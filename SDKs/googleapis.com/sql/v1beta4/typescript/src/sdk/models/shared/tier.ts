@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Tier
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A Google Cloud SQL service tier resource.
 **/
 export class Tier extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DiskQuota" })
+  @SpeakeasyMetadata({ data: "json, name=DiskQuota" })
   diskQuota?: string;
 
-  @Metadata({ data: "json, name=RAM" })
+  @SpeakeasyMetadata({ data: "json, name=RAM" })
   ram?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=region" })
+  @SpeakeasyMetadata({ data: "json, name=region" })
   region?: string[];
 
-  @Metadata({ data: "json, name=tier" })
+  @SpeakeasyMetadata({ data: "json, name=tier" })
   tier?: string;
 }

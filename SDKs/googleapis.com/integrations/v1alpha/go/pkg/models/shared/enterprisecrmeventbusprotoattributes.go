@@ -19,6 +19,8 @@ const (
 	EnterpriseCrmEventbusProtoAttributesSearchableEnumNo          EnterpriseCrmEventbusProtoAttributesSearchableEnum = "NO"
 )
 
+// EnterpriseCrmEventbusProtoAttributes
+// Attributes are additional options that can be associated with each event property. For more information, see go/integration-platform/event_bus/attributes_registry.md. Next available: 8
 type EnterpriseCrmEventbusProtoAttributes struct {
 	DataType       *EnterpriseCrmEventbusProtoAttributesDataTypeEnum   `json:"dataType,omitempty"`
 	DefaultValue   *EnterpriseCrmEventbusProtoValueType                `json:"defaultValue,omitempty"`

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ListPopulationTerm } from "./listpopulationterm";
+
 
 
 // ListPopulationClause
@@ -8,6 +8,6 @@ import { ListPopulationTerm } from "./listpopulationterm";
  * A group clause made up of list population terms representing constraints joined by ORs.
 **/
 export class ListPopulationClause extends SpeakeasyBase {
-  @Metadata({ data: "json, name=terms", elemType: shared.ListPopulationTerm })
+  @SpeakeasyMetadata({ data: "json, name=terms", elemType: ListPopulationTerm })
   terms?: ListPopulationTerm[];
 }

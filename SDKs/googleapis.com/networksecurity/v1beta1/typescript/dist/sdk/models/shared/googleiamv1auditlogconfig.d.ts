@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum GoogleIamV1AuditLogConfigLogTypeEnum {
     LogTypeUnspecified = "LOG_TYPE_UNSPECIFIED",
     AdminRead = "ADMIN_READ",

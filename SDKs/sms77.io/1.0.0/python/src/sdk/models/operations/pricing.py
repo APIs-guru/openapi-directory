@@ -10,11 +10,11 @@ class PricingQueryParams:
 
 @dataclass
 class PricingRequest:
-    query_params: PricingQueryParams = field(default=None)
+    query_params: PricingQueryParams = field()
     
 
 @dataclass
 class PricingResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

@@ -22,10 +22,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { AdBreak } from "./adbreak";
+import { EditAtom } from "./editatom";
+import { ElementaryStream } from "./elementarystream";
+import { Input } from "./input";
+import { Manifest } from "./manifest";
+import { MuxStream } from "./muxstream";
 import { Output } from "./output";
+import { Overlay } from "./overlay";
 import { PubsubDestination } from "./pubsubdestination";
+import { SpriteSheet } from "./spritesheet";
 // JobConfig
 /**
  * Job configuration
@@ -36,43 +43,43 @@ var JobConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=adBreaks", elemType: shared.AdBreak }),
+        SpeakeasyMetadata({ data: "json, name=adBreaks", elemType: AdBreak }),
         __metadata("design:type", Array)
     ], JobConfig.prototype, "adBreaks", void 0);
     __decorate([
-        Metadata({ data: "json, name=editList", elemType: shared.EditAtom }),
+        SpeakeasyMetadata({ data: "json, name=editList", elemType: EditAtom }),
         __metadata("design:type", Array)
     ], JobConfig.prototype, "editList", void 0);
     __decorate([
-        Metadata({ data: "json, name=elementaryStreams", elemType: shared.ElementaryStream }),
+        SpeakeasyMetadata({ data: "json, name=elementaryStreams", elemType: ElementaryStream }),
         __metadata("design:type", Array)
     ], JobConfig.prototype, "elementaryStreams", void 0);
     __decorate([
-        Metadata({ data: "json, name=inputs", elemType: shared.Input }),
+        SpeakeasyMetadata({ data: "json, name=inputs", elemType: Input }),
         __metadata("design:type", Array)
     ], JobConfig.prototype, "inputs", void 0);
     __decorate([
-        Metadata({ data: "json, name=manifests", elemType: shared.Manifest }),
+        SpeakeasyMetadata({ data: "json, name=manifests", elemType: Manifest }),
         __metadata("design:type", Array)
     ], JobConfig.prototype, "manifests", void 0);
     __decorate([
-        Metadata({ data: "json, name=muxStreams", elemType: shared.MuxStream }),
+        SpeakeasyMetadata({ data: "json, name=muxStreams", elemType: MuxStream }),
         __metadata("design:type", Array)
     ], JobConfig.prototype, "muxStreams", void 0);
     __decorate([
-        Metadata({ data: "json, name=output" }),
+        SpeakeasyMetadata({ data: "json, name=output" }),
         __metadata("design:type", Output)
     ], JobConfig.prototype, "output", void 0);
     __decorate([
-        Metadata({ data: "json, name=overlays", elemType: shared.Overlay }),
+        SpeakeasyMetadata({ data: "json, name=overlays", elemType: Overlay }),
         __metadata("design:type", Array)
     ], JobConfig.prototype, "overlays", void 0);
     __decorate([
-        Metadata({ data: "json, name=pubsubDestination" }),
+        SpeakeasyMetadata({ data: "json, name=pubsubDestination" }),
         __metadata("design:type", PubsubDestination)
     ], JobConfig.prototype, "pubsubDestination", void 0);
     __decorate([
-        Metadata({ data: "json, name=spriteSheets", elemType: shared.SpriteSheet }),
+        SpeakeasyMetadata({ data: "json, name=spriteSheets", elemType: SpriteSheet }),
         __metadata("design:type", Array)
     ], JobConfig.prototype, "spriteSheets", void 0);
     return JobConfig;

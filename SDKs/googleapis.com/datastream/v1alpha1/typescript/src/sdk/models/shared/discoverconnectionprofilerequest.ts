@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { ConnectionProfile } from "./connectionprofile";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ConnectionProfileInput } from "./connectionprofile";
 import { MysqlRdbms } from "./mysqlrdbms";
 import { OracleRdbms } from "./oraclerdbms";
 
 
-// DiscoverConnectionProfileRequest
+
+// DiscoverConnectionProfileRequestInput
 /** 
  * Request message for 'discover' ConnectionProfile request.
 **/
-export class DiscoverConnectionProfileRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=connectionProfile" })
-  connectionProfile?: ConnectionProfile;
+export class DiscoverConnectionProfileRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=connectionProfile" })
+  connectionProfile?: ConnectionProfileInput;
 
-  @Metadata({ data: "json, name=connectionProfileName" })
+  @SpeakeasyMetadata({ data: "json, name=connectionProfileName" })
   connectionProfileName?: string;
 
-  @Metadata({ data: "json, name=mysqlRdbms" })
+  @SpeakeasyMetadata({ data: "json, name=mysqlRdbms" })
   mysqlRdbms?: MysqlRdbms;
 
-  @Metadata({ data: "json, name=oracleRdbms" })
+  @SpeakeasyMetadata({ data: "json, name=oracleRdbms" })
   oracleRdbms?: OracleRdbms;
 
-  @Metadata({ data: "json, name=recursionDepth" })
+  @SpeakeasyMetadata({ data: "json, name=recursionDepth" })
   recursionDepth?: number;
 
-  @Metadata({ data: "json, name=recursive" })
+  @SpeakeasyMetadata({ data: "json, name=recursive" })
   recursive?: boolean;
 }

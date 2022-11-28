@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetSetIdentityMailFromDomainActionEnum(str, Enum):
     SET_IDENTITY_MAIL_FROM_DOMAIN = "SetIdentityMailFromDomain"
@@ -14,11 +18,11 @@ class GetSetIdentityMailFromDomainVersionEnum(str, Enum):
 
 @dataclass
 class GetSetIdentityMailFromDomainQueryParams:
-    action: GetSetIdentityMailFromDomainActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetSetIdentityMailFromDomainActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    identity: str = field(metadata={'query_param': { 'field_name': 'Identity', 'style': 'form', 'explode': True }})
+    version: GetSetIdentityMailFromDomainVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     behavior_on_mx_failure: Optional[GetSetIdentityMailFromDomainBehaviorOnMxFailureEnum] = field(default=None, metadata={'query_param': { 'field_name': 'BehaviorOnMXFailure', 'style': 'form', 'explode': True }})
-    identity: str = field(default=None, metadata={'query_param': { 'field_name': 'Identity', 'style': 'form', 'explode': True }})
     mail_from_domain: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'MailFromDomain', 'style': 'form', 'explode': True }})
-    version: GetSetIdentityMailFromDomainVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -34,13 +38,13 @@ class GetSetIdentityMailFromDomainHeaders:
 
 @dataclass
 class GetSetIdentityMailFromDomainRequest:
-    query_params: GetSetIdentityMailFromDomainQueryParams = field(default=None)
-    headers: GetSetIdentityMailFromDomainHeaders = field(default=None)
+    headers: GetSetIdentityMailFromDomainHeaders = field()
+    query_params: GetSetIdentityMailFromDomainQueryParams = field()
     
 
 @dataclass
 class GetSetIdentityMailFromDomainResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

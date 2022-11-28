@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,7 +23,11 @@ class PutStorageConfigurationHeaders:
 @dataclass_json
 @dataclass
 class PutStorageConfigurationRequestBodyMultiLayerStorage:
-    customer_managed_s3_storage: Optional[shared.CustomerManagedS3Storage] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'customerManagedS3Storage' }})
+    r"""PutStorageConfigurationRequestBodyMultiLayerStorage
+    Contains information about the storage destination.
+    """
+    
+    customer_managed_s3_storage: Optional[shared.CustomerManagedS3Storage] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('customerManagedS3Storage') }})
     
 class PutStorageConfigurationRequestBodyStorageTypeEnum(str, Enum):
     SITEWISE_DEFAULT_STORAGE = "SITEWISE_DEFAULT_STORAGE"
@@ -28,26 +37,26 @@ class PutStorageConfigurationRequestBodyStorageTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PutStorageConfigurationRequestBody:
-    multi_layer_storage: Optional[PutStorageConfigurationRequestBodyMultiLayerStorage] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'multiLayerStorage' }})
-    storage_type: PutStorageConfigurationRequestBodyStorageTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'storageType' }})
+    storage_type: PutStorageConfigurationRequestBodyStorageTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('storageType') }})
+    multi_layer_storage: Optional[PutStorageConfigurationRequestBodyMultiLayerStorage] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('multiLayerStorage') }})
     
 
 @dataclass
 class PutStorageConfigurationRequest:
-    headers: PutStorageConfigurationHeaders = field(default=None)
-    request: PutStorageConfigurationRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: PutStorageConfigurationHeaders = field()
+    request: PutStorageConfigurationRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PutStorageConfigurationResponse:
+    content_type: str = field()
+    status_code: int = field()
     conflicting_operation_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     put_storage_configuration_response: Optional[shared.PutStorageConfigurationResponse] = field(default=None)
     resource_already_exists_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

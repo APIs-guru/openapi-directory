@@ -4,10 +4,10 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-type CreateTimerRequests struct {
-	TimerInfoDto  *shared.TimerInfoDto `request:"mediaType=application/*+json"`
-	TimerInfoDto1 *shared.TimerInfoDto `request:"mediaType=application/json"`
-	TimerInfoDto2 *shared.TimerInfoDto `request:"mediaType=text/json"`
+type CreateTimerRequestsInput struct {
+	TimerInfoDto  *shared.TimerInfoDtoInput `request:"mediaType=application/*+json"`
+	TimerInfoDto1 *shared.TimerInfoDtoInput `request:"mediaType=application/json"`
+	TimerInfoDto2 *shared.TimerInfoDtoInput `request:"mediaType=text/json"`
 }
 
 type CreateTimerSecurity struct {
@@ -15,7 +15,7 @@ type CreateTimerSecurity struct {
 }
 
 type CreateTimerRequest struct {
-	Request  *CreateTimerRequests
+	Request  *CreateTimerRequestsInput
 	Security CreateTimerSecurity
 }
 

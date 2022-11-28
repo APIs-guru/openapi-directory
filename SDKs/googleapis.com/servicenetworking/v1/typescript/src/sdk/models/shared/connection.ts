@@ -1,4 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
+
+
+// ConnectionInput
+/** 
+ * Represents a private connection resource. A private connection is implemented as a VPC Network Peering connection between a service producer's VPC network and a service consumer's VPC network.
+**/
+export class ConnectionInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=network" })
+  network?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=reservedPeeringRanges" })
+  reservedPeeringRanges?: string[];
+}
 
 
 // Connection
@@ -6,15 +20,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents a private connection resource. A private connection is implemented as a VPC Network Peering connection between a service producer's VPC network and a service consumer's VPC network.
 **/
 export class Connection extends SpeakeasyBase {
-  @Metadata({ data: "json, name=network" })
+  @SpeakeasyMetadata({ data: "json, name=network" })
   network?: string;
 
-  @Metadata({ data: "json, name=peering" })
+  @SpeakeasyMetadata({ data: "json, name=peering" })
   peering?: string;
 
-  @Metadata({ data: "json, name=reservedPeeringRanges" })
+  @SpeakeasyMetadata({ data: "json, name=reservedPeeringRanges" })
   reservedPeeringRanges?: string[];
 
-  @Metadata({ data: "json, name=service" })
+  @SpeakeasyMetadata({ data: "json, name=service" })
   service?: string;
 }

@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class ApplicationGetRequest:
-    application_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'application_id' }})
-    client_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'client_id' }})
-    secret: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'secret' }})
+    r"""ApplicationGetRequest
+    ApplicationGetResponse defines the schema for `/application/get`
+    """
+    
+    application_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('application_id') }})
+    client_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('client_id') }})
+    secret: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('secret') }})
     

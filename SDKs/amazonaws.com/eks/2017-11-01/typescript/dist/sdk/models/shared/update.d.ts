@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ErrorDetail } from "./errordetail";
 import { UpdateParam } from "./updateparam";
 import { UpdateStatusEnum } from "./updatestatusenum";

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Transfer
@@ -7,12 +8,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * 
 **/
 export class Transfer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=billable" })
+  @SpeakeasyMetadata({ data: "json, name=billable" })
   billable?: number;
 
-  @Metadata({ data: "json, name=quota" })
+  @SpeakeasyMetadata({ data: "json, name=quota" })
   quota?: number;
 
-  @Metadata({ data: "json, name=used" })
+  @SpeakeasyMetadata({ data: "json, name=used" })
   used?: number;
 }

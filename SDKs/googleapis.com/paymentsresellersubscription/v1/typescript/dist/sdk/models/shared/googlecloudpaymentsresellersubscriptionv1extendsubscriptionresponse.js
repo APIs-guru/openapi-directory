@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GoogleCloudPaymentsResellerSubscriptionV1ExtendSubscriptionResponse = /** @class */ (function (_super) {
     __extends(GoogleCloudPaymentsResellerSubscriptionV1ExtendSubscriptionResponse, _super);
     function GoogleCloudPaymentsResellerSubscriptionV1ExtendSubscriptionResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=cycleEndTime" }),
+        SpeakeasyMetadata({ data: "json, name=cycleEndTime" }),
         __metadata("design:type", String)
     ], GoogleCloudPaymentsResellerSubscriptionV1ExtendSubscriptionResponse.prototype, "cycleEndTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=freeTrialEndTime" }),
+        SpeakeasyMetadata({ data: "json, name=freeTrialEndTime" }),
         __metadata("design:type", String)
     ], GoogleCloudPaymentsResellerSubscriptionV1ExtendSubscriptionResponse.prototype, "freeTrialEndTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=renewalTime" }),
+        SpeakeasyMetadata({ data: "json, name=renewalTime" }),
         __metadata("design:type", String)
     ], GoogleCloudPaymentsResellerSubscriptionV1ExtendSubscriptionResponse.prototype, "renewalTime", void 0);
     return GoogleCloudPaymentsResellerSubscriptionV1ExtendSubscriptionResponse;

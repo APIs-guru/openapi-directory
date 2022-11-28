@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { HttpRequestContext } from "./httprequestcontext";
 import { SourceLocation } from "./sourcelocation";
 import { SourceReference } from "./sourcereference";

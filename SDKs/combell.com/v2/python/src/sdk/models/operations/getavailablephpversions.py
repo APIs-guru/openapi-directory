@@ -5,23 +5,23 @@ from sdk.models import shared
 
 @dataclass
 class GetAvailablePhpVersionsPathParams:
-    domain_name: str = field(default=None, metadata={'path_param': { 'field_name': 'domainName', 'style': 'simple', 'explode': False }})
+    domain_name: str = field(metadata={'path_param': { 'field_name': 'domainName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetAvailablePhpVersionsQueryParams:
-    domain_name: str = field(default=None, metadata={'query_param': { 'field_name': 'domain_name', 'style': 'form', 'explode': True }})
+    domain_name: str = field(metadata={'query_param': { 'field_name': 'domain_name', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class GetAvailablePhpVersionsRequest:
-    path_params: GetAvailablePhpVersionsPathParams = field(default=None)
-    query_params: GetAvailablePhpVersionsQueryParams = field(default=None)
+    path_params: GetAvailablePhpVersionsPathParams = field()
+    query_params: GetAvailablePhpVersionsQueryParams = field()
     
 
 @dataclass
 class GetAvailablePhpVersionsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     php_versions: Optional[List[shared.PhpVersion]] = field(default=None)
-    status_code: int = field(default=None)
     

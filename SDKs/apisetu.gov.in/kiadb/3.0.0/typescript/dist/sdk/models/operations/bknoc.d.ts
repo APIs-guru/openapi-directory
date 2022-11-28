@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class BknocRequestBodyCertificateParameters extends SpeakeasyBase {
     dob: string;
@@ -18,10 +18,6 @@ export declare class BknocRequestBody extends SpeakeasyBase {
 export declare class BknocSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class BknocRequest extends SpeakeasyBase {
-    request?: BknocRequestBody;
-    security: BknocSecurity;
 }
 export declare enum Bknoc400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -104,6 +100,10 @@ export declare enum Bknoc504ApplicationJsonErrorDescriptionEnum {
 export declare class Bknoc504ApplicationJson extends SpeakeasyBase {
     error?: Bknoc504ApplicationJsonErrorEnum;
     errorDescription?: Bknoc504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class BknocRequest extends SpeakeasyBase {
+    request?: BknocRequestBody;
+    security: BknocSecurity;
 }
 export declare class BknocResponse extends SpeakeasyBase {
     contentType: string;

@@ -1,6 +1,7 @@
 
 
+
 export enum PidModeEnum {
-    Host = "host"
-,    Task = "task"
+    Host = "host",
+    Task = "task"
 }

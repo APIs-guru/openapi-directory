@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsEcsClusterConfigurationExecuteCommandConfigurationLogConfigurationDetails } from "./awsecsclusterconfigurationexecutecommandconfigurationlogconfigurationdetails";
+
 
 
 // AwsEcsClusterConfigurationExecuteCommandConfigurationDetails
@@ -7,12 +8,12 @@ import { AwsEcsClusterConfigurationExecuteCommandConfigurationLogConfigurationDe
  * Contains the run command configuration for the cluster.
 **/
 export class AwsEcsClusterConfigurationExecuteCommandConfigurationDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=KmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=KmsKeyId" })
   kmsKeyId?: string;
 
-  @Metadata({ data: "json, name=LogConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=LogConfiguration" })
   logConfiguration?: AwsEcsClusterConfigurationExecuteCommandConfigurationLogConfigurationDetails;
 
-  @Metadata({ data: "json, name=Logging" })
+  @SpeakeasyMetadata({ data: "json, name=Logging" })
   logging?: string;
 }

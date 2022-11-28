@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class PayorCreateAPIKeyRequestRolesEnum(str, Enum):
     PAYOR_ADMIN = "payor.admin"
@@ -10,7 +12,7 @@ class PayorCreateAPIKeyRequestRolesEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PayorCreateAPIKeyRequest:
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    roles: List[PayorCreateAPIKeyRequestRolesEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'roles' }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    roles: List[PayorCreateAPIKeyRequestRolesEnum] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('roles') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
     

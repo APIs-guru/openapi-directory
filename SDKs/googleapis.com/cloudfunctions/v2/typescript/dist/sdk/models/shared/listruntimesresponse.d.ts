@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Runtime } from "./runtime";
 /**
  * Response for the `ListRuntimes` method.

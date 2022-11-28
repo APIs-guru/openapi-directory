@@ -1,7 +1,8 @@
 
 
+
 export enum DlnaProfileTypeEnum {
-    Audio = "Audio"
-,    Video = "Video"
-,    Photo = "Photo"
+    Audio = "Audio",
+    Video = "Video",
+    Photo = "Photo"
 }

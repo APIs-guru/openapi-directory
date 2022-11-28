@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ServiceMetadata } from "./servicemetadata";
 
 
+
 export class GetServicesInScopeResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=serviceMetadata", elemType: shared.ServiceMetadata })
+  @SpeakeasyMetadata({ data: "json, name=serviceMetadata", elemType: ServiceMetadata })
   serviceMetadata?: ServiceMetadata[];
 }

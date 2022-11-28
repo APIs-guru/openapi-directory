@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ProtocolSshGetArgsPathParams = /** @class */ (function (_super) {
     __extends(ProtocolSshGetArgsPathParams, _super);
     function ProtocolSshGetArgsPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
         __metadata("design:type", Number)
     ], ProtocolSshGetArgsPathParams.prototype, "agentNum", void 0);
     return ProtocolSshGetArgsPathParams;
@@ -41,7 +41,7 @@ var ProtocolSshGetArgsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProtocolSshGetArgsPathParams)
     ], ProtocolSshGetArgsRequest.prototype, "pathParams", void 0);
     return ProtocolSshGetArgsRequest;
@@ -53,15 +53,15 @@ var ProtocolSshGetArgsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolSshGetArgsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProtocolSshGetArgsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], ProtocolSshGetArgsResponse.prototype, "protocolSshGetArgs200ApplicationJsonObject", void 0);
     return ProtocolSshGetArgsResponse;

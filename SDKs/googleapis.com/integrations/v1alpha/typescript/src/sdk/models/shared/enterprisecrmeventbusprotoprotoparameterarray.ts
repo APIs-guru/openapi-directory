@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class EnterpriseCrmEventbusProtoProtoParameterArray extends SpeakeasyBase {
-  @Metadata({ data: "json, name=protoValues" })
+  @SpeakeasyMetadata({ data: "json, name=protoValues" })
   protoValues?: Map<string, any>[];
 }

@@ -17,6 +17,8 @@ const (
 	ApplicationReportStateEnumInstalled                   ApplicationReportStateEnum = "INSTALLED"
 )
 
+// ApplicationReport
+// Information reported about an installed app.
 type ApplicationReport struct {
 	ApplicationSource          *ApplicationReportApplicationSourceEnum `json:"applicationSource,omitempty"`
 	DisplayName                *string                                 `json:"displayName,omitempty"`

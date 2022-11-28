@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudMlV1ManualScaling
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Options for manually scaling a model.
 **/
 export class GoogleCloudMlV1ManualScaling extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nodes" })
+  @SpeakeasyMetadata({ data: "json, name=nodes" })
   nodes?: number;
 }

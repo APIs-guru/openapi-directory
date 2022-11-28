@@ -15,6 +15,8 @@ const (
 	LayoutTextSegmentTypeEnumTableCell                  LayoutTextSegmentTypeEnum = "TABLE_CELL"
 )
 
+// Layout
+// Describes the layout information of a text_segment in the document.
 type Layout struct {
 	BoundingPoly    *BoundingPoly              `json:"boundingPoly,omitempty"`
 	PageNumber      *int32                     `json:"pageNumber,omitempty"`

@@ -1,57 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AmendmentLine } from "./amendmentline";
 import { AmendmentTypeEnum } from "./amendmenttypeenum";
 import { AmendmentDecisionEnum } from "./amendmentdecisionenum";
 import { AmendmentMember } from "./amendmentmember";
 
 
+
 export class AmendmentDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=amendmentId" })
+  @SpeakeasyMetadata({ data: "json, name=amendmentId" })
   amendmentId?: number;
 
-  @Metadata({ data: "json, name=amendmentLines", elemType: shared.AmendmentLine })
+  @SpeakeasyMetadata({ data: "json, name=amendmentLines", elemType: AmendmentLine })
   amendmentLines?: AmendmentLine[];
 
-  @Metadata({ data: "json, name=amendmentNote" })
+  @SpeakeasyMetadata({ data: "json, name=amendmentNote" })
   amendmentNote?: string;
 
-  @Metadata({ data: "json, name=amendmentPosition" })
+  @SpeakeasyMetadata({ data: "json, name=amendmentPosition" })
   amendmentPosition?: string;
 
-  @Metadata({ data: "json, name=amendmentType" })
+  @SpeakeasyMetadata({ data: "json, name=amendmentType" })
   amendmentType?: AmendmentTypeEnum;
 
-  @Metadata({ data: "json, name=billId" })
+  @SpeakeasyMetadata({ data: "json, name=billId" })
   billId?: number;
 
-  @Metadata({ data: "json, name=billStageId" })
+  @SpeakeasyMetadata({ data: "json, name=billStageId" })
   billStageId?: number;
 
-  @Metadata({ data: "json, name=clause" })
+  @SpeakeasyMetadata({ data: "json, name=clause" })
   clause?: number;
 
-  @Metadata({ data: "json, name=decision" })
+  @SpeakeasyMetadata({ data: "json, name=decision" })
   decision?: AmendmentDecisionEnum;
 
-  @Metadata({ data: "json, name=explanatoryText" })
+  @SpeakeasyMetadata({ data: "json, name=explanatoryText" })
   explanatoryText?: string;
 
-  @Metadata({ data: "json, name=explanatoryTextPrefix" })
+  @SpeakeasyMetadata({ data: "json, name=explanatoryTextPrefix" })
   explanatoryTextPrefix?: string;
 
-  @Metadata({ data: "json, name=lineNumber" })
+  @SpeakeasyMetadata({ data: "json, name=lineNumber" })
   lineNumber?: number;
 
-  @Metadata({ data: "json, name=marshalledListText" })
+  @SpeakeasyMetadata({ data: "json, name=marshalledListText" })
   marshalledListText?: string;
 
-  @Metadata({ data: "json, name=pageNumber" })
+  @SpeakeasyMetadata({ data: "json, name=pageNumber" })
   pageNumber?: number;
 
-  @Metadata({ data: "json, name=schedule" })
+  @SpeakeasyMetadata({ data: "json, name=schedule" })
   schedule?: number;
 
-  @Metadata({ data: "json, name=sponsors", elemType: shared.AmendmentMember })
+  @SpeakeasyMetadata({ data: "json, name=sponsors", elemType: AmendmentMember })
   sponsors?: AmendmentMember[];
 }

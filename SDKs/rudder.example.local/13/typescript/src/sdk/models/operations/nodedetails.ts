@@ -1,25 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class NodeDetailsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=nodeId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=nodeId" })
   nodeId: string;
 }
 
 
 export class NodeDetailsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=include" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=include" })
   include?: string;
-}
-
-
-export class NodeDetailsRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: NodeDetailsPathParams;
-
-  @Metadata()
-  queryParams: NodeDetailsQueryParams;
 }
 
 export enum NodeDetails200ApplicationJsonActionEnum {
@@ -32,35 +24,44 @@ export enum NodeDetails200ApplicationJsonActionEnum {
  * Information about the node
 **/
 export class NodeDetails200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nodes", elemType: shared.NodeFull })
+  @SpeakeasyMetadata({ data: "json, name=nodes", elemType: shared.NodeFull })
   nodes: shared.NodeFull[];
 }
 
 export enum NodeDetails200ApplicationJsonResultEnum {
-    Success = "success"
-,    Error = "error"
+    Success = "success",
+    Error = "error"
 }
 
 
 export class NodeDetails200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: NodeDetails200ApplicationJsonActionEnum;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: NodeDetails200ApplicationJsonData;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result: NodeDetails200ApplicationJsonResultEnum;
 }
 
 
+export class NodeDetailsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: NodeDetailsPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: NodeDetailsQueryParams;
+}
+
+
 export class NodeDetailsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   nodeDetails200ApplicationJsonObject?: NodeDetails200ApplicationJson;
 }

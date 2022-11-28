@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PortalStatus } from "./portalstatus";
 
 
+
 export class DeletePortalResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=portalStatus" })
+  @SpeakeasyMetadata({ data: "json, name=portalStatus" })
   portalStatus: PortalStatus;
 }

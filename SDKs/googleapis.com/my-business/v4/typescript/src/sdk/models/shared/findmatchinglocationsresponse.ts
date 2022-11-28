@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MatchedLocation } from "./matchedlocation";
+
 
 
 // FindMatchingLocationsResponse
@@ -8,9 +8,9 @@ import { MatchedLocation } from "./matchedlocation";
  * Response message for Locations.FindMatchingLocations.
 **/
 export class FindMatchingLocationsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=matchTime" })
+  @SpeakeasyMetadata({ data: "json, name=matchTime" })
   matchTime?: string;
 
-  @Metadata({ data: "json, name=matchedLocations", elemType: shared.MatchedLocation })
+  @SpeakeasyMetadata({ data: "json, name=matchedLocations", elemType: MatchedLocation })
   matchedLocations?: MatchedLocation[];
 }

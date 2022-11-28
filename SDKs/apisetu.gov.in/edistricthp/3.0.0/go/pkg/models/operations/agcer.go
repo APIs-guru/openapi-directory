@@ -26,11 +26,6 @@ type AgcerSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type AgcerRequest struct {
-	Request  *AgcerRequestBody `request:"mediaType=application/json"`
-	Security AgcerSecurity
-}
-
 type Agcer400ApplicationJSONErrorEnum string
 
 const (
@@ -160,6 +155,11 @@ const (
 type Agcer504ApplicationJSON struct {
 	Error            *Agcer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Agcer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type AgcerRequest struct {
+	Request  *AgcerRequestBody `request:"mediaType=application/json"`
+	Security AgcerSecurity
 }
 
 type AgcerResponse struct {

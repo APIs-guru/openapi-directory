@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Model
+// Information about a model deployed on an edge device that is registered with SageMaker Edge Manager.
 type Model struct {
 	LatestInference  *time.Time   `json:"LatestInference,omitempty"`
 	LatestSampleTime *time.Time   `json:"LatestSampleTime,omitempty"`

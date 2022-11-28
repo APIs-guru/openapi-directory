@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LanguageSettings
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Language settings for an account. These settings correspond to the "Language settings" feature in the web interface.
 **/
 export class LanguageSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=displayLanguage" })
+  @SpeakeasyMetadata({ data: "json, name=displayLanguage" })
   displayLanguage?: string;
 }

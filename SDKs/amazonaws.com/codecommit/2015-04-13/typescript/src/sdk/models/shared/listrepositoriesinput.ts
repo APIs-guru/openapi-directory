@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OrderEnumEnum } from "./orderenumenum";
 import { SortByEnumEnum } from "./sortbyenumenum";
+
 
 
 // ListRepositoriesInput
@@ -8,12 +9,12 @@ import { SortByEnumEnum } from "./sortbyenumenum";
  * Represents the input of a list repositories operation.
 **/
 export class ListRepositoriesInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=order" })
+  @SpeakeasyMetadata({ data: "json, name=order" })
   order?: OrderEnumEnum;
 
-  @Metadata({ data: "json, name=sortBy" })
+  @SpeakeasyMetadata({ data: "json, name=sortBy" })
   sortBy?: SortByEnumEnum;
 }

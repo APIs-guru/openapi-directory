@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MysqlRdbms } from "./mysqlrdbms";
-import { MysqlRdbms } from "./mysqlrdbms";
+
 
 
 // MysqlSourceConfig
@@ -8,9 +8,9 @@ import { MysqlRdbms } from "./mysqlrdbms";
  * MySQL source configuration
 **/
 export class MysqlSourceConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowlist" })
+  @SpeakeasyMetadata({ data: "json, name=allowlist" })
   allowlist?: MysqlRdbms;
 
-  @Metadata({ data: "json, name=rejectlist" })
+  @SpeakeasyMetadata({ data: "json, name=rejectlist" })
   rejectlist?: MysqlRdbms;
 }

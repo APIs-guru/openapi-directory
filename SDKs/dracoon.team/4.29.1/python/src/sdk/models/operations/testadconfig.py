@@ -10,14 +10,14 @@ class TestAdConfigHeaders:
 
 @dataclass
 class TestAdConfigRequest:
-    headers: TestAdConfigHeaders = field(default=None)
-    request: shared.TestActiveDirectoryConfigRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: TestAdConfigHeaders = field()
+    request: shared.TestActiveDirectoryConfigRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class TestAdConfigResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     test_active_directory_config_response: Optional[shared.TestActiveDirectoryConfigResponse] = field(default=None)
     

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Image } from "./image";
+
 
 
 // FeatureDescription
@@ -7,12 +8,12 @@ import { Image } from "./image";
  * A feature description of the product. For more information, see https://support.google.com/manufacturers/answer/6124116#featuredesc.
 **/
 export class FeatureDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=headline" })
+  @SpeakeasyMetadata({ data: "json, name=headline" })
   headline?: string;
 
-  @Metadata({ data: "json, name=image" })
+  @SpeakeasyMetadata({ data: "json, name=image" })
   image?: Image;
 
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: string;
 }

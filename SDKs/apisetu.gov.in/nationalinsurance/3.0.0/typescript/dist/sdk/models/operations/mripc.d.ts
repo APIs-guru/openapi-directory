@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class MripcRequestBodyCertificateParameters extends SpeakeasyBase {
     customerId: string;
@@ -17,10 +17,6 @@ export declare class MripcRequestBody extends SpeakeasyBase {
 export declare class MripcSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class MripcRequest extends SpeakeasyBase {
-    request?: MripcRequestBody;
-    security: MripcSecurity;
 }
 export declare enum Mripc400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -103,6 +99,10 @@ export declare enum Mripc504ApplicationJsonErrorDescriptionEnum {
 export declare class Mripc504ApplicationJson extends SpeakeasyBase {
     error?: Mripc504ApplicationJsonErrorEnum;
     errorDescription?: Mripc504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class MripcRequest extends SpeakeasyBase {
+    request?: MripcRequestBody;
+    security: MripcSecurity;
 }
 export declare class MripcResponse extends SpeakeasyBase {
     contentType: string;

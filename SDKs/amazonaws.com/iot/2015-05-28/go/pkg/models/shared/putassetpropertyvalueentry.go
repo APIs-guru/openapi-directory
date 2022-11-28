@@ -1,5 +1,7 @@
 package shared
 
+// PutAssetPropertyValueEntry
+// An asset property value entry containing the following information.
 type PutAssetPropertyValueEntry struct {
 	AssetID        *string              `json:"assetId,omitempty"`
 	EntryID        *string              `json:"entryId,omitempty"`

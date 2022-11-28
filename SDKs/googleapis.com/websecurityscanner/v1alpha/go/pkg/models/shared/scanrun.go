@@ -18,6 +18,8 @@ const (
 	ScanRunResultStateEnumKilled                 ScanRunResultStateEnum = "KILLED"
 )
 
+// ScanRun
+// A ScanRun is a output-only resource representing an actual run of the scan.
 type ScanRun struct {
 	EndTime            *string                    `json:"endTime,omitempty"`
 	ExecutionState     *ScanRunExecutionStateEnum `json:"executionState,omitempty"`

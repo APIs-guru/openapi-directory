@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LicenseStatusEnum } from "./licensestatusenum";
 
 
+
 export class CreateLicenseVersionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LicenseArn" })
+  @SpeakeasyMetadata({ data: "json, name=LicenseArn" })
   licenseArn?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: LicenseStatusEnum;
 
-  @Metadata({ data: "json, name=Version" })
+  @SpeakeasyMetadata({ data: "json, name=Version" })
   version?: string;
 }

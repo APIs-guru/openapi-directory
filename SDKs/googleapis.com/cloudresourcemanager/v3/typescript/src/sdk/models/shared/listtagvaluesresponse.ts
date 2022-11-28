@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TagValue } from "./tagvalue";
+
 
 
 // ListTagValuesResponse
@@ -8,9 +8,9 @@ import { TagValue } from "./tagvalue";
  * The ListTagValues response.
 **/
 export class ListTagValuesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=tagValues", elemType: shared.TagValue })
+  @SpeakeasyMetadata({ data: "json, name=tagValues", elemType: TagValue })
   tagValues?: TagValue[];
 }

@@ -1,19 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { GoogleCloudChannelV1Parameter } from "./googlecloudchannelv1parameter";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GoogleCloudChannelV1ParameterInput } from "./googlecloudchannelv1parameter";
 
 
-// GoogleCloudChannelV1ChangeParametersRequest
+
+// GoogleCloudChannelV1ChangeParametersRequestInput
 /** 
  * Request message for CloudChannelService.ChangeParametersRequest.
 **/
-export class GoogleCloudChannelV1ChangeParametersRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=parameters", elemType: shared.GoogleCloudChannelV1Parameter })
-  parameters?: GoogleCloudChannelV1Parameter[];
+export class GoogleCloudChannelV1ChangeParametersRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=parameters", elemType: GoogleCloudChannelV1ParameterInput })
+  parameters?: GoogleCloudChannelV1ParameterInput[];
 
-  @Metadata({ data: "json, name=purchaseOrderId" })
+  @SpeakeasyMetadata({ data: "json, name=purchaseOrderId" })
   purchaseOrderId?: string;
 
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId?: string;
 }

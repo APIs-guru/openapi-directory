@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConnectionStateEnum } from "./connectionstateenum";
 var DeleteConnectionResponse = /** @class */ (function (_super) {
     __extends(DeleteConnectionResponse, _super);
@@ -30,23 +30,23 @@ var DeleteConnectionResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ConnectionArn" }),
+        SpeakeasyMetadata({ data: "json, name=ConnectionArn" }),
         __metadata("design:type", String)
     ], DeleteConnectionResponse.prototype, "connectionArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=ConnectionState" }),
+        SpeakeasyMetadata({ data: "json, name=ConnectionState" }),
         __metadata("design:type", String)
     ], DeleteConnectionResponse.prototype, "connectionState", void 0);
     __decorate([
-        Metadata({ data: "json, name=CreationTime" }),
+        SpeakeasyMetadata({ data: "json, name=CreationTime" }),
         __metadata("design:type", Date)
     ], DeleteConnectionResponse.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastAuthorizedTime" }),
+        SpeakeasyMetadata({ data: "json, name=LastAuthorizedTime" }),
         __metadata("design:type", Date)
     ], DeleteConnectionResponse.prototype, "lastAuthorizedTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastModifiedTime" }),
+        SpeakeasyMetadata({ data: "json, name=LastModifiedTime" }),
         __metadata("design:type", Date)
     ], DeleteConnectionResponse.prototype, "lastModifiedTime", void 0);
     return DeleteConnectionResponse;

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDescribeEngineDefaultParametersActionEnum(str, Enum):
     DESCRIBE_ENGINE_DEFAULT_PARAMETERS = "DescribeEngineDefaultParameters"
@@ -10,10 +14,10 @@ class PostDescribeEngineDefaultParametersVersionEnum(str, Enum):
 
 @dataclass
 class PostDescribeEngineDefaultParametersQueryParams:
-    action: PostDescribeEngineDefaultParametersActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: PostDescribeEngineDefaultParametersActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDescribeEngineDefaultParametersVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
     max_records: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'MaxRecords', 'style': 'form', 'explode': True }})
-    version: PostDescribeEngineDefaultParametersVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,14 +33,14 @@ class PostDescribeEngineDefaultParametersHeaders:
 
 @dataclass
 class PostDescribeEngineDefaultParametersRequest:
-    query_params: PostDescribeEngineDefaultParametersQueryParams = field(default=None)
-    headers: PostDescribeEngineDefaultParametersHeaders = field(default=None)
+    headers: PostDescribeEngineDefaultParametersHeaders = field()
+    query_params: PostDescribeEngineDefaultParametersQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDescribeEngineDefaultParametersResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

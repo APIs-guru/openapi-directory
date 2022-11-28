@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class EeCreateTokenResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessToken" })
+  @SpeakeasyMetadata({ data: "json, name=accessToken" })
   accessToken?: string;
 
-  @Metadata({ data: "json, name=expiresIn" })
+  @SpeakeasyMetadata({ data: "json, name=expiresIn" })
   expiresIn?: number;
 
-  @Metadata({ data: "json, name=tokenType" })
+  @SpeakeasyMetadata({ data: "json, name=tokenType" })
   tokenType?: string;
 }

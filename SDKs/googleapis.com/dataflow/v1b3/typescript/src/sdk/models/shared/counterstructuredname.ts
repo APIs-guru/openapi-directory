@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum CounterStructuredNameOriginEnum {
-    System = "SYSTEM"
-,    User = "USER"
+    System = "SYSTEM",
+    User = "USER"
 }
 
 export enum CounterStructuredNamePortionEnum {
-    All = "ALL"
-,    Key = "KEY"
-,    Value = "VALUE"
+    All = "ALL",
+    Key = "KEY",
+    Value = "VALUE"
 }
 
 
@@ -17,33 +18,33 @@ export enum CounterStructuredNamePortionEnum {
  * Identifies a counter within a per-job namespace. Counters whose structured names are the same get merged into a single value for the job.
 **/
 export class CounterStructuredName extends SpeakeasyBase {
-  @Metadata({ data: "json, name=componentStepName" })
+  @SpeakeasyMetadata({ data: "json, name=componentStepName" })
   componentStepName?: string;
 
-  @Metadata({ data: "json, name=executionStepName" })
+  @SpeakeasyMetadata({ data: "json, name=executionStepName" })
   executionStepName?: string;
 
-  @Metadata({ data: "json, name=inputIndex" })
+  @SpeakeasyMetadata({ data: "json, name=inputIndex" })
   inputIndex?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=origin" })
+  @SpeakeasyMetadata({ data: "json, name=origin" })
   origin?: CounterStructuredNameOriginEnum;
 
-  @Metadata({ data: "json, name=originNamespace" })
+  @SpeakeasyMetadata({ data: "json, name=originNamespace" })
   originNamespace?: string;
 
-  @Metadata({ data: "json, name=originalRequestingStepName" })
+  @SpeakeasyMetadata({ data: "json, name=originalRequestingStepName" })
   originalRequestingStepName?: string;
 
-  @Metadata({ data: "json, name=originalStepName" })
+  @SpeakeasyMetadata({ data: "json, name=originalStepName" })
   originalStepName?: string;
 
-  @Metadata({ data: "json, name=portion" })
+  @SpeakeasyMetadata({ data: "json, name=portion" })
   portion?: CounterStructuredNamePortionEnum;
 
-  @Metadata({ data: "json, name=workerId" })
+  @SpeakeasyMetadata({ data: "json, name=workerId" })
   workerId?: string;
 }

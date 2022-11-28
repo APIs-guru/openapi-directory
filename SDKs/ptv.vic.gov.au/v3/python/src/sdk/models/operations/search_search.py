@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class SearchSearchPathParams:
-    search_term: str = field(default=None, metadata={'path_param': { 'field_name': 'search_term', 'style': 'simple', 'explode': False }})
+    search_term: str = field(metadata={'path_param': { 'field_name': 'search_term', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,15 +26,15 @@ class SearchSearchQueryParams:
 
 @dataclass
 class SearchSearchRequest:
-    path_params: SearchSearchPathParams = field(default=None)
-    query_params: SearchSearchQueryParams = field(default=None)
+    path_params: SearchSearchPathParams = field()
+    query_params: SearchSearchQueryParams = field()
     
 
 @dataclass
 class SearchSearchResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     v3_error_response: Optional[shared.V3ErrorResponse] = field(default=None)
     v3_search_result: Optional[shared.V3SearchResult] = field(default=None)
     

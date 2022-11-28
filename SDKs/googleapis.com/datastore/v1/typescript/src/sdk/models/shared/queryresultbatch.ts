@@ -1,20 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EntityResult } from "./entityresult";
 
+
 export enum QueryResultBatchEntityResultTypeEnum {
-    ResultTypeUnspecified = "RESULT_TYPE_UNSPECIFIED"
-,    Full = "FULL"
-,    Projection = "PROJECTION"
-,    KeyOnly = "KEY_ONLY"
+    ResultTypeUnspecified = "RESULT_TYPE_UNSPECIFIED",
+    Full = "FULL",
+    Projection = "PROJECTION",
+    KeyOnly = "KEY_ONLY"
 }
 
 export enum QueryResultBatchMoreResultsEnum {
-    MoreResultsTypeUnspecified = "MORE_RESULTS_TYPE_UNSPECIFIED"
-,    NotFinished = "NOT_FINISHED"
-,    MoreResultsAfterLimit = "MORE_RESULTS_AFTER_LIMIT"
-,    MoreResultsAfterCursor = "MORE_RESULTS_AFTER_CURSOR"
-,    NoMoreResults = "NO_MORE_RESULTS"
+    MoreResultsTypeUnspecified = "MORE_RESULTS_TYPE_UNSPECIFIED",
+    NotFinished = "NOT_FINISHED",
+    MoreResultsAfterLimit = "MORE_RESULTS_AFTER_LIMIT",
+    MoreResultsAfterCursor = "MORE_RESULTS_AFTER_CURSOR",
+    NoMoreResults = "NO_MORE_RESULTS"
 }
 
 
@@ -23,27 +23,27 @@ export enum QueryResultBatchMoreResultsEnum {
  * A batch of results produced by a query.
 **/
 export class QueryResultBatch extends SpeakeasyBase {
-  @Metadata({ data: "json, name=endCursor" })
+  @SpeakeasyMetadata({ data: "json, name=endCursor" })
   endCursor?: string;
 
-  @Metadata({ data: "json, name=entityResultType" })
+  @SpeakeasyMetadata({ data: "json, name=entityResultType" })
   entityResultType?: QueryResultBatchEntityResultTypeEnum;
 
-  @Metadata({ data: "json, name=entityResults", elemType: shared.EntityResult })
+  @SpeakeasyMetadata({ data: "json, name=entityResults", elemType: EntityResult })
   entityResults?: EntityResult[];
 
-  @Metadata({ data: "json, name=moreResults" })
+  @SpeakeasyMetadata({ data: "json, name=moreResults" })
   moreResults?: QueryResultBatchMoreResultsEnum;
 
-  @Metadata({ data: "json, name=readTime" })
+  @SpeakeasyMetadata({ data: "json, name=readTime" })
   readTime?: string;
 
-  @Metadata({ data: "json, name=skippedCursor" })
+  @SpeakeasyMetadata({ data: "json, name=skippedCursor" })
   skippedCursor?: string;
 
-  @Metadata({ data: "json, name=skippedResults" })
+  @SpeakeasyMetadata({ data: "json, name=skippedResults" })
   skippedResults?: number;
 
-  @Metadata({ data: "json, name=snapshotVersion" })
+  @SpeakeasyMetadata({ data: "json, name=snapshotVersion" })
   snapshotVersion?: string;
 }

@@ -1,33 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateThingGroupPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=thingGroupName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=thingGroupName" })
   thingGroupName: string;
 }
 
 
 export class CreateThingGroupHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -37,57 +38,57 @@ export class CreateThingGroupHeaders extends SpeakeasyBase {
  * Thing group properties.
 **/
 export class CreateThingGroupRequestBodyThingGroupProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attributePayload" })
+  @SpeakeasyMetadata({ data: "json, name=attributePayload" })
   attributePayload?: shared.AttributePayload;
 
-  @Metadata({ data: "json, name=thingGroupDescription" })
+  @SpeakeasyMetadata({ data: "json, name=thingGroupDescription" })
   thingGroupDescription?: string;
 }
 
 
 export class CreateThingGroupRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=parentGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=parentGroupName" })
   parentGroupName?: string;
 
-  @Metadata({ data: "json, name=tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=tags", elemType: shared.Tag })
   tags?: shared.Tag[];
 
-  @Metadata({ data: "json, name=thingGroupProperties" })
+  @SpeakeasyMetadata({ data: "json, name=thingGroupProperties" })
   thingGroupProperties?: CreateThingGroupRequestBodyThingGroupProperties;
 }
 
 
 export class CreateThingGroupRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CreateThingGroupPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateThingGroupHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateThingGroupRequestBody;
 }
 
 
 export class CreateThingGroupResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createThingGroupResponse?: shared.CreateThingGroupResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalFailureException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceAlreadyExistsException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 }

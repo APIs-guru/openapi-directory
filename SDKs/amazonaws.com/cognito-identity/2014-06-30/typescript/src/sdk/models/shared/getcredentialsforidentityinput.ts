@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GetCredentialsForIdentityInput
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Input to the <code>GetCredentialsForIdentity</code> action.
 **/
 export class GetCredentialsForIdentityInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CustomRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=CustomRoleArn" })
   customRoleArn?: string;
 
-  @Metadata({ data: "json, name=IdentityId" })
+  @SpeakeasyMetadata({ data: "json, name=IdentityId" })
   identityId: string;
 
-  @Metadata({ data: "json, name=Logins" })
+  @SpeakeasyMetadata({ data: "json, name=Logins" })
   logins?: Map<string, string>;
 }

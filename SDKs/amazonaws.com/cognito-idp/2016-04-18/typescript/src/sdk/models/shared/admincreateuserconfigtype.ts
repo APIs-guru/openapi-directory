@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MessageTemplateType } from "./messagetemplatetype";
+
 
 
 // AdminCreateUserConfigType
@@ -7,12 +8,12 @@ import { MessageTemplateType } from "./messagetemplatetype";
  * The configuration for creating a new user profile.
 **/
 export class AdminCreateUserConfigType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AllowAdminCreateUserOnly" })
+  @SpeakeasyMetadata({ data: "json, name=AllowAdminCreateUserOnly" })
   allowAdminCreateUserOnly?: boolean;
 
-  @Metadata({ data: "json, name=InviteMessageTemplate" })
+  @SpeakeasyMetadata({ data: "json, name=InviteMessageTemplate" })
   inviteMessageTemplate?: MessageTemplateType;
 
-  @Metadata({ data: "json, name=UnusedAccountValidityDays" })
+  @SpeakeasyMetadata({ data: "json, name=UnusedAccountValidityDays" })
   unusedAccountValidityDays?: number;
 }

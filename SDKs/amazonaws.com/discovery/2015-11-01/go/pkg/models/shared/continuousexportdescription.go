@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ContinuousExportDescription
+// A list of continuous export descriptions.
 type ContinuousExportDescription struct {
 	DataSource          *DataSourceEnum             `json:"dataSource,omitempty"`
 	ExportID            *string                     `json:"exportId,omitempty"`

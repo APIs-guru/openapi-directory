@@ -1,5 +1,7 @@
 package shared
 
+// PatchRule
+// Defines an approval rule for a patch baseline.
 type PatchRule struct {
 	ApproveAfterDays  *int64                    `json:"ApproveAfterDays,omitempty"`
 	ApproveUntilDate  *string                   `json:"ApproveUntilDate,omitempty"`

@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DeleteWebhooksV3AppIdSubscriptionsSubscriptionIdArchivePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=appId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=appId" })
   appId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=subscriptionId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=subscriptionId" })
   subscriptionId: number;
 }
 
 
 export class DeleteWebhooksV3AppIdSubscriptionsSubscriptionIdArchiveSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
   developerHapikey: shared.SchemeDeveloperHapikey;
 }
 
 
 export class DeleteWebhooksV3AppIdSubscriptionsSubscriptionIdArchiveRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DeleteWebhooksV3AppIdSubscriptionsSubscriptionIdArchivePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: DeleteWebhooksV3AppIdSubscriptionsSubscriptionIdArchiveSecurity;
 }
 
 
 export class DeleteWebhooksV3AppIdSubscriptionsSubscriptionIdArchiveResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

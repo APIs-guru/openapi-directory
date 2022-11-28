@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class DescribeGatewayPathParams:
-    gateway_id: str = field(default=None, metadata={'path_param': { 'field_name': 'gatewayId', 'style': 'simple', 'explode': False }})
+    gateway_id: str = field(metadata={'path_param': { 'field_name': 'gatewayId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,17 +24,17 @@ class DescribeGatewayHeaders:
 
 @dataclass
 class DescribeGatewayRequest:
-    path_params: DescribeGatewayPathParams = field(default=None)
-    headers: DescribeGatewayHeaders = field(default=None)
+    headers: DescribeGatewayHeaders = field()
+    path_params: DescribeGatewayPathParams = field()
     
 
 @dataclass
 class DescribeGatewayResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     describe_gateway_response: Optional[shared.DescribeGatewayResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

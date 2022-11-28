@@ -1,9 +1,13 @@
 package shared
 
+// UserUserPermission
+// The users' permissions
 type UserUserPermission struct {
 	Permission []interface{} `json:"Permission,omitempty"`
 }
 
+// UserUserRoles
+// The users' roles
 type UserUserRoles struct {
 	Role []string `json:"Role,omitempty"`
 }

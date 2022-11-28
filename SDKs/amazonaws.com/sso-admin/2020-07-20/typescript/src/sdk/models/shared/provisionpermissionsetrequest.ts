@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProvisionTargetTypeEnum } from "./provisiontargettypeenum";
 
 
+
 export class ProvisionPermissionSetRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=InstanceArn" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceArn" })
   instanceArn: string;
 
-  @Metadata({ data: "json, name=PermissionSetArn" })
+  @SpeakeasyMetadata({ data: "json, name=PermissionSetArn" })
   permissionSetArn: string;
 
-  @Metadata({ data: "json, name=TargetId" })
+  @SpeakeasyMetadata({ data: "json, name=TargetId" })
   targetId?: string;
 
-  @Metadata({ data: "json, name=TargetType" })
+  @SpeakeasyMetadata({ data: "json, name=TargetType" })
   targetType: ProvisionTargetTypeEnum;
 }

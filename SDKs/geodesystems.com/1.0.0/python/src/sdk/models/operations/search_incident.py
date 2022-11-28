@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Optional
@@ -31,11 +31,11 @@ class SearchIncidentQueryParams:
 
 @dataclass
 class SearchIncidentRequest:
-    query_params: SearchIncidentQueryParams = field(default=None)
+    query_params: SearchIncidentQueryParams = field()
     
 
 @dataclass
 class SearchIncidentResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

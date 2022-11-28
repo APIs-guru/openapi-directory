@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Vpc } from "./vpc";
 /**
  * The details of the Apache Kafka cluster to which the connector is connected.

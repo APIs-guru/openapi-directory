@@ -12,11 +12,6 @@ type GetQuerySecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type GetQueryRequest struct {
-	QueryParams GetQueryQueryParams
-	Security    GetQuerySecurity
-}
-
 type GetQuery200ApplicationJSONDescriptionColumns struct {
 	ColumnName *string `json:"column_name,omitempty"`
 }
@@ -50,6 +45,11 @@ type GetQuery422ApplicationJSON struct {
 
 type GetQuery500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type GetQueryRequest struct {
+	QueryParams GetQueryQueryParams
+	Security    GetQuerySecurity
 }
 
 type GetQueryResponse struct {

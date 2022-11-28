@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // InferenceInputNameConfiguration
 /**
  * Specifies configuration information for the input data for the inference, including timestamp format and delimiter.
@@ -33,11 +33,11 @@ var InferenceInputNameConfiguration = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ComponentTimestampDelimiter" }),
+        SpeakeasyMetadata({ data: "json, name=ComponentTimestampDelimiter" }),
         __metadata("design:type", String)
     ], InferenceInputNameConfiguration.prototype, "componentTimestampDelimiter", void 0);
     __decorate([
-        Metadata({ data: "json, name=TimestampFormat" }),
+        SpeakeasyMetadata({ data: "json, name=TimestampFormat" }),
         __metadata("design:type", String)
     ], InferenceInputNameConfiguration.prototype, "timestampFormat", void 0);
     return InferenceInputNameConfiguration;

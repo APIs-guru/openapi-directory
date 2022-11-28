@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetAllCustomFieldsByCategoryPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=category" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=category" })
   category: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=companyId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=companyId" })
   companyId: string;
 }
 
 
 export class GetAllCustomFieldsByCategorySecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   paylocityAuth: shared.SchemePaylocityAuth;
 }
 
 
 export class GetAllCustomFieldsByCategoryRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetAllCustomFieldsByCategoryPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetAllCustomFieldsByCategorySecurity;
 }
 
 
 export class GetAllCustomFieldsByCategoryResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.CustomFieldDefinition })
+  @SpeakeasyMetadata({ elemType: shared.CustomFieldDefinition })
   customFieldDefinitions?: shared.CustomFieldDefinition[];
 
-  @Metadata({ elemType: shared.Error })
+  @SpeakeasyMetadata({ elemType: shared.Error })
   errors?: shared.Error[];
 }

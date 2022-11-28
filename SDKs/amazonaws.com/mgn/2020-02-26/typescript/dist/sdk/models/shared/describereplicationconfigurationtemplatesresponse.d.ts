@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ReplicationConfigurationTemplate } from "./replicationconfigurationtemplate";
 export declare class DescribeReplicationConfigurationTemplatesResponse extends SpeakeasyBase {
     items?: ReplicationConfigurationTemplate[];

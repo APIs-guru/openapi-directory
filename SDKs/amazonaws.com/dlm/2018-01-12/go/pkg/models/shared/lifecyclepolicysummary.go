@@ -1,5 +1,7 @@
 package shared
 
+// LifecyclePolicySummary
+// Summary information about a lifecycle policy.
 type LifecyclePolicySummary struct {
 	Description *string                        `json:"Description,omitempty"`
 	PolicyID    *string                        `json:"PolicyId,omitempty"`

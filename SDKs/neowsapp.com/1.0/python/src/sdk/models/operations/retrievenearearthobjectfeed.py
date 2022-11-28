@@ -1,5 +1,8 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
 from sdk.models import shared
 
 
@@ -12,12 +15,12 @@ class RetrieveNearEarthObjectFeedQueryParams:
 
 @dataclass
 class RetrieveNearEarthObjectFeedRequest:
-    query_params: RetrieveNearEarthObjectFeedQueryParams = field(default=None)
+    query_params: RetrieveNearEarthObjectFeedQueryParams = field()
     
 
 @dataclass
 class RetrieveNearEarthObjectFeedResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     near_earth_object_list: Optional[shared.NearEarthObjectList] = field(default=None)
-    status_code: int = field(default=None)
     

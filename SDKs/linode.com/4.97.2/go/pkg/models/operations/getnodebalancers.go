@@ -9,22 +9,9 @@ type GetNodeBalancersQueryParams struct {
 	PageSize *int64 `queryParam:"style=form,explode=true,name=page_size"`
 }
 
-type GetNodeBalancersSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type GetNodeBalancersSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type GetNodeBalancersSecurity struct {
-	Option1 *GetNodeBalancersSecurityOption1 `security:"option"`
-	Option2 *GetNodeBalancersSecurityOption2 `security:"option"`
-}
-
-type GetNodeBalancersRequest struct {
-	QueryParams GetNodeBalancersQueryParams
-	Security    GetNodeBalancersSecurity
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
 }
 
 type GetNodeBalancers200ApplicationJSON struct {
@@ -36,6 +23,11 @@ type GetNodeBalancers200ApplicationJSON struct {
 
 type GetNodeBalancersDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type GetNodeBalancersRequest struct {
+	QueryParams GetNodeBalancersQueryParams
+	Security    GetNodeBalancersSecurity
 }
 
 type GetNodeBalancersResponse struct {

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ErrorAutoReloadNotEnabled
 /**
  * Auto-Reload not enabled
@@ -33,11 +33,11 @@ var ErrorAutoReloadNotEnabled = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error-code" }),
+        SpeakeasyMetadata({ data: "json, name=error-code" }),
         __metadata("design:type", Object)
     ], ErrorAutoReloadNotEnabled.prototype, "errorCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=error-code-label" }),
+        SpeakeasyMetadata({ data: "json, name=error-code-label" }),
         __metadata("design:type", Object)
     ], ErrorAutoReloadNotEnabled.prototype, "errorCodeLabel", void 0);
     return ErrorAutoReloadNotEnabled;

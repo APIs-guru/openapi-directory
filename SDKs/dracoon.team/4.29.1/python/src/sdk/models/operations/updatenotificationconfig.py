@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from sdk.models import shared
 
 
 @dataclass
 class UpdateNotificationConfigPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,15 +18,15 @@ class UpdateNotificationConfigHeaders:
 
 @dataclass
 class UpdateNotificationConfigRequest:
-    path_params: UpdateNotificationConfigPathParams = field(default=None)
-    headers: UpdateNotificationConfigHeaders = field(default=None)
-    request: shared.NotificationConfigChangeRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateNotificationConfigHeaders = field()
+    path_params: UpdateNotificationConfigPathParams = field()
+    request: shared.NotificationConfigChangeRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateNotificationConfigResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     notification_config: Optional[shared.NotificationConfig] = field(default=None)
-    status_code: int = field(default=None)
     

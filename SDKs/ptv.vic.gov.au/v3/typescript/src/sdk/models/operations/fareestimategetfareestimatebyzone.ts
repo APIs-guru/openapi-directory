@@ -1,62 +1,63 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class FareEstimateGetFareEstimateByZonePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=maxZone" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=maxZone" })
   maxZone: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=minZone" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=minZone" })
   minZone: number;
 }
 
 
 export class FareEstimateGetFareEstimateByZoneQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=devid" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=devid" })
   devid?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=is_journey_in_free_tram_zone" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=is_journey_in_free_tram_zone" })
   isJourneyInFreeTramZone?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=journey_touch_off_utc" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=journey_touch_off_utc" })
   journeyTouchOffUtc?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=journey_touch_on_utc" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=journey_touch_on_utc" })
   journeyTouchOnUtc?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=signature" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=signature" })
   signature?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=token" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=token" })
   token?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=travelled_route_types" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=travelled_route_types" })
   travelledRouteTypes?: number[];
 }
 
 
 export class FareEstimateGetFareEstimateByZoneRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: FareEstimateGetFareEstimateByZonePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: FareEstimateGetFareEstimateByZoneQueryParams;
 }
 
 
 export class FareEstimateGetFareEstimateByZoneResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   v3ErrorResponse?: shared.V3ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   v3FareEstimateResponse?: any;
 }

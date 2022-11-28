@@ -34,6 +34,8 @@ const (
 	RepositoryInvitationPermissionsEnumAdmin RepositoryInvitationPermissionsEnum = "admin"
 )
 
+// RepositoryInvitation
+// Repository invitations let you manage who you collaborate with.
 type RepositoryInvitation struct {
 	CreatedAt   time.Time                           `json:"created_at"`
 	Expired     *bool                               `json:"expired,omitempty"`

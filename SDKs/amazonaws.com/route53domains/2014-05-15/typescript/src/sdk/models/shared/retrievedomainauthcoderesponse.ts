@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RetrieveDomainAuthCodeResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The RetrieveDomainAuthCode response includes the following element.
 **/
 export class RetrieveDomainAuthCodeResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AuthCode" })
+  @SpeakeasyMetadata({ data: "json, name=AuthCode" })
   authCode: string;
 }

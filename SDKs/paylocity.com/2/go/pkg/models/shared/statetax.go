@@ -1,5 +1,7 @@
 package shared
 
+// StateTax
+// The State Tax model
 type StateTax struct {
 	Amount             *float64 `json:"amount,omitempty"`
 	DeductionsAmount   *float64 `json:"deductionsAmount,omitempty"`

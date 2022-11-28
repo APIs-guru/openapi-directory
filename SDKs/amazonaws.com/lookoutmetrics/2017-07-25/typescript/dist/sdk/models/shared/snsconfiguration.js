@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // SnsConfiguration
 /**
  * Contains information about the SNS topic to which you want to send your alerts and the IAM role that has access to that topic.
@@ -33,11 +33,11 @@ var SnsConfiguration = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=RoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=RoleArn" }),
         __metadata("design:type", String)
     ], SnsConfiguration.prototype, "roleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=SnsTopicArn" }),
+        SpeakeasyMetadata({ data: "json, name=SnsTopicArn" }),
         __metadata("design:type", String)
     ], SnsConfiguration.prototype, "snsTopicArn", void 0);
     return SnsConfiguration;

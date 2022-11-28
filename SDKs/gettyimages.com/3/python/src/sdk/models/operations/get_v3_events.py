@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -16,12 +17,12 @@ class GetV3EventsHeaders:
 
 @dataclass
 class GetV3EventsRequest:
-    query_params: GetV3EventsQueryParams = field(default=None)
-    headers: GetV3EventsHeaders = field(default=None)
+    headers: GetV3EventsHeaders = field()
+    query_params: GetV3EventsQueryParams = field()
     
 
 @dataclass
 class GetV3EventsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

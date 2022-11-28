@@ -4,10 +4,6 @@ type GetTagNameJSONPathParams struct {
 	Name string `pathParam:"style=simple,explode=false,name=name"`
 }
 
-type GetTagNameJSONRequest struct {
-	PathParams GetTagNameJSONPathParams
-}
-
 type GetTagNameJSON200ApplicationJSONTopicListTags struct {
 	ID         *int64  `json:"id,omitempty"`
 	Name       *string `json:"name,omitempty"`
@@ -79,6 +75,10 @@ type GetTagNameJSON200ApplicationJSON struct {
 	PrimaryGroups []interface{}                              `json:"primary_groups,omitempty"`
 	TopicList     *GetTagNameJSON200ApplicationJSONTopicList `json:"topic_list,omitempty"`
 	Users         []GetTagNameJSON200ApplicationJSONUsers    `json:"users,omitempty"`
+}
+
+type GetTagNameJSONRequest struct {
+	PathParams GetTagNameJSONPathParams
 }
 
 type GetTagNameJSONResponse struct {

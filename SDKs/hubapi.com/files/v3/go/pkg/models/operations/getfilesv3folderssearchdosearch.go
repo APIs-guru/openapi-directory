@@ -23,22 +23,12 @@ type GetFilesV3FoldersSearchDoSearchQueryParams struct {
 	UpdatedAtLte   *time.Time `queryParam:"style=form,explode=true,name=updatedAtLte"`
 }
 
-type GetFilesV3FoldersSearchDoSearchSecurityOption1 struct {
-	Oauth2Legacy shared.SchemeOauth2Legacy `security:"scheme,type=oauth2"`
-}
-
-type GetFilesV3FoldersSearchDoSearchSecurityOption2 struct {
-	Hapikey shared.SchemeHapikey `security:"scheme,type=apiKey,subtype=query"`
-}
-
-type GetFilesV3FoldersSearchDoSearchSecurityOption3 struct {
-	Oauth2Legacy shared.SchemeOauth2Legacy `security:"scheme,type=oauth2"`
-}
-
 type GetFilesV3FoldersSearchDoSearchSecurity struct {
-	Option1 *GetFilesV3FoldersSearchDoSearchSecurityOption1 `security:"option"`
-	Option2 *GetFilesV3FoldersSearchDoSearchSecurityOption2 `security:"option"`
-	Option3 *GetFilesV3FoldersSearchDoSearchSecurityOption3 `security:"option"`
+	PrivateAppsLegacy  *shared.SchemePrivateAppsLegacy `security:"scheme,type=apiKey,subtype=header"`
+	Oauth2Legacy       *shared.SchemeOauth2Legacy      `security:"scheme,type=oauth2"`
+	Hapikey            *shared.SchemeHapikey           `security:"scheme,type=apiKey,subtype=query"`
+	PrivateAppsLegacy1 *shared.SchemePrivateAppsLegacy `security:"scheme,type=apiKey,subtype=header"`
+	Oauth2Legacy1      *shared.SchemeOauth2Legacy      `security:"scheme,type=oauth2"`
 }
 
 type GetFilesV3FoldersSearchDoSearchRequest struct {

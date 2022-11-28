@@ -10,13 +10,13 @@ class Request3ConfigHeaders:
 
 @dataclass
 class Request3ConfigRequest:
-    headers: Request3ConfigHeaders = field(default=None)
+    headers: Request3ConfigHeaders = field()
     
 
 @dataclass
 class Request3ConfigResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     s3_config: Optional[shared.S3Config] = field(default=None)
-    status_code: int = field(default=None)
     

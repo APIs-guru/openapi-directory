@@ -1,61 +1,62 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetglobalnumberinfoQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=intlnumber" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=intlnumber" })
   intlnumber: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=license" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=license" })
   license: string;
 }
 
 
-export class GetglobalnumberinfoRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetglobalnumberinfoQueryParams;
-}
-
-
 export class Getglobalnumberinfo200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Code" })
+  @SpeakeasyMetadata({ data: "json, name=Code" })
   code?: string;
 
-  @Metadata({ data: "json, name=Country" })
+  @SpeakeasyMetadata({ data: "json, name=Country" })
   country?: string;
 
-  @Metadata({ data: "json, name=Credits" })
+  @SpeakeasyMetadata({ data: "json, name=Credits" })
   credits?: string;
 
-  @Metadata({ data: "json, name=Language2" })
+  @SpeakeasyMetadata({ data: "json, name=Language2" })
   language2?: string;
 
-  @Metadata({ data: "json, name=Language3" })
+  @SpeakeasyMetadata({ data: "json, name=Language3" })
   language3?: string;
 
-  @Metadata({ data: "json, name=Mobile" })
+  @SpeakeasyMetadata({ data: "json, name=Mobile" })
   mobile?: string;
 
-  @Metadata({ data: "json, name=PrimaryCity" })
+  @SpeakeasyMetadata({ data: "json, name=PrimaryCity" })
   primaryCity?: string;
 
-  @Metadata({ data: "json, name=PrimaryLanguage" })
+  @SpeakeasyMetadata({ data: "json, name=PrimaryLanguage" })
   primaryLanguage?: string;
 
-  @Metadata({ data: "json, name=Region" })
+  @SpeakeasyMetadata({ data: "json, name=Region" })
   region?: string;
 
-  @Metadata({ data: "json, name=Wealth" })
+  @SpeakeasyMetadata({ data: "json, name=Wealth" })
   wealth?: string;
 }
 
 
+export class GetglobalnumberinfoRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetglobalnumberinfoQueryParams;
+}
+
+
 export class GetglobalnumberinfoResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getglobalnumberinfo200ApplicationJsonObject?: Getglobalnumberinfo200ApplicationJson;
 }

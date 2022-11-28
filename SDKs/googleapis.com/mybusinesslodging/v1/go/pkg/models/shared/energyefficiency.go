@@ -63,6 +63,8 @@ const (
 	EnergyEfficiencyIndependentOrganizationAuditsEnergyUseExceptionEnumDependentOnDayOfWeek EnergyEfficiencyIndependentOrganizationAuditsEnergyUseExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
 
+// EnergyEfficiency
+// Energy efficiency practices implemented at the hotel.
 type EnergyEfficiency struct {
 	CarbonFreeEnergySources                          *bool                                                                 `json:"carbonFreeEnergySources,omitempty"`
 	CarbonFreeEnergySourcesException                 *EnergyEfficiencyCarbonFreeEnergySourcesExceptionEnum                 `json:"carbonFreeEnergySourcesException,omitempty"`
@@ -76,6 +78,23 @@ type EnergyEfficiency struct {
 	EnergySavingThermostatsException                 *EnergyEfficiencyEnergySavingThermostatsExceptionEnum                 `json:"energySavingThermostatsException,omitempty"`
 	GreenBuildingDesign                              *bool                                                                 `json:"greenBuildingDesign,omitempty"`
 	GreenBuildingDesignException                     *EnergyEfficiencyGreenBuildingDesignExceptionEnum                     `json:"greenBuildingDesignException,omitempty"`
+	IndependentOrganizationAuditsEnergyUse           *bool                                                                 `json:"independentOrganizationAuditsEnergyUse,omitempty"`
+	IndependentOrganizationAuditsEnergyUseException  *EnergyEfficiencyIndependentOrganizationAuditsEnergyUseExceptionEnum  `json:"independentOrganizationAuditsEnergyUseException,omitempty"`
+}
+
+// EnergyEfficiencyInput
+// Energy efficiency practices implemented at the hotel.
+type EnergyEfficiencyInput struct {
+	CarbonFreeEnergySources                          *bool                                                                 `json:"carbonFreeEnergySources,omitempty"`
+	CarbonFreeEnergySourcesException                 *EnergyEfficiencyCarbonFreeEnergySourcesExceptionEnum                 `json:"carbonFreeEnergySourcesException,omitempty"`
+	EnergyConservationProgram                        *bool                                                                 `json:"energyConservationProgram,omitempty"`
+	EnergyConservationProgramException               *EnergyEfficiencyEnergyConservationProgramExceptionEnum               `json:"energyConservationProgramException,omitempty"`
+	EnergyEfficientHeatingAndCoolingSystems          *bool                                                                 `json:"energyEfficientHeatingAndCoolingSystems,omitempty"`
+	EnergyEfficientHeatingAndCoolingSystemsException *EnergyEfficiencyEnergyEfficientHeatingAndCoolingSystemsExceptionEnum `json:"energyEfficientHeatingAndCoolingSystemsException,omitempty"`
+	EnergyEfficientLighting                          *bool                                                                 `json:"energyEfficientLighting,omitempty"`
+	EnergyEfficientLightingException                 *EnergyEfficiencyEnergyEfficientLightingExceptionEnum                 `json:"energyEfficientLightingException,omitempty"`
+	EnergySavingThermostats                          *bool                                                                 `json:"energySavingThermostats,omitempty"`
+	EnergySavingThermostatsException                 *EnergyEfficiencyEnergySavingThermostatsExceptionEnum                 `json:"energySavingThermostatsException,omitempty"`
 	IndependentOrganizationAuditsEnergyUse           *bool                                                                 `json:"independentOrganizationAuditsEnergyUse,omitempty"`
 	IndependentOrganizationAuditsEnergyUseException  *EnergyEfficiencyIndependentOrganizationAuditsEnergyUseExceptionEnum  `json:"independentOrganizationAuditsEnergyUseException,omitempty"`
 }

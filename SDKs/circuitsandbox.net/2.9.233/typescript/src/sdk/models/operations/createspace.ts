@@ -1,85 +1,86 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum CreateSpaceRequestBodyAccessModeTypeEnum {
-    InternalOnly = "INTERNAL_ONLY"
-,    InternalExternal = "INTERNAL_EXTERNAL"
+    InternalOnly = "INTERNAL_ONLY",
+    InternalExternal = "INTERNAL_EXTERNAL"
 }
 
 export enum CreateSpaceRequestBodyRoleEnum {
-    Moderator = "MODERATOR"
-,    Author = "AUTHOR"
-,    Participant = "PARTICIPANT"
-,    Reader = "READER"
+    Moderator = "MODERATOR",
+    Author = "AUTHOR",
+    Participant = "PARTICIPANT",
+    Reader = "READER"
 }
 
 export enum CreateSpaceRequestBodyStatusEnum {
-    Enabled = "ENABLED"
-,    Disabled = "DISABLED"
+    Enabled = "ENABLED",
+    Disabled = "DISABLED"
 }
 
 export enum CreateSpaceRequestBodyTypeEnum {
-    Open = "OPEN"
-,    Closed = "CLOSED"
-,    Secret = "SECRET"
+    Open = "OPEN",
+    Closed = "CLOSED",
+    Secret = "SECRET"
 }
 
 
 export class CreateSpaceRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "form, name=accessModeType;" })
+  @SpeakeasyMetadata({ data: "form, name=accessModeType;" })
   accessModeType: CreateSpaceRequestBodyAccessModeTypeEnum;
 
-  @Metadata({ data: "form, name=description;" })
+  @SpeakeasyMetadata({ data: "form, name=description;" })
   description?: string;
 
-  @Metadata({ data: "form, name=largePictureBase64;" })
+  @SpeakeasyMetadata({ data: "form, name=largePictureBase64;" })
   largePictureBase64?: string;
 
-  @Metadata({ data: "form, name=name;" })
+  @SpeakeasyMetadata({ data: "form, name=name;" })
   name: string;
 
-  @Metadata({ data: "form, name=role;" })
+  @SpeakeasyMetadata({ data: "form, name=role;" })
   role: CreateSpaceRequestBodyRoleEnum;
 
-  @Metadata({ data: "form, name=smallPictureBase64;" })
+  @SpeakeasyMetadata({ data: "form, name=smallPictureBase64;" })
   smallPictureBase64?: string;
 
-  @Metadata({ data: "form, name=status;" })
+  @SpeakeasyMetadata({ data: "form, name=status;" })
   status: CreateSpaceRequestBodyStatusEnum;
 
-  @Metadata({ data: "form, name=tags;" })
+  @SpeakeasyMetadata({ data: "form, name=tags;" })
   tags?: string[];
 
-  @Metadata({ data: "form, name=type;" })
+  @SpeakeasyMetadata({ data: "form, name=type;" })
   type: CreateSpaceRequestBodyTypeEnum;
 }
 
 
 export class CreateSpaceSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth: shared.SchemeOauth;
 }
 
 
 export class CreateSpaceRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
   request: CreateSpaceRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: CreateSpaceSecurity;
 }
 
 
 export class CreateSpaceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   participantSpaceWrapper?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SearchForPositionResult } from "./searchforpositionresult";
 import { SearchPlaceIndexForPositionSummary } from "./searchplaceindexforpositionsummary";
 
 
+
 export class SearchPlaceIndexForPositionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Results", elemType: shared.SearchForPositionResult })
+  @SpeakeasyMetadata({ data: "json, name=Results", elemType: SearchForPositionResult })
   results: SearchForPositionResult[];
 
-  @Metadata({ data: "json, name=Summary" })
+  @SpeakeasyMetadata({ data: "json, name=Summary" })
   summary: SearchPlaceIndexForPositionSummary;
 }

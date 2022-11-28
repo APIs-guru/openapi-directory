@@ -1,86 +1,87 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum ListActiveViolationsBehaviorCriteriaTypeEnum {
-    Static = "STATIC"
-,    Statistical = "STATISTICAL"
-,    MachineLearning = "MACHINE_LEARNING"
+    Static = "STATIC",
+    Statistical = "STATISTICAL",
+    MachineLearning = "MACHINE_LEARNING"
 }
 
 
 export class ListActiveViolationsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=behaviorCriteriaType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=behaviorCriteriaType" })
   behaviorCriteriaType?: ListActiveViolationsBehaviorCriteriaTypeEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=listSuppressedAlerts" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=listSuppressedAlerts" })
   listSuppressedAlerts?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxResults" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=nextToken" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=securityProfileName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=securityProfileName" })
   securityProfileName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=thingName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=thingName" })
   thingName?: string;
 }
 
 
 export class ListActiveViolationsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class ListActiveViolationsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ListActiveViolationsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: ListActiveViolationsHeaders;
 }
 
 
 export class ListActiveViolationsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalFailureException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   listActiveViolationsResponse?: shared.ListActiveViolationsResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 }

@@ -22,8 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // IssueTokenRequestFlags
 /**
  * Object representing flags that potentialy modify this transaction
@@ -34,7 +33,7 @@ var IssueTokenRequestFlags = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=splitChange" }),
+        SpeakeasyMetadata({ data: "json, name=splitChange" }),
         __metadata("design:type", Boolean)
     ], IssueTokenRequestFlags.prototype, "splitChange", void 0);
     return IssueTokenRequestFlags;
@@ -46,19 +45,19 @@ var IssueTokenRequestMetadataEncryptions = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], IssueTokenRequestMetadataEncryptions.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=key" }),
+        SpeakeasyMetadata({ data: "json, name=key" }),
         __metadata("design:type", String)
     ], IssueTokenRequestMetadataEncryptions.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "json, name=pubkey" }),
+        SpeakeasyMetadata({ data: "json, name=pubkey" }),
         __metadata("design:type", String)
     ], IssueTokenRequestMetadataEncryptions.prototype, "pubkey", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], IssueTokenRequestMetadataEncryptions.prototype, "type", void 0);
     return IssueTokenRequestMetadataEncryptions;
@@ -74,11 +73,11 @@ var IssueTokenRequestMetadataRulesExpiration = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=locked" }),
+        SpeakeasyMetadata({ data: "json, name=locked" }),
         __metadata("design:type", Boolean)
     ], IssueTokenRequestMetadataRulesExpiration.prototype, "locked", void 0);
     __decorate([
-        Metadata({ data: "json, name=validUntil" }),
+        SpeakeasyMetadata({ data: "json, name=validUntil" }),
         __metadata("design:type", Number)
     ], IssueTokenRequestMetadataRulesExpiration.prototype, "validUntil", void 0);
     return IssueTokenRequestMetadataRulesExpiration;
@@ -90,15 +89,15 @@ var IssueTokenRequestMetadataRulesFeesItems = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=address" }),
+        SpeakeasyMetadata({ data: "json, name=address" }),
         __metadata("design:type", String)
     ], IssueTokenRequestMetadataRulesFeesItems.prototype, "address", void 0);
     __decorate([
-        Metadata({ data: "json, name=tokenId" }),
+        SpeakeasyMetadata({ data: "json, name=tokenId" }),
         __metadata("design:type", String)
     ], IssueTokenRequestMetadataRulesFeesItems.prototype, "tokenId", void 0);
     __decorate([
-        Metadata({ data: "json, name=value" }),
+        SpeakeasyMetadata({ data: "json, name=value" }),
         __metadata("design:type", String)
     ], IssueTokenRequestMetadataRulesFeesItems.prototype, "value", void 0);
     return IssueTokenRequestMetadataRulesFeesItems;
@@ -110,11 +109,11 @@ var IssueTokenRequestMetadataRulesFees = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=items", elemType: shared.IssueTokenRequestMetadataRulesFeesItems }),
+        SpeakeasyMetadata({ data: "json, name=items", elemType: IssueTokenRequestMetadataRulesFeesItems }),
         __metadata("design:type", Array)
     ], IssueTokenRequestMetadataRulesFees.prototype, "items", void 0);
     __decorate([
-        Metadata({ data: "json, name=locked" }),
+        SpeakeasyMetadata({ data: "json, name=locked" }),
         __metadata("design:type", Boolean)
     ], IssueTokenRequestMetadataRulesFees.prototype, "locked", void 0);
     return IssueTokenRequestMetadataRulesFees;
@@ -126,11 +125,11 @@ var IssueTokenRequestMetadataRulesHolders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=address" }),
+        SpeakeasyMetadata({ data: "json, name=address" }),
         __metadata("design:type", String)
     ], IssueTokenRequestMetadataRulesHolders.prototype, "address", void 0);
     __decorate([
-        Metadata({ data: "json, name=locked" }),
+        SpeakeasyMetadata({ data: "json, name=locked" }),
         __metadata("design:type", Boolean)
     ], IssueTokenRequestMetadataRulesHolders.prototype, "locked", void 0);
     return IssueTokenRequestMetadataRulesHolders;
@@ -146,15 +145,15 @@ var IssueTokenRequestMetadataRules = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=expiration" }),
+        SpeakeasyMetadata({ data: "json, name=expiration" }),
         __metadata("design:type", IssueTokenRequestMetadataRulesExpiration)
     ], IssueTokenRequestMetadataRules.prototype, "expiration", void 0);
     __decorate([
-        Metadata({ data: "json, name=fees" }),
+        SpeakeasyMetadata({ data: "json, name=fees" }),
         __metadata("design:type", IssueTokenRequestMetadataRulesFees)
     ], IssueTokenRequestMetadataRules.prototype, "fees", void 0);
     __decorate([
-        Metadata({ data: "json, name=holders", elemType: shared.IssueTokenRequestMetadataRulesHolders }),
+        SpeakeasyMetadata({ data: "json, name=holders", elemType: IssueTokenRequestMetadataRulesHolders }),
         __metadata("design:type", Array)
     ], IssueTokenRequestMetadataRules.prototype, "holders", void 0);
     return IssueTokenRequestMetadataRules;
@@ -166,19 +165,19 @@ var IssueTokenRequestMetadataUrls = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=dataHash" }),
+        SpeakeasyMetadata({ data: "json, name=dataHash" }),
         __metadata("design:type", String)
     ], IssueTokenRequestMetadataUrls.prototype, "dataHash", void 0);
     __decorate([
-        Metadata({ data: "json, name=mimeType" }),
+        SpeakeasyMetadata({ data: "json, name=mimeType" }),
         __metadata("design:type", String)
     ], IssueTokenRequestMetadataUrls.prototype, "mimeType", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], IssueTokenRequestMetadataUrls.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=url" }),
+        SpeakeasyMetadata({ data: "json, name=url" }),
         __metadata("design:type", String)
     ], IssueTokenRequestMetadataUrls.prototype, "url", void 0);
     return IssueTokenRequestMetadataUrls;
@@ -190,11 +189,11 @@ var IssueTokenRequestMetadataUserDataMeta = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=key" }),
+        SpeakeasyMetadata({ data: "json, name=key" }),
         __metadata("design:type", String)
     ], IssueTokenRequestMetadataUserDataMeta.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "json, name=value" }),
+        SpeakeasyMetadata({ data: "json, name=value" }),
         __metadata("design:type", String)
     ], IssueTokenRequestMetadataUserDataMeta.prototype, "value", void 0);
     return IssueTokenRequestMetadataUserDataMeta;
@@ -210,7 +209,7 @@ var IssueTokenRequestMetadataUserData = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=meta", elemType: shared.IssueTokenRequestMetadataUserDataMeta }),
+        SpeakeasyMetadata({ data: "json, name=meta", elemType: IssueTokenRequestMetadataUserDataMeta }),
         __metadata("design:type", Array)
     ], IssueTokenRequestMetadataUserData.prototype, "meta", void 0);
     return IssueTokenRequestMetadataUserData;
@@ -226,31 +225,31 @@ var IssueTokenRequestMetadata = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], IssueTokenRequestMetadata.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=encryptions", elemType: shared.IssueTokenRequestMetadataEncryptions }),
+        SpeakeasyMetadata({ data: "json, name=encryptions", elemType: IssueTokenRequestMetadataEncryptions }),
         __metadata("design:type", Array)
     ], IssueTokenRequestMetadata.prototype, "encryptions", void 0);
     __decorate([
-        Metadata({ data: "json, name=issuer" }),
+        SpeakeasyMetadata({ data: "json, name=issuer" }),
         __metadata("design:type", String)
     ], IssueTokenRequestMetadata.prototype, "issuer", void 0);
     __decorate([
-        Metadata({ data: "json, name=rules" }),
+        SpeakeasyMetadata({ data: "json, name=rules" }),
         __metadata("design:type", IssueTokenRequestMetadataRules)
     ], IssueTokenRequestMetadata.prototype, "rules", void 0);
     __decorate([
-        Metadata({ data: "json, name=tokenName" }),
+        SpeakeasyMetadata({ data: "json, name=tokenName" }),
         __metadata("design:type", String)
     ], IssueTokenRequestMetadata.prototype, "tokenName", void 0);
     __decorate([
-        Metadata({ data: "json, name=urls", elemType: shared.IssueTokenRequestMetadataUrls }),
+        SpeakeasyMetadata({ data: "json, name=urls", elemType: IssueTokenRequestMetadataUrls }),
         __metadata("design:type", Array)
     ], IssueTokenRequestMetadata.prototype, "urls", void 0);
     __decorate([
-        Metadata({ data: "json, name=userData" }),
+        SpeakeasyMetadata({ data: "json, name=userData" }),
         __metadata("design:type", IssueTokenRequestMetadataUserData)
     ], IssueTokenRequestMetadata.prototype, "userData", void 0);
     return IssueTokenRequestMetadata;
@@ -262,11 +261,11 @@ var IssueTokenRequestTransfer = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=address" }),
+        SpeakeasyMetadata({ data: "json, name=address" }),
         __metadata("design:type", String)
     ], IssueTokenRequestTransfer.prototype, "address", void 0);
     __decorate([
-        Metadata({ data: "json, name=amount" }),
+        SpeakeasyMetadata({ data: "json, name=amount" }),
         __metadata("design:type", Number)
     ], IssueTokenRequestTransfer.prototype, "amount", void 0);
     return IssueTokenRequestTransfer;
@@ -278,35 +277,35 @@ var IssueTokenRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=amount" }),
+        SpeakeasyMetadata({ data: "json, name=amount" }),
         __metadata("design:type", Number)
     ], IssueTokenRequest.prototype, "amount", void 0);
     __decorate([
-        Metadata({ data: "json, name=divisibility" }),
+        SpeakeasyMetadata({ data: "json, name=divisibility" }),
         __metadata("design:type", Number)
     ], IssueTokenRequest.prototype, "divisibility", void 0);
     __decorate([
-        Metadata({ data: "json, name=fee" }),
+        SpeakeasyMetadata({ data: "json, name=fee" }),
         __metadata("design:type", Number)
     ], IssueTokenRequest.prototype, "fee", void 0);
     __decorate([
-        Metadata({ data: "json, name=flags" }),
+        SpeakeasyMetadata({ data: "json, name=flags" }),
         __metadata("design:type", IssueTokenRequestFlags)
     ], IssueTokenRequest.prototype, "flags", void 0);
     __decorate([
-        Metadata({ data: "json, name=issueAddress" }),
+        SpeakeasyMetadata({ data: "json, name=issueAddress" }),
         __metadata("design:type", String)
     ], IssueTokenRequest.prototype, "issueAddress", void 0);
     __decorate([
-        Metadata({ data: "json, name=metadata" }),
+        SpeakeasyMetadata({ data: "json, name=metadata" }),
         __metadata("design:type", IssueTokenRequestMetadata)
     ], IssueTokenRequest.prototype, "metadata", void 0);
     __decorate([
-        Metadata({ data: "json, name=reissuable" }),
+        SpeakeasyMetadata({ data: "json, name=reissuable" }),
         __metadata("design:type", Boolean)
     ], IssueTokenRequest.prototype, "reissuable", void 0);
     __decorate([
-        Metadata({ data: "json, name=transfer", elemType: shared.IssueTokenRequestTransfer }),
+        SpeakeasyMetadata({ data: "json, name=transfer", elemType: IssueTokenRequestTransfer }),
         __metadata("design:type", Array)
     ], IssueTokenRequest.prototype, "transfer", void 0);
     return IssueTokenRequest;

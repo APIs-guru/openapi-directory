@@ -4,14 +4,10 @@ import (
 	"time"
 )
 
-type WritableAggregate struct {
-	Created      *time.Time             `json:"created,omitempty"`
+type WritableAggregateInput struct {
 	CustomFields map[string]interface{} `json:"custom_fields,omitempty"`
 	DateAdded    *time.Time             `json:"date_added,omitempty"`
 	Description  *string                `json:"description,omitempty"`
-	Family       *string                `json:"family,omitempty"`
-	ID           *int64                 `json:"id,omitempty"`
-	LastUpdated  *time.Time             `json:"last_updated,omitempty"`
 	Prefix       string                 `json:"prefix"`
 	Rir          int64                  `json:"rir"`
 	Tags         []string               `json:"tags,omitempty"`

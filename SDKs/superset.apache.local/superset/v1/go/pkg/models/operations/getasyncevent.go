@@ -12,11 +12,6 @@ type GetAsyncEventSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type GetAsyncEventRequest struct {
-	QueryParams GetAsyncEventQueryParams
-	Security    GetAsyncEventSecurity
-}
-
 type GetAsyncEvent200ApplicationJSONResult struct {
 	ChannelID *string                  `json:"channel_id,omitempty"`
 	Errors    []map[string]interface{} `json:"errors,omitempty"`
@@ -37,6 +32,11 @@ type GetAsyncEvent401ApplicationJSON struct {
 
 type GetAsyncEvent500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type GetAsyncEventRequest struct {
+	QueryParams GetAsyncEventQueryParams
+	Security    GetAsyncEventSecurity
 }
 
 type GetAsyncEventResponse struct {

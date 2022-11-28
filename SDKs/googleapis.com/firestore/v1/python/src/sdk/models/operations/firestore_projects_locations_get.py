@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class FirestoreProjectsLocationsGetPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,14 +29,14 @@ class FirestoreProjectsLocationsGetQueryParams:
 
 @dataclass
 class FirestoreProjectsLocationsGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FirestoreProjectsLocationsGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -46,14 +47,14 @@ class FirestoreProjectsLocationsGetSecurity:
 
 @dataclass
 class FirestoreProjectsLocationsGetRequest:
-    path_params: FirestoreProjectsLocationsGetPathParams = field(default=None)
-    query_params: FirestoreProjectsLocationsGetQueryParams = field(default=None)
-    security: FirestoreProjectsLocationsGetSecurity = field(default=None)
+    path_params: FirestoreProjectsLocationsGetPathParams = field()
+    query_params: FirestoreProjectsLocationsGetQueryParams = field()
+    security: FirestoreProjectsLocationsGetSecurity = field()
     
 
 @dataclass
 class FirestoreProjectsLocationsGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     location: Optional[shared.Location] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReferenceDataSourceDescription } from "./referencedatasourcedescription";
 
 
+
 export class AddApplicationReferenceDataSourceResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApplicationARN" })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationARN" })
   applicationArn?: string;
 
-  @Metadata({ data: "json, name=ApplicationVersionId" })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationVersionId" })
   applicationVersionId?: number;
 
-  @Metadata({ data: "json, name=ReferenceDataSourceDescriptions", elemType: shared.ReferenceDataSourceDescription })
+  @SpeakeasyMetadata({ data: "json, name=ReferenceDataSourceDescriptions", elemType: ReferenceDataSourceDescription })
   referenceDataSourceDescriptions?: ReferenceDataSourceDescription[];
 }

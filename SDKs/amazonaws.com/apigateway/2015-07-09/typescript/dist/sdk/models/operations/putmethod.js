@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PutMethodPathParams = /** @class */ (function (_super) {
     __extends(PutMethodPathParams, _super);
@@ -30,15 +30,15 @@ var PutMethodPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=http_method" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=http_method" }),
         __metadata("design:type", String)
     ], PutMethodPathParams.prototype, "httpMethod", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=resource_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=resource_id" }),
         __metadata("design:type", String)
     ], PutMethodPathParams.prototype, "resourceId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=restapi_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=restapi_id" }),
         __metadata("design:type", String)
     ], PutMethodPathParams.prototype, "restapiId", void 0);
     return PutMethodPathParams;
@@ -50,31 +50,31 @@ var PutMethodHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], PutMethodHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], PutMethodHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], PutMethodHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], PutMethodHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], PutMethodHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], PutMethodHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], PutMethodHeaders.prototype, "xAmzSignedHeaders", void 0);
     return PutMethodHeaders;
@@ -86,35 +86,35 @@ var PutMethodRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=apiKeyRequired" }),
+        SpeakeasyMetadata({ data: "json, name=apiKeyRequired" }),
         __metadata("design:type", Boolean)
     ], PutMethodRequestBody.prototype, "apiKeyRequired", void 0);
     __decorate([
-        Metadata({ data: "json, name=authorizationScopes" }),
+        SpeakeasyMetadata({ data: "json, name=authorizationScopes" }),
         __metadata("design:type", Array)
     ], PutMethodRequestBody.prototype, "authorizationScopes", void 0);
     __decorate([
-        Metadata({ data: "json, name=authorizationType" }),
+        SpeakeasyMetadata({ data: "json, name=authorizationType" }),
         __metadata("design:type", String)
     ], PutMethodRequestBody.prototype, "authorizationType", void 0);
     __decorate([
-        Metadata({ data: "json, name=authorizerId" }),
+        SpeakeasyMetadata({ data: "json, name=authorizerId" }),
         __metadata("design:type", String)
     ], PutMethodRequestBody.prototype, "authorizerId", void 0);
     __decorate([
-        Metadata({ data: "json, name=operationName" }),
+        SpeakeasyMetadata({ data: "json, name=operationName" }),
         __metadata("design:type", String)
     ], PutMethodRequestBody.prototype, "operationName", void 0);
     __decorate([
-        Metadata({ data: "json, name=requestModels" }),
+        SpeakeasyMetadata({ data: "json, name=requestModels" }),
         __metadata("design:type", Map)
     ], PutMethodRequestBody.prototype, "requestModels", void 0);
     __decorate([
-        Metadata({ data: "json, name=requestParameters" }),
+        SpeakeasyMetadata({ data: "json, name=requestParameters" }),
         __metadata("design:type", Map)
     ], PutMethodRequestBody.prototype, "requestParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=requestValidatorId" }),
+        SpeakeasyMetadata({ data: "json, name=requestValidatorId" }),
         __metadata("design:type", String)
     ], PutMethodRequestBody.prototype, "requestValidatorId", void 0);
     return PutMethodRequestBody;
@@ -126,15 +126,15 @@ var PutMethodRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PutMethodPathParams)
     ], PutMethodRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PutMethodHeaders)
     ], PutMethodRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", PutMethodRequestBody)
     ], PutMethodRequest.prototype, "request", void 0);
     return PutMethodRequest;
@@ -146,39 +146,39 @@ var PutMethodResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PutMethodResponse.prototype, "badRequestException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PutMethodResponse.prototype, "conflictException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PutMethodResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PutMethodResponse.prototype, "limitExceededException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Method)
     ], PutMethodResponse.prototype, "method", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PutMethodResponse.prototype, "notFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PutMethodResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PutMethodResponse.prototype, "tooManyRequestsException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PutMethodResponse.prototype, "unauthorizedException", void 0);
     return PutMethodResponse;

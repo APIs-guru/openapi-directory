@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var AssetResponseAttributesStatusEnum;
 (function (AssetResponseAttributesStatusEnum) {
     AssetResponseAttributesStatusEnum["Importing"] = "importing";
@@ -40,39 +40,39 @@ var AssetResponseAttributes = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=created" }),
+        SpeakeasyMetadata({ data: "json, name=created" }),
         __metadata("design:type", String)
     ], AssetResponseAttributes.prototype, "created", void 0);
     __decorate([
-        Metadata({ data: "json, name=filename" }),
+        SpeakeasyMetadata({ data: "json, name=filename" }),
         __metadata("design:type", String)
     ], AssetResponseAttributes.prototype, "filename", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], AssetResponseAttributes.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=owner" }),
+        SpeakeasyMetadata({ data: "json, name=owner" }),
         __metadata("design:type", String)
     ], AssetResponseAttributes.prototype, "owner", void 0);
     __decorate([
-        Metadata({ data: "json, name=region" }),
+        SpeakeasyMetadata({ data: "json, name=region" }),
         __metadata("design:type", String)
     ], AssetResponseAttributes.prototype, "region", void 0);
     __decorate([
-        Metadata({ data: "json, name=renderId" }),
+        SpeakeasyMetadata({ data: "json, name=renderId" }),
         __metadata("design:type", String)
     ], AssetResponseAttributes.prototype, "renderId", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], AssetResponseAttributes.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=updated" }),
+        SpeakeasyMetadata({ data: "json, name=updated" }),
         __metadata("design:type", String)
     ], AssetResponseAttributes.prototype, "updated", void 0);
     __decorate([
-        Metadata({ data: "json, name=url" }),
+        SpeakeasyMetadata({ data: "json, name=url" }),
         __metadata("design:type", String)
     ], AssetResponseAttributes.prototype, "url", void 0);
     return AssetResponseAttributes;

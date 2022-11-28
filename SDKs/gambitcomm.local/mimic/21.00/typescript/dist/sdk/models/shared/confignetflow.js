@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ConfigNetflow = /** @class */ (function (_super) {
     __extends(ConfigNetflow, _super);
     function ConfigNetflow() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=bundleflowsets" }),
+        SpeakeasyMetadata({ data: "json, name=bundleflowsets" }),
         __metadata("design:type", Number)
     ], ConfigNetflow.prototype, "bundleflowsets", void 0);
     __decorate([
-        Metadata({ data: "json, name=collector" }),
+        SpeakeasyMetadata({ data: "json, name=collector" }),
         __metadata("design:type", String)
     ], ConfigNetflow.prototype, "collector", void 0);
     __decorate([
-        Metadata({ data: "json, name=collectorport" }),
+        SpeakeasyMetadata({ data: "json, name=collectorport" }),
         __metadata("design:type", Number)
     ], ConfigNetflow.prototype, "collectorport", void 0);
     __decorate([
-        Metadata({ data: "json, name=filename" }),
+        SpeakeasyMetadata({ data: "json, name=filename" }),
         __metadata("design:type", String)
     ], ConfigNetflow.prototype, "filename", void 0);
     return ConfigNetflow;

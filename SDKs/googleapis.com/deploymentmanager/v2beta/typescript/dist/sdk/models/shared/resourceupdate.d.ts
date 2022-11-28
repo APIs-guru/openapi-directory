@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ResourceAccessControl } from "./resourceaccesscontrol";
 export declare class ResourceUpdateErrorErrors extends SpeakeasyBase {
     code?: string;

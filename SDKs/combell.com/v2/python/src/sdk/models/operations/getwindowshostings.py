@@ -11,13 +11,13 @@ class GetWindowsHostingsQueryParams:
 
 @dataclass
 class GetWindowsHostingsRequest:
-    query_params: GetWindowsHostingsQueryParams = field(default=None)
+    query_params: GetWindowsHostingsQueryParams = field()
     
 
 @dataclass
 class GetWindowsHostingsResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     windows_hostings: Optional[List[shared.WindowsHosting]] = field(default=None)
     

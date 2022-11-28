@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // NodeConfig
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configuration for a Memcached Node.
 **/
 export class NodeConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cpuCount" })
+  @SpeakeasyMetadata({ data: "json, name=cpuCount" })
   cpuCount?: number;
 
-  @Metadata({ data: "json, name=memorySizeMb" })
+  @SpeakeasyMetadata({ data: "json, name=memorySizeMb" })
   memorySizeMb?: number;
 }

@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PushLoginRequestQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=callback" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" })
   callback: string;
 }
 
 
-export class PushLoginRequestRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: PushLoginRequestQueryParams;
-
-  @Metadata({ data: "request, media_type=application/jwt" })
-  request: Uint8Array;
-}
-
-
 export class PushLoginRequest200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 }
 
 
+export class PushLoginRequestRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: PushLoginRequestQueryParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/jwt" })
+  request: Uint8Array;
+}
+
+
 export class PushLoginRequestResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   pushLoginRequest200ApplicationJsonObject?: PushLoginRequest200ApplicationJson;
 }

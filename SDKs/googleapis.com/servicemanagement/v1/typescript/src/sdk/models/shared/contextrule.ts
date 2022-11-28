@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ContextRule
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A context rule provides information about the context for an individual API element.
 **/
 export class ContextRule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowedRequestExtensions" })
+  @SpeakeasyMetadata({ data: "json, name=allowedRequestExtensions" })
   allowedRequestExtensions?: string[];
 
-  @Metadata({ data: "json, name=allowedResponseExtensions" })
+  @SpeakeasyMetadata({ data: "json, name=allowedResponseExtensions" })
   allowedResponseExtensions?: string[];
 
-  @Metadata({ data: "json, name=provided" })
+  @SpeakeasyMetadata({ data: "json, name=provided" })
   provided?: string[];
 
-  @Metadata({ data: "json, name=requested" })
+  @SpeakeasyMetadata({ data: "json, name=requested" })
   requested?: string[];
 
-  @Metadata({ data: "json, name=selector" })
+  @SpeakeasyMetadata({ data: "json, name=selector" })
   selector?: string;
 }

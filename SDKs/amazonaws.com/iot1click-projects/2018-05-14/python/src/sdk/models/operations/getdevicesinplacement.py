@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetDevicesInPlacementPathParams:
-    placement_name: str = field(default=None, metadata={'path_param': { 'field_name': 'placementName', 'style': 'simple', 'explode': False }})
-    project_name: str = field(default=None, metadata={'path_param': { 'field_name': 'projectName', 'style': 'simple', 'explode': False }})
+    placement_name: str = field(metadata={'path_param': { 'field_name': 'placementName', 'style': 'simple', 'explode': False }})
+    project_name: str = field(metadata={'path_param': { 'field_name': 'projectName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,16 +25,16 @@ class GetDevicesInPlacementHeaders:
 
 @dataclass
 class GetDevicesInPlacementRequest:
-    path_params: GetDevicesInPlacementPathParams = field(default=None)
-    headers: GetDevicesInPlacementHeaders = field(default=None)
+    headers: GetDevicesInPlacementHeaders = field()
+    path_params: GetDevicesInPlacementPathParams = field()
     
 
 @dataclass
 class GetDevicesInPlacementResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_devices_in_placement_response: Optional[shared.GetDevicesInPlacementResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FeedbackValueTypeEnum } from "./feedbackvaluetypeenum";
+
 
 
 // EventFeedbackType
@@ -7,12 +8,12 @@ import { FeedbackValueTypeEnum } from "./feedbackvaluetypeenum";
  * Specifies the event feedback type.
 **/
 export class EventFeedbackType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FeedbackDate" })
+  @SpeakeasyMetadata({ data: "json, name=FeedbackDate" })
   feedbackDate?: Date;
 
-  @Metadata({ data: "json, name=FeedbackValue" })
+  @SpeakeasyMetadata({ data: "json, name=FeedbackValue" })
   feedbackValue: FeedbackValueTypeEnum;
 
-  @Metadata({ data: "json, name=Provider" })
+  @SpeakeasyMetadata({ data: "json, name=Provider" })
   provider: string;
 }

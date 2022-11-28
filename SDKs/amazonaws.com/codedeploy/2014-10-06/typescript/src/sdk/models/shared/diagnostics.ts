@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LifecycleErrorCodeEnum } from "./lifecycleerrorcodeenum";
+
 
 
 // Diagnostics
@@ -7,15 +8,15 @@ import { LifecycleErrorCodeEnum } from "./lifecycleerrorcodeenum";
  * Diagnostic information about executable scripts that are part of a deployment.
 **/
 export class Diagnostics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errorCode" })
+  @SpeakeasyMetadata({ data: "json, name=errorCode" })
   errorCode?: LifecycleErrorCodeEnum;
 
-  @Metadata({ data: "json, name=logTail" })
+  @SpeakeasyMetadata({ data: "json, name=logTail" })
   logTail?: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=scriptName" })
+  @SpeakeasyMetadata({ data: "json, name=scriptName" })
   scriptName?: string;
 }

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RemoveAttributesFromFindingsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attributeKeys" })
+  @SpeakeasyMetadata({ data: "json, name=attributeKeys" })
   attributeKeys: string[];
 
-  @Metadata({ data: "json, name=findingArns" })
+  @SpeakeasyMetadata({ data: "json, name=findingArns" })
   findingArns: string[];
 }

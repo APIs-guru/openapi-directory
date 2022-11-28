@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var IsDescendantOfUsingGetPathParams = /** @class */ (function (_super) {
     __extends(IsDescendantOfUsingGetPathParams, _super);
     function IsDescendantOfUsingGetPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=accId1" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=accId1" }),
         __metadata("design:type", String)
     ], IsDescendantOfUsingGetPathParams.prototype, "accId1", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=accId2" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=accId2" }),
         __metadata("design:type", String)
     ], IsDescendantOfUsingGetPathParams.prototype, "accId2", void 0);
     return IsDescendantOfUsingGetPathParams;
@@ -45,7 +45,7 @@ var IsDescendantOfUsingGetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", IsDescendantOfUsingGetPathParams)
     ], IsDescendantOfUsingGetRequest.prototype, "pathParams", void 0);
     return IsDescendantOfUsingGetRequest;
@@ -57,15 +57,15 @@ var IsDescendantOfUsingGetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], IsDescendantOfUsingGetResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], IsDescendantOfUsingGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], IsDescendantOfUsingGetResponse.prototype, "statusCode", void 0);
     return IsDescendantOfUsingGetResponse;

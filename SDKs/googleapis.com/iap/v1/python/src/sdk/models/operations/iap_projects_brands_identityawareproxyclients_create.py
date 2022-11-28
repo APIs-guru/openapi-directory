@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class IapProjectsBrandsIdentityAwareProxyClientsCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class IapProjectsBrandsIdentityAwareProxyClientsCreateQueryParams:
 
 @dataclass
 class IapProjectsBrandsIdentityAwareProxyClientsCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class IapProjectsBrandsIdentityAwareProxyClientsCreateRequest:
-    path_params: IapProjectsBrandsIdentityAwareProxyClientsCreatePathParams = field(default=None)
-    query_params: IapProjectsBrandsIdentityAwareProxyClientsCreateQueryParams = field(default=None)
-    request: Optional[shared.IdentityAwareProxyClient] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: IapProjectsBrandsIdentityAwareProxyClientsCreateSecurity = field(default=None)
+    path_params: IapProjectsBrandsIdentityAwareProxyClientsCreatePathParams = field()
+    query_params: IapProjectsBrandsIdentityAwareProxyClientsCreateQueryParams = field()
+    security: IapProjectsBrandsIdentityAwareProxyClientsCreateSecurity = field()
+    request: Optional[shared.IdentityAwareProxyClientInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class IapProjectsBrandsIdentityAwareProxyClientsCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     identity_aware_proxy_client: Optional[shared.IdentityAwareProxyClient] = field(default=None)
-    status_code: int = field(default=None)
     

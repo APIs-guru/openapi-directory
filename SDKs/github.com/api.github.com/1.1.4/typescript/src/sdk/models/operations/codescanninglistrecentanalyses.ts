@@ -1,71 +1,72 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CodeScanningListRecentAnalysesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=owner" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=owner" })
   owner: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repo" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repo" })
   repo: string;
 }
 
 
 export class CodeScanningListRecentAnalysesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ref" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ref" })
   ref?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sarif_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sarif_id" })
   sarifId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=tool_guid" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tool_guid" })
   toolGuid?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=tool_name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tool_name" })
   toolName?: string;
 }
 
 
-export class CodeScanningListRecentAnalysesRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: CodeScanningListRecentAnalysesPathParams;
-
-  @Metadata()
-  queryParams: CodeScanningListRecentAnalysesQueryParams;
-}
-
-
 export class CodeScanningListRecentAnalyses503ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: string;
 
-  @Metadata({ data: "json, name=documentation_url" })
+  @SpeakeasyMetadata({ data: "json, name=documentation_url" })
   documentationUrl?: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class CodeScanningListRecentAnalysesRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: CodeScanningListRecentAnalysesPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: CodeScanningListRecentAnalysesQueryParams;
+}
+
+
 export class CodeScanningListRecentAnalysesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 
-  @Metadata({ elemType: shared.CodeScanningAnalysis })
+  @SpeakeasyMetadata({ elemType: shared.CodeScanningAnalysis })
   codeScanningAnalyses?: shared.CodeScanningAnalysis[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   codeScanningListRecentAnalyses503ApplicationJsonObject?: CodeScanningListRecentAnalyses503ApplicationJson;
 }

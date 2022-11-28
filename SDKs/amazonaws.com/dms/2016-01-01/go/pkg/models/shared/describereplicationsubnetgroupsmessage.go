@@ -1,5 +1,7 @@
 package shared
 
+// DescribeReplicationSubnetGroupsMessage
+// <p/>
 type DescribeReplicationSubnetGroupsMessage struct {
 	Filters    []Filter `json:"Filters,omitempty"`
 	Marker     *string  `json:"Marker,omitempty"`

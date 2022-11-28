@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NotificationTypeEnum } from "./notificationtypeenum";
 import { SlackNotificationConfiguration } from "./slacknotificationconfiguration";
 
 
+
 export class Notification extends SpeakeasyBase {
-  @Metadata({ data: "json, name=notificationType" })
+  @SpeakeasyMetadata({ data: "json, name=notificationType" })
   notificationType: NotificationTypeEnum;
 
-  @Metadata({ data: "json, name=slackConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=slackConfiguration" })
   slackConfiguration?: SlackNotificationConfiguration;
 }

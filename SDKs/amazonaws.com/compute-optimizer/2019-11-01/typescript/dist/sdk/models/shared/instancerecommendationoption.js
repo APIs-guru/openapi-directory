@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { UtilizationMetric } from "./utilizationmetric";
 // InstanceRecommendationOption
 /**
  * Describes a recommendation option for an Amazon EC2 instance.
@@ -34,23 +34,23 @@ var InstanceRecommendationOption = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=instanceType" }),
+        SpeakeasyMetadata({ data: "json, name=instanceType" }),
         __metadata("design:type", String)
     ], InstanceRecommendationOption.prototype, "instanceType", void 0);
     __decorate([
-        Metadata({ data: "json, name=performanceRisk" }),
+        SpeakeasyMetadata({ data: "json, name=performanceRisk" }),
         __metadata("design:type", Number)
     ], InstanceRecommendationOption.prototype, "performanceRisk", void 0);
     __decorate([
-        Metadata({ data: "json, name=platformDifferences" }),
+        SpeakeasyMetadata({ data: "json, name=platformDifferences" }),
         __metadata("design:type", Array)
     ], InstanceRecommendationOption.prototype, "platformDifferences", void 0);
     __decorate([
-        Metadata({ data: "json, name=projectedUtilizationMetrics", elemType: shared.UtilizationMetric }),
+        SpeakeasyMetadata({ data: "json, name=projectedUtilizationMetrics", elemType: UtilizationMetric }),
         __metadata("design:type", Array)
     ], InstanceRecommendationOption.prototype, "projectedUtilizationMetrics", void 0);
     __decorate([
-        Metadata({ data: "json, name=rank" }),
+        SpeakeasyMetadata({ data: "json, name=rank" }),
         __metadata("design:type", Number)
     ], InstanceRecommendationOption.prototype, "rank", void 0);
     return InstanceRecommendationOption;

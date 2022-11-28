@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum LinuxNodeConfigCgroupModeEnum {
-    CgroupModeUnspecified = "CGROUP_MODE_UNSPECIFIED"
-,    CgroupModeV1 = "CGROUP_MODE_V1"
-,    CgroupModeV2 = "CGROUP_MODE_V2"
+    CgroupModeUnspecified = "CGROUP_MODE_UNSPECIFIED",
+    CgroupModeV1 = "CGROUP_MODE_V1",
+    CgroupModeV2 = "CGROUP_MODE_V2"
 }
 
 
@@ -12,9 +13,9 @@ export enum LinuxNodeConfigCgroupModeEnum {
  * Parameters that can be configured on Linux nodes.
 **/
 export class LinuxNodeConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cgroupMode" })
+  @SpeakeasyMetadata({ data: "json, name=cgroupMode" })
   cgroupMode?: LinuxNodeConfigCgroupModeEnum;
 
-  @Metadata({ data: "json, name=sysctls" })
+  @SpeakeasyMetadata({ data: "json, name=sysctls" })
   sysctls?: Map<string, string>;
 }

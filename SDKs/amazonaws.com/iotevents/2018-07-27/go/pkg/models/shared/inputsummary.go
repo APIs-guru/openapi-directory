@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// InputSummary
+// Information about the input.
 type InputSummary struct {
 	CreationTime     *time.Time       `json:"creationTime,omitempty"`
 	InputArn         *string          `json:"inputArn,omitempty"`

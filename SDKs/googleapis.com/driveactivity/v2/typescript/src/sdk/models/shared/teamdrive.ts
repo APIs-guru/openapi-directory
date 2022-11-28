@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DriveItem } from "./driveitem";
+
 
 
 // TeamDrive
@@ -7,12 +8,12 @@ import { DriveItem } from "./driveitem";
  * This item is deprecated; please see `Drive` instead.
 **/
 export class TeamDrive extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=root" })
+  @SpeakeasyMetadata({ data: "json, name=root" })
   root?: DriveItem;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

@@ -9,14 +9,14 @@ type PostConnectorsRequestBody struct {
 	Type          *string `json:"type,omitempty"`
 }
 
-type PostConnectorsRequest struct {
-	Request PostConnectorsRequestBody `request:"mediaType=application/json"`
-}
-
 type PostConnectors200ApplicationJSON struct {
 	Message *string                `json:"message,omitempty"`
 	Ok      *bool                  `json:"ok,omitempty"`
 	Result  map[string]interface{} `json:"result,omitempty"`
+}
+
+type PostConnectorsRequest struct {
+	Request PostConnectorsRequestBody `request:"mediaType=application/json"`
 }
 
 type PostConnectorsResponse struct {

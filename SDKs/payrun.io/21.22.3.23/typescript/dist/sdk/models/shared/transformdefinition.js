@@ -22,46 +22,46 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var TransformDefinitionTransformDefinition = /** @class */ (function (_super) {
     __extends(TransformDefinitionTransformDefinition, _super);
     function TransformDefinitionTransformDefinition() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Active" }),
+        SpeakeasyMetadata({ data: "json, name=Active" }),
         __metadata("design:type", Boolean)
     ], TransformDefinitionTransformDefinition.prototype, "active", void 0);
     __decorate([
-        Metadata({ data: "json, name=ContentType" }),
+        SpeakeasyMetadata({ data: "json, name=ContentType" }),
         __metadata("design:type", String)
     ], TransformDefinitionTransformDefinition.prototype, "contentType", void 0);
     __decorate([
-        Metadata({ data: "json, name=Definition" }),
+        SpeakeasyMetadata({ data: "json, name=Definition" }),
         __metadata("design:type", String)
     ], TransformDefinitionTransformDefinition.prototype, "definition", void 0);
     __decorate([
-        Metadata({ data: "json, name=DefinitionType" }),
+        SpeakeasyMetadata({ data: "json, name=DefinitionType" }),
         __metadata("design:type", String)
     ], TransformDefinitionTransformDefinition.prototype, "definitionType", void 0);
     __decorate([
-        Metadata({ data: "json, name=Readonly" }),
+        SpeakeasyMetadata({ data: "json, name=Readonly" }),
         __metadata("design:type", Boolean)
     ], TransformDefinitionTransformDefinition.prototype, "readonly", void 0);
     __decorate([
-        Metadata({ data: "json, name=SupportedReports" }),
+        SpeakeasyMetadata({ data: "json, name=SupportedReports" }),
         __metadata("design:type", String)
     ], TransformDefinitionTransformDefinition.prototype, "supportedReports", void 0);
     __decorate([
-        Metadata({ data: "json, name=TaxYear" }),
+        SpeakeasyMetadata({ data: "json, name=TaxYear" }),
         __metadata("design:type", Number)
     ], TransformDefinitionTransformDefinition.prototype, "taxYear", void 0);
     __decorate([
-        Metadata({ data: "json, name=Title" }),
+        SpeakeasyMetadata({ data: "json, name=Title" }),
         __metadata("design:type", String)
     ], TransformDefinitionTransformDefinition.prototype, "title", void 0);
     __decorate([
-        Metadata({ data: "json, name=Version" }),
+        SpeakeasyMetadata({ data: "json, name=Version" }),
         __metadata("design:type", String)
     ], TransformDefinitionTransformDefinition.prototype, "version", void 0);
     return TransformDefinitionTransformDefinition;
@@ -73,7 +73,7 @@ var TransformDefinition = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=TransformDefinition" }),
+        SpeakeasyMetadata({ data: "json, name=TransformDefinition" }),
         __metadata("design:type", TransformDefinitionTransformDefinition)
     ], TransformDefinition.prototype, "transformDefinition", void 0);
     return TransformDefinition;

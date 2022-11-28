@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import conformancepackcompliancetype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ConformancePackComplianceSummary:
-    conformance_pack_compliance_status: conformancepackcompliancetype_enum.ConformancePackComplianceTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ConformancePackComplianceStatus' }})
-    conformance_pack_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ConformancePackName' }})
+    r"""ConformancePackComplianceSummary
+    Summary includes the name and status of the conformance pack.
+    """
+    
+    conformance_pack_compliance_status: ConformancePackComplianceTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ConformancePackComplianceStatus') }})
+    conformance_pack_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ConformancePackName') }})
     

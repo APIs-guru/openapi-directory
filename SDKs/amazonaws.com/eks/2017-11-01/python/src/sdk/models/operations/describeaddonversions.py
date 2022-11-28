@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
@@ -24,16 +27,16 @@ class DescribeAddonVersionsHeaders:
 
 @dataclass
 class DescribeAddonVersionsRequest:
-    query_params: DescribeAddonVersionsQueryParams = field(default=None)
-    headers: DescribeAddonVersionsHeaders = field(default=None)
+    headers: DescribeAddonVersionsHeaders = field()
+    query_params: DescribeAddonVersionsQueryParams = field()
     
 
 @dataclass
 class DescribeAddonVersionsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     describe_addon_versions_response: Optional[shared.DescribeAddonVersionsResponse] = field(default=None)
     invalid_parameter_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     server_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

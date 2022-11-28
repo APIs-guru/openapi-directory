@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BatchGetCustomDataIdentifierSummary } from "./batchgetcustomdataidentifiersummary";
 
 
+
 export class BatchGetCustomDataIdentifiersResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=customDataIdentifiers", elemType: shared.BatchGetCustomDataIdentifierSummary })
+  @SpeakeasyMetadata({ data: "json, name=customDataIdentifiers", elemType: BatchGetCustomDataIdentifierSummary })
   customDataIdentifiers?: BatchGetCustomDataIdentifierSummary[];
 
-  @Metadata({ data: "json, name=notFoundIdentifierIds" })
+  @SpeakeasyMetadata({ data: "json, name=notFoundIdentifierIds" })
   notFoundIdentifierIds?: string[];
 }

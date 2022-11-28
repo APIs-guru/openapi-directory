@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StructuredQuery } from "./structuredquery";
+
 
 
 // PartitionQueryRequest
@@ -7,18 +8,18 @@ import { StructuredQuery } from "./structuredquery";
  * The request for Firestore.PartitionQuery.
 **/
 export class PartitionQueryRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pageSize" })
+  @SpeakeasyMetadata({ data: "json, name=pageSize" })
   pageSize?: number;
 
-  @Metadata({ data: "json, name=pageToken" })
+  @SpeakeasyMetadata({ data: "json, name=pageToken" })
   pageToken?: string;
 
-  @Metadata({ data: "json, name=partitionCount" })
+  @SpeakeasyMetadata({ data: "json, name=partitionCount" })
   partitionCount?: string;
 
-  @Metadata({ data: "json, name=readTime" })
+  @SpeakeasyMetadata({ data: "json, name=readTime" })
   readTime?: string;
 
-  @Metadata({ data: "json, name=structuredQuery" })
+  @SpeakeasyMetadata({ data: "json, name=structuredQuery" })
   structuredQuery?: StructuredQuery;
 }

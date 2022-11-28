@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class PlusActivitiesListCollectionEnum(str, Enum):
@@ -8,8 +9,8 @@ class PlusActivitiesListCollectionEnum(str, Enum):
 
 @dataclass
 class PlusActivitiesListPathParams:
-    collection: PlusActivitiesListCollectionEnum = field(default=None, metadata={'path_param': { 'field_name': 'collection', 'style': 'simple', 'explode': False }})
-    user_id: str = field(default=None, metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
+    collection: PlusActivitiesListCollectionEnum = field(metadata={'path_param': { 'field_name': 'collection', 'style': 'simple', 'explode': False }})
+    user_id: str = field(metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,14 +28,14 @@ class PlusActivitiesListQueryParams:
 
 @dataclass
 class PlusActivitiesListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class PlusActivitiesListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -45,14 +46,14 @@ class PlusActivitiesListSecurity:
 
 @dataclass
 class PlusActivitiesListRequest:
-    path_params: PlusActivitiesListPathParams = field(default=None)
-    query_params: PlusActivitiesListQueryParams = field(default=None)
-    security: PlusActivitiesListSecurity = field(default=None)
+    path_params: PlusActivitiesListPathParams = field()
+    query_params: PlusActivitiesListQueryParams = field()
+    security: PlusActivitiesListSecurity = field()
     
 
 @dataclass
 class PlusActivitiesListResponse:
+    content_type: str = field()
+    status_code: int = field()
     activity_feed: Optional[shared.ActivityFeed] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

@@ -8,6 +8,8 @@ const (
 	TemplateContentsInterpreterEnumJinja              TemplateContentsInterpreterEnum = "JINJA"
 )
 
+// TemplateContents
+// Files that make up the template contents of a template type.
 type TemplateContents struct {
 	Imports      []ImportFile                     `json:"imports,omitempty"`
 	Interpreter  *TemplateContentsInterpreterEnum `json:"interpreter,omitempty"`

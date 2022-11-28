@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googleclouddatalabelingv1beta1evaluationconfig
-from . import googleclouddatalabelingv1beta1evaluationmetrics
+from sdk import utils
+from . import *
 
 class GoogleCloudDatalabelingV1beta1EvaluationAnnotationTypeEnum(str, Enum):
     ANNOTATION_TYPE_UNSPECIFIED = "ANNOTATION_TYPE_UNSPECIFIED"
@@ -24,11 +25,15 @@ class GoogleCloudDatalabelingV1beta1EvaluationAnnotationTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleCloudDatalabelingV1beta1Evaluation:
-    annotation_type: Optional[GoogleCloudDatalabelingV1beta1EvaluationAnnotationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'annotationType' }})
-    config: Optional[googleclouddatalabelingv1beta1evaluationconfig.GoogleCloudDatalabelingV1beta1EvaluationConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'config' }})
-    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createTime' }})
-    evaluated_item_count: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'evaluatedItemCount' }})
-    evaluation_job_run_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'evaluationJobRunTime' }})
-    evaluation_metrics: Optional[googleclouddatalabelingv1beta1evaluationmetrics.GoogleCloudDatalabelingV1beta1EvaluationMetrics] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'evaluationMetrics' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
+    r"""GoogleCloudDatalabelingV1beta1Evaluation
+    Describes an evaluation between a machine learning model's predictions and ground truth labels. Created when an EvaluationJob runs successfully.
+    """
+    
+    annotation_type: Optional[GoogleCloudDatalabelingV1beta1EvaluationAnnotationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('annotationType') }})
+    config: Optional[GoogleCloudDatalabelingV1beta1EvaluationConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('config') }})
+    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createTime') }})
+    evaluated_item_count: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('evaluatedItemCount') }})
+    evaluation_job_run_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('evaluationJobRunTime') }})
+    evaluation_metrics: Optional[GoogleCloudDatalabelingV1beta1EvaluationMetrics] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('evaluationMetrics') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
     

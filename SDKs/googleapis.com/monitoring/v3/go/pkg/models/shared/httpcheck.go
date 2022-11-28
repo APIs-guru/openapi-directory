@@ -15,6 +15,8 @@ const (
 	HTTPCheckRequestMethodEnumPost              HTTPCheckRequestMethodEnum = "POST"
 )
 
+// HTTPCheck
+// Information involved in an HTTP/HTTPS Uptime check request.
 type HTTPCheck struct {
 	AcceptedResponseStatusCodes []ResponseStatusCode        `json:"acceptedResponseStatusCodes,omitempty"`
 	AuthInfo                    *BasicAuthentication        `json:"authInfo,omitempty"`

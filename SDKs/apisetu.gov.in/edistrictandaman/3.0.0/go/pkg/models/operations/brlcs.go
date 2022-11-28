@@ -26,11 +26,6 @@ type BrlcsSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type BrlcsRequest struct {
-	Request  *BrlcsRequestBody `request:"mediaType=application/json"`
-	Security BrlcsSecurity
-}
-
 type Brlcs400ApplicationJSONErrorEnum string
 
 const (
@@ -160,6 +155,11 @@ const (
 type Brlcs504ApplicationJSON struct {
 	Error            *Brlcs504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Brlcs504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type BrlcsRequest struct {
+	Request  *BrlcsRequestBody `request:"mediaType=application/json"`
+	Security BrlcsSecurity
 }
 
 type BrlcsResponse struct {

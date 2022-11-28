@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeliveryStatusEnum } from "./deliverystatusenum";
+
 
 
 // ConfigStreamDeliveryInfo
@@ -7,15 +8,15 @@ import { DeliveryStatusEnum } from "./deliverystatusenum";
  * A list that contains the status of the delivery of the configuration stream notification to the Amazon SNS topic.
 **/
 export class ConfigStreamDeliveryInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=lastErrorCode" })
+  @SpeakeasyMetadata({ data: "json, name=lastErrorCode" })
   lastErrorCode?: string;
 
-  @Metadata({ data: "json, name=lastErrorMessage" })
+  @SpeakeasyMetadata({ data: "json, name=lastErrorMessage" })
   lastErrorMessage?: string;
 
-  @Metadata({ data: "json, name=lastStatus" })
+  @SpeakeasyMetadata({ data: "json, name=lastStatus" })
   lastStatus?: DeliveryStatusEnum;
 
-  @Metadata({ data: "json, name=lastStatusChangeTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastStatusChangeTime" })
   lastStatusChangeTime?: Date;
 }

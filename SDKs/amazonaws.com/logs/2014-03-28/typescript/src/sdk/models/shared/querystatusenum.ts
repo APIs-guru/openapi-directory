@@ -1,11 +1,12 @@
 
 
+
 export enum QueryStatusEnum {
-    Scheduled = "Scheduled"
-,    Running = "Running"
-,    Complete = "Complete"
-,    Failed = "Failed"
-,    Cancelled = "Cancelled"
-,    Timeout = "Timeout"
-,    Unknown = "Unknown"
+    Scheduled = "Scheduled",
+    Running = "Running",
+    Complete = "Complete",
+    Failed = "Failed",
+    Cancelled = "Cancelled",
+    Timeout = "Timeout",
+    Unknown = "Unknown"
 }

@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class PublicKeyAlgorithmEnum(str, Enum):
     CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED = "CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED"
@@ -27,6 +29,10 @@ class PublicKeyAlgorithmEnum(str, Enum):
     EC_SIGN_P384_SHA384 = "EC_SIGN_P384_SHA384"
     EC_SIGN_SECP256_K1_SHA256 = "EC_SIGN_SECP256K1_SHA256"
     HMAC_SHA256 = "HMAC_SHA256"
+    HMAC_SHA1 = "HMAC_SHA1"
+    HMAC_SHA384 = "HMAC_SHA384"
+    HMAC_SHA512 = "HMAC_SHA512"
+    HMAC_SHA224 = "HMAC_SHA224"
     EXTERNAL_SYMMETRIC_ENCRYPTION = "EXTERNAL_SYMMETRIC_ENCRYPTION"
 
 class PublicKeyProtectionLevelEnum(str, Enum):
@@ -40,9 +46,13 @@ class PublicKeyProtectionLevelEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PublicKey:
-    algorithm: Optional[PublicKeyAlgorithmEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'algorithm' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    pem: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pem' }})
-    pem_crc32c: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pemCrc32c' }})
-    protection_level: Optional[PublicKeyProtectionLevelEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'protectionLevel' }})
+    r"""PublicKey
+    The public key for a given CryptoKeyVersion. Obtained via GetPublicKey.
+    """
+    
+    algorithm: Optional[PublicKeyAlgorithmEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('algorithm') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    pem: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pem') }})
+    pem_crc32c: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pemCrc32c') }})
+    protection_level: Optional[PublicKeyProtectionLevelEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('protectionLevel') }})
     

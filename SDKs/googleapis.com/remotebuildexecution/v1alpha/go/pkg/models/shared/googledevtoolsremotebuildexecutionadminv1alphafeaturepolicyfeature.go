@@ -9,6 +9,8 @@ const (
 	GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeaturePolicyEnumRestricted        GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeaturePolicyEnum = "RESTRICTED"
 )
 
+// GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature
+// Defines whether a feature can be used or what values are accepted.
 type GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature struct {
 	AllowedValues []string                                                                      `json:"allowedValues,omitempty"`
 	Policy        *GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeaturePolicyEnum `json:"policy,omitempty"`

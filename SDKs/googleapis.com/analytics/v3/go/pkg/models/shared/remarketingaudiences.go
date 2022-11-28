@@ -1,5 +1,7 @@
 package shared
 
+// RemarketingAudiences
+// A remarketing audience collection lists Analytics remarketing audiences to which the user has access. Each resource in the collection corresponds to a single Analytics remarketing audience.
 type RemarketingAudiences struct {
 	Items        []RemarketingAudience `json:"items,omitempty"`
 	ItemsPerPage *int32                `json:"itemsPerPage,omitempty"`

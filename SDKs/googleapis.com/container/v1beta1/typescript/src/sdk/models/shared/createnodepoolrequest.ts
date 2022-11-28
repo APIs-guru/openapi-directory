@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NodePool } from "./nodepool";
+
 
 
 // CreateNodePoolRequest
@@ -7,18 +8,18 @@ import { NodePool } from "./nodepool";
  * CreateNodePoolRequest creates a node pool for a cluster.
 **/
 export class CreateNodePoolRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clusterId" })
+  @SpeakeasyMetadata({ data: "json, name=clusterId" })
   clusterId?: string;
 
-  @Metadata({ data: "json, name=nodePool" })
+  @SpeakeasyMetadata({ data: "json, name=nodePool" })
   nodePool?: NodePool;
 
-  @Metadata({ data: "json, name=parent" })
+  @SpeakeasyMetadata({ data: "json, name=parent" })
   parent?: string;
 
-  @Metadata({ data: "json, name=projectId" })
+  @SpeakeasyMetadata({ data: "json, name=projectId" })
   projectId?: string;
 
-  @Metadata({ data: "json, name=zone" })
+  @SpeakeasyMetadata({ data: "json, name=zone" })
   zone?: string;
 }

@@ -16,6 +16,8 @@ const (
 	CancelTestMatrixResponseTestStateEnumInvalid                  CancelTestMatrixResponseTestStateEnum = "INVALID"
 )
 
+// CancelTestMatrixResponse
+// Response containing the current state of the specified test matrix.
 type CancelTestMatrixResponse struct {
 	TestState *CancelTestMatrixResponseTestStateEnum `json:"testState,omitempty"`
 }

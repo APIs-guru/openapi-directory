@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -11,19 +12,19 @@ class GetPurchasesQueryParams:
 
 @dataclass
 class GetPurchasesSecurity:
-    account_auth: shared.SchemeAccountAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    account_auth: shared.SchemeAccountAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetPurchasesRequest:
-    query_params: GetPurchasesQueryParams = field(default=None)
-    security: GetPurchasesSecurity = field(default=None)
+    query_params: GetPurchasesQueryParams = field()
+    security: GetPurchasesSecurity = field()
     
 
 @dataclass
 class GetPurchasesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     purchases: Optional[List[shared.Purchase]] = field(default=None)
     service_error: Optional[shared.ServiceError] = field(default=None)
-    status_code: int = field(default=None)
     

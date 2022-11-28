@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ResultTableColumnHeader
 /**
  * The description of a column of the result table.
@@ -33,15 +33,15 @@ var ResultTableColumnHeader = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=columnType" }),
+        SpeakeasyMetadata({ data: "json, name=columnType" }),
         __metadata("design:type", String)
     ], ResultTableColumnHeader.prototype, "columnType", void 0);
     __decorate([
-        Metadata({ data: "json, name=dataType" }),
+        SpeakeasyMetadata({ data: "json, name=dataType" }),
         __metadata("design:type", String)
     ], ResultTableColumnHeader.prototype, "dataType", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], ResultTableColumnHeader.prototype, "name", void 0);
     return ResultTableColumnHeader;

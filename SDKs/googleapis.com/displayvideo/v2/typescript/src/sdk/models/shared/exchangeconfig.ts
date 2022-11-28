@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ExchangeConfigEnabledExchange } from "./exchangeconfigenabledexchange";
+
 
 
 // ExchangeConfig
@@ -8,6 +8,6 @@ import { ExchangeConfigEnabledExchange } from "./exchangeconfigenabledexchange";
  * Settings that control which exchanges are enabled for a partner.
 **/
 export class ExchangeConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enabledExchanges", elemType: shared.ExchangeConfigEnabledExchange })
+  @SpeakeasyMetadata({ data: "json, name=enabledExchanges", elemType: ExchangeConfigEnabledExchange })
   enabledExchanges?: ExchangeConfigEnabledExchange[];
 }

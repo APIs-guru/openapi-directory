@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudContactcenterinsightsV1ConversationCallMetadata
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Call-specific metadata.
 **/
 export class GoogleCloudContactcenterinsightsV1ConversationCallMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=agentChannel" })
+  @SpeakeasyMetadata({ data: "json, name=agentChannel" })
   agentChannel?: number;
 
-  @Metadata({ data: "json, name=customerChannel" })
+  @SpeakeasyMetadata({ data: "json, name=customerChannel" })
   customerChannel?: number;
 }

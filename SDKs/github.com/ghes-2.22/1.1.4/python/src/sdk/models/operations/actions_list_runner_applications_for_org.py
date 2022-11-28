@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class ActionsListRunnerApplicationsForOrgPathParams:
-    org: str = field(default=None, metadata={'path_param': { 'field_name': 'org', 'style': 'simple', 'explode': False }})
+    org: str = field(metadata={'path_param': { 'field_name': 'org', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ActionsListRunnerApplicationsForOrgRequest:
-    path_params: ActionsListRunnerApplicationsForOrgPathParams = field(default=None)
+    path_params: ActionsListRunnerApplicationsForOrgPathParams = field()
     
 
 @dataclass
 class ActionsListRunnerApplicationsForOrgResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     runner_applications: Optional[List[shared.RunnerApplication]] = field(default=None)
     

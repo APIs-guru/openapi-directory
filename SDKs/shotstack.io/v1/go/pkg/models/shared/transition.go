@@ -132,6 +132,8 @@ const (
 	TransitionOutEnumZoom                   TransitionOutEnum = "zoom"
 )
 
+// Transition
+// In and out transitions for a clip - i.e. fade in and fade out
 type Transition struct {
 	In  *TransitionInEnum  `json:"in,omitempty"`
 	Out *TransitionOutEnum `json:"out,omitempty"`

@@ -13,13 +13,13 @@ type TemplatesRemoveSecurity struct {
 	SakariAuth shared.SchemeSakariAuth `security:"scheme,type=oauth2"`
 }
 
+type TemplatesRemove200ApplicationJSON struct {
+	Success *bool `json:"success,omitempty"`
+}
+
 type TemplatesRemoveRequest struct {
 	PathParams TemplatesRemovePathParams
 	Security   TemplatesRemoveSecurity
-}
-
-type TemplatesRemove200ApplicationJSON struct {
-	Success *bool `json:"success,omitempty"`
 }
 
 type TemplatesRemoveResponse struct {

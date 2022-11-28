@@ -1,23 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ComponentClsEnum {
-    LabelComponent = "labelComponent"
-,    NumberComponent = "numberComponent"
-,    TextComponent = "textComponent"
-,    ImageComponent = "imageComponent"
-,    DateComponent = "dateComponent"
-,    HlineComponent = "hlineComponent"
-,    VlineComponent = "vlineComponent"
-,    TableComponent = "tableComponent"
-,    CompositeComponent = "compositeComponent"
-,    BarcodeComponent = "barcodeComponent"
-,    QrcodeComponent = "qrcodeComponent"
-,    ChartComponent = "chartComponent"
-,    RectangleComponent = "rectangleComponent"
-,    HeaderComponent = "headerComponent"
-,    FooterComponent = "footerComponent"
-,    CheckboxComponent = "checkboxComponent"
-,    RadioComponent = "radioComponent"
+    LabelComponent = "labelComponent",
+    NumberComponent = "numberComponent",
+    TextComponent = "textComponent",
+    ImageComponent = "imageComponent",
+    DateComponent = "dateComponent",
+    HlineComponent = "hlineComponent",
+    VlineComponent = "vlineComponent",
+    TableComponent = "tableComponent",
+    CompositeComponent = "compositeComponent",
+    BarcodeComponent = "barcodeComponent",
+    QrcodeComponent = "qrcodeComponent",
+    ChartComponent = "chartComponent",
+    RectangleComponent = "rectangleComponent",
+    HeaderComponent = "headerComponent",
+    FooterComponent = "footerComponent",
+    CheckboxComponent = "checkboxComponent",
+    RadioComponent = "radioComponent"
 }
 
 
@@ -26,30 +27,30 @@ export enum ComponentClsEnum {
  * Template component definition
 **/
 export class Component extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cls" })
+  @SpeakeasyMetadata({ data: "json, name=cls" })
   cls?: ComponentClsEnum;
 
-  @Metadata({ data: "json, name=dataIndex" })
+  @SpeakeasyMetadata({ data: "json, name=dataIndex" })
   dataIndex?: string;
 
-  @Metadata({ data: "json, name=height" })
+  @SpeakeasyMetadata({ data: "json, name=height" })
   height?: number;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=left" })
+  @SpeakeasyMetadata({ data: "json, name=left" })
   left?: number;
 
-  @Metadata({ data: "json, name=top" })
+  @SpeakeasyMetadata({ data: "json, name=top" })
   top?: number;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 
-  @Metadata({ data: "json, name=width" })
+  @SpeakeasyMetadata({ data: "json, name=width" })
   width?: number;
 
-  @Metadata({ data: "json, name=zindex" })
+  @SpeakeasyMetadata({ data: "json, name=zindex" })
   zindex?: number;
 }

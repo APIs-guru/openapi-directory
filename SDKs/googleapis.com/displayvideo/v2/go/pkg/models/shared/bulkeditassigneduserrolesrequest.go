@@ -1,6 +1,8 @@
 package shared
 
-type BulkEditAssignedUserRolesRequest struct {
-	CreatedAssignedUserRoles []AssignedUserRole `json:"createdAssignedUserRoles,omitempty"`
-	DeletedAssignedUserRoles []string           `json:"deletedAssignedUserRoles,omitempty"`
+// BulkEditAssignedUserRolesRequestInput
+// Request message for BulkEditAssignedUserRoles.
+type BulkEditAssignedUserRolesRequestInput struct {
+	CreatedAssignedUserRoles []AssignedUserRoleInput `json:"createdAssignedUserRoles,omitempty"`
+	DeletedAssignedUserRoles []string                `json:"deletedAssignedUserRoles,omitempty"`
 }

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetModifyHostsActionEnum(str, Enum):
     MODIFY_HOSTS = "ModifyHosts"
@@ -18,13 +22,13 @@ class GetModifyHostsVersionEnum(str, Enum):
 
 @dataclass
 class GetModifyHostsQueryParams:
-    action: GetModifyHostsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetModifyHostsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    host_id: List[str] = field(metadata={'query_param': { 'field_name': 'HostId', 'style': 'form', 'explode': True }})
+    version: GetModifyHostsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     auto_placement: Optional[GetModifyHostsAutoPlacementEnum] = field(default=None, metadata={'query_param': { 'field_name': 'AutoPlacement', 'style': 'form', 'explode': True }})
-    host_id: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'HostId', 'style': 'form', 'explode': True }})
     host_recovery: Optional[GetModifyHostsHostRecoveryEnum] = field(default=None, metadata={'query_param': { 'field_name': 'HostRecovery', 'style': 'form', 'explode': True }})
     instance_family: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'InstanceFamily', 'style': 'form', 'explode': True }})
     instance_type: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'InstanceType', 'style': 'form', 'explode': True }})
-    version: GetModifyHostsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -40,13 +44,13 @@ class GetModifyHostsHeaders:
 
 @dataclass
 class GetModifyHostsRequest:
-    query_params: GetModifyHostsQueryParams = field(default=None)
-    headers: GetModifyHostsHeaders = field(default=None)
+    headers: GetModifyHostsHeaders = field()
+    query_params: GetModifyHostsQueryParams = field()
     
 
 @dataclass
 class GetModifyHostsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

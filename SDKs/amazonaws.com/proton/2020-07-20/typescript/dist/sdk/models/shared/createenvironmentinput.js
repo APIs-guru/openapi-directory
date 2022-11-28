@@ -22,47 +22,47 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Tag } from "./tag";
 var CreateEnvironmentInput = /** @class */ (function (_super) {
     __extends(CreateEnvironmentInput, _super);
     function CreateEnvironmentInput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], CreateEnvironmentInput.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=environmentAccountConnectionId" }),
+        SpeakeasyMetadata({ data: "json, name=environmentAccountConnectionId" }),
         __metadata("design:type", String)
     ], CreateEnvironmentInput.prototype, "environmentAccountConnectionId", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], CreateEnvironmentInput.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=protonServiceRoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=protonServiceRoleArn" }),
         __metadata("design:type", String)
     ], CreateEnvironmentInput.prototype, "protonServiceRoleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=spec" }),
+        SpeakeasyMetadata({ data: "json, name=spec" }),
         __metadata("design:type", String)
     ], CreateEnvironmentInput.prototype, "spec", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags", elemType: shared.Tag }),
+        SpeakeasyMetadata({ data: "json, name=tags", elemType: Tag }),
         __metadata("design:type", Array)
     ], CreateEnvironmentInput.prototype, "tags", void 0);
     __decorate([
-        Metadata({ data: "json, name=templateMajorVersion" }),
+        SpeakeasyMetadata({ data: "json, name=templateMajorVersion" }),
         __metadata("design:type", String)
     ], CreateEnvironmentInput.prototype, "templateMajorVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=templateMinorVersion" }),
+        SpeakeasyMetadata({ data: "json, name=templateMinorVersion" }),
         __metadata("design:type", String)
     ], CreateEnvironmentInput.prototype, "templateMinorVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=templateName" }),
+        SpeakeasyMetadata({ data: "json, name=templateName" }),
         __metadata("design:type", String)
     ], CreateEnvironmentInput.prototype, "templateName", void 0);
     return CreateEnvironmentInput;

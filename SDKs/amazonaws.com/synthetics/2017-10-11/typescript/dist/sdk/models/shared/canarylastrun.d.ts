@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CanaryRun } from "./canaryrun";
 /**
  * This structure contains information about the most recent run of a single canary.

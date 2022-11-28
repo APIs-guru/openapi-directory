@@ -24,26 +24,18 @@ type CreateLinodeInstanceRequestBody struct {
 	Type            string                         `json:"type"`
 }
 
-type CreateLinodeInstanceSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type CreateLinodeInstanceSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type CreateLinodeInstanceSecurity struct {
-	Option1 *CreateLinodeInstanceSecurityOption1 `security:"option"`
-	Option2 *CreateLinodeInstanceSecurityOption2 `security:"option"`
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
+}
+
+type CreateLinodeInstanceDefaultApplicationJSON struct {
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type CreateLinodeInstanceRequest struct {
 	Request  CreateLinodeInstanceRequestBody `request:"mediaType=application/json"`
 	Security CreateLinodeInstanceSecurity
-}
-
-type CreateLinodeInstanceDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type CreateLinodeInstanceResponse struct {

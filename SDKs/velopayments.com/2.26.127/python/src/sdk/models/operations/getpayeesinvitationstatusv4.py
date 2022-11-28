@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetPayeesInvitationStatusV4PathParams:
-    payor_id: str = field(default=None, metadata={'path_param': { 'field_name': 'payorId', 'style': 'simple', 'explode': False }})
+    payor_id: str = field(metadata={'path_param': { 'field_name': 'payorId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,15 +19,15 @@ class GetPayeesInvitationStatusV4QueryParams:
 
 @dataclass
 class GetPayeesInvitationStatusV4Request:
-    path_params: GetPayeesInvitationStatusV4PathParams = field(default=None)
-    query_params: GetPayeesInvitationStatusV4QueryParams = field(default=None)
+    path_params: GetPayeesInvitationStatusV4PathParams = field()
+    query_params: GetPayeesInvitationStatusV4QueryParams = field()
     
 
 @dataclass
 class GetPayeesInvitationStatusV4Response:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     paged_payee_invitation_status_response_2: Optional[shared.PagedPayeeInvitationStatusResponse2] = field(default=None)
-    status_code: int = field(default=None)
     inline_response_400: Optional[Any] = field(default=None)
     inline_response_401: Optional[Any] = field(default=None)
     inline_response_403: Optional[Any] = field(default=None)

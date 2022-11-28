@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetBasicAuthUserPasswdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=passwd" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=passwd" })
   passwd: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=user" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=user" })
   user: string;
 }
 
 
 export class GetBasicAuthUserPasswdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetBasicAuthUserPasswdPathParams;
 }
 
 
 export class GetBasicAuthUserPasswdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

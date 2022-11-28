@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class PriorityPackagesGetPriorityPackagesStatusEnum(str, Enum):
@@ -18,13 +22,13 @@ class PriorityPackagesGetPriorityPackagesQueryParams:
 
 @dataclass
 class PriorityPackagesGetPriorityPackagesRequest:
-    query_params: PriorityPackagesGetPriorityPackagesQueryParams = field(default=None)
+    query_params: PriorityPackagesGetPriorityPackagesQueryParams = field()
     
 
 @dataclass
 class PriorityPackagesGetPriorityPackagesResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_models_api_error: Optional[shared.APIModelsAPIError] = field(default=None)
     api_paged_response_update_system_models_priority_package_: Optional[shared.APIPagedResponseUpdateSystemModelsPriorityPackage] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

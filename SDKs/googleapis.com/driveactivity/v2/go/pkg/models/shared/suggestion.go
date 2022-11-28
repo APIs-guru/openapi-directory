@@ -14,6 +14,8 @@ const (
 	SuggestionSubtypeEnumRejectDeleted      SuggestionSubtypeEnum = "REJECT_DELETED"
 )
 
+// Suggestion
+// A suggestion.
 type Suggestion struct {
 	Subtype *SuggestionSubtypeEnum `json:"subtype,omitempty"`
 }

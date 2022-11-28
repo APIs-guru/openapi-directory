@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Column } from "./column";
+
 
 
 // SchemaDefinition
@@ -8,6 +8,6 @@ import { Column } from "./column";
  * Information needed to define a schema.
 **/
 export class SchemaDefinition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=columns", elemType: shared.Column })
+  @SpeakeasyMetadata({ data: "json, name=columns", elemType: Column })
   columns?: Column[];
 }

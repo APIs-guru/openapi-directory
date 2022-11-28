@@ -22,27 +22,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SecretVersionsListEntry } from "./secretversionslistentry";
 var ListSecretVersionIdsResponse = /** @class */ (function (_super) {
     __extends(ListSecretVersionIdsResponse, _super);
     function ListSecretVersionIdsResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ARN" }),
+        SpeakeasyMetadata({ data: "json, name=ARN" }),
         __metadata("design:type", String)
     ], ListSecretVersionIdsResponse.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], ListSecretVersionIdsResponse.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=NextToken" }),
+        SpeakeasyMetadata({ data: "json, name=NextToken" }),
         __metadata("design:type", String)
     ], ListSecretVersionIdsResponse.prototype, "nextToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=Versions", elemType: shared.SecretVersionsListEntry }),
+        SpeakeasyMetadata({ data: "json, name=Versions", elemType: SecretVersionsListEntry }),
         __metadata("design:type", Array)
     ], ListSecretVersionIdsResponse.prototype, "versions", void 0);
     return ListSecretVersionIdsResponse;

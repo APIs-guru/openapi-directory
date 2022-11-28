@@ -1,14 +1,22 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import routingstrategy
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateAliasInput:
-    alias_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AliasId' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
-    routing_strategy: Optional[routingstrategy.RoutingStrategy] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RoutingStrategy' }})
+    r"""UpdateAliasInput
+    Represents the input for a request operation.
+    """
+    
+    alias_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('AliasId') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Description') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
+    routing_strategy: Optional[RoutingStrategy] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('RoutingStrategy') }})
     

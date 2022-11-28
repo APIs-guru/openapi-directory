@@ -1,265 +1,266 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TripsTripDetailsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=trackToken" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=trackToken" })
   trackToken?: string;
 }
 
 
-export class TripsTripDetailsRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: TripsTripDetailsQueryParams;
-}
-
-
 export class TripsTripDetails200ApplicationJsonResultTrackAddressFinishParts extends SpeakeasyBase {
-  @Metadata({ data: "json, name=City" })
+  @SpeakeasyMetadata({ data: "json, name=City" })
   city?: string;
 
-  @Metadata({ data: "json, name=CountryCode" })
+  @SpeakeasyMetadata({ data: "json, name=CountryCode" })
   countryCode?: string;
 
-  @Metadata({ data: "json, name=District" })
+  @SpeakeasyMetadata({ data: "json, name=District" })
   district?: string;
 
-  @Metadata({ data: "json, name=House" })
+  @SpeakeasyMetadata({ data: "json, name=House" })
   house?: string;
 
-  @Metadata({ data: "json, name=PostalCode" })
+  @SpeakeasyMetadata({ data: "json, name=PostalCode" })
   postalCode?: string;
 
-  @Metadata({ data: "json, name=Street" })
+  @SpeakeasyMetadata({ data: "json, name=Street" })
   street?: string;
 }
 
 
 export class TripsTripDetails200ApplicationJsonResultTrackAddressStartParts extends SpeakeasyBase {
-  @Metadata({ data: "json, name=City" })
+  @SpeakeasyMetadata({ data: "json, name=City" })
   city?: string;
 
-  @Metadata({ data: "json, name=CountryCode" })
+  @SpeakeasyMetadata({ data: "json, name=CountryCode" })
   countryCode?: string;
 
-  @Metadata({ data: "json, name=District" })
+  @SpeakeasyMetadata({ data: "json, name=District" })
   district?: string;
 
-  @Metadata({ data: "json, name=House" })
+  @SpeakeasyMetadata({ data: "json, name=House" })
   house?: string;
 
-  @Metadata({ data: "json, name=PostalCode" })
+  @SpeakeasyMetadata({ data: "json, name=PostalCode" })
   postalCode?: string;
 
-  @Metadata({ data: "json, name=Street" })
+  @SpeakeasyMetadata({ data: "json, name=Street" })
   street?: string;
 }
 
 
 export class TripsTripDetails200ApplicationJsonResultTrackPoints extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AlertType" })
+  @SpeakeasyMetadata({ data: "json, name=AlertType" })
   alertType?: string;
 
-  @Metadata({ data: "json, name=AlertValue" })
+  @SpeakeasyMetadata({ data: "json, name=AlertValue" })
   alertValue?: number;
 
-  @Metadata({ data: "json, name=Cornering" })
+  @SpeakeasyMetadata({ data: "json, name=Cornering" })
   cornering?: boolean;
 
-  @Metadata({ data: "json, name=Course" })
+  @SpeakeasyMetadata({ data: "json, name=Course" })
   course?: number;
 
-  @Metadata({ data: "json, name=Height" })
+  @SpeakeasyMetadata({ data: "json, name=Height" })
   height?: number;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: number;
 
-  @Metadata({ data: "json, name=Lateral" })
+  @SpeakeasyMetadata({ data: "json, name=Lateral" })
   lateral?: number;
 
-  @Metadata({ data: "json, name=Latitude" })
+  @SpeakeasyMetadata({ data: "json, name=Latitude" })
   latitude?: number;
 
-  @Metadata({ data: "json, name=Longitude" })
+  @SpeakeasyMetadata({ data: "json, name=Longitude" })
   longitude?: number;
 
-  @Metadata({ data: "json, name=MidSpeed" })
+  @SpeakeasyMetadata({ data: "json, name=MidSpeed" })
   midSpeed?: number;
 
-  @Metadata({ data: "json, name=Number" })
+  @SpeakeasyMetadata({ data: "json, name=Number" })
   number?: number;
 
-  @Metadata({ data: "json, name=PhoneUsage" })
+  @SpeakeasyMetadata({ data: "json, name=PhoneUsage" })
   phoneUsage?: boolean;
 
-  @Metadata({ data: "json, name=PointDate" })
+  @SpeakeasyMetadata({ data: "json, name=PointDate" })
   pointDate?: string;
 
-  @Metadata({ data: "json, name=Speed" })
+  @SpeakeasyMetadata({ data: "json, name=Speed" })
   speed?: number;
 
-  @Metadata({ data: "json, name=SpeedLimit" })
+  @SpeakeasyMetadata({ data: "json, name=SpeedLimit" })
   speedLimit?: number;
 
-  @Metadata({ data: "json, name=SpeedType" })
+  @SpeakeasyMetadata({ data: "json, name=SpeedType" })
   speedType?: string;
 
-  @Metadata({ data: "json, name=TotalMeters" })
+  @SpeakeasyMetadata({ data: "json, name=TotalMeters" })
   totalMeters?: number;
 
-  @Metadata({ data: "json, name=Yaw" })
+  @SpeakeasyMetadata({ data: "json, name=Yaw" })
   yaw?: number;
 }
 
 
 export class TripsTripDetails200ApplicationJsonResultTrack extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccelerationCount" })
+  @SpeakeasyMetadata({ data: "json, name=AccelerationCount" })
   accelerationCount?: number;
 
-  @Metadata({ data: "json, name=AddressEnd" })
+  @SpeakeasyMetadata({ data: "json, name=AddressEnd" })
   addressEnd?: string;
 
-  @Metadata({ data: "json, name=AddressFinishParts" })
+  @SpeakeasyMetadata({ data: "json, name=AddressFinishParts" })
   addressFinishParts?: TripsTripDetails200ApplicationJsonResultTrackAddressFinishParts;
 
-  @Metadata({ data: "json, name=AddressStart" })
+  @SpeakeasyMetadata({ data: "json, name=AddressStart" })
   addressStart?: string;
 
-  @Metadata({ data: "json, name=AddressStartParts" })
+  @SpeakeasyMetadata({ data: "json, name=AddressStartParts" })
   addressStartParts?: TripsTripDetails200ApplicationJsonResultTrackAddressStartParts;
 
-  @Metadata({ data: "json, name=BeaconId" })
+  @SpeakeasyMetadata({ data: "json, name=BeaconId" })
   beaconId?: number;
 
-  @Metadata({ data: "json, name=CityFinish" })
+  @SpeakeasyMetadata({ data: "json, name=CityFinish" })
   cityFinish?: string;
 
-  @Metadata({ data: "json, name=CityStart" })
+  @SpeakeasyMetadata({ data: "json, name=CityStart" })
   cityStart?: string;
 
-  @Metadata({ data: "json, name=DecelerationCount" })
+  @SpeakeasyMetadata({ data: "json, name=DecelerationCount" })
   decelerationCount?: number;
 
-  @Metadata({ data: "json, name=Distance" })
+  @SpeakeasyMetadata({ data: "json, name=Distance" })
   distance?: number;
 
-  @Metadata({ data: "json, name=DrivingTips" })
+  @SpeakeasyMetadata({ data: "json, name=DrivingTips" })
   drivingTips?: string;
 
-  @Metadata({ data: "json, name=Duration" })
+  @SpeakeasyMetadata({ data: "json, name=Duration" })
   duration?: number;
 
-  @Metadata({ data: "json, name=EcoScore" })
+  @SpeakeasyMetadata({ data: "json, name=EcoScore" })
   ecoScore?: number;
 
-  @Metadata({ data: "json, name=EcoScoreBrakes" })
+  @SpeakeasyMetadata({ data: "json, name=EcoScoreBrakes" })
   ecoScoreBrakes?: number;
 
-  @Metadata({ data: "json, name=EcoScoreDepreciation" })
+  @SpeakeasyMetadata({ data: "json, name=EcoScoreDepreciation" })
   ecoScoreDepreciation?: number;
 
-  @Metadata({ data: "json, name=EcoScoreFuel" })
+  @SpeakeasyMetadata({ data: "json, name=EcoScoreFuel" })
   ecoScoreFuel?: number;
 
-  @Metadata({ data: "json, name=EcoScoreTyres" })
+  @SpeakeasyMetadata({ data: "json, name=EcoScoreTyres" })
   ecoScoreTyres?: number;
 
-  @Metadata({ data: "json, name=EndDate" })
+  @SpeakeasyMetadata({ data: "json, name=EndDate" })
   endDate?: string;
 
-  @Metadata({ data: "json, name=HighOverSpeedMileage" })
+  @SpeakeasyMetadata({ data: "json, name=HighOverSpeedMileage" })
   highOverSpeedMileage?: number;
 
-  @Metadata({ data: "json, name=MidOverSpeedMileage" })
+  @SpeakeasyMetadata({ data: "json, name=MidOverSpeedMileage" })
   midOverSpeedMileage?: number;
 
-  @Metadata({ data: "json, name=OriginChanged" })
+  @SpeakeasyMetadata({ data: "json, name=OriginChanged" })
   originChanged?: boolean;
 
-  @Metadata({ data: "json, name=PhoneUsage" })
+  @SpeakeasyMetadata({ data: "json, name=PhoneUsage" })
   phoneUsage?: number;
 
-  @Metadata({ data: "json, name=Points", elemType: operations.TripsTripDetails200ApplicationJsonResultTrackPoints })
+  @SpeakeasyMetadata({ data: "json, name=Points", elemType: TripsTripDetails200ApplicationJsonResultTrackPoints })
   points?: TripsTripDetails200ApplicationJsonResultTrackPoints[];
 
-  @Metadata({ data: "json, name=Rating" })
+  @SpeakeasyMetadata({ data: "json, name=Rating" })
   rating?: number;
 
-  @Metadata({ data: "json, name=Rating100" })
+  @SpeakeasyMetadata({ data: "json, name=Rating100" })
   rating100?: number;
 
-  @Metadata({ data: "json, name=RatingAcceleration" })
+  @SpeakeasyMetadata({ data: "json, name=RatingAcceleration" })
   ratingAcceleration?: number;
 
-  @Metadata({ data: "json, name=RatingAcceleration100" })
+  @SpeakeasyMetadata({ data: "json, name=RatingAcceleration100" })
   ratingAcceleration100?: number;
 
-  @Metadata({ data: "json, name=RatingBraking" })
+  @SpeakeasyMetadata({ data: "json, name=RatingBraking" })
   ratingBraking?: number;
 
-  @Metadata({ data: "json, name=RatingBraking100" })
+  @SpeakeasyMetadata({ data: "json, name=RatingBraking100" })
   ratingBraking100?: number;
 
-  @Metadata({ data: "json, name=RatingCornering" })
+  @SpeakeasyMetadata({ data: "json, name=RatingCornering" })
   ratingCornering?: number;
 
-  @Metadata({ data: "json, name=RatingCornering100" })
+  @SpeakeasyMetadata({ data: "json, name=RatingCornering100" })
   ratingCornering100?: number;
 
-  @Metadata({ data: "json, name=RatingPhoneDistraction100" })
+  @SpeakeasyMetadata({ data: "json, name=RatingPhoneDistraction100" })
   ratingPhoneDistraction100?: number;
 
-  @Metadata({ data: "json, name=RatingPhoneUsage" })
+  @SpeakeasyMetadata({ data: "json, name=RatingPhoneUsage" })
   ratingPhoneUsage?: number;
 
-  @Metadata({ data: "json, name=RatingSpeeding" })
+  @SpeakeasyMetadata({ data: "json, name=RatingSpeeding" })
   ratingSpeeding?: number;
 
-  @Metadata({ data: "json, name=RatingSpeeding100" })
+  @SpeakeasyMetadata({ data: "json, name=RatingSpeeding100" })
   ratingSpeeding100?: number;
 
-  @Metadata({ data: "json, name=RatingTimeOfDay" })
+  @SpeakeasyMetadata({ data: "json, name=RatingTimeOfDay" })
   ratingTimeOfDay?: number;
 
-  @Metadata({ data: "json, name=ShareType" })
+  @SpeakeasyMetadata({ data: "json, name=ShareType" })
   shareType?: string;
 
-  @Metadata({ data: "json, name=StartDate" })
+  @SpeakeasyMetadata({ data: "json, name=StartDate" })
   startDate?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: string;
 
-  @Metadata({ data: "json, name=TrackOriginCode" })
+  @SpeakeasyMetadata({ data: "json, name=TrackOriginCode" })
   trackOriginCode?: string;
 }
 
 
 export class TripsTripDetails200ApplicationJsonResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Code" })
+  @SpeakeasyMetadata({ data: "json, name=Code" })
   code?: number;
 
-  @Metadata({ data: "json, name=Track" })
+  @SpeakeasyMetadata({ data: "json, name=Track" })
   track?: TripsTripDetails200ApplicationJsonResultTrack;
 }
 
 
 export class TripsTripDetails200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Result" })
+  @SpeakeasyMetadata({ data: "json, name=Result" })
   result?: TripsTripDetails200ApplicationJsonResult;
 }
 
 
+export class TripsTripDetailsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: TripsTripDetailsQueryParams;
+}
+
+
 export class TripsTripDetailsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tripsTripDetails200ApplicationJsonObject?: TripsTripDetails200ApplicationJson;
 }

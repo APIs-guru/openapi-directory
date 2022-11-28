@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { QueryParameterMatch } from "./queryparametermatch";
+
 
 
 // HttpQueryParameter
@@ -7,9 +8,9 @@ import { QueryParameterMatch } from "./queryparametermatch";
  * An object that represents the query parameter in the request.
 **/
 export class HttpQueryParameter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=match" })
+  @SpeakeasyMetadata({ data: "json, name=match" })
   match?: QueryParameterMatch;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 }

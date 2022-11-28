@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class CustomDeviceGetResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     custom_device_to_posts: Optional[List[shared.CustomDeviceToPost]] = field(default=None)
-    status_code: int = field(default=None)
     

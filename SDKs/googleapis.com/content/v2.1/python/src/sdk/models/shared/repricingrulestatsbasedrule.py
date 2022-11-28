@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class RepricingRuleStatsBasedRule:
-    percentage_delta: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'percentageDelta' }})
-    price_delta: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'priceDelta' }})
+    r"""RepricingRuleStatsBasedRule
+    Definition of stats based rule.
+    """
+    
+    percentage_delta: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('percentageDelta') }})
+    price_delta: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('priceDelta') }})
     

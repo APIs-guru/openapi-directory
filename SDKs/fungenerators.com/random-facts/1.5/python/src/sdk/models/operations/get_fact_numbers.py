@@ -1,25 +1,25 @@
 from dataclasses import dataclass, field
-
+from sdk.models import shared
 
 
 @dataclass
 class GetFactNumbersQueryParams:
-    number: int = field(default=None, metadata={'query_param': { 'field_name': 'number', 'style': 'form', 'explode': True }})
+    number: int = field(metadata={'query_param': { 'field_name': 'number', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class GetFactNumbersSecurity:
-    x_fungenerators_api_secret: shared.SchemeXFungeneratorsAPISecret = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    x_fungenerators_api_secret: shared.SchemeXFungeneratorsAPISecret = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetFactNumbersRequest:
-    query_params: GetFactNumbersQueryParams = field(default=None)
-    security: GetFactNumbersSecurity = field(default=None)
+    query_params: GetFactNumbersQueryParams = field()
+    security: GetFactNumbersSecurity = field()
     
 
 @dataclass
 class GetFactNumbersResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

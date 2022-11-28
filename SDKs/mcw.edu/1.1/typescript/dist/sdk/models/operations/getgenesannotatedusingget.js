@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetGenesAnnotatedUsingGetPathParams = /** @class */ (function (_super) {
     __extends(GetGenesAnnotatedUsingGetPathParams, _super);
     function GetGenesAnnotatedUsingGetPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=accId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=accId" }),
         __metadata("design:type", String)
     ], GetGenesAnnotatedUsingGetPathParams.prototype, "accId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=speciesTypeKey" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=speciesTypeKey" }),
         __metadata("design:type", Number)
     ], GetGenesAnnotatedUsingGetPathParams.prototype, "speciesTypeKey", void 0);
     return GetGenesAnnotatedUsingGetPathParams;
@@ -45,7 +45,7 @@ var GetGenesAnnotatedUsingGetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetGenesAnnotatedUsingGetPathParams)
     ], GetGenesAnnotatedUsingGetRequest.prototype, "pathParams", void 0);
     return GetGenesAnnotatedUsingGetRequest;
@@ -57,15 +57,15 @@ var GetGenesAnnotatedUsingGetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetGenesAnnotatedUsingGetResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetGenesAnnotatedUsingGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetGenesAnnotatedUsingGetResponse.prototype, "statusCode", void 0);
     return GetGenesAnnotatedUsingGetResponse;

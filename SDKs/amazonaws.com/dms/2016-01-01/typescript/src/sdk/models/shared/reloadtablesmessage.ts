@@ -1,16 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReloadOptionValueEnum } from "./reloadoptionvalueenum";
 import { TableToReload } from "./tabletoreload";
 
 
+
 export class ReloadTablesMessage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ReloadOption" })
+  @SpeakeasyMetadata({ data: "json, name=ReloadOption" })
   reloadOption?: ReloadOptionValueEnum;
 
-  @Metadata({ data: "json, name=ReplicationTaskArn" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicationTaskArn" })
   replicationTaskArn: string;
 
-  @Metadata({ data: "json, name=TablesToReload", elemType: shared.TableToReload })
+  @SpeakeasyMetadata({ data: "json, name=TablesToReload", elemType: TableToReload })
   tablesToReload: TableToReload[];
 }

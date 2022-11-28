@@ -1,5 +1,7 @@
 package shared
 
+// CloudwatchMetricAction
+// Describes an action that captures a CloudWatch metric.
 type CloudwatchMetricAction struct {
 	MetricName      string  `json:"metricName"`
 	MetricNamespace string  `json:"metricNamespace"`

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ReceiptRecognitionResult
+// Result of recognizing a receipt, to extract the key information from the receipt
 type ReceiptRecognitionResult struct {
 	AddressString   *string           `json:"AddressString,omitempty"`
 	BusinessName    *string           `json:"BusinessName,omitempty"`

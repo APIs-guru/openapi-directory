@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class PatchGroupsIDPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,13 +18,13 @@ class PatchGroupsIDRequestBody:
 
 @dataclass
 class PatchGroupsIDRequest:
-    path_params: PatchGroupsIDPathParams = field(default=None)
+    path_params: PatchGroupsIDPathParams = field()
     request: Optional[PatchGroupsIDRequestBody] = field(default=None, metadata={'request': { 'media_type': 'multipart/form-data' }})
     
 
 @dataclass
 class PatchGroupsIDResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     group_entity: Optional[shared.GroupEntity] = field(default=None)
-    status_code: int = field(default=None)
     

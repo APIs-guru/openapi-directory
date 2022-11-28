@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum IssueJobStatusStatusEnum {
-    Accepted = "ACCEPTED"
-,    Started = "STARTED"
-,    Running = "RUNNING"
-,    Failure = "FAILURE"
+    Accepted = "ACCEPTED",
+    Started = "STARTED",
+    Running = "RUNNING",
+    Failure = "FAILURE"
 }
 
 
@@ -13,21 +14,21 @@ export enum IssueJobStatusStatusEnum {
  * The status of an import or export job
 **/
 export class IssueJobStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count?: number;
 
-  @Metadata({ data: "json, name=pct" })
+  @SpeakeasyMetadata({ data: "json, name=pct" })
   pct?: number;
 
-  @Metadata({ data: "json, name=phase" })
+  @SpeakeasyMetadata({ data: "json, name=phase" })
   phase?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: IssueJobStatusStatusEnum;
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total?: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }

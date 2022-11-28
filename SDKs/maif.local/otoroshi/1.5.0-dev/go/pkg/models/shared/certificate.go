@@ -1,5 +1,7 @@
 package shared
 
+// Certificate
+// A SSL/TLS X509 certificate
 type Certificate struct {
 	AutoRenew  string `json:"autoRenew"`
 	Ca         string `json:"ca"`

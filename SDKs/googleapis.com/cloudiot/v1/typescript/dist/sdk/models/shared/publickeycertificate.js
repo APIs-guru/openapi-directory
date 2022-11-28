@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { X509CertificateDetails } from "./x509certificatedetails";
 export var PublicKeyCertificateFormatEnum;
 (function (PublicKeyCertificateFormatEnum) {
@@ -39,15 +39,15 @@ var PublicKeyCertificate = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=certificate" }),
+        SpeakeasyMetadata({ data: "json, name=certificate" }),
         __metadata("design:type", String)
     ], PublicKeyCertificate.prototype, "certificate", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], PublicKeyCertificate.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=x509Details" }),
+        SpeakeasyMetadata({ data: "json, name=x509Details" }),
         __metadata("design:type", X509CertificateDetails)
     ], PublicKeyCertificate.prototype, "x509Details", void 0);
     return PublicKeyCertificate;

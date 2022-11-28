@@ -1,5 +1,7 @@
 package shared
 
+// DescribeVaultOutput
+// Contains the Amazon S3 Glacier response to your request.
 type DescribeVaultOutput struct {
 	CreationDate      *string `json:"CreationDate,omitempty"`
 	LastInventoryDate *string `json:"LastInventoryDate,omitempty"`

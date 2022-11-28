@@ -16,10 +16,6 @@ type CreateMonitorRequestBody struct {
 	Monitor *CreateMonitorRequestBodyMonitor `json:"monitor,omitempty"`
 }
 
-type CreateMonitorRequest struct {
-	Request *CreateMonitorRequestBody `request:"mediaType=application/json"`
-}
-
 type CreateMonitor200ApplicationJSONMonitor struct {
 	ID   *string `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
@@ -42,6 +38,10 @@ type CreateMonitor400ApplicationJSONError struct {
 
 type CreateMonitor400ApplicationJSON struct {
 	Error *CreateMonitor400ApplicationJSONError `json:"error,omitempty"`
+}
+
+type CreateMonitorRequest struct {
+	Request *CreateMonitorRequestBody `request:"mediaType=application/json"`
 }
 
 type CreateMonitorResponse struct {

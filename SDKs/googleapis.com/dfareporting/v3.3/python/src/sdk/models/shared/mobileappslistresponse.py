@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import mobileapp
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class MobileAppsListResponse:
-    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
-    mobile_apps: Optional[List[mobileapp.MobileApp]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mobileApps' }})
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextPageToken' }})
+    r"""MobileAppsListResponse
+    Mobile app List Response
+    """
+    
+    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
+    mobile_apps: Optional[List[MobileApp]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mobileApps') }})
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextPageToken') }})
     

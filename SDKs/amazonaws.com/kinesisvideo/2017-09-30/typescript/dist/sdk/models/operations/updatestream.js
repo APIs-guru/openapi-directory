@@ -22,38 +22,38 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var UpdateStreamHeaders = /** @class */ (function (_super) {
     __extends(UpdateStreamHeaders, _super);
     function UpdateStreamHeaders() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], UpdateStreamHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], UpdateStreamHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], UpdateStreamHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], UpdateStreamHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], UpdateStreamHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], UpdateStreamHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], UpdateStreamHeaders.prototype, "xAmzSignedHeaders", void 0);
     return UpdateStreamHeaders;
@@ -65,23 +65,23 @@ var UpdateStreamRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CurrentVersion" }),
+        SpeakeasyMetadata({ data: "json, name=CurrentVersion" }),
         __metadata("design:type", String)
     ], UpdateStreamRequestBody.prototype, "currentVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=DeviceName" }),
+        SpeakeasyMetadata({ data: "json, name=DeviceName" }),
         __metadata("design:type", String)
     ], UpdateStreamRequestBody.prototype, "deviceName", void 0);
     __decorate([
-        Metadata({ data: "json, name=MediaType" }),
+        SpeakeasyMetadata({ data: "json, name=MediaType" }),
         __metadata("design:type", String)
     ], UpdateStreamRequestBody.prototype, "mediaType", void 0);
     __decorate([
-        Metadata({ data: "json, name=StreamARN" }),
+        SpeakeasyMetadata({ data: "json, name=StreamARN" }),
         __metadata("design:type", String)
     ], UpdateStreamRequestBody.prototype, "streamArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=StreamName" }),
+        SpeakeasyMetadata({ data: "json, name=StreamName" }),
         __metadata("design:type", String)
     ], UpdateStreamRequestBody.prototype, "streamName", void 0);
     return UpdateStreamRequestBody;
@@ -93,11 +93,11 @@ var UpdateStreamRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateStreamHeaders)
     ], UpdateStreamRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", UpdateStreamRequestBody)
     ], UpdateStreamRequest.prototype, "request", void 0);
     return UpdateStreamRequest;
@@ -109,39 +109,39 @@ var UpdateStreamResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateStreamResponse.prototype, "clientLimitExceededException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UpdateStreamResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateStreamResponse.prototype, "invalidArgumentException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateStreamResponse.prototype, "notAuthorizedException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateStreamResponse.prototype, "resourceInUseException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateStreamResponse.prototype, "resourceNotFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UpdateStreamResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], UpdateStreamResponse.prototype, "updateStreamOutput", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateStreamResponse.prototype, "versionMismatchException", void 0);
     return UpdateStreamResponse;

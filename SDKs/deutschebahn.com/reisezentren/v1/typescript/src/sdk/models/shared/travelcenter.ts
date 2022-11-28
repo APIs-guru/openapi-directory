@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TravelCenterOpeningTimes
@@ -6,59 +7,59 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Opening times of the travel center, ordered by week day
 **/
 export class TravelCenterOpeningTimes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fri" })
+  @SpeakeasyMetadata({ data: "json, name=fri" })
   fri?: string[];
 
-  @Metadata({ data: "json, name=mon" })
+  @SpeakeasyMetadata({ data: "json, name=mon" })
   mon?: string[];
 
-  @Metadata({ data: "json, name=sat" })
+  @SpeakeasyMetadata({ data: "json, name=sat" })
   sat?: string[];
 
-  @Metadata({ data: "json, name=sun" })
+  @SpeakeasyMetadata({ data: "json, name=sun" })
   sun?: string[];
 
-  @Metadata({ data: "json, name=thu" })
+  @SpeakeasyMetadata({ data: "json, name=thu" })
   thu?: string[];
 
-  @Metadata({ data: "json, name=tue" })
+  @SpeakeasyMetadata({ data: "json, name=tue" })
   tue?: string[];
 
-  @Metadata({ data: "json, name=wed" })
+  @SpeakeasyMetadata({ data: "json, name=wed" })
   wed?: string[];
 }
 
 export enum TravelCenterTypeEnum {
-    Reisezentrum = "Reisezentrum"
-,    MobilityCenter = "Mobility Center"
+    Reisezentrum = "Reisezentrum",
+    MobilityCenter = "Mobility Center"
 }
 
 
 export class TravelCenter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=address" })
+  @SpeakeasyMetadata({ data: "json, name=address" })
   address?: string;
 
-  @Metadata({ data: "json, name=city" })
+  @SpeakeasyMetadata({ data: "json, name=city" })
   city?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=lat" })
+  @SpeakeasyMetadata({ data: "json, name=lat" })
   lat?: number;
 
-  @Metadata({ data: "json, name=lon" })
+  @SpeakeasyMetadata({ data: "json, name=lon" })
   lon?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=openingTimes" })
+  @SpeakeasyMetadata({ data: "json, name=openingTimes" })
   openingTimes?: TravelCenterOpeningTimes;
 
-  @Metadata({ data: "json, name=postCode" })
+  @SpeakeasyMetadata({ data: "json, name=postCode" })
   postCode?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: TravelCenterTypeEnum;
 }

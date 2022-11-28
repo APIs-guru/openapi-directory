@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetRateBasedRuleManagedKeysResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ManagedKeys" })
+  @SpeakeasyMetadata({ data: "json, name=ManagedKeys" })
   managedKeys?: string[];
 
-  @Metadata({ data: "json, name=NextMarker" })
+  @SpeakeasyMetadata({ data: "json, name=NextMarker" })
   nextMarker?: string;
 }

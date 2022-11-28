@@ -22,6 +22,8 @@ const (
 	OpaqueColorThemeColorEnumBackground2               OpaqueColorThemeColorEnum = "BACKGROUND2"
 )
 
+// OpaqueColor
+// A themeable solid color value.
 type OpaqueColor struct {
 	RgbColor   *RgbColor                  `json:"rgbColor,omitempty"`
 	ThemeColor *OpaqueColorThemeColorEnum `json:"themeColor,omitempty"`

@@ -1,5 +1,7 @@
 package shared
 
+// AccountSummary
+// JSON template for an Analytics AccountSummary. An AccountSummary is a lightweight tree comprised of properties/profiles.
 type AccountSummary struct {
 	ID            *string              `json:"id,omitempty"`
 	Kind          *string              `json:"kind,omitempty"`

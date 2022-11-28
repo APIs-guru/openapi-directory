@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ArchiveStateEnum } from "./archivestateenum";
 /**
  * An <code>Archive</code> object that contains details about an archive.

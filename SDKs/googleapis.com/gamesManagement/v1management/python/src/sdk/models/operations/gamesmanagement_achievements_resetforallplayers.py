@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GamesManagementAchievementsResetForAllPlayersPathParams:
-    achievement_id: str = field(default=None, metadata={'path_param': { 'field_name': 'achievementId', 'style': 'simple', 'explode': False }})
+    achievement_id: str = field(metadata={'path_param': { 'field_name': 'achievementId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,19 +26,19 @@ class GamesManagementAchievementsResetForAllPlayersQueryParams:
 
 @dataclass
 class GamesManagementAchievementsResetForAllPlayersSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GamesManagementAchievementsResetForAllPlayersRequest:
-    path_params: GamesManagementAchievementsResetForAllPlayersPathParams = field(default=None)
-    query_params: GamesManagementAchievementsResetForAllPlayersQueryParams = field(default=None)
-    security: GamesManagementAchievementsResetForAllPlayersSecurity = field(default=None)
+    path_params: GamesManagementAchievementsResetForAllPlayersPathParams = field()
+    query_params: GamesManagementAchievementsResetForAllPlayersQueryParams = field()
+    security: GamesManagementAchievementsResetForAllPlayersSecurity = field()
     
 
 @dataclass
 class GamesManagementAchievementsResetForAllPlayersResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

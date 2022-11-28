@@ -1,5 +1,7 @@
 package shared
 
+// PublicEndpoint
+// Specifies the properties and attributes of an endpoint that's associated with an event.
 type PublicEndpoint struct {
 	Address        *string              `json:"Address,omitempty"`
 	Attributes     map[string][]string  `json:"Attributes,omitempty"`

@@ -5,14 +5,14 @@ type GetcitystandardQueryParams struct {
 	License string `queryParam:"style=form,explode=true,name=license"`
 }
 
-type GetcitystandardRequest struct {
-	QueryParams GetcitystandardQueryParams
-}
-
 type Getcitystandard200ApplicationJSON struct {
 	CityStandard *string `json:"CityStandard,omitempty"`
 	Code         *string `json:"Code,omitempty"`
 	Credits      *string `json:"Credits,omitempty"`
+}
+
+type GetcitystandardRequest struct {
+	QueryParams GetcitystandardQueryParams
 }
 
 type GetcitystandardResponse struct {

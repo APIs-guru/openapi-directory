@@ -22,8 +22,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { FileShareConfig } from "./fileshareconfig";
+import { NetworkConfig } from "./networkconfig";
+import { NetworkConfigInput } from "./networkconfig";
 export var InstanceStateEnum;
 (function (InstanceStateEnum) {
     InstanceStateEnum["StateUnspecified"] = "STATE_UNSPECIFIED";
@@ -34,6 +36,8 @@ export var InstanceStateEnum;
     InstanceStateEnum["Error"] = "ERROR";
     InstanceStateEnum["Restoring"] = "RESTORING";
     InstanceStateEnum["Suspended"] = "SUSPENDED";
+    InstanceStateEnum["Suspending"] = "SUSPENDING";
+    InstanceStateEnum["Resuming"] = "RESUMING";
 })(InstanceStateEnum || (InstanceStateEnum = {}));
 export var InstanceSuspensionReasonsEnum;
 (function (InstanceSuspensionReasonsEnum) {
@@ -60,57 +64,97 @@ var Instance = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", String)
     ], Instance.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], Instance.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=etag" }),
+        SpeakeasyMetadata({ data: "json, name=etag" }),
         __metadata("design:type", String)
     ], Instance.prototype, "etag", void 0);
     __decorate([
-        Metadata({ data: "json, name=fileShares", elemType: shared.FileShareConfig }),
+        SpeakeasyMetadata({ data: "json, name=fileShares", elemType: FileShareConfig }),
         __metadata("design:type", Array)
     ], Instance.prototype, "fileShares", void 0);
     __decorate([
-        Metadata({ data: "json, name=kmsKeyName" }),
+        SpeakeasyMetadata({ data: "json, name=kmsKeyName" }),
         __metadata("design:type", String)
     ], Instance.prototype, "kmsKeyName", void 0);
     __decorate([
-        Metadata({ data: "json, name=labels" }),
+        SpeakeasyMetadata({ data: "json, name=labels" }),
         __metadata("design:type", Map)
     ], Instance.prototype, "labels", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Instance.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=networks", elemType: shared.NetworkConfig }),
+        SpeakeasyMetadata({ data: "json, name=networks", elemType: NetworkConfig }),
         __metadata("design:type", Array)
     ], Instance.prototype, "networks", void 0);
     __decorate([
-        Metadata({ data: "json, name=satisfiesPzs" }),
+        SpeakeasyMetadata({ data: "json, name=satisfiesPzs" }),
         __metadata("design:type", Boolean)
     ], Instance.prototype, "satisfiesPzs", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], Instance.prototype, "state", void 0);
     __decorate([
-        Metadata({ data: "json, name=statusMessage" }),
+        SpeakeasyMetadata({ data: "json, name=statusMessage" }),
         __metadata("design:type", String)
     ], Instance.prototype, "statusMessage", void 0);
     __decorate([
-        Metadata({ data: "json, name=suspensionReasons" }),
+        SpeakeasyMetadata({ data: "json, name=suspensionReasons" }),
         __metadata("design:type", Array)
     ], Instance.prototype, "suspensionReasons", void 0);
     __decorate([
-        Metadata({ data: "json, name=tier" }),
+        SpeakeasyMetadata({ data: "json, name=tier" }),
         __metadata("design:type", String)
     ], Instance.prototype, "tier", void 0);
     return Instance;
 }(SpeakeasyBase));
 export { Instance };
+// InstanceInput
+/**
+ * A Filestore instance.
+**/
+var InstanceInput = /** @class */ (function (_super) {
+    __extends(InstanceInput, _super);
+    function InstanceInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=description" }),
+        __metadata("design:type", String)
+    ], InstanceInput.prototype, "description", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=etag" }),
+        __metadata("design:type", String)
+    ], InstanceInput.prototype, "etag", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=fileShares", elemType: FileShareConfig }),
+        __metadata("design:type", Array)
+    ], InstanceInput.prototype, "fileShares", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=kmsKeyName" }),
+        __metadata("design:type", String)
+    ], InstanceInput.prototype, "kmsKeyName", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=labels" }),
+        __metadata("design:type", Map)
+    ], InstanceInput.prototype, "labels", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=networks", elemType: NetworkConfigInput }),
+        __metadata("design:type", Array)
+    ], InstanceInput.prototype, "networks", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=tier" }),
+        __metadata("design:type", String)
+    ], InstanceInput.prototype, "tier", void 0);
+    return InstanceInput;
+}(SpeakeasyBase));
+export { InstanceInput };

@@ -11,6 +11,8 @@ const (
 	OutcomeSummaryEnumFlaky        OutcomeSummaryEnum = "flaky"
 )
 
+// Outcome
+// Interprets a result so that humans and machines can act on it.
 type Outcome struct {
 	FailureDetail      *FailureDetail      `json:"failureDetail,omitempty"`
 	InconclusiveDetail *InconclusiveDetail `json:"inconclusiveDetail,omitempty"`

@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteProvisioningTemplateVersionPathParams:
-    template_name: str = field(default=None, metadata={'path_param': { 'field_name': 'templateName', 'style': 'simple', 'explode': False }})
-    version_id: int = field(default=None, metadata={'path_param': { 'field_name': 'versionId', 'style': 'simple', 'explode': False }})
+    template_name: str = field(metadata={'path_param': { 'field_name': 'templateName', 'style': 'simple', 'explode': False }})
+    version_id: int = field(metadata={'path_param': { 'field_name': 'versionId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,20 +24,20 @@ class DeleteProvisioningTemplateVersionHeaders:
 
 @dataclass
 class DeleteProvisioningTemplateVersionRequest:
-    path_params: DeleteProvisioningTemplateVersionPathParams = field(default=None)
-    headers: DeleteProvisioningTemplateVersionHeaders = field(default=None)
+    headers: DeleteProvisioningTemplateVersionHeaders = field()
+    path_params: DeleteProvisioningTemplateVersionPathParams = field()
     
 
 @dataclass
 class DeleteProvisioningTemplateVersionResponse:
+    content_type: str = field()
+    status_code: int = field()
     conflicting_resource_update_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     delete_conflict_exception: Optional[Any] = field(default=None)
     delete_provisioning_template_version_response: Optional[dict[str, Any]] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

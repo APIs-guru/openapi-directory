@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CompositeType } from "./compositetype";
+
 
 
 // CompositeTypesListResponse
@@ -8,9 +8,9 @@ import { CompositeType } from "./compositetype";
  * A response that returns all Composite Types supported by Deployment Manager
 **/
 export class CompositeTypesListResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=compositeTypes", elemType: shared.CompositeType })
+  @SpeakeasyMetadata({ data: "json, name=compositeTypes", elemType: CompositeType })
   compositeTypes?: CompositeType[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

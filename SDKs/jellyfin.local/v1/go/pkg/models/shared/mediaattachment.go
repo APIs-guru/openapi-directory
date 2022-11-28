@@ -1,5 +1,7 @@
 package shared
 
+// MediaAttachment
+// Class MediaAttachment.
 type MediaAttachment struct {
 	Codec       *string `json:"Codec,omitempty"`
 	CodecTag    *string `json:"CodecTag,omitempty"`

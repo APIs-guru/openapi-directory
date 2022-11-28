@@ -1,5 +1,8 @@
 package shared
 
+// Pattern
+//
+//	A set of rules used to make a recommendation during an analysis.
 type Pattern struct {
 	CountersToAggregate []string   `json:"countersToAggregate,omitempty"`
 	Description         *string    `json:"description,omitempty"`

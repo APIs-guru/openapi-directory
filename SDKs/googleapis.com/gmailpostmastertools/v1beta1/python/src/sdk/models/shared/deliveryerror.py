@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class DeliveryErrorErrorClassEnum(str, Enum):
     DELIVERY_ERROR_CLASS_UNSPECIFIED = "DELIVERY_ERROR_CLASS_UNSPECIFIED"
@@ -24,7 +26,11 @@ class DeliveryErrorErrorTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class DeliveryError:
-    error_class: Optional[DeliveryErrorErrorClassEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorClass' }})
-    error_ratio: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorRatio' }})
-    error_type: Optional[DeliveryErrorErrorTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorType' }})
+    r"""DeliveryError
+    Metric on a particular delivery error type.
+    """
+    
+    error_class: Optional[DeliveryErrorErrorClassEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorClass') }})
+    error_ratio: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorRatio') }})
+    error_type: Optional[DeliveryErrorErrorTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorType') }})
     

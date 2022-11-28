@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ProvisionedThroughputOverride
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Replica-specific provisioned throughput settings. If not specified, uses the source table's provisioned throughput settings.
 **/
 export class ProvisionedThroughputOverride extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ReadCapacityUnits" })
+  @SpeakeasyMetadata({ data: "json, name=ReadCapacityUnits" })
   readCapacityUnits?: number;
 }

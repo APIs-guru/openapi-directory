@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ThingTypeProperties
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The ThingTypeProperties contains information about the thing type including: a thing type description, and a list of searchable thing attribute names.
 **/
 export class ThingTypeProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=searchableAttributes" })
+  @SpeakeasyMetadata({ data: "json, name=searchableAttributes" })
   searchableAttributes?: string[];
 
-  @Metadata({ data: "json, name=thingTypeDescription" })
+  @SpeakeasyMetadata({ data: "json, name=thingTypeDescription" })
   thingTypeDescription?: string;
 }

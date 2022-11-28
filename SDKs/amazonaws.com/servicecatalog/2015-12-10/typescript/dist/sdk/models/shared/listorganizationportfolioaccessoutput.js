@@ -22,19 +22,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { OrganizationNode } from "./organizationnode";
 var ListOrganizationPortfolioAccessOutput = /** @class */ (function (_super) {
     __extends(ListOrganizationPortfolioAccessOutput, _super);
     function ListOrganizationPortfolioAccessOutput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=NextPageToken" }),
+        SpeakeasyMetadata({ data: "json, name=NextPageToken" }),
         __metadata("design:type", String)
     ], ListOrganizationPortfolioAccessOutput.prototype, "nextPageToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=OrganizationNodes", elemType: shared.OrganizationNode }),
+        SpeakeasyMetadata({ data: "json, name=OrganizationNodes", elemType: OrganizationNode }),
         __metadata("design:type", Array)
     ], ListOrganizationPortfolioAccessOutput.prototype, "organizationNodes", void 0);
     return ListOrganizationPortfolioAccessOutput;

@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googleclouddialogflowcxv3beta1synthesizespeechconfig
+from sdk import utils
+from . import *
 
 class GoogleCloudDialogflowCxV3beta1OutputAudioConfigAudioEncodingEnum(str, Enum):
     OUTPUT_AUDIO_ENCODING_UNSPECIFIED = "OUTPUT_AUDIO_ENCODING_UNSPECIFIED"
@@ -15,7 +17,11 @@ class GoogleCloudDialogflowCxV3beta1OutputAudioConfigAudioEncodingEnum(str, Enum
 @dataclass_json
 @dataclass
 class GoogleCloudDialogflowCxV3beta1OutputAudioConfig:
-    audio_encoding: Optional[GoogleCloudDialogflowCxV3beta1OutputAudioConfigAudioEncodingEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'audioEncoding' }})
-    sample_rate_hertz: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sampleRateHertz' }})
-    synthesize_speech_config: Optional[googleclouddialogflowcxv3beta1synthesizespeechconfig.GoogleCloudDialogflowCxV3beta1SynthesizeSpeechConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'synthesizeSpeechConfig' }})
+    r"""GoogleCloudDialogflowCxV3beta1OutputAudioConfig
+    Instructs the speech synthesizer how to generate the output audio content.
+    """
+    
+    audio_encoding: Optional[GoogleCloudDialogflowCxV3beta1OutputAudioConfigAudioEncodingEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('audioEncoding') }})
+    sample_rate_hertz: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sampleRateHertz') }})
+    synthesize_speech_config: Optional[GoogleCloudDialogflowCxV3beta1SynthesizeSpeechConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('synthesizeSpeechConfig') }})
     

@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GoogleCloudPaymentsResellerSubscriptionV1CancelSubscriptionRequestCancellationReasonEnum(str, Enum):
     CANCELLATION_REASON_UNSPECIFIED = "CANCELLATION_REASON_UNSPECIFIED"
@@ -17,6 +19,6 @@ class GoogleCloudPaymentsResellerSubscriptionV1CancelSubscriptionRequestCancella
 @dataclass_json
 @dataclass
 class GoogleCloudPaymentsResellerSubscriptionV1CancelSubscriptionRequest:
-    cancel_immediately: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cancelImmediately' }})
-    cancellation_reason: Optional[GoogleCloudPaymentsResellerSubscriptionV1CancelSubscriptionRequestCancellationReasonEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cancellationReason' }})
+    cancel_immediately: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cancelImmediately') }})
+    cancellation_reason: Optional[GoogleCloudPaymentsResellerSubscriptionV1CancelSubscriptionRequestCancellationReasonEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cancellationReason') }})
     

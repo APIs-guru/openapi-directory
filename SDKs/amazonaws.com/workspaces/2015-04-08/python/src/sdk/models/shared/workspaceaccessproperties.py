@@ -1,25 +1,24 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import accesspropertyvalue_enum
-from . import accesspropertyvalue_enum
-from . import accesspropertyvalue_enum
-from . import accesspropertyvalue_enum
-from . import accesspropertyvalue_enum
-from . import accesspropertyvalue_enum
-from . import accesspropertyvalue_enum
-from . import accesspropertyvalue_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class WorkspaceAccessProperties:
-    device_type_android: Optional[accesspropertyvalue_enum.AccessPropertyValueEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DeviceTypeAndroid' }})
-    device_type_chrome_os: Optional[accesspropertyvalue_enum.AccessPropertyValueEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DeviceTypeChromeOs' }})
-    device_type_ios: Optional[accesspropertyvalue_enum.AccessPropertyValueEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DeviceTypeIos' }})
-    device_type_linux: Optional[accesspropertyvalue_enum.AccessPropertyValueEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DeviceTypeLinux' }})
-    device_type_osx: Optional[accesspropertyvalue_enum.AccessPropertyValueEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DeviceTypeOsx' }})
-    device_type_web: Optional[accesspropertyvalue_enum.AccessPropertyValueEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DeviceTypeWeb' }})
-    device_type_windows: Optional[accesspropertyvalue_enum.AccessPropertyValueEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DeviceTypeWindows' }})
-    device_type_zero_client: Optional[accesspropertyvalue_enum.AccessPropertyValueEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DeviceTypeZeroClient' }})
+    r"""WorkspaceAccessProperties
+    The device types and operating systems that can be used to access a WorkSpace. For more information, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/workspaces-network-requirements.html\">Amazon WorkSpaces Client Network Requirements</a>.
+    """
+    
+    device_type_android: Optional[AccessPropertyValueEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DeviceTypeAndroid') }})
+    device_type_chrome_os: Optional[AccessPropertyValueEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DeviceTypeChromeOs') }})
+    device_type_ios: Optional[AccessPropertyValueEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DeviceTypeIos') }})
+    device_type_linux: Optional[AccessPropertyValueEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DeviceTypeLinux') }})
+    device_type_osx: Optional[AccessPropertyValueEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DeviceTypeOsx') }})
+    device_type_web: Optional[AccessPropertyValueEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DeviceTypeWeb') }})
+    device_type_windows: Optional[AccessPropertyValueEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DeviceTypeWindows') }})
+    device_type_zero_client: Optional[AccessPropertyValueEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DeviceTypeZeroClient') }})
     

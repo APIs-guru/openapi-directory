@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class CloudWatchLogsInitialPositionEnum(str, Enum):
     START_OF_FILE = "start_of_file"

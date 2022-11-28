@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ResendValidationEmailRequest = /** @class */ (function (_super) {
     __extends(ResendValidationEmailRequest, _super);
     function ResendValidationEmailRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CertificateArn" }),
+        SpeakeasyMetadata({ data: "json, name=CertificateArn" }),
         __metadata("design:type", String)
     ], ResendValidationEmailRequest.prototype, "certificateArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=Domain" }),
+        SpeakeasyMetadata({ data: "json, name=Domain" }),
         __metadata("design:type", String)
     ], ResendValidationEmailRequest.prototype, "domain", void 0);
     __decorate([
-        Metadata({ data: "json, name=ValidationDomain" }),
+        SpeakeasyMetadata({ data: "json, name=ValidationDomain" }),
         __metadata("design:type", String)
     ], ResendValidationEmailRequest.prototype, "validationDomain", void 0);
     return ResendValidationEmailRequest;

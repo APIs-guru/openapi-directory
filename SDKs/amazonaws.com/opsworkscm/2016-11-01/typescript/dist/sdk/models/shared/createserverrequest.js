@@ -22,95 +22,96 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { EngineAttribute } from "./engineattribute";
+import { Tag } from "./tag";
 var CreateServerRequest = /** @class */ (function (_super) {
     __extends(CreateServerRequest, _super);
     function CreateServerRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AssociatePublicIpAddress" }),
+        SpeakeasyMetadata({ data: "json, name=AssociatePublicIpAddress" }),
         __metadata("design:type", Boolean)
     ], CreateServerRequest.prototype, "associatePublicIpAddress", void 0);
     __decorate([
-        Metadata({ data: "json, name=BackupId" }),
+        SpeakeasyMetadata({ data: "json, name=BackupId" }),
         __metadata("design:type", String)
     ], CreateServerRequest.prototype, "backupId", void 0);
     __decorate([
-        Metadata({ data: "json, name=BackupRetentionCount" }),
+        SpeakeasyMetadata({ data: "json, name=BackupRetentionCount" }),
         __metadata("design:type", Number)
     ], CreateServerRequest.prototype, "backupRetentionCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=CustomCertificate" }),
+        SpeakeasyMetadata({ data: "json, name=CustomCertificate" }),
         __metadata("design:type", String)
     ], CreateServerRequest.prototype, "customCertificate", void 0);
     __decorate([
-        Metadata({ data: "json, name=CustomDomain" }),
+        SpeakeasyMetadata({ data: "json, name=CustomDomain" }),
         __metadata("design:type", String)
     ], CreateServerRequest.prototype, "customDomain", void 0);
     __decorate([
-        Metadata({ data: "json, name=CustomPrivateKey" }),
+        SpeakeasyMetadata({ data: "json, name=CustomPrivateKey" }),
         __metadata("design:type", String)
     ], CreateServerRequest.prototype, "customPrivateKey", void 0);
     __decorate([
-        Metadata({ data: "json, name=DisableAutomatedBackup" }),
+        SpeakeasyMetadata({ data: "json, name=DisableAutomatedBackup" }),
         __metadata("design:type", Boolean)
     ], CreateServerRequest.prototype, "disableAutomatedBackup", void 0);
     __decorate([
-        Metadata({ data: "json, name=Engine" }),
+        SpeakeasyMetadata({ data: "json, name=Engine" }),
         __metadata("design:type", String)
     ], CreateServerRequest.prototype, "engine", void 0);
     __decorate([
-        Metadata({ data: "json, name=EngineAttributes", elemType: shared.EngineAttribute }),
+        SpeakeasyMetadata({ data: "json, name=EngineAttributes", elemType: EngineAttribute }),
         __metadata("design:type", Array)
     ], CreateServerRequest.prototype, "engineAttributes", void 0);
     __decorate([
-        Metadata({ data: "json, name=EngineModel" }),
+        SpeakeasyMetadata({ data: "json, name=EngineModel" }),
         __metadata("design:type", String)
     ], CreateServerRequest.prototype, "engineModel", void 0);
     __decorate([
-        Metadata({ data: "json, name=EngineVersion" }),
+        SpeakeasyMetadata({ data: "json, name=EngineVersion" }),
         __metadata("design:type", String)
     ], CreateServerRequest.prototype, "engineVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=InstanceProfileArn" }),
+        SpeakeasyMetadata({ data: "json, name=InstanceProfileArn" }),
         __metadata("design:type", String)
     ], CreateServerRequest.prototype, "instanceProfileArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=InstanceType" }),
+        SpeakeasyMetadata({ data: "json, name=InstanceType" }),
         __metadata("design:type", String)
     ], CreateServerRequest.prototype, "instanceType", void 0);
     __decorate([
-        Metadata({ data: "json, name=KeyPair" }),
+        SpeakeasyMetadata({ data: "json, name=KeyPair" }),
         __metadata("design:type", String)
     ], CreateServerRequest.prototype, "keyPair", void 0);
     __decorate([
-        Metadata({ data: "json, name=PreferredBackupWindow" }),
+        SpeakeasyMetadata({ data: "json, name=PreferredBackupWindow" }),
         __metadata("design:type", String)
     ], CreateServerRequest.prototype, "preferredBackupWindow", void 0);
     __decorate([
-        Metadata({ data: "json, name=PreferredMaintenanceWindow" }),
+        SpeakeasyMetadata({ data: "json, name=PreferredMaintenanceWindow" }),
         __metadata("design:type", String)
     ], CreateServerRequest.prototype, "preferredMaintenanceWindow", void 0);
     __decorate([
-        Metadata({ data: "json, name=SecurityGroupIds" }),
+        SpeakeasyMetadata({ data: "json, name=SecurityGroupIds" }),
         __metadata("design:type", Array)
     ], CreateServerRequest.prototype, "securityGroupIds", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServerName" }),
+        SpeakeasyMetadata({ data: "json, name=ServerName" }),
         __metadata("design:type", String)
     ], CreateServerRequest.prototype, "serverName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServiceRoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=ServiceRoleArn" }),
         __metadata("design:type", String)
     ], CreateServerRequest.prototype, "serviceRoleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=SubnetIds" }),
+        SpeakeasyMetadata({ data: "json, name=SubnetIds" }),
         __metadata("design:type", Array)
     ], CreateServerRequest.prototype, "subnetIds", void 0);
     __decorate([
-        Metadata({ data: "json, name=Tags", elemType: shared.Tag }),
+        SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag }),
         __metadata("design:type", Array)
     ], CreateServerRequest.prototype, "tags", void 0);
     return CreateServerRequest;

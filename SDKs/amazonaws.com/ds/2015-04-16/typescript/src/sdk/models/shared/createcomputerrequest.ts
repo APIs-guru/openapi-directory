@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Attribute } from "./attribute";
+
 
 
 // CreateComputerRequest
@@ -8,18 +8,18 @@ import { Attribute } from "./attribute";
  * Contains the inputs for the <a>CreateComputer</a> operation.
 **/
 export class CreateComputerRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ComputerAttributes", elemType: shared.Attribute })
+  @SpeakeasyMetadata({ data: "json, name=ComputerAttributes", elemType: Attribute })
   computerAttributes?: Attribute[];
 
-  @Metadata({ data: "json, name=ComputerName" })
+  @SpeakeasyMetadata({ data: "json, name=ComputerName" })
   computerName: string;
 
-  @Metadata({ data: "json, name=DirectoryId" })
+  @SpeakeasyMetadata({ data: "json, name=DirectoryId" })
   directoryId: string;
 
-  @Metadata({ data: "json, name=OrganizationalUnitDistinguishedName" })
+  @SpeakeasyMetadata({ data: "json, name=OrganizationalUnitDistinguishedName" })
   organizationalUnitDistinguishedName?: string;
 
-  @Metadata({ data: "json, name=Password" })
+  @SpeakeasyMetadata({ data: "json, name=Password" })
   password: string;
 }

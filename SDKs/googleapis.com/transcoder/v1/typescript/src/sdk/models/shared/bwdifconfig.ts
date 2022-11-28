@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BwdifConfig
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Bob Weaver Deinterlacing Filter Configuration.
 **/
 export class BwdifConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deinterlaceAllFrames" })
+  @SpeakeasyMetadata({ data: "json, name=deinterlaceAllFrames" })
   deinterlaceAllFrames?: boolean;
 
-  @Metadata({ data: "json, name=mode" })
+  @SpeakeasyMetadata({ data: "json, name=mode" })
   mode?: string;
 
-  @Metadata({ data: "json, name=parity" })
+  @SpeakeasyMetadata({ data: "json, name=parity" })
   parity?: string;
 }

@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum NetworkingConfigConnectionTypeEnum {
-    ConnectionTypeUnspecified = "CONNECTION_TYPE_UNSPECIFIED"
-,    VpcPeering = "VPC_PEERING"
-,    PrivateServiceConnect = "PRIVATE_SERVICE_CONNECT"
+    ConnectionTypeUnspecified = "CONNECTION_TYPE_UNSPECIFIED",
+    VpcPeering = "VPC_PEERING",
+    PrivateServiceConnect = "PRIVATE_SERVICE_CONNECT"
 }
 
 
@@ -12,6 +13,6 @@ export enum NetworkingConfigConnectionTypeEnum {
  * Configuration options for networking connections in the Composer 2 environment.
 **/
 export class NetworkingConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=connectionType" })
+  @SpeakeasyMetadata({ data: "json, name=connectionType" })
   connectionType?: NetworkingConfigConnectionTypeEnum;
 }

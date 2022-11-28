@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import formatmessage
+from sdk import utils
+from . import *
 
 class StatusMessageRefersToEnum(str, Enum):
     UNSPECIFIED = "UNSPECIFIED"
@@ -17,7 +19,11 @@ class StatusMessageRefersToEnum(str, Enum):
 @dataclass_json
 @dataclass
 class StatusMessage:
-    description: Optional[formatmessage.FormatMessage] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    is_error: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'isError' }})
-    refers_to: Optional[StatusMessageRefersToEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'refersTo' }})
+    r"""StatusMessage
+    Represents a contextual status message. The message can indicate an error or informational status, and refer to specific parts of the containing object. For example, the `Breakpoint.status` field can indicate an error referring to the `BREAKPOINT_SOURCE_LOCATION` with the message `Location not found`.
+    """
+    
+    description: Optional[FormatMessage] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    is_error: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('isError') }})
+    refers_to: Optional[StatusMessageRefersToEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('refersTo') }})
     

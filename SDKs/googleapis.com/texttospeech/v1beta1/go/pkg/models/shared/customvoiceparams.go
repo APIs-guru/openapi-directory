@@ -8,6 +8,8 @@ const (
 	CustomVoiceParamsReportedUsageEnumOffline                  CustomVoiceParamsReportedUsageEnum = "OFFLINE"
 )
 
+// CustomVoiceParams
+// Description of the custom voice to be synthesized.
 type CustomVoiceParams struct {
 	Model         *string                             `json:"model,omitempty"`
 	ReportedUsage *CustomVoiceParamsReportedUsageEnum `json:"reportedUsage,omitempty"`

@@ -1,25 +1,25 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import histogramqueryresult
-from . import histogramresults
-from . import location
-from . import matchingjob
-from . import responsemetadata
-from . import spellingcorrection
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SearchJobsResponse:
-    broadened_query_jobs_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'broadenedQueryJobsCount' }})
-    estimated_total_size: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'estimatedTotalSize' }})
-    histogram_query_results: Optional[List[histogramqueryresult.HistogramQueryResult]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'histogramQueryResults' }})
-    histogram_results: Optional[histogramresults.HistogramResults] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'histogramResults' }})
-    location_filters: Optional[List[location.Location]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'locationFilters' }})
-    matching_jobs: Optional[List[matchingjob.MatchingJob]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'matchingJobs' }})
-    metadata: Optional[responsemetadata.ResponseMetadata] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadata' }})
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextPageToken' }})
-    spell_correction: Optional[spellingcorrection.SpellingCorrection] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'spellCorrection' }})
-    total_size: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'totalSize' }})
+    r"""SearchJobsResponse
+    Output only. Response for SearchJob method.
+    """
+    
+    broadened_query_jobs_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('broadenedQueryJobsCount') }})
+    estimated_total_size: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('estimatedTotalSize') }})
+    histogram_query_results: Optional[List[HistogramQueryResult]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('histogramQueryResults') }})
+    histogram_results: Optional[HistogramResults] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('histogramResults') }})
+    location_filters: Optional[List[Location]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('locationFilters') }})
+    matching_jobs: Optional[List[MatchingJob]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('matchingJobs') }})
+    metadata: Optional[ResponseMetadata] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('metadata') }})
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextPageToken') }})
+    spell_correction: Optional[SpellingCorrection] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('spellCorrection') }})
+    total_size: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('totalSize') }})
     

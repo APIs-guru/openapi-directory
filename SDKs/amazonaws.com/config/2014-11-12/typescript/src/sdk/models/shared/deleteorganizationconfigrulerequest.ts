@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteOrganizationConfigRuleRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=OrganizationConfigRuleName" })
+  @SpeakeasyMetadata({ data: "json, name=OrganizationConfigRuleName" })
   organizationConfigRuleName: string;
 }

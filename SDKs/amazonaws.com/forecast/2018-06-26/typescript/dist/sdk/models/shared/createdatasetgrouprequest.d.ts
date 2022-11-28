@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DomainEnum } from "./domainenum";
 import { Tag } from "./tag";
 export declare class CreateDatasetGroupRequest extends SpeakeasyBase {

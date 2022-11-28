@@ -1,5 +1,7 @@
 package shared
 
+// NotifyConfigurationType
+// The notify configuration type.
 type NotifyConfigurationType struct {
 	BlockEmail    *NotifyEmailType `json:"BlockEmail,omitempty"`
 	From          *string          `json:"From,omitempty"`

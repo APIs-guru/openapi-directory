@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DomainConfiguration } from "./domainconfiguration";
 import { DomainInfo } from "./domaininfo";
+
 
 
 // DomainDetail
@@ -8,9 +9,9 @@ import { DomainInfo } from "./domaininfo";
  * Contains details of a domain.
 **/
 export class DomainDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=configuration" })
+  @SpeakeasyMetadata({ data: "json, name=configuration" })
   configuration: DomainConfiguration;
 
-  @Metadata({ data: "json, name=domainInfo" })
+  @SpeakeasyMetadata({ data: "json, name=domainInfo" })
   domainInfo: DomainInfo;
 }

@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import usercompact
-from . import workspacecompact
+from sdk import utils
+from . import *
 
 class TagResponseColorEnum(str, Enum):
     DARK_PINK = "dark-pink"
@@ -27,12 +28,20 @@ class TagResponseColorEnum(str, Enum):
 
 @dataclass_json
 @dataclass
+class TagResponseInput:
+    color: Optional[TagResponseColorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('color') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    workspace: Optional[WorkspaceCompactInput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('workspace') }})
+    
+
+@dataclass_json
+@dataclass
 class TagResponse:
-    color: Optional[TagResponseColorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'color' }})
-    followers: Optional[List[usercompact.UserCompact]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'followers' }})
-    gid: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gid' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    permalink_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'permalink_url' }})
-    resource_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resource_type' }})
-    workspace: Optional[workspacecompact.WorkspaceCompact] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'workspace' }})
+    color: Optional[TagResponseColorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('color') }})
+    followers: Optional[List[UserCompact]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('followers') }})
+    gid: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('gid') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    permalink_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('permalink_url') }})
+    resource_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resource_type') }})
+    workspace: Optional[WorkspaceCompact] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('workspace') }})
     

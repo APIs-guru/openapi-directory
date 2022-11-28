@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleChromePolicyVersionsV1RemoveNetworkRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request object for removing a network
 **/
 export class GoogleChromePolicyVersionsV1RemoveNetworkRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=networkId" })
+  @SpeakeasyMetadata({ data: "json, name=networkId" })
   networkId?: string;
 
-  @Metadata({ data: "json, name=targetResource" })
+  @SpeakeasyMetadata({ data: "json, name=targetResource" })
   targetResource?: string;
 }

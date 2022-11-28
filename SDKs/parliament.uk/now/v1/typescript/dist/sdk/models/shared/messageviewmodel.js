@@ -22,8 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ScrollingMessageViewModel } from "./scrollingmessageviewmodel";
+import { SlideViewModel } from "./slideviewmodel";
 export var MessageViewModelAnnunciatorTypeEnum;
 (function (MessageViewModelAnnunciatorTypeEnum) {
     MessageViewModelAnnunciatorTypeEnum["CommonsMain"] = "CommonsMain";
@@ -36,35 +37,35 @@ var MessageViewModel = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=annunciatorType" }),
+        SpeakeasyMetadata({ data: "json, name=annunciatorType" }),
         __metadata("design:type", String)
     ], MessageViewModel.prototype, "annunciatorType", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", Number)
     ], MessageViewModel.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=isSecurityOverride" }),
+        SpeakeasyMetadata({ data: "json, name=isSecurityOverride" }),
         __metadata("design:type", Boolean)
     ], MessageViewModel.prototype, "isSecurityOverride", void 0);
     __decorate([
-        Metadata({ data: "json, name=publishTime" }),
+        SpeakeasyMetadata({ data: "json, name=publishTime" }),
         __metadata("design:type", Date)
     ], MessageViewModel.prototype, "publishTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=scrollingMessages", elemType: shared.ScrollingMessageViewModel }),
+        SpeakeasyMetadata({ data: "json, name=scrollingMessages", elemType: ScrollingMessageViewModel }),
         __metadata("design:type", Array)
     ], MessageViewModel.prototype, "scrollingMessages", void 0);
     __decorate([
-        Metadata({ data: "json, name=showCommonsBell" }),
+        SpeakeasyMetadata({ data: "json, name=showCommonsBell" }),
         __metadata("design:type", Boolean)
     ], MessageViewModel.prototype, "showCommonsBell", void 0);
     __decorate([
-        Metadata({ data: "json, name=showLordsBell" }),
+        SpeakeasyMetadata({ data: "json, name=showLordsBell" }),
         __metadata("design:type", Boolean)
     ], MessageViewModel.prototype, "showLordsBell", void 0);
     __decorate([
-        Metadata({ data: "json, name=slides", elemType: shared.SlideViewModel }),
+        SpeakeasyMetadata({ data: "json, name=slides", elemType: SlideViewModel }),
         __metadata("design:type", Array)
     ], MessageViewModel.prototype, "slides", void 0);
     return MessageViewModel;

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetDeleteVpcEndpointServiceConfigurationsActionEnum(str, Enum):
     DELETE_VPC_ENDPOINT_SERVICE_CONFIGURATIONS = "DeleteVpcEndpointServiceConfigurations"
@@ -10,10 +14,10 @@ class GetDeleteVpcEndpointServiceConfigurationsVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteVpcEndpointServiceConfigurationsQueryParams:
-    action: GetDeleteVpcEndpointServiceConfigurationsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDeleteVpcEndpointServiceConfigurationsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    service_id: List[str] = field(metadata={'query_param': { 'field_name': 'ServiceId', 'style': 'form', 'explode': True }})
+    version: GetDeleteVpcEndpointServiceConfigurationsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    service_id: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'ServiceId', 'style': 'form', 'explode': True }})
-    version: GetDeleteVpcEndpointServiceConfigurationsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetDeleteVpcEndpointServiceConfigurationsHeaders:
 
 @dataclass
 class GetDeleteVpcEndpointServiceConfigurationsRequest:
-    query_params: GetDeleteVpcEndpointServiceConfigurationsQueryParams = field(default=None)
-    headers: GetDeleteVpcEndpointServiceConfigurationsHeaders = field(default=None)
+    headers: GetDeleteVpcEndpointServiceConfigurationsHeaders = field()
+    query_params: GetDeleteVpcEndpointServiceConfigurationsQueryParams = field()
     
 
 @dataclass
 class GetDeleteVpcEndpointServiceConfigurationsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

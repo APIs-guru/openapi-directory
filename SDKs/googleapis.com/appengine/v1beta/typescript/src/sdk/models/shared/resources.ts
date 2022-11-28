@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Volume } from "./volume";
+
 
 
 // Resources
@@ -8,18 +8,18 @@ import { Volume } from "./volume";
  * Machine resources for a version.
 **/
 export class Resources extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cpu" })
+  @SpeakeasyMetadata({ data: "json, name=cpu" })
   cpu?: number;
 
-  @Metadata({ data: "json, name=diskGb" })
+  @SpeakeasyMetadata({ data: "json, name=diskGb" })
   diskGb?: number;
 
-  @Metadata({ data: "json, name=kmsKeyReference" })
+  @SpeakeasyMetadata({ data: "json, name=kmsKeyReference" })
   kmsKeyReference?: string;
 
-  @Metadata({ data: "json, name=memoryGb" })
+  @SpeakeasyMetadata({ data: "json, name=memoryGb" })
   memoryGb?: number;
 
-  @Metadata({ data: "json, name=volumes", elemType: shared.Volume })
+  @SpeakeasyMetadata({ data: "json, name=volumes", elemType: Volume })
   volumes?: Volume[];
 }

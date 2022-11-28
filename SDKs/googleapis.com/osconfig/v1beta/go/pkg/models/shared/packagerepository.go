@@ -1,5 +1,7 @@
 package shared
 
+// PackageRepository
+// A package repository.
 type PackageRepository struct {
 	Apt    *AptRepository    `json:"apt,omitempty"`
 	Goo    *GooRepository    `json:"goo,omitempty"`

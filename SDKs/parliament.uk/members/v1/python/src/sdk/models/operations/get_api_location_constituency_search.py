@@ -12,13 +12,13 @@ class GetAPILocationConstituencySearchQueryParams:
 
 @dataclass
 class GetAPILocationConstituencySearchRequest:
-    query_params: GetAPILocationConstituencySearchQueryParams = field(default=None)
+    query_params: GetAPILocationConstituencySearchQueryParams = field()
     
 
 @dataclass
 class GetAPILocationConstituencySearchResponse:
-    body: bytes = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     constituency_members_service_search_result: Optional[shared.ConstituencyMembersServiceSearchResult] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

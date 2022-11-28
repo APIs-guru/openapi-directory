@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ApnsFcmOptions } from "./apnsfcmoptions";
 /**
  * [Apple Push Notification Service](https://goo.gl/MXRTPa) specific options.

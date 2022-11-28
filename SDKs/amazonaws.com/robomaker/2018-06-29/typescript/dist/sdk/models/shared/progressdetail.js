@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RobotDeploymentStepEnum } from "./robotdeploymentstepenum";
 // ProgressDetail
 /**
@@ -34,19 +34,19 @@ var ProgressDetail = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=currentProgress" }),
+        SpeakeasyMetadata({ data: "json, name=currentProgress" }),
         __metadata("design:type", String)
     ], ProgressDetail.prototype, "currentProgress", void 0);
     __decorate([
-        Metadata({ data: "json, name=estimatedTimeRemainingSeconds" }),
+        SpeakeasyMetadata({ data: "json, name=estimatedTimeRemainingSeconds" }),
         __metadata("design:type", Number)
     ], ProgressDetail.prototype, "estimatedTimeRemainingSeconds", void 0);
     __decorate([
-        Metadata({ data: "json, name=percentDone" }),
+        SpeakeasyMetadata({ data: "json, name=percentDone" }),
         __metadata("design:type", Number)
     ], ProgressDetail.prototype, "percentDone", void 0);
     __decorate([
-        Metadata({ data: "json, name=targetResource" }),
+        SpeakeasyMetadata({ data: "json, name=targetResource" }),
         __metadata("design:type", String)
     ], ProgressDetail.prototype, "targetResource", void 0);
     return ProgressDetail;

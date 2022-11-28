@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateCustomDataIdentifierResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=customDataIdentifierId" })
+  @SpeakeasyMetadata({ data: "json, name=customDataIdentifierId" })
   customDataIdentifierId?: string;
 }

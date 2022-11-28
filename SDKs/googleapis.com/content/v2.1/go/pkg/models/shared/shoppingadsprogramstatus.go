@@ -9,6 +9,8 @@ const (
 	ShoppingAdsProgramStatusGlobalStateEnumEnabled                 ShoppingAdsProgramStatusGlobalStateEnum = "ENABLED"
 )
 
+// ShoppingAdsProgramStatus
+// Response message for GetShoppingAdsProgramStatus.
 type ShoppingAdsProgramStatus struct {
 	GlobalState    *ShoppingAdsProgramStatusGlobalStateEnum `json:"globalState,omitempty"`
 	RegionStatuses []ShoppingAdsProgramStatusRegionStatus   `json:"regionStatuses,omitempty"`

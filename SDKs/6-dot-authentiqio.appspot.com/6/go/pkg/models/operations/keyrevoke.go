@@ -8,13 +8,13 @@ type KeyRevokeQueryParams struct {
 	Secret string `queryParam:"style=form,explode=true,name=secret"`
 }
 
+type KeyRevoke200ApplicationJSON struct {
+	Status *string `json:"status,omitempty"`
+}
+
 type KeyRevokeRequest struct {
 	PathParams  KeyRevokePathParams
 	QueryParams KeyRevokeQueryParams
-}
-
-type KeyRevoke200ApplicationJSON struct {
-	Status *string `json:"status,omitempty"`
 }
 
 type KeyRevokeResponse struct {

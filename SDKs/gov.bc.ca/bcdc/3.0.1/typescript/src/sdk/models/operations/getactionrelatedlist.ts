@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetActionRelatedListQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=dataset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dataset" })
   dataset?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=featured" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=featured" })
   featured?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=id" })
   id?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=type_filter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=type_filter" })
   typeFilter?: string;
 }
 
 
 export class GetActionRelatedListRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetActionRelatedListQueryParams;
 }
 
 
 export class GetActionRelatedListResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

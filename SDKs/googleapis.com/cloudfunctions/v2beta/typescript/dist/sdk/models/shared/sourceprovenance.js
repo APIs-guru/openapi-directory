@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RepoSource } from "./reposource";
 import { StorageSource } from "./storagesource";
 // SourceProvenance
@@ -35,11 +35,11 @@ var SourceProvenance = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=resolvedRepoSource" }),
+        SpeakeasyMetadata({ data: "json, name=resolvedRepoSource" }),
         __metadata("design:type", RepoSource)
     ], SourceProvenance.prototype, "resolvedRepoSource", void 0);
     __decorate([
-        Metadata({ data: "json, name=resolvedStorageSource" }),
+        SpeakeasyMetadata({ data: "json, name=resolvedStorageSource" }),
         __metadata("design:type", StorageSource)
     ], SourceProvenance.prototype, "resolvedStorageSource", void 0);
     return SourceProvenance;

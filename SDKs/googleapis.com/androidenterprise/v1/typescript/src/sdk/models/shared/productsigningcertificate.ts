@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ProductSigningCertificate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=certificateHashSha1" })
+  @SpeakeasyMetadata({ data: "json, name=certificateHashSha1" })
   certificateHashSha1?: string;
 
-  @Metadata({ data: "json, name=certificateHashSha256" })
+  @SpeakeasyMetadata({ data: "json, name=certificateHashSha256" })
   certificateHashSha256?: string;
 }

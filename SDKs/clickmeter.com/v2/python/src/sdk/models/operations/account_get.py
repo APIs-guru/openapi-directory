@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class AccountGetResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_core_dto_accounting_user: Optional[shared.APICoreDtoAccountingUser] = field(default=None)
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    body: Optional[bytes] = field(default=None)
     

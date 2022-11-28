@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PublicKey extends SpeakeasyBase {
-  @Metadata({ data: "json, name=algorithm" })
+  @SpeakeasyMetadata({ data: "json, name=algorithm" })
   algorithm?: string;
 
-  @Metadata({ data: "json, name=bits" })
+  @SpeakeasyMetadata({ data: "json, name=bits" })
   bits?: number;
 }

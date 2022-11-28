@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // S3Destination
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies an S3 bucket to store data classification results in, and the encryption settings to use when storing results in that bucket.
 **/
 export class S3Destination extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bucketName" })
+  @SpeakeasyMetadata({ data: "json, name=bucketName" })
   bucketName: string;
 
-  @Metadata({ data: "json, name=keyPrefix" })
+  @SpeakeasyMetadata({ data: "json, name=keyPrefix" })
   keyPrefix?: string;
 
-  @Metadata({ data: "json, name=kmsKeyArn" })
+  @SpeakeasyMetadata({ data: "json, name=kmsKeyArn" })
   kmsKeyArn: string;
 }

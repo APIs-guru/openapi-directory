@@ -1,6 +1,7 @@
 
 
+
 export enum EdgePresetDeploymentStatusEnum {
-    Completed = "COMPLETED"
-,    Failed = "FAILED"
+    Completed = "COMPLETED",
+    Failed = "FAILED"
 }

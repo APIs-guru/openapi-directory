@@ -1,39 +1,40 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateBotLocalePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=botId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=botId" })
   botId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=botVersion" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=botVersion" })
   botVersion: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=localeId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=localeId" })
   localeId: string;
 }
 
 
 export class UpdateBotLocaleHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -43,60 +44,60 @@ export class UpdateBotLocaleHeaders extends SpeakeasyBase {
  * Defines settings for using an Amazon Polly voice to communicate with a user.
 **/
 export class UpdateBotLocaleRequestBodyVoiceSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=voiceId" })
+  @SpeakeasyMetadata({ data: "json, name=voiceId" })
   voiceId?: string;
 }
 
 
 export class UpdateBotLocaleRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=nluIntentConfidenceThreshold" })
+  @SpeakeasyMetadata({ data: "json, name=nluIntentConfidenceThreshold" })
   nluIntentConfidenceThreshold: number;
 
-  @Metadata({ data: "json, name=voiceSettings" })
+  @SpeakeasyMetadata({ data: "json, name=voiceSettings" })
   voiceSettings?: UpdateBotLocaleRequestBodyVoiceSettings;
 }
 
 
 export class UpdateBotLocaleRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateBotLocalePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdateBotLocaleHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdateBotLocaleRequestBody;
 }
 
 
 export class UpdateBotLocaleResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   conflictException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   preconditionFailedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceQuotaExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateBotLocaleResponse?: shared.UpdateBotLocaleResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationException?: any;
 }

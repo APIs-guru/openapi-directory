@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class WebhookCreateEventsEnum(str, Enum):
     CALL = "CALL"
@@ -17,9 +19,9 @@ class WebhookCreateSigningAlgoEnum(str, Enum):
 @dataclass_json
 @dataclass
 class WebhookCreate:
-    events: Optional[List[WebhookCreateEventsEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'events' }})
-    metadata_policy: Optional[WebhookCreateMetadataPolicyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadataPolicy' }})
-    signing_algo: Optional[WebhookCreateSigningAlgoEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'signingAlgo' }})
-    signing_key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'signingKey' }})
-    url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
+    events: Optional[List[WebhookCreateEventsEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('events') }})
+    metadata_policy: Optional[WebhookCreateMetadataPolicyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('metadataPolicy') }})
+    signing_algo: Optional[WebhookCreateSigningAlgoEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('signingAlgo') }})
+    signing_key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('signingKey') }})
+    url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('url') }})
     

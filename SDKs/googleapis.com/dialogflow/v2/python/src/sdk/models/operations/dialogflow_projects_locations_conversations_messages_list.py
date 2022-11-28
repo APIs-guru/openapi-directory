@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DialogflowProjectsLocationsConversationsMessagesListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,14 +29,14 @@ class DialogflowProjectsLocationsConversationsMessagesListQueryParams:
 
 @dataclass
 class DialogflowProjectsLocationsConversationsMessagesListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DialogflowProjectsLocationsConversationsMessagesListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -46,14 +47,14 @@ class DialogflowProjectsLocationsConversationsMessagesListSecurity:
 
 @dataclass
 class DialogflowProjectsLocationsConversationsMessagesListRequest:
-    path_params: DialogflowProjectsLocationsConversationsMessagesListPathParams = field(default=None)
-    query_params: DialogflowProjectsLocationsConversationsMessagesListQueryParams = field(default=None)
-    security: DialogflowProjectsLocationsConversationsMessagesListSecurity = field(default=None)
+    path_params: DialogflowProjectsLocationsConversationsMessagesListPathParams = field()
+    query_params: DialogflowProjectsLocationsConversationsMessagesListQueryParams = field()
+    security: DialogflowProjectsLocationsConversationsMessagesListSecurity = field()
     
 
 @dataclass
 class DialogflowProjectsLocationsConversationsMessagesListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_dialogflow_v2_list_messages_response: Optional[shared.GoogleCloudDialogflowV2ListMessagesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

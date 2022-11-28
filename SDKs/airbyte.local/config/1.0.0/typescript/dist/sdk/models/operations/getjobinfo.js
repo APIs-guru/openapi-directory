@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetJobInfoRequest = /** @class */ (function (_super) {
     __extends(GetJobInfoRequest, _super);
@@ -30,7 +30,7 @@ var GetJobInfoRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.JobIdRequestBody)
     ], GetJobInfoRequest.prototype, "request", void 0);
     return GetJobInfoRequest;
@@ -42,23 +42,23 @@ var GetJobInfoResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetJobInfoResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.InvalidInputExceptionInfo)
     ], GetJobInfoResponse.prototype, "invalidInputExceptionInfo", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.JobInfoRead)
     ], GetJobInfoResponse.prototype, "jobInfoRead", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.NotFoundKnownExceptionInfo)
     ], GetJobInfoResponse.prototype, "notFoundKnownExceptionInfo", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetJobInfoResponse.prototype, "statusCode", void 0);
     return GetJobInfoResponse;

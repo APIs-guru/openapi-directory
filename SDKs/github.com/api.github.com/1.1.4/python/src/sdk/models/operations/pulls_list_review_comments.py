@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class PullsListReviewCommentsPathParams:
-    owner: str = field(default=None, metadata={'path_param': { 'field_name': 'owner', 'style': 'simple', 'explode': False }})
-    pull_number: int = field(default=None, metadata={'path_param': { 'field_name': 'pull_number', 'style': 'simple', 'explode': False }})
-    repo: str = field(default=None, metadata={'path_param': { 'field_name': 'repo', 'style': 'simple', 'explode': False }})
+    owner: str = field(metadata={'path_param': { 'field_name': 'owner', 'style': 'simple', 'explode': False }})
+    pull_number: int = field(metadata={'path_param': { 'field_name': 'pull_number', 'style': 'simple', 'explode': False }})
+    repo: str = field(metadata={'path_param': { 'field_name': 'repo', 'style': 'simple', 'explode': False }})
     
 class PullsListReviewCommentsDirectionEnum(str, Enum):
     ASC = "asc"
@@ -25,14 +26,14 @@ class PullsListReviewCommentsQueryParams:
 
 @dataclass
 class PullsListReviewCommentsRequest:
-    path_params: PullsListReviewCommentsPathParams = field(default=None)
-    query_params: PullsListReviewCommentsQueryParams = field(default=None)
+    path_params: PullsListReviewCommentsPathParams = field()
+    query_params: PullsListReviewCommentsQueryParams = field()
     
 
 @dataclass
 class PullsListReviewCommentsResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     pull_request_review_comments: Optional[List[shared.PullRequestReviewComment]] = field(default=None)
     

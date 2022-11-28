@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SendEmailResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A unique message ID that you receive when an email is accepted for sending.
 **/
 export class SendEmailResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MessageId" })
+  @SpeakeasyMetadata({ data: "json, name=MessageId" })
   messageId?: string;
 }

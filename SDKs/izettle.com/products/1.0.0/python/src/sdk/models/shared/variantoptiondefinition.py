@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import variantoptionproperties
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class VariantOptionDefinition:
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    properties: List[variantoptionproperties.VariantOptionProperties] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'properties' }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    properties: List[VariantOptionProperties] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('properties') }})
     

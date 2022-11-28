@@ -1,6 +1,7 @@
 
 
+
 export enum SamplingStrategyNameEnum {
-    PartialScan = "PartialScan"
-,    FixedRate = "FixedRate"
+    PartialScan = "PartialScan",
+    FixedRate = "FixedRate"
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MatchedDeveloperMetadata } from "./matcheddevelopermetadata";
+
 
 
 // SearchDeveloperMetadataResponse
@@ -8,6 +8,6 @@ import { MatchedDeveloperMetadata } from "./matcheddevelopermetadata";
  * A reply to a developer metadata search request.
 **/
 export class SearchDeveloperMetadataResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=matchedDeveloperMetadata", elemType: shared.MatchedDeveloperMetadata })
+  @SpeakeasyMetadata({ data: "json, name=matchedDeveloperMetadata", elemType: MatchedDeveloperMetadata })
   matchedDeveloperMetadata?: MatchedDeveloperMetadata[];
 }

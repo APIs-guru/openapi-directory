@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class MaterializedViewDefinition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enableRefresh" })
+  @SpeakeasyMetadata({ data: "json, name=enableRefresh" })
   enableRefresh?: boolean;
 
-  @Metadata({ data: "json, name=lastRefreshTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastRefreshTime" })
   lastRefreshTime?: string;
 
-  @Metadata({ data: "json, name=maxStaleness" })
+  @SpeakeasyMetadata({ data: "json, name=maxStaleness" })
   maxStaleness?: string;
 
-  @Metadata({ data: "json, name=query" })
+  @SpeakeasyMetadata({ data: "json, name=query" })
   query?: string;
 
-  @Metadata({ data: "json, name=refreshIntervalMs" })
+  @SpeakeasyMetadata({ data: "json, name=refreshIntervalMs" })
   refreshIntervalMs?: string;
 }

@@ -1,0 +1,153 @@
+# openapi
+
+<!-- Start SDK Installation -->
+## SDK Installation
+
+### NPM
+
+```bash
+npm add openapi
+```
+
+### Yarn
+
+```bash
+yarn add openapi
+```
+<!-- End SDK Installation -->
+
+<!-- Start SDK Example Usage -->
+## SDK Example Usage
+
+```typescript
+import { SDK, WithSecurity} from "openapi";
+import { RemotebuildexecutionProjectsInstancesCreateRequest, RemotebuildexecutionProjectsInstancesCreateResponse } from "openapi/src/sdk/models/operations";
+import { AxiosError } from "axios";
+
+
+const sdk = new SDK();
+    
+const req: RemotebuildexecutionProjectsInstancesCreateRequest = {
+  security: {
+    oauth2: {
+      authorization: "Bearer YOUR_ACCESS_TOKEN_HERE",
+    }
+    oauth2c: {
+      authorization: "Bearer YOUR_ACCESS_TOKEN_HERE",
+    },
+  },
+  pathParams: {
+    parent: "totam",
+  },
+  queryParams: {
+    dollarXgafv: "2",
+    accessToken: "ea",
+    alt: "media",
+    callback: "rerum",
+    fields: "consequatur",
+    key: "qui",
+    oauthToken: "aut",
+    prettyPrint: true,
+    quotaUser: "exercitationem",
+    uploadType: "aut",
+    uploadProtocol: "doloremque",
+  },
+  request: {
+    instance: {
+      featurePolicy: {
+        containerImageSources: {
+          allowedValues: [
+            "totam",
+          ],
+          policy: "ALLOWED",
+        },
+        dockerAddCapabilities: {
+          allowedValues: [
+            "vel",
+            "aspernatur",
+          ],
+          policy: "POLICY_UNSPECIFIED",
+        },
+        dockerChrootPath: {
+          allowedValues: [
+            "porro",
+            "rerum",
+          ],
+          policy: "FORBIDDEN",
+        },
+        dockerNetwork: {
+          allowedValues: [
+            "hic",
+          ],
+          policy: "ALLOWED",
+        },
+        dockerPrivileged: {
+          allowedValues: [
+            "quia",
+            "saepe",
+          ],
+          policy: "RESTRICTED",
+        },
+        dockerRunAsContainerProvidedUser: {
+          allowedValues: [
+            "voluptatem",
+          ],
+          policy: "ALLOWED",
+        },
+        dockerRunAsRoot: {
+          allowedValues: [
+            "reiciendis",
+          ],
+          policy: "ALLOWED",
+        },
+        dockerRuntime: {
+          allowedValues: [
+            "natus",
+            "earum",
+            "et",
+          ],
+          policy: "POLICY_UNSPECIFIED",
+        },
+        dockerSiblingContainers: {
+          allowedValues: [
+            "consequatur",
+            "ut",
+          ],
+          policy: "ALLOWED",
+        },
+        linuxIsolation: "GVISOR",
+        vmVerification: "VM_VERIFICATION_UNSPECIFIED",
+      },
+      location: "numquam",
+      loggingEnabled: true,
+      name: "vel",
+      state: "STATE_UNSPECIFIED",
+    },
+    instanceId: "voluptatem",
+    parent: "nostrum",
+  },
+};
+
+sdk.projects.remotebuildexecutionProjectsInstancesCreate(req).then((res: RemotebuildexecutionProjectsInstancesCreateResponse | AxiosError) => {
+   // handle response
+});
+```
+<!-- End SDK Example Usage -->
+
+<!-- Start SDK Available Operations -->
+## SDK Available Operations
+
+### projects
+
+* `remotebuildexecutionProjectsInstancesCreate` - Creates a new instance in the specified region. Returns a long running operation which contains an instance on completion. While the long running operation is in progress, any call to `GetInstance` returns an instance in state `CREATING`.
+* `remotebuildexecutionProjectsInstancesList` - Lists instances in a project.
+* `remotebuildexecutionProjectsInstancesTestNotify` - Sends a test notification to the specified instance. Returns a `google.protobuf.Empty` on success.
+* `remotebuildexecutionProjectsInstancesWorkerpoolsCreate` - Creates a new worker pool with a specified size and configuration. Returns a long running operation which contains a worker pool on completion. While the long running operation is in progress, any call to `GetWorkerPool` returns a worker pool in state `CREATING`.
+* `remotebuildexecutionProjectsInstancesWorkerpoolsDelete` - Deletes the specified worker pool. Returns a long running operation, which contains a `google.protobuf.Empty` response on completion. While the long running operation is in progress, any call to `GetWorkerPool` returns a worker pool in state `DELETING`.
+* `remotebuildexecutionProjectsInstancesWorkerpoolsList` - Lists worker pools in an instance.
+* `remotebuildexecutionProjectsInstancesWorkerpoolsPatch` - Updates an existing worker pool with a specified size and/or configuration. Returns a long running operation, which contains a worker pool on completion. While the long running operation is in progress, any call to `GetWorkerPool` returns a worker pool in state `UPDATING`.
+* `remotebuildexecutionProjectsOperationsGet` - Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
+
+<!-- End SDK Available Operations -->
+
+### SDK Generated by [Speakeasy](https://docs.speakeasyapi.dev/docs/using-speakeasy/client-sdks)

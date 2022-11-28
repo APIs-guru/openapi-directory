@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ThrottlingSettingsPeriodEnum {
-    Secondly = "SECONDLY"
-,    RollingMinute = "ROLLING_MINUTE"
+    Secondly = "SECONDLY",
+    RollingMinute = "ROLLING_MINUTE"
 }
 
 
@@ -11,9 +12,9 @@ export enum ThrottlingSettingsPeriodEnum {
  * Configuration details for webhook throttling.
 **/
 export class ThrottlingSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=maxConcurrentRequests" })
+  @SpeakeasyMetadata({ data: "json, name=maxConcurrentRequests" })
   maxConcurrentRequests: number;
 
-  @Metadata({ data: "json, name=period" })
+  @SpeakeasyMetadata({ data: "json, name=period" })
   period: ThrottlingSettingsPeriodEnum;
 }

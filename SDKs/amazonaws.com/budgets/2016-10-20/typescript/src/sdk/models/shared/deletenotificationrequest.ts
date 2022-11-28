@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Notification } from "./notification";
+
 
 
 // DeleteNotificationRequest
@@ -7,12 +8,12 @@ import { Notification } from "./notification";
  *  Request of DeleteNotification 
 **/
 export class DeleteNotificationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccountId" })
+  @SpeakeasyMetadata({ data: "json, name=AccountId" })
   accountId: string;
 
-  @Metadata({ data: "json, name=BudgetName" })
+  @SpeakeasyMetadata({ data: "json, name=BudgetName" })
   budgetName: string;
 
-  @Metadata({ data: "json, name=Notification" })
+  @SpeakeasyMetadata({ data: "json, name=Notification" })
   notification: Notification;
 }

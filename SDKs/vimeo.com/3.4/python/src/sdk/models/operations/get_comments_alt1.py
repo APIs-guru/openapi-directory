@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetCommentsAlt1PathParams:
-    channel_id: float = field(default=None, metadata={'path_param': { 'field_name': 'channel_id', 'style': 'simple', 'explode': False }})
-    video_id: float = field(default=None, metadata={'path_param': { 'field_name': 'video_id', 'style': 'simple', 'explode': False }})
+    channel_id: float = field(metadata={'path_param': { 'field_name': 'channel_id', 'style': 'simple', 'explode': False }})
+    video_id: float = field(metadata={'path_param': { 'field_name': 'video_id', 'style': 'simple', 'explode': False }})
     
 class GetCommentsAlt1DirectionEnum(str, Enum):
     ASC = "asc"
@@ -22,13 +23,13 @@ class GetCommentsAlt1QueryParams:
 
 @dataclass
 class GetCommentsAlt1Request:
-    path_params: GetCommentsAlt1PathParams = field(default=None)
-    query_params: GetCommentsAlt1QueryParams = field(default=None)
+    path_params: GetCommentsAlt1PathParams = field()
+    query_params: GetCommentsAlt1QueryParams = field()
     
 
 @dataclass
 class GetCommentsAlt1Response:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     comments: Optional[List[shared.Comment]] = field(default=None)
     

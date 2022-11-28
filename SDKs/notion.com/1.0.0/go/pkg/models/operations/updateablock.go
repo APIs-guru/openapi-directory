@@ -21,11 +21,6 @@ type UpdateABlockRequestBody struct {
 	Paragraph *UpdateABlockRequestBodyParagraph `json:"paragraph,omitempty"`
 }
 
-type UpdateABlockRequest struct {
-	PathParams UpdateABlockPathParams
-	Request    *UpdateABlockRequestBody `request:"mediaType=application/json"`
-}
-
 type UpdateABlock200ApplicationJSONParagraphTextAnnotations struct {
 	Bold          *bool   `json:"bold,omitempty"`
 	Code          *bool   `json:"code,omitempty"`
@@ -60,6 +55,11 @@ type UpdateABlock200ApplicationJSON struct {
 	Object         *string                                  `json:"object,omitempty"`
 	Paragraph      *UpdateABlock200ApplicationJSONParagraph `json:"paragraph,omitempty"`
 	Type           *string                                  `json:"type,omitempty"`
+}
+
+type UpdateABlockRequest struct {
+	PathParams UpdateABlockPathParams
+	Request    *UpdateABlockRequestBody `request:"mediaType=application/json"`
 }
 
 type UpdateABlockResponse struct {

@@ -30,11 +30,6 @@ type VhtaxSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type VhtaxRequest struct {
-	Request  *VhtaxRequestBody `request:"mediaType=application/json"`
-	Security VhtaxSecurity
-}
-
 type Vhtax400ApplicationJSONErrorEnum string
 
 const (
@@ -164,6 +159,11 @@ const (
 type Vhtax504ApplicationJSON struct {
 	Error            *Vhtax504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Vhtax504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type VhtaxRequest struct {
+	Request  *VhtaxRequestBody `request:"mediaType=application/json"`
+	Security VhtaxSecurity
 }
 
 type VhtaxResponse struct {

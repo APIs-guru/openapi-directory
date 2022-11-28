@@ -4,8 +4,8 @@ from typing import Optional
 
 @dataclass
 class PostTruststorePkcs12RequestBodyTruststoreP12:
-    content: bytes = field(default=None, metadata={'multipart_form': { 'content': True }})
-    truststore_p12: str = field(default=None, metadata={'multipart_form': { 'field_name': 'truststore.p12' }})
+    content: bytes = field(metadata={'multipart_form': { 'content': True }})
+    truststore_p12: str = field(metadata={'multipart_form': { 'field_name': 'truststore.p12' }})
     
 
 @dataclass
@@ -20,7 +20,7 @@ class PostTruststorePkcs12Request:
 
 @dataclass
 class PostTruststorePkcs12Response:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     post_truststore_pkcs12_default_text_plain_string: Optional[str] = field(default=None)
     

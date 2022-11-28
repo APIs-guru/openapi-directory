@@ -22,109 +22,109 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-var GetSdkTypesQueryParams = /** @class */ (function (_super) {
-    __extends(GetSdkTypesQueryParams, _super);
-    function GetSdkTypesQueryParams() {
+var GetSDKTypesQueryParams = /** @class */ (function (_super) {
+    __extends(GetSDKTypesQueryParams, _super);
+    function GetSDKTypesQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", Number)
-    ], GetSdkTypesQueryParams.prototype, "limit", void 0);
+    ], GetSDKTypesQueryParams.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=position" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=position" }),
         __metadata("design:type", String)
-    ], GetSdkTypesQueryParams.prototype, "position", void 0);
-    return GetSdkTypesQueryParams;
+    ], GetSDKTypesQueryParams.prototype, "position", void 0);
+    return GetSDKTypesQueryParams;
 }(SpeakeasyBase));
-export { GetSdkTypesQueryParams };
-var GetSdkTypesHeaders = /** @class */ (function (_super) {
-    __extends(GetSdkTypesHeaders, _super);
-    function GetSdkTypesHeaders() {
+export { GetSDKTypesQueryParams };
+var GetSDKTypesHeaders = /** @class */ (function (_super) {
+    __extends(GetSDKTypesHeaders, _super);
+    function GetSDKTypesHeaders() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
-    ], GetSdkTypesHeaders.prototype, "xAmzAlgorithm", void 0);
+    ], GetSDKTypesHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
-    ], GetSdkTypesHeaders.prototype, "xAmzContentSha256", void 0);
+    ], GetSDKTypesHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
-    ], GetSdkTypesHeaders.prototype, "xAmzCredential", void 0);
+    ], GetSDKTypesHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
-    ], GetSdkTypesHeaders.prototype, "xAmzDate", void 0);
+    ], GetSDKTypesHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
-    ], GetSdkTypesHeaders.prototype, "xAmzSecurityToken", void 0);
+    ], GetSDKTypesHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
-    ], GetSdkTypesHeaders.prototype, "xAmzSignature", void 0);
+    ], GetSDKTypesHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
-    ], GetSdkTypesHeaders.prototype, "xAmzSignedHeaders", void 0);
-    return GetSdkTypesHeaders;
+    ], GetSDKTypesHeaders.prototype, "xAmzSignedHeaders", void 0);
+    return GetSDKTypesHeaders;
 }(SpeakeasyBase));
-export { GetSdkTypesHeaders };
-var GetSdkTypesRequest = /** @class */ (function (_super) {
-    __extends(GetSdkTypesRequest, _super);
-    function GetSdkTypesRequest() {
+export { GetSDKTypesHeaders };
+var GetSDKTypesRequest = /** @class */ (function (_super) {
+    __extends(GetSDKTypesRequest, _super);
+    function GetSDKTypesRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
-        __metadata("design:type", GetSdkTypesQueryParams)
-    ], GetSdkTypesRequest.prototype, "queryParams", void 0);
+        SpeakeasyMetadata(),
+        __metadata("design:type", GetSDKTypesQueryParams)
+    ], GetSDKTypesRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
-        __metadata("design:type", GetSdkTypesHeaders)
-    ], GetSdkTypesRequest.prototype, "headers", void 0);
-    return GetSdkTypesRequest;
+        SpeakeasyMetadata(),
+        __metadata("design:type", GetSDKTypesHeaders)
+    ], GetSDKTypesRequest.prototype, "headers", void 0);
+    return GetSDKTypesRequest;
 }(SpeakeasyBase));
-export { GetSdkTypesRequest };
-var GetSdkTypesResponse = /** @class */ (function (_super) {
-    __extends(GetSdkTypesResponse, _super);
-    function GetSdkTypesResponse() {
+export { GetSDKTypesRequest };
+var GetSDKTypesResponse = /** @class */ (function (_super) {
+    __extends(GetSDKTypesResponse, _super);
+    function GetSDKTypesResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
-    ], GetSdkTypesResponse.prototype, "badRequestException", void 0);
+    ], GetSDKTypesResponse.prototype, "badRequestException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
-    ], GetSdkTypesResponse.prototype, "contentType", void 0);
+    ], GetSDKTypesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
-    ], GetSdkTypesResponse.prototype, "notFoundException", void 0);
+    ], GetSDKTypesResponse.prototype, "notFoundException", void 0);
     __decorate([
-        Metadata(),
-        __metadata("design:type", shared.SdkTypes)
-    ], GetSdkTypesResponse.prototype, "sdkTypes", void 0);
+        SpeakeasyMetadata(),
+        __metadata("design:type", shared.SDKTypes)
+    ], GetSDKTypesResponse.prototype, "sdkTypes", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
-    ], GetSdkTypesResponse.prototype, "statusCode", void 0);
+    ], GetSDKTypesResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
-    ], GetSdkTypesResponse.prototype, "tooManyRequestsException", void 0);
+    ], GetSDKTypesResponse.prototype, "tooManyRequestsException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
-    ], GetSdkTypesResponse.prototype, "unauthorizedException", void 0);
-    return GetSdkTypesResponse;
+    ], GetSDKTypesResponse.prototype, "unauthorizedException", void 0);
+    return GetSDKTypesResponse;
 }(SpeakeasyBase));
-export { GetSdkTypesResponse };
+export { GetSDKTypesResponse };

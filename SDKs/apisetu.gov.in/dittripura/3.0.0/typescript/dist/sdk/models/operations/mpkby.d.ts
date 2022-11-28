@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class MpkbyRequestBodyCertificateParameters extends SpeakeasyBase {
     refNo: string;
@@ -16,10 +16,6 @@ export declare class MpkbyRequestBody extends SpeakeasyBase {
 export declare class MpkbySecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class MpkbyRequest extends SpeakeasyBase {
-    request?: MpkbyRequestBody;
-    security: MpkbySecurity;
 }
 export declare enum Mpkby400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -102,6 +98,10 @@ export declare enum Mpkby504ApplicationJsonErrorDescriptionEnum {
 export declare class Mpkby504ApplicationJson extends SpeakeasyBase {
     error?: Mpkby504ApplicationJsonErrorEnum;
     errorDescription?: Mpkby504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class MpkbyRequest extends SpeakeasyBase {
+    request?: MpkbyRequestBody;
+    security: MpkbySecurity;
 }
 export declare class MpkbyResponse extends SpeakeasyBase {
     contentType: string;

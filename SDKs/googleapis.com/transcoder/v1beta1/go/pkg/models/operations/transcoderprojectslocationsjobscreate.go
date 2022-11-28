@@ -30,7 +30,7 @@ type TranscoderProjectsLocationsJobsCreateSecurity struct {
 type TranscoderProjectsLocationsJobsCreateRequest struct {
 	PathParams  TranscoderProjectsLocationsJobsCreatePathParams
 	QueryParams TranscoderProjectsLocationsJobsCreateQueryParams
-	Request     *shared.Job `request:"mediaType=application/json"`
+	Request     *shared.JobInput `request:"mediaType=application/json"`
 	Security    TranscoderProjectsLocationsJobsCreateSecurity
 }
 

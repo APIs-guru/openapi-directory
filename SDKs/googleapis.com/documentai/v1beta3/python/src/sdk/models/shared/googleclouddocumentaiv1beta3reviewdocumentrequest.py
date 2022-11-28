@@ -1,9 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googleclouddocumentaiv1beta3document
-from . import googleclouddocumentaiv1beta3documentschema
-from . import googleclouddocumentaiv1beta3document
+from sdk import utils
+from . import *
 
 class GoogleCloudDocumentaiV1beta3ReviewDocumentRequestPriorityEnum(str, Enum):
     DEFAULT = "DEFAULT"
@@ -13,9 +13,13 @@ class GoogleCloudDocumentaiV1beta3ReviewDocumentRequestPriorityEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleCloudDocumentaiV1beta3ReviewDocumentRequest:
-    document: Optional[googleclouddocumentaiv1beta3document.GoogleCloudDocumentaiV1beta3Document] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'document' }})
-    document_schema: Optional[googleclouddocumentaiv1beta3documentschema.GoogleCloudDocumentaiV1beta3DocumentSchema] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'documentSchema' }})
-    enable_schema_validation: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enableSchemaValidation' }})
-    inline_document: Optional[googleclouddocumentaiv1beta3document.GoogleCloudDocumentaiV1beta3Document] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'inlineDocument' }})
-    priority: Optional[GoogleCloudDocumentaiV1beta3ReviewDocumentRequestPriorityEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'priority' }})
+    r"""GoogleCloudDocumentaiV1beta3ReviewDocumentRequest
+    Request message for review document method.
+    """
+    
+    document: Optional[GoogleCloudDocumentaiV1beta3Document] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('document') }})
+    document_schema: Optional[GoogleCloudDocumentaiV1beta3DocumentSchema] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('documentSchema') }})
+    enable_schema_validation: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('enableSchemaValidation') }})
+    inline_document: Optional[GoogleCloudDocumentaiV1beta3Document] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('inlineDocument') }})
+    priority: Optional[GoogleCloudDocumentaiV1beta3ReviewDocumentRequestPriorityEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('priority') }})
     

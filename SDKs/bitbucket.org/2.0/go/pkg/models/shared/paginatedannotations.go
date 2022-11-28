@@ -1,5 +1,7 @@
 package shared
 
+// PaginatedAnnotations
+// A paginated list of annotations.
 type PaginatedAnnotations struct {
 	Next     *string                  `json:"next,omitempty"`
 	Page     *int64                   `json:"page,omitempty"`

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ChartOptionsModeEnum {
-    ModeUnspecified = "MODE_UNSPECIFIED"
-,    Color = "COLOR"
-,    XRay = "X_RAY"
-,    Stats = "STATS"
+    ModeUnspecified = "MODE_UNSPECIFIED",
+    Color = "COLOR",
+    XRay = "X_RAY",
+    Stats = "STATS"
 }
 
 
@@ -13,6 +14,6 @@ export enum ChartOptionsModeEnum {
  * Options to control visual rendering of a chart.
 **/
 export class ChartOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=mode" })
+  @SpeakeasyMetadata({ data: "json, name=mode" })
   mode?: ChartOptionsModeEnum;
 }

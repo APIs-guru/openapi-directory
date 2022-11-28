@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudBillingBudgetsV1beta1AllUpdatesRule
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * AllUpdatesRule defines notifications that are sent based on budget spend and thresholds.
 **/
 export class GoogleCloudBillingBudgetsV1beta1AllUpdatesRule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=disableDefaultIamRecipients" })
+  @SpeakeasyMetadata({ data: "json, name=disableDefaultIamRecipients" })
   disableDefaultIamRecipients?: boolean;
 
-  @Metadata({ data: "json, name=monitoringNotificationChannels" })
+  @SpeakeasyMetadata({ data: "json, name=monitoringNotificationChannels" })
   monitoringNotificationChannels?: string[];
 
-  @Metadata({ data: "json, name=pubsubTopic" })
+  @SpeakeasyMetadata({ data: "json, name=pubsubTopic" })
   pubsubTopic?: string;
 
-  @Metadata({ data: "json, name=schemaVersion" })
+  @SpeakeasyMetadata({ data: "json, name=schemaVersion" })
   schemaVersion?: string;
 }

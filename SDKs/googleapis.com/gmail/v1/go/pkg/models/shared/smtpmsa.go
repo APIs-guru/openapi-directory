@@ -9,6 +9,8 @@ const (
 	SMTPMsaSecurityModeEnumStarttls                SMTPMsaSecurityModeEnum = "starttls"
 )
 
+// SMTPMsa
+// Configuration for communication with an SMTP service.
 type SMTPMsa struct {
 	Host         *string                  `json:"host,omitempty"`
 	Password     *string                  `json:"password,omitempty"`

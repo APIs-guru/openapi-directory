@@ -1,7 +1,8 @@
 
 
+
 export enum SyncPlayUserAccessTypeEnum {
-    CreateAndJoinGroups = "CreateAndJoinGroups"
-,    JoinGroups = "JoinGroups"
-,    None = "None"
+    CreateAndJoinGroups = "CreateAndJoinGroups",
+    JoinGroups = "JoinGroups",
+    None = "None"
 }

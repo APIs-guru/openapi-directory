@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import criterionadditionalproperties
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class FindingCriteria:
-    criterion: Optional[dict[str, criterionadditionalproperties.CriterionAdditionalProperties]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'criterion' }})
+    r"""FindingCriteria
+    Specifies, as a map, one or more property-based conditions that filter the results of a query for findings.
+    """
+    
+    criterion: Optional[dict[str, CriterionAdditionalProperties]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('criterion') }})
     

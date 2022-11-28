@@ -1,9 +1,11 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class VideoStatusFailureReasonEnum(str, Enum):
     CONVERSION = "conversion"
@@ -45,14 +47,18 @@ class VideoStatusUploadStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class VideoStatus:
-    embeddable: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'embeddable' }})
-    failure_reason: Optional[VideoStatusFailureReasonEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'failureReason' }})
-    license: Optional[VideoStatusLicenseEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'license' }})
-    made_for_kids: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'madeForKids' }})
-    privacy_status: Optional[VideoStatusPrivacyStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'privacyStatus' }})
-    public_stats_viewable: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'publicStatsViewable' }})
-    publish_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'publishAt', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    rejection_reason: Optional[VideoStatusRejectionReasonEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rejectionReason' }})
-    self_declared_made_for_kids: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'selfDeclaredMadeForKids' }})
-    upload_status: Optional[VideoStatusUploadStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uploadStatus' }})
+    r"""VideoStatus
+    Basic details about a video category, such as its localized title. Next Id: 18
+    """
+    
+    embeddable: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('embeddable') }})
+    failure_reason: Optional[VideoStatusFailureReasonEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('failureReason') }})
+    license: Optional[VideoStatusLicenseEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('license') }})
+    made_for_kids: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('madeForKids') }})
+    privacy_status: Optional[VideoStatusPrivacyStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('privacyStatus') }})
+    public_stats_viewable: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('publicStatsViewable') }})
+    publish_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('publishAt'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    rejection_reason: Optional[VideoStatusRejectionReasonEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rejectionReason') }})
+    self_declared_made_for_kids: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('selfDeclaredMadeForKids') }})
+    upload_status: Optional[VideoStatusUploadStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('uploadStatus') }})
     

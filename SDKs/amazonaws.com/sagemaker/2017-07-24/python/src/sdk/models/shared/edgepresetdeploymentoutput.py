@@ -1,15 +1,20 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import edgepresetdeploymentstatus_enum
-from . import edgepresetdeploymenttype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class EdgePresetDeploymentOutput:
-    artifact: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Artifact' }})
-    status: Optional[edgepresetdeploymentstatus_enum.EdgePresetDeploymentStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Status' }})
-    status_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StatusMessage' }})
-    type: edgepresetdeploymenttype_enum.EdgePresetDeploymentTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
+    r"""EdgePresetDeploymentOutput
+    The output of a SageMaker Edge Manager deployable resource.
+    """
+    
+    type: EdgePresetDeploymentTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Type') }})
+    artifact: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Artifact') }})
+    status: Optional[EdgePresetDeploymentStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Status') }})
+    status_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StatusMessage') }})
     

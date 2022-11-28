@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import overridestatus_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class OverridePullRequestApprovalRulesInput:
-    override_status: overridestatus_enum.OverrideStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'overrideStatus' }})
-    pull_request_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pullRequestId' }})
-    revision_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'revisionId' }})
+    override_status: OverrideStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('overrideStatus') }})
+    pull_request_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('pullRequestId') }})
+    revision_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('revisionId') }})
     

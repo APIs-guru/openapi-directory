@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AppLinkedAppInfo
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information from the app store if the app is linked to an app store.
 **/
 export class AppLinkedAppInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=appStoreId" })
+  @SpeakeasyMetadata({ data: "json, name=appStoreId" })
   appStoreId?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 }

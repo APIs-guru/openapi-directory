@@ -1,5 +1,7 @@
 package shared
 
+// Pipeline
+// The pipeline (queue) that is used to manage jobs.
 type Pipeline struct {
 	Arn             *string               `json:"Arn,omitempty"`
 	AwsKmsKeyArn    *string               `json:"AwsKmsKeyArn,omitempty"`

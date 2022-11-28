@@ -1,9 +1,11 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class DeviceToPostDeviceEnergyTypeEnum(str, Enum):
     METER_TYPE_UNKNOWN = "MeterTypeUnknown"
@@ -38,31 +40,35 @@ class DeviceToPostMeterSubTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class DeviceToPost:
-    active_power: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ActivePower' }, 'form': { 'field_name': 'ActivePower' }})
-    counter_reading: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CounterReading' }, 'form': { 'field_name': 'CounterReading' }})
-    counter_reading_export: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CounterReadingExport' }, 'form': { 'field_name': 'CounterReadingExport' }})
-    counter_reading_export_t1: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CounterReadingExportT1' }, 'form': { 'field_name': 'CounterReadingExportT1' }})
-    counter_reading_export_t2: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CounterReadingExportT2' }, 'form': { 'field_name': 'CounterReadingExportT2' }})
-    counter_reading_t1: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CounterReadingT1' }, 'form': { 'field_name': 'CounterReadingT1' }})
-    counter_reading_t2: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CounterReadingT2' }, 'form': { 'field_name': 'CounterReadingT2' }})
-    current: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Current' }, 'form': { 'field_name': 'Current' }})
-    current_l1: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CurrentL1' }, 'form': { 'field_name': 'CurrentL1' }})
-    current_l2: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CurrentL2' }, 'form': { 'field_name': 'CurrentL2' }})
-    current_l3: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CurrentL3' }, 'form': { 'field_name': 'CurrentL3' }})
-    device_energy_type: Optional[DeviceToPostDeviceEnergyTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DeviceEnergyType' }, 'form': { 'field_name': 'DeviceEnergyType' }})
-    digital_input1: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DigitalInput1' }, 'form': { 'field_name': 'DigitalInput1' }})
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Id' }, 'form': { 'field_name': 'Id' }})
-    meter_sub_type: Optional[DeviceToPostMeterSubTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MeterSubType' }, 'form': { 'field_name': 'MeterSubType' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }, 'form': { 'field_name': 'Name' }})
-    power_factor: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PowerFactor' }, 'form': { 'field_name': 'PowerFactor' }})
-    power_factor_l1: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PowerFactorL1' }, 'form': { 'field_name': 'PowerFactorL1' }})
-    power_factor_l2: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PowerFactorL2' }, 'form': { 'field_name': 'PowerFactorL2' }})
-    power_factor_l3: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PowerFactorL3' }, 'form': { 'field_name': 'PowerFactorL3' }})
-    serial: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Serial' }, 'form': { 'field_name': 'Serial' }})
-    temperature: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Temperature' }, 'form': { 'field_name': 'Temperature' }})
-    value_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ValueDate', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }, 'form': { 'field_name': 'ValueDate' }})
-    voltage: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Voltage' }, 'form': { 'field_name': 'Voltage' }})
-    voltage_l1: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'VoltageL1' }, 'form': { 'field_name': 'VoltageL1' }})
-    voltage_l2: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'VoltageL2' }, 'form': { 'field_name': 'VoltageL2' }})
-    voltage_l3: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'VoltageL3' }, 'form': { 'field_name': 'VoltageL3' }})
+    r"""DeviceToPost
+    Container Class for the Web API
+    """
+    
+    active_power: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ActivePower') }, 'form': { 'field_name': 'ActivePower' }})
+    counter_reading: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CounterReading') }, 'form': { 'field_name': 'CounterReading' }})
+    counter_reading_export: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CounterReadingExport') }, 'form': { 'field_name': 'CounterReadingExport' }})
+    counter_reading_export_t1: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CounterReadingExportT1') }, 'form': { 'field_name': 'CounterReadingExportT1' }})
+    counter_reading_export_t2: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CounterReadingExportT2') }, 'form': { 'field_name': 'CounterReadingExportT2' }})
+    counter_reading_t1: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CounterReadingT1') }, 'form': { 'field_name': 'CounterReadingT1' }})
+    counter_reading_t2: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CounterReadingT2') }, 'form': { 'field_name': 'CounterReadingT2' }})
+    current: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Current') }, 'form': { 'field_name': 'Current' }})
+    current_l1: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CurrentL1') }, 'form': { 'field_name': 'CurrentL1' }})
+    current_l2: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CurrentL2') }, 'form': { 'field_name': 'CurrentL2' }})
+    current_l3: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CurrentL3') }, 'form': { 'field_name': 'CurrentL3' }})
+    device_energy_type: Optional[DeviceToPostDeviceEnergyTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DeviceEnergyType') }, 'form': { 'field_name': 'DeviceEnergyType' }})
+    digital_input1: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DigitalInput1') }, 'form': { 'field_name': 'DigitalInput1' }})
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Id') }, 'form': { 'field_name': 'Id' }})
+    meter_sub_type: Optional[DeviceToPostMeterSubTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MeterSubType') }, 'form': { 'field_name': 'MeterSubType' }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }, 'form': { 'field_name': 'Name' }})
+    power_factor: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PowerFactor') }, 'form': { 'field_name': 'PowerFactor' }})
+    power_factor_l1: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PowerFactorL1') }, 'form': { 'field_name': 'PowerFactorL1' }})
+    power_factor_l2: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PowerFactorL2') }, 'form': { 'field_name': 'PowerFactorL2' }})
+    power_factor_l3: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PowerFactorL3') }, 'form': { 'field_name': 'PowerFactorL3' }})
+    serial: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Serial') }, 'form': { 'field_name': 'Serial' }})
+    temperature: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Temperature') }, 'form': { 'field_name': 'Temperature' }})
+    value_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ValueDate'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }, 'form': { 'field_name': 'ValueDate' }})
+    voltage: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Voltage') }, 'form': { 'field_name': 'Voltage' }})
+    voltage_l1: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('VoltageL1') }, 'form': { 'field_name': 'VoltageL1' }})
+    voltage_l2: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('VoltageL2') }, 'form': { 'field_name': 'VoltageL2' }})
+    voltage_l3: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('VoltageL3') }, 'form': { 'field_name': 'VoltageL3' }})
     

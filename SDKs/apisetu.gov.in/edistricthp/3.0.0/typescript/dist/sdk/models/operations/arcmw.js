@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ArcmwRequestBodyCertificateParameters = /** @class */ (function (_super) {
     __extends(ArcmwRequestBodyCertificateParameters, _super);
@@ -30,7 +30,7 @@ var ArcmwRequestBodyCertificateParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=UDF1" }),
+        SpeakeasyMetadata({ data: "json, name=UDF1" }),
         __metadata("design:type", String)
     ], ArcmwRequestBodyCertificateParameters.prototype, "udf1", void 0);
     return ArcmwRequestBodyCertificateParameters;
@@ -46,19 +46,19 @@ var ArcmwRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=certificateParameters" }),
+        SpeakeasyMetadata({ data: "json, name=certificateParameters" }),
         __metadata("design:type", ArcmwRequestBodyCertificateParameters)
     ], ArcmwRequestBody.prototype, "certificateParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=consentArtifact" }),
+        SpeakeasyMetadata({ data: "json, name=consentArtifact" }),
         __metadata("design:type", Object)
     ], ArcmwRequestBody.prototype, "consentArtifact", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], ArcmwRequestBody.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=txnId" }),
+        SpeakeasyMetadata({ data: "json, name=txnId" }),
         __metadata("design:type", String)
     ], ArcmwRequestBody.prototype, "txnId", void 0);
     return ArcmwRequestBody;
@@ -70,32 +70,16 @@ var ArcmwSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], ArcmwSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeClientId)
     ], ArcmwSecurity.prototype, "clientId", void 0);
     return ArcmwSecurity;
 }(SpeakeasyBase));
 export { ArcmwSecurity };
-var ArcmwRequest = /** @class */ (function (_super) {
-    __extends(ArcmwRequest, _super);
-    function ArcmwRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", ArcmwRequestBody)
-    ], ArcmwRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", ArcmwSecurity)
-    ], ArcmwRequest.prototype, "security", void 0);
-    return ArcmwRequest;
-}(SpeakeasyBase));
-export { ArcmwRequest };
 export var Arcmw400ApplicationJsonErrorEnum;
 (function (Arcmw400ApplicationJsonErrorEnum) {
     Arcmw400ApplicationJsonErrorEnum["MissingParameter"] = "missing_parameter";
@@ -118,11 +102,11 @@ var Arcmw400ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Arcmw400ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Arcmw400ApplicationJson.prototype, "errorDescription", void 0);
     return Arcmw400ApplicationJson;
@@ -144,11 +128,11 @@ var Arcmw401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Arcmw401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Arcmw401ApplicationJson.prototype, "errorDescription", void 0);
     return Arcmw401ApplicationJson;
@@ -170,11 +154,11 @@ var Arcmw404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Arcmw404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Arcmw404ApplicationJson.prototype, "errorDescription", void 0);
     return Arcmw404ApplicationJson;
@@ -194,11 +178,11 @@ var Arcmw500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Arcmw500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Arcmw500ApplicationJson.prototype, "errorDescription", void 0);
     return Arcmw500ApplicationJson;
@@ -218,11 +202,11 @@ var Arcmw502ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Arcmw502ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Arcmw502ApplicationJson.prototype, "errorDescription", void 0);
     return Arcmw502ApplicationJson;
@@ -242,11 +226,11 @@ var Arcmw503ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Arcmw503ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Arcmw503ApplicationJson.prototype, "errorDescription", void 0);
     return Arcmw503ApplicationJson;
@@ -266,55 +250,71 @@ var Arcmw504ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Arcmw504ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Arcmw504ApplicationJson.prototype, "errorDescription", void 0);
     return Arcmw504ApplicationJson;
 }(SpeakeasyBase));
 export { Arcmw504ApplicationJson };
+var ArcmwRequest = /** @class */ (function (_super) {
+    __extends(ArcmwRequest, _super);
+    function ArcmwRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", ArcmwRequestBody)
+    ], ArcmwRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", ArcmwSecurity)
+    ], ArcmwRequest.prototype, "security", void 0);
+    return ArcmwRequest;
+}(SpeakeasyBase));
+export { ArcmwRequest };
 var ArcmwResponse = /** @class */ (function (_super) {
     __extends(ArcmwResponse, _super);
     function ArcmwResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ArcmwResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ArcmwResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Arcmw400ApplicationJson)
     ], ArcmwResponse.prototype, "arcmw400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Arcmw401ApplicationJson)
     ], ArcmwResponse.prototype, "arcmw401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Arcmw404ApplicationJson)
     ], ArcmwResponse.prototype, "arcmw404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Arcmw500ApplicationJson)
     ], ArcmwResponse.prototype, "arcmw500ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Arcmw502ApplicationJson)
     ], ArcmwResponse.prototype, "arcmw502ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Arcmw503ApplicationJson)
     ], ArcmwResponse.prototype, "arcmw503ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Arcmw504ApplicationJson)
     ], ArcmwResponse.prototype, "arcmw504ApplicationJsonObject", void 0);
     return ArcmwResponse;

@@ -1,11 +1,19 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import googleanalyticsadminv1alphauserlink
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
-class GoogleAnalyticsAdminV1alphaUpdateUserLinkRequest:
-    user_link: Optional[googleanalyticsadminv1alphauserlink.GoogleAnalyticsAdminV1alphaUserLink] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'userLink' }})
+class GoogleAnalyticsAdminV1alphaUpdateUserLinkRequestInput:
+    r"""GoogleAnalyticsAdminV1alphaUpdateUserLinkRequestInput
+    Request message for UpdateUserLink RPC.
+    """
+    
+    user_link: Optional[GoogleAnalyticsAdminV1alphaUserLinkInput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('userLink') }})
     

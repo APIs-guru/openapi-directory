@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://firmalyzer.com/api/v1",
 }
 
@@ -19,9 +19,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -32,27 +36,46 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// DetectDeviceDetectPost - Detect iot device by service banners and mac address
+// Use device service banners and mac address captured by your network port scanner, vulnerability assessment or asset discovery tools to detect device maker, model and firmware information
 func (s *SDK) DetectDeviceDetectPost(ctx context.Context, request operations.DetectDeviceDetectPostRequest) (*operations.DetectDeviceDetectPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/device/detect"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -70,7 +93,7 @@ func (s *SDK) DetectDeviceDetectPost(ctx context.Context, request operations.Det
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -110,8 +133,9 @@ func (s *SDK) DetectDeviceDetectPost(ctx context.Context, request operations.Det
 	return res, nil
 }
 
+// FirmwareAccountsFirmwareFirmwareHashAccountsGet - Get default accounts and password hashes of a firmware
 func (s *SDK) FirmwareAccountsFirmwareFirmwareHashAccountsGet(ctx context.Context, request operations.FirmwareAccountsFirmwareFirmwareHashAccountsGetRequest) (*operations.FirmwareAccountsFirmwareFirmwareHashAccountsGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/firmware/{firmware_hash}/accounts", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -119,7 +143,7 @@ func (s *SDK) FirmwareAccountsFirmwareFirmwareHashAccountsGet(ctx context.Contex
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -159,8 +183,9 @@ func (s *SDK) FirmwareAccountsFirmwareFirmwareHashAccountsGet(ctx context.Contex
 	return res, nil
 }
 
+// FirmwareConfigIssuesFirmwareFirmwareHashConfigIssuesGet - Get default OS configuration issues of a device firmware
 func (s *SDK) FirmwareConfigIssuesFirmwareFirmwareHashConfigIssuesGet(ctx context.Context, request operations.FirmwareConfigIssuesFirmwareFirmwareHashConfigIssuesGetRequest) (*operations.FirmwareConfigIssuesFirmwareFirmwareHashConfigIssuesGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/firmware/{firmware_hash}/config-issues", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -168,7 +193,7 @@ func (s *SDK) FirmwareConfigIssuesFirmwareFirmwareHashConfigIssuesGet(ctx contex
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -208,8 +233,9 @@ func (s *SDK) FirmwareConfigIssuesFirmwareFirmwareHashConfigIssuesGet(ctx contex
 	return res, nil
 }
 
+// FirmwareExpiredCertsFirmwareFirmwareHashExpiredCertsGet - Get expired digital certificates embedded in a device firmware
 func (s *SDK) FirmwareExpiredCertsFirmwareFirmwareHashExpiredCertsGet(ctx context.Context, request operations.FirmwareExpiredCertsFirmwareFirmwareHashExpiredCertsGetRequest) (*operations.FirmwareExpiredCertsFirmwareFirmwareHashExpiredCertsGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/firmware/{firmware_hash}/expired-certs", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -217,7 +243,7 @@ func (s *SDK) FirmwareExpiredCertsFirmwareFirmwareHashExpiredCertsGet(ctx contex
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -257,8 +283,9 @@ func (s *SDK) FirmwareExpiredCertsFirmwareFirmwareHashExpiredCertsGet(ctx contex
 	return res, nil
 }
 
+// FirmwarePrivateKeysFirmwareFirmwareHashPrivateKeysGet - Get private crypto keys embedded in a device firmware
 func (s *SDK) FirmwarePrivateKeysFirmwareFirmwareHashPrivateKeysGet(ctx context.Context, request operations.FirmwarePrivateKeysFirmwareFirmwareHashPrivateKeysGetRequest) (*operations.FirmwarePrivateKeysFirmwareFirmwareHashPrivateKeysGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/firmware/{firmware_hash}/private-keys", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -266,7 +293,7 @@ func (s *SDK) FirmwarePrivateKeysFirmwareFirmwareHashPrivateKeysGet(ctx context.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -306,8 +333,9 @@ func (s *SDK) FirmwarePrivateKeysFirmwareFirmwareHashPrivateKeysGet(ctx context.
 	return res, nil
 }
 
+// FirmwareRiskFirmwareFirmwareHashRiskGet - Get iot device firmware risk analysis
 func (s *SDK) FirmwareRiskFirmwareFirmwareHashRiskGet(ctx context.Context, request operations.FirmwareRiskFirmwareFirmwareHashRiskGetRequest) (*operations.FirmwareRiskFirmwareFirmwareHashRiskGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/firmware/{firmware_hash}/risk", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -315,7 +343,7 @@ func (s *SDK) FirmwareRiskFirmwareFirmwareHashRiskGet(ctx context.Context, reque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -355,8 +383,9 @@ func (s *SDK) FirmwareRiskFirmwareFirmwareHashRiskGet(ctx context.Context, reque
 	return res, nil
 }
 
+// FirmwareWeakCertsFirmwareFirmwareHashWeakCertsGet - Get certificates with weak fingerprinting algorithms that are mebedded in a device firmware
 func (s *SDK) FirmwareWeakCertsFirmwareFirmwareHashWeakCertsGet(ctx context.Context, request operations.FirmwareWeakCertsFirmwareFirmwareHashWeakCertsGetRequest) (*operations.FirmwareWeakCertsFirmwareFirmwareHashWeakCertsGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/firmware/{firmware_hash}/weak-certs", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -364,7 +393,7 @@ func (s *SDK) FirmwareWeakCertsFirmwareFirmwareHashWeakCertsGet(ctx context.Cont
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -404,8 +433,9 @@ func (s *SDK) FirmwareWeakCertsFirmwareFirmwareHashWeakCertsGet(ctx context.Cont
 	return res, nil
 }
 
+// FirmwareWeakKeysFirmwareFirmwareHashWeakKeysGet - Get weak crypto keys with short length
 func (s *SDK) FirmwareWeakKeysFirmwareFirmwareHashWeakKeysGet(ctx context.Context, request operations.FirmwareWeakKeysFirmwareFirmwareHashWeakKeysGetRequest) (*operations.FirmwareWeakKeysFirmwareFirmwareHashWeakKeysGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/firmware/{firmware_hash}/weak-keys", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -413,7 +443,7 @@ func (s *SDK) FirmwareWeakKeysFirmwareFirmwareHashWeakKeysGet(ctx context.Contex
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {

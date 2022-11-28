@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetQueryJobResultsForProjectPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=project-id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=project-id" })
   projectId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=queryjob-id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=queryjob-id" })
   queryjobId: string;
 }
 
 
 export class GetQueryJobResultsForProjectQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=nofilter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=nofilter" })
   nofilter?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=start" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=start" })
   start?: number;
 }
 
 
 export class GetQueryJobResultsForProjectSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   accessToken: shared.SchemeAccessToken;
 }
 
 
 export class GetQueryJobResultsForProjectRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetQueryJobResultsForProjectPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetQueryJobResultsForProjectQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetQueryJobResultsForProjectSecurity;
 }
 
 
 export class GetQueryJobResultsForProjectResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryjobProjectResults?: shared.QueryjobProjectResults;
 }

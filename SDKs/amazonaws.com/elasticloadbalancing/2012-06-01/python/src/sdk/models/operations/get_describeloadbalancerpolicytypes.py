@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetDescribeLoadBalancerPolicyTypesActionEnum(str, Enum):
     DESCRIBE_LOAD_BALANCER_POLICY_TYPES = "DescribeLoadBalancerPolicyTypes"
@@ -10,9 +14,9 @@ class GetDescribeLoadBalancerPolicyTypesVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeLoadBalancerPolicyTypesQueryParams:
-    action: GetDescribeLoadBalancerPolicyTypesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribeLoadBalancerPolicyTypesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDescribeLoadBalancerPolicyTypesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     policy_type_names: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'PolicyTypeNames', 'style': 'form', 'explode': True }})
-    version: GetDescribeLoadBalancerPolicyTypesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetDescribeLoadBalancerPolicyTypesHeaders:
 
 @dataclass
 class GetDescribeLoadBalancerPolicyTypesRequest:
-    query_params: GetDescribeLoadBalancerPolicyTypesQueryParams = field(default=None)
-    headers: GetDescribeLoadBalancerPolicyTypesHeaders = field(default=None)
+    headers: GetDescribeLoadBalancerPolicyTypesHeaders = field()
+    query_params: GetDescribeLoadBalancerPolicyTypesQueryParams = field()
     
 
 @dataclass
 class GetDescribeLoadBalancerPolicyTypesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AttributeType } from "./attributetype";
 import { MfaOptionType } from "./mfaoptiontype";
 import { UserStatusTypeEnum } from "./userstatustypeenum";
+
 
 
 // UserType
@@ -10,24 +10,24 @@ import { UserStatusTypeEnum } from "./userstatustypeenum";
  * The user type.
 **/
 export class UserType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Attributes", elemType: shared.AttributeType })
+  @SpeakeasyMetadata({ data: "json, name=Attributes", elemType: AttributeType })
   attributes?: AttributeType[];
 
-  @Metadata({ data: "json, name=Enabled" })
+  @SpeakeasyMetadata({ data: "json, name=Enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=MFAOptions", elemType: shared.MfaOptionType })
+  @SpeakeasyMetadata({ data: "json, name=MFAOptions", elemType: MfaOptionType })
   mfaOptions?: MfaOptionType[];
 
-  @Metadata({ data: "json, name=UserCreateDate" })
+  @SpeakeasyMetadata({ data: "json, name=UserCreateDate" })
   userCreateDate?: Date;
 
-  @Metadata({ data: "json, name=UserLastModifiedDate" })
+  @SpeakeasyMetadata({ data: "json, name=UserLastModifiedDate" })
   userLastModifiedDate?: Date;
 
-  @Metadata({ data: "json, name=UserStatus" })
+  @SpeakeasyMetadata({ data: "json, name=UserStatus" })
   userStatus?: UserStatusTypeEnum;
 
-  @Metadata({ data: "json, name=Username" })
+  @SpeakeasyMetadata({ data: "json, name=Username" })
   username?: string;
 }

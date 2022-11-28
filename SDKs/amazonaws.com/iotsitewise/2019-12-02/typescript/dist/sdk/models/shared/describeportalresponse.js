@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Alarms } from "./alarms";
 import { AuthModeEnum } from "./authmodeenum";
 import { ImageLocation } from "./imagelocation";
@@ -33,63 +33,63 @@ var DescribePortalResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=alarms" }),
+        SpeakeasyMetadata({ data: "json, name=alarms" }),
         __metadata("design:type", Alarms)
     ], DescribePortalResponse.prototype, "alarms", void 0);
     __decorate([
-        Metadata({ data: "json, name=notificationSenderEmail" }),
+        SpeakeasyMetadata({ data: "json, name=notificationSenderEmail" }),
         __metadata("design:type", String)
     ], DescribePortalResponse.prototype, "notificationSenderEmail", void 0);
     __decorate([
-        Metadata({ data: "json, name=portalArn" }),
+        SpeakeasyMetadata({ data: "json, name=portalArn" }),
         __metadata("design:type", String)
     ], DescribePortalResponse.prototype, "portalArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=portalAuthMode" }),
+        SpeakeasyMetadata({ data: "json, name=portalAuthMode" }),
         __metadata("design:type", String)
     ], DescribePortalResponse.prototype, "portalAuthMode", void 0);
     __decorate([
-        Metadata({ data: "json, name=portalClientId" }),
+        SpeakeasyMetadata({ data: "json, name=portalClientId" }),
         __metadata("design:type", String)
     ], DescribePortalResponse.prototype, "portalClientId", void 0);
     __decorate([
-        Metadata({ data: "json, name=portalContactEmail" }),
+        SpeakeasyMetadata({ data: "json, name=portalContactEmail" }),
         __metadata("design:type", String)
     ], DescribePortalResponse.prototype, "portalContactEmail", void 0);
     __decorate([
-        Metadata({ data: "json, name=portalCreationDate" }),
+        SpeakeasyMetadata({ data: "json, name=portalCreationDate" }),
         __metadata("design:type", Date)
     ], DescribePortalResponse.prototype, "portalCreationDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=portalDescription" }),
+        SpeakeasyMetadata({ data: "json, name=portalDescription" }),
         __metadata("design:type", String)
     ], DescribePortalResponse.prototype, "portalDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=portalId" }),
+        SpeakeasyMetadata({ data: "json, name=portalId" }),
         __metadata("design:type", String)
     ], DescribePortalResponse.prototype, "portalId", void 0);
     __decorate([
-        Metadata({ data: "json, name=portalLastUpdateDate" }),
+        SpeakeasyMetadata({ data: "json, name=portalLastUpdateDate" }),
         __metadata("design:type", Date)
     ], DescribePortalResponse.prototype, "portalLastUpdateDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=portalLogoImageLocation" }),
+        SpeakeasyMetadata({ data: "json, name=portalLogoImageLocation" }),
         __metadata("design:type", ImageLocation)
     ], DescribePortalResponse.prototype, "portalLogoImageLocation", void 0);
     __decorate([
-        Metadata({ data: "json, name=portalName" }),
+        SpeakeasyMetadata({ data: "json, name=portalName" }),
         __metadata("design:type", String)
     ], DescribePortalResponse.prototype, "portalName", void 0);
     __decorate([
-        Metadata({ data: "json, name=portalStartUrl" }),
+        SpeakeasyMetadata({ data: "json, name=portalStartUrl" }),
         __metadata("design:type", String)
     ], DescribePortalResponse.prototype, "portalStartUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=portalStatus" }),
+        SpeakeasyMetadata({ data: "json, name=portalStatus" }),
         __metadata("design:type", PortalStatus)
     ], DescribePortalResponse.prototype, "portalStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=roleArn" }),
+        SpeakeasyMetadata({ data: "json, name=roleArn" }),
         __metadata("design:type", String)
     ], DescribePortalResponse.prototype, "roleArn", void 0);
     return DescribePortalResponse;

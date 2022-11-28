@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostCreateDbSecurityGroupActionEnum(str, Enum):
     CREATE_DB_SECURITY_GROUP = "CreateDBSecurityGroup"
@@ -10,8 +14,8 @@ class PostCreateDbSecurityGroupVersionEnum(str, Enum):
 
 @dataclass
 class PostCreateDbSecurityGroupQueryParams:
-    action: PostCreateDbSecurityGroupActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostCreateDbSecurityGroupVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostCreateDbSecurityGroupActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostCreateDbSecurityGroupVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostCreateDbSecurityGroupHeaders:
 
 @dataclass
 class PostCreateDbSecurityGroupRequest:
-    query_params: PostCreateDbSecurityGroupQueryParams = field(default=None)
-    headers: PostCreateDbSecurityGroupHeaders = field(default=None)
+    headers: PostCreateDbSecurityGroupHeaders = field()
+    query_params: PostCreateDbSecurityGroupQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostCreateDbSecurityGroupResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

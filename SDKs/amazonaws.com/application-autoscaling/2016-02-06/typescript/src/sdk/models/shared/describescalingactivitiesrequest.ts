@@ -1,21 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ScalableDimensionEnum } from "./scalabledimensionenum";
 import { ServiceNamespaceEnum } from "./servicenamespaceenum";
 
 
+
 export class DescribeScalingActivitiesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=ResourceId" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceId" })
   resourceId?: string;
 
-  @Metadata({ data: "json, name=ScalableDimension" })
+  @SpeakeasyMetadata({ data: "json, name=ScalableDimension" })
   scalableDimension?: ScalableDimensionEnum;
 
-  @Metadata({ data: "json, name=ServiceNamespace" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceNamespace" })
   serviceNamespace: ServiceNamespaceEnum;
 }

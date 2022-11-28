@@ -1,5 +1,7 @@
 package shared
 
+// JobProcessDetails
+// The job process details.
 type JobProcessDetails struct {
 	NumberOfCanceledThings   *int64   `json:"numberOfCanceledThings,omitempty"`
 	NumberOfFailedThings     *int64   `json:"numberOfFailedThings,omitempty"`

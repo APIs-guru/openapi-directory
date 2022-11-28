@@ -22,38 +22,38 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var AppointmentReserveModel = /** @class */ (function (_super) {
     __extends(AppointmentReserveModel, _super);
     function AppointmentReserveModel() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=customerMessage" }),
+        SpeakeasyMetadata({ data: "json, name=customerMessage" }),
         __metadata("design:type", String)
     ], AppointmentReserveModel.prototype, "customerMessage", void 0);
     __decorate([
-        Metadata({ data: "json, name=email" }),
+        SpeakeasyMetadata({ data: "json, name=email" }),
         __metadata("design:type", String)
     ], AppointmentReserveModel.prototype, "email", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], AppointmentReserveModel.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=notes" }),
+        SpeakeasyMetadata({ data: "json, name=notes" }),
         __metadata("design:type", String)
     ], AppointmentReserveModel.prototype, "notes", void 0);
     __decorate([
-        Metadata({ data: "json, name=phone" }),
+        SpeakeasyMetadata({ data: "json, name=phone" }),
         __metadata("design:type", String)
     ], AppointmentReserveModel.prototype, "phone", void 0);
     __decorate([
-        Metadata({ data: "json, name=phoneExt" }),
+        SpeakeasyMetadata({ data: "json, name=phoneExt" }),
         __metadata("design:type", String)
     ], AppointmentReserveModel.prototype, "phoneExt", void 0);
     __decorate([
-        Metadata({ data: "json, name=phoneType" }),
+        SpeakeasyMetadata({ data: "json, name=phoneType" }),
         __metadata("design:type", String)
     ], AppointmentReserveModel.prototype, "phoneType", void 0);
     return AppointmentReserveModel;

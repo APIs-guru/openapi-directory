@@ -1,11 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class ListSourceServiceInventoriesPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,14 +18,14 @@ class ListSourceServiceInventoriesQueryParams:
 
 @dataclass
 class ListSourceServiceInventoriesRequest:
-    path_params: ListSourceServiceInventoriesPathParams = field(default=None)
-    query_params: ListSourceServiceInventoriesQueryParams = field(default=None)
+    path_params: ListSourceServiceInventoriesPathParams = field()
+    query_params: ListSourceServiceInventoriesQueryParams = field()
     
 
 @dataclass
 class ListSourceServiceInventoriesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_not_found: Optional[shared.ErrorNotFound] = field(default=None)
     service_inventories_collection: Optional[shared.ServiceInventoriesCollection] = field(default=None)
-    status_code: int = field(default=None)
     

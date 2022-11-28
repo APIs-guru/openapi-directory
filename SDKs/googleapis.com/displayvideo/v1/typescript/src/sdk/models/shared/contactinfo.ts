@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ContactInfo
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contact information defining a Customer Match audience member.
 **/
 export class ContactInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=countryCode" })
+  @SpeakeasyMetadata({ data: "json, name=countryCode" })
   countryCode?: string;
 
-  @Metadata({ data: "json, name=hashedEmails" })
+  @SpeakeasyMetadata({ data: "json, name=hashedEmails" })
   hashedEmails?: string[];
 
-  @Metadata({ data: "json, name=hashedFirstName" })
+  @SpeakeasyMetadata({ data: "json, name=hashedFirstName" })
   hashedFirstName?: string;
 
-  @Metadata({ data: "json, name=hashedLastName" })
+  @SpeakeasyMetadata({ data: "json, name=hashedLastName" })
   hashedLastName?: string;
 
-  @Metadata({ data: "json, name=hashedPhoneNumbers" })
+  @SpeakeasyMetadata({ data: "json, name=hashedPhoneNumbers" })
   hashedPhoneNumbers?: string[];
 
-  @Metadata({ data: "json, name=zipCodes" })
+  @SpeakeasyMetadata({ data: "json, name=zipCodes" })
   zipCodes?: string[];
 }

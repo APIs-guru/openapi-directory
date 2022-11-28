@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AllMocks200ApplicationJsonMocks extends SpeakeasyBase {
-  @Metadata({ data: "json, name=collection" })
+  @SpeakeasyMetadata({ data: "json, name=collection" })
   collection?: string;
 
-  @Metadata({ data: "json, name=environment" })
+  @SpeakeasyMetadata({ data: "json, name=environment" })
   environment?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=mockUrl" })
+  @SpeakeasyMetadata({ data: "json, name=mockUrl" })
   mockUrl?: string;
 
-  @Metadata({ data: "json, name=owner" })
+  @SpeakeasyMetadata({ data: "json, name=owner" })
   owner?: string;
 
-  @Metadata({ data: "json, name=uid" })
+  @SpeakeasyMetadata({ data: "json, name=uid" })
   uid?: string;
 }
 
 
 export class AllMocks200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=mocks", elemType: operations.AllMocks200ApplicationJsonMocks })
+  @SpeakeasyMetadata({ data: "json, name=mocks", elemType: AllMocks200ApplicationJsonMocks })
   mocks?: AllMocks200ApplicationJsonMocks[];
 }
 
 
 export class AllMocksResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   allMocks200ApplicationJsonObject?: AllMocks200ApplicationJson;
 }

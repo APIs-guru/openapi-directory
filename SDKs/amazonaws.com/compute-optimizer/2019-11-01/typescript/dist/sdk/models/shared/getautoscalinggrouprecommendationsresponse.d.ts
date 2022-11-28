@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AutoScalingGroupRecommendation } from "./autoscalinggrouprecommendation";
 import { GetRecommendationError } from "./getrecommendationerror";
 export declare class GetAutoScalingGroupRecommendationsResponse extends SpeakeasyBase {

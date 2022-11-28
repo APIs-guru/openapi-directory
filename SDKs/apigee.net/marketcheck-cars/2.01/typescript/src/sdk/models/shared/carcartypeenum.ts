@@ -1,7 +1,8 @@
 
 
+
 export enum CarCarTypeEnum {
-    New = "new"
-,    Used = "used"
-,    Certified = "certified"
+    New = "new",
+    Used = "used",
+    Certified = "certified"
 }

@@ -1,73 +1,74 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AppointmentInitialModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bookedBy" })
+  @SpeakeasyMetadata({ data: "json, name=bookedBy" })
   bookedBy?: string;
 
-  @Metadata({ data: "json, name=bookingWindowId" })
+  @SpeakeasyMetadata({ data: "json, name=bookingWindowId" })
   bookingWindowId?: string;
 
-  @Metadata({ data: "json, name=calendarId" })
+  @SpeakeasyMetadata({ data: "json, name=calendarId" })
   calendarId?: string;
 
-  @Metadata({ data: "json, name=customerId" })
+  @SpeakeasyMetadata({ data: "json, name=customerId" })
   customerId?: string;
 
-  @Metadata({ data: "json, name=customerMessage" })
+  @SpeakeasyMetadata({ data: "json, name=customerMessage" })
   customerMessage?: string;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=endDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=endDateTime" })
   endDateTime?: Date;
 
-  @Metadata({ data: "json, name=groupSize" })
+  @SpeakeasyMetadata({ data: "json, name=groupSize" })
   groupSize?: number;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: string;
 
-  @Metadata({ data: "json, name=locationId" })
+  @SpeakeasyMetadata({ data: "json, name=locationId" })
   locationId?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=notes" })
+  @SpeakeasyMetadata({ data: "json, name=notes" })
   notes?: string;
 
-  @Metadata({ data: "json, name=phone" })
+  @SpeakeasyMetadata({ data: "json, name=phone" })
   phone?: string;
 
-  @Metadata({ data: "json, name=phoneType" })
+  @SpeakeasyMetadata({ data: "json, name=phoneType" })
   phoneType?: string;
 
-  @Metadata({ data: "json, name=resourceGroupId" })
+  @SpeakeasyMetadata({ data: "json, name=resourceGroupId" })
   resourceGroupId?: string;
 
-  @Metadata({ data: "json, name=resourceId" })
+  @SpeakeasyMetadata({ data: "json, name=resourceId" })
   resourceId?: string;
 
-  @Metadata({ data: "json, name=resourceIds" })
+  @SpeakeasyMetadata({ data: "json, name=resourceIds" })
   resourceIds?: string;
 
-  @Metadata({ data: "json, name=serviceAllocationId" })
+  @SpeakeasyMetadata({ data: "json, name=serviceAllocationId" })
   serviceAllocationId?: string;
 
-  @Metadata({ data: "json, name=serviceId" })
+  @SpeakeasyMetadata({ data: "json, name=serviceId" })
   serviceId?: string;
 
-  @Metadata({ data: "json, name=startDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=startDateTime" })
   startDateTime?: Date;
 
-  @Metadata({ data: "json, name=timezoneName" })
+  @SpeakeasyMetadata({ data: "json, name=timezoneName" })
   timezoneName?: string;
 
-  @Metadata({ data: "json, name=travelAppointmentId" })
+  @SpeakeasyMetadata({ data: "json, name=travelAppointmentId" })
   travelAppointmentId?: string;
 
-  @Metadata({ data: "json, name=travelTimeMins" })
+  @SpeakeasyMetadata({ data: "json, name=travelTimeMins" })
   travelTimeMins?: number;
 }

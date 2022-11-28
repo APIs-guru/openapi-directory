@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CloudWatchEventsExecutionDataDetails
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides details about execution input or output.
 **/
 export class CloudWatchEventsExecutionDataDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=included" })
+  @SpeakeasyMetadata({ data: "json, name=included" })
   included?: boolean;
 }

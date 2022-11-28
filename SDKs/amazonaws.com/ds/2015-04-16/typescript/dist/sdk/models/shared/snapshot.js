@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SnapshotStatusEnum } from "./snapshotstatusenum";
 import { SnapshotTypeEnum } from "./snapshottypeenum";
 // Snapshot
@@ -35,27 +35,27 @@ var Snapshot = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DirectoryId" }),
+        SpeakeasyMetadata({ data: "json, name=DirectoryId" }),
         __metadata("design:type", String)
     ], Snapshot.prototype, "directoryId", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], Snapshot.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=SnapshotId" }),
+        SpeakeasyMetadata({ data: "json, name=SnapshotId" }),
         __metadata("design:type", String)
     ], Snapshot.prototype, "snapshotId", void 0);
     __decorate([
-        Metadata({ data: "json, name=StartTime" }),
+        SpeakeasyMetadata({ data: "json, name=StartTime" }),
         __metadata("design:type", Date)
     ], Snapshot.prototype, "startTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=Status" }),
+        SpeakeasyMetadata({ data: "json, name=Status" }),
         __metadata("design:type", String)
     ], Snapshot.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=Type" }),
+        SpeakeasyMetadata({ data: "json, name=Type" }),
         __metadata("design:type", String)
     ], Snapshot.prototype, "type", void 0);
     return Snapshot;

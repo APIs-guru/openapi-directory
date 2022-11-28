@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SchedulerResource
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configuration for resources used by Airflow schedulers.
 **/
 export class SchedulerResource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count?: number;
 
-  @Metadata({ data: "json, name=cpu" })
+  @SpeakeasyMetadata({ data: "json, name=cpu" })
   cpu?: number;
 
-  @Metadata({ data: "json, name=memoryGb" })
+  @SpeakeasyMetadata({ data: "json, name=memoryGb" })
   memoryGb?: number;
 
-  @Metadata({ data: "json, name=storageGb" })
+  @SpeakeasyMetadata({ data: "json, name=storageGb" })
   storageGb?: number;
 }

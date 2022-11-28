@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PublicIdentifier } from "./publicidentifier";
+
 
 
 // InvoiceRecipientPreflight
@@ -8,6 +8,6 @@ import { PublicIdentifier } from "./publicidentifier";
  * Identifies the invoice recipient to preflight
 **/
 export class InvoiceRecipientPreflight extends SpeakeasyBase {
-  @Metadata({ data: "json, name=publicIdentifiers", elemType: shared.PublicIdentifier })
+  @SpeakeasyMetadata({ data: "json, name=publicIdentifiers", elemType: PublicIdentifier })
   publicIdentifiers?: PublicIdentifier[];
 }

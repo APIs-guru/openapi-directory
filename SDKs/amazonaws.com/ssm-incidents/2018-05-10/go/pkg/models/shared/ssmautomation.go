@@ -1,5 +1,7 @@
 package shared
 
+// SsmAutomation
+// Details about the Systems Manager automation document that will be used as a runbook during an incident.
 type SsmAutomation struct {
 	DocumentName    string                `json:"documentName"`
 	DocumentVersion *string               `json:"documentVersion,omitempty"`

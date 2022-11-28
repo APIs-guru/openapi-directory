@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsCodeBuildProjectEnvironment } from "./awscodebuildprojectenvironment";
 import { AwsCodeBuildProjectSource } from "./awscodebuildprojectsource";
 import { AwsCodeBuildProjectVpcConfig } from "./awscodebuildprojectvpcconfig";
+
 
 
 // AwsCodeBuildProjectDetails
@@ -9,21 +10,21 @@ import { AwsCodeBuildProjectVpcConfig } from "./awscodebuildprojectvpcconfig";
  * Information about an CodeBuild project.
 **/
 export class AwsCodeBuildProjectDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EncryptionKey" })
+  @SpeakeasyMetadata({ data: "json, name=EncryptionKey" })
   encryptionKey?: string;
 
-  @Metadata({ data: "json, name=Environment" })
+  @SpeakeasyMetadata({ data: "json, name=Environment" })
   environment?: AwsCodeBuildProjectEnvironment;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=ServiceRole" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceRole" })
   serviceRole?: string;
 
-  @Metadata({ data: "json, name=Source" })
+  @SpeakeasyMetadata({ data: "json, name=Source" })
   source?: AwsCodeBuildProjectSource;
 
-  @Metadata({ data: "json, name=VpcConfig" })
+  @SpeakeasyMetadata({ data: "json, name=VpcConfig" })
   vpcConfig?: AwsCodeBuildProjectVpcConfig;
 }

@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SharedDirectory } from "./shareddirectory";
 
 
+
 export class DescribeSharedDirectoriesResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=SharedDirectories", elemType: shared.SharedDirectory })
+  @SpeakeasyMetadata({ data: "json, name=SharedDirectories", elemType: SharedDirectory })
   sharedDirectories?: SharedDirectory[];
 }

@@ -12,18 +12,18 @@ class GetAliasesQueryParams:
 
 @dataclass
 class GetAliasesSecurity:
-    api_key_auth: shared.SchemeAPIKeyAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    api_key_auth: shared.SchemeAPIKeyAuth = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetAliasesRequest:
-    query_params: GetAliasesQueryParams = field(default=None)
-    security: GetAliasesSecurity = field(default=None)
+    query_params: GetAliasesQueryParams = field()
+    security: GetAliasesSecurity = field()
     
 
 @dataclass
 class GetAliasesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_aliases_model: Optional[shared.GetAliasesModel] = field(default=None)
-    status_code: int = field(default=None)
     

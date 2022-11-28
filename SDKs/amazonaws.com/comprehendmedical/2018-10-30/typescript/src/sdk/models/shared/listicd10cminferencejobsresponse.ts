@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ComprehendMedicalAsyncJobProperties } from "./comprehendmedicalasyncjobproperties";
 
 
+
 export class ListIcd10CmInferenceJobsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ComprehendMedicalAsyncJobPropertiesList", elemType: shared.ComprehendMedicalAsyncJobProperties })
+  @SpeakeasyMetadata({ data: "json, name=ComprehendMedicalAsyncJobPropertiesList", elemType: ComprehendMedicalAsyncJobProperties })
   comprehendMedicalAsyncJobPropertiesList?: ComprehendMedicalAsyncJobProperties[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

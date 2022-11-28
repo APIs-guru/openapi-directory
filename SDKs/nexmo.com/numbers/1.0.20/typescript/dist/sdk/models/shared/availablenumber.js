@@ -22,30 +22,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Availablenumber = /** @class */ (function (_super) {
     __extends(Availablenumber, _super);
     function Availablenumber() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=cost" }),
+        SpeakeasyMetadata({ data: "json, name=cost" }),
         __metadata("design:type", String)
     ], Availablenumber.prototype, "cost", void 0);
     __decorate([
-        Metadata({ data: "json, name=country" }),
+        SpeakeasyMetadata({ data: "json, name=country" }),
         __metadata("design:type", String)
     ], Availablenumber.prototype, "country", void 0);
     __decorate([
-        Metadata({ data: "json, name=features" }),
+        SpeakeasyMetadata({ data: "json, name=features" }),
         __metadata("design:type", Array)
     ], Availablenumber.prototype, "features", void 0);
     __decorate([
-        Metadata({ data: "json, name=msisdn" }),
+        SpeakeasyMetadata({ data: "json, name=msisdn" }),
         __metadata("design:type", String)
     ], Availablenumber.prototype, "msisdn", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], Availablenumber.prototype, "type", void 0);
     return Availablenumber;

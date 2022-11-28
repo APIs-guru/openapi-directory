@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ResourcesettingsProjectsSettingsListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 class ResourcesettingsProjectsSettingsListViewEnum(str, Enum):
     SETTING_VIEW_UNSPECIFIED = "SETTING_VIEW_UNSPECIFIED"
@@ -34,20 +35,20 @@ class ResourcesettingsProjectsSettingsListQueryParams:
 
 @dataclass
 class ResourcesettingsProjectsSettingsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ResourcesettingsProjectsSettingsListRequest:
-    path_params: ResourcesettingsProjectsSettingsListPathParams = field(default=None)
-    query_params: ResourcesettingsProjectsSettingsListQueryParams = field(default=None)
-    security: ResourcesettingsProjectsSettingsListSecurity = field(default=None)
+    path_params: ResourcesettingsProjectsSettingsListPathParams = field()
+    query_params: ResourcesettingsProjectsSettingsListQueryParams = field()
+    security: ResourcesettingsProjectsSettingsListSecurity = field()
     
 
 @dataclass
 class ResourcesettingsProjectsSettingsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_resourcesettings_v1_list_settings_response: Optional[shared.GoogleCloudResourcesettingsV1ListSettingsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

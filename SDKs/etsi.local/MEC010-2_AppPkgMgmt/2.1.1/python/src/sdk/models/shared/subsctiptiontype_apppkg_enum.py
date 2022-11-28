@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class SubsctiptionTypeAppPkgEnum(str, Enum):
     APP_PACKAGE_ON_BOARDING = "AppPackageOnBoarding"

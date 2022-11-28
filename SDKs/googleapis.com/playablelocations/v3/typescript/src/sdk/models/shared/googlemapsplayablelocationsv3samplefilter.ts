@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleMapsPlayablelocationsV3SampleSpacingOptions } from "./googlemapsplayablelocationsv3samplespacingoptions";
+
 
 
 // GoogleMapsPlayablelocationsV3SampleFilter
@@ -7,12 +8,12 @@ import { GoogleMapsPlayablelocationsV3SampleSpacingOptions } from "./googlemapsp
  * Specifies the filters to use when searching for playable locations.
 **/
 export class GoogleMapsPlayablelocationsV3SampleFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=includedTypes" })
+  @SpeakeasyMetadata({ data: "json, name=includedTypes" })
   includedTypes?: string[];
 
-  @Metadata({ data: "json, name=maxLocationCount" })
+  @SpeakeasyMetadata({ data: "json, name=maxLocationCount" })
   maxLocationCount?: number;
 
-  @Metadata({ data: "json, name=spacing" })
+  @SpeakeasyMetadata({ data: "json, name=spacing" })
   spacing?: GoogleMapsPlayablelocationsV3SampleSpacingOptions;
 }

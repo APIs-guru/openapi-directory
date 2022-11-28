@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CodeDeliveryDetailsType } from "./codedeliverydetailstype";
+
 
 
 // UpdateUserAttributesResponse
@@ -8,6 +8,6 @@ import { CodeDeliveryDetailsType } from "./codedeliverydetailstype";
  * Represents the response from the server for the request to update user attributes.
 **/
 export class UpdateUserAttributesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CodeDeliveryDetailsList", elemType: shared.CodeDeliveryDetailsType })
+  @SpeakeasyMetadata({ data: "json, name=CodeDeliveryDetailsList", elemType: CodeDeliveryDetailsType })
   codeDeliveryDetailsList?: CodeDeliveryDetailsType[];
 }

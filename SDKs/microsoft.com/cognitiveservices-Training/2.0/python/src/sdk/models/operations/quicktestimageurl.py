@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class QuickTestImageURLPathParams:
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,30 +15,30 @@ class QuickTestImageURLQueryParams:
 
 @dataclass
 class QuickTestImageURLHeaders:
-    training_key: str = field(default=None, metadata={'header': { 'field_name': 'Training-Key', 'style': 'simple', 'explode': False }})
+    training_key: str = field(metadata={'header': { 'field_name': 'Training-Key', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class QuickTestImageURLRequests:
-    application_xml: bytes = field(default=None, metadata={'request': { 'media_type': 'application/xml' }})
+    application_xml: bytes = field(metadata={'request': { 'media_type': 'application/xml' }})
+    text_xml: bytes = field(metadata={'request': { 'media_type': 'text/xml' }})
     image_url: Optional[shared.ImageURL] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     image_url1: Optional[shared.ImageURL] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     image_url2: Optional[shared.ImageURL] = field(default=None, metadata={'request': { 'media_type': 'text/json' }})
-    text_xml: bytes = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class QuickTestImageURLRequest:
-    path_params: QuickTestImageURLPathParams = field(default=None)
-    query_params: QuickTestImageURLQueryParams = field(default=None)
-    headers: QuickTestImageURLHeaders = field(default=None)
-    request: QuickTestImageURLRequests = field(default=None)
+    headers: QuickTestImageURLHeaders = field()
+    path_params: QuickTestImageURLPathParams = field()
+    query_params: QuickTestImageURLQueryParams = field()
+    request: QuickTestImageURLRequests = field()
     
 
 @dataclass
 class QuickTestImageURLResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     image_prediction: Optional[shared.ImagePrediction] = field(default=None)
-    status_code: int = field(default=None)
     

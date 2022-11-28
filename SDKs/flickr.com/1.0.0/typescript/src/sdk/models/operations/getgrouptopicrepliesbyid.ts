@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetGroupTopicRepliesByIdQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=api_key" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_key" })
   apiKey: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=group_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=group_id" })
   groupId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=reply_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=reply_id" })
   replyId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=topic_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=topic_id" })
   topicId: string;
 }
 
 
-export class GetGroupTopicRepliesByIdRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetGroupTopicRepliesByIdQueryParams;
-}
-
-
 export class GetGroupTopicRepliesById200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=reply" })
+  @SpeakeasyMetadata({ data: "json, name=reply" })
   reply?: shared.TopicReply;
 
-  @Metadata({ data: "json, name=stat" })
+  @SpeakeasyMetadata({ data: "json, name=stat" })
   stat?: string;
 }
 
 
+export class GetGroupTopicRepliesByIdRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetGroupTopicRepliesByIdQueryParams;
+}
+
+
 export class GetGroupTopicRepliesByIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getGroupTopicRepliesById200ApplicationJsonObject?: GetGroupTopicRepliesById200ApplicationJson;
 }

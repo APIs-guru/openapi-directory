@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ObError1 } from "./oberror1";
 // ObErrorResponse1
 /**
  * An array of detail error codes, and messages, and URLs to documentation to help remediation.
@@ -34,19 +34,19 @@ var ObErrorResponse1 = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Code" }),
+        SpeakeasyMetadata({ data: "json, name=Code" }),
         __metadata("design:type", String)
     ], ObErrorResponse1.prototype, "code", void 0);
     __decorate([
-        Metadata({ data: "json, name=Errors", elemType: shared.ObError1 }),
+        SpeakeasyMetadata({ data: "json, name=Errors", elemType: ObError1 }),
         __metadata("design:type", Array)
     ], ObErrorResponse1.prototype, "errors", void 0);
     __decorate([
-        Metadata({ data: "json, name=Id" }),
+        SpeakeasyMetadata({ data: "json, name=Id" }),
         __metadata("design:type", String)
     ], ObErrorResponse1.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=Message" }),
+        SpeakeasyMetadata({ data: "json, name=Message" }),
         __metadata("design:type", String)
     ], ObErrorResponse1.prototype, "message", void 0);
     return ObErrorResponse1;

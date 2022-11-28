@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Message } from "./message";
 import { Pagination } from "./pagination";
 var Meta = /** @class */ (function (_super) {
     __extends(Meta, _super);
@@ -31,15 +31,15 @@ var Meta = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=messages", elemType: shared.Message }),
+        SpeakeasyMetadata({ data: "json, name=messages", elemType: Message }),
         __metadata("design:type", Array)
     ], Meta.prototype, "messages", void 0);
     __decorate([
-        Metadata({ data: "json, name=pagination" }),
+        SpeakeasyMetadata({ data: "json, name=pagination" }),
         __metadata("design:type", Pagination)
     ], Meta.prototype, "pagination", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", Number)
     ], Meta.prototype, "status", void 0);
     return Meta;

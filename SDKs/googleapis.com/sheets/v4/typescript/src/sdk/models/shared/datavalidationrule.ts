@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BooleanCondition } from "./booleancondition";
+
 
 
 // DataValidationRule
@@ -7,15 +8,15 @@ import { BooleanCondition } from "./booleancondition";
  * A data validation rule.
 **/
 export class DataValidationRule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=condition" })
+  @SpeakeasyMetadata({ data: "json, name=condition" })
   condition?: BooleanCondition;
 
-  @Metadata({ data: "json, name=inputMessage" })
+  @SpeakeasyMetadata({ data: "json, name=inputMessage" })
   inputMessage?: string;
 
-  @Metadata({ data: "json, name=showCustomUi" })
+  @SpeakeasyMetadata({ data: "json, name=showCustomUi" })
   showCustomUi?: boolean;
 
-  @Metadata({ data: "json, name=strict" })
+  @SpeakeasyMetadata({ data: "json, name=strict" })
   strict?: boolean;
 }

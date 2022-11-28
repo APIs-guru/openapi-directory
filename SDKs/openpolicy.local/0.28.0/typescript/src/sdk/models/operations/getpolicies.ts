@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetPoliciesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=pretty" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pretty" })
   pretty?: boolean;
 }
 
 
 export class GetPoliciesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetPoliciesQueryParams;
 }
 
 
 export class GetPoliciesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   twoHundredResult?: shared.TwoHundredResult;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   fourHundred?: shared.FourHundred;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

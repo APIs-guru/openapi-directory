@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsEcsTaskDefinitionContainerDefinitionsMountPointsDetails
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A mount point for the data volumes in the container.
 **/
 export class AwsEcsTaskDefinitionContainerDefinitionsMountPointsDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ContainerPath" })
+  @SpeakeasyMetadata({ data: "json, name=ContainerPath" })
   containerPath?: string;
 
-  @Metadata({ data: "json, name=ReadOnly" })
+  @SpeakeasyMetadata({ data: "json, name=ReadOnly" })
   readOnly?: boolean;
 
-  @Metadata({ data: "json, name=SourceVolume" })
+  @SpeakeasyMetadata({ data: "json, name=SourceVolume" })
   sourceVolume?: string;
 }

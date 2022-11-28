@@ -1,14 +1,15 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import ocrresult
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class OcrPredictResponse:
-    object: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'object' }})
-    probabilities: Optional[List[ocrresult.OcrResult]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'probabilities' }})
-    sample_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sampleId' }})
-    task: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'task' }})
+    object: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('object') }})
+    probabilities: Optional[List[OcrResult]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('probabilities') }})
+    sample_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sampleId') }})
+    task: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('task') }})
     

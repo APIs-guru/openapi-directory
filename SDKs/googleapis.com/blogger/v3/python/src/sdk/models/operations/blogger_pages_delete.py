@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class BloggerPagesDeletePathParams:
-    blog_id: str = field(default=None, metadata={'path_param': { 'field_name': 'blogId', 'style': 'simple', 'explode': False }})
-    page_id: str = field(default=None, metadata={'path_param': { 'field_name': 'pageId', 'style': 'simple', 'explode': False }})
+    blog_id: str = field(metadata={'path_param': { 'field_name': 'blogId', 'style': 'simple', 'explode': False }})
+    page_id: str = field(metadata={'path_param': { 'field_name': 'pageId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,19 +27,19 @@ class BloggerPagesDeleteQueryParams:
 
 @dataclass
 class BloggerPagesDeleteSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BloggerPagesDeleteRequest:
-    path_params: BloggerPagesDeletePathParams = field(default=None)
-    query_params: BloggerPagesDeleteQueryParams = field(default=None)
-    security: BloggerPagesDeleteSecurity = field(default=None)
+    path_params: BloggerPagesDeletePathParams = field()
+    query_params: BloggerPagesDeleteQueryParams = field()
+    security: BloggerPagesDeleteSecurity = field()
     
 
 @dataclass
 class BloggerPagesDeleteResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

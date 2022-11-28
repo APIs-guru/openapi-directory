@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,20 +22,20 @@ class GetLaunchConfigurationHeaders:
 @dataclass_json
 @dataclass
 class GetLaunchConfigurationRequestBody:
-    source_server_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sourceServerID' }})
+    source_server_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('sourceServerID') }})
     
 
 @dataclass
 class GetLaunchConfigurationRequest:
-    headers: GetLaunchConfigurationHeaders = field(default=None)
-    request: GetLaunchConfigurationRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: GetLaunchConfigurationHeaders = field()
+    request: GetLaunchConfigurationRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class GetLaunchConfigurationResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     launch_configuration: Optional[shared.LaunchConfiguration] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     uninitialized_account_exception: Optional[Any] = field(default=None)
     

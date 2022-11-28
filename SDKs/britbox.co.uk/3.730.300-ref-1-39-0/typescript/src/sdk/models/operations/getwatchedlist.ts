@@ -1,73 +1,74 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum GetWatchedListOrderByEnum {
-    DateAdded = "date-added"
-,    DateModified = "date-modified"
+    DateAdded = "date-added",
+    DateModified = "date-modified"
 }
 
 
 export class GetWatchedListQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=completed" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=completed" })
   completed?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=device" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=device" })
   device?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=ff" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=ff" })
   ff?: shared.FeatureFlagsEnum[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=item_type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=item_type" })
   itemType?: shared.ItemTypeEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=lang" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lang" })
   lang?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=order" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=order" })
   order?: shared.ListOrderEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=order_by" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=order_by" })
   orderBy?: GetWatchedListOrderByEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page_size" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_size" })
   pageSize?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=segments" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=segments" })
   segments?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sub" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sub" })
   sub?: string;
 }
 
 
 export class GetWatchedListSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   profileAuth: shared.SchemeProfileAuth;
 }
 
 
 export class GetWatchedListRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetWatchedListQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetWatchedListSecurity;
 }
 
 
 export class GetWatchedListResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   itemList?: shared.ItemList;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceError?: shared.ServiceError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

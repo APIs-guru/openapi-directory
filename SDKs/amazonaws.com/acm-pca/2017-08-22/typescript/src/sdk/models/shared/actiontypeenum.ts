@@ -1,7 +1,8 @@
 
 
+
 export enum ActionTypeEnum {
-    IssueCertificate = "IssueCertificate"
-,    GetCertificate = "GetCertificate"
-,    ListPermissions = "ListPermissions"
+    IssueCertificate = "IssueCertificate",
+    GetCertificate = "GetCertificate",
+    ListPermissions = "ListPermissions"
 }

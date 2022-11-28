@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SingularConnectorProfileCredentials
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  The connector-specific profile credentials required when using Singular. 
 **/
 export class SingularConnectorProfileCredentials extends SpeakeasyBase {
-  @Metadata({ data: "json, name=apiKey" })
+  @SpeakeasyMetadata({ data: "json, name=apiKey" })
   apiKey: string;
 }

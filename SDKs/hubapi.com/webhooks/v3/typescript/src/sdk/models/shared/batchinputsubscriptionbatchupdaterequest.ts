@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SubscriptionBatchUpdateRequest } from "./subscriptionbatchupdaterequest";
 
 
+
 export class BatchInputSubscriptionBatchUpdateRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=inputs", elemType: shared.SubscriptionBatchUpdateRequest })
+  @SpeakeasyMetadata({ data: "json, name=inputs", elemType: SubscriptionBatchUpdateRequest })
   inputs: SubscriptionBatchUpdateRequest[];
 }

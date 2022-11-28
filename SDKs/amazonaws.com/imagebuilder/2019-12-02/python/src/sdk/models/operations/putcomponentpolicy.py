@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,21 +22,22 @@ class PutComponentPolicyHeaders:
 @dataclass_json
 @dataclass
 class PutComponentPolicyRequestBody:
-    component_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'componentArn' }})
-    policy: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'policy' }})
+    component_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('componentArn') }})
+    policy: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('policy') }})
     
 
 @dataclass
 class PutComponentPolicyRequest:
-    headers: PutComponentPolicyHeaders = field(default=None)
-    request: PutComponentPolicyRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: PutComponentPolicyHeaders = field()
+    request: PutComponentPolicyRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PutComponentPolicyResponse:
+    content_type: str = field()
+    status_code: int = field()
     call_rate_limit_exceeded_exception: Optional[Any] = field(default=None)
     client_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     forbidden_exception: Optional[Any] = field(default=None)
     invalid_parameter_value_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
@@ -40,5 +45,4 @@ class PutComponentPolicyResponse:
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

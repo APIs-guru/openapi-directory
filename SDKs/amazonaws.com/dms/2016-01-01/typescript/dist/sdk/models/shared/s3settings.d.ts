@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CannedAclForObjectsValueEnum } from "./cannedaclforobjectsvalueenum";
 import { CompressionTypeValueEnum } from "./compressiontypevalueenum";
 import { DataFormatValueEnum } from "./dataformatvalueenum";

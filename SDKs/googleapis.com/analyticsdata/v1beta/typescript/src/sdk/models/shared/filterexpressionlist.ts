@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FilterExpression } from "./filterexpression";
+
 
 
 // FilterExpressionList
@@ -8,6 +8,6 @@ import { FilterExpression } from "./filterexpression";
  * A list of filter expressions.
 **/
 export class FilterExpressionList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=expressions", elemType: shared.FilterExpression })
+  @SpeakeasyMetadata({ data: "json, name=expressions", elemType: FilterExpression })
   expressions?: FilterExpression[];
 }

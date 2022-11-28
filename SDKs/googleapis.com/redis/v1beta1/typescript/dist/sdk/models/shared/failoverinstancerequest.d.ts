@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum FailoverInstanceRequestDataProtectionModeEnum {
     DataProtectionModeUnspecified = "DATA_PROTECTION_MODE_UNSPECIFIED",
     LimitedDataLoss = "LIMITED_DATA_LOSS",

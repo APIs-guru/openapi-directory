@@ -1,10 +1,12 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import lineviewmodel
+from sdk import utils
+from . import *
 
 class SlideViewModelSoundToPlayEnum(str, Enum):
     NEW_SLIDE = "NewSlide"
@@ -30,12 +32,12 @@ class SlideViewModelTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class SlideViewModel:
-    carousel_display_seconds: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'carouselDisplaySeconds' }})
-    carousel_order: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'carouselOrder' }})
-    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    lines: Optional[List[lineviewmodel.LineViewModel]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lines' }})
-    slide_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'slideTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    sound_to_play: Optional[SlideViewModelSoundToPlayEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'soundToPlay' }})
-    speaker_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'speakerTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    type: Optional[SlideViewModelTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    carousel_display_seconds: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('carouselDisplaySeconds') }})
+    carousel_order: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('carouselOrder') }})
+    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    lines: Optional[List[LineViewModel]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lines') }})
+    slide_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('slideTime'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    sound_to_play: Optional[SlideViewModelSoundToPlayEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('soundToPlay') }})
+    speaker_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('speakerTime'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    type: Optional[SlideViewModelTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

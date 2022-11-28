@@ -1,16 +1,21 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import interaction_group_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class InteractionLimitResponse:
-    expires_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expires_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    limit: interaction_group_enum.InteractionGroupEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'limit' }})
-    origin: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'origin' }})
+    r"""InteractionLimitResponse
+    Interaction limit settings.
+    """
+    
+    expires_at: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('expires_at'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    limit: InteractionGroupEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('limit') }})
+    origin: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('origin') }})
     

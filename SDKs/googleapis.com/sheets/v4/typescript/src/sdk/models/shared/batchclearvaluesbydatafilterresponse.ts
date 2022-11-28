@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BatchClearValuesByDataFilterResponse
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The response when clearing a range of values selected with DataFilters in a spreadsheet.
 **/
 export class BatchClearValuesByDataFilterResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clearedRanges" })
+  @SpeakeasyMetadata({ data: "json, name=clearedRanges" })
   clearedRanges?: string[];
 
-  @Metadata({ data: "json, name=spreadsheetId" })
+  @SpeakeasyMetadata({ data: "json, name=spreadsheetId" })
   spreadsheetId?: string;
 }

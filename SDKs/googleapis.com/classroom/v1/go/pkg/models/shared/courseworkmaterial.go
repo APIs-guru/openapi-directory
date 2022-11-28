@@ -17,6 +17,8 @@ const (
 	CourseWorkMaterialStateEnumDeleted                            CourseWorkMaterialStateEnum = "DELETED"
 )
 
+// CourseWorkMaterial
+// Course work material created by a teacher for students of the course
 type CourseWorkMaterial struct {
 	AlternateLink             *string                             `json:"alternateLink,omitempty"`
 	AssigneeMode              *CourseWorkMaterialAssigneeModeEnum `json:"assigneeMode,omitempty"`

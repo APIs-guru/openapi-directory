@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SyncFlags } from "./syncflags";
+
 
 
 // MySqlSyncConfig
@@ -8,6 +8,6 @@ import { SyncFlags } from "./syncflags";
  * MySQL-specific external server sync settings.
 **/
 export class MySqlSyncConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=initialSyncFlags", elemType: shared.SyncFlags })
+  @SpeakeasyMetadata({ data: "json, name=initialSyncFlags", elemType: SyncFlags })
   initialSyncFlags?: SyncFlags[];
 }

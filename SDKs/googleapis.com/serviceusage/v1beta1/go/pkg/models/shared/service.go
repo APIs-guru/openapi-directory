@@ -8,6 +8,8 @@ const (
 	ServiceStateEnumEnabled          ServiceStateEnum = "ENABLED"
 )
 
+// Service
+// A service that is available for use by the consumer.
 type Service struct {
 	Config *ServiceConfig    `json:"config,omitempty"`
 	Name   *string           `json:"name,omitempty"`

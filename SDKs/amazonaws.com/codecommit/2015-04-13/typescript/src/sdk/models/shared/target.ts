@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Target
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Returns information about a target for a pull request.
 **/
 export class Target extends SpeakeasyBase {
-  @Metadata({ data: "json, name=destinationReference" })
+  @SpeakeasyMetadata({ data: "json, name=destinationReference" })
   destinationReference?: string;
 
-  @Metadata({ data: "json, name=repositoryName" })
+  @SpeakeasyMetadata({ data: "json, name=repositoryName" })
   repositoryName: string;
 
-  @Metadata({ data: "json, name=sourceReference" })
+  @SpeakeasyMetadata({ data: "json, name=sourceReference" })
   sourceReference: string;
 }

@@ -1,1160 +1,1161 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class MirrorTimelineInsertQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=alt" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" })
   alt?: shared.AltEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" })
   fields?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=key" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" })
   key?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" })
   oauthToken?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" })
   prettyPrint?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" })
   quotaUser?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=userIp" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userIp" })
   userIp?: string;
 }
 
 
 export class MirrorTimelineInsertRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=audio/1d-interleaved-parityfec" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/1d-interleaved-parityfec" })
   audio1dInterleavedParityfec: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/32kadpcm" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/32kadpcm" })
   audio32kadpcm: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/3gpp" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/3gpp" })
   audio3gpp: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/3gpp2" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/3gpp2" })
   audio3gpp2: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/aac" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/aac" })
   audioAac: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/ac3" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/ac3" })
   audioAc3: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/adpcm" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/adpcm" })
   audioAdpcm: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/amr" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/amr" })
   audioAmr: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/amr-wb" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/amr-wb" })
   audioAmrWb: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/amr-wb+" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/amr-wb+" })
   audioAmrWbPlus: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/aptx" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/aptx" })
   audioAptx: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/asc" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/asc" })
   audioAsc: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/atrac3" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/atrac3" })
   audioAtrac3: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/atrac-advanced-lossless" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/atrac-advanced-lossless" })
   audioAtracAdvancedLossless: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/atrac-x" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/atrac-x" })
   audioAtracX: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/basic" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/basic" })
   audioBasic: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/bv16" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/bv16" })
   audioBv16: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/bv32" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/bv32" })
   audioBv32: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/clearmode" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/clearmode" })
   audioClearmode: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/cn" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/cn" })
   audioCn: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/dat12" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/dat12" })
   audioDat12: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/dls" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/dls" })
   audioDls: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/dsr-es201108" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/dsr-es201108" })
   audioDsrEs201108: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/dsr-es202050" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/dsr-es202050" })
   audioDsrEs202050: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/dsr-es202211" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/dsr-es202211" })
   audioDsrEs202211: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/dsr-es202212" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/dsr-es202212" })
   audioDsrEs202212: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/dv" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/dv" })
   audioDv: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/dvi4" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/dvi4" })
   audioDvi4: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/eac3" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/eac3" })
   audioEac3: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/encaprtp" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/encaprtp" })
   audioEncaprtp: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/evrc" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/evrc" })
   audioEvrc: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/evrc0" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/evrc0" })
   audioEvrc0: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/evrc1" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/evrc1" })
   audioEvrc1: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/evrc-qcp" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/evrc-qcp" })
   audioEvrcQcp: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/evrcb" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/evrcb" })
   audioEvrcb: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/evrcb0" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/evrcb0" })
   audioEvrcb0: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/evrcb1" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/evrcb1" })
   audioEvrcb1: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/evrcnw" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/evrcnw" })
   audioEvrcnw: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/evrcnw0" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/evrcnw0" })
   audioEvrcnw0: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/evrcnw1" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/evrcnw1" })
   audioEvrcnw1: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/evrcwb" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/evrcwb" })
   audioEvrcwb: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/evrcwb0" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/evrcwb0" })
   audioEvrcwb0: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/evrcwb1" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/evrcwb1" })
   audioEvrcwb1: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/evs" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/evs" })
   audioEvs: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/fwdred" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/fwdred" })
   audioFwdred: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/g711-0" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/g711-0" })
   audioG7110: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/g719" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/g719" })
   audioG719: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/g722" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/g722" })
   audioG722: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/g7221" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/g7221" })
   audioG7221: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/g723" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/g723" })
   audioG723: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/g726-16" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/g726-16" })
   audioG72616: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/g726-24" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/g726-24" })
   audioG72624: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/g726-32" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/g726-32" })
   audioG72632: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/g726-40" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/g726-40" })
   audioG72640: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/g728" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/g728" })
   audioG728: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/g729" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/g729" })
   audioG729: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/g7291" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/g7291" })
   audioG7291: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/g729d" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/g729d" })
   audioG729d: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/g729e" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/g729e" })
   audioG729e: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/gsm" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/gsm" })
   audioGsm: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/gsm-efr" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/gsm-efr" })
   audioGsmEfr: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/gsm-hr-08" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/gsm-hr-08" })
   audioGsmHr08: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/ip-mr_v2.5" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/ip-mr_v2.5" })
   audioIpMrV25: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/ilbc" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/ilbc" })
   audioIlbc: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/isac" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/isac" })
   audioIsac: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/l16" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/l16" })
   audioL16: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/l20" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/l20" })
   audioL20: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/l24" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/l24" })
   audioL24: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/l8" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/l8" })
   audioL8: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/lpc" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/lpc" })
   audioLpc: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/melp" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/melp" })
   audioMelp: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/melp1200" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/melp1200" })
   audioMelp1200: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/melp2400" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/melp2400" })
   audioMelp2400: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/melp600" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/melp600" })
   audioMelp600: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/midi" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/midi" })
   audioMidi: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/mobile-xmf" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/mobile-xmf" })
   audioMobileXmf: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/mp3" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/mp3" })
   audioMp3: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/mp4" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/mp4" })
   audioMp4: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/mp4a-latm" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/mp4a-latm" })
   audioMp4aLatm: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/mpa" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/mpa" })
   audioMpa: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/mpa-robust" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/mpa-robust" })
   audioMpaRobust: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/mpeg" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/mpeg" })
   audioMpeg: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/mpeg4-generic" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/mpeg4-generic" })
   audioMpeg4Generic: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/musepack" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/musepack" })
   audioMusepack: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/ogg" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/ogg" })
   audioOgg: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/opus" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/opus" })
   audioOpus: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/parityfec" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/parityfec" })
   audioParityfec: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/pcma" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/pcma" })
   audioPcma: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/pcma-wb" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/pcma-wb" })
   audioPcmaWb: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/pcmu" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/pcmu" })
   audioPcmu: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/pcmu-wb" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/pcmu-wb" })
   audioPcmuWb: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/prs.sid" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/prs.sid" })
   audioPrsSid: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/qcelp" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/qcelp" })
   audioQcelp: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/raptorfec" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/raptorfec" })
   audioRaptorfec: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/red" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/red" })
   audioRed: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/rtp-enc-aescm128" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/rtp-enc-aescm128" })
   audioRtpEncAescm128: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/rtp-midi" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/rtp-midi" })
   audioRtpMidi: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/rtploopback" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/rtploopback" })
   audioRtploopback: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/rtx" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/rtx" })
   audioRtx: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/s3m" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/s3m" })
   audioS3m: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/silk" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/silk" })
   audioSilk: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/smv" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/smv" })
   audioSmv: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/smv0" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/smv0" })
   audioSmv0: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/smv-qcp" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/smv-qcp" })
   audioSmvQcp: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/sp-midi" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/sp-midi" })
   audioSpMidi: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/speex" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/speex" })
   audioSpeex: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/t140c" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/t140c" })
   audioT140c: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/t38" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/t38" })
   audioT38: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/telephone-event" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/telephone-event" })
   audioTelephoneEvent: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/tetra_acelp" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/tetra_acelp" })
   audioTetraAcelp: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/tone" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/tone" })
   audioTone: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/uemclip" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/uemclip" })
   audioUemclip: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/ulpfec" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/ulpfec" })
   audioUlpfec: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/usac" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/usac" })
   audioUsac: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/vdvi" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/vdvi" })
   audioVdvi: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/vmr-wb" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/vmr-wb" })
   audioVmrWb: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/vnd.3gpp.iufp" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/vnd.3gpp.iufp" })
   audioVnd3gppIufp: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/vnd.4sb" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/vnd.4sb" })
   audioVnd4sb: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/vnd.audiokoz" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/vnd.audiokoz" })
   audioVndAudiokoz: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/vnd.celp" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/vnd.celp" })
   audioVndCelp: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/vnd.cisco.nse" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/vnd.cisco.nse" })
   audioVndCiscoNse: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/vnd.cmles.radio-events" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/vnd.cmles.radio-events" })
   audioVndCmlesRadioEvents: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/vnd.cns.anp1" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/vnd.cns.anp1" })
   audioVndCnsAnp1: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/vnd.cns.inf1" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/vnd.cns.inf1" })
   audioVndCnsInf1: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/vnd.dece.audio" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/vnd.dece.audio" })
   audioVndDeceAudio: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/vnd.digital-winds" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/vnd.digital-winds" })
   audioVndDigitalWinds: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/vnd.dlna.adts" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/vnd.dlna.adts" })
   audioVndDlnaAdts: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/vnd.dolby.heaac.1" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/vnd.dolby.heaac.1" })
   audioVndDolbyHeaac1: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/vnd.dolby.heaac.2" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/vnd.dolby.heaac.2" })
   audioVndDolbyHeaac2: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/vnd.dolby.mlp" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/vnd.dolby.mlp" })
   audioVndDolbyMlp: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/vnd.dolby.mps" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/vnd.dolby.mps" })
   audioVndDolbyMps: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/vnd.dolby.pl2" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/vnd.dolby.pl2" })
   audioVndDolbyPl2: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/vnd.dolby.pl2x" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/vnd.dolby.pl2x" })
   audioVndDolbyPl2x: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/vnd.dolby.pl2z" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/vnd.dolby.pl2z" })
   audioVndDolbyPl2z: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/vnd.dolby.pulse.1" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/vnd.dolby.pulse.1" })
   audioVndDolbyPulse1: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/vnd.dra" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/vnd.dra" })
   audioVndDra: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/vnd.dts" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/vnd.dts" })
   audioVndDts: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/vnd.dts.hd" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/vnd.dts.hd" })
   audioVndDtsHd: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/vnd.dts.uhd" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/vnd.dts.uhd" })
   audioVndDtsUhd: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/vnd.dvb.file" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/vnd.dvb.file" })
   audioVndDvbFile: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/vnd.everad.plj" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/vnd.everad.plj" })
   audioVndEveradPlj: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/vnd.hns.audio" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/vnd.hns.audio" })
   audioVndHnsAudio: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/vnd.lucent.voice" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/vnd.lucent.voice" })
   audioVndLucentVoice: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/vnd.ms-playready.media.pya" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/vnd.ms-playready.media.pya" })
   audioVndMsPlayreadyMediaPya: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/vnd.nokia.mobile-xmf" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/vnd.nokia.mobile-xmf" })
   audioVndNokiaMobileXmf: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/vnd.nortel.vbk" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/vnd.nortel.vbk" })
   audioVndNortelVbk: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/vnd.nuera.ecelp4800" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/vnd.nuera.ecelp4800" })
   audioVndNueraEcelp4800: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/vnd.nuera.ecelp7470" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/vnd.nuera.ecelp7470" })
   audioVndNueraEcelp7470: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/vnd.nuera.ecelp9600" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/vnd.nuera.ecelp9600" })
   audioVndNueraEcelp9600: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/vnd.octel.sbc" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/vnd.octel.sbc" })
   audioVndOctelSbc: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/vnd.presonus.multitrack" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/vnd.presonus.multitrack" })
   audioVndPresonusMultitrack: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/vnd.qcelp" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/vnd.qcelp" })
   audioVndQcelp: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/vnd.rhetorex.32kadpcm" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/vnd.rhetorex.32kadpcm" })
   audioVndRhetorex32kadpcm: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/vnd.rip" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/vnd.rip" })
   audioVndRip: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/vnd.rn-realaudio" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/vnd.rn-realaudio" })
   audioVndRnRealaudio: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/vnd.sealedmedia.softseal.mpeg" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/vnd.sealedmedia.softseal.mpeg" })
   audioVndSealedmediaSoftsealMpeg: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/vnd.vmx.cvsd" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/vnd.vmx.cvsd" })
   audioVndVmxCvsd: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/vnd.wave" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/vnd.wave" })
   audioVndWave: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/vorbis" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/vorbis" })
   audioVorbis: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/vorbis-config" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/vorbis-config" })
   audioVorbisConfig: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/wav" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/wav" })
   audioWav: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/wave" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/wave" })
   audioWave: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/webm" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/webm" })
   audioWebm: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/x-aac" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/x-aac" })
   audioXAac: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/x-aiff" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/x-aiff" })
   audioXAiff: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/x-caf" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/x-caf" })
   audioXCaf: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/x-flac" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/x-flac" })
   audioXFlac: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/x-matroska" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/x-matroska" })
   audioXMatroska: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/x-mpegurl" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/x-mpegurl" })
   audioXMpegurl: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/x-ms-wax" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/x-ms-wax" })
   audioXMsWax: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/x-ms-wma" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/x-ms-wma" })
   audioXMsWma: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/x-pn-realaudio" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/x-pn-realaudio" })
   audioXPnRealaudio: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/x-pn-realaudio-plugin" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/x-pn-realaudio-plugin" })
   audioXPnRealaudioPlugin: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/x-realaudio" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/x-realaudio" })
   audioXRealaudio: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/x-tta" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/x-tta" })
   audioXTta: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/x-wav" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/x-wav" })
   audioXWav: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/xm" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/xm" })
   audioXm: Uint8Array;
 
-  @Metadata({ data: "request, media_type=audio/x-m4a" })
+  @SpeakeasyMetadata({ data: "request, media_type=audio/x-m4a" })
   audioXm4a: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/aces" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/aces" })
   imageAces: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/apng" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/apng" })
   imageApng: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/avci" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/avci" })
   imageAvci: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/avcs" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/avcs" })
   imageAvcs: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/bmp" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/bmp" })
   imageBmp: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/cgm" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/cgm" })
   imageCgm: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/dicom-rle" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/dicom-rle" })
   imageDicomRle: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/emf" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/emf" })
   imageEmf: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/fits" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/fits" })
   imageFits: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/g3fax" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/g3fax" })
   imageG3fax: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/gif" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/gif" })
   imageGif: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/heic" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/heic" })
   imageHeic: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/heic-sequence" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/heic-sequence" })
   imageHeicSequence: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/heif" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/heif" })
   imageHeif: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/heif-sequence" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/heif-sequence" })
   imageHeifSequence: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/ief" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/ief" })
   imageIef: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/jls" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/jls" })
   imageJls: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/jp2" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/jp2" })
   imageJp2: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/jpeg" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/jpeg" })
   imageJpeg: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/jpm" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/jpm" })
   imageJpm: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/jpx" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/jpx" })
   imageJpx: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/ktx" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/ktx" })
   imageKtx: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/naplps" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/naplps" })
   imageNaplps: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/pjpeg" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/pjpeg" })
   imagePjpeg: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/png" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/png" })
   imagePng: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/prs.btif" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/prs.btif" })
   imagePrsBtif: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/prs.pti" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/prs.pti" })
   imagePrsPti: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/pwg-raster" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/pwg-raster" })
   imagePwgRaster: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/sgi" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/sgi" })
   imageSgi: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/svg+xml" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/svg+xml" })
   imageSvgPlusXml: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/t38" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/t38" })
   imageT38: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/tiff" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/tiff" })
   imageTiff: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/tiff-fx" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/tiff-fx" })
   imageTiffFx: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/vnd.adobe.photoshop" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/vnd.adobe.photoshop" })
   imageVndAdobePhotoshop: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/vnd.airzip.accelerator.azv" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/vnd.airzip.accelerator.azv" })
   imageVndAirzipAcceleratorAzv: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/vnd.cns.inf2" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/vnd.cns.inf2" })
   imageVndCnsInf2: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/vnd.dece.graphic" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/vnd.dece.graphic" })
   imageVndDeceGraphic: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/vnd.djvu" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/vnd.djvu" })
   imageVndDjvu: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/vnd.dvb.subtitle" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/vnd.dvb.subtitle" })
   imageVndDvbSubtitle: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/vnd.dwg" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/vnd.dwg" })
   imageVndDwg: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/vnd.dxf" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/vnd.dxf" })
   imageVndDxf: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/vnd.fastbidsheet" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/vnd.fastbidsheet" })
   imageVndFastbidsheet: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/vnd.fpx" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/vnd.fpx" })
   imageVndFpx: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/vnd.fst" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/vnd.fst" })
   imageVndFst: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/vnd.fujixerox.edmics-mmr" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/vnd.fujixerox.edmics-mmr" })
   imageVndFujixeroxEdmicsMmr: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/vnd.fujixerox.edmics-rlc" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/vnd.fujixerox.edmics-rlc" })
   imageVndFujixeroxEdmicsRlc: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/vnd.globalgraphics.pgb" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/vnd.globalgraphics.pgb" })
   imageVndGlobalgraphicsPgb: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/vnd.microsoft.icon" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/vnd.microsoft.icon" })
   imageVndMicrosoftIcon: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/vnd.mix" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/vnd.mix" })
   imageVndMix: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/vnd.mozilla.apng" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/vnd.mozilla.apng" })
   imageVndMozillaApng: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/vnd.ms-modi" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/vnd.ms-modi" })
   imageVndMsModi: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/vnd.ms-photo" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/vnd.ms-photo" })
   imageVndMsPhoto: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/vnd.net-fpx" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/vnd.net-fpx" })
   imageVndNetFpx: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/vnd.radiance" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/vnd.radiance" })
   imageVndRadiance: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/vnd.sealed.png" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/vnd.sealed.png" })
   imageVndSealedPng: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/vnd.sealedmedia.softseal.gif" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/vnd.sealedmedia.softseal.gif" })
   imageVndSealedmediaSoftsealGif: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/vnd.sealedmedia.softseal.jpg" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/vnd.sealedmedia.softseal.jpg" })
   imageVndSealedmediaSoftsealJpg: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/vnd.svf" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/vnd.svf" })
   imageVndSvf: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/vnd.tencent.tap" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/vnd.tencent.tap" })
   imageVndTencentTap: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/vnd.valve.source.texture" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/vnd.valve.source.texture" })
   imageVndValveSourceTexture: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/vnd.wap.wbmp" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/vnd.wap.wbmp" })
   imageVndWapWbmp: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/vnd.xiff" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/vnd.xiff" })
   imageVndXiff: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/vnd.zbrush.pcx" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/vnd.zbrush.pcx" })
   imageVndZbrushPcx: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/webp" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/webp" })
   imageWebp: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/wmf" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/wmf" })
   imageWmf: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/x-3ds" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/x-3ds" })
   imageX3ds: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/x-cmu-raster" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/x-cmu-raster" })
   imageXCmuRaster: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/x-cmx" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/x-cmx" })
   imageXCmx: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/x-freehand" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/x-freehand" })
   imageXFreehand: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/x-icon" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/x-icon" })
   imageXIcon: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/x-jng" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/x-jng" })
   imageXJng: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/x-mrsid-image" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/x-mrsid-image" })
   imageXMrsidImage: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/x-ms-bmp" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/x-ms-bmp" })
   imageXMsBmp: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/x-pcx" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/x-pcx" })
   imageXPcx: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/x-pict" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/x-pict" })
   imageXPict: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/x-portable-anymap" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/x-portable-anymap" })
   imageXPortableAnymap: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/x-portable-bitmap" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/x-portable-bitmap" })
   imageXPortableBitmap: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/x-portable-graymap" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/x-portable-graymap" })
   imageXPortableGraymap: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/x-portable-pixmap" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/x-portable-pixmap" })
   imageXPortablePixmap: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/x-rgb" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/x-rgb" })
   imageXRgb: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/x-tga" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/x-tga" })
   imageXTga: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/x-xbitmap" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/x-xbitmap" })
   imageXXbitmap: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/x-xcf" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/x-xcf" })
   imageXXcf: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/x-xpixmap" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/x-xpixmap" })
   imageXXpixmap: Uint8Array;
 
-  @Metadata({ data: "request, media_type=image/x-xwindowdump" })
+  @SpeakeasyMetadata({ data: "request, media_type=image/x-xwindowdump" })
   imageXXwindowdump: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/1d-interleaved-parityfec" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/1d-interleaved-parityfec" })
   video1dInterleavedParityfec: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/3gpp" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/3gpp" })
   video3gpp: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/3gpp2" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/3gpp2" })
   video3gpp2: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/3gpp-tt" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/3gpp-tt" })
   video3gppTt: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/bmpeg" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/bmpeg" })
   videoBmpeg: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/bt656" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/bt656" })
   videoBt656: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/celb" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/celb" })
   videoCelb: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/dv" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/dv" })
   videoDv: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/encaprtp" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/encaprtp" })
   videoEncaprtp: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/h261" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/h261" })
   videoH261: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/h263" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/h263" })
   videoH263: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/h263-1998" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/h263-1998" })
   videoH2631998: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/h263-2000" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/h263-2000" })
   videoH2632000: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/h264" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/h264" })
   videoH264: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/h264-rcdo" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/h264-rcdo" })
   videoH264Rcdo: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/h264-svc" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/h264-svc" })
   videoH264Svc: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/h265" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/h265" })
   videoH265: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/iso.segment" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/iso.segment" })
   videoIsoSegment: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/jpeg" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/jpeg" })
   videoJpeg: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/jpeg2000" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/jpeg2000" })
   videoJpeg2000: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/jpm" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/jpm" })
   videoJpm: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/mj2" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/mj2" })
   videoMj2: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/mp1s" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/mp1s" })
   videoMp1s: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/mp2p" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/mp2p" })
   videoMp2p: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/mp2t" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/mp2t" })
   videoMp2t: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/mp4" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/mp4" })
   videoMp4: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/mp4v-es" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/mp4v-es" })
   videoMp4vEs: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/mpeg" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/mpeg" })
   videoMpeg: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/mpeg4-generic" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/mpeg4-generic" })
   videoMpeg4Generic: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/mpv" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/mpv" })
   videoMpv: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/nv" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/nv" })
   videoNv: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/ogg" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/ogg" })
   videoOgg: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/parityfec" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/parityfec" })
   videoParityfec: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/pointer" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/pointer" })
   videoPointer: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/quicktime" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/quicktime" })
   videoQuicktime: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/raptorfec" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/raptorfec" })
   videoRaptorfec: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/raw" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/raw" })
   videoRaw: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/rtp-enc-aescm128" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/rtp-enc-aescm128" })
   videoRtpEncAescm128: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/rtploopback" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/rtploopback" })
   videoRtploopback: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/rtx" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/rtx" })
   videoRtx: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/smpte291" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/smpte291" })
   videoSmpte291: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/smpte292m" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/smpte292m" })
   videoSmpte292m: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/ulpfec" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/ulpfec" })
   videoUlpfec: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/vc1" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/vc1" })
   videoVc1: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/vc2" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/vc2" })
   videoVc2: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/vnd.cctv" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/vnd.cctv" })
   videoVndCctv: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/vnd.dece.hd" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/vnd.dece.hd" })
   videoVndDeceHd: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/vnd.dece.mobile" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/vnd.dece.mobile" })
   videoVndDeceMobile: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/vnd.dece.mp4" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/vnd.dece.mp4" })
   videoVndDeceMp4: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/vnd.dece.pd" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/vnd.dece.pd" })
   videoVndDecePd: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/vnd.dece.sd" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/vnd.dece.sd" })
   videoVndDeceSd: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/vnd.dece.video" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/vnd.dece.video" })
   videoVndDeceVideo: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/vnd.directv.mpeg" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/vnd.directv.mpeg" })
   videoVndDirectvMpeg: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/vnd.directv.mpeg-tts" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/vnd.directv.mpeg-tts" })
   videoVndDirectvMpegTts: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/vnd.dlna.mpeg-tts" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/vnd.dlna.mpeg-tts" })
   videoVndDlnaMpegTts: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/vnd.dvb.file" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/vnd.dvb.file" })
   videoVndDvbFile: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/vnd.fvt" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/vnd.fvt" })
   videoVndFvt: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/vnd.hns.video" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/vnd.hns.video" })
   videoVndHnsVideo: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/vnd.iptvforum.1dparityfec-1010" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/vnd.iptvforum.1dparityfec-1010" })
   videoVndIptvforum1dparityfec1010: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/vnd.iptvforum.1dparityfec-2005" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/vnd.iptvforum.1dparityfec-2005" })
   videoVndIptvforum1dparityfec2005: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/vnd.iptvforum.2dparityfec-1010" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/vnd.iptvforum.2dparityfec-1010" })
   videoVndIptvforum2dparityfec1010: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/vnd.iptvforum.2dparityfec-2005" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/vnd.iptvforum.2dparityfec-2005" })
   videoVndIptvforum2dparityfec2005: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/vnd.iptvforum.ttsavc" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/vnd.iptvforum.ttsavc" })
   videoVndIptvforumTtsavc: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/vnd.iptvforum.ttsmpeg2" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/vnd.iptvforum.ttsmpeg2" })
   videoVndIptvforumTtsmpeg2: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/vnd.motorola.video" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/vnd.motorola.video" })
   videoVndMotorolaVideo: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/vnd.motorola.videop" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/vnd.motorola.videop" })
   videoVndMotorolaVideop: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/vnd.mpegurl" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/vnd.mpegurl" })
   videoVndMpegurl: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/vnd.ms-playready.media.pyv" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/vnd.ms-playready.media.pyv" })
   videoVndMsPlayreadyMediaPyv: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/vnd.nokia.interleaved-multimedia" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/vnd.nokia.interleaved-multimedia" })
   videoVndNokiaInterleavedMultimedia: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/vnd.nokia.mp4vr" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/vnd.nokia.mp4vr" })
   videoVndNokiaMp4vr: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/vnd.nokia.videovoip" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/vnd.nokia.videovoip" })
   videoVndNokiaVideovoip: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/vnd.objectvideo" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/vnd.objectvideo" })
   videoVndObjectvideo: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/vnd.radgamettools.bink" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/vnd.radgamettools.bink" })
   videoVndRadgamettoolsBink: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/vnd.radgamettools.smacker" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/vnd.radgamettools.smacker" })
   videoVndRadgamettoolsSmacker: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/vnd.sealed.mpeg1" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/vnd.sealed.mpeg1" })
   videoVndSealedMpeg1: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/vnd.sealed.mpeg4" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/vnd.sealed.mpeg4" })
   videoVndSealedMpeg4: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/vnd.sealed.swf" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/vnd.sealed.swf" })
   videoVndSealedSwf: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/vnd.sealedmedia.softseal.mov" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/vnd.sealedmedia.softseal.mov" })
   videoVndSealedmediaSoftsealMov: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/vnd.uvvu.mp4" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/vnd.uvvu.mp4" })
   videoVndUvvuMp4: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/vnd.vivo" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/vnd.vivo" })
   videoVndVivo: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/vp8" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/vp8" })
   videoVp8: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/webm" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/webm" })
   videoWebm: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/x-fli" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/x-fli" })
   videoXFli: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/x-flv" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/x-flv" })
   videoXFlv: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/x-matroska" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/x-matroska" })
   videoXMatroska: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/x-mng" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/x-mng" })
   videoXMng: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/x-ms-asf" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/x-ms-asf" })
   videoXMsAsf: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/x-ms-vob" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/x-ms-vob" })
   videoXMsVob: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/x-ms-wm" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/x-ms-wm" })
   videoXMsWm: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/x-ms-wmv" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/x-ms-wmv" })
   videoXMsWmv: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/x-ms-wmx" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/x-ms-wmx" })
   videoXMsWmx: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/x-ms-wvx" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/x-ms-wvx" })
   videoXMsWvx: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/x-msvideo" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/x-msvideo" })
   videoXMsvideo: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/x-sgi-movie" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/x-sgi-movie" })
   videoXSgiMovie: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/x-smv" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/x-smv" })
   videoXSmv: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/x-f4v" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/x-f4v" })
   videoXf4v: Uint8Array;
 
-  @Metadata({ data: "request, media_type=video/x-m4v" })
+  @SpeakeasyMetadata({ data: "request, media_type=video/x-m4v" })
   videoXm4v: Uint8Array;
 }
 
 
 export class MirrorTimelineInsertSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2: shared.SchemeOauth2;
 
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2c: shared.SchemeOauth2c;
 }
 
 
 export class MirrorTimelineInsertSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2: shared.SchemeOauth2;
 
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2c: shared.SchemeOauth2c;
 }
 
 
 export class MirrorTimelineInsertSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
+  @SpeakeasyMetadata({ data: "security, option=true" })
   option1?: MirrorTimelineInsertSecurityOption1;
 
-  @Metadata({ data: "security, option=true" })
+  @SpeakeasyMetadata({ data: "security, option=true" })
   option2?: MirrorTimelineInsertSecurityOption2;
 }
 
 
 export class MirrorTimelineInsertRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: MirrorTimelineInsertQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request?: MirrorTimelineInsertRequests;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: MirrorTimelineInsertSecurity;
 }
 
 
 export class MirrorTimelineInsertResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

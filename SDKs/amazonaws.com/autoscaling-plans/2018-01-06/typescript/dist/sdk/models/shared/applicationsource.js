@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { TagFilter } from "./tagfilter";
 // ApplicationSource
 /**
  * Represents an application source.
@@ -34,11 +34,11 @@ var ApplicationSource = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CloudFormationStackARN" }),
+        SpeakeasyMetadata({ data: "json, name=CloudFormationStackARN" }),
         __metadata("design:type", String)
     ], ApplicationSource.prototype, "cloudFormationStackArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=TagFilters", elemType: shared.TagFilter }),
+        SpeakeasyMetadata({ data: "json, name=TagFilters", elemType: TagFilter }),
         __metadata("design:type", Array)
     ], ApplicationSource.prototype, "tagFilters", void 0);
     return ApplicationSource;

@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetModifyDefaultCreditSpecificationActionEnum {
     ModifyDefaultCreditSpecification = "ModifyDefaultCreditSpecification"
 }
 
 export enum GetModifyDefaultCreditSpecificationInstanceFamilyEnum {
-    T2 = "t2"
-,    T3 = "t3"
-,    T3a = "t3a"
-,    T4g = "t4g"
+    T2 = "t2",
+    T3 = "t3",
+    T3a = "t3a",
+    T4g = "t4g"
 }
 
 export enum GetModifyDefaultCreditSpecificationVersionEnum {
@@ -17,63 +18,63 @@ export enum GetModifyDefaultCreditSpecificationVersionEnum {
 
 
 export class GetModifyDefaultCreditSpecificationQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Action" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" })
   action: GetModifyDefaultCreditSpecificationActionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=CpuCredits" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=CpuCredits" })
   cpuCredits: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=DryRun" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DryRun" })
   dryRun?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=InstanceFamily" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=InstanceFamily" })
   instanceFamily: GetModifyDefaultCreditSpecificationInstanceFamilyEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" })
   version: GetModifyDefaultCreditSpecificationVersionEnum;
 }
 
 
 export class GetModifyDefaultCreditSpecificationHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class GetModifyDefaultCreditSpecificationRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetModifyDefaultCreditSpecificationQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetModifyDefaultCreditSpecificationHeaders;
 }
 
 
 export class GetModifyDefaultCreditSpecificationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

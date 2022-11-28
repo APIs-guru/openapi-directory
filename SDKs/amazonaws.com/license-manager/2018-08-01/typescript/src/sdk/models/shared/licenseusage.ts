@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EntitlementUsage } from "./entitlementusage";
+
 
 
 // LicenseUsage
@@ -8,6 +8,6 @@ import { EntitlementUsage } from "./entitlementusage";
  * Describes the entitlement usage associated with a license.
 **/
 export class LicenseUsage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EntitlementUsages", elemType: shared.EntitlementUsage })
+  @SpeakeasyMetadata({ data: "json, name=EntitlementUsages", elemType: EntitlementUsage })
   entitlementUsages?: EntitlementUsage[];
 }

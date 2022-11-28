@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ConnectionTypeEnum } from "./connectiontypeenum";
 import { Tag } from "./tag";
 export declare class CreateEnvironmentEc2Request extends SpeakeasyBase {

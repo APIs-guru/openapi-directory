@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import googleclouddialogflowv2beta1entitytypeentity
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleCloudDialogflowV2beta1BatchCreateEntitiesRequest:
-    entities: Optional[List[googleclouddialogflowv2beta1entitytypeentity.GoogleCloudDialogflowV2beta1EntityTypeEntity]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'entities' }})
-    language_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'languageCode' }})
+    r"""GoogleCloudDialogflowV2beta1BatchCreateEntitiesRequest
+    The request message for EntityTypes.BatchCreateEntities.
+    """
+    
+    entities: Optional[List[GoogleCloudDialogflowV2beta1EntityTypeEntity]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('entities') }})
+    language_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('languageCode') }})
     

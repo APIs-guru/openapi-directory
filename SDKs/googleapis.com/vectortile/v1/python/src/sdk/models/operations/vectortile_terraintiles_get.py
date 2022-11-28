@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class VectortileTerraintilesGetPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 class VectortileTerraintilesGetClientInfoPlatformEnum(str, Enum):
     PLATFORM_UNSPECIFIED = "PLATFORM_UNSPECIFIED"
@@ -57,13 +58,13 @@ class VectortileTerraintilesGetQueryParams:
 
 @dataclass
 class VectortileTerraintilesGetRequest:
-    path_params: VectortileTerraintilesGetPathParams = field(default=None)
-    query_params: VectortileTerraintilesGetQueryParams = field(default=None)
+    path_params: VectortileTerraintilesGetPathParams = field()
+    query_params: VectortileTerraintilesGetQueryParams = field()
     
 
 @dataclass
 class VectortileTerraintilesGetResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     terrain_tile: Optional[shared.TerrainTile] = field(default=None)
     

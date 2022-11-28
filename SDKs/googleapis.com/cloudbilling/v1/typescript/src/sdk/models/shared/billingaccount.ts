@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BillingAccount
@@ -6,15 +7,28 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A billing account in the [Google Cloud Console](https://console.cloud.google.com/). You can assign a billing account to one or more projects.
 **/
 export class BillingAccount extends SpeakeasyBase {
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=masterBillingAccount" })
+  @SpeakeasyMetadata({ data: "json, name=masterBillingAccount" })
   masterBillingAccount?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=open" })
+  @SpeakeasyMetadata({ data: "json, name=open" })
   open?: boolean;
+}
+
+
+// BillingAccountInput
+/** 
+ * A billing account in the [Google Cloud Console](https://console.cloud.google.com/). You can assign a billing account to one or more projects.
+**/
+export class BillingAccountInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
+  displayName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=masterBillingAccount" })
+  masterBillingAccount?: string;
 }

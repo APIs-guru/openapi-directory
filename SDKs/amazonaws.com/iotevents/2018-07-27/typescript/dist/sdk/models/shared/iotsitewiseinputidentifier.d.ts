@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { IotSiteWiseAssetModelPropertyIdentifier } from "./iotsitewiseassetmodelpropertyidentifier";
 /**
  *  The identifer of the input routed from AWS IoT SiteWise.

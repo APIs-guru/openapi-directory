@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActivityType } from "./activitytype";
 import { WorkflowExecution } from "./workflowexecution";
+
 
 
 // ActivityTask
@@ -8,21 +9,21 @@ import { WorkflowExecution } from "./workflowexecution";
  * Unit of work sent to an activity worker.
 **/
 export class ActivityTask extends SpeakeasyBase {
-  @Metadata({ data: "json, name=activityId" })
+  @SpeakeasyMetadata({ data: "json, name=activityId" })
   activityId: string;
 
-  @Metadata({ data: "json, name=activityType" })
+  @SpeakeasyMetadata({ data: "json, name=activityType" })
   activityType: ActivityType;
 
-  @Metadata({ data: "json, name=input" })
+  @SpeakeasyMetadata({ data: "json, name=input" })
   input?: string;
 
-  @Metadata({ data: "json, name=startedEventId" })
+  @SpeakeasyMetadata({ data: "json, name=startedEventId" })
   startedEventId: number;
 
-  @Metadata({ data: "json, name=taskToken" })
+  @SpeakeasyMetadata({ data: "json, name=taskToken" })
   taskToken: string;
 
-  @Metadata({ data: "json, name=workflowExecution" })
+  @SpeakeasyMetadata({ data: "json, name=workflowExecution" })
   workflowExecution: WorkflowExecution;
 }

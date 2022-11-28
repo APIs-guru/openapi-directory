@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import iceserver
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetIceServerConfigResponse:
-    ice_server_list: Optional[List[iceserver.IceServer]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IceServerList' }})
+    ice_server_list: Optional[List[IceServer]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('IceServerList') }})
     

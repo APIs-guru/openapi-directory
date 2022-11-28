@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum IamBindingActionEnum {
-    ActionUnspecified = "ACTION_UNSPECIFIED"
-,    Add = "ADD"
-,    Remove = "REMOVE"
+    ActionUnspecified = "ACTION_UNSPECIFIED",
+    Add = "ADD",
+    Remove = "REMOVE"
 }
 
 
@@ -12,12 +13,12 @@ export enum IamBindingActionEnum {
  * Represents a particular IAM binding, which captures a member's role addition, removal, or state.
 **/
 export class IamBinding extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action?: IamBindingActionEnum;
 
-  @Metadata({ data: "json, name=member" })
+  @SpeakeasyMetadata({ data: "json, name=member" })
   member?: string;
 
-  @Metadata({ data: "json, name=role" })
+  @SpeakeasyMetadata({ data: "json, name=role" })
   role?: string;
 }

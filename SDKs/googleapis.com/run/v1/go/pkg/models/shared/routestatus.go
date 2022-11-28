@@ -1,5 +1,7 @@
 package shared
 
+// RouteStatus
+// RouteStatus communicates the observed state of the Route (from the controller).
 type RouteStatus struct {
 	Address            *Addressable                `json:"address,omitempty"`
 	Conditions         []GoogleCloudRunV1Condition `json:"conditions,omitempty"`

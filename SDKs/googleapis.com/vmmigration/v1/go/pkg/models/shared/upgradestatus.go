@@ -9,6 +9,8 @@ const (
 	UpgradeStatusStateEnumSucceeded        UpgradeStatusStateEnum = "SUCCEEDED"
 )
 
+// UpgradeStatus
+// UpgradeStatus contains information about upgradeAppliance operation.
 type UpgradeStatus struct {
 	Error           *Status                 `json:"error,omitempty"`
 	PreviousVersion *string                 `json:"previousVersion,omitempty"`

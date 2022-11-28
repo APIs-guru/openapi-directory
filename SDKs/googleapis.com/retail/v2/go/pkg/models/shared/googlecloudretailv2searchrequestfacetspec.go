@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudRetailV2SearchRequestFacetSpec
+// A facet specification to perform faceted search.
 type GoogleCloudRetailV2SearchRequestFacetSpec struct {
 	EnableDynamicPosition *bool                                              `json:"enableDynamicPosition,omitempty"`
 	ExcludedFilterKeys    []string                                           `json:"excludedFilterKeys,omitempty"`

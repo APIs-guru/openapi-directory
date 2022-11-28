@@ -8,10 +8,6 @@ type GetScriptTagsSecurity struct {
 	OAuth2 shared.SchemeOAuth2 `security:"scheme,type=oauth2"`
 }
 
-type GetScriptTagsRequest struct {
-	Security GetScriptTagsSecurity
-}
-
 type GetScriptTags200ApplicationJSONScriptTagsDisplayScopeEnum string
 
 const (
@@ -31,6 +27,10 @@ type GetScriptTags200ApplicationJSONScriptTags struct {
 
 type GetScriptTags200ApplicationJSON struct {
 	ScriptTags []GetScriptTags200ApplicationJSONScriptTags `json:"script_tags,omitempty"`
+}
+
+type GetScriptTagsRequest struct {
+	Security GetScriptTagsSecurity
 }
 
 type GetScriptTagsResponse struct {

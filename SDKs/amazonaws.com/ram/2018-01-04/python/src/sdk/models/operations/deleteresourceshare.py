@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class DeleteResourceShareQueryParams:
+    resource_share_arn: str = field(metadata={'query_param': { 'field_name': 'resourceShareArn', 'style': 'form', 'explode': True }})
     client_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'clientToken', 'style': 'form', 'explode': True }})
-    resource_share_arn: str = field(default=None, metadata={'query_param': { 'field_name': 'resourceShareArn', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -22,13 +25,14 @@ class DeleteResourceShareHeaders:
 
 @dataclass
 class DeleteResourceShareRequest:
-    query_params: DeleteResourceShareQueryParams = field(default=None)
-    headers: DeleteResourceShareHeaders = field(default=None)
+    headers: DeleteResourceShareHeaders = field()
+    query_params: DeleteResourceShareQueryParams = field()
     
 
 @dataclass
 class DeleteResourceShareResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     delete_resource_share_response: Optional[shared.DeleteResourceShareResponse] = field(default=None)
     idempotent_parameter_mismatch_exception: Optional[Any] = field(default=None)
     invalid_client_token_exception: Optional[Any] = field(default=None)
@@ -38,6 +42,5 @@ class DeleteResourceShareResponse:
     operation_not_permitted_exception: Optional[Any] = field(default=None)
     server_internal_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     unknown_resource_exception: Optional[Any] = field(default=None)
     

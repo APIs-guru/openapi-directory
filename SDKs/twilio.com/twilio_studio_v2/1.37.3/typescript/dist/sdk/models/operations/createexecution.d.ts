@@ -1,0 +1,25 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import * as shared from "../shared";
+export declare const CreateExecutionServerList: readonly ["https://studio.twilio.com"];
+export declare class CreateExecutionPathParams extends SpeakeasyBase {
+    flowSid: string;
+}
+export declare class CreateExecutionCreateExecutionRequest extends SpeakeasyBase {
+    from: string;
+    parameters?: any;
+    to: string;
+}
+export declare class CreateExecutionSecurity extends SpeakeasyBase {
+    accountSidAuthToken: shared.SchemeAccountSidAuthToken;
+}
+export declare class CreateExecutionRequest extends SpeakeasyBase {
+    serverUrl?: string;
+    pathParams: CreateExecutionPathParams;
+    request?: CreateExecutionCreateExecutionRequest;
+    security: CreateExecutionSecurity;
+}
+export declare class CreateExecutionResponse extends SpeakeasyBase {
+    contentType: string;
+    statusCode: number;
+    studioV2FlowExecution?: shared.StudioV2FlowExecution;
+}

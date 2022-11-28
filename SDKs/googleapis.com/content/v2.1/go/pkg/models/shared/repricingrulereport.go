@@ -10,6 +10,8 @@ const (
 	RepricingRuleReportTypeEnumTypeCompetitivePrice         RepricingRuleReportTypeEnum = "TYPE_COMPETITIVE_PRICE"
 )
 
+// RepricingRuleReport
+// Resource that represents a daily Repricing rule report. Next ID: 11
 type RepricingRuleReport struct {
 	BuyboxWinningRuleStats *RepricingRuleReportBuyboxWinningRuleStats `json:"buyboxWinningRuleStats,omitempty"`
 	Date                   *Date                                      `json:"date,omitempty"`

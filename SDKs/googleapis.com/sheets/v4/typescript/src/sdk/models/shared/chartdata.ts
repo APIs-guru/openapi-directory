@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataSourceColumnReference } from "./datasourcecolumnreference";
 import { ChartGroupRule } from "./chartgrouprule";
 import { ChartSourceRange } from "./chartsourcerange";
 
+
 export enum ChartDataAggregateTypeEnum {
-    ChartAggregateTypeUnspecified = "CHART_AGGREGATE_TYPE_UNSPECIFIED"
-,    Average = "AVERAGE"
-,    Count = "COUNT"
-,    Max = "MAX"
-,    Median = "MEDIAN"
-,    Min = "MIN"
-,    Sum = "SUM"
+    ChartAggregateTypeUnspecified = "CHART_AGGREGATE_TYPE_UNSPECIFIED",
+    Average = "AVERAGE",
+    Count = "COUNT",
+    Max = "MAX",
+    Median = "MEDIAN",
+    Min = "MIN",
+    Sum = "SUM"
 }
 
 
@@ -19,15 +20,15 @@ export enum ChartDataAggregateTypeEnum {
  * The data included in a domain or series.
 **/
 export class ChartData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=aggregateType" })
+  @SpeakeasyMetadata({ data: "json, name=aggregateType" })
   aggregateType?: ChartDataAggregateTypeEnum;
 
-  @Metadata({ data: "json, name=columnReference" })
+  @SpeakeasyMetadata({ data: "json, name=columnReference" })
   columnReference?: DataSourceColumnReference;
 
-  @Metadata({ data: "json, name=groupRule" })
+  @SpeakeasyMetadata({ data: "json, name=groupRule" })
   groupRule?: ChartGroupRule;
 
-  @Metadata({ data: "json, name=sourceRange" })
+  @SpeakeasyMetadata({ data: "json, name=sourceRange" })
   sourceRange?: ChartSourceRange;
 }

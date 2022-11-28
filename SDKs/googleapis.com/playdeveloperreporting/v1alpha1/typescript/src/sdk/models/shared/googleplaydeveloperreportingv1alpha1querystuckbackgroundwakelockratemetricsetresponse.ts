@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GooglePlayDeveloperReportingV1alpha1MetricsRow } from "./googleplaydeveloperreportingv1alpha1metricsrow";
+
 
 
 // GooglePlayDeveloperReportingV1alpha1QueryStuckBackgroundWakelockRateMetricSetResponse
@@ -8,9 +8,9 @@ import { GooglePlayDeveloperReportingV1alpha1MetricsRow } from "./googleplaydeve
  * Response message for QueryStuckBackgroundWakelockRateMetricSet.
 **/
 export class GooglePlayDeveloperReportingV1alpha1QueryStuckBackgroundWakelockRateMetricSetResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=rows", elemType: shared.GooglePlayDeveloperReportingV1alpha1MetricsRow })
+  @SpeakeasyMetadata({ data: "json, name=rows", elemType: GooglePlayDeveloperReportingV1alpha1MetricsRow })
   rows?: GooglePlayDeveloperReportingV1alpha1MetricsRow[];
 }

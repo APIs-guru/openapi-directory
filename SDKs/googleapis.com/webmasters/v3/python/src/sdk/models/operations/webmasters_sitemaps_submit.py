@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class WebmastersSitemapsSubmitPathParams:
-    feedpath: str = field(default=None, metadata={'path_param': { 'field_name': 'feedpath', 'style': 'simple', 'explode': False }})
-    site_url: str = field(default=None, metadata={'path_param': { 'field_name': 'siteUrl', 'style': 'simple', 'explode': False }})
+    feedpath: str = field(metadata={'path_param': { 'field_name': 'feedpath', 'style': 'simple', 'explode': False }})
+    site_url: str = field(metadata={'path_param': { 'field_name': 'siteUrl', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,19 +23,19 @@ class WebmastersSitemapsSubmitQueryParams:
 
 @dataclass
 class WebmastersSitemapsSubmitSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class WebmastersSitemapsSubmitRequest:
-    path_params: WebmastersSitemapsSubmitPathParams = field(default=None)
-    query_params: WebmastersSitemapsSubmitQueryParams = field(default=None)
-    security: WebmastersSitemapsSubmitSecurity = field(default=None)
+    path_params: WebmastersSitemapsSubmitPathParams = field()
+    query_params: WebmastersSitemapsSubmitQueryParams = field()
+    security: WebmastersSitemapsSubmitSecurity = field()
     
 
 @dataclass
 class WebmastersSitemapsSubmitResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

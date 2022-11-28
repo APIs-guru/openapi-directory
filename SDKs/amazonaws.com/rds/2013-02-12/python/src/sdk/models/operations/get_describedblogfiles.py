@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDescribeDbLogFilesActionEnum(str, Enum):
     DESCRIBE_DB_LOG_FILES = "DescribeDBLogFiles"
@@ -10,14 +14,14 @@ class GetDescribeDbLogFilesVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeDbLogFilesQueryParams:
-    action: GetDescribeDbLogFilesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    db_instance_identifier: str = field(default=None, metadata={'query_param': { 'field_name': 'DBInstanceIdentifier', 'style': 'form', 'explode': True }})
+    action: GetDescribeDbLogFilesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    db_instance_identifier: str = field(metadata={'query_param': { 'field_name': 'DBInstanceIdentifier', 'style': 'form', 'explode': True }})
+    version: GetDescribeDbLogFilesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     file_last_written: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'FileLastWritten', 'style': 'form', 'explode': True }})
     file_size: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'FileSize', 'style': 'form', 'explode': True }})
     filename_contains: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'FilenameContains', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
     max_records: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxRecords', 'style': 'form', 'explode': True }})
-    version: GetDescribeDbLogFilesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -33,13 +37,13 @@ class GetDescribeDbLogFilesHeaders:
 
 @dataclass
 class GetDescribeDbLogFilesRequest:
-    query_params: GetDescribeDbLogFilesQueryParams = field(default=None)
-    headers: GetDescribeDbLogFilesHeaders = field(default=None)
+    headers: GetDescribeDbLogFilesHeaders = field()
+    query_params: GetDescribeDbLogFilesQueryParams = field()
     
 
 @dataclass
 class GetDescribeDbLogFilesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

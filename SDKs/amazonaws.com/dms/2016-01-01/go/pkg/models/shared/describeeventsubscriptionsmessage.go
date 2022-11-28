@@ -1,5 +1,7 @@
 package shared
 
+// DescribeEventSubscriptionsMessage
+// <p/>
 type DescribeEventSubscriptionsMessage struct {
 	Filters          []Filter `json:"Filters,omitempty"`
 	Marker           *string  `json:"Marker,omitempty"`

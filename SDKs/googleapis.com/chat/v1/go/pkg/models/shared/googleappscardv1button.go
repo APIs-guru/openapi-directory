@@ -1,5 +1,7 @@
 package shared
 
+// GoogleAppsCardV1Button
+// A text, icon, or text + icon button that users can click. To make an image a clickable button, specify an Image (not an ImageComponent) and set an `onClick` action.
 type GoogleAppsCardV1Button struct {
 	AltText  *string                  `json:"altText,omitempty"`
 	Color    *Color                   `json:"color,omitempty"`

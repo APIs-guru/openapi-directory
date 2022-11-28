@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDocumentaiV1DocumentSchema } from "./googleclouddocumentaiv1documentschema";
 import { GoogleCloudDocumentaiV1Document } from "./googleclouddocumentaiv1document";
 
+
 export enum GoogleCloudDocumentaiV1ReviewDocumentRequestPriorityEnum {
-    Default = "DEFAULT"
-,    Urgent = "URGENT"
+    Default = "DEFAULT",
+    Urgent = "URGENT"
 }
 
 
@@ -13,15 +14,15 @@ export enum GoogleCloudDocumentaiV1ReviewDocumentRequestPriorityEnum {
  * Request message for review document method.
 **/
 export class GoogleCloudDocumentaiV1ReviewDocumentRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=documentSchema" })
+  @SpeakeasyMetadata({ data: "json, name=documentSchema" })
   documentSchema?: GoogleCloudDocumentaiV1DocumentSchema;
 
-  @Metadata({ data: "json, name=enableSchemaValidation" })
+  @SpeakeasyMetadata({ data: "json, name=enableSchemaValidation" })
   enableSchemaValidation?: boolean;
 
-  @Metadata({ data: "json, name=inlineDocument" })
+  @SpeakeasyMetadata({ data: "json, name=inlineDocument" })
   inlineDocument?: GoogleCloudDocumentaiV1Document;
 
-  @Metadata({ data: "json, name=priority" })
+  @SpeakeasyMetadata({ data: "json, name=priority" })
   priority?: GoogleCloudDocumentaiV1ReviewDocumentRequestPriorityEnum;
 }

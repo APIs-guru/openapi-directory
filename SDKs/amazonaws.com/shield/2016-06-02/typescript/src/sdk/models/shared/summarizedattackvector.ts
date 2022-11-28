@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SummarizedCounter } from "./summarizedcounter";
+
 
 
 // SummarizedAttackVector
@@ -8,9 +8,9 @@ import { SummarizedCounter } from "./summarizedcounter";
  * A summary of information about the attack.
 **/
 export class SummarizedAttackVector extends SpeakeasyBase {
-  @Metadata({ data: "json, name=VectorCounters", elemType: shared.SummarizedCounter })
+  @SpeakeasyMetadata({ data: "json, name=VectorCounters", elemType: SummarizedCounter })
   vectorCounters?: SummarizedCounter[];
 
-  @Metadata({ data: "json, name=VectorType" })
+  @SpeakeasyMetadata({ data: "json, name=VectorType" })
   vectorType: string;
 }

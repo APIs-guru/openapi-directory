@@ -9,6 +9,8 @@ const (
 	ConversionErrorCodeEnumNotFound         ConversionErrorCodeEnum = "NOT_FOUND"
 )
 
+// ConversionError
+// The error code and description for a conversion that failed to insert or update.
 type ConversionError struct {
 	Code    *ConversionErrorCodeEnum `json:"code,omitempty"`
 	Kind    *string                  `json:"kind,omitempty"`

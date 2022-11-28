@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class CustomEventErrorCodeEnum(str, Enum):
     UNKNOWN = "UNKNOWN"
@@ -13,7 +15,11 @@ class CustomEventErrorCodeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CustomEventError:
-    code: Optional[CustomEventErrorCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
-    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
-    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
+    r"""CustomEventError
+    The error code and description for a custom event that failed to insert.
+    """
+    
+    code: Optional[CustomEventErrorCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('code') }})
+    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
+    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('message') }})
     

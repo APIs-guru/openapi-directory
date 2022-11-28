@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SubscriptionCancelSurveyResult } from "./subscriptioncancelsurveyresult";
 import { IntroductoryPriceInfo } from "./introductorypriceinfo";
 import { SubscriptionPriceChange } from "./subscriptionpricechange";
+
 
 
 // SubscriptionPurchase
@@ -9,90 +10,90 @@ import { SubscriptionPriceChange } from "./subscriptionpricechange";
  * A SubscriptionPurchase resource indicates the status of a user's subscription purchase.
 **/
 export class SubscriptionPurchase extends SpeakeasyBase {
-  @Metadata({ data: "json, name=acknowledgementState" })
+  @SpeakeasyMetadata({ data: "json, name=acknowledgementState" })
   acknowledgementState?: number;
 
-  @Metadata({ data: "json, name=autoRenewing" })
+  @SpeakeasyMetadata({ data: "json, name=autoRenewing" })
   autoRenewing?: boolean;
 
-  @Metadata({ data: "json, name=autoResumeTimeMillis" })
+  @SpeakeasyMetadata({ data: "json, name=autoResumeTimeMillis" })
   autoResumeTimeMillis?: string;
 
-  @Metadata({ data: "json, name=cancelReason" })
+  @SpeakeasyMetadata({ data: "json, name=cancelReason" })
   cancelReason?: number;
 
-  @Metadata({ data: "json, name=cancelSurveyResult" })
+  @SpeakeasyMetadata({ data: "json, name=cancelSurveyResult" })
   cancelSurveyResult?: SubscriptionCancelSurveyResult;
 
-  @Metadata({ data: "json, name=countryCode" })
+  @SpeakeasyMetadata({ data: "json, name=countryCode" })
   countryCode?: string;
 
-  @Metadata({ data: "json, name=developerPayload" })
+  @SpeakeasyMetadata({ data: "json, name=developerPayload" })
   developerPayload?: string;
 
-  @Metadata({ data: "json, name=emailAddress" })
+  @SpeakeasyMetadata({ data: "json, name=emailAddress" })
   emailAddress?: string;
 
-  @Metadata({ data: "json, name=expiryTimeMillis" })
+  @SpeakeasyMetadata({ data: "json, name=expiryTimeMillis" })
   expiryTimeMillis?: string;
 
-  @Metadata({ data: "json, name=externalAccountId" })
+  @SpeakeasyMetadata({ data: "json, name=externalAccountId" })
   externalAccountId?: string;
 
-  @Metadata({ data: "json, name=familyName" })
+  @SpeakeasyMetadata({ data: "json, name=familyName" })
   familyName?: string;
 
-  @Metadata({ data: "json, name=givenName" })
+  @SpeakeasyMetadata({ data: "json, name=givenName" })
   givenName?: string;
 
-  @Metadata({ data: "json, name=introductoryPriceInfo" })
+  @SpeakeasyMetadata({ data: "json, name=introductoryPriceInfo" })
   introductoryPriceInfo?: IntroductoryPriceInfo;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=linkedPurchaseToken" })
+  @SpeakeasyMetadata({ data: "json, name=linkedPurchaseToken" })
   linkedPurchaseToken?: string;
 
-  @Metadata({ data: "json, name=obfuscatedExternalAccountId" })
+  @SpeakeasyMetadata({ data: "json, name=obfuscatedExternalAccountId" })
   obfuscatedExternalAccountId?: string;
 
-  @Metadata({ data: "json, name=obfuscatedExternalProfileId" })
+  @SpeakeasyMetadata({ data: "json, name=obfuscatedExternalProfileId" })
   obfuscatedExternalProfileId?: string;
 
-  @Metadata({ data: "json, name=orderId" })
+  @SpeakeasyMetadata({ data: "json, name=orderId" })
   orderId?: string;
 
-  @Metadata({ data: "json, name=paymentState" })
+  @SpeakeasyMetadata({ data: "json, name=paymentState" })
   paymentState?: number;
 
-  @Metadata({ data: "json, name=priceAmountMicros" })
+  @SpeakeasyMetadata({ data: "json, name=priceAmountMicros" })
   priceAmountMicros?: string;
 
-  @Metadata({ data: "json, name=priceChange" })
+  @SpeakeasyMetadata({ data: "json, name=priceChange" })
   priceChange?: SubscriptionPriceChange;
 
-  @Metadata({ data: "json, name=priceCurrencyCode" })
+  @SpeakeasyMetadata({ data: "json, name=priceCurrencyCode" })
   priceCurrencyCode?: string;
 
-  @Metadata({ data: "json, name=profileId" })
+  @SpeakeasyMetadata({ data: "json, name=profileId" })
   profileId?: string;
 
-  @Metadata({ data: "json, name=profileName" })
+  @SpeakeasyMetadata({ data: "json, name=profileName" })
   profileName?: string;
 
-  @Metadata({ data: "json, name=promotionCode" })
+  @SpeakeasyMetadata({ data: "json, name=promotionCode" })
   promotionCode?: string;
 
-  @Metadata({ data: "json, name=promotionType" })
+  @SpeakeasyMetadata({ data: "json, name=promotionType" })
   promotionType?: number;
 
-  @Metadata({ data: "json, name=purchaseType" })
+  @SpeakeasyMetadata({ data: "json, name=purchaseType" })
   purchaseType?: number;
 
-  @Metadata({ data: "json, name=startTimeMillis" })
+  @SpeakeasyMetadata({ data: "json, name=startTimeMillis" })
   startTimeMillis?: string;
 
-  @Metadata({ data: "json, name=userCancellationTimeMillis" })
+  @SpeakeasyMetadata({ data: "json, name=userCancellationTimeMillis" })
   userCancellationTimeMillis?: string;
 }

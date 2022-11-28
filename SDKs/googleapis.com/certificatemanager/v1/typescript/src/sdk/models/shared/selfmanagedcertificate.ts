@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SelfManagedCertificate
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Certificate data for a SelfManaged Certificate. SelfManaged Certificates are uploaded by the user. Updating such certificates before they expire remains the user's responsibility.
 **/
 export class SelfManagedCertificate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pemCertificate" })
+  @SpeakeasyMetadata({ data: "json, name=pemCertificate" })
   pemCertificate?: string;
 
-  @Metadata({ data: "json, name=pemPrivateKey" })
+  @SpeakeasyMetadata({ data: "json, name=pemPrivateKey" })
   pemPrivateKey?: string;
 }

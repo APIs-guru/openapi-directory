@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Entity } from "./entity";
 import { ErrorDetail } from "./errordetail";
+
 
 
 // ChangeSummary
@@ -9,18 +9,18 @@ import { ErrorDetail } from "./errordetail";
  * This object is a container for common summary information about the change. The summary doesn't contain the whole change structure.
 **/
 export class ChangeSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ChangeName" })
+  @SpeakeasyMetadata({ data: "json, name=ChangeName" })
   changeName?: string;
 
-  @Metadata({ data: "json, name=ChangeType" })
+  @SpeakeasyMetadata({ data: "json, name=ChangeType" })
   changeType?: string;
 
-  @Metadata({ data: "json, name=Details" })
+  @SpeakeasyMetadata({ data: "json, name=Details" })
   details?: string;
 
-  @Metadata({ data: "json, name=Entity" })
+  @SpeakeasyMetadata({ data: "json, name=Entity" })
   entity?: Entity;
 
-  @Metadata({ data: "json, name=ErrorDetailList", elemType: shared.ErrorDetail })
+  @SpeakeasyMetadata({ data: "json, name=ErrorDetailList", elemType: ErrorDetail })
   errorDetailList?: ErrorDetail[];
 }

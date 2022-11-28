@@ -27,6 +27,8 @@ const (
 	PublicSubscriptionStatusStatusEnumNotSubscribed PublicSubscriptionStatusStatusEnum = "NOT_SUBSCRIBED"
 )
 
+// PublicSubscriptionStatus
+// The status of a subscription for a contact.
 type PublicSubscriptionStatus struct {
 	BrandID               *int64                                     `json:"brandId,omitempty"`
 	Description           string                                     `json:"description"`

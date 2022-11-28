@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RenameVirtualFolderQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name" })
   name?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=newName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=newName" })
   newName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=refreshLibrary" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=refreshLibrary" })
   refreshLibrary?: boolean;
 }
 
 
 export class RenameVirtualFolderSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   customAuthentication: shared.SchemeCustomAuthentication;
 }
 
 
 export class RenameVirtualFolderRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: RenameVirtualFolderQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: RenameVirtualFolderSecurity;
 }
 
 
 export class RenameVirtualFolderResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

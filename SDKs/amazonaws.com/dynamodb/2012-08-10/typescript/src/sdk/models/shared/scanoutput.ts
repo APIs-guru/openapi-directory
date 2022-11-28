@@ -1,8 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConsumedCapacity } from "./consumedcapacity";
 import { AttributeValue } from "./attributevalue";
-import { AttributeValue } from "./attributevalue";
+
 
 
 // ScanOutput
@@ -10,18 +9,18 @@ import { AttributeValue } from "./attributevalue";
  * Represents the output of a <code>Scan</code> operation.
 **/
 export class ScanOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConsumedCapacity" })
+  @SpeakeasyMetadata({ data: "json, name=ConsumedCapacity" })
   consumedCapacity?: ConsumedCapacity;
 
-  @Metadata({ data: "json, name=Count" })
+  @SpeakeasyMetadata({ data: "json, name=Count" })
   count?: number;
 
-  @Metadata({ data: "json, name=Items", elemType: shared.AttributeValue, elemDepth: 2 })
+  @SpeakeasyMetadata({ data: "json, name=Items", elemType: AttributeValue, elemDepth: 2 })
   items?: Map<string, AttributeValue>[];
 
-  @Metadata({ data: "json, name=LastEvaluatedKey", elemType: shared.AttributeValue })
+  @SpeakeasyMetadata({ data: "json, name=LastEvaluatedKey", elemType: AttributeValue })
   lastEvaluatedKey?: Map<string, AttributeValue>;
 
-  @Metadata({ data: "json, name=ScannedCount" })
+  @SpeakeasyMetadata({ data: "json, name=ScannedCount" })
   scannedCount?: number;
 }

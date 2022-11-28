@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TrainingJobStatusEnum } from "./trainingjobstatusenum";
+
 
 
 // TrainingJobSummary
@@ -7,21 +8,21 @@ import { TrainingJobStatusEnum } from "./trainingjobstatusenum";
  * Provides summary information about a training job.
 **/
 export class TrainingJobSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime: Date;
 
-  @Metadata({ data: "json, name=LastModifiedTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedTime" })
   lastModifiedTime?: Date;
 
-  @Metadata({ data: "json, name=TrainingEndTime" })
+  @SpeakeasyMetadata({ data: "json, name=TrainingEndTime" })
   trainingEndTime?: Date;
 
-  @Metadata({ data: "json, name=TrainingJobArn" })
+  @SpeakeasyMetadata({ data: "json, name=TrainingJobArn" })
   trainingJobArn: string;
 
-  @Metadata({ data: "json, name=TrainingJobName" })
+  @SpeakeasyMetadata({ data: "json, name=TrainingJobName" })
   trainingJobName: string;
 
-  @Metadata({ data: "json, name=TrainingJobStatus" })
+  @SpeakeasyMetadata({ data: "json, name=TrainingJobStatus" })
   trainingJobStatus: TrainingJobStatusEnum;
 }

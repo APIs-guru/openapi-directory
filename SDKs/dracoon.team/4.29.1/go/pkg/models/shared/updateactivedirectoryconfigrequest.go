@@ -1,5 +1,7 @@
 package shared
 
+// UpdateActiveDirectoryConfigRequest
+// Request model for updating an Active Directory configuration
 type UpdateActiveDirectoryConfigRequest struct {
 	AdExportGroup       *string `json:"adExportGroup,omitempty"`
 	Alias               *string `json:"alias,omitempty"`

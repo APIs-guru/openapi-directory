@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
-from typing import Any,List,Optional
+from typing import Any,Optional
 from sdk.models import operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,37 +14,55 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def registry_create_api(self, request: operations.RegistryCreateAPIRequest) -> operations.RegistryCreateAPIResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""CreateApi creates a specified API.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/projects/{project}/apis", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -56,24 +77,23 @@ class SDK:
 
     
     def registry_create_api_spec(self, request: operations.RegistryCreateAPISpecRequest) -> operations.RegistryCreateAPISpecResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""CreateApiSpec creates a specified spec.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/projects/{project}/apis/{api}/versions/{version}/specs", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -88,24 +108,23 @@ class SDK:
 
     
     def registry_create_api_version(self, request: operations.RegistryCreateAPIVersionRequest) -> operations.RegistryCreateAPIVersionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""CreateApiVersion creates a specified version.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/projects/{project}/apis/{api}/versions", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -120,24 +139,23 @@ class SDK:
 
     
     def registry_create_artifact(self, request: operations.RegistryCreateArtifactRequest) -> operations.RegistryCreateArtifactResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""CreateArtifact creates a specified artifact.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/projects/{project}/artifacts", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -152,24 +170,23 @@ class SDK:
 
     
     def registry_create_project(self, request: operations.RegistryCreateProjectRequest) -> operations.RegistryCreateProjectResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""CreateProject creates a specified project.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/projects"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -184,13 +201,16 @@ class SDK:
 
     
     def registry_delete_api(self, request: operations.RegistryDeleteAPIRequest) -> operations.RegistryDeleteAPIResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""DeleteApi removes a specified API and all of the resources that it owns.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/projects/{project}/apis/{api}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -203,13 +223,16 @@ class SDK:
 
     
     def registry_delete_api_spec(self, request: operations.RegistryDeleteAPISpecRequest) -> operations.RegistryDeleteAPISpecResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""DeleteApiSpec removes a specified spec, all revisions, and all child resources (e.g. artifacts).
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/projects/{project}/apis/{api}/versions/{version}/specs/{spec}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -222,13 +245,16 @@ class SDK:
 
     
     def registry_delete_api_spec_revision(self, request: operations.RegistryDeleteAPISpecRevisionRequest) -> operations.RegistryDeleteAPISpecRevisionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""DeleteApiSpecRevision deletes a revision of a spec.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/projects/{project}/apis/{api}/versions/{version}/specs/{spec}:deleteRevision", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -241,13 +267,16 @@ class SDK:
 
     
     def registry_delete_api_version(self, request: operations.RegistryDeleteAPIVersionRequest) -> operations.RegistryDeleteAPIVersionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""DeleteApiVersion removes a specified version and all of the resources that it owns.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/projects/{project}/apis/{api}/versions/{version}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -260,13 +289,16 @@ class SDK:
 
     
     def registry_delete_artifact(self, request: operations.RegistryDeleteArtifactRequest) -> operations.RegistryDeleteArtifactResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""DeleteArtifact removes a specified artifact.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/projects/{project}/artifacts/{artifact}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -279,13 +311,16 @@ class SDK:
 
     
     def registry_delete_project(self, request: operations.RegistryDeleteProjectRequest) -> operations.RegistryDeleteProjectResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""DeleteProject removes a specified project and all of the resources that it owns.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/projects/{project}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -298,13 +333,16 @@ class SDK:
 
     
     def registry_get_api(self, request: operations.RegistryGetAPIRequest) -> operations.RegistryGetAPIResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""GetApi returns a specified API.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/projects/{project}/apis/{api}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -319,13 +357,16 @@ class SDK:
 
     
     def registry_get_api_spec(self, request: operations.RegistryGetAPISpecRequest) -> operations.RegistryGetAPISpecResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""GetApiSpec returns a specified spec.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/projects/{project}/apis/{api}/versions/{version}/specs/{spec}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -340,13 +381,16 @@ class SDK:
 
     
     def registry_get_api_spec_contents(self, request: operations.RegistryGetAPISpecContentsRequest) -> operations.RegistryGetAPISpecContentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""GetApiSpecContents returns the contents of a specified spec.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/projects/{project}/apis/{api}/versions/{version}/specs/{spec}/contents", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -359,13 +403,16 @@ class SDK:
 
     
     def registry_get_api_version(self, request: operations.RegistryGetAPIVersionRequest) -> operations.RegistryGetAPIVersionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""GetApiVersion returns a specified version.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/projects/{project}/apis/{api}/versions/{version}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -380,13 +427,16 @@ class SDK:
 
     
     def registry_get_artifact(self, request: operations.RegistryGetArtifactRequest) -> operations.RegistryGetArtifactResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""GetArtifact returns a specified artifact.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/projects/{project}/artifacts/{artifact}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -401,13 +451,16 @@ class SDK:
 
     
     def registry_get_artifact_contents(self, request: operations.RegistryGetArtifactContentsRequest) -> operations.RegistryGetArtifactContentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""GetArtifactContents returns the contents of a specified artifact.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/projects/{project}/artifacts/{artifact}/contents", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -420,13 +473,16 @@ class SDK:
 
     
     def registry_get_project(self, request: operations.RegistryGetProjectRequest) -> operations.RegistryGetProjectResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""GetProject returns a specified project.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/projects/{project}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -441,13 +497,16 @@ class SDK:
 
     
     def registry_get_status(self) -> operations.RegistryGetStatusResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""GetStatus returns the status of the service. GetStatus is for verifying open source deployments only and is not included in hosted versions of the API.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/status"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -462,15 +521,17 @@ class SDK:
 
     
     def registry_list_api_spec_revisions(self, request: operations.RegistryListAPISpecRevisionsRequest) -> operations.RegistryListAPISpecRevisionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""ListApiSpecRevisions lists all revisions of a spec. Revisions are returned in descending order of revision creation time.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/projects/{project}/apis/{api}/versions/{version}/specs/{spec}:listRevisions", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -485,15 +546,17 @@ class SDK:
 
     
     def registry_list_api_specs(self, request: operations.RegistryListAPISpecsRequest) -> operations.RegistryListAPISpecsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""ListApiSpecs returns matching specs.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/projects/{project}/apis/{api}/versions/{version}/specs", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -508,15 +571,17 @@ class SDK:
 
     
     def registry_list_api_versions(self, request: operations.RegistryListAPIVersionsRequest) -> operations.RegistryListAPIVersionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""ListApiVersions returns matching versions.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/projects/{project}/apis/{api}/versions", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -531,15 +596,17 @@ class SDK:
 
     
     def registry_list_apis(self, request: operations.RegistryListApisRequest) -> operations.RegistryListApisResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""ListApis returns matching APIs.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/projects/{project}/apis", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -554,15 +621,17 @@ class SDK:
 
     
     def registry_list_artifacts(self, request: operations.RegistryListArtifactsRequest) -> operations.RegistryListArtifactsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""ListArtifacts returns matching artifacts.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/projects/{project}/artifacts", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -577,15 +646,17 @@ class SDK:
 
     
     def registry_list_projects(self, request: operations.RegistryListProjectsRequest) -> operations.RegistryListProjectsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""ListProjects returns matching projects.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/projects"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -600,22 +671,22 @@ class SDK:
 
     
     def registry_replace_artifact(self, request: operations.RegistryReplaceArtifactRequest) -> operations.RegistryReplaceArtifactResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""ReplaceArtifact can be used to replace a specified artifact.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/projects/{project}/artifacts/{artifact}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -630,22 +701,22 @@ class SDK:
 
     
     def registry_rollback_api_spec(self, request: operations.RegistryRollbackAPISpecRequest) -> operations.RegistryRollbackAPISpecResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""RollbackApiSpec sets the current revision to a specified prior revision. Note that this creates a new revision with a new revision ID.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/projects/{project}/apis/{api}/versions/{version}/specs/{spec}:rollback", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -660,22 +731,22 @@ class SDK:
 
     
     def registry_tag_api_spec_revision(self, request: operations.RegistryTagAPISpecRevisionRequest) -> operations.RegistryTagAPISpecRevisionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""TagApiSpecRevision adds a tag to a specified revision of a spec.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/projects/{project}/apis/{api}/versions/{version}/specs/{spec}:tagRevision", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -690,24 +761,23 @@ class SDK:
 
     
     def registry_update_api(self, request: operations.RegistryUpdateAPIRequest) -> operations.RegistryUpdateAPIResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""UpdateApi can be used to modify a specified API.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/projects/{project}/apis/{api}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PATCH", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -722,24 +792,23 @@ class SDK:
 
     
     def registry_update_api_spec(self, request: operations.RegistryUpdateAPISpecRequest) -> operations.RegistryUpdateAPISpecResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""UpdateApiSpec can be used to modify a specified spec.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/projects/{project}/apis/{api}/versions/{version}/specs/{spec}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PATCH", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -754,24 +823,23 @@ class SDK:
 
     
     def registry_update_api_version(self, request: operations.RegistryUpdateAPIVersionRequest) -> operations.RegistryUpdateAPIVersionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""UpdateApiVersion can be used to modify a specified version.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/projects/{project}/apis/{api}/versions/{version}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PATCH", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -786,24 +854,23 @@ class SDK:
 
     
     def registry_update_project(self, request: operations.RegistryUpdateProjectRequest) -> operations.RegistryUpdateProjectResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""UpdateProject can be used to modify a specified project.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/projects/{project}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PATCH", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

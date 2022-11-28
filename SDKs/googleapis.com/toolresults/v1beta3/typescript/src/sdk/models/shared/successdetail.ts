@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SuccessDetail
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Details for an outcome with a SUCCESS outcome summary. LINT.IfChange
 **/
 export class SuccessDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=otherNativeCrash" })
+  @SpeakeasyMetadata({ data: "json, name=otherNativeCrash" })
   otherNativeCrash?: boolean;
 }

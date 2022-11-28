@@ -1,5 +1,7 @@
 package shared
 
+// SlsaMetadata
+// Other properties of the build.
 type SlsaMetadata struct {
 	BuildFinishedOn   *string           `json:"buildFinishedOn,omitempty"`
 	BuildInvocationID *string           `json:"buildInvocationId,omitempty"`

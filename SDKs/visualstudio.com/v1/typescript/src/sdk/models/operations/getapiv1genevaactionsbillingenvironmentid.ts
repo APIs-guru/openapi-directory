@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetApiV1GenevaActionsBillingEnvironmentIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=environmentId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=environmentId" })
   environmentId: string;
 }
 
 
 export class GetApiV1GenevaActionsBillingEnvironmentIdQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=endTime" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=endTime" })
   endTime?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=startTime" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=startTime" })
   startTime?: string;
 }
 
 
 export class GetApiV1GenevaActionsBillingEnvironmentIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetApiV1GenevaActionsBillingEnvironmentIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetApiV1GenevaActionsBillingEnvironmentIdQueryParams;
 }
 
 
 export class GetApiV1GenevaActionsBillingEnvironmentIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   billSummary?: shared.BillSummary;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AttributePayload } from "./attributepayload";
+
 
 
 // ThingGroupProperties
@@ -7,9 +8,9 @@ import { AttributePayload } from "./attributepayload";
  * Thing group properties.
 **/
 export class ThingGroupProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attributePayload" })
+  @SpeakeasyMetadata({ data: "json, name=attributePayload" })
   attributePayload?: AttributePayload;
 
-  @Metadata({ data: "json, name=thingGroupDescription" })
+  @SpeakeasyMetadata({ data: "json, name=thingGroupDescription" })
   thingGroupDescription?: string;
 }

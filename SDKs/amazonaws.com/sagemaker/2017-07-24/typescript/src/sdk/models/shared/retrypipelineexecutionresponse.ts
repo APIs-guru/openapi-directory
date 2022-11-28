@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RetryPipelineExecutionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PipelineExecutionArn" })
+  @SpeakeasyMetadata({ data: "json, name=PipelineExecutionArn" })
   pipelineExecutionArn?: string;
 }

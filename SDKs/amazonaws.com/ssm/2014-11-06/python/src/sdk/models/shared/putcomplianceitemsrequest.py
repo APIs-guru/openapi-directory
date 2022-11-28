@@ -1,19 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import complianceexecutionsummary
-from . import complianceitementry
-from . import complianceuploadtype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class PutComplianceItemsRequest:
-    compliance_type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ComplianceType' }})
-    execution_summary: complianceexecutionsummary.ComplianceExecutionSummary = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ExecutionSummary' }})
-    item_content_hash: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ItemContentHash' }})
-    items: List[complianceitementry.ComplianceItemEntry] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Items' }})
-    resource_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ResourceId' }})
-    resource_type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ResourceType' }})
-    upload_type: Optional[complianceuploadtype_enum.ComplianceUploadTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'UploadType' }})
+    compliance_type: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ComplianceType') }})
+    execution_summary: ComplianceExecutionSummary = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ExecutionSummary') }})
+    items: List[ComplianceItemEntry] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Items') }})
+    resource_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ResourceId') }})
+    resource_type: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ResourceType') }})
+    item_content_hash: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ItemContentHash') }})
+    upload_type: Optional[ComplianceUploadTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('UploadType') }})
     

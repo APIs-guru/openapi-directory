@@ -1,17 +1,19 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import drivefile
-from . import form
-from . import link
-from . import youtubevideo
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Attachment:
-    drive_file: Optional[drivefile.DriveFile] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'driveFile' }})
-    form: Optional[form.Form] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'form' }})
-    link: Optional[link.Link] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'link' }})
-    you_tube_video: Optional[youtubevideo.YouTubeVideo] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'youTubeVideo' }})
+    r"""Attachment
+    Attachment added to student assignment work. When creating attachments, setting the `form` field is not supported.
+    """
+    
+    drive_file: Optional[DriveFile] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('driveFile') }})
+    form: Optional[Form] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('form') }})
+    link: Optional[Link] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('link') }})
+    you_tube_video: Optional[YouTubeVideo] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('youTubeVideo') }})
     

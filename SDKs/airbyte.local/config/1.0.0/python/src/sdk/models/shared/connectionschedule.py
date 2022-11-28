@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ConnectionScheduleTimeUnitEnum(str, Enum):
     MINUTES = "minutes"
@@ -13,6 +14,10 @@ class ConnectionScheduleTimeUnitEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ConnectionSchedule:
-    time_unit: ConnectionScheduleTimeUnitEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timeUnit' }})
-    units: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'units' }})
+    r"""ConnectionSchedule
+    if null, then no schedule is set.
+    """
+    
+    time_unit: ConnectionScheduleTimeUnitEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('timeUnit') }})
+    units: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('units') }})
     

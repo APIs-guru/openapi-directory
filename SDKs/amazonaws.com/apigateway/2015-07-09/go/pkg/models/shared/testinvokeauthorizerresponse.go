@@ -1,5 +1,7 @@
 package shared
 
+// TestInvokeAuthorizerResponse
+// Represents the response of the test invoke request for a custom <a>Authorizer</a>
 type TestInvokeAuthorizerResponse struct {
 	Authorization map[string][]string `json:"authorization,omitempty"`
 	Claims        map[string]string   `json:"claims,omitempty"`

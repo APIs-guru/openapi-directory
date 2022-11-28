@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import metadatalabels
+from sdk import utils
+from . import *
 
 class MetadataLabelMatcherMetadataLabelMatchCriteriaEnum(str, Enum):
     METADATA_LABEL_MATCH_CRITERIA_UNSPECIFIED = "METADATA_LABEL_MATCH_CRITERIA_UNSPECIFIED"
@@ -12,6 +14,10 @@ class MetadataLabelMatcherMetadataLabelMatchCriteriaEnum(str, Enum):
 @dataclass_json
 @dataclass
 class MetadataLabelMatcher:
-    metadata_label_match_criteria: Optional[MetadataLabelMatcherMetadataLabelMatchCriteriaEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadataLabelMatchCriteria' }})
-    metadata_labels: Optional[List[metadatalabels.MetadataLabels]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadataLabels' }})
+    r"""MetadataLabelMatcher
+    The matcher that is based on node metadata presented by xDS clients.
+    """
+    
+    metadata_label_match_criteria: Optional[MetadataLabelMatcherMetadataLabelMatchCriteriaEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('metadataLabelMatchCriteria') }})
+    metadata_labels: Optional[List[MetadataLabels]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('metadataLabels') }})
     

@@ -1,61 +1,62 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SingleEnvironmentPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=environment_uid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=environment_uid" })
   environmentUid: string;
 }
 
 
-export class SingleEnvironmentRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: SingleEnvironmentPathParams;
-}
-
-
 export class SingleEnvironment200ApplicationJsonEnvironmentValues extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=hovered" })
+  @SpeakeasyMetadata({ data: "json, name=hovered" })
   hovered?: boolean;
 
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }
 
 
 export class SingleEnvironment200ApplicationJsonEnvironment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=values", elemType: operations.SingleEnvironment200ApplicationJsonEnvironmentValues })
+  @SpeakeasyMetadata({ data: "json, name=values", elemType: SingleEnvironment200ApplicationJsonEnvironmentValues })
   values?: SingleEnvironment200ApplicationJsonEnvironmentValues[];
 }
 
 
 export class SingleEnvironment200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=environment" })
+  @SpeakeasyMetadata({ data: "json, name=environment" })
   environment?: SingleEnvironment200ApplicationJsonEnvironment;
 }
 
 
+export class SingleEnvironmentRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: SingleEnvironmentPathParams;
+}
+
+
 export class SingleEnvironmentResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   singleEnvironment200ApplicationJsonObject?: SingleEnvironment200ApplicationJson;
 }

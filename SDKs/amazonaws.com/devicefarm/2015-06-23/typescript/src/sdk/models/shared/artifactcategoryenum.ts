@@ -1,7 +1,8 @@
 
 
+
 export enum ArtifactCategoryEnum {
-    Screenshot = "SCREENSHOT"
-,    File = "FILE"
-,    Log = "LOG"
+    Screenshot = "SCREENSHOT",
+    File = "FILE",
+    Log = "LOG"
 }

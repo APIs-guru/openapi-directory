@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,29 +23,33 @@ class ChangeServerLifeCycleStateHeaders:
 @dataclass_json
 @dataclass
 class ChangeServerLifeCycleStateRequestBodyLifeCycle:
-    state: Optional[shared.ChangeServerLifeCycleStateSourceServerLifecycleStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
+    r"""ChangeServerLifeCycleStateRequestBodyLifeCycle
+    The request to change the source server migration lifecycle state.
+    """
+    
+    state: Optional[shared.ChangeServerLifeCycleStateSourceServerLifecycleStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
     
 
 @dataclass_json
 @dataclass
 class ChangeServerLifeCycleStateRequestBody:
-    life_cycle: ChangeServerLifeCycleStateRequestBodyLifeCycle = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lifeCycle' }})
-    source_server_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sourceServerID' }})
+    life_cycle: ChangeServerLifeCycleStateRequestBodyLifeCycle = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('lifeCycle') }})
+    source_server_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('sourceServerID') }})
     
 
 @dataclass
 class ChangeServerLifeCycleStateRequest:
-    headers: ChangeServerLifeCycleStateHeaders = field(default=None)
-    request: ChangeServerLifeCycleStateRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ChangeServerLifeCycleStateHeaders = field()
+    request: ChangeServerLifeCycleStateRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ChangeServerLifeCycleStateResponse:
+    content_type: str = field()
+    status_code: int = field()
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     source_server: Optional[shared.SourceServer] = field(default=None)
-    status_code: int = field(default=None)
     uninitialized_account_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

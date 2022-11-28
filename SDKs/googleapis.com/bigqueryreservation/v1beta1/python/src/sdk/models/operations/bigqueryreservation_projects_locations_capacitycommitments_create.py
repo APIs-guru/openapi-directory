@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class BigqueryreservationProjectsLocationsCapacityCommitmentsCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,14 +28,14 @@ class BigqueryreservationProjectsLocationsCapacityCommitmentsCreateQueryParams:
 
 @dataclass
 class BigqueryreservationProjectsLocationsCapacityCommitmentsCreateSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BigqueryreservationProjectsLocationsCapacityCommitmentsCreateSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -45,15 +46,15 @@ class BigqueryreservationProjectsLocationsCapacityCommitmentsCreateSecurity:
 
 @dataclass
 class BigqueryreservationProjectsLocationsCapacityCommitmentsCreateRequest:
-    path_params: BigqueryreservationProjectsLocationsCapacityCommitmentsCreatePathParams = field(default=None)
-    query_params: BigqueryreservationProjectsLocationsCapacityCommitmentsCreateQueryParams = field(default=None)
-    request: Optional[shared.CapacityCommitment] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: BigqueryreservationProjectsLocationsCapacityCommitmentsCreateSecurity = field(default=None)
+    path_params: BigqueryreservationProjectsLocationsCapacityCommitmentsCreatePathParams = field()
+    query_params: BigqueryreservationProjectsLocationsCapacityCommitmentsCreateQueryParams = field()
+    security: BigqueryreservationProjectsLocationsCapacityCommitmentsCreateSecurity = field()
+    request: Optional[shared.CapacityCommitmentInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class BigqueryreservationProjectsLocationsCapacityCommitmentsCreateResponse:
+    content_type: str = field()
+    status_code: int = field()
     capacity_commitment: Optional[shared.CapacityCommitment] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

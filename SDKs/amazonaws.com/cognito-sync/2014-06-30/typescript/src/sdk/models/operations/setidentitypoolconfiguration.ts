@@ -1,33 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class SetIdentityPoolConfigurationPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=IdentityPoolId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=IdentityPoolId" })
   identityPoolId: string;
 }
 
 
 export class SetIdentityPoolConfigurationHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -37,13 +38,13 @@ export class SetIdentityPoolConfigurationHeaders extends SpeakeasyBase {
  * Configuration options for configure Cognito streams.
 **/
 export class SetIdentityPoolConfigurationRequestBodyCognitoStreams extends SpeakeasyBase {
-  @Metadata({ data: "json, name=RoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=RoleArn" })
   roleArn?: string;
 
-  @Metadata({ data: "json, name=StreamName" })
+  @SpeakeasyMetadata({ data: "json, name=StreamName" })
   streamName?: string;
 
-  @Metadata({ data: "json, name=StreamingStatus" })
+  @SpeakeasyMetadata({ data: "json, name=StreamingStatus" })
   streamingStatus?: shared.StreamingStatusEnum;
 }
 
@@ -53,60 +54,60 @@ export class SetIdentityPoolConfigurationRequestBodyCognitoStreams extends Speak
  * Configuration options to be applied to the identity pool.
 **/
 export class SetIdentityPoolConfigurationRequestBodyPushSync extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApplicationArns" })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationArns" })
   applicationArns?: string[];
 
-  @Metadata({ data: "json, name=RoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=RoleArn" })
   roleArn?: string;
 }
 
 
 export class SetIdentityPoolConfigurationRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CognitoStreams" })
+  @SpeakeasyMetadata({ data: "json, name=CognitoStreams" })
   cognitoStreams?: SetIdentityPoolConfigurationRequestBodyCognitoStreams;
 
-  @Metadata({ data: "json, name=PushSync" })
+  @SpeakeasyMetadata({ data: "json, name=PushSync" })
   pushSync?: SetIdentityPoolConfigurationRequestBodyPushSync;
 }
 
 
 export class SetIdentityPoolConfigurationRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: SetIdentityPoolConfigurationPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: SetIdentityPoolConfigurationHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: SetIdentityPoolConfigurationRequestBody;
 }
 
 
 export class SetIdentityPoolConfigurationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   concurrentModificationException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalErrorException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidParameterException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   notAuthorizedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   setIdentityPoolConfigurationResponse?: shared.SetIdentityPoolConfigurationResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tooManyRequestsException?: any;
 }

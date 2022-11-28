@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReplicationEndpointTypeValueEnum } from "./replicationendpointtypevalueenum";
+
 
 
 // SupportedEndpointType
@@ -7,18 +8,18 @@ import { ReplicationEndpointTypeValueEnum } from "./replicationendpointtypevalue
  * Provides information about types of supported endpoints in response to a request by the <code>DescribeEndpointTypes</code> operation. This information includes the type of endpoint, the database engine name, and whether change data capture (CDC) is supported.
 **/
 export class SupportedEndpointType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EndpointType" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointType" })
   endpointType?: ReplicationEndpointTypeValueEnum;
 
-  @Metadata({ data: "json, name=EngineDisplayName" })
+  @SpeakeasyMetadata({ data: "json, name=EngineDisplayName" })
   engineDisplayName?: string;
 
-  @Metadata({ data: "json, name=EngineName" })
+  @SpeakeasyMetadata({ data: "json, name=EngineName" })
   engineName?: string;
 
-  @Metadata({ data: "json, name=ReplicationInstanceEngineMinimumVersion" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicationInstanceEngineMinimumVersion" })
   replicationInstanceEngineMinimumVersion?: string;
 
-  @Metadata({ data: "json, name=SupportsCDC" })
+  @SpeakeasyMetadata({ data: "json, name=SupportsCDC" })
   supportsCdc?: boolean;
 }

@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class FailoverInstanceRequestDataProtectionModeEnum(str, Enum):
     DATA_PROTECTION_MODE_UNSPECIFIED = "DATA_PROTECTION_MODE_UNSPECIFIED"
@@ -11,5 +13,9 @@ class FailoverInstanceRequestDataProtectionModeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class FailoverInstanceRequest:
-    data_protection_mode: Optional[FailoverInstanceRequestDataProtectionModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dataProtectionMode' }})
+    r"""FailoverInstanceRequest
+    Request for Failover.
+    """
+    
+    data_protection_mode: Optional[FailoverInstanceRequestDataProtectionModeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dataProtectionMode') }})
     

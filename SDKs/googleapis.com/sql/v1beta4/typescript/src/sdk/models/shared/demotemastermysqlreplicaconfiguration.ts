@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DemoteMasterMySqlReplicaConfiguration
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Read-replica configuration specific to MySQL databases.
 **/
 export class DemoteMasterMySqlReplicaConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=caCertificate" })
+  @SpeakeasyMetadata({ data: "json, name=caCertificate" })
   caCertificate?: string;
 
-  @Metadata({ data: "json, name=clientCertificate" })
+  @SpeakeasyMetadata({ data: "json, name=clientCertificate" })
   clientCertificate?: string;
 
-  @Metadata({ data: "json, name=clientKey" })
+  @SpeakeasyMetadata({ data: "json, name=clientKey" })
   clientKey?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=password" })
+  @SpeakeasyMetadata({ data: "json, name=password" })
   password?: string;
 
-  @Metadata({ data: "json, name=username" })
+  @SpeakeasyMetadata({ data: "json, name=username" })
   username?: string;
 }

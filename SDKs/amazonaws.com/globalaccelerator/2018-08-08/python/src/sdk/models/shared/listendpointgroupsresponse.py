@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import endpointgroup
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListEndpointGroupsResponse:
-    endpoint_groups: Optional[List[endpointgroup.EndpointGroup]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EndpointGroups' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
+    endpoint_groups: Optional[List[EndpointGroup]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('EndpointGroups') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
     

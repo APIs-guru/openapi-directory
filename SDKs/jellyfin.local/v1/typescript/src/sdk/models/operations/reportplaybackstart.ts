@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
-export class ReportPlaybackStartRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
-  playbackStartInfo?: shared.PlaybackStartInfo;
 
-  @Metadata({ data: "request, media_type=application/json" })
-  playbackStartInfo1?: shared.PlaybackStartInfo;
+export class ReportPlaybackStartRequestsInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
+  playbackStartInfo?: shared.PlaybackStartInfoInput;
 
-  @Metadata({ data: "request, media_type=text/json" })
-  playbackStartInfo2?: shared.PlaybackStartInfo;
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  playbackStartInfo1?: shared.PlaybackStartInfoInput;
+
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
+  playbackStartInfo2?: shared.PlaybackStartInfoInput;
 }
 
 
 export class ReportPlaybackStartSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   customAuthentication: shared.SchemeCustomAuthentication;
 }
 
 
 export class ReportPlaybackStartRequest extends SpeakeasyBase {
-  @Metadata()
-  request?: ReportPlaybackStartRequests;
+  @SpeakeasyMetadata()
+  request?: ReportPlaybackStartRequestsInput;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: ReportPlaybackStartSecurity;
 }
 
 
 export class ReportPlaybackStartResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostGetMetricWidgetImageActionEnum(str, Enum):
     GET_METRIC_WIDGET_IMAGE = "GetMetricWidgetImage"
@@ -10,8 +14,8 @@ class PostGetMetricWidgetImageVersionEnum(str, Enum):
 
 @dataclass
 class PostGetMetricWidgetImageQueryParams:
-    action: PostGetMetricWidgetImageActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostGetMetricWidgetImageVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostGetMetricWidgetImageActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostGetMetricWidgetImageVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostGetMetricWidgetImageHeaders:
 
 @dataclass
 class PostGetMetricWidgetImageRequest:
-    query_params: PostGetMetricWidgetImageQueryParams = field(default=None)
-    headers: PostGetMetricWidgetImageHeaders = field(default=None)
+    headers: PostGetMetricWidgetImageHeaders = field()
+    query_params: PostGetMetricWidgetImageQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostGetMetricWidgetImageResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

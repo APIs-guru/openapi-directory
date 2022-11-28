@@ -5,19 +5,19 @@ from sdk.models import shared
 
 @dataclass
 class PostProjectUsernameProjectBuildNumRetryPathParams:
-    build_num: int = field(default=None, metadata={'path_param': { 'field_name': 'build_num', 'style': 'simple', 'explode': False }})
-    project: str = field(default=None, metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
-    username: str = field(default=None, metadata={'path_param': { 'field_name': 'username', 'style': 'simple', 'explode': False }})
+    build_num: int = field(metadata={'path_param': { 'field_name': 'build_num', 'style': 'simple', 'explode': False }})
+    project: str = field(metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
+    username: str = field(metadata={'path_param': { 'field_name': 'username', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class PostProjectUsernameProjectBuildNumRetryRequest:
-    path_params: PostProjectUsernameProjectBuildNumRetryPathParams = field(default=None)
+    path_params: PostProjectUsernameProjectBuildNumRetryPathParams = field()
     
 
 @dataclass
 class PostProjectUsernameProjectBuildNumRetryResponse:
+    content_type: str = field()
+    status_code: int = field()
     build: Optional[shared.Build] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

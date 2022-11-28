@@ -8,6 +8,8 @@ const (
 	IdentityServiceMembershipStateStateEnumError                      IdentityServiceMembershipStateStateEnum = "ERROR"
 )
 
+// IdentityServiceMembershipState
+// **Anthos Identity Service**: State for a single Membership.
 type IdentityServiceMembershipState struct {
 	FailureReason    *string                                  `json:"failureReason,omitempty"`
 	InstalledVersion *string                                  `json:"installedVersion,omitempty"`

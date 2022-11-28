@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class IsDescendantOfUsingGetPathParams extends SpeakeasyBase {
     accId1: string;
     accId2: string;

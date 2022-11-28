@@ -1,14 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import registrationstatus_enum
-from . import tagfilter
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListOnPremisesInstancesInput:
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextToken' }})
-    registration_status: Optional[registrationstatus_enum.RegistrationStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'registrationStatus' }})
-    tag_filters: Optional[List[tagfilter.TagFilter]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tagFilters' }})
+    r"""ListOnPremisesInstancesInput
+    Represents the input of a <code>ListOnPremisesInstances</code> operation.
+    """
+    
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextToken') }})
+    registration_status: Optional[RegistrationStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('registrationStatus') }})
+    tag_filters: Optional[List[TagFilter]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tagFilters') }})
     

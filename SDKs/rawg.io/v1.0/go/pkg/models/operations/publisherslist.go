@@ -9,15 +9,15 @@ type PublishersListQueryParams struct {
 	PageSize *int64 `queryParam:"style=form,explode=true,name=page_size"`
 }
 
-type PublishersListRequest struct {
-	QueryParams PublishersListQueryParams
-}
-
 type PublishersList200ApplicationJSON struct {
 	Count    int64              `json:"count"`
 	Next     *string            `json:"next,omitempty"`
 	Previous *string            `json:"previous,omitempty"`
 	Results  []shared.Publisher `json:"results"`
+}
+
+type PublishersListRequest struct {
+	QueryParams PublishersListQueryParams
 }
 
 type PublishersListResponse struct {

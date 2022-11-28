@@ -5,19 +5,19 @@ from sdk.models import shared
 
 @dataclass
 class TaxAPIAllHeaders:
-    x_auth_key: str = field(default=None, metadata={'header': { 'field_name': 'x-auth-key', 'style': 'simple', 'explode': False }})
-    x_auth_secret: str = field(default=None, metadata={'header': { 'field_name': 'x-auth-secret', 'style': 'simple', 'explode': False }})
+    x_auth_key: str = field(metadata={'header': { 'field_name': 'x-auth-key', 'style': 'simple', 'explode': False }})
+    x_auth_secret: str = field(metadata={'header': { 'field_name': 'x-auth-secret', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class TaxAPIAllRequest:
-    headers: TaxAPIAllHeaders = field(default=None)
+    headers: TaxAPIAllHeaders = field()
     
 
 @dataclass
 class TaxAPIAllResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     tax_details_api_models: Optional[List[shared.TaxDetailsAPIModel]] = field(default=None)
     

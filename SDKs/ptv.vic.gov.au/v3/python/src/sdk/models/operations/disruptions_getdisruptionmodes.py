@@ -12,14 +12,14 @@ class DisruptionsGetDisruptionModesQueryParams:
 
 @dataclass
 class DisruptionsGetDisruptionModesRequest:
-    query_params: DisruptionsGetDisruptionModesQueryParams = field(default=None)
+    query_params: DisruptionsGetDisruptionModesQueryParams = field()
     
 
 @dataclass
 class DisruptionsGetDisruptionModesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     v3_disruption_modes_response: Optional[shared.V3DisruptionModesResponse] = field(default=None)
     v3_error_response: Optional[shared.V3ErrorResponse] = field(default=None)
     

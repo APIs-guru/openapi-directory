@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MinimalRepository } from "./minimalrepository";
 import { SearchResultTextMatches } from "./searchresulttextmatches";
+
 
 
 // CodeSearchResultItem
@@ -9,42 +9,42 @@ import { SearchResultTextMatches } from "./searchresulttextmatches";
  * Code Search Result Item
 **/
 export class CodeSearchResultItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=file_size" })
+  @SpeakeasyMetadata({ data: "json, name=file_size" })
   fileSize?: number;
 
-  @Metadata({ data: "json, name=git_url" })
+  @SpeakeasyMetadata({ data: "json, name=git_url" })
   gitUrl: string;
 
-  @Metadata({ data: "json, name=html_url" })
+  @SpeakeasyMetadata({ data: "json, name=html_url" })
   htmlUrl: string;
 
-  @Metadata({ data: "json, name=language" })
+  @SpeakeasyMetadata({ data: "json, name=language" })
   language?: string;
 
-  @Metadata({ data: "json, name=last_modified_at" })
+  @SpeakeasyMetadata({ data: "json, name=last_modified_at" })
   lastModifiedAt?: Date;
 
-  @Metadata({ data: "json, name=line_numbers" })
+  @SpeakeasyMetadata({ data: "json, name=line_numbers" })
   lineNumbers?: string[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path: string;
 
-  @Metadata({ data: "json, name=repository" })
+  @SpeakeasyMetadata({ data: "json, name=repository" })
   repository: MinimalRepository;
 
-  @Metadata({ data: "json, name=score" })
+  @SpeakeasyMetadata({ data: "json, name=score" })
   score: number;
 
-  @Metadata({ data: "json, name=sha" })
+  @SpeakeasyMetadata({ data: "json, name=sha" })
   sha: string;
 
-  @Metadata({ data: "json, name=text_matches", elemType: shared.SearchResultTextMatches })
+  @SpeakeasyMetadata({ data: "json, name=text_matches", elemType: SearchResultTextMatches })
   textMatches?: SearchResultTextMatches[];
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url: string;
 }

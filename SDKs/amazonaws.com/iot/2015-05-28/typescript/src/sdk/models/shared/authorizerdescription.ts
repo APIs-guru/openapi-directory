@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AuthorizerStatusEnum } from "./authorizerstatusenum";
+
 
 
 // AuthorizerDescription
@@ -7,30 +8,30 @@ import { AuthorizerStatusEnum } from "./authorizerstatusenum";
  * The authorizer description.
 **/
 export class AuthorizerDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authorizerArn" })
+  @SpeakeasyMetadata({ data: "json, name=authorizerArn" })
   authorizerArn?: string;
 
-  @Metadata({ data: "json, name=authorizerFunctionArn" })
+  @SpeakeasyMetadata({ data: "json, name=authorizerFunctionArn" })
   authorizerFunctionArn?: string;
 
-  @Metadata({ data: "json, name=authorizerName" })
+  @SpeakeasyMetadata({ data: "json, name=authorizerName" })
   authorizerName?: string;
 
-  @Metadata({ data: "json, name=creationDate" })
+  @SpeakeasyMetadata({ data: "json, name=creationDate" })
   creationDate?: Date;
 
-  @Metadata({ data: "json, name=lastModifiedDate" })
+  @SpeakeasyMetadata({ data: "json, name=lastModifiedDate" })
   lastModifiedDate?: Date;
 
-  @Metadata({ data: "json, name=signingDisabled" })
+  @SpeakeasyMetadata({ data: "json, name=signingDisabled" })
   signingDisabled?: boolean;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: AuthorizerStatusEnum;
 
-  @Metadata({ data: "json, name=tokenKeyName" })
+  @SpeakeasyMetadata({ data: "json, name=tokenKeyName" })
   tokenKeyName?: string;
 
-  @Metadata({ data: "json, name=tokenSigningPublicKeys" })
+  @SpeakeasyMetadata({ data: "json, name=tokenSigningPublicKeys" })
   tokenSigningPublicKeys?: Map<string, string>;
 }

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetDescribeApplicationVersionsActionEnum(str, Enum):
     DESCRIBE_APPLICATION_VERSIONS = "DescribeApplicationVersions"
@@ -10,11 +14,11 @@ class GetDescribeApplicationVersionsVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeApplicationVersionsQueryParams:
-    action: GetDescribeApplicationVersionsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribeApplicationVersionsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDescribeApplicationVersionsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     application_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'ApplicationName', 'style': 'form', 'explode': True }})
     max_records: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxRecords', 'style': 'form', 'explode': True }})
     next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NextToken', 'style': 'form', 'explode': True }})
-    version: GetDescribeApplicationVersionsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     version_labels: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'VersionLabels', 'style': 'form', 'explode': True }})
     
 
@@ -31,13 +35,13 @@ class GetDescribeApplicationVersionsHeaders:
 
 @dataclass
 class GetDescribeApplicationVersionsRequest:
-    query_params: GetDescribeApplicationVersionsQueryParams = field(default=None)
-    headers: GetDescribeApplicationVersionsHeaders = field(default=None)
+    headers: GetDescribeApplicationVersionsHeaders = field()
+    query_params: GetDescribeApplicationVersionsQueryParams = field()
     
 
 @dataclass
 class GetDescribeApplicationVersionsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

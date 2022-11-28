@@ -1,8 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { OsPolicyAssignmentLabelSet } from "./ospolicyassignmentlabelset";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OsPolicyAssignmentLabelSet } from "./ospolicyassignmentlabelset";
 import { OsPolicyAssignmentInstanceFilterInventory } from "./ospolicyassignmentinstancefilterinventory";
+
 
 
 // OsPolicyAssignmentInstanceFilter
@@ -10,15 +9,15 @@ import { OsPolicyAssignmentInstanceFilterInventory } from "./ospolicyassignmenti
  * Filters to select target VMs for an assignment. If more than one filter criteria is specified below, a VM will be selected if and only if it satisfies all of them.
 **/
 export class OsPolicyAssignmentInstanceFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=all" })
+  @SpeakeasyMetadata({ data: "json, name=all" })
   all?: boolean;
 
-  @Metadata({ data: "json, name=exclusionLabels", elemType: shared.OsPolicyAssignmentLabelSet })
+  @SpeakeasyMetadata({ data: "json, name=exclusionLabels", elemType: OsPolicyAssignmentLabelSet })
   exclusionLabels?: OsPolicyAssignmentLabelSet[];
 
-  @Metadata({ data: "json, name=inclusionLabels", elemType: shared.OsPolicyAssignmentLabelSet })
+  @SpeakeasyMetadata({ data: "json, name=inclusionLabels", elemType: OsPolicyAssignmentLabelSet })
   inclusionLabels?: OsPolicyAssignmentLabelSet[];
 
-  @Metadata({ data: "json, name=inventories", elemType: shared.OsPolicyAssignmentInstanceFilterInventory })
+  @SpeakeasyMetadata({ data: "json, name=inventories", elemType: OsPolicyAssignmentInstanceFilterInventory })
   inventories?: OsPolicyAssignmentInstanceFilterInventory[];
 }

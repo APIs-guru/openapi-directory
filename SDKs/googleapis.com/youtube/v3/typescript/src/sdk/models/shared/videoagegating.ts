@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum VideoAgeGatingVideoGameRatingEnum {
-    Anyone = "anyone"
-,    M15Plus = "m15Plus"
-,    M16Plus = "m16Plus"
-,    M17Plus = "m17Plus"
+    Anyone = "anyone",
+    M15Plus = "m15Plus",
+    M16Plus = "m16Plus",
+    M17Plus = "m17Plus"
 }
 
 
 export class VideoAgeGating extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alcoholContent" })
+  @SpeakeasyMetadata({ data: "json, name=alcoholContent" })
   alcoholContent?: boolean;
 
-  @Metadata({ data: "json, name=restricted" })
+  @SpeakeasyMetadata({ data: "json, name=restricted" })
   restricted?: boolean;
 
-  @Metadata({ data: "json, name=videoGameRating" })
+  @SpeakeasyMetadata({ data: "json, name=videoGameRating" })
   videoGameRating?: VideoAgeGatingVideoGameRatingEnum;
 }

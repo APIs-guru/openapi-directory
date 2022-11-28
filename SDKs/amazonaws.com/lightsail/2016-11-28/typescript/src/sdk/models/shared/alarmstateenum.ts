@@ -1,7 +1,8 @@
 
 
+
 export enum AlarmStateEnum {
-    Ok = "OK"
-,    Alarm = "ALARM"
-,    InsufficientData = "INSUFFICIENT_DATA"
+    Ok = "OK",
+    Alarm = "ALARM",
+    InsufficientData = "INSUFFICIENT_DATA"
 }

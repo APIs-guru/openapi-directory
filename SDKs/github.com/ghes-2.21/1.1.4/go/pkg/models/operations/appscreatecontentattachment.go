@@ -15,14 +15,14 @@ type AppsCreateContentAttachmentRequestBody struct {
 	Title string `json:"title"`
 }
 
-type AppsCreateContentAttachmentRequest struct {
-	PathParams AppsCreateContentAttachmentPathParams
-	Request    *AppsCreateContentAttachmentRequestBody `request:"mediaType=application/json"`
-}
-
 type AppsCreateContentAttachment415ApplicationJSON struct {
 	DocumentationURL string `json:"documentation_url"`
 	Message          string `json:"message"`
+}
+
+type AppsCreateContentAttachmentRequest struct {
+	PathParams AppsCreateContentAttachmentPathParams
+	Request    *AppsCreateContentAttachmentRequestBody `request:"mediaType=application/json"`
 }
 
 type AppsCreateContentAttachmentResponse struct {

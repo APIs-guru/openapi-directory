@@ -34,6 +34,8 @@ const (
 	GoogleCloudIntegrationsV1alphaParameterMapValueTypeEnumProtoArray                              GoogleCloudIntegrationsV1alphaParameterMapValueTypeEnum = "PROTO_ARRAY"
 )
 
+// GoogleCloudIntegrationsV1alphaParameterMap
+// A generic multi-map that holds key value pairs. They keys and values can be of any type, unless specified.
 type GoogleCloudIntegrationsV1alphaParameterMap struct {
 	Entries   []GoogleCloudIntegrationsV1alphaParameterMapEntry        `json:"entries,omitempty"`
 	KeyType   *GoogleCloudIntegrationsV1alphaParameterMapKeyTypeEnum   `json:"keyType,omitempty"`

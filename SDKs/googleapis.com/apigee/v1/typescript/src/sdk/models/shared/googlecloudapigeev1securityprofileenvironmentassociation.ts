@@ -1,4 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
+
+
+// GoogleCloudApigeeV1SecurityProfileEnvironmentAssociationInput
+/** 
+ * Represents a SecurityProfileEnvironmentAssociation resource.
+**/
+export class GoogleCloudApigeeV1SecurityProfileEnvironmentAssociationInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=securityProfileRevisionId" })
+  securityProfileRevisionId?: string;
+}
 
 
 // GoogleCloudApigeeV1SecurityProfileEnvironmentAssociation
@@ -6,12 +20,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents a SecurityProfileEnvironmentAssociation resource.
 **/
 export class GoogleCloudApigeeV1SecurityProfileEnvironmentAssociation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attachTime" })
+  @SpeakeasyMetadata({ data: "json, name=attachTime" })
   attachTime?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=securityProfileRevisionId" })
+  @SpeakeasyMetadata({ data: "json, name=securityProfileRevisionId" })
   securityProfileRevisionId?: string;
 }

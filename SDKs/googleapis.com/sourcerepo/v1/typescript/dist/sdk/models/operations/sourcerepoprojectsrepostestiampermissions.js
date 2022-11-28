@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var SourcerepoProjectsReposTestIamPermissionsPathParams = /** @class */ (function (_super) {
     __extends(SourcerepoProjectsReposTestIamPermissionsPathParams, _super);
@@ -30,7 +30,7 @@ var SourcerepoProjectsReposTestIamPermissionsPathParams = /** @class */ (functio
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=resource" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=resource" }),
         __metadata("design:type", String)
     ], SourcerepoProjectsReposTestIamPermissionsPathParams.prototype, "resource", void 0);
     return SourcerepoProjectsReposTestIamPermissionsPathParams;
@@ -42,47 +42,47 @@ var SourcerepoProjectsReposTestIamPermissionsQueryParams = /** @class */ (functi
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], SourcerepoProjectsReposTestIamPermissionsQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], SourcerepoProjectsReposTestIamPermissionsQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], SourcerepoProjectsReposTestIamPermissionsQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], SourcerepoProjectsReposTestIamPermissionsQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], SourcerepoProjectsReposTestIamPermissionsQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], SourcerepoProjectsReposTestIamPermissionsQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], SourcerepoProjectsReposTestIamPermissionsQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], SourcerepoProjectsReposTestIamPermissionsQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], SourcerepoProjectsReposTestIamPermissionsQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], SourcerepoProjectsReposTestIamPermissionsQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], SourcerepoProjectsReposTestIamPermissionsQueryParams.prototype, "uploadProtocol", void 0);
     return SourcerepoProjectsReposTestIamPermissionsQueryParams;
@@ -94,11 +94,11 @@ var SourcerepoProjectsReposTestIamPermissionsSecurityOption1 = /** @class */ (fu
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], SourcerepoProjectsReposTestIamPermissionsSecurityOption1.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], SourcerepoProjectsReposTestIamPermissionsSecurityOption1.prototype, "oauth2c", void 0);
     return SourcerepoProjectsReposTestIamPermissionsSecurityOption1;
@@ -110,11 +110,11 @@ var SourcerepoProjectsReposTestIamPermissionsSecurityOption2 = /** @class */ (fu
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], SourcerepoProjectsReposTestIamPermissionsSecurityOption2.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], SourcerepoProjectsReposTestIamPermissionsSecurityOption2.prototype, "oauth2c", void 0);
     return SourcerepoProjectsReposTestIamPermissionsSecurityOption2;
@@ -126,11 +126,11 @@ var SourcerepoProjectsReposTestIamPermissionsSecurityOption3 = /** @class */ (fu
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], SourcerepoProjectsReposTestIamPermissionsSecurityOption3.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], SourcerepoProjectsReposTestIamPermissionsSecurityOption3.prototype, "oauth2c", void 0);
     return SourcerepoProjectsReposTestIamPermissionsSecurityOption3;
@@ -142,11 +142,11 @@ var SourcerepoProjectsReposTestIamPermissionsSecurityOption4 = /** @class */ (fu
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], SourcerepoProjectsReposTestIamPermissionsSecurityOption4.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], SourcerepoProjectsReposTestIamPermissionsSecurityOption4.prototype, "oauth2c", void 0);
     return SourcerepoProjectsReposTestIamPermissionsSecurityOption4;
@@ -158,19 +158,19 @@ var SourcerepoProjectsReposTestIamPermissionsSecurity = /** @class */ (function 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", SourcerepoProjectsReposTestIamPermissionsSecurityOption1)
     ], SourcerepoProjectsReposTestIamPermissionsSecurity.prototype, "option1", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", SourcerepoProjectsReposTestIamPermissionsSecurityOption2)
     ], SourcerepoProjectsReposTestIamPermissionsSecurity.prototype, "option2", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", SourcerepoProjectsReposTestIamPermissionsSecurityOption3)
     ], SourcerepoProjectsReposTestIamPermissionsSecurity.prototype, "option3", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", SourcerepoProjectsReposTestIamPermissionsSecurityOption4)
     ], SourcerepoProjectsReposTestIamPermissionsSecurity.prototype, "option4", void 0);
     return SourcerepoProjectsReposTestIamPermissionsSecurity;
@@ -182,19 +182,19 @@ var SourcerepoProjectsReposTestIamPermissionsRequest = /** @class */ (function (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SourcerepoProjectsReposTestIamPermissionsPathParams)
     ], SourcerepoProjectsReposTestIamPermissionsRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SourcerepoProjectsReposTestIamPermissionsQueryParams)
     ], SourcerepoProjectsReposTestIamPermissionsRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.TestIamPermissionsRequest)
     ], SourcerepoProjectsReposTestIamPermissionsRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SourcerepoProjectsReposTestIamPermissionsSecurity)
     ], SourcerepoProjectsReposTestIamPermissionsRequest.prototype, "security", void 0);
     return SourcerepoProjectsReposTestIamPermissionsRequest;
@@ -206,15 +206,15 @@ var SourcerepoProjectsReposTestIamPermissionsResponse = /** @class */ (function 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], SourcerepoProjectsReposTestIamPermissionsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], SourcerepoProjectsReposTestIamPermissionsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.TestIamPermissionsResponse)
     ], SourcerepoProjectsReposTestIamPermissionsResponse.prototype, "testIamPermissionsResponse", void 0);
     return SourcerepoProjectsReposTestIamPermissionsResponse;

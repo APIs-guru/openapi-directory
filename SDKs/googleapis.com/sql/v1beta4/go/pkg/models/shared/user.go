@@ -17,6 +17,8 @@ const (
 	UserTypeEnumCloudIamServiceAccount UserTypeEnum = "CLOUD_IAM_SERVICE_ACCOUNT"
 )
 
+// User
+// A Cloud SQL user resource.
 type User struct {
 	DualPasswordType     *UserDualPasswordTypeEnum     `json:"dualPasswordType,omitempty"`
 	Etag                 *string                       `json:"etag,omitempty"`

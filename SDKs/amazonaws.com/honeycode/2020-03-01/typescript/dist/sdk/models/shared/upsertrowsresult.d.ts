@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { UpsertActionEnum } from "./upsertactionenum";
 /**
  *  An object that represents the result of a single upsert row request.

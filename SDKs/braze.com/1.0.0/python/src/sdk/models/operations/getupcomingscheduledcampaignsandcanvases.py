@@ -9,11 +9,11 @@ class GetUpcomingScheduledCampaignsAndCanvasesQueryParams:
 
 @dataclass
 class GetUpcomingScheduledCampaignsAndCanvasesRequest:
-    query_params: GetUpcomingScheduledCampaignsAndCanvasesQueryParams = field(default=None)
+    query_params: GetUpcomingScheduledCampaignsAndCanvasesQueryParams = field()
     
 
 @dataclass
 class GetUpcomingScheduledCampaignsAndCanvasesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

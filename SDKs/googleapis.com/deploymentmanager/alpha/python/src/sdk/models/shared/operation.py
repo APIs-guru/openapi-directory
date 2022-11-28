@@ -1,20 +1,26 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class OperationErrorErrors:
-    code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
-    location: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'location' }})
-    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
+    code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('code') }})
+    location: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('location') }})
+    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('message') }})
     
 
 @dataclass_json
 @dataclass
 class OperationError:
-    errors: Optional[List[OperationErrorErrors]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errors' }})
+    r"""OperationError
+    [Output Only] If errors are generated during processing of the operation, this field will be populated.
+    """
+    
+    errors: Optional[List[OperationErrorErrors]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errors') }})
     
 class OperationStatusEnum(str, Enum):
     PENDING = "PENDING"
@@ -54,43 +60,47 @@ class OperationWarningsCodeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class OperationWarningsData:
-    key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
-    value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('key') }})
+    value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     
 
 @dataclass_json
 @dataclass
 class OperationWarnings:
-    code: Optional[OperationWarningsCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
-    data: Optional[List[OperationWarningsData]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
-    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
+    code: Optional[OperationWarningsCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('code') }})
+    data: Optional[List[OperationWarningsData]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
+    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('message') }})
     
 
 @dataclass_json
 @dataclass
 class Operation:
-    client_operation_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clientOperationId' }})
-    creation_timestamp: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'creationTimestamp' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    end_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'endTime' }})
-    error: Optional[OperationError] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    http_error_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'httpErrorMessage' }})
-    http_error_status_code: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'httpErrorStatusCode' }})
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    insert_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'insertTime' }})
-    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    operation_group_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'operationGroupId' }})
-    operation_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'operationType' }})
-    progress: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'progress' }})
-    region: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'region' }})
-    self_link: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'selfLink' }})
-    start_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'startTime' }})
-    status: Optional[OperationStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    status_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'statusMessage' }})
-    target_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'targetId' }})
-    target_link: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'targetLink' }})
-    user: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'user' }})
-    warnings: Optional[List[OperationWarnings]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'warnings' }})
-    zone: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'zone' }})
+    r"""Operation
+    Represents an Operation resource. Google Compute Engine has three Operation resources: * [Global](/compute/docs/reference/rest/{$api_version}/globalOperations) * [Regional](/compute/docs/reference/rest/{$api_version}/regionOperations) * [Zonal](/compute/docs/reference/rest/{$api_version}/zoneOperations) You can use an operation resource to manage asynchronous API requests. For more information, read Handling API responses. Operations can be global, regional or zonal. - For global operations, use the `globalOperations` resource. - For regional operations, use the `regionOperations` resource. - For zonal operations, use the `zonalOperations` resource. For more information, read Global, Regional, and Zonal Resources.
+    """
+    
+    client_operation_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clientOperationId') }})
+    creation_timestamp: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('creationTimestamp') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    end_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('endTime') }})
+    error: Optional[OperationError] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    http_error_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('httpErrorMessage') }})
+    http_error_status_code: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('httpErrorStatusCode') }})
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    insert_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('insertTime') }})
+    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    operation_group_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('operationGroupId') }})
+    operation_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('operationType') }})
+    progress: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('progress') }})
+    region: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('region') }})
+    self_link: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('selfLink') }})
+    start_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('startTime') }})
+    status: Optional[OperationStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    status_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('statusMessage') }})
+    target_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('targetId') }})
+    target_link: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('targetLink') }})
+    user: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('user') }})
+    warnings: Optional[List[OperationWarnings]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('warnings') }})
+    zone: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('zone') }})
     

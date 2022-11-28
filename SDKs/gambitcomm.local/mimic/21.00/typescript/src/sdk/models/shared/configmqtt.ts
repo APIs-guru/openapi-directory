@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ConfigMqtt extends SpeakeasyBase {
-  @Metadata({ data: "json, name=broker" })
+  @SpeakeasyMetadata({ data: "json, name=broker" })
   broker?: string;
 
-  @Metadata({ data: "json, name=clientid" })
+  @SpeakeasyMetadata({ data: "json, name=clientid" })
   clientid?: string;
 
-  @Metadata({ data: "json, name=filename" })
+  @SpeakeasyMetadata({ data: "json, name=filename" })
   filename?: string;
 
-  @Metadata({ data: "json, name=is_tls" })
+  @SpeakeasyMetadata({ data: "json, name=is_tls" })
   isTls?: string;
 
-  @Metadata({ data: "json, name=password" })
+  @SpeakeasyMetadata({ data: "json, name=password" })
   password?: string;
 
-  @Metadata({ data: "json, name=port" })
+  @SpeakeasyMetadata({ data: "json, name=port" })
   port?: number;
 
-  @Metadata({ data: "json, name=tls_conf_filename" })
+  @SpeakeasyMetadata({ data: "json, name=tls_conf_filename" })
   tlsConfFilename?: string;
 
-  @Metadata({ data: "json, name=username" })
+  @SpeakeasyMetadata({ data: "json, name=username" })
   username?: string;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 }

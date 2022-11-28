@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Attachment } from "./attachment";
 import { SendableDocument } from "./sendabledocument";
 import { Routing } from "./routing";
+
 
 
 // DocumentSubmission
@@ -10,24 +10,24 @@ import { Routing } from "./routing";
  * The document you want Storecove to send, with some meta-data.
 **/
 export class DocumentSubmission extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attachments", elemType: shared.Attachment })
+  @SpeakeasyMetadata({ data: "json, name=attachments", elemType: Attachment })
   attachments?: Attachment[];
 
-  @Metadata({ data: "json, name=createPrimaryImage" })
+  @SpeakeasyMetadata({ data: "json, name=createPrimaryImage" })
   createPrimaryImage?: boolean;
 
-  @Metadata({ data: "json, name=document" })
+  @SpeakeasyMetadata({ data: "json, name=document" })
   document?: SendableDocument;
 
-  @Metadata({ data: "json, name=idempotencyGuid" })
+  @SpeakeasyMetadata({ data: "json, name=idempotencyGuid" })
   idempotencyGuid?: string;
 
-  @Metadata({ data: "json, name=legalEntityId" })
+  @SpeakeasyMetadata({ data: "json, name=legalEntityId" })
   legalEntityId?: number;
 
-  @Metadata({ data: "json, name=receiveGuid" })
+  @SpeakeasyMetadata({ data: "json, name=receiveGuid" })
   receiveGuid?: string;
 
-  @Metadata({ data: "json, name=routing" })
+  @SpeakeasyMetadata({ data: "json, name=routing" })
   routing?: Routing;
 }

@@ -1,62 +1,62 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-export const AIRTRAVELCOORDINATES_SERVERS = [
-	"http://api.climatekuul.com:8000/footprint",
-];
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 
+export const AirtravelCoordinatesServerList = [
+	"http://api.climatekuul.com:8000/footprint",
+] as const;
 
 
 export class AirtravelCoordinatesHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Content-Type" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Content-Type" })
   contentType: string;
 }
 
 
 export class AirtravelCoordinatesRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "form, name=apiKey_l1;" })
+  @SpeakeasyMetadata({ data: "form, name=apiKey_l1;" })
   apiKeyL1: string;
 
-  @Metadata({ data: "form, name=apiKey_l2;" })
+  @SpeakeasyMetadata({ data: "form, name=apiKey_l2;" })
   apiKeyL2: string;
 
-  @Metadata({ data: "form, name=destination_airport_latitude;" })
+  @SpeakeasyMetadata({ data: "form, name=destination_airport_latitude;" })
   destinationAirportLatitude: number;
 
-  @Metadata({ data: "form, name=destination_airport_longitude;" })
+  @SpeakeasyMetadata({ data: "form, name=destination_airport_longitude;" })
   destinationAirportLongitude: number;
 
-  @Metadata({ data: "form, name=number_of_passengers;" })
+  @SpeakeasyMetadata({ data: "form, name=number_of_passengers;" })
   numberOfPassengers: number;
 
-  @Metadata({ data: "form, name=origin_airport_latitude;" })
+  @SpeakeasyMetadata({ data: "form, name=origin_airport_latitude;" })
   originAirportLatitude: number;
 
-  @Metadata({ data: "form, name=origin_airport_longitude;" })
+  @SpeakeasyMetadata({ data: "form, name=origin_airport_longitude;" })
   originAirportLongitude: number;
 
-  @Metadata({ data: "form, name=travel_class;" })
+  @SpeakeasyMetadata({ data: "form, name=travel_class;" })
   travelClass: string;
 
-  @Metadata({ data: "form, name=travel_mode;" })
+  @SpeakeasyMetadata({ data: "form, name=travel_mode;" })
   travelMode: string;
 }
 
 
 export class AirtravelCoordinatesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   serverUrl?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: AirtravelCoordinatesHeaders;
 
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
   request?: AirtravelCoordinatesRequestBody;
 }
 
 
 export class AirtravelCoordinatesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

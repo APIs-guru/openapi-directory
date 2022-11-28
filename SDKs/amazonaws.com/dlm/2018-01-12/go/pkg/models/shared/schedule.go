@@ -1,5 +1,7 @@
 package shared
 
+// Schedule
+// Specifies a backup schedule for a snapshot or AMI lifecycle policy.
 type Schedule struct {
 	CopyTags             *bool                 `json:"CopyTags,omitempty"`
 	CreateRule           *CreateRule           `json:"CreateRule,omitempty"`

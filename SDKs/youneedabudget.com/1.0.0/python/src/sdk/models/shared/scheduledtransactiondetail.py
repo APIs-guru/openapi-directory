@@ -1,10 +1,12 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import scheduledsubtransaction
+from sdk import utils
+from . import *
 
 class ScheduledTransactionDetailFlagColorEnum(str, Enum):
     RED = "red"
@@ -33,20 +35,20 @@ class ScheduledTransactionDetailFrequencyEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ScheduledTransactionDetail:
-    account_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'account_id' }})
-    account_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'account_name' }})
-    amount: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'amount' }})
-    category_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'category_id' }})
-    category_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'category_name' }})
-    date_first: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'date_first', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    date_next: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'date_next', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    deleted: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deleted' }})
-    flag_color: Optional[ScheduledTransactionDetailFlagColorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'flag_color' }})
-    frequency: ScheduledTransactionDetailFrequencyEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'frequency' }})
-    id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    memo: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'memo' }})
-    payee_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'payee_id' }})
-    payee_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'payee_name' }})
-    subtransactions: List[scheduledsubtransaction.ScheduledSubTransaction] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'subtransactions' }})
-    transfer_account_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'transfer_account_id' }})
+    account_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('account_id') }})
+    account_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('account_name') }})
+    amount: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('amount') }})
+    date_first: date = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('date_first'), 'encoder': utils.dateisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    date_next: date = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('date_next'), 'encoder': utils.dateisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    deleted: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('deleted') }})
+    frequency: ScheduledTransactionDetailFrequencyEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('frequency') }})
+    id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    subtransactions: List[ScheduledSubTransaction] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('subtransactions') }})
+    category_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('category_id') }})
+    category_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('category_name') }})
+    flag_color: Optional[ScheduledTransactionDetailFlagColorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('flag_color') }})
+    memo: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('memo') }})
+    payee_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('payee_id') }})
+    payee_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('payee_name') }})
+    transfer_account_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('transfer_account_id') }})
     

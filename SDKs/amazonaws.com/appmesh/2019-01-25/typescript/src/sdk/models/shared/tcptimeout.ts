@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Duration } from "./duration";
+
 
 
 // TcpTimeout
@@ -7,6 +8,6 @@ import { Duration } from "./duration";
  * An object that represents types of timeouts. 
 **/
 export class TcpTimeout extends SpeakeasyBase {
-  @Metadata({ data: "json, name=idle" })
+  @SpeakeasyMetadata({ data: "json, name=idle" })
   idle?: Duration;
 }

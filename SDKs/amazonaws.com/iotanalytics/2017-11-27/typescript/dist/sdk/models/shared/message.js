@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Message
 /**
  * Information about a message.
@@ -33,11 +33,11 @@ var Message = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=messageId" }),
+        SpeakeasyMetadata({ data: "json, name=messageId" }),
         __metadata("design:type", String)
     ], Message.prototype, "messageId", void 0);
     __decorate([
-        Metadata({ data: "json, name=payload" }),
+        SpeakeasyMetadata({ data: "json, name=payload" }),
         __metadata("design:type", String)
     ], Message.prototype, "payload", void 0);
     return Message;

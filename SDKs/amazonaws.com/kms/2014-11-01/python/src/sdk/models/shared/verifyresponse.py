@@ -1,13 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import signingalgorithmspec_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class VerifyResponse:
-    key_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'KeyId' }})
-    signature_valid: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SignatureValid' }})
-    signing_algorithm: Optional[signingalgorithmspec_enum.SigningAlgorithmSpecEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SigningAlgorithm' }})
+    key_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('KeyId') }})
+    signature_valid: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SignatureValid') }})
+    signing_algorithm: Optional[SigningAlgorithmSpecEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SigningAlgorithm') }})
     

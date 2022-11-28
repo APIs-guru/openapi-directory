@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApprovalRequest } from "./approvalrequest";
+
 
 
 // ListApprovalRequestsResponse
@@ -8,9 +8,9 @@ import { ApprovalRequest } from "./approvalrequest";
  * Response to listing of ApprovalRequest objects.
 **/
 export class ListApprovalRequestsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=approvalRequests", elemType: shared.ApprovalRequest })
+  @SpeakeasyMetadata({ data: "json, name=approvalRequests", elemType: ApprovalRequest })
   approvalRequests?: ApprovalRequest[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

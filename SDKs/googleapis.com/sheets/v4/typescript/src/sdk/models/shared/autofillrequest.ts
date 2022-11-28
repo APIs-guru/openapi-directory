@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GridRange } from "./gridrange";
 import { SourceAndDestination } from "./sourceanddestination";
+
 
 
 // AutoFillRequest
@@ -8,12 +9,12 @@ import { SourceAndDestination } from "./sourceanddestination";
  * Fills in more data based on existing data.
 **/
 export class AutoFillRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=range" })
+  @SpeakeasyMetadata({ data: "json, name=range" })
   range?: GridRange;
 
-  @Metadata({ data: "json, name=sourceAndDestination" })
+  @SpeakeasyMetadata({ data: "json, name=sourceAndDestination" })
   sourceAndDestination?: SourceAndDestination;
 
-  @Metadata({ data: "json, name=useAlternateSeries" })
+  @SpeakeasyMetadata({ data: "json, name=useAlternateSeries" })
   useAlternateSeries?: boolean;
 }

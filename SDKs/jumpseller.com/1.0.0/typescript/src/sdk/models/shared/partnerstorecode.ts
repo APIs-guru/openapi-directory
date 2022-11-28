@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PartnerStoreCodeStore extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: string;
 }
 
 
 export class PartnerStoreCode extends SpeakeasyBase {
-  @Metadata({ data: "json, name=store" })
+  @SpeakeasyMetadata({ data: "json, name=store" })
   store?: PartnerStoreCodeStore;
 }

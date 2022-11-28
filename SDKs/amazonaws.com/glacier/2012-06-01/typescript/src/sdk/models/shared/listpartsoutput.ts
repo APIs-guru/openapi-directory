@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PartListElement } from "./partlistelement";
+
 
 
 // ListPartsOutput
@@ -8,24 +8,24 @@ import { PartListElement } from "./partlistelement";
  * Contains the Amazon S3 Glacier response to your request.
 **/
 export class ListPartsOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ArchiveDescription" })
+  @SpeakeasyMetadata({ data: "json, name=ArchiveDescription" })
   archiveDescription?: string;
 
-  @Metadata({ data: "json, name=CreationDate" })
+  @SpeakeasyMetadata({ data: "json, name=CreationDate" })
   creationDate?: string;
 
-  @Metadata({ data: "json, name=Marker" })
+  @SpeakeasyMetadata({ data: "json, name=Marker" })
   marker?: string;
 
-  @Metadata({ data: "json, name=MultipartUploadId" })
+  @SpeakeasyMetadata({ data: "json, name=MultipartUploadId" })
   multipartUploadId?: string;
 
-  @Metadata({ data: "json, name=PartSizeInBytes" })
+  @SpeakeasyMetadata({ data: "json, name=PartSizeInBytes" })
   partSizeInBytes?: number;
 
-  @Metadata({ data: "json, name=Parts", elemType: shared.PartListElement })
+  @SpeakeasyMetadata({ data: "json, name=Parts", elemType: PartListElement })
   parts?: PartListElement[];
 
-  @Metadata({ data: "json, name=VaultARN" })
+  @SpeakeasyMetadata({ data: "json, name=VaultARN" })
   vaultArn?: string;
 }

@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class FireteamSearchPublicAvailableClanFireteamsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=activityType" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=activityType" })
   activityType: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=dateRange" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=dateRange" })
   dateRange: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=page" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=page" })
   page: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=platform" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=platform" })
   platform: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=slotFilter" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=slotFilter" })
   slotFilter: number;
 }
 
 
 export class FireteamSearchPublicAvailableClanFireteamsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=langFilter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=langFilter" })
   langFilter?: string;
 }
 
 
 export class FireteamSearchPublicAvailableClanFireteamsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2: shared.SchemeOauth2;
 }
 
 
 export class FireteamSearchPublicAvailableClanFireteamsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: FireteamSearchPublicAvailableClanFireteamsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: FireteamSearchPublicAvailableClanFireteamsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: FireteamSearchPublicAvailableClanFireteamsSecurity;
 }
 
 
 export class FireteamSearchPublicAvailableClanFireteamsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

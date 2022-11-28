@@ -14,6 +14,8 @@ type CreateMapHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateMapRequestBodyConfiguration
+// Specifies the map tile style selected from an available provider.
 type CreateMapRequestBodyConfiguration struct {
 	Style *string `json:"Style,omitempty"`
 }

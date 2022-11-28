@@ -1,60 +1,61 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum TagApiGetTopTagsEntryTypeEnum {
-    Undefined = "Undefined"
-,    Album = "Album"
-,    Artist = "Artist"
-,    DiscussionTopic = "DiscussionTopic"
-,    Pv = "PV"
-,    ReleaseEvent = "ReleaseEvent"
-,    ReleaseEventSeries = "ReleaseEventSeries"
-,    Song = "Song"
-,    SongList = "SongList"
-,    Tag = "Tag"
-,    User = "User"
-,    Venue = "Venue"
+    Undefined = "Undefined",
+    Album = "Album",
+    Artist = "Artist",
+    DiscussionTopic = "DiscussionTopic",
+    Pv = "PV",
+    ReleaseEvent = "ReleaseEvent",
+    ReleaseEventSeries = "ReleaseEventSeries",
+    Song = "Song",
+    SongList = "SongList",
+    Tag = "Tag",
+    User = "User",
+    Venue = "Venue"
 }
 
 export enum TagApiGetTopTagsLangEnum {
-    Default = "Default"
-,    Japanese = "Japanese"
-,    Romaji = "Romaji"
-,    English = "English"
+    Default = "Default",
+    Japanese = "Japanese",
+    Romaji = "Romaji",
+    English = "English"
 }
 
 
 export class TagApiGetTopTagsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=categoryName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=categoryName" })
   categoryName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=entryType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=entryType" })
   entryType?: TagApiGetTopTagsEntryTypeEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=lang" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lang" })
   lang?: TagApiGetTopTagsLangEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxResults" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxResults" })
   maxResults?: number;
 }
 
 
 export class TagApiGetTopTagsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: TagApiGetTopTagsQueryParams;
 }
 
 
 export class TagApiGetTopTagsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.TagBaseContract })
+  @SpeakeasyMetadata({ elemType: shared.TagBaseContract })
   tagBaseContracts?: shared.TagBaseContract[];
 }

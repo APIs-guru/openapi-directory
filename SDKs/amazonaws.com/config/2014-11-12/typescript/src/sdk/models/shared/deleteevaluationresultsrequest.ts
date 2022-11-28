@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DeleteEvaluationResultsRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * <p/>
 **/
 export class DeleteEvaluationResultsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConfigRuleName" })
+  @SpeakeasyMetadata({ data: "json, name=ConfigRuleName" })
   configRuleName: string;
 }

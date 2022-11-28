@@ -1,7 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BitbucketServerConfig } from "./bitbucketserverconfig";
 import { PullRequestFilter } from "./pullrequestfilter";
 import { PushFilter } from "./pushfilter";
+import { BitbucketServerConfigInput } from "./bitbucketserverconfig";
+
 
 
 // BitbucketServerTriggerConfig
@@ -9,21 +11,46 @@ import { PushFilter } from "./pushfilter";
  * BitbucketServerTriggerConfig describes the configuration of a trigger that creates a build whenever a Bitbucket Server event is received.
 **/
 export class BitbucketServerTriggerConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bitbucketServerConfig" })
+  @SpeakeasyMetadata({ data: "json, name=bitbucketServerConfig" })
   bitbucketServerConfig?: BitbucketServerConfig;
 
-  @Metadata({ data: "json, name=bitbucketServerConfigResource" })
+  @SpeakeasyMetadata({ data: "json, name=bitbucketServerConfigResource" })
   bitbucketServerConfigResource?: string;
 
-  @Metadata({ data: "json, name=projectKey" })
+  @SpeakeasyMetadata({ data: "json, name=projectKey" })
   projectKey?: string;
 
-  @Metadata({ data: "json, name=pullRequest" })
+  @SpeakeasyMetadata({ data: "json, name=pullRequest" })
   pullRequest?: PullRequestFilter;
 
-  @Metadata({ data: "json, name=push" })
+  @SpeakeasyMetadata({ data: "json, name=push" })
   push?: PushFilter;
 
-  @Metadata({ data: "json, name=repoSlug" })
+  @SpeakeasyMetadata({ data: "json, name=repoSlug" })
+  repoSlug?: string;
+}
+
+
+// BitbucketServerTriggerConfigInput
+/** 
+ * BitbucketServerTriggerConfig describes the configuration of a trigger that creates a build whenever a Bitbucket Server event is received.
+**/
+export class BitbucketServerTriggerConfigInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=bitbucketServerConfig" })
+  bitbucketServerConfig?: BitbucketServerConfigInput;
+
+  @SpeakeasyMetadata({ data: "json, name=bitbucketServerConfigResource" })
+  bitbucketServerConfigResource?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=projectKey" })
+  projectKey?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=pullRequest" })
+  pullRequest?: PullRequestFilter;
+
+  @SpeakeasyMetadata({ data: "json, name=push" })
+  push?: PushFilter;
+
+  @SpeakeasyMetadata({ data: "json, name=repoSlug" })
   repoSlug?: string;
 }

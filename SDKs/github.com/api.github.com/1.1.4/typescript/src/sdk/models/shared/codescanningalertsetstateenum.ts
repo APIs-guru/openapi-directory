@@ -1,6 +1,7 @@
 
 
+
 export enum CodeScanningAlertSetStateEnum {
-    Open = "open"
-,    Dismissed = "dismissed"
+    Open = "open",
+    Dismissed = "dismissed"
 }

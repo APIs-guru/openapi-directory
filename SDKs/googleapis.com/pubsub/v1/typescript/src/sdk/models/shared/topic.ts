@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MessageStoragePolicy } from "./messagestoragepolicy";
 import { SchemaSettings } from "./schemasettings";
+
 
 
 // Topic
@@ -8,24 +9,24 @@ import { SchemaSettings } from "./schemasettings";
  * A topic resource.
 **/
 export class Topic extends SpeakeasyBase {
-  @Metadata({ data: "json, name=kmsKeyName" })
+  @SpeakeasyMetadata({ data: "json, name=kmsKeyName" })
   kmsKeyName?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=messageRetentionDuration" })
+  @SpeakeasyMetadata({ data: "json, name=messageRetentionDuration" })
   messageRetentionDuration?: string;
 
-  @Metadata({ data: "json, name=messageStoragePolicy" })
+  @SpeakeasyMetadata({ data: "json, name=messageStoragePolicy" })
   messageStoragePolicy?: MessageStoragePolicy;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=satisfiesPzs" })
+  @SpeakeasyMetadata({ data: "json, name=satisfiesPzs" })
   satisfiesPzs?: boolean;
 
-  @Metadata({ data: "json, name=schemaSettings" })
+  @SpeakeasyMetadata({ data: "json, name=schemaSettings" })
   schemaSettings?: SchemaSettings;
 }

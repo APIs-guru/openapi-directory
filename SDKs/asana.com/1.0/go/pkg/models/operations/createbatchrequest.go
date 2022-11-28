@@ -13,13 +13,13 @@ type CreateBatchRequestRequestBody struct {
 	Data *shared.BatchRequest `json:"data,omitempty"`
 }
 
+type CreateBatchRequest200ApplicationJSON struct {
+	Data []shared.BatchResponse `json:"data,omitempty"`
+}
+
 type CreateBatchRequestRequest struct {
 	QueryParams CreateBatchRequestQueryParams
 	Request     CreateBatchRequestRequestBody `request:"mediaType=application/json"`
-}
-
-type CreateBatchRequest200ApplicationJSON struct {
-	Data []shared.BatchResponse `json:"data,omitempty"`
 }
 
 type CreateBatchRequestResponse struct {

@@ -1,19 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class LoadServiceRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=service_description_url" })
+  @SpeakeasyMetadata({ data: "json, name=service_description_url" })
   serviceDescriptionUrl: string;
 
-  @Metadata({ data: "json, name=service_moniker" })
+  @SpeakeasyMetadata({ data: "json, name=service_moniker" })
   serviceMoniker?: string;
-}
-
-
-export class LoadServiceRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: LoadServiceRequestBody;
 }
 
 export enum LoadService200ApplicationJsonStatusEnum {
@@ -22,30 +17,36 @@ export enum LoadService200ApplicationJsonStatusEnum {
 
 
 export class LoadService200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=api" })
+  @SpeakeasyMetadata({ data: "json, name=api" })
   api: string;
 
-  @Metadata({ data: "json, name=method" })
+  @SpeakeasyMetadata({ data: "json, name=method" })
   method: string;
 
-  @Metadata({ data: "json, name=response" })
+  @SpeakeasyMetadata({ data: "json, name=response" })
   response: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: LoadService200ApplicationJsonStatusEnum;
 }
 
 
+export class LoadServiceRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: LoadServiceRequestBody;
+}
+
+
 export class LoadServiceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorModel?: shared.ErrorModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   loadService200ApplicationJsonObject?: LoadService200ApplicationJson;
 }

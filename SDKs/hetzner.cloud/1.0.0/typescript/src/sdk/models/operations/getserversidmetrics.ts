@@ -1,76 +1,77 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetServersIdMetricsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
 export enum GetServersIdMetricsTypeEnum {
-    Cpu = "cpu"
-,    Disk = "disk"
-,    Network = "network"
+    Cpu = "cpu",
+    Disk = "disk",
+    Network = "network"
 }
 
 
 export class GetServersIdMetricsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=end" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=end" })
   end: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=start" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=start" })
   start: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=step" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=step" })
   step?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=type" })
   type: GetServersIdMetricsTypeEnum;
 }
 
 
-export class GetServersIdMetricsRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetServersIdMetricsPathParams;
-
-  @Metadata()
-  queryParams: GetServersIdMetricsQueryParams;
-}
-
-
 export class GetServersIdMetrics200ApplicationJsonMetricsTimeSeries extends SpeakeasyBase {
-  @Metadata({ data: "json, name=values" })
+  @SpeakeasyMetadata({ data: "json, name=values" })
   values: any[][];
 }
 
 
 export class GetServersIdMetrics200ApplicationJsonMetrics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=end" })
+  @SpeakeasyMetadata({ data: "json, name=end" })
   end: string;
 
-  @Metadata({ data: "json, name=start" })
+  @SpeakeasyMetadata({ data: "json, name=start" })
   start: string;
 
-  @Metadata({ data: "json, name=step" })
+  @SpeakeasyMetadata({ data: "json, name=step" })
   step: number;
 
-  @Metadata({ data: "json, name=time_series", elemType: operations.GetServersIdMetrics200ApplicationJsonMetricsTimeSeries })
+  @SpeakeasyMetadata({ data: "json, name=time_series", elemType: GetServersIdMetrics200ApplicationJsonMetricsTimeSeries })
   timeSeries: Map<string, GetServersIdMetrics200ApplicationJsonMetricsTimeSeries>;
 }
 
 
 export class GetServersIdMetrics200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=metrics" })
+  @SpeakeasyMetadata({ data: "json, name=metrics" })
   metrics: GetServersIdMetrics200ApplicationJsonMetrics;
 }
 
 
+export class GetServersIdMetricsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetServersIdMetricsPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: GetServersIdMetricsQueryParams;
+}
+
+
 export class GetServersIdMetricsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getServersIdMetrics200ApplicationJsonObject?: GetServersIdMetrics200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

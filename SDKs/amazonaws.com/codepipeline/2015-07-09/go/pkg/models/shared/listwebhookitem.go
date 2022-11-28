@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ListWebhookItem
+// The detail returned for each webhook after listing webhooks, such as the webhook URL, the webhook name, and the webhook ARN.
 type ListWebhookItem struct {
 	Arn           *string           `json:"arn,omitempty"`
 	Definition    WebhookDefinition `json:"definition"`

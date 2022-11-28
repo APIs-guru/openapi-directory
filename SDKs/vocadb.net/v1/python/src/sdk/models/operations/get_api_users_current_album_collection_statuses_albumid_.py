@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class GetAPIUsersCurrentAlbumCollectionStatusesAlbumIDPathParams:
-    album_id: int = field(default=None, metadata={'path_param': { 'field_name': 'albumId', 'style': 'simple', 'explode': False }})
+    album_id: int = field(metadata={'path_param': { 'field_name': 'albumId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetAPIUsersCurrentAlbumCollectionStatusesAlbumIDRequest:
-    path_params: GetAPIUsersCurrentAlbumCollectionStatusesAlbumIDPathParams = field(default=None)
+    path_params: GetAPIUsersCurrentAlbumCollectionStatusesAlbumIDPathParams = field()
     
 
 @dataclass
 class GetAPIUsersCurrentAlbumCollectionStatusesAlbumIDResponse:
+    content_type: str = field()
+    status_code: int = field()
     album_for_user_for_api_contract: Optional[shared.AlbumForUserForAPIContract] = field(default=None)
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    body: Optional[bytes] = field(default=None)
     

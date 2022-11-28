@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ChangeReport } from "./changereport";
 import { Diagnostic } from "./diagnostic";
+
 
 
 // GenerateConfigReportResponse
@@ -9,15 +9,15 @@ import { Diagnostic } from "./diagnostic";
  * Response message for GenerateConfigReport method.
 **/
 export class GenerateConfigReportResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=changeReports", elemType: shared.ChangeReport })
+  @SpeakeasyMetadata({ data: "json, name=changeReports", elemType: ChangeReport })
   changeReports?: ChangeReport[];
 
-  @Metadata({ data: "json, name=diagnostics", elemType: shared.Diagnostic })
+  @SpeakeasyMetadata({ data: "json, name=diagnostics", elemType: Diagnostic })
   diagnostics?: Diagnostic[];
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=serviceName" })
+  @SpeakeasyMetadata({ data: "json, name=serviceName" })
   serviceName?: string;
 }

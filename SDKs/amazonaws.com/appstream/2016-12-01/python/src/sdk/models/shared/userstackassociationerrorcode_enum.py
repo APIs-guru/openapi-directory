@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class UserStackAssociationErrorCodeEnum(str, Enum):
     STACK_NOT_FOUND = "STACK_NOT_FOUND"

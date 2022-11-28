@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class EwcerRequestBodyCertificateParameters extends SpeakeasyBase {
     refNo: string;
@@ -16,10 +16,6 @@ export declare class EwcerRequestBody extends SpeakeasyBase {
 export declare class EwcerSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class EwcerRequest extends SpeakeasyBase {
-    request?: EwcerRequestBody;
-    security: EwcerSecurity;
 }
 export declare enum Ewcer400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -102,6 +98,10 @@ export declare enum Ewcer504ApplicationJsonErrorDescriptionEnum {
 export declare class Ewcer504ApplicationJson extends SpeakeasyBase {
     error?: Ewcer504ApplicationJsonErrorEnum;
     errorDescription?: Ewcer504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class EwcerRequest extends SpeakeasyBase {
+    request?: EwcerRequestBody;
+    security: EwcerSecurity;
 }
 export declare class EwcerResponse extends SpeakeasyBase {
     contentType: string;

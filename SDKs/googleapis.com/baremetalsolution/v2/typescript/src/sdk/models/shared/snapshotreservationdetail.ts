@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SnapshotReservationDetail
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Details about snapshot space reservation and usage on the storage volume.
 **/
 export class SnapshotReservationDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=reservedSpaceGib" })
+  @SpeakeasyMetadata({ data: "json, name=reservedSpaceGib" })
   reservedSpaceGib?: string;
 
-  @Metadata({ data: "json, name=reservedSpacePercent" })
+  @SpeakeasyMetadata({ data: "json, name=reservedSpacePercent" })
   reservedSpacePercent?: number;
 
-  @Metadata({ data: "json, name=reservedSpaceRemainingGib" })
+  @SpeakeasyMetadata({ data: "json, name=reservedSpaceRemainingGib" })
   reservedSpaceRemainingGib?: string;
 
-  @Metadata({ data: "json, name=reservedSpaceUsedPercent" })
+  @SpeakeasyMetadata({ data: "json, name=reservedSpaceUsedPercent" })
   reservedSpaceUsedPercent?: number;
 }

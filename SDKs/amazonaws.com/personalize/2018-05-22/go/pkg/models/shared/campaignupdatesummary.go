@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// CampaignUpdateSummary
+// Provides a summary of the properties of a campaign update. For a complete listing, call the <a>DescribeCampaign</a> API.
 type CampaignUpdateSummary struct {
 	CampaignConfig      *CampaignConfig `json:"campaignConfig,omitempty"`
 	CreationDateTime    *time.Time      `json:"creationDateTime,omitempty"`

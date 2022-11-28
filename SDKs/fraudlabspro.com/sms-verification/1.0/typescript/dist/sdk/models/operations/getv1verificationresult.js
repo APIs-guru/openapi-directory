@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetV1VerificationResultFormatEnum;
 (function (GetV1VerificationResultFormatEnum) {
     GetV1VerificationResultFormatEnum["Json"] = "json";
@@ -34,19 +34,19 @@ var GetV1VerificationResultQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=format" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=format" }),
         __metadata("design:type", String)
     ], GetV1VerificationResultQueryParams.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], GetV1VerificationResultQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=otp" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=otp" }),
         __metadata("design:type", String)
     ], GetV1VerificationResultQueryParams.prototype, "otp", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=tran_id" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tran_id" }),
         __metadata("design:type", String)
     ], GetV1VerificationResultQueryParams.prototype, "tranId", void 0);
     return GetV1VerificationResultQueryParams;
@@ -58,7 +58,7 @@ var GetV1VerificationResultRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetV1VerificationResultQueryParams)
     ], GetV1VerificationResultRequest.prototype, "queryParams", void 0);
     return GetV1VerificationResultRequest;
@@ -70,15 +70,15 @@ var GetV1VerificationResultResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetV1VerificationResultResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetV1VerificationResultResponse.prototype, "getV1VerificationResult200ApplicationJsonString", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetV1VerificationResultResponse.prototype, "statusCode", void 0);
     return GetV1VerificationResultResponse;

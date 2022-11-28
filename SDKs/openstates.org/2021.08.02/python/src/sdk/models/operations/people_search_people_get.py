@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -23,14 +24,14 @@ class PeopleSearchPeopleGetHeaders:
 
 @dataclass
 class PeopleSearchPeopleGetRequest:
-    query_params: PeopleSearchPeopleGetQueryParams = field(default=None)
-    headers: PeopleSearchPeopleGetHeaders = field(default=None)
+    headers: PeopleSearchPeopleGetHeaders = field()
+    query_params: PeopleSearchPeopleGetQueryParams = field()
     
 
 @dataclass
 class PeopleSearchPeopleGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     http_validation_error: Optional[shared.HTTPValidationError] = field(default=None)
     person_list: Optional[shared.PersonList] = field(default=None)
-    status_code: int = field(default=None)
     

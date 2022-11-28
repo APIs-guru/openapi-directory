@@ -1,5 +1,7 @@
 package shared
 
+// CountryInfo
+// Class CountryInfo.
 type CountryInfo struct {
 	DisplayName              *string `json:"DisplayName,omitempty"`
 	Name                     *string `json:"Name,omitempty"`

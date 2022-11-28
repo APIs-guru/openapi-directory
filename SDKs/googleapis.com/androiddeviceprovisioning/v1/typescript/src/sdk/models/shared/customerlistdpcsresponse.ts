@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Dpc } from "./dpc";
+
 
 
 // CustomerListDpcsResponse
@@ -8,6 +8,6 @@ import { Dpc } from "./dpc";
  * Response message of customer's listing DPCs.
 **/
 export class CustomerListDpcsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dpcs", elemType: shared.Dpc })
+  @SpeakeasyMetadata({ data: "json, name=dpcs", elemType: Dpc })
   dpcs?: Dpc[];
 }

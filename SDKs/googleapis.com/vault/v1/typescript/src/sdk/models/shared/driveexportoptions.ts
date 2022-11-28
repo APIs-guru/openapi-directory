@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DriveExportOptions
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Options for Drive exports.
 **/
 export class DriveExportOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=includeAccessInfo" })
+  @SpeakeasyMetadata({ data: "json, name=includeAccessInfo" })
   includeAccessInfo?: boolean;
 }

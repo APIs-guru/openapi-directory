@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
@@ -17,24 +21,24 @@ class DisassociateWebsiteCertificateAuthorityHeaders:
 @dataclass_json
 @dataclass
 class DisassociateWebsiteCertificateAuthorityRequestBody:
-    fleet_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FleetArn' }})
-    website_ca_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'WebsiteCaId' }})
+    fleet_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('FleetArn') }})
+    website_ca_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('WebsiteCaId') }})
     
 
 @dataclass
 class DisassociateWebsiteCertificateAuthorityRequest:
-    headers: DisassociateWebsiteCertificateAuthorityHeaders = field(default=None)
-    request: DisassociateWebsiteCertificateAuthorityRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: DisassociateWebsiteCertificateAuthorityHeaders = field()
+    request: DisassociateWebsiteCertificateAuthorityRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DisassociateWebsiteCertificateAuthorityResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     disassociate_website_certificate_authority_response: Optional[dict[str, Any]] = field(default=None)
     internal_server_error_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

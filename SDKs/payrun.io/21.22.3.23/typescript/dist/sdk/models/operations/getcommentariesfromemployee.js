@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetCommentariesFromEmployeePathParams = /** @class */ (function (_super) {
     __extends(GetCommentariesFromEmployeePathParams, _super);
@@ -30,11 +30,11 @@ var GetCommentariesFromEmployeePathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=EmployeeId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=EmployeeId" }),
         __metadata("design:type", String)
     ], GetCommentariesFromEmployeePathParams.prototype, "employeeId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=EmployerId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=EmployerId" }),
         __metadata("design:type", String)
     ], GetCommentariesFromEmployeePathParams.prototype, "employerId", void 0);
     return GetCommentariesFromEmployeePathParams;
@@ -46,11 +46,11 @@ var GetCommentariesFromEmployeeHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
         __metadata("design:type", String)
     ], GetCommentariesFromEmployeeHeaders.prototype, "apiVersion", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Authorization" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" }),
         __metadata("design:type", String)
     ], GetCommentariesFromEmployeeHeaders.prototype, "authorization", void 0);
     return GetCommentariesFromEmployeeHeaders;
@@ -62,11 +62,11 @@ var GetCommentariesFromEmployeeRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetCommentariesFromEmployeePathParams)
     ], GetCommentariesFromEmployeeRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetCommentariesFromEmployeeHeaders)
     ], GetCommentariesFromEmployeeRequest.prototype, "headers", void 0);
     return GetCommentariesFromEmployeeRequest;
@@ -78,19 +78,19 @@ var GetCommentariesFromEmployeeResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetCommentariesFromEmployeeResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorModel)
     ], GetCommentariesFromEmployeeResponse.prototype, "errorModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.LinkCollection)
     ], GetCommentariesFromEmployeeResponse.prototype, "linkCollection", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetCommentariesFromEmployeeResponse.prototype, "statusCode", void 0);
     return GetCommentariesFromEmployeeResponse;

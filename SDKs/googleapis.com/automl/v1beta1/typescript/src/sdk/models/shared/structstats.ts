@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataStats } from "./datastats";
+
 
 
 // StructStats
@@ -8,6 +8,6 @@ import { DataStats } from "./datastats";
  * The data statistics of a series of STRUCT values.
 **/
 export class StructStats extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fieldStats", elemType: shared.DataStats })
+  @SpeakeasyMetadata({ data: "json, name=fieldStats", elemType: DataStats })
   fieldStats?: Map<string, DataStats>;
 }

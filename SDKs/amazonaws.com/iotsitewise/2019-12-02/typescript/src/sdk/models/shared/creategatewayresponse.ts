@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateGatewayResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=gatewayArn" })
+  @SpeakeasyMetadata({ data: "json, name=gatewayArn" })
   gatewayArn: string;
 
-  @Metadata({ data: "json, name=gatewayId" })
+  @SpeakeasyMetadata({ data: "json, name=gatewayId" })
   gatewayId: string;
 }

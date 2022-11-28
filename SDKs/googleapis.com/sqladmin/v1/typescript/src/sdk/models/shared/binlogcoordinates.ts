@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BinLogCoordinates
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Binary log coordinates.
 **/
 export class BinLogCoordinates extends SpeakeasyBase {
-  @Metadata({ data: "json, name=binLogFileName" })
+  @SpeakeasyMetadata({ data: "json, name=binLogFileName" })
   binLogFileName?: string;
 
-  @Metadata({ data: "json, name=binLogPosition" })
+  @SpeakeasyMetadata({ data: "json, name=binLogPosition" })
   binLogPosition?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 }

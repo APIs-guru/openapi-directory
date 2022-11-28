@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Continent } from "./continent";
+
 
 
 // ContinentList
@@ -8,9 +8,9 @@ import { Continent } from "./continent";
  * Continents List
 **/
 export class ContinentList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=continents", elemType: shared.Continent })
+  @SpeakeasyMetadata({ data: "json, name=continents", elemType: Continent })
   continents: Continent[];
 
-  @Metadata({ data: "json, name=sum" })
+  @SpeakeasyMetadata({ data: "json, name=sum" })
   sum: number;
 }

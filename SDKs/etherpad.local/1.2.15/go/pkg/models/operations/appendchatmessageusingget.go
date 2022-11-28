@@ -7,10 +7,6 @@ type AppendChatMessageUsingGetQueryParams struct {
 	Time     *string `queryParam:"style=form,explode=true,name=time"`
 }
 
-type AppendChatMessageUsingGetRequest struct {
-	QueryParams AppendChatMessageUsingGetQueryParams
-}
-
 type AppendChatMessageUsingGet200ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
@@ -33,6 +29,10 @@ type AppendChatMessageUsingGet500ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
 	Message *string                `json:"message,omitempty"`
+}
+
+type AppendChatMessageUsingGetRequest struct {
+	QueryParams AppendChatMessageUsingGetQueryParams
 }
 
 type AppendChatMessageUsingGetResponse struct {

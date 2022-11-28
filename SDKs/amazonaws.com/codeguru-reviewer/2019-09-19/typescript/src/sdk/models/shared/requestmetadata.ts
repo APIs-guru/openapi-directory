@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EventInfo } from "./eventinfo";
 import { VendorNameEnum } from "./vendornameenum";
+
 
 
 // RequestMetadata
@@ -8,15 +9,15 @@ import { VendorNameEnum } from "./vendornameenum";
  * Metadata that is associated with a code review. This applies to both pull request and repository analysis code reviews.
 **/
 export class RequestMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EventInfo" })
+  @SpeakeasyMetadata({ data: "json, name=EventInfo" })
   eventInfo?: EventInfo;
 
-  @Metadata({ data: "json, name=RequestId" })
+  @SpeakeasyMetadata({ data: "json, name=RequestId" })
   requestId?: string;
 
-  @Metadata({ data: "json, name=Requester" })
+  @SpeakeasyMetadata({ data: "json, name=Requester" })
   requester?: string;
 
-  @Metadata({ data: "json, name=VendorName" })
+  @SpeakeasyMetadata({ data: "json, name=VendorName" })
   vendorName?: VendorNameEnum;
 }

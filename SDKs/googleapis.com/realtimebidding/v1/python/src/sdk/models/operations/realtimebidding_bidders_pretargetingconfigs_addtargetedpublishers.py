@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class RealtimebiddingBiddersPretargetingConfigsAddTargetedPublishersPathParams:
-    pretargeting_config: str = field(default=None, metadata={'path_param': { 'field_name': 'pretargetingConfig', 'style': 'simple', 'explode': False }})
+    pretargeting_config: str = field(metadata={'path_param': { 'field_name': 'pretargetingConfig', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class RealtimebiddingBiddersPretargetingConfigsAddTargetedPublishersQueryParams:
 
 @dataclass
 class RealtimebiddingBiddersPretargetingConfigsAddTargetedPublishersSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class RealtimebiddingBiddersPretargetingConfigsAddTargetedPublishersRequest:
-    path_params: RealtimebiddingBiddersPretargetingConfigsAddTargetedPublishersPathParams = field(default=None)
-    query_params: RealtimebiddingBiddersPretargetingConfigsAddTargetedPublishersQueryParams = field(default=None)
+    path_params: RealtimebiddingBiddersPretargetingConfigsAddTargetedPublishersPathParams = field()
+    query_params: RealtimebiddingBiddersPretargetingConfigsAddTargetedPublishersQueryParams = field()
+    security: RealtimebiddingBiddersPretargetingConfigsAddTargetedPublishersSecurity = field()
     request: Optional[shared.AddTargetedPublishersRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: RealtimebiddingBiddersPretargetingConfigsAddTargetedPublishersSecurity = field(default=None)
     
 
 @dataclass
 class RealtimebiddingBiddersPretargetingConfigsAddTargetedPublishersResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     pretargeting_config: Optional[shared.PretargetingConfig] = field(default=None)
-    status_code: int = field(default=None)
     

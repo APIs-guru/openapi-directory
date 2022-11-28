@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // AccountsBalanceGetRequestOptions
 /**
  * An optional object to filter `/accounts/balance/get` results.
@@ -33,11 +33,11 @@ var AccountsBalanceGetRequestOptions = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=account_ids" }),
+        SpeakeasyMetadata({ data: "json, name=account_ids" }),
         __metadata("design:type", Array)
     ], AccountsBalanceGetRequestOptions.prototype, "accountIds", void 0);
     __decorate([
-        Metadata({ data: "json, name=min_last_updated_datetime" }),
+        SpeakeasyMetadata({ data: "json, name=min_last_updated_datetime" }),
         __metadata("design:type", Date)
     ], AccountsBalanceGetRequestOptions.prototype, "minLastUpdatedDatetime", void 0);
     return AccountsBalanceGetRequestOptions;

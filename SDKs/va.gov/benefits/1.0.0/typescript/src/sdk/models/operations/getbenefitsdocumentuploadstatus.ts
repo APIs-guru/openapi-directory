@@ -1,98 +1,99 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetBenefitsDocumentUploadStatusPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class GetBenefitsDocumentUploadStatusSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   apikey: shared.SchemeApikey;
 }
 
 
-export class GetBenefitsDocumentUploadStatusRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetBenefitsDocumentUploadStatusPathParams;
-
-  @Metadata()
-  security: GetBenefitsDocumentUploadStatusSecurity;
-}
-
-
 export class GetBenefitsDocumentUploadStatus401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Message" })
+  @SpeakeasyMetadata({ data: "json, name=Message" })
   message?: string;
 }
 
 
 export class GetBenefitsDocumentUploadStatus403ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Message" })
+  @SpeakeasyMetadata({ data: "json, name=Message" })
   message?: string;
 }
 
 
 export class GetBenefitsDocumentUploadStatus404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: string;
 
-  @Metadata({ data: "json, name=detail" })
+  @SpeakeasyMetadata({ data: "json, name=detail" })
   detail?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }
 
 
 export class GetBenefitsDocumentUploadStatus429ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Message" })
+  @SpeakeasyMetadata({ data: "json, name=Message" })
   message?: string;
 }
 
 
 export class GetBenefitsDocumentUploadStatus500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: string;
 
-  @Metadata({ data: "json, name=detail" })
+  @SpeakeasyMetadata({ data: "json, name=detail" })
   detail?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }
 
 
+export class GetBenefitsDocumentUploadStatusRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetBenefitsDocumentUploadStatusPathParams;
+
+  @SpeakeasyMetadata()
+  security: GetBenefitsDocumentUploadStatusSecurity;
+}
+
+
 export class GetBenefitsDocumentUploadStatusResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getBenefitsDocumentUploadStatus200ApplicationJsonAny?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getBenefitsDocumentUploadStatus401ApplicationJsonObject?: GetBenefitsDocumentUploadStatus401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getBenefitsDocumentUploadStatus403ApplicationJsonObject?: GetBenefitsDocumentUploadStatus403ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getBenefitsDocumentUploadStatus404ApplicationJsonObject?: GetBenefitsDocumentUploadStatus404ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getBenefitsDocumentUploadStatus429ApplicationJsonObject?: GetBenefitsDocumentUploadStatus429ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getBenefitsDocumentUploadStatus500ApplicationJsonObject?: GetBenefitsDocumentUploadStatus500ApplicationJson;
 }

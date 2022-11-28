@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GoogleCloudAssuredworkloadsV1beta1WorkloadKmsSettings
 /**
  * Settings specific to the Key Management Service.
@@ -33,11 +33,11 @@ var GoogleCloudAssuredworkloadsV1beta1WorkloadKmsSettings = /** @class */ (funct
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=nextRotationTime" }),
+        SpeakeasyMetadata({ data: "json, name=nextRotationTime" }),
         __metadata("design:type", String)
     ], GoogleCloudAssuredworkloadsV1beta1WorkloadKmsSettings.prototype, "nextRotationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=rotationPeriod" }),
+        SpeakeasyMetadata({ data: "json, name=rotationPeriod" }),
         __metadata("design:type", String)
     ], GoogleCloudAssuredworkloadsV1beta1WorkloadKmsSettings.prototype, "rotationPeriod", void 0);
     return GoogleCloudAssuredworkloadsV1beta1WorkloadKmsSettings;

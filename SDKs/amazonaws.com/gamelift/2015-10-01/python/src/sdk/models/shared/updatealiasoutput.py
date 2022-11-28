@@ -1,11 +1,19 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import alias
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateAliasOutput:
-    alias: Optional[alias.Alias] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Alias' }})
+    r"""UpdateAliasOutput
+    Represents the returned data in response to a request operation.
+    """
+    
+    alias: Optional[Alias] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Alias') }})
     

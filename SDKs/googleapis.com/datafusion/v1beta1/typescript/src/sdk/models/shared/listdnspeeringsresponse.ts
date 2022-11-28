@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DnsPeering } from "./dnspeering";
+
 
 
 // ListDnsPeeringsResponse
@@ -8,9 +8,9 @@ import { DnsPeering } from "./dnspeering";
  * Response message for list DNS peerings.
 **/
 export class ListDnsPeeringsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dnsPeerings", elemType: shared.DnsPeering })
+  @SpeakeasyMetadata({ data: "json, name=dnsPeerings", elemType: DnsPeering })
   dnsPeerings?: DnsPeering[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

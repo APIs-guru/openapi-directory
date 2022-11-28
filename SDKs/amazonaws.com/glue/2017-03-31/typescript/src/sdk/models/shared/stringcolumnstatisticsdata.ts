@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // StringColumnStatisticsData
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Defines column statistics supported for character sequence data values.
 **/
 export class StringColumnStatisticsData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AverageLength" })
+  @SpeakeasyMetadata({ data: "json, name=AverageLength" })
   averageLength: number;
 
-  @Metadata({ data: "json, name=MaximumLength" })
+  @SpeakeasyMetadata({ data: "json, name=MaximumLength" })
   maximumLength: number;
 
-  @Metadata({ data: "json, name=NumberOfDistinctValues" })
+  @SpeakeasyMetadata({ data: "json, name=NumberOfDistinctValues" })
   numberOfDistinctValues: number;
 
-  @Metadata({ data: "json, name=NumberOfNulls" })
+  @SpeakeasyMetadata({ data: "json, name=NumberOfNulls" })
   numberOfNulls: number;
 }

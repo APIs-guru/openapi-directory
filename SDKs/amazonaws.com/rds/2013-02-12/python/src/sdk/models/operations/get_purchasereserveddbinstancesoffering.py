@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetPurchaseReservedDbInstancesOfferingActionEnum(str, Enum):
     PURCHASE_RESERVED_DB_INSTANCES_OFFERING = "PurchaseReservedDBInstancesOffering"
@@ -10,11 +14,11 @@ class GetPurchaseReservedDbInstancesOfferingVersionEnum(str, Enum):
 
 @dataclass
 class GetPurchaseReservedDbInstancesOfferingQueryParams:
-    action: GetPurchaseReservedDbInstancesOfferingActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetPurchaseReservedDbInstancesOfferingActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    reserved_db_instances_offering_id: str = field(metadata={'query_param': { 'field_name': 'ReservedDBInstancesOfferingId', 'style': 'form', 'explode': True }})
+    version: GetPurchaseReservedDbInstancesOfferingVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     db_instance_count: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'DBInstanceCount', 'style': 'form', 'explode': True }})
     reserved_db_instance_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'ReservedDBInstanceId', 'style': 'form', 'explode': True }})
-    reserved_db_instances_offering_id: str = field(default=None, metadata={'query_param': { 'field_name': 'ReservedDBInstancesOfferingId', 'style': 'form', 'explode': True }})
-    version: GetPurchaseReservedDbInstancesOfferingVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetPurchaseReservedDbInstancesOfferingHeaders:
 
 @dataclass
 class GetPurchaseReservedDbInstancesOfferingRequest:
-    query_params: GetPurchaseReservedDbInstancesOfferingQueryParams = field(default=None)
-    headers: GetPurchaseReservedDbInstancesOfferingHeaders = field(default=None)
+    headers: GetPurchaseReservedDbInstancesOfferingHeaders = field()
+    query_params: GetPurchaseReservedDbInstancesOfferingQueryParams = field()
     
 
 @dataclass
 class GetPurchaseReservedDbInstancesOfferingResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

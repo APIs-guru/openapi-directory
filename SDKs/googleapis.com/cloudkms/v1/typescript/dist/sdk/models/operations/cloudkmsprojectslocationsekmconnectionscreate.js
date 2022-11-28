@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CloudkmsProjectsLocationsEkmConnectionsCreatePathParams = /** @class */ (function (_super) {
     __extends(CloudkmsProjectsLocationsEkmConnectionsCreatePathParams, _super);
@@ -30,7 +30,7 @@ var CloudkmsProjectsLocationsEkmConnectionsCreatePathParams = /** @class */ (fun
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=parent" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=parent" }),
         __metadata("design:type", String)
     ], CloudkmsProjectsLocationsEkmConnectionsCreatePathParams.prototype, "parent", void 0);
     return CloudkmsProjectsLocationsEkmConnectionsCreatePathParams;
@@ -42,51 +42,51 @@ var CloudkmsProjectsLocationsEkmConnectionsCreateQueryParams = /** @class */ (fu
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], CloudkmsProjectsLocationsEkmConnectionsCreateQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], CloudkmsProjectsLocationsEkmConnectionsCreateQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], CloudkmsProjectsLocationsEkmConnectionsCreateQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], CloudkmsProjectsLocationsEkmConnectionsCreateQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ekmConnectionId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ekmConnectionId" }),
         __metadata("design:type", String)
     ], CloudkmsProjectsLocationsEkmConnectionsCreateQueryParams.prototype, "ekmConnectionId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], CloudkmsProjectsLocationsEkmConnectionsCreateQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], CloudkmsProjectsLocationsEkmConnectionsCreateQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], CloudkmsProjectsLocationsEkmConnectionsCreateQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], CloudkmsProjectsLocationsEkmConnectionsCreateQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], CloudkmsProjectsLocationsEkmConnectionsCreateQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], CloudkmsProjectsLocationsEkmConnectionsCreateQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], CloudkmsProjectsLocationsEkmConnectionsCreateQueryParams.prototype, "uploadProtocol", void 0);
     return CloudkmsProjectsLocationsEkmConnectionsCreateQueryParams;
@@ -98,11 +98,11 @@ var CloudkmsProjectsLocationsEkmConnectionsCreateSecurityOption1 = /** @class */
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], CloudkmsProjectsLocationsEkmConnectionsCreateSecurityOption1.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], CloudkmsProjectsLocationsEkmConnectionsCreateSecurityOption1.prototype, "oauth2c", void 0);
     return CloudkmsProjectsLocationsEkmConnectionsCreateSecurityOption1;
@@ -114,11 +114,11 @@ var CloudkmsProjectsLocationsEkmConnectionsCreateSecurityOption2 = /** @class */
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], CloudkmsProjectsLocationsEkmConnectionsCreateSecurityOption2.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], CloudkmsProjectsLocationsEkmConnectionsCreateSecurityOption2.prototype, "oauth2c", void 0);
     return CloudkmsProjectsLocationsEkmConnectionsCreateSecurityOption2;
@@ -130,11 +130,11 @@ var CloudkmsProjectsLocationsEkmConnectionsCreateSecurity = /** @class */ (funct
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", CloudkmsProjectsLocationsEkmConnectionsCreateSecurityOption1)
     ], CloudkmsProjectsLocationsEkmConnectionsCreateSecurity.prototype, "option1", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", CloudkmsProjectsLocationsEkmConnectionsCreateSecurityOption2)
     ], CloudkmsProjectsLocationsEkmConnectionsCreateSecurity.prototype, "option2", void 0);
     return CloudkmsProjectsLocationsEkmConnectionsCreateSecurity;
@@ -146,19 +146,19 @@ var CloudkmsProjectsLocationsEkmConnectionsCreateRequest = /** @class */ (functi
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CloudkmsProjectsLocationsEkmConnectionsCreatePathParams)
     ], CloudkmsProjectsLocationsEkmConnectionsCreateRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CloudkmsProjectsLocationsEkmConnectionsCreateQueryParams)
     ], CloudkmsProjectsLocationsEkmConnectionsCreateRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", shared.EkmConnection)
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", shared.EkmConnectionInput)
     ], CloudkmsProjectsLocationsEkmConnectionsCreateRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CloudkmsProjectsLocationsEkmConnectionsCreateSecurity)
     ], CloudkmsProjectsLocationsEkmConnectionsCreateRequest.prototype, "security", void 0);
     return CloudkmsProjectsLocationsEkmConnectionsCreateRequest;
@@ -170,15 +170,15 @@ var CloudkmsProjectsLocationsEkmConnectionsCreateResponse = /** @class */ (funct
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CloudkmsProjectsLocationsEkmConnectionsCreateResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.EkmConnection)
     ], CloudkmsProjectsLocationsEkmConnectionsCreateResponse.prototype, "ekmConnection", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CloudkmsProjectsLocationsEkmConnectionsCreateResponse.prototype, "statusCode", void 0);
     return CloudkmsProjectsLocationsEkmConnectionsCreateResponse;

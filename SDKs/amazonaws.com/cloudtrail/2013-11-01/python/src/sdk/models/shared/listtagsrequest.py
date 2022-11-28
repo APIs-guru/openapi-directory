@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class ListTagsRequest:
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
-    resource_id_list: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ResourceIdList' }})
+    r"""ListTagsRequest
+    Specifies a list of trail tags to return.
+    """
+    
+    resource_id_list: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ResourceIdList') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
     

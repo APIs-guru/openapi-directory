@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LocationKey
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Alternate/surrogate key references for a location.
 **/
 export class LocationKey extends SpeakeasyBase {
-  @Metadata({ data: "json, name=explicitNoPlaceId" })
+  @SpeakeasyMetadata({ data: "json, name=explicitNoPlaceId" })
   explicitNoPlaceId?: boolean;
 
-  @Metadata({ data: "json, name=placeId" })
+  @SpeakeasyMetadata({ data: "json, name=placeId" })
   placeId?: string;
 
-  @Metadata({ data: "json, name=plusPageId" })
+  @SpeakeasyMetadata({ data: "json, name=plusPageId" })
   plusPageId?: string;
 
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId?: string;
 }

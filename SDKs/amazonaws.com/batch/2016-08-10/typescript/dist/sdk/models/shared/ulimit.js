@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Ulimit
 /**
  * <p>The <code>ulimit</code> settings to pass to the container.</p> <note> <p>This object isn't applicable to jobs that are running on Fargate resources.</p> </note>
@@ -33,15 +33,15 @@ var Ulimit = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=hardLimit" }),
+        SpeakeasyMetadata({ data: "json, name=hardLimit" }),
         __metadata("design:type", Number)
     ], Ulimit.prototype, "hardLimit", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Ulimit.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=softLimit" }),
+        SpeakeasyMetadata({ data: "json, name=softLimit" }),
         __metadata("design:type", Number)
     ], Ulimit.prototype, "softLimit", void 0);
     return Ulimit;

@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AttachObjectResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AttachedObjectIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=AttachedObjectIdentifier" })
   attachedObjectIdentifier?: string;
 }

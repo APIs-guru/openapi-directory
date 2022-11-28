@@ -1,5 +1,7 @@
 package shared
 
+// AirbyteStream
+// the immutable schema defined by the source
 type AirbyteStream struct {
 	DefaultCursorField      []string               `json:"defaultCursorField,omitempty"`
 	JSONSchema              map[string]interface{} `json:"jsonSchema,omitempty"`

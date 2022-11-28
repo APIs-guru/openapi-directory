@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AppValidationOutput } from "./appvalidationoutput";
 import { ServerValidationOutput } from "./servervalidationoutput";
 import { ValidationStatusEnum } from "./validationstatusenum";

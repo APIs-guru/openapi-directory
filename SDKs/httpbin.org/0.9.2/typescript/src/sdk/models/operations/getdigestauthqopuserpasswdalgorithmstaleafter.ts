@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetDigestAuthQopUserPasswdAlgorithmStaleAfterPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=algorithm" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=algorithm" })
   algorithm: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=passwd" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=passwd" })
   passwd: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=qop" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=qop" })
   qop: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=stale_after" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=stale_after" })
   staleAfter: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=user" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=user" })
   user: string;
 }
 
 
 export class GetDigestAuthQopUserPasswdAlgorithmStaleAfterRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetDigestAuthQopUserPasswdAlgorithmStaleAfterPathParams;
 }
 
 
 export class GetDigestAuthQopUserPasswdAlgorithmStaleAfterResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

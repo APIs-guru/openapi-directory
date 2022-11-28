@@ -31,6 +31,8 @@ const (
 	CreateDeploymentRequestBodyCacheClusterSizeEnumTwoHundredAndThirtySeven CreateDeploymentRequestBodyCacheClusterSizeEnum = "237"
 )
 
+// CreateDeploymentRequestBodyCanarySettings
+// The input configuration for a canary deployment.
 type CreateDeploymentRequestBodyCanarySettings struct {
 	PercentTraffic         *float64          `json:"percentTraffic,omitempty"`
 	StageVariableOverrides map[string]string `json:"stageVariableOverrides,omitempty"`

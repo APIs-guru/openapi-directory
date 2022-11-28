@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // FormFieldDefinition
@@ -6,57 +7,57 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Definition of a form field for OCR data extraction from images
 **/
 export class FormFieldDefinition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AllowNumericDigits" })
+  @SpeakeasyMetadata({ data: "json, name=AllowNumericDigits" })
   allowNumericDigits?: boolean;
 
-  @Metadata({ data: "json, name=AlternateAnchor" })
+  @SpeakeasyMetadata({ data: "json, name=AlternateAnchor" })
   alternateAnchor?: string;
 
-  @Metadata({ data: "json, name=AnchorMode" })
+  @SpeakeasyMetadata({ data: "json, name=AnchorMode" })
   anchorMode?: string;
 
-  @Metadata({ data: "json, name=BottomAnchor" })
+  @SpeakeasyMetadata({ data: "json, name=BottomAnchor" })
   bottomAnchor?: string;
 
-  @Metadata({ data: "json, name=DataType" })
+  @SpeakeasyMetadata({ data: "json, name=DataType" })
   dataType?: string;
 
-  @Metadata({ data: "json, name=FieldID" })
+  @SpeakeasyMetadata({ data: "json, name=FieldID" })
   fieldId?: string;
 
-  @Metadata({ data: "json, name=HorizontalAlignmentType" })
+  @SpeakeasyMetadata({ data: "json, name=HorizontalAlignmentType" })
   horizontalAlignmentType?: string;
 
-  @Metadata({ data: "json, name=Ignore" })
+  @SpeakeasyMetadata({ data: "json, name=Ignore" })
   ignore?: string[];
 
-  @Metadata({ data: "json, name=LeftAnchor" })
+  @SpeakeasyMetadata({ data: "json, name=LeftAnchor" })
   leftAnchor?: string;
 
-  @Metadata({ data: "json, name=MinimumCharacterCount" })
+  @SpeakeasyMetadata({ data: "json, name=MinimumCharacterCount" })
   minimumCharacterCount?: number;
 
-  @Metadata({ data: "json, name=Options" })
+  @SpeakeasyMetadata({ data: "json, name=Options" })
   options?: string;
 
-  @Metadata({ data: "json, name=TargetDigitCount" })
+  @SpeakeasyMetadata({ data: "json, name=TargetDigitCount" })
   targetDigitCount?: number;
 
-  @Metadata({ data: "json, name=TargetFieldHeight_Relative" })
+  @SpeakeasyMetadata({ data: "json, name=TargetFieldHeight_Relative" })
   targetFieldHeightRelative?: number;
 
-  @Metadata({ data: "json, name=TargetFieldHorizontalAdjustment" })
+  @SpeakeasyMetadata({ data: "json, name=TargetFieldHorizontalAdjustment" })
   targetFieldHorizontalAdjustment?: number;
 
-  @Metadata({ data: "json, name=TargetFieldVerticalAdjustment" })
+  @SpeakeasyMetadata({ data: "json, name=TargetFieldVerticalAdjustment" })
   targetFieldVerticalAdjustment?: number;
 
-  @Metadata({ data: "json, name=TargetFieldWidth_Relative" })
+  @SpeakeasyMetadata({ data: "json, name=TargetFieldWidth_Relative" })
   targetFieldWidthRelative?: number;
 
-  @Metadata({ data: "json, name=TopAnchor" })
+  @SpeakeasyMetadata({ data: "json, name=TopAnchor" })
   topAnchor?: string;
 
-  @Metadata({ data: "json, name=VerticalAlignmentType" })
+  @SpeakeasyMetadata({ data: "json, name=VerticalAlignmentType" })
   verticalAlignmentType?: string;
 }

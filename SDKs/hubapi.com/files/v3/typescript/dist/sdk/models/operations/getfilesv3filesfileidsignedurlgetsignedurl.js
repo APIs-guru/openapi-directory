@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetFilesV3FilesFileIdSignedUrlGetSignedUrlPathParams = /** @class */ (function (_super) {
     __extends(GetFilesV3FilesFileIdSignedUrlGetSignedUrlPathParams, _super);
@@ -30,7 +30,7 @@ var GetFilesV3FilesFileIdSignedUrlGetSignedUrlPathParams = /** @class */ (functi
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=fileId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=fileId" }),
         __metadata("design:type", String)
     ], GetFilesV3FilesFileIdSignedUrlGetSignedUrlPathParams.prototype, "fileId", void 0);
     return GetFilesV3FilesFileIdSignedUrlGetSignedUrlPathParams;
@@ -49,73 +49,45 @@ var GetFilesV3FilesFileIdSignedUrlGetSignedUrlQueryParams = /** @class */ (funct
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=expirationSeconds" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=expirationSeconds" }),
         __metadata("design:type", Number)
     ], GetFilesV3FilesFileIdSignedUrlGetSignedUrlQueryParams.prototype, "expirationSeconds", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=size" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=size" }),
         __metadata("design:type", String)
     ], GetFilesV3FilesFileIdSignedUrlGetSignedUrlQueryParams.prototype, "size", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upscale" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upscale" }),
         __metadata("design:type", Boolean)
     ], GetFilesV3FilesFileIdSignedUrlGetSignedUrlQueryParams.prototype, "upscale", void 0);
     return GetFilesV3FilesFileIdSignedUrlGetSignedUrlQueryParams;
 }(SpeakeasyBase));
 export { GetFilesV3FilesFileIdSignedUrlGetSignedUrlQueryParams };
-var GetFilesV3FilesFileIdSignedUrlGetSignedUrlSecurityOption1 = /** @class */ (function (_super) {
-    __extends(GetFilesV3FilesFileIdSignedUrlGetSignedUrlSecurityOption1, _super);
-    function GetFilesV3FilesFileIdSignedUrlGetSignedUrlSecurityOption1() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
-        __metadata("design:type", shared.SchemeOauth2Legacy)
-    ], GetFilesV3FilesFileIdSignedUrlGetSignedUrlSecurityOption1.prototype, "oauth2Legacy", void 0);
-    return GetFilesV3FilesFileIdSignedUrlGetSignedUrlSecurityOption1;
-}(SpeakeasyBase));
-export { GetFilesV3FilesFileIdSignedUrlGetSignedUrlSecurityOption1 };
-var GetFilesV3FilesFileIdSignedUrlGetSignedUrlSecurityOption2 = /** @class */ (function (_super) {
-    __extends(GetFilesV3FilesFileIdSignedUrlGetSignedUrlSecurityOption2, _super);
-    function GetFilesV3FilesFileIdSignedUrlGetSignedUrlSecurityOption2() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
-        __metadata("design:type", shared.SchemeHapikey)
-    ], GetFilesV3FilesFileIdSignedUrlGetSignedUrlSecurityOption2.prototype, "hapikey", void 0);
-    return GetFilesV3FilesFileIdSignedUrlGetSignedUrlSecurityOption2;
-}(SpeakeasyBase));
-export { GetFilesV3FilesFileIdSignedUrlGetSignedUrlSecurityOption2 };
-var GetFilesV3FilesFileIdSignedUrlGetSignedUrlSecurityOption3 = /** @class */ (function (_super) {
-    __extends(GetFilesV3FilesFileIdSignedUrlGetSignedUrlSecurityOption3, _super);
-    function GetFilesV3FilesFileIdSignedUrlGetSignedUrlSecurityOption3() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
-        __metadata("design:type", shared.SchemeOauth2Legacy)
-    ], GetFilesV3FilesFileIdSignedUrlGetSignedUrlSecurityOption3.prototype, "oauth2Legacy", void 0);
-    return GetFilesV3FilesFileIdSignedUrlGetSignedUrlSecurityOption3;
-}(SpeakeasyBase));
-export { GetFilesV3FilesFileIdSignedUrlGetSignedUrlSecurityOption3 };
 var GetFilesV3FilesFileIdSignedUrlGetSignedUrlSecurity = /** @class */ (function (_super) {
     __extends(GetFilesV3FilesFileIdSignedUrlGetSignedUrlSecurity, _super);
     function GetFilesV3FilesFileIdSignedUrlGetSignedUrlSecurity() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", GetFilesV3FilesFileIdSignedUrlGetSignedUrlSecurityOption1)
-    ], GetFilesV3FilesFileIdSignedUrlGetSignedUrlSecurity.prototype, "option1", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        __metadata("design:type", shared.SchemePrivateAppsLegacy)
+    ], GetFilesV3FilesFileIdSignedUrlGetSignedUrlSecurity.prototype, "privateAppsLegacy", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", GetFilesV3FilesFileIdSignedUrlGetSignedUrlSecurityOption2)
-    ], GetFilesV3FilesFileIdSignedUrlGetSignedUrlSecurity.prototype, "option2", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
+        __metadata("design:type", shared.SchemeOauth2Legacy)
+    ], GetFilesV3FilesFileIdSignedUrlGetSignedUrlSecurity.prototype, "oauth2Legacy", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", GetFilesV3FilesFileIdSignedUrlGetSignedUrlSecurityOption3)
-    ], GetFilesV3FilesFileIdSignedUrlGetSignedUrlSecurity.prototype, "option3", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
+        __metadata("design:type", shared.SchemeHapikey)
+    ], GetFilesV3FilesFileIdSignedUrlGetSignedUrlSecurity.prototype, "hapikey", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        __metadata("design:type", shared.SchemePrivateAppsLegacy)
+    ], GetFilesV3FilesFileIdSignedUrlGetSignedUrlSecurity.prototype, "privateAppsLegacy1", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
+        __metadata("design:type", shared.SchemeOauth2Legacy)
+    ], GetFilesV3FilesFileIdSignedUrlGetSignedUrlSecurity.prototype, "oauth2Legacy1", void 0);
     return GetFilesV3FilesFileIdSignedUrlGetSignedUrlSecurity;
 }(SpeakeasyBase));
 export { GetFilesV3FilesFileIdSignedUrlGetSignedUrlSecurity };
@@ -125,15 +97,15 @@ var GetFilesV3FilesFileIdSignedUrlGetSignedUrlRequest = /** @class */ (function 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetFilesV3FilesFileIdSignedUrlGetSignedUrlPathParams)
     ], GetFilesV3FilesFileIdSignedUrlGetSignedUrlRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetFilesV3FilesFileIdSignedUrlGetSignedUrlQueryParams)
     ], GetFilesV3FilesFileIdSignedUrlGetSignedUrlRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetFilesV3FilesFileIdSignedUrlGetSignedUrlSecurity)
     ], GetFilesV3FilesFileIdSignedUrlGetSignedUrlRequest.prototype, "security", void 0);
     return GetFilesV3FilesFileIdSignedUrlGetSignedUrlRequest;
@@ -145,19 +117,19 @@ var GetFilesV3FilesFileIdSignedUrlGetSignedUrlResponse = /** @class */ (function
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetFilesV3FilesFileIdSignedUrlGetSignedUrlResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetFilesV3FilesFileIdSignedUrlGetSignedUrlResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.SignedUrl)
     ], GetFilesV3FilesFileIdSignedUrlGetSignedUrlResponse.prototype, "signedUrl", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetFilesV3FilesFileIdSignedUrlGetSignedUrlResponse.prototype, "statusCode", void 0);
     return GetFilesV3FilesFileIdSignedUrlGetSignedUrlResponse;

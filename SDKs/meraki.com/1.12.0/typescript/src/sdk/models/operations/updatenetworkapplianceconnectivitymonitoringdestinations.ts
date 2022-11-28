@@ -1,46 +1,47 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateNetworkApplianceConnectivityMonitoringDestinationsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
 
 export class UpdateNetworkApplianceConnectivityMonitoringDestinationsRequestBodyDestinations extends SpeakeasyBase {
-  @Metadata({ data: "json, name=default" })
+  @SpeakeasyMetadata({ data: "json, name=default" })
   default?: boolean;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=ip" })
+  @SpeakeasyMetadata({ data: "json, name=ip" })
   ip: string;
 }
 
 
 export class UpdateNetworkApplianceConnectivityMonitoringDestinationsRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=destinations", elemType: operations.UpdateNetworkApplianceConnectivityMonitoringDestinationsRequestBodyDestinations })
+  @SpeakeasyMetadata({ data: "json, name=destinations", elemType: UpdateNetworkApplianceConnectivityMonitoringDestinationsRequestBodyDestinations })
   destinations?: UpdateNetworkApplianceConnectivityMonitoringDestinationsRequestBodyDestinations[];
 }
 
 
 export class UpdateNetworkApplianceConnectivityMonitoringDestinationsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateNetworkApplianceConnectivityMonitoringDestinationsPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: UpdateNetworkApplianceConnectivityMonitoringDestinationsRequestBody;
 }
 
 
 export class UpdateNetworkApplianceConnectivityMonitoringDestinationsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateNetworkApplianceConnectivityMonitoringDestinations200ApplicationJsonObject?: Map<string, any>;
 }

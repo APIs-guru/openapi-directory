@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class CreatePayeeAddressCountryEnum(str, Enum):
     AF = "AF"
@@ -257,12 +259,12 @@ class CreatePayeeAddressCountryEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CreatePayeeAddress:
-    city: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'city' }})
-    country: CreatePayeeAddressCountryEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'country' }})
-    county_or_province: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'countyOrProvince' }})
-    line1: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'line1' }})
-    line2: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'line2' }})
-    line3: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'line3' }})
-    line4: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'line4' }})
-    zip_or_postcode: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'zipOrPostcode' }})
+    city: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('city') }})
+    country: CreatePayeeAddressCountryEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('country') }})
+    line1: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('line1') }})
+    county_or_province: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('countyOrProvince') }})
+    line2: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('line2') }})
+    line3: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('line3') }})
+    line4: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('line4') }})
+    zip_or_postcode: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('zipOrPostcode') }})
     

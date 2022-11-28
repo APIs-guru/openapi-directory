@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SegmentDefinition } from "./segmentdefinition";
-import { SegmentDefinition } from "./segmentdefinition";
+
 
 
 // DynamicSegment
@@ -8,12 +8,12 @@ import { SegmentDefinition } from "./segmentdefinition";
  * Dynamic segment definition for defining the segment within the request. A segment can select users, sessions or both.
 **/
 export class DynamicSegment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=sessionSegment" })
+  @SpeakeasyMetadata({ data: "json, name=sessionSegment" })
   sessionSegment?: SegmentDefinition;
 
-  @Metadata({ data: "json, name=userSegment" })
+  @SpeakeasyMetadata({ data: "json, name=userSegment" })
   userSegment?: SegmentDefinition;
 }

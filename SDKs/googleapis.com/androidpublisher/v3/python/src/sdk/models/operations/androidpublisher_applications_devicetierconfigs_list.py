@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AndroidpublisherApplicationsDeviceTierConfigsListPathParams:
-    package_name: str = field(default=None, metadata={'path_param': { 'field_name': 'packageName', 'style': 'simple', 'explode': False }})
+    package_name: str = field(metadata={'path_param': { 'field_name': 'packageName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class AndroidpublisherApplicationsDeviceTierConfigsListQueryParams:
 
 @dataclass
 class AndroidpublisherApplicationsDeviceTierConfigsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AndroidpublisherApplicationsDeviceTierConfigsListRequest:
-    path_params: AndroidpublisherApplicationsDeviceTierConfigsListPathParams = field(default=None)
-    query_params: AndroidpublisherApplicationsDeviceTierConfigsListQueryParams = field(default=None)
-    security: AndroidpublisherApplicationsDeviceTierConfigsListSecurity = field(default=None)
+    path_params: AndroidpublisherApplicationsDeviceTierConfigsListPathParams = field()
+    query_params: AndroidpublisherApplicationsDeviceTierConfigsListQueryParams = field()
+    security: AndroidpublisherApplicationsDeviceTierConfigsListSecurity = field()
     
 
 @dataclass
 class AndroidpublisherApplicationsDeviceTierConfigsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_device_tier_configs_response: Optional[shared.ListDeviceTierConfigsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

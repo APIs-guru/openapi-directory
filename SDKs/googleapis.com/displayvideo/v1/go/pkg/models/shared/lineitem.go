@@ -57,6 +57,8 @@ const (
 	LineItemWarningMessagesEnumTargetingDeprecatedGeoTarget                 LineItemWarningMessagesEnum = "TARGETING_DEPRECATED_GEO_TARGET"
 )
 
+// LineItem
+// A single line item.
 type LineItem struct {
 	AdvertiserID        *string                       `json:"advertiserId,omitempty"`
 	BidStrategy         *BiddingStrategy              `json:"bidStrategy,omitempty"`
@@ -83,4 +85,27 @@ type LineItem struct {
 	TargetingExpansion  *TargetingExpansionConfig     `json:"targetingExpansion,omitempty"`
 	UpdateTime          *string                       `json:"updateTime,omitempty"`
 	WarningMessages     []LineItemWarningMessagesEnum `json:"warningMessages,omitempty"`
+}
+
+// LineItemInput
+// A single line item.
+type LineItemInput struct {
+	BidStrategy         *BiddingStrategy          `json:"bidStrategy,omitempty"`
+	Budget              *LineItemBudgetInput      `json:"budget,omitempty"`
+	ConversionCounting  *ConversionCountingConfig `json:"conversionCounting,omitempty"`
+	CreativeIds         []string                  `json:"creativeIds,omitempty"`
+	DisplayName         *string                   `json:"displayName,omitempty"`
+	EntityStatus        *LineItemEntityStatusEnum `json:"entityStatus,omitempty"`
+	ExcludeNewExchanges *bool                     `json:"excludeNewExchanges,omitempty"`
+	Flight              *LineItemFlight           `json:"flight,omitempty"`
+	FrequencyCap        *FrequencyCap             `json:"frequencyCap,omitempty"`
+	InsertionOrderID    *string                   `json:"insertionOrderId,omitempty"`
+	IntegrationDetails  *IntegrationDetails       `json:"integrationDetails,omitempty"`
+	InventorySourceIds  []string                  `json:"inventorySourceIds,omitempty"`
+	LineItemType        *LineItemLineItemTypeEnum `json:"lineItemType,omitempty"`
+	MobileApp           *MobileAppInput           `json:"mobileApp,omitempty"`
+	Pacing              *Pacing                   `json:"pacing,omitempty"`
+	PartnerCosts        []PartnerCost             `json:"partnerCosts,omitempty"`
+	PartnerRevenueModel *PartnerRevenueModel      `json:"partnerRevenueModel,omitempty"`
+	TargetingExpansion  *TargetingExpansionConfig `json:"targetingExpansion,omitempty"`
 }

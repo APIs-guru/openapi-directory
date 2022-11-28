@@ -10,7 +10,7 @@ type IpamRolesPartialUpdatePathParams struct {
 
 type IpamRolesPartialUpdateRequest struct {
 	PathParams IpamRolesPartialUpdatePathParams
-	Request    shared.Role `request:"mediaType=application/json"`
+	Request    shared.RoleInput `request:"mediaType=application/json"`
 }
 
 type IpamRolesPartialUpdateResponse struct {

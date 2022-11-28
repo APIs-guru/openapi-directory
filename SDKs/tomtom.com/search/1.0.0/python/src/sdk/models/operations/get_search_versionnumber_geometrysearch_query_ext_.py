@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetSearchVersionNumberGeometrySearchQueryExtPathParams:
-    ext: shared.ExtEnum = field(default=None, metadata={'path_param': { 'field_name': 'ext', 'style': 'simple', 'explode': False }})
-    query: str = field(default=None, metadata={'path_param': { 'field_name': 'query', 'style': 'simple', 'explode': False }})
-    version_number: int = field(default=None, metadata={'path_param': { 'field_name': 'versionNumber', 'style': 'simple', 'explode': False }})
+    ext: shared.ExtEnum = field(metadata={'path_param': { 'field_name': 'ext', 'style': 'simple', 'explode': False }})
+    query: str = field(metadata={'path_param': { 'field_name': 'query', 'style': 'simple', 'explode': False }})
+    version_number: int = field(metadata={'path_param': { 'field_name': 'versionNumber', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,12 +22,12 @@ class GetSearchVersionNumberGeometrySearchQueryExtQueryParams:
 
 @dataclass
 class GetSearchVersionNumberGeometrySearchQueryExtRequest:
-    path_params: GetSearchVersionNumberGeometrySearchQueryExtPathParams = field(default=None)
-    query_params: GetSearchVersionNumberGeometrySearchQueryExtQueryParams = field(default=None)
+    path_params: GetSearchVersionNumberGeometrySearchQueryExtPathParams = field()
+    query_params: GetSearchVersionNumberGeometrySearchQueryExtQueryParams = field()
     
 
 @dataclass
 class GetSearchVersionNumberGeometrySearchQueryExtResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var UpdateGeofenceCollectionPathParams = /** @class */ (function (_super) {
     __extends(UpdateGeofenceCollectionPathParams, _super);
@@ -30,7 +30,7 @@ var UpdateGeofenceCollectionPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=CollectionName" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=CollectionName" }),
         __metadata("design:type", String)
     ], UpdateGeofenceCollectionPathParams.prototype, "collectionName", void 0);
     return UpdateGeofenceCollectionPathParams;
@@ -42,31 +42,31 @@ var UpdateGeofenceCollectionHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], UpdateGeofenceCollectionHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], UpdateGeofenceCollectionHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], UpdateGeofenceCollectionHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], UpdateGeofenceCollectionHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], UpdateGeofenceCollectionHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], UpdateGeofenceCollectionHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], UpdateGeofenceCollectionHeaders.prototype, "xAmzSignedHeaders", void 0);
     return UpdateGeofenceCollectionHeaders;
@@ -84,15 +84,15 @@ var UpdateGeofenceCollectionRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], UpdateGeofenceCollectionRequestBody.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=PricingPlan" }),
+        SpeakeasyMetadata({ data: "json, name=PricingPlan" }),
         __metadata("design:type", String)
     ], UpdateGeofenceCollectionRequestBody.prototype, "pricingPlan", void 0);
     __decorate([
-        Metadata({ data: "json, name=PricingPlanDataSource" }),
+        SpeakeasyMetadata({ data: "json, name=PricingPlanDataSource" }),
         __metadata("design:type", String)
     ], UpdateGeofenceCollectionRequestBody.prototype, "pricingPlanDataSource", void 0);
     return UpdateGeofenceCollectionRequestBody;
@@ -104,15 +104,15 @@ var UpdateGeofenceCollectionRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateGeofenceCollectionPathParams)
     ], UpdateGeofenceCollectionRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateGeofenceCollectionHeaders)
     ], UpdateGeofenceCollectionRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", UpdateGeofenceCollectionRequestBody)
     ], UpdateGeofenceCollectionRequest.prototype, "request", void 0);
     return UpdateGeofenceCollectionRequest;
@@ -124,35 +124,35 @@ var UpdateGeofenceCollectionResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateGeofenceCollectionResponse.prototype, "accessDeniedException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UpdateGeofenceCollectionResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateGeofenceCollectionResponse.prototype, "internalServerException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateGeofenceCollectionResponse.prototype, "resourceNotFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UpdateGeofenceCollectionResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateGeofenceCollectionResponse.prototype, "throttlingException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.UpdateGeofenceCollectionResponse)
     ], UpdateGeofenceCollectionResponse.prototype, "updateGeofenceCollectionResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateGeofenceCollectionResponse.prototype, "validationException", void 0);
     return UpdateGeofenceCollectionResponse;

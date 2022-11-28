@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UpdateMetadataArguments } from "./updatemetadataarguments";
+
 
 
 // UpdateDeviceMetadataInBatchRequest
@@ -8,6 +8,6 @@ import { UpdateMetadataArguments } from "./updatemetadataarguments";
  * Request to update device metadata in batch.
 **/
 export class UpdateDeviceMetadataInBatchRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=updates", elemType: shared.UpdateMetadataArguments })
+  @SpeakeasyMetadata({ data: "json, name=updates", elemType: UpdateMetadataArguments })
   updates?: UpdateMetadataArguments[];
 }

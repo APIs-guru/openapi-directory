@@ -1,5 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
@@ -22,16 +25,16 @@ class ListPortalsHeaders:
 
 @dataclass
 class ListPortalsRequest:
-    query_params: ListPortalsQueryParams = field(default=None)
-    headers: ListPortalsHeaders = field(default=None)
+    headers: ListPortalsHeaders = field()
+    query_params: ListPortalsQueryParams = field()
     
 
 @dataclass
 class ListPortalsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     list_portals_response: Optional[shared.ListPortalsResponse] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

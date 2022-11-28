@@ -1,22 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProductOption } from "./productoption";
 import { Variant } from "./variant";
 
 
+
 export class ProductOptionValueFields extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=position" })
+  @SpeakeasyMetadata({ data: "json, name=position" })
   position?: number;
 
-  @Metadata({ data: "json, name=product_option" })
+  @SpeakeasyMetadata({ data: "json, name=product_option" })
   productOption?: ProductOption;
 
-  @Metadata({ data: "json, name=variants", elemType: shared.Variant })
+  @SpeakeasyMetadata({ data: "json, name=variants", elemType: Variant })
   variants?: Variant[];
 }

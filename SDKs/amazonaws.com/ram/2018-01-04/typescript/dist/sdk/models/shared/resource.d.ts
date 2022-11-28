@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ResourceStatusEnum } from "./resourcestatusenum";
 /**
  * Describes a resource associated with a resource share.

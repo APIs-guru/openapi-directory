@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { RegionTypeEnum } from "./regiontypeenum";
 import { DirectoryStageEnum } from "./directorystageenum";
 import { DirectoryVpcSettings } from "./directoryvpcsettings";

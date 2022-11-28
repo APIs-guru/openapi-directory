@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 class ImportRestAPIModeEnum(str, Enum):
@@ -9,8 +14,8 @@ class ImportRestAPIModeEnum(str, Enum):
 
 @dataclass
 class ImportRestAPIQueryParams:
+    mode: ImportRestAPIModeEnum = field(metadata={'query_param': { 'field_name': 'mode', 'style': 'form', 'explode': True }})
     failonwarnings: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'failonwarnings', 'style': 'form', 'explode': True }})
-    mode: ImportRestAPIModeEnum = field(default=None, metadata={'query_param': { 'field_name': 'mode', 'style': 'form', 'explode': True }})
     parameters: Optional[dict[str, str]] = field(default=None, metadata={'query_param': { 'field_name': 'parameters', 'style': 'form', 'explode': True }})
     
 
@@ -28,25 +33,25 @@ class ImportRestAPIHeaders:
 @dataclass_json
 @dataclass
 class ImportRestAPIRequestBody:
-    body: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'body' }})
+    body: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('body') }})
     
 
 @dataclass
 class ImportRestAPIRequest:
-    query_params: ImportRestAPIQueryParams = field(default=None)
-    headers: ImportRestAPIHeaders = field(default=None)
-    request: ImportRestAPIRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ImportRestAPIHeaders = field()
+    query_params: ImportRestAPIQueryParams = field()
+    request: ImportRestAPIRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ImportRestAPIResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
     rest_api: Optional[shared.RestAPI] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

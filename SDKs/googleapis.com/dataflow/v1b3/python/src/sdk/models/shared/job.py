@@ -1,12 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import environment
-from . import jobexecutioninfo
-from . import jobmetadata
-from . import pipelinedescription
-from . import executionstagestate
-from . import step
+from sdk import utils
+from . import *
 
 class JobCurrentStateEnum(str, Enum):
     JOB_STATE_UNKNOWN = "JOB_STATE_UNKNOWN"
@@ -47,29 +44,67 @@ class JobTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Job:
-    client_request_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clientRequestId' }})
-    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createTime' }})
-    created_from_snapshot_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createdFromSnapshotId' }})
-    current_state: Optional[JobCurrentStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'currentState' }})
-    current_state_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'currentStateTime' }})
-    environment: Optional[environment.Environment] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'environment' }})
-    execution_info: Optional[jobexecutioninfo.JobExecutionInfo] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'executionInfo' }})
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    job_metadata: Optional[jobmetadata.JobMetadata] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'jobMetadata' }})
-    labels: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labels' }})
-    location: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'location' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    pipeline_description: Optional[pipelinedescription.PipelineDescription] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pipelineDescription' }})
-    project_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'projectId' }})
-    replace_job_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'replaceJobId' }})
-    replaced_by_job_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'replacedByJobId' }})
-    requested_state: Optional[JobRequestedStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'requestedState' }})
-    satisfies_pzs: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'satisfiesPzs' }})
-    stage_states: Optional[List[executionstagestate.ExecutionStageState]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stageStates' }})
-    start_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'startTime' }})
-    steps: Optional[List[step.Step]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'steps' }})
-    steps_location: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stepsLocation' }})
-    temp_files: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tempFiles' }})
-    transform_name_mapping: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'transformNameMapping' }})
-    type: Optional[JobTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""Job
+    Defines a job to be run by the Cloud Dataflow service. Do not enter confidential information when you supply string values using the API.
+    """
+    
+    client_request_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clientRequestId') }})
+    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createTime') }})
+    created_from_snapshot_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createdFromSnapshotId') }})
+    current_state: Optional[JobCurrentStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('currentState') }})
+    current_state_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('currentStateTime') }})
+    environment: Optional[Environment] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('environment') }})
+    execution_info: Optional[JobExecutionInfo] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('executionInfo') }})
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    job_metadata: Optional[JobMetadata] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('jobMetadata') }})
+    labels: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('labels') }})
+    location: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('location') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    pipeline_description: Optional[PipelineDescription] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pipelineDescription') }})
+    project_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('projectId') }})
+    replace_job_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('replaceJobId') }})
+    replaced_by_job_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('replacedByJobId') }})
+    requested_state: Optional[JobRequestedStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('requestedState') }})
+    satisfies_pzs: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('satisfiesPzs') }})
+    stage_states: Optional[List[ExecutionStageState]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('stageStates') }})
+    start_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('startTime') }})
+    steps: Optional[List[Step]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('steps') }})
+    steps_location: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('stepsLocation') }})
+    temp_files: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tempFiles') }})
+    transform_name_mapping: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('transformNameMapping') }})
+    type: Optional[JobTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    
+
+@dataclass_json
+@dataclass
+class JobInput:
+    r"""JobInput
+    Defines a job to be run by the Cloud Dataflow service. Do not enter confidential information when you supply string values using the API.
+    """
+    
+    client_request_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clientRequestId') }})
+    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createTime') }})
+    created_from_snapshot_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createdFromSnapshotId') }})
+    current_state: Optional[JobCurrentStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('currentState') }})
+    current_state_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('currentStateTime') }})
+    environment: Optional[EnvironmentInput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('environment') }})
+    execution_info: Optional[JobExecutionInfo] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('executionInfo') }})
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    job_metadata: Optional[JobMetadata] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('jobMetadata') }})
+    labels: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('labels') }})
+    location: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('location') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    pipeline_description: Optional[PipelineDescription] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pipelineDescription') }})
+    project_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('projectId') }})
+    replace_job_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('replaceJobId') }})
+    replaced_by_job_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('replacedByJobId') }})
+    requested_state: Optional[JobRequestedStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('requestedState') }})
+    satisfies_pzs: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('satisfiesPzs') }})
+    stage_states: Optional[List[ExecutionStageState]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('stageStates') }})
+    start_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('startTime') }})
+    steps: Optional[List[Step]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('steps') }})
+    steps_location: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('stepsLocation') }})
+    temp_files: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tempFiles') }})
+    transform_name_mapping: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('transformNameMapping') }})
+    type: Optional[JobTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class PolyUsersLikedassetsListPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -29,13 +30,13 @@ class PolyUsersLikedassetsListQueryParams:
 
 @dataclass
 class PolyUsersLikedassetsListRequest:
-    path_params: PolyUsersLikedassetsListPathParams = field(default=None)
-    query_params: PolyUsersLikedassetsListQueryParams = field(default=None)
+    path_params: PolyUsersLikedassetsListPathParams = field()
+    query_params: PolyUsersLikedassetsListQueryParams = field()
     
 
 @dataclass
 class PolyUsersLikedassetsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_liked_assets_response: Optional[shared.ListLikedAssetsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

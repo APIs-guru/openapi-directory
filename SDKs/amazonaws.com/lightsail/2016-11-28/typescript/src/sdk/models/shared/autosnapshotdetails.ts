@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AttachedDisk } from "./attacheddisk";
 import { AutoSnapshotStatusEnum } from "./autosnapshotstatusenum";
+
 
 
 // AutoSnapshotDetails
@@ -9,15 +9,15 @@ import { AutoSnapshotStatusEnum } from "./autosnapshotstatusenum";
  * Describes an automatic snapshot.
 **/
 export class AutoSnapshotDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=date" })
+  @SpeakeasyMetadata({ data: "json, name=date" })
   date?: string;
 
-  @Metadata({ data: "json, name=fromAttachedDisks", elemType: shared.AttachedDisk })
+  @SpeakeasyMetadata({ data: "json, name=fromAttachedDisks", elemType: AttachedDisk })
   fromAttachedDisks?: AttachedDisk[];
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: AutoSnapshotStatusEnum;
 }

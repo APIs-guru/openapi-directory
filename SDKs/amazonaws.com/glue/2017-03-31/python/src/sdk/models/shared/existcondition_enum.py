@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ExistConditionEnum(str, Enum):
     MUST_EXIST = "MUST_EXIST"

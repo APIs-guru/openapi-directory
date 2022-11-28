@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ListingsByZipCodeAndDateListingsByZipCodeAndDateGetQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=endDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=endDate" })
   endDate: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=jwt" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=jwt" })
   jwt: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=modelName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=modelName" })
   modelName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=newCars" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=newCars" })
   newCars?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=startDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=startDate" })
   startDate: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=zipCode" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=zipCode" })
   zipCode: number;
 }
 
 
 export class ListingsByZipCodeAndDateListingsByZipCodeAndDateGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ListingsByZipCodeAndDateListingsByZipCodeAndDateGetQueryParams;
 }
 
 
 export class ListingsByZipCodeAndDateListingsByZipCodeAndDateGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   httpValidationError?: shared.HttpValidationError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   listingResp?: shared.ListingResp;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

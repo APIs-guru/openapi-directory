@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetDescribeAlarmsActionEnum(str, Enum):
@@ -16,7 +20,8 @@ class GetDescribeAlarmsVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeAlarmsQueryParams:
-    action: GetDescribeAlarmsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribeAlarmsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDescribeAlarmsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     action_prefix: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'ActionPrefix', 'style': 'form', 'explode': True }})
     alarm_name_prefix: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'AlarmNamePrefix', 'style': 'form', 'explode': True }})
     alarm_names: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'AlarmNames', 'style': 'form', 'explode': True }})
@@ -26,7 +31,6 @@ class GetDescribeAlarmsQueryParams:
     next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NextToken', 'style': 'form', 'explode': True }})
     parents_of_alarm_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'ParentsOfAlarmName', 'style': 'form', 'explode': True }})
     state_value: Optional[GetDescribeAlarmsStateValueEnum] = field(default=None, metadata={'query_param': { 'field_name': 'StateValue', 'style': 'form', 'explode': True }})
-    version: GetDescribeAlarmsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -42,13 +46,13 @@ class GetDescribeAlarmsHeaders:
 
 @dataclass
 class GetDescribeAlarmsRequest:
-    query_params: GetDescribeAlarmsQueryParams = field(default=None)
-    headers: GetDescribeAlarmsHeaders = field(default=None)
+    headers: GetDescribeAlarmsHeaders = field()
+    query_params: GetDescribeAlarmsQueryParams = field()
     
 
 @dataclass
 class GetDescribeAlarmsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

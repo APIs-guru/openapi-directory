@@ -20,6 +20,8 @@ const (
 	GoogleCloudDialogflowCxV3ExperimentResultMetricTypeEnumSessionEndRate                 GoogleCloudDialogflowCxV3ExperimentResultMetricTypeEnum = "SESSION_END_RATE"
 )
 
+// GoogleCloudDialogflowCxV3ExperimentResultMetric
+// Metric and corresponding confidence intervals.
 type GoogleCloudDialogflowCxV3ExperimentResultMetric struct {
 	ConfidenceInterval *GoogleCloudDialogflowCxV3ExperimentResultConfidenceInterval  `json:"confidenceInterval,omitempty"`
 	Count              *float64                                                      `json:"count,omitempty"`

@@ -1,12 +1,20 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
+class SecretRoleInput:
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    slug: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('slug') }})
+    
+
+@dataclass_json
+@dataclass
 class SecretRole:
-    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    slug: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'slug' }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    slug: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('slug') }})
+    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
     

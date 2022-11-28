@@ -1,26 +1,25 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { ReplicaInfo } from "./replicainfo";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReplicaInfo } from "./replicainfo";
 
+
 export enum InstanceConfigConfigTypeEnum {
-    TypeUnspecified = "TYPE_UNSPECIFIED"
-,    GoogleManaged = "GOOGLE_MANAGED"
-,    UserManaged = "USER_MANAGED"
+    TypeUnspecified = "TYPE_UNSPECIFIED",
+    GoogleManaged = "GOOGLE_MANAGED",
+    UserManaged = "USER_MANAGED"
 }
 
 export enum InstanceConfigFreeInstanceAvailabilityEnum {
-    FreeInstanceAvailabilityUnspecified = "FREE_INSTANCE_AVAILABILITY_UNSPECIFIED"
-,    Available = "AVAILABLE"
-,    Unsupported = "UNSUPPORTED"
-,    Disabled = "DISABLED"
-,    QuotaExceeded = "QUOTA_EXCEEDED"
+    FreeInstanceAvailabilityUnspecified = "FREE_INSTANCE_AVAILABILITY_UNSPECIFIED",
+    Available = "AVAILABLE",
+    Unsupported = "UNSUPPORTED",
+    Disabled = "DISABLED",
+    QuotaExceeded = "QUOTA_EXCEEDED"
 }
 
 export enum InstanceConfigStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Creating = "CREATING"
-,    Ready = "READY"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Creating = "CREATING",
+    Ready = "READY"
 }
 
 
@@ -29,39 +28,67 @@ export enum InstanceConfigStateEnum {
  * A possible configuration for a Cloud Spanner instance. Configurations define the geographic placement of nodes and their replication.
 **/
 export class InstanceConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=baseConfig" })
+  @SpeakeasyMetadata({ data: "json, name=baseConfig" })
   baseConfig?: string;
 
-  @Metadata({ data: "json, name=configType" })
+  @SpeakeasyMetadata({ data: "json, name=configType" })
   configType?: InstanceConfigConfigTypeEnum;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=freeInstanceAvailability" })
+  @SpeakeasyMetadata({ data: "json, name=freeInstanceAvailability" })
   freeInstanceAvailability?: InstanceConfigFreeInstanceAvailabilityEnum;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=leaderOptions" })
+  @SpeakeasyMetadata({ data: "json, name=leaderOptions" })
   leaderOptions?: string[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=optionalReplicas", elemType: shared.ReplicaInfo })
+  @SpeakeasyMetadata({ data: "json, name=optionalReplicas", elemType: ReplicaInfo })
   optionalReplicas?: ReplicaInfo[];
 
-  @Metadata({ data: "json, name=reconciling" })
+  @SpeakeasyMetadata({ data: "json, name=reconciling" })
   reconciling?: boolean;
 
-  @Metadata({ data: "json, name=replicas", elemType: shared.ReplicaInfo })
+  @SpeakeasyMetadata({ data: "json, name=replicas", elemType: ReplicaInfo })
   replicas?: ReplicaInfo[];
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: InstanceConfigStateEnum;
+}
+
+
+// InstanceConfigInput
+/** 
+ * A possible configuration for a Cloud Spanner instance. Configurations define the geographic placement of nodes and their replication.
+**/
+export class InstanceConfigInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=baseConfig" })
+  baseConfig?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
+  displayName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=etag" })
+  etag?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=leaderOptions" })
+  leaderOptions?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=replicas", elemType: ReplicaInfo })
+  replicas?: ReplicaInfo[];
 }

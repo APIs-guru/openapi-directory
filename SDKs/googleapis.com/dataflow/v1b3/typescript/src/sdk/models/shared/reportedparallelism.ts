@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ReportedParallelism
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the level of parallelism in a WorkItem's input, reported by the worker.
 **/
 export class ReportedParallelism extends SpeakeasyBase {
-  @Metadata({ data: "json, name=isInfinite" })
+  @SpeakeasyMetadata({ data: "json, name=isInfinite" })
   isInfinite?: boolean;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: number;
 }

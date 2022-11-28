@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NiCallerIdentity } from "./nicalleridentity";
 import { NiCurrentCarrierProperties } from "./nicurrentcarrierproperties";
 import { NiInitialCarrierProperties } from "./niinitialcarrierproperties";
@@ -67,87 +67,87 @@ var NiResponseJsonAdvancedRoamingUnknown = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=caller_identity" }),
+        SpeakeasyMetadata({ data: "json, name=caller_identity" }),
         __metadata("design:type", NiCallerIdentity)
     ], NiResponseJsonAdvancedRoamingUnknown.prototype, "callerIdentity", void 0);
     __decorate([
-        Metadata({ data: "json, name=country_code" }),
+        SpeakeasyMetadata({ data: "json, name=country_code" }),
         __metadata("design:type", String)
     ], NiResponseJsonAdvancedRoamingUnknown.prototype, "countryCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=country_code_iso3" }),
+        SpeakeasyMetadata({ data: "json, name=country_code_iso3" }),
         __metadata("design:type", String)
     ], NiResponseJsonAdvancedRoamingUnknown.prototype, "countryCodeIso3", void 0);
     __decorate([
-        Metadata({ data: "json, name=country_name" }),
+        SpeakeasyMetadata({ data: "json, name=country_name" }),
         __metadata("design:type", String)
     ], NiResponseJsonAdvancedRoamingUnknown.prototype, "countryName", void 0);
     __decorate([
-        Metadata({ data: "json, name=country_prefix" }),
+        SpeakeasyMetadata({ data: "json, name=country_prefix" }),
         __metadata("design:type", String)
     ], NiResponseJsonAdvancedRoamingUnknown.prototype, "countryPrefix", void 0);
     __decorate([
-        Metadata({ data: "json, name=current_carrier" }),
+        SpeakeasyMetadata({ data: "json, name=current_carrier" }),
         __metadata("design:type", NiCurrentCarrierProperties)
     ], NiResponseJsonAdvancedRoamingUnknown.prototype, "currentCarrier", void 0);
     __decorate([
-        Metadata({ data: "json, name=international_format_number" }),
+        SpeakeasyMetadata({ data: "json, name=international_format_number" }),
         __metadata("design:type", String)
     ], NiResponseJsonAdvancedRoamingUnknown.prototype, "internationalFormatNumber", void 0);
     __decorate([
-        Metadata({ data: "json, name=lookup_outcome" }),
+        SpeakeasyMetadata({ data: "json, name=lookup_outcome" }),
         __metadata("design:type", Number)
     ], NiResponseJsonAdvancedRoamingUnknown.prototype, "lookupOutcome", void 0);
     __decorate([
-        Metadata({ data: "json, name=lookup_outcome_message" }),
+        SpeakeasyMetadata({ data: "json, name=lookup_outcome_message" }),
         __metadata("design:type", String)
     ], NiResponseJsonAdvancedRoamingUnknown.prototype, "lookupOutcomeMessage", void 0);
     __decorate([
-        Metadata({ data: "json, name=national_format_number" }),
+        SpeakeasyMetadata({ data: "json, name=national_format_number" }),
         __metadata("design:type", String)
     ], NiResponseJsonAdvancedRoamingUnknown.prototype, "nationalFormatNumber", void 0);
     __decorate([
-        Metadata({ data: "json, name=original_carrier" }),
+        SpeakeasyMetadata({ data: "json, name=original_carrier" }),
         __metadata("design:type", NiInitialCarrierProperties)
     ], NiResponseJsonAdvancedRoamingUnknown.prototype, "originalCarrier", void 0);
     __decorate([
-        Metadata({ data: "json, name=ported" }),
+        SpeakeasyMetadata({ data: "json, name=ported" }),
         __metadata("design:type", String)
     ], NiResponseJsonAdvancedRoamingUnknown.prototype, "ported", void 0);
     __decorate([
-        Metadata({ data: "json, name=reachable" }),
+        SpeakeasyMetadata({ data: "json, name=reachable" }),
         __metadata("design:type", String)
     ], NiResponseJsonAdvancedRoamingUnknown.prototype, "reachable", void 0);
     __decorate([
-        Metadata({ data: "json, name=refund_price" }),
+        SpeakeasyMetadata({ data: "json, name=refund_price" }),
         __metadata("design:type", String)
     ], NiResponseJsonAdvancedRoamingUnknown.prototype, "refundPrice", void 0);
     __decorate([
-        Metadata({ data: "json, name=remaining_balance" }),
+        SpeakeasyMetadata({ data: "json, name=remaining_balance" }),
         __metadata("design:type", String)
     ], NiResponseJsonAdvancedRoamingUnknown.prototype, "remainingBalance", void 0);
     __decorate([
-        Metadata({ data: "json, name=request_id" }),
+        SpeakeasyMetadata({ data: "json, name=request_id" }),
         __metadata("design:type", String)
     ], NiResponseJsonAdvancedRoamingUnknown.prototype, "requestId", void 0);
     __decorate([
-        Metadata({ data: "json, name=request_price" }),
+        SpeakeasyMetadata({ data: "json, name=request_price" }),
         __metadata("design:type", String)
     ], NiResponseJsonAdvancedRoamingUnknown.prototype, "requestPrice", void 0);
     __decorate([
-        Metadata({ data: "json, name=roaming" }),
+        SpeakeasyMetadata({ data: "json, name=roaming" }),
         __metadata("design:type", String)
     ], NiResponseJsonAdvancedRoamingUnknown.prototype, "roaming", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", Number)
     ], NiResponseJsonAdvancedRoamingUnknown.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=status_message" }),
+        SpeakeasyMetadata({ data: "json, name=status_message" }),
         __metadata("design:type", String)
     ], NiResponseJsonAdvancedRoamingUnknown.prototype, "statusMessage", void 0);
     __decorate([
-        Metadata({ data: "json, name=valid_number" }),
+        SpeakeasyMetadata({ data: "json, name=valid_number" }),
         __metadata("design:type", String)
     ], NiResponseJsonAdvancedRoamingUnknown.prototype, "validNumber", void 0);
     return NiResponseJsonAdvancedRoamingUnknown;

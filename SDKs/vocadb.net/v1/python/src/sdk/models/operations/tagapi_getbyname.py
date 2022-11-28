@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class TagAPIGetByNamePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 class TagAPIGetByNameFieldsEnum(str, Enum):
     NONE = "None"
@@ -34,14 +35,14 @@ class TagAPIGetByNameQueryParams:
 
 @dataclass
 class TagAPIGetByNameRequest:
-    path_params: TagAPIGetByNamePathParams = field(default=None)
-    query_params: TagAPIGetByNameQueryParams = field(default=None)
+    path_params: TagAPIGetByNamePathParams = field()
+    query_params: TagAPIGetByNameQueryParams = field()
     
 
 @dataclass
 class TagAPIGetByNameResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     tag_for_api_contract: Optional[shared.TagForAPIContract] = field(default=None)
     

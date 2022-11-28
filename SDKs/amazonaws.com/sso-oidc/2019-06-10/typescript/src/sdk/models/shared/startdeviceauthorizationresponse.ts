@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class StartDeviceAuthorizationResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deviceCode" })
+  @SpeakeasyMetadata({ data: "json, name=deviceCode" })
   deviceCode?: string;
 
-  @Metadata({ data: "json, name=expiresIn" })
+  @SpeakeasyMetadata({ data: "json, name=expiresIn" })
   expiresIn?: number;
 
-  @Metadata({ data: "json, name=interval" })
+  @SpeakeasyMetadata({ data: "json, name=interval" })
   interval?: number;
 
-  @Metadata({ data: "json, name=userCode" })
+  @SpeakeasyMetadata({ data: "json, name=userCode" })
   userCode?: string;
 
-  @Metadata({ data: "json, name=verificationUri" })
+  @SpeakeasyMetadata({ data: "json, name=verificationUri" })
   verificationUri?: string;
 
-  @Metadata({ data: "json, name=verificationUriComplete" })
+  @SpeakeasyMetadata({ data: "json, name=verificationUriComplete" })
   verificationUriComplete?: string;
 }

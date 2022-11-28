@@ -1,36 +1,37 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum TeamHittingVsStartingPitcherFormatEnum {
-    Xml = "XML"
-,    Json = "JSON"
+    Xml = "XML",
+    Json = "JSON"
 }
 
 
 export class TeamHittingVsStartingPitcherPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=format" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" })
   format: TeamHittingVsStartingPitcherFormatEnum;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=gameid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=gameid" })
   gameid: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=team" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=team" })
   team: string;
 }
 
 
 export class TeamHittingVsStartingPitcherRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: TeamHittingVsStartingPitcherPathParams;
 }
 
 
 export class TeamHittingVsStartingPitcherResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   playerSeasons?: any[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

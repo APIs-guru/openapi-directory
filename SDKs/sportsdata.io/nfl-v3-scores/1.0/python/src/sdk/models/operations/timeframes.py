@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 
 class TimeframesFormatEnum(str, Enum):
     XML = "XML"
@@ -15,18 +16,18 @@ class TimeframesTypeEnum(str, Enum):
 
 @dataclass
 class TimeframesPathParams:
-    format: TimeframesFormatEnum = field(default=None, metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
-    type: TimeframesTypeEnum = field(default=None, metadata={'path_param': { 'field_name': 'type', 'style': 'simple', 'explode': False }})
+    format: TimeframesFormatEnum = field(metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
+    type: TimeframesTypeEnum = field(metadata={'path_param': { 'field_name': 'type', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class TimeframesRequest:
-    path_params: TimeframesPathParams = field(default=None)
+    path_params: TimeframesPathParams = field()
     
 
 @dataclass
 class TimeframesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     timeframes: Optional[List[Any]] = field(default=None)
     

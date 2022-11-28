@@ -1,8 +1,9 @@
 
 
+
 export enum PriorityTypeEnum {
-    Latency = "LATENCY"
-,    Cost = "COST"
-,    Destination = "DESTINATION"
-,    Location = "LOCATION"
+    Latency = "LATENCY",
+    Cost = "COST",
+    Destination = "DESTINATION",
+    Location = "LOCATION"
 }

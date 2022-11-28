@@ -1,5 +1,7 @@
 package shared
 
+// Write
+// A write on a document.
 type Write struct {
 	CurrentDocument  *Precondition      `json:"currentDocument,omitempty"`
 	Delete           *string            `json:"delete,omitempty"`

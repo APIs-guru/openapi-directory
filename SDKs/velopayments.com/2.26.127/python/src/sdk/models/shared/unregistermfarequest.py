@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class UnregisterMfaRequestMfaTypeEnum(str, Enum):
     YUBIKEY = "YUBIKEY"
@@ -10,6 +12,6 @@ class UnregisterMfaRequestMfaTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class UnregisterMfaRequest:
-    mfa_type: UnregisterMfaRequestMfaTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mfaType' }})
-    verification_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'verificationCode' }})
+    mfa_type: UnregisterMfaRequestMfaTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('mfaType') }})
+    verification_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('verificationCode') }})
     

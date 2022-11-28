@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// DeploymentConfigInfo
+// Information about a deployment configuration.
 type DeploymentConfigInfo struct {
 	ComputePlatform      *ComputePlatformEnum  `json:"computePlatform,omitempty"`
 	CreateTime           *time.Time            `json:"createTime,omitempty"`

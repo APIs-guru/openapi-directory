@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class CloudbillingBillingAccountsPatchPathParams extends SpeakeasyBase {
     name: string;
@@ -32,7 +32,7 @@ export declare class CloudbillingBillingAccountsPatchSecurity extends SpeakeasyB
 export declare class CloudbillingBillingAccountsPatchRequest extends SpeakeasyBase {
     pathParams: CloudbillingBillingAccountsPatchPathParams;
     queryParams: CloudbillingBillingAccountsPatchQueryParams;
-    request?: shared.BillingAccount;
+    request?: shared.BillingAccountInput;
     security: CloudbillingBillingAccountsPatchSecurity;
 }
 export declare class CloudbillingBillingAccountsPatchResponse extends SpeakeasyBase {

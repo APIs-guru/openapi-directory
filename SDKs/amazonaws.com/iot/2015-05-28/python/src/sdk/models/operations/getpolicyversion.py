@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetPolicyVersionPathParams:
-    policy_name: str = field(default=None, metadata={'path_param': { 'field_name': 'policyName', 'style': 'simple', 'explode': False }})
-    policy_version_id: str = field(default=None, metadata={'path_param': { 'field_name': 'policyVersionId', 'style': 'simple', 'explode': False }})
+    policy_name: str = field(metadata={'path_param': { 'field_name': 'policyName', 'style': 'simple', 'explode': False }})
+    policy_version_id: str = field(metadata={'path_param': { 'field_name': 'policyVersionId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,19 +25,19 @@ class GetPolicyVersionHeaders:
 
 @dataclass
 class GetPolicyVersionRequest:
-    path_params: GetPolicyVersionPathParams = field(default=None)
-    headers: GetPolicyVersionHeaders = field(default=None)
+    headers: GetPolicyVersionHeaders = field()
+    path_params: GetPolicyVersionPathParams = field()
     
 
 @dataclass
 class GetPolicyVersionResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_policy_version_response: Optional[shared.GetPolicyVersionResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

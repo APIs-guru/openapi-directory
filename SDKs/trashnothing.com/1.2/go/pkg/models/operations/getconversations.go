@@ -13,15 +13,15 @@ type GetConversationsQueryParams struct {
 	PerPage          *int64   `queryParam:"style=form,explode=true,name=per_page"`
 }
 
-type GetConversationsRequest struct {
-	QueryParams GetConversationsQueryParams
-}
-
 type GetConversations200ApplicationJSON struct {
 	Conversations []shared.Conversation `json:"conversations,omitempty"`
 	NumUnread     *int64                `json:"num_unread,omitempty"`
 	Page          *int64                `json:"page,omitempty"`
 	PerPage       *int64                `json:"per_page,omitempty"`
+}
+
+type GetConversationsRequest struct {
+	QueryParams GetConversationsQueryParams
 }
 
 type GetConversationsResponse struct {

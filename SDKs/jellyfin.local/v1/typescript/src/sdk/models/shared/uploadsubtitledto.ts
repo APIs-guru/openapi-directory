@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // UploadSubtitleDto
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Upload subtitles dto.
 **/
 export class UploadSubtitleDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Data" })
+  @SpeakeasyMetadata({ data: "json, name=Data" })
   data: string;
 
-  @Metadata({ data: "json, name=Format" })
+  @SpeakeasyMetadata({ data: "json, name=Format" })
   format: string;
 
-  @Metadata({ data: "json, name=IsForced" })
+  @SpeakeasyMetadata({ data: "json, name=IsForced" })
   isForced: boolean;
 
-  @Metadata({ data: "json, name=Language" })
+  @SpeakeasyMetadata({ data: "json, name=Language" })
   language: string;
 }

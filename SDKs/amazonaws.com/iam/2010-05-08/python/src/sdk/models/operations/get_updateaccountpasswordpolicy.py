@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetUpdateAccountPasswordPolicyActionEnum(str, Enum):
     UPDATE_ACCOUNT_PASSWORD_POLICY = "UpdateAccountPasswordPolicy"
@@ -10,7 +14,8 @@ class GetUpdateAccountPasswordPolicyVersionEnum(str, Enum):
 
 @dataclass
 class GetUpdateAccountPasswordPolicyQueryParams:
-    action: GetUpdateAccountPasswordPolicyActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetUpdateAccountPasswordPolicyActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetUpdateAccountPasswordPolicyVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     allow_users_to_change_password: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'AllowUsersToChangePassword', 'style': 'form', 'explode': True }})
     hard_expiry: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'HardExpiry', 'style': 'form', 'explode': True }})
     max_password_age: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxPasswordAge', 'style': 'form', 'explode': True }})
@@ -20,7 +25,6 @@ class GetUpdateAccountPasswordPolicyQueryParams:
     require_numbers: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'RequireNumbers', 'style': 'form', 'explode': True }})
     require_symbols: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'RequireSymbols', 'style': 'form', 'explode': True }})
     require_uppercase_characters: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'RequireUppercaseCharacters', 'style': 'form', 'explode': True }})
-    version: GetUpdateAccountPasswordPolicyVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -36,13 +40,13 @@ class GetUpdateAccountPasswordPolicyHeaders:
 
 @dataclass
 class GetUpdateAccountPasswordPolicyRequest:
-    query_params: GetUpdateAccountPasswordPolicyQueryParams = field(default=None)
-    headers: GetUpdateAccountPasswordPolicyHeaders = field(default=None)
+    headers: GetUpdateAccountPasswordPolicyHeaders = field()
+    query_params: GetUpdateAccountPasswordPolicyQueryParams = field()
     
 
 @dataclass
 class GetUpdateAccountPasswordPolicyResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

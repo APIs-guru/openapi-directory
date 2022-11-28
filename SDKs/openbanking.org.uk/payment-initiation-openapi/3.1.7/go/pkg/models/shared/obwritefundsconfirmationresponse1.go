@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ObWriteFundsConfirmationResponse1DataFundsAvailableResult
+// Result of a funds availability check.
 type ObWriteFundsConfirmationResponse1DataFundsAvailableResult struct {
 	FundsAvailable         bool      `json:"FundsAvailable"`
 	FundsAvailableDateTime time.Time `json:"FundsAvailableDateTime"`

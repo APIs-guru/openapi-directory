@@ -1,6 +1,7 @@
 
 
+
 export enum TrustTypeEnum {
-    Forest = "Forest"
-,    External = "External"
+    Forest = "Forest",
+    External = "External"
 }

@@ -4,16 +4,16 @@ type DeleteAnAPIPathParams struct {
 	APIID string `pathParam:"style=simple,explode=false,name=apiId"`
 }
 
-type DeleteAnAPIRequest struct {
-	PathParams DeleteAnAPIPathParams
-}
-
 type DeleteAnAPI200ApplicationJSONAPI struct {
 	ID *string `json:"id,omitempty"`
 }
 
 type DeleteAnAPI200ApplicationJSON struct {
 	API *DeleteAnAPI200ApplicationJSONAPI `json:"api,omitempty"`
+}
+
+type DeleteAnAPIRequest struct {
+	PathParams DeleteAnAPIPathParams
 }
 
 type DeleteAnAPIResponse struct {

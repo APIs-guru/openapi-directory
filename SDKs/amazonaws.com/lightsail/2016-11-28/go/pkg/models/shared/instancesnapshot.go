@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// InstanceSnapshot
+// Describes an instance snapshot.
 type InstanceSnapshot struct {
 	Arn                *string                    `json:"arn,omitempty"`
 	CreatedAt          *time.Time                 `json:"createdAt,omitempty"`

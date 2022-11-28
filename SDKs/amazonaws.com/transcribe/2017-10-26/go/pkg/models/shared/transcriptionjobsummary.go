@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// TranscriptionJobSummary
+// Provides a summary of information about a transcription job.
 type TranscriptionJobSummary struct {
 	CompletionTime          *time.Time                  `json:"CompletionTime,omitempty"`
 	ContentRedaction        *ContentRedaction           `json:"ContentRedaction,omitempty"`

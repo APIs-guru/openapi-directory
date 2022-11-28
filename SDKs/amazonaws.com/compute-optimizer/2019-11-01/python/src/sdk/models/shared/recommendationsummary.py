@@ -1,14 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import recommendationsourcetype_enum
-from . import summary
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class RecommendationSummary:
-    account_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'accountId' }})
-    recommendation_resource_type: Optional[recommendationsourcetype_enum.RecommendationSourceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'recommendationResourceType' }})
-    summaries: Optional[List[summary.Summary]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'summaries' }})
+    r"""RecommendationSummary
+    A summary of a recommendation.
+    """
+    
+    account_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('accountId') }})
+    recommendation_resource_type: Optional[RecommendationSourceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('recommendationResourceType') }})
+    summaries: Optional[List[Summary]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('summaries') }})
     

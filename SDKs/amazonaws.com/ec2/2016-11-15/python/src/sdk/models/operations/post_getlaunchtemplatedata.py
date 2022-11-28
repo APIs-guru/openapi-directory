@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostGetLaunchTemplateDataActionEnum(str, Enum):
     GET_LAUNCH_TEMPLATE_DATA = "GetLaunchTemplateData"
@@ -10,8 +14,8 @@ class PostGetLaunchTemplateDataVersionEnum(str, Enum):
 
 @dataclass
 class PostGetLaunchTemplateDataQueryParams:
-    action: PostGetLaunchTemplateDataActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostGetLaunchTemplateDataVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostGetLaunchTemplateDataActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostGetLaunchTemplateDataVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostGetLaunchTemplateDataHeaders:
 
 @dataclass
 class PostGetLaunchTemplateDataRequest:
-    query_params: PostGetLaunchTemplateDataQueryParams = field(default=None)
-    headers: PostGetLaunchTemplateDataHeaders = field(default=None)
+    headers: PostGetLaunchTemplateDataHeaders = field()
+    query_params: PostGetLaunchTemplateDataQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostGetLaunchTemplateDataResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

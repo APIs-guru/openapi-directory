@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SdfConfig } from "./sdfconfig";
+
 
 
 // AdvertiserSdfConfig
@@ -7,9 +8,9 @@ import { SdfConfig } from "./sdfconfig";
  * Structured Data Files (SDF) settings of an advertiser.
 **/
 export class AdvertiserSdfConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=overridePartnerSdfConfig" })
+  @SpeakeasyMetadata({ data: "json, name=overridePartnerSdfConfig" })
   overridePartnerSdfConfig?: boolean;
 
-  @Metadata({ data: "json, name=sdfConfig" })
+  @SpeakeasyMetadata({ data: "json, name=sdfConfig" })
   sdfConfig?: SdfConfig;
 }

@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Session } from "./session";
 
 
+
 export class AddMediaIntentHandlingInvocation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=method" })
+  @SpeakeasyMetadata({ data: "json, name=method" })
   method: string;
 
-  @Metadata({ data: "json, name=params" })
+  @SpeakeasyMetadata({ data: "json, name=params" })
   params: Map<string, any>;
 
-  @Metadata({ data: "json, name=session" })
+  @SpeakeasyMetadata({ data: "json, name=session" })
   session?: Session;
 }

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateSystemModelsUpdateMetricsDataCurrentStateByClientRecord extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClientCount" })
+  @SpeakeasyMetadata({ data: "json, name=ClientCount" })
   clientCount?: number;
 
-  @Metadata({ data: "json, name=State" })
+  @SpeakeasyMetadata({ data: "json, name=State" })
   state?: string;
 }

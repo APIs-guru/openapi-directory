@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -20,13 +21,13 @@ class DigitalassetlinksAssetlinksBulkCheckQueryParams:
 
 @dataclass
 class DigitalassetlinksAssetlinksBulkCheckRequest:
-    query_params: DigitalassetlinksAssetlinksBulkCheckQueryParams = field(default=None)
+    query_params: DigitalassetlinksAssetlinksBulkCheckQueryParams = field()
     request: Optional[shared.BulkCheckRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DigitalassetlinksAssetlinksBulkCheckResponse:
+    content_type: str = field()
+    status_code: int = field()
     bulk_check_response: Optional[shared.BulkCheckResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

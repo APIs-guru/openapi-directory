@@ -1,18 +1,23 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import ostype_enum
-from . import tier_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ApplicationComponent:
-    component_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ComponentName' }})
-    component_remarks: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ComponentRemarks' }})
-    detected_workload: Optional[dict[str, dict[str, str]]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DetectedWorkload' }})
-    monitor: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Monitor' }})
-    os_type: Optional[ostype_enum.OsTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OsType' }})
-    resource_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ResourceType' }})
-    tier: Optional[tier_enum.TierEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Tier' }})
+    r"""ApplicationComponent
+    Describes a standalone resource or similarly grouped resources that the application is made up of.
+    """
+    
+    component_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ComponentName') }})
+    component_remarks: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ComponentRemarks') }})
+    detected_workload: Optional[dict[str, dict[str, str]]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DetectedWorkload') }})
+    monitor: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Monitor') }})
+    os_type: Optional[OsTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('OsType') }})
+    resource_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ResourceType') }})
+    tier: Optional[TierEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Tier') }})
     

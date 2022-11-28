@@ -29,6 +29,8 @@ const (
 	FolderMenuItemFolderTypeEnumGridPhotovoltaicPowerSystem FolderMenuItemFolderTypeEnum = "GridPhotovoltaicPowerSystem"
 )
 
+// FolderMenuItem
+// A folder menu item
 type FolderMenuItem struct {
 	AutoExportSettings *AutoExportSettings           `json:"AutoExportSettings,omitempty"`
 	Children           []FolderMenuItem              `json:"Children,omitempty"`

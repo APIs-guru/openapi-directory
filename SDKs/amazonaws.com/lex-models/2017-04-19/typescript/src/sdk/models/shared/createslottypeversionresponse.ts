@@ -1,38 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EnumerationValue } from "./enumerationvalue";
 import { SlotTypeConfiguration } from "./slottypeconfiguration";
 import { SlotValueSelectionStrategyEnum } from "./slotvalueselectionstrategyenum";
 
 
+
 export class CreateSlotTypeVersionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=checksum" })
+  @SpeakeasyMetadata({ data: "json, name=checksum" })
   checksum?: string;
 
-  @Metadata({ data: "json, name=createdDate" })
+  @SpeakeasyMetadata({ data: "json, name=createdDate" })
   createdDate?: Date;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=enumerationValues", elemType: shared.EnumerationValue })
+  @SpeakeasyMetadata({ data: "json, name=enumerationValues", elemType: EnumerationValue })
   enumerationValues?: EnumerationValue[];
 
-  @Metadata({ data: "json, name=lastUpdatedDate" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdatedDate" })
   lastUpdatedDate?: Date;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=parentSlotTypeSignature" })
+  @SpeakeasyMetadata({ data: "json, name=parentSlotTypeSignature" })
   parentSlotTypeSignature?: string;
 
-  @Metadata({ data: "json, name=slotTypeConfigurations", elemType: shared.SlotTypeConfiguration })
+  @SpeakeasyMetadata({ data: "json, name=slotTypeConfigurations", elemType: SlotTypeConfiguration })
   slotTypeConfigurations?: SlotTypeConfiguration[];
 
-  @Metadata({ data: "json, name=valueSelectionStrategy" })
+  @SpeakeasyMetadata({ data: "json, name=valueSelectionStrategy" })
   valueSelectionStrategy?: SlotValueSelectionStrategyEnum;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 }

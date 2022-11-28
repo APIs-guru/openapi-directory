@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CompanyDeepsearchNumberPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=country" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=country" })
   country: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=number" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=number" })
   number: string;
 }
 
 
 export class CompanyDeepsearchNumberSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   userKey: shared.SchemeUserKey;
 }
 
 
 export class CompanyDeepsearchNumberRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CompanyDeepsearchNumberPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: CompanyDeepsearchNumberSecurity;
 }
 
 
 export class CompanyDeepsearchNumberResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   companyDeepsearchNumber200ApplicationJsonAnies?: any[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   companyDeepsearchNumberDefaultApplicationJsonAny?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

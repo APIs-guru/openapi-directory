@@ -1,51 +1,52 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostChargePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 export enum PostChargeRequestBodyActionEnum {
-    Start = "START"
-,    Stop = "STOP"
+    Start = "START",
+    Stop = "STOP"
 }
 
 
 export class PostChargeRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: PostChargeRequestBodyActionEnum;
 }
 
 
-export class PostChargeRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: PostChargePathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: PostChargeRequestBody;
-}
-
-
 export class PostCharge200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=ok" })
+  @SpeakeasyMetadata({ data: "json, name=ok" })
   ok?: boolean;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result?: Map<string, any>;
 }
 
 
+export class PostChargeRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: PostChargePathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: PostChargeRequestBody;
+}
+
+
 export class PostChargeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postCharge200ApplicationJsonObject?: PostCharge200ApplicationJson;
 }

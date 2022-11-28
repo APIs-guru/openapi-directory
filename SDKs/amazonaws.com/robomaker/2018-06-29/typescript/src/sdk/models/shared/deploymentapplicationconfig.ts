@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeploymentLaunchConfig } from "./deploymentlaunchconfig";
+
 
 
 // DeploymentApplicationConfig
@@ -7,12 +8,12 @@ import { DeploymentLaunchConfig } from "./deploymentlaunchconfig";
  * Information about a deployment application configuration.
 **/
 export class DeploymentApplicationConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=application" })
+  @SpeakeasyMetadata({ data: "json, name=application" })
   application: string;
 
-  @Metadata({ data: "json, name=applicationVersion" })
+  @SpeakeasyMetadata({ data: "json, name=applicationVersion" })
   applicationVersion: string;
 
-  @Metadata({ data: "json, name=launchConfig" })
+  @SpeakeasyMetadata({ data: "json, name=launchConfig" })
   launchConfig: DeploymentLaunchConfig;
 }

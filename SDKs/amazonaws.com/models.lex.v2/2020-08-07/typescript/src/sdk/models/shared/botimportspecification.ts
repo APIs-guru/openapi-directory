@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataPrivacy } from "./dataprivacy";
+
 
 
 // BotImportSpecification
@@ -7,21 +8,21 @@ import { DataPrivacy } from "./dataprivacy";
  * Provides the bot parameters required for importing a bot.
 **/
 export class BotImportSpecification extends SpeakeasyBase {
-  @Metadata({ data: "json, name=botName" })
+  @SpeakeasyMetadata({ data: "json, name=botName" })
   botName: string;
 
-  @Metadata({ data: "json, name=botTags" })
+  @SpeakeasyMetadata({ data: "json, name=botTags" })
   botTags?: Map<string, string>;
 
-  @Metadata({ data: "json, name=dataPrivacy" })
+  @SpeakeasyMetadata({ data: "json, name=dataPrivacy" })
   dataPrivacy: DataPrivacy;
 
-  @Metadata({ data: "json, name=idleSessionTTLInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=idleSessionTTLInSeconds" })
   idleSessionTtlInSeconds?: number;
 
-  @Metadata({ data: "json, name=roleArn" })
+  @SpeakeasyMetadata({ data: "json, name=roleArn" })
   roleArn: string;
 
-  @Metadata({ data: "json, name=testBotAliasTags" })
+  @SpeakeasyMetadata({ data: "json, name=testBotAliasTags" })
   testBotAliasTags?: Map<string, string>;
 }

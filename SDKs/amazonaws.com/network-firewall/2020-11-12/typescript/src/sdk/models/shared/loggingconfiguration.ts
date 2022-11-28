@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LogDestinationConfig } from "./logdestinationconfig";
+
 
 
 // LoggingConfiguration
@@ -8,6 +8,6 @@ import { LogDestinationConfig } from "./logdestinationconfig";
  * Defines how AWS Network Firewall performs logging for a <a>Firewall</a>. 
 **/
 export class LoggingConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LogDestinationConfigs", elemType: shared.LogDestinationConfig })
+  @SpeakeasyMetadata({ data: "json, name=LogDestinationConfigs", elemType: LogDestinationConfig })
   logDestinationConfigs: LogDestinationConfig[];
 }

@@ -15,11 +15,6 @@ type CreateSchemaRequestBody struct {
 	Schema *CreateSchemaRequestBodySchema `json:"schema,omitempty"`
 }
 
-type CreateSchemaRequest struct {
-	PathParams CreateSchemaPathParams
-	Request    *CreateSchemaRequestBody `request:"mediaType=application/json"`
-}
-
 type CreateSchema200ApplicationJSONSchema struct {
 	APIVersion *string `json:"apiVersion,omitempty"`
 	CreatedAt  *string `json:"createdAt,omitempty"`
@@ -33,6 +28,11 @@ type CreateSchema200ApplicationJSONSchema struct {
 
 type CreateSchema200ApplicationJSON struct {
 	Schema *CreateSchema200ApplicationJSONSchema `json:"schema,omitempty"`
+}
+
+type CreateSchemaRequest struct {
+	PathParams CreateSchemaPathParams
+	Request    *CreateSchemaRequestBody `request:"mediaType=application/json"`
 }
 
 type CreateSchemaResponse struct {

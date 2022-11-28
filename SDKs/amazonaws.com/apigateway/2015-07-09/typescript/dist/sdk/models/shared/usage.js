@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Usage
 /**
  * <p>Represents the usage data of a usage plan.</p> <div class="remarks"/> <div class="seeAlso"> <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html">Create and Use Usage Plans</a>, <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-create-usage-plans-with-console.html#api-gateway-usage-plan-manage-usage">Manage Usage in a Usage Plan</a> </div>
@@ -33,23 +33,23 @@ var Usage = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=endDate" }),
+        SpeakeasyMetadata({ data: "json, name=endDate" }),
         __metadata("design:type", String)
     ], Usage.prototype, "endDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=items" }),
+        SpeakeasyMetadata({ data: "json, name=items" }),
         __metadata("design:type", Map)
     ], Usage.prototype, "items", void 0);
     __decorate([
-        Metadata({ data: "json, name=position" }),
+        SpeakeasyMetadata({ data: "json, name=position" }),
         __metadata("design:type", String)
     ], Usage.prototype, "position", void 0);
     __decorate([
-        Metadata({ data: "json, name=startDate" }),
+        SpeakeasyMetadata({ data: "json, name=startDate" }),
         __metadata("design:type", String)
     ], Usage.prototype, "startDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=usagePlanId" }),
+        SpeakeasyMetadata({ data: "json, name=usagePlanId" }),
         __metadata("design:type", String)
     ], Usage.prototype, "usagePlanId", void 0);
     return Usage;

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ArtifactRevision
+// Represents revision details of an artifact.
 type ArtifactRevision struct {
 	Created                  *time.Time `json:"created,omitempty"`
 	Name                     *string    `json:"name,omitempty"`

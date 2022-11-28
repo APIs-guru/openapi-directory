@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Payload } from "./payload";
+
 
 
 // FirehoseAction
@@ -7,12 +8,12 @@ import { Payload } from "./payload";
  * Sends information about the detector model instance and the event that triggered the action to an Amazon Kinesis Data Firehose delivery stream.
 **/
 export class FirehoseAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deliveryStreamName" })
+  @SpeakeasyMetadata({ data: "json, name=deliveryStreamName" })
   deliveryStreamName: string;
 
-  @Metadata({ data: "json, name=payload" })
+  @SpeakeasyMetadata({ data: "json, name=payload" })
   payload?: Payload;
 
-  @Metadata({ data: "json, name=separator" })
+  @SpeakeasyMetadata({ data: "json, name=separator" })
   separator?: string;
 }

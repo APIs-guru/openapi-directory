@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetRealmClientsIdRolesRoleNameGroupsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=realm" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=realm" })
   realm: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=role-name" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=role-name" })
   roleName: string;
 }
 
 
 export class GetRealmClientsIdRolesRoleNameGroupsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=briefRepresentation" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=briefRepresentation" })
   briefRepresentation?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=first" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=first" })
   first?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=max" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=max" })
   max?: number;
 }
 
 
 export class GetRealmClientsIdRolesRoleNameGroupsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetRealmClientsIdRolesRoleNameGroupsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetRealmClientsIdRolesRoleNameGroupsQueryParams;
 }
 
 
 export class GetRealmClientsIdRolesRoleNameGroupsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.GroupRepresentation })
+  @SpeakeasyMetadata({ elemType: shared.GroupRepresentation })
   groupRepresentations?: shared.GroupRepresentation[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

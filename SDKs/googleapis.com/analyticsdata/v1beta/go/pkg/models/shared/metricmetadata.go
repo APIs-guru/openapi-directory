@@ -26,6 +26,8 @@ const (
 	MetricMetadataTypeEnumTypeKilometers        MetricMetadataTypeEnum = "TYPE_KILOMETERS"
 )
 
+// MetricMetadata
+// Explains a metric.
 type MetricMetadata struct {
 	APIName            *string                            `json:"apiName,omitempty"`
 	BlockedReasons     []MetricMetadataBlockedReasonsEnum `json:"blockedReasons,omitempty"`

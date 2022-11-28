@@ -1,25 +1,25 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PolicyRepresentation } from "./policyrepresentation";
 import { ResourceRepresentation } from "./resourcerepresentation";
 
 
+
 export class ScopeRepresentation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=iconUri" })
+  @SpeakeasyMetadata({ data: "json, name=iconUri" })
   iconUri?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=policies", elemType: shared.PolicyRepresentation })
+  @SpeakeasyMetadata({ data: "json, name=policies", elemType: PolicyRepresentation })
   policies?: PolicyRepresentation[];
 
-  @Metadata({ data: "json, name=resources", elemType: shared.ResourceRepresentation })
+  @SpeakeasyMetadata({ data: "json, name=resources", elemType: ResourceRepresentation })
   resources?: ResourceRepresentation[];
 }

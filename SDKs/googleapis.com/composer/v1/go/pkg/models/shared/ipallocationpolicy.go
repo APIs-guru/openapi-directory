@@ -1,5 +1,7 @@
 package shared
 
+// IPAllocationPolicy
+// Configuration for controlling how IPs are allocated in the GKE cluster running the Apache Airflow software.
 type IPAllocationPolicy struct {
 	ClusterIpv4CidrBlock       *string `json:"clusterIpv4CidrBlock,omitempty"`
 	ClusterSecondaryRangeName  *string `json:"clusterSecondaryRangeName,omitempty"`

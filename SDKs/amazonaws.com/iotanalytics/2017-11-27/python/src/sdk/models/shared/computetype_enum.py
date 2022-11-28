@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ComputeTypeEnum(str, Enum):
     ACU_1 = "ACU_1"

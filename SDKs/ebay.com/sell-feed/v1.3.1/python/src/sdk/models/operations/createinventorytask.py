@@ -10,18 +10,18 @@ class CreateInventoryTaskHeaders:
 
 @dataclass
 class CreateInventoryTaskSecurity:
-    api_auth: shared.SchemeAPIAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    api_auth: shared.SchemeAPIAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CreateInventoryTaskRequest:
-    headers: CreateInventoryTaskHeaders = field(default=None)
-    request: shared.CreateInventoryTaskRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: CreateInventoryTaskSecurity = field(default=None)
+    headers: CreateInventoryTaskHeaders = field()
+    request: shared.CreateInventoryTaskRequest = field(metadata={'request': { 'media_type': 'application/json' }})
+    security: CreateInventoryTaskSecurity = field()
     
 
 @dataclass
 class CreateInventoryTaskResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

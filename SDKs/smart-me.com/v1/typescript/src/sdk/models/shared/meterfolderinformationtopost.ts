@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MeterFolderInformationToPost
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Container for a Meter or Folder Information to Post
 **/
 export class MeterFolderInformationToPost extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Id, form, name=Id;" })
+  @SpeakeasyMetadata({ data: "json, name=Id, form, name=Id;" })
   id?: string;
 
-  @Metadata({ data: "json, name=Name, form, name=Name;" })
+  @SpeakeasyMetadata({ data: "json, name=Name, form, name=Name;" })
   name?: string;
 }

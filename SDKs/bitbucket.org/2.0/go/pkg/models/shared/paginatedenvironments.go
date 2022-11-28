@@ -1,5 +1,7 @@
 package shared
 
+// PaginatedEnvironments
+// A paged list of environments
 type PaginatedEnvironments struct {
 	Next     *string                  `json:"next,omitempty"`
 	Page     *int64                   `json:"page,omitempty"`

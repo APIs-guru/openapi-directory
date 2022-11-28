@@ -10,7 +10,7 @@ type DcimVirtualChassisPartialUpdatePathParams struct {
 
 type DcimVirtualChassisPartialUpdateRequest struct {
 	PathParams DcimVirtualChassisPartialUpdatePathParams
-	Request    shared.WritableVirtualChassis `request:"mediaType=application/json"`
+	Request    shared.WritableVirtualChassisInput `request:"mediaType=application/json"`
 }
 
 type DcimVirtualChassisPartialUpdateResponse struct {

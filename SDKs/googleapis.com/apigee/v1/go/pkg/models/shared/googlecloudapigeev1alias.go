@@ -8,6 +8,8 @@ const (
 	GoogleCloudApigeeV1AliasTypeEnumKeyCert              GoogleCloudApigeeV1AliasTypeEnum = "KEY_CERT"
 )
 
+// GoogleCloudApigeeV1Alias
+// Reference to a certificate or key/certificate pair.
 type GoogleCloudApigeeV1Alias struct {
 	Alias     *string                           `json:"alias,omitempty"`
 	CertsInfo *GoogleCloudApigeeV1Certificate   `json:"certsInfo,omitempty"`

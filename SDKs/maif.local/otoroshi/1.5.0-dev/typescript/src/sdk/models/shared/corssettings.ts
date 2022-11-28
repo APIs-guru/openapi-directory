@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CorsSettings
@@ -6,27 +7,27 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The configuration for cors support
 **/
 export class CorsSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowCredentials" })
+  @SpeakeasyMetadata({ data: "json, name=allowCredentials" })
   allowCredentials: boolean;
 
-  @Metadata({ data: "json, name=allowHeaders" })
+  @SpeakeasyMetadata({ data: "json, name=allowHeaders" })
   allowHeaders: string[];
 
-  @Metadata({ data: "json, name=allowMethods" })
+  @SpeakeasyMetadata({ data: "json, name=allowMethods" })
   allowMethods: string[];
 
-  @Metadata({ data: "json, name=allowOrigin" })
+  @SpeakeasyMetadata({ data: "json, name=allowOrigin" })
   allowOrigin: string;
 
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled: boolean;
 
-  @Metadata({ data: "json, name=excludedPatterns" })
+  @SpeakeasyMetadata({ data: "json, name=excludedPatterns" })
   excludedPatterns: string[];
 
-  @Metadata({ data: "json, name=exposeHeaders" })
+  @SpeakeasyMetadata({ data: "json, name=exposeHeaders" })
   exposeHeaders: string[];
 
-  @Metadata({ data: "json, name=maxAge" })
+  @SpeakeasyMetadata({ data: "json, name=maxAge" })
   maxAge: number;
 }

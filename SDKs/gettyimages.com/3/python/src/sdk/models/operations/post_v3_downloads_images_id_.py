@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class PostV3DownloadsImagesIDPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -33,14 +34,14 @@ class PostV3DownloadsImagesIDRequests:
 
 @dataclass
 class PostV3DownloadsImagesIDRequest:
-    path_params: PostV3DownloadsImagesIDPathParams = field(default=None)
-    query_params: PostV3DownloadsImagesIDQueryParams = field(default=None)
-    headers: PostV3DownloadsImagesIDHeaders = field(default=None)
+    headers: PostV3DownloadsImagesIDHeaders = field()
+    path_params: PostV3DownloadsImagesIDPathParams = field()
+    query_params: PostV3DownloadsImagesIDQueryParams = field()
     request: Optional[PostV3DownloadsImagesIDRequests] = field(default=None)
     
 
 @dataclass
 class PostV3DownloadsImagesIDResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

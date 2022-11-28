@@ -30,7 +30,7 @@ type CloudchannelAccountsCustomersCreateSecurity struct {
 type CloudchannelAccountsCustomersCreateRequest struct {
 	PathParams  CloudchannelAccountsCustomersCreatePathParams
 	QueryParams CloudchannelAccountsCustomersCreateQueryParams
-	Request     *shared.GoogleCloudChannelV1Customer `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudChannelV1CustomerInput `request:"mediaType=application/json"`
 	Security    CloudchannelAccountsCustomersCreateSecurity
 }
 

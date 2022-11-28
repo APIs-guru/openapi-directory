@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SearchPlaceIndexForTextSummary
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A summary of the geocoding request sent using <code>SearchPlaceIndexForText</code>.
 **/
 export class SearchPlaceIndexForTextSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BiasPosition" })
+  @SpeakeasyMetadata({ data: "json, name=BiasPosition" })
   biasPosition?: number[];
 
-  @Metadata({ data: "json, name=DataSource" })
+  @SpeakeasyMetadata({ data: "json, name=DataSource" })
   dataSource: string;
 
-  @Metadata({ data: "json, name=FilterBBox" })
+  @SpeakeasyMetadata({ data: "json, name=FilterBBox" })
   filterBBox?: number[];
 
-  @Metadata({ data: "json, name=FilterCountries" })
+  @SpeakeasyMetadata({ data: "json, name=FilterCountries" })
   filterCountries?: string[];
 
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=ResultBBox" })
+  @SpeakeasyMetadata({ data: "json, name=ResultBBox" })
   resultBBox?: number[];
 
-  @Metadata({ data: "json, name=Text" })
+  @SpeakeasyMetadata({ data: "json, name=Text" })
   text: string;
 }

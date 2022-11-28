@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { RepositoryAssociation } from "./repositoryassociation";
 export declare class AssociateRepositoryResponse extends SpeakeasyBase {
     repositoryAssociation?: RepositoryAssociation;

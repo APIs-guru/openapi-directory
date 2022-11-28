@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import detector
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeDetectorResponse:
-    detector: Optional[detector.Detector] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'detector' }})
+    detector: Optional[Detector] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('detector') }})
     

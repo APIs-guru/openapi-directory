@@ -1,17 +1,17 @@
 package operations
 
+// LinkRequestBodyIdentification
+// User identification requires a userId, email or both
 type LinkRequestBodyIdentification struct {
 	Email  *string `json:"email,omitempty"`
 	UserID *string `json:"userId,omitempty"`
 }
 
+// LinkRequestBody
+// Link web activity to user
 type LinkRequestBody struct {
 	DeviceID       string                        `json:"deviceId"`
 	Identification LinkRequestBodyIdentification `json:"identification"`
-}
-
-type LinkRequest struct {
-	Request LinkRequestBody `request:"mediaType=application/json"`
 }
 
 type Link201ApplicationJSONMeta struct {
@@ -24,12 +24,16 @@ type Link201ApplicationJSON struct {
 	Meta    Link201ApplicationJSONMeta `json:"meta"`
 }
 
+// Link400ApplicationJSONErrorsParameters
+// All query-, header- and path- parameters that seemed incorrect
 type Link400ApplicationJSONErrorsParameters struct {
 	Header map[string]string `json:"header,omitempty"`
 	Path   map[string]string `json:"path,omitempty"`
 	Query  map[string]string `json:"query,omitempty"`
 }
 
+// Link400ApplicationJSONErrors
+// Map that sums up all received values that seemed incorrect
 type Link400ApplicationJSONErrors struct {
 	Fields     map[string]string                       `json:"fields,omitempty"`
 	Parameters *Link400ApplicationJSONErrorsParameters `json:"parameters,omitempty"`
@@ -84,6 +88,10 @@ type Link500ApplicationJSONMeta struct {
 type Link500ApplicationJSON struct {
 	Message string                     `json:"message"`
 	Meta    Link500ApplicationJSONMeta `json:"meta"`
+}
+
+type LinkRequest struct {
+	Request LinkRequestBody `request:"mediaType=application/json"`
 }
 
 type LinkResponse struct {

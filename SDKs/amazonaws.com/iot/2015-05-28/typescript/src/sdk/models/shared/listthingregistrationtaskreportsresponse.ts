@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReportTypeEnum } from "./reporttypeenum";
 
 
+
 export class ListThingRegistrationTaskReportsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=reportType" })
+  @SpeakeasyMetadata({ data: "json, name=reportType" })
   reportType?: ReportTypeEnum;
 
-  @Metadata({ data: "json, name=resourceLinks" })
+  @SpeakeasyMetadata({ data: "json, name=resourceLinks" })
   resourceLinks?: string[];
 }

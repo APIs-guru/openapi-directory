@@ -1,14 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import retentionaction_enum
-from . import foldername_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class FolderConfiguration:
-    action: retentionaction_enum.RetentionActionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Action' }})
-    name: foldername_enum.FolderNameEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
-    period: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Period' }})
+    r"""FolderConfiguration
+    The configuration applied to an organization's folders by its retention policy.
+    """
+    
+    action: RetentionActionEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Action') }})
+    name: FolderNameEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
+    period: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Period') }})
     

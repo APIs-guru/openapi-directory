@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { LogSetup } from "./logsetup";
 /**
  * An object representing the logging configuration for resources in your cluster.

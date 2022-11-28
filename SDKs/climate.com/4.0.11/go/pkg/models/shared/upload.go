@@ -12,6 +12,8 @@ const (
 	UploadContentTypeEnumImageVndClimateRgbGeotiff         UploadContentTypeEnum = "image/vnd.climate.rgb.geotiff"
 )
 
+// Upload
+// Client request to upload data for a user.
 type Upload struct {
 	ContentType UploadContentTypeEnum  `json:"contentType"`
 	Length      int64                  `json:"length"`

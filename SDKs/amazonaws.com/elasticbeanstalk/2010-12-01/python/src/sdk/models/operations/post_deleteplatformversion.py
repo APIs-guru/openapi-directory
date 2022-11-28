@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDeletePlatformVersionActionEnum(str, Enum):
     DELETE_PLATFORM_VERSION = "DeletePlatformVersion"
@@ -10,8 +14,8 @@ class PostDeletePlatformVersionVersionEnum(str, Enum):
 
 @dataclass
 class PostDeletePlatformVersionQueryParams:
-    action: PostDeletePlatformVersionActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDeletePlatformVersionVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDeletePlatformVersionActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDeletePlatformVersionVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDeletePlatformVersionHeaders:
 
 @dataclass
 class PostDeletePlatformVersionRequest:
-    query_params: PostDeletePlatformVersionQueryParams = field(default=None)
-    headers: PostDeletePlatformVersionHeaders = field(default=None)
+    headers: PostDeletePlatformVersionHeaders = field()
+    query_params: PostDeletePlatformVersionQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDeletePlatformVersionResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

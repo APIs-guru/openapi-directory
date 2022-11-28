@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://comprehendmedical.{region}.amazonaws.com",
 	"https://comprehendmedical.{region}.amazonaws.com",
 	"http://comprehendmedical.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/comprehendmedical/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// DescribeEntitiesDetectionV2Job - Gets the properties associated with a medical entities detection job. Use this operation to get the status of a detection job.
 func (s *SDK) DescribeEntitiesDetectionV2Job(ctx context.Context, request operations.DescribeEntitiesDetectionV2JobRequest) (*operations.DescribeEntitiesDetectionV2JobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=ComprehendMedical_20181030.DescribeEntitiesDetectionV2Job"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -81,7 +108,7 @@ func (s *SDK) DescribeEntitiesDetectionV2Job(ctx context.Context, request operat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -151,8 +178,9 @@ func (s *SDK) DescribeEntitiesDetectionV2Job(ctx context.Context, request operat
 	return res, nil
 }
 
+// DescribeIcd10CmInferenceJob - Gets the properties associated with an InferICD10CM job. Use this operation to get the status of an inference job.
 func (s *SDK) DescribeIcd10CmInferenceJob(ctx context.Context, request operations.DescribeIcd10CmInferenceJobRequest) (*operations.DescribeIcd10CmInferenceJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=ComprehendMedical_20181030.DescribeICD10CMInferenceJob"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -172,7 +200,7 @@ func (s *SDK) DescribeIcd10CmInferenceJob(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -242,8 +270,9 @@ func (s *SDK) DescribeIcd10CmInferenceJob(ctx context.Context, request operation
 	return res, nil
 }
 
+// DescribePhiDetectionJob - Gets the properties associated with a protected health information (PHI) detection job. Use this operation to get the status of a detection job.
 func (s *SDK) DescribePhiDetectionJob(ctx context.Context, request operations.DescribePhiDetectionJobRequest) (*operations.DescribePhiDetectionJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=ComprehendMedical_20181030.DescribePHIDetectionJob"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -263,7 +292,7 @@ func (s *SDK) DescribePhiDetectionJob(ctx context.Context, request operations.De
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -333,8 +362,9 @@ func (s *SDK) DescribePhiDetectionJob(ctx context.Context, request operations.De
 	return res, nil
 }
 
+// DescribeRxNormInferenceJob - Gets the properties associated with an InferRxNorm job. Use this operation to get the status of an inference job.
 func (s *SDK) DescribeRxNormInferenceJob(ctx context.Context, request operations.DescribeRxNormInferenceJobRequest) (*operations.DescribeRxNormInferenceJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=ComprehendMedical_20181030.DescribeRxNormInferenceJob"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -354,7 +384,7 @@ func (s *SDK) DescribeRxNormInferenceJob(ctx context.Context, request operations
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -424,8 +454,9 @@ func (s *SDK) DescribeRxNormInferenceJob(ctx context.Context, request operations
 	return res, nil
 }
 
+// DetectEntities - <p>The <code>DetectEntities</code> operation is deprecated. You should use the <a>DetectEntitiesV2</a> operation instead.</p> <p> Inspects the clinical text for a variety of medical entities and returns specific information about them such as entity category, location, and confidence score on that information .</p>
 func (s *SDK) DetectEntities(ctx context.Context, request operations.DetectEntitiesRequest) (*operations.DetectEntitiesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=ComprehendMedical_20181030.DetectEntities"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -445,7 +476,7 @@ func (s *SDK) DetectEntities(ctx context.Context, request operations.DetectEntit
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -535,8 +566,9 @@ func (s *SDK) DetectEntities(ctx context.Context, request operations.DetectEntit
 	return res, nil
 }
 
+// DetectEntitiesV2 - <p>Inspects the clinical text for a variety of medical entities and returns specific information about them such as entity category, location, and confidence score on that information. Amazon Comprehend Medical only detects medical entities in English language texts.</p> <p>The <code>DetectEntitiesV2</code> operation replaces the <a>DetectEntities</a> operation. This new action uses a different model for determining the entities in your medical text and changes the way that some entities are returned in the output. You should use the <code>DetectEntitiesV2</code> operation in all new applications.</p> <p>The <code>DetectEntitiesV2</code> operation returns the <code>Acuity</code> and <code>Direction</code> entities as attributes instead of types. </p>
 func (s *SDK) DetectEntitiesV2(ctx context.Context, request operations.DetectEntitiesV2Request) (*operations.DetectEntitiesV2Response, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=ComprehendMedical_20181030.DetectEntitiesV2"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -556,7 +588,7 @@ func (s *SDK) DetectEntitiesV2(ctx context.Context, request operations.DetectEnt
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -646,8 +678,9 @@ func (s *SDK) DetectEntitiesV2(ctx context.Context, request operations.DetectEnt
 	return res, nil
 }
 
+// DetectPhi -  Inspects the clinical text for protected health information (PHI) entities and returns the entity category, location, and confidence score for each entity. Amazon Comprehend Medical only detects entities in English language texts.
 func (s *SDK) DetectPhi(ctx context.Context, request operations.DetectPhiRequest) (*operations.DetectPhiResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=ComprehendMedical_20181030.DetectPHI"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -667,7 +700,7 @@ func (s *SDK) DetectPhi(ctx context.Context, request operations.DetectPhiRequest
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -757,8 +790,9 @@ func (s *SDK) DetectPhi(ctx context.Context, request operations.DetectPhiRequest
 	return res, nil
 }
 
+// InferIcd10Cm - InferICD10CM detects medical conditions as entities listed in a patient record and links those entities to normalized concept identifiers in the ICD-10-CM knowledge base from the Centers for Disease Control. Amazon Comprehend Medical only detects medical entities in English language texts.
 func (s *SDK) InferIcd10Cm(ctx context.Context, request operations.InferIcd10CmRequest) (*operations.InferIcd10CmResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=ComprehendMedical_20181030.InferICD10CM"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -778,7 +812,7 @@ func (s *SDK) InferIcd10Cm(ctx context.Context, request operations.InferIcd10CmR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -868,8 +902,9 @@ func (s *SDK) InferIcd10Cm(ctx context.Context, request operations.InferIcd10CmR
 	return res, nil
 }
 
+// InferRxNorm - InferRxNorm detects medications as entities listed in a patient record and links to the normalized concept identifiers in the RxNorm database from the National Library of Medicine. Amazon Comprehend Medical only detects medical entities in English language texts.
 func (s *SDK) InferRxNorm(ctx context.Context, request operations.InferRxNormRequest) (*operations.InferRxNormResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=ComprehendMedical_20181030.InferRxNorm"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -889,7 +924,7 @@ func (s *SDK) InferRxNorm(ctx context.Context, request operations.InferRxNormReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -979,8 +1014,9 @@ func (s *SDK) InferRxNorm(ctx context.Context, request operations.InferRxNormReq
 	return res, nil
 }
 
+// ListEntitiesDetectionV2Jobs - Gets a list of medical entity detection jobs that you have submitted.
 func (s *SDK) ListEntitiesDetectionV2Jobs(ctx context.Context, request operations.ListEntitiesDetectionV2JobsRequest) (*operations.ListEntitiesDetectionV2JobsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=ComprehendMedical_20181030.ListEntitiesDetectionV2Jobs"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1000,7 +1036,7 @@ func (s *SDK) ListEntitiesDetectionV2Jobs(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1070,8 +1106,9 @@ func (s *SDK) ListEntitiesDetectionV2Jobs(ctx context.Context, request operation
 	return res, nil
 }
 
+// ListIcd10CmInferenceJobs - Gets a list of InferICD10CM jobs that you have submitted.
 func (s *SDK) ListIcd10CmInferenceJobs(ctx context.Context, request operations.ListIcd10CmInferenceJobsRequest) (*operations.ListIcd10CmInferenceJobsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=ComprehendMedical_20181030.ListICD10CMInferenceJobs"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1091,7 +1128,7 @@ func (s *SDK) ListIcd10CmInferenceJobs(ctx context.Context, request operations.L
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1161,8 +1198,9 @@ func (s *SDK) ListIcd10CmInferenceJobs(ctx context.Context, request operations.L
 	return res, nil
 }
 
+// ListPhiDetectionJobs - Gets a list of protected health information (PHI) detection jobs that you have submitted.
 func (s *SDK) ListPhiDetectionJobs(ctx context.Context, request operations.ListPhiDetectionJobsRequest) (*operations.ListPhiDetectionJobsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=ComprehendMedical_20181030.ListPHIDetectionJobs"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1182,7 +1220,7 @@ func (s *SDK) ListPhiDetectionJobs(ctx context.Context, request operations.ListP
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1252,8 +1290,9 @@ func (s *SDK) ListPhiDetectionJobs(ctx context.Context, request operations.ListP
 	return res, nil
 }
 
+// ListRxNormInferenceJobs - Gets a list of InferRxNorm jobs that you have submitted.
 func (s *SDK) ListRxNormInferenceJobs(ctx context.Context, request operations.ListRxNormInferenceJobsRequest) (*operations.ListRxNormInferenceJobsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=ComprehendMedical_20181030.ListRxNormInferenceJobs"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1273,7 +1312,7 @@ func (s *SDK) ListRxNormInferenceJobs(ctx context.Context, request operations.Li
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1343,8 +1382,9 @@ func (s *SDK) ListRxNormInferenceJobs(ctx context.Context, request operations.Li
 	return res, nil
 }
 
+// StartEntitiesDetectionV2Job - Starts an asynchronous medical entity detection job for a collection of documents. Use the <code>DescribeEntitiesDetectionV2Job</code> operation to track the status of a job.
 func (s *SDK) StartEntitiesDetectionV2Job(ctx context.Context, request operations.StartEntitiesDetectionV2JobRequest) (*operations.StartEntitiesDetectionV2JobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=ComprehendMedical_20181030.StartEntitiesDetectionV2Job"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1364,7 +1404,7 @@ func (s *SDK) StartEntitiesDetectionV2Job(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1434,8 +1474,9 @@ func (s *SDK) StartEntitiesDetectionV2Job(ctx context.Context, request operation
 	return res, nil
 }
 
+// StartIcd10CmInferenceJob - Starts an asynchronous job to detect medical conditions and link them to the ICD-10-CM ontology. Use the <code>DescribeICD10CMInferenceJob</code> operation to track the status of a job.
 func (s *SDK) StartIcd10CmInferenceJob(ctx context.Context, request operations.StartIcd10CmInferenceJobRequest) (*operations.StartIcd10CmInferenceJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=ComprehendMedical_20181030.StartICD10CMInferenceJob"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1455,7 +1496,7 @@ func (s *SDK) StartIcd10CmInferenceJob(ctx context.Context, request operations.S
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1525,8 +1566,9 @@ func (s *SDK) StartIcd10CmInferenceJob(ctx context.Context, request operations.S
 	return res, nil
 }
 
+// StartPhiDetectionJob - Starts an asynchronous job to detect protected health information (PHI). Use the <code>DescribePHIDetectionJob</code> operation to track the status of a job.
 func (s *SDK) StartPhiDetectionJob(ctx context.Context, request operations.StartPhiDetectionJobRequest) (*operations.StartPhiDetectionJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=ComprehendMedical_20181030.StartPHIDetectionJob"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1546,7 +1588,7 @@ func (s *SDK) StartPhiDetectionJob(ctx context.Context, request operations.Start
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1616,8 +1658,9 @@ func (s *SDK) StartPhiDetectionJob(ctx context.Context, request operations.Start
 	return res, nil
 }
 
+// StartRxNormInferenceJob - Starts an asynchronous job to detect medication entities and link them to the RxNorm ontology. Use the <code>DescribeRxNormInferenceJob</code> operation to track the status of a job.
 func (s *SDK) StartRxNormInferenceJob(ctx context.Context, request operations.StartRxNormInferenceJobRequest) (*operations.StartRxNormInferenceJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=ComprehendMedical_20181030.StartRxNormInferenceJob"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1637,7 +1680,7 @@ func (s *SDK) StartRxNormInferenceJob(ctx context.Context, request operations.St
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1707,8 +1750,9 @@ func (s *SDK) StartRxNormInferenceJob(ctx context.Context, request operations.St
 	return res, nil
 }
 
+// StopEntitiesDetectionV2Job - Stops a medical entities detection job in progress.
 func (s *SDK) StopEntitiesDetectionV2Job(ctx context.Context, request operations.StopEntitiesDetectionV2JobRequest) (*operations.StopEntitiesDetectionV2JobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=ComprehendMedical_20181030.StopEntitiesDetectionV2Job"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1728,7 +1772,7 @@ func (s *SDK) StopEntitiesDetectionV2Job(ctx context.Context, request operations
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1788,8 +1832,9 @@ func (s *SDK) StopEntitiesDetectionV2Job(ctx context.Context, request operations
 	return res, nil
 }
 
+// StopIcd10CmInferenceJob - Stops an InferICD10CM inference job in progress.
 func (s *SDK) StopIcd10CmInferenceJob(ctx context.Context, request operations.StopIcd10CmInferenceJobRequest) (*operations.StopIcd10CmInferenceJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=ComprehendMedical_20181030.StopICD10CMInferenceJob"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1809,7 +1854,7 @@ func (s *SDK) StopIcd10CmInferenceJob(ctx context.Context, request operations.St
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1869,8 +1914,9 @@ func (s *SDK) StopIcd10CmInferenceJob(ctx context.Context, request operations.St
 	return res, nil
 }
 
+// StopPhiDetectionJob - Stops a protected health information (PHI) detection job in progress.
 func (s *SDK) StopPhiDetectionJob(ctx context.Context, request operations.StopPhiDetectionJobRequest) (*operations.StopPhiDetectionJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=ComprehendMedical_20181030.StopPHIDetectionJob"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1890,7 +1936,7 @@ func (s *SDK) StopPhiDetectionJob(ctx context.Context, request operations.StopPh
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1950,8 +1996,9 @@ func (s *SDK) StopPhiDetectionJob(ctx context.Context, request operations.StopPh
 	return res, nil
 }
 
+// StopRxNormInferenceJob - Stops an InferRxNorm inference job in progress.
 func (s *SDK) StopRxNormInferenceJob(ctx context.Context, request operations.StopRxNormInferenceJobRequest) (*operations.StopRxNormInferenceJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=ComprehendMedical_20181030.StopRxNormInferenceJob"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1971,7 +2018,7 @@ func (s *SDK) StopRxNormInferenceJob(ctx context.Context, request operations.Sto
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

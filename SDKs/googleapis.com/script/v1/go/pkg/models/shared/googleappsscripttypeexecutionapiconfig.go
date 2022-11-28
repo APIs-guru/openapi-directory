@@ -10,6 +10,8 @@ const (
 	GoogleAppsScriptTypeExecutionAPIConfigAccessEnumAnyoneAnonymous GoogleAppsScriptTypeExecutionAPIConfigAccessEnum = "ANYONE_ANONYMOUS"
 )
 
+// GoogleAppsScriptTypeExecutionAPIConfig
+// API executable entry point configuration.
 type GoogleAppsScriptTypeExecutionAPIConfig struct {
 	Access *GoogleAppsScriptTypeExecutionAPIConfigAccessEnum `json:"access,omitempty"`
 }

@@ -1,8 +1,10 @@
+import base64
 import cgi
 import json
 import re
 from dataclasses import Field, dataclass, fields, is_dataclass, make_dataclass
-from typing import Callable, List, Tuple
+from datetime import date, datetime
+from typing import Callable, List, Tuple, Union, get_args, get_origin
 from xmlrpc.client import boolean
 
 import requests
@@ -10,8 +12,11 @@ from dataclasses_json import DataClassJsonMixin
 
 
 class SecurityClient:
-    client: requests.Session = requests.Session()
+    client: requests.Session
     query_params: dict[str, str] = {}
+
+    def __init__(self, client: requests.Session):
+        self.client = client
 
     def request(self, method, url, **kwargs):
         params = kwargs.get('params', {})
@@ -20,8 +25,8 @@ class SecurityClient:
         return self.client.request(method, url, **kwargs)
 
 
-def configure_security_client(security: dataclass):
-    client = SecurityClient()
+def configure_security_client(client: requests.Session, security: dataclass):
+    client = SecurityClient(client)
 
     sec_fields: Tuple[Field, ...] = fields(security)
     for sec_field in sec_fields:
@@ -52,22 +57,28 @@ def _parse_security_option(client: SecurityClient, option: dataclass):
 
 
 def _parse_security_scheme(client: SecurityClient, scheme_metadata: dict, scheme: dataclass):
+    scheme_type = scheme_metadata.get('type')
+    sub_type = scheme_metadata.get('sub_type')
+
+    if scheme_type == 'http' and sub_type == 'basic':
+        _parse_basic_auth_scheme(client, scheme)
+        return
+
     scheme_fields: Tuple[Field, ...] = fields(scheme)
     for scheme_field in scheme_fields:
         metadata = scheme_field.metadata.get('security')
         if metadata is None or metadata.get('field_name') is None:
             continue
 
-        scheme_type = scheme_metadata.get('type')
         header_name = metadata.get('field_name')
         value = getattr(scheme, scheme_field.name)
 
         if scheme_type == "apiKey":
-            if scheme_metadata.get('sub_type') == 'header':
+            if sub_type == 'header':
                 client.client.headers[header_name] = value
-            elif scheme_metadata.get('sub_type') == 'query':
+            elif sub_type == 'query':
                 client.query_params[header_name] = value
-            elif scheme_metadata.get('sub_type') == 'cookie':
+            elif sub_type == 'cookie':
                 client.client.cookies[header_name] = value
             else:
                 raise Exception('not supported')
@@ -76,12 +87,33 @@ def _parse_security_scheme(client: SecurityClient, scheme_metadata: dict, scheme
         elif scheme_type == 'oauth2':
             client.client.headers[header_name] = value
         elif scheme_type == 'http':
-            if scheme_metadata.get('sub_type') == 'bearer' or scheme_metadata.get('sub_type') == 'basic':
+            if sub_type == 'bearer':
                 client.client.headers[header_name] = value
             else:
                 raise Exception('not supported')
         else:
             raise Exception('not supported')
+
+
+def _parse_basic_auth_scheme(client: SecurityClient, scheme: dataclass):
+    username, password = ""
+
+    scheme_fields: Tuple[Field, ...] = fields(scheme)
+    for scheme_field in scheme_fields:
+        metadata = scheme_field.metadata.get('security')
+        if metadata is None or metadata.get('field_name') is None:
+            continue
+
+        field_name = metadata.get('field_name')
+        value = getattr(scheme, scheme_field.name)
+
+        if field_name == 'username':
+            username = value
+        if field_name == 'password':
+            password = value
+
+    data = f'{username}:{password}'.encode()
+    client.client.headers['Authorization'] = f'Basic {base64.b64encode(data)}'
 
 
 def generate_url(server_url: str, path: str, path_params: dataclass) -> str:
@@ -92,10 +124,53 @@ def generate_url(server_url: str, path: str, path_params: dataclass) -> str:
             continue
         if param_metadata.get('style', 'simple') == 'simple':
             param = getattr(path_params, f.name)
-            path = path.replace(
-                '{' + param_metadata.get('field_name', f.name) + '}', str(param), 1)
+            if type(param) is list:
+                pp_vals: list[str] = []
+                for pp_val in param:
+                    pp_vals.append(str(pp_val))
+                path = path.replace(
+                    '{' + param_metadata.get('field_name', f.name) + '}', ",".join(pp_vals), 1)
+            elif type(param) is map:
+                pp_vals: list[str] = []
+                for pp_key in param:
+                    if param_metadata.get('explode'):
+                        pp_vals.append(f"{pp_key}={param[pp_key]}")
+                    else:
+                        pp_vals.append(f"{pp_key},{param[pp_key]}")
+                path = path.replace(
+                    '{' + param_metadata.get('field_name', f.name) + '}', ",".join(pp_vals), 1)
+            elif not isinstance(param, (str, int, float, complex, bool)):
+                pp_vals: list[str] = []
+                attrs: list[str] = [p for p in dir(param) if not p.startswith(
+                    '__') and not callable(getattr(param, p))]
+                for attr in attrs:
+                    field: Field = _get_field_from_attr(param, attr)
+                    param_field_val = getattr(param, attr)
+                    if field is not None and is_optional(field) and param_field_val is None:
+                        continue
+                    elif param_metadata.get('explode'):
+                        pp_vals.append(f"{attr}={param_field_val}")
+                    else:
+                        pp_vals.append(f"{attr},{param_field_val}")
+                path = path.replace(
+                    '{' + param_metadata.get('field_name', f.name) + '}', ",".join(pp_vals), 1)
+            else:
+                path = path.replace(
+                    '{' + param_metadata.get('field_name', f.name) + '}', str(param), 1)
 
     return server_url.removesuffix("/") + path
+
+
+def _get_field_from_attr(obj, attr: str) -> Field:
+    pp_fields: Tuple[Field, ...] = fields(obj)
+    for pp_field in pp_fields:
+        if pp_field.name == attr:
+            return pp_field
+    return None
+
+
+def is_optional(field):
+    return get_origin(field) is Union and type(None) in get_args(field)
 
 
 def replace_parameters(string_with_params: str, params: dict[str, str]) -> str:
@@ -176,7 +251,8 @@ def _get_deep_object_query_params(metadata: dict, field_name: str, obj: any) -> 
             obj_param_metadata = obj_field.metadata.get('query_param')
             if not obj_param_metadata:
                 continue
-            params[f'{metadata.get("field_name", field_name)}[{obj_param_metadata.get("field_name", obj_field.name)}]'] = [
+            params[
+                f'{metadata.get("field_name", field_name)}[{obj_param_metadata.get("field_name", obj_field.name)}]'] = [
                 getattr(obj, obj_field.name)]
     elif isinstance(obj, dict):
         for key, value in obj.items():
@@ -217,7 +293,7 @@ def serialize_request_body(request: dataclass) -> Tuple[str, any, any]:
             request_metadata = f.metadata.get('request')
             break
 
-    if not request_metadata is None:
+    if request_metadata is not None:
         # single request
         return serialize_content_type("request", request_metadata, request_val)
 
@@ -285,14 +361,14 @@ def serialize_multipart_form(media_type: str, request: dataclass) -> Tuple[str, 
             form.append([field_name, [file_name, content]])
         elif field_metadata.get("json") is True:
             form.append([field_metadata.get("field_name", f.name), [
-                        None, marshal_json(getattr(request, f.name)), "application/json"]])
+                None, marshal_json(getattr(request, f.name)), "application/json"]])
         else:
             val = getattr(request, f.name)
             field_name = field_metadata.get("field_name", f.name)
 
             if isinstance(val, list):
                 for value in val:
-                    form.append([field_name+"[]", [None, value]])
+                    form.append([field_name + "[]", [None, value]])
             else:
                 form.append([field_name, [None, val]])
     return media_type, None, form
@@ -482,3 +558,27 @@ def match_content_type(content_type: str, pattern: str) -> boolean:
             return True
 
     return False
+
+
+def datetimeisoformat(optional: bool):
+    def isoformatoptional(v):
+        if optional and v is None:
+            return None
+        return datetime.isoformat(v)
+
+    return isoformatoptional
+
+
+def dateisoformat(optional: bool):
+    def isoformatoptional(v):
+        if optional and v is None:
+            return None
+        return date.isoformat(v)
+
+    return isoformatoptional
+
+
+def field_name(name):
+    def override(_, _field_name=name):
+        return _field_name
+    return override

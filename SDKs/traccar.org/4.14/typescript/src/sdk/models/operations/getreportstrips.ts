@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetReportsTripsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=deviceId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=deviceId" })
   deviceId?: number[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=from" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=from" })
   from: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=groupId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=groupId" })
   groupId?: number[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=to" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=to" })
   to: Date;
 }
 
 
 export class GetReportsTripsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetReportsTripsQueryParams;
 }
 
 
 export class GetReportsTripsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.ReportTrips })
+  @SpeakeasyMetadata({ elemType: shared.ReportTrips })
   reportTrips?: shared.ReportTrips[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

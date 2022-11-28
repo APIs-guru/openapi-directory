@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class FileGetFromTaskPathParams extends SpeakeasyBase {
     fileName: string;
     jobId: string;

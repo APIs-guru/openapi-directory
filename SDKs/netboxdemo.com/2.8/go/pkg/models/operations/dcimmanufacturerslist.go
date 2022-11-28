@@ -46,15 +46,15 @@ type DcimManufacturersListQueryParams struct {
 	SlugNisw        *string `queryParam:"style=form,explode=true,name=slug__nisw"`
 }
 
-type DcimManufacturersListRequest struct {
-	QueryParams DcimManufacturersListQueryParams
-}
-
 type DcimManufacturersList200ApplicationJSON struct {
 	Count    int64                 `json:"count"`
 	Next     *string               `json:"next,omitempty"`
 	Previous *string               `json:"previous,omitempty"`
 	Results  []shared.Manufacturer `json:"results"`
+}
+
+type DcimManufacturersListRequest struct {
+	QueryParams DcimManufacturersListQueryParams
 }
 
 type DcimManufacturersListResponse struct {

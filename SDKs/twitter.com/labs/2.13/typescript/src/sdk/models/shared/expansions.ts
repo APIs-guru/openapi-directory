@@ -1,24 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Photo } from "./photo";
 import { Video } from "./video";
 import { AnimatedGif } from "./animatedgif";
 import { Poll } from "./poll";
 
 
+
 export class Expansions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=media" })
+  @SpeakeasyMetadata({ data: "json, name=media" })
   media?: any[];
 
-  @Metadata({ data: "json, name=places" })
+  @SpeakeasyMetadata({ data: "json, name=places" })
   places?: any[];
 
-  @Metadata({ data: "json, name=polls", elemType: shared.Poll })
+  @SpeakeasyMetadata({ data: "json, name=polls", elemType: Poll })
   polls?: Poll[];
 
-  @Metadata({ data: "json, name=tweets" })
+  @SpeakeasyMetadata({ data: "json, name=tweets" })
   tweets?: any[];
 
-  @Metadata({ data: "json, name=users" })
+  @SpeakeasyMetadata({ data: "json, name=users" })
   users?: any[];
 }

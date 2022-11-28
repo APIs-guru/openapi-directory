@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import List,Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,36 +14,71 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
-    
-    def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
+            self._server_url = server_url
 
+        
+    
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        
+    
+
+    def config_security(self, security: shared.Security):
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        
+    
+    
     
     def communication(self, request: operations.CommunicationRequest) -> operations.CommunicationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Communication & Tonality
+        Identify the purpose and writing style of a written text.
+        
+        Supported Languages: [`ar`, `de`, `en`, `es`, `fr`, `it`, `nl`, `pt`, `ru`, `tr`, `zh`]
+        
+        Returned labels:
+        * action-seeking
+        * fact-oriented
+        * information-seeking
+        * self-revealing
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/communication"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -59,21 +97,33 @@ class SDK:
 
     
     def ekman_emotion(self, request: operations.EkmanEmotionRequest) -> operations.EkmanEmotionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Emotion Analysis
+        Detect the emotions of the text based on Ekman.
+        
+        Supported Langauges: [`en`, `de`, `es`]
+        
+        Returned labels:
+        * anger
+        * disgust
+        * fear
+        * joy
+        * sadness
+        * surprise
+        * no-emotion
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/ekman-emotion"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -92,21 +142,32 @@ class SDK:
 
     
     def emotion(self, request: operations.EmotionRequest) -> operations.EmotionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Emotion Analysis
+        Detect the emotions of the text.
+        
+        Supported Langauges: [`en`, `de`, `es`]
+        
+        Returned labels:
+        * anger
+        * joy
+        * love
+        * sadness
+        * surprise
+        * uncategorized
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/emotion"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -125,19 +186,24 @@ class SDK:
 
     
     def language_detection(self, request: operations.LanguageDetectionRequest) -> operations.LanguageDetectionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Language Detection
+        Identifies what language a text is written in. Only languages that our API supports can be analyzed.
+        
+        Returned labels:
+        * language_code of the detected language
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/language-detection"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -156,21 +222,29 @@ class SDK:
 
     
     def personality(self, request: operations.PersonalityRequest) -> operations.PersonalityResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Personality Traits
+        Predict the personality trait of author of any written text.
+        
+        Supported Languages: [`ar`, `de`, `en`, `es`, `fr`, `it`, `nl`, `pt`, `ru`, `tr`, `zh`]
+        
+        Returned labels:
+        
+        * emotional
+        * rational
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/personality"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -189,21 +263,28 @@ class SDK:
 
     
     def sentiment(self, request: operations.SentimentRequest) -> operations.SentimentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Sentiment Analysis
+        Evaluate the overall tonality of the text.
+        
+        Supported Languages: [`en`, `de`, `es`]
+        
+        Returned labels:
+        * positive
+        * negative
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/sentiment"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -222,21 +303,21 @@ class SDK:
 
     
     def topic_sentiment(self, request: operations.TopicSentimentRequest) -> operations.TopicSentimentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Extracts topics and sentiments and relates them.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/topic-sentiment"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

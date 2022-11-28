@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { QueryOperator } from "./queryoperator";
 import { Source } from "./source";
+
 
 
 // QuerySource
@@ -9,15 +9,15 @@ import { Source } from "./source";
  * List of sources that the user can search using the query API.
 **/
 export class QuerySource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=operators", elemType: shared.QueryOperator })
+  @SpeakeasyMetadata({ data: "json, name=operators", elemType: QueryOperator })
   operators?: QueryOperator[];
 
-  @Metadata({ data: "json, name=shortName" })
+  @SpeakeasyMetadata({ data: "json, name=shortName" })
   shortName?: string;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: Source;
 }

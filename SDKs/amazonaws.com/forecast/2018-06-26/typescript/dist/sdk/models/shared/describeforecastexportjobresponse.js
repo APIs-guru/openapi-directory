@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataDestination } from "./datadestination";
 var DescribeForecastExportJobResponse = /** @class */ (function (_super) {
     __extends(DescribeForecastExportJobResponse, _super);
@@ -30,35 +30,35 @@ var DescribeForecastExportJobResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CreationTime" }),
+        SpeakeasyMetadata({ data: "json, name=CreationTime" }),
         __metadata("design:type", Date)
     ], DescribeForecastExportJobResponse.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=Destination" }),
+        SpeakeasyMetadata({ data: "json, name=Destination" }),
         __metadata("design:type", DataDestination)
     ], DescribeForecastExportJobResponse.prototype, "destination", void 0);
     __decorate([
-        Metadata({ data: "json, name=ForecastArn" }),
+        SpeakeasyMetadata({ data: "json, name=ForecastArn" }),
         __metadata("design:type", String)
     ], DescribeForecastExportJobResponse.prototype, "forecastArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=ForecastExportJobArn" }),
+        SpeakeasyMetadata({ data: "json, name=ForecastExportJobArn" }),
         __metadata("design:type", String)
     ], DescribeForecastExportJobResponse.prototype, "forecastExportJobArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=ForecastExportJobName" }),
+        SpeakeasyMetadata({ data: "json, name=ForecastExportJobName" }),
         __metadata("design:type", String)
     ], DescribeForecastExportJobResponse.prototype, "forecastExportJobName", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastModificationTime" }),
+        SpeakeasyMetadata({ data: "json, name=LastModificationTime" }),
         __metadata("design:type", Date)
     ], DescribeForecastExportJobResponse.prototype, "lastModificationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=Message" }),
+        SpeakeasyMetadata({ data: "json, name=Message" }),
         __metadata("design:type", String)
     ], DescribeForecastExportJobResponse.prototype, "message", void 0);
     __decorate([
-        Metadata({ data: "json, name=Status" }),
+        SpeakeasyMetadata({ data: "json, name=Status" }),
         __metadata("design:type", String)
     ], DescribeForecastExportJobResponse.prototype, "status", void 0);
     return DescribeForecastExportJobResponse;

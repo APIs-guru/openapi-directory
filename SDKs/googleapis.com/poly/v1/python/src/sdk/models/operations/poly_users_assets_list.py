@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class PolyUsersAssetsListPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 class PolyUsersAssetsListVisibilityEnum(str, Enum):
     VISIBILITY_UNSPECIFIED = "VISIBILITY_UNSPECIFIED"
@@ -35,13 +36,13 @@ class PolyUsersAssetsListQueryParams:
 
 @dataclass
 class PolyUsersAssetsListRequest:
-    path_params: PolyUsersAssetsListPathParams = field(default=None)
-    query_params: PolyUsersAssetsListQueryParams = field(default=None)
+    path_params: PolyUsersAssetsListPathParams = field()
+    query_params: PolyUsersAssetsListQueryParams = field()
     
 
 @dataclass
 class PolyUsersAssetsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_user_assets_response: Optional[shared.ListUserAssetsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

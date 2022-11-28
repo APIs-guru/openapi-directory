@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BatchAlarmActionErrorEntry } from "./batchalarmactionerrorentry";
 
 
+
 export class BatchSnoozeAlarmResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errorEntries", elemType: shared.BatchAlarmActionErrorEntry })
+  @SpeakeasyMetadata({ data: "json, name=errorEntries", elemType: BatchAlarmActionErrorEntry })
   errorEntries?: BatchAlarmActionErrorEntry[];
 }

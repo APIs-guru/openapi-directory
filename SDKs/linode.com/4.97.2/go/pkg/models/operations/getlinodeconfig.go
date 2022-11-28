@@ -9,26 +9,18 @@ type GetLinodeConfigPathParams struct {
 	LinodeID int64 `pathParam:"style=simple,explode=false,name=linodeId"`
 }
 
-type GetLinodeConfigSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type GetLinodeConfigSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type GetLinodeConfigSecurity struct {
-	Option1 *GetLinodeConfigSecurityOption1 `security:"option"`
-	Option2 *GetLinodeConfigSecurityOption2 `security:"option"`
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
+}
+
+type GetLinodeConfigDefaultApplicationJSON struct {
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type GetLinodeConfigRequest struct {
 	PathParams GetLinodeConfigPathParams
 	Security   GetLinodeConfigSecurity
-}
-
-type GetLinodeConfigDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type GetLinodeConfigResponse struct {

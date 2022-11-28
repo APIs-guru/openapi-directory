@@ -1,15 +1,20 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import duration
-from . import tcpretrypolicyevent_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class HTTPRetryPolicy:
-    http_retry_events: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'httpRetryEvents' }})
-    max_retries: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxRetries' }})
-    per_retry_timeout: duration.Duration = field(default=None, metadata={'dataclasses_json': { 'field_name': 'perRetryTimeout' }})
-    tcp_retry_events: Optional[List[tcpretrypolicyevent_enum.TCPRetryPolicyEventEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tcpRetryEvents' }})
+    r"""HTTPRetryPolicy
+    An object that represents a retry policy. Specify at least one value for at least one of the types of <code>RetryEvents</code>, a value for <code>maxRetries</code>, and a value for <code>perRetryTimeout</code>. Both <code>server-error</code> and <code>gateway-error</code> under <code>httpRetryEvents</code> include the Envoy <code>reset</code> policy. For more information on the <code>reset</code> policy, see the <a href=\"https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/router_filter#x-envoy-retry-on\">Envoy documentation</a>.
+    """
+    
+    max_retries: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxRetries') }})
+    per_retry_timeout: Duration = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('perRetryTimeout') }})
+    http_retry_events: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('httpRetryEvents') }})
+    tcp_retry_events: Optional[List[TCPRetryPolicyEventEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tcpRetryEvents') }})
     

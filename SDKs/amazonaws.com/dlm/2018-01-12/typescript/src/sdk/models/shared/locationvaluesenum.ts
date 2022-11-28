@@ -1,6 +1,7 @@
 
 
+
 export enum LocationValuesEnum {
-    Cloud = "CLOUD"
-,    OutpostLocal = "OUTPOST_LOCAL"
+    Cloud = "CLOUD",
+    OutpostLocal = "OUTPOST_LOCAL"
 }

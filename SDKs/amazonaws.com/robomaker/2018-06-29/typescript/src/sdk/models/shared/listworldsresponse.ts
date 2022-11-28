@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WorldSummary } from "./worldsummary";
 
 
+
 export class ListWorldsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=worldSummaries", elemType: shared.WorldSummary })
+  @SpeakeasyMetadata({ data: "json, name=worldSummaries", elemType: WorldSummary })
   worldSummaries?: WorldSummary[];
 }

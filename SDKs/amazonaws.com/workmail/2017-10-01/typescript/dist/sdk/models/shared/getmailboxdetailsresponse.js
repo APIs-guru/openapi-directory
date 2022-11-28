@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetMailboxDetailsResponse = /** @class */ (function (_super) {
     __extends(GetMailboxDetailsResponse, _super);
     function GetMailboxDetailsResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=MailboxQuota" }),
+        SpeakeasyMetadata({ data: "json, name=MailboxQuota" }),
         __metadata("design:type", Number)
     ], GetMailboxDetailsResponse.prototype, "mailboxQuota", void 0);
     __decorate([
-        Metadata({ data: "json, name=MailboxSize" }),
+        SpeakeasyMetadata({ data: "json, name=MailboxSize" }),
         __metadata("design:type", Number)
     ], GetMailboxDetailsResponse.prototype, "mailboxSize", void 0);
     return GetMailboxDetailsResponse;

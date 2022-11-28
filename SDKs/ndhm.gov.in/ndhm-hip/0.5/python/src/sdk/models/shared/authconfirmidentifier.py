@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import authconfirmidentifiertype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AuthConfirmIdentifier:
-    type: authconfirmidentifiertype_enum.AuthConfirmIdentifierTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    value: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    type: AuthConfirmIdentifierTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    value: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     

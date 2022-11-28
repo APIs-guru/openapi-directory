@@ -4,7 +4,7 @@ from typing import Any,Optional
 
 @dataclass
 class GetInstancesIDMetadataPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -14,13 +14,13 @@ class GetInstancesIDMetadataQueryParams:
 
 @dataclass
 class GetInstancesIDMetadataRequest:
-    path_params: GetInstancesIDMetadataPathParams = field(default=None)
-    query_params: GetInstancesIDMetadataQueryParams = field(default=None)
+    path_params: GetInstancesIDMetadataPathParams = field()
+    query_params: GetInstancesIDMetadataQueryParams = field()
     
 
 @dataclass
 class GetInstancesIDMetadataResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_instances_id_metadata_200_application_json_any: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

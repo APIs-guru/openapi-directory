@@ -9,6 +9,8 @@ const (
 	InventoryTypeTargetingInventoryTypesEnumVideoPlayer              InventoryTypeTargetingInventoryTypesEnum = "VIDEO_PLAYER"
 )
 
+// InventoryTypeTargeting
+// Targeting of the inventory types a bid request can originate from.
 type InventoryTypeTargeting struct {
 	InventoryTypes []InventoryTypeTargetingInventoryTypesEnum `json:"inventoryTypes,omitempty"`
 }

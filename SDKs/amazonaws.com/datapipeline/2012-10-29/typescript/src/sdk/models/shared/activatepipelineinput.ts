@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ParameterValue } from "./parametervalue";
+
 
 
 // ActivatePipelineInput
@@ -8,12 +8,12 @@ import { ParameterValue } from "./parametervalue";
  * Contains the parameters for ActivatePipeline.
 **/
 export class ActivatePipelineInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=parameterValues", elemType: shared.ParameterValue })
+  @SpeakeasyMetadata({ data: "json, name=parameterValues", elemType: ParameterValue })
   parameterValues?: ParameterValue[];
 
-  @Metadata({ data: "json, name=pipelineId" })
+  @SpeakeasyMetadata({ data: "json, name=pipelineId" })
   pipelineId: string;
 
-  @Metadata({ data: "json, name=startTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=startTimestamp" })
   startTimestamp?: Date;
 }

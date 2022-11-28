@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var ChannelStateEnum;
 (function (ChannelStateEnum) {
     ChannelStateEnum["StateUnspecified"] = "STATE_UNSPECIFIED";
@@ -40,41 +40,65 @@ var Channel = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=activationToken" }),
+        SpeakeasyMetadata({ data: "json, name=activationToken" }),
         __metadata("design:type", String)
     ], Channel.prototype, "activationToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", String)
     ], Channel.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=cryptoKeyName" }),
+        SpeakeasyMetadata({ data: "json, name=cryptoKeyName" }),
         __metadata("design:type", String)
     ], Channel.prototype, "cryptoKeyName", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Channel.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=provider" }),
+        SpeakeasyMetadata({ data: "json, name=provider" }),
         __metadata("design:type", String)
     ], Channel.prototype, "provider", void 0);
     __decorate([
-        Metadata({ data: "json, name=pubsubTopic" }),
+        SpeakeasyMetadata({ data: "json, name=pubsubTopic" }),
         __metadata("design:type", String)
     ], Channel.prototype, "pubsubTopic", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], Channel.prototype, "state", void 0);
     __decorate([
-        Metadata({ data: "json, name=uid" }),
+        SpeakeasyMetadata({ data: "json, name=uid" }),
         __metadata("design:type", String)
     ], Channel.prototype, "uid", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateTime" }),
+        SpeakeasyMetadata({ data: "json, name=updateTime" }),
         __metadata("design:type", String)
     ], Channel.prototype, "updateTime", void 0);
     return Channel;
 }(SpeakeasyBase));
 export { Channel };
+// ChannelInput
+/**
+ * A representation of the Channel resource. A Channel is a resource on which event providers publish their events. The published events are delivered through the transport associated with the channel. Note that a channel is associated with exactly one event provider.
+**/
+var ChannelInput = /** @class */ (function (_super) {
+    __extends(ChannelInput, _super);
+    function ChannelInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=cryptoKeyName" }),
+        __metadata("design:type", String)
+    ], ChannelInput.prototype, "cryptoKeyName", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=name" }),
+        __metadata("design:type", String)
+    ], ChannelInput.prototype, "name", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=provider" }),
+        __metadata("design:type", String)
+    ], ChannelInput.prototype, "provider", void 0);
+    return ChannelInput;
+}(SpeakeasyBase));
+export { ChannelInput };

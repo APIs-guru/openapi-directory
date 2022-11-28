@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://api.nexmo.com/v3/media",
 }
 
@@ -19,9 +19,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -32,27 +36,46 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// DeleteAMediaItem - Delete a media item
+// Delete a previously created media item by ID.
 func (s *SDK) DeleteAMediaItem(ctx context.Context) (*operations.DeleteAMediaItemResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/:id"
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -60,7 +83,7 @@ func (s *SDK) DeleteAMediaItem(ctx context.Context) (*operations.DeleteAMediaIte
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -81,8 +104,10 @@ func (s *SDK) DeleteAMediaItem(ctx context.Context) (*operations.DeleteAMediaIte
 	return res, nil
 }
 
+// ListAndSearchMediaItems - List and search media items
+// Retrieve information about multiple media items with the ability to search and paginate.
 func (s *SDK) ListAndSearchMediaItems(ctx context.Context, request operations.ListAndSearchMediaItemsRequest) (*operations.ListAndSearchMediaItemsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -92,7 +117,7 @@ func (s *SDK) ListAndSearchMediaItems(ctx context.Context, request operations.Li
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -122,8 +147,10 @@ func (s *SDK) ListAndSearchMediaItems(ctx context.Context, request operations.Li
 	return res, nil
 }
 
+// RetrieveAMediaItem - Retrieve a media item
+// Retrieve information about a single media item
 func (s *SDK) RetrieveAMediaItem(ctx context.Context) (*operations.RetrieveAMediaItemResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/:id/info"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -131,7 +158,7 @@ func (s *SDK) RetrieveAMediaItem(ctx context.Context) (*operations.RetrieveAMedi
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -161,8 +188,10 @@ func (s *SDK) RetrieveAMediaItem(ctx context.Context) (*operations.RetrieveAMedi
 	return res, nil
 }
 
+// UpdateAMediaItem - Update a media item
+// Update a previously created media item by ID.
 func (s *SDK) UpdateAMediaItem(ctx context.Context, request operations.UpdateAMediaItemRequest) (*operations.UpdateAMediaItemResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/:id/info"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -177,7 +206,7 @@ func (s *SDK) UpdateAMediaItem(ctx context.Context, request operations.UpdateAMe
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

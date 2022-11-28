@@ -1,14 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { VulnerabilityLocation } from "./vulnerabilitylocation";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VulnerabilityLocation } from "./vulnerabilitylocation";
 
+
 export enum PackageIssueEffectiveSeverityEnum {
-    SeverityUnspecified = "SEVERITY_UNSPECIFIED"
-,    Minimal = "MINIMAL"
-,    Low = "LOW"
-,    Medium = "MEDIUM"
-,    High = "HIGH"
-,    Critical = "CRITICAL"
+    SeverityUnspecified = "SEVERITY_UNSPECIFIED",
+    Minimal = "MINIMAL",
+    Low = "LOW",
+    Medium = "MEDIUM",
+    High = "HIGH",
+    Critical = "CRITICAL"
 }
 
 
@@ -17,18 +17,37 @@ export enum PackageIssueEffectiveSeverityEnum {
  * This message wraps a location affected by a vulnerability and its associated fix (if one is available).
 **/
 export class PackageIssue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=affectedLocation" })
+  @SpeakeasyMetadata({ data: "json, name=affectedLocation" })
   affectedLocation?: VulnerabilityLocation;
 
-  @Metadata({ data: "json, name=effectiveSeverity" })
+  @SpeakeasyMetadata({ data: "json, name=effectiveSeverity" })
   effectiveSeverity?: PackageIssueEffectiveSeverityEnum;
 
-  @Metadata({ data: "json, name=fixedLocation" })
+  @SpeakeasyMetadata({ data: "json, name=fixedLocation" })
   fixedLocation?: VulnerabilityLocation;
 
-  @Metadata({ data: "json, name=packageType" })
+  @SpeakeasyMetadata({ data: "json, name=packageType" })
   packageType?: string;
 
-  @Metadata({ data: "json, name=severityName" })
+  @SpeakeasyMetadata({ data: "json, name=severityName" })
+  severityName?: string;
+}
+
+
+// PackageIssueInput
+/** 
+ * This message wraps a location affected by a vulnerability and its associated fix (if one is available).
+**/
+export class PackageIssueInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=affectedLocation" })
+  affectedLocation?: VulnerabilityLocation;
+
+  @SpeakeasyMetadata({ data: "json, name=fixedLocation" })
+  fixedLocation?: VulnerabilityLocation;
+
+  @SpeakeasyMetadata({ data: "json, name=packageType" })
+  packageType?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=severityName" })
   severityName?: string;
 }

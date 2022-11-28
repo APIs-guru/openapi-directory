@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class HealthcareProjectsLocationsDatasetsFhirStoresFhirObservationLastnPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class HealthcareProjectsLocationsDatasetsFhirStoresFhirObservationLastnQueryPara
 
 @dataclass
 class HealthcareProjectsLocationsDatasetsFhirStoresFhirObservationLastnSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class HealthcareProjectsLocationsDatasetsFhirStoresFhirObservationLastnRequest:
-    path_params: HealthcareProjectsLocationsDatasetsFhirStoresFhirObservationLastnPathParams = field(default=None)
-    query_params: HealthcareProjectsLocationsDatasetsFhirStoresFhirObservationLastnQueryParams = field(default=None)
-    security: HealthcareProjectsLocationsDatasetsFhirStoresFhirObservationLastnSecurity = field(default=None)
+    path_params: HealthcareProjectsLocationsDatasetsFhirStoresFhirObservationLastnPathParams = field()
+    query_params: HealthcareProjectsLocationsDatasetsFhirStoresFhirObservationLastnQueryParams = field()
+    security: HealthcareProjectsLocationsDatasetsFhirStoresFhirObservationLastnSecurity = field()
     
 
 @dataclass
 class HealthcareProjectsLocationsDatasetsFhirStoresFhirObservationLastnResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     http_body: Optional[shared.HTTPBody] = field(default=None)
-    status_code: int = field(default=None)
     

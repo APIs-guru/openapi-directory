@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EncryptionKey } from "./encryptionkey";
 import { NamespacedNames } from "./namespacednames";
 import { Namespaces } from "./namespaces";
+
 
 
 // BackupConfig
@@ -9,21 +10,21 @@ import { Namespaces } from "./namespaces";
  * BackupConfig defines the configuration of Backups created via this BackupPlan.
 **/
 export class BackupConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allNamespaces" })
+  @SpeakeasyMetadata({ data: "json, name=allNamespaces" })
   allNamespaces?: boolean;
 
-  @Metadata({ data: "json, name=encryptionKey" })
+  @SpeakeasyMetadata({ data: "json, name=encryptionKey" })
   encryptionKey?: EncryptionKey;
 
-  @Metadata({ data: "json, name=includeSecrets" })
+  @SpeakeasyMetadata({ data: "json, name=includeSecrets" })
   includeSecrets?: boolean;
 
-  @Metadata({ data: "json, name=includeVolumeData" })
+  @SpeakeasyMetadata({ data: "json, name=includeVolumeData" })
   includeVolumeData?: boolean;
 
-  @Metadata({ data: "json, name=selectedApplications" })
+  @SpeakeasyMetadata({ data: "json, name=selectedApplications" })
   selectedApplications?: NamespacedNames;
 
-  @Metadata({ data: "json, name=selectedNamespaces" })
+  @SpeakeasyMetadata({ data: "json, name=selectedNamespaces" })
   selectedNamespaces?: Namespaces;
 }

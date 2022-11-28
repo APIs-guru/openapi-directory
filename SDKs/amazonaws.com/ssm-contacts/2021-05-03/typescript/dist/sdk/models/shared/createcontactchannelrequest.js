@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContactChannelAddress } from "./contactchanneladdress";
 import { ChannelTypeEnum } from "./channeltypeenum";
 var CreateContactChannelRequest = /** @class */ (function (_super) {
@@ -31,27 +31,27 @@ var CreateContactChannelRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ContactId" }),
+        SpeakeasyMetadata({ data: "json, name=ContactId" }),
         __metadata("design:type", String)
     ], CreateContactChannelRequest.prototype, "contactId", void 0);
     __decorate([
-        Metadata({ data: "json, name=DeferActivation" }),
+        SpeakeasyMetadata({ data: "json, name=DeferActivation" }),
         __metadata("design:type", Boolean)
     ], CreateContactChannelRequest.prototype, "deferActivation", void 0);
     __decorate([
-        Metadata({ data: "json, name=DeliveryAddress" }),
+        SpeakeasyMetadata({ data: "json, name=DeliveryAddress" }),
         __metadata("design:type", ContactChannelAddress)
     ], CreateContactChannelRequest.prototype, "deliveryAddress", void 0);
     __decorate([
-        Metadata({ data: "json, name=IdempotencyToken" }),
+        SpeakeasyMetadata({ data: "json, name=IdempotencyToken" }),
         __metadata("design:type", String)
     ], CreateContactChannelRequest.prototype, "idempotencyToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], CreateContactChannelRequest.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=Type" }),
+        SpeakeasyMetadata({ data: "json, name=Type" }),
         __metadata("design:type", String)
     ], CreateContactChannelRequest.prototype, "type", void 0);
     return CreateContactChannelRequest;

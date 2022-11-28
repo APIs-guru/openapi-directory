@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { RecipientDetail } from "./recipientdetail";
 /**
  * Contains the configuration information of SMS notifications.

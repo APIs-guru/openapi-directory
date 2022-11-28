@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import uploadmetadata
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class StartAttachmentUploadResponse:
-    attachment_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AttachmentId' }})
-    upload_metadata: Optional[uploadmetadata.UploadMetadata] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'UploadMetadata' }})
+    attachment_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AttachmentId') }})
+    upload_metadata: Optional[UploadMetadata] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('UploadMetadata') }})
     

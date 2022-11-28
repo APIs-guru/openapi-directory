@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class PartnerCostCostTypeEnum(str, Enum):
     PARTNER_COST_TYPE_UNSPECIFIED = "PARTNER_COST_TYPE_UNSPECIFIED"
@@ -48,9 +50,13 @@ class PartnerCostInvoiceTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PartnerCost:
-    cost_type: Optional[PartnerCostCostTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'costType' }})
-    fee_amount: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'feeAmount' }})
-    fee_percentage_millis: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'feePercentageMillis' }})
-    fee_type: Optional[PartnerCostFeeTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'feeType' }})
-    invoice_type: Optional[PartnerCostInvoiceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'invoiceType' }})
+    r"""PartnerCost
+    Settings that control a partner cost. A partner cost is any type of expense involved in running a campaign, other than the costs of purchasing impressions (which is called the media cost) and using third-party audience segment data (data fee). Some examples of partner costs include the fees for using DV360, a third-party ad server, or a third-party ad serving verification service.
+    """
+    
+    cost_type: Optional[PartnerCostCostTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('costType') }})
+    fee_amount: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('feeAmount') }})
+    fee_percentage_millis: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('feePercentageMillis') }})
+    fee_type: Optional[PartnerCostFeeTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('feeType') }})
+    invoice_type: Optional[PartnerCostInvoiceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('invoiceType') }})
     

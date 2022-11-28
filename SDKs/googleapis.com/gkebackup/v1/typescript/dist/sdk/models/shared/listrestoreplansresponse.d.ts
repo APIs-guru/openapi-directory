@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { RestorePlan } from "./restoreplan";
 /**
  * Response message for ListRestorePlans.

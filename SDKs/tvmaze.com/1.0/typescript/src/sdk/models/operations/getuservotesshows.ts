@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
+
 
 export enum GetUserVotesShowsEmbedEnum {
     Show = "show"
@@ -7,24 +8,24 @@ export enum GetUserVotesShowsEmbedEnum {
 
 
 export class GetUserVotesShowsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=embed" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=embed" })
   embed?: GetUserVotesShowsEmbedEnum;
 }
 
 
 export class GetUserVotesShowsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetUserVotesShowsQueryParams;
 }
 
 
 export class GetUserVotesShowsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.ShowVote })
+  @SpeakeasyMetadata({ elemType: shared.ShowVote })
   showVotes?: shared.ShowVote[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

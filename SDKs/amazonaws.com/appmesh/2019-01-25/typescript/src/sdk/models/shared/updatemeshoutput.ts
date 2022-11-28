@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MeshData } from "./meshdata";
+
 
 
 // UpdateMeshOutput
@@ -7,6 +8,6 @@ import { MeshData } from "./meshdata";
  * <zonbook></zonbook><xhtml></xhtml>
 **/
 export class UpdateMeshOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=mesh" })
+  @SpeakeasyMetadata({ data: "json, name=mesh" })
   mesh: MeshData;
 }

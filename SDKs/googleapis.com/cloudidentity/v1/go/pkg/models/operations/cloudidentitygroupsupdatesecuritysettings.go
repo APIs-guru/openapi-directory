@@ -41,7 +41,7 @@ type CloudidentityGroupsUpdateSecuritySettingsSecurity struct {
 type CloudidentityGroupsUpdateSecuritySettingsRequest struct {
 	PathParams  CloudidentityGroupsUpdateSecuritySettingsPathParams
 	QueryParams CloudidentityGroupsUpdateSecuritySettingsQueryParams
-	Request     *shared.SecuritySettings `request:"mediaType=application/json"`
+	Request     *shared.SecuritySettingsInput `request:"mediaType=application/json"`
 	Security    CloudidentityGroupsUpdateSecuritySettingsSecurity
 }
 

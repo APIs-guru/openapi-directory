@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class FileCommentReactionEntity:
-    emoji: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'emoji' }})
-    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
+    r"""FileCommentReactionEntity
+    Create File Comment Reaction
+    """
+    
+    emoji: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('emoji') }})
+    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
     

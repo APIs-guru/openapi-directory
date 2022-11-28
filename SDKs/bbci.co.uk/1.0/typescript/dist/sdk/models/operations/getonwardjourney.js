@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetOnwardJourneyPathParams = /** @class */ (function (_super) {
     __extends(GetOnwardJourneyPathParams, _super);
@@ -30,7 +30,7 @@ var GetOnwardJourneyPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=pid" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=pid" }),
         __metadata("design:type", String)
     ], GetOnwardJourneyPathParams.prototype, "pid", void 0);
     return GetOnwardJourneyPathParams;
@@ -42,11 +42,11 @@ var GetOnwardJourneyQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=availability" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=availability" }),
         __metadata("design:type", String)
     ], GetOnwardJourneyQueryParams.prototype, "availability", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=rights" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=rights" }),
         __metadata("design:type", String)
     ], GetOnwardJourneyQueryParams.prototype, "rights", void 0);
     return GetOnwardJourneyQueryParams;
@@ -58,11 +58,11 @@ var GetOnwardJourneyRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetOnwardJourneyPathParams)
     ], GetOnwardJourneyRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetOnwardJourneyQueryParams)
     ], GetOnwardJourneyRequest.prototype, "queryParams", void 0);
     return GetOnwardJourneyRequest;
@@ -74,15 +74,15 @@ var GetOnwardJourneyResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetOnwardJourneyResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetOnwardJourneyResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], GetOnwardJourneyResponse.prototype, "ibl", void 0);
     return GetOnwardJourneyResponse;

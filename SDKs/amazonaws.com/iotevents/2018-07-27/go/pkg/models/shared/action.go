@@ -1,5 +1,7 @@
 package shared
 
+// Action
+// An action to be performed when the <code>condition</code> is TRUE.
 type Action struct {
 	ClearTimer      *ClearTimerAction      `json:"clearTimer,omitempty"`
 	DynamoDb        *DynamoDbAction        `json:"dynamoDB,omitempty"`

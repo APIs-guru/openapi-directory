@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RelatedResource
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The detailed related resource.
 **/
 export class RelatedResource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assetType" })
+  @SpeakeasyMetadata({ data: "json, name=assetType" })
   assetType?: string;
 
-  @Metadata({ data: "json, name=fullResourceName" })
+  @SpeakeasyMetadata({ data: "json, name=fullResourceName" })
   fullResourceName?: string;
 }

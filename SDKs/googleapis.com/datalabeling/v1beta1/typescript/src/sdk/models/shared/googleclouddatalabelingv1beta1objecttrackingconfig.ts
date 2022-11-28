@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDatalabelingV1beta1ObjectTrackingConfig
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Config for video object tracking human labeling task.
 **/
 export class GoogleCloudDatalabelingV1beta1ObjectTrackingConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=annotationSpecSet" })
+  @SpeakeasyMetadata({ data: "json, name=annotationSpecSet" })
   annotationSpecSet?: string;
 
-  @Metadata({ data: "json, name=clipLength" })
+  @SpeakeasyMetadata({ data: "json, name=clipLength" })
   clipLength?: number;
 
-  @Metadata({ data: "json, name=overlapLength" })
+  @SpeakeasyMetadata({ data: "json, name=overlapLength" })
   overlapLength?: number;
 }

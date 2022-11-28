@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from sdk.models import shared
 
 
@@ -10,12 +10,12 @@ class GetWebhooksQueryParams:
 
 @dataclass
 class GetWebhooksRequest:
-    query_params: GetWebhooksQueryParams = field(default=None)
+    query_params: GetWebhooksQueryParams = field()
     
 
 @dataclass
 class GetWebhooksResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_webhooks_response: Optional[shared.ListWebhooksResponse] = field(default=None)
-    status_code: int = field(default=None)
     

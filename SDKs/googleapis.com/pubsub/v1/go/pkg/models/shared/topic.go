@@ -1,5 +1,7 @@
 package shared
 
+// Topic
+// A topic resource.
 type Topic struct {
 	KmsKeyName               *string               `json:"kmsKeyName,omitempty"`
 	Labels                   map[string]string     `json:"labels,omitempty"`

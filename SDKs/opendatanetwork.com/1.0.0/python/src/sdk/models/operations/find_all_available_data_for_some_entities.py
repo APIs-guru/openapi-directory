@@ -4,8 +4,8 @@ from typing import Optional
 
 @dataclass
 class FindAllAvailableDataForSomeEntitiesQueryParams:
+    entity_id: str = field(metadata={'query_param': { 'field_name': 'entity_id', 'style': 'form', 'explode': True }})
     app_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'app_token', 'style': 'form', 'explode': True }})
-    entity_id: str = field(default=None, metadata={'query_param': { 'field_name': 'entity_id', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -15,12 +15,12 @@ class FindAllAvailableDataForSomeEntitiesHeaders:
 
 @dataclass
 class FindAllAvailableDataForSomeEntitiesRequest:
-    query_params: FindAllAvailableDataForSomeEntitiesQueryParams = field(default=None)
-    headers: FindAllAvailableDataForSomeEntitiesHeaders = field(default=None)
+    headers: FindAllAvailableDataForSomeEntitiesHeaders = field()
+    query_params: FindAllAvailableDataForSomeEntitiesQueryParams = field()
     
 
 @dataclass
 class FindAllAvailableDataForSomeEntitiesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

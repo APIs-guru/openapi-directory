@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BatchPutGeofenceError } from "./batchputgeofenceerror";
 import { BatchPutGeofenceSuccess } from "./batchputgeofencesuccess";
 
 
+
 export class BatchPutGeofenceResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Errors", elemType: shared.BatchPutGeofenceError })
+  @SpeakeasyMetadata({ data: "json, name=Errors", elemType: BatchPutGeofenceError })
   errors: BatchPutGeofenceError[];
 
-  @Metadata({ data: "json, name=Successes", elemType: shared.BatchPutGeofenceSuccess })
+  @SpeakeasyMetadata({ data: "json, name=Successes", elemType: BatchPutGeofenceSuccess })
   successes: BatchPutGeofenceSuccess[];
 }

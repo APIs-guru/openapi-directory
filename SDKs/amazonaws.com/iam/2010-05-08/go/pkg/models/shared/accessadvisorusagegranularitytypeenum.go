@@ -1,0 +1,8 @@
+package shared
+
+type AccessAdvisorUsageGranularityTypeEnum string
+
+const (
+	AccessAdvisorUsageGranularityTypeEnumServiceLevel AccessAdvisorUsageGranularityTypeEnum = "SERVICE_LEVEL"
+	AccessAdvisorUsageGranularityTypeEnumActionLevel  AccessAdvisorUsageGranularityTypeEnum = "ACTION_LEVEL"
+)

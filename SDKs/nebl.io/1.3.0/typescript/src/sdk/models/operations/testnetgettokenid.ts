@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class TestnetGetTokenIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=tokensymbol" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=tokensymbol" })
   tokensymbol: string;
 }
 
 
 export class TestnetGetTokenIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: TestnetGetTokenIdPathParams;
 }
 
 
 export class TestnetGetTokenIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getTokenIdResponse?: shared.GetTokenIdResponse;
 }

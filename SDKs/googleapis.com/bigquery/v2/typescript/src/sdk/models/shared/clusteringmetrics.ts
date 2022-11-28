@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Cluster } from "./cluster";
+
 
 
 // ClusteringMetrics
@@ -8,12 +8,12 @@ import { Cluster } from "./cluster";
  * Evaluation metrics for clustering models.
 **/
 export class ClusteringMetrics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clusters", elemType: shared.Cluster })
+  @SpeakeasyMetadata({ data: "json, name=clusters", elemType: Cluster })
   clusters?: Cluster[];
 
-  @Metadata({ data: "json, name=daviesBouldinIndex" })
+  @SpeakeasyMetadata({ data: "json, name=daviesBouldinIndex" })
   daviesBouldinIndex?: number;
 
-  @Metadata({ data: "json, name=meanSquaredDistance" })
+  @SpeakeasyMetadata({ data: "json, name=meanSquaredDistance" })
   meanSquaredDistance?: number;
 }

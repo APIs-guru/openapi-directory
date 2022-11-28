@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LongviewClientApps
@@ -7,13 +8,13 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * 
 **/
 export class LongviewClientApps extends SpeakeasyBase {
-  @Metadata({ data: "json, name=apache" })
+  @SpeakeasyMetadata({ data: "json, name=apache" })
   apache?: boolean;
 
-  @Metadata({ data: "json, name=mysql" })
+  @SpeakeasyMetadata({ data: "json, name=mysql" })
   mysql?: boolean;
 
-  @Metadata({ data: "json, name=nginx" })
+  @SpeakeasyMetadata({ data: "json, name=nginx" })
   nginx?: boolean;
 }
 
@@ -24,24 +25,35 @@ export class LongviewClientApps extends SpeakeasyBase {
  * 
 **/
 export class LongviewClient extends SpeakeasyBase {
-  @Metadata({ data: "json, name=api_key" })
+  @SpeakeasyMetadata({ data: "json, name=api_key" })
   apiKey?: string;
 
-  @Metadata({ data: "json, name=apps" })
+  @SpeakeasyMetadata({ data: "json, name=apps" })
   apps?: LongviewClientApps;
 
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=install_code" })
+  @SpeakeasyMetadata({ data: "json, name=install_code" })
   installCode?: string;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 
-  @Metadata({ data: "json, name=updated" })
+  @SpeakeasyMetadata({ data: "json, name=updated" })
   updated?: Date;
+}
+
+
+// LongviewClientInput
+/** 
+ * A LongviewClient is a single monitor set up to track statistics about one of your servers.
+ * 
+**/
+export class LongviewClientInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=label" })
+  label?: string;
 }

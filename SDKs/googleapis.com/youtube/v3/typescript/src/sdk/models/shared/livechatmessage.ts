@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LiveChatMessageAuthorDetails } from "./livechatmessageauthordetails";
 import { LiveChatMessageSnippet } from "./livechatmessagesnippet";
+
 
 
 // LiveChatMessage
@@ -8,18 +9,18 @@ import { LiveChatMessageSnippet } from "./livechatmessagesnippet";
  * A *liveChatMessage* resource represents a chat message in a YouTube Live Chat.
 **/
 export class LiveChatMessage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authorDetails" })
+  @SpeakeasyMetadata({ data: "json, name=authorDetails" })
   authorDetails?: LiveChatMessageAuthorDetails;
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=snippet" })
+  @SpeakeasyMetadata({ data: "json, name=snippet" })
   snippet?: LiveChatMessageSnippet;
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ValidationStatusEnum } from "./validationstatusenum";
+
 
 
 // NotificationContext
@@ -7,12 +8,12 @@ import { ValidationStatusEnum } from "./validationstatusenum";
  * Contains the status of validating an application.
 **/
 export class NotificationContext extends SpeakeasyBase {
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: ValidationStatusEnum;
 
-  @Metadata({ data: "json, name=statusMessage" })
+  @SpeakeasyMetadata({ data: "json, name=statusMessage" })
   statusMessage?: string;
 
-  @Metadata({ data: "json, name=validationId" })
+  @SpeakeasyMetadata({ data: "json, name=validationId" })
   validationId?: string;
 }

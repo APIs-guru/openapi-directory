@@ -1,5 +1,7 @@
 package shared
 
+// ScimUserList
+// SCIM User List
 type ScimUserList struct {
 	Resources    []ScimUser `json:"Resources"`
 	ItemsPerPage int64      `json:"itemsPerPage"`

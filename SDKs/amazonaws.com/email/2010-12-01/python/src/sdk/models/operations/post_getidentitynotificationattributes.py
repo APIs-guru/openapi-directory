@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostGetIdentityNotificationAttributesActionEnum(str, Enum):
     GET_IDENTITY_NOTIFICATION_ATTRIBUTES = "GetIdentityNotificationAttributes"
@@ -10,8 +14,8 @@ class PostGetIdentityNotificationAttributesVersionEnum(str, Enum):
 
 @dataclass
 class PostGetIdentityNotificationAttributesQueryParams:
-    action: PostGetIdentityNotificationAttributesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostGetIdentityNotificationAttributesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostGetIdentityNotificationAttributesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostGetIdentityNotificationAttributesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostGetIdentityNotificationAttributesHeaders:
 
 @dataclass
 class PostGetIdentityNotificationAttributesRequest:
-    query_params: PostGetIdentityNotificationAttributesQueryParams = field(default=None)
-    headers: PostGetIdentityNotificationAttributesHeaders = field(default=None)
+    headers: PostGetIdentityNotificationAttributesHeaders = field()
+    query_params: PostGetIdentityNotificationAttributesQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostGetIdentityNotificationAttributesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

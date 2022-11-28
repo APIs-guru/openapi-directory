@@ -22,42 +22,42 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Folder = /** @class */ (function (_super) {
     __extends(Folder, _super);
     function Folder() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=archived" }),
+        SpeakeasyMetadata({ data: "json, name=archived" }),
         __metadata("design:type", Boolean)
     ], Folder.prototype, "archived", void 0);
     __decorate([
-        Metadata({ data: "json, name=archivedAt" }),
+        SpeakeasyMetadata({ data: "json, name=archivedAt" }),
         __metadata("design:type", Date)
     ], Folder.prototype, "archivedAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=createdAt" }),
+        SpeakeasyMetadata({ data: "json, name=createdAt" }),
         __metadata("design:type", Date)
     ], Folder.prototype, "createdAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], Folder.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Folder.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=parentFolderId" }),
+        SpeakeasyMetadata({ data: "json, name=parentFolderId" }),
         __metadata("design:type", String)
     ], Folder.prototype, "parentFolderId", void 0);
     __decorate([
-        Metadata({ data: "json, name=path" }),
+        SpeakeasyMetadata({ data: "json, name=path" }),
         __metadata("design:type", String)
     ], Folder.prototype, "path", void 0);
     __decorate([
-        Metadata({ data: "json, name=updatedAt" }),
+        SpeakeasyMetadata({ data: "json, name=updatedAt" }),
         __metadata("design:type", Date)
     ], Folder.prototype, "updatedAt", void 0);
     return Folder;

@@ -14,6 +14,8 @@ type UpdateEmailTemplateHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateEmailTemplateRequestBodyTemplateContent
+// The content of the email, composed of a subject line, an HTML part, and a text-only part.
 type UpdateEmailTemplateRequestBodyTemplateContent struct {
 	HTML    *string `json:"Html,omitempty"`
 	Subject *string `json:"Subject,omitempty"`

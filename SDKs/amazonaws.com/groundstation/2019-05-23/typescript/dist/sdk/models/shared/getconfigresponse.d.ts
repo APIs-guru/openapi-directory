@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ConfigTypeData } from "./configtypedata";
 import { ConfigCapabilityTypeEnum } from "./configcapabilitytypeenum";
 /**

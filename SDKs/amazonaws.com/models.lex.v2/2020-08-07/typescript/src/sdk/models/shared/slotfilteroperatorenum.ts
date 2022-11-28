@@ -1,6 +1,7 @@
 
 
+
 export enum SlotFilterOperatorEnum {
-    Co = "CO"
-,    Eq = "EQ"
+    Co = "CO",
+    Eq = "EQ"
 }

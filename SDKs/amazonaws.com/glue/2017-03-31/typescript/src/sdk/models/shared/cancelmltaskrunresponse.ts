@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TaskStatusTypeEnum } from "./taskstatustypeenum";
 
 
+
 export class CancelMlTaskRunResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: TaskStatusTypeEnum;
 
-  @Metadata({ data: "json, name=TaskRunId" })
+  @SpeakeasyMetadata({ data: "json, name=TaskRunId" })
   taskRunId?: string;
 
-  @Metadata({ data: "json, name=TransformId" })
+  @SpeakeasyMetadata({ data: "json, name=TransformId" })
   transformId?: string;
 }

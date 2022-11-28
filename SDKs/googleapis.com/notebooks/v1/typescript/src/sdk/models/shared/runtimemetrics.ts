@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RuntimeMetrics
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains runtime daemon metrics, such as OS and kernels and sessions stats.
 **/
 export class RuntimeMetrics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=systemMetrics" })
+  @SpeakeasyMetadata({ data: "json, name=systemMetrics" })
   systemMetrics?: Map<string, string>;
 }

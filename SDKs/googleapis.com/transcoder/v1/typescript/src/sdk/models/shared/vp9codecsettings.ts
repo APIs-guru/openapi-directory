@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Vp9CodecSettings
@@ -6,33 +7,33 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * VP9 codec settings.
 **/
 export class Vp9CodecSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bitrateBps" })
+  @SpeakeasyMetadata({ data: "json, name=bitrateBps" })
   bitrateBps?: number;
 
-  @Metadata({ data: "json, name=crfLevel" })
+  @SpeakeasyMetadata({ data: "json, name=crfLevel" })
   crfLevel?: number;
 
-  @Metadata({ data: "json, name=frameRate" })
+  @SpeakeasyMetadata({ data: "json, name=frameRate" })
   frameRate?: number;
 
-  @Metadata({ data: "json, name=gopDuration" })
+  @SpeakeasyMetadata({ data: "json, name=gopDuration" })
   gopDuration?: string;
 
-  @Metadata({ data: "json, name=gopFrameCount" })
+  @SpeakeasyMetadata({ data: "json, name=gopFrameCount" })
   gopFrameCount?: number;
 
-  @Metadata({ data: "json, name=heightPixels" })
+  @SpeakeasyMetadata({ data: "json, name=heightPixels" })
   heightPixels?: number;
 
-  @Metadata({ data: "json, name=pixelFormat" })
+  @SpeakeasyMetadata({ data: "json, name=pixelFormat" })
   pixelFormat?: string;
 
-  @Metadata({ data: "json, name=profile" })
+  @SpeakeasyMetadata({ data: "json, name=profile" })
   profile?: string;
 
-  @Metadata({ data: "json, name=rateControlMode" })
+  @SpeakeasyMetadata({ data: "json, name=rateControlMode" })
   rateControlMode?: string;
 
-  @Metadata({ data: "json, name=widthPixels" })
+  @SpeakeasyMetadata({ data: "json, name=widthPixels" })
   widthPixels?: number;
 }

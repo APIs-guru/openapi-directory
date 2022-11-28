@@ -1,7 +1,8 @@
 
 
+
 export enum ProblemTypeEnum {
-    BinaryClassification = "BinaryClassification"
-,    MulticlassClassification = "MulticlassClassification"
-,    Regression = "Regression"
+    BinaryClassification = "BinaryClassification",
+    MulticlassClassification = "MulticlassClassification",
+    Regression = "Regression"
 }

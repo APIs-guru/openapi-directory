@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DisplayvideoAdvertisersChannelsSitesBulkEditPathParams:
-    advertiser_id: str = field(default=None, metadata={'path_param': { 'field_name': 'advertiserId', 'style': 'simple', 'explode': False }})
-    channel_id: str = field(default=None, metadata={'path_param': { 'field_name': 'channelId', 'style': 'simple', 'explode': False }})
+    advertiser_id: str = field(metadata={'path_param': { 'field_name': 'advertiserId', 'style': 'simple', 'explode': False }})
+    channel_id: str = field(metadata={'path_param': { 'field_name': 'channelId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +27,21 @@ class DisplayvideoAdvertisersChannelsSitesBulkEditQueryParams:
 
 @dataclass
 class DisplayvideoAdvertisersChannelsSitesBulkEditSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DisplayvideoAdvertisersChannelsSitesBulkEditRequest:
-    path_params: DisplayvideoAdvertisersChannelsSitesBulkEditPathParams = field(default=None)
-    query_params: DisplayvideoAdvertisersChannelsSitesBulkEditQueryParams = field(default=None)
-    request: Optional[shared.BulkEditSitesRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DisplayvideoAdvertisersChannelsSitesBulkEditSecurity = field(default=None)
+    path_params: DisplayvideoAdvertisersChannelsSitesBulkEditPathParams = field()
+    query_params: DisplayvideoAdvertisersChannelsSitesBulkEditQueryParams = field()
+    security: DisplayvideoAdvertisersChannelsSitesBulkEditSecurity = field()
+    request: Optional[shared.BulkEditSitesRequestInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DisplayvideoAdvertisersChannelsSitesBulkEditResponse:
+    content_type: str = field()
+    status_code: int = field()
     bulk_edit_sites_response: Optional[shared.BulkEditSitesResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

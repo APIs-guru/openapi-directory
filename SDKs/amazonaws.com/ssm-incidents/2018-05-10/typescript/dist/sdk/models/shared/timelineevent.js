@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // TimelineEvent
 /**
  * A significant event that happened during the incident.
@@ -33,27 +33,27 @@ var TimelineEvent = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=eventData" }),
+        SpeakeasyMetadata({ data: "json, name=eventData" }),
         __metadata("design:type", String)
     ], TimelineEvent.prototype, "eventData", void 0);
     __decorate([
-        Metadata({ data: "json, name=eventId" }),
+        SpeakeasyMetadata({ data: "json, name=eventId" }),
         __metadata("design:type", String)
     ], TimelineEvent.prototype, "eventId", void 0);
     __decorate([
-        Metadata({ data: "json, name=eventTime" }),
+        SpeakeasyMetadata({ data: "json, name=eventTime" }),
         __metadata("design:type", Date)
     ], TimelineEvent.prototype, "eventTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=eventType" }),
+        SpeakeasyMetadata({ data: "json, name=eventType" }),
         __metadata("design:type", String)
     ], TimelineEvent.prototype, "eventType", void 0);
     __decorate([
-        Metadata({ data: "json, name=eventUpdatedTime" }),
+        SpeakeasyMetadata({ data: "json, name=eventUpdatedTime" }),
         __metadata("design:type", Date)
     ], TimelineEvent.prototype, "eventUpdatedTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=incidentRecordArn" }),
+        SpeakeasyMetadata({ data: "json, name=incidentRecordArn" }),
         __metadata("design:type", String)
     ], TimelineEvent.prototype, "incidentRecordArn", void 0);
     return TimelineEvent;

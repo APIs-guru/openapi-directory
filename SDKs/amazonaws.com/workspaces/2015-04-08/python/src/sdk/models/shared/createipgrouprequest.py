@@ -1,15 +1,15 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import tag
-from . import ipruleitem
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateIPGroupRequest:
-    group_desc: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'GroupDesc' }})
-    group_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'GroupName' }})
-    tags: Optional[List[tag.Tag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Tags' }})
-    user_rules: Optional[List[ipruleitem.IPRuleItem]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'UserRules' }})
+    group_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('GroupName') }})
+    group_desc: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('GroupDesc') }})
+    tags: Optional[List[Tag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Tags') }})
+    user_rules: Optional[List[IPRuleItem]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('UserRules') }})
     

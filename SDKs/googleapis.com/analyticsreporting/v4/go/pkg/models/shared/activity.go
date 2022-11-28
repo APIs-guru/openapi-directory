@@ -11,6 +11,8 @@ const (
 	ActivityActivityTypeEnumEvent                   ActivityActivityTypeEnum = "EVENT"
 )
 
+// Activity
+// An Activity represents data for an activity of a user. Note that an Activity is different from a hit. A hit might result in multiple Activity's. For example, if a hit includes a transaction and a goal completion, there will be two Activity protos for this hit, one for ECOMMERCE and one for GOAL. Conversely, multiple hits can also construct one Activity. In classic e-commerce, data for one transaction might be sent through multiple hits. These hits will be merged into one ECOMMERCE Activity.
 type Activity struct {
 	ActivityTime    *string                   `json:"activityTime,omitempty"`
 	ActivityType    *ActivityActivityTypeEnum `json:"activityType,omitempty"`

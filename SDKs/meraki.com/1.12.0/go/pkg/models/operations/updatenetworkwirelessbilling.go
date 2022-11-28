@@ -4,6 +4,8 @@ type UpdateNetworkWirelessBillingPathParams struct {
 	NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
 }
 
+// UpdateNetworkWirelessBillingRequestBodyPlansBandwidthLimits
+// The uplink bandwidth settings for the pricing plan.
 type UpdateNetworkWirelessBillingRequestBodyPlansBandwidthLimits struct {
 	LimitDown *int64 `json:"limitDown,omitempty"`
 	LimitUp   *int64 `json:"limitUp,omitempty"`

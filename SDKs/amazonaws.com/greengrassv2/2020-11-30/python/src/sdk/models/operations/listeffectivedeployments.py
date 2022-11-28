@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class ListEffectiveDeploymentsPathParams:
-    core_device_thing_name: str = field(default=None, metadata={'path_param': { 'field_name': 'coreDeviceThingName', 'style': 'simple', 'explode': False }})
+    core_device_thing_name: str = field(metadata={'path_param': { 'field_name': 'coreDeviceThingName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,19 +30,19 @@ class ListEffectiveDeploymentsHeaders:
 
 @dataclass
 class ListEffectiveDeploymentsRequest:
-    path_params: ListEffectiveDeploymentsPathParams = field(default=None)
-    query_params: ListEffectiveDeploymentsQueryParams = field(default=None)
-    headers: ListEffectiveDeploymentsHeaders = field(default=None)
+    headers: ListEffectiveDeploymentsHeaders = field()
+    path_params: ListEffectiveDeploymentsPathParams = field()
+    query_params: ListEffectiveDeploymentsQueryParams = field()
     
 
 @dataclass
 class ListEffectiveDeploymentsResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     list_effective_deployments_response: Optional[shared.ListEffectiveDeploymentsResponse] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

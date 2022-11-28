@@ -16,15 +16,15 @@ type CodeScanningListAlertsInstancesQueryParams struct {
 	Ref     *string `queryParam:"style=form,explode=true,name=ref"`
 }
 
-type CodeScanningListAlertsInstancesRequest struct {
-	PathParams  CodeScanningListAlertsInstancesPathParams
-	QueryParams CodeScanningListAlertsInstancesQueryParams
-}
-
 type CodeScanningListAlertsInstances503ApplicationJSON struct {
 	Code             *string `json:"code,omitempty"`
 	DocumentationURL *string `json:"documentation_url,omitempty"`
 	Message          *string `json:"message,omitempty"`
+}
+
+type CodeScanningListAlertsInstancesRequest struct {
+	PathParams  CodeScanningListAlertsInstancesPathParams
+	QueryParams CodeScanningListAlertsInstancesQueryParams
 }
 
 type CodeScanningListAlertsInstancesResponse struct {

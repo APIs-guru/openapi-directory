@@ -7,6 +7,8 @@ const (
 	InstallFailureEventFailureReasonEnumTimeout InstallFailureEventFailureReasonEnum = "timeout"
 )
 
+// InstallFailureEvent
+// An event generated when an app installation failed on a device
 type InstallFailureEvent struct {
 	DeviceID       *string                               `json:"deviceId,omitempty"`
 	FailureDetails *string                               `json:"failureDetails,omitempty"`

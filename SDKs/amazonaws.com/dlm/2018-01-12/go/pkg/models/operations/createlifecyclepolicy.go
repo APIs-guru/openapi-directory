@@ -14,6 +14,8 @@ type CreateLifecyclePolicyHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateLifecyclePolicyRequestBodyPolicyDetails
+// Specifies the configuration of a lifecycle policy.
 type CreateLifecyclePolicyRequestBodyPolicyDetails struct {
 	Actions           []shared.Action                     `json:"Actions,omitempty"`
 	EventSource       *shared.EventSource                 `json:"EventSource,omitempty"`

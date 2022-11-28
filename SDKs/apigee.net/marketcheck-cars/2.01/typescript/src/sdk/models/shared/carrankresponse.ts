@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CarListingRank } from "./carlistingrank";
+
 
 
 // CarRankResponse
@@ -8,9 +8,9 @@ import { CarListingRank } from "./carlistingrank";
  * Ranking query response
 **/
 export class CarRankResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=num_ranked" })
+  @SpeakeasyMetadata({ data: "json, name=num_ranked" })
   numRanked?: number;
 
-  @Metadata({ data: "json, name=ranked_listings", elemType: shared.CarListingRank })
+  @SpeakeasyMetadata({ data: "json, name=ranked_listings", elemType: CarListingRank })
   rankedListings?: CarListingRank[];
 }

@@ -22,64 +22,65 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ProvisioningParameter } from "./provisioningparameter";
 import { ProvisioningPreferences } from "./provisioningpreferences";
+import { Tag } from "./tag";
 var ProvisionProductInput = /** @class */ (function (_super) {
     __extends(ProvisionProductInput, _super);
     function ProvisionProductInput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AcceptLanguage" }),
+        SpeakeasyMetadata({ data: "json, name=AcceptLanguage" }),
         __metadata("design:type", String)
     ], ProvisionProductInput.prototype, "acceptLanguage", void 0);
     __decorate([
-        Metadata({ data: "json, name=NotificationArns" }),
+        SpeakeasyMetadata({ data: "json, name=NotificationArns" }),
         __metadata("design:type", Array)
     ], ProvisionProductInput.prototype, "notificationArns", void 0);
     __decorate([
-        Metadata({ data: "json, name=PathId" }),
+        SpeakeasyMetadata({ data: "json, name=PathId" }),
         __metadata("design:type", String)
     ], ProvisionProductInput.prototype, "pathId", void 0);
     __decorate([
-        Metadata({ data: "json, name=PathName" }),
+        SpeakeasyMetadata({ data: "json, name=PathName" }),
         __metadata("design:type", String)
     ], ProvisionProductInput.prototype, "pathName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProductId" }),
+        SpeakeasyMetadata({ data: "json, name=ProductId" }),
         __metadata("design:type", String)
     ], ProvisionProductInput.prototype, "productId", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProductName" }),
+        SpeakeasyMetadata({ data: "json, name=ProductName" }),
         __metadata("design:type", String)
     ], ProvisionProductInput.prototype, "productName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProvisionToken" }),
+        SpeakeasyMetadata({ data: "json, name=ProvisionToken" }),
         __metadata("design:type", String)
     ], ProvisionProductInput.prototype, "provisionToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProvisionedProductName" }),
+        SpeakeasyMetadata({ data: "json, name=ProvisionedProductName" }),
         __metadata("design:type", String)
     ], ProvisionProductInput.prototype, "provisionedProductName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProvisioningArtifactId" }),
+        SpeakeasyMetadata({ data: "json, name=ProvisioningArtifactId" }),
         __metadata("design:type", String)
     ], ProvisionProductInput.prototype, "provisioningArtifactId", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProvisioningArtifactName" }),
+        SpeakeasyMetadata({ data: "json, name=ProvisioningArtifactName" }),
         __metadata("design:type", String)
     ], ProvisionProductInput.prototype, "provisioningArtifactName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProvisioningParameters", elemType: shared.ProvisioningParameter }),
+        SpeakeasyMetadata({ data: "json, name=ProvisioningParameters", elemType: ProvisioningParameter }),
         __metadata("design:type", Array)
     ], ProvisionProductInput.prototype, "provisioningParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProvisioningPreferences" }),
+        SpeakeasyMetadata({ data: "json, name=ProvisioningPreferences" }),
         __metadata("design:type", ProvisioningPreferences)
     ], ProvisionProductInput.prototype, "provisioningPreferences", void 0);
     __decorate([
-        Metadata({ data: "json, name=Tags", elemType: shared.Tag }),
+        SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag }),
         __metadata("design:type", Array)
     ], ProvisionProductInput.prototype, "tags", void 0);
     return ProvisionProductInput;

@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Licensee } from "./licensee";
 
 
+
 export class LicenseeListResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hasMore" })
+  @SpeakeasyMetadata({ data: "json, name=hasMore" })
   hasMore?: boolean;
 
-  @Metadata({ data: "json, name=licensees", elemType: shared.Licensee })
+  @SpeakeasyMetadata({ data: "json, name=licensees", elemType: Licensee })
   licensees?: Licensee[];
 }

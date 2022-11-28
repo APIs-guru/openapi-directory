@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -20,20 +21,20 @@ class HomegraphDevicesQueryQueryParams:
 
 @dataclass
 class HomegraphDevicesQuerySecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class HomegraphDevicesQueryRequest:
-    query_params: HomegraphDevicesQueryQueryParams = field(default=None)
+    query_params: HomegraphDevicesQueryQueryParams = field()
+    security: HomegraphDevicesQuerySecurity = field()
     request: Optional[shared.QueryRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: HomegraphDevicesQuerySecurity = field(default=None)
     
 
 @dataclass
 class HomegraphDevicesQueryResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     query_response: Optional[shared.QueryResponse] = field(default=None)
-    status_code: int = field(default=None)
     

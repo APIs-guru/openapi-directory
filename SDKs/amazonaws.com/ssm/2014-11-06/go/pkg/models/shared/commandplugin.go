@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// CommandPlugin
+// Describes plugin details.
 type CommandPlugin struct {
 	Name                   *string                  `json:"Name,omitempty"`
 	Output                 *string                  `json:"Output,omitempty"`

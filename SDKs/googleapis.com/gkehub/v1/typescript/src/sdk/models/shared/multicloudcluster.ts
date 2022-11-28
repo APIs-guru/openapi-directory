@@ -1,4 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
+
+
+// MultiCloudClusterInput
+/** 
+ * MultiCloudCluster contains information specific to GKE Multi-Cloud clusters.
+**/
+export class MultiCloudClusterInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=resourceLink" })
+  resourceLink?: string;
+}
 
 
 // MultiCloudCluster
@@ -6,9 +17,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * MultiCloudCluster contains information specific to GKE Multi-Cloud clusters.
 **/
 export class MultiCloudCluster extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clusterMissing" })
+  @SpeakeasyMetadata({ data: "json, name=clusterMissing" })
   clusterMissing?: boolean;
 
-  @Metadata({ data: "json, name=resourceLink" })
+  @SpeakeasyMetadata({ data: "json, name=resourceLink" })
   resourceLink?: string;
 }

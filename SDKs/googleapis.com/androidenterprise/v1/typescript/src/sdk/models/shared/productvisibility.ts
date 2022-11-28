@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ProductVisibilityTracksEnum {
-    AppTrackUnspecified = "appTrackUnspecified"
-,    Production = "production"
-,    Beta = "beta"
-,    Alpha = "alpha"
+    AppTrackUnspecified = "appTrackUnspecified",
+    Production = "production",
+    Beta = "beta",
+    Alpha = "alpha"
 }
 
 
@@ -13,12 +14,12 @@ export enum ProductVisibilityTracksEnum {
  * A product to be made visible to a user.
 **/
 export class ProductVisibility extends SpeakeasyBase {
-  @Metadata({ data: "json, name=productId" })
+  @SpeakeasyMetadata({ data: "json, name=productId" })
   productId?: string;
 
-  @Metadata({ data: "json, name=trackIds" })
+  @SpeakeasyMetadata({ data: "json, name=trackIds" })
   trackIds?: string[];
 
-  @Metadata({ data: "json, name=tracks" })
+  @SpeakeasyMetadata({ data: "json, name=tracks" })
   tracks?: ProductVisibilityTracksEnum[];
 }

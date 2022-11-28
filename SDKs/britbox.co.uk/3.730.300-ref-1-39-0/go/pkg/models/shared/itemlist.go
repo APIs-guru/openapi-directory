@@ -14,6 +14,8 @@ const (
 	ItemListItemTypesEnumCustomAsset ItemListItemTypesEnum = "customAsset"
 )
 
+// ItemList
+// A pageable list of items.
 type ItemList struct {
 	CustomFields     map[string]interface{}  `json:"customFields,omitempty"`
 	Description      *string                 `json:"description,omitempty"`

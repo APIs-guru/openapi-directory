@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetNetworkBluetoothClientPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=bluetoothClientId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=bluetoothClientId" })
   bluetoothClientId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
 
 export class GetNetworkBluetoothClientQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=connectivityHistoryTimespan" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=connectivityHistoryTimespan" })
   connectivityHistoryTimespan?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=includeConnectivityHistory" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=includeConnectivityHistory" })
   includeConnectivityHistory?: boolean;
 }
 
 
 export class GetNetworkBluetoothClientRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetNetworkBluetoothClientPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetNetworkBluetoothClientQueryParams;
 }
 
 
 export class GetNetworkBluetoothClientResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getNetworkBluetoothClient200ApplicationJsonObject?: Map<string, any>;
 }

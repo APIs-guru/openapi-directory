@@ -26,11 +26,6 @@ type CoprgSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type CoprgRequest struct {
-	Request  *CoprgRequestBody `request:"mediaType=application/json"`
-	Security CoprgSecurity
-}
-
 type Coprg400ApplicationJSONErrorEnum string
 
 const (
@@ -160,6 +155,11 @@ const (
 type Coprg504ApplicationJSON struct {
 	Error            *Coprg504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Coprg504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type CoprgRequest struct {
+	Request  *CoprgRequestBody `request:"mediaType=application/json"`
+	Security CoprgSecurity
 }
 
 type CoprgResponse struct {

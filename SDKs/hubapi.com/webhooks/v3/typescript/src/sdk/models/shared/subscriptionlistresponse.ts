@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SubscriptionResponse } from "./subscriptionresponse";
+
 
 
 // SubscriptionListResponse
@@ -8,6 +8,6 @@ import { SubscriptionResponse } from "./subscriptionresponse";
  * List of event subscriptions for your app
 **/
 export class SubscriptionListResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=results", elemType: shared.SubscriptionResponse })
+  @SpeakeasyMetadata({ data: "json, name=results", elemType: SubscriptionResponse })
   results: SubscriptionResponse[];
 }

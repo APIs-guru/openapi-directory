@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// S3Bucket
+// Provides information about the S3 bucket that a finding applies to.
 type S3Bucket struct {
 	AllowsUnencryptedObjectUploads *AllowsUnencryptedObjectUploadsEnum `json:"allowsUnencryptedObjectUploads,omitempty"`
 	Arn                            *string                             `json:"arn,omitempty"`

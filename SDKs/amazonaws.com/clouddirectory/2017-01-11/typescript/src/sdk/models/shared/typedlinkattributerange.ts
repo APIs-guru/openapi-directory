@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TypedAttributeValueRange } from "./typedattributevaluerange";
+
 
 
 // TypedLinkAttributeRange
@@ -7,9 +8,9 @@ import { TypedAttributeValueRange } from "./typedattributevaluerange";
  * Identifies the range of attributes that are used by a specified filter.
 **/
 export class TypedLinkAttributeRange extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AttributeName" })
+  @SpeakeasyMetadata({ data: "json, name=AttributeName" })
   attributeName?: string;
 
-  @Metadata({ data: "json, name=Range" })
+  @SpeakeasyMetadata({ data: "json, name=Range" })
   range: TypedAttributeValueRange;
 }

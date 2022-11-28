@@ -1,5 +1,7 @@
 package shared
 
+// DescribedExecution
+// The details for an execution object.
 type DescribedExecution struct {
 	ExecutionID          *string               `json:"ExecutionId,omitempty"`
 	ExecutionRole        *string               `json:"ExecutionRole,omitempty"`

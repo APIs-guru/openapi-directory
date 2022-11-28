@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { KeyPhrase } from "./keyphrase";
+
 
 
 // BatchDetectKeyPhrasesItemResult
@@ -8,9 +8,9 @@ import { KeyPhrase } from "./keyphrase";
  * The result of calling the operation. The operation returns one object for each document that is successfully processed by the operation.
 **/
 export class BatchDetectKeyPhrasesItemResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Index" })
+  @SpeakeasyMetadata({ data: "json, name=Index" })
   index?: number;
 
-  @Metadata({ data: "json, name=KeyPhrases", elemType: shared.KeyPhrase })
+  @SpeakeasyMetadata({ data: "json, name=KeyPhrases", elemType: KeyPhrase })
   keyPhrases?: KeyPhrase[];
 }

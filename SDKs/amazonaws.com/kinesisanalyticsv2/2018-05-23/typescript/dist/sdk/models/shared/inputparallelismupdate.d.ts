@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * For a SQL-based Kinesis Data Analytics application, provides updates to the parallelism count.
 **/

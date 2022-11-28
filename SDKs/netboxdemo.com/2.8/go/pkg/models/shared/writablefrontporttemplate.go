@@ -19,9 +19,8 @@ const (
 	WritableFrontPortTemplateTypeEnumSt                    WritableFrontPortTemplateTypeEnum = "st"
 )
 
-type WritableFrontPortTemplate struct {
+type WritableFrontPortTemplateInput struct {
 	DeviceType       int64                             `json:"device_type"`
-	ID               *int64                            `json:"id,omitempty"`
 	Name             string                            `json:"name"`
 	RearPort         int64                             `json:"rear_port"`
 	RearPortPosition *int64                            `json:"rear_port_position,omitempty"`

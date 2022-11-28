@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum GetAllFacilitiesAcceptEnum {
-    ApplicationGeoPlusJson = "application/geo+json"
-,    ApplicationVndGeoPlusJson = "application/vnd.geo+json"
-,    TextCsv = "text/csv"
+    ApplicationGeoPlusJson = "application/geo+json",
+    ApplicationVndGeoPlusJson = "application/vnd.geo+json",
+    TextCsv = "text/csv"
 }
 
 
 export class GetAllFacilitiesHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Accept" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept" })
   accept: GetAllFacilitiesAcceptEnum;
 }
 
 
 export class GetAllFacilitiesSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   apikey: shared.SchemeApikey;
 }
 
 
 export class GetAllFacilitiesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetAllFacilitiesHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetAllFacilitiesSecurity;
 }
 
 
 export class GetAllFacilitiesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiError?: shared.ApiError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   genericError?: shared.GenericError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   geoFacilitiesResponse?: shared.GeoFacilitiesResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getAllFacilities200TextCsvString?: string;
 }

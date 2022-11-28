@@ -1,7 +1,8 @@
 
 
+
 export enum WorkspaceImageStateEnum {
-    Available = "AVAILABLE"
-,    Pending = "PENDING"
-,    Error = "ERROR"
+    Available = "AVAILABLE",
+    Pending = "PENDING",
+    Error = "ERROR"
 }

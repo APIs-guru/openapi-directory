@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var StorageBucketAccessControlsDeletePathParams = /** @class */ (function (_super) {
     __extends(StorageBucketAccessControlsDeletePathParams, _super);
@@ -30,11 +30,11 @@ var StorageBucketAccessControlsDeletePathParams = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=bucket" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=bucket" }),
         __metadata("design:type", String)
     ], StorageBucketAccessControlsDeletePathParams.prototype, "bucket", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=entity" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=entity" }),
         __metadata("design:type", String)
     ], StorageBucketAccessControlsDeletePathParams.prototype, "entity", void 0);
     return StorageBucketAccessControlsDeletePathParams;
@@ -46,31 +46,31 @@ var StorageBucketAccessControlsDeleteQueryParams = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], StorageBucketAccessControlsDeleteQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], StorageBucketAccessControlsDeleteQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], StorageBucketAccessControlsDeleteQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], StorageBucketAccessControlsDeleteQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], StorageBucketAccessControlsDeleteQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], StorageBucketAccessControlsDeleteQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=userIp" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userIp" }),
         __metadata("design:type", String)
     ], StorageBucketAccessControlsDeleteQueryParams.prototype, "userIp", void 0);
     return StorageBucketAccessControlsDeleteQueryParams;
@@ -82,11 +82,11 @@ var StorageBucketAccessControlsDeleteSecurity = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], StorageBucketAccessControlsDeleteSecurity.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], StorageBucketAccessControlsDeleteSecurity.prototype, "oauth2c", void 0);
     return StorageBucketAccessControlsDeleteSecurity;
@@ -98,15 +98,15 @@ var StorageBucketAccessControlsDeleteRequest = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", StorageBucketAccessControlsDeletePathParams)
     ], StorageBucketAccessControlsDeleteRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", StorageBucketAccessControlsDeleteQueryParams)
     ], StorageBucketAccessControlsDeleteRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", StorageBucketAccessControlsDeleteSecurity)
     ], StorageBucketAccessControlsDeleteRequest.prototype, "security", void 0);
     return StorageBucketAccessControlsDeleteRequest;
@@ -118,11 +118,11 @@ var StorageBucketAccessControlsDeleteResponse = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], StorageBucketAccessControlsDeleteResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], StorageBucketAccessControlsDeleteResponse.prototype, "statusCode", void 0);
     return StorageBucketAccessControlsDeleteResponse;

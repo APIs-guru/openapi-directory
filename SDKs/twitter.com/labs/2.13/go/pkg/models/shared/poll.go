@@ -11,6 +11,8 @@ const (
 	PollVotingStatusEnumClosed PollVotingStatusEnum = "closed"
 )
 
+// Poll
+// Represent a Poll attached to a Tweet
 type Poll struct {
 	DurationMinutes *int64                `json:"duration_minutes,omitempty"`
 	EndDatetime     *time.Time            `json:"end_datetime,omitempty"`

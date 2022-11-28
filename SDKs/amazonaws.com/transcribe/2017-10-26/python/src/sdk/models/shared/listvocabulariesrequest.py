@@ -1,14 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import vocabularystate_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListVocabulariesRequest:
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MaxResults' }})
-    name_contains: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NameContains' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
-    state_equals: Optional[vocabularystate_enum.VocabularyStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StateEquals' }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MaxResults') }})
+    name_contains: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NameContains') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
+    state_equals: Optional[VocabularyStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StateEquals') }})
     

@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class WimstatusQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=vid" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=vid" })
   vid?: string;
 }
 
 
-export class WimstatusRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: WimstatusQueryParams;
-}
-
-
 export class Wimstatus200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=wim_started" })
+  @SpeakeasyMetadata({ data: "json, name=wim_started" })
   wimStarted?: number;
 
-  @Metadata({ data: "json, name=wim_status" })
+  @SpeakeasyMetadata({ data: "json, name=wim_status" })
   wimStatus?: string;
 }
 
 
+export class WimstatusRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: WimstatusQueryParams;
+}
+
+
 export class WimstatusResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   wimstatus200ApplicationJsonObject?: Wimstatus200ApplicationJson;
 }

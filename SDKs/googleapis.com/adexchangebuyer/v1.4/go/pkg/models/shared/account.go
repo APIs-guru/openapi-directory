@@ -7,6 +7,8 @@ type AccountBidderLocation struct {
 	URL         *string `json:"url,omitempty"`
 }
 
+// Account
+// Configuration data for an Ad Exchange buyer account.
 type Account struct {
 	ApplyPretargetingToNonGuaranteedDeals *bool                   `json:"applyPretargetingToNonGuaranteedDeals,omitempty"`
 	BidderLocation                        []AccountBidderLocation `json:"bidderLocation,omitempty"`

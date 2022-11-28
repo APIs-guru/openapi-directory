@@ -1,27 +1,28 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import cpuutilization
-from . import diskutilization
-from . import networkutilization
-from . import requestutilization
-from . import standardschedulersettings
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AutomaticScaling:
-    cool_down_period: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'coolDownPeriod' }})
-    cpu_utilization: Optional[cpuutilization.CPUUtilization] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cpuUtilization' }})
-    disk_utilization: Optional[diskutilization.DiskUtilization] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'diskUtilization' }})
-    max_concurrent_requests: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxConcurrentRequests' }})
-    max_idle_instances: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxIdleInstances' }})
-    max_pending_latency: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxPendingLatency' }})
-    max_total_instances: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxTotalInstances' }})
-    min_idle_instances: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'minIdleInstances' }})
-    min_pending_latency: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'minPendingLatency' }})
-    min_total_instances: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'minTotalInstances' }})
-    network_utilization: Optional[networkutilization.NetworkUtilization] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'networkUtilization' }})
-    request_utilization: Optional[requestutilization.RequestUtilization] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'requestUtilization' }})
-    standard_scheduler_settings: Optional[standardschedulersettings.StandardSchedulerSettings] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'standardSchedulerSettings' }})
+    r"""AutomaticScaling
+    Automatic scaling is based on request rate, response latencies, and other application metrics.
+    """
+    
+    cool_down_period: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('coolDownPeriod') }})
+    cpu_utilization: Optional[CPUUtilization] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cpuUtilization') }})
+    disk_utilization: Optional[DiskUtilization] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('diskUtilization') }})
+    max_concurrent_requests: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxConcurrentRequests') }})
+    max_idle_instances: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxIdleInstances') }})
+    max_pending_latency: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxPendingLatency') }})
+    max_total_instances: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxTotalInstances') }})
+    min_idle_instances: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('minIdleInstances') }})
+    min_pending_latency: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('minPendingLatency') }})
+    min_total_instances: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('minTotalInstances') }})
+    network_utilization: Optional[NetworkUtilization] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('networkUtilization') }})
+    request_utilization: Optional[RequestUtilization] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('requestUtilization') }})
+    standard_scheduler_settings: Optional[StandardSchedulerSettings] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('standardSchedulerSettings') }})
     

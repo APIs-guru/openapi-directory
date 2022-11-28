@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DeleteAttributeNamespaceMetaPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=namespace" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=namespace" })
   namespace: string;
 }
 
 
 export class DeleteAttributeNamespaceMetaSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   basicAuthentication: shared.SchemeBasicAuthentication;
 }
 
 
 export class DeleteAttributeNamespaceMetaRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DeleteAttributeNamespaceMetaPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: DeleteAttributeNamespaceMetaSecurity;
 }
 
 
 export class DeleteAttributeNamespaceMetaResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

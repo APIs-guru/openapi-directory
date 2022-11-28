@@ -1,8 +1,11 @@
-import warnings
+
+__doc__ = """ SDK Documentation: https://cloud.google.com/resource-manager"""
 import requests
-from typing import List,Optional
-from sdk.models import operations, shared
+
 from . import utils
+
+from .folders import Folders
+from .operations import Operations
 
 
 SERVERS = [
@@ -11,339 +14,56 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    r"""SDK Documentation: https://cloud.google.com/resource-manager"""
+    folders: Folders
+    operations: Operations
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        self._init_sdks()
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        self._init_sdks()
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        self._init_sdks()
     
-    def cloudresourcemanager_folders_create(self, request: operations.CloudresourcemanagerFoldersCreateRequest) -> operations.CloudresourcemanagerFoldersCreateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/v2/folders"
-
-        headers = {}
-
-        req_content_type, data, form = utils.serialize_request_body(request)
-        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers["content-type"] = req_content_type
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.CloudresourcemanagerFoldersCreateResponse(status_code=r.status_code, content_type=content_type)
+    
+    def _init_sdks(self):
         
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.Operation])
-                res.operation = out
-
-        return res
-
-    
-    def cloudresourcemanager_folders_delete(self, request: operations.CloudresourcemanagerFoldersDeleteRequest) -> operations.CloudresourcemanagerFoldersDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/v2/{name}", request.path_params)
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("DELETE", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.CloudresourcemanagerFoldersDeleteResponse(status_code=r.status_code, content_type=content_type)
+        self.folders = Folders(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
         
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.Folder])
-                res.folder = out
-
-        return res
-
+        self.operations = Operations(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
     
-    def cloudresourcemanager_folders_get(self, request: operations.CloudresourcemanagerFoldersGetRequest) -> operations.CloudresourcemanagerFoldersGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/v2/{name}", request.path_params)
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.CloudresourcemanagerFoldersGetResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.Folder])
-                res.folder = out
-
-        return res
-
-    
-    def cloudresourcemanager_folders_get_iam_policy(self, request: operations.CloudresourcemanagerFoldersGetIamPolicyRequest) -> operations.CloudresourcemanagerFoldersGetIamPolicyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/v2/{resource}:getIamPolicy", request.path_params)
-
-        headers = {}
-
-        req_content_type, data, form = utils.serialize_request_body(request)
-        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers["content-type"] = req_content_type
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.CloudresourcemanagerFoldersGetIamPolicyResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.Policy])
-                res.policy = out
-
-        return res
-
-    
-    def cloudresourcemanager_folders_list(self, request: operations.CloudresourcemanagerFoldersListRequest) -> operations.CloudresourcemanagerFoldersListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/v2/folders"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.CloudresourcemanagerFoldersListResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.ListFoldersResponse])
-                res.list_folders_response = out
-
-        return res
-
-    
-    def cloudresourcemanager_folders_move(self, request: operations.CloudresourcemanagerFoldersMoveRequest) -> operations.CloudresourcemanagerFoldersMoveResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/v2/{name}:move", request.path_params)
-
-        headers = {}
-
-        req_content_type, data, form = utils.serialize_request_body(request)
-        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers["content-type"] = req_content_type
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.CloudresourcemanagerFoldersMoveResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.Operation])
-                res.operation = out
-
-        return res
-
-    
-    def cloudresourcemanager_folders_patch(self, request: operations.CloudresourcemanagerFoldersPatchRequest) -> operations.CloudresourcemanagerFoldersPatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/v2/{name}", request.path_params)
-
-        headers = {}
-
-        req_content_type, data, form = utils.serialize_request_body(request)
-        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers["content-type"] = req_content_type
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("PATCH", url, params=query_params, data=data, files=form, headers=headers)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.CloudresourcemanagerFoldersPatchResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.Folder])
-                res.folder = out
-
-        return res
-
-    
-    def cloudresourcemanager_folders_search(self, request: operations.CloudresourcemanagerFoldersSearchRequest) -> operations.CloudresourcemanagerFoldersSearchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/v2/folders:search"
-
-        headers = {}
-
-        req_content_type, data, form = utils.serialize_request_body(request)
-        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers["content-type"] = req_content_type
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.CloudresourcemanagerFoldersSearchResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.SearchFoldersResponse])
-                res.search_folders_response = out
-
-        return res
-
-    
-    def cloudresourcemanager_folders_set_iam_policy(self, request: operations.CloudresourcemanagerFoldersSetIamPolicyRequest) -> operations.CloudresourcemanagerFoldersSetIamPolicyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/v2/{resource}:setIamPolicy", request.path_params)
-
-        headers = {}
-
-        req_content_type, data, form = utils.serialize_request_body(request)
-        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers["content-type"] = req_content_type
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.CloudresourcemanagerFoldersSetIamPolicyResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.Policy])
-                res.policy = out
-
-        return res
-
-    
-    def cloudresourcemanager_folders_test_iam_permissions(self, request: operations.CloudresourcemanagerFoldersTestIamPermissionsRequest) -> operations.CloudresourcemanagerFoldersTestIamPermissionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/v2/{resource}:testIamPermissions", request.path_params)
-
-        headers = {}
-
-        req_content_type, data, form = utils.serialize_request_body(request)
-        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers["content-type"] = req_content_type
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.CloudresourcemanagerFoldersTestIamPermissionsResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.TestIamPermissionsResponse])
-                res.test_iam_permissions_response = out
-
-        return res
-
-    
-    def cloudresourcemanager_folders_undelete(self, request: operations.CloudresourcemanagerFoldersUndeleteRequest) -> operations.CloudresourcemanagerFoldersUndeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/v2/{name}:undelete", request.path_params)
-
-        headers = {}
-
-        req_content_type, data, form = utils.serialize_request_body(request)
-        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers["content-type"] = req_content_type
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.CloudresourcemanagerFoldersUndeleteResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.Folder])
-                res.folder = out
-
-        return res
-
-    
-    def cloudresourcemanager_operations_get(self, request: operations.CloudresourcemanagerOperationsGetRequest) -> operations.CloudresourcemanagerOperationsGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/v1/{name}", request.path_params)
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.CloudresourcemanagerOperationsGetResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.Operation])
-                res.operation = out
-
-        return res
-
     

@@ -1,6 +1,6 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export declare const DELETEFAX_SERVERS: string[];
+export declare const DeleteFaxServerList: readonly ["https://fax.twilio.com"];
 export declare class DeleteFaxPathParams extends SpeakeasyBase {
     sid: string;
 }

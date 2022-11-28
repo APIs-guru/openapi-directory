@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { UnprocessedIdentityId } from "./unprocessedidentityid";
 /**
  * Returned in response to a successful <code>DeleteIdentities</code> operation.

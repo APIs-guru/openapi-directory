@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CustomListTargetingSetting
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Details of custom list targeting setting.
 **/
 export class CustomListTargetingSetting extends SpeakeasyBase {
-  @Metadata({ data: "json, name=customListId" })
+  @SpeakeasyMetadata({ data: "json, name=customListId" })
   customListId?: string;
 }

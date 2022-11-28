@@ -1,6 +1,7 @@
 
 
+
 export enum CancelStepsRequestStatusEnum {
-    Submitted = "SUBMITTED"
-,    Failed = "FAILED"
+    Submitted = "SUBMITTED",
+    Failed = "FAILED"
 }

@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GameServerGroupActionEnum } from "./gameservergroupactionenum";
 
 
+
 export class ResumeGameServerGroupInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=GameServerGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=GameServerGroupName" })
   gameServerGroupName: string;
 
-  @Metadata({ data: "json, name=ResumeActions" })
+  @SpeakeasyMetadata({ data: "json, name=ResumeActions" })
   resumeActions: GameServerGroupActionEnum[];
 }

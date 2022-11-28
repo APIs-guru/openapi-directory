@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MobileApplicationTargeting } from "./mobileapplicationtargeting";
 import { UrlTargeting } from "./urltargeting";
+
 
 
 // PlacementTargeting
@@ -8,9 +9,9 @@ import { UrlTargeting } from "./urltargeting";
  * Represents targeting about where the ads can appear, for example, certain sites or mobile applications. Different placement targeting types will be logically OR'ed.
 **/
 export class PlacementTargeting extends SpeakeasyBase {
-  @Metadata({ data: "json, name=mobileApplicationTargeting" })
+  @SpeakeasyMetadata({ data: "json, name=mobileApplicationTargeting" })
   mobileApplicationTargeting?: MobileApplicationTargeting;
 
-  @Metadata({ data: "json, name=urlTargeting" })
+  @SpeakeasyMetadata({ data: "json, name=urlTargeting" })
   urlTargeting?: UrlTargeting;
 }

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ActivityActor
+// User doing the action.
 type ActivityActor struct {
 	CallerType *string `json:"callerType,omitempty"`
 	Email      *string `json:"email,omitempty"`
@@ -11,6 +13,8 @@ type ActivityActor struct {
 	ProfileID  *string `json:"profileId,omitempty"`
 }
 
+// ActivityEventsParametersMessageValue
+// Nested parameter value pairs associated with this parameter. Complex value type for a parameter are returned as a list of parameter values. For example, the address parameter may have a value as `[{parameter: [{name: city, value: abc}]}]`
 type ActivityEventsParametersMessageValue struct {
 	Parameter []NestedParameter `json:"parameter,omitempty"`
 }
@@ -36,6 +40,8 @@ type ActivityEvents struct {
 	Type       *string                    `json:"type,omitempty"`
 }
 
+// ActivityID
+// Unique identifier for each activity record.
 type ActivityID struct {
 	ApplicationName *string    `json:"applicationName,omitempty"`
 	CustomerID      *string    `json:"customerId,omitempty"`
@@ -43,6 +49,8 @@ type ActivityID struct {
 	UniqueQualifier *string    `json:"uniqueQualifier,omitempty"`
 }
 
+// Activity
+// JSON template for the activity resource.
 type Activity struct {
 	Actor       *ActivityActor   `json:"actor,omitempty"`
 	Etag        *string          `json:"etag,omitempty"`

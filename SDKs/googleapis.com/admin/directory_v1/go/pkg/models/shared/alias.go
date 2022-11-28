@@ -1,5 +1,7 @@
 package shared
 
+// Alias
+// JSON template for Alias object in Directory API.
 type Alias struct {
 	Alias        *string `json:"alias,omitempty"`
 	Etag         *string `json:"etag,omitempty"`

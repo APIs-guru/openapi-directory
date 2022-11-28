@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDatalabelingV1beta1EvaluationJobAlertConfig
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides details for how an evaluation job sends email alerts based on the results of a run.
 **/
 export class GoogleCloudDatalabelingV1beta1EvaluationJobAlertConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=minAcceptableMeanAveragePrecision" })
+  @SpeakeasyMetadata({ data: "json, name=minAcceptableMeanAveragePrecision" })
   minAcceptableMeanAveragePrecision?: number;
 }

@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetBundleRegistrationsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=bundle_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=bundle_id" })
   bundleId?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=cursor" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=cursor" })
   cursor?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=user_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=user_id" })
   userId?: number;
 }
 
 
 export class GetBundleRegistrationsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetBundleRegistrationsQueryParams;
 }
 
 
 export class GetBundleRegistrationsResponse extends SpeakeasyBase {
-  @Metadata({ elemType: shared.BundleRegistrationEntity })
+  @SpeakeasyMetadata({ elemType: shared.BundleRegistrationEntity })
   bundleRegistrationEntities?: shared.BundleRegistrationEntity[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

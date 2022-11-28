@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EvaluationResult } from "./evaluationresult";
+
 
 
 // GetComplianceDetailsByResourceResponse
@@ -8,9 +8,9 @@ import { EvaluationResult } from "./evaluationresult";
  * <p/>
 **/
 export class GetComplianceDetailsByResourceResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EvaluationResults", elemType: shared.EvaluationResult })
+  @SpeakeasyMetadata({ data: "json, name=EvaluationResults", elemType: EvaluationResult })
   evaluationResults?: EvaluationResult[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

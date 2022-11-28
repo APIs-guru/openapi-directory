@@ -5,19 +5,19 @@ from sdk.models import shared
 
 @dataclass
 class GetTeamsTeamIDSetupProgressPathParams:
-    team_id: str = field(default=None, metadata={'path_param': { 'field_name': 'teamId', 'style': 'simple', 'explode': False }})
+    team_id: str = field(metadata={'path_param': { 'field_name': 'teamId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetTeamsTeamIDSetupProgressRequest:
-    path_params: GetTeamsTeamIDSetupProgressPathParams = field(default=None)
+    path_params: GetTeamsTeamIDSetupProgressPathParams = field()
     
 
 @dataclass
 class GetTeamsTeamIDSetupProgressResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     error_response_content: Optional[shared.ErrorResponseContent] = field(default=None)
-    status_code: int = field(default=None)
     team_setup_progress: Optional[shared.TeamSetupProgress] = field(default=None)
     

@@ -9,6 +9,8 @@ const (
 	JobRunStateEnumFailed           JobRunStateEnum = "FAILED"
 )
 
+// JobRun
+// A `JobRun` resource in the Google Cloud Deploy API. A `JobRun` contains information of a single `Rollout` job evaluation.
 type JobRun struct {
 	CreateTime   *string          `json:"createTime,omitempty"`
 	DeployJobRun *DeployJobRun    `json:"deployJobRun,omitempty"`

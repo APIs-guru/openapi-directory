@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ErrorEvent } from "./errorevent";
+
 
 
 // ListEventsResponse
@@ -8,12 +8,12 @@ import { ErrorEvent } from "./errorevent";
  * Contains a set of requested error events.
 **/
 export class ListEventsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errorEvents", elemType: shared.ErrorEvent })
+  @SpeakeasyMetadata({ data: "json, name=errorEvents", elemType: ErrorEvent })
   errorEvents?: ErrorEvent[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=timeRangeBegin" })
+  @SpeakeasyMetadata({ data: "json, name=timeRangeBegin" })
   timeRangeBegin?: string;
 }

@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Entity } from "./entity";
 
 
+
 export class DetectEntitiesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Entities", elemType: shared.Entity })
+  @SpeakeasyMetadata({ data: "json, name=Entities", elemType: Entity })
   entities?: Entity[];
 }

@@ -9,6 +9,8 @@ const (
 	ProfileSettingsFriendsListVisibilityEnumUnavailable                      ProfileSettingsFriendsListVisibilityEnum = "UNAVAILABLE"
 )
 
+// ProfileSettings
+// Profile settings
 type ProfileSettings struct {
 	FriendsListVisibility *ProfileSettingsFriendsListVisibilityEnum `json:"friendsListVisibility,omitempty"`
 	Kind                  *string                                   `json:"kind,omitempty"`

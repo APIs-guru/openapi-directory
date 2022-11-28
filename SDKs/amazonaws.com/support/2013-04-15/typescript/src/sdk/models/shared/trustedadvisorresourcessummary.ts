@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TrustedAdvisorResourcesSummary
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Details about AWS resources that were analyzed in a call to Trusted Advisor <a>DescribeTrustedAdvisorCheckSummaries</a>.
 **/
 export class TrustedAdvisorResourcesSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=resourcesFlagged" })
+  @SpeakeasyMetadata({ data: "json, name=resourcesFlagged" })
   resourcesFlagged: number;
 
-  @Metadata({ data: "json, name=resourcesIgnored" })
+  @SpeakeasyMetadata({ data: "json, name=resourcesIgnored" })
   resourcesIgnored: number;
 
-  @Metadata({ data: "json, name=resourcesProcessed" })
+  @SpeakeasyMetadata({ data: "json, name=resourcesProcessed" })
   resourcesProcessed: number;
 
-  @Metadata({ data: "json, name=resourcesSuppressed" })
+  @SpeakeasyMetadata({ data: "json, name=resourcesSuppressed" })
   resourcesSuppressed: number;
 }

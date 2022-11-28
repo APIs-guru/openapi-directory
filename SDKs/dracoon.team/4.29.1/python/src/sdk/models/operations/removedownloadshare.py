@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class RemoveDownloadSharePathParams:
-    share_id: int = field(default=None, metadata={'path_param': { 'field_name': 'share_id', 'style': 'simple', 'explode': False }})
+    share_id: int = field(metadata={'path_param': { 'field_name': 'share_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,13 +15,13 @@ class RemoveDownloadShareHeaders:
 
 @dataclass
 class RemoveDownloadShareRequest:
-    path_params: RemoveDownloadSharePathParams = field(default=None)
-    headers: RemoveDownloadShareHeaders = field(default=None)
+    headers: RemoveDownloadShareHeaders = field()
+    path_params: RemoveDownloadSharePathParams = field()
     
 
 @dataclass
 class RemoveDownloadShareResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

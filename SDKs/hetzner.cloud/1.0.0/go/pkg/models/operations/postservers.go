@@ -20,10 +20,8 @@ type PostServersCreateServerRequest struct {
 	Volumes          []int64                                   `json:"volumes,omitempty"`
 }
 
-type PostServersRequest struct {
-	Request *PostServersCreateServerRequest `request:"mediaType=application/json"`
-}
-
+// PostServersCreateServerResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type PostServersCreateServerResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -64,12 +62,16 @@ type PostServersCreateServerResponseServerDatacenterLocation struct {
 	NetworkZone string  `json:"network_zone"`
 }
 
+// PostServersCreateServerResponseServerDatacenterServerTypes
+// The Server types the Datacenter can handle
 type PostServersCreateServerResponseServerDatacenterServerTypes struct {
 	Available             []float64 `json:"available"`
 	AvailableForMigration []float64 `json:"available_for_migration"`
 	Supported             []float64 `json:"supported"`
 }
 
+// PostServersCreateServerResponseServerDatacenter
+// Datacenter this Resource is located at
 type PostServersCreateServerResponseServerDatacenter struct {
 	Description string                                                     `json:"description"`
 	ID          int64                                                      `json:"id"`
@@ -78,6 +80,8 @@ type PostServersCreateServerResponseServerDatacenter struct {
 	ServerTypes PostServersCreateServerResponseServerDatacenterServerTypes `json:"server_types"`
 }
 
+// PostServersCreateServerResponseServerImageCreatedFrom
+// Information about the Server the Image was created from
 type PostServersCreateServerResponseServerImageCreatedFrom struct {
 	ID   int64  `json:"id"`
 	Name string `json:"name"`
@@ -93,6 +97,8 @@ const (
 	PostServersCreateServerResponseServerImageOsFlavorEnumUnknown PostServersCreateServerResponseServerImageOsFlavorEnum = "unknown"
 )
 
+// PostServersCreateServerResponseServerImageProtection
+// Protection configuration for the Resource
 type PostServersCreateServerResponseServerImageProtection struct {
 	Delete bool `json:"delete"`
 }
@@ -143,6 +149,8 @@ const (
 	PostServersCreateServerResponseServerIsoTypeEnumPrivate PostServersCreateServerResponseServerIsoTypeEnum = "private"
 )
 
+// PostServersCreateServerResponseServerIso
+// ISO Image that is attached to this Server. Null if no ISO is attached.
 type PostServersCreateServerResponseServerIso struct {
 	Deprecated  string                                           `json:"deprecated"`
 	Description string                                           `json:"description"`
@@ -173,6 +181,8 @@ type PostServersCreateServerResponseServerPrivateNet struct {
 	Network    *int64   `json:"network,omitempty"`
 }
 
+// PostServersCreateServerResponseServerProtection
+// Protection configuration for the Server
 type PostServersCreateServerResponseServerProtection struct {
 	Delete  bool `json:"delete"`
 	Rebuild bool `json:"rebuild"`
@@ -190,6 +200,8 @@ type PostServersCreateServerResponseServerPublicNetServerPublicNetFirewall struc
 	Status *PostServersCreateServerResponseServerPublicNetServerPublicNetFirewallStatusEnum `json:"status,omitempty"`
 }
 
+// PostServersCreateServerResponseServerPublicNetIpv4
+// IP address (v4) and its reverse DNS entry of this Server
 type PostServersCreateServerResponseServerPublicNetIpv4 struct {
 	Blocked bool   `json:"blocked"`
 	DNSPtr  string `json:"dns_ptr"`
@@ -201,12 +213,16 @@ type PostServersCreateServerResponseServerPublicNetIpv6DNSPtr struct {
 	IP     string `json:"ip"`
 }
 
+// PostServersCreateServerResponseServerPublicNetIpv6
+// IPv6 network assigned to this Server and its reverse DNS entry
 type PostServersCreateServerResponseServerPublicNetIpv6 struct {
 	Blocked bool                                                       `json:"blocked"`
 	DNSPtr  []PostServersCreateServerResponseServerPublicNetIpv6DNSPtr `json:"dns_ptr"`
 	IP      string                                                     `json:"ip"`
 }
 
+// PostServersCreateServerResponseServerPublicNet
+// Public network information. The Server's IPv4 address can be found in `public_net->ipv4->ip`
 type PostServersCreateServerResponseServerPublicNet struct {
 	Firewalls   []PostServersCreateServerResponseServerPublicNetServerPublicNetFirewall `json:"firewalls,omitempty"`
 	FloatingIps []int64                                                                 `json:"floating_ips"`
@@ -221,11 +237,15 @@ const (
 	PostServersCreateServerResponseServerServerTypeCPUTypeEnumDedicated PostServersCreateServerResponseServerServerTypeCPUTypeEnum = "dedicated"
 )
 
+// PostServersCreateServerResponseServerServerTypePricesPriceHourly
+// Hourly costs for a Server type in this Location
 type PostServersCreateServerResponseServerServerTypePricesPriceHourly struct {
 	Gross string `json:"gross"`
 	Net   string `json:"net"`
 }
 
+// PostServersCreateServerResponseServerServerTypePricesPriceMonthly
+// Monthly costs for a Server type in this Location
 type PostServersCreateServerResponseServerServerTypePricesPriceMonthly struct {
 	Gross string `json:"gross"`
 	Net   string `json:"net"`
@@ -244,6 +264,8 @@ const (
 	PostServersCreateServerResponseServerServerTypeStorageTypeEnumNetwork PostServersCreateServerResponseServerServerTypeStorageTypeEnum = "network"
 )
 
+// PostServersCreateServerResponseServerServerType
+// Type of Server - determines how much ram, disk and cpu a Server has
 type PostServersCreateServerResponseServerServerType struct {
 	Cores       float64                                                        `json:"cores"`
 	CPUType     PostServersCreateServerResponseServerServerTypeCPUTypeEnum     `json:"cpu_type"`
@@ -301,6 +323,10 @@ type PostServersCreateServerResponse struct {
 	NextActions  []PostServersCreateServerResponseAction `json:"next_actions"`
 	RootPassword string                                  `json:"root_password"`
 	Server       PostServersCreateServerResponseServer   `json:"server"`
+}
+
+type PostServersRequest struct {
+	Request *PostServersCreateServerRequest `request:"mediaType=application/json"`
 }
 
 type PostServersResponse struct {

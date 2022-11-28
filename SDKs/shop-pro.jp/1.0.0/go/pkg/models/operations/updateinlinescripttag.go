@@ -36,12 +36,6 @@ type UpdateInlineScriptTagSecurity struct {
 	OAuth2 shared.SchemeOAuth2 `security:"scheme,type=oauth2"`
 }
 
-type UpdateInlineScriptTagRequest struct {
-	PathParams UpdateInlineScriptTagPathParams
-	Request    *UpdateInlineScriptTagRequestBody `request:"mediaType=application/json"`
-	Security   UpdateInlineScriptTagSecurity
-}
-
 type UpdateInlineScriptTag200ApplicationJSONInlineScriptTagDisplayScopeEnum string
 
 const (
@@ -69,6 +63,12 @@ type UpdateInlineScriptTag200ApplicationJSONInlineScriptTag struct {
 
 type UpdateInlineScriptTag200ApplicationJSON struct {
 	InlineScriptTag *UpdateInlineScriptTag200ApplicationJSONInlineScriptTag `json:"inline_script_tag,omitempty"`
+}
+
+type UpdateInlineScriptTagRequest struct {
+	PathParams UpdateInlineScriptTagPathParams
+	Request    *UpdateInlineScriptTagRequestBody `request:"mediaType=application/json"`
+	Security   UpdateInlineScriptTagSecurity
 }
 
 type UpdateInlineScriptTagResponse struct {

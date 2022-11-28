@@ -12,17 +12,17 @@ class SyncPlayReadyRequests:
 
 @dataclass
 class SyncPlayReadySecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class SyncPlayReadyRequest:
-    request: SyncPlayReadyRequests = field(default=None)
-    security: SyncPlayReadySecurity = field(default=None)
+    request: SyncPlayReadyRequests = field()
+    security: SyncPlayReadySecurity = field()
     
 
 @dataclass
 class SyncPlayReadyResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

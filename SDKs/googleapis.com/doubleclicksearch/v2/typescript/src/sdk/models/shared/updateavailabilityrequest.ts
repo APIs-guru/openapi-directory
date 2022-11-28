@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Availability } from "./availability";
+
 
 
 // UpdateAvailabilityRequest
@@ -8,6 +8,6 @@ import { Availability } from "./availability";
  * The request to update availability.
 **/
 export class UpdateAvailabilityRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=availabilities", elemType: shared.Availability })
+  @SpeakeasyMetadata({ data: "json, name=availabilities", elemType: Availability })
   availabilities?: Availability[];
 }

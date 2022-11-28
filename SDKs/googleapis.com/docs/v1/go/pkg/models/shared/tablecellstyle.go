@@ -10,6 +10,8 @@ const (
 	TableCellStyleContentAlignmentEnumBottom                      TableCellStyleContentAlignmentEnum = "BOTTOM"
 )
 
+// TableCellStyle
+// The style of a TableCell. Inherited table cell styles are represented as unset fields in this message. A table cell style can inherit from the table's style.
 type TableCellStyle struct {
 	BackgroundColor  *OptionalColor                      `json:"backgroundColor,omitempty"`
 	BorderBottom     *TableCellBorder                    `json:"borderBottom,omitempty"`

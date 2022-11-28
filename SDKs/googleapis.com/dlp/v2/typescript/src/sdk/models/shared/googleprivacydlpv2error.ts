@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleRpcStatus } from "./googlerpcstatus";
+
 
 
 // GooglePrivacyDlpV2Error
@@ -7,9 +8,9 @@ import { GoogleRpcStatus } from "./googlerpcstatus";
  * Details information about an error encountered during job execution or the results of an unsuccessful activation of the JobTrigger.
 **/
 export class GooglePrivacyDlpV2Error extends SpeakeasyBase {
-  @Metadata({ data: "json, name=details" })
+  @SpeakeasyMetadata({ data: "json, name=details" })
   details?: GoogleRpcStatus;
 
-  @Metadata({ data: "json, name=timestamps" })
+  @SpeakeasyMetadata({ data: "json, name=timestamps" })
   timestamps?: string[];
 }

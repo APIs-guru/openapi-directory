@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Resources } from "./resources";
+
 
 
 // FhirFilter
@@ -7,6 +8,6 @@ import { Resources } from "./resources";
  * Filter configuration.
 **/
 export class FhirFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=resources" })
+  @SpeakeasyMetadata({ data: "json, name=resources" })
   resources?: Resources;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDatalabelingV1beta1Example
+// An Example is a piece of data and its annotation. For example, an image with label "house".
 type GoogleCloudDatalabelingV1beta1Example struct {
 	Annotations  []GoogleCloudDatalabelingV1beta1Annotation  `json:"annotations,omitempty"`
 	ImagePayload *GoogleCloudDatalabelingV1beta1ImagePayload `json:"imagePayload,omitempty"`

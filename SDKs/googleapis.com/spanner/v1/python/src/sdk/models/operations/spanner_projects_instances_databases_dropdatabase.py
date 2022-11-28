@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class SpannerProjectsInstancesDatabasesDropDatabasePathParams:
-    database: str = field(default=None, metadata={'path_param': { 'field_name': 'database', 'style': 'simple', 'explode': False }})
+    database: str = field(metadata={'path_param': { 'field_name': 'database', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class SpannerProjectsInstancesDatabasesDropDatabaseQueryParams:
 
 @dataclass
 class SpannerProjectsInstancesDatabasesDropDatabaseSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class SpannerProjectsInstancesDatabasesDropDatabaseSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,14 +44,14 @@ class SpannerProjectsInstancesDatabasesDropDatabaseSecurity:
 
 @dataclass
 class SpannerProjectsInstancesDatabasesDropDatabaseRequest:
-    path_params: SpannerProjectsInstancesDatabasesDropDatabasePathParams = field(default=None)
-    query_params: SpannerProjectsInstancesDatabasesDropDatabaseQueryParams = field(default=None)
-    security: SpannerProjectsInstancesDatabasesDropDatabaseSecurity = field(default=None)
+    path_params: SpannerProjectsInstancesDatabasesDropDatabasePathParams = field()
+    query_params: SpannerProjectsInstancesDatabasesDropDatabaseQueryParams = field()
+    security: SpannerProjectsInstancesDatabasesDropDatabaseSecurity = field()
     
 
 @dataclass
 class SpannerProjectsInstancesDatabasesDropDatabaseResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

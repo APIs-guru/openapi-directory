@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class StromkontoRegisterRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=first_name" })
+  @SpeakeasyMetadata({ data: "json, name=first_name" })
   firstName?: string;
 
-  @Metadata({ data: "json, name=last_name" })
+  @SpeakeasyMetadata({ data: "json, name=last_name" })
   lastName?: string;
 
-  @Metadata({ data: "json, name=zipcode" })
+  @SpeakeasyMetadata({ data: "json, name=zipcode" })
   zipcode?: string;
 }
 
 
 export class StromkontoRegisterRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: StromkontoRegisterRequestBody;
 }
 
 
 export class StromkontoRegisterResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

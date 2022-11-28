@@ -5,23 +5,23 @@ from sdk.models import shared
 
 @dataclass
 class GetProductPathParams:
-    epid: str = field(default=None, metadata={'path_param': { 'field_name': 'epid', 'style': 'simple', 'explode': False }})
+    epid: str = field(metadata={'path_param': { 'field_name': 'epid', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetProductSecurity:
-    api_auth: shared.SchemeAPIAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    api_auth: shared.SchemeAPIAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetProductRequest:
-    path_params: GetProductPathParams = field(default=None)
-    security: GetProductSecurity = field(default=None)
+    path_params: GetProductPathParams = field()
+    security: GetProductSecurity = field()
     
 
 @dataclass
 class GetProductResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     product: Optional[shared.Product] = field(default=None)
-    status_code: int = field(default=None)
     

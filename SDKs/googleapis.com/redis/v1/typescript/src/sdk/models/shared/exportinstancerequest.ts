@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OutputConfig } from "./outputconfig";
+
 
 
 // ExportInstanceRequest
@@ -7,6 +8,6 @@ import { OutputConfig } from "./outputconfig";
  * Request for Export.
 **/
 export class ExportInstanceRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=outputConfig" })
+  @SpeakeasyMetadata({ data: "json, name=outputConfig" })
   outputConfig?: OutputConfig;
 }

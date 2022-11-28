@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDeleteNetworkInsightsPathActionEnum(str, Enum):
     DELETE_NETWORK_INSIGHTS_PATH = "DeleteNetworkInsightsPath"
@@ -10,8 +14,8 @@ class PostDeleteNetworkInsightsPathVersionEnum(str, Enum):
 
 @dataclass
 class PostDeleteNetworkInsightsPathQueryParams:
-    action: PostDeleteNetworkInsightsPathActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDeleteNetworkInsightsPathVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDeleteNetworkInsightsPathActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDeleteNetworkInsightsPathVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDeleteNetworkInsightsPathHeaders:
 
 @dataclass
 class PostDeleteNetworkInsightsPathRequest:
-    query_params: PostDeleteNetworkInsightsPathQueryParams = field(default=None)
-    headers: PostDeleteNetworkInsightsPathHeaders = field(default=None)
+    headers: PostDeleteNetworkInsightsPathHeaders = field()
+    query_params: PostDeleteNetworkInsightsPathQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDeleteNetworkInsightsPathResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

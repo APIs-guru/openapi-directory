@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AddAttributesActivity } from "./addattributesactivity";
 import { ChannelActivity } from "./channelactivity";
 import { DatastoreActivity } from "./datastoreactivity";
@@ -43,43 +43,43 @@ var PipelineActivity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=addAttributes" }),
+        SpeakeasyMetadata({ data: "json, name=addAttributes" }),
         __metadata("design:type", AddAttributesActivity)
     ], PipelineActivity.prototype, "addAttributes", void 0);
     __decorate([
-        Metadata({ data: "json, name=channel" }),
+        SpeakeasyMetadata({ data: "json, name=channel" }),
         __metadata("design:type", ChannelActivity)
     ], PipelineActivity.prototype, "channel", void 0);
     __decorate([
-        Metadata({ data: "json, name=datastore" }),
+        SpeakeasyMetadata({ data: "json, name=datastore" }),
         __metadata("design:type", DatastoreActivity)
     ], PipelineActivity.prototype, "datastore", void 0);
     __decorate([
-        Metadata({ data: "json, name=deviceRegistryEnrich" }),
+        SpeakeasyMetadata({ data: "json, name=deviceRegistryEnrich" }),
         __metadata("design:type", DeviceRegistryEnrichActivity)
     ], PipelineActivity.prototype, "deviceRegistryEnrich", void 0);
     __decorate([
-        Metadata({ data: "json, name=deviceShadowEnrich" }),
+        SpeakeasyMetadata({ data: "json, name=deviceShadowEnrich" }),
         __metadata("design:type", DeviceShadowEnrichActivity)
     ], PipelineActivity.prototype, "deviceShadowEnrich", void 0);
     __decorate([
-        Metadata({ data: "json, name=filter" }),
+        SpeakeasyMetadata({ data: "json, name=filter" }),
         __metadata("design:type", FilterActivity)
     ], PipelineActivity.prototype, "filter", void 0);
     __decorate([
-        Metadata({ data: "json, name=lambda" }),
+        SpeakeasyMetadata({ data: "json, name=lambda" }),
         __metadata("design:type", LambdaActivity)
     ], PipelineActivity.prototype, "lambda", void 0);
     __decorate([
-        Metadata({ data: "json, name=math" }),
+        SpeakeasyMetadata({ data: "json, name=math" }),
         __metadata("design:type", MathActivity)
     ], PipelineActivity.prototype, "math", void 0);
     __decorate([
-        Metadata({ data: "json, name=removeAttributes" }),
+        SpeakeasyMetadata({ data: "json, name=removeAttributes" }),
         __metadata("design:type", RemoveAttributesActivity)
     ], PipelineActivity.prototype, "removeAttributes", void 0);
     __decorate([
-        Metadata({ data: "json, name=selectAttributes" }),
+        SpeakeasyMetadata({ data: "json, name=selectAttributes" }),
         __metadata("design:type", SelectAttributesActivity)
     ], PipelineActivity.prototype, "selectAttributes", void 0);
     return PipelineActivity;

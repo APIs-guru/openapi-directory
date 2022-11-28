@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ProfileSpecifier extends SpeakeasyBase {
-  @Metadata({ data: "json, name=oid" })
+  @SpeakeasyMetadata({ data: "json, name=oid" })
   oid?: string;
 
-  @Metadata({ data: "json, name=provider" })
+  @SpeakeasyMetadata({ data: "json, name=provider" })
   provider?: string;
 
-  @Metadata({ data: "json, name=tid" })
+  @SpeakeasyMetadata({ data: "json, name=tid" })
   tid?: string;
 }

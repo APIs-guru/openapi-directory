@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Fingerprint } from "./fingerprint";
+
 
 
 // Basis
@@ -7,9 +8,9 @@ import { Fingerprint } from "./fingerprint";
  * Basis describes the base image portion (Note) of the DockerImage relationship. Linked occurrences are derived from this or an equivalent image via: FROM Or an equivalent reference, e.g. a tag of the resource_url.
 **/
 export class Basis extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fingerprint" })
+  @SpeakeasyMetadata({ data: "json, name=fingerprint" })
   fingerprint?: Fingerprint;
 
-  @Metadata({ data: "json, name=resourceUrl" })
+  @SpeakeasyMetadata({ data: "json, name=resourceUrl" })
   resourceUrl?: string;
 }

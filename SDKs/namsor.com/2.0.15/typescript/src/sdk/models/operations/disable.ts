@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DisablePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=disabled" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=disabled" })
   disabled: boolean;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=source" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=source" })
   source: string;
 }
 
 
 export class DisableRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DisablePathParams;
 }
 
 
 export class DisableResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

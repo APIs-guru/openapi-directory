@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GenerateUploadUrlResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Response of `GenerateSourceUploadUrl` method.
 **/
 export class GenerateUploadUrlResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=uploadUrl" })
+  @SpeakeasyMetadata({ data: "json, name=uploadUrl" })
   uploadUrl?: string;
 }

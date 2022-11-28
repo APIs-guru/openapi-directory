@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteAccessPolicyPathParams:
-    access_policy_id: str = field(default=None, metadata={'path_param': { 'field_name': 'accessPolicyId', 'style': 'simple', 'explode': False }})
+    access_policy_id: str = field(metadata={'path_param': { 'field_name': 'accessPolicyId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,18 +28,18 @@ class DeleteAccessPolicyHeaders:
 
 @dataclass
 class DeleteAccessPolicyRequest:
-    path_params: DeleteAccessPolicyPathParams = field(default=None)
-    query_params: DeleteAccessPolicyQueryParams = field(default=None)
-    headers: DeleteAccessPolicyHeaders = field(default=None)
+    headers: DeleteAccessPolicyHeaders = field()
+    path_params: DeleteAccessPolicyPathParams = field()
+    query_params: DeleteAccessPolicyQueryParams = field()
     
 
 @dataclass
 class DeleteAccessPolicyResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     delete_access_policy_response: Optional[dict[str, Any]] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class FailureInfoTypeEnum(str, Enum):
     FAILURE_TYPE_UNSPECIFIED = "FAILURE_TYPE_UNSPECIFIED"
@@ -15,6 +17,10 @@ class FailureInfoTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class FailureInfo:
-    detail: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'detail' }})
-    type: Optional[FailureInfoTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""FailureInfo
+    A fatal problem encountered during the execution of the build.
+    """
+    
+    detail: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('detail') }})
+    type: Optional[FailureInfoTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

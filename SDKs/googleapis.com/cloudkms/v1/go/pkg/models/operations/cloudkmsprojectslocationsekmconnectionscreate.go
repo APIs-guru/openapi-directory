@@ -41,7 +41,7 @@ type CloudkmsProjectsLocationsEkmConnectionsCreateSecurity struct {
 type CloudkmsProjectsLocationsEkmConnectionsCreateRequest struct {
 	PathParams  CloudkmsProjectsLocationsEkmConnectionsCreatePathParams
 	QueryParams CloudkmsProjectsLocationsEkmConnectionsCreateQueryParams
-	Request     *shared.EkmConnection `request:"mediaType=application/json"`
+	Request     *shared.EkmConnectionInput `request:"mediaType=application/json"`
 	Security    CloudkmsProjectsLocationsEkmConnectionsCreateSecurity
 }
 

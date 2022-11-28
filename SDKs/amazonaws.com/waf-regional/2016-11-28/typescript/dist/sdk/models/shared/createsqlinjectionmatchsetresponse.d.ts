@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { SqlInjectionMatchSet } from "./sqlinjectionmatchset";
 /**
  * The response to a <code>CreateSqlInjectionMatchSet</code> request.

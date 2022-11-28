@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Server } from "./server";
 import { ServerValidationStrategyEnum } from "./servervalidationstrategyenum";
 import { UserDataValidationParameters } from "./userdatavalidationparameters";

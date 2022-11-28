@@ -1,36 +1,37 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateBotAliasPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=botAliasId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=botAliasId" })
   botAliasId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=botId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=botId" })
   botId: string;
 }
 
 
 export class UpdateBotAliasHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -40,10 +41,10 @@ export class UpdateBotAliasHeaders extends SpeakeasyBase {
  * Configures conversation logging that saves audio, text, and metadata for the conversations with your users.
 **/
 export class UpdateBotAliasRequestBodyConversationLogSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=audioLogSettings", elemType: shared.AudioLogSetting })
+  @SpeakeasyMetadata({ data: "json, name=audioLogSettings", elemType: shared.AudioLogSetting })
   audioLogSettings?: shared.AudioLogSetting[];
 
-  @Metadata({ data: "json, name=textLogSettings", elemType: shared.TextLogSetting })
+  @SpeakeasyMetadata({ data: "json, name=textLogSettings", elemType: shared.TextLogSetting })
   textLogSettings?: shared.TextLogSetting[];
 }
 
@@ -53,69 +54,69 @@ export class UpdateBotAliasRequestBodyConversationLogSettings extends SpeakeasyB
  * Determines whether Amazon Lex will use Amazon Comprehend to detect the sentiment of user utterances.
 **/
 export class UpdateBotAliasRequestBodySentimentAnalysisSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=detectSentiment" })
+  @SpeakeasyMetadata({ data: "json, name=detectSentiment" })
   detectSentiment?: boolean;
 }
 
 
 export class UpdateBotAliasRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=botAliasLocaleSettings", elemType: shared.BotAliasLocaleSettings })
+  @SpeakeasyMetadata({ data: "json, name=botAliasLocaleSettings", elemType: shared.BotAliasLocaleSettings })
   botAliasLocaleSettings?: Map<string, shared.BotAliasLocaleSettings>;
 
-  @Metadata({ data: "json, name=botAliasName" })
+  @SpeakeasyMetadata({ data: "json, name=botAliasName" })
   botAliasName: string;
 
-  @Metadata({ data: "json, name=botVersion" })
+  @SpeakeasyMetadata({ data: "json, name=botVersion" })
   botVersion?: string;
 
-  @Metadata({ data: "json, name=conversationLogSettings" })
+  @SpeakeasyMetadata({ data: "json, name=conversationLogSettings" })
   conversationLogSettings?: UpdateBotAliasRequestBodyConversationLogSettings;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=sentimentAnalysisSettings" })
+  @SpeakeasyMetadata({ data: "json, name=sentimentAnalysisSettings" })
   sentimentAnalysisSettings?: UpdateBotAliasRequestBodySentimentAnalysisSettings;
 }
 
 
 export class UpdateBotAliasRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateBotAliasPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdateBotAliasHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdateBotAliasRequestBody;
 }
 
 
 export class UpdateBotAliasResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   conflictException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   preconditionFailedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceQuotaExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateBotAliasResponse?: shared.UpdateBotAliasResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationException?: any;
 }

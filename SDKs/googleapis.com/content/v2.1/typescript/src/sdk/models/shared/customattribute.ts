@@ -1,15 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { CustomAttribute } from "./customattribute";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CustomAttribute extends SpeakeasyBase {
-  @Metadata({ data: "json, name=groupValues", elemType: shared.CustomAttribute })
+  @SpeakeasyMetadata({ data: "json, name=groupValues", elemType: CustomAttribute })
   groupValues?: CustomAttribute[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }

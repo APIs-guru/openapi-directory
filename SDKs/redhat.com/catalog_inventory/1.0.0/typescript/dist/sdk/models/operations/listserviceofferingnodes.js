@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ListServiceOfferingNodesQueryParams = /** @class */ (function (_super) {
     __extends(ListServiceOfferingNodesQueryParams, _super);
@@ -30,19 +30,19 @@ var ListServiceOfferingNodesQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=deepObject;explode=true;name=filter" }),
+        SpeakeasyMetadata({ data: "queryParam, style=deepObject;explode=true;name=filter" }),
         __metadata("design:type", Map)
     ], ListServiceOfferingNodesQueryParams.prototype, "filter", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", Number)
     ], ListServiceOfferingNodesQueryParams.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=offset" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" }),
         __metadata("design:type", Number)
     ], ListServiceOfferingNodesQueryParams.prototype, "offset", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=deepObject;explode=true;name=sort_by" }),
+        SpeakeasyMetadata({ data: "queryParam, style=deepObject;explode=true;name=sort_by" }),
         __metadata("design:type", Map)
     ], ListServiceOfferingNodesQueryParams.prototype, "sortBy", void 0);
     return ListServiceOfferingNodesQueryParams;
@@ -54,7 +54,7 @@ var ListServiceOfferingNodesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ListServiceOfferingNodesQueryParams)
     ], ListServiceOfferingNodesRequest.prototype, "queryParams", void 0);
     return ListServiceOfferingNodesRequest;
@@ -66,15 +66,15 @@ var ListServiceOfferingNodesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ListServiceOfferingNodesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ServiceOfferingNodesCollection)
     ], ListServiceOfferingNodesResponse.prototype, "serviceOfferingNodesCollection", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ListServiceOfferingNodesResponse.prototype, "statusCode", void 0);
     return ListServiceOfferingNodesResponse;

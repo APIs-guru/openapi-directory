@@ -10,18 +10,18 @@ class GetAccountTasksQueryParams:
 
 @dataclass
 class GetAccountTasksSecurity:
-    bearer_auth: shared.SchemeBearerAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_auth: shared.SchemeBearerAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class GetAccountTasksRequest:
-    query_params: GetAccountTasksQueryParams = field(default=None)
-    security: GetAccountTasksSecurity = field(default=None)
+    query_params: GetAccountTasksQueryParams = field()
+    security: GetAccountTasksSecurity = field()
     
 
 @dataclass
 class GetAccountTasksResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     tasks: Optional[List[shared.Task]] = field(default=None)
     

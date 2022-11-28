@@ -1,49 +1,50 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetTeamTeamnamePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=teamname" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=teamname" })
   teamname: string;
 }
 
 
-export class GetTeamTeamnameRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetTeamTeamnamePathParams;
-}
-
-
 export class GetTeamTeamname200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=@id" })
+  @SpeakeasyMetadata({ data: "json, name=@id" })
   atId?: string;
 
-  @Metadata({ data: "json, name=logo" })
+  @SpeakeasyMetadata({ data: "json, name=logo" })
   logo?: string;
 
-  @Metadata({ data: "json, name=logo_email" })
+  @SpeakeasyMetadata({ data: "json, name=logo_email" })
   logoEmail?: string;
 
-  @Metadata({ data: "json, name=members" })
+  @SpeakeasyMetadata({ data: "json, name=members" })
   members?: any[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=profile" })
+  @SpeakeasyMetadata({ data: "json, name=profile" })
   profile?: string;
 
-  @Metadata({ data: "json, name=sub" })
+  @SpeakeasyMetadata({ data: "json, name=sub" })
   sub: string;
 }
 
 
+export class GetTeamTeamnameRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetTeamTeamnamePathParams;
+}
+
+
 export class GetTeamTeamnameResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getTeamTeamname200ApplicationJsonObject?: GetTeamTeamname200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

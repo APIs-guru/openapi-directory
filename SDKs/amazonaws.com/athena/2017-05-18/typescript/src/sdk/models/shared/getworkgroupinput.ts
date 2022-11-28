@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetWorkGroupInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=WorkGroup" })
+  @SpeakeasyMetadata({ data: "json, name=WorkGroup" })
   workGroup: string;
 }

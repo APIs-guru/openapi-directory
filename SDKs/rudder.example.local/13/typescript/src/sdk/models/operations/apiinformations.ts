@@ -1,16 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ApiInformationsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=endpointName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=endpointName" })
   endpointName: string;
-}
-
-
-export class ApiInformationsRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: ApiInformationsPathParams;
 }
 
 export enum ApiInformations200ApplicationJsonActionEnum {
@@ -23,50 +18,56 @@ export enum ApiInformations200ApplicationJsonActionEnum {
  * Supported path and version for that endpoint
 **/
 export class ApiInformations200ApplicationJsonDataEndpoints extends SpeakeasyBase {
-  @Metadata({ data: "json, name=httpVerb" })
+  @SpeakeasyMetadata({ data: "json, name=httpVerb" })
   httpVerb?: any;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: shared.ApiVersion;
 }
 
 
 export class ApiInformations200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=documentation" })
+  @SpeakeasyMetadata({ data: "json, name=documentation" })
   documentation: string;
 
-  @Metadata({ data: "json, name=endpointName" })
+  @SpeakeasyMetadata({ data: "json, name=endpointName" })
   endpointName: string;
 
-  @Metadata({ data: "json, name=endpoints", elemType: operations.ApiInformations200ApplicationJsonDataEndpoints })
+  @SpeakeasyMetadata({ data: "json, name=endpoints", elemType: ApiInformations200ApplicationJsonDataEndpoints })
   endpoints: ApiInformations200ApplicationJsonDataEndpoints[];
 }
 
 export enum ApiInformations200ApplicationJsonResultEnum {
-    Success = "success"
-,    Error = "error"
+    Success = "success",
+    Error = "error"
 }
 
 
 export class ApiInformations200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: ApiInformations200ApplicationJsonActionEnum;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: ApiInformations200ApplicationJsonData;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result: ApiInformations200ApplicationJsonResultEnum;
 }
 
 
+export class ApiInformationsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: ApiInformationsPathParams;
+}
+
+
 export class ApiInformationsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   apiInformations200ApplicationJsonObject?: ApiInformations200ApplicationJson;
 }

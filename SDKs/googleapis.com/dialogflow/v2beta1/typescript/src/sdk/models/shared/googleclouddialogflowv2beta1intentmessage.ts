@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowV2beta1IntentMessageBasicCard } from "./googleclouddialogflowv2beta1intentmessagebasiccard";
 import { GoogleCloudDialogflowV2beta1IntentMessageBrowseCarouselCard } from "./googleclouddialogflowv2beta1intentmessagebrowsecarouselcard";
 import { GoogleCloudDialogflowV2beta1IntentMessageCard } from "./googleclouddialogflowv2beta1intentmessagecard";
@@ -19,18 +19,19 @@ import { GoogleCloudDialogflowV2beta1IntentMessageTelephonySynthesizeSpeech } fr
 import { GoogleCloudDialogflowV2beta1IntentMessageTelephonyTransferCall } from "./googleclouddialogflowv2beta1intentmessagetelephonytransfercall";
 import { GoogleCloudDialogflowV2beta1IntentMessageText } from "./googleclouddialogflowv2beta1intentmessagetext";
 
+
 export enum GoogleCloudDialogflowV2beta1IntentMessagePlatformEnum {
-    PlatformUnspecified = "PLATFORM_UNSPECIFIED"
-,    Facebook = "FACEBOOK"
-,    Slack = "SLACK"
-,    Telegram = "TELEGRAM"
-,    Kik = "KIK"
-,    Skype = "SKYPE"
-,    Line = "LINE"
-,    Viber = "VIBER"
-,    ActionsOnGoogle = "ACTIONS_ON_GOOGLE"
-,    Telephony = "TELEPHONY"
-,    GoogleHangouts = "GOOGLE_HANGOUTS"
+    PlatformUnspecified = "PLATFORM_UNSPECIFIED",
+    Facebook = "FACEBOOK",
+    Slack = "SLACK",
+    Telegram = "TELEGRAM",
+    Kik = "KIK",
+    Skype = "SKYPE",
+    Line = "LINE",
+    Viber = "VIBER",
+    ActionsOnGoogle = "ACTIONS_ON_GOOGLE",
+    Telephony = "TELEPHONY",
+    GoogleHangouts = "GOOGLE_HANGOUTS"
 }
 
 
@@ -39,66 +40,66 @@ export enum GoogleCloudDialogflowV2beta1IntentMessagePlatformEnum {
  * Corresponds to the `Response` field in the Dialogflow console.
 **/
 export class GoogleCloudDialogflowV2beta1IntentMessage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=basicCard" })
+  @SpeakeasyMetadata({ data: "json, name=basicCard" })
   basicCard?: GoogleCloudDialogflowV2beta1IntentMessageBasicCard;
 
-  @Metadata({ data: "json, name=browseCarouselCard" })
+  @SpeakeasyMetadata({ data: "json, name=browseCarouselCard" })
   browseCarouselCard?: GoogleCloudDialogflowV2beta1IntentMessageBrowseCarouselCard;
 
-  @Metadata({ data: "json, name=card" })
+  @SpeakeasyMetadata({ data: "json, name=card" })
   card?: GoogleCloudDialogflowV2beta1IntentMessageCard;
 
-  @Metadata({ data: "json, name=carouselSelect" })
+  @SpeakeasyMetadata({ data: "json, name=carouselSelect" })
   carouselSelect?: GoogleCloudDialogflowV2beta1IntentMessageCarouselSelect;
 
-  @Metadata({ data: "json, name=image" })
+  @SpeakeasyMetadata({ data: "json, name=image" })
   image?: GoogleCloudDialogflowV2beta1IntentMessageImage;
 
-  @Metadata({ data: "json, name=linkOutSuggestion" })
+  @SpeakeasyMetadata({ data: "json, name=linkOutSuggestion" })
   linkOutSuggestion?: GoogleCloudDialogflowV2beta1IntentMessageLinkOutSuggestion;
 
-  @Metadata({ data: "json, name=listSelect" })
+  @SpeakeasyMetadata({ data: "json, name=listSelect" })
   listSelect?: GoogleCloudDialogflowV2beta1IntentMessageListSelect;
 
-  @Metadata({ data: "json, name=mediaContent" })
+  @SpeakeasyMetadata({ data: "json, name=mediaContent" })
   mediaContent?: GoogleCloudDialogflowV2beta1IntentMessageMediaContent;
 
-  @Metadata({ data: "json, name=payload" })
+  @SpeakeasyMetadata({ data: "json, name=payload" })
   payload?: Map<string, any>;
 
-  @Metadata({ data: "json, name=platform" })
+  @SpeakeasyMetadata({ data: "json, name=platform" })
   platform?: GoogleCloudDialogflowV2beta1IntentMessagePlatformEnum;
 
-  @Metadata({ data: "json, name=quickReplies" })
+  @SpeakeasyMetadata({ data: "json, name=quickReplies" })
   quickReplies?: GoogleCloudDialogflowV2beta1IntentMessageQuickReplies;
 
-  @Metadata({ data: "json, name=rbmCarouselRichCard" })
+  @SpeakeasyMetadata({ data: "json, name=rbmCarouselRichCard" })
   rbmCarouselRichCard?: GoogleCloudDialogflowV2beta1IntentMessageRbmCarouselCard;
 
-  @Metadata({ data: "json, name=rbmStandaloneRichCard" })
+  @SpeakeasyMetadata({ data: "json, name=rbmStandaloneRichCard" })
   rbmStandaloneRichCard?: GoogleCloudDialogflowV2beta1IntentMessageRbmStandaloneCard;
 
-  @Metadata({ data: "json, name=rbmText" })
+  @SpeakeasyMetadata({ data: "json, name=rbmText" })
   rbmText?: GoogleCloudDialogflowV2beta1IntentMessageRbmText;
 
-  @Metadata({ data: "json, name=simpleResponses" })
+  @SpeakeasyMetadata({ data: "json, name=simpleResponses" })
   simpleResponses?: GoogleCloudDialogflowV2beta1IntentMessageSimpleResponses;
 
-  @Metadata({ data: "json, name=suggestions" })
+  @SpeakeasyMetadata({ data: "json, name=suggestions" })
   suggestions?: GoogleCloudDialogflowV2beta1IntentMessageSuggestions;
 
-  @Metadata({ data: "json, name=tableCard" })
+  @SpeakeasyMetadata({ data: "json, name=tableCard" })
   tableCard?: GoogleCloudDialogflowV2beta1IntentMessageTableCard;
 
-  @Metadata({ data: "json, name=telephonyPlayAudio" })
+  @SpeakeasyMetadata({ data: "json, name=telephonyPlayAudio" })
   telephonyPlayAudio?: GoogleCloudDialogflowV2beta1IntentMessageTelephonyPlayAudio;
 
-  @Metadata({ data: "json, name=telephonySynthesizeSpeech" })
+  @SpeakeasyMetadata({ data: "json, name=telephonySynthesizeSpeech" })
   telephonySynthesizeSpeech?: GoogleCloudDialogflowV2beta1IntentMessageTelephonySynthesizeSpeech;
 
-  @Metadata({ data: "json, name=telephonyTransferCall" })
+  @SpeakeasyMetadata({ data: "json, name=telephonyTransferCall" })
   telephonyTransferCall?: GoogleCloudDialogflowV2beta1IntentMessageTelephonyTransferCall;
 
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: GoogleCloudDialogflowV2beta1IntentMessageText;
 }

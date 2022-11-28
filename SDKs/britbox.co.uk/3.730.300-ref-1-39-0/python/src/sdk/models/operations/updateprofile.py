@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -11,19 +15,19 @@ class UpdateProfileQueryParams:
 
 @dataclass
 class UpdateProfileSecurity:
-    account_auth: shared.SchemeAccountAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    account_auth: shared.SchemeAccountAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class UpdateProfileRequest:
-    query_params: UpdateProfileQueryParams = field(default=None)
-    request: shared.ItvUpdateProfileRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: UpdateProfileSecurity = field(default=None)
+    query_params: UpdateProfileQueryParams = field()
+    request: shared.ItvUpdateProfileRequest = field(metadata={'request': { 'media_type': 'application/json' }})
+    security: UpdateProfileSecurity = field()
     
 
 @dataclass
 class UpdateProfileResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     service_error: Optional[shared.ServiceError] = field(default=None)
-    status_code: int = field(default=None)
     

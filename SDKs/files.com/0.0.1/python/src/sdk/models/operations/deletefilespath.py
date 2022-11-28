@@ -4,7 +4,7 @@ from typing import Optional
 
 @dataclass
 class DeleteFilesPathPathParams:
-    path: str = field(default=None, metadata={'path_param': { 'field_name': 'path', 'style': 'simple', 'explode': False }})
+    path: str = field(metadata={'path_param': { 'field_name': 'path', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -14,12 +14,12 @@ class DeleteFilesPathQueryParams:
 
 @dataclass
 class DeleteFilesPathRequest:
-    path_params: DeleteFilesPathPathParams = field(default=None)
-    query_params: DeleteFilesPathQueryParams = field(default=None)
+    path_params: DeleteFilesPathPathParams = field()
+    query_params: DeleteFilesPathQueryParams = field()
     
 
 @dataclass
 class DeleteFilesPathResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

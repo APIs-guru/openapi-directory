@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // StateTax
@@ -6,42 +7,42 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The State Tax model
 **/
 export class StateTax extends SpeakeasyBase {
-  @Metadata({ data: "json, name=amount" })
+  @SpeakeasyMetadata({ data: "json, name=amount" })
   amount?: number;
 
-  @Metadata({ data: "json, name=deductionsAmount" })
+  @SpeakeasyMetadata({ data: "json, name=deductionsAmount" })
   deductionsAmount?: number;
 
-  @Metadata({ data: "json, name=dependentsAmount" })
+  @SpeakeasyMetadata({ data: "json, name=dependentsAmount" })
   dependentsAmount?: number;
 
-  @Metadata({ data: "json, name=exemptions" })
+  @SpeakeasyMetadata({ data: "json, name=exemptions" })
   exemptions?: number;
 
-  @Metadata({ data: "json, name=exemptions2" })
+  @SpeakeasyMetadata({ data: "json, name=exemptions2" })
   exemptions2?: number;
 
-  @Metadata({ data: "json, name=filingStatus" })
+  @SpeakeasyMetadata({ data: "json, name=filingStatus" })
   filingStatus?: string;
 
-  @Metadata({ data: "json, name=higherRate" })
+  @SpeakeasyMetadata({ data: "json, name=higherRate" })
   higherRate?: boolean;
 
-  @Metadata({ data: "json, name=otherIncomeAmount" })
+  @SpeakeasyMetadata({ data: "json, name=otherIncomeAmount" })
   otherIncomeAmount?: number;
 
-  @Metadata({ data: "json, name=percentage" })
+  @SpeakeasyMetadata({ data: "json, name=percentage" })
   percentage?: number;
 
-  @Metadata({ data: "json, name=specialCheckCalc" })
+  @SpeakeasyMetadata({ data: "json, name=specialCheckCalc" })
   specialCheckCalc?: string;
 
-  @Metadata({ data: "json, name=taxCalculationCode" })
+  @SpeakeasyMetadata({ data: "json, name=taxCalculationCode" })
   taxCalculationCode?: string;
 
-  @Metadata({ data: "json, name=taxCode" })
+  @SpeakeasyMetadata({ data: "json, name=taxCode" })
   taxCode?: string;
 
-  @Metadata({ data: "json, name=w4FormYear" })
+  @SpeakeasyMetadata({ data: "json, name=w4FormYear" })
   w4FormYear?: number;
 }

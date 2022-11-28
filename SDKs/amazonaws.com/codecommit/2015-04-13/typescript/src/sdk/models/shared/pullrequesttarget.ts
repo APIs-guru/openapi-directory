@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MergeMetadata } from "./mergemetadata";
+
 
 
 // PullRequestTarget
@@ -7,24 +8,24 @@ import { MergeMetadata } from "./mergemetadata";
  * Returns information about a pull request target.
 **/
 export class PullRequestTarget extends SpeakeasyBase {
-  @Metadata({ data: "json, name=destinationCommit" })
+  @SpeakeasyMetadata({ data: "json, name=destinationCommit" })
   destinationCommit?: string;
 
-  @Metadata({ data: "json, name=destinationReference" })
+  @SpeakeasyMetadata({ data: "json, name=destinationReference" })
   destinationReference?: string;
 
-  @Metadata({ data: "json, name=mergeBase" })
+  @SpeakeasyMetadata({ data: "json, name=mergeBase" })
   mergeBase?: string;
 
-  @Metadata({ data: "json, name=mergeMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=mergeMetadata" })
   mergeMetadata?: MergeMetadata;
 
-  @Metadata({ data: "json, name=repositoryName" })
+  @SpeakeasyMetadata({ data: "json, name=repositoryName" })
   repositoryName?: string;
 
-  @Metadata({ data: "json, name=sourceCommit" })
+  @SpeakeasyMetadata({ data: "json, name=sourceCommit" })
   sourceCommit?: string;
 
-  @Metadata({ data: "json, name=sourceReference" })
+  @SpeakeasyMetadata({ data: "json, name=sourceReference" })
   sourceReference?: string;
 }

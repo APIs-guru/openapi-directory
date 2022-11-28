@@ -1,80 +1,81 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetDashboardRelatedColumnNamePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=column_name" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=column_name" })
   columnName: string;
 }
 
 
 export class GetDashboardRelatedColumnNameQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, serialization=json;name=q" })
+  @SpeakeasyMetadata({ data: "queryParam, serialization=json;name=q" })
   q?: shared.GetRelatedSchema;
 }
 
 
 export class GetDashboardRelatedColumnNameSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   jwt: shared.SchemeJwt;
 }
 
 
-export class GetDashboardRelatedColumnNameRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetDashboardRelatedColumnNamePathParams;
-
-  @Metadata()
-  queryParams: GetDashboardRelatedColumnNameQueryParams;
-
-  @Metadata()
-  security: GetDashboardRelatedColumnNameSecurity;
-}
-
-
 export class GetDashboardRelatedColumnName400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetDashboardRelatedColumnName401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetDashboardRelatedColumnName404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetDashboardRelatedColumnName500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class GetDashboardRelatedColumnNameRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetDashboardRelatedColumnNamePathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: GetDashboardRelatedColumnNameQueryParams;
+
+  @SpeakeasyMetadata()
+  security: GetDashboardRelatedColumnNameSecurity;
+}
+
+
 export class GetDashboardRelatedColumnNameResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getDashboardRelatedColumnName400ApplicationJsonObject?: GetDashboardRelatedColumnName400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getDashboardRelatedColumnName401ApplicationJsonObject?: GetDashboardRelatedColumnName401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getDashboardRelatedColumnName404ApplicationJsonObject?: GetDashboardRelatedColumnName404ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getDashboardRelatedColumnName500ApplicationJsonObject?: GetDashboardRelatedColumnName500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   relatedResponseSchema?: shared.RelatedResponseSchema;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

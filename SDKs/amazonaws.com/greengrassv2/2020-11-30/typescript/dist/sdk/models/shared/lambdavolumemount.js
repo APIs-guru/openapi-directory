@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LambdaFilesystemPermissionEnum } from "./lambdafilesystempermissionenum";
 // LambdaVolumeMount
 /**
@@ -34,19 +34,19 @@ var LambdaVolumeMount = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=addGroupOwner" }),
+        SpeakeasyMetadata({ data: "json, name=addGroupOwner" }),
         __metadata("design:type", Boolean)
     ], LambdaVolumeMount.prototype, "addGroupOwner", void 0);
     __decorate([
-        Metadata({ data: "json, name=destinationPath" }),
+        SpeakeasyMetadata({ data: "json, name=destinationPath" }),
         __metadata("design:type", String)
     ], LambdaVolumeMount.prototype, "destinationPath", void 0);
     __decorate([
-        Metadata({ data: "json, name=permission" }),
+        SpeakeasyMetadata({ data: "json, name=permission" }),
         __metadata("design:type", String)
     ], LambdaVolumeMount.prototype, "permission", void 0);
     __decorate([
-        Metadata({ data: "json, name=sourcePath" }),
+        SpeakeasyMetadata({ data: "json, name=sourcePath" }),
         __metadata("design:type", String)
     ], LambdaVolumeMount.prototype, "sourcePath", void 0);
     return LambdaVolumeMount;

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // FileSection
@@ -6,27 +7,45 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * For files that are in a section, this field describes the section.
 **/
 export class FileSection extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 }
 
 
 export class File extends SpeakeasyBase {
-  @Metadata({ data: "json, name=content" })
+  @SpeakeasyMetadata({ data: "json, name=content" })
   content?: string;
 
-  @Metadata({ data: "json, name=content_path" })
+  @SpeakeasyMetadata({ data: "json, name=content_path" })
   contentPath?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=section" })
+  @SpeakeasyMetadata({ data: "json, name=section" })
   section?: FileSection;
 
-  @Metadata({ data: "json, name=size" })
+  @SpeakeasyMetadata({ data: "json, name=size" })
+  size?: number;
+}
+
+
+export class FileInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=content" })
+  content?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=id" })
+  id?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=section" })
+  section?: FileSection;
+
+  @SpeakeasyMetadata({ data: "json, name=size" })
   size?: number;
 }

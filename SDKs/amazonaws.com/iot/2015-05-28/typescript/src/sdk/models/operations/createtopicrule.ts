@@ -1,36 +1,37 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateTopicRulePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=ruleName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ruleName" })
   ruleName: string;
 }
 
 
 export class CreateTopicRuleHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=x-amz-tagging" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-amz-tagging" })
   xAmzTagging?: string;
 }
 
@@ -40,66 +41,66 @@ export class CreateTopicRuleHeaders extends SpeakeasyBase {
  * Describes a rule.
 **/
 export class CreateTopicRuleRequestBodyTopicRulePayload extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actions", elemType: shared.Action })
+  @SpeakeasyMetadata({ data: "json, name=actions", elemType: shared.Action })
   actions?: shared.Action[];
 
-  @Metadata({ data: "json, name=awsIotSqlVersion" })
+  @SpeakeasyMetadata({ data: "json, name=awsIotSqlVersion" })
   awsIotSqlVersion?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=errorAction" })
+  @SpeakeasyMetadata({ data: "json, name=errorAction" })
   errorAction?: shared.Action;
 
-  @Metadata({ data: "json, name=ruleDisabled" })
+  @SpeakeasyMetadata({ data: "json, name=ruleDisabled" })
   ruleDisabled?: boolean;
 
-  @Metadata({ data: "json, name=sql" })
+  @SpeakeasyMetadata({ data: "json, name=sql" })
   sql?: string;
 }
 
 
 export class CreateTopicRuleRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=topicRulePayload" })
+  @SpeakeasyMetadata({ data: "json, name=topicRulePayload" })
   topicRulePayload: CreateTopicRuleRequestBodyTopicRulePayload;
 }
 
 
 export class CreateTopicRuleRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CreateTopicRulePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateTopicRuleHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateTopicRuleRequestBody;
 }
 
 
 export class CreateTopicRuleResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   conflictingResourceUpdateException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceAlreadyExistsException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceUnavailableException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   sqlParseException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

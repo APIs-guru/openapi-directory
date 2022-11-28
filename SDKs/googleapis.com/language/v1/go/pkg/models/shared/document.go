@@ -8,6 +8,8 @@ const (
 	DocumentTypeEnumHTML            DocumentTypeEnum = "HTML"
 )
 
+// Document
+// Represents the input to API methods.
 type Document struct {
 	Content       *string           `json:"content,omitempty"`
 	GcsContentURI *string           `json:"gcsContentUri,omitempty"`

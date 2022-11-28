@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -20,14 +21,14 @@ class AnalyticsreportingReportsBatchGetQueryParams:
 
 @dataclass
 class AnalyticsreportingReportsBatchGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AnalyticsreportingReportsBatchGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -38,14 +39,14 @@ class AnalyticsreportingReportsBatchGetSecurity:
 
 @dataclass
 class AnalyticsreportingReportsBatchGetRequest:
-    query_params: AnalyticsreportingReportsBatchGetQueryParams = field(default=None)
+    query_params: AnalyticsreportingReportsBatchGetQueryParams = field()
+    security: AnalyticsreportingReportsBatchGetSecurity = field()
     request: Optional[shared.GetReportsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AnalyticsreportingReportsBatchGetSecurity = field(default=None)
     
 
 @dataclass
 class AnalyticsreportingReportsBatchGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_reports_response: Optional[shared.GetReportsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetGetClusterCredentialsActionEnum {
     GetClusterCredentials = "GetClusterCredentials"
@@ -10,72 +11,72 @@ export enum GetGetClusterCredentialsVersionEnum {
 
 
 export class GetGetClusterCredentialsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Action" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" })
   action: GetGetClusterCredentialsActionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=AutoCreate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=AutoCreate" })
   autoCreate?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ClusterIdentifier" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ClusterIdentifier" })
   clusterIdentifier: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=DbGroups" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DbGroups" })
   dbGroups?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=DbName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DbName" })
   dbName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=DbUser" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DbUser" })
   dbUser: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=DurationSeconds" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DurationSeconds" })
   durationSeconds?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" })
   version: GetGetClusterCredentialsVersionEnum;
 }
 
 
 export class GetGetClusterCredentialsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class GetGetClusterCredentialsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetGetClusterCredentialsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetGetClusterCredentialsHeaders;
 }
 
 
 export class GetGetClusterCredentialsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

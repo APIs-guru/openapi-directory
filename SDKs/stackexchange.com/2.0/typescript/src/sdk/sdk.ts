@@ -1,15 +1,13 @@
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
 import * as operations from "./models/operations";
-import { ParamsSerializerOptions } from "axios";
-import { GetQueryParamSerializer } from "../internal/utils/queryparams";
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import * as utils from "../internal/utils";
+
+
 
 type OptsFunc = (sdk: SDK) => void;
 
-const Servers = [
-  "https://api.stackexchange.com/2.0",
+export const ServerList = [
+	"https://api.stackexchange.com/2.0",
 ] as const;
 
 export function WithServerURL(
@@ -20,52 +18,52 @@ export function WithServerURL(
     if (params != null) {
       serverURL = utils.ReplaceParameters(serverURL, params);
     }
-    sdk.serverURL = serverURL;
+    sdk._serverURL = serverURL;
   };
 }
 
 export function WithClient(client: AxiosInstance): OptsFunc {
   return (sdk: SDK) => {
-    sdk.defaultClient = client;
+    sdk._defaultClient = client;
   };
 }
 
-// SDK Documentation: https://api.stackexchange.com/
+/* SDK Documentation: https://api.stackexchange.com/*/
 export class SDK {
-  defaultClient?: AxiosInstance;
-  securityClient?: AxiosInstance;
-  security?: any;
-  serverURL: string;
+
+  public _defaultClient: AxiosInstance;
+  public _securityClient: AxiosInstance;
+  
+  public _serverURL: string;
+  private _language = "typescript";
+  private _sdkVersion = "0.0.1";
+  private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
-    if (this.serverURL == "") {
-      this.serverURL = Servers[0];
+    if (this._serverURL == "") {
+      this._serverURL = ServerList[0];
     }
 
-    if (!this.defaultClient) {
-      this.defaultClient = axios.create({ baseURL: this.serverURL });
+    if (!this._defaultClient) {
+      this._defaultClient = axios.create({ baseURL: this._serverURL });
     }
 
-    if (!this.securityClient) {
-      if (this.security) {
-        this.securityClient = CreateSecurityClient(
-          this.defaultClient,
-          this.security
-        );
-      } else {
-        this.securityClient = this.defaultClient;
-      }
+    if (!this._securityClient) {
+      this._securityClient = this._defaultClient;
     }
+    
   }
   
-  // GetAccessTokensAccessTokens - Reads the properties for a set of access tokens.
- 
-{accessTokens} can contain up to 20 access tokens. These are obtained by authenticating a user using OAuth 2.0.
- 
-This method returns a list of access_tokens.
-
-  GetAccessTokensAccessTokens(
+  /**
+   * getAccessTokensAccessTokens - Reads the properties for a set of access tokens.
+   *  
+   * {accessTokens} can contain up to 20 access tokens. These are obtained by authenticating a user using OAuth 2.0.
+   *  
+   * This method returns a list of access_tokens.
+   * 
+  **/
+  getAccessTokensAccessTokens(
     req: operations.GetAccessTokensAccessTokensRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAccessTokensAccessTokensResponse> {
@@ -73,12 +71,11 @@ This method returns a list of access_tokens.
       req = new operations.GetAccessTokensAccessTokensRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/access-tokens/{accessTokens}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -87,42 +84,43 @@ This method returns a list of access_tokens.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAccessTokensAccessTokensResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetAccessTokensAccessTokensResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -132,13 +130,15 @@ This method returns a list of access_tokens.
   }
 
   
-  // GetAccessTokensAccessTokensInvalidate - Immediately expires the access tokens passed. This method is meant to allow an application to discard any active access tokens it no longer needs.
- 
-{accessTokens} can contain up to 20 access tokens. These are obtained by authenticating a user using OAuth 2.0.
- 
-This method returns a list of access_tokens.
-
-  GetAccessTokensAccessTokensInvalidate(
+  /**
+   * getAccessTokensAccessTokensInvalidate - Immediately expires the access tokens passed. This method is meant to allow an application to discard any active access tokens it no longer needs.
+   *  
+   * {accessTokens} can contain up to 20 access tokens. These are obtained by authenticating a user using OAuth 2.0.
+   *  
+   * This method returns a list of access_tokens.
+   * 
+  **/
+  getAccessTokensAccessTokensInvalidate(
     req: operations.GetAccessTokensAccessTokensInvalidateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAccessTokensAccessTokensInvalidateResponse> {
@@ -146,12 +146,11 @@ This method returns a list of access_tokens.
       req = new operations.GetAccessTokensAccessTokensInvalidateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/access-tokens/{accessTokens}/invalidate", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -160,42 +159,43 @@ This method returns a list of access_tokens.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAccessTokensAccessTokensInvalidateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetAccessTokensAccessTokensInvalidateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -205,20 +205,22 @@ This method returns a list of access_tokens.
   }
 
   
-  // GetAnswers - Returns all the undeleted answers in the system.
- 
-The sorts accepted by this method operate on the follow fields of the answer object:
- - activity - last_activity_date
- - creation - creation_date
- - votes - score
-  activity is the default sort.
- 
- It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
-
- 
-This method returns a list of answers.
-
-  GetAnswers(
+  /**
+   * getAnswers - Returns all the undeleted answers in the system.
+   *  
+   * The sorts accepted by this method operate on the follow fields of the answer object:
+   *  - activity - last_activity_date
+   *  - creation - creation_date
+   *  - votes - score
+   *   activity is the default sort.
+   *  
+   *  It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+   * 
+   *  
+   * This method returns a list of answers.
+   * 
+  **/
+  getAnswers(
     req: operations.GetAnswersRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAnswersResponse> {
@@ -226,12 +228,11 @@ This method returns a list of answers.
       req = new operations.GetAnswersRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/answers";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -240,42 +241,43 @@ This method returns a list of answers.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAnswersResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetAnswersResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -285,24 +287,26 @@ This method returns a list of answers.
   }
 
   
-  // GetAnswersIds - Gets the set of answers identified by ids.
- 
-This is meant for batch fetcing of questions. A useful trick to poll for updates is to sort by activity, with a minimum date of the last time you polled.
- 
-{ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for answer_id on answer objects.
- 
-The sorts accepted by this method operate on the follow fields of the answer object:
- - activity - last_activity_date
- - creation - creation_date
- - votes - score
-  activity is the default sort.
- 
- It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
-
- 
-This method returns a list of answers.
-
-  GetAnswersIds(
+  /**
+   * getAnswersIds - Gets the set of answers identified by ids.
+   *  
+   * This is meant for batch fetcing of questions. A useful trick to poll for updates is to sort by activity, with a minimum date of the last time you polled.
+   *  
+   * {ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for answer_id on answer objects.
+   *  
+   * The sorts accepted by this method operate on the follow fields of the answer object:
+   *  - activity - last_activity_date
+   *  - creation - creation_date
+   *  - votes - score
+   *   activity is the default sort.
+   *  
+   *  It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+   * 
+   *  
+   * This method returns a list of answers.
+   * 
+  **/
+  getAnswersIds(
     req: operations.GetAnswersIdsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAnswersIdsResponse> {
@@ -310,12 +314,11 @@ This method returns a list of answers.
       req = new operations.GetAnswersIdsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/answers/{ids}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -324,42 +327,43 @@ This method returns a list of answers.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAnswersIdsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetAnswersIdsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -369,23 +373,25 @@ This method returns a list of answers.
   }
 
   
-  // GetAnswersIdsComments - Gets the comments on a set of answers.
- 
-If you know that you have an answer id and need the comments, use this method. If you know you have a question id, use /questions/{id}/comments. If you are unsure, use /posts/{id}/comments.
- 
-{ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for answer_id on answer objects.
- 
-The sorts accepted by this method operate on the follow fields of the comment object:
- - creation - creation_date
- - votes - score
-  creation is the default sort.
- 
- It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
-
- 
-This method returns a list of comments.
-
-  GetAnswersIdsComments(
+  /**
+   * getAnswersIdsComments - Gets the comments on a set of answers.
+   *  
+   * If you know that you have an answer id and need the comments, use this method. If you know you have a question id, use /questions/{id}/comments. If you are unsure, use /posts/{id}/comments.
+   *  
+   * {ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for answer_id on answer objects.
+   *  
+   * The sorts accepted by this method operate on the follow fields of the comment object:
+   *  - creation - creation_date
+   *  - votes - score
+   *   creation is the default sort.
+   *  
+   *  It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+   * 
+   *  
+   * This method returns a list of comments.
+   * 
+  **/
+  getAnswersIdsComments(
     req: operations.GetAnswersIdsCommentsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAnswersIdsCommentsResponse> {
@@ -393,12 +399,11 @@ This method returns a list of comments.
       req = new operations.GetAnswersIdsCommentsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/answers/{ids}/comments", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -407,42 +412,43 @@ This method returns a list of comments.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAnswersIdsCommentsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetAnswersIdsCommentsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -452,17 +458,19 @@ This method returns a list of comments.
   }
 
   
-  // GetAppsAccessTokensDeAuthenticate - Passing valid access_tokens to this method causes the application that created them to be de-authorized by the user associated with each access_token. This will remove the application from their apps tab, and cause all other existing access_tokens to be destroyed.
- 
-This method is meant for uninstalling applications, recovering from access_token leaks, or simply as a stronger form of /access-tokens/{accessTokens}/invalidate.
- 
-Nothing prevents a user from re-authenticate to an application that has de-authenticated itself, the user will be prompted to approve the application again however.
- 
-{accessTokens} can contain up to 20 access tokens. These are obtained by authenticating a user using OAuth 2.0.
- 
-This method returns a list of access_tokens.
-
-  GetAppsAccessTokensDeAuthenticate(
+  /**
+   * getAppsAccessTokensDeAuthenticate - Passing valid access_tokens to this method causes the application that created them to be de-authorized by the user associated with each access_token. This will remove the application from their apps tab, and cause all other existing access_tokens to be destroyed.
+   *  
+   * This method is meant for uninstalling applications, recovering from access_token leaks, or simply as a stronger form of /access-tokens/{accessTokens}/invalidate.
+   *  
+   * Nothing prevents a user from re-authenticate to an application that has de-authenticated itself, the user will be prompted to approve the application again however.
+   *  
+   * {accessTokens} can contain up to 20 access tokens. These are obtained by authenticating a user using OAuth 2.0.
+   *  
+   * This method returns a list of access_tokens.
+   * 
+  **/
+  getAppsAccessTokensDeAuthenticate(
     req: operations.GetAppsAccessTokensDeAuthenticateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAppsAccessTokensDeAuthenticateResponse> {
@@ -470,12 +478,11 @@ This method returns a list of access_tokens.
       req = new operations.GetAppsAccessTokensDeAuthenticateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/apps/{accessTokens}/de-authenticate", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -484,42 +491,43 @@ This method returns a list of access_tokens.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAppsAccessTokensDeAuthenticateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetAppsAccessTokensDeAuthenticateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -529,19 +537,21 @@ This method returns a list of access_tokens.
   }
 
   
-  // GetBadges - Returns all the badges in the system.
- 
-Badge sorts are a tad complicated. For the purposes of sorting (and min/max) tag_based is considered to be greater than named.
- 
-This means that you can get a list of all tag based badges by passing min=tag_based, and conversely all the named badges by passing max=named, with sort=type.
- 
-For ranks, bronze is greater than silver which is greater than gold. Along with sort=rank, set max=gold for just gold badges, max=silver&min=silver for just silver, and min=bronze for just bronze.
- 
-rank is the default sort.
- 
-This method returns a list of badges.
-
-  GetBadges(
+  /**
+   * getBadges - Returns all the badges in the system.
+   *  
+   * Badge sorts are a tad complicated. For the purposes of sorting (and min/max) tag_based is considered to be greater than named.
+   *  
+   * This means that you can get a list of all tag based badges by passing min=tag_based, and conversely all the named badges by passing max=named, with sort=type.
+   *  
+   * For ranks, bronze is greater than silver which is greater than gold. Along with sort=rank, set max=gold for just gold badges, max=silver&min=silver for just silver, and min=bronze for just bronze.
+   *  
+   * rank is the default sort.
+   *  
+   * This method returns a list of badges.
+   * 
+  **/
+  getBadges(
     req: operations.GetBadgesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetBadgesResponse> {
@@ -549,12 +559,11 @@ This method returns a list of badges.
       req = new operations.GetBadgesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/badges";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -563,42 +572,43 @@ This method returns a list of badges.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetBadgesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetBadgesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -608,23 +618,25 @@ This method returns a list of badges.
   }
 
   
-  // GetBadgesIds - Gets the badges identified in id.
- 
-Note that badge ids are not constant across sites, and thus should be looked up via the /badges method. A badge id on a single site is, however, guaranteed to be stable.
- 
-Badge sorts are a tad complicated. For the purposes of sorting (and min/max) tag_based is considered to be greater than named.
- 
-This means that you can get a list of all tag based badges by passing min=tag_based, and conversely all the named badges by passing max=named, with sort=type.
- 
-For ranks, bronze is greater than silver which is greater than gold. Along with sort=rank, set max=gold for just gold badges, max=silver&min=silver for just silver, and min=bronze for just bronze.
- 
-rank is the default sort.
- 
-{ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for badge_id on badge objects.
- 
-This method returns a list of badges.
-
-  GetBadgesIds(
+  /**
+   * getBadgesIds - Gets the badges identified in id.
+   *  
+   * Note that badge ids are not constant across sites, and thus should be looked up via the /badges method. A badge id on a single site is, however, guaranteed to be stable.
+   *  
+   * Badge sorts are a tad complicated. For the purposes of sorting (and min/max) tag_based is considered to be greater than named.
+   *  
+   * This means that you can get a list of all tag based badges by passing min=tag_based, and conversely all the named badges by passing max=named, with sort=type.
+   *  
+   * For ranks, bronze is greater than silver which is greater than gold. Along with sort=rank, set max=gold for just gold badges, max=silver&min=silver for just silver, and min=bronze for just bronze.
+   *  
+   * rank is the default sort.
+   *  
+   * {ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for badge_id on badge objects.
+   *  
+   * This method returns a list of badges.
+   * 
+  **/
+  getBadgesIds(
     req: operations.GetBadgesIdsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetBadgesIdsResponse> {
@@ -632,12 +644,11 @@ This method returns a list of badges.
       req = new operations.GetBadgesIdsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/badges/{ids}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -646,42 +657,43 @@ This method returns a list of badges.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetBadgesIdsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetBadgesIdsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -691,15 +703,17 @@ This method returns a list of badges.
   }
 
   
-  // GetBadgesIdsRecipients - Returns recently awarded badges in the system, constrained to a certain set of badges.
- 
-As these badges have been awarded, they will have the badge.user property set.
- 
-{ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for badge_id on badge objects.
- 
-This method returns a list of badges.
-
-  GetBadgesIdsRecipients(
+  /**
+   * getBadgesIdsRecipients - Returns recently awarded badges in the system, constrained to a certain set of badges.
+   *  
+   * As these badges have been awarded, they will have the badge.user property set.
+   *  
+   * {ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for badge_id on badge objects.
+   *  
+   * This method returns a list of badges.
+   * 
+  **/
+  getBadgesIdsRecipients(
     req: operations.GetBadgesIdsRecipientsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetBadgesIdsRecipientsResponse> {
@@ -707,12 +721,11 @@ This method returns a list of badges.
       req = new operations.GetBadgesIdsRecipientsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/badges/{ids}/recipients", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -721,42 +734,43 @@ This method returns a list of badges.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetBadgesIdsRecipientsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetBadgesIdsRecipientsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -766,17 +780,19 @@ This method returns a list of badges.
   }
 
   
-  // GetBadgesName - Gets all explicitly named badges in the system.
- 
-A named badged stands in opposition to a tag-based badge. These are referred to as general badges on the sites themselves.
- 
-For the rank sort, bronze is greater than silver which is greater than gold. Along with sort=rank, set max=gold for just gold badges, max=silver&min=silver for just silver, and min=bronze for just bronze.
- 
-rank is the default sort.
- 
-This method returns a list of badges.
-
-  GetBadgesName(
+  /**
+   * getBadgesName - Gets all explicitly named badges in the system.
+   *  
+   * A named badged stands in opposition to a tag-based badge. These are referred to as general badges on the sites themselves.
+   *  
+   * For the rank sort, bronze is greater than silver which is greater than gold. Along with sort=rank, set max=gold for just gold badges, max=silver&min=silver for just silver, and min=bronze for just bronze.
+   *  
+   * rank is the default sort.
+   *  
+   * This method returns a list of badges.
+   * 
+  **/
+  getBadgesName(
     req: operations.GetBadgesNameRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetBadgesNameResponse> {
@@ -784,12 +800,11 @@ This method returns a list of badges.
       req = new operations.GetBadgesNameRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/badges/name";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -798,42 +813,43 @@ This method returns a list of badges.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetBadgesNameResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetBadgesNameResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -843,13 +859,15 @@ This method returns a list of badges.
   }
 
   
-  // GetBadgesRecipients - Returns recently awarded badges in the system.
- 
-As these badges have been awarded, they will have the badge.user property set.
- 
-This method returns a list of badges.
-
-  GetBadgesRecipients(
+  /**
+   * getBadgesRecipients - Returns recently awarded badges in the system.
+   *  
+   * As these badges have been awarded, they will have the badge.user property set.
+   *  
+   * This method returns a list of badges.
+   * 
+  **/
+  getBadgesRecipients(
     req: operations.GetBadgesRecipientsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetBadgesRecipientsResponse> {
@@ -857,12 +875,11 @@ This method returns a list of badges.
       req = new operations.GetBadgesRecipientsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/badges/recipients";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -871,42 +888,43 @@ This method returns a list of badges.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetBadgesRecipientsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetBadgesRecipientsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -916,15 +934,17 @@ This method returns a list of badges.
   }
 
   
-  // GetBadgesTags - Returns the badges that are awarded for participation in specific tags.
- 
-For the rank sort, bronze is greater than silver which is greater than gold. Along with sort=rank, set max=gold for just gold badges, max=silver&min=silver for just silver, and min=bronze for just bronze.
- 
-rank is the default sort.
- 
-This method returns a list of badges.
-
-  GetBadgesTags(
+  /**
+   * getBadgesTags - Returns the badges that are awarded for participation in specific tags.
+   *  
+   * For the rank sort, bronze is greater than silver which is greater than gold. Along with sort=rank, set max=gold for just gold badges, max=silver&min=silver for just silver, and min=bronze for just bronze.
+   *  
+   * rank is the default sort.
+   *  
+   * This method returns a list of badges.
+   * 
+  **/
+  getBadgesTags(
     req: operations.GetBadgesTagsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetBadgesTagsResponse> {
@@ -932,12 +952,11 @@ This method returns a list of badges.
       req = new operations.GetBadgesTagsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/badges/tags";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -946,42 +965,43 @@ This method returns a list of badges.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetBadgesTagsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetBadgesTagsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -991,23 +1011,25 @@ This method returns a list of badges.
   }
 
   
-  // GetComments - Gets all the comments on the site.
- 
-If you're filtering for interesting comments (by score, creation date, etc.) make use of the sort paramter with appropriate min and max values.
- 
-If you're looking to query conversations between users, instead use the /users/{ids}/mentioned and /users/{ids}/comments/{toid} methods.
- 
-The sorts accepted by this method operate on the follow fields of the comment object:
- - creation - creation_date
- - votes - score
-  creation is the default sort.
- 
- It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
-
- 
-This method returns a list of comments.
-
-  GetComments(
+  /**
+   * getComments - Gets all the comments on the site.
+   *  
+   * If you're filtering for interesting comments (by score, creation date, etc.) make use of the sort paramter with appropriate min and max values.
+   *  
+   * If you're looking to query conversations between users, instead use the /users/{ids}/mentioned and /users/{ids}/comments/{toid} methods.
+   *  
+   * The sorts accepted by this method operate on the follow fields of the comment object:
+   *  - creation - creation_date
+   *  - votes - score
+   *   creation is the default sort.
+   *  
+   *  It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+   * 
+   *  
+   * This method returns a list of comments.
+   * 
+  **/
+  getComments(
     req: operations.GetCommentsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetCommentsResponse> {
@@ -1015,12 +1037,11 @@ This method returns a list of comments.
       req = new operations.GetCommentsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/comments";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1029,42 +1050,43 @@ This method returns a list of comments.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetCommentsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetCommentsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -1074,23 +1096,25 @@ This method returns a list of comments.
   }
 
   
-  // GetCommentsIds - Gets the comments identified in id.
- 
-This method is most useful if you have a cache of comment ids obtained through other means (such as /questions/{id}/comments) but suspect the data may be stale.
- 
-{ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for comment_id on comment objects.
- 
-The sorts accepted by this method operate on the follow fields of the comment object:
- - creation - creation_date
- - votes - score
-  creation is the default sort.
- 
- It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
-
- 
-This method returns a list of comments.
-
-  GetCommentsIds(
+  /**
+   * getCommentsIds - Gets the comments identified in id.
+   *  
+   * This method is most useful if you have a cache of comment ids obtained through other means (such as /questions/{id}/comments) but suspect the data may be stale.
+   *  
+   * {ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for comment_id on comment objects.
+   *  
+   * The sorts accepted by this method operate on the follow fields of the comment object:
+   *  - creation - creation_date
+   *  - votes - score
+   *   creation is the default sort.
+   *  
+   *  It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+   * 
+   *  
+   * This method returns a list of comments.
+   * 
+  **/
+  getCommentsIds(
     req: operations.GetCommentsIdsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetCommentsIdsResponse> {
@@ -1098,12 +1122,11 @@ This method returns a list of comments.
       req = new operations.GetCommentsIdsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/comments/{ids}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1112,42 +1135,43 @@ This method returns a list of comments.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetCommentsIdsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetCommentsIdsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -1157,15 +1181,17 @@ This method returns a list of comments.
   }
 
   
-  // GetErrors - Returns the various error codes that can be produced by the API.
- 
-This method is provided for discovery, documentation, and testing purposes, it is not expected many applications will consume it during normal operation.
- 
-For testing purposes, look into the /errors/{id} method which simulates errors given a code.
- 
-This method returns a list of errors.
-
-  GetErrors(
+  /**
+   * getErrors - Returns the various error codes that can be produced by the API.
+   *  
+   * This method is provided for discovery, documentation, and testing purposes, it is not expected many applications will consume it during normal operation.
+   *  
+   * For testing purposes, look into the /errors/{id} method which simulates errors given a code.
+   *  
+   * This method returns a list of errors.
+   * 
+  **/
+  getErrors(
     req: operations.GetErrorsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetErrorsResponse> {
@@ -1173,12 +1199,11 @@ This method returns a list of errors.
       req = new operations.GetErrorsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/errors";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1187,42 +1212,43 @@ This method returns a list of errors.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetErrorsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetErrorsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -1232,13 +1258,15 @@ This method returns a list of errors.
   }
 
   
-  // GetErrorsId - This method allows you to generate an error.
- 
-This method is only intended for use when testing an application or library. Unlike other methods in the API, its contract is not frozen, and new error codes may be added at any time.
- 
-This method results in an error, which will be expressed with a 400 HTTP status code and setting the error* properties on the wrapper object.
-
-  GetErrorsId(
+  /**
+   * getErrorsId - This method allows you to generate an error.
+   *  
+   * This method is only intended for use when testing an application or library. Unlike other methods in the API, its contract is not frozen, and new error codes may be added at any time.
+   *  
+   * This method results in an error, which will be expressed with a 400 HTTP status code and setting the error* properties on the wrapper object.
+   * 
+  **/
+  getErrorsId(
     req: operations.GetErrorsIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetErrorsIdResponse> {
@@ -1246,48 +1274,48 @@ This method results in an error, which will be expressed with a 400 HTTP status 
       req = new operations.GetErrorsIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/errors/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetErrorsIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetErrorsIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -1297,25 +1325,27 @@ This method results in an error, which will be expressed with a 400 HTTP status 
   }
 
   
-  // GetEvents - Returns a stream of events that have occurred on the site.
- 
-The API considers the following "events":
- - posting a question
- - posting an answer
- - posting a comment
- - editing a post
- - creating a user
-
-  
-
- 
-Events are only accessible for 15 minutes after they occurred, and by default only events in the last 5 minutes are returned. You can specify the age of the oldest event returned by setting the since parameter.
- 
-It is advised that developers batch events by ids and make as few subsequent requests to other methods as possible.
- 
-This method returns a list of events.
-
-  GetEvents(
+  /**
+   * getEvents - Returns a stream of events that have occurred on the site.
+   *  
+   * The API considers the following "events":
+   *  - posting a question
+   *  - posting an answer
+   *  - posting a comment
+   *  - editing a post
+   *  - creating a user
+   * 
+   *   
+   * 
+   *  
+   * Events are only accessible for 15 minutes after they occurred, and by default only events in the last 5 minutes are returned. You can specify the age of the oldest event returned by setting the since parameter.
+   *  
+   * It is advised that developers batch events by ids and make as few subsequent requests to other methods as possible.
+   *  
+   * This method returns a list of events.
+   * 
+  **/
+  getEvents(
     req: operations.GetEventsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetEventsResponse> {
@@ -1323,12 +1353,11 @@ This method returns a list of events.
       req = new operations.GetEventsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/events";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1337,42 +1366,43 @@ This method returns a list of events.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetEventsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetEventsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -1382,19 +1412,21 @@ This method returns a list of events.
   }
 
   
-  // GetFiltersCreate - Creates a new filter given a list of includes, excludes, a base filter, and whether or not this filter should be "unsafe".
- 
-Filter "safety" is defined as follows. Any string returned as a result of an API call with a safe filter will be inline-able into HTML without script-injection concerns. That is to say, no additional sanitizing (encoding, HTML tag stripping, etc.) will be necessary on returned strings. Applications that wish to handle sanitizing themselves should create an unsafe filter. All filters are safe by default, under the assumption that double-encoding bugs are more desirable than script injections.
- 
-If no base filter is specified, the default filter is assumed. When building a filter from scratch, the none built-in filter is useful.
- 
-When the size of the parameters being sent to this method grows to large, problems can occur. This method will accept POST requests to mitigate this.
- 
-It is not expected that many applications will call this method at runtime, filters should be pre-calculated and "baked in" in the common cases. Furthermore, there are a number of built-in filters which cover common use cases.
- 
-This method returns a single filter.
-
-  GetFiltersCreate(
+  /**
+   * getFiltersCreate - Creates a new filter given a list of includes, excludes, a base filter, and whether or not this filter should be "unsafe".
+   *  
+   * Filter "safety" is defined as follows. Any string returned as a result of an API call with a safe filter will be inline-able into HTML without script-injection concerns. That is to say, no additional sanitizing (encoding, HTML tag stripping, etc.) will be necessary on returned strings. Applications that wish to handle sanitizing themselves should create an unsafe filter. All filters are safe by default, under the assumption that double-encoding bugs are more desirable than script injections.
+   *  
+   * If no base filter is specified, the default filter is assumed. When building a filter from scratch, the none built-in filter is useful.
+   *  
+   * When the size of the parameters being sent to this method grows to large, problems can occur. This method will accept POST requests to mitigate this.
+   *  
+   * It is not expected that many applications will call this method at runtime, filters should be pre-calculated and "baked in" in the common cases. Furthermore, there are a number of built-in filters which cover common use cases.
+   *  
+   * This method returns a single filter.
+   * 
+  **/
+  getFiltersCreate(
     req: operations.GetFiltersCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetFiltersCreateResponse> {
@@ -1402,12 +1434,11 @@ This method returns a single filter.
       req = new operations.GetFiltersCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/filters/create";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1416,42 +1447,43 @@ This method returns a single filter.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetFiltersCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetFiltersCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -1461,15 +1493,17 @@ This method returns a single filter.
   }
 
   
-  // GetFiltersFilters - Returns the fields included by the given filters, and the "safeness" of those filters.
- 
-It is not expected that this method will be consumed by many applications at runtime, it is provided to aid in debugging.
- 
-{filters} can contain up to 20 semicolon delimited filters. Filters are obtained via calls to /filters/create, or by using a built-in filter.
- 
-This method returns a list of filters.
-
-  GetFiltersFilters(
+  /**
+   * getFiltersFilters - Returns the fields included by the given filters, and the "safeness" of those filters.
+   *  
+   * It is not expected that this method will be consumed by many applications at runtime, it is provided to aid in debugging.
+   *  
+   * {filters} can contain up to 20 semicolon delimited filters. Filters are obtained via calls to /filters/create, or by using a built-in filter.
+   *  
+   * This method returns a list of filters.
+   * 
+  **/
+  getFiltersFilters(
     req: operations.GetFiltersFiltersRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetFiltersFiltersResponse> {
@@ -1477,48 +1511,48 @@ This method returns a list of filters.
       req = new operations.GetFiltersFiltersRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/filters/{filters}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetFiltersFiltersResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetFiltersFiltersResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -1528,13 +1562,15 @@ This method returns a list of filters.
   }
 
   
-  // GetInbox - Returns a user's inbox.
- 
-This method requires an access_token, with a scope containing "read_inbox".
- 
-This method returns a list of inbox items.
-
-  GetInbox(
+  /**
+   * getInbox - Returns a user's inbox.
+   *  
+   * This method requires an access_token, with a scope containing "read_inbox".
+   *  
+   * This method returns a list of inbox items.
+   * 
+  **/
+  getInbox(
     req: operations.GetInboxRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetInboxResponse> {
@@ -1542,12 +1578,11 @@ This method returns a list of inbox items.
       req = new operations.GetInboxRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/inbox";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1556,42 +1591,43 @@ This method returns a list of inbox items.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetInboxResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetInboxResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -1601,13 +1637,15 @@ This method returns a list of inbox items.
   }
 
   
-  // GetInboxUnread - Returns the unread items in a user's inbox.
- 
-This method requires an access_token, with a scope containing "read_inbox".
- 
-This method returns a list of inbox items.
-
-  GetInboxUnread(
+  /**
+   * getInboxUnread - Returns the unread items in a user's inbox.
+   *  
+   * This method requires an access_token, with a scope containing "read_inbox".
+   *  
+   * This method returns a list of inbox items.
+   * 
+  **/
+  getInboxUnread(
     req: operations.GetInboxUnreadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetInboxUnreadResponse> {
@@ -1615,12 +1653,11 @@ This method returns a list of inbox items.
       req = new operations.GetInboxUnreadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/inbox/unread";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1629,42 +1666,43 @@ This method returns a list of inbox items.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetInboxUnreadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetInboxUnreadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -1674,15 +1712,17 @@ This method returns a list of inbox items.
   }
 
   
-  // GetInfo - Returns a collection of statistics about the site.
- 
-Data to facilitate per-site customization, discover related sites, and aggregate statistics is all returned by this method.
- 
-This data is cached very aggressively, by design. Query sparingly, ideally no more than once an hour.
- 
-This method returns an info object.
-
-  GetInfo(
+  /**
+   * getInfo - Returns a collection of statistics about the site.
+   *  
+   * Data to facilitate per-site customization, discover related sites, and aggregate statistics is all returned by this method.
+   *  
+   * This data is cached very aggressively, by design. Query sparingly, ideally no more than once an hour.
+   *  
+   * This method returns an info object.
+   * 
+  **/
+  getInfo(
     req: operations.GetInfoRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetInfoResponse> {
@@ -1690,12 +1730,11 @@ This method returns an info object.
       req = new operations.GetInfoRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/info";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1704,42 +1743,43 @@ This method returns an info object.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetInfoResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetInfoResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -1749,11 +1789,13 @@ This method returns an info object.
   }
 
   
-  // GetMe - Returns the user associated with the passed access_token.
- 
-This method returns a user.
-
-  GetMe(
+  /**
+   * getMe - Returns the user associated with the passed access_token.
+   *  
+   * This method returns a user.
+   * 
+  **/
+  getMe(
     req: operations.GetMeRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetMeResponse> {
@@ -1761,12 +1803,11 @@ This method returns a user.
       req = new operations.GetMeRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/me";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1775,42 +1816,43 @@ This method returns a user.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetMeResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetMeResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -1820,11 +1862,13 @@ This method returns a user.
   }
 
   
-  // GetMeAnswers - Returns the answers owned by the user associated with the given access_token.
- 
-This method returns a list of answers.
-
-  GetMeAnswers(
+  /**
+   * getMeAnswers - Returns the answers owned by the user associated with the given access_token.
+   *  
+   * This method returns a list of answers.
+   * 
+  **/
+  getMeAnswers(
     req: operations.GetMeAnswersRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetMeAnswersResponse> {
@@ -1832,12 +1876,11 @@ This method returns a list of answers.
       req = new operations.GetMeAnswersRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/me/answers";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1846,42 +1889,43 @@ This method returns a list of answers.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetMeAnswersResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetMeAnswersResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -1891,11 +1935,13 @@ This method returns a list of answers.
   }
 
   
-  // GetMeAssociated - Returns all of a user's associated accounts, given an access_token for them.
- 
-This method returns a list of network users.
-
-  GetMeAssociated(
+  /**
+   * getMeAssociated - Returns all of a user's associated accounts, given an access_token for them.
+   *  
+   * This method returns a list of network users.
+   * 
+  **/
+  getMeAssociated(
     req: operations.GetMeAssociatedRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetMeAssociatedResponse> {
@@ -1903,12 +1949,11 @@ This method returns a list of network users.
       req = new operations.GetMeAssociatedRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/me/associated";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1917,42 +1962,43 @@ This method returns a list of network users.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetMeAssociatedResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetMeAssociatedResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -1962,11 +2008,13 @@ This method returns a list of network users.
   }
 
   
-  // GetMeBadges - Returns the badges earned by the user associated with the given access_token.
- 
-This method returns a list of badges.
-
-  GetMeBadges(
+  /**
+   * getMeBadges - Returns the badges earned by the user associated with the given access_token.
+   *  
+   * This method returns a list of badges.
+   * 
+  **/
+  getMeBadges(
     req: operations.GetMeBadgesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetMeBadgesResponse> {
@@ -1974,12 +2022,11 @@ This method returns a list of badges.
       req = new operations.GetMeBadgesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/me/badges";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1988,42 +2035,43 @@ This method returns a list of badges.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetMeBadgesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetMeBadgesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -2033,11 +2081,13 @@ This method returns a list of badges.
   }
 
   
-  // GetMeComments - Returns the comments owned by the user associated with the given access_token.
- 
-This method returns a list of comments.
-
-  GetMeComments(
+  /**
+   * getMeComments - Returns the comments owned by the user associated with the given access_token.
+   *  
+   * This method returns a list of comments.
+   * 
+  **/
+  getMeComments(
     req: operations.GetMeCommentsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetMeCommentsResponse> {
@@ -2045,12 +2095,11 @@ This method returns a list of comments.
       req = new operations.GetMeCommentsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/me/comments";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2059,42 +2108,43 @@ This method returns a list of comments.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetMeCommentsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetMeCommentsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -2104,11 +2154,13 @@ This method returns a list of comments.
   }
 
   
-  // GetMeCommentsToId - Returns the comments owned by the user associated with the given access_token that are in reply to the user identified by {toId}.
- 
-This method returns a list of comments.
-
-  GetMeCommentsToId(
+  /**
+   * getMeCommentsToId - Returns the comments owned by the user associated with the given access_token that are in reply to the user identified by {toId}.
+   *  
+   * This method returns a list of comments.
+   * 
+  **/
+  getMeCommentsToId(
     req: operations.GetMeCommentsToIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetMeCommentsToIdResponse> {
@@ -2116,12 +2168,11 @@ This method returns a list of comments.
       req = new operations.GetMeCommentsToIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/me/comments/{toId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2130,42 +2181,43 @@ This method returns a list of comments.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetMeCommentsToIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetMeCommentsToIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -2175,11 +2227,13 @@ This method returns a list of comments.
   }
 
   
-  // GetMeFavorites - Returns the questions favorites by the user associated with the given access_token.
- 
-This method returns a list of questions.
-
-  GetMeFavorites(
+  /**
+   * getMeFavorites - Returns the questions favorites by the user associated with the given access_token.
+   *  
+   * This method returns a list of questions.
+   * 
+  **/
+  getMeFavorites(
     req: operations.GetMeFavoritesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetMeFavoritesResponse> {
@@ -2187,12 +2241,11 @@ This method returns a list of questions.
       req = new operations.GetMeFavoritesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/me/favorites";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2201,42 +2254,43 @@ This method returns a list of questions.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetMeFavoritesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetMeFavoritesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -2246,13 +2300,15 @@ This method returns a list of questions.
   }
 
   
-  // GetMeInbox - Returns the user identified by access_token's inbox.
- 
-This method requires an access_token, with a scope containing "read_inbox".
- 
-This method returns a list of inbox items.
-
-  GetMeInbox(
+  /**
+   * getMeInbox - Returns the user identified by access_token's inbox.
+   *  
+   * This method requires an access_token, with a scope containing "read_inbox".
+   *  
+   * This method returns a list of inbox items.
+   * 
+  **/
+  getMeInbox(
     req: operations.GetMeInboxRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetMeInboxResponse> {
@@ -2260,12 +2316,11 @@ This method returns a list of inbox items.
       req = new operations.GetMeInboxRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/me/inbox";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2274,42 +2329,43 @@ This method returns a list of inbox items.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetMeInboxResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetMeInboxResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -2319,13 +2375,15 @@ This method returns a list of inbox items.
   }
 
   
-  // GetMeInboxUnread - Returns the unread items in the user identified by access_token's inbox.
- 
-This method requires an access_token, with a scope containing "read_inbox".
- 
-This method returns a list of inbox items.
-
-  GetMeInboxUnread(
+  /**
+   * getMeInboxUnread - Returns the unread items in the user identified by access_token's inbox.
+   *  
+   * This method requires an access_token, with a scope containing "read_inbox".
+   *  
+   * This method returns a list of inbox items.
+   * 
+  **/
+  getMeInboxUnread(
     req: operations.GetMeInboxUnreadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetMeInboxUnreadResponse> {
@@ -2333,12 +2391,11 @@ This method returns a list of inbox items.
       req = new operations.GetMeInboxUnreadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/me/inbox/unread";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2347,42 +2404,43 @@ This method returns a list of inbox items.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetMeInboxUnreadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetMeInboxUnreadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -2392,11 +2450,13 @@ This method returns a list of inbox items.
   }
 
   
-  // GetMeMentioned - Returns the comments mentioning the user associated with the given access_token.
- 
-This method returns a list of comments.
-
-  GetMeMentioned(
+  /**
+   * getMeMentioned - Returns the comments mentioning the user associated with the given access_token.
+   *  
+   * This method returns a list of comments.
+   * 
+  **/
+  getMeMentioned(
     req: operations.GetMeMentionedRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetMeMentionedResponse> {
@@ -2404,12 +2464,11 @@ This method returns a list of comments.
       req = new operations.GetMeMentionedRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/me/mentioned";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2418,42 +2477,43 @@ This method returns a list of comments.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetMeMentionedResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetMeMentionedResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -2463,19 +2523,21 @@ This method returns a list of comments.
   }
 
   
-  // GetMeMerges - Returns a record of merges that have occurred involving a user identified by an access_token.
- 
-This method allows you to take now invalid account ids and find what account they've become, or take currently valid account ids and find which ids were equivalent in the past.
- 
-This is most useful when confirming that an account_id is in fact "new" to an application.
- 
-Account merges can happen for a wide range of reasons, applications should not make assumptions that merges have particular causes.
- 
-Note that accounts are managed at a network level, users on a site may be merged due to an account level merge but there is no guarantee that a merge has an effect on any particular site.
- 
-This method returns a list of account_merge.
-
-  GetMeMerges(
+  /**
+   * getMeMerges - Returns a record of merges that have occurred involving a user identified by an access_token.
+   *  
+   * This method allows you to take now invalid account ids and find what account they've become, or take currently valid account ids and find which ids were equivalent in the past.
+   *  
+   * This is most useful when confirming that an account_id is in fact "new" to an application.
+   *  
+   * Account merges can happen for a wide range of reasons, applications should not make assumptions that merges have particular causes.
+   *  
+   * Note that accounts are managed at a network level, users on a site may be merged due to an account level merge but there is no guarantee that a merge has an effect on any particular site.
+   *  
+   * This method returns a list of account_merge.
+   * 
+  **/
+  getMeMerges(
     req: operations.GetMeMergesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetMeMergesResponse> {
@@ -2483,12 +2545,11 @@ This method returns a list of account_merge.
       req = new operations.GetMeMergesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/me/merges";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2497,42 +2558,43 @@ This method returns a list of account_merge.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetMeMergesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetMeMergesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -2542,13 +2604,15 @@ This method returns a list of account_merge.
   }
 
   
-  // GetMeNotifications - Returns a user's notifications, given an access_token.
- 
-This method requires an access_token, with a scope containing "read_inbox".
- 
-This method returns a list of notifications.
-
-  GetMeNotifications(
+  /**
+   * getMeNotifications - Returns a user's notifications, given an access_token.
+   *  
+   * This method requires an access_token, with a scope containing "read_inbox".
+   *  
+   * This method returns a list of notifications.
+   * 
+  **/
+  getMeNotifications(
     req: operations.GetMeNotificationsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetMeNotificationsResponse> {
@@ -2556,12 +2620,11 @@ This method returns a list of notifications.
       req = new operations.GetMeNotificationsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/me/notifications";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2570,42 +2633,43 @@ This method returns a list of notifications.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetMeNotificationsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetMeNotificationsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -2615,13 +2679,15 @@ This method returns a list of notifications.
   }
 
   
-  // GetMeNotificationsUnread - Returns a user's unread notifications, given an access_token.
- 
-This method requires an access_token, with a scope containing "read_inbox".
- 
-This method returns a list of notifications.
-
-  GetMeNotificationsUnread(
+  /**
+   * getMeNotificationsUnread - Returns a user's unread notifications, given an access_token.
+   *  
+   * This method requires an access_token, with a scope containing "read_inbox".
+   *  
+   * This method returns a list of notifications.
+   * 
+  **/
+  getMeNotificationsUnread(
     req: operations.GetMeNotificationsUnreadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetMeNotificationsUnreadResponse> {
@@ -2629,12 +2695,11 @@ This method returns a list of notifications.
       req = new operations.GetMeNotificationsUnreadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/me/notifications/unread";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2643,42 +2708,43 @@ This method returns a list of notifications.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetMeNotificationsUnreadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetMeNotificationsUnreadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -2688,11 +2754,13 @@ This method returns a list of notifications.
   }
 
   
-  // GetMePrivileges - Returns the privileges the user identified by access_token has.
- 
-This method returns a list of privileges.
-
-  GetMePrivileges(
+  /**
+   * getMePrivileges - Returns the privileges the user identified by access_token has.
+   *  
+   * This method returns a list of privileges.
+   * 
+  **/
+  getMePrivileges(
     req: operations.GetMePrivilegesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetMePrivilegesResponse> {
@@ -2700,12 +2768,11 @@ This method returns a list of privileges.
       req = new operations.GetMePrivilegesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/me/privileges";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2714,42 +2781,43 @@ This method returns a list of privileges.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetMePrivilegesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetMePrivilegesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -2759,11 +2827,13 @@ This method returns a list of privileges.
   }
 
   
-  // GetMeQuestions - Returns the questions owned by the user associated with the given access_token.
- 
-This method returns a list of questions.
-
-  GetMeQuestions(
+  /**
+   * getMeQuestions - Returns the questions owned by the user associated with the given access_token.
+   *  
+   * This method returns a list of questions.
+   * 
+  **/
+  getMeQuestions(
     req: operations.GetMeQuestionsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetMeQuestionsResponse> {
@@ -2771,12 +2841,11 @@ This method returns a list of questions.
       req = new operations.GetMeQuestionsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/me/questions";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2785,42 +2854,43 @@ This method returns a list of questions.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetMeQuestionsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetMeQuestionsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -2830,11 +2900,13 @@ This method returns a list of questions.
   }
 
   
-  // GetMeQuestionsFeatured - Returns the questions that have active bounties offered by the user associated with the given access_token.
- 
-This method returns a list of questions.
-
-  GetMeQuestionsFeatured(
+  /**
+   * getMeQuestionsFeatured - Returns the questions that have active bounties offered by the user associated with the given access_token.
+   *  
+   * This method returns a list of questions.
+   * 
+  **/
+  getMeQuestionsFeatured(
     req: operations.GetMeQuestionsFeaturedRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetMeQuestionsFeaturedResponse> {
@@ -2842,12 +2914,11 @@ This method returns a list of questions.
       req = new operations.GetMeQuestionsFeaturedRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/me/questions/featured";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2856,42 +2927,43 @@ This method returns a list of questions.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetMeQuestionsFeaturedResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetMeQuestionsFeaturedResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -2901,11 +2973,13 @@ This method returns a list of questions.
   }
 
   
-  // GetMeQuestionsNoAnswers - Returns the questions owned by the user associated with the given access_token that have no answers.
- 
-This method returns a list of questions.
-
-  GetMeQuestionsNoAnswers(
+  /**
+   * getMeQuestionsNoAnswers - Returns the questions owned by the user associated with the given access_token that have no answers.
+   *  
+   * This method returns a list of questions.
+   * 
+  **/
+  getMeQuestionsNoAnswers(
     req: operations.GetMeQuestionsNoAnswersRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetMeQuestionsNoAnswersResponse> {
@@ -2913,12 +2987,11 @@ This method returns a list of questions.
       req = new operations.GetMeQuestionsNoAnswersRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/me/questions/no-answers";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2927,42 +3000,43 @@ This method returns a list of questions.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetMeQuestionsNoAnswersResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetMeQuestionsNoAnswersResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -2972,11 +3046,13 @@ This method returns a list of questions.
   }
 
   
-  // GetMeQuestionsUnaccepted - Returns the questions owned by the user associated with the given access_token that have no accepted answer.
- 
-This method returns a list of questions.
-
-  GetMeQuestionsUnaccepted(
+  /**
+   * getMeQuestionsUnaccepted - Returns the questions owned by the user associated with the given access_token that have no accepted answer.
+   *  
+   * This method returns a list of questions.
+   * 
+  **/
+  getMeQuestionsUnaccepted(
     req: operations.GetMeQuestionsUnacceptedRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetMeQuestionsUnacceptedResponse> {
@@ -2984,12 +3060,11 @@ This method returns a list of questions.
       req = new operations.GetMeQuestionsUnacceptedRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/me/questions/unaccepted";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2998,42 +3073,43 @@ This method returns a list of questions.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetMeQuestionsUnacceptedResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetMeQuestionsUnacceptedResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -3043,11 +3119,13 @@ This method returns a list of questions.
   }
 
   
-  // GetMeQuestionsUnanswered - Returns the questions owned by the user associated with the given access_token that are not considered answered.
- 
-This method returns a list of questions.
-
-  GetMeQuestionsUnanswered(
+  /**
+   * getMeQuestionsUnanswered - Returns the questions owned by the user associated with the given access_token that are not considered answered.
+   *  
+   * This method returns a list of questions.
+   * 
+  **/
+  getMeQuestionsUnanswered(
     req: operations.GetMeQuestionsUnansweredRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetMeQuestionsUnansweredResponse> {
@@ -3055,12 +3133,11 @@ This method returns a list of questions.
       req = new operations.GetMeQuestionsUnansweredRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/me/questions/unanswered";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3069,42 +3146,43 @@ This method returns a list of questions.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetMeQuestionsUnansweredResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetMeQuestionsUnansweredResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -3114,11 +3192,13 @@ This method returns a list of questions.
   }
 
   
-  // GetMeReputation - Returns the reputation changed for the user associated with the given access_token.
- 
-This method returns a list of reputation changes.
-
-  GetMeReputation(
+  /**
+   * getMeReputation - Returns the reputation changed for the user associated with the given access_token.
+   *  
+   * This method returns a list of reputation changes.
+   * 
+  **/
+  getMeReputation(
     req: operations.GetMeReputationRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetMeReputationResponse> {
@@ -3126,12 +3206,11 @@ This method returns a list of reputation changes.
       req = new operations.GetMeReputationRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/me/reputation";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3140,42 +3219,43 @@ This method returns a list of reputation changes.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetMeReputationResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetMeReputationResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -3185,11 +3265,13 @@ This method returns a list of reputation changes.
   }
 
   
-  // GetMeReputationHistory - Returns user's public reputation history.
- 
-This method returns a list of reputation_history.
-
-  GetMeReputationHistory(
+  /**
+   * getMeReputationHistory - Returns user's public reputation history.
+   *  
+   * This method returns a list of reputation_history.
+   * 
+  **/
+  getMeReputationHistory(
     req: operations.GetMeReputationHistoryRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetMeReputationHistoryResponse> {
@@ -3197,12 +3279,11 @@ This method returns a list of reputation_history.
       req = new operations.GetMeReputationHistoryRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/me/reputation-history";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3211,42 +3292,43 @@ This method returns a list of reputation_history.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetMeReputationHistoryResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetMeReputationHistoryResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -3256,14 +3338,16 @@ This method returns a list of reputation_history.
   }
 
   
-  // GetMeReputationHistoryFull - Returns user's full reputation history, including private events.
- 
- This method requires an access_token, with a scope containing "private_info".
-
- 
-This method returns a list of reputation_history.
-
-  GetMeReputationHistoryFull(
+  /**
+   * getMeReputationHistoryFull - Returns user's full reputation history, including private events.
+   *  
+   *  This method requires an access_token, with a scope containing "private_info".
+   * 
+   *  
+   * This method returns a list of reputation_history.
+   * 
+  **/
+  getMeReputationHistoryFull(
     req: operations.GetMeReputationHistoryFullRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetMeReputationHistoryFullResponse> {
@@ -3271,12 +3355,11 @@ This method returns a list of reputation_history.
       req = new operations.GetMeReputationHistoryFullRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/me/reputation-history/full";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3285,42 +3368,43 @@ This method returns a list of reputation_history.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetMeReputationHistoryFullResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetMeReputationHistoryFullResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -3330,11 +3414,13 @@ This method returns a list of reputation_history.
   }
 
   
-  // GetMeSuggestedEdits - Returns the suggested edits the user identified by access_token has submitted.
- 
-This method returns a list of suggested-edits.
-
-  GetMeSuggestedEdits(
+  /**
+   * getMeSuggestedEdits - Returns the suggested edits the user identified by access_token has submitted.
+   *  
+   * This method returns a list of suggested-edits.
+   * 
+  **/
+  getMeSuggestedEdits(
     req: operations.GetMeSuggestedEditsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetMeSuggestedEditsResponse> {
@@ -3342,12 +3428,11 @@ This method returns a list of suggested-edits.
       req = new operations.GetMeSuggestedEditsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/me/suggested-edits";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3356,42 +3441,43 @@ This method returns a list of suggested-edits.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetMeSuggestedEditsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetMeSuggestedEditsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -3401,11 +3487,13 @@ This method returns a list of suggested-edits.
   }
 
   
-  // GetMeTags - Returns the tags the user identified by the access_token passed is active in.
- 
-This method returns a list of tags.
-
-  GetMeTags(
+  /**
+   * getMeTags - Returns the tags the user identified by the access_token passed is active in.
+   *  
+   * This method returns a list of tags.
+   * 
+  **/
+  getMeTags(
     req: operations.GetMeTagsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetMeTagsResponse> {
@@ -3413,12 +3501,11 @@ This method returns a list of tags.
       req = new operations.GetMeTagsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/me/tags";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3427,42 +3514,43 @@ This method returns a list of tags.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetMeTagsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetMeTagsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -3472,11 +3560,13 @@ This method returns a list of tags.
   }
 
   
-  // GetMeTagsTagsTopAnswers - Returns the top 30 answers the user associated with the given access_token has posted in response to questions with the given tags.
- 
-This method returns a list of answers.
-
-  GetMeTagsTagsTopAnswers(
+  /**
+   * getMeTagsTagsTopAnswers - Returns the top 30 answers the user associated with the given access_token has posted in response to questions with the given tags.
+   *  
+   * This method returns a list of answers.
+   * 
+  **/
+  getMeTagsTagsTopAnswers(
     req: operations.GetMeTagsTagsTopAnswersRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetMeTagsTagsTopAnswersResponse> {
@@ -3484,12 +3574,11 @@ This method returns a list of answers.
       req = new operations.GetMeTagsTagsTopAnswersRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/me/tags/{tags}/top-answers", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3498,42 +3587,43 @@ This method returns a list of answers.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetMeTagsTagsTopAnswersResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetMeTagsTagsTopAnswersResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -3543,11 +3633,13 @@ This method returns a list of answers.
   }
 
   
-  // GetMeTagsTagsTopQuestions - Returns the top 30 questions the user associated with the given access_token has posted in response to questions with the given tags.
- 
-This method returns a list of questions.
-
-  GetMeTagsTagsTopQuestions(
+  /**
+   * getMeTagsTagsTopQuestions - Returns the top 30 questions the user associated with the given access_token has posted in response to questions with the given tags.
+   *  
+   * This method returns a list of questions.
+   * 
+  **/
+  getMeTagsTagsTopQuestions(
     req: operations.GetMeTagsTagsTopQuestionsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetMeTagsTagsTopQuestionsResponse> {
@@ -3555,12 +3647,11 @@ This method returns a list of questions.
       req = new operations.GetMeTagsTagsTopQuestionsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/me/tags/{tags}/top-questions", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3569,42 +3660,43 @@ This method returns a list of questions.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetMeTagsTagsTopQuestionsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetMeTagsTagsTopQuestionsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -3614,11 +3706,13 @@ This method returns a list of questions.
   }
 
   
-  // GetMeTimeline - Returns a subset of the actions the user identified by the passed access_token has taken on the site.
- 
-This method returns a list of user timeline objects.
-
-  GetMeTimeline(
+  /**
+   * getMeTimeline - Returns a subset of the actions the user identified by the passed access_token has taken on the site.
+   *  
+   * This method returns a list of user timeline objects.
+   * 
+  **/
+  getMeTimeline(
     req: operations.GetMeTimelineRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetMeTimelineResponse> {
@@ -3626,12 +3720,11 @@ This method returns a list of user timeline objects.
       req = new operations.GetMeTimelineRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/me/timeline";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3640,42 +3733,43 @@ This method returns a list of user timeline objects.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetMeTimelineResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetMeTimelineResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -3685,11 +3779,13 @@ This method returns a list of user timeline objects.
   }
 
   
-  // GetMeTopAnswerTags - Returns the user identified by access_token's top 30 tags by answer score.
- 
-This method returns a list of top tag objects.
-
-  GetMeTopAnswerTags(
+  /**
+   * getMeTopAnswerTags - Returns the user identified by access_token's top 30 tags by answer score.
+   *  
+   * This method returns a list of top tag objects.
+   * 
+  **/
+  getMeTopAnswerTags(
     req: operations.GetMeTopAnswerTagsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetMeTopAnswerTagsResponse> {
@@ -3697,12 +3793,11 @@ This method returns a list of top tag objects.
       req = new operations.GetMeTopAnswerTagsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/me/top-answer-tags";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3711,42 +3806,43 @@ This method returns a list of top tag objects.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetMeTopAnswerTagsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetMeTopAnswerTagsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -3756,11 +3852,13 @@ This method returns a list of top tag objects.
   }
 
   
-  // GetMeTopQuestionTags - Returns the user identified by access_token's top 30 tags by question score.
- 
-This method returns a list of top tag objects.
-
-  GetMeTopQuestionTags(
+  /**
+   * getMeTopQuestionTags - Returns the user identified by access_token's top 30 tags by question score.
+   *  
+   * This method returns a list of top tag objects.
+   * 
+  **/
+  getMeTopQuestionTags(
     req: operations.GetMeTopQuestionTagsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetMeTopQuestionTagsResponse> {
@@ -3768,12 +3866,11 @@ This method returns a list of top tag objects.
       req = new operations.GetMeTopQuestionTagsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/me/top-question-tags";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3782,42 +3879,43 @@ This method returns a list of top tag objects.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetMeTopQuestionTagsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetMeTopQuestionTagsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -3827,15 +3925,17 @@ This method returns a list of top tag objects.
   }
 
   
-  // GetMeWritePermissions - Returns the write permissions a user has via the api, given an access token.
- 
-The Stack Exchange API gives users the ability to create, edit, and delete certain types. This method returns whether the passed user is capable of performing those actions at all, as well as how many times a day they can.
- 
-This method does not consider the user's current quota (ie. if they've already exhausted it for today) nor any additional restrictions on write access, such as editing deleted comments.
- 
-This method returns a list of write_permissions.
-
-  GetMeWritePermissions(
+  /**
+   * getMeWritePermissions - Returns the write permissions a user has via the api, given an access token.
+   *  
+   * The Stack Exchange API gives users the ability to create, edit, and delete certain types. This method returns whether the passed user is capable of performing those actions at all, as well as how many times a day they can.
+   *  
+   * This method does not consider the user's current quota (ie. if they've already exhausted it for today) nor any additional restrictions on write access, such as editing deleted comments.
+   *  
+   * This method returns a list of write_permissions.
+   * 
+  **/
+  getMeWritePermissions(
     req: operations.GetMeWritePermissionsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetMeWritePermissionsResponse> {
@@ -3843,12 +3943,11 @@ This method returns a list of write_permissions.
       req = new operations.GetMeWritePermissionsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/me/write-permissions";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3857,42 +3956,43 @@ This method returns a list of write_permissions.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetMeWritePermissionsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetMeWritePermissionsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -3902,13 +4002,15 @@ This method returns a list of write_permissions.
   }
 
   
-  // GetNotifications - Returns a user's notifications.
- 
-This method requires an access_token, with a scope containing "read_inbox".
- 
-This method returns a list of notifications.
-
-  GetNotifications(
+  /**
+   * getNotifications - Returns a user's notifications.
+   *  
+   * This method requires an access_token, with a scope containing "read_inbox".
+   *  
+   * This method returns a list of notifications.
+   * 
+  **/
+  getNotifications(
     req: operations.GetNotificationsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetNotificationsResponse> {
@@ -3916,12 +4018,11 @@ This method returns a list of notifications.
       req = new operations.GetNotificationsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/notifications";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3930,42 +4031,43 @@ This method returns a list of notifications.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetNotificationsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetNotificationsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -3975,13 +4077,15 @@ This method returns a list of notifications.
   }
 
   
-  // GetNotificationsUnread - Returns a user's unread notifications.
- 
-This method requires an access_token, with a scope containing "read_inbox".
- 
-This method returns a list of notifications.
-
-  GetNotificationsUnread(
+  /**
+   * getNotificationsUnread - Returns a user's unread notifications.
+   *  
+   * This method requires an access_token, with a scope containing "read_inbox".
+   *  
+   * This method returns a list of notifications.
+   * 
+  **/
+  getNotificationsUnread(
     req: operations.GetNotificationsUnreadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetNotificationsUnreadResponse> {
@@ -3989,12 +4093,11 @@ This method returns a list of notifications.
       req = new operations.GetNotificationsUnreadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/notifications/unread";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4003,42 +4106,43 @@ This method returns a list of notifications.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetNotificationsUnreadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetNotificationsUnreadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -4048,24 +4152,26 @@ This method returns a list of notifications.
   }
 
   
-  // GetPosts - Fetches all posts (questions and answers) on the site.
- 
-In many ways this method is the union of /questions and /answers, returning both sets of data albeit only the common fields.
- 
-Most applications should use the question or answer specific methods, but /posts is available for those rare cases where any activity is of intereset. Examples of such queries would be: "all posts on Jan. 1st 2011" or "top 10 posts by score of all time".
- 
-The sorts accepted by this method operate on the follow fields of the post object:
- - activity - last_activity_date
- - creation - creation_date
- - votes - score
-  activity is the default sort.
- 
- It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
-
- 
-This method returns a list of posts.
-
-  GetPosts(
+  /**
+   * getPosts - Fetches all posts (questions and answers) on the site.
+   *  
+   * In many ways this method is the union of /questions and /answers, returning both sets of data albeit only the common fields.
+   *  
+   * Most applications should use the question or answer specific methods, but /posts is available for those rare cases where any activity is of intereset. Examples of such queries would be: "all posts on Jan. 1st 2011" or "top 10 posts by score of all time".
+   *  
+   * The sorts accepted by this method operate on the follow fields of the post object:
+   *  - activity - last_activity_date
+   *  - creation - creation_date
+   *  - votes - score
+   *   activity is the default sort.
+   *  
+   *  It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+   * 
+   *  
+   * This method returns a list of posts.
+   * 
+  **/
+  getPosts(
     req: operations.GetPostsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetPostsResponse> {
@@ -4073,12 +4179,11 @@ This method returns a list of posts.
       req = new operations.GetPostsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/posts";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4087,42 +4192,43 @@ This method returns a list of posts.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetPostsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetPostsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -4132,24 +4238,26 @@ This method returns a list of posts.
   }
 
   
-  // GetPostsIds - Fetches a set of posts by ids.
- 
-This method is meant for grabbing an object when unsure whether an id identifies a question or an answer. This is most common with user entered data.
- 
-{ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for post_id, answer_id, or question_id on post, answer, and question objects respectively.
- 
-The sorts accepted by this method operate on the follow fields of the post object:
- - activity - last_activity_date
- - creation - creation_date
- - votes - score
-  activity is the default sort.
- 
- It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
-
- 
-This method returns a list of posts.
-
-  GetPostsIds(
+  /**
+   * getPostsIds - Fetches a set of posts by ids.
+   *  
+   * This method is meant for grabbing an object when unsure whether an id identifies a question or an answer. This is most common with user entered data.
+   *  
+   * {ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for post_id, answer_id, or question_id on post, answer, and question objects respectively.
+   *  
+   * The sorts accepted by this method operate on the follow fields of the post object:
+   *  - activity - last_activity_date
+   *  - creation - creation_date
+   *  - votes - score
+   *   activity is the default sort.
+   *  
+   *  It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+   * 
+   *  
+   * This method returns a list of posts.
+   * 
+  **/
+  getPostsIds(
     req: operations.GetPostsIdsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetPostsIdsResponse> {
@@ -4157,12 +4265,11 @@ This method returns a list of posts.
       req = new operations.GetPostsIdsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/posts/{ids}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4171,42 +4278,43 @@ This method returns a list of posts.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetPostsIdsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetPostsIdsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -4216,23 +4324,25 @@ This method returns a list of posts.
   }
 
   
-  // GetPostsIdsComments - Gets the comments on the posts identified in ids, regardless of the type of the posts.
- 
-This method is meant for cases when you are unsure of the type of the post id provided. Generally, this would be due to obtaining the post id directly from a user.
- 
-{ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for post_id, answer_id, or question_id on post, answer, and question objects respectively.
- 
-The sorts accepted by this method operate on the follow fields of the comment object:
- - creation - creation_date
- - votes - score
-  creation is the default sort.
- 
- It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
-
- 
-This method returns a list of comments.
-
-  GetPostsIdsComments(
+  /**
+   * getPostsIdsComments - Gets the comments on the posts identified in ids, regardless of the type of the posts.
+   *  
+   * This method is meant for cases when you are unsure of the type of the post id provided. Generally, this would be due to obtaining the post id directly from a user.
+   *  
+   * {ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for post_id, answer_id, or question_id on post, answer, and question objects respectively.
+   *  
+   * The sorts accepted by this method operate on the follow fields of the comment object:
+   *  - creation - creation_date
+   *  - votes - score
+   *   creation is the default sort.
+   *  
+   *  It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+   * 
+   *  
+   * This method returns a list of comments.
+   * 
+  **/
+  getPostsIdsComments(
     req: operations.GetPostsIdsCommentsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetPostsIdsCommentsResponse> {
@@ -4240,12 +4350,11 @@ This method returns a list of comments.
       req = new operations.GetPostsIdsCommentsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/posts/{ids}/comments", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4254,42 +4363,43 @@ This method returns a list of comments.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetPostsIdsCommentsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetPostsIdsCommentsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -4299,13 +4409,15 @@ This method returns a list of comments.
   }
 
   
-  // GetPostsIdsRevisions - Returns edit revisions for the posts identified in ids.
- 
-{ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for post_id, answer_id, or question_id on post, answer, and question objects respectively.
- 
-This method returns a list of revisions.
-
-  GetPostsIdsRevisions(
+  /**
+   * getPostsIdsRevisions - Returns edit revisions for the posts identified in ids.
+   *  
+   * {ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for post_id, answer_id, or question_id on post, answer, and question objects respectively.
+   *  
+   * This method returns a list of revisions.
+   * 
+  **/
+  getPostsIdsRevisions(
     req: operations.GetPostsIdsRevisionsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetPostsIdsRevisionsResponse> {
@@ -4313,12 +4425,11 @@ This method returns a list of revisions.
       req = new operations.GetPostsIdsRevisionsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/posts/{ids}/revisions", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4327,42 +4438,43 @@ This method returns a list of revisions.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetPostsIdsRevisionsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetPostsIdsRevisionsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -4372,19 +4484,21 @@ This method returns a list of revisions.
   }
 
   
-  // GetPostsIdsSuggestedEdits - Returns suggsted edits on the posts identified in ids.
- 
- - creation - creation_date
- - approval - approval_date
- - rejection - rejection_date
-  creation is the default sort.
- 
- {ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for post_id, answer_id, or question_id on post, answer, and question objects respectively.
-
- 
-This method returns a list of suggested-edits.
-
-  GetPostsIdsSuggestedEdits(
+  /**
+   * getPostsIdsSuggestedEdits - Returns suggsted edits on the posts identified in ids.
+   *  
+   *  - creation - creation_date
+   *  - approval - approval_date
+   *  - rejection - rejection_date
+   *   creation is the default sort.
+   *  
+   *  {ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for post_id, answer_id, or question_id on post, answer, and question objects respectively.
+   * 
+   *  
+   * This method returns a list of suggested-edits.
+   * 
+  **/
+  getPostsIdsSuggestedEdits(
     req: operations.GetPostsIdsSuggestedEditsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetPostsIdsSuggestedEditsResponse> {
@@ -4392,12 +4506,11 @@ This method returns a list of suggested-edits.
       req = new operations.GetPostsIdsSuggestedEditsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/posts/{ids}/suggested-edits", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4406,42 +4519,43 @@ This method returns a list of suggested-edits.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetPostsIdsSuggestedEditsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetPostsIdsSuggestedEditsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -4451,15 +4565,17 @@ This method returns a list of suggested-edits.
   }
 
   
-  // GetPrivileges - Returns the earnable privileges on a site.
- 
-Privileges define abilities a user can earn (via reputation) on any Stack Exchange site.
- 
-While fairly stable, over time they do change. New ones are introduced with new features, and the reputation requirements change as a site matures.
- 
-This method returns a list of privileges.
-
-  GetPrivileges(
+  /**
+   * getPrivileges - Returns the earnable privileges on a site.
+   *  
+   * Privileges define abilities a user can earn (via reputation) on any Stack Exchange site.
+   *  
+   * While fairly stable, over time they do change. New ones are introduced with new features, and the reputation requirements change as a site matures.
+   *  
+   * This method returns a list of privileges.
+   * 
+  **/
+  getPrivileges(
     req: operations.GetPrivilegesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetPrivilegesResponse> {
@@ -4467,12 +4583,11 @@ This method returns a list of privileges.
       req = new operations.GetPrivilegesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/privileges";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4481,42 +4596,43 @@ This method returns a list of privileges.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetPrivilegesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetPrivilegesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -4526,27 +4642,29 @@ This method returns a list of privileges.
   }
 
   
-  // GetQuestions - Gets all the questions on the site.
- 
-This method allows you make fairly flexible queries across the entire corpus of questions on a site. For example, getting all questions asked in the the week of Jan 1st 2011 with scores of 10 or more is a single query with parameters sort=votes&min=10&fromdate=1293840000&todate=1294444800.
- 
-To constrain questions returned to those with a set of tags, use the tagged parameter with a semi-colon delimited list of tags. This is an and contraint, passing tagged=c;java will return only those questions with both tags. As such, passing more than 5 tags will always return zero results.
- 
-The sorts accepted by this method operate on the follow fields of the question object:
- - activity - last_activity_date
- - creation - creation_date
- - votes - score
- - hot - by the formula ordering the hot tab Does not accept min or max
- - week - by the formula ordering the week tab Does not accept min or max
- - month - by the formula ordering the month tab Does not accept min or max
-  activity is the default sort.
- 
- It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
-
- 
-This method returns a list of questions.
-
-  GetQuestions(
+  /**
+   * getQuestions - Gets all the questions on the site.
+   *  
+   * This method allows you make fairly flexible queries across the entire corpus of questions on a site. For example, getting all questions asked in the the week of Jan 1st 2011 with scores of 10 or more is a single query with parameters sort=votes&min=10&fromdate=1293840000&todate=1294444800.
+   *  
+   * To constrain questions returned to those with a set of tags, use the tagged parameter with a semi-colon delimited list of tags. This is an and contraint, passing tagged=c;java will return only those questions with both tags. As such, passing more than 5 tags will always return zero results.
+   *  
+   * The sorts accepted by this method operate on the follow fields of the question object:
+   *  - activity - last_activity_date
+   *  - creation - creation_date
+   *  - votes - score
+   *  - hot - by the formula ordering the hot tab Does not accept min or max
+   *  - week - by the formula ordering the week tab Does not accept min or max
+   *  - month - by the formula ordering the month tab Does not accept min or max
+   *   activity is the default sort.
+   *  
+   *  It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+   * 
+   *  
+   * This method returns a list of questions.
+   * 
+  **/
+  getQuestions(
     req: operations.GetQuestionsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetQuestionsResponse> {
@@ -4554,12 +4672,11 @@ This method returns a list of questions.
       req = new operations.GetQuestionsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/questions";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4568,42 +4685,43 @@ This method returns a list of questions.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetQuestionsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetQuestionsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -4613,20 +4731,22 @@ This method returns a list of questions.
   }
 
   
-  // GetQuestionsFeatured - Returns all the questions with active bounties in the system.
- 
-The sorts accepted by this method operate on the follow fields of the question object:
- - activity - last_activity_date
- - creation - creation_date
- - votes - score
-  activity is the default sort.
- 
- It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
-
- 
-This method returns a list of questions.
-
-  GetQuestionsFeatured(
+  /**
+   * getQuestionsFeatured - Returns all the questions with active bounties in the system.
+   *  
+   * The sorts accepted by this method operate on the follow fields of the question object:
+   *  - activity - last_activity_date
+   *  - creation - creation_date
+   *  - votes - score
+   *   activity is the default sort.
+   *  
+   *  It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+   * 
+   *  
+   * This method returns a list of questions.
+   * 
+  **/
+  getQuestionsFeatured(
     req: operations.GetQuestionsFeaturedRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetQuestionsFeaturedResponse> {
@@ -4634,12 +4754,11 @@ This method returns a list of questions.
       req = new operations.GetQuestionsFeaturedRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/questions/featured";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4648,42 +4767,43 @@ This method returns a list of questions.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetQuestionsFeaturedResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetQuestionsFeaturedResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -4693,24 +4813,26 @@ This method returns a list of questions.
   }
 
   
-  // GetQuestionsIds - Returns the questions identified in {ids}.
- 
-This is most useful for fetching fresh data when maintaining a cache of question ids, or polling for changes.
- 
-{ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for question_id on question objects.
- 
-The sorts accepted by this method operate on the follow fields of the question object:
- - activity - last_activity_date
- - creation - creation_date
- - votes - score
-  activity is the default sort.
- 
- It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
-
- 
-This method returns a list of questions.
-
-  GetQuestionsIds(
+  /**
+   * getQuestionsIds - Returns the questions identified in {ids}.
+   *  
+   * This is most useful for fetching fresh data when maintaining a cache of question ids, or polling for changes.
+   *  
+   * {ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for question_id on question objects.
+   *  
+   * The sorts accepted by this method operate on the follow fields of the question object:
+   *  - activity - last_activity_date
+   *  - creation - creation_date
+   *  - votes - score
+   *   activity is the default sort.
+   *  
+   *  It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+   * 
+   *  
+   * This method returns a list of questions.
+   * 
+  **/
+  getQuestionsIds(
     req: operations.GetQuestionsIdsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetQuestionsIdsResponse> {
@@ -4718,12 +4840,11 @@ This method returns a list of questions.
       req = new operations.GetQuestionsIdsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/questions/{ids}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4732,42 +4853,43 @@ This method returns a list of questions.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetQuestionsIdsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetQuestionsIdsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -4777,24 +4899,26 @@ This method returns a list of questions.
   }
 
   
-  // GetQuestionsIdsAnswers - Gets the answers to a set of questions identified in id.
- 
-This method is most useful if you have a set of interesting questions, and you wish to obtain all of their answers at once or if you are polling for new or updates answers (in conjunction with sort=activity).
- 
-{ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for question_id on question objects.
- 
-The sorts accepted by this method operate on the follow fields of the answer object:
- - activity - last_activity_date
- - creation - creation_date
- - votes - score
-  activity is the default sort.
- 
- It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
-
- 
-This method returns a list of answers.
-
-  GetQuestionsIdsAnswers(
+  /**
+   * getQuestionsIdsAnswers - Gets the answers to a set of questions identified in id.
+   *  
+   * This method is most useful if you have a set of interesting questions, and you wish to obtain all of their answers at once or if you are polling for new or updates answers (in conjunction with sort=activity).
+   *  
+   * {ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for question_id on question objects.
+   *  
+   * The sorts accepted by this method operate on the follow fields of the answer object:
+   *  - activity - last_activity_date
+   *  - creation - creation_date
+   *  - votes - score
+   *   activity is the default sort.
+   *  
+   *  It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+   * 
+   *  
+   * This method returns a list of answers.
+   * 
+  **/
+  getQuestionsIdsAnswers(
     req: operations.GetQuestionsIdsAnswersRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetQuestionsIdsAnswersResponse> {
@@ -4802,12 +4926,11 @@ This method returns a list of answers.
       req = new operations.GetQuestionsIdsAnswersRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/questions/{ids}/answers", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4816,42 +4939,43 @@ This method returns a list of answers.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetQuestionsIdsAnswersResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetQuestionsIdsAnswersResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -4861,23 +4985,25 @@ This method returns a list of answers.
   }
 
   
-  // GetQuestionsIdsComments - Gets the comments on a question.
- 
-If you know that you have an question id and need the comments, use this method. If you know you have a answer id, use /answers/{ids}/comments. If you are unsure, use /posts/{ids}/comments.
- 
-{ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for question_id on question objects.
- 
-The sorts accepted by this method operate on the follow fields of the comment object:
- - creation - creation_date
- - votes - score
-  creation is the default sort.
- 
- It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
-
- 
-This method returns a list of comments.
-
-  GetQuestionsIdsComments(
+  /**
+   * getQuestionsIdsComments - Gets the comments on a question.
+   *  
+   * If you know that you have an question id and need the comments, use this method. If you know you have a answer id, use /answers/{ids}/comments. If you are unsure, use /posts/{ids}/comments.
+   *  
+   * {ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for question_id on question objects.
+   *  
+   * The sorts accepted by this method operate on the follow fields of the comment object:
+   *  - creation - creation_date
+   *  - votes - score
+   *   creation is the default sort.
+   *  
+   *  It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+   * 
+   *  
+   * This method returns a list of comments.
+   * 
+  **/
+  getQuestionsIdsComments(
     req: operations.GetQuestionsIdsCommentsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetQuestionsIdsCommentsResponse> {
@@ -4885,12 +5011,11 @@ This method returns a list of comments.
       req = new operations.GetQuestionsIdsCommentsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/questions/{ids}/comments", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4899,42 +5024,43 @@ This method returns a list of comments.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetQuestionsIdsCommentsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetQuestionsIdsCommentsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -4944,27 +5070,29 @@ This method returns a list of comments.
   }
 
   
-  // GetQuestionsIdsLinked - Gets questions which link to those questions identified in {ids}.
- 
-This method only considers questions that are linked within a site, and will never return questions from another Stack Exchange site.
- 
-A question is considered "linked" when it explicitly includes a hyperlink to another question, there are no other heuristics.
- 
-{ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for question_id on question objects.
- 
-The sorts accepted by this method operate on the follow fields of the question object:
- - activity - last_activity_date
- - creation - creation_date
- - votes - score
- - rank - a priority sort by site applies, subject to change at any time Does not accept min or max
-  activity is the default sort.
- 
- It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
-
- 
-This method returns a list of questions.
-
-  GetQuestionsIdsLinked(
+  /**
+   * getQuestionsIdsLinked - Gets questions which link to those questions identified in {ids}.
+   *  
+   * This method only considers questions that are linked within a site, and will never return questions from another Stack Exchange site.
+   *  
+   * A question is considered "linked" when it explicitly includes a hyperlink to another question, there are no other heuristics.
+   *  
+   * {ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for question_id on question objects.
+   *  
+   * The sorts accepted by this method operate on the follow fields of the question object:
+   *  - activity - last_activity_date
+   *  - creation - creation_date
+   *  - votes - score
+   *  - rank - a priority sort by site applies, subject to change at any time Does not accept min or max
+   *   activity is the default sort.
+   *  
+   *  It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+   * 
+   *  
+   * This method returns a list of questions.
+   * 
+  **/
+  getQuestionsIdsLinked(
     req: operations.GetQuestionsIdsLinkedRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetQuestionsIdsLinkedResponse> {
@@ -4972,12 +5100,11 @@ This method returns a list of questions.
       req = new operations.GetQuestionsIdsLinkedRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/questions/{ids}/linked", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4986,42 +5113,43 @@ This method returns a list of questions.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetQuestionsIdsLinkedResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetQuestionsIdsLinkedResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -5031,25 +5159,27 @@ This method returns a list of questions.
   }
 
   
-  // GetQuestionsIdsRelated - Returns questions that the site considers related to those identified in {ids}.
- 
-The algorithm for determining if questions are related is not documented, and subject to change at any time. Futhermore, these values are very heavily cached, and may not update immediately after a question has been editted. It is also not guaranteed that a question will be considered related to any number (even non-zero) of questions, and a consumer should be able to handle a variable number of returned questions.
- 
-{ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for question_id on question objects.
- 
-The sorts accepted by this method operate on the follow fields of the question object:
- - activity - last_activity_date
- - creation - creation_date
- - votes - score
- - rank - a priority sort by site applies, subject to change at any time Does not accept min or max
-  activity is the default sort.
- 
- It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
-
- 
-This method returns a list of questions.
-
-  GetQuestionsIdsRelated(
+  /**
+   * getQuestionsIdsRelated - Returns questions that the site considers related to those identified in {ids}.
+   *  
+   * The algorithm for determining if questions are related is not documented, and subject to change at any time. Futhermore, these values are very heavily cached, and may not update immediately after a question has been editted. It is also not guaranteed that a question will be considered related to any number (even non-zero) of questions, and a consumer should be able to handle a variable number of returned questions.
+   *  
+   * {ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for question_id on question objects.
+   *  
+   * The sorts accepted by this method operate on the follow fields of the question object:
+   *  - activity - last_activity_date
+   *  - creation - creation_date
+   *  - votes - score
+   *  - rank - a priority sort by site applies, subject to change at any time Does not accept min or max
+   *   activity is the default sort.
+   *  
+   *  It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+   * 
+   *  
+   * This method returns a list of questions.
+   * 
+  **/
+  getQuestionsIdsRelated(
     req: operations.GetQuestionsIdsRelatedRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetQuestionsIdsRelatedResponse> {
@@ -5057,12 +5187,11 @@ This method returns a list of questions.
       req = new operations.GetQuestionsIdsRelatedRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/questions/{ids}/related", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -5071,42 +5200,43 @@ This method returns a list of questions.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetQuestionsIdsRelatedResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetQuestionsIdsRelatedResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -5116,17 +5246,19 @@ This method returns a list of questions.
   }
 
   
-  // GetQuestionsIdsTimeline - Returns a subset of the events that have happened to the questions identified in id.
- 
-This provides data similar to that found on a question's timeline page.
- 
-Voting data is scrubbed to deter inferencing of voter identity.
- 
-{ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for question_id on question objects.
- 
-This method returns a list of question timeline events.
-
-  GetQuestionsIdsTimeline(
+  /**
+   * getQuestionsIdsTimeline - Returns a subset of the events that have happened to the questions identified in id.
+   *  
+   * This provides data similar to that found on a question's timeline page.
+   *  
+   * Voting data is scrubbed to deter inferencing of voter identity.
+   *  
+   * {ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for question_id on question objects.
+   *  
+   * This method returns a list of question timeline events.
+   * 
+  **/
+  getQuestionsIdsTimeline(
     req: operations.GetQuestionsIdsTimelineRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetQuestionsIdsTimelineResponse> {
@@ -5134,12 +5266,11 @@ This method returns a list of question timeline events.
       req = new operations.GetQuestionsIdsTimelineRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/questions/{ids}/timeline", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -5148,42 +5279,43 @@ This method returns a list of question timeline events.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetQuestionsIdsTimelineResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetQuestionsIdsTimelineResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -5193,26 +5325,28 @@ This method returns a list of question timeline events.
   }
 
   
-  // GetQuestionsNoAnswers - Returns questions which have received no answers.
- 
-Compare with /questions/unanswered which mearly returns questions that the sites consider insufficiently well answered.
- 
-This method corresponds roughly with the this site tab.
- 
-To constrain questions returned to those with a set of tags, use the tagged parameter with a semi-colon delimited list of tags. This is an and contraint, passing tagged=c;java will return only those questions with both tags. As such, passing more than 5 tags will always return zero results.
- 
-The sorts accepted by this method operate on the follow fields of the question object:
- - activity - last_activity_date
- - creation - creation_date
- - votes - score
-  activity is the default sort.
- 
- It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
-
- 
-This method returns a list of questions.
-
-  GetQuestionsNoAnswers(
+  /**
+   * getQuestionsNoAnswers - Returns questions which have received no answers.
+   *  
+   * Compare with /questions/unanswered which mearly returns questions that the sites consider insufficiently well answered.
+   *  
+   * This method corresponds roughly with the this site tab.
+   *  
+   * To constrain questions returned to those with a set of tags, use the tagged parameter with a semi-colon delimited list of tags. This is an and contraint, passing tagged=c;java will return only those questions with both tags. As such, passing more than 5 tags will always return zero results.
+   *  
+   * The sorts accepted by this method operate on the follow fields of the question object:
+   *  - activity - last_activity_date
+   *  - creation - creation_date
+   *  - votes - score
+   *   activity is the default sort.
+   *  
+   *  It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+   * 
+   *  
+   * This method returns a list of questions.
+   * 
+  **/
+  getQuestionsNoAnswers(
     req: operations.GetQuestionsNoAnswersRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetQuestionsNoAnswersResponse> {
@@ -5220,12 +5354,11 @@ This method returns a list of questions.
       req = new operations.GetQuestionsNoAnswersRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/questions/no-answers";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -5234,42 +5367,43 @@ This method returns a list of questions.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetQuestionsNoAnswersResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetQuestionsNoAnswersResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -5279,28 +5413,30 @@ This method returns a list of questions.
   }
 
   
-  // GetQuestionsUnanswered - Returns questions the site considers to be unanswered.
- 
-Note that just because a question has an answer, that does not mean it is considered answered. While the rules are subject to change, at this time a question must have at least one upvoted answer to be considered answered.
- 
-To constrain questions returned to those with a set of tags, use the tagged parameter with a semi-colon delimited list of tags. This is an and contraint, passing tagged=c;java will return only those questions with both tags. As such, passing more than 5 tags will always return zero results.
- 
-Compare with /questions/no-answers.
- 
-This method corresponds roughly with the unanswered tab.
- 
-The sorts accepted by this method operate on the follow fields of the question object:
- - activity - last_activity_date
- - creation - creation_date
- - votes - score
-  activity is the default sort.
- 
- It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
-
- 
-This method returns a list of questions.
-
-  GetQuestionsUnanswered(
+  /**
+   * getQuestionsUnanswered - Returns questions the site considers to be unanswered.
+   *  
+   * Note that just because a question has an answer, that does not mean it is considered answered. While the rules are subject to change, at this time a question must have at least one upvoted answer to be considered answered.
+   *  
+   * To constrain questions returned to those with a set of tags, use the tagged parameter with a semi-colon delimited list of tags. This is an and contraint, passing tagged=c;java will return only those questions with both tags. As such, passing more than 5 tags will always return zero results.
+   *  
+   * Compare with /questions/no-answers.
+   *  
+   * This method corresponds roughly with the unanswered tab.
+   *  
+   * The sorts accepted by this method operate on the follow fields of the question object:
+   *  - activity - last_activity_date
+   *  - creation - creation_date
+   *  - votes - score
+   *   activity is the default sort.
+   *  
+   *  It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+   * 
+   *  
+   * This method returns a list of questions.
+   * 
+  **/
+  getQuestionsUnanswered(
     req: operations.GetQuestionsUnansweredRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetQuestionsUnansweredResponse> {
@@ -5308,12 +5444,11 @@ This method returns a list of questions.
       req = new operations.GetQuestionsUnansweredRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/questions/unanswered";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -5322,42 +5457,43 @@ This method returns a list of questions.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetQuestionsUnansweredResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetQuestionsUnansweredResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -5367,13 +5503,15 @@ This method returns a list of questions.
   }
 
   
-  // GetRevisionsIds - Returns edit revisions identified by ids in {ids}.
- 
-{ids} can contain up to 20 semicolon delimited ids, to find ids programatically look for revision_guid on revision objects. Note that unlike most other id types in the API, revision_guid is a string.
- 
-This method returns a list of revisions.
-
-  GetRevisionsIds(
+  /**
+   * getRevisionsIds - Returns edit revisions identified by ids in {ids}.
+   *  
+   * {ids} can contain up to 20 semicolon delimited ids, to find ids programatically look for revision_guid on revision objects. Note that unlike most other id types in the API, revision_guid is a string.
+   *  
+   * This method returns a list of revisions.
+   * 
+  **/
+  getRevisionsIds(
     req: operations.GetRevisionsIdsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetRevisionsIdsResponse> {
@@ -5381,12 +5519,11 @@ This method returns a list of revisions.
       req = new operations.GetRevisionsIdsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/revisions/{ids}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -5395,42 +5532,43 @@ This method returns a list of revisions.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetRevisionsIdsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetRevisionsIdsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -5440,27 +5578,29 @@ This method returns a list of revisions.
   }
 
   
-  // GetSearch - Searches a site for any questions which fit the given criteria.
- 
-This method is intentionally quite limited. For more general searching, you should use a proper internet search engine restricted to the domain of the site in question.
- 
-At least one of tagged or intitle must be set on this method. nottagged is only used if tagged is also set, for performance reasons.
- 
-tagged and nottagged are semi-colon delimited list of tags. At least 1 tag in tagged will be on each returned question if it is passed, making it the OR equivalent of the AND version of tagged on /questions.
- 
-The sorts accepted by this method operate on the follow fields of the question object:
- - activity - last_activity_date
- - creation - creation_date
- - votes - score
- - relevance - matches the relevance tab on the site itself Does not accept min or max
-  activity is the default sort.
- 
- It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
-
- 
-This method returns a list of questions.
-
-  GetSearch(
+  /**
+   * getSearch - Searches a site for any questions which fit the given criteria.
+   *  
+   * This method is intentionally quite limited. For more general searching, you should use a proper internet search engine restricted to the domain of the site in question.
+   *  
+   * At least one of tagged or intitle must be set on this method. nottagged is only used if tagged is also set, for performance reasons.
+   *  
+   * tagged and nottagged are semi-colon delimited list of tags. At least 1 tag in tagged will be on each returned question if it is passed, making it the OR equivalent of the AND version of tagged on /questions.
+   *  
+   * The sorts accepted by this method operate on the follow fields of the question object:
+   *  - activity - last_activity_date
+   *  - creation - creation_date
+   *  - votes - score
+   *  - relevance - matches the relevance tab on the site itself Does not accept min or max
+   *   activity is the default sort.
+   *  
+   *  It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+   * 
+   *  
+   * This method returns a list of questions.
+   * 
+  **/
+  getSearch(
     req: operations.GetSearchRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetSearchResponse> {
@@ -5468,12 +5608,11 @@ This method returns a list of questions.
       req = new operations.GetSearchRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/search";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -5482,42 +5621,43 @@ This method returns a list of questions.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetSearchResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetSearchResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -5527,40 +5667,42 @@ This method returns a list of questions.
   }
 
   
-  // GetSearchAdvanced - Searches a site for any questions which fit the given criteria.
- 
-Search criteria are expressed using the following parameters:
-  - q - a free form text parameter, will match all question properties based on an undocumented algorithm.
- - accepted - true to return only questions with accepted answers, false to return only those without. Omit to elide constraint.
- - answers - the minimum number of answers returned questions must have.
- - body - text which must appear in returned questions' bodies.
- - closed - true to return only closed questions, false to return only open ones. Omit to elide constraint.
- - migrated - true to return only questions migrated away from a site, false to return only those not. Omit to elide constraint.
- - notice - true to return only questions with post notices, false to return only those without. Omit to elide constraint.
- - nottagged - a semicolon delimited list of tags, none of which will be present on returned questions.
- - tagged - a semicolon delimited list of tags, of which at least one will be present on all returned questions.
- - title - text which must appear in returned questions' titles.
- - user - the id of the user who must own the questions returned.
- - url - a url which must be contained in a post, may include a wildcard.
- - views - the minimum number of views returned questions must have.
- - wiki - true to return only community wiki questions, false to return only non-community wiki ones. Omit to elide constraint.
-
-  
-At least one additional parameter must be set if nottagged is set, for performance reasons.
- 
-The sorts accepted by this method operate on the follow fields of the question object:
- - activity - last_activity_date
- - creation - creation_date
- - votes - score
- - relevance - matches the relevance tab on the site itself Does not accept min or max
-  activity is the default sort.
- 
- It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
-
- 
-This method returns a list of questions.
-
-  GetSearchAdvanced(
+  /**
+   * getSearchAdvanced - Searches a site for any questions which fit the given criteria.
+   *  
+   * Search criteria are expressed using the following parameters:
+   *   - q - a free form text parameter, will match all question properties based on an undocumented algorithm.
+   *  - accepted - true to return only questions with accepted answers, false to return only those without. Omit to elide constraint.
+   *  - answers - the minimum number of answers returned questions must have.
+   *  - body - text which must appear in returned questions' bodies.
+   *  - closed - true to return only closed questions, false to return only open ones. Omit to elide constraint.
+   *  - migrated - true to return only questions migrated away from a site, false to return only those not. Omit to elide constraint.
+   *  - notice - true to return only questions with post notices, false to return only those without. Omit to elide constraint.
+   *  - nottagged - a semicolon delimited list of tags, none of which will be present on returned questions.
+   *  - tagged - a semicolon delimited list of tags, of which at least one will be present on all returned questions.
+   *  - title - text which must appear in returned questions' titles.
+   *  - user - the id of the user who must own the questions returned.
+   *  - url - a url which must be contained in a post, may include a wildcard.
+   *  - views - the minimum number of views returned questions must have.
+   *  - wiki - true to return only community wiki questions, false to return only non-community wiki ones. Omit to elide constraint.
+   * 
+   *   
+   * At least one additional parameter must be set if nottagged is set, for performance reasons.
+   *  
+   * The sorts accepted by this method operate on the follow fields of the question object:
+   *  - activity - last_activity_date
+   *  - creation - creation_date
+   *  - votes - score
+   *  - relevance - matches the relevance tab on the site itself Does not accept min or max
+   *   activity is the default sort.
+   *  
+   *  It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+   * 
+   *  
+   * This method returns a list of questions.
+   * 
+  **/
+  getSearchAdvanced(
     req: operations.GetSearchAdvancedRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetSearchAdvancedResponse> {
@@ -5568,12 +5710,11 @@ This method returns a list of questions.
       req = new operations.GetSearchAdvancedRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/search/advanced";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -5582,42 +5723,43 @@ This method returns a list of questions.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetSearchAdvancedResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetSearchAdvancedResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -5627,29 +5769,31 @@ This method returns a list of questions.
   }
 
   
-  // GetSimilar - Returns questions which are similar to a hypothetical one based on a title and tag combination.
- 
-This method is roughly equivalent to a site's related questions suggestion on the ask page.
- 
-This method is useful for correlating data outside of a Stack Exchange site with similar content within one.
- 
-Note that title must always be passed as a parameter. tagged and nottagged are optional, semi-colon delimited lists of tags.
- 
-If tagged is passed it is treated as a preference, there is no guarantee that questions returned will have any of those tags. nottagged is treated as a requirement, no questions will be returned with those tags.
- 
-The sorts accepted by this method operate on the follow fields of the question object:
- - activity - last_activity_date
- - creation - creation_date
- - votes - score
- - relevance - order by "how similar" the questions are, most likely candidate first with a descending order Does not accept min or max
-  activity is the default sort.
- 
- It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
-
- 
-This method returns a list of questions.
-
-  GetSimilar(
+  /**
+   * getSimilar - Returns questions which are similar to a hypothetical one based on a title and tag combination.
+   *  
+   * This method is roughly equivalent to a site's related questions suggestion on the ask page.
+   *  
+   * This method is useful for correlating data outside of a Stack Exchange site with similar content within one.
+   *  
+   * Note that title must always be passed as a parameter. tagged and nottagged are optional, semi-colon delimited lists of tags.
+   *  
+   * If tagged is passed it is treated as a preference, there is no guarantee that questions returned will have any of those tags. nottagged is treated as a requirement, no questions will be returned with those tags.
+   *  
+   * The sorts accepted by this method operate on the follow fields of the question object:
+   *  - activity - last_activity_date
+   *  - creation - creation_date
+   *  - votes - score
+   *  - relevance - order by "how similar" the questions are, most likely candidate first with a descending order Does not accept min or max
+   *   activity is the default sort.
+   *  
+   *  It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+   * 
+   *  
+   * This method returns a list of questions.
+   * 
+  **/
+  getSimilar(
     req: operations.GetSimilarRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetSimilarResponse> {
@@ -5657,12 +5801,11 @@ This method returns a list of questions.
       req = new operations.GetSimilarRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/similar";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -5671,42 +5814,43 @@ This method returns a list of questions.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetSimilarResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetSimilarResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -5716,15 +5860,17 @@ This method returns a list of questions.
   }
 
   
-  // GetSites - Returns all sites in the network.
- 
-This method allows for discovery of new sites, and changes to existing ones. Be aware that unlike normal API methods, this method should be fetched very infrequently, it is very unusual for these values to change more than once on any given day. It is suggested that you cache its return for at least one day, unless your app encounters evidence that it has changed (such as from the /info method).
- 
-The pagesize parameter for this method is unbounded, in acknowledgement that for many applications repeatedly fetching from /sites would complicate start-up tasks needlessly.
- 
-This method returns a list of sites.
-
-  GetSites(
+  /**
+   * getSites - Returns all sites in the network.
+   *  
+   * This method allows for discovery of new sites, and changes to existing ones. Be aware that unlike normal API methods, this method should be fetched very infrequently, it is very unusual for these values to change more than once on any given day. It is suggested that you cache its return for at least one day, unless your app encounters evidence that it has changed (such as from the /info method).
+   *  
+   * The pagesize parameter for this method is unbounded, in acknowledgement that for many applications repeatedly fetching from /sites would complicate start-up tasks needlessly.
+   *  
+   * This method returns a list of sites.
+   * 
+  **/
+  getSites(
     req: operations.GetSitesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetSitesResponse> {
@@ -5732,12 +5878,11 @@ This method returns a list of sites.
       req = new operations.GetSitesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/sites";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -5746,42 +5891,43 @@ This method returns a list of sites.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetSitesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetSitesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -5791,19 +5937,21 @@ This method returns a list of sites.
   }
 
   
-  // GetSuggestedEdits - Returns all the suggested edits in the systems.
- 
-This method returns a list of suggested-edits.
- 
-The sorts accepted by this method operate on the follow fields of the suggested_edit object:
- - creation - creation_date
- - approval - approval_date Does not return unapproved suggested_edits
- - rejection - rejection_date Does not return unrejected suggested_edits
-  creation is the default sort.
- 
- It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
-
-  GetSuggestedEdits(
+  /**
+   * getSuggestedEdits - Returns all the suggested edits in the systems.
+   *  
+   * This method returns a list of suggested-edits.
+   *  
+   * The sorts accepted by this method operate on the follow fields of the suggested_edit object:
+   *  - creation - creation_date
+   *  - approval - approval_date Does not return unapproved suggested_edits
+   *  - rejection - rejection_date Does not return unrejected suggested_edits
+   *   creation is the default sort.
+   *  
+   *  It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+   * 
+  **/
+  getSuggestedEdits(
     req: operations.GetSuggestedEditsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetSuggestedEditsResponse> {
@@ -5811,12 +5959,11 @@ The sorts accepted by this method operate on the follow fields of the suggested_
       req = new operations.GetSuggestedEditsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/suggested-edits";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -5825,42 +5972,43 @@ The sorts accepted by this method operate on the follow fields of the suggested_
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetSuggestedEditsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetSuggestedEditsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -5870,22 +6018,24 @@ The sorts accepted by this method operate on the follow fields of the suggested_
   }
 
   
-  // GetSuggestedEditsIds - Returns suggested edits identified in ids.
- 
-{ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for suggested_edit_id on suggested_edit objects.
- 
-The sorts accepted by this method operate on the follow fields of the suggested_edit object:
- - creation - creation_date
- - approval - approval_date Does not return unapproved suggested_edits
- - rejection - rejection_date Does not return unrejected suggested_edits
-  creation is the default sort.
- 
- It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
-
- 
-This method returns a list of suggested-edits.
-
-  GetSuggestedEditsIds(
+  /**
+   * getSuggestedEditsIds - Returns suggested edits identified in ids.
+   *  
+   * {ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for suggested_edit_id on suggested_edit objects.
+   *  
+   * The sorts accepted by this method operate on the follow fields of the suggested_edit object:
+   *  - creation - creation_date
+   *  - approval - approval_date Does not return unapproved suggested_edits
+   *  - rejection - rejection_date Does not return unrejected suggested_edits
+   *   creation is the default sort.
+   *  
+   *  It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+   * 
+   *  
+   * This method returns a list of suggested-edits.
+   * 
+  **/
+  getSuggestedEditsIds(
     req: operations.GetSuggestedEditsIdsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetSuggestedEditsIdsResponse> {
@@ -5893,12 +6043,11 @@ This method returns a list of suggested-edits.
       req = new operations.GetSuggestedEditsIdsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/suggested-edits/{ids}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -5907,42 +6056,43 @@ This method returns a list of suggested-edits.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetSuggestedEditsIdsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetSuggestedEditsIdsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -5952,21 +6102,23 @@ This method returns a list of suggested-edits.
   }
 
   
-  // GetTags - Returns the tags found on a site.
- 
-The inname parameter lets a consumer filter down to tags that contain a certain substring. For example, inname=own would return both "download" and "owner" amongst others.
- 
-This method returns a list of tags.
- 
-The sorts accepted by this method operate on the follow fields of the tag object:
- - popular - count
- - activity - the creation_date of the last question asked with the tag
- - name - name
-  popular is the default sort.
- 
- It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
-
-  GetTags(
+  /**
+   * getTags - Returns the tags found on a site.
+   *  
+   * The inname parameter lets a consumer filter down to tags that contain a certain substring. For example, inname=own would return both "download" and "owner" amongst others.
+   *  
+   * This method returns a list of tags.
+   *  
+   * The sorts accepted by this method operate on the follow fields of the tag object:
+   *  - popular - count
+   *  - activity - the creation_date of the last question asked with the tag
+   *  - name - name
+   *   popular is the default sort.
+   *  
+   *  It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+   * 
+  **/
+  getTags(
     req: operations.GetTagsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetTagsResponse> {
@@ -5974,12 +6126,11 @@ The sorts accepted by this method operate on the follow fields of the tag object
       req = new operations.GetTagsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/tags";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -5988,42 +6139,43 @@ The sorts accepted by this method operate on the follow fields of the tag object
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetTagsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetTagsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -6033,21 +6185,23 @@ The sorts accepted by this method operate on the follow fields of the tag object
   }
 
   
-  // GetTagsModeratorOnly - Returns the tags found on a site that only moderators can use.
- 
-The inname parameter lets a consumer filter down to tags that contain a certain substring. For example, inname=own would return both "download" and "owner" amongst others.
- 
-This method returns a list of tags.
- 
-The sorts accepted by this method operate on the follow fields of the tag object:
- - popular - count
- - activity - the creation_date of the last question asked with the tag
- - name - name
-  popular is the default sort.
- 
- It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
-
-  GetTagsModeratorOnly(
+  /**
+   * getTagsModeratorOnly - Returns the tags found on a site that only moderators can use.
+   *  
+   * The inname parameter lets a consumer filter down to tags that contain a certain substring. For example, inname=own would return both "download" and "owner" amongst others.
+   *  
+   * This method returns a list of tags.
+   *  
+   * The sorts accepted by this method operate on the follow fields of the tag object:
+   *  - popular - count
+   *  - activity - the creation_date of the last question asked with the tag
+   *  - name - name
+   *   popular is the default sort.
+   *  
+   *  It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+   * 
+  **/
+  getTagsModeratorOnly(
     req: operations.GetTagsModeratorOnlyRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetTagsModeratorOnlyResponse> {
@@ -6055,12 +6209,11 @@ The sorts accepted by this method operate on the follow fields of the tag object
       req = new operations.GetTagsModeratorOnlyRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/tags/moderator-only";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -6069,42 +6222,43 @@ The sorts accepted by this method operate on the follow fields of the tag object
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetTagsModeratorOnlyResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetTagsModeratorOnlyResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -6114,21 +6268,23 @@ The sorts accepted by this method operate on the follow fields of the tag object
   }
 
   
-  // GetTagsRequired - Returns the tags found on a site that fulfill required tag constraints on questions.
- 
-The inname parameter lets a consumer filter down to tags that contain a certain substring. For example, inname=own would return both "download" and "owner" amongst others.
- 
-This method returns a list of tags.
- 
-The sorts accepted by this method operate on the follow fields of the tag object:
- - popular - count
- - activity - the creation_date of the last question asked with the tag
- - name - name
-  popular is the default sort.
- 
- It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
-
-  GetTagsRequired(
+  /**
+   * getTagsRequired - Returns the tags found on a site that fulfill required tag constraints on questions.
+   *  
+   * The inname parameter lets a consumer filter down to tags that contain a certain substring. For example, inname=own would return both "download" and "owner" amongst others.
+   *  
+   * This method returns a list of tags.
+   *  
+   * The sorts accepted by this method operate on the follow fields of the tag object:
+   *  - popular - count
+   *  - activity - the creation_date of the last question asked with the tag
+   *  - name - name
+   *   popular is the default sort.
+   *  
+   *  It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+   * 
+  **/
+  getTagsRequired(
     req: operations.GetTagsRequiredRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetTagsRequiredResponse> {
@@ -6136,12 +6292,11 @@ The sorts accepted by this method operate on the follow fields of the tag object
       req = new operations.GetTagsRequiredRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/tags/required";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -6150,42 +6305,43 @@ The sorts accepted by this method operate on the follow fields of the tag object
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetTagsRequiredResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetTagsRequiredResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -6195,22 +6351,24 @@ The sorts accepted by this method operate on the follow fields of the tag object
   }
 
   
-  // GetTagsSynonyms - Returns all tag synonyms found a site.
- 
-When searching for synonyms of specific tags, it is better to use /tags/{tags}/synonyms over this method.
- 
-The sorts accepted by this method operate on the follow fields of the tag_synonym object:
- - creation - creation_date
- - applied - applied_count
- - activity - last_applied_date
-  creation is the default sort.
- 
- It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
-
- 
-This method returns a list of tag_synonyms.
-
-  GetTagsSynonyms(
+  /**
+   * getTagsSynonyms - Returns all tag synonyms found a site.
+   *  
+   * When searching for synonyms of specific tags, it is better to use /tags/{tags}/synonyms over this method.
+   *  
+   * The sorts accepted by this method operate on the follow fields of the tag_synonym object:
+   *  - creation - creation_date
+   *  - applied - applied_count
+   *  - activity - last_applied_date
+   *   creation is the default sort.
+   *  
+   *  It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+   * 
+   *  
+   * This method returns a list of tag_synonyms.
+   * 
+  **/
+  getTagsSynonyms(
     req: operations.GetTagsSynonymsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetTagsSynonymsResponse> {
@@ -6218,12 +6376,11 @@ This method returns a list of tag_synonyms.
       req = new operations.GetTagsSynonymsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/tags/synonyms";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -6232,42 +6389,43 @@ This method returns a list of tag_synonyms.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetTagsSynonymsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetTagsSynonymsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -6277,13 +6435,15 @@ This method returns a list of tag_synonyms.
   }
 
   
-  // GetTagsTagTopAnswerersPeriod - Returns the top 30 answerers active in a single tag, of either all-time or the last 30 days.
- 
-This is a view onto the data presented on the tag info page on the sites.
- 
-This method returns a list of tag score objects.
-
-  GetTagsTagTopAnswerersPeriod(
+  /**
+   * getTagsTagTopAnswerersPeriod - Returns the top 30 answerers active in a single tag, of either all-time or the last 30 days.
+   *  
+   * This is a view onto the data presented on the tag info page on the sites.
+   *  
+   * This method returns a list of tag score objects.
+   * 
+  **/
+  getTagsTagTopAnswerersPeriod(
     req: operations.GetTagsTagTopAnswerersPeriodRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetTagsTagTopAnswerersPeriodResponse> {
@@ -6291,12 +6451,11 @@ This method returns a list of tag score objects.
       req = new operations.GetTagsTagTopAnswerersPeriodRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/tags/{tag}/top-answerers/{period}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -6305,42 +6464,43 @@ This method returns a list of tag score objects.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetTagsTagTopAnswerersPeriodResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetTagsTagTopAnswerersPeriodResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -6350,13 +6510,15 @@ This method returns a list of tag score objects.
   }
 
   
-  // GetTagsTagTopAskersPeriod - Returns the top 30 askers active in a single tag, of either all-time or the last 30 days.
- 
-This is a view onto the data presented on the tag info page on the sites.
- 
-This method returns a list of tag score objects.
-
-  GetTagsTagTopAskersPeriod(
+  /**
+   * getTagsTagTopAskersPeriod - Returns the top 30 askers active in a single tag, of either all-time or the last 30 days.
+   *  
+   * This is a view onto the data presented on the tag info page on the sites.
+   *  
+   * This method returns a list of tag score objects.
+   * 
+  **/
+  getTagsTagTopAskersPeriod(
     req: operations.GetTagsTagTopAskersPeriodRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetTagsTagTopAskersPeriodResponse> {
@@ -6364,12 +6526,11 @@ This method returns a list of tag score objects.
       req = new operations.GetTagsTagTopAskersPeriodRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/tags/{tag}/top-askers/{period}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -6378,42 +6539,43 @@ This method returns a list of tag score objects.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetTagsTagTopAskersPeriodResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetTagsTagTopAskersPeriodResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -6423,15 +6585,17 @@ This method returns a list of tag score objects.
   }
 
   
-  // GetTagsTagsFaq - Returns the frequently asked questions for the given set of tags in {tags}.
- 
-For a question to be returned, it must have all the tags in {tags} and be considered "frequently asked". The exact algorithm for determining whether a question is considered a FAQ is subject to change at any time.
- 
-{tags} can contain up to 5 individual tags per request.
- 
-This method returns a list of questions.
-
-  GetTagsTagsFaq(
+  /**
+   * getTagsTagsFaq - Returns the frequently asked questions for the given set of tags in {tags}.
+   *  
+   * For a question to be returned, it must have all the tags in {tags} and be considered "frequently asked". The exact algorithm for determining whether a question is considered a FAQ is subject to change at any time.
+   *  
+   * {tags} can contain up to 5 individual tags per request.
+   *  
+   * This method returns a list of questions.
+   * 
+  **/
+  getTagsTagsFaq(
     req: operations.GetTagsTagsFaqRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetTagsTagsFaqResponse> {
@@ -6439,12 +6603,11 @@ This method returns a list of questions.
       req = new operations.GetTagsTagsFaqRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/tags/{tags}/faq", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -6453,42 +6616,43 @@ This method returns a list of questions.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetTagsTagsFaqResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetTagsTagsFaqResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -6498,21 +6662,23 @@ This method returns a list of questions.
   }
 
   
-  // GetTagsTagsInfo - Returns tag objects representing the tags in {tags} found on the site.
- 
-This method diverges from the standard naming patterns to avoid to conflicting with existing methods, due to the free form nature of tag names.
- 
-This method returns a list of tags.
- 
-The sorts accepted by this method operate on the follow fields of the tag object:
- - popular - count
- - activity - the creation_date of the last question asked with the tag
- - name - name
-  popular is the default sort.
- 
- It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
-
-  GetTagsTagsInfo(
+  /**
+   * getTagsTagsInfo - Returns tag objects representing the tags in {tags} found on the site.
+   *  
+   * This method diverges from the standard naming patterns to avoid to conflicting with existing methods, due to the free form nature of tag names.
+   *  
+   * This method returns a list of tags.
+   *  
+   * The sorts accepted by this method operate on the follow fields of the tag object:
+   *  - popular - count
+   *  - activity - the creation_date of the last question asked with the tag
+   *  - name - name
+   *   popular is the default sort.
+   *  
+   *  It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+   * 
+  **/
+  getTagsTagsInfo(
     req: operations.GetTagsTagsInfoRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetTagsTagsInfoResponse> {
@@ -6520,12 +6686,11 @@ The sorts accepted by this method operate on the follow fields of the tag object
       req = new operations.GetTagsTagsInfoRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/tags/{tags}/info", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -6534,42 +6699,43 @@ The sorts accepted by this method operate on the follow fields of the tag object
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetTagsTagsInfoResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetTagsTagsInfoResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -6579,17 +6745,19 @@ The sorts accepted by this method operate on the follow fields of the tag object
   }
 
   
-  // GetTagsTagsRelated - Returns the tags that are most related to those in {tags}.
- 
-Including multiple tags in {tags} is equivalent to asking for "tags related to tag #1 and tag #2" not "tags related to tag #1 or tag #2".
- 
-count on tag objects returned is the number of question with that tag that also share all those in {tags}.
- 
-{tags} can contain up to 4 individual tags per request.
- 
-This method returns a list of tags.
-
-  GetTagsTagsRelated(
+  /**
+   * getTagsTagsRelated - Returns the tags that are most related to those in {tags}.
+   *  
+   * Including multiple tags in {tags} is equivalent to asking for "tags related to tag #1 and tag #2" not "tags related to tag #1 or tag #2".
+   *  
+   * count on tag objects returned is the number of question with that tag that also share all those in {tags}.
+   *  
+   * {tags} can contain up to 4 individual tags per request.
+   *  
+   * This method returns a list of tags.
+   * 
+  **/
+  getTagsTagsRelated(
     req: operations.GetTagsTagsRelatedRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetTagsTagsRelatedResponse> {
@@ -6597,12 +6765,11 @@ This method returns a list of tags.
       req = new operations.GetTagsTagsRelatedRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/tags/{tags}/related", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -6611,42 +6778,43 @@ This method returns a list of tags.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetTagsTagsRelatedResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetTagsTagsRelatedResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -6656,22 +6824,24 @@ This method returns a list of tags.
   }
 
   
-  // GetTagsTagsSynonyms - Gets all the synonyms that point to the tags identified in {tags}. If you're looking to discover all the tag synonyms on a site, use the /tags/synonyms methods instead of call this method on all tags.
- 
-{tags} can contain up to 20 individual tags per request.
- 
-The sorts accepted by this method operate on the follow fields of the tag_synonym object:
- - creation - creation_date
- - applied - applied_count
- - activity - last_applied_date
-  creation is the default sort.
- 
- It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
-
- 
-This method returns a list of tag synonyms.
-
-  GetTagsTagsSynonyms(
+  /**
+   * getTagsTagsSynonyms - Gets all the synonyms that point to the tags identified in {tags}. If you're looking to discover all the tag synonyms on a site, use the /tags/synonyms methods instead of call this method on all tags.
+   *  
+   * {tags} can contain up to 20 individual tags per request.
+   *  
+   * The sorts accepted by this method operate on the follow fields of the tag_synonym object:
+   *  - creation - creation_date
+   *  - applied - applied_count
+   *  - activity - last_applied_date
+   *   creation is the default sort.
+   *  
+   *  It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+   * 
+   *  
+   * This method returns a list of tag synonyms.
+   * 
+  **/
+  getTagsTagsSynonyms(
     req: operations.GetTagsTagsSynonymsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetTagsTagsSynonymsResponse> {
@@ -6679,12 +6849,11 @@ This method returns a list of tag synonyms.
       req = new operations.GetTagsTagsSynonymsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/tags/{tags}/synonyms", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -6693,42 +6862,43 @@ This method returns a list of tag synonyms.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetTagsTagsSynonymsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetTagsTagsSynonymsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -6738,15 +6908,17 @@ This method returns a list of tag synonyms.
   }
 
   
-  // GetTagsTagsWikis - Returns the wikis that go with the given set of tags in {tags}.
- 
-Be aware that not all tags have wikis.
- 
-{tags} can contain up to 20 individual tags per request.
- 
-This method returns a list of tag wikis.
-
-  GetTagsTagsWikis(
+  /**
+   * getTagsTagsWikis - Returns the wikis that go with the given set of tags in {tags}.
+   *  
+   * Be aware that not all tags have wikis.
+   *  
+   * {tags} can contain up to 20 individual tags per request.
+   *  
+   * This method returns a list of tag wikis.
+   * 
+  **/
+  getTagsTagsWikis(
     req: operations.GetTagsTagsWikisRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetTagsTagsWikisResponse> {
@@ -6754,12 +6926,11 @@ This method returns a list of tag wikis.
       req = new operations.GetTagsTagsWikisRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/tags/{tags}/wikis", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -6768,42 +6939,43 @@ This method returns a list of tag wikis.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetTagsTagsWikisResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetTagsTagsWikisResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -6813,23 +6985,25 @@ This method returns a list of tag wikis.
   }
 
   
-  // GetUsers - Returns all users on a site.
- 
-This method returns a list of users.
- 
-The sorts accepted by this method operate on the follow fields of the user object:
- - reputation - reputation
- - creation - creation_date
- - name - display_name
- - modified - last_modified_date
-  reputation is the default sort.
- 
- It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
-
- 
-The inname parameter lets consumers filter the results down to just those users with a certain substring in their display name. For example, inname=kevin will return all users with both users named simply "Kevin" or those with Kevin as one of (or part of) their names; such as "Kevin Montrose".
-
-  GetUsers(
+  /**
+   * getUsers - Returns all users on a site.
+   *  
+   * This method returns a list of users.
+   *  
+   * The sorts accepted by this method operate on the follow fields of the user object:
+   *  - reputation - reputation
+   *  - creation - creation_date
+   *  - name - display_name
+   *  - modified - last_modified_date
+   *   reputation is the default sort.
+   *  
+   *  It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+   * 
+   *  
+   * The inname parameter lets consumers filter the results down to just those users with a certain substring in their display name. For example, inname=kevin will return all users with both users named simply "Kevin" or those with Kevin as one of (or part of) their names; such as "Kevin Montrose".
+   * 
+  **/
+  getUsers(
     req: operations.GetUsersRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetUsersResponse> {
@@ -6837,12 +7011,11 @@ The inname parameter lets consumers filter the results down to just those users 
       req = new operations.GetUsersRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/users";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -6851,42 +7024,43 @@ The inname parameter lets consumers filter the results down to just those users 
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetUsersResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetUsersResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -6896,17 +7070,19 @@ The inname parameter lets consumers filter the results down to just those users 
   }
 
   
-  // GetUsersIdInbox - Returns a user's inbox.
- 
-This method requires an access_token, with a scope containing "read_inbox".
- 
-This method is effectively an alias for /inbox. It is provided for consumers who make strong assumptions about operating within the context of a single site rather than the Stack Exchange network as a whole.
- 
-{id} can contain a single id, to find it programatically look for user_id on user or shallow_user objects.
- 
-This method returns a list of inbox items.
-
-  GetUsersIdInbox(
+  /**
+   * getUsersIdInbox - Returns a user's inbox.
+   *  
+   * This method requires an access_token, with a scope containing "read_inbox".
+   *  
+   * This method is effectively an alias for /inbox. It is provided for consumers who make strong assumptions about operating within the context of a single site rather than the Stack Exchange network as a whole.
+   *  
+   * {id} can contain a single id, to find it programatically look for user_id on user or shallow_user objects.
+   *  
+   * This method returns a list of inbox items.
+   * 
+  **/
+  getUsersIdInbox(
     req: operations.GetUsersIdInboxRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetUsersIdInboxResponse> {
@@ -6914,12 +7090,11 @@ This method returns a list of inbox items.
       req = new operations.GetUsersIdInboxRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/users/{id}/inbox", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -6928,42 +7103,43 @@ This method returns a list of inbox items.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetUsersIdInboxResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetUsersIdInboxResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -6973,17 +7149,19 @@ This method returns a list of inbox items.
   }
 
   
-  // GetUsersIdInboxUnread - Returns the unread items in a user's inbox.
- 
-This method requires an access_token, with a scope containing "read_inbox".
- 
-This method is effectively an alias for /inbox/unread. It is provided for consumers who make strong assumptions about operating within the context of a single site rather than the Stack Exchange network as a whole.
- 
-{id} can contain a single id, to find it programatically look for user_id on user or shallow_user objects.
- 
-This method returns a list of inbox items.
-
-  GetUsersIdInboxUnread(
+  /**
+   * getUsersIdInboxUnread - Returns the unread items in a user's inbox.
+   *  
+   * This method requires an access_token, with a scope containing "read_inbox".
+   *  
+   * This method is effectively an alias for /inbox/unread. It is provided for consumers who make strong assumptions about operating within the context of a single site rather than the Stack Exchange network as a whole.
+   *  
+   * {id} can contain a single id, to find it programatically look for user_id on user or shallow_user objects.
+   *  
+   * This method returns a list of inbox items.
+   * 
+  **/
+  getUsersIdInboxUnread(
     req: operations.GetUsersIdInboxUnreadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetUsersIdInboxUnreadResponse> {
@@ -6991,12 +7169,11 @@ This method returns a list of inbox items.
       req = new operations.GetUsersIdInboxUnreadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/users/{id}/inbox/unread", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -7005,42 +7182,43 @@ This method returns a list of inbox items.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetUsersIdInboxUnreadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetUsersIdInboxUnreadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -7050,13 +7228,15 @@ This method returns a list of inbox items.
   }
 
   
-  // GetUsersIdNotifications - Returns a user's notifications.
- 
-This method requires an access_token, with a scope containing "read_inbox".
- 
-This method returns a list of notifications.
-
-  GetUsersIdNotifications(
+  /**
+   * getUsersIdNotifications - Returns a user's notifications.
+   *  
+   * This method requires an access_token, with a scope containing "read_inbox".
+   *  
+   * This method returns a list of notifications.
+   * 
+  **/
+  getUsersIdNotifications(
     req: operations.GetUsersIdNotificationsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetUsersIdNotificationsResponse> {
@@ -7064,12 +7244,11 @@ This method returns a list of notifications.
       req = new operations.GetUsersIdNotificationsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/users/{id}/notifications", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -7078,42 +7257,43 @@ This method returns a list of notifications.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetUsersIdNotificationsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetUsersIdNotificationsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -7123,13 +7303,15 @@ This method returns a list of notifications.
   }
 
   
-  // GetUsersIdNotificationsUnread - Returns a user's unread notifications.
- 
-This method requires an access_token, with a scope containing "read_inbox".
- 
-This method returns a list of notifications.
-
-  GetUsersIdNotificationsUnread(
+  /**
+   * getUsersIdNotificationsUnread - Returns a user's unread notifications.
+   *  
+   * This method requires an access_token, with a scope containing "read_inbox".
+   *  
+   * This method returns a list of notifications.
+   * 
+  **/
+  getUsersIdNotificationsUnread(
     req: operations.GetUsersIdNotificationsUnreadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetUsersIdNotificationsUnreadResponse> {
@@ -7137,12 +7319,11 @@ This method returns a list of notifications.
       req = new operations.GetUsersIdNotificationsUnreadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/users/{id}/notifications/unread", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -7151,42 +7332,43 @@ This method returns a list of notifications.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetUsersIdNotificationsUnreadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetUsersIdNotificationsUnreadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -7196,15 +7378,17 @@ This method returns a list of notifications.
   }
 
   
-  // GetUsersIdPrivileges - Returns the privileges a user has.
- 
-Applications are encouraged to calculate privileges themselves, without repeated queries to this method. A simple check against the results returned by /privileges and user.user_type would be sufficient.
- 
-{id} can contain only a single, to find it programatically look for user_id on user or shallow_user objects.
- 
-This method returns a list of privileges.
-
-  GetUsersIdPrivileges(
+  /**
+   * getUsersIdPrivileges - Returns the privileges a user has.
+   *  
+   * Applications are encouraged to calculate privileges themselves, without repeated queries to this method. A simple check against the results returned by /privileges and user.user_type would be sufficient.
+   *  
+   * {id} can contain only a single, to find it programatically look for user_id on user or shallow_user objects.
+   *  
+   * This method returns a list of privileges.
+   * 
+  **/
+  getUsersIdPrivileges(
     req: operations.GetUsersIdPrivilegesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetUsersIdPrivilegesResponse> {
@@ -7212,12 +7396,11 @@ This method returns a list of privileges.
       req = new operations.GetUsersIdPrivilegesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/users/{id}/privileges", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -7226,42 +7409,43 @@ This method returns a list of privileges.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetUsersIdPrivilegesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetUsersIdPrivilegesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -7271,13 +7455,15 @@ This method returns a list of privileges.
   }
 
   
-  // GetUsersIdReputationHistoryFull - Returns a user's full reputation history, including private events.
- 
-This method requires an access_token, with a scope containing "private_info".
- 
-This method returns a list of reputation_history.
-
-  GetUsersIdReputationHistoryFull(
+  /**
+   * getUsersIdReputationHistoryFull - Returns a user's full reputation history, including private events.
+   *  
+   * This method requires an access_token, with a scope containing "private_info".
+   *  
+   * This method returns a list of reputation_history.
+   * 
+  **/
+  getUsersIdReputationHistoryFull(
     req: operations.GetUsersIdReputationHistoryFullRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetUsersIdReputationHistoryFullResponse> {
@@ -7285,12 +7471,11 @@ This method returns a list of reputation_history.
       req = new operations.GetUsersIdReputationHistoryFullRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/users/{id}/reputation-history/full", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -7299,42 +7484,43 @@ This method returns a list of reputation_history.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetUsersIdReputationHistoryFullResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetUsersIdReputationHistoryFullResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -7344,22 +7530,24 @@ This method returns a list of reputation_history.
   }
 
   
-  // GetUsersIdTagsTagsTopAnswers - Returns the top 30 answers a user has posted in response to questions with the given tags.
- 
-{id} can contain a single id, to find it programatically look for user_id on user or shallow_user objects. {tags} is limited to 5 tags, passing more will result in an error.
- 
-The sorts accepted by this method operate on the follow fields of the answer object:
- - activity - last_activity_date
- - creation - creation_date
- - votes - score
-  activity is the default sort.
- 
- It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
-
- 
-This method returns a list of answers.
-
-  GetUsersIdTagsTagsTopAnswers(
+  /**
+   * getUsersIdTagsTagsTopAnswers - Returns the top 30 answers a user has posted in response to questions with the given tags.
+   *  
+   * {id} can contain a single id, to find it programatically look for user_id on user or shallow_user objects. {tags} is limited to 5 tags, passing more will result in an error.
+   *  
+   * The sorts accepted by this method operate on the follow fields of the answer object:
+   *  - activity - last_activity_date
+   *  - creation - creation_date
+   *  - votes - score
+   *   activity is the default sort.
+   *  
+   *  It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+   * 
+   *  
+   * This method returns a list of answers.
+   * 
+  **/
+  getUsersIdTagsTagsTopAnswers(
     req: operations.GetUsersIdTagsTagsTopAnswersRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetUsersIdTagsTagsTopAnswersResponse> {
@@ -7367,12 +7555,11 @@ This method returns a list of answers.
       req = new operations.GetUsersIdTagsTagsTopAnswersRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/users/{id}/tags/{tags}/top-answers", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -7381,42 +7568,43 @@ This method returns a list of answers.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetUsersIdTagsTagsTopAnswersResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetUsersIdTagsTagsTopAnswersResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -7426,22 +7614,24 @@ This method returns a list of answers.
   }
 
   
-  // GetUsersIdTagsTagsTopQuestions - Returns the top 30 questions a user has asked with the given tags.
- 
-{id} can contain a single id, to find it programatically look for user_id on user or shallow_user objects. {tags} is limited to 5 tags, passing more will result in an error.
- 
-The sorts accepted by this method operate on the follow fields of the question object:
- - activity - last_activity_date
- - creation - creation_date
- - votes - score
-  activity is the default sort.
- 
- It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
-
- 
-This method returns a list of questions.
-
-  GetUsersIdTagsTagsTopQuestions(
+  /**
+   * getUsersIdTagsTagsTopQuestions - Returns the top 30 questions a user has asked with the given tags.
+   *  
+   * {id} can contain a single id, to find it programatically look for user_id on user or shallow_user objects. {tags} is limited to 5 tags, passing more will result in an error.
+   *  
+   * The sorts accepted by this method operate on the follow fields of the question object:
+   *  - activity - last_activity_date
+   *  - creation - creation_date
+   *  - votes - score
+   *   activity is the default sort.
+   *  
+   *  It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+   * 
+   *  
+   * This method returns a list of questions.
+   * 
+  **/
+  getUsersIdTagsTagsTopQuestions(
     req: operations.GetUsersIdTagsTagsTopQuestionsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetUsersIdTagsTagsTopQuestionsResponse> {
@@ -7449,12 +7639,11 @@ This method returns a list of questions.
       req = new operations.GetUsersIdTagsTagsTopQuestionsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/users/{id}/tags/{tags}/top-questions", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -7463,42 +7652,43 @@ This method returns a list of questions.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetUsersIdTagsTagsTopQuestionsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetUsersIdTagsTagsTopQuestionsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -7508,15 +7698,17 @@ This method returns a list of questions.
   }
 
   
-  // GetUsersIdTopAnswerTags - Returns a single user's top tags by answer score.
- 
-This a subset of the data returned on a user's tags tab.
- 
-{id} can contain a single id, to find it programatically look for user_id on user or shallow_user objects.
- 
-This method returns a list of top_tag objects.
-
-  GetUsersIdTopAnswerTags(
+  /**
+   * getUsersIdTopAnswerTags - Returns a single user's top tags by answer score.
+   *  
+   * This a subset of the data returned on a user's tags tab.
+   *  
+   * {id} can contain a single id, to find it programatically look for user_id on user or shallow_user objects.
+   *  
+   * This method returns a list of top_tag objects.
+   * 
+  **/
+  getUsersIdTopAnswerTags(
     req: operations.GetUsersIdTopAnswerTagsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetUsersIdTopAnswerTagsResponse> {
@@ -7524,12 +7716,11 @@ This method returns a list of top_tag objects.
       req = new operations.GetUsersIdTopAnswerTagsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/users/{id}/top-answer-tags", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -7538,42 +7729,43 @@ This method returns a list of top_tag objects.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetUsersIdTopAnswerTagsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetUsersIdTopAnswerTagsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -7583,15 +7775,17 @@ This method returns a list of top_tag objects.
   }
 
   
-  // GetUsersIdTopQuestionTags - Returns a single user's top tags by question score.
- 
-This a subset of the data returned on a user's tags tab.
- 
-{id} can contain a single id, to find it programatically look for user_id on user or shallow_user objects.
- 
-This method returns a list of top_tag objects.
-
-  GetUsersIdTopQuestionTags(
+  /**
+   * getUsersIdTopQuestionTags - Returns a single user's top tags by question score.
+   *  
+   * This a subset of the data returned on a user's tags tab.
+   *  
+   * {id} can contain a single id, to find it programatically look for user_id on user or shallow_user objects.
+   *  
+   * This method returns a list of top_tag objects.
+   * 
+  **/
+  getUsersIdTopQuestionTags(
     req: operations.GetUsersIdTopQuestionTagsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetUsersIdTopQuestionTagsResponse> {
@@ -7599,12 +7793,11 @@ This method returns a list of top_tag objects.
       req = new operations.GetUsersIdTopQuestionTagsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/users/{id}/top-question-tags", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -7613,42 +7806,43 @@ This method returns a list of top_tag objects.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetUsersIdTopQuestionTagsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetUsersIdTopQuestionTagsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -7658,15 +7852,17 @@ This method returns a list of top_tag objects.
   }
 
   
-  // GetUsersIdWritePermissions - Returns the write permissions a user has via the api.
- 
-The Stack Exchange API gives users the ability to create, edit, and delete certain types. This method returns whether the passed user is capable of performing those actions at all, as well as how many times a day they can.
- 
-This method does not consider the user's current quota (ie. if they've already exhausted it for today) nor any additional restrictions on write access, such as editing deleted comments.
- 
-This method returns a list of write_permissions.
-
-  GetUsersIdWritePermissions(
+  /**
+   * getUsersIdWritePermissions - Returns the write permissions a user has via the api.
+   *  
+   * The Stack Exchange API gives users the ability to create, edit, and delete certain types. This method returns whether the passed user is capable of performing those actions at all, as well as how many times a day they can.
+   *  
+   * This method does not consider the user's current quota (ie. if they've already exhausted it for today) nor any additional restrictions on write access, such as editing deleted comments.
+   *  
+   * This method returns a list of write_permissions.
+   * 
+  **/
+  getUsersIdWritePermissions(
     req: operations.GetUsersIdWritePermissionsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetUsersIdWritePermissionsResponse> {
@@ -7674,12 +7870,11 @@ This method returns a list of write_permissions.
       req = new operations.GetUsersIdWritePermissionsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/users/{id}/write-permissions", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -7688,42 +7883,43 @@ This method returns a list of write_permissions.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetUsersIdWritePermissionsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetUsersIdWritePermissionsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -7733,25 +7929,27 @@ This method returns a list of write_permissions.
   }
 
   
-  // GetUsersIds - Gets the users identified in ids in {ids}.
- 
-Typically this method will be called to fetch user profiles when you have obtained user ids from some other source, such as /questions.
- 
-{ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for user_id on user or shallow_user objects.
- 
-The sorts accepted by this method operate on the follow fields of the user object:
- - reputation - reputation
- - creation - creation_date
- - name - display_name
- - modified - last_modified_date
-  reputation is the default sort.
- 
- It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
-
- 
-This method returns a list of users.
-
-  GetUsersIds(
+  /**
+   * getUsersIds - Gets the users identified in ids in {ids}.
+   *  
+   * Typically this method will be called to fetch user profiles when you have obtained user ids from some other source, such as /questions.
+   *  
+   * {ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for user_id on user or shallow_user objects.
+   *  
+   * The sorts accepted by this method operate on the follow fields of the user object:
+   *  - reputation - reputation
+   *  - creation - creation_date
+   *  - name - display_name
+   *  - modified - last_modified_date
+   *   reputation is the default sort.
+   *  
+   *  It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+   * 
+   *  
+   * This method returns a list of users.
+   * 
+  **/
+  getUsersIds(
     req: operations.GetUsersIdsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetUsersIdsResponse> {
@@ -7759,12 +7957,11 @@ This method returns a list of users.
       req = new operations.GetUsersIdsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/users/{ids}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -7773,42 +7970,43 @@ This method returns a list of users.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetUsersIdsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetUsersIdsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -7818,22 +8016,24 @@ This method returns a list of users.
   }
 
   
-  // GetUsersIdsAnswers - Returns the answers the users in {ids} have posted.
- 
-{ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for user_id on user or shallow_user objects.
- 
-The sorts accepted by this method operate on the follow fields of the answer object:
- - activity - last_activity_date
- - creation - creation_date
- - votes - score
-  activity is the default sort.
- 
- It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
-
- 
-This method returns a list of answers.
-
-  GetUsersIdsAnswers(
+  /**
+   * getUsersIdsAnswers - Returns the answers the users in {ids} have posted.
+   *  
+   * {ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for user_id on user or shallow_user objects.
+   *  
+   * The sorts accepted by this method operate on the follow fields of the answer object:
+   *  - activity - last_activity_date
+   *  - creation - creation_date
+   *  - votes - score
+   *   activity is the default sort.
+   *  
+   *  It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+   * 
+   *  
+   * This method returns a list of answers.
+   * 
+  **/
+  getUsersIdsAnswers(
     req: operations.GetUsersIdsAnswersRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetUsersIdsAnswersResponse> {
@@ -7841,12 +8041,11 @@ This method returns a list of answers.
       req = new operations.GetUsersIdsAnswersRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/users/{ids}/answers", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -7855,42 +8054,43 @@ This method returns a list of answers.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetUsersIdsAnswersResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetUsersIdsAnswersResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -7900,13 +8100,15 @@ This method returns a list of answers.
   }
 
   
-  // GetUsersIdsAssociated - Returns all of a user's associated accounts, given their account_ids in {ids}.
- 
-{ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for account_id on user objects.
- 
-This method returns a list of network_users.
-
-  GetUsersIdsAssociated(
+  /**
+   * getUsersIdsAssociated - Returns all of a user's associated accounts, given their account_ids in {ids}.
+   *  
+   * {ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for account_id on user objects.
+   *  
+   * This method returns a list of network_users.
+   * 
+  **/
+  getUsersIdsAssociated(
     req: operations.GetUsersIdsAssociatedRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetUsersIdsAssociatedResponse> {
@@ -7914,12 +8116,11 @@ This method returns a list of network_users.
       req = new operations.GetUsersIdsAssociatedRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/users/{ids}/associated", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -7928,42 +8129,43 @@ This method returns a list of network_users.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetUsersIdsAssociatedResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetUsersIdsAssociatedResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -7973,21 +8175,23 @@ This method returns a list of network_users.
   }
 
   
-  // GetUsersIdsBadges - Get the badges the users in {ids} have earned.
- 
-Badge sorts are a tad complicated. For the purposes of sorting (and min/max) tag_based is considered to be greater than named.
- 
-This means that you can get a list of all tag based badges a user has by passing min=tag_based, and conversely all the named badges by passing max=named, with sort=type.
- 
-For ranks, bronze is greater than silver which is greater than gold. Along with sort=rank, set max=gold for just gold badges, max=silver&min=silver for just silver, and min=bronze for just bronze.
- 
-rank is the default sort.
- 
-{ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for user_id on user or shallow_user objects.
- 
-This method returns a list of badges.
-
-  GetUsersIdsBadges(
+  /**
+   * getUsersIdsBadges - Get the badges the users in {ids} have earned.
+   *  
+   * Badge sorts are a tad complicated. For the purposes of sorting (and min/max) tag_based is considered to be greater than named.
+   *  
+   * This means that you can get a list of all tag based badges a user has by passing min=tag_based, and conversely all the named badges by passing max=named, with sort=type.
+   *  
+   * For ranks, bronze is greater than silver which is greater than gold. Along with sort=rank, set max=gold for just gold badges, max=silver&min=silver for just silver, and min=bronze for just bronze.
+   *  
+   * rank is the default sort.
+   *  
+   * {ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for user_id on user or shallow_user objects.
+   *  
+   * This method returns a list of badges.
+   * 
+  **/
+  getUsersIdsBadges(
     req: operations.GetUsersIdsBadgesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetUsersIdsBadgesResponse> {
@@ -7995,12 +8199,11 @@ This method returns a list of badges.
       req = new operations.GetUsersIdsBadgesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/users/{ids}/badges", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -8009,42 +8212,43 @@ This method returns a list of badges.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetUsersIdsBadgesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetUsersIdsBadgesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -8054,21 +8258,23 @@ This method returns a list of badges.
   }
 
   
-  // GetUsersIdsComments - Get the comments posted by users in {ids}.
- 
-{ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for user_id on user or shallow_user objects.
- 
-The sorts accepted by this method operate on the follow fields of the comment object:
- - creation - creation_date
- - votes - score
-  creation is the default sort.
- 
- It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
-
- 
-This method returns a list of comments.
-
-  GetUsersIdsComments(
+  /**
+   * getUsersIdsComments - Get the comments posted by users in {ids}.
+   *  
+   * {ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for user_id on user or shallow_user objects.
+   *  
+   * The sorts accepted by this method operate on the follow fields of the comment object:
+   *  - creation - creation_date
+   *  - votes - score
+   *   creation is the default sort.
+   *  
+   *  It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+   * 
+   *  
+   * This method returns a list of comments.
+   * 
+  **/
+  getUsersIdsComments(
     req: operations.GetUsersIdsCommentsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetUsersIdsCommentsResponse> {
@@ -8076,12 +8282,11 @@ This method returns a list of comments.
       req = new operations.GetUsersIdsCommentsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/users/{ids}/comments", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -8090,42 +8295,43 @@ This method returns a list of comments.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetUsersIdsCommentsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetUsersIdsCommentsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -8135,23 +8341,25 @@ This method returns a list of comments.
   }
 
   
-  // GetUsersIdsCommentsToid - Get the comments that the users in {ids} have posted in reply to the single user identified in {toid}.
- 
-This method is useful for extracting conversations, especially over time or across multiple posts.
- 
-{ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for user_id on user or shallow_user objects. {toid} can contain only 1 id, found in the same manner as those in {ids}.
- 
-The sorts accepted by this method operate on the follow fields of the comment object:
- - creation - creation_date
- - votes - score
-  creation is the default sort.
- 
- It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
-
- 
-This method returns a list of comments.
-
-  GetUsersIdsCommentsToid(
+  /**
+   * getUsersIdsCommentsToid - Get the comments that the users in {ids} have posted in reply to the single user identified in {toid}.
+   *  
+   * This method is useful for extracting conversations, especially over time or across multiple posts.
+   *  
+   * {ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for user_id on user or shallow_user objects. {toid} can contain only 1 id, found in the same manner as those in {ids}.
+   *  
+   * The sorts accepted by this method operate on the follow fields of the comment object:
+   *  - creation - creation_date
+   *  - votes - score
+   *   creation is the default sort.
+   *  
+   *  It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+   * 
+   *  
+   * This method returns a list of comments.
+   * 
+  **/
+  getUsersIdsCommentsToid(
     req: operations.GetUsersIdsCommentsToidRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetUsersIdsCommentsToidResponse> {
@@ -8159,12 +8367,11 @@ This method returns a list of comments.
       req = new operations.GetUsersIdsCommentsToidRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/users/{ids}/comments/{toid}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -8173,42 +8380,43 @@ This method returns a list of comments.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetUsersIdsCommentsToidResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetUsersIdsCommentsToidResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -8218,25 +8426,27 @@ This method returns a list of comments.
   }
 
   
-  // GetUsersIdsFavorites - Get the questions that users in {ids} have favorited.
- 
-This method is effectively a view onto a user's favorites tab.
- 
-{ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for user_id on user or shallow_user objects.
- 
-The sorts accepted by this method operate on the follow fields of the question object:
- - activity - last_activity_date
- - creation - creation_date
- - votes - score
- - added - when the user favorited the question
-  activity is the default sort.
- 
- It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
-
- 
-This method returns a list of questions.
-
-  GetUsersIdsFavorites(
+  /**
+   * getUsersIdsFavorites - Get the questions that users in {ids} have favorited.
+   *  
+   * This method is effectively a view onto a user's favorites tab.
+   *  
+   * {ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for user_id on user or shallow_user objects.
+   *  
+   * The sorts accepted by this method operate on the follow fields of the question object:
+   *  - activity - last_activity_date
+   *  - creation - creation_date
+   *  - votes - score
+   *  - added - when the user favorited the question
+   *   activity is the default sort.
+   *  
+   *  It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+   * 
+   *  
+   * This method returns a list of questions.
+   * 
+  **/
+  getUsersIdsFavorites(
     req: operations.GetUsersIdsFavoritesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetUsersIdsFavoritesResponse> {
@@ -8244,12 +8454,11 @@ This method returns a list of questions.
       req = new operations.GetUsersIdsFavoritesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/users/{ids}/favorites", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -8258,42 +8467,43 @@ This method returns a list of questions.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetUsersIdsFavoritesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetUsersIdsFavoritesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -8303,21 +8513,23 @@ This method returns a list of questions.
   }
 
   
-  // GetUsersIdsMentioned - Gets all the comments that the users in {ids} were mentioned in.
- 
-Note, to count as a mention the comment must be considered to be "in reply to" a user. Most importantly, this means that a comment can only be in reply to a single user.
- 
-{ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for user_id on user or shallow_user objects.
- 
-The sorts accepted by this method operate on the follow fields of the comment object:
- - creation - creation_date
- - votes - score
-  It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
-
- 
-This method returns a list of comments.
-
-  GetUsersIdsMentioned(
+  /**
+   * getUsersIdsMentioned - Gets all the comments that the users in {ids} were mentioned in.
+   *  
+   * Note, to count as a mention the comment must be considered to be "in reply to" a user. Most importantly, this means that a comment can only be in reply to a single user.
+   *  
+   * {ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for user_id on user or shallow_user objects.
+   *  
+   * The sorts accepted by this method operate on the follow fields of the comment object:
+   *  - creation - creation_date
+   *  - votes - score
+   *   It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+   * 
+   *  
+   * This method returns a list of comments.
+   * 
+  **/
+  getUsersIdsMentioned(
     req: operations.GetUsersIdsMentionedRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetUsersIdsMentionedResponse> {
@@ -8325,12 +8537,11 @@ This method returns a list of comments.
       req = new operations.GetUsersIdsMentionedRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/users/{ids}/mentioned", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -8339,42 +8550,43 @@ This method returns a list of comments.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetUsersIdsMentionedResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetUsersIdsMentionedResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -8384,19 +8596,21 @@ This method returns a list of comments.
   }
 
   
-  // GetUsersIdsMerges - Returns a record of merges that have occurred involving the passed account ids.
- 
-This method allows you to take now invalid account ids and find what account they've become, or take currently valid account ids and find which ids were equivalent in the past.
- 
-This is most useful when confirming that an account_id is in fact "new" to an application.
- 
-Account merges can happen for a wide range of reasons, applications should not make assumptions that merges have particular causes.
- 
-Note that accounts are managed at a network level, users on a site may be merged due to an account level merge but there is no guarantee that a merge has an effect on any particular site.
- 
-This method returns a list of account_merge.
-
-  GetUsersIdsMerges(
+  /**
+   * getUsersIdsMerges - Returns a record of merges that have occurred involving the passed account ids.
+   *  
+   * This method allows you to take now invalid account ids and find what account they've become, or take currently valid account ids and find which ids were equivalent in the past.
+   *  
+   * This is most useful when confirming that an account_id is in fact "new" to an application.
+   *  
+   * Account merges can happen for a wide range of reasons, applications should not make assumptions that merges have particular causes.
+   *  
+   * Note that accounts are managed at a network level, users on a site may be merged due to an account level merge but there is no guarantee that a merge has an effect on any particular site.
+   *  
+   * This method returns a list of account_merge.
+   * 
+  **/
+  getUsersIdsMerges(
     req: operations.GetUsersIdsMergesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetUsersIdsMergesResponse> {
@@ -8404,12 +8618,11 @@ This method returns a list of account_merge.
       req = new operations.GetUsersIdsMergesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/users/{ids}/merges", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -8418,42 +8631,43 @@ This method returns a list of account_merge.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetUsersIdsMergesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetUsersIdsMergesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -8463,22 +8677,24 @@ This method returns a list of account_merge.
   }
 
   
-  // GetUsersIdsQuestions - Gets the questions asked by the users in {ids}.
- 
-{ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for user_id on user or shallow_user objects.
- 
-The sorts accepted by this method operate on the follow fields of the question object:
- - activity - last_activity_date
- - creation - creation_date
- - votes - score
-  activity is the default sort.
- 
- It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
-
- 
-This method returns a list of questions.
-
-  GetUsersIdsQuestions(
+  /**
+   * getUsersIdsQuestions - Gets the questions asked by the users in {ids}.
+   *  
+   * {ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for user_id on user or shallow_user objects.
+   *  
+   * The sorts accepted by this method operate on the follow fields of the question object:
+   *  - activity - last_activity_date
+   *  - creation - creation_date
+   *  - votes - score
+   *   activity is the default sort.
+   *  
+   *  It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+   * 
+   *  
+   * This method returns a list of questions.
+   * 
+  **/
+  getUsersIdsQuestions(
     req: operations.GetUsersIdsQuestionsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetUsersIdsQuestionsResponse> {
@@ -8486,12 +8702,11 @@ This method returns a list of questions.
       req = new operations.GetUsersIdsQuestionsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/users/{ids}/questions", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -8500,42 +8715,43 @@ This method returns a list of questions.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetUsersIdsQuestionsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetUsersIdsQuestionsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -8545,22 +8761,24 @@ This method returns a list of questions.
   }
 
   
-  // GetUsersIdsQuestionsFeatured - Gets the questions on which the users in {ids} have active bounties.
- 
-{ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for user_id on user or shallow_user objects.
- 
-The sorts accepted by this method operate on the follow fields of the question object:
- - activity - last_activity_date
- - creation - creation_date
- - votes - score
-  activity is the default sort.
- 
- It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
-
- 
-This method returns a list of questions.
-
-  GetUsersIdsQuestionsFeatured(
+  /**
+   * getUsersIdsQuestionsFeatured - Gets the questions on which the users in {ids} have active bounties.
+   *  
+   * {ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for user_id on user or shallow_user objects.
+   *  
+   * The sorts accepted by this method operate on the follow fields of the question object:
+   *  - activity - last_activity_date
+   *  - creation - creation_date
+   *  - votes - score
+   *   activity is the default sort.
+   *  
+   *  It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+   * 
+   *  
+   * This method returns a list of questions.
+   * 
+  **/
+  getUsersIdsQuestionsFeatured(
     req: operations.GetUsersIdsQuestionsFeaturedRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetUsersIdsQuestionsFeaturedResponse> {
@@ -8568,12 +8786,11 @@ This method returns a list of questions.
       req = new operations.GetUsersIdsQuestionsFeaturedRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/users/{ids}/questions/featured", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -8582,42 +8799,43 @@ This method returns a list of questions.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetUsersIdsQuestionsFeaturedResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetUsersIdsQuestionsFeaturedResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -8627,24 +8845,26 @@ This method returns a list of questions.
   }
 
   
-  // GetUsersIdsQuestionsNoAnswers - Gets the questions asked by the users in {ids} which have no answers.
- 
-Questions returns by this method actually have zero undeleted answers. It is completely disjoint /users/{ids}/questions/unanswered and /users/{ids}/questions/unaccepted, which only return questions with at least one answer, subject to other contraints.
- 
-{ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for user_id on user or shallow_user objects.
- 
-The sorts accepted by this method operate on the follow fields of the question object:
- - activity - last_activity_date
- - creation - creation_date
- - votes - score
-  activity is the default sort.
- 
- It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
-
- 
-This method returns a list of questions.
-
-  GetUsersIdsQuestionsNoAnswers(
+  /**
+   * getUsersIdsQuestionsNoAnswers - Gets the questions asked by the users in {ids} which have no answers.
+   *  
+   * Questions returns by this method actually have zero undeleted answers. It is completely disjoint /users/{ids}/questions/unanswered and /users/{ids}/questions/unaccepted, which only return questions with at least one answer, subject to other contraints.
+   *  
+   * {ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for user_id on user or shallow_user objects.
+   *  
+   * The sorts accepted by this method operate on the follow fields of the question object:
+   *  - activity - last_activity_date
+   *  - creation - creation_date
+   *  - votes - score
+   *   activity is the default sort.
+   *  
+   *  It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+   * 
+   *  
+   * This method returns a list of questions.
+   * 
+  **/
+  getUsersIdsQuestionsNoAnswers(
     req: operations.GetUsersIdsQuestionsNoAnswersRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetUsersIdsQuestionsNoAnswersResponse> {
@@ -8652,12 +8872,11 @@ This method returns a list of questions.
       req = new operations.GetUsersIdsQuestionsNoAnswersRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/users/{ids}/questions/no-answers", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -8666,42 +8885,43 @@ This method returns a list of questions.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetUsersIdsQuestionsNoAnswersResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetUsersIdsQuestionsNoAnswersResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -8711,24 +8931,26 @@ This method returns a list of questions.
   }
 
   
-  // GetUsersIdsQuestionsUnaccepted - Gets the questions asked by the users in {ids} which have at least one answer, but no accepted answer.
- 
-Questions returned by this method have answers, but the owner has not opted to accept any of them.
- 
-{ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for user_id on user or shallow_user objects.
- 
-The sorts accepted by this method operate on the follow fields of the question object:
- - activity - last_activity_date
- - creation - creation_date
- - votes - score
-  activity is the default sort.
- 
- It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
-
- 
-This method returns a list of questions.
-
-  GetUsersIdsQuestionsUnaccepted(
+  /**
+   * getUsersIdsQuestionsUnaccepted - Gets the questions asked by the users in {ids} which have at least one answer, but no accepted answer.
+   *  
+   * Questions returned by this method have answers, but the owner has not opted to accept any of them.
+   *  
+   * {ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for user_id on user or shallow_user objects.
+   *  
+   * The sorts accepted by this method operate on the follow fields of the question object:
+   *  - activity - last_activity_date
+   *  - creation - creation_date
+   *  - votes - score
+   *   activity is the default sort.
+   *  
+   *  It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+   * 
+   *  
+   * This method returns a list of questions.
+   * 
+  **/
+  getUsersIdsQuestionsUnaccepted(
     req: operations.GetUsersIdsQuestionsUnacceptedRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetUsersIdsQuestionsUnacceptedResponse> {
@@ -8736,12 +8958,11 @@ This method returns a list of questions.
       req = new operations.GetUsersIdsQuestionsUnacceptedRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/users/{ids}/questions/unaccepted", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -8750,42 +8971,43 @@ This method returns a list of questions.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetUsersIdsQuestionsUnacceptedResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetUsersIdsQuestionsUnacceptedResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -8795,26 +9017,28 @@ This method returns a list of questions.
   }
 
   
-  // GetUsersIdsQuestionsUnanswered - Gets the questions asked by the users in {ids} which the site consideres unanswered, while still having at least one answer posted.
- 
-These rules are subject to change, but currently any question without at least one upvoted or accepted answer is considered unanswered.
- 
-To get the set of questions that a user probably considers unanswered, the returned questions should be unioned with those returned by /users/{id}/questions/no-answers. These methods are distinct so that truly unanswered (that is, zero posted answers) questions can be easily separated from mearly poorly or inadequately answered ones.
- 
-{ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for user_id on user or shallow_user objects.
- 
-The sorts accepted by this method operate on the follow fields of the question object:
- - activity - last_activity_date
- - creation - creation_date
- - votes - score
-  activity is the default sort.
- 
- It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
-
- 
-This method returns a list of questions.
-
-  GetUsersIdsQuestionsUnanswered(
+  /**
+   * getUsersIdsQuestionsUnanswered - Gets the questions asked by the users in {ids} which the site consideres unanswered, while still having at least one answer posted.
+   *  
+   * These rules are subject to change, but currently any question without at least one upvoted or accepted answer is considered unanswered.
+   *  
+   * To get the set of questions that a user probably considers unanswered, the returned questions should be unioned with those returned by /users/{id}/questions/no-answers. These methods are distinct so that truly unanswered (that is, zero posted answers) questions can be easily separated from mearly poorly or inadequately answered ones.
+   *  
+   * {ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for user_id on user or shallow_user objects.
+   *  
+   * The sorts accepted by this method operate on the follow fields of the question object:
+   *  - activity - last_activity_date
+   *  - creation - creation_date
+   *  - votes - score
+   *   activity is the default sort.
+   *  
+   *  It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+   * 
+   *  
+   * This method returns a list of questions.
+   * 
+  **/
+  getUsersIdsQuestionsUnanswered(
     req: operations.GetUsersIdsQuestionsUnansweredRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetUsersIdsQuestionsUnansweredResponse> {
@@ -8822,12 +9046,11 @@ This method returns a list of questions.
       req = new operations.GetUsersIdsQuestionsUnansweredRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/users/{ids}/questions/unanswered", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -8836,42 +9059,43 @@ This method returns a list of questions.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetUsersIdsQuestionsUnansweredResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetUsersIdsQuestionsUnansweredResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -8881,15 +9105,17 @@ This method returns a list of questions.
   }
 
   
-  // GetUsersIdsReputation - Gets a subset of the reputation changes for users in {ids}.
- 
-Reputation changes are intentionally scrubbed of some data to make it difficult to correlate votes on particular posts with user reputation changes. That being said, this method returns enough data for reasonable display of reputation trends.
- 
-{ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for user_id on user or shallow_user objects.
- 
-This method returns a list of reputation objects.
-
-  GetUsersIdsReputation(
+  /**
+   * getUsersIdsReputation - Gets a subset of the reputation changes for users in {ids}.
+   *  
+   * Reputation changes are intentionally scrubbed of some data to make it difficult to correlate votes on particular posts with user reputation changes. That being said, this method returns enough data for reasonable display of reputation trends.
+   *  
+   * {ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for user_id on user or shallow_user objects.
+   *  
+   * This method returns a list of reputation objects.
+   * 
+  **/
+  getUsersIdsReputation(
     req: operations.GetUsersIdsReputationRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetUsersIdsReputationResponse> {
@@ -8897,12 +9123,11 @@ This method returns a list of reputation objects.
       req = new operations.GetUsersIdsReputationRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/users/{ids}/reputation", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -8911,42 +9136,43 @@ This method returns a list of reputation objects.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetUsersIdsReputationResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetUsersIdsReputationResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -8956,11 +9182,13 @@ This method returns a list of reputation objects.
   }
 
   
-  // GetUsersIdsReputationHistory - Returns users' public reputation history.
- 
-This method returns a list of reputation_history.
-
-  GetUsersIdsReputationHistory(
+  /**
+   * getUsersIdsReputationHistory - Returns users' public reputation history.
+   *  
+   * This method returns a list of reputation_history.
+   * 
+  **/
+  getUsersIdsReputationHistory(
     req: operations.GetUsersIdsReputationHistoryRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetUsersIdsReputationHistoryResponse> {
@@ -8968,12 +9196,11 @@ This method returns a list of reputation_history.
       req = new operations.GetUsersIdsReputationHistoryRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/users/{ids}/reputation-history", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -8982,42 +9209,43 @@ This method returns a list of reputation_history.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetUsersIdsReputationHistoryResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetUsersIdsReputationHistoryResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -9027,22 +9255,24 @@ This method returns a list of reputation_history.
   }
 
   
-  // GetUsersIdsSuggestedEdits - Returns the suggested edits a users in {ids} have submitted.
- 
-{ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for user_id on user or shallow_user objects.
- 
-The sorts accepted by this method operate on the follow fields of the suggested_edit object:
- - creation - creation_date
- - approval - approval_date Does not return unapproved suggested_edits
- - rejection - rejection_date Does not return unrejected suggested_edits
-  creation is the default sort.
- 
- It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
-
- 
-This method returns a list of suggested-edits.
-
-  GetUsersIdsSuggestedEdits(
+  /**
+   * getUsersIdsSuggestedEdits - Returns the suggested edits a users in {ids} have submitted.
+   *  
+   * {ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for user_id on user or shallow_user objects.
+   *  
+   * The sorts accepted by this method operate on the follow fields of the suggested_edit object:
+   *  - creation - creation_date
+   *  - approval - approval_date Does not return unapproved suggested_edits
+   *  - rejection - rejection_date Does not return unrejected suggested_edits
+   *   creation is the default sort.
+   *  
+   *  It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+   * 
+   *  
+   * This method returns a list of suggested-edits.
+   * 
+  **/
+  getUsersIdsSuggestedEdits(
     req: operations.GetUsersIdsSuggestedEditsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetUsersIdsSuggestedEditsResponse> {
@@ -9050,12 +9280,11 @@ This method returns a list of suggested-edits.
       req = new operations.GetUsersIdsSuggestedEditsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/users/{ids}/suggested-edits", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -9064,42 +9293,43 @@ This method returns a list of suggested-edits.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetUsersIdsSuggestedEditsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetUsersIdsSuggestedEditsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -9109,24 +9339,26 @@ This method returns a list of suggested-edits.
   }
 
   
-  // GetUsersIdsTags - Returns the tags the users identified in {ids} have been active in.
- 
-This route corresponds roughly to user's stats tab, but does not include tag scores. A subset of tag scores are available (on a single user basis) in /users/{id}/top-answer-tags and /users/{id}/top-question-tags.
- 
-{ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for user_id on user or shallow_user objects.
- 
-The sorts accepted by this method operate on the follow fields of the tag object:
- - popular - count
- - activity - the creation_date of the last question asked with the tag
- - name - name
-  popular is the default sort.
- 
- It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
-
- 
-This method returns a list of tags.
-
-  GetUsersIdsTags(
+  /**
+   * getUsersIdsTags - Returns the tags the users identified in {ids} have been active in.
+   *  
+   * This route corresponds roughly to user's stats tab, but does not include tag scores. A subset of tag scores are available (on a single user basis) in /users/{id}/top-answer-tags and /users/{id}/top-question-tags.
+   *  
+   * {ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for user_id on user or shallow_user objects.
+   *  
+   * The sorts accepted by this method operate on the follow fields of the tag object:
+   *  - popular - count
+   *  - activity - the creation_date of the last question asked with the tag
+   *  - name - name
+   *   popular is the default sort.
+   *  
+   *  It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+   * 
+   *  
+   * This method returns a list of tags.
+   * 
+  **/
+  getUsersIdsTags(
     req: operations.GetUsersIdsTagsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetUsersIdsTagsResponse> {
@@ -9134,12 +9366,11 @@ This method returns a list of tags.
       req = new operations.GetUsersIdsTagsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/users/{ids}/tags", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -9148,42 +9379,43 @@ This method returns a list of tags.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetUsersIdsTagsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetUsersIdsTagsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -9193,15 +9425,17 @@ This method returns a list of tags.
   }
 
   
-  // GetUsersIdsTimeline - Returns a subset of the actions the users in {ids} have taken on the site.
- 
-This method returns users' posts, edits, and earned badges in the order they were accomplished. It is possible to filter to just a window of activity using the fromdate and todate parameters.
- 
-{ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for user_id on user or shallow_user objects.
- 
-This method returns a list of user timeline objects.
-
-  GetUsersIdsTimeline(
+  /**
+   * getUsersIdsTimeline - Returns a subset of the actions the users in {ids} have taken on the site.
+   *  
+   * This method returns users' posts, edits, and earned badges in the order they were accomplished. It is possible to filter to just a window of activity using the fromdate and todate parameters.
+   *  
+   * {ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for user_id on user or shallow_user objects.
+   *  
+   * This method returns a list of user timeline objects.
+   * 
+  **/
+  getUsersIdsTimeline(
     req: operations.GetUsersIdsTimelineRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetUsersIdsTimelineResponse> {
@@ -9209,12 +9443,11 @@ This method returns a list of user timeline objects.
       req = new operations.GetUsersIdsTimelineRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/users/{ids}/timeline", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -9223,42 +9456,43 @@ This method returns a list of user timeline objects.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetUsersIdsTimelineResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetUsersIdsTimelineResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -9268,23 +9502,25 @@ This method returns a list of user timeline objects.
   }
 
   
-  // GetUsersModerators - Gets those users on a site who can exercise moderation powers.
- 
-Note, employees of Stack Exchange Inc. will be returned if they have been granted moderation powers on a site even if they have never been appointed or elected explicitly. This method checks abilities, not the manner in which they were obtained.
- 
-The sorts accepted by this method operate on the follow fields of the user object:
- - reputation - reputation
- - creation - creation_date
- - name - display_name
- - modified - last_modified_date
-  reputation is the default sort.
- 
- It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
-
- 
-This method returns a list of users.
-
-  GetUsersModerators(
+  /**
+   * getUsersModerators - Gets those users on a site who can exercise moderation powers.
+   *  
+   * Note, employees of Stack Exchange Inc. will be returned if they have been granted moderation powers on a site even if they have never been appointed or elected explicitly. This method checks abilities, not the manner in which they were obtained.
+   *  
+   * The sorts accepted by this method operate on the follow fields of the user object:
+   *  - reputation - reputation
+   *  - creation - creation_date
+   *  - name - display_name
+   *  - modified - last_modified_date
+   *   reputation is the default sort.
+   *  
+   *  It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+   * 
+   *  
+   * This method returns a list of users.
+   * 
+  **/
+  getUsersModerators(
     req: operations.GetUsersModeratorsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetUsersModeratorsResponse> {
@@ -9292,12 +9528,11 @@ This method returns a list of users.
       req = new operations.GetUsersModeratorsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/users/moderators";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -9306,42 +9541,43 @@ This method returns a list of users.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetUsersModeratorsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetUsersModeratorsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -9351,23 +9587,25 @@ This method returns a list of users.
   }
 
   
-  // GetUsersModeratorsElected - Returns those users on a site who both have moderator powers, and were actually elected.
- 
-This method excludes Stack Exchange Inc. employees, unless they were actually elected moderators on a site (which can only have happened prior to their employment).
- 
-The sorts accepted by this method operate on the follow fields of the user object:
- - reputation - reputation
- - creation - creation_date
- - name - display_name
- - modified - last_modified_date
-  reputation is the default sort.
- 
- It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
-
- 
-This method returns a list of users.
-
-  GetUsersModeratorsElected(
+  /**
+   * getUsersModeratorsElected - Returns those users on a site who both have moderator powers, and were actually elected.
+   *  
+   * This method excludes Stack Exchange Inc. employees, unless they were actually elected moderators on a site (which can only have happened prior to their employment).
+   *  
+   * The sorts accepted by this method operate on the follow fields of the user object:
+   *  - reputation - reputation
+   *  - creation - creation_date
+   *  - name - display_name
+   *  - modified - last_modified_date
+   *   reputation is the default sort.
+   *  
+   *  It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+   * 
+   *  
+   * This method returns a list of users.
+   * 
+  **/
+  getUsersModeratorsElected(
     req: operations.GetUsersModeratorsElectedRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetUsersModeratorsElectedResponse> {
@@ -9375,12 +9613,11 @@ This method returns a list of users.
       req = new operations.GetUsersModeratorsElectedRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/users/moderators/elected";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -9389,42 +9626,43 @@ This method returns a list of users.
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetUsersModeratorsElectedResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetUsersModeratorsElectedResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -9434,13 +9672,15 @@ This method returns a list of users.
   }
 
   
-  // PostCommentsIdDelete - Deletes a comment.
- 
-Use an access_token with write_access to delete a comment.
- 
-In practice, this method will never return an object.
-
-  PostCommentsIdDelete(
+  /**
+   * postCommentsIdDelete - Deletes a comment.
+   *  
+   * Use an access_token with write_access to delete a comment.
+   *  
+   * In practice, this method will never return an object.
+   * 
+  **/
+  postCommentsIdDelete(
     req: operations.PostCommentsIdDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostCommentsIdDeleteResponse> {
@@ -9448,12 +9688,11 @@ In practice, this method will never return an object.
       req = new operations.PostCommentsIdDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/comments/{id}/delete", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -9462,36 +9701,37 @@ In practice, this method will never return an object.
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostCommentsIdDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PostCommentsIdDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -9501,13 +9741,15 @@ In practice, this method will never return an object.
   }
 
   
-  // PostCommentsIdEdit - Edit an existing comment.
- 
-Use an access_token with write_access to edit an existing comment.
- 
-This method return the created comment.
-
-  PostCommentsIdEdit(
+  /**
+   * postCommentsIdEdit - Edit an existing comment.
+   *  
+   * Use an access_token with write_access to edit an existing comment.
+   *  
+   * This method return the created comment.
+   * 
+  **/
+  postCommentsIdEdit(
     req: operations.PostCommentsIdEditRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostCommentsIdEditResponse> {
@@ -9515,12 +9757,11 @@ This method return the created comment.
       req = new operations.PostCommentsIdEditRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/comments/{id}/edit", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -9529,42 +9770,43 @@ This method return the created comment.
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostCommentsIdEditResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.PostCommentsIdEditResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -9574,13 +9816,15 @@ This method return the created comment.
   }
 
   
-  // PostPostsIdCommentsAdd - Create a new comment.
- 
-Use an access_token with write_access to create a new comment on a post.
- 
-This method returns the created comment.
-
-  PostPostsIdCommentsAdd(
+  /**
+   * postPostsIdCommentsAdd - Create a new comment.
+   *  
+   * Use an access_token with write_access to create a new comment on a post.
+   *  
+   * This method returns the created comment.
+   * 
+  **/
+  postPostsIdCommentsAdd(
     req: operations.PostPostsIdCommentsAddRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostPostsIdCommentsAddResponse> {
@@ -9588,12 +9832,11 @@ This method returns the created comment.
       req = new operations.PostPostsIdCommentsAddRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/posts/{id}/comments/add", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -9602,42 +9845,43 @@ This method returns the created comment.
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostPostsIdCommentsAddResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.PostPostsIdCommentsAddResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 402:
+          case httpRes?.status == 402:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 

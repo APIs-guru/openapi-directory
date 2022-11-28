@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class NotebooksProjectsLocationsSchedulesDeletePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +27,20 @@ class NotebooksProjectsLocationsSchedulesDeleteQueryParams:
 
 @dataclass
 class NotebooksProjectsLocationsSchedulesDeleteSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class NotebooksProjectsLocationsSchedulesDeleteRequest:
-    path_params: NotebooksProjectsLocationsSchedulesDeletePathParams = field(default=None)
-    query_params: NotebooksProjectsLocationsSchedulesDeleteQueryParams = field(default=None)
-    security: NotebooksProjectsLocationsSchedulesDeleteSecurity = field(default=None)
+    path_params: NotebooksProjectsLocationsSchedulesDeletePathParams = field()
+    query_params: NotebooksProjectsLocationsSchedulesDeleteQueryParams = field()
+    security: NotebooksProjectsLocationsSchedulesDeleteSecurity = field()
     
 
 @dataclass
 class NotebooksProjectsLocationsSchedulesDeleteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

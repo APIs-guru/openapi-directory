@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// LambdaFunctionRecommendation
+// Describes an Lambda function recommendation.
 type LambdaFunctionRecommendation struct {
 	AccountID                       *string                                             `json:"accountId,omitempty"`
 	CurrentMemorySize               *int64                                              `json:"currentMemorySize,omitempty"`

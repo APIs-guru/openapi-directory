@@ -1,14 +1,17 @@
-import { AxiosInstance, AxiosRequestConfig } from "axios";
-import * as operations from "./models/operations";
-declare type OptsFunc = (sdk: SDK) => void;
+import { AxiosInstance } from "axios";
+import { AmpUrls } from "./ampurls";
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://acceleratedmobilepageurl.googleapis.com/"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    ampUrls: AmpUrls;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
-    AcceleratedmobilepageurlAmpUrlsBatchGet(req: operations.AcceleratedmobilepageurlAmpUrlsBatchGetRequest, config?: AxiosRequestConfig): Promise<operations.AcceleratedmobilepageurlAmpUrlsBatchGetResponse>;
 }
 export {};

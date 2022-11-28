@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ComponentCandidate
 /**
  * Contains information about a component that is a candidate to deploy to a Greengrass core device.
@@ -33,15 +33,15 @@ var ComponentCandidate = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=componentName" }),
+        SpeakeasyMetadata({ data: "json, name=componentName" }),
         __metadata("design:type", String)
     ], ComponentCandidate.prototype, "componentName", void 0);
     __decorate([
-        Metadata({ data: "json, name=componentVersion" }),
+        SpeakeasyMetadata({ data: "json, name=componentVersion" }),
         __metadata("design:type", String)
     ], ComponentCandidate.prototype, "componentVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=versionRequirements" }),
+        SpeakeasyMetadata({ data: "json, name=versionRequirements" }),
         __metadata("design:type", Map)
     ], ComponentCandidate.prototype, "versionRequirements", void 0);
     return ComponentCandidate;

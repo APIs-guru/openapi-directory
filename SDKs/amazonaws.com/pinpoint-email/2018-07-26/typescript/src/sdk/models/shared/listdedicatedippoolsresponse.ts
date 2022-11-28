@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ListDedicatedIpPoolsResponse
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A list of dedicated IP pools.
 **/
 export class ListDedicatedIpPoolsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DedicatedIpPools" })
+  @SpeakeasyMetadata({ data: "json, name=DedicatedIpPools" })
   dedicatedIpPools?: string[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

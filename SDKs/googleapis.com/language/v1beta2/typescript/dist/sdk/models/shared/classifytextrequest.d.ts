@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ClassificationModelOptions } from "./classificationmodeloptions";
 import { Document } from "./document";
 /**

@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AssociateClientDeviceWithCoreDeviceErrorEntry } from "./associateclientdevicewithcoredeviceerrorentry";
 
 
+
 export class BatchAssociateClientDeviceWithCoreDeviceResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errorEntries", elemType: shared.AssociateClientDeviceWithCoreDeviceErrorEntry })
+  @SpeakeasyMetadata({ data: "json, name=errorEntries", elemType: AssociateClientDeviceWithCoreDeviceErrorEntry })
   errorEntries?: AssociateClientDeviceWithCoreDeviceErrorEntry[];
 }

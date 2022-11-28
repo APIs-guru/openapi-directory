@@ -1,7 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Value } from "./value";
-import { Value } from "./value";
+
 
 
 // MetadataRecord
@@ -9,9 +8,9 @@ import { Value } from "./value";
  * A complex type that defines the data records returned in the report.
 **/
 export class MetadataRecord extends SpeakeasyBase {
-  @Metadata({ data: "json, name=metadataValues", elemType: shared.Value })
+  @SpeakeasyMetadata({ data: "json, name=metadataValues", elemType: Value })
   metadataValues?: Value[];
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: Value;
 }

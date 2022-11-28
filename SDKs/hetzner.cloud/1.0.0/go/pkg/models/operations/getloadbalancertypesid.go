@@ -4,15 +4,15 @@ type GetLoadBalancerTypesIDPathParams struct {
 	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type GetLoadBalancerTypesIDRequest struct {
-	PathParams GetLoadBalancerTypesIDPathParams
-}
-
+// GetLoadBalancerTypesID200ApplicationJSONLoadBalancerTypePricesPriceHourly
+// Hourly costs for a Resource in this Location
 type GetLoadBalancerTypesID200ApplicationJSONLoadBalancerTypePricesPriceHourly struct {
 	Gross string `json:"gross"`
 	Net   string `json:"net"`
 }
 
+// GetLoadBalancerTypesID200ApplicationJSONLoadBalancerTypePricesPriceMonthly
+// Monthly costs for a Resource in this Location
 type GetLoadBalancerTypesID200ApplicationJSONLoadBalancerTypePricesPriceMonthly struct {
 	Gross string `json:"gross"`
 	Net   string `json:"net"`
@@ -38,6 +38,10 @@ type GetLoadBalancerTypesID200ApplicationJSONLoadBalancerType struct {
 
 type GetLoadBalancerTypesID200ApplicationJSON struct {
 	LoadBalancerType *GetLoadBalancerTypesID200ApplicationJSONLoadBalancerType `json:"load_balancer_type,omitempty"`
+}
+
+type GetLoadBalancerTypesIDRequest struct {
+	PathParams GetLoadBalancerTypesIDPathParams
 }
 
 type GetLoadBalancerTypesIDResponse struct {

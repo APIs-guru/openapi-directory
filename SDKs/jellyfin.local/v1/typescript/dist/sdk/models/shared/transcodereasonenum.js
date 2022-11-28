@@ -1,0 +1,26 @@
+export var TranscodeReasonEnum;
+(function (TranscodeReasonEnum) {
+    TranscodeReasonEnum["ContainerNotSupported"] = "ContainerNotSupported";
+    TranscodeReasonEnum["VideoCodecNotSupported"] = "VideoCodecNotSupported";
+    TranscodeReasonEnum["AudioCodecNotSupported"] = "AudioCodecNotSupported";
+    TranscodeReasonEnum["ContainerBitrateExceedsLimit"] = "ContainerBitrateExceedsLimit";
+    TranscodeReasonEnum["AudioBitrateNotSupported"] = "AudioBitrateNotSupported";
+    TranscodeReasonEnum["AudioChannelsNotSupported"] = "AudioChannelsNotSupported";
+    TranscodeReasonEnum["VideoResolutionNotSupported"] = "VideoResolutionNotSupported";
+    TranscodeReasonEnum["UnknownVideoStreamInfo"] = "UnknownVideoStreamInfo";
+    TranscodeReasonEnum["UnknownAudioStreamInfo"] = "UnknownAudioStreamInfo";
+    TranscodeReasonEnum["AudioProfileNotSupported"] = "AudioProfileNotSupported";
+    TranscodeReasonEnum["AudioSampleRateNotSupported"] = "AudioSampleRateNotSupported";
+    TranscodeReasonEnum["AnamorphicVideoNotSupported"] = "AnamorphicVideoNotSupported";
+    TranscodeReasonEnum["InterlacedVideoNotSupported"] = "InterlacedVideoNotSupported";
+    TranscodeReasonEnum["SecondaryAudioNotSupported"] = "SecondaryAudioNotSupported";
+    TranscodeReasonEnum["RefFramesNotSupported"] = "RefFramesNotSupported";
+    TranscodeReasonEnum["VideoBitDepthNotSupported"] = "VideoBitDepthNotSupported";
+    TranscodeReasonEnum["VideoBitrateNotSupported"] = "VideoBitrateNotSupported";
+    TranscodeReasonEnum["VideoFramerateNotSupported"] = "VideoFramerateNotSupported";
+    TranscodeReasonEnum["VideoLevelNotSupported"] = "VideoLevelNotSupported";
+    TranscodeReasonEnum["VideoProfileNotSupported"] = "VideoProfileNotSupported";
+    TranscodeReasonEnum["AudioBitDepthNotSupported"] = "AudioBitDepthNotSupported";
+    TranscodeReasonEnum["SubtitleCodecNotSupported"] = "SubtitleCodecNotSupported";
+    TranscodeReasonEnum["DirectPlayError"] = "DirectPlayError";
+})(TranscodeReasonEnum || (TranscodeReasonEnum = {}));

@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import errorhandlingconfig
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class EventBridgeDestinationProperties:
-    error_handling_config: Optional[errorhandlingconfig.ErrorHandlingConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorHandlingConfig' }})
-    object: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'object' }})
+    r"""EventBridgeDestinationProperties
+     The properties that are applied when Amazon EventBridge is being used as a destination. 
+    """
+    
+    object: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('object') }})
+    error_handling_config: Optional[ErrorHandlingConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorHandlingConfig') }})
     

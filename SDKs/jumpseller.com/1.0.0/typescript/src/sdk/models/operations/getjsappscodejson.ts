@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetJsappsCodeJsonPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=code" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=code" })
   code: string;
 }
 
 
 export class GetJsappsCodeJsonQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=authtoken" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=authtoken" })
   authtoken: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=login" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=login" })
   login: string;
 }
 
 
 export class GetJsappsCodeJsonRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetJsappsCodeJsonPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetJsappsCodeJsonQueryParams;
 }
 
 
 export class GetJsappsCodeJsonResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   jsApp?: shared.JsApp;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

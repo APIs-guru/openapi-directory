@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class MembershipsDuration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=memberSince" })
+  @SpeakeasyMetadata({ data: "json, name=memberSince" })
   memberSince?: string;
 
-  @Metadata({ data: "json, name=memberTotalDurationMonths" })
+  @SpeakeasyMetadata({ data: "json, name=memberTotalDurationMonths" })
   memberTotalDurationMonths?: number;
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Change } from "./change";
+
 
 
 // ContinuousCheckEntry
@@ -8,18 +8,18 @@ import { Change } from "./change";
  * Represents to changelog entry of a continuous check
 **/
 export class ContinuousCheckEntry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=changes", elemType: shared.Change })
+  @SpeakeasyMetadata({ data: "json, name=changes", elemType: Change })
   changes?: Change[];
 
-  @Metadata({ data: "json, name=check_id" })
+  @SpeakeasyMetadata({ data: "json, name=check_id" })
   checkId?: string;
 
-  @Metadata({ data: "json, name=continuous_check_id" })
+  @SpeakeasyMetadata({ data: "json, name=continuous_check_id" })
   continuousCheckId?: string;
 
-  @Metadata({ data: "json, name=creation_date" })
+  @SpeakeasyMetadata({ data: "json, name=creation_date" })
   creationDate?: Date;
 
-  @Metadata({ data: "json, name=previous_check_id" })
+  @SpeakeasyMetadata({ data: "json, name=previous_check_id" })
   previousCheckId?: string;
 }

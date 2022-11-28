@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MetricHeaderEntry } from "./metricheaderentry";
 import { PivotHeader } from "./pivotheader";
+
 
 
 // MetricHeader
@@ -9,9 +9,9 @@ import { PivotHeader } from "./pivotheader";
  * The headers for the metrics.
 **/
 export class MetricHeader extends SpeakeasyBase {
-  @Metadata({ data: "json, name=metricHeaderEntries", elemType: shared.MetricHeaderEntry })
+  @SpeakeasyMetadata({ data: "json, name=metricHeaderEntries", elemType: MetricHeaderEntry })
   metricHeaderEntries?: MetricHeaderEntry[];
 
-  @Metadata({ data: "json, name=pivotHeaders", elemType: shared.PivotHeader })
+  @SpeakeasyMetadata({ data: "json, name=pivotHeaders", elemType: PivotHeader })
   pivotHeaders?: PivotHeader[];
 }

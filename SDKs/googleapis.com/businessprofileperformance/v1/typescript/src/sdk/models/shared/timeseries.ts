@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DatedValue } from "./datedvalue";
+
 
 
 // TimeSeries
@@ -8,6 +8,6 @@ import { DatedValue } from "./datedvalue";
  * Represents a timeseries.
 **/
 export class TimeSeries extends SpeakeasyBase {
-  @Metadata({ data: "json, name=datedValues", elemType: shared.DatedValue })
+  @SpeakeasyMetadata({ data: "json, name=datedValues", elemType: DatedValue })
   datedValues?: DatedValue[];
 }

@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GridRange } from "./gridrange";
 import { DataValidationRule } from "./datavalidationrule";
+
 
 
 // SetDataValidationRequest
@@ -8,9 +9,9 @@ import { DataValidationRule } from "./datavalidationrule";
  * Sets a data validation rule to every cell in the range. To clear validation in a range, call this with no rule specified.
 **/
 export class SetDataValidationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=range" })
+  @SpeakeasyMetadata({ data: "json, name=range" })
   range?: GridRange;
 
-  @Metadata({ data: "json, name=rule" })
+  @SpeakeasyMetadata({ data: "json, name=rule" })
   rule?: DataValidationRule;
 }

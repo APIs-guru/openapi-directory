@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ValidatedUser
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * list of users with their workflow settings
 **/
 export class ValidatedUser extends SpeakeasyBase {
-  @Metadata({ data: "json, name=isValidated" })
+  @SpeakeasyMetadata({ data: "json, name=isValidated" })
   isValidated: boolean;
 
-  @Metadata({ data: "json, name=userExists" })
+  @SpeakeasyMetadata({ data: "json, name=userExists" })
   userExists: boolean;
 
-  @Metadata({ data: "json, name=username" })
+  @SpeakeasyMetadata({ data: "json, name=username" })
   username: string;
 }

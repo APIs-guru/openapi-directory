@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SensitiveDataItemCategoryEnum } from "./sensitivedataitemcategoryenum";
+
 
 
 // ManagedDataIdentifierSummary
@@ -7,9 +8,9 @@ import { SensitiveDataItemCategoryEnum } from "./sensitivedataitemcategoryenum";
  * Provides information about a managed data identifier. For additional information, see <a href="https://docs.aws.amazon.com/macie/latest/user/managed-data-identifiers.html">Using managed data identifiers</a> in the <i>Amazon Macie User Guide</i>.
 **/
 export class ManagedDataIdentifierSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=category" })
+  @SpeakeasyMetadata({ data: "json, name=category" })
   category?: SensitiveDataItemCategoryEnum;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 }

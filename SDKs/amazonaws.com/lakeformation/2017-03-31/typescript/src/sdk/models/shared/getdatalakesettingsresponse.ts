@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataLakeSettings } from "./datalakesettings";
 
 
+
 export class GetDataLakeSettingsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DataLakeSettings" })
+  @SpeakeasyMetadata({ data: "json, name=DataLakeSettings" })
   dataLakeSettings?: DataLakeSettings;
 }

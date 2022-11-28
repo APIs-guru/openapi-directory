@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var FindTweetByIdPathParams = /** @class */ (function (_super) {
     __extends(FindTweetByIdPathParams, _super);
@@ -30,7 +30,7 @@ var FindTweetByIdPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], FindTweetByIdPathParams.prototype, "id", void 0);
     return FindTweetByIdPathParams;
@@ -42,27 +42,27 @@ var FindTweetByIdQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=expansions" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=expansions" }),
         __metadata("design:type", Array)
     ], FindTweetByIdQueryParams.prototype, "expansions", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=media.fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=media.fields" }),
         __metadata("design:type", Array)
     ], FindTweetByIdQueryParams.prototype, "mediaFields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=place.fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=place.fields" }),
         __metadata("design:type", Array)
     ], FindTweetByIdQueryParams.prototype, "placeFields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=poll.fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=poll.fields" }),
         __metadata("design:type", Array)
     ], FindTweetByIdQueryParams.prototype, "pollFields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=tweet.fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=tweet.fields" }),
         __metadata("design:type", Array)
     ], FindTweetByIdQueryParams.prototype, "tweetFields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=user.fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=user.fields" }),
         __metadata("design:type", Array)
     ], FindTweetByIdQueryParams.prototype, "userFields", void 0);
     return FindTweetByIdQueryParams;
@@ -74,11 +74,11 @@ var FindTweetByIdRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FindTweetByIdPathParams)
     ], FindTweetByIdRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FindTweetByIdQueryParams)
     ], FindTweetByIdRequest.prototype, "queryParams", void 0);
     return FindTweetByIdRequest;
@@ -90,23 +90,23 @@ var FindTweetByIdResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], FindTweetByIdResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], FindTweetByIdResponse.prototype, "error", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], FindTweetByIdResponse.prototype, "problem", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.SingleTweetLookupResponse)
     ], FindTweetByIdResponse.prototype, "singleTweetLookupResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], FindTweetByIdResponse.prototype, "statusCode", void 0);
     return FindTweetByIdResponse;

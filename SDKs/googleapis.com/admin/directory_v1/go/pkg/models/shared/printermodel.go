@@ -1,5 +1,7 @@
 package shared
 
+// PrinterModel
+// Printer manufacturer and model
 type PrinterModel struct {
 	DisplayName  *string `json:"displayName,omitempty"`
 	MakeAndModel *string `json:"makeAndModel,omitempty"`

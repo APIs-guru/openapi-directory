@@ -1,6 +1,7 @@
 
 
+
 export enum PropertyNotificationStateEnum {
-    Enabled = "ENABLED"
-,    Disabled = "DISABLED"
+    Enabled = "ENABLED",
+    Disabled = "DISABLED"
 }

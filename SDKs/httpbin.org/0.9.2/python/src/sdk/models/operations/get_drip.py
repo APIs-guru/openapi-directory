@@ -12,11 +12,11 @@ class GetDripQueryParams:
 
 @dataclass
 class GetDripRequest:
-    query_params: GetDripQueryParams = field(default=None)
+    query_params: GetDripQueryParams = field()
     
 
 @dataclass
 class GetDripResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

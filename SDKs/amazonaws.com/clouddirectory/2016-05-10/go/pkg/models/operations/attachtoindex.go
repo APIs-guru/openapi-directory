@@ -15,10 +15,14 @@ type AttachToIndexHeaders struct {
 	XAmzDataPartition string  `header:"style=simple,explode=false,name=x-amz-data-partition"`
 }
 
+// AttachToIndexRequestBodyIndexReference
+// The reference that identifies an object.
 type AttachToIndexRequestBodyIndexReference struct {
 	Selector *string `json:"Selector,omitempty"`
 }
 
+// AttachToIndexRequestBodyTargetReference
+// The reference that identifies an object.
 type AttachToIndexRequestBodyTargetReference struct {
 	Selector *string `json:"Selector,omitempty"`
 }

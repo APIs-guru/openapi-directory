@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SharedDriveFile } from "./shareddrivefile";
 import { Form } from "./form";
 import { Link } from "./link";
@@ -37,19 +37,19 @@ var Material = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=driveFile" }),
+        SpeakeasyMetadata({ data: "json, name=driveFile" }),
         __metadata("design:type", SharedDriveFile)
     ], Material.prototype, "driveFile", void 0);
     __decorate([
-        Metadata({ data: "json, name=form" }),
+        SpeakeasyMetadata({ data: "json, name=form" }),
         __metadata("design:type", Form)
     ], Material.prototype, "form", void 0);
     __decorate([
-        Metadata({ data: "json, name=link" }),
+        SpeakeasyMetadata({ data: "json, name=link" }),
         __metadata("design:type", Link)
     ], Material.prototype, "link", void 0);
     __decorate([
-        Metadata({ data: "json, name=youtubeVideo" }),
+        SpeakeasyMetadata({ data: "json, name=youtubeVideo" }),
         __metadata("design:type", YouTubeVideo)
     ], Material.prototype, "youtubeVideo", void 0);
     return Material;

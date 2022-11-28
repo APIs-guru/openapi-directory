@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BatchStrategyEnum } from "./batchstrategyenum";
 import { DataProcessing } from "./dataprocessing";
 import { ExperimentConfig } from "./experimentconfig";
@@ -9,64 +9,65 @@ import { TransformOutput } from "./transformoutput";
 import { TransformResources } from "./transformresources";
 
 
+
 export class DescribeTransformJobResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AutoMLJobArn" })
+  @SpeakeasyMetadata({ data: "json, name=AutoMLJobArn" })
   autoMlJobArn?: string;
 
-  @Metadata({ data: "json, name=BatchStrategy" })
+  @SpeakeasyMetadata({ data: "json, name=BatchStrategy" })
   batchStrategy?: BatchStrategyEnum;
 
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime: Date;
 
-  @Metadata({ data: "json, name=DataProcessing" })
+  @SpeakeasyMetadata({ data: "json, name=DataProcessing" })
   dataProcessing?: DataProcessing;
 
-  @Metadata({ data: "json, name=Environment" })
+  @SpeakeasyMetadata({ data: "json, name=Environment" })
   environment?: Map<string, string>;
 
-  @Metadata({ data: "json, name=ExperimentConfig" })
+  @SpeakeasyMetadata({ data: "json, name=ExperimentConfig" })
   experimentConfig?: ExperimentConfig;
 
-  @Metadata({ data: "json, name=FailureReason" })
+  @SpeakeasyMetadata({ data: "json, name=FailureReason" })
   failureReason?: string;
 
-  @Metadata({ data: "json, name=LabelingJobArn" })
+  @SpeakeasyMetadata({ data: "json, name=LabelingJobArn" })
   labelingJobArn?: string;
 
-  @Metadata({ data: "json, name=MaxConcurrentTransforms" })
+  @SpeakeasyMetadata({ data: "json, name=MaxConcurrentTransforms" })
   maxConcurrentTransforms?: number;
 
-  @Metadata({ data: "json, name=MaxPayloadInMB" })
+  @SpeakeasyMetadata({ data: "json, name=MaxPayloadInMB" })
   maxPayloadInMb?: number;
 
-  @Metadata({ data: "json, name=ModelClientConfig" })
+  @SpeakeasyMetadata({ data: "json, name=ModelClientConfig" })
   modelClientConfig?: ModelClientConfig;
 
-  @Metadata({ data: "json, name=ModelName" })
+  @SpeakeasyMetadata({ data: "json, name=ModelName" })
   modelName: string;
 
-  @Metadata({ data: "json, name=TransformEndTime" })
+  @SpeakeasyMetadata({ data: "json, name=TransformEndTime" })
   transformEndTime?: Date;
 
-  @Metadata({ data: "json, name=TransformInput" })
+  @SpeakeasyMetadata({ data: "json, name=TransformInput" })
   transformInput: TransformInput;
 
-  @Metadata({ data: "json, name=TransformJobArn" })
+  @SpeakeasyMetadata({ data: "json, name=TransformJobArn" })
   transformJobArn: string;
 
-  @Metadata({ data: "json, name=TransformJobName" })
+  @SpeakeasyMetadata({ data: "json, name=TransformJobName" })
   transformJobName: string;
 
-  @Metadata({ data: "json, name=TransformJobStatus" })
+  @SpeakeasyMetadata({ data: "json, name=TransformJobStatus" })
   transformJobStatus: TransformJobStatusEnum;
 
-  @Metadata({ data: "json, name=TransformOutput" })
+  @SpeakeasyMetadata({ data: "json, name=TransformOutput" })
   transformOutput?: TransformOutput;
 
-  @Metadata({ data: "json, name=TransformResources" })
+  @SpeakeasyMetadata({ data: "json, name=TransformResources" })
   transformResources: TransformResources;
 
-  @Metadata({ data: "json, name=TransformStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=TransformStartTime" })
   transformStartTime?: Date;
 }

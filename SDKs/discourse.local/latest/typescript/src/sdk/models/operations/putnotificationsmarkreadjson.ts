@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PutNotificationsMarkReadJsonRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 }
 
 
-export class PutNotificationsMarkReadJsonRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: PutNotificationsMarkReadJsonRequestBody;
-}
-
-
 export class PutNotificationsMarkReadJson200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=success" })
+  @SpeakeasyMetadata({ data: "json, name=success" })
   success?: string;
 }
 
 
+export class PutNotificationsMarkReadJsonRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: PutNotificationsMarkReadJsonRequestBody;
+}
+
+
 export class PutNotificationsMarkReadJsonResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   putNotificationsMarkReadJson200ApplicationJsonObject?: PutNotificationsMarkReadJson200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

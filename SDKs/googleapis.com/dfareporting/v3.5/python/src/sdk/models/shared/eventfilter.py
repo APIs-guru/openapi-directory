@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import pathreportdimensionvalue
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class EventFilter:
-    dimension_filter: Optional[pathreportdimensionvalue.PathReportDimensionValue] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dimensionFilter' }})
-    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
+    r"""EventFilter
+    Represents a DfaReporting event filter.
+    """
+    
+    dimension_filter: Optional[PathReportDimensionValue] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dimensionFilter') }})
+    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
     

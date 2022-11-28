@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class AllServiceGroupsSecurity:
-    otoroshi_auth: shared.SchemeOtoroshiAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    otoroshi_auth: shared.SchemeOtoroshiAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
     
 
 @dataclass
 class AllServiceGroupsRequest:
-    security: AllServiceGroupsSecurity = field(default=None)
+    security: AllServiceGroupsSecurity = field()
     
 
 @dataclass
 class AllServiceGroupsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     groups: Optional[List[shared.Group]] = field(default=None)
-    status_code: int = field(default=None)
     

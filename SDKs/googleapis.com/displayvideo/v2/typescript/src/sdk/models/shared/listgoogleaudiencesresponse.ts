@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleAudience } from "./googleaudience";
 
 
+
 export class ListGoogleAudiencesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=googleAudiences", elemType: shared.GoogleAudience })
+  @SpeakeasyMetadata({ data: "json, name=googleAudiences", elemType: GoogleAudience })
   googleAudiences?: GoogleAudience[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

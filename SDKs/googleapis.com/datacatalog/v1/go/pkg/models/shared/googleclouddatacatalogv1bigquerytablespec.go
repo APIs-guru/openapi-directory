@@ -9,6 +9,8 @@ const (
 	GoogleCloudDatacatalogV1BigQueryTableSpecTableSourceTypeEnumBigqueryMaterializedView   GoogleCloudDatacatalogV1BigQueryTableSpecTableSourceTypeEnum = "BIGQUERY_MATERIALIZED_VIEW"
 )
 
+// GoogleCloudDatacatalogV1BigQueryTableSpec
+// Describes a BigQuery table.
 type GoogleCloudDatacatalogV1BigQueryTableSpec struct {
 	TableSourceType *GoogleCloudDatacatalogV1BigQueryTableSpecTableSourceTypeEnum `json:"tableSourceType,omitempty"`
 	TableSpec       *GoogleCloudDatacatalogV1TableSpec                            `json:"tableSpec,omitempty"`

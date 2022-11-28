@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * Definition of a custom Compute Engine virtual machine image for starting a notebook instance with the environment installed directly on the VM.
 **/

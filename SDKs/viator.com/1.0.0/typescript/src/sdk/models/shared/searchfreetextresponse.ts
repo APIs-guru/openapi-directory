@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum SearchFreetextResponseSearchTypeEnum {
-    Product = "PRODUCT"
-,    Destination = "DESTINATION"
-,    Attraction = "ATTRACTION"
-,    Recommendation = "RECOMMENDATION"
+    Product = "PRODUCT",
+    Destination = "DESTINATION",
+    Attraction = "ATTRACTION",
+    Recommendation = "RECOMMENDATION"
 }
 
 
 export class SearchFreetextResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=searchType" })
+  @SpeakeasyMetadata({ data: "json, name=searchType" })
   searchType?: SearchFreetextResponseSearchTypeEnum;
 
-  @Metadata({ data: "json, name=sortOrder" })
+  @SpeakeasyMetadata({ data: "json, name=sortOrder" })
   sortOrder?: number;
 }

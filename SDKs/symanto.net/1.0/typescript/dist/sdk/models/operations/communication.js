@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CommunicationQueryParams = /** @class */ (function (_super) {
     __extends(CommunicationQueryParams, _super);
@@ -30,7 +30,7 @@ var CommunicationQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=all" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=all" }),
         __metadata("design:type", Boolean)
     ], CommunicationQueryParams.prototype, "all", void 0);
     return CommunicationQueryParams;
@@ -42,11 +42,11 @@ var CommunicationRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CommunicationQueryParams)
     ], CommunicationRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json", elemType: shared.Post }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json", elemType: shared.Post }),
         __metadata("design:type", Array)
     ], CommunicationRequest.prototype, "request", void 0);
     return CommunicationRequest;
@@ -58,19 +58,19 @@ var CommunicationResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CommunicationResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata({ elemType: shared.PostPredicted }),
+        SpeakeasyMetadata({ elemType: shared.PostPredicted }),
         __metadata("design:type", Array)
     ], CommunicationResponse.prototype, "predictionResults", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CommunicationResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ValidationErrors)
     ], CommunicationResponse.prototype, "validationErrors", void 0);
     return CommunicationResponse;

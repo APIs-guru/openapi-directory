@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import ampissue
+from sdk import utils
+from . import *
 
 class AmpInspectionResultAmpIndexStatusVerdictEnum(str, Enum):
     VERDICT_UNSPECIFIED = "VERDICT_UNSPECIFIED"
@@ -46,12 +48,16 @@ class AmpInspectionResultVerdictEnum(str, Enum):
 @dataclass_json
 @dataclass
 class AmpInspectionResult:
-    amp_index_status_verdict: Optional[AmpInspectionResultAmpIndexStatusVerdictEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ampIndexStatusVerdict' }})
-    amp_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ampUrl' }})
-    indexing_state: Optional[AmpInspectionResultIndexingStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'indexingState' }})
-    issues: Optional[List[ampissue.AmpIssue]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'issues' }})
-    last_crawl_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lastCrawlTime' }})
-    page_fetch_state: Optional[AmpInspectionResultPageFetchStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pageFetchState' }})
-    robots_txt_state: Optional[AmpInspectionResultRobotsTxtStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'robotsTxtState' }})
-    verdict: Optional[AmpInspectionResultVerdictEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'verdict' }})
+    r"""AmpInspectionResult
+    AMP inspection result of the live page or the current information from Google's index, depending on whether you requested a live inspection or not.
+    """
+    
+    amp_index_status_verdict: Optional[AmpInspectionResultAmpIndexStatusVerdictEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ampIndexStatusVerdict') }})
+    amp_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ampUrl') }})
+    indexing_state: Optional[AmpInspectionResultIndexingStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('indexingState') }})
+    issues: Optional[List[AmpIssue]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('issues') }})
+    last_crawl_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lastCrawlTime') }})
+    page_fetch_state: Optional[AmpInspectionResultPageFetchStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pageFetchState') }})
+    robots_txt_state: Optional[AmpInspectionResultRobotsTxtStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('robotsTxtState') }})
+    verdict: Optional[AmpInspectionResultVerdictEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('verdict') }})
     

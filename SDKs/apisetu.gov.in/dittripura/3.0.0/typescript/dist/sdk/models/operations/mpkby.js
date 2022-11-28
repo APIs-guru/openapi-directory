@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var MpkbyRequestBodyCertificateParameters = /** @class */ (function (_super) {
     __extends(MpkbyRequestBodyCertificateParameters, _super);
@@ -30,11 +30,11 @@ var MpkbyRequestBodyCertificateParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=RefNo" }),
+        SpeakeasyMetadata({ data: "json, name=RefNo" }),
         __metadata("design:type", String)
     ], MpkbyRequestBodyCertificateParameters.prototype, "refNo", void 0);
     __decorate([
-        Metadata({ data: "json, name=TokenNo" }),
+        SpeakeasyMetadata({ data: "json, name=TokenNo" }),
         __metadata("design:type", String)
     ], MpkbyRequestBodyCertificateParameters.prototype, "tokenNo", void 0);
     return MpkbyRequestBodyCertificateParameters;
@@ -50,19 +50,19 @@ var MpkbyRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=certificateParameters" }),
+        SpeakeasyMetadata({ data: "json, name=certificateParameters" }),
         __metadata("design:type", MpkbyRequestBodyCertificateParameters)
     ], MpkbyRequestBody.prototype, "certificateParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=consentArtifact" }),
+        SpeakeasyMetadata({ data: "json, name=consentArtifact" }),
         __metadata("design:type", Object)
     ], MpkbyRequestBody.prototype, "consentArtifact", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], MpkbyRequestBody.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=txnId" }),
+        SpeakeasyMetadata({ data: "json, name=txnId" }),
         __metadata("design:type", String)
     ], MpkbyRequestBody.prototype, "txnId", void 0);
     return MpkbyRequestBody;
@@ -74,32 +74,16 @@ var MpkbySecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], MpkbySecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeClientId)
     ], MpkbySecurity.prototype, "clientId", void 0);
     return MpkbySecurity;
 }(SpeakeasyBase));
 export { MpkbySecurity };
-var MpkbyRequest = /** @class */ (function (_super) {
-    __extends(MpkbyRequest, _super);
-    function MpkbyRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", MpkbyRequestBody)
-    ], MpkbyRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", MpkbySecurity)
-    ], MpkbyRequest.prototype, "security", void 0);
-    return MpkbyRequest;
-}(SpeakeasyBase));
-export { MpkbyRequest };
 export var Mpkby400ApplicationJsonErrorEnum;
 (function (Mpkby400ApplicationJsonErrorEnum) {
     Mpkby400ApplicationJsonErrorEnum["MissingParameter"] = "missing_parameter";
@@ -122,11 +106,11 @@ var Mpkby400ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Mpkby400ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Mpkby400ApplicationJson.prototype, "errorDescription", void 0);
     return Mpkby400ApplicationJson;
@@ -148,11 +132,11 @@ var Mpkby401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Mpkby401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Mpkby401ApplicationJson.prototype, "errorDescription", void 0);
     return Mpkby401ApplicationJson;
@@ -174,11 +158,11 @@ var Mpkby404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Mpkby404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Mpkby404ApplicationJson.prototype, "errorDescription", void 0);
     return Mpkby404ApplicationJson;
@@ -198,11 +182,11 @@ var Mpkby500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Mpkby500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Mpkby500ApplicationJson.prototype, "errorDescription", void 0);
     return Mpkby500ApplicationJson;
@@ -222,11 +206,11 @@ var Mpkby502ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Mpkby502ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Mpkby502ApplicationJson.prototype, "errorDescription", void 0);
     return Mpkby502ApplicationJson;
@@ -246,11 +230,11 @@ var Mpkby503ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Mpkby503ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Mpkby503ApplicationJson.prototype, "errorDescription", void 0);
     return Mpkby503ApplicationJson;
@@ -270,55 +254,71 @@ var Mpkby504ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Mpkby504ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Mpkby504ApplicationJson.prototype, "errorDescription", void 0);
     return Mpkby504ApplicationJson;
 }(SpeakeasyBase));
 export { Mpkby504ApplicationJson };
+var MpkbyRequest = /** @class */ (function (_super) {
+    __extends(MpkbyRequest, _super);
+    function MpkbyRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", MpkbyRequestBody)
+    ], MpkbyRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", MpkbySecurity)
+    ], MpkbyRequest.prototype, "security", void 0);
+    return MpkbyRequest;
+}(SpeakeasyBase));
+export { MpkbyRequest };
 var MpkbyResponse = /** @class */ (function (_super) {
     __extends(MpkbyResponse, _super);
     function MpkbyResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], MpkbyResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], MpkbyResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Mpkby400ApplicationJson)
     ], MpkbyResponse.prototype, "mpkby400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Mpkby401ApplicationJson)
     ], MpkbyResponse.prototype, "mpkby401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Mpkby404ApplicationJson)
     ], MpkbyResponse.prototype, "mpkby404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Mpkby500ApplicationJson)
     ], MpkbyResponse.prototype, "mpkby500ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Mpkby502ApplicationJson)
     ], MpkbyResponse.prototype, "mpkby502ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Mpkby503ApplicationJson)
     ], MpkbyResponse.prototype, "mpkby503ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Mpkby504ApplicationJson)
     ], MpkbyResponse.prototype, "mpkby504ApplicationJsonObject", void 0);
     return MpkbyResponse;

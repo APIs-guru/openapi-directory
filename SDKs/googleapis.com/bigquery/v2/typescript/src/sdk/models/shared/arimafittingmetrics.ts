@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ArimaFittingMetrics
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * ARIMA model fitting metrics.
 **/
 export class ArimaFittingMetrics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=aic" })
+  @SpeakeasyMetadata({ data: "json, name=aic" })
   aic?: number;
 
-  @Metadata({ data: "json, name=logLikelihood" })
+  @SpeakeasyMetadata({ data: "json, name=logLikelihood" })
   logLikelihood?: number;
 
-  @Metadata({ data: "json, name=variance" })
+  @SpeakeasyMetadata({ data: "json, name=variance" })
   variance?: number;
 }

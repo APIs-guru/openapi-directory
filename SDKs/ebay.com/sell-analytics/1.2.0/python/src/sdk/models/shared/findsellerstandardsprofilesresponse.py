@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import standardsprofile
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class FindSellerStandardsProfilesResponse:
-    standards_profiles: Optional[List[standardsprofile.StandardsProfile]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'standardsProfiles' }})
+    r"""FindSellerStandardsProfilesResponse
+    The response container for a list of seller profiles.
+    """
+    
+    standards_profiles: Optional[List[StandardsProfile]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('standardsProfiles') }})
     

@@ -38,16 +38,16 @@ type GetNameConceptTypeSpecificConceptJSONQueryParams struct {
 	Query  string                                           `queryParam:"style=form,explode=true,name=query"`
 }
 
-type GetNameConceptTypeSpecificConceptJSONRequest struct {
-	PathParams  GetNameConceptTypeSpecificConceptJSONPathParams
-	QueryParams GetNameConceptTypeSpecificConceptJSONQueryParams
-}
-
 type GetNameConceptTypeSpecificConceptJSON200ApplicationJSON struct {
 	Copyright  *string          `json:"copyright,omitempty"`
 	NumResults *int64           `json:"num_results,omitempty"`
 	Results    []shared.Concept `json:"results,omitempty"`
 	Status     *string          `json:"status,omitempty"`
+}
+
+type GetNameConceptTypeSpecificConceptJSONRequest struct {
+	PathParams  GetNameConceptTypeSpecificConceptJSONPathParams
+	QueryParams GetNameConceptTypeSpecificConceptJSONQueryParams
 }
 
 type GetNameConceptTypeSpecificConceptJSONResponse struct {

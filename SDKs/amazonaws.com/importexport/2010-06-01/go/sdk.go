@@ -11,7 +11,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://importexport.amazonaws.com",
 	"https://importexport.amazonaws.com",
 	"http://importexport.{region}.amazonaws.com.cn",
@@ -22,10 +22,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/importexport/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -36,33 +41,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// GetCancelJob - This operation cancels a specified job. Only the job owner can cancel it. The operation fails if the job has already started or is complete.
 func (s *SDK) GetCancelJob(ctx context.Context, request operations.GetCancelJobRequest) (*operations.GetCancelJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Operation=CancelJob&Action=CancelJob"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -72,7 +99,7 @@ func (s *SDK) GetCancelJob(ctx context.Context, request operations.GetCancelJobR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -162,8 +189,9 @@ func (s *SDK) GetCancelJob(ctx context.Context, request operations.GetCancelJobR
 	return res, nil
 }
 
+// GetCreateJob - This operation initiates the process of scheduling an upload or download of your data. You include in the request a manifest that describes the data transfer specifics. The response to the request includes a job ID, which you can use in other operations, a signature that you use to identify your storage device, and the address where you should ship your storage device.
 func (s *SDK) GetCreateJob(ctx context.Context, request operations.GetCreateJobRequest) (*operations.GetCreateJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Operation=CreateJob&Action=CreateJob"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -173,7 +201,7 @@ func (s *SDK) GetCreateJob(ctx context.Context, request operations.GetCreateJobR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -363,8 +391,9 @@ func (s *SDK) GetCreateJob(ctx context.Context, request operations.GetCreateJobR
 	return res, nil
 }
 
+// GetGetShippingLabel - This operation generates a pre-paid UPS shipping label that you will use to ship your device to AWS for processing.
 func (s *SDK) GetGetShippingLabel(ctx context.Context, request operations.GetGetShippingLabelRequest) (*operations.GetGetShippingLabelResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Operation=GetShippingLabel&Action=GetShippingLabel"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -374,7 +403,7 @@ func (s *SDK) GetGetShippingLabel(ctx context.Context, request operations.GetGet
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -474,8 +503,9 @@ func (s *SDK) GetGetShippingLabel(ctx context.Context, request operations.GetGet
 	return res, nil
 }
 
+// GetGetStatus - This operation returns information about a job, including where the job is in the processing pipeline, the status of the results, and the signature value associated with the job. You can only return information about jobs you own.
 func (s *SDK) GetGetStatus(ctx context.Context, request operations.GetGetStatusRequest) (*operations.GetGetStatusResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Operation=GetStatus&Action=GetStatus"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -485,7 +515,7 @@ func (s *SDK) GetGetStatus(ctx context.Context, request operations.GetGetStatusR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -565,8 +595,9 @@ func (s *SDK) GetGetStatus(ctx context.Context, request operations.GetGetStatusR
 	return res, nil
 }
 
+// GetListJobs - This operation returns the jobs associated with the requester. AWS Import/Export lists the jobs in reverse chronological order based on the date of creation. For example if Job Test1 was created 2009Dec30 and Test2 was created 2010Feb05, the ListJobs operation would return Test2 followed by Test1.
 func (s *SDK) GetListJobs(ctx context.Context, request operations.GetListJobsRequest) (*operations.GetListJobsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Operation=ListJobs&Action=ListJobs"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -576,7 +607,7 @@ func (s *SDK) GetListJobs(ctx context.Context, request operations.GetListJobsReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -636,8 +667,9 @@ func (s *SDK) GetListJobs(ctx context.Context, request operations.GetListJobsReq
 	return res, nil
 }
 
+// GetUpdateJob - You use this operation to change the parameters specified in the original manifest file by supplying a new manifest file. The manifest file attached to this request replaces the original manifest file. You can only use the operation after a CreateJob request but before the data transfer starts and you can only use it on jobs you own.
 func (s *SDK) GetUpdateJob(ctx context.Context, request operations.GetUpdateJobRequest) (*operations.GetUpdateJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Operation=UpdateJob&Action=UpdateJob"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -647,7 +679,7 @@ func (s *SDK) GetUpdateJob(ctx context.Context, request operations.GetUpdateJobR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -857,8 +889,9 @@ func (s *SDK) GetUpdateJob(ctx context.Context, request operations.GetUpdateJobR
 	return res, nil
 }
 
+// PostCancelJob - This operation cancels a specified job. Only the job owner can cancel it. The operation fails if the job has already started or is complete.
 func (s *SDK) PostCancelJob(ctx context.Context, request operations.PostCancelJobRequest) (*operations.PostCancelJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Operation=CancelJob&Action=CancelJob"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -875,7 +908,7 @@ func (s *SDK) PostCancelJob(ctx context.Context, request operations.PostCancelJo
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -965,8 +998,9 @@ func (s *SDK) PostCancelJob(ctx context.Context, request operations.PostCancelJo
 	return res, nil
 }
 
+// PostCreateJob - This operation initiates the process of scheduling an upload or download of your data. You include in the request a manifest that describes the data transfer specifics. The response to the request includes a job ID, which you can use in other operations, a signature that you use to identify your storage device, and the address where you should ship your storage device.
 func (s *SDK) PostCreateJob(ctx context.Context, request operations.PostCreateJobRequest) (*operations.PostCreateJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Operation=CreateJob&Action=CreateJob"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -983,7 +1017,7 @@ func (s *SDK) PostCreateJob(ctx context.Context, request operations.PostCreateJo
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1173,8 +1207,9 @@ func (s *SDK) PostCreateJob(ctx context.Context, request operations.PostCreateJo
 	return res, nil
 }
 
+// PostGetShippingLabel - This operation generates a pre-paid UPS shipping label that you will use to ship your device to AWS for processing.
 func (s *SDK) PostGetShippingLabel(ctx context.Context, request operations.PostGetShippingLabelRequest) (*operations.PostGetShippingLabelResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Operation=GetShippingLabel&Action=GetShippingLabel"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1191,7 +1226,7 @@ func (s *SDK) PostGetShippingLabel(ctx context.Context, request operations.PostG
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1291,8 +1326,9 @@ func (s *SDK) PostGetShippingLabel(ctx context.Context, request operations.PostG
 	return res, nil
 }
 
+// PostGetStatus - This operation returns information about a job, including where the job is in the processing pipeline, the status of the results, and the signature value associated with the job. You can only return information about jobs you own.
 func (s *SDK) PostGetStatus(ctx context.Context, request operations.PostGetStatusRequest) (*operations.PostGetStatusResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Operation=GetStatus&Action=GetStatus"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1309,7 +1345,7 @@ func (s *SDK) PostGetStatus(ctx context.Context, request operations.PostGetStatu
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1389,8 +1425,9 @@ func (s *SDK) PostGetStatus(ctx context.Context, request operations.PostGetStatu
 	return res, nil
 }
 
+// PostListJobs - This operation returns the jobs associated with the requester. AWS Import/Export lists the jobs in reverse chronological order based on the date of creation. For example if Job Test1 was created 2009Dec30 and Test2 was created 2010Feb05, the ListJobs operation would return Test2 followed by Test1.
 func (s *SDK) PostListJobs(ctx context.Context, request operations.PostListJobsRequest) (*operations.PostListJobsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Operation=ListJobs&Action=ListJobs"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1407,7 +1444,7 @@ func (s *SDK) PostListJobs(ctx context.Context, request operations.PostListJobsR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1467,8 +1504,9 @@ func (s *SDK) PostListJobs(ctx context.Context, request operations.PostListJobsR
 	return res, nil
 }
 
+// PostUpdateJob - You use this operation to change the parameters specified in the original manifest file by supplying a new manifest file. The manifest file attached to this request replaces the original manifest file. You can only use the operation after a CreateJob request but before the data transfer starts and you can only use it on jobs you own.
 func (s *SDK) PostUpdateJob(ctx context.Context, request operations.PostUpdateJobRequest) (*operations.PostUpdateJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Operation=UpdateJob&Action=UpdateJob"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1485,7 +1523,7 @@ func (s *SDK) PostUpdateJob(ctx context.Context, request operations.PostUpdateJo
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

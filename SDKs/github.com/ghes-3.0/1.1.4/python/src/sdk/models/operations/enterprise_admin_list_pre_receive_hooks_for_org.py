@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class EnterpriseAdminListPreReceiveHooksForOrgPathParams:
-    org: str = field(default=None, metadata={'path_param': { 'field_name': 'org', 'style': 'simple', 'explode': False }})
+    org: str = field(metadata={'path_param': { 'field_name': 'org', 'style': 'simple', 'explode': False }})
     
 class EnterpriseAdminListPreReceiveHooksForOrgSortEnum(str, Enum):
     CREATED = "created"
@@ -23,13 +27,13 @@ class EnterpriseAdminListPreReceiveHooksForOrgQueryParams:
 
 @dataclass
 class EnterpriseAdminListPreReceiveHooksForOrgRequest:
-    path_params: EnterpriseAdminListPreReceiveHooksForOrgPathParams = field(default=None)
-    query_params: EnterpriseAdminListPreReceiveHooksForOrgQueryParams = field(default=None)
+    path_params: EnterpriseAdminListPreReceiveHooksForOrgPathParams = field()
+    query_params: EnterpriseAdminListPreReceiveHooksForOrgQueryParams = field()
     
 
 @dataclass
 class EnterpriseAdminListPreReceiveHooksForOrgResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     org_pre_receive_hooks: Optional[List[shared.OrgPreReceiveHook]] = field(default=None)
     

@@ -22,9 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TrustedAdvisorCategorySpecificSummary } from "./trustedadvisorcategoryspecificsummary";
+import { TrustedAdvisorResourceDetail } from "./trustedadvisorresourcedetail";
 import { TrustedAdvisorResourcesSummary } from "./trustedadvisorresourcessummary";
 // TrustedAdvisorCheckResult
 /**
@@ -36,27 +36,27 @@ var TrustedAdvisorCheckResult = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=categorySpecificSummary" }),
+        SpeakeasyMetadata({ data: "json, name=categorySpecificSummary" }),
         __metadata("design:type", TrustedAdvisorCategorySpecificSummary)
     ], TrustedAdvisorCheckResult.prototype, "categorySpecificSummary", void 0);
     __decorate([
-        Metadata({ data: "json, name=checkId" }),
+        SpeakeasyMetadata({ data: "json, name=checkId" }),
         __metadata("design:type", String)
     ], TrustedAdvisorCheckResult.prototype, "checkId", void 0);
     __decorate([
-        Metadata({ data: "json, name=flaggedResources", elemType: shared.TrustedAdvisorResourceDetail }),
+        SpeakeasyMetadata({ data: "json, name=flaggedResources", elemType: TrustedAdvisorResourceDetail }),
         __metadata("design:type", Array)
     ], TrustedAdvisorCheckResult.prototype, "flaggedResources", void 0);
     __decorate([
-        Metadata({ data: "json, name=resourcesSummary" }),
+        SpeakeasyMetadata({ data: "json, name=resourcesSummary" }),
         __metadata("design:type", TrustedAdvisorResourcesSummary)
     ], TrustedAdvisorCheckResult.prototype, "resourcesSummary", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], TrustedAdvisorCheckResult.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=timestamp" }),
+        SpeakeasyMetadata({ data: "json, name=timestamp" }),
         __metadata("design:type", String)
     ], TrustedAdvisorCheckResult.prototype, "timestamp", void 0);
     return TrustedAdvisorCheckResult;

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { User } from "./user";
 
+
 export enum EnrollmentTokenAllowPersonalUsageEnum {
-    AllowPersonalUsageUnspecified = "ALLOW_PERSONAL_USAGE_UNSPECIFIED"
-,    PersonalUsageAllowed = "PERSONAL_USAGE_ALLOWED"
-,    PersonalUsageDisallowed = "PERSONAL_USAGE_DISALLOWED"
+    AllowPersonalUsageUnspecified = "ALLOW_PERSONAL_USAGE_UNSPECIFIED",
+    PersonalUsageAllowed = "PERSONAL_USAGE_ALLOWED",
+    PersonalUsageDisallowed = "PERSONAL_USAGE_DISALLOWED"
 }
 
 
@@ -13,33 +14,33 @@ export enum EnrollmentTokenAllowPersonalUsageEnum {
  * An enrollment token.
 **/
 export class EnrollmentToken extends SpeakeasyBase {
-  @Metadata({ data: "json, name=additionalData" })
+  @SpeakeasyMetadata({ data: "json, name=additionalData" })
   additionalData?: string;
 
-  @Metadata({ data: "json, name=allowPersonalUsage" })
+  @SpeakeasyMetadata({ data: "json, name=allowPersonalUsage" })
   allowPersonalUsage?: EnrollmentTokenAllowPersonalUsageEnum;
 
-  @Metadata({ data: "json, name=duration" })
+  @SpeakeasyMetadata({ data: "json, name=duration" })
   duration?: string;
 
-  @Metadata({ data: "json, name=expirationTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=expirationTimestamp" })
   expirationTimestamp?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=oneTimeOnly" })
+  @SpeakeasyMetadata({ data: "json, name=oneTimeOnly" })
   oneTimeOnly?: boolean;
 
-  @Metadata({ data: "json, name=policyName" })
+  @SpeakeasyMetadata({ data: "json, name=policyName" })
   policyName?: string;
 
-  @Metadata({ data: "json, name=qrCode" })
+  @SpeakeasyMetadata({ data: "json, name=qrCode" })
   qrCode?: string;
 
-  @Metadata({ data: "json, name=user" })
+  @SpeakeasyMetadata({ data: "json, name=user" })
   user?: User;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }

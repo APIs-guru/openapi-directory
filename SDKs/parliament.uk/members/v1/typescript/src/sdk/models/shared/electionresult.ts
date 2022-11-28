@@ -1,43 +1,43 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ElectionCandidate } from "./electioncandidate";
 import { Party } from "./party";
 
 
+
 export class ElectionResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=candidates", elemType: shared.ElectionCandidate })
+  @SpeakeasyMetadata({ data: "json, name=candidates", elemType: ElectionCandidate })
   candidates?: ElectionCandidate[];
 
-  @Metadata({ data: "json, name=constituencyName" })
+  @SpeakeasyMetadata({ data: "json, name=constituencyName" })
   constituencyName?: string;
 
-  @Metadata({ data: "json, name=electionDate" })
+  @SpeakeasyMetadata({ data: "json, name=electionDate" })
   electionDate?: Date;
 
-  @Metadata({ data: "json, name=electionId" })
+  @SpeakeasyMetadata({ data: "json, name=electionId" })
   electionId?: number;
 
-  @Metadata({ data: "json, name=electionTitle" })
+  @SpeakeasyMetadata({ data: "json, name=electionTitle" })
   electionTitle?: string;
 
-  @Metadata({ data: "json, name=electorate" })
+  @SpeakeasyMetadata({ data: "json, name=electorate" })
   electorate?: number;
 
-  @Metadata({ data: "json, name=isGeneralElection" })
+  @SpeakeasyMetadata({ data: "json, name=isGeneralElection" })
   isGeneralElection?: boolean;
 
-  @Metadata({ data: "json, name=isNotional" })
+  @SpeakeasyMetadata({ data: "json, name=isNotional" })
   isNotional?: boolean;
 
-  @Metadata({ data: "json, name=majority" })
+  @SpeakeasyMetadata({ data: "json, name=majority" })
   majority?: number;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result?: string;
 
-  @Metadata({ data: "json, name=turnout" })
+  @SpeakeasyMetadata({ data: "json, name=turnout" })
   turnout?: number;
 
-  @Metadata({ data: "json, name=winningParty" })
+  @SpeakeasyMetadata({ data: "json, name=winningParty" })
   winningParty?: Party;
 }

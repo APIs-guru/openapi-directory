@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -11,19 +12,19 @@ class GetAccountQueryParams:
 
 @dataclass
 class GetAccountSecurity:
-    account_auth: shared.SchemeAccountAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    account_auth: shared.SchemeAccountAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetAccountRequest:
-    query_params: GetAccountQueryParams = field(default=None)
-    security: GetAccountSecurity = field(default=None)
+    query_params: GetAccountQueryParams = field()
+    security: GetAccountSecurity = field()
     
 
 @dataclass
 class GetAccountResponse:
+    content_type: str = field()
+    status_code: int = field()
     account: Optional[dict[str, Any]] = field(default=None)
-    content_type: str = field(default=None)
     service_error: Optional[shared.ServiceError] = field(default=None)
-    status_code: int = field(default=None)
     

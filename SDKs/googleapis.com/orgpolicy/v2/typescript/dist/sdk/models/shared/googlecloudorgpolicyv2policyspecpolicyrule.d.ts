@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GoogleTypeExpr } from "./googletypeexpr";
 import { GoogleCloudOrgpolicyV2PolicySpecPolicyRuleStringValues } from "./googlecloudorgpolicyv2policyspecpolicyrulestringvalues";
 /**

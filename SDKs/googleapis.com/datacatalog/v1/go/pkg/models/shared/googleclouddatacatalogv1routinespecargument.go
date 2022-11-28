@@ -9,6 +9,8 @@ const (
 	GoogleCloudDatacatalogV1RoutineSpecArgumentModeEnumInout           GoogleCloudDatacatalogV1RoutineSpecArgumentModeEnum = "INOUT"
 )
 
+// GoogleCloudDatacatalogV1RoutineSpecArgument
+// Input or output argument of a function or stored procedure.
 type GoogleCloudDatacatalogV1RoutineSpecArgument struct {
 	Mode *GoogleCloudDatacatalogV1RoutineSpecArgumentModeEnum `json:"mode,omitempty"`
 	Name *string                                              `json:"name,omitempty"`

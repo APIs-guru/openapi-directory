@@ -1,29 +1,40 @@
 import { AxiosInstance, AxiosRequestConfig } from "axios";
 import * as operations from "./models/operations";
-declare type OptsFunc = (sdk: SDK) => void;
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://api.deutschebahn.com/reisezentren/v1", "http://api.deutschebahn.com/reisezentren/v1"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
     /**
+     * getReisezentren - Get all station infos
+     *
      * Get all station infos
     **/
-    GetReisezentren(req: operations.GetReisezentrenRequest, config?: AxiosRequestConfig): Promise<operations.GetReisezentrenResponse>;
+    getReisezentren(req: operations.GetReisezentrenRequest, config?: AxiosRequestConfig): Promise<operations.GetReisezentrenResponse>;
     /**
+     * getReisezentrenId - Get information about a specific station
+     *
      * Get information about a specific station
     **/
-    GetReisezentrenId(req: operations.GetReisezentrenIdRequest, config?: AxiosRequestConfig): Promise<operations.GetReisezentrenIdResponse>;
+    getReisezentrenId(req: operations.GetReisezentrenIdRequest, config?: AxiosRequestConfig): Promise<operations.GetReisezentrenIdResponse>;
     /**
+     * getReisezentrenLocLatLon - Get information about a station near a location
+     *
      * Get information about a station near a location
     **/
-    GetReisezentrenLocLatLon(req: operations.GetReisezentrenLocLatLonRequest, config?: AxiosRequestConfig): Promise<operations.GetReisezentrenLocLatLonResponse>;
+    getReisezentrenLocLatLon(req: operations.GetReisezentrenLocLatLonRequest, config?: AxiosRequestConfig): Promise<operations.GetReisezentrenLocLatLonResponse>;
     /**
+     * getReisezentrenLocLatLonDist - Get stations in a given radius
+     *
      * Get stations in a given radius
     **/
-    GetReisezentrenLocLatLonDist(req: operations.GetReisezentrenLocLatLonDistRequest, config?: AxiosRequestConfig): Promise<operations.GetReisezentrenLocLatLonDistResponse>;
+    getReisezentrenLocLatLonDist(req: operations.GetReisezentrenLocLatLonDistRequest, config?: AxiosRequestConfig): Promise<operations.GetReisezentrenLocLatLonDistResponse>;
 }
 export {};

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class InitiateMultipartUploadPathParams extends SpeakeasyBase {
     accountId: string;
     vaultName: string;

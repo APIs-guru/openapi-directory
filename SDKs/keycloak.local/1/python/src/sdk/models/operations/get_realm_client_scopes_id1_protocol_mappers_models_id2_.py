@@ -5,19 +5,19 @@ from sdk.models import shared
 
 @dataclass
 class GetRealmClientScopesId1ProtocolMappersModelsId2PathParams:
-    id1: str = field(default=None, metadata={'path_param': { 'field_name': 'id1', 'style': 'simple', 'explode': False }})
-    id2: str = field(default=None, metadata={'path_param': { 'field_name': 'id2', 'style': 'simple', 'explode': False }})
-    realm: str = field(default=None, metadata={'path_param': { 'field_name': 'realm', 'style': 'simple', 'explode': False }})
+    id1: str = field(metadata={'path_param': { 'field_name': 'id1', 'style': 'simple', 'explode': False }})
+    id2: str = field(metadata={'path_param': { 'field_name': 'id2', 'style': 'simple', 'explode': False }})
+    realm: str = field(metadata={'path_param': { 'field_name': 'realm', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetRealmClientScopesId1ProtocolMappersModelsId2Request:
-    path_params: GetRealmClientScopesId1ProtocolMappersModelsId2PathParams = field(default=None)
+    path_params: GetRealmClientScopesId1ProtocolMappersModelsId2PathParams = field()
     
 
 @dataclass
 class GetRealmClientScopesId1ProtocolMappersModelsId2Response:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     protocol_mapper_representation: Optional[shared.ProtocolMapperRepresentation] = field(default=None)
-    status_code: int = field(default=None)
     

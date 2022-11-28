@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteRouteTableActionEnum(str, Enum):
     DELETE_ROUTE_TABLE = "DeleteRouteTable"
@@ -10,10 +14,10 @@ class GetDeleteRouteTableVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteRouteTableQueryParams:
-    action: GetDeleteRouteTableActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDeleteRouteTableActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    route_table_id: str = field(metadata={'query_param': { 'field_name': 'RouteTableId', 'style': 'form', 'explode': True }})
+    version: GetDeleteRouteTableVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    route_table_id: str = field(default=None, metadata={'query_param': { 'field_name': 'RouteTableId', 'style': 'form', 'explode': True }})
-    version: GetDeleteRouteTableVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,12 +33,12 @@ class GetDeleteRouteTableHeaders:
 
 @dataclass
 class GetDeleteRouteTableRequest:
-    query_params: GetDeleteRouteTableQueryParams = field(default=None)
-    headers: GetDeleteRouteTableHeaders = field(default=None)
+    headers: GetDeleteRouteTableHeaders = field()
+    query_params: GetDeleteRouteTableQueryParams = field()
     
 
 @dataclass
 class GetDeleteRouteTableResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

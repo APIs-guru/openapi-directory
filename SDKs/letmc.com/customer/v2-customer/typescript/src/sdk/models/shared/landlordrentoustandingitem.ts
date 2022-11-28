@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LandlordRentOustandingItem
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Outstanding Rent
 **/
 export class LandlordRentOustandingItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DebtDays" })
+  @SpeakeasyMetadata({ data: "json, name=DebtDays" })
   debtDays?: number;
 
-  @Metadata({ data: "json, name=OutstandingRent" })
+  @SpeakeasyMetadata({ data: "json, name=OutstandingRent" })
   outstandingRent?: number;
 
-  @Metadata({ data: "json, name=Property" })
+  @SpeakeasyMetadata({ data: "json, name=Property" })
   property?: string;
 
-  @Metadata({ data: "json, name=Tenant" })
+  @SpeakeasyMetadata({ data: "json, name=Tenant" })
   tenant?: string;
 
-  @Metadata({ data: "json, name=TenantID" })
+  @SpeakeasyMetadata({ data: "json, name=TenantID" })
   tenantId?: string;
 }

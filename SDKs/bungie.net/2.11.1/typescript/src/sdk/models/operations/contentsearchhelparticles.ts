@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ContentSearchHelpArticlesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=searchtext" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=searchtext" })
   searchtext: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=size" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=size" })
   size: string;
 }
 
 
 export class ContentSearchHelpArticlesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ContentSearchHelpArticlesPathParams;
 }
 
 
 export class ContentSearchHelpArticlesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

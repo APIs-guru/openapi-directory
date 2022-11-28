@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostCreateHsmClientCertificateActionEnum(str, Enum):
     CREATE_HSM_CLIENT_CERTIFICATE = "CreateHsmClientCertificate"
@@ -10,8 +14,8 @@ class PostCreateHsmClientCertificateVersionEnum(str, Enum):
 
 @dataclass
 class PostCreateHsmClientCertificateQueryParams:
-    action: PostCreateHsmClientCertificateActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostCreateHsmClientCertificateVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostCreateHsmClientCertificateActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostCreateHsmClientCertificateVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostCreateHsmClientCertificateHeaders:
 
 @dataclass
 class PostCreateHsmClientCertificateRequest:
-    query_params: PostCreateHsmClientCertificateQueryParams = field(default=None)
-    headers: PostCreateHsmClientCertificateHeaders = field(default=None)
+    headers: PostCreateHsmClientCertificateHeaders = field()
+    query_params: PostCreateHsmClientCertificateQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostCreateHsmClientCertificateResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// AnalyzerSummary
+// Contains information about the analyzer.
 type AnalyzerSummary struct {
 	Arn                    string             `json:"arn"`
 	CreatedAt              time.Time          `json:"createdAt"`

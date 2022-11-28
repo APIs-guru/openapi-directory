@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ClientVersionEnum } from "./clientversionenum";
 var GetConfigRequest = /** @class */ (function (_super) {
     __extends(GetConfigRequest, _super);
@@ -30,15 +30,15 @@ var GetConfigRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ClientArn" }),
+        SpeakeasyMetadata({ data: "json, name=ClientArn" }),
         __metadata("design:type", String)
     ], GetConfigRequest.prototype, "clientArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=ClientVersion" }),
+        SpeakeasyMetadata({ data: "json, name=ClientVersion" }),
         __metadata("design:type", String)
     ], GetConfigRequest.prototype, "clientVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=HapgList" }),
+        SpeakeasyMetadata({ data: "json, name=HapgList" }),
         __metadata("design:type", Array)
     ], GetConfigRequest.prototype, "hapgList", void 0);
     return GetConfigRequest;

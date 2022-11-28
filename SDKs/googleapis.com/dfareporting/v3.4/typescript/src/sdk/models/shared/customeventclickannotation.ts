@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CustomEventClickAnnotation
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Annotate a click event.
 **/
 export class CustomEventClickAnnotation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=gclid" })
+  @SpeakeasyMetadata({ data: "json, name=gclid" })
   gclid?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 }

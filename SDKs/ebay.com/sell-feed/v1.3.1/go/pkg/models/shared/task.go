@@ -1,5 +1,7 @@
 package shared
 
+// Task
+// The type that defines the fields for the task details.
 type Task struct {
 	CompletionDate *string        `json:"completionDate,omitempty"`
 	CreationDate   *string        `json:"creationDate,omitempty"`

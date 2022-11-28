@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ImageTypeEnum } from "./imagetypeenum";
 import { ItemFieldsEnum } from "./itemfieldsenum";
+
 
 
 // GetProgramsDto
@@ -8,84 +9,84 @@ import { ItemFieldsEnum } from "./itemfieldsenum";
  * Get programs dto.
 **/
 export class GetProgramsDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ChannelIds" })
+  @SpeakeasyMetadata({ data: "json, name=ChannelIds" })
   channelIds?: string[];
 
-  @Metadata({ data: "json, name=EnableImageTypes" })
+  @SpeakeasyMetadata({ data: "json, name=EnableImageTypes" })
   enableImageTypes?: ImageTypeEnum[];
 
-  @Metadata({ data: "json, name=EnableImages" })
+  @SpeakeasyMetadata({ data: "json, name=EnableImages" })
   enableImages?: boolean;
 
-  @Metadata({ data: "json, name=EnableTotalRecordCount" })
+  @SpeakeasyMetadata({ data: "json, name=EnableTotalRecordCount" })
   enableTotalRecordCount?: boolean;
 
-  @Metadata({ data: "json, name=EnableUserData" })
+  @SpeakeasyMetadata({ data: "json, name=EnableUserData" })
   enableUserData?: boolean;
 
-  @Metadata({ data: "json, name=Fields" })
+  @SpeakeasyMetadata({ data: "json, name=Fields" })
   fields?: ItemFieldsEnum[];
 
-  @Metadata({ data: "json, name=GenreIds" })
+  @SpeakeasyMetadata({ data: "json, name=GenreIds" })
   genreIds?: string[];
 
-  @Metadata({ data: "json, name=Genres" })
+  @SpeakeasyMetadata({ data: "json, name=Genres" })
   genres?: string[];
 
-  @Metadata({ data: "json, name=HasAired" })
+  @SpeakeasyMetadata({ data: "json, name=HasAired" })
   hasAired?: boolean;
 
-  @Metadata({ data: "json, name=ImageTypeLimit" })
+  @SpeakeasyMetadata({ data: "json, name=ImageTypeLimit" })
   imageTypeLimit?: number;
 
-  @Metadata({ data: "json, name=IsAiring" })
+  @SpeakeasyMetadata({ data: "json, name=IsAiring" })
   isAiring?: boolean;
 
-  @Metadata({ data: "json, name=IsKids" })
+  @SpeakeasyMetadata({ data: "json, name=IsKids" })
   isKids?: boolean;
 
-  @Metadata({ data: "json, name=IsMovie" })
+  @SpeakeasyMetadata({ data: "json, name=IsMovie" })
   isMovie?: boolean;
 
-  @Metadata({ data: "json, name=IsNews" })
+  @SpeakeasyMetadata({ data: "json, name=IsNews" })
   isNews?: boolean;
 
-  @Metadata({ data: "json, name=IsSeries" })
+  @SpeakeasyMetadata({ data: "json, name=IsSeries" })
   isSeries?: boolean;
 
-  @Metadata({ data: "json, name=IsSports" })
+  @SpeakeasyMetadata({ data: "json, name=IsSports" })
   isSports?: boolean;
 
-  @Metadata({ data: "json, name=LibrarySeriesId" })
+  @SpeakeasyMetadata({ data: "json, name=LibrarySeriesId" })
   librarySeriesId?: string;
 
-  @Metadata({ data: "json, name=Limit" })
+  @SpeakeasyMetadata({ data: "json, name=Limit" })
   limit?: number;
 
-  @Metadata({ data: "json, name=MaxEndDate" })
+  @SpeakeasyMetadata({ data: "json, name=MaxEndDate" })
   maxEndDate?: Date;
 
-  @Metadata({ data: "json, name=MaxStartDate" })
+  @SpeakeasyMetadata({ data: "json, name=MaxStartDate" })
   maxStartDate?: Date;
 
-  @Metadata({ data: "json, name=MinEndDate" })
+  @SpeakeasyMetadata({ data: "json, name=MinEndDate" })
   minEndDate?: Date;
 
-  @Metadata({ data: "json, name=MinStartDate" })
+  @SpeakeasyMetadata({ data: "json, name=MinStartDate" })
   minStartDate?: Date;
 
-  @Metadata({ data: "json, name=SeriesTimerId" })
+  @SpeakeasyMetadata({ data: "json, name=SeriesTimerId" })
   seriesTimerId?: string;
 
-  @Metadata({ data: "json, name=SortBy" })
+  @SpeakeasyMetadata({ data: "json, name=SortBy" })
   sortBy?: string;
 
-  @Metadata({ data: "json, name=SortOrder" })
+  @SpeakeasyMetadata({ data: "json, name=SortOrder" })
   sortOrder?: string;
 
-  @Metadata({ data: "json, name=StartIndex" })
+  @SpeakeasyMetadata({ data: "json, name=StartIndex" })
   startIndex?: number;
 
-  @Metadata({ data: "json, name=UserId" })
+  @SpeakeasyMetadata({ data: "json, name=UserId" })
   userId?: string;
 }

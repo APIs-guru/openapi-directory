@@ -17,14 +17,14 @@ type AddItemForPortfolioRequestBody struct {
 	Data *shared.PortfolioAddItemRequest `json:"data,omitempty"`
 }
 
+type AddItemForPortfolio200ApplicationJSON struct {
+	Data map[string]interface{} `json:"data,omitempty"`
+}
+
 type AddItemForPortfolioRequest struct {
 	PathParams  AddItemForPortfolioPathParams
 	QueryParams AddItemForPortfolioQueryParams
 	Request     AddItemForPortfolioRequestBody `request:"mediaType=application/json"`
-}
-
-type AddItemForPortfolio200ApplicationJSON struct {
-	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type AddItemForPortfolioResponse struct {

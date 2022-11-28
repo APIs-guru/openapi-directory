@@ -41,6 +41,8 @@ type CategoryResourceRelationships struct {
 	Parent   CategoryResourceRelationshipsParent   `json:"parent"`
 }
 
+// CategoryResource
+// Provides information about a category and its ancestry.
 type CategoryResource struct {
 	Attributes    CategoryResourceAttributes    `json:"attributes"`
 	ID            string                        `json:"id"`

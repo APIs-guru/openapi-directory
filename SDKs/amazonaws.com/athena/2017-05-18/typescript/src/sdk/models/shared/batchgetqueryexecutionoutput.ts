@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { QueryExecution } from "./queryexecution";
 import { UnprocessedQueryExecutionId } from "./unprocessedqueryexecutionid";
 
 
+
 export class BatchGetQueryExecutionOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=QueryExecutions", elemType: shared.QueryExecution })
+  @SpeakeasyMetadata({ data: "json, name=QueryExecutions", elemType: QueryExecution })
   queryExecutions?: QueryExecution[];
 
-  @Metadata({ data: "json, name=UnprocessedQueryExecutionIds", elemType: shared.UnprocessedQueryExecutionId })
+  @SpeakeasyMetadata({ data: "json, name=UnprocessedQueryExecutionIds", elemType: UnprocessedQueryExecutionId })
   unprocessedQueryExecutionIds?: UnprocessedQueryExecutionId[];
 }

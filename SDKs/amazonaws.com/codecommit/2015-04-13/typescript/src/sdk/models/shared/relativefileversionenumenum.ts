@@ -1,6 +1,7 @@
 
 
+
 export enum RelativeFileVersionEnumEnum {
-    Before = "BEFORE"
-,    After = "AFTER"
+    Before = "BEFORE",
+    After = "AFTER"
 }

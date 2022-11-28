@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetUsersUserIDPermissionsPathParams:
-    user_id: str = field(default=None, metadata={'path_param': { 'field_name': 'user_id', 'style': 'simple', 'explode': False }})
+    user_id: str = field(metadata={'path_param': { 'field_name': 'user_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,13 +26,13 @@ class GetUsersUserIDPermissionsQueryParams:
 
 @dataclass
 class GetUsersUserIDPermissionsRequest:
-    path_params: GetUsersUserIDPermissionsPathParams = field(default=None)
-    query_params: GetUsersUserIDPermissionsQueryParams = field(default=None)
+    path_params: GetUsersUserIDPermissionsPathParams = field()
+    query_params: GetUsersUserIDPermissionsQueryParams = field()
     
 
 @dataclass
 class GetUsersUserIDPermissionsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     permission_entities: Optional[List[shared.PermissionEntity]] = field(default=None)
-    status_code: int = field(default=None)
     

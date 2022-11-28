@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetSearchQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=terms" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=terms" })
   terms: string;
 }
 
 
-export class GetSearchRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetSearchQueryParams;
-}
-
-
 export class GetSearch200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=calls_per_month" })
+  @SpeakeasyMetadata({ data: "json, name=calls_per_month" })
   callsPerMonth?: string;
 
-  @Metadata({ data: "json, name=companies", elemType: shared.SimilarCompanySearch })
+  @SpeakeasyMetadata({ data: "json, name=companies", elemType: shared.SimilarCompanySearch })
   companies?: shared.SimilarCompanySearch[];
 
-  @Metadata({ data: "json, name=count_remaining" })
+  @SpeakeasyMetadata({ data: "json, name=count_remaining" })
   countRemaining?: string;
 
-  @Metadata({ data: "json, name=renewal_date" })
+  @SpeakeasyMetadata({ data: "json, name=renewal_date" })
   renewalDate?: string;
 }
 
 
+export class GetSearchRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetSearchQueryParams;
+}
+
+
 export class GetSearchResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getSearch200ApplicationJsonObject?: GetSearch200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

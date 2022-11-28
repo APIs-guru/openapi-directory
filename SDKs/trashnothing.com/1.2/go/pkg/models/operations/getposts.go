@@ -22,27 +22,10 @@ type GetPostsQueryParams struct {
 	UserState        *string    `queryParam:"style=form,explode=true,name=user_state"`
 }
 
-type GetPostsSecurityOption1 struct {
-	Oauth2Implicit shared.SchemeOauth2Implicit `security:"scheme,type=oauth2"`
-}
-
-type GetPostsSecurityOption2 struct {
-	Oauth2Code shared.SchemeOauth2Code `security:"scheme,type=oauth2"`
-}
-
-type GetPostsSecurityOption3 struct {
-	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=query"`
-}
-
 type GetPostsSecurity struct {
-	Option1 *GetPostsSecurityOption1 `security:"option"`
-	Option2 *GetPostsSecurityOption2 `security:"option"`
-	Option3 *GetPostsSecurityOption3 `security:"option"`
-}
-
-type GetPostsRequest struct {
-	QueryParams GetPostsQueryParams
-	Security    GetPostsSecurity
+	Oauth2Implicit *shared.SchemeOauth2Implicit `security:"scheme,type=oauth2"`
+	Oauth2Code     *shared.SchemeOauth2Code     `security:"scheme,type=oauth2"`
+	APIKey         *shared.SchemeAPIKey         `security:"scheme,type=apiKey,subtype=query"`
 }
 
 type GetPosts200ApplicationJSON struct {
@@ -55,6 +38,11 @@ type GetPosts200ApplicationJSON struct {
 	PerPage          *int64        `json:"per_page,omitempty"`
 	Posts            []shared.Post `json:"posts,omitempty"`
 	StartIndex       *int64        `json:"start_index,omitempty"`
+}
+
+type GetPostsRequest struct {
+	QueryParams GetPostsQueryParams
+	Security    GetPostsSecurity
 }
 
 type GetPostsResponse struct {

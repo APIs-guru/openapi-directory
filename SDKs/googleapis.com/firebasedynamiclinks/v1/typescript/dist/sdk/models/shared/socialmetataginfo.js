@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // SocialMetaTagInfo
 /**
  * Parameters for social meta tag params. Used to set meta tag data for link previews on social sites.
@@ -33,15 +33,15 @@ var SocialMetaTagInfo = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=socialDescription" }),
+        SpeakeasyMetadata({ data: "json, name=socialDescription" }),
         __metadata("design:type", String)
     ], SocialMetaTagInfo.prototype, "socialDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=socialImageLink" }),
+        SpeakeasyMetadata({ data: "json, name=socialImageLink" }),
         __metadata("design:type", String)
     ], SocialMetaTagInfo.prototype, "socialImageLink", void 0);
     __decorate([
-        Metadata({ data: "json, name=socialTitle" }),
+        SpeakeasyMetadata({ data: "json, name=socialTitle" }),
         __metadata("design:type", String)
     ], SocialMetaTagInfo.prototype, "socialTitle", void 0);
     return SocialMetaTagInfo;

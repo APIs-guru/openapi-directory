@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GetRecaptchaParamResponse
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Response of getting recaptcha param.
 **/
 export class GetRecaptchaParamResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=recaptchaSiteKey" })
+  @SpeakeasyMetadata({ data: "json, name=recaptchaSiteKey" })
   recaptchaSiteKey?: string;
 
-  @Metadata({ data: "json, name=recaptchaStoken" })
+  @SpeakeasyMetadata({ data: "json, name=recaptchaStoken" })
   recaptchaStoken?: string;
 }

@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GridRange } from "./gridrange";
 import { SortSpec } from "./sortspec";
+
 
 
 // SortRangeRequest
@@ -9,9 +9,9 @@ import { SortSpec } from "./sortspec";
  * Sorts data in rows based on a sort order per column.
 **/
 export class SortRangeRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=range" })
+  @SpeakeasyMetadata({ data: "json, name=range" })
   range?: GridRange;
 
-  @Metadata({ data: "json, name=sortSpecs", elemType: shared.SortSpec })
+  @SpeakeasyMetadata({ data: "json, name=sortSpecs", elemType: SortSpec })
   sortSpecs?: SortSpec[];
 }

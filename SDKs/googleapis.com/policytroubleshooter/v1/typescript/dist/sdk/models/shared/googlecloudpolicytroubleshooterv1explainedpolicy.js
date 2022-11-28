@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GoogleCloudPolicytroubleshooterV1BindingExplanation } from "./googlecloudpolicytroubleshooterv1bindingexplanation";
 import { GoogleIamV1Policy } from "./googleiamv1policy";
 export var GoogleCloudPolicytroubleshooterV1ExplainedPolicyAccessEnum;
 (function (GoogleCloudPolicytroubleshooterV1ExplainedPolicyAccessEnum) {
@@ -49,23 +49,23 @@ var GoogleCloudPolicytroubleshooterV1ExplainedPolicy = /** @class */ (function (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=access" }),
+        SpeakeasyMetadata({ data: "json, name=access" }),
         __metadata("design:type", String)
     ], GoogleCloudPolicytroubleshooterV1ExplainedPolicy.prototype, "access", void 0);
     __decorate([
-        Metadata({ data: "json, name=bindingExplanations", elemType: shared.GoogleCloudPolicytroubleshooterV1BindingExplanation }),
+        SpeakeasyMetadata({ data: "json, name=bindingExplanations", elemType: GoogleCloudPolicytroubleshooterV1BindingExplanation }),
         __metadata("design:type", Array)
     ], GoogleCloudPolicytroubleshooterV1ExplainedPolicy.prototype, "bindingExplanations", void 0);
     __decorate([
-        Metadata({ data: "json, name=fullResourceName" }),
+        SpeakeasyMetadata({ data: "json, name=fullResourceName" }),
         __metadata("design:type", String)
     ], GoogleCloudPolicytroubleshooterV1ExplainedPolicy.prototype, "fullResourceName", void 0);
     __decorate([
-        Metadata({ data: "json, name=policy" }),
+        SpeakeasyMetadata({ data: "json, name=policy" }),
         __metadata("design:type", GoogleIamV1Policy)
     ], GoogleCloudPolicytroubleshooterV1ExplainedPolicy.prototype, "policy", void 0);
     __decorate([
-        Metadata({ data: "json, name=relevance" }),
+        SpeakeasyMetadata({ data: "json, name=relevance" }),
         __metadata("design:type", String)
     ], GoogleCloudPolicytroubleshooterV1ExplainedPolicy.prototype, "relevance", void 0);
     return GoogleCloudPolicytroubleshooterV1ExplainedPolicy;

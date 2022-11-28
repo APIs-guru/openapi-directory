@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ChannelStorageSummary } from "./channelstoragesummary";
 import { ChannelStatusEnum } from "./channelstatusenum";
+
 
 
 // ChannelSummary
@@ -8,21 +9,21 @@ import { ChannelStatusEnum } from "./channelstatusenum";
  * A summary of information about a channel.
 **/
 export class ChannelSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=channelName" })
+  @SpeakeasyMetadata({ data: "json, name=channelName" })
   channelName?: string;
 
-  @Metadata({ data: "json, name=channelStorage" })
+  @SpeakeasyMetadata({ data: "json, name=channelStorage" })
   channelStorage?: ChannelStorageSummary;
 
-  @Metadata({ data: "json, name=creationTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=lastMessageArrivalTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastMessageArrivalTime" })
   lastMessageArrivalTime?: Date;
 
-  @Metadata({ data: "json, name=lastUpdateTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdateTime" })
   lastUpdateTime?: Date;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: ChannelStatusEnum;
 }

@@ -13,6 +13,8 @@ const (
 	ParameterTypeEnumTagReference     ParameterTypeEnum = "tagReference"
 )
 
+// Parameter
+// Represents a Google Tag Manager Parameter.
 type Parameter struct {
 	Key   *string            `json:"key,omitempty"`
 	List  []Parameter        `json:"list,omitempty"`

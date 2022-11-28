@@ -1,14 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Color } from "./color";
 import { ColorStyle } from "./colorstyle";
 import { DataSourceColumnReference } from "./datasourcecolumnreference";
-import { Color } from "./color";
-import { ColorStyle } from "./colorstyle";
+
 
 export enum SortSpecSortOrderEnum {
-    SortOrderUnspecified = "SORT_ORDER_UNSPECIFIED"
-,    Ascending = "ASCENDING"
-,    Descending = "DESCENDING"
+    SortOrderUnspecified = "SORT_ORDER_UNSPECIFIED",
+    Ascending = "ASCENDING",
+    Descending = "DESCENDING"
 }
 
 
@@ -17,24 +16,24 @@ export enum SortSpecSortOrderEnum {
  * A sort order associated with a specific column or row.
 **/
 export class SortSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=backgroundColor" })
+  @SpeakeasyMetadata({ data: "json, name=backgroundColor" })
   backgroundColor?: Color;
 
-  @Metadata({ data: "json, name=backgroundColorStyle" })
+  @SpeakeasyMetadata({ data: "json, name=backgroundColorStyle" })
   backgroundColorStyle?: ColorStyle;
 
-  @Metadata({ data: "json, name=dataSourceColumnReference" })
+  @SpeakeasyMetadata({ data: "json, name=dataSourceColumnReference" })
   dataSourceColumnReference?: DataSourceColumnReference;
 
-  @Metadata({ data: "json, name=dimensionIndex" })
+  @SpeakeasyMetadata({ data: "json, name=dimensionIndex" })
   dimensionIndex?: number;
 
-  @Metadata({ data: "json, name=foregroundColor" })
+  @SpeakeasyMetadata({ data: "json, name=foregroundColor" })
   foregroundColor?: Color;
 
-  @Metadata({ data: "json, name=foregroundColorStyle" })
+  @SpeakeasyMetadata({ data: "json, name=foregroundColorStyle" })
   foregroundColorStyle?: ColorStyle;
 
-  @Metadata({ data: "json, name=sortOrder" })
+  @SpeakeasyMetadata({ data: "json, name=sortOrder" })
   sortOrder?: SortSpecSortOrderEnum;
 }

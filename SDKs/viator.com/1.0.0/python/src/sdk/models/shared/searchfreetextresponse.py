@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class SearchFreetextResponseSearchTypeEnum(str, Enum):
     PRODUCT = "PRODUCT"
@@ -12,6 +14,6 @@ class SearchFreetextResponseSearchTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class SearchFreetextResponse:
-    search_type: Optional[SearchFreetextResponseSearchTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'searchType' }})
-    sort_order: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sortOrder' }})
+    search_type: Optional[SearchFreetextResponseSearchTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('searchType') }})
+    sort_order: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sortOrder') }})
     

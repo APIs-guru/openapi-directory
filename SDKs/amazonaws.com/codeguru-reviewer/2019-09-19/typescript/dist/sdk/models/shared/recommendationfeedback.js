@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // RecommendationFeedback
 /**
  *  Information about the recommendation feedback.
@@ -33,27 +33,27 @@ var RecommendationFeedback = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CodeReviewArn" }),
+        SpeakeasyMetadata({ data: "json, name=CodeReviewArn" }),
         __metadata("design:type", String)
     ], RecommendationFeedback.prototype, "codeReviewArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=CreatedTimeStamp" }),
+        SpeakeasyMetadata({ data: "json, name=CreatedTimeStamp" }),
         __metadata("design:type", Date)
     ], RecommendationFeedback.prototype, "createdTimeStamp", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastUpdatedTimeStamp" }),
+        SpeakeasyMetadata({ data: "json, name=LastUpdatedTimeStamp" }),
         __metadata("design:type", Date)
     ], RecommendationFeedback.prototype, "lastUpdatedTimeStamp", void 0);
     __decorate([
-        Metadata({ data: "json, name=Reactions" }),
+        SpeakeasyMetadata({ data: "json, name=Reactions" }),
         __metadata("design:type", Array)
     ], RecommendationFeedback.prototype, "reactions", void 0);
     __decorate([
-        Metadata({ data: "json, name=RecommendationId" }),
+        SpeakeasyMetadata({ data: "json, name=RecommendationId" }),
         __metadata("design:type", String)
     ], RecommendationFeedback.prototype, "recommendationId", void 0);
     __decorate([
-        Metadata({ data: "json, name=UserId" }),
+        SpeakeasyMetadata({ data: "json, name=UserId" }),
         __metadata("design:type", String)
     ], RecommendationFeedback.prototype, "userId", void 0);
     return RecommendationFeedback;

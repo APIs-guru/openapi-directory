@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReviewActionStatusEnum } from "./reviewactionstatusenum";
+
 
 
 // ReviewActionDetail
@@ -7,27 +8,27 @@ import { ReviewActionStatusEnum } from "./reviewactionstatusenum";
  *  Both the AssignmentReviewReport and the HITReviewReport elements contains the ReviewActionDetail data structure. This structure is returned multiple times for each action specified in the Review Policy. 
 **/
 export class ReviewActionDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ActionId" })
+  @SpeakeasyMetadata({ data: "json, name=ActionId" })
   actionId?: string;
 
-  @Metadata({ data: "json, name=ActionName" })
+  @SpeakeasyMetadata({ data: "json, name=ActionName" })
   actionName?: string;
 
-  @Metadata({ data: "json, name=CompleteTime" })
+  @SpeakeasyMetadata({ data: "json, name=CompleteTime" })
   completeTime?: Date;
 
-  @Metadata({ data: "json, name=ErrorCode" })
+  @SpeakeasyMetadata({ data: "json, name=ErrorCode" })
   errorCode?: string;
 
-  @Metadata({ data: "json, name=Result" })
+  @SpeakeasyMetadata({ data: "json, name=Result" })
   result?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: ReviewActionStatusEnum;
 
-  @Metadata({ data: "json, name=TargetId" })
+  @SpeakeasyMetadata({ data: "json, name=TargetId" })
   targetId?: string;
 
-  @Metadata({ data: "json, name=TargetType" })
+  @SpeakeasyMetadata({ data: "json, name=TargetType" })
   targetType?: string;
 }

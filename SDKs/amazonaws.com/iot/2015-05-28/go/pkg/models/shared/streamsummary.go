@@ -1,5 +1,7 @@
 package shared
 
+// StreamSummary
+// A summary of a stream.
 type StreamSummary struct {
 	Description   *string `json:"description,omitempty"`
 	StreamArn     *string `json:"streamArn,omitempty"`

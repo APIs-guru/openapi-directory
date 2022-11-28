@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var StoryGetQueryParams = /** @class */ (function (_super) {
     __extends(StoryGetQueryParams, _super);
@@ -30,11 +30,11 @@ var StoryGetQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=include_outline" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=include_outline" }),
         __metadata("design:type", Boolean)
     ], StoryGetQueryParams.prototype, "includeOutline", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=include_relationships" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=include_relationships" }),
         __metadata("design:type", Boolean)
     ], StoryGetQueryParams.prototype, "includeRelationships", void 0);
     return StoryGetQueryParams;
@@ -46,7 +46,7 @@ var StoryGetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", StoryGetQueryParams)
     ], StoryGetRequest.prototype, "queryParams", void 0);
     return StoryGetRequest;
@@ -58,19 +58,19 @@ var StoryGetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], StoryGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], StoryGetResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], StoryGetResponse.prototype, "problemDetail", void 0);
     __decorate([
-        Metadata({ elemType: shared.Story }),
+        SpeakeasyMetadata({ elemType: shared.Story }),
         __metadata("design:type", Array)
     ], StoryGetResponse.prototype, "stories", void 0);
     return StoryGetResponse;

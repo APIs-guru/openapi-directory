@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetRealmAdminEventsPathParams:
-    realm: str = field(default=None, metadata={'path_param': { 'field_name': 'realm', 'style': 'simple', 'explode': False }})
+    realm: str = field(metadata={'path_param': { 'field_name': 'realm', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,13 +28,13 @@ class GetRealmAdminEventsQueryParams:
 
 @dataclass
 class GetRealmAdminEventsRequest:
-    path_params: GetRealmAdminEventsPathParams = field(default=None)
-    query_params: GetRealmAdminEventsQueryParams = field(default=None)
+    path_params: GetRealmAdminEventsPathParams = field()
+    query_params: GetRealmAdminEventsQueryParams = field()
     
 
 @dataclass
 class GetRealmAdminEventsResponse:
+    content_type: str = field()
+    status_code: int = field()
     admin_event_representations: Optional[List[shared.AdminEventRepresentation]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

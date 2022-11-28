@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class DeviceTypeTargetingOptionDetailsDeviceTypeEnum(str, Enum):
     DEVICE_TYPE_UNSPECIFIED = "DEVICE_TYPE_UNSPECIFIED"
@@ -13,5 +15,9 @@ class DeviceTypeTargetingOptionDetailsDeviceTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class DeviceTypeTargetingOptionDetails:
-    device_type: Optional[DeviceTypeTargetingOptionDetailsDeviceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deviceType' }})
+    r"""DeviceTypeTargetingOptionDetails
+    Represents a targetable device type. This will be populated in the device_type_details field of a TargetingOption when targeting_type is `TARGETING_TYPE_DEVICE_TYPE`.
+    """
+    
+    device_type: Optional[DeviceTypeTargetingOptionDetailsDeviceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('deviceType') }})
     

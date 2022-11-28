@@ -1,15 +1,18 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 
 
 @dataclass
 class PublishFunction20200531PathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'Name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'Name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class PublishFunction20200531Headers:
-    if_match: str = field(default=None, metadata={'header': { 'field_name': 'If-Match', 'style': 'simple', 'explode': False }})
+    if_match: str = field(metadata={'header': { 'field_name': 'If-Match', 'style': 'simple', 'explode': False }})
     x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm', 'style': 'simple', 'explode': False }})
     x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256', 'style': 'simple', 'explode': False }})
     x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential', 'style': 'simple', 'explode': False }})
@@ -21,13 +24,13 @@ class PublishFunction20200531Headers:
 
 @dataclass
 class PublishFunction20200531Request:
-    path_params: PublishFunction20200531PathParams = field(default=None)
-    headers: PublishFunction20200531Headers = field(default=None)
+    headers: PublishFunction20200531Headers = field()
+    path_params: PublishFunction20200531PathParams = field()
     
 
 @dataclass
 class PublishFunction20200531Response:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

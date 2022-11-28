@@ -22,7 +22,31 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+// ChannelConnectionInput
+/**
+ * A representation of the ChannelConnection resource. A ChannelConnection is a resource which event providers create during the activation process to establish a connection between the provider and the subscriber channel.
+**/
+var ChannelConnectionInput = /** @class */ (function (_super) {
+    __extends(ChannelConnectionInput, _super);
+    function ChannelConnectionInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=activationToken" }),
+        __metadata("design:type", String)
+    ], ChannelConnectionInput.prototype, "activationToken", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=channel" }),
+        __metadata("design:type", String)
+    ], ChannelConnectionInput.prototype, "channel", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=name" }),
+        __metadata("design:type", String)
+    ], ChannelConnectionInput.prototype, "name", void 0);
+    return ChannelConnectionInput;
+}(SpeakeasyBase));
+export { ChannelConnectionInput };
 // ChannelConnection
 /**
  * A representation of the ChannelConnection resource. A ChannelConnection is a resource which event providers create during the activation process to establish a connection between the provider and the subscriber channel.
@@ -33,27 +57,27 @@ var ChannelConnection = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=activationToken" }),
+        SpeakeasyMetadata({ data: "json, name=activationToken" }),
         __metadata("design:type", String)
     ], ChannelConnection.prototype, "activationToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=channel" }),
+        SpeakeasyMetadata({ data: "json, name=channel" }),
         __metadata("design:type", String)
     ], ChannelConnection.prototype, "channel", void 0);
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", String)
     ], ChannelConnection.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], ChannelConnection.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=uid" }),
+        SpeakeasyMetadata({ data: "json, name=uid" }),
         __metadata("design:type", String)
     ], ChannelConnection.prototype, "uid", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateTime" }),
+        SpeakeasyMetadata({ data: "json, name=updateTime" }),
         __metadata("design:type", String)
     ], ChannelConnection.prototype, "updateTime", void 0);
     return ChannelConnection;

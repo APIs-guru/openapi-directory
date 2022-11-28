@@ -12,11 +12,6 @@ type GetChartFavoriteStatusSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type GetChartFavoriteStatusRequest struct {
-	QueryParams GetChartFavoriteStatusQueryParams
-	Security    GetChartFavoriteStatusSecurity
-}
-
 type GetChartFavoriteStatus400ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
 }
@@ -31,6 +26,11 @@ type GetChartFavoriteStatus404ApplicationJSON struct {
 
 type GetChartFavoriteStatus500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type GetChartFavoriteStatusRequest struct {
+	QueryParams GetChartFavoriteStatusQueryParams
+	Security    GetChartFavoriteStatusSecurity
 }
 
 type GetChartFavoriteStatusResponse struct {

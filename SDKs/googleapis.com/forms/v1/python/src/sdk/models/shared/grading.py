@@ -1,18 +1,20 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import correctanswers
-from . import feedback
-from . import feedback
-from . import feedback
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Grading:
-    correct_answers: Optional[correctanswers.CorrectAnswers] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'correctAnswers' }})
-    general_feedback: Optional[feedback.Feedback] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'generalFeedback' }})
-    point_value: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pointValue' }})
-    when_right: Optional[feedback.Feedback] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'whenRight' }})
-    when_wrong: Optional[feedback.Feedback] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'whenWrong' }})
+    r"""Grading
+    Grading for a single question
+    """
+    
+    correct_answers: Optional[CorrectAnswers] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('correctAnswers') }})
+    general_feedback: Optional[Feedback] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('generalFeedback') }})
+    point_value: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pointValue') }})
+    when_right: Optional[Feedback] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('whenRight') }})
+    when_wrong: Optional[Feedback] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('whenWrong') }})
     

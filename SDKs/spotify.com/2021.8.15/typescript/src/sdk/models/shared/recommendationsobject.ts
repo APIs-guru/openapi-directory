@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RecommendationSeedObject } from "./recommendationseedobject";
 import { TrackObject } from "./trackobject";
+
 
 
 // RecommendationsObject
@@ -9,9 +9,9 @@ import { TrackObject } from "./trackobject";
  * https://developer.spotify.com/documentation/web-api/reference/#object-recommendationsobject - Find more info on the official Spotify Web API Reference
 **/
 export class RecommendationsObject extends SpeakeasyBase {
-  @Metadata({ data: "json, name=seeds", elemType: shared.RecommendationSeedObject })
+  @SpeakeasyMetadata({ data: "json, name=seeds", elemType: RecommendationSeedObject })
   seeds?: RecommendationSeedObject[];
 
-  @Metadata({ data: "json, name=tracks", elemType: shared.TrackObject })
+  @SpeakeasyMetadata({ data: "json, name=tracks", elemType: TrackObject })
   tracks?: TrackObject[];
 }

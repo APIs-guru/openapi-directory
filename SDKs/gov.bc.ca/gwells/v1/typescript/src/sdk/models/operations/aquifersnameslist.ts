@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class AquifersNamesListQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search" })
   search?: string;
 }
 
 
 export class AquifersNamesListRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: AquifersNamesListQueryParams;
 }
 
 
 export class AquifersNamesListResponse extends SpeakeasyBase {
-  @Metadata({ elemType: shared.AquiferSerializerBasic })
+  @SpeakeasyMetadata({ elemType: shared.AquiferSerializerBasic })
   aquiferSerializerBasics?: shared.AquiferSerializerBasic[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

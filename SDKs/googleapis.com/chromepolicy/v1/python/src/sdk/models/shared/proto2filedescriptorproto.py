@@ -1,16 +1,21 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import proto2enumdescriptorproto
-from . import proto2descriptorproto
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Proto2FileDescriptorProto:
-    enum_type: Optional[List[proto2enumdescriptorproto.Proto2EnumDescriptorProto]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enumType' }})
-    message_type: Optional[List[proto2descriptorproto.Proto2DescriptorProto]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'messageType' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    package: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'package' }})
-    syntax: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'syntax' }})
+    r"""Proto2FileDescriptorProto
+    Describes a complete .proto file.
+    """
+    
+    enum_type: Optional[List[Proto2EnumDescriptorProto]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('enumType') }})
+    message_type: Optional[List[Proto2DescriptorProto]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('messageType') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    package: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('package') }})
+    syntax: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('syntax') }})
     

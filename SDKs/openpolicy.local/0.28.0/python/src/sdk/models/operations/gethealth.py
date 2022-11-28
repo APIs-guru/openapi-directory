@@ -10,11 +10,11 @@ class GetHealthQueryParams:
 
 @dataclass
 class GetHealthRequest:
-    query_params: GetHealthQueryParams = field(default=None)
+    query_params: GetHealthQueryParams = field()
     
 
 @dataclass
 class GetHealthResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

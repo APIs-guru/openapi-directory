@@ -1,12 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import jsonfilecompression_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class JSONFormatDescriptor:
-    charset: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Charset' }})
-    file_compression: Optional[jsonfilecompression_enum.JSONFileCompressionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FileCompression' }})
+    r"""JSONFormatDescriptor
+    Contains information about how a source JSON data file should be analyzed.
+    """
+    
+    charset: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Charset') }})
+    file_compression: Optional[JSONFileCompressionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FileCompression') }})
     

@@ -1,15 +1,16 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DeparturesGetForStopPathParams:
-    route_type: int = field(default=None, metadata={'path_param': { 'field_name': 'route_type', 'style': 'simple', 'explode': False }})
-    stop_id: int = field(default=None, metadata={'path_param': { 'field_name': 'stop_id', 'style': 'simple', 'explode': False }})
+    route_type: int = field(metadata={'path_param': { 'field_name': 'route_type', 'style': 'simple', 'explode': False }})
+    stop_id: int = field(metadata={'path_param': { 'field_name': 'stop_id', 'style': 'simple', 'explode': False }})
     
 class DeparturesGetForStopExpandEnum(str, Enum):
     ALL = "All"
@@ -41,15 +42,15 @@ class DeparturesGetForStopQueryParams:
 
 @dataclass
 class DeparturesGetForStopRequest:
-    path_params: DeparturesGetForStopPathParams = field(default=None)
-    query_params: DeparturesGetForStopQueryParams = field(default=None)
+    path_params: DeparturesGetForStopPathParams = field()
+    query_params: DeparturesGetForStopQueryParams = field()
     
 
 @dataclass
 class DeparturesGetForStopResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     v3_departures_response: Optional[shared.V3DeparturesResponse] = field(default=None)
     v3_error_response: Optional[shared.V3ErrorResponse] = field(default=None)
     

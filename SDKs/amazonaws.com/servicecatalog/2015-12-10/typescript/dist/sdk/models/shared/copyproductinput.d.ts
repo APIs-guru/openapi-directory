@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CopyOptionEnum } from "./copyoptionenum";
 export declare class CopyProductInput extends SpeakeasyBase {
     acceptLanguage?: string;

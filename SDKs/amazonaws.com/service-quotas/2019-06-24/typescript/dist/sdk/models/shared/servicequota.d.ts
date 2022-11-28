@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ErrorReason } from "./errorreason";
 import { QuotaPeriod } from "./quotaperiod";
 import { MetricInfo } from "./metricinfo";

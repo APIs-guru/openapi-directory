@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetTxPathParams = /** @class */ (function (_super) {
     __extends(GetTxPathParams, _super);
@@ -30,7 +30,7 @@ var GetTxPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=txid" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=txid" }),
         __metadata("design:type", String)
     ], GetTxPathParams.prototype, "txid", void 0);
     return GetTxPathParams;
@@ -42,7 +42,7 @@ var GetTxRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetTxPathParams)
     ], GetTxRequest.prototype, "pathParams", void 0);
     return GetTxRequest;
@@ -54,15 +54,15 @@ var GetTxResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetTxResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetTxResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.GetTxResponse)
     ], GetTxResponse.prototype, "getTxResponse", void 0);
     return GetTxResponse;

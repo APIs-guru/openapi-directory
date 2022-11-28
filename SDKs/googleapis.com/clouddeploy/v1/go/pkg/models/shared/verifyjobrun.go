@@ -10,6 +10,8 @@ const (
 	VerifyJobRunFailureCauseEnumVerificationConfigNotFound VerifyJobRunFailureCauseEnum = "VERIFICATION_CONFIG_NOT_FOUND"
 )
 
+// VerifyJobRun
+// VerifyJobRun contains information specific to a verify `JobRun`.
 type VerifyJobRun struct {
 	ArtifactURI    *string                       `json:"artifactUri,omitempty"`
 	Build          *string                       `json:"build,omitempty"`

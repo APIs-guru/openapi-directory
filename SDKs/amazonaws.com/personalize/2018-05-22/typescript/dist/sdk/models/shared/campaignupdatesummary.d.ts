@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CampaignConfig } from "./campaignconfig";
 /**
  * Provides a summary of the properties of a campaign update. For a complete listing, call the <a>DescribeCampaign</a> API.

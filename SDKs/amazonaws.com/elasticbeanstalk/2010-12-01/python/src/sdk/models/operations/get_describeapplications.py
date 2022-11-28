@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetDescribeApplicationsActionEnum(str, Enum):
     DESCRIBE_APPLICATIONS = "DescribeApplications"
@@ -10,9 +14,9 @@ class GetDescribeApplicationsVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeApplicationsQueryParams:
-    action: GetDescribeApplicationsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribeApplicationsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDescribeApplicationsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     application_names: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'ApplicationNames', 'style': 'form', 'explode': True }})
-    version: GetDescribeApplicationsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetDescribeApplicationsHeaders:
 
 @dataclass
 class GetDescribeApplicationsRequest:
-    query_params: GetDescribeApplicationsQueryParams = field(default=None)
-    headers: GetDescribeApplicationsHeaders = field(default=None)
+    headers: GetDescribeApplicationsHeaders = field()
+    query_params: GetDescribeApplicationsQueryParams = field()
     
 
 @dataclass
 class GetDescribeApplicationsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

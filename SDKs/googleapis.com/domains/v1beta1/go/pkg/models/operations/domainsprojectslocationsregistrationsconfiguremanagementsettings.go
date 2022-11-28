@@ -30,7 +30,7 @@ type DomainsProjectsLocationsRegistrationsConfigureManagementSettingsSecurity st
 type DomainsProjectsLocationsRegistrationsConfigureManagementSettingsRequest struct {
 	PathParams  DomainsProjectsLocationsRegistrationsConfigureManagementSettingsPathParams
 	QueryParams DomainsProjectsLocationsRegistrationsConfigureManagementSettingsQueryParams
-	Request     *shared.ConfigureManagementSettingsRequest `request:"mediaType=application/json"`
+	Request     *shared.ConfigureManagementSettingsRequestInput `request:"mediaType=application/json"`
 	Security    DomainsProjectsLocationsRegistrationsConfigureManagementSettingsSecurity
 }
 

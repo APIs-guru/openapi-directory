@@ -15,6 +15,8 @@ const (
 	ExecutionStateEnumInitializing     ExecutionStateEnum = "INITIALIZING"
 )
 
+// Execution
+// The definition of a single executed notebook.
 type Execution struct {
 	CreateTime         *string             `json:"createTime,omitempty"`
 	Description        *string             `json:"description,omitempty"`
@@ -25,4 +27,12 @@ type Execution struct {
 	OutputNotebookFile *string             `json:"outputNotebookFile,omitempty"`
 	State              *ExecutionStateEnum `json:"state,omitempty"`
 	UpdateTime         *string             `json:"updateTime,omitempty"`
+}
+
+// ExecutionInput
+// The definition of a single executed notebook.
+type ExecutionInput struct {
+	Description        *string            `json:"description,omitempty"`
+	ExecutionTemplate  *ExecutionTemplate `json:"executionTemplate,omitempty"`
+	OutputNotebookFile *string            `json:"outputNotebookFile,omitempty"`
 }

@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import dimension
-from . import dimension
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SectionColumnProperties:
-    padding_end: Optional[dimension.Dimension] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'paddingEnd' }})
-    width: Optional[dimension.Dimension] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'width' }})
+    r"""SectionColumnProperties
+    Properties that apply to a section's column.
+    """
+    
+    padding_end: Optional[Dimension] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('paddingEnd') }})
+    width: Optional[Dimension] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('width') }})
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // DeviceRegistryEnrichActivity
 /**
  * An activity that adds data from the IoT device registry to your message.
@@ -33,23 +33,23 @@ var DeviceRegistryEnrichActivity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=attribute" }),
+        SpeakeasyMetadata({ data: "json, name=attribute" }),
         __metadata("design:type", String)
     ], DeviceRegistryEnrichActivity.prototype, "attribute", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], DeviceRegistryEnrichActivity.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=next" }),
+        SpeakeasyMetadata({ data: "json, name=next" }),
         __metadata("design:type", String)
     ], DeviceRegistryEnrichActivity.prototype, "next", void 0);
     __decorate([
-        Metadata({ data: "json, name=roleArn" }),
+        SpeakeasyMetadata({ data: "json, name=roleArn" }),
         __metadata("design:type", String)
     ], DeviceRegistryEnrichActivity.prototype, "roleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=thingName" }),
+        SpeakeasyMetadata({ data: "json, name=thingName" }),
         __metadata("design:type", String)
     ], DeviceRegistryEnrichActivity.prototype, "thingName", void 0);
     return DeviceRegistryEnrichActivity;

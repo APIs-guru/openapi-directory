@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CreatePlaylistDto
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Create new playlist dto.
 **/
 export class CreatePlaylistDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Ids" })
+  @SpeakeasyMetadata({ data: "json, name=Ids" })
   ids?: string[];
 
-  @Metadata({ data: "json, name=MediaType" })
+  @SpeakeasyMetadata({ data: "json, name=MediaType" })
   mediaType?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=UserId" })
+  @SpeakeasyMetadata({ data: "json, name=UserId" })
   userId?: string;
 }

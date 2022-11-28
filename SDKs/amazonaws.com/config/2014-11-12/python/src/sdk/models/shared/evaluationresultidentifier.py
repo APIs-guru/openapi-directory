@@ -1,15 +1,20 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import evaluationresultqualifier
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class EvaluationResultIdentifier:
-    evaluation_result_qualifier: Optional[evaluationresultqualifier.EvaluationResultQualifier] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EvaluationResultQualifier' }})
-    ordering_timestamp: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OrderingTimestamp', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    r"""EvaluationResultIdentifier
+    Uniquely identifies an evaluation result.
+    """
+    
+    evaluation_result_qualifier: Optional[EvaluationResultQualifier] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('EvaluationResultQualifier') }})
+    ordering_timestamp: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('OrderingTimestamp'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     

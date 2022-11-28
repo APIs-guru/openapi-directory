@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PreprocessingUnrotateRequestBodyImageFile extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, content=true" })
+  @SpeakeasyMetadata({ data: "multipart_form, content=true" })
   content: Uint8Array;
 
-  @Metadata({ data: "multipart_form, name=imageFile" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=imageFile" })
   imageFile: string;
 }
 
 
 export class PreprocessingUnrotateRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, file=true" })
+  @SpeakeasyMetadata({ data: "multipart_form, file=true" })
   imageFile: PreprocessingUnrotateRequestBodyImageFile;
 }
 
 
 export class PreprocessingUnrotateSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   apikey: shared.SchemeApikey;
 }
 
 
 export class PreprocessingUnrotateRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=multipart/form-data" })
+  @SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" })
   request: PreprocessingUnrotateRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: PreprocessingUnrotateSecurity;
 }
 
 
 export class PreprocessingUnrotateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   preprocessingUnrotate200ApplicationJsonByteString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   preprocessingUnrotate200ApplicationXmlByteString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   preprocessingUnrotate200TextJsonByteString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   preprocessingUnrotate200TextXmlByteString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

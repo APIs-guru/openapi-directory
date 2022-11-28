@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DescribeCasesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=afterTime" })
+  @SpeakeasyMetadata({ data: "json, name=afterTime" })
   afterTime?: string;
 
-  @Metadata({ data: "json, name=beforeTime" })
+  @SpeakeasyMetadata({ data: "json, name=beforeTime" })
   beforeTime?: string;
 
-  @Metadata({ data: "json, name=caseIdList" })
+  @SpeakeasyMetadata({ data: "json, name=caseIdList" })
   caseIdList?: string[];
 
-  @Metadata({ data: "json, name=displayId" })
+  @SpeakeasyMetadata({ data: "json, name=displayId" })
   displayId?: string;
 
-  @Metadata({ data: "json, name=includeCommunications" })
+  @SpeakeasyMetadata({ data: "json, name=includeCommunications" })
   includeCommunications?: boolean;
 
-  @Metadata({ data: "json, name=includeResolvedCases" })
+  @SpeakeasyMetadata({ data: "json, name=includeResolvedCases" })
   includeResolvedCases?: boolean;
 
-  @Metadata({ data: "json, name=language" })
+  @SpeakeasyMetadata({ data: "json, name=language" })
   language?: string;
 
-  @Metadata({ data: "json, name=maxResults" })
+  @SpeakeasyMetadata({ data: "json, name=maxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

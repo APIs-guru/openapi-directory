@@ -32,7 +32,7 @@ type DatamigrationProjectsLocationsConnectionProfilesCreateSecurity struct {
 type DatamigrationProjectsLocationsConnectionProfilesCreateRequest struct {
 	PathParams  DatamigrationProjectsLocationsConnectionProfilesCreatePathParams
 	QueryParams DatamigrationProjectsLocationsConnectionProfilesCreateQueryParams
-	Request     *shared.ConnectionProfile `request:"mediaType=application/json"`
+	Request     *shared.ConnectionProfileInput `request:"mediaType=application/json"`
 	Security    DatamigrationProjectsLocationsConnectionProfilesCreateSecurity
 }
 

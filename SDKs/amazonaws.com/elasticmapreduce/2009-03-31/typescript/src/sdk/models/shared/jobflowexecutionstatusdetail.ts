@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { JobFlowExecutionStateEnum } from "./jobflowexecutionstateenum";
+
 
 
 // JobFlowExecutionStatusDetail
@@ -7,21 +8,21 @@ import { JobFlowExecutionStateEnum } from "./jobflowexecutionstateenum";
  * Describes the status of the cluster (job flow).
 **/
 export class JobFlowExecutionStatusDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreationDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationDateTime" })
   creationDateTime: Date;
 
-  @Metadata({ data: "json, name=EndDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=EndDateTime" })
   endDateTime?: Date;
 
-  @Metadata({ data: "json, name=LastStateChangeReason" })
+  @SpeakeasyMetadata({ data: "json, name=LastStateChangeReason" })
   lastStateChangeReason?: string;
 
-  @Metadata({ data: "json, name=ReadyDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=ReadyDateTime" })
   readyDateTime?: Date;
 
-  @Metadata({ data: "json, name=StartDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=StartDateTime" })
   startDateTime?: Date;
 
-  @Metadata({ data: "json, name=State" })
+  @SpeakeasyMetadata({ data: "json, name=State" })
   state: JobFlowExecutionStateEnum;
 }

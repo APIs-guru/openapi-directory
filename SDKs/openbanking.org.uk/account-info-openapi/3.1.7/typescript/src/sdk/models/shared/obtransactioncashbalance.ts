@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ObCreditDebitCode2Enum } from "./obcreditdebitcode2enum";
 import { ObBalanceType1CodeEnum } from "./obbalancetype1codeenum";
+
 
 
 // ObTransactionCashBalanceAmount
@@ -8,10 +9,10 @@ import { ObBalanceType1CodeEnum } from "./obbalancetype1codeenum";
  * Amount of money of the cash balance after a transaction entry is applied to the account..
 **/
 export class ObTransactionCashBalanceAmount extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Amount" })
+  @SpeakeasyMetadata({ data: "json, name=Amount" })
   amount: string;
 
-  @Metadata({ data: "json, name=Currency" })
+  @SpeakeasyMetadata({ data: "json, name=Currency" })
   currency: string;
 }
 
@@ -21,12 +22,12 @@ export class ObTransactionCashBalanceAmount extends SpeakeasyBase {
  * Set of elements used to define the balance as a numerical representation of the net increases and decreases in an account after a transaction entry is applied to the account.
 **/
 export class ObTransactionCashBalance extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Amount" })
+  @SpeakeasyMetadata({ data: "json, name=Amount" })
   amount: ObTransactionCashBalanceAmount;
 
-  @Metadata({ data: "json, name=CreditDebitIndicator" })
+  @SpeakeasyMetadata({ data: "json, name=CreditDebitIndicator" })
   creditDebitIndicator: ObCreditDebitCode2Enum;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type: ObBalanceType1CodeEnum;
 }

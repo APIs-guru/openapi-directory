@@ -7,6 +7,8 @@ const (
 	ManagedZoneVisibilityEnumPrivate ManagedZoneVisibilityEnum = "PRIVATE"
 )
 
+// ManagedZone
+// A zone is a subtree of the DNS namespace under one administrative responsibility. A ManagedZone is a resource that represents a DNS zone hosted by the Cloud DNS service.
 type ManagedZone struct {
 	CloudLoggingConfig      *ManagedZoneCloudLoggingConfig      `json:"cloudLoggingConfig,omitempty"`
 	CreationTime            *string                             `json:"creationTime,omitempty"`

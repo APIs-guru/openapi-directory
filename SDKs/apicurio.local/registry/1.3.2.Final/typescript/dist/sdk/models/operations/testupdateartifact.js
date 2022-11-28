@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var TestUpdateArtifactPathParams = /** @class */ (function (_super) {
     __extends(TestUpdateArtifactPathParams, _super);
@@ -30,7 +30,7 @@ var TestUpdateArtifactPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=artifactId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=artifactId" }),
         __metadata("design:type", String)
     ], TestUpdateArtifactPathParams.prototype, "artifactId", void 0);
     return TestUpdateArtifactPathParams;
@@ -56,7 +56,7 @@ var TestUpdateArtifactHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Registry-ArtifactType" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Registry-ArtifactType" }),
         __metadata("design:type", String)
     ], TestUpdateArtifactHeaders.prototype, "xRegistryArtifactType", void 0);
     return TestUpdateArtifactHeaders;
@@ -68,15 +68,15 @@ var TestUpdateArtifactRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", TestUpdateArtifactPathParams)
     ], TestUpdateArtifactRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", TestUpdateArtifactHeaders)
     ], TestUpdateArtifactRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=*/*" }),
+        SpeakeasyMetadata({ data: "request, media_type=*/*" }),
         __metadata("design:type", Uint8Array)
     ], TestUpdateArtifactRequest.prototype, "request", void 0);
     return TestUpdateArtifactRequest;
@@ -88,15 +88,15 @@ var TestUpdateArtifactResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], TestUpdateArtifactResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Error)
     ], TestUpdateArtifactResponse.prototype, "error", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], TestUpdateArtifactResponse.prototype, "statusCode", void 0);
     return TestUpdateArtifactResponse;

@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostLoadBalancersIdActionsAddServicePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
@@ -12,25 +13,25 @@ export class PostLoadBalancersIdActionsAddServicePathParams extends SpeakeasyBas
  * Additional configuration for protocol http
 **/
 export class PostLoadBalancersIdActionsAddServiceLoadBalancerServiceLoadBalancerServiceHealthCheckHttp extends SpeakeasyBase {
-  @Metadata({ data: "json, name=domain" })
+  @SpeakeasyMetadata({ data: "json, name=domain" })
   domain: string;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path: string;
 
-  @Metadata({ data: "json, name=response" })
+  @SpeakeasyMetadata({ data: "json, name=response" })
   response?: string;
 
-  @Metadata({ data: "json, name=status_codes" })
+  @SpeakeasyMetadata({ data: "json, name=status_codes" })
   statusCodes?: string[];
 
-  @Metadata({ data: "json, name=tls" })
+  @SpeakeasyMetadata({ data: "json, name=tls" })
   tls?: boolean;
 }
 
 export enum PostLoadBalancersIdActionsAddServiceLoadBalancerServiceLoadBalancerServiceHealthCheckProtocolEnum {
-    Tcp = "tcp"
-,    Http = "http"
+    Tcp = "tcp",
+    Http = "http"
 }
 
 
@@ -39,22 +40,22 @@ export enum PostLoadBalancersIdActionsAddServiceLoadBalancerServiceLoadBalancerS
  * Service health check
 **/
 export class PostLoadBalancersIdActionsAddServiceLoadBalancerServiceLoadBalancerServiceHealthCheck extends SpeakeasyBase {
-  @Metadata({ data: "json, name=http" })
+  @SpeakeasyMetadata({ data: "json, name=http" })
   http?: PostLoadBalancersIdActionsAddServiceLoadBalancerServiceLoadBalancerServiceHealthCheckHttp;
 
-  @Metadata({ data: "json, name=interval" })
+  @SpeakeasyMetadata({ data: "json, name=interval" })
   interval: number;
 
-  @Metadata({ data: "json, name=port" })
+  @SpeakeasyMetadata({ data: "json, name=port" })
   port: number;
 
-  @Metadata({ data: "json, name=protocol" })
+  @SpeakeasyMetadata({ data: "json, name=protocol" })
   protocol: PostLoadBalancersIdActionsAddServiceLoadBalancerServiceLoadBalancerServiceHealthCheckProtocolEnum;
 
-  @Metadata({ data: "json, name=retries" })
+  @SpeakeasyMetadata({ data: "json, name=retries" })
   retries: number;
 
-  @Metadata({ data: "json, name=timeout" })
+  @SpeakeasyMetadata({ data: "json, name=timeout" })
   timeout: number;
 }
 
@@ -64,56 +65,47 @@ export class PostLoadBalancersIdActionsAddServiceLoadBalancerServiceLoadBalancer
  * Configuration option for protocols http and https
 **/
 export class PostLoadBalancersIdActionsAddServiceLoadBalancerServiceHttp extends SpeakeasyBase {
-  @Metadata({ data: "json, name=certificates" })
+  @SpeakeasyMetadata({ data: "json, name=certificates" })
   certificates?: number[];
 
-  @Metadata({ data: "json, name=cookie_lifetime" })
+  @SpeakeasyMetadata({ data: "json, name=cookie_lifetime" })
   cookieLifetime: number;
 
-  @Metadata({ data: "json, name=cookie_name" })
+  @SpeakeasyMetadata({ data: "json, name=cookie_name" })
   cookieName: string;
 
-  @Metadata({ data: "json, name=redirect_http" })
+  @SpeakeasyMetadata({ data: "json, name=redirect_http" })
   redirectHttp?: boolean;
 
-  @Metadata({ data: "json, name=sticky_sessions" })
+  @SpeakeasyMetadata({ data: "json, name=sticky_sessions" })
   stickySessions?: boolean;
 }
 
 export enum PostLoadBalancersIdActionsAddServiceLoadBalancerServiceProtocolEnum {
-    Tcp = "tcp"
-,    Http = "http"
-,    Https = "https"
+    Tcp = "tcp",
+    Http = "http",
+    Https = "https"
 }
 
 
 export class PostLoadBalancersIdActionsAddServiceLoadBalancerService extends SpeakeasyBase {
-  @Metadata({ data: "json, name=destination_port" })
+  @SpeakeasyMetadata({ data: "json, name=destination_port" })
   destinationPort: number;
 
-  @Metadata({ data: "json, name=health_check" })
+  @SpeakeasyMetadata({ data: "json, name=health_check" })
   healthCheck: PostLoadBalancersIdActionsAddServiceLoadBalancerServiceLoadBalancerServiceHealthCheck;
 
-  @Metadata({ data: "json, name=http" })
+  @SpeakeasyMetadata({ data: "json, name=http" })
   http?: PostLoadBalancersIdActionsAddServiceLoadBalancerServiceHttp;
 
-  @Metadata({ data: "json, name=listen_port" })
+  @SpeakeasyMetadata({ data: "json, name=listen_port" })
   listenPort: number;
 
-  @Metadata({ data: "json, name=protocol" })
+  @SpeakeasyMetadata({ data: "json, name=protocol" })
   protocol: PostLoadBalancersIdActionsAddServiceLoadBalancerServiceProtocolEnum;
 
-  @Metadata({ data: "json, name=proxyprotocol" })
+  @SpeakeasyMetadata({ data: "json, name=proxyprotocol" })
   proxyprotocol: boolean;
-}
-
-
-export class PostLoadBalancersIdActionsAddServiceRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: PostLoadBalancersIdActionsAddServicePathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: PostLoadBalancersIdActionsAddServiceLoadBalancerService;
 }
 
 
@@ -122,69 +114,78 @@ export class PostLoadBalancersIdActionsAddServiceRequest extends SpeakeasyBase {
  * Error message for the Action if error occurred, otherwise null
 **/
 export class PostLoadBalancersIdActionsAddServiceActionResponseActionError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 }
 
 
 export class PostLoadBalancersIdActionsAddServiceActionResponseActionResources extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }
 
 export enum PostLoadBalancersIdActionsAddServiceActionResponseActionStatusEnum {
-    Success = "success"
-,    Running = "running"
-,    Error = "error"
+    Success = "success",
+    Running = "running",
+    Error = "error"
 }
 
 
 export class PostLoadBalancersIdActionsAddServiceActionResponseAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=command" })
+  @SpeakeasyMetadata({ data: "json, name=command" })
   command: string;
 
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error: PostLoadBalancersIdActionsAddServiceActionResponseActionError;
 
-  @Metadata({ data: "json, name=finished" })
+  @SpeakeasyMetadata({ data: "json, name=finished" })
   finished: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=progress" })
+  @SpeakeasyMetadata({ data: "json, name=progress" })
   progress: number;
 
-  @Metadata({ data: "json, name=resources", elemType: operations.PostLoadBalancersIdActionsAddServiceActionResponseActionResources })
+  @SpeakeasyMetadata({ data: "json, name=resources", elemType: PostLoadBalancersIdActionsAddServiceActionResponseActionResources })
   resources: PostLoadBalancersIdActionsAddServiceActionResponseActionResources[];
 
-  @Metadata({ data: "json, name=started" })
+  @SpeakeasyMetadata({ data: "json, name=started" })
   started: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: PostLoadBalancersIdActionsAddServiceActionResponseActionStatusEnum;
 }
 
 
 export class PostLoadBalancersIdActionsAddServiceActionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: PostLoadBalancersIdActionsAddServiceActionResponseAction;
 }
 
 
+export class PostLoadBalancersIdActionsAddServiceRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: PostLoadBalancersIdActionsAddServicePathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: PostLoadBalancersIdActionsAddServiceLoadBalancerService;
+}
+
+
 export class PostLoadBalancersIdActionsAddServiceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   actionResponse?: PostLoadBalancersIdActionsAddServiceActionResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Revision } from "./revision";
+
 
 
 // RevisionList
@@ -8,12 +8,12 @@ import { Revision } from "./revision";
  * A list of revisions of a file.
 **/
 export class RevisionList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=revisions", elemType: shared.Revision })
+  @SpeakeasyMetadata({ data: "json, name=revisions", elemType: Revision })
   revisions?: Revision[];
 }

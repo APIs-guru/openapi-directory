@@ -15,13 +15,13 @@ type DeleteTagQueryParams struct {
 	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
+type DeleteTag200ApplicationJSON struct {
+	Data map[string]interface{} `json:"data,omitempty"`
+}
+
 type DeleteTagRequest struct {
 	PathParams  DeleteTagPathParams
 	QueryParams DeleteTagQueryParams
-}
-
-type DeleteTag200ApplicationJSON struct {
-	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type DeleteTagResponse struct {

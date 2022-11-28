@@ -13,6 +13,23 @@ const (
 	GoogleCloudRunV2JobLaunchStageEnumDeprecated             GoogleCloudRunV2JobLaunchStageEnum = "DEPRECATED"
 )
 
+// GoogleCloudRunV2JobInput
+// Job represents the configuration of a single job. A job an immutable resource that references a container image which is run to completion.
+type GoogleCloudRunV2JobInput struct {
+	Annotations            map[string]string                    `json:"annotations,omitempty"`
+	BinaryAuthorization    *GoogleCloudRunV2BinaryAuthorization `json:"binaryAuthorization,omitempty"`
+	Client                 *string                              `json:"client,omitempty"`
+	ClientVersion          *string                              `json:"clientVersion,omitempty"`
+	Labels                 map[string]string                    `json:"labels,omitempty"`
+	LatestCreatedExecution *GoogleCloudRunV2ExecutionReference  `json:"latestCreatedExecution,omitempty"`
+	LaunchStage            *GoogleCloudRunV2JobLaunchStageEnum  `json:"launchStage,omitempty"`
+	Name                   *string                              `json:"name,omitempty"`
+	Template               *GoogleCloudRunV2ExecutionTemplate   `json:"template,omitempty"`
+	TerminalCondition      *GoogleCloudRunV2Condition           `json:"terminalCondition,omitempty"`
+}
+
+// GoogleCloudRunV2Job
+// Job represents the configuration of a single job. A job an immutable resource that references a container image which is run to completion.
 type GoogleCloudRunV2Job struct {
 	Annotations            map[string]string                    `json:"annotations,omitempty"`
 	BinaryAuthorization    *GoogleCloudRunV2BinaryAuthorization `json:"binaryAuthorization,omitempty"`

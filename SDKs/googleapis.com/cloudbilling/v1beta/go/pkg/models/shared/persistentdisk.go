@@ -8,6 +8,8 @@ const (
 	PersistentDiskScopeEnumScopeRegional    PersistentDiskScopeEnum = "SCOPE_REGIONAL"
 )
 
+// PersistentDisk
+// Specification of a persistent disk attached to a VM.
 type PersistentDisk struct {
 	DiskSize        *Usage                   `json:"diskSize,omitempty"`
 	DiskType        *string                  `json:"diskType,omitempty"`

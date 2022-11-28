@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SecretPayload } from "./secretpayload";
+
 
 
 // AddSecretVersionRequest
@@ -7,6 +8,6 @@ import { SecretPayload } from "./secretpayload";
  * Request message for SecretManagerService.AddSecretVersion.
 **/
 export class AddSecretVersionRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=payload" })
+  @SpeakeasyMetadata({ data: "json, name=payload" })
   payload?: SecretPayload;
 }

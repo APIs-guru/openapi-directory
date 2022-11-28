@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RegisterEcsClusterRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EcsClusterArn" })
+  @SpeakeasyMetadata({ data: "json, name=EcsClusterArn" })
   ecsClusterArn: string;
 
-  @Metadata({ data: "json, name=StackId" })
+  @SpeakeasyMetadata({ data: "json, name=StackId" })
   stackId: string;
 }

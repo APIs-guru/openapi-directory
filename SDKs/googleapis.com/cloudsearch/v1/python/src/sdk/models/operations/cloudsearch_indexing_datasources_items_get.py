@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudsearchIndexingDatasourcesItemsGetPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,14 +28,14 @@ class CloudsearchIndexingDatasourcesItemsGetQueryParams:
 
 @dataclass
 class CloudsearchIndexingDatasourcesItemsGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudsearchIndexingDatasourcesItemsGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -45,14 +46,14 @@ class CloudsearchIndexingDatasourcesItemsGetSecurity:
 
 @dataclass
 class CloudsearchIndexingDatasourcesItemsGetRequest:
-    path_params: CloudsearchIndexingDatasourcesItemsGetPathParams = field(default=None)
-    query_params: CloudsearchIndexingDatasourcesItemsGetQueryParams = field(default=None)
-    security: CloudsearchIndexingDatasourcesItemsGetSecurity = field(default=None)
+    path_params: CloudsearchIndexingDatasourcesItemsGetPathParams = field()
+    query_params: CloudsearchIndexingDatasourcesItemsGetQueryParams = field()
+    security: CloudsearchIndexingDatasourcesItemsGetSecurity = field()
     
 
 @dataclass
 class CloudsearchIndexingDatasourcesItemsGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     item: Optional[shared.Item] = field(default=None)
-    status_code: int = field(default=None)
     

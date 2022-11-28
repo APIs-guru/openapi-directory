@@ -11,12 +11,12 @@ class GetInvoicesQueryParams:
 
 @dataclass
 class GetInvoicesRequest:
-    query_params: GetInvoicesQueryParams = field(default=None)
+    query_params: GetInvoicesQueryParams = field()
     
 
 @dataclass
 class GetInvoicesResponse:
+    content_type: str = field()
+    status_code: int = field()
     account_line_item_entities: Optional[List[shared.AccountLineItemEntity]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

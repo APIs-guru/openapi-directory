@@ -13,14 +13,14 @@ type ActionsListSelectedRepositoriesEnabledGithubActionsOrganizationQueryParams 
 	PerPage *int64 `queryParam:"style=form,explode=true,name=per_page"`
 }
 
-type ActionsListSelectedRepositoriesEnabledGithubActionsOrganizationRequest struct {
-	PathParams  ActionsListSelectedRepositoriesEnabledGithubActionsOrganizationPathParams
-	QueryParams ActionsListSelectedRepositoriesEnabledGithubActionsOrganizationQueryParams
-}
-
 type ActionsListSelectedRepositoriesEnabledGithubActionsOrganization200ApplicationJSON struct {
 	Repositories []shared.Repository `json:"repositories"`
 	TotalCount   float64             `json:"total_count"`
+}
+
+type ActionsListSelectedRepositoriesEnabledGithubActionsOrganizationRequest struct {
+	PathParams  ActionsListSelectedRepositoriesEnabledGithubActionsOrganizationPathParams
+	QueryParams ActionsListSelectedRepositoriesEnabledGithubActionsOrganizationQueryParams
 }
 
 type ActionsListSelectedRepositoriesEnabledGithubActionsOrganizationResponse struct {

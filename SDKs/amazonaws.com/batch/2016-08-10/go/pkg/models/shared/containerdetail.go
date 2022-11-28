@@ -1,5 +1,7 @@
 package shared
 
+// ContainerDetail
+// An object representing the details of a container that's part of a job.
 type ContainerDetail struct {
 	Command                      []string                      `json:"command,omitempty"`
 	ContainerInstanceArn         *string                       `json:"containerInstanceArn,omitempty"`

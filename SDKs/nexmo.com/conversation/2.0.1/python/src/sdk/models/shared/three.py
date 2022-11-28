@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ThreeContentTypeEnum(str, Enum):
     AUDIO_L16_RATE_EQUAL_8000 = "audio/l16;rate=8000"
@@ -10,14 +12,22 @@ class ThreeContentTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ThreeHeaders:
-    customer_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'customer_id' }})
+    r"""ThreeHeaders
+    Details of the Websocket you want to connect to
+    """
+    
+    customer_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('customer_id') }})
     
 
 @dataclass_json
 @dataclass
 class Three:
-    content_type: ThreeContentTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'content-type' }})
-    headers: Optional[ThreeHeaders] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'headers' }})
-    type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""Three
+    Connect to a Websocket
+    """
+    
+    content_type: ThreeContentTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('content-type') }})
+    type: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    headers: Optional[ThreeHeaders] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('headers') }})
+    uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     

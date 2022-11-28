@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import Any,List,Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -14,28 +17,57 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
-    
-    def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
+            self._server_url = server_url
 
+        
+    
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        
+    
+
+    def config_security(self, security: shared.Security):
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        
+    
+    
     
     def all_stars(self, request: operations.AllStarsRequest) -> operations.AllStarsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""All-Stars
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{format}/AllStars/{season}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -50,13 +82,17 @@ class SDK:
 
     
     def are_games_in_progress(self, request: operations.AreGamesInProgressRequest) -> operations.AreGamesInProgressResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Are Games In Progress
+        Returns <code>true</code> if there is at least one game being played at the time of the request or <code>false</code> if there are none.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{format}/AreAnyGamesInProgress", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -71,13 +107,16 @@ class SDK:
 
     
     def box_score(self, request: operations.BoxScoreRequest) -> operations.BoxScoreResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Box Score
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{format}/BoxScore/{gameid}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -92,13 +131,16 @@ class SDK:
 
     
     def box_scores_by_date(self, request: operations.BoxScoresByDateRequest) -> operations.BoxScoresByDateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Box Scores by Date
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{format}/BoxScores/{date}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -113,13 +155,16 @@ class SDK:
 
     
     def box_scores_by_date_delta(self, request: operations.BoxScoresByDateDeltaRequest) -> operations.BoxScoresByDateDeltaResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Box Scores by Date Delta
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{format}/BoxScoresDelta/{date}/{minutes}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -134,13 +179,16 @@ class SDK:
 
     
     def current_season(self, request: operations.CurrentSeasonRequest) -> operations.CurrentSeasonResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Current Season
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{format}/CurrentSeason", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -155,13 +203,16 @@ class SDK:
 
     
     def dfs_slates_by_date(self, request: operations.DfsSlatesByDateRequest) -> operations.DfsSlatesByDateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""DFS Slates by Date
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{format}/DfsSlatesByDate/{date}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -176,13 +227,16 @@ class SDK:
 
     
     def games_by_date(self, request: operations.GamesByDateRequest) -> operations.GamesByDateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Games by Date
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{format}/GamesByDate/{date}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -197,13 +251,16 @@ class SDK:
 
     
     def news(self, request: operations.NewsRequest) -> operations.NewsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""News
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{format}/News", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -218,13 +275,16 @@ class SDK:
 
     
     def news_by_date(self, request: operations.NewsByDateRequest) -> operations.NewsByDateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""News by Date
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{format}/NewsByDate/{date}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -239,13 +299,16 @@ class SDK:
 
     
     def news_by_player(self, request: operations.NewsByPlayerRequest) -> operations.NewsByPlayerResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""News by Player
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{format}/NewsByPlayerID/{playerid}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -260,13 +323,16 @@ class SDK:
 
     
     def player_details_by_active(self, request: operations.PlayerDetailsByActiveRequest) -> operations.PlayerDetailsByActiveResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Player Details by Active
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{format}/Players", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -281,13 +347,16 @@ class SDK:
 
     
     def player_details_by_free_agent(self, request: operations.PlayerDetailsByFreeAgentRequest) -> operations.PlayerDetailsByFreeAgentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Player Details by Free Agent
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{format}/FreeAgents", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -302,13 +371,16 @@ class SDK:
 
     
     def player_details_by_player(self, request: operations.PlayerDetailsByPlayerRequest) -> operations.PlayerDetailsByPlayerResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Player Details by Player
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{format}/Player/{playerid}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -323,13 +395,16 @@ class SDK:
 
     
     def player_game_logs_by_season(self, request: operations.PlayerGameLogsBySeasonRequest) -> operations.PlayerGameLogsBySeasonResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Player Game Logs By Season
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{format}/PlayerGameStatsBySeason/{season}/{playerid}/{numberofgames}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -344,13 +419,16 @@ class SDK:
 
     
     def player_game_stats_by_date(self, request: operations.PlayerGameStatsByDateRequest) -> operations.PlayerGameStatsByDateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Player Game Stats by Date
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{format}/PlayerGameStatsByDate/{date}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -365,13 +443,16 @@ class SDK:
 
     
     def player_game_stats_by_player(self, request: operations.PlayerGameStatsByPlayerRequest) -> operations.PlayerGameStatsByPlayerResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Player Game Stats by Player
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{format}/PlayerGameStatsByPlayer/{date}/{playerid}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -386,13 +467,16 @@ class SDK:
 
     
     def player_season_stats(self, request: operations.PlayerSeasonStatsRequest) -> operations.PlayerSeasonStatsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Player Season Stats
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{format}/PlayerSeasonStats/{season}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -407,13 +491,16 @@ class SDK:
 
     
     def player_season_stats_by_player(self, request: operations.PlayerSeasonStatsByPlayerRequest) -> operations.PlayerSeasonStatsByPlayerResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Player Season Stats By Player
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{format}/PlayerSeasonStatsByPlayer/{season}/{playerid}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -428,13 +515,16 @@ class SDK:
 
     
     def player_season_stats_by_team(self, request: operations.PlayerSeasonStatsByTeamRequest) -> operations.PlayerSeasonStatsByTeamResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Player Season Stats by Team
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{format}/PlayerSeasonStatsByTeam/{season}/{team}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -449,13 +539,16 @@ class SDK:
 
     
     def players_by_team(self, request: operations.PlayersByTeamRequest) -> operations.PlayersByTeamResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Players by Team
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{format}/Players/{team}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -470,13 +563,16 @@ class SDK:
 
     
     def schedules(self, request: operations.SchedulesRequest) -> operations.SchedulesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Schedules
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{format}/Games/{season}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -491,13 +587,16 @@ class SDK:
 
     
     def stadiums(self, request: operations.StadiumsRequest) -> operations.StadiumsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Stadiums
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{format}/Stadiums", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -512,13 +611,16 @@ class SDK:
 
     
     def standings(self, request: operations.StandingsRequest) -> operations.StandingsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Standings
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{format}/Standings/{season}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -533,13 +635,16 @@ class SDK:
 
     
     def team_game_stats_by_date(self, request: operations.TeamGameStatsByDateRequest) -> operations.TeamGameStatsByDateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Team Game Stats by Date
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{format}/TeamGameStatsByDate/{date}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -554,13 +659,16 @@ class SDK:
 
     
     def team_season_stats(self, request: operations.TeamSeasonStatsRequest) -> operations.TeamSeasonStatsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Team Season Stats
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{format}/TeamSeasonStats/{season}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -575,13 +683,16 @@ class SDK:
 
     
     def team_stats_allowed_by_position(self, request: operations.TeamStatsAllowedByPositionRequest) -> operations.TeamStatsAllowedByPositionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Team Stats Allowed by Position
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{format}/TeamStatsAllowedByPosition/{season}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -596,13 +707,16 @@ class SDK:
 
     
     def teams_active(self, request: operations.TeamsActiveRequest) -> operations.TeamsActiveResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Teams (Active)
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{format}/teams", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -617,13 +731,16 @@ class SDK:
 
     
     def teams_all(self, request: operations.TeamsAllRequest) -> operations.TeamsAllResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Teams (All)
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{format}/AllTeams", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 

@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import filtertype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Filter:
-    field: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Field' }})
-    type: filtertype_enum.FilterTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
-    value: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Value' }})
+    r"""Filter
+    The constraints that you want all returned products to match.
+    """
+    
+    field: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Field') }})
+    type: FilterTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Type') }})
+    value: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Value') }})
     

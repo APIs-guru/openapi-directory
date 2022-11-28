@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import List,Optional
 from sdk.models import operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,28 +14,50 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def get_daily_report_all_countries(self, request: operations.GetDailyReportAllCountriesRequest) -> operations.GetDailyReportAllCountriesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""getDailyReportAllCountries
+        Get daily report for all countries. Date is mandatory parametar. Date format is by ISO 8601 standard, but you can provide different format with date-format parameter.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/report/country/all"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -49,15 +74,18 @@ class SDK:
 
     
     def get_daily_report_by_country_code(self, request: operations.GetDailyReportByCountryCodeRequest) -> operations.GetDailyReportByCountryCodeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""getDailyReportByCountryCode
+        Get daily report for specific country. Country code and date are mandatory in parametars. Country code is in ISO 3166-1 standard. It can be 2 chars (Alpha-2) or 3 chars (Alpha-3) type. Date format is by ISO 8601 standard, but you can provide different format with date-format parameter
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/report/country/code"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -74,15 +102,18 @@ class SDK:
 
     
     def get_daily_report_by_country_name(self, request: operations.GetDailyReportByCountryNameRequest) -> operations.GetDailyReportByCountryNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""getDailyReportByCountryName
+        Get daily report for specific country. Country name and date are mandatory in parametars. Date format is by ISO 8601 standard, but you can provide different format with date-format parameter
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/report/country/name"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -99,15 +130,18 @@ class SDK:
 
     
     def get_daily_report_totals(self, request: operations.GetDailyReportTotalsRequest) -> operations.GetDailyReportTotalsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""getDailyReportTotals
+        Get daily report data for whole world.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/report/totals"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -124,15 +158,18 @@ class SDK:
 
     
     def get_latest_all_countries(self, request: operations.GetLatestAllCountriesRequest) -> operations.GetLatestAllCountriesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""getLatestAllCountries
+        Get latest data from all countries.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/country/all"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -149,15 +186,18 @@ class SDK:
 
     
     def get_latest_country_data_by_code(self, request: operations.GetLatestCountryDataByCodeRequest) -> operations.GetLatestCountryDataByCodeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""getLatestCountryDataByCode
+        Get latest data for specific country. Country code and format are in parametars. Country code is in ISO 3166-1 standard. It can be 2 chars (Alpha-2) or 3 chars (Alpha-3) type.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/country/code"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -174,15 +214,18 @@ class SDK:
 
     
     def get_latest_country_data_by_name(self, request: operations.GetLatestCountryDataByNameRequest) -> operations.GetLatestCountryDataByNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""getLatestCountryDataByName
+        Get latest data for specific country. Country name and format are in parametars.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/country"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -199,15 +242,18 @@ class SDK:
 
     
     def get_latest_totals(self, request: operations.GetLatestTotalsRequest) -> operations.GetLatestTotalsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""getLatestTotals
+        Get latest data for whole world.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/totals"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -224,15 +270,18 @@ class SDK:
 
     
     def get_list_of_countries(self, request: operations.GetListOfCountriesRequest) -> operations.GetListOfCountriesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""getListOfCountries
+        Get name name, alpha-2, alpha-3 code, latitude and longitude for every country.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/help/countries"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 

@@ -9,6 +9,8 @@ const (
 	MediaPropertiesAlignmentEnumCenter               MediaPropertiesAlignmentEnum = "CENTER"
 )
 
+// MediaProperties
+// Properties of the media.
 type MediaProperties struct {
 	Alignment *MediaPropertiesAlignmentEnum `json:"alignment,omitempty"`
 	Width     *int32                        `json:"width,omitempty"`

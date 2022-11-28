@@ -17,6 +17,8 @@ const (
 	FirebaseAppInfoStateEnumDeleted          FirebaseAppInfoStateEnum = "DELETED"
 )
 
+// FirebaseAppInfo
+// A high-level summary of an App.
 type FirebaseAppInfo struct {
 	APIKeyID    *string                      `json:"apiKeyId,omitempty"`
 	AppID       *string                      `json:"appId,omitempty"`

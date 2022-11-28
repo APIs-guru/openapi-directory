@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var FileUpdateInputAccessEnum;
 (function (FileUpdateInputAccessEnum) {
     FileUpdateInputAccessEnum["PublicIndexable"] = "PUBLIC_INDEXABLE";
@@ -42,23 +42,23 @@ var FileUpdateInput = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=access" }),
+        SpeakeasyMetadata({ data: "json, name=access" }),
         __metadata("design:type", String)
     ], FileUpdateInput.prototype, "access", void 0);
     __decorate([
-        Metadata({ data: "json, name=isUsableInContent" }),
+        SpeakeasyMetadata({ data: "json, name=isUsableInContent" }),
         __metadata("design:type", Boolean)
     ], FileUpdateInput.prototype, "isUsableInContent", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], FileUpdateInput.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=parentFolderId" }),
+        SpeakeasyMetadata({ data: "json, name=parentFolderId" }),
         __metadata("design:type", String)
     ], FileUpdateInput.prototype, "parentFolderId", void 0);
     __decorate([
-        Metadata({ data: "json, name=parentFolderPath" }),
+        SpeakeasyMetadata({ data: "json, name=parentFolderPath" }),
         __metadata("design:type", String)
     ], FileUpdateInput.prototype, "parentFolderPath", void 0);
     return FileUpdateInput;

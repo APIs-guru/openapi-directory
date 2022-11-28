@@ -10,19 +10,19 @@ class CheckPreviousEntitlementsQueryParams:
 
 @dataclass
 class CheckPreviousEntitlementsSecurity:
-    account_auth: shared.SchemeAccountAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    account_auth: shared.SchemeAccountAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CheckPreviousEntitlementsRequest:
-    query_params: CheckPreviousEntitlementsQueryParams = field(default=None)
-    security: CheckPreviousEntitlementsSecurity = field(default=None)
+    query_params: CheckPreviousEntitlementsQueryParams = field()
+    security: CheckPreviousEntitlementsSecurity = field()
     
 
 @dataclass
 class CheckPreviousEntitlementsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     itv_had_entitlement: Optional[shared.ItvHadEntitlement] = field(default=None)
     service_error: Optional[shared.ServiceError] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// AssociationDescription
+// Describes the parameters for a document.
 type AssociationDescription struct {
 	ApplyOnlyAtCronInterval       *bool                              `json:"ApplyOnlyAtCronInterval,omitempty"`
 	AssociationID                 *string                            `json:"AssociationId,omitempty"`

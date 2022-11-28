@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class AddressAutocompleteQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=licensee" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=licensee" })
   licensee?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=postcode_outward" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=postcode_outward" })
   postcodeOutward?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=query" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=query" })
   query: string;
 }
 
 
 export class AddressAutocompleteSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
   apiKey: shared.SchemeApiKey;
 
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
   userToken: shared.SchemeUserToken;
 }
 
 
 export class AddressAutocompleteRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: AddressAutocompleteQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: AddressAutocompleteSecurity;
 }
 
 
 export class AddressAutocompleteResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   addressAutocompleteResponseSchema?: shared.AddressAutocompleteResponseSchema;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   addressLookupResponseSchema?: shared.AddressLookupResponseSchema;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

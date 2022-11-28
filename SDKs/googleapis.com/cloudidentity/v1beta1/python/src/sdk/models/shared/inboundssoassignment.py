@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import samlssoinfo
-from . import signinbehavior
+from sdk import utils
+from . import *
 
 class InboundSsoAssignmentSsoModeEnum(str, Enum):
     SSO_MODE_UNSPECIFIED = "SSO_MODE_UNSPECIFIED"
@@ -14,12 +15,32 @@ class InboundSsoAssignmentSsoModeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class InboundSsoAssignment:
-    customer: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'customer' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    rank: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rank' }})
-    saml_sso_info: Optional[samlssoinfo.SamlSsoInfo] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'samlSsoInfo' }})
-    sign_in_behavior: Optional[signinbehavior.SignInBehavior] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'signInBehavior' }})
-    sso_mode: Optional[InboundSsoAssignmentSsoModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ssoMode' }})
-    target_group: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'targetGroup' }})
-    target_org_unit: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'targetOrgUnit' }})
+    r"""InboundSsoAssignment
+    Targets with \"set\" SSO assignments and their respective assignments.
+    """
+    
+    customer: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('customer') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    rank: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rank') }})
+    saml_sso_info: Optional[SamlSsoInfo] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('samlSsoInfo') }})
+    sign_in_behavior: Optional[SignInBehavior] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('signInBehavior') }})
+    sso_mode: Optional[InboundSsoAssignmentSsoModeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ssoMode') }})
+    target_group: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('targetGroup') }})
+    target_org_unit: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('targetOrgUnit') }})
+    
+
+@dataclass_json
+@dataclass
+class InboundSsoAssignmentInput:
+    r"""InboundSsoAssignmentInput
+    Targets with \"set\" SSO assignments and their respective assignments.
+    """
+    
+    customer: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('customer') }})
+    rank: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rank') }})
+    saml_sso_info: Optional[SamlSsoInfo] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('samlSsoInfo') }})
+    sign_in_behavior: Optional[SignInBehavior] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('signInBehavior') }})
+    sso_mode: Optional[InboundSsoAssignmentSsoModeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ssoMode') }})
+    target_group: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('targetGroup') }})
+    target_org_unit: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('targetOrgUnit') }})
     

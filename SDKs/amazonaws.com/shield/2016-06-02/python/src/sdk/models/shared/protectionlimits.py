@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import limit
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ProtectionLimits:
-    protected_resource_type_limits: List[limit.Limit] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProtectedResourceTypeLimits' }})
+    r"""ProtectionLimits
+    Limits settings on protections for your subscription. 
+    """
+    
+    protected_resource_type_limits: List[Limit] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ProtectedResourceTypeLimits') }})
     

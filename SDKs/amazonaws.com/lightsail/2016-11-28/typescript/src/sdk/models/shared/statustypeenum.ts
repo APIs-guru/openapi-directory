@@ -1,6 +1,7 @@
 
 
+
 export enum StatusTypeEnum {
-    Active = "Active"
-,    Inactive = "Inactive"
+    Active = "Active",
+    Inactive = "Inactive"
 }

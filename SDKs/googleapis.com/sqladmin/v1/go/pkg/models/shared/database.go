@@ -1,5 +1,7 @@
 package shared
 
+// Database
+// Represents a SQL database on the Cloud SQL instance.
 type Database struct {
 	Charset                  *string                   `json:"charset,omitempty"`
 	Collation                *string                   `json:"collation,omitempty"`

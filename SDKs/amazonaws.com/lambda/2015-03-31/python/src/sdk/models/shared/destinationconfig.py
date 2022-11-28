@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import onfailure
-from . import onsuccess
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DestinationConfig:
-    on_failure: Optional[onfailure.OnFailure] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OnFailure' }})
-    on_success: Optional[onsuccess.OnSuccess] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OnSuccess' }})
+    r"""DestinationConfig
+    A configuration object that specifies the destination of an event after Lambda processes it.
+    """
+    
+    on_failure: Optional[OnFailure] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('OnFailure') }})
+    on_success: Optional[OnSuccess] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('OnSuccess') }})
     

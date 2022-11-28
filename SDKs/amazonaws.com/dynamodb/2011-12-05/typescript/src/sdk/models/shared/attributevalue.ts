@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AttributeValue
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * AttributeValue can be <code>String</code>, <code>Number</code>, <code>Binary</code>, <code>StringSet</code>, <code>NumberSet</code>, <code>BinarySet</code>.
 **/
 export class AttributeValue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=B" })
+  @SpeakeasyMetadata({ data: "json, name=B" })
   b?: string;
 
-  @Metadata({ data: "json, name=BS" })
+  @SpeakeasyMetadata({ data: "json, name=BS" })
   bs?: string[];
 
-  @Metadata({ data: "json, name=N" })
+  @SpeakeasyMetadata({ data: "json, name=N" })
   n?: string;
 
-  @Metadata({ data: "json, name=NS" })
+  @SpeakeasyMetadata({ data: "json, name=NS" })
   ns?: string[];
 
-  @Metadata({ data: "json, name=S" })
+  @SpeakeasyMetadata({ data: "json, name=S" })
   s?: string;
 
-  @Metadata({ data: "json, name=SS" })
+  @SpeakeasyMetadata({ data: "json, name=SS" })
   ss?: string[];
 }

@@ -2,9 +2,9 @@ from .bigtableadmin_operations_cancel import *
 from .bigtableadmin_operations_projects_operations_list import *
 from .bigtableadmin_projects_instances_appprofiles_create import *
 from .bigtableadmin_projects_instances_appprofiles_list import *
+from .bigtableadmin_projects_instances_clusters_backups_copy import *
 from .bigtableadmin_projects_instances_clusters_backups_create import *
 from .bigtableadmin_projects_instances_clusters_backups_list import *
-from .bigtableadmin_projects_instances_clusters_backups_patch import *
 from .bigtableadmin_projects_instances_clusters_create import *
 from .bigtableadmin_projects_instances_clusters_hottablets_list import *
 from .bigtableadmin_projects_instances_clusters_list import *
@@ -19,6 +19,7 @@ from .bigtableadmin_projects_instances_tables_generateconsistencytoken import *
 from .bigtableadmin_projects_instances_tables_getiampolicy import *
 from .bigtableadmin_projects_instances_tables_list import *
 from .bigtableadmin_projects_instances_tables_modifycolumnfamilies import *
+from .bigtableadmin_projects_instances_tables_patch import *
 from .bigtableadmin_projects_instances_tables_restore import *
 from .bigtableadmin_projects_instances_tables_setiampolicy import *
 from .bigtableadmin_projects_instances_tables_testiampermissions import *

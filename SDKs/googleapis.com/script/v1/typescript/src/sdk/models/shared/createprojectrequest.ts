@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CreateProjectRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request to create a script project. Request to create a script project.
 **/
 export class CreateProjectRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=parentId" })
+  @SpeakeasyMetadata({ data: "json, name=parentId" })
   parentId?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

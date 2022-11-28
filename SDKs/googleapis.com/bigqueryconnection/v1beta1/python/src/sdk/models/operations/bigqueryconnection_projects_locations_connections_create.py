@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class BigqueryconnectionProjectsLocationsConnectionsCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,14 +27,14 @@ class BigqueryconnectionProjectsLocationsConnectionsCreateQueryParams:
 
 @dataclass
 class BigqueryconnectionProjectsLocationsConnectionsCreateSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BigqueryconnectionProjectsLocationsConnectionsCreateSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -44,15 +45,15 @@ class BigqueryconnectionProjectsLocationsConnectionsCreateSecurity:
 
 @dataclass
 class BigqueryconnectionProjectsLocationsConnectionsCreateRequest:
-    path_params: BigqueryconnectionProjectsLocationsConnectionsCreatePathParams = field(default=None)
-    query_params: BigqueryconnectionProjectsLocationsConnectionsCreateQueryParams = field(default=None)
-    request: Optional[shared.Connection] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: BigqueryconnectionProjectsLocationsConnectionsCreateSecurity = field(default=None)
+    path_params: BigqueryconnectionProjectsLocationsConnectionsCreatePathParams = field()
+    query_params: BigqueryconnectionProjectsLocationsConnectionsCreateQueryParams = field()
+    security: BigqueryconnectionProjectsLocationsConnectionsCreateSecurity = field()
+    request: Optional[shared.ConnectionInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class BigqueryconnectionProjectsLocationsConnectionsCreateResponse:
+    content_type: str = field()
+    status_code: int = field()
     connection: Optional[shared.Connection] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Api } from "./api";
 import { Authentication } from "./authentication";
 import { Backend } from "./backend";
@@ -20,8 +19,8 @@ import { Quota } from "./quota";
 import { SourceInfo } from "./sourceinfo";
 import { SystemParameters } from "./systemparameters";
 import { Type } from "./type";
-import { Type } from "./type";
 import { Usage } from "./usage";
+
 
 
 // Service
@@ -29,84 +28,84 @@ import { Usage } from "./usage";
  * `Service` is the root object of Google API service configuration (service config). It describes the basic information about a logical service, such as the service name and the user-facing title, and delegates other aspects to sub-sections. Each sub-section is either a proto message or a repeated proto message that configures a specific aspect, such as auth. For more information, see each proto message definition. Example: type: google.api.Service name: calendar.googleapis.com title: Google Calendar API apis: - name: google.calendar.v3.Calendar visibility: rules: - selector: "google.calendar.v3.*" restriction: PREVIEW backend: rules: - selector: "google.calendar.v3.*" address: calendar.example.com authentication: providers: - id: google_calendar_auth jwks_uri: https://www.googleapis.com/oauth2/v1/certs issuer: https://securetoken.google.com rules: - selector: "*" requirements: provider_id: google_calendar_auth
 **/
 export class Service extends SpeakeasyBase {
-  @Metadata({ data: "json, name=apis", elemType: shared.Api })
+  @SpeakeasyMetadata({ data: "json, name=apis", elemType: Api })
   apis?: Api[];
 
-  @Metadata({ data: "json, name=authentication" })
+  @SpeakeasyMetadata({ data: "json, name=authentication" })
   authentication?: Authentication;
 
-  @Metadata({ data: "json, name=backend" })
+  @SpeakeasyMetadata({ data: "json, name=backend" })
   backend?: Backend;
 
-  @Metadata({ data: "json, name=billing" })
+  @SpeakeasyMetadata({ data: "json, name=billing" })
   billing?: Billing;
 
-  @Metadata({ data: "json, name=configVersion" })
+  @SpeakeasyMetadata({ data: "json, name=configVersion" })
   configVersion?: number;
 
-  @Metadata({ data: "json, name=context" })
+  @SpeakeasyMetadata({ data: "json, name=context" })
   context?: Context;
 
-  @Metadata({ data: "json, name=control" })
+  @SpeakeasyMetadata({ data: "json, name=control" })
   control?: Control;
 
-  @Metadata({ data: "json, name=customError" })
+  @SpeakeasyMetadata({ data: "json, name=customError" })
   customError?: CustomError;
 
-  @Metadata({ data: "json, name=documentation" })
+  @SpeakeasyMetadata({ data: "json, name=documentation" })
   documentation?: Documentation;
 
-  @Metadata({ data: "json, name=endpoints", elemType: shared.Endpoint })
+  @SpeakeasyMetadata({ data: "json, name=endpoints", elemType: Endpoint })
   endpoints?: Endpoint[];
 
-  @Metadata({ data: "json, name=enums", elemType: shared.Enum })
+  @SpeakeasyMetadata({ data: "json, name=enums", elemType: Enum })
   enums?: Enum[];
 
-  @Metadata({ data: "json, name=http" })
+  @SpeakeasyMetadata({ data: "json, name=http" })
   http?: Http;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=logging" })
+  @SpeakeasyMetadata({ data: "json, name=logging" })
   logging?: Logging;
 
-  @Metadata({ data: "json, name=logs", elemType: shared.LogDescriptor })
+  @SpeakeasyMetadata({ data: "json, name=logs", elemType: LogDescriptor })
   logs?: LogDescriptor[];
 
-  @Metadata({ data: "json, name=metrics", elemType: shared.MetricDescriptor })
+  @SpeakeasyMetadata({ data: "json, name=metrics", elemType: MetricDescriptor })
   metrics?: MetricDescriptor[];
 
-  @Metadata({ data: "json, name=monitoredResources", elemType: shared.MonitoredResourceDescriptor })
+  @SpeakeasyMetadata({ data: "json, name=monitoredResources", elemType: MonitoredResourceDescriptor })
   monitoredResources?: MonitoredResourceDescriptor[];
 
-  @Metadata({ data: "json, name=monitoring" })
+  @SpeakeasyMetadata({ data: "json, name=monitoring" })
   monitoring?: Monitoring;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=producerProjectId" })
+  @SpeakeasyMetadata({ data: "json, name=producerProjectId" })
   producerProjectId?: string;
 
-  @Metadata({ data: "json, name=quota" })
+  @SpeakeasyMetadata({ data: "json, name=quota" })
   quota?: Quota;
 
-  @Metadata({ data: "json, name=sourceInfo" })
+  @SpeakeasyMetadata({ data: "json, name=sourceInfo" })
   sourceInfo?: SourceInfo;
 
-  @Metadata({ data: "json, name=systemParameters" })
+  @SpeakeasyMetadata({ data: "json, name=systemParameters" })
   systemParameters?: SystemParameters;
 
-  @Metadata({ data: "json, name=systemTypes", elemType: shared.Type })
+  @SpeakeasyMetadata({ data: "json, name=systemTypes", elemType: Type })
   systemTypes?: Type[];
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=types", elemType: shared.Type })
+  @SpeakeasyMetadata({ data: "json, name=types", elemType: Type })
   types?: Type[];
 
-  @Metadata({ data: "json, name=usage" })
+  @SpeakeasyMetadata({ data: "json, name=usage" })
   usage?: Usage;
 }

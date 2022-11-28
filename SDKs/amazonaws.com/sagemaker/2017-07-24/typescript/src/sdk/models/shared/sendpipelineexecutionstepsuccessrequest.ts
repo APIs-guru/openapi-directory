@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OutputParameter } from "./outputparameter";
 
 
+
 export class SendPipelineExecutionStepSuccessRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CallbackToken" })
+  @SpeakeasyMetadata({ data: "json, name=CallbackToken" })
   callbackToken: string;
 
-  @Metadata({ data: "json, name=ClientRequestToken" })
+  @SpeakeasyMetadata({ data: "json, name=ClientRequestToken" })
   clientRequestToken?: string;
 
-  @Metadata({ data: "json, name=OutputParameters", elemType: shared.OutputParameter })
+  @SpeakeasyMetadata({ data: "json, name=OutputParameters", elemType: OutputParameter })
   outputParameters?: OutputParameter[];
 }

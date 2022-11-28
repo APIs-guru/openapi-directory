@@ -1,5 +1,7 @@
 package shared
 
+// WorkspaceProperties
+// Describes a WorkSpace.
 type WorkspaceProperties struct {
 	ComputeTypeName                     *ComputeEnum     `json:"ComputeTypeName,omitempty"`
 	RootVolumeSizeGib                   *int64           `json:"RootVolumeSizeGib,omitempty"`

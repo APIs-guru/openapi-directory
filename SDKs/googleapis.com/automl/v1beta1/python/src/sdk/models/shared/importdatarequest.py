@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import inputconfig
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ImportDataRequest:
-    input_config: Optional[inputconfig.InputConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'inputConfig' }})
+    r"""ImportDataRequest
+    Request message for AutoMl.ImportData.
+    """
+    
+    input_config: Optional[InputConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('inputConfig') }})
     

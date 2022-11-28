@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetGetXrefListFormatEnum;
 (function (GetGetXrefListFormatEnum) {
     GetGetXrefListFormatEnum["Json"] = "json";
@@ -38,15 +38,15 @@ var GetGetXrefListQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=code" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=code" }),
         __metadata("design:type", String)
     ], GetGetXrefListQueryParams.prototype, "code", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=format" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=format" }),
         __metadata("design:type", String)
     ], GetGetXrefListQueryParams.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=pwId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pwId" }),
         __metadata("design:type", String)
     ], GetGetXrefListQueryParams.prototype, "pwId", void 0);
     return GetGetXrefListQueryParams;
@@ -58,7 +58,7 @@ var GetGetXrefListRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetGetXrefListQueryParams)
     ], GetGetXrefListRequest.prototype, "queryParams", void 0);
     return GetGetXrefListRequest;
@@ -70,11 +70,11 @@ var GetGetXrefListResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetGetXrefListResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetGetXrefListResponse.prototype, "statusCode", void 0);
     return GetGetXrefListResponse;

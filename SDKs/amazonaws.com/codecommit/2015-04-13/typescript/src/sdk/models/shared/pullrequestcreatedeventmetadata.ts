@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PullRequestCreatedEventMetadata
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Metadata about the pull request that is used when comparing the pull request source with its destination.
 **/
 export class PullRequestCreatedEventMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=destinationCommitId" })
+  @SpeakeasyMetadata({ data: "json, name=destinationCommitId" })
   destinationCommitId?: string;
 
-  @Metadata({ data: "json, name=mergeBase" })
+  @SpeakeasyMetadata({ data: "json, name=mergeBase" })
   mergeBase?: string;
 
-  @Metadata({ data: "json, name=repositoryName" })
+  @SpeakeasyMetadata({ data: "json, name=repositoryName" })
   repositoryName?: string;
 
-  @Metadata({ data: "json, name=sourceCommitId" })
+  @SpeakeasyMetadata({ data: "json, name=sourceCommitId" })
   sourceCommitId?: string;
 }

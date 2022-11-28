@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Member
+// Provides information about an account that's associated with an Amazon Macie administrator account.
 type Member struct {
 	AccountID              *string                 `json:"accountId,omitempty"`
 	AdministratorAccountID *string                 `json:"administratorAccountId,omitempty"`

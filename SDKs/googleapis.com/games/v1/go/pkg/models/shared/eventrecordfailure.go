@@ -8,6 +8,8 @@ const (
 	EventRecordFailureFailureCauseEnumInvalidUpdateValue                 EventRecordFailureFailureCauseEnum = "INVALID_UPDATE_VALUE"
 )
 
+// EventRecordFailure
+// An event update failure resource.
 type EventRecordFailure struct {
 	EventID      *string                             `json:"eventId,omitempty"`
 	FailureCause *EventRecordFailureFailureCauseEnum `json:"failureCause,omitempty"`

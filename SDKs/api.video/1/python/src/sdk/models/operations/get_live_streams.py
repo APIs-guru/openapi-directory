@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetLiveStreamsSortOrderEnum(str, Enum):
@@ -19,18 +20,18 @@ class GetLiveStreamsQueryParams:
 
 @dataclass
 class GetLiveStreamsSecurity:
-    bearer_auth: shared.SchemeBearerAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_auth: shared.SchemeBearerAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class GetLiveStreamsRequest:
-    query_params: GetLiveStreamsQueryParams = field(default=None)
-    security: GetLiveStreamsSecurity = field(default=None)
+    query_params: GetLiveStreamsQueryParams = field()
+    security: GetLiveStreamsSecurity = field()
     
 
 @dataclass
 class GetLiveStreamsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     live_stream_list_response: Optional[shared.LiveStreamListResponse] = field(default=None)
     

@@ -16,6 +16,8 @@ type BranchProtectionRequiredStatusChecks struct {
 	URL              *string  `json:"url,omitempty"`
 }
 
+// BranchProtection
+// Branch Protection
 type BranchProtection struct {
 	EnforceAdmins                  *ProtectedBranchAdminEnforced                   `json:"enforce_admins,omitempty"`
 	Name                           *string                                         `json:"name,omitempty"`

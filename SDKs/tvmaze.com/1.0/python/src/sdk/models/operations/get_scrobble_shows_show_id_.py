@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetScrobbleShowsShowIDPathParams:
-    show_id: int = field(default=None, metadata={'path_param': { 'field_name': 'show_id', 'style': 'simple', 'explode': False }})
+    show_id: int = field(metadata={'path_param': { 'field_name': 'show_id', 'style': 'simple', 'explode': False }})
     
 class GetScrobbleShowsShowIDEmbedEnum(str, Enum):
     EPISODE = "episode"
@@ -18,13 +19,13 @@ class GetScrobbleShowsShowIDQueryParams:
 
 @dataclass
 class GetScrobbleShowsShowIDRequest:
-    path_params: GetScrobbleShowsShowIDPathParams = field(default=None)
-    query_params: GetScrobbleShowsShowIDQueryParams = field(default=None)
+    path_params: GetScrobbleShowsShowIDPathParams = field()
+    query_params: GetScrobbleShowsShowIDQueryParams = field()
     
 
 @dataclass
 class GetScrobbleShowsShowIDResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     marked_episodes: Optional[List[shared.MarkedEpisode]] = field(default=None)
-    status_code: int = field(default=None)
     

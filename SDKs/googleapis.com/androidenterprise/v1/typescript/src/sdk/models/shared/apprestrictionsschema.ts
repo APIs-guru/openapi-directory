@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AppRestrictionsSchemaRestriction } from "./apprestrictionsschemarestriction";
+
 
 
 // AppRestrictionsSchema
@@ -8,9 +8,9 @@ import { AppRestrictionsSchemaRestriction } from "./apprestrictionsschemarestric
  * Represents the list of app restrictions available to be pre-configured for the product.
 **/
 export class AppRestrictionsSchema extends SpeakeasyBase {
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=restrictions", elemType: shared.AppRestrictionsSchemaRestriction })
+  @SpeakeasyMetadata({ data: "json, name=restrictions", elemType: AppRestrictionsSchemaRestriction })
   restrictions?: AppRestrictionsSchemaRestriction[];
 }

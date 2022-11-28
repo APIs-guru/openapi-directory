@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Service
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The metadata for a service, such as the service code and available attribute names.
 **/
 export class Service extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AttributeNames" })
+  @SpeakeasyMetadata({ data: "json, name=AttributeNames" })
   attributeNames?: string[];
 
-  @Metadata({ data: "json, name=ServiceCode" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceCode" })
   serviceCode?: string;
 }

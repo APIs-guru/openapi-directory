@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CaseDetails } from "./casedetails";
+
 
 
 // DescribeCasesResponse
@@ -8,9 +8,9 @@ import { CaseDetails } from "./casedetails";
  * Returns an array of <a href="https://docs.aws.amazon.com/awssupport/latest/APIReference/API_CaseDetails.html">CaseDetails</a> objects and a <code>nextToken</code> that defines a point for pagination in the result set.
 **/
 export class DescribeCasesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cases", elemType: shared.CaseDetails })
+  @SpeakeasyMetadata({ data: "json, name=cases", elemType: CaseDetails })
   cases?: CaseDetails[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

@@ -1,33 +1,24 @@
 from dataclasses import dataclass, field
 from typing import Any,Optional
+from sdk.models import shared
 
-
-@dataclass
-class PostCreateNotificationConfigurationSecurityOption1:
-    basic_auth: shared.SchemeBasicAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
-    
-
-@dataclass
-class PostCreateNotificationConfigurationSecurityOption2:
-    api_key_auth: shared.SchemeAPIKeyAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
-    
 
 @dataclass
 class PostCreateNotificationConfigurationSecurity:
-    option1: Optional[PostCreateNotificationConfigurationSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[PostCreateNotificationConfigurationSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
+    api_key_auth: Optional[shared.SchemeAPIKeyAuth] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    basic_auth: Optional[shared.SchemeBasicAuth] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
     
 
 @dataclass
 class PostCreateNotificationConfigurationRequest:
+    security: PostCreateNotificationConfigurationSecurity = field()
     request: Optional[Any] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: PostCreateNotificationConfigurationSecurity = field(default=None)
     
 
 @dataclass
 class PostCreateNotificationConfigurationResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_notification_configuration_response: Optional[Any] = field(default=None)
     service_error: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,29 +22,29 @@ class AssociateResourceSharePermissionHeaders:
 @dataclass_json
 @dataclass
 class AssociateResourceSharePermissionRequestBody:
-    client_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clientToken' }})
-    permission_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'permissionArn' }})
-    permission_version: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'permissionVersion' }})
-    replace: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'replace' }})
-    resource_share_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceShareArn' }})
+    permission_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('permissionArn') }})
+    resource_share_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceShareArn') }})
+    client_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clientToken') }})
+    permission_version: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('permissionVersion') }})
+    replace: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('replace') }})
     
 
 @dataclass
 class AssociateResourceSharePermissionRequest:
-    headers: AssociateResourceSharePermissionHeaders = field(default=None)
-    request: AssociateResourceSharePermissionRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: AssociateResourceSharePermissionHeaders = field()
+    request: AssociateResourceSharePermissionRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class AssociateResourceSharePermissionResponse:
+    content_type: str = field()
+    status_code: int = field()
     associate_resource_share_permission_response: Optional[shared.AssociateResourceSharePermissionResponse] = field(default=None)
-    content_type: str = field(default=None)
     invalid_client_token_exception: Optional[Any] = field(default=None)
     invalid_parameter_exception: Optional[Any] = field(default=None)
     malformed_arn_exception: Optional[Any] = field(default=None)
     operation_not_permitted_exception: Optional[Any] = field(default=None)
     server_internal_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     unknown_resource_exception: Optional[Any] = field(default=None)
     

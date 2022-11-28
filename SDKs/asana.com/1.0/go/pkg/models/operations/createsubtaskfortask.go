@@ -13,18 +13,18 @@ type CreateSubtaskForTaskQueryParams struct {
 	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
-type CreateSubtaskForTaskRequestBody struct {
-	Data *shared.TaskRequest `json:"data,omitempty"`
+type CreateSubtaskForTaskRequestBodyInput struct {
+	Data *shared.TaskRequestInput `json:"data,omitempty"`
+}
+
+type CreateSubtaskForTask201ApplicationJSON struct {
+	Data *shared.TaskResponse `json:"data,omitempty"`
 }
 
 type CreateSubtaskForTaskRequest struct {
 	PathParams  CreateSubtaskForTaskPathParams
 	QueryParams CreateSubtaskForTaskQueryParams
-	Request     CreateSubtaskForTaskRequestBody `request:"mediaType=application/json"`
-}
-
-type CreateSubtaskForTask201ApplicationJSON struct {
-	Data *shared.TaskResponse `json:"data,omitempty"`
+	Request     CreateSubtaskForTaskRequestBodyInput `request:"mediaType=application/json"`
 }
 
 type CreateSubtaskForTaskResponse struct {

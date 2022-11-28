@@ -1,5 +1,7 @@
 package shared
 
+// PaymentDisputeSummary
+// This type is used by each payment dispute that is returned with the getPaymentDisputeSummaries method.
 type PaymentDisputeSummary struct {
 	Amount               *SimpleAmount `json:"amount,omitempty"`
 	BuyerUsername        *string       `json:"buyerUsername,omitempty"`

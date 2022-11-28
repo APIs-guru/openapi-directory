@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VpcPeeringConnection } from "./vpcpeeringconnection";
+
 
 
 // DescribeVpcPeeringConnectionsOutput
@@ -8,6 +8,6 @@ import { VpcPeeringConnection } from "./vpcpeeringconnection";
  * Represents the returned data in response to a request operation.
 **/
 export class DescribeVpcPeeringConnectionsOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=VpcPeeringConnections", elemType: shared.VpcPeeringConnection })
+  @SpeakeasyMetadata({ data: "json, name=VpcPeeringConnections", elemType: VpcPeeringConnection })
   vpcPeeringConnections?: VpcPeeringConnection[];
 }

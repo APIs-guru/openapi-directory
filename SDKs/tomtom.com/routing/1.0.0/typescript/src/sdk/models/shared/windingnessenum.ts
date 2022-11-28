@@ -1,7 +1,8 @@
 
 
+
 export enum WindingnessEnum {
-    Low = "low"
-,    Normal = "normal"
-,    High = "high"
+    Low = "low",
+    Normal = "normal",
+    High = "high"
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PosixFilesystem
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A POSIX filesystem resource.
 **/
 export class PosixFilesystem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=rootDirectory" })
+  @SpeakeasyMetadata({ data: "json, name=rootDirectory" })
   rootDirectory?: string;
 }

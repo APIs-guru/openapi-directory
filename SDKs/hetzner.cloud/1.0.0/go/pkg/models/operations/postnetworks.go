@@ -1,5 +1,7 @@
 package operations
 
+// PostNetworksCreateNetworkRequestLabels
+// User-defined labels (key-value pairs)
 type PostNetworksCreateNetworkRequestLabels struct {
 	Labelkey *string `json:"labelkey,omitempty"`
 }
@@ -31,10 +33,8 @@ type PostNetworksCreateNetworkRequest struct {
 	Subnets []PostNetworksCreateNetworkRequestSubnets `json:"subnets,omitempty"`
 }
 
-type PostNetworksRequest struct {
-	Request *PostNetworksCreateNetworkRequest `request:"mediaType=application/json"`
-}
-
+// PostNetworks201ApplicationJSONNetworkProtection
+// Protection configuration for the Network
 type PostNetworks201ApplicationJSONNetworkProtection struct {
 	Delete bool `json:"delete"`
 }
@@ -74,6 +74,10 @@ type PostNetworks201ApplicationJSONNetwork struct {
 
 type PostNetworks201ApplicationJSON struct {
 	Network *PostNetworks201ApplicationJSONNetwork `json:"network,omitempty"`
+}
+
+type PostNetworksRequest struct {
+	Request *PostNetworksCreateNetworkRequest `request:"mediaType=application/json"`
 }
 
 type PostNetworksResponse struct {

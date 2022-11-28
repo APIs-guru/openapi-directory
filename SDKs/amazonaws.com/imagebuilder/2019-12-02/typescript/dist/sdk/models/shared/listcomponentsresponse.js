@@ -22,23 +22,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ComponentVersion } from "./componentversion";
 var ListComponentsResponse = /** @class */ (function (_super) {
     __extends(ListComponentsResponse, _super);
     function ListComponentsResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=componentVersionList", elemType: shared.ComponentVersion }),
+        SpeakeasyMetadata({ data: "json, name=componentVersionList", elemType: ComponentVersion }),
         __metadata("design:type", Array)
     ], ListComponentsResponse.prototype, "componentVersionList", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextToken" }),
         __metadata("design:type", String)
     ], ListComponentsResponse.prototype, "nextToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=requestId" }),
+        SpeakeasyMetadata({ data: "json, name=requestId" }),
         __metadata("design:type", String)
     ], ListComponentsResponse.prototype, "requestId", void 0);
     return ListComponentsResponse;

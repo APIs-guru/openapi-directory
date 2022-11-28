@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import piientitiesdetectionjobproperties
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribePiiEntitiesDetectionJobResponse:
-    pii_entities_detection_job_properties: Optional[piientitiesdetectionjobproperties.PiiEntitiesDetectionJobProperties] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PiiEntitiesDetectionJobProperties' }})
+    pii_entities_detection_job_properties: Optional[PiiEntitiesDetectionJobProperties] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PiiEntitiesDetectionJobProperties') }})
     

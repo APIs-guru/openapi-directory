@@ -1,37 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BiographyItem } from "./biographyitem";
-import { BiographyItem } from "./biographyitem";
-import { BiographyItem } from "./biographyitem";
-import { BiographyItem } from "./biographyitem";
-import { BiographyItem } from "./biographyitem";
-import { BiographyItem } from "./biographyitem";
-import { BiographyItem } from "./biographyitem";
-import { BiographyItem } from "./biographyitem";
+
 
 
 export class MemberBiography extends SpeakeasyBase {
-  @Metadata({ data: "json, name=committeeMemberships", elemType: shared.BiographyItem })
+  @SpeakeasyMetadata({ data: "json, name=committeeMemberships", elemType: BiographyItem })
   committeeMemberships?: BiographyItem[];
 
-  @Metadata({ data: "json, name=electionsContested", elemType: shared.BiographyItem })
+  @SpeakeasyMetadata({ data: "json, name=electionsContested", elemType: BiographyItem })
   electionsContested?: BiographyItem[];
 
-  @Metadata({ data: "json, name=governmentPosts", elemType: shared.BiographyItem })
+  @SpeakeasyMetadata({ data: "json, name=governmentPosts", elemType: BiographyItem })
   governmentPosts?: BiographyItem[];
 
-  @Metadata({ data: "json, name=houseMemberships", elemType: shared.BiographyItem })
+  @SpeakeasyMetadata({ data: "json, name=houseMemberships", elemType: BiographyItem })
   houseMemberships?: BiographyItem[];
 
-  @Metadata({ data: "json, name=oppositionPosts", elemType: shared.BiographyItem })
+  @SpeakeasyMetadata({ data: "json, name=oppositionPosts", elemType: BiographyItem })
   oppositionPosts?: BiographyItem[];
 
-  @Metadata({ data: "json, name=otherPosts", elemType: shared.BiographyItem })
+  @SpeakeasyMetadata({ data: "json, name=otherPosts", elemType: BiographyItem })
   otherPosts?: BiographyItem[];
 
-  @Metadata({ data: "json, name=partyAffiliations", elemType: shared.BiographyItem })
+  @SpeakeasyMetadata({ data: "json, name=partyAffiliations", elemType: BiographyItem })
   partyAffiliations?: BiographyItem[];
 
-  @Metadata({ data: "json, name=representations", elemType: shared.BiographyItem })
+  @SpeakeasyMetadata({ data: "json, name=representations", elemType: BiographyItem })
   representations?: BiographyItem[];
 }

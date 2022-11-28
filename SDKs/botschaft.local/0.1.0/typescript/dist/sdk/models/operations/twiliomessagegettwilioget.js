@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var TwilioMessageGetTwilioGetQueryParams = /** @class */ (function (_super) {
     __extends(TwilioMessageGetTwilioGetQueryParams, _super);
@@ -30,15 +30,15 @@ var TwilioMessageGetTwilioGetQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=base64_message" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=base64_message" }),
         __metadata("design:type", String)
     ], TwilioMessageGetTwilioGetQueryParams.prototype, "base64Message", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=message" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=message" }),
         __metadata("design:type", String)
     ], TwilioMessageGetTwilioGetQueryParams.prototype, "message", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=to" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=to" }),
         __metadata("design:type", String)
     ], TwilioMessageGetTwilioGetQueryParams.prototype, "to", void 0);
     return TwilioMessageGetTwilioGetQueryParams;
@@ -50,7 +50,7 @@ var TwilioMessageGetTwilioGetHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=authorization" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=authorization" }),
         __metadata("design:type", String)
     ], TwilioMessageGetTwilioGetHeaders.prototype, "authorization", void 0);
     return TwilioMessageGetTwilioGetHeaders;
@@ -62,11 +62,11 @@ var TwilioMessageGetTwilioGetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", TwilioMessageGetTwilioGetQueryParams)
     ], TwilioMessageGetTwilioGetRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", TwilioMessageGetTwilioGetHeaders)
     ], TwilioMessageGetTwilioGetRequest.prototype, "headers", void 0);
     return TwilioMessageGetTwilioGetRequest;
@@ -78,19 +78,19 @@ var TwilioMessageGetTwilioGetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], TwilioMessageGetTwilioGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.HttpValidationError)
     ], TwilioMessageGetTwilioGetResponse.prototype, "httpValidationError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], TwilioMessageGetTwilioGetResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], TwilioMessageGetTwilioGetResponse.prototype, "twilioMessageGetTwilioGet200ApplicationJsonAny", void 0);
     return TwilioMessageGetTwilioGetResponse;

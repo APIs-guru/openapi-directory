@@ -12,17 +12,14 @@ type NodeDetailsQueryParams struct {
 	Include *string `queryParam:"style=form,explode=true,name=include"`
 }
 
-type NodeDetailsRequest struct {
-	PathParams  NodeDetailsPathParams
-	QueryParams NodeDetailsQueryParams
-}
-
 type NodeDetails200ApplicationJSONActionEnum string
 
 const (
 	NodeDetails200ApplicationJSONActionEnumNodeDetails NodeDetails200ApplicationJSONActionEnum = "nodeDetails"
 )
 
+// NodeDetails200ApplicationJSONData
+// Information about the node
 type NodeDetails200ApplicationJSONData struct {
 	Nodes []shared.NodeFull `json:"nodes"`
 }
@@ -38,6 +35,11 @@ type NodeDetails200ApplicationJSON struct {
 	Action NodeDetails200ApplicationJSONActionEnum `json:"action"`
 	Data   NodeDetails200ApplicationJSONData       `json:"data"`
 	Result NodeDetails200ApplicationJSONResultEnum `json:"result"`
+}
+
+type NodeDetailsRequest struct {
+	PathParams  NodeDetailsPathParams
+	QueryParams NodeDetailsQueryParams
 }
 
 type NodeDetailsResponse struct {

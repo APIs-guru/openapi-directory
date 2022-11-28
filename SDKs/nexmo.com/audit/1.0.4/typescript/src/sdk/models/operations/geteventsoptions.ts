@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetEventsOptionsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   basicAuth: shared.SchemeBasicAuth;
 }
 
 
 export class GetEventsOptionsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetEventsOptionsSecurity;
 }
 
 
 export class GetEventsOptionsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   auditEventTypesResp?: shared.AuditEventTypesResp;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorForbidden?: shared.ErrorForbidden;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorUnauthorized?: shared.ErrorUnauthorized;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   noContent?: shared.NoContent;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

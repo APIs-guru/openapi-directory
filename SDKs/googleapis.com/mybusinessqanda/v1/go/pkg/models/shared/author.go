@@ -9,6 +9,8 @@ const (
 	AuthorTypeEnumMerchant              AuthorTypeEnum = "MERCHANT"
 )
 
+// Author
+// Represents the author of a question or answer
 type Author struct {
 	DisplayName     *string         `json:"displayName,omitempty"`
 	ProfilePhotoURI *string         `json:"profilePhotoUri,omitempty"`

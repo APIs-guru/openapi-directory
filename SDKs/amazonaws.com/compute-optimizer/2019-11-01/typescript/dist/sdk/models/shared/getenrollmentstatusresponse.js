@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StatusEnum } from "./statusenum";
 var GetEnrollmentStatusResponse = /** @class */ (function (_super) {
     __extends(GetEnrollmentStatusResponse, _super);
@@ -30,23 +30,23 @@ var GetEnrollmentStatusResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=lastUpdatedTimestamp" }),
+        SpeakeasyMetadata({ data: "json, name=lastUpdatedTimestamp" }),
         __metadata("design:type", Date)
     ], GetEnrollmentStatusResponse.prototype, "lastUpdatedTimestamp", void 0);
     __decorate([
-        Metadata({ data: "json, name=memberAccountsEnrolled" }),
+        SpeakeasyMetadata({ data: "json, name=memberAccountsEnrolled" }),
         __metadata("design:type", Boolean)
     ], GetEnrollmentStatusResponse.prototype, "memberAccountsEnrolled", void 0);
     __decorate([
-        Metadata({ data: "json, name=numberOfMemberAccountsOptedIn" }),
+        SpeakeasyMetadata({ data: "json, name=numberOfMemberAccountsOptedIn" }),
         __metadata("design:type", Number)
     ], GetEnrollmentStatusResponse.prototype, "numberOfMemberAccountsOptedIn", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], GetEnrollmentStatusResponse.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=statusReason" }),
+        SpeakeasyMetadata({ data: "json, name=statusReason" }),
         __metadata("design:type", String)
     ], GetEnrollmentStatusResponse.prototype, "statusReason", void 0);
     return GetEnrollmentStatusResponse;

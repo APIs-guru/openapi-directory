@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetRealmAuthenticationFormActionProvidersPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=realm" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=realm" })
   realm: string;
 }
 
 
 export class GetRealmAuthenticationFormActionProvidersRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetRealmAuthenticationFormActionProvidersPathParams;
 }
 
 
 export class GetRealmAuthenticationFormActionProvidersResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getRealmAuthenticationFormActionProviders2XxApplicationJsonObjects?: Map<string, any>[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

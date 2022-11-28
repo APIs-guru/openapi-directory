@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LambdaDeviceMount } from "./lambdadevicemount";
 import { LambdaVolumeMount } from "./lambdavolumemount";
+
 
 
 // LambdaContainerParams
@@ -9,15 +9,15 @@ import { LambdaVolumeMount } from "./lambdavolumemount";
  * Contains information about a container in which Lambda functions run on Greengrass core devices.
 **/
 export class LambdaContainerParams extends SpeakeasyBase {
-  @Metadata({ data: "json, name=devices", elemType: shared.LambdaDeviceMount })
+  @SpeakeasyMetadata({ data: "json, name=devices", elemType: LambdaDeviceMount })
   devices?: LambdaDeviceMount[];
 
-  @Metadata({ data: "json, name=memorySizeInKB" })
+  @SpeakeasyMetadata({ data: "json, name=memorySizeInKB" })
   memorySizeInKb?: number;
 
-  @Metadata({ data: "json, name=mountROSysfs" })
+  @SpeakeasyMetadata({ data: "json, name=mountROSysfs" })
   mountRoSysfs?: boolean;
 
-  @Metadata({ data: "json, name=volumes", elemType: shared.LambdaVolumeMount })
+  @SpeakeasyMetadata({ data: "json, name=volumes", elemType: LambdaVolumeMount })
   volumes?: LambdaVolumeMount[];
 }

@@ -1,48 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LanguagePackageDependency } from "./languagepackagedependency";
 import { FileLocation } from "./filelocation";
 
+
 export enum PackageDataPackageTypeEnum {
-    PackageTypeUnspecified = "PACKAGE_TYPE_UNSPECIFIED"
-,    Os = "OS"
-,    Maven = "MAVEN"
-,    Go = "GO"
-,    GoStdlib = "GO_STDLIB"
+    PackageTypeUnspecified = "PACKAGE_TYPE_UNSPECIFIED",
+    Os = "OS",
+    Maven = "MAVEN",
+    Go = "GO",
+    GoStdlib = "GO_STDLIB"
 }
 
 
 export class PackageData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cpeUri" })
+  @SpeakeasyMetadata({ data: "json, name=cpeUri" })
   cpeUri?: string;
 
-  @Metadata({ data: "json, name=dependencyChain", elemType: shared.LanguagePackageDependency })
+  @SpeakeasyMetadata({ data: "json, name=dependencyChain", elemType: LanguagePackageDependency })
   dependencyChain?: LanguagePackageDependency[];
 
-  @Metadata({ data: "json, name=fileLocation", elemType: shared.FileLocation })
+  @SpeakeasyMetadata({ data: "json, name=fileLocation", elemType: FileLocation })
   fileLocation?: FileLocation[];
 
-  @Metadata({ data: "json, name=hashDigest" })
+  @SpeakeasyMetadata({ data: "json, name=hashDigest" })
   hashDigest?: string;
 
-  @Metadata({ data: "json, name=os" })
+  @SpeakeasyMetadata({ data: "json, name=os" })
   os?: string;
 
-  @Metadata({ data: "json, name=osVersion" })
+  @SpeakeasyMetadata({ data: "json, name=osVersion" })
   osVersion?: string;
 
-  @Metadata({ data: "json, name=package" })
+  @SpeakeasyMetadata({ data: "json, name=package" })
   package?: string;
 
-  @Metadata({ data: "json, name=packageType" })
+  @SpeakeasyMetadata({ data: "json, name=packageType" })
   packageType?: PackageDataPackageTypeEnum;
 
-  @Metadata({ data: "json, name=patchedCve" })
+  @SpeakeasyMetadata({ data: "json, name=patchedCve" })
   patchedCve?: string[];
 
-  @Metadata({ data: "json, name=unused" })
+  @SpeakeasyMetadata({ data: "json, name=unused" })
   unused?: string;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 }

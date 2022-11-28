@@ -11,6 +11,8 @@ const (
 	PhaseStateEnumAborted          PhaseStateEnum = "ABORTED"
 )
 
+// Phase
+// Phase represents a collection of jobs that are logically grouped together for a `Rollout`.
 type Phase struct {
 	DeploymentJobs *DeploymentJobs `json:"deploymentJobs,omitempty"`
 	ID             *string         `json:"id,omitempty"`

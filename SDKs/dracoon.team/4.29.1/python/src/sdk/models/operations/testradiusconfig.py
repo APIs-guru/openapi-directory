@@ -10,12 +10,12 @@ class TestRadiusConfigHeaders:
 
 @dataclass
 class TestRadiusConfigRequest:
-    headers: TestRadiusConfigHeaders = field(default=None)
+    headers: TestRadiusConfigHeaders = field()
     
 
 @dataclass
 class TestRadiusConfigResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import blackframe
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class StartTechnicalCueDetectionFilter:
-    black_frame: Optional[blackframe.BlackFrame] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BlackFrame' }})
-    min_segment_confidence: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MinSegmentConfidence' }})
+    r"""StartTechnicalCueDetectionFilter
+    Filters for the technical segments returned by <a>GetSegmentDetection</a>. For more information, see <a>StartSegmentDetectionFilters</a>.
+    """
+    
+    black_frame: Optional[BlackFrame] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('BlackFrame') }})
+    min_segment_confidence: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MinSegmentConfidence') }})
     

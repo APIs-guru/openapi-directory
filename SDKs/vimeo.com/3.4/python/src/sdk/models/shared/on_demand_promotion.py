@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List
+from typing import List
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class OnDemandPromotionAccessTypeEnum(str, Enum):
     DEFAULT = "default"
@@ -15,21 +17,33 @@ class OnDemandPromotionDiscountTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class OnDemandPromotionMetadataConnectionsCodes:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""OnDemandPromotionMetadataConnectionsCodes
+    Information about the codes associated with this promotion.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class OnDemandPromotionMetadataConnections:
-    codes: OnDemandPromotionMetadataConnectionsCodes = field(default=None, metadata={'dataclasses_json': { 'field_name': 'codes' }})
+    r"""OnDemandPromotionMetadataConnections
+    A list of resource URIs related to the On Demand promotion.
+    """
+    
+    codes: OnDemandPromotionMetadataConnectionsCodes = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('codes') }})
     
 
 @dataclass_json
 @dataclass
 class OnDemandPromotionMetadata:
-    connections: OnDemandPromotionMetadataConnections = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connections' }})
+    r"""OnDemandPromotionMetadata
+    The video's metadata.
+    """
+    
+    connections: OnDemandPromotionMetadataConnections = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('connections') }})
     
 class OnDemandPromotionProductTypeEnum(str, Enum):
     ANY = "any"
@@ -58,15 +72,15 @@ class OnDemandPromotionTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class OnDemandPromotion:
-    access_type: OnDemandPromotionAccessTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'access_type' }})
-    discount_type: OnDemandPromotionDiscountTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'discount_type' }})
-    download: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'download' }})
-    label: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
-    metadata: OnDemandPromotionMetadata = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadata' }})
-    percent_off: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'percent_off' }})
-    product_type: OnDemandPromotionProductTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'product_type' }})
-    stream_period: OnDemandPromotionStreamPeriodEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stream_period' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    type: OnDemandPromotionTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    access_type: OnDemandPromotionAccessTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('access_type') }})
+    discount_type: OnDemandPromotionDiscountTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('discount_type') }})
+    download: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('download') }})
+    label: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('label') }})
+    metadata: OnDemandPromotionMetadata = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('metadata') }})
+    percent_off: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('percent_off') }})
+    product_type: OnDemandPromotionProductTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('product_type') }})
+    stream_period: OnDemandPromotionStreamPeriodEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('stream_period') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    type: OnDemandPromotionTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     

@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Kdfparams extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dklen" })
+  @SpeakeasyMetadata({ data: "json, name=dklen" })
   dklen: number;
 
-  @Metadata({ data: "json, name=n" })
+  @SpeakeasyMetadata({ data: "json, name=n" })
   n: number;
 
-  @Metadata({ data: "json, name=p" })
+  @SpeakeasyMetadata({ data: "json, name=p" })
   p: number;
 
-  @Metadata({ data: "json, name=r" })
+  @SpeakeasyMetadata({ data: "json, name=r" })
   r: number;
 
-  @Metadata({ data: "json, name=salt" })
+  @SpeakeasyMetadata({ data: "json, name=salt" })
   salt: string;
 }

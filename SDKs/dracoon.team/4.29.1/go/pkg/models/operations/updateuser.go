@@ -19,9 +19,9 @@ type UpdateUserRequest struct {
 	Request    shared.UpdateUserRequest `request:"mediaType=application/json"`
 }
 
-type UpdateUserResponse struct {
+type UpdateUserResponseOutput struct {
 	ContentType   string
 	ErrorResponse *shared.ErrorResponse
 	StatusCode    int64
-	UserData      *shared.UserData
+	UserData      *shared.UserDataOutput
 }

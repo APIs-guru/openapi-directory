@@ -1,9 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum WebAppStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Active = "ACTIVE"
-,    Deleted = "DELETED"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Active = "ACTIVE",
+    Deleted = "DELETED"
+}
+
+
+// WebAppInput
+/** 
+ * Details of a Firebase App for the web.
+**/
+export class WebAppInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=apiKeyId" })
+  apiKeyId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=appUrls" })
+  appUrls?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
+  displayName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
 }
 
 
@@ -12,27 +32,27 @@ export enum WebAppStateEnum {
  * Details of a Firebase App for the web.
 **/
 export class WebApp extends SpeakeasyBase {
-  @Metadata({ data: "json, name=apiKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=apiKeyId" })
   apiKeyId?: string;
 
-  @Metadata({ data: "json, name=appId" })
+  @SpeakeasyMetadata({ data: "json, name=appId" })
   appId?: string;
 
-  @Metadata({ data: "json, name=appUrls" })
+  @SpeakeasyMetadata({ data: "json, name=appUrls" })
   appUrls?: string[];
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=projectId" })
+  @SpeakeasyMetadata({ data: "json, name=projectId" })
   projectId?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: WebAppStateEnum;
 
-  @Metadata({ data: "json, name=webId" })
+  @SpeakeasyMetadata({ data: "json, name=webId" })
   webId?: string;
 }

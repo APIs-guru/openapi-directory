@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { RecipientDetail } from "./recipientdetail";
 // SmsConfiguration
 /**
  * Contains the configuration information of SMS notifications.
@@ -34,15 +34,15 @@ var SmsConfiguration = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=additionalMessage" }),
+        SpeakeasyMetadata({ data: "json, name=additionalMessage" }),
         __metadata("design:type", String)
     ], SmsConfiguration.prototype, "additionalMessage", void 0);
     __decorate([
-        Metadata({ data: "json, name=recipients", elemType: shared.RecipientDetail }),
+        SpeakeasyMetadata({ data: "json, name=recipients", elemType: RecipientDetail }),
         __metadata("design:type", Array)
     ], SmsConfiguration.prototype, "recipients", void 0);
     __decorate([
-        Metadata({ data: "json, name=senderId" }),
+        SpeakeasyMetadata({ data: "json, name=senderId" }),
         __metadata("design:type", String)
     ], SmsConfiguration.prototype, "senderId", void 0);
     return SmsConfiguration;

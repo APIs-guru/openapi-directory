@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import timinginformation
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AbortTransactionResult:
-    timing_information: Optional[timinginformation.TimingInformation] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TimingInformation' }})
+    r"""AbortTransactionResult
+    Contains the details of the aborted transaction.
+    """
+    
+    timing_information: Optional[TimingInformation] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TimingInformation') }})
     

@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UserDefinedFieldsGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   pageResultUserDefinedFieldDto?: shared.PageResultUserDefinedFieldDto;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

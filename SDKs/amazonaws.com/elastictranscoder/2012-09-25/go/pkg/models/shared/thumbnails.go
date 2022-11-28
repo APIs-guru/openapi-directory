@@ -1,5 +1,7 @@
 package shared
 
+// Thumbnails
+// Thumbnails for videos.
 type Thumbnails struct {
 	AspectRatio   *string `json:"AspectRatio,omitempty"`
 	Format        *string `json:"Format,omitempty"`

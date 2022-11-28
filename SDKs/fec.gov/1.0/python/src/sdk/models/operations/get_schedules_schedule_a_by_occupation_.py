@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetSchedulesScheduleAByOccupationQueryParams:
-    api_key: str = field(default=None, metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
+    api_key: str = field(metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
     committee_id: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'committee_id', 'style': 'form', 'explode': True }})
     cycle: Optional[List[int]] = field(default=None, metadata={'query_param': { 'field_name': 'cycle', 'style': 'form', 'explode': True }})
     occupation: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'occupation', 'style': 'form', 'explode': True }})
@@ -19,12 +19,12 @@ class GetSchedulesScheduleAByOccupationQueryParams:
 
 @dataclass
 class GetSchedulesScheduleAByOccupationRequest:
-    query_params: GetSchedulesScheduleAByOccupationQueryParams = field(default=None)
+    query_params: GetSchedulesScheduleAByOccupationQueryParams = field()
     
 
 @dataclass
 class GetSchedulesScheduleAByOccupationResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     schedule_a_by_occupation_page: Optional[shared.ScheduleAByOccupationPage] = field(default=None)
-    status_code: int = field(default=None)
     

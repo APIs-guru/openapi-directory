@@ -1,5 +1,7 @@
 package shared
 
+// LandlordRentOustandingItem
+// Outstanding Rent
 type LandlordRentOustandingItem struct {
 	DebtDays        *int32   `json:"DebtDays,omitempty"`
 	OutstandingRent *float64 `json:"OutstandingRent,omitempty"`

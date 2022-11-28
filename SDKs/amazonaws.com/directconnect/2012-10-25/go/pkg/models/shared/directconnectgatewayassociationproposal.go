@@ -1,5 +1,7 @@
 package shared
 
+// DirectConnectGatewayAssociationProposal
+// Information about the proposal request to attach a virtual private gateway to a Direct Connect gateway.
 type DirectConnectGatewayAssociationProposal struct {
 	AssociatedGateway                              *AssociatedGateway                                `json:"associatedGateway,omitempty"`
 	DirectConnectGatewayID                         *string                                           `json:"directConnectGatewayId,omitempty"`

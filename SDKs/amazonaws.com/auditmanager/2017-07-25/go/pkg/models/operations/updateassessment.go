@@ -18,11 +18,17 @@ type UpdateAssessmentHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateAssessmentRequestBodyAssessmentReportsDestination
+//
+//	The location in which Audit Manager saves assessment reports for the given assessment.
 type UpdateAssessmentRequestBodyAssessmentReportsDestination struct {
 	Destination     *string                                     `json:"destination,omitempty"`
 	DestinationType *shared.AssessmentReportDestinationTypeEnum `json:"destinationType,omitempty"`
 }
 
+// UpdateAssessmentRequestBodyScope
+//
+//	The wrapper that contains the accounts and services in scope for the assessment.
 type UpdateAssessmentRequestBodyScope struct {
 	AwsAccounts []shared.AwsAccount `json:"awsAccounts,omitempty"`
 	AwsServices []shared.AwsService `json:"awsServices,omitempty"`

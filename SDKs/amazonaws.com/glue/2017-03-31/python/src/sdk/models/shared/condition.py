@@ -1,17 +1,21 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import crawlstate_enum
-from . import logicaloperator_enum
-from . import jobrunstate_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Condition:
-    crawl_state: Optional[crawlstate_enum.CrawlStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CrawlState' }})
-    crawler_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CrawlerName' }})
-    job_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'JobName' }})
-    logical_operator: Optional[logicaloperator_enum.LogicalOperatorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LogicalOperator' }})
-    state: Optional[jobrunstate_enum.JobRunStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'State' }})
+    r"""Condition
+    Defines a condition under which a trigger fires.
+    """
+    
+    crawl_state: Optional[CrawlStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CrawlState') }})
+    crawler_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CrawlerName') }})
+    job_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('JobName') }})
+    logical_operator: Optional[LogicalOperatorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('LogicalOperator') }})
+    state: Optional[JobRunStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('State') }})
     

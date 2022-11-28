@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleCloudChannelV1PeriodPeriodTypeEnum {
-    PeriodTypeUnspecified = "PERIOD_TYPE_UNSPECIFIED"
-,    Day = "DAY"
-,    Month = "MONTH"
-,    Year = "YEAR"
+    PeriodTypeUnspecified = "PERIOD_TYPE_UNSPECIFIED",
+    Day = "DAY",
+    Month = "MONTH",
+    Year = "YEAR"
 }
 
 
@@ -13,9 +14,9 @@ export enum GoogleCloudChannelV1PeriodPeriodTypeEnum {
  * Represents period in days/months/years.
 **/
 export class GoogleCloudChannelV1Period extends SpeakeasyBase {
-  @Metadata({ data: "json, name=duration" })
+  @SpeakeasyMetadata({ data: "json, name=duration" })
   duration?: number;
 
-  @Metadata({ data: "json, name=periodType" })
+  @SpeakeasyMetadata({ data: "json, name=periodType" })
   periodType?: GoogleCloudChannelV1PeriodPeriodTypeEnum;
 }

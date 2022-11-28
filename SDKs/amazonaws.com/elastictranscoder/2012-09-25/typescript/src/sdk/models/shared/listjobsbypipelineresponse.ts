@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Job } from "./job";
+
 
 
 // ListJobsByPipelineResponse
@@ -8,9 +8,9 @@ import { Job } from "./job";
  * The <code>ListJobsByPipelineResponse</code> structure.
 **/
 export class ListJobsByPipelineResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Jobs", elemType: shared.Job })
+  @SpeakeasyMetadata({ data: "json, name=Jobs", elemType: Job })
   jobs?: Job[];
 
-  @Metadata({ data: "json, name=NextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextPageToken" })
   nextPageToken?: string;
 }

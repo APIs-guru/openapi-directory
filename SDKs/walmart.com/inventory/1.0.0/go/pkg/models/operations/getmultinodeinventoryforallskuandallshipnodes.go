@@ -13,11 +13,6 @@ type GetMultiNodeInventoryForAllSkuAndAllShipNodesHeaders struct {
 	WmSvcName             string `header:"style=simple,explode=false,name=WM_SVC.NAME"`
 }
 
-type GetMultiNodeInventoryForAllSkuAndAllShipNodesRequest struct {
-	QueryParams GetMultiNodeInventoryForAllSkuAndAllShipNodesQueryParams
-	Headers     GetMultiNodeInventoryForAllSkuAndAllShipNodesHeaders
-}
-
 type GetMultiNodeInventoryForAllSkuAndAllShipNodes200ApplicationJSONElementsInventoriesNodesAvailToSellQtyUnitEnum string
 
 const (
@@ -63,6 +58,11 @@ type GetMultiNodeInventoryForAllSkuAndAllShipNodes200ApplicationJSONMeta struct 
 type GetMultiNodeInventoryForAllSkuAndAllShipNodes200ApplicationJSON struct {
 	Elements *GetMultiNodeInventoryForAllSkuAndAllShipNodes200ApplicationJSONElements `json:"elements,omitempty"`
 	Meta     *GetMultiNodeInventoryForAllSkuAndAllShipNodes200ApplicationJSONMeta     `json:"meta,omitempty"`
+}
+
+type GetMultiNodeInventoryForAllSkuAndAllShipNodesRequest struct {
+	QueryParams GetMultiNodeInventoryForAllSkuAndAllShipNodesQueryParams
+	Headers     GetMultiNodeInventoryForAllSkuAndAllShipNodesHeaders
 }
 
 type GetMultiNodeInventoryForAllSkuAndAllShipNodesResponse struct {

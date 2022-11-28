@@ -14,6 +14,8 @@ const (
 	DeliverInfoTargetEnumPscVpcSc            DeliverInfoTargetEnum = "PSC_VPC_SC"
 )
 
+// DeliverInfo
+// Details of the final state "deliver" and associated resource.
 type DeliverInfo struct {
 	ResourceURI *string                `json:"resourceUri,omitempty"`
 	Target      *DeliverInfoTargetEnum `json:"target,omitempty"`

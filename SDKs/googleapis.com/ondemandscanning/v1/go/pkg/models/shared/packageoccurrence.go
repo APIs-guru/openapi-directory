@@ -8,6 +8,8 @@ const (
 	PackageOccurrenceArchitectureEnumX64                     PackageOccurrenceArchitectureEnum = "X64"
 )
 
+// PackageOccurrence
+// Details on how a particular software package was installed on a system.
 type PackageOccurrence struct {
 	Architecture *PackageOccurrenceArchitectureEnum `json:"architecture,omitempty"`
 	CpeURI       *string                            `json:"cpeUri,omitempty"`

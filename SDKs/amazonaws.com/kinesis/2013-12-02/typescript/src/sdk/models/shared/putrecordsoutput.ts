@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EncryptionTypeEnum } from "./encryptiontypeenum";
 import { PutRecordsResultEntry } from "./putrecordsresultentry";
+
 
 
 // PutRecordsOutput
@@ -9,12 +9,12 @@ import { PutRecordsResultEntry } from "./putrecordsresultentry";
  *  <code>PutRecords</code> results.
 **/
 export class PutRecordsOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EncryptionType" })
+  @SpeakeasyMetadata({ data: "json, name=EncryptionType" })
   encryptionType?: EncryptionTypeEnum;
 
-  @Metadata({ data: "json, name=FailedRecordCount" })
+  @SpeakeasyMetadata({ data: "json, name=FailedRecordCount" })
   failedRecordCount?: number;
 
-  @Metadata({ data: "json, name=Records", elemType: shared.PutRecordsResultEntry })
+  @SpeakeasyMetadata({ data: "json, name=Records", elemType: PutRecordsResultEntry })
   records: PutRecordsResultEntry[];
 }

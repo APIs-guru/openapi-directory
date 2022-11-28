@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum OperationalDisconnectProblemDisconnectTypeEnum {
-    OperationalDisconnect = "OperationalDisconnect"
-,    UpstreamOperationalDisconnect = "UpstreamOperationalDisconnect"
-,    ForceDisconnect = "ForceDisconnect"
-,    UpstreamUncleanDisconnect = "UpstreamUncleanDisconnect"
-,    SlowReader = "SlowReader"
-,    InternalError = "InternalError"
-,    PackageUpgraded = "PackageUpgraded"
-,    PackageDowngraded = "PackageDowngraded"
-,    ClientApplicationStateDegraded = "ClientApplicationStateDegraded"
+    OperationalDisconnect = "OperationalDisconnect",
+    UpstreamOperationalDisconnect = "UpstreamOperationalDisconnect",
+    ForceDisconnect = "ForceDisconnect",
+    UpstreamUncleanDisconnect = "UpstreamUncleanDisconnect",
+    SlowReader = "SlowReader",
+    InternalError = "InternalError",
+    PackageUpgraded = "PackageUpgraded",
+    PackageDowngraded = "PackageDowngraded",
+    ClientApplicationStateDegraded = "ClientApplicationStateDegraded"
 }
 
 
@@ -18,15 +19,15 @@ export enum OperationalDisconnectProblemDisconnectTypeEnum {
  * You have been disconnected for operational reasons.
 **/
 export class OperationalDisconnectProblem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=detail" })
+  @SpeakeasyMetadata({ data: "json, name=detail" })
   detail: string;
 
-  @Metadata({ data: "json, name=disconnect_type" })
+  @SpeakeasyMetadata({ data: "json, name=disconnect_type" })
   disconnectType?: OperationalDisconnectProblemDisconnectTypeEnum;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }

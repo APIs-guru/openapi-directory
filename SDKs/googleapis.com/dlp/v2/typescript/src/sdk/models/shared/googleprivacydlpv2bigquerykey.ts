@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GooglePrivacyDlpV2BigQueryTable } from "./googleprivacydlpv2bigquerytable";
+
 
 
 // GooglePrivacyDlpV2BigQueryKey
@@ -7,9 +8,9 @@ import { GooglePrivacyDlpV2BigQueryTable } from "./googleprivacydlpv2bigquerytab
  * Row key for identifying a record in BigQuery table.
 **/
 export class GooglePrivacyDlpV2BigQueryKey extends SpeakeasyBase {
-  @Metadata({ data: "json, name=rowNumber" })
+  @SpeakeasyMetadata({ data: "json, name=rowNumber" })
   rowNumber?: string;
 
-  @Metadata({ data: "json, name=tableReference" })
+  @SpeakeasyMetadata({ data: "json, name=tableReference" })
   tableReference?: GooglePrivacyDlpV2BigQueryTable;
 }

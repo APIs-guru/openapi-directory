@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetApiV1EnvironmentsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=deleted" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=deleted" })
   deleted?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name" })
   name?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=planId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=planId" })
   planId?: string;
 }
 
 
 export class GetApiV1EnvironmentsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetApiV1EnvironmentsQueryParams;
 }
 
 
 export class GetApiV1EnvironmentsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata({ elemType: shared.CloudEnvironmentResult })
+  @SpeakeasyMetadata({ elemType: shared.CloudEnvironmentResult })
   cloudEnvironmentResults?: shared.CloudEnvironmentResult[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

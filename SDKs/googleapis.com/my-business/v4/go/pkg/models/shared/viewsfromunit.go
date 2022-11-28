@@ -72,6 +72,8 @@ const (
 	ViewsFromUnitValleyViewExceptionEnumDependentOnDayOfWeek ViewsFromUnitValleyViewExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
 
+// ViewsFromUnit
+// Views available from the guest unit itself.
 type ViewsFromUnit struct {
 	BeachView             *bool                                   `json:"beachView,omitempty"`
 	BeachViewException    *ViewsFromUnitBeachViewExceptionEnum    `json:"beachViewException,omitempty"`

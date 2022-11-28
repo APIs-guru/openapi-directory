@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsRdsDbInstanceAssociatedRole
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An IAM role associated with the DB instance.
 **/
 export class AwsRdsDbInstanceAssociatedRole extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FeatureName" })
+  @SpeakeasyMetadata({ data: "json, name=FeatureName" })
   featureName?: string;
 
-  @Metadata({ data: "json, name=RoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=RoleArn" })
   roleArn?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: string;
 }

@@ -1,6 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { Page } from "./page";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Page
@@ -8,12 +7,12 @@ import { Page } from "./page";
  * Represents a documentation page. A page can contain subpages to represent nested documentation set structure.
 **/
 export class Page extends SpeakeasyBase {
-  @Metadata({ data: "json, name=content" })
+  @SpeakeasyMetadata({ data: "json, name=content" })
   content?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=subpages", elemType: shared.Page })
+  @SpeakeasyMetadata({ data: "json, name=subpages", elemType: Page })
   subpages?: Page[];
 }

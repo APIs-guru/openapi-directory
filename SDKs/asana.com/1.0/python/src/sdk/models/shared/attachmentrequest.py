@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 
 
 @dataclass
 class AttachmentRequestFile:
-    content: bytes = field(default=None, metadata={'multipart_form': { 'content': True }})
-    file: str = field(default=None, metadata={'multipart_form': { 'field_name': 'file' }})
+    content: bytes = field(metadata={'multipart_form': { 'content': True }})
+    file: str = field(metadata={'multipart_form': { 'field_name': 'file' }})
     
 class AttachmentRequestResourceSubtypeEnum(str, Enum):
     ASANA_FILE_ATTACHMENTS = "asana_file_attachments"

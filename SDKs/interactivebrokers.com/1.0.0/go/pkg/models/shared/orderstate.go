@@ -7,6 +7,8 @@ const (
 	OrderStateSideEnumTwo OrderStateSideEnum = "2"
 )
 
+// OrderState
+// An object containing all the properties defining an order
 type OrderState struct {
 	ContractID        *float64            `json:"ContractId,omitempty"`
 	CustomerOrderID   *float64            `json:"CustomerOrderId,omitempty"`

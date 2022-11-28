@@ -12,6 +12,8 @@ const (
 	PieChartSpecLegendPositionEnumLabeledLegend                     PieChartSpecLegendPositionEnum = "LABELED_LEGEND"
 )
 
+// PieChartSpec
+// A pie chart.
 type PieChartSpec struct {
 	Domain           *ChartData                      `json:"domain,omitempty"`
 	LegendPosition   *PieChartSpecLegendPositionEnum `json:"legendPosition,omitempty"`

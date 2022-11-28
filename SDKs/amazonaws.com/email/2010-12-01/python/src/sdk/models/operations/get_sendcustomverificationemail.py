@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetSendCustomVerificationEmailActionEnum(str, Enum):
     SEND_CUSTOM_VERIFICATION_EMAIL = "SendCustomVerificationEmail"
@@ -10,11 +14,11 @@ class GetSendCustomVerificationEmailVersionEnum(str, Enum):
 
 @dataclass
 class GetSendCustomVerificationEmailQueryParams:
-    action: GetSendCustomVerificationEmailActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetSendCustomVerificationEmailActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    email_address: str = field(metadata={'query_param': { 'field_name': 'EmailAddress', 'style': 'form', 'explode': True }})
+    template_name: str = field(metadata={'query_param': { 'field_name': 'TemplateName', 'style': 'form', 'explode': True }})
+    version: GetSendCustomVerificationEmailVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     configuration_set_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'ConfigurationSetName', 'style': 'form', 'explode': True }})
-    email_address: str = field(default=None, metadata={'query_param': { 'field_name': 'EmailAddress', 'style': 'form', 'explode': True }})
-    template_name: str = field(default=None, metadata={'query_param': { 'field_name': 'TemplateName', 'style': 'form', 'explode': True }})
-    version: GetSendCustomVerificationEmailVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetSendCustomVerificationEmailHeaders:
 
 @dataclass
 class GetSendCustomVerificationEmailRequest:
-    query_params: GetSendCustomVerificationEmailQueryParams = field(default=None)
-    headers: GetSendCustomVerificationEmailHeaders = field(default=None)
+    headers: GetSendCustomVerificationEmailHeaders = field()
+    query_params: GetSendCustomVerificationEmailQueryParams = field()
     
 
 @dataclass
 class GetSendCustomVerificationEmailResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

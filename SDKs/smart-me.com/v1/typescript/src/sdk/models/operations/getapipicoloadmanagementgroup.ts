@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetApiPicoLoadmanagementgroupResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.PicoLoadmanagementGroupDto })
+  @SpeakeasyMetadata({ elemType: shared.PicoLoadmanagementGroupDto })
   picoLoadmanagementGroupDtos?: shared.PicoLoadmanagementGroupDto[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

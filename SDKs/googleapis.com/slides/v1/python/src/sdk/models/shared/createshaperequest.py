@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import pageelementproperties
+from sdk import utils
+from . import *
 
 class CreateShapeRequestShapeTypeEnum(str, Enum):
     TYPE_UNSPECIFIED = "TYPE_UNSPECIFIED"
@@ -152,7 +154,11 @@ class CreateShapeRequestShapeTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CreateShapeRequest:
-    element_properties: Optional[pageelementproperties.PageElementProperties] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'elementProperties' }})
-    object_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'objectId' }})
-    shape_type: Optional[CreateShapeRequestShapeTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'shapeType' }})
+    r"""CreateShapeRequest
+    Creates a new shape.
+    """
+    
+    element_properties: Optional[PageElementProperties] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('elementProperties') }})
+    object_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('objectId') }})
+    shape_type: Optional[CreateShapeRequestShapeTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('shapeType') }})
     

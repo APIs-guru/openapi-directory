@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TeardownTag
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents a tag that fires after another tag in order to tear down dependencies.
 **/
 export class TeardownTag extends SpeakeasyBase {
-  @Metadata({ data: "json, name=stopTeardownOnFailure" })
+  @SpeakeasyMetadata({ data: "json, name=stopTeardownOnFailure" })
   stopTeardownOnFailure?: boolean;
 
-  @Metadata({ data: "json, name=tagName" })
+  @SpeakeasyMetadata({ data: "json, name=tagName" })
   tagName?: string;
 }

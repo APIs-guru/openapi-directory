@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DescribeObjectPathParams:
-    path: str = field(default=None, metadata={'path_param': { 'field_name': 'Path', 'style': 'simple', 'explode': False }})
+    path: str = field(metadata={'path_param': { 'field_name': 'Path', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,16 +23,16 @@ class DescribeObjectHeaders:
 
 @dataclass
 class DescribeObjectRequest:
-    path_params: DescribeObjectPathParams = field(default=None)
-    headers: DescribeObjectHeaders = field(default=None)
+    headers: DescribeObjectHeaders = field()
+    path_params: DescribeObjectPathParams = field()
     
 
 @dataclass
 class DescribeObjectResponse:
+    content_type: str = field()
+    status_code: int = field()
     container_not_found_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     describe_object_response: Optional[dict[str, Any]] = field(default=None)
     internal_server_error: Optional[Any] = field(default=None)
     object_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

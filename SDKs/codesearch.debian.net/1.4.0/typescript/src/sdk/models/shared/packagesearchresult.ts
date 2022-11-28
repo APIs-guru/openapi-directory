@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SearchResult } from "./searchresult";
 
 
+
 export class PackageSearchResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=package" })
+  @SpeakeasyMetadata({ data: "json, name=package" })
   package: string;
 
-  @Metadata({ data: "json, name=results", elemType: shared.SearchResult })
+  @SpeakeasyMetadata({ data: "json, name=results", elemType: SearchResult })
   results: SearchResult[];
 }

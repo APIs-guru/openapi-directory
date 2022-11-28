@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteSubnetCidrReservationActionEnum(str, Enum):
     DELETE_SUBNET_CIDR_RESERVATION = "DeleteSubnetCidrReservation"
@@ -10,10 +14,10 @@ class GetDeleteSubnetCidrReservationVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteSubnetCidrReservationQueryParams:
-    action: GetDeleteSubnetCidrReservationActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDeleteSubnetCidrReservationActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    subnet_cidr_reservation_id: str = field(metadata={'query_param': { 'field_name': 'SubnetCidrReservationId', 'style': 'form', 'explode': True }})
+    version: GetDeleteSubnetCidrReservationVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    subnet_cidr_reservation_id: str = field(default=None, metadata={'query_param': { 'field_name': 'SubnetCidrReservationId', 'style': 'form', 'explode': True }})
-    version: GetDeleteSubnetCidrReservationVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetDeleteSubnetCidrReservationHeaders:
 
 @dataclass
 class GetDeleteSubnetCidrReservationRequest:
-    query_params: GetDeleteSubnetCidrReservationQueryParams = field(default=None)
-    headers: GetDeleteSubnetCidrReservationHeaders = field(default=None)
+    headers: GetDeleteSubnetCidrReservationHeaders = field()
+    query_params: GetDeleteSubnetCidrReservationQueryParams = field()
     
 
 @dataclass
 class GetDeleteSubnetCidrReservationResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

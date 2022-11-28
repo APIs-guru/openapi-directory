@@ -1,5 +1,7 @@
 package shared
 
+// Variable
+// Represents a Google Tag Manager Variable.
 type Variable struct {
 	AccountID          *string              `json:"accountId,omitempty"`
 	ContainerID        *string              `json:"containerId,omitempty"`

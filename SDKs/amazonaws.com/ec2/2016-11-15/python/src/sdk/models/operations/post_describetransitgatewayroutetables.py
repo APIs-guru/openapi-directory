@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDescribeTransitGatewayRouteTablesActionEnum(str, Enum):
     DESCRIBE_TRANSIT_GATEWAY_ROUTE_TABLES = "DescribeTransitGatewayRouteTables"
@@ -10,10 +14,10 @@ class PostDescribeTransitGatewayRouteTablesVersionEnum(str, Enum):
 
 @dataclass
 class PostDescribeTransitGatewayRouteTablesQueryParams:
-    action: PostDescribeTransitGatewayRouteTablesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: PostDescribeTransitGatewayRouteTablesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDescribeTransitGatewayRouteTablesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     max_results: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'MaxResults', 'style': 'form', 'explode': True }})
     next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NextToken', 'style': 'form', 'explode': True }})
-    version: PostDescribeTransitGatewayRouteTablesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,14 +33,14 @@ class PostDescribeTransitGatewayRouteTablesHeaders:
 
 @dataclass
 class PostDescribeTransitGatewayRouteTablesRequest:
-    query_params: PostDescribeTransitGatewayRouteTablesQueryParams = field(default=None)
-    headers: PostDescribeTransitGatewayRouteTablesHeaders = field(default=None)
+    headers: PostDescribeTransitGatewayRouteTablesHeaders = field()
+    query_params: PostDescribeTransitGatewayRouteTablesQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDescribeTransitGatewayRouteTablesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

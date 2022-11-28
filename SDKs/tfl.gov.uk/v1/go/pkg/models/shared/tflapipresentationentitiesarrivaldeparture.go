@@ -13,6 +13,8 @@ const (
 	TflAPIPresentationEntitiesArrivalDepartureDepartureStatusEnumNotStoppingAtStation TflAPIPresentationEntitiesArrivalDepartureDepartureStatusEnum = "NotStoppingAtStation"
 )
 
+// TflAPIPresentationEntitiesArrivalDeparture
+// DTO to capture the prediction details
 type TflAPIPresentationEntitiesArrivalDeparture struct {
 	Cause                        *string                                                        `json:"cause,omitempty"`
 	DepartureStatus              *TflAPIPresentationEntitiesArrivalDepartureDepartureStatusEnum `json:"departureStatus,omitempty"`

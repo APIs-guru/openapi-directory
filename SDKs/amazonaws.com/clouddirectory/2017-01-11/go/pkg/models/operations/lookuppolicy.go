@@ -20,6 +20,8 @@ type LookupPolicyHeaders struct {
 	XAmzDataPartition string  `header:"style=simple,explode=false,name=x-amz-data-partition"`
 }
 
+// LookupPolicyRequestBodyObjectReference
+// The reference that identifies an object.
 type LookupPolicyRequestBodyObjectReference struct {
 	Selector *string `json:"Selector,omitempty"`
 }

@@ -1,65 +1,66 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum GetContentSourceSectionTimePeriodJsonSourceEnum {
-    All = "all"
-,    Nyt = "nyt"
-,    Iht = "iht"
+    All = "all",
+    Nyt = "nyt",
+    Iht = "iht"
 }
 
 
 export class GetContentSourceSectionTimePeriodJsonPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=section" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=section" })
   section: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=source" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=source" })
   source: GetContentSourceSectionTimePeriodJsonSourceEnum;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=time-period" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=time-period" })
   timePeriod: number;
 }
 
 
 export class GetContentSourceSectionTimePeriodJsonQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: number;
 }
 
 
-export class GetContentSourceSectionTimePeriodJsonRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetContentSourceSectionTimePeriodJsonPathParams;
-
-  @Metadata()
-  queryParams: GetContentSourceSectionTimePeriodJsonQueryParams;
-}
-
-
 export class GetContentSourceSectionTimePeriodJson200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=copyright" })
+  @SpeakeasyMetadata({ data: "json, name=copyright" })
   copyright?: string;
 
-  @Metadata({ data: "json, name=num_results" })
+  @SpeakeasyMetadata({ data: "json, name=num_results" })
   numResults?: number;
 
-  @Metadata({ data: "json, name=results", elemType: shared.Article })
+  @SpeakeasyMetadata({ data: "json, name=results", elemType: shared.Article })
   results?: shared.Article[];
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 }
 
 
+export class GetContentSourceSectionTimePeriodJsonRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetContentSourceSectionTimePeriodJsonPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: GetContentSourceSectionTimePeriodJsonQueryParams;
+}
+
+
 export class GetContentSourceSectionTimePeriodJsonResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getContentSourceSectionTimePeriodJson200ApplicationJsonObject?: GetContentSourceSectionTimePeriodJson200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DesktopInfo
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Desktop related attributes to the Dynamic Link.
 **/
 export class DesktopInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=desktopFallbackLink" })
+  @SpeakeasyMetadata({ data: "json, name=desktopFallbackLink" })
   desktopFallbackLink?: string;
 }

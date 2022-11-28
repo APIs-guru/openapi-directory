@@ -8,6 +8,8 @@ const (
 	MetricCompatibilityCompatibilityEnumIncompatible             MetricCompatibilityCompatibilityEnum = "INCOMPATIBLE"
 )
 
+// MetricCompatibility
+// The compatibility for a single metric.
 type MetricCompatibility struct {
 	Compatibility  *MetricCompatibilityCompatibilityEnum `json:"compatibility,omitempty"`
 	MetricMetadata *MetricMetadata                       `json:"metricMetadata,omitempty"`

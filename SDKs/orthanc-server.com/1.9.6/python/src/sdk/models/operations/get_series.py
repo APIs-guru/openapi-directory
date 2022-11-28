@@ -13,12 +13,12 @@ class GetSeriesQueryParams:
 
 @dataclass
 class GetSeriesRequest:
-    query_params: GetSeriesQueryParams = field(default=None)
+    query_params: GetSeriesQueryParams = field()
     
 
 @dataclass
 class GetSeriesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_series_200_application_json_any: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

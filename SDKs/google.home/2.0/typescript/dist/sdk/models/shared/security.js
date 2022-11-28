@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var SchemeCastLocalAuthorizationToken = /** @class */ (function (_super) {
     __extends(SchemeCastLocalAuthorizationToken, _super);
     function SchemeCastLocalAuthorizationToken() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, name=cast-local-authorization-token" }),
+        SpeakeasyMetadata({ data: "security, name=cast-local-authorization-token" }),
         __metadata("design:type", String)
     ], SchemeCastLocalAuthorizationToken.prototype, "apiKey", void 0);
     return SchemeCastLocalAuthorizationToken;
@@ -41,7 +41,7 @@ var Security = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", SchemeCastLocalAuthorizationToken)
     ], Security.prototype, "castLocalAuthorizationToken", void 0);
     return Security;

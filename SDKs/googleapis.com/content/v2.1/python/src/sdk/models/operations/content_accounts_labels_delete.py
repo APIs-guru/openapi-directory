@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ContentAccountsLabelsDeletePathParams:
-    account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
-    label_id: str = field(default=None, metadata={'path_param': { 'field_name': 'labelId', 'style': 'simple', 'explode': False }})
+    account_id: str = field(metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
+    label_id: str = field(metadata={'path_param': { 'field_name': 'labelId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,19 +27,19 @@ class ContentAccountsLabelsDeleteQueryParams:
 
 @dataclass
 class ContentAccountsLabelsDeleteSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ContentAccountsLabelsDeleteRequest:
-    path_params: ContentAccountsLabelsDeletePathParams = field(default=None)
-    query_params: ContentAccountsLabelsDeleteQueryParams = field(default=None)
-    security: ContentAccountsLabelsDeleteSecurity = field(default=None)
+    path_params: ContentAccountsLabelsDeletePathParams = field()
+    query_params: ContentAccountsLabelsDeleteQueryParams = field()
+    security: ContentAccountsLabelsDeleteSecurity = field()
     
 
 @dataclass
 class ContentAccountsLabelsDeleteResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

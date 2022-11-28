@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GuestUnitFeatures } from "./guestunitfeatures";
+
 
 
 // GuestUnitType
@@ -7,12 +8,12 @@ import { GuestUnitFeatures } from "./guestunitfeatures";
  * A specific type of unit primarily defined by its features.
 **/
 export class GuestUnitType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=codes" })
+  @SpeakeasyMetadata({ data: "json, name=codes" })
   codes?: string[];
 
-  @Metadata({ data: "json, name=features" })
+  @SpeakeasyMetadata({ data: "json, name=features" })
   features?: GuestUnitFeatures;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 }

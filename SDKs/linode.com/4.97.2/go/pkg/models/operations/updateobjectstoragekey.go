@@ -4,7 +4,7 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-var UpdateObjectStorageKeyServers = []string{
+var UpdateObjectStorageKeyServerList = []string{
 	"https://api.linode.com/v4",
 }
 
@@ -16,17 +16,13 @@ type UpdateObjectStorageKeyRequestBody struct {
 	Label *string `json:"label,omitempty"`
 }
 
-type UpdateObjectStorageKeySecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type UpdateObjectStorageKeySecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type UpdateObjectStorageKeySecurity struct {
-	Option1 *UpdateObjectStorageKeySecurityOption1 `security:"option"`
-	Option2 *UpdateObjectStorageKeySecurityOption2 `security:"option"`
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
+}
+
+type UpdateObjectStorageKeyDefaultApplicationJSON struct {
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type UpdateObjectStorageKeyRequest struct {
@@ -34,10 +30,6 @@ type UpdateObjectStorageKeyRequest struct {
 	PathParams UpdateObjectStorageKeyPathParams
 	Request    *UpdateObjectStorageKeyRequestBody `request:"mediaType=application/json"`
 	Security   UpdateObjectStorageKeySecurity
-}
-
-type UpdateObjectStorageKeyDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type UpdateObjectStorageKeyResponse struct {

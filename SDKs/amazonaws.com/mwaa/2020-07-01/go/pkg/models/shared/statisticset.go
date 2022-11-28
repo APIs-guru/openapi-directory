@@ -1,5 +1,7 @@
 package shared
 
+// StatisticSet
+// Internal only API.
 type StatisticSet struct {
 	Maximum     *float64 `json:"Maximum,omitempty"`
 	Minimum     *float64 `json:"Minimum,omitempty"`

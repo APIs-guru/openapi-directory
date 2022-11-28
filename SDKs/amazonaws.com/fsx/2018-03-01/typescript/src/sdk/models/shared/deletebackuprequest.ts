@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DeleteBackupRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The request object for <code>DeleteBackup</code> operation.
 **/
 export class DeleteBackupRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BackupId" })
+  @SpeakeasyMetadata({ data: "json, name=BackupId" })
   backupId: string;
 
-  @Metadata({ data: "json, name=ClientRequestToken" })
+  @SpeakeasyMetadata({ data: "json, name=ClientRequestToken" })
   clientRequestToken?: string;
 }

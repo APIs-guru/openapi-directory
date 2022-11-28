@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class CloudidentityGroupsMembershipsCreatePathParams extends SpeakeasyBase {
     parent: string;
@@ -31,7 +31,7 @@ export declare class CloudidentityGroupsMembershipsCreateSecurity extends Speake
 export declare class CloudidentityGroupsMembershipsCreateRequest extends SpeakeasyBase {
     pathParams: CloudidentityGroupsMembershipsCreatePathParams;
     queryParams: CloudidentityGroupsMembershipsCreateQueryParams;
-    request?: shared.Membership;
+    request?: shared.MembershipInput;
     security: CloudidentityGroupsMembershipsCreateSecurity;
 }
 export declare class CloudidentityGroupsMembershipsCreateResponse extends SpeakeasyBase {

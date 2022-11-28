@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EmailPreferences } from "./emailpreferences";
 import { Status } from "./status";
 
+
 export enum TransferRunStateEnum {
-    TransferStateUnspecified = "TRANSFER_STATE_UNSPECIFIED"
-,    Pending = "PENDING"
-,    Running = "RUNNING"
-,    Succeeded = "SUCCEEDED"
-,    Failed = "FAILED"
-,    Cancelled = "CANCELLED"
+    TransferStateUnspecified = "TRANSFER_STATE_UNSPECIFIED",
+    Pending = "PENDING",
+    Running = "RUNNING",
+    Succeeded = "SUCCEEDED",
+    Failed = "FAILED",
+    Cancelled = "CANCELLED"
 }
 
 
@@ -17,48 +18,48 @@ export enum TransferRunStateEnum {
  * Represents a data transfer run.
 **/
 export class TransferRun extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataSourceId" })
+  @SpeakeasyMetadata({ data: "json, name=dataSourceId" })
   dataSourceId?: string;
 
-  @Metadata({ data: "json, name=destinationDatasetId" })
+  @SpeakeasyMetadata({ data: "json, name=destinationDatasetId" })
   destinationDatasetId?: string;
 
-  @Metadata({ data: "json, name=emailPreferences" })
+  @SpeakeasyMetadata({ data: "json, name=emailPreferences" })
   emailPreferences?: EmailPreferences;
 
-  @Metadata({ data: "json, name=endTime" })
+  @SpeakeasyMetadata({ data: "json, name=endTime" })
   endTime?: string;
 
-  @Metadata({ data: "json, name=errorStatus" })
+  @SpeakeasyMetadata({ data: "json, name=errorStatus" })
   errorStatus?: Status;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=notificationPubsubTopic" })
+  @SpeakeasyMetadata({ data: "json, name=notificationPubsubTopic" })
   notificationPubsubTopic?: string;
 
-  @Metadata({ data: "json, name=params" })
+  @SpeakeasyMetadata({ data: "json, name=params" })
   params?: Map<string, any>;
 
-  @Metadata({ data: "json, name=runTime" })
+  @SpeakeasyMetadata({ data: "json, name=runTime" })
   runTime?: string;
 
-  @Metadata({ data: "json, name=schedule" })
+  @SpeakeasyMetadata({ data: "json, name=schedule" })
   schedule?: string;
 
-  @Metadata({ data: "json, name=scheduleTime" })
+  @SpeakeasyMetadata({ data: "json, name=scheduleTime" })
   scheduleTime?: string;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: TransferRunStateEnum;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 
-  @Metadata({ data: "json, name=userId" })
+  @SpeakeasyMetadata({ data: "json, name=userId" })
   userId?: string;
 }

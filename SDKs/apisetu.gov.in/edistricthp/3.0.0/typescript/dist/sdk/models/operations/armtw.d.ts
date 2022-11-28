@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class ArmtwRequestBodyCertificateParameters extends SpeakeasyBase {
     udf1: string;
@@ -15,10 +15,6 @@ export declare class ArmtwRequestBody extends SpeakeasyBase {
 export declare class ArmtwSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class ArmtwRequest extends SpeakeasyBase {
-    request?: ArmtwRequestBody;
-    security: ArmtwSecurity;
 }
 export declare enum Armtw400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -101,6 +97,10 @@ export declare enum Armtw504ApplicationJsonErrorDescriptionEnum {
 export declare class Armtw504ApplicationJson extends SpeakeasyBase {
     error?: Armtw504ApplicationJsonErrorEnum;
     errorDescription?: Armtw504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class ArmtwRequest extends SpeakeasyBase {
+    request?: ArmtwRequestBody;
+    security: ArmtwSecurity;
 }
 export declare class ArmtwResponse extends SpeakeasyBase {
     contentType: string;

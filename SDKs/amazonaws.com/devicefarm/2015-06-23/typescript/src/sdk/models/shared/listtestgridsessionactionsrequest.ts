@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ListTestGridSessionActionsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=maxResult" })
+  @SpeakeasyMetadata({ data: "json, name=maxResult" })
   maxResult?: number;
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=sessionArn" })
+  @SpeakeasyMetadata({ data: "json, name=sessionArn" })
   sessionArn: string;
 }

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostGetTransitGatewayRouteTablePropagationsActionEnum(str, Enum):
     GET_TRANSIT_GATEWAY_ROUTE_TABLE_PROPAGATIONS = "GetTransitGatewayRouteTablePropagations"
@@ -10,10 +14,10 @@ class PostGetTransitGatewayRouteTablePropagationsVersionEnum(str, Enum):
 
 @dataclass
 class PostGetTransitGatewayRouteTablePropagationsQueryParams:
-    action: PostGetTransitGatewayRouteTablePropagationsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: PostGetTransitGatewayRouteTablePropagationsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostGetTransitGatewayRouteTablePropagationsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     max_results: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'MaxResults', 'style': 'form', 'explode': True }})
     next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NextToken', 'style': 'form', 'explode': True }})
-    version: PostGetTransitGatewayRouteTablePropagationsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,14 +33,14 @@ class PostGetTransitGatewayRouteTablePropagationsHeaders:
 
 @dataclass
 class PostGetTransitGatewayRouteTablePropagationsRequest:
-    query_params: PostGetTransitGatewayRouteTablePropagationsQueryParams = field(default=None)
-    headers: PostGetTransitGatewayRouteTablePropagationsHeaders = field(default=None)
+    headers: PostGetTransitGatewayRouteTablePropagationsHeaders = field()
+    query_params: PostGetTransitGatewayRouteTablePropagationsQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostGetTransitGatewayRouteTablePropagationsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

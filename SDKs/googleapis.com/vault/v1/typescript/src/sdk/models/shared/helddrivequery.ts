@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // HeldDriveQuery
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Options for Drive holds.
 **/
 export class HeldDriveQuery extends SpeakeasyBase {
-  @Metadata({ data: "json, name=includeSharedDriveFiles" })
+  @SpeakeasyMetadata({ data: "json, name=includeSharedDriveFiles" })
   includeSharedDriveFiles?: boolean;
 
-  @Metadata({ data: "json, name=includeTeamDriveFiles" })
+  @SpeakeasyMetadata({ data: "json, name=includeTeamDriveFiles" })
   includeTeamDriveFiles?: boolean;
 }

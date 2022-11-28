@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -22,8 +27,12 @@ class CreateConnectorProfileRequestBodyConnectionModeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CreateConnectorProfileRequestBodyConnectorProfileConfig:
-    connector_profile_credentials: Optional[shared.ConnectorProfileCredentials] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connectorProfileCredentials' }})
-    connector_profile_properties: Optional[shared.ConnectorProfileProperties] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connectorProfileProperties' }})
+    r"""CreateConnectorProfileRequestBodyConnectorProfileConfig
+     Defines the connector-specific configuration and credentials for the connector profile. 
+    """
+    
+    connector_profile_credentials: Optional[shared.ConnectorProfileCredentials] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('connectorProfileCredentials') }})
+    connector_profile_properties: Optional[shared.ConnectorProfileProperties] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('connectorProfileProperties') }})
     
 class CreateConnectorProfileRequestBodyConnectorTypeEnum(str, Enum):
     SALESFORCE = "Salesforce"
@@ -53,27 +62,27 @@ class CreateConnectorProfileRequestBodyConnectorTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CreateConnectorProfileRequestBody:
-    connection_mode: CreateConnectorProfileRequestBodyConnectionModeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connectionMode' }})
-    connector_profile_config: CreateConnectorProfileRequestBodyConnectorProfileConfig = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connectorProfileConfig' }})
-    connector_profile_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connectorProfileName' }})
-    connector_type: CreateConnectorProfileRequestBodyConnectorTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connectorType' }})
-    kms_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kmsArn' }})
+    connection_mode: CreateConnectorProfileRequestBodyConnectionModeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('connectionMode') }})
+    connector_profile_config: CreateConnectorProfileRequestBodyConnectorProfileConfig = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('connectorProfileConfig') }})
+    connector_profile_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('connectorProfileName') }})
+    connector_type: CreateConnectorProfileRequestBodyConnectorTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('connectorType') }})
+    kms_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kmsArn') }})
     
 
 @dataclass
 class CreateConnectorProfileRequest:
-    headers: CreateConnectorProfileHeaders = field(default=None)
-    request: CreateConnectorProfileRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateConnectorProfileHeaders = field()
+    request: CreateConnectorProfileRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateConnectorProfileResponse:
+    content_type: str = field()
+    status_code: int = field()
     conflict_exception: Optional[Any] = field(default=None)
     connector_authentication_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     create_connector_profile_response: Optional[shared.CreateConnectorProfileResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     service_quota_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

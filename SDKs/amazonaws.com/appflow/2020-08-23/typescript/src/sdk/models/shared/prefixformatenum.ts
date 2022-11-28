@@ -1,9 +1,10 @@
 
 
+
 export enum PrefixFormatEnum {
-    Year = "YEAR"
-,    Month = "MONTH"
-,    Day = "DAY"
-,    Hour = "HOUR"
-,    Minute = "MINUTE"
+    Year = "YEAR",
+    Month = "MONTH",
+    Day = "DAY",
+    Hour = "HOUR",
+    Minute = "MINUTE"
 }

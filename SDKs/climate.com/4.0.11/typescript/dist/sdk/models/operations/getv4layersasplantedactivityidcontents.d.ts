@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class GetV4LayersAsPlantedActivityIdContentsPathParams extends SpeakeasyBase {
     activityId: string;
@@ -7,15 +7,9 @@ export declare class GetV4LayersAsPlantedActivityIdContentsHeaders extends Speak
     accept: string;
     range: string;
 }
-export declare class GetV4LayersAsPlantedActivityIdContentsSecurityOption1 extends SpeakeasyBase {
-    apiKey: shared.SchemeApiKey;
-}
-export declare class GetV4LayersAsPlantedActivityIdContentsSecurityOption2 extends SpeakeasyBase {
-    oauth2AuthorizationCode: shared.SchemeOauth2AuthorizationCode;
-}
 export declare class GetV4LayersAsPlantedActivityIdContentsSecurity extends SpeakeasyBase {
-    option1?: GetV4LayersAsPlantedActivityIdContentsSecurityOption1;
-    option2?: GetV4LayersAsPlantedActivityIdContentsSecurityOption2;
+    apiKey?: shared.SchemeApiKey;
+    oauth2AuthorizationCode?: shared.SchemeOauth2AuthorizationCode;
 }
 export declare class GetV4LayersAsPlantedActivityIdContentsRequest extends SpeakeasyBase {
     pathParams: GetV4LayersAsPlantedActivityIdContentsPathParams;

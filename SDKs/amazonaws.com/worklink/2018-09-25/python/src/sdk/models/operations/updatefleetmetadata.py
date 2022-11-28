@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
@@ -17,24 +21,24 @@ class UpdateFleetMetadataHeaders:
 @dataclass_json
 @dataclass
 class UpdateFleetMetadataRequestBody:
-    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DisplayName' }})
-    fleet_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FleetArn' }})
-    optimize_for_end_user_location: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OptimizeForEndUserLocation' }})
+    fleet_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('FleetArn') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DisplayName') }})
+    optimize_for_end_user_location: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('OptimizeForEndUserLocation') }})
     
 
 @dataclass
 class UpdateFleetMetadataRequest:
-    headers: UpdateFleetMetadataHeaders = field(default=None)
-    request: UpdateFleetMetadataRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateFleetMetadataHeaders = field()
+    request: UpdateFleetMetadataRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateFleetMetadataResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_server_error_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     update_fleet_metadata_response: Optional[dict[str, Any]] = field(default=None)

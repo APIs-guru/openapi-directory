@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsIamConfig
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The Identity and Access Management configuration.
 **/
 export class AwsIamConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=signingRegion" })
+  @SpeakeasyMetadata({ data: "json, name=signingRegion" })
   signingRegion?: string;
 
-  @Metadata({ data: "json, name=signingServiceName" })
+  @SpeakeasyMetadata({ data: "json, name=signingServiceName" })
   signingServiceName?: string;
 }

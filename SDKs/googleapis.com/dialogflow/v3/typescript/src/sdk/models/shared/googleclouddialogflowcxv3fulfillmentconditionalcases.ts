@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowCxV3FulfillmentConditionalCasesCase } from "./googleclouddialogflowcxv3fulfillmentconditionalcasescase";
+import { GoogleCloudDialogflowCxV3FulfillmentConditionalCasesCaseInput } from "./googleclouddialogflowcxv3fulfillmentconditionalcasescase";
+
 
 
 // GoogleCloudDialogflowCxV3FulfillmentConditionalCases
@@ -8,6 +9,16 @@ import { GoogleCloudDialogflowCxV3FulfillmentConditionalCasesCase } from "./goog
  * A list of cascading if-else conditions. Cases are mutually exclusive. The first one with a matching condition is selected, all the rest ignored.
 **/
 export class GoogleCloudDialogflowCxV3FulfillmentConditionalCases extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cases", elemType: shared.GoogleCloudDialogflowCxV3FulfillmentConditionalCasesCase })
+  @SpeakeasyMetadata({ data: "json, name=cases", elemType: GoogleCloudDialogflowCxV3FulfillmentConditionalCasesCase })
   cases?: GoogleCloudDialogflowCxV3FulfillmentConditionalCasesCase[];
+}
+
+
+// GoogleCloudDialogflowCxV3FulfillmentConditionalCasesInput
+/** 
+ * A list of cascading if-else conditions. Cases are mutually exclusive. The first one with a matching condition is selected, all the rest ignored.
+**/
+export class GoogleCloudDialogflowCxV3FulfillmentConditionalCasesInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=cases", elemType: GoogleCloudDialogflowCxV3FulfillmentConditionalCasesCaseInput })
+  cases?: GoogleCloudDialogflowCxV3FulfillmentConditionalCasesCaseInput[];
 }

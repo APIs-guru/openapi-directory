@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AssociatedClientDevice
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains information about a client device that is associated to a core device for cloud discovery.
 **/
 export class AssociatedClientDevice extends SpeakeasyBase {
-  @Metadata({ data: "json, name=associationTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=associationTimestamp" })
   associationTimestamp?: Date;
 
-  @Metadata({ data: "json, name=thingName" })
+  @SpeakeasyMetadata({ data: "json, name=thingName" })
   thingName?: string;
 }

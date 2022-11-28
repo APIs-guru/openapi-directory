@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
 from typing import Any,Optional
+from sdk.models import shared
 
 
 @dataclass
 class ReferencesAirlinesByAirlineCodeGetPathParams:
-    airline_code: str = field(default=None, metadata={'path_param': { 'field_name': 'airlineCode', 'style': 'simple', 'explode': False }})
+    airline_code: str = field(metadata={'path_param': { 'field_name': 'airlineCode', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,25 +16,25 @@ class ReferencesAirlinesByAirlineCodeGetQueryParams:
 
 @dataclass
 class ReferencesAirlinesByAirlineCodeGetHeaders:
-    accept: str = field(default=None, metadata={'header': { 'field_name': 'Accept', 'style': 'simple', 'explode': False }})
+    accept: str = field(metadata={'header': { 'field_name': 'Accept', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ReferencesAirlinesByAirlineCodeGetSecurity:
-    auth: shared.SchemeAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    auth: shared.SchemeAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ReferencesAirlinesByAirlineCodeGetRequest:
-    path_params: ReferencesAirlinesByAirlineCodeGetPathParams = field(default=None)
-    query_params: ReferencesAirlinesByAirlineCodeGetQueryParams = field(default=None)
-    headers: ReferencesAirlinesByAirlineCodeGetHeaders = field(default=None)
-    security: ReferencesAirlinesByAirlineCodeGetSecurity = field(default=None)
+    headers: ReferencesAirlinesByAirlineCodeGetHeaders = field()
+    path_params: ReferencesAirlinesByAirlineCodeGetPathParams = field()
+    query_params: ReferencesAirlinesByAirlineCodeGetQueryParams = field()
+    security: ReferencesAirlinesByAirlineCodeGetSecurity = field()
     
 
 @dataclass
 class ReferencesAirlinesByAirlineCodeGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     references_airlines_by_airline_code_get_200_application_json_object: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

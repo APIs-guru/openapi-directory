@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class PutSetupV1ServicesIDAvailabilityPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,13 +18,13 @@ class PutSetupV1ServicesIDAvailabilityRequests:
 
 @dataclass
 class PutSetupV1ServicesIDAvailabilityRequest:
-    path_params: PutSetupV1ServicesIDAvailabilityPathParams = field(default=None)
+    path_params: PutSetupV1ServicesIDAvailabilityPathParams = field()
     request: Optional[PutSetupV1ServicesIDAvailabilityRequests] = field(default=None)
     
 
 @dataclass
 class PutSetupV1ServicesIDAvailabilityResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     service_availability_view_model: Optional[shared.ServiceAvailabilityViewModel] = field(default=None)
-    status_code: int = field(default=None)
     

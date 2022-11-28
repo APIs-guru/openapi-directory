@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SnowconeDeviceConfiguration } from "./snowconedeviceconfiguration";
+
 
 
 // DeviceConfiguration
@@ -7,6 +8,6 @@ import { SnowconeDeviceConfiguration } from "./snowconedeviceconfiguration";
  * The container for <code>SnowconeDeviceConfiguration</code>. 
 **/
 export class DeviceConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SnowconeDeviceConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=SnowconeDeviceConfiguration" })
   snowconeDeviceConfiguration?: SnowconeDeviceConfiguration;
 }

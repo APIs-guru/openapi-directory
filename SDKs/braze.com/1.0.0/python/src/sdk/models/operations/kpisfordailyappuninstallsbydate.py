@@ -11,11 +11,11 @@ class KpIsForDailyAppUninstallsByDateQueryParams:
 
 @dataclass
 class KpIsForDailyAppUninstallsByDateRequest:
-    query_params: KpIsForDailyAppUninstallsByDateQueryParams = field(default=None)
+    query_params: KpIsForDailyAppUninstallsByDateQueryParams = field()
     
 
 @dataclass
 class KpIsForDailyAppUninstallsByDateResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

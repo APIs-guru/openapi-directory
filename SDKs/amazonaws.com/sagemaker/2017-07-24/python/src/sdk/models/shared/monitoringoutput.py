@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import monitorings3output
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class MonitoringOutput:
-    s3_output: monitorings3output.MonitoringS3Output = field(default=None, metadata={'dataclasses_json': { 'field_name': 'S3Output' }})
+    r"""MonitoringOutput
+    The output object for a monitoring job.
+    """
+    
+    s3_output: MonitoringS3Output = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('S3Output') }})
     

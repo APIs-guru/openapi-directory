@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ComputeEnum } from "./computeenum";
+
 
 
 // ComputeType
@@ -7,6 +8,6 @@ import { ComputeEnum } from "./computeenum";
  * Describes the compute type of the bundle.
 **/
 export class ComputeType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: ComputeEnum;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// CertificateProviderInstance
+// Specification of a TLS certificate provider instance. Workloads may have one or more CertificateProvider instances (plugins) and one of them is enabled and configured by specifying this message. Workloads use the values from this message to locate and load the CertificateProvider instance configuration.
 type CertificateProviderInstance struct {
 	PluginInstance *string `json:"pluginInstance,omitempty"`
 }

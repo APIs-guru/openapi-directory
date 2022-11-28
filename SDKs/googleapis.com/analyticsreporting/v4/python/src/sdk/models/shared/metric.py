@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class MetricFormattingTypeEnum(str, Enum):
     METRIC_TYPE_UNSPECIFIED = "METRIC_TYPE_UNSPECIFIED"
@@ -14,7 +16,11 @@ class MetricFormattingTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Metric:
-    alias: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'alias' }})
-    expression: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expression' }})
-    formatting_type: Optional[MetricFormattingTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'formattingType' }})
+    r"""Metric
+    [Metrics](https://support.google.com/analytics/answer/1033861) are the quantitative measurements. For example, the metric `ga:users` indicates the total number of users for the requested time period.
+    """
+    
+    alias: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('alias') }})
+    expression: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('expression') }})
+    formatting_type: Optional[MetricFormattingTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('formattingType') }})
     

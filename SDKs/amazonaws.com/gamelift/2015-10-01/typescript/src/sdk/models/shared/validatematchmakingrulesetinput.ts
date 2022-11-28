@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ValidateMatchmakingRuleSetInput
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the input for a request operation.
 **/
 export class ValidateMatchmakingRuleSetInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=RuleSetBody" })
+  @SpeakeasyMetadata({ data: "json, name=RuleSetBody" })
   ruleSetBody: string;
 }

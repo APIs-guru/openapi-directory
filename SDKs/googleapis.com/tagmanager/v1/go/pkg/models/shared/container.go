@@ -121,6 +121,8 @@ const (
 	ContainerUsageContextEnumAmp         ContainerUsageContextEnum = "amp"
 )
 
+// Container
+// Represents a Google Tag Manager Container.
 type Container struct {
 	AccountID              *string                               `json:"accountId,omitempty"`
 	ContainerID            *string                               `json:"containerId,omitempty"`

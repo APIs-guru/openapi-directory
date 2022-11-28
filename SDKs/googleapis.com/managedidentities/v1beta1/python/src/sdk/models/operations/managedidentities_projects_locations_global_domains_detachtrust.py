@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ManagedidentitiesProjectsLocationsGlobalDomainsDetachTrustPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class ManagedidentitiesProjectsLocationsGlobalDomainsDetachTrustQueryParams:
 
 @dataclass
 class ManagedidentitiesProjectsLocationsGlobalDomainsDetachTrustSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ManagedidentitiesProjectsLocationsGlobalDomainsDetachTrustRequest:
-    path_params: ManagedidentitiesProjectsLocationsGlobalDomainsDetachTrustPathParams = field(default=None)
-    query_params: ManagedidentitiesProjectsLocationsGlobalDomainsDetachTrustQueryParams = field(default=None)
-    request: Optional[shared.DetachTrustRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ManagedidentitiesProjectsLocationsGlobalDomainsDetachTrustSecurity = field(default=None)
+    path_params: ManagedidentitiesProjectsLocationsGlobalDomainsDetachTrustPathParams = field()
+    query_params: ManagedidentitiesProjectsLocationsGlobalDomainsDetachTrustQueryParams = field()
+    security: ManagedidentitiesProjectsLocationsGlobalDomainsDetachTrustSecurity = field()
+    request: Optional[shared.DetachTrustRequestInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ManagedidentitiesProjectsLocationsGlobalDomainsDetachTrustResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

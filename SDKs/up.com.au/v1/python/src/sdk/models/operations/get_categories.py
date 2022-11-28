@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from sdk.models import shared
 
 
@@ -10,12 +10,12 @@ class GetCategoriesQueryParams:
 
 @dataclass
 class GetCategoriesRequest:
-    query_params: GetCategoriesQueryParams = field(default=None)
+    query_params: GetCategoriesQueryParams = field()
     
 
 @dataclass
 class GetCategoriesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_categories_response: Optional[shared.ListCategoriesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

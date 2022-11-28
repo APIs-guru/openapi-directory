@@ -18,15 +18,12 @@ const (
 	WritableConsoleServerPortTypeEnumOther     WritableConsoleServerPortTypeEnum = "other"
 )
 
-type WritableConsoleServerPort struct {
-	Cable                 *NestedCable                       `json:"cable,omitempty"`
-	ConnectedEndpoint     map[string]string                  `json:"connected_endpoint,omitempty"`
-	ConnectedEndpointType *string                            `json:"connected_endpoint_type,omitempty"`
-	ConnectionStatus      *bool                              `json:"connection_status,omitempty"`
-	Description           *string                            `json:"description,omitempty"`
-	Device                int64                              `json:"device"`
-	ID                    *int64                             `json:"id,omitempty"`
-	Name                  string                             `json:"name"`
-	Tags                  []string                           `json:"tags,omitempty"`
-	Type                  *WritableConsoleServerPortTypeEnum `json:"type,omitempty"`
+type WritableConsoleServerPortInput struct {
+	Cable            *NestedCableInput                  `json:"cable,omitempty"`
+	ConnectionStatus *bool                              `json:"connection_status,omitempty"`
+	Description      *string                            `json:"description,omitempty"`
+	Device           int64                              `json:"device"`
+	Name             string                             `json:"name"`
+	Tags             []string                           `json:"tags,omitempty"`
+	Type             *WritableConsoleServerPortTypeEnum `json:"type,omitempty"`
 }

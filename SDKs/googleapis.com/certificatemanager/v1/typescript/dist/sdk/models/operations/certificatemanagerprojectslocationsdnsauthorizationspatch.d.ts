@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class CertificatemanagerProjectsLocationsDnsAuthorizationsPatchPathParams extends SpeakeasyBase {
     name: string;
@@ -24,7 +24,7 @@ export declare class CertificatemanagerProjectsLocationsDnsAuthorizationsPatchSe
 export declare class CertificatemanagerProjectsLocationsDnsAuthorizationsPatchRequest extends SpeakeasyBase {
     pathParams: CertificatemanagerProjectsLocationsDnsAuthorizationsPatchPathParams;
     queryParams: CertificatemanagerProjectsLocationsDnsAuthorizationsPatchQueryParams;
-    request?: shared.DnsAuthorization;
+    request?: shared.DnsAuthorizationInput;
     security: CertificatemanagerProjectsLocationsDnsAuthorizationsPatchSecurity;
 }
 export declare class CertificatemanagerProjectsLocationsDnsAuthorizationsPatchResponse extends SpeakeasyBase {

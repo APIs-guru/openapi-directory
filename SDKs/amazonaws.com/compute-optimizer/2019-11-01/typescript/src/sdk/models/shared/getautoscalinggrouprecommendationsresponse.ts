@@ -1,16 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AutoScalingGroupRecommendation } from "./autoscalinggrouprecommendation";
 import { GetRecommendationError } from "./getrecommendationerror";
 
 
+
 export class GetAutoScalingGroupRecommendationsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=autoScalingGroupRecommendations", elemType: shared.AutoScalingGroupRecommendation })
+  @SpeakeasyMetadata({ data: "json, name=autoScalingGroupRecommendations", elemType: AutoScalingGroupRecommendation })
   autoScalingGroupRecommendations?: AutoScalingGroupRecommendation[];
 
-  @Metadata({ data: "json, name=errors", elemType: shared.GetRecommendationError })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: GetRecommendationError })
   errors?: GetRecommendationError[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

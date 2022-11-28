@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class PolyAssetsListMaxComplexityEnum(str, Enum):
@@ -34,12 +35,12 @@ class PolyAssetsListQueryParams:
 
 @dataclass
 class PolyAssetsListRequest:
-    query_params: PolyAssetsListQueryParams = field(default=None)
+    query_params: PolyAssetsListQueryParams = field()
     
 
 @dataclass
 class PolyAssetsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_assets_response: Optional[shared.ListAssetsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

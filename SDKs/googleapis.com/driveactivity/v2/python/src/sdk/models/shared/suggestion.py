@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class SuggestionSubtypeEnum(str, Enum):
     SUBTYPE_UNSPECIFIED = "SUBTYPE_UNSPECIFIED"
@@ -17,5 +19,9 @@ class SuggestionSubtypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Suggestion:
-    subtype: Optional[SuggestionSubtypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'subtype' }})
+    r"""Suggestion
+    A suggestion.
+    """
+    
+    subtype: Optional[SuggestionSubtypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('subtype') }})
     

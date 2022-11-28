@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetDealerRvIDPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,14 +16,14 @@ class GetDealerRvIDQueryParams:
 
 @dataclass
 class GetDealerRvIDRequest:
-    path_params: GetDealerRvIDPathParams = field(default=None)
-    query_params: GetDealerRvIDQueryParams = field(default=None)
+    path_params: GetDealerRvIDPathParams = field()
+    query_params: GetDealerRvIDQueryParams = field()
     
 
 @dataclass
 class GetDealerRvIDResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     dealer: Optional[shared.Dealer] = field(default=None)
     error: Optional[shared.Error] = field(default=None)
-    status_code: int = field(default=None)
     

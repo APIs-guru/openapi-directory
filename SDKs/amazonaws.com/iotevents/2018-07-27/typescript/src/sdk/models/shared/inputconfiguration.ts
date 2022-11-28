@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InputStatusEnum } from "./inputstatusenum";
+
 
 
 // InputConfiguration
@@ -7,21 +8,21 @@ import { InputStatusEnum } from "./inputstatusenum";
  * Information about the configuration of an input.
 **/
 export class InputConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=creationTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationTime" })
   creationTime: Date;
 
-  @Metadata({ data: "json, name=inputArn" })
+  @SpeakeasyMetadata({ data: "json, name=inputArn" })
   inputArn: string;
 
-  @Metadata({ data: "json, name=inputDescription" })
+  @SpeakeasyMetadata({ data: "json, name=inputDescription" })
   inputDescription?: string;
 
-  @Metadata({ data: "json, name=inputName" })
+  @SpeakeasyMetadata({ data: "json, name=inputName" })
   inputName: string;
 
-  @Metadata({ data: "json, name=lastUpdateTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdateTime" })
   lastUpdateTime: Date;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: InputStatusEnum;
 }

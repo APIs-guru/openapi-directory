@@ -27,11 +27,6 @@ type UncrdSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type UncrdRequest struct {
-	Request  *UncrdRequestBody `request:"mediaType=application/json"`
-	Security UncrdSecurity
-}
-
 type Uncrd400ApplicationJSONErrorEnum string
 
 const (
@@ -161,6 +156,11 @@ const (
 type Uncrd504ApplicationJSON struct {
 	Error            *Uncrd504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Uncrd504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type UncrdRequest struct {
+	Request  *UncrdRequestBody `request:"mediaType=application/json"`
+	Security UncrdSecurity
 }
 
 type UncrdResponse struct {

@@ -22,42 +22,42 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Platform = /** @class */ (function (_super) {
     __extends(Platform, _super);
     function Platform() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=games_count" }),
+        SpeakeasyMetadata({ data: "json, name=games_count" }),
         __metadata("design:type", Number)
     ], Platform.prototype, "gamesCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", Number)
     ], Platform.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=image" }),
+        SpeakeasyMetadata({ data: "json, name=image" }),
         __metadata("design:type", String)
     ], Platform.prototype, "image", void 0);
     __decorate([
-        Metadata({ data: "json, name=image_background" }),
+        SpeakeasyMetadata({ data: "json, name=image_background" }),
         __metadata("design:type", String)
     ], Platform.prototype, "imageBackground", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Platform.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=slug" }),
+        SpeakeasyMetadata({ data: "json, name=slug" }),
         __metadata("design:type", String)
     ], Platform.prototype, "slug", void 0);
     __decorate([
-        Metadata({ data: "json, name=year_end" }),
+        SpeakeasyMetadata({ data: "json, name=year_end" }),
         __metadata("design:type", Number)
     ], Platform.prototype, "yearEnd", void 0);
     __decorate([
-        Metadata({ data: "json, name=year_start" }),
+        SpeakeasyMetadata({ data: "json, name=year_start" }),
         __metadata("design:type", Number)
     ], Platform.prototype, "yearStart", void 0);
     return Platform;

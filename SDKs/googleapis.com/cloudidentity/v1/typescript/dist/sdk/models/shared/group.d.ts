@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DynamicGroupMetadata } from "./dynamicgroupmetadata";
 import { EntityKey } from "./entitykey";
 /**
@@ -14,4 +14,15 @@ export declare class Group extends SpeakeasyBase {
     name?: string;
     parent?: string;
     updateTime?: string;
+}
+/**
+ * A group within the Cloud Identity Groups API. A `Group` is a collection of entities, where each entity is either a user, another group, or a service account.
+**/
+export declare class GroupInput extends SpeakeasyBase {
+    description?: string;
+    displayName?: string;
+    dynamicGroupMetadata?: DynamicGroupMetadata;
+    groupKey?: EntityKey;
+    labels?: Map<string, string>;
+    parent?: string;
 }

@@ -1,62 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetMarketingV3MarketingEventsEventsExternalEventIdGetByIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=externalEventId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=externalEventId" })
   externalEventId: string;
 }
 
 
 export class GetMarketingV3MarketingEventsEventsExternalEventIdGetByIdQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=externalAccountId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=externalAccountId" })
   externalAccountId: string;
 }
 
 
-export class GetMarketingV3MarketingEventsEventsExternalEventIdGetByIdSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
-  hapikey: shared.SchemeHapikey;
-}
-
-
-export class GetMarketingV3MarketingEventsEventsExternalEventIdGetByIdSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth2Legacy: shared.SchemeOauth2Legacy;
-}
-
-
 export class GetMarketingV3MarketingEventsEventsExternalEventIdGetByIdSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: GetMarketingV3MarketingEventsEventsExternalEventIdGetByIdSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
+  hapikey?: shared.SchemeHapikey;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: GetMarketingV3MarketingEventsEventsExternalEventIdGetByIdSecurityOption2;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth2Legacy?: shared.SchemeOauth2Legacy;
+
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  privateAppsLegacy?: shared.SchemePrivateAppsLegacy;
 }
 
 
 export class GetMarketingV3MarketingEventsEventsExternalEventIdGetByIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetMarketingV3MarketingEventsEventsExternalEventIdGetByIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetMarketingV3MarketingEventsEventsExternalEventIdGetByIdQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetMarketingV3MarketingEventsEventsExternalEventIdGetByIdSecurity;
 }
 
 
 export class GetMarketingV3MarketingEventsEventsExternalEventIdGetByIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   marketingEventPublicReadResponse?: shared.MarketingEventPublicReadResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Tag } from "./tag";
 // CreateReplicationInstanceMessage
 /**
  * <p/>
@@ -34,63 +34,63 @@ var CreateReplicationInstanceMessage = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AllocatedStorage" }),
+        SpeakeasyMetadata({ data: "json, name=AllocatedStorage" }),
         __metadata("design:type", Number)
     ], CreateReplicationInstanceMessage.prototype, "allocatedStorage", void 0);
     __decorate([
-        Metadata({ data: "json, name=AutoMinorVersionUpgrade" }),
+        SpeakeasyMetadata({ data: "json, name=AutoMinorVersionUpgrade" }),
         __metadata("design:type", Boolean)
     ], CreateReplicationInstanceMessage.prototype, "autoMinorVersionUpgrade", void 0);
     __decorate([
-        Metadata({ data: "json, name=AvailabilityZone" }),
+        SpeakeasyMetadata({ data: "json, name=AvailabilityZone" }),
         __metadata("design:type", String)
     ], CreateReplicationInstanceMessage.prototype, "availabilityZone", void 0);
     __decorate([
-        Metadata({ data: "json, name=DnsNameServers" }),
+        SpeakeasyMetadata({ data: "json, name=DnsNameServers" }),
         __metadata("design:type", String)
     ], CreateReplicationInstanceMessage.prototype, "dnsNameServers", void 0);
     __decorate([
-        Metadata({ data: "json, name=EngineVersion" }),
+        SpeakeasyMetadata({ data: "json, name=EngineVersion" }),
         __metadata("design:type", String)
     ], CreateReplicationInstanceMessage.prototype, "engineVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=KmsKeyId" }),
+        SpeakeasyMetadata({ data: "json, name=KmsKeyId" }),
         __metadata("design:type", String)
     ], CreateReplicationInstanceMessage.prototype, "kmsKeyId", void 0);
     __decorate([
-        Metadata({ data: "json, name=MultiAZ" }),
+        SpeakeasyMetadata({ data: "json, name=MultiAZ" }),
         __metadata("design:type", Boolean)
     ], CreateReplicationInstanceMessage.prototype, "multiAz", void 0);
     __decorate([
-        Metadata({ data: "json, name=PreferredMaintenanceWindow" }),
+        SpeakeasyMetadata({ data: "json, name=PreferredMaintenanceWindow" }),
         __metadata("design:type", String)
     ], CreateReplicationInstanceMessage.prototype, "preferredMaintenanceWindow", void 0);
     __decorate([
-        Metadata({ data: "json, name=PubliclyAccessible" }),
+        SpeakeasyMetadata({ data: "json, name=PubliclyAccessible" }),
         __metadata("design:type", Boolean)
     ], CreateReplicationInstanceMessage.prototype, "publiclyAccessible", void 0);
     __decorate([
-        Metadata({ data: "json, name=ReplicationInstanceClass" }),
+        SpeakeasyMetadata({ data: "json, name=ReplicationInstanceClass" }),
         __metadata("design:type", String)
     ], CreateReplicationInstanceMessage.prototype, "replicationInstanceClass", void 0);
     __decorate([
-        Metadata({ data: "json, name=ReplicationInstanceIdentifier" }),
+        SpeakeasyMetadata({ data: "json, name=ReplicationInstanceIdentifier" }),
         __metadata("design:type", String)
     ], CreateReplicationInstanceMessage.prototype, "replicationInstanceIdentifier", void 0);
     __decorate([
-        Metadata({ data: "json, name=ReplicationSubnetGroupIdentifier" }),
+        SpeakeasyMetadata({ data: "json, name=ReplicationSubnetGroupIdentifier" }),
         __metadata("design:type", String)
     ], CreateReplicationInstanceMessage.prototype, "replicationSubnetGroupIdentifier", void 0);
     __decorate([
-        Metadata({ data: "json, name=ResourceIdentifier" }),
+        SpeakeasyMetadata({ data: "json, name=ResourceIdentifier" }),
         __metadata("design:type", String)
     ], CreateReplicationInstanceMessage.prototype, "resourceIdentifier", void 0);
     __decorate([
-        Metadata({ data: "json, name=Tags", elemType: shared.Tag }),
+        SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag }),
         __metadata("design:type", Array)
     ], CreateReplicationInstanceMessage.prototype, "tags", void 0);
     __decorate([
-        Metadata({ data: "json, name=VpcSecurityGroupIds" }),
+        SpeakeasyMetadata({ data: "json, name=VpcSecurityGroupIds" }),
         __metadata("design:type", Array)
     ], CreateReplicationInstanceMessage.prototype, "vpcSecurityGroupIds", void 0);
     return CreateReplicationInstanceMessage;

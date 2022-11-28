@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EntityStatusEnum } from "./entitystatusenum";
+
 
 
 // GetBatchPredictionOutput
@@ -7,54 +8,54 @@ import { EntityStatusEnum } from "./entitystatusenum";
  * Represents the output of a <code>GetBatchPrediction</code> operation and describes a <code>BatchPrediction</code>.
 **/
 export class GetBatchPredictionOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BatchPredictionDataSourceId" })
+  @SpeakeasyMetadata({ data: "json, name=BatchPredictionDataSourceId" })
   batchPredictionDataSourceId?: string;
 
-  @Metadata({ data: "json, name=BatchPredictionId" })
+  @SpeakeasyMetadata({ data: "json, name=BatchPredictionId" })
   batchPredictionId?: string;
 
-  @Metadata({ data: "json, name=ComputeTime" })
+  @SpeakeasyMetadata({ data: "json, name=ComputeTime" })
   computeTime?: number;
 
-  @Metadata({ data: "json, name=CreatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=CreatedByIamUser" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedByIamUser" })
   createdByIamUser?: string;
 
-  @Metadata({ data: "json, name=FinishedAt" })
+  @SpeakeasyMetadata({ data: "json, name=FinishedAt" })
   finishedAt?: Date;
 
-  @Metadata({ data: "json, name=InputDataLocationS3" })
+  @SpeakeasyMetadata({ data: "json, name=InputDataLocationS3" })
   inputDataLocationS3?: string;
 
-  @Metadata({ data: "json, name=InvalidRecordCount" })
+  @SpeakeasyMetadata({ data: "json, name=InvalidRecordCount" })
   invalidRecordCount?: number;
 
-  @Metadata({ data: "json, name=LastUpdatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=LastUpdatedAt" })
   lastUpdatedAt?: Date;
 
-  @Metadata({ data: "json, name=LogUri" })
+  @SpeakeasyMetadata({ data: "json, name=LogUri" })
   logUri?: string;
 
-  @Metadata({ data: "json, name=MLModelId" })
+  @SpeakeasyMetadata({ data: "json, name=MLModelId" })
   mlModelId?: string;
 
-  @Metadata({ data: "json, name=Message" })
+  @SpeakeasyMetadata({ data: "json, name=Message" })
   message?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=OutputUri" })
+  @SpeakeasyMetadata({ data: "json, name=OutputUri" })
   outputUri?: string;
 
-  @Metadata({ data: "json, name=StartedAt" })
+  @SpeakeasyMetadata({ data: "json, name=StartedAt" })
   startedAt?: Date;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: EntityStatusEnum;
 
-  @Metadata({ data: "json, name=TotalRecordCount" })
+  @SpeakeasyMetadata({ data: "json, name=TotalRecordCount" })
   totalRecordCount?: number;
 }

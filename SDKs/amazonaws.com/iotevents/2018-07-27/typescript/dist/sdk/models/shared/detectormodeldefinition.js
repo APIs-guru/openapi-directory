@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { State } from "./state";
 // DetectorModelDefinition
 /**
  * Information that defines how a detector operates.
@@ -34,11 +34,11 @@ var DetectorModelDefinition = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=initialStateName" }),
+        SpeakeasyMetadata({ data: "json, name=initialStateName" }),
         __metadata("design:type", String)
     ], DetectorModelDefinition.prototype, "initialStateName", void 0);
     __decorate([
-        Metadata({ data: "json, name=states", elemType: shared.State }),
+        SpeakeasyMetadata({ data: "json, name=states", elemType: State }),
         __metadata("design:type", Array)
     ], DetectorModelDefinition.prototype, "states", void 0);
     return DetectorModelDefinition;

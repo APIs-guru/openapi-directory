@@ -14,7 +14,7 @@ type CreatePayRunSecurity struct {
 
 type CreatePayRunRequest struct {
 	Headers  CreatePayRunHeaders
-	Request  []shared.PayRun `request:"mediaType=application/json"`
+	Request  []shared.PayRunInput `request:"mediaType=application/json"`
 	Security CreatePayRunSecurity
 }
 

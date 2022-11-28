@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConfigurationOverrides } from "./configurationoverrides";
 import { FailureReasonEnum } from "./failurereasonenum";
 import { EndpointStateEnum } from "./endpointstateenum";
+
 
 
 // Endpoint
@@ -9,54 +10,54 @@ import { EndpointStateEnum } from "./endpointstateenum";
  * This entity represents the endpoint that is managed by Amazon EMR on EKS.
 **/
 export class Endpoint extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=certificateArn" })
+  @SpeakeasyMetadata({ data: "json, name=certificateArn" })
   certificateArn?: string;
 
-  @Metadata({ data: "json, name=configurationOverrides" })
+  @SpeakeasyMetadata({ data: "json, name=configurationOverrides" })
   configurationOverrides?: ConfigurationOverrides;
 
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=executionRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=executionRoleArn" })
   executionRoleArn?: string;
 
-  @Metadata({ data: "json, name=failureReason" })
+  @SpeakeasyMetadata({ data: "json, name=failureReason" })
   failureReason?: FailureReasonEnum;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=releaseLabel" })
+  @SpeakeasyMetadata({ data: "json, name=releaseLabel" })
   releaseLabel?: string;
 
-  @Metadata({ data: "json, name=securityGroup" })
+  @SpeakeasyMetadata({ data: "json, name=securityGroup" })
   securityGroup?: string;
 
-  @Metadata({ data: "json, name=serverUrl" })
+  @SpeakeasyMetadata({ data: "json, name=serverUrl" })
   serverUrl?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: EndpointStateEnum;
 
-  @Metadata({ data: "json, name=stateDetails" })
+  @SpeakeasyMetadata({ data: "json, name=stateDetails" })
   stateDetails?: string;
 
-  @Metadata({ data: "json, name=subnetIds" })
+  @SpeakeasyMetadata({ data: "json, name=subnetIds" })
   subnetIds?: string[];
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 
-  @Metadata({ data: "json, name=virtualClusterId" })
+  @SpeakeasyMetadata({ data: "json, name=virtualClusterId" })
   virtualClusterId?: string;
 }

@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://football-prediction-api.p.rapidapi.com",
 }
 
@@ -18,9 +18,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -31,27 +35,45 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// GetAPIV2ListFederations - Returns an array of all the available federations.
 func (s *SDK) GetAPIV2ListFederations(ctx context.Context, request operations.GetAPIV2ListFederationsRequest) (*operations.GetAPIV2ListFederationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/v2/list-federations"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -61,7 +83,7 @@ func (s *SDK) GetAPIV2ListFederations(ctx context.Context, request operations.Ge
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -101,8 +123,9 @@ func (s *SDK) GetAPIV2ListFederations(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetAPIV2ListMarkets - Returns an array of all the supported prediction markets
 func (s *SDK) GetAPIV2ListMarkets(ctx context.Context, request operations.GetAPIV2ListMarketsRequest) (*operations.GetAPIV2ListMarketsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/v2/list-markets"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -112,7 +135,7 @@ func (s *SDK) GetAPIV2ListMarkets(ctx context.Context, request operations.GetAPI
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -152,8 +175,9 @@ func (s *SDK) GetAPIV2ListMarkets(ctx context.Context, request operations.GetAPI
 	return res, nil
 }
 
+// GetAPIV2PerformanceStats - Returns predictions accuracy in the last 1, 7, 14, 30 days.
 func (s *SDK) GetAPIV2PerformanceStats(ctx context.Context, request operations.GetAPIV2PerformanceStatsRequest) (*operations.GetAPIV2PerformanceStatsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/v2/performance-stats"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -163,7 +187,7 @@ func (s *SDK) GetAPIV2PerformanceStats(ctx context.Context, request operations.G
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -203,8 +227,9 @@ func (s *SDK) GetAPIV2PerformanceStats(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetAPIV2Predictions - This endpoint returns by default the next non-expired football predictions. URL parameters can be specified to show specific date in the past or future or to filter by federation and prediction market name.
 func (s *SDK) GetAPIV2Predictions(ctx context.Context, request operations.GetAPIV2PredictionsRequest) (*operations.GetAPIV2PredictionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/v2/predictions"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -214,7 +239,7 @@ func (s *SDK) GetAPIV2Predictions(ctx context.Context, request operations.GetAPI
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -245,8 +270,9 @@ func (s *SDK) GetAPIV2Predictions(ctx context.Context, request operations.GetAPI
 	return res, nil
 }
 
+// GetAPIV2PredictionsID - Returns all predictions available for a match id.
 func (s *SDK) GetAPIV2PredictionsID(ctx context.Context, request operations.GetAPIV2PredictionsIDRequest) (*operations.GetAPIV2PredictionsIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/v2/predictions/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -254,7 +280,7 @@ func (s *SDK) GetAPIV2PredictionsID(ctx context.Context, request operations.GetA
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

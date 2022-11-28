@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // LinkCollectionLinkCollectionLink
 /**
  * The link collections' links
@@ -33,7 +33,7 @@ var LinkCollectionLinkCollectionLink = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Link" }),
+        SpeakeasyMetadata({ data: "json, name=Link" }),
         __metadata("design:type", Array)
     ], LinkCollectionLinkCollectionLink.prototype, "link", void 0);
     return LinkCollectionLinkCollectionLink;
@@ -45,7 +45,7 @@ var LinkCollectionLinkCollection = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Links" }),
+        SpeakeasyMetadata({ data: "json, name=Links" }),
         __metadata("design:type", LinkCollectionLinkCollectionLink)
     ], LinkCollectionLinkCollection.prototype, "links", void 0);
     return LinkCollectionLinkCollection;
@@ -57,7 +57,7 @@ var LinkCollection = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=LinkCollection" }),
+        SpeakeasyMetadata({ data: "json, name=LinkCollection" }),
         __metadata("design:type", LinkCollectionLinkCollection)
     ], LinkCollection.prototype, "linkCollection", void 0);
     return LinkCollection;

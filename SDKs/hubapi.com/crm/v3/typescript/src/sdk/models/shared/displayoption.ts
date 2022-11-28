@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum DisplayOptionTypeEnum {
-    Default = "DEFAULT"
-,    Success = "SUCCESS"
-,    Warning = "WARNING"
-,    Danger = "DANGER"
-,    Info = "INFO"
+    Default = "DEFAULT",
+    Success = "SUCCESS",
+    Warning = "WARNING",
+    Danger = "DANGER",
+    Info = "INFO"
 }
 
 
@@ -14,12 +15,12 @@ export enum DisplayOptionTypeEnum {
  * Option definition for STATUS dataTypes.
 **/
 export class DisplayOption extends SpeakeasyBase {
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: DisplayOptionTypeEnum;
 }

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetStartExportTaskActionEnum(str, Enum):
     START_EXPORT_TASK = "StartExportTask"
@@ -10,15 +14,15 @@ class GetStartExportTaskVersionEnum(str, Enum):
 
 @dataclass
 class GetStartExportTaskQueryParams:
-    action: GetStartExportTaskActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetStartExportTaskActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    export_task_identifier: str = field(metadata={'query_param': { 'field_name': 'ExportTaskIdentifier', 'style': 'form', 'explode': True }})
+    iam_role_arn: str = field(metadata={'query_param': { 'field_name': 'IamRoleArn', 'style': 'form', 'explode': True }})
+    kms_key_id: str = field(metadata={'query_param': { 'field_name': 'KmsKeyId', 'style': 'form', 'explode': True }})
+    s3_bucket_name: str = field(metadata={'query_param': { 'field_name': 'S3BucketName', 'style': 'form', 'explode': True }})
+    source_arn: str = field(metadata={'query_param': { 'field_name': 'SourceArn', 'style': 'form', 'explode': True }})
+    version: GetStartExportTaskVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     export_only: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'ExportOnly', 'style': 'form', 'explode': True }})
-    export_task_identifier: str = field(default=None, metadata={'query_param': { 'field_name': 'ExportTaskIdentifier', 'style': 'form', 'explode': True }})
-    iam_role_arn: str = field(default=None, metadata={'query_param': { 'field_name': 'IamRoleArn', 'style': 'form', 'explode': True }})
-    kms_key_id: str = field(default=None, metadata={'query_param': { 'field_name': 'KmsKeyId', 'style': 'form', 'explode': True }})
-    s3_bucket_name: str = field(default=None, metadata={'query_param': { 'field_name': 'S3BucketName', 'style': 'form', 'explode': True }})
     s3_prefix: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'S3Prefix', 'style': 'form', 'explode': True }})
-    source_arn: str = field(default=None, metadata={'query_param': { 'field_name': 'SourceArn', 'style': 'form', 'explode': True }})
-    version: GetStartExportTaskVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -34,13 +38,13 @@ class GetStartExportTaskHeaders:
 
 @dataclass
 class GetStartExportTaskRequest:
-    query_params: GetStartExportTaskQueryParams = field(default=None)
-    headers: GetStartExportTaskHeaders = field(default=None)
+    headers: GetStartExportTaskHeaders = field()
+    query_params: GetStartExportTaskQueryParams = field()
     
 
 @dataclass
 class GetStartExportTaskResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

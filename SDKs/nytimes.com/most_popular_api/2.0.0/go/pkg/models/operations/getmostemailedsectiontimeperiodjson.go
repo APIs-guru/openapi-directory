@@ -13,11 +13,6 @@ type GetMostemailedSectionTimePeriodJSONSecurity struct {
 	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=query"`
 }
 
-type GetMostemailedSectionTimePeriodJSONRequest struct {
-	PathParams GetMostemailedSectionTimePeriodJSONPathParams
-	Security   GetMostemailedSectionTimePeriodJSONSecurity
-}
-
 type GetMostemailedSectionTimePeriodJSON200ApplicationJSON struct {
 	Copyright  *string                       `json:"copyright,omitempty"`
 	NumResults *int64                        `json:"num_results,omitempty"`
@@ -30,6 +25,11 @@ type GetMostemailedSectionTimePeriodJSON400ApplicationJSON struct {
 	Errors    []string      `json:"errors,omitempty"`
 	Results   []interface{} `json:"results,omitempty"`
 	Status    *string       `json:"status,omitempty"`
+}
+
+type GetMostemailedSectionTimePeriodJSONRequest struct {
+	PathParams GetMostemailedSectionTimePeriodJSONPathParams
+	Security   GetMostemailedSectionTimePeriodJSONSecurity
 }
 
 type GetMostemailedSectionTimePeriodJSONResponse struct {

@@ -21,14 +21,14 @@ type ProjectsAddCollaboratorRequestBody struct {
 	Permission *ProjectsAddCollaboratorRequestBodyPermissionEnum `json:"permission,omitempty"`
 }
 
-type ProjectsAddCollaboratorRequest struct {
-	PathParams ProjectsAddCollaboratorPathParams
-	Request    *ProjectsAddCollaboratorRequestBody `request:"mediaType=application/json"`
-}
-
 type ProjectsAddCollaborator415ApplicationJSON struct {
 	DocumentationURL string `json:"documentation_url"`
 	Message          string `json:"message"`
+}
+
+type ProjectsAddCollaboratorRequest struct {
+	PathParams ProjectsAddCollaboratorPathParams
+	Request    *ProjectsAddCollaboratorRequestBody `request:"mediaType=application/json"`
 }
 
 type ProjectsAddCollaboratorResponse struct {

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { RecordTypeEnum } from "./recordtypeenum";
 /**
  * A complex type that contains information about the Route 53 DNS records that you want Cloud Map to create when you register an instance.

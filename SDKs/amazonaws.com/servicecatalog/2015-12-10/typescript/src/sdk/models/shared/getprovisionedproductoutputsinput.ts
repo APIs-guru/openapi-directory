@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetProvisionedProductOutputsInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AcceptLanguage" })
+  @SpeakeasyMetadata({ data: "json, name=AcceptLanguage" })
   acceptLanguage?: string;
 
-  @Metadata({ data: "json, name=OutputKeys" })
+  @SpeakeasyMetadata({ data: "json, name=OutputKeys" })
   outputKeys?: string[];
 
-  @Metadata({ data: "json, name=PageSize" })
+  @SpeakeasyMetadata({ data: "json, name=PageSize" })
   pageSize?: number;
 
-  @Metadata({ data: "json, name=PageToken" })
+  @SpeakeasyMetadata({ data: "json, name=PageToken" })
   pageToken?: string;
 
-  @Metadata({ data: "json, name=ProvisionedProductId" })
+  @SpeakeasyMetadata({ data: "json, name=ProvisionedProductId" })
   provisionedProductId?: string;
 
-  @Metadata({ data: "json, name=ProvisionedProductName" })
+  @SpeakeasyMetadata({ data: "json, name=ProvisionedProductName" })
   provisionedProductName?: string;
 }

@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum SiteStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    RequiresReview = "REQUIRES_REVIEW"
-,    GettingReady = "GETTING_READY"
-,    Ready = "READY"
-,    NeedsAttention = "NEEDS_ATTENTION"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    RequiresReview = "REQUIRES_REVIEW",
+    GettingReady = "GETTING_READY",
+    Ready = "READY",
+    NeedsAttention = "NEEDS_ATTENTION"
 }
 
 
@@ -14,18 +15,18 @@ export enum SiteStateEnum {
  * Representation of a Site.
 **/
 export class Site extends SpeakeasyBase {
-  @Metadata({ data: "json, name=autoAdsEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=autoAdsEnabled" })
   autoAdsEnabled?: boolean;
 
-  @Metadata({ data: "json, name=domain" })
+  @SpeakeasyMetadata({ data: "json, name=domain" })
   domain?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=reportingDimensionId" })
+  @SpeakeasyMetadata({ data: "json, name=reportingDimensionId" })
   reportingDimensionId?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: SiteStateEnum;
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LocalInventory } from "./localinventory";
+
 
 
 // LocalinventoryCustomBatchRequestEntry
@@ -7,18 +8,18 @@ import { LocalInventory } from "./localinventory";
  * Batch entry encoding a single local inventory update request.
 **/
 export class LocalinventoryCustomBatchRequestEntry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=batchId" })
+  @SpeakeasyMetadata({ data: "json, name=batchId" })
   batchId?: number;
 
-  @Metadata({ data: "json, name=localInventory" })
+  @SpeakeasyMetadata({ data: "json, name=localInventory" })
   localInventory?: LocalInventory;
 
-  @Metadata({ data: "json, name=merchantId" })
+  @SpeakeasyMetadata({ data: "json, name=merchantId" })
   merchantId?: string;
 
-  @Metadata({ data: "json, name=method" })
+  @SpeakeasyMetadata({ data: "json, name=method" })
   method?: string;
 
-  @Metadata({ data: "json, name=productId" })
+  @SpeakeasyMetadata({ data: "json, name=productId" })
   productId?: string;
 }

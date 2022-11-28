@@ -1,17 +1,21 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdateConnectorPathParams:
-    connector_arn: str = field(default=None, metadata={'path_param': { 'field_name': 'connectorArn', 'style': 'simple', 'explode': False }})
+    connector_arn: str = field(metadata={'path_param': { 'field_name': 'connectorArn', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class UpdateConnectorQueryParams:
-    current_version: str = field(default=None, metadata={'query_param': { 'field_name': 'currentVersion', 'style': 'form', 'explode': True }})
+    current_version: str = field(metadata={'query_param': { 'field_name': 'currentVersion', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,33 +32,37 @@ class UpdateConnectorHeaders:
 @dataclass_json
 @dataclass
 class UpdateConnectorRequestBodyCapacity:
-    auto_scaling: Optional[shared.AutoScalingUpdate] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'autoScaling' }})
-    provisioned_capacity: Optional[shared.ProvisionedCapacityUpdate] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'provisionedCapacity' }})
+    r"""UpdateConnectorRequestBodyCapacity
+    The target capacity for the connector. The capacity can be auto scaled or provisioned.
+    """
+    
+    auto_scaling: Optional[shared.AutoScalingUpdate] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('autoScaling') }})
+    provisioned_capacity: Optional[shared.ProvisionedCapacityUpdate] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('provisionedCapacity') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateConnectorRequestBody:
-    capacity: UpdateConnectorRequestBodyCapacity = field(default=None, metadata={'dataclasses_json': { 'field_name': 'capacity' }})
+    capacity: UpdateConnectorRequestBodyCapacity = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('capacity') }})
     
 
 @dataclass
 class UpdateConnectorRequest:
-    path_params: UpdateConnectorPathParams = field(default=None)
-    query_params: UpdateConnectorQueryParams = field(default=None)
-    headers: UpdateConnectorHeaders = field(default=None)
-    request: UpdateConnectorRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateConnectorHeaders = field()
+    path_params: UpdateConnectorPathParams = field()
+    query_params: UpdateConnectorQueryParams = field()
+    request: UpdateConnectorRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateConnectorResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     forbidden_exception: Optional[Any] = field(default=None)
     internal_server_error_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     update_connector_response: Optional[shared.UpdateConnectorResponse] = field(default=None)

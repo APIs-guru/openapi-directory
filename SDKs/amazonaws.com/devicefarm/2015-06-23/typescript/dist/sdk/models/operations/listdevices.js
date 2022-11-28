@@ -1,0 +1,138 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import * as shared from "../shared";
+var ListDevicesQueryParams = /** @class */ (function (_super) {
+    __extends(ListDevicesQueryParams, _super);
+    function ListDevicesQueryParams() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=nextToken" }),
+        __metadata("design:type", String)
+    ], ListDevicesQueryParams.prototype, "nextToken", void 0);
+    return ListDevicesQueryParams;
+}(SpeakeasyBase));
+export { ListDevicesQueryParams };
+export var ListDevicesXAmzTargetEnum;
+(function (ListDevicesXAmzTargetEnum) {
+    ListDevicesXAmzTargetEnum["DeviceFarm20150623ListDevices"] = "DeviceFarm_20150623.ListDevices";
+})(ListDevicesXAmzTargetEnum || (ListDevicesXAmzTargetEnum = {}));
+var ListDevicesHeaders = /** @class */ (function (_super) {
+    __extends(ListDevicesHeaders, _super);
+    function ListDevicesHeaders() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        __metadata("design:type", String)
+    ], ListDevicesHeaders.prototype, "xAmzAlgorithm", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        __metadata("design:type", String)
+    ], ListDevicesHeaders.prototype, "xAmzContentSha256", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        __metadata("design:type", String)
+    ], ListDevicesHeaders.prototype, "xAmzCredential", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        __metadata("design:type", String)
+    ], ListDevicesHeaders.prototype, "xAmzDate", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        __metadata("design:type", String)
+    ], ListDevicesHeaders.prototype, "xAmzSecurityToken", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        __metadata("design:type", String)
+    ], ListDevicesHeaders.prototype, "xAmzSignature", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        __metadata("design:type", String)
+    ], ListDevicesHeaders.prototype, "xAmzSignedHeaders", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Target" }),
+        __metadata("design:type", String)
+    ], ListDevicesHeaders.prototype, "xAmzTarget", void 0);
+    return ListDevicesHeaders;
+}(SpeakeasyBase));
+export { ListDevicesHeaders };
+var ListDevicesRequest = /** @class */ (function (_super) {
+    __extends(ListDevicesRequest, _super);
+    function ListDevicesRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", ListDevicesQueryParams)
+    ], ListDevicesRequest.prototype, "queryParams", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", ListDevicesHeaders)
+    ], ListDevicesRequest.prototype, "headers", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", shared.ListDevicesRequest)
+    ], ListDevicesRequest.prototype, "request", void 0);
+    return ListDevicesRequest;
+}(SpeakeasyBase));
+export { ListDevicesRequest };
+var ListDevicesResponse = /** @class */ (function (_super) {
+    __extends(ListDevicesResponse, _super);
+    function ListDevicesResponse() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Object)
+    ], ListDevicesResponse.prototype, "argumentException", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", String)
+    ], ListDevicesResponse.prototype, "contentType", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Object)
+    ], ListDevicesResponse.prototype, "limitExceededException", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", shared.ListDevicesResult)
+    ], ListDevicesResponse.prototype, "listDevicesResult", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Object)
+    ], ListDevicesResponse.prototype, "notFoundException", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Object)
+    ], ListDevicesResponse.prototype, "serviceAccountException", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Number)
+    ], ListDevicesResponse.prototype, "statusCode", void 0);
+    return ListDevicesResponse;
+}(SpeakeasyBase));
+export { ListDevicesResponse };

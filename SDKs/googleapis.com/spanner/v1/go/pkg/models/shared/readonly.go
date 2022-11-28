@@ -1,5 +1,7 @@
 package shared
 
+// ReadOnly
+// Message type to initiate a read-only transaction.
 type ReadOnly struct {
 	ExactStaleness      *string `json:"exactStaleness,omitempty"`
 	MaxStaleness        *string `json:"maxStaleness,omitempty"`

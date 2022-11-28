@@ -5,10 +5,6 @@ type PostAssetsCorrelationMatrixValidationRequestBody struct {
 	AssetsCorrelationMatrix [][]float64 `json:"assetsCorrelationMatrix"`
 }
 
-type PostAssetsCorrelationMatrixValidationRequest struct {
-	Request PostAssetsCorrelationMatrixValidationRequestBody `request:"mediaType=application/json"`
-}
-
 type PostAssetsCorrelationMatrixValidation200ApplicationJSONMessageEnum string
 
 const (
@@ -20,6 +16,10 @@ const (
 
 type PostAssetsCorrelationMatrixValidation200ApplicationJSON struct {
 	Message PostAssetsCorrelationMatrixValidation200ApplicationJSONMessageEnum `json:"message"`
+}
+
+type PostAssetsCorrelationMatrixValidationRequest struct {
+	Request PostAssetsCorrelationMatrixValidationRequestBody `request:"mediaType=application/json"`
 }
 
 type PostAssetsCorrelationMatrixValidationResponse struct {

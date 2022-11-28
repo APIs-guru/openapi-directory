@@ -22,30 +22,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetMobileDeviceAccessEffectRequest = /** @class */ (function (_super) {
     __extends(GetMobileDeviceAccessEffectRequest, _super);
     function GetMobileDeviceAccessEffectRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DeviceModel" }),
+        SpeakeasyMetadata({ data: "json, name=DeviceModel" }),
         __metadata("design:type", String)
     ], GetMobileDeviceAccessEffectRequest.prototype, "deviceModel", void 0);
     __decorate([
-        Metadata({ data: "json, name=DeviceOperatingSystem" }),
+        SpeakeasyMetadata({ data: "json, name=DeviceOperatingSystem" }),
         __metadata("design:type", String)
     ], GetMobileDeviceAccessEffectRequest.prototype, "deviceOperatingSystem", void 0);
     __decorate([
-        Metadata({ data: "json, name=DeviceType" }),
+        SpeakeasyMetadata({ data: "json, name=DeviceType" }),
         __metadata("design:type", String)
     ], GetMobileDeviceAccessEffectRequest.prototype, "deviceType", void 0);
     __decorate([
-        Metadata({ data: "json, name=DeviceUserAgent" }),
+        SpeakeasyMetadata({ data: "json, name=DeviceUserAgent" }),
         __metadata("design:type", String)
     ], GetMobileDeviceAccessEffectRequest.prototype, "deviceUserAgent", void 0);
     __decorate([
-        Metadata({ data: "json, name=OrganizationId" }),
+        SpeakeasyMetadata({ data: "json, name=OrganizationId" }),
         __metadata("design:type", String)
     ], GetMobileDeviceAccessEffectRequest.prototype, "organizationId", void 0);
     return GetMobileDeviceAccessEffectRequest;

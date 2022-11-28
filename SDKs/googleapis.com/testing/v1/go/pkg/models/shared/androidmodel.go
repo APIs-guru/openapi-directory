@@ -18,6 +18,8 @@ const (
 	AndroidModelFormFactorEnumWearable                    AndroidModelFormFactorEnum = "WEARABLE"
 )
 
+// AndroidModel
+// A description of an Android device tests may be run on.
 type AndroidModel struct {
 	Brand                *string                     `json:"brand,omitempty"`
 	Codename             *string                     `json:"codename,omitempty"`

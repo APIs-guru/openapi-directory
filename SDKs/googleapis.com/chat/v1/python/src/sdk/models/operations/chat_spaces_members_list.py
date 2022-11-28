@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ChatSpacesMembersListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class ChatSpacesMembersListQueryParams:
 
 @dataclass
 class ChatSpacesMembersListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ChatSpacesMembersListRequest:
-    path_params: ChatSpacesMembersListPathParams = field(default=None)
-    query_params: ChatSpacesMembersListQueryParams = field(default=None)
-    security: ChatSpacesMembersListSecurity = field(default=None)
+    path_params: ChatSpacesMembersListPathParams = field()
+    query_params: ChatSpacesMembersListQueryParams = field()
+    security: ChatSpacesMembersListSecurity = field()
     
 
 @dataclass
 class ChatSpacesMembersListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_memberships_response: Optional[shared.ListMembershipsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

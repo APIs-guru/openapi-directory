@@ -1,5 +1,7 @@
 package shared
 
+// SystemInstanceDescription
+// An object that contains a system instance definition and summary information.
 type SystemInstanceDescription struct {
 	Definition                   *DefinitionDocument    `json:"definition,omitempty"`
 	FlowActionsRoleArn           *string                `json:"flowActionsRoleArn,omitempty"`

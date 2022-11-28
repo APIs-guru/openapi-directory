@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConnectionTypeEnum } from "./connectiontypeenum";
+
 
 
 // GetConnectionsFilter
@@ -7,9 +8,9 @@ import { ConnectionTypeEnum } from "./connectiontypeenum";
  * Filters the connection definitions that are returned by the <code>GetConnections</code> API operation.
 **/
 export class GetConnectionsFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConnectionType" })
+  @SpeakeasyMetadata({ data: "json, name=ConnectionType" })
   connectionType?: ConnectionTypeEnum;
 
-  @Metadata({ data: "json, name=MatchCriteria" })
+  @SpeakeasyMetadata({ data: "json, name=MatchCriteria" })
   matchCriteria?: string[];
 }

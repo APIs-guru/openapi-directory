@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ByProducts
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Defines an object for the byproducts field in in-toto links. The suggested fields are "stderr", "stdout", and "return-value".
 **/
 export class ByProducts extends SpeakeasyBase {
-  @Metadata({ data: "json, name=customValues" })
+  @SpeakeasyMetadata({ data: "json, name=customValues" })
   customValues?: Map<string, string>;
 }

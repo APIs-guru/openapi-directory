@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var PubsubConfigMessageFormatEnum;
 (function (PubsubConfigMessageFormatEnum) {
     PubsubConfigMessageFormatEnum["MessageFormatUnspecified"] = "MESSAGE_FORMAT_UNSPECIFIED";
@@ -39,15 +39,15 @@ var PubsubConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=messageFormat" }),
+        SpeakeasyMetadata({ data: "json, name=messageFormat" }),
         __metadata("design:type", String)
     ], PubsubConfig.prototype, "messageFormat", void 0);
     __decorate([
-        Metadata({ data: "json, name=serviceAccountEmail" }),
+        SpeakeasyMetadata({ data: "json, name=serviceAccountEmail" }),
         __metadata("design:type", String)
     ], PubsubConfig.prototype, "serviceAccountEmail", void 0);
     __decorate([
-        Metadata({ data: "json, name=topic" }),
+        SpeakeasyMetadata({ data: "json, name=topic" }),
         __metadata("design:type", String)
     ], PubsubConfig.prototype, "topic", void 0);
     return PubsubConfig;

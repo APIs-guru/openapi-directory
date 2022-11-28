@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccessPolicy } from "./accesspolicy";
+
 
 
 // ListAccessPoliciesResponse
@@ -8,9 +8,9 @@ import { AccessPolicy } from "./accesspolicy";
  * A response to `ListAccessPoliciesRequest`.
 **/
 export class ListAccessPoliciesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessPolicies", elemType: shared.AccessPolicy })
+  @SpeakeasyMetadata({ data: "json, name=accessPolicies", elemType: AccessPolicy })
   accessPolicies?: AccessPolicy[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

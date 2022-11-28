@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import intentmetadata
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetIntentsResponse:
-    intents: Optional[List[intentmetadata.IntentMetadata]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'intents' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextToken' }})
+    intents: Optional[List[IntentMetadata]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('intents') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextToken') }})
     

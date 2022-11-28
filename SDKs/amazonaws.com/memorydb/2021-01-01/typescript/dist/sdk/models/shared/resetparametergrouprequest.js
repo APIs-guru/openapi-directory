@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ResetParameterGroupRequest = /** @class */ (function (_super) {
     __extends(ResetParameterGroupRequest, _super);
     function ResetParameterGroupRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AllParameters" }),
+        SpeakeasyMetadata({ data: "json, name=AllParameters" }),
         __metadata("design:type", Boolean)
     ], ResetParameterGroupRequest.prototype, "allParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=ParameterGroupName" }),
+        SpeakeasyMetadata({ data: "json, name=ParameterGroupName" }),
         __metadata("design:type", String)
     ], ResetParameterGroupRequest.prototype, "parameterGroupName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ParameterNames" }),
+        SpeakeasyMetadata({ data: "json, name=ParameterNames" }),
         __metadata("design:type", Array)
     ], ResetParameterGroupRequest.prototype, "parameterNames", void 0);
     return ResetParameterGroupRequest;

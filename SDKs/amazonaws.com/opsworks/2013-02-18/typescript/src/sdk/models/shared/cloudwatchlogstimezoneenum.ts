@@ -1,6 +1,7 @@
 
 
+
 export enum CloudWatchLogsTimeZoneEnum {
-    Local = "LOCAL"
-,    Utc = "UTC"
+    Local = "LOCAL",
+    Utc = "UTC"
 }

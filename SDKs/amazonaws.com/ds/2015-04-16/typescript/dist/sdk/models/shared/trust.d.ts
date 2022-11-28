@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { SelectiveAuthEnum } from "./selectiveauthenum";
 import { TrustDirectionEnum } from "./trustdirectionenum";
 import { TrustStateEnum } from "./truststateenum";

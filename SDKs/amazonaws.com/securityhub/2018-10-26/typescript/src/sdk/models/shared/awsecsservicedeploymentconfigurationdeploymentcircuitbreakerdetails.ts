@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsEcsServiceDeploymentConfigurationDeploymentCircuitBreakerDetails
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Determines whether a service deployment fails if a service cannot reach a steady state.
 **/
 export class AwsEcsServiceDeploymentConfigurationDeploymentCircuitBreakerDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Enable" })
+  @SpeakeasyMetadata({ data: "json, name=Enable" })
   enable?: boolean;
 
-  @Metadata({ data: "json, name=Rollback" })
+  @SpeakeasyMetadata({ data: "json, name=Rollback" })
   rollback?: boolean;
 }

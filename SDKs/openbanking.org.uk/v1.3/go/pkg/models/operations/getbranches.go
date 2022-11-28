@@ -9,10 +9,6 @@ type GetBranchesHeaders struct {
 	IfNoneMatch     *string `header:"style=simple,explode=false,name=If-None-Match"`
 }
 
-type GetBranchesRequest struct {
-	Headers GetBranchesHeaders
-}
-
 type GetBranches400ErrorObjectDescriptionEnum string
 
 const (
@@ -154,6 +150,8 @@ const (
 	GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONBranchAccessibilityTypesEnumWheelchairAccess  GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONBranchAccessibilityTypesEnum = "WheelchairAccess"
 )
 
+// GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONBranchAddress
+// Postal Address
 type GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONBranchAddress struct {
 	BuildingNumberOrName *string `json:"BuildingNumberOrName,omitempty"`
 	Country              string  `json:"Country"`
@@ -164,6 +162,8 @@ type GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONBranchAddress str
 	TownName             *string `json:"TownName,omitempty"`
 }
 
+// GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONBranchAlternatePhone
+// Alternative Phone Number
 type GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONBranchAlternatePhone struct {
 	AlternateTelephoneNumber            *string `json:"AlternateTelephoneNumber,omitempty"`
 	AlternateTelephoneNumberDescription *string `json:"AlternateTelephoneNumberDescription,omitempty"`
@@ -237,6 +237,8 @@ const (
 	GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONBranchCustomerSegmentEnumWealth    GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONBranchCustomerSegmentEnum = "Wealth"
 )
 
+// GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONBranchGeographicLocation
+// Geographic Coordinates
 type GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONBranchGeographicLocation struct {
 	Latitude  string `json:"Latitude"`
 	Longitude string `json:"Longitude"`
@@ -270,26 +272,36 @@ const (
 	GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONBranchOrganisationBrandTrademarkIpoCodeEnumEu GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONBranchOrganisationBrandTrademarkIpoCodeEnum = "EU"
 )
 
+// GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONBranchOrganisationBrand
+// Brand
 type GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONBranchOrganisationBrand struct {
 	TrademarkID      string                                                                                                `json:"TrademarkID"`
 	TrademarkIpoCode GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONBranchOrganisationBrandTrademarkIpoCodeEnum `json:"TrademarkIPOCode"`
 }
 
+// GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONBranchOrganisationParentOrganisationOrganisationName
+// Organisation Name
 type GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONBranchOrganisationParentOrganisationOrganisationName struct {
 	LegalName string `json:"LegalName"`
 }
 
+// GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONBranchOrganisationParentOrganisation
+// Parent organisation
 type GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONBranchOrganisationParentOrganisation struct {
 	Bic              *string                                                                                                        `json:"BIC,omitempty"`
 	Lei              *string                                                                                                        `json:"LEI,omitempty"`
 	OrganisationName GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONBranchOrganisationParentOrganisationOrganisationName `json:"OrganisationName"`
 }
 
+// GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONBranchOrganisation
+// Organisation
 type GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONBranchOrganisation struct {
 	Brand              GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONBranchOrganisationBrand              `json:"Brand"`
 	ParentOrganisation GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONBranchOrganisationParentOrganisation `json:"ParentOrganisation"`
 }
 
+// GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONBranchPlannedBranchClosure
+// Planned branch closure
 type GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONBranchPlannedBranchClosure struct {
 	EndDate   *string `json:"EndDate,omitempty"`
 	StartDate *string `json:"StartDate,omitempty"`
@@ -354,6 +366,10 @@ type GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaData struct {
 type GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSON struct {
 	Data []GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONBranch `json:"data"`
 	Meta GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaData `json:"meta"`
+}
+
+type GetBranchesRequest struct {
+	Headers GetBranchesHeaders
 }
 
 type GetBranchesResponse struct {

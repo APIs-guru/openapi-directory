@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum DescribeSnapshotsXAmzTargetEnum {
     DirectoryService20150416DescribeSnapshots = "DirectoryService_20150416.DescribeSnapshots"

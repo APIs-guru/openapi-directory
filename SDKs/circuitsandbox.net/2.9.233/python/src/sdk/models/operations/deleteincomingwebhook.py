@@ -1,25 +1,25 @@
 from dataclasses import dataclass, field
-
+from sdk.models import shared
 
 
 @dataclass
 class DeleteIncomingWebhookPathParams:
-    webhook_id: str = field(default=None, metadata={'path_param': { 'field_name': 'webhookId', 'style': 'simple', 'explode': False }})
+    webhook_id: str = field(metadata={'path_param': { 'field_name': 'webhookId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DeleteIncomingWebhookSecurity:
-    oauth: shared.SchemeOauth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth: shared.SchemeOauth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DeleteIncomingWebhookRequest:
-    path_params: DeleteIncomingWebhookPathParams = field(default=None)
-    security: DeleteIncomingWebhookSecurity = field(default=None)
+    path_params: DeleteIncomingWebhookPathParams = field()
+    security: DeleteIncomingWebhookSecurity = field()
     
 
 @dataclass
 class DeleteIncomingWebhookResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

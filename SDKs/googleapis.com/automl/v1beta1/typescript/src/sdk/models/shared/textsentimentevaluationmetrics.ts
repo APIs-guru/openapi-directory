@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConfusionMatrix } from "./confusionmatrix";
+
 
 
 // TextSentimentEvaluationMetrics
@@ -7,30 +8,30 @@ import { ConfusionMatrix } from "./confusionmatrix";
  * Model evaluation metrics for text sentiment problems.
 **/
 export class TextSentimentEvaluationMetrics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=annotationSpecId" })
+  @SpeakeasyMetadata({ data: "json, name=annotationSpecId" })
   annotationSpecId?: string[];
 
-  @Metadata({ data: "json, name=confusionMatrix" })
+  @SpeakeasyMetadata({ data: "json, name=confusionMatrix" })
   confusionMatrix?: ConfusionMatrix;
 
-  @Metadata({ data: "json, name=f1Score" })
+  @SpeakeasyMetadata({ data: "json, name=f1Score" })
   f1Score?: number;
 
-  @Metadata({ data: "json, name=linearKappa" })
+  @SpeakeasyMetadata({ data: "json, name=linearKappa" })
   linearKappa?: number;
 
-  @Metadata({ data: "json, name=meanAbsoluteError" })
+  @SpeakeasyMetadata({ data: "json, name=meanAbsoluteError" })
   meanAbsoluteError?: number;
 
-  @Metadata({ data: "json, name=meanSquaredError" })
+  @SpeakeasyMetadata({ data: "json, name=meanSquaredError" })
   meanSquaredError?: number;
 
-  @Metadata({ data: "json, name=precision" })
+  @SpeakeasyMetadata({ data: "json, name=precision" })
   precision?: number;
 
-  @Metadata({ data: "json, name=quadraticKappa" })
+  @SpeakeasyMetadata({ data: "json, name=quadraticKappa" })
   quadraticKappa?: number;
 
-  @Metadata({ data: "json, name=recall" })
+  @SpeakeasyMetadata({ data: "json, name=recall" })
   recall?: number;
 }

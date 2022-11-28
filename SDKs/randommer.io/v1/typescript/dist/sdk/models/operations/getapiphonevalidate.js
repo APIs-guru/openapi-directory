@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetApiPhoneValidateQueryParams = /** @class */ (function (_super) {
     __extends(GetApiPhoneValidateQueryParams, _super);
     function GetApiPhoneValidateQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=CountryCode" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=CountryCode" }),
         __metadata("design:type", String)
     ], GetApiPhoneValidateQueryParams.prototype, "countryCode", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=telephone" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=telephone" }),
         __metadata("design:type", String)
     ], GetApiPhoneValidateQueryParams.prototype, "telephone", void 0);
     return GetApiPhoneValidateQueryParams;
@@ -45,7 +45,7 @@ var GetApiPhoneValidateHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Api-Key" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Api-Key" }),
         __metadata("design:type", String)
     ], GetApiPhoneValidateHeaders.prototype, "xApiKey", void 0);
     return GetApiPhoneValidateHeaders;
@@ -57,11 +57,11 @@ var GetApiPhoneValidateRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetApiPhoneValidateQueryParams)
     ], GetApiPhoneValidateRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetApiPhoneValidateHeaders)
     ], GetApiPhoneValidateRequest.prototype, "headers", void 0);
     return GetApiPhoneValidateRequest;
@@ -73,11 +73,11 @@ var GetApiPhoneValidateResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetApiPhoneValidateResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetApiPhoneValidateResponse.prototype, "statusCode", void 0);
     return GetApiPhoneValidateResponse;

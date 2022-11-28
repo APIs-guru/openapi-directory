@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDescribeMetricCollectionTypesActionEnum(str, Enum):
     DESCRIBE_METRIC_COLLECTION_TYPES = "DescribeMetricCollectionTypes"
@@ -10,8 +14,8 @@ class GetDescribeMetricCollectionTypesVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeMetricCollectionTypesQueryParams:
-    action: GetDescribeMetricCollectionTypesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: GetDescribeMetricCollectionTypesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetDescribeMetricCollectionTypesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDescribeMetricCollectionTypesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,13 +31,13 @@ class GetDescribeMetricCollectionTypesHeaders:
 
 @dataclass
 class GetDescribeMetricCollectionTypesRequest:
-    query_params: GetDescribeMetricCollectionTypesQueryParams = field(default=None)
-    headers: GetDescribeMetricCollectionTypesHeaders = field(default=None)
+    headers: GetDescribeMetricCollectionTypesHeaders = field()
+    query_params: GetDescribeMetricCollectionTypesQueryParams = field()
     
 
 @dataclass
 class GetDescribeMetricCollectionTypesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AttackVolumeStatistics
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Statistics objects for the various data types in <a>AttackVolume</a>. 
 **/
 export class AttackVolumeStatistics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Max" })
+  @SpeakeasyMetadata({ data: "json, name=Max" })
   max: number;
 }

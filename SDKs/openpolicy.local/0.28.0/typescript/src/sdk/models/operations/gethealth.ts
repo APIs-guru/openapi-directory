@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetHealthQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=bundles" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=bundles" })
   bundles?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=plugins" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=plugins" })
   plugins?: boolean;
 }
 
 
 export class GetHealthRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetHealthQueryParams;
 }
 
 
 export class GetHealthResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

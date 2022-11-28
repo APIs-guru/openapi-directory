@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ListQualificationTypesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=MustBeOwnedByCaller" })
+  @SpeakeasyMetadata({ data: "json, name=MustBeOwnedByCaller" })
   mustBeOwnedByCaller?: boolean;
 
-  @Metadata({ data: "json, name=MustBeRequestable" })
+  @SpeakeasyMetadata({ data: "json, name=MustBeRequestable" })
   mustBeRequestable: boolean;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=Query" })
+  @SpeakeasyMetadata({ data: "json, name=Query" })
   query?: string;
 }

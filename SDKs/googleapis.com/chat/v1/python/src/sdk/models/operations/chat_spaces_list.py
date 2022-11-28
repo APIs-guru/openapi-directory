@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -22,12 +23,12 @@ class ChatSpacesListQueryParams:
 
 @dataclass
 class ChatSpacesListRequest:
-    query_params: ChatSpacesListQueryParams = field(default=None)
+    query_params: ChatSpacesListQueryParams = field()
     
 
 @dataclass
 class ChatSpacesListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_spaces_response: Optional[shared.ListSpacesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

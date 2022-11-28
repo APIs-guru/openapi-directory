@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ScrollingMessageViewModel } from "./scrollingmessageviewmodel";
 import { SlideViewModel } from "./slideviewmodel";
 export declare enum MessageViewModelAnnunciatorTypeEnum {

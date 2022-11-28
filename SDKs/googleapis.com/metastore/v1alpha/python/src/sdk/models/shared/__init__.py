@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .alt_enum import *
 from .auditconfig import *
 from .auditlogconfig import *
@@ -40,5 +40,6 @@ from .security import *
 from .service import *
 from .setiampolicyrequest import *
 from .status import *
+from .telemetryconfig import *
 from .testiampermissionsrequest import *
 from .testiampermissionsresponse import *

@@ -51,6 +51,8 @@ const (
 	BuildOptionsSubstitutionOptionEnumAllowLoose BuildOptionsSubstitutionOptionEnum = "ALLOW_LOOSE"
 )
 
+// BuildOptions
+// Optional arguments to enable specific features of builds.
 type BuildOptions struct {
 	DiskSizeGb            *string                                `json:"diskSizeGb,omitempty"`
 	DynamicSubstitutions  *bool                                  `json:"dynamicSubstitutions,omitempty"`

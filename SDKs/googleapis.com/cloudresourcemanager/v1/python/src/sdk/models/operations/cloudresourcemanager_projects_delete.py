@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudresourcemanagerProjectsDeletePathParams:
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class CloudresourcemanagerProjectsDeleteQueryParams:
 
 @dataclass
 class CloudresourcemanagerProjectsDeleteSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudresourcemanagerProjectsDeleteRequest:
-    path_params: CloudresourcemanagerProjectsDeletePathParams = field(default=None)
-    query_params: CloudresourcemanagerProjectsDeleteQueryParams = field(default=None)
-    security: CloudresourcemanagerProjectsDeleteSecurity = field(default=None)
+    path_params: CloudresourcemanagerProjectsDeletePathParams = field()
+    query_params: CloudresourcemanagerProjectsDeleteQueryParams = field()
+    security: CloudresourcemanagerProjectsDeleteSecurity = field()
     
 
 @dataclass
 class CloudresourcemanagerProjectsDeleteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

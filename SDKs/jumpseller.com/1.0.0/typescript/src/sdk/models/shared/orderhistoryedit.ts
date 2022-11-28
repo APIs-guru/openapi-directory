@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OrderHistoryEditFields } from "./orderhistoryeditfields";
 
 
+
 export class OrderHistoryEdit extends SpeakeasyBase {
-  @Metadata({ data: "json, name=order_history" })
+  @SpeakeasyMetadata({ data: "json, name=order_history" })
   orderHistory?: OrderHistoryEditFields;
 }

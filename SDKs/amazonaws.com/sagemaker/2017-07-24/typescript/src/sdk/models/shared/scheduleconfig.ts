@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ScheduleConfig
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configuration details about the monitoring schedule.
 **/
 export class ScheduleConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ScheduleExpression" })
+  @SpeakeasyMetadata({ data: "json, name=ScheduleExpression" })
   scheduleExpression: string;
 }

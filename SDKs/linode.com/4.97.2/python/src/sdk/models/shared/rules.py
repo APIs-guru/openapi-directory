@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import firewallruleconfig
-from . import firewallruleconfig
+from sdk import utils
+from . import *
 
 class RulesInboundPolicyEnum(str, Enum):
     ACCEPT = "ACCEPT"
@@ -16,8 +17,15 @@ class RulesOutboundPolicyEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Rules:
-    inbound: Optional[List[firewallruleconfig.FirewallRuleConfig]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'inbound' }})
-    inbound_policy: Optional[RulesInboundPolicyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'inbound_policy' }})
-    outbound: Optional[List[firewallruleconfig.FirewallRuleConfig]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'outbound' }})
-    outbound_policy: Optional[RulesOutboundPolicyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'outbound_policy' }})
+    r"""Rules
+    The inbound and outbound access rules to apply to the Firewall.
+    
+    A Firewall may have up to 25 rules across its inbound and outbound rulesets.
+    
+    """
+    
+    inbound: Optional[List[FirewallRuleConfig]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('inbound') }})
+    inbound_policy: Optional[RulesInboundPolicyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('inbound_policy') }})
+    outbound: Optional[List[FirewallRuleConfig]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('outbound') }})
+    outbound_policy: Optional[RulesOutboundPolicyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('outbound_policy') }})
     

@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateTagQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
   optFields?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
   optPretty?: boolean;
 }
 
 
-export class CreateTagRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
-  data?: shared.TagRequest;
-}
-
-
-export class CreateTagRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: CreateTagQueryParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: CreateTagRequestBody;
+export class CreateTagRequestBodyInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=data" })
+  data?: shared.TagRequestInput;
 }
 
 
 export class CreateTag201ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: shared.TagResponse;
 }
 
 
+export class CreateTagRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: CreateTagQueryParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: CreateTagRequestBodyInput;
+}
+
+
 export class CreateTagResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createTag201ApplicationJsonObject?: CreateTag201ApplicationJson;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ManualScaling
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A service with manual scaling runs continuously, allowing you to perform complex initialization and rely on the state of its memory over time.
 **/
 export class ManualScaling extends SpeakeasyBase {
-  @Metadata({ data: "json, name=instances" })
+  @SpeakeasyMetadata({ data: "json, name=instances" })
   instances?: number;
 }

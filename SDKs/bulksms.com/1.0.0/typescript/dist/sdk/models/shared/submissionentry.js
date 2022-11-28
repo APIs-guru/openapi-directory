@@ -22,8 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var SubmissionEntryDeliveryReportsEnum;
 (function (SubmissionEntryDeliveryReportsEnum) {
     SubmissionEntryDeliveryReportsEnum["All"] = "ALL";
@@ -57,11 +56,11 @@ var SubmissionEntryFrom = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=address" }),
+        SpeakeasyMetadata({ data: "json, name=address" }),
         __metadata("design:type", String)
     ], SubmissionEntryFrom.prototype, "address", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], SubmissionEntryFrom.prototype, "type", void 0);
     return SubmissionEntryFrom;
@@ -107,23 +106,23 @@ var SubmissionEntryTo = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=address" }),
+        SpeakeasyMetadata({ data: "json, name=address" }),
         __metadata("design:type", String)
     ], SubmissionEntryTo.prototype, "address", void 0);
     __decorate([
-        Metadata({ data: "json, name=fields" }),
+        SpeakeasyMetadata({ data: "json, name=fields" }),
         __metadata("design:type", Array)
     ], SubmissionEntryTo.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], SubmissionEntryTo.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], SubmissionEntryTo.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], SubmissionEntryTo.prototype, "type", void 0);
     return SubmissionEntryTo;
@@ -139,43 +138,43 @@ var SubmissionEntry = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=body" }),
+        SpeakeasyMetadata({ data: "json, name=body" }),
         __metadata("design:type", String)
     ], SubmissionEntry.prototype, "body", void 0);
     __decorate([
-        Metadata({ data: "json, name=deliveryReports" }),
+        SpeakeasyMetadata({ data: "json, name=deliveryReports" }),
         __metadata("design:type", String)
     ], SubmissionEntry.prototype, "deliveryReports", void 0);
     __decorate([
-        Metadata({ data: "json, name=encoding" }),
+        SpeakeasyMetadata({ data: "json, name=encoding" }),
         __metadata("design:type", String)
     ], SubmissionEntry.prototype, "encoding", void 0);
     __decorate([
-        Metadata({ data: "json, name=from" }),
+        SpeakeasyMetadata({ data: "json, name=from" }),
         __metadata("design:type", SubmissionEntryFrom)
     ], SubmissionEntry.prototype, "from", void 0);
     __decorate([
-        Metadata({ data: "json, name=longMessageMaxParts" }),
+        SpeakeasyMetadata({ data: "json, name=longMessageMaxParts" }),
         __metadata("design:type", Number)
     ], SubmissionEntry.prototype, "longMessageMaxParts", void 0);
     __decorate([
-        Metadata({ data: "json, name=messageClass" }),
+        SpeakeasyMetadata({ data: "json, name=messageClass" }),
         __metadata("design:type", String)
     ], SubmissionEntry.prototype, "messageClass", void 0);
     __decorate([
-        Metadata({ data: "json, name=protocolId" }),
+        SpeakeasyMetadata({ data: "json, name=protocolId" }),
         __metadata("design:type", String)
     ], SubmissionEntry.prototype, "protocolId", void 0);
     __decorate([
-        Metadata({ data: "json, name=routingGroup" }),
+        SpeakeasyMetadata({ data: "json, name=routingGroup" }),
         __metadata("design:type", String)
     ], SubmissionEntry.prototype, "routingGroup", void 0);
     __decorate([
-        Metadata({ data: "json, name=to", elemType: shared.SubmissionEntryTo }),
+        SpeakeasyMetadata({ data: "json, name=to", elemType: SubmissionEntryTo }),
         __metadata("design:type", Array)
     ], SubmissionEntry.prototype, "to", void 0);
     __decorate([
-        Metadata({ data: "json, name=userSuppliedId" }),
+        SpeakeasyMetadata({ data: "json, name=userSuppliedId" }),
         __metadata("design:type", String)
     ], SubmissionEntry.prototype, "userSuppliedId", void 0);
     return SubmissionEntry;

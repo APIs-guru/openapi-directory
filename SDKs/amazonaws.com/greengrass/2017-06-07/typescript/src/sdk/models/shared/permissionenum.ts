@@ -1,6 +1,7 @@
 
 
+
 export enum PermissionEnum {
-    Ro = "ro"
-,    Rw = "rw"
+    Ro = "ro",
+    Rw = "rw"
 }

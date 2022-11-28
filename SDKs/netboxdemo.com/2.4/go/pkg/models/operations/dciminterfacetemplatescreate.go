@@ -5,7 +5,7 @@ import (
 )
 
 type DcimInterfaceTemplatesCreateRequest struct {
-	Request shared.WritableInterfaceTemplate `request:"mediaType=application/json"`
+	Request shared.WritableInterfaceTemplateInput `request:"mediaType=application/json"`
 }
 
 type DcimInterfaceTemplatesCreateResponse struct {

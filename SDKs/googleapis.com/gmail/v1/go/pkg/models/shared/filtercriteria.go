@@ -8,6 +8,8 @@ const (
 	FilterCriteriaSizeComparisonEnumLarger      FilterCriteriaSizeComparisonEnum = "larger"
 )
 
+// FilterCriteria
+// Message matching criteria.
 type FilterCriteria struct {
 	ExcludeChats   *bool                             `json:"excludeChats,omitempty"`
 	From           *string                           `json:"from,omitempty"`

@@ -1,5 +1,7 @@
 package shared
 
+// NestedParameter
+// JSON template for a parameter used in various reports.
 type NestedParameter struct {
 	BoolValue      *bool    `json:"boolValue,omitempty"`
 	IntValue       *string  `json:"intValue,omitempty"`

@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum UsageCapExceededProblemPeriodEnum {
-    Daily = "Daily"
-,    Monthly = "Monthly"
+    Daily = "Daily",
+    Monthly = "Monthly"
 }
 
 export enum UsageCapExceededProblemScopeEnum {
-    Account = "Account"
-,    Product = "Product"
+    Account = "Account",
+    Product = "Product"
 }
 
 
@@ -16,18 +17,18 @@ export enum UsageCapExceededProblemScopeEnum {
  * A problem that indicates that a usage cap has been exceeded.
 **/
 export class UsageCapExceededProblem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=detail" })
+  @SpeakeasyMetadata({ data: "json, name=detail" })
   detail: string;
 
-  @Metadata({ data: "json, name=period" })
+  @SpeakeasyMetadata({ data: "json, name=period" })
   period?: UsageCapExceededProblemPeriodEnum;
 
-  @Metadata({ data: "json, name=scope" })
+  @SpeakeasyMetadata({ data: "json, name=scope" })
   scope?: UsageCapExceededProblemScopeEnum;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }

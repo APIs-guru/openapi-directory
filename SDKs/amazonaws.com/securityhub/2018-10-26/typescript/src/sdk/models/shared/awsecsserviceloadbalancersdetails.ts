@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsEcsServiceLoadBalancersDetails
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about a load balancer that the service uses.
 **/
 export class AwsEcsServiceLoadBalancersDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ContainerName" })
+  @SpeakeasyMetadata({ data: "json, name=ContainerName" })
   containerName?: string;
 
-  @Metadata({ data: "json, name=ContainerPort" })
+  @SpeakeasyMetadata({ data: "json, name=ContainerPort" })
   containerPort?: number;
 
-  @Metadata({ data: "json, name=LoadBalancerName" })
+  @SpeakeasyMetadata({ data: "json, name=LoadBalancerName" })
   loadBalancerName?: string;
 
-  @Metadata({ data: "json, name=TargetGroupArn" })
+  @SpeakeasyMetadata({ data: "json, name=TargetGroupArn" })
   targetGroupArn?: string;
 }

@@ -30,7 +30,7 @@ type ProdTtSasportalNodesNodesDeploymentsCreateSecurity struct {
 type ProdTtSasportalNodesNodesDeploymentsCreateRequest struct {
 	PathParams  ProdTtSasportalNodesNodesDeploymentsCreatePathParams
 	QueryParams ProdTtSasportalNodesNodesDeploymentsCreateQueryParams
-	Request     *shared.SasPortalDeployment `request:"mediaType=application/json"`
+	Request     *shared.SasPortalDeploymentInput `request:"mediaType=application/json"`
 	Security    ProdTtSasportalNodesNodesDeploymentsCreateSecurity
 }
 

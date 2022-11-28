@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class OrderLineItemProductVariantAttribute extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dimension" })
+  @SpeakeasyMetadata({ data: "json, name=dimension" })
   dimension?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }

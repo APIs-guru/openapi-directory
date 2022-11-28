@@ -10,6 +10,8 @@ const (
 	CreativeOptimizationConfigurationOptimizationModelEnumVideoCompletion        CreativeOptimizationConfigurationOptimizationModelEnum = "VIDEO_COMPLETION"
 )
 
+// CreativeOptimizationConfiguration
+// Creative optimization settings.
 type CreativeOptimizationConfiguration struct {
 	ID                    *string                                                 `json:"id,omitempty"`
 	Name                  *string                                                 `json:"name,omitempty"`

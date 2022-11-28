@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Any,List,Optional
@@ -16,40 +16,30 @@ class GetV4LayersAsAppliedQueryParams:
 
 @dataclass
 class GetV4LayersAsAppliedHeaders:
-    accept: str = field(default=None, metadata={'header': { 'field_name': 'Accept', 'style': 'simple', 'explode': False }})
+    accept: str = field(metadata={'header': { 'field_name': 'Accept', 'style': 'simple', 'explode': False }})
     x_limit: Optional[int] = field(default=None, metadata={'header': { 'field_name': 'X-Limit', 'style': 'simple', 'explode': False }})
     x_next_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Next-Token', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
-class GetV4LayersAsAppliedSecurityOption1:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
-    
-
-@dataclass
-class GetV4LayersAsAppliedSecurityOption2:
-    oauth2_authorization_code: shared.SchemeOauth2AuthorizationCode = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    
-
-@dataclass
 class GetV4LayersAsAppliedSecurity:
-    option1: Optional[GetV4LayersAsAppliedSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[GetV4LayersAsAppliedSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
+    api_key: Optional[shared.SchemeAPIKey] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    oauth2_authorization_code: Optional[shared.SchemeOauth2AuthorizationCode] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetV4LayersAsAppliedRequest:
-    query_params: GetV4LayersAsAppliedQueryParams = field(default=None)
-    headers: GetV4LayersAsAppliedHeaders = field(default=None)
-    security: GetV4LayersAsAppliedSecurity = field(default=None)
+    headers: GetV4LayersAsAppliedHeaders = field()
+    query_params: GetV4LayersAsAppliedQueryParams = field()
+    security: GetV4LayersAsAppliedSecurity = field()
     
 
 @dataclass
 class GetV4LayersAsAppliedResponse:
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     application_activities: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     empty: Optional[dict[str, Any]] = field(default=None)
     error: Optional[shared.Error] = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
     

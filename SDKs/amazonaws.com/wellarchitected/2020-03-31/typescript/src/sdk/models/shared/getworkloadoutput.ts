@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Workload } from "./workload";
+
 
 
 // GetWorkloadOutput
@@ -7,6 +8,6 @@ import { Workload } from "./workload";
  * Output of a get workload call.
 **/
 export class GetWorkloadOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Workload" })
+  @SpeakeasyMetadata({ data: "json, name=Workload" })
   workload?: Workload;
 }

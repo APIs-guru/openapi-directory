@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -20,14 +21,14 @@ class SearchconsoleURLInspectionIndexInspectQueryParams:
 
 @dataclass
 class SearchconsoleURLInspectionIndexInspectSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class SearchconsoleURLInspectionIndexInspectSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -38,14 +39,14 @@ class SearchconsoleURLInspectionIndexInspectSecurity:
 
 @dataclass
 class SearchconsoleURLInspectionIndexInspectRequest:
-    query_params: SearchconsoleURLInspectionIndexInspectQueryParams = field(default=None)
+    query_params: SearchconsoleURLInspectionIndexInspectQueryParams = field()
+    security: SearchconsoleURLInspectionIndexInspectSecurity = field()
     request: Optional[shared.InspectURLIndexRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: SearchconsoleURLInspectionIndexInspectSecurity = field(default=None)
     
 
 @dataclass
 class SearchconsoleURLInspectionIndexInspectResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     inspect_url_index_response: Optional[shared.InspectURLIndexResponse] = field(default=None)
-    status_code: int = field(default=None)
     

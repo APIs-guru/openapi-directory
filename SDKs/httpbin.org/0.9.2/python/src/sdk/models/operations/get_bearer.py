@@ -9,11 +9,11 @@ class GetBearerHeaders:
 
 @dataclass
 class GetBearerRequest:
-    headers: GetBearerHeaders = field(default=None)
+    headers: GetBearerHeaders = field()
     
 
 @dataclass
 class GetBearerResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

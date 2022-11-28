@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PostBuildQueryParams = /** @class */ (function (_super) {
     __extends(PostBuildQueryParams, _super);
     function PostBuildQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=nocache" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=nocache" }),
         __metadata("design:type", Boolean)
     ], PostBuildQueryParams.prototype, "nocache", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=pull" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pull" }),
         __metadata("design:type", Boolean)
     ], PostBuildQueryParams.prototype, "pull", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=q" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=q" }),
         __metadata("design:type", Boolean)
     ], PostBuildQueryParams.prototype, "q", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=t" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=t" }),
         __metadata("design:type", String)
     ], PostBuildQueryParams.prototype, "t", void 0);
     return PostBuildQueryParams;
@@ -53,11 +53,11 @@ var PostBuildHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Auth-Project-Id" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Auth-Project-Id" }),
         __metadata("design:type", String)
     ], PostBuildHeaders.prototype, "xAuthProjectId", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Auth-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Auth-Token" }),
         __metadata("design:type", String)
     ], PostBuildHeaders.prototype, "xAuthToken", void 0);
     return PostBuildHeaders;
@@ -69,15 +69,15 @@ var PostBuildRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostBuildQueryParams)
     ], PostBuildRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostBuildHeaders)
     ], PostBuildRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/tar" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/tar" }),
         __metadata("design:type", Uint8Array)
     ], PostBuildRequest.prototype, "request", void 0);
     return PostBuildRequest;
@@ -89,11 +89,11 @@ var PostBuildResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostBuildResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostBuildResponse.prototype, "statusCode", void 0);
     return PostBuildResponse;

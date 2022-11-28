@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserPermission } from "./userpermission";
+
 
 
 // ListUserPermissionsResponse
@@ -8,9 +8,9 @@ import { UserPermission } from "./userpermission";
  * List user permissions response.
 **/
 export class ListUserPermissionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=userPermission", elemType: shared.UserPermission })
+  @SpeakeasyMetadata({ data: "json, name=userPermission", elemType: UserPermission })
   userPermission?: UserPermission[];
 }

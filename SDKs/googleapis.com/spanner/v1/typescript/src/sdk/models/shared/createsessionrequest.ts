@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { Session } from "./session";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SessionInput } from "./session";
 
 
-// CreateSessionRequest
+
+// CreateSessionRequestInput
 /** 
  * The request for CreateSession.
 **/
-export class CreateSessionRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=session" })
-  session?: Session;
+export class CreateSessionRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=session" })
+  session?: SessionInput;
 }

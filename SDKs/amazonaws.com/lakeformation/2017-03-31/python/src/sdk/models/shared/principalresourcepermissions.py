@@ -1,19 +1,21 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import detailsmap
-from . import permission_enum
-from . import permission_enum
-from . import datalakeprincipal
-from . import resource
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class PrincipalResourcePermissions:
-    additional_details: Optional[detailsmap.DetailsMap] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AdditionalDetails' }})
-    permissions: Optional[List[permission_enum.PermissionEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Permissions' }})
-    permissions_with_grant_option: Optional[List[permission_enum.PermissionEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PermissionsWithGrantOption' }})
-    principal: Optional[datalakeprincipal.DataLakePrincipal] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Principal' }})
-    resource: Optional[resource.Resource] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Resource' }})
+    r"""PrincipalResourcePermissions
+    The permissions granted or revoked on a resource.
+    """
+    
+    additional_details: Optional[DetailsMap] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AdditionalDetails') }})
+    permissions: Optional[List[PermissionEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Permissions') }})
+    permissions_with_grant_option: Optional[List[PermissionEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PermissionsWithGrantOption') }})
+    principal: Optional[DataLakePrincipal] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Principal') }})
+    resource: Optional[Resource] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Resource') }})
     

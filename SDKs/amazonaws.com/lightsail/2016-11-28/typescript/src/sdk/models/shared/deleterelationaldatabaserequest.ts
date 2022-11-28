@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteRelationalDatabaseRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=finalRelationalDatabaseSnapshotName" })
+  @SpeakeasyMetadata({ data: "json, name=finalRelationalDatabaseSnapshotName" })
   finalRelationalDatabaseSnapshotName?: string;
 
-  @Metadata({ data: "json, name=relationalDatabaseName" })
+  @SpeakeasyMetadata({ data: "json, name=relationalDatabaseName" })
   relationalDatabaseName: string;
 
-  @Metadata({ data: "json, name=skipFinalSnapshot" })
+  @SpeakeasyMetadata({ data: "json, name=skipFinalSnapshot" })
   skipFinalSnapshot?: boolean;
 }

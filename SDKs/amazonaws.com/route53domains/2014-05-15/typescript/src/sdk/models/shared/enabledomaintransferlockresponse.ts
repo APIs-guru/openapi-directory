@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // EnableDomainTransferLockResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The EnableDomainTransferLock response includes the following elements.
 **/
 export class EnableDomainTransferLockResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=OperationId" })
+  @SpeakeasyMetadata({ data: "json, name=OperationId" })
   operationId: string;
 }

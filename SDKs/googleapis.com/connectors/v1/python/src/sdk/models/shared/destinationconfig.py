@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import destination
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DestinationConfig:
-    destinations: Optional[List[destination.Destination]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'destinations' }})
-    key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
+    r"""DestinationConfig
+    Define the Connectors target endpoint.
+    """
+    
+    destinations: Optional[List[Destination]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('destinations') }})
+    key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('key') }})
     

@@ -1,25 +1,25 @@
 from dataclasses import dataclass, field
-
+from sdk.models import shared
 
 
 @dataclass
 class RemoveAccountOrganizationPathParams:
-    org_id: str = field(default=None, metadata={'path_param': { 'field_name': 'org_id', 'style': 'simple', 'explode': False }})
+    org_id: str = field(metadata={'path_param': { 'field_name': 'org_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class RemoveAccountOrganizationSecurity:
-    bearer_auth: shared.SchemeBearerAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_auth: shared.SchemeBearerAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class RemoveAccountOrganizationRequest:
-    path_params: RemoveAccountOrganizationPathParams = field(default=None)
-    security: RemoveAccountOrganizationSecurity = field(default=None)
+    path_params: RemoveAccountOrganizationPathParams = field()
+    security: RemoveAccountOrganizationSecurity = field()
     
 
 @dataclass
 class RemoveAccountOrganizationResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

@@ -1,17 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AdsensehostCustomchannelsPatchPathParams:
-    ad_client_id: str = field(default=None, metadata={'path_param': { 'field_name': 'adClientId', 'style': 'simple', 'explode': False }})
+    ad_client_id: str = field(metadata={'path_param': { 'field_name': 'adClientId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class AdsensehostCustomchannelsPatchQueryParams:
+    custom_channel_id: str = field(metadata={'query_param': { 'field_name': 'customChannelId', 'style': 'form', 'explode': True }})
     alt: Optional[shared.AltEnum] = field(default=None, metadata={'query_param': { 'field_name': 'alt', 'style': 'form', 'explode': True }})
-    custom_channel_id: str = field(default=None, metadata={'query_param': { 'field_name': 'customChannelId', 'style': 'form', 'explode': True }})
     fields: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'fields', 'style': 'form', 'explode': True }})
     key: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'key', 'style': 'form', 'explode': True }})
     oauth_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'oauth_token', 'style': 'form', 'explode': True }})
@@ -22,21 +23,21 @@ class AdsensehostCustomchannelsPatchQueryParams:
 
 @dataclass
 class AdsensehostCustomchannelsPatchSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AdsensehostCustomchannelsPatchRequest:
-    path_params: AdsensehostCustomchannelsPatchPathParams = field(default=None)
-    query_params: AdsensehostCustomchannelsPatchQueryParams = field(default=None)
+    path_params: AdsensehostCustomchannelsPatchPathParams = field()
+    query_params: AdsensehostCustomchannelsPatchQueryParams = field()
+    security: AdsensehostCustomchannelsPatchSecurity = field()
     request: Optional[shared.CustomChannel] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AdsensehostCustomchannelsPatchSecurity = field(default=None)
     
 
 @dataclass
 class AdsensehostCustomchannelsPatchResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     custom_channel: Optional[shared.CustomChannel] = field(default=None)
-    status_code: int = field(default=None)
     

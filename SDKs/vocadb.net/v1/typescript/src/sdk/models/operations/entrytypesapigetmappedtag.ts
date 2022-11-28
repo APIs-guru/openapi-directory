@@ -1,69 +1,70 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum EntryTypesApiGetMappedTagEntryTypeEnum {
-    Undefined = "Undefined"
-,    Album = "Album"
-,    Artist = "Artist"
-,    DiscussionTopic = "DiscussionTopic"
-,    Pv = "PV"
-,    ReleaseEvent = "ReleaseEvent"
-,    ReleaseEventSeries = "ReleaseEventSeries"
-,    Song = "Song"
-,    SongList = "SongList"
-,    Tag = "Tag"
-,    User = "User"
-,    Venue = "Venue"
+    Undefined = "Undefined",
+    Album = "Album",
+    Artist = "Artist",
+    DiscussionTopic = "DiscussionTopic",
+    Pv = "PV",
+    ReleaseEvent = "ReleaseEvent",
+    ReleaseEventSeries = "ReleaseEventSeries",
+    Song = "Song",
+    SongList = "SongList",
+    Tag = "Tag",
+    User = "User",
+    Venue = "Venue"
 }
 
 
 export class EntryTypesApiGetMappedTagPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=entryType" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=entryType" })
   entryType: EntryTypesApiGetMappedTagEntryTypeEnum;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=subType" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=subType" })
   subType: string;
 }
 
 export enum EntryTypesApiGetMappedTagFieldsEnum {
-    None = "None"
-,    AdditionalNames = "AdditionalNames"
-,    AliasedTo = "AliasedTo"
-,    Description = "Description"
-,    MainPicture = "MainPicture"
-,    Names = "Names"
-,    Parent = "Parent"
-,    RelatedTags = "RelatedTags"
-,    TranslatedDescription = "TranslatedDescription"
-,    WebLinks = "WebLinks"
+    None = "None",
+    AdditionalNames = "AdditionalNames",
+    AliasedTo = "AliasedTo",
+    Description = "Description",
+    MainPicture = "MainPicture",
+    Names = "Names",
+    Parent = "Parent",
+    RelatedTags = "RelatedTags",
+    TranslatedDescription = "TranslatedDescription",
+    WebLinks = "WebLinks"
 }
 
 
 export class EntryTypesApiGetMappedTagQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" })
   fields?: EntryTypesApiGetMappedTagFieldsEnum;
 }
 
 
 export class EntryTypesApiGetMappedTagRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: EntryTypesApiGetMappedTagPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: EntryTypesApiGetMappedTagQueryParams;
 }
 
 
 export class EntryTypesApiGetMappedTagResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tagForApiContract?: shared.TagForApiContract;
 }

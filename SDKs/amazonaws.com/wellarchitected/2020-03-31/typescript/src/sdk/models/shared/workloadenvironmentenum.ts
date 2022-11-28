@@ -1,6 +1,7 @@
 
 
+
 export enum WorkloadEnvironmentEnum {
-    Production = "PRODUCTION"
-,    Preproduction = "PREPRODUCTION"
+    Production = "PRODUCTION",
+    Preproduction = "PREPRODUCTION"
 }

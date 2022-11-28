@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Link
 /**
  * Links object defined in [section 4.2 of RFC 7483](https://tools.ietf.org/html/rfc7483#section-4.2).
@@ -33,31 +33,31 @@ var Link = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=href" }),
+        SpeakeasyMetadata({ data: "json, name=href" }),
         __metadata("design:type", String)
     ], Link.prototype, "href", void 0);
     __decorate([
-        Metadata({ data: "json, name=hreflang" }),
+        SpeakeasyMetadata({ data: "json, name=hreflang" }),
         __metadata("design:type", String)
     ], Link.prototype, "hreflang", void 0);
     __decorate([
-        Metadata({ data: "json, name=media" }),
+        SpeakeasyMetadata({ data: "json, name=media" }),
         __metadata("design:type", String)
     ], Link.prototype, "media", void 0);
     __decorate([
-        Metadata({ data: "json, name=rel" }),
+        SpeakeasyMetadata({ data: "json, name=rel" }),
         __metadata("design:type", String)
     ], Link.prototype, "rel", void 0);
     __decorate([
-        Metadata({ data: "json, name=title" }),
+        SpeakeasyMetadata({ data: "json, name=title" }),
         __metadata("design:type", String)
     ], Link.prototype, "title", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], Link.prototype, "type", void 0);
     __decorate([
-        Metadata({ data: "json, name=value" }),
+        SpeakeasyMetadata({ data: "json, name=value" }),
         __metadata("design:type", String)
     ], Link.prototype, "value", void 0);
     return Link;

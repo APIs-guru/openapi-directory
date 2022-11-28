@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class ListAlarmModelVersionsPathParams:
-    alarm_model_name: str = field(default=None, metadata={'path_param': { 'field_name': 'alarmModelName', 'style': 'simple', 'explode': False }})
+    alarm_model_name: str = field(metadata={'path_param': { 'field_name': 'alarmModelName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,19 +30,19 @@ class ListAlarmModelVersionsHeaders:
 
 @dataclass
 class ListAlarmModelVersionsRequest:
-    path_params: ListAlarmModelVersionsPathParams = field(default=None)
-    query_params: ListAlarmModelVersionsQueryParams = field(default=None)
-    headers: ListAlarmModelVersionsHeaders = field(default=None)
+    headers: ListAlarmModelVersionsHeaders = field()
+    path_params: ListAlarmModelVersionsPathParams = field()
+    query_params: ListAlarmModelVersionsQueryParams = field()
     
 
 @dataclass
 class ListAlarmModelVersionsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     list_alarm_model_versions_response: Optional[shared.ListAlarmModelVersionsResponse] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

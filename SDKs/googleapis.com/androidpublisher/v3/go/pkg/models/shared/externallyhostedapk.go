@@ -1,5 +1,7 @@
 package shared
 
+// ExternallyHostedApk
+// Defines an APK available for this application that is hosted externally and not uploaded to Google Play. This function is only available to organizations using Managed Play whose application is configured to restrict distribution to the organizations.
 type ExternallyHostedApk struct {
 	ApplicationLabel    *string          `json:"applicationLabel,omitempty"`
 	CertificateBase64s  []string         `json:"certificateBase64s,omitempty"`

@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GooglePrivacyDlpV2KindExpression } from "./googleprivacydlpv2kindexpression";
 import { GooglePrivacyDlpV2PartitionId } from "./googleprivacydlpv2partitionid";
+
 
 
 // GooglePrivacyDlpV2DatastoreOptions
@@ -8,9 +9,9 @@ import { GooglePrivacyDlpV2PartitionId } from "./googleprivacydlpv2partitionid";
  * Options defining a data set within Google Cloud Datastore.
 **/
 export class GooglePrivacyDlpV2DatastoreOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: GooglePrivacyDlpV2KindExpression;
 
-  @Metadata({ data: "json, name=partitionId" })
+  @SpeakeasyMetadata({ data: "json, name=partitionId" })
   partitionId?: GooglePrivacyDlpV2PartitionId;
 }

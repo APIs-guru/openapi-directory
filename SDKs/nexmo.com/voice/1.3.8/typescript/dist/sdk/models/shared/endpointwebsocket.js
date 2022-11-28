@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var EndpointWebsocketContentTypeEnum;
 (function (EndpointWebsocketContentTypeEnum) {
     EndpointWebsocketContentTypeEnum["AudioL16RateEqual8000"] = "audio/l16;rate=8000";
@@ -38,7 +38,7 @@ var EndpointWebsocketHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=customer_id" }),
+        SpeakeasyMetadata({ data: "json, name=customer_id" }),
         __metadata("design:type", String)
     ], EndpointWebsocketHeaders.prototype, "customerId", void 0);
     return EndpointWebsocketHeaders;
@@ -54,19 +54,19 @@ var EndpointWebsocket = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=content-type" }),
+        SpeakeasyMetadata({ data: "json, name=content-type" }),
         __metadata("design:type", String)
     ], EndpointWebsocket.prototype, "contentType", void 0);
     __decorate([
-        Metadata({ data: "json, name=headers" }),
+        SpeakeasyMetadata({ data: "json, name=headers" }),
         __metadata("design:type", EndpointWebsocketHeaders)
     ], EndpointWebsocket.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], EndpointWebsocket.prototype, "type", void 0);
     __decorate([
-        Metadata({ data: "json, name=uri" }),
+        SpeakeasyMetadata({ data: "json, name=uri" }),
         __metadata("design:type", String)
     ], EndpointWebsocket.prototype, "uri", void 0);
     return EndpointWebsocket;

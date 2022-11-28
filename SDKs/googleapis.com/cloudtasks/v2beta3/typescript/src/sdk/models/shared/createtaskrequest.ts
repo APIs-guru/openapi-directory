@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Task } from "./task";
 
+
 export enum CreateTaskRequestResponseViewEnum {
-    ViewUnspecified = "VIEW_UNSPECIFIED"
-,    Basic = "BASIC"
-,    Full = "FULL"
+    ViewUnspecified = "VIEW_UNSPECIFIED",
+    Basic = "BASIC",
+    Full = "FULL"
 }
 
 
@@ -13,9 +14,9 @@ export enum CreateTaskRequestResponseViewEnum {
  * Request message for CreateTask.
 **/
 export class CreateTaskRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=responseView" })
+  @SpeakeasyMetadata({ data: "json, name=responseView" })
   responseView?: CreateTaskRequestResponseViewEnum;
 
-  @Metadata({ data: "json, name=task" })
+  @SpeakeasyMetadata({ data: "json, name=task" })
   task?: Task;
 }

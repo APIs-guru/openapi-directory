@@ -17,10 +17,14 @@ const (
 	GoogleCloudIntegrationsV1alphaTriggerConfigTriggerTypeEnumSfdcChannel            GoogleCloudIntegrationsV1alphaTriggerConfigTriggerTypeEnum = "SFDC_CHANNEL"
 	GoogleCloudIntegrationsV1alphaTriggerConfigTriggerTypeEnumCloudPubsubExternal    GoogleCloudIntegrationsV1alphaTriggerConfigTriggerTypeEnum = "CLOUD_PUBSUB_EXTERNAL"
 	GoogleCloudIntegrationsV1alphaTriggerConfigTriggerTypeEnumSfdcCdcChannel         GoogleCloudIntegrationsV1alphaTriggerConfigTriggerTypeEnum = "SFDC_CDC_CHANNEL"
+	GoogleCloudIntegrationsV1alphaTriggerConfigTriggerTypeEnumCloudScheduler         GoogleCloudIntegrationsV1alphaTriggerConfigTriggerTypeEnum = "CLOUD_SCHEDULER"
 )
 
+// GoogleCloudIntegrationsV1alphaTriggerConfig
+// Configuration detail of a trigger.
 type GoogleCloudIntegrationsV1alphaTriggerConfig struct {
 	AlertConfig              []GoogleCloudIntegrationsV1alphaIntegrationAlertConfig                   `json:"alertConfig,omitempty"`
+	CloudSchedulerConfig     *GoogleCloudIntegrationsV1alphaCloudSchedulerConfig                      `json:"cloudSchedulerConfig,omitempty"`
 	Description              *string                                                                  `json:"description,omitempty"`
 	Label                    *string                                                                  `json:"label,omitempty"`
 	NextTasksExecutionPolicy *GoogleCloudIntegrationsV1alphaTriggerConfigNextTasksExecutionPolicyEnum `json:"nextTasksExecutionPolicy,omitempty"`

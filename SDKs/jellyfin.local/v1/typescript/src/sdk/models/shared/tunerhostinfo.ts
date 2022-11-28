@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TunerHostInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AllowHWTranscoding" })
+  @SpeakeasyMetadata({ data: "json, name=AllowHWTranscoding" })
   allowHwTranscoding?: boolean;
 
-  @Metadata({ data: "json, name=DeviceId" })
+  @SpeakeasyMetadata({ data: "json, name=DeviceId" })
   deviceId?: string;
 
-  @Metadata({ data: "json, name=EnableStreamLooping" })
+  @SpeakeasyMetadata({ data: "json, name=EnableStreamLooping" })
   enableStreamLooping?: boolean;
 
-  @Metadata({ data: "json, name=FriendlyName" })
+  @SpeakeasyMetadata({ data: "json, name=FriendlyName" })
   friendlyName?: string;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=ImportFavoritesOnly" })
+  @SpeakeasyMetadata({ data: "json, name=ImportFavoritesOnly" })
   importFavoritesOnly?: boolean;
 
-  @Metadata({ data: "json, name=Source" })
+  @SpeakeasyMetadata({ data: "json, name=Source" })
   source?: string;
 
-  @Metadata({ data: "json, name=TunerCount" })
+  @SpeakeasyMetadata({ data: "json, name=TunerCount" })
   tunerCount?: number;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: string;
 
-  @Metadata({ data: "json, name=Url" })
+  @SpeakeasyMetadata({ data: "json, name=Url" })
   url?: string;
 
-  @Metadata({ data: "json, name=UserAgent" })
+  @SpeakeasyMetadata({ data: "json, name=UserAgent" })
   userAgent?: string;
 }

@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class CreateBotVersionPathParams:
-    bot_id: str = field(default=None, metadata={'path_param': { 'field_name': 'botId', 'style': 'simple', 'explode': False }})
+    bot_id: str = field(metadata={'path_param': { 'field_name': 'botId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,26 +27,26 @@ class CreateBotVersionHeaders:
 @dataclass_json
 @dataclass
 class CreateBotVersionRequestBody:
-    bot_version_locale_specification: dict[str, shared.BotVersionLocaleDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'botVersionLocaleSpecification' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
+    bot_version_locale_specification: dict[str, shared.BotVersionLocaleDetails] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('botVersionLocaleSpecification') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
     
 
 @dataclass
 class CreateBotVersionRequest:
-    path_params: CreateBotVersionPathParams = field(default=None)
-    headers: CreateBotVersionHeaders = field(default=None)
-    request: CreateBotVersionRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateBotVersionHeaders = field()
+    path_params: CreateBotVersionPathParams = field()
+    request: CreateBotVersionRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateBotVersionResponse:
+    content_type: str = field()
+    status_code: int = field()
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     create_bot_version_response: Optional[shared.CreateBotVersionResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     precondition_failed_exception: Optional[Any] = field(default=None)
     service_quota_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

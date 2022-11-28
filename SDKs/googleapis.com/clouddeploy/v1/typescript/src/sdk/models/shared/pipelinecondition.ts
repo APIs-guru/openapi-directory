@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PipelineReadyCondition } from "./pipelinereadycondition";
 import { TargetsPresentCondition } from "./targetspresentcondition";
+
 
 
 // PipelineCondition
@@ -8,9 +9,9 @@ import { TargetsPresentCondition } from "./targetspresentcondition";
  * PipelineCondition contains all conditions relevant to a Delivery Pipeline.
 **/
 export class PipelineCondition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pipelineReadyCondition" })
+  @SpeakeasyMetadata({ data: "json, name=pipelineReadyCondition" })
   pipelineReadyCondition?: PipelineReadyCondition;
 
-  @Metadata({ data: "json, name=targetsPresentCondition" })
+  @SpeakeasyMetadata({ data: "json, name=targetsPresentCondition" })
   targetsPresentCondition?: TargetsPresentCondition;
 }

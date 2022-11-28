@@ -17,12 +17,12 @@ class PutAdministrationEntityRequests:
 
 @dataclass
 class PutAdministrationEntityRequest:
-    headers: PutAdministrationEntityHeaders = field(default=None)
+    headers: PutAdministrationEntityHeaders = field()
     request: Optional[PutAdministrationEntityRequests] = field(default=None)
     
 
 @dataclass
 class PutAdministrationEntityResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

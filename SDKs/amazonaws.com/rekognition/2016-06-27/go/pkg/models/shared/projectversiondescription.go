@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ProjectVersionDescription
+// The description of a version of a model.
 type ProjectVersionDescription struct {
 	BillableTrainingTimeInSeconds *int64                    `json:"BillableTrainingTimeInSeconds,omitempty"`
 	CreationTimestamp             *time.Time                `json:"CreationTimestamp,omitempty"`

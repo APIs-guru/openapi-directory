@@ -8,15 +8,15 @@ type PostAdministrationUserHeaders struct {
 	Token *string `header:"style=simple,explode=false,name=Token"`
 }
 
-type PostAdministrationUserRequests struct {
-	NewUserRequest  *shared.NewUserRequest `request:"mediaType=application/*+json"`
-	NewUserRequest1 *shared.NewUserRequest `request:"mediaType=application/json"`
-	NewUserRequest2 *shared.NewUserRequest `request:"mediaType=text/json"`
+type PostAdministrationUserRequestsInput struct {
+	NewUserRequest  *shared.NewUserRequestInput `request:"mediaType=application/*+json"`
+	NewUserRequest1 *shared.NewUserRequestInput `request:"mediaType=application/json"`
+	NewUserRequest2 *shared.NewUserRequestInput `request:"mediaType=text/json"`
 }
 
 type PostAdministrationUserRequest struct {
 	Headers PostAdministrationUserHeaders
-	Request *PostAdministrationUserRequests
+	Request *PostAdministrationUserRequestsInput
 }
 
 type PostAdministrationUserResponse struct {

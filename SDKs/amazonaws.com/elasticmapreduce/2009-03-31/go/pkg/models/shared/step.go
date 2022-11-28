@@ -1,5 +1,7 @@
 package shared
 
+// Step
+// This represents a step in a cluster.
 type Step struct {
 	ActionOnFailure *ActionOnFailureEnum `json:"ActionOnFailure,omitempty"`
 	Config          *HadoopStepConfig    `json:"Config,omitempty"`

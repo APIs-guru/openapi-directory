@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class InstanceStateChangeReasonCodeEnum(str, Enum):
     INTERNAL_ERROR = "INTERNAL_ERROR"

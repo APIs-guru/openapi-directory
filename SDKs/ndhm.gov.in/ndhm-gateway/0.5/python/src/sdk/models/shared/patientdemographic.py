@@ -1,15 +1,23 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import patientgender_enum
-from . import authconfirmidentifier
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class PatientDemographic:
-    date_of_birth: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dateOfBirth' }})
-    gender: patientgender_enum.PatientGenderEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gender' }})
-    identifier: Optional[authconfirmidentifier.AuthConfirmIdentifier] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'identifier' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
+    r"""PatientDemographic
+    Demographic details are only required for demographic auth at this point. Demographic details must be same as registered
+    """
+    
+    date_of_birth: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('dateOfBirth') }})
+    gender: PatientGenderEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('gender') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    identifier: Optional[AuthConfirmIdentifier] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('identifier') }})
     

@@ -1,10 +1,14 @@
 package shared
 
+// PlayerName
+// An object representation of the individual components of the player's name. For some players, these fields may not be present.
 type PlayerName struct {
 	FamilyName *string `json:"familyName,omitempty"`
 	GivenName  *string `json:"givenName,omitempty"`
 }
 
+// Player
+// A Player resource.
 type Player struct {
 	AvatarImageURL     *string                            `json:"avatarImageUrl,omitempty"`
 	BannerURLLandscape *string                            `json:"bannerUrlLandscape,omitempty"`

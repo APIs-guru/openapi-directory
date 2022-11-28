@@ -32,13 +32,13 @@ type HooksPostQueryParams struct {
 	TargetURL     *string                     `queryParam:"style=form,explode=true,name=target_url"`
 }
 
-type HooksPostRequest struct {
-	QueryParams HooksPostQueryParams
-}
-
 type HooksPost200ApplicationJSON struct {
 	ID      *int64 `json:"id,omitempty"`
 	Success *bool  `json:"success,omitempty"`
+}
+
+type HooksPostRequest struct {
+	QueryParams HooksPostQueryParams
 }
 
 type HooksPostResponse struct {

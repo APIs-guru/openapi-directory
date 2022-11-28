@@ -1,5 +1,8 @@
 package shared
 
+// UserDto
+// The UserDTO Class.
+// Contains relevant fields of User DTO by masking actual User entity's fields in application.
 type UserDto struct {
 	AccountNumber        *string `json:"accountNumber,omitempty"`
 	ExternalEntityNumber *string `json:"externalEntityNumber,omitempty"`

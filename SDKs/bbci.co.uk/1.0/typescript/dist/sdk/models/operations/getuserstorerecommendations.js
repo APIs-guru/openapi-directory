@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetUserStoreRecommendationsQueryParams = /** @class */ (function (_super) {
     __extends(GetUserStoreRecommendationsQueryParams, _super);
     function GetUserStoreRecommendationsQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=identity_cookie" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=identity_cookie" }),
         __metadata("design:type", Number)
     ], GetUserStoreRecommendationsQueryParams.prototype, "identityCookie", void 0);
     return GetUserStoreRecommendationsQueryParams;
@@ -41,7 +41,7 @@ var GetUserStoreRecommendationsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetUserStoreRecommendationsQueryParams)
     ], GetUserStoreRecommendationsRequest.prototype, "queryParams", void 0);
     return GetUserStoreRecommendationsRequest;
@@ -53,15 +53,15 @@ var GetUserStoreRecommendationsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetUserStoreRecommendationsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetUserStoreRecommendationsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], GetUserStoreRecommendationsResponse.prototype, "ibl", void 0);
     return GetUserStoreRecommendationsResponse;

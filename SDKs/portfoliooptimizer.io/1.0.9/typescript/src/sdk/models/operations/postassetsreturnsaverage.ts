@@ -1,43 +1,44 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostAssetsReturnsAverageRequestBodyAssets extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assetReturns" })
+  @SpeakeasyMetadata({ data: "json, name=assetReturns" })
   assetReturns: number[];
 }
 
 
 export class PostAssetsReturnsAverageRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assets", elemType: operations.PostAssetsReturnsAverageRequestBodyAssets })
+  @SpeakeasyMetadata({ data: "json, name=assets", elemType: PostAssetsReturnsAverageRequestBodyAssets })
   assets: PostAssetsReturnsAverageRequestBodyAssets[];
 }
 
 
-export class PostAssetsReturnsAverageRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: PostAssetsReturnsAverageRequestBody;
-}
-
-
 export class PostAssetsReturnsAverage200ApplicationJsonAssets extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assetAverageReturn" })
+  @SpeakeasyMetadata({ data: "json, name=assetAverageReturn" })
   assetAverageReturn: number;
 }
 
 
 export class PostAssetsReturnsAverage200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assets", elemType: operations.PostAssetsReturnsAverage200ApplicationJsonAssets })
+  @SpeakeasyMetadata({ data: "json, name=assets", elemType: PostAssetsReturnsAverage200ApplicationJsonAssets })
   assets: PostAssetsReturnsAverage200ApplicationJsonAssets[];
 }
 
 
+export class PostAssetsReturnsAverageRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: PostAssetsReturnsAverageRequestBody;
+}
+
+
 export class PostAssetsReturnsAverageResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postAssetsReturnsAverage200ApplicationJsonObject?: PostAssetsReturnsAverage200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

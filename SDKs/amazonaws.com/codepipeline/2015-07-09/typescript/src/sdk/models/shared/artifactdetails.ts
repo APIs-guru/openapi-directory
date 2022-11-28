@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ArtifactDetails
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Returns information about the details of an artifact.
 **/
 export class ArtifactDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=maximumCount" })
+  @SpeakeasyMetadata({ data: "json, name=maximumCount" })
   maximumCount: number;
 
-  @Metadata({ data: "json, name=minimumCount" })
+  @SpeakeasyMetadata({ data: "json, name=minimumCount" })
   minimumCount: number;
 }

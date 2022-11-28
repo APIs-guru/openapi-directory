@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
+
 
 export enum PutFileXAmzTargetEnum {
     CodeCommit20150413PutFile = "CodeCommit_20150413.PutFile"
@@ -7,138 +8,138 @@ export enum PutFileXAmzTargetEnum {
 
 
 export class PutFileHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Target" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Target" })
   xAmzTarget: PutFileXAmzTargetEnum;
 }
 
 
 export class PutFileRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: PutFileHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.PutFileInput;
 }
 
 
 export class PutFileResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   branchDoesNotExistException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   branchNameIsTagNameException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   branchNameRequiredException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   commitMessageLengthExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   directoryNameConflictsWithFileNameException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   encryptionIntegrityChecksFailedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   encryptionKeyAccessDeniedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   encryptionKeyDisabledException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   encryptionKeyNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   encryptionKeyUnavailableException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   fileContentRequiredException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   fileContentSizeLimitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   fileNameConflictsWithDirectoryNameException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   filePathConflictsWithSubmodulePathException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   folderContentSizeLimitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidBranchNameException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidDeletionParameterException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidEmailException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidFileModeException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidParentCommitIdException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidPathException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRepositoryNameException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   nameLengthExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   parentCommitDoesNotExistException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   parentCommitIdOutdatedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   parentCommitIdRequiredException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   pathRequiredException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   putFileOutput?: shared.PutFileOutput;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   repositoryDoesNotExistException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   repositoryNameRequiredException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   sameFileContentException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

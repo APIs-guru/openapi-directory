@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// BuildPhase
+// Information about a stage for a build.
 type BuildPhase struct {
 	Contexts          []PhaseContext      `json:"contexts,omitempty"`
 	DurationInSeconds *int64              `json:"durationInSeconds,omitempty"`

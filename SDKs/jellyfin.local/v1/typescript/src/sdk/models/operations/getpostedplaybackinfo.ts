@@ -1,98 +1,99 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetPostedPlaybackInfoPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=itemId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=itemId" })
   itemId: string;
 }
 
 
 export class GetPostedPlaybackInfoQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=allowAudioStreamCopy" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=allowAudioStreamCopy" })
   allowAudioStreamCopy?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=allowVideoStreamCopy" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=allowVideoStreamCopy" })
   allowVideoStreamCopy?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=audioStreamIndex" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=audioStreamIndex" })
   audioStreamIndex?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=autoOpenLiveStream" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=autoOpenLiveStream" })
   autoOpenLiveStream?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=enableDirectPlay" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=enableDirectPlay" })
   enableDirectPlay?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=enableDirectStream" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=enableDirectStream" })
   enableDirectStream?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=enableTranscoding" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=enableTranscoding" })
   enableTranscoding?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=liveStreamId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=liveStreamId" })
   liveStreamId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxAudioChannels" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxAudioChannels" })
   maxAudioChannels?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxStreamingBitrate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxStreamingBitrate" })
   maxStreamingBitrate?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=mediaSourceId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=mediaSourceId" })
   mediaSourceId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=startTimeTicks" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=startTimeTicks" })
   startTimeTicks?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=subtitleStreamIndex" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=subtitleStreamIndex" })
   subtitleStreamIndex?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=userId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userId" })
   userId?: string;
 }
 
 
 export class GetPostedPlaybackInfoRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
   playbackInfoDto?: shared.PlaybackInfoDto;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   playbackInfoDto1?: shared.PlaybackInfoDto;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   playbackInfoDto2?: shared.PlaybackInfoDto;
 }
 
 
 export class GetPostedPlaybackInfoSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   customAuthentication: shared.SchemeCustomAuthentication;
 }
 
 
 export class GetPostedPlaybackInfoRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetPostedPlaybackInfoPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetPostedPlaybackInfoQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request?: GetPostedPlaybackInfoRequests;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetPostedPlaybackInfoSecurity;
 }
 
 
 export class GetPostedPlaybackInfoResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   playbackInfoResponse?: shared.PlaybackInfoResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

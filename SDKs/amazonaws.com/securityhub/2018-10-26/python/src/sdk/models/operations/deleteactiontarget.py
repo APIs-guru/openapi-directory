@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class DeleteActionTargetPathParams:
-    action_target_arn: str = field(default=None, metadata={'path_param': { 'field_name': 'ActionTargetArn', 'style': 'simple', 'explode': False }})
+    action_target_arn: str = field(metadata={'path_param': { 'field_name': 'ActionTargetArn', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,17 +24,17 @@ class DeleteActionTargetHeaders:
 
 @dataclass
 class DeleteActionTargetRequest:
-    path_params: DeleteActionTargetPathParams = field(default=None)
-    headers: DeleteActionTargetHeaders = field(default=None)
+    headers: DeleteActionTargetHeaders = field()
+    path_params: DeleteActionTargetPathParams = field()
     
 
 @dataclass
 class DeleteActionTargetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     delete_action_target_response: Optional[shared.DeleteActionTargetResponse] = field(default=None)
     internal_exception: Optional[Any] = field(default=None)
     invalid_access_exception: Optional[Any] = field(default=None)
     invalid_input_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -22,30 +22,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DescribeCommunicationsRequest = /** @class */ (function (_super) {
     __extends(DescribeCommunicationsRequest, _super);
     function DescribeCommunicationsRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=afterTime" }),
+        SpeakeasyMetadata({ data: "json, name=afterTime" }),
         __metadata("design:type", String)
     ], DescribeCommunicationsRequest.prototype, "afterTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=beforeTime" }),
+        SpeakeasyMetadata({ data: "json, name=beforeTime" }),
         __metadata("design:type", String)
     ], DescribeCommunicationsRequest.prototype, "beforeTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=caseId" }),
+        SpeakeasyMetadata({ data: "json, name=caseId" }),
         __metadata("design:type", String)
     ], DescribeCommunicationsRequest.prototype, "caseId", void 0);
     __decorate([
-        Metadata({ data: "json, name=maxResults" }),
+        SpeakeasyMetadata({ data: "json, name=maxResults" }),
         __metadata("design:type", Number)
     ], DescribeCommunicationsRequest.prototype, "maxResults", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextToken" }),
         __metadata("design:type", String)
     ], DescribeCommunicationsRequest.prototype, "nextToken", void 0);
     return DescribeCommunicationsRequest;

@@ -1,5 +1,7 @@
 package shared
 
+// ObPostalAddress6
+// Information that locates and identifies a specific address, as defined by postal services.
 type ObPostalAddress6 struct {
 	AddressLine        []string               `json:"AddressLine,omitempty"`
 	AddressType        *ObAddressTypeCodeEnum `json:"AddressType,omitempty"`

@@ -1,5 +1,7 @@
 package shared
 
+// MetricFilterMatchRecord
+// Represents a matched event.
 type MetricFilterMatchRecord struct {
 	EventMessage    *string           `json:"eventMessage,omitempty"`
 	EventNumber     *int64            `json:"eventNumber,omitempty"`

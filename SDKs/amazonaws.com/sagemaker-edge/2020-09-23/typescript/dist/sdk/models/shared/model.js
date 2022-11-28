@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { EdgeMetric } from "./edgemetric";
 // Model
 /**
  * Information about a model deployed on an edge device that is registered with SageMaker Edge Manager.
@@ -34,23 +34,23 @@ var Model = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=LatestInference" }),
+        SpeakeasyMetadata({ data: "json, name=LatestInference" }),
         __metadata("design:type", Date)
     ], Model.prototype, "latestInference", void 0);
     __decorate([
-        Metadata({ data: "json, name=LatestSampleTime" }),
+        SpeakeasyMetadata({ data: "json, name=LatestSampleTime" }),
         __metadata("design:type", Date)
     ], Model.prototype, "latestSampleTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=ModelMetrics", elemType: shared.EdgeMetric }),
+        SpeakeasyMetadata({ data: "json, name=ModelMetrics", elemType: EdgeMetric }),
         __metadata("design:type", Array)
     ], Model.prototype, "modelMetrics", void 0);
     __decorate([
-        Metadata({ data: "json, name=ModelName" }),
+        SpeakeasyMetadata({ data: "json, name=ModelName" }),
         __metadata("design:type", String)
     ], Model.prototype, "modelName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ModelVersion" }),
+        SpeakeasyMetadata({ data: "json, name=ModelVersion" }),
         __metadata("design:type", String)
     ], Model.prototype, "modelVersion", void 0);
     return Model;

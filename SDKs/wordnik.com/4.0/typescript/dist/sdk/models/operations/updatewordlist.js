@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var UpdateWordListPathParams = /** @class */ (function (_super) {
     __extends(UpdateWordListPathParams, _super);
     function UpdateWordListPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=permalink" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=permalink" }),
         __metadata("design:type", String)
     ], UpdateWordListPathParams.prototype, "permalink", void 0);
     return UpdateWordListPathParams;
@@ -41,7 +41,7 @@ var UpdateWordListHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=auth_token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=auth_token" }),
         __metadata("design:type", String)
     ], UpdateWordListHeaders.prototype, "authToken", void 0);
     return UpdateWordListHeaders;
@@ -53,15 +53,15 @@ var UpdateWordListRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateWordListPathParams)
     ], UpdateWordListRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateWordListHeaders)
     ], UpdateWordListRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", Object)
     ], UpdateWordListRequest.prototype, "request", void 0);
     return UpdateWordListRequest;
@@ -73,15 +73,15 @@ var UpdateWordListResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], UpdateWordListResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UpdateWordListResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UpdateWordListResponse.prototype, "statusCode", void 0);
     return UpdateWordListResponse;

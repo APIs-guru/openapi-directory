@@ -23,6 +23,8 @@ const (
 	DirectoryChromeosdevicesCommandTypeEnumRemotePowerwash        DirectoryChromeosdevicesCommandTypeEnum = "REMOTE_POWERWASH"
 )
 
+// DirectoryChromeosdevicesCommand
+// Information regarding a command that was issued to a device.
 type DirectoryChromeosdevicesCommand struct {
 	CommandExpireTime *string                                   `json:"commandExpireTime,omitempty"`
 	CommandID         *string                                   `json:"commandId,omitempty"`

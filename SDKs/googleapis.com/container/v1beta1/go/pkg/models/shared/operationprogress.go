@@ -10,6 +10,8 @@ const (
 	OperationProgressStatusEnumAborting          OperationProgressStatusEnum = "ABORTING"
 )
 
+// OperationProgress
+// Information about operation (or operation stage) progress.
 type OperationProgress struct {
 	Metrics []Metric                     `json:"metrics,omitempty"`
 	Name    *string                      `json:"name,omitempty"`

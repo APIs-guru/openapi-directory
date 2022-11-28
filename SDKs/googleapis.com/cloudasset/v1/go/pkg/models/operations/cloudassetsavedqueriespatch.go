@@ -31,7 +31,7 @@ type CloudassetSavedQueriesPatchSecurity struct {
 type CloudassetSavedQueriesPatchRequest struct {
 	PathParams  CloudassetSavedQueriesPatchPathParams
 	QueryParams CloudassetSavedQueriesPatchQueryParams
-	Request     *shared.SavedQuery `request:"mediaType=application/json"`
+	Request     *shared.SavedQueryInput `request:"mediaType=application/json"`
 	Security    CloudassetSavedQueriesPatchSecurity
 }
 

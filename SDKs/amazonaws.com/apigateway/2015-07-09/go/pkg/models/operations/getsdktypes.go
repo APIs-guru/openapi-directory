@@ -4,12 +4,12 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-type GetSdkTypesQueryParams struct {
+type GetSDKTypesQueryParams struct {
 	Limit    *int64  `queryParam:"style=form,explode=true,name=limit"`
 	Position *string `queryParam:"style=form,explode=true,name=position"`
 }
 
-type GetSdkTypesHeaders struct {
+type GetSDKTypesHeaders struct {
 	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
 	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
 	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
@@ -19,16 +19,16 @@ type GetSdkTypesHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
-type GetSdkTypesRequest struct {
-	QueryParams GetSdkTypesQueryParams
-	Headers     GetSdkTypesHeaders
+type GetSDKTypesRequest struct {
+	QueryParams GetSDKTypesQueryParams
+	Headers     GetSDKTypesHeaders
 }
 
-type GetSdkTypesResponse struct {
+type GetSDKTypesResponse struct {
 	BadRequestException      *interface{}
 	ContentType              string
 	NotFoundException        *interface{}
-	SdkTypes                 *shared.SdkTypes
+	SdkTypes                 *shared.SDKTypes
 	StatusCode               int64
 	TooManyRequestsException *interface{}
 	UnauthorizedException    *interface{}

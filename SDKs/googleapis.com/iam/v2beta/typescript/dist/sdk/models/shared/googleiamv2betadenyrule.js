@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleTypeExpr } from "./googletypeexpr";
 // GoogleIamV2betaDenyRule
 /**
@@ -34,23 +34,23 @@ var GoogleIamV2betaDenyRule = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=denialCondition" }),
+        SpeakeasyMetadata({ data: "json, name=denialCondition" }),
         __metadata("design:type", GoogleTypeExpr)
     ], GoogleIamV2betaDenyRule.prototype, "denialCondition", void 0);
     __decorate([
-        Metadata({ data: "json, name=deniedPermissions" }),
+        SpeakeasyMetadata({ data: "json, name=deniedPermissions" }),
         __metadata("design:type", Array)
     ], GoogleIamV2betaDenyRule.prototype, "deniedPermissions", void 0);
     __decorate([
-        Metadata({ data: "json, name=deniedPrincipals" }),
+        SpeakeasyMetadata({ data: "json, name=deniedPrincipals" }),
         __metadata("design:type", Array)
     ], GoogleIamV2betaDenyRule.prototype, "deniedPrincipals", void 0);
     __decorate([
-        Metadata({ data: "json, name=exceptionPermissions" }),
+        SpeakeasyMetadata({ data: "json, name=exceptionPermissions" }),
         __metadata("design:type", Array)
     ], GoogleIamV2betaDenyRule.prototype, "exceptionPermissions", void 0);
     __decorate([
-        Metadata({ data: "json, name=exceptionPrincipals" }),
+        SpeakeasyMetadata({ data: "json, name=exceptionPrincipals" }),
         __metadata("design:type", Array)
     ], GoogleIamV2betaDenyRule.prototype, "exceptionPrincipals", void 0);
     return GoogleIamV2betaDenyRule;

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetModifyVpcEndpointServicePermissionsActionEnum;
 (function (GetModifyVpcEndpointServicePermissionsActionEnum) {
     GetModifyVpcEndpointServicePermissionsActionEnum["ModifyVpcEndpointServicePermissions"] = "ModifyVpcEndpointServicePermissions";
@@ -37,27 +37,27 @@ var GetModifyVpcEndpointServicePermissionsQueryParams = /** @class */ (function 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" }),
         __metadata("design:type", String)
     ], GetModifyVpcEndpointServicePermissionsQueryParams.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=AddAllowedPrincipals" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=AddAllowedPrincipals" }),
         __metadata("design:type", Array)
     ], GetModifyVpcEndpointServicePermissionsQueryParams.prototype, "addAllowedPrincipals", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=DryRun" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DryRun" }),
         __metadata("design:type", Boolean)
     ], GetModifyVpcEndpointServicePermissionsQueryParams.prototype, "dryRun", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=RemoveAllowedPrincipals" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=RemoveAllowedPrincipals" }),
         __metadata("design:type", Array)
     ], GetModifyVpcEndpointServicePermissionsQueryParams.prototype, "removeAllowedPrincipals", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ServiceId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ServiceId" }),
         __metadata("design:type", String)
     ], GetModifyVpcEndpointServicePermissionsQueryParams.prototype, "serviceId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" }),
         __metadata("design:type", String)
     ], GetModifyVpcEndpointServicePermissionsQueryParams.prototype, "version", void 0);
     return GetModifyVpcEndpointServicePermissionsQueryParams;
@@ -69,31 +69,31 @@ var GetModifyVpcEndpointServicePermissionsHeaders = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], GetModifyVpcEndpointServicePermissionsHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], GetModifyVpcEndpointServicePermissionsHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], GetModifyVpcEndpointServicePermissionsHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], GetModifyVpcEndpointServicePermissionsHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], GetModifyVpcEndpointServicePermissionsHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], GetModifyVpcEndpointServicePermissionsHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], GetModifyVpcEndpointServicePermissionsHeaders.prototype, "xAmzSignedHeaders", void 0);
     return GetModifyVpcEndpointServicePermissionsHeaders;
@@ -105,11 +105,11 @@ var GetModifyVpcEndpointServicePermissionsRequest = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetModifyVpcEndpointServicePermissionsQueryParams)
     ], GetModifyVpcEndpointServicePermissionsRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetModifyVpcEndpointServicePermissionsHeaders)
     ], GetModifyVpcEndpointServicePermissionsRequest.prototype, "headers", void 0);
     return GetModifyVpcEndpointServicePermissionsRequest;
@@ -121,15 +121,15 @@ var GetModifyVpcEndpointServicePermissionsResponse = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetModifyVpcEndpointServicePermissionsResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetModifyVpcEndpointServicePermissionsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetModifyVpcEndpointServicePermissionsResponse.prototype, "statusCode", void 0);
     return GetModifyVpcEndpointServicePermissionsResponse;

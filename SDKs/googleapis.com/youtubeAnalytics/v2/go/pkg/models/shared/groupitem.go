@@ -1,5 +1,7 @@
 package shared
 
+// GroupItem
+// A group item.
 type GroupItem struct {
 	Errors   *Errors            `json:"errors,omitempty"`
 	Etag     *string            `json:"etag,omitempty"`

@@ -1,48 +1,49 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ContactsPostActionEnum {
-    Del = "del"
-,    Write = "write"
+    Del = "del",
+    Write = "write"
 }
 
 
 export class ContactsPostQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=action" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=action" })
   action: ContactsPostActionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=email" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=email" })
   email?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=empfaenger" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=empfaenger" })
   empfaenger?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=id" })
   id?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=json" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=json" })
   json?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=nick" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=nick" })
   nick?: string;
 }
 
 
 export class ContactsPostRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ContactsPostQueryParams;
 }
 
 
 export class ContactsPostResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contactsPost200ApplicationJsonString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contactsPost200TextPlainString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

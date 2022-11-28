@@ -1,8 +1,37 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum TagKeyPurposeEnum {
-    PurposeUnspecified = "PURPOSE_UNSPECIFIED"
-,    GceFirewall = "GCE_FIREWALL"
+    PurposeUnspecified = "PURPOSE_UNSPECIFIED",
+    GceFirewall = "GCE_FIREWALL"
+}
+
+
+// TagKeyInput
+/** 
+ * A TagKey, used to group a set of TagValues.
+**/
+export class TagKeyInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=etag" })
+  etag?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=parent" })
+  parent?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=purpose" })
+  purpose?: TagKeyPurposeEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=purposeData" })
+  purposeData?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=shortName" })
+  shortName?: string;
 }
 
 
@@ -11,33 +40,33 @@ export enum TagKeyPurposeEnum {
  * A TagKey, used to group a set of TagValues.
 **/
 export class TagKey extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=namespacedName" })
+  @SpeakeasyMetadata({ data: "json, name=namespacedName" })
   namespacedName?: string;
 
-  @Metadata({ data: "json, name=parent" })
+  @SpeakeasyMetadata({ data: "json, name=parent" })
   parent?: string;
 
-  @Metadata({ data: "json, name=purpose" })
+  @SpeakeasyMetadata({ data: "json, name=purpose" })
   purpose?: TagKeyPurposeEnum;
 
-  @Metadata({ data: "json, name=purposeData" })
+  @SpeakeasyMetadata({ data: "json, name=purposeData" })
   purposeData?: Map<string, string>;
 
-  @Metadata({ data: "json, name=shortName" })
+  @SpeakeasyMetadata({ data: "json, name=shortName" })
   shortName?: string;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 }

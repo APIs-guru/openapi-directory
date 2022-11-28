@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import offset
+from sdk import utils
+from . import *
 
 class TitleAssetPositionEnum(str, Enum):
     TOP = "top"
@@ -39,12 +41,16 @@ class TitleAssetStyleEnum(str, Enum):
 @dataclass_json
 @dataclass
 class TitleAsset:
-    background: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'background' }})
-    color: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'color' }})
-    offset: Optional[offset.Offset] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'offset' }})
-    position: Optional[TitleAssetPositionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'position' }})
-    size: Optional[TitleAssetSizeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'size' }})
-    style: Optional[TitleAssetStyleEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'style' }})
-    text: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'text' }})
-    type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""TitleAsset
+    The TitleAsset clip type lets you create video titles from a text string and apply styling and positioning.
+    """
+    
+    text: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('text') }})
+    type: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    background: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('background') }})
+    color: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('color') }})
+    offset: Optional[Offset] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('offset') }})
+    position: Optional[TitleAssetPositionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('position') }})
+    size: Optional[TitleAssetSizeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('size') }})
+    style: Optional[TitleAssetStyleEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('style') }})
     

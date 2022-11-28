@@ -1,5 +1,7 @@
 package shared
 
+// ColumnInfo
+// Information about the columns in a query execution result.
 type ColumnInfo struct {
 	CaseSensitive *bool               `json:"CaseSensitive,omitempty"`
 	CatalogName   *string             `json:"CatalogName,omitempty"`

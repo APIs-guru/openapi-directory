@@ -22,16 +22,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var SchemeApiKey = /** @class */ (function (_super) {
     __extends(SchemeApiKey, _super);
     function SchemeApiKey() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, name=Authorization" }),
+        SpeakeasyMetadata({ data: "security, name=password" }),
         __metadata("design:type", String)
-    ], SchemeApiKey.prototype, "authorization", void 0);
+    ], SchemeApiKey.prototype, "password", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "security, name=username" }),
+        __metadata("design:type", String)
+    ], SchemeApiKey.prototype, "username", void 0);
     return SchemeApiKey;
 }(SpeakeasyBase));
 export { SchemeApiKey };

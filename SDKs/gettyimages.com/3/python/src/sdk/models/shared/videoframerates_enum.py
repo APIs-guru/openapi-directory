@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class VideoFrameRatesEnum(str, Enum):
     TWENTY_THREE_98 = "23.98"

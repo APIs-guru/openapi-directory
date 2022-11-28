@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import googleclouddialogflowcxv3continuoustestresult
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleCloudDialogflowCxV3ListContinuousTestResultsResponse:
-    continuous_test_results: Optional[List[googleclouddialogflowcxv3continuoustestresult.GoogleCloudDialogflowCxV3ContinuousTestResult]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'continuousTestResults' }})
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextPageToken' }})
+    r"""GoogleCloudDialogflowCxV3ListContinuousTestResultsResponse
+    The response message for Environments.ListTestCaseResults.
+    """
+    
+    continuous_test_results: Optional[List[GoogleCloudDialogflowCxV3ContinuousTestResult]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('continuousTestResults') }})
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextPageToken') }})
     

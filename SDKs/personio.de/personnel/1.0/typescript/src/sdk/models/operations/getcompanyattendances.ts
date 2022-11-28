@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetCompanyAttendancesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=employees" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=employees" })
   employees?: number[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=end_date" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=end_date" })
   endDate: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=start_date" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=start_date" })
   startDate: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=updated_from" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=updated_from" })
   updatedFrom?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=updated_to" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=updated_to" })
   updatedTo?: string;
 }
 
 
 export class GetCompanyAttendancesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetCompanyAttendancesQueryParams;
 }
 
 
 export class GetCompanyAttendancesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   attendancePeriodsResponse?: shared.AttendancePeriodsResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

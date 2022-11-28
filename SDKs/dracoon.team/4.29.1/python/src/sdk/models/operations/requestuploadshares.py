@@ -1,5 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
@@ -19,14 +22,14 @@ class RequestUploadSharesHeaders:
 
 @dataclass
 class RequestUploadSharesRequest:
-    query_params: RequestUploadSharesQueryParams = field(default=None)
-    headers: RequestUploadSharesHeaders = field(default=None)
+    headers: RequestUploadSharesHeaders = field()
+    query_params: RequestUploadSharesQueryParams = field()
     
 
 @dataclass
 class RequestUploadSharesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     upload_share_list: Optional[shared.UploadShareList] = field(default=None)
     

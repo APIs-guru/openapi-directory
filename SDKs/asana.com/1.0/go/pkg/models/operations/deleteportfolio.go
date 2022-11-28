@@ -13,13 +13,13 @@ type DeletePortfolioQueryParams struct {
 	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
+type DeletePortfolio200ApplicationJSON struct {
+	Data map[string]interface{} `json:"data,omitempty"`
+}
+
 type DeletePortfolioRequest struct {
 	PathParams  DeletePortfolioPathParams
 	QueryParams DeletePortfolioQueryParams
-}
-
-type DeletePortfolio200ApplicationJSON struct {
-	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type DeletePortfolioResponse struct {

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // BulkDeploymentMetrics
 /**
  * Relevant metrics on input records processed during bulk deployment.
@@ -33,15 +33,15 @@ var BulkDeploymentMetrics = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=InvalidInputRecords" }),
+        SpeakeasyMetadata({ data: "json, name=InvalidInputRecords" }),
         __metadata("design:type", Number)
     ], BulkDeploymentMetrics.prototype, "invalidInputRecords", void 0);
     __decorate([
-        Metadata({ data: "json, name=RecordsProcessed" }),
+        SpeakeasyMetadata({ data: "json, name=RecordsProcessed" }),
         __metadata("design:type", Number)
     ], BulkDeploymentMetrics.prototype, "recordsProcessed", void 0);
     __decorate([
-        Metadata({ data: "json, name=RetryAttempts" }),
+        SpeakeasyMetadata({ data: "json, name=RetryAttempts" }),
         __metadata("design:type", Number)
     ], BulkDeploymentMetrics.prototype, "retryAttempts", void 0);
     return BulkDeploymentMetrics;

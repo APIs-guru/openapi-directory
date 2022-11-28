@@ -10,7 +10,7 @@ type UpdateItemListPathParams struct {
 
 type UpdateItemListRequest struct {
 	PathParams UpdateItemListPathParams
-	Request    shared.ItemList `request:"mediaType=application/json"`
+	Request    shared.ItemListInput `request:"mediaType=application/json"`
 }
 
 type UpdateItemListResponse struct {

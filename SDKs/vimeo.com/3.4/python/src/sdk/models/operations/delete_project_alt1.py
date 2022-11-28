@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class DeleteProjectAlt1PathParams:
-    project_id: float = field(default=None, metadata={'path_param': { 'field_name': 'project_id', 'style': 'simple', 'explode': False }})
+    project_id: float = field(metadata={'path_param': { 'field_name': 'project_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,19 +15,19 @@ class DeleteProjectAlt1QueryParams:
 
 @dataclass
 class DeleteProjectAlt1Security:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DeleteProjectAlt1Request:
-    path_params: DeleteProjectAlt1PathParams = field(default=None)
-    query_params: DeleteProjectAlt1QueryParams = field(default=None)
-    security: DeleteProjectAlt1Security = field(default=None)
+    path_params: DeleteProjectAlt1PathParams = field()
+    query_params: DeleteProjectAlt1QueryParams = field()
+    security: DeleteProjectAlt1Security = field()
     
 
 @dataclass
 class DeleteProjectAlt1Response:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[shared.Error] = field(default=None)
     

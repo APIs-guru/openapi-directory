@@ -28,11 +28,6 @@ type IdcerSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type IdcerRequest struct {
-	Request  *IdcerRequestBody `request:"mediaType=application/json"`
-	Security IdcerSecurity
-}
-
 type Idcer400ApplicationJSONErrorEnum string
 
 const (
@@ -162,6 +157,11 @@ const (
 type Idcer504ApplicationJSON struct {
 	Error            *Idcer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Idcer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type IdcerRequest struct {
+	Request  *IdcerRequestBody `request:"mediaType=application/json"`
+	Security IdcerSecurity
 }
 
 type IdcerResponse struct {

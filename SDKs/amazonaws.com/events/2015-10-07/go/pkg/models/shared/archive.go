@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Archive
+// An <code>Archive</code> object that contains details about an archive.
 type Archive struct {
 	ArchiveName    *string           `json:"ArchiveName,omitempty"`
 	CreationTime   *time.Time        `json:"CreationTime,omitempty"`

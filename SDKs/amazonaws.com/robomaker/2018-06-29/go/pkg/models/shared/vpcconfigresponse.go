@@ -1,5 +1,7 @@
 package shared
 
+// VpcConfigResponse
+// VPC configuration associated with your simulation job.
 type VpcConfigResponse struct {
 	AssignPublicIP *bool    `json:"assignPublicIp,omitempty"`
 	SecurityGroups []string `json:"securityGroups,omitempty"`

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ListTagsForResourceMessage
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * <p/>
 **/
 export class ListTagsForResourceMessage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ResourceArn" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceArn" })
   resourceArn?: string;
 
-  @Metadata({ data: "json, name=ResourceArnList" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceArnList" })
   resourceArnList?: string[];
 }

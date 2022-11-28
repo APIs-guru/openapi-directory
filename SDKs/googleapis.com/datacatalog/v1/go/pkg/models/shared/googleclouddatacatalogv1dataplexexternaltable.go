@@ -10,6 +10,8 @@ const (
 	GoogleCloudDatacatalogV1DataplexExternalTableSystemEnumDataplex                    GoogleCloudDatacatalogV1DataplexExternalTableSystemEnum = "DATAPLEX"
 )
 
+// GoogleCloudDatacatalogV1DataplexExternalTable
+// External table registered by Dataplex. Dataplex publishes data discovered from an asset into multiple other systems (BigQuery, DPMS) in form of tables. We call them "external tables". External tables are also synced into the Data Catalog. This message contains pointers to those external tables (fully qualified name, resource name et cetera) within the Data Catalog.
 type GoogleCloudDatacatalogV1DataplexExternalTable struct {
 	DataCatalogEntry    *string                                                  `json:"dataCatalogEntry,omitempty"`
 	FullyQualifiedName  *string                                                  `json:"fullyQualifiedName,omitempty"`

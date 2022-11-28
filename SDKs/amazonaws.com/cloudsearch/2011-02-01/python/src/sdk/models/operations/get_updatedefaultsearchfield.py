@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetUpdateDefaultSearchFieldActionEnum(str, Enum):
     UPDATE_DEFAULT_SEARCH_FIELD = "UpdateDefaultSearchField"
@@ -10,10 +14,10 @@ class GetUpdateDefaultSearchFieldVersionEnum(str, Enum):
 
 @dataclass
 class GetUpdateDefaultSearchFieldQueryParams:
-    action: GetUpdateDefaultSearchFieldActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    default_search_field: str = field(default=None, metadata={'query_param': { 'field_name': 'DefaultSearchField', 'style': 'form', 'explode': True }})
-    domain_name: str = field(default=None, metadata={'query_param': { 'field_name': 'DomainName', 'style': 'form', 'explode': True }})
-    version: GetUpdateDefaultSearchFieldVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetUpdateDefaultSearchFieldActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    default_search_field: str = field(metadata={'query_param': { 'field_name': 'DefaultSearchField', 'style': 'form', 'explode': True }})
+    domain_name: str = field(metadata={'query_param': { 'field_name': 'DomainName', 'style': 'form', 'explode': True }})
+    version: GetUpdateDefaultSearchFieldVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetUpdateDefaultSearchFieldHeaders:
 
 @dataclass
 class GetUpdateDefaultSearchFieldRequest:
-    query_params: GetUpdateDefaultSearchFieldQueryParams = field(default=None)
-    headers: GetUpdateDefaultSearchFieldHeaders = field(default=None)
+    headers: GetUpdateDefaultSearchFieldHeaders = field()
+    query_params: GetUpdateDefaultSearchFieldQueryParams = field()
     
 
 @dataclass
 class GetUpdateDefaultSearchFieldResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

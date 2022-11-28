@@ -22,24 +22,24 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RepositoryCatalogDataInput } from "./repositorycatalogdatainput";
+import { Tag } from "./tag";
 var CreateRepositoryRequest = /** @class */ (function (_super) {
     __extends(CreateRepositoryRequest, _super);
     function CreateRepositoryRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=catalogData" }),
+        SpeakeasyMetadata({ data: "json, name=catalogData" }),
         __metadata("design:type", RepositoryCatalogDataInput)
     ], CreateRepositoryRequest.prototype, "catalogData", void 0);
     __decorate([
-        Metadata({ data: "json, name=repositoryName" }),
+        SpeakeasyMetadata({ data: "json, name=repositoryName" }),
         __metadata("design:type", String)
     ], CreateRepositoryRequest.prototype, "repositoryName", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags", elemType: shared.Tag }),
+        SpeakeasyMetadata({ data: "json, name=tags", elemType: Tag }),
         __metadata("design:type", Array)
     ], CreateRepositoryRequest.prototype, "tags", void 0);
     return CreateRepositoryRequest;

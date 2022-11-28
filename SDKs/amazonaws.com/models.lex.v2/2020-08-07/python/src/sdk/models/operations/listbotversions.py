@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class ListBotVersionsPathParams:
-    bot_id: str = field(default=None, metadata={'path_param': { 'field_name': 'botId', 'style': 'simple', 'explode': False }})
+    bot_id: str = field(metadata={'path_param': { 'field_name': 'botId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -29,33 +34,37 @@ class ListBotVersionsHeaders:
 @dataclass_json
 @dataclass
 class ListBotVersionsRequestBodySortBy:
-    attribute: Optional[shared.BotVersionSortAttributeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'attribute' }})
-    order: Optional[shared.SortOrderEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'order' }})
+    r"""ListBotVersionsRequestBodySortBy
+    Specifies attributes for sorting a list of bot versions.
+    """
+    
+    attribute: Optional[shared.BotVersionSortAttributeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('attribute') }})
+    order: Optional[shared.SortOrderEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('order') }})
     
 
 @dataclass_json
 @dataclass
 class ListBotVersionsRequestBody:
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxResults' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextToken' }})
-    sort_by: Optional[ListBotVersionsRequestBodySortBy] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sortBy' }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxResults') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextToken') }})
+    sort_by: Optional[ListBotVersionsRequestBodySortBy] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sortBy') }})
     
 
 @dataclass
 class ListBotVersionsRequest:
-    path_params: ListBotVersionsPathParams = field(default=None)
-    query_params: ListBotVersionsQueryParams = field(default=None)
-    headers: ListBotVersionsHeaders = field(default=None)
-    request: ListBotVersionsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ListBotVersionsHeaders = field()
+    path_params: ListBotVersionsPathParams = field()
+    query_params: ListBotVersionsQueryParams = field()
+    request: ListBotVersionsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ListBotVersionsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_server_exception: Optional[Any] = field(default=None)
     list_bot_versions_response: Optional[shared.ListBotVersionsResponse] = field(default=None)
     service_quota_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

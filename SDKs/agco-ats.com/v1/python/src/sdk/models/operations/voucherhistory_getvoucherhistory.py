@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Optional
@@ -17,12 +17,12 @@ class VoucherHistoryGetVoucherHistoryQueryParams:
 
 @dataclass
 class VoucherHistoryGetVoucherHistoryRequest:
-    query_params: VoucherHistoryGetVoucherHistoryQueryParams = field(default=None)
+    query_params: VoucherHistoryGetVoucherHistoryQueryParams = field()
     
 
 @dataclass
 class VoucherHistoryGetVoucherHistoryResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_paged_response_dealer_db_models_voucher_history_: Optional[shared.APIPagedResponseDealerDbModelsVoucherHistory] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

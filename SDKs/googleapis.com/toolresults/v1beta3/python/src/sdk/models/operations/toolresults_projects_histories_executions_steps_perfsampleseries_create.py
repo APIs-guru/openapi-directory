@@ -1,14 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ToolresultsProjectsHistoriesExecutionsStepsPerfSampleSeriesCreatePathParams:
-    execution_id: str = field(default=None, metadata={'path_param': { 'field_name': 'executionId', 'style': 'simple', 'explode': False }})
-    history_id: str = field(default=None, metadata={'path_param': { 'field_name': 'historyId', 'style': 'simple', 'explode': False }})
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
-    step_id: str = field(default=None, metadata={'path_param': { 'field_name': 'stepId', 'style': 'simple', 'explode': False }})
+    execution_id: str = field(metadata={'path_param': { 'field_name': 'executionId', 'style': 'simple', 'explode': False }})
+    history_id: str = field(metadata={'path_param': { 'field_name': 'historyId', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
+    step_id: str = field(metadata={'path_param': { 'field_name': 'stepId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,21 +29,21 @@ class ToolresultsProjectsHistoriesExecutionsStepsPerfSampleSeriesCreateQueryPara
 
 @dataclass
 class ToolresultsProjectsHistoriesExecutionsStepsPerfSampleSeriesCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ToolresultsProjectsHistoriesExecutionsStepsPerfSampleSeriesCreateRequest:
-    path_params: ToolresultsProjectsHistoriesExecutionsStepsPerfSampleSeriesCreatePathParams = field(default=None)
-    query_params: ToolresultsProjectsHistoriesExecutionsStepsPerfSampleSeriesCreateQueryParams = field(default=None)
+    path_params: ToolresultsProjectsHistoriesExecutionsStepsPerfSampleSeriesCreatePathParams = field()
+    query_params: ToolresultsProjectsHistoriesExecutionsStepsPerfSampleSeriesCreateQueryParams = field()
+    security: ToolresultsProjectsHistoriesExecutionsStepsPerfSampleSeriesCreateSecurity = field()
     request: Optional[shared.PerfSampleSeries] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ToolresultsProjectsHistoriesExecutionsStepsPerfSampleSeriesCreateSecurity = field(default=None)
     
 
 @dataclass
 class ToolresultsProjectsHistoriesExecutionsStepsPerfSampleSeriesCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     perf_sample_series: Optional[shared.PerfSampleSeries] = field(default=None)
-    status_code: int = field(default=None)
     

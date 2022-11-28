@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Artifact } from "./artifact";
 /**
  *  The result structure for the list artifacts request.

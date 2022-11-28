@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeploymentWaitTypeEnum } from "./deploymentwaittypeenum";
 
 
+
 export class ContinueDeploymentInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deploymentId" })
+  @SpeakeasyMetadata({ data: "json, name=deploymentId" })
   deploymentId?: string;
 
-  @Metadata({ data: "json, name=deploymentWaitType" })
+  @SpeakeasyMetadata({ data: "json, name=deploymentWaitType" })
   deploymentWaitType?: DeploymentWaitTypeEnum;
 }

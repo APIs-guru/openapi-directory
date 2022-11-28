@@ -42,6 +42,8 @@ const (
 	CheckErrorCodeEnumInjectedError                          CheckErrorCodeEnum = "INJECTED_ERROR"
 )
 
+// CheckError
+// Defines the errors to be returned in google.api.servicecontrol.v1.CheckResponse.check_errors.
 type CheckError struct {
 	Code    *CheckErrorCodeEnum `json:"code,omitempty"`
 	Detail  *string             `json:"detail,omitempty"`

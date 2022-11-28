@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BlockerTypeEnum } from "./blockertypeenum";
+
 
 
 // BlockerDeclaration
@@ -7,9 +8,9 @@ import { BlockerTypeEnum } from "./blockertypeenum";
  * Reserved for future use.
 **/
 export class BlockerDeclaration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: BlockerTypeEnum;
 }

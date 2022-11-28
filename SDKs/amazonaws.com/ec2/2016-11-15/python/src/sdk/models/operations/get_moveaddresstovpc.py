@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetMoveAddressToVpcActionEnum(str, Enum):
     MOVE_ADDRESS_TO_VPC = "MoveAddressToVpc"
@@ -10,10 +14,10 @@ class GetMoveAddressToVpcVersionEnum(str, Enum):
 
 @dataclass
 class GetMoveAddressToVpcQueryParams:
-    action: GetMoveAddressToVpcActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetMoveAddressToVpcActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    public_ip: str = field(metadata={'query_param': { 'field_name': 'PublicIp', 'style': 'form', 'explode': True }})
+    version: GetMoveAddressToVpcVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    public_ip: str = field(default=None, metadata={'query_param': { 'field_name': 'PublicIp', 'style': 'form', 'explode': True }})
-    version: GetMoveAddressToVpcVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetMoveAddressToVpcHeaders:
 
 @dataclass
 class GetMoveAddressToVpcRequest:
-    query_params: GetMoveAddressToVpcQueryParams = field(default=None)
-    headers: GetMoveAddressToVpcHeaders = field(default=None)
+    headers: GetMoveAddressToVpcHeaders = field()
+    query_params: GetMoveAddressToVpcQueryParams = field()
     
 
 @dataclass
 class GetMoveAddressToVpcResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

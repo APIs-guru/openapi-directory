@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LocationAttributes } from "./locationattributes";
+
 
 
 // DescribeFleetLocationAttributesOutput
@@ -8,15 +8,15 @@ import { LocationAttributes } from "./locationattributes";
  * Represents the returned data in response to a request operation. 
 **/
 export class DescribeFleetLocationAttributesOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FleetArn" })
+  @SpeakeasyMetadata({ data: "json, name=FleetArn" })
   fleetArn?: string;
 
-  @Metadata({ data: "json, name=FleetId" })
+  @SpeakeasyMetadata({ data: "json, name=FleetId" })
   fleetId?: string;
 
-  @Metadata({ data: "json, name=LocationAttributes", elemType: shared.LocationAttributes })
+  @SpeakeasyMetadata({ data: "json, name=LocationAttributes", elemType: LocationAttributes })
   locationAttributes?: LocationAttributes[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

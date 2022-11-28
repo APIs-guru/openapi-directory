@@ -22,23 +22,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ColumnMetadata } from "./columnmetadata";
 var DescribeTableResponse = /** @class */ (function (_super) {
     __extends(DescribeTableResponse, _super);
     function DescribeTableResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ColumnList", elemType: shared.ColumnMetadata }),
+        SpeakeasyMetadata({ data: "json, name=ColumnList", elemType: ColumnMetadata }),
         __metadata("design:type", Array)
     ], DescribeTableResponse.prototype, "columnList", void 0);
     __decorate([
-        Metadata({ data: "json, name=NextToken" }),
+        SpeakeasyMetadata({ data: "json, name=NextToken" }),
         __metadata("design:type", String)
     ], DescribeTableResponse.prototype, "nextToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=TableName" }),
+        SpeakeasyMetadata({ data: "json, name=TableName" }),
         __metadata("design:type", String)
     ], DescribeTableResponse.prototype, "tableName", void 0);
     return DescribeTableResponse;

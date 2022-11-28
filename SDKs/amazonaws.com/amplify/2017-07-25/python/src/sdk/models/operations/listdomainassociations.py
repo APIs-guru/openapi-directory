@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class ListDomainAssociationsPathParams:
-    app_id: str = field(default=None, metadata={'path_param': { 'field_name': 'appId', 'style': 'simple', 'explode': False }})
+    app_id: str = field(metadata={'path_param': { 'field_name': 'appId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,17 +30,17 @@ class ListDomainAssociationsHeaders:
 
 @dataclass
 class ListDomainAssociationsRequest:
-    path_params: ListDomainAssociationsPathParams = field(default=None)
-    query_params: ListDomainAssociationsQueryParams = field(default=None)
-    headers: ListDomainAssociationsHeaders = field(default=None)
+    headers: ListDomainAssociationsHeaders = field()
+    path_params: ListDomainAssociationsPathParams = field()
+    query_params: ListDomainAssociationsQueryParams = field()
     
 
 @dataclass
 class ListDomainAssociationsResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     list_domain_associations_result: Optional[shared.ListDomainAssociationsResult] = field(default=None)
-    status_code: int = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

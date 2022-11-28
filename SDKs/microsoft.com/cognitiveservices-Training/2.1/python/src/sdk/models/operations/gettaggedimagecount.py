@@ -4,7 +4,7 @@ from typing import List,Optional
 
 @dataclass
 class GetTaggedImageCountPathParams:
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,21 +15,21 @@ class GetTaggedImageCountQueryParams:
 
 @dataclass
 class GetTaggedImageCountHeaders:
-    training_key: str = field(default=None, metadata={'header': { 'field_name': 'Training-Key', 'style': 'simple', 'explode': False }})
+    training_key: str = field(metadata={'header': { 'field_name': 'Training-Key', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetTaggedImageCountRequest:
-    path_params: GetTaggedImageCountPathParams = field(default=None)
-    query_params: GetTaggedImageCountQueryParams = field(default=None)
-    headers: GetTaggedImageCountHeaders = field(default=None)
+    headers: GetTaggedImageCountHeaders = field()
+    path_params: GetTaggedImageCountPathParams = field()
+    query_params: GetTaggedImageCountQueryParams = field()
     
 
 @dataclass
 class GetTaggedImageCountResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     get_tagged_image_count_200_application_json_int32_integer: Optional[int] = field(default=None)
     get_tagged_image_count_200_text_json_int32_integer: Optional[int] = field(default=None)
-    status_code: int = field(default=None)
     

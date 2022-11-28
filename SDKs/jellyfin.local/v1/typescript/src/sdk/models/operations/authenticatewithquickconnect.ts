@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class AuthenticateWithQuickConnectRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
   quickConnectDto?: shared.QuickConnectDto;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   quickConnectDto1?: shared.QuickConnectDto;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   quickConnectDto2?: shared.QuickConnectDto;
 }
 
 
 export class AuthenticateWithQuickConnectRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   request: AuthenticateWithQuickConnectRequests;
 }
 
 
 export class AuthenticateWithQuickConnectResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   authenticationResult?: shared.AuthenticationResult;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

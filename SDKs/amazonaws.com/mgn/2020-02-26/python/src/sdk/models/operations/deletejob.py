@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
@@ -17,21 +21,21 @@ class DeleteJobHeaders:
 @dataclass_json
 @dataclass
 class DeleteJobRequestBody:
-    job_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'jobID' }})
+    job_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('jobID') }})
     
 
 @dataclass
 class DeleteJobRequest:
-    headers: DeleteJobHeaders = field(default=None)
-    request: DeleteJobRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: DeleteJobHeaders = field()
+    request: DeleteJobRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DeleteJobResponse:
+    content_type: str = field()
+    status_code: int = field()
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     delete_job_response: Optional[dict[str, Any]] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     uninitialized_account_exception: Optional[Any] = field(default=None)
     

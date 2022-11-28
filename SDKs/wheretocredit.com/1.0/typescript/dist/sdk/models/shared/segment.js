@@ -22,42 +22,42 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Segment = /** @class */ (function (_super) {
     __extends(Segment, _super);
     function Segment() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=bookingClass" }),
+        SpeakeasyMetadata({ data: "json, name=bookingClass" }),
         __metadata("design:type", String)
     ], Segment.prototype, "bookingClass", void 0);
     __decorate([
-        Metadata({ data: "json, name=carrier" }),
+        SpeakeasyMetadata({ data: "json, name=carrier" }),
         __metadata("design:type", String)
     ], Segment.prototype, "carrier", void 0);
     __decorate([
-        Metadata({ data: "json, name=departure" }),
+        SpeakeasyMetadata({ data: "json, name=departure" }),
         __metadata("design:type", Date)
     ], Segment.prototype, "departure", void 0);
     __decorate([
-        Metadata({ data: "json, name=destination" }),
+        SpeakeasyMetadata({ data: "json, name=destination" }),
         __metadata("design:type", String)
     ], Segment.prototype, "destination", void 0);
     __decorate([
-        Metadata({ data: "json, name=distance" }),
+        SpeakeasyMetadata({ data: "json, name=distance" }),
         __metadata("design:type", Number)
     ], Segment.prototype, "distance", void 0);
     __decorate([
-        Metadata({ data: "json, name=flightNumber" }),
+        SpeakeasyMetadata({ data: "json, name=flightNumber" }),
         __metadata("design:type", Number)
     ], Segment.prototype, "flightNumber", void 0);
     __decorate([
-        Metadata({ data: "json, name=operatingCarrier" }),
+        SpeakeasyMetadata({ data: "json, name=operatingCarrier" }),
         __metadata("design:type", String)
     ], Segment.prototype, "operatingCarrier", void 0);
     __decorate([
-        Metadata({ data: "json, name=origin" }),
+        SpeakeasyMetadata({ data: "json, name=origin" }),
         __metadata("design:type", String)
     ], Segment.prototype, "origin", void 0);
     return Segment;

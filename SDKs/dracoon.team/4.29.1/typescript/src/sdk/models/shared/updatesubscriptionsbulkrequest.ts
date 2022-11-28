@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // UpdateSubscriptionsBulkRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request model for updating subscriptions
 **/
 export class UpdateSubscriptionsBulkRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=isSubscribed" })
+  @SpeakeasyMetadata({ data: "json, name=isSubscribed" })
   isSubscribed: boolean;
 
-  @Metadata({ data: "json, name=objectIds" })
+  @SpeakeasyMetadata({ data: "json, name=objectIds" })
   objectIds: number[];
 }

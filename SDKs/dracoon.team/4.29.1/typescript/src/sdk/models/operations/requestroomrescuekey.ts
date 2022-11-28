@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RequestRoomRescueKeyPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=file_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=file_id" })
   fileId: number;
 }
 
 
 export class RequestRoomRescueKeyQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=version" })
   version?: string;
 }
 
 
 export class RequestRoomRescueKeyHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Sds-Auth-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Sds-Auth-Token" })
   xSdsAuthToken?: string;
 }
 
 
 export class RequestRoomRescueKeyRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: RequestRoomRescueKeyPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: RequestRoomRescueKeyQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: RequestRoomRescueKeyHeaders;
 }
 
 
 export class RequestRoomRescueKeyResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   fileKey?: shared.FileKey;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

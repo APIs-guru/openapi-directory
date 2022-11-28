@@ -10,6 +10,8 @@ const (
 	PeeringStateEnumDeleting         PeeringStateEnum = "DELETING"
 )
 
+// Peering
+// Represents a Managed Service for Microsoft Active Directory Peering.
 type Peering struct {
 	AuthorizedNetwork *string           `json:"authorizedNetwork,omitempty"`
 	CreateTime        *string           `json:"createTime,omitempty"`
@@ -19,4 +21,12 @@ type Peering struct {
 	State             *PeeringStateEnum `json:"state,omitempty"`
 	StatusMessage     *string           `json:"statusMessage,omitempty"`
 	UpdateTime        *string           `json:"updateTime,omitempty"`
+}
+
+// PeeringInput
+// Represents a Managed Service for Microsoft Active Directory Peering.
+type PeeringInput struct {
+	AuthorizedNetwork *string           `json:"authorizedNetwork,omitempty"`
+	DomainResource    *string           `json:"domainResource,omitempty"`
+	Labels            map[string]string `json:"labels,omitempty"`
 }

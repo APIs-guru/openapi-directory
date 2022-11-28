@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ChannelGrouping } from "./channelgrouping";
 import { PathFilter } from "./pathfilter";
+
 
 
 // PathQueryOptions
@@ -9,9 +9,9 @@ import { PathFilter } from "./pathfilter";
  * Path Query Options for Report Options.
 **/
 export class PathQueryOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=channelGrouping" })
+  @SpeakeasyMetadata({ data: "json, name=channelGrouping" })
   channelGrouping?: ChannelGrouping;
 
-  @Metadata({ data: "json, name=pathFilters", elemType: shared.PathFilter })
+  @SpeakeasyMetadata({ data: "json, name=pathFilters", elemType: PathFilter })
   pathFilters?: PathFilter[];
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Attribute } from "./attribute";
+
 
 
 // AssessmentTemplate
@@ -8,30 +8,30 @@ import { Attribute } from "./attribute";
  * Contains information about an Amazon Inspector assessment template. This data type is used as the response element in the <a>DescribeAssessmentTemplates</a> action.
 **/
 export class AssessmentTemplate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn: string;
 
-  @Metadata({ data: "json, name=assessmentRunCount" })
+  @SpeakeasyMetadata({ data: "json, name=assessmentRunCount" })
   assessmentRunCount: number;
 
-  @Metadata({ data: "json, name=assessmentTargetArn" })
+  @SpeakeasyMetadata({ data: "json, name=assessmentTargetArn" })
   assessmentTargetArn: string;
 
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt: Date;
 
-  @Metadata({ data: "json, name=durationInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=durationInSeconds" })
   durationInSeconds: number;
 
-  @Metadata({ data: "json, name=lastAssessmentRunArn" })
+  @SpeakeasyMetadata({ data: "json, name=lastAssessmentRunArn" })
   lastAssessmentRunArn?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=rulesPackageArns" })
+  @SpeakeasyMetadata({ data: "json, name=rulesPackageArns" })
   rulesPackageArns: string[];
 
-  @Metadata({ data: "json, name=userAttributesForFindings", elemType: shared.Attribute })
+  @SpeakeasyMetadata({ data: "json, name=userAttributesForFindings", elemType: Attribute })
   userAttributesForFindings: Attribute[];
 }

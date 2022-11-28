@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CustomRoutingEndpointConfiguration
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The list of endpoint objects. For custom routing, this is a list of virtual private cloud (VPC) subnet IDs.
 **/
 export class CustomRoutingEndpointConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EndpointId" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointId" })
   endpointId?: string;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DependencyEdge } from "./dependencyedge";
 import { PartOfSpeech } from "./partofspeech";
 import { TextSpan } from "./textspan";

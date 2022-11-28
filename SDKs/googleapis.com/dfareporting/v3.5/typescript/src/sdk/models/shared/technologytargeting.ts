@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Browser } from "./browser";
 import { ConnectionType } from "./connectiontype";
 import { MobileCarrier } from "./mobilecarrier";
@@ -8,26 +7,27 @@ import { OperatingSystem } from "./operatingsystem";
 import { PlatformType } from "./platformtype";
 
 
+
 // TechnologyTargeting
 /** 
  * Technology Targeting.
 **/
 export class TechnologyTargeting extends SpeakeasyBase {
-  @Metadata({ data: "json, name=browsers", elemType: shared.Browser })
+  @SpeakeasyMetadata({ data: "json, name=browsers", elemType: Browser })
   browsers?: Browser[];
 
-  @Metadata({ data: "json, name=connectionTypes", elemType: shared.ConnectionType })
+  @SpeakeasyMetadata({ data: "json, name=connectionTypes", elemType: ConnectionType })
   connectionTypes?: ConnectionType[];
 
-  @Metadata({ data: "json, name=mobileCarriers", elemType: shared.MobileCarrier })
+  @SpeakeasyMetadata({ data: "json, name=mobileCarriers", elemType: MobileCarrier })
   mobileCarriers?: MobileCarrier[];
 
-  @Metadata({ data: "json, name=operatingSystemVersions", elemType: shared.OperatingSystemVersion })
+  @SpeakeasyMetadata({ data: "json, name=operatingSystemVersions", elemType: OperatingSystemVersion })
   operatingSystemVersions?: OperatingSystemVersion[];
 
-  @Metadata({ data: "json, name=operatingSystems", elemType: shared.OperatingSystem })
+  @SpeakeasyMetadata({ data: "json, name=operatingSystems", elemType: OperatingSystem })
   operatingSystems?: OperatingSystem[];
 
-  @Metadata({ data: "json, name=platformTypes", elemType: shared.PlatformType })
+  @SpeakeasyMetadata({ data: "json, name=platformTypes", elemType: PlatformType })
   platformTypes?: PlatformType[];
 }

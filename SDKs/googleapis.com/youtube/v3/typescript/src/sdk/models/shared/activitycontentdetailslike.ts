@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceId } from "./resourceid";
+
 
 
 // ActivityContentDetailsLike
@@ -7,6 +8,6 @@ import { ResourceId } from "./resourceid";
  * Information about a resource that received a positive (like) rating.
 **/
 export class ActivityContentDetailsLike extends SpeakeasyBase {
-  @Metadata({ data: "json, name=resourceId" })
+  @SpeakeasyMetadata({ data: "json, name=resourceId" })
   resourceId?: ResourceId;
 }

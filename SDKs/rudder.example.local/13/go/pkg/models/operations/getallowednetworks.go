@@ -4,10 +4,6 @@ type GetAllowedNetworksPathParams struct {
 	NodeID string `pathParam:"style=simple,explode=false,name=nodeId"`
 }
 
-type GetAllowedNetworksRequest struct {
-	PathParams GetAllowedNetworksPathParams
-}
-
 type GetAllowedNetworks200ApplicationJSONActionEnum string
 
 const (
@@ -18,6 +14,8 @@ type GetAllowedNetworks200ApplicationJSONDataSettings struct {
 	AllowedNetworks []interface{} `json:"allowed_networks"`
 }
 
+// GetAllowedNetworks200ApplicationJSONData
+// Information about the allowed_networks settings
 type GetAllowedNetworks200ApplicationJSONData struct {
 	Settings GetAllowedNetworks200ApplicationJSONDataSettings `json:"settings"`
 }
@@ -34,6 +32,10 @@ type GetAllowedNetworks200ApplicationJSON struct {
 	Data   GetAllowedNetworks200ApplicationJSONData       `json:"data"`
 	ID     string                                         `json:"id"`
 	Result GetAllowedNetworks200ApplicationJSONResultEnum `json:"result"`
+}
+
+type GetAllowedNetworksRequest struct {
+	PathParams GetAllowedNetworksPathParams
 }
 
 type GetAllowedNetworksResponse struct {

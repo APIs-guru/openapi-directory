@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MetricDatapoint } from "./metricdatapoint";
 import { DistributionMetricNameEnum } from "./distributionmetricnameenum";
 
 
+
 export class GetDistributionMetricDataResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=metricData", elemType: shared.MetricDatapoint })
+  @SpeakeasyMetadata({ data: "json, name=metricData", elemType: MetricDatapoint })
   metricData?: MetricDatapoint[];
 
-  @Metadata({ data: "json, name=metricName" })
+  @SpeakeasyMetadata({ data: "json, name=metricName" })
   metricName?: DistributionMetricNameEnum;
 }

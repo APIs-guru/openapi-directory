@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDialogflowV2beta1SuggestionFaqAnswer
+// Represents suggested answer from "frequently asked questions".
 type GoogleCloudDialogflowV2beta1SuggestionFaqAnswer struct {
 	Answer       *string           `json:"answer,omitempty"`
 	AnswerRecord *string           `json:"answerRecord,omitempty"`

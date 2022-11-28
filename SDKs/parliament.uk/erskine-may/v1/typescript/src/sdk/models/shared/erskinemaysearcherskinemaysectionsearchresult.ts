@@ -1,27 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ErskineMaySectionSearchResult } from "./erskinemaysectionsearchresult";
 
 
+
 export class ErskineMaySearchErskineMaySectionSearchResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=searchResults", elemType: shared.ErskineMaySectionSearchResult })
+  @SpeakeasyMetadata({ data: "json, name=searchResults", elemType: ErskineMaySectionSearchResult })
   searchResults?: ErskineMaySectionSearchResult[];
 
-  @Metadata({ data: "json, name=searchTerm" })
+  @SpeakeasyMetadata({ data: "json, name=searchTerm" })
   searchTerm?: string;
 
-  @Metadata({ data: "json, name=searchTerms" })
+  @SpeakeasyMetadata({ data: "json, name=searchTerms" })
   searchTerms?: string[];
 
-  @Metadata({ data: "json, name=skip" })
+  @SpeakeasyMetadata({ data: "json, name=skip" })
   skip?: number;
 
-  @Metadata({ data: "json, name=suggestedSearch" })
+  @SpeakeasyMetadata({ data: "json, name=suggestedSearch" })
   suggestedSearch?: string;
 
-  @Metadata({ data: "json, name=take" })
+  @SpeakeasyMetadata({ data: "json, name=take" })
   take?: number;
 
-  @Metadata({ data: "json, name=totalResults" })
+  @SpeakeasyMetadata({ data: "json, name=totalResults" })
   totalResults?: number;
 }

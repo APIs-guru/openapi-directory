@@ -1,5 +1,7 @@
 package shared
 
+// JobDetail
+// An object representing an Batch job.
 type JobDetail struct {
 	ArrayProperties      *ArrayPropertiesDetail   `json:"arrayProperties,omitempty"`
 	Attempts             []AttemptDetail          `json:"attempts,omitempty"`

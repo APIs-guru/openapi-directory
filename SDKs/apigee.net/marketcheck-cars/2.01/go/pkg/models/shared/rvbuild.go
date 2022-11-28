@@ -1,5 +1,7 @@
 package shared
 
+// RvBuild
+// Describes the RV specification
 type RvBuild struct {
 	Area         *string `json:"area,omitempty"`
 	Class        *string `json:"class,omitempty"`

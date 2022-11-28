@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PhotoResultThumbnail
@@ -6,13 +7,13 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Photo thumbnail data.
 **/
 export class PhotoResultThumbnail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=height" })
+  @SpeakeasyMetadata({ data: "json, name=height" })
   height?: number;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 
-  @Metadata({ data: "json, name=width" })
+  @SpeakeasyMetadata({ data: "json, name=width" })
   width?: number;
 }
 
@@ -22,9 +23,9 @@ export class PhotoResultThumbnail extends SpeakeasyBase {
  * The result of uploading or editing a photo.
 **/
 export class PhotoResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=photo_id" })
+  @SpeakeasyMetadata({ data: "json, name=photo_id" })
   photoId?: string;
 
-  @Metadata({ data: "json, name=thumbnail" })
+  @SpeakeasyMetadata({ data: "json, name=thumbnail" })
   thumbnail?: PhotoResultThumbnail;
 }

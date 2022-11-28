@@ -1,20 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TflApiPresentationEntitiesJourneyPlannerTimeAdjustment } from "./tflapipresentationentitiesjourneyplannertimeadjustment";
-import { TflApiPresentationEntitiesJourneyPlannerTimeAdjustment } from "./tflapipresentationentitiesjourneyplannertimeadjustment";
-import { TflApiPresentationEntitiesJourneyPlannerTimeAdjustment } from "./tflapipresentationentitiesjourneyplannertimeadjustment";
-import { TflApiPresentationEntitiesJourneyPlannerTimeAdjustment } from "./tflapipresentationentitiesjourneyplannertimeadjustment";
+
 
 
 export class TflApiPresentationEntitiesJourneyPlannerTimeAdjustments extends SpeakeasyBase {
-  @Metadata({ data: "json, name=earlier" })
+  @SpeakeasyMetadata({ data: "json, name=earlier" })
   earlier?: TflApiPresentationEntitiesJourneyPlannerTimeAdjustment;
 
-  @Metadata({ data: "json, name=earliest" })
+  @SpeakeasyMetadata({ data: "json, name=earliest" })
   earliest?: TflApiPresentationEntitiesJourneyPlannerTimeAdjustment;
 
-  @Metadata({ data: "json, name=later" })
+  @SpeakeasyMetadata({ data: "json, name=later" })
   later?: TflApiPresentationEntitiesJourneyPlannerTimeAdjustment;
 
-  @Metadata({ data: "json, name=latest" })
+  @SpeakeasyMetadata({ data: "json, name=latest" })
   latest?: TflApiPresentationEntitiesJourneyPlannerTimeAdjustment;
 }

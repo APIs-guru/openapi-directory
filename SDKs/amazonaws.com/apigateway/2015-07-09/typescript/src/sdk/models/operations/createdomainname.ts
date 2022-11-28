@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateDomainNameHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -31,10 +32,10 @@ export class CreateDomainNameHeaders extends SpeakeasyBase {
  * The endpoint configuration to indicate the types of endpoints an API (<a>RestApi</a>) or its custom domain name (<a>DomainName</a>) has. 
 **/
 export class CreateDomainNameRequestBodyEndpointConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=types" })
+  @SpeakeasyMetadata({ data: "json, name=types" })
   types?: shared.EndpointTypeEnum[];
 
-  @Metadata({ data: "json, name=vpcEndpointIds" })
+  @SpeakeasyMetadata({ data: "json, name=vpcEndpointIds" })
   vpcEndpointIds?: string[];
 }
 
@@ -44,92 +45,92 @@ export class CreateDomainNameRequestBodyEndpointConfiguration extends SpeakeasyB
  * If specified, API Gateway performs two-way authentication between the client and the server. Clients must present a trusted certificate to access your custom domain name.
 **/
 export class CreateDomainNameRequestBodyMutualTlsAuthentication extends SpeakeasyBase {
-  @Metadata({ data: "json, name=truststoreUri" })
+  @SpeakeasyMetadata({ data: "json, name=truststoreUri" })
   truststoreUri?: string;
 
-  @Metadata({ data: "json, name=truststoreVersion" })
+  @SpeakeasyMetadata({ data: "json, name=truststoreVersion" })
   truststoreVersion?: string;
 }
 
 export enum CreateDomainNameRequestBodySecurityPolicyEnum {
-    Tls10 = "TLS_1_0"
-,    Tls12 = "TLS_1_2"
+    Tls10 = "TLS_1_0",
+    Tls12 = "TLS_1_2"
 }
 
 
 export class CreateDomainNameRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=certificateArn" })
+  @SpeakeasyMetadata({ data: "json, name=certificateArn" })
   certificateArn?: string;
 
-  @Metadata({ data: "json, name=certificateBody" })
+  @SpeakeasyMetadata({ data: "json, name=certificateBody" })
   certificateBody?: string;
 
-  @Metadata({ data: "json, name=certificateChain" })
+  @SpeakeasyMetadata({ data: "json, name=certificateChain" })
   certificateChain?: string;
 
-  @Metadata({ data: "json, name=certificateName" })
+  @SpeakeasyMetadata({ data: "json, name=certificateName" })
   certificateName?: string;
 
-  @Metadata({ data: "json, name=certificatePrivateKey" })
+  @SpeakeasyMetadata({ data: "json, name=certificatePrivateKey" })
   certificatePrivateKey?: string;
 
-  @Metadata({ data: "json, name=domainName" })
+  @SpeakeasyMetadata({ data: "json, name=domainName" })
   domainName: string;
 
-  @Metadata({ data: "json, name=endpointConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=endpointConfiguration" })
   endpointConfiguration?: CreateDomainNameRequestBodyEndpointConfiguration;
 
-  @Metadata({ data: "json, name=mutualTlsAuthentication" })
+  @SpeakeasyMetadata({ data: "json, name=mutualTlsAuthentication" })
   mutualTlsAuthentication?: CreateDomainNameRequestBodyMutualTlsAuthentication;
 
-  @Metadata({ data: "json, name=ownershipVerificationCertificateArn" })
+  @SpeakeasyMetadata({ data: "json, name=ownershipVerificationCertificateArn" })
   ownershipVerificationCertificateArn?: string;
 
-  @Metadata({ data: "json, name=regionalCertificateArn" })
+  @SpeakeasyMetadata({ data: "json, name=regionalCertificateArn" })
   regionalCertificateArn?: string;
 
-  @Metadata({ data: "json, name=regionalCertificateName" })
+  @SpeakeasyMetadata({ data: "json, name=regionalCertificateName" })
   regionalCertificateName?: string;
 
-  @Metadata({ data: "json, name=securityPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=securityPolicy" })
   securityPolicy?: CreateDomainNameRequestBodySecurityPolicyEnum;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 }
 
 
 export class CreateDomainNameRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateDomainNameHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateDomainNameRequestBody;
 }
 
 
 export class CreateDomainNameResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   badRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   conflictException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   domainName?: shared.DomainName;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   limitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tooManyRequestsException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   unauthorizedException?: any;
 }

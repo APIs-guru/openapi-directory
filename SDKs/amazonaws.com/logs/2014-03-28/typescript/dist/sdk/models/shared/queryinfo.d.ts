@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { QueryStatusEnum } from "./querystatusenum";
 /**
  * Information about one CloudWatch Logs Insights query that matches the request in a <code>DescribeQueries</code> operation.

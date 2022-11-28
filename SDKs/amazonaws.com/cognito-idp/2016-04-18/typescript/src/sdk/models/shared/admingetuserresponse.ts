@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MfaOptionType } from "./mfaoptiontype";
 import { AttributeType } from "./attributetype";
 import { UserStatusTypeEnum } from "./userstatustypeenum";
+
 
 
 // AdminGetUserResponse
@@ -10,30 +10,30 @@ import { UserStatusTypeEnum } from "./userstatustypeenum";
  * Represents the response from the server from the request to get the specified user as an administrator.
 **/
 export class AdminGetUserResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Enabled" })
+  @SpeakeasyMetadata({ data: "json, name=Enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=MFAOptions", elemType: shared.MfaOptionType })
+  @SpeakeasyMetadata({ data: "json, name=MFAOptions", elemType: MfaOptionType })
   mfaOptions?: MfaOptionType[];
 
-  @Metadata({ data: "json, name=PreferredMfaSetting" })
+  @SpeakeasyMetadata({ data: "json, name=PreferredMfaSetting" })
   preferredMfaSetting?: string;
 
-  @Metadata({ data: "json, name=UserAttributes", elemType: shared.AttributeType })
+  @SpeakeasyMetadata({ data: "json, name=UserAttributes", elemType: AttributeType })
   userAttributes?: AttributeType[];
 
-  @Metadata({ data: "json, name=UserCreateDate" })
+  @SpeakeasyMetadata({ data: "json, name=UserCreateDate" })
   userCreateDate?: Date;
 
-  @Metadata({ data: "json, name=UserLastModifiedDate" })
+  @SpeakeasyMetadata({ data: "json, name=UserLastModifiedDate" })
   userLastModifiedDate?: Date;
 
-  @Metadata({ data: "json, name=UserMFASettingList" })
+  @SpeakeasyMetadata({ data: "json, name=UserMFASettingList" })
   userMfaSettingList?: string[];
 
-  @Metadata({ data: "json, name=UserStatus" })
+  @SpeakeasyMetadata({ data: "json, name=UserStatus" })
   userStatus?: UserStatusTypeEnum;
 
-  @Metadata({ data: "json, name=Username" })
+  @SpeakeasyMetadata({ data: "json, name=Username" })
   username: string;
 }

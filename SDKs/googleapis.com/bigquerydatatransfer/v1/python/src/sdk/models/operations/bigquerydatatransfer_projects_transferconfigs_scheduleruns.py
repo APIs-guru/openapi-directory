@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class BigquerydatatransferProjectsTransferConfigsScheduleRunsPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class BigquerydatatransferProjectsTransferConfigsScheduleRunsQueryParams:
 
 @dataclass
 class BigquerydatatransferProjectsTransferConfigsScheduleRunsSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BigquerydatatransferProjectsTransferConfigsScheduleRunsSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class BigquerydatatransferProjectsTransferConfigsScheduleRunsSecurity:
 
 @dataclass
 class BigquerydatatransferProjectsTransferConfigsScheduleRunsRequest:
-    path_params: BigquerydatatransferProjectsTransferConfigsScheduleRunsPathParams = field(default=None)
-    query_params: BigquerydatatransferProjectsTransferConfigsScheduleRunsQueryParams = field(default=None)
+    path_params: BigquerydatatransferProjectsTransferConfigsScheduleRunsPathParams = field()
+    query_params: BigquerydatatransferProjectsTransferConfigsScheduleRunsQueryParams = field()
+    security: BigquerydatatransferProjectsTransferConfigsScheduleRunsSecurity = field()
     request: Optional[shared.ScheduleTransferRunsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: BigquerydatatransferProjectsTransferConfigsScheduleRunsSecurity = field(default=None)
     
 
 @dataclass
 class BigquerydatatransferProjectsTransferConfigsScheduleRunsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     schedule_transfer_runs_response: Optional[shared.ScheduleTransferRunsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

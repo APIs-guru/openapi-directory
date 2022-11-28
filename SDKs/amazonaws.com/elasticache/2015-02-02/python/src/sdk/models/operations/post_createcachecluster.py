@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostCreateCacheClusterActionEnum(str, Enum):
     CREATE_CACHE_CLUSTER = "CreateCacheCluster"
@@ -10,8 +14,8 @@ class PostCreateCacheClusterVersionEnum(str, Enum):
 
 @dataclass
 class PostCreateCacheClusterQueryParams:
-    action: PostCreateCacheClusterActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostCreateCacheClusterVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostCreateCacheClusterActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostCreateCacheClusterVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostCreateCacheClusterHeaders:
 
 @dataclass
 class PostCreateCacheClusterRequest:
-    query_params: PostCreateCacheClusterQueryParams = field(default=None)
-    headers: PostCreateCacheClusterHeaders = field(default=None)
+    headers: PostCreateCacheClusterHeaders = field()
+    query_params: PostCreateCacheClusterQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostCreateCacheClusterResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

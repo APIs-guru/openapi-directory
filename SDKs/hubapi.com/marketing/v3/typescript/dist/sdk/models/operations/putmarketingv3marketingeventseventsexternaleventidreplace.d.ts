@@ -1,17 +1,12 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class PutMarketingV3MarketingEventsEventsExternalEventIdReplacePathParams extends SpeakeasyBase {
     externalEventId: string;
 }
-export declare class PutMarketingV3MarketingEventsEventsExternalEventIdReplaceSecurityOption1 extends SpeakeasyBase {
-    hapikey: shared.SchemeHapikey;
-}
-export declare class PutMarketingV3MarketingEventsEventsExternalEventIdReplaceSecurityOption2 extends SpeakeasyBase {
-    oauth2Legacy: shared.SchemeOauth2Legacy;
-}
 export declare class PutMarketingV3MarketingEventsEventsExternalEventIdReplaceSecurity extends SpeakeasyBase {
-    option1?: PutMarketingV3MarketingEventsEventsExternalEventIdReplaceSecurityOption1;
-    option2?: PutMarketingV3MarketingEventsEventsExternalEventIdReplaceSecurityOption2;
+    hapikey?: shared.SchemeHapikey;
+    privateAppsLegacy?: shared.SchemePrivateAppsLegacy;
+    oauth2Legacy?: shared.SchemeOauth2Legacy;
 }
 export declare class PutMarketingV3MarketingEventsEventsExternalEventIdReplaceRequest extends SpeakeasyBase {
     pathParams: PutMarketingV3MarketingEventsEventsExternalEventIdReplacePathParams;

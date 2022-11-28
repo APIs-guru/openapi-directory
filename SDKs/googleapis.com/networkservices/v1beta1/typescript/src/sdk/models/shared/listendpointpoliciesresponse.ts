@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EndpointPolicy } from "./endpointpolicy";
+
 
 
 // ListEndpointPoliciesResponse
@@ -8,9 +8,9 @@ import { EndpointPolicy } from "./endpointpolicy";
  * Response returned by the ListEndpointPolicies method.
 **/
 export class ListEndpointPoliciesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=endpointPolicies", elemType: shared.EndpointPolicy })
+  @SpeakeasyMetadata({ data: "json, name=endpointPolicies", elemType: EndpointPolicy })
   endpointPolicies?: EndpointPolicy[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

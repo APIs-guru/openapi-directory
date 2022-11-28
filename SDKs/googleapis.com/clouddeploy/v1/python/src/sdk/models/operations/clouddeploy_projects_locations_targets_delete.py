@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ClouddeployProjectsLocationsTargetsDeletePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -29,20 +33,20 @@ class ClouddeployProjectsLocationsTargetsDeleteQueryParams:
 
 @dataclass
 class ClouddeployProjectsLocationsTargetsDeleteSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ClouddeployProjectsLocationsTargetsDeleteRequest:
-    path_params: ClouddeployProjectsLocationsTargetsDeletePathParams = field(default=None)
-    query_params: ClouddeployProjectsLocationsTargetsDeleteQueryParams = field(default=None)
-    security: ClouddeployProjectsLocationsTargetsDeleteSecurity = field(default=None)
+    path_params: ClouddeployProjectsLocationsTargetsDeletePathParams = field()
+    query_params: ClouddeployProjectsLocationsTargetsDeleteQueryParams = field()
+    security: ClouddeployProjectsLocationsTargetsDeleteSecurity = field()
     
 
 @dataclass
 class ClouddeployProjectsLocationsTargetsDeleteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

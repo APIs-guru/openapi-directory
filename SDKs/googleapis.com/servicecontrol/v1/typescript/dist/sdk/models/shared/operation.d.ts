@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { LogEntry } from "./logentry";
 import { MetricValueSet } from "./metricvalueset";
 import { QuotaProperties } from "./quotaproperties";

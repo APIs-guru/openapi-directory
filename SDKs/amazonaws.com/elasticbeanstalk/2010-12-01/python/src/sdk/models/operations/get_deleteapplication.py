@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteApplicationActionEnum(str, Enum):
     DELETE_APPLICATION = "DeleteApplication"
@@ -10,10 +14,10 @@ class GetDeleteApplicationVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteApplicationQueryParams:
-    action: GetDeleteApplicationActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    application_name: str = field(default=None, metadata={'query_param': { 'field_name': 'ApplicationName', 'style': 'form', 'explode': True }})
+    action: GetDeleteApplicationActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    application_name: str = field(metadata={'query_param': { 'field_name': 'ApplicationName', 'style': 'form', 'explode': True }})
+    version: GetDeleteApplicationVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     terminate_env_by_force: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'TerminateEnvByForce', 'style': 'form', 'explode': True }})
-    version: GetDeleteApplicationVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetDeleteApplicationHeaders:
 
 @dataclass
 class GetDeleteApplicationRequest:
-    query_params: GetDeleteApplicationQueryParams = field(default=None)
-    headers: GetDeleteApplicationHeaders = field(default=None)
+    headers: GetDeleteApplicationHeaders = field()
+    query_params: GetDeleteApplicationQueryParams = field()
     
 
 @dataclass
 class GetDeleteApplicationResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

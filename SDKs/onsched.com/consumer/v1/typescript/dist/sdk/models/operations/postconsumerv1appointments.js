@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PostConsumerV1AppointmentsQueryParams = /** @class */ (function (_super) {
     __extends(PostConsumerV1AppointmentsQueryParams, _super);
@@ -30,7 +30,7 @@ var PostConsumerV1AppointmentsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=completeBooking" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=completeBooking" }),
         __metadata("design:type", String)
     ], PostConsumerV1AppointmentsQueryParams.prototype, "completeBooking", void 0);
     return PostConsumerV1AppointmentsQueryParams;
@@ -42,19 +42,19 @@ var PostConsumerV1AppointmentsRequests = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/*+json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/*+json" }),
         __metadata("design:type", shared.AppointmentInitialModel)
     ], PostConsumerV1AppointmentsRequests.prototype, "appointmentInitialModel", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.AppointmentInitialModel)
     ], PostConsumerV1AppointmentsRequests.prototype, "appointmentInitialModel1", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json-patch+json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json-patch+json" }),
         __metadata("design:type", shared.AppointmentInitialModel)
     ], PostConsumerV1AppointmentsRequests.prototype, "appointmentInitialModel2", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=text/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=text/json" }),
         __metadata("design:type", shared.AppointmentInitialModel)
     ], PostConsumerV1AppointmentsRequests.prototype, "appointmentInitialModel3", void 0);
     return PostConsumerV1AppointmentsRequests;
@@ -66,11 +66,11 @@ var PostConsumerV1AppointmentsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostConsumerV1AppointmentsQueryParams)
     ], PostConsumerV1AppointmentsRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostConsumerV1AppointmentsRequests)
     ], PostConsumerV1AppointmentsRequest.prototype, "request", void 0);
     return PostConsumerV1AppointmentsRequest;
@@ -82,15 +82,15 @@ var PostConsumerV1AppointmentsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.AppointmentInitialViewModel)
     ], PostConsumerV1AppointmentsResponse.prototype, "appointmentInitialViewModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostConsumerV1AppointmentsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostConsumerV1AppointmentsResponse.prototype, "statusCode", void 0);
     return PostConsumerV1AppointmentsResponse;

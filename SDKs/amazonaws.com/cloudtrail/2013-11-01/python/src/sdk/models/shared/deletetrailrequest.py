@@ -1,9 +1,14 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class DeleteTrailRequest:
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
+    r"""DeleteTrailRequest
+    The request that specifies the name of a trail to delete.
+    """
+    
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
     

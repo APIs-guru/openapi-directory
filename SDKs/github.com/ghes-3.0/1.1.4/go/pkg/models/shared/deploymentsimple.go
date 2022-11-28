@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// DeploymentSimple
+// A deployment created as the result of an Actions check run from a workflow that references an environment
 type DeploymentSimple struct {
 	CreatedAt             time.Time              `json:"created_at"`
 	Description           string                 `json:"description"`

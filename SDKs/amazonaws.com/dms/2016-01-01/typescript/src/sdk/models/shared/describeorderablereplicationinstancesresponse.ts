@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OrderableReplicationInstance } from "./orderablereplicationinstance";
+
 
 
 // DescribeOrderableReplicationInstancesResponse
@@ -8,9 +8,9 @@ import { OrderableReplicationInstance } from "./orderablereplicationinstance";
  * <p/>
 **/
 export class DescribeOrderableReplicationInstancesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Marker" })
+  @SpeakeasyMetadata({ data: "json, name=Marker" })
   marker?: string;
 
-  @Metadata({ data: "json, name=OrderableReplicationInstances", elemType: shared.OrderableReplicationInstance })
+  @SpeakeasyMetadata({ data: "json, name=OrderableReplicationInstances", elemType: OrderableReplicationInstance })
   orderableReplicationInstances?: OrderableReplicationInstance[];
 }

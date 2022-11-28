@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { LifecyclePolicyPreviewFilter } from "./lifecyclepolicypreviewfilter";
 import { ImageIdentifier } from "./imageidentifier";
 export declare class GetLifecyclePolicyPreviewRequest extends SpeakeasyBase {

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// AutoMlCandidate
+// Information about a candidate produced by an AutoML training job, including its status, steps, and other properties.
 type AutoMlCandidate struct {
 	CandidateName                 string                         `json:"CandidateName"`
 	CandidateProperties           *CandidateProperties           `json:"CandidateProperties,omitempty"`

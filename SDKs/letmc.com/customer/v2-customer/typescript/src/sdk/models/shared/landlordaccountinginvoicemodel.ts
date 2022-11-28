@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LandlordAccountingInvoiceModel
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Invoices
 **/
 export class LandlordAccountingInvoiceModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Date" })
+  @SpeakeasyMetadata({ data: "json, name=Date" })
   date?: Date;
 
-  @Metadata({ data: "json, name=InvoiceID" })
+  @SpeakeasyMetadata({ data: "json, name=InvoiceID" })
   invoiceId?: string;
 
-  @Metadata({ data: "json, name=IsMaintenanceInvoice" })
+  @SpeakeasyMetadata({ data: "json, name=IsMaintenanceInvoice" })
   isMaintenanceInvoice?: boolean;
 }

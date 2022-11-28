@@ -1,8 +1,8 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
-import { Schema } from "./schema";
+import { SpeakeasyBase } from "../../../internal/utils";
+import { SchemaInput } from "./schema";
 /**
  * Request for the `ValidateSchema` method.
 **/
-export declare class ValidateSchemaRequest extends SpeakeasyBase {
-    schema?: Schema;
+export declare class ValidateSchemaRequestInput extends SpeakeasyBase {
+    schema?: SchemaInput;
 }

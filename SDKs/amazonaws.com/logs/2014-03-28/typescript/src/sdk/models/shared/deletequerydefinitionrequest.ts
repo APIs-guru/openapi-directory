@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteQueryDefinitionRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=queryDefinitionId" })
+  @SpeakeasyMetadata({ data: "json, name=queryDefinitionId" })
   queryDefinitionId: string;
 }

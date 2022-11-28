@@ -1,32 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PutFirewallsIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
 
 export class PutFirewallsIdUpdateFirewallRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, any>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
 
 
-export class PutFirewallsIdRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: PutFirewallsIdPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: PutFirewallsIdUpdateFirewallRequest;
-}
-
-
 export class PutFirewallsIdFirewallResponseFirewallAppliedToAppliedToResourcesServer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 }
 
@@ -36,114 +28,123 @@ export enum PutFirewallsIdFirewallResponseFirewallAppliedToAppliedToResourcesTyp
 
 
 export class PutFirewallsIdFirewallResponseFirewallAppliedToAppliedToResources extends SpeakeasyBase {
-  @Metadata({ data: "json, name=server" })
+  @SpeakeasyMetadata({ data: "json, name=server" })
   server?: PutFirewallsIdFirewallResponseFirewallAppliedToAppliedToResourcesServer;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: PutFirewallsIdFirewallResponseFirewallAppliedToAppliedToResourcesTypeEnum;
 }
 
 
 export class PutFirewallsIdFirewallResponseFirewallAppliedToLabelSelector extends SpeakeasyBase {
-  @Metadata({ data: "json, name=selector" })
+  @SpeakeasyMetadata({ data: "json, name=selector" })
   selector: string;
 }
 
 
 export class PutFirewallsIdFirewallResponseFirewallAppliedToServer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 }
 
 export enum PutFirewallsIdFirewallResponseFirewallAppliedToTypeEnum {
-    Server = "server"
-,    LabelSelector = "label_selector"
+    Server = "server",
+    LabelSelector = "label_selector"
 }
 
 
 export class PutFirewallsIdFirewallResponseFirewallAppliedTo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=applied_to_resources", elemType: operations.PutFirewallsIdFirewallResponseFirewallAppliedToAppliedToResources })
+  @SpeakeasyMetadata({ data: "json, name=applied_to_resources", elemType: PutFirewallsIdFirewallResponseFirewallAppliedToAppliedToResources })
   appliedToResources?: PutFirewallsIdFirewallResponseFirewallAppliedToAppliedToResources[];
 
-  @Metadata({ data: "json, name=label_selector" })
+  @SpeakeasyMetadata({ data: "json, name=label_selector" })
   labelSelector?: PutFirewallsIdFirewallResponseFirewallAppliedToLabelSelector;
 
-  @Metadata({ data: "json, name=server" })
+  @SpeakeasyMetadata({ data: "json, name=server" })
   server?: PutFirewallsIdFirewallResponseFirewallAppliedToServer;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: PutFirewallsIdFirewallResponseFirewallAppliedToTypeEnum;
 }
 
 export enum PutFirewallsIdFirewallResponseFirewallRuleDirectionEnum {
-    In = "in"
-,    Out = "out"
+    In = "in",
+    Out = "out"
 }
 
 export enum PutFirewallsIdFirewallResponseFirewallRuleProtocolEnum {
-    Tcp = "tcp"
-,    Udp = "udp"
-,    Icmp = "icmp"
-,    Esp = "esp"
-,    Gre = "gre"
+    Tcp = "tcp",
+    Udp = "udp",
+    Icmp = "icmp",
+    Esp = "esp",
+    Gre = "gre"
 }
 
 
 export class PutFirewallsIdFirewallResponseFirewallRule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=destination_ips" })
+  @SpeakeasyMetadata({ data: "json, name=destination_ips" })
   destinationIps?: string[];
 
-  @Metadata({ data: "json, name=direction" })
+  @SpeakeasyMetadata({ data: "json, name=direction" })
   direction: PutFirewallsIdFirewallResponseFirewallRuleDirectionEnum;
 
-  @Metadata({ data: "json, name=port" })
+  @SpeakeasyMetadata({ data: "json, name=port" })
   port?: string;
 
-  @Metadata({ data: "json, name=protocol" })
+  @SpeakeasyMetadata({ data: "json, name=protocol" })
   protocol: PutFirewallsIdFirewallResponseFirewallRuleProtocolEnum;
 
-  @Metadata({ data: "json, name=source_ips" })
+  @SpeakeasyMetadata({ data: "json, name=source_ips" })
   sourceIps?: string[];
 }
 
 
 export class PutFirewallsIdFirewallResponseFirewall extends SpeakeasyBase {
-  @Metadata({ data: "json, name=applied_to", elemType: operations.PutFirewallsIdFirewallResponseFirewallAppliedTo })
+  @SpeakeasyMetadata({ data: "json, name=applied_to", elemType: PutFirewallsIdFirewallResponseFirewallAppliedTo })
   appliedTo: PutFirewallsIdFirewallResponseFirewallAppliedTo[];
 
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=rules", elemType: operations.PutFirewallsIdFirewallResponseFirewallRule })
+  @SpeakeasyMetadata({ data: "json, name=rules", elemType: PutFirewallsIdFirewallResponseFirewallRule })
   rules: PutFirewallsIdFirewallResponseFirewallRule[];
 }
 
 
 export class PutFirewallsIdFirewallResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=firewall" })
+  @SpeakeasyMetadata({ data: "json, name=firewall" })
   firewall: PutFirewallsIdFirewallResponseFirewall;
 }
 
 
+export class PutFirewallsIdRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: PutFirewallsIdPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: PutFirewallsIdUpdateFirewallRequest;
+}
+
+
 export class PutFirewallsIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   firewallResponse?: PutFirewallsIdFirewallResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

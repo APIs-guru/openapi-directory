@@ -14,6 +14,8 @@ const (
 	LoggingConfigDriverLogLevelsEnumOff              LoggingConfigDriverLogLevelsEnum = "OFF"
 )
 
+// LoggingConfig
+// The runtime logging config of the job.
 type LoggingConfig struct {
 	DriverLogLevels map[string]LoggingConfigDriverLogLevelsEnum `json:"driverLogLevels,omitempty"`
 }

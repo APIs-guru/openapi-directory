@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Meta2 } from "./meta2";
 
 
+
 export class AnnotationRestApiGet extends SpeakeasyBase {
-  @Metadata({ data: "json, name=end_dttm" })
+  @SpeakeasyMetadata({ data: "json, name=end_dttm" })
   endDttm?: Date;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=json_metadata" })
+  @SpeakeasyMetadata({ data: "json, name=json_metadata" })
   jsonMetadata?: string;
 
-  @Metadata({ data: "json, name=layer" })
+  @SpeakeasyMetadata({ data: "json, name=layer" })
   layer: Meta2;
 
-  @Metadata({ data: "json, name=long_descr" })
+  @SpeakeasyMetadata({ data: "json, name=long_descr" })
   longDescr?: string;
 
-  @Metadata({ data: "json, name=short_descr" })
+  @SpeakeasyMetadata({ data: "json, name=short_descr" })
   shortDescr?: string;
 
-  @Metadata({ data: "json, name=start_dttm" })
+  @SpeakeasyMetadata({ data: "json, name=start_dttm" })
   startDttm?: Date;
 }

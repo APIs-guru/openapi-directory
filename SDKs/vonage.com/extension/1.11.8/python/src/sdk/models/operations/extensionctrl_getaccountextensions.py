@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class ExtensionCtrlGetAccountExtensionsPathParams:
-    account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'account_id', 'style': 'simple', 'explode': False }})
+    account_id: str = field(metadata={'path_param': { 'field_name': 'account_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,20 +20,20 @@ class ExtensionCtrlGetAccountExtensionsQueryParams:
 
 @dataclass
 class ExtensionCtrlGetAccountExtensionsSecurity:
-    bearer_auth: shared.SchemeBearerAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_auth: shared.SchemeBearerAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class ExtensionCtrlGetAccountExtensionsRequest:
-    path_params: ExtensionCtrlGetAccountExtensionsPathParams = field(default=None)
-    query_params: ExtensionCtrlGetAccountExtensionsQueryParams = field(default=None)
-    security: ExtensionCtrlGetAccountExtensionsSecurity = field(default=None)
+    path_params: ExtensionCtrlGetAccountExtensionsPathParams = field()
+    query_params: ExtensionCtrlGetAccountExtensionsQueryParams = field()
+    security: ExtensionCtrlGetAccountExtensionsSecurity = field()
     
 
 @dataclass
 class ExtensionCtrlGetAccountExtensionsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     end_user_route_hal_response: Optional[shared.EndUserRouteHalResponse] = field(default=None)
-    status_code: int = field(default=None)
     validation_errors_response: Optional[shared.ValidationErrorsResponse] = field(default=None)
     

@@ -1,5 +1,7 @@
 package shared
 
+// AwsDynamoDbTableProvisionedThroughput
+// Information about the provisioned throughput for the table or for a global secondary index.
 type AwsDynamoDbTableProvisionedThroughput struct {
 	LastDecreaseDateTime   *string `json:"LastDecreaseDateTime,omitempty"`
 	LastIncreaseDateTime   *string `json:"LastIncreaseDateTime,omitempty"`

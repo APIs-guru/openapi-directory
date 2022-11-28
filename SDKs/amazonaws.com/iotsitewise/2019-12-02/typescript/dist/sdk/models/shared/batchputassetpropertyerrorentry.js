@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { BatchPutAssetPropertyError } from "./batchputassetpropertyerror";
 // BatchPutAssetPropertyErrorEntry
 /**
  * Contains error information for asset property value entries that are associated with the <a href="https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchPutAssetPropertyValue.html">BatchPutAssetPropertyValue</a> API.
@@ -34,11 +34,11 @@ var BatchPutAssetPropertyErrorEntry = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=entryId" }),
+        SpeakeasyMetadata({ data: "json, name=entryId" }),
         __metadata("design:type", String)
     ], BatchPutAssetPropertyErrorEntry.prototype, "entryId", void 0);
     __decorate([
-        Metadata({ data: "json, name=errors", elemType: shared.BatchPutAssetPropertyError }),
+        SpeakeasyMetadata({ data: "json, name=errors", elemType: BatchPutAssetPropertyError }),
         __metadata("design:type", Array)
     ], BatchPutAssetPropertyErrorEntry.prototype, "errors", void 0);
     return BatchPutAssetPropertyErrorEntry;

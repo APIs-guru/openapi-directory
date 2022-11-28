@@ -1,17 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import language_enum
-from . import voice_name_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class StartTalkRequest:
-    language: Optional[language_enum.LanguageEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'language' }})
-    level: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'level' }})
-    loop: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'loop' }})
-    style: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'style' }})
-    text: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'text' }})
-    voice_name: Optional[voice_name_enum.VoiceNameEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'voice_name' }})
+    text: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('text') }})
+    language: Optional[LanguageEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('language') }})
+    level: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('level') }})
+    loop: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('loop') }})
+    style: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('style') }})
+    voice_name: Optional[VoiceNameEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('voice_name') }})
     

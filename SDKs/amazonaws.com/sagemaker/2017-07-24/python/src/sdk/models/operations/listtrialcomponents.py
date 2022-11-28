@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -14,6 +18,7 @@ class ListTrialComponentsXAmzTargetEnum(str, Enum):
 
 @dataclass
 class ListTrialComponentsHeaders:
+    x_amz_target: ListTrialComponentsXAmzTargetEnum = field(metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm', 'style': 'simple', 'explode': False }})
     x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256', 'style': 'simple', 'explode': False }})
     x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential', 'style': 'simple', 'explode': False }})
@@ -21,20 +26,19 @@ class ListTrialComponentsHeaders:
     x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token', 'style': 'simple', 'explode': False }})
     x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature', 'style': 'simple', 'explode': False }})
     x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders', 'style': 'simple', 'explode': False }})
-    x_amz_target: ListTrialComponentsXAmzTargetEnum = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ListTrialComponentsRequest:
-    query_params: ListTrialComponentsQueryParams = field(default=None)
-    headers: ListTrialComponentsHeaders = field(default=None)
-    request: shared.ListTrialComponentsRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ListTrialComponentsHeaders = field()
+    query_params: ListTrialComponentsQueryParams = field()
+    request: shared.ListTrialComponentsRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ListTrialComponentsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_trial_components_response: Optional[shared.ListTrialComponentsResponse] = field(default=None)
     resource_not_found: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

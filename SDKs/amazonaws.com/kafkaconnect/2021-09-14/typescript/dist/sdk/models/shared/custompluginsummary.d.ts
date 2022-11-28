@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CustomPluginStateEnum } from "./custompluginstateenum";
 import { CustomPluginRevisionSummary } from "./custompluginrevisionsummary";
 /**

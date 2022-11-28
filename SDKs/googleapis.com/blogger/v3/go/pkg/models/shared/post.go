@@ -1,9 +1,13 @@
 package shared
 
+// PostAuthorImage
+// The creator's avatar.
 type PostAuthorImage struct {
 	URL *string `json:"url,omitempty"`
 }
 
+// PostAuthor
+// The author of this Post.
 type PostAuthor struct {
 	DisplayName *string          `json:"displayName,omitempty"`
 	ID          *string          `json:"id,omitempty"`
@@ -11,6 +15,8 @@ type PostAuthor struct {
 	URL         *string          `json:"url,omitempty"`
 }
 
+// PostBlog
+// Data about the blog containing this Post.
 type PostBlog struct {
 	ID *string `json:"id,omitempty"`
 }
@@ -19,6 +25,8 @@ type PostImages struct {
 	URL *string `json:"url,omitempty"`
 }
 
+// PostLocation
+// The location for geotagged posts.
 type PostLocation struct {
 	Lat  *float64 `json:"lat,omitempty"`
 	Lng  *float64 `json:"lng,omitempty"`
@@ -34,6 +42,8 @@ const (
 	PostReaderCommentsEnumDontAllowHideExisting PostReaderCommentsEnum = "DONT_ALLOW_HIDE_EXISTING"
 )
 
+// PostReplies
+// The container of comments on this Post.
 type PostReplies struct {
 	Items      []Comment `json:"items,omitempty"`
 	SelfLink   *string   `json:"selfLink,omitempty"`

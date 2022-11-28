@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // InferenceS3OutputConfiguration
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  Specifies configuration information for the output results from the inference, including output S3 location. 
 **/
 export class InferenceS3OutputConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Bucket" })
+  @SpeakeasyMetadata({ data: "json, name=Bucket" })
   bucket: string;
 
-  @Metadata({ data: "json, name=Prefix" })
+  @SpeakeasyMetadata({ data: "json, name=Prefix" })
   prefix?: string;
 }

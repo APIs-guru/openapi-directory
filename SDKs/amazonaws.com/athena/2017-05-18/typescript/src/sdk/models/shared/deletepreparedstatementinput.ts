@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeletePreparedStatementInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=StatementName" })
+  @SpeakeasyMetadata({ data: "json, name=StatementName" })
   statementName: string;
 
-  @Metadata({ data: "json, name=WorkGroup" })
+  @SpeakeasyMetadata({ data: "json, name=WorkGroup" })
   workGroup: string;
 }

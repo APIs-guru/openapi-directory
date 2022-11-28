@@ -1,5 +1,7 @@
 package shared
 
+// ProvisioningConfig
+// An provisioning configuration.
 type ProvisioningConfig struct {
 	Instances []InstanceConfig `json:"instances,omitempty"`
 	Networks  []NetworkConfig  `json:"networks,omitempty"`

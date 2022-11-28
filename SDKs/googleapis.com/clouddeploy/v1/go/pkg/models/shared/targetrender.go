@@ -17,6 +17,8 @@ const (
 	TargetRenderRenderingStateEnumInProgress                   TargetRenderRenderingStateEnum = "IN_PROGRESS"
 )
 
+// TargetRender
+// Details of rendering for a single target.
 type TargetRender struct {
 	FailureCause   *TargetRenderFailureCauseEnum   `json:"failureCause,omitempty"`
 	FailureMessage *string                         `json:"failureMessage,omitempty"`

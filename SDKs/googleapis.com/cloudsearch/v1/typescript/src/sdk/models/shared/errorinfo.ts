@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ErrorMessage } from "./errormessage";
+
 
 
 // ErrorInfo
@@ -8,6 +8,6 @@ import { ErrorMessage } from "./errormessage";
  * Error information about the response.
 **/
 export class ErrorInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errorMessages", elemType: shared.ErrorMessage })
+  @SpeakeasyMetadata({ data: "json, name=errorMessages", elemType: ErrorMessage })
   errorMessages?: ErrorMessage[];
 }

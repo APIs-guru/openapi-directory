@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // QueryDefinition
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * This structure contains details about a saved CloudWatch Logs Insights query definition.
 **/
 export class QueryDefinition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=lastModified" })
+  @SpeakeasyMetadata({ data: "json, name=lastModified" })
   lastModified?: number;
 
-  @Metadata({ data: "json, name=logGroupNames" })
+  @SpeakeasyMetadata({ data: "json, name=logGroupNames" })
   logGroupNames?: string[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=queryDefinitionId" })
+  @SpeakeasyMetadata({ data: "json, name=queryDefinitionId" })
   queryDefinitionId?: string;
 
-  @Metadata({ data: "json, name=queryString" })
+  @SpeakeasyMetadata({ data: "json, name=queryString" })
   queryString?: string;
 }

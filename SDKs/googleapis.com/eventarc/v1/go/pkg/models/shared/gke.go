@@ -1,5 +1,7 @@
 package shared
 
+// Gke
+// Represents a GKE destination.
 type Gke struct {
 	Cluster   *string `json:"cluster,omitempty"`
 	Location  *string `json:"location,omitempty"`

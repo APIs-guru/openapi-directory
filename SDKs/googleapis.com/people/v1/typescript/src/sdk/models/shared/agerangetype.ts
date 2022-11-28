@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FieldMetadata } from "./fieldmetadata";
 
+
 export enum AgeRangeTypeAgeRangeEnum {
-    AgeRangeUnspecified = "AGE_RANGE_UNSPECIFIED"
-,    LessThanEighteen = "LESS_THAN_EIGHTEEN"
-,    EighteenToTwenty = "EIGHTEEN_TO_TWENTY"
-,    TwentyOneOrOlder = "TWENTY_ONE_OR_OLDER"
+    AgeRangeUnspecified = "AGE_RANGE_UNSPECIFIED",
+    LessThanEighteen = "LESS_THAN_EIGHTEEN",
+    EighteenToTwenty = "EIGHTEEN_TO_TWENTY",
+    TwentyOneOrOlder = "TWENTY_ONE_OR_OLDER"
 }
 
 
@@ -14,9 +15,9 @@ export enum AgeRangeTypeAgeRangeEnum {
  * A person's age range.
 **/
 export class AgeRangeType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ageRange" })
+  @SpeakeasyMetadata({ data: "json, name=ageRange" })
   ageRange?: AgeRangeTypeAgeRangeEnum;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: FieldMetadata;
 }

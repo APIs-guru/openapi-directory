@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ITunesConnectAnalytics
 /**
  * Parameters for iTunes Connect App Analytics.
@@ -33,19 +33,19 @@ var ITunesConnectAnalytics = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=at" }),
+        SpeakeasyMetadata({ data: "json, name=at" }),
         __metadata("design:type", String)
     ], ITunesConnectAnalytics.prototype, "at", void 0);
     __decorate([
-        Metadata({ data: "json, name=ct" }),
+        SpeakeasyMetadata({ data: "json, name=ct" }),
         __metadata("design:type", String)
     ], ITunesConnectAnalytics.prototype, "ct", void 0);
     __decorate([
-        Metadata({ data: "json, name=mt" }),
+        SpeakeasyMetadata({ data: "json, name=mt" }),
         __metadata("design:type", String)
     ], ITunesConnectAnalytics.prototype, "mt", void 0);
     __decorate([
-        Metadata({ data: "json, name=pt" }),
+        SpeakeasyMetadata({ data: "json, name=pt" }),
         __metadata("design:type", String)
     ], ITunesConnectAnalytics.prototype, "pt", void 0);
     return ITunesConnectAnalytics;

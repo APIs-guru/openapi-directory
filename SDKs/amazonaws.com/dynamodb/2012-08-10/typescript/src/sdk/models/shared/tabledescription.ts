@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ArchivalSummary } from "./archivalsummary";
 import { AttributeDefinition } from "./attributedefinition";
 import { BillingModeSummary } from "./billingmodesummary";
@@ -14,71 +13,72 @@ import { StreamSpecification } from "./streamspecification";
 import { TableStatusEnum } from "./tablestatusenum";
 
 
+
 // TableDescription
 /** 
  * Represents the properties of a table.
 **/
 export class TableDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ArchivalSummary" })
+  @SpeakeasyMetadata({ data: "json, name=ArchivalSummary" })
   archivalSummary?: ArchivalSummary;
 
-  @Metadata({ data: "json, name=AttributeDefinitions", elemType: shared.AttributeDefinition })
+  @SpeakeasyMetadata({ data: "json, name=AttributeDefinitions", elemType: AttributeDefinition })
   attributeDefinitions?: AttributeDefinition[];
 
-  @Metadata({ data: "json, name=BillingModeSummary" })
+  @SpeakeasyMetadata({ data: "json, name=BillingModeSummary" })
   billingModeSummary?: BillingModeSummary;
 
-  @Metadata({ data: "json, name=CreationDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationDateTime" })
   creationDateTime?: Date;
 
-  @Metadata({ data: "json, name=GlobalSecondaryIndexes", elemType: shared.GlobalSecondaryIndexDescription })
+  @SpeakeasyMetadata({ data: "json, name=GlobalSecondaryIndexes", elemType: GlobalSecondaryIndexDescription })
   globalSecondaryIndexes?: GlobalSecondaryIndexDescription[];
 
-  @Metadata({ data: "json, name=GlobalTableVersion" })
+  @SpeakeasyMetadata({ data: "json, name=GlobalTableVersion" })
   globalTableVersion?: string;
 
-  @Metadata({ data: "json, name=ItemCount" })
+  @SpeakeasyMetadata({ data: "json, name=ItemCount" })
   itemCount?: number;
 
-  @Metadata({ data: "json, name=KeySchema", elemType: shared.KeySchemaElement })
+  @SpeakeasyMetadata({ data: "json, name=KeySchema", elemType: KeySchemaElement })
   keySchema?: KeySchemaElement[];
 
-  @Metadata({ data: "json, name=LatestStreamArn" })
+  @SpeakeasyMetadata({ data: "json, name=LatestStreamArn" })
   latestStreamArn?: string;
 
-  @Metadata({ data: "json, name=LatestStreamLabel" })
+  @SpeakeasyMetadata({ data: "json, name=LatestStreamLabel" })
   latestStreamLabel?: string;
 
-  @Metadata({ data: "json, name=LocalSecondaryIndexes", elemType: shared.LocalSecondaryIndexDescription })
+  @SpeakeasyMetadata({ data: "json, name=LocalSecondaryIndexes", elemType: LocalSecondaryIndexDescription })
   localSecondaryIndexes?: LocalSecondaryIndexDescription[];
 
-  @Metadata({ data: "json, name=ProvisionedThroughput" })
+  @SpeakeasyMetadata({ data: "json, name=ProvisionedThroughput" })
   provisionedThroughput?: ProvisionedThroughputDescription;
 
-  @Metadata({ data: "json, name=Replicas", elemType: shared.ReplicaDescription })
+  @SpeakeasyMetadata({ data: "json, name=Replicas", elemType: ReplicaDescription })
   replicas?: ReplicaDescription[];
 
-  @Metadata({ data: "json, name=RestoreSummary" })
+  @SpeakeasyMetadata({ data: "json, name=RestoreSummary" })
   restoreSummary?: RestoreSummary;
 
-  @Metadata({ data: "json, name=SSEDescription" })
+  @SpeakeasyMetadata({ data: "json, name=SSEDescription" })
   sseDescription?: SseDescription;
 
-  @Metadata({ data: "json, name=StreamSpecification" })
+  @SpeakeasyMetadata({ data: "json, name=StreamSpecification" })
   streamSpecification?: StreamSpecification;
 
-  @Metadata({ data: "json, name=TableArn" })
+  @SpeakeasyMetadata({ data: "json, name=TableArn" })
   tableArn?: string;
 
-  @Metadata({ data: "json, name=TableId" })
+  @SpeakeasyMetadata({ data: "json, name=TableId" })
   tableId?: string;
 
-  @Metadata({ data: "json, name=TableName" })
+  @SpeakeasyMetadata({ data: "json, name=TableName" })
   tableName?: string;
 
-  @Metadata({ data: "json, name=TableSizeBytes" })
+  @SpeakeasyMetadata({ data: "json, name=TableSizeBytes" })
   tableSizeBytes?: number;
 
-  @Metadata({ data: "json, name=TableStatus" })
+  @SpeakeasyMetadata({ data: "json, name=TableStatus" })
   tableStatus?: TableStatusEnum;
 }

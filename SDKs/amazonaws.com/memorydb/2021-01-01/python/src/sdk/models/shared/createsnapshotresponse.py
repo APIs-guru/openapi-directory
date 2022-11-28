@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import snapshot
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateSnapshotResponse:
-    snapshot: Optional[snapshot.Snapshot] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Snapshot' }})
+    snapshot: Optional[Snapshot] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Snapshot') }})
     

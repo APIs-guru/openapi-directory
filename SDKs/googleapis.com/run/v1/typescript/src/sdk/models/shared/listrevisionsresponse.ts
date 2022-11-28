@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Revision } from "./revision";
 import { ListMeta } from "./listmeta";
+
 
 
 // ListRevisionsResponse
@@ -9,18 +9,18 @@ import { ListMeta } from "./listmeta";
  * ListRevisionsResponse is a list of Revision resources.
 **/
 export class ListRevisionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=apiVersion" })
+  @SpeakeasyMetadata({ data: "json, name=apiVersion" })
   apiVersion?: string;
 
-  @Metadata({ data: "json, name=items", elemType: shared.Revision })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: Revision })
   items?: Revision[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: ListMeta;
 
-  @Metadata({ data: "json, name=unreachable" })
+  @SpeakeasyMetadata({ data: "json, name=unreachable" })
   unreachable?: string[];
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var AddExamplePathParams = /** @class */ (function (_super) {
     __extends(AddExamplePathParams, _super);
@@ -30,7 +30,7 @@ var AddExamplePathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=datasetId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=datasetId" }),
         __metadata("design:type", String)
     ], AddExamplePathParams.prototype, "datasetId", void 0);
     return AddExamplePathParams;
@@ -42,15 +42,15 @@ var AddExampleRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "multipart_form, name=data" }),
+        SpeakeasyMetadata({ data: "multipart_form, name=data" }),
         __metadata("design:type", String)
     ], AddExampleRequestBody.prototype, "data", void 0);
     __decorate([
-        Metadata({ data: "multipart_form, name=labelId" }),
+        SpeakeasyMetadata({ data: "multipart_form, name=labelId" }),
         __metadata("design:type", Number)
     ], AddExampleRequestBody.prototype, "labelId", void 0);
     __decorate([
-        Metadata({ data: "multipart_form, name=name" }),
+        SpeakeasyMetadata({ data: "multipart_form, name=name" }),
         __metadata("design:type", String)
     ], AddExampleRequestBody.prototype, "name", void 0);
     return AddExampleRequestBody;
@@ -62,7 +62,7 @@ var AddExampleSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
         __metadata("design:type", shared.SchemeBearerToken)
     ], AddExampleSecurity.prototype, "bearerToken", void 0);
     return AddExampleSecurity;
@@ -74,15 +74,15 @@ var AddExampleRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AddExamplePathParams)
     ], AddExampleRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=multipart/form-data" }),
+        SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" }),
         __metadata("design:type", AddExampleRequestBody)
     ], AddExampleRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AddExampleSecurity)
     ], AddExampleRequest.prototype, "security", void 0);
     return AddExampleRequest;
@@ -94,15 +94,15 @@ var AddExampleResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], AddExampleResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Example)
     ], AddExampleResponse.prototype, "example", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], AddExampleResponse.prototype, "statusCode", void 0);
     return AddExampleResponse;

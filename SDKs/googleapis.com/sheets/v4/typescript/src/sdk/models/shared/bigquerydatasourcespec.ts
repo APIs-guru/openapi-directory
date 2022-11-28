@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BigQueryQuerySpec } from "./bigqueryqueryspec";
 import { BigQueryTableSpec } from "./bigquerytablespec";
+
 
 
 // BigQueryDataSourceSpec
@@ -8,12 +9,12 @@ import { BigQueryTableSpec } from "./bigquerytablespec";
  * The specification of a BigQuery data source that's connected to a sheet.
 **/
 export class BigQueryDataSourceSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=projectId" })
+  @SpeakeasyMetadata({ data: "json, name=projectId" })
   projectId?: string;
 
-  @Metadata({ data: "json, name=querySpec" })
+  @SpeakeasyMetadata({ data: "json, name=querySpec" })
   querySpec?: BigQueryQuerySpec;
 
-  @Metadata({ data: "json, name=tableSpec" })
+  @SpeakeasyMetadata({ data: "json, name=tableSpec" })
   tableSpec?: BigQueryTableSpec;
 }

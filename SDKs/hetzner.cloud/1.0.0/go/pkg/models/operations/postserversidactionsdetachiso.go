@@ -4,10 +4,8 @@ type PostServersIDActionsDetachIsoPathParams struct {
 	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type PostServersIDActionsDetachIsoRequest struct {
-	PathParams PostServersIDActionsDetachIsoPathParams
-}
-
+// PostServersIDActionsDetachIsoActionResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type PostServersIDActionsDetachIsoActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -39,6 +37,10 @@ type PostServersIDActionsDetachIsoActionResponseAction struct {
 
 type PostServersIDActionsDetachIsoActionResponse struct {
 	Action PostServersIDActionsDetachIsoActionResponseAction `json:"action"`
+}
+
+type PostServersIDActionsDetachIsoRequest struct {
+	PathParams PostServersIDActionsDetachIsoPathParams
 }
 
 type PostServersIDActionsDetachIsoResponse struct {

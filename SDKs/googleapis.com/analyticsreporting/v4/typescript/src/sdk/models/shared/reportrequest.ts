@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CohortGroup } from "./cohortgroup";
 import { DateRange } from "./daterange";
 import { DimensionFilterClause } from "./dimensionfilterclause";
@@ -10,11 +9,12 @@ import { OrderBy } from "./orderby";
 import { Pivot } from "./pivot";
 import { Segment } from "./segment";
 
+
 export enum ReportRequestSamplingLevelEnum {
-    SamplingUnspecified = "SAMPLING_UNSPECIFIED"
-,    Default = "DEFAULT"
-,    Small = "SMALL"
-,    Large = "LARGE"
+    SamplingUnspecified = "SAMPLING_UNSPECIFIED",
+    Default = "DEFAULT",
+    Small = "SMALL",
+    Large = "LARGE"
 }
 
 
@@ -23,54 +23,54 @@ export enum ReportRequestSamplingLevelEnum {
  * The main request class which specifies the Reporting API request.
 **/
 export class ReportRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cohortGroup" })
+  @SpeakeasyMetadata({ data: "json, name=cohortGroup" })
   cohortGroup?: CohortGroup;
 
-  @Metadata({ data: "json, name=dateRanges", elemType: shared.DateRange })
+  @SpeakeasyMetadata({ data: "json, name=dateRanges", elemType: DateRange })
   dateRanges?: DateRange[];
 
-  @Metadata({ data: "json, name=dimensionFilterClauses", elemType: shared.DimensionFilterClause })
+  @SpeakeasyMetadata({ data: "json, name=dimensionFilterClauses", elemType: DimensionFilterClause })
   dimensionFilterClauses?: DimensionFilterClause[];
 
-  @Metadata({ data: "json, name=dimensions", elemType: shared.Dimension })
+  @SpeakeasyMetadata({ data: "json, name=dimensions", elemType: Dimension })
   dimensions?: Dimension[];
 
-  @Metadata({ data: "json, name=filtersExpression" })
+  @SpeakeasyMetadata({ data: "json, name=filtersExpression" })
   filtersExpression?: string;
 
-  @Metadata({ data: "json, name=hideTotals" })
+  @SpeakeasyMetadata({ data: "json, name=hideTotals" })
   hideTotals?: boolean;
 
-  @Metadata({ data: "json, name=hideValueRanges" })
+  @SpeakeasyMetadata({ data: "json, name=hideValueRanges" })
   hideValueRanges?: boolean;
 
-  @Metadata({ data: "json, name=includeEmptyRows" })
+  @SpeakeasyMetadata({ data: "json, name=includeEmptyRows" })
   includeEmptyRows?: boolean;
 
-  @Metadata({ data: "json, name=metricFilterClauses", elemType: shared.MetricFilterClause })
+  @SpeakeasyMetadata({ data: "json, name=metricFilterClauses", elemType: MetricFilterClause })
   metricFilterClauses?: MetricFilterClause[];
 
-  @Metadata({ data: "json, name=metrics", elemType: shared.Metric })
+  @SpeakeasyMetadata({ data: "json, name=metrics", elemType: Metric })
   metrics?: Metric[];
 
-  @Metadata({ data: "json, name=orderBys", elemType: shared.OrderBy })
+  @SpeakeasyMetadata({ data: "json, name=orderBys", elemType: OrderBy })
   orderBys?: OrderBy[];
 
-  @Metadata({ data: "json, name=pageSize" })
+  @SpeakeasyMetadata({ data: "json, name=pageSize" })
   pageSize?: number;
 
-  @Metadata({ data: "json, name=pageToken" })
+  @SpeakeasyMetadata({ data: "json, name=pageToken" })
   pageToken?: string;
 
-  @Metadata({ data: "json, name=pivots", elemType: shared.Pivot })
+  @SpeakeasyMetadata({ data: "json, name=pivots", elemType: Pivot })
   pivots?: Pivot[];
 
-  @Metadata({ data: "json, name=samplingLevel" })
+  @SpeakeasyMetadata({ data: "json, name=samplingLevel" })
   samplingLevel?: ReportRequestSamplingLevelEnum;
 
-  @Metadata({ data: "json, name=segments", elemType: shared.Segment })
+  @SpeakeasyMetadata({ data: "json, name=segments", elemType: Segment })
   segments?: Segment[];
 
-  @Metadata({ data: "json, name=viewId" })
+  @SpeakeasyMetadata({ data: "json, name=viewId" })
   viewId?: string;
 }

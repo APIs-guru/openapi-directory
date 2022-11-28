@@ -1,106 +1,107 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetPaymentsForPayoutV4PathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=payoutId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=payoutId" })
   payoutId: string;
 }
 
 export enum GetPaymentsForPayoutV4StatusEnum {
-    Accepted = "ACCEPTED"
-,    AwaitingFunds = "AWAITING_FUNDS"
-,    Funded = "FUNDED"
-,    Unfunded = "UNFUNDED"
-,    BankPaymentRequested = "BANK_PAYMENT_REQUESTED"
-,    Rejected = "REJECTED"
-,    AcceptedByRails = "ACCEPTED_BY_RAILS"
-,    Confirmed = "CONFIRMED"
-,    Failed = "FAILED"
-,    Returned = "RETURNED"
-,    Withdrawn = "WITHDRAWN"
+    Accepted = "ACCEPTED",
+    AwaitingFunds = "AWAITING_FUNDS",
+    Funded = "FUNDED",
+    Unfunded = "UNFUNDED",
+    BankPaymentRequested = "BANK_PAYMENT_REQUESTED",
+    Rejected = "REJECTED",
+    AcceptedByRails = "ACCEPTED_BY_RAILS",
+    Confirmed = "CONFIRMED",
+    Failed = "FAILED",
+    Returned = "RETURNED",
+    Withdrawn = "WITHDRAWN"
 }
 
 export enum GetPaymentsForPayoutV4TransmissionTypeEnum {
-    Ach = "ACH"
-,    SameDayAch = "SAME_DAY_ACH"
-,    Wire = "WIRE"
+    Ach = "ACH",
+    SameDayAch = "SAME_DAY_ACH",
+    Wire = "WIRE"
 }
 
 
 export class GetPaymentsForPayoutV4QueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=pageSize" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pageSize" })
   pageSize?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=paymentAmountFrom" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=paymentAmountFrom" })
   paymentAmountFrom?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=paymentAmountTo" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=paymentAmountTo" })
   paymentAmountTo?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=remoteId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=remoteId" })
   remoteId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=remoteSystemId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=remoteSystemId" })
   remoteSystemId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sensitive" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sensitive" })
   sensitive?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sourceAmountFrom" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sourceAmountFrom" })
   sourceAmountFrom?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sourceAmountTo" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sourceAmountTo" })
   sourceAmountTo?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=status" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=status" })
   status?: GetPaymentsForPayoutV4StatusEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=submittedDateFrom" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=submittedDateFrom" })
   submittedDateFrom?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=submittedDateTo" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=submittedDateTo" })
   submittedDateTo?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=transmissionType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=transmissionType" })
   transmissionType?: GetPaymentsForPayoutV4TransmissionTypeEnum;
 }
 
 
 export class GetPaymentsForPayoutV4Request extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetPaymentsForPayoutV4PathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetPaymentsForPayoutV4QueryParams;
 }
 
 
 export class GetPaymentsForPayoutV4Response extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getPaymentsForPayoutResponseV4?: shared.GetPaymentsForPayoutResponseV4;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   inlineResponse400?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   inlineResponse401?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   inlineResponse403?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   inlineResponse404?: any;
 }

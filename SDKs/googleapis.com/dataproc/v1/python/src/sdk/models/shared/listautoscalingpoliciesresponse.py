@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import autoscalingpolicy
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListAutoscalingPoliciesResponse:
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextPageToken' }})
-    policies: Optional[List[autoscalingpolicy.AutoscalingPolicy]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'policies' }})
+    r"""ListAutoscalingPoliciesResponse
+    A response to a request to list autoscaling policies in a project.
+    """
+    
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextPageToken') }})
+    policies: Optional[List[AutoscalingPolicy]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('policies') }})
     

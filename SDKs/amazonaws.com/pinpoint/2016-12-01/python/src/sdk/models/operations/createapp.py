@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,32 +22,36 @@ class CreateAppHeaders:
 @dataclass_json
 @dataclass
 class CreateAppRequestBodyCreateApplicationRequest:
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
-    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
+    r"""CreateAppRequestBodyCreateApplicationRequest
+    Specifies the display name of an application and the tags to associate with the application.
+    """
+    
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
+    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     
 
 @dataclass_json
 @dataclass
 class CreateAppRequestBody:
-    create_application_request: CreateAppRequestBodyCreateApplicationRequest = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CreateApplicationRequest' }})
+    create_application_request: CreateAppRequestBodyCreateApplicationRequest = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('CreateApplicationRequest') }})
     
 
 @dataclass
 class CreateAppRequest:
-    headers: CreateAppHeaders = field(default=None)
-    request: CreateAppRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateAppHeaders = field()
+    request: CreateAppRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateAppResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     create_app_response: Optional[shared.CreateAppResponse] = field(default=None)
     forbidden_exception: Optional[Any] = field(default=None)
     internal_server_error_exception: Optional[Any] = field(default=None)
     method_not_allowed_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
     payload_too_large_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

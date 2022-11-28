@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetAssignPrivateIPAddressesActionEnum(str, Enum):
     ASSIGN_PRIVATE_IP_ADDRESSES = "AssignPrivateIpAddresses"
@@ -10,14 +14,14 @@ class GetAssignPrivateIPAddressesVersionEnum(str, Enum):
 
 @dataclass
 class GetAssignPrivateIPAddressesQueryParams:
-    action: GetAssignPrivateIPAddressesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetAssignPrivateIPAddressesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    network_interface_id: str = field(metadata={'query_param': { 'field_name': 'NetworkInterfaceId', 'style': 'form', 'explode': True }})
+    version: GetAssignPrivateIPAddressesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     allow_reassignment: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'AllowReassignment', 'style': 'form', 'explode': True }})
     ipv4_prefix: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'Ipv4Prefix', 'style': 'form', 'explode': True }})
     ipv4_prefix_count: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'Ipv4PrefixCount', 'style': 'form', 'explode': True }})
-    network_interface_id: str = field(default=None, metadata={'query_param': { 'field_name': 'NetworkInterfaceId', 'style': 'form', 'explode': True }})
     private_ip_address: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'PrivateIpAddress', 'style': 'form', 'explode': True }})
     secondary_private_ip_address_count: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'SecondaryPrivateIpAddressCount', 'style': 'form', 'explode': True }})
-    version: GetAssignPrivateIPAddressesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -33,13 +37,13 @@ class GetAssignPrivateIPAddressesHeaders:
 
 @dataclass
 class GetAssignPrivateIPAddressesRequest:
-    query_params: GetAssignPrivateIPAddressesQueryParams = field(default=None)
-    headers: GetAssignPrivateIPAddressesHeaders = field(default=None)
+    headers: GetAssignPrivateIPAddressesHeaders = field()
+    query_params: GetAssignPrivateIPAddressesQueryParams = field()
     
 
 @dataclass
 class GetAssignPrivateIPAddressesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * For a SQL-based Kinesis Data Analytics application's output, describes the AWS Lambda function that is configured as its destination.
 **/

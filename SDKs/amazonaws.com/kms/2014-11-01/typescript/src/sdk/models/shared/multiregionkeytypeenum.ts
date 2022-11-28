@@ -1,6 +1,7 @@
 
 
+
 export enum MultiRegionKeyTypeEnum {
-    Primary = "PRIMARY"
-,    Replica = "REPLICA"
+    Primary = "PRIMARY",
+    Replica = "REPLICA"
 }

@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class RecommendationSourceTypeEnum(str, Enum):
     EC2_INSTANCE = "Ec2Instance"

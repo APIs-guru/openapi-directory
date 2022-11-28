@@ -30,7 +30,7 @@ type AuthorizedbuyersmarketplaceBuyersClientsUsersCreateSecurity struct {
 type AuthorizedbuyersmarketplaceBuyersClientsUsersCreateRequest struct {
 	PathParams  AuthorizedbuyersmarketplaceBuyersClientsUsersCreatePathParams
 	QueryParams AuthorizedbuyersmarketplaceBuyersClientsUsersCreateQueryParams
-	Request     *shared.ClientUser `request:"mediaType=application/json"`
+	Request     *shared.ClientUserInput `request:"mediaType=application/json"`
 	Security    AuthorizedbuyersmarketplaceBuyersClientsUsersCreateSecurity
 }
 

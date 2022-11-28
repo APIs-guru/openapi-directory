@@ -1,10 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { Page } from "./page";
-import { Page } from "./page";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Page } from "./page";
 import { Size } from "./size";
-import { Page } from "./page";
+
 
 
 // Presentation
@@ -12,30 +9,30 @@ import { Page } from "./page";
  * A Google Slides presentation.
 **/
 export class Presentation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=layouts", elemType: shared.Page })
+  @SpeakeasyMetadata({ data: "json, name=layouts", elemType: Page })
   layouts?: Page[];
 
-  @Metadata({ data: "json, name=locale" })
+  @SpeakeasyMetadata({ data: "json, name=locale" })
   locale?: string;
 
-  @Metadata({ data: "json, name=masters", elemType: shared.Page })
+  @SpeakeasyMetadata({ data: "json, name=masters", elemType: Page })
   masters?: Page[];
 
-  @Metadata({ data: "json, name=notesMaster" })
+  @SpeakeasyMetadata({ data: "json, name=notesMaster" })
   notesMaster?: Page;
 
-  @Metadata({ data: "json, name=pageSize" })
+  @SpeakeasyMetadata({ data: "json, name=pageSize" })
   pageSize?: Size;
 
-  @Metadata({ data: "json, name=presentationId" })
+  @SpeakeasyMetadata({ data: "json, name=presentationId" })
   presentationId?: string;
 
-  @Metadata({ data: "json, name=revisionId" })
+  @SpeakeasyMetadata({ data: "json, name=revisionId" })
   revisionId?: string;
 
-  @Metadata({ data: "json, name=slides", elemType: shared.Page })
+  @SpeakeasyMetadata({ data: "json, name=slides", elemType: Page })
   slides?: Page[];
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

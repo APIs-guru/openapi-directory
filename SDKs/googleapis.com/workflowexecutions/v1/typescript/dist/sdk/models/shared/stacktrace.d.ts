@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { StackTraceElement } from "./stacktraceelement";
 /**
  * A collection of stack elements (frames) where an error occurred.

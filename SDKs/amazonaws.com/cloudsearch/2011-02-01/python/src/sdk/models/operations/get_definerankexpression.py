@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDefineRankExpressionActionEnum(str, Enum):
     DEFINE_RANK_EXPRESSION = "DefineRankExpression"
@@ -7,8 +11,12 @@ class GetDefineRankExpressionActionEnum(str, Enum):
 
 @dataclass
 class GetDefineRankExpressionRankExpression:
-    rank_expression: str = field(default=None, metadata={'query_param': { 'field_name': 'RankExpression' }})
-    rank_name: str = field(default=None, metadata={'query_param': { 'field_name': 'RankName' }})
+    r"""GetDefineRankExpressionRankExpression
+    A named expression that can be evaluated at search time and used for ranking or thresholding in a search query. 
+    """
+    
+    rank_expression: str = field(metadata={'query_param': { 'field_name': 'RankExpression' }})
+    rank_name: str = field(metadata={'query_param': { 'field_name': 'RankName' }})
     
 class GetDefineRankExpressionVersionEnum(str, Enum):
     TWO_THOUSAND_AND_ELEVEN_02_01 = "2011-02-01"
@@ -16,10 +24,10 @@ class GetDefineRankExpressionVersionEnum(str, Enum):
 
 @dataclass
 class GetDefineRankExpressionQueryParams:
-    action: GetDefineRankExpressionActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    domain_name: str = field(default=None, metadata={'query_param': { 'field_name': 'DomainName', 'style': 'form', 'explode': True }})
-    rank_expression: GetDefineRankExpressionRankExpression = field(default=None, metadata={'query_param': { 'field_name': 'RankExpression', 'style': 'form', 'explode': True }})
-    version: GetDefineRankExpressionVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetDefineRankExpressionActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    domain_name: str = field(metadata={'query_param': { 'field_name': 'DomainName', 'style': 'form', 'explode': True }})
+    rank_expression: GetDefineRankExpressionRankExpression = field(metadata={'query_param': { 'field_name': 'RankExpression', 'style': 'form', 'explode': True }})
+    version: GetDefineRankExpressionVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -35,13 +43,13 @@ class GetDefineRankExpressionHeaders:
 
 @dataclass
 class GetDefineRankExpressionRequest:
-    query_params: GetDefineRankExpressionQueryParams = field(default=None)
-    headers: GetDefineRankExpressionHeaders = field(default=None)
+    headers: GetDefineRankExpressionHeaders = field()
+    query_params: GetDefineRankExpressionQueryParams = field()
     
 
 @dataclass
 class GetDefineRankExpressionResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

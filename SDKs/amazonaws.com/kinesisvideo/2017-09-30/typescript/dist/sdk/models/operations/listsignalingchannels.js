@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ListSignalingChannelsQueryParams = /** @class */ (function (_super) {
     __extends(ListSignalingChannelsQueryParams, _super);
@@ -30,11 +30,11 @@ var ListSignalingChannelsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=MaxResults" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MaxResults" }),
         __metadata("design:type", String)
     ], ListSignalingChannelsQueryParams.prototype, "maxResults", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=NextToken" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=NextToken" }),
         __metadata("design:type", String)
     ], ListSignalingChannelsQueryParams.prototype, "nextToken", void 0);
     return ListSignalingChannelsQueryParams;
@@ -46,31 +46,31 @@ var ListSignalingChannelsHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], ListSignalingChannelsHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], ListSignalingChannelsHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], ListSignalingChannelsHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], ListSignalingChannelsHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], ListSignalingChannelsHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], ListSignalingChannelsHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], ListSignalingChannelsHeaders.prototype, "xAmzSignedHeaders", void 0);
     return ListSignalingChannelsHeaders;
@@ -86,11 +86,11 @@ var ListSignalingChannelsRequestBodyChannelNameCondition = /** @class */ (functi
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ComparisonOperator" }),
+        SpeakeasyMetadata({ data: "json, name=ComparisonOperator" }),
         __metadata("design:type", String)
     ], ListSignalingChannelsRequestBodyChannelNameCondition.prototype, "comparisonOperator", void 0);
     __decorate([
-        Metadata({ data: "json, name=ComparisonValue" }),
+        SpeakeasyMetadata({ data: "json, name=ComparisonValue" }),
         __metadata("design:type", String)
     ], ListSignalingChannelsRequestBodyChannelNameCondition.prototype, "comparisonValue", void 0);
     return ListSignalingChannelsRequestBodyChannelNameCondition;
@@ -102,15 +102,15 @@ var ListSignalingChannelsRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ChannelNameCondition" }),
+        SpeakeasyMetadata({ data: "json, name=ChannelNameCondition" }),
         __metadata("design:type", ListSignalingChannelsRequestBodyChannelNameCondition)
     ], ListSignalingChannelsRequestBody.prototype, "channelNameCondition", void 0);
     __decorate([
-        Metadata({ data: "json, name=MaxResults" }),
+        SpeakeasyMetadata({ data: "json, name=MaxResults" }),
         __metadata("design:type", Number)
     ], ListSignalingChannelsRequestBody.prototype, "maxResults", void 0);
     __decorate([
-        Metadata({ data: "json, name=NextToken" }),
+        SpeakeasyMetadata({ data: "json, name=NextToken" }),
         __metadata("design:type", String)
     ], ListSignalingChannelsRequestBody.prototype, "nextToken", void 0);
     return ListSignalingChannelsRequestBody;
@@ -122,15 +122,15 @@ var ListSignalingChannelsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ListSignalingChannelsQueryParams)
     ], ListSignalingChannelsRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ListSignalingChannelsHeaders)
     ], ListSignalingChannelsRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", ListSignalingChannelsRequestBody)
     ], ListSignalingChannelsRequest.prototype, "request", void 0);
     return ListSignalingChannelsRequest;
@@ -142,27 +142,27 @@ var ListSignalingChannelsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ListSignalingChannelsResponse.prototype, "accessDeniedException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ListSignalingChannelsResponse.prototype, "clientLimitExceededException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ListSignalingChannelsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ListSignalingChannelsResponse.prototype, "invalidArgumentException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ListSignalingChannelsOutput)
     ], ListSignalingChannelsResponse.prototype, "listSignalingChannelsOutput", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ListSignalingChannelsResponse.prototype, "statusCode", void 0);
     return ListSignalingChannelsResponse;

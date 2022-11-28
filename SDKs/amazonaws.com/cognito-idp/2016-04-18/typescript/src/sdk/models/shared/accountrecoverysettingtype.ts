@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RecoveryOptionType } from "./recoveryoptiontype";
+
 
 
 // AccountRecoverySettingType
@@ -8,6 +8,6 @@ import { RecoveryOptionType } from "./recoveryoptiontype";
  * The data type for <code>AccountRecoverySetting</code>.
 **/
 export class AccountRecoverySettingType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=RecoveryMechanisms", elemType: shared.RecoveryOptionType })
+  @SpeakeasyMetadata({ data: "json, name=RecoveryMechanisms", elemType: RecoveryOptionType })
   recoveryMechanisms?: RecoveryOptionType[];
 }

@@ -18,6 +18,8 @@ type UpdateApnsVoipChannelHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateApnsVoipChannelRequestBodyApnsVoipChannelRequest
+// Specifies the status and settings of the APNs (Apple Push Notification service) VoIP channel for an application.
 type UpdateApnsVoipChannelRequestBodyApnsVoipChannelRequest struct {
 	BundleID                    *string `json:"BundleId,omitempty"`
 	Certificate                 *string `json:"Certificate,omitempty"`

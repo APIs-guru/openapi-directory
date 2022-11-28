@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class TasksTasklistsDeletePathParams:
-    tasklist: str = field(default=None, metadata={'path_param': { 'field_name': 'tasklist', 'style': 'simple', 'explode': False }})
+    tasklist: str = field(metadata={'path_param': { 'field_name': 'tasklist', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,19 +26,19 @@ class TasksTasklistsDeleteQueryParams:
 
 @dataclass
 class TasksTasklistsDeleteSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class TasksTasklistsDeleteRequest:
-    path_params: TasksTasklistsDeletePathParams = field(default=None)
-    query_params: TasksTasklistsDeleteQueryParams = field(default=None)
-    security: TasksTasklistsDeleteSecurity = field(default=None)
+    path_params: TasksTasklistsDeletePathParams = field()
+    query_params: TasksTasklistsDeleteQueryParams = field()
+    security: TasksTasklistsDeleteSecurity = field()
     
 
 @dataclass
 class TasksTasklistsDeleteResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class TagmanagerAccountsUserPermissionsUpdatePathParams:
-    path: str = field(default=None, metadata={'path_param': { 'field_name': 'path', 'style': 'simple', 'explode': False }})
+    path: str = field(metadata={'path_param': { 'field_name': 'path', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +30,21 @@ class TagmanagerAccountsUserPermissionsUpdateQueryParams:
 
 @dataclass
 class TagmanagerAccountsUserPermissionsUpdateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class TagmanagerAccountsUserPermissionsUpdateRequest:
-    path_params: TagmanagerAccountsUserPermissionsUpdatePathParams = field(default=None)
-    query_params: TagmanagerAccountsUserPermissionsUpdateQueryParams = field(default=None)
+    path_params: TagmanagerAccountsUserPermissionsUpdatePathParams = field()
+    query_params: TagmanagerAccountsUserPermissionsUpdateQueryParams = field()
+    security: TagmanagerAccountsUserPermissionsUpdateSecurity = field()
     request: Optional[shared.UserPermission] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: TagmanagerAccountsUserPermissionsUpdateSecurity = field(default=None)
     
 
 @dataclass
 class TagmanagerAccountsUserPermissionsUpdateResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     user_permission: Optional[shared.UserPermission] = field(default=None)
     

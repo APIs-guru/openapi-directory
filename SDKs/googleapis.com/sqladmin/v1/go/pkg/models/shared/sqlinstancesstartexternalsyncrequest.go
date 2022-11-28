@@ -8,6 +8,8 @@ const (
 	SQLInstancesStartExternalSyncRequestSyncModeEnumOffline                     SQLInstancesStartExternalSyncRequestSyncModeEnum = "OFFLINE"
 )
 
+// SQLInstancesStartExternalSyncRequest
+// Instance start external sync request.
 type SQLInstancesStartExternalSyncRequest struct {
 	MysqlSyncConfig  *MySQLSyncConfig                                  `json:"mysqlSyncConfig,omitempty"`
 	SkipVerification *bool                                             `json:"skipVerification,omitempty"`

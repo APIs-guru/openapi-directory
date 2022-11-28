@@ -22,8 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { StandardError } from "./standarderror";
+import { SubscriberEmailResponse } from "./subscriberemailresponse";
 export var BatchResponseSubscriberEmailResponseStatusEnum;
 (function (BatchResponseSubscriberEmailResponseStatusEnum) {
     BatchResponseSubscriberEmailResponseStatusEnum["Pending"] = "PENDING";
@@ -37,35 +38,35 @@ var BatchResponseSubscriberEmailResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=completedAt" }),
+        SpeakeasyMetadata({ data: "json, name=completedAt" }),
         __metadata("design:type", Date)
     ], BatchResponseSubscriberEmailResponse.prototype, "completedAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=errors", elemType: shared.StandardError }),
+        SpeakeasyMetadata({ data: "json, name=errors", elemType: StandardError }),
         __metadata("design:type", Array)
     ], BatchResponseSubscriberEmailResponse.prototype, "errors", void 0);
     __decorate([
-        Metadata({ data: "json, name=links" }),
+        SpeakeasyMetadata({ data: "json, name=links" }),
         __metadata("design:type", Map)
     ], BatchResponseSubscriberEmailResponse.prototype, "links", void 0);
     __decorate([
-        Metadata({ data: "json, name=numErrors" }),
+        SpeakeasyMetadata({ data: "json, name=numErrors" }),
         __metadata("design:type", Number)
     ], BatchResponseSubscriberEmailResponse.prototype, "numErrors", void 0);
     __decorate([
-        Metadata({ data: "json, name=requestedAt" }),
+        SpeakeasyMetadata({ data: "json, name=requestedAt" }),
         __metadata("design:type", Date)
     ], BatchResponseSubscriberEmailResponse.prototype, "requestedAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=results", elemType: shared.SubscriberEmailResponse }),
+        SpeakeasyMetadata({ data: "json, name=results", elemType: SubscriberEmailResponse }),
         __metadata("design:type", Array)
     ], BatchResponseSubscriberEmailResponse.prototype, "results", void 0);
     __decorate([
-        Metadata({ data: "json, name=startedAt" }),
+        SpeakeasyMetadata({ data: "json, name=startedAt" }),
         __metadata("design:type", Date)
     ], BatchResponseSubscriberEmailResponse.prototype, "startedAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], BatchResponseSubscriberEmailResponse.prototype, "status", void 0);
     return BatchResponseSubscriberEmailResponse;

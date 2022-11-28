@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PutRetentionConfigurationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=RetentionPeriodInDays" })
+  @SpeakeasyMetadata({ data: "json, name=RetentionPeriodInDays" })
   retentionPeriodInDays: number;
 }

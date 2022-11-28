@@ -1,15 +1,20 @@
 import { AxiosInstance, AxiosRequestConfig } from "axios";
 import * as operations from "./models/operations";
-declare type OptsFunc = (sdk: SDK) => void;
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://autodealerdata.com"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
     /**
+     * daysSupplyDaysSupplyGet - Days worth of supply left on dealer lots
+     *
      * Average, median, standard deviation, population variance, and whole region average of the
      * days of supply left on dealer lots for a given brand and region. The average, median, stdDev, and pVar fields are calculated on
      * a dealer by dealer basis while the whole region average treats the entire region like a single dealership.
@@ -18,8 +23,10 @@ export declare class SDK {
      *
      * The available brand and region names can be retrieved from their respective endpoints.
     **/
-    DaysSupplyDaysSupplyGet(req: operations.DaysSupplyDaysSupplyGetRequest, config?: AxiosRequestConfig): Promise<operations.DaysSupplyDaysSupplyGetResponse>;
+    daysSupplyDaysSupplyGet(req: operations.DaysSupplyDaysSupplyGetRequest, config?: AxiosRequestConfig): Promise<operations.DaysSupplyDaysSupplyGetResponse>;
     /**
+     * daysToSellDaysToSellGet - Days a vehicle takes to sell
+     *
      * Average, median, standard deviation, population variance, and whole region average of the
      * number of days a vehicle spends on dealer lots for a given brand and region. The average, median, stdDev, and pVar fields are calculated on
      * a dealer by dealer basis while the whole region average treats the entire region like a single dealership.
@@ -27,65 +34,85 @@ export declare class SDK {
      *
      * The available brand and region names can be retrieved from their respective endpoints.
     **/
-    DaysToSellDaysToSellGet(req: operations.DaysToSellDaysToSellGetRequest, config?: AxiosRequestConfig): Promise<operations.DaysToSellDaysToSellGetResponse>;
+    daysToSellDaysToSellGet(req: operations.DaysToSellDaysToSellGetRequest, config?: AxiosRequestConfig): Promise<operations.DaysToSellDaysToSellGetResponse>;
     /**
+     * getAvgListPriceListPriceGet - Stats on ask price of new vehicles
+     *
      * Average, median, standard deviation, and population variance of the ask price of new vehicles over the last 15 days for a given brand and region.
      *
      * The available brand and region names can be retrieved from their respective endpoints.
     **/
-    GetAvgListPriceListPriceGet(req: operations.GetAvgListPriceListPriceGetRequest, config?: AxiosRequestConfig): Promise<operations.GetAvgListPriceListPriceGetResponse>;
+    getAvgListPriceListPriceGet(req: operations.GetAvgListPriceListPriceGetRequest, config?: AxiosRequestConfig): Promise<operations.GetAvgListPriceListPriceGetResponse>;
     /**
+     * getAvgSalePriceSalePriceGet - Stats on sale price of new vehicles
+     *
      * Average, median, standard deviation, and population variance of the sale price of new vehicles over the last 15 days for a given brand and region.
      *
      * The available brand and region names can be retrieved from their respective endpoints.
     **/
-    GetAvgSalePriceSalePriceGet(req: operations.GetAvgSalePriceSalePriceGetRequest, config?: AxiosRequestConfig): Promise<operations.GetAvgSalePriceSalePriceGetResponse>;
+    getAvgSalePriceSalePriceGet(req: operations.GetAvgSalePriceSalePriceGetRequest, config?: AxiosRequestConfig): Promise<operations.GetAvgSalePriceSalePriceGetResponse>;
     /**
+     * getBrandNamesGetBrandsGet - Get a list of brand names
+     *
      * Get vehicle brand names.
      *
      * These names are used as arguments for other endpoints. The names are generally not case sensitive
      * when used with other endpoints, but it is best practice to use the names returned by this endpoint without changes.
     **/
-    GetBrandNamesGetBrandsGet(req: operations.GetBrandNamesGetBrandsGetRequest, config?: AxiosRequestConfig): Promise<operations.GetBrandNamesGetBrandsGetResponse>;
+    getBrandNamesGetBrandsGet(req: operations.GetBrandNamesGetBrandsGetRequest, config?: AxiosRequestConfig): Promise<operations.GetBrandNamesGetBrandsGetResponse>;
     /**
+     * getDealerSalesRegionDailySalesGet - Brand sales by region and Day
+     *
      * Get regional sales by brand and day. Most recent data is typically only 2 days old for this endpoint.
      *
      * The Day field is in YYYY-MM-DD format. For example if you wanted sales data from April 5th of 2020 the day field would be '2020-04-05'
      *
      * Data availability depends on region and goes back up to 2016.
     **/
-    GetDealerSalesRegionDailySalesGet(req: operations.GetDealerSalesRegionDailySalesGetRequest, config?: AxiosRequestConfig): Promise<operations.GetDealerSalesRegionDailySalesGetResponse>;
+    getDealerSalesRegionDailySalesGet(req: operations.GetDealerSalesRegionDailySalesGetRequest, config?: AxiosRequestConfig): Promise<operations.GetDealerSalesRegionDailySalesGetResponse>;
     /**
+     * getDealerSalesRegionSalesGet - Premium. Brand sales by region and month
+     *
      * Premium. Get regional sales by brand and month, broken down by day. Most recent data is typically only 2 days old for this endpoint.
      *
      * The month field is in YYYY-MM-DD format. For example if you wanted sales data from April of 2020 the month field would be '2020-04-01'
      *
      * Data availability depends on region and goes back up to 2016.
     **/
-    GetDealerSalesRegionSalesGet(req: operations.GetDealerSalesRegionSalesGetRequest, config?: AxiosRequestConfig): Promise<operations.GetDealerSalesRegionSalesGetResponse>;
+    getDealerSalesRegionSalesGet(req: operations.GetDealerSalesRegionSalesGetRequest, config?: AxiosRequestConfig): Promise<operations.GetDealerSalesRegionSalesGetResponse>;
     /**
+     * getDealersGetDealersByIdGet - Premium. Dealers by ID
+     *
      * Premium. Dealership information using the internal ID. Returns name, address, state, zipCode, and ID for a single dealer in the same format as the /getDealers endpoint.
      * Dealer IDs are generally retrieved via the /getDealers or /getDealersByRegion endpoints.
     **/
-    GetDealersGetDealersByIdGet(req: operations.GetDealersGetDealersByIdGetRequest, config?: AxiosRequestConfig): Promise<operations.GetDealersGetDealersByIdGetResponse>;
+    getDealersGetDealersByIdGet(req: operations.GetDealersGetDealersByIdGetRequest, config?: AxiosRequestConfig): Promise<operations.GetDealersGetDealersByIdGetResponse>;
     /**
+     * getDealersGetDealersByRegionGet - Premium. Dealers in a region.
+     *
      * Premium. Dealership information in a given region. Returns name, address, state, zipCode, and IDs. Results are paginated with up to 30 results per page.
     **/
-    GetDealersGetDealersByRegionGet(req: operations.GetDealersGetDealersByRegionGetRequest, config?: AxiosRequestConfig): Promise<operations.GetDealersGetDealersByRegionGetResponse>;
+    getDealersGetDealersByRegionGet(req: operations.GetDealersGetDealersByRegionGetRequest, config?: AxiosRequestConfig): Promise<operations.GetDealersGetDealersByRegionGetResponse>;
     /**
+     * getDealersGetDealersGet - Premium. Dealers in a zip code.
+     *
      * Premium. Dealership information in a given zip code using the first 4 digits. Returns name, address, state, zipCode, and IDs.
      * For example a call with the zip code 92701 would return dealers with zip codes in the range [92700, 92709]
     **/
-    GetDealersGetDealersGet(req: operations.GetDealersGetDealersGetRequest, config?: AxiosRequestConfig): Promise<operations.GetDealersGetDealersGetResponse>;
+    getDealersGetDealersGet(req: operations.GetDealersGetDealersGetRequest, config?: AxiosRequestConfig): Promise<operations.GetDealersGetDealersGetResponse>;
     /**
+     * getHistory2VehicleHistoryGet - Premium. Simple Vehicle History Report
+     *
      * Premium. Provides a simple report detailing a vechicle's sales history at dealerships. Data includes the name of the dealership, dates it was for sale,
      * price, new/used condition, mileage, dealership state, and dealership zip code. Data availability goes back to early 2016.
      *
      * If your use case involves checking if a vehicle has appeared on the open market on or after a given date see
      * the /vehicleSeen endpoint.
     **/
-    GetHistory2VehicleHistoryGet(req: operations.GetHistory2VehicleHistoryGetRequest, config?: AxiosRequestConfig): Promise<operations.GetHistory2VehicleHistoryGetResponse>;
+    getHistory2VehicleHistoryGet(req: operations.GetHistory2VehicleHistoryGetRequest, config?: AxiosRequestConfig): Promise<operations.GetHistory2VehicleHistoryGetResponse>;
     /**
+     * getListings2Listings2Get - Flexible Listing Search
+     *
      * Generic getter for listings supporting a wide array of selection criteria. This is the new primary listing endpoint and we will phase out the older listing endpoints over time.
      * The other listing endpoints return the same data, but are more restrictive in the available geographic and vehicle selection criteria.
      *
@@ -112,42 +139,54 @@ export declare class SDK {
      *
      * Results are paginated in chunks of up to 20 vehicles. Prices are in the dealer's local currency (generally USD).
     **/
-    GetListings2Listings2Get(req: operations.GetListings2Listings2GetRequest, config?: AxiosRequestConfig): Promise<operations.GetListings2Listings2GetResponse>;
+    getListings2Listings2Get(req: operations.GetListings2Listings2GetRequest, config?: AxiosRequestConfig): Promise<operations.GetListings2Listings2GetResponse>;
     /**
+     * getListingsByDealerListingsByDateGet - Listings by Dealer ID and Date
+     *
      * See /listings2 endpoint for more flexible listing search.
      * Returns a dealer's listings over the given timespan by dealer ID. The ID can be found by calling the /getDealers endpoint.
      * Maximum time interval between startDate and endDate is 45 days.
      * Listing keys are: vin, askPrice, msrp, isNew, firstSeen, lastSeen, modelName, brandName.
      * Results are paginated in chunks of up to 20 vehicles. Prices are in the dealer's local currency (generally USD).
     **/
-    GetListingsByDealerListingsByDateGet(req: operations.GetListingsByDealerListingsByDateGetRequest, config?: AxiosRequestConfig): Promise<operations.GetListingsByDealerListingsByDateGetResponse>;
+    getListingsByDealerListingsByDateGet(req: operations.GetListingsByDealerListingsByDateGetRequest, config?: AxiosRequestConfig): Promise<operations.GetListingsByDealerListingsByDateGetResponse>;
     /**
+     * getListingsByDealerListingsGet - Listings by Dealer ID
+     *
      * See /listings2 endpoint for more flexible listing search.
      * Returns a dealer's listings over the last 45 days by dealer ID. The ID can be found by calling the /getDealers endpoint.
      * Listing keys are: vin, askPrice, msrp, isNew, firstSeen, lastSeen, modelName, brandName.
      * Results are paginated in chunks of up to 20 vehicles. Prices are in the dealer's local currency (generally USD).
     **/
-    GetListingsByDealerListingsGet(req: operations.GetListingsByDealerListingsGetRequest, config?: AxiosRequestConfig): Promise<operations.GetListingsByDealerListingsGetResponse>;
+    getListingsByDealerListingsGet(req: operations.GetListingsByDealerListingsGetRequest, config?: AxiosRequestConfig): Promise<operations.GetListingsByDealerListingsGetResponse>;
     /**
+     * getListingsByRegionAndDateListingsByRegionAndDateGet - Listings by Region and Date
+     *
      * See /listings2 endpoint for more flexible listing search.
      * Returns listings active in a region in the given date range [startdate, endDate), or in other words dates that satisfy startDate <= X < endDate. Maximum range is 45 days
      * Listing keys are: vin, askPrice, msrp, isNew, firstSeen, lastSeen, modelName, brandName.
      * Results are paginated in chunks of up to 20 vehicles. Prices are in the dealer's local currency (generally USD).
     **/
-    GetListingsByRegionAndDateListingsByRegionAndDateGet(req: operations.GetListingsByRegionAndDateListingsByRegionAndDateGetRequest, config?: AxiosRequestConfig): Promise<operations.GetListingsByRegionAndDateListingsByRegionAndDateGetResponse>;
+    getListingsByRegionAndDateListingsByRegionAndDateGet(req: operations.GetListingsByRegionAndDateListingsByRegionAndDateGetRequest, config?: AxiosRequestConfig): Promise<operations.GetListingsByRegionAndDateListingsByRegionAndDateGetResponse>;
     /**
+     * getListingsByRegionListingsByRegionGet - Listings by Region
+     *
      * See /listings2 endpoint for more flexible listing search.
      * Returns a dealer's listings over up to the last 45 days by region.
      * Listing keys are: vin, askPrice, msrp, isNew, firstSeen, lastSeen, modelName, brandName.
      * Results are paginated in chunks of up to 20 vehicles. Prices are in the dealer's local currency (generally USD).
     **/
-    GetListingsByRegionListingsByRegionGet(req: operations.GetListingsByRegionListingsByRegionGetRequest, config?: AxiosRequestConfig): Promise<operations.GetListingsByRegionListingsByRegionGetResponse>;
+    getListingsByRegionListingsByRegionGet(req: operations.GetListingsByRegionListingsByRegionGetRequest, config?: AxiosRequestConfig): Promise<operations.GetListingsByRegionListingsByRegionGetResponse>;
     /**
+     * getMarket3SimilarSalePriceGet - Premium. Simple Vehicle Market Report
+     *
      * Premium. Provides the average, stdDev, and count, of the sale price and mileage of similar new and used vehicles in a given region based off the provided VIN.
      * Optionally restricts report to vehicles of the same model year and goes back up to 120 days.
     **/
-    GetMarket3SimilarSalePriceGet(req: operations.GetMarket3SimilarSalePriceGetRequest, config?: AxiosRequestConfig): Promise<operations.GetMarket3SimilarSalePriceGetResponse>;
+    getMarket3SimilarSalePriceGet(req: operations.GetMarket3SimilarSalePriceGetRequest, config?: AxiosRequestConfig): Promise<operations.GetMarket3SimilarSalePriceGetResponse>;
     /**
+     * getModelNamesAllGetInactiveModelsGet - Get a list of model names including discontinued models
+     *
      * Get all model names including discontinued models. Because these models are no longer built, or have very poor market performance
      * they are not incuded in the normal getModels endpoint. Many users itterate through the model names with our new vehicle sales
      * endpoints and waste some of their quota making self contradictory requests. This endpoint was created to aleviate the use case where
@@ -156,45 +195,61 @@ export declare class SDK {
      * These names are used as arguments for other endpoints. The names are generally not case sensitive
      * when used with other endpoints, but it is best practice to use the names returned by this endpoint without changes.
     **/
-    GetModelNamesAllGetInactiveModelsGet(req: operations.GetModelNamesAllGetInactiveModelsGetRequest, config?: AxiosRequestConfig): Promise<operations.GetModelNamesAllGetInactiveModelsGetResponse>;
+    getModelNamesAllGetInactiveModelsGet(req: operations.GetModelNamesAllGetInactiveModelsGetRequest, config?: AxiosRequestConfig): Promise<operations.GetModelNamesAllGetInactiveModelsGetResponse>;
     /**
+     * getModelNamesGetModelsGet - Get a list of model names
+     *
      * Get brand model names for currently active models. This endpoint does not return model names that have been discontinued or have
      * sold less than 10 vehicles in the last month and a half.
      *
      * These names are used as arguments for other endpoints. The names are generally not case sensitive
      * when used with other endpoints, but it is best practice to use the names returned by this endpoint without changes.
     **/
-    GetModelNamesGetModelsGet(req: operations.GetModelNamesGetModelsGetRequest, config?: AxiosRequestConfig): Promise<operations.GetModelNamesGetModelsGetResponse>;
+    getModelNamesGetModelsGet(req: operations.GetModelNamesGetModelsGetRequest, config?: AxiosRequestConfig): Promise<operations.GetModelNamesGetModelsGetResponse>;
     /**
+     * getModelSaleBucketsSalePriceHistogramGet - Histogram of sales price of new vehicles by model
+     *
      * Histogram of the sale price of vehicles over the last 45 days for a given model and region.
      * Price buckets are grouped in units of $1000
      * The available brand, model, and region names can be retrieved from their respective endpoints.
     **/
-    GetModelSaleBucketsSalePriceHistogramGet(req: operations.GetModelSaleBucketsSalePriceHistogramGetRequest, config?: AxiosRequestConfig): Promise<operations.GetModelSaleBucketsSalePriceHistogramGetResponse>;
+    getModelSaleBucketsSalePriceHistogramGet(req: operations.GetModelSaleBucketsSalePriceHistogramGetRequest, config?: AxiosRequestConfig): Promise<operations.GetModelSaleBucketsSalePriceHistogramGetResponse>;
     /**
+     * getModelUsedDistModelYearDistGet - Used market share of model year by model
+     *
      * Market share of used vehicles over the last 45 days by model and year. All values are relative to vehicles of the same model.
      * For example: a percentOfMarket value of 25, year of 2017, and modelName of Camry means that 25% of used Camrys on the market
      * in the given region over the last 45 days were from the 2017 model year.
     **/
-    GetModelUsedDistModelYearDistGet(req: operations.GetModelUsedDistModelYearDistGetRequest, config?: AxiosRequestConfig): Promise<operations.GetModelUsedDistModelYearDistGetResponse>;
+    getModelUsedDistModelYearDistGet(req: operations.GetModelUsedDistModelYearDistGetRequest, config?: AxiosRequestConfig): Promise<operations.GetModelUsedDistModelYearDistGetResponse>;
     /**
+     * getRegionBrandMarketShareGetRegionBrandMarketShareGet - Market share of a brand in region
+     *
      * Market share of a given brand in a given region by number of vehicles sold over the last 45 days.
     **/
-    GetRegionBrandMarketShareGetRegionBrandMarketShareGet(req: operations.GetRegionBrandMarketShareGetRegionBrandMarketShareGetRequest, config?: AxiosRequestConfig): Promise<operations.GetRegionBrandMarketShareGetRegionBrandMarketShareGetResponse>;
+    getRegionBrandMarketShareGetRegionBrandMarketShareGet(req: operations.GetRegionBrandMarketShareGetRegionBrandMarketShareGetRequest, config?: AxiosRequestConfig): Promise<operations.GetRegionBrandMarketShareGetRegionBrandMarketShareGetResponse>;
     /**
+     * getRegionMarketShareGetRegionMarketShareGet - Market share of all brands in region
+     *
      * Market share of a all brands in a given region by number of vehicles sold over the last 45 days.
     **/
-    GetRegionMarketShareGetRegionMarketShareGet(req: operations.GetRegionMarketShareGetRegionMarketShareGetRequest, config?: AxiosRequestConfig): Promise<operations.GetRegionMarketShareGetRegionMarketShareGetResponse>;
+    getRegionMarketShareGetRegionMarketShareGet(req: operations.GetRegionMarketShareGetRegionMarketShareGetRequest, config?: AxiosRequestConfig): Promise<operations.GetRegionMarketShareGetRegionMarketShareGetResponse>;
     /**
+     * getRegionsGetRegionsGet - Get a list of region names
+     *
      * Get region names. These names are used as arguments for other endpoints. The names are generally not case sensitive
      * when used with other endpoints, but it is best practice to use the names returned by this endpoint without changes.
     **/
-    GetRegionsGetRegionsGet(req: operations.GetRegionsGetRegionsGetRequest, config?: AxiosRequestConfig): Promise<operations.GetRegionsGetRegionsGetResponse>;
+    getRegionsGetRegionsGet(req: operations.GetRegionsGetRegionsGetRequest, config?: AxiosRequestConfig): Promise<operations.GetRegionsGetRegionsGetResponse>;
     /**
+     * getSubUserKeysGetSubUserKeysGet - Get all Sub User Keys associated with your account.
+     *
      * Get a list of your issued SubUser API Keys. Includes active and revoked keys.
     **/
-    GetSubUserKeysGetSubUserKeysGet(req: operations.GetSubUserKeysGetSubUserKeysGetRequest, config?: AxiosRequestConfig): Promise<operations.GetSubUserKeysGetSubUserKeysGetResponse>;
+    getSubUserKeysGetSubUserKeysGet(req: operations.GetSubUserKeysGetSubUserKeysGetRequest, config?: AxiosRequestConfig): Promise<operations.GetSubUserKeysGetSubUserKeysGetResponse>;
     /**
+     * getTopModelsTopModelsGet - Top models in a given region
+     *
      * Sales ranking of different models by region over the last 45 days.
      * The <strong>percentOfTopSales</strong> value is the percent of the top seller the model represents.
      *
@@ -203,28 +258,36 @@ export declare class SDK {
      * The other fields represent the model percent of X. The <strong>brandMarketShare</strong> field is that brand's market share of the region
      * over the report's time interval.
     **/
-    GetTopModelsTopModelsGet(req: operations.GetTopModelsTopModelsGetRequest, config?: AxiosRequestConfig): Promise<operations.GetTopModelsTopModelsGetResponse>;
+    getTopModelsTopModelsGet(req: operations.GetTopModelsTopModelsGetRequest, config?: AxiosRequestConfig): Promise<operations.GetTopModelsTopModelsGetResponse>;
     /**
+     * getVehicleSeenVehicleSeenGet - Checks if a VIN appeared on the market on or after a given date.
+     *
      * Checks our database to see if we have data on a VIN that appeared on the open market on or after the given date with a True/False response.
      * This endpoint is more cost effective than the /vehicleHistory endpoint if your use case
      * requires searching a large list of vehicles with a low individual likelyhood of appearing on the open market. (For example searching for a specific stolen vehicle).
     **/
-    GetVehicleSeenVehicleSeenGet(req: operations.GetVehicleSeenVehicleSeenGetRequest, config?: AxiosRequestConfig): Promise<operations.GetVehicleSeenVehicleSeenGetResponse>;
+    getVehicleSeenVehicleSeenGet(req: operations.GetVehicleSeenVehicleSeenGetRequest, config?: AxiosRequestConfig): Promise<operations.GetVehicleSeenVehicleSeenGetResponse>;
     /**
+     * listingsByZipCodeAndDateListingsByZipCodeAndDateGet - Listings by ZipCode and Date
+     *
      * See /listings2 endpoint for more flexible listing search.
      * Returns a dealer's listings over up to the last 45 days in the provided dealership's zip code. For example 92701.
      * Listing keys are: vin, askPrice, msrp, isNew, firstSeen, lastSeen, modelName, brandName.
      * Results are paginated in chunks of up to 20 vehicles. Prices are in the dealer's local currency (generally USD).
     **/
-    ListingsByZipCodeAndDateListingsByZipCodeAndDateGet(req: operations.ListingsByZipCodeAndDateListingsByZipCodeAndDateGetRequest, config?: AxiosRequestConfig): Promise<operations.ListingsByZipCodeAndDateListingsByZipCodeAndDateGetResponse>;
+    listingsByZipCodeAndDateListingsByZipCodeAndDateGet(req: operations.ListingsByZipCodeAndDateListingsByZipCodeAndDateGetRequest, config?: AxiosRequestConfig): Promise<operations.ListingsByZipCodeAndDateListingsByZipCodeAndDateGetResponse>;
     /**
+     * listingsByZipCodeListingsByZipCodeGet - Listings by ZipCode
+     *
      * See /listings2 endpoint for more flexible listing search.
      * Returns a dealer's listings over up to the last 45 days in the provided dealerhip's zip code. For example 92701.
      * Listing keys are: vin, askPrice, msrp, isNew, firstSeen, lastSeen, modelName, brandName.
      * Results are paginated in chunks of up to 20 vehicles. Prices are in the dealer's local currency (generally USD).
     **/
-    ListingsByZipCodeListingsByZipCodeGet(req: operations.ListingsByZipCodeListingsByZipCodeGetRequest, config?: AxiosRequestConfig): Promise<operations.ListingsByZipCodeListingsByZipCodeGetResponse>;
+    listingsByZipCodeListingsByZipCodeGet(req: operations.ListingsByZipCodeListingsByZipCodeGetRequest, config?: AxiosRequestConfig): Promise<operations.ListingsByZipCodeListingsByZipCodeGetResponse>;
     /**
+     * makeSubUserKeyMakeSubUserKeyPost - Generate a Sub User Key that can be used by your users to make API calls in frontend applications.
+     *
      * This endpoint is only fully available to users with a paid plan. Users on Basic or Trial plans may only create keys valid on the "localhost" domain.
      * This endpoint creates an API key that can be embedded in frontend applications such as web pages that allow your users to directly make API calls.
      * The "endpoints" value is an array of strings that name the allowed endpoints that may be called using the Sub User Key. Passing a "*" value in the array will allow
@@ -232,8 +295,10 @@ export declare class SDK {
      * All API calls made by the Sub User Keys are billed to your account. Additionally you should not call this endpoint or the /revokeSubUserKey endpoint at a combined rate
      * higher than once per second.
     **/
-    MakeSubUserKeyMakeSubUserKeyPost(req: operations.MakeSubUserKeyMakeSubUserKeyPostRequest, config?: AxiosRequestConfig): Promise<operations.MakeSubUserKeyMakeSubUserKeyPostResponse>;
+    makeSubUserKeyMakeSubUserKeyPost(req: operations.MakeSubUserKeyMakeSubUserKeyPostRequest, config?: AxiosRequestConfig): Promise<operations.MakeSubUserKeyMakeSubUserKeyPostResponse>;
     /**
+     * makeTokenGetTokenGet - Get a JWT from your API credentials
+     *
      * This is the first function you should call.
      *
      * If you are accessing our API through a third party provider they will handle authenticating to our API for you
@@ -245,8 +310,10 @@ export declare class SDK {
      * API endpoint with a missing, invalid, or expired JWT it will return a HTTP 403 code. You would then need to call this end point
      * to get a new token.
     **/
-    MakeTokenGetTokenGet(req: operations.MakeTokenGetTokenGetRequest, config?: AxiosRequestConfig): Promise<operations.MakeTokenGetTokenGetResponse>;
+    makeTokenGetTokenGet(req: operations.MakeTokenGetTokenGetRequest, config?: AxiosRequestConfig): Promise<operations.MakeTokenGetTokenGetResponse>;
     /**
+     * makeTokenGetTokenPost - Get a JWT from your API credentials
+     *
      * This is the first function you should call.
      *
      * If you are accessing our API through a third party provider they will handle authenticating to our API for you
@@ -258,17 +325,21 @@ export declare class SDK {
      * API endpoint with a missing, invalid, or expired JWT it will return a HTTP 403 code. You would then need to call this end point
      * to get a new token.
     **/
-    MakeTokenGetTokenPost(req: operations.MakeTokenGetTokenPostRequest, config?: AxiosRequestConfig): Promise<operations.MakeTokenGetTokenPostResponse>;
+    makeTokenGetTokenPost(req: operations.MakeTokenGetTokenPostRequest, config?: AxiosRequestConfig): Promise<operations.MakeTokenGetTokenPostResponse>;
     /**
+     * revokeSubUserKeyRevokeSubUserKeyPut - Revoke a Sub User Key associated with your account.
+     *
      * Revoke a SubUser API Key with the given UUID. This action can not be undone.
     **/
-    RevokeSubUserKeyRevokeSubUserKeyPut(req: operations.RevokeSubUserKeyRevokeSubUserKeyPutRequest, config?: AxiosRequestConfig): Promise<operations.RevokeSubUserKeyRevokeSubUserKeyPutResponse>;
+    revokeSubUserKeyRevokeSubUserKeyPut(req: operations.RevokeSubUserKeyRevokeSubUserKeyPutRequest, config?: AxiosRequestConfig): Promise<operations.RevokeSubUserKeyRevokeSubUserKeyPutResponse>;
     /**
+     * vinDecodeVinDecodeGet - Vin decoder and Recall Info
+     *
      * Decodes the provided North American vin and provides recall information if available.
      * We require at least the first 12 out of 17 characters in the vin to attempt a decode. The vin is not case sensitive.
      * If passEmpty (default False) is True we will also include the empty fields in the response json.
      * If includeRecall (default True) is True we will include recall data reported to the NHTSA. Set False for a faster response.
     **/
-    VinDecodeVinDecodeGet(req: operations.VinDecodeVinDecodeGetRequest, config?: AxiosRequestConfig): Promise<operations.VinDecodeVinDecodeGetResponse>;
+    vinDecodeVinDecodeGet(req: operations.VinDecodeVinDecodeGetRequest, config?: AxiosRequestConfig): Promise<operations.VinDecodeVinDecodeGetResponse>;
 }
 export {};

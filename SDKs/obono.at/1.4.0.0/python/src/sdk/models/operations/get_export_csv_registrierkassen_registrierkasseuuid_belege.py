@@ -4,7 +4,7 @@ from typing import Optional
 
 @dataclass
 class GetExportCsvRegistrierkassenRegistrierkasseUUIDBelegePathParams:
-    registrierkasse_uuid: str = field(default=None, metadata={'path_param': { 'field_name': 'registrierkasseUuid', 'style': 'simple', 'explode': False }})
+    registrierkasse_uuid: str = field(metadata={'path_param': { 'field_name': 'registrierkasseUuid', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,12 +16,12 @@ class GetExportCsvRegistrierkassenRegistrierkasseUUIDBelegeQueryParams:
 
 @dataclass
 class GetExportCsvRegistrierkassenRegistrierkasseUUIDBelegeRequest:
-    path_params: GetExportCsvRegistrierkassenRegistrierkasseUUIDBelegePathParams = field(default=None)
-    query_params: GetExportCsvRegistrierkassenRegistrierkasseUUIDBelegeQueryParams = field(default=None)
+    path_params: GetExportCsvRegistrierkassenRegistrierkasseUUIDBelegePathParams = field()
+    query_params: GetExportCsvRegistrierkassenRegistrierkasseUUIDBelegeQueryParams = field()
     
 
 @dataclass
 class GetExportCsvRegistrierkassenRegistrierkasseUUIDBelegeResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

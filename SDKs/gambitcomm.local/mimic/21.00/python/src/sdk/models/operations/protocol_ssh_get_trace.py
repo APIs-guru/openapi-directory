@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class ProtocolSSHGetTracePathParams:
-    agent_num: int = field(default=None, metadata={'path_param': { 'field_name': 'agentNum', 'style': 'simple', 'explode': False }})
+    agent_num: int = field(metadata={'path_param': { 'field_name': 'agentNum', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ProtocolSSHGetTraceRequest:
-    path_params: ProtocolSSHGetTracePathParams = field(default=None)
+    path_params: ProtocolSSHGetTracePathParams = field()
     
 
 @dataclass
 class ProtocolSSHGetTraceResponse:
+    content_type: str = field()
+    status_code: int = field()
     config_ssh: Optional[shared.ConfigSSH] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

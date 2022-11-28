@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ResourceShare
+// Describes a resource share.
 type ResourceShare struct {
 	AllowExternalPrincipals *bool                        `json:"allowExternalPrincipals,omitempty"`
 	CreationTime            *time.Time                   `json:"creationTime,omitempty"`

@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AndroidenterpriseGrouplicensesGetPathParams:
-    enterprise_id: str = field(default=None, metadata={'path_param': { 'field_name': 'enterpriseId', 'style': 'simple', 'explode': False }})
-    group_license_id: str = field(default=None, metadata={'path_param': { 'field_name': 'groupLicenseId', 'style': 'simple', 'explode': False }})
+    enterprise_id: str = field(metadata={'path_param': { 'field_name': 'enterpriseId', 'style': 'simple', 'explode': False }})
+    group_license_id: str = field(metadata={'path_param': { 'field_name': 'groupLicenseId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +27,20 @@ class AndroidenterpriseGrouplicensesGetQueryParams:
 
 @dataclass
 class AndroidenterpriseGrouplicensesGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AndroidenterpriseGrouplicensesGetRequest:
-    path_params: AndroidenterpriseGrouplicensesGetPathParams = field(default=None)
-    query_params: AndroidenterpriseGrouplicensesGetQueryParams = field(default=None)
-    security: AndroidenterpriseGrouplicensesGetSecurity = field(default=None)
+    path_params: AndroidenterpriseGrouplicensesGetPathParams = field()
+    query_params: AndroidenterpriseGrouplicensesGetQueryParams = field()
+    security: AndroidenterpriseGrouplicensesGetSecurity = field()
     
 
 @dataclass
 class AndroidenterpriseGrouplicensesGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     group_license: Optional[shared.GroupLicense] = field(default=None)
-    status_code: int = field(default=None)
     

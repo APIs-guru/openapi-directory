@@ -1,5 +1,7 @@
 package shared
 
+// RedshiftDatasetDefinition
+// Configuration for Redshift Dataset Definition input.
 type RedshiftDatasetDefinition struct {
 	ClusterID         string                             `json:"ClusterId"`
 	ClusterRoleArn    string                             `json:"ClusterRoleArn"`

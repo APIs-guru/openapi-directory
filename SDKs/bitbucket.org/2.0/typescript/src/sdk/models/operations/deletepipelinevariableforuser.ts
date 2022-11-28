@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeletePipelineVariableForUserPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=selected_user" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=selected_user" })
   selectedUser: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=variable_uuid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=variable_uuid" })
   variableUuid: string;
 }
 
 
 export class DeletePipelineVariableForUserRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DeletePipelineVariableForUserPathParams;
 }
 
 
 export class DeletePipelineVariableForUserResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: Map<string, any>;
 }

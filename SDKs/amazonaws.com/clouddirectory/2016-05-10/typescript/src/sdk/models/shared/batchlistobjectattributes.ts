@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SchemaFacet } from "./schemafacet";
 import { ObjectReference } from "./objectreference";
+
 
 
 // BatchListObjectAttributes
@@ -8,15 +9,15 @@ import { ObjectReference } from "./objectreference";
  * Represents the output of a <a>ListObjectAttributes</a> operation.
 **/
 export class BatchListObjectAttributes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FacetFilter" })
+  @SpeakeasyMetadata({ data: "json, name=FacetFilter" })
   facetFilter?: SchemaFacet;
 
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=ObjectReference" })
+  @SpeakeasyMetadata({ data: "json, name=ObjectReference" })
   objectReference: ObjectReference;
 }

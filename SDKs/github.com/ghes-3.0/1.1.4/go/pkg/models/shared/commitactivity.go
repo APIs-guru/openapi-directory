@@ -1,5 +1,7 @@
 package shared
 
+// CommitActivity
+// Commit Activity
 type CommitActivity struct {
 	Days  []int64 `json:"days"`
 	Total int64   `json:"total"`

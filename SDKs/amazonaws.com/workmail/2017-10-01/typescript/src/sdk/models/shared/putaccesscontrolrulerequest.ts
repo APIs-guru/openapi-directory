@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccessControlRuleEffectEnum } from "./accesscontrolruleeffectenum";
 
 
+
 export class PutAccessControlRuleRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Actions" })
+  @SpeakeasyMetadata({ data: "json, name=Actions" })
   actions?: string[];
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description: string;
 
-  @Metadata({ data: "json, name=Effect" })
+  @SpeakeasyMetadata({ data: "json, name=Effect" })
   effect: AccessControlRuleEffectEnum;
 
-  @Metadata({ data: "json, name=IpRanges" })
+  @SpeakeasyMetadata({ data: "json, name=IpRanges" })
   ipRanges?: string[];
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 
-  @Metadata({ data: "json, name=NotActions" })
+  @SpeakeasyMetadata({ data: "json, name=NotActions" })
   notActions?: string[];
 
-  @Metadata({ data: "json, name=NotIpRanges" })
+  @SpeakeasyMetadata({ data: "json, name=NotIpRanges" })
   notIpRanges?: string[];
 
-  @Metadata({ data: "json, name=NotUserIds" })
+  @SpeakeasyMetadata({ data: "json, name=NotUserIds" })
   notUserIds?: string[];
 
-  @Metadata({ data: "json, name=OrganizationId" })
+  @SpeakeasyMetadata({ data: "json, name=OrganizationId" })
   organizationId: string;
 
-  @Metadata({ data: "json, name=UserIds" })
+  @SpeakeasyMetadata({ data: "json, name=UserIds" })
   userIds?: string[];
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetCreateCustomVerificationEmailTemplateActionEnum {
     CreateCustomVerificationEmailTemplate = "CreateCustomVerificationEmailTemplate"
@@ -10,72 +11,72 @@ export enum GetCreateCustomVerificationEmailTemplateVersionEnum {
 
 
 export class GetCreateCustomVerificationEmailTemplateQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Action" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" })
   action: GetCreateCustomVerificationEmailTemplateActionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=FailureRedirectionURL" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=FailureRedirectionURL" })
   failureRedirectionUrl: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=FromEmailAddress" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=FromEmailAddress" })
   fromEmailAddress: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=SuccessRedirectionURL" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=SuccessRedirectionURL" })
   successRedirectionUrl: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=TemplateContent" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=TemplateContent" })
   templateContent: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=TemplateName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=TemplateName" })
   templateName: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=TemplateSubject" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=TemplateSubject" })
   templateSubject: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" })
   version: GetCreateCustomVerificationEmailTemplateVersionEnum;
 }
 
 
 export class GetCreateCustomVerificationEmailTemplateHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class GetCreateCustomVerificationEmailTemplateRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetCreateCustomVerificationEmailTemplateQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetCreateCustomVerificationEmailTemplateHeaders;
 }
 
 
 export class GetCreateCustomVerificationEmailTemplateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

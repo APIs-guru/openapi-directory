@@ -4,7 +4,7 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-var RecordConversationServers = []string{
+var RecordConversationServerList = []string{
 	"https://api.nexmo.com/v1",
 }
 

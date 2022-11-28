@@ -1,38 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class BurnTokenRequestBurn extends SpeakeasyBase {
-  @Metadata({ data: "json, name=amount" })
+  @SpeakeasyMetadata({ data: "json, name=amount" })
   amount?: number;
 
-  @Metadata({ data: "json, name=tokenId" })
+  @SpeakeasyMetadata({ data: "json, name=tokenId" })
   tokenId?: string;
 }
 
 
 export class BurnTokenRequestTransfer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=address" })
+  @SpeakeasyMetadata({ data: "json, name=address" })
   address?: string;
 
-  @Metadata({ data: "json, name=amount" })
+  @SpeakeasyMetadata({ data: "json, name=amount" })
   amount?: number;
 
-  @Metadata({ data: "json, name=tokenId" })
+  @SpeakeasyMetadata({ data: "json, name=tokenId" })
   tokenId?: string;
 }
 
 
 export class BurnTokenRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=burn", elemType: shared.BurnTokenRequestBurn })
+  @SpeakeasyMetadata({ data: "json, name=burn", elemType: BurnTokenRequestBurn })
   burn: BurnTokenRequestBurn[];
 
-  @Metadata({ data: "json, name=fee" })
+  @SpeakeasyMetadata({ data: "json, name=fee" })
   fee: number;
 
-  @Metadata({ data: "json, name=from" })
+  @SpeakeasyMetadata({ data: "json, name=from" })
   from?: string[];
 
-  @Metadata({ data: "json, name=transfer", elemType: shared.BurnTokenRequestTransfer })
+  @SpeakeasyMetadata({ data: "json, name=transfer", elemType: BurnTokenRequestTransfer })
   transfer?: BurnTokenRequestTransfer[];
 }

@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SearchFacesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CollectionId" })
+  @SpeakeasyMetadata({ data: "json, name=CollectionId" })
   collectionId: string;
 
-  @Metadata({ data: "json, name=FaceId" })
+  @SpeakeasyMetadata({ data: "json, name=FaceId" })
   faceId: string;
 
-  @Metadata({ data: "json, name=FaceMatchThreshold" })
+  @SpeakeasyMetadata({ data: "json, name=FaceMatchThreshold" })
   faceMatchThreshold?: number;
 
-  @Metadata({ data: "json, name=MaxFaces" })
+  @SpeakeasyMetadata({ data: "json, name=MaxFaces" })
   maxFaces?: number;
 }

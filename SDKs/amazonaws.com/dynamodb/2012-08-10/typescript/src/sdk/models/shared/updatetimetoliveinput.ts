@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TimeToLiveSpecification } from "./timetolivespecification";
+
 
 
 // UpdateTimeToLiveInput
@@ -7,9 +8,9 @@ import { TimeToLiveSpecification } from "./timetolivespecification";
  * Represents the input of an <code>UpdateTimeToLive</code> operation.
 **/
 export class UpdateTimeToLiveInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=TableName" })
+  @SpeakeasyMetadata({ data: "json, name=TableName" })
   tableName: string;
 
-  @Metadata({ data: "json, name=TimeToLiveSpecification" })
+  @SpeakeasyMetadata({ data: "json, name=TimeToLiveSpecification" })
   timeToLiveSpecification: TimeToLiveSpecification;
 }

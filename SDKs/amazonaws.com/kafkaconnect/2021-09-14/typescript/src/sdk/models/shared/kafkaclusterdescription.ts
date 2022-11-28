@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApacheKafkaClusterDescription } from "./apachekafkaclusterdescription";
+
 
 
 // KafkaClusterDescription
@@ -7,6 +8,6 @@ import { ApacheKafkaClusterDescription } from "./apachekafkaclusterdescription";
  * Details of how to connect to the Apache Kafka cluster.
 **/
 export class KafkaClusterDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=apacheKafkaCluster" })
+  @SpeakeasyMetadata({ data: "json, name=apacheKafkaCluster" })
   apacheKafkaCluster?: ApacheKafkaClusterDescription;
 }

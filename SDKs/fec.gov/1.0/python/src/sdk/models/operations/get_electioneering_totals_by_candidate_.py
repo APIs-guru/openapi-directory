@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetElectioneeringTotalsByCandidateQueryParams:
-    api_key: str = field(default=None, metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
+    api_key: str = field(metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
     candidate_id: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'candidate_id', 'style': 'form', 'explode': True }})
     cycle: Optional[List[int]] = field(default=None, metadata={'query_param': { 'field_name': 'cycle', 'style': 'form', 'explode': True }})
     election_full: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'election_full', 'style': 'form', 'explode': True }})
@@ -19,12 +22,12 @@ class GetElectioneeringTotalsByCandidateQueryParams:
 
 @dataclass
 class GetElectioneeringTotalsByCandidateRequest:
-    query_params: GetElectioneeringTotalsByCandidateQueryParams = field(default=None)
+    query_params: GetElectioneeringTotalsByCandidateQueryParams = field()
     
 
 @dataclass
 class GetElectioneeringTotalsByCandidateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     ec_totals_by_candidate_page: Optional[shared.EcTotalsByCandidatePage] = field(default=None)
-    status_code: int = field(default=None)
     

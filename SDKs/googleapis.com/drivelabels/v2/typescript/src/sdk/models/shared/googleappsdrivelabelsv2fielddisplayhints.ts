@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleAppsDriveLabelsV2FieldDisplayHints
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * UI display hints for rendering a field.
 **/
 export class GoogleAppsDriveLabelsV2FieldDisplayHints extends SpeakeasyBase {
-  @Metadata({ data: "json, name=disabled" })
+  @SpeakeasyMetadata({ data: "json, name=disabled" })
   disabled?: boolean;
 
-  @Metadata({ data: "json, name=hiddenInSearch" })
+  @SpeakeasyMetadata({ data: "json, name=hiddenInSearch" })
   hiddenInSearch?: boolean;
 
-  @Metadata({ data: "json, name=required" })
+  @SpeakeasyMetadata({ data: "json, name=required" })
   required?: boolean;
 
-  @Metadata({ data: "json, name=shownInApply" })
+  @SpeakeasyMetadata({ data: "json, name=shownInApply" })
   shownInApply?: boolean;
 }

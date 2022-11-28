@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetListEntitiesForPolicyActionEnum(str, Enum):
     LIST_ENTITIES_FOR_POLICY = "ListEntitiesForPolicy"
@@ -21,14 +25,14 @@ class GetListEntitiesForPolicyVersionEnum(str, Enum):
 
 @dataclass
 class GetListEntitiesForPolicyQueryParams:
-    action: GetListEntitiesForPolicyActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetListEntitiesForPolicyActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    policy_arn: str = field(metadata={'query_param': { 'field_name': 'PolicyArn', 'style': 'form', 'explode': True }})
+    version: GetListEntitiesForPolicyVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     entity_filter: Optional[GetListEntitiesForPolicyEntityFilterEnum] = field(default=None, metadata={'query_param': { 'field_name': 'EntityFilter', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
     max_items: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxItems', 'style': 'form', 'explode': True }})
     path_prefix: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'PathPrefix', 'style': 'form', 'explode': True }})
-    policy_arn: str = field(default=None, metadata={'query_param': { 'field_name': 'PolicyArn', 'style': 'form', 'explode': True }})
     policy_usage_filter: Optional[GetListEntitiesForPolicyPolicyUsageFilterEnum] = field(default=None, metadata={'query_param': { 'field_name': 'PolicyUsageFilter', 'style': 'form', 'explode': True }})
-    version: GetListEntitiesForPolicyVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -44,13 +48,13 @@ class GetListEntitiesForPolicyHeaders:
 
 @dataclass
 class GetListEntitiesForPolicyRequest:
-    query_params: GetListEntitiesForPolicyQueryParams = field(default=None)
-    headers: GetListEntitiesForPolicyHeaders = field(default=None)
+    headers: GetListEntitiesForPolicyHeaders = field()
+    query_params: GetListEntitiesForPolicyQueryParams = field()
     
 
 @dataclass
 class GetListEntitiesForPolicyResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RuntimeAcceleratorConfig } from "./runtimeacceleratorconfig";
 // SwitchRuntimeRequest
 /**
@@ -34,15 +34,15 @@ var SwitchRuntimeRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=acceleratorConfig" }),
+        SpeakeasyMetadata({ data: "json, name=acceleratorConfig" }),
         __metadata("design:type", RuntimeAcceleratorConfig)
     ], SwitchRuntimeRequest.prototype, "acceleratorConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=machineType" }),
+        SpeakeasyMetadata({ data: "json, name=machineType" }),
         __metadata("design:type", String)
     ], SwitchRuntimeRequest.prototype, "machineType", void 0);
     __decorate([
-        Metadata({ data: "json, name=requestId" }),
+        SpeakeasyMetadata({ data: "json, name=requestId" }),
         __metadata("design:type", String)
     ], SwitchRuntimeRequest.prototype, "requestId", void 0);
     return SwitchRuntimeRequest;

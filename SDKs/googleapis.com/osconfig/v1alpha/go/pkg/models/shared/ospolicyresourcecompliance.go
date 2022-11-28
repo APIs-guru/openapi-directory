@@ -10,6 +10,8 @@ const (
 	OsPolicyResourceComplianceStateEnumNoOsPoliciesApplicable             OsPolicyResourceComplianceStateEnum = "NO_OS_POLICIES_APPLICABLE"
 )
 
+// OsPolicyResourceCompliance
+// Compliance data for an OS policy resource.
 type OsPolicyResourceCompliance struct {
 	ConfigSteps        []OsPolicyResourceConfigStep                  `json:"configSteps,omitempty"`
 	ExecResourceOutput *OsPolicyResourceComplianceExecResourceOutput `json:"execResourceOutput,omitempty"`

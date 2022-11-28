@@ -28,6 +28,8 @@ type ListObjectPoliciesHeaders struct {
 	XAmzDataPartition    string                                      `header:"style=simple,explode=false,name=x-amz-data-partition"`
 }
 
+// ListObjectPoliciesRequestBodyObjectReference
+// The reference that identifies an object.
 type ListObjectPoliciesRequestBodyObjectReference struct {
 	Selector *string `json:"Selector,omitempty"`
 }

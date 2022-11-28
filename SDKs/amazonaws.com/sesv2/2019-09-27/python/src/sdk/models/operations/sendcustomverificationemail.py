@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,27 +22,27 @@ class SendCustomVerificationEmailHeaders:
 @dataclass_json
 @dataclass
 class SendCustomVerificationEmailRequestBody:
-    configuration_set_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ConfigurationSetName' }})
-    email_address: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EmailAddress' }})
-    template_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TemplateName' }})
+    email_address: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('EmailAddress') }})
+    template_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('TemplateName') }})
+    configuration_set_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ConfigurationSetName') }})
     
 
 @dataclass
 class SendCustomVerificationEmailRequest:
-    headers: SendCustomVerificationEmailHeaders = field(default=None)
-    request: SendCustomVerificationEmailRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: SendCustomVerificationEmailHeaders = field()
+    request: SendCustomVerificationEmailRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class SendCustomVerificationEmailResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     mail_from_domain_not_verified_exception: Optional[Any] = field(default=None)
     message_rejected: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
     send_custom_verification_email_response: Optional[shared.SendCustomVerificationEmailResponse] = field(default=None)
     sending_paused_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

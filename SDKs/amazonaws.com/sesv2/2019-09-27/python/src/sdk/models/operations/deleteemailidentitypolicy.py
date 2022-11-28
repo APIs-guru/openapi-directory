@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteEmailIdentityPolicyPathParams:
-    email_identity: str = field(default=None, metadata={'path_param': { 'field_name': 'EmailIdentity', 'style': 'simple', 'explode': False }})
-    policy_name: str = field(default=None, metadata={'path_param': { 'field_name': 'PolicyName', 'style': 'simple', 'explode': False }})
+    email_identity: str = field(metadata={'path_param': { 'field_name': 'EmailIdentity', 'style': 'simple', 'explode': False }})
+    policy_name: str = field(metadata={'path_param': { 'field_name': 'PolicyName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,16 +24,16 @@ class DeleteEmailIdentityPolicyHeaders:
 
 @dataclass
 class DeleteEmailIdentityPolicyRequest:
-    path_params: DeleteEmailIdentityPolicyPathParams = field(default=None)
-    headers: DeleteEmailIdentityPolicyHeaders = field(default=None)
+    headers: DeleteEmailIdentityPolicyHeaders = field()
+    path_params: DeleteEmailIdentityPolicyPathParams = field()
     
 
 @dataclass
 class DeleteEmailIdentityPolicyResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     delete_email_identity_policy_response: Optional[dict[str, Any]] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

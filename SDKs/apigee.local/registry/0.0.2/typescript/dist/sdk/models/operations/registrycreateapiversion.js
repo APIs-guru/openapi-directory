@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var RegistryCreateApiVersionPathParams = /** @class */ (function (_super) {
     __extends(RegistryCreateApiVersionPathParams, _super);
     function RegistryCreateApiVersionPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=api" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=api" }),
         __metadata("design:type", String)
     ], RegistryCreateApiVersionPathParams.prototype, "api", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=project" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=project" }),
         __metadata("design:type", String)
     ], RegistryCreateApiVersionPathParams.prototype, "project", void 0);
     return RegistryCreateApiVersionPathParams;
@@ -45,7 +45,7 @@ var RegistryCreateApiVersionQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=api_version_id" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_version_id" }),
         __metadata("design:type", String)
     ], RegistryCreateApiVersionQueryParams.prototype, "apiVersionId", void 0);
     return RegistryCreateApiVersionQueryParams;
@@ -57,15 +57,15 @@ var RegistryCreateApiVersionRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", RegistryCreateApiVersionPathParams)
     ], RegistryCreateApiVersionRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", RegistryCreateApiVersionQueryParams)
     ], RegistryCreateApiVersionRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", Object)
     ], RegistryCreateApiVersionRequest.prototype, "request", void 0);
     return RegistryCreateApiVersionRequest;
@@ -77,15 +77,15 @@ var RegistryCreateApiVersionResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], RegistryCreateApiVersionResponse.prototype, "apiVersion", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], RegistryCreateApiVersionResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], RegistryCreateApiVersionResponse.prototype, "statusCode", void 0);
     return RegistryCreateApiVersionResponse;

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConformancePackComplianceTypeEnum } from "./conformancepackcompliancetypeenum";
+
 
 
 // ConformancePackComplianceSummary
@@ -7,9 +8,9 @@ import { ConformancePackComplianceTypeEnum } from "./conformancepackcompliancety
  * Summary includes the name and status of the conformance pack.
 **/
 export class ConformancePackComplianceSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConformancePackComplianceStatus" })
+  @SpeakeasyMetadata({ data: "json, name=ConformancePackComplianceStatus" })
   conformancePackComplianceStatus: ConformancePackComplianceTypeEnum;
 
-  @Metadata({ data: "json, name=ConformancePackName" })
+  @SpeakeasyMetadata({ data: "json, name=ConformancePackName" })
   conformancePackName: string;
 }

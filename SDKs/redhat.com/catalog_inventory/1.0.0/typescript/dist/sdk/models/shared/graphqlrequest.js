@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GraphQlRequest = /** @class */ (function (_super) {
     __extends(GraphQlRequest, _super);
     function GraphQlRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=operationName" }),
+        SpeakeasyMetadata({ data: "json, name=operationName" }),
         __metadata("design:type", String)
     ], GraphQlRequest.prototype, "operationName", void 0);
     __decorate([
-        Metadata({ data: "json, name=query" }),
+        SpeakeasyMetadata({ data: "json, name=query" }),
         __metadata("design:type", String)
     ], GraphQlRequest.prototype, "query", void 0);
     __decorate([
-        Metadata({ data: "json, name=variables" }),
+        SpeakeasyMetadata({ data: "json, name=variables" }),
         __metadata("design:type", Map)
     ], GraphQlRequest.prototype, "variables", void 0);
     return GraphQlRequest;

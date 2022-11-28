@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostSetIPAddressTypeActionEnum(str, Enum):
     SET_IP_ADDRESS_TYPE = "SetIpAddressType"
@@ -10,8 +14,8 @@ class PostSetIPAddressTypeVersionEnum(str, Enum):
 
 @dataclass
 class PostSetIPAddressTypeQueryParams:
-    action: PostSetIPAddressTypeActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostSetIPAddressTypeVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostSetIPAddressTypeActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostSetIPAddressTypeVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostSetIPAddressTypeHeaders:
 
 @dataclass
 class PostSetIPAddressTypeRequest:
-    query_params: PostSetIPAddressTypeQueryParams = field(default=None)
-    headers: PostSetIPAddressTypeHeaders = field(default=None)
+    headers: PostSetIPAddressTypeHeaders = field()
+    query_params: PostSetIPAddressTypeQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostSetIPAddressTypeResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

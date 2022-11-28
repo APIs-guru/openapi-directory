@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://obono.at/api/v1",
 }
 
@@ -19,9 +19,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -32,33 +36,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// GetAuth - Request a JWT access token using your obono username and password.
 func (s *SDK) GetAuth(ctx context.Context, request operations.GetAuthRequest) (*operations.GetAuthResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/auth"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -66,7 +92,7 @@ func (s *SDK) GetAuth(ctx context.Context, request operations.GetAuthRequest) (*
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -96,8 +122,9 @@ func (s *SDK) GetAuth(ctx context.Context, request operations.GetAuthRequest) (*
 	return res, nil
 }
 
+// GetBelegeBelegUUID - Retrieves a particular `Beleg` from the "Datenerfassungsprotokoll".
 func (s *SDK) GetBelegeBelegUUID(ctx context.Context, request operations.GetBelegeBelegUUIDRequest) (*operations.GetBelegeBelegUUIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/belege/{belegUuid}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -105,7 +132,7 @@ func (s *SDK) GetBelegeBelegUUID(ctx context.Context, request operations.GetBele
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -137,7 +164,7 @@ func (s *SDK) GetBelegeBelegUUID(ctx context.Context, request operations.GetBele
 }
 
 func (s *SDK) GetExportCsvRegistrierkassenRegistrierkasseUUIDBelege(ctx context.Context, request operations.GetExportCsvRegistrierkassenRegistrierkasseUUIDBelegeRequest) (*operations.GetExportCsvRegistrierkassenRegistrierkasseUUIDBelegeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/export/csv/registrierkassen/{registrierkasseUuid}/belege", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -147,7 +174,7 @@ func (s *SDK) GetExportCsvRegistrierkassenRegistrierkasseUUIDBelege(ctx context.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -169,7 +196,7 @@ func (s *SDK) GetExportCsvRegistrierkassenRegistrierkasseUUIDBelege(ctx context.
 }
 
 func (s *SDK) GetExportDep131RegistrierkassenRegistrierkasseUUIDBelege(ctx context.Context, request operations.GetExportDep131RegistrierkassenRegistrierkasseUUIDBelegeRequest) (*operations.GetExportDep131RegistrierkassenRegistrierkasseUUIDBelegeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/export/dep131/registrierkassen/{registrierkasseUuid}/belege", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -179,7 +206,7 @@ func (s *SDK) GetExportDep131RegistrierkassenRegistrierkasseUUIDBelege(ctx conte
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -201,7 +228,7 @@ func (s *SDK) GetExportDep131RegistrierkassenRegistrierkasseUUIDBelege(ctx conte
 }
 
 func (s *SDK) GetExportDep7RegistrierkassenRegistrierkasseUUIDBelege(ctx context.Context, request operations.GetExportDep7RegistrierkassenRegistrierkasseUUIDBelegeRequest) (*operations.GetExportDep7RegistrierkassenRegistrierkasseUUIDBelegeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/export/dep7/registrierkassen/{registrierkasseUuid}/belege", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -211,7 +238,7 @@ func (s *SDK) GetExportDep7RegistrierkassenRegistrierkasseUUIDBelege(ctx context
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -233,7 +260,7 @@ func (s *SDK) GetExportDep7RegistrierkassenRegistrierkasseUUIDBelege(ctx context
 }
 
 func (s *SDK) GetExportGobdRegistrierkassenRegistrierkasseUUID(ctx context.Context, request operations.GetExportGobdRegistrierkassenRegistrierkasseUUIDRequest) (*operations.GetExportGobdRegistrierkassenRegistrierkasseUUIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/export/gobd/registrierkassen/{registrierkasseUuid}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -243,7 +270,7 @@ func (s *SDK) GetExportGobdRegistrierkassenRegistrierkasseUUID(ctx context.Conte
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -265,7 +292,7 @@ func (s *SDK) GetExportGobdRegistrierkassenRegistrierkasseUUID(ctx context.Conte
 }
 
 func (s *SDK) GetExportHTMLBelegeBelegUUID(ctx context.Context, request operations.GetExportHTMLBelegeBelegUUIDRequest) (*operations.GetExportHTMLBelegeBelegUUIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/export/html/belege/{belegUuid}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -273,7 +300,7 @@ func (s *SDK) GetExportHTMLBelegeBelegUUID(ctx context.Context, request operatio
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -295,7 +322,7 @@ func (s *SDK) GetExportHTMLBelegeBelegUUID(ctx context.Context, request operatio
 }
 
 func (s *SDK) GetExportPdfBelegeBelegUUID(ctx context.Context, request operations.GetExportPdfBelegeBelegUUIDRequest) (*operations.GetExportPdfBelegeBelegUUIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/export/pdf/belege/{belegUuid}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -303,7 +330,7 @@ func (s *SDK) GetExportPdfBelegeBelegUUID(ctx context.Context, request operation
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -325,7 +352,7 @@ func (s *SDK) GetExportPdfBelegeBelegUUID(ctx context.Context, request operation
 }
 
 func (s *SDK) GetExportQrBelegeBelegUUID(ctx context.Context, request operations.GetExportQrBelegeBelegUUIDRequest) (*operations.GetExportQrBelegeBelegUUIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/export/qr/belege/{belegUuid}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -333,7 +360,7 @@ func (s *SDK) GetExportQrBelegeBelegUUID(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -355,7 +382,7 @@ func (s *SDK) GetExportQrBelegeBelegUUID(ctx context.Context, request operations
 }
 
 func (s *SDK) GetExportThermalPrintBelegeBelegUUID(ctx context.Context, request operations.GetExportThermalPrintBelegeBelegUUIDRequest) (*operations.GetExportThermalPrintBelegeBelegUUIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/export/thermal-print/belege/{belegUuid}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -365,7 +392,7 @@ func (s *SDK) GetExportThermalPrintBelegeBelegUUID(ctx context.Context, request 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -387,7 +414,7 @@ func (s *SDK) GetExportThermalPrintBelegeBelegUUID(ctx context.Context, request 
 }
 
 func (s *SDK) GetExportXlsRegistrierkassenRegistrierkasseUUIDBelege(ctx context.Context, request operations.GetExportXlsRegistrierkassenRegistrierkasseUUIDBelegeRequest) (*operations.GetExportXlsRegistrierkassenRegistrierkasseUUIDBelegeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/export/xls/registrierkassen/{registrierkasseUuid}/belege", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -397,7 +424,7 @@ func (s *SDK) GetExportXlsRegistrierkassenRegistrierkasseUUIDBelege(ctx context.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -418,8 +445,9 @@ func (s *SDK) GetExportXlsRegistrierkassenRegistrierkasseUUIDBelege(ctx context.
 	return res, nil
 }
 
+// AddBeleg - Signs a receipt and stores it in the "Datenerfassungsprotokoll".
 func (s *SDK) AddBeleg(ctx context.Context, request operations.AddBelegRequest) (*operations.AddBelegResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/registrierkassen/{registrierkasseUuid}/belege/{belegUuid}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -437,7 +465,7 @@ func (s *SDK) AddBeleg(ctx context.Context, request operations.AddBelegRequest) 
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -466,8 +494,9 @@ func (s *SDK) AddBeleg(ctx context.Context, request operations.AddBelegRequest) 
 	return res, nil
 }
 
+// CreateAbschluss - Generates an `Abschlussbeleg`.
 func (s *SDK) CreateAbschluss(ctx context.Context, request operations.CreateAbschlussRequest) (*operations.CreateAbschlussResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/registrierkassen/{registrierkasseUuid}/abschluss", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -485,7 +514,7 @@ func (s *SDK) CreateAbschluss(ctx context.Context, request operations.CreateAbsc
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -507,8 +536,9 @@ func (s *SDK) CreateAbschluss(ctx context.Context, request operations.CreateAbsc
 	return res, nil
 }
 
+// GetBeleg - Retrieves a particular `Beleg` from the "Datenerfassungsprotokoll".
 func (s *SDK) GetBeleg(ctx context.Context, request operations.GetBelegRequest) (*operations.GetBelegResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/registrierkassen/{registrierkasseUuid}/belege/{belegUuid}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -516,7 +546,7 @@ func (s *SDK) GetBeleg(ctx context.Context, request operations.GetBelegRequest) 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -547,8 +577,9 @@ func (s *SDK) GetBeleg(ctx context.Context, request operations.GetBelegRequest) 
 	return res, nil
 }
 
+// GetBelege - Retrieves the `Beleg` collection from the "Datenerfassungsprotokoll".
 func (s *SDK) GetBelege(ctx context.Context, request operations.GetBelegeRequest) (*operations.GetBelegeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/registrierkassen/{registrierkasseUuid}/belege", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -558,7 +589,7 @@ func (s *SDK) GetBelege(ctx context.Context, request operations.GetBelegeRequest
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -588,8 +619,9 @@ func (s *SDK) GetBelege(ctx context.Context, request operations.GetBelegeRequest
 	return res, nil
 }
 
+// GetDep - Generates a DEP file.
 func (s *SDK) GetDep(ctx context.Context, request operations.GetDepRequest) (*operations.GetDepResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/registrierkassen/{registrierkasseUuid}/dep", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -597,7 +629,7 @@ func (s *SDK) GetDep(ctx context.Context, request operations.GetDepRequest) (*op
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -618,8 +650,9 @@ func (s *SDK) GetDep(ctx context.Context, request operations.GetDepRequest) (*op
 	return res, nil
 }
 
+// GetMonatsbelege - Returns a list of `Monatsbelege`.
 func (s *SDK) GetMonatsbelege(ctx context.Context, request operations.GetMonatsbelegeRequest) (*operations.GetMonatsbelegeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/registrierkassen/{registrierkasseUuid}/monatsbelege", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -629,7 +662,7 @@ func (s *SDK) GetMonatsbelege(ctx context.Context, request operations.GetMonatsb
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -659,8 +692,9 @@ func (s *SDK) GetMonatsbelege(ctx context.Context, request operations.GetMonatsb
 	return res, nil
 }
 
+// GetRegistrierkasse - Returns information about a particular `Registrierkasse`.
 func (s *SDK) GetRegistrierkasse(ctx context.Context, request operations.GetRegistrierkasseRequest) (*operations.GetRegistrierkasseResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/registrierkassen/{registrierkasseUuid}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -668,7 +702,7 @@ func (s *SDK) GetRegistrierkasse(ctx context.Context, request operations.GetRegi
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

@@ -1,7 +1,8 @@
 
 
+
 export enum SavingsPlanTypeEnum {
-    Compute = "Compute"
-,    Ec2Instance = "EC2Instance"
-,    SageMaker = "SageMaker"
+    Compute = "Compute",
+    Ec2Instance = "EC2Instance",
+    SageMaker = "SageMaker"
 }

@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetSpecificMessageAnnunciatorEnum(str, Enum):
@@ -13,19 +14,19 @@ class GetSpecificMessageAnnunciatorEnum(str, Enum):
 
 @dataclass
 class GetSpecificMessagePathParams:
-    annunciator: GetSpecificMessageAnnunciatorEnum = field(default=None, metadata={'path_param': { 'field_name': 'annunciator', 'style': 'simple', 'explode': False }})
-    date: datetime = field(default=None, metadata={'path_param': { 'field_name': 'date', 'style': 'simple', 'explode': False }})
+    annunciator: GetSpecificMessageAnnunciatorEnum = field(metadata={'path_param': { 'field_name': 'annunciator', 'style': 'simple', 'explode': False }})
+    date_: datetime = field(metadata={'path_param': { 'field_name': 'date', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetSpecificMessageRequest:
-    path_params: GetSpecificMessagePathParams = field(default=None)
+    path_params: GetSpecificMessagePathParams = field()
     
 
 @dataclass
 class GetSpecificMessageResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     message_view_model: Optional[shared.MessageViewModel] = field(default=None)
-    status_code: int = field(default=None)
     

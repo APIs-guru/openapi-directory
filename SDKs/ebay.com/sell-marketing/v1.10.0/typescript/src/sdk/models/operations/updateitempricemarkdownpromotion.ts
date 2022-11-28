@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateItemPriceMarkdownPromotionPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=promotion_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=promotion_id" })
   promotionId: string;
 }
 
 
 export class UpdateItemPriceMarkdownPromotionSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   apiAuth: shared.SchemeApiAuth;
 }
 
 
 export class UpdateItemPriceMarkdownPromotionRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateItemPriceMarkdownPromotionPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: shared.ItemPriceMarkdown;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: UpdateItemPriceMarkdownPromotionSecurity;
 }
 
 
 export class UpdateItemPriceMarkdownPromotionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateItemPriceMarkdownPromotion200ApplicationJsonObject?: Map<string, any>;
 }

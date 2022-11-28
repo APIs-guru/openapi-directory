@@ -22,11 +22,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { MaintenancePolicyInput } from "./maintenancepolicy";
+import { MaintenanceScheduleInput } from "./maintenanceschedule";
+import { PersistenceConfigInput } from "./persistenceconfig";
 import { MaintenancePolicy } from "./maintenancepolicy";
 import { MaintenanceSchedule } from "./maintenanceschedule";
+import { NodeInfo } from "./nodeinfo";
 import { PersistenceConfig } from "./persistenceconfig";
+import { TlsCertificate } from "./tlscertificate";
 export var InstanceConnectModeEnum;
 (function (InstanceConnectModeEnum) {
     InstanceConnectModeEnum["ConnectModeUnspecified"] = "CONNECT_MODE_UNSPECIFIED";
@@ -39,18 +43,6 @@ export var InstanceReadReplicasModeEnum;
     InstanceReadReplicasModeEnum["ReadReplicasDisabled"] = "READ_REPLICAS_DISABLED";
     InstanceReadReplicasModeEnum["ReadReplicasEnabled"] = "READ_REPLICAS_ENABLED";
 })(InstanceReadReplicasModeEnum || (InstanceReadReplicasModeEnum = {}));
-export var InstanceStateEnum;
-(function (InstanceStateEnum) {
-    InstanceStateEnum["StateUnspecified"] = "STATE_UNSPECIFIED";
-    InstanceStateEnum["Creating"] = "CREATING";
-    InstanceStateEnum["Ready"] = "READY";
-    InstanceStateEnum["Updating"] = "UPDATING";
-    InstanceStateEnum["Deleting"] = "DELETING";
-    InstanceStateEnum["Repairing"] = "REPAIRING";
-    InstanceStateEnum["Maintenance"] = "MAINTENANCE";
-    InstanceStateEnum["Importing"] = "IMPORTING";
-    InstanceStateEnum["FailingOver"] = "FAILING_OVER";
-})(InstanceStateEnum || (InstanceStateEnum = {}));
 export var InstanceSuspensionReasonsEnum;
 (function (InstanceSuspensionReasonsEnum) {
     InstanceSuspensionReasonsEnum["SuspensionReasonUnspecified"] = "SUSPENSION_REASON_UNSPECIFIED";
@@ -68,6 +60,126 @@ export var InstanceTransitEncryptionModeEnum;
     InstanceTransitEncryptionModeEnum["ServerAuthentication"] = "SERVER_AUTHENTICATION";
     InstanceTransitEncryptionModeEnum["Disabled"] = "DISABLED";
 })(InstanceTransitEncryptionModeEnum || (InstanceTransitEncryptionModeEnum = {}));
+export var InstanceStateEnum;
+(function (InstanceStateEnum) {
+    InstanceStateEnum["StateUnspecified"] = "STATE_UNSPECIFIED";
+    InstanceStateEnum["Creating"] = "CREATING";
+    InstanceStateEnum["Ready"] = "READY";
+    InstanceStateEnum["Updating"] = "UPDATING";
+    InstanceStateEnum["Deleting"] = "DELETING";
+    InstanceStateEnum["Repairing"] = "REPAIRING";
+    InstanceStateEnum["Maintenance"] = "MAINTENANCE";
+    InstanceStateEnum["Importing"] = "IMPORTING";
+    InstanceStateEnum["FailingOver"] = "FAILING_OVER";
+})(InstanceStateEnum || (InstanceStateEnum = {}));
+// InstanceInput
+/**
+ * A Memorystore for Redis instance.
+**/
+var InstanceInput = /** @class */ (function (_super) {
+    __extends(InstanceInput, _super);
+    function InstanceInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=alternativeLocationId" }),
+        __metadata("design:type", String)
+    ], InstanceInput.prototype, "alternativeLocationId", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=authEnabled" }),
+        __metadata("design:type", Boolean)
+    ], InstanceInput.prototype, "authEnabled", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=authorizedNetwork" }),
+        __metadata("design:type", String)
+    ], InstanceInput.prototype, "authorizedNetwork", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=availableMaintenanceVersions" }),
+        __metadata("design:type", Array)
+    ], InstanceInput.prototype, "availableMaintenanceVersions", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=connectMode" }),
+        __metadata("design:type", String)
+    ], InstanceInput.prototype, "connectMode", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=customerManagedKey" }),
+        __metadata("design:type", String)
+    ], InstanceInput.prototype, "customerManagedKey", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
+        __metadata("design:type", String)
+    ], InstanceInput.prototype, "displayName", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=labels" }),
+        __metadata("design:type", Map)
+    ], InstanceInput.prototype, "labels", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=locationId" }),
+        __metadata("design:type", String)
+    ], InstanceInput.prototype, "locationId", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=maintenancePolicy" }),
+        __metadata("design:type", MaintenancePolicyInput)
+    ], InstanceInput.prototype, "maintenancePolicy", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=maintenanceSchedule" }),
+        __metadata("design:type", MaintenanceScheduleInput)
+    ], InstanceInput.prototype, "maintenanceSchedule", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=maintenanceVersion" }),
+        __metadata("design:type", String)
+    ], InstanceInput.prototype, "maintenanceVersion", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=memorySizeGb" }),
+        __metadata("design:type", Number)
+    ], InstanceInput.prototype, "memorySizeGb", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=name" }),
+        __metadata("design:type", String)
+    ], InstanceInput.prototype, "name", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=persistenceConfig" }),
+        __metadata("design:type", PersistenceConfigInput)
+    ], InstanceInput.prototype, "persistenceConfig", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=readReplicasMode" }),
+        __metadata("design:type", String)
+    ], InstanceInput.prototype, "readReplicasMode", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=redisConfigs" }),
+        __metadata("design:type", Map)
+    ], InstanceInput.prototype, "redisConfigs", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=redisVersion" }),
+        __metadata("design:type", String)
+    ], InstanceInput.prototype, "redisVersion", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=replicaCount" }),
+        __metadata("design:type", Number)
+    ], InstanceInput.prototype, "replicaCount", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=reservedIpRange" }),
+        __metadata("design:type", String)
+    ], InstanceInput.prototype, "reservedIpRange", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=secondaryIpRange" }),
+        __metadata("design:type", String)
+    ], InstanceInput.prototype, "secondaryIpRange", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=suspensionReasons" }),
+        __metadata("design:type", Array)
+    ], InstanceInput.prototype, "suspensionReasons", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=tier" }),
+        __metadata("design:type", String)
+    ], InstanceInput.prototype, "tier", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=transitEncryptionMode" }),
+        __metadata("design:type", String)
+    ], InstanceInput.prototype, "transitEncryptionMode", void 0);
+    return InstanceInput;
+}(SpeakeasyBase));
+export { InstanceInput };
 // Instance
 /**
  * A Memorystore for Redis instance.
@@ -78,143 +190,143 @@ var Instance = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=alternativeLocationId" }),
+        SpeakeasyMetadata({ data: "json, name=alternativeLocationId" }),
         __metadata("design:type", String)
     ], Instance.prototype, "alternativeLocationId", void 0);
     __decorate([
-        Metadata({ data: "json, name=authEnabled" }),
+        SpeakeasyMetadata({ data: "json, name=authEnabled" }),
         __metadata("design:type", Boolean)
     ], Instance.prototype, "authEnabled", void 0);
     __decorate([
-        Metadata({ data: "json, name=authorizedNetwork" }),
+        SpeakeasyMetadata({ data: "json, name=authorizedNetwork" }),
         __metadata("design:type", String)
     ], Instance.prototype, "authorizedNetwork", void 0);
     __decorate([
-        Metadata({ data: "json, name=availableMaintenanceVersions" }),
+        SpeakeasyMetadata({ data: "json, name=availableMaintenanceVersions" }),
         __metadata("design:type", Array)
     ], Instance.prototype, "availableMaintenanceVersions", void 0);
     __decorate([
-        Metadata({ data: "json, name=connectMode" }),
+        SpeakeasyMetadata({ data: "json, name=connectMode" }),
         __metadata("design:type", String)
     ], Instance.prototype, "connectMode", void 0);
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", String)
     ], Instance.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=currentLocationId" }),
+        SpeakeasyMetadata({ data: "json, name=currentLocationId" }),
         __metadata("design:type", String)
     ], Instance.prototype, "currentLocationId", void 0);
     __decorate([
-        Metadata({ data: "json, name=customerManagedKey" }),
+        SpeakeasyMetadata({ data: "json, name=customerManagedKey" }),
         __metadata("design:type", String)
     ], Instance.prototype, "customerManagedKey", void 0);
     __decorate([
-        Metadata({ data: "json, name=displayName" }),
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
         __metadata("design:type", String)
     ], Instance.prototype, "displayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=host" }),
+        SpeakeasyMetadata({ data: "json, name=host" }),
         __metadata("design:type", String)
     ], Instance.prototype, "host", void 0);
     __decorate([
-        Metadata({ data: "json, name=labels" }),
+        SpeakeasyMetadata({ data: "json, name=labels" }),
         __metadata("design:type", Map)
     ], Instance.prototype, "labels", void 0);
     __decorate([
-        Metadata({ data: "json, name=locationId" }),
+        SpeakeasyMetadata({ data: "json, name=locationId" }),
         __metadata("design:type", String)
     ], Instance.prototype, "locationId", void 0);
     __decorate([
-        Metadata({ data: "json, name=maintenancePolicy" }),
+        SpeakeasyMetadata({ data: "json, name=maintenancePolicy" }),
         __metadata("design:type", MaintenancePolicy)
     ], Instance.prototype, "maintenancePolicy", void 0);
     __decorate([
-        Metadata({ data: "json, name=maintenanceSchedule" }),
+        SpeakeasyMetadata({ data: "json, name=maintenanceSchedule" }),
         __metadata("design:type", MaintenanceSchedule)
     ], Instance.prototype, "maintenanceSchedule", void 0);
     __decorate([
-        Metadata({ data: "json, name=maintenanceVersion" }),
+        SpeakeasyMetadata({ data: "json, name=maintenanceVersion" }),
         __metadata("design:type", String)
     ], Instance.prototype, "maintenanceVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=memorySizeGb" }),
+        SpeakeasyMetadata({ data: "json, name=memorySizeGb" }),
         __metadata("design:type", Number)
     ], Instance.prototype, "memorySizeGb", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Instance.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=nodes", elemType: shared.NodeInfo }),
+        SpeakeasyMetadata({ data: "json, name=nodes", elemType: NodeInfo }),
         __metadata("design:type", Array)
     ], Instance.prototype, "nodes", void 0);
     __decorate([
-        Metadata({ data: "json, name=persistenceConfig" }),
+        SpeakeasyMetadata({ data: "json, name=persistenceConfig" }),
         __metadata("design:type", PersistenceConfig)
     ], Instance.prototype, "persistenceConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=persistenceIamIdentity" }),
+        SpeakeasyMetadata({ data: "json, name=persistenceIamIdentity" }),
         __metadata("design:type", String)
     ], Instance.prototype, "persistenceIamIdentity", void 0);
     __decorate([
-        Metadata({ data: "json, name=port" }),
+        SpeakeasyMetadata({ data: "json, name=port" }),
         __metadata("design:type", Number)
     ], Instance.prototype, "port", void 0);
     __decorate([
-        Metadata({ data: "json, name=readEndpoint" }),
+        SpeakeasyMetadata({ data: "json, name=readEndpoint" }),
         __metadata("design:type", String)
     ], Instance.prototype, "readEndpoint", void 0);
     __decorate([
-        Metadata({ data: "json, name=readEndpointPort" }),
+        SpeakeasyMetadata({ data: "json, name=readEndpointPort" }),
         __metadata("design:type", Number)
     ], Instance.prototype, "readEndpointPort", void 0);
     __decorate([
-        Metadata({ data: "json, name=readReplicasMode" }),
+        SpeakeasyMetadata({ data: "json, name=readReplicasMode" }),
         __metadata("design:type", String)
     ], Instance.prototype, "readReplicasMode", void 0);
     __decorate([
-        Metadata({ data: "json, name=redisConfigs" }),
+        SpeakeasyMetadata({ data: "json, name=redisConfigs" }),
         __metadata("design:type", Map)
     ], Instance.prototype, "redisConfigs", void 0);
     __decorate([
-        Metadata({ data: "json, name=redisVersion" }),
+        SpeakeasyMetadata({ data: "json, name=redisVersion" }),
         __metadata("design:type", String)
     ], Instance.prototype, "redisVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=replicaCount" }),
+        SpeakeasyMetadata({ data: "json, name=replicaCount" }),
         __metadata("design:type", Number)
     ], Instance.prototype, "replicaCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=reservedIpRange" }),
+        SpeakeasyMetadata({ data: "json, name=reservedIpRange" }),
         __metadata("design:type", String)
     ], Instance.prototype, "reservedIpRange", void 0);
     __decorate([
-        Metadata({ data: "json, name=secondaryIpRange" }),
+        SpeakeasyMetadata({ data: "json, name=secondaryIpRange" }),
         __metadata("design:type", String)
     ], Instance.prototype, "secondaryIpRange", void 0);
     __decorate([
-        Metadata({ data: "json, name=serverCaCerts", elemType: shared.TlsCertificate }),
+        SpeakeasyMetadata({ data: "json, name=serverCaCerts", elemType: TlsCertificate }),
         __metadata("design:type", Array)
     ], Instance.prototype, "serverCaCerts", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], Instance.prototype, "state", void 0);
     __decorate([
-        Metadata({ data: "json, name=statusMessage" }),
+        SpeakeasyMetadata({ data: "json, name=statusMessage" }),
         __metadata("design:type", String)
     ], Instance.prototype, "statusMessage", void 0);
     __decorate([
-        Metadata({ data: "json, name=suspensionReasons" }),
+        SpeakeasyMetadata({ data: "json, name=suspensionReasons" }),
         __metadata("design:type", Array)
     ], Instance.prototype, "suspensionReasons", void 0);
     __decorate([
-        Metadata({ data: "json, name=tier" }),
+        SpeakeasyMetadata({ data: "json, name=tier" }),
         __metadata("design:type", String)
     ], Instance.prototype, "tier", void 0);
     __decorate([
-        Metadata({ data: "json, name=transitEncryptionMode" }),
+        SpeakeasyMetadata({ data: "json, name=transitEncryptionMode" }),
         __metadata("design:type", String)
     ], Instance.prototype, "transitEncryptionMode", void 0);
     return Instance;

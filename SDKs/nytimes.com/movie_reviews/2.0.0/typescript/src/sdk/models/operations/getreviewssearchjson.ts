@@ -1,64 +1,65 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum GetReviewsSearchJsonCriticsPickEnum {
-    Y = "Y"
-,    N = "N"
+    Y = "Y",
+    N = "N"
 }
 
 
 export class GetReviewsSearchJsonQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=critics-pick" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=critics-pick" })
   criticsPick?: GetReviewsSearchJsonCriticsPickEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=opening-date" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=opening-date" })
   openingDate?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=order" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=order" })
   order?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=publication-date" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=publication-date" })
   publicationDate?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=query" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=query" })
   query?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=reviewer" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=reviewer" })
   reviewer?: string;
 }
 
 
-export class GetReviewsSearchJsonRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetReviewsSearchJsonQueryParams;
-}
-
-
 export class GetReviewsSearchJson200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=copyright" })
+  @SpeakeasyMetadata({ data: "json, name=copyright" })
   copyright?: string;
 
-  @Metadata({ data: "json, name=num_results" })
+  @SpeakeasyMetadata({ data: "json, name=num_results" })
   numResults?: number;
 
-  @Metadata({ data: "json, name=results", elemType: shared.Movie })
+  @SpeakeasyMetadata({ data: "json, name=results", elemType: shared.Movie })
   results?: shared.Movie[];
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 }
 
 
+export class GetReviewsSearchJsonRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetReviewsSearchJsonQueryParams;
+}
+
+
 export class GetReviewsSearchJsonResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getReviewsSearchJson200ApplicationJsonObject?: GetReviewsSearchJson200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

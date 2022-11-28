@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// PeriodicPaymentInitiationWithStatusResponse
+// Generic JSON response body consistion of the corresponding periodic payment initation JSON body together with an optional transaction status field.
 type PeriodicPaymentInitiationWithStatusResponse struct {
 	CreditorAccount                        AccountReference16Ch             `json:"creditorAccount"`
 	CreditorAddress                        *Address                         `json:"creditorAddress,omitempty"`

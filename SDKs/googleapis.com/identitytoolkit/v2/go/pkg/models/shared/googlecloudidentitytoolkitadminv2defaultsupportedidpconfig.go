@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudIdentitytoolkitAdminV2DefaultSupportedIdpConfig
+// Configurations options for authenticating with a the standard set of Identity Toolkit-trusted IDPs.
 type GoogleCloudIdentitytoolkitAdminV2DefaultSupportedIdpConfig struct {
 	AppleSignInConfig *GoogleCloudIdentitytoolkitAdminV2AppleSignInConfig `json:"appleSignInConfig,omitempty"`
 	ClientID          *string                                             `json:"clientId,omitempty"`

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { PolicyBinding } from "./policybinding";
 /**
  * Describes policy settings that can be applied to a newly created tenant project.

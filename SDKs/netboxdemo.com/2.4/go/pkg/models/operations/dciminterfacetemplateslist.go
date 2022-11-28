@@ -13,15 +13,15 @@ type DcimInterfaceTemplatesListQueryParams struct {
 	Offset       *int64  `queryParam:"style=form,explode=true,name=offset"`
 }
 
-type DcimInterfaceTemplatesListRequest struct {
-	QueryParams DcimInterfaceTemplatesListQueryParams
-}
-
 type DcimInterfaceTemplatesList200ApplicationJSON struct {
 	Count    int64                      `json:"count"`
 	Next     *string                    `json:"next,omitempty"`
 	Previous *string                    `json:"previous,omitempty"`
 	Results  []shared.InterfaceTemplate `json:"results"`
+}
+
+type DcimInterfaceTemplatesListRequest struct {
+	QueryParams DcimInterfaceTemplatesListQueryParams
 }
 
 type DcimInterfaceTemplatesListResponse struct {

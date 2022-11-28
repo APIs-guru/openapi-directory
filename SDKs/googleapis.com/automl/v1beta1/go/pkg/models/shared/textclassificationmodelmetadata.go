@@ -8,6 +8,8 @@ const (
 	TextClassificationModelMetadataClassificationTypeEnumMultilabel                    TextClassificationModelMetadataClassificationTypeEnum = "MULTILABEL"
 )
 
+// TextClassificationModelMetadata
+// Model metadata that is specific to text classification.
 type TextClassificationModelMetadata struct {
 	ClassificationType *TextClassificationModelMetadataClassificationTypeEnum `json:"classificationType,omitempty"`
 }

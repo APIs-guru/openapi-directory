@@ -1,5 +1,7 @@
 package shared
 
+// DescribeTagsResponse
+// <p/>
 type DescribeTagsResponse struct {
 	Marker     *string `json:"Marker,omitempty"`
 	NextMarker *string `json:"NextMarker,omitempty"`

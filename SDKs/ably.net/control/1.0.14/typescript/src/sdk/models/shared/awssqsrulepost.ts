@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RuleSource } from "./rulesource";
 import { AwsAccessKeys } from "./awsaccesskeys";
 import { AwsAssumeRole } from "./awsassumerole";
+
 
 export enum AwsSqsRulePostRequestModeEnum {
     Single = "single"
@@ -12,45 +13,45 @@ export enum AwsSqsRulePostRuleTypeEnum {
 }
 
 export enum AwsSqsRulePostStatusEnum {
-    Enabled = "enabled"
-,    Disabled = "disabled"
+    Enabled = "enabled",
+    Disabled = "disabled"
 }
 
 
 export class AwsSqsRulePostTarget extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authentication" })
+  @SpeakeasyMetadata({ data: "json, name=authentication" })
   authentication: any;
 
-  @Metadata({ data: "json, name=awsAccountId" })
+  @SpeakeasyMetadata({ data: "json, name=awsAccountId" })
   awsAccountId: string;
 
-  @Metadata({ data: "json, name=enveloped" })
+  @SpeakeasyMetadata({ data: "json, name=enveloped" })
   enveloped?: boolean;
 
-  @Metadata({ data: "json, name=format" })
+  @SpeakeasyMetadata({ data: "json, name=format" })
   format?: string;
 
-  @Metadata({ data: "json, name=queueName" })
+  @SpeakeasyMetadata({ data: "json, name=queueName" })
   queueName: string;
 
-  @Metadata({ data: "json, name=region" })
+  @SpeakeasyMetadata({ data: "json, name=region" })
   region: string;
 }
 
 
 export class AwsSqsRulePost extends SpeakeasyBase {
-  @Metadata({ data: "json, name=requestMode" })
+  @SpeakeasyMetadata({ data: "json, name=requestMode" })
   requestMode: AwsSqsRulePostRequestModeEnum;
 
-  @Metadata({ data: "json, name=ruleType" })
+  @SpeakeasyMetadata({ data: "json, name=ruleType" })
   ruleType: AwsSqsRulePostRuleTypeEnum;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source: RuleSource;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: AwsSqsRulePostStatusEnum;
 
-  @Metadata({ data: "json, name=target" })
+  @SpeakeasyMetadata({ data: "json, name=target" })
   target: AwsSqsRulePostTarget;
 }

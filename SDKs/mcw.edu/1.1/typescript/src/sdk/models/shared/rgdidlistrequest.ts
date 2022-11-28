@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RgdidListRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=rgdIds" })
+  @SpeakeasyMetadata({ data: "json, name=rgdIds" })
   rgdIds?: number[];
 }

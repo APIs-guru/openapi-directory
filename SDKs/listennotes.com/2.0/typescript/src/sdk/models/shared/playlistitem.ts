@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EpisodeSimple } from "./episodesimple";
 import { PodcastSimple } from "./podcastsimple";
 import { CustomAudio } from "./customaudio";
 import { DeletedItem } from "./deleteditem";
 
+
 export enum PlaylistItemTypeEnum {
-    Episode = "episode"
-,    CustomAudio = "custom_audio"
-,    Podcast = "podcast"
+    Episode = "episode",
+    CustomAudio = "custom_audio",
+    Podcast = "podcast"
 }
 
 
@@ -16,18 +17,18 @@ export enum PlaylistItemTypeEnum {
  * An item in a playlist
 **/
 export class PlaylistItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=added_at_ms" })
+  @SpeakeasyMetadata({ data: "json, name=added_at_ms" })
   addedAtMs?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: any;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=notes" })
+  @SpeakeasyMetadata({ data: "json, name=notes" })
   notes?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: PlaylistItemTypeEnum;
 }

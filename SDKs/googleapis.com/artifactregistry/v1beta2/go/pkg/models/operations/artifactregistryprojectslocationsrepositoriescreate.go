@@ -31,7 +31,7 @@ type ArtifactregistryProjectsLocationsRepositoriesCreateSecurity struct {
 type ArtifactregistryProjectsLocationsRepositoriesCreateRequest struct {
 	PathParams  ArtifactregistryProjectsLocationsRepositoriesCreatePathParams
 	QueryParams ArtifactregistryProjectsLocationsRepositoriesCreateQueryParams
-	Request     *shared.Repository `request:"mediaType=application/json"`
+	Request     *shared.RepositoryInput `request:"mediaType=application/json"`
 	Security    ArtifactregistryProjectsLocationsRepositoriesCreateSecurity
 }
 

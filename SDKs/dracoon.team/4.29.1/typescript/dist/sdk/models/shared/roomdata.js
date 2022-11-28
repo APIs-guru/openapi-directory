@@ -1,0 +1,127 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { UserInfo } from "./userinfo";
+import { NodePermissions } from "./nodepermissions";
+export var RoomDataTypeEnum;
+(function (RoomDataTypeEnum) {
+    RoomDataTypeEnum["Room"] = "room";
+})(RoomDataTypeEnum || (RoomDataTypeEnum = {}));
+// RoomData
+/**
+ * Room information
+**/
+var RoomData = /** @class */ (function (_super) {
+    __extends(RoomData, _super);
+    function RoomData() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=children", elemType: RoomData }),
+        __metadata("design:type", Array)
+    ], RoomData.prototype, "children", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=cntAdmins" }),
+        __metadata("design:type", Number)
+    ], RoomData.prototype, "cntAdmins", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=cntDownloadShares" }),
+        __metadata("design:type", Number)
+    ], RoomData.prototype, "cntDownloadShares", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=cntUploadShares" }),
+        __metadata("design:type", Number)
+    ], RoomData.prototype, "cntUploadShares", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=cntUsers" }),
+        __metadata("design:type", Number)
+    ], RoomData.prototype, "cntUsers", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=createdAt" }),
+        __metadata("design:type", Date)
+    ], RoomData.prototype, "createdAt", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=createdBy" }),
+        __metadata("design:type", UserInfo)
+    ], RoomData.prototype, "createdBy", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=hasRecycleBin" }),
+        __metadata("design:type", Boolean)
+    ], RoomData.prototype, "hasRecycleBin", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=id" }),
+        __metadata("design:type", Number)
+    ], RoomData.prototype, "id", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=isEncrypted" }),
+        __metadata("design:type", Boolean)
+    ], RoomData.prototype, "isEncrypted", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=isFavorite" }),
+        __metadata("design:type", Boolean)
+    ], RoomData.prototype, "isFavorite", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=isGranted" }),
+        __metadata("design:type", Boolean)
+    ], RoomData.prototype, "isGranted", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=name" }),
+        __metadata("design:type", String)
+    ], RoomData.prototype, "name", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=parentId" }),
+        __metadata("design:type", Number)
+    ], RoomData.prototype, "parentId", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=permissions" }),
+        __metadata("design:type", NodePermissions)
+    ], RoomData.prototype, "permissions", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=quota" }),
+        __metadata("design:type", Number)
+    ], RoomData.prototype, "quota", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=recycleBinRetentionPeriod" }),
+        __metadata("design:type", Number)
+    ], RoomData.prototype, "recycleBinRetentionPeriod", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=size" }),
+        __metadata("design:type", Number)
+    ], RoomData.prototype, "size", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=type" }),
+        __metadata("design:type", String)
+    ], RoomData.prototype, "type", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=updatedAt" }),
+        __metadata("design:type", Date)
+    ], RoomData.prototype, "updatedAt", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=updatedBy" }),
+        __metadata("design:type", UserInfo)
+    ], RoomData.prototype, "updatedBy", void 0);
+    return RoomData;
+}(SpeakeasyBase));
+export { RoomData };

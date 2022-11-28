@@ -1,5 +1,7 @@
 package shared
 
+// GooglePrivacyDlpV2Bucket
+// Bucket is represented as a range, along with replacement values.
 type GooglePrivacyDlpV2Bucket struct {
 	Max              *GooglePrivacyDlpV2Value `json:"max,omitempty"`
 	Min              *GooglePrivacyDlpV2Value `json:"min,omitempty"`

@@ -22,34 +22,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DescribeUserProfileResult = /** @class */ (function (_super) {
     __extends(DescribeUserProfileResult, _super);
     function DescribeUserProfileResult() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=createdTimestamp" }),
+        SpeakeasyMetadata({ data: "json, name=createdTimestamp" }),
         __metadata("design:type", Date)
     ], DescribeUserProfileResult.prototype, "createdTimestamp", void 0);
     __decorate([
-        Metadata({ data: "json, name=displayName" }),
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
         __metadata("design:type", String)
     ], DescribeUserProfileResult.prototype, "displayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=emailAddress" }),
+        SpeakeasyMetadata({ data: "json, name=emailAddress" }),
         __metadata("design:type", String)
     ], DescribeUserProfileResult.prototype, "emailAddress", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastModifiedTimestamp" }),
+        SpeakeasyMetadata({ data: "json, name=lastModifiedTimestamp" }),
         __metadata("design:type", Date)
     ], DescribeUserProfileResult.prototype, "lastModifiedTimestamp", void 0);
     __decorate([
-        Metadata({ data: "json, name=sshPublicKey" }),
+        SpeakeasyMetadata({ data: "json, name=sshPublicKey" }),
         __metadata("design:type", String)
     ], DescribeUserProfileResult.prototype, "sshPublicKey", void 0);
     __decorate([
-        Metadata({ data: "json, name=userArn" }),
+        SpeakeasyMetadata({ data: "json, name=userArn" }),
         __metadata("design:type", String)
     ], DescribeUserProfileResult.prototype, "userArn", void 0);
     return DescribeUserProfileResult;

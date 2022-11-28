@@ -1,8 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { InventoryItem } from "./inventoryitem";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InventoryItem } from "./inventoryitem";
 import { SelectionRule } from "./selectionrule";
+
 
 
 // RuleCriteria
@@ -10,18 +9,18 @@ import { SelectionRule } from "./selectionrule";
  * This type defines the fields for a set of inventory selection rules. Required: When inventoryCriterionType is set to INVENTORY_BY_RULE or INVENTORY_ANY.
 **/
 export class RuleCriteria extends SpeakeasyBase {
-  @Metadata({ data: "json, name=excludeInventoryItems", elemType: shared.InventoryItem })
+  @SpeakeasyMetadata({ data: "json, name=excludeInventoryItems", elemType: InventoryItem })
   excludeInventoryItems?: InventoryItem[];
 
-  @Metadata({ data: "json, name=excludeListingIds" })
+  @SpeakeasyMetadata({ data: "json, name=excludeListingIds" })
   excludeListingIds?: string[];
 
-  @Metadata({ data: "json, name=markupInventoryItems", elemType: shared.InventoryItem })
+  @SpeakeasyMetadata({ data: "json, name=markupInventoryItems", elemType: InventoryItem })
   markupInventoryItems?: InventoryItem[];
 
-  @Metadata({ data: "json, name=markupListingIds" })
+  @SpeakeasyMetadata({ data: "json, name=markupListingIds" })
   markupListingIds?: string[];
 
-  @Metadata({ data: "json, name=selectionRules", elemType: shared.SelectionRule })
+  @SpeakeasyMetadata({ data: "json, name=selectionRules", elemType: SelectionRule })
   selectionRules?: SelectionRule[];
 }

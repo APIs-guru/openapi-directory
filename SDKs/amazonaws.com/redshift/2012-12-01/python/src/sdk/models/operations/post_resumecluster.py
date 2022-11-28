@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostResumeClusterActionEnum(str, Enum):
     RESUME_CLUSTER = "ResumeCluster"
@@ -10,8 +14,8 @@ class PostResumeClusterVersionEnum(str, Enum):
 
 @dataclass
 class PostResumeClusterQueryParams:
-    action: PostResumeClusterActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostResumeClusterVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostResumeClusterActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostResumeClusterVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostResumeClusterHeaders:
 
 @dataclass
 class PostResumeClusterRequest:
-    query_params: PostResumeClusterQueryParams = field(default=None)
-    headers: PostResumeClusterHeaders = field(default=None)
+    headers: PostResumeClusterHeaders = field()
+    query_params: PostResumeClusterQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostResumeClusterResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

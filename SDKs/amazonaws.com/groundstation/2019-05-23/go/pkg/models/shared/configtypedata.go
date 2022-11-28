@@ -1,5 +1,7 @@
 package shared
 
+// ConfigTypeData
+// <p>Object containing the parameters of a <code>Config</code>.</p> <p>See the subtype definitions for what each type of <code>Config</code> contains.</p>
 type ConfigTypeData struct {
 	AntennaDownlinkConfig            *AntennaDownlinkConfig            `json:"antennaDownlinkConfig,omitempty"`
 	AntennaDownlinkDemodDecodeConfig *AntennaDownlinkDemodDecodeConfig `json:"antennaDownlinkDemodDecodeConfig,omitempty"`

@@ -1,5 +1,7 @@
 package shared
 
+// CompatibleFields
+// Represents a response to the queryCompatibleFields method.
 type CompatibleFields struct {
 	CrossDimensionReachReportCompatibleFields *CrossDimensionReachReportCompatibleFields `json:"crossDimensionReachReportCompatibleFields,omitempty"`
 	FloodlightReportCompatibleFields          *FloodlightReportCompatibleFields          `json:"floodlightReportCompatibleFields,omitempty"`

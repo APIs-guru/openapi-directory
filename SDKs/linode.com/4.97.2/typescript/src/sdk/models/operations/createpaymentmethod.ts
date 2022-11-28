@@ -1,22 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export const CREATEPAYMENTMETHOD_SERVERS = [
-	"https://api.linode.com/v4",
-];
 
+export const CreatePaymentMethodServerList = [
+	"https://api.linode.com/v4",
+] as const;
 
 
 export class CreatePaymentMethodRequestBodyData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=card_number" })
+  @SpeakeasyMetadata({ data: "json, name=card_number" })
   cardNumber?: string;
 
-  @Metadata({ data: "json, name=cvv" })
+  @SpeakeasyMetadata({ data: "json, name=cvv" })
   cvv?: string;
 
-  @Metadata({ data: "json, name=expiry_month" })
+  @SpeakeasyMetadata({ data: "json, name=expiry_month" })
   expiryMonth?: number;
 
-  @Metadata({ data: "json, name=expiry_year" })
+  @SpeakeasyMetadata({ data: "json, name=expiry_year" })
   expiryYear?: number;
 }
 
@@ -26,66 +26,54 @@ export class CreatePaymentMethodRequestBodyData extends SpeakeasyBase {
  * Payment Method Request Object.
 **/
 export class CreatePaymentMethodRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: CreatePaymentMethodRequestBodyData;
 
-  @Metadata({ data: "json, name=is_default" })
+  @SpeakeasyMetadata({ data: "json, name=is_default" })
   isDefault: boolean;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: shared.TypeEnum;
 }
 
 
-export class CreatePaymentMethodSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class CreatePaymentMethodSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class CreatePaymentMethodSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: CreatePaymentMethodSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: CreatePaymentMethodSecurityOption2;
-}
-
-
-export class CreatePaymentMethodRequest extends SpeakeasyBase {
-  @Metadata()
-  serverUrl?: string;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: CreatePaymentMethodRequestBody;
-
-  @Metadata()
-  security: CreatePaymentMethodSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class CreatePaymentMethodDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class CreatePaymentMethodRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  serverUrl?: string;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: CreatePaymentMethodRequestBody;
+
+  @SpeakeasyMetadata()
+  security: CreatePaymentMethodSecurity;
+}
+
+
 export class CreatePaymentMethodResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createPaymentMethod200ApplicationJsonObject?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createPaymentMethodDefaultApplicationJsonObject?: CreatePaymentMethodDefaultApplicationJson;
 }

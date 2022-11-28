@@ -79,6 +79,8 @@ const (
 	CvssUserInteractionEnumUserInteractionRequired    CvssUserInteractionEnum = "USER_INTERACTION_REQUIRED"
 )
 
+// Cvss
+// Common Vulnerability Scoring System. For details, see https://www.first.org/cvss/specification-document This is a message we will try to use for storing various versions of CVSS rather than making a separate proto for storing a specific version.
 type Cvss struct {
 	AttackComplexity      *CvssAttackComplexityEnum      `json:"attackComplexity,omitempty"`
 	AttackVector          *CvssAttackVectorEnum          `json:"attackVector,omitempty"`

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BatchJobInstructionBatchJobInstructionDelete
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The batch job instructions' instructions
 **/
 export class BatchJobInstructionBatchJobInstructionDelete extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DELETE" })
+  @SpeakeasyMetadata({ data: "json, name=DELETE" })
   delete?: any[];
 }
 
 
 export class BatchJobInstructionBatchJobInstruction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=HoldingDate" })
+  @SpeakeasyMetadata({ data: "json, name=HoldingDate" })
   holdingDate?: Date;
 
-  @Metadata({ data: "json, name=Instructions" })
+  @SpeakeasyMetadata({ data: "json, name=Instructions" })
   instructions?: BatchJobInstructionBatchJobInstructionDelete;
 
-  @Metadata({ data: "json, name=ValidateOnly" })
+  @SpeakeasyMetadata({ data: "json, name=ValidateOnly" })
   validateOnly?: boolean;
 }
 
 
 export class BatchJobInstruction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BatchJobInstruction" })
+  @SpeakeasyMetadata({ data: "json, name=BatchJobInstruction" })
   batchJobInstruction?: BatchJobInstructionBatchJobInstruction;
 }

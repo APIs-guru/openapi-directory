@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccountQuota } from "./accountquota";
+
 
 
 // DescribeAccountAttributesResponse
@@ -8,9 +8,9 @@ import { AccountQuota } from "./accountquota";
  * <p/>
 **/
 export class DescribeAccountAttributesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccountQuotas", elemType: shared.AccountQuota })
+  @SpeakeasyMetadata({ data: "json, name=AccountQuotas", elemType: AccountQuota })
   accountQuotas?: AccountQuota[];
 
-  @Metadata({ data: "json, name=UniqueAccountIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=UniqueAccountIdentifier" })
   uniqueAccountIdentifier?: string;
 }

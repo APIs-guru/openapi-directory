@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CharacterMaskConfig } from "./charactermaskconfig";
 import { CryptoHashConfig } from "./cryptohashconfig";
 import { DateShiftConfig } from "./dateshiftconfig";
+
 
 
 // InfoTypeTransformation
@@ -9,21 +10,21 @@ import { DateShiftConfig } from "./dateshiftconfig";
  * A transformation to apply to text that is identified as a specific info_type.
 **/
 export class InfoTypeTransformation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=characterMaskConfig" })
+  @SpeakeasyMetadata({ data: "json, name=characterMaskConfig" })
   characterMaskConfig?: CharacterMaskConfig;
 
-  @Metadata({ data: "json, name=cryptoHashConfig" })
+  @SpeakeasyMetadata({ data: "json, name=cryptoHashConfig" })
   cryptoHashConfig?: CryptoHashConfig;
 
-  @Metadata({ data: "json, name=dateShiftConfig" })
+  @SpeakeasyMetadata({ data: "json, name=dateShiftConfig" })
   dateShiftConfig?: DateShiftConfig;
 
-  @Metadata({ data: "json, name=infoTypes" })
+  @SpeakeasyMetadata({ data: "json, name=infoTypes" })
   infoTypes?: string[];
 
-  @Metadata({ data: "json, name=redactConfig" })
+  @SpeakeasyMetadata({ data: "json, name=redactConfig" })
   redactConfig?: Map<string, any>;
 
-  @Metadata({ data: "json, name=replaceWithInfoTypeConfig" })
+  @SpeakeasyMetadata({ data: "json, name=replaceWithInfoTypeConfig" })
   replaceWithInfoTypeConfig?: Map<string, any>;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // UpdateCampaignIdentificationRequest
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * This type specifies the updated name, and start and end dates for an update-campaign request.
 **/
 export class UpdateCampaignIdentificationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=campaignName" })
+  @SpeakeasyMetadata({ data: "json, name=campaignName" })
   campaignName?: string;
 
-  @Metadata({ data: "json, name=endDate" })
+  @SpeakeasyMetadata({ data: "json, name=endDate" })
   endDate?: string;
 
-  @Metadata({ data: "json, name=startDate" })
+  @SpeakeasyMetadata({ data: "json, name=startDate" })
   startDate?: string;
 }

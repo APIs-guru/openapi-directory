@@ -5,23 +5,23 @@ from sdk.models import shared
 
 @dataclass
 class BinLookupPathParams:
-    bin: str = field(default=None, metadata={'path_param': { 'field_name': 'bin', 'style': 'simple', 'explode': False }})
+    bin: str = field(metadata={'path_param': { 'field_name': 'bin', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class BinLookupQueryParams:
-    api_key: str = field(default=None, metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
+    api_key: str = field(metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class BinLookupRequest:
-    path_params: BinLookupPathParams = field(default=None)
-    query_params: BinLookupQueryParams = field(default=None)
+    path_params: BinLookupPathParams = field()
+    query_params: BinLookupQueryParams = field()
     
 
 @dataclass
 class BinLookupResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     response_items: Optional[List[shared.ResponseItem]] = field(default=None)
-    status_code: int = field(default=None)
     

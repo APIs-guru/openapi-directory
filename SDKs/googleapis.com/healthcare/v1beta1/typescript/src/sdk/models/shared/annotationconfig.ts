@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AnnotationConfig
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies how to store annotations during de-identification operation.
 **/
 export class AnnotationConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=annotationStoreName" })
+  @SpeakeasyMetadata({ data: "json, name=annotationStoreName" })
   annotationStoreName?: string;
 
-  @Metadata({ data: "json, name=storeQuote" })
+  @SpeakeasyMetadata({ data: "json, name=storeQuote" })
   storeQuote?: boolean;
 }

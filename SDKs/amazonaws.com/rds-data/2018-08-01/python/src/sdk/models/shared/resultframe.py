@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import record
-from . import resultsetmetadata
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ResultFrame:
-    records: Optional[List[record.Record]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'records' }})
-    result_set_metadata: Optional[resultsetmetadata.ResultSetMetadata] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resultSetMetadata' }})
+    r"""ResultFrame
+    The result set returned by a SQL statement.
+    """
+    
+    records: Optional[List[Record]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('records') }})
+    result_set_metadata: Optional[ResultSetMetadata] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resultSetMetadata') }})
     

@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ProductCouponApiModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Code" })
+  @SpeakeasyMetadata({ data: "json, name=Code" })
   code?: string;
 
-  @Metadata({ data: "json, name=DiscountAmount" })
+  @SpeakeasyMetadata({ data: "json, name=DiscountAmount" })
   discountAmount?: number;
 
-  @Metadata({ data: "json, name=DiscountPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=DiscountPercentage" })
   discountPercentage?: number;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: number;
 
-  @Metadata({ data: "json, name=ValidUntil" })
+  @SpeakeasyMetadata({ data: "json, name=ValidUntil" })
   validUntil?: Date;
 }

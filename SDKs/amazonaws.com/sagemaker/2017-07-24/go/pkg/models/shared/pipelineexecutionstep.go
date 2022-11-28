@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// PipelineExecutionStep
+// An execution of a step in a pipeline.
 type PipelineExecutionStep struct {
 	CacheHitResult *CacheHitResult                `json:"CacheHitResult,omitempty"`
 	EndTime        *time.Time                     `json:"EndTime,omitempty"`

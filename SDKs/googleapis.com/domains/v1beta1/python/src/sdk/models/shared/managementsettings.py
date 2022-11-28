@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ManagementSettingsRenewalMethodEnum(str, Enum):
     RENEWAL_METHOD_UNSPECIFIED = "RENEWAL_METHOD_UNSPECIFIED"
@@ -15,7 +17,21 @@ class ManagementSettingsTransferLockStateEnum(str, Enum):
 
 @dataclass_json
 @dataclass
+class ManagementSettingsInput:
+    r"""ManagementSettingsInput
+    Defines renewal, billing, and transfer settings for a `Registration`.
+    """
+    
+    transfer_lock_state: Optional[ManagementSettingsTransferLockStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('transferLockState') }})
+    
+
+@dataclass_json
+@dataclass
 class ManagementSettings:
-    renewal_method: Optional[ManagementSettingsRenewalMethodEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'renewalMethod' }})
-    transfer_lock_state: Optional[ManagementSettingsTransferLockStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'transferLockState' }})
+    r"""ManagementSettings
+    Defines renewal, billing, and transfer settings for a `Registration`.
+    """
+    
+    renewal_method: Optional[ManagementSettingsRenewalMethodEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('renewalMethod') }})
+    transfer_lock_state: Optional[ManagementSettingsTransferLockStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('transferLockState') }})
     

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class GetWorkingLocationResponse extends SpeakeasyBase {
     s3Bucket?: string;
     s3Path?: string;

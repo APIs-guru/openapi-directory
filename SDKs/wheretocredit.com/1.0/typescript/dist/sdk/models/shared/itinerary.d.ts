@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Segment } from "./segment";
 export declare class Itinerary extends SpeakeasyBase {
     baseFareUsd?: number;

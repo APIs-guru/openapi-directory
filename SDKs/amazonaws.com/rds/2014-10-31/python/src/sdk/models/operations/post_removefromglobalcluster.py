@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostRemoveFromGlobalClusterActionEnum(str, Enum):
     REMOVE_FROM_GLOBAL_CLUSTER = "RemoveFromGlobalCluster"
@@ -10,8 +14,8 @@ class PostRemoveFromGlobalClusterVersionEnum(str, Enum):
 
 @dataclass
 class PostRemoveFromGlobalClusterQueryParams:
-    action: PostRemoveFromGlobalClusterActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostRemoveFromGlobalClusterVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostRemoveFromGlobalClusterActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostRemoveFromGlobalClusterVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostRemoveFromGlobalClusterHeaders:
 
 @dataclass
 class PostRemoveFromGlobalClusterRequest:
-    query_params: PostRemoveFromGlobalClusterQueryParams = field(default=None)
-    headers: PostRemoveFromGlobalClusterHeaders = field(default=None)
+    headers: PostRemoveFromGlobalClusterHeaders = field()
+    query_params: PostRemoveFromGlobalClusterQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostRemoveFromGlobalClusterResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

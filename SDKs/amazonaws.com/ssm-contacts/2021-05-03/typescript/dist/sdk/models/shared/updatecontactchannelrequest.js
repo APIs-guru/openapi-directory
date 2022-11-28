@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContactChannelAddress } from "./contactchanneladdress";
 var UpdateContactChannelRequest = /** @class */ (function (_super) {
     __extends(UpdateContactChannelRequest, _super);
@@ -30,15 +30,15 @@ var UpdateContactChannelRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ContactChannelId" }),
+        SpeakeasyMetadata({ data: "json, name=ContactChannelId" }),
         __metadata("design:type", String)
     ], UpdateContactChannelRequest.prototype, "contactChannelId", void 0);
     __decorate([
-        Metadata({ data: "json, name=DeliveryAddress" }),
+        SpeakeasyMetadata({ data: "json, name=DeliveryAddress" }),
         __metadata("design:type", ContactChannelAddress)
     ], UpdateContactChannelRequest.prototype, "deliveryAddress", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], UpdateContactChannelRequest.prototype, "name", void 0);
     return UpdateContactChannelRequest;

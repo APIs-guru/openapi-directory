@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { ResourceId } from "./resourceid";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceId } from "./resourceid";
 
+
 export enum ActivityContentDetailsRecommendationReasonEnum {
-    ReasonUnspecified = "reasonUnspecified"
-,    VideoFavorited = "videoFavorited"
-,    VideoLiked = "videoLiked"
-,    VideoWatched = "videoWatched"
+    ReasonUnspecified = "reasonUnspecified",
+    VideoFavorited = "videoFavorited",
+    VideoLiked = "videoLiked",
+    VideoWatched = "videoWatched"
 }
 
 
@@ -15,12 +15,12 @@ export enum ActivityContentDetailsRecommendationReasonEnum {
  * Information that identifies the recommended resource.
 **/
 export class ActivityContentDetailsRecommendation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=reason" })
+  @SpeakeasyMetadata({ data: "json, name=reason" })
   reason?: ActivityContentDetailsRecommendationReasonEnum;
 
-  @Metadata({ data: "json, name=resourceId" })
+  @SpeakeasyMetadata({ data: "json, name=resourceId" })
   resourceId?: ResourceId;
 
-  @Metadata({ data: "json, name=seedResourceId" })
+  @SpeakeasyMetadata({ data: "json, name=seedResourceId" })
   seedResourceId?: ResourceId;
 }

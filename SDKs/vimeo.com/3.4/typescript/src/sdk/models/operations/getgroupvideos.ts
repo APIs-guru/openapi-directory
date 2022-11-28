@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetGroupVideosPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=group_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=group_id" })
   groupId: number;
 }
 
 export enum GetGroupVideosDirectionEnum {
-    Asc = "asc"
-,    Desc = "desc"
+    Asc = "asc",
+    Desc = "desc"
 }
 
 export enum GetGroupVideosFilterEnum {
@@ -17,58 +18,58 @@ export enum GetGroupVideosFilterEnum {
 }
 
 export enum GetGroupVideosSortEnum {
-    Alphabetical = "alphabetical"
-,    Comments = "comments"
-,    Date = "date"
-,    Duration = "duration"
-,    Likes = "likes"
-,    Plays = "plays"
+    Alphabetical = "alphabetical",
+    Comments = "comments",
+    Date = "date",
+    Duration = "duration",
+    Likes = "likes",
+    Plays = "plays"
 }
 
 
 export class GetGroupVideosQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=direction" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=direction" })
   direction?: GetGroupVideosDirectionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter" })
   filter?: GetGroupVideosFilterEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter_embeddable" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter_embeddable" })
   filterEmbeddable?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=query" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=query" })
   query?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: GetGroupVideosSortEnum;
 }
 
 
 export class GetGroupVideosRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetGroupVideosPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetGroupVideosQueryParams;
 }
 
 
 export class GetGroupVideosResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   legacyError?: shared.LegacyError;
 
-  @Metadata({ elemType: shared.Video })
+  @SpeakeasyMetadata({ elemType: shared.Video })
   videos?: shared.Video[];
 }

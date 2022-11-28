@@ -1,17 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Picture } from "./picture";
 
+
 export enum UserAccountEnum {
-    Basic = "basic"
-,    Business = "business"
-,    LiveBusiness = "live_business"
-,    LivePremium = "live_premium"
-,    LivePro = "live_pro"
-,    Plus = "plus"
-,    Pro = "pro"
-,    ProUnlimited = "pro_unlimited"
-,    Producer = "producer"
+    Basic = "basic",
+    Business = "business",
+    LiveBusiness = "live_business",
+    LivePremium = "live_premium",
+    LivePro = "live_pro",
+    Plus = "plus",
+    Pro = "pro",
+    ProUnlimited = "pro_unlimited",
+    Producer = "producer"
 }
 
 
@@ -20,13 +20,13 @@ export enum UserAccountEnum {
  * Information about the albums created by this user.
 **/
 export class UserMetadataConnectionsAlbums extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total: number;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -36,13 +36,13 @@ export class UserMetadataConnectionsAlbums extends SpeakeasyBase {
  * Information about the appearances of this user in other videos.
 **/
 export class UserMetadataConnectionsAppearances extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total: number;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -52,13 +52,13 @@ export class UserMetadataConnectionsAppearances extends SpeakeasyBase {
  * Information on the users that the current user has blocked. This data requires a bearer token with the `private` scope.
 **/
 export class UserMetadataConnectionsBlock extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total: number;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -68,13 +68,13 @@ export class UserMetadataConnectionsBlock extends SpeakeasyBase {
  * Information about this user's followed categories.
 **/
 export class UserMetadataConnectionsCategories extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total: number;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -84,13 +84,13 @@ export class UserMetadataConnectionsCategories extends SpeakeasyBase {
  * Information about this user's subscribed channels.
 **/
 export class UserMetadataConnectionsChannels extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total: number;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -100,10 +100,10 @@ export class UserMetadataConnectionsChannels extends SpeakeasyBase {
  * Information about this user's feed.
 **/
 export class UserMetadataConnectionsFeed extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -113,13 +113,13 @@ export class UserMetadataConnectionsFeed extends SpeakeasyBase {
  * Information about this user's folders.
 **/
 export class UserMetadataConnectionsFolders extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total: number;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -129,13 +129,13 @@ export class UserMetadataConnectionsFolders extends SpeakeasyBase {
  * Information about the user's followers.
 **/
 export class UserMetadataConnectionsFollowers extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total: number;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -145,13 +145,13 @@ export class UserMetadataConnectionsFollowers extends SpeakeasyBase {
  * Information about the users that the current user is following.
 **/
 export class UserMetadataConnectionsFollowing extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total: number;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -161,13 +161,13 @@ export class UserMetadataConnectionsFollowing extends SpeakeasyBase {
  * Information about the groups created by this user.
 **/
 export class UserMetadataConnectionsGroups extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total: number;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -177,13 +177,13 @@ export class UserMetadataConnectionsGroups extends SpeakeasyBase {
  * Information about the videos that this user has liked.
 **/
 export class UserMetadataConnectionsLikes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total: number;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -193,13 +193,13 @@ export class UserMetadataConnectionsLikes extends SpeakeasyBase {
  * Information about the channels that this user moderates.
 **/
 export class UserMetadataConnectionsModeratedChannels extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total: number;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -209,13 +209,13 @@ export class UserMetadataConnectionsModeratedChannels extends SpeakeasyBase {
  * Information about this user's portraits.
 **/
 export class UserMetadataConnectionsPictures extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total: number;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -225,13 +225,13 @@ export class UserMetadataConnectionsPictures extends SpeakeasyBase {
  * Information about this user's portfolios.
 **/
 export class UserMetadataConnectionsPortfolios extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total: number;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -241,13 +241,13 @@ export class UserMetadataConnectionsPortfolios extends SpeakeasyBase {
  * A collection of recommended channels for the current user to follow. This data requires a bearer token with the `private` scope.
 **/
 export class UserMetadataConnectionsRecommendedChannels extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total: number;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -257,13 +257,13 @@ export class UserMetadataConnectionsRecommendedChannels extends SpeakeasyBase {
  * A Collection of recommended users for the current user to follow. This data requires a bearer token with the `private` scope.
 **/
 export class UserMetadataConnectionsRecommendedUsers extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total: number;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -273,13 +273,13 @@ export class UserMetadataConnectionsRecommendedUsers extends SpeakeasyBase {
  * Information about the videos that have been shared with this user.
 **/
 export class UserMetadataConnectionsShared extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total: number;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -289,13 +289,13 @@ export class UserMetadataConnectionsShared extends SpeakeasyBase {
  * Information about the videos uploaded by this user.
 **/
 export class UserMetadataConnectionsVideos extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total: number;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -305,13 +305,13 @@ export class UserMetadataConnectionsVideos extends SpeakeasyBase {
  * Information about the videos that this user has watched.
 **/
 export class UserMetadataConnectionsWatchedVideos extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total: number;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -321,13 +321,13 @@ export class UserMetadataConnectionsWatchedVideos extends SpeakeasyBase {
  * Information about the videos that this user wants to watch later.
 **/
 export class UserMetadataConnectionsWatchlater extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total: number;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -337,73 +337,73 @@ export class UserMetadataConnectionsWatchlater extends SpeakeasyBase {
  * The list of resource URIs related to the user.
 **/
 export class UserMetadataConnections extends SpeakeasyBase {
-  @Metadata({ data: "json, name=albums" })
+  @SpeakeasyMetadata({ data: "json, name=albums" })
   albums: UserMetadataConnectionsAlbums;
 
-  @Metadata({ data: "json, name=appearances" })
+  @SpeakeasyMetadata({ data: "json, name=appearances" })
   appearances: UserMetadataConnectionsAppearances;
 
-  @Metadata({ data: "json, name=block" })
+  @SpeakeasyMetadata({ data: "json, name=block" })
   block: UserMetadataConnectionsBlock;
 
-  @Metadata({ data: "json, name=categories" })
+  @SpeakeasyMetadata({ data: "json, name=categories" })
   categories: UserMetadataConnectionsCategories;
 
-  @Metadata({ data: "json, name=channels" })
+  @SpeakeasyMetadata({ data: "json, name=channels" })
   channels: UserMetadataConnectionsChannels;
 
-  @Metadata({ data: "json, name=feed" })
+  @SpeakeasyMetadata({ data: "json, name=feed" })
   feed: UserMetadataConnectionsFeed;
 
-  @Metadata({ data: "json, name=folders" })
+  @SpeakeasyMetadata({ data: "json, name=folders" })
   folders: UserMetadataConnectionsFolders;
 
-  @Metadata({ data: "json, name=followers" })
+  @SpeakeasyMetadata({ data: "json, name=followers" })
   followers: UserMetadataConnectionsFollowers;
 
-  @Metadata({ data: "json, name=following" })
+  @SpeakeasyMetadata({ data: "json, name=following" })
   following: UserMetadataConnectionsFollowing;
 
-  @Metadata({ data: "json, name=groups" })
+  @SpeakeasyMetadata({ data: "json, name=groups" })
   groups: UserMetadataConnectionsGroups;
 
-  @Metadata({ data: "json, name=likes" })
+  @SpeakeasyMetadata({ data: "json, name=likes" })
   likes: UserMetadataConnectionsLikes;
 
-  @Metadata({ data: "json, name=moderated_channels" })
+  @SpeakeasyMetadata({ data: "json, name=moderated_channels" })
   moderatedChannels: UserMetadataConnectionsModeratedChannels;
 
-  @Metadata({ data: "json, name=pictures" })
+  @SpeakeasyMetadata({ data: "json, name=pictures" })
   pictures: UserMetadataConnectionsPictures;
 
-  @Metadata({ data: "json, name=portfolios" })
+  @SpeakeasyMetadata({ data: "json, name=portfolios" })
   portfolios: UserMetadataConnectionsPortfolios;
 
-  @Metadata({ data: "json, name=recommended_channels" })
+  @SpeakeasyMetadata({ data: "json, name=recommended_channels" })
   recommendedChannels: UserMetadataConnectionsRecommendedChannels;
 
-  @Metadata({ data: "json, name=recommended_users" })
+  @SpeakeasyMetadata({ data: "json, name=recommended_users" })
   recommendedUsers: UserMetadataConnectionsRecommendedUsers;
 
-  @Metadata({ data: "json, name=shared" })
+  @SpeakeasyMetadata({ data: "json, name=shared" })
   shared: UserMetadataConnectionsShared;
 
-  @Metadata({ data: "json, name=videos" })
+  @SpeakeasyMetadata({ data: "json, name=videos" })
   videos: UserMetadataConnectionsVideos;
 
-  @Metadata({ data: "json, name=watched_videos" })
+  @SpeakeasyMetadata({ data: "json, name=watched_videos" })
   watchedVideos: UserMetadataConnectionsWatchedVideos;
 
-  @Metadata({ data: "json, name=watchlater" })
+  @SpeakeasyMetadata({ data: "json, name=watchlater" })
   watchlater: UserMetadataConnectionsWatchlater;
 }
 
 
 export class UserMetadataInteractionsAddPrivacyUser extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options?: string[];
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri?: string;
 }
 
@@ -413,16 +413,16 @@ export class UserMetadataInteractionsAddPrivacyUser extends SpeakeasyBase {
  * Information related to the block status of this user.
 **/
 export class UserMetadataInteractionsBlock extends SpeakeasyBase {
-  @Metadata({ data: "json, name=added" })
+  @SpeakeasyMetadata({ data: "json, name=added" })
   added: boolean;
 
-  @Metadata({ data: "json, name=added_time" })
+  @SpeakeasyMetadata({ data: "json, name=added_time" })
   addedTime: string;
 
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -432,13 +432,13 @@ export class UserMetadataInteractionsBlock extends SpeakeasyBase {
  * Information related to the followed status of this user.
 **/
 export class UserMetadataInteractionsFollow extends SpeakeasyBase {
-  @Metadata({ data: "json, name=added" })
+  @SpeakeasyMetadata({ data: "json, name=added" })
   added: boolean;
 
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -448,28 +448,28 @@ export class UserMetadataInteractionsFollow extends SpeakeasyBase {
  * Information regarding where and how to report a user.
 **/
 export class UserMetadataInteractionsReport extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=reason" })
+  @SpeakeasyMetadata({ data: "json, name=reason" })
   reason: string[];
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
 
 export class UserMetadataInteractions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=add_privacy_user" })
+  @SpeakeasyMetadata({ data: "json, name=add_privacy_user" })
   addPrivacyUser?: UserMetadataInteractionsAddPrivacyUser;
 
-  @Metadata({ data: "json, name=block" })
+  @SpeakeasyMetadata({ data: "json, name=block" })
   block: UserMetadataInteractionsBlock;
 
-  @Metadata({ data: "json, name=follow" })
+  @SpeakeasyMetadata({ data: "json, name=follow" })
   follow: UserMetadataInteractionsFollow;
 
-  @Metadata({ data: "json, name=report" })
+  @SpeakeasyMetadata({ data: "json, name=report" })
   report: UserMetadataInteractionsReport;
 }
 
@@ -479,62 +479,62 @@ export class UserMetadataInteractions extends SpeakeasyBase {
  * The user's metadata.
 **/
 export class UserMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=connections" })
+  @SpeakeasyMetadata({ data: "json, name=connections" })
   connections: UserMetadataConnections;
 
-  @Metadata({ data: "json, name=interactions" })
+  @SpeakeasyMetadata({ data: "json, name=interactions" })
   interactions: UserMetadataInteractions;
 }
 
 export enum UserPreferencesVideosPrivacyCommentsEnum {
-    Anybody = "anybody"
-,    Contacts = "contacts"
-,    Nobody = "nobody"
+    Anybody = "anybody",
+    Contacts = "contacts",
+    Nobody = "nobody"
 }
 
 export enum UserPreferencesVideosPrivacyEmbedEnum {
-    Private = "private"
-,    Public = "public"
-,    Whitelist = "whitelist"
+    Private = "private",
+    Public = "public",
+    Whitelist = "whitelist"
 }
 
 export enum UserPreferencesVideosPrivacyViewEnum {
-    Anybody = "anybody"
-,    Contacts = "contacts"
-,    Disable = "disable"
-,    Nobody = "nobody"
-,    Password = "password"
-,    Unlisted = "unlisted"
-,    Users = "users"
+    Anybody = "anybody",
+    Contacts = "contacts",
+    Disable = "disable",
+    Nobody = "nobody",
+    Password = "password",
+    Unlisted = "unlisted",
+    Users = "users"
 }
 
 
 export class UserPreferencesVideosPrivacy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=add" })
+  @SpeakeasyMetadata({ data: "json, name=add" })
   add?: boolean;
 
-  @Metadata({ data: "json, name=comments" })
+  @SpeakeasyMetadata({ data: "json, name=comments" })
   comments?: UserPreferencesVideosPrivacyCommentsEnum;
 
-  @Metadata({ data: "json, name=download" })
+  @SpeakeasyMetadata({ data: "json, name=download" })
   download?: boolean;
 
-  @Metadata({ data: "json, name=embed" })
+  @SpeakeasyMetadata({ data: "json, name=embed" })
   embed?: UserPreferencesVideosPrivacyEmbedEnum;
 
-  @Metadata({ data: "json, name=view" })
+  @SpeakeasyMetadata({ data: "json, name=view" })
   view?: UserPreferencesVideosPrivacyViewEnum;
 }
 
 
 export class UserPreferencesVideos extends SpeakeasyBase {
-  @Metadata({ data: "json, name=privacy" })
+  @SpeakeasyMetadata({ data: "json, name=privacy" })
   privacy?: UserPreferencesVideosPrivacy;
 }
 
 
 export class UserPreferences extends SpeakeasyBase {
-  @Metadata({ data: "json, name=videos" })
+  @SpeakeasyMetadata({ data: "json, name=videos" })
   videos?: UserPreferencesVideos;
 }
 
@@ -544,13 +544,13 @@ export class UserPreferences extends SpeakeasyBase {
  * Information about the user's lifetime upload usage.
 **/
 export class UserUploadQuotaLifetime extends SpeakeasyBase {
-  @Metadata({ data: "json, name=free" })
+  @SpeakeasyMetadata({ data: "json, name=free" })
   free: number;
 
-  @Metadata({ data: "json, name=max" })
+  @SpeakeasyMetadata({ data: "json, name=max" })
   max: number;
 
-  @Metadata({ data: "json, name=used" })
+  @SpeakeasyMetadata({ data: "json, name=used" })
   used: number;
 }
 
@@ -560,22 +560,22 @@ export class UserUploadQuotaLifetime extends SpeakeasyBase {
  * Information about the user's usage for the current period.
 **/
 export class UserUploadQuotaPeriodic extends SpeakeasyBase {
-  @Metadata({ data: "json, name=free" })
+  @SpeakeasyMetadata({ data: "json, name=free" })
   free: number;
 
-  @Metadata({ data: "json, name=max" })
+  @SpeakeasyMetadata({ data: "json, name=max" })
   max: number;
 
-  @Metadata({ data: "json, name=reset_date" })
+  @SpeakeasyMetadata({ data: "json, name=reset_date" })
   resetDate: string;
 
-  @Metadata({ data: "json, name=used" })
+  @SpeakeasyMetadata({ data: "json, name=used" })
   used: number;
 }
 
 export enum UserUploadQuotaSpaceShowingEnum {
-    Lifetime = "lifetime"
-,    Periodic = "periodic"
+    Lifetime = "lifetime",
+    Periodic = "periodic"
 }
 
 
@@ -584,16 +584,16 @@ export enum UserUploadQuotaSpaceShowingEnum {
  * Information about the user's upload space remaining for the current period.
 **/
 export class UserUploadQuotaSpace extends SpeakeasyBase {
-  @Metadata({ data: "json, name=free" })
+  @SpeakeasyMetadata({ data: "json, name=free" })
   free: number;
 
-  @Metadata({ data: "json, name=max" })
+  @SpeakeasyMetadata({ data: "json, name=max" })
   max: number;
 
-  @Metadata({ data: "json, name=showing" })
+  @SpeakeasyMetadata({ data: "json, name=showing" })
   showing: UserUploadQuotaSpaceShowingEnum;
 
-  @Metadata({ data: "json, name=used" })
+  @SpeakeasyMetadata({ data: "json, name=used" })
   used: number;
 }
 
@@ -603,72 +603,72 @@ export class UserUploadQuotaSpace extends SpeakeasyBase {
  * Appears only when the user has upload access and is looking at their own user record.
 **/
 export class UserUploadQuota extends SpeakeasyBase {
-  @Metadata({ data: "json, name=lifetime" })
+  @SpeakeasyMetadata({ data: "json, name=lifetime" })
   lifetime: UserUploadQuotaLifetime;
 
-  @Metadata({ data: "json, name=periodic" })
+  @SpeakeasyMetadata({ data: "json, name=periodic" })
   periodic: UserUploadQuotaPeriodic;
 
-  @Metadata({ data: "json, name=space" })
+  @SpeakeasyMetadata({ data: "json, name=space" })
   space: UserUploadQuotaSpace;
 }
 
 
 export class UserWebsites extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description: string;
 
-  @Metadata({ data: "json, name=link" })
+  @SpeakeasyMetadata({ data: "json, name=link" })
   link: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 }
 
 
 export class User extends SpeakeasyBase {
-  @Metadata({ data: "json, name=account" })
+  @SpeakeasyMetadata({ data: "json, name=account" })
   account: UserAccountEnum;
 
-  @Metadata({ data: "json, name=bio" })
+  @SpeakeasyMetadata({ data: "json, name=bio" })
   bio: string;
 
-  @Metadata({ data: "json, name=content_filter" })
+  @SpeakeasyMetadata({ data: "json, name=content_filter" })
   contentFilter?: string[];
 
-  @Metadata({ data: "json, name=created_time" })
+  @SpeakeasyMetadata({ data: "json, name=created_time" })
   createdTime: string;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=link" })
+  @SpeakeasyMetadata({ data: "json, name=link" })
   link: string;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location: string;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata: UserMetadata;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=pictures" })
+  @SpeakeasyMetadata({ data: "json, name=pictures" })
   pictures: Picture;
 
-  @Metadata({ data: "json, name=preferences" })
+  @SpeakeasyMetadata({ data: "json, name=preferences" })
   preferences?: UserPreferences;
 
-  @Metadata({ data: "json, name=resource_key" })
+  @SpeakeasyMetadata({ data: "json, name=resource_key" })
   resourceKey: string;
 
-  @Metadata({ data: "json, name=upload_quota" })
+  @SpeakeasyMetadata({ data: "json, name=upload_quota" })
   uploadQuota: UserUploadQuota;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 
-  @Metadata({ data: "json, name=websites", elemType: shared.UserWebsites })
+  @SpeakeasyMetadata({ data: "json, name=websites", elemType: UserWebsites })
   websites: UserWebsites[];
 }

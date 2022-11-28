@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Range
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Identifies where the sensitive data begins and ends.
 **/
 export class Range extends SpeakeasyBase {
-  @Metadata({ data: "json, name=End" })
+  @SpeakeasyMetadata({ data: "json, name=End" })
   end?: number;
 
-  @Metadata({ data: "json, name=Start" })
+  @SpeakeasyMetadata({ data: "json, name=Start" })
   start?: number;
 
-  @Metadata({ data: "json, name=StartColumn" })
+  @SpeakeasyMetadata({ data: "json, name=StartColumn" })
   startColumn?: number;
 }

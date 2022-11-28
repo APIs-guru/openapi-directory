@@ -1,15 +1,19 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import money
-from . import money
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class RegionalSubscriptionOfferPhaseConfig:
-    absolute_discount: Optional[money.Money] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'absoluteDiscount' }})
-    price: Optional[money.Money] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'price' }})
-    region_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'regionCode' }})
-    relative_discount: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'relativeDiscount' }})
+    r"""RegionalSubscriptionOfferPhaseConfig
+    Configuration for a single phase of a subscription offer in a single region.
+    """
+    
+    absolute_discount: Optional[Money] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('absoluteDiscount') }})
+    price: Optional[Money] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('price') }})
+    region_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('regionCode') }})
+    relative_discount: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('relativeDiscount') }})
     

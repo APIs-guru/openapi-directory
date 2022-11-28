@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,20 +22,20 @@ class PutTraceSegmentsHeaders:
 @dataclass_json
 @dataclass
 class PutTraceSegmentsRequestBody:
-    trace_segment_documents: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TraceSegmentDocuments' }})
+    trace_segment_documents: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('TraceSegmentDocuments') }})
     
 
 @dataclass
 class PutTraceSegmentsRequest:
-    headers: PutTraceSegmentsHeaders = field(default=None)
-    request: PutTraceSegmentsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: PutTraceSegmentsHeaders = field()
+    request: PutTraceSegmentsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PutTraceSegmentsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     invalid_request_exception: Optional[Any] = field(default=None)
     put_trace_segments_result: Optional[shared.PutTraceSegmentsResult] = field(default=None)
-    status_code: int = field(default=None)
     throttled_exception: Optional[Any] = field(default=None)
     

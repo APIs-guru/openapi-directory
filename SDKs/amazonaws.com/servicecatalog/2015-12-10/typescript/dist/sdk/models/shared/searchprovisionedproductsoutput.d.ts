@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ProvisionedProductAttribute } from "./provisionedproductattribute";
 export declare class SearchProvisionedProductsOutput extends SpeakeasyBase {
     nextPageToken?: string;

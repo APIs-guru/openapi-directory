@@ -9,6 +9,8 @@ const (
 	DimensionOrderByOrderTypeEnumNumeric                     DimensionOrderByOrderTypeEnum = "NUMERIC"
 )
 
+// DimensionOrderBy
+// Sorts by dimension values.
 type DimensionOrderBy struct {
 	DimensionName *string                        `json:"dimensionName,omitempty"`
 	OrderType     *DimensionOrderByOrderTypeEnum `json:"orderType,omitempty"`

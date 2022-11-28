@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import traffic
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CloneTraffic:
-    clones: List[traffic.Traffic] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clones' }})
-    count: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'count' }})
-    uniques: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uniques' }})
+    r"""CloneTraffic
+    Clone Traffic
+    """
+    
+    clones: List[Traffic] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('clones') }})
+    count: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('count') }})
+    uniques: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uniques') }})
     

@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DiasporaPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=countryIso2" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=countryIso2" })
   countryIso2: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=firstName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=firstName" })
   firstName: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=lastName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=lastName" })
   lastName: string;
 }
 
 
 export class DiasporaSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   apiKey: shared.SchemeApiKey;
 }
 
 
 export class DiasporaRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DiasporaPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: DiasporaSecurity;
 }
 
 
 export class DiasporaResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   firstLastNameDiasporaedOut?: shared.FirstLastNameDiasporaedOut;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

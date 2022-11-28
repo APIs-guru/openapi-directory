@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AdUnit } from "./adunit";
 export declare class AdUnits extends SpeakeasyBase {
     etag?: string;

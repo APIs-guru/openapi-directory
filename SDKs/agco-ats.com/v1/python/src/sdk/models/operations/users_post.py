@@ -5,22 +5,22 @@ from sdk.models import shared
 
 @dataclass
 class UsersPostRequests:
+    application_xml: bytes = field(metadata={'request': { 'media_type': 'application/xml' }})
+    text_xml: bytes = field(metadata={'request': { 'media_type': 'text/xml' }})
     api_models_user: Optional[shared.APIModelsUser] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     api_models_user1: Optional[shared.APIModelsUser] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     api_models_user2: Optional[shared.APIModelsUser] = field(default=None, metadata={'request': { 'media_type': 'text/json' }})
-    application_xml: bytes = field(default=None, metadata={'request': { 'media_type': 'application/xml' }})
-    text_xml: bytes = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class UsersPostRequest:
-    request: UsersPostRequests = field(default=None)
+    request: UsersPostRequests = field()
     
 
 @dataclass
 class UsersPostResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_models_user: Optional[shared.APIModelsUser] = field(default=None)
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    body: Optional[bytes] = field(default=None)
     

@@ -1,8 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import resourceaccesscontrol
-from . import resourceupdate
+from sdk import utils
+from . import *
 
 class ResourceWarningsCodeEnum(str, Enum):
     DEPRECATED_RESOURCE_USED = "DEPRECATED_RESOURCE_USED"
@@ -37,31 +41,31 @@ class ResourceWarningsCodeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ResourceWarningsData:
-    key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
-    value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('key') }})
+    value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     
 
 @dataclass_json
 @dataclass
 class ResourceWarnings:
-    code: Optional[ResourceWarningsCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
-    data: Optional[List[ResourceWarningsData]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
-    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
+    code: Optional[ResourceWarningsCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('code') }})
+    data: Optional[List[ResourceWarningsData]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
+    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('message') }})
     
 
 @dataclass_json
 @dataclass
 class Resource:
-    access_control: Optional[resourceaccesscontrol.ResourceAccessControl] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'accessControl' }})
-    final_properties: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'finalProperties' }})
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    insert_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'insertTime' }})
-    manifest: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'manifest' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    properties: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'properties' }})
-    type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    update: Optional[resourceupdate.ResourceUpdate] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'update' }})
-    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updateTime' }})
-    url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
-    warnings: Optional[List[ResourceWarnings]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'warnings' }})
+    access_control: Optional[ResourceAccessControl] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('accessControl') }})
+    final_properties: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('finalProperties') }})
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    insert_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('insertTime') }})
+    manifest: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('manifest') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    properties: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('properties') }})
+    type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    update: Optional[ResourceUpdate] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('update') }})
+    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('updateTime') }})
+    url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('url') }})
+    warnings: Optional[List[ResourceWarnings]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('warnings') }})
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var DgcerRequestBodyCertificateParameters = /** @class */ (function (_super) {
     __extends(DgcerRequestBodyCertificateParameters, _super);
@@ -30,19 +30,19 @@ var DgcerRequestBodyCertificateParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CNAME" }),
+        SpeakeasyMetadata({ data: "json, name=CNAME" }),
         __metadata("design:type", String)
     ], DgcerRequestBodyCertificateParameters.prototype, "cname", void 0);
     __decorate([
-        Metadata({ data: "json, name=REGNO" }),
+        SpeakeasyMetadata({ data: "json, name=REGNO" }),
         __metadata("design:type", String)
     ], DgcerRequestBodyCertificateParameters.prototype, "regno", void 0);
     __decorate([
-        Metadata({ data: "json, name=RROLL" }),
+        SpeakeasyMetadata({ data: "json, name=RROLL" }),
         __metadata("design:type", String)
     ], DgcerRequestBodyCertificateParameters.prototype, "rroll", void 0);
     __decorate([
-        Metadata({ data: "json, name=YEAR" }),
+        SpeakeasyMetadata({ data: "json, name=YEAR" }),
         __metadata("design:type", String)
     ], DgcerRequestBodyCertificateParameters.prototype, "year", void 0);
     return DgcerRequestBodyCertificateParameters;
@@ -58,19 +58,19 @@ var DgcerRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=certificateParameters" }),
+        SpeakeasyMetadata({ data: "json, name=certificateParameters" }),
         __metadata("design:type", DgcerRequestBodyCertificateParameters)
     ], DgcerRequestBody.prototype, "certificateParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=consentArtifact" }),
+        SpeakeasyMetadata({ data: "json, name=consentArtifact" }),
         __metadata("design:type", Object)
     ], DgcerRequestBody.prototype, "consentArtifact", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], DgcerRequestBody.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=txnId" }),
+        SpeakeasyMetadata({ data: "json, name=txnId" }),
         __metadata("design:type", String)
     ], DgcerRequestBody.prototype, "txnId", void 0);
     return DgcerRequestBody;
@@ -82,32 +82,16 @@ var DgcerSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], DgcerSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeClientId)
     ], DgcerSecurity.prototype, "clientId", void 0);
     return DgcerSecurity;
 }(SpeakeasyBase));
 export { DgcerSecurity };
-var DgcerRequest = /** @class */ (function (_super) {
-    __extends(DgcerRequest, _super);
-    function DgcerRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", DgcerRequestBody)
-    ], DgcerRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", DgcerSecurity)
-    ], DgcerRequest.prototype, "security", void 0);
-    return DgcerRequest;
-}(SpeakeasyBase));
-export { DgcerRequest };
 export var Dgcer400ApplicationJsonErrorEnum;
 (function (Dgcer400ApplicationJsonErrorEnum) {
     Dgcer400ApplicationJsonErrorEnum["MissingParameter"] = "missing_parameter";
@@ -130,11 +114,11 @@ var Dgcer400ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Dgcer400ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Dgcer400ApplicationJson.prototype, "errorDescription", void 0);
     return Dgcer400ApplicationJson;
@@ -156,11 +140,11 @@ var Dgcer401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Dgcer401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Dgcer401ApplicationJson.prototype, "errorDescription", void 0);
     return Dgcer401ApplicationJson;
@@ -182,11 +166,11 @@ var Dgcer404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Dgcer404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Dgcer404ApplicationJson.prototype, "errorDescription", void 0);
     return Dgcer404ApplicationJson;
@@ -206,11 +190,11 @@ var Dgcer500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Dgcer500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Dgcer500ApplicationJson.prototype, "errorDescription", void 0);
     return Dgcer500ApplicationJson;
@@ -230,11 +214,11 @@ var Dgcer502ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Dgcer502ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Dgcer502ApplicationJson.prototype, "errorDescription", void 0);
     return Dgcer502ApplicationJson;
@@ -254,11 +238,11 @@ var Dgcer503ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Dgcer503ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Dgcer503ApplicationJson.prototype, "errorDescription", void 0);
     return Dgcer503ApplicationJson;
@@ -278,55 +262,71 @@ var Dgcer504ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Dgcer504ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Dgcer504ApplicationJson.prototype, "errorDescription", void 0);
     return Dgcer504ApplicationJson;
 }(SpeakeasyBase));
 export { Dgcer504ApplicationJson };
+var DgcerRequest = /** @class */ (function (_super) {
+    __extends(DgcerRequest, _super);
+    function DgcerRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", DgcerRequestBody)
+    ], DgcerRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", DgcerSecurity)
+    ], DgcerRequest.prototype, "security", void 0);
+    return DgcerRequest;
+}(SpeakeasyBase));
+export { DgcerRequest };
 var DgcerResponse = /** @class */ (function (_super) {
     __extends(DgcerResponse, _super);
     function DgcerResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DgcerResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DgcerResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Dgcer400ApplicationJson)
     ], DgcerResponse.prototype, "dgcer400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Dgcer401ApplicationJson)
     ], DgcerResponse.prototype, "dgcer401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Dgcer404ApplicationJson)
     ], DgcerResponse.prototype, "dgcer404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Dgcer500ApplicationJson)
     ], DgcerResponse.prototype, "dgcer500ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Dgcer502ApplicationJson)
     ], DgcerResponse.prototype, "dgcer502ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Dgcer503ApplicationJson)
     ], DgcerResponse.prototype, "dgcer503ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Dgcer504ApplicationJson)
     ], DgcerResponse.prototype, "dgcer504ApplicationJsonObject", void 0);
     return DgcerResponse;

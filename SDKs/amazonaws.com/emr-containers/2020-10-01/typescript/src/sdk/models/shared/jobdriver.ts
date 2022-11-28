@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SparkSubmitJobDriver } from "./sparksubmitjobdriver";
+
 
 
 // JobDriver
@@ -7,6 +8,6 @@ import { SparkSubmitJobDriver } from "./sparksubmitjobdriver";
  * Specify the driver that the job runs on.
 **/
 export class JobDriver extends SpeakeasyBase {
-  @Metadata({ data: "json, name=sparkSubmitJobDriver" })
+  @SpeakeasyMetadata({ data: "json, name=sparkSubmitJobDriver" })
   sparkSubmitJobDriver?: SparkSubmitJobDriver;
 }

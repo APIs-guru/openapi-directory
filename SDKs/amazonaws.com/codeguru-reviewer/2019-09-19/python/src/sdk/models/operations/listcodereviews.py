@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class ListCodeReviewsTypeEnum(str, Enum):
@@ -9,12 +13,12 @@ class ListCodeReviewsTypeEnum(str, Enum):
 
 @dataclass
 class ListCodeReviewsQueryParams:
+    type: ListCodeReviewsTypeEnum = field(metadata={'query_param': { 'field_name': 'Type', 'style': 'form', 'explode': True }})
     max_results: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxResults', 'style': 'form', 'explode': True }})
     next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NextToken', 'style': 'form', 'explode': True }})
     provider_types: Optional[List[shared.ProviderTypeEnum]] = field(default=None, metadata={'query_param': { 'field_name': 'ProviderTypes', 'style': 'form', 'explode': True }})
     repository_names: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'RepositoryNames', 'style': 'form', 'explode': True }})
     states: Optional[List[shared.JobStateEnum]] = field(default=None, metadata={'query_param': { 'field_name': 'States', 'style': 'form', 'explode': True }})
-    type: ListCodeReviewsTypeEnum = field(default=None, metadata={'query_param': { 'field_name': 'Type', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,17 +34,17 @@ class ListCodeReviewsHeaders:
 
 @dataclass
 class ListCodeReviewsRequest:
-    query_params: ListCodeReviewsQueryParams = field(default=None)
-    headers: ListCodeReviewsHeaders = field(default=None)
+    headers: ListCodeReviewsHeaders = field()
+    query_params: ListCodeReviewsQueryParams = field()
     
 
 @dataclass
 class ListCodeReviewsResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     list_code_reviews_response: Optional[shared.ListCodeReviewsResponse] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

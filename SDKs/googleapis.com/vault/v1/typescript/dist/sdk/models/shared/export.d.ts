@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CloudStorageSink } from "./cloudstoragesink";
 import { ExportOptions } from "./exportoptions";
 import { Query } from "./query";

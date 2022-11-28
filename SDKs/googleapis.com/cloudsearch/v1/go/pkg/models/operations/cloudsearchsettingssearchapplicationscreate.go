@@ -41,7 +41,7 @@ type CloudsearchSettingsSearchapplicationsCreateSecurity struct {
 
 type CloudsearchSettingsSearchapplicationsCreateRequest struct {
 	QueryParams CloudsearchSettingsSearchapplicationsCreateQueryParams
-	Request     *shared.SearchApplication `request:"mediaType=application/json"`
+	Request     *shared.SearchApplicationInput `request:"mediaType=application/json"`
 	Security    CloudsearchSettingsSearchapplicationsCreateSecurity
 }
 

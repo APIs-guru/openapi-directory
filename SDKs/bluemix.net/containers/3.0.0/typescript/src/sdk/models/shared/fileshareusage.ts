@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class FileshareUsage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=available_space" })
+  @SpeakeasyMetadata({ data: "json, name=available_space" })
   availableSpace?: string;
 
-  @Metadata({ data: "json, name=total_space" })
+  @SpeakeasyMetadata({ data: "json, name=total_space" })
   totalSpace?: string;
 
-  @Metadata({ data: "json, name=used_space" })
+  @SpeakeasyMetadata({ data: "json, name=used_space" })
   usedSpace?: string;
 
-  @Metadata({ data: "json, name=used_space_percentage" })
+  @SpeakeasyMetadata({ data: "json, name=used_space_percentage" })
   usedSpacePercentage?: string;
 }

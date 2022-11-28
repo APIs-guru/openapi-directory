@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum RequestPhoneVerificationRequestPhoneVerificationMethodEnum {
-    PhoneVerificationMethodUnspecified = "PHONE_VERIFICATION_METHOD_UNSPECIFIED"
-,    Sms = "SMS"
-,    PhoneCall = "PHONE_CALL"
+    PhoneVerificationMethodUnspecified = "PHONE_VERIFICATION_METHOD_UNSPECIFIED",
+    Sms = "SMS",
+    PhoneCall = "PHONE_CALL"
 }
 
 
@@ -12,15 +13,15 @@ export enum RequestPhoneVerificationRequestPhoneVerificationMethodEnum {
  * Request message for the RequestPhoneVerification method.
 **/
 export class RequestPhoneVerificationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=languageCode" })
+  @SpeakeasyMetadata({ data: "json, name=languageCode" })
   languageCode?: string;
 
-  @Metadata({ data: "json, name=phoneNumber" })
+  @SpeakeasyMetadata({ data: "json, name=phoneNumber" })
   phoneNumber?: string;
 
-  @Metadata({ data: "json, name=phoneRegionCode" })
+  @SpeakeasyMetadata({ data: "json, name=phoneRegionCode" })
   phoneRegionCode?: string;
 
-  @Metadata({ data: "json, name=phoneVerificationMethod" })
+  @SpeakeasyMetadata({ data: "json, name=phoneVerificationMethod" })
   phoneVerificationMethod?: RequestPhoneVerificationRequestPhoneVerificationMethodEnum;
 }

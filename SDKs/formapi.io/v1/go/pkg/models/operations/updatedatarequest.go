@@ -51,12 +51,6 @@ type UpdateDataRequestSecurity struct {
 	APITokenBasic shared.SchemeAPITokenBasic `security:"scheme,type=http,subtype=basic"`
 }
 
-type UpdateDataRequestRequest struct {
-	PathParams UpdateDataRequestPathParams
-	Request    UpdateDataRequestUpdateSubmissionDataRequestData `request:"mediaType=application/json"`
-	Security   UpdateDataRequestSecurity
-}
-
 type UpdateDataRequestUpdateDataRequestResponseStatusEnum string
 
 const (
@@ -68,6 +62,12 @@ type UpdateDataRequestUpdateDataRequestResponse struct {
 	DataRequest shared.SubmissionDataRequest                         `json:"data_request"`
 	Errors      []string                                             `json:"errors,omitempty"`
 	Status      UpdateDataRequestUpdateDataRequestResponseStatusEnum `json:"status"`
+}
+
+type UpdateDataRequestRequest struct {
+	PathParams UpdateDataRequestPathParams
+	Request    UpdateDataRequestUpdateSubmissionDataRequestData `request:"mediaType=application/json"`
+	Security   UpdateDataRequestSecurity
 }
 
 type UpdateDataRequestResponse struct {

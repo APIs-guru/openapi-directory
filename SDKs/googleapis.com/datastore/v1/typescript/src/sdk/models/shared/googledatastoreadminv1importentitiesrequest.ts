@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleDatastoreAdminV1EntityFilter } from "./googledatastoreadminv1entityfilter";
+
 
 
 // GoogleDatastoreAdminV1ImportEntitiesRequest
@@ -7,12 +8,12 @@ import { GoogleDatastoreAdminV1EntityFilter } from "./googledatastoreadminv1enti
  * The request for google.datastore.admin.v1.DatastoreAdmin.ImportEntities.
 **/
 export class GoogleDatastoreAdminV1ImportEntitiesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=entityFilter" })
+  @SpeakeasyMetadata({ data: "json, name=entityFilter" })
   entityFilter?: GoogleDatastoreAdminV1EntityFilter;
 
-  @Metadata({ data: "json, name=inputUrl" })
+  @SpeakeasyMetadata({ data: "json, name=inputUrl" })
   inputUrl?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 }

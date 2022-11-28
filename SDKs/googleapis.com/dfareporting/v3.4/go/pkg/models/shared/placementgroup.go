@@ -7,6 +7,8 @@ const (
 	PlacementGroupPlacementGroupTypeEnumPlacementRoadblock PlacementGroupPlacementGroupTypeEnum = "PLACEMENT_ROADBLOCK"
 )
 
+// PlacementGroup
+// Contains properties of a package or roadblock.
 type PlacementGroup struct {
 	AccountID                        *string                               `json:"accountId,omitempty"`
 	AdvertiserID                     *string                               `json:"advertiserId,omitempty"`

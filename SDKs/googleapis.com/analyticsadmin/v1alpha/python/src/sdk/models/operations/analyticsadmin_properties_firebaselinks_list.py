@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AnalyticsadminPropertiesFirebaseLinksListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,14 +28,14 @@ class AnalyticsadminPropertiesFirebaseLinksListQueryParams:
 
 @dataclass
 class AnalyticsadminPropertiesFirebaseLinksListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AnalyticsadminPropertiesFirebaseLinksListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -45,14 +46,14 @@ class AnalyticsadminPropertiesFirebaseLinksListSecurity:
 
 @dataclass
 class AnalyticsadminPropertiesFirebaseLinksListRequest:
-    path_params: AnalyticsadminPropertiesFirebaseLinksListPathParams = field(default=None)
-    query_params: AnalyticsadminPropertiesFirebaseLinksListQueryParams = field(default=None)
-    security: AnalyticsadminPropertiesFirebaseLinksListSecurity = field(default=None)
+    path_params: AnalyticsadminPropertiesFirebaseLinksListPathParams = field()
+    query_params: AnalyticsadminPropertiesFirebaseLinksListQueryParams = field()
+    security: AnalyticsadminPropertiesFirebaseLinksListSecurity = field()
     
 
 @dataclass
 class AnalyticsadminPropertiesFirebaseLinksListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_analytics_admin_v1alpha_list_firebase_links_response: Optional[shared.GoogleAnalyticsAdminV1alphaListFirebaseLinksResponse] = field(default=None)
-    status_code: int = field(default=None)
     

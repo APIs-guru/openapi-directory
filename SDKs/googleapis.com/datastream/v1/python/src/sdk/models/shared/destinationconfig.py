@@ -1,14 +1,18 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import bigquerydestinationconfig
-from . import gcsdestinationconfig
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DestinationConfig:
-    bigquery_destination_config: Optional[bigquerydestinationconfig.BigQueryDestinationConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bigqueryDestinationConfig' }})
-    destination_connection_profile: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'destinationConnectionProfile' }})
-    gcs_destination_config: Optional[gcsdestinationconfig.GcsDestinationConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gcsDestinationConfig' }})
+    r"""DestinationConfig
+    The configuration of the stream destination.
+    """
+    
+    bigquery_destination_config: Optional[BigQueryDestinationConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('bigqueryDestinationConfig') }})
+    destination_connection_profile: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('destinationConnectionProfile') }})
+    gcs_destination_config: Optional[GcsDestinationConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('gcsDestinationConfig') }})
     

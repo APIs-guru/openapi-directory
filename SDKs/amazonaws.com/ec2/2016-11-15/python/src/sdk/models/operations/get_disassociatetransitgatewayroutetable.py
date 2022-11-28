@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDisassociateTransitGatewayRouteTableActionEnum(str, Enum):
     DISASSOCIATE_TRANSIT_GATEWAY_ROUTE_TABLE = "DisassociateTransitGatewayRouteTable"
@@ -10,11 +14,11 @@ class GetDisassociateTransitGatewayRouteTableVersionEnum(str, Enum):
 
 @dataclass
 class GetDisassociateTransitGatewayRouteTableQueryParams:
-    action: GetDisassociateTransitGatewayRouteTableActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDisassociateTransitGatewayRouteTableActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    transit_gateway_attachment_id: str = field(metadata={'query_param': { 'field_name': 'TransitGatewayAttachmentId', 'style': 'form', 'explode': True }})
+    transit_gateway_route_table_id: str = field(metadata={'query_param': { 'field_name': 'TransitGatewayRouteTableId', 'style': 'form', 'explode': True }})
+    version: GetDisassociateTransitGatewayRouteTableVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    transit_gateway_attachment_id: str = field(default=None, metadata={'query_param': { 'field_name': 'TransitGatewayAttachmentId', 'style': 'form', 'explode': True }})
-    transit_gateway_route_table_id: str = field(default=None, metadata={'query_param': { 'field_name': 'TransitGatewayRouteTableId', 'style': 'form', 'explode': True }})
-    version: GetDisassociateTransitGatewayRouteTableVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetDisassociateTransitGatewayRouteTableHeaders:
 
 @dataclass
 class GetDisassociateTransitGatewayRouteTableRequest:
-    query_params: GetDisassociateTransitGatewayRouteTableQueryParams = field(default=None)
-    headers: GetDisassociateTransitGatewayRouteTableHeaders = field(default=None)
+    headers: GetDisassociateTransitGatewayRouteTableHeaders = field()
+    query_params: GetDisassociateTransitGatewayRouteTableQueryParams = field()
     
 
 @dataclass
 class GetDisassociateTransitGatewayRouteTableResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostRestoreDbInstanceToPointInTimeActionEnum(str, Enum):
     RESTORE_DB_INSTANCE_TO_POINT_IN_TIME = "RestoreDBInstanceToPointInTime"
@@ -10,8 +14,8 @@ class PostRestoreDbInstanceToPointInTimeVersionEnum(str, Enum):
 
 @dataclass
 class PostRestoreDbInstanceToPointInTimeQueryParams:
-    action: PostRestoreDbInstanceToPointInTimeActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostRestoreDbInstanceToPointInTimeVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostRestoreDbInstanceToPointInTimeActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostRestoreDbInstanceToPointInTimeVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostRestoreDbInstanceToPointInTimeHeaders:
 
 @dataclass
 class PostRestoreDbInstanceToPointInTimeRequest:
-    query_params: PostRestoreDbInstanceToPointInTimeQueryParams = field(default=None)
-    headers: PostRestoreDbInstanceToPointInTimeHeaders = field(default=None)
+    headers: PostRestoreDbInstanceToPointInTimeHeaders = field()
+    query_params: PostRestoreDbInstanceToPointInTimeQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostRestoreDbInstanceToPointInTimeResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

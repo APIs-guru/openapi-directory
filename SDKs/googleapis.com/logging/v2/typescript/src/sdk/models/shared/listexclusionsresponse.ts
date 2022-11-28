@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LogExclusion } from "./logexclusion";
+
 
 
 // ListExclusionsResponse
@@ -8,9 +8,9 @@ import { LogExclusion } from "./logexclusion";
  * Result returned from ListExclusions.
 **/
 export class ListExclusionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=exclusions", elemType: shared.LogExclusion })
+  @SpeakeasyMetadata({ data: "json, name=exclusions", elemType: LogExclusion })
   exclusions?: LogExclusion[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

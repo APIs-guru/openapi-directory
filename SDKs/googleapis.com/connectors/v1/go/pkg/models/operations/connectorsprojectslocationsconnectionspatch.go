@@ -31,7 +31,7 @@ type ConnectorsProjectsLocationsConnectionsPatchSecurity struct {
 type ConnectorsProjectsLocationsConnectionsPatchRequest struct {
 	PathParams  ConnectorsProjectsLocationsConnectionsPatchPathParams
 	QueryParams ConnectorsProjectsLocationsConnectionsPatchQueryParams
-	Request     *shared.Connection `request:"mediaType=application/json"`
+	Request     *shared.ConnectionInput `request:"mediaType=application/json"`
 	Security    ConnectorsProjectsLocationsConnectionsPatchSecurity
 }
 

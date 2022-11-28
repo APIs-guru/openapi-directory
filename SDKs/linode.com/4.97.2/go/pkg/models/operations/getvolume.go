@@ -13,27 +13,19 @@ type GetVolumeQueryParams struct {
 	PageSize *int64 `queryParam:"style=form,explode=true,name=page_size"`
 }
 
-type GetVolumeSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type GetVolumeSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type GetVolumeSecurity struct {
-	Option1 *GetVolumeSecurityOption1 `security:"option"`
-	Option2 *GetVolumeSecurityOption2 `security:"option"`
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
+}
+
+type GetVolumeDefaultApplicationJSON struct {
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type GetVolumeRequest struct {
 	PathParams  GetVolumePathParams
 	QueryParams GetVolumeQueryParams
 	Security    GetVolumeSecurity
-}
-
-type GetVolumeDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type GetVolumeResponse struct {

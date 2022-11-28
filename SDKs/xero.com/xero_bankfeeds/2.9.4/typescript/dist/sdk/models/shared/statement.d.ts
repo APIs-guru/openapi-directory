@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { EndBalance } from "./endbalance";
 import { Error } from "./error";
 import { StartBalance } from "./startbalance";

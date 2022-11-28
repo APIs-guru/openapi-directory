@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetOrdersStatusStatusJSONStatusEnum(str, Enum):
@@ -11,25 +12,25 @@ class GetOrdersStatusStatusJSONStatusEnum(str, Enum):
 
 @dataclass
 class GetOrdersStatusStatusJSONPathParams:
-    status: GetOrdersStatusStatusJSONStatusEnum = field(default=None, metadata={'path_param': { 'field_name': 'status', 'style': 'simple', 'explode': False }})
+    status: GetOrdersStatusStatusJSONStatusEnum = field(metadata={'path_param': { 'field_name': 'status', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetOrdersStatusStatusJSONQueryParams:
-    authtoken: str = field(default=None, metadata={'query_param': { 'field_name': 'authtoken', 'style': 'form', 'explode': True }})
-    login: str = field(default=None, metadata={'query_param': { 'field_name': 'login', 'style': 'form', 'explode': True }})
+    authtoken: str = field(metadata={'query_param': { 'field_name': 'authtoken', 'style': 'form', 'explode': True }})
+    login: str = field(metadata={'query_param': { 'field_name': 'login', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class GetOrdersStatusStatusJSONRequest:
-    path_params: GetOrdersStatusStatusJSONPathParams = field(default=None)
-    query_params: GetOrdersStatusStatusJSONQueryParams = field(default=None)
+    path_params: GetOrdersStatusStatusJSONPathParams = field()
+    query_params: GetOrdersStatusStatusJSONQueryParams = field()
     
 
 @dataclass
 class GetOrdersStatusStatusJSONResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     orders: Optional[List[shared.Order]] = field(default=None)
-    status_code: int = field(default=None)
     status_invalid: Optional[Any] = field(default=None)
     

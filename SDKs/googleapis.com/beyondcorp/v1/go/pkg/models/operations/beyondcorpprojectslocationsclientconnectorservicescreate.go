@@ -33,7 +33,7 @@ type BeyondcorpProjectsLocationsClientConnectorServicesCreateSecurity struct {
 type BeyondcorpProjectsLocationsClientConnectorServicesCreateRequest struct {
 	PathParams  BeyondcorpProjectsLocationsClientConnectorServicesCreatePathParams
 	QueryParams BeyondcorpProjectsLocationsClientConnectorServicesCreateQueryParams
-	Request     *shared.ClientConnectorService `request:"mediaType=application/json"`
+	Request     *shared.ClientConnectorServiceInput `request:"mediaType=application/json"`
 	Security    BeyondcorpProjectsLocationsClientConnectorServicesCreateSecurity
 }
 

@@ -1,5 +1,7 @@
 package shared
 
+// Bidder
+// Bidder settings.
 type Bidder struct {
 	BypassNonguaranteedDealsPretargeting *bool   `json:"bypassNonguaranteedDealsPretargeting,omitempty"`
 	CookieMatchingNetworkID              *string `json:"cookieMatchingNetworkId,omitempty"`

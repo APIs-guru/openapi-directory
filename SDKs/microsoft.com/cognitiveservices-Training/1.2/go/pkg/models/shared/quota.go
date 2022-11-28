@@ -1,5 +1,7 @@
 package shared
 
+// Quota
+// Represents a quota
 type Quota struct {
 	TimeUntilReset *string `json:"TimeUntilReset,omitempty"`
 	Total          *int32  `json:"Total,omitempty"`

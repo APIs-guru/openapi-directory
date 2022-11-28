@@ -13,6 +13,8 @@ const (
 	VolumeStatusEnumContactSupport VolumeStatusEnum = "contact_support"
 )
 
+// Volume
+// A Block Storage Volume associated with your Account.
 type Volume struct {
 	Created        *time.Time        `json:"created,omitempty"`
 	FilesystemPath *string           `json:"filesystem_path,omitempty"`

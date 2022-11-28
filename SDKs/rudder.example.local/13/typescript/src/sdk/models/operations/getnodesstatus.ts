@@ -1,15 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetNodesStatusQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ids" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ids" })
   ids: string;
-}
-
-
-export class GetNodesStatusRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetNodesStatusQueryParams;
 }
 
 export enum GetNodesStatus200ApplicationJsonActionEnum {
@@ -17,18 +12,18 @@ export enum GetNodesStatus200ApplicationJsonActionEnum {
 }
 
 export enum GetNodesStatus200ApplicationJsonDataNodesStatusEnum {
-    Pending = "pending"
-,    Accepted = "accepted"
-,    Deleted = "deleted"
-,    Unknown = "unknown"
+    Pending = "pending",
+    Accepted = "accepted",
+    Deleted = "deleted",
+    Unknown = "unknown"
 }
 
 
 export class GetNodesStatus200ApplicationJsonDataNodes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: GetNodesStatus200ApplicationJsonDataNodesStatusEnum;
 }
 
@@ -38,35 +33,41 @@ export class GetNodesStatus200ApplicationJsonDataNodes extends SpeakeasyBase {
  * List of nodeId and associated status
 **/
 export class GetNodesStatus200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nodes", elemType: operations.GetNodesStatus200ApplicationJsonDataNodes })
+  @SpeakeasyMetadata({ data: "json, name=nodes", elemType: GetNodesStatus200ApplicationJsonDataNodes })
   nodes: GetNodesStatus200ApplicationJsonDataNodes[];
 }
 
 export enum GetNodesStatus200ApplicationJsonResultEnum {
-    Success = "success"
-,    Error = "error"
+    Success = "success",
+    Error = "error"
 }
 
 
 export class GetNodesStatus200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: GetNodesStatus200ApplicationJsonActionEnum;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: GetNodesStatus200ApplicationJsonData;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result: GetNodesStatus200ApplicationJsonResultEnum;
 }
 
 
+export class GetNodesStatusRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetNodesStatusQueryParams;
+}
+
+
 export class GetNodesStatusResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getNodesStatus200ApplicationJsonObject?: GetNodesStatus200ApplicationJson;
 }

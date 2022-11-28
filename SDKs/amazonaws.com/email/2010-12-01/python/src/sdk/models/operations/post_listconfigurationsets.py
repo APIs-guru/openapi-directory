@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostListConfigurationSetsActionEnum(str, Enum):
     LIST_CONFIGURATION_SETS = "ListConfigurationSets"
@@ -10,8 +14,8 @@ class PostListConfigurationSetsVersionEnum(str, Enum):
 
 @dataclass
 class PostListConfigurationSetsQueryParams:
-    action: PostListConfigurationSetsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostListConfigurationSetsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostListConfigurationSetsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostListConfigurationSetsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostListConfigurationSetsHeaders:
 
 @dataclass
 class PostListConfigurationSetsRequest:
-    query_params: PostListConfigurationSetsQueryParams = field(default=None)
-    headers: PostListConfigurationSetsHeaders = field(default=None)
+    headers: PostListConfigurationSetsHeaders = field()
+    query_params: PostListConfigurationSetsQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostListConfigurationSetsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

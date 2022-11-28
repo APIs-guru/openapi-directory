@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SimpleRuleEvaluation } from "./simpleruleevaluation";
+
 
 
 // RuleEvaluation
@@ -7,6 +8,6 @@ import { SimpleRuleEvaluation } from "./simpleruleevaluation";
  * Information needed to evaluate data.
 **/
 export class RuleEvaluation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=simpleRuleEvaluation" })
+  @SpeakeasyMetadata({ data: "json, name=simpleRuleEvaluation" })
   simpleRuleEvaluation?: SimpleRuleEvaluation;
 }

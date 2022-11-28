@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum BlogPerUserInfoRoleEnum {
     ViewTypeUnspecified = "VIEW_TYPE_UNSPECIFIED",
     Reader = "READER",

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DatasetTemplate
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Dataset template used for dynamic dataset creation.
 **/
 export class DatasetTemplate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=datasetIdPrefix" })
+  @SpeakeasyMetadata({ data: "json, name=datasetIdPrefix" })
   datasetIdPrefix?: string;
 
-  @Metadata({ data: "json, name=kmsKeyName" })
+  @SpeakeasyMetadata({ data: "json, name=kmsKeyName" })
   kmsKeyName?: string;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: string;
 }

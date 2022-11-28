@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Campaign
+// Contains properties of a Campaign Manager campaign.
 type Campaign struct {
 	AccountID                                    *string                                `json:"accountId,omitempty"`
 	AdBlockingConfiguration                      *AdBlockingConfiguration               `json:"adBlockingConfiguration,omitempty"`

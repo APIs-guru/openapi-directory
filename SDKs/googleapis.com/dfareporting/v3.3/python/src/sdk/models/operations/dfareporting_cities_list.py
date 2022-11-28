@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DfareportingCitiesListPathParams:
-    profile_id: str = field(default=None, metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
+    profile_id: str = field(metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -29,20 +30,20 @@ class DfareportingCitiesListQueryParams:
 
 @dataclass
 class DfareportingCitiesListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DfareportingCitiesListRequest:
-    path_params: DfareportingCitiesListPathParams = field(default=None)
-    query_params: DfareportingCitiesListQueryParams = field(default=None)
-    security: DfareportingCitiesListSecurity = field(default=None)
+    path_params: DfareportingCitiesListPathParams = field()
+    query_params: DfareportingCitiesListQueryParams = field()
+    security: DfareportingCitiesListSecurity = field()
     
 
 @dataclass
 class DfareportingCitiesListResponse:
+    content_type: str = field()
+    status_code: int = field()
     cities_list_response: Optional[shared.CitiesListResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

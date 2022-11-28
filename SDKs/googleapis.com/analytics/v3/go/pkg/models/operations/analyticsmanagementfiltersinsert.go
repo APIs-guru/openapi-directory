@@ -26,7 +26,7 @@ type AnalyticsManagementFiltersInsertSecurity struct {
 type AnalyticsManagementFiltersInsertRequest struct {
 	PathParams  AnalyticsManagementFiltersInsertPathParams
 	QueryParams AnalyticsManagementFiltersInsertQueryParams
-	Request     *shared.Filter `request:"mediaType=application/json"`
+	Request     *shared.FilterInput `request:"mediaType=application/json"`
 	Security    AnalyticsManagementFiltersInsertSecurity
 }
 

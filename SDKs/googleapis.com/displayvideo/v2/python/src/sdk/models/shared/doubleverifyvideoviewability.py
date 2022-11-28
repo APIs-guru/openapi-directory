@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class DoubleVerifyVideoViewabilityPlayerImpressionRateEnum(str, Enum):
     PLAYER_SIZE_400_X300_UNSPECIFIED = "PLAYER_SIZE_400X300_UNSPECIFIED"
@@ -34,7 +36,11 @@ class DoubleVerifyVideoViewabilityVideoViewableRateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class DoubleVerifyVideoViewability:
-    player_impression_rate: Optional[DoubleVerifyVideoViewabilityPlayerImpressionRateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'playerImpressionRate' }})
-    video_iab: Optional[DoubleVerifyVideoViewabilityVideoIabEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'videoIab' }})
-    video_viewable_rate: Optional[DoubleVerifyVideoViewabilityVideoViewableRateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'videoViewableRate' }})
+    r"""DoubleVerifyVideoViewability
+    Details of DoubleVerify video viewability settings.
+    """
+    
+    player_impression_rate: Optional[DoubleVerifyVideoViewabilityPlayerImpressionRateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('playerImpressionRate') }})
+    video_iab: Optional[DoubleVerifyVideoViewabilityVideoIabEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('videoIab') }})
+    video_viewable_rate: Optional[DoubleVerifyVideoViewabilityVideoViewableRateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('videoViewableRate') }})
     

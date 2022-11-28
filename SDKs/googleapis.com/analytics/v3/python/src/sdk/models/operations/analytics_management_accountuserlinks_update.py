@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AnalyticsManagementAccountUserLinksUpdatePathParams:
-    account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
-    link_id: str = field(default=None, metadata={'path_param': { 'field_name': 'linkId', 'style': 'simple', 'explode': False }})
+    account_id: str = field(metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
+    link_id: str = field(metadata={'path_param': { 'field_name': 'linkId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,21 +26,21 @@ class AnalyticsManagementAccountUserLinksUpdateQueryParams:
 
 @dataclass
 class AnalyticsManagementAccountUserLinksUpdateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AnalyticsManagementAccountUserLinksUpdateRequest:
-    path_params: AnalyticsManagementAccountUserLinksUpdatePathParams = field(default=None)
-    query_params: AnalyticsManagementAccountUserLinksUpdateQueryParams = field(default=None)
-    request: Optional[shared.EntityUserLink] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AnalyticsManagementAccountUserLinksUpdateSecurity = field(default=None)
+    path_params: AnalyticsManagementAccountUserLinksUpdatePathParams = field()
+    query_params: AnalyticsManagementAccountUserLinksUpdateQueryParams = field()
+    security: AnalyticsManagementAccountUserLinksUpdateSecurity = field()
+    request: Optional[shared.EntityUserLinkInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class AnalyticsManagementAccountUserLinksUpdateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     entity_user_link: Optional[shared.EntityUserLink] = field(default=None)
-    status_code: int = field(default=None)
     

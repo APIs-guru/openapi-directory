@@ -1,5 +1,7 @@
 package shared
 
+// PaginatedPullrequests
+// A paginated list of pullrequests.
 type PaginatedPullrequests struct {
 	Next     *string                  `json:"next,omitempty"`
 	Page     *int64                   `json:"page,omitempty"`

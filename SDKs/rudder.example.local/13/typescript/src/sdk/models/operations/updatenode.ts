@@ -1,19 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateNodePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=nodeId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=nodeId" })
   nodeId: string;
-}
-
-
-export class UpdateNodeRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: UpdateNodePathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: shared.NodeSettings;
 }
 
 export enum UpdateNode200ApplicationJsonActionEnum {
@@ -26,35 +18,44 @@ export enum UpdateNode200ApplicationJsonActionEnum {
  * Information about the node
 **/
 export class UpdateNode200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nodes", elemType: shared.NodeFull })
+  @SpeakeasyMetadata({ data: "json, name=nodes", elemType: shared.NodeFull })
   nodes: shared.NodeFull[];
 }
 
 export enum UpdateNode200ApplicationJsonResultEnum {
-    Success = "success"
-,    Error = "error"
+    Success = "success",
+    Error = "error"
 }
 
 
 export class UpdateNode200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: UpdateNode200ApplicationJsonActionEnum;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: UpdateNode200ApplicationJsonData;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result: UpdateNode200ApplicationJsonResultEnum;
 }
 
 
+export class UpdateNodeRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: UpdateNodePathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: shared.NodeSettings;
+}
+
+
 export class UpdateNodeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateNode200ApplicationJsonObject?: UpdateNode200ApplicationJson;
 }

@@ -11,6 +11,8 @@ const (
 	CancelSurveyResultReasonEnumCancelSurveyReasonOthers          CancelSurveyResultReasonEnum = "CANCEL_SURVEY_REASON_OTHERS"
 )
 
+// CancelSurveyResult
+// Result of the cancel survey when the subscription was canceled by the user.
 type CancelSurveyResult struct {
 	Reason          *CancelSurveyResultReasonEnum `json:"reason,omitempty"`
 	ReasonUserInput *string                       `json:"reasonUserInput,omitempty"`

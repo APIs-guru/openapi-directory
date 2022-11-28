@@ -6,6 +6,8 @@ const (
 	GetModifyVolumeAttributeActionEnumModifyVolumeAttribute GetModifyVolumeAttributeActionEnum = "ModifyVolumeAttribute"
 )
 
+// GetModifyVolumeAttributeAutoEnableIo
+// Describes a value for a resource attribute that is a Boolean value.
 type GetModifyVolumeAttributeAutoEnableIo struct {
 	Value *bool `queryParam:"name=Value"`
 }

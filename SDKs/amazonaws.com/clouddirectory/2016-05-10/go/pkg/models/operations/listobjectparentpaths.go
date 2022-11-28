@@ -20,6 +20,8 @@ type ListObjectParentPathsHeaders struct {
 	XAmzDataPartition string  `header:"style=simple,explode=false,name=x-amz-data-partition"`
 }
 
+// ListObjectParentPathsRequestBodyObjectReference
+// The reference that identifies an object.
 type ListObjectParentPathsRequestBodyObjectReference struct {
 	Selector *string `json:"Selector,omitempty"`
 }

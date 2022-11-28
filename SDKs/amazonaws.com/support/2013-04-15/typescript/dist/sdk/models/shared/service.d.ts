@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Category } from "./category";
 /**
  * Information about an AWS service returned by the <a>DescribeServices</a> operation.

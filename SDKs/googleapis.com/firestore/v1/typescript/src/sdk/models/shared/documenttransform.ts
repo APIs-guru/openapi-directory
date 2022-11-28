@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FieldTransform } from "./fieldtransform";
+
 
 
 // DocumentTransform
@@ -8,9 +8,9 @@ import { FieldTransform } from "./fieldtransform";
  * A transformation of a document.
 **/
 export class DocumentTransform extends SpeakeasyBase {
-  @Metadata({ data: "json, name=document" })
+  @SpeakeasyMetadata({ data: "json, name=document" })
   document?: string;
 
-  @Metadata({ data: "json, name=fieldTransforms", elemType: shared.FieldTransform })
+  @SpeakeasyMetadata({ data: "json, name=fieldTransforms", elemType: FieldTransform })
   fieldTransforms?: FieldTransform[];
 }

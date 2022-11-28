@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetAlbumContextByIdQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=api_key" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_key" })
   apiKey: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=photo_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=photo_id" })
   photoId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=photoset_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=photoset_id" })
   photosetId?: string;
 }
 
 
-export class GetAlbumContextByIdRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetAlbumContextByIdQueryParams;
-}
-
-
 export class GetAlbumContextById200ApplicationJsonCount extends SpeakeasyBase {
-  @Metadata({ data: "json, name=_content" })
+  @SpeakeasyMetadata({ data: "json, name=_content" })
   content?: string;
 }
 
 
 export class GetAlbumContextById200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count?: GetAlbumContextById200ApplicationJsonCount;
 
-  @Metadata({ data: "json, name=nextphoto" })
+  @SpeakeasyMetadata({ data: "json, name=nextphoto" })
   nextphoto?: shared.ContextPhoto;
 
-  @Metadata({ data: "json, name=prevphoto" })
+  @SpeakeasyMetadata({ data: "json, name=prevphoto" })
   prevphoto?: shared.ContextPhoto;
 
-  @Metadata({ data: "json, name=stat" })
+  @SpeakeasyMetadata({ data: "json, name=stat" })
   stat?: string;
 }
 
 
+export class GetAlbumContextByIdRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetAlbumContextByIdQueryParams;
+}
+
+
 export class GetAlbumContextByIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getAlbumContextById200ApplicationJsonObject?: GetAlbumContextById200ApplicationJson;
 }

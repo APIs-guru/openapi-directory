@@ -9,6 +9,8 @@ const (
 	ChartAxisViewWindowOptionsViewWindowModeEnumPretty                    ChartAxisViewWindowOptionsViewWindowModeEnum = "PRETTY"
 )
 
+// ChartAxisViewWindowOptions
+// The options that define a "view window" for a chart (such as the visible values in an axis).
 type ChartAxisViewWindowOptions struct {
 	ViewWindowMax  *float64                                      `json:"viewWindowMax,omitempty"`
 	ViewWindowMin  *float64                                      `json:"viewWindowMin,omitempty"`

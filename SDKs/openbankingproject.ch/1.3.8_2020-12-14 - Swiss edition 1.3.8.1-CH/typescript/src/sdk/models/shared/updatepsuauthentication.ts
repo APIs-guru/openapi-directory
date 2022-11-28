@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PsuData } from "./psudata";
+
 
 
 // UpdatePsuAuthentication
@@ -10,6 +11,6 @@ import { PsuData } from "./psudata";
  * 
 **/
 export class UpdatePsuAuthentication extends SpeakeasyBase {
-  @Metadata({ data: "json, name=psuData" })
+  @SpeakeasyMetadata({ data: "json, name=psuData" })
   psuData: PsuData;
 }

@@ -5,10 +5,6 @@ type SetHTMLUsingGetQueryParams struct {
 	PadID *string `queryParam:"style=form,explode=true,name=padID"`
 }
 
-type SetHTMLUsingGetRequest struct {
-	QueryParams SetHTMLUsingGetQueryParams
-}
-
 type SetHTMLUsingGet200ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
@@ -31,6 +27,10 @@ type SetHTMLUsingGet500ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
 	Message *string                `json:"message,omitempty"`
+}
+
+type SetHTMLUsingGetRequest struct {
+	QueryParams SetHTMLUsingGetQueryParams
 }
 
 type SetHTMLUsingGetResponse struct {

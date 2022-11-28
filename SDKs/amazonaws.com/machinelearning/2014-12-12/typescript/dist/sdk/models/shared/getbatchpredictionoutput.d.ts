@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { EntityStatusEnum } from "./entitystatusenum";
 /**
  * Represents the output of a <code>GetBatchPrediction</code> operation and describes a <code>BatchPrediction</code>.

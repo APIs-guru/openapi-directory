@@ -10,6 +10,8 @@ const (
 	GoogleCloudAssuredworkloadsV1WorkloadResourceInfoResourceTypeEnumKeyring                 GoogleCloudAssuredworkloadsV1WorkloadResourceInfoResourceTypeEnum = "KEYRING"
 )
 
+// GoogleCloudAssuredworkloadsV1WorkloadResourceInfo
+// Represent the resources that are children of this Workload.
 type GoogleCloudAssuredworkloadsV1WorkloadResourceInfo struct {
 	ResourceID   *string                                                            `json:"resourceId,omitempty"`
 	ResourceType *GoogleCloudAssuredworkloadsV1WorkloadResourceInfoResourceTypeEnum `json:"resourceType,omitempty"`

@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class ScriptProcessesListUserProcessFilterStatusesEnum(str, Enum):
@@ -61,19 +62,19 @@ class ScriptProcessesListQueryParams:
 
 @dataclass
 class ScriptProcessesListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ScriptProcessesListRequest:
-    query_params: ScriptProcessesListQueryParams = field(default=None)
-    security: ScriptProcessesListSecurity = field(default=None)
+    query_params: ScriptProcessesListQueryParams = field()
+    security: ScriptProcessesListSecurity = field()
     
 
 @dataclass
 class ScriptProcessesListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_user_processes_response: Optional[shared.ListUserProcessesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

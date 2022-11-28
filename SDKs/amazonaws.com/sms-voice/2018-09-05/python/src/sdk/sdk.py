@@ -1,8 +1,11 @@
-import warnings
+
+__doc__ = """ SDK Documentation: https://docs.aws.amazon.com/pinpoint/ - Amazon Web Services documentation"""
 import requests
-from typing import Any,List,Optional
-from sdk.models import operations, shared
+from typing import Any,Optional
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -14,37 +17,63 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    r"""SDK Documentation: https://docs.aws.amazon.com/pinpoint/ - Amazon Web Services documentation"""
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
-    
-    def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
+            self._server_url = server_url
 
+        
+    
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        
+    
+
+    def config_security(self, security: shared.Security):
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        
+    
+    
     
     def create_configuration_set(self, request: operations.CreateConfigurationSetRequest) -> operations.CreateConfigurationSetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new configuration set. After you create the configuration set, you can add one or more event destinations to it.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/sms-voice/configuration-sets"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -79,22 +108,22 @@ class SDK:
 
     
     def create_configuration_set_event_destination(self, request: operations.CreateConfigurationSetEventDestinationRequest) -> operations.CreateConfigurationSetEventDestinationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new event destination in a configuration set.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/sms-voice/configuration-sets/{ConfigurationSetName}/event-destinations", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -133,15 +162,17 @@ class SDK:
 
     
     def delete_configuration_set(self, request: operations.DeleteConfigurationSetRequest) -> operations.DeleteConfigurationSetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes an existing configuration set.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/sms-voice/configuration-sets/{ConfigurationSetName}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -172,15 +203,17 @@ class SDK:
 
     
     def delete_configuration_set_event_destination(self, request: operations.DeleteConfigurationSetEventDestinationRequest) -> operations.DeleteConfigurationSetEventDestinationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes an event destination in a configuration set.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/sms-voice/configuration-sets/{ConfigurationSetName}/event-destinations/{EventDestinationName}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -211,15 +244,17 @@ class SDK:
 
     
     def get_configuration_set_event_destinations(self, request: operations.GetConfigurationSetEventDestinationsRequest) -> operations.GetConfigurationSetEventDestinationsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Obtain information about an event destination, including the types of events it reports, the Amazon Resource Name (ARN) of the destination, and the name of the event destination.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/sms-voice/configuration-sets/{ConfigurationSetName}/event-destinations", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -250,17 +285,18 @@ class SDK:
 
     
     def list_configuration_sets(self, request: operations.ListConfigurationSetsRequest) -> operations.ListConfigurationSetsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List all of the configuration sets associated with your Amazon Pinpoint account in the current region.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/sms-voice/configuration-sets"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -287,22 +323,22 @@ class SDK:
 
     
     def send_voice_message(self, request: operations.SendVoiceMessageRequest) -> operations.SendVoiceMessageResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new voice message and send it to a recipient's phone number.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/sms-voice/voice/message"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -329,22 +365,22 @@ class SDK:
 
     
     def update_configuration_set_event_destination(self, request: operations.UpdateConfigurationSetEventDestinationRequest) -> operations.UpdateConfigurationSetEventDestinationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update an event destination in a configuration set. An event destination is a location that you publish information about your voice calls to. For example, you can log an event to an Amazon CloudWatch destination when a call fails.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/sms-voice/configuration-sets/{ConfigurationSetName}/event-destinations/{EventDestinationName}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

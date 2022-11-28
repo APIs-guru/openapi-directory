@@ -5,19 +5,19 @@ from sdk.models import shared
 
 @dataclass
 class PostV05SubscriptionsHiuOnNotifyHeaders:
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
+    authorization: str = field(metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class PostV05SubscriptionsHiuOnNotifyRequest:
-    headers: PostV05SubscriptionsHiuOnNotifyHeaders = field(default=None)
-    request: shared.HiuSubscriptionNotificationAcknowledgment = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: PostV05SubscriptionsHiuOnNotifyHeaders = field()
+    request: shared.HiuSubscriptionNotificationAcknowledgment = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PostV05SubscriptionsHiuOnNotifyResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

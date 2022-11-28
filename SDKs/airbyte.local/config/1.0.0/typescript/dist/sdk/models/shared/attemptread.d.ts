@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AttemptStatusEnum } from "./attemptstatusenum";
 export declare class AttemptRead extends SpeakeasyBase {
     bytesSynced?: number;

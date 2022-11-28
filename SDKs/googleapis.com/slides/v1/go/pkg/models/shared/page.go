@@ -10,6 +10,8 @@ const (
 	PagePageTypeEnumNotesMaster PagePageTypeEnum = "NOTES_MASTER"
 )
 
+// Page
+// A page in a presentation.
 type Page struct {
 	LayoutProperties *LayoutProperties `json:"layoutProperties,omitempty"`
 	MasterProperties *MasterProperties `json:"masterProperties,omitempty"`

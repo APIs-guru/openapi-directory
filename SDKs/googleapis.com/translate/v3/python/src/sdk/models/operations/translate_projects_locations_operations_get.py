@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class TranslateProjectsLocationsOperationsGetPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class TranslateProjectsLocationsOperationsGetQueryParams:
 
 @dataclass
 class TranslateProjectsLocationsOperationsGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class TranslateProjectsLocationsOperationsGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,14 +44,14 @@ class TranslateProjectsLocationsOperationsGetSecurity:
 
 @dataclass
 class TranslateProjectsLocationsOperationsGetRequest:
-    path_params: TranslateProjectsLocationsOperationsGetPathParams = field(default=None)
-    query_params: TranslateProjectsLocationsOperationsGetQueryParams = field(default=None)
-    security: TranslateProjectsLocationsOperationsGetSecurity = field(default=None)
+    path_params: TranslateProjectsLocationsOperationsGetPathParams = field()
+    query_params: TranslateProjectsLocationsOperationsGetQueryParams = field()
+    security: TranslateProjectsLocationsOperationsGetSecurity = field()
     
 
 @dataclass
 class TranslateProjectsLocationsOperationsGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetFactOnthisdayEventQueryParams = /** @class */ (function (_super) {
     __extends(GetFactOnthisdayEventQueryParams, _super);
@@ -30,11 +30,11 @@ var GetFactOnthisdayEventQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=day" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=day" }),
         __metadata("design:type", String)
     ], GetFactOnthisdayEventQueryParams.prototype, "day", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=month" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=month" }),
         __metadata("design:type", String)
     ], GetFactOnthisdayEventQueryParams.prototype, "month", void 0);
     return GetFactOnthisdayEventQueryParams;
@@ -46,7 +46,7 @@ var GetFactOnthisdayEventSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeXFungeneratorsApiSecret)
     ], GetFactOnthisdayEventSecurity.prototype, "xFungeneratorsApiSecret", void 0);
     return GetFactOnthisdayEventSecurity;
@@ -58,11 +58,11 @@ var GetFactOnthisdayEventRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetFactOnthisdayEventQueryParams)
     ], GetFactOnthisdayEventRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetFactOnthisdayEventSecurity)
     ], GetFactOnthisdayEventRequest.prototype, "security", void 0);
     return GetFactOnthisdayEventRequest;
@@ -74,11 +74,11 @@ var GetFactOnthisdayEventResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetFactOnthisdayEventResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetFactOnthisdayEventResponse.prototype, "statusCode", void 0);
     return GetFactOnthisdayEventResponse;

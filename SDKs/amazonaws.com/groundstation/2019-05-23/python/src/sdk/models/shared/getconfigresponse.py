@@ -1,17 +1,22 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import configtypedata
-from . import configcapabilitytype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetConfigResponse:
-    config_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'configArn' }})
-    config_data: configtypedata.ConfigTypeData = field(default=None, metadata={'dataclasses_json': { 'field_name': 'configData' }})
-    config_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'configId' }})
-    config_type: Optional[configcapabilitytype_enum.ConfigCapabilityTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'configType' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
+    r"""GetConfigResponse
+    <p/>
+    """
+    
+    config_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('configArn') }})
+    config_data: ConfigTypeData = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('configData') }})
+    config_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('configId') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    config_type: Optional[ConfigCapabilityTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('configType') }})
+    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     

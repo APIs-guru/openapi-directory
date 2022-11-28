@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // EnableVpcServiceControlsRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request to enable VPC service controls.
 **/
 export class EnableVpcServiceControlsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=consumerNetwork" })
+  @SpeakeasyMetadata({ data: "json, name=consumerNetwork" })
   consumerNetwork?: string;
 }

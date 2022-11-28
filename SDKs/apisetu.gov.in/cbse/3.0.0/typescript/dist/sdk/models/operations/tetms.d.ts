@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class TetmsRequestBodyCertificateParameters extends SpeakeasyBase {
     fullName: string;
@@ -17,10 +17,6 @@ export declare class TetmsRequestBody extends SpeakeasyBase {
 export declare class TetmsSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class TetmsRequest extends SpeakeasyBase {
-    request?: TetmsRequestBody;
-    security: TetmsSecurity;
 }
 export declare enum Tetms400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -103,6 +99,10 @@ export declare enum Tetms504ApplicationJsonErrorDescriptionEnum {
 export declare class Tetms504ApplicationJson extends SpeakeasyBase {
     error?: Tetms504ApplicationJsonErrorEnum;
     errorDescription?: Tetms504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class TetmsRequest extends SpeakeasyBase {
+    request?: TetmsRequestBody;
+    security: TetmsSecurity;
 }
 export declare class TetmsResponse extends SpeakeasyBase {
     contentType: string;

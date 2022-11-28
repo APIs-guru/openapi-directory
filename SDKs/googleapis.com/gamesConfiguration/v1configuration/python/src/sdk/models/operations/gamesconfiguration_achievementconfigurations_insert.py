@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GamesConfigurationAchievementConfigurationsInsertPathParams:
-    application_id: str = field(default=None, metadata={'path_param': { 'field_name': 'applicationId', 'style': 'simple', 'explode': False }})
+    application_id: str = field(metadata={'path_param': { 'field_name': 'applicationId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class GamesConfigurationAchievementConfigurationsInsertQueryParams:
 
 @dataclass
 class GamesConfigurationAchievementConfigurationsInsertSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GamesConfigurationAchievementConfigurationsInsertRequest:
-    path_params: GamesConfigurationAchievementConfigurationsInsertPathParams = field(default=None)
-    query_params: GamesConfigurationAchievementConfigurationsInsertQueryParams = field(default=None)
+    path_params: GamesConfigurationAchievementConfigurationsInsertPathParams = field()
+    query_params: GamesConfigurationAchievementConfigurationsInsertQueryParams = field()
+    security: GamesConfigurationAchievementConfigurationsInsertSecurity = field()
     request: Optional[shared.AchievementConfiguration] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: GamesConfigurationAchievementConfigurationsInsertSecurity = field(default=None)
     
 
 @dataclass
 class GamesConfigurationAchievementConfigurationsInsertResponse:
+    content_type: str = field()
+    status_code: int = field()
     achievement_configuration: Optional[shared.AchievementConfiguration] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

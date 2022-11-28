@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -20,20 +21,20 @@ class DirectoryGroupsInsertQueryParams:
 
 @dataclass
 class DirectoryGroupsInsertSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DirectoryGroupsInsertRequest:
-    query_params: DirectoryGroupsInsertQueryParams = field(default=None)
+    query_params: DirectoryGroupsInsertQueryParams = field()
+    security: DirectoryGroupsInsertSecurity = field()
     request: Optional[shared.Group] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DirectoryGroupsInsertSecurity = field(default=None)
     
 
 @dataclass
 class DirectoryGroupsInsertResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     group: Optional[shared.Group] = field(default=None)
-    status_code: int = field(default=None)
     

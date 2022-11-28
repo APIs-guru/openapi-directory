@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { FormatEnum } from "./formatenum";
 /**
  * An object that represents a single cell in a table.

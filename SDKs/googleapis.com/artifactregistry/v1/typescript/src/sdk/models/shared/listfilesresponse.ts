@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleDevtoolsArtifactregistryV1File } from "./googledevtoolsartifactregistryv1file";
+
 
 
 // ListFilesResponse
@@ -8,9 +8,9 @@ import { GoogleDevtoolsArtifactregistryV1File } from "./googledevtoolsartifactre
  * The response from listing files.
 **/
 export class ListFilesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=files", elemType: shared.GoogleDevtoolsArtifactregistryV1File })
+  @SpeakeasyMetadata({ data: "json, name=files", elemType: GoogleDevtoolsArtifactregistryV1File })
   files?: GoogleDevtoolsArtifactregistryV1File[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

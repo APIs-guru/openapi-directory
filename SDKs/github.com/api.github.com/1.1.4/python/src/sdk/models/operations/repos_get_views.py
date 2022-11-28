@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ReposGetViewsPathParams:
-    owner: str = field(default=None, metadata={'path_param': { 'field_name': 'owner', 'style': 'simple', 'explode': False }})
-    repo: str = field(default=None, metadata={'path_param': { 'field_name': 'repo', 'style': 'simple', 'explode': False }})
+    owner: str = field(metadata={'path_param': { 'field_name': 'owner', 'style': 'simple', 'explode': False }})
+    repo: str = field(metadata={'path_param': { 'field_name': 'repo', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,14 +17,14 @@ class ReposGetViewsQueryParams:
 
 @dataclass
 class ReposGetViewsRequest:
-    path_params: ReposGetViewsPathParams = field(default=None)
-    query_params: ReposGetViewsQueryParams = field(default=None)
+    path_params: ReposGetViewsPathParams = field()
+    query_params: ReposGetViewsQueryParams = field()
     
 
 @dataclass
 class ReposGetViewsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     basic_error: Optional[shared.BasicError] = field(default=None)
     view_traffic: Optional[shared.ViewTraffic] = field(default=None)
     

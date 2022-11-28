@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AppRestrictionsSchemaChangeEvent } from "./apprestrictionsschemachangeevent";
 import { AppUpdateEvent } from "./appupdateevent";
 import { DeviceReportUpdateEvent } from "./devicereportupdateevent";
@@ -8,17 +8,18 @@ import { NewPermissionsEvent } from "./newpermissionsevent";
 import { ProductApprovalEvent } from "./productapprovalevent";
 import { ProductAvailabilityChangeEvent } from "./productavailabilitychangeevent";
 
+
 export enum NotificationNotificationTypeEnum {
-    Unknown = "unknown"
-,    TestNotification = "testNotification"
-,    ProductApproval = "productApproval"
-,    InstallFailure = "installFailure"
-,    AppUpdate = "appUpdate"
-,    NewPermissions = "newPermissions"
-,    AppRestricionsSchemaChange = "appRestricionsSchemaChange"
-,    ProductAvailabilityChange = "productAvailabilityChange"
-,    NewDevice = "newDevice"
-,    DeviceReportUpdate = "deviceReportUpdate"
+    Unknown = "unknown",
+    TestNotification = "testNotification",
+    ProductApproval = "productApproval",
+    InstallFailure = "installFailure",
+    AppUpdate = "appUpdate",
+    NewPermissions = "newPermissions",
+    AppRestricionsSchemaChange = "appRestricionsSchemaChange",
+    ProductAvailabilityChange = "productAvailabilityChange",
+    NewDevice = "newDevice",
+    DeviceReportUpdate = "deviceReportUpdate"
 }
 
 
@@ -27,36 +28,36 @@ export enum NotificationNotificationTypeEnum {
  * A notification of one event relating to an enterprise.
 **/
 export class Notification extends SpeakeasyBase {
-  @Metadata({ data: "json, name=appRestrictionsSchemaChangeEvent" })
+  @SpeakeasyMetadata({ data: "json, name=appRestrictionsSchemaChangeEvent" })
   appRestrictionsSchemaChangeEvent?: AppRestrictionsSchemaChangeEvent;
 
-  @Metadata({ data: "json, name=appUpdateEvent" })
+  @SpeakeasyMetadata({ data: "json, name=appUpdateEvent" })
   appUpdateEvent?: AppUpdateEvent;
 
-  @Metadata({ data: "json, name=deviceReportUpdateEvent" })
+  @SpeakeasyMetadata({ data: "json, name=deviceReportUpdateEvent" })
   deviceReportUpdateEvent?: DeviceReportUpdateEvent;
 
-  @Metadata({ data: "json, name=enterpriseId" })
+  @SpeakeasyMetadata({ data: "json, name=enterpriseId" })
   enterpriseId?: string;
 
-  @Metadata({ data: "json, name=installFailureEvent" })
+  @SpeakeasyMetadata({ data: "json, name=installFailureEvent" })
   installFailureEvent?: InstallFailureEvent;
 
-  @Metadata({ data: "json, name=newDeviceEvent" })
+  @SpeakeasyMetadata({ data: "json, name=newDeviceEvent" })
   newDeviceEvent?: NewDeviceEvent;
 
-  @Metadata({ data: "json, name=newPermissionsEvent" })
+  @SpeakeasyMetadata({ data: "json, name=newPermissionsEvent" })
   newPermissionsEvent?: NewPermissionsEvent;
 
-  @Metadata({ data: "json, name=notificationType" })
+  @SpeakeasyMetadata({ data: "json, name=notificationType" })
   notificationType?: NotificationNotificationTypeEnum;
 
-  @Metadata({ data: "json, name=productApprovalEvent" })
+  @SpeakeasyMetadata({ data: "json, name=productApprovalEvent" })
   productApprovalEvent?: ProductApprovalEvent;
 
-  @Metadata({ data: "json, name=productAvailabilityChangeEvent" })
+  @SpeakeasyMetadata({ data: "json, name=productAvailabilityChangeEvent" })
   productAvailabilityChangeEvent?: ProductAvailabilityChangeEvent;
 
-  @Metadata({ data: "json, name=timestampMillis" })
+  @SpeakeasyMetadata({ data: "json, name=timestampMillis" })
   timestampMillis?: string;
 }

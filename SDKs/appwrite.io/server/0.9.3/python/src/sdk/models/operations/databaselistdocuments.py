@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class DatabaseListDocumentsPathParams:
-    collection_id: str = field(default=None, metadata={'path_param': { 'field_name': 'collectionId', 'style': 'simple', 'explode': False }})
+    collection_id: str = field(metadata={'path_param': { 'field_name': 'collectionId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,21 +21,21 @@ class DatabaseListDocumentsQueryParams:
 
 @dataclass
 class DatabaseListDocumentsSecurity:
-    jwt: shared.SchemeJwt = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
-    key: shared.SchemeKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
-    project: shared.SchemeProject = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    jwt: shared.SchemeJwt = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    key: shared.SchemeKey = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    project: shared.SchemeProject = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class DatabaseListDocumentsRequest:
-    path_params: DatabaseListDocumentsPathParams = field(default=None)
-    query_params: DatabaseListDocumentsQueryParams = field(default=None)
-    security: DatabaseListDocumentsSecurity = field(default=None)
+    path_params: DatabaseListDocumentsPathParams = field()
+    query_params: DatabaseListDocumentsQueryParams = field()
+    security: DatabaseListDocumentsSecurity = field()
     
 
 @dataclass
 class DatabaseListDocumentsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     document_list: Optional[shared.DocumentList] = field(default=None)
     

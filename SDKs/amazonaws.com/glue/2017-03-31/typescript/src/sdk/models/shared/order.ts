@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Order
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies the sort order of a sorted column.
 **/
 export class Order extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Column" })
+  @SpeakeasyMetadata({ data: "json, name=Column" })
   column: string;
 
-  @Metadata({ data: "json, name=SortOrder" })
+  @SpeakeasyMetadata({ data: "json, name=SortOrder" })
   sortOrder: number;
 }

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetAcceptVpcEndpointConnectionsActionEnum(str, Enum):
     ACCEPT_VPC_ENDPOINT_CONNECTIONS = "AcceptVpcEndpointConnections"
@@ -10,11 +14,11 @@ class GetAcceptVpcEndpointConnectionsVersionEnum(str, Enum):
 
 @dataclass
 class GetAcceptVpcEndpointConnectionsQueryParams:
-    action: GetAcceptVpcEndpointConnectionsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetAcceptVpcEndpointConnectionsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    service_id: str = field(metadata={'query_param': { 'field_name': 'ServiceId', 'style': 'form', 'explode': True }})
+    version: GetAcceptVpcEndpointConnectionsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    vpc_endpoint_id: List[str] = field(metadata={'query_param': { 'field_name': 'VpcEndpointId', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    service_id: str = field(default=None, metadata={'query_param': { 'field_name': 'ServiceId', 'style': 'form', 'explode': True }})
-    version: GetAcceptVpcEndpointConnectionsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
-    vpc_endpoint_id: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'VpcEndpointId', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetAcceptVpcEndpointConnectionsHeaders:
 
 @dataclass
 class GetAcceptVpcEndpointConnectionsRequest:
-    query_params: GetAcceptVpcEndpointConnectionsQueryParams = field(default=None)
-    headers: GetAcceptVpcEndpointConnectionsHeaders = field(default=None)
+    headers: GetAcceptVpcEndpointConnectionsHeaders = field()
+    query_params: GetAcceptVpcEndpointConnectionsQueryParams = field()
     
 
 @dataclass
 class GetAcceptVpcEndpointConnectionsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

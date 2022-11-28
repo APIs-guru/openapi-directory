@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetAnnotationCountByAccIdAndSpeciesUsingGetPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=accId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=accId" })
   accId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=includeChildren" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=includeChildren" })
   includeChildren: boolean;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=speciesTypeKey" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=speciesTypeKey" })
   speciesTypeKey: number;
 }
 
 
 export class GetAnnotationCountByAccIdAndSpeciesUsingGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetAnnotationCountByAccIdAndSpeciesUsingGetPathParams;
 }
 
 
 export class GetAnnotationCountByAccIdAndSpeciesUsingGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

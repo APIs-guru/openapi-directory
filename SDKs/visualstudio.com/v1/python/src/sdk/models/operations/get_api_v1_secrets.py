@@ -10,14 +10,14 @@ class GetAPIV1SecretsQueryParams:
 
 @dataclass
 class GetAPIV1SecretsRequest:
-    query_params: GetAPIV1SecretsQueryParams = field(default=None)
+    query_params: GetAPIV1SecretsQueryParams = field()
     
 
 @dataclass
 class GetAPIV1SecretsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     problem_details: Optional[dict[str, Any]] = field(default=None)
     scoped_secret_result_bodies: Optional[List[shared.ScopedSecretResultBody]] = field(default=None)
-    status_code: int = field(default=None)
     

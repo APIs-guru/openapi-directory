@@ -17,3 +17,16 @@ type CategoryInfo struct {
 	Options         *int32                 `json:"options,omitempty"`
 	Order           *int32                 `json:"order,omitempty"`
 }
+
+type CategoryInfoInput struct {
+	Augmentations   []CategoryAugmentation `json:"augmentations,omitempty"`
+	Color           *string                `json:"color,omitempty"`
+	ID              *string                `json:"id,omitempty"`
+	ImageName       *string                `json:"imageName,omitempty"`
+	KeywordMatching *int32                 `json:"keywordMatching,omitempty"`
+	Keywords        []string               `json:"keywords,omitempty"`
+	LastMatch       *time.Time             `json:"lastMatch,omitempty"`
+	Name            *string                `json:"name,omitempty"`
+	Options         *int32                 `json:"options,omitempty"`
+	Order           *int32                 `json:"order,omitempty"`
+}

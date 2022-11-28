@@ -1,93 +1,94 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RegisterDevicePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=IdentityId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=IdentityId" })
   identityId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=IdentityPoolId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=IdentityPoolId" })
   identityPoolId: string;
 }
 
 
 export class RegisterDeviceHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 export enum RegisterDeviceRequestBodyPlatformEnum {
-    Apns = "APNS"
-,    ApnsSandbox = "APNS_SANDBOX"
-,    Gcm = "GCM"
-,    Adm = "ADM"
+    Apns = "APNS",
+    ApnsSandbox = "APNS_SANDBOX",
+    Gcm = "GCM",
+    Adm = "ADM"
 }
 
 
 export class RegisterDeviceRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Platform" })
+  @SpeakeasyMetadata({ data: "json, name=Platform" })
   platform: RegisterDeviceRequestBodyPlatformEnum;
 
-  @Metadata({ data: "json, name=Token" })
+  @SpeakeasyMetadata({ data: "json, name=Token" })
   token: string;
 }
 
 
 export class RegisterDeviceRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: RegisterDevicePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: RegisterDeviceHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: RegisterDeviceRequestBody;
 }
 
 
 export class RegisterDeviceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalErrorException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidConfigurationException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidParameterException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   notAuthorizedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   registerDeviceResponse?: shared.RegisterDeviceResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tooManyRequestsException?: any;
 }

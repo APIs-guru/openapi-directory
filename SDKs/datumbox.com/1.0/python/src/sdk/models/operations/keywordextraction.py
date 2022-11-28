@@ -4,7 +4,7 @@ from typing import Optional
 
 @dataclass
 class KeywordExtractionRequestBody:
-    api_key: str = field(default=None, metadata={'form': { 'field_name': 'api_key' }})
+    api_key: str = field(metadata={'form': { 'field_name': 'api_key' }})
     n: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'n' }})
     text: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'text' }})
     
@@ -16,6 +16,6 @@ class KeywordExtractionRequest:
 
 @dataclass
 class KeywordExtractionResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

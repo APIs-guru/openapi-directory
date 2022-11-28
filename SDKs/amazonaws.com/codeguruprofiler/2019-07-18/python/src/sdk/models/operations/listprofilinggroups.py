@@ -1,5 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
@@ -23,15 +26,15 @@ class ListProfilingGroupsHeaders:
 
 @dataclass
 class ListProfilingGroupsRequest:
-    query_params: ListProfilingGroupsQueryParams = field(default=None)
-    headers: ListProfilingGroupsHeaders = field(default=None)
+    headers: ListProfilingGroupsHeaders = field()
+    query_params: ListProfilingGroupsQueryParams = field()
     
 
 @dataclass
 class ListProfilingGroupsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_server_exception: Optional[Any] = field(default=None)
     list_profiling_groups_response: Optional[shared.ListProfilingGroupsResponse] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

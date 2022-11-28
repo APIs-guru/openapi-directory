@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudContactcenterinsightsV1ConversationTranscriptTranscriptSegmentDialogflowSegmentMetadata
+// Metadata from Dialogflow relating to the current transcript segment.
 type GoogleCloudContactcenterinsightsV1ConversationTranscriptTranscriptSegmentDialogflowSegmentMetadata struct {
 	SmartReplyAllowlistCovered *bool `json:"smartReplyAllowlistCovered,omitempty"`
 }

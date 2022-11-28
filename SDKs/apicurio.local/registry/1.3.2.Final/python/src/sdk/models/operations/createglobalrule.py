@@ -5,12 +5,12 @@ from sdk.models import shared
 
 @dataclass
 class CreateGlobalRuleRequest:
-    request: shared.Rule = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.Rule = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateGlobalRuleResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[shared.Error] = field(default=None)
-    status_code: int = field(default=None)
     

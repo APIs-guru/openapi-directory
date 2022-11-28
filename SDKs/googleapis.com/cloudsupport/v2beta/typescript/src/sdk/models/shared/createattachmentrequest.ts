@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { Attachment } from "./attachment";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { AttachmentInput } from "./attachment";
 
 
-// CreateAttachmentRequest
+
+// CreateAttachmentRequestInput
 /** 
  * The request message for the CreateAttachment endpoint.
 **/
-export class CreateAttachmentRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attachment" })
-  attachment?: Attachment;
+export class CreateAttachmentRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=attachment" })
+  attachment?: AttachmentInput;
 }

@@ -20,6 +20,8 @@ const (
 	CreateSignalingChannelRequestBodyChannelTypeEnumSingleMaster CreateSignalingChannelRequestBodyChannelTypeEnum = "SINGLE_MASTER"
 )
 
+// CreateSignalingChannelRequestBodySingleMasterConfiguration
+// A structure that contains the configuration for the <code>SINGLE_MASTER</code> channel type.
 type CreateSignalingChannelRequestBodySingleMasterConfiguration struct {
 	MessageTTLSeconds *int64 `json:"MessageTtlSeconds,omitempty"`
 }

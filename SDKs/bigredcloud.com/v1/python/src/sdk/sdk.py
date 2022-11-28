@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import Any,List,Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,26 +14,50 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def accounts_get(self) -> operations.AccountsGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of company's Accounts. Supports OData querying protocol.
+        Filtering is forbidden.
+        Ordering is allowed by \"id\" and \"code\" fields.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/accounts"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -45,13 +72,18 @@ class SDK:
 
     
     def analysis_categories_get(self) -> operations.AnalysisCategoriesGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of company's Analysis Categories. Supports OData querying protocol.
+        Filtering is allowed by \"categoryTypeId\" field.
+        Ordering is allowed by \"id\" and \"orderIndex\" fields.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/analysisCategories"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -66,15 +98,17 @@ class SDK:
 
     
     def bank_accounts_delete(self, request: operations.BankAccountsDeleteRequest) -> operations.BankAccountsDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Removes an existing Bank Account.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/bankAccounts/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -89,13 +123,18 @@ class SDK:
 
     
     def bank_accounts_get(self) -> operations.BankAccountsGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of company's Bank Account. Supports OData querying protocol.
+        Filtering is forbidden.
+        Ordering is allowed by \"id\" and \"acCode\" fields.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/bankAccounts"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -110,22 +149,22 @@ class SDK:
 
     
     def bank_accounts_post(self, request: operations.BankAccountsPostRequest) -> operations.BankAccountsPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a new Bank Account.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/bankAccounts"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -140,22 +179,22 @@ class SDK:
 
     
     def bank_accounts_process_batch(self, request: operations.BankAccountsProcessBatchRequest) -> operations.BankAccountsProcessBatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Processes a batch of Bank Accounts.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/bankAccounts/batch"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -170,22 +209,22 @@ class SDK:
 
     
     def bank_accounts_put(self, request: operations.BankAccountsPutRequest) -> operations.BankAccountsPutResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates an existing Bank Account.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/bankAccounts/{id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -200,13 +239,18 @@ class SDK:
 
     
     def book_tran_types_get(self) -> operations.BookTranTypesGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of global Book Transactions' Types. Supports OData querying protocol.
+        Filtering is forbidden.
+        Ordering is allowed by \"id\" field.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/bookTranTypes"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -221,15 +265,17 @@ class SDK:
 
     
     def cash_payments_delete(self, request: operations.CashPaymentsDeleteRequest) -> operations.CashPaymentsDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Removes an existing Cash Payment.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/cashPayments/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -244,13 +290,18 @@ class SDK:
 
     
     def cash_payments_get(self) -> operations.CashPaymentsGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of company's Cash Payments. Supports OData querying protocol.
+        Filtering is allowed by \"entryDate\" field.
+        Ordering is allowed by \"id\" field.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/cashPayments"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -265,22 +316,22 @@ class SDK:
 
     
     def cash_payments_post(self, request: operations.CashPaymentsPostRequest) -> operations.CashPaymentsPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a new Cash Payment.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/cashPayments"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -295,22 +346,22 @@ class SDK:
 
     
     def cash_payments_process_batch(self, request: operations.CashPaymentsProcessBatchRequest) -> operations.CashPaymentsProcessBatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Processes a batch of Cash Payments.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/cashPayments/batch"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -325,22 +376,22 @@ class SDK:
 
     
     def cash_payments_put(self, request: operations.CashPaymentsPutRequest) -> operations.CashPaymentsPutResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates an existing Cash Payment.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/cashPayments/{id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -355,15 +406,17 @@ class SDK:
 
     
     def cash_receipts_delete(self, request: operations.CashReceiptsDeleteRequest) -> operations.CashReceiptsDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Removes an existing Cash Receipt.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/cashReceipts/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -378,13 +431,18 @@ class SDK:
 
     
     def cash_receipts_get(self) -> operations.CashReceiptsGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of company's Cash Receipts. Supports OData querying protocol.
+        Filtering is allowed by \"entryDate\" field.
+        Ordering is allowed by \"id\" field.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/cashReceipts"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -399,22 +457,22 @@ class SDK:
 
     
     def cash_receipts_post(self, request: operations.CashReceiptsPostRequest) -> operations.CashReceiptsPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a new Cash Receipt.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/cashReceipts"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -429,22 +487,22 @@ class SDK:
 
     
     def cash_receipts_process_batch(self, request: operations.CashReceiptsProcessBatchRequest) -> operations.CashReceiptsProcessBatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Processes a batch of Cash Receipts.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/cashReceipts/batch"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -459,22 +517,22 @@ class SDK:
 
     
     def cash_receipts_put(self, request: operations.CashReceiptsPutRequest) -> operations.CashReceiptsPutResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates an existing Cash Receipt.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/cashReceipts/{id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -489,13 +547,18 @@ class SDK:
 
     
     def category_types_get(self) -> operations.CategoryTypesGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of company's Category Types. Supports OData querying protocol.
+        Filtering is forbidden.
+        Ordering is allowed by \"id\" field.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/categoryTypes"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -510,13 +573,17 @@ class SDK:
 
     
     def company_settings_get(self) -> operations.CompanySettingsGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of company settings. Supports OData querying protocol.
+        Filtering is forbidden.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/companySettings"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -531,13 +598,16 @@ class SDK:
 
     
     def company_setup_config_get(self) -> operations.CompanySetupConfigGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns the company configuration settings.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/companySetupConfig"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -552,13 +622,16 @@ class SDK:
 
     
     def company_setup_config_get_company_options(self) -> operations.CompanySetupConfigGetCompanyOptionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns the company option setting.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/companySetupConfig/getCompanyOptions"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -573,13 +646,16 @@ class SDK:
 
     
     def company_setup_config_get_financial_year(self) -> operations.CompanySetupConfigGetFinancialYearResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns the financial year.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/companySetupConfig/getFinancialYear"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -594,15 +670,17 @@ class SDK:
 
     
     def customers_delete(self, request: operations.CustomersDeleteRequest) -> operations.CustomersDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Removes an existing Customer.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/customers/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -617,13 +695,18 @@ class SDK:
 
     
     def customers_get(self) -> operations.CustomersGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of company's Customers. Supports OData querying protocol.
+        Filtering is forbidden.
+        Ordering is allowed by \"id\" and \"code\" fields.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/customers"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -638,13 +721,16 @@ class SDK:
 
     
     def customers_get_account_trans(self, request: operations.CustomersGetAccountTransRequest) -> operations.CustomersGetAccountTransResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of Customer's account transactions.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/customers/{itemId}/accountTrans", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -659,13 +745,16 @@ class SDK:
 
     
     def customers_get_opening_balance(self, request: operations.CustomersGetOpeningBalanceRequest) -> operations.CustomersGetOpeningBalanceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a Customer's opening balances, calculated for the next periods: current month, one month old, two months old, three and more months old.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/customers/{itemId}/openingBalance", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -680,13 +769,16 @@ class SDK:
 
     
     def customers_get_opening_balance_list(self, request: operations.CustomersGetOpeningBalanceListRequest) -> operations.CustomersGetOpeningBalanceListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of Customer's opening balance transactions.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/customers/{itemId}/openingBalanceList", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -701,13 +793,16 @@ class SDK:
 
     
     def customers_get_quotes(self, request: operations.CustomersGetQuotesRequest) -> operations.CustomersGetQuotesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of Customer's quotes.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/customers/{itemId}/quotes", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -722,22 +817,22 @@ class SDK:
 
     
     def customers_post(self, request: operations.CustomersPostRequest) -> operations.CustomersPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a new Customer.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/customers"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -752,22 +847,22 @@ class SDK:
 
     
     def customers_process_batch(self, request: operations.CustomersProcessBatchRequest) -> operations.CustomersProcessBatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Processes a batch of Customers.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/customers/batch"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -782,22 +877,22 @@ class SDK:
 
     
     def customers_put(self, request: operations.CustomersPutRequest) -> operations.CustomersPutResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates an existing Customer.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/customers/{id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -812,22 +907,23 @@ class SDK:
 
     
     def email_send_email_statement(self, request: operations.EmailSendEmailStatementRequest) -> operations.EmailSendEmailStatementResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Sends a Statement email.
+        If \"toAddress\" is not empty then email will be sent to this address. Otherwise email will be sent to Statement Customer's address.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/email/sendEmailStatement"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -842,22 +938,23 @@ class SDK:
 
     
     def email_send_quote(self, request: operations.EmailSendQuoteRequest) -> operations.EmailSendQuoteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Sends a Quote email.
+        If \"toAddress\" is not empty then email will be sent to this address. Otherwise email will be sent to Statement Customer's address.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/email/sendQuote"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -872,22 +969,23 @@ class SDK:
 
     
     def email_send_sales_invoice(self, request: operations.EmailSendSalesInvoiceRequest) -> operations.EmailSendSalesInvoiceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Sends a Sales Invoice email.
+        If \"toAddress\" is not empty then email will be sent to this address. Otherwise email will be sent to Sales Invoice Customer's address.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/email/sendSalesInvoice"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -902,13 +1000,16 @@ class SDK:
 
     
     def get_v1_bank_accounts_id_(self, request: operations.GetV1BankAccountsIDRequest) -> operations.GetV1BankAccountsIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns information about a single Bank Account.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/bankAccounts/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -923,13 +1024,16 @@ class SDK:
 
     
     def get_v1_cash_payments_id_(self, request: operations.GetV1CashPaymentsIDRequest) -> operations.GetV1CashPaymentsIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns information about a single Cash Payment.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/cashPayments/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -944,13 +1048,16 @@ class SDK:
 
     
     def get_v1_cash_receipts_id_(self, request: operations.GetV1CashReceiptsIDRequest) -> operations.GetV1CashReceiptsIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns information about a single Cash Receipt.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/cashReceipts/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -965,15 +1072,17 @@ class SDK:
 
     
     def get_v1_customers_id_(self, request: operations.GetV1CustomersIDRequest) -> operations.GetV1CustomersIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns information about a single Customer. You may specify that Customer's ledger balance should be calculated.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/customers/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -988,13 +1097,16 @@ class SDK:
 
     
     def get_v1_payments_id_(self, request: operations.GetV1PaymentsIDRequest) -> operations.GetV1PaymentsIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns information about a single Payments.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/payments/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1009,13 +1121,16 @@ class SDK:
 
     
     def get_v1_products_id_(self, request: operations.GetV1ProductsIDRequest) -> operations.GetV1ProductsIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns information about a single Product.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/products/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1030,13 +1145,16 @@ class SDK:
 
     
     def get_v1_purchases_id_(self, request: operations.GetV1PurchasesIDRequest) -> operations.GetV1PurchasesIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns information about a single Purchases.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/purchases/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1051,13 +1169,16 @@ class SDK:
 
     
     def get_v1_quotes_id_(self, request: operations.GetV1QuotesIDRequest) -> operations.GetV1QuotesIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns information about a single Quote.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/quotes/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1072,13 +1193,16 @@ class SDK:
 
     
     def get_v1_sales_credit_notes_id_(self, request: operations.GetV1SalesCreditNotesIDRequest) -> operations.GetV1SalesCreditNotesIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns information about a single Sales Credit Note.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/salesCreditNotes/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1093,13 +1217,16 @@ class SDK:
 
     
     def get_v1_sales_entries_id_(self, request: operations.GetV1SalesEntriesIDRequest) -> operations.GetV1SalesEntriesIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns information about a single Sales Entry.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/salesEntries/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1114,13 +1241,16 @@ class SDK:
 
     
     def get_v1_sales_invoices_id_(self, request: operations.GetV1SalesInvoicesIDRequest) -> operations.GetV1SalesInvoicesIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns information about a single Sales Invoice.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/salesInvoices/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1135,13 +1265,16 @@ class SDK:
 
     
     def get_v1_sales_reps_id_(self, request: operations.GetV1SalesRepsIDRequest) -> operations.GetV1SalesRepsIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns information about a single SaleRep.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/salesReps/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1156,15 +1289,17 @@ class SDK:
 
     
     def get_v1_suppliers_id_(self, request: operations.GetV1SuppliersIDRequest) -> operations.GetV1SuppliersIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns information about a single Supplier. You may specify that Supplier's ledger balance should be calculated.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/suppliers/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1179,13 +1314,18 @@ class SDK:
 
     
     def owner_type_groups_get(self) -> operations.OwnerTypeGroupsGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of global Owner Type Groups. Supports OData querying protocol.
+        Filtering is forbidden.
+        Ordering is allowed by \"id\" field.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/ownerTypeGroups"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1200,13 +1340,18 @@ class SDK:
 
     
     def owner_types_get(self) -> operations.OwnerTypesGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of global Owner Types. Supports OData querying protocol.
+        Filtering is forbidden.
+        Ordering is allowed by \"id\" field.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/ownerTypes"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1221,15 +1366,17 @@ class SDK:
 
     
     def payments_delete(self, request: operations.PaymentsDeleteRequest) -> operations.PaymentsDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Removes an existing Payment.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/payments/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1244,13 +1391,18 @@ class SDK:
 
     
     def payments_get(self) -> operations.PaymentsGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of company's Payments. Supports OData querying protocol.
+        Filtering is allowed by \"entryDate\" field.
+        Ordering is allowed by \"id\" field.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/payments"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1265,22 +1417,22 @@ class SDK:
 
     
     def payments_post(self, request: operations.PaymentsPostRequest) -> operations.PaymentsPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a new Payment.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/payments"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1295,22 +1447,22 @@ class SDK:
 
     
     def payments_process_batch(self, request: operations.PaymentsProcessBatchRequest) -> operations.PaymentsProcessBatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Processes a batch of Payments.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/payments/batch"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1325,22 +1477,22 @@ class SDK:
 
     
     def payments_put(self, request: operations.PaymentsPutRequest) -> operations.PaymentsPutResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates an existing Payment.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/payments/{id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1355,15 +1507,17 @@ class SDK:
 
     
     def products_delete(self, request: operations.ProductsDeleteRequest) -> operations.ProductsDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Removes an existing Product.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/products/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1378,13 +1532,18 @@ class SDK:
 
     
     def products_get(self) -> operations.ProductsGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of company's Products. Supports OData querying protocol.
+        Filtering is forbidden.
+        Ordering is allowed by \"id\" and \"stockCode\" fields.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/products"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1399,22 +1558,22 @@ class SDK:
 
     
     def products_post(self, request: operations.ProductsPostRequest) -> operations.ProductsPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a new Product.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/products"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1429,22 +1588,22 @@ class SDK:
 
     
     def products_process_batch(self, request: operations.ProductsProcessBatchRequest) -> operations.ProductsProcessBatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Processes a batch of Products.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/products/batch"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1459,22 +1618,22 @@ class SDK:
 
     
     def products_put(self, request: operations.ProductsPutRequest) -> operations.ProductsPutResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates an existing Product.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/products/{id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1489,15 +1648,17 @@ class SDK:
 
     
     def purchases_delete(self, request: operations.PurchasesDeleteRequest) -> operations.PurchasesDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Removes an existing Purchase.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/purchases/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1512,13 +1673,18 @@ class SDK:
 
     
     def purchases_get(self) -> operations.PurchasesGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of company's Purchases. Supports OData querying protocol.
+        Filtering is allowed by \"entryDate\" field.
+        Ordering is allowed by \"id\" field.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/purchases"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1533,22 +1699,22 @@ class SDK:
 
     
     def purchases_post(self, request: operations.PurchasesPostRequest) -> operations.PurchasesPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a new Purchase.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/purchases"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1563,22 +1729,22 @@ class SDK:
 
     
     def purchases_process_batch(self, request: operations.PurchasesProcessBatchRequest) -> operations.PurchasesProcessBatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Processes a batch of Purchases.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/purchases/batch"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1593,22 +1759,22 @@ class SDK:
 
     
     def purchases_put(self, request: operations.PurchasesPutRequest) -> operations.PurchasesPutResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates an existing Purchase.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/purchases/{id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1623,13 +1789,16 @@ class SDK:
 
     
     def quote_close(self, request: operations.QuoteCloseRequest) -> operations.QuoteCloseResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Close a Quote.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/quotes/close/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("PUT", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1644,15 +1813,17 @@ class SDK:
 
     
     def quote_delete(self, request: operations.QuoteDeleteRequest) -> operations.QuoteDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Removes an existing Quote.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/quotes/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1667,13 +1838,18 @@ class SDK:
 
     
     def quote_get(self) -> operations.QuoteGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of company's Quotes.
+        Filtering is forbidden.
+        Ordering is allowed by \"id\".
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/quotes"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1688,22 +1864,22 @@ class SDK:
 
     
     def quote_post(self, request: operations.QuotePostRequest) -> operations.QuotePostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a new Quote.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/quotes"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1718,22 +1894,22 @@ class SDK:
 
     
     def quote_post_create_quote_with_generating_reference(self, request: operations.QuotePostCreateQuoteWithGeneratingReferenceRequest) -> operations.QuotePostCreateQuoteWithGeneratingReferenceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a new Quote with auto generating reference.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/quotes/createQuoteWithGeneratingReference"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1748,22 +1924,23 @@ class SDK:
 
     
     def quote_post_generate_sale_invoice(self, request: operations.QuotePostGenerateSaleInvoiceRequest) -> operations.QuotePostGenerateSaleInvoiceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Generate a sale invoice from a Quote.
+        When sale invoice is empty, new sale invoice will be generated from Quote.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/quotes/generateSaleInvoice"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1778,22 +1955,22 @@ class SDK:
 
     
     def quote_process_batch(self, request: operations.QuoteProcessBatchRequest) -> operations.QuoteProcessBatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Processes a batch of Quote.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/quotes/batch"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1808,22 +1985,22 @@ class SDK:
 
     
     def quote_put(self, request: operations.QuotePutRequest) -> operations.QuotePutResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates an existing Quote.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/quotes/{id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1838,13 +2015,16 @@ class SDK:
 
     
     def quote_reopen(self, request: operations.QuoteReopenRequest) -> operations.QuoteReopenResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Reopen a Quote.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/quotes/reopen/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("PUT", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1859,15 +2039,17 @@ class SDK:
 
     
     def sales_credit_notes_delete(self, request: operations.SalesCreditNotesDeleteRequest) -> operations.SalesCreditNotesDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Removes an existing Sales Credit Note.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/salesCreditNotes/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1882,13 +2064,18 @@ class SDK:
 
     
     def sales_credit_notes_get(self) -> operations.SalesCreditNotesGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of company's Sales Credit Notes. Supports OData querying protocol.
+        Filtering is allowed by \"entryDate\" field.
+        Ordering is allowed by \"id\" field.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/salesCreditNotes"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1903,22 +2090,22 @@ class SDK:
 
     
     def sales_credit_notes_post(self, request: operations.SalesCreditNotesPostRequest) -> operations.SalesCreditNotesPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a new Sales Credit Note.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/salesCreditNotes"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1933,22 +2120,22 @@ class SDK:
 
     
     def sales_credit_notes_process_batch(self, request: operations.SalesCreditNotesProcessBatchRequest) -> operations.SalesCreditNotesProcessBatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Processes a batch of Sales Credit Notes.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/salesCreditNotes/batch"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1963,22 +2150,22 @@ class SDK:
 
     
     def sales_credit_notes_put(self, request: operations.SalesCreditNotesPutRequest) -> operations.SalesCreditNotesPutResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates an existing Sales Credit Note.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/salesCreditNotes/{id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1993,15 +2180,17 @@ class SDK:
 
     
     def sales_entries_delete(self, request: operations.SalesEntriesDeleteRequest) -> operations.SalesEntriesDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Removes an existing Sales Entry.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/salesEntries/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2016,13 +2205,18 @@ class SDK:
 
     
     def sales_entries_get(self) -> operations.SalesEntriesGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of company's Sales Entries. Supports OData querying protocol.
+        Filtering is allowed by \"entryDate\" field.
+        Ordering is allowed by \"id\" field.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/salesEntries"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2037,22 +2231,22 @@ class SDK:
 
     
     def sales_entries_post(self, request: operations.SalesEntriesPostRequest) -> operations.SalesEntriesPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a new Sales Entry.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/salesEntries"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2067,22 +2261,22 @@ class SDK:
 
     
     def sales_entries_process_batch(self, request: operations.SalesEntriesProcessBatchRequest) -> operations.SalesEntriesProcessBatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Processes a batch of Sales Entries.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/salesEntries/batch"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2097,22 +2291,22 @@ class SDK:
 
     
     def sales_entries_put(self, request: operations.SalesEntriesPutRequest) -> operations.SalesEntriesPutResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates an existing Sales Entry.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/salesEntries/{id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2127,15 +2321,17 @@ class SDK:
 
     
     def sales_invoices_delete(self, request: operations.SalesInvoicesDeleteRequest) -> operations.SalesInvoicesDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Removes an existing Sales Invoice.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/salesInvoices/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2150,13 +2346,18 @@ class SDK:
 
     
     def sales_invoices_get(self) -> operations.SalesInvoicesGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of company's Sales Invoices. Supports OData querying protocol.
+        Filtering is allowed by \"entryDate\" field.
+        Ordering is allowed by \"id\" field.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/salesInvoices"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2171,22 +2372,22 @@ class SDK:
 
     
     def sales_invoices_post(self, request: operations.SalesInvoicesPostRequest) -> operations.SalesInvoicesPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a new Sales Invoice.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/salesInvoices"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2201,22 +2402,22 @@ class SDK:
 
     
     def sales_invoices_post_create_sale_invoice_with_generating_reference(self, request: operations.SalesInvoicesPostCreateSaleInvoiceWithGeneratingReferenceRequest) -> operations.SalesInvoicesPostCreateSaleInvoiceWithGeneratingReferenceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a new Sale Invoice with auto generating reference.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/salesInvoices/createSaleInvoiceWithGeneratingReference"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2231,22 +2432,22 @@ class SDK:
 
     
     def sales_invoices_process_batch(self, request: operations.SalesInvoicesProcessBatchRequest) -> operations.SalesInvoicesProcessBatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Processes a batch of Sales Invoices.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/salesInvoices/batch"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2261,22 +2462,22 @@ class SDK:
 
     
     def sales_invoices_put(self, request: operations.SalesInvoicesPutRequest) -> operations.SalesInvoicesPutResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates an existing Sales Invoice.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/salesInvoices/{id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2291,15 +2492,17 @@ class SDK:
 
     
     def sales_rep_delete(self, request: operations.SalesRepDeleteRequest) -> operations.SalesRepDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Removes an existing Sale Rep.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/salesReps/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2314,13 +2517,18 @@ class SDK:
 
     
     def sales_rep_get(self) -> operations.SalesRepGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of company's SaleRep.
+        Filtering is forbidden.
+        Ordering is allowed by \"id\".
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/salesReps"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2335,22 +2543,22 @@ class SDK:
 
     
     def sales_rep_post(self, request: operations.SalesRepPostRequest) -> operations.SalesRepPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a new SaleRep.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/salesReps"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2365,22 +2573,22 @@ class SDK:
 
     
     def sales_rep_process_batch(self, request: operations.SalesRepProcessBatchRequest) -> operations.SalesRepProcessBatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Processes a batch of Sale Rep.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/salesReps/batch"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2395,22 +2603,22 @@ class SDK:
 
     
     def sales_rep_put(self, request: operations.SalesRepPutRequest) -> operations.SalesRepPutResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates an existing Sale Rep.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/salesReps/{id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2425,13 +2633,18 @@ class SDK:
 
     
     def sales_get(self) -> operations.SalesGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of company's Sales Entries, Sales Invoices and Sales Credit Notes. Supports OData querying protocol.
+        Filtering is allowed by \"entryDate\" field.
+        Ordering is allowed by \"id\" field.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/sales"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2446,15 +2659,17 @@ class SDK:
 
     
     def suppliers_delete(self, request: operations.SuppliersDeleteRequest) -> operations.SuppliersDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Removes an existing Supplier.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/suppliers/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2469,13 +2684,18 @@ class SDK:
 
     
     def suppliers_get(self) -> operations.SuppliersGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of company's Suppliers. Supports OData querying protocol.
+        Filtering is forbidden.
+        Ordering is allowed by \"id\" and \"code\" fields.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/suppliers"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2490,13 +2710,16 @@ class SDK:
 
     
     def suppliers_get_account_trans(self, request: operations.SuppliersGetAccountTransRequest) -> operations.SuppliersGetAccountTransResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of Supplier's account transactions.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/suppliers/{itemId}/accountTrans", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2511,13 +2734,16 @@ class SDK:
 
     
     def suppliers_get_opening_balance(self, request: operations.SuppliersGetOpeningBalanceRequest) -> operations.SuppliersGetOpeningBalanceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a Supplier's opening balances, calculated for the next periods: current month, one month old, two months old, three and more months old.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/suppliers/{itemId}/openingBalance", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2532,13 +2758,16 @@ class SDK:
 
     
     def suppliers_get_opening_balance_list(self, request: operations.SuppliersGetOpeningBalanceListRequest) -> operations.SuppliersGetOpeningBalanceListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of Supplier's opening balance transactions.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/suppliers/{itemId}/openingBalanceList", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2553,22 +2782,22 @@ class SDK:
 
     
     def suppliers_post(self, request: operations.SuppliersPostRequest) -> operations.SuppliersPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a new Supplier.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/suppliers"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2583,22 +2812,22 @@ class SDK:
 
     
     def suppliers_process_batch(self, request: operations.SuppliersProcessBatchRequest) -> operations.SuppliersProcessBatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Processes a batch of Suppliers.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/suppliers/batch"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2613,22 +2842,22 @@ class SDK:
 
     
     def suppliers_put(self, request: operations.SuppliersPutRequest) -> operations.SuppliersPutResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates an existing Supplier.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/suppliers/{id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2643,13 +2872,18 @@ class SDK:
 
     
     def user_defined_fields_get(self) -> operations.UserDefinedFieldsGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of company's User Defined Fields. Supports OData querying protocol.
+        Filtering is allowed by \"categoryTypeId\" field.
+        Ordering is allowed by \"id\" and \"orderIndex\" fields.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/userDefinedFields"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2664,13 +2898,18 @@ class SDK:
 
     
     def vat_analysis_types_get(self) -> operations.VatAnalysisTypesGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of global Vat Analysis Types. Supports OData querying protocol.
+        Filtering is forbidden.
+        Ordering is allowed by \"id\" field.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/vatAnalysisTypes"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2685,13 +2924,18 @@ class SDK:
 
     
     def vat_categories_get(self) -> operations.VatCategoriesGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of global Vat Categories. Supports OData querying protocol.
+        Filtering is forbidden.
+        Ordering is allowed by \"id\" field.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/vatCategories"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2706,22 +2950,22 @@ class SDK:
 
     
     def vat_categories_process_vat_rates(self, request: operations.VatCategoriesProcessVatRatesRequest) -> operations.VatCategoriesProcessVatRatesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Process Vat Rates
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/vatCategories/vatRates"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2736,13 +2980,18 @@ class SDK:
 
     
     def vat_rates_get(self) -> operations.VatRatesGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of company's Vat Rates. Supports OData querying protocol.
+        Filtering is allowed by \"vatCategoryId\" field.
+        Ordering is allowed by \"id\" and \"orderIndex\" fields.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/vatRates"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2757,13 +3006,18 @@ class SDK:
 
     
     def vat_types_get(self) -> operations.VatTypesGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of global Vat Types. Supports OData querying protocol.
+        Filtering is forbidden.
+        Ordering is allowed by \"id\" field.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/vatTypes"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 

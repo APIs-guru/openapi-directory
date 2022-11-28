@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AuthorizationCodesSharedModelsCategory } from "./authorizationcodessharedmodelscategory";
 import { AuthorizationCodesSharedModelsAuthorizationCodeUser } from "./authorizationcodessharedmodelsauthorizationcodeuser";
 
 
+
 export class AuthorizationCodesSharedModelsCategoryUserReport extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Categories", elemType: shared.AuthorizationCodesSharedModelsCategory })
+  @SpeakeasyMetadata({ data: "json, name=Categories", elemType: AuthorizationCodesSharedModelsCategory })
   categories?: AuthorizationCodesSharedModelsCategory[];
 
-  @Metadata({ data: "json, name=User" })
+  @SpeakeasyMetadata({ data: "json, name=User" })
   user?: AuthorizationCodesSharedModelsAuthorizationCodeUser;
 }

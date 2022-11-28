@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeobfuscationFile } from "./deobfuscationfile";
+
 
 
 // DeobfuscationFilesUploadResponse
@@ -7,6 +8,6 @@ import { DeobfuscationFile } from "./deobfuscationfile";
  * Responses for the upload.
 **/
 export class DeobfuscationFilesUploadResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deobfuscationFile" })
+  @SpeakeasyMetadata({ data: "json, name=deobfuscationFile" })
   deobfuscationFile?: DeobfuscationFile;
 }

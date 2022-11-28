@@ -1,18 +1,24 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import modelpackagegroupstatus_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ModelPackageGroupSummary:
-    creation_time: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CreationTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    model_package_group_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ModelPackageGroupArn' }})
-    model_package_group_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ModelPackageGroupDescription' }})
-    model_package_group_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ModelPackageGroupName' }})
-    model_package_group_status: modelpackagegroupstatus_enum.ModelPackageGroupStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ModelPackageGroupStatus' }})
+    r"""ModelPackageGroupSummary
+    Summary information about a model group.
+    """
+    
+    creation_time: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('CreationTime'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    model_package_group_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ModelPackageGroupArn') }})
+    model_package_group_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ModelPackageGroupName') }})
+    model_package_group_status: ModelPackageGroupStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ModelPackageGroupStatus') }})
+    model_package_group_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ModelPackageGroupDescription') }})
     

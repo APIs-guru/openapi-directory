@@ -26,6 +26,8 @@ type TopicSearchResultItemRelated struct {
 	TopicRelation *TopicSearchResultItemRelatedTopicRelation `json:"topic_relation,omitempty"`
 }
 
+// TopicSearchResultItem
+// Topic Search Result Item
 type TopicSearchResultItem struct {
 	Aliases          []TopicSearchResultItemAliases `json:"aliases,omitempty"`
 	CreatedAt        time.Time                      `json:"created_at"`

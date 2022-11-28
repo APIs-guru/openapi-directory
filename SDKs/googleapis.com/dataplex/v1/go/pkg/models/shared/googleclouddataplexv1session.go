@@ -10,6 +10,8 @@ const (
 	GoogleCloudDataplexV1SessionStateEnumActionRequired   GoogleCloudDataplexV1SessionStateEnum = "ACTION_REQUIRED"
 )
 
+// GoogleCloudDataplexV1Session
+// Represents an active analyze session running for a user.
 type GoogleCloudDataplexV1Session struct {
 	CreateTime *string                                `json:"createTime,omitempty"`
 	Name       *string                                `json:"name,omitempty"`

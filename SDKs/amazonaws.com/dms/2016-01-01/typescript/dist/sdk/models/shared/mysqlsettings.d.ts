@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { TargetDbTypeEnum } from "./targetdbtypeenum";
 /**
  * Provides information that defines a MySQL endpoint.

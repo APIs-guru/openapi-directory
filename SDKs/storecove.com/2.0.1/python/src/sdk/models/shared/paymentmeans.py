@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class PaymentMeansCodeEnum(str, Enum):
     CREDIT_TRANSFER = "credit_transfer"
@@ -25,11 +30,15 @@ class PaymentMeansCodeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PaymentMeans:
-    account: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'account' }})
-    branche_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'branche_code' }})
-    code: PaymentMeansCodeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
-    holder: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'holder' }})
-    mandate: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mandate' }})
-    network: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'network' }})
-    payment_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'paymentId' }})
+    r"""PaymentMeans
+    A PaymentMeans is a way to pay the invoice.
+    """
+    
+    code: PaymentMeansCodeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('code') }})
+    account: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('account') }})
+    branche_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('branche_code') }})
+    holder: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('holder') }})
+    mandate: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mandate') }})
+    network: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('network') }})
+    payment_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('paymentId') }})
     

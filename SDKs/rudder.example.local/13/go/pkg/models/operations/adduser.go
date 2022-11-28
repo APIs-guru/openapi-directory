@@ -4,10 +4,6 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-type AddUserRequest struct {
-	Request shared.Users `request:"mediaType=application/json"`
-}
-
 type AddUser200ApplicationJSONActionEnum string
 
 const (
@@ -35,6 +31,10 @@ type AddUser200ApplicationJSON struct {
 	Action AddUser200ApplicationJSONActionEnum `json:"action"`
 	Data   AddUser200ApplicationJSONData       `json:"data"`
 	Result AddUser200ApplicationJSONResultEnum `json:"result"`
+}
+
+type AddUserRequest struct {
+	Request shared.Users `request:"mediaType=application/json"`
 }
 
 type AddUserResponse struct {

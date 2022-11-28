@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LookupSelfDeviceUsersResponse
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Response containing resource names of the DeviceUsers associated with the caller's credentials.
 **/
 export class LookupSelfDeviceUsersResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=customer" })
+  @SpeakeasyMetadata({ data: "json, name=customer" })
   customer?: string;
 
-  @Metadata({ data: "json, name=names" })
+  @SpeakeasyMetadata({ data: "json, name=names" })
   names?: string[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

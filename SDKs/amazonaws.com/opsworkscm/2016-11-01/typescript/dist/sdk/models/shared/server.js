@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { EngineAttribute } from "./engineattribute";
 import { MaintenanceStatusEnum } from "./maintenancestatusenum";
 import { ServerStatusEnum } from "./serverstatusenum";
 // Server
@@ -36,99 +36,99 @@ var Server = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AssociatePublicIpAddress" }),
+        SpeakeasyMetadata({ data: "json, name=AssociatePublicIpAddress" }),
         __metadata("design:type", Boolean)
     ], Server.prototype, "associatePublicIpAddress", void 0);
     __decorate([
-        Metadata({ data: "json, name=BackupRetentionCount" }),
+        SpeakeasyMetadata({ data: "json, name=BackupRetentionCount" }),
         __metadata("design:type", Number)
     ], Server.prototype, "backupRetentionCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=CloudFormationStackArn" }),
+        SpeakeasyMetadata({ data: "json, name=CloudFormationStackArn" }),
         __metadata("design:type", String)
     ], Server.prototype, "cloudFormationStackArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=CreatedAt" }),
+        SpeakeasyMetadata({ data: "json, name=CreatedAt" }),
         __metadata("design:type", Date)
     ], Server.prototype, "createdAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=CustomDomain" }),
+        SpeakeasyMetadata({ data: "json, name=CustomDomain" }),
         __metadata("design:type", String)
     ], Server.prototype, "customDomain", void 0);
     __decorate([
-        Metadata({ data: "json, name=DisableAutomatedBackup" }),
+        SpeakeasyMetadata({ data: "json, name=DisableAutomatedBackup" }),
         __metadata("design:type", Boolean)
     ], Server.prototype, "disableAutomatedBackup", void 0);
     __decorate([
-        Metadata({ data: "json, name=Endpoint" }),
+        SpeakeasyMetadata({ data: "json, name=Endpoint" }),
         __metadata("design:type", String)
     ], Server.prototype, "endpoint", void 0);
     __decorate([
-        Metadata({ data: "json, name=Engine" }),
+        SpeakeasyMetadata({ data: "json, name=Engine" }),
         __metadata("design:type", String)
     ], Server.prototype, "engine", void 0);
     __decorate([
-        Metadata({ data: "json, name=EngineAttributes", elemType: shared.EngineAttribute }),
+        SpeakeasyMetadata({ data: "json, name=EngineAttributes", elemType: EngineAttribute }),
         __metadata("design:type", Array)
     ], Server.prototype, "engineAttributes", void 0);
     __decorate([
-        Metadata({ data: "json, name=EngineModel" }),
+        SpeakeasyMetadata({ data: "json, name=EngineModel" }),
         __metadata("design:type", String)
     ], Server.prototype, "engineModel", void 0);
     __decorate([
-        Metadata({ data: "json, name=EngineVersion" }),
+        SpeakeasyMetadata({ data: "json, name=EngineVersion" }),
         __metadata("design:type", String)
     ], Server.prototype, "engineVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=InstanceProfileArn" }),
+        SpeakeasyMetadata({ data: "json, name=InstanceProfileArn" }),
         __metadata("design:type", String)
     ], Server.prototype, "instanceProfileArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=InstanceType" }),
+        SpeakeasyMetadata({ data: "json, name=InstanceType" }),
         __metadata("design:type", String)
     ], Server.prototype, "instanceType", void 0);
     __decorate([
-        Metadata({ data: "json, name=KeyPair" }),
+        SpeakeasyMetadata({ data: "json, name=KeyPair" }),
         __metadata("design:type", String)
     ], Server.prototype, "keyPair", void 0);
     __decorate([
-        Metadata({ data: "json, name=MaintenanceStatus" }),
+        SpeakeasyMetadata({ data: "json, name=MaintenanceStatus" }),
         __metadata("design:type", String)
     ], Server.prototype, "maintenanceStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=PreferredBackupWindow" }),
+        SpeakeasyMetadata({ data: "json, name=PreferredBackupWindow" }),
         __metadata("design:type", String)
     ], Server.prototype, "preferredBackupWindow", void 0);
     __decorate([
-        Metadata({ data: "json, name=PreferredMaintenanceWindow" }),
+        SpeakeasyMetadata({ data: "json, name=PreferredMaintenanceWindow" }),
         __metadata("design:type", String)
     ], Server.prototype, "preferredMaintenanceWindow", void 0);
     __decorate([
-        Metadata({ data: "json, name=SecurityGroupIds" }),
+        SpeakeasyMetadata({ data: "json, name=SecurityGroupIds" }),
         __metadata("design:type", Array)
     ], Server.prototype, "securityGroupIds", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServerArn" }),
+        SpeakeasyMetadata({ data: "json, name=ServerArn" }),
         __metadata("design:type", String)
     ], Server.prototype, "serverArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServerName" }),
+        SpeakeasyMetadata({ data: "json, name=ServerName" }),
         __metadata("design:type", String)
     ], Server.prototype, "serverName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServiceRoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=ServiceRoleArn" }),
         __metadata("design:type", String)
     ], Server.prototype, "serviceRoleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=Status" }),
+        SpeakeasyMetadata({ data: "json, name=Status" }),
         __metadata("design:type", String)
     ], Server.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=StatusReason" }),
+        SpeakeasyMetadata({ data: "json, name=StatusReason" }),
         __metadata("design:type", String)
     ], Server.prototype, "statusReason", void 0);
     __decorate([
-        Metadata({ data: "json, name=SubnetIds" }),
+        SpeakeasyMetadata({ data: "json, name=SubnetIds" }),
         __metadata("design:type", Array)
     ], Server.prototype, "subnetIds", void 0);
     return Server;

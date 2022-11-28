@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SystemInstanceDeploymentStatusEnum } from "./systeminstancedeploymentstatusenum";
 import { DeploymentTargetEnum } from "./deploymenttargetenum";
 // SystemInstanceSummary
@@ -35,39 +35,39 @@ var SystemInstanceSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=arn" }),
+        SpeakeasyMetadata({ data: "json, name=arn" }),
         __metadata("design:type", String)
     ], SystemInstanceSummary.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=createdAt" }),
+        SpeakeasyMetadata({ data: "json, name=createdAt" }),
         __metadata("design:type", Date)
     ], SystemInstanceSummary.prototype, "createdAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=greengrassGroupId" }),
+        SpeakeasyMetadata({ data: "json, name=greengrassGroupId" }),
         __metadata("design:type", String)
     ], SystemInstanceSummary.prototype, "greengrassGroupId", void 0);
     __decorate([
-        Metadata({ data: "json, name=greengrassGroupName" }),
+        SpeakeasyMetadata({ data: "json, name=greengrassGroupName" }),
         __metadata("design:type", String)
     ], SystemInstanceSummary.prototype, "greengrassGroupName", void 0);
     __decorate([
-        Metadata({ data: "json, name=greengrassGroupVersionId" }),
+        SpeakeasyMetadata({ data: "json, name=greengrassGroupVersionId" }),
         __metadata("design:type", String)
     ], SystemInstanceSummary.prototype, "greengrassGroupVersionId", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], SystemInstanceSummary.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], SystemInstanceSummary.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=target" }),
+        SpeakeasyMetadata({ data: "json, name=target" }),
         __metadata("design:type", String)
     ], SystemInstanceSummary.prototype, "target", void 0);
     __decorate([
-        Metadata({ data: "json, name=updatedAt" }),
+        SpeakeasyMetadata({ data: "json, name=updatedAt" }),
         __metadata("design:type", Date)
     ], SystemInstanceSummary.prototype, "updatedAt", void 0);
     return SystemInstanceSummary;

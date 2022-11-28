@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class PostAPIV1GenevaActionsBillingEnvironmentIDStateChangesPathParams:
-    environment_id: str = field(default=None, metadata={'path_param': { 'field_name': 'environmentId', 'style': 'simple', 'explode': False }})
+    environment_id: str = field(metadata={'path_param': { 'field_name': 'environmentId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,15 +18,15 @@ class PostAPIV1GenevaActionsBillingEnvironmentIDStateChangesRequests:
 
 @dataclass
 class PostAPIV1GenevaActionsBillingEnvironmentIDStateChangesRequest:
-    path_params: PostAPIV1GenevaActionsBillingEnvironmentIDStateChangesPathParams = field(default=None)
-    request: PostAPIV1GenevaActionsBillingEnvironmentIDStateChangesRequests = field(default=None)
+    path_params: PostAPIV1GenevaActionsBillingEnvironmentIDStateChangesPathParams = field()
+    request: PostAPIV1GenevaActionsBillingEnvironmentIDStateChangesRequests = field()
     
 
 @dataclass
 class PostAPIV1GenevaActionsBillingEnvironmentIDStateChangesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     environment_state_change: Optional[shared.EnvironmentStateChange] = field(default=None)
     problem_details: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

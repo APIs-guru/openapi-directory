@@ -1,5 +1,7 @@
 package shared
 
+// ContainerProperties
+// Container properties are used in job definitions to describe the container that's launched as part of a job.
 type ContainerProperties struct {
 	Command                      []string                      `json:"command,omitempty"`
 	Environment                  []KeyValuePair                `json:"environment,omitempty"`

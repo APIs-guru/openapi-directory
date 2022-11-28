@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RepositoryMetadata
@@ -6,33 +7,33 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about a repository.
 **/
 export class RepositoryMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Arn" })
+  @SpeakeasyMetadata({ data: "json, name=Arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=cloneUrlHttp" })
+  @SpeakeasyMetadata({ data: "json, name=cloneUrlHttp" })
   cloneUrlHttp?: string;
 
-  @Metadata({ data: "json, name=cloneUrlSsh" })
+  @SpeakeasyMetadata({ data: "json, name=cloneUrlSsh" })
   cloneUrlSsh?: string;
 
-  @Metadata({ data: "json, name=creationDate" })
+  @SpeakeasyMetadata({ data: "json, name=creationDate" })
   creationDate?: Date;
 
-  @Metadata({ data: "json, name=defaultBranch" })
+  @SpeakeasyMetadata({ data: "json, name=defaultBranch" })
   defaultBranch?: string;
 
-  @Metadata({ data: "json, name=lastModifiedDate" })
+  @SpeakeasyMetadata({ data: "json, name=lastModifiedDate" })
   lastModifiedDate?: Date;
 
-  @Metadata({ data: "json, name=repositoryDescription" })
+  @SpeakeasyMetadata({ data: "json, name=repositoryDescription" })
   repositoryDescription?: string;
 
-  @Metadata({ data: "json, name=repositoryId" })
+  @SpeakeasyMetadata({ data: "json, name=repositoryId" })
   repositoryId?: string;
 
-  @Metadata({ data: "json, name=repositoryName" })
+  @SpeakeasyMetadata({ data: "json, name=repositoryName" })
   repositoryName?: string;
 }

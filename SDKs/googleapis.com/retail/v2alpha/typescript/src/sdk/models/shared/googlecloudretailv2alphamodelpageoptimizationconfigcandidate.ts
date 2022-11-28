@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudRetailV2alphaModelPageOptimizationConfigCandidate
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A candidate to consider for a given panel. Currently only ServingConfig are valid candidates.
 **/
 export class GoogleCloudRetailV2alphaModelPageOptimizationConfigCandidate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=servingConfigId" })
+  @SpeakeasyMetadata({ data: "json, name=servingConfigId" })
   servingConfigId?: string;
 }

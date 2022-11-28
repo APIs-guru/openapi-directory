@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import tableversionerror
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BatchDeleteTableVersionResponse:
-    errors: Optional[List[tableversionerror.TableVersionError]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Errors' }})
+    errors: Optional[List[TableVersionError]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Errors') }})
     

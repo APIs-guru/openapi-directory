@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RepositoryTriggerExecutionFailure } from "./repositorytriggerexecutionfailure";
+
 
 
 // TestRepositoryTriggersOutput
@@ -8,9 +8,9 @@ import { RepositoryTriggerExecutionFailure } from "./repositorytriggerexecutionf
  * Represents the output of a test repository triggers operation.
 **/
 export class TestRepositoryTriggersOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=failedExecutions", elemType: shared.RepositoryTriggerExecutionFailure })
+  @SpeakeasyMetadata({ data: "json, name=failedExecutions", elemType: RepositoryTriggerExecutionFailure })
   failedExecutions?: RepositoryTriggerExecutionFailure[];
 
-  @Metadata({ data: "json, name=successfulExecutions" })
+  @SpeakeasyMetadata({ data: "json, name=successfulExecutions" })
   successfulExecutions?: string[];
 }

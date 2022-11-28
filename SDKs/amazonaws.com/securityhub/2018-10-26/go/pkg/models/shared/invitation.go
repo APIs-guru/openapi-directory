@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Invitation
+// Details about an invitation.
 type Invitation struct {
 	AccountID    *string    `json:"AccountId,omitempty"`
 	InvitationID *string    `json:"InvitationId,omitempty"`

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ImageConfiguration
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes the configuration that AWS App Runner uses to run an App Runner service using an image pulled from a source image repository.
 **/
 export class ImageConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Port" })
+  @SpeakeasyMetadata({ data: "json, name=Port" })
   port?: string;
 
-  @Metadata({ data: "json, name=RuntimeEnvironmentVariables" })
+  @SpeakeasyMetadata({ data: "json, name=RuntimeEnvironmentVariables" })
   runtimeEnvironmentVariables?: Map<string, string>;
 
-  @Metadata({ data: "json, name=StartCommand" })
+  @SpeakeasyMetadata({ data: "json, name=StartCommand" })
   startCommand?: string;
 }

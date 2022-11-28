@@ -1,5 +1,7 @@
 package shared
 
+// ContainerStateChange
+// An object representing a change in state for a container.
 type ContainerStateChange struct {
 	ContainerName   *string          `json:"containerName,omitempty"`
 	ExitCode        *int64           `json:"exitCode,omitempty"`

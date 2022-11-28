@@ -11,6 +11,8 @@ const (
 	GetDescribeUpdateActionsActionEnumDescribeUpdateActions GetDescribeUpdateActionsActionEnum = "DescribeUpdateActions"
 )
 
+// GetDescribeUpdateActionsServiceUpdateTimeRange
+// Filters update actions from the service updates that are in available status during the time range.
 type GetDescribeUpdateActionsServiceUpdateTimeRange struct {
 	EndTime   *time.Time `queryParam:"name=EndTime"`
 	StartTime *time.Time `queryParam:"name=StartTime"`

@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Attraction } from "./attraction";
 import { Classification } from "./classification";
 import { EventDates } from "./eventdates";
@@ -13,10 +12,11 @@ import { EventSalesDates } from "./eventsalesdates";
 import { Source } from "./source";
 import { Venue } from "./venue";
 
+
 export enum EventTypeEnum {
-    Event = "event"
-,    Venue = "venue"
-,    Attraction = "attraction"
+    Event = "event",
+    Venue = "venue",
+    Attraction = "attraction"
 }
 
 
@@ -25,84 +25,84 @@ export enum EventTypeEnum {
  * Event
 **/
 export class Event extends SpeakeasyBase {
-  @Metadata({ data: "json, name=active" })
+  @SpeakeasyMetadata({ data: "json, name=active" })
   active?: boolean;
 
-  @Metadata({ data: "json, name=additionalInfos" })
+  @SpeakeasyMetadata({ data: "json, name=additionalInfos" })
   additionalInfos?: Map<string, string>;
 
-  @Metadata({ data: "json, name=attractions", elemType: shared.Attraction })
+  @SpeakeasyMetadata({ data: "json, name=attractions", elemType: Attraction })
   attractions?: Attraction[];
 
-  @Metadata({ data: "json, name=classifications", elemType: shared.Classification })
+  @SpeakeasyMetadata({ data: "json, name=classifications", elemType: Classification })
   classifications?: Classification[];
 
-  @Metadata({ data: "json, name=dates" })
+  @SpeakeasyMetadata({ data: "json, name=dates" })
   dates?: EventDates;
 
-  @Metadata({ data: "json, name=descriptions" })
+  @SpeakeasyMetadata({ data: "json, name=descriptions" })
   descriptions?: Map<string, string>;
 
-  @Metadata({ data: "json, name=discoverable" })
+  @SpeakeasyMetadata({ data: "json, name=discoverable" })
   discoverable?: boolean;
 
-  @Metadata({ data: "json, name=distance" })
+  @SpeakeasyMetadata({ data: "json, name=distance" })
   distance?: number;
 
-  @Metadata({ data: "json, name=images", elemType: shared.Image })
+  @SpeakeasyMetadata({ data: "json, name=images", elemType: Image })
   images?: Image[];
 
-  @Metadata({ data: "json, name=infos" })
+  @SpeakeasyMetadata({ data: "json, name=infos" })
   infos?: Map<string, string>;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: Location;
 
-  @Metadata({ data: "json, name=names" })
+  @SpeakeasyMetadata({ data: "json, name=names" })
   names?: Map<string, string>;
 
-  @Metadata({ data: "json, name=place" })
+  @SpeakeasyMetadata({ data: "json, name=place" })
   place?: Place;
 
-  @Metadata({ data: "json, name=pleaseNotes" })
+  @SpeakeasyMetadata({ data: "json, name=pleaseNotes" })
   pleaseNotes?: Map<string, string>;
 
-  @Metadata({ data: "json, name=priceRanges", elemType: shared.PriceRange })
+  @SpeakeasyMetadata({ data: "json, name=priceRanges", elemType: PriceRange })
   priceRanges?: PriceRange[];
 
-  @Metadata({ data: "json, name=promoter" })
+  @SpeakeasyMetadata({ data: "json, name=promoter" })
   promoter?: Promoter;
 
-  @Metadata({ data: "json, name=publicVisibility" })
+  @SpeakeasyMetadata({ data: "json, name=publicVisibility" })
   publicVisibility?: PublicVisibility;
 
-  @Metadata({ data: "json, name=references" })
+  @SpeakeasyMetadata({ data: "json, name=references" })
   references?: Map<string, string>;
 
-  @Metadata({ data: "json, name=relationships" })
+  @SpeakeasyMetadata({ data: "json, name=relationships" })
   relationships?: Map<string, any>[];
 
-  @Metadata({ data: "json, name=sales" })
+  @SpeakeasyMetadata({ data: "json, name=sales" })
   sales?: EventSalesDates;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: Source;
 
-  @Metadata({ data: "json, name=test" })
+  @SpeakeasyMetadata({ data: "json, name=test" })
   test?: boolean;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: EventTypeEnum;
 
-  @Metadata({ data: "json, name=units" })
+  @SpeakeasyMetadata({ data: "json, name=units" })
   units?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 
-  @Metadata({ data: "json, name=venue" })
+  @SpeakeasyMetadata({ data: "json, name=venue" })
   venue?: Venue;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: number;
 }

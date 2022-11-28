@@ -1,10 +1,12 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import subscriptionresponse
+from sdk import utils
+from . import *
 
 class BatchResponseSubscriptionResponseStatusEnum(str, Enum):
     PENDING = "PENDING"
@@ -16,10 +18,10 @@ class BatchResponseSubscriptionResponseStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class BatchResponseSubscriptionResponse:
-    completed_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'completedAt', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    links: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'links' }})
-    requested_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'requestedAt', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    results: List[subscriptionresponse.SubscriptionResponse] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'results' }})
-    started_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'startedAt', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    status: BatchResponseSubscriptionResponseStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    completed_at: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('completedAt'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    results: List[SubscriptionResponse] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('results') }})
+    started_at: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('startedAt'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    status: BatchResponseSubscriptionResponseStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    links: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('links') }})
+    requested_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('requestedAt'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     

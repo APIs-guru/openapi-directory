@@ -1,5 +1,7 @@
 package shared
 
+// AwsEc2NetworkInterfaceDetails
+// Details about the network interface
 type AwsEc2NetworkInterfaceDetails struct {
 	Attachment         *AwsEc2NetworkInterfaceAttachment              `json:"Attachment,omitempty"`
 	IPV6Addresses      []AwsEc2NetworkInterfaceIPV6AddressDetail      `json:"IpV6Addresses,omitempty"`

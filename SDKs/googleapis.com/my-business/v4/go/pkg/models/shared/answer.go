@@ -1,5 +1,7 @@
 package shared
 
+// Answer
+// Represents an answer to a question
 type Answer struct {
 	Author      *Author `json:"author,omitempty"`
 	CreateTime  *string `json:"createTime,omitempty"`

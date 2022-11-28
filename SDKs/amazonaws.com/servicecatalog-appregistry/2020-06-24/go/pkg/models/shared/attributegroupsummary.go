@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// AttributeGroupSummary
+// Summary of a Amazon Web Services Service Catalog AppRegistry attribute group.
 type AttributeGroupSummary struct {
 	Arn            *string    `json:"arn,omitempty"`
 	CreationTime   *time.Time `json:"creationTime,omitempty"`

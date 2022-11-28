@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDatacatalogV1beta1SearchCatalogResult } from "./googleclouddatacatalogv1beta1searchcatalogresult";
+
 
 
 // GoogleCloudDatacatalogV1beta1SearchCatalogResponse
@@ -8,12 +8,12 @@ import { GoogleCloudDatacatalogV1beta1SearchCatalogResult } from "./googlecloudd
  * Response message for SearchCatalog.
 **/
 export class GoogleCloudDatacatalogV1beta1SearchCatalogResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=results", elemType: shared.GoogleCloudDatacatalogV1beta1SearchCatalogResult })
+  @SpeakeasyMetadata({ data: "json, name=results", elemType: GoogleCloudDatacatalogV1beta1SearchCatalogResult })
   results?: GoogleCloudDatacatalogV1beta1SearchCatalogResult[];
 
-  @Metadata({ data: "json, name=unreachable" })
+  @SpeakeasyMetadata({ data: "json, name=unreachable" })
   unreachable?: string[];
 }

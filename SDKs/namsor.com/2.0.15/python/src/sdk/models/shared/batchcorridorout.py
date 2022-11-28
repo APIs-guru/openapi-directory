@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import corridorout
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BatchCorridorOut:
-    corridor_from_to: Optional[List[corridorout.CorridorOut]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'corridorFromTo' }})
+    corridor_from_to: Optional[List[CorridorOut]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('corridorFromTo') }})
     

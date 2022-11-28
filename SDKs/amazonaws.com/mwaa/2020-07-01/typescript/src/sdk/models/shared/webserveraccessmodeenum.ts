@@ -1,6 +1,7 @@
 
 
+
 export enum WebserverAccessModeEnum {
-    PrivateOnly = "PRIVATE_ONLY"
-,    PublicOnly = "PUBLIC_ONLY"
+    PrivateOnly = "PRIVATE_ONLY",
+    PublicOnly = "PUBLIC_ONLY"
 }

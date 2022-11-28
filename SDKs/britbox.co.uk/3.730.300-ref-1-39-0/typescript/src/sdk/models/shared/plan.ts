@@ -1,79 +1,80 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum PlanBillingPeriodTypeEnum {
-    Day = "day"
-,    Week = "week"
-,    Month = "month"
-,    Year = "year"
-,    None = "none"
+    Day = "day",
+    Week = "week",
+    Month = "month",
+    Year = "year",
+    None = "none"
 }
 
 export enum PlanRevenueTypeEnum {
-    Tvod = "TVOD"
-,    Svod = "SVOD"
+    Tvod = "TVOD",
+    Svod = "SVOD"
 }
 
 export enum PlanTypeEnum {
-    Free = "Free"
-,    Subscription = "Subscription"
+    Free = "Free",
+    Subscription = "Subscription"
 }
 
 
 export class Plan extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alias" })
+  @SpeakeasyMetadata({ data: "json, name=alias" })
   alias: string;
 
-  @Metadata({ data: "json, name=benefits" })
+  @SpeakeasyMetadata({ data: "json, name=benefits" })
   benefits: string[];
 
-  @Metadata({ data: "json, name=billingPeriodFrequency" })
+  @SpeakeasyMetadata({ data: "json, name=billingPeriodFrequency" })
   billingPeriodFrequency: number;
 
-  @Metadata({ data: "json, name=billingPeriodType" })
+  @SpeakeasyMetadata({ data: "json, name=billingPeriodType" })
   billingPeriodType: PlanBillingPeriodTypeEnum;
 
-  @Metadata({ data: "json, name=currency" })
+  @SpeakeasyMetadata({ data: "json, name=currency" })
   currency: string;
 
-  @Metadata({ data: "json, name=customFields" })
+  @SpeakeasyMetadata({ data: "json, name=customFields" })
   customFields?: Map<string, any>;
 
-  @Metadata({ data: "json, name=hasTrialPeriod" })
+  @SpeakeasyMetadata({ data: "json, name=hasTrialPeriod" })
   hasTrialPeriod: boolean;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=isActive" })
+  @SpeakeasyMetadata({ data: "json, name=isActive" })
   isActive: boolean;
 
-  @Metadata({ data: "json, name=isFeatured" })
+  @SpeakeasyMetadata({ data: "json, name=isFeatured" })
   isFeatured: boolean;
 
-  @Metadata({ data: "json, name=isPrivate" })
+  @SpeakeasyMetadata({ data: "json, name=isPrivate" })
   isPrivate: boolean;
 
-  @Metadata({ data: "json, name=price" })
+  @SpeakeasyMetadata({ data: "json, name=price" })
   price?: number;
 
-  @Metadata({ data: "json, name=revenueType" })
+  @SpeakeasyMetadata({ data: "json, name=revenueType" })
   revenueType: PlanRevenueTypeEnum;
 
-  @Metadata({ data: "json, name=subscriptionCode" })
+  @SpeakeasyMetadata({ data: "json, name=subscriptionCode" })
   subscriptionCode: string;
 
-  @Metadata({ data: "json, name=tagline" })
+  @SpeakeasyMetadata({ data: "json, name=tagline" })
   tagline: string;
 
-  @Metadata({ data: "json, name=termsAndConditions" })
+  @SpeakeasyMetadata({ data: "json, name=termsAndConditions" })
   termsAndConditions: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title: string;
 
-  @Metadata({ data: "json, name=trialPeriodDays" })
+  @SpeakeasyMetadata({ data: "json, name=trialPeriodDays" })
   trialPeriodDays: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: PlanTypeEnum;
 }

@@ -1,7 +1,8 @@
 
 
+
 export enum OriginatingHouseEnum {
-    All = "All"
-,    Commons = "Commons"
-,    Lords = "Lords"
+    All = "All",
+    Commons = "Commons",
+    Lords = "Lords"
 }

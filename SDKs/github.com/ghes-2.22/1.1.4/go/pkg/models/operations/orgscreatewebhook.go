@@ -8,6 +8,8 @@ type OrgsCreateWebhookPathParams struct {
 	Org string `pathParam:"style=simple,explode=false,name=org"`
 }
 
+// OrgsCreateWebhookRequestBodyConfig
+// Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/enterprise-server@2.22/rest/reference/orgs#create-hook-config-params).
 type OrgsCreateWebhookRequestBodyConfig struct {
 	ContentType *string      `json:"content_type,omitempty"`
 	InsecureSsl *interface{} `json:"insecure_ssl,omitempty"`

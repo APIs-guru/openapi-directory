@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudtraceProjectsTracesGetPathParams:
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
-    trace_id: str = field(default=None, metadata={'path_param': { 'field_name': 'traceId', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
+    trace_id: str = field(metadata={'path_param': { 'field_name': 'traceId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,14 +27,14 @@ class CloudtraceProjectsTracesGetQueryParams:
 
 @dataclass
 class CloudtraceProjectsTracesGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudtraceProjectsTracesGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -44,14 +45,14 @@ class CloudtraceProjectsTracesGetSecurity:
 
 @dataclass
 class CloudtraceProjectsTracesGetRequest:
-    path_params: CloudtraceProjectsTracesGetPathParams = field(default=None)
-    query_params: CloudtraceProjectsTracesGetQueryParams = field(default=None)
-    security: CloudtraceProjectsTracesGetSecurity = field(default=None)
+    path_params: CloudtraceProjectsTracesGetPathParams = field()
+    query_params: CloudtraceProjectsTracesGetQueryParams = field()
+    security: CloudtraceProjectsTracesGetSecurity = field()
     
 
 @dataclass
 class CloudtraceProjectsTracesGetResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     trace: Optional[shared.Trace] = field(default=None)
     

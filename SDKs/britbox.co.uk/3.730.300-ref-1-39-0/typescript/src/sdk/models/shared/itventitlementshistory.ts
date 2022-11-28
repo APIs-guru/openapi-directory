@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ItvEntitlementCancelation } from "./itventitlementcancelation";
 import { ItvEntitlement } from "./itventitlement";
 
 
+
 export class ItvEntitlementsHistory extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cancellations", elemType: shared.ItvEntitlementCancelation })
+  @SpeakeasyMetadata({ data: "json, name=cancellations", elemType: ItvEntitlementCancelation })
   cancellations: ItvEntitlementCancelation[];
 
-  @Metadata({ data: "json, name=entitlements", elemType: shared.ItvEntitlement })
+  @SpeakeasyMetadata({ data: "json, name=entitlements", elemType: ItvEntitlement })
   entitlements: ItvEntitlement[];
 }

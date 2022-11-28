@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
+
 
 export enum ListDeploymentTargetsXAmzTargetEnum {
     CodeDeploy20141006ListDeploymentTargets = "CodeDeploy_20141006.ListDeploymentTargets"
@@ -7,72 +8,72 @@ export enum ListDeploymentTargetsXAmzTargetEnum {
 
 
 export class ListDeploymentTargetsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Target" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Target" })
   xAmzTarget: ListDeploymentTargetsXAmzTargetEnum;
 }
 
 
 export class ListDeploymentTargetsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: ListDeploymentTargetsHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.ListDeploymentTargetsInput;
 }
 
 
 export class ListDeploymentTargetsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deploymentDoesNotExistException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deploymentIdRequiredException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deploymentNotStartedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidDeploymentIdException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidDeploymentInstanceTypeException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidInstanceStatusException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidInstanceTypeException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidNextTokenException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   listDeploymentTargetsOutput?: shared.ListDeploymentTargetsOutput;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,13 +1,21 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import googleclouddialogflowv2beta1entitytypeentity
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleCloudDialogflowV2beta1BatchUpdateEntitiesRequest:
-    entities: Optional[List[googleclouddialogflowv2beta1entitytypeentity.GoogleCloudDialogflowV2beta1EntityTypeEntity]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'entities' }})
-    language_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'languageCode' }})
-    update_mask: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updateMask' }})
+    r"""GoogleCloudDialogflowV2beta1BatchUpdateEntitiesRequest
+    The request message for EntityTypes.BatchUpdateEntities.
+    """
+    
+    entities: Optional[List[GoogleCloudDialogflowV2beta1EntityTypeEntity]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('entities') }})
+    language_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('languageCode') }})
+    update_mask: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('updateMask') }})
     

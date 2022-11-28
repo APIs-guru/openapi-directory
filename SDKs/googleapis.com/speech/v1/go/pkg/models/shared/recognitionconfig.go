@@ -14,11 +14,13 @@ const (
 	RecognitionConfigEncodingEnumWebmOpus            RecognitionConfigEncodingEnum = "WEBM_OPUS"
 )
 
-type RecognitionConfig struct {
+// RecognitionConfigInput
+// Provides information to the recognizer that specifies how to process the request.
+type RecognitionConfigInput struct {
 	Adaptation                          *SpeechAdaptation              `json:"adaptation,omitempty"`
 	AlternativeLanguageCodes            []string                       `json:"alternativeLanguageCodes,omitempty"`
 	AudioChannelCount                   *int32                         `json:"audioChannelCount,omitempty"`
-	DiarizationConfig                   *SpeakerDiarizationConfig      `json:"diarizationConfig,omitempty"`
+	DiarizationConfig                   *SpeakerDiarizationConfigInput `json:"diarizationConfig,omitempty"`
 	EnableAutomaticPunctuation          *bool                          `json:"enableAutomaticPunctuation,omitempty"`
 	EnableSeparateRecognitionPerChannel *bool                          `json:"enableSeparateRecognitionPerChannel,omitempty"`
 	EnableSpokenEmojis                  *bool                          `json:"enableSpokenEmojis,omitempty"`

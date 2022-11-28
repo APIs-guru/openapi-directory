@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BillDocumentLink } from "./billdocumentlink";
 
 
+
 export class BillDocumentOrVersion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=date" })
+  @SpeakeasyMetadata({ data: "json, name=date" })
   date: string;
 
-  @Metadata({ data: "json, name=links", elemType: shared.BillDocumentLink })
+  @SpeakeasyMetadata({ data: "json, name=links", elemType: BillDocumentLink })
   links: BillDocumentLink[];
 
-  @Metadata({ data: "json, name=note" })
+  @SpeakeasyMetadata({ data: "json, name=note" })
   note: string;
 }

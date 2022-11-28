@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PartOfSpeechTag } from "./partofspeechtag";
 // SyntaxToken
 /**
@@ -34,23 +34,23 @@ var SyntaxToken = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=BeginOffset" }),
+        SpeakeasyMetadata({ data: "json, name=BeginOffset" }),
         __metadata("design:type", Number)
     ], SyntaxToken.prototype, "beginOffset", void 0);
     __decorate([
-        Metadata({ data: "json, name=EndOffset" }),
+        SpeakeasyMetadata({ data: "json, name=EndOffset" }),
         __metadata("design:type", Number)
     ], SyntaxToken.prototype, "endOffset", void 0);
     __decorate([
-        Metadata({ data: "json, name=PartOfSpeech" }),
+        SpeakeasyMetadata({ data: "json, name=PartOfSpeech" }),
         __metadata("design:type", PartOfSpeechTag)
     ], SyntaxToken.prototype, "partOfSpeech", void 0);
     __decorate([
-        Metadata({ data: "json, name=Text" }),
+        SpeakeasyMetadata({ data: "json, name=Text" }),
         __metadata("design:type", String)
     ], SyntaxToken.prototype, "text", void 0);
     __decorate([
-        Metadata({ data: "json, name=TokenId" }),
+        SpeakeasyMetadata({ data: "json, name=TokenId" }),
         __metadata("design:type", Number)
     ], SyntaxToken.prototype, "tokenId", void 0);
     return SyntaxToken;

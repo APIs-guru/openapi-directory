@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // EventIntegrationAssociation
 /**
  * The event integration association.
@@ -33,27 +33,27 @@ var EventIntegrationAssociation = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ClientAssociationMetadata" }),
+        SpeakeasyMetadata({ data: "json, name=ClientAssociationMetadata" }),
         __metadata("design:type", Map)
     ], EventIntegrationAssociation.prototype, "clientAssociationMetadata", void 0);
     __decorate([
-        Metadata({ data: "json, name=ClientId" }),
+        SpeakeasyMetadata({ data: "json, name=ClientId" }),
         __metadata("design:type", String)
     ], EventIntegrationAssociation.prototype, "clientId", void 0);
     __decorate([
-        Metadata({ data: "json, name=EventBridgeRuleName" }),
+        SpeakeasyMetadata({ data: "json, name=EventBridgeRuleName" }),
         __metadata("design:type", String)
     ], EventIntegrationAssociation.prototype, "eventBridgeRuleName", void 0);
     __decorate([
-        Metadata({ data: "json, name=EventIntegrationAssociationArn" }),
+        SpeakeasyMetadata({ data: "json, name=EventIntegrationAssociationArn" }),
         __metadata("design:type", String)
     ], EventIntegrationAssociation.prototype, "eventIntegrationAssociationArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=EventIntegrationAssociationId" }),
+        SpeakeasyMetadata({ data: "json, name=EventIntegrationAssociationId" }),
         __metadata("design:type", String)
     ], EventIntegrationAssociation.prototype, "eventIntegrationAssociationId", void 0);
     __decorate([
-        Metadata({ data: "json, name=EventIntegrationName" }),
+        SpeakeasyMetadata({ data: "json, name=EventIntegrationName" }),
         __metadata("design:type", String)
     ], EventIntegrationAssociation.prototype, "eventIntegrationName", void 0);
     return EventIntegrationAssociation;

@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GoogleCloudSecuritycenterV1beta1Finding } from "./googlecloudsecuritycenterv1beta1finding";
 // ListFindingsResponse
 /**
  * Response message for listing findings.
@@ -34,19 +34,19 @@ var ListFindingsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=findings", elemType: shared.GoogleCloudSecuritycenterV1beta1Finding }),
+        SpeakeasyMetadata({ data: "json, name=findings", elemType: GoogleCloudSecuritycenterV1beta1Finding }),
         __metadata("design:type", Array)
     ], ListFindingsResponse.prototype, "findings", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextPageToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextPageToken" }),
         __metadata("design:type", String)
     ], ListFindingsResponse.prototype, "nextPageToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=readTime" }),
+        SpeakeasyMetadata({ data: "json, name=readTime" }),
         __metadata("design:type", String)
     ], ListFindingsResponse.prototype, "readTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=totalSize" }),
+        SpeakeasyMetadata({ data: "json, name=totalSize" }),
         __metadata("design:type", Number)
     ], ListFindingsResponse.prototype, "totalSize", void 0);
     return ListFindingsResponse;

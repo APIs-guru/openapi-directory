@@ -7,6 +7,8 @@ const (
 	GoogleCloudDataplexV1SchemaPartitionStyleEnumHiveCompatible            GoogleCloudDataplexV1SchemaPartitionStyleEnum = "HIVE_COMPATIBLE"
 )
 
+// GoogleCloudDataplexV1Schema
+// Schema information describing the structure and layout of the data.
 type GoogleCloudDataplexV1Schema struct {
 	Fields          []GoogleCloudDataplexV1SchemaSchemaField       `json:"fields,omitempty"`
 	PartitionFields []GoogleCloudDataplexV1SchemaPartitionField    `json:"partitionFields,omitempty"`

@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ShardFilterTypeEnum } from "./shardfiltertypeenum";
 
 
+
 export class ShardFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ShardId" })
+  @SpeakeasyMetadata({ data: "json, name=ShardId" })
   shardId?: string;
 
-  @Metadata({ data: "json, name=Timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=Timestamp" })
   timestamp?: Date;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type: ShardFilterTypeEnum;
 }

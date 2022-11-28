@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetCancelSpotFleetRequestsActionEnum(str, Enum):
     CANCEL_SPOT_FLEET_REQUESTS = "CancelSpotFleetRequests"
@@ -10,11 +14,11 @@ class GetCancelSpotFleetRequestsVersionEnum(str, Enum):
 
 @dataclass
 class GetCancelSpotFleetRequestsQueryParams:
-    action: GetCancelSpotFleetRequestsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetCancelSpotFleetRequestsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    spot_fleet_request_id: List[str] = field(metadata={'query_param': { 'field_name': 'SpotFleetRequestId', 'style': 'form', 'explode': True }})
+    terminate_instances: bool = field(metadata={'query_param': { 'field_name': 'TerminateInstances', 'style': 'form', 'explode': True }})
+    version: GetCancelSpotFleetRequestsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    spot_fleet_request_id: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'SpotFleetRequestId', 'style': 'form', 'explode': True }})
-    terminate_instances: bool = field(default=None, metadata={'query_param': { 'field_name': 'TerminateInstances', 'style': 'form', 'explode': True }})
-    version: GetCancelSpotFleetRequestsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetCancelSpotFleetRequestsHeaders:
 
 @dataclass
 class GetCancelSpotFleetRequestsRequest:
-    query_params: GetCancelSpotFleetRequestsQueryParams = field(default=None)
-    headers: GetCancelSpotFleetRequestsHeaders = field(default=None)
+    headers: GetCancelSpotFleetRequestsHeaders = field()
+    query_params: GetCancelSpotFleetRequestsQueryParams = field()
     
 
 @dataclass
 class GetCancelSpotFleetRequestsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

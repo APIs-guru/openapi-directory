@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApiCoreDtoAggregatedAggregatedResult } from "./apicoredtoaggregatedaggregatedresult";
 
 
+
 export class ApiCoreResponsesEntitiesResponseApiCoreDtoAggregatedAggregatedResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=entities", elemType: shared.ApiCoreDtoAggregatedAggregatedResult })
+  @SpeakeasyMetadata({ data: "json, name=entities", elemType: ApiCoreDtoAggregatedAggregatedResult })
   entities?: ApiCoreDtoAggregatedAggregatedResult[];
 }

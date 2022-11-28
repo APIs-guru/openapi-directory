@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDialogflowCxV3beta1EnvironmentTestCasesConfig
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The configuration for continuous tests.
 **/
 export class GoogleCloudDialogflowCxV3beta1EnvironmentTestCasesConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enableContinuousRun" })
+  @SpeakeasyMetadata({ data: "json, name=enableContinuousRun" })
   enableContinuousRun?: boolean;
 
-  @Metadata({ data: "json, name=enablePredeploymentRun" })
+  @SpeakeasyMetadata({ data: "json, name=enablePredeploymentRun" })
   enablePredeploymentRun?: boolean;
 
-  @Metadata({ data: "json, name=testCases" })
+  @SpeakeasyMetadata({ data: "json, name=testCases" })
   testCases?: string[];
 }

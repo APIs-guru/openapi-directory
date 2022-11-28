@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // InstanceAndroidDetails
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The Android instance details resource.
 **/
 export class InstanceAndroidDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enablePiracyCheck" })
+  @SpeakeasyMetadata({ data: "json, name=enablePiracyCheck" })
   enablePiracyCheck?: boolean;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=packageName" })
+  @SpeakeasyMetadata({ data: "json, name=packageName" })
   packageName?: string;
 
-  @Metadata({ data: "json, name=preferred" })
+  @SpeakeasyMetadata({ data: "json, name=preferred" })
   preferred?: boolean;
 }

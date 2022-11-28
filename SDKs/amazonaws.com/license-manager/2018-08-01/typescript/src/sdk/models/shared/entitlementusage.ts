@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EntitlementDataUnitEnum } from "./entitlementdataunitenum";
+
 
 
 // EntitlementUsage
@@ -7,15 +8,15 @@ import { EntitlementDataUnitEnum } from "./entitlementdataunitenum";
  * Usage associated with an entitlement resource.
 **/
 export class EntitlementUsage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConsumedValue" })
+  @SpeakeasyMetadata({ data: "json, name=ConsumedValue" })
   consumedValue: string;
 
-  @Metadata({ data: "json, name=MaxCount" })
+  @SpeakeasyMetadata({ data: "json, name=MaxCount" })
   maxCount?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 
-  @Metadata({ data: "json, name=Unit" })
+  @SpeakeasyMetadata({ data: "json, name=Unit" })
   unit: EntitlementDataUnitEnum;
 }

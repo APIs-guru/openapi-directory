@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Ad } from "./ad";
+
 
 
 // Ads
@@ -8,6 +8,6 @@ import { Ad } from "./ad";
  * This type defines the container for an array of ads.
 **/
 export class Ads extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ads", elemType: shared.Ad })
+  @SpeakeasyMetadata({ data: "json, name=ads", elemType: Ad })
   ads?: Ad[];
 }

@@ -1,65 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PutUsersSelectedUserHooksUidPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=selected_user" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=selected_user" })
   selectedUser: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=uid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=uid" })
   uid: string;
 }
 
 
-export class PutUsersSelectedUserHooksUidSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth2: shared.SchemeOauth2;
-}
-
-
-export class PutUsersSelectedUserHooksUidSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
-  basic: shared.SchemeBasic;
-}
-
-
-export class PutUsersSelectedUserHooksUidSecurityOption3 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
-  apiKey: shared.SchemeApiKey;
-}
-
-
 export class PutUsersSelectedUserHooksUidSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: PutUsersSelectedUserHooksUidSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth2?: shared.SchemeOauth2;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: PutUsersSelectedUserHooksUidSecurityOption2;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  basic?: shared.SchemeBasic;
 
-  @Metadata({ data: "security, option=true" })
-  option3?: PutUsersSelectedUserHooksUidSecurityOption3;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  apiKey?: shared.SchemeApiKey;
 }
 
 
 export class PutUsersSelectedUserHooksUidRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PutUsersSelectedUserHooksUidPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: PutUsersSelectedUserHooksUidSecurity;
 }
 
 
 export class PutUsersSelectedUserHooksUidResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   webhookSubscription?: Map<string, any>;
 }

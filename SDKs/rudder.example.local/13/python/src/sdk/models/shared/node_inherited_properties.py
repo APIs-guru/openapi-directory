@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class NodeInheritedPropertiesPropertiesHierarchyKindEnum(str, Enum):
     GLOBAL = "global"
@@ -10,10 +12,10 @@ class NodeInheritedPropertiesPropertiesHierarchyKindEnum(str, Enum):
 @dataclass_json
 @dataclass
 class NodeInheritedPropertiesPropertiesHierarchy:
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    kind: NodeInheritedPropertiesPropertiesHierarchyKindEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    value: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    kind: NodeInheritedPropertiesPropertiesHierarchyKindEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
+    value: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
     
 class NodeInheritedPropertiesPropertiesProviderEnum(str, Enum):
     INHERITED = "inherited"
@@ -24,16 +26,16 @@ class NodeInheritedPropertiesPropertiesProviderEnum(str, Enum):
 @dataclass_json
 @dataclass
 class NodeInheritedPropertiesProperties:
-    hierarchy: Optional[List[NodeInheritedPropertiesPropertiesHierarchy]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'hierarchy' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    origval: Optional[Any] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'origval' }})
-    provider: Optional[NodeInheritedPropertiesPropertiesProviderEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'provider' }})
-    value: Any = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    value: Any = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
+    hierarchy: Optional[List[NodeInheritedPropertiesPropertiesHierarchy]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('hierarchy') }})
+    origval: Optional[Any] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('origval') }})
+    provider: Optional[NodeInheritedPropertiesPropertiesProviderEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('provider') }})
     
 
 @dataclass_json
 @dataclass
 class NodeInheritedProperties:
-    id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    properties: List[NodeInheritedPropertiesProperties] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'properties' }})
+    id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    properties: List[NodeInheritedPropertiesProperties] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('properties') }})
     

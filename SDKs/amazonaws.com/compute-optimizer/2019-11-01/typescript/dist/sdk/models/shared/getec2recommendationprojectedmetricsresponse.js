@@ -22,15 +22,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { RecommendedOptionProjectedMetric } from "./recommendedoptionprojectedmetric";
 var GetEc2RecommendationProjectedMetricsResponse = /** @class */ (function (_super) {
     __extends(GetEc2RecommendationProjectedMetricsResponse, _super);
     function GetEc2RecommendationProjectedMetricsResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=recommendedOptionProjectedMetrics", elemType: shared.RecommendedOptionProjectedMetric }),
+        SpeakeasyMetadata({ data: "json, name=recommendedOptionProjectedMetrics", elemType: RecommendedOptionProjectedMetric }),
         __metadata("design:type", Array)
     ], GetEc2RecommendationProjectedMetricsResponse.prototype, "recommendedOptionProjectedMetrics", void 0);
     return GetEc2RecommendationProjectedMetricsResponse;

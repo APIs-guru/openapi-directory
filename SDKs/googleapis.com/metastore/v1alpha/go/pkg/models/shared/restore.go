@@ -18,6 +18,8 @@ const (
 	RestoreTypeEnumMetadataOnly           RestoreTypeEnum = "METADATA_ONLY"
 )
 
+// Restore
+// The details of a metadata restore operation.
 type Restore struct {
 	Backup    *string           `json:"backup,omitempty"`
 	Details   *string           `json:"details,omitempty"`

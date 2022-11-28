@@ -1,5 +1,7 @@
 package shared
 
+// Profile
+// The standard profile of a customer.
 type Profile struct {
 	AccountNumber         *string           `json:"AccountNumber,omitempty"`
 	AdditionalInformation *string           `json:"AdditionalInformation,omitempty"`

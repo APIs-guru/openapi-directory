@@ -1,43 +1,44 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostConfigApacheSlingGetServletQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=enable.html" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=enable.html" })
   enableHtml?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=enable.html@TypeHint" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=enable.html@TypeHint" })
   enableHtmlAtTypeHint?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=enable.txt" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=enable.txt" })
   enableTxt?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=enable.txt@TypeHint" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=enable.txt@TypeHint" })
   enableTxtAtTypeHint?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=enable.xml" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=enable.xml" })
   enableXml?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=enable.xml@TypeHint" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=enable.xml@TypeHint" })
   enableXmlAtTypeHint?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=json.maximumresults" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=json.maximumresults" })
   jsonMaximumresults?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=json.maximumresults@TypeHint" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=json.maximumresults@TypeHint" })
   jsonMaximumresultsAtTypeHint?: string;
 }
 
 
 export class PostConfigApacheSlingGetServletRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PostConfigApacheSlingGetServletQueryParams;
 }
 
 
 export class PostConfigApacheSlingGetServletResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

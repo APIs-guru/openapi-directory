@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// MonitoringExecutionSummary
+// Summary of information about the last monitoring job to run.
 type MonitoringExecutionSummary struct {
 	CreationTime                time.Time           `json:"CreationTime"`
 	EndpointName                *string             `json:"EndpointName,omitempty"`

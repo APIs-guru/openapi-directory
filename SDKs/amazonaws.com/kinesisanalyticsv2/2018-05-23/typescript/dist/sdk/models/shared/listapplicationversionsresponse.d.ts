@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ApplicationVersionSummary } from "./applicationversionsummary";
 export declare class ListApplicationVersionsResponse extends SpeakeasyBase {
     applicationVersionSummaries?: ApplicationVersionSummary[];

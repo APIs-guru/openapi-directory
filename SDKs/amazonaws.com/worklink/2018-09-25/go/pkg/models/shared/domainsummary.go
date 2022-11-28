@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// DomainSummary
+// The summary of the domain.
 type DomainSummary struct {
 	CreatedTime  time.Time        `json:"CreatedTime"`
 	DisplayName  *string          `json:"DisplayName,omitempty"`

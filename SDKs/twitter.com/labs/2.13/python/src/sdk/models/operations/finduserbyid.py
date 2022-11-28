@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class FindUserByIDPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,15 +21,15 @@ class FindUserByIDQueryParams:
 
 @dataclass
 class FindUserByIDRequest:
-    path_params: FindUserByIDPathParams = field(default=None)
-    query_params: FindUserByIDQueryParams = field(default=None)
+    path_params: FindUserByIDPathParams = field()
+    query_params: FindUserByIDQueryParams = field()
     
 
 @dataclass
 class FindUserByIDResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[Any] = field(default=None)
     problem: Optional[Any] = field(default=None)
     single_user_lookup_response: Optional[shared.SingleUserLookupResponse] = field(default=None)
-    status_code: int = field(default=None)
     

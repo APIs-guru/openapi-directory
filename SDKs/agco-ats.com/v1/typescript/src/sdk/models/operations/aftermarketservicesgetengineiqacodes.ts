@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class AftermarketServicesGetEngineIqaCodesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=serialNumber" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=serialNumber" })
   serialNumber: string;
 }
 
 
 export class AftermarketServicesGetEngineIqaCodesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=EDTInstanceId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=EDTInstanceId" })
   edtInstanceId: string;
 }
 
 
 export class AftermarketServicesGetEngineIqaCodesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: AftermarketServicesGetEngineIqaCodesPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: AftermarketServicesGetEngineIqaCodesQueryParams;
 }
 
 
 export class AftermarketServicesGetEngineIqaCodesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiModelsApiError?: shared.ApiModelsApiError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   aftermarketServicesGetEngineIqaCodes200ApplicationJsonStrings?: string[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   aftermarketServicesGetEngineIqaCodes200TextJsonStrings?: string[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

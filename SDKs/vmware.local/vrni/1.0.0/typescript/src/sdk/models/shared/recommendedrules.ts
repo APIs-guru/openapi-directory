@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RecommendedRule } from "./recommendedrule";
 import { TimeRange } from "./timerange";
 
 
+
 export class RecommendedRules extends SpeakeasyBase {
-  @Metadata({ data: "json, name=results", elemType: shared.RecommendedRule })
+  @SpeakeasyMetadata({ data: "json, name=results", elemType: RecommendedRule })
   results?: RecommendedRule[];
 
-  @Metadata({ data: "json, name=time_range" })
+  @SpeakeasyMetadata({ data: "json, name=time_range" })
   timeRange?: TimeRange;
 }

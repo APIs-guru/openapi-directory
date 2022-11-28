@@ -1,8 +1,11 @@
-import warnings
+
+__doc__ = """ SDK Documentation: https://github.com/namsor - NamSor API client SDKs v2 for Java, Python"""
 import requests
 from typing import Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,28 +14,57 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    r"""SDK Documentation: https://github.com/namsor - NamSor API client SDKs v2 for Java, Python"""
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
-    
-    def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
+            self._server_url = server_url
 
+        
+    
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        
+    
+
+    def config_security(self, security: shared.Security):
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        
+    
+    
     
     def anonymize(self, request: operations.AnonymizeRequest) -> operations.AnonymizeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Activate/deactivate anonymization for a source.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api2/json/anonymize/{source}/{anonymized}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -47,13 +79,16 @@ class SDK:
 
     
     def api_status(self) -> operations.APIStatusResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Prints the current status of the classifiers. A classifier name in apiStatus corresponds to a service name in apiServices.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api2/json/apiStatus"
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -70,13 +105,16 @@ class SDK:
 
     
     def api_usage(self, request: operations.APIUsageRequest) -> operations.APIUsageResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Print current API usage.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api2/json/apiUsage"
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -93,13 +131,16 @@ class SDK:
 
     
     def api_usage_history(self, request: operations.APIUsageHistoryRequest) -> operations.APIUsageHistoryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Print historical API usage.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api2/json/apiUsageHistory"
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -116,13 +157,16 @@ class SDK:
 
     
     def api_usage_history_aggregate(self, request: operations.APIUsageHistoryAggregateRequest) -> operations.APIUsageHistoryAggregateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Print historical API usage (in an aggregated view, by service, by day/hour/min).
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api2/json/apiUsageHistoryAggregate"
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -139,13 +183,16 @@ class SDK:
 
     
     def available_services(self) -> operations.AvailableServicesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List of classification services and usage cost in Units per classification (default is 1=ONE Unit). Some API endpoints (ex. Corridor) combine multiple classifiers.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api2/json/apiServices"
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -162,13 +209,16 @@ class SDK:
 
     
     def chinese_name_candidates(self, request: operations.ChineseNameCandidatesRequest) -> operations.ChineseNameCandidatesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Identify Chinese name candidates, based on the romanized name ex. Wang Xiaoming
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api2/json/chineseNameCandidates/{chineseSurnameLatin}/{chineseGivenNameLatin}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -187,19 +237,20 @@ class SDK:
 
     
     def chinese_name_candidates_batch(self, request: operations.ChineseNameCandidatesBatchRequest) -> operations.ChineseNameCandidatesBatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Identify Chinese name candidates, based on the romanized name (firstName = chineseGivenName; lastName=chineseSurname), ex. Wang Xiaoming
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api2/json/chineseNameCandidatesBatch"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -218,19 +269,20 @@ class SDK:
 
     
     def chinese_name_candidates_gender_batch(self, request: operations.ChineseNameCandidatesGenderBatchRequest) -> operations.ChineseNameCandidatesGenderBatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Identify Chinese name candidates, based on the romanized name (firstName = chineseGivenName; lastName=chineseSurname) ex. Wang Xiaoming.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api2/json/chineseNameCandidatesGenderBatch"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -249,13 +301,16 @@ class SDK:
 
     
     def chinese_name_gender_candidates(self, request: operations.ChineseNameGenderCandidatesRequest) -> operations.ChineseNameGenderCandidatesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Identify Chinese name candidates, based on the romanized name ex. Wang Xiaoming - having a known gender ('male' or 'female')
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api2/json/chineseNameGenderCandidates/{chineseSurnameLatin}/{chineseGivenNameLatin}/{knownGender}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -274,13 +329,16 @@ class SDK:
 
     
     def chinese_name_match(self, request: operations.ChineseNameMatchRequest) -> operations.ChineseNameMatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Return a score for matching Chinese name ex. 王晓明 with a romanized name ex. Wang Xiaoming
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api2/json/chineseNameMatch/{chineseSurnameLatin}/{chineseGivenNameLatin}/{chineseName}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -299,19 +357,20 @@ class SDK:
 
     
     def chinese_name_match_batch(self, request: operations.ChineseNameMatchBatchRequest) -> operations.ChineseNameMatchBatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Identify Chinese name candidates, based on the romanized name (firstName = chineseGivenName; lastName=chineseSurname), ex. Wang Xiaoming
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api2/json/chineseNameMatchBatch"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -330,13 +389,16 @@ class SDK:
 
     
     def corridor(self, request: operations.CorridorRequest) -> operations.CorridorResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""[USES 20 UNITS PER NAME COUPLE] Infer several classifications for a cross border interaction between names (ex. remit, travel, intl com)
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api2/json/corridor/{countryIso2From}/{firstNameFrom}/{lastNameFrom}/{countryIso2To}/{firstNameTo}/{lastNameTo}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -355,19 +417,20 @@ class SDK:
 
     
     def corridor_batch(self, request: operations.CorridorBatchRequest) -> operations.CorridorBatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""[USES 20 UNITS PER NAME PAIR] Infer several classifications for up to 100 cross border interaction between names (ex. remit, travel, intl com)
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api2/json/corridorBatch"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -386,13 +449,16 @@ class SDK:
 
     
     def country(self, request: operations.CountryRequest) -> operations.CountryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""[USES 10 UNITS PER NAME] Infer the likely country of residence of a personal full name, or one surname. Assumes names as they are in the country of residence OR the country of origin.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api2/json/country/{personalNameFull}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -411,19 +477,20 @@ class SDK:
 
     
     def country_batch(self, request: operations.CountryBatchRequest) -> operations.CountryBatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""[USES 10 UNITS PER NAME] Infer the likely country of residence of up to 100 personal full names, or surnames. Assumes names as they are in the country of residence OR the country of origin.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api2/json/countryBatch"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -442,13 +509,16 @@ class SDK:
 
     
     def diaspora(self, request: operations.DiasporaRequest) -> operations.DiasporaResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""[USES 20 UNITS PER NAME] Infer the likely ethnicity/diaspora of a personal name, given a country of residence ISO2 code (ex. US, CA, AU, NZ etc.)
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api2/json/diaspora/{countryIso2}/{firstName}/{lastName}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -467,19 +537,20 @@ class SDK:
 
     
     def diaspora_batch(self, request: operations.DiasporaBatchRequest) -> operations.DiasporaBatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""[USES 20 UNITS PER NAME] Infer the likely ethnicity/diaspora of up to 100 personal names, given a country of residence ISO2 code (ex. US, CA, AU, NZ etc.)
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api2/json/diasporaBatch"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -498,13 +569,16 @@ class SDK:
 
     
     def disable(self, request: operations.DisableRequest) -> operations.DisableResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Activate/deactivate an API Key.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api2/json/disable/{source}/{disabled}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -519,13 +593,16 @@ class SDK:
 
     
     def gender(self, request: operations.GenderRequest) -> operations.GenderResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Infer the likely gender of a name.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api2/json/gender/{firstName}/{lastName}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -544,19 +621,20 @@ class SDK:
 
     
     def gender_batch(self, request: operations.GenderBatchRequest) -> operations.GenderBatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Infer the likely gender of up to 100 names, detecting automatically the cultural context.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api2/json/genderBatch"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -575,13 +653,16 @@ class SDK:
 
     
     def gender_chinese_name(self, request: operations.GenderChineseNameRequest) -> operations.GenderChineseNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Infer the likely gender of a Chinese full name ex. 王晓明
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api2/json/genderChineseName/{chineseName}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -600,19 +681,20 @@ class SDK:
 
     
     def gender_chinese_name_batch(self, request: operations.GenderChineseNameBatchRequest) -> operations.GenderChineseNameBatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Infer the likely gender of up to 100 full names ex. 王晓明
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api2/json/genderChineseNameBatch"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -631,13 +713,16 @@ class SDK:
 
     
     def gender_chinese_name_pinyin(self, request: operations.GenderChineseNamePinyinRequest) -> operations.GenderChineseNamePinyinResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Infer the likely gender of a Chinese name in LATIN (Pinyin).
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api2/json/genderChineseNamePinyin/{chineseSurnameLatin}/{chineseGivenNameLatin}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -656,19 +741,20 @@ class SDK:
 
     
     def gender_chinese_name_pinyin_batch(self, request: operations.GenderChineseNamePinyinBatchRequest) -> operations.GenderChineseNamePinyinBatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Infer the likely gender of up to 100 Chinese names in LATIN (Pinyin).
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api2/json/genderChineseNamePinyinBatch"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -687,13 +773,16 @@ class SDK:
 
     
     def gender_full(self, request: operations.GenderFullRequest) -> operations.GenderFullResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Infer the likely gender of a full name, ex. John H. Smith
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api2/json/genderFull/{fullName}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -712,19 +801,20 @@ class SDK:
 
     
     def gender_full_batch(self, request: operations.GenderFullBatchRequest) -> operations.GenderFullBatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Infer the likely gender of up to 100 full names, detecting automatically the cultural context.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api2/json/genderFullBatch"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -743,13 +833,16 @@ class SDK:
 
     
     def gender_full_geo(self, request: operations.GenderFullGeoRequest) -> operations.GenderFullGeoResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Infer the likely gender of a full name, given a local context (ISO2 country code).
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api2/json/genderFullGeo/{fullName}/{countryIso2}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -768,19 +861,20 @@ class SDK:
 
     
     def gender_full_geo_batch(self, request: operations.GenderFullGeoBatchRequest) -> operations.GenderFullGeoBatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Infer the likely gender of up to 100 full names, with a given cultural context (country ISO2 code).
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api2/json/genderFullGeoBatch"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -799,13 +893,16 @@ class SDK:
 
     
     def gender_geo(self, request: operations.GenderGeoRequest) -> operations.GenderGeoResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Infer the likely gender of a name, given a local context (ISO2 country code).
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api2/json/genderGeo/{firstName}/{lastName}/{countryIso2}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -824,19 +921,20 @@ class SDK:
 
     
     def gender_geo_batch(self, request: operations.GenderGeoBatchRequest) -> operations.GenderGeoBatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Infer the likely gender of up to 100 names, each given a local context (ISO2 country code).
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api2/json/genderGeoBatch"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -855,13 +953,16 @@ class SDK:
 
     
     def gender_japanese_name_full(self, request: operations.GenderJapaneseNameFullRequest) -> operations.GenderJapaneseNameFullResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Infer the likely gender of a Japanese full name ex. 王晓明
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api2/json/genderJapaneseNameFull/{japaneseName}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -880,19 +981,20 @@ class SDK:
 
     
     def gender_japanese_name_full_batch(self, request: operations.GenderJapaneseNameFullBatchRequest) -> operations.GenderJapaneseNameFullBatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Infer the likely gender of up to 100 full names
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api2/json/genderJapaneseNameFullBatch"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -911,13 +1013,16 @@ class SDK:
 
     
     def gender_japanese_name_pinyin(self, request: operations.GenderJapaneseNamePinyinRequest) -> operations.GenderJapaneseNamePinyinResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Infer the likely gender of a Japanese name in LATIN (Pinyin).
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api2/json/genderJapaneseName/{japaneseSurname}/{japaneseGivenName}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -936,19 +1041,20 @@ class SDK:
 
     
     def gender_japanese_name_pinyin_batch(self, request: operations.GenderJapaneseNamePinyinBatchRequest) -> operations.GenderJapaneseNamePinyinBatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Infer the likely gender of up to 100 Japanese names in LATIN (Pinyin).
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api2/json/genderJapaneseNameBatch"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -967,19 +1073,20 @@ class SDK:
 
     
     def japanese_name_gender_kanji_candidates_batch(self, request: operations.JapaneseNameGenderKanjiCandidatesBatchRequest) -> operations.JapaneseNameGenderKanjiCandidatesBatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Identify japanese name candidates in KANJI, based on the romanized name (firstName = japaneseGivenName; lastName=japaneseSurname) with KNOWN gender, ex. Yamamoto Sanae
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api2/json/japaneseNameGenderKanjiCandidatesBatch"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -998,13 +1105,16 @@ class SDK:
 
     
     def japanese_name_kanji_candidates(self, request: operations.JapaneseNameKanjiCandidatesRequest) -> operations.JapaneseNameKanjiCandidatesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Identify japanese name candidates in KANJI, based on the romanized name ex. Yamamoto Sanae - and a known gender.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api2/json/japaneseNameKanjiCandidates/{japaneseSurnameLatin}/{japaneseGivenNameLatin}/{knownGender}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1023,19 +1133,20 @@ class SDK:
 
     
     def japanese_name_kanji_candidates_batch(self, request: operations.JapaneseNameKanjiCandidatesBatchRequest) -> operations.JapaneseNameKanjiCandidatesBatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Identify japanese name candidates in KANJI, based on the romanized name (firstName = japaneseGivenName; lastName=japaneseSurname), ex. Yamamoto Sanae
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api2/json/japaneseNameKanjiCandidatesBatch"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1054,13 +1165,16 @@ class SDK:
 
     
     def japanese_name_kanji_candidates_1(self, request: operations.JapaneseNameKanjiCandidates1Request) -> operations.JapaneseNameKanjiCandidates1Response:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Identify japanese name candidates in KANJI, based on the romanized name ex. Yamamoto Sanae
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api2/json/japaneseNameKanjiCandidates/{japaneseSurnameLatin}/{japaneseGivenNameLatin}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1079,13 +1193,16 @@ class SDK:
 
     
     def japanese_name_latin_candidates(self, request: operations.JapaneseNameLatinCandidatesRequest) -> operations.JapaneseNameLatinCandidatesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Romanize japanese name, based on the name in Kanji.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api2/json/japaneseNameLatinCandidates/{japaneseSurnameKanji}/{japaneseGivenNameKanji}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1104,19 +1221,20 @@ class SDK:
 
     
     def japanese_name_latin_candidates_batch(self, request: operations.JapaneseNameLatinCandidatesBatchRequest) -> operations.JapaneseNameLatinCandidatesBatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Romanize japanese names, based on the name in KANJI
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api2/json/japaneseNameLatinCandidatesBatch"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1135,13 +1253,16 @@ class SDK:
 
     
     def japanese_name_match(self, request: operations.JapaneseNameMatchRequest) -> operations.JapaneseNameMatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Return a score for matching Japanese name in KANJI ex. 山本 早苗 with a romanized name ex. Yamamoto Sanae
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api2/json/japaneseNameMatch/{japaneseSurnameLatin}/{japaneseGivenNameLatin}/{japaneseName}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1160,19 +1281,20 @@ class SDK:
 
     
     def japanese_name_match_batch(self, request: operations.JapaneseNameMatchBatchRequest) -> operations.JapaneseNameMatchBatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Return a score for matching a list of Japanese names in KANJI ex. 山本 早苗 with romanized names ex. Yamamoto Sanae
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api2/json/japaneseNameMatchBatch"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1191,13 +1313,16 @@ class SDK:
 
     
     def japanese_name_match_feedback_loop(self, request: operations.JapaneseNameMatchFeedbackLoopRequest) -> operations.JapaneseNameMatchFeedbackLoopResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""[CREDITS 1 UNIT] Feedback loop to better perform matching Japanese name in KANJI ex. 山本 早苗 with a romanized name ex. Yamamoto Sanae
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api2/json/japaneseNameMatchFeedbackLoop/{japaneseSurnameLatin}/{japaneseGivenNameLatin}/{japaneseName}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1216,13 +1341,16 @@ class SDK:
 
     
     def learnable(self, request: operations.LearnableRequest) -> operations.LearnableResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Activate/deactivate learning from a source.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api2/json/learnable/{source}/{learnable}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1237,13 +1365,16 @@ class SDK:
 
     
     def name_type(self, request: operations.NameTypeRequest) -> operations.NameTypeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Infer the likely type of a proper noun (personal name, brand name, place name etc.)
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api2/json/nameType/{properNoun}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1262,19 +1393,20 @@ class SDK:
 
     
     def name_type_batch(self, request: operations.NameTypeBatchRequest) -> operations.NameTypeBatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Infer the likely common type of up to 100 proper nouns (personal name, brand name, place name etc.)
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api2/json/nameTypeBatch"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1293,13 +1425,16 @@ class SDK:
 
     
     def name_type_geo(self, request: operations.NameTypeGeoRequest) -> operations.NameTypeGeoResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Infer the likely type of a proper noun (personal name, brand name, place name etc.)
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api2/json/nameTypeGeo/{properNoun}/{countryIso2}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1318,19 +1453,20 @@ class SDK:
 
     
     def name_type_geo_batch(self, request: operations.NameTypeGeoBatchRequest) -> operations.NameTypeGeoBatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Infer the likely common type of up to 100 proper nouns (personal name, brand name, place name etc.)
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api2/json/nameTypeGeoBatch"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1349,13 +1485,16 @@ class SDK:
 
     
     def origin(self, request: operations.OriginRequest) -> operations.OriginResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""[USES 10 UNITS PER NAME] Infer the likely country of origin of a personal name. Assumes names as they are in the country of origin. For US, CA, AU, NZ and other melting-pots : use 'diaspora' instead.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api2/json/origin/{firstName}/{lastName}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1374,19 +1513,20 @@ class SDK:
 
     
     def origin_batch(self, request: operations.OriginBatchRequest) -> operations.OriginBatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""[USES 10 UNITS PER NAME] Infer the likely country of origin of up to 100 names, detecting automatically the cultural context.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api2/json/originBatch"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1405,13 +1545,16 @@ class SDK:
 
     
     def parse_chinese_name(self, request: operations.ParseChineseNameRequest) -> operations.ParseChineseNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Infer the likely first/last name structure of a name, ex. 王晓明 -> 王(surname) 晓明(given name)
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api2/json/parseChineseName/{chineseName}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1430,19 +1573,20 @@ class SDK:
 
     
     def parse_chinese_name_batch(self, request: operations.ParseChineseNameBatchRequest) -> operations.ParseChineseNameBatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Infer the likely first/last name structure of a name, ex. 王晓明 -> 王(surname) 晓明(given name).
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api2/json/parseChineseNameBatch"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1461,13 +1605,16 @@ class SDK:
 
     
     def parse_japanese_name(self, request: operations.ParseJapaneseNameRequest) -> operations.ParseJapaneseNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Infer the likely first/last name structure of a name, ex. 山本 早苗 or Yamamoto Sanae
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api2/json/parseJapaneseName/{japaneseName}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1486,19 +1633,20 @@ class SDK:
 
     
     def parse_japanese_name_batch(self, request: operations.ParseJapaneseNameBatchRequest) -> operations.ParseJapaneseNameBatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Infer the likely first/last name structure of a name, ex. 山本 早苗 or Yamamoto Sanae 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api2/json/parseJapaneseNameBatch"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1517,13 +1665,16 @@ class SDK:
 
     
     def parse_name(self, request: operations.ParseNameRequest) -> operations.ParseNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Infer the likely first/last name structure of a name, ex. John Smith or SMITH, John or SMITH; John. 
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api2/json/parseName/{nameFull}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1542,19 +1693,20 @@ class SDK:
 
     
     def parse_name_batch(self, request: operations.ParseNameBatchRequest) -> operations.ParseNameBatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Infer the likely first/last name structure of a name, ex. John Smith or SMITH, John or SMITH; John.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api2/json/parseNameBatch"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1573,13 +1725,16 @@ class SDK:
 
     
     def parse_name_geo(self, request: operations.ParseNameGeoRequest) -> operations.ParseNameGeoResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Infer the likely first/last name structure of a name, ex. John Smith or SMITH, John or SMITH; John. For better accuracy, provide a geographic context.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api2/json/parseName/{nameFull}/{countryIso2}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1598,19 +1753,20 @@ class SDK:
 
     
     def parse_name_geo_batch(self, request: operations.ParseNameGeoBatchRequest) -> operations.ParseNameGeoBatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Infer the likely first/last name structure of a name, ex. John Smith or SMITH, John or SMITH; John. Giving a local context improves precision. 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api2/json/parseNameGeoBatch"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1629,13 +1785,16 @@ class SDK:
 
     
     def phone_code(self, request: operations.PhoneCodeRequest) -> operations.PhoneCodeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""[USES 11 UNITS PER NAME] Infer the likely country and phone prefix, given a personal name and formatted / unformatted phone number.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api2/json/phoneCode/{firstName}/{lastName}/{phoneNumber}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1654,19 +1813,20 @@ class SDK:
 
     
     def phone_code_batch(self, request: operations.PhoneCodeBatchRequest) -> operations.PhoneCodeBatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""[USES 11 UNITS PER NAME] Infer the likely country and phone prefix, of up to 100 personal names, detecting automatically the local context given a name and formatted / unformatted phone number.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api2/json/phoneCodeBatch"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1685,13 +1845,16 @@ class SDK:
 
     
     def phone_code_geo(self, request: operations.PhoneCodeGeoRequest) -> operations.PhoneCodeGeoResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""[USES 11 UNITS PER NAME] Infer the likely phone prefix, given a personal name and formatted / unformatted phone number, with a local context (ISO2 country of residence).
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api2/json/phoneCodeGeo/{firstName}/{lastName}/{phoneNumber}/{countryIso2}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1710,19 +1873,20 @@ class SDK:
 
     
     def phone_code_geo_batch(self, request: operations.PhoneCodeGeoBatchRequest) -> operations.PhoneCodeGeoBatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""[USES 11 UNITS PER NAME] Infer the likely country and phone prefix, of up to 100 personal names, with a local context (ISO2 country of residence).
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api2/json/phoneCodeGeoBatch"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1741,13 +1905,16 @@ class SDK:
 
     
     def phone_code_geo_feedback_loop(self, request: operations.PhoneCodeGeoFeedbackLoopRequest) -> operations.PhoneCodeGeoFeedbackLoopResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""[CREDITS 1 UNIT] Feedback loop to better infer the likely phone prefix, given a personal name and formatted / unformatted phone number, with a local context (ISO2 country of residence).
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api2/json/phoneCodeGeoFeedbackLoop/{firstName}/{lastName}/{phoneNumber}/{phoneNumberE164}/{countryIso2}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1766,13 +1933,16 @@ class SDK:
 
     
     def pinyin_chinese_name(self, request: operations.PinyinChineseNameRequest) -> operations.PinyinChineseNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Romanize the Chinese name to Pinyin, ex. 王晓明 -> Wang (surname) Xiaoming (given name)
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api2/json/pinyinChineseName/{chineseName}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1791,19 +1961,20 @@ class SDK:
 
     
     def pinyin_chinese_name_batch(self, request: operations.PinyinChineseNameBatchRequest) -> operations.PinyinChineseNameBatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Romanize a list of Chinese name to Pinyin, ex. 王晓明 -> Wang (surname) Xiaoming (given name).
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api2/json/pinyinChineseNameBatch"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1822,13 +1993,16 @@ class SDK:
 
     
     def software_version(self) -> operations.SoftwareVersionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get the current software version
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api2/json/softwareVersion"
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1845,13 +2019,16 @@ class SDK:
 
     
     def taxonomy_classes(self, request: operations.TaxonomyClassesRequest) -> operations.TaxonomyClassesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Print the taxonomy classes valid for the given classifier.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api2/json/taxonomyClasses/{classifierName}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1868,13 +2045,16 @@ class SDK:
 
     
     def us_race_ethnicity(self, request: operations.UsRaceEthnicityRequest) -> operations.UsRaceEthnicityResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""[USES 10 UNITS PER NAME] Infer a US resident's likely race/ethnicity according to US Census taxonomy W_NL (white, non latino), HL (hispano latino),  A (asian, non latino), B_NL (black, non latino). Optionally add header X-OPTION-USRACEETHNICITY-TAXONOMY: USRACEETHNICITY-6CLASSES for two additional classes, AI_AN (American Indian or Alaskan Native) and PI (Pacific Islander).
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api2/json/usRaceEthnicity/{firstName}/{lastName}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1893,19 +2073,20 @@ class SDK:
 
     
     def us_race_ethnicity_batch(self, request: operations.UsRaceEthnicityBatchRequest) -> operations.UsRaceEthnicityBatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""[USES 10 UNITS PER NAME] Infer up-to 100 US resident's likely race/ethnicity according to US Census taxonomy. Output is W_NL (white, non latino), HL (hispano latino),  A (asian, non latino), B_NL (black, non latino). Optionally add header X-OPTION-USRACEETHNICITY-TAXONOMY: USRACEETHNICITY-6CLASSES for two additional classes, AI_AN (American Indian or Alaskan Native) and PI (Pacific Islander).
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api2/json/usRaceEthnicityBatch"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1924,13 +2105,16 @@ class SDK:
 
     
     def us_race_ethnicity_zip5(self, request: operations.UsRaceEthnicityZip5Request) -> operations.UsRaceEthnicityZip5Response:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""[USES 10 UNITS PER NAME] Infer a US resident's likely race/ethnicity according to US Census taxonomy, using (optional) ZIP5 code info. Output is W_NL (white, non latino), HL (hispano latino),  A (asian, non latino), B_NL (black, non latino). Optionally add header X-OPTION-USRACEETHNICITY-TAXONOMY: USRACEETHNICITY-6CLASSES for two additional classes, AI_AN (American Indian or Alaskan Native) and PI (Pacific Islander).
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api2/json/usRaceEthnicityZIP5/{firstName}/{lastName}/{zip5Code}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1949,19 +2133,20 @@ class SDK:
 
     
     def us_zip_race_ethnicity_batch(self, request: operations.UsZipRaceEthnicityBatchRequest) -> operations.UsZipRaceEthnicityBatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""[USES 10 UNITS PER NAME] Infer up-to 100 US resident's likely race/ethnicity according to US Census taxonomy, with (optional) ZIP code. Output is W_NL (white, non latino), HL (hispano latino),  A (asian, non latino), B_NL (black, non latino). Optionally add header X-OPTION-USRACEETHNICITY-TAXONOMY: USRACEETHNICITY-6CLASSES for two additional classes, AI_AN (American Indian or Alaskan Native) and PI (Pacific Islander).
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api2/json/usZipRaceEthnicityBatch"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

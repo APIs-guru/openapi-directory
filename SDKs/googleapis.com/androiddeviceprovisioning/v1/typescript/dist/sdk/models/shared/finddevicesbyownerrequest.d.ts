@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum FindDevicesByOwnerRequestSectionTypeEnum {
     SectionTypeUnspecified = "SECTION_TYPE_UNSPECIFIED",
     SectionTypeSimLock = "SECTION_TYPE_SIM_LOCK",
@@ -9,6 +9,7 @@ export declare enum FindDevicesByOwnerRequestSectionTypeEnum {
 **/
 export declare class FindDevicesByOwnerRequest extends SpeakeasyBase {
     customerId?: string[];
+    googleWorkspaceCustomerId?: string[];
     limit?: string;
     pageToken?: string;
     sectionType?: FindDevicesByOwnerRequestSectionTypeEnum;

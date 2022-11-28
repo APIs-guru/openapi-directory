@@ -1,6 +1,7 @@
 
 
+
 export enum ImageTypeEnum {
-    Ami = "AMI"
-,    Docker = "DOCKER"
+    Ami = "AMI",
+    Docker = "DOCKER"
 }

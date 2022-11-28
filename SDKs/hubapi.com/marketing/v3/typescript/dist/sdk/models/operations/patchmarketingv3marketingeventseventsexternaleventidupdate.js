@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PatchMarketingV3MarketingEventsEventsExternalEventIdUpdatePathParams = /** @class */ (function (_super) {
     __extends(PatchMarketingV3MarketingEventsEventsExternalEventIdUpdatePathParams, _super);
@@ -30,7 +30,7 @@ var PatchMarketingV3MarketingEventsEventsExternalEventIdUpdatePathParams = /** @
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=externalEventId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=externalEventId" }),
         __metadata("design:type", String)
     ], PatchMarketingV3MarketingEventsEventsExternalEventIdUpdatePathParams.prototype, "externalEventId", void 0);
     return PatchMarketingV3MarketingEventsEventsExternalEventIdUpdatePathParams;
@@ -42,49 +42,29 @@ var PatchMarketingV3MarketingEventsEventsExternalEventIdUpdateQueryParams = /** 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=externalAccountId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=externalAccountId" }),
         __metadata("design:type", String)
     ], PatchMarketingV3MarketingEventsEventsExternalEventIdUpdateQueryParams.prototype, "externalAccountId", void 0);
     return PatchMarketingV3MarketingEventsEventsExternalEventIdUpdateQueryParams;
 }(SpeakeasyBase));
 export { PatchMarketingV3MarketingEventsEventsExternalEventIdUpdateQueryParams };
-var PatchMarketingV3MarketingEventsEventsExternalEventIdUpdateSecurityOption1 = /** @class */ (function (_super) {
-    __extends(PatchMarketingV3MarketingEventsEventsExternalEventIdUpdateSecurityOption1, _super);
-    function PatchMarketingV3MarketingEventsEventsExternalEventIdUpdateSecurityOption1() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
-        __metadata("design:type", shared.SchemeHapikey)
-    ], PatchMarketingV3MarketingEventsEventsExternalEventIdUpdateSecurityOption1.prototype, "hapikey", void 0);
-    return PatchMarketingV3MarketingEventsEventsExternalEventIdUpdateSecurityOption1;
-}(SpeakeasyBase));
-export { PatchMarketingV3MarketingEventsEventsExternalEventIdUpdateSecurityOption1 };
-var PatchMarketingV3MarketingEventsEventsExternalEventIdUpdateSecurityOption2 = /** @class */ (function (_super) {
-    __extends(PatchMarketingV3MarketingEventsEventsExternalEventIdUpdateSecurityOption2, _super);
-    function PatchMarketingV3MarketingEventsEventsExternalEventIdUpdateSecurityOption2() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
-        __metadata("design:type", shared.SchemeOauth2Legacy)
-    ], PatchMarketingV3MarketingEventsEventsExternalEventIdUpdateSecurityOption2.prototype, "oauth2Legacy", void 0);
-    return PatchMarketingV3MarketingEventsEventsExternalEventIdUpdateSecurityOption2;
-}(SpeakeasyBase));
-export { PatchMarketingV3MarketingEventsEventsExternalEventIdUpdateSecurityOption2 };
 var PatchMarketingV3MarketingEventsEventsExternalEventIdUpdateSecurity = /** @class */ (function (_super) {
     __extends(PatchMarketingV3MarketingEventsEventsExternalEventIdUpdateSecurity, _super);
     function PatchMarketingV3MarketingEventsEventsExternalEventIdUpdateSecurity() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", PatchMarketingV3MarketingEventsEventsExternalEventIdUpdateSecurityOption1)
-    ], PatchMarketingV3MarketingEventsEventsExternalEventIdUpdateSecurity.prototype, "option1", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
+        __metadata("design:type", shared.SchemeHapikey)
+    ], PatchMarketingV3MarketingEventsEventsExternalEventIdUpdateSecurity.prototype, "hapikey", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", PatchMarketingV3MarketingEventsEventsExternalEventIdUpdateSecurityOption2)
-    ], PatchMarketingV3MarketingEventsEventsExternalEventIdUpdateSecurity.prototype, "option2", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        __metadata("design:type", shared.SchemePrivateAppsLegacy)
+    ], PatchMarketingV3MarketingEventsEventsExternalEventIdUpdateSecurity.prototype, "privateAppsLegacy", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
+        __metadata("design:type", shared.SchemeOauth2Legacy)
+    ], PatchMarketingV3MarketingEventsEventsExternalEventIdUpdateSecurity.prototype, "oauth2Legacy", void 0);
     return PatchMarketingV3MarketingEventsEventsExternalEventIdUpdateSecurity;
 }(SpeakeasyBase));
 export { PatchMarketingV3MarketingEventsEventsExternalEventIdUpdateSecurity };
@@ -94,19 +74,19 @@ var PatchMarketingV3MarketingEventsEventsExternalEventIdUpdateRequest = /** @cla
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PatchMarketingV3MarketingEventsEventsExternalEventIdUpdatePathParams)
     ], PatchMarketingV3MarketingEventsEventsExternalEventIdUpdateRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PatchMarketingV3MarketingEventsEventsExternalEventIdUpdateQueryParams)
     ], PatchMarketingV3MarketingEventsEventsExternalEventIdUpdateRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.MarketingEventUpdateRequestParams)
     ], PatchMarketingV3MarketingEventsEventsExternalEventIdUpdateRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PatchMarketingV3MarketingEventsEventsExternalEventIdUpdateSecurity)
     ], PatchMarketingV3MarketingEventsEventsExternalEventIdUpdateRequest.prototype, "security", void 0);
     return PatchMarketingV3MarketingEventsEventsExternalEventIdUpdateRequest;
@@ -118,19 +98,19 @@ var PatchMarketingV3MarketingEventsEventsExternalEventIdUpdateResponse = /** @cl
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], PatchMarketingV3MarketingEventsEventsExternalEventIdUpdateResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PatchMarketingV3MarketingEventsEventsExternalEventIdUpdateResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.MarketingEventPublicDefaultResponse)
     ], PatchMarketingV3MarketingEventsEventsExternalEventIdUpdateResponse.prototype, "marketingEventPublicDefaultResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PatchMarketingV3MarketingEventsEventsExternalEventIdUpdateResponse.prototype, "statusCode", void 0);
     return PatchMarketingV3MarketingEventsEventsExternalEventIdUpdateResponse;

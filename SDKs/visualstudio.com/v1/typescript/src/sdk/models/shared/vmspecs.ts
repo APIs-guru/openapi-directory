@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class VmSpecs extends SpeakeasyBase {
-  @Metadata({ data: "json, name=diskType" })
+  @SpeakeasyMetadata({ data: "json, name=diskType" })
   diskType: number;
 
-  @Metadata({ data: "json, name=imageResourceId" })
+  @SpeakeasyMetadata({ data: "json, name=imageResourceId" })
   imageResourceId: string;
 
-  @Metadata({ data: "json, name=size" })
+  @SpeakeasyMetadata({ data: "json, name=size" })
   size: string;
 
-  @Metadata({ data: "json, name=subnetResourceId" })
+  @SpeakeasyMetadata({ data: "json, name=subnetResourceId" })
   subnetResourceId: string;
 }

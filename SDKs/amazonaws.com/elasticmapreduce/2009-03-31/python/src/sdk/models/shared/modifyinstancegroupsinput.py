@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import instancegroupmodifyconfig
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ModifyInstanceGroupsInput:
-    cluster_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ClusterId' }})
-    instance_groups: Optional[List[instancegroupmodifyconfig.InstanceGroupModifyConfig]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'InstanceGroups' }})
+    r"""ModifyInstanceGroupsInput
+    Change the size of some instance groups.
+    """
+    
+    cluster_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ClusterId') }})
+    instance_groups: Optional[List[InstanceGroupModifyConfig]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('InstanceGroups') }})
     

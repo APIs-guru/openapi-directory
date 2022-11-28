@@ -1,6 +1,7 @@
 
 
+
 export enum MutationProtectionStatusEnum {
-    Enabled = "ENABLED"
-,    Disabled = "DISABLED"
+    Enabled = "ENABLED",
+    Disabled = "DISABLED"
 }

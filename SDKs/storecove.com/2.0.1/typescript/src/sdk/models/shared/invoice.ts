@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccountingCustomerParty } from "./accountingcustomerparty";
 import { AccountingSupplierParty } from "./accountingsupplierparty";
 import { AllowanceCharge } from "./allowancecharge";
@@ -9,30 +8,31 @@ import { InvoiceLine } from "./invoiceline";
 import { PaymentMeans } from "./paymentmeans";
 import { TaxSubtotal } from "./taxsubtotal";
 
+
 export enum InvoiceTypeOfInvoiceEnum {
-    ThreeHundredAndEighty = "380"
-,    ThreeHundredAndEightyOne = "381"
-,    ThreeHundredAndEightyFour = "384"
+    ThreeHundredAndEighty = "380",
+    ThreeHundredAndEightyOne = "381",
+    ThreeHundredAndEightyFour = "384"
 }
 
 export enum InvoicePaymentMeansCodeEnum {
-    OnlinePaymentService = "online_payment_service"
-,    BankCard = "bank_card"
-,    DirectDebit = "direct_debit"
-,    StandingAgreement = "standing_agreement"
-,    CreditTransfer = "credit_transfer"
-,    SeBankgiro = "se_bankgiro"
-,    SePlusgiro = "se_plusgiro"
-,    AunzNpp = "aunz_npp"
-,    Unknown = ""
-,    One = "1"
-,    Thirty = "30"
-,    ThirtyOne = "31"
-,    FortyTwo = "42"
-,    FortyEight = "48"
-,    FortyNine = "49"
-,    FiftySeven = "57"
-,    FiftyEight = "58"
+    OnlinePaymentService = "online_payment_service",
+    BankCard = "bank_card",
+    DirectDebit = "direct_debit",
+    StandingAgreement = "standing_agreement",
+    CreditTransfer = "credit_transfer",
+    SeBankgiro = "se_bankgiro",
+    SePlusgiro = "se_plusgiro",
+    AunzNpp = "aunz_npp",
+    Unknown = "",
+    One = "1",
+    Thirty = "30",
+    ThirtyOne = "31",
+    FortyTwo = "42",
+    FortyEight = "48",
+    FortyNine = "49",
+    FiftySeven = "57",
+    FiftyEight = "58"
 }
 
 
@@ -41,23 +41,23 @@ export enum InvoicePaymentMeansCodeEnum {
  * The payment terms of the invoice.
 **/
 export class InvoiceThePaymentTerms extends SpeakeasyBase {
-  @Metadata({ data: "json, name=note" })
+  @SpeakeasyMetadata({ data: "json, name=note" })
   note?: string;
 }
 
 export enum InvoiceTaxExemptReasonEnum {
-    Export = "export"
-,    ReverseCharge = "reverse_charge"
-,    ZeroRated = "zero_rated"
-,    Exempt = "exempt"
-,    OutsideScope = "outside_scope"
-,    IntraCommunity = "intra_community"
+    Export = "export",
+    ReverseCharge = "reverse_charge",
+    ZeroRated = "zero_rated",
+    Exempt = "exempt",
+    OutsideScope = "outside_scope",
+    IntraCommunity = "intra_community"
 }
 
 export enum InvoiceTaxSystemEnum {
-    TaxLineAmounts = "tax_line_amounts"
-,    TaxLinePercentages = "tax_line_percentages"
-,    TaxNoTax = "tax_no_tax"
+    TaxLineAmounts = "tax_line_amounts",
+    TaxLinePercentages = "tax_line_percentages",
+    TaxNoTax = "tax_no_tax"
 }
 
 
@@ -66,105 +66,105 @@ export enum InvoiceTaxSystemEnum {
  * The invoice to send.  Provide either invoice, or invoiceData, but not both.
 **/
 export class Invoice extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountingCost" })
+  @SpeakeasyMetadata({ data: "json, name=accountingCost" })
   accountingCost?: string;
 
-  @Metadata({ data: "json, name=accountingCustomerParty" })
+  @SpeakeasyMetadata({ data: "json, name=accountingCustomerParty" })
   accountingCustomerParty: AccountingCustomerParty;
 
-  @Metadata({ data: "json, name=accountingSupplierParty" })
+  @SpeakeasyMetadata({ data: "json, name=accountingSupplierParty" })
   accountingSupplierParty?: AccountingSupplierParty;
 
-  @Metadata({ data: "json, name=allowanceCharges", elemType: shared.AllowanceCharge })
+  @SpeakeasyMetadata({ data: "json, name=allowanceCharges", elemType: AllowanceCharge })
   allowanceCharges?: AllowanceCharge[];
 
-  @Metadata({ data: "json, name=amountIncludingVat" })
+  @SpeakeasyMetadata({ data: "json, name=amountIncludingVat" })
   amountIncludingVat: number;
 
-  @Metadata({ data: "json, name=billingReference" })
+  @SpeakeasyMetadata({ data: "json, name=billingReference" })
   billingReference?: string;
 
-  @Metadata({ data: "json, name=buyerReference" })
+  @SpeakeasyMetadata({ data: "json, name=buyerReference" })
   buyerReference?: string;
 
-  @Metadata({ data: "json, name=consumerTaxMode" })
+  @SpeakeasyMetadata({ data: "json, name=consumerTaxMode" })
   consumerTaxMode?: boolean;
 
-  @Metadata({ data: "json, name=contractDocumentReference" })
+  @SpeakeasyMetadata({ data: "json, name=contractDocumentReference" })
   contractDocumentReference?: string;
 
-  @Metadata({ data: "json, name=delivery" })
+  @SpeakeasyMetadata({ data: "json, name=delivery" })
   delivery?: Delivery;
 
-  @Metadata({ data: "json, name=documentCurrencyCode" })
+  @SpeakeasyMetadata({ data: "json, name=documentCurrencyCode" })
   documentCurrencyCode?: CurrencyCodeEnum;
 
-  @Metadata({ data: "json, name=dueDate" })
+  @SpeakeasyMetadata({ data: "json, name=dueDate" })
   dueDate?: string;
 
-  @Metadata({ data: "json, name=invoiceLines", elemType: shared.InvoiceLine })
+  @SpeakeasyMetadata({ data: "json, name=invoiceLines", elemType: InvoiceLine })
   invoiceLines: InvoiceLine[];
 
-  @Metadata({ data: "json, name=invoiceNumber" })
+  @SpeakeasyMetadata({ data: "json, name=invoiceNumber" })
   invoiceNumber: string;
 
-  @Metadata({ data: "json, name=invoicePeriod" })
+  @SpeakeasyMetadata({ data: "json, name=invoicePeriod" })
   invoicePeriod?: string;
 
-  @Metadata({ data: "json, name=invoiceType" })
+  @SpeakeasyMetadata({ data: "json, name=invoiceType" })
   invoiceType?: InvoiceTypeOfInvoiceEnum;
 
-  @Metadata({ data: "json, name=issueDate" })
+  @SpeakeasyMetadata({ data: "json, name=issueDate" })
   issueDate: string;
 
-  @Metadata({ data: "json, name=note" })
+  @SpeakeasyMetadata({ data: "json, name=note" })
   note?: string;
 
-  @Metadata({ data: "json, name=orderReference" })
+  @SpeakeasyMetadata({ data: "json, name=orderReference" })
   orderReference?: string;
 
-  @Metadata({ data: "json, name=paymentMeansArray", elemType: shared.PaymentMeans })
+  @SpeakeasyMetadata({ data: "json, name=paymentMeansArray", elemType: PaymentMeans })
   paymentMeansArray?: PaymentMeans[];
 
-  @Metadata({ data: "json, name=paymentMeansBic" })
+  @SpeakeasyMetadata({ data: "json, name=paymentMeansBic" })
   paymentMeansBic?: string;
 
-  @Metadata({ data: "json, name=paymentMeansCode" })
+  @SpeakeasyMetadata({ data: "json, name=paymentMeansCode" })
   paymentMeansCode?: InvoicePaymentMeansCodeEnum;
 
-  @Metadata({ data: "json, name=paymentMeansIban" })
+  @SpeakeasyMetadata({ data: "json, name=paymentMeansIban" })
   paymentMeansIban?: string;
 
-  @Metadata({ data: "json, name=paymentMeansPaymentId" })
+  @SpeakeasyMetadata({ data: "json, name=paymentMeansPaymentId" })
   paymentMeansPaymentId?: string;
 
-  @Metadata({ data: "json, name=paymentTerms" })
+  @SpeakeasyMetadata({ data: "json, name=paymentTerms" })
   paymentTerms?: InvoiceThePaymentTerms;
 
-  @Metadata({ data: "json, name=prepaidAmount" })
+  @SpeakeasyMetadata({ data: "json, name=prepaidAmount" })
   prepaidAmount?: number;
 
-  @Metadata({ data: "json, name=projectReference" })
+  @SpeakeasyMetadata({ data: "json, name=projectReference" })
   projectReference?: string;
 
-  @Metadata({ data: "json, name=salesOrderId" })
+  @SpeakeasyMetadata({ data: "json, name=salesOrderId" })
   salesOrderId?: string;
 
-  @Metadata({ data: "json, name=taxExemptReason" })
+  @SpeakeasyMetadata({ data: "json, name=taxExemptReason" })
   taxExemptReason?: InvoiceTaxExemptReasonEnum;
 
-  @Metadata({ data: "json, name=taxPointDate" })
+  @SpeakeasyMetadata({ data: "json, name=taxPointDate" })
   taxPointDate?: string;
 
-  @Metadata({ data: "json, name=taxSubtotals", elemType: shared.TaxSubtotal })
+  @SpeakeasyMetadata({ data: "json, name=taxSubtotals", elemType: TaxSubtotal })
   taxSubtotals?: TaxSubtotal[];
 
-  @Metadata({ data: "json, name=taxSystem" })
+  @SpeakeasyMetadata({ data: "json, name=taxSystem" })
   taxSystem?: InvoiceTaxSystemEnum;
 
-  @Metadata({ data: "json, name=ublExtensions" })
+  @SpeakeasyMetadata({ data: "json, name=ublExtensions" })
   ublExtensions?: string[];
 
-  @Metadata({ data: "json, name=vatReverseCharge" })
+  @SpeakeasyMetadata({ data: "json, name=vatReverseCharge" })
   vatReverseCharge?: boolean;
 }

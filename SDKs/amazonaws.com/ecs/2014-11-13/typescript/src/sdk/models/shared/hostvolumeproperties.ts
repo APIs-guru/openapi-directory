@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // HostVolumeProperties
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Details on a container instance bind mount host volume.
 **/
 export class HostVolumeProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=sourcePath" })
+  @SpeakeasyMetadata({ data: "json, name=sourcePath" })
   sourcePath?: string;
 }

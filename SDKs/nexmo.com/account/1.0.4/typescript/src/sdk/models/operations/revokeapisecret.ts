@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RevokeApiSecretPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=api_key" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=api_key" })
   apiKey: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=secret_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=secret_id" })
   secretId: string;
 }
 
 
 export class RevokeApiSecretSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   basicAuth: shared.SchemeBasicAuth;
 }
 
 
 export class RevokeApiSecretRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: RevokeApiSecretPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: RevokeApiSecretSecurity;
 }
 
 
 export class RevokeApiSecretResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   revokeApiSecret401ApplicationJsonAny?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   revokeApiSecret403ApplicationJsonAny?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   revokeApiSecret404ApplicationJsonOneOf?: any;
 }

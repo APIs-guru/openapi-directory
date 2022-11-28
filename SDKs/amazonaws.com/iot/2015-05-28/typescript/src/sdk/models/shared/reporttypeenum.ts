@@ -1,6 +1,7 @@
 
 
+
 export enum ReportTypeEnum {
-    Errors = "ERRORS"
-,    Results = "RESULTS"
+    Errors = "ERRORS",
+    Results = "RESULTS"
 }

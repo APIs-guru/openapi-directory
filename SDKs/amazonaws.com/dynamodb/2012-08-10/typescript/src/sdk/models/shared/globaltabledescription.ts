@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GlobalTableStatusEnum } from "./globaltablestatusenum";
 import { ReplicaDescription } from "./replicadescription";
+
 
 
 // GlobalTableDescription
@@ -9,18 +9,18 @@ import { ReplicaDescription } from "./replicadescription";
  * Contains details about the global table.
 **/
 export class GlobalTableDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreationDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationDateTime" })
   creationDateTime?: Date;
 
-  @Metadata({ data: "json, name=GlobalTableArn" })
+  @SpeakeasyMetadata({ data: "json, name=GlobalTableArn" })
   globalTableArn?: string;
 
-  @Metadata({ data: "json, name=GlobalTableName" })
+  @SpeakeasyMetadata({ data: "json, name=GlobalTableName" })
   globalTableName?: string;
 
-  @Metadata({ data: "json, name=GlobalTableStatus" })
+  @SpeakeasyMetadata({ data: "json, name=GlobalTableStatus" })
   globalTableStatus?: GlobalTableStatusEnum;
 
-  @Metadata({ data: "json, name=ReplicationGroup", elemType: shared.ReplicaDescription })
+  @SpeakeasyMetadata({ data: "json, name=ReplicationGroup", elemType: ReplicaDescription })
   replicationGroup?: ReplicaDescription[];
 }

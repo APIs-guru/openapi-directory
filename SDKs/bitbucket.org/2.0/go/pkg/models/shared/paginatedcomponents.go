@@ -1,5 +1,7 @@
 package shared
 
+// PaginatedComponents
+// A paginated list of issue tracker components.
 type PaginatedComponents struct {
 	Next     *string                  `json:"next,omitempty"`
 	Page     *int64                   `json:"page,omitempty"`

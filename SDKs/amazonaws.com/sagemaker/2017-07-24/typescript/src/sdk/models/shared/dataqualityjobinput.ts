@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EndpointInput } from "./endpointinput";
+
 
 
 // DataQualityJobInput
@@ -7,6 +8,6 @@ import { EndpointInput } from "./endpointinput";
  * The input for the data quality monitoring job. Currently endpoints are supported for input.
 **/
 export class DataQualityJobInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EndpointInput" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointInput" })
   endpointInput: EndpointInput;
 }

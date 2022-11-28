@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HumanLoopStatusEnum } from "./humanloopstatusenum";
+
 
 
 // HumanLoopSummary
@@ -7,18 +8,18 @@ import { HumanLoopStatusEnum } from "./humanloopstatusenum";
  * Summary information about the human loop.
 **/
 export class HumanLoopSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=FailureReason" })
+  @SpeakeasyMetadata({ data: "json, name=FailureReason" })
   failureReason?: string;
 
-  @Metadata({ data: "json, name=FlowDefinitionArn" })
+  @SpeakeasyMetadata({ data: "json, name=FlowDefinitionArn" })
   flowDefinitionArn?: string;
 
-  @Metadata({ data: "json, name=HumanLoopName" })
+  @SpeakeasyMetadata({ data: "json, name=HumanLoopName" })
   humanLoopName?: string;
 
-  @Metadata({ data: "json, name=HumanLoopStatus" })
+  @SpeakeasyMetadata({ data: "json, name=HumanLoopStatus" })
   humanLoopStatus?: HumanLoopStatusEnum;
 }

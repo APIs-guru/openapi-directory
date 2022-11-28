@@ -1,43 +1,44 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateNetworkWirelessSsidIdentityPskPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=number" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=number" })
   number: string;
 }
 
 
 export class CreateNetworkWirelessSsidIdentityPskRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=groupPolicyId" })
+  @SpeakeasyMetadata({ data: "json, name=groupPolicyId" })
   groupPolicyId: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=passphrase" })
+  @SpeakeasyMetadata({ data: "json, name=passphrase" })
   passphrase?: string;
 }
 
 
 export class CreateNetworkWirelessSsidIdentityPskRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CreateNetworkWirelessSsidIdentityPskPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateNetworkWirelessSsidIdentityPskRequestBody;
 }
 
 
 export class CreateNetworkWirelessSsidIdentityPskResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createNetworkWirelessSsidIdentityPsk201ApplicationJsonObject?: Map<string, any>;
 }

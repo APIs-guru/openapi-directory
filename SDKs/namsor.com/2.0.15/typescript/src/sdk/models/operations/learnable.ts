@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class LearnablePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=learnable" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=learnable" })
   learnable: boolean;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=source" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=source" })
   source: string;
 }
 
 
 export class LearnableRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: LearnablePathParams;
 }
 
 
 export class LearnableResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class CfltrRequestBodyCertificateParameters extends SpeakeasyBase {
     dob: string;
@@ -18,10 +18,6 @@ export declare class CfltrRequestBody extends SpeakeasyBase {
 export declare class CfltrSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class CfltrRequest extends SpeakeasyBase {
-    request?: CfltrRequestBody;
-    security: CfltrSecurity;
 }
 export declare enum Cfltr400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -104,6 +100,10 @@ export declare enum Cfltr504ApplicationJsonErrorDescriptionEnum {
 export declare class Cfltr504ApplicationJson extends SpeakeasyBase {
     error?: Cfltr504ApplicationJsonErrorEnum;
     errorDescription?: Cfltr504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class CfltrRequest extends SpeakeasyBase {
+    request?: CfltrRequestBody;
+    security: CfltrSecurity;
 }
 export declare class CfltrResponse extends SpeakeasyBase {
     contentType: string;

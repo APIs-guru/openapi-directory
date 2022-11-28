@@ -1,5 +1,8 @@
 package shared
 
+// BundleDetails
+//
+//	The details of the bundle.
 type BundleDetails struct {
 	AvailablePlatforms []PlatformEnum `json:"availablePlatforms,omitempty"`
 	BundleID           *string        `json:"bundleId,omitempty"`

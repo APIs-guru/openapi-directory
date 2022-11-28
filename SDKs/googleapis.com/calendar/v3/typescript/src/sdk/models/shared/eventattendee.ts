@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class EventAttendee extends SpeakeasyBase {
-  @Metadata({ data: "json, name=additionalGuests" })
+  @SpeakeasyMetadata({ data: "json, name=additionalGuests" })
   additionalGuests?: number;
 
-  @Metadata({ data: "json, name=comment" })
+  @SpeakeasyMetadata({ data: "json, name=comment" })
   comment?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=optional" })
+  @SpeakeasyMetadata({ data: "json, name=optional" })
   optional?: boolean;
 
-  @Metadata({ data: "json, name=organizer" })
+  @SpeakeasyMetadata({ data: "json, name=organizer" })
   organizer?: boolean;
 
-  @Metadata({ data: "json, name=resource" })
+  @SpeakeasyMetadata({ data: "json, name=resource" })
   resource?: boolean;
 
-  @Metadata({ data: "json, name=responseStatus" })
+  @SpeakeasyMetadata({ data: "json, name=responseStatus" })
   responseStatus?: string;
 
-  @Metadata({ data: "json, name=self" })
+  @SpeakeasyMetadata({ data: "json, name=self" })
   self?: boolean;
 }

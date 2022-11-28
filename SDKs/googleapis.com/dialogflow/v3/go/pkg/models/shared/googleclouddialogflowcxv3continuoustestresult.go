@@ -8,6 +8,8 @@ const (
 	GoogleCloudDialogflowCxV3ContinuousTestResultResultEnumFailed                          GoogleCloudDialogflowCxV3ContinuousTestResultResultEnum = "FAILED"
 )
 
+// GoogleCloudDialogflowCxV3ContinuousTestResult
+// Represents a result from running a test case in an agent environment.
 type GoogleCloudDialogflowCxV3ContinuousTestResult struct {
 	Name            *string                                                  `json:"name,omitempty"`
 	Result          *GoogleCloudDialogflowCxV3ContinuousTestResultResultEnum `json:"result,omitempty"`

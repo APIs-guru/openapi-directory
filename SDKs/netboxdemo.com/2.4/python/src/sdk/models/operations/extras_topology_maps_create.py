@@ -5,12 +5,12 @@ from sdk.models import shared
 
 @dataclass
 class ExtrasTopologyMapsCreateRequest:
-    request: shared.WritableTopologyMap = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.WritableTopologyMapInput = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ExtrasTopologyMapsCreateResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     topology_map: Optional[shared.TopologyMap] = field(default=None)
     

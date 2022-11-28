@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 
 class RotoballerArticlesByPlayerFormatEnum(str, Enum):
     XML = "xml"
@@ -8,18 +9,18 @@ class RotoballerArticlesByPlayerFormatEnum(str, Enum):
 
 @dataclass
 class RotoballerArticlesByPlayerPathParams:
-    format: RotoballerArticlesByPlayerFormatEnum = field(default=None, metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
-    playerid: str = field(default=None, metadata={'path_param': { 'field_name': 'playerid', 'style': 'simple', 'explode': False }})
+    format: RotoballerArticlesByPlayerFormatEnum = field(metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
+    playerid: str = field(metadata={'path_param': { 'field_name': 'playerid', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class RotoballerArticlesByPlayerRequest:
-    path_params: RotoballerArticlesByPlayerPathParams = field(default=None)
+    path_params: RotoballerArticlesByPlayerPathParams = field()
     
 
 @dataclass
 class RotoballerArticlesByPlayerResponse:
+    content_type: str = field()
+    status_code: int = field()
     articles: Optional[List[Any]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

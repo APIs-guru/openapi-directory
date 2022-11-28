@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreatePresignedDomainUrlRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DomainId" })
+  @SpeakeasyMetadata({ data: "json, name=DomainId" })
   domainId: string;
 
-  @Metadata({ data: "json, name=ExpiresInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=ExpiresInSeconds" })
   expiresInSeconds?: number;
 
-  @Metadata({ data: "json, name=SessionExpirationDurationInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=SessionExpirationDurationInSeconds" })
   sessionExpirationDurationInSeconds?: number;
 
-  @Metadata({ data: "json, name=UserProfileName" })
+  @SpeakeasyMetadata({ data: "json, name=UserProfileName" })
   userProfileName: string;
 }

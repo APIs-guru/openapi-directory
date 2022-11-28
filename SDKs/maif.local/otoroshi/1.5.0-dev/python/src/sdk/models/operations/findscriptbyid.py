@@ -5,23 +5,23 @@ from sdk.models import shared
 
 @dataclass
 class FindScriptByIDPathParams:
-    script_id: str = field(default=None, metadata={'path_param': { 'field_name': 'scriptId', 'style': 'simple', 'explode': False }})
+    script_id: str = field(metadata={'path_param': { 'field_name': 'scriptId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class FindScriptByIDSecurity:
-    otoroshi_auth: shared.SchemeOtoroshiAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    otoroshi_auth: shared.SchemeOtoroshiAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
     
 
 @dataclass
 class FindScriptByIDRequest:
-    path_params: FindScriptByIDPathParams = field(default=None)
-    security: FindScriptByIDSecurity = field(default=None)
+    path_params: FindScriptByIDPathParams = field()
+    security: FindScriptByIDSecurity = field()
     
 
 @dataclass
 class FindScriptByIDResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     script: Optional[shared.Script] = field(default=None)
-    status_code: int = field(default=None)
     

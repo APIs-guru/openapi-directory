@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SecondaryIpRangeSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ipPrefixLength" })
+  @SpeakeasyMetadata({ data: "json, name=ipPrefixLength" })
   ipPrefixLength?: number;
 
-  @Metadata({ data: "json, name=outsideAllocationPublicIpRange" })
+  @SpeakeasyMetadata({ data: "json, name=outsideAllocationPublicIpRange" })
   outsideAllocationPublicIpRange?: string;
 
-  @Metadata({ data: "json, name=rangeName" })
+  @SpeakeasyMetadata({ data: "json, name=rangeName" })
   rangeName?: string;
 
-  @Metadata({ data: "json, name=requestedAddress" })
+  @SpeakeasyMetadata({ data: "json, name=requestedAddress" })
   requestedAddress?: string;
 }

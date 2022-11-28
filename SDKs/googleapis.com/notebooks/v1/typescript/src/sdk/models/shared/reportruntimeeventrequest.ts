@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Event } from "./event";
+
 
 
 // ReportRuntimeEventRequest
@@ -7,9 +8,9 @@ import { Event } from "./event";
  * Request for reporting a Managed Notebook Event.
 **/
 export class ReportRuntimeEventRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=event" })
+  @SpeakeasyMetadata({ data: "json, name=event" })
   event?: Event;
 
-  @Metadata({ data: "json, name=vmId" })
+  @SpeakeasyMetadata({ data: "json, name=vmId" })
   vmId?: string;
 }

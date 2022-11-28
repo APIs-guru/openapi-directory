@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetModifyNetworkInterfaceAttributeActionEnum(str, Enum):
     MODIFY_NETWORK_INTERFACE_ATTRIBUTE = "ModifyNetworkInterfaceAttribute"
@@ -7,17 +11,29 @@ class GetModifyNetworkInterfaceAttributeActionEnum(str, Enum):
 
 @dataclass
 class GetModifyNetworkInterfaceAttributeAttachment:
+    r"""GetModifyNetworkInterfaceAttributeAttachment
+    Describes an attachment change.
+    """
+    
     attachment_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'AttachmentId' }})
     delete_on_termination: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DeleteOnTermination' }})
     
 
 @dataclass
 class GetModifyNetworkInterfaceAttributeDescription:
+    r"""GetModifyNetworkInterfaceAttributeDescription
+    Describes a value for a resource attribute that is a String.
+    """
+    
     value: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Value' }})
     
 
 @dataclass
 class GetModifyNetworkInterfaceAttributeSourceDestCheck:
+    r"""GetModifyNetworkInterfaceAttributeSourceDestCheck
+    Describes a value for a resource attribute that is a Boolean value.
+    """
+    
     value: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'Value' }})
     
 class GetModifyNetworkInterfaceAttributeVersionEnum(str, Enum):
@@ -26,14 +42,14 @@ class GetModifyNetworkInterfaceAttributeVersionEnum(str, Enum):
 
 @dataclass
 class GetModifyNetworkInterfaceAttributeQueryParams:
-    action: GetModifyNetworkInterfaceAttributeActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetModifyNetworkInterfaceAttributeActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    network_interface_id: str = field(metadata={'query_param': { 'field_name': 'NetworkInterfaceId', 'style': 'form', 'explode': True }})
+    version: GetModifyNetworkInterfaceAttributeVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     attachment: Optional[GetModifyNetworkInterfaceAttributeAttachment] = field(default=None, metadata={'query_param': { 'field_name': 'Attachment', 'style': 'form', 'explode': True }})
     description: Optional[GetModifyNetworkInterfaceAttributeDescription] = field(default=None, metadata={'query_param': { 'field_name': 'Description', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    network_interface_id: str = field(default=None, metadata={'query_param': { 'field_name': 'NetworkInterfaceId', 'style': 'form', 'explode': True }})
     security_group_id: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'SecurityGroupId', 'style': 'form', 'explode': True }})
     source_dest_check: Optional[GetModifyNetworkInterfaceAttributeSourceDestCheck] = field(default=None, metadata={'query_param': { 'field_name': 'SourceDestCheck', 'style': 'form', 'explode': True }})
-    version: GetModifyNetworkInterfaceAttributeVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -49,12 +65,12 @@ class GetModifyNetworkInterfaceAttributeHeaders:
 
 @dataclass
 class GetModifyNetworkInterfaceAttributeRequest:
-    query_params: GetModifyNetworkInterfaceAttributeQueryParams = field(default=None)
-    headers: GetModifyNetworkInterfaceAttributeHeaders = field(default=None)
+    headers: GetModifyNetworkInterfaceAttributeHeaders = field()
+    query_params: GetModifyNetworkInterfaceAttributeQueryParams = field()
     
 
 @dataclass
 class GetModifyNetworkInterfaceAttributeResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReplicationTaskAssessmentRunProgress } from "./replicationtaskassessmentrunprogress";
+
 
 
 // ReplicationTaskAssessmentRun
@@ -7,39 +8,39 @@ import { ReplicationTaskAssessmentRunProgress } from "./replicationtaskassessmen
  * <p>Provides information that describes a premigration assessment run that you have started using the <code>StartReplicationTaskAssessmentRun</code> operation.</p> <p>Some of the information appears based on other operations that can return the <code>ReplicationTaskAssessmentRun</code> object.</p>
 **/
 export class ReplicationTaskAssessmentRun extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AssessmentProgress" })
+  @SpeakeasyMetadata({ data: "json, name=AssessmentProgress" })
   assessmentProgress?: ReplicationTaskAssessmentRunProgress;
 
-  @Metadata({ data: "json, name=AssessmentRunName" })
+  @SpeakeasyMetadata({ data: "json, name=AssessmentRunName" })
   assessmentRunName?: string;
 
-  @Metadata({ data: "json, name=LastFailureMessage" })
+  @SpeakeasyMetadata({ data: "json, name=LastFailureMessage" })
   lastFailureMessage?: string;
 
-  @Metadata({ data: "json, name=ReplicationTaskArn" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicationTaskArn" })
   replicationTaskArn?: string;
 
-  @Metadata({ data: "json, name=ReplicationTaskAssessmentRunArn" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicationTaskAssessmentRunArn" })
   replicationTaskAssessmentRunArn?: string;
 
-  @Metadata({ data: "json, name=ReplicationTaskAssessmentRunCreationDate" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicationTaskAssessmentRunCreationDate" })
   replicationTaskAssessmentRunCreationDate?: Date;
 
-  @Metadata({ data: "json, name=ResultEncryptionMode" })
+  @SpeakeasyMetadata({ data: "json, name=ResultEncryptionMode" })
   resultEncryptionMode?: string;
 
-  @Metadata({ data: "json, name=ResultKmsKeyArn" })
+  @SpeakeasyMetadata({ data: "json, name=ResultKmsKeyArn" })
   resultKmsKeyArn?: string;
 
-  @Metadata({ data: "json, name=ResultLocationBucket" })
+  @SpeakeasyMetadata({ data: "json, name=ResultLocationBucket" })
   resultLocationBucket?: string;
 
-  @Metadata({ data: "json, name=ResultLocationFolder" })
+  @SpeakeasyMetadata({ data: "json, name=ResultLocationFolder" })
   resultLocationFolder?: string;
 
-  @Metadata({ data: "json, name=ServiceAccessRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceAccessRoleArn" })
   serviceAccessRoleArn?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: string;
 }

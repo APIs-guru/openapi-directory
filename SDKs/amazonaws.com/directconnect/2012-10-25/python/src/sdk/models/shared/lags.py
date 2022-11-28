@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import lag
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Lags:
-    lags: Optional[List[lag.Lag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lags' }})
+    lags: Optional[List[Lag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lags') }})
     

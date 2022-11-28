@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDescribeListenerCertificatesActionEnum(str, Enum):
     DESCRIBE_LISTENER_CERTIFICATES = "DescribeListenerCertificates"
@@ -10,11 +14,11 @@ class GetDescribeListenerCertificatesVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeListenerCertificatesQueryParams:
-    action: GetDescribeListenerCertificatesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    listener_arn: str = field(default=None, metadata={'query_param': { 'field_name': 'ListenerArn', 'style': 'form', 'explode': True }})
+    action: GetDescribeListenerCertificatesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    listener_arn: str = field(metadata={'query_param': { 'field_name': 'ListenerArn', 'style': 'form', 'explode': True }})
+    version: GetDescribeListenerCertificatesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
     page_size: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'PageSize', 'style': 'form', 'explode': True }})
-    version: GetDescribeListenerCertificatesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetDescribeListenerCertificatesHeaders:
 
 @dataclass
 class GetDescribeListenerCertificatesRequest:
-    query_params: GetDescribeListenerCertificatesQueryParams = field(default=None)
-    headers: GetDescribeListenerCertificatesHeaders = field(default=None)
+    headers: GetDescribeListenerCertificatesHeaders = field()
+    query_params: GetDescribeListenerCertificatesQueryParams = field()
     
 
 @dataclass
 class GetDescribeListenerCertificatesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

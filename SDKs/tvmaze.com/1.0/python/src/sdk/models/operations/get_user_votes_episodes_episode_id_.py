@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class GetUserVotesEpisodesEpisodeIDPathParams:
-    episode_id: int = field(default=None, metadata={'path_param': { 'field_name': 'episode_id', 'style': 'simple', 'explode': False }})
+    episode_id: int = field(metadata={'path_param': { 'field_name': 'episode_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetUserVotesEpisodesEpisodeIDRequest:
-    path_params: GetUserVotesEpisodesEpisodeIDPathParams = field(default=None)
+    path_params: GetUserVotesEpisodesEpisodeIDPathParams = field()
     
 
 @dataclass
 class GetUserVotesEpisodesEpisodeIDResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     episode_vote: Optional[shared.EpisodeVote] = field(default=None)
-    status_code: int = field(default=None)
     

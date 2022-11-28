@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ScalableDimensionEnum } from "./scalabledimensionenum";
 import { ScalingPolicy } from "./scalingpolicy";
 import { ScalingStatusCodeEnum } from "./scalingstatuscodeenum";

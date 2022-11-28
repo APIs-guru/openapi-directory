@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDeleteTransitGatewayPeeringAttachmentActionEnum(str, Enum):
     DELETE_TRANSIT_GATEWAY_PEERING_ATTACHMENT = "DeleteTransitGatewayPeeringAttachment"
@@ -10,8 +14,8 @@ class PostDeleteTransitGatewayPeeringAttachmentVersionEnum(str, Enum):
 
 @dataclass
 class PostDeleteTransitGatewayPeeringAttachmentQueryParams:
-    action: PostDeleteTransitGatewayPeeringAttachmentActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDeleteTransitGatewayPeeringAttachmentVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDeleteTransitGatewayPeeringAttachmentActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDeleteTransitGatewayPeeringAttachmentVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDeleteTransitGatewayPeeringAttachmentHeaders:
 
 @dataclass
 class PostDeleteTransitGatewayPeeringAttachmentRequest:
-    query_params: PostDeleteTransitGatewayPeeringAttachmentQueryParams = field(default=None)
-    headers: PostDeleteTransitGatewayPeeringAttachmentHeaders = field(default=None)
+    headers: PostDeleteTransitGatewayPeeringAttachmentHeaders = field()
+    query_params: PostDeleteTransitGatewayPeeringAttachmentQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDeleteTransitGatewayPeeringAttachmentResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

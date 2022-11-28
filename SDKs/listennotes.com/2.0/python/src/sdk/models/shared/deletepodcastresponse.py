@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class DeletePodcastResponseStatusEnum(str, Enum):
     DELETED = "deleted"
@@ -10,5 +11,5 @@ class DeletePodcastResponseStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class DeletePodcastResponse:
-    status: DeletePodcastResponseStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: DeletePodcastResponseStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     

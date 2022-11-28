@@ -1,10 +1,10 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { RecognitionAudio } from "./recognitionaudio";
-import { RecognitionConfig } from "./recognitionconfig";
+import { RecognitionConfigInput } from "./recognitionconfig";
 /**
  * The top-level message sent by the client for the `Recognize` method.
 **/
-export declare class RecognizeRequest extends SpeakeasyBase {
+export declare class RecognizeRequestInput extends SpeakeasyBase {
     audio?: RecognitionAudio;
-    config?: RecognitionConfig;
+    config?: RecognitionConfigInput;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Row } from "./row";
 export var UpdateRowRequestViewEnum;
 (function (UpdateRowRequestViewEnum) {
@@ -39,15 +39,15 @@ var UpdateRowRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=row" }),
+        SpeakeasyMetadata({ data: "json, name=row" }),
         __metadata("design:type", Row)
     ], UpdateRowRequest.prototype, "row", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateMask" }),
+        SpeakeasyMetadata({ data: "json, name=updateMask" }),
         __metadata("design:type", String)
     ], UpdateRowRequest.prototype, "updateMask", void 0);
     __decorate([
-        Metadata({ data: "json, name=view" }),
+        SpeakeasyMetadata({ data: "json, name=view" }),
         __metadata("design:type", String)
     ], UpdateRowRequest.prototype, "view", void 0);
     return UpdateRowRequest;

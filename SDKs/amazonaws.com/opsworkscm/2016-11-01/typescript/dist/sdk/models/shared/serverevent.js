@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ServerEvent
 /**
  * An event that is related to the server, such as the start of maintenance or backup.
@@ -33,19 +33,19 @@ var ServerEvent = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CreatedAt" }),
+        SpeakeasyMetadata({ data: "json, name=CreatedAt" }),
         __metadata("design:type", Date)
     ], ServerEvent.prototype, "createdAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=LogUrl" }),
+        SpeakeasyMetadata({ data: "json, name=LogUrl" }),
         __metadata("design:type", String)
     ], ServerEvent.prototype, "logUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=Message" }),
+        SpeakeasyMetadata({ data: "json, name=Message" }),
         __metadata("design:type", String)
     ], ServerEvent.prototype, "message", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServerName" }),
+        SpeakeasyMetadata({ data: "json, name=ServerName" }),
         __metadata("design:type", String)
     ], ServerEvent.prototype, "serverName", void 0);
     return ServerEvent;

@@ -1,5 +1,7 @@
 package shared
 
+// Item
+// An item - message or event - that has been sent.
 type Item struct {
 	AbsoluteTime    *string              `json:"AbsoluteTime,omitempty"`
 	Attachments     []AttachmentItem     `json:"Attachments,omitempty"`

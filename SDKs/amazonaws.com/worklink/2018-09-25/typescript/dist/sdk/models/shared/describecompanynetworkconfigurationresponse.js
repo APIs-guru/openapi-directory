@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DescribeCompanyNetworkConfigurationResponse = /** @class */ (function (_super) {
     __extends(DescribeCompanyNetworkConfigurationResponse, _super);
     function DescribeCompanyNetworkConfigurationResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=SecurityGroupIds" }),
+        SpeakeasyMetadata({ data: "json, name=SecurityGroupIds" }),
         __metadata("design:type", Array)
     ], DescribeCompanyNetworkConfigurationResponse.prototype, "securityGroupIds", void 0);
     __decorate([
-        Metadata({ data: "json, name=SubnetIds" }),
+        SpeakeasyMetadata({ data: "json, name=SubnetIds" }),
         __metadata("design:type", Array)
     ], DescribeCompanyNetworkConfigurationResponse.prototype, "subnetIds", void 0);
     __decorate([
-        Metadata({ data: "json, name=VpcId" }),
+        SpeakeasyMetadata({ data: "json, name=VpcId" }),
         __metadata("design:type", String)
     ], DescribeCompanyNetworkConfigurationResponse.prototype, "vpcId", void 0);
     return DescribeCompanyNetworkConfigurationResponse;

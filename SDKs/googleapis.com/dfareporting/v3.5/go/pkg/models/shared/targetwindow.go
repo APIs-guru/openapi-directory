@@ -8,6 +8,8 @@ const (
 	TargetWindowTargetWindowOptionEnumCustom        TargetWindowTargetWindowOptionEnum = "CUSTOM"
 )
 
+// TargetWindow
+// Target Window.
 type TargetWindow struct {
 	CustomHTML         *string                             `json:"customHtml,omitempty"`
 	TargetWindowOption *TargetWindowTargetWindowOptionEnum `json:"targetWindowOption,omitempty"`

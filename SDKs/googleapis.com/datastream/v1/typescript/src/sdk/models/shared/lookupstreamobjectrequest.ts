@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SourceObjectIdentifier } from "./sourceobjectidentifier";
+
 
 
 // LookupStreamObjectRequest
@@ -7,6 +8,6 @@ import { SourceObjectIdentifier } from "./sourceobjectidentifier";
  * Request for looking up a specific stream object by its source object identifier.
 **/
 export class LookupStreamObjectRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=sourceObjectIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=sourceObjectIdentifier" })
   sourceObjectIdentifier?: SourceObjectIdentifier;
 }

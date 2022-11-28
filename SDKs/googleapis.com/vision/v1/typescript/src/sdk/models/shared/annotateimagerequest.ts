@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Feature } from "./feature";
 import { Image } from "./image";
 import { ImageContext } from "./imagecontext";
+
 
 
 // AnnotateImageRequest
@@ -10,12 +10,12 @@ import { ImageContext } from "./imagecontext";
  * Request for performing Google Cloud Vision API tasks over a user-provided image, with user-requested features, and with context information.
 **/
 export class AnnotateImageRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=features", elemType: shared.Feature })
+  @SpeakeasyMetadata({ data: "json, name=features", elemType: Feature })
   features?: Feature[];
 
-  @Metadata({ data: "json, name=image" })
+  @SpeakeasyMetadata({ data: "json, name=image" })
   image?: Image;
 
-  @Metadata({ data: "json, name=imageContext" })
+  @SpeakeasyMetadata({ data: "json, name=imageContext" })
   imageContext?: ImageContext;
 }

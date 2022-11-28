@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LambdaFilesystemPermissionEnum } from "./lambdafilesystempermissionenum";
+
 
 
 // LambdaDeviceMount
@@ -7,12 +8,12 @@ import { LambdaFilesystemPermissionEnum } from "./lambdafilesystempermissionenum
  * Contains information about a device that Linux processes in a container can access.
 **/
 export class LambdaDeviceMount extends SpeakeasyBase {
-  @Metadata({ data: "json, name=addGroupOwner" })
+  @SpeakeasyMetadata({ data: "json, name=addGroupOwner" })
   addGroupOwner?: boolean;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path: string;
 
-  @Metadata({ data: "json, name=permission" })
+  @SpeakeasyMetadata({ data: "json, name=permission" })
   permission?: LambdaFilesystemPermissionEnum;
 }

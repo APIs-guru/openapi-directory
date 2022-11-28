@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,14 +28,14 @@ class ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListQueryParams:
 
 @dataclass
 class ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -45,14 +46,14 @@ class ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListSecurity:
 
 @dataclass
 class ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListRequest:
-    path_params: ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListPathParams = field(default=None)
-    query_params: ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListQueryParams = field(default=None)
-    security: ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListSecurity = field(default=None)
+    path_params: ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListPathParams = field()
+    query_params: ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListQueryParams = field()
+    security: ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListSecurity = field()
     
 
 @dataclass
 class ArtifactregistryProjectsLocationsRepositoriesNpmPackagesListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_npm_packages_response: Optional[shared.ListNpmPackagesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

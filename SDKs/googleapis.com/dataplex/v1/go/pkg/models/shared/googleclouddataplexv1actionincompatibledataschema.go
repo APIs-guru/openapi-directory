@@ -8,6 +8,8 @@ const (
 	GoogleCloudDataplexV1ActionIncompatibleDataSchemaSchemaChangeEnumModified                GoogleCloudDataplexV1ActionIncompatibleDataSchemaSchemaChangeEnum = "MODIFIED"
 )
 
+// GoogleCloudDataplexV1ActionIncompatibleDataSchema
+// Action details for incompatible schemas detected by discovery.
 type GoogleCloudDataplexV1ActionIncompatibleDataSchema struct {
 	ExistingSchema       *string                                                            `json:"existingSchema,omitempty"`
 	NewSchema            *string                                                            `json:"newSchema,omitempty"`

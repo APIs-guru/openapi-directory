@@ -1,5 +1,7 @@
 package shared
 
+// CreateFileSystemWindowsConfiguration
+// The configuration object for the Microsoft Windows file system used in <code>CreateFileSystem</code> and <code>CreateFileSystemFromBackup</code> operations.
 type CreateFileSystemWindowsConfiguration struct {
 	ActiveDirectoryID                       *string                                  `json:"ActiveDirectoryId,omitempty"`
 	Aliases                                 []string                                 `json:"Aliases,omitempty"`

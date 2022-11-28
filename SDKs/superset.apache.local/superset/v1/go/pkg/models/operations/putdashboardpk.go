@@ -12,12 +12,6 @@ type PutDashboardPkSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type PutDashboardPkRequest struct {
-	PathParams PutDashboardPkPathParams
-	Request    shared.DashboardRestAPIPut `request:"mediaType=application/json"`
-	Security   PutDashboardPkSecurity
-}
-
 type PutDashboardPk200ApplicationJSON struct {
 	ID     *float64                    `json:"id,omitempty"`
 	Result *shared.DashboardRestAPIPut `json:"result,omitempty"`
@@ -45,6 +39,12 @@ type PutDashboardPk422ApplicationJSON struct {
 
 type PutDashboardPk500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type PutDashboardPkRequest struct {
+	PathParams PutDashboardPkPathParams
+	Request    shared.DashboardRestAPIPut `request:"mediaType=application/json"`
+	Security   PutDashboardPkSecurity
 }
 
 type PutDashboardPkResponse struct {

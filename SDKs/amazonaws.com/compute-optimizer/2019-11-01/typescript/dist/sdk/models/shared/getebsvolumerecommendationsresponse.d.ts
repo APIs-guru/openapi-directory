@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GetRecommendationError } from "./getrecommendationerror";
 import { VolumeRecommendation } from "./volumerecommendation";
 export declare class GetEbsVolumeRecommendationsResponse extends SpeakeasyBase {

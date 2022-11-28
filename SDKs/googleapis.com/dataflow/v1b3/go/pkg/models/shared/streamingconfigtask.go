@@ -1,5 +1,7 @@
 package shared
 
+// StreamingConfigTask
+// A task that carries configuration information for streaming computations.
 type StreamingConfigTask struct {
 	CommitStreamChunkSizeBytes   *string                      `json:"commitStreamChunkSizeBytes,omitempty"`
 	GetDataStreamChunkSizeBytes  *string                      `json:"getDataStreamChunkSizeBytes,omitempty"`

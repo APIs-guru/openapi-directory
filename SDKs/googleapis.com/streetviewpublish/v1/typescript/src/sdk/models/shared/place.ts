@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Place
@@ -6,12 +7,22 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Place metadata for an entity.
 **/
 export class Place extends SpeakeasyBase {
-  @Metadata({ data: "json, name=languageCode" })
+  @SpeakeasyMetadata({ data: "json, name=languageCode" })
   languageCode?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=placeId" })
+  @SpeakeasyMetadata({ data: "json, name=placeId" })
+  placeId?: string;
+}
+
+
+// PlaceInput
+/** 
+ * Place metadata for an entity.
+**/
+export class PlaceInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=placeId" })
   placeId?: string;
 }

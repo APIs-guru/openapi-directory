@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetConnectionsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=authEventId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=authEventId" })
   authEventId?: string;
 }
 
 
 export class GetConnectionsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oAuth2: shared.SchemeOAuth2;
 }
 
 
 export class GetConnectionsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetConnectionsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetConnectionsSecurity;
 }
 
 
 export class GetConnectionsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   connections?: any[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

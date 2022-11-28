@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { MemberViewModel } from "./memberviewmodel";
 export declare enum LineViewModelContentTypeEnum {
     Generic = "Generic",

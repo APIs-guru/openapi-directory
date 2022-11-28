@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApnsFcmOptions } from "./apnsfcmoptions";
 // ApnsConfig
 /**
@@ -34,15 +34,15 @@ var ApnsConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=fcmOptions" }),
+        SpeakeasyMetadata({ data: "json, name=fcmOptions" }),
         __metadata("design:type", ApnsFcmOptions)
     ], ApnsConfig.prototype, "fcmOptions", void 0);
     __decorate([
-        Metadata({ data: "json, name=headers" }),
+        SpeakeasyMetadata({ data: "json, name=headers" }),
         __metadata("design:type", Map)
     ], ApnsConfig.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "json, name=payload" }),
+        SpeakeasyMetadata({ data: "json, name=payload" }),
         __metadata("design:type", Map)
     ], ApnsConfig.prototype, "payload", void 0);
     return ApnsConfig;

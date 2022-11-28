@@ -1,8 +1,10 @@
 package shared
 
-type CreateInstanceRequest struct {
-	Clusters   map[string]Cluster `json:"clusters,omitempty"`
-	Instance   *Instance          `json:"instance,omitempty"`
-	InstanceID *string            `json:"instanceId,omitempty"`
-	Parent     *string            `json:"parent,omitempty"`
+// CreateInstanceRequestInput
+// Request message for BigtableInstanceAdmin.CreateInstance.
+type CreateInstanceRequestInput struct {
+	Clusters   map[string]ClusterInput `json:"clusters,omitempty"`
+	Instance   *InstanceInput          `json:"instance,omitempty"`
+	InstanceID *string                 `json:"instanceId,omitempty"`
+	Parent     *string                 `json:"parent,omitempty"`
 }

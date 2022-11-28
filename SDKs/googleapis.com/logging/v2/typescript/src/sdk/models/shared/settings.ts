@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Settings
@@ -6,18 +7,34 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes the settings associated with a project, folder, organization, billing account, or flexible resource.
 **/
 export class Settings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=disableDefaultSink" })
+  @SpeakeasyMetadata({ data: "json, name=disableDefaultSink" })
   disableDefaultSink?: boolean;
 
-  @Metadata({ data: "json, name=kmsKeyName" })
+  @SpeakeasyMetadata({ data: "json, name=kmsKeyName" })
   kmsKeyName?: string;
 
-  @Metadata({ data: "json, name=kmsServiceAccountId" })
+  @SpeakeasyMetadata({ data: "json, name=kmsServiceAccountId" })
   kmsServiceAccountId?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=storageLocation" })
+  @SpeakeasyMetadata({ data: "json, name=storageLocation" })
+  storageLocation?: string;
+}
+
+
+// SettingsInput
+/** 
+ * Describes the settings associated with a project, folder, organization, billing account, or flexible resource.
+**/
+export class SettingsInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=disableDefaultSink" })
+  disableDefaultSink?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=kmsKeyName" })
+  kmsKeyName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=storageLocation" })
   storageLocation?: string;
 }

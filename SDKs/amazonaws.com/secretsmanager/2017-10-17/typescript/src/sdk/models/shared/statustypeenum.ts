@@ -1,7 +1,8 @@
 
 
+
 export enum StatusTypeEnum {
-    InSync = "InSync"
-,    Failed = "Failed"
-,    InProgress = "InProgress"
+    InSync = "InSync",
+    Failed = "Failed",
+    InProgress = "InProgress"
 }

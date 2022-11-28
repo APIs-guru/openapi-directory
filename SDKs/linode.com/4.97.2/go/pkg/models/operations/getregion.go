@@ -8,12 +8,12 @@ type GetRegionPathParams struct {
 	RegionID string `pathParam:"style=simple,explode=false,name=regionId"`
 }
 
-type GetRegionRequest struct {
-	PathParams GetRegionPathParams
-}
-
 type GetRegionDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type GetRegionRequest struct {
+	PathParams GetRegionPathParams
 }
 
 type GetRegionResponse struct {

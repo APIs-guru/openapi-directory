@@ -8,11 +8,6 @@ type GetListOfIssuersIDSecurity struct {
 	Oauthsecurity shared.SchemeOauthsecurity `security:"scheme,type=oauth2"`
 }
 
-type GetListOfIssuersIDRequest struct {
-	Request  *interface{} `request:"mediaType=application/x-www-form-urlencoded"`
-	Security GetListOfIssuersIDSecurity
-}
-
 type GetListOfIssuersID400ApplicationJSON struct {
 	Error            *string `json:"error,omitempty"`
 	ErrorDescription *string `json:"error_description,omitempty"`
@@ -26,6 +21,11 @@ type GetListOfIssuersID401ApplicationJSON struct {
 type GetListOfIssuersID500ApplicationJSON struct {
 	Error            *interface{} `json:"error,omitempty"`
 	ErrorDescription *interface{} `json:"error_description,omitempty"`
+}
+
+type GetListOfIssuersIDRequest struct {
+	Request  *interface{} `request:"mediaType=application/x-www-form-urlencoded"`
+	Security GetListOfIssuersIDSecurity
 }
 
 type GetListOfIssuersIDResponse struct {

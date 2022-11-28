@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeviceIdentifier } from "./deviceidentifier";
 import { DeviceMetadata } from "./devicemetadata";
 export var ClaimDeviceRequestSectionTypeEnum;
@@ -41,21 +41,33 @@ var ClaimDeviceRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=customerId" }),
+        SpeakeasyMetadata({ data: "json, name=customerId" }),
         __metadata("design:type", String)
     ], ClaimDeviceRequest.prototype, "customerId", void 0);
     __decorate([
-        Metadata({ data: "json, name=deviceIdentifier" }),
+        SpeakeasyMetadata({ data: "json, name=deviceIdentifier" }),
         __metadata("design:type", DeviceIdentifier)
     ], ClaimDeviceRequest.prototype, "deviceIdentifier", void 0);
     __decorate([
-        Metadata({ data: "json, name=deviceMetadata" }),
+        SpeakeasyMetadata({ data: "json, name=deviceMetadata" }),
         __metadata("design:type", DeviceMetadata)
     ], ClaimDeviceRequest.prototype, "deviceMetadata", void 0);
     __decorate([
-        Metadata({ data: "json, name=sectionType" }),
+        SpeakeasyMetadata({ data: "json, name=googleWorkspaceCustomerId" }),
+        __metadata("design:type", String)
+    ], ClaimDeviceRequest.prototype, "googleWorkspaceCustomerId", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=preProvisioningToken" }),
+        __metadata("design:type", String)
+    ], ClaimDeviceRequest.prototype, "preProvisioningToken", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=sectionType" }),
         __metadata("design:type", String)
     ], ClaimDeviceRequest.prototype, "sectionType", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=simlockProfileId" }),
+        __metadata("design:type", String)
+    ], ClaimDeviceRequest.prototype, "simlockProfileId", void 0);
     return ClaimDeviceRequest;
 }(SpeakeasyBase));
 export { ClaimDeviceRequest };

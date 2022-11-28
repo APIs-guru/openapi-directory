@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteReviewsReviewIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=reviewId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=reviewId" })
   reviewId: string;
 }
 
 
 export class DeleteReviewsReviewIdQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=userAccountId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userAccountId" })
   userAccountId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=userId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userId" })
   userId: string;
 }
 
 
 export class DeleteReviewsReviewIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DeleteReviewsReviewIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: DeleteReviewsReviewIdQueryParams;
 }
 
 
 export class DeleteReviewsReviewIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContactTypeEnum } from "./contacttypeenum";
 import { CountryCodeEnum } from "./countrycodeenum";
 import { ExtraParam } from "./extraparam";
+
 
 
 // ContactDetail
@@ -10,45 +10,45 @@ import { ExtraParam } from "./extraparam";
  * ContactDetail includes the following elements.
 **/
 export class ContactDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AddressLine1" })
+  @SpeakeasyMetadata({ data: "json, name=AddressLine1" })
   addressLine1?: string;
 
-  @Metadata({ data: "json, name=AddressLine2" })
+  @SpeakeasyMetadata({ data: "json, name=AddressLine2" })
   addressLine2?: string;
 
-  @Metadata({ data: "json, name=City" })
+  @SpeakeasyMetadata({ data: "json, name=City" })
   city?: string;
 
-  @Metadata({ data: "json, name=ContactType" })
+  @SpeakeasyMetadata({ data: "json, name=ContactType" })
   contactType?: ContactTypeEnum;
 
-  @Metadata({ data: "json, name=CountryCode" })
+  @SpeakeasyMetadata({ data: "json, name=CountryCode" })
   countryCode?: CountryCodeEnum;
 
-  @Metadata({ data: "json, name=Email" })
+  @SpeakeasyMetadata({ data: "json, name=Email" })
   email?: string;
 
-  @Metadata({ data: "json, name=ExtraParams", elemType: shared.ExtraParam })
+  @SpeakeasyMetadata({ data: "json, name=ExtraParams", elemType: ExtraParam })
   extraParams?: ExtraParam[];
 
-  @Metadata({ data: "json, name=Fax" })
+  @SpeakeasyMetadata({ data: "json, name=Fax" })
   fax?: string;
 
-  @Metadata({ data: "json, name=FirstName" })
+  @SpeakeasyMetadata({ data: "json, name=FirstName" })
   firstName?: string;
 
-  @Metadata({ data: "json, name=LastName" })
+  @SpeakeasyMetadata({ data: "json, name=LastName" })
   lastName?: string;
 
-  @Metadata({ data: "json, name=OrganizationName" })
+  @SpeakeasyMetadata({ data: "json, name=OrganizationName" })
   organizationName?: string;
 
-  @Metadata({ data: "json, name=PhoneNumber" })
+  @SpeakeasyMetadata({ data: "json, name=PhoneNumber" })
   phoneNumber?: string;
 
-  @Metadata({ data: "json, name=State" })
+  @SpeakeasyMetadata({ data: "json, name=State" })
   state?: string;
 
-  @Metadata({ data: "json, name=ZipCode" })
+  @SpeakeasyMetadata({ data: "json, name=ZipCode" })
   zipCode?: string;
 }

@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum CreateChannelRequestBodyPrivacyEnum {
-    Anybody = "anybody"
-,    Moderators = "moderators"
-,    User = "user"
+    Anybody = "anybody",
+    Moderators = "moderators",
+    User = "user"
 }
 
 
 export class CreateChannelRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=link" })
+  @SpeakeasyMetadata({ data: "json, name=link" })
   link?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=privacy" })
+  @SpeakeasyMetadata({ data: "json, name=privacy" })
   privacy: CreateChannelRequestBodyPrivacyEnum;
 }
 
 
 export class CreateChannelSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2: shared.SchemeOauth2;
 }
 
 
 export class CreateChannelRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/vnd.vimeo.channel+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/vnd.vimeo.channel+json" })
   request: CreateChannelRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: CreateChannelSecurity;
 }
 
 
 export class CreateChannelResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   channel?: shared.Channel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   legacyError?: shared.LegacyError;
 }

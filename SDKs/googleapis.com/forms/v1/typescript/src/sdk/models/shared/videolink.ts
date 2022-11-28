@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // VideoLink
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Link to a video.
 **/
 export class VideoLink extends SpeakeasyBase {
-  @Metadata({ data: "json, name=displayText" })
+  @SpeakeasyMetadata({ data: "json, name=displayText" })
   displayText?: string;
 
-  @Metadata({ data: "json, name=youtubeUri" })
+  @SpeakeasyMetadata({ data: "json, name=youtubeUri" })
   youtubeUri?: string;
 }

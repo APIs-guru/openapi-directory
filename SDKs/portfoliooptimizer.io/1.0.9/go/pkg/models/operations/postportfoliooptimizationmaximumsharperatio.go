@@ -18,12 +18,12 @@ type PostPortfolioOptimizationMaximumSharpeRatioRequestBody struct {
 	RiskFreeRate           float64                                                            `json:"riskFreeRate"`
 }
 
-type PostPortfolioOptimizationMaximumSharpeRatioRequest struct {
-	Request PostPortfolioOptimizationMaximumSharpeRatioRequestBody `request:"mediaType=application/json"`
-}
-
 type PostPortfolioOptimizationMaximumSharpeRatio200ApplicationJSON struct {
 	AssetsWeights []float64 `json:"assetsWeights"`
+}
+
+type PostPortfolioOptimizationMaximumSharpeRatioRequest struct {
+	Request PostPortfolioOptimizationMaximumSharpeRatioRequestBody `request:"mediaType=application/json"`
 }
 
 type PostPortfolioOptimizationMaximumSharpeRatioResponse struct {

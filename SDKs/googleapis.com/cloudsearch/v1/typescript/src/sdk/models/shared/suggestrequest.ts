@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataSourceRestriction } from "./datasourcerestriction";
 import { RequestOptions } from "./requestoptions";
+
 
 
 // SuggestRequest
@@ -9,12 +9,12 @@ import { RequestOptions } from "./requestoptions";
  * Request of suggest API.
 **/
 export class SuggestRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataSourceRestrictions", elemType: shared.DataSourceRestriction })
+  @SpeakeasyMetadata({ data: "json, name=dataSourceRestrictions", elemType: DataSourceRestriction })
   dataSourceRestrictions?: DataSourceRestriction[];
 
-  @Metadata({ data: "json, name=query" })
+  @SpeakeasyMetadata({ data: "json, name=query" })
   query?: string;
 
-  @Metadata({ data: "json, name=requestOptions" })
+  @SpeakeasyMetadata({ data: "json, name=requestOptions" })
   requestOptions?: RequestOptions;
 }

@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .alt_enum import *
 from .googleappsdrivelabelsv2betabadgecolors import *
 from .googleappsdrivelabelsv2betabadgeconfig import *
@@ -36,7 +36,6 @@ from .googleappsdrivelabelsv2betafielddisplayhints import *
 from .googleappsdrivelabelsv2betafieldintegeroptions import *
 from .googleappsdrivelabelsv2betafieldlimits import *
 from .googleappsdrivelabelsv2betafieldlistoptions import *
-from .googleappsdrivelabelsv2betafieldlongtextoptions import *
 from .googleappsdrivelabelsv2betafieldproperties import *
 from .googleappsdrivelabelsv2betafieldschemacapabilities import *
 from .googleappsdrivelabelsv2betafieldselectionoptions import *

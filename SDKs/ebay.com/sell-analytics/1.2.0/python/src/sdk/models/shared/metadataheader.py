@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import definition
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class MetadataHeader:
-    key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
-    metadata_keys: Optional[List[definition.Definition]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadataKeys' }})
+    r"""MetadataHeader
+    Type that defines the metadata header fields.
+    """
+    
+    key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('key') }})
+    metadata_keys: Optional[List[Definition]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('metadataKeys') }})
     

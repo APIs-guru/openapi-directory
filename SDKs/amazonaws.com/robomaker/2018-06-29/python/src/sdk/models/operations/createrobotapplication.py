@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,41 +23,49 @@ class CreateRobotApplicationHeaders:
 @dataclass_json
 @dataclass
 class CreateRobotApplicationRequestBodyEnvironment:
-    uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""CreateRobotApplicationRequestBodyEnvironment
+    The object that contains the Docker image URI for either your robot or simulation applications.
+    """
+    
+    uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class CreateRobotApplicationRequestBodyRobotSoftwareSuite:
-    name: Optional[shared.RobotSoftwareSuiteTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    version: Optional[shared.RobotSoftwareSuiteVersionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'version' }})
+    r"""CreateRobotApplicationRequestBodyRobotSoftwareSuite
+    Information about a robot software suite (ROS distribution).
+    """
+    
+    name: Optional[shared.RobotSoftwareSuiteTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    version: Optional[shared.RobotSoftwareSuiteVersionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('version') }})
     
 
 @dataclass_json
 @dataclass
 class CreateRobotApplicationRequestBody:
-    environment: Optional[CreateRobotApplicationRequestBodyEnvironment] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'environment' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    robot_software_suite: CreateRobotApplicationRequestBodyRobotSoftwareSuite = field(default=None, metadata={'dataclasses_json': { 'field_name': 'robotSoftwareSuite' }})
-    sources: Optional[List[shared.SourceConfig]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sources' }})
-    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    robot_software_suite: CreateRobotApplicationRequestBodyRobotSoftwareSuite = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('robotSoftwareSuite') }})
+    environment: Optional[CreateRobotApplicationRequestBodyEnvironment] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('environment') }})
+    sources: Optional[List[shared.SourceConfig]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sources') }})
+    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     
 
 @dataclass
 class CreateRobotApplicationRequest:
-    headers: CreateRobotApplicationHeaders = field(default=None)
-    request: CreateRobotApplicationRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateRobotApplicationHeaders = field()
+    request: CreateRobotApplicationRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateRobotApplicationResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     create_robot_application_response: Optional[shared.CreateRobotApplicationResponse] = field(default=None)
     idempotent_parameter_mismatch_exception: Optional[Any] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     invalid_parameter_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     resource_already_exists_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

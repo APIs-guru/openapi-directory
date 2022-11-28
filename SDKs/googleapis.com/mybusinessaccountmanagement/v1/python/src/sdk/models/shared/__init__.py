@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .account import *
 from .admin import *
 from .alt_enum import *

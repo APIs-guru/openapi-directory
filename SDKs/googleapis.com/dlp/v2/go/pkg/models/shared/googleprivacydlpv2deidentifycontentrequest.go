@@ -1,5 +1,7 @@
 package shared
 
+// GooglePrivacyDlpV2DeidentifyContentRequest
+// Request to de-identify a ContentItem.
 type GooglePrivacyDlpV2DeidentifyContentRequest struct {
 	DeidentifyConfig       *GooglePrivacyDlpV2DeidentifyConfig `json:"deidentifyConfig,omitempty"`
 	DeidentifyTemplateName *string                             `json:"deidentifyTemplateName,omitempty"`

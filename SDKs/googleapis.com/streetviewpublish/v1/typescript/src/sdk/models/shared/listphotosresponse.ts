@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Photo } from "./photo";
+
 
 
 // ListPhotosResponse
@@ -8,9 +8,9 @@ import { Photo } from "./photo";
  * Response to list all photos that belong to a user.
 **/
 export class ListPhotosResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=photos", elemType: shared.Photo })
+  @SpeakeasyMetadata({ data: "json, name=photos", elemType: Photo })
   photos?: Photo[];
 }

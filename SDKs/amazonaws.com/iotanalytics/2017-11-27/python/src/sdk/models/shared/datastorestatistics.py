@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import estimatedresourcesize
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DatastoreStatistics:
-    size: Optional[estimatedresourcesize.EstimatedResourceSize] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'size' }})
+    r"""DatastoreStatistics
+    Statistical information about the data store.
+    """
+    
+    size: Optional[EstimatedResourceSize] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('size') }})
     

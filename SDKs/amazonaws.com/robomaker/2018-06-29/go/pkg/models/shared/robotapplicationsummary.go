@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// RobotApplicationSummary
+// Summary information for a robot application.
 type RobotApplicationSummary struct {
 	Arn                *string             `json:"arn,omitempty"`
 	LastUpdatedAt      *time.Time          `json:"lastUpdatedAt,omitempty"`

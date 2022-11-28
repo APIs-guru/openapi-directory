@@ -4,13 +4,10 @@ type RemoveUserFromAccountPathParams struct {
 	AccountID string `pathParam:"style=simple,explode=false,name=accountId"`
 }
 
+// RemoveUserFromAccountRequestBody
+// The user being added/removed from the account
 type RemoveUserFromAccountRequestBody struct {
 	UserID string `json:"userId"`
-}
-
-type RemoveUserFromAccountRequest struct {
-	PathParams RemoveUserFromAccountPathParams
-	Request    RemoveUserFromAccountRequestBody `request:"mediaType=application/json"`
 }
 
 type RemoveUserFromAccount201ApplicationJSONMeta struct {
@@ -23,12 +20,16 @@ type RemoveUserFromAccount201ApplicationJSON struct {
 	Meta    RemoveUserFromAccount201ApplicationJSONMeta `json:"meta"`
 }
 
+// RemoveUserFromAccount400ApplicationJSONErrorsParameters
+// All query-, header- and path- parameters that seemed incorrect
 type RemoveUserFromAccount400ApplicationJSONErrorsParameters struct {
 	Header map[string]string `json:"header,omitempty"`
 	Path   map[string]string `json:"path,omitempty"`
 	Query  map[string]string `json:"query,omitempty"`
 }
 
+// RemoveUserFromAccount400ApplicationJSONErrors
+// Map that sums up all received values that seemed incorrect
 type RemoveUserFromAccount400ApplicationJSONErrors struct {
 	Fields     map[string]string                                        `json:"fields,omitempty"`
 	Parameters *RemoveUserFromAccount400ApplicationJSONErrorsParameters `json:"parameters,omitempty"`
@@ -83,6 +84,11 @@ type RemoveUserFromAccount500ApplicationJSONMeta struct {
 type RemoveUserFromAccount500ApplicationJSON struct {
 	Message string                                      `json:"message"`
 	Meta    RemoveUserFromAccount500ApplicationJSONMeta `json:"meta"`
+}
+
+type RemoveUserFromAccountRequest struct {
+	PathParams RemoveUserFromAccountPathParams
+	Request    RemoveUserFromAccountRequestBody `request:"mediaType=application/json"`
 }
 
 type RemoveUserFromAccountResponse struct {

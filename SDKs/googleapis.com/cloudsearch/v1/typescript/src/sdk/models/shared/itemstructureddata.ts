@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StructuredDataObject } from "./structureddataobject";
+
 
 
 // ItemStructuredData
@@ -7,9 +8,9 @@ import { StructuredDataObject } from "./structureddataobject";
  * Available structured data fields for the item.
 **/
 export class ItemStructuredData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hash" })
+  @SpeakeasyMetadata({ data: "json, name=hash" })
   hash?: string;
 
-  @Metadata({ data: "json, name=object" })
+  @SpeakeasyMetadata({ data: "json, name=object" })
   object?: StructuredDataObject;
 }

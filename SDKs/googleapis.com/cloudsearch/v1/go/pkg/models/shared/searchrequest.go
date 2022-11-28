@@ -1,5 +1,7 @@
 package shared
 
+// SearchRequest
+// The search API request.
 type SearchRequest struct {
 	ContextAttributes          []ContextAttribute          `json:"contextAttributes,omitempty"`
 	DataSourceRestrictions     []DataSourceRestriction     `json:"dataSourceRestrictions,omitempty"`

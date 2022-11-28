@@ -10,11 +10,6 @@ type RetrievePrefixPricingQueryParams struct {
 	Prefix    string `queryParam:"style=form,explode=true,name=prefix"`
 }
 
-type RetrievePrefixPricingRequest struct {
-	PathParams  RetrievePrefixPricingPathParams
-	QueryParams RetrievePrefixPricingQueryParams
-}
-
 type RetrievePrefixPricing400ApplicationJSONInvalidParameters struct {
 	Message   *string `json:"message,omitempty"`
 	Parameter *string `json:"parameter,omitempty"`
@@ -30,6 +25,11 @@ type RetrievePrefixPricing401ApplicationJSON struct {
 	Code           string `json:"code"`
 	Currency       string `json:"currency"`
 	ErrorCodeLabel string `json:"error-code-label"`
+}
+
+type RetrievePrefixPricingRequest struct {
+	PathParams  RetrievePrefixPricingPathParams
+	QueryParams RetrievePrefixPricingQueryParams
 }
 
 type RetrievePrefixPricingResponse struct {

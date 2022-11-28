@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ReplicationStatus } from "./replicationstatus";
 export declare enum SecretVersionStateEnum {
     StateUnspecified = "STATE_UNSPECIFIED",

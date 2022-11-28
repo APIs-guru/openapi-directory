@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ExportDestination } from "./exportdestination";
 import { ResourceTypeEnum } from "./resourcetypeenum";
 import { JobStatusEnum } from "./jobstatusenum";
+
 
 
 // RecommendationExportJob
@@ -9,24 +10,24 @@ import { JobStatusEnum } from "./jobstatusenum";
  * <p>Describes a recommendation export job.</p> <p>Use the <a>DescribeRecommendationExportJobs</a> action to view your recommendation export jobs.</p> <p>Use the <a>ExportAutoScalingGroupRecommendations</a> or <a>ExportEC2InstanceRecommendations</a> actions to request an export of your recommendations.</p>
 **/
 export class RecommendationExportJob extends SpeakeasyBase {
-  @Metadata({ data: "json, name=creationTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=creationTimestamp" })
   creationTimestamp?: Date;
 
-  @Metadata({ data: "json, name=destination" })
+  @SpeakeasyMetadata({ data: "json, name=destination" })
   destination?: ExportDestination;
 
-  @Metadata({ data: "json, name=failureReason" })
+  @SpeakeasyMetadata({ data: "json, name=failureReason" })
   failureReason?: string;
 
-  @Metadata({ data: "json, name=jobId" })
+  @SpeakeasyMetadata({ data: "json, name=jobId" })
   jobId?: string;
 
-  @Metadata({ data: "json, name=lastUpdatedTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdatedTimestamp" })
   lastUpdatedTimestamp?: Date;
 
-  @Metadata({ data: "json, name=resourceType" })
+  @SpeakeasyMetadata({ data: "json, name=resourceType" })
   resourceType?: ResourceTypeEnum;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: JobStatusEnum;
 }

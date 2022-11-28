@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class ReposListPagesBuildsPathParams:
-    owner: str = field(default=None, metadata={'path_param': { 'field_name': 'owner', 'style': 'simple', 'explode': False }})
-    repo: str = field(default=None, metadata={'path_param': { 'field_name': 'repo', 'style': 'simple', 'explode': False }})
+    owner: str = field(metadata={'path_param': { 'field_name': 'owner', 'style': 'simple', 'explode': False }})
+    repo: str = field(metadata={'path_param': { 'field_name': 'repo', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,14 +17,14 @@ class ReposListPagesBuildsQueryParams:
 
 @dataclass
 class ReposListPagesBuildsRequest:
-    path_params: ReposListPagesBuildsPathParams = field(default=None)
-    query_params: ReposListPagesBuildsQueryParams = field(default=None)
+    path_params: ReposListPagesBuildsPathParams = field()
+    query_params: ReposListPagesBuildsQueryParams = field()
     
 
 @dataclass
 class ReposListPagesBuildsResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     page_builds: Optional[List[shared.PageBuild]] = field(default=None)
     

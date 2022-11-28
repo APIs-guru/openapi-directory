@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleDatastoreAdminV1beta1EntityFilter } from "./googledatastoreadminv1beta1entityfilter";
+
 
 
 // GoogleDatastoreAdminV1beta1ExportEntitiesRequest
@@ -7,12 +8,12 @@ import { GoogleDatastoreAdminV1beta1EntityFilter } from "./googledatastoreadminv
  * The request for google.datastore.admin.v1beta1.DatastoreAdmin.ExportEntities.
 **/
 export class GoogleDatastoreAdminV1beta1ExportEntitiesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=entityFilter" })
+  @SpeakeasyMetadata({ data: "json, name=entityFilter" })
   entityFilter?: GoogleDatastoreAdminV1beta1EntityFilter;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=outputUrlPrefix" })
+  @SpeakeasyMetadata({ data: "json, name=outputUrlPrefix" })
   outputUrlPrefix?: string;
 }

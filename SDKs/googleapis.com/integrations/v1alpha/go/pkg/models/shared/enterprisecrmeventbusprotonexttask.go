@@ -1,5 +1,7 @@
 package shared
 
+// EnterpriseCrmEventbusProtoNextTask
+// The task that is next in line to be executed, if the condition specified evaluated to true.
 type EnterpriseCrmEventbusProtoNextTask struct {
 	CombinedConditions []EnterpriseCrmEventbusProtoCombinedCondition `json:"combinedConditions,omitempty"`
 	Condition          *string                                       `json:"condition,omitempty"`

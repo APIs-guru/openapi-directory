@@ -19,10 +19,6 @@ type SearchCommitsQueryParams struct {
 	Sort    *SearchCommitsSortEnum `queryParam:"style=form,explode=true,name=sort"`
 }
 
-type SearchCommitsRequest struct {
-	QueryParams SearchCommitsQueryParams
-}
-
 type SearchCommits200ApplicationJSON struct {
 	IncompleteResults bool                            `json:"incomplete_results"`
 	Items             []shared.CommitSearchResultItem `json:"items"`
@@ -32,6 +28,10 @@ type SearchCommits200ApplicationJSON struct {
 type SearchCommits415ApplicationJSON struct {
 	DocumentationURL string `json:"documentation_url"`
 	Message          string `json:"message"`
+}
+
+type SearchCommitsRequest struct {
+	QueryParams SearchCommitsQueryParams
 }
 
 type SearchCommitsResponse struct {

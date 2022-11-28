@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ChannelToStoreLinkDetails } from "./channeltostorelinkdetails";
 
+
 export enum ThirdPartyLinkSnippetTypeEnum {
-    LinkUnspecified = "linkUnspecified"
-,    ChannelToStoreLink = "channelToStoreLink"
+    LinkUnspecified = "linkUnspecified",
+    ChannelToStoreLink = "channelToStoreLink"
 }
 
 
@@ -12,9 +13,9 @@ export enum ThirdPartyLinkSnippetTypeEnum {
  * Basic information about a third party account link, including its type and type-specific information.
 **/
 export class ThirdPartyLinkSnippet extends SpeakeasyBase {
-  @Metadata({ data: "json, name=channelToStoreLink" })
+  @SpeakeasyMetadata({ data: "json, name=channelToStoreLink" })
   channelToStoreLink?: ChannelToStoreLinkDetails;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: ThirdPartyLinkSnippetTypeEnum;
 }

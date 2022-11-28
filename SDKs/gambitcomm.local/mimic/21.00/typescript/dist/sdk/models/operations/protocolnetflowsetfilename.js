@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ProtocolNetflowSetFileNamePathParams = /** @class */ (function (_super) {
     __extends(ProtocolNetflowSetFileNamePathParams, _super);
     function ProtocolNetflowSetFileNamePathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
         __metadata("design:type", Number)
     ], ProtocolNetflowSetFileNamePathParams.prototype, "agentNum", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=fileName" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=fileName" }),
         __metadata("design:type", String)
     ], ProtocolNetflowSetFileNamePathParams.prototype, "fileName", void 0);
     return ProtocolNetflowSetFileNamePathParams;
@@ -45,7 +45,7 @@ var ProtocolNetflowSetFileNameRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProtocolNetflowSetFileNamePathParams)
     ], ProtocolNetflowSetFileNameRequest.prototype, "pathParams", void 0);
     return ProtocolNetflowSetFileNameRequest;
@@ -57,15 +57,15 @@ var ProtocolNetflowSetFileNameResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolNetflowSetFileNameResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProtocolNetflowSetFileNameResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolNetflowSetFileNameResponse.prototype, "protocolNetflowSetFileName200ApplicationJsonString", void 0);
     return ProtocolNetflowSetFileNameResponse;

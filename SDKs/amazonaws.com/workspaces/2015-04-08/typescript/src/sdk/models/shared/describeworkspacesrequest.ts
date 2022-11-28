@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DescribeWorkspacesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BundleId" })
+  @SpeakeasyMetadata({ data: "json, name=BundleId" })
   bundleId?: string;
 
-  @Metadata({ data: "json, name=DirectoryId" })
+  @SpeakeasyMetadata({ data: "json, name=DirectoryId" })
   directoryId?: string;
 
-  @Metadata({ data: "json, name=Limit" })
+  @SpeakeasyMetadata({ data: "json, name=Limit" })
   limit?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=UserName" })
+  @SpeakeasyMetadata({ data: "json, name=UserName" })
   userName?: string;
 
-  @Metadata({ data: "json, name=WorkspaceIds" })
+  @SpeakeasyMetadata({ data: "json, name=WorkspaceIds" })
   workspaceIds?: string[];
 }

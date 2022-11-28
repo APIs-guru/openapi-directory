@@ -37,6 +37,8 @@ const (
 	CaptionSnippetTrackKindEnumForced   CaptionSnippetTrackKindEnum = "forced"
 )
 
+// CaptionSnippet
+// Basic details about a caption track, such as its language and name.
 type CaptionSnippet struct {
 	AudioTrackType *CaptionSnippetAudioTrackTypeEnum `json:"audioTrackType,omitempty"`
 	FailureReason  *CaptionSnippetFailureReasonEnum  `json:"failureReason,omitempty"`

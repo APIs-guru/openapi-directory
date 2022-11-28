@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var SearchDocsQueryParams = /** @class */ (function (_super) {
     __extends(SearchDocsQueryParams, _super);
@@ -30,7 +30,7 @@ var SearchDocsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search" }),
         __metadata("design:type", String)
     ], SearchDocsQueryParams.prototype, "search", void 0);
     return SearchDocsQueryParams;
@@ -42,7 +42,7 @@ var SearchDocsHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=x-readme-version" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-readme-version" }),
         __metadata("design:type", String)
     ], SearchDocsHeaders.prototype, "xReadmeVersion", void 0);
     return SearchDocsHeaders;
@@ -54,7 +54,7 @@ var SearchDocsSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], SearchDocsSecurity.prototype, "apiKey", void 0);
     return SearchDocsSecurity;
@@ -66,15 +66,15 @@ var SearchDocsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SearchDocsQueryParams)
     ], SearchDocsRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SearchDocsHeaders)
     ], SearchDocsRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SearchDocsSecurity)
     ], SearchDocsRequest.prototype, "security", void 0);
     return SearchDocsRequest;
@@ -86,11 +86,11 @@ var SearchDocsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], SearchDocsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], SearchDocsResponse.prototype, "statusCode", void 0);
     return SearchDocsResponse;

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LockEntity
@@ -6,39 +7,39 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * List Locks by path
 **/
 export class LockEntity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allow_access_by_any_user" })
+  @SpeakeasyMetadata({ data: "json, name=allow_access_by_any_user" })
   allowAccessByAnyUser?: boolean;
 
-  @Metadata({ data: "json, name=depth" })
+  @SpeakeasyMetadata({ data: "json, name=depth" })
   depth?: string;
 
-  @Metadata({ data: "json, name=exclusive" })
+  @SpeakeasyMetadata({ data: "json, name=exclusive" })
   exclusive?: boolean;
 
-  @Metadata({ data: "json, name=owner" })
+  @SpeakeasyMetadata({ data: "json, name=owner" })
   owner?: string;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path?: string;
 
-  @Metadata({ data: "json, name=recursive" })
+  @SpeakeasyMetadata({ data: "json, name=recursive" })
   recursive?: boolean;
 
-  @Metadata({ data: "json, name=scope" })
+  @SpeakeasyMetadata({ data: "json, name=scope" })
   scope?: string;
 
-  @Metadata({ data: "json, name=timeout" })
+  @SpeakeasyMetadata({ data: "json, name=timeout" })
   timeout?: number;
 
-  @Metadata({ data: "json, name=token" })
+  @SpeakeasyMetadata({ data: "json, name=token" })
   token?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 
-  @Metadata({ data: "json, name=user_id" })
+  @SpeakeasyMetadata({ data: "json, name=user_id" })
   userId?: number;
 
-  @Metadata({ data: "json, name=username" })
+  @SpeakeasyMetadata({ data: "json, name=username" })
   username?: string;
 }

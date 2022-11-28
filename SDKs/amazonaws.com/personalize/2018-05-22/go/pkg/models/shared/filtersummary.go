@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// FilterSummary
+// A short summary of a filter's attributes.
 type FilterSummary struct {
 	CreationDateTime    *time.Time `json:"creationDateTime,omitempty"`
 	DatasetGroupArn     *string    `json:"datasetGroupArn,omitempty"`

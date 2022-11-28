@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Summary } from "./summary";
+
 
 
 // EvaluationResult
@@ -7,9 +8,9 @@ import { Summary } from "./summary";
  * The evaluation results for the training of a model.
 **/
 export class EvaluationResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=F1Score" })
+  @SpeakeasyMetadata({ data: "json, name=F1Score" })
   f1Score?: number;
 
-  @Metadata({ data: "json, name=Summary" })
+  @SpeakeasyMetadata({ data: "json, name=Summary" })
   summary?: Summary;
 }

@@ -1,15 +1,18 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
-class GetSdkTypePathParams:
-    sdktype_id: str = field(default=None, metadata={'path_param': { 'field_name': 'sdktype_id', 'style': 'simple', 'explode': False }})
+class GetSDKTypePathParams:
+    sdktype_id: str = field(metadata={'path_param': { 'field_name': 'sdktype_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
-class GetSdkTypeHeaders:
+class GetSDKTypeHeaders:
     x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm', 'style': 'simple', 'explode': False }})
     x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256', 'style': 'simple', 'explode': False }})
     x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential', 'style': 'simple', 'explode': False }})
@@ -20,18 +23,18 @@ class GetSdkTypeHeaders:
     
 
 @dataclass
-class GetSdkTypeRequest:
-    path_params: GetSdkTypePathParams = field(default=None)
-    headers: GetSdkTypeHeaders = field(default=None)
+class GetSDKTypeRequest:
+    headers: GetSDKTypeHeaders = field()
+    path_params: GetSDKTypePathParams = field()
     
 
 @dataclass
-class GetSdkTypeResponse:
+class GetSDKTypeResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    sdk_type: Optional[shared.SdkType] = field(default=None)
-    status_code: int = field(default=None)
+    sdk_type: Optional[shared.SDKType] = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

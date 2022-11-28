@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AuthGetRequestOptions } from "./authgetrequestoptions";
 /**
  * AuthGetRequest defines the request schema for `/auth/get`

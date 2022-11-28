@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BatchInferenceJobConfig } from "./batchinferencejobconfig";
 import { BatchInferenceJobInput } from "./batchinferencejobinput";
 import { BatchInferenceJobOutput } from "./batchinferencejoboutput";
+
 
 
 // BatchInferenceJob
@@ -9,42 +10,42 @@ import { BatchInferenceJobOutput } from "./batchinferencejoboutput";
  * Contains information on a batch inference job.
 **/
 export class BatchInferenceJob extends SpeakeasyBase {
-  @Metadata({ data: "json, name=batchInferenceJobArn" })
+  @SpeakeasyMetadata({ data: "json, name=batchInferenceJobArn" })
   batchInferenceJobArn?: string;
 
-  @Metadata({ data: "json, name=batchInferenceJobConfig" })
+  @SpeakeasyMetadata({ data: "json, name=batchInferenceJobConfig" })
   batchInferenceJobConfig?: BatchInferenceJobConfig;
 
-  @Metadata({ data: "json, name=creationDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationDateTime" })
   creationDateTime?: Date;
 
-  @Metadata({ data: "json, name=failureReason" })
+  @SpeakeasyMetadata({ data: "json, name=failureReason" })
   failureReason?: string;
 
-  @Metadata({ data: "json, name=filterArn" })
+  @SpeakeasyMetadata({ data: "json, name=filterArn" })
   filterArn?: string;
 
-  @Metadata({ data: "json, name=jobInput" })
+  @SpeakeasyMetadata({ data: "json, name=jobInput" })
   jobInput?: BatchInferenceJobInput;
 
-  @Metadata({ data: "json, name=jobName" })
+  @SpeakeasyMetadata({ data: "json, name=jobName" })
   jobName?: string;
 
-  @Metadata({ data: "json, name=jobOutput" })
+  @SpeakeasyMetadata({ data: "json, name=jobOutput" })
   jobOutput?: BatchInferenceJobOutput;
 
-  @Metadata({ data: "json, name=lastUpdatedDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdatedDateTime" })
   lastUpdatedDateTime?: Date;
 
-  @Metadata({ data: "json, name=numResults" })
+  @SpeakeasyMetadata({ data: "json, name=numResults" })
   numResults?: number;
 
-  @Metadata({ data: "json, name=roleArn" })
+  @SpeakeasyMetadata({ data: "json, name=roleArn" })
   roleArn?: string;
 
-  @Metadata({ data: "json, name=solutionVersionArn" })
+  @SpeakeasyMetadata({ data: "json, name=solutionVersionArn" })
   solutionVersionArn?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 }

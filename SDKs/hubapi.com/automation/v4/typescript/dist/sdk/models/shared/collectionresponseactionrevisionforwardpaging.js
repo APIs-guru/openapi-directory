@@ -22,20 +22,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ForwardPaging } from "./forwardpaging";
+import { ActionRevision } from "./actionrevision";
 var CollectionResponseActionRevisionForwardPaging = /** @class */ (function (_super) {
     __extends(CollectionResponseActionRevisionForwardPaging, _super);
     function CollectionResponseActionRevisionForwardPaging() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=paging" }),
+        SpeakeasyMetadata({ data: "json, name=paging" }),
         __metadata("design:type", ForwardPaging)
     ], CollectionResponseActionRevisionForwardPaging.prototype, "paging", void 0);
     __decorate([
-        Metadata({ data: "json, name=results", elemType: shared.ActionRevision }),
+        SpeakeasyMetadata({ data: "json, name=results", elemType: ActionRevision }),
         __metadata("design:type", Array)
     ], CollectionResponseActionRevisionForwardPaging.prototype, "results", void 0);
     return CollectionResponseActionRevisionForwardPaging;

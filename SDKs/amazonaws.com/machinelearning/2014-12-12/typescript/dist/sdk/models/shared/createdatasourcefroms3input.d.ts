@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { S3DataSpec } from "./s3dataspec";
 export declare class CreateDataSourceFromS3Input extends SpeakeasyBase {
     computeStatistics?: boolean;

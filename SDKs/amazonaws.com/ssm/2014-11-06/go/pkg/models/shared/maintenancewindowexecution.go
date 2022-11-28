@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// MaintenanceWindowExecution
+// Describes the information about an execution of a maintenance window.
 type MaintenanceWindowExecution struct {
 	EndTime           *time.Time                            `json:"EndTime,omitempty"`
 	StartTime         *time.Time                            `json:"StartTime,omitempty"`

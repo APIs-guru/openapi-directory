@@ -16,6 +16,8 @@ const (
 	ComputeSchedulingRestartTypeEnumNoAutomaticRestart     ComputeSchedulingRestartTypeEnum = "NO_AUTOMATIC_RESTART"
 )
 
+// ComputeScheduling
+// Scheduling information for VM on maintenance/restart behaviour and node allocation in sole tenant nodes.
 type ComputeScheduling struct {
 	MinNodeCpus       *int32                                  `json:"minNodeCpus,omitempty"`
 	NodeAffinities    []SchedulingNodeAffinity                `json:"nodeAffinities,omitempty"`

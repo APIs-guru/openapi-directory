@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CountryInfo
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Class CountryInfo.
 **/
 export class CountryInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DisplayName" })
+  @SpeakeasyMetadata({ data: "json, name=DisplayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=ThreeLetterISORegionName" })
+  @SpeakeasyMetadata({ data: "json, name=ThreeLetterISORegionName" })
   threeLetterIsoRegionName?: string;
 
-  @Metadata({ data: "json, name=TwoLetterISORegionName" })
+  @SpeakeasyMetadata({ data: "json, name=TwoLetterISORegionName" })
   twoLetterIsoRegionName?: string;
 }

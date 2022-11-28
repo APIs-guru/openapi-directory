@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OpsItemFilter } from "./opsitemfilter";
 
 
+
 export class DescribeOpsItemsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=OpsItemFilters", elemType: shared.OpsItemFilter })
+  @SpeakeasyMetadata({ data: "json, name=OpsItemFilters", elemType: OpsItemFilter })
   opsItemFilters?: OpsItemFilter[];
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WirelessConnection } from "./wirelessconnection";
+
 
 
 // SnowconeDeviceConfiguration
@@ -7,6 +8,6 @@ import { WirelessConnection } from "./wirelessconnection";
  * Specifies the device configuration for an AWS Snowcone job. 
 **/
 export class SnowconeDeviceConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=WirelessConnection" })
+  @SpeakeasyMetadata({ data: "json, name=WirelessConnection" })
   wirelessConnection?: WirelessConnection;
 }

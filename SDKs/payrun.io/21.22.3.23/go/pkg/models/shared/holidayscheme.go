@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// HolidaySchemeHolidaySchemeAccrualPayCodes
+// The holiday schemes' accrual pay codes
 type HolidaySchemeHolidaySchemeAccrualPayCodes struct {
 	PayCode []string `json:"PayCode,omitempty"`
 }

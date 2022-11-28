@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var TeamsGetMembershipsPathParams = /** @class */ (function (_super) {
     __extends(TeamsGetMembershipsPathParams, _super);
@@ -30,7 +30,7 @@ var TeamsGetMembershipsPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=teamId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=teamId" }),
         __metadata("design:type", String)
     ], TeamsGetMembershipsPathParams.prototype, "teamId", void 0);
     return TeamsGetMembershipsPathParams;
@@ -42,19 +42,19 @@ var TeamsGetMembershipsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", Number)
     ], TeamsGetMembershipsQueryParams.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=offset" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" }),
         __metadata("design:type", Number)
     ], TeamsGetMembershipsQueryParams.prototype, "offset", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=orderType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=orderType" }),
         __metadata("design:type", String)
     ], TeamsGetMembershipsQueryParams.prototype, "orderType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search" }),
         __metadata("design:type", String)
     ], TeamsGetMembershipsQueryParams.prototype, "search", void 0);
     return TeamsGetMembershipsQueryParams;
@@ -66,11 +66,11 @@ var TeamsGetMembershipsSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeJwt)
     ], TeamsGetMembershipsSecurity.prototype, "jwt", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeProject)
     ], TeamsGetMembershipsSecurity.prototype, "project", void 0);
     return TeamsGetMembershipsSecurity;
@@ -82,15 +82,15 @@ var TeamsGetMembershipsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", TeamsGetMembershipsPathParams)
     ], TeamsGetMembershipsRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", TeamsGetMembershipsQueryParams)
     ], TeamsGetMembershipsRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", TeamsGetMembershipsSecurity)
     ], TeamsGetMembershipsRequest.prototype, "security", void 0);
     return TeamsGetMembershipsRequest;
@@ -102,15 +102,15 @@ var TeamsGetMembershipsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], TeamsGetMembershipsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], TeamsGetMembershipsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.MembershipList)
     ], TeamsGetMembershipsResponse.prototype, "membershipList", void 0);
     return TeamsGetMembershipsResponse;

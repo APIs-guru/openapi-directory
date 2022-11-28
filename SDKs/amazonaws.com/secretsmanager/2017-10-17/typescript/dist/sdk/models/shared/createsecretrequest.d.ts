@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ReplicaRegionType } from "./replicaregiontype";
 import { Tag } from "./tag";
 export declare class CreateSecretRequest extends SpeakeasyBase {

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Logger } from "./logger";
+
 
 
 // LoggerDefinitionVersion
@@ -8,6 +8,6 @@ import { Logger } from "./logger";
  * Information about a logger definition version.
 **/
 export class LoggerDefinitionVersion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Loggers", elemType: shared.Logger })
+  @SpeakeasyMetadata({ data: "json, name=Loggers", elemType: Logger })
   loggers?: Logger[];
 }

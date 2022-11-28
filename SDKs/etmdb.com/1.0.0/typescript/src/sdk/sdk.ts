@@ -1,13 +1,13 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
 import * as operations from "./models/operations";
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import * as utils from "../internal/utils";
+
+
 
 type OptsFunc = (sdk: SDK) => void;
 
-const Servers = [
-  "https://etmdb.com",
+export const ServerList = [
+	"https://etmdb.com",
 ] as const;
 
 export function WithServerURL(
@@ -18,47 +18,46 @@ export function WithServerURL(
     if (params != null) {
       serverURL = utils.ReplaceParameters(serverURL, params);
     }
-    sdk.serverURL = serverURL;
+    sdk._serverURL = serverURL;
   };
 }
 
 export function WithClient(client: AxiosInstance): OptsFunc {
   return (sdk: SDK) => {
-    sdk.defaultClient = client;
+    sdk._defaultClient = client;
   };
 }
 
 
 export class SDK {
-  defaultClient?: AxiosInstance;
-  securityClient?: AxiosInstance;
-  security?: any;
-  serverURL: string;
+
+  public _defaultClient: AxiosInstance;
+  public _securityClient: AxiosInstance;
+  
+  public _serverURL: string;
+  private _language = "typescript";
+  private _sdkVersion = "0.0.1";
+  private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
-    if (this.serverURL == "") {
-      this.serverURL = Servers[0];
+    if (this._serverURL == "") {
+      this._serverURL = ServerList[0];
     }
 
-    if (!this.defaultClient) {
-      this.defaultClient = axios.create({ baseURL: this.serverURL });
+    if (!this._defaultClient) {
+      this._defaultClient = axios.create({ baseURL: this._serverURL });
     }
 
-    if (!this.securityClient) {
-      if (this.security) {
-        this.securityClient = CreateSecurityClient(
-          this.defaultClient,
-          this.security
-        );
-      } else {
-        this.securityClient = this.defaultClient;
-      }
+    if (!this._securityClient) {
+      this._securityClient = this._defaultClient;
     }
+    
   }
   
-  // CinemaDetailSearchRead - Return cinema details search result
-  /** 
+  /**
+   * cinemaDetailSearchRead - Return cinema details search result
+   *
    * Return cinema details search result
    * 
    * ### Response Class (Status 200)
@@ -68,7 +67,7 @@ export class SDK {
    * For more details on how cinemas are listed [see here][ref].
    * [ref]: https://etmdb.com/en/cinema-list/-updated_date
   **/
-  CinemaDetailSearchRead(
+  cinemaDetailSearchRead(
     req: operations.CinemaDetailSearchReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CinemaDetailSearchReadResponse> {
@@ -76,22 +75,22 @@ export class SDK {
       req = new operations.CinemaDetailSearchReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/cinema-detail/search/{cinema_name}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CinemaDetailSearchReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.CinemaDetailSearchReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -101,8 +100,9 @@ export class SDK {
   }
 
   
-  // CinemaScheduleSearchRead - Return cinema schedule search result
-  /** 
+  /**
+   * cinemaScheduleSearchRead - Return cinema schedule search result
+   *
    * Return cinema schedule search result
    * 
    * ### Response Class (Status 200)
@@ -113,7 +113,7 @@ export class SDK {
    * For more details about cinema schedule, check each cinema from the cinema list [see here][ref].
    * [ref]: https://etmdb.com/en/movie-list/-updated_date
   **/
-  CinemaScheduleSearchRead(
+  cinemaScheduleSearchRead(
     req: operations.CinemaScheduleSearchReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CinemaScheduleSearchReadResponse> {
@@ -121,22 +121,22 @@ export class SDK {
       req = new operations.CinemaScheduleSearchReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/cinema-schedule/search/{movie_title}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CinemaScheduleSearchReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.CinemaScheduleSearchReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -146,8 +146,9 @@ export class SDK {
   }
 
   
-  // CinemaScheduleSearchallRead - Return cinema schedule search result
-  /** 
+  /**
+   * cinemaScheduleSearchallRead - Return cinema schedule search result
+   *
    * Return cinema schedule search result
    * 
    * ### Response Class (Status 200)
@@ -160,7 +161,7 @@ export class SDK {
    * For more details about cinema schedule, check each cinema from the cinema list [see here][ref].
    * [ref]: https://etmdb.com/en/movie-list/-updated_date
   **/
-  CinemaScheduleSearchallRead(
+  cinemaScheduleSearchallRead(
     req: operations.CinemaScheduleSearchallReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CinemaScheduleSearchallReadResponse> {
@@ -168,22 +169,22 @@ export class SDK {
       req = new operations.CinemaScheduleSearchallReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/cinema-schedule/searchall/{param}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CinemaScheduleSearchallReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.CinemaScheduleSearchallReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -193,8 +194,9 @@ export class SDK {
   }
 
   
-  // CinemaSheduleShowtimeSearchRead - Return cinema schedule and showtime search result
-  /** 
+  /**
+   * cinemaSheduleShowtimeSearchRead - Return cinema schedule and showtime search result
+   *
    * Return cinema schedule and showtime search result
    * 
    * ### Response Class (Status 200)
@@ -204,7 +206,7 @@ export class SDK {
    * For more details about cinema schedule showtime, check each cinema from the cinema list [see here][ref].
    * [ref]: https://etmdb.com/en/movie-list/-updated_date
   **/
-  CinemaSheduleShowtimeSearchRead(
+  cinemaSheduleShowtimeSearchRead(
     req: operations.CinemaSheduleShowtimeSearchReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CinemaSheduleShowtimeSearchReadResponse> {
@@ -212,22 +214,22 @@ export class SDK {
       req = new operations.CinemaSheduleShowtimeSearchReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/cinema-shedule-showtime/search/{movie_title}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CinemaSheduleShowtimeSearchReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.CinemaSheduleShowtimeSearchReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -237,8 +239,9 @@ export class SDK {
   }
 
   
-  // CinemaSheduleShowtimeSearchallRead - Return cinema schedule and showtime search result
-  /** 
+  /**
+   * cinemaSheduleShowtimeSearchallRead - Return cinema schedule and showtime search result
+   *
    * Return cinema schedule and showtime search result
    * 
    * ### Response Class (Status 200)
@@ -253,7 +256,7 @@ export class SDK {
    * For more details about cinema schedule, check each cinema from the cinema list [see here][ref].
    * [ref]: https://etmdb.com/en/movie-list/-updated_date
   **/
-  CinemaSheduleShowtimeSearchallRead(
+  cinemaSheduleShowtimeSearchallRead(
     req: operations.CinemaSheduleShowtimeSearchallReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CinemaSheduleShowtimeSearchallReadResponse> {
@@ -261,22 +264,22 @@ export class SDK {
       req = new operations.CinemaSheduleShowtimeSearchallReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/cinema-shedule-showtime/searchall/{param}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CinemaSheduleShowtimeSearchallReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.CinemaSheduleShowtimeSearchallReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -286,8 +289,9 @@ export class SDK {
   }
 
   
-  // CinemaSearchRead - Return cinema search result
-  /** 
+  /**
+   * cinemaSearchRead - Return cinema search result
+   *
    * Return cinema search result
    * 
    * ### Response Class (Status 200)
@@ -297,7 +301,7 @@ export class SDK {
    * For more details on how cinemas are listed [see here][ref].
    * [ref]: https://etmdb.com/en/cinema-list/-updated_date
   **/
-  CinemaSearchRead(
+  cinemaSearchRead(
     req: operations.CinemaSearchReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CinemaSearchReadResponse> {
@@ -305,22 +309,22 @@ export class SDK {
       req = new operations.CinemaSearchReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/cinema/search/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CinemaSearchReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.CinemaSearchReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -330,8 +334,9 @@ export class SDK {
   }
 
   
-  // CompanyCreditsSearchRead - Return company credits search result
-  /** 
+  /**
+   * companyCreditsSearchRead - Return company credits search result
+   *
    * Return company credits search result
    * 
    * ### Response Class (Status 200)
@@ -342,7 +347,7 @@ export class SDK {
    * For more details on how company credits are listed [see here][ref].
    * [ref]: https://etmdb.com/en/movie-list/-updated_date
   **/
-  CompanyCreditsSearchRead(
+  companyCreditsSearchRead(
     req: operations.CompanyCreditsSearchReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CompanyCreditsSearchReadResponse> {
@@ -350,22 +355,22 @@ export class SDK {
       req = new operations.CompanyCreditsSearchReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/company-credits/search/{movie_title}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CompanyCreditsSearchReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.CompanyCreditsSearchReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -375,8 +380,9 @@ export class SDK {
   }
 
   
-  // CompanyCreditsSearchallRead - Return company credits search result
-  /** 
+  /**
+   * companyCreditsSearchallRead - Return company credits search result
+   *
    * Return company credits search result
    * 
    * ### Response Class (Status 200)
@@ -388,7 +394,7 @@ export class SDK {
    * For more details on how company credits are listed [see here][ref].
    * [ref]: https://etmdb.com/en/company-list/company_name
   **/
-  CompanyCreditsSearchallRead(
+  companyCreditsSearchallRead(
     req: operations.CompanyCreditsSearchallReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CompanyCreditsSearchallReadResponse> {
@@ -396,22 +402,22 @@ export class SDK {
       req = new operations.CompanyCreditsSearchallReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/company-credits/searchall/{param}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CompanyCreditsSearchallReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.CompanyCreditsSearchallReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -421,8 +427,9 @@ export class SDK {
   }
 
   
-  // CompanySearchRead - Return company search result
-  /** 
+  /**
+   * companySearchRead - Return company search result
+   *
    * Return company search result
    * 
    * ### Response Class (Status 200)
@@ -432,7 +439,7 @@ export class SDK {
    * For more details on how companies are listed [see here][ref].
    * [ref]: https://etmdb.com/en/company-list/-updated_date
   **/
-  CompanySearchRead(
+  companySearchRead(
     req: operations.CompanySearchReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CompanySearchReadResponse> {
@@ -440,22 +447,22 @@ export class SDK {
       req = new operations.CompanySearchReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/company/search/{company_name}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CompanySearchReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.CompanySearchReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -465,8 +472,9 @@ export class SDK {
   }
 
   
-  // FilmographyTypeSearchRead - Return filmography type search result
-  /** 
+  /**
+   * filmographyTypeSearchRead - Return filmography type search result
+   *
    * Return filmography type search result
    * 
    * ### Response Class (Status 200)
@@ -476,7 +484,7 @@ export class SDK {
    * For more details on how filmography types are listed [see here][ref].
    * [ref]: https://etmdb.com/en/movie-list/-updated_date
   **/
-  FilmographyTypeSearchRead(
+  filmographyTypeSearchRead(
     req: operations.FilmographyTypeSearchReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.FilmographyTypeSearchReadResponse> {
@@ -484,22 +492,22 @@ export class SDK {
       req = new operations.FilmographyTypeSearchReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/filmography-type/search/{filmography_description}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.FilmographyTypeSearchReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.FilmographyTypeSearchReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -509,8 +517,9 @@ export class SDK {
   }
 
   
-  // FilmographySearchRead - Return filmography search result
-  /** 
+  /**
+   * filmographySearchRead - Return filmography search result
+   *
    * Return filmography search result
    * 
    * ### Response Class (Status 200)
@@ -521,7 +530,7 @@ export class SDK {
    * For more details on how filmographies are listed [see here][ref].
    * [ref]: https://etmdb.com/en/movie-list/-updated_date
   **/
-  FilmographySearchRead(
+  filmographySearchRead(
     req: operations.FilmographySearchReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.FilmographySearchReadResponse> {
@@ -529,22 +538,22 @@ export class SDK {
       req = new operations.FilmographySearchReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/filmography/search/{movie_title}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.FilmographySearchReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.FilmographySearchReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -554,8 +563,9 @@ export class SDK {
   }
 
   
-  // FilmographySearchallRead - Return filmography search result
-  /** 
+  /**
+   * filmographySearchallRead - Return filmography search result
+   *
    * Return filmography search result
    * 
    * ### Response Class (Status 200)
@@ -569,7 +579,7 @@ export class SDK {
    * For more details on how filmographies are listed [see here][ref].
    * [ref]: https://etmdb.com/en/movie-list/-updated_date
   **/
-  FilmographySearchallRead(
+  filmographySearchallRead(
     req: operations.FilmographySearchallReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.FilmographySearchallReadResponse> {
@@ -577,22 +587,22 @@ export class SDK {
       req = new operations.FilmographySearchallReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/filmography/searchall/{param}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.FilmographySearchallReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.FilmographySearchallReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -602,8 +612,9 @@ export class SDK {
   }
 
   
-  // GenreTypeSearchRead - Return genre type search result
-  /** 
+  /**
+   * genreTypeSearchRead - Return genre type search result
+   *
    * Return genre type search result
    * 
    * ### Response Class (Status 200)
@@ -613,7 +624,7 @@ export class SDK {
    * For more details on how genre types are listed [see here][ref].
    * [ref]: https://etmdb.com/en/movie-list/-updated_date
   **/
-  GenreTypeSearchRead(
+  genreTypeSearchRead(
     req: operations.GenreTypeSearchReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GenreTypeSearchReadResponse> {
@@ -621,22 +632,22 @@ export class SDK {
       req = new operations.GenreTypeSearchReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/genre-type/search/{genre_description}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GenreTypeSearchReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.GenreTypeSearchReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -646,8 +657,9 @@ export class SDK {
   }
 
   
-  // GenreSearchRead - Return movie genre search result
-  /** 
+  /**
+   * genreSearchRead - Return movie genre search result
+   *
    * Return movie genre search result
    * 
    * ### Response Class (Status 200)
@@ -658,7 +670,7 @@ export class SDK {
    * For more details on how movies are listed [see here][ref].
    * [ref]: https://etmdb.com/en/movie-list/-updated_date
   **/
-  GenreSearchRead(
+  genreSearchRead(
     req: operations.GenreSearchReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GenreSearchReadResponse> {
@@ -666,22 +678,22 @@ export class SDK {
       req = new operations.GenreSearchReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/genre/search/{movie_title}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GenreSearchReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.GenreSearchReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -691,8 +703,9 @@ export class SDK {
   }
 
   
-  // GenreSearchallRead - Return movie genre search result
-  /** 
+  /**
+   * genreSearchallRead - Return movie genre search result
+   *
    * Return movie genre search result
    * 
    * ### Response Class (Status 200)
@@ -702,7 +715,7 @@ export class SDK {
    * For more details on how movies are listed [see here][ref].
    * [ref]: https://etmdb.com/en/movie-list/-updated_date
   **/
-  GenreSearchallRead(
+  genreSearchallRead(
     req: operations.GenreSearchallReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GenreSearchallReadResponse> {
@@ -710,22 +723,22 @@ export class SDK {
       req = new operations.GenreSearchallReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/genre/searchall/{movie_genre_type}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GenreSearchallReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.GenreSearchallReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -735,8 +748,9 @@ export class SDK {
   }
 
   
-  // JobSearchRead - Return job details search result
-  /** 
+  /**
+   * jobSearchRead - Return job details search result
+   *
    * Return job details search result
    * 
    * ### Response Class (Status 200)
@@ -746,7 +760,7 @@ export class SDK {
    * For more details on how job are listed [see here][ref].
    * [ref]: https://etmdb.com/en/job-list/-updated_date
   **/
-  JobSearchRead(
+  jobSearchRead(
     req: operations.JobSearchReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.JobSearchReadResponse> {
@@ -754,22 +768,22 @@ export class SDK {
       req = new operations.JobSearchReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/job/search/{job_title}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.JobSearchReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.JobSearchReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -779,8 +793,9 @@ export class SDK {
   }
 
   
-  // JobSearchallRead - Return job details search result
-  /** 
+  /**
+   * jobSearchallRead - Return job details search result
+   *
    * Return job details search result
    * 
    * ### Response Class (Status 200)
@@ -790,7 +805,7 @@ export class SDK {
    * For more details on how job are listed [see here][ref].
    * [ref]: https://etmdb.com/en/job-list/-updated_date
   **/
-  JobSearchallRead(
+  jobSearchallRead(
     req: operations.JobSearchallReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.JobSearchallReadResponse> {
@@ -798,22 +813,22 @@ export class SDK {
       req = new operations.JobSearchallReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/job/searchall/{company_name}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.JobSearchallReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.JobSearchallReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -823,8 +838,9 @@ export class SDK {
   }
 
   
-  // MediaSearchRead - Return movie media search result
-  /** 
+  /**
+   * mediaSearchRead - Return movie media search result
+   *
    * Return movie media search result
    * 
    * ### Response Class (Status 200)
@@ -835,7 +851,7 @@ export class SDK {
    * For more details on how media is listed [see here][ref].
    * [ref]: https://etmdb.com/en/movie-list/-updated_date
   **/
-  MediaSearchRead(
+  mediaSearchRead(
     req: operations.MediaSearchReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.MediaSearchReadResponse> {
@@ -843,22 +859,22 @@ export class SDK {
       req = new operations.MediaSearchReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/media/search/{movie_title}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.MediaSearchReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.MediaSearchReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -868,8 +884,9 @@ export class SDK {
   }
 
   
-  // MediaSearchallRead - Return cast media search result
-  /** 
+  /**
+   * mediaSearchallRead - Return cast media search result
+   *
    * Return cast media search result
    * 
    * ### Response Class (Status 200)
@@ -881,7 +898,7 @@ export class SDK {
    * For more details on how cast media is listed [see here][ref].
    * [ref]: https://etmdb.com/en/cast-list/-updated_date
   **/
-  MediaSearchallRead(
+  mediaSearchallRead(
     req: operations.MediaSearchallReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.MediaSearchallReadResponse> {
@@ -889,22 +906,22 @@ export class SDK {
       req = new operations.MediaSearchallReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/media/searchall/{user}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.MediaSearchallReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.MediaSearchallReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -914,8 +931,9 @@ export class SDK {
   }
 
   
-  // MovieCastSearchRead - Return movie cast search result
-  /** 
+  /**
+   * movieCastSearchRead - Return movie cast search result
+   *
    * Return movie cast search result
    * 
    * ### Response Class (Status 200)
@@ -926,7 +944,7 @@ export class SDK {
    * For more details on how movie casts are listed [see here][ref].
    * [ref]: https://etmdb.com/en/movie-list/-updated_date
   **/
-  MovieCastSearchRead(
+  movieCastSearchRead(
     req: operations.MovieCastSearchReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.MovieCastSearchReadResponse> {
@@ -934,22 +952,22 @@ export class SDK {
       req = new operations.MovieCastSearchReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/movie-cast/search/{movie_title}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.MovieCastSearchReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.MovieCastSearchReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -959,8 +977,9 @@ export class SDK {
   }
 
   
-  // MovieCastSearchallRead - Return movie cast search result
-  /** 
+  /**
+   * movieCastSearchallRead - Return movie cast search result
+   *
    * Return movie cast search result
    * 
    * ### Response Class (Status 200)
@@ -974,7 +993,7 @@ export class SDK {
    * For more details on how movie casts are listed [see here][ref].
    * [ref]: https://etmdb.com/en/movie-list/-updated_date
   **/
-  MovieCastSearchallRead(
+  movieCastSearchallRead(
     req: operations.MovieCastSearchallReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.MovieCastSearchallReadResponse> {
@@ -982,22 +1001,22 @@ export class SDK {
       req = new operations.MovieCastSearchallReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/movie-cast/searchall/{param}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.MovieCastSearchallReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.MovieCastSearchallReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -1007,8 +1026,9 @@ export class SDK {
   }
 
   
-  // MovieSearchRead - Return movie search result
-  /** 
+  /**
+   * movieSearchRead - Return movie search result
+   *
    * Return movie search result
    * 
    * ### Response Class (Status 200)
@@ -1019,7 +1039,7 @@ export class SDK {
    * For more details on how movies are listed [see here][ref].
    * [ref]: https://etmdb.com/en/movie-list/-updated_date
   **/
-  MovieSearchRead(
+  movieSearchRead(
     req: operations.MovieSearchReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.MovieSearchReadResponse> {
@@ -1027,22 +1047,22 @@ export class SDK {
       req = new operations.MovieSearchReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/movie/search/{movie_title}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.MovieSearchReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.MovieSearchReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -1052,8 +1072,9 @@ export class SDK {
   }
 
   
-  // NewsSearchRead - Return news or article search result
-  /** 
+  /**
+   * newsSearchRead - Return news or article search result
+   *
    * Return news or article search result
    * 
    * ### Response Class (Status 200)
@@ -1063,7 +1084,7 @@ export class SDK {
    * For more details on how news & articles are listed [see here][ref].
    * [ref]: https://etmdb.com/en/news-list/-updated_date
   **/
-  NewsSearchRead(
+  newsSearchRead(
     req: operations.NewsSearchReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.NewsSearchReadResponse> {
@@ -1071,22 +1092,22 @@ export class SDK {
       req = new operations.NewsSearchReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/news/search/{title}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.NewsSearchReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.NewsSearchReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -1096,8 +1117,9 @@ export class SDK {
   }
 
   
-  // PeopleSearchRead - Return cast search result
-  /** 
+  /**
+   * peopleSearchRead - Return cast search result
+   *
    * Return cast search result
    * 
    * ### Response Class (Status 200)
@@ -1109,7 +1131,7 @@ export class SDK {
    * For more details on how cast are listed [see here][ref].
    * [ref]: https://etmdb.com/en/cast-list/-updated_date
   **/
-  PeopleSearchRead(
+  peopleSearchRead(
     req: operations.PeopleSearchReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PeopleSearchReadResponse> {
@@ -1117,22 +1139,22 @@ export class SDK {
       req = new operations.PeopleSearchReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/people/search/{user}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PeopleSearchReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PeopleSearchReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -1142,8 +1164,9 @@ export class SDK {
   }
 
   
-  // ShowtimeSearchallRead - Return showtime search result
-  /** 
+  /**
+   * showtimeSearchallRead - Return showtime search result
+   *
    * Return showtime search result
    * 
    * ### Response Class (Status 200)
@@ -1154,7 +1177,7 @@ export class SDK {
    * For more details about showtime, check each cinema from the cinema list [see here][ref].
    * [ref]: https://etmdb.com/en/movie-list/-updated_date
   **/
-  ShowtimeSearchallRead(
+  showtimeSearchallRead(
     req: operations.ShowtimeSearchallReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ShowtimeSearchallReadResponse> {
@@ -1162,22 +1185,22 @@ export class SDK {
       req = new operations.ShowtimeSearchallReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/showtime/searchall/{param}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ShowtimeSearchallReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.ShowtimeSearchallReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -1187,8 +1210,9 @@ export class SDK {
   }
 
   
-  // WatchlistSearchRead - Return watchlist search result
-  /** 
+  /**
+   * watchlistSearchRead - Return watchlist search result
+   *
    * Return watchlist search result
    * 
    * ### Response Class (Status 200)
@@ -1199,7 +1223,7 @@ export class SDK {
    * For more details on how watchlist are listed [see here][ref].
    * [ref]: https://etmdb.com/en/movies/watchlist/id
   **/
-  WatchlistSearchRead(
+  watchlistSearchRead(
     req: operations.WatchlistSearchReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.WatchlistSearchReadResponse> {
@@ -1207,22 +1231,22 @@ export class SDK {
       req = new operations.WatchlistSearchReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/watchlist/search/{movie_title}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.WatchlistSearchReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.WatchlistSearchReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -1232,8 +1256,9 @@ export class SDK {
   }
 
   
-  // WatchlistSearchallRead - Return watchlist search result
-  /** 
+  /**
+   * watchlistSearchallRead - Return watchlist search result
+   *
    * Return watchlist search result
    * 
    * ### Response Class (Status 200)
@@ -1246,7 +1271,7 @@ export class SDK {
    * For more details on how watchlist are listed [see here][ref].
    * [ref]: https://etmdb.com/en/movies/watchlist/id
   **/
-  WatchlistSearchallRead(
+  watchlistSearchallRead(
     req: operations.WatchlistSearchallReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.WatchlistSearchallReadResponse> {
@@ -1254,22 +1279,22 @@ export class SDK {
       req = new operations.WatchlistSearchallReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/watchlist/searchall/{param}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.WatchlistSearchallReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.WatchlistSearchallReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 

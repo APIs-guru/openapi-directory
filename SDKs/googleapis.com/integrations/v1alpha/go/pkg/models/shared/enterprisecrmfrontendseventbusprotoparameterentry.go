@@ -23,6 +23,8 @@ const (
 	EnterpriseCrmFrontendsEventbusProtoParameterEntryDataTypeEnumJSONValue             EnterpriseCrmFrontendsEventbusProtoParameterEntryDataTypeEnum = "JSON_VALUE"
 )
 
+// EnterpriseCrmFrontendsEventbusProtoParameterEntry
+// Key-value pair of EventBus parameters.
 type EnterpriseCrmFrontendsEventbusProtoParameterEntry struct {
 	DataType *EnterpriseCrmFrontendsEventbusProtoParameterEntryDataTypeEnum `json:"dataType,omitempty"`
 	Key      *string                                                        `json:"key,omitempty"`

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum NetworkSettingsIngressTrafficAllowedEnum {
     IngressTrafficAllowedUnspecified = "INGRESS_TRAFFIC_ALLOWED_UNSPECIFIED",
     IngressTrafficAllowedAll = "INGRESS_TRAFFIC_ALLOWED_ALL",

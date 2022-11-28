@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDialogflowV2beta1ResponseMessageMixedAudioSegment
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents one segment of audio.
 **/
 export class GoogleCloudDialogflowV2beta1ResponseMessageMixedAudioSegment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowPlaybackInterruption" })
+  @SpeakeasyMetadata({ data: "json, name=allowPlaybackInterruption" })
   allowPlaybackInterruption?: boolean;
 
-  @Metadata({ data: "json, name=audio" })
+  @SpeakeasyMetadata({ data: "json, name=audio" })
   audio?: string;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri?: string;
 }

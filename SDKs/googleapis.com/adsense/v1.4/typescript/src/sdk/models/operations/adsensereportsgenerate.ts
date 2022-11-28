@@ -1,110 +1,111 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class AdsenseReportsGenerateQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=accountId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=accountId" })
   accountId?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=alt" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" })
   alt?: shared.AltEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=currency" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=currency" })
   currency?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=dimension" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dimension" })
   dimension?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=endDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=endDate" })
   endDate: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" })
   fields?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter" })
   filter?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=key" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" })
   key?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=locale" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=locale" })
   locale?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxResults" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=metric" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=metric" })
   metric?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" })
   oauthToken?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" })
   prettyPrint?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" })
   quotaUser?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=startDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=startDate" })
   startDate: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=startIndex" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=startIndex" })
   startIndex?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=useTimezoneReporting" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=useTimezoneReporting" })
   useTimezoneReporting?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=userIp" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userIp" })
   userIp?: string;
 }
 
 
 export class AdsenseReportsGenerateSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2: shared.SchemeOauth2;
 
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2c: shared.SchemeOauth2c;
 }
 
 
 export class AdsenseReportsGenerateSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2: shared.SchemeOauth2;
 
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2c: shared.SchemeOauth2c;
 }
 
 
 export class AdsenseReportsGenerateSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
+  @SpeakeasyMetadata({ data: "security, option=true" })
   option1?: AdsenseReportsGenerateSecurityOption1;
 
-  @Metadata({ data: "security, option=true" })
+  @SpeakeasyMetadata({ data: "security, option=true" })
   option2?: AdsenseReportsGenerateSecurityOption2;
 }
 
 
 export class AdsenseReportsGenerateRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: AdsenseReportsGenerateQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: AdsenseReportsGenerateSecurity;
 }
 
 
 export class AdsenseReportsGenerateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   adsenseReportsGenerateResponse?: shared.AdsenseReportsGenerateResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

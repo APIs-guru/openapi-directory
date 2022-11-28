@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// IPRouteInfo
+// Information about one or more IP address blocks.
 type IPRouteInfo struct {
 	AddedDateTime       *time.Time            `json:"AddedDateTime,omitempty"`
 	CidrIP              *string               `json:"CidrIp,omitempty"`

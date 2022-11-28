@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ProximitybeaconBeaconsUpdatePathParams:
-    beacon_name: str = field(default=None, metadata={'path_param': { 'field_name': 'beaconName', 'style': 'simple', 'explode': False }})
+    beacon_name: str = field(metadata={'path_param': { 'field_name': 'beaconName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +30,21 @@ class ProximitybeaconBeaconsUpdateQueryParams:
 
 @dataclass
 class ProximitybeaconBeaconsUpdateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ProximitybeaconBeaconsUpdateRequest:
-    path_params: ProximitybeaconBeaconsUpdatePathParams = field(default=None)
-    query_params: ProximitybeaconBeaconsUpdateQueryParams = field(default=None)
+    path_params: ProximitybeaconBeaconsUpdatePathParams = field()
+    query_params: ProximitybeaconBeaconsUpdateQueryParams = field()
+    security: ProximitybeaconBeaconsUpdateSecurity = field()
     request: Optional[shared.Beacon] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ProximitybeaconBeaconsUpdateSecurity = field(default=None)
     
 
 @dataclass
 class ProximitybeaconBeaconsUpdateResponse:
+    content_type: str = field()
+    status_code: int = field()
     beacon: Optional[shared.Beacon] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

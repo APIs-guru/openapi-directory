@@ -8,6 +8,8 @@ const (
 	GoogleFirebaseAppcheckV1betaServiceEnforcementModeEnumEnforced   GoogleFirebaseAppcheckV1betaServiceEnforcementModeEnum = "ENFORCED"
 )
 
+// GoogleFirebaseAppcheckV1betaService
+// The enforcement configuration for a Firebase service supported by App Check.
 type GoogleFirebaseAppcheckV1betaService struct {
 	EnforcementMode *GoogleFirebaseAppcheckV1betaServiceEnforcementModeEnum `json:"enforcementMode,omitempty"`
 	Name            *string                                                 `json:"name,omitempty"`

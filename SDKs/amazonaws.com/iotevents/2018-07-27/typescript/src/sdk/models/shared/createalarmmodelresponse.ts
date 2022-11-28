@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AlarmModelVersionStatusEnum } from "./alarmmodelversionstatusenum";
 
 
+
 export class CreateAlarmModelResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alarmModelArn" })
+  @SpeakeasyMetadata({ data: "json, name=alarmModelArn" })
   alarmModelArn?: string;
 
-  @Metadata({ data: "json, name=alarmModelVersion" })
+  @SpeakeasyMetadata({ data: "json, name=alarmModelVersion" })
   alarmModelVersion?: string;
 
-  @Metadata({ data: "json, name=creationTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=lastUpdateTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdateTime" })
   lastUpdateTime?: Date;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: AlarmModelVersionStatusEnum;
 }

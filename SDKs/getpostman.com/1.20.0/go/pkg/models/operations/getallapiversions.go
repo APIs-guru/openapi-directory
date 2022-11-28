@@ -4,10 +4,6 @@ type GetAllAPIVersionsPathParams struct {
 	APIID string `pathParam:"style=simple,explode=false,name=apiId"`
 }
 
-type GetAllAPIVersionsRequest struct {
-	PathParams GetAllAPIVersionsPathParams
-}
-
 type GetAllAPIVersions200ApplicationJSONVersions struct {
 	CreatedAt   *string `json:"createdAt,omitempty"`
 	CreatedBy   *string `json:"createdBy,omitempty"`
@@ -20,6 +16,10 @@ type GetAllAPIVersions200ApplicationJSONVersions struct {
 
 type GetAllAPIVersions200ApplicationJSON struct {
 	Versions []GetAllAPIVersions200ApplicationJSONVersions `json:"versions,omitempty"`
+}
+
+type GetAllAPIVersionsRequest struct {
+	PathParams GetAllAPIVersionsPathParams
 }
 
 type GetAllAPIVersionsResponse struct {

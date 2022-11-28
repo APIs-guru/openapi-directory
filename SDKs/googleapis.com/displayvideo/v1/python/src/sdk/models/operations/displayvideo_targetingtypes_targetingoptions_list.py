@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class DisplayvideoTargetingTypesTargetingOptionsListTargetingTypeEnum(str, Enum):
@@ -53,7 +54,7 @@ class DisplayvideoTargetingTypesTargetingOptionsListTargetingTypeEnum(str, Enum)
 
 @dataclass
 class DisplayvideoTargetingTypesTargetingOptionsListPathParams:
-    targeting_type: DisplayvideoTargetingTypesTargetingOptionsListTargetingTypeEnum = field(default=None, metadata={'path_param': { 'field_name': 'targetingType', 'style': 'simple', 'explode': False }})
+    targeting_type: DisplayvideoTargetingTypesTargetingOptionsListTargetingTypeEnum = field(metadata={'path_param': { 'field_name': 'targetingType', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -78,20 +79,20 @@ class DisplayvideoTargetingTypesTargetingOptionsListQueryParams:
 
 @dataclass
 class DisplayvideoTargetingTypesTargetingOptionsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DisplayvideoTargetingTypesTargetingOptionsListRequest:
-    path_params: DisplayvideoTargetingTypesTargetingOptionsListPathParams = field(default=None)
-    query_params: DisplayvideoTargetingTypesTargetingOptionsListQueryParams = field(default=None)
-    security: DisplayvideoTargetingTypesTargetingOptionsListSecurity = field(default=None)
+    path_params: DisplayvideoTargetingTypesTargetingOptionsListPathParams = field()
+    query_params: DisplayvideoTargetingTypesTargetingOptionsListQueryParams = field()
+    security: DisplayvideoTargetingTypesTargetingOptionsListSecurity = field()
     
 
 @dataclass
 class DisplayvideoTargetingTypesTargetingOptionsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_targeting_options_response: Optional[shared.ListTargetingOptionsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

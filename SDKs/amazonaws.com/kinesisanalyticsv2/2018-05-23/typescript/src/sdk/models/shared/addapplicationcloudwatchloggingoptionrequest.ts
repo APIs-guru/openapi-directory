@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CloudWatchLoggingOption } from "./cloudwatchloggingoption";
 
 
+
 export class AddApplicationCloudWatchLoggingOptionRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApplicationName" })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationName" })
   applicationName: string;
 
-  @Metadata({ data: "json, name=CloudWatchLoggingOption" })
+  @SpeakeasyMetadata({ data: "json, name=CloudWatchLoggingOption" })
   cloudWatchLoggingOption: CloudWatchLoggingOption;
 
-  @Metadata({ data: "json, name=ConditionalToken" })
+  @SpeakeasyMetadata({ data: "json, name=ConditionalToken" })
   conditionalToken?: string;
 
-  @Metadata({ data: "json, name=CurrentApplicationVersionId" })
+  @SpeakeasyMetadata({ data: "json, name=CurrentApplicationVersionId" })
   currentApplicationVersionId?: number;
 }

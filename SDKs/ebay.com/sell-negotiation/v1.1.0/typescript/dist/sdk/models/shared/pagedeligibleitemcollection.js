@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { EligibleItem } from "./eligibleitem";
 // PagedEligibleItemCollection
 /**
  * This complex type defines a collection of listings that are eligible for an offer to a buyer.
@@ -34,31 +34,31 @@ var PagedEligibleItemCollection = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=eligibleItems", elemType: shared.EligibleItem }),
+        SpeakeasyMetadata({ data: "json, name=eligibleItems", elemType: EligibleItem }),
         __metadata("design:type", Array)
     ], PagedEligibleItemCollection.prototype, "eligibleItems", void 0);
     __decorate([
-        Metadata({ data: "json, name=href" }),
+        SpeakeasyMetadata({ data: "json, name=href" }),
         __metadata("design:type", String)
     ], PagedEligibleItemCollection.prototype, "href", void 0);
     __decorate([
-        Metadata({ data: "json, name=limit" }),
+        SpeakeasyMetadata({ data: "json, name=limit" }),
         __metadata("design:type", Number)
     ], PagedEligibleItemCollection.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "json, name=next" }),
+        SpeakeasyMetadata({ data: "json, name=next" }),
         __metadata("design:type", String)
     ], PagedEligibleItemCollection.prototype, "next", void 0);
     __decorate([
-        Metadata({ data: "json, name=offset" }),
+        SpeakeasyMetadata({ data: "json, name=offset" }),
         __metadata("design:type", Number)
     ], PagedEligibleItemCollection.prototype, "offset", void 0);
     __decorate([
-        Metadata({ data: "json, name=prev" }),
+        SpeakeasyMetadata({ data: "json, name=prev" }),
         __metadata("design:type", String)
     ], PagedEligibleItemCollection.prototype, "prev", void 0);
     __decorate([
-        Metadata({ data: "json, name=total" }),
+        SpeakeasyMetadata({ data: "json, name=total" }),
         __metadata("design:type", Number)
     ], PagedEligibleItemCollection.prototype, "total", void 0);
     return PagedEligibleItemCollection;

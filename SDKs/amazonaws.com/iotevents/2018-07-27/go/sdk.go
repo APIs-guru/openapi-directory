@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://iotevents.{region}.amazonaws.com",
 	"https://iotevents.{region}.amazonaws.com",
 	"http://iotevents.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/iotevents/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// CreateAlarmModel - Creates an alarm model to monitor an AWS IoT Events input attribute. You can use the alarm to get notified when the value is outside a specified range. For more information, see <a href="https://docs.aws.amazon.com/iotevents/latest/developerguide/create-alarms.html">Create an alarm model</a> in the <i>AWS IoT Events Developer Guide</i>.
 func (s *SDK) CreateAlarmModel(ctx context.Context, request operations.CreateAlarmModelRequest) (*operations.CreateAlarmModelResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/alarm-models"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -81,7 +108,7 @@ func (s *SDK) CreateAlarmModel(ctx context.Context, request operations.CreateAla
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -181,8 +208,9 @@ func (s *SDK) CreateAlarmModel(ctx context.Context, request operations.CreateAla
 	return res, nil
 }
 
+// CreateDetectorModel - Creates a detector model.
 func (s *SDK) CreateDetectorModel(ctx context.Context, request operations.CreateDetectorModelRequest) (*operations.CreateDetectorModelResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/detector-models"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -202,7 +230,7 @@ func (s *SDK) CreateDetectorModel(ctx context.Context, request operations.Create
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -302,8 +330,9 @@ func (s *SDK) CreateDetectorModel(ctx context.Context, request operations.Create
 	return res, nil
 }
 
+// CreateInput - Creates an input.
 func (s *SDK) CreateInput(ctx context.Context, request operations.CreateInputRequest) (*operations.CreateInputResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/inputs"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -323,7 +352,7 @@ func (s *SDK) CreateInput(ctx context.Context, request operations.CreateInputReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -403,8 +432,9 @@ func (s *SDK) CreateInput(ctx context.Context, request operations.CreateInputReq
 	return res, nil
 }
 
+// DeleteAlarmModel - Deletes an alarm model. Any alarm instances that were created based on this alarm model are also deleted. This action can't be undone.
 func (s *SDK) DeleteAlarmModel(ctx context.Context, request operations.DeleteAlarmModelRequest) (*operations.DeleteAlarmModelResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/alarm-models/{alarmModelName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -414,7 +444,7 @@ func (s *SDK) DeleteAlarmModel(ctx context.Context, request operations.DeleteAla
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -504,8 +534,9 @@ func (s *SDK) DeleteAlarmModel(ctx context.Context, request operations.DeleteAla
 	return res, nil
 }
 
+// DeleteDetectorModel - Deletes a detector model. Any active instances of the detector model are also deleted.
 func (s *SDK) DeleteDetectorModel(ctx context.Context, request operations.DeleteDetectorModelRequest) (*operations.DeleteDetectorModelResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/detector-models/{detectorModelName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -515,7 +546,7 @@ func (s *SDK) DeleteDetectorModel(ctx context.Context, request operations.Delete
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -605,8 +636,9 @@ func (s *SDK) DeleteDetectorModel(ctx context.Context, request operations.Delete
 	return res, nil
 }
 
+// DeleteInput - Deletes an input.
 func (s *SDK) DeleteInput(ctx context.Context, request operations.DeleteInputRequest) (*operations.DeleteInputResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/inputs/{inputName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -616,7 +648,7 @@ func (s *SDK) DeleteInput(ctx context.Context, request operations.DeleteInputReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -706,8 +738,9 @@ func (s *SDK) DeleteInput(ctx context.Context, request operations.DeleteInputReq
 	return res, nil
 }
 
+// DescribeAlarmModel - Retrieves information about an alarm model. If you don't specify a value for the <code>alarmModelVersion</code> parameter, the latest version is returned.
 func (s *SDK) DescribeAlarmModel(ctx context.Context, request operations.DescribeAlarmModelRequest) (*operations.DescribeAlarmModelResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/alarm-models/{alarmModelName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -719,7 +752,7 @@ func (s *SDK) DescribeAlarmModel(ctx context.Context, request operations.Describ
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -799,8 +832,9 @@ func (s *SDK) DescribeAlarmModel(ctx context.Context, request operations.Describ
 	return res, nil
 }
 
+// DescribeDetectorModel - Describes a detector model. If the <code>version</code> parameter is not specified, information about the latest version is returned.
 func (s *SDK) DescribeDetectorModel(ctx context.Context, request operations.DescribeDetectorModelRequest) (*operations.DescribeDetectorModelResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/detector-models/{detectorModelName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -812,7 +846,7 @@ func (s *SDK) DescribeDetectorModel(ctx context.Context, request operations.Desc
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -892,8 +926,9 @@ func (s *SDK) DescribeDetectorModel(ctx context.Context, request operations.Desc
 	return res, nil
 }
 
+// DescribeDetectorModelAnalysis - <p>Retrieves runtime information about a detector model analysis.</p> <note> <p>After AWS IoT Events starts analyzing your detector model, you have up to 24 hours to retrieve the analysis results.</p> </note>
 func (s *SDK) DescribeDetectorModelAnalysis(ctx context.Context, request operations.DescribeDetectorModelAnalysisRequest) (*operations.DescribeDetectorModelAnalysisResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/analysis/detector-models/{analysisId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -903,7 +938,7 @@ func (s *SDK) DescribeDetectorModelAnalysis(ctx context.Context, request operati
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -983,8 +1018,9 @@ func (s *SDK) DescribeDetectorModelAnalysis(ctx context.Context, request operati
 	return res, nil
 }
 
+// DescribeInput - Describes an input.
 func (s *SDK) DescribeInput(ctx context.Context, request operations.DescribeInputRequest) (*operations.DescribeInputResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/inputs/{inputName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -994,7 +1030,7 @@ func (s *SDK) DescribeInput(ctx context.Context, request operations.DescribeInpu
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1074,8 +1110,9 @@ func (s *SDK) DescribeInput(ctx context.Context, request operations.DescribeInpu
 	return res, nil
 }
 
+// DescribeLoggingOptions - Retrieves the current settings of the AWS IoT Events logging options.
 func (s *SDK) DescribeLoggingOptions(ctx context.Context, request operations.DescribeLoggingOptionsRequest) (*operations.DescribeLoggingOptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/logging"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1085,7 +1122,7 @@ func (s *SDK) DescribeLoggingOptions(ctx context.Context, request operations.Des
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1175,8 +1212,9 @@ func (s *SDK) DescribeLoggingOptions(ctx context.Context, request operations.Des
 	return res, nil
 }
 
+// GetDetectorModelAnalysisResults - <p>Retrieves one or more analysis results of the detector model.</p> <note> <p>After AWS IoT Events starts analyzing your detector model, you have up to 24 hours to retrieve the analysis results.</p> </note>
 func (s *SDK) GetDetectorModelAnalysisResults(ctx context.Context, request operations.GetDetectorModelAnalysisResultsRequest) (*operations.GetDetectorModelAnalysisResultsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/analysis/detector-models/{analysisId}/results", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1188,7 +1226,7 @@ func (s *SDK) GetDetectorModelAnalysisResults(ctx context.Context, request opera
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1268,8 +1306,9 @@ func (s *SDK) GetDetectorModelAnalysisResults(ctx context.Context, request opera
 	return res, nil
 }
 
+// ListAlarmModelVersions - Lists all the versions of an alarm model. The operation returns only the metadata associated with each alarm model version.
 func (s *SDK) ListAlarmModelVersions(ctx context.Context, request operations.ListAlarmModelVersionsRequest) (*operations.ListAlarmModelVersionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/alarm-models/{alarmModelName}/versions", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1281,7 +1320,7 @@ func (s *SDK) ListAlarmModelVersions(ctx context.Context, request operations.Lis
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1361,8 +1400,9 @@ func (s *SDK) ListAlarmModelVersions(ctx context.Context, request operations.Lis
 	return res, nil
 }
 
+// ListAlarmModels - Lists the alarm models that you created. The operation returns only the metadata associated with each alarm model.
 func (s *SDK) ListAlarmModels(ctx context.Context, request operations.ListAlarmModelsRequest) (*operations.ListAlarmModelsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/alarm-models"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1374,7 +1414,7 @@ func (s *SDK) ListAlarmModels(ctx context.Context, request operations.ListAlarmM
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1444,8 +1484,9 @@ func (s *SDK) ListAlarmModels(ctx context.Context, request operations.ListAlarmM
 	return res, nil
 }
 
+// ListDetectorModelVersions - Lists all the versions of a detector model. Only the metadata associated with each detector model version is returned.
 func (s *SDK) ListDetectorModelVersions(ctx context.Context, request operations.ListDetectorModelVersionsRequest) (*operations.ListDetectorModelVersionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/detector-models/{detectorModelName}/versions", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1457,7 +1498,7 @@ func (s *SDK) ListDetectorModelVersions(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1537,8 +1578,9 @@ func (s *SDK) ListDetectorModelVersions(ctx context.Context, request operations.
 	return res, nil
 }
 
+// ListDetectorModels - Lists the detector models you have created. Only the metadata associated with each detector model is returned.
 func (s *SDK) ListDetectorModels(ctx context.Context, request operations.ListDetectorModelsRequest) (*operations.ListDetectorModelsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/detector-models"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1550,7 +1592,7 @@ func (s *SDK) ListDetectorModels(ctx context.Context, request operations.ListDet
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1620,8 +1662,9 @@ func (s *SDK) ListDetectorModels(ctx context.Context, request operations.ListDet
 	return res, nil
 }
 
+// ListInputRoutings -  Lists one or more input routings.
 func (s *SDK) ListInputRoutings(ctx context.Context, request operations.ListInputRoutingsRequest) (*operations.ListInputRoutingsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/input-routings"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1641,7 +1684,7 @@ func (s *SDK) ListInputRoutings(ctx context.Context, request operations.ListInpu
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1721,8 +1764,9 @@ func (s *SDK) ListInputRoutings(ctx context.Context, request operations.ListInpu
 	return res, nil
 }
 
+// ListInputs - Lists the inputs you have created.
 func (s *SDK) ListInputs(ctx context.Context, request operations.ListInputsRequest) (*operations.ListInputsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/inputs"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1734,7 +1778,7 @@ func (s *SDK) ListInputs(ctx context.Context, request operations.ListInputsReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1804,8 +1848,9 @@ func (s *SDK) ListInputs(ctx context.Context, request operations.ListInputsReque
 	return res, nil
 }
 
+// ListTagsForResource - Lists the tags (metadata) you have assigned to the resource.
 func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTagsForResourceRequest) (*operations.ListTagsForResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/tags#resourceArn"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1817,7 +1862,7 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1897,8 +1942,9 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 	return res, nil
 }
 
+// PutLoggingOptions - <p>Sets or updates the AWS IoT Events logging options.</p> <p>If you update the value of any <code>loggingOptions</code> field, it takes up to one minute for the change to take effect. If you change the policy attached to the role you specified in the <code>roleArn</code> field (for example, to correct an invalid policy), it takes up to five minutes for that change to take effect.</p>
 func (s *SDK) PutLoggingOptions(ctx context.Context, request operations.PutLoggingOptionsRequest) (*operations.PutLoggingOptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/logging"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1918,7 +1964,7 @@ func (s *SDK) PutLoggingOptions(ctx context.Context, request operations.PutLoggi
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1999,8 +2045,9 @@ func (s *SDK) PutLoggingOptions(ctx context.Context, request operations.PutLoggi
 	return res, nil
 }
 
+// StartDetectorModelAnalysis - Performs an analysis of your detector model. For more information, see <a href="https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-analyze-api.html">Troubleshooting a detector model</a> in the <i>AWS IoT Events Developer Guide</i>.
 func (s *SDK) StartDetectorModelAnalysis(ctx context.Context, request operations.StartDetectorModelAnalysisRequest) (*operations.StartDetectorModelAnalysisResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/analysis/detector-models/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2020,7 +2067,7 @@ func (s *SDK) StartDetectorModelAnalysis(ctx context.Context, request operations
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2100,8 +2147,9 @@ func (s *SDK) StartDetectorModelAnalysis(ctx context.Context, request operations
 	return res, nil
 }
 
+// TagResource - Adds to or modifies the tags of the given resource. Tags are metadata that can be used to manage a resource.
 func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceRequest) (*operations.TagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/tags#resourceArn"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2123,7 +2171,7 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2213,8 +2261,9 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 	return res, nil
 }
 
+// UntagResource - Removes the given tags (metadata) from the resource.
 func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourceRequest) (*operations.UntagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/tags#resourceArn&tagKeys"
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -2226,7 +2275,7 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2306,8 +2355,9 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 	return res, nil
 }
 
+// UpdateAlarmModel - Updates an alarm model. Any alarms that were created based on the previous version are deleted and then created again as new data arrives.
 func (s *SDK) UpdateAlarmModel(ctx context.Context, request operations.UpdateAlarmModelRequest) (*operations.UpdateAlarmModelResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/alarm-models/{alarmModelName}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2327,7 +2377,7 @@ func (s *SDK) UpdateAlarmModel(ctx context.Context, request operations.UpdateAla
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2417,8 +2467,9 @@ func (s *SDK) UpdateAlarmModel(ctx context.Context, request operations.UpdateAla
 	return res, nil
 }
 
+// UpdateDetectorModel - Updates a detector model. Detectors (instances) spawned by the previous version are deleted and then re-created as new inputs arrive.
 func (s *SDK) UpdateDetectorModel(ctx context.Context, request operations.UpdateDetectorModelRequest) (*operations.UpdateDetectorModelResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/detector-models/{detectorModelName}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2438,7 +2489,7 @@ func (s *SDK) UpdateDetectorModel(ctx context.Context, request operations.Update
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2528,8 +2579,9 @@ func (s *SDK) UpdateDetectorModel(ctx context.Context, request operations.Update
 	return res, nil
 }
 
+// UpdateInput - Updates an input.
 func (s *SDK) UpdateInput(ctx context.Context, request operations.UpdateInputRequest) (*operations.UpdateInputResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/inputs/{inputName}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2549,7 +2601,7 @@ func (s *SDK) UpdateInput(ctx context.Context, request operations.UpdateInputReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

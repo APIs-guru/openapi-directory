@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Update } from "./update";
 export declare class AssociateIdentityProviderConfigResponse extends SpeakeasyBase {
     tags?: Map<string, string>;

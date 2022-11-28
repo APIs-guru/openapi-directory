@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Status } from "./status";
 
 
+
 export class BulkEditAssignedTargetingOptionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.Status })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: Status })
   errors?: Status[];
 
-  @Metadata({ data: "json, name=failedLineItemIds" })
+  @SpeakeasyMetadata({ data: "json, name=failedLineItemIds" })
   failedLineItemIds?: string[];
 
-  @Metadata({ data: "json, name=updatedLineItemIds" })
+  @SpeakeasyMetadata({ data: "json, name=updatedLineItemIds" })
   updatedLineItemIds?: string[];
 }

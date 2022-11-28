@@ -1,7 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LandlordProfitLossSectionModel } from "./landlordprofitlosssectionmodel";
-import { LandlordProfitLossSectionModel } from "./landlordprofitlosssectionmodel";
-import { LandlordProfitLossSectionModel } from "./landlordprofitlosssectionmodel";
+
 
 
 // LandlordProfitLossModel
@@ -9,12 +8,12 @@ import { LandlordProfitLossSectionModel } from "./landlordprofitlosssectionmodel
  * Class to represent proffit loss report.
 **/
 export class LandlordProfitLossModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DirectCosts" })
+  @SpeakeasyMetadata({ data: "json, name=DirectCosts" })
   directCosts?: LandlordProfitLossSectionModel;
 
-  @Metadata({ data: "json, name=GrossProfitLoss" })
+  @SpeakeasyMetadata({ data: "json, name=GrossProfitLoss" })
   grossProfitLoss?: LandlordProfitLossSectionModel;
 
-  @Metadata({ data: "json, name=Income" })
+  @SpeakeasyMetadata({ data: "json, name=Income" })
   income?: LandlordProfitLossSectionModel;
 }

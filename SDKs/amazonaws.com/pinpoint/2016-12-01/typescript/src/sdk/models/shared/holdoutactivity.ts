@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // HoldoutActivity
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies the settings for a holdout activity in a journey. This type of activity stops a journey for a specified percentage of participants.
 **/
 export class HoldoutActivity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NextActivity" })
+  @SpeakeasyMetadata({ data: "json, name=NextActivity" })
   nextActivity?: string;
 
-  @Metadata({ data: "json, name=Percentage" })
+  @SpeakeasyMetadata({ data: "json, name=Percentage" })
   percentage: number;
 }

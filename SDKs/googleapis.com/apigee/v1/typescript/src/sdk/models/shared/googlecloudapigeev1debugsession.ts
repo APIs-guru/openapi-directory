@@ -1,25 +1,47 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GoogleCloudApigeeV1DebugSession extends SpeakeasyBase {
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count?: number;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=filter" })
+  @SpeakeasyMetadata({ data: "json, name=filter" })
   filter?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=timeout" })
+  @SpeakeasyMetadata({ data: "json, name=timeout" })
   timeout?: string;
 
-  @Metadata({ data: "json, name=tracesize" })
+  @SpeakeasyMetadata({ data: "json, name=tracesize" })
   tracesize?: number;
 
-  @Metadata({ data: "json, name=validity" })
+  @SpeakeasyMetadata({ data: "json, name=validity" })
+  validity?: number;
+}
+
+
+export class GoogleCloudApigeeV1DebugSessionInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=count" })
+  count?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=filter" })
+  filter?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=timeout" })
+  timeout?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=tracesize" })
+  tracesize?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=validity" })
   validity?: number;
 }

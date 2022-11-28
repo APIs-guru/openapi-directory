@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var WebhookCreateEventsEnum;
 (function (WebhookCreateEventsEnum) {
     WebhookCreateEventsEnum["Call"] = "CALL";
@@ -43,23 +43,23 @@ var WebhookCreate = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=events" }),
+        SpeakeasyMetadata({ data: "json, name=events" }),
         __metadata("design:type", Array)
     ], WebhookCreate.prototype, "events", void 0);
     __decorate([
-        Metadata({ data: "json, name=metadataPolicy" }),
+        SpeakeasyMetadata({ data: "json, name=metadataPolicy" }),
         __metadata("design:type", String)
     ], WebhookCreate.prototype, "metadataPolicy", void 0);
     __decorate([
-        Metadata({ data: "json, name=signingAlgo" }),
+        SpeakeasyMetadata({ data: "json, name=signingAlgo" }),
         __metadata("design:type", String)
     ], WebhookCreate.prototype, "signingAlgo", void 0);
     __decorate([
-        Metadata({ data: "json, name=signingKey" }),
+        SpeakeasyMetadata({ data: "json, name=signingKey" }),
         __metadata("design:type", String)
     ], WebhookCreate.prototype, "signingKey", void 0);
     __decorate([
-        Metadata({ data: "json, name=url" }),
+        SpeakeasyMetadata({ data: "json, name=url" }),
         __metadata("design:type", String)
     ], WebhookCreate.prototype, "url", void 0);
     return WebhookCreate;

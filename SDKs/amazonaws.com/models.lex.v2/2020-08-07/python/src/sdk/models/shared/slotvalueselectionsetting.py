@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import slotvalueregexfilter
-from . import slotvalueresolutionstrategy_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SlotValueSelectionSetting:
-    regex_filter: Optional[slotvalueregexfilter.SlotValueRegexFilter] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'regexFilter' }})
-    resolution_strategy: slotvalueresolutionstrategy_enum.SlotValueResolutionStrategyEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resolutionStrategy' }})
+    r"""SlotValueSelectionSetting
+    Contains settings used by Amazon Lex to select a slot value.
+    """
+    
+    resolution_strategy: SlotValueResolutionStrategyEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('resolutionStrategy') }})
+    regex_filter: Optional[SlotValueRegexFilter] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('regexFilter') }})
     

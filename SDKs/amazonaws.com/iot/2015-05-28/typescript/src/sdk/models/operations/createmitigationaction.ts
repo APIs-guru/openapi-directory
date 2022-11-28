@@ -1,33 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateMitigationActionPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=actionName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=actionName" })
   actionName: string;
 }
 
 
 export class CreateMitigationActionHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -37,72 +38,72 @@ export class CreateMitigationActionHeaders extends SpeakeasyBase {
  * The set of parameters for this mitigation action. You can specify only one type of parameter (in other words, you can apply only one action for each defined mitigation action).
 **/
 export class CreateMitigationActionRequestBodyActionParams extends SpeakeasyBase {
-  @Metadata({ data: "json, name=addThingsToThingGroupParams" })
+  @SpeakeasyMetadata({ data: "json, name=addThingsToThingGroupParams" })
   addThingsToThingGroupParams?: shared.AddThingsToThingGroupParams;
 
-  @Metadata({ data: "json, name=enableIoTLoggingParams" })
+  @SpeakeasyMetadata({ data: "json, name=enableIoTLoggingParams" })
   enableIoTLoggingParams?: shared.EnableIoTLoggingParams;
 
-  @Metadata({ data: "json, name=publishFindingToSnsParams" })
+  @SpeakeasyMetadata({ data: "json, name=publishFindingToSnsParams" })
   publishFindingToSnsParams?: shared.PublishFindingToSnsParams;
 
-  @Metadata({ data: "json, name=replaceDefaultPolicyVersionParams" })
+  @SpeakeasyMetadata({ data: "json, name=replaceDefaultPolicyVersionParams" })
   replaceDefaultPolicyVersionParams?: shared.ReplaceDefaultPolicyVersionParams;
 
-  @Metadata({ data: "json, name=updateCACertificateParams" })
+  @SpeakeasyMetadata({ data: "json, name=updateCACertificateParams" })
   updateCaCertificateParams?: shared.UpdateCaCertificateParams;
 
-  @Metadata({ data: "json, name=updateDeviceCertificateParams" })
+  @SpeakeasyMetadata({ data: "json, name=updateDeviceCertificateParams" })
   updateDeviceCertificateParams?: shared.UpdateDeviceCertificateParams;
 }
 
 
 export class CreateMitigationActionRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actionParams" })
+  @SpeakeasyMetadata({ data: "json, name=actionParams" })
   actionParams: CreateMitigationActionRequestBodyActionParams;
 
-  @Metadata({ data: "json, name=roleArn" })
+  @SpeakeasyMetadata({ data: "json, name=roleArn" })
   roleArn: string;
 
-  @Metadata({ data: "json, name=tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=tags", elemType: shared.Tag })
   tags?: shared.Tag[];
 }
 
 
 export class CreateMitigationActionRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CreateMitigationActionPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateMitigationActionHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateMitigationActionRequestBody;
 }
 
 
 export class CreateMitigationActionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createMitigationActionResponse?: shared.CreateMitigationActionResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalFailureException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   limitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceAlreadyExistsException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 }

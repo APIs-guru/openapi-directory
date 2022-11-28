@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { AudioAtom } from "./audioatom";
 // AudioStream
 /**
  * Audio stream resource.
@@ -34,27 +34,27 @@ var AudioStream = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=bitrateBps" }),
+        SpeakeasyMetadata({ data: "json, name=bitrateBps" }),
         __metadata("design:type", Number)
     ], AudioStream.prototype, "bitrateBps", void 0);
     __decorate([
-        Metadata({ data: "json, name=channelCount" }),
+        SpeakeasyMetadata({ data: "json, name=channelCount" }),
         __metadata("design:type", Number)
     ], AudioStream.prototype, "channelCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=channelLayout" }),
+        SpeakeasyMetadata({ data: "json, name=channelLayout" }),
         __metadata("design:type", Array)
     ], AudioStream.prototype, "channelLayout", void 0);
     __decorate([
-        Metadata({ data: "json, name=codec" }),
+        SpeakeasyMetadata({ data: "json, name=codec" }),
         __metadata("design:type", String)
     ], AudioStream.prototype, "codec", void 0);
     __decorate([
-        Metadata({ data: "json, name=mapping", elemType: shared.AudioAtom }),
+        SpeakeasyMetadata({ data: "json, name=mapping", elemType: AudioAtom }),
         __metadata("design:type", Array)
     ], AudioStream.prototype, "mapping", void 0);
     __decorate([
-        Metadata({ data: "json, name=sampleRateHertz" }),
+        SpeakeasyMetadata({ data: "json, name=sampleRateHertz" }),
         __metadata("design:type", Number)
     ], AudioStream.prototype, "sampleRateHertz", void 0);
     return AudioStream;

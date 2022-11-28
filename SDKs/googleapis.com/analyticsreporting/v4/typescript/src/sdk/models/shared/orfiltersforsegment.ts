@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SegmentFilterClause } from "./segmentfilterclause";
+
 
 
 // OrFiltersForSegment
@@ -8,6 +8,6 @@ import { SegmentFilterClause } from "./segmentfilterclause";
  * A list of segment filters in the `OR` group are combined with the logical OR operator.
 **/
 export class OrFiltersForSegment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=segmentFilterClauses", elemType: shared.SegmentFilterClause })
+  @SpeakeasyMetadata({ data: "json, name=segmentFilterClauses", elemType: SegmentFilterClause })
   segmentFilterClauses?: SegmentFilterClause[];
 }

@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ArtifactTypeEnum } from "./artifacttypeenum";
 import { MavenReference } from "./mavenreference";
 import { S3ContentLocation } from "./s3contentlocation";
+
 
 
 // CustomArtifactConfigurationDescription
@@ -9,12 +10,12 @@ import { S3ContentLocation } from "./s3contentlocation";
  * Specifies a dependency JAR or a JAR of user-defined functions.
 **/
 export class CustomArtifactConfigurationDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ArtifactType" })
+  @SpeakeasyMetadata({ data: "json, name=ArtifactType" })
   artifactType?: ArtifactTypeEnum;
 
-  @Metadata({ data: "json, name=MavenReferenceDescription" })
+  @SpeakeasyMetadata({ data: "json, name=MavenReferenceDescription" })
   mavenReferenceDescription?: MavenReference;
 
-  @Metadata({ data: "json, name=S3ContentLocationDescription" })
+  @SpeakeasyMetadata({ data: "json, name=S3ContentLocationDescription" })
   s3ContentLocationDescription?: S3ContentLocation;
 }

@@ -8,8 +8,11 @@ const (
 	GoogleCloudDialogflowV2AutomatedAgentReplyAutomatedAgentReplyTypeEnumFinal                              GoogleCloudDialogflowV2AutomatedAgentReplyAutomatedAgentReplyTypeEnum = "FINAL"
 )
 
+// GoogleCloudDialogflowV2AutomatedAgentReply
+// Represents a response from an automated agent.
 type GoogleCloudDialogflowV2AutomatedAgentReply struct {
 	AllowCancellation       *bool                                                                  `json:"allowCancellation,omitempty"`
 	AutomatedAgentReplyType *GoogleCloudDialogflowV2AutomatedAgentReplyAutomatedAgentReplyTypeEnum `json:"automatedAgentReplyType,omitempty"`
+	CxCurrentPage           *string                                                                `json:"cxCurrentPage,omitempty"`
 	DetectIntentResponse    *GoogleCloudDialogflowV2DetectIntentResponse                           `json:"detectIntentResponse,omitempty"`
 }

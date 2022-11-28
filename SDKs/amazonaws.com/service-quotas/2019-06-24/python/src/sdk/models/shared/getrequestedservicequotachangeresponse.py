@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import requestedservicequotachange
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetRequestedServiceQuotaChangeResponse:
-    requested_quota: Optional[requestedservicequotachange.RequestedServiceQuotaChange] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RequestedQuota' }})
+    requested_quota: Optional[RequestedServiceQuotaChange] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('RequestedQuota') }})
     

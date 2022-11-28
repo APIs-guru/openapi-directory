@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class TranslateProjectsLocationsDetectLanguagePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class TranslateProjectsLocationsDetectLanguageQueryParams:
 
 @dataclass
 class TranslateProjectsLocationsDetectLanguageSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class TranslateProjectsLocationsDetectLanguageSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class TranslateProjectsLocationsDetectLanguageSecurity:
 
 @dataclass
 class TranslateProjectsLocationsDetectLanguageRequest:
-    path_params: TranslateProjectsLocationsDetectLanguagePathParams = field(default=None)
-    query_params: TranslateProjectsLocationsDetectLanguageQueryParams = field(default=None)
+    path_params: TranslateProjectsLocationsDetectLanguagePathParams = field()
+    query_params: TranslateProjectsLocationsDetectLanguageQueryParams = field()
+    security: TranslateProjectsLocationsDetectLanguageSecurity = field()
     request: Optional[shared.DetectLanguageRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: TranslateProjectsLocationsDetectLanguageSecurity = field(default=None)
     
 
 @dataclass
 class TranslateProjectsLocationsDetectLanguageResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     detect_language_response: Optional[shared.DetectLanguageResponse] = field(default=None)
-    status_code: int = field(default=None)
     

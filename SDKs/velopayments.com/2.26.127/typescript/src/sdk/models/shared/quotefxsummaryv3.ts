@@ -1,51 +1,52 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum QuoteFxSummaryV3FundingStatusEnum {
-    Unfunded = "UNFUNDED"
-,    Instructed = "INSTRUCTED"
-,    Funded = "FUNDED"
+    Unfunded = "UNFUNDED",
+    Instructed = "INSTRUCTED",
+    Funded = "FUNDED"
 }
 
 export enum QuoteFxSummaryV3StatusEnum {
-    Unquoted = "UNQUOTED"
-,    Quoted = "QUOTED"
-,    Expired = "EXPIRED"
-,    Executed = "EXECUTED"
-,    Rejected = "REJECTED"
+    Unquoted = "UNQUOTED",
+    Quoted = "QUOTED",
+    Expired = "EXPIRED",
+    Executed = "EXECUTED",
+    Rejected = "REJECTED"
 }
 
 
 export class QuoteFxSummaryV3 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=creationTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationTime" })
   creationTime: Date;
 
-  @Metadata({ data: "json, name=expiryTime" })
+  @SpeakeasyMetadata({ data: "json, name=expiryTime" })
   expiryTime?: Date;
 
-  @Metadata({ data: "json, name=fundingStatus" })
+  @SpeakeasyMetadata({ data: "json, name=fundingStatus" })
   fundingStatus: QuoteFxSummaryV3FundingStatusEnum;
 
-  @Metadata({ data: "json, name=invertedRate" })
+  @SpeakeasyMetadata({ data: "json, name=invertedRate" })
   invertedRate?: number;
 
-  @Metadata({ data: "json, name=paymentCurrency" })
+  @SpeakeasyMetadata({ data: "json, name=paymentCurrency" })
   paymentCurrency: string;
 
-  @Metadata({ data: "json, name=quoteId" })
+  @SpeakeasyMetadata({ data: "json, name=quoteId" })
   quoteId: string;
 
-  @Metadata({ data: "json, name=rate" })
+  @SpeakeasyMetadata({ data: "json, name=rate" })
   rate: number;
 
-  @Metadata({ data: "json, name=sourceCurrency" })
+  @SpeakeasyMetadata({ data: "json, name=sourceCurrency" })
   sourceCurrency: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: QuoteFxSummaryV3StatusEnum;
 
-  @Metadata({ data: "json, name=totalPaymentAmount" })
+  @SpeakeasyMetadata({ data: "json, name=totalPaymentAmount" })
   totalPaymentAmount: number;
 
-  @Metadata({ data: "json, name=totalSourceAmount" })
+  @SpeakeasyMetadata({ data: "json, name=totalSourceAmount" })
   totalSourceAmount: number;
 }

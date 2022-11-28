@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BatchGetDeploymentInstancesInput
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  Represents the input of a <code>BatchGetDeploymentInstances</code> operation. 
 **/
 export class BatchGetDeploymentInstancesInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deploymentId" })
+  @SpeakeasyMetadata({ data: "json, name=deploymentId" })
   deploymentId: string;
 
-  @Metadata({ data: "json, name=instanceIds" })
+  @SpeakeasyMetadata({ data: "json, name=instanceIds" })
   instanceIds: string[];
 }

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// TimeSeriesServiceStatistics
+// A list of TimeSeriesStatistic structures.
 type TimeSeriesServiceStatistics struct {
 	EdgeSummaryStatistics     *EdgeStatistics     `json:"EdgeSummaryStatistics,omitempty"`
 	ResponseTimeHistogram     []HistogramEntry    `json:"ResponseTimeHistogram,omitempty"`

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Tag } from "./tag";
+
 
 
 // CreateBackupRequest
@@ -8,15 +8,15 @@ import { Tag } from "./tag";
  * The request object for the <code>CreateBackup</code> operation.
 **/
 export class CreateBackupRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClientRequestToken" })
+  @SpeakeasyMetadata({ data: "json, name=ClientRequestToken" })
   clientRequestToken?: string;
 
-  @Metadata({ data: "json, name=FileSystemId" })
+  @SpeakeasyMetadata({ data: "json, name=FileSystemId" })
   fileSystemId?: string;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 
-  @Metadata({ data: "json, name=VolumeId" })
+  @SpeakeasyMetadata({ data: "json, name=VolumeId" })
   volumeId?: string;
 }

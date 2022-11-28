@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // IosInfo
 /**
  * iOS related attributes to the Dynamic Link..
@@ -33,31 +33,31 @@ var IosInfo = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=iosAppStoreId" }),
+        SpeakeasyMetadata({ data: "json, name=iosAppStoreId" }),
         __metadata("design:type", String)
     ], IosInfo.prototype, "iosAppStoreId", void 0);
     __decorate([
-        Metadata({ data: "json, name=iosBundleId" }),
+        SpeakeasyMetadata({ data: "json, name=iosBundleId" }),
         __metadata("design:type", String)
     ], IosInfo.prototype, "iosBundleId", void 0);
     __decorate([
-        Metadata({ data: "json, name=iosCustomScheme" }),
+        SpeakeasyMetadata({ data: "json, name=iosCustomScheme" }),
         __metadata("design:type", String)
     ], IosInfo.prototype, "iosCustomScheme", void 0);
     __decorate([
-        Metadata({ data: "json, name=iosFallbackLink" }),
+        SpeakeasyMetadata({ data: "json, name=iosFallbackLink" }),
         __metadata("design:type", String)
     ], IosInfo.prototype, "iosFallbackLink", void 0);
     __decorate([
-        Metadata({ data: "json, name=iosIpadBundleId" }),
+        SpeakeasyMetadata({ data: "json, name=iosIpadBundleId" }),
         __metadata("design:type", String)
     ], IosInfo.prototype, "iosIpadBundleId", void 0);
     __decorate([
-        Metadata({ data: "json, name=iosIpadFallbackLink" }),
+        SpeakeasyMetadata({ data: "json, name=iosIpadFallbackLink" }),
         __metadata("design:type", String)
     ], IosInfo.prototype, "iosIpadFallbackLink", void 0);
     __decorate([
-        Metadata({ data: "json, name=iosMinimumVersion" }),
+        SpeakeasyMetadata({ data: "json, name=iosMinimumVersion" }),
         __metadata("design:type", String)
     ], IosInfo.prototype, "iosMinimumVersion", void 0);
     return IosInfo;

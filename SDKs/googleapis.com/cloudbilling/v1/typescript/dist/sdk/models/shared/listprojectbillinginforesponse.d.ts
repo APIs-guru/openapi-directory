@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ProjectBillingInfo } from "./projectbillinginfo";
 /**
  * Request message for `ListProjectBillingInfoResponse`.

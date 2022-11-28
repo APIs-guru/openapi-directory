@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Payload } from "./payload";
 // FirehoseAction
 /**
@@ -34,15 +34,15 @@ var FirehoseAction = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=deliveryStreamName" }),
+        SpeakeasyMetadata({ data: "json, name=deliveryStreamName" }),
         __metadata("design:type", String)
     ], FirehoseAction.prototype, "deliveryStreamName", void 0);
     __decorate([
-        Metadata({ data: "json, name=payload" }),
+        SpeakeasyMetadata({ data: "json, name=payload" }),
         __metadata("design:type", Payload)
     ], FirehoseAction.prototype, "payload", void 0);
     __decorate([
-        Metadata({ data: "json, name=separator" }),
+        SpeakeasyMetadata({ data: "json, name=separator" }),
         __metadata("design:type", String)
     ], FirehoseAction.prototype, "separator", void 0);
     return FirehoseAction;

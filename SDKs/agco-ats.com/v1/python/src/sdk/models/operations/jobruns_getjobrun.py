@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class JobRunsGetJobRunPathParams:
-    job_run_id: int = field(default=None, metadata={'path_param': { 'field_name': 'jobRunID', 'style': 'simple', 'explode': False }})
+    job_run_id: int = field(metadata={'path_param': { 'field_name': 'jobRunID', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,15 +15,15 @@ class JobRunsGetJobRunQueryParams:
 
 @dataclass
 class JobRunsGetJobRunRequest:
-    path_params: JobRunsGetJobRunPathParams = field(default=None)
-    query_params: JobRunsGetJobRunQueryParams = field(default=None)
+    path_params: JobRunsGetJobRunPathParams = field()
+    query_params: JobRunsGetJobRunQueryParams = field()
     
 
 @dataclass
 class JobRunsGetJobRunResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_models_api_error: Optional[shared.APIModelsAPIError] = field(default=None)
-    body: bytes = field(default=None)
+    body: Optional[bytes] = field(default=None)
     build_system_shared_dto_job_run: Optional[shared.BuildSystemSharedDtoJobRun] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

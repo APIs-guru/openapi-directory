@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CancellationReason extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cancellationReasonCode" })
+  @SpeakeasyMetadata({ data: "json, name=cancellationReasonCode" })
   cancellationReasonCode?: string;
 
-  @Metadata({ data: "json, name=cancellationReasonText" })
+  @SpeakeasyMetadata({ data: "json, name=cancellationReasonText" })
   cancellationReasonText?: string;
 }

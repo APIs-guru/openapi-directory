@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Editors
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The editors of a protected range.
 **/
 export class Editors extends SpeakeasyBase {
-  @Metadata({ data: "json, name=domainUsersCanEdit" })
+  @SpeakeasyMetadata({ data: "json, name=domainUsersCanEdit" })
   domainUsersCanEdit?: boolean;
 
-  @Metadata({ data: "json, name=groups" })
+  @SpeakeasyMetadata({ data: "json, name=groups" })
   groups?: string[];
 
-  @Metadata({ data: "json, name=users" })
+  @SpeakeasyMetadata({ data: "json, name=users" })
   users?: string[];
 }

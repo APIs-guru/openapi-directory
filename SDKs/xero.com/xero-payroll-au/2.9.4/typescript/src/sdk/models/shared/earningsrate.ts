@@ -1,59 +1,111 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AllowanceTypeEnum } from "./allowancetypeenum";
 import { EarningsTypeEnum } from "./earningstypeenum";
 import { EmploymentTerminationPaymentTypeEnum } from "./employmentterminationpaymenttypeenum";
 import { RateTypeEnum } from "./ratetypeenum";
 
 
-export class EarningsRate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccountCode" })
+
+export class EarningsRateInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=AccountCode" })
   accountCode?: string;
 
-  @Metadata({ data: "json, name=AccrueLeave" })
+  @SpeakeasyMetadata({ data: "json, name=AccrueLeave" })
   accrueLeave?: boolean;
 
-  @Metadata({ data: "json, name=AllowanceType" })
+  @SpeakeasyMetadata({ data: "json, name=AllowanceType" })
   allowanceType?: AllowanceTypeEnum;
 
-  @Metadata({ data: "json, name=Amount" })
+  @SpeakeasyMetadata({ data: "json, name=Amount" })
   amount?: number;
 
-  @Metadata({ data: "json, name=CurrentRecord" })
+  @SpeakeasyMetadata({ data: "json, name=CurrentRecord" })
   currentRecord?: boolean;
 
-  @Metadata({ data: "json, name=EarningsRateID" })
+  @SpeakeasyMetadata({ data: "json, name=EarningsRateID" })
   earningsRateId?: string;
 
-  @Metadata({ data: "json, name=EarningsType" })
+  @SpeakeasyMetadata({ data: "json, name=EarningsType" })
   earningsType?: EarningsTypeEnum;
 
-  @Metadata({ data: "json, name=EmploymentTerminationPaymentType" })
+  @SpeakeasyMetadata({ data: "json, name=EmploymentTerminationPaymentType" })
   employmentTerminationPaymentType?: EmploymentTerminationPaymentTypeEnum;
 
-  @Metadata({ data: "json, name=IsExemptFromSuper" })
+  @SpeakeasyMetadata({ data: "json, name=IsExemptFromSuper" })
   isExemptFromSuper?: boolean;
 
-  @Metadata({ data: "json, name=IsExemptFromTax" })
+  @SpeakeasyMetadata({ data: "json, name=IsExemptFromTax" })
   isExemptFromTax?: boolean;
 
-  @Metadata({ data: "json, name=IsReportableAsW1" })
+  @SpeakeasyMetadata({ data: "json, name=IsReportableAsW1" })
   isReportableAsW1?: boolean;
 
-  @Metadata({ data: "json, name=Multiplier" })
+  @SpeakeasyMetadata({ data: "json, name=Multiplier" })
   multiplier?: number;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=RatePerUnit" })
+  @SpeakeasyMetadata({ data: "json, name=RatePerUnit" })
   ratePerUnit?: string;
 
-  @Metadata({ data: "json, name=RateType" })
+  @SpeakeasyMetadata({ data: "json, name=RateType" })
   rateType?: RateTypeEnum;
 
-  @Metadata({ data: "json, name=TypeOfUnits" })
+  @SpeakeasyMetadata({ data: "json, name=TypeOfUnits" })
+  typeOfUnits?: string;
+}
+
+
+export class EarningsRate extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=AccountCode" })
+  accountCode?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=AccrueLeave" })
+  accrueLeave?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=AllowanceType" })
+  allowanceType?: AllowanceTypeEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=Amount" })
+  amount?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=CurrentRecord" })
+  currentRecord?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=EarningsRateID" })
+  earningsRateId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=EarningsType" })
+  earningsType?: EarningsTypeEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=EmploymentTerminationPaymentType" })
+  employmentTerminationPaymentType?: EmploymentTerminationPaymentTypeEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=IsExemptFromSuper" })
+  isExemptFromSuper?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=IsExemptFromTax" })
+  isExemptFromTax?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=IsReportableAsW1" })
+  isReportableAsW1?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=Multiplier" })
+  multiplier?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=Name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=RatePerUnit" })
+  ratePerUnit?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=RateType" })
+  rateType?: RateTypeEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=TypeOfUnits" })
   typeOfUnits?: string;
 
-  @Metadata({ data: "json, name=UpdatedDateUTC" })
+  @SpeakeasyMetadata({ data: "json, name=UpdatedDateUTC" })
   updatedDateUtc?: string;
 }

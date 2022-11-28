@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,25 +22,25 @@ class StartThingRegistrationTaskHeaders:
 @dataclass_json
 @dataclass
 class StartThingRegistrationTaskRequestBody:
-    input_file_bucket: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'inputFileBucket' }})
-    input_file_key: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'inputFileKey' }})
-    role_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'roleArn' }})
-    template_body: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'templateBody' }})
+    input_file_bucket: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('inputFileBucket') }})
+    input_file_key: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('inputFileKey') }})
+    role_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('roleArn') }})
+    template_body: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('templateBody') }})
     
 
 @dataclass
 class StartThingRegistrationTaskRequest:
-    headers: StartThingRegistrationTaskHeaders = field(default=None)
-    request: StartThingRegistrationTaskRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: StartThingRegistrationTaskHeaders = field()
+    request: StartThingRegistrationTaskRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class StartThingRegistrationTaskResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     start_thing_registration_task_response: Optional[shared.StartThingRegistrationTaskResponse] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

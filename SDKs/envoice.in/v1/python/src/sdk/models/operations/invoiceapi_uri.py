@@ -5,25 +5,25 @@ from sdk.models import shared
 
 @dataclass
 class InvoiceAPIURIQueryParams:
-    id: int = field(default=None, metadata={'query_param': { 'field_name': 'id', 'style': 'form', 'explode': True }})
+    id: int = field(metadata={'query_param': { 'field_name': 'id', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class InvoiceAPIURIHeaders:
-    x_auth_key: str = field(default=None, metadata={'header': { 'field_name': 'x-auth-key', 'style': 'simple', 'explode': False }})
-    x_auth_secret: str = field(default=None, metadata={'header': { 'field_name': 'x-auth-secret', 'style': 'simple', 'explode': False }})
+    x_auth_key: str = field(metadata={'header': { 'field_name': 'x-auth-key', 'style': 'simple', 'explode': False }})
+    x_auth_secret: str = field(metadata={'header': { 'field_name': 'x-auth-secret', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class InvoiceAPIURIRequest:
-    query_params: InvoiceAPIURIQueryParams = field(default=None)
-    headers: InvoiceAPIURIHeaders = field(default=None)
+    headers: InvoiceAPIURIHeaders = field()
+    query_params: InvoiceAPIURIQueryParams = field()
     
 
 @dataclass
 class InvoiceAPIURIResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     invoice_uri_api_model: Optional[shared.InvoiceURIAPIModel] = field(default=None)
-    status_code: int = field(default=None)
     

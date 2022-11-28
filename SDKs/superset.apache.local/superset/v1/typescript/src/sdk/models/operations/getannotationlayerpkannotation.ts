@@ -1,92 +1,93 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetAnnotationLayerPkAnnotationPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=pk" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=pk" })
   pk: number;
 }
 
 
 export class GetAnnotationLayerPkAnnotationQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, serialization=json;name=q" })
+  @SpeakeasyMetadata({ data: "queryParam, serialization=json;name=q" })
   q?: shared.GetListSchema;
 }
 
 
 export class GetAnnotationLayerPkAnnotationSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   jwt: shared.SchemeJwt;
 }
 
 
-export class GetAnnotationLayerPkAnnotationRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetAnnotationLayerPkAnnotationPathParams;
-
-  @Metadata()
-  queryParams: GetAnnotationLayerPkAnnotationQueryParams;
-
-  @Metadata()
-  security: GetAnnotationLayerPkAnnotationSecurity;
-}
-
-
 export class GetAnnotationLayerPkAnnotation200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count?: number;
 
-  @Metadata({ data: "json, name=ids" })
+  @SpeakeasyMetadata({ data: "json, name=ids" })
   ids?: string[];
 
-  @Metadata({ data: "json, name=result", elemType: shared.AnnotationRestApiGetList })
+  @SpeakeasyMetadata({ data: "json, name=result", elemType: shared.AnnotationRestApiGetList })
   result?: shared.AnnotationRestApiGetList[];
 }
 
 
 export class GetAnnotationLayerPkAnnotation400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetAnnotationLayerPkAnnotation401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetAnnotationLayerPkAnnotation422ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetAnnotationLayerPkAnnotation500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class GetAnnotationLayerPkAnnotationRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetAnnotationLayerPkAnnotationPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: GetAnnotationLayerPkAnnotationQueryParams;
+
+  @SpeakeasyMetadata()
+  security: GetAnnotationLayerPkAnnotationSecurity;
+}
+
+
 export class GetAnnotationLayerPkAnnotationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getAnnotationLayerPkAnnotation200ApplicationJsonObject?: GetAnnotationLayerPkAnnotation200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getAnnotationLayerPkAnnotation400ApplicationJsonObject?: GetAnnotationLayerPkAnnotation400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getAnnotationLayerPkAnnotation401ApplicationJsonObject?: GetAnnotationLayerPkAnnotation401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getAnnotationLayerPkAnnotation422ApplicationJsonObject?: GetAnnotationLayerPkAnnotation422ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getAnnotationLayerPkAnnotation500ApplicationJsonObject?: GetAnnotationLayerPkAnnotation500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

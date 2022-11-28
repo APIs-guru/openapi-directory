@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // HttpGatewayRoutePathRewrite
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An object that represents the path to rewrite.
 **/
 export class HttpGatewayRoutePathRewrite extends SpeakeasyBase {
-  @Metadata({ data: "json, name=exact" })
+  @SpeakeasyMetadata({ data: "json, name=exact" })
   exact?: string;
 }

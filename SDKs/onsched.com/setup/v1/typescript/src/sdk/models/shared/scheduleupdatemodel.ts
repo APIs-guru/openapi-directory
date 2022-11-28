@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AvailabilityInputModel } from "./availabilityinputmodel";
 
 
+
 export class ScheduleUpdateModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=availability" })
+  @SpeakeasyMetadata({ data: "json, name=availability" })
   availability?: AvailabilityInputModel;
 
-  @Metadata({ data: "json, name=bookingsPerSlot" })
+  @SpeakeasyMetadata({ data: "json, name=bookingsPerSlot" })
   bookingsPerSlot?: number;
 
-  @Metadata({ data: "json, name=interval" })
+  @SpeakeasyMetadata({ data: "json, name=interval" })
   interval?: number;
 
-  @Metadata({ data: "json, name=locationId" })
+  @SpeakeasyMetadata({ data: "json, name=locationId" })
   locationId?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=resourceGroupId" })
+  @SpeakeasyMetadata({ data: "json, name=resourceGroupId" })
   resourceGroupId?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }

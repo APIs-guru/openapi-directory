@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TableRange } from "./tablerange";
+
 
 
 // MergeTableCellsRequest
@@ -7,9 +8,9 @@ import { TableRange } from "./tablerange";
  * Merges cells in a Table.
 **/
 export class MergeTableCellsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=objectId" })
+  @SpeakeasyMetadata({ data: "json, name=objectId" })
   objectId?: string;
 
-  @Metadata({ data: "json, name=tableRange" })
+  @SpeakeasyMetadata({ data: "json, name=tableRange" })
   tableRange?: TableRange;
 }

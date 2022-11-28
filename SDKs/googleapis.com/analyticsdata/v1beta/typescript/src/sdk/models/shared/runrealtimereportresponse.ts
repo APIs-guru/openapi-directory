@@ -1,12 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DimensionHeader } from "./dimensionheader";
 import { Row } from "./row";
 import { MetricHeader } from "./metricheader";
-import { Row } from "./row";
 import { PropertyQuota } from "./propertyquota";
-import { Row } from "./row";
-import { Row } from "./row";
+
 
 
 // RunRealtimeReportResponse
@@ -14,30 +11,30 @@ import { Row } from "./row";
  * The response realtime report table corresponding to a request.
 **/
 export class RunRealtimeReportResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dimensionHeaders", elemType: shared.DimensionHeader })
+  @SpeakeasyMetadata({ data: "json, name=dimensionHeaders", elemType: DimensionHeader })
   dimensionHeaders?: DimensionHeader[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=maximums", elemType: shared.Row })
+  @SpeakeasyMetadata({ data: "json, name=maximums", elemType: Row })
   maximums?: Row[];
 
-  @Metadata({ data: "json, name=metricHeaders", elemType: shared.MetricHeader })
+  @SpeakeasyMetadata({ data: "json, name=metricHeaders", elemType: MetricHeader })
   metricHeaders?: MetricHeader[];
 
-  @Metadata({ data: "json, name=minimums", elemType: shared.Row })
+  @SpeakeasyMetadata({ data: "json, name=minimums", elemType: Row })
   minimums?: Row[];
 
-  @Metadata({ data: "json, name=propertyQuota" })
+  @SpeakeasyMetadata({ data: "json, name=propertyQuota" })
   propertyQuota?: PropertyQuota;
 
-  @Metadata({ data: "json, name=rowCount" })
+  @SpeakeasyMetadata({ data: "json, name=rowCount" })
   rowCount?: number;
 
-  @Metadata({ data: "json, name=rows", elemType: shared.Row })
+  @SpeakeasyMetadata({ data: "json, name=rows", elemType: Row })
   rows?: Row[];
 
-  @Metadata({ data: "json, name=totals", elemType: shared.Row })
+  @SpeakeasyMetadata({ data: "json, name=totals", elemType: Row })
   totals?: Row[];
 }

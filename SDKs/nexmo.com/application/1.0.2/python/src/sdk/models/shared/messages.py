@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class MessagesWebhooksEndpointTypeEnum(str, Enum):
     INBOUND_URL = "inbound_url"
@@ -14,13 +16,17 @@ class MessagesWebhooksHTTPMethodEnum(str, Enum):
 @dataclass_json
 @dataclass
 class MessagesWebhooks:
-    endpoint: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'endpoint' }})
-    endpoint_type: MessagesWebhooksEndpointTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'endpoint_type' }})
-    http_method: MessagesWebhooksHTTPMethodEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'http_method' }})
+    endpoint: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('endpoint') }})
+    endpoint_type: MessagesWebhooksEndpointTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('endpoint_type') }})
+    http_method: MessagesWebhooksHTTPMethodEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('http_method') }})
     
 
 @dataclass_json
 @dataclass
 class Messages:
-    webhooks: Optional[List[MessagesWebhooks]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'webhooks' }})
+    r"""Messages
+    The Nexmo product that you access with this application.
+    """
+    
+    webhooks: Optional[List[MessagesWebhooks]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('webhooks') }})
     

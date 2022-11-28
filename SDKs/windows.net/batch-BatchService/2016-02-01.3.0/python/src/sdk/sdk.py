@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
-from typing import Any,List,Optional
+from typing import Any,Optional
 from sdk.models import operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,30 +14,50 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def account_list_node_agent_skus(self, request: operations.AccountListNodeAgentSkusRequest) -> operations.AccountListNodeAgentSkusResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists all node agent SKUs supported by the Azure Batch service.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/nodeagentskus"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -55,17 +78,18 @@ class SDK:
 
     
     def application_get(self, request: operations.ApplicationGetRequest) -> operations.ApplicationGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets information about the specified application.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/applications/{applicationId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -86,17 +110,18 @@ class SDK:
 
     
     def application_list(self, request: operations.ApplicationListRequest) -> operations.ApplicationListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists all of the applications available in the specified account.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/applications"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -117,24 +142,23 @@ class SDK:
 
     
     def certificate_add(self, request: operations.CertificateAddRequest) -> operations.CertificateAddResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Adds a certificate to the specified account.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/certificates"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -152,17 +176,18 @@ class SDK:
 
     
     def certificate_cancel_deletion(self, request: operations.CertificateCancelDeletionRequest) -> operations.CertificateCancelDeletionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Cancels a failed deletion of a certificate from the specified account.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})/canceldelete", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -180,17 +205,18 @@ class SDK:
 
     
     def certificate_delete(self, request: operations.CertificateDeleteRequest) -> operations.CertificateDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a certificate from the specified account.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -208,17 +234,18 @@ class SDK:
 
     
     def certificate_get(self, request: operations.CertificateGetRequest) -> operations.CertificateGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets information about the specified certificate.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -239,17 +266,18 @@ class SDK:
 
     
     def certificate_list(self, request: operations.CertificateListRequest) -> operations.CertificateListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists all of the certificates that have been added to the specified account.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/certificates"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -270,24 +298,23 @@ class SDK:
 
     
     def compute_node_add_user(self, request: operations.ComputeNodeAddUserRequest) -> operations.ComputeNodeAddUserResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Adds a user account to the specified compute node.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/pools/{poolId}/nodes/{nodeId}/users", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -305,17 +332,18 @@ class SDK:
 
     
     def compute_node_delete_user(self, request: operations.ComputeNodeDeleteUserRequest) -> operations.ComputeNodeDeleteUserResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a user account from the specified compute node.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/pools/{poolId}/nodes/{nodeId}/users/{userName}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -333,21 +361,21 @@ class SDK:
 
     
     def compute_node_disable_scheduling(self, request: operations.ComputeNodeDisableSchedulingRequest) -> operations.ComputeNodeDisableSchedulingResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Disable task scheduling of the specified compute node.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/pools/{poolId}/nodes/{nodeId}/disablescheduling", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -365,17 +393,18 @@ class SDK:
 
     
     def compute_node_enable_scheduling(self, request: operations.ComputeNodeEnableSchedulingRequest) -> operations.ComputeNodeEnableSchedulingResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Enable task scheduling of the specified compute node.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/pools/{poolId}/nodes/{nodeId}/enablescheduling", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -393,17 +422,18 @@ class SDK:
 
     
     def compute_node_get(self, request: operations.ComputeNodeGetRequest) -> operations.ComputeNodeGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets information about the specified compute node.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/pools/{poolId}/nodes/{nodeId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -424,17 +454,18 @@ class SDK:
 
     
     def compute_node_get_remote_desktop(self, request: operations.ComputeNodeGetRemoteDesktopRequest) -> operations.ComputeNodeGetRemoteDesktopResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets the Remote Desktop Protocol file for the specified compute node.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/pools/{poolId}/nodes/{nodeId}/rdp", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -455,17 +486,18 @@ class SDK:
 
     
     def compute_node_get_remote_login_settings(self, request: operations.ComputeNodeGetRemoteLoginSettingsRequest) -> operations.ComputeNodeGetRemoteLoginSettingsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets the settings required for remote login to a compute node.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/pools/{poolId}/nodes/{nodeId}/remoteloginsettings", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -486,17 +518,18 @@ class SDK:
 
     
     def compute_node_list(self, request: operations.ComputeNodeListRequest) -> operations.ComputeNodeListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists the compute nodes in the specified pool.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/pools/{poolId}/nodes", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -517,21 +550,21 @@ class SDK:
 
     
     def compute_node_reboot(self, request: operations.ComputeNodeRebootRequest) -> operations.ComputeNodeRebootResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Restarts the specified compute node.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/pools/{poolId}/nodes/{nodeId}/reboot", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -549,21 +582,21 @@ class SDK:
 
     
     def compute_node_reimage(self, request: operations.ComputeNodeReimageRequest) -> operations.ComputeNodeReimageResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Reinstalls the operating system on the specified compute node.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/pools/{poolId}/nodes/{nodeId}/reimage", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -581,24 +614,23 @@ class SDK:
 
     
     def compute_node_update_user(self, request: operations.ComputeNodeUpdateUserRequest) -> operations.ComputeNodeUpdateUserResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates the password or expiration time of a user account on the specified compute node.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/pools/{poolId}/nodes/{nodeId}/users/{userName}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -616,17 +648,18 @@ class SDK:
 
     
     def file_delete_from_compute_node(self, request: operations.FileDeleteFromComputeNodeRequest) -> operations.FileDeleteFromComputeNodeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes the specified task file from the compute node.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/pools/{poolId}/nodes/{nodeId}/files/{fileName}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -644,17 +677,18 @@ class SDK:
 
     
     def file_delete_from_task(self, request: operations.FileDeleteFromTaskRequest) -> operations.FileDeleteFromTaskResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes the specified task file from the compute node where the task ran.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/jobs/{jobId}/tasks/{taskId}/files/{fileName}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -672,17 +706,18 @@ class SDK:
 
     
     def file_get_from_compute_node(self, request: operations.FileGetFromComputeNodeRequest) -> operations.FileGetFromComputeNodeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns the content of the specified task file.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/pools/{poolId}/nodes/{nodeId}/files/{fileName}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -703,17 +738,18 @@ class SDK:
 
     
     def file_get_from_task(self, request: operations.FileGetFromTaskRequest) -> operations.FileGetFromTaskResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns the content of the specified task file.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/jobs/{jobId}/tasks/{taskId}/files/{fileName}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -734,17 +770,18 @@ class SDK:
 
     
     def file_get_node_file_properties_from_compute_node(self, request: operations.FileGetNodeFilePropertiesFromComputeNodeRequest) -> operations.FileGetNodeFilePropertiesFromComputeNodeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets the properties of the specified compute node file.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/pools/{poolId}/nodes/{nodeId}/files/{fileName}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("HEAD", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -762,17 +799,18 @@ class SDK:
 
     
     def file_get_node_file_properties_from_task(self, request: operations.FileGetNodeFilePropertiesFromTaskRequest) -> operations.FileGetNodeFilePropertiesFromTaskResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets the properties of the specified task file.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/jobs/{jobId}/tasks/{taskId}/files/{fileName}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("HEAD", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -790,17 +828,18 @@ class SDK:
 
     
     def file_list_from_compute_node(self, request: operations.FileListFromComputeNodeRequest) -> operations.FileListFromComputeNodeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists all of the files in task directories on the specified compute node.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/pools/{poolId}/nodes/{nodeId}/files", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -821,17 +860,18 @@ class SDK:
 
     
     def file_list_from_task(self, request: operations.FileListFromTaskRequest) -> operations.FileListFromTaskResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists the files in a task's directory on its compute node.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/jobs/{jobId}/tasks/{taskId}/files", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -852,24 +892,23 @@ class SDK:
 
     
     def job_schedule_add(self, request: operations.JobScheduleAddRequest) -> operations.JobScheduleAddResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Adds a job schedule to the specified account.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/jobschedules"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -887,17 +926,18 @@ class SDK:
 
     
     def job_schedule_delete(self, request: operations.JobScheduleDeleteRequest) -> operations.JobScheduleDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a job schedule from the specified account.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/jobschedules/{jobScheduleId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -915,17 +955,18 @@ class SDK:
 
     
     def job_schedule_disable(self, request: operations.JobScheduleDisableRequest) -> operations.JobScheduleDisableResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Disables a job schedule.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/jobschedules/{jobScheduleId}/disable", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -943,17 +984,18 @@ class SDK:
 
     
     def job_schedule_enable(self, request: operations.JobScheduleEnableRequest) -> operations.JobScheduleEnableResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Enables a job schedule.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/jobschedules/{jobScheduleId}/enable", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -971,17 +1013,18 @@ class SDK:
 
     
     def job_schedule_exists(self, request: operations.JobScheduleExistsRequest) -> operations.JobScheduleExistsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Checks the specified job schedule exists.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/jobschedules/{jobScheduleId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("HEAD", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1001,17 +1044,18 @@ class SDK:
 
     
     def job_schedule_get(self, request: operations.JobScheduleGetRequest) -> operations.JobScheduleGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets information about the specified job schedule.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/jobschedules/{jobScheduleId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1032,17 +1076,18 @@ class SDK:
 
     
     def job_schedule_list(self, request: operations.JobScheduleListRequest) -> operations.JobScheduleListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists all of the job schedules in the specified account.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/jobschedules"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1063,24 +1108,23 @@ class SDK:
 
     
     def job_schedule_patch(self, request: operations.JobSchedulePatchRequest) -> operations.JobSchedulePatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates the properties of the specified job schedule.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/jobschedules/{jobScheduleId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PATCH", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1098,17 +1142,18 @@ class SDK:
 
     
     def job_schedule_terminate(self, request: operations.JobScheduleTerminateRequest) -> operations.JobScheduleTerminateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Terminates a job schedule.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/jobschedules/{jobScheduleId}/terminate", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1126,24 +1171,23 @@ class SDK:
 
     
     def job_schedule_update(self, request: operations.JobScheduleUpdateRequest) -> operations.JobScheduleUpdateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates the properties of the specified job schedule.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/jobschedules/{jobScheduleId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1161,24 +1205,23 @@ class SDK:
 
     
     def job_add(self, request: operations.JobAddRequest) -> operations.JobAddResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Adds a job to the specified account.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/jobs"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1196,17 +1239,18 @@ class SDK:
 
     
     def job_delete(self, request: operations.JobDeleteRequest) -> operations.JobDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a job.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/jobs/{jobId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1224,24 +1268,23 @@ class SDK:
 
     
     def job_disable(self, request: operations.JobDisableRequest) -> operations.JobDisableResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Disables the specified job, preventing new tasks from running.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/jobs/{jobId}/disable", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1259,17 +1302,18 @@ class SDK:
 
     
     def job_enable(self, request: operations.JobEnableRequest) -> operations.JobEnableResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Enables the specified job, allowing new tasks to run.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/jobs/{jobId}/enable", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1287,17 +1331,18 @@ class SDK:
 
     
     def job_get(self, request: operations.JobGetRequest) -> operations.JobGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets information about the specified job.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/jobs/{jobId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1318,17 +1363,18 @@ class SDK:
 
     
     def job_get_all_jobs_lifetime_statistics(self, request: operations.JobGetAllJobsLifetimeStatisticsRequest) -> operations.JobGetAllJobsLifetimeStatisticsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets lifetime summary statistics for all of the jobs in the specified account. Statistics are aggregated across all jobs that have ever existed in the account, from account creation to the last update time of the statistics.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/lifetimejobstats"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1349,17 +1395,18 @@ class SDK:
 
     
     def job_list(self, request: operations.JobListRequest) -> operations.JobListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists all of the jobs in the specified account.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/jobs"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1380,17 +1427,18 @@ class SDK:
 
     
     def job_list_from_job_schedule(self, request: operations.JobListFromJobScheduleRequest) -> operations.JobListFromJobScheduleResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists the jobs that have been created under the specified job schedule.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/jobschedules/{jobScheduleId}/jobs", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1411,17 +1459,18 @@ class SDK:
 
     
     def job_list_preparation_and_release_task_status(self, request: operations.JobListPreparationAndReleaseTaskStatusRequest) -> operations.JobListPreparationAndReleaseTaskStatusResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists the execution status of the Job Preparation and Job Release task for the specified job across the compute nodes where the job has run.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/jobs/{jobId}/jobpreparationandreleasetaskstatus", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1442,24 +1491,23 @@ class SDK:
 
     
     def job_patch(self, request: operations.JobPatchRequest) -> operations.JobPatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates the properties of a job.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/jobs/{jobId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PATCH", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1477,21 +1525,21 @@ class SDK:
 
     
     def job_terminate(self, request: operations.JobTerminateRequest) -> operations.JobTerminateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Terminates the specified job, marking it as completed.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/jobs/{jobId}/terminate", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1509,24 +1557,23 @@ class SDK:
 
     
     def job_update(self, request: operations.JobUpdateRequest) -> operations.JobUpdateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates the properties of a job.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/jobs/{jobId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1544,24 +1591,23 @@ class SDK:
 
     
     def pool_add(self, request: operations.PoolAddRequest) -> operations.PoolAddResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Adds a pool to the specified account.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/pools"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1579,17 +1625,18 @@ class SDK:
 
     
     def pool_delete(self, request: operations.PoolDeleteRequest) -> operations.PoolDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a pool from the specified account.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/pools/{poolId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1607,17 +1654,18 @@ class SDK:
 
     
     def pool_disable_auto_scale(self, request: operations.PoolDisableAutoScaleRequest) -> operations.PoolDisableAutoScaleResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Disables automatic scaling for a pool.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/pools/{poolId}/disableautoscale", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1635,24 +1683,23 @@ class SDK:
 
     
     def pool_enable_auto_scale(self, request: operations.PoolEnableAutoScaleRequest) -> operations.PoolEnableAutoScaleResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Enables automatic scaling for a pool.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/pools/{poolId}/enableautoscale", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1670,24 +1717,23 @@ class SDK:
 
     
     def pool_evaluate_auto_scale(self, request: operations.PoolEvaluateAutoScaleRequest) -> operations.PoolEvaluateAutoScaleResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets the result of evaluating an automatic scaling formula on the pool.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/pools/{poolId}/evaluateautoscale", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1708,17 +1754,18 @@ class SDK:
 
     
     def pool_exists(self, request: operations.PoolExistsRequest) -> operations.PoolExistsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets basic properties of a pool.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/pools/{poolId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("HEAD", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1738,17 +1785,18 @@ class SDK:
 
     
     def pool_get(self, request: operations.PoolGetRequest) -> operations.PoolGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets information about the specified pool.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/pools/{poolId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1769,17 +1817,18 @@ class SDK:
 
     
     def pool_get_all_pools_lifetime_statistics(self, request: operations.PoolGetAllPoolsLifetimeStatisticsRequest) -> operations.PoolGetAllPoolsLifetimeStatisticsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets lifetime summary statistics for all of the pools in the specified account. Statistics are aggregated across all pools that have ever existed in the account, from account creation to the last update time of the statistics.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/lifetimepoolstats"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1800,17 +1849,18 @@ class SDK:
 
     
     def pool_list(self, request: operations.PoolListRequest) -> operations.PoolListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists all of the pools in the specified account.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/pools"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1831,17 +1881,18 @@ class SDK:
 
     
     def pool_list_pool_usage_metrics(self, request: operations.PoolListPoolUsageMetricsRequest) -> operations.PoolListPoolUsageMetricsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists the usage metrics, aggregated by pool across individual time intervals, for the specified account.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/poolusagemetrics"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1862,24 +1913,23 @@ class SDK:
 
     
     def pool_patch(self, request: operations.PoolPatchRequest) -> operations.PoolPatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates the properties of a pool.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/pools/{poolId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PATCH", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1897,24 +1947,23 @@ class SDK:
 
     
     def pool_remove_nodes(self, request: operations.PoolRemoveNodesRequest) -> operations.PoolRemoveNodesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Removes compute nodes from the specified pool.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/pools/{poolId}/removenodes", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1932,24 +1981,23 @@ class SDK:
 
     
     def pool_resize(self, request: operations.PoolResizeRequest) -> operations.PoolResizeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Changes the number of compute nodes that are assigned to a pool.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/pools/{poolId}/resize", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1967,17 +2015,18 @@ class SDK:
 
     
     def pool_stop_resize(self, request: operations.PoolStopResizeRequest) -> operations.PoolStopResizeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Stops an ongoing resize operation on the pool. This does not restore the pool to its previous state before the resize operation: it only stops any further changes being made, and the pool maintains its current state.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/pools/{poolId}/stopresize", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1995,24 +2044,23 @@ class SDK:
 
     
     def pool_update_properties(self, request: operations.PoolUpdatePropertiesRequest) -> operations.PoolUpdatePropertiesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates the properties of a pool.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/pools/{poolId}/updateproperties", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2030,24 +2078,23 @@ class SDK:
 
     
     def pool_upgrade_os(self, request: operations.PoolUpgradeOsRequest) -> operations.PoolUpgradeOsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Upgrades the operating system of the specified pool.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/pools/{poolId}/upgradeos", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2065,24 +2112,23 @@ class SDK:
 
     
     def task_add(self, request: operations.TaskAddRequest) -> operations.TaskAddResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Adds a task to the specified job.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/jobs/{jobId}/tasks", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2100,24 +2146,23 @@ class SDK:
 
     
     def task_add_collection(self, request: operations.TaskAddCollectionRequest) -> operations.TaskAddCollectionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Adds a collection of tasks to the specified job.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/jobs/{jobId}/addtaskcollection", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2138,17 +2183,18 @@ class SDK:
 
     
     def task_delete(self, request: operations.TaskDeleteRequest) -> operations.TaskDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a task from the specified job.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/jobs/{jobId}/tasks/{taskId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2166,17 +2212,18 @@ class SDK:
 
     
     def task_get(self, request: operations.TaskGetRequest) -> operations.TaskGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets information about the specified task.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/jobs/{jobId}/tasks/{taskId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2197,17 +2244,18 @@ class SDK:
 
     
     def task_list(self, request: operations.TaskListRequest) -> operations.TaskListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists all of the tasks that are associated with the specified job.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/jobs/{jobId}/tasks", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2228,17 +2276,18 @@ class SDK:
 
     
     def task_list_subtasks(self, request: operations.TaskListSubtasksRequest) -> operations.TaskListSubtasksResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists all of the subtasks that are associated with the specified multi-instance task.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/jobs/{jobId}/tasks/{taskId}/subtasksinfo", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2259,17 +2308,18 @@ class SDK:
 
     
     def task_terminate(self, request: operations.TaskTerminateRequest) -> operations.TaskTerminateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Terminates the specified task.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/jobs/{jobId}/tasks/{taskId}/terminate", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2287,24 +2337,23 @@ class SDK:
 
     
     def task_update(self, request: operations.TaskUpdateRequest) -> operations.TaskUpdateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates the properties of the specified task.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/jobs/{jobId}/tasks/{taskId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

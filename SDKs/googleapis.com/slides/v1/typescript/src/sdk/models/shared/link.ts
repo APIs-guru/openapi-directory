@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum LinkRelativeLinkEnum {
-    RelativeSlideLinkUnspecified = "RELATIVE_SLIDE_LINK_UNSPECIFIED"
-,    NextSlide = "NEXT_SLIDE"
-,    PreviousSlide = "PREVIOUS_SLIDE"
-,    FirstSlide = "FIRST_SLIDE"
-,    LastSlide = "LAST_SLIDE"
+    RelativeSlideLinkUnspecified = "RELATIVE_SLIDE_LINK_UNSPECIFIED",
+    NextSlide = "NEXT_SLIDE",
+    PreviousSlide = "PREVIOUS_SLIDE",
+    FirstSlide = "FIRST_SLIDE",
+    LastSlide = "LAST_SLIDE"
 }
 
 
@@ -14,15 +15,15 @@ export enum LinkRelativeLinkEnum {
  * A hypertext link.
 **/
 export class Link extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pageObjectId" })
+  @SpeakeasyMetadata({ data: "json, name=pageObjectId" })
   pageObjectId?: string;
 
-  @Metadata({ data: "json, name=relativeLink" })
+  @SpeakeasyMetadata({ data: "json, name=relativeLink" })
   relativeLink?: LinkRelativeLinkEnum;
 
-  @Metadata({ data: "json, name=slideIndex" })
+  @SpeakeasyMetadata({ data: "json, name=slideIndex" })
   slideIndex?: number;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }

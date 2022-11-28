@@ -17,3 +17,14 @@ type Subscription struct {
 	URL                       *string                `json:"url,omitempty"`
 	VerifyTargetCertificate   *bool                  `json:"verify_target_certificate,omitempty"`
 }
+
+type SubscriptionInput struct {
+	Custom                  *interface{} `json:"custom,omitempty"`
+	DatabaseHoldTimeH       *int64       `json:"database_hold_time_h,omitempty"`
+	Description             *string      `json:"description,omitempty"`
+	PopulateEvents          *bool        `json:"populate_events,omitempty"`
+	TargetRetry             *bool        `json:"target_retry,omitempty"`
+	TargetURL               *string      `json:"target_url,omitempty"`
+	TopicFilter             *string      `json:"topic_filter,omitempty"`
+	VerifyTargetCertificate *bool        `json:"verify_target_certificate,omitempty"`
+}

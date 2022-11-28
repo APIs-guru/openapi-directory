@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SparkBatch
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A configuration for running an Apache Spark (https://spark.apache.org/) batch workload.
 **/
 export class SparkBatch extends SpeakeasyBase {
-  @Metadata({ data: "json, name=archiveUris" })
+  @SpeakeasyMetadata({ data: "json, name=archiveUris" })
   archiveUris?: string[];
 
-  @Metadata({ data: "json, name=args" })
+  @SpeakeasyMetadata({ data: "json, name=args" })
   args?: string[];
 
-  @Metadata({ data: "json, name=fileUris" })
+  @SpeakeasyMetadata({ data: "json, name=fileUris" })
   fileUris?: string[];
 
-  @Metadata({ data: "json, name=jarFileUris" })
+  @SpeakeasyMetadata({ data: "json, name=jarFileUris" })
   jarFileUris?: string[];
 
-  @Metadata({ data: "json, name=mainClass" })
+  @SpeakeasyMetadata({ data: "json, name=mainClass" })
   mainClass?: string;
 
-  @Metadata({ data: "json, name=mainJarFileUri" })
+  @SpeakeasyMetadata({ data: "json, name=mainJarFileUri" })
   mainJarFileUri?: string;
 }

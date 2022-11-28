@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GrafeasV1SlsaProvenanceZeroTwoSlsaConfigSource } from "./grafeasv1slsaprovenancezerotwoslsaconfigsource";
+
 
 
 // GrafeasV1SlsaProvenanceZeroTwoSlsaInvocation
@@ -7,12 +8,12 @@ import { GrafeasV1SlsaProvenanceZeroTwoSlsaConfigSource } from "./grafeasv1slsap
  * Identifies the event that kicked off the build.
 **/
 export class GrafeasV1SlsaProvenanceZeroTwoSlsaInvocation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=configSource" })
+  @SpeakeasyMetadata({ data: "json, name=configSource" })
   configSource?: GrafeasV1SlsaProvenanceZeroTwoSlsaConfigSource;
 
-  @Metadata({ data: "json, name=environment" })
+  @SpeakeasyMetadata({ data: "json, name=environment" })
   environment?: Map<string, any>;
 
-  @Metadata({ data: "json, name=parameters" })
+  @SpeakeasyMetadata({ data: "json, name=parameters" })
   parameters?: Map<string, any>;
 }

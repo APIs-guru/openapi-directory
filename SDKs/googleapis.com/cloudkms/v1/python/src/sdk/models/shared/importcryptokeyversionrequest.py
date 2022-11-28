@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ImportCryptoKeyVersionRequestAlgorithmEnum(str, Enum):
     CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED = "CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED"
@@ -27,15 +29,23 @@ class ImportCryptoKeyVersionRequestAlgorithmEnum(str, Enum):
     EC_SIGN_P384_SHA384 = "EC_SIGN_P384_SHA384"
     EC_SIGN_SECP256_K1_SHA256 = "EC_SIGN_SECP256K1_SHA256"
     HMAC_SHA256 = "HMAC_SHA256"
+    HMAC_SHA1 = "HMAC_SHA1"
+    HMAC_SHA384 = "HMAC_SHA384"
+    HMAC_SHA512 = "HMAC_SHA512"
+    HMAC_SHA224 = "HMAC_SHA224"
     EXTERNAL_SYMMETRIC_ENCRYPTION = "EXTERNAL_SYMMETRIC_ENCRYPTION"
 
 
 @dataclass_json
 @dataclass
 class ImportCryptoKeyVersionRequest:
-    algorithm: Optional[ImportCryptoKeyVersionRequestAlgorithmEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'algorithm' }})
-    crypto_key_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cryptoKeyVersion' }})
-    import_job: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'importJob' }})
-    rsa_aes_wrapped_key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rsaAesWrappedKey' }})
-    wrapped_key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'wrappedKey' }})
+    r"""ImportCryptoKeyVersionRequest
+    Request message for KeyManagementService.ImportCryptoKeyVersion.
+    """
+    
+    algorithm: Optional[ImportCryptoKeyVersionRequestAlgorithmEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('algorithm') }})
+    crypto_key_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cryptoKeyVersion') }})
+    import_job: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('importJob') }})
+    rsa_aes_wrapped_key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rsaAesWrappedKey') }})
+    wrapped_key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('wrappedKey') }})
     

@@ -1,14 +1,20 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import externalidmediatype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ExternalIDInfo:
-    key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Key' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
-    type: Optional[externalidmediatype_enum.ExternalIDMediaTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
-    url_format_string: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'UrlFormatString' }})
+    r"""ExternalIDInfo
+    Represents the external id information for serialization to the client.
+    """
+    
+    key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Key') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
+    type: Optional[ExternalIDMediaTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Type') }})
+    url_format_string: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('UrlFormatString') }})
     

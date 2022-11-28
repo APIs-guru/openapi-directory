@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -22,14 +23,14 @@ class AnalyticsadminAccountSummariesListQueryParams:
 
 @dataclass
 class AnalyticsadminAccountSummariesListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AnalyticsadminAccountSummariesListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -40,13 +41,13 @@ class AnalyticsadminAccountSummariesListSecurity:
 
 @dataclass
 class AnalyticsadminAccountSummariesListRequest:
-    query_params: AnalyticsadminAccountSummariesListQueryParams = field(default=None)
-    security: AnalyticsadminAccountSummariesListSecurity = field(default=None)
+    query_params: AnalyticsadminAccountSummariesListQueryParams = field()
+    security: AnalyticsadminAccountSummariesListSecurity = field()
     
 
 @dataclass
 class AnalyticsadminAccountSummariesListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_analytics_admin_v1alpha_list_account_summaries_response: Optional[shared.GoogleAnalyticsAdminV1alphaListAccountSummariesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

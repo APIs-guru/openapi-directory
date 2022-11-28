@@ -1,15 +1,13 @@
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
 import * as operations from "./models/operations";
-import { ParamsSerializerOptions } from "axios";
-import { GetQueryParamSerializer } from "../internal/utils/queryparams";
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import * as utils from "../internal/utils";
+
+
 
 type OptsFunc = (sdk: SDK) => void;
 
-const Servers = [
-  "https://parliament.uk",
+export const ServerList = [
+	"https://parliament.uk",
 ] as const;
 
 export function WithServerURL(
@@ -20,47 +18,47 @@ export function WithServerURL(
     if (params != null) {
       serverURL = utils.ReplaceParameters(serverURL, params);
     }
-    sdk.serverURL = serverURL;
+    sdk._serverURL = serverURL;
   };
 }
 
 export function WithClient(client: AxiosInstance): OptsFunc {
   return (sdk: SDK) => {
-    sdk.defaultClient = client;
+    sdk._defaultClient = client;
   };
 }
 
 
 export class SDK {
-  defaultClient?: AxiosInstance;
-  securityClient?: AxiosInstance;
-  security?: any;
-  serverURL: string;
+
+  public _defaultClient: AxiosInstance;
+  public _securityClient: AxiosInstance;
+  
+  public _serverURL: string;
+  private _language = "typescript";
+  private _sdkVersion = "0.0.1";
+  private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
-    if (this.serverURL == "") {
-      this.serverURL = Servers[0];
+    if (this._serverURL == "") {
+      this._serverURL = ServerList[0];
     }
 
-    if (!this.defaultClient) {
-      this.defaultClient = axios.create({ baseURL: this.serverURL });
+    if (!this._defaultClient) {
+      this._defaultClient = axios.create({ baseURL: this._serverURL });
     }
 
-    if (!this.securityClient) {
-      if (this.security) {
-        this.securityClient = CreateSecurityClient(
-          this.defaultClient,
-          this.security
-        );
-      } else {
-        this.securityClient = this.defaultClient;
-      }
+    if (!this._securityClient) {
+      this._securityClient = this._defaultClient;
     }
+    
   }
   
-  // GetApiLocationBrowseLocationTypeLocationName - Returns a list of locations, both parent and child
-  GetApiLocationBrowseLocationTypeLocationName(
+  /**
+   * getApiLocationBrowseLocationTypeLocationName - Returns a list of locations, both parent and child
+  **/
+  getApiLocationBrowseLocationTypeLocationName(
     req: operations.GetApiLocationBrowseLocationTypeLocationNameRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiLocationBrowseLocationTypeLocationNameResponse> {
@@ -68,38 +66,38 @@ export class SDK {
       req = new operations.GetApiLocationBrowseLocationTypeLocationNameRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/Location/Browse/{locationType}/{locationName}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiLocationBrowseLocationTypeLocationNameResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiLocationBrowseLocationTypeLocationNameResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.locationItem = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.locationItem = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -109,8 +107,10 @@ export class SDK {
   }
 
   
-  // GetApiLocationConstituencySearch - Returns a list of constituencies
-  GetApiLocationConstituencySearch(
+  /**
+   * getApiLocationConstituencySearch - Returns a list of constituencies
+  **/
+  getApiLocationConstituencySearch(
     req: operations.GetApiLocationConstituencySearchRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiLocationConstituencySearchResponse> {
@@ -118,12 +118,11 @@ export class SDK {
       req = new operations.GetApiLocationConstituencySearchRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/api/Location/Constituency/Search";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -132,30 +131,31 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiLocationConstituencySearchResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiLocationConstituencySearchResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.constituencyMembersServiceSearchResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.constituencyMembersServiceSearchResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
         }
 
@@ -165,8 +165,10 @@ export class SDK {
   }
 
   
-  // GetApiLocationConstituencyId - Returns a constituency by ID
-  GetApiLocationConstituencyId(
+  /**
+   * getApiLocationConstituencyId - Returns a constituency by ID
+  **/
+  getApiLocationConstituencyId(
     req: operations.GetApiLocationConstituencyIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiLocationConstituencyIdResponse> {
@@ -174,38 +176,38 @@ export class SDK {
       req = new operations.GetApiLocationConstituencyIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/Location/Constituency/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiLocationConstituencyIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiLocationConstituencyIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.constituencyItem = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.constituencyItem = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -215,8 +217,10 @@ export class SDK {
   }
 
   
-  // GetApiLocationConstituencyIdElectionResultLatest - Returns latest election result by constituency id
-  GetApiLocationConstituencyIdElectionResultLatest(
+  /**
+   * getApiLocationConstituencyIdElectionResultLatest - Returns latest election result by constituency id
+  **/
+  getApiLocationConstituencyIdElectionResultLatest(
     req: operations.GetApiLocationConstituencyIdElectionResultLatestRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiLocationConstituencyIdElectionResultLatestResponse> {
@@ -224,38 +228,38 @@ export class SDK {
       req = new operations.GetApiLocationConstituencyIdElectionResultLatestRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/Location/Constituency/{id}/ElectionResult/Latest", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiLocationConstituencyIdElectionResultLatestResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiLocationConstituencyIdElectionResultLatestResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.electionResultItem = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.electionResultItem = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -265,8 +269,10 @@ export class SDK {
   }
 
   
-  // GetApiLocationConstituencyIdElectionResultElectionId - Returns an election result by constituency and election id
-  GetApiLocationConstituencyIdElectionResultElectionId(
+  /**
+   * getApiLocationConstituencyIdElectionResultElectionId - Returns an election result by constituency and election id
+  **/
+  getApiLocationConstituencyIdElectionResultElectionId(
     req: operations.GetApiLocationConstituencyIdElectionResultElectionIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiLocationConstituencyIdElectionResultElectionIdResponse> {
@@ -274,38 +280,38 @@ export class SDK {
       req = new operations.GetApiLocationConstituencyIdElectionResultElectionIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/Location/Constituency/{id}/ElectionResult/{electionId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiLocationConstituencyIdElectionResultElectionIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiLocationConstituencyIdElectionResultElectionIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.electionResultItem = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.electionResultItem = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -315,8 +321,10 @@ export class SDK {
   }
 
   
-  // GetApiLocationConstituencyIdElectionResults - Returns a list of election results by constituency ID
-  GetApiLocationConstituencyIdElectionResults(
+  /**
+   * getApiLocationConstituencyIdElectionResults - Returns a list of election results by constituency ID
+  **/
+  getApiLocationConstituencyIdElectionResults(
     req: operations.GetApiLocationConstituencyIdElectionResultsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiLocationConstituencyIdElectionResultsResponse> {
@@ -324,38 +332,38 @@ export class SDK {
       req = new operations.GetApiLocationConstituencyIdElectionResultsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/Location/Constituency/{id}/ElectionResults", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiLocationConstituencyIdElectionResultsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiLocationConstituencyIdElectionResultsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.electionResultListItem = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.electionResultListItem = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -365,8 +373,10 @@ export class SDK {
   }
 
   
-  // GetApiLocationConstituencyIdGeometry - Returns geometry by constituency ID
-  GetApiLocationConstituencyIdGeometry(
+  /**
+   * getApiLocationConstituencyIdGeometry - Returns geometry by constituency ID
+  **/
+  getApiLocationConstituencyIdGeometry(
     req: operations.GetApiLocationConstituencyIdGeometryRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiLocationConstituencyIdGeometryResponse> {
@@ -374,38 +384,38 @@ export class SDK {
       req = new operations.GetApiLocationConstituencyIdGeometryRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/Location/Constituency/{id}/Geometry", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiLocationConstituencyIdGeometryResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiLocationConstituencyIdGeometryResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.stringItem = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.stringItem = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -415,8 +425,10 @@ export class SDK {
   }
 
   
-  // GetApiLocationConstituencyIdRepresentations - Returns a list of representations by constituency ID
-  GetApiLocationConstituencyIdRepresentations(
+  /**
+   * getApiLocationConstituencyIdRepresentations - Returns a list of representations by constituency ID
+  **/
+  getApiLocationConstituencyIdRepresentations(
     req: operations.GetApiLocationConstituencyIdRepresentationsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiLocationConstituencyIdRepresentationsResponse> {
@@ -424,38 +436,38 @@ export class SDK {
       req = new operations.GetApiLocationConstituencyIdRepresentationsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/Location/Constituency/{id}/Representations", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiLocationConstituencyIdRepresentationsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiLocationConstituencyIdRepresentationsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.constituencyRepresentationListItem = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.constituencyRepresentationListItem = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -465,8 +477,10 @@ export class SDK {
   }
 
   
-  // GetApiLocationConstituencyIdSynopsis - Returns a synopsis by constituency ID
-  GetApiLocationConstituencyIdSynopsis(
+  /**
+   * getApiLocationConstituencyIdSynopsis - Returns a synopsis by constituency ID
+  **/
+  getApiLocationConstituencyIdSynopsis(
     req: operations.GetApiLocationConstituencyIdSynopsisRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiLocationConstituencyIdSynopsisResponse> {
@@ -474,38 +488,38 @@ export class SDK {
       req = new operations.GetApiLocationConstituencyIdSynopsisRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/Location/Constituency/{id}/Synopsis", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiLocationConstituencyIdSynopsisResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiLocationConstituencyIdSynopsisResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.stringItem = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.stringItem = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -515,8 +529,10 @@ export class SDK {
   }
 
   
-  // GetApiLordsInterestsRegister - Returns a list of registered interests
-  GetApiLordsInterestsRegister(
+  /**
+   * getApiLordsInterestsRegister - Returns a list of registered interests
+  **/
+  getApiLordsInterestsRegister(
     req: operations.GetApiLordsInterestsRegisterRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiLordsInterestsRegisterResponse> {
@@ -524,12 +540,11 @@ export class SDK {
       req = new operations.GetApiLordsInterestsRegisterRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/api/LordsInterests/Register";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -538,30 +553,31 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiLordsInterestsRegisterResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiLordsInterestsRegisterResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.membersInterestsMembersServiceSearchResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.membersInterestsMembersServiceSearchResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
         }
 
@@ -571,8 +587,10 @@ export class SDK {
   }
 
   
-  // GetApiLordsInterestsStaff - Returns a list of staff
-  GetApiLordsInterestsStaff(
+  /**
+   * getApiLordsInterestsStaff - Returns a list of staff
+  **/
+  getApiLordsInterestsStaff(
     req: operations.GetApiLordsInterestsStaffRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiLordsInterestsStaffResponse> {
@@ -580,12 +598,11 @@ export class SDK {
       req = new operations.GetApiLordsInterestsStaffRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/api/LordsInterests/Staff";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -594,30 +611,31 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiLordsInterestsStaffResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiLordsInterestsStaffResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.membersStaffMembersServiceSearchResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.membersStaffMembersServiceSearchResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
         }
 
@@ -627,8 +645,10 @@ export class SDK {
   }
 
   
-  // GetApiMembersHistory - Return members by ID with list of their historical names, parties and memberships
-  GetApiMembersHistory(
+  /**
+   * getApiMembersHistory - Return members by ID with list of their historical names, parties and memberships
+  **/
+  getApiMembersHistory(
     req: operations.GetApiMembersHistoryRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiMembersHistoryResponse> {
@@ -636,12 +656,11 @@ export class SDK {
       req = new operations.GetApiMembersHistoryRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/api/Members/History";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -650,32 +669,33 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiMembersHistoryResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiMembersHistoryResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.memberHistoryItems = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.memberHistoryItems = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -685,8 +705,10 @@ export class SDK {
   }
 
   
-  // GetApiMembersSearch - Returns a list of current members of the Commons or Lords
-  GetApiMembersSearch(
+  /**
+   * getApiMembersSearch - Returns a list of current members of the Commons or Lords
+  **/
+  getApiMembersSearch(
     req: operations.GetApiMembersSearchRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiMembersSearchResponse> {
@@ -694,12 +716,11 @@ export class SDK {
       req = new operations.GetApiMembersSearchRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/api/Members/Search";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -708,30 +729,31 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiMembersSearchResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiMembersSearchResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.memberMembersServiceSearchResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.memberMembersServiceSearchResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
         }
 
@@ -741,8 +763,10 @@ export class SDK {
   }
 
   
-  // GetApiMembersSearchHistorical - Returns a list of members of the Commons or Lords
-  GetApiMembersSearchHistorical(
+  /**
+   * getApiMembersSearchHistorical - Returns a list of members of the Commons or Lords
+  **/
+  getApiMembersSearchHistorical(
     req: operations.GetApiMembersSearchHistoricalRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiMembersSearchHistoricalResponse> {
@@ -750,12 +774,11 @@ export class SDK {
       req = new operations.GetApiMembersSearchHistoricalRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/api/Members/SearchHistorical";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -764,30 +787,31 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiMembersSearchHistoricalResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiMembersSearchHistoricalResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.memberMembersServiceSearchResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.memberMembersServiceSearchResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
         }
 
@@ -797,8 +821,10 @@ export class SDK {
   }
 
   
-  // GetApiMembersId - Return member by ID
-  GetApiMembersId(
+  /**
+   * getApiMembersId - Return member by ID
+  **/
+  getApiMembersId(
     req: operations.GetApiMembersIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiMembersIdResponse> {
@@ -806,12 +832,11 @@ export class SDK {
       req = new operations.GetApiMembersIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/Members/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -820,32 +845,33 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiMembersIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiMembersIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.memberItem = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.memberItem = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -855,8 +881,10 @@ export class SDK {
   }
 
   
-  // GetApiMembersIdBiography - Return biography of member by ID
-  GetApiMembersIdBiography(
+  /**
+   * getApiMembersIdBiography - Return biography of member by ID
+  **/
+  getApiMembersIdBiography(
     req: operations.GetApiMembersIdBiographyRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiMembersIdBiographyResponse> {
@@ -864,38 +892,38 @@ export class SDK {
       req = new operations.GetApiMembersIdBiographyRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/Members/{id}/Biography", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiMembersIdBiographyResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiMembersIdBiographyResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.memberBiographyItem = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.memberBiographyItem = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -905,8 +933,10 @@ export class SDK {
   }
 
   
-  // GetApiMembersIdContact - Return list of contact details of member by ID
-  GetApiMembersIdContact(
+  /**
+   * getApiMembersIdContact - Return list of contact details of member by ID
+  **/
+  getApiMembersIdContact(
     req: operations.GetApiMembersIdContactRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiMembersIdContactResponse> {
@@ -914,38 +944,38 @@ export class SDK {
       req = new operations.GetApiMembersIdContactRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/Members/{id}/Contact", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiMembersIdContactResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiMembersIdContactResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.contactInformationListItem = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.contactInformationListItem = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -955,8 +985,10 @@ export class SDK {
   }
 
   
-  // GetApiMembersIdContributionSummary - Return contribution summary of member by ID
-  GetApiMembersIdContributionSummary(
+  /**
+   * getApiMembersIdContributionSummary - Return contribution summary of member by ID
+  **/
+  getApiMembersIdContributionSummary(
     req: operations.GetApiMembersIdContributionSummaryRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiMembersIdContributionSummaryResponse> {
@@ -964,12 +996,11 @@ export class SDK {
       req = new operations.GetApiMembersIdContributionSummaryRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/Members/{id}/ContributionSummary", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -978,32 +1009,33 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiMembersIdContributionSummaryResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiMembersIdContributionSummaryResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.debateContributionMembersServiceSearchResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.debateContributionMembersServiceSearchResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -1013,8 +1045,10 @@ export class SDK {
   }
 
   
-  // GetApiMembersIdEdms - Return list of early day motions of member by ID
-  GetApiMembersIdEdms(
+  /**
+   * getApiMembersIdEdms - Return list of early day motions of member by ID
+  **/
+  getApiMembersIdEdms(
     req: operations.GetApiMembersIdEdmsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiMembersIdEdmsResponse> {
@@ -1022,12 +1056,11 @@ export class SDK {
       req = new operations.GetApiMembersIdEdmsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/Members/{id}/Edms", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1036,32 +1069,33 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiMembersIdEdmsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiMembersIdEdmsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.earlyDayMotionMembersServiceSearchResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.earlyDayMotionMembersServiceSearchResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -1071,8 +1105,10 @@ export class SDK {
   }
 
   
-  // GetApiMembersIdExperience - Return experience of member by ID
-  GetApiMembersIdExperience(
+  /**
+   * getApiMembersIdExperience - Return experience of member by ID
+  **/
+  getApiMembersIdExperience(
     req: operations.GetApiMembersIdExperienceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiMembersIdExperienceResponse> {
@@ -1080,38 +1116,38 @@ export class SDK {
       req = new operations.GetApiMembersIdExperienceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/Members/{id}/Experience", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiMembersIdExperienceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiMembersIdExperienceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.biographyExperienceListItem = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.biographyExperienceListItem = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -1121,8 +1157,10 @@ export class SDK {
   }
 
   
-  // GetApiMembersIdFocus - Return list of areas of focus of member by ID
-  GetApiMembersIdFocus(
+  /**
+   * getApiMembersIdFocus - Return list of areas of focus of member by ID
+  **/
+  getApiMembersIdFocus(
     req: operations.GetApiMembersIdFocusRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiMembersIdFocusResponse> {
@@ -1130,38 +1168,38 @@ export class SDK {
       req = new operations.GetApiMembersIdFocusRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/Members/{id}/Focus", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiMembersIdFocusResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiMembersIdFocusResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.memberFocusListItem = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.memberFocusListItem = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -1171,8 +1209,10 @@ export class SDK {
   }
 
   
-  // GetApiMembersIdLatestElectionResult - Return latest election result of member by ID
-  GetApiMembersIdLatestElectionResult(
+  /**
+   * getApiMembersIdLatestElectionResult - Return latest election result of member by ID
+  **/
+  getApiMembersIdLatestElectionResult(
     req: operations.GetApiMembersIdLatestElectionResultRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiMembersIdLatestElectionResultResponse> {
@@ -1180,38 +1220,38 @@ export class SDK {
       req = new operations.GetApiMembersIdLatestElectionResultRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/Members/{id}/LatestElectionResult", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiMembersIdLatestElectionResultResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiMembersIdLatestElectionResultResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.electionResultItem = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.electionResultItem = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -1221,8 +1261,10 @@ export class SDK {
   }
 
   
-  // GetApiMembersIdPortrait - Return portrait of member by ID
-  GetApiMembersIdPortrait(
+  /**
+   * getApiMembersIdPortrait - Return portrait of member by ID
+  **/
+  getApiMembersIdPortrait(
     req: operations.GetApiMembersIdPortraitRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiMembersIdPortraitResponse> {
@@ -1230,12 +1272,11 @@ export class SDK {
       req = new operations.GetApiMembersIdPortraitRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/Members/{id}/Portrait", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1244,22 +1285,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiMembersIdPortraitResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.GetApiMembersIdPortraitResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 204:
+          case httpRes?.status == 204:
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -1269,8 +1311,10 @@ export class SDK {
   }
 
   
-  // GetApiMembersIdPortraitUrl - Return portrait url of member by ID
-  GetApiMembersIdPortraitUrl(
+  /**
+   * getApiMembersIdPortraitUrl - Return portrait url of member by ID
+  **/
+  getApiMembersIdPortraitUrl(
     req: operations.GetApiMembersIdPortraitUrlRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiMembersIdPortraitUrlResponse> {
@@ -1278,38 +1322,38 @@ export class SDK {
       req = new operations.GetApiMembersIdPortraitUrlRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/Members/{id}/PortraitUrl", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiMembersIdPortraitUrlResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiMembersIdPortraitUrlResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.stringItem = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.stringItem = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -1319,8 +1363,10 @@ export class SDK {
   }
 
   
-  // GetApiMembersIdRegisteredInterests - Return list of registered interests of member by ID
-  GetApiMembersIdRegisteredInterests(
+  /**
+   * getApiMembersIdRegisteredInterests - Return list of registered interests of member by ID
+  **/
+  getApiMembersIdRegisteredInterests(
     req: operations.GetApiMembersIdRegisteredInterestsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiMembersIdRegisteredInterestsResponse> {
@@ -1328,38 +1374,38 @@ export class SDK {
       req = new operations.GetApiMembersIdRegisteredInterestsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/Members/{id}/RegisteredInterests", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiMembersIdRegisteredInterestsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiMembersIdRegisteredInterestsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.registeredInterestCategoryListItem = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.registeredInterestCategoryListItem = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -1369,8 +1415,10 @@ export class SDK {
   }
 
   
-  // GetApiMembersIdStaff - Return list of staff of member by ID
-  GetApiMembersIdStaff(
+  /**
+   * getApiMembersIdStaff - Return list of staff of member by ID
+  **/
+  getApiMembersIdStaff(
     req: operations.GetApiMembersIdStaffRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiMembersIdStaffResponse> {
@@ -1378,38 +1426,38 @@ export class SDK {
       req = new operations.GetApiMembersIdStaffRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/Members/{id}/Staff", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiMembersIdStaffResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiMembersIdStaffResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.staffListItem = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.staffListItem = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -1419,8 +1467,10 @@ export class SDK {
   }
 
   
-  // GetApiMembersIdSynopsis - Return synopsis of member by ID
-  GetApiMembersIdSynopsis(
+  /**
+   * getApiMembersIdSynopsis - Return synopsis of member by ID
+  **/
+  getApiMembersIdSynopsis(
     req: operations.GetApiMembersIdSynopsisRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiMembersIdSynopsisResponse> {
@@ -1428,38 +1478,38 @@ export class SDK {
       req = new operations.GetApiMembersIdSynopsisRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/Members/{id}/Synopsis", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiMembersIdSynopsisResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiMembersIdSynopsisResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.stringItem = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.stringItem = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -1469,8 +1519,10 @@ export class SDK {
   }
 
   
-  // GetApiMembersIdThumbnail - Return thumbnail of member by ID
-  GetApiMembersIdThumbnail(
+  /**
+   * getApiMembersIdThumbnail - Return thumbnail of member by ID
+  **/
+  getApiMembersIdThumbnail(
     req: operations.GetApiMembersIdThumbnailRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiMembersIdThumbnailResponse> {
@@ -1478,26 +1530,26 @@ export class SDK {
       req = new operations.GetApiMembersIdThumbnailRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/Members/{id}/Thumbnail", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiMembersIdThumbnailResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.GetApiMembersIdThumbnailResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -1507,8 +1559,10 @@ export class SDK {
   }
 
   
-  // GetApiMembersIdThumbnailUrl - Return thumbnail url of member by ID
-  GetApiMembersIdThumbnailUrl(
+  /**
+   * getApiMembersIdThumbnailUrl - Return thumbnail url of member by ID
+  **/
+  getApiMembersIdThumbnailUrl(
     req: operations.GetApiMembersIdThumbnailUrlRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiMembersIdThumbnailUrlResponse> {
@@ -1516,38 +1570,38 @@ export class SDK {
       req = new operations.GetApiMembersIdThumbnailUrlRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/Members/{id}/ThumbnailUrl", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiMembersIdThumbnailUrlResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiMembersIdThumbnailUrlResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.stringItem = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.stringItem = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -1557,8 +1611,10 @@ export class SDK {
   }
 
   
-  // GetApiMembersIdVoting - Return list of votes by member by ID
-  GetApiMembersIdVoting(
+  /**
+   * getApiMembersIdVoting - Return list of votes by member by ID
+  **/
+  getApiMembersIdVoting(
     req: operations.GetApiMembersIdVotingRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiMembersIdVotingResponse> {
@@ -1566,12 +1622,11 @@ export class SDK {
       req = new operations.GetApiMembersIdVotingRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/Members/{id}/Voting", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1580,32 +1635,33 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiMembersIdVotingResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiMembersIdVotingResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.voteMembersServiceSearchResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.voteMembersServiceSearchResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -1615,8 +1671,10 @@ export class SDK {
   }
 
   
-  // GetApiMembersIdWrittenQuestions - Return list of written questions by member by ID
-  GetApiMembersIdWrittenQuestions(
+  /**
+   * getApiMembersIdWrittenQuestions - Return list of written questions by member by ID
+  **/
+  getApiMembersIdWrittenQuestions(
     req: operations.GetApiMembersIdWrittenQuestionsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiMembersIdWrittenQuestionsResponse> {
@@ -1624,12 +1682,11 @@ export class SDK {
       req = new operations.GetApiMembersIdWrittenQuestionsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/Members/{id}/WrittenQuestions", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1638,32 +1695,33 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiMembersIdWrittenQuestionsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiMembersIdWrittenQuestionsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.writtenQuestionMembersServiceSearchResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.writtenQuestionMembersServiceSearchResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -1673,8 +1731,10 @@ export class SDK {
   }
 
   
-  // GetApiPartiesGetActiveHouse - Returns a list of current parties with at least one active member.
-  GetApiPartiesGetActiveHouse(
+  /**
+   * getApiPartiesGetActiveHouse - Returns a list of current parties with at least one active member.
+  **/
+  getApiPartiesGetActiveHouse(
     req: operations.GetApiPartiesGetActiveHouseRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiPartiesGetActiveHouseResponse> {
@@ -1682,36 +1742,36 @@ export class SDK {
       req = new operations.GetApiPartiesGetActiveHouseRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/Parties/GetActive/{house}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiPartiesGetActiveHouseResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiPartiesGetActiveHouseResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.partyMembersServiceSearchResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.partyMembersServiceSearchResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
         }
 
@@ -1721,8 +1781,10 @@ export class SDK {
   }
 
   
-  // GetApiPartiesLordsByTypeForDate - Returns the composition of the House of Lords by peerage type.
-  GetApiPartiesLordsByTypeForDate(
+  /**
+   * getApiPartiesLordsByTypeForDate - Returns the composition of the House of Lords by peerage type.
+  **/
+  getApiPartiesLordsByTypeForDate(
     req: operations.GetApiPartiesLordsByTypeForDateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiPartiesLordsByTypeForDateResponse> {
@@ -1730,36 +1792,36 @@ export class SDK {
       req = new operations.GetApiPartiesLordsByTypeForDateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/Parties/LordsByType/{forDate}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiPartiesLordsByTypeForDateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiPartiesLordsByTypeForDateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.lordsByTypeMembersServiceSearchResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.lordsByTypeMembersServiceSearchResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
         }
 
@@ -1769,8 +1831,10 @@ export class SDK {
   }
 
   
-  // GetApiPartiesStateOfThePartiesHouseForDate - Returns current state of parties
-  GetApiPartiesStateOfThePartiesHouseForDate(
+  /**
+   * getApiPartiesStateOfThePartiesHouseForDate - Returns current state of parties
+  **/
+  getApiPartiesStateOfThePartiesHouseForDate(
     req: operations.GetApiPartiesStateOfThePartiesHouseForDateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiPartiesStateOfThePartiesHouseForDateResponse> {
@@ -1778,36 +1842,36 @@ export class SDK {
       req = new operations.GetApiPartiesStateOfThePartiesHouseForDateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/Parties/StateOfTheParties/{house}/{forDate}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiPartiesStateOfThePartiesHouseForDateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiPartiesStateOfThePartiesHouseForDateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.partySeatCountMembersServiceSearchResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.partySeatCountMembersServiceSearchResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
         }
 
@@ -1817,8 +1881,10 @@ export class SDK {
   }
 
   
-  // GetApiPostsDepartmentsType - Returns a list of departments.
-  GetApiPostsDepartmentsType(
+  /**
+   * getApiPostsDepartmentsType - Returns a list of departments.
+  **/
+  getApiPostsDepartmentsType(
     req: operations.GetApiPostsDepartmentsTypeRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiPostsDepartmentsTypeResponse> {
@@ -1826,36 +1892,36 @@ export class SDK {
       req = new operations.GetApiPostsDepartmentsTypeRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/Posts/Departments/{type}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiPostsDepartmentsTypeResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiPostsDepartmentsTypeResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.governmentDepartments = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.governmentDepartments = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -1865,8 +1931,10 @@ export class SDK {
   }
 
   
-  // GetApiPostsGovernmentPosts - Returns a list of government posts.
-  GetApiPostsGovernmentPosts(
+  /**
+   * getApiPostsGovernmentPosts - Returns a list of government posts.
+  **/
+  getApiPostsGovernmentPosts(
     req: operations.GetApiPostsGovernmentPostsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiPostsGovernmentPostsResponse> {
@@ -1874,12 +1942,11 @@ export class SDK {
       req = new operations.GetApiPostsGovernmentPostsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/api/Posts/GovernmentPosts";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1888,32 +1955,33 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiPostsGovernmentPostsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiPostsGovernmentPostsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.governmentOppositionPostItems = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.governmentOppositionPostItems = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -1923,8 +1991,10 @@ export class SDK {
   }
 
   
-  // GetApiPostsOppositionPosts - Returns a list of opposition posts.
-  GetApiPostsOppositionPosts(
+  /**
+   * getApiPostsOppositionPosts - Returns a list of opposition posts.
+  **/
+  getApiPostsOppositionPosts(
     req: operations.GetApiPostsOppositionPostsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiPostsOppositionPostsResponse> {
@@ -1932,12 +2002,11 @@ export class SDK {
       req = new operations.GetApiPostsOppositionPostsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/api/Posts/OppositionPosts";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1946,32 +2015,33 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiPostsOppositionPostsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiPostsOppositionPostsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.governmentOppositionPostItems = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.governmentOppositionPostItems = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -1981,8 +2051,10 @@ export class SDK {
   }
 
   
-  // GetApiPostsSpeakerAndDeputiesForDate - Returns a list containing the speaker and deputy speakers.
-  GetApiPostsSpeakerAndDeputiesForDate(
+  /**
+   * getApiPostsSpeakerAndDeputiesForDate - Returns a list containing the speaker and deputy speakers.
+  **/
+  getApiPostsSpeakerAndDeputiesForDate(
     req: operations.GetApiPostsSpeakerAndDeputiesForDateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiPostsSpeakerAndDeputiesForDateResponse> {
@@ -1990,38 +2062,38 @@ export class SDK {
       req = new operations.GetApiPostsSpeakerAndDeputiesForDateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/Posts/SpeakerAndDeputies/{forDate}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiPostsSpeakerAndDeputiesForDateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiPostsSpeakerAndDeputiesForDateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.memberItems = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.memberItems = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -2031,8 +2103,10 @@ export class SDK {
   }
 
   
-  // GetApiPostsSpokespersons - Returns a list of spokespersons.
-  GetApiPostsSpokespersons(
+  /**
+   * getApiPostsSpokespersons - Returns a list of spokespersons.
+  **/
+  getApiPostsSpokespersons(
     req: operations.GetApiPostsSpokespersonsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiPostsSpokespersonsResponse> {
@@ -2040,12 +2114,11 @@ export class SDK {
       req = new operations.GetApiPostsSpokespersonsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/api/Posts/Spokespersons";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2054,32 +2127,33 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiPostsSpokespersonsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiPostsSpokespersonsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.governmentOppositionPostItems = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.governmentOppositionPostItems = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -2089,8 +2163,10 @@ export class SDK {
   }
 
   
-  // GetApiReferenceAnsweringBodies - Returns a list of answering bodies.
-  GetApiReferenceAnsweringBodies(
+  /**
+   * getApiReferenceAnsweringBodies - Returns a list of answering bodies.
+  **/
+  getApiReferenceAnsweringBodies(
     req: operations.GetApiReferenceAnsweringBodiesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiReferenceAnsweringBodiesResponse> {
@@ -2098,12 +2174,11 @@ export class SDK {
       req = new operations.GetApiReferenceAnsweringBodiesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/api/Reference/AnsweringBodies";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2112,30 +2187,31 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiReferenceAnsweringBodiesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiReferenceAnsweringBodiesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.answeringBodies = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.answeringBodies = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
         }
 
@@ -2145,8 +2221,10 @@ export class SDK {
   }
 
   
-  // GetApiReferenceDepartments - Returns a list of departments.
-  GetApiReferenceDepartments(
+  /**
+   * getApiReferenceDepartments - Returns a list of departments.
+  **/
+  getApiReferenceDepartments(
     req: operations.GetApiReferenceDepartmentsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiReferenceDepartmentsResponse> {
@@ -2154,12 +2232,11 @@ export class SDK {
       req = new operations.GetApiReferenceDepartmentsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/api/Reference/Departments";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2168,30 +2245,31 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiReferenceDepartmentsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiReferenceDepartmentsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.governmentDepartments = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.governmentDepartments = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
         }
 
@@ -2201,8 +2279,10 @@ export class SDK {
   }
 
   
-  // GetApiReferenceDepartmentsIdLogo - Returns department logo.
-  GetApiReferenceDepartmentsIdLogo(
+  /**
+   * getApiReferenceDepartmentsIdLogo - Returns department logo.
+  **/
+  getApiReferenceDepartmentsIdLogo(
     req: operations.GetApiReferenceDepartmentsIdLogoRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiReferenceDepartmentsIdLogoResponse> {
@@ -2210,26 +2290,26 @@ export class SDK {
       req = new operations.GetApiReferenceDepartmentsIdLogoRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/Reference/Departments/{id}/Logo", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiReferenceDepartmentsIdLogoResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.GetApiReferenceDepartmentsIdLogoResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -2239,34 +2319,35 @@ export class SDK {
   }
 
   
-  // GetApiReferencePolicyInterests - Returns a list of policy interest.
-  GetApiReferencePolicyInterests(
-    
+  /**
+   * getApiReferencePolicyInterests - Returns a list of policy interest.
+  **/
+  getApiReferencePolicyInterests(
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiReferencePolicyInterestsResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/api/Reference/PolicyInterests";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiReferencePolicyInterestsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiReferencePolicyInterestsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.genericReferenceData = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.genericReferenceData = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);

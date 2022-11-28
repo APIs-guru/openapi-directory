@@ -1,7 +1,8 @@
 
 
+
 export enum ComputeLimitsUnitTypeEnum {
-    InstanceFleetUnits = "InstanceFleetUnits"
-,    Instances = "Instances"
-,    Vcpu = "VCPU"
+    InstanceFleetUnits = "InstanceFleetUnits",
+    Instances = "Instances",
+    Vcpu = "VCPU"
 }

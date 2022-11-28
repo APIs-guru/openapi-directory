@@ -45,6 +45,8 @@ const (
 	PostConversationsConversationIDOfferRequestBodyShippingPriceCurrencyEnumMxn PostConversationsConversationIDOfferRequestBodyShippingPriceCurrencyEnum = "MXN"
 )
 
+// PostConversationsConversationIDOfferRequestBodyShippingPrice
+// Shipping price (sellers only)
 type PostConversationsConversationIDOfferRequestBodyShippingPrice struct {
 	Amount   string                                                                   `json:"amount"`
 	Currency PostConversationsConversationIDOfferRequestBodyShippingPriceCurrencyEnum `json:"currency"`

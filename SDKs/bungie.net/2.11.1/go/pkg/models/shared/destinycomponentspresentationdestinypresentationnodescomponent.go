@@ -1,0 +1,5 @@
+package shared
+
+type DestinyComponentsPresentationDestinyPresentationNodesComponent struct {
+	Nodes map[string]DestinyComponentsPresentationDestinyPresentationNodeComponent
+}

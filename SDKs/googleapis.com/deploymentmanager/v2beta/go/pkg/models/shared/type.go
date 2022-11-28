@@ -1,5 +1,7 @@
 package shared
 
+// Type
+// A resource type supported by Deployment Manager.
 type Type struct {
 	Base        *BaseType        `json:"base,omitempty"`
 	Description *string          `json:"description,omitempty"`

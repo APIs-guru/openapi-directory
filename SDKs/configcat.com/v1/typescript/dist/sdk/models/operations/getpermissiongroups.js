@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetPermissionGroupsPathParams = /** @class */ (function (_super) {
     __extends(GetPermissionGroupsPathParams, _super);
@@ -30,7 +30,7 @@ var GetPermissionGroupsPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=productId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=productId" }),
         __metadata("design:type", String)
     ], GetPermissionGroupsPathParams.prototype, "productId", void 0);
     return GetPermissionGroupsPathParams;
@@ -42,7 +42,7 @@ var GetPermissionGroupsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetPermissionGroupsPathParams)
     ], GetPermissionGroupsRequest.prototype, "pathParams", void 0);
     return GetPermissionGroupsRequest;
@@ -54,15 +54,15 @@ var GetPermissionGroupsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetPermissionGroupsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata({ elemType: shared.PermissionGroupModel }),
+        SpeakeasyMetadata({ elemType: shared.PermissionGroupModel }),
         __metadata("design:type", Array)
     ], GetPermissionGroupsResponse.prototype, "permissionGroupModels", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetPermissionGroupsResponse.prototype, "statusCode", void 0);
     return GetPermissionGroupsResponse;

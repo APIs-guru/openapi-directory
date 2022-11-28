@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BusinessCardRecognitionResult
@@ -6,27 +7,27 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Result of recognizing a business card, to extract the key information from the business card
 **/
 export class BusinessCardRecognitionResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AddressString" })
+  @SpeakeasyMetadata({ data: "json, name=AddressString" })
   addressString?: string;
 
-  @Metadata({ data: "json, name=BusinessName" })
+  @SpeakeasyMetadata({ data: "json, name=BusinessName" })
   businessName?: string;
 
-  @Metadata({ data: "json, name=EmailAddress" })
+  @SpeakeasyMetadata({ data: "json, name=EmailAddress" })
   emailAddress?: string;
 
-  @Metadata({ data: "json, name=PersonName" })
+  @SpeakeasyMetadata({ data: "json, name=PersonName" })
   personName?: string;
 
-  @Metadata({ data: "json, name=PersonTitle" })
+  @SpeakeasyMetadata({ data: "json, name=PersonTitle" })
   personTitle?: string;
 
-  @Metadata({ data: "json, name=PhoneNumber" })
+  @SpeakeasyMetadata({ data: "json, name=PhoneNumber" })
   phoneNumber?: string;
 
-  @Metadata({ data: "json, name=Successful" })
+  @SpeakeasyMetadata({ data: "json, name=Successful" })
   successful?: boolean;
 
-  @Metadata({ data: "json, name=Timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=Timestamp" })
   timestamp?: Date;
 }

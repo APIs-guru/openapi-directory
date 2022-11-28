@@ -1,5 +1,7 @@
 package shared
 
+// ProfileSummary
+// JSON template for an Analytics ProfileSummary. ProfileSummary returns basic information (i.e., summary) for a profile.
 type ProfileSummary struct {
 	ID      *string `json:"id,omitempty"`
 	Kind    *string `json:"kind,omitempty"`

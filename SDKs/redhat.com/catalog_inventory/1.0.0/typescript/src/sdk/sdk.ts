@@ -1,19 +1,16 @@
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
+import FormData from "form-data";
 import * as operations from "./models/operations";
-import { ParamsSerializerOptions } from "axios";
-import { GetQueryParamSerializer } from "../internal/utils/queryparams";
-import { SerializeRequestBody } from "../internal/utils/requestbody";
-import FormData from 'form-data';
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import * as utils from "../internal/utils";
 import { Security } from "./models/shared";
+
+
 
 type OptsFunc = (sdk: SDK) => void;
 
-const Servers = [
-  "https://cloud.redhat.com/{basePath}",
-  "http://localhost:{port}/{basePath}",
+export const ServerList = [
+	"https://cloud.redhat.com/{basePath}",
+	"http://localhost:{port}/{basePath}",
 ] as const;
 
 export function WithServerURL(
@@ -24,13 +21,13 @@ export function WithServerURL(
     if (params != null) {
       serverURL = utils.ReplaceParameters(serverURL, params);
     }
-    sdk.serverURL = serverURL;
+    sdk._serverURL = serverURL;
   };
 }
 
 export function WithClient(client: AxiosInstance): OptsFunc {
   return (sdk: SDK) => {
-    sdk.defaultClient = client;
+    sdk._defaultClient = client;
   };
 }
 
@@ -39,44 +36,50 @@ export function WithSecurity(security: Security): OptsFunc {
     security = new Security(security);
   }
   return (sdk: SDK) => {
-    sdk.security = security;
+    sdk._security = security;
   };
 }
 
 
 export class SDK {
-  defaultClient?: AxiosInstance;
-  securityClient?: AxiosInstance;
-  security?: any;
-  serverURL: string;
+
+  public _defaultClient: AxiosInstance;
+  public _securityClient: AxiosInstance;
+  public _security?: Security;
+  public _serverURL: string;
+  private _language = "typescript";
+  private _sdkVersion = "0.0.1";
+  private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
-    if (this.serverURL == "") {
-      this.serverURL = Servers[0];
+    if (this._serverURL == "") {
+      this._serverURL = ServerList[0];
     }
 
-    if (!this.defaultClient) {
-      this.defaultClient = axios.create({ baseURL: this.serverURL });
+    if (!this._defaultClient) {
+      this._defaultClient = axios.create({ baseURL: this._serverURL });
     }
 
-    if (!this.securityClient) {
-      if (this.security) {
-        this.securityClient = CreateSecurityClient(
-          this.defaultClient,
-          this.security
+    if (!this._securityClient) {
+      if (this._security) {
+        this._securityClient = utils.CreateSecurityClient(
+          this._defaultClient,
+          this._security
         );
       } else {
-        this.securityClient = this.defaultClient;
+        this._securityClient = this._defaultClient;
       }
     }
+    
   }
   
-  // AppliedInventoriesTagsForServiceOffering - Invokes computing of ServiceInventories tags for given ServiceOffering
-  /** 
+  /**
+   * appliedInventoriesTagsForServiceOffering - Invokes computing of ServiceInventories tags for given ServiceOffering
+   *
    * Returns an array of inventories tags
   **/
-  AppliedInventoriesTagsForServiceOffering(
+  appliedInventoriesTagsForServiceOffering(
     req: operations.AppliedInventoriesTagsForServiceOfferingRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.AppliedInventoriesTagsForServiceOfferingResponse> {
@@ -84,44 +87,44 @@ export class SDK {
       req = new operations.AppliedInventoriesTagsForServiceOfferingRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/service_offerings/{id}/applied_inventories_tags", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.AppliedInventoriesTagsForServiceOfferingResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.AppliedInventoriesTagsForServiceOfferingResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.tags = httpRes?.data;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
         }
 
@@ -131,27 +134,30 @@ export class SDK {
   }
 
   
-  // GetDocumentation - Return this API document in JSON format
-  GetDocumentation(
-    
+  /**
+   * getDocumentation - Return this API document in JSON format
+  **/
+  getDocumentation(
     config?: AxiosRequestConfig
   ): Promise<operations.GetDocumentationResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/openapi.json";
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetDocumentationResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetDocumentationResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getDocumentation200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -163,11 +169,12 @@ export class SDK {
   }
 
   
-  // IncrementalRefreshSource - Incremental Refresh an existing Source
-  /** 
+  /**
+   * incrementalRefreshSource - Incremental Refresh an existing Source
+   *
    * Incremental Refresh a source object
   **/
-  IncrementalRefreshSource(
+  incrementalRefreshSource(
     req: operations.IncrementalRefreshSourceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IncrementalRefreshSourceResponse> {
@@ -175,27 +182,29 @@ export class SDK {
       req = new operations.IncrementalRefreshSourceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/sources/{id}/incremental_refresh", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .patch(url, {
+      .request({
+        url: url,
+        method: "patch",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IncrementalRefreshSourceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.IncrementalRefreshSourceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 429:
+          case httpRes?.status == 429:
             break;
         }
 
@@ -205,11 +214,12 @@ export class SDK {
   }
 
   
-  // ListServiceCredentialTypes - List ServiceCredentialTypes
-  /** 
+  /**
+   * listServiceCredentialTypes - List ServiceCredentialTypes
+   *
    * Returns an array of ServiceCredentialType objects
   **/
-  ListServiceCredentialTypes(
+  listServiceCredentialTypes(
     req: operations.ListServiceCredentialTypesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ListServiceCredentialTypesResponse> {
@@ -217,11 +227,12 @@ export class SDK {
       req = new operations.ListServiceCredentialTypesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/service_credential_types";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -230,17 +241,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ListServiceCredentialTypesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ListServiceCredentialTypesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceCredentialTypesCollection = httpRes?.data;
             }
             break;
@@ -252,11 +264,12 @@ export class SDK {
   }
 
   
-  // ListServiceCredentials - List ServiceCredentials
-  /** 
+  /**
+   * listServiceCredentials - List ServiceCredentials
+   *
    * Returns an array of ServiceCredential objects
   **/
-  ListServiceCredentials(
+  listServiceCredentials(
     req: operations.ListServiceCredentialsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ListServiceCredentialsResponse> {
@@ -264,11 +277,12 @@ export class SDK {
       req = new operations.ListServiceCredentialsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/service_credentials";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -277,17 +291,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ListServiceCredentialsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ListServiceCredentialsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceCredentialsCollection = httpRes?.data;
             }
             break;
@@ -299,11 +314,12 @@ export class SDK {
   }
 
   
-  // ListServiceInstances - List ServiceInstances
-  /** 
+  /**
+   * listServiceInstances - List ServiceInstances
+   *
    * Returns an array of ServiceInstance objects
   **/
-  ListServiceInstances(
+  listServiceInstances(
     req: operations.ListServiceInstancesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ListServiceInstancesResponse> {
@@ -311,11 +327,12 @@ export class SDK {
       req = new operations.ListServiceInstancesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/service_instances";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -324,17 +341,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ListServiceInstancesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ListServiceInstancesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceInstancesCollection = httpRes?.data;
             }
             break;
@@ -346,11 +364,12 @@ export class SDK {
   }
 
   
-  // ListServiceInventories - List ServiceInventories
-  /** 
+  /**
+   * listServiceInventories - List ServiceInventories
+   *
    * Returns an array of ServiceInventory objects
   **/
-  ListServiceInventories(
+  listServiceInventories(
     req: operations.ListServiceInventoriesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ListServiceInventoriesResponse> {
@@ -358,11 +377,12 @@ export class SDK {
       req = new operations.ListServiceInventoriesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/service_inventories";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -371,17 +391,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ListServiceInventoriesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ListServiceInventoriesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceInventoriesCollection = httpRes?.data;
             }
             break;
@@ -393,11 +414,12 @@ export class SDK {
   }
 
   
-  // ListServiceInventoryTags - List Tags for ServiceInventory
-  /** 
+  /**
+   * listServiceInventoryTags - List Tags for ServiceInventory
+   *
    * Returns an array of Tag objects
   **/
-  ListServiceInventoryTags(
+  listServiceInventoryTags(
     req: operations.ListServiceInventoryTagsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ListServiceInventoryTagsResponse> {
@@ -405,11 +427,12 @@ export class SDK {
       req = new operations.ListServiceInventoryTagsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/service_inventories/{id}/tags", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -418,22 +441,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ListServiceInventoryTagsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ListServiceInventoryTagsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.tagsCollection = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.errorNotFound = httpRes?.data;
             }
             break;
@@ -445,11 +469,12 @@ export class SDK {
   }
 
   
-  // ListServiceOfferingNodes - List ServiceOfferingNodes
-  /** 
+  /**
+   * listServiceOfferingNodes - List ServiceOfferingNodes
+   *
    * Returns an array of ServiceOfferingNode objects
   **/
-  ListServiceOfferingNodes(
+  listServiceOfferingNodes(
     req: operations.ListServiceOfferingNodesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ListServiceOfferingNodesResponse> {
@@ -457,11 +482,12 @@ export class SDK {
       req = new operations.ListServiceOfferingNodesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/service_offering_nodes";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -470,17 +496,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ListServiceOfferingNodesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ListServiceOfferingNodesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceOfferingNodesCollection = httpRes?.data;
             }
             break;
@@ -492,11 +519,12 @@ export class SDK {
   }
 
   
-  // ListServiceOfferingServiceInstances - List ServiceInstances for ServiceOffering
-  /** 
+  /**
+   * listServiceOfferingServiceInstances - List ServiceInstances for ServiceOffering
+   *
    * Returns an array of ServiceInstance objects
   **/
-  ListServiceOfferingServiceInstances(
+  listServiceOfferingServiceInstances(
     req: operations.ListServiceOfferingServiceInstancesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ListServiceOfferingServiceInstancesResponse> {
@@ -504,11 +532,12 @@ export class SDK {
       req = new operations.ListServiceOfferingServiceInstancesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/service_offerings/{id}/service_instances", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -517,22 +546,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ListServiceOfferingServiceInstancesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ListServiceOfferingServiceInstancesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceInstancesCollection = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.errorNotFound = httpRes?.data;
             }
             break;
@@ -544,11 +574,12 @@ export class SDK {
   }
 
   
-  // ListServiceOfferingServiceOfferingNodes - List ServiceOfferingNodes for ServiceOffering
-  /** 
+  /**
+   * listServiceOfferingServiceOfferingNodes - List ServiceOfferingNodes for ServiceOffering
+   *
    * Returns an array of ServiceOfferingNode objects
   **/
-  ListServiceOfferingServiceOfferingNodes(
+  listServiceOfferingServiceOfferingNodes(
     req: operations.ListServiceOfferingServiceOfferingNodesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ListServiceOfferingServiceOfferingNodesResponse> {
@@ -556,11 +587,12 @@ export class SDK {
       req = new operations.ListServiceOfferingServiceOfferingNodesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/service_offerings/{id}/service_offering_nodes", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -569,22 +601,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ListServiceOfferingServiceOfferingNodesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ListServiceOfferingServiceOfferingNodesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceOfferingNodesCollection = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.errorNotFound = httpRes?.data;
             }
             break;
@@ -596,11 +629,12 @@ export class SDK {
   }
 
   
-  // ListServiceOfferingServicePlans - List ServicePlans for ServiceOffering
-  /** 
+  /**
+   * listServiceOfferingServicePlans - List ServicePlans for ServiceOffering
+   *
    * Returns an array of ServicePlan objects
   **/
-  ListServiceOfferingServicePlans(
+  listServiceOfferingServicePlans(
     req: operations.ListServiceOfferingServicePlansRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ListServiceOfferingServicePlansResponse> {
@@ -608,11 +642,12 @@ export class SDK {
       req = new operations.ListServiceOfferingServicePlansRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/service_offerings/{id}/service_plans", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -621,22 +656,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ListServiceOfferingServicePlansResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ListServiceOfferingServicePlansResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.servicePlansCollection = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.errorNotFound = httpRes?.data;
             }
             break;
@@ -648,11 +684,12 @@ export class SDK {
   }
 
   
-  // ListServiceOfferings - List ServiceOfferings
-  /** 
+  /**
+   * listServiceOfferings - List ServiceOfferings
+   *
    * Returns an array of ServiceOffering objects
   **/
-  ListServiceOfferings(
+  listServiceOfferings(
     req: operations.ListServiceOfferingsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ListServiceOfferingsResponse> {
@@ -660,11 +697,12 @@ export class SDK {
       req = new operations.ListServiceOfferingsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/service_offerings";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -673,17 +711,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ListServiceOfferingsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ListServiceOfferingsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceOfferingsCollection = httpRes?.data;
             }
             break;
@@ -695,11 +734,12 @@ export class SDK {
   }
 
   
-  // ListServicePlans - List ServicePlans
-  /** 
+  /**
+   * listServicePlans - List ServicePlans
+   *
    * Returns an array of ServicePlan objects
   **/
-  ListServicePlans(
+  listServicePlans(
     req: operations.ListServicePlansRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ListServicePlansResponse> {
@@ -707,11 +747,12 @@ export class SDK {
       req = new operations.ListServicePlansRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/service_plans";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -720,17 +761,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ListServicePlansResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ListServicePlansResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.servicePlansCollection = httpRes?.data;
             }
             break;
@@ -742,11 +784,12 @@ export class SDK {
   }
 
   
-  // ListSourceServiceInstances - List ServiceInstances for Source
-  /** 
+  /**
+   * listSourceServiceInstances - List ServiceInstances for Source
+   *
    * Returns an array of ServiceInstance objects
   **/
-  ListSourceServiceInstances(
+  listSourceServiceInstances(
     req: operations.ListSourceServiceInstancesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ListSourceServiceInstancesResponse> {
@@ -754,11 +797,12 @@ export class SDK {
       req = new operations.ListSourceServiceInstancesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/sources/{id}/service_instances", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -767,22 +811,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ListSourceServiceInstancesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ListSourceServiceInstancesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceInstancesCollection = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.errorNotFound = httpRes?.data;
             }
             break;
@@ -794,11 +839,12 @@ export class SDK {
   }
 
   
-  // ListSourceServiceInventories - List ServiceInventories for Source
-  /** 
+  /**
+   * listSourceServiceInventories - List ServiceInventories for Source
+   *
    * Returns an array of ServiceInventory objects
   **/
-  ListSourceServiceInventories(
+  listSourceServiceInventories(
     req: operations.ListSourceServiceInventoriesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ListSourceServiceInventoriesResponse> {
@@ -806,11 +852,12 @@ export class SDK {
       req = new operations.ListSourceServiceInventoriesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/sources/{id}/service_inventories", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -819,22 +866,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ListSourceServiceInventoriesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ListSourceServiceInventoriesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceInventoriesCollection = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.errorNotFound = httpRes?.data;
             }
             break;
@@ -846,11 +894,12 @@ export class SDK {
   }
 
   
-  // ListSourceServiceOfferingNodes - List ServiceOfferingNodes for Source
-  /** 
+  /**
+   * listSourceServiceOfferingNodes - List ServiceOfferingNodes for Source
+   *
    * Returns an array of ServiceOfferingNode objects
   **/
-  ListSourceServiceOfferingNodes(
+  listSourceServiceOfferingNodes(
     req: operations.ListSourceServiceOfferingNodesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ListSourceServiceOfferingNodesResponse> {
@@ -858,11 +907,12 @@ export class SDK {
       req = new operations.ListSourceServiceOfferingNodesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/sources/{id}/service_offering_nodes", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -871,22 +921,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ListSourceServiceOfferingNodesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ListSourceServiceOfferingNodesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceOfferingNodesCollection = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.errorNotFound = httpRes?.data;
             }
             break;
@@ -898,11 +949,12 @@ export class SDK {
   }
 
   
-  // ListSourceServiceOfferings - List ServiceOfferings for Source
-  /** 
+  /**
+   * listSourceServiceOfferings - List ServiceOfferings for Source
+   *
    * Returns an array of ServiceOffering objects
   **/
-  ListSourceServiceOfferings(
+  listSourceServiceOfferings(
     req: operations.ListSourceServiceOfferingsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ListSourceServiceOfferingsResponse> {
@@ -910,11 +962,12 @@ export class SDK {
       req = new operations.ListSourceServiceOfferingsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/sources/{id}/service_offerings", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -923,22 +976,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ListSourceServiceOfferingsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ListSourceServiceOfferingsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceOfferingsCollection = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.errorNotFound = httpRes?.data;
             }
             break;
@@ -950,11 +1004,12 @@ export class SDK {
   }
 
   
-  // ListSourceServicePlans - List ServicePlans for Source
-  /** 
+  /**
+   * listSourceServicePlans - List ServicePlans for Source
+   *
    * Returns an array of ServicePlan objects
   **/
-  ListSourceServicePlans(
+  listSourceServicePlans(
     req: operations.ListSourceServicePlansRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ListSourceServicePlansResponse> {
@@ -962,11 +1017,12 @@ export class SDK {
       req = new operations.ListSourceServicePlansRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/sources/{id}/service_plans", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -975,22 +1031,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ListSourceServicePlansResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ListSourceServicePlansResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.servicePlansCollection = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.errorNotFound = httpRes?.data;
             }
             break;
@@ -1002,11 +1059,12 @@ export class SDK {
   }
 
   
-  // ListSourceTasks - List Tasks for Source
-  /** 
+  /**
+   * listSourceTasks - List Tasks for Source
+   *
    * Returns an array of Task objects
   **/
-  ListSourceTasks(
+  listSourceTasks(
     req: operations.ListSourceTasksRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ListSourceTasksResponse> {
@@ -1014,11 +1072,12 @@ export class SDK {
       req = new operations.ListSourceTasksRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/sources/{id}/tasks", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1027,22 +1086,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ListSourceTasksResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ListSourceTasksResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.tasksCollection = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.errorNotFound = httpRes?.data;
             }
             break;
@@ -1054,11 +1114,12 @@ export class SDK {
   }
 
   
-  // ListSources - List Sources
-  /** 
+  /**
+   * listSources - List Sources
+   *
    * Returns an array of Source objects
   **/
-  ListSources(
+  listSources(
     req: operations.ListSourcesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ListSourcesResponse> {
@@ -1066,11 +1127,12 @@ export class SDK {
       req = new operations.ListSourcesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/sources";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1079,17 +1141,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ListSourcesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ListSourcesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.sourcesCollection = httpRes?.data;
             }
             break;
@@ -1101,11 +1164,12 @@ export class SDK {
   }
 
   
-  // ListTags - List Tags
-  /** 
+  /**
+   * listTags - List Tags
+   *
    * Returns an array of Tag objects
   **/
-  ListTags(
+  listTags(
     req: operations.ListTagsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ListTagsResponse> {
@@ -1113,11 +1177,12 @@ export class SDK {
       req = new operations.ListTagsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/tags";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1126,17 +1191,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ListTagsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ListTagsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.tagsCollection = httpRes?.data;
             }
             break;
@@ -1148,11 +1214,12 @@ export class SDK {
   }
 
   
-  // ListTasks - List Tasks
-  /** 
+  /**
+   * listTasks - List Tasks
+   *
    * Returns an array of Task objects
   **/
-  ListTasks(
+  listTasks(
     req: operations.ListTasksRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ListTasksResponse> {
@@ -1160,11 +1227,12 @@ export class SDK {
       req = new operations.ListTasksRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/tasks";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1173,17 +1241,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ListTasksResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ListTasksResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.tasksCollection = httpRes?.data;
             }
             break;
@@ -1195,11 +1264,12 @@ export class SDK {
   }
 
   
-  // OrderServiceOffering - Order an existing ServiceOffering
-  /** 
+  /**
+   * orderServiceOffering - Order an existing ServiceOffering
+   *
    * Returns a Task id
   **/
-  OrderServiceOffering(
+  orderServiceOffering(
     req: operations.OrderServiceOfferingRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.OrderServiceOfferingResponse> {
@@ -1207,44 +1277,44 @@ export class SDK {
       req = new operations.OrderServiceOfferingRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/service_offerings/{id}/order", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.OrderServiceOfferingResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.OrderServiceOfferingResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.orderServiceOffering200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
         }
 
@@ -1254,11 +1324,12 @@ export class SDK {
   }
 
   
-  // PostGraphQl - Perform a GraphQL Query
-  /** 
+  /**
+   * postGraphQl - Perform a GraphQL Query
+   *
    * Performs a GraphQL Query
   **/
-  PostGraphQl(
+  postGraphQl(
     req: operations.PostGraphQlRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostGraphQlResponse> {
@@ -1266,40 +1337,40 @@ export class SDK {
       req = new operations.PostGraphQlRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/graphql";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostGraphQlResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostGraphQlResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.graphQlResponse = httpRes?.data;
             }
             break;
@@ -1311,11 +1382,12 @@ export class SDK {
   }
 
   
-  // RefreshSource -  Refresh an existing Source
-  /** 
+  /**
+   * refreshSource -  Refresh an existing Source
+   *
    * Refresh a source object
   **/
-  RefreshSource(
+  refreshSource(
     req: operations.RefreshSourceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.RefreshSourceResponse> {
@@ -1323,27 +1395,29 @@ export class SDK {
       req = new operations.RefreshSourceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/sources/{id}/refresh", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .patch(url, {
+      .request({
+        url: url,
+        method: "patch",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.RefreshSourceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.RefreshSourceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 429:
+          case httpRes?.status == 429:
             break;
         }
 
@@ -1353,11 +1427,12 @@ export class SDK {
   }
 
   
-  // ShowServiceCredential - Show an existing ServiceCredential
-  /** 
+  /**
+   * showServiceCredential - Show an existing ServiceCredential
+   *
    * Returns a ServiceCredential object
   **/
-  ShowServiceCredential(
+  showServiceCredential(
     req: operations.ShowServiceCredentialRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ShowServiceCredentialResponse> {
@@ -1365,27 +1440,29 @@ export class SDK {
       req = new operations.ShowServiceCredentialRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/service_credentials/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ShowServiceCredentialResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ShowServiceCredentialResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceCredential = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.errorNotFound = httpRes?.data;
             }
             break;
@@ -1397,11 +1474,12 @@ export class SDK {
   }
 
   
-  // ShowServiceCredentialType - Show an existing ServiceCredentialType
-  /** 
+  /**
+   * showServiceCredentialType - Show an existing ServiceCredentialType
+   *
    * Returns a ServiceCredentialType object
   **/
-  ShowServiceCredentialType(
+  showServiceCredentialType(
     req: operations.ShowServiceCredentialTypeRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ShowServiceCredentialTypeResponse> {
@@ -1409,27 +1487,29 @@ export class SDK {
       req = new operations.ShowServiceCredentialTypeRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/service_credential_types/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ShowServiceCredentialTypeResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ShowServiceCredentialTypeResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceCredentialType = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.errorNotFound = httpRes?.data;
             }
             break;
@@ -1441,11 +1521,12 @@ export class SDK {
   }
 
   
-  // ShowServiceInstance - Show an existing ServiceInstance
-  /** 
+  /**
+   * showServiceInstance - Show an existing ServiceInstance
+   *
    * Returns a ServiceInstance object
   **/
-  ShowServiceInstance(
+  showServiceInstance(
     req: operations.ShowServiceInstanceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ShowServiceInstanceResponse> {
@@ -1453,27 +1534,29 @@ export class SDK {
       req = new operations.ShowServiceInstanceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/service_instances/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ShowServiceInstanceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ShowServiceInstanceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceInstance = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.errorNotFound = httpRes?.data;
             }
             break;
@@ -1485,11 +1568,12 @@ export class SDK {
   }
 
   
-  // ShowServiceInventory - Show an existing ServiceInventory
-  /** 
+  /**
+   * showServiceInventory - Show an existing ServiceInventory
+   *
    * Returns a ServiceInventory object
   **/
-  ShowServiceInventory(
+  showServiceInventory(
     req: operations.ShowServiceInventoryRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ShowServiceInventoryResponse> {
@@ -1497,27 +1581,29 @@ export class SDK {
       req = new operations.ShowServiceInventoryRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/service_inventories/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ShowServiceInventoryResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ShowServiceInventoryResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceInventory = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.errorNotFound = httpRes?.data;
             }
             break;
@@ -1529,11 +1615,12 @@ export class SDK {
   }
 
   
-  // ShowServiceOffering - Show an existing ServiceOffering
-  /** 
+  /**
+   * showServiceOffering - Show an existing ServiceOffering
+   *
    * Returns a ServiceOffering object
   **/
-  ShowServiceOffering(
+  showServiceOffering(
     req: operations.ShowServiceOfferingRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ShowServiceOfferingResponse> {
@@ -1541,27 +1628,29 @@ export class SDK {
       req = new operations.ShowServiceOfferingRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/service_offerings/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ShowServiceOfferingResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ShowServiceOfferingResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceOffering = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.errorNotFound = httpRes?.data;
             }
             break;
@@ -1573,11 +1662,12 @@ export class SDK {
   }
 
   
-  // ShowServiceOfferingNode - Show an existing ServiceOfferingNode
-  /** 
+  /**
+   * showServiceOfferingNode - Show an existing ServiceOfferingNode
+   *
    * Returns a ServiceOfferingNode object
   **/
-  ShowServiceOfferingNode(
+  showServiceOfferingNode(
     req: operations.ShowServiceOfferingNodeRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ShowServiceOfferingNodeResponse> {
@@ -1585,27 +1675,29 @@ export class SDK {
       req = new operations.ShowServiceOfferingNodeRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/service_offering_nodes/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ShowServiceOfferingNodeResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ShowServiceOfferingNodeResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceOfferingNode = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.errorNotFound = httpRes?.data;
             }
             break;
@@ -1617,11 +1709,12 @@ export class SDK {
   }
 
   
-  // ShowServicePlan - Show an existing ServicePlan
-  /** 
+  /**
+   * showServicePlan - Show an existing ServicePlan
+   *
    * Returns a ServicePlan object
   **/
-  ShowServicePlan(
+  showServicePlan(
     req: operations.ShowServicePlanRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ShowServicePlanResponse> {
@@ -1629,27 +1722,29 @@ export class SDK {
       req = new operations.ShowServicePlanRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/service_plans/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ShowServicePlanResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ShowServicePlanResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.servicePlan = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.errorNotFound = httpRes?.data;
             }
             break;
@@ -1661,11 +1756,12 @@ export class SDK {
   }
 
   
-  // ShowSource - Show an existing Source
-  /** 
+  /**
+   * showSource - Show an existing Source
+   *
    * Returns a Source object
   **/
-  ShowSource(
+  showSource(
     req: operations.ShowSourceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ShowSourceResponse> {
@@ -1673,27 +1769,29 @@ export class SDK {
       req = new operations.ShowSourceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/sources/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ShowSourceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ShowSourceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.source = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.errorNotFound = httpRes?.data;
             }
             break;
@@ -1705,11 +1803,12 @@ export class SDK {
   }
 
   
-  // ShowTask - Show an existing Task
-  /** 
+  /**
+   * showTask - Show an existing Task
+   *
    * Returns a Task object
   **/
-  ShowTask(
+  showTask(
     req: operations.ShowTaskRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ShowTaskResponse> {
@@ -1717,27 +1816,29 @@ export class SDK {
       req = new operations.ShowTaskRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/tasks/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ShowTaskResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ShowTaskResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.task = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.errorNotFound = httpRes?.data;
             }
             break;
@@ -1749,11 +1850,12 @@ export class SDK {
   }
 
   
-  // TagServiceInventory - Tag a ServiceInventory
-  /** 
+  /**
+   * tagServiceInventory - Tag a ServiceInventory
+   *
    * Tags a ServiceInventory object
   **/
-  TagServiceInventory(
+  tagServiceInventory(
     req: operations.TagServiceInventoryRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.TagServiceInventoryResponse> {
@@ -1761,44 +1863,44 @@ export class SDK {
       req = new operations.TagServiceInventoryRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/service_inventories/{id}/tag", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.TagServiceInventoryResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.TagServiceInventoryResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.tags = httpRes?.data;
             }
             break;
-          case 304:
+          case httpRes?.status == 304:
             break;
         }
 
@@ -1808,11 +1910,12 @@ export class SDK {
   }
 
   
-  // UntagServiceInventory - Untag a ServiceInventory
-  /** 
+  /**
+   * untagServiceInventory - Untag a ServiceInventory
+   *
    * Untags a ServiceInventory object
   **/
-  UntagServiceInventory(
+  untagServiceInventory(
     req: operations.UntagServiceInventoryRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UntagServiceInventoryResponse> {
@@ -1820,39 +1923,39 @@ export class SDK {
       req = new operations.UntagServiceInventoryRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/service_inventories/{id}/untag", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UntagServiceInventoryResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.UntagServiceInventoryResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -1862,11 +1965,12 @@ export class SDK {
   }
 
   
-  // UpdateTask - Update an existing Task
-  /** 
+  /**
+   * updateTask - Update an existing Task
+   *
    * Updates a Task object
   **/
-  UpdateTask(
+  updateTask(
     req: operations.UpdateTaskRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateTaskResponse> {
@@ -1874,44 +1978,44 @@ export class SDK {
       req = new operations.UpdateTaskRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/tasks/{id}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateTaskResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.UpdateTaskResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.errorNotFound = httpRes?.data;
             }
             break;

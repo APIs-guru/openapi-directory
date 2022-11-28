@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ArchiveStateEnum } from "./archivestateenum";
 var DescribeArchiveResponse = /** @class */ (function (_super) {
     __extends(DescribeArchiveResponse, _super);
@@ -30,47 +30,47 @@ var DescribeArchiveResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ArchiveArn" }),
+        SpeakeasyMetadata({ data: "json, name=ArchiveArn" }),
         __metadata("design:type", String)
     ], DescribeArchiveResponse.prototype, "archiveArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=ArchiveName" }),
+        SpeakeasyMetadata({ data: "json, name=ArchiveName" }),
         __metadata("design:type", String)
     ], DescribeArchiveResponse.prototype, "archiveName", void 0);
     __decorate([
-        Metadata({ data: "json, name=CreationTime" }),
+        SpeakeasyMetadata({ data: "json, name=CreationTime" }),
         __metadata("design:type", Date)
     ], DescribeArchiveResponse.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], DescribeArchiveResponse.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=EventCount" }),
+        SpeakeasyMetadata({ data: "json, name=EventCount" }),
         __metadata("design:type", Number)
     ], DescribeArchiveResponse.prototype, "eventCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=EventPattern" }),
+        SpeakeasyMetadata({ data: "json, name=EventPattern" }),
         __metadata("design:type", String)
     ], DescribeArchiveResponse.prototype, "eventPattern", void 0);
     __decorate([
-        Metadata({ data: "json, name=EventSourceArn" }),
+        SpeakeasyMetadata({ data: "json, name=EventSourceArn" }),
         __metadata("design:type", String)
     ], DescribeArchiveResponse.prototype, "eventSourceArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=RetentionDays" }),
+        SpeakeasyMetadata({ data: "json, name=RetentionDays" }),
         __metadata("design:type", Number)
     ], DescribeArchiveResponse.prototype, "retentionDays", void 0);
     __decorate([
-        Metadata({ data: "json, name=SizeBytes" }),
+        SpeakeasyMetadata({ data: "json, name=SizeBytes" }),
         __metadata("design:type", Number)
     ], DescribeArchiveResponse.prototype, "sizeBytes", void 0);
     __decorate([
-        Metadata({ data: "json, name=State" }),
+        SpeakeasyMetadata({ data: "json, name=State" }),
         __metadata("design:type", String)
     ], DescribeArchiveResponse.prototype, "state", void 0);
     __decorate([
-        Metadata({ data: "json, name=StateReason" }),
+        SpeakeasyMetadata({ data: "json, name=StateReason" }),
         __metadata("design:type", String)
     ], DescribeArchiveResponse.prototype, "stateReason", void 0);
     return DescribeArchiveResponse;

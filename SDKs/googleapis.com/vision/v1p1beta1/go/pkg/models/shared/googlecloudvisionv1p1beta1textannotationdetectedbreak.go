@@ -11,6 +11,8 @@ const (
 	GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreakTypeEnumLineBreak    GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreakTypeEnum = "LINE_BREAK"
 )
 
+// GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreak
+// Detected start or end of a structural component.
 type GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreak struct {
 	IsPrefix *bool                                                          `json:"isPrefix,omitempty"`
 	Type     *GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreakTypeEnum `json:"type,omitempty"`

@@ -9,13 +9,13 @@ type ReposGetAllEnvironmentsPathParams struct {
 	Repo  string `pathParam:"style=simple,explode=false,name=repo"`
 }
 
-type ReposGetAllEnvironmentsRequest struct {
-	PathParams ReposGetAllEnvironmentsPathParams
-}
-
 type ReposGetAllEnvironments200ApplicationJSON struct {
 	Environments []shared.Environment `json:"environments,omitempty"`
 	TotalCount   *int64               `json:"total_count,omitempty"`
+}
+
+type ReposGetAllEnvironmentsRequest struct {
+	PathParams ReposGetAllEnvironmentsPathParams
 }
 
 type ReposGetAllEnvironmentsResponse struct {

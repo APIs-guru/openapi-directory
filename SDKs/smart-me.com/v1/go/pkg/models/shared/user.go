@@ -1,5 +1,7 @@
 package shared
 
+// User
+// Container Class for the Web API
 type User struct {
 	ChildUsers  []User   `json:"ChildUsers,omitempty"`
 	Email       *string  `json:"Email,omitempty"`

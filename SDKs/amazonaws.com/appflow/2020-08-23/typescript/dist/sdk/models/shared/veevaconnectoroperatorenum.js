@@ -1,0 +1,24 @@
+export var VeevaConnectorOperatorEnum;
+(function (VeevaConnectorOperatorEnum) {
+    VeevaConnectorOperatorEnum["Projection"] = "PROJECTION";
+    VeevaConnectorOperatorEnum["LessThan"] = "LESS_THAN";
+    VeevaConnectorOperatorEnum["GreaterThan"] = "GREATER_THAN";
+    VeevaConnectorOperatorEnum["Contains"] = "CONTAINS";
+    VeevaConnectorOperatorEnum["Between"] = "BETWEEN";
+    VeevaConnectorOperatorEnum["LessThanOrEqualTo"] = "LESS_THAN_OR_EQUAL_TO";
+    VeevaConnectorOperatorEnum["GreaterThanOrEqualTo"] = "GREATER_THAN_OR_EQUAL_TO";
+    VeevaConnectorOperatorEnum["EqualTo"] = "EQUAL_TO";
+    VeevaConnectorOperatorEnum["NotEqualTo"] = "NOT_EQUAL_TO";
+    VeevaConnectorOperatorEnum["Addition"] = "ADDITION";
+    VeevaConnectorOperatorEnum["Multiplication"] = "MULTIPLICATION";
+    VeevaConnectorOperatorEnum["Division"] = "DIVISION";
+    VeevaConnectorOperatorEnum["Subtraction"] = "SUBTRACTION";
+    VeevaConnectorOperatorEnum["MaskAll"] = "MASK_ALL";
+    VeevaConnectorOperatorEnum["MaskFirstN"] = "MASK_FIRST_N";
+    VeevaConnectorOperatorEnum["MaskLastN"] = "MASK_LAST_N";
+    VeevaConnectorOperatorEnum["ValidateNonNull"] = "VALIDATE_NON_NULL";
+    VeevaConnectorOperatorEnum["ValidateNonZero"] = "VALIDATE_NON_ZERO";
+    VeevaConnectorOperatorEnum["ValidateNonNegative"] = "VALIDATE_NON_NEGATIVE";
+    VeevaConnectorOperatorEnum["ValidateNumeric"] = "VALIDATE_NUMERIC";
+    VeevaConnectorOperatorEnum["NoOp"] = "NO_OP";
+})(VeevaConnectorOperatorEnum || (VeevaConnectorOperatorEnum = {}));

@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FileModeTypeEnumEnum } from "./filemodetypeenumenum";
 import { SourceFileSpecifier } from "./sourcefilespecifier";
+
 
 
 // PutFileEntry
@@ -8,15 +9,15 @@ import { SourceFileSpecifier } from "./sourcefilespecifier";
  * Information about a file added or updated as part of a commit.
 **/
 export class PutFileEntry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fileContent" })
+  @SpeakeasyMetadata({ data: "json, name=fileContent" })
   fileContent?: string;
 
-  @Metadata({ data: "json, name=fileMode" })
+  @SpeakeasyMetadata({ data: "json, name=fileMode" })
   fileMode?: FileModeTypeEnumEnum;
 
-  @Metadata({ data: "json, name=filePath" })
+  @SpeakeasyMetadata({ data: "json, name=filePath" })
   filePath: string;
 
-  @Metadata({ data: "json, name=sourceFile" })
+  @SpeakeasyMetadata({ data: "json, name=sourceFile" })
   sourceFile?: SourceFileSpecifier;
 }

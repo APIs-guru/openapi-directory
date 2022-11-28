@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GoogleCloudAssuredworkloadsV1WorkloadSaaEnrollmentResponseSetupErrorsEnum;
 (function (GoogleCloudAssuredworkloadsV1WorkloadSaaEnrollmentResponseSetupErrorsEnum) {
     GoogleCloudAssuredworkloadsV1WorkloadSaaEnrollmentResponseSetupErrorsEnum["SetupErrorUnspecified"] = "SETUP_ERROR_UNSPECIFIED";
@@ -47,11 +47,11 @@ var GoogleCloudAssuredworkloadsV1WorkloadSaaEnrollmentResponse = /** @class */ (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=setupErrors" }),
+        SpeakeasyMetadata({ data: "json, name=setupErrors" }),
         __metadata("design:type", Array)
     ], GoogleCloudAssuredworkloadsV1WorkloadSaaEnrollmentResponse.prototype, "setupErrors", void 0);
     __decorate([
-        Metadata({ data: "json, name=setupStatus" }),
+        SpeakeasyMetadata({ data: "json, name=setupStatus" }),
         __metadata("design:type", String)
     ], GoogleCloudAssuredworkloadsV1WorkloadSaaEnrollmentResponse.prototype, "setupStatus", void 0);
     return GoogleCloudAssuredworkloadsV1WorkloadSaaEnrollmentResponse;

@@ -1,23 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AllowedOperationEnum } from "./allowedoperationenum";
 
 
+
 export class CreateGrantRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AllowedOperations" })
+  @SpeakeasyMetadata({ data: "json, name=AllowedOperations" })
   allowedOperations: AllowedOperationEnum[];
 
-  @Metadata({ data: "json, name=ClientToken" })
+  @SpeakeasyMetadata({ data: "json, name=ClientToken" })
   clientToken: string;
 
-  @Metadata({ data: "json, name=GrantName" })
+  @SpeakeasyMetadata({ data: "json, name=GrantName" })
   grantName: string;
 
-  @Metadata({ data: "json, name=HomeRegion" })
+  @SpeakeasyMetadata({ data: "json, name=HomeRegion" })
   homeRegion: string;
 
-  @Metadata({ data: "json, name=LicenseArn" })
+  @SpeakeasyMetadata({ data: "json, name=LicenseArn" })
   licenseArn: string;
 
-  @Metadata({ data: "json, name=Principals" })
+  @SpeakeasyMetadata({ data: "json, name=Principals" })
   principals: string[];
 }

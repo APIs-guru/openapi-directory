@@ -1,17 +1,19 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import attributenameandvalue
-from . import objectreference
-from . import objectreference
-from . import typedlinkschemaandfacetname
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BatchAttachTypedLink:
-    attributes: List[attributenameandvalue.AttributeNameAndValue] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Attributes' }})
-    source_object_reference: objectreference.ObjectReference = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SourceObjectReference' }})
-    target_object_reference: objectreference.ObjectReference = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TargetObjectReference' }})
-    typed_link_facet: typedlinkschemaandfacetname.TypedLinkSchemaAndFacetName = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TypedLinkFacet' }})
+    r"""BatchAttachTypedLink
+    Attaches a typed link to a specified source and target object inside a <a>BatchRead</a> operation. For more information, see <a>AttachTypedLink</a> and <a>BatchReadRequest$Operations</a>.
+    """
+    
+    attributes: List[AttributeNameAndValue] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Attributes') }})
+    source_object_reference: ObjectReference = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('SourceObjectReference') }})
+    target_object_reference: ObjectReference = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('TargetObjectReference') }})
+    typed_link_facet: TypedLinkSchemaAndFacetName = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('TypedLinkFacet') }})
     

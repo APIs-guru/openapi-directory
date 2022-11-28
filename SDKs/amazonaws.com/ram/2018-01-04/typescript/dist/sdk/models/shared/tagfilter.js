@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // TagFilter
 /**
  * Used to filter information based on tags.
@@ -33,11 +33,11 @@ var TagFilter = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=tagKey" }),
+        SpeakeasyMetadata({ data: "json, name=tagKey" }),
         __metadata("design:type", String)
     ], TagFilter.prototype, "tagKey", void 0);
     __decorate([
-        Metadata({ data: "json, name=tagValues" }),
+        SpeakeasyMetadata({ data: "json, name=tagValues" }),
         __metadata("design:type", Array)
     ], TagFilter.prototype, "tagValues", void 0);
     return TagFilter;

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class PripcRequestBodyCertificateParameters extends SpeakeasyBase {
     customerId: string;
@@ -17,10 +17,6 @@ export declare class PripcRequestBody extends SpeakeasyBase {
 export declare class PripcSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class PripcRequest extends SpeakeasyBase {
-    request?: PripcRequestBody;
-    security: PripcSecurity;
 }
 export declare enum Pripc400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -103,6 +99,10 @@ export declare enum Pripc504ApplicationJsonErrorDescriptionEnum {
 export declare class Pripc504ApplicationJson extends SpeakeasyBase {
     error?: Pripc504ApplicationJsonErrorEnum;
     errorDescription?: Pripc504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class PripcRequest extends SpeakeasyBase {
+    request?: PripcRequestBody;
+    security: PripcSecurity;
 }
 export declare class PripcResponse extends SpeakeasyBase {
     contentType: string;

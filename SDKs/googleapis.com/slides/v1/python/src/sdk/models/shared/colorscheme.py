@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import themecolorpair
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ColorScheme:
-    colors: Optional[List[themecolorpair.ThemeColorPair]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'colors' }})
+    r"""ColorScheme
+    The palette of predefined colors for a page.
+    """
+    
+    colors: Optional[List[ThemeColorPair]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('colors') }})
     

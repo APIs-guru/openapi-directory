@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudOrgpolicyV1Policy
+// Defines a Cloud Organization `Policy` which is used to specify `Constraints` for configurations of Cloud Platform resources.
 type GoogleCloudOrgpolicyV1Policy struct {
 	BooleanPolicy  *GoogleCloudOrgpolicyV1BooleanPolicy `json:"booleanPolicy,omitempty"`
 	Constraint     *string                              `json:"constraint,omitempty"`

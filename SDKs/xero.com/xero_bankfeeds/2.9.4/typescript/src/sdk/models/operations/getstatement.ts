@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetStatementPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=statementID" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=statementID" })
   statementId: string;
 }
 
 
 export class GetStatementQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=statementId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=statementId" })
   statementId: string;
 }
 
 
 export class GetStatementHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Xero-Tenant-Id" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Xero-Tenant-Id" })
   xeroTenantId: string;
 }
 
 
 export class GetStatementSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oAuth2: shared.SchemeOAuth2;
 }
 
 
 export class GetStatementRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetStatementPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetStatementQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetStatementHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetStatementSecurity;
 }
 
 
 export class GetStatementResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statement?: shared.Statement;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

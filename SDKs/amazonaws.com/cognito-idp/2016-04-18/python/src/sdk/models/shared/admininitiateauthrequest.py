@@ -1,19 +1,23 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import analyticsmetadatatype
-from . import authflowtype_enum
-from . import contextdatatype
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AdminInitiateAuthRequest:
-    analytics_metadata: Optional[analyticsmetadatatype.AnalyticsMetadataType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AnalyticsMetadata' }})
-    auth_flow: authflowtype_enum.AuthFlowTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AuthFlow' }})
-    auth_parameters: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AuthParameters' }})
-    client_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ClientId' }})
-    client_metadata: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ClientMetadata' }})
-    context_data: Optional[contextdatatype.ContextDataType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ContextData' }})
-    user_pool_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'UserPoolId' }})
+    r"""AdminInitiateAuthRequest
+    Initiates the authorization request, as an administrator.
+    """
+    
+    auth_flow: AuthFlowTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('AuthFlow') }})
+    client_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ClientId') }})
+    user_pool_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('UserPoolId') }})
+    analytics_metadata: Optional[AnalyticsMetadataType] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AnalyticsMetadata') }})
+    auth_parameters: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AuthParameters') }})
+    client_metadata: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ClientMetadata') }})
+    context_data: Optional[ContextDataType] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ContextData') }})
     

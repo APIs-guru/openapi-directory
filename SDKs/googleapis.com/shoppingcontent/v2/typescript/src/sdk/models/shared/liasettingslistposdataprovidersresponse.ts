@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PosDataProviders } from "./posdataproviders";
 
 
+
 export class LiasettingsListPosDataProvidersResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=posDataProviders", elemType: shared.PosDataProviders })
+  @SpeakeasyMetadata({ data: "json, name=posDataProviders", elemType: PosDataProviders })
   posDataProviders?: PosDataProviders[];
 }

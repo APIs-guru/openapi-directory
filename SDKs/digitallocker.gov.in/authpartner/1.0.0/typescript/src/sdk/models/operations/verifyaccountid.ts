@@ -1,65 +1,66 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class VerifyAccountIdSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauthsecurity: shared.SchemeOauthsecurity;
 }
 
 
-export class VerifyAccountIdRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=multipart/form-data" })
-  request?: any;
-
-  @Metadata()
-  security: VerifyAccountIdSecurity;
-}
-
-
 export class VerifyAccountId400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: any;
 
-  @Metadata({ data: "json, name=error_description" })
+  @SpeakeasyMetadata({ data: "json, name=error_description" })
   errorDescription?: any;
 }
 
 
 export class VerifyAccountId401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: string;
 
-  @Metadata({ data: "json, name=error_description" })
+  @SpeakeasyMetadata({ data: "json, name=error_description" })
   errorDescription?: string;
 }
 
 
 export class VerifyAccountId500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: any;
 
-  @Metadata({ data: "json, name=error_description" })
+  @SpeakeasyMetadata({ data: "json, name=error_description" })
   errorDescription?: any;
 }
 
 
+export class VerifyAccountIdRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" })
+  request?: any;
+
+  @SpeakeasyMetadata()
+  security: VerifyAccountIdSecurity;
+}
+
+
 export class VerifyAccountIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   verifyAccountId400ApplicationJsonObject?: VerifyAccountId400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   verifyAccountId401ApplicationJsonObject?: VerifyAccountId401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   verifyAccountId500ApplicationJsonObject?: VerifyAccountId500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   verifyAccountResponse?: shared.VerifyAccountResponse;
 }

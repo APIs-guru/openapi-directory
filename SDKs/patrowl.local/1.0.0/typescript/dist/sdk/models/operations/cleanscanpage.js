@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var CleanScanPagePathParams = /** @class */ (function (_super) {
     __extends(CleanScanPagePathParams, _super);
     function CleanScanPagePathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=scanId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=scanId" }),
         __metadata("design:type", Number)
     ], CleanScanPagePathParams.prototype, "scanId", void 0);
     return CleanScanPagePathParams;
@@ -41,7 +41,7 @@ var CleanScanPageRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CleanScanPagePathParams)
     ], CleanScanPageRequest.prototype, "pathParams", void 0);
     return CleanScanPageRequest;
@@ -53,15 +53,15 @@ var CleanScanPageResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CleanScanPageResponse.prototype, "apiResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CleanScanPageResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CleanScanPageResponse.prototype, "statusCode", void 0);
     return CleanScanPageResponse;

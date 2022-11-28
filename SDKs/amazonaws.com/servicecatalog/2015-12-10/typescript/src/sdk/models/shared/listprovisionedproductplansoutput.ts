@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProvisionedProductPlanSummary } from "./provisionedproductplansummary";
 
 
+
 export class ListProvisionedProductPlansOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=ProvisionedProductPlans", elemType: shared.ProvisionedProductPlanSummary })
+  @SpeakeasyMetadata({ data: "json, name=ProvisionedProductPlans", elemType: ProvisionedProductPlanSummary })
   provisionedProductPlans?: ProvisionedProductPlanSummary[];
 }

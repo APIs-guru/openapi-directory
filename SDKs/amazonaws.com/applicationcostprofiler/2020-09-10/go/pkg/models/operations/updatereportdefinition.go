@@ -18,6 +18,8 @@ type UpdateReportDefinitionHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateReportDefinitionRequestBodyDestinationS3Location
+// Represents the Amazon Simple Storage Service (Amazon S3) location where AWS Application Cost Profiler reports are generated and then written to.
 type UpdateReportDefinitionRequestBodyDestinationS3Location struct {
 	Bucket *string `json:"bucket,omitempty"`
 	Prefix *string `json:"prefix,omitempty"`

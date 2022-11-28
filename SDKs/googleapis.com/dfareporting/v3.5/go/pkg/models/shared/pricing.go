@@ -32,6 +32,8 @@ const (
 	PricingPricingTypeEnumPlanningPlacementPricingTypeCpmActiveview       PricingPricingTypeEnum = "PLANNING_PLACEMENT_PRICING_TYPE_CPM_ACTIVEVIEW"
 )
 
+// Pricing
+// Pricing Information
 type Pricing struct {
 	CapCostType *PricingCapCostTypeEnum `json:"capCostType,omitempty"`
 	EndDate     *time.Time              `json:"endDate,omitempty"`

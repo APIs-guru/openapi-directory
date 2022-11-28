@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LatencyPercentile
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Latency percentile rank and value.
 **/
 export class LatencyPercentile extends SpeakeasyBase {
-  @Metadata({ data: "json, name=latencyMicros" })
+  @SpeakeasyMetadata({ data: "json, name=latencyMicros" })
   latencyMicros?: string;
 
-  @Metadata({ data: "json, name=percent" })
+  @SpeakeasyMetadata({ data: "json, name=percent" })
   percent?: number;
 }

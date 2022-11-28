@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDescribeReceiptRuleSetActionEnum(str, Enum):
     DESCRIBE_RECEIPT_RULE_SET = "DescribeReceiptRuleSet"
@@ -10,8 +14,8 @@ class PostDescribeReceiptRuleSetVersionEnum(str, Enum):
 
 @dataclass
 class PostDescribeReceiptRuleSetQueryParams:
-    action: PostDescribeReceiptRuleSetActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDescribeReceiptRuleSetVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDescribeReceiptRuleSetActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDescribeReceiptRuleSetVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDescribeReceiptRuleSetHeaders:
 
 @dataclass
 class PostDescribeReceiptRuleSetRequest:
-    query_params: PostDescribeReceiptRuleSetQueryParams = field(default=None)
-    headers: PostDescribeReceiptRuleSetHeaders = field(default=None)
+    headers: PostDescribeReceiptRuleSetHeaders = field()
+    query_params: PostDescribeReceiptRuleSetQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDescribeReceiptRuleSetResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

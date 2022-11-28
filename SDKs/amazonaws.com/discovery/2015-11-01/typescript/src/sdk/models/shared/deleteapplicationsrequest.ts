@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteApplicationsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=configurationIds" })
+  @SpeakeasyMetadata({ data: "json, name=configurationIds" })
   configurationIds: string[];
 }

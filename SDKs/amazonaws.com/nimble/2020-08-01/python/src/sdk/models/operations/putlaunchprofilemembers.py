@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class PutLaunchProfileMembersPathParams:
-    launch_profile_id: str = field(default=None, metadata={'path_param': { 'field_name': 'launchProfileId', 'style': 'simple', 'explode': False }})
-    studio_id: str = field(default=None, metadata={'path_param': { 'field_name': 'studioId', 'style': 'simple', 'explode': False }})
+    launch_profile_id: str = field(metadata={'path_param': { 'field_name': 'launchProfileId', 'style': 'simple', 'explode': False }})
+    studio_id: str = field(metadata={'path_param': { 'field_name': 'studioId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,27 +29,27 @@ class PutLaunchProfileMembersHeaders:
 @dataclass_json
 @dataclass
 class PutLaunchProfileMembersRequestBody:
-    identity_store_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'identityStoreId' }})
-    members: List[shared.NewLaunchProfileMember] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'members' }})
+    identity_store_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('identityStoreId') }})
+    members: List[shared.NewLaunchProfileMember] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('members') }})
     
 
 @dataclass
 class PutLaunchProfileMembersRequest:
-    path_params: PutLaunchProfileMembersPathParams = field(default=None)
-    headers: PutLaunchProfileMembersHeaders = field(default=None)
-    request: PutLaunchProfileMembersRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: PutLaunchProfileMembersHeaders = field()
+    path_params: PutLaunchProfileMembersPathParams = field()
+    request: PutLaunchProfileMembersRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PutLaunchProfileMembersResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_error_exception: Optional[Any] = field(default=None)
     put_launch_profile_members_response: Optional[dict[str, Any]] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_quota_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

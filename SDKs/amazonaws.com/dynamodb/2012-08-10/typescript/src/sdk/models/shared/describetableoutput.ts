@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TableDescription } from "./tabledescription";
+
 
 
 // DescribeTableOutput
@@ -7,6 +8,6 @@ import { TableDescription } from "./tabledescription";
  * Represents the output of a <code>DescribeTable</code> operation.
 **/
 export class DescribeTableOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Table" })
+  @SpeakeasyMetadata({ data: "json, name=Table" })
   table?: TableDescription;
 }

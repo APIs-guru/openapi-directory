@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // SuspendedState
 /**
  * Specifies whether the scaling activities for a scalable target are in a suspended state.
@@ -33,15 +33,15 @@ var SuspendedState = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DynamicScalingInSuspended" }),
+        SpeakeasyMetadata({ data: "json, name=DynamicScalingInSuspended" }),
         __metadata("design:type", Boolean)
     ], SuspendedState.prototype, "dynamicScalingInSuspended", void 0);
     __decorate([
-        Metadata({ data: "json, name=DynamicScalingOutSuspended" }),
+        SpeakeasyMetadata({ data: "json, name=DynamicScalingOutSuspended" }),
         __metadata("design:type", Boolean)
     ], SuspendedState.prototype, "dynamicScalingOutSuspended", void 0);
     __decorate([
-        Metadata({ data: "json, name=ScheduledScalingSuspended" }),
+        SpeakeasyMetadata({ data: "json, name=ScheduledScalingSuspended" }),
         __metadata("design:type", Boolean)
     ], SuspendedState.prototype, "scheduledScalingSuspended", void 0);
     return SuspendedState;

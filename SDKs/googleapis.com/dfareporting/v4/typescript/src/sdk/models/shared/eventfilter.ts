@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PathReportDimensionValue } from "./pathreportdimensionvalue";
 import { UvarFilter } from "./uvarfilter";
+
 
 
 // EventFilter
@@ -8,12 +9,12 @@ import { UvarFilter } from "./uvarfilter";
  * Represents a DfaReporting event filter.
 **/
 export class EventFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dimensionFilter" })
+  @SpeakeasyMetadata({ data: "json, name=dimensionFilter" })
   dimensionFilter?: PathReportDimensionValue;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=uvarFilter" })
+  @SpeakeasyMetadata({ data: "json, name=uvarFilter" })
   uvarFilter?: UvarFilter;
 }

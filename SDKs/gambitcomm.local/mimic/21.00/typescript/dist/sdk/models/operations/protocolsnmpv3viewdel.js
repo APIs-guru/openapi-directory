@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ProtocolSnmpv3ViewDelPathParams = /** @class */ (function (_super) {
     __extends(ProtocolSnmpv3ViewDelPathParams, _super);
     function ProtocolSnmpv3ViewDelPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
         __metadata("design:type", Number)
     ], ProtocolSnmpv3ViewDelPathParams.prototype, "agentNum", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=viewName" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=viewName" }),
         __metadata("design:type", String)
     ], ProtocolSnmpv3ViewDelPathParams.prototype, "viewName", void 0);
     return ProtocolSnmpv3ViewDelPathParams;
@@ -45,7 +45,7 @@ var ProtocolSnmpv3ViewDelRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProtocolSnmpv3ViewDelPathParams)
     ], ProtocolSnmpv3ViewDelRequest.prototype, "pathParams", void 0);
     return ProtocolSnmpv3ViewDelRequest;
@@ -57,15 +57,15 @@ var ProtocolSnmpv3ViewDelResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolSnmpv3ViewDelResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProtocolSnmpv3ViewDelResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolSnmpv3ViewDelResponse.prototype, "protocolSnmpv3ViewDel200ApplicationJsonString", void 0);
     return ProtocolSnmpv3ViewDelResponse;

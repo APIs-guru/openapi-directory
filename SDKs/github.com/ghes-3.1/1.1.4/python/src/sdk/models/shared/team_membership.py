@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class TeamMembershipRoleEnum(str, Enum):
     MEMBER = "member"
@@ -14,7 +15,11 @@ class TeamMembershipStateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class TeamMembership:
-    role: TeamMembershipRoleEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'role' }})
-    state: TeamMembershipStateEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
-    url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
+    r"""TeamMembership
+    Team Membership
+    """
+    
+    role: TeamMembershipRoleEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('role') }})
+    state: TeamMembershipStateEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
+    url: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('url') }})
     

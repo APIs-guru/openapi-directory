@@ -22,70 +22,70 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetcitymatchQueryParams = /** @class */ (function (_super) {
     __extends(GetcitymatchQueryParams, _super);
     function GetcitymatchQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=city" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=city" }),
         __metadata("design:type", String)
     ], GetcitymatchQueryParams.prototype, "city", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=license" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=license" }),
         __metadata("design:type", String)
     ], GetcitymatchQueryParams.prototype, "license", void 0);
     return GetcitymatchQueryParams;
 }(SpeakeasyBase));
 export { GetcitymatchQueryParams };
-var GetcitymatchRequest = /** @class */ (function (_super) {
-    __extends(GetcitymatchRequest, _super);
-    function GetcitymatchRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata(),
-        __metadata("design:type", GetcitymatchQueryParams)
-    ], GetcitymatchRequest.prototype, "queryParams", void 0);
-    return GetcitymatchRequest;
-}(SpeakeasyBase));
-export { GetcitymatchRequest };
 var Getcitymatch200ApplicationJson = /** @class */ (function (_super) {
     __extends(Getcitymatch200ApplicationJson, _super);
     function Getcitymatch200ApplicationJson() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Code" }),
+        SpeakeasyMetadata({ data: "json, name=Code" }),
         __metadata("design:type", String)
     ], Getcitymatch200ApplicationJson.prototype, "code", void 0);
     __decorate([
-        Metadata({ data: "json, name=Credits" }),
+        SpeakeasyMetadata({ data: "json, name=Credits" }),
         __metadata("design:type", String)
     ], Getcitymatch200ApplicationJson.prototype, "credits", void 0);
     __decorate([
-        Metadata({ data: "json, name=Simkey" }),
+        SpeakeasyMetadata({ data: "json, name=Simkey" }),
         __metadata("design:type", String)
     ], Getcitymatch200ApplicationJson.prototype, "simkey", void 0);
     return Getcitymatch200ApplicationJson;
 }(SpeakeasyBase));
 export { Getcitymatch200ApplicationJson };
+var GetcitymatchRequest = /** @class */ (function (_super) {
+    __extends(GetcitymatchRequest, _super);
+    function GetcitymatchRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", GetcitymatchQueryParams)
+    ], GetcitymatchRequest.prototype, "queryParams", void 0);
+    return GetcitymatchRequest;
+}(SpeakeasyBase));
+export { GetcitymatchRequest };
 var GetcitymatchResponse = /** @class */ (function (_super) {
     __extends(GetcitymatchResponse, _super);
     function GetcitymatchResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetcitymatchResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetcitymatchResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Getcitymatch200ApplicationJson)
     ], GetcitymatchResponse.prototype, "getcitymatch200ApplicationJsonObject", void 0);
     return GetcitymatchResponse;

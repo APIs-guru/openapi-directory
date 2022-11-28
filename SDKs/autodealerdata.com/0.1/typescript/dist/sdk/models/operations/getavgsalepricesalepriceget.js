@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetAvgSalePriceSalePriceGetQueryParams = /** @class */ (function (_super) {
     __extends(GetAvgSalePriceSalePriceGetQueryParams, _super);
@@ -30,15 +30,15 @@ var GetAvgSalePriceSalePriceGetQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=brandName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=brandName" }),
         __metadata("design:type", String)
     ], GetAvgSalePriceSalePriceGetQueryParams.prototype, "brandName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=jwt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=jwt" }),
         __metadata("design:type", String)
     ], GetAvgSalePriceSalePriceGetQueryParams.prototype, "jwt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=regionName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=regionName" }),
         __metadata("design:type", String)
     ], GetAvgSalePriceSalePriceGetQueryParams.prototype, "regionName", void 0);
     return GetAvgSalePriceSalePriceGetQueryParams;
@@ -50,7 +50,7 @@ var GetAvgSalePriceSalePriceGetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAvgSalePriceSalePriceGetQueryParams)
     ], GetAvgSalePriceSalePriceGetRequest.prototype, "queryParams", void 0);
     return GetAvgSalePriceSalePriceGetRequest;
@@ -62,19 +62,19 @@ var GetAvgSalePriceSalePriceGetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.BasicModelStatsResp)
     ], GetAvgSalePriceSalePriceGetResponse.prototype, "basicModelStatsResp", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetAvgSalePriceSalePriceGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.HttpValidationError)
     ], GetAvgSalePriceSalePriceGetResponse.prototype, "httpValidationError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetAvgSalePriceSalePriceGetResponse.prototype, "statusCode", void 0);
     return GetAvgSalePriceSalePriceGetResponse;

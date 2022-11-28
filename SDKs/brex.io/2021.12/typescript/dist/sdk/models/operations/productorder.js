@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ProductOrderPathParams = /** @class */ (function (_super) {
     __extends(ProductOrderPathParams, _super);
@@ -30,11 +30,11 @@ var ProductOrderPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=sku" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=sku" }),
         __metadata("design:type", String)
     ], ProductOrderPathParams.prototype, "sku", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=subjectId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=subjectId" }),
         __metadata("design:type", String)
     ], ProductOrderPathParams.prototype, "subjectId", void 0);
     return ProductOrderPathParams;
@@ -46,7 +46,7 @@ var ProductOrderSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeUserKey)
     ], ProductOrderSecurity.prototype, "userKey", void 0);
     return ProductOrderSecurity;
@@ -58,11 +58,11 @@ var ProductOrderRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProductOrderPathParams)
     ], ProductOrderRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProductOrderSecurity)
     ], ProductOrderRequest.prototype, "security", void 0);
     return ProductOrderRequest;
@@ -74,19 +74,19 @@ var ProductOrderResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProductOrderResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ProductOrderResponse.prototype, "productOrder200ApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ProductOrderResponse.prototype, "productOrderDefaultApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProductOrderResponse.prototype, "statusCode", void 0);
     return ProductOrderResponse;

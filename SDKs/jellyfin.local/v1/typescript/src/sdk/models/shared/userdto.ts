@@ -1,6 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserConfiguration } from "./userconfiguration";
+import { UserPolicyInput } from "./userpolicy";
 import { UserPolicy } from "./userpolicy";
+
+
+
+// UserDtoInput
+/** 
+ * Class UserDto.
+**/
+export class UserDtoInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=Configuration" })
+  configuration?: UserConfiguration;
+
+  @SpeakeasyMetadata({ data: "json, name=EnableAutoLogin" })
+  enableAutoLogin?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=HasConfiguredEasyPassword" })
+  hasConfiguredEasyPassword?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=HasConfiguredPassword" })
+  hasConfiguredPassword?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=HasPassword" })
+  hasPassword?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=Id" })
+  id?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=LastActivityDate" })
+  lastActivityDate?: Date;
+
+  @SpeakeasyMetadata({ data: "json, name=LastLoginDate" })
+  lastLoginDate?: Date;
+
+  @SpeakeasyMetadata({ data: "json, name=Name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=Policy" })
+  policy?: UserPolicyInput;
+
+  @SpeakeasyMetadata({ data: "json, name=PrimaryImageAspectRatio" })
+  primaryImageAspectRatio?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=PrimaryImageTag" })
+  primaryImageTag?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=ServerId" })
+  serverId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=ServerName" })
+  serverName?: string;
+}
 
 
 // UserDto
@@ -8,45 +59,45 @@ import { UserPolicy } from "./userpolicy";
  * Class UserDto.
 **/
 export class UserDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Configuration" })
+  @SpeakeasyMetadata({ data: "json, name=Configuration" })
   configuration?: UserConfiguration;
 
-  @Metadata({ data: "json, name=EnableAutoLogin" })
+  @SpeakeasyMetadata({ data: "json, name=EnableAutoLogin" })
   enableAutoLogin?: boolean;
 
-  @Metadata({ data: "json, name=HasConfiguredEasyPassword" })
+  @SpeakeasyMetadata({ data: "json, name=HasConfiguredEasyPassword" })
   hasConfiguredEasyPassword?: boolean;
 
-  @Metadata({ data: "json, name=HasConfiguredPassword" })
+  @SpeakeasyMetadata({ data: "json, name=HasConfiguredPassword" })
   hasConfiguredPassword?: boolean;
 
-  @Metadata({ data: "json, name=HasPassword" })
+  @SpeakeasyMetadata({ data: "json, name=HasPassword" })
   hasPassword?: boolean;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=LastActivityDate" })
+  @SpeakeasyMetadata({ data: "json, name=LastActivityDate" })
   lastActivityDate?: Date;
 
-  @Metadata({ data: "json, name=LastLoginDate" })
+  @SpeakeasyMetadata({ data: "json, name=LastLoginDate" })
   lastLoginDate?: Date;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Policy" })
+  @SpeakeasyMetadata({ data: "json, name=Policy" })
   policy?: UserPolicy;
 
-  @Metadata({ data: "json, name=PrimaryImageAspectRatio" })
+  @SpeakeasyMetadata({ data: "json, name=PrimaryImageAspectRatio" })
   primaryImageAspectRatio?: number;
 
-  @Metadata({ data: "json, name=PrimaryImageTag" })
+  @SpeakeasyMetadata({ data: "json, name=PrimaryImageTag" })
   primaryImageTag?: string;
 
-  @Metadata({ data: "json, name=ServerId" })
+  @SpeakeasyMetadata({ data: "json, name=ServerId" })
   serverId?: string;
 
-  @Metadata({ data: "json, name=ServerName" })
+  @SpeakeasyMetadata({ data: "json, name=ServerName" })
   serverName?: string;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudPrivatecatalogproducerV1beta1Product
@@ -7,21 +8,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * `Catalog` with display metadata and a list of `Version` resources.
 **/
 export class GoogleCloudPrivatecatalogproducerV1beta1Product extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assetType" })
+  @SpeakeasyMetadata({ data: "json, name=assetType" })
   assetType?: string;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=displayMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=displayMetadata" })
   displayMetadata?: Map<string, any>;
 
-  @Metadata({ data: "json, name=iconUri" })
+  @SpeakeasyMetadata({ data: "json, name=iconUri" })
   iconUri?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 }

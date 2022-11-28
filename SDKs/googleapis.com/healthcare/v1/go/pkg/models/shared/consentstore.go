@@ -1,5 +1,7 @@
 package shared
 
+// ConsentStore
+// Represents a consent store.
 type ConsentStore struct {
 	DefaultConsentTTL           *string           `json:"defaultConsentTtl,omitempty"`
 	EnableConsentCreateOnUpdate *bool             `json:"enableConsentCreateOnUpdate,omitempty"`

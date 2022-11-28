@@ -30,6 +30,8 @@ const (
 	GoogleAnalyticsAdminV1alphaAttributionSettingsReportingAttributionModelEnumAdsPreferredLastClick                GoogleAnalyticsAdminV1alphaAttributionSettingsReportingAttributionModelEnum = "ADS_PREFERRED_LAST_CLICK"
 )
 
+// GoogleAnalyticsAdminV1alphaAttributionSettings
+// The attribution settings used for a given property. This is a singleton resource.
 type GoogleAnalyticsAdminV1alphaAttributionSettings struct {
 	AcquisitionConversionEventLookbackWindow *GoogleAnalyticsAdminV1alphaAttributionSettingsAcquisitionConversionEventLookbackWindowEnum `json:"acquisitionConversionEventLookbackWindow,omitempty"`
 	Name                                     *string                                                                                     `json:"name,omitempty"`

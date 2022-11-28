@@ -1,52 +1,53 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostPortfolioSimulationRebalancingDriftWeightRequestBodyAssets extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assetPrices" })
+  @SpeakeasyMetadata({ data: "json, name=assetPrices" })
   assetPrices: number[];
 }
 
 
 export class PostPortfolioSimulationRebalancingDriftWeightRequestBodyPortfolios extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assetsWeights" })
+  @SpeakeasyMetadata({ data: "json, name=assetsWeights" })
   assetsWeights: number[];
 }
 
 
 export class PostPortfolioSimulationRebalancingDriftWeightRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assets", elemType: operations.PostPortfolioSimulationRebalancingDriftWeightRequestBodyAssets })
+  @SpeakeasyMetadata({ data: "json, name=assets", elemType: PostPortfolioSimulationRebalancingDriftWeightRequestBodyAssets })
   assets: PostPortfolioSimulationRebalancingDriftWeightRequestBodyAssets[];
 
-  @Metadata({ data: "json, name=portfolios", elemType: operations.PostPortfolioSimulationRebalancingDriftWeightRequestBodyPortfolios })
+  @SpeakeasyMetadata({ data: "json, name=portfolios", elemType: PostPortfolioSimulationRebalancingDriftWeightRequestBodyPortfolios })
   portfolios: PostPortfolioSimulationRebalancingDriftWeightRequestBodyPortfolios[];
 }
 
 
-export class PostPortfolioSimulationRebalancingDriftWeightRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: PostPortfolioSimulationRebalancingDriftWeightRequestBody;
-}
-
-
 export class PostPortfolioSimulationRebalancingDriftWeight200ApplicationJsonPortfolios extends SpeakeasyBase {
-  @Metadata({ data: "json, name=portfolioValues" })
+  @SpeakeasyMetadata({ data: "json, name=portfolioValues" })
   portfolioValues: number[];
 }
 
 
 export class PostPortfolioSimulationRebalancingDriftWeight200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=portfolios", elemType: operations.PostPortfolioSimulationRebalancingDriftWeight200ApplicationJsonPortfolios })
+  @SpeakeasyMetadata({ data: "json, name=portfolios", elemType: PostPortfolioSimulationRebalancingDriftWeight200ApplicationJsonPortfolios })
   portfolios: PostPortfolioSimulationRebalancingDriftWeight200ApplicationJsonPortfolios[];
 }
 
 
+export class PostPortfolioSimulationRebalancingDriftWeightRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: PostPortfolioSimulationRebalancingDriftWeightRequestBody;
+}
+
+
 export class PostPortfolioSimulationRebalancingDriftWeightResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postPortfolioSimulationRebalancingDriftWeight200ApplicationJsonObject?: PostPortfolioSimulationRebalancingDriftWeight200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

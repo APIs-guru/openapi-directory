@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CompletionResult } from "./completionresult";
 import { ResponseMetadata } from "./responsemetadata";
+
 
 
 // CompleteQueryResponse
@@ -9,9 +9,9 @@ import { ResponseMetadata } from "./responsemetadata";
  * Output only. Response of auto-complete query.
 **/
 export class CompleteQueryResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=completionResults", elemType: shared.CompletionResult })
+  @SpeakeasyMetadata({ data: "json, name=completionResults", elemType: CompletionResult })
   completionResults?: CompletionResult[];
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: ResponseMetadata;
 }

@@ -1,5 +1,19 @@
 package shared
 
+// HTTPRouteInput
+// HttpRoute is the resource defining how HTTP traffic should be routed by a Mesh or Gateway resource.
+type HTTPRouteInput struct {
+	Description *string              `json:"description,omitempty"`
+	Gateways    []string             `json:"gateways,omitempty"`
+	Hostnames   []string             `json:"hostnames,omitempty"`
+	Labels      map[string]string    `json:"labels,omitempty"`
+	Meshes      []string             `json:"meshes,omitempty"`
+	Name        *string              `json:"name,omitempty"`
+	Rules       []HTTPRouteRouteRule `json:"rules,omitempty"`
+}
+
+// HTTPRoute
+// HttpRoute is the resource defining how HTTP traffic should be routed by a Mesh or Gateway resource.
 type HTTPRoute struct {
 	CreateTime  *string              `json:"createTime,omitempty"`
 	Description *string              `json:"description,omitempty"`

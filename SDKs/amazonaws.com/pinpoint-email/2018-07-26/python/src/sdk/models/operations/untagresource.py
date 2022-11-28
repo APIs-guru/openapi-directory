@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 
 
 @dataclass
 class UntagResourceQueryParams:
-    resource_arn: str = field(default=None, metadata={'query_param': { 'field_name': 'ResourceArn', 'style': 'form', 'explode': True }})
-    tag_keys: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'TagKeys', 'style': 'form', 'explode': True }})
+    resource_arn: str = field(metadata={'query_param': { 'field_name': 'ResourceArn', 'style': 'form', 'explode': True }})
+    tag_keys: List[str] = field(metadata={'query_param': { 'field_name': 'TagKeys', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -21,17 +24,17 @@ class UntagResourceHeaders:
 
 @dataclass
 class UntagResourceRequest:
-    query_params: UntagResourceQueryParams = field(default=None)
-    headers: UntagResourceHeaders = field(default=None)
+    headers: UntagResourceHeaders = field()
+    query_params: UntagResourceQueryParams = field()
     
 
 @dataclass
 class UntagResourceResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
     concurrent_modification_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     untag_resource_response: Optional[dict[str, Any]] = field(default=None)
     

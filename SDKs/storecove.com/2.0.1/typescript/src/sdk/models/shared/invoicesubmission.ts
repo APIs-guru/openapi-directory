@@ -1,10 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Attachment } from "./attachment";
 import { Invoice } from "./invoice";
 import { InvoiceData } from "./invoicedata";
 import { InvoiceRecipient } from "./invoicerecipient";
 import { Routing } from "./routing";
+
 
 export enum InvoiceSubmissionModeEnum {
     Direct = "direct"
@@ -16,42 +16,42 @@ export enum InvoiceSubmissionModeEnum {
  * The invoice you want Storecove to process, with some meta-data.
 **/
 export class InvoiceSubmission extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attachments", elemType: shared.Attachment })
+  @SpeakeasyMetadata({ data: "json, name=attachments", elemType: Attachment })
   attachments?: Attachment[];
 
-  @Metadata({ data: "json, name=createPrimaryImage" })
+  @SpeakeasyMetadata({ data: "json, name=createPrimaryImage" })
   createPrimaryImage?: boolean;
 
-  @Metadata({ data: "json, name=document" })
+  @SpeakeasyMetadata({ data: "json, name=document" })
   document?: string;
 
-  @Metadata({ data: "json, name=documentUrl" })
+  @SpeakeasyMetadata({ data: "json, name=documentUrl" })
   documentUrl?: string;
 
-  @Metadata({ data: "json, name=idempotencyGuid" })
+  @SpeakeasyMetadata({ data: "json, name=idempotencyGuid" })
   idempotencyGuid?: string;
 
-  @Metadata({ data: "json, name=invoice" })
+  @SpeakeasyMetadata({ data: "json, name=invoice" })
   invoice?: Invoice;
 
-  @Metadata({ data: "json, name=invoiceData" })
+  @SpeakeasyMetadata({ data: "json, name=invoiceData" })
   invoiceData?: InvoiceData;
 
-  @Metadata({ data: "json, name=invoiceRecipient" })
+  @SpeakeasyMetadata({ data: "json, name=invoiceRecipient" })
   invoiceRecipient?: InvoiceRecipient;
 
-  @Metadata({ data: "json, name=legalEntityId" })
+  @SpeakeasyMetadata({ data: "json, name=legalEntityId" })
   legalEntityId?: number;
 
-  @Metadata({ data: "json, name=legalSupplierId" })
+  @SpeakeasyMetadata({ data: "json, name=legalSupplierId" })
   legalSupplierId?: number;
 
-  @Metadata({ data: "json, name=mode" })
+  @SpeakeasyMetadata({ data: "json, name=mode" })
   mode?: InvoiceSubmissionModeEnum;
 
-  @Metadata({ data: "json, name=routing" })
+  @SpeakeasyMetadata({ data: "json, name=routing" })
   routing?: Routing;
 
-  @Metadata({ data: "json, name=supplierId" })
+  @SpeakeasyMetadata({ data: "json, name=supplierId" })
   supplierId?: number;
 }

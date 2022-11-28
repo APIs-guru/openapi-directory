@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateOrderHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 export enum CreateOrderRequestBodyPaymentOptionEnum {
-    AllUpfront = "ALL_UPFRONT"
-,    NoUpfront = "NO_UPFRONT"
-,    PartialUpfront = "PARTIAL_UPFRONT"
+    AllUpfront = "ALL_UPFRONT",
+    NoUpfront = "NO_UPFRONT",
+    PartialUpfront = "PARTIAL_UPFRONT"
 }
 
 export enum CreateOrderRequestBodyPaymentTermEnum {
@@ -37,54 +38,54 @@ export enum CreateOrderRequestBodyPaymentTermEnum {
 
 
 export class CreateOrderRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LineItems", elemType: shared.LineItemRequest })
+  @SpeakeasyMetadata({ data: "json, name=LineItems", elemType: shared.LineItemRequest })
   lineItems: shared.LineItemRequest[];
 
-  @Metadata({ data: "json, name=OutpostIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=OutpostIdentifier" })
   outpostIdentifier: string;
 
-  @Metadata({ data: "json, name=PaymentOption" })
+  @SpeakeasyMetadata({ data: "json, name=PaymentOption" })
   paymentOption: CreateOrderRequestBodyPaymentOptionEnum;
 
-  @Metadata({ data: "json, name=PaymentTerm" })
+  @SpeakeasyMetadata({ data: "json, name=PaymentTerm" })
   paymentTerm?: CreateOrderRequestBodyPaymentTermEnum;
 }
 
 
 export class CreateOrderRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateOrderHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateOrderRequestBody;
 }
 
 
 export class CreateOrderResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   accessDeniedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   conflictException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createOrderOutput?: shared.CreateOrderOutput;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   notFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceQuotaExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationException?: any;
 }

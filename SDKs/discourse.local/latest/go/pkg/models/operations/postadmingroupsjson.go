@@ -8,10 +8,6 @@ type PostAdminGroupsJSONRequestBody struct {
 	Group PostAdminGroupsJSONRequestBodyGroup `json:"group"`
 }
 
-type PostAdminGroupsJSONRequest struct {
-	Request *PostAdminGroupsJSONRequestBody `request:"mediaType=application/json"`
-}
-
 type PostAdminGroupsJSON200ApplicationJSONBasicGroup struct {
 	AllowMembershipRequests         *bool   `json:"allow_membership_requests,omitempty"`
 	Automatic                       *bool   `json:"automatic,omitempty"`
@@ -46,6 +42,10 @@ type PostAdminGroupsJSON200ApplicationJSONBasicGroup struct {
 
 type PostAdminGroupsJSON200ApplicationJSON struct {
 	BasicGroup PostAdminGroupsJSON200ApplicationJSONBasicGroup `json:"basic_group"`
+}
+
+type PostAdminGroupsJSONRequest struct {
+	Request *PostAdminGroupsJSONRequestBody `request:"mediaType=application/json"`
 }
 
 type PostAdminGroupsJSONResponse struct {

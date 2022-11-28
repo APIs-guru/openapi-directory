@@ -1,5 +1,7 @@
 package shared
 
+// PythonPackage
+// PythonPackage represents a python artifact.
 type PythonPackage struct {
 	CreateTime  *string `json:"createTime,omitempty"`
 	Name        *string `json:"name,omitempty"`

@@ -8,10 +8,6 @@ type SearchTopicsQueryParams struct {
 	Q string `queryParam:"style=form,explode=true,name=q"`
 }
 
-type SearchTopicsRequest struct {
-	QueryParams SearchTopicsQueryParams
-}
-
 type SearchTopics200ApplicationJSON struct {
 	IncompleteResults bool                           `json:"incomplete_results"`
 	Items             []shared.TopicSearchResultItem `json:"items"`
@@ -21,6 +17,10 @@ type SearchTopics200ApplicationJSON struct {
 type SearchTopics415ApplicationJSON struct {
 	DocumentationURL string `json:"documentation_url"`
 	Message          string `json:"message"`
+}
+
+type SearchTopicsRequest struct {
+	QueryParams SearchTopicsQueryParams
 }
 
 type SearchTopicsResponse struct {

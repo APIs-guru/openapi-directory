@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class TranscoderProjectsLocationsJobsCreatePathParams extends SpeakeasyBase {
     parent: string;
@@ -23,7 +23,7 @@ export declare class TranscoderProjectsLocationsJobsCreateSecurity extends Speak
 export declare class TranscoderProjectsLocationsJobsCreateRequest extends SpeakeasyBase {
     pathParams: TranscoderProjectsLocationsJobsCreatePathParams;
     queryParams: TranscoderProjectsLocationsJobsCreateQueryParams;
-    request?: shared.Job;
+    request?: shared.JobInput;
     security: TranscoderProjectsLocationsJobsCreateSecurity;
 }
 export declare class TranscoderProjectsLocationsJobsCreateResponse extends SpeakeasyBase {

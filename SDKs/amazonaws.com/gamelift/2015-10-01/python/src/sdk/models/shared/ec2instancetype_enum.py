@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class Ec2InstanceTypeEnum(str, Enum):
     T2_MICRO = "t2.micro"

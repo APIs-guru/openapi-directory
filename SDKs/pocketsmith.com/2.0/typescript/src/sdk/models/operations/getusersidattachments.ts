@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetUsersIdAttachmentsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
 
 export class GetUsersIdAttachmentsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=unassigned" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=unassigned" })
   unassigned?: number;
 }
 
 
 export class GetUsersIdAttachmentsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetUsersIdAttachmentsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetUsersIdAttachmentsQueryParams;
 }
 
 
 export class GetUsersIdAttachmentsResponse extends SpeakeasyBase {
-  @Metadata({ elemType: shared.Attachment })
+  @SpeakeasyMetadata({ elemType: shared.Attachment })
   attachments?: shared.Attachment[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

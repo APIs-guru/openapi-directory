@@ -1,68 +1,69 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum ListCallsDirectionEnum {
-    Inbound = "INBOUND"
-,    Outbound = "OUTBOUND"
+    Inbound = "INBOUND",
+    Outbound = "OUTBOUND"
 }
 
 export enum ListCallsOrderEnum {
-    Desc = "DESC"
-,    Asc = "ASC"
+    Desc = "DESC",
+    Asc = "ASC"
 }
 
 export enum ListCallsStatesEnum {
-    Initializing = "INITIALIZING"
-,    Ringing = "RINGING"
-,    Active = "ACTIVE"
-,    Held = "HELD"
-,    RemoteHeld = "REMOTE_HELD"
+    Initializing = "INITIALIZING",
+    Ringing = "RINGING",
+    Active = "ACTIVE",
+    Held = "HELD",
+    RemoteHeld = "REMOTE_HELD"
 }
 
 
 export class ListCallsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=direction" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=direction" })
   direction?: ListCallsDirectionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fromDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fromDate" })
   fromDate?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=order" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=order" })
   order?: ListCallsOrderEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=size" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=size" })
   size?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=states" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=states" })
   states?: ListCallsStatesEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=toDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=toDate" })
   toDate?: number;
 }
 
 
 export class ListCallsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ListCallsQueryParams;
 }
 
 
 export class ListCallsResponse extends SpeakeasyBase {
-  @Metadata({ elemType: shared.Call })
+  @SpeakeasyMetadata({ elemType: shared.Call })
   calls?: shared.Call[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

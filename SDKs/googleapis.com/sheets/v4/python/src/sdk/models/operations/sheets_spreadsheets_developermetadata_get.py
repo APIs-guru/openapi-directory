@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class SheetsSpreadsheetsDeveloperMetadataGetPathParams:
-    metadata_id: int = field(default=None, metadata={'path_param': { 'field_name': 'metadataId', 'style': 'simple', 'explode': False }})
-    spreadsheet_id: str = field(default=None, metadata={'path_param': { 'field_name': 'spreadsheetId', 'style': 'simple', 'explode': False }})
+    metadata_id: int = field(metadata={'path_param': { 'field_name': 'metadataId', 'style': 'simple', 'explode': False }})
+    spreadsheet_id: str = field(metadata={'path_param': { 'field_name': 'spreadsheetId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +27,20 @@ class SheetsSpreadsheetsDeveloperMetadataGetQueryParams:
 
 @dataclass
 class SheetsSpreadsheetsDeveloperMetadataGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class SheetsSpreadsheetsDeveloperMetadataGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class SheetsSpreadsheetsDeveloperMetadataGetSecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -51,14 +52,14 @@ class SheetsSpreadsheetsDeveloperMetadataGetSecurity:
 
 @dataclass
 class SheetsSpreadsheetsDeveloperMetadataGetRequest:
-    path_params: SheetsSpreadsheetsDeveloperMetadataGetPathParams = field(default=None)
-    query_params: SheetsSpreadsheetsDeveloperMetadataGetQueryParams = field(default=None)
-    security: SheetsSpreadsheetsDeveloperMetadataGetSecurity = field(default=None)
+    path_params: SheetsSpreadsheetsDeveloperMetadataGetPathParams = field()
+    query_params: SheetsSpreadsheetsDeveloperMetadataGetQueryParams = field()
+    security: SheetsSpreadsheetsDeveloperMetadataGetSecurity = field()
     
 
 @dataclass
 class SheetsSpreadsheetsDeveloperMetadataGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     developer_metadata: Optional[shared.DeveloperMetadata] = field(default=None)
-    status_code: int = field(default=None)
     

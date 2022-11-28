@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetPromoteReadReplicaDbClusterActionEnum(str, Enum):
     PROMOTE_READ_REPLICA_DB_CLUSTER = "PromoteReadReplicaDBCluster"
@@ -10,9 +14,9 @@ class GetPromoteReadReplicaDbClusterVersionEnum(str, Enum):
 
 @dataclass
 class GetPromoteReadReplicaDbClusterQueryParams:
-    action: GetPromoteReadReplicaDbClusterActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    db_cluster_identifier: str = field(default=None, metadata={'query_param': { 'field_name': 'DBClusterIdentifier', 'style': 'form', 'explode': True }})
-    version: GetPromoteReadReplicaDbClusterVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetPromoteReadReplicaDbClusterActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    db_cluster_identifier: str = field(metadata={'query_param': { 'field_name': 'DBClusterIdentifier', 'style': 'form', 'explode': True }})
+    version: GetPromoteReadReplicaDbClusterVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetPromoteReadReplicaDbClusterHeaders:
 
 @dataclass
 class GetPromoteReadReplicaDbClusterRequest:
-    query_params: GetPromoteReadReplicaDbClusterQueryParams = field(default=None)
-    headers: GetPromoteReadReplicaDbClusterHeaders = field(default=None)
+    headers: GetPromoteReadReplicaDbClusterHeaders = field()
+    query_params: GetPromoteReadReplicaDbClusterQueryParams = field()
     
 
 @dataclass
 class GetPromoteReadReplicaDbClusterResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

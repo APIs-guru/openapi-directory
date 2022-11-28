@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Dpc } from "./dpc";
 /**
  * Response message of customer's listing DPCs.

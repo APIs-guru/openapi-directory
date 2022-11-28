@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .achievementconfiguration import *
 from .achievementconfigurationdetail import *
 from .achievementconfigurationlistresponse import *

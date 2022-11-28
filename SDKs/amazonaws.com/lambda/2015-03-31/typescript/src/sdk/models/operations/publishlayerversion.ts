@@ -1,33 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PublishLayerVersionPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=LayerName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=LayerName" })
   layerName: string;
 }
 
 
 export class PublishLayerVersionHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -37,69 +38,69 @@ export class PublishLayerVersionHeaders extends SpeakeasyBase {
  * A ZIP archive that contains the contents of an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">Lambda layer</a>. You can specify either an Amazon S3 location, or upload a layer archive directly.
 **/
 export class PublishLayerVersionRequestBodyContent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=S3Bucket" })
+  @SpeakeasyMetadata({ data: "json, name=S3Bucket" })
   s3Bucket?: string;
 
-  @Metadata({ data: "json, name=S3Key" })
+  @SpeakeasyMetadata({ data: "json, name=S3Key" })
   s3Key?: string;
 
-  @Metadata({ data: "json, name=S3ObjectVersion" })
+  @SpeakeasyMetadata({ data: "json, name=S3ObjectVersion" })
   s3ObjectVersion?: string;
 
-  @Metadata({ data: "json, name=ZipFile" })
+  @SpeakeasyMetadata({ data: "json, name=ZipFile" })
   zipFile?: string;
 }
 
 
 export class PublishLayerVersionRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CompatibleRuntimes" })
+  @SpeakeasyMetadata({ data: "json, name=CompatibleRuntimes" })
   compatibleRuntimes?: shared.RuntimeEnum[];
 
-  @Metadata({ data: "json, name=Content" })
+  @SpeakeasyMetadata({ data: "json, name=Content" })
   content: PublishLayerVersionRequestBodyContent;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=LicenseInfo" })
+  @SpeakeasyMetadata({ data: "json, name=LicenseInfo" })
   licenseInfo?: string;
 }
 
 
 export class PublishLayerVersionRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PublishLayerVersionPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: PublishLayerVersionHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: PublishLayerVersionRequestBody;
 }
 
 
 export class PublishLayerVersionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   codeStorageExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidParameterValueException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   publishLayerVersionResponse?: shared.PublishLayerVersionResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tooManyRequestsException?: any;
 }

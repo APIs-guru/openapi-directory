@@ -1,5 +1,7 @@
 package shared
 
+// UpdateParagraphStyleRequest
+// Updates the styling for all of the paragraphs within a Shape or Table that overlap with the given text index range.
 type UpdateParagraphStyleRequest struct {
 	CellLocation *TableCellLocation `json:"cellLocation,omitempty"`
 	Fields       *string            `json:"fields,omitempty"`

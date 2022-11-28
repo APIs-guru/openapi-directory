@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import derivedsource
-from . import sourcesplitshard
+from sdk import utils
+from . import *
 
 class SourceSplitResponseOutcomeEnum(str, Enum):
     SOURCE_SPLIT_OUTCOME_UNKNOWN = "SOURCE_SPLIT_OUTCOME_UNKNOWN"
@@ -13,7 +14,11 @@ class SourceSplitResponseOutcomeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class SourceSplitResponse:
-    bundles: Optional[List[derivedsource.DerivedSource]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bundles' }})
-    outcome: Optional[SourceSplitResponseOutcomeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'outcome' }})
-    shards: Optional[List[sourcesplitshard.SourceSplitShard]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'shards' }})
+    r"""SourceSplitResponse
+    The response to a SourceSplitRequest.
+    """
+    
+    bundles: Optional[List[DerivedSource]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('bundles') }})
+    outcome: Optional[SourceSplitResponseOutcomeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('outcome') }})
+    shards: Optional[List[SourceSplitShard]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('shards') }})
     

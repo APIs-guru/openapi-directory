@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -24,24 +28,24 @@ class ListSimulationJobsHeaders:
 @dataclass_json
 @dataclass
 class ListSimulationJobsRequestBody:
-    filters: Optional[List[shared.Filter]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'filters' }})
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxResults' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextToken' }})
+    filters: Optional[List[shared.Filter]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('filters') }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxResults') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextToken') }})
     
 
 @dataclass
 class ListSimulationJobsRequest:
-    query_params: ListSimulationJobsQueryParams = field(default=None)
-    headers: ListSimulationJobsHeaders = field(default=None)
-    request: ListSimulationJobsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ListSimulationJobsHeaders = field()
+    query_params: ListSimulationJobsQueryParams = field()
+    request: ListSimulationJobsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ListSimulationJobsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_server_exception: Optional[Any] = field(default=None)
     invalid_parameter_exception: Optional[Any] = field(default=None)
     list_simulation_jobs_response: Optional[shared.ListSimulationJobsResponse] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

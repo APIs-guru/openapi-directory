@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { InputStatusEnum } from "./inputstatusenum";
 /**
  * Information about the configuration of an input.

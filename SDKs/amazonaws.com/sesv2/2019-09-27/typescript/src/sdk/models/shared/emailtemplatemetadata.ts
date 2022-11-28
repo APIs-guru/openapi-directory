@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // EmailTemplateMetadata
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains information about an email template.
 **/
 export class EmailTemplateMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreatedTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedTimestamp" })
   createdTimestamp?: Date;
 
-  @Metadata({ data: "json, name=TemplateName" })
+  @SpeakeasyMetadata({ data: "json, name=TemplateName" })
   templateName?: string;
 }

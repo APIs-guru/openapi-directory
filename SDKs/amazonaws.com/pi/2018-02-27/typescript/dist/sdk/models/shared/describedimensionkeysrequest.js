@@ -1,0 +1,79 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { DimensionGroup } from "./dimensiongroup";
+import { ServiceTypeEnum } from "./servicetypeenum";
+var DescribeDimensionKeysRequest = /** @class */ (function (_super) {
+    __extends(DescribeDimensionKeysRequest, _super);
+    function DescribeDimensionKeysRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=EndTime" }),
+        __metadata("design:type", Date)
+    ], DescribeDimensionKeysRequest.prototype, "endTime", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=Filter" }),
+        __metadata("design:type", Map)
+    ], DescribeDimensionKeysRequest.prototype, "filter", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=GroupBy" }),
+        __metadata("design:type", DimensionGroup)
+    ], DescribeDimensionKeysRequest.prototype, "groupBy", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=Identifier" }),
+        __metadata("design:type", String)
+    ], DescribeDimensionKeysRequest.prototype, "identifier", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=MaxResults" }),
+        __metadata("design:type", Number)
+    ], DescribeDimensionKeysRequest.prototype, "maxResults", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=Metric" }),
+        __metadata("design:type", String)
+    ], DescribeDimensionKeysRequest.prototype, "metric", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=NextToken" }),
+        __metadata("design:type", String)
+    ], DescribeDimensionKeysRequest.prototype, "nextToken", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=PartitionBy" }),
+        __metadata("design:type", DimensionGroup)
+    ], DescribeDimensionKeysRequest.prototype, "partitionBy", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=PeriodInSeconds" }),
+        __metadata("design:type", Number)
+    ], DescribeDimensionKeysRequest.prototype, "periodInSeconds", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=ServiceType" }),
+        __metadata("design:type", String)
+    ], DescribeDimensionKeysRequest.prototype, "serviceType", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=StartTime" }),
+        __metadata("design:type", Date)
+    ], DescribeDimensionKeysRequest.prototype, "startTime", void 0);
+    return DescribeDimensionKeysRequest;
+}(SpeakeasyBase));
+export { DescribeDimensionKeysRequest };

@@ -1,68 +1,69 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum CategoryGoalTypeEnum {
-    Tb = "TB"
-,    Tbd = "TBD"
-,    Mf = "MF"
-,    Need = "NEED"
+    Tb = "TB",
+    Tbd = "TBD",
+    Mf = "MF",
+    Need = "NEED"
 }
 
 
 export class Category extends SpeakeasyBase {
-  @Metadata({ data: "json, name=activity" })
+  @SpeakeasyMetadata({ data: "json, name=activity" })
   activity: number;
 
-  @Metadata({ data: "json, name=balance" })
+  @SpeakeasyMetadata({ data: "json, name=balance" })
   balance: number;
 
-  @Metadata({ data: "json, name=budgeted" })
+  @SpeakeasyMetadata({ data: "json, name=budgeted" })
   budgeted: number;
 
-  @Metadata({ data: "json, name=category_group_id" })
+  @SpeakeasyMetadata({ data: "json, name=category_group_id" })
   categoryGroupId: string;
 
-  @Metadata({ data: "json, name=deleted" })
+  @SpeakeasyMetadata({ data: "json, name=deleted" })
   deleted: boolean;
 
-  @Metadata({ data: "json, name=goal_creation_month" })
+  @SpeakeasyMetadata({ data: "json, name=goal_creation_month" })
   goalCreationMonth?: Date;
 
-  @Metadata({ data: "json, name=goal_months_to_budget" })
+  @SpeakeasyMetadata({ data: "json, name=goal_months_to_budget" })
   goalMonthsToBudget?: number;
 
-  @Metadata({ data: "json, name=goal_overall_funded" })
+  @SpeakeasyMetadata({ data: "json, name=goal_overall_funded" })
   goalOverallFunded?: number;
 
-  @Metadata({ data: "json, name=goal_overall_left" })
+  @SpeakeasyMetadata({ data: "json, name=goal_overall_left" })
   goalOverallLeft?: number;
 
-  @Metadata({ data: "json, name=goal_percentage_complete" })
+  @SpeakeasyMetadata({ data: "json, name=goal_percentage_complete" })
   goalPercentageComplete?: number;
 
-  @Metadata({ data: "json, name=goal_target" })
+  @SpeakeasyMetadata({ data: "json, name=goal_target" })
   goalTarget?: number;
 
-  @Metadata({ data: "json, name=goal_target_month" })
+  @SpeakeasyMetadata({ data: "json, name=goal_target_month" })
   goalTargetMonth?: Date;
 
-  @Metadata({ data: "json, name=goal_type" })
+  @SpeakeasyMetadata({ data: "json, name=goal_type" })
   goalType?: CategoryGoalTypeEnum;
 
-  @Metadata({ data: "json, name=goal_under_funded" })
+  @SpeakeasyMetadata({ data: "json, name=goal_under_funded" })
   goalUnderFunded?: number;
 
-  @Metadata({ data: "json, name=hidden" })
+  @SpeakeasyMetadata({ data: "json, name=hidden" })
   hidden: boolean;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=note" })
+  @SpeakeasyMetadata({ data: "json, name=note" })
   note?: string;
 
-  @Metadata({ data: "json, name=original_category_group_id" })
+  @SpeakeasyMetadata({ data: "json, name=original_category_group_id" })
   originalCategoryGroupId?: string;
 }

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetCreateLbCookieStickinessPolicyActionEnum(str, Enum):
     CREATE_LB_COOKIE_STICKINESS_POLICY = "CreateLBCookieStickinessPolicy"
@@ -10,11 +14,11 @@ class GetCreateLbCookieStickinessPolicyVersionEnum(str, Enum):
 
 @dataclass
 class GetCreateLbCookieStickinessPolicyQueryParams:
-    action: GetCreateLbCookieStickinessPolicyActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetCreateLbCookieStickinessPolicyActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    load_balancer_name: str = field(metadata={'query_param': { 'field_name': 'LoadBalancerName', 'style': 'form', 'explode': True }})
+    policy_name: str = field(metadata={'query_param': { 'field_name': 'PolicyName', 'style': 'form', 'explode': True }})
+    version: GetCreateLbCookieStickinessPolicyVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     cookie_expiration_period: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'CookieExpirationPeriod', 'style': 'form', 'explode': True }})
-    load_balancer_name: str = field(default=None, metadata={'query_param': { 'field_name': 'LoadBalancerName', 'style': 'form', 'explode': True }})
-    policy_name: str = field(default=None, metadata={'query_param': { 'field_name': 'PolicyName', 'style': 'form', 'explode': True }})
-    version: GetCreateLbCookieStickinessPolicyVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetCreateLbCookieStickinessPolicyHeaders:
 
 @dataclass
 class GetCreateLbCookieStickinessPolicyRequest:
-    query_params: GetCreateLbCookieStickinessPolicyQueryParams = field(default=None)
-    headers: GetCreateLbCookieStickinessPolicyHeaders = field(default=None)
+    headers: GetCreateLbCookieStickinessPolicyHeaders = field()
+    query_params: GetCreateLbCookieStickinessPolicyQueryParams = field()
     
 
 @dataclass
 class GetCreateLbCookieStickinessPolicyResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

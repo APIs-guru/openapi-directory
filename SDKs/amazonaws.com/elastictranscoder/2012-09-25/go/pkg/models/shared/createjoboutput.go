@@ -1,5 +1,7 @@
 package shared
 
+// CreateJobOutput
+// The <code>CreateJobOutput</code> structure.
 type CreateJobOutput struct {
 	AlbumArt            *JobAlbumArt   `json:"AlbumArt,omitempty"`
 	Captions            *Captions      `json:"Captions,omitempty"`

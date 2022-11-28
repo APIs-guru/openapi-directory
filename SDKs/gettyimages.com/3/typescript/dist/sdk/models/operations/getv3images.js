@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetV3ImagesQueryParams = /** @class */ (function (_super) {
     __extends(GetV3ImagesQueryParams, _super);
@@ -30,11 +30,11 @@ var GetV3ImagesQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=fields" }),
         __metadata("design:type", Array)
     ], GetV3ImagesQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=ids" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=ids" }),
         __metadata("design:type", Array)
     ], GetV3ImagesQueryParams.prototype, "ids", void 0);
     return GetV3ImagesQueryParams;
@@ -46,7 +46,7 @@ var GetV3ImagesHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Accept-Language" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept-Language" }),
         __metadata("design:type", String)
     ], GetV3ImagesHeaders.prototype, "acceptLanguage", void 0);
     return GetV3ImagesHeaders;
@@ -58,11 +58,11 @@ var GetV3ImagesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetV3ImagesQueryParams)
     ], GetV3ImagesRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetV3ImagesHeaders)
     ], GetV3ImagesRequest.prototype, "headers", void 0);
     return GetV3ImagesRequest;
@@ -74,15 +74,15 @@ var GetV3ImagesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetV3ImagesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ImagesDetailResults)
     ], GetV3ImagesResponse.prototype, "imagesDetailResults", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetV3ImagesResponse.prototype, "statusCode", void 0);
     return GetV3ImagesResponse;

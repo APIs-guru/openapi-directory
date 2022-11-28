@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TimeRange } from "./timerange";
 
 
+
 export class ListEngagementsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=IncidentId" })
+  @SpeakeasyMetadata({ data: "json, name=IncidentId" })
   incidentId?: string;
 
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=TimeRangeValue" })
+  @SpeakeasyMetadata({ data: "json, name=TimeRangeValue" })
   timeRangeValue?: TimeRange;
 }

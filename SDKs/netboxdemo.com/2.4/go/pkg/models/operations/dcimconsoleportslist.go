@@ -13,15 +13,15 @@ type DcimConsolePortsListQueryParams struct {
 	Tag      *string `queryParam:"style=form,explode=true,name=tag"`
 }
 
-type DcimConsolePortsListRequest struct {
-	QueryParams DcimConsolePortsListQueryParams
-}
-
 type DcimConsolePortsList200ApplicationJSON struct {
 	Count    int64                `json:"count"`
 	Next     *string              `json:"next,omitempty"`
 	Previous *string              `json:"previous,omitempty"`
 	Results  []shared.ConsolePort `json:"results"`
+}
+
+type DcimConsolePortsListRequest struct {
+	QueryParams DcimConsolePortsListQueryParams
 }
 
 type DcimConsolePortsListResponse struct {

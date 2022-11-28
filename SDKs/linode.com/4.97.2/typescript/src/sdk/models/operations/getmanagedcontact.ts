@@ -1,59 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetManagedContactPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=contactId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=contactId" })
   contactId: number;
 }
 
 
-export class GetManagedContactSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class GetManagedContactSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class GetManagedContactSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: GetManagedContactSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: GetManagedContactSecurityOption2;
-}
-
-
-export class GetManagedContactRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetManagedContactPathParams;
-
-  @Metadata()
-  security: GetManagedContactSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class GetManagedContactDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class GetManagedContactRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetManagedContactPathParams;
+
+  @SpeakeasyMetadata()
+  security: GetManagedContactSecurity;
+}
+
+
 export class GetManagedContactResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   managedContact?: shared.ManagedContact;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getManagedContactDefaultApplicationJsonObject?: GetManagedContactDefaultApplicationJson;
 }

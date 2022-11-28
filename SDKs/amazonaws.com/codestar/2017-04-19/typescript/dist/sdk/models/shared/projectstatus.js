@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ProjectStatus
 /**
  * An indication of whether a project creation or deletion is failed or successful.
@@ -33,11 +33,11 @@ var ProjectStatus = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=reason" }),
+        SpeakeasyMetadata({ data: "json, name=reason" }),
         __metadata("design:type", String)
     ], ProjectStatus.prototype, "reason", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], ProjectStatus.prototype, "state", void 0);
     return ProjectStatus;

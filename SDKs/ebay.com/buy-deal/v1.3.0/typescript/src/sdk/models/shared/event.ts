@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Coupon } from "./coupon";
 import { Image } from "./image";
 import { Terms } from "./terms";
+
 
 
 // Event
@@ -10,33 +10,33 @@ import { Terms } from "./terms";
  * The result set for the event search.
 **/
 export class Event extends SpeakeasyBase {
-  @Metadata({ data: "json, name=applicableCoupons", elemType: shared.Coupon })
+  @SpeakeasyMetadata({ data: "json, name=applicableCoupons", elemType: Coupon })
   applicableCoupons?: Coupon[];
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=endDate" })
+  @SpeakeasyMetadata({ data: "json, name=endDate" })
   endDate?: string;
 
-  @Metadata({ data: "json, name=eventAffiliateWebUrl" })
+  @SpeakeasyMetadata({ data: "json, name=eventAffiliateWebUrl" })
   eventAffiliateWebUrl?: string;
 
-  @Metadata({ data: "json, name=eventId" })
+  @SpeakeasyMetadata({ data: "json, name=eventId" })
   eventId?: string;
 
-  @Metadata({ data: "json, name=eventWebUrl" })
+  @SpeakeasyMetadata({ data: "json, name=eventWebUrl" })
   eventWebUrl?: string;
 
-  @Metadata({ data: "json, name=images", elemType: shared.Image })
+  @SpeakeasyMetadata({ data: "json, name=images", elemType: Image })
   images?: Image[];
 
-  @Metadata({ data: "json, name=startDate" })
+  @SpeakeasyMetadata({ data: "json, name=startDate" })
   startDate?: string;
 
-  @Metadata({ data: "json, name=terms" })
+  @SpeakeasyMetadata({ data: "json, name=terms" })
   terms?: Terms;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

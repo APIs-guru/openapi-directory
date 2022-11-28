@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TransactionsGetRequestOptions
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An optional object to be used with the request. If specified, `options` must not be `null`.
 **/
 export class TransactionsGetRequestOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=account_ids" })
+  @SpeakeasyMetadata({ data: "json, name=account_ids" })
   accountIds?: string[];
 
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count?: number;
 
-  @Metadata({ data: "json, name=include_original_description" })
+  @SpeakeasyMetadata({ data: "json, name=include_original_description" })
   includeOriginalDescription?: boolean;
 
-  @Metadata({ data: "json, name=offset" })
+  @SpeakeasyMetadata({ data: "json, name=offset" })
   offset?: number;
 }

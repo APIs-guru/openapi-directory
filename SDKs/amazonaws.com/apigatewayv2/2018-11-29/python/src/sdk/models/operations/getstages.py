@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetStagesPathParams:
-    api_id: str = field(default=None, metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
+    api_id: str = field(metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,17 +30,17 @@ class GetStagesHeaders:
 
 @dataclass
 class GetStagesRequest:
-    path_params: GetStagesPathParams = field(default=None)
-    query_params: GetStagesQueryParams = field(default=None)
-    headers: GetStagesHeaders = field(default=None)
+    headers: GetStagesHeaders = field()
+    path_params: GetStagesPathParams = field()
+    query_params: GetStagesQueryParams = field()
     
 
 @dataclass
 class GetStagesResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_stages_response: Optional[shared.GetStagesResponse] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

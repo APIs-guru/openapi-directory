@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostUpdateServiceSpecificCredentialActionEnum(str, Enum):
     UPDATE_SERVICE_SPECIFIC_CREDENTIAL = "UpdateServiceSpecificCredential"
@@ -10,8 +14,8 @@ class PostUpdateServiceSpecificCredentialVersionEnum(str, Enum):
 
 @dataclass
 class PostUpdateServiceSpecificCredentialQueryParams:
-    action: PostUpdateServiceSpecificCredentialActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostUpdateServiceSpecificCredentialVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostUpdateServiceSpecificCredentialActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostUpdateServiceSpecificCredentialVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostUpdateServiceSpecificCredentialHeaders:
 
 @dataclass
 class PostUpdateServiceSpecificCredentialRequest:
-    query_params: PostUpdateServiceSpecificCredentialQueryParams = field(default=None)
-    headers: PostUpdateServiceSpecificCredentialHeaders = field(default=None)
+    headers: PostUpdateServiceSpecificCredentialHeaders = field()
+    query_params: PostUpdateServiceSpecificCredentialQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostUpdateServiceSpecificCredentialResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

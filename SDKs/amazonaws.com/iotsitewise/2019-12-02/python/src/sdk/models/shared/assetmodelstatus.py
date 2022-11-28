@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import errordetails
-from . import assetmodelstate_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AssetModelStatus:
-    error: Optional[errordetails.ErrorDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    state: assetmodelstate_enum.AssetModelStateEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
+    r"""AssetModelStatus
+    Contains current status information for an asset model. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-and-model-states.html\">Asset and model states</a> in the <i>IoT SiteWise User Guide</i>.
+    """
+    
+    state: AssetModelStateEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
+    error: Optional[ErrorDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
     

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EmailTemplateContent } from "./emailtemplatecontent";
+
 
 
 // GetEmailTemplateResponse
@@ -7,9 +8,9 @@ import { EmailTemplateContent } from "./emailtemplatecontent";
  * The following element is returned by the service.
 **/
 export class GetEmailTemplateResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=TemplateContent" })
+  @SpeakeasyMetadata({ data: "json, name=TemplateContent" })
   templateContent: EmailTemplateContent;
 
-  @Metadata({ data: "json, name=TemplateName" })
+  @SpeakeasyMetadata({ data: "json, name=TemplateName" })
   templateName: string;
 }

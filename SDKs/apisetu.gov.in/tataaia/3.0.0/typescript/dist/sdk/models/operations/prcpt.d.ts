@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class PrcptRequestBodyCertificateParameters extends SpeakeasyBase {
     fullName: string;
@@ -18,10 +18,6 @@ export declare class PrcptRequestBody extends SpeakeasyBase {
 export declare class PrcptSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class PrcptRequest extends SpeakeasyBase {
-    request?: PrcptRequestBody;
-    security: PrcptSecurity;
 }
 export declare enum Prcpt400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -104,6 +100,10 @@ export declare enum Prcpt504ApplicationJsonErrorDescriptionEnum {
 export declare class Prcpt504ApplicationJson extends SpeakeasyBase {
     error?: Prcpt504ApplicationJsonErrorEnum;
     errorDescription?: Prcpt504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class PrcptRequest extends SpeakeasyBase {
+    request?: PrcptRequestBody;
+    security: PrcptSecurity;
 }
 export declare class PrcptResponse extends SpeakeasyBase {
     contentType: string;

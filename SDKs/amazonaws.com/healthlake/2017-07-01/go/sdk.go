@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://healthlake.{region}.amazonaws.com",
 	"https://healthlake.{region}.amazonaws.com",
 	"http://healthlake.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/healthlake/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// CreateFhirDatastore - Creates a Data Store that can ingest and export FHIR formatted data.
 func (s *SDK) CreateFhirDatastore(ctx context.Context, request operations.CreateFhirDatastoreRequest) (*operations.CreateFhirDatastoreResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=HealthLake.CreateFHIRDatastore"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -81,7 +108,7 @@ func (s *SDK) CreateFhirDatastore(ctx context.Context, request operations.Create
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -151,8 +178,9 @@ func (s *SDK) CreateFhirDatastore(ctx context.Context, request operations.Create
 	return res, nil
 }
 
+// DeleteFhirDatastore - Deletes a Data Store.
 func (s *SDK) DeleteFhirDatastore(ctx context.Context, request operations.DeleteFhirDatastoreRequest) (*operations.DeleteFhirDatastoreResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=HealthLake.DeleteFHIRDatastore"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -172,7 +200,7 @@ func (s *SDK) DeleteFhirDatastore(ctx context.Context, request operations.Delete
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -262,8 +290,9 @@ func (s *SDK) DeleteFhirDatastore(ctx context.Context, request operations.Delete
 	return res, nil
 }
 
+// DescribeFhirDatastore - Gets the properties associated with the FHIR Data Store, including the Data Store ID, Data Store ARN, Data Store name, Data Store status, created at, Data Store type version, and Data Store endpoint.
 func (s *SDK) DescribeFhirDatastore(ctx context.Context, request operations.DescribeFhirDatastoreRequest) (*operations.DescribeFhirDatastoreResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=HealthLake.DescribeFHIRDatastore"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -283,7 +312,7 @@ func (s *SDK) DescribeFhirDatastore(ctx context.Context, request operations.Desc
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -353,8 +382,9 @@ func (s *SDK) DescribeFhirDatastore(ctx context.Context, request operations.Desc
 	return res, nil
 }
 
+// DescribeFhirExportJob - Displays the properties of a FHIR export job, including the ID, ARN, name, and the status of the job.
 func (s *SDK) DescribeFhirExportJob(ctx context.Context, request operations.DescribeFhirExportJobRequest) (*operations.DescribeFhirExportJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=HealthLake.DescribeFHIRExportJob"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -374,7 +404,7 @@ func (s *SDK) DescribeFhirExportJob(ctx context.Context, request operations.Desc
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -444,8 +474,9 @@ func (s *SDK) DescribeFhirExportJob(ctx context.Context, request operations.Desc
 	return res, nil
 }
 
+// DescribeFhirImportJob - Displays the properties of a FHIR import job, including the ID, ARN, name, and the status of the job.
 func (s *SDK) DescribeFhirImportJob(ctx context.Context, request operations.DescribeFhirImportJobRequest) (*operations.DescribeFhirImportJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=HealthLake.DescribeFHIRImportJob"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -465,7 +496,7 @@ func (s *SDK) DescribeFhirImportJob(ctx context.Context, request operations.Desc
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -535,8 +566,9 @@ func (s *SDK) DescribeFhirImportJob(ctx context.Context, request operations.Desc
 	return res, nil
 }
 
+// ListFhirDatastores - Lists all FHIR Data Stores that are in the user’s account, regardless of Data Store status.
 func (s *SDK) ListFhirDatastores(ctx context.Context, request operations.ListFhirDatastoresRequest) (*operations.ListFhirDatastoresResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=HealthLake.ListFHIRDatastores"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -558,7 +590,7 @@ func (s *SDK) ListFhirDatastores(ctx context.Context, request operations.ListFhi
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -618,8 +650,9 @@ func (s *SDK) ListFhirDatastores(ctx context.Context, request operations.ListFhi
 	return res, nil
 }
 
+// ListFhirExportJobs -  Lists all FHIR export jobs associated with an account and their statuses.
 func (s *SDK) ListFhirExportJobs(ctx context.Context, request operations.ListFhirExportJobsRequest) (*operations.ListFhirExportJobsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=HealthLake.ListFHIRExportJobs"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -641,7 +674,7 @@ func (s *SDK) ListFhirExportJobs(ctx context.Context, request operations.ListFhi
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -721,8 +754,9 @@ func (s *SDK) ListFhirExportJobs(ctx context.Context, request operations.ListFhi
 	return res, nil
 }
 
+// ListFhirImportJobs -  Lists all FHIR import jobs associated with an account and their statuses.
 func (s *SDK) ListFhirImportJobs(ctx context.Context, request operations.ListFhirImportJobsRequest) (*operations.ListFhirImportJobsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=HealthLake.ListFHIRImportJobs"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -744,7 +778,7 @@ func (s *SDK) ListFhirImportJobs(ctx context.Context, request operations.ListFhi
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -824,8 +858,9 @@ func (s *SDK) ListFhirImportJobs(ctx context.Context, request operations.ListFhi
 	return res, nil
 }
 
+// ListTagsForResource -  Returns a list of all existing tags associated with a Data Store.
 func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTagsForResourceRequest) (*operations.ListTagsForResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=HealthLake.ListTagsForResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -845,7 +880,7 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -895,8 +930,9 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 	return res, nil
 }
 
+// StartFhirExportJob - Begins a FHIR export job.
 func (s *SDK) StartFhirExportJob(ctx context.Context, request operations.StartFhirExportJobRequest) (*operations.StartFhirExportJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=HealthLake.StartFHIRExportJob"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -916,7 +952,7 @@ func (s *SDK) StartFhirExportJob(ctx context.Context, request operations.StartFh
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -996,8 +1032,9 @@ func (s *SDK) StartFhirExportJob(ctx context.Context, request operations.StartFh
 	return res, nil
 }
 
+// StartFhirImportJob - Begins a FHIR Import job.
 func (s *SDK) StartFhirImportJob(ctx context.Context, request operations.StartFhirImportJobRequest) (*operations.StartFhirImportJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=HealthLake.StartFHIRImportJob"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1017,7 +1054,7 @@ func (s *SDK) StartFhirImportJob(ctx context.Context, request operations.StartFh
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1097,8 +1134,9 @@ func (s *SDK) StartFhirImportJob(ctx context.Context, request operations.StartFh
 	return res, nil
 }
 
+// TagResource -  Adds a user specifed key and value tag to a Data Store.
 func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceRequest) (*operations.TagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=HealthLake.TagResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1118,7 +1156,7 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1168,8 +1206,9 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 	return res, nil
 }
 
+// UntagResource -  Removes tags from a Data Store.
 func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourceRequest) (*operations.UntagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=HealthLake.UntagResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1189,7 +1228,7 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

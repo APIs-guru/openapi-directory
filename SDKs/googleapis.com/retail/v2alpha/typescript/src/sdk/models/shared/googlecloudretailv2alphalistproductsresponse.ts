@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudRetailV2alphaProduct } from "./googlecloudretailv2alphaproduct";
+
 
 
 // GoogleCloudRetailV2alphaListProductsResponse
@@ -8,12 +8,12 @@ import { GoogleCloudRetailV2alphaProduct } from "./googlecloudretailv2alphaprodu
  * Response message for ProductService.ListProducts method.
 **/
 export class GoogleCloudRetailV2alphaListProductsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=products", elemType: shared.GoogleCloudRetailV2alphaProduct })
+  @SpeakeasyMetadata({ data: "json, name=products", elemType: GoogleCloudRetailV2alphaProduct })
   products?: GoogleCloudRetailV2alphaProduct[];
 
-  @Metadata({ data: "json, name=totalSize" })
+  @SpeakeasyMetadata({ data: "json, name=totalSize" })
   totalSize?: number;
 }

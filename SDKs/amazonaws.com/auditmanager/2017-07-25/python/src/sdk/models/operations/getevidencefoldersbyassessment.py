@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetEvidenceFoldersByAssessmentPathParams:
-    assessment_id: str = field(default=None, metadata={'path_param': { 'field_name': 'assessmentId', 'style': 'simple', 'explode': False }})
+    assessment_id: str = field(metadata={'path_param': { 'field_name': 'assessmentId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,18 +30,18 @@ class GetEvidenceFoldersByAssessmentHeaders:
 
 @dataclass
 class GetEvidenceFoldersByAssessmentRequest:
-    path_params: GetEvidenceFoldersByAssessmentPathParams = field(default=None)
-    query_params: GetEvidenceFoldersByAssessmentQueryParams = field(default=None)
-    headers: GetEvidenceFoldersByAssessmentHeaders = field(default=None)
+    headers: GetEvidenceFoldersByAssessmentHeaders = field()
+    path_params: GetEvidenceFoldersByAssessmentPathParams = field()
+    query_params: GetEvidenceFoldersByAssessmentQueryParams = field()
     
 
 @dataclass
 class GetEvidenceFoldersByAssessmentResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_evidence_folders_by_assessment_response: Optional[shared.GetEvidenceFoldersByAssessmentResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

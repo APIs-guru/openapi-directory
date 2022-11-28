@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -20,20 +21,20 @@ class StreetviewpublishPhotoSequenceStartUploadQueryParams:
 
 @dataclass
 class StreetviewpublishPhotoSequenceStartUploadSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class StreetviewpublishPhotoSequenceStartUploadRequest:
-    query_params: StreetviewpublishPhotoSequenceStartUploadQueryParams = field(default=None)
+    query_params: StreetviewpublishPhotoSequenceStartUploadQueryParams = field()
+    security: StreetviewpublishPhotoSequenceStartUploadSecurity = field()
     request: Optional[dict[str, Any]] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: StreetviewpublishPhotoSequenceStartUploadSecurity = field(default=None)
     
 
 @dataclass
 class StreetviewpublishPhotoSequenceStartUploadResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     upload_ref: Optional[shared.UploadRef] = field(default=None)
     

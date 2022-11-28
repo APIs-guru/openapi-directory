@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateEventNotificationHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=x-fapi-financial-id" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-fapi-financial-id" })
   xFapiFinancialId: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=x-fapi-interaction-id" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-fapi-interaction-id" })
   xFapiInteractionId?: string;
 }
 
 
 export class CreateEventNotificationRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateEventNotificationHeaders;
 
-  @Metadata({ data: "request, media_type=application/jwt" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/jwt" })
   request: string;
 }
 
 
 export class CreateEventNotificationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

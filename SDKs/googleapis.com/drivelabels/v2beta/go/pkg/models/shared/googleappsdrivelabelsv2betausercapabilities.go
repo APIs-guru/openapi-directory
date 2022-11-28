@@ -1,5 +1,7 @@
 package shared
 
+// GoogleAppsDriveLabelsV2betaUserCapabilities
+// The capabilities of a user.
 type GoogleAppsDriveLabelsV2betaUserCapabilities struct {
 	CanAccessLabelManager *bool   `json:"canAccessLabelManager,omitempty"`
 	CanAdministrateLabels *bool   `json:"canAdministrateLabels,omitempty"`

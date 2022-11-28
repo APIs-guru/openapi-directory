@@ -1,13 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import processings3uploadmode_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class MonitoringS3Output:
-    local_path: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LocalPath' }})
-    s3_upload_mode: Optional[processings3uploadmode_enum.ProcessingS3UploadModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'S3UploadMode' }})
-    s3_uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'S3Uri' }})
+    r"""MonitoringS3Output
+    Information about where and how you want to store the results of a monitoring job.
+    """
+    
+    local_path: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('LocalPath') }})
+    s3_uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('S3Uri') }})
+    s3_upload_mode: Optional[ProcessingS3UploadModeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('S3UploadMode') }})
     

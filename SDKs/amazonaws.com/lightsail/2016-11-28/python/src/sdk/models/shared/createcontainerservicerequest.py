@@ -1,18 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import containerservicedeploymentrequest
-from . import containerservicepowername_enum
-from . import tag
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateContainerServiceRequest:
-    deployment: Optional[containerservicedeploymentrequest.ContainerServiceDeploymentRequest] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deployment' }})
-    power: containerservicepowername_enum.ContainerServicePowerNameEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'power' }})
-    public_domain_names: Optional[dict[str, List[str]]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'publicDomainNames' }})
-    scale: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'scale' }})
-    service_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'serviceName' }})
-    tags: Optional[List[tag.Tag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
+    power: ContainerServicePowerNameEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('power') }})
+    scale: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('scale') }})
+    service_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('serviceName') }})
+    deployment: Optional[ContainerServiceDeploymentRequest] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('deployment') }})
+    public_domain_names: Optional[dict[str, List[str]]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('publicDomainNames') }})
+    tags: Optional[List[Tag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     

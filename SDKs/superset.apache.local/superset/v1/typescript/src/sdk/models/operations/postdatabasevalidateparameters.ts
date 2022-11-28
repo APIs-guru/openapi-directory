@@ -1,62 +1,63 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostDatabaseValidateParametersSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   jwt: shared.SchemeJwt;
 }
 
 
-export class PostDatabaseValidateParametersRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: shared.DatabaseValidateParametersSchema;
-
-  @Metadata()
-  security: PostDatabaseValidateParametersSecurity;
-}
-
-
 export class PostDatabaseValidateParameters200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PostDatabaseValidateParameters400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PostDatabaseValidateParameters422ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PostDatabaseValidateParameters500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class PostDatabaseValidateParametersRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: shared.DatabaseValidateParametersSchema;
+
+  @SpeakeasyMetadata()
+  security: PostDatabaseValidateParametersSecurity;
+}
+
+
 export class PostDatabaseValidateParametersResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postDatabaseValidateParameters200ApplicationJsonObject?: PostDatabaseValidateParameters200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postDatabaseValidateParameters400ApplicationJsonObject?: PostDatabaseValidateParameters400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postDatabaseValidateParameters422ApplicationJsonObject?: PostDatabaseValidateParameters422ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postDatabaseValidateParameters500ApplicationJsonObject?: PostDatabaseValidateParameters500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

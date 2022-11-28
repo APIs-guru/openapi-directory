@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SubscriptionTypeEnum } from "./subscriptiontypeenum";
 // CreateHsmRequest
 /**
@@ -34,35 +34,35 @@ var CreateHsmRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ClientToken" }),
+        SpeakeasyMetadata({ data: "json, name=ClientToken" }),
         __metadata("design:type", String)
     ], CreateHsmRequest.prototype, "clientToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=EniIp" }),
+        SpeakeasyMetadata({ data: "json, name=EniIp" }),
         __metadata("design:type", String)
     ], CreateHsmRequest.prototype, "eniIp", void 0);
     __decorate([
-        Metadata({ data: "json, name=ExternalId" }),
+        SpeakeasyMetadata({ data: "json, name=ExternalId" }),
         __metadata("design:type", String)
     ], CreateHsmRequest.prototype, "externalId", void 0);
     __decorate([
-        Metadata({ data: "json, name=IamRoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=IamRoleArn" }),
         __metadata("design:type", String)
     ], CreateHsmRequest.prototype, "iamRoleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=SshKey" }),
+        SpeakeasyMetadata({ data: "json, name=SshKey" }),
         __metadata("design:type", String)
     ], CreateHsmRequest.prototype, "sshKey", void 0);
     __decorate([
-        Metadata({ data: "json, name=SubnetId" }),
+        SpeakeasyMetadata({ data: "json, name=SubnetId" }),
         __metadata("design:type", String)
     ], CreateHsmRequest.prototype, "subnetId", void 0);
     __decorate([
-        Metadata({ data: "json, name=SubscriptionType" }),
+        SpeakeasyMetadata({ data: "json, name=SubscriptionType" }),
         __metadata("design:type", String)
     ], CreateHsmRequest.prototype, "subscriptionType", void 0);
     __decorate([
-        Metadata({ data: "json, name=SyslogIp" }),
+        SpeakeasyMetadata({ data: "json, name=SyslogIp" }),
         __metadata("design:type", String)
     ], CreateHsmRequest.prototype, "syslogIp", void 0);
     return CreateHsmRequest;

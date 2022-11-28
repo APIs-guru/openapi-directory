@@ -1,5 +1,7 @@
 package shared
 
+// NodePermissions
+// Node permissions
 type NodePermissions struct {
 	Change              bool `json:"change"`
 	Create              bool `json:"create"`

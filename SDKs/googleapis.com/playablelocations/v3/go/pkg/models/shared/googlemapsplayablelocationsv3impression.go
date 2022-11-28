@@ -8,6 +8,8 @@ const (
 	GoogleMapsPlayablelocationsV3ImpressionImpressionTypeEnumInteracted                GoogleMapsPlayablelocationsV3ImpressionImpressionTypeEnum = "INTERACTED"
 )
 
+// GoogleMapsPlayablelocationsV3Impression
+// Encapsulates impression event details.
 type GoogleMapsPlayablelocationsV3Impression struct {
 	GameObjectType *int32                                                     `json:"gameObjectType,omitempty"`
 	ImpressionType *GoogleMapsPlayablelocationsV3ImpressionImpressionTypeEnum `json:"impressionType,omitempty"`

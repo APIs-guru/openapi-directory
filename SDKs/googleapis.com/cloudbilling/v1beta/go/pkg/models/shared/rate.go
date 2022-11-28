@@ -1,5 +1,7 @@
 package shared
 
+// Rate
+// A SKU price consisting of tiered rates.
 type Rate struct {
 	Tiers     []RateTier `json:"tiers,omitempty"`
 	Unit      *string    `json:"unit,omitempty"`

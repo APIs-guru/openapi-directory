@@ -9,6 +9,21 @@ const (
 	GoogleCloudIntegrationsV1alphaSuspensionStateEnumLifted                     GoogleCloudIntegrationsV1alphaSuspensionStateEnum = "LIFTED"
 )
 
+// GoogleCloudIntegrationsV1alphaSuspensionInput
+// A record representing a suspension.
+type GoogleCloudIntegrationsV1alphaSuspensionInput struct {
+	ApprovalConfig       *GoogleCloudIntegrationsV1alphaSuspensionApprovalConfigInput `json:"approvalConfig,omitempty"`
+	Audit                *GoogleCloudIntegrationsV1alphaSuspensionAudit               `json:"audit,omitempty"`
+	EventExecutionInfoID *string                                                      `json:"eventExecutionInfoId,omitempty"`
+	Integration          *string                                                      `json:"integration,omitempty"`
+	Name                 *string                                                      `json:"name,omitempty"`
+	State                *GoogleCloudIntegrationsV1alphaSuspensionStateEnum           `json:"state,omitempty"`
+	SuspensionConfig     *EnterpriseCrmEventbusProtoSuspensionConfig                  `json:"suspensionConfig,omitempty"`
+	TaskID               *string                                                      `json:"taskId,omitempty"`
+}
+
+// GoogleCloudIntegrationsV1alphaSuspension
+// A record representing a suspension.
 type GoogleCloudIntegrationsV1alphaSuspension struct {
 	ApprovalConfig       *GoogleCloudIntegrationsV1alphaSuspensionApprovalConfig `json:"approvalConfig,omitempty"`
 	Audit                *GoogleCloudIntegrationsV1alphaSuspensionAudit          `json:"audit,omitempty"`

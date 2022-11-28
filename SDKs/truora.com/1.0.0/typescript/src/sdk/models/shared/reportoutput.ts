@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Report } from "./report";
+
 
 
 // ReportOutput
@@ -7,12 +8,12 @@ import { Report } from "./report";
  * Reprents the report creation result
 **/
 export class ReportOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=checks" })
+  @SpeakeasyMetadata({ data: "json, name=checks" })
   checks: string;
 
-  @Metadata({ data: "json, name=report" })
+  @SpeakeasyMetadata({ data: "json, name=report" })
   report: Report;
 
-  @Metadata({ data: "json, name=self" })
+  @SpeakeasyMetadata({ data: "json, name=self" })
   self?: string;
 }

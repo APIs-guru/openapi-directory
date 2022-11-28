@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import List,Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,34 +14,61 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
-    
-    def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
+            self._server_url = server_url
 
+        
+    
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        
+    
+
+    def config_security(self, security: shared.Security):
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        
+    
+    
     
     def deployments_create(self, request: operations.DeploymentsCreateRequest) -> operations.DeploymentsCreateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new deployment.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v3/deployments"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -68,13 +98,17 @@ class SDK:
 
     
     def deployments_delete(self, request: operations.DeploymentsDeleteRequest) -> operations.DeploymentsDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a deployment by its ID.
+        This endpoint doesn't clear the version number of messages already annotated with this deployment version.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v3/deployments/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -97,13 +131,16 @@ class SDK:
 
     
     def deployments_get(self, request: operations.DeploymentsGetRequest) -> operations.DeploymentsGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Fetch a deployment by its ID.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v3/deployments/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -131,13 +168,16 @@ class SDK:
 
     
     def deployments_get_all(self) -> operations.DeploymentsGetAllResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Fetch a list of deployments.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v3/deployments"
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -163,19 +203,20 @@ class SDK:
 
     
     def heartbeats_create(self, request: operations.HeartbeatsCreateRequest) -> operations.HeartbeatsCreateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new heartbeat.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v3/heartbeats/{logId}/{id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -198,19 +239,20 @@ class SDK:
 
     
     def logs_create(self, request: operations.LogsCreateRequest) -> operations.LogsCreateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new log.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v3/logs"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -238,13 +280,16 @@ class SDK:
 
     
     def logs_disable(self, request: operations.LogsDisableRequest) -> operations.LogsDisableResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Disable a log by its ID.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v3/logs/{id}/_disable", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -265,13 +310,16 @@ class SDK:
 
     
     def logs_enable(self, request: operations.LogsEnableRequest) -> operations.LogsEnableResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Enable a log by its ID.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v3/logs/{id}/_enable", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -292,13 +340,16 @@ class SDK:
 
     
     def logs_get(self, request: operations.LogsGetRequest) -> operations.LogsGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Fetch a log by its ID.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v3/logs/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -326,13 +377,16 @@ class SDK:
 
     
     def logs_get_all(self) -> operations.LogsGetAllResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Fetch a list of logs.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v3/logs"
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -358,19 +412,20 @@ class SDK:
 
     
     def messages_create(self, request: operations.MessagesCreateRequest) -> operations.MessagesCreateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new message.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v3/messages/{logId}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -411,19 +466,20 @@ class SDK:
 
     
     def messages_create_bulk(self, request: operations.MessagesCreateBulkRequest) -> operations.MessagesCreateBulkResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create one or more new messages.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v3/messages/{logId}/_bulk", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -453,13 +509,16 @@ class SDK:
 
     
     def messages_delete(self, request: operations.MessagesDeleteRequest) -> operations.MessagesDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a message by its ID.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v3/messages/{logId}/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -482,19 +541,20 @@ class SDK:
 
     
     def messages_delete_all(self, request: operations.MessagesDeleteAllRequest) -> operations.MessagesDeleteAllResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a list of messages by logid and query.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v3/messages/{logId}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -517,15 +577,17 @@ class SDK:
 
     
     def messages_fix(self, request: operations.MessagesFixRequest) -> operations.MessagesFixResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Fix a message by its ID.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v3/messages/{logId}/{id}/_fix", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -548,13 +610,16 @@ class SDK:
 
     
     def messages_get(self, request: operations.MessagesGetRequest) -> operations.MessagesGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Fetch a message by its ID.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v3/messages/{logId}/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -584,15 +649,17 @@ class SDK:
 
     
     def messages_get_all(self, request: operations.MessagesGetAllRequest) -> operations.MessagesGetAllResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Fetch messages from a log.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v3/messages/{logId}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -620,13 +687,16 @@ class SDK:
 
     
     def messages_hide(self, request: operations.MessagesHideRequest) -> operations.MessagesHideResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Hide a message by its ID.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v3/messages/{logId}/{id}/_hide", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -649,22 +719,22 @@ class SDK:
 
     
     def source_maps_create_or_update(self, request: operations.SourceMapsCreateOrUpdateRequest) -> operations.SourceMapsCreateOrUpdateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create or update a translation between a minified JavaScript path to the minified JavaScript and source map files.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v3/sourcemaps/{logId}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -687,13 +757,16 @@ class SDK:
 
     
     def uptime_checks_get_all(self) -> operations.UptimeChecksGetAllResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Fetch a list of uptime checks. Currently in closed beta. Get in contact to get access to this endpoint.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v3/uptimechecks"
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 

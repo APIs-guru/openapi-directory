@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ProductOptionVariantEdit extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=product_option_id" })
+  @SpeakeasyMetadata({ data: "json, name=product_option_id" })
   productOptionId?: number;
 
-  @Metadata({ data: "json, name=product_option_position" })
+  @SpeakeasyMetadata({ data: "json, name=product_option_position" })
   productOptionPosition?: number;
 
-  @Metadata({ data: "json, name=product_option_value_id" })
+  @SpeakeasyMetadata({ data: "json, name=product_option_value_id" })
   productOptionValueId?: number;
 
-  @Metadata({ data: "json, name=product_value_position" })
+  @SpeakeasyMetadata({ data: "json, name=product_value_position" })
   productValuePosition?: number;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }

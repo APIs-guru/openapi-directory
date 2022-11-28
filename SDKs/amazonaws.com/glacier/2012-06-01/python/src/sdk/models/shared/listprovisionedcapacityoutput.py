@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import provisionedcapacitydescription
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListProvisionedCapacityOutput:
-    provisioned_capacity_list: Optional[List[provisionedcapacitydescription.ProvisionedCapacityDescription]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProvisionedCapacityList' }})
+    provisioned_capacity_list: Optional[List[ProvisionedCapacityDescription]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ProvisionedCapacityList') }})
     

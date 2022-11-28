@@ -8,6 +8,8 @@ const (
 	VideoSourceEnumDrive             VideoSourceEnum = "DRIVE"
 )
 
+// Video
+// A PageElement kind representing a video.
 type Video struct {
 	ID              *string          `json:"id,omitempty"`
 	Source          *VideoSourceEnum `json:"source,omitempty"`

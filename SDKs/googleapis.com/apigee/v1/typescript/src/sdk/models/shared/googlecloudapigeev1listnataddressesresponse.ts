@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudApigeeV1NatAddress } from "./googlecloudapigeev1nataddress";
+
 
 
 // GoogleCloudApigeeV1ListNatAddressesResponse
@@ -8,9 +8,9 @@ import { GoogleCloudApigeeV1NatAddress } from "./googlecloudapigeev1nataddress";
  * Response for ListNatAddresses.
 **/
 export class GoogleCloudApigeeV1ListNatAddressesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=natAddresses", elemType: shared.GoogleCloudApigeeV1NatAddress })
+  @SpeakeasyMetadata({ data: "json, name=natAddresses", elemType: GoogleCloudApigeeV1NatAddress })
   natAddresses?: GoogleCloudApigeeV1NatAddress[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

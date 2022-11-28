@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 
 
 @dataclass
 class GetExportThermalPrintBelegeBelegUUIDPathParams:
-    beleg_uuid: str = field(default=None, metadata={'path_param': { 'field_name': 'belegUuid', 'style': 'simple', 'explode': False }})
+    beleg_uuid: str = field(metadata={'path_param': { 'field_name': 'belegUuid', 'style': 'simple', 'explode': False }})
     
 class GetExportThermalPrintBelegeBelegUUIDDialectEnum(str, Enum):
     ESCPOS = "escpos"
@@ -27,12 +28,12 @@ class GetExportThermalPrintBelegeBelegUUIDQueryParams:
 
 @dataclass
 class GetExportThermalPrintBelegeBelegUUIDRequest:
-    path_params: GetExportThermalPrintBelegeBelegUUIDPathParams = field(default=None)
-    query_params: GetExportThermalPrintBelegeBelegUUIDQueryParams = field(default=None)
+    path_params: GetExportThermalPrintBelegeBelegUUIDPathParams = field()
+    query_params: GetExportThermalPrintBelegeBelegUUIDQueryParams = field()
     
 
 @dataclass
 class GetExportThermalPrintBelegeBelegUUIDResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

@@ -32,7 +32,7 @@ type DisplayvideoInventorySourceGroupsAssignedInventorySourcesCreateSecurity str
 type DisplayvideoInventorySourceGroupsAssignedInventorySourcesCreateRequest struct {
 	PathParams  DisplayvideoInventorySourceGroupsAssignedInventorySourcesCreatePathParams
 	QueryParams DisplayvideoInventorySourceGroupsAssignedInventorySourcesCreateQueryParams
-	Request     *shared.AssignedInventorySource `request:"mediaType=application/json"`
+	Request     *shared.AssignedInventorySourceInput `request:"mediaType=application/json"`
 	Security    DisplayvideoInventorySourceGroupsAssignedInventorySourcesCreateSecurity
 }
 

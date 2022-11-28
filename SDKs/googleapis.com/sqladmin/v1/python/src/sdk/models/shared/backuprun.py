@@ -1,9 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import diskencryptionconfiguration
-from . import diskencryptionstatus
-from . import operationerror
+from sdk import utils
+from . import *
 
 class BackupRunBackupKindEnum(str, Enum):
     SQL_BACKUP_KIND_UNSPECIFIED = "SQL_BACKUP_KIND_UNSPECIFIED"
@@ -31,21 +31,25 @@ class BackupRunTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class BackupRun:
-    backup_kind: Optional[BackupRunBackupKindEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'backupKind' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    disk_encryption_configuration: Optional[diskencryptionconfiguration.DiskEncryptionConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'diskEncryptionConfiguration' }})
-    disk_encryption_status: Optional[diskencryptionstatus.DiskEncryptionStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'diskEncryptionStatus' }})
-    end_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'endTime' }})
-    enqueued_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enqueuedTime' }})
-    error: Optional[operationerror.OperationError] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    instance: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'instance' }})
-    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
-    location: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'location' }})
-    self_link: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'selfLink' }})
-    start_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'startTime' }})
-    status: Optional[BackupRunStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    time_zone: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timeZone' }})
-    type: Optional[BackupRunTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    window_start_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'windowStartTime' }})
+    r"""BackupRun
+    A BackupRun resource.
+    """
+    
+    backup_kind: Optional[BackupRunBackupKindEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('backupKind') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    disk_encryption_configuration: Optional[DiskEncryptionConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('diskEncryptionConfiguration') }})
+    disk_encryption_status: Optional[DiskEncryptionStatus] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('diskEncryptionStatus') }})
+    end_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('endTime') }})
+    enqueued_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('enqueuedTime') }})
+    error: Optional[OperationError] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    instance: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('instance') }})
+    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
+    location: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('location') }})
+    self_link: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('selfLink') }})
+    start_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('startTime') }})
+    status: Optional[BackupRunStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    time_zone: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('timeZone') }})
+    type: Optional[BackupRunTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    window_start_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('windowStartTime') }})
     

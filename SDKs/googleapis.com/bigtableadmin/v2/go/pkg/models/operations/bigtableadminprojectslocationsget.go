@@ -16,6 +16,7 @@ const (
 	BigtableadminProjectsLocationsGetViewEnumSchemaView      BigtableadminProjectsLocationsGetViewEnum = "SCHEMA_VIEW"
 	BigtableadminProjectsLocationsGetViewEnumReplicationView BigtableadminProjectsLocationsGetViewEnum = "REPLICATION_VIEW"
 	BigtableadminProjectsLocationsGetViewEnumEncryptionView  BigtableadminProjectsLocationsGetViewEnum = "ENCRYPTION_VIEW"
+	BigtableadminProjectsLocationsGetViewEnumStatsView       BigtableadminProjectsLocationsGetViewEnum = "STATS_VIEW"
 	BigtableadminProjectsLocationsGetViewEnumFull            BigtableadminProjectsLocationsGetViewEnum = "FULL"
 )
 

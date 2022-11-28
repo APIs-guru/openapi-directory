@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DfareportingConnectionTypesListPathParams:
-    profile_id: str = field(default=None, metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
+    profile_id: str = field(metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class DfareportingConnectionTypesListQueryParams:
 
 @dataclass
 class DfareportingConnectionTypesListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DfareportingConnectionTypesListRequest:
-    path_params: DfareportingConnectionTypesListPathParams = field(default=None)
-    query_params: DfareportingConnectionTypesListQueryParams = field(default=None)
-    security: DfareportingConnectionTypesListSecurity = field(default=None)
+    path_params: DfareportingConnectionTypesListPathParams = field()
+    query_params: DfareportingConnectionTypesListQueryParams = field()
+    security: DfareportingConnectionTypesListSecurity = field()
     
 
 @dataclass
 class DfareportingConnectionTypesListResponse:
+    content_type: str = field()
+    status_code: int = field()
     connection_types_list_response: Optional[shared.ConnectionTypesListResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

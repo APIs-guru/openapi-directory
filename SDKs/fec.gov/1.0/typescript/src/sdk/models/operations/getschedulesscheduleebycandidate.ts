@@ -1,79 +1,80 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum GetSchedulesScheduleEByCandidateOfficeEnum {
-    House = "house"
-,    Senate = "senate"
-,    President = "president"
+    House = "house",
+    Senate = "senate",
+    President = "president"
 }
 
 export enum GetSchedulesScheduleEByCandidateSupportOpposeEnum {
-    S = "S"
-,    O = "O"
+    S = "S",
+    O = "O"
 }
 
 
 export class GetSchedulesScheduleEByCandidateQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=api_key" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_key" })
   apiKey: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=candidate_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=candidate_id" })
   candidateId?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=committee_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=committee_id" })
   committeeId?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=cycle" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=cycle" })
   cycle?: number[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=district" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=district" })
   district?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=election_full" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=election_full" })
   electionFull?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=office" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=office" })
   office?: GetSchedulesScheduleEByCandidateOfficeEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort_hide_null" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort_hide_null" })
   sortHideNull?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort_null_only" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort_null_only" })
   sortNullOnly?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort_nulls_last" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort_nulls_last" })
   sortNullsLast?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=state" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=state" })
   state?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=support_oppose" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=support_oppose" })
   supportOppose?: GetSchedulesScheduleEByCandidateSupportOpposeEnum;
 }
 
 
 export class GetSchedulesScheduleEByCandidateRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetSchedulesScheduleEByCandidateQueryParams;
 }
 
 
 export class GetSchedulesScheduleEByCandidateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   scheduleEByCandidatePage?: shared.ScheduleEByCandidatePage;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 class ListJobsStatusEnum(str, Enum):
@@ -37,17 +41,17 @@ class ListJobsHeaders:
 
 @dataclass
 class ListJobsRequest:
-    query_params: ListJobsQueryParams = field(default=None)
-    headers: ListJobsHeaders = field(default=None)
+    headers: ListJobsHeaders = field()
+    query_params: ListJobsQueryParams = field()
     
 
 @dataclass
 class ListJobsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     invalid_request_exception: Optional[Any] = field(default=None)
     list_jobs_response: Optional[shared.ListJobsResponse] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

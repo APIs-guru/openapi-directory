@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EbsVolume } from "./ebsvolume";
 import { MarketTypeEnum } from "./markettypeenum";
 import { InstanceStatus } from "./instancestatus";
+
 
 
 // Instance
@@ -10,39 +10,39 @@ import { InstanceStatus } from "./instancestatus";
  * Represents an EC2 instance provisioned as part of cluster.
 **/
 export class Instance extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EbsVolumes", elemType: shared.EbsVolume })
+  @SpeakeasyMetadata({ data: "json, name=EbsVolumes", elemType: EbsVolume })
   ebsVolumes?: EbsVolume[];
 
-  @Metadata({ data: "json, name=Ec2InstanceId" })
+  @SpeakeasyMetadata({ data: "json, name=Ec2InstanceId" })
   ec2InstanceId?: string;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=InstanceFleetId" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceFleetId" })
   instanceFleetId?: string;
 
-  @Metadata({ data: "json, name=InstanceGroupId" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceGroupId" })
   instanceGroupId?: string;
 
-  @Metadata({ data: "json, name=InstanceType" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceType" })
   instanceType?: string;
 
-  @Metadata({ data: "json, name=Market" })
+  @SpeakeasyMetadata({ data: "json, name=Market" })
   market?: MarketTypeEnum;
 
-  @Metadata({ data: "json, name=PrivateDnsName" })
+  @SpeakeasyMetadata({ data: "json, name=PrivateDnsName" })
   privateDnsName?: string;
 
-  @Metadata({ data: "json, name=PrivateIpAddress" })
+  @SpeakeasyMetadata({ data: "json, name=PrivateIpAddress" })
   privateIpAddress?: string;
 
-  @Metadata({ data: "json, name=PublicDnsName" })
+  @SpeakeasyMetadata({ data: "json, name=PublicDnsName" })
   publicDnsName?: string;
 
-  @Metadata({ data: "json, name=PublicIpAddress" })
+  @SpeakeasyMetadata({ data: "json, name=PublicIpAddress" })
   publicIpAddress?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: InstanceStatus;
 }

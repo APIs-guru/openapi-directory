@@ -1,5 +1,7 @@
 package shared
 
+// ListFindingsResponse
+// Response message for listing findings.
 type ListFindingsResponse struct {
 	Findings      []GoogleCloudSecuritycenterV1beta1Finding `json:"findings,omitempty"`
 	NextPageToken *string                                   `json:"nextPageToken,omitempty"`

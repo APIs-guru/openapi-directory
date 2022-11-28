@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleAppsCloudidentityDevicesV1AndroidAttributes } from "./googleappscloudidentitydevicesv1androidattributes";
 export var GoogleAppsCloudidentityDevicesV1DeviceCompromisedStateEnum;
 (function (GoogleAppsCloudidentityDevicesV1DeviceCompromisedStateEnum) {
@@ -64,6 +64,42 @@ export var GoogleAppsCloudidentityDevicesV1DeviceOwnerTypeEnum;
     GoogleAppsCloudidentityDevicesV1DeviceOwnerTypeEnum["Company"] = "COMPANY";
     GoogleAppsCloudidentityDevicesV1DeviceOwnerTypeEnum["Byod"] = "BYOD";
 })(GoogleAppsCloudidentityDevicesV1DeviceOwnerTypeEnum || (GoogleAppsCloudidentityDevicesV1DeviceOwnerTypeEnum = {}));
+// GoogleAppsCloudidentityDevicesV1DeviceInput
+/**
+ *  A Device within the Cloud Identity Devices API. Represents a Device known to Google Cloud, independent of the device ownership, type, and whether it is assigned or in use by a user.
+**/
+var GoogleAppsCloudidentityDevicesV1DeviceInput = /** @class */ (function (_super) {
+    __extends(GoogleAppsCloudidentityDevicesV1DeviceInput, _super);
+    function GoogleAppsCloudidentityDevicesV1DeviceInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=androidSpecificAttributes" }),
+        __metadata("design:type", GoogleAppsCloudidentityDevicesV1AndroidAttributes)
+    ], GoogleAppsCloudidentityDevicesV1DeviceInput.prototype, "androidSpecificAttributes", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=assetTag" }),
+        __metadata("design:type", String)
+    ], GoogleAppsCloudidentityDevicesV1DeviceInput.prototype, "assetTag", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=deviceId" }),
+        __metadata("design:type", String)
+    ], GoogleAppsCloudidentityDevicesV1DeviceInput.prototype, "deviceId", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=lastSyncTime" }),
+        __metadata("design:type", String)
+    ], GoogleAppsCloudidentityDevicesV1DeviceInput.prototype, "lastSyncTime", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=serialNumber" }),
+        __metadata("design:type", String)
+    ], GoogleAppsCloudidentityDevicesV1DeviceInput.prototype, "serialNumber", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=wifiMacAddresses" }),
+        __metadata("design:type", Array)
+    ], GoogleAppsCloudidentityDevicesV1DeviceInput.prototype, "wifiMacAddresses", void 0);
+    return GoogleAppsCloudidentityDevicesV1DeviceInput;
+}(SpeakeasyBase));
+export { GoogleAppsCloudidentityDevicesV1DeviceInput };
 // GoogleAppsCloudidentityDevicesV1Device
 /**
  *  A Device within the Cloud Identity Devices API. Represents a Device known to Google Cloud, independent of the device ownership, type, and whether it is assigned or in use by a user.
@@ -74,119 +110,119 @@ var GoogleAppsCloudidentityDevicesV1Device = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=androidSpecificAttributes" }),
+        SpeakeasyMetadata({ data: "json, name=androidSpecificAttributes" }),
         __metadata("design:type", GoogleAppsCloudidentityDevicesV1AndroidAttributes)
     ], GoogleAppsCloudidentityDevicesV1Device.prototype, "androidSpecificAttributes", void 0);
     __decorate([
-        Metadata({ data: "json, name=assetTag" }),
+        SpeakeasyMetadata({ data: "json, name=assetTag" }),
         __metadata("design:type", String)
     ], GoogleAppsCloudidentityDevicesV1Device.prototype, "assetTag", void 0);
     __decorate([
-        Metadata({ data: "json, name=basebandVersion" }),
+        SpeakeasyMetadata({ data: "json, name=basebandVersion" }),
         __metadata("design:type", String)
     ], GoogleAppsCloudidentityDevicesV1Device.prototype, "basebandVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=bootloaderVersion" }),
+        SpeakeasyMetadata({ data: "json, name=bootloaderVersion" }),
         __metadata("design:type", String)
     ], GoogleAppsCloudidentityDevicesV1Device.prototype, "bootloaderVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=brand" }),
+        SpeakeasyMetadata({ data: "json, name=brand" }),
         __metadata("design:type", String)
     ], GoogleAppsCloudidentityDevicesV1Device.prototype, "brand", void 0);
     __decorate([
-        Metadata({ data: "json, name=buildNumber" }),
+        SpeakeasyMetadata({ data: "json, name=buildNumber" }),
         __metadata("design:type", String)
     ], GoogleAppsCloudidentityDevicesV1Device.prototype, "buildNumber", void 0);
     __decorate([
-        Metadata({ data: "json, name=compromisedState" }),
+        SpeakeasyMetadata({ data: "json, name=compromisedState" }),
         __metadata("design:type", String)
     ], GoogleAppsCloudidentityDevicesV1Device.prototype, "compromisedState", void 0);
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", String)
     ], GoogleAppsCloudidentityDevicesV1Device.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=deviceId" }),
+        SpeakeasyMetadata({ data: "json, name=deviceId" }),
         __metadata("design:type", String)
     ], GoogleAppsCloudidentityDevicesV1Device.prototype, "deviceId", void 0);
     __decorate([
-        Metadata({ data: "json, name=deviceType" }),
+        SpeakeasyMetadata({ data: "json, name=deviceType" }),
         __metadata("design:type", String)
     ], GoogleAppsCloudidentityDevicesV1Device.prototype, "deviceType", void 0);
     __decorate([
-        Metadata({ data: "json, name=enabledDeveloperOptions" }),
+        SpeakeasyMetadata({ data: "json, name=enabledDeveloperOptions" }),
         __metadata("design:type", Boolean)
     ], GoogleAppsCloudidentityDevicesV1Device.prototype, "enabledDeveloperOptions", void 0);
     __decorate([
-        Metadata({ data: "json, name=enabledUsbDebugging" }),
+        SpeakeasyMetadata({ data: "json, name=enabledUsbDebugging" }),
         __metadata("design:type", Boolean)
     ], GoogleAppsCloudidentityDevicesV1Device.prototype, "enabledUsbDebugging", void 0);
     __decorate([
-        Metadata({ data: "json, name=encryptionState" }),
+        SpeakeasyMetadata({ data: "json, name=encryptionState" }),
         __metadata("design:type", String)
     ], GoogleAppsCloudidentityDevicesV1Device.prototype, "encryptionState", void 0);
     __decorate([
-        Metadata({ data: "json, name=imei" }),
+        SpeakeasyMetadata({ data: "json, name=imei" }),
         __metadata("design:type", String)
     ], GoogleAppsCloudidentityDevicesV1Device.prototype, "imei", void 0);
     __decorate([
-        Metadata({ data: "json, name=kernelVersion" }),
+        SpeakeasyMetadata({ data: "json, name=kernelVersion" }),
         __metadata("design:type", String)
     ], GoogleAppsCloudidentityDevicesV1Device.prototype, "kernelVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastSyncTime" }),
+        SpeakeasyMetadata({ data: "json, name=lastSyncTime" }),
         __metadata("design:type", String)
     ], GoogleAppsCloudidentityDevicesV1Device.prototype, "lastSyncTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=managementState" }),
+        SpeakeasyMetadata({ data: "json, name=managementState" }),
         __metadata("design:type", String)
     ], GoogleAppsCloudidentityDevicesV1Device.prototype, "managementState", void 0);
     __decorate([
-        Metadata({ data: "json, name=manufacturer" }),
+        SpeakeasyMetadata({ data: "json, name=manufacturer" }),
         __metadata("design:type", String)
     ], GoogleAppsCloudidentityDevicesV1Device.prototype, "manufacturer", void 0);
     __decorate([
-        Metadata({ data: "json, name=meid" }),
+        SpeakeasyMetadata({ data: "json, name=meid" }),
         __metadata("design:type", String)
     ], GoogleAppsCloudidentityDevicesV1Device.prototype, "meid", void 0);
     __decorate([
-        Metadata({ data: "json, name=model" }),
+        SpeakeasyMetadata({ data: "json, name=model" }),
         __metadata("design:type", String)
     ], GoogleAppsCloudidentityDevicesV1Device.prototype, "model", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], GoogleAppsCloudidentityDevicesV1Device.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=networkOperator" }),
+        SpeakeasyMetadata({ data: "json, name=networkOperator" }),
         __metadata("design:type", String)
     ], GoogleAppsCloudidentityDevicesV1Device.prototype, "networkOperator", void 0);
     __decorate([
-        Metadata({ data: "json, name=osVersion" }),
+        SpeakeasyMetadata({ data: "json, name=osVersion" }),
         __metadata("design:type", String)
     ], GoogleAppsCloudidentityDevicesV1Device.prototype, "osVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=otherAccounts" }),
+        SpeakeasyMetadata({ data: "json, name=otherAccounts" }),
         __metadata("design:type", Array)
     ], GoogleAppsCloudidentityDevicesV1Device.prototype, "otherAccounts", void 0);
     __decorate([
-        Metadata({ data: "json, name=ownerType" }),
+        SpeakeasyMetadata({ data: "json, name=ownerType" }),
         __metadata("design:type", String)
     ], GoogleAppsCloudidentityDevicesV1Device.prototype, "ownerType", void 0);
     __decorate([
-        Metadata({ data: "json, name=releaseVersion" }),
+        SpeakeasyMetadata({ data: "json, name=releaseVersion" }),
         __metadata("design:type", String)
     ], GoogleAppsCloudidentityDevicesV1Device.prototype, "releaseVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=securityPatchTime" }),
+        SpeakeasyMetadata({ data: "json, name=securityPatchTime" }),
         __metadata("design:type", String)
     ], GoogleAppsCloudidentityDevicesV1Device.prototype, "securityPatchTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=serialNumber" }),
+        SpeakeasyMetadata({ data: "json, name=serialNumber" }),
         __metadata("design:type", String)
     ], GoogleAppsCloudidentityDevicesV1Device.prototype, "serialNumber", void 0);
     __decorate([
-        Metadata({ data: "json, name=wifiMacAddresses" }),
+        SpeakeasyMetadata({ data: "json, name=wifiMacAddresses" }),
         __metadata("design:type", Array)
     ], GoogleAppsCloudidentityDevicesV1Device.prototype, "wifiMacAddresses", void 0);
     return GoogleAppsCloudidentityDevicesV1Device;

@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { JobStatusEnum } from "./jobstatusenum";
 
 
+
 export class StartFhirExportJobResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DatastoreId" })
+  @SpeakeasyMetadata({ data: "json, name=DatastoreId" })
   datastoreId?: string;
 
-  @Metadata({ data: "json, name=JobId" })
+  @SpeakeasyMetadata({ data: "json, name=JobId" })
   jobId: string;
 
-  @Metadata({ data: "json, name=JobStatus" })
+  @SpeakeasyMetadata({ data: "json, name=JobStatus" })
   jobStatus: JobStatusEnum;
 }

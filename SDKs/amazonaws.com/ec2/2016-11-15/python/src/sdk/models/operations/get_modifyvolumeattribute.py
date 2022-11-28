@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetModifyVolumeAttributeActionEnum(str, Enum):
     MODIFY_VOLUME_ATTRIBUTE = "ModifyVolumeAttribute"
@@ -7,6 +11,10 @@ class GetModifyVolumeAttributeActionEnum(str, Enum):
 
 @dataclass
 class GetModifyVolumeAttributeAutoEnableIo:
+    r"""GetModifyVolumeAttributeAutoEnableIo
+    Describes a value for a resource attribute that is a Boolean value.
+    """
+    
     value: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'Value' }})
     
 class GetModifyVolumeAttributeVersionEnum(str, Enum):
@@ -15,11 +23,11 @@ class GetModifyVolumeAttributeVersionEnum(str, Enum):
 
 @dataclass
 class GetModifyVolumeAttributeQueryParams:
-    action: GetModifyVolumeAttributeActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetModifyVolumeAttributeActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetModifyVolumeAttributeVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    volume_id: str = field(metadata={'query_param': { 'field_name': 'VolumeId', 'style': 'form', 'explode': True }})
     auto_enable_io: Optional[GetModifyVolumeAttributeAutoEnableIo] = field(default=None, metadata={'query_param': { 'field_name': 'AutoEnableIO', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    version: GetModifyVolumeAttributeVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
-    volume_id: str = field(default=None, metadata={'query_param': { 'field_name': 'VolumeId', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -35,12 +43,12 @@ class GetModifyVolumeAttributeHeaders:
 
 @dataclass
 class GetModifyVolumeAttributeRequest:
-    query_params: GetModifyVolumeAttributeQueryParams = field(default=None)
-    headers: GetModifyVolumeAttributeHeaders = field(default=None)
+    headers: GetModifyVolumeAttributeHeaders = field()
+    query_params: GetModifyVolumeAttributeQueryParams = field()
     
 
 @dataclass
 class GetModifyVolumeAttributeResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

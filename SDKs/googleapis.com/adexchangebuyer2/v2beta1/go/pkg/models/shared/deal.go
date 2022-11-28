@@ -34,6 +34,8 @@ const (
 	DealSyndicationProductEnumGames                         DealSyndicationProductEnum = "GAMES"
 )
 
+// Deal
+// A deal represents a segment of inventory for displaying ads on. A proposal can contain multiple deals. A deal contains the terms and targeting information that is used for serving.
 type Deal struct {
 	AvailableEndTime               *string                                 `json:"availableEndTime,omitempty"`
 	AvailableStartTime             *string                                 `json:"availableStartTime,omitempty"`
@@ -60,4 +62,23 @@ type Deal struct {
 	TargetingCriterion             []TargetingCriteria                     `json:"targetingCriterion,omitempty"`
 	UpdateTime                     *string                                 `json:"updateTime,omitempty"`
 	WebPropertyCode                *string                                 `json:"webPropertyCode,omitempty"`
+}
+
+// DealInput
+// A deal represents a segment of inventory for displaying ads on. A proposal can contain multiple deals. A deal contains the terms and targeting information that is used for serving.
+type DealInput struct {
+	AvailableEndTime      *string                     `json:"availableEndTime,omitempty"`
+	AvailableStartTime    *string                     `json:"availableStartTime,omitempty"`
+	BuyerPrivateData      *PrivateData                `json:"buyerPrivateData,omitempty"`
+	CreateProductID       *string                     `json:"createProductId,omitempty"`
+	CreateProductRevision *string                     `json:"createProductRevision,omitempty"`
+	CreativeRestrictions  *CreativeRestrictions       `json:"creativeRestrictions,omitempty"`
+	DealServingMetadata   *DealServingMetadata        `json:"dealServingMetadata,omitempty"`
+	DealTerms             *DealTerms                  `json:"dealTerms,omitempty"`
+	Description           *string                     `json:"description,omitempty"`
+	DisplayName           *string                     `json:"displayName,omitempty"`
+	SyndicationProduct    *DealSyndicationProductEnum `json:"syndicationProduct,omitempty"`
+	Targeting             *MarketplaceTargeting       `json:"targeting,omitempty"`
+	TargetingCriterion    []TargetingCriteria         `json:"targetingCriterion,omitempty"`
+	WebPropertyCode       *string                     `json:"webPropertyCode,omitempty"`
 }

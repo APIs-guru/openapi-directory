@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class StopReplicationToReplicaResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ARN" })
+  @SpeakeasyMetadata({ data: "json, name=ARN" })
   arn?: string;
 }

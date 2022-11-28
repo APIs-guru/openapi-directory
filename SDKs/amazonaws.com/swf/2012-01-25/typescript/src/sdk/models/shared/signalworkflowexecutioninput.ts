@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SignalWorkflowExecutionInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=domain" })
+  @SpeakeasyMetadata({ data: "json, name=domain" })
   domain: string;
 
-  @Metadata({ data: "json, name=input" })
+  @SpeakeasyMetadata({ data: "json, name=input" })
   input?: string;
 
-  @Metadata({ data: "json, name=runId" })
+  @SpeakeasyMetadata({ data: "json, name=runId" })
   runId?: string;
 
-  @Metadata({ data: "json, name=signalName" })
+  @SpeakeasyMetadata({ data: "json, name=signalName" })
   signalName: string;
 
-  @Metadata({ data: "json, name=workflowId" })
+  @SpeakeasyMetadata({ data: "json, name=workflowId" })
   workflowId: string;
 }

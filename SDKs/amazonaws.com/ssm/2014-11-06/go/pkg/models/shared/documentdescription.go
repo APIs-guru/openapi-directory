@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// DocumentDescription
+// Describes a Amazon Web Services Systems Manager document (SSM document).
 type DocumentDescription struct {
 	ApprovedVersion        *string                 `json:"ApprovedVersion,omitempty"`
 	AttachmentsInformation []AttachmentInformation `json:"AttachmentsInformation,omitempty"`

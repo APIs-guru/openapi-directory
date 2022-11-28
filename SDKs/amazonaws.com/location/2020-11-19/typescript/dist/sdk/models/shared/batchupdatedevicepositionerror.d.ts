@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { BatchItemError } from "./batchitemerror";
 /**
  * Contains error details for each device that failed to update its position.

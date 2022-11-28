@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var ImportFromUrlInputAccessEnum;
 (function (ImportFromUrlInputAccessEnum) {
     ImportFromUrlInputAccessEnum["PublicIndexable"] = "PUBLIC_INDEXABLE";
@@ -49,39 +49,39 @@ var ImportFromUrlInput = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=access" }),
+        SpeakeasyMetadata({ data: "json, name=access" }),
         __metadata("design:type", String)
     ], ImportFromUrlInput.prototype, "access", void 0);
     __decorate([
-        Metadata({ data: "json, name=duplicateValidationScope" }),
+        SpeakeasyMetadata({ data: "json, name=duplicateValidationScope" }),
         __metadata("design:type", String)
     ], ImportFromUrlInput.prototype, "duplicateValidationScope", void 0);
     __decorate([
-        Metadata({ data: "json, name=duplicateValidationStrategy" }),
+        SpeakeasyMetadata({ data: "json, name=duplicateValidationStrategy" }),
         __metadata("design:type", String)
     ], ImportFromUrlInput.prototype, "duplicateValidationStrategy", void 0);
     __decorate([
-        Metadata({ data: "json, name=folderId" }),
+        SpeakeasyMetadata({ data: "json, name=folderId" }),
         __metadata("design:type", String)
     ], ImportFromUrlInput.prototype, "folderId", void 0);
     __decorate([
-        Metadata({ data: "json, name=folderPath" }),
+        SpeakeasyMetadata({ data: "json, name=folderPath" }),
         __metadata("design:type", String)
     ], ImportFromUrlInput.prototype, "folderPath", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], ImportFromUrlInput.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=overwrite" }),
+        SpeakeasyMetadata({ data: "json, name=overwrite" }),
         __metadata("design:type", Boolean)
     ], ImportFromUrlInput.prototype, "overwrite", void 0);
     __decorate([
-        Metadata({ data: "json, name=ttl" }),
+        SpeakeasyMetadata({ data: "json, name=ttl" }),
         __metadata("design:type", String)
     ], ImportFromUrlInput.prototype, "ttl", void 0);
     __decorate([
-        Metadata({ data: "json, name=url" }),
+        SpeakeasyMetadata({ data: "json, name=url" }),
         __metadata("design:type", String)
     ], ImportFromUrlInput.prototype, "url", void 0);
     return ImportFromUrlInput;

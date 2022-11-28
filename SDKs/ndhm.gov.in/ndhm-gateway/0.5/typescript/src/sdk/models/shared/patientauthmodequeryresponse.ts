@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AuthenticationModeEnum } from "./authenticationmodeenum";
 import { PatientAuthPurposeEnum } from "./patientauthpurposeenum";
 import { Error } from "./error";
 import { RequestReference } from "./requestreference";
 
 
+
 export class PatientAuthModeQueryResponseAuth extends SpeakeasyBase {
-  @Metadata({ data: "json, name=modes" })
+  @SpeakeasyMetadata({ data: "json, name=modes" })
   modes: AuthenticationModeEnum[];
 
-  @Metadata({ data: "json, name=purpose" })
+  @SpeakeasyMetadata({ data: "json, name=purpose" })
   purpose: PatientAuthPurposeEnum;
 }
 
 
 export class PatientAuthModeQueryResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=auth" })
+  @SpeakeasyMetadata({ data: "json, name=auth" })
   auth?: PatientAuthModeQueryResponseAuth;
 
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: Error;
 
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId: string;
 
-  @Metadata({ data: "json, name=resp" })
+  @SpeakeasyMetadata({ data: "json, name=resp" })
   resp: RequestReference;
 
-  @Metadata({ data: "json, name=timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=timestamp" })
   timestamp: Date;
 }

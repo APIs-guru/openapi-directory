@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GoogleTypeExpr } from "./googletypeexpr";
 import { GoogleCloudPolicytroubleshooterV1betaBindingExplanationAnnotatedMembership } from "./googlecloudpolicytroubleshooterv1betabindingexplanationannotatedmembership";
 export declare enum GoogleCloudPolicytroubleshooterV1betaBindingExplanationAccessEnum {

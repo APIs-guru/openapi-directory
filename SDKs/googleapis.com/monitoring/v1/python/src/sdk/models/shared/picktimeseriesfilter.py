@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class PickTimeSeriesFilterDirectionEnum(str, Enum):
     DIRECTION_UNSPECIFIED = "DIRECTION_UNSPECIFIED"
@@ -19,7 +21,11 @@ class PickTimeSeriesFilterRankingMethodEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PickTimeSeriesFilter:
-    direction: Optional[PickTimeSeriesFilterDirectionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'direction' }})
-    num_time_series: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'numTimeSeries' }})
-    ranking_method: Optional[PickTimeSeriesFilterRankingMethodEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rankingMethod' }})
+    r"""PickTimeSeriesFilter
+    Describes a ranking-based time series filter. Each input time series is ranked with an aligner. The filter will allow up to num_time_series time series to pass through it, selecting them based on the relative ranking.For example, if ranking_method is METHOD_MEAN,direction is BOTTOM, and num_time_series is 3, then the 3 times series with the lowest mean values will pass through the filter.
+    """
+    
+    direction: Optional[PickTimeSeriesFilterDirectionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('direction') }})
+    num_time_series: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('numTimeSeries') }})
+    ranking_method: Optional[PickTimeSeriesFilterRankingMethodEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rankingMethod') }})
     

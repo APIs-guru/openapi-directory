@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://libretranslate.local",
 }
 
@@ -19,9 +19,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -32,27 +36,45 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// GetFrontendSettings - Retrieve frontend specific settings
 func (s *SDK) GetFrontendSettings(ctx context.Context) (*operations.GetFrontendSettingsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/frontend/settings"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -60,7 +82,7 @@ func (s *SDK) GetFrontendSettings(ctx context.Context) (*operations.GetFrontendS
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -90,8 +112,9 @@ func (s *SDK) GetFrontendSettings(ctx context.Context) (*operations.GetFrontendS
 	return res, nil
 }
 
+// GetLanguages - Retrieve list of supported languages
 func (s *SDK) GetLanguages(ctx context.Context) (*operations.GetLanguagesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/languages"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -99,7 +122,7 @@ func (s *SDK) GetLanguages(ctx context.Context) (*operations.GetLanguagesRespons
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -139,8 +162,9 @@ func (s *SDK) GetLanguages(ctx context.Context) (*operations.GetLanguagesRespons
 	return res, nil
 }
 
+// PostDetect - Detect the language of a single text
 func (s *SDK) PostDetect(ctx context.Context, request operations.PostDetectRequest) (*operations.PostDetectResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/detect"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -155,7 +179,7 @@ func (s *SDK) PostDetect(ctx context.Context, request operations.PostDetectReque
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -225,8 +249,9 @@ func (s *SDK) PostDetect(ctx context.Context, request operations.PostDetectReque
 	return res, nil
 }
 
+// PostLanguages - Retrieve list of supported languages
 func (s *SDK) PostLanguages(ctx context.Context) (*operations.PostLanguagesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/languages"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -234,7 +259,7 @@ func (s *SDK) PostLanguages(ctx context.Context) (*operations.PostLanguagesRespo
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -274,8 +299,9 @@ func (s *SDK) PostLanguages(ctx context.Context) (*operations.PostLanguagesRespo
 	return res, nil
 }
 
+// PostTranslate - Translate text from a language to another
 func (s *SDK) PostTranslate(ctx context.Context, request operations.PostTranslateRequest) (*operations.PostTranslateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/translate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -290,7 +316,7 @@ func (s *SDK) PostTranslate(ctx context.Context, request operations.PostTranslat
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import creativeclickthroughurl
-from . import popupwindowproperties
+from sdk import utils
+from . import *
 
 class CreativeCustomEventAdvertiserCustomEventTypeEnum(str, Enum):
     ADVERTISER_EVENT_TIMER = "ADVERTISER_EVENT_TIMER"
@@ -26,14 +27,18 @@ class CreativeCustomEventTargetTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CreativeCustomEvent:
-    advertiser_custom_event_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'advertiserCustomEventId' }})
-    advertiser_custom_event_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'advertiserCustomEventName' }})
-    advertiser_custom_event_type: Optional[CreativeCustomEventAdvertiserCustomEventTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'advertiserCustomEventType' }})
-    artwork_label: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'artworkLabel' }})
-    artwork_type: Optional[CreativeCustomEventArtworkTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'artworkType' }})
-    exit_click_through_url: Optional[creativeclickthroughurl.CreativeClickThroughURL] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'exitClickThroughUrl' }})
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    popup_window_properties: Optional[popupwindowproperties.PopupWindowProperties] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'popupWindowProperties' }})
-    target_type: Optional[CreativeCustomEventTargetTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'targetType' }})
-    video_reporting_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'videoReportingId' }})
+    r"""CreativeCustomEvent
+    Creative Custom Event.
+    """
+    
+    advertiser_custom_event_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('advertiserCustomEventId') }})
+    advertiser_custom_event_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('advertiserCustomEventName') }})
+    advertiser_custom_event_type: Optional[CreativeCustomEventAdvertiserCustomEventTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('advertiserCustomEventType') }})
+    artwork_label: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('artworkLabel') }})
+    artwork_type: Optional[CreativeCustomEventArtworkTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('artworkType') }})
+    exit_click_through_url: Optional[CreativeClickThroughURL] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('exitClickThroughUrl') }})
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    popup_window_properties: Optional[PopupWindowProperties] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('popupWindowProperties') }})
+    target_type: Optional[CreativeCustomEventTargetTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('targetType') }})
+    video_reporting_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('videoReportingId') }})
     

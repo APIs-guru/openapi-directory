@@ -1,13 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import failedcreateassociation
-from . import associationdescription
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateAssociationBatchResult:
-    failed: Optional[List[failedcreateassociation.FailedCreateAssociation]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Failed' }})
-    successful: Optional[List[associationdescription.AssociationDescription]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Successful' }})
+    failed: Optional[List[FailedCreateAssociation]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Failed') }})
+    successful: Optional[List[AssociationDescription]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Successful') }})
     

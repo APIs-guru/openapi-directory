@@ -1,21 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HumanTaskUiStatusEnum } from "./humantaskuistatusenum";
 import { UiTemplateInfo } from "./uitemplateinfo";
 
 
+
 export class DescribeHumanTaskUiResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime: Date;
 
-  @Metadata({ data: "json, name=HumanTaskUiArn" })
+  @SpeakeasyMetadata({ data: "json, name=HumanTaskUiArn" })
   humanTaskUiArn: string;
 
-  @Metadata({ data: "json, name=HumanTaskUiName" })
+  @SpeakeasyMetadata({ data: "json, name=HumanTaskUiName" })
   humanTaskUiName: string;
 
-  @Metadata({ data: "json, name=HumanTaskUiStatus" })
+  @SpeakeasyMetadata({ data: "json, name=HumanTaskUiStatus" })
   humanTaskUiStatus?: HumanTaskUiStatusEnum;
 
-  @Metadata({ data: "json, name=UiTemplate" })
+  @SpeakeasyMetadata({ data: "json, name=UiTemplate" })
   uiTemplate: UiTemplateInfo;
 }

@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetVmknicPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,20 +15,20 @@ class GetVmknicQueryParams:
 
 @dataclass
 class GetVmknicSecurity:
-    api_key_auth: shared.SchemeAPIKeyAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    api_key_auth: shared.SchemeAPIKeyAuth = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetVmknicRequest:
-    path_params: GetVmknicPathParams = field(default=None)
-    query_params: GetVmknicQueryParams = field(default=None)
-    security: GetVmknicSecurity = field(default=None)
+    path_params: GetVmknicPathParams = field()
+    query_params: GetVmknicQueryParams = field()
+    security: GetVmknicSecurity = field()
     
 
 @dataclass
 class GetVmknicResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_error: Optional[shared.APIError] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     vmknic: Optional[shared.Vmknic] = field(default=None)
     

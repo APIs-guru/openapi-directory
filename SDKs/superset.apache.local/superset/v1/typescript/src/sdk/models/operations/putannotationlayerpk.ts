@@ -1,83 +1,84 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PutAnnotationLayerPkPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=pk" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=pk" })
   pk: number;
 }
 
 
 export class PutAnnotationLayerPkSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   jwt: shared.SchemeJwt;
 }
 
 
-export class PutAnnotationLayerPkRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: PutAnnotationLayerPkPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: shared.AnnotationLayerRestApiPut;
-
-  @Metadata()
-  security: PutAnnotationLayerPkSecurity;
-}
-
-
 export class PutAnnotationLayerPk200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result?: shared.AnnotationLayerRestApiPut;
 }
 
 
 export class PutAnnotationLayerPk400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PutAnnotationLayerPk401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PutAnnotationLayerPk404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PutAnnotationLayerPk500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class PutAnnotationLayerPkRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: PutAnnotationLayerPkPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: shared.AnnotationLayerRestApiPut;
+
+  @SpeakeasyMetadata()
+  security: PutAnnotationLayerPkSecurity;
+}
+
+
 export class PutAnnotationLayerPkResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   putAnnotationLayerPk200ApplicationJsonObject?: PutAnnotationLayerPk200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   putAnnotationLayerPk400ApplicationJsonObject?: PutAnnotationLayerPk400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   putAnnotationLayerPk401ApplicationJsonObject?: PutAnnotationLayerPk401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   putAnnotationLayerPk404ApplicationJsonObject?: PutAnnotationLayerPk404ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   putAnnotationLayerPk500ApplicationJsonObject?: PutAnnotationLayerPk500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

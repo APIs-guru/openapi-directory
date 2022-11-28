@@ -5,23 +5,23 @@ from sdk.models import shared
 
 @dataclass
 class DeleteUploadTokensUploadTokenPathParams:
-    upload_token: str = field(default=None, metadata={'path_param': { 'field_name': 'uploadToken', 'style': 'simple', 'explode': False }})
+    upload_token: str = field(metadata={'path_param': { 'field_name': 'uploadToken', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DeleteUploadTokensUploadTokenSecurity:
-    bearer_auth: shared.SchemeBearerAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_auth: shared.SchemeBearerAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class DeleteUploadTokensUploadTokenRequest:
-    path_params: DeleteUploadTokensUploadTokenPathParams = field(default=None)
-    security: DeleteUploadTokensUploadTokenSecurity = field(default=None)
+    path_params: DeleteUploadTokensUploadTokenPathParams = field()
+    security: DeleteUploadTokensUploadTokenSecurity = field()
     
 
 @dataclass
 class DeleteUploadTokensUploadTokenResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     not_found: Optional[shared.NotFound] = field(default=None)
     

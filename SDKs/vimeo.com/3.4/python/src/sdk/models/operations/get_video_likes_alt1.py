@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetVideoLikesAlt1PathParams:
-    channel_id: float = field(default=None, metadata={'path_param': { 'field_name': 'channel_id', 'style': 'simple', 'explode': False }})
-    video_id: float = field(default=None, metadata={'path_param': { 'field_name': 'video_id', 'style': 'simple', 'explode': False }})
+    channel_id: float = field(metadata={'path_param': { 'field_name': 'channel_id', 'style': 'simple', 'explode': False }})
+    video_id: float = field(metadata={'path_param': { 'field_name': 'video_id', 'style': 'simple', 'explode': False }})
     
 class GetVideoLikesAlt1DirectionEnum(str, Enum):
     ASC = "asc"
@@ -27,13 +31,13 @@ class GetVideoLikesAlt1QueryParams:
 
 @dataclass
 class GetVideoLikesAlt1Request:
-    path_params: GetVideoLikesAlt1PathParams = field(default=None)
-    query_params: GetVideoLikesAlt1QueryParams = field(default=None)
+    path_params: GetVideoLikesAlt1PathParams = field()
+    query_params: GetVideoLikesAlt1QueryParams = field()
     
 
 @dataclass
 class GetVideoLikesAlt1Response:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     users: Optional[List[shared.User]] = field(default=None)
     

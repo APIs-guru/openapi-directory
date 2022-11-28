@@ -10,6 +10,8 @@ const (
 	EncryptResponseProtectionLevelEnumExternalVpc                EncryptResponseProtectionLevelEnum = "EXTERNAL_VPC"
 )
 
+// EncryptResponse
+// Response message for KeyManagementService.Encrypt.
 type EncryptResponse struct {
 	Ciphertext                                *string                             `json:"ciphertext,omitempty"`
 	CiphertextCrc32c                          *string                             `json:"ciphertextCrc32c,omitempty"`

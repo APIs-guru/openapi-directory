@@ -1,5 +1,7 @@
 package shared
 
+// Channel
+// A channel is a named input source that training algorithms can consume.
 type Channel struct {
 	ChannelName       string                 `json:"ChannelName"`
 	CompressionType   *CompressionTypeEnum   `json:"CompressionType,omitempty"`

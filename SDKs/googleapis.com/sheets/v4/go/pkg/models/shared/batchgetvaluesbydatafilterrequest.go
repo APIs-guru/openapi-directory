@@ -23,6 +23,8 @@ const (
 	BatchGetValuesByDataFilterRequestValueRenderOptionEnumFormula          BatchGetValuesByDataFilterRequestValueRenderOptionEnum = "FORMULA"
 )
 
+// BatchGetValuesByDataFilterRequest
+// The request for retrieving a range of values in a spreadsheet selected by a set of DataFilters.
 type BatchGetValuesByDataFilterRequest struct {
 	DataFilters          []DataFilter                                               `json:"dataFilters,omitempty"`
 	DateTimeRenderOption *BatchGetValuesByDataFilterRequestDateTimeRenderOptionEnum `json:"dateTimeRenderOption,omitempty"`

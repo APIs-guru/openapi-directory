@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetPlayersSortByEnum(str, Enum):
@@ -21,19 +25,19 @@ class GetPlayersQueryParams:
 
 @dataclass
 class GetPlayersSecurity:
-    bearer_auth: shared.SchemeBearerAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_auth: shared.SchemeBearerAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class GetPlayersRequest:
-    query_params: GetPlayersQueryParams = field(default=None)
-    security: GetPlayersSecurity = field(default=None)
+    query_params: GetPlayersQueryParams = field()
+    security: GetPlayersSecurity = field()
     
 
 @dataclass
 class GetPlayersResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     bad_request: Optional[shared.BadRequest] = field(default=None)
     players_list_response: Optional[shared.PlayersListResponse] = field(default=None)
     

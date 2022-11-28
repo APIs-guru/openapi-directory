@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ViewBillingRequest
+// The ViewBilling request includes the following elements.
 type ViewBillingRequest struct {
 	End      *time.Time `json:"End,omitempty"`
 	Marker   *string    `json:"Marker,omitempty"`

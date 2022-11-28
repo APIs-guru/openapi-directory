@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WeightedTarget } from "./weightedtarget";
+
 
 
 // HttpRouteAction
@@ -9,6 +9,6 @@ import { WeightedTarget } from "./weightedtarget";
  *          requests.
 **/
 export class HttpRouteAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=weightedTargets", elemType: shared.WeightedTarget })
+  @SpeakeasyMetadata({ data: "json, name=weightedTargets", elemType: WeightedTarget })
   weightedTargets?: WeightedTarget[];
 }

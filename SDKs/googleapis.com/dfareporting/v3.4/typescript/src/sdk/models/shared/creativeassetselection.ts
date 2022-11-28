@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Rule } from "./rule";
+
 
 
 // CreativeAssetSelection
@@ -8,9 +8,9 @@ import { Rule } from "./rule";
  * Encapsulates the list of rules for asset selection and a default asset in case none of the rules match. Applicable to INSTREAM_VIDEO creatives.
 **/
 export class CreativeAssetSelection extends SpeakeasyBase {
-  @Metadata({ data: "json, name=defaultAssetId" })
+  @SpeakeasyMetadata({ data: "json, name=defaultAssetId" })
   defaultAssetId?: string;
 
-  @Metadata({ data: "json, name=rules", elemType: shared.Rule })
+  @SpeakeasyMetadata({ data: "json, name=rules", elemType: Rule })
   rules?: Rule[];
 }

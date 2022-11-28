@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccountsCustomBatchResponseEntry } from "./accountscustombatchresponseentry";
 
 
+
 export class AccountsCustomBatchResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=entries", elemType: shared.AccountsCustomBatchResponseEntry })
+  @SpeakeasyMetadata({ data: "json, name=entries", elemType: AccountsCustomBatchResponseEntry })
   entries?: AccountsCustomBatchResponseEntry[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 }

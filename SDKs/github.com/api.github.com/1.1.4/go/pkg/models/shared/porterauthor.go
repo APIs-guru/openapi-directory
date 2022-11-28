@@ -1,5 +1,7 @@
 package shared
 
+// PorterAuthor
+// Porter Author
 type PorterAuthor struct {
 	Email      string `json:"email"`
 	ID         int64  `json:"id"`

@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import positionedobjectproperties
-from . import positionedobjectpropertiessuggestionstate
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SuggestedPositionedObjectProperties:
-    positioned_object_properties: Optional[positionedobjectproperties.PositionedObjectProperties] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'positionedObjectProperties' }})
-    positioned_object_properties_suggestion_state: Optional[positionedobjectpropertiessuggestionstate.PositionedObjectPropertiesSuggestionState] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'positionedObjectPropertiesSuggestionState' }})
+    r"""SuggestedPositionedObjectProperties
+    A suggested change to PositionedObjectProperties.
+    """
+    
+    positioned_object_properties: Optional[PositionedObjectProperties] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('positionedObjectProperties') }})
+    positioned_object_properties_suggestion_state: Optional[PositionedObjectPropertiesSuggestionState] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('positionedObjectPropertiesSuggestionState') }})
     

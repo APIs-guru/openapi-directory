@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ApiCoreDtoDatapointsUrlByNationItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nation" })
+  @SpeakeasyMetadata({ data: "json, name=nation" })
   nation?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }

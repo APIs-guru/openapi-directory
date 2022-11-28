@@ -9,10 +9,6 @@ type ListTechniqueVersionDirectivesPathParams struct {
 	TechniqueVersion string `pathParam:"style=simple,explode=false,name=techniqueVersion"`
 }
 
-type ListTechniqueVersionDirectivesRequest struct {
-	PathParams ListTechniqueVersionDirectivesPathParams
-}
-
 type ListTechniqueVersionDirectives200ApplicationJSONActionEnum string
 
 const (
@@ -34,6 +30,10 @@ type ListTechniqueVersionDirectives200ApplicationJSON struct {
 	Action ListTechniqueVersionDirectives200ApplicationJSONActionEnum `json:"action"`
 	Data   ListTechniqueVersionDirectives200ApplicationJSONData       `json:"data"`
 	Result ListTechniqueVersionDirectives200ApplicationJSONResultEnum `json:"result"`
+}
+
+type ListTechniqueVersionDirectivesRequest struct {
+	PathParams ListTechniqueVersionDirectivesPathParams
 }
 
 type ListTechniqueVersionDirectivesResponse struct {

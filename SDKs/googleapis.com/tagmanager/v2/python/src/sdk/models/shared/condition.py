@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import parameter
+from sdk import utils
+from . import *
 
 class ConditionTypeEnum(str, Enum):
     CONDITION_TYPE_UNSPECIFIED = "conditionTypeUnspecified"
@@ -21,6 +23,10 @@ class ConditionTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Condition:
-    parameter: Optional[List[parameter.Parameter]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'parameter' }})
-    type: Optional[ConditionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""Condition
+    Represents a predicate.
+    """
+    
+    parameter: Optional[List[Parameter]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('parameter') }})
+    type: Optional[ConditionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

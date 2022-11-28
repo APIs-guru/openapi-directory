@@ -27,11 +27,6 @@ type RitinSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type RitinRequest struct {
-	Request  *RitinRequestBody `request:"mediaType=application/json"`
-	Security RitinSecurity
-}
-
 type Ritin400ApplicationJSONErrorEnum string
 
 const (
@@ -161,6 +156,11 @@ const (
 type Ritin504ApplicationJSON struct {
 	Error            *Ritin504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Ritin504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type RitinRequest struct {
+	Request  *RitinRequestBody `request:"mediaType=application/json"`
+	Security RitinSecurity
 }
 
 type RitinResponse struct {

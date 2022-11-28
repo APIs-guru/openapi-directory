@@ -9,6 +9,8 @@ const (
 	TabStopAlignmentEnumEnd                         TabStopAlignmentEnum = "END"
 )
 
+// TabStop
+// A tab stop within a paragraph.
 type TabStop struct {
 	Alignment *TabStopAlignmentEnum `json:"alignment,omitempty"`
 	Offset    *Dimension            `json:"offset,omitempty"`

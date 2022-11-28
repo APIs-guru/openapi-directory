@@ -13,15 +13,15 @@ type DcimDeviceRolesListQueryParams struct {
 	VMRole *string `queryParam:"style=form,explode=true,name=vm_role"`
 }
 
-type DcimDeviceRolesListRequest struct {
-	QueryParams DcimDeviceRolesListQueryParams
-}
-
 type DcimDeviceRolesList200ApplicationJSON struct {
 	Count    int64               `json:"count"`
 	Next     *string             `json:"next,omitempty"`
 	Previous *string             `json:"previous,omitempty"`
 	Results  []shared.DeviceRole `json:"results"`
+}
+
+type DcimDeviceRolesListRequest struct {
+	QueryParams DcimDeviceRolesListQueryParams
 }
 
 type DcimDeviceRolesListResponse struct {

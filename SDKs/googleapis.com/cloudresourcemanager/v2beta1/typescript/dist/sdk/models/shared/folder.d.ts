@@ -1,8 +1,15 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum FolderLifecycleStateEnum {
     LifecycleStateUnspecified = "LIFECYCLE_STATE_UNSPECIFIED",
     Active = "ACTIVE",
     DeleteRequested = "DELETE_REQUESTED"
+}
+/**
+ * A Folder in an Organization's resource hierarchy, used to organize that Organization's resources.
+**/
+export declare class FolderInput extends SpeakeasyBase {
+    displayName?: string;
+    parent?: string;
 }
 /**
  * A Folder in an Organization's resource hierarchy, used to organize that Organization's resources.

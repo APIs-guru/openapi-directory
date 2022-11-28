@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetTeamPathParams:
-    team_key: str = field(default=None, metadata={'path_param': { 'field_name': 'team_key', 'style': 'simple', 'explode': False }})
+    team_key: str = field(metadata={'path_param': { 'field_name': 'team_key', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,20 +15,20 @@ class GetTeamHeaders:
 
 @dataclass
 class GetTeamSecurity:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    api_key: shared.SchemeAPIKey = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetTeamRequest:
-    path_params: GetTeamPathParams = field(default=None)
-    headers: GetTeamHeaders = field(default=None)
-    security: GetTeamSecurity = field(default=None)
+    headers: GetTeamHeaders = field()
+    path_params: GetTeamPathParams = field()
+    security: GetTeamSecurity = field()
     
 
 @dataclass
 class GetTeamResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     team: Optional[shared.Team] = field(default=None)
     

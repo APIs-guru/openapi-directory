@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ExpansionFile
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An expansion file. The resource for ExpansionFilesService.
 **/
 export class ExpansionFile extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fileSize" })
+  @SpeakeasyMetadata({ data: "json, name=fileSize" })
   fileSize?: string;
 
-  @Metadata({ data: "json, name=referencesVersion" })
+  @SpeakeasyMetadata({ data: "json, name=referencesVersion" })
   referencesVersion?: number;
 }

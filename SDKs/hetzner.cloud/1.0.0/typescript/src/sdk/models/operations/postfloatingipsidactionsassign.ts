@@ -1,24 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostFloatingIpsIdActionsAssignPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
 
 export class PostFloatingIpsIdActionsAssignAssignFloatingIpRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=server" })
+  @SpeakeasyMetadata({ data: "json, name=server" })
   server: number;
-}
-
-
-export class PostFloatingIpsIdActionsAssignRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: PostFloatingIpsIdActionsAssignPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: PostFloatingIpsIdActionsAssignAssignFloatingIpRequest;
 }
 
 
@@ -27,69 +19,78 @@ export class PostFloatingIpsIdActionsAssignRequest extends SpeakeasyBase {
  * Error message for the Action if error occurred, otherwise null
 **/
 export class PostFloatingIpsIdActionsAssignActionResponseActionError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 }
 
 
 export class PostFloatingIpsIdActionsAssignActionResponseActionResources extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }
 
 export enum PostFloatingIpsIdActionsAssignActionResponseActionStatusEnum {
-    Success = "success"
-,    Running = "running"
-,    Error = "error"
+    Success = "success",
+    Running = "running",
+    Error = "error"
 }
 
 
 export class PostFloatingIpsIdActionsAssignActionResponseAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=command" })
+  @SpeakeasyMetadata({ data: "json, name=command" })
   command: string;
 
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error: PostFloatingIpsIdActionsAssignActionResponseActionError;
 
-  @Metadata({ data: "json, name=finished" })
+  @SpeakeasyMetadata({ data: "json, name=finished" })
   finished: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=progress" })
+  @SpeakeasyMetadata({ data: "json, name=progress" })
   progress: number;
 
-  @Metadata({ data: "json, name=resources", elemType: operations.PostFloatingIpsIdActionsAssignActionResponseActionResources })
+  @SpeakeasyMetadata({ data: "json, name=resources", elemType: PostFloatingIpsIdActionsAssignActionResponseActionResources })
   resources: PostFloatingIpsIdActionsAssignActionResponseActionResources[];
 
-  @Metadata({ data: "json, name=started" })
+  @SpeakeasyMetadata({ data: "json, name=started" })
   started: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: PostFloatingIpsIdActionsAssignActionResponseActionStatusEnum;
 }
 
 
 export class PostFloatingIpsIdActionsAssignActionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: PostFloatingIpsIdActionsAssignActionResponseAction;
 }
 
 
+export class PostFloatingIpsIdActionsAssignRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: PostFloatingIpsIdActionsAssignPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: PostFloatingIpsIdActionsAssignAssignFloatingIpRequest;
+}
+
+
 export class PostFloatingIpsIdActionsAssignResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   actionResponse?: PostFloatingIpsIdActionsAssignActionResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

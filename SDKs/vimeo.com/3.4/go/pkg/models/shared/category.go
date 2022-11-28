@@ -1,29 +1,39 @@
 package shared
 
+// CategoryMetadataConnectionsChannels
+// Information about the channels related to this category.
 type CategoryMetadataConnectionsChannels struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// CategoryMetadataConnectionsGroups
+// Information about the groups related to this category.
 type CategoryMetadataConnectionsGroups struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// CategoryMetadataConnectionsUsers
+// Information about the users related to this category.
 type CategoryMetadataConnectionsUsers struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// CategoryMetadataConnectionsVideos
+// Information about the videos related to this category.
 type CategoryMetadataConnectionsVideos struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// CategoryMetadataConnections
+// A collection of information that is connected to this resource.
 type CategoryMetadataConnections struct {
 	Channels CategoryMetadataConnectionsChannels `json:"channels"`
 	Groups   CategoryMetadataConnectionsGroups   `json:"groups"`
@@ -31,21 +41,29 @@ type CategoryMetadataConnections struct {
 	Videos   CategoryMetadataConnectionsVideos   `json:"videos"`
 }
 
+// CategoryMetadataInteractionsFollow
+// An action indicating if the authenticated user has followed this category.
 type CategoryMetadataInteractionsFollow struct {
 	Added     bool   `json:"added"`
 	AddedTime string `json:"added_time"`
 	URI       string `json:"uri"`
 }
 
+// CategoryMetadataInteractions
+// The permissible actions related to the category.
 type CategoryMetadataInteractions struct {
 	Follow CategoryMetadataInteractionsFollow `json:"follow"`
 }
 
+// CategoryMetadata
+// Metadata about the category.
 type CategoryMetadata struct {
 	Connections  CategoryMetadataConnections  `json:"connections"`
 	Interactions CategoryMetadataInteractions `json:"interactions"`
 }
 
+// CategoryParent
+// The container of this category's parent category, if the current category is a subcategory.
 type CategoryParent struct {
 	Link string `json:"link"`
 	Name string `json:"name"`

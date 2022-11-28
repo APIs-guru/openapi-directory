@@ -5,23 +5,23 @@ from sdk.models import shared
 
 @dataclass
 class GetTransferPathParams:
-    transfer_id: str = field(default=None, metadata={'path_param': { 'field_name': 'transfer_Id', 'style': 'simple', 'explode': False }})
+    transfer_id: str = field(metadata={'path_param': { 'field_name': 'transfer_Id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetTransferSecurity:
-    api_auth: shared.SchemeAPIAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    api_auth: shared.SchemeAPIAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetTransferRequest:
-    path_params: GetTransferPathParams = field(default=None)
-    security: GetTransferSecurity = field(default=None)
+    path_params: GetTransferPathParams = field()
+    security: GetTransferSecurity = field()
     
 
 @dataclass
 class GetTransferResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     transfer: Optional[shared.Transfer] = field(default=None)
     

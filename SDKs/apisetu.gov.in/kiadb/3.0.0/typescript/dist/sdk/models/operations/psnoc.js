@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PsnocRequestBodyCertificateParameters = /** @class */ (function (_super) {
     __extends(PsnocRequestBodyCertificateParameters, _super);
@@ -30,19 +30,19 @@ var PsnocRequestBodyCertificateParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DOB" }),
+        SpeakeasyMetadata({ data: "json, name=DOB" }),
         __metadata("design:type", String)
     ], PsnocRequestBodyCertificateParameters.prototype, "dob", void 0);
     __decorate([
-        Metadata({ data: "json, name=FullName" }),
+        SpeakeasyMetadata({ data: "json, name=FullName" }),
         __metadata("design:type", String)
     ], PsnocRequestBodyCertificateParameters.prototype, "fullName", void 0);
     __decorate([
-        Metadata({ data: "json, name=RegNum" }),
+        SpeakeasyMetadata({ data: "json, name=RegNum" }),
         __metadata("design:type", String)
     ], PsnocRequestBodyCertificateParameters.prototype, "regNum", void 0);
     __decorate([
-        Metadata({ data: "json, name=UID" }),
+        SpeakeasyMetadata({ data: "json, name=UID" }),
         __metadata("design:type", String)
     ], PsnocRequestBodyCertificateParameters.prototype, "uid", void 0);
     return PsnocRequestBodyCertificateParameters;
@@ -58,19 +58,19 @@ var PsnocRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=certificateParameters" }),
+        SpeakeasyMetadata({ data: "json, name=certificateParameters" }),
         __metadata("design:type", PsnocRequestBodyCertificateParameters)
     ], PsnocRequestBody.prototype, "certificateParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=consentArtifact" }),
+        SpeakeasyMetadata({ data: "json, name=consentArtifact" }),
         __metadata("design:type", Object)
     ], PsnocRequestBody.prototype, "consentArtifact", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], PsnocRequestBody.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=txnId" }),
+        SpeakeasyMetadata({ data: "json, name=txnId" }),
         __metadata("design:type", String)
     ], PsnocRequestBody.prototype, "txnId", void 0);
     return PsnocRequestBody;
@@ -82,32 +82,16 @@ var PsnocSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], PsnocSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeClientId)
     ], PsnocSecurity.prototype, "clientId", void 0);
     return PsnocSecurity;
 }(SpeakeasyBase));
 export { PsnocSecurity };
-var PsnocRequest = /** @class */ (function (_super) {
-    __extends(PsnocRequest, _super);
-    function PsnocRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", PsnocRequestBody)
-    ], PsnocRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", PsnocSecurity)
-    ], PsnocRequest.prototype, "security", void 0);
-    return PsnocRequest;
-}(SpeakeasyBase));
-export { PsnocRequest };
 export var Psnoc400ApplicationJsonErrorEnum;
 (function (Psnoc400ApplicationJsonErrorEnum) {
     Psnoc400ApplicationJsonErrorEnum["MissingParameter"] = "missing_parameter";
@@ -130,11 +114,11 @@ var Psnoc400ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Psnoc400ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Psnoc400ApplicationJson.prototype, "errorDescription", void 0);
     return Psnoc400ApplicationJson;
@@ -156,11 +140,11 @@ var Psnoc401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Psnoc401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Psnoc401ApplicationJson.prototype, "errorDescription", void 0);
     return Psnoc401ApplicationJson;
@@ -182,11 +166,11 @@ var Psnoc404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Psnoc404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Psnoc404ApplicationJson.prototype, "errorDescription", void 0);
     return Psnoc404ApplicationJson;
@@ -206,11 +190,11 @@ var Psnoc500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Psnoc500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Psnoc500ApplicationJson.prototype, "errorDescription", void 0);
     return Psnoc500ApplicationJson;
@@ -230,11 +214,11 @@ var Psnoc502ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Psnoc502ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Psnoc502ApplicationJson.prototype, "errorDescription", void 0);
     return Psnoc502ApplicationJson;
@@ -254,11 +238,11 @@ var Psnoc503ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Psnoc503ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Psnoc503ApplicationJson.prototype, "errorDescription", void 0);
     return Psnoc503ApplicationJson;
@@ -278,55 +262,71 @@ var Psnoc504ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Psnoc504ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Psnoc504ApplicationJson.prototype, "errorDescription", void 0);
     return Psnoc504ApplicationJson;
 }(SpeakeasyBase));
 export { Psnoc504ApplicationJson };
+var PsnocRequest = /** @class */ (function (_super) {
+    __extends(PsnocRequest, _super);
+    function PsnocRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", PsnocRequestBody)
+    ], PsnocRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", PsnocSecurity)
+    ], PsnocRequest.prototype, "security", void 0);
+    return PsnocRequest;
+}(SpeakeasyBase));
+export { PsnocRequest };
 var PsnocResponse = /** @class */ (function (_super) {
     __extends(PsnocResponse, _super);
     function PsnocResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PsnocResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PsnocResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Psnoc400ApplicationJson)
     ], PsnocResponse.prototype, "psnoc400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Psnoc401ApplicationJson)
     ], PsnocResponse.prototype, "psnoc401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Psnoc404ApplicationJson)
     ], PsnocResponse.prototype, "psnoc404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Psnoc500ApplicationJson)
     ], PsnocResponse.prototype, "psnoc500ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Psnoc502ApplicationJson)
     ], PsnocResponse.prototype, "psnoc502ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Psnoc503ApplicationJson)
     ], PsnocResponse.prototype, "psnoc503ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Psnoc504ApplicationJson)
     ], PsnocResponse.prototype, "psnoc504ApplicationJsonObject", void 0);
     return PsnocResponse;

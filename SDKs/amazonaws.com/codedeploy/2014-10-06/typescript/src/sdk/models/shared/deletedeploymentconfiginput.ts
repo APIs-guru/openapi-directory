@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DeleteDeploymentConfigInput
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the input of a <code>DeleteDeploymentConfig</code> operation.
 **/
 export class DeleteDeploymentConfigInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deploymentConfigName" })
+  @SpeakeasyMetadata({ data: "json, name=deploymentConfigName" })
   deploymentConfigName: string;
 }

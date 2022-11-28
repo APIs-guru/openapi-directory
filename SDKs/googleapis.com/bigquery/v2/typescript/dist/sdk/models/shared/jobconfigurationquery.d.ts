@@ -1,0 +1,37 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import { Clustering } from "./clustering";
+import { ConnectionProperty } from "./connectionproperty";
+import { DatasetReference } from "./datasetreference";
+import { EncryptionConfiguration } from "./encryptionconfiguration";
+import { TableReference } from "./tablereference";
+import { QueryParameter } from "./queryparameter";
+import { RangePartitioning } from "./rangepartitioning";
+import { ExternalDataConfiguration } from "./externaldataconfiguration";
+import { TimePartitioning } from "./timepartitioning";
+import { UserDefinedFunctionResource } from "./userdefinedfunctionresource";
+export declare class JobConfigurationQuery extends SpeakeasyBase {
+    allowLargeResults?: boolean;
+    clustering?: Clustering;
+    connectionProperties?: ConnectionProperty[];
+    createDisposition?: string;
+    createSession?: boolean;
+    defaultDataset?: DatasetReference;
+    destinationEncryptionConfiguration?: EncryptionConfiguration;
+    destinationTable?: TableReference;
+    flattenResults?: boolean;
+    maximumBillingTier?: number;
+    maximumBytesBilled?: string;
+    parameterMode?: string;
+    preserveNulls?: boolean;
+    priority?: string;
+    query?: string;
+    queryParameters?: QueryParameter[];
+    rangePartitioning?: RangePartitioning;
+    schemaUpdateOptions?: string[];
+    tableDefinitions?: Map<string, ExternalDataConfiguration>;
+    timePartitioning?: TimePartitioning;
+    useLegacySql?: boolean;
+    useQueryCache?: boolean;
+    userDefinedFunctionResources?: UserDefinedFunctionResource[];
+    writeDisposition?: string;
+}

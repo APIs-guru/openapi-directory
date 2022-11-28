@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeviceCgroupPermissionEnum } from "./devicecgrouppermissionenum";
+
 
 
 // Device
@@ -7,12 +8,12 @@ import { DeviceCgroupPermissionEnum } from "./devicecgrouppermissionenum";
  * An object representing a container instance host device.
 **/
 export class Device extends SpeakeasyBase {
-  @Metadata({ data: "json, name=containerPath" })
+  @SpeakeasyMetadata({ data: "json, name=containerPath" })
   containerPath?: string;
 
-  @Metadata({ data: "json, name=hostPath" })
+  @SpeakeasyMetadata({ data: "json, name=hostPath" })
   hostPath: string;
 
-  @Metadata({ data: "json, name=permissions" })
+  @SpeakeasyMetadata({ data: "json, name=permissions" })
   permissions?: DeviceCgroupPermissionEnum[];
 }

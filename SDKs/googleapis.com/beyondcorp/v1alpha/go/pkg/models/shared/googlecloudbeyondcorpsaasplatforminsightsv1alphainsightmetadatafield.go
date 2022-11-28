@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudBeyondcorpSaasplatformInsightsV1alphaInsightMetadataField
+// Field metadata. Commonly understandable name and description for the field. Multiple such fields constitute the Insight.
 type GoogleCloudBeyondcorpSaasplatformInsightsV1alphaInsightMetadataField struct {
 	Description *string `json:"description,omitempty"`
 	DisplayName *string `json:"displayName,omitempty"`

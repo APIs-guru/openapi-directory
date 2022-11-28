@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PolicyTypeEnum } from "./policytypeenum";
 
 
+
 export class ListPoliciesForTargetRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Filter" })
+  @SpeakeasyMetadata({ data: "json, name=Filter" })
   filter: PolicyTypeEnum;
 
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=TargetId" })
+  @SpeakeasyMetadata({ data: "json, name=TargetId" })
   targetId: string;
 }

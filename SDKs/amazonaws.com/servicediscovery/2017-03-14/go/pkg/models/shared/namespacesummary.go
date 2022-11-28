@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// NamespaceSummary
+// A complex type that contains information about a namespace.
 type NamespaceSummary struct {
 	Arn          *string              `json:"Arn,omitempty"`
 	CreateDate   *time.Time           `json:"CreateDate,omitempty"`

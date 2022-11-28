@@ -22,38 +22,38 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var FaxV1FaxFaxMedia = /** @class */ (function (_super) {
     __extends(FaxV1FaxFaxMedia, _super);
     function FaxV1FaxFaxMedia() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=account_sid" }),
+        SpeakeasyMetadata({ data: "json, name=account_sid" }),
         __metadata("design:type", String)
     ], FaxV1FaxFaxMedia.prototype, "accountSid", void 0);
     __decorate([
-        Metadata({ data: "json, name=content_type" }),
+        SpeakeasyMetadata({ data: "json, name=content_type" }),
         __metadata("design:type", String)
     ], FaxV1FaxFaxMedia.prototype, "contentType", void 0);
     __decorate([
-        Metadata({ data: "json, name=date_created" }),
+        SpeakeasyMetadata({ data: "json, name=date_created" }),
         __metadata("design:type", Date)
     ], FaxV1FaxFaxMedia.prototype, "dateCreated", void 0);
     __decorate([
-        Metadata({ data: "json, name=date_updated" }),
+        SpeakeasyMetadata({ data: "json, name=date_updated" }),
         __metadata("design:type", Date)
     ], FaxV1FaxFaxMedia.prototype, "dateUpdated", void 0);
     __decorate([
-        Metadata({ data: "json, name=fax_sid" }),
+        SpeakeasyMetadata({ data: "json, name=fax_sid" }),
         __metadata("design:type", String)
     ], FaxV1FaxFaxMedia.prototype, "faxSid", void 0);
     __decorate([
-        Metadata({ data: "json, name=sid" }),
+        SpeakeasyMetadata({ data: "json, name=sid" }),
         __metadata("design:type", String)
     ], FaxV1FaxFaxMedia.prototype, "sid", void 0);
     __decorate([
-        Metadata({ data: "json, name=url" }),
+        SpeakeasyMetadata({ data: "json, name=url" }),
         __metadata("design:type", String)
     ], FaxV1FaxFaxMedia.prototype, "url", void 0);
     return FaxV1FaxFaxMedia;

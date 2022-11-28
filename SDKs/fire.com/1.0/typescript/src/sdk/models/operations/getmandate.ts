@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetMandatePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=mandateUuid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=mandateUuid" })
   mandateUuid: string;
 }
 
 
 export class GetMandateRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetMandatePathParams;
 }
 
 
 export class GetMandateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   onemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItems?: shared.OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItems;
 }

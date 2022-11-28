@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Phone } from "./phone";
+
 
 
 // PhoneList
@@ -8,9 +8,9 @@ import { Phone } from "./phone";
  * Phones List
 **/
 export class PhoneList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=phones", elemType: shared.Phone })
+  @SpeakeasyMetadata({ data: "json, name=phones", elemType: Phone })
   phones: Phone[];
 
-  @Metadata({ data: "json, name=sum" })
+  @SpeakeasyMetadata({ data: "json, name=sum" })
   sum: number;
 }

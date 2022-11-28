@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudChannelV1AssociationInfo
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Association links that an entitlement has to other entitlements.
 **/
 export class GoogleCloudChannelV1AssociationInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=baseEntitlement" })
+  @SpeakeasyMetadata({ data: "json, name=baseEntitlement" })
   baseEntitlement?: string;
 }

@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class CreateArtifactIfExistsEnum(str, Enum):
@@ -35,15 +36,15 @@ class CreateArtifactHeaders:
 
 @dataclass
 class CreateArtifactRequest:
-    query_params: CreateArtifactQueryParams = field(default=None)
-    headers: CreateArtifactHeaders = field(default=None)
-    request: bytes = field(default=None, metadata={'request': { 'media_type': '*/*' }})
+    headers: CreateArtifactHeaders = field()
+    query_params: CreateArtifactQueryParams = field()
+    request: bytes = field(metadata={'request': { 'media_type': '*/*' }})
     
 
 @dataclass
 class CreateArtifactResponse:
+    content_type: str = field()
+    status_code: int = field()
     artifact_meta_data: Optional[shared.ArtifactMetaData] = field(default=None)
-    content_type: str = field(default=None)
     error: Optional[shared.Error] = field(default=None)
-    status_code: int = field(default=None)
     

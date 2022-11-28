@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class CreateHookSecurity:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    api_key: shared.SchemeAPIKey = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class CreateHookRequest:
-    request: shared.CreateHookInput = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
-    security: CreateHookSecurity = field(default=None)
+    request: shared.CreateHookInput = field(metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    security: CreateHookSecurity = field()
     
 
 @dataclass
 class CreateHookResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     hook: Optional[shared.Hook] = field(default=None)
-    status_code: int = field(default=None)
     

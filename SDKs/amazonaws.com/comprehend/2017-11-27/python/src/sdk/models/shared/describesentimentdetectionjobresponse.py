@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import sentimentdetectionjobproperties
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeSentimentDetectionJobResponse:
-    sentiment_detection_job_properties: Optional[sentimentdetectionjobproperties.SentimentDetectionJobProperties] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SentimentDetectionJobProperties' }})
+    sentiment_detection_job_properties: Optional[SentimentDetectionJobProperties] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SentimentDetectionJobProperties') }})
     

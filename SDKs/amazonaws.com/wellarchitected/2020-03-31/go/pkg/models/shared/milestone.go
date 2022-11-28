@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Milestone
+// A milestone return object.
 type Milestone struct {
 	MilestoneName   *string    `json:"MilestoneName,omitempty"`
 	MilestoneNumber *int64     `json:"MilestoneNumber,omitempty"`

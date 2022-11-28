@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// HistoryExportEntity
+// Show History Export
 type HistoryExportEntity struct {
 	EndAt                    *time.Time `json:"end_at,omitempty"`
 	HistoryVersion           *string    `json:"history_version,omitempty"`

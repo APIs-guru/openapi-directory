@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AzStatusEnum } from "./azstatusenum";
 import { Endpoint } from "./endpoint";
 import { ClusterPendingUpdates } from "./clusterpendingupdates";

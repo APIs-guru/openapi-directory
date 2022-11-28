@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SearchKeywordCount } from "./searchkeywordcount";
+
 
 
 // ListSearchKeywordImpressionsMonthlyResponse
@@ -8,9 +8,9 @@ import { SearchKeywordCount } from "./searchkeywordcount";
  * Represents the response for ListSearchKeywordImpressionsMonthly.
 **/
 export class ListSearchKeywordImpressionsMonthlyResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=searchKeywordsCounts", elemType: shared.SearchKeywordCount })
+  @SpeakeasyMetadata({ data: "json, name=searchKeywordsCounts", elemType: SearchKeywordCount })
   searchKeywordsCounts?: SearchKeywordCount[];
 }

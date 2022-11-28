@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PostRoutingVersionNumberCalculateRouteLocationsContentTypePathParams = /** @class */ (function (_super) {
     __extends(PostRoutingVersionNumberCalculateRouteLocationsContentTypePathParams, _super);
@@ -30,15 +30,15 @@ var PostRoutingVersionNumberCalculateRouteLocationsContentTypePathParams = /** @
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=contentType" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=contentType" }),
         __metadata("design:type", String)
     ], PostRoutingVersionNumberCalculateRouteLocationsContentTypePathParams.prototype, "contentType", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=locations" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=locations" }),
         __metadata("design:type", String)
     ], PostRoutingVersionNumberCalculateRouteLocationsContentTypePathParams.prototype, "locations", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=versionNumber" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=versionNumber" }),
         __metadata("design:type", Number)
     ], PostRoutingVersionNumberCalculateRouteLocationsContentTypePathParams.prototype, "versionNumber", void 0);
     return PostRoutingVersionNumberCalculateRouteLocationsContentTypePathParams;
@@ -50,159 +50,159 @@ var PostRoutingVersionNumberCalculateRouteLocationsContentTypeQueryParams = /** 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=accelerationEfficiency" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=accelerationEfficiency" }),
         __metadata("design:type", Number)
     ], PostRoutingVersionNumberCalculateRouteLocationsContentTypeQueryParams.prototype, "accelerationEfficiency", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alternativeType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alternativeType" }),
         __metadata("design:type", String)
     ], PostRoutingVersionNumberCalculateRouteLocationsContentTypeQueryParams.prototype, "alternativeType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=arriveAt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=arriveAt" }),
         __metadata("design:type", String)
     ], PostRoutingVersionNumberCalculateRouteLocationsContentTypeQueryParams.prototype, "arriveAt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=auxiliaryPowerInLitersPerHour" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=auxiliaryPowerInLitersPerHour" }),
         __metadata("design:type", Number)
     ], PostRoutingVersionNumberCalculateRouteLocationsContentTypeQueryParams.prototype, "auxiliaryPowerInLitersPerHour", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=avoid" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=avoid" }),
         __metadata("design:type", String)
     ], PostRoutingVersionNumberCalculateRouteLocationsContentTypeQueryParams.prototype, "avoid", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], PostRoutingVersionNumberCalculateRouteLocationsContentTypeQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=computeBestOrder" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=computeBestOrder" }),
         __metadata("design:type", Boolean)
     ], PostRoutingVersionNumberCalculateRouteLocationsContentTypeQueryParams.prototype, "computeBestOrder", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=computeTravelTimeFor" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=computeTravelTimeFor" }),
         __metadata("design:type", String)
     ], PostRoutingVersionNumberCalculateRouteLocationsContentTypeQueryParams.prototype, "computeTravelTimeFor", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=constantSpeedConsumptionInLitersPerHundredkm" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=constantSpeedConsumptionInLitersPerHundredkm" }),
         __metadata("design:type", String)
     ], PostRoutingVersionNumberCalculateRouteLocationsContentTypeQueryParams.prototype, "constantSpeedConsumptionInLitersPerHundredkm", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=constantSpeedConsumptionInkWhPerHundredkm" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=constantSpeedConsumptionInkWhPerHundredkm" }),
         __metadata("design:type", String)
     ], PostRoutingVersionNumberCalculateRouteLocationsContentTypeQueryParams.prototype, "constantSpeedConsumptionInkWhPerHundredkm", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=currentFuelInLiters" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=currentFuelInLiters" }),
         __metadata("design:type", Number)
     ], PostRoutingVersionNumberCalculateRouteLocationsContentTypeQueryParams.prototype, "currentFuelInLiters", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=decelerationEfficiency" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=decelerationEfficiency" }),
         __metadata("design:type", Number)
     ], PostRoutingVersionNumberCalculateRouteLocationsContentTypeQueryParams.prototype, "decelerationEfficiency", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=departAt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=departAt" }),
         __metadata("design:type", String)
     ], PostRoutingVersionNumberCalculateRouteLocationsContentTypeQueryParams.prototype, "departAt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=downhillEfficiency" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=downhillEfficiency" }),
         __metadata("design:type", Number)
     ], PostRoutingVersionNumberCalculateRouteLocationsContentTypeQueryParams.prototype, "downhillEfficiency", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fuelEnergyDensityInMJoulesPerLiter" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fuelEnergyDensityInMJoulesPerLiter" }),
         __metadata("design:type", Number)
     ], PostRoutingVersionNumberCalculateRouteLocationsContentTypeQueryParams.prototype, "fuelEnergyDensityInMJoulesPerLiter", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=hilliness" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=hilliness" }),
         __metadata("design:type", String)
     ], PostRoutingVersionNumberCalculateRouteLocationsContentTypeQueryParams.prototype, "hilliness", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=instructionsType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=instructionsType" }),
         __metadata("design:type", String)
     ], PostRoutingVersionNumberCalculateRouteLocationsContentTypeQueryParams.prototype, "instructionsType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=language" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=language" }),
         __metadata("design:type", String)
     ], PostRoutingVersionNumberCalculateRouteLocationsContentTypeQueryParams.prototype, "language", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=maxAlternatives" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxAlternatives" }),
         __metadata("design:type", Number)
     ], PostRoutingVersionNumberCalculateRouteLocationsContentTypeQueryParams.prototype, "maxAlternatives", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=minDeviationDistance" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=minDeviationDistance" }),
         __metadata("design:type", Number)
     ], PostRoutingVersionNumberCalculateRouteLocationsContentTypeQueryParams.prototype, "minDeviationDistance", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=minDeviationTime" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=minDeviationTime" }),
         __metadata("design:type", Number)
     ], PostRoutingVersionNumberCalculateRouteLocationsContentTypeQueryParams.prototype, "minDeviationTime", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=report" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=report" }),
         __metadata("design:type", String)
     ], PostRoutingVersionNumberCalculateRouteLocationsContentTypeQueryParams.prototype, "report", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=routeRepresentation" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=routeRepresentation" }),
         __metadata("design:type", String)
     ], PostRoutingVersionNumberCalculateRouteLocationsContentTypeQueryParams.prototype, "routeRepresentation", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=routeType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=routeType" }),
         __metadata("design:type", String)
     ], PostRoutingVersionNumberCalculateRouteLocationsContentTypeQueryParams.prototype, "routeType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sectionType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sectionType" }),
         __metadata("design:type", String)
     ], PostRoutingVersionNumberCalculateRouteLocationsContentTypeQueryParams.prototype, "sectionType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=traffic" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=traffic" }),
         __metadata("design:type", Boolean)
     ], PostRoutingVersionNumberCalculateRouteLocationsContentTypeQueryParams.prototype, "traffic", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=travelMode" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=travelMode" }),
         __metadata("design:type", String)
     ], PostRoutingVersionNumberCalculateRouteLocationsContentTypeQueryParams.prototype, "travelMode", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uphillEfficiency" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uphillEfficiency" }),
         __metadata("design:type", Number)
     ], PostRoutingVersionNumberCalculateRouteLocationsContentTypeQueryParams.prototype, "uphillEfficiency", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=vehicleAxleWeight" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=vehicleAxleWeight" }),
         __metadata("design:type", Number)
     ], PostRoutingVersionNumberCalculateRouteLocationsContentTypeQueryParams.prototype, "vehicleAxleWeight", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=vehicleCommercial" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=vehicleCommercial" }),
         __metadata("design:type", Boolean)
     ], PostRoutingVersionNumberCalculateRouteLocationsContentTypeQueryParams.prototype, "vehicleCommercial", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=vehicleEngineType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=vehicleEngineType" }),
         __metadata("design:type", String)
     ], PostRoutingVersionNumberCalculateRouteLocationsContentTypeQueryParams.prototype, "vehicleEngineType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=vehicleHeading" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=vehicleHeading" }),
         __metadata("design:type", Number)
     ], PostRoutingVersionNumberCalculateRouteLocationsContentTypeQueryParams.prototype, "vehicleHeading", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=vehicleHeight" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=vehicleHeight" }),
         __metadata("design:type", Number)
     ], PostRoutingVersionNumberCalculateRouteLocationsContentTypeQueryParams.prototype, "vehicleHeight", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=vehicleLength" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=vehicleLength" }),
         __metadata("design:type", Number)
     ], PostRoutingVersionNumberCalculateRouteLocationsContentTypeQueryParams.prototype, "vehicleLength", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=vehicleLoadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=vehicleLoadType" }),
         __metadata("design:type", String)
     ], PostRoutingVersionNumberCalculateRouteLocationsContentTypeQueryParams.prototype, "vehicleLoadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=vehicleMaxSpeed" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=vehicleMaxSpeed" }),
         __metadata("design:type", Number)
     ], PostRoutingVersionNumberCalculateRouteLocationsContentTypeQueryParams.prototype, "vehicleMaxSpeed", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=vehicleWeight" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=vehicleWeight" }),
         __metadata("design:type", Number)
     ], PostRoutingVersionNumberCalculateRouteLocationsContentTypeQueryParams.prototype, "vehicleWeight", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=vehicleWidth" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=vehicleWidth" }),
         __metadata("design:type", Number)
     ], PostRoutingVersionNumberCalculateRouteLocationsContentTypeQueryParams.prototype, "vehicleWidth", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=windingness" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=windingness" }),
         __metadata("design:type", String)
     ], PostRoutingVersionNumberCalculateRouteLocationsContentTypeQueryParams.prototype, "windingness", void 0);
     return PostRoutingVersionNumberCalculateRouteLocationsContentTypeQueryParams;
@@ -214,11 +214,11 @@ var PostRoutingVersionNumberCalculateRouteLocationsContentTypeRequests = /** @cl
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/xml" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/xml" }),
         __metadata("design:type", Uint8Array)
     ], PostRoutingVersionNumberCalculateRouteLocationsContentTypeRequests.prototype, "applicationXml", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.CalculateRoutePostDataParameters)
     ], PostRoutingVersionNumberCalculateRouteLocationsContentTypeRequests.prototype, "calculateRoutePostDataParameters", void 0);
     return PostRoutingVersionNumberCalculateRouteLocationsContentTypeRequests;
@@ -230,15 +230,15 @@ var PostRoutingVersionNumberCalculateRouteLocationsContentTypeRequest = /** @cla
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostRoutingVersionNumberCalculateRouteLocationsContentTypePathParams)
     ], PostRoutingVersionNumberCalculateRouteLocationsContentTypeRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostRoutingVersionNumberCalculateRouteLocationsContentTypeQueryParams)
     ], PostRoutingVersionNumberCalculateRouteLocationsContentTypeRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostRoutingVersionNumberCalculateRouteLocationsContentTypeRequests)
     ], PostRoutingVersionNumberCalculateRouteLocationsContentTypeRequest.prototype, "request", void 0);
     return PostRoutingVersionNumberCalculateRouteLocationsContentTypeRequest;
@@ -250,11 +250,11 @@ var PostRoutingVersionNumberCalculateRouteLocationsContentTypeResponse = /** @cl
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostRoutingVersionNumberCalculateRouteLocationsContentTypeResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostRoutingVersionNumberCalculateRouteLocationsContentTypeResponse.prototype, "statusCode", void 0);
     return PostRoutingVersionNumberCalculateRouteLocationsContentTypeResponse;

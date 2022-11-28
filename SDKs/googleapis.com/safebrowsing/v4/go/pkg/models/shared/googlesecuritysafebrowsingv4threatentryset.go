@@ -8,6 +8,8 @@ const (
 	GoogleSecuritySafebrowsingV4ThreatEntrySetCompressionTypeEnumRice                       GoogleSecuritySafebrowsingV4ThreatEntrySetCompressionTypeEnum = "RICE"
 )
 
+// GoogleSecuritySafebrowsingV4ThreatEntrySet
+// A set of threats that should be added or removed from a client's local database.
 type GoogleSecuritySafebrowsingV4ThreatEntrySet struct {
 	CompressionType *GoogleSecuritySafebrowsingV4ThreatEntrySetCompressionTypeEnum `json:"compressionType,omitempty"`
 	RawHashes       *GoogleSecuritySafebrowsingV4RawHashes                         `json:"rawHashes,omitempty"`

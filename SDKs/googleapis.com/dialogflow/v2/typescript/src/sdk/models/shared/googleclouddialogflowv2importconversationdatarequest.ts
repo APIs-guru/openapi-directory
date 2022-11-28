@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowV2InputConfig } from "./googleclouddialogflowv2inputconfig";
+
 
 
 // GoogleCloudDialogflowV2ImportConversationDataRequest
@@ -7,6 +8,6 @@ import { GoogleCloudDialogflowV2InputConfig } from "./googleclouddialogflowv2inp
  * The request message for ConversationDatasets.ImportConversationData.
 **/
 export class GoogleCloudDialogflowV2ImportConversationDataRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=inputConfig" })
+  @SpeakeasyMetadata({ data: "json, name=inputConfig" })
   inputConfig?: GoogleCloudDialogflowV2InputConfig;
 }

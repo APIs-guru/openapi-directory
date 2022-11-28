@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AdminCustomersChromePrintServersBatchCreatePrintServersPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class AdminCustomersChromePrintServersBatchCreatePrintServersQueryParams:
 
 @dataclass
 class AdminCustomersChromePrintServersBatchCreatePrintServersSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AdminCustomersChromePrintServersBatchCreatePrintServersRequest:
-    path_params: AdminCustomersChromePrintServersBatchCreatePrintServersPathParams = field(default=None)
-    query_params: AdminCustomersChromePrintServersBatchCreatePrintServersQueryParams = field(default=None)
-    request: Optional[shared.BatchCreatePrintServersRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AdminCustomersChromePrintServersBatchCreatePrintServersSecurity = field(default=None)
+    path_params: AdminCustomersChromePrintServersBatchCreatePrintServersPathParams = field()
+    query_params: AdminCustomersChromePrintServersBatchCreatePrintServersQueryParams = field()
+    security: AdminCustomersChromePrintServersBatchCreatePrintServersSecurity = field()
+    request: Optional[shared.BatchCreatePrintServersRequestInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class AdminCustomersChromePrintServersBatchCreatePrintServersResponse:
+    content_type: str = field()
+    status_code: int = field()
     batch_create_print_servers_response: Optional[shared.BatchCreatePrintServersResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

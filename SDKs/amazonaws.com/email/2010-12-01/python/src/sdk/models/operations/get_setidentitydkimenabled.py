@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetSetIdentityDkimEnabledActionEnum(str, Enum):
     SET_IDENTITY_DKIM_ENABLED = "SetIdentityDkimEnabled"
@@ -10,10 +14,10 @@ class GetSetIdentityDkimEnabledVersionEnum(str, Enum):
 
 @dataclass
 class GetSetIdentityDkimEnabledQueryParams:
-    action: GetSetIdentityDkimEnabledActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    dkim_enabled: bool = field(default=None, metadata={'query_param': { 'field_name': 'DkimEnabled', 'style': 'form', 'explode': True }})
-    identity: str = field(default=None, metadata={'query_param': { 'field_name': 'Identity', 'style': 'form', 'explode': True }})
-    version: GetSetIdentityDkimEnabledVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetSetIdentityDkimEnabledActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    dkim_enabled: bool = field(metadata={'query_param': { 'field_name': 'DkimEnabled', 'style': 'form', 'explode': True }})
+    identity: str = field(metadata={'query_param': { 'field_name': 'Identity', 'style': 'form', 'explode': True }})
+    version: GetSetIdentityDkimEnabledVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetSetIdentityDkimEnabledHeaders:
 
 @dataclass
 class GetSetIdentityDkimEnabledRequest:
-    query_params: GetSetIdentityDkimEnabledQueryParams = field(default=None)
-    headers: GetSetIdentityDkimEnabledHeaders = field(default=None)
+    headers: GetSetIdentityDkimEnabledHeaders = field()
+    query_params: GetSetIdentityDkimEnabledQueryParams = field()
     
 
 @dataclass
 class GetSetIdentityDkimEnabledResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

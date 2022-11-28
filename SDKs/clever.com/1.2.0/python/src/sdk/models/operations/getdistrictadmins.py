@@ -12,12 +12,12 @@ class GetDistrictAdminsQueryParams:
 
 @dataclass
 class GetDistrictAdminsRequest:
-    query_params: GetDistrictAdminsQueryParams = field(default=None)
+    query_params: GetDistrictAdminsQueryParams = field()
     
 
 @dataclass
 class GetDistrictAdminsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     district_admins_response: Optional[shared.DistrictAdminsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class EnterpriseAdminUpdateAttributeForEnterpriseUserPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=enterprise" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=enterprise" })
   enterprise: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=scim_user_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=scim_user_id" })
   scimUserId: string;
 }
 
 
 export class EnterpriseAdminUpdateAttributeForEnterpriseUserRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Operations" })
+  @SpeakeasyMetadata({ data: "json, name=Operations" })
   operations: Map<string, any>[];
 
-  @Metadata({ data: "json, name=schemas" })
+  @SpeakeasyMetadata({ data: "json, name=schemas" })
   schemas: string[];
 }
 
 
 export class EnterpriseAdminUpdateAttributeForEnterpriseUserRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: EnterpriseAdminUpdateAttributeForEnterpriseUserPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: EnterpriseAdminUpdateAttributeForEnterpriseUserRequestBody;
 }
 
 
 export class EnterpriseAdminUpdateAttributeForEnterpriseUserResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   scimEnterpriseUser?: shared.ScimEnterpriseUser;
 }

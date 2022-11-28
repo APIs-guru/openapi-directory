@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class AwsAccessKeysAuthenticationModeEnum(str, Enum):
     CREDENTIALS = "credentials"
@@ -9,7 +11,7 @@ class AwsAccessKeysAuthenticationModeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class AwsAccessKeys:
-    access_key_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'accessKeyId' }})
-    authentication_mode: Optional[AwsAccessKeysAuthenticationModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'authenticationMode' }})
-    secret_access_key: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'secretAccessKey' }})
+    access_key_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('accessKeyId') }})
+    secret_access_key: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('secretAccessKey') }})
+    authentication_mode: Optional[AwsAccessKeysAuthenticationModeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('authenticationMode') }})
     

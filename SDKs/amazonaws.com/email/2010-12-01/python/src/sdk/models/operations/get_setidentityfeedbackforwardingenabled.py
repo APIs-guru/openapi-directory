@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetSetIdentityFeedbackForwardingEnabledActionEnum(str, Enum):
     SET_IDENTITY_FEEDBACK_FORWARDING_ENABLED = "SetIdentityFeedbackForwardingEnabled"
@@ -10,10 +14,10 @@ class GetSetIdentityFeedbackForwardingEnabledVersionEnum(str, Enum):
 
 @dataclass
 class GetSetIdentityFeedbackForwardingEnabledQueryParams:
-    action: GetSetIdentityFeedbackForwardingEnabledActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    forwarding_enabled: bool = field(default=None, metadata={'query_param': { 'field_name': 'ForwardingEnabled', 'style': 'form', 'explode': True }})
-    identity: str = field(default=None, metadata={'query_param': { 'field_name': 'Identity', 'style': 'form', 'explode': True }})
-    version: GetSetIdentityFeedbackForwardingEnabledVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetSetIdentityFeedbackForwardingEnabledActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    forwarding_enabled: bool = field(metadata={'query_param': { 'field_name': 'ForwardingEnabled', 'style': 'form', 'explode': True }})
+    identity: str = field(metadata={'query_param': { 'field_name': 'Identity', 'style': 'form', 'explode': True }})
+    version: GetSetIdentityFeedbackForwardingEnabledVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetSetIdentityFeedbackForwardingEnabledHeaders:
 
 @dataclass
 class GetSetIdentityFeedbackForwardingEnabledRequest:
-    query_params: GetSetIdentityFeedbackForwardingEnabledQueryParams = field(default=None)
-    headers: GetSetIdentityFeedbackForwardingEnabledHeaders = field(default=None)
+    headers: GetSetIdentityFeedbackForwardingEnabledHeaders = field()
+    query_params: GetSetIdentityFeedbackForwardingEnabledQueryParams = field()
     
 
 @dataclass
 class GetSetIdentityFeedbackForwardingEnabledResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

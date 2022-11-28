@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OAuthGrantTypeEnum } from "./oauthgranttypeenum";
 import { OAuthScopesElementEnum } from "./oauthscopeselementenum";
 import { SocialProviderSettings } from "./socialprovidersettings";
+
 
 
 // CreateBackendAuthOAuthConfig
@@ -9,21 +10,21 @@ import { SocialProviderSettings } from "./socialprovidersettings";
  * Creates the OAuth configuration for your Amplify project.
 **/
 export class CreateBackendAuthOAuthConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DomainPrefix" })
+  @SpeakeasyMetadata({ data: "json, name=DomainPrefix" })
   domainPrefix?: string;
 
-  @Metadata({ data: "json, name=OAuthGrantType" })
+  @SpeakeasyMetadata({ data: "json, name=OAuthGrantType" })
   oAuthGrantType: OAuthGrantTypeEnum;
 
-  @Metadata({ data: "json, name=OAuthScopes" })
+  @SpeakeasyMetadata({ data: "json, name=OAuthScopes" })
   oAuthScopes: OAuthScopesElementEnum[];
 
-  @Metadata({ data: "json, name=RedirectSignInURIs" })
+  @SpeakeasyMetadata({ data: "json, name=RedirectSignInURIs" })
   redirectSignInUrIs: string[];
 
-  @Metadata({ data: "json, name=RedirectSignOutURIs" })
+  @SpeakeasyMetadata({ data: "json, name=RedirectSignOutURIs" })
   redirectSignOutUrIs: string[];
 
-  @Metadata({ data: "json, name=SocialProviderSettings" })
+  @SpeakeasyMetadata({ data: "json, name=SocialProviderSettings" })
   socialProviderSettings?: SocialProviderSettings;
 }

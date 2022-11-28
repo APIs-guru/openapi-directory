@@ -79,10 +79,9 @@ const (
 	WritablePowerOutletTemplateTypeEnumHdotCx         WritablePowerOutletTemplateTypeEnum = "hdot-cx"
 )
 
-type WritablePowerOutletTemplate struct {
+type WritablePowerOutletTemplateInput struct {
 	DeviceType int64                                   `json:"device_type"`
 	FeedLeg    *WritablePowerOutletTemplateFeedLegEnum `json:"feed_leg,omitempty"`
-	ID         *int64                                  `json:"id,omitempty"`
 	Name       string                                  `json:"name"`
 	PowerPort  *int64                                  `json:"power_port,omitempty"`
 	Type       *WritablePowerOutletTemplateTypeEnum    `json:"type,omitempty"`

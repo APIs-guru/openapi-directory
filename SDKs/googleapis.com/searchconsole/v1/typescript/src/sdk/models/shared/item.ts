@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RichResultsIssue } from "./richresultsissue";
+
 
 
 // Item
@@ -8,9 +8,9 @@ import { RichResultsIssue } from "./richresultsissue";
  * A specific rich result found on the page.
 **/
 export class Item extends SpeakeasyBase {
-  @Metadata({ data: "json, name=issues", elemType: shared.RichResultsIssue })
+  @SpeakeasyMetadata({ data: "json, name=issues", elemType: RichResultsIssue })
   issues?: RichResultsIssue[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

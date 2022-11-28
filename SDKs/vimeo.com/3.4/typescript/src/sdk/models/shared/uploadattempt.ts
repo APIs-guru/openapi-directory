@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Video } from "./video";
 import { User } from "./user";
 
 
+
 export class UploadAttempt extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clip" })
+  @SpeakeasyMetadata({ data: "json, name=clip" })
   clip?: Video;
 
-  @Metadata({ data: "json, name=complete_uri" })
+  @SpeakeasyMetadata({ data: "json, name=complete_uri" })
   completeUri?: string;
 
-  @Metadata({ data: "json, name=form" })
+  @SpeakeasyMetadata({ data: "json, name=form" })
   form?: string;
 
-  @Metadata({ data: "json, name=ticket_id" })
+  @SpeakeasyMetadata({ data: "json, name=ticket_id" })
   ticketId: string;
 
-  @Metadata({ data: "json, name=upload_link" })
+  @SpeakeasyMetadata({ data: "json, name=upload_link" })
   uploadLink: string;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 
-  @Metadata({ data: "json, name=user" })
+  @SpeakeasyMetadata({ data: "json, name=user" })
   user: User;
 }

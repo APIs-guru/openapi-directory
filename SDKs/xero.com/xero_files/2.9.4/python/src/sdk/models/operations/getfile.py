@@ -5,29 +5,29 @@ from sdk.models import shared
 
 @dataclass
 class GetFilePathParams:
-    file_id: str = field(default=None, metadata={'path_param': { 'field_name': 'FileId', 'style': 'simple', 'explode': False }})
+    file_id: str = field(metadata={'path_param': { 'field_name': 'FileId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetFileHeaders:
-    xero_tenant_id: str = field(default=None, metadata={'header': { 'field_name': 'xero-tenant-id', 'style': 'simple', 'explode': False }})
+    xero_tenant_id: str = field(metadata={'header': { 'field_name': 'xero-tenant-id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetFileSecurity:
-    o_auth2: shared.SchemeOAuth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    o_auth2: shared.SchemeOAuth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetFileRequest:
-    path_params: GetFilePathParams = field(default=None)
-    headers: GetFileHeaders = field(default=None)
-    security: GetFileSecurity = field(default=None)
+    headers: GetFileHeaders = field()
+    path_params: GetFilePathParams = field()
+    security: GetFileSecurity = field()
     
 
 @dataclass
 class GetFileResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     file_object: Optional[shared.FileObject] = field(default=None)
-    status_code: int = field(default=None)
     

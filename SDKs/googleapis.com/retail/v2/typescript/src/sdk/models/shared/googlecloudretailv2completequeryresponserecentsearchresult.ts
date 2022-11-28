@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudRetailV2CompleteQueryResponseRecentSearchResult
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Recent search of this user.
 **/
 export class GoogleCloudRetailV2CompleteQueryResponseRecentSearchResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=recentSearch" })
+  @SpeakeasyMetadata({ data: "json, name=recentSearch" })
   recentSearch?: string;
 }

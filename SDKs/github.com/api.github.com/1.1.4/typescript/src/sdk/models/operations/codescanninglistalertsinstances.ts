@@ -1,65 +1,66 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CodeScanningListAlertsInstancesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=alert_number" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=alert_number" })
   alertNumber: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=owner" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=owner" })
   owner: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repo" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repo" })
   repo: string;
 }
 
 
 export class CodeScanningListAlertsInstancesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ref" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ref" })
   ref?: string;
 }
 
 
-export class CodeScanningListAlertsInstancesRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: CodeScanningListAlertsInstancesPathParams;
-
-  @Metadata()
-  queryParams: CodeScanningListAlertsInstancesQueryParams;
-}
-
-
 export class CodeScanningListAlertsInstances503ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: string;
 
-  @Metadata({ data: "json, name=documentation_url" })
+  @SpeakeasyMetadata({ data: "json, name=documentation_url" })
   documentationUrl?: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class CodeScanningListAlertsInstancesRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: CodeScanningListAlertsInstancesPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: CodeScanningListAlertsInstancesQueryParams;
+}
+
+
 export class CodeScanningListAlertsInstancesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 
-  @Metadata({ elemType: shared.CodeScanningAlertInstance })
+  @SpeakeasyMetadata({ elemType: shared.CodeScanningAlertInstance })
   codeScanningAlertInstances?: shared.CodeScanningAlertInstance[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   codeScanningListAlertsInstances503ApplicationJsonObject?: CodeScanningListAlertsInstances503ApplicationJson;
 }

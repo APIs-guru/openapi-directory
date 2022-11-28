@@ -1,5 +1,7 @@
 package shared
 
+// AwsEc2VpnConnectionDetails
+// Details about an Amazon EC2 VPN connection.
 type AwsEc2VpnConnectionDetails struct {
 	Category                     *string                                  `json:"Category,omitempty"`
 	CustomerGatewayConfiguration *string                                  `json:"CustomerGatewayConfiguration,omitempty"`

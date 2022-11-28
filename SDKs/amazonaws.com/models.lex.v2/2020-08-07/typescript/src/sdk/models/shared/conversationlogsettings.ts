@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AudioLogSetting } from "./audiologsetting";
 import { TextLogSetting } from "./textlogsetting";
+
 
 
 // ConversationLogSettings
@@ -9,9 +9,9 @@ import { TextLogSetting } from "./textlogsetting";
  * Configures conversation logging that saves audio, text, and metadata for the conversations with your users.
 **/
 export class ConversationLogSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=audioLogSettings", elemType: shared.AudioLogSetting })
+  @SpeakeasyMetadata({ data: "json, name=audioLogSettings", elemType: AudioLogSetting })
   audioLogSettings?: AudioLogSetting[];
 
-  @Metadata({ data: "json, name=textLogSettings", elemType: shared.TextLogSetting })
+  @SpeakeasyMetadata({ data: "json, name=textLogSettings", elemType: TextLogSetting })
   textLogSettings?: TextLogSetting[];
 }

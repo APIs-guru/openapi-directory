@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConfigurationStatus } from "./configurationstatus";
 import { EncryptionTypeEnum } from "./encryptiontypeenum";
 
 
+
 export class PutDefaultEncryptionConfigurationResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=configurationStatus" })
+  @SpeakeasyMetadata({ data: "json, name=configurationStatus" })
   configurationStatus: ConfigurationStatus;
 
-  @Metadata({ data: "json, name=encryptionType" })
+  @SpeakeasyMetadata({ data: "json, name=encryptionType" })
   encryptionType: EncryptionTypeEnum;
 
-  @Metadata({ data: "json, name=kmsKeyArn" })
+  @SpeakeasyMetadata({ data: "json, name=kmsKeyArn" })
   kmsKeyArn?: string;
 }

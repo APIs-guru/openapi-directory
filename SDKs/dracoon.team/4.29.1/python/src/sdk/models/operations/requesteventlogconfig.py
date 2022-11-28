@@ -10,13 +10,13 @@ class RequestEventlogConfigHeaders:
 
 @dataclass
 class RequestEventlogConfigRequest:
-    headers: RequestEventlogConfigHeaders = field(default=None)
+    headers: RequestEventlogConfigHeaders = field()
     
 
 @dataclass
 class RequestEventlogConfigResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     eventlog_config: Optional[shared.EventlogConfig] = field(default=None)
-    status_code: int = field(default=None)
     

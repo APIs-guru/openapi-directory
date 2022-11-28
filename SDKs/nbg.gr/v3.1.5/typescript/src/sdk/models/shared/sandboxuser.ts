@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SandboxBankAccount } from "./sandboxbankaccount";
 import { SandboxCard } from "./sandboxcard";
 import { SandboxRetryCacheEntry } from "./sandboxretrycacheentry";
+
 
 
 // SandboxUser
@@ -10,15 +10,15 @@ import { SandboxRetryCacheEntry } from "./sandboxretrycacheentry";
  * User data
 **/
 export class SandboxUser extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accounts", elemType: shared.SandboxBankAccount })
+  @SpeakeasyMetadata({ data: "json, name=accounts", elemType: SandboxBankAccount })
   accounts?: SandboxBankAccount[];
 
-  @Metadata({ data: "json, name=cards", elemType: shared.SandboxCard })
+  @SpeakeasyMetadata({ data: "json, name=cards", elemType: SandboxCard })
   cards?: SandboxCard[];
 
-  @Metadata({ data: "json, name=retryCacheEntries", elemType: shared.SandboxRetryCacheEntry })
+  @SpeakeasyMetadata({ data: "json, name=retryCacheEntries", elemType: SandboxRetryCacheEntry })
   retryCacheEntries?: SandboxRetryCacheEntry[];
 
-  @Metadata({ data: "json, name=userId" })
+  @SpeakeasyMetadata({ data: "json, name=userId" })
   userId?: string;
 }

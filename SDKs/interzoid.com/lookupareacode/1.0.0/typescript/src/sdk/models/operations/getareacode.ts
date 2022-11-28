@@ -1,49 +1,50 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetareacodeQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=areacode" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=areacode" })
   areacode: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=license" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=license" })
   license: string;
 }
 
 
-export class GetareacodeRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetareacodeQueryParams;
-}
-
-
 export class Getareacode200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Abbreviation" })
+  @SpeakeasyMetadata({ data: "json, name=Abbreviation" })
   abbreviation?: string;
 
-  @Metadata({ data: "json, name=AreaCode" })
+  @SpeakeasyMetadata({ data: "json, name=AreaCode" })
   areaCode?: string;
 
-  @Metadata({ data: "json, name=Code" })
+  @SpeakeasyMetadata({ data: "json, name=Code" })
   code?: string;
 
-  @Metadata({ data: "json, name=Credits" })
+  @SpeakeasyMetadata({ data: "json, name=Credits" })
   credits?: string;
 
-  @Metadata({ data: "json, name=Locale" })
+  @SpeakeasyMetadata({ data: "json, name=Locale" })
   locale?: string;
 
-  @Metadata({ data: "json, name=PrimaryCity" })
+  @SpeakeasyMetadata({ data: "json, name=PrimaryCity" })
   primaryCity?: string;
 }
 
 
+export class GetareacodeRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetareacodeQueryParams;
+}
+
+
 export class GetareacodeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getareacode200ApplicationJsonObject?: Getareacode200ApplicationJson;
 }

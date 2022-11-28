@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -12,28 +15,50 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def delete_account_access_consents_consent_id_(self, request: operations.DeleteAccountAccessConsentsConsentIDRequest) -> operations.DeleteAccountAccessConsentsConsentIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete Account Access Consents
+        Delete Account Access Consents by Consent ID
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/account-access-consents/{consentId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -86,13 +111,17 @@ class SDK:
 
     
     def delete_sandbox_sandbox_id_(self, request: operations.DeleteSandboxSandboxIDRequest) -> operations.DeleteSandboxSandboxIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete Sandbox
+        Delete Sandbox
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/sandbox/{sandboxId}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -139,15 +168,18 @@ class SDK:
 
     
     def get_account_access_consents_consent_id_(self, request: operations.GetAccountAccessConsentsConsentIDRequest) -> operations.GetAccountAccessConsentsConsentIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Account Access Consents
+        Get Account Access Consents by Consent ID
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/account-access-consents/{consentId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -206,15 +238,18 @@ class SDK:
 
     
     def get_accounts(self, request: operations.GetAccountsRequest) -> operations.GetAccountsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Accounts
+        Get Accounts
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/accounts"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -273,15 +308,18 @@ class SDK:
 
     
     def get_accounts_account_id_(self, request: operations.GetAccountsAccountIDRequest) -> operations.GetAccountsAccountIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Accounts
+        Get Accounts by Account ID
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/accounts/{accountId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -340,15 +378,18 @@ class SDK:
 
     
     def get_accounts_account_id_balances(self, request: operations.GetAccountsAccountIDBalancesRequest) -> operations.GetAccountsAccountIDBalancesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Balances
+        Get Balances by Account ID
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/accounts/{accountId}/balances", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -407,15 +448,18 @@ class SDK:
 
     
     def get_accounts_account_id_beneficiaries(self, request: operations.GetAccountsAccountIDBeneficiariesRequest) -> operations.GetAccountsAccountIDBeneficiariesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Beneficiaries
+        Get Beneficiaries by Account ID
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/accounts/{accountId}/beneficiaries", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -474,15 +518,18 @@ class SDK:
 
     
     def get_accounts_account_id_parties(self, request: operations.GetAccountsAccountIDPartiesRequest) -> operations.GetAccountsAccountIDPartiesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Parties
+        Get Parties by Account ID
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/accounts/{accountId}/parties", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -541,15 +588,18 @@ class SDK:
 
     
     def get_accounts_account_id_party(self, request: operations.GetAccountsAccountIDPartyRequest) -> operations.GetAccountsAccountIDPartyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Party
+        Get Party by Account ID
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/accounts/{accountId}/party", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -608,15 +658,18 @@ class SDK:
 
     
     def get_accounts_account_id_scheduled_payments(self, request: operations.GetAccountsAccountIDScheduledPaymentsRequest) -> operations.GetAccountsAccountIDScheduledPaymentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Scheduled Payments
+        Get Scheduled Payments by Account ID
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/accounts/{accountId}/scheduled-payments", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -675,15 +728,18 @@ class SDK:
 
     
     def get_accounts_account_id_standing_orders(self, request: operations.GetAccountsAccountIDStandingOrdersRequest) -> operations.GetAccountsAccountIDStandingOrdersResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Standing Orders
+        Get Standing Orders by Account ID
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/accounts/{accountId}/standing-orders", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -742,17 +798,19 @@ class SDK:
 
     
     def get_accounts_account_id_statements(self, request: operations.GetAccountsAccountIDStatementsRequest) -> operations.GetAccountsAccountIDStatementsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Statements
+        Get Statements by Account ID
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/accounts/{accountId}/statements", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -811,15 +869,18 @@ class SDK:
 
     
     def get_accounts_account_id_statements_statement_id_(self, request: operations.GetAccountsAccountIDStatementsStatementIDRequest) -> operations.GetAccountsAccountIDStatementsStatementIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Statements
+        Get Statements by Account ID and Statement ID
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/accounts/{accountId}/statements/{statementId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -878,15 +939,18 @@ class SDK:
 
     
     def get_accounts_account_id_statements_statement_id_file(self, request: operations.GetAccountsAccountIDStatementsStatementIDFileRequest) -> operations.GetAccountsAccountIDStatementsStatementIDFileResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Statements
+        Get Statement PDF File by Account ID and Statement ID
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/accounts/{accountId}/statements/{statementId}/file", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -929,15 +993,18 @@ class SDK:
 
     
     def get_accounts_account_id_statements_statement_id_transactions(self, request: operations.GetAccountsAccountIDStatementsStatementIDTransactionsRequest) -> operations.GetAccountsAccountIDStatementsStatementIDTransactionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Transactions
+        Get Transactions by Account ID and Statement ID
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/accounts/{accountId}/statements/{statementId}/transactions", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -996,17 +1063,19 @@ class SDK:
 
     
     def get_accounts_account_id_transactions(self, request: operations.GetAccountsAccountIDTransactionsRequest) -> operations.GetAccountsAccountIDTransactionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Transactions
+        Get Transactions by Account ID
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/accounts/{accountId}/transactions", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1065,15 +1134,18 @@ class SDK:
 
     
     def get_party(self, request: operations.GetPartyRequest) -> operations.GetPartyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Party
+        Get Party
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/party"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1132,13 +1204,17 @@ class SDK:
 
     
     def get_sandbox_sandbox_id_(self, request: operations.GetSandboxSandboxIDRequest) -> operations.GetSandboxSandboxIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Export Sandbox
+        Export Sandbox
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/sandbox/{sandboxId}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1191,19 +1267,21 @@ class SDK:
 
     
     def post_account_access_consents(self, request: operations.PostAccountAccessConsentsRequest) -> operations.PostAccountAccessConsentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create Account Access Consents
+        Create Account Access Consents
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/account-access-consents"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1265,19 +1343,21 @@ class SDK:
 
     
     def post_sandbox(self, request: operations.PostSandboxRequest) -> operations.PostSandboxResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create Sandbox
+        Create Sandbox
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/sandbox"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1333,19 +1413,21 @@ class SDK:
 
     
     def put_sandbox(self, request: operations.PutSandboxRequest) -> operations.PutSandboxResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Import Sandbox
+        Import Sandbox
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/sandbox"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

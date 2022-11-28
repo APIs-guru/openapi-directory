@@ -1,5 +1,7 @@
 package shared
 
+// PlacementGroupsListResponse
+// Placement Group List Response
 type PlacementGroupsListResponse struct {
 	Kind            *string          `json:"kind,omitempty"`
 	NextPageToken   *string          `json:"nextPageToken,omitempty"`

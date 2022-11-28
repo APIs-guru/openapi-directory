@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CaOptions
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes values that are relevant in a CA certificate.
 **/
 export class CaOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=isCa" })
+  @SpeakeasyMetadata({ data: "json, name=isCa" })
   isCa?: boolean;
 
-  @Metadata({ data: "json, name=maxIssuerPathLength" })
+  @SpeakeasyMetadata({ data: "json, name=maxIssuerPathLength" })
   maxIssuerPathLength?: number;
 }

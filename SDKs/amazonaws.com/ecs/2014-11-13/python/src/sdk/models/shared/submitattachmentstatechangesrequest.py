@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import attachmentstatechange
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SubmitAttachmentStateChangesRequest:
-    attachments: List[attachmentstatechange.AttachmentStateChange] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'attachments' }})
-    cluster: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cluster' }})
+    attachments: List[AttachmentStateChange] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('attachments') }})
+    cluster: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cluster') }})
     

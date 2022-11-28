@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IoUsage } from "./iousage";
 import { TimingInformation } from "./timinginformation";
 // CommitTransactionResult
@@ -35,19 +35,19 @@ var CommitTransactionResult = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CommitDigest" }),
+        SpeakeasyMetadata({ data: "json, name=CommitDigest" }),
         __metadata("design:type", String)
     ], CommitTransactionResult.prototype, "commitDigest", void 0);
     __decorate([
-        Metadata({ data: "json, name=ConsumedIOs" }),
+        SpeakeasyMetadata({ data: "json, name=ConsumedIOs" }),
         __metadata("design:type", IoUsage)
     ], CommitTransactionResult.prototype, "consumedIOs", void 0);
     __decorate([
-        Metadata({ data: "json, name=TimingInformation" }),
+        SpeakeasyMetadata({ data: "json, name=TimingInformation" }),
         __metadata("design:type", TimingInformation)
     ], CommitTransactionResult.prototype, "timingInformation", void 0);
     __decorate([
-        Metadata({ data: "json, name=TransactionId" }),
+        SpeakeasyMetadata({ data: "json, name=TransactionId" }),
         __metadata("design:type", String)
     ], CommitTransactionResult.prototype, "transactionId", void 0);
     return CommitTransactionResult;

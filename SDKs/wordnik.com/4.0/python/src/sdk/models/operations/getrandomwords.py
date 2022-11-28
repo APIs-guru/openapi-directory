@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 
 class GetRandomWordsSortByEnum(str, Enum):
     ALPHA = "alpha"
@@ -28,12 +29,12 @@ class GetRandomWordsQueryParams:
 
 @dataclass
 class GetRandomWordsRequest:
-    query_params: GetRandomWordsQueryParams = field(default=None)
+    query_params: GetRandomWordsQueryParams = field()
     
 
 @dataclass
 class GetRandomWordsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

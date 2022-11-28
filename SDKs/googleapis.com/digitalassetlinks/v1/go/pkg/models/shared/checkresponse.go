@@ -16,6 +16,8 @@ const (
 	CheckResponseErrorCodeEnumErrorCodeFetchBudgetExhausted        CheckResponseErrorCodeEnum = "ERROR_CODE_FETCH_BUDGET_EXHAUSTED"
 )
 
+// CheckResponse
+// Response message for the CheckAssetLinks call.
 type CheckResponse struct {
 	DebugString *string                      `json:"debugString,omitempty"`
 	ErrorCode   []CheckResponseErrorCodeEnum `json:"errorCode,omitempty"`

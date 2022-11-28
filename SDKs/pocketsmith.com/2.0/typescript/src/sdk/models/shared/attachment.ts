@@ -1,55 +1,56 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AttachmentContentTypeMeta extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=extension" })
+  @SpeakeasyMetadata({ data: "json, name=extension" })
   extension?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }
 
 
 export class AttachmentVariants extends SpeakeasyBase {
-  @Metadata({ data: "json, name=large_url" })
+  @SpeakeasyMetadata({ data: "json, name=large_url" })
   largeUrl?: string;
 
-  @Metadata({ data: "json, name=thumb_url" })
+  @SpeakeasyMetadata({ data: "json, name=thumb_url" })
   thumbUrl?: string;
 }
 
 
 export class Attachment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=content_type" })
+  @SpeakeasyMetadata({ data: "json, name=content_type" })
   contentType?: string;
 
-  @Metadata({ data: "json, name=content_type_meta" })
+  @SpeakeasyMetadata({ data: "json, name=content_type_meta" })
   contentTypeMeta?: AttachmentContentTypeMeta;
 
-  @Metadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata({ data: "json, name=created_at" })
   createdAt?: string;
 
-  @Metadata({ data: "json, name=file_name" })
+  @SpeakeasyMetadata({ data: "json, name=file_name" })
   fileName?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=original_url" })
+  @SpeakeasyMetadata({ data: "json, name=original_url" })
   originalUrl?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 
-  @Metadata({ data: "json, name=updated_at" })
+  @SpeakeasyMetadata({ data: "json, name=updated_at" })
   updatedAt?: string;
 
-  @Metadata({ data: "json, name=variants" })
+  @SpeakeasyMetadata({ data: "json, name=variants" })
   variants?: AttachmentVariants;
 }

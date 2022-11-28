@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteCatchAllPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=domainName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=domainName" })
   domainName: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=emailAddress" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=emailAddress" })
   emailAddress: string;
 }
 
 
 export class DeleteCatchAllQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=domain_name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=domain_name" })
   domainName: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=email_address" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=email_address" })
   emailAddress: string;
 }
 
 
 export class DeleteCatchAllRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DeleteCatchAllPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: DeleteCatchAllQueryParams;
 }
 
 
 export class DeleteCatchAllResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

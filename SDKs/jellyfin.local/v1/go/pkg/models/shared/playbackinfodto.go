@@ -1,5 +1,7 @@
 package shared
 
+// PlaybackInfoDto
+// Plabyback info dto.
 type PlaybackInfoDto struct {
 	AllowAudioStreamCopy *bool          `json:"AllowAudioStreamCopy,omitempty"`
 	AllowVideoStreamCopy *bool          `json:"AllowVideoStreamCopy,omitempty"`

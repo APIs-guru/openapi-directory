@@ -1,161 +1,161 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DistributionsResponseMeta extends SpeakeasyBase {
-  @Metadata({ data: "json, name=httpStatus" })
+  @SpeakeasyMetadata({ data: "json, name=httpStatus" })
   httpStatus?: string;
 
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId?: string;
 }
 
 
 export class DistributionsResponseResultElementsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fromEmail" })
+  @SpeakeasyMetadata({ data: "json, name=fromEmail" })
   fromEmail?: any;
 
-  @Metadata({ data: "json, name=fromName" })
+  @SpeakeasyMetadata({ data: "json, name=fromName" })
   fromName?: any;
 
-  @Metadata({ data: "json, name=replyToEmail" })
+  @SpeakeasyMetadata({ data: "json, name=replyToEmail" })
   replyToEmail?: any;
 }
 
 
 export class DistributionsResponseResultElementsMessage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=libraryId" })
+  @SpeakeasyMetadata({ data: "json, name=libraryId" })
   libraryId?: any;
 
-  @Metadata({ data: "json, name=messageId" })
+  @SpeakeasyMetadata({ data: "json, name=messageId" })
   messageId?: any;
 
-  @Metadata({ data: "json, name=messageText" })
+  @SpeakeasyMetadata({ data: "json, name=messageText" })
   messageText?: any;
 }
 
 
 export class DistributionsResponseResultElementsRecipients extends SpeakeasyBase {
-  @Metadata({ data: "json, name=contactId" })
+  @SpeakeasyMetadata({ data: "json, name=contactId" })
   contactId?: any;
 
-  @Metadata({ data: "json, name=libraryId" })
+  @SpeakeasyMetadata({ data: "json, name=libraryId" })
   libraryId?: string;
 
-  @Metadata({ data: "json, name=mailingListId" })
+  @SpeakeasyMetadata({ data: "json, name=mailingListId" })
   mailingListId?: string;
 
-  @Metadata({ data: "json, name=sampleId" })
+  @SpeakeasyMetadata({ data: "json, name=sampleId" })
   sampleId?: any;
 }
 
 
 export class DistributionsResponseResultElementsStats extends SpeakeasyBase {
-  @Metadata({ data: "json, name=blocked" })
+  @SpeakeasyMetadata({ data: "json, name=blocked" })
   blocked?: number;
 
-  @Metadata({ data: "json, name=bounced" })
+  @SpeakeasyMetadata({ data: "json, name=bounced" })
   bounced?: number;
 
-  @Metadata({ data: "json, name=complaints" })
+  @SpeakeasyMetadata({ data: "json, name=complaints" })
   complaints?: number;
 
-  @Metadata({ data: "json, name=failed" })
+  @SpeakeasyMetadata({ data: "json, name=failed" })
   failed?: number;
 
-  @Metadata({ data: "json, name=finished" })
+  @SpeakeasyMetadata({ data: "json, name=finished" })
   finished?: number;
 
-  @Metadata({ data: "json, name=opened" })
+  @SpeakeasyMetadata({ data: "json, name=opened" })
   opened?: number;
 
-  @Metadata({ data: "json, name=sent" })
+  @SpeakeasyMetadata({ data: "json, name=sent" })
   sent?: number;
 
-  @Metadata({ data: "json, name=skipped" })
+  @SpeakeasyMetadata({ data: "json, name=skipped" })
   skipped?: number;
 
-  @Metadata({ data: "json, name=started" })
+  @SpeakeasyMetadata({ data: "json, name=started" })
   started?: number;
 }
 
 
 export class DistributionsResponseResultElementsSurveyLink extends SpeakeasyBase {
-  @Metadata({ data: "json, name=expirationDate" })
+  @SpeakeasyMetadata({ data: "json, name=expirationDate" })
   expirationDate?: string;
 
-  @Metadata({ data: "json, name=linkType" })
+  @SpeakeasyMetadata({ data: "json, name=linkType" })
   linkType?: string;
 
-  @Metadata({ data: "json, name=surveyId" })
+  @SpeakeasyMetadata({ data: "json, name=surveyId" })
   surveyId?: string;
 }
 
 
 export class DistributionsResponseResultElements extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createdDate" })
+  @SpeakeasyMetadata({ data: "json, name=createdDate" })
   createdDate: string;
 
-  @Metadata({ data: "json, name=customHeaders" })
+  @SpeakeasyMetadata({ data: "json, name=customHeaders" })
   customHeaders: Map<string, any>;
 
-  @Metadata({ data: "json, name=embeddedData" })
+  @SpeakeasyMetadata({ data: "json, name=embeddedData" })
   embeddedData: any;
 
-  @Metadata({ data: "json, name=headers" })
+  @SpeakeasyMetadata({ data: "json, name=headers" })
   headers: DistributionsResponseResultElementsHeaders;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: DistributionsResponseResultElementsMessage;
 
-  @Metadata({ data: "json, name=modifiedDate" })
+  @SpeakeasyMetadata({ data: "json, name=modifiedDate" })
   modifiedDate: string;
 
-  @Metadata({ data: "json, name=organizationId" })
+  @SpeakeasyMetadata({ data: "json, name=organizationId" })
   organizationId: string;
 
-  @Metadata({ data: "json, name=ownerId" })
+  @SpeakeasyMetadata({ data: "json, name=ownerId" })
   ownerId: string;
 
-  @Metadata({ data: "json, name=parentDistributionId" })
+  @SpeakeasyMetadata({ data: "json, name=parentDistributionId" })
   parentDistributionId: any;
 
-  @Metadata({ data: "json, name=recipients" })
+  @SpeakeasyMetadata({ data: "json, name=recipients" })
   recipients: DistributionsResponseResultElementsRecipients;
 
-  @Metadata({ data: "json, name=requestStatus" })
+  @SpeakeasyMetadata({ data: "json, name=requestStatus" })
   requestStatus: string;
 
-  @Metadata({ data: "json, name=requestType" })
+  @SpeakeasyMetadata({ data: "json, name=requestType" })
   requestType: string;
 
-  @Metadata({ data: "json, name=sendDate" })
+  @SpeakeasyMetadata({ data: "json, name=sendDate" })
   sendDate: string;
 
-  @Metadata({ data: "json, name=stats" })
+  @SpeakeasyMetadata({ data: "json, name=stats" })
   stats: DistributionsResponseResultElementsStats;
 
-  @Metadata({ data: "json, name=surveyLink" })
+  @SpeakeasyMetadata({ data: "json, name=surveyLink" })
   surveyLink: DistributionsResponseResultElementsSurveyLink;
 }
 
 
 export class DistributionsResponseResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=elements", elemType: shared.DistributionsResponseResultElements })
+  @SpeakeasyMetadata({ data: "json, name=elements", elemType: DistributionsResponseResultElements })
   elements?: DistributionsResponseResultElements[];
 
-  @Metadata({ data: "json, name=nextPage" })
+  @SpeakeasyMetadata({ data: "json, name=nextPage" })
   nextPage?: any;
 }
 
 
 export class DistributionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=meta" })
+  @SpeakeasyMetadata({ data: "json, name=meta" })
   meta?: DistributionsResponseMeta;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result?: DistributionsResponseResult;
 }

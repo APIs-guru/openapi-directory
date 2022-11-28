@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TaskSet } from "./taskset";
 
 
+
 export class CreateTaskSetResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=taskSet" })
+  @SpeakeasyMetadata({ data: "json, name=taskSet" })
   taskSet?: TaskSet;
 }

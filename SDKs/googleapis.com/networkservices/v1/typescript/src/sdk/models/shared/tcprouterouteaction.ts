@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TcpRouteRouteDestination } from "./tcprouteroutedestination";
+
 
 
 // TcpRouteRouteAction
@@ -8,9 +8,9 @@ import { TcpRouteRouteDestination } from "./tcprouteroutedestination";
  * The specifications for routing traffic and applying associated policies.
 **/
 export class TcpRouteRouteAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=destinations", elemType: shared.TcpRouteRouteDestination })
+  @SpeakeasyMetadata({ data: "json, name=destinations", elemType: TcpRouteRouteDestination })
   destinations?: TcpRouteRouteDestination[];
 
-  @Metadata({ data: "json, name=originalDestination" })
+  @SpeakeasyMetadata({ data: "json, name=originalDestination" })
   originalDestination?: boolean;
 }

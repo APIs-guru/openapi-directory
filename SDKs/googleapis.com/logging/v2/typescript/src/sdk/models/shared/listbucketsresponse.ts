@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LogBucket } from "./logbucket";
+
 
 
 // ListBucketsResponse
@@ -8,9 +8,9 @@ import { LogBucket } from "./logbucket";
  * The response from ListBuckets.
 **/
 export class ListBucketsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=buckets", elemType: shared.LogBucket })
+  @SpeakeasyMetadata({ data: "json, name=buckets", elemType: LogBucket })
   buckets?: LogBucket[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

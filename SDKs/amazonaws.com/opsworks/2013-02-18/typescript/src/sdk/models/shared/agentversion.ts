@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StackConfigurationManager } from "./stackconfigurationmanager";
+
 
 
 // AgentVersion
@@ -7,9 +8,9 @@ import { StackConfigurationManager } from "./stackconfigurationmanager";
  * Describes an agent version.
 **/
 export class AgentVersion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConfigurationManager" })
+  @SpeakeasyMetadata({ data: "json, name=ConfigurationManager" })
   configurationManager?: StackConfigurationManager;
 
-  @Metadata({ data: "json, name=Version" })
+  @SpeakeasyMetadata({ data: "json, name=Version" })
   version?: string;
 }

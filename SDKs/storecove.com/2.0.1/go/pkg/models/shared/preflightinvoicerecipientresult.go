@@ -7,6 +7,8 @@ const (
 	PreflightInvoiceRecipientResultResultCodeEnumNok PreflightInvoiceRecipientResultResultCodeEnum = "nok"
 )
 
+// PreflightInvoiceRecipientResult
+// The result of preflighting an invoice recipient
 type PreflightInvoiceRecipientResult struct {
 	Code *PreflightInvoiceRecipientResultResultCodeEnum `json:"code,omitempty"`
 }

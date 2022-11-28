@@ -1,10 +1,16 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import webhookresource
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetWebhookResponse:
-    data: webhookresource.WebhookResource = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
+    r"""GetWebhookResponse
+    Successful response to get a single webhook.
+    
+    """
+    
+    data: WebhookResource = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
     

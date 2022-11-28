@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class CheckoutCustomFieldEditFieldsAreaEnum(str, Enum):
     CONTACT = "contact"
@@ -18,11 +23,11 @@ class CheckoutCustomFieldEditFieldsTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CheckoutCustomFieldEditFields:
-    area: Optional[CheckoutCustomFieldEditFieldsAreaEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'area' }})
-    custom_field_select_options: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'custom_field_select_options' }})
-    deletable: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deletable' }})
-    label: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
-    position: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'position' }})
-    required: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'required' }})
-    type: Optional[CheckoutCustomFieldEditFieldsTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    area: Optional[CheckoutCustomFieldEditFieldsAreaEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('area') }})
+    custom_field_select_options: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('custom_field_select_options') }})
+    deletable: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('deletable') }})
+    label: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('label') }})
+    position: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('position') }})
+    required: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('required') }})
+    type: Optional[CheckoutCustomFieldEditFieldsTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

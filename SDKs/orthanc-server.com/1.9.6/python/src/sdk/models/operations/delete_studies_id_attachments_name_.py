@@ -4,8 +4,8 @@ from typing import Optional
 
 @dataclass
 class DeleteStudiesIDAttachmentsNamePathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,12 +15,12 @@ class DeleteStudiesIDAttachmentsNameHeaders:
 
 @dataclass
 class DeleteStudiesIDAttachmentsNameRequest:
-    path_params: DeleteStudiesIDAttachmentsNamePathParams = field(default=None)
-    headers: DeleteStudiesIDAttachmentsNameHeaders = field(default=None)
+    headers: DeleteStudiesIDAttachmentsNameHeaders = field()
+    path_params: DeleteStudiesIDAttachmentsNamePathParams = field()
     
 
 @dataclass
 class DeleteStudiesIDAttachmentsNameResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

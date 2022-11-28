@@ -105,6 +105,8 @@ const (
 	IntegralAdScienceVideoViewabilityEnumVideoViewability70          IntegralAdScienceVideoViewabilityEnum = "VIDEO_VIEWABILITY_70"
 )
 
+// IntegralAdScience
+// Details of Integral Ad Science settings.
 type IntegralAdScience struct {
 	CustomSegmentID               []string                                            `json:"customSegmentId,omitempty"`
 	DisplayViewability            *IntegralAdScienceDisplayViewabilityEnum            `json:"displayViewability,omitempty"`

@@ -6,6 +6,8 @@ const (
 	GetDefineExpressionActionEnumDefineExpression GetDefineExpressionActionEnum = "DefineExpression"
 )
 
+// GetDefineExpressionExpression
+// A named expression that can be evaluated at search time. Can be used to sort the search results, define other expressions, or return computed information in the search results.
 type GetDefineExpressionExpression struct {
 	ExpressionName  string `queryParam:"name=ExpressionName"`
 	ExpressionValue string `queryParam:"name=ExpressionValue"`

@@ -18,6 +18,8 @@ const (
 	GetModifyTargetGroupHealthCheckProtocolEnumGeneve GetModifyTargetGroupHealthCheckProtocolEnum = "GENEVE"
 )
 
+// GetModifyTargetGroupMatcher
+// The codes to use when checking for a successful response from a target. If the protocol version is gRPC, these are gRPC codes. Otherwise, these are HTTP codes.
 type GetModifyTargetGroupMatcher struct {
 	GrpcCode *string `queryParam:"name=GrpcCode"`
 	HTTPCode *string `queryParam:"name=HttpCode"`

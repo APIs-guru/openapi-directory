@@ -1,71 +1,72 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetSavedQueryExportQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, serialization=json;name=q" })
+  @SpeakeasyMetadata({ data: "queryParam, serialization=json;name=q" })
   q?: number[];
 }
 
 
 export class GetSavedQueryExportSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   jwt: shared.SchemeJwt;
 }
 
 
-export class GetSavedQueryExportRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetSavedQueryExportQueryParams;
-
-  @Metadata()
-  security: GetSavedQueryExportSecurity;
-}
-
-
 export class GetSavedQueryExport400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetSavedQueryExport401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetSavedQueryExport404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetSavedQueryExport500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class GetSavedQueryExportRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetSavedQueryExportQueryParams;
+
+  @SpeakeasyMetadata()
+  security: GetSavedQueryExportSecurity;
+}
+
+
 export class GetSavedQueryExportResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getSavedQueryExport200ApplicationZipBinaryString?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getSavedQueryExport400ApplicationJsonObject?: GetSavedQueryExport400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getSavedQueryExport401ApplicationJsonObject?: GetSavedQueryExport401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getSavedQueryExport404ApplicationJsonObject?: GetSavedQueryExport404ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getSavedQueryExport500ApplicationJsonObject?: GetSavedQueryExport500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

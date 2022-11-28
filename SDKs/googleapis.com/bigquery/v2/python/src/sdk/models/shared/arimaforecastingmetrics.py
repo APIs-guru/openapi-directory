@@ -1,9 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import arimafittingmetrics
-from . import arimasinglemodelforecastingmetrics
-from . import arimaorder
+from sdk import utils
+from . import *
 
 class ArimaForecastingMetricsSeasonalPeriodsEnum(str, Enum):
     SEASONAL_PERIOD_TYPE_UNSPECIFIED = "SEASONAL_PERIOD_TYPE_UNSPECIFIED"
@@ -18,10 +18,14 @@ class ArimaForecastingMetricsSeasonalPeriodsEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ArimaForecastingMetrics:
-    arima_fitting_metrics: Optional[List[arimafittingmetrics.ArimaFittingMetrics]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'arimaFittingMetrics' }})
-    arima_single_model_forecasting_metrics: Optional[List[arimasinglemodelforecastingmetrics.ArimaSingleModelForecastingMetrics]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'arimaSingleModelForecastingMetrics' }})
-    has_drift: Optional[List[bool]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'hasDrift' }})
-    non_seasonal_order: Optional[List[arimaorder.ArimaOrder]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nonSeasonalOrder' }})
-    seasonal_periods: Optional[List[ArimaForecastingMetricsSeasonalPeriodsEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'seasonalPeriods' }})
-    time_series_id: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timeSeriesId' }})
+    r"""ArimaForecastingMetrics
+    Model evaluation metrics for ARIMA forecasting models.
+    """
+    
+    arima_fitting_metrics: Optional[List[ArimaFittingMetrics]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('arimaFittingMetrics') }})
+    arima_single_model_forecasting_metrics: Optional[List[ArimaSingleModelForecastingMetrics]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('arimaSingleModelForecastingMetrics') }})
+    has_drift: Optional[List[bool]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('hasDrift') }})
+    non_seasonal_order: Optional[List[ArimaOrder]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nonSeasonalOrder') }})
+    seasonal_periods: Optional[List[ArimaForecastingMetricsSeasonalPeriodsEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('seasonalPeriods') }})
+    time_series_id: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('timeSeriesId') }})
     

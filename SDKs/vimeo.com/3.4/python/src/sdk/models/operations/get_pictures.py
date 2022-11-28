@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetPicturesPathParams:
-    user_id: float = field(default=None, metadata={'path_param': { 'field_name': 'user_id', 'style': 'simple', 'explode': False }})
+    user_id: float = field(metadata={'path_param': { 'field_name': 'user_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,13 +16,13 @@ class GetPicturesQueryParams:
 
 @dataclass
 class GetPicturesRequest:
-    path_params: GetPicturesPathParams = field(default=None)
-    query_params: GetPicturesQueryParams = field(default=None)
+    path_params: GetPicturesPathParams = field()
+    query_params: GetPicturesQueryParams = field()
     
 
 @dataclass
 class GetPicturesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     pictures: Optional[List[shared.Picture]] = field(default=None)
     

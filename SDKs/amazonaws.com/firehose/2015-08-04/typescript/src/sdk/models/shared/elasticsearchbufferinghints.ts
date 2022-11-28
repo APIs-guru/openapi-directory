@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ElasticsearchBufferingHints
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes the buffering to perform before delivering data to the Amazon ES destination.
 **/
 export class ElasticsearchBufferingHints extends SpeakeasyBase {
-  @Metadata({ data: "json, name=IntervalInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=IntervalInSeconds" })
   intervalInSeconds?: number;
 
-  @Metadata({ data: "json, name=SizeInMBs" })
+  @SpeakeasyMetadata({ data: "json, name=SizeInMBs" })
   sizeInMBs?: number;
 }

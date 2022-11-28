@@ -19,20 +19,20 @@ class GetNearbyFacilitiesQueryParams:
 
 @dataclass
 class GetNearbyFacilitiesSecurity:
-    apikey: shared.SchemeApikey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    apikey: shared.SchemeApikey = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetNearbyFacilitiesRequest:
-    query_params: GetNearbyFacilitiesQueryParams = field(default=None)
-    security: GetNearbyFacilitiesSecurity = field(default=None)
+    query_params: GetNearbyFacilitiesQueryParams = field()
+    security: GetNearbyFacilitiesSecurity = field()
     
 
 @dataclass
 class GetNearbyFacilitiesResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_error: Optional[shared.APIError] = field(default=None)
-    content_type: str = field(default=None)
     generic_error: Optional[shared.GenericError] = field(default=None)
     nearby_response: Optional[shared.NearbyResponse] = field(default=None)
-    status_code: int = field(default=None)
     

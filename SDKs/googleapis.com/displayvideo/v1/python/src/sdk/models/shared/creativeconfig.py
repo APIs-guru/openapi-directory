@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import inventorysourcedisplaycreativeconfig
-from . import inventorysourcevideocreativeconfig
+from sdk import utils
+from . import *
 
 class CreativeConfigCreativeTypeEnum(str, Enum):
     CREATIVE_TYPE_UNSPECIFIED = "CREATIVE_TYPE_UNSPECIFIED"
@@ -25,7 +26,11 @@ class CreativeConfigCreativeTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CreativeConfig:
-    creative_type: Optional[CreativeConfigCreativeTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'creativeType' }})
-    display_creative_config: Optional[inventorysourcedisplaycreativeconfig.InventorySourceDisplayCreativeConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayCreativeConfig' }})
-    video_creative_config: Optional[inventorysourcevideocreativeconfig.InventorySourceVideoCreativeConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'videoCreativeConfig' }})
+    r"""CreativeConfig
+    Creative requirements configuration for the inventory source.
+    """
+    
+    creative_type: Optional[CreativeConfigCreativeTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('creativeType') }})
+    display_creative_config: Optional[InventorySourceDisplayCreativeConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayCreativeConfig') }})
+    video_creative_config: Optional[InventorySourceVideoCreativeConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('videoCreativeConfig') }})
     

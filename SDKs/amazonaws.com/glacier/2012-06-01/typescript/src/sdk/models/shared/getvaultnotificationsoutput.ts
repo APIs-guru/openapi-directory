@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VaultNotificationConfig } from "./vaultnotificationconfig";
+
 
 
 // GetVaultNotificationsOutput
@@ -7,6 +8,6 @@ import { VaultNotificationConfig } from "./vaultnotificationconfig";
  * Contains the Amazon S3 Glacier response to your request.
 **/
 export class GetVaultNotificationsOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=vaultNotificationConfig" })
+  @SpeakeasyMetadata({ data: "json, name=vaultNotificationConfig" })
   vaultNotificationConfig?: VaultNotificationConfig;
 }

@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostProjectsRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, name=global_access" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=global_access" })
   globalAccess: string;
 }
 
 
 export class PostProjectsRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=multipart/form-data" })
+  @SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" })
   request: PostProjectsRequestBody;
 }
 
 
 export class PostProjectsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   projectEntity?: shared.ProjectEntity;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

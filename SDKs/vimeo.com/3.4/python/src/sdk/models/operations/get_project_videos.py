@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetProjectVideosPathParams:
-    project_id: float = field(default=None, metadata={'path_param': { 'field_name': 'project_id', 'style': 'simple', 'explode': False }})
-    user_id: float = field(default=None, metadata={'path_param': { 'field_name': 'user_id', 'style': 'simple', 'explode': False }})
+    project_id: float = field(metadata={'path_param': { 'field_name': 'project_id', 'style': 'simple', 'explode': False }})
+    user_id: float = field(metadata={'path_param': { 'field_name': 'user_id', 'style': 'simple', 'explode': False }})
     
 class GetProjectVideosDirectionEnum(str, Enum):
     ASC = "asc"
@@ -30,20 +34,20 @@ class GetProjectVideosQueryParams:
 
 @dataclass
 class GetProjectVideosSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetProjectVideosRequest:
-    path_params: GetProjectVideosPathParams = field(default=None)
-    query_params: GetProjectVideosQueryParams = field(default=None)
-    security: GetProjectVideosSecurity = field(default=None)
+    path_params: GetProjectVideosPathParams = field()
+    query_params: GetProjectVideosQueryParams = field()
+    security: GetProjectVideosSecurity = field()
     
 
 @dataclass
 class GetProjectVideosResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[shared.Error] = field(default=None)
     videos: Optional[List[shared.Video]] = field(default=None)
     

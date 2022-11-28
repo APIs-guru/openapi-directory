@@ -1,5 +1,7 @@
 package shared
 
+// ContactInfo
+// Contact information defining a Customer Match audience member.
 type ContactInfo struct {
 	CountryCode        *string  `json:"countryCode,omitempty"`
 	HashedEmails       []string `json:"hashedEmails,omitempty"`

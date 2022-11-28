@@ -1,21 +1,21 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import licensecountingtype_enum
-from . import productinformation
-from . import tag
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateLicenseConfigurationRequest:
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
-    disassociate_when_not_found: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DisassociateWhenNotFound' }})
-    license_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LicenseCount' }})
-    license_count_hard_limit: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LicenseCountHardLimit' }})
-    license_counting_type: licensecountingtype_enum.LicenseCountingTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LicenseCountingType' }})
-    license_rules: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LicenseRules' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
-    product_information_list: Optional[List[productinformation.ProductInformation]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProductInformationList' }})
-    tags: Optional[List[tag.Tag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Tags' }})
+    license_counting_type: LicenseCountingTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('LicenseCountingType') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Description') }})
+    disassociate_when_not_found: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DisassociateWhenNotFound') }})
+    license_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('LicenseCount') }})
+    license_count_hard_limit: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('LicenseCountHardLimit') }})
+    license_rules: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('LicenseRules') }})
+    product_information_list: Optional[List[ProductInformation]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ProductInformationList') }})
+    tags: Optional[List[Tag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Tags') }})
     

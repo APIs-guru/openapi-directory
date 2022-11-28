@@ -1,5 +1,7 @@
 package shared
 
+// AwsS3ObjectDetails
+// Details about an Amazon S3 object.
 type AwsS3ObjectDetails struct {
 	ContentType          *string `json:"ContentType,omitempty"`
 	ETag                 *string `json:"ETag,omitempty"`

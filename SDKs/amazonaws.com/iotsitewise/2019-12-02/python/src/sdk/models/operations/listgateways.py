@@ -1,5 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
@@ -22,16 +25,16 @@ class ListGatewaysHeaders:
 
 @dataclass
 class ListGatewaysRequest:
-    query_params: ListGatewaysQueryParams = field(default=None)
-    headers: ListGatewaysHeaders = field(default=None)
+    headers: ListGatewaysHeaders = field()
+    query_params: ListGatewaysQueryParams = field()
     
 
 @dataclass
 class ListGatewaysResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     list_gateways_response: Optional[shared.ListGatewaysResponse] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

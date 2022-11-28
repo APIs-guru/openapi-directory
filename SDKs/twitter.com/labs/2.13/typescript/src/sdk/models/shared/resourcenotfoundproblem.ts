@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ResourceNotFoundProblemResourceTypeEnum {
-    User = "user"
-,    Tweet = "tweet"
-,    Media = "media"
+    User = "user",
+    Tweet = "tweet",
+    Media = "media"
 }
 
 
@@ -12,24 +13,24 @@ export enum ResourceNotFoundProblemResourceTypeEnum {
  * A problem that indicates that a given Tweet, User, etc. does not exist.
 **/
 export class ResourceNotFoundProblem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=detail" })
+  @SpeakeasyMetadata({ data: "json, name=detail" })
   detail: string;
 
-  @Metadata({ data: "json, name=parameter" })
+  @SpeakeasyMetadata({ data: "json, name=parameter" })
   parameter: string;
 
-  @Metadata({ data: "json, name=resource_id" })
+  @SpeakeasyMetadata({ data: "json, name=resource_id" })
   resourceId: string;
 
-  @Metadata({ data: "json, name=resource_type" })
+  @SpeakeasyMetadata({ data: "json, name=resource_type" })
   resourceType: ResourceNotFoundProblemResourceTypeEnum;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value: any;
 }

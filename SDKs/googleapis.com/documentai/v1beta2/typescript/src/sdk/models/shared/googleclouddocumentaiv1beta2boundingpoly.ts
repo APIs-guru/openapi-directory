@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDocumentaiV1beta2NormalizedVertex } from "./googleclouddocumentaiv1beta2normalizedvertex";
 import { GoogleCloudDocumentaiV1beta2Vertex } from "./googleclouddocumentaiv1beta2vertex";
+
 
 
 // GoogleCloudDocumentaiV1beta2BoundingPoly
@@ -9,9 +9,9 @@ import { GoogleCloudDocumentaiV1beta2Vertex } from "./googleclouddocumentaiv1bet
  * A bounding polygon for the detected image annotation.
 **/
 export class GoogleCloudDocumentaiV1beta2BoundingPoly extends SpeakeasyBase {
-  @Metadata({ data: "json, name=normalizedVertices", elemType: shared.GoogleCloudDocumentaiV1beta2NormalizedVertex })
+  @SpeakeasyMetadata({ data: "json, name=normalizedVertices", elemType: GoogleCloudDocumentaiV1beta2NormalizedVertex })
   normalizedVertices?: GoogleCloudDocumentaiV1beta2NormalizedVertex[];
 
-  @Metadata({ data: "json, name=vertices", elemType: shared.GoogleCloudDocumentaiV1beta2Vertex })
+  @SpeakeasyMetadata({ data: "json, name=vertices", elemType: GoogleCloudDocumentaiV1beta2Vertex })
   vertices?: GoogleCloudDocumentaiV1beta2Vertex[];
 }

@@ -30,6 +30,8 @@ const (
 	TaxSubtotalTaxCategoryEnumExemptionServiceTax   TaxSubtotalTaxCategoryEnum = "exemption_service_tax"
 )
 
+// TaxSubtotal
+// The total amount of tax of this type in the invoice.
 type TaxSubtotal struct {
 	Category      *TaxSubtotalTaxCategoryEnum `json:"category,omitempty"`
 	Country       *CountryEnum                `json:"country,omitempty"`

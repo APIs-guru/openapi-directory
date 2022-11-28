@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { TimeRange } from "./timerange";
 export declare class ListEngagementsRequest extends SpeakeasyBase {
     incidentId?: string;

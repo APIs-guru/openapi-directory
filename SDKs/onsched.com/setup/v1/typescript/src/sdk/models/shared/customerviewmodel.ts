@@ -1,106 +1,107 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CustomerViewModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=birthdate" })
+  @SpeakeasyMetadata({ data: "json, name=birthdate" })
   birthdate?: string;
 
-  @Metadata({ data: "json, name=businessName" })
+  @SpeakeasyMetadata({ data: "json, name=businessName" })
   businessName?: string;
 
-  @Metadata({ data: "json, name=companyName" })
+  @SpeakeasyMetadata({ data: "json, name=companyName" })
   companyName?: string;
 
-  @Metadata({ data: "json, name=createdBy" })
+  @SpeakeasyMetadata({ data: "json, name=createdBy" })
   createdBy?: string;
 
-  @Metadata({ data: "json, name=createdOn" })
+  @SpeakeasyMetadata({ data: "json, name=createdOn" })
   createdOn?: string;
 
-  @Metadata({ data: "json, name=deletedStatus" })
+  @SpeakeasyMetadata({ data: "json, name=deletedStatus" })
   deletedStatus?: boolean;
 
-  @Metadata({ data: "json, name=deletedTime" })
+  @SpeakeasyMetadata({ data: "json, name=deletedTime" })
   deletedTime?: string;
 
-  @Metadata({ data: "json, name=disabled" })
+  @SpeakeasyMetadata({ data: "json, name=disabled" })
   disabled?: boolean;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=emailInfo" })
+  @SpeakeasyMetadata({ data: "json, name=emailInfo" })
   emailInfo?: boolean;
 
-  @Metadata({ data: "json, name=emailPromotion" })
+  @SpeakeasyMetadata({ data: "json, name=emailPromotion" })
   emailPromotion?: boolean;
 
-  @Metadata({ data: "json, name=firstname" })
+  @SpeakeasyMetadata({ data: "json, name=firstname" })
   firstname?: string;
 
-  @Metadata({ data: "json, name=gender" })
+  @SpeakeasyMetadata({ data: "json, name=gender" })
   gender?: string;
 
-  @Metadata({ data: "json, name=groupId" })
+  @SpeakeasyMetadata({ data: "json, name=groupId" })
   groupId?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=inviteEmailSent" })
+  @SpeakeasyMetadata({ data: "json, name=inviteEmailSent" })
   inviteEmailSent?: string;
 
-  @Metadata({ data: "json, name=lastVisitDate" })
+  @SpeakeasyMetadata({ data: "json, name=lastVisitDate" })
   lastVisitDate?: string;
 
-  @Metadata({ data: "json, name=lastname" })
+  @SpeakeasyMetadata({ data: "json, name=lastname" })
   lastname?: string;
 
-  @Metadata({ data: "json, name=latitude" })
+  @SpeakeasyMetadata({ data: "json, name=latitude" })
   latitude?: string;
 
-  @Metadata({ data: "json, name=locationId" })
+  @SpeakeasyMetadata({ data: "json, name=locationId" })
   locationId?: string;
 
-  @Metadata({ data: "json, name=longitude" })
+  @SpeakeasyMetadata({ data: "json, name=longitude" })
   longitude?: string;
 
-  @Metadata({ data: "json, name=modifiedBy" })
+  @SpeakeasyMetadata({ data: "json, name=modifiedBy" })
   modifiedBy?: string;
 
-  @Metadata({ data: "json, name=modifiedOn" })
+  @SpeakeasyMetadata({ data: "json, name=modifiedOn" })
   modifiedOn?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=notificationType" })
+  @SpeakeasyMetadata({ data: "json, name=notificationType" })
   notificationType?: string;
 
-  @Metadata({ data: "json, name=objectName" })
+  @SpeakeasyMetadata({ data: "json, name=objectName" })
   objectName?: string;
 
-  @Metadata({ data: "json, name=registeredBy" })
+  @SpeakeasyMetadata({ data: "json, name=registeredBy" })
   registeredBy?: string;
 
-  @Metadata({ data: "json, name=registrationDate" })
+  @SpeakeasyMetadata({ data: "json, name=registrationDate" })
   registrationDate?: string;
 
-  @Metadata({ data: "json, name=resourceId" })
+  @SpeakeasyMetadata({ data: "json, name=resourceId" })
   resourceId?: string;
 
-  @Metadata({ data: "json, name=stripeCustomerId" })
+  @SpeakeasyMetadata({ data: "json, name=stripeCustomerId" })
   stripeCustomerId?: string;
 
-  @Metadata({ data: "json, name=subscriptionId" })
+  @SpeakeasyMetadata({ data: "json, name=subscriptionId" })
   subscriptionId?: string;
 
-  @Metadata({ data: "json, name=verificationDate" })
+  @SpeakeasyMetadata({ data: "json, name=verificationDate" })
   verificationDate?: string;
 
-  @Metadata({ data: "json, name=verifiedBy" })
+  @SpeakeasyMetadata({ data: "json, name=verifiedBy" })
   verifiedBy?: string;
 
-  @Metadata({ data: "json, name=welcomeEmailSent" })
+  @SpeakeasyMetadata({ data: "json, name=welcomeEmailSent" })
   welcomeEmailSent?: string;
 }

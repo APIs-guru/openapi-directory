@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetBatchPredictionInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BatchPredictionId" })
+  @SpeakeasyMetadata({ data: "json, name=BatchPredictionId" })
   batchPredictionId: string;
 }

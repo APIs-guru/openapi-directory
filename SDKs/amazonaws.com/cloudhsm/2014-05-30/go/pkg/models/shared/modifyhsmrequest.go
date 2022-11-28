@@ -1,5 +1,7 @@
 package shared
 
+// ModifyHsmRequest
+// Contains the inputs for the <a>ModifyHsm</a> operation.
 type ModifyHsmRequest struct {
 	EniIP      *string `json:"EniIp,omitempty"`
 	ExternalID *string `json:"ExternalId,omitempty"`

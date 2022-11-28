@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { NamespaceDefinitionTypeEnum } from "./namespacedefinitiontypeenum";
 import { ResourceRequirements } from "./resourcerequirements";
 import { ConnectionSchedule } from "./connectionschedule";

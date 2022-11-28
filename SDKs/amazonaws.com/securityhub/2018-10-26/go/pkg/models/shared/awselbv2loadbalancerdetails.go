@@ -1,5 +1,7 @@
 package shared
 
+// AwsElbv2LoadBalancerDetails
+// Information about a load balancer.
 type AwsElbv2LoadBalancerDetails struct {
 	AvailabilityZones     []AvailabilityZone `json:"AvailabilityZones,omitempty"`
 	CanonicalHostedZoneID *string            `json:"CanonicalHostedZoneId,omitempty"`

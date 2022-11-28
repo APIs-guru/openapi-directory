@@ -1,6 +1,7 @@
 
 
+
 export enum SearchResourcesComparatorEnum {
-    Eq = "EQ"
-,    Ne = "NE"
+    Eq = "EQ",
+    Ne = "NE"
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetMapVersionNumberCopyrightsCaptionFormatFormatEnum;
 (function (GetMapVersionNumberCopyrightsCaptionFormatFormatEnum) {
     GetMapVersionNumberCopyrightsCaptionFormatFormatEnum["Json"] = "json";
@@ -35,11 +35,11 @@ var GetMapVersionNumberCopyrightsCaptionFormatPathParams = /** @class */ (functi
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=format" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" }),
         __metadata("design:type", String)
     ], GetMapVersionNumberCopyrightsCaptionFormatPathParams.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=versionNumber" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=versionNumber" }),
         __metadata("design:type", Number)
     ], GetMapVersionNumberCopyrightsCaptionFormatPathParams.prototype, "versionNumber", void 0);
     return GetMapVersionNumberCopyrightsCaptionFormatPathParams;
@@ -51,7 +51,7 @@ var GetMapVersionNumberCopyrightsCaptionFormatQueryParams = /** @class */ (funct
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], GetMapVersionNumberCopyrightsCaptionFormatQueryParams.prototype, "callback", void 0);
     return GetMapVersionNumberCopyrightsCaptionFormatQueryParams;
@@ -63,11 +63,11 @@ var GetMapVersionNumberCopyrightsCaptionFormatRequest = /** @class */ (function 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetMapVersionNumberCopyrightsCaptionFormatPathParams)
     ], GetMapVersionNumberCopyrightsCaptionFormatRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetMapVersionNumberCopyrightsCaptionFormatQueryParams)
     ], GetMapVersionNumberCopyrightsCaptionFormatRequest.prototype, "queryParams", void 0);
     return GetMapVersionNumberCopyrightsCaptionFormatRequest;
@@ -79,11 +79,11 @@ var GetMapVersionNumberCopyrightsCaptionFormatResponse = /** @class */ (function
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetMapVersionNumberCopyrightsCaptionFormatResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetMapVersionNumberCopyrightsCaptionFormatResponse.prototype, "statusCode", void 0);
     return GetMapVersionNumberCopyrightsCaptionFormatResponse;

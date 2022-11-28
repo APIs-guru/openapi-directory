@@ -1,31 +1,31 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AlertAttachment } from "./alertattachment";
 import { EventParameterInfo } from "./eventparameterinfo";
 
 
+
 export class RaiseAlertInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attachments", elemType: shared.AlertAttachment })
+  @SpeakeasyMetadata({ data: "json, name=attachments", elemType: AlertAttachment })
   attachments?: AlertAttachment[];
 
-  @Metadata({ data: "json, name=category" })
+  @SpeakeasyMetadata({ data: "json, name=category" })
   category?: string;
 
-  @Metadata({ data: "json, name=externalId" })
+  @SpeakeasyMetadata({ data: "json, name=externalId" })
   externalId?: string;
 
-  @Metadata({ data: "json, name=flags" })
+  @SpeakeasyMetadata({ data: "json, name=flags" })
   flags?: number;
 
-  @Metadata({ data: "json, name=parameters", elemType: shared.EventParameterInfo })
+  @SpeakeasyMetadata({ data: "json, name=parameters", elemType: EventParameterInfo })
   parameters?: EventParameterInfo[];
 
-  @Metadata({ data: "json, name=severity" })
+  @SpeakeasyMetadata({ data: "json, name=severity" })
   severity?: number;
 
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

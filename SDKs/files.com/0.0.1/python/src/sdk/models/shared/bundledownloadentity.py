@@ -1,10 +1,12 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import bundleregistrationentity
+from sdk import utils
+from . import *
 
 class BundleDownloadEntityDownloadMethodEnum(str, Enum):
     FILE = "file"
@@ -14,8 +16,12 @@ class BundleDownloadEntityDownloadMethodEnum(str, Enum):
 @dataclass_json
 @dataclass
 class BundleDownloadEntity:
-    bundle_registration: Optional[bundleregistrationentity.BundleRegistrationEntity] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bundle_registration' }})
-    created_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    download_method: Optional[BundleDownloadEntityDownloadMethodEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'download_method' }})
-    path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'path' }})
+    r"""BundleDownloadEntity
+    List Bundle Downloads
+    """
+    
+    bundle_registration: Optional[BundleRegistrationEntity] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('bundle_registration') }})
+    created_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('created_at'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    download_method: Optional[BundleDownloadEntityDownloadMethodEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('download_method') }})
+    path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('path') }})
     

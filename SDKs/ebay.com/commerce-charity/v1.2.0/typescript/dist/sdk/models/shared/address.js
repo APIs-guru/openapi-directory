@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Address
 /**
  * The physical location of the item.
@@ -33,19 +33,19 @@ var Address = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=city" }),
+        SpeakeasyMetadata({ data: "json, name=city" }),
         __metadata("design:type", String)
     ], Address.prototype, "city", void 0);
     __decorate([
-        Metadata({ data: "json, name=country" }),
+        SpeakeasyMetadata({ data: "json, name=country" }),
         __metadata("design:type", String)
     ], Address.prototype, "country", void 0);
     __decorate([
-        Metadata({ data: "json, name=postalCode" }),
+        SpeakeasyMetadata({ data: "json, name=postalCode" }),
         __metadata("design:type", String)
     ], Address.prototype, "postalCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=stateOrProvince" }),
+        SpeakeasyMetadata({ data: "json, name=stateOrProvince" }),
         __metadata("design:type", String)
     ], Address.prototype, "stateOrProvince", void 0);
     return Address;

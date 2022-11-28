@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ScheduleOptions
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Options customizing the data transfer schedule.
 **/
 export class ScheduleOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=disableAutoScheduling" })
+  @SpeakeasyMetadata({ data: "json, name=disableAutoScheduling" })
   disableAutoScheduling?: boolean;
 
-  @Metadata({ data: "json, name=endTime" })
+  @SpeakeasyMetadata({ data: "json, name=endTime" })
   endTime?: string;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: string;
 }

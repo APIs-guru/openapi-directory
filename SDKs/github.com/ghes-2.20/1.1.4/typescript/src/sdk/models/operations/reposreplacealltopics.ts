@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ReposReplaceAllTopicsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=owner" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=owner" })
   owner: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repo" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repo" })
   repo: string;
 }
 
 
 export class ReposReplaceAllTopicsRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=names" })
+  @SpeakeasyMetadata({ data: "json, name=names" })
   names: string[];
 }
 
 
-export class ReposReplaceAllTopicsRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: ReposReplaceAllTopicsPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: ReposReplaceAllTopicsRequestBody;
-}
-
-
 export class ReposReplaceAllTopics415ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=documentation_url" })
+  @SpeakeasyMetadata({ data: "json, name=documentation_url" })
   documentationUrl: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 }
 
 
+export class ReposReplaceAllTopicsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: ReposReplaceAllTopicsPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: ReposReplaceAllTopicsRequestBody;
+}
+
+
 export class ReposReplaceAllTopicsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   reposReplaceAllTopics415ApplicationJsonObject?: ReposReplaceAllTopics415ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   topic?: shared.Topic;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationErrorSimple?: shared.ValidationErrorSimple;
 }

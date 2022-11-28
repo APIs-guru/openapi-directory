@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import apkbinary
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Apk:
-    binary: Optional[apkbinary.ApkBinary] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'binary' }})
-    version_code: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'versionCode' }})
+    r"""Apk
+    Information about an APK. The resource for ApksService.
+    """
+    
+    binary: Optional[ApkBinary] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('binary') }})
+    version_code: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('versionCode') }})
     

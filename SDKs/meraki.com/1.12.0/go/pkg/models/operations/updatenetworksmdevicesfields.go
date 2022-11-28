@@ -4,6 +4,8 @@ type UpdateNetworkSmDevicesFieldsPathParams struct {
 	NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
 }
 
+// UpdateNetworkSmDevicesFieldsRequestBodyDeviceFields
+// The new fields of the device. Each field of this object is optional.
 type UpdateNetworkSmDevicesFieldsRequestBodyDeviceFields struct {
 	Name  *string `json:"name,omitempty"`
 	Notes *string `json:"notes,omitempty"`

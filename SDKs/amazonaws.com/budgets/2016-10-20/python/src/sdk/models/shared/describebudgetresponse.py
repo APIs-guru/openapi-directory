@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import budget
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeBudgetResponse:
-    budget: Optional[budget.Budget] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Budget' }})
+    r"""DescribeBudgetResponse
+     Response of DescribeBudget 
+    """
+    
+    budget: Optional[Budget] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Budget') }})
     

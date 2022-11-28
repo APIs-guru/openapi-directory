@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BasicAutoscalingAlgorithm } from "./basicautoscalingalgorithm";
 import { InstanceGroupAutoscalingPolicyConfig } from "./instancegroupautoscalingpolicyconfig";
-import { InstanceGroupAutoscalingPolicyConfig } from "./instancegroupautoscalingpolicyconfig";
+
 
 
 // AutoscalingPolicy
@@ -9,21 +9,43 @@ import { InstanceGroupAutoscalingPolicyConfig } from "./instancegroupautoscaling
  * Describes an autoscaling policy for Dataproc cluster autoscaler.
 **/
 export class AutoscalingPolicy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=basicAlgorithm" })
+  @SpeakeasyMetadata({ data: "json, name=basicAlgorithm" })
   basicAlgorithm?: BasicAutoscalingAlgorithm;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=secondaryWorkerConfig" })
+  @SpeakeasyMetadata({ data: "json, name=secondaryWorkerConfig" })
   secondaryWorkerConfig?: InstanceGroupAutoscalingPolicyConfig;
 
-  @Metadata({ data: "json, name=workerConfig" })
+  @SpeakeasyMetadata({ data: "json, name=workerConfig" })
+  workerConfig?: InstanceGroupAutoscalingPolicyConfig;
+}
+
+
+// AutoscalingPolicyInput
+/** 
+ * Describes an autoscaling policy for Dataproc cluster autoscaler.
+**/
+export class AutoscalingPolicyInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=basicAlgorithm" })
+  basicAlgorithm?: BasicAutoscalingAlgorithm;
+
+  @SpeakeasyMetadata({ data: "json, name=id" })
+  id?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=secondaryWorkerConfig" })
+  secondaryWorkerConfig?: InstanceGroupAutoscalingPolicyConfig;
+
+  @SpeakeasyMetadata({ data: "json, name=workerConfig" })
   workerConfig?: InstanceGroupAutoscalingPolicyConfig;
 }

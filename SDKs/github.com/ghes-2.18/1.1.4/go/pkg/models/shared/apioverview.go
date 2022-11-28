@@ -1,5 +1,7 @@
 package shared
 
+// APIOverview
+// Api Overview
 type APIOverview struct {
 	Dependabot                       []string `json:"dependabot,omitempty"`
 	GithubServicesSha                *string  `json:"github_services_sha,omitempty"`

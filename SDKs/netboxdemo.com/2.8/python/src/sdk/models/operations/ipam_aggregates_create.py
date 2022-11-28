@@ -5,12 +5,12 @@ from sdk.models import shared
 
 @dataclass
 class IpamAggregatesCreateRequest:
-    request: shared.WritableAggregate = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.WritableAggregateInput = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class IpamAggregatesCreateResponse:
+    content_type: str = field()
+    status_code: int = field()
     aggregate: Optional[shared.Aggregate] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

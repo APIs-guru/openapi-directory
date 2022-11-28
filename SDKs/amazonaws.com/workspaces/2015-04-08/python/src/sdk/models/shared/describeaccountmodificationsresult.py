@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import accountmodification
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeAccountModificationsResult:
-    account_modifications: Optional[List[accountmodification.AccountModification]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AccountModifications' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
+    account_modifications: Optional[List[AccountModification]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AccountModifications') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
     

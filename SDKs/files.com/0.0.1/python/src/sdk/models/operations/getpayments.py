@@ -11,12 +11,12 @@ class GetPaymentsQueryParams:
 
 @dataclass
 class GetPaymentsRequest:
-    query_params: GetPaymentsQueryParams = field(default=None)
+    query_params: GetPaymentsQueryParams = field()
     
 
 @dataclass
 class GetPaymentsResponse:
+    content_type: str = field()
+    status_code: int = field()
     account_line_item_entities: Optional[List[shared.AccountLineItemEntity]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SessionManagerOutputUrl } from "./sessionmanageroutputurl";
 import { SessionStatusEnum } from "./sessionstatusenum";
+
 
 
 // Session
@@ -8,30 +9,30 @@ import { SessionStatusEnum } from "./sessionstatusenum";
  * Information about a Session Manager connection to an instance.
 **/
 export class Session extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Details" })
+  @SpeakeasyMetadata({ data: "json, name=Details" })
   details?: string;
 
-  @Metadata({ data: "json, name=DocumentName" })
+  @SpeakeasyMetadata({ data: "json, name=DocumentName" })
   documentName?: string;
 
-  @Metadata({ data: "json, name=EndDate" })
+  @SpeakeasyMetadata({ data: "json, name=EndDate" })
   endDate?: Date;
 
-  @Metadata({ data: "json, name=OutputUrl" })
+  @SpeakeasyMetadata({ data: "json, name=OutputUrl" })
   outputUrl?: SessionManagerOutputUrl;
 
-  @Metadata({ data: "json, name=Owner" })
+  @SpeakeasyMetadata({ data: "json, name=Owner" })
   owner?: string;
 
-  @Metadata({ data: "json, name=SessionId" })
+  @SpeakeasyMetadata({ data: "json, name=SessionId" })
   sessionId?: string;
 
-  @Metadata({ data: "json, name=StartDate" })
+  @SpeakeasyMetadata({ data: "json, name=StartDate" })
   startDate?: Date;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: SessionStatusEnum;
 
-  @Metadata({ data: "json, name=Target" })
+  @SpeakeasyMetadata({ data: "json, name=Target" })
   target?: string;
 }

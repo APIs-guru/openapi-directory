@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EcsCluster } from "./ecscluster";
+
 
 
 // DescribeEcsClustersResult
@@ -8,9 +8,9 @@ import { EcsCluster } from "./ecscluster";
  * Contains the response to a <code>DescribeEcsClusters</code> request.
 **/
 export class DescribeEcsClustersResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EcsClusters", elemType: shared.EcsCluster })
+  @SpeakeasyMetadata({ data: "json, name=EcsClusters", elemType: EcsCluster })
   ecsClusters?: EcsCluster[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

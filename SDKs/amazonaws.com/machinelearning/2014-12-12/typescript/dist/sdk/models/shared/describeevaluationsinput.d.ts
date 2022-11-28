@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { EvaluationFilterVariableEnum } from "./evaluationfiltervariableenum";
 import { SortOrderEnum } from "./sortorderenum";
 export declare class DescribeEvaluationsInput extends SpeakeasyBase {

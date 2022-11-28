@@ -26,6 +26,8 @@ type TeamDiscussionSimpleUser struct {
 	URL               string  `json:"url"`
 }
 
+// TeamDiscussion
+// A team discussion is a persistent record of a free-form conversation within a team.
 type TeamDiscussion struct {
 	Author        TeamDiscussionSimpleUser `json:"author"`
 	Body          string                   `json:"body"`

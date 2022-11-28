@@ -17,15 +17,15 @@ type ExtrasObjectChangesListQueryParams struct {
 	UserName          *string `queryParam:"style=form,explode=true,name=user_name"`
 }
 
-type ExtrasObjectChangesListRequest struct {
-	QueryParams ExtrasObjectChangesListQueryParams
-}
-
 type ExtrasObjectChangesList200ApplicationJSON struct {
 	Count    int64                 `json:"count"`
 	Next     *string               `json:"next,omitempty"`
 	Previous *string               `json:"previous,omitempty"`
 	Results  []shared.ObjectChange `json:"results"`
+}
+
+type ExtrasObjectChangesListRequest struct {
+	QueryParams ExtrasObjectChangesListQueryParams
 }
 
 type ExtrasObjectChangesListResponse struct {

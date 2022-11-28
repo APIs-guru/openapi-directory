@@ -1,5 +1,7 @@
 package shared
 
+// Category
+// Data related to individual game categories.
 type Category struct {
 	Category         *string `json:"category,omitempty"`
 	ExperiencePoints *string `json:"experiencePoints,omitempty"`

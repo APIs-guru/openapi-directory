@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -24,23 +28,23 @@ class GetInsightEventsHeaders:
 @dataclass_json
 @dataclass
 class GetInsightEventsRequestBody:
-    insight_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'InsightId' }})
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MaxResults' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
+    insight_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('InsightId') }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MaxResults') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
     
 
 @dataclass
 class GetInsightEventsRequest:
-    query_params: GetInsightEventsQueryParams = field(default=None)
-    headers: GetInsightEventsHeaders = field(default=None)
-    request: GetInsightEventsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: GetInsightEventsHeaders = field()
+    query_params: GetInsightEventsQueryParams = field()
+    request: GetInsightEventsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class GetInsightEventsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_insight_events_result: Optional[shared.GetInsightEventsResult] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttled_exception: Optional[Any] = field(default=None)
     

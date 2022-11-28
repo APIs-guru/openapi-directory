@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostForecastAiHistoryAndForecastHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Token" })
   token?: string;
 }
 
 
 export class PostForecastAiHistoryAndForecastRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
   aiPlanningLevelRequest?: shared.AiPlanningLevelRequest;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   aiPlanningLevelRequest1?: shared.AiPlanningLevelRequest;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   aiPlanningLevelRequest2?: shared.AiPlanningLevelRequest;
 }
 
 
 export class PostForecastAiHistoryAndForecastRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: PostForecastAiHistoryAndForecastHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request?: PostForecastAiHistoryAndForecastRequests;
 }
 
 
 export class PostForecastAiHistoryAndForecastResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   historyAndForecastResponse?: shared.HistoryAndForecastResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

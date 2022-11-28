@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googlecloudbeyondcorpsaasplatforminsightsv1alphainsightmetadatafield
+from sdk import utils
+from . import *
 
 class GoogleCloudBeyondcorpSaasplatformInsightsV1alphaInsightMetadataAggregationsEnum(str, Enum):
     AGGREGATION_UNSPECIFIED = "AGGREGATION_UNSPECIFIED"
@@ -15,11 +17,15 @@ class GoogleCloudBeyondcorpSaasplatformInsightsV1alphaInsightMetadataAggregation
 @dataclass_json
 @dataclass
 class GoogleCloudBeyondcorpSaasplatformInsightsV1alphaInsightMetadata:
-    aggregations: Optional[List[GoogleCloudBeyondcorpSaasplatformInsightsV1alphaInsightMetadataAggregationsEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'aggregations' }})
-    category: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'category' }})
-    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayName' }})
-    fields: Optional[List[googlecloudbeyondcorpsaasplatforminsightsv1alphainsightmetadatafield.GoogleCloudBeyondcorpSaasplatformInsightsV1alphaInsightMetadataField]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fields' }})
-    groups: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'groups' }})
-    sub_category: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'subCategory' }})
-    type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""GoogleCloudBeyondcorpSaasplatformInsightsV1alphaInsightMetadata
+    Insight filters, groupings and aggregations that can be applied for the insight. Examples: aggregations, groups, field filters.
+    """
+    
+    aggregations: Optional[List[GoogleCloudBeyondcorpSaasplatformInsightsV1alphaInsightMetadataAggregationsEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('aggregations') }})
+    category: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('category') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    fields: Optional[List[GoogleCloudBeyondcorpSaasplatformInsightsV1alphaInsightMetadataField]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fields') }})
+    groups: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('groups') }})
+    sub_category: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('subCategory') }})
+    type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

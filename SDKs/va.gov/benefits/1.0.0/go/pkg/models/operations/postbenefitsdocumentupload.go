@@ -8,10 +8,6 @@ type PostBenefitsDocumentUploadSecurity struct {
 	Apikey shared.SchemeApikey `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type PostBenefitsDocumentUploadRequest struct {
-	Security PostBenefitsDocumentUploadSecurity
-}
-
 type PostBenefitsDocumentUpload202ApplicationJSON struct {
 	Data interface{} `json:"data"`
 }
@@ -37,6 +33,10 @@ type PostBenefitsDocumentUpload500ApplicationJSON struct {
 	Detail *string `json:"detail,omitempty"`
 	Status *string `json:"status,omitempty"`
 	Title  *string `json:"title,omitempty"`
+}
+
+type PostBenefitsDocumentUploadRequest struct {
+	Security PostBenefitsDocumentUploadSecurity
 }
 
 type PostBenefitsDocumentUploadResponse struct {

@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import blockertype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BlockerDeclaration:
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    type: blockertype_enum.BlockerTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""BlockerDeclaration
+    Reserved for future use.
+    """
+    
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    type: BlockerTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

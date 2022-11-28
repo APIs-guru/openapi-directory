@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostCheckDNSAvailabilityActionEnum(str, Enum):
     CHECK_DNS_AVAILABILITY = "CheckDNSAvailability"
@@ -10,8 +14,8 @@ class PostCheckDNSAvailabilityVersionEnum(str, Enum):
 
 @dataclass
 class PostCheckDNSAvailabilityQueryParams:
-    action: PostCheckDNSAvailabilityActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostCheckDNSAvailabilityVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostCheckDNSAvailabilityActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostCheckDNSAvailabilityVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostCheckDNSAvailabilityHeaders:
 
 @dataclass
 class PostCheckDNSAvailabilityRequest:
-    query_params: PostCheckDNSAvailabilityQueryParams = field(default=None)
-    headers: PostCheckDNSAvailabilityHeaders = field(default=None)
+    headers: PostCheckDNSAvailabilityHeaders = field()
+    query_params: PostCheckDNSAvailabilityQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostCheckDNSAvailabilityResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ReportInstanceReasonCodesEnum(str, Enum):
     INSTANCE_STUCK_IN_STATE = "instance-stuck-in-state"

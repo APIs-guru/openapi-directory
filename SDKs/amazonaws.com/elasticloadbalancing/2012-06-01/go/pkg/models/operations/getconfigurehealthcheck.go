@@ -6,6 +6,8 @@ const (
 	GetConfigureHealthCheckActionEnumConfigureHealthCheck GetConfigureHealthCheckActionEnum = "ConfigureHealthCheck"
 )
 
+// GetConfigureHealthCheckHealthCheck
+// Information about a health check.
 type GetConfigureHealthCheckHealthCheck struct {
 	HealthyThreshold   int64  `queryParam:"name=HealthyThreshold"`
 	Interval           int64  `queryParam:"name=Interval"`

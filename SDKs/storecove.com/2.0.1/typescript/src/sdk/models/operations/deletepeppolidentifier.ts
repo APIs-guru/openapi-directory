@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeletePeppolIdentifierPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=identifier" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=identifier" })
   identifier: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=legal_entity_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=legal_entity_id" })
   legalEntityId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=scheme" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=scheme" })
   scheme: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=superscheme" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=superscheme" })
   superscheme: string;
 }
 
 
 export class DeletePeppolIdentifierRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DeletePeppolIdentifierPathParams;
 }
 
 
 export class DeletePeppolIdentifierResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

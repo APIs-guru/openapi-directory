@@ -1,80 +1,81 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BadgeExpiry } from "./badgeexpiry";
 
 
+
 export class OfferingRequiredBadge extends SpeakeasyBase {
-  @Metadata({ data: "json, name=badgeExpiry" })
+  @SpeakeasyMetadata({ data: "json, name=badgeExpiry" })
   badgeExpiry?: BadgeExpiry;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=requiresApproval" })
+  @SpeakeasyMetadata({ data: "json, name=requiresApproval" })
   requiresApproval?: boolean;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }
 
 
 export class OfferingRequiredMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=category" })
+  @SpeakeasyMetadata({ data: "json, name=category" })
   category?: string;
 
-  @Metadata({ data: "json, name=level" })
+  @SpeakeasyMetadata({ data: "json, name=level" })
   level?: string;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: string[];
 
-  @Metadata({ data: "json, name=topic" })
+  @SpeakeasyMetadata({ data: "json, name=topic" })
   topic?: string;
 }
 
 
 export class OfferingRequired extends SpeakeasyBase {
-  @Metadata({ data: "json, name=badge" })
+  @SpeakeasyMetadata({ data: "json, name=badge" })
   badge?: OfferingRequiredBadge;
 
-  @Metadata({ data: "json, name=contentId" })
+  @SpeakeasyMetadata({ data: "json, name=contentId" })
   contentId?: string;
 
-  @Metadata({ data: "json, name=createDefaultChannels" })
+  @SpeakeasyMetadata({ data: "json, name=createDefaultChannels" })
   createDefaultChannels?: boolean;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=earlyCloseOffDate" })
+  @SpeakeasyMetadata({ data: "json, name=earlyCloseOffDate" })
   earlyCloseOffDate?: Date;
 
-  @Metadata({ data: "json, name=end" })
+  @SpeakeasyMetadata({ data: "json, name=end" })
   end?: Date;
 
-  @Metadata({ data: "json, name=hasEarlyCloseOff" })
+  @SpeakeasyMetadata({ data: "json, name=hasEarlyCloseOff" })
   hasEarlyCloseOff?: boolean;
 
-  @Metadata({ data: "json, name=identifier" })
+  @SpeakeasyMetadata({ data: "json, name=identifier" })
   identifier?: string;
 
-  @Metadata({ data: "json, name=isReadonly" })
+  @SpeakeasyMetadata({ data: "json, name=isReadonly" })
   isReadonly?: boolean;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: OfferingRequiredMetadata;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=rootContentId" })
+  @SpeakeasyMetadata({ data: "json, name=rootContentId" })
   rootContentId?: string;
 
-  @Metadata({ data: "json, name=start" })
+  @SpeakeasyMetadata({ data: "json, name=start" })
   start: Date;
 
-  @Metadata({ data: "json, name=trailerVideoUrl" })
+  @SpeakeasyMetadata({ data: "json, name=trailerVideoUrl" })
   trailerVideoUrl?: string;
 
-  @Metadata({ data: "json, name=useRelativeDates" })
+  @SpeakeasyMetadata({ data: "json, name=useRelativeDates" })
   useRelativeDates?: boolean;
 }

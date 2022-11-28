@@ -9,13 +9,13 @@ type ReposDeletePagesSitePathParams struct {
 	Repo  string `pathParam:"style=simple,explode=false,name=repo"`
 }
 
-type ReposDeletePagesSiteRequest struct {
-	PathParams ReposDeletePagesSitePathParams
-}
-
 type ReposDeletePagesSite415ApplicationJSON struct {
 	DocumentationURL string `json:"documentation_url"`
 	Message          string `json:"message"`
+}
+
+type ReposDeletePagesSiteRequest struct {
+	PathParams ReposDeletePagesSitePathParams
 }
 
 type ReposDeletePagesSiteResponse struct {

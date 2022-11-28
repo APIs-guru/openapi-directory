@@ -22,13 +22,9 @@ type EndpointGetUsersTopArtistsAndTracksSecurity struct {
 	SpotifyAuth shared.SchemeSpotifyAuth `security:"scheme,type=oauth2"`
 }
 
-type EndpointGetUsersTopArtistsAndTracksRequest struct {
-	PathParams  EndpointGetUsersTopArtistsAndTracksPathParams
-	QueryParams EndpointGetUsersTopArtistsAndTracksQueryParams
-	Headers     EndpointGetUsersTopArtistsAndTracksHeaders
-	Security    EndpointGetUsersTopArtistsAndTracksSecurity
-}
+// EndpointGetUsersTopArtistsAndTracks200ApplicationJSON
 
+// https://developer.spotify.com/documentation/web-api/reference/#object-pagingobject - Find more info on the official Spotify Web API Reference
 type EndpointGetUsersTopArtistsAndTracks200ApplicationJSON struct {
 	Href     *string       `json:"href,omitempty"`
 	Items    []interface{} `json:"items,omitempty"`
@@ -37,6 +33,13 @@ type EndpointGetUsersTopArtistsAndTracks200ApplicationJSON struct {
 	Offset   *int32        `json:"offset,omitempty"`
 	Previous *string       `json:"previous,omitempty"`
 	Total    *int32        `json:"total,omitempty"`
+}
+
+type EndpointGetUsersTopArtistsAndTracksRequest struct {
+	PathParams  EndpointGetUsersTopArtistsAndTracksPathParams
+	QueryParams EndpointGetUsersTopArtistsAndTracksQueryParams
+	Headers     EndpointGetUsersTopArtistsAndTracksHeaders
+	Security    EndpointGetUsersTopArtistsAndTracksSecurity
 }
 
 type EndpointGetUsersTopArtistsAndTracksResponse struct {

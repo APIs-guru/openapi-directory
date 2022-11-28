@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MaintenanceEntity
@@ -7,28 +8,28 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * 
 **/
 export class MaintenanceEntity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }
 
 export enum MaintenanceStatusEnum {
-    Pending = "pending"
-,    Started = "started"
+    Pending = "pending",
+    Started = "started"
 }
 
 export enum MaintenanceTypeEnum {
-    Reboot = "reboot"
-,    ColdMigration = "cold_migration"
-,    LiveMigration = "live_migration"
+    Reboot = "reboot",
+    ColdMigration = "cold_migration",
+    LiveMigration = "live_migration"
 }
 
 
@@ -38,18 +39,18 @@ export enum MaintenanceTypeEnum {
  * 
 **/
 export class Maintenance extends SpeakeasyBase {
-  @Metadata({ data: "json, name=entity" })
+  @SpeakeasyMetadata({ data: "json, name=entity" })
   entity?: MaintenanceEntity;
 
-  @Metadata({ data: "json, name=reason" })
+  @SpeakeasyMetadata({ data: "json, name=reason" })
   reason?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: MaintenanceStatusEnum;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: MaintenanceTypeEnum;
 
-  @Metadata({ data: "json, name=when" })
+  @SpeakeasyMetadata({ data: "json, name=when" })
   when?: Date;
 }

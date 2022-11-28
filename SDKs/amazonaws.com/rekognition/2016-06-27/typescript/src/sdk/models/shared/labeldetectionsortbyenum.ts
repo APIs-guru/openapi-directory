@@ -1,6 +1,7 @@
 
 
+
 export enum LabelDetectionSortByEnum {
-    Name = "NAME"
-,    Timestamp = "TIMESTAMP"
+    Name = "NAME",
+    Timestamp = "TIMESTAMP"
 }

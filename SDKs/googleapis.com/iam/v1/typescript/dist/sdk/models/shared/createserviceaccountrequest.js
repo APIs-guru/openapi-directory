@@ -22,25 +22,25 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { ServiceAccount } from "./serviceaccount";
-// CreateServiceAccountRequest
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ServiceAccountInput } from "./serviceaccount";
+// CreateServiceAccountRequestInput
 /**
  * The service account create request.
 **/
-var CreateServiceAccountRequest = /** @class */ (function (_super) {
-    __extends(CreateServiceAccountRequest, _super);
-    function CreateServiceAccountRequest() {
+var CreateServiceAccountRequestInput = /** @class */ (function (_super) {
+    __extends(CreateServiceAccountRequestInput, _super);
+    function CreateServiceAccountRequestInput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=accountId" }),
+        SpeakeasyMetadata({ data: "json, name=accountId" }),
         __metadata("design:type", String)
-    ], CreateServiceAccountRequest.prototype, "accountId", void 0);
+    ], CreateServiceAccountRequestInput.prototype, "accountId", void 0);
     __decorate([
-        Metadata({ data: "json, name=serviceAccount" }),
-        __metadata("design:type", ServiceAccount)
-    ], CreateServiceAccountRequest.prototype, "serviceAccount", void 0);
-    return CreateServiceAccountRequest;
+        SpeakeasyMetadata({ data: "json, name=serviceAccount" }),
+        __metadata("design:type", ServiceAccountInput)
+    ], CreateServiceAccountRequestInput.prototype, "serviceAccount", void 0);
+    return CreateServiceAccountRequestInput;
 }(SpeakeasyBase));
-export { CreateServiceAccountRequest };
+export { CreateServiceAccountRequestInput };

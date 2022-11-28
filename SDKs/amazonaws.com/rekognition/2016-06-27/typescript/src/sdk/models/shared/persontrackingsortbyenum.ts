@@ -1,6 +1,7 @@
 
 
+
 export enum PersonTrackingSortByEnum {
-    Index = "INDEX"
-,    Timestamp = "TIMESTAMP"
+    Index = "INDEX",
+    Timestamp = "TIMESTAMP"
 }

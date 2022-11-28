@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsEcsServiceServiceRegistriesDetails
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about a service discovery registry to assign to the service.
 **/
 export class AwsEcsServiceServiceRegistriesDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ContainerName" })
+  @SpeakeasyMetadata({ data: "json, name=ContainerName" })
   containerName?: string;
 
-  @Metadata({ data: "json, name=ContainerPort" })
+  @SpeakeasyMetadata({ data: "json, name=ContainerPort" })
   containerPort?: number;
 
-  @Metadata({ data: "json, name=Port" })
+  @SpeakeasyMetadata({ data: "json, name=Port" })
   port?: number;
 
-  @Metadata({ data: "json, name=RegistryArn" })
+  @SpeakeasyMetadata({ data: "json, name=RegistryArn" })
   registryArn?: string;
 }

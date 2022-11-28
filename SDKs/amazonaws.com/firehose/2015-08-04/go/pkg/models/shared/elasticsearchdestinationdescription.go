@@ -1,5 +1,7 @@
 package shared
 
+// ElasticsearchDestinationDescription
+// The destination description in Amazon ES.
 type ElasticsearchDestinationDescription struct {
 	BufferingHints              *ElasticsearchBufferingHints          `json:"BufferingHints,omitempty"`
 	CloudWatchLoggingOptions    *CloudWatchLoggingOptions             `json:"CloudWatchLoggingOptions,omitempty"`

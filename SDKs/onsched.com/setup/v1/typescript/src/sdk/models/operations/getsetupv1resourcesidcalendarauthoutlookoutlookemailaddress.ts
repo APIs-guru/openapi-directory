@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetSetupV1ResourcesIdCalendarAuthOutlookOutlookEmailAddressPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=outlookEmailAddress" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=outlookEmailAddress" })
   outlookEmailAddress: string;
 }
 
 
 export class GetSetupV1ResourcesIdCalendarAuthOutlookOutlookEmailAddressQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=outlookAuthReturnUrl" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=outlookAuthReturnUrl" })
   outlookAuthReturnUrl?: string;
 }
 
 
 export class GetSetupV1ResourcesIdCalendarAuthOutlookOutlookEmailAddressRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetSetupV1ResourcesIdCalendarAuthOutlookOutlookEmailAddressPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetSetupV1ResourcesIdCalendarAuthOutlookOutlookEmailAddressQueryParams;
 }
 
 
 export class GetSetupV1ResourcesIdCalendarAuthOutlookOutlookEmailAddressResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   calendarAuthViewModel?: shared.CalendarAuthViewModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

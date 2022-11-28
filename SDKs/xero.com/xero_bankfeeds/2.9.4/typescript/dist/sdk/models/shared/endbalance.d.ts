@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CreditDebitIndicatorEnum } from "./creditdebitindicatorenum";
 /**
  * The StartBalance plus all the Statement Line Amounts should be equal to the EndBalance Amount.

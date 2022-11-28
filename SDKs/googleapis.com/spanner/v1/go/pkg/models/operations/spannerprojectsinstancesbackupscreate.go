@@ -52,7 +52,7 @@ type SpannerProjectsInstancesBackupsCreateSecurity struct {
 type SpannerProjectsInstancesBackupsCreateRequest struct {
 	PathParams  SpannerProjectsInstancesBackupsCreatePathParams
 	QueryParams SpannerProjectsInstancesBackupsCreateQueryParams
-	Request     *shared.Backup `request:"mediaType=application/json"`
+	Request     *shared.BackupInput `request:"mediaType=application/json"`
 	Security    SpannerProjectsInstancesBackupsCreateSecurity
 }
 

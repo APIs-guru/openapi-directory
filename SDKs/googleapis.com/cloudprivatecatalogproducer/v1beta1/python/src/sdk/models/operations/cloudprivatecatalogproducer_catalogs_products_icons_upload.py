@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudprivatecatalogproducerCatalogsProductsIconsUploadPathParams:
-    product: str = field(default=None, metadata={'path_param': { 'field_name': 'product', 'style': 'simple', 'explode': False }})
+    product: str = field(metadata={'path_param': { 'field_name': 'product', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class CloudprivatecatalogproducerCatalogsProductsIconsUploadQueryParams:
 
 @dataclass
 class CloudprivatecatalogproducerCatalogsProductsIconsUploadSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudprivatecatalogproducerCatalogsProductsIconsUploadRequest:
-    path_params: CloudprivatecatalogproducerCatalogsProductsIconsUploadPathParams = field(default=None)
-    query_params: CloudprivatecatalogproducerCatalogsProductsIconsUploadQueryParams = field(default=None)
+    path_params: CloudprivatecatalogproducerCatalogsProductsIconsUploadPathParams = field()
+    query_params: CloudprivatecatalogproducerCatalogsProductsIconsUploadQueryParams = field()
+    security: CloudprivatecatalogproducerCatalogsProductsIconsUploadSecurity = field()
     request: Optional[shared.GoogleCloudPrivatecatalogproducerV1beta1UploadIconRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: CloudprivatecatalogproducerCatalogsProductsIconsUploadSecurity = field(default=None)
     
 
 @dataclass
 class CloudprivatecatalogproducerCatalogsProductsIconsUploadResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -5,24 +5,24 @@ from sdk.models import shared
 
 @dataclass
 class DeleteOrdersIDPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DeleteOrdersIDSecurity:
-    fdc_auth: shared.SchemeFdcAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    fdc_auth: shared.SchemeFdcAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DeleteOrdersIDRequest:
-    path_params: DeleteOrdersIDPathParams = field(default=None)
-    security: DeleteOrdersIDSecurity = field(default=None)
+    path_params: DeleteOrdersIDPathParams = field()
+    security: DeleteOrdersIDSecurity = field()
     
 
 @dataclass
 class DeleteOrdersIDResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     oneorders_get_responses_404_content_application_1json_schema: Optional[shared.OneordersGetResponses404ContentApplication1jsonSchema] = field(default=None)
     oneorders_post_responses_201_content_application_1json_schema: Optional[shared.OneordersPostResponses201ContentApplication1jsonSchema] = field(default=None)
     

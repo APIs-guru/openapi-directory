@@ -1,11 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EventChild } from "./eventchild";
 
+
 export enum EventDefinitionVisibilityEnum {
-    EventVisibilityUnspecified = "EVENT_VISIBILITY_UNSPECIFIED"
-,    Revealed = "REVEALED"
-,    Hidden = "HIDDEN"
+    EventVisibilityUnspecified = "EVENT_VISIBILITY_UNSPECIFIED",
+    Revealed = "REVEALED",
+    Hidden = "HIDDEN"
 }
 
 
@@ -14,27 +14,27 @@ export enum EventDefinitionVisibilityEnum {
  * An event definition resource.
 **/
 export class EventDefinition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=childEvents", elemType: shared.EventChild })
+  @SpeakeasyMetadata({ data: "json, name=childEvents", elemType: EventChild })
   childEvents?: EventChild[];
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=imageUrl" })
+  @SpeakeasyMetadata({ data: "json, name=imageUrl" })
   imageUrl?: string;
 
-  @Metadata({ data: "json, name=isDefaultImageUrl" })
+  @SpeakeasyMetadata({ data: "json, name=isDefaultImageUrl" })
   isDefaultImageUrl?: boolean;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=visibility" })
+  @SpeakeasyMetadata({ data: "json, name=visibility" })
   visibility?: EventDefinitionVisibilityEnum;
 }

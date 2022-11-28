@@ -1,12 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import sqlipconfig
+from sdk import utils
+from . import *
 
 class CloudSQLSettingsActivationPolicyEnum(str, Enum):
     SQL_ACTIVATION_POLICY_UNSPECIFIED = "SQL_ACTIVATION_POLICY_UNSPECIFIED"
     ALWAYS = "ALWAYS"
     NEVER = "NEVER"
+
+class CloudSQLSettingsAvailabilityTypeEnum(str, Enum):
+    SQL_AVAILABILITY_TYPE_UNSPECIFIED = "SQL_AVAILABILITY_TYPE_UNSPECIFIED"
+    ZONAL = "ZONAL"
+    REGIONAL = "REGIONAL"
 
 class CloudSQLSettingsDataDiskTypeEnum(str, Enum):
     SQL_DATA_DISK_TYPE_UNSPECIFIED = "SQL_DATA_DISK_TYPE_UNSPECIFIED"
@@ -28,21 +35,53 @@ class CloudSQLSettingsDatabaseVersionEnum(str, Enum):
 
 @dataclass_json
 @dataclass
+class CloudSQLSettingsInput:
+    r"""CloudSQLSettingsInput
+    Settings for creating a Cloud SQL database instance.
+    """
+    
+    activation_policy: Optional[CloudSQLSettingsActivationPolicyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('activationPolicy') }})
+    auto_storage_increase: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('autoStorageIncrease') }})
+    availability_type: Optional[CloudSQLSettingsAvailabilityTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('availabilityType') }})
+    cmek_key_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cmekKeyName') }})
+    collation: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('collation') }})
+    data_disk_size_gb: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dataDiskSizeGb') }})
+    data_disk_type: Optional[CloudSQLSettingsDataDiskTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dataDiskType') }})
+    database_flags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('databaseFlags') }})
+    database_version: Optional[CloudSQLSettingsDatabaseVersionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('databaseVersion') }})
+    ip_config: Optional[SQLIPConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ipConfig') }})
+    root_password: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rootPassword') }})
+    secondary_zone: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('secondaryZone') }})
+    source_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sourceId') }})
+    storage_auto_resize_limit: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('storageAutoResizeLimit') }})
+    tier: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tier') }})
+    user_labels: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('userLabels') }})
+    zone: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('zone') }})
+    
+
+@dataclass_json
+@dataclass
 class CloudSQLSettings:
-    activation_policy: Optional[CloudSQLSettingsActivationPolicyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'activationPolicy' }})
-    auto_storage_increase: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'autoStorageIncrease' }})
-    cmek_key_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cmekKeyName' }})
-    collation: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'collation' }})
-    data_disk_size_gb: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dataDiskSizeGb' }})
-    data_disk_type: Optional[CloudSQLSettingsDataDiskTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dataDiskType' }})
-    database_flags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'databaseFlags' }})
-    database_version: Optional[CloudSQLSettingsDatabaseVersionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'databaseVersion' }})
-    ip_config: Optional[sqlipconfig.SQLIPConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ipConfig' }})
-    root_password: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rootPassword' }})
-    root_password_set: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rootPasswordSet' }})
-    source_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sourceId' }})
-    storage_auto_resize_limit: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'storageAutoResizeLimit' }})
-    tier: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tier' }})
-    user_labels: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'userLabels' }})
-    zone: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'zone' }})
+    r"""CloudSQLSettings
+    Settings for creating a Cloud SQL database instance.
+    """
+    
+    activation_policy: Optional[CloudSQLSettingsActivationPolicyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('activationPolicy') }})
+    auto_storage_increase: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('autoStorageIncrease') }})
+    availability_type: Optional[CloudSQLSettingsAvailabilityTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('availabilityType') }})
+    cmek_key_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cmekKeyName') }})
+    collation: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('collation') }})
+    data_disk_size_gb: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dataDiskSizeGb') }})
+    data_disk_type: Optional[CloudSQLSettingsDataDiskTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dataDiskType') }})
+    database_flags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('databaseFlags') }})
+    database_version: Optional[CloudSQLSettingsDatabaseVersionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('databaseVersion') }})
+    ip_config: Optional[SQLIPConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ipConfig') }})
+    root_password: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rootPassword') }})
+    root_password_set: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rootPasswordSet') }})
+    secondary_zone: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('secondaryZone') }})
+    source_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sourceId') }})
+    storage_auto_resize_limit: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('storageAutoResizeLimit') }})
+    tier: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tier') }})
+    user_labels: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('userLabels') }})
+    zone: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('zone') }})
     

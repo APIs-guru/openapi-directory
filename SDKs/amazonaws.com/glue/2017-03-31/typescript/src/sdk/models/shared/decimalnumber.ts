@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DecimalNumber
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains a numeric value in decimal format.
 **/
 export class DecimalNumber extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Scale" })
+  @SpeakeasyMetadata({ data: "json, name=Scale" })
   scale: number;
 
-  @Metadata({ data: "json, name=UnscaledValue" })
+  @SpeakeasyMetadata({ data: "json, name=UnscaledValue" })
   unscaledValue: string;
 }

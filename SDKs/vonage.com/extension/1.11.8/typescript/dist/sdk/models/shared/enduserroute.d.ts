@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Did } from "./did";
 import { Line } from "./line";
 import { BasicUser } from "./basicuser";

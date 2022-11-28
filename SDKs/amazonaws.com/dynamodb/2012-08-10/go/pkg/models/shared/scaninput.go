@@ -1,5 +1,7 @@
 package shared
 
+// ScanInput
+// Represents the input of a <code>Scan</code> operation.
 type ScanInput struct {
 	AttributesToGet           []string                    `json:"AttributesToGet,omitempty"`
 	ConditionalOperator       *ConditionalOperatorEnum    `json:"ConditionalOperator,omitempty"`

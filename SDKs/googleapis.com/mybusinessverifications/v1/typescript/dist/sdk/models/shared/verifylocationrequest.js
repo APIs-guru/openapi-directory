@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ServiceBusinessContext } from "./servicebusinesscontext";
 import { VerificationToken } from "./verificationtoken";
 export var VerifyLocationRequestMethodEnum;
@@ -45,31 +45,31 @@ var VerifyLocationRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=context" }),
+        SpeakeasyMetadata({ data: "json, name=context" }),
         __metadata("design:type", ServiceBusinessContext)
     ], VerifyLocationRequest.prototype, "context", void 0);
     __decorate([
-        Metadata({ data: "json, name=emailAddress" }),
+        SpeakeasyMetadata({ data: "json, name=emailAddress" }),
         __metadata("design:type", String)
     ], VerifyLocationRequest.prototype, "emailAddress", void 0);
     __decorate([
-        Metadata({ data: "json, name=languageCode" }),
+        SpeakeasyMetadata({ data: "json, name=languageCode" }),
         __metadata("design:type", String)
     ], VerifyLocationRequest.prototype, "languageCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=mailerContact" }),
+        SpeakeasyMetadata({ data: "json, name=mailerContact" }),
         __metadata("design:type", String)
     ], VerifyLocationRequest.prototype, "mailerContact", void 0);
     __decorate([
-        Metadata({ data: "json, name=method" }),
+        SpeakeasyMetadata({ data: "json, name=method" }),
         __metadata("design:type", String)
     ], VerifyLocationRequest.prototype, "method", void 0);
     __decorate([
-        Metadata({ data: "json, name=phoneNumber" }),
+        SpeakeasyMetadata({ data: "json, name=phoneNumber" }),
         __metadata("design:type", String)
     ], VerifyLocationRequest.prototype, "phoneNumber", void 0);
     __decorate([
-        Metadata({ data: "json, name=token" }),
+        SpeakeasyMetadata({ data: "json, name=token" }),
         __metadata("design:type", VerificationToken)
     ], VerifyLocationRequest.prototype, "token", void 0);
     return VerifyLocationRequest;

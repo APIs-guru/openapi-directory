@@ -1,16 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GetRecommendationError } from "./getrecommendationerror";
 import { InstanceRecommendation } from "./instancerecommendation";
 
 
+
 export class GetEc2InstanceRecommendationsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.GetRecommendationError })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: GetRecommendationError })
   errors?: GetRecommendationError[];
 
-  @Metadata({ data: "json, name=instanceRecommendations", elemType: shared.InstanceRecommendation })
+  @SpeakeasyMetadata({ data: "json, name=instanceRecommendations", elemType: InstanceRecommendation })
   instanceRecommendations?: InstanceRecommendation[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

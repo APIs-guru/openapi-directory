@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class GetMarket3SimilarSalePriceGetQueryParams extends SpeakeasyBase {
     daysBack?: number;

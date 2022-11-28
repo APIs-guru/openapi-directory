@@ -1,12 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import participantrole_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ChannelDefinition:
-    channel_id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ChannelId' }})
-    participant_role: Optional[participantrole_enum.ParticipantRoleEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ParticipantRole' }})
+    r"""ChannelDefinition
+    For a call analytics job, an object that indicates the audio channel that belongs to the agent and the audio channel that belongs to the customer.
+    """
+    
+    channel_id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ChannelId') }})
+    participant_role: Optional[ParticipantRoleEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ParticipantRole') }})
     

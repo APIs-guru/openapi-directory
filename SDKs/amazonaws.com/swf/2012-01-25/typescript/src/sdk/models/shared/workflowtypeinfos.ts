@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WorkflowTypeInfo } from "./workflowtypeinfo";
+
 
 
 // WorkflowTypeInfos
@@ -8,9 +8,9 @@ import { WorkflowTypeInfo } from "./workflowtypeinfo";
  * Contains a paginated list of information structures about workflow types.
 **/
 export class WorkflowTypeInfos extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=typeInfos", elemType: shared.WorkflowTypeInfo })
+  @SpeakeasyMetadata({ data: "json, name=typeInfos", elemType: WorkflowTypeInfo })
   typeInfos: WorkflowTypeInfo[];
 }

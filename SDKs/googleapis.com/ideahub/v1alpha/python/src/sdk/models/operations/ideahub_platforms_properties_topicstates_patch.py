@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class IdeahubPlatformsPropertiesTopicStatesPatchPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,14 +30,14 @@ class IdeahubPlatformsPropertiesTopicStatesPatchQueryParams:
 
 @dataclass
 class IdeahubPlatformsPropertiesTopicStatesPatchRequest:
-    path_params: IdeahubPlatformsPropertiesTopicStatesPatchPathParams = field(default=None)
-    query_params: IdeahubPlatformsPropertiesTopicStatesPatchQueryParams = field(default=None)
+    path_params: IdeahubPlatformsPropertiesTopicStatesPatchPathParams = field()
+    query_params: IdeahubPlatformsPropertiesTopicStatesPatchQueryParams = field()
     request: Optional[shared.GoogleSearchIdeahubV1alphaTopicState] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class IdeahubPlatformsPropertiesTopicStatesPatchResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_search_ideahub_v1alpha_topic_state: Optional[shared.GoogleSearchIdeahubV1alphaTopicState] = field(default=None)
-    status_code: int = field(default=None)
     

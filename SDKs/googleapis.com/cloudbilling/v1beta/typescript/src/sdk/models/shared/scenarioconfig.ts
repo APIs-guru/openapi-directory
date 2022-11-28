@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ScenarioConfig
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configuration for a CostScenario. Specifies how costs are calculated.
 **/
 export class ScenarioConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=estimateDuration" })
+  @SpeakeasyMetadata({ data: "json, name=estimateDuration" })
   estimateDuration?: string;
 }

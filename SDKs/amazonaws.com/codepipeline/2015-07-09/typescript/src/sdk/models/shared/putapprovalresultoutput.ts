@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PutApprovalResultOutput
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the output of a <code>PutApprovalResult</code> action.
 **/
 export class PutApprovalResultOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=approvedAt" })
+  @SpeakeasyMetadata({ data: "json, name=approvedAt" })
   approvedAt?: Date;
 }

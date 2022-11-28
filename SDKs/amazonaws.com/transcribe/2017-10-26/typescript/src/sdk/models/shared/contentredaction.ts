@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RedactionOutputEnum } from "./redactionoutputenum";
 import { RedactionTypeEnum } from "./redactiontypeenum";
+
 
 
 // ContentRedaction
@@ -8,9 +9,9 @@ import { RedactionTypeEnum } from "./redactiontypeenum";
  * Settings for content redaction within a transcription job.
 **/
 export class ContentRedaction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=RedactionOutput" })
+  @SpeakeasyMetadata({ data: "json, name=RedactionOutput" })
   redactionOutput: RedactionOutputEnum;
 
-  @Metadata({ data: "json, name=RedactionType" })
+  @SpeakeasyMetadata({ data: "json, name=RedactionType" })
   redactionType: RedactionTypeEnum;
 }

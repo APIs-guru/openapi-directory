@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MailerSettings
@@ -6,27 +7,27 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configuration for mailgun api client
 **/
 export class MailerSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=apiKey" })
+  @SpeakeasyMetadata({ data: "json, name=apiKey" })
   apiKey: string;
 
-  @Metadata({ data: "json, name=apiKeyPrivate" })
+  @SpeakeasyMetadata({ data: "json, name=apiKeyPrivate" })
   apiKeyPrivate?: string;
 
-  @Metadata({ data: "json, name=apiKeyPublic" })
+  @SpeakeasyMetadata({ data: "json, name=apiKeyPublic" })
   apiKeyPublic?: string;
 
-  @Metadata({ data: "json, name=domain" })
+  @SpeakeasyMetadata({ data: "json, name=domain" })
   domain: string;
 
-  @Metadata({ data: "json, name=eu" })
+  @SpeakeasyMetadata({ data: "json, name=eu" })
   eu?: boolean;
 
-  @Metadata({ data: "json, name=header" })
+  @SpeakeasyMetadata({ data: "json, name=header" })
   header?: Map<string, string>;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }

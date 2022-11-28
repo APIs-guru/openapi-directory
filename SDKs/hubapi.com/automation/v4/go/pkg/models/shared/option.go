@@ -1,5 +1,7 @@
 package shared
 
+// Option
+// An option for a field value.
 type Option struct {
 	Description  string  `json:"description"`
 	DisplayOrder int32   `json:"displayOrder"`

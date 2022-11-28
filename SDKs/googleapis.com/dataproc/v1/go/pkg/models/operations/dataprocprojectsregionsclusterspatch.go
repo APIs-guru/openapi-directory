@@ -35,7 +35,7 @@ type DataprocProjectsRegionsClustersPatchSecurity struct {
 type DataprocProjectsRegionsClustersPatchRequest struct {
 	PathParams  DataprocProjectsRegionsClustersPatchPathParams
 	QueryParams DataprocProjectsRegionsClustersPatchQueryParams
-	Request     *shared.Cluster `request:"mediaType=application/json"`
+	Request     *shared.ClusterInput `request:"mediaType=application/json"`
 	Security    DataprocProjectsRegionsClustersPatchSecurity
 }
 

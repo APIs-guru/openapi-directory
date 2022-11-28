@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Dataset } from "./dataset";
+
 
 
 // ListDatasetsResponse
@@ -8,9 +8,9 @@ import { Dataset } from "./dataset";
  * Response message for AutoMl.ListDatasets.
 **/
 export class ListDatasetsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=datasets", elemType: shared.Dataset })
+  @SpeakeasyMetadata({ data: "json, name=datasets", elemType: Dataset })
   datasets?: Dataset[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

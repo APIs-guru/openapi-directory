@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RoleAssignment
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Defines an assignment of a role.
 **/
 export class RoleAssignment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assignedTo" })
+  @SpeakeasyMetadata({ data: "json, name=assignedTo" })
   assignedTo?: string;
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=orgUnitId" })
+  @SpeakeasyMetadata({ data: "json, name=orgUnitId" })
   orgUnitId?: string;
 
-  @Metadata({ data: "json, name=roleAssignmentId" })
+  @SpeakeasyMetadata({ data: "json, name=roleAssignmentId" })
   roleAssignmentId?: string;
 
-  @Metadata({ data: "json, name=roleId" })
+  @SpeakeasyMetadata({ data: "json, name=roleId" })
   roleId?: string;
 
-  @Metadata({ data: "json, name=scopeType" })
+  @SpeakeasyMetadata({ data: "json, name=scopeType" })
   scopeType?: string;
 }

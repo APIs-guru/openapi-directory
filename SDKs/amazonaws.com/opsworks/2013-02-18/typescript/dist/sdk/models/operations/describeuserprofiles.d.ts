@@ -1,0 +1,26 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import * as shared from "../shared";
+export declare enum DescribeUserProfilesXAmzTargetEnum {
+    OpsWorks20130218DescribeUserProfiles = "OpsWorks_20130218.DescribeUserProfiles"
+}
+export declare class DescribeUserProfilesHeaders extends SpeakeasyBase {
+    xAmzAlgorithm?: string;
+    xAmzContentSha256?: string;
+    xAmzCredential?: string;
+    xAmzDate?: string;
+    xAmzSecurityToken?: string;
+    xAmzSignature?: string;
+    xAmzSignedHeaders?: string;
+    xAmzTarget: DescribeUserProfilesXAmzTargetEnum;
+}
+export declare class DescribeUserProfilesRequest extends SpeakeasyBase {
+    headers: DescribeUserProfilesHeaders;
+    request: shared.DescribeUserProfilesRequest;
+}
+export declare class DescribeUserProfilesResponse extends SpeakeasyBase {
+    contentType: string;
+    describeUserProfilesResult?: shared.DescribeUserProfilesResult;
+    resourceNotFoundException?: any;
+    statusCode: number;
+    validationException?: any;
+}

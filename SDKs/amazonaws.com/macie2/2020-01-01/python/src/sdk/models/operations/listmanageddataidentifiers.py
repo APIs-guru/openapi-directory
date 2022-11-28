@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,18 +22,18 @@ class ListManagedDataIdentifiersHeaders:
 @dataclass_json
 @dataclass
 class ListManagedDataIdentifiersRequestBody:
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextToken' }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextToken') }})
     
 
 @dataclass
 class ListManagedDataIdentifiersRequest:
-    headers: ListManagedDataIdentifiersHeaders = field(default=None)
-    request: ListManagedDataIdentifiersRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ListManagedDataIdentifiersHeaders = field()
+    request: ListManagedDataIdentifiersRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ListManagedDataIdentifiersResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_managed_data_identifiers_response: Optional[shared.ListManagedDataIdentifiersResponse] = field(default=None)
-    status_code: int = field(default=None)
     

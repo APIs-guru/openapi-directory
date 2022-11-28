@@ -1,5 +1,7 @@
 package shared
 
+// LettingsLandlordDocument
+// Document details.
 type LettingsLandlordDocument struct {
 	FileName *string `json:"FileName,omitempty"`
 	FileSize *int32  `json:"FileSize,omitempty"`

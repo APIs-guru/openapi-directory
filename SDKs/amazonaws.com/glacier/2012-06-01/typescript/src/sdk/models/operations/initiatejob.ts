@@ -1,36 +1,37 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class InitiateJobPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=accountId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=accountId" })
   accountId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=vaultName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=vaultName" })
   vaultName: string;
 }
 
 
 export class InitiateJobHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -40,81 +41,81 @@ export class InitiateJobHeaders extends SpeakeasyBase {
  * Provides options for defining a job.
 **/
 export class InitiateJobRequestBodyJobParameters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ArchiveId" })
+  @SpeakeasyMetadata({ data: "json, name=ArchiveId" })
   archiveId?: string;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=Format" })
+  @SpeakeasyMetadata({ data: "json, name=Format" })
   format?: string;
 
-  @Metadata({ data: "json, name=InventoryRetrievalParameters" })
+  @SpeakeasyMetadata({ data: "json, name=InventoryRetrievalParameters" })
   inventoryRetrievalParameters?: shared.InventoryRetrievalJobInput;
 
-  @Metadata({ data: "json, name=OutputLocation" })
+  @SpeakeasyMetadata({ data: "json, name=OutputLocation" })
   outputLocation?: shared.OutputLocation;
 
-  @Metadata({ data: "json, name=RetrievalByteRange" })
+  @SpeakeasyMetadata({ data: "json, name=RetrievalByteRange" })
   retrievalByteRange?: string;
 
-  @Metadata({ data: "json, name=SNSTopic" })
+  @SpeakeasyMetadata({ data: "json, name=SNSTopic" })
   snsTopic?: string;
 
-  @Metadata({ data: "json, name=SelectParameters" })
+  @SpeakeasyMetadata({ data: "json, name=SelectParameters" })
   selectParameters?: shared.SelectParameters;
 
-  @Metadata({ data: "json, name=Tier" })
+  @SpeakeasyMetadata({ data: "json, name=Tier" })
   tier?: string;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: string;
 }
 
 
 export class InitiateJobRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=jobParameters" })
+  @SpeakeasyMetadata({ data: "json, name=jobParameters" })
   jobParameters?: InitiateJobRequestBodyJobParameters;
 }
 
 
 export class InitiateJobRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: InitiateJobPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: InitiateJobHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: InitiateJobRequestBody;
 }
 
 
 export class InitiateJobResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   initiateJobOutput?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   insufficientCapacityException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidParameterValueException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   missingParameterValueException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   policyEnforcedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceUnavailableException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

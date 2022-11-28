@@ -1,5 +1,7 @@
 package shared
 
+// AwsS3BucketBucketLifecycleConfigurationRulesDetails
+// Configuration for a lifecycle rule.
 type AwsS3BucketBucketLifecycleConfigurationRulesDetails struct {
 	AbortIncompleteMultipartUpload    *AwsS3BucketBucketLifecycleConfigurationRulesAbortIncompleteMultipartUploadDetails `json:"AbortIncompleteMultipartUpload,omitempty"`
 	ExpirationDate                    *string                                                                            `json:"ExpirationDate,omitempty"`

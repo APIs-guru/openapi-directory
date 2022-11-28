@@ -27,11 +27,6 @@ type DipcrSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type DipcrRequest struct {
-	Request  *DipcrRequestBody `request:"mediaType=application/json"`
-	Security DipcrSecurity
-}
-
 type Dipcr400ApplicationJSONErrorEnum string
 
 const (
@@ -161,6 +156,11 @@ const (
 type Dipcr504ApplicationJSON struct {
 	Error            *Dipcr504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Dipcr504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type DipcrRequest struct {
+	Request  *DipcrRequestBody `request:"mediaType=application/json"`
+	Security DipcrSecurity
 }
 
 type DipcrResponse struct {

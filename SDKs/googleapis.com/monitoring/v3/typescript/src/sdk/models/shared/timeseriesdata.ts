@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LabelValue } from "./labelvalue";
 import { PointData } from "./pointdata";
+
 
 
 // TimeSeriesData
@@ -9,9 +9,9 @@ import { PointData } from "./pointdata";
  * Represents the values of a time series associated with a TimeSeriesDescriptor.
 **/
 export class TimeSeriesData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=labelValues", elemType: shared.LabelValue })
+  @SpeakeasyMetadata({ data: "json, name=labelValues", elemType: LabelValue })
   labelValues?: LabelValue[];
 
-  @Metadata({ data: "json, name=pointData", elemType: shared.PointData })
+  @SpeakeasyMetadata({ data: "json, name=pointData", elemType: PointData })
   pointData?: PointData[];
 }

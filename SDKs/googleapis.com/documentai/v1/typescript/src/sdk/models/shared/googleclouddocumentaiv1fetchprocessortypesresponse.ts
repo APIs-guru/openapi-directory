@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDocumentaiV1ProcessorType } from "./googleclouddocumentaiv1processortype";
+
 
 
 // GoogleCloudDocumentaiV1FetchProcessorTypesResponse
@@ -8,6 +8,6 @@ import { GoogleCloudDocumentaiV1ProcessorType } from "./googleclouddocumentaiv1p
  * Response message for fetch processor types.
 **/
 export class GoogleCloudDocumentaiV1FetchProcessorTypesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=processorTypes", elemType: shared.GoogleCloudDocumentaiV1ProcessorType })
+  @SpeakeasyMetadata({ data: "json, name=processorTypes", elemType: GoogleCloudDocumentaiV1ProcessorType })
   processorTypes?: GoogleCloudDocumentaiV1ProcessorType[];
 }

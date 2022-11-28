@@ -14,8 +14,9 @@ const (
 	PolicyControllerMembershipStateStateEnumSuspended                 PolicyControllerMembershipStateStateEnum = "SUSPENDED"
 )
 
+// PolicyControllerMembershipState
+// **Policy Controller**: State for a single cluster.
 type PolicyControllerMembershipState struct {
-	ClusterName     *string                                   `json:"clusterName,omitempty"`
 	ComponentStates map[string]PolicyControllerOnClusterState `json:"componentStates,omitempty"`
 	State           *PolicyControllerMembershipStateStateEnum `json:"state,omitempty"`
 }

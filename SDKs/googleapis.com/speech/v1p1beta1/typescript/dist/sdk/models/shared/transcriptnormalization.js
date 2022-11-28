@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Entry } from "./entry";
 // TranscriptNormalization
 /**
  * Transcription normalization configuration. Use transcription normalization to automatically replace parts of the transcript with phrases of your choosing. For StreamingRecognize, this normalization only applies to stable partial transcripts (stability > 0.8) and final transcripts.
@@ -34,7 +34,7 @@ var TranscriptNormalization = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=entries", elemType: shared.Entry }),
+        SpeakeasyMetadata({ data: "json, name=entries", elemType: Entry }),
         __metadata("design:type", Array)
     ], TranscriptNormalization.prototype, "entries", void 0);
     return TranscriptNormalization;

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DriveExportOptions } from "./driveexportoptions";
 import { GroupsExportOptions } from "./groupsexportoptions";
 import { HangoutsChatExportOptions } from "./hangoutschatexportoptions";
@@ -45,27 +45,27 @@ var ExportOptions = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=driveOptions" }),
+        SpeakeasyMetadata({ data: "json, name=driveOptions" }),
         __metadata("design:type", DriveExportOptions)
     ], ExportOptions.prototype, "driveOptions", void 0);
     __decorate([
-        Metadata({ data: "json, name=groupsOptions" }),
+        SpeakeasyMetadata({ data: "json, name=groupsOptions" }),
         __metadata("design:type", GroupsExportOptions)
     ], ExportOptions.prototype, "groupsOptions", void 0);
     __decorate([
-        Metadata({ data: "json, name=hangoutsChatOptions" }),
+        SpeakeasyMetadata({ data: "json, name=hangoutsChatOptions" }),
         __metadata("design:type", HangoutsChatExportOptions)
     ], ExportOptions.prototype, "hangoutsChatOptions", void 0);
     __decorate([
-        Metadata({ data: "json, name=mailOptions" }),
+        SpeakeasyMetadata({ data: "json, name=mailOptions" }),
         __metadata("design:type", MailExportOptions)
     ], ExportOptions.prototype, "mailOptions", void 0);
     __decorate([
-        Metadata({ data: "json, name=region" }),
+        SpeakeasyMetadata({ data: "json, name=region" }),
         __metadata("design:type", String)
     ], ExportOptions.prototype, "region", void 0);
     __decorate([
-        Metadata({ data: "json, name=voiceOptions" }),
+        SpeakeasyMetadata({ data: "json, name=voiceOptions" }),
         __metadata("design:type", VoiceExportOptions)
     ], ExportOptions.prototype, "voiceOptions", void 0);
     return ExportOptions;

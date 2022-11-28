@@ -10,6 +10,8 @@ const (
 	GoogleCloudDataplexV1AssetDiscoveryStatusStateEnumDisabled         GoogleCloudDataplexV1AssetDiscoveryStatusStateEnum = "DISABLED"
 )
 
+// GoogleCloudDataplexV1AssetDiscoveryStatus
+// Status of discovery for an asset.
 type GoogleCloudDataplexV1AssetDiscoveryStatus struct {
 	LastRunDuration *string                                             `json:"lastRunDuration,omitempty"`
 	LastRunTime     *string                                             `json:"lastRunTime,omitempty"`

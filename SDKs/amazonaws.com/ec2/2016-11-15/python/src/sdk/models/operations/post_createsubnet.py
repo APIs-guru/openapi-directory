@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostCreateSubnetActionEnum(str, Enum):
     CREATE_SUBNET = "CreateSubnet"
@@ -10,8 +14,8 @@ class PostCreateSubnetVersionEnum(str, Enum):
 
 @dataclass
 class PostCreateSubnetQueryParams:
-    action: PostCreateSubnetActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostCreateSubnetVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostCreateSubnetActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostCreateSubnetVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostCreateSubnetHeaders:
 
 @dataclass
 class PostCreateSubnetRequest:
-    query_params: PostCreateSubnetQueryParams = field(default=None)
-    headers: PostCreateSubnetHeaders = field(default=None)
+    headers: PostCreateSubnetHeaders = field()
+    query_params: PostCreateSubnetQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostCreateSubnetResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

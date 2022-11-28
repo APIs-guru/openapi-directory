@@ -1,62 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetCommunicationPreferencesV3StatusEmailEmailAddressGetEmailStatusPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=emailAddress" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=emailAddress" })
   emailAddress: string;
 }
 
 
-export class GetCommunicationPreferencesV3StatusEmailEmailAddressGetEmailStatusSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
-  hapikey: shared.SchemeHapikey;
-}
-
-
-export class GetCommunicationPreferencesV3StatusEmailEmailAddressGetEmailStatusSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth2Legacy: shared.SchemeOauth2Legacy;
-}
-
-
-export class GetCommunicationPreferencesV3StatusEmailEmailAddressGetEmailStatusSecurityOption3 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth2Legacy: shared.SchemeOauth2Legacy;
-}
-
-
 export class GetCommunicationPreferencesV3StatusEmailEmailAddressGetEmailStatusSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: GetCommunicationPreferencesV3StatusEmailEmailAddressGetEmailStatusSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
+  hapikey?: shared.SchemeHapikey;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: GetCommunicationPreferencesV3StatusEmailEmailAddressGetEmailStatusSecurityOption2;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  privateAppsLegacy?: shared.SchemePrivateAppsLegacy;
 
-  @Metadata({ data: "security, option=true" })
-  option3?: GetCommunicationPreferencesV3StatusEmailEmailAddressGetEmailStatusSecurityOption3;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth2Legacy?: shared.SchemeOauth2Legacy;
+
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  privateAppsLegacy1?: shared.SchemePrivateAppsLegacy;
+
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth2Legacy1?: shared.SchemeOauth2Legacy;
 }
 
 
 export class GetCommunicationPreferencesV3StatusEmailEmailAddressGetEmailStatusRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetCommunicationPreferencesV3StatusEmailEmailAddressGetEmailStatusPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetCommunicationPreferencesV3StatusEmailEmailAddressGetEmailStatusSecurity;
 }
 
 
 export class GetCommunicationPreferencesV3StatusEmailEmailAddressGetEmailStatusResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   publicSubscriptionStatusesResponse?: shared.PublicSubscriptionStatusesResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // InjectCredentialsRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A request to inject credentials into a cluster.
 **/
 export class InjectCredentialsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clusterUuid" })
+  @SpeakeasyMetadata({ data: "json, name=clusterUuid" })
   clusterUuid?: string;
 
-  @Metadata({ data: "json, name=credentialsCiphertext" })
+  @SpeakeasyMetadata({ data: "json, name=credentialsCiphertext" })
   credentialsCiphertext?: string;
 }

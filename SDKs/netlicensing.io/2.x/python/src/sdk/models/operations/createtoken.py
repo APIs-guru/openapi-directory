@@ -1,5 +1,7 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
+from sdk.models import shared
 
 class CreateTokenRequestBodyActionEnum(str, Enum):
     LICENSEE_LOGIN = "licenseeLogin"
@@ -22,6 +24,7 @@ class CreateTokenRequestBodyTypeEnum(str, Enum):
 
 @dataclass
 class CreateTokenRequestBody:
+    token_type: CreateTokenRequestBodyTokenTypeEnum = field(metadata={'form': { 'field_name': 'tokenType' }})
     action: Optional[CreateTokenRequestBodyActionEnum] = field(default=None, metadata={'form': { 'field_name': 'action' }})
     api_key_role: Optional[CreateTokenRequestBodyAPIKeyRoleEnum] = field(default=None, metadata={'form': { 'field_name': 'apiKeyRole' }})
     cancel_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'cancelURL' }})
@@ -33,25 +36,24 @@ class CreateTokenRequestBody:
     product_number: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'productNumber' }})
     success_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'successURL' }})
     success_url_title: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'successURLTitle' }})
-    token_type: CreateTokenRequestBodyTokenTypeEnum = field(default=None, metadata={'form': { 'field_name': 'tokenType' }})
     type: Optional[CreateTokenRequestBodyTypeEnum] = field(default=None, metadata={'form': { 'field_name': 'type' }})
     
 
 @dataclass
 class CreateTokenSecurity:
-    basic_auth: shared.SchemeBasicAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    basic_auth: shared.SchemeBasicAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
     
 
 @dataclass
 class CreateTokenRequest:
-    request: CreateTokenRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
-    security: CreateTokenSecurity = field(default=None)
+    request: CreateTokenRequestBody = field(metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    security: CreateTokenSecurity = field()
     
 
 @dataclass
 class CreateTokenResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     netlicensing: Optional[Any] = field(default=None)
     

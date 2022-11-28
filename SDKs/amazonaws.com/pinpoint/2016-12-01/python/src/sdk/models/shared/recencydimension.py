@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import duration_enum
-from . import recencytype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class RecencyDimension:
-    duration: duration_enum.DurationEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Duration' }})
-    recency_type: recencytype_enum.RecencyTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RecencyType' }})
+    r"""RecencyDimension
+    Specifies criteria for including or excluding endpoints from a segment based on how recently an endpoint was active.
+    """
+    
+    duration: DurationEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Duration') }})
+    recency_type: RecencyTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('RecencyType') }})
     

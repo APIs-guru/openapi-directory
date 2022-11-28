@@ -10,13 +10,13 @@ class GetAPIPostsGovernmentPostsQueryParams:
 
 @dataclass
 class GetAPIPostsGovernmentPostsRequest:
-    query_params: GetAPIPostsGovernmentPostsQueryParams = field(default=None)
+    query_params: GetAPIPostsGovernmentPostsQueryParams = field()
     
 
 @dataclass
 class GetAPIPostsGovernmentPostsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     government_opposition_post_items: Optional[List[shared.GovernmentOppositionPostItem]] = field(default=None)
-    status_code: int = field(default=None)
     

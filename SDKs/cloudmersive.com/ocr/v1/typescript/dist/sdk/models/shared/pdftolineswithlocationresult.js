@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { OcrPageResultWithLinesWithLocation } from "./ocrpageresultwithlineswithlocation";
 // PdfToLinesWithLocationResult
 /**
  * Response from an OCR to lines with location operation.  Includes the confience rating and converted text result, along with the locations of the lines in the pages.
@@ -34,11 +34,11 @@ var PdfToLinesWithLocationResult = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=OcrPages", elemType: shared.OcrPageResultWithLinesWithLocation }),
+        SpeakeasyMetadata({ data: "json, name=OcrPages", elemType: OcrPageResultWithLinesWithLocation }),
         __metadata("design:type", Array)
     ], PdfToLinesWithLocationResult.prototype, "ocrPages", void 0);
     __decorate([
-        Metadata({ data: "json, name=Successful" }),
+        SpeakeasyMetadata({ data: "json, name=Successful" }),
         __metadata("design:type", Boolean)
     ], PdfToLinesWithLocationResult.prototype, "successful", void 0);
     return PdfToLinesWithLocationResult;

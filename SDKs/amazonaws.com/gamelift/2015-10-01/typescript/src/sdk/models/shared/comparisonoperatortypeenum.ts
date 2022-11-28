@@ -1,8 +1,9 @@
 
 
+
 export enum ComparisonOperatorTypeEnum {
-    GreaterThanOrEqualToThreshold = "GreaterThanOrEqualToThreshold"
-,    GreaterThanThreshold = "GreaterThanThreshold"
-,    LessThanThreshold = "LessThanThreshold"
-,    LessThanOrEqualToThreshold = "LessThanOrEqualToThreshold"
+    GreaterThanOrEqualToThreshold = "GreaterThanOrEqualToThreshold",
+    GreaterThanThreshold = "GreaterThanThreshold",
+    LessThanThreshold = "LessThanThreshold",
+    LessThanOrEqualToThreshold = "LessThanOrEqualToThreshold"
 }

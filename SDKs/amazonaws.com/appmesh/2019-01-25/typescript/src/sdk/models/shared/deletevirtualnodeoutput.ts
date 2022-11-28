@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VirtualNodeData } from "./virtualnodedata";
+
 
 
 // DeleteVirtualNodeOutput
@@ -7,6 +8,6 @@ import { VirtualNodeData } from "./virtualnodedata";
  * <zonbook></zonbook><xhtml></xhtml>
 **/
 export class DeleteVirtualNodeOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=virtualNode" })
+  @SpeakeasyMetadata({ data: "json, name=virtualNode" })
   virtualNode: VirtualNodeData;
 }

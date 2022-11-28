@@ -1,7 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserContext } from "./usercontext";
 import { InferenceSpecification } from "./inferencespecification";
-import { UserContext } from "./usercontext";
 import { MetadataProperties } from "./metadataproperties";
 import { ModelApprovalStatusEnum } from "./modelapprovalstatusenum";
 import { ModelMetrics } from "./modelmetrics";
@@ -11,61 +10,62 @@ import { SourceAlgorithmSpecification } from "./sourcealgorithmspecification";
 import { ModelPackageValidationSpecification } from "./modelpackagevalidationspecification";
 
 
+
 export class DescribeModelPackageOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApprovalDescription" })
+  @SpeakeasyMetadata({ data: "json, name=ApprovalDescription" })
   approvalDescription?: string;
 
-  @Metadata({ data: "json, name=CertifyForMarketplace" })
+  @SpeakeasyMetadata({ data: "json, name=CertifyForMarketplace" })
   certifyForMarketplace?: boolean;
 
-  @Metadata({ data: "json, name=CreatedBy" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedBy" })
   createdBy?: UserContext;
 
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime: Date;
 
-  @Metadata({ data: "json, name=InferenceSpecification" })
+  @SpeakeasyMetadata({ data: "json, name=InferenceSpecification" })
   inferenceSpecification?: InferenceSpecification;
 
-  @Metadata({ data: "json, name=LastModifiedBy" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedBy" })
   lastModifiedBy?: UserContext;
 
-  @Metadata({ data: "json, name=LastModifiedTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedTime" })
   lastModifiedTime?: Date;
 
-  @Metadata({ data: "json, name=MetadataProperties" })
+  @SpeakeasyMetadata({ data: "json, name=MetadataProperties" })
   metadataProperties?: MetadataProperties;
 
-  @Metadata({ data: "json, name=ModelApprovalStatus" })
+  @SpeakeasyMetadata({ data: "json, name=ModelApprovalStatus" })
   modelApprovalStatus?: ModelApprovalStatusEnum;
 
-  @Metadata({ data: "json, name=ModelMetrics" })
+  @SpeakeasyMetadata({ data: "json, name=ModelMetrics" })
   modelMetrics?: ModelMetrics;
 
-  @Metadata({ data: "json, name=ModelPackageArn" })
+  @SpeakeasyMetadata({ data: "json, name=ModelPackageArn" })
   modelPackageArn: string;
 
-  @Metadata({ data: "json, name=ModelPackageDescription" })
+  @SpeakeasyMetadata({ data: "json, name=ModelPackageDescription" })
   modelPackageDescription?: string;
 
-  @Metadata({ data: "json, name=ModelPackageGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=ModelPackageGroupName" })
   modelPackageGroupName?: string;
 
-  @Metadata({ data: "json, name=ModelPackageName" })
+  @SpeakeasyMetadata({ data: "json, name=ModelPackageName" })
   modelPackageName: string;
 
-  @Metadata({ data: "json, name=ModelPackageStatus" })
+  @SpeakeasyMetadata({ data: "json, name=ModelPackageStatus" })
   modelPackageStatus: ModelPackageStatusEnum;
 
-  @Metadata({ data: "json, name=ModelPackageStatusDetails" })
+  @SpeakeasyMetadata({ data: "json, name=ModelPackageStatusDetails" })
   modelPackageStatusDetails: ModelPackageStatusDetails;
 
-  @Metadata({ data: "json, name=ModelPackageVersion" })
+  @SpeakeasyMetadata({ data: "json, name=ModelPackageVersion" })
   modelPackageVersion?: number;
 
-  @Metadata({ data: "json, name=SourceAlgorithmSpecification" })
+  @SpeakeasyMetadata({ data: "json, name=SourceAlgorithmSpecification" })
   sourceAlgorithmSpecification?: SourceAlgorithmSpecification;
 
-  @Metadata({ data: "json, name=ValidationSpecification" })
+  @SpeakeasyMetadata({ data: "json, name=ValidationSpecification" })
   validationSpecification?: ModelPackageValidationSpecification;
 }

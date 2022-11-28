@@ -1,19 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApplicationEvent } from "./applicationevent";
 import { KeyedAppState } from "./keyedappstate";
 
+
 export enum ApplicationReportApplicationSourceEnum {
-    ApplicationSourceUnspecified = "APPLICATION_SOURCE_UNSPECIFIED"
-,    SystemAppFactoryVersion = "SYSTEM_APP_FACTORY_VERSION"
-,    SystemAppUpdatedVersion = "SYSTEM_APP_UPDATED_VERSION"
-,    InstalledFromPlayStore = "INSTALLED_FROM_PLAY_STORE"
+    ApplicationSourceUnspecified = "APPLICATION_SOURCE_UNSPECIFIED",
+    SystemAppFactoryVersion = "SYSTEM_APP_FACTORY_VERSION",
+    SystemAppUpdatedVersion = "SYSTEM_APP_UPDATED_VERSION",
+    InstalledFromPlayStore = "INSTALLED_FROM_PLAY_STORE"
 }
 
 export enum ApplicationReportStateEnum {
-    ApplicationStateUnspecified = "APPLICATION_STATE_UNSPECIFIED"
-,    Removed = "REMOVED"
-,    Installed = "INSTALLED"
+    ApplicationStateUnspecified = "APPLICATION_STATE_UNSPECIFIED",
+    Removed = "REMOVED",
+    Installed = "INSTALLED"
 }
 
 
@@ -22,36 +22,36 @@ export enum ApplicationReportStateEnum {
  * Information reported about an installed app.
 **/
 export class ApplicationReport extends SpeakeasyBase {
-  @Metadata({ data: "json, name=applicationSource" })
+  @SpeakeasyMetadata({ data: "json, name=applicationSource" })
   applicationSource?: ApplicationReportApplicationSourceEnum;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=events", elemType: shared.ApplicationEvent })
+  @SpeakeasyMetadata({ data: "json, name=events", elemType: ApplicationEvent })
   events?: ApplicationEvent[];
 
-  @Metadata({ data: "json, name=installerPackageName" })
+  @SpeakeasyMetadata({ data: "json, name=installerPackageName" })
   installerPackageName?: string;
 
-  @Metadata({ data: "json, name=keyedAppStates", elemType: shared.KeyedAppState })
+  @SpeakeasyMetadata({ data: "json, name=keyedAppStates", elemType: KeyedAppState })
   keyedAppStates?: KeyedAppState[];
 
-  @Metadata({ data: "json, name=packageName" })
+  @SpeakeasyMetadata({ data: "json, name=packageName" })
   packageName?: string;
 
-  @Metadata({ data: "json, name=packageSha256Hash" })
+  @SpeakeasyMetadata({ data: "json, name=packageSha256Hash" })
   packageSha256Hash?: string;
 
-  @Metadata({ data: "json, name=signingKeyCertFingerprints" })
+  @SpeakeasyMetadata({ data: "json, name=signingKeyCertFingerprints" })
   signingKeyCertFingerprints?: string[];
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: ApplicationReportStateEnum;
 
-  @Metadata({ data: "json, name=versionCode" })
+  @SpeakeasyMetadata({ data: "json, name=versionCode" })
   versionCode?: number;
 
-  @Metadata({ data: "json, name=versionName" })
+  @SpeakeasyMetadata({ data: "json, name=versionName" })
   versionName?: string;
 }

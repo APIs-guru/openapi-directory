@@ -1,6 +1,7 @@
 
 
+
 export enum ReportFormatEnum {
-    TextORcsv = "textORcsv"
-,    Parquet = "Parquet"
+    TextORcsv = "textORcsv",
+    Parquet = "Parquet"
 }

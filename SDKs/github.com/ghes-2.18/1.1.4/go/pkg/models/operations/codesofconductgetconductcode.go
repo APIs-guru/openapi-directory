@@ -8,13 +8,13 @@ type CodesOfConductGetConductCodePathParams struct {
 	Key string `pathParam:"style=simple,explode=false,name=key"`
 }
 
-type CodesOfConductGetConductCodeRequest struct {
-	PathParams CodesOfConductGetConductCodePathParams
-}
-
 type CodesOfConductGetConductCode415ApplicationJSON struct {
 	DocumentationURL string `json:"documentation_url"`
 	Message          string `json:"message"`
+}
+
+type CodesOfConductGetConductCodeRequest struct {
+	PathParams CodesOfConductGetConductCodePathParams
 }
 
 type CodesOfConductGetConductCodeResponse struct {

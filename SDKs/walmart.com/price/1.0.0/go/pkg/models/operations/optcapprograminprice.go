@@ -13,11 +13,6 @@ type OptCapProgramInPriceRequestBody struct {
 	SubsidyPreference *bool `json:"subsidyPreference,omitempty"`
 }
 
-type OptCapProgramInPriceRequest struct {
-	Headers OptCapProgramInPriceHeaders
-	Request OptCapProgramInPriceRequestBody `request:"mediaType=application/json"`
-}
-
 type OptCapProgramInPrice200ApplicationJSONStatusInfo struct {
 	SubsidyEnrolled   *bool `json:"subsidyEnrolled,omitempty"`
 	SubsidyPreference *bool `json:"subsidyPreference,omitempty"`
@@ -26,6 +21,11 @@ type OptCapProgramInPrice200ApplicationJSONStatusInfo struct {
 type OptCapProgramInPrice200ApplicationJSON struct {
 	MartID     *string                                           `json:"martId,omitempty"`
 	StatusInfo *OptCapProgramInPrice200ApplicationJSONStatusInfo `json:"statusInfo,omitempty"`
+}
+
+type OptCapProgramInPriceRequest struct {
+	Headers OptCapProgramInPriceHeaders
+	Request OptCapProgramInPriceRequestBody `request:"mediaType=application/json"`
 }
 
 type OptCapProgramInPriceResponse struct {

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var QueryScheduleFrequencyEnum;
 (function (QueryScheduleFrequencyEnum) {
     QueryScheduleFrequencyEnum["OneTime"] = "ONE_TIME";
@@ -43,23 +43,23 @@ var QuerySchedule = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=endTimeMs" }),
+        SpeakeasyMetadata({ data: "json, name=endTimeMs" }),
         __metadata("design:type", String)
     ], QuerySchedule.prototype, "endTimeMs", void 0);
     __decorate([
-        Metadata({ data: "json, name=frequency" }),
+        SpeakeasyMetadata({ data: "json, name=frequency" }),
         __metadata("design:type", String)
     ], QuerySchedule.prototype, "frequency", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextRunMinuteOfDay" }),
+        SpeakeasyMetadata({ data: "json, name=nextRunMinuteOfDay" }),
         __metadata("design:type", Number)
     ], QuerySchedule.prototype, "nextRunMinuteOfDay", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextRunTimezoneCode" }),
+        SpeakeasyMetadata({ data: "json, name=nextRunTimezoneCode" }),
         __metadata("design:type", String)
     ], QuerySchedule.prototype, "nextRunTimezoneCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=startTimeMs" }),
+        SpeakeasyMetadata({ data: "json, name=startTimeMs" }),
         __metadata("design:type", String)
     ], QuerySchedule.prototype, "startTimeMs", void 0);
     return QuerySchedule;

@@ -22,38 +22,38 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Version = /** @class */ (function (_super) {
     __extends(Version, _super);
     function Version() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=codename" }),
+        SpeakeasyMetadata({ data: "json, name=codename" }),
         __metadata("design:type", String)
     ], Version.prototype, "codename", void 0);
     __decorate([
-        Metadata({ data: "json, name=from" }),
+        SpeakeasyMetadata({ data: "json, name=from" }),
         __metadata("design:type", String)
     ], Version.prototype, "from", void 0);
     __decorate([
-        Metadata({ data: "json, name=is_beta" }),
+        SpeakeasyMetadata({ data: "json, name=is_beta" }),
         __metadata("design:type", Boolean)
     ], Version.prototype, "isBeta", void 0);
     __decorate([
-        Metadata({ data: "json, name=is_deprecated" }),
+        SpeakeasyMetadata({ data: "json, name=is_deprecated" }),
         __metadata("design:type", Boolean)
     ], Version.prototype, "isDeprecated", void 0);
     __decorate([
-        Metadata({ data: "json, name=is_hidden" }),
+        SpeakeasyMetadata({ data: "json, name=is_hidden" }),
         __metadata("design:type", Boolean)
     ], Version.prototype, "isHidden", void 0);
     __decorate([
-        Metadata({ data: "json, name=is_stable" }),
+        SpeakeasyMetadata({ data: "json, name=is_stable" }),
         __metadata("design:type", Boolean)
     ], Version.prototype, "isStable", void 0);
     __decorate([
-        Metadata({ data: "json, name=version" }),
+        SpeakeasyMetadata({ data: "json, name=version" }),
         __metadata("design:type", String)
     ], Version.prototype, "version", void 0);
     return Version;

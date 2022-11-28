@@ -1,5 +1,24 @@
 package shared
 
+// GoogleAppsDriveLabelsV2betaFieldInput
+// Defines a field that has a display name, data type, and other configuration options. This field defines the kind of metadata that may be set on a Drive item.
+type GoogleAppsDriveLabelsV2betaFieldInput struct {
+	AppliedCapabilities *GoogleAppsDriveLabelsV2betaFieldAppliedCapabilities   `json:"appliedCapabilities,omitempty"`
+	Creator             *GoogleAppsDriveLabelsV2betaUserInfo                   `json:"creator,omitempty"`
+	DateOptions         *GoogleAppsDriveLabelsV2betaFieldDateOptionsInput      `json:"dateOptions,omitempty"`
+	Disabler            *GoogleAppsDriveLabelsV2betaUserInfo                   `json:"disabler,omitempty"`
+	DisplayHints        *GoogleAppsDriveLabelsV2betaFieldDisplayHints          `json:"displayHints,omitempty"`
+	Lifecycle           *GoogleAppsDriveLabelsV2betaLifecycleInput             `json:"lifecycle,omitempty"`
+	Properties          *GoogleAppsDriveLabelsV2betaFieldProperties            `json:"properties,omitempty"`
+	Publisher           *GoogleAppsDriveLabelsV2betaUserInfo                   `json:"publisher,omitempty"`
+	SchemaCapabilities  *GoogleAppsDriveLabelsV2betaFieldSchemaCapabilities    `json:"schemaCapabilities,omitempty"`
+	SelectionOptions    *GoogleAppsDriveLabelsV2betaFieldSelectionOptionsInput `json:"selectionOptions,omitempty"`
+	Updater             *GoogleAppsDriveLabelsV2betaUserInfo                   `json:"updater,omitempty"`
+	UserOptions         *GoogleAppsDriveLabelsV2betaFieldUserOptions           `json:"userOptions,omitempty"`
+}
+
+// GoogleAppsDriveLabelsV2betaField
+// Defines a field that has a display name, data type, and other configuration options. This field defines the kind of metadata that may be set on a Drive item.
 type GoogleAppsDriveLabelsV2betaField struct {
 	AppliedCapabilities *GoogleAppsDriveLabelsV2betaFieldAppliedCapabilities `json:"appliedCapabilities,omitempty"`
 	CreateTime          *string                                              `json:"createTime,omitempty"`

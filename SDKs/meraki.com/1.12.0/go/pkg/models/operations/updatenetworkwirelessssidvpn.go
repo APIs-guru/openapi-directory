@@ -21,6 +21,8 @@ type UpdateNetworkWirelessSsidVpnRequestBodySplitTunnelRules struct {
 	Protocol *UpdateNetworkWirelessSsidVpnRequestBodySplitTunnelRulesProtocolEnum `json:"protocol,omitempty"`
 }
 
+// UpdateNetworkWirelessSsidVpnRequestBodySplitTunnel
+// The VPN split tunnel settings for this SSID.
 type UpdateNetworkWirelessSsidVpnRequestBodySplitTunnel struct {
 	Enabled *bool                                                     `json:"enabled,omitempty"`
 	Rules   []UpdateNetworkWirelessSsidVpnRequestBodySplitTunnelRules `json:"rules,omitempty"`

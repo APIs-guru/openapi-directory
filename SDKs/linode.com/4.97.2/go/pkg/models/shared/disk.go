@@ -31,3 +31,9 @@ type Disk struct {
 	Status     *DiskStatusEnum     `json:"status,omitempty"`
 	Updated    *time.Time          `json:"updated,omitempty"`
 }
+
+type DiskInput struct {
+	Filesystem *DiskFilesystemEnum `json:"filesystem,omitempty"`
+	Label      *string             `json:"label,omitempty"`
+	Size       *int64              `json:"size,omitempty"`
+}

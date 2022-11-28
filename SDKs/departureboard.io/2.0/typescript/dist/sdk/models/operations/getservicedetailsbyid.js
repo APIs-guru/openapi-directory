@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetServiceDetailsByIdPathParams = /** @class */ (function (_super) {
     __extends(GetServiceDetailsByIdPathParams, _super);
     function GetServiceDetailsByIdPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=serviceID" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=serviceID" }),
         __metadata("design:type", String)
     ], GetServiceDetailsByIdPathParams.prototype, "serviceId", void 0);
     return GetServiceDetailsByIdPathParams;
@@ -41,7 +41,7 @@ var GetServiceDetailsByIdQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=apiKey" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=apiKey" }),
         __metadata("design:type", String)
     ], GetServiceDetailsByIdQueryParams.prototype, "apiKey", void 0);
     return GetServiceDetailsByIdQueryParams;
@@ -53,11 +53,11 @@ var GetServiceDetailsByIdRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetServiceDetailsByIdPathParams)
     ], GetServiceDetailsByIdRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetServiceDetailsByIdQueryParams)
     ], GetServiceDetailsByIdRequest.prototype, "queryParams", void 0);
     return GetServiceDetailsByIdRequest;
@@ -69,11 +69,11 @@ var GetServiceDetailsByIdResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetServiceDetailsByIdResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetServiceDetailsByIdResponse.prototype, "statusCode", void 0);
     return GetServiceDetailsByIdResponse;

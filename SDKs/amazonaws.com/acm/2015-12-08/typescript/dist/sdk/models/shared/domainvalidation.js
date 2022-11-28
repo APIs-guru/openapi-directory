@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceRecord } from "./resourcerecord";
 import { ValidationMethodEnum } from "./validationmethodenum";
 import { DomainStatusEnum } from "./domainstatusenum";
@@ -36,27 +36,27 @@ var DomainValidation = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DomainName" }),
+        SpeakeasyMetadata({ data: "json, name=DomainName" }),
         __metadata("design:type", String)
     ], DomainValidation.prototype, "domainName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ResourceRecord" }),
+        SpeakeasyMetadata({ data: "json, name=ResourceRecord" }),
         __metadata("design:type", ResourceRecord)
     ], DomainValidation.prototype, "resourceRecord", void 0);
     __decorate([
-        Metadata({ data: "json, name=ValidationDomain" }),
+        SpeakeasyMetadata({ data: "json, name=ValidationDomain" }),
         __metadata("design:type", String)
     ], DomainValidation.prototype, "validationDomain", void 0);
     __decorate([
-        Metadata({ data: "json, name=ValidationEmails" }),
+        SpeakeasyMetadata({ data: "json, name=ValidationEmails" }),
         __metadata("design:type", Array)
     ], DomainValidation.prototype, "validationEmails", void 0);
     __decorate([
-        Metadata({ data: "json, name=ValidationMethod" }),
+        SpeakeasyMetadata({ data: "json, name=ValidationMethod" }),
         __metadata("design:type", String)
     ], DomainValidation.prototype, "validationMethod", void 0);
     __decorate([
-        Metadata({ data: "json, name=ValidationStatus" }),
+        SpeakeasyMetadata({ data: "json, name=ValidationStatus" }),
         __metadata("design:type", String)
     ], DomainValidation.prototype, "validationStatus", void 0);
     return DomainValidation;

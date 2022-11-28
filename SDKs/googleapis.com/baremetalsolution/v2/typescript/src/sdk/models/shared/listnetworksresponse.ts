@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Network } from "./network";
+
 
 
 // ListNetworksResponse
@@ -8,12 +8,12 @@ import { Network } from "./network";
  * Response message containing the list of networks.
 **/
 export class ListNetworksResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=networks", elemType: shared.Network })
+  @SpeakeasyMetadata({ data: "json, name=networks", elemType: Network })
   networks?: Network[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=unreachable" })
+  @SpeakeasyMetadata({ data: "json, name=unreachable" })
   unreachable?: string[];
 }

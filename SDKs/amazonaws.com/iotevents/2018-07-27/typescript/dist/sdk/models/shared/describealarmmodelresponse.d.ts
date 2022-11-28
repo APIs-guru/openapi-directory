@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AlarmCapabilities } from "./alarmcapabilities";
 import { AlarmEventActions } from "./alarmeventactions";
 import { AlarmNotification } from "./alarmnotification";

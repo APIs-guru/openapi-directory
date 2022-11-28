@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum OnPremClusterClusterTypeEnum {
-    ClustertypeUnspecified = "CLUSTERTYPE_UNSPECIFIED"
-,    Bootstrap = "BOOTSTRAP"
-,    Hybrid = "HYBRID"
-,    Standalone = "STANDALONE"
-,    User = "USER"
+    ClustertypeUnspecified = "CLUSTERTYPE_UNSPECIFIED",
+    Bootstrap = "BOOTSTRAP",
+    Hybrid = "HYBRID",
+    Standalone = "STANDALONE",
+    User = "USER"
 }
 
 
@@ -14,15 +15,31 @@ export enum OnPremClusterClusterTypeEnum {
  * OnPremCluster contains information specific to GKE On-Prem clusters.
 **/
 export class OnPremCluster extends SpeakeasyBase {
-  @Metadata({ data: "json, name=adminCluster" })
+  @SpeakeasyMetadata({ data: "json, name=adminCluster" })
   adminCluster?: boolean;
 
-  @Metadata({ data: "json, name=clusterMissing" })
+  @SpeakeasyMetadata({ data: "json, name=clusterMissing" })
   clusterMissing?: boolean;
 
-  @Metadata({ data: "json, name=clusterType" })
+  @SpeakeasyMetadata({ data: "json, name=clusterType" })
   clusterType?: OnPremClusterClusterTypeEnum;
 
-  @Metadata({ data: "json, name=resourceLink" })
+  @SpeakeasyMetadata({ data: "json, name=resourceLink" })
+  resourceLink?: string;
+}
+
+
+// OnPremClusterInput
+/** 
+ * OnPremCluster contains information specific to GKE On-Prem clusters.
+**/
+export class OnPremClusterInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=adminCluster" })
+  adminCluster?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=clusterType" })
+  clusterType?: OnPremClusterClusterTypeEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=resourceLink" })
   resourceLink?: string;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ValidateLicenseePathParams = /** @class */ (function (_super) {
     __extends(ValidateLicenseePathParams, _super);
@@ -30,7 +30,7 @@ var ValidateLicenseePathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=licenseeNumber" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=licenseeNumber" }),
         __metadata("design:type", String)
     ], ValidateLicenseePathParams.prototype, "licenseeNumber", void 0);
     return ValidateLicenseePathParams;
@@ -47,27 +47,27 @@ var ValidateLicenseeRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "form, name=action;" }),
+        SpeakeasyMetadata({ data: "form, name=action;" }),
         __metadata("design:type", String)
     ], ValidateLicenseeRequestBody.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "form, name=licenseeName;" }),
+        SpeakeasyMetadata({ data: "form, name=licenseeName;" }),
         __metadata("design:type", String)
     ], ValidateLicenseeRequestBody.prototype, "licenseeName", void 0);
     __decorate([
-        Metadata({ data: "form, name=nodeSecret;" }),
+        SpeakeasyMetadata({ data: "form, name=nodeSecret;" }),
         __metadata("design:type", String)
     ], ValidateLicenseeRequestBody.prototype, "nodeSecret", void 0);
     __decorate([
-        Metadata({ data: "form, name=productModuleNumber;" }),
+        SpeakeasyMetadata({ data: "form, name=productModuleNumber;" }),
         __metadata("design:type", String)
     ], ValidateLicenseeRequestBody.prototype, "productModuleNumber", void 0);
     __decorate([
-        Metadata({ data: "form, name=productNumber;" }),
+        SpeakeasyMetadata({ data: "form, name=productNumber;" }),
         __metadata("design:type", String)
     ], ValidateLicenseeRequestBody.prototype, "productNumber", void 0);
     __decorate([
-        Metadata({ data: "form, name=sessionId;" }),
+        SpeakeasyMetadata({ data: "form, name=sessionId;" }),
         __metadata("design:type", String)
     ], ValidateLicenseeRequestBody.prototype, "sessionId", void 0);
     return ValidateLicenseeRequestBody;
@@ -79,7 +79,7 @@ var ValidateLicenseeSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
         __metadata("design:type", shared.SchemeBasicAuth)
     ], ValidateLicenseeSecurity.prototype, "basicAuth", void 0);
     return ValidateLicenseeSecurity;
@@ -91,15 +91,15 @@ var ValidateLicenseeRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ValidateLicenseePathParams)
     ], ValidateLicenseeRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
         __metadata("design:type", ValidateLicenseeRequestBody)
     ], ValidateLicenseeRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ValidateLicenseeSecurity)
     ], ValidateLicenseeRequest.prototype, "security", void 0);
     return ValidateLicenseeRequest;
@@ -111,19 +111,19 @@ var ValidateLicenseeResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], ValidateLicenseeResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ValidateLicenseeResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ValidateLicenseeResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ValidateLicenseeResponse.prototype, "netlicensing", void 0);
     return ValidateLicenseeResponse;

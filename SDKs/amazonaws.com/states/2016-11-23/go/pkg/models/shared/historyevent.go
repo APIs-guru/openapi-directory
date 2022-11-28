@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// HistoryEvent
+// Contains details about the events of an execution.
 type HistoryEvent struct {
 	ActivityFailedEventDetails               *ActivityFailedEventDetails               `json:"activityFailedEventDetails,omitempty"`
 	ActivityScheduleFailedEventDetails       *ActivityScheduleFailedEventDetails       `json:"activityScheduleFailedEventDetails,omitempty"`

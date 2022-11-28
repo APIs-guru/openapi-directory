@@ -8,6 +8,8 @@ const (
 	PageBackgroundFillPropertyStateEnumInherit     PageBackgroundFillPropertyStateEnum = "INHERIT"
 )
 
+// PageBackgroundFill
+// The page background fill.
 type PageBackgroundFill struct {
 	PropertyState        *PageBackgroundFillPropertyStateEnum `json:"propertyState,omitempty"`
 	SolidFill            *SolidFill                           `json:"solidFill,omitempty"`

@@ -14,6 +14,8 @@ type CreateAlertHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateAlertRequestBodyAction
+// A configuration that specifies the action to perform when anomalies are detected.
 type CreateAlertRequestBodyAction struct {
 	LambdaConfiguration *shared.LambdaConfiguration `json:"LambdaConfiguration,omitempty"`
 	SnsConfiguration    *shared.SnsConfiguration    `json:"SNSConfiguration,omitempty"`

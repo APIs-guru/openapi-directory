@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AdminCustomersChromePrintersListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -30,14 +31,14 @@ class AdminCustomersChromePrintersListQueryParams:
 
 @dataclass
 class AdminCustomersChromePrintersListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AdminCustomersChromePrintersListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -48,14 +49,14 @@ class AdminCustomersChromePrintersListSecurity:
 
 @dataclass
 class AdminCustomersChromePrintersListRequest:
-    path_params: AdminCustomersChromePrintersListPathParams = field(default=None)
-    query_params: AdminCustomersChromePrintersListQueryParams = field(default=None)
-    security: AdminCustomersChromePrintersListSecurity = field(default=None)
+    path_params: AdminCustomersChromePrintersListPathParams = field()
+    query_params: AdminCustomersChromePrintersListQueryParams = field()
+    security: AdminCustomersChromePrintersListSecurity = field()
     
 
 @dataclass
 class AdminCustomersChromePrintersListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_printers_response: Optional[shared.ListPrintersResponse] = field(default=None)
-    status_code: int = field(default=None)
     

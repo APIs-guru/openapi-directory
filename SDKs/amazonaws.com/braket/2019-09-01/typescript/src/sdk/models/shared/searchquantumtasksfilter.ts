@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SearchQuantumTasksFilterOperatorEnum } from "./searchquantumtasksfilteroperatorenum";
+
 
 
 // SearchQuantumTasksFilter
@@ -7,12 +8,12 @@ import { SearchQuantumTasksFilterOperatorEnum } from "./searchquantumtasksfilter
  * A filter to use to search for tasks.
 **/
 export class SearchQuantumTasksFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=operator" })
+  @SpeakeasyMetadata({ data: "json, name=operator" })
   operator: SearchQuantumTasksFilterOperatorEnum;
 
-  @Metadata({ data: "json, name=values" })
+  @SpeakeasyMetadata({ data: "json, name=values" })
   values: string[];
 }

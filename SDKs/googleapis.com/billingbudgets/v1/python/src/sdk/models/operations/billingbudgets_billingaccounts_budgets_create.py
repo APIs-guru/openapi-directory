@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class BillingbudgetsBillingAccountsBudgetsCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class BillingbudgetsBillingAccountsBudgetsCreateQueryParams:
 
 @dataclass
 class BillingbudgetsBillingAccountsBudgetsCreateSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BillingbudgetsBillingAccountsBudgetsCreateSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class BillingbudgetsBillingAccountsBudgetsCreateSecurity:
 
 @dataclass
 class BillingbudgetsBillingAccountsBudgetsCreateRequest:
-    path_params: BillingbudgetsBillingAccountsBudgetsCreatePathParams = field(default=None)
-    query_params: BillingbudgetsBillingAccountsBudgetsCreateQueryParams = field(default=None)
-    request: Optional[shared.GoogleCloudBillingBudgetsV1Budget] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: BillingbudgetsBillingAccountsBudgetsCreateSecurity = field(default=None)
+    path_params: BillingbudgetsBillingAccountsBudgetsCreatePathParams = field()
+    query_params: BillingbudgetsBillingAccountsBudgetsCreateQueryParams = field()
+    security: BillingbudgetsBillingAccountsBudgetsCreateSecurity = field()
+    request: Optional[shared.GoogleCloudBillingBudgetsV1BudgetInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class BillingbudgetsBillingAccountsBudgetsCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_billing_budgets_v1_budget: Optional[shared.GoogleCloudBillingBudgetsV1Budget] = field(default=None)
-    status_code: int = field(default=None)
     

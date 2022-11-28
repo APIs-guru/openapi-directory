@@ -1,20 +1,20 @@
 from dataclasses import dataclass, field
-
+from typing import Optional
 
 
 @dataclass
 class JobRunsDeleteJobRunPathParams:
-    job_run_id: int = field(default=None, metadata={'path_param': { 'field_name': 'jobRunID', 'style': 'simple', 'explode': False }})
+    job_run_id: int = field(metadata={'path_param': { 'field_name': 'jobRunID', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class JobRunsDeleteJobRunRequest:
-    path_params: JobRunsDeleteJobRunPathParams = field(default=None)
+    path_params: JobRunsDeleteJobRunPathParams = field()
     
 
 @dataclass
 class JobRunsDeleteJobRunResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GoogleCloudPaymentsResellerSubscriptionV1CancelSubscriptionRequestCancellationReasonEnum;
 (function (GoogleCloudPaymentsResellerSubscriptionV1CancelSubscriptionRequestCancellationReasonEnum) {
     GoogleCloudPaymentsResellerSubscriptionV1CancelSubscriptionRequestCancellationReasonEnum["CancellationReasonUnspecified"] = "CANCELLATION_REASON_UNSPECIFIED";
@@ -41,11 +41,11 @@ var GoogleCloudPaymentsResellerSubscriptionV1CancelSubscriptionRequest = /** @cl
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=cancelImmediately" }),
+        SpeakeasyMetadata({ data: "json, name=cancelImmediately" }),
         __metadata("design:type", Boolean)
     ], GoogleCloudPaymentsResellerSubscriptionV1CancelSubscriptionRequest.prototype, "cancelImmediately", void 0);
     __decorate([
-        Metadata({ data: "json, name=cancellationReason" }),
+        SpeakeasyMetadata({ data: "json, name=cancellationReason" }),
         __metadata("design:type", String)
     ], GoogleCloudPaymentsResellerSubscriptionV1CancelSubscriptionRequest.prototype, "cancellationReason", void 0);
     return GoogleCloudPaymentsResellerSubscriptionV1CancelSubscriptionRequest;

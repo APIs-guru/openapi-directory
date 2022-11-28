@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class InforNexusConnectorProfileCredentials:
-    access_key_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'accessKeyId' }})
-    datakey: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'datakey' }})
-    secret_access_key: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'secretAccessKey' }})
-    user_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'userId' }})
+    r"""InforNexusConnectorProfileCredentials
+     The connector-specific profile credentials required by Infor Nexus. 
+    """
+    
+    access_key_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('accessKeyId') }})
+    datakey: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('datakey') }})
+    secret_access_key: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('secretAccessKey') }})
+    user_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('userId') }})
     

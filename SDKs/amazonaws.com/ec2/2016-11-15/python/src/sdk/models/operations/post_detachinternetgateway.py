@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDetachInternetGatewayActionEnum(str, Enum):
     DETACH_INTERNET_GATEWAY = "DetachInternetGateway"
@@ -10,8 +14,8 @@ class PostDetachInternetGatewayVersionEnum(str, Enum):
 
 @dataclass
 class PostDetachInternetGatewayQueryParams:
-    action: PostDetachInternetGatewayActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDetachInternetGatewayVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDetachInternetGatewayActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDetachInternetGatewayVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,13 +31,13 @@ class PostDetachInternetGatewayHeaders:
 
 @dataclass
 class PostDetachInternetGatewayRequest:
-    query_params: PostDetachInternetGatewayQueryParams = field(default=None)
-    headers: PostDetachInternetGatewayHeaders = field(default=None)
+    headers: PostDetachInternetGatewayHeaders = field()
+    query_params: PostDetachInternetGatewayQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDetachInternetGatewayResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

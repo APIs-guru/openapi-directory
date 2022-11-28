@@ -1,142 +1,231 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { AlbumContract } from "./albumcontract";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { AlbumContractInput } from "./albumcontract";
 import { ArtistForSongContract } from "./artistforsongcontract";
 import { LyricsForSongContract } from "./lyricsforsongcontract";
 import { EntryThumbForApiContract } from "./entrythumbforapicontract";
 import { LocalizedStringContract } from "./localizedstringcontract";
 import { PvContract } from "./pvcontract";
-import { ReleaseEventForApiContract } from "./releaseeventforapicontract";
+import { ReleaseEventForApiContractInput } from "./releaseeventforapicontract";
 import { TagUsageForApiContract } from "./tagusageforapicontract";
 import { WebLinkForApiContract } from "./weblinkforapicontract";
+import { AlbumContract } from "./albumcontract";
+import { ReleaseEventForApiContract } from "./releaseeventforapicontract";
+
 
 export enum SongForApiContractDefaultNameLanguageEnum {
-    Unspecified = "Unspecified"
-,    Japanese = "Japanese"
-,    Romaji = "Romaji"
-,    English = "English"
+    Unspecified = "Unspecified",
+    Japanese = "Japanese",
+    Romaji = "Romaji",
+    English = "English"
 }
 
 export enum SongForApiContractPvServicesEnum {
-    Nothing = "Nothing"
-,    NicoNicoDouga = "NicoNicoDouga"
-,    Youtube = "Youtube"
-,    SoundCloud = "SoundCloud"
-,    Vimeo = "Vimeo"
-,    Piapro = "Piapro"
-,    Bilibili = "Bilibili"
-,    File = "File"
-,    LocalFile = "LocalFile"
-,    Creofuga = "Creofuga"
-,    Bandcamp = "Bandcamp"
+    Nothing = "Nothing",
+    NicoNicoDouga = "NicoNicoDouga",
+    Youtube = "Youtube",
+    SoundCloud = "SoundCloud",
+    Vimeo = "Vimeo",
+    Piapro = "Piapro",
+    Bilibili = "Bilibili",
+    File = "File",
+    LocalFile = "LocalFile",
+    Creofuga = "Creofuga",
+    Bandcamp = "Bandcamp"
 }
 
 export enum SongForApiContractSongTypeEnum {
-    Unspecified = "Unspecified"
-,    Original = "Original"
-,    Remaster = "Remaster"
-,    Remix = "Remix"
-,    Cover = "Cover"
-,    Arrangement = "Arrangement"
-,    Instrumental = "Instrumental"
-,    Mashup = "Mashup"
-,    MusicPv = "MusicPV"
-,    DramaPv = "DramaPV"
-,    Live = "Live"
-,    Illustration = "Illustration"
-,    Other = "Other"
+    Unspecified = "Unspecified",
+    Original = "Original",
+    Remaster = "Remaster",
+    Remix = "Remix",
+    Cover = "Cover",
+    Arrangement = "Arrangement",
+    Instrumental = "Instrumental",
+    Mashup = "Mashup",
+    MusicPv = "MusicPV",
+    DramaPv = "DramaPV",
+    Live = "Live",
+    Illustration = "Illustration",
+    Other = "Other"
 }
 
 export enum SongForApiContractStatusEnum {
-    Draft = "Draft"
-,    Finished = "Finished"
-,    Approved = "Approved"
-,    Locked = "Locked"
+    Draft = "Draft",
+    Finished = "Finished",
+    Approved = "Approved",
+    Locked = "Locked"
+}
+
+
+export class SongForApiContractInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=additionalNames" })
+  additionalNames?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=albums", elemType: AlbumContractInput })
+  albums?: AlbumContractInput[];
+
+  @SpeakeasyMetadata({ data: "json, name=artistString" })
+  artistString?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=artists", elemType: ArtistForSongContract })
+  artists?: ArtistForSongContract[];
+
+  @SpeakeasyMetadata({ data: "json, name=createDate" })
+  createDate?: Date;
+
+  @SpeakeasyMetadata({ data: "json, name=defaultName" })
+  defaultName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=defaultNameLanguage" })
+  defaultNameLanguage?: SongForApiContractDefaultNameLanguageEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=deleted" })
+  deleted?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=favoritedTimes" })
+  favoritedTimes?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=id" })
+  id?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=lengthSeconds" })
+  lengthSeconds?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=lyrics", elemType: LyricsForSongContract })
+  lyrics?: LyricsForSongContract[];
+
+  @SpeakeasyMetadata({ data: "json, name=mainPicture" })
+  mainPicture?: EntryThumbForApiContract;
+
+  @SpeakeasyMetadata({ data: "json, name=mergedTo" })
+  mergedTo?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=names", elemType: LocalizedStringContract })
+  names?: LocalizedStringContract[];
+
+  @SpeakeasyMetadata({ data: "json, name=originalVersionId" })
+  originalVersionId?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=publishDate" })
+  publishDate?: Date;
+
+  @SpeakeasyMetadata({ data: "json, name=pvServices" })
+  pvServices?: SongForApiContractPvServicesEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=pvs", elemType: PvContract })
+  pvs?: PvContract[];
+
+  @SpeakeasyMetadata({ data: "json, name=ratingScore" })
+  ratingScore?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=releaseEvent" })
+  releaseEvent?: ReleaseEventForApiContractInput;
+
+  @SpeakeasyMetadata({ data: "json, name=songType" })
+  songType?: SongForApiContractSongTypeEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=status" })
+  status?: SongForApiContractStatusEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=tags", elemType: TagUsageForApiContract })
+  tags?: TagUsageForApiContract[];
+
+  @SpeakeasyMetadata({ data: "json, name=thumbUrl" })
+  thumbUrl?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=version" })
+  version?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=webLinks", elemType: WebLinkForApiContract })
+  webLinks?: WebLinkForApiContract[];
 }
 
 
 export class SongForApiContract extends SpeakeasyBase {
-  @Metadata({ data: "json, name=additionalNames" })
+  @SpeakeasyMetadata({ data: "json, name=additionalNames" })
   additionalNames?: string;
 
-  @Metadata({ data: "json, name=albums", elemType: shared.AlbumContract })
+  @SpeakeasyMetadata({ data: "json, name=albums", elemType: AlbumContract })
   albums?: AlbumContract[];
 
-  @Metadata({ data: "json, name=artistString" })
+  @SpeakeasyMetadata({ data: "json, name=artistString" })
   artistString?: string;
 
-  @Metadata({ data: "json, name=artists", elemType: shared.ArtistForSongContract })
+  @SpeakeasyMetadata({ data: "json, name=artists", elemType: ArtistForSongContract })
   artists?: ArtistForSongContract[];
 
-  @Metadata({ data: "json, name=createDate" })
+  @SpeakeasyMetadata({ data: "json, name=createDate" })
   createDate?: Date;
 
-  @Metadata({ data: "json, name=defaultName" })
+  @SpeakeasyMetadata({ data: "json, name=defaultName" })
   defaultName?: string;
 
-  @Metadata({ data: "json, name=defaultNameLanguage" })
+  @SpeakeasyMetadata({ data: "json, name=defaultNameLanguage" })
   defaultNameLanguage?: SongForApiContractDefaultNameLanguageEnum;
 
-  @Metadata({ data: "json, name=deleted" })
+  @SpeakeasyMetadata({ data: "json, name=deleted" })
   deleted?: boolean;
 
-  @Metadata({ data: "json, name=favoritedTimes" })
+  @SpeakeasyMetadata({ data: "json, name=favoritedTimes" })
   favoritedTimes?: number;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=lengthSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=lengthSeconds" })
   lengthSeconds?: number;
 
-  @Metadata({ data: "json, name=lyrics", elemType: shared.LyricsForSongContract })
+  @SpeakeasyMetadata({ data: "json, name=lyrics", elemType: LyricsForSongContract })
   lyrics?: LyricsForSongContract[];
 
-  @Metadata({ data: "json, name=mainPicture" })
+  @SpeakeasyMetadata({ data: "json, name=mainPicture" })
   mainPicture?: EntryThumbForApiContract;
 
-  @Metadata({ data: "json, name=mergedTo" })
+  @SpeakeasyMetadata({ data: "json, name=mergedTo" })
   mergedTo?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=names", elemType: shared.LocalizedStringContract })
+  @SpeakeasyMetadata({ data: "json, name=names", elemType: LocalizedStringContract })
   names?: LocalizedStringContract[];
 
-  @Metadata({ data: "json, name=originalVersionId" })
+  @SpeakeasyMetadata({ data: "json, name=originalVersionId" })
   originalVersionId?: number;
 
-  @Metadata({ data: "json, name=publishDate" })
+  @SpeakeasyMetadata({ data: "json, name=publishDate" })
   publishDate?: Date;
 
-  @Metadata({ data: "json, name=pvServices" })
+  @SpeakeasyMetadata({ data: "json, name=pvServices" })
   pvServices?: SongForApiContractPvServicesEnum;
 
-  @Metadata({ data: "json, name=pvs", elemType: shared.PvContract })
+  @SpeakeasyMetadata({ data: "json, name=pvs", elemType: PvContract })
   pvs?: PvContract[];
 
-  @Metadata({ data: "json, name=ratingScore" })
+  @SpeakeasyMetadata({ data: "json, name=ratingScore" })
   ratingScore?: number;
 
-  @Metadata({ data: "json, name=releaseEvent" })
+  @SpeakeasyMetadata({ data: "json, name=releaseEvent" })
   releaseEvent?: ReleaseEventForApiContract;
 
-  @Metadata({ data: "json, name=songType" })
+  @SpeakeasyMetadata({ data: "json, name=songType" })
   songType?: SongForApiContractSongTypeEnum;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: SongForApiContractStatusEnum;
 
-  @Metadata({ data: "json, name=tags", elemType: shared.TagUsageForApiContract })
+  @SpeakeasyMetadata({ data: "json, name=tags", elemType: TagUsageForApiContract })
   tags?: TagUsageForApiContract[];
 
-  @Metadata({ data: "json, name=thumbUrl" })
+  @SpeakeasyMetadata({ data: "json, name=thumbUrl" })
   thumbUrl?: string;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: number;
 
-  @Metadata({ data: "json, name=webLinks", elemType: shared.WebLinkForApiContract })
+  @SpeakeasyMetadata({ data: "json, name=webLinks", elemType: WebLinkForApiContract })
   webLinks?: WebLinkForApiContract[];
 }

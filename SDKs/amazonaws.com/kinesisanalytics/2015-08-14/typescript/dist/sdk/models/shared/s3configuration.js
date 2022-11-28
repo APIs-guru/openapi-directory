@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // S3Configuration
 /**
  * Provides a description of an Amazon S3 data source, including the Amazon Resource Name (ARN) of the S3 bucket, the ARN of the IAM role that is used to access the bucket, and the name of the Amazon S3 object that contains the data.
@@ -33,15 +33,15 @@ var S3Configuration = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=BucketARN" }),
+        SpeakeasyMetadata({ data: "json, name=BucketARN" }),
         __metadata("design:type", String)
     ], S3Configuration.prototype, "bucketArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=FileKey" }),
+        SpeakeasyMetadata({ data: "json, name=FileKey" }),
         __metadata("design:type", String)
     ], S3Configuration.prototype, "fileKey", void 0);
     __decorate([
-        Metadata({ data: "json, name=RoleARN" }),
+        SpeakeasyMetadata({ data: "json, name=RoleARN" }),
         __metadata("design:type", String)
     ], S3Configuration.prototype, "roleArn", void 0);
     return S3Configuration;

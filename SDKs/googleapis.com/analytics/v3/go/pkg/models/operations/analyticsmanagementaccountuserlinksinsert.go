@@ -26,7 +26,7 @@ type AnalyticsManagementAccountUserLinksInsertSecurity struct {
 type AnalyticsManagementAccountUserLinksInsertRequest struct {
 	PathParams  AnalyticsManagementAccountUserLinksInsertPathParams
 	QueryParams AnalyticsManagementAccountUserLinksInsertQueryParams
-	Request     *shared.EntityUserLink `request:"mediaType=application/json"`
+	Request     *shared.EntityUserLinkInput `request:"mediaType=application/json"`
 	Security    AnalyticsManagementAccountUserLinksInsertSecurity
 }
 

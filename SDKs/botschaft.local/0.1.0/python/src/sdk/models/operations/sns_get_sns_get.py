@@ -16,14 +16,14 @@ class SnsGetSnsGetHeaders:
 
 @dataclass
 class SnsGetSnsGetRequest:
-    query_params: SnsGetSnsGetQueryParams = field(default=None)
-    headers: SnsGetSnsGetHeaders = field(default=None)
+    headers: SnsGetSnsGetHeaders = field()
+    query_params: SnsGetSnsGetQueryParams = field()
     
 
 @dataclass
 class SnsGetSnsGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     http_validation_error: Optional[shared.HTTPValidationError] = field(default=None)
-    status_code: int = field(default=None)
     sns_get_sns_get_200_application_json_any: Optional[Any] = field(default=None)
     

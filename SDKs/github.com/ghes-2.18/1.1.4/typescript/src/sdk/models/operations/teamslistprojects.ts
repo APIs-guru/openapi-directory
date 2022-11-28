@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class TeamsListProjectsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=team_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=team_id" })
   teamId: number;
 }
 
 
 export class TeamsListProjectsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 }
 
 
 export class TeamsListProjectsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=accept" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=accept" })
   accept: string;
 }
 
 
 export class TeamsListProjectsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: TeamsListProjectsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: TeamsListProjectsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: TeamsListProjectsHeaders;
 }
 
 
 export class TeamsListProjectsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.TeamProject })
+  @SpeakeasyMetadata({ elemType: shared.TeamProject })
   teamProjects?: shared.TeamProject[];
 }

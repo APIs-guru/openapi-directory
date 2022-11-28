@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class ListArtifactVersionsPathParams:
-    artifact_id: str = field(default=None, metadata={'path_param': { 'field_name': 'artifactId', 'style': 'simple', 'explode': False }})
+    artifact_id: str = field(metadata={'path_param': { 'field_name': 'artifactId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ListArtifactVersionsRequest:
-    path_params: ListArtifactVersionsPathParams = field(default=None)
+    path_params: ListArtifactVersionsPathParams = field()
     
 
 @dataclass
 class ListArtifactVersionsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[shared.Error] = field(default=None)
-    status_code: int = field(default=None)
     list_artifact_versions_200_application_json_int64_integers: Optional[List[int]] = field(default=None)
     

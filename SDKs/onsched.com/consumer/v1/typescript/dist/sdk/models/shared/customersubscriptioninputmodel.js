@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var CustomerSubscriptionInputModel = /** @class */ (function (_super) {
     __extends(CustomerSubscriptionInputModel, _super);
     function CustomerSubscriptionInputModel() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=customerPlanId" }),
+        SpeakeasyMetadata({ data: "json, name=customerPlanId" }),
         __metadata("design:type", String)
     ], CustomerSubscriptionInputModel.prototype, "customerPlanId", void 0);
     __decorate([
-        Metadata({ data: "json, name=planStart" }),
+        SpeakeasyMetadata({ data: "json, name=planStart" }),
         __metadata("design:type", Date)
     ], CustomerSubscriptionInputModel.prototype, "planStart", void 0);
     __decorate([
-        Metadata({ data: "json, name=trialPeriodEnd" }),
+        SpeakeasyMetadata({ data: "json, name=trialPeriodEnd" }),
         __metadata("design:type", Date)
     ], CustomerSubscriptionInputModel.prototype, "trialPeriodEnd", void 0);
     return CustomerSubscriptionInputModel;

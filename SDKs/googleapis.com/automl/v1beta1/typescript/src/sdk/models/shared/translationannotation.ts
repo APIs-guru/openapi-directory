@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TextSnippet } from "./textsnippet";
+
 
 
 // TranslationAnnotation
@@ -7,6 +8,6 @@ import { TextSnippet } from "./textsnippet";
  * Annotation details specific to translation.
 **/
 export class TranslationAnnotation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=translatedContent" })
+  @SpeakeasyMetadata({ data: "json, name=translatedContent" })
   translatedContent?: TextSnippet;
 }

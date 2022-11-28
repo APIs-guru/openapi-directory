@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Computer } from "./computer";
 /**
  * Contains the results for the <a>CreateComputer</a> operation.

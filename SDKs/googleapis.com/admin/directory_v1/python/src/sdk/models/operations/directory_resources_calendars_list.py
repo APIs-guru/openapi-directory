@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DirectoryResourcesCalendarsListPathParams:
-    customer: str = field(default=None, metadata={'path_param': { 'field_name': 'customer', 'style': 'simple', 'explode': False }})
+    customer: str = field(metadata={'path_param': { 'field_name': 'customer', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -29,14 +30,14 @@ class DirectoryResourcesCalendarsListQueryParams:
 
 @dataclass
 class DirectoryResourcesCalendarsListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DirectoryResourcesCalendarsListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -47,14 +48,14 @@ class DirectoryResourcesCalendarsListSecurity:
 
 @dataclass
 class DirectoryResourcesCalendarsListRequest:
-    path_params: DirectoryResourcesCalendarsListPathParams = field(default=None)
-    query_params: DirectoryResourcesCalendarsListQueryParams = field(default=None)
-    security: DirectoryResourcesCalendarsListSecurity = field(default=None)
+    path_params: DirectoryResourcesCalendarsListPathParams = field()
+    query_params: DirectoryResourcesCalendarsListQueryParams = field()
+    security: DirectoryResourcesCalendarsListSecurity = field()
     
 
 @dataclass
 class DirectoryResourcesCalendarsListResponse:
+    content_type: str = field()
+    status_code: int = field()
     calendar_resources: Optional[shared.CalendarResources] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

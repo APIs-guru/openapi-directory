@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { StandardUnitEnum } from "./standardunitenum";
 /**
  * Indicates how to transform ingested log events to metric data in a CloudWatch metric.

@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class GetBackendAPIPathParams:
-    app_id: str = field(default=None, metadata={'path_param': { 'field_name': 'appId', 'style': 'simple', 'explode': False }})
-    backend_environment_name: str = field(default=None, metadata={'path_param': { 'field_name': 'backendEnvironmentName', 'style': 'simple', 'explode': False }})
+    app_id: str = field(metadata={'path_param': { 'field_name': 'appId', 'style': 'simple', 'explode': False }})
+    backend_environment_name: str = field(metadata={'path_param': { 'field_name': 'backendEnvironmentName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -24,35 +28,39 @@ class GetBackendAPIHeaders:
 @dataclass_json
 @dataclass
 class GetBackendAPIRequestBodyResourceConfig:
-    additional_auth_types: Optional[List[shared.BackendAPIAuthType]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AdditionalAuthTypes' }})
-    api_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ApiName' }})
-    conflict_resolution: Optional[shared.BackendAPIConflictResolution] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ConflictResolution' }})
-    default_auth_type: Optional[shared.BackendAPIAuthType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DefaultAuthType' }})
-    service: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Service' }})
-    transform_schema: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TransformSchema' }})
+    r"""GetBackendAPIRequestBodyResourceConfig
+    The resource config for the data model, configured as a part of the Amplify project.
+    """
+    
+    additional_auth_types: Optional[List[shared.BackendAPIAuthType]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AdditionalAuthTypes') }})
+    api_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ApiName') }})
+    conflict_resolution: Optional[shared.BackendAPIConflictResolution] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ConflictResolution') }})
+    default_auth_type: Optional[shared.BackendAPIAuthType] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DefaultAuthType') }})
+    service: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Service') }})
+    transform_schema: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TransformSchema') }})
     
 
 @dataclass_json
 @dataclass
 class GetBackendAPIRequestBody:
-    resource_config: Optional[GetBackendAPIRequestBodyResourceConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceConfig' }})
-    resource_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceName' }})
+    resource_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceName') }})
+    resource_config: Optional[GetBackendAPIRequestBodyResourceConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceConfig') }})
     
 
 @dataclass
 class GetBackendAPIRequest:
-    path_params: GetBackendAPIPathParams = field(default=None)
-    headers: GetBackendAPIHeaders = field(default=None)
-    request: GetBackendAPIRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: GetBackendAPIHeaders = field()
+    path_params: GetBackendAPIPathParams = field()
+    request: GetBackendAPIRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class GetBackendAPIResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     gateway_timeout_exception: Optional[Any] = field(default=None)
     get_backend_api_response: Optional[shared.GetBackendAPIResponse] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

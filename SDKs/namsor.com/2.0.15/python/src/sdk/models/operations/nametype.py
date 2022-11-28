@@ -5,23 +5,23 @@ from sdk.models import shared
 
 @dataclass
 class NameTypePathParams:
-    proper_noun: str = field(default=None, metadata={'path_param': { 'field_name': 'properNoun', 'style': 'simple', 'explode': False }})
+    proper_noun: str = field(metadata={'path_param': { 'field_name': 'properNoun', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class NameTypeSecurity:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    api_key: shared.SchemeAPIKey = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class NameTypeRequest:
-    path_params: NameTypePathParams = field(default=None)
-    security: NameTypeSecurity = field(default=None)
+    path_params: NameTypePathParams = field()
+    security: NameTypeSecurity = field()
     
 
 @dataclass
 class NameTypeResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     proper_noun_categorized_out: Optional[shared.ProperNounCategorizedOut] = field(default=None)
-    status_code: int = field(default=None)
     

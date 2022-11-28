@@ -9,22 +9,9 @@ type GetEventsQueryParams struct {
 	PageSize *int64 `queryParam:"style=form,explode=true,name=page_size"`
 }
 
-type GetEventsSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type GetEventsSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type GetEventsSecurity struct {
-	Option1 *GetEventsSecurityOption1 `security:"option"`
-	Option2 *GetEventsSecurityOption2 `security:"option"`
-}
-
-type GetEventsRequest struct {
-	QueryParams GetEventsQueryParams
-	Security    GetEventsSecurity
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
 }
 
 type GetEvents200ApplicationJSON struct {
@@ -36,6 +23,11 @@ type GetEvents200ApplicationJSON struct {
 
 type GetEventsDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type GetEventsRequest struct {
+	QueryParams GetEventsQueryParams
+	Security    GetEventsSecurity
 }
 
 type GetEventsResponse struct {

@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GoogleAppsScriptTypeProcessProcessStatusEnum(str, Enum):
     PROCESS_STATUS_UNSPECIFIED = "PROCESS_STATUS_UNSPECIFIED"
@@ -36,11 +38,15 @@ class GoogleAppsScriptTypeProcessUserAccessLevelEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleAppsScriptTypeProcess:
-    duration: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'duration' }})
-    function_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'functionName' }})
-    process_status: Optional[GoogleAppsScriptTypeProcessProcessStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'processStatus' }})
-    process_type: Optional[GoogleAppsScriptTypeProcessProcessTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'processType' }})
-    project_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'projectName' }})
-    start_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'startTime' }})
-    user_access_level: Optional[GoogleAppsScriptTypeProcessUserAccessLevelEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'userAccessLevel' }})
+    r"""GoogleAppsScriptTypeProcess
+    Representation of a single script process execution that was started from the script editor, a trigger, an application, or using the Apps Script API. This is distinct from the `Operation` resource, which only represents executions started via the Apps Script API.
+    """
+    
+    duration: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('duration') }})
+    function_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('functionName') }})
+    process_status: Optional[GoogleAppsScriptTypeProcessProcessStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('processStatus') }})
+    process_type: Optional[GoogleAppsScriptTypeProcessProcessTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('processType') }})
+    project_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('projectName') }})
+    start_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('startTime') }})
+    user_access_level: Optional[GoogleAppsScriptTypeProcessUserAccessLevelEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('userAccessLevel') }})
     

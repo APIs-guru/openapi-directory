@@ -1,12 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { BigQueryOptionsInput } from "./bigqueryoptions";
+import { LogExclusionInput } from "./logexclusion";
 import { BigQueryOptions } from "./bigqueryoptions";
 import { LogExclusion } from "./logexclusion";
 
+
 export enum LogSinkOutputVersionFormatEnum {
-    VersionFormatUnspecified = "VERSION_FORMAT_UNSPECIFIED"
-,    V2 = "V2"
-,    V1 = "V1"
+    VersionFormatUnspecified = "VERSION_FORMAT_UNSPECIFIED",
+    V2 = "V2",
+    V1 = "V1"
+}
+
+
+// LogSinkInput
+/** 
+ * Describes a sink used to export log entries to one of the following destinations in any project: a Cloud Storage bucket, a BigQuery dataset, a Pub/Sub topic or a Cloud Logging log bucket. A logs filter controls which log entries are exported. The sink must be created within a project, organization, billing account, or folder.
+**/
+export class LogSinkInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=bigqueryOptions" })
+  bigqueryOptions?: BigQueryOptionsInput;
+
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=destination" })
+  destination?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=disabled" })
+  disabled?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=exclusions", elemType: LogExclusionInput })
+  exclusions?: LogExclusionInput[];
+
+  @SpeakeasyMetadata({ data: "json, name=filter" })
+  filter?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=includeChildren" })
+  includeChildren?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=outputVersionFormat" })
+  outputVersionFormat?: LogSinkOutputVersionFormatEnum;
 }
 
 
@@ -15,39 +51,39 @@ export enum LogSinkOutputVersionFormatEnum {
  * Describes a sink used to export log entries to one of the following destinations in any project: a Cloud Storage bucket, a BigQuery dataset, a Pub/Sub topic or a Cloud Logging log bucket. A logs filter controls which log entries are exported. The sink must be created within a project, organization, billing account, or folder.
 **/
 export class LogSink extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bigqueryOptions" })
+  @SpeakeasyMetadata({ data: "json, name=bigqueryOptions" })
   bigqueryOptions?: BigQueryOptions;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=destination" })
+  @SpeakeasyMetadata({ data: "json, name=destination" })
   destination?: string;
 
-  @Metadata({ data: "json, name=disabled" })
+  @SpeakeasyMetadata({ data: "json, name=disabled" })
   disabled?: boolean;
 
-  @Metadata({ data: "json, name=exclusions", elemType: shared.LogExclusion })
+  @SpeakeasyMetadata({ data: "json, name=exclusions", elemType: LogExclusion })
   exclusions?: LogExclusion[];
 
-  @Metadata({ data: "json, name=filter" })
+  @SpeakeasyMetadata({ data: "json, name=filter" })
   filter?: string;
 
-  @Metadata({ data: "json, name=includeChildren" })
+  @SpeakeasyMetadata({ data: "json, name=includeChildren" })
   includeChildren?: boolean;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=outputVersionFormat" })
+  @SpeakeasyMetadata({ data: "json, name=outputVersionFormat" })
   outputVersionFormat?: LogSinkOutputVersionFormatEnum;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 
-  @Metadata({ data: "json, name=writerIdentity" })
+  @SpeakeasyMetadata({ data: "json, name=writerIdentity" })
   writerIdentity?: string;
 }

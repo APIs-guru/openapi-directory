@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudRetailV2Interval
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A floating point interval.
 **/
 export class GoogleCloudRetailV2Interval extends SpeakeasyBase {
-  @Metadata({ data: "json, name=exclusiveMaximum" })
+  @SpeakeasyMetadata({ data: "json, name=exclusiveMaximum" })
   exclusiveMaximum?: number;
 
-  @Metadata({ data: "json, name=exclusiveMinimum" })
+  @SpeakeasyMetadata({ data: "json, name=exclusiveMinimum" })
   exclusiveMinimum?: number;
 
-  @Metadata({ data: "json, name=maximum" })
+  @SpeakeasyMetadata({ data: "json, name=maximum" })
   maximum?: number;
 
-  @Metadata({ data: "json, name=minimum" })
+  @SpeakeasyMetadata({ data: "json, name=minimum" })
   minimum?: number;
 }

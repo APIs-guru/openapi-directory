@@ -1,10 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LocalizedStringBundle } from "./localizedstringbundle";
-import { LocalizedStringBundle } from "./localizedstringbundle";
-import { LocalizedStringBundle } from "./localizedstringbundle";
-import { LocalizedStringBundle } from "./localizedstringbundle";
-import { LocalizedStringBundle } from "./localizedstringbundle";
-import { LocalizedStringBundle } from "./localizedstringbundle";
+
 
 
 // GamesNumberAffixConfiguration
@@ -12,21 +8,21 @@ import { LocalizedStringBundle } from "./localizedstringbundle";
  * A number affix resource.
 **/
 export class GamesNumberAffixConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=few" })
+  @SpeakeasyMetadata({ data: "json, name=few" })
   few?: LocalizedStringBundle;
 
-  @Metadata({ data: "json, name=many" })
+  @SpeakeasyMetadata({ data: "json, name=many" })
   many?: LocalizedStringBundle;
 
-  @Metadata({ data: "json, name=one" })
+  @SpeakeasyMetadata({ data: "json, name=one" })
   one?: LocalizedStringBundle;
 
-  @Metadata({ data: "json, name=other" })
+  @SpeakeasyMetadata({ data: "json, name=other" })
   other?: LocalizedStringBundle;
 
-  @Metadata({ data: "json, name=two" })
+  @SpeakeasyMetadata({ data: "json, name=two" })
   two?: LocalizedStringBundle;
 
-  @Metadata({ data: "json, name=zero" })
+  @SpeakeasyMetadata({ data: "json, name=zero" })
   zero?: LocalizedStringBundle;
 }

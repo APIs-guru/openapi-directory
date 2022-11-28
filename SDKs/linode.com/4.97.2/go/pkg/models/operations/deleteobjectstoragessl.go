@@ -4,7 +4,7 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-var DeleteObjectStorageSslServers = []string{
+var DeleteObjectStorageSslServerList = []string{
 	"https://api.linode.com/v4",
 }
 
@@ -13,27 +13,19 @@ type DeleteObjectStorageSslPathParams struct {
 	ClusterID string `pathParam:"style=simple,explode=false,name=clusterId"`
 }
 
-type DeleteObjectStorageSslSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type DeleteObjectStorageSslSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type DeleteObjectStorageSslSecurity struct {
-	Option1 *DeleteObjectStorageSslSecurityOption1 `security:"option"`
-	Option2 *DeleteObjectStorageSslSecurityOption2 `security:"option"`
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
+}
+
+type DeleteObjectStorageSslDefaultApplicationJSON struct {
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type DeleteObjectStorageSslRequest struct {
 	ServerURL  *string
 	PathParams DeleteObjectStorageSslPathParams
 	Security   DeleteObjectStorageSslSecurity
-}
-
-type DeleteObjectStorageSslDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type DeleteObjectStorageSslResponse struct {

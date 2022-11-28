@@ -22,27 +22,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { InstanceTypeItem } from "./instancetypeitem";
 var GetOutpostInstanceTypesOutput = /** @class */ (function (_super) {
     __extends(GetOutpostInstanceTypesOutput, _super);
     function GetOutpostInstanceTypesOutput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=InstanceTypes", elemType: shared.InstanceTypeItem }),
+        SpeakeasyMetadata({ data: "json, name=InstanceTypes", elemType: InstanceTypeItem }),
         __metadata("design:type", Array)
     ], GetOutpostInstanceTypesOutput.prototype, "instanceTypes", void 0);
     __decorate([
-        Metadata({ data: "json, name=NextToken" }),
+        SpeakeasyMetadata({ data: "json, name=NextToken" }),
         __metadata("design:type", String)
     ], GetOutpostInstanceTypesOutput.prototype, "nextToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=OutpostArn" }),
+        SpeakeasyMetadata({ data: "json, name=OutpostArn" }),
         __metadata("design:type", String)
     ], GetOutpostInstanceTypesOutput.prototype, "outpostArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=OutpostId" }),
+        SpeakeasyMetadata({ data: "json, name=OutpostId" }),
         __metadata("design:type", String)
     ], GetOutpostInstanceTypesOutput.prototype, "outpostId", void 0);
     return GetOutpostInstanceTypesOutput;

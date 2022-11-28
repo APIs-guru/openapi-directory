@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleFirebaseAppcheckV1betaServiceEnforcementModeEnum {
-    Off = "OFF"
-,    Unenforced = "UNENFORCED"
-,    Enforced = "ENFORCED"
+    Off = "OFF",
+    Unenforced = "UNENFORCED",
+    Enforced = "ENFORCED"
 }
 
 
@@ -12,9 +13,9 @@ export enum GoogleFirebaseAppcheckV1betaServiceEnforcementModeEnum {
  * The enforcement configuration for a Firebase service supported by App Check.
 **/
 export class GoogleFirebaseAppcheckV1betaService extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enforcementMode" })
+  @SpeakeasyMetadata({ data: "json, name=enforcementMode" })
   enforcementMode?: GoogleFirebaseAppcheckV1betaServiceEnforcementModeEnum;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

@@ -12,6 +12,8 @@ const (
 	AudioConfigAudioEncodingEnumAlaw                     AudioConfigAudioEncodingEnum = "ALAW"
 )
 
+// AudioConfig
+// Description of audio data to be synthesized.
 type AudioConfig struct {
 	AudioEncoding    *AudioConfigAudioEncodingEnum `json:"audioEncoding,omitempty"`
 	EffectsProfileID []string                      `json:"effectsProfileId,omitempty"`

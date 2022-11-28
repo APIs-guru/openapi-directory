@@ -8,6 +8,8 @@ const (
 	SubscribedNodeTypeEnumFile   SubscribedNodeTypeEnum = "file"
 )
 
+// SubscribedNode
+// Subscribed node information
 type SubscribedNode struct {
 	AuthParentID *int64                  `json:"authParentId,omitempty"`
 	ID           int64                   `json:"id"`

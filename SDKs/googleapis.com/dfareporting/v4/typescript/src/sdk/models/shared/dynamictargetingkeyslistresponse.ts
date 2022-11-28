@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DynamicTargetingKey } from "./dynamictargetingkey";
+
 
 
 // DynamicTargetingKeysListResponse
@@ -8,9 +8,9 @@ import { DynamicTargetingKey } from "./dynamictargetingkey";
  * Dynamic Targeting Key List Response
 **/
 export class DynamicTargetingKeysListResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dynamicTargetingKeys", elemType: shared.DynamicTargetingKey })
+  @SpeakeasyMetadata({ data: "json, name=dynamicTargetingKeys", elemType: DynamicTargetingKey })
   dynamicTargetingKeys?: DynamicTargetingKey[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 }

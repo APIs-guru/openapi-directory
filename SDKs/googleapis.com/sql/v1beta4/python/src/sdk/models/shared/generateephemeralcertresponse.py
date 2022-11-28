@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import sslcert
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GenerateEphemeralCertResponse:
-    ephemeral_cert: Optional[sslcert.SslCert] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ephemeralCert' }})
+    r"""GenerateEphemeralCertResponse
+    Ephemeral certificate creation request.
+    """
+    
+    ephemeral_cert: Optional[SslCert] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ephemeralCert') }})
     

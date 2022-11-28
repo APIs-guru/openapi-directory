@@ -28,7 +28,7 @@ type AnalyticsManagementProfileFilterLinksInsertSecurity struct {
 type AnalyticsManagementProfileFilterLinksInsertRequest struct {
 	PathParams  AnalyticsManagementProfileFilterLinksInsertPathParams
 	QueryParams AnalyticsManagementProfileFilterLinksInsertQueryParams
-	Request     *shared.ProfileFilterLink `request:"mediaType=application/json"`
+	Request     *shared.ProfileFilterLinkInput `request:"mediaType=application/json"`
 	Security    AnalyticsManagementProfileFilterLinksInsertSecurity
 }
 

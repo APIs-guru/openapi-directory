@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PerformanceReport
@@ -6,69 +7,69 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The configuration data for an Ad Exchange performance report list.
 **/
 export class PerformanceReport extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bidRate" })
+  @SpeakeasyMetadata({ data: "json, name=bidRate" })
   bidRate?: number;
 
-  @Metadata({ data: "json, name=bidRequestRate" })
+  @SpeakeasyMetadata({ data: "json, name=bidRequestRate" })
   bidRequestRate?: number;
 
-  @Metadata({ data: "json, name=calloutStatusRate" })
+  @SpeakeasyMetadata({ data: "json, name=calloutStatusRate" })
   calloutStatusRate?: any[];
 
-  @Metadata({ data: "json, name=cookieMatcherStatusRate" })
+  @SpeakeasyMetadata({ data: "json, name=cookieMatcherStatusRate" })
   cookieMatcherStatusRate?: any[];
 
-  @Metadata({ data: "json, name=creativeStatusRate" })
+  @SpeakeasyMetadata({ data: "json, name=creativeStatusRate" })
   creativeStatusRate?: any[];
 
-  @Metadata({ data: "json, name=filteredBidRate" })
+  @SpeakeasyMetadata({ data: "json, name=filteredBidRate" })
   filteredBidRate?: number;
 
-  @Metadata({ data: "json, name=hostedMatchStatusRate" })
+  @SpeakeasyMetadata({ data: "json, name=hostedMatchStatusRate" })
   hostedMatchStatusRate?: any[];
 
-  @Metadata({ data: "json, name=inventoryMatchRate" })
+  @SpeakeasyMetadata({ data: "json, name=inventoryMatchRate" })
   inventoryMatchRate?: number;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=latency50thPercentile" })
+  @SpeakeasyMetadata({ data: "json, name=latency50thPercentile" })
   latency50thPercentile?: number;
 
-  @Metadata({ data: "json, name=latency85thPercentile" })
+  @SpeakeasyMetadata({ data: "json, name=latency85thPercentile" })
   latency85thPercentile?: number;
 
-  @Metadata({ data: "json, name=latency95thPercentile" })
+  @SpeakeasyMetadata({ data: "json, name=latency95thPercentile" })
   latency95thPercentile?: number;
 
-  @Metadata({ data: "json, name=noQuotaInRegion" })
+  @SpeakeasyMetadata({ data: "json, name=noQuotaInRegion" })
   noQuotaInRegion?: number;
 
-  @Metadata({ data: "json, name=outOfQuota" })
+  @SpeakeasyMetadata({ data: "json, name=outOfQuota" })
   outOfQuota?: number;
 
-  @Metadata({ data: "json, name=pixelMatchRequests" })
+  @SpeakeasyMetadata({ data: "json, name=pixelMatchRequests" })
   pixelMatchRequests?: number;
 
-  @Metadata({ data: "json, name=pixelMatchResponses" })
+  @SpeakeasyMetadata({ data: "json, name=pixelMatchResponses" })
   pixelMatchResponses?: number;
 
-  @Metadata({ data: "json, name=quotaConfiguredLimit" })
+  @SpeakeasyMetadata({ data: "json, name=quotaConfiguredLimit" })
   quotaConfiguredLimit?: number;
 
-  @Metadata({ data: "json, name=quotaThrottledLimit" })
+  @SpeakeasyMetadata({ data: "json, name=quotaThrottledLimit" })
   quotaThrottledLimit?: number;
 
-  @Metadata({ data: "json, name=region" })
+  @SpeakeasyMetadata({ data: "json, name=region" })
   region?: string;
 
-  @Metadata({ data: "json, name=successfulRequestRate" })
+  @SpeakeasyMetadata({ data: "json, name=successfulRequestRate" })
   successfulRequestRate?: number;
 
-  @Metadata({ data: "json, name=timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=timestamp" })
   timestamp?: string;
 
-  @Metadata({ data: "json, name=unsuccessfulRequestRate" })
+  @SpeakeasyMetadata({ data: "json, name=unsuccessfulRequestRate" })
   unsuccessfulRequestRate?: number;
 }

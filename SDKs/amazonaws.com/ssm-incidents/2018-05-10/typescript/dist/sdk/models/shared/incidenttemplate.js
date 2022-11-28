@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { NotificationTargetItem } from "./notificationtargetitem";
 // IncidentTemplate
 /**
  * Basic details used in creating a response plan. The response plan is then used to create an incident record.
@@ -34,23 +34,23 @@ var IncidentTemplate = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=dedupeString" }),
+        SpeakeasyMetadata({ data: "json, name=dedupeString" }),
         __metadata("design:type", String)
     ], IncidentTemplate.prototype, "dedupeString", void 0);
     __decorate([
-        Metadata({ data: "json, name=impact" }),
+        SpeakeasyMetadata({ data: "json, name=impact" }),
         __metadata("design:type", Number)
     ], IncidentTemplate.prototype, "impact", void 0);
     __decorate([
-        Metadata({ data: "json, name=notificationTargets", elemType: shared.NotificationTargetItem }),
+        SpeakeasyMetadata({ data: "json, name=notificationTargets", elemType: NotificationTargetItem }),
         __metadata("design:type", Array)
     ], IncidentTemplate.prototype, "notificationTargets", void 0);
     __decorate([
-        Metadata({ data: "json, name=summary" }),
+        SpeakeasyMetadata({ data: "json, name=summary" }),
         __metadata("design:type", String)
     ], IncidentTemplate.prototype, "summary", void 0);
     __decorate([
-        Metadata({ data: "json, name=title" }),
+        SpeakeasyMetadata({ data: "json, name=title" }),
         __metadata("design:type", String)
     ], IncidentTemplate.prototype, "title", void 0);
     return IncidentTemplate;

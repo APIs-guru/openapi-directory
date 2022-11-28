@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GroupKind } from "./groupkind";
+
 
 
 // ClusterResourceRestoreScope
@@ -8,6 +8,6 @@ import { GroupKind } from "./groupkind";
  * Identifies the cluster-scoped resources to restore from the Backup.
 **/
 export class ClusterResourceRestoreScope extends SpeakeasyBase {
-  @Metadata({ data: "json, name=selectedGroupKinds", elemType: shared.GroupKind })
+  @SpeakeasyMetadata({ data: "json, name=selectedGroupKinds", elemType: GroupKind })
   selectedGroupKinds?: GroupKind[];
 }

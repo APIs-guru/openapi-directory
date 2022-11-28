@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceDownloadOwnerSetting } from "./resourcedownloadownersetting";
+
 
 
 // SageMakerMachineLearningModelResourceData
@@ -7,12 +8,12 @@ import { ResourceDownloadOwnerSetting } from "./resourcedownloadownersetting";
  * Attributes that define an Amazon SageMaker machine learning resource.
 **/
 export class SageMakerMachineLearningModelResourceData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DestinationPath" })
+  @SpeakeasyMetadata({ data: "json, name=DestinationPath" })
   destinationPath?: string;
 
-  @Metadata({ data: "json, name=OwnerSetting" })
+  @SpeakeasyMetadata({ data: "json, name=OwnerSetting" })
   ownerSetting?: ResourceDownloadOwnerSetting;
 
-  @Metadata({ data: "json, name=SageMakerJobArn" })
+  @SpeakeasyMetadata({ data: "json, name=SageMakerJobArn" })
   sageMakerJobArn?: string;
 }

@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeletedNodeSummary } from "./deletednodesummary";
 import { Range } from "./range";
+
 
 
 // DeletedNodeSummaryList
@@ -9,9 +9,9 @@ import { Range } from "./range";
  * List of deleted nodes
 **/
 export class DeletedNodeSummaryList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.DeletedNodeSummary })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: DeletedNodeSummary })
   items: DeletedNodeSummary[];
 
-  @Metadata({ data: "json, name=range" })
+  @SpeakeasyMetadata({ data: "json, name=range" })
   range: Range;
 }

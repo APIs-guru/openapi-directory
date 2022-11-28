@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DnsPeering
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * DNS peering configuration. These configurations are used to create DNS peering with the customer Cloud DNS.
 **/
 export class DnsPeering extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=domain" })
+  @SpeakeasyMetadata({ data: "json, name=domain" })
   domain?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=targetNetwork" })
+  @SpeakeasyMetadata({ data: "json, name=targetNetwork" })
   targetNetwork?: string;
 
-  @Metadata({ data: "json, name=targetProject" })
+  @SpeakeasyMetadata({ data: "json, name=targetProject" })
   targetProject?: string;
 }

@@ -1,24 +1,25 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ConfigManagementGatekeeperDeploymentStateGatekeeperAuditEnum {
-    DeploymentStateUnspecified = "DEPLOYMENT_STATE_UNSPECIFIED"
-,    NotInstalled = "NOT_INSTALLED"
-,    Installed = "INSTALLED"
-,    Error = "ERROR"
+    DeploymentStateUnspecified = "DEPLOYMENT_STATE_UNSPECIFIED",
+    NotInstalled = "NOT_INSTALLED",
+    Installed = "INSTALLED",
+    Error = "ERROR"
 }
 
 export enum ConfigManagementGatekeeperDeploymentStateGatekeeperControllerManagerStateEnum {
-    DeploymentStateUnspecified = "DEPLOYMENT_STATE_UNSPECIFIED"
-,    NotInstalled = "NOT_INSTALLED"
-,    Installed = "INSTALLED"
-,    Error = "ERROR"
+    DeploymentStateUnspecified = "DEPLOYMENT_STATE_UNSPECIFIED",
+    NotInstalled = "NOT_INSTALLED",
+    Installed = "INSTALLED",
+    Error = "ERROR"
 }
 
 export enum ConfigManagementGatekeeperDeploymentStateGatekeeperMutationEnum {
-    DeploymentStateUnspecified = "DEPLOYMENT_STATE_UNSPECIFIED"
-,    NotInstalled = "NOT_INSTALLED"
-,    Installed = "INSTALLED"
-,    Error = "ERROR"
+    DeploymentStateUnspecified = "DEPLOYMENT_STATE_UNSPECIFIED",
+    NotInstalled = "NOT_INSTALLED",
+    Installed = "INSTALLED",
+    Error = "ERROR"
 }
 
 
@@ -27,12 +28,12 @@ export enum ConfigManagementGatekeeperDeploymentStateGatekeeperMutationEnum {
  * State of Policy Controller installation.
 **/
 export class ConfigManagementGatekeeperDeploymentState extends SpeakeasyBase {
-  @Metadata({ data: "json, name=gatekeeperAudit" })
+  @SpeakeasyMetadata({ data: "json, name=gatekeeperAudit" })
   gatekeeperAudit?: ConfigManagementGatekeeperDeploymentStateGatekeeperAuditEnum;
 
-  @Metadata({ data: "json, name=gatekeeperControllerManagerState" })
+  @SpeakeasyMetadata({ data: "json, name=gatekeeperControllerManagerState" })
   gatekeeperControllerManagerState?: ConfigManagementGatekeeperDeploymentStateGatekeeperControllerManagerStateEnum;
 
-  @Metadata({ data: "json, name=gatekeeperMutation" })
+  @SpeakeasyMetadata({ data: "json, name=gatekeeperMutation" })
   gatekeeperMutation?: ConfigManagementGatekeeperDeploymentStateGatekeeperMutationEnum;
 }

@@ -20,11 +20,6 @@ type TaxonomyAttractionsRequestBody struct {
 	TopX      *string                                      `json:"topX,omitempty"`
 }
 
-type TaxonomyAttractionsRequest struct {
-	Headers TaxonomyAttractionsHeaders
-	Request *TaxonomyAttractionsRequestBody `request:"mediaType=application/json"`
-}
-
 type TaxonomyAttractions200ApplicationJSONData struct {
 	AttractionCity            *string  `json:"attractionCity,omitempty"`
 	AttractionLatitude        *float64 `json:"attractionLatitude,omitempty"`
@@ -62,6 +57,11 @@ type TaxonomyAttractions200ApplicationJSON struct {
 	Success          *bool                                       `json:"success,omitempty"`
 	TotalCount       *int64                                      `json:"totalCount,omitempty"`
 	Vmid             *string                                     `json:"vmid,omitempty"`
+}
+
+type TaxonomyAttractionsRequest struct {
+	Headers TaxonomyAttractionsHeaders
+	Request *TaxonomyAttractionsRequestBody `request:"mediaType=application/json"`
 }
 
 type TaxonomyAttractionsResponse struct {

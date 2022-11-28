@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { LensReviewSummary } from "./lensreviewsummary";
 // ListLensReviewsOutput
 /**
  * Output of a list lens reviews call.
@@ -34,19 +34,19 @@ var ListLensReviewsOutput = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=LensReviewSummaries", elemType: shared.LensReviewSummary }),
+        SpeakeasyMetadata({ data: "json, name=LensReviewSummaries", elemType: LensReviewSummary }),
         __metadata("design:type", Array)
     ], ListLensReviewsOutput.prototype, "lensReviewSummaries", void 0);
     __decorate([
-        Metadata({ data: "json, name=MilestoneNumber" }),
+        SpeakeasyMetadata({ data: "json, name=MilestoneNumber" }),
         __metadata("design:type", Number)
     ], ListLensReviewsOutput.prototype, "milestoneNumber", void 0);
     __decorate([
-        Metadata({ data: "json, name=NextToken" }),
+        SpeakeasyMetadata({ data: "json, name=NextToken" }),
         __metadata("design:type", String)
     ], ListLensReviewsOutput.prototype, "nextToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=WorkloadId" }),
+        SpeakeasyMetadata({ data: "json, name=WorkloadId" }),
         __metadata("design:type", String)
     ], ListLensReviewsOutput.prototype, "workloadId", void 0);
     return ListLensReviewsOutput;

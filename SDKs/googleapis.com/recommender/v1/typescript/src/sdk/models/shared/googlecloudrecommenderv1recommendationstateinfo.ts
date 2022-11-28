@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleCloudRecommenderV1RecommendationStateInfoStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Active = "ACTIVE"
-,    Claimed = "CLAIMED"
-,    Succeeded = "SUCCEEDED"
-,    Failed = "FAILED"
-,    Dismissed = "DISMISSED"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Active = "ACTIVE",
+    Claimed = "CLAIMED",
+    Succeeded = "SUCCEEDED",
+    Failed = "FAILED",
+    Dismissed = "DISMISSED"
 }
 
 
@@ -15,9 +16,9 @@ export enum GoogleCloudRecommenderV1RecommendationStateInfoStateEnum {
  * Information for state. Contains state and metadata.
 **/
 export class GoogleCloudRecommenderV1RecommendationStateInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: GoogleCloudRecommenderV1RecommendationStateInfoStateEnum;
 
-  @Metadata({ data: "json, name=stateMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=stateMetadata" })
   stateMetadata?: Map<string, string>;
 }

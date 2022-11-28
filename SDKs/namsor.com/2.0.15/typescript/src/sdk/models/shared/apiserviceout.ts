@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ApiServiceOut
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * List of API Services
 **/
 export class ApiServiceOut extends SpeakeasyBase {
-  @Metadata({ data: "json, name=costInUnits" })
+  @SpeakeasyMetadata({ data: "json, name=costInUnits" })
   costInUnits?: number;
 
-  @Metadata({ data: "json, name=serviceGroup" })
+  @SpeakeasyMetadata({ data: "json, name=serviceGroup" })
   serviceGroup?: string;
 
-  @Metadata({ data: "json, name=serviceName" })
+  @SpeakeasyMetadata({ data: "json, name=serviceName" })
   serviceName?: string;
 }

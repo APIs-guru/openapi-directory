@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RuleSource } from "./rulesource";
 export var AwsLambdaRulePostRequestModeEnum;
 (function (AwsLambdaRulePostRequestModeEnum) {
@@ -43,19 +43,19 @@ var AwsLambdaRulePostTarget = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=authentication" }),
+        SpeakeasyMetadata({ data: "json, name=authentication" }),
         __metadata("design:type", Object)
     ], AwsLambdaRulePostTarget.prototype, "authentication", void 0);
     __decorate([
-        Metadata({ data: "json, name=enveloped" }),
+        SpeakeasyMetadata({ data: "json, name=enveloped" }),
         __metadata("design:type", Boolean)
     ], AwsLambdaRulePostTarget.prototype, "enveloped", void 0);
     __decorate([
-        Metadata({ data: "json, name=functionName" }),
+        SpeakeasyMetadata({ data: "json, name=functionName" }),
         __metadata("design:type", String)
     ], AwsLambdaRulePostTarget.prototype, "functionName", void 0);
     __decorate([
-        Metadata({ data: "json, name=region" }),
+        SpeakeasyMetadata({ data: "json, name=region" }),
         __metadata("design:type", String)
     ], AwsLambdaRulePostTarget.prototype, "region", void 0);
     return AwsLambdaRulePostTarget;
@@ -67,23 +67,23 @@ var AwsLambdaRulePost = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=requestMode" }),
+        SpeakeasyMetadata({ data: "json, name=requestMode" }),
         __metadata("design:type", String)
     ], AwsLambdaRulePost.prototype, "requestMode", void 0);
     __decorate([
-        Metadata({ data: "json, name=ruleType" }),
+        SpeakeasyMetadata({ data: "json, name=ruleType" }),
         __metadata("design:type", String)
     ], AwsLambdaRulePost.prototype, "ruleType", void 0);
     __decorate([
-        Metadata({ data: "json, name=source" }),
+        SpeakeasyMetadata({ data: "json, name=source" }),
         __metadata("design:type", RuleSource)
     ], AwsLambdaRulePost.prototype, "source", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], AwsLambdaRulePost.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=target" }),
+        SpeakeasyMetadata({ data: "json, name=target" }),
         __metadata("design:type", AwsLambdaRulePostTarget)
     ], AwsLambdaRulePost.prototype, "target", void 0);
     return AwsLambdaRulePost;

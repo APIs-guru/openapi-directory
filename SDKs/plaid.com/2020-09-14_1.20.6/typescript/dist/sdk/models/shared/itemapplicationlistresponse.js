@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ConnectedApplication } from "./connectedapplication";
 // ItemApplicationListResponse
 /**
  * Describes the connected application for a particular end user.
@@ -34,11 +34,11 @@ var ItemApplicationListResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=applications", elemType: shared.ConnectedApplication }),
+        SpeakeasyMetadata({ data: "json, name=applications", elemType: ConnectedApplication }),
         __metadata("design:type", Array)
     ], ItemApplicationListResponse.prototype, "applications", void 0);
     __decorate([
-        Metadata({ data: "json, name=request_id" }),
+        SpeakeasyMetadata({ data: "json, name=request_id" }),
         __metadata("design:type", String)
     ], ItemApplicationListResponse.prototype, "requestId", void 0);
     return ItemApplicationListResponse;

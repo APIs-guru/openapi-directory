@@ -1,7 +1,8 @@
 
 
+
 export enum DesiredStatusEnum {
-    Running = "RUNNING"
-,    Pending = "PENDING"
-,    Stopped = "STOPPED"
+    Running = "RUNNING",
+    Pending = "PENDING",
+    Stopped = "STOPPED"
 }

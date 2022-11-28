@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class TransformOutputRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "form, name=json;json=true" })
+  @SpeakeasyMetadata({ data: "form, name=json;json=true" })
   json?: shared.SeldonMessage;
 }
 
 
 export class TransformOutputRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
   request: TransformOutputRequestBody;
 }
 
 
 export class TransformOutputResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   seldonMessage?: shared.SeldonMessage;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Selection } from "./selection";
+
 
 
 // SelectionList
@@ -8,6 +8,6 @@ import { Selection } from "./selection";
  * Wrapper for SelectionList Field value.
 **/
 export class SelectionList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=values", elemType: shared.Selection })
+  @SpeakeasyMetadata({ data: "json, name=values", elemType: Selection })
   values?: Selection[];
 }

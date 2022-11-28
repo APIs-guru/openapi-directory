@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 
 class GetSitesSiteIDSubsitesOutputFormatOutputFormatEnum(str, Enum):
     JSON = "json"
@@ -13,8 +14,8 @@ class GetSitesSiteIDSubsitesOutputFormatOutputFormatEnum(str, Enum):
 
 @dataclass
 class GetSitesSiteIDSubsitesOutputFormatPathParams:
-    output_format: GetSitesSiteIDSubsitesOutputFormatOutputFormatEnum = field(default=None, metadata={'path_param': { 'field_name': 'outputFormat', 'style': 'simple', 'explode': False }})
-    site_id: str = field(default=None, metadata={'path_param': { 'field_name': 'siteID', 'style': 'simple', 'explode': False }})
+    output_format: GetSitesSiteIDSubsitesOutputFormatOutputFormatEnum = field(metadata={'path_param': { 'field_name': 'outputFormat', 'style': 'simple', 'explode': False }})
+    site_id: str = field(metadata={'path_param': { 'field_name': 'siteID', 'style': 'simple', 'explode': False }})
     
 class GetSitesSiteIDSubsitesOutputFormatLocationDescriptorEnum(str, Enum):
     ANY = "any"
@@ -35,12 +36,12 @@ class GetSitesSiteIDSubsitesOutputFormatQueryParams:
 
 @dataclass
 class GetSitesSiteIDSubsitesOutputFormatRequest:
-    path_params: GetSitesSiteIDSubsitesOutputFormatPathParams = field(default=None)
-    query_params: GetSitesSiteIDSubsitesOutputFormatQueryParams = field(default=None)
+    path_params: GetSitesSiteIDSubsitesOutputFormatPathParams = field()
+    query_params: GetSitesSiteIDSubsitesOutputFormatQueryParams = field()
     
 
 @dataclass
 class GetSitesSiteIDSubsitesOutputFormatResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

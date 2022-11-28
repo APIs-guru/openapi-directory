@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetPublishedProjectNameRepositoryNameArchitectureNameBinaryFilenamePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=architecture_name" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=architecture_name" })
   architectureName: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=binary_filename" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=binary_filename" })
   binaryFilename: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=project_name" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=project_name" })
   projectName: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repository_name" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repository_name" })
   repositoryName: string;
 }
 
 
 export class GetPublishedProjectNameRepositoryNameArchitectureNameBinaryFilenameSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   basicAuthentication: shared.SchemeBasicAuthentication;
 }
 
 
 export class GetPublishedProjectNameRepositoryNameArchitectureNameBinaryFilenameRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetPublishedProjectNameRepositoryNameArchitectureNameBinaryFilenamePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetPublishedProjectNameRepositoryNameArchitectureNameBinaryFilenameSecurity;
 }
 
 
 export class GetPublishedProjectNameRepositoryNameArchitectureNameBinaryFilenameResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getPublishedProjectNameRepositoryNameArchitectureNameBinaryFilename200ApplicationWildcardBinaryString?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getPublishedProjectNameRepositoryNameArchitectureNameBinaryFilename200TextXmlBinaryString?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

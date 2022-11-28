@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var UpdateArchiveRequest = /** @class */ (function (_super) {
     __extends(UpdateArchiveRequest, _super);
     function UpdateArchiveRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ArchiveName" }),
+        SpeakeasyMetadata({ data: "json, name=ArchiveName" }),
         __metadata("design:type", String)
     ], UpdateArchiveRequest.prototype, "archiveName", void 0);
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], UpdateArchiveRequest.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=EventPattern" }),
+        SpeakeasyMetadata({ data: "json, name=EventPattern" }),
         __metadata("design:type", String)
     ], UpdateArchiveRequest.prototype, "eventPattern", void 0);
     __decorate([
-        Metadata({ data: "json, name=RetentionDays" }),
+        SpeakeasyMetadata({ data: "json, name=RetentionDays" }),
         __metadata("design:type", Number)
     ], UpdateArchiveRequest.prototype, "retentionDays", void 0);
     return UpdateArchiveRequest;

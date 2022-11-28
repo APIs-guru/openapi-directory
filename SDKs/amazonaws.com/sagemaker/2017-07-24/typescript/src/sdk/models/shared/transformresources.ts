@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TransformInstanceTypeEnum } from "./transforminstancetypeenum";
+
 
 
 // TransformResources
@@ -7,12 +8,12 @@ import { TransformInstanceTypeEnum } from "./transforminstancetypeenum";
  * Describes the resources, including ML instance types and ML instance count, to use for transform job.
 **/
 export class TransformResources extends SpeakeasyBase {
-  @Metadata({ data: "json, name=InstanceCount" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceCount" })
   instanceCount: number;
 
-  @Metadata({ data: "json, name=InstanceType" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceType" })
   instanceType: TransformInstanceTypeEnum;
 
-  @Metadata({ data: "json, name=VolumeKmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=VolumeKmsKeyId" })
   volumeKmsKeyId?: string;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Output } from "./output";
 import { Timeline } from "./timeline";
 export declare enum EditDiskEnum {

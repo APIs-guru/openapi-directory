@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// DomainNameConfiguration
+// The domain name configuration.
 type DomainNameConfiguration struct {
 	APIGatewayDomainName                *string               `json:"ApiGatewayDomainName,omitempty"`
 	CertificateArn                      *string               `json:"CertificateArn,omitempty"`

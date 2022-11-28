@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ObjectExpiration } from "./objectexpiration";
+
 
 
 // UpdateDownloadSharesBulkRequest
@@ -7,21 +8,21 @@ import { ObjectExpiration } from "./objectexpiration";
  * Request model for updating a list of Download Shares
 **/
 export class UpdateDownloadSharesBulkRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=expiration" })
+  @SpeakeasyMetadata({ data: "json, name=expiration" })
   expiration?: ObjectExpiration;
 
-  @Metadata({ data: "json, name=maxDownloads" })
+  @SpeakeasyMetadata({ data: "json, name=maxDownloads" })
   maxDownloads?: number;
 
-  @Metadata({ data: "json, name=objectIds" })
+  @SpeakeasyMetadata({ data: "json, name=objectIds" })
   objectIds: number[];
 
-  @Metadata({ data: "json, name=resetMaxDownloads" })
+  @SpeakeasyMetadata({ data: "json, name=resetMaxDownloads" })
   resetMaxDownloads?: boolean;
 
-  @Metadata({ data: "json, name=showCreatorName" })
+  @SpeakeasyMetadata({ data: "json, name=showCreatorName" })
   showCreatorName?: boolean;
 
-  @Metadata({ data: "json, name=showCreatorUsername" })
+  @SpeakeasyMetadata({ data: "json, name=showCreatorUsername" })
   showCreatorUsername?: boolean;
 }

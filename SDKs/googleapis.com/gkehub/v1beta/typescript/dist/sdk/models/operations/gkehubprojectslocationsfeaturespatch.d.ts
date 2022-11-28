@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class GkehubProjectsLocationsFeaturesPatchPathParams extends SpeakeasyBase {
     name: string;
@@ -25,7 +25,7 @@ export declare class GkehubProjectsLocationsFeaturesPatchSecurity extends Speake
 export declare class GkehubProjectsLocationsFeaturesPatchRequest extends SpeakeasyBase {
     pathParams: GkehubProjectsLocationsFeaturesPatchPathParams;
     queryParams: GkehubProjectsLocationsFeaturesPatchQueryParams;
-    request?: shared.Feature;
+    request?: shared.FeatureInput;
     security: GkehubProjectsLocationsFeaturesPatchSecurity;
 }
 export declare class GkehubProjectsLocationsFeaturesPatchResponse extends SpeakeasyBase {

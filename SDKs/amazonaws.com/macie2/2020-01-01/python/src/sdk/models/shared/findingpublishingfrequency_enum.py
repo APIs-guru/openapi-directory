@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class FindingPublishingFrequencyEnum(str, Enum):
     FIFTEEN_MINUTES = "FIFTEEN_MINUTES"

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -14,6 +18,7 @@ class DescribeEffectiveInstanceAssociationsXAmzTargetEnum(str, Enum):
 
 @dataclass
 class DescribeEffectiveInstanceAssociationsHeaders:
+    x_amz_target: DescribeEffectiveInstanceAssociationsXAmzTargetEnum = field(metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm', 'style': 'simple', 'explode': False }})
     x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256', 'style': 'simple', 'explode': False }})
     x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential', 'style': 'simple', 'explode': False }})
@@ -21,22 +26,21 @@ class DescribeEffectiveInstanceAssociationsHeaders:
     x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token', 'style': 'simple', 'explode': False }})
     x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature', 'style': 'simple', 'explode': False }})
     x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders', 'style': 'simple', 'explode': False }})
-    x_amz_target: DescribeEffectiveInstanceAssociationsXAmzTargetEnum = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DescribeEffectiveInstanceAssociationsRequest:
-    query_params: DescribeEffectiveInstanceAssociationsQueryParams = field(default=None)
-    headers: DescribeEffectiveInstanceAssociationsHeaders = field(default=None)
-    request: shared.DescribeEffectiveInstanceAssociationsRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: DescribeEffectiveInstanceAssociationsHeaders = field()
+    query_params: DescribeEffectiveInstanceAssociationsQueryParams = field()
+    request: shared.DescribeEffectiveInstanceAssociationsRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DescribeEffectiveInstanceAssociationsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     describe_effective_instance_associations_result: Optional[shared.DescribeEffectiveInstanceAssociationsResult] = field(default=None)
     internal_server_error: Optional[Any] = field(default=None)
     invalid_instance_id: Optional[Any] = field(default=None)
     invalid_next_token: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

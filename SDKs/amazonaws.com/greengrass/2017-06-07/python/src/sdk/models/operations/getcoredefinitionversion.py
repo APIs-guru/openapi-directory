@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetCoreDefinitionVersionPathParams:
-    core_definition_id: str = field(default=None, metadata={'path_param': { 'field_name': 'CoreDefinitionId', 'style': 'simple', 'explode': False }})
-    core_definition_version_id: str = field(default=None, metadata={'path_param': { 'field_name': 'CoreDefinitionVersionId', 'style': 'simple', 'explode': False }})
+    core_definition_id: str = field(metadata={'path_param': { 'field_name': 'CoreDefinitionId', 'style': 'simple', 'explode': False }})
+    core_definition_version_id: str = field(metadata={'path_param': { 'field_name': 'CoreDefinitionVersionId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,14 +25,14 @@ class GetCoreDefinitionVersionHeaders:
 
 @dataclass
 class GetCoreDefinitionVersionRequest:
-    path_params: GetCoreDefinitionVersionPathParams = field(default=None)
-    headers: GetCoreDefinitionVersionHeaders = field(default=None)
+    headers: GetCoreDefinitionVersionHeaders = field()
+    path_params: GetCoreDefinitionVersionPathParams = field()
     
 
 @dataclass
 class GetCoreDefinitionVersionResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_core_definition_version_response: Optional[shared.GetCoreDefinitionVersionResponse] = field(default=None)
-    status_code: int = field(default=None)
     

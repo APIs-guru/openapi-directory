@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class TeamsListMembersInOrgPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=org" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=org" })
   org: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=team_slug" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=team_slug" })
   teamSlug: string;
 }
 
 export enum TeamsListMembersInOrgRoleEnum {
-    Member = "member"
-,    Maintainer = "maintainer"
-,    All = "all"
+    Member = "member",
+    Maintainer = "maintainer",
+    All = "all"
 }
 
 
 export class TeamsListMembersInOrgQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=role" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=role" })
   role?: TeamsListMembersInOrgRoleEnum;
 }
 
 
 export class TeamsListMembersInOrgRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: TeamsListMembersInOrgPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: TeamsListMembersInOrgQueryParams;
 }
 
 
 export class TeamsListMembersInOrgResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.SimpleUser })
+  @SpeakeasyMetadata({ elemType: shared.SimpleUser })
   simpleUsers?: shared.SimpleUser[];
 }

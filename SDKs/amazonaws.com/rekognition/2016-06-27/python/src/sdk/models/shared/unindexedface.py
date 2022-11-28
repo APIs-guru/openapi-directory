@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import facedetail
-from . import reason_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UnindexedFace:
-    face_detail: Optional[facedetail.FaceDetail] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FaceDetail' }})
-    reasons: Optional[List[reason_enum.ReasonEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Reasons' }})
+    r"""UnindexedFace
+    A face that <a>IndexFaces</a> detected, but didn't index. Use the <code>Reasons</code> response attribute to determine why a face wasn't indexed.
+    """
+    
+    face_detail: Optional[FaceDetail] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FaceDetail') }})
+    reasons: Optional[List[ReasonEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Reasons') }})
     

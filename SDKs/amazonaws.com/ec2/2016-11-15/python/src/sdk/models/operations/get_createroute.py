@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetCreateRouteActionEnum(str, Enum):
     CREATE_ROUTE = "CreateRoute"
@@ -10,7 +14,9 @@ class GetCreateRouteVersionEnum(str, Enum):
 
 @dataclass
 class GetCreateRouteQueryParams:
-    action: GetCreateRouteActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetCreateRouteActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    route_table_id: str = field(metadata={'query_param': { 'field_name': 'RouteTableId', 'style': 'form', 'explode': True }})
+    version: GetCreateRouteVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     carrier_gateway_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'CarrierGatewayId', 'style': 'form', 'explode': True }})
     destination_cidr_block: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'DestinationCidrBlock', 'style': 'form', 'explode': True }})
     destination_ipv6_cidr_block: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'DestinationIpv6CidrBlock', 'style': 'form', 'explode': True }})
@@ -22,9 +28,7 @@ class GetCreateRouteQueryParams:
     local_gateway_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'LocalGatewayId', 'style': 'form', 'explode': True }})
     nat_gateway_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NatGatewayId', 'style': 'form', 'explode': True }})
     network_interface_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NetworkInterfaceId', 'style': 'form', 'explode': True }})
-    route_table_id: str = field(default=None, metadata={'query_param': { 'field_name': 'RouteTableId', 'style': 'form', 'explode': True }})
     transit_gateway_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'TransitGatewayId', 'style': 'form', 'explode': True }})
-    version: GetCreateRouteVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     vpc_endpoint_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'VpcEndpointId', 'style': 'form', 'explode': True }})
     vpc_peering_connection_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'VpcPeeringConnectionId', 'style': 'form', 'explode': True }})
     
@@ -42,13 +46,13 @@ class GetCreateRouteHeaders:
 
 @dataclass
 class GetCreateRouteRequest:
-    query_params: GetCreateRouteQueryParams = field(default=None)
-    headers: GetCreateRouteHeaders = field(default=None)
+    headers: GetCreateRouteHeaders = field()
+    query_params: GetCreateRouteQueryParams = field()
     
 
 @dataclass
 class GetCreateRouteResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum DestinationStatusStatusEnum {
-    Unknown = "UNKNOWN"
-,    Active = "ACTIVE"
-,    Pending = "PENDING"
-,    Disapproved = "DISAPPROVED"
+    Unknown = "UNKNOWN",
+    Active = "ACTIVE",
+    Pending = "PENDING",
+    Disapproved = "DISAPPROVED"
 }
 
 
@@ -13,9 +14,9 @@ export enum DestinationStatusStatusEnum {
  * The destination status.
 **/
 export class DestinationStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=destination" })
+  @SpeakeasyMetadata({ data: "json, name=destination" })
   destination?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: DestinationStatusStatusEnum;
 }

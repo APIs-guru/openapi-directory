@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CasesSearchQueryParams = /** @class */ (function (_super) {
     __extends(CasesSearchQueryParams, _super);
@@ -30,71 +30,71 @@ var CasesSearchQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", Number)
     ], CasesSearchQueryParams.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" }),
         __metadata("design:type", Number)
     ], CasesSearchQueryParams.prototype, "page", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search" }),
         __metadata("design:type", String)
     ], CasesSearchQueryParams.prototype, "search", void 0);
     return CasesSearchQueryParams;
 }(SpeakeasyBase));
 export { CasesSearchQueryParams };
-var CasesSearchRequest = /** @class */ (function (_super) {
-    __extends(CasesSearchRequest, _super);
-    function CasesSearchRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata(),
-        __metadata("design:type", CasesSearchQueryParams)
-    ], CasesSearchRequest.prototype, "queryParams", void 0);
-    return CasesSearchRequest;
-}(SpeakeasyBase));
-export { CasesSearchRequest };
 var CasesSearch200ApplicationJson = /** @class */ (function (_super) {
     __extends(CasesSearch200ApplicationJson, _super);
     function CasesSearch200ApplicationJson() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=count" }),
+        SpeakeasyMetadata({ data: "json, name=count" }),
         __metadata("design:type", Number)
     ], CasesSearch200ApplicationJson.prototype, "count", void 0);
     __decorate([
-        Metadata({ data: "json, name=next" }),
+        SpeakeasyMetadata({ data: "json, name=next" }),
         __metadata("design:type", String)
     ], CasesSearch200ApplicationJson.prototype, "next", void 0);
     __decorate([
-        Metadata({ data: "json, name=previous" }),
+        SpeakeasyMetadata({ data: "json, name=previous" }),
         __metadata("design:type", String)
     ], CasesSearch200ApplicationJson.prototype, "previous", void 0);
     __decorate([
-        Metadata({ data: "json, name=results", elemType: shared.CountryStats }),
+        SpeakeasyMetadata({ data: "json, name=results", elemType: shared.CountryStats }),
         __metadata("design:type", Array)
     ], CasesSearch200ApplicationJson.prototype, "results", void 0);
     return CasesSearch200ApplicationJson;
 }(SpeakeasyBase));
 export { CasesSearch200ApplicationJson };
+var CasesSearchRequest = /** @class */ (function (_super) {
+    __extends(CasesSearchRequest, _super);
+    function CasesSearchRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", CasesSearchQueryParams)
+    ], CasesSearchRequest.prototype, "queryParams", void 0);
+    return CasesSearchRequest;
+}(SpeakeasyBase));
+export { CasesSearchRequest };
 var CasesSearchResponse = /** @class */ (function (_super) {
     __extends(CasesSearchResponse, _super);
     function CasesSearchResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CasesSearchResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CasesSearchResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CasesSearch200ApplicationJson)
     ], CasesSearchResponse.prototype, "casesSearch200ApplicationJsonObject", void 0);
     return CasesSearchResponse;

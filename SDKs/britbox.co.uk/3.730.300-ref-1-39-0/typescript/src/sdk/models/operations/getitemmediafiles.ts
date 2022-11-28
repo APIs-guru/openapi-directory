@@ -1,68 +1,69 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetItemMediaFilesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class GetItemMediaFilesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=false;name=delivery" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=delivery" })
   delivery: shared.MediaFileDeliveryEnum[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=device" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=device" })
   device?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=ff" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=ff" })
   ff?: shared.FeatureFlagsEnum[];
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=formats" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=formats" })
   formats?: shared.MediaFileFormatsEnum[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=lang" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lang" })
   lang?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=resolution" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=resolution" })
   resolution: shared.MediaFileResolutionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=segments" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=segments" })
   segments?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sub" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sub" })
   sub?: string;
 }
 
 
 export class GetItemMediaFilesSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   accountAuth: shared.SchemeAccountAuth;
 }
 
 
 export class GetItemMediaFilesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetItemMediaFilesPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetItemMediaFilesQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetItemMediaFilesSecurity;
 }
 
 
 export class GetItemMediaFilesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.MediaFile })
+  @SpeakeasyMetadata({ elemType: shared.MediaFile })
   mediaFiles?: shared.MediaFile[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceError?: shared.ServiceError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

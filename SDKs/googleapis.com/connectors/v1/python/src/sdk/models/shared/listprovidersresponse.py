@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import provider
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListProvidersResponse:
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextPageToken' }})
-    providers: Optional[List[provider.Provider]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'providers' }})
-    unreachable: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'unreachable' }})
+    r"""ListProvidersResponse
+    Response message for Connectors.ListProviders.
+    """
+    
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextPageToken') }})
+    providers: Optional[List[Provider]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('providers') }})
+    unreachable: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('unreachable') }})
     

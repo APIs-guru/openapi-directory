@@ -14,18 +14,18 @@ class RetrainRequestBody:
 
 @dataclass
 class RetrainSecurity:
-    bearer_token: shared.SchemeBearerToken = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_token: shared.SchemeBearerToken = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class RetrainRequest:
+    security: RetrainSecurity = field()
     request: Optional[RetrainRequestBody] = field(default=None, metadata={'request': { 'media_type': 'multipart/form-data' }})
-    security: RetrainSecurity = field(default=None)
     
 
 @dataclass
 class RetrainResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     train_response: Optional[shared.TrainResponse] = field(default=None)
     

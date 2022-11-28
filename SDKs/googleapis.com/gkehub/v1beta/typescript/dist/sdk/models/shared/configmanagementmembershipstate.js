@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConfigManagementBinauthzState } from "./configmanagementbinauthzstate";
 import { ConfigManagementConfigSyncState } from "./configmanagementconfigsyncstate";
 import { ConfigManagementHierarchyControllerState } from "./configmanagementhierarchycontrollerstate";
@@ -39,31 +39,31 @@ var ConfigManagementMembershipState = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=binauthzState" }),
+        SpeakeasyMetadata({ data: "json, name=binauthzState" }),
         __metadata("design:type", ConfigManagementBinauthzState)
     ], ConfigManagementMembershipState.prototype, "binauthzState", void 0);
     __decorate([
-        Metadata({ data: "json, name=clusterName" }),
+        SpeakeasyMetadata({ data: "json, name=clusterName" }),
         __metadata("design:type", String)
     ], ConfigManagementMembershipState.prototype, "clusterName", void 0);
     __decorate([
-        Metadata({ data: "json, name=configSyncState" }),
+        SpeakeasyMetadata({ data: "json, name=configSyncState" }),
         __metadata("design:type", ConfigManagementConfigSyncState)
     ], ConfigManagementMembershipState.prototype, "configSyncState", void 0);
     __decorate([
-        Metadata({ data: "json, name=hierarchyControllerState" }),
+        SpeakeasyMetadata({ data: "json, name=hierarchyControllerState" }),
         __metadata("design:type", ConfigManagementHierarchyControllerState)
     ], ConfigManagementMembershipState.prototype, "hierarchyControllerState", void 0);
     __decorate([
-        Metadata({ data: "json, name=membershipSpec" }),
+        SpeakeasyMetadata({ data: "json, name=membershipSpec" }),
         __metadata("design:type", ConfigManagementMembershipSpec)
     ], ConfigManagementMembershipState.prototype, "membershipSpec", void 0);
     __decorate([
-        Metadata({ data: "json, name=operatorState" }),
+        SpeakeasyMetadata({ data: "json, name=operatorState" }),
         __metadata("design:type", ConfigManagementOperatorState)
     ], ConfigManagementMembershipState.prototype, "operatorState", void 0);
     __decorate([
-        Metadata({ data: "json, name=policyControllerState" }),
+        SpeakeasyMetadata({ data: "json, name=policyControllerState" }),
         __metadata("design:type", ConfigManagementPolicyControllerState)
     ], ConfigManagementMembershipState.prototype, "policyControllerState", void 0);
     return ConfigManagementMembershipState;

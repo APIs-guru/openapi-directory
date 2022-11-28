@@ -1,17 +1,22 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import cloudwatchmetricsdimension
-from . import cloudwatchmetricsstat_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CloudWatchMetricsDetail:
-    dimensions: Optional[List[cloudwatchmetricsdimension.CloudWatchMetricsDimension]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Dimensions' }})
-    metric_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MetricName' }})
-    namespace: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Namespace' }})
-    period: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Period' }})
-    stat: Optional[cloudwatchmetricsstat_enum.CloudWatchMetricsStatEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Stat' }})
-    unit: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Unit' }})
+    r"""CloudWatchMetricsDetail
+     Information about an Amazon CloudWatch metric. 
+    """
+    
+    dimensions: Optional[List[CloudWatchMetricsDimension]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Dimensions') }})
+    metric_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MetricName') }})
+    namespace: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Namespace') }})
+    period: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Period') }})
+    stat: Optional[CloudWatchMetricsStatEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Stat') }})
+    unit: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Unit') }})
     

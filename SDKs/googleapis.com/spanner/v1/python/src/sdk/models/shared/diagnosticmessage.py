@@ -1,9 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import localizedstring
-from . import localizedstring
-from . import localizedstring
+from sdk import utils
+from . import *
 
 class DiagnosticMessageSeverityEnum(str, Enum):
     SEVERITY_UNSPECIFIED = "SEVERITY_UNSPECIFIED"
@@ -16,9 +16,13 @@ class DiagnosticMessageSeverityEnum(str, Enum):
 @dataclass_json
 @dataclass
 class DiagnosticMessage:
-    info: Optional[localizedstring.LocalizedString] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'info' }})
-    metric: Optional[localizedstring.LocalizedString] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metric' }})
-    metric_specific: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metricSpecific' }})
-    severity: Optional[DiagnosticMessageSeverityEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'severity' }})
-    short_message: Optional[localizedstring.LocalizedString] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'shortMessage' }})
+    r"""DiagnosticMessage
+    A message representing the key visualizer diagnostic messages.
+    """
+    
+    info: Optional[LocalizedString] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('info') }})
+    metric: Optional[LocalizedString] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('metric') }})
+    metric_specific: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('metricSpecific') }})
+    severity: Optional[DiagnosticMessageSeverityEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('severity') }})
+    short_message: Optional[LocalizedString] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('shortMessage') }})
     

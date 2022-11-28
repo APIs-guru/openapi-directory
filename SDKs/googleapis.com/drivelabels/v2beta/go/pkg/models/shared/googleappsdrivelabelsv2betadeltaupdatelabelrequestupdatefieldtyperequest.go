@@ -1,12 +1,11 @@
 package shared
 
-type GoogleAppsDriveLabelsV2betaDeltaUpdateLabelRequestUpdateFieldTypeRequest struct {
-	DateOptions      *GoogleAppsDriveLabelsV2betaFieldDateOptions      `json:"dateOptions,omitempty"`
-	ID               *string                                           `json:"id,omitempty"`
-	IntegerOptions   *GoogleAppsDriveLabelsV2betaFieldIntegerOptions   `json:"integerOptions,omitempty"`
-	LongTextOptions  *GoogleAppsDriveLabelsV2betaFieldLongTextOptions  `json:"longTextOptions,omitempty"`
-	SelectionOptions *GoogleAppsDriveLabelsV2betaFieldSelectionOptions `json:"selectionOptions,omitempty"`
-	TextOptions      *GoogleAppsDriveLabelsV2betaFieldTextOptions      `json:"textOptions,omitempty"`
-	UpdateMask       *string                                           `json:"updateMask,omitempty"`
-	UserOptions      *GoogleAppsDriveLabelsV2betaFieldUserOptions      `json:"userOptions,omitempty"`
+// GoogleAppsDriveLabelsV2betaDeltaUpdateLabelRequestUpdateFieldTypeRequestInput
+// Request to change the type of a Field.
+type GoogleAppsDriveLabelsV2betaDeltaUpdateLabelRequestUpdateFieldTypeRequestInput struct {
+	DateOptions      *GoogleAppsDriveLabelsV2betaFieldDateOptionsInput      `json:"dateOptions,omitempty"`
+	ID               *string                                                `json:"id,omitempty"`
+	SelectionOptions *GoogleAppsDriveLabelsV2betaFieldSelectionOptionsInput `json:"selectionOptions,omitempty"`
+	UpdateMask       *string                                                `json:"updateMask,omitempty"`
+	UserOptions      *GoogleAppsDriveLabelsV2betaFieldUserOptions           `json:"userOptions,omitempty"`
 }

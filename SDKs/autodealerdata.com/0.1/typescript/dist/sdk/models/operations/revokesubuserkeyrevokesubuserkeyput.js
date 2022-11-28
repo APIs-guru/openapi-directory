@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var RevokeSubUserKeyRevokeSubUserKeyPutQueryParams = /** @class */ (function (_super) {
     __extends(RevokeSubUserKeyRevokeSubUserKeyPutQueryParams, _super);
@@ -30,15 +30,15 @@ var RevokeSubUserKeyRevokeSubUserKeyPutQueryParams = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=apiID" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=apiID" }),
         __metadata("design:type", String)
     ], RevokeSubUserKeyRevokeSubUserKeyPutQueryParams.prototype, "apiId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=apiKey" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=apiKey" }),
         __metadata("design:type", String)
     ], RevokeSubUserKeyRevokeSubUserKeyPutQueryParams.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=subUserKeyUUID" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=subUserKeyUUID" }),
         __metadata("design:type", String)
     ], RevokeSubUserKeyRevokeSubUserKeyPutQueryParams.prototype, "subUserKeyUuid", void 0);
     return RevokeSubUserKeyRevokeSubUserKeyPutQueryParams;
@@ -50,7 +50,7 @@ var RevokeSubUserKeyRevokeSubUserKeyPutRequest = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", RevokeSubUserKeyRevokeSubUserKeyPutQueryParams)
     ], RevokeSubUserKeyRevokeSubUserKeyPutRequest.prototype, "queryParams", void 0);
     return RevokeSubUserKeyRevokeSubUserKeyPutRequest;
@@ -62,19 +62,19 @@ var RevokeSubUserKeyRevokeSubUserKeyPutResponse = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], RevokeSubUserKeyRevokeSubUserKeyPutResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.GenericResponse)
     ], RevokeSubUserKeyRevokeSubUserKeyPutResponse.prototype, "genericResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.HttpValidationError)
     ], RevokeSubUserKeyRevokeSubUserKeyPutResponse.prototype, "httpValidationError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], RevokeSubUserKeyRevokeSubUserKeyPutResponse.prototype, "statusCode", void 0);
     return RevokeSubUserKeyRevokeSubUserKeyPutResponse;

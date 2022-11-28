@@ -13,6 +13,8 @@ const (
 	CallToActionActionTypeEnumCall                  CallToActionActionTypeEnum = "CALL"
 )
 
+// CallToAction
+// An action that is performed when the user clicks through the post
 type CallToAction struct {
 	ActionType *CallToActionActionTypeEnum `json:"actionType,omitempty"`
 	URL        *string                     `json:"url,omitempty"`

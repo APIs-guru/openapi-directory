@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ContentRatingCodeEnum {
-    Drugs = "drugs"
-,    Language = "language"
-,    Nudity = "nudity"
-,    Safe = "safe"
-,    Unrated = "unrated"
-,    Violence = "violence"
+    Drugs = "drugs",
+    Language = "language",
+    Nudity = "nudity",
+    Safe = "safe",
+    Unrated = "unrated",
+    Violence = "violence"
 }
 
 
 export class ContentRating extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code: ContentRatingCodeEnum;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }

@@ -1,21 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { Cluster } from "./cluster";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ClusterInput } from "./cluster";
 
 
-// CreateClusterRequest
+
+// CreateClusterRequestInput
 /** 
  * CreateClusterRequest creates a cluster.
 **/
-export class CreateClusterRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cluster" })
-  cluster?: Cluster;
+export class CreateClusterRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=cluster" })
+  cluster?: ClusterInput;
 
-  @Metadata({ data: "json, name=parent" })
+  @SpeakeasyMetadata({ data: "json, name=parent" })
   parent?: string;
 
-  @Metadata({ data: "json, name=projectId" })
+  @SpeakeasyMetadata({ data: "json, name=projectId" })
   projectId?: string;
 
-  @Metadata({ data: "json, name=zone" })
+  @SpeakeasyMetadata({ data: "json, name=zone" })
   zone?: string;
 }

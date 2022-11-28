@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PostModalitiesIdFindPatientPathParams = /** @class */ (function (_super) {
     __extends(PostModalitiesIdFindPatientPathParams, _super);
     function PostModalitiesIdFindPatientPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], PostModalitiesIdFindPatientPathParams.prototype, "id", void 0);
     return PostModalitiesIdFindPatientPathParams;
@@ -41,11 +41,11 @@ var PostModalitiesIdFindPatientRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostModalitiesIdFindPatientPathParams)
     ], PostModalitiesIdFindPatientRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", Object)
     ], PostModalitiesIdFindPatientRequest.prototype, "request", void 0);
     return PostModalitiesIdFindPatientRequest;
@@ -57,15 +57,15 @@ var PostModalitiesIdFindPatientResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostModalitiesIdFindPatientResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PostModalitiesIdFindPatientResponse.prototype, "postModalitiesIdFindPatient200ApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostModalitiesIdFindPatientResponse.prototype, "statusCode", void 0);
     return PostModalitiesIdFindPatientResponse;

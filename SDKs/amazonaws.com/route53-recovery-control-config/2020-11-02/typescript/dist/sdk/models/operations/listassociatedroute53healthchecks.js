@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ListAssociatedRoute53HealthChecksPathParams = /** @class */ (function (_super) {
     __extends(ListAssociatedRoute53HealthChecksPathParams, _super);
@@ -30,7 +30,7 @@ var ListAssociatedRoute53HealthChecksPathParams = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=RoutingControlArn" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=RoutingControlArn" }),
         __metadata("design:type", String)
     ], ListAssociatedRoute53HealthChecksPathParams.prototype, "routingControlArn", void 0);
     return ListAssociatedRoute53HealthChecksPathParams;
@@ -42,11 +42,11 @@ var ListAssociatedRoute53HealthChecksQueryParams = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=MaxResults" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MaxResults" }),
         __metadata("design:type", Number)
     ], ListAssociatedRoute53HealthChecksQueryParams.prototype, "maxResults", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=NextToken" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=NextToken" }),
         __metadata("design:type", String)
     ], ListAssociatedRoute53HealthChecksQueryParams.prototype, "nextToken", void 0);
     return ListAssociatedRoute53HealthChecksQueryParams;
@@ -58,31 +58,31 @@ var ListAssociatedRoute53HealthChecksHeaders = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], ListAssociatedRoute53HealthChecksHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], ListAssociatedRoute53HealthChecksHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], ListAssociatedRoute53HealthChecksHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], ListAssociatedRoute53HealthChecksHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], ListAssociatedRoute53HealthChecksHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], ListAssociatedRoute53HealthChecksHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], ListAssociatedRoute53HealthChecksHeaders.prototype, "xAmzSignedHeaders", void 0);
     return ListAssociatedRoute53HealthChecksHeaders;
@@ -94,15 +94,15 @@ var ListAssociatedRoute53HealthChecksRequest = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ListAssociatedRoute53HealthChecksPathParams)
     ], ListAssociatedRoute53HealthChecksRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ListAssociatedRoute53HealthChecksQueryParams)
     ], ListAssociatedRoute53HealthChecksRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ListAssociatedRoute53HealthChecksHeaders)
     ], ListAssociatedRoute53HealthChecksRequest.prototype, "headers", void 0);
     return ListAssociatedRoute53HealthChecksRequest;
@@ -114,27 +114,27 @@ var ListAssociatedRoute53HealthChecksResponse = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ListAssociatedRoute53HealthChecksResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ListAssociatedRoute53HealthChecksResponse.prototype, "internalServerException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ListAssociatedRoute53HealthChecksResponse)
     ], ListAssociatedRoute53HealthChecksResponse.prototype, "listAssociatedRoute53HealthChecksResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ListAssociatedRoute53HealthChecksResponse.prototype, "resourceNotFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ListAssociatedRoute53HealthChecksResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ListAssociatedRoute53HealthChecksResponse.prototype, "validationException", void 0);
     return ListAssociatedRoute53HealthChecksResponse;

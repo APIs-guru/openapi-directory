@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Disk
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes the data disk used by a workflow job.
 **/
 export class Disk extends SpeakeasyBase {
-  @Metadata({ data: "json, name=diskType" })
+  @SpeakeasyMetadata({ data: "json, name=diskType" })
   diskType?: string;
 
-  @Metadata({ data: "json, name=mountPoint" })
+  @SpeakeasyMetadata({ data: "json, name=mountPoint" })
   mountPoint?: string;
 
-  @Metadata({ data: "json, name=sizeGb" })
+  @SpeakeasyMetadata({ data: "json, name=sizeGb" })
   sizeGb?: number;
 }

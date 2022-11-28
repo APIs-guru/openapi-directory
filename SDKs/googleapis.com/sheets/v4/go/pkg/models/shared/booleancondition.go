@@ -37,6 +37,8 @@ const (
 	BooleanConditionTypeEnumDateNotEq                BooleanConditionTypeEnum = "DATE_NOT_EQ"
 )
 
+// BooleanCondition
+// A condition that can evaluate to true or false. BooleanConditions are used by conditional formatting, data validation, and the criteria in filters.
 type BooleanCondition struct {
 	Type   *BooleanConditionTypeEnum `json:"type,omitempty"`
 	Values []ConditionValue          `json:"values,omitempty"`

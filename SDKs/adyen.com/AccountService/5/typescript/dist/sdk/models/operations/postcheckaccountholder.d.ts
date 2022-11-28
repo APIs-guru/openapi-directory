@@ -1,14 +1,8 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export declare class PostCheckAccountHolderSecurityOption1 extends SpeakeasyBase {
-    basicAuth: shared.SchemeBasicAuth;
-}
-export declare class PostCheckAccountHolderSecurityOption2 extends SpeakeasyBase {
-    apiKeyAuth: shared.SchemeApiKeyAuth;
-}
 export declare class PostCheckAccountHolderSecurity extends SpeakeasyBase {
-    option1?: PostCheckAccountHolderSecurityOption1;
-    option2?: PostCheckAccountHolderSecurityOption2;
+    basicAuth?: shared.SchemeBasicAuth;
+    apiKeyAuth?: shared.SchemeApiKeyAuth;
 }
 export declare class PostCheckAccountHolderRequest extends SpeakeasyBase {
     request?: any;

@@ -5,10 +5,6 @@ type GetEnvironmentRelationsPathParams struct {
 	APIVersionID string `pathParam:"style=simple,explode=false,name=apiVersionId"`
 }
 
-type GetEnvironmentRelationsRequest struct {
-	PathParams GetEnvironmentRelationsPathParams
-}
-
 type GetEnvironmentRelations200ApplicationJSONEnvironment struct {
 	ID        *string `json:"id,omitempty"`
 	Name      *string `json:"name,omitempty"`
@@ -17,6 +13,10 @@ type GetEnvironmentRelations200ApplicationJSONEnvironment struct {
 
 type GetEnvironmentRelations200ApplicationJSON struct {
 	Environment []GetEnvironmentRelations200ApplicationJSONEnvironment `json:"environment,omitempty"`
+}
+
+type GetEnvironmentRelationsRequest struct {
+	PathParams GetEnvironmentRelationsPathParams
 }
 
 type GetEnvironmentRelationsResponse struct {

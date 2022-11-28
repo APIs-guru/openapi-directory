@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { S3Destination } from "./s3destination";
 /**
  * Describes the destination of the recommendations export and metadata files.

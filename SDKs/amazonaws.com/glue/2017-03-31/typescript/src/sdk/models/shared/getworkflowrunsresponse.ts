@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WorkflowRun } from "./workflowrun";
 
 
+
 export class GetWorkflowRunsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=Runs", elemType: shared.WorkflowRun })
+  @SpeakeasyMetadata({ data: "json, name=Runs", elemType: WorkflowRun })
   runs?: WorkflowRun[];
 }

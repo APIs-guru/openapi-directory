@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LabelingJobDataAttributes } from "./labelingjobdataattributes";
 import { LabelingJobDataSource } from "./labelingjobdatasource";
+
 
 
 // LabelingJobInputConfig
@@ -8,9 +9,9 @@ import { LabelingJobDataSource } from "./labelingjobdatasource";
  * Input configuration information for a labeling job.
 **/
 export class LabelingJobInputConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DataAttributes" })
+  @SpeakeasyMetadata({ data: "json, name=DataAttributes" })
   dataAttributes?: LabelingJobDataAttributes;
 
-  @Metadata({ data: "json, name=DataSource" })
+  @SpeakeasyMetadata({ data: "json, name=DataSource" })
   dataSource: LabelingJobDataSource;
 }

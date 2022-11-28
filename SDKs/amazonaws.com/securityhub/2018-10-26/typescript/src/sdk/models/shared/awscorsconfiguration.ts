@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsCorsConfiguration
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains the cross-origin resource sharing (CORS) configuration for the API. CORS is only supported for HTTP APIs.
 **/
 export class AwsCorsConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AllowCredentials" })
+  @SpeakeasyMetadata({ data: "json, name=AllowCredentials" })
   allowCredentials?: boolean;
 
-  @Metadata({ data: "json, name=AllowHeaders" })
+  @SpeakeasyMetadata({ data: "json, name=AllowHeaders" })
   allowHeaders?: string[];
 
-  @Metadata({ data: "json, name=AllowMethods" })
+  @SpeakeasyMetadata({ data: "json, name=AllowMethods" })
   allowMethods?: string[];
 
-  @Metadata({ data: "json, name=AllowOrigins" })
+  @SpeakeasyMetadata({ data: "json, name=AllowOrigins" })
   allowOrigins?: string[];
 
-  @Metadata({ data: "json, name=ExposeHeaders" })
+  @SpeakeasyMetadata({ data: "json, name=ExposeHeaders" })
   exposeHeaders?: string[];
 
-  @Metadata({ data: "json, name=MaxAge" })
+  @SpeakeasyMetadata({ data: "json, name=MaxAge" })
   maxAge?: number;
 }

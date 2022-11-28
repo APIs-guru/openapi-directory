@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccessConfig } from "./accessconfig";
+
 
 
 // NetworkInterface
@@ -8,12 +8,12 @@ import { AccessConfig } from "./accessconfig";
  * A Compute Engine NetworkInterface resource. Identical to the NetworkInterface on the corresponding Compute Engine resource.
 **/
 export class NetworkInterface extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessConfigs", elemType: shared.AccessConfig })
+  @SpeakeasyMetadata({ data: "json, name=accessConfigs", elemType: AccessConfig })
   accessConfigs?: AccessConfig[];
 
-  @Metadata({ data: "json, name=network" })
+  @SpeakeasyMetadata({ data: "json, name=network" })
   network?: string;
 
-  @Metadata({ data: "json, name=networkIp" })
+  @SpeakeasyMetadata({ data: "json, name=networkIp" })
   networkIp?: string;
 }

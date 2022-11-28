@@ -25,6 +25,19 @@ const (
 	GoogleFirestoreAdminV1DatabaseTypeEnumDatastoreMode           GoogleFirestoreAdminV1DatabaseTypeEnum = "DATASTORE_MODE"
 )
 
+// GoogleFirestoreAdminV1DatabaseInput
+// A Cloud Firestore Database. Currently only one database is allowed per cloud project; this database must have a `database_id` of '(default)'.
+type GoogleFirestoreAdminV1DatabaseInput struct {
+	AppEngineIntegrationMode *GoogleFirestoreAdminV1DatabaseAppEngineIntegrationModeEnum `json:"appEngineIntegrationMode,omitempty"`
+	ConcurrencyMode          *GoogleFirestoreAdminV1DatabaseConcurrencyModeEnum          `json:"concurrencyMode,omitempty"`
+	Etag                     *string                                                     `json:"etag,omitempty"`
+	LocationID               *string                                                     `json:"locationId,omitempty"`
+	Name                     *string                                                     `json:"name,omitempty"`
+	Type                     *GoogleFirestoreAdminV1DatabaseTypeEnum                     `json:"type,omitempty"`
+}
+
+// GoogleFirestoreAdminV1Database
+// A Cloud Firestore Database. Currently only one database is allowed per cloud project; this database must have a `database_id` of '(default)'.
 type GoogleFirestoreAdminV1Database struct {
 	AppEngineIntegrationMode *GoogleFirestoreAdminV1DatabaseAppEngineIntegrationModeEnum `json:"appEngineIntegrationMode,omitempty"`
 	ConcurrencyMode          *GoogleFirestoreAdminV1DatabaseConcurrencyModeEnum          `json:"concurrencyMode,omitempty"`

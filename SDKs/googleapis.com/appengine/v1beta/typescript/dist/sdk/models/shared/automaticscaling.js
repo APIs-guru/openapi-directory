@@ -22,9 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CpuUtilization } from "./cpuutilization";
+import { CustomMetric } from "./custommetric";
 import { DiskUtilization } from "./diskutilization";
 import { NetworkUtilization } from "./networkutilization";
 import { RequestUtilization } from "./requestutilization";
@@ -39,59 +39,59 @@ var AutomaticScaling = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=coolDownPeriod" }),
+        SpeakeasyMetadata({ data: "json, name=coolDownPeriod" }),
         __metadata("design:type", String)
     ], AutomaticScaling.prototype, "coolDownPeriod", void 0);
     __decorate([
-        Metadata({ data: "json, name=cpuUtilization" }),
+        SpeakeasyMetadata({ data: "json, name=cpuUtilization" }),
         __metadata("design:type", CpuUtilization)
     ], AutomaticScaling.prototype, "cpuUtilization", void 0);
     __decorate([
-        Metadata({ data: "json, name=customMetrics", elemType: shared.CustomMetric }),
+        SpeakeasyMetadata({ data: "json, name=customMetrics", elemType: CustomMetric }),
         __metadata("design:type", Array)
     ], AutomaticScaling.prototype, "customMetrics", void 0);
     __decorate([
-        Metadata({ data: "json, name=diskUtilization" }),
+        SpeakeasyMetadata({ data: "json, name=diskUtilization" }),
         __metadata("design:type", DiskUtilization)
     ], AutomaticScaling.prototype, "diskUtilization", void 0);
     __decorate([
-        Metadata({ data: "json, name=maxConcurrentRequests" }),
+        SpeakeasyMetadata({ data: "json, name=maxConcurrentRequests" }),
         __metadata("design:type", Number)
     ], AutomaticScaling.prototype, "maxConcurrentRequests", void 0);
     __decorate([
-        Metadata({ data: "json, name=maxIdleInstances" }),
+        SpeakeasyMetadata({ data: "json, name=maxIdleInstances" }),
         __metadata("design:type", Number)
     ], AutomaticScaling.prototype, "maxIdleInstances", void 0);
     __decorate([
-        Metadata({ data: "json, name=maxPendingLatency" }),
+        SpeakeasyMetadata({ data: "json, name=maxPendingLatency" }),
         __metadata("design:type", String)
     ], AutomaticScaling.prototype, "maxPendingLatency", void 0);
     __decorate([
-        Metadata({ data: "json, name=maxTotalInstances" }),
+        SpeakeasyMetadata({ data: "json, name=maxTotalInstances" }),
         __metadata("design:type", Number)
     ], AutomaticScaling.prototype, "maxTotalInstances", void 0);
     __decorate([
-        Metadata({ data: "json, name=minIdleInstances" }),
+        SpeakeasyMetadata({ data: "json, name=minIdleInstances" }),
         __metadata("design:type", Number)
     ], AutomaticScaling.prototype, "minIdleInstances", void 0);
     __decorate([
-        Metadata({ data: "json, name=minPendingLatency" }),
+        SpeakeasyMetadata({ data: "json, name=minPendingLatency" }),
         __metadata("design:type", String)
     ], AutomaticScaling.prototype, "minPendingLatency", void 0);
     __decorate([
-        Metadata({ data: "json, name=minTotalInstances" }),
+        SpeakeasyMetadata({ data: "json, name=minTotalInstances" }),
         __metadata("design:type", Number)
     ], AutomaticScaling.prototype, "minTotalInstances", void 0);
     __decorate([
-        Metadata({ data: "json, name=networkUtilization" }),
+        SpeakeasyMetadata({ data: "json, name=networkUtilization" }),
         __metadata("design:type", NetworkUtilization)
     ], AutomaticScaling.prototype, "networkUtilization", void 0);
     __decorate([
-        Metadata({ data: "json, name=requestUtilization" }),
+        SpeakeasyMetadata({ data: "json, name=requestUtilization" }),
         __metadata("design:type", RequestUtilization)
     ], AutomaticScaling.prototype, "requestUtilization", void 0);
     __decorate([
-        Metadata({ data: "json, name=standardSchedulerSettings" }),
+        SpeakeasyMetadata({ data: "json, name=standardSchedulerSettings" }),
         __metadata("design:type", StandardSchedulerSettings)
     ], AutomaticScaling.prototype, "standardSchedulerSettings", void 0);
     return AutomaticScaling;

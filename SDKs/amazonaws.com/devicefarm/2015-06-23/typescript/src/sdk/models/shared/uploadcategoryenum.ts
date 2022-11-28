@@ -1,6 +1,7 @@
 
 
+
 export enum UploadCategoryEnum {
-    Curated = "CURATED"
-,    Private = "PRIVATE"
+    Curated = "CURATED",
+    Private = "PRIVATE"
 }

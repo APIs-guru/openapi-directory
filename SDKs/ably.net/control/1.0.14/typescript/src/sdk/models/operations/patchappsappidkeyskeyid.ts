@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PatchAppsAppIdKeysKeyIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=app_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=app_id" })
   appId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=key_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=key_id" })
   keyId: string;
 }
 
 
 export class PatchAppsAppIdKeysKeyIdSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   bearerAuth: shared.SchemeBearerAuth;
 }
 
 
 export class PatchAppsAppIdKeysKeyIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PatchAppsAppIdKeysKeyIdPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: shared.KeyPatch;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: PatchAppsAppIdKeysKeyIdSecurity;
 }
 
 
 export class PatchAppsAppIdKeysKeyIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   keyResponse?: shared.KeyResponse;
 }

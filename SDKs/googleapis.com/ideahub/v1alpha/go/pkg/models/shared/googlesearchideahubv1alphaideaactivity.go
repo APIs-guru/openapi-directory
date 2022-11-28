@@ -10,6 +10,8 @@ const (
 	GoogleSearchIdeahubV1alphaIdeaActivityTypeEnumPostUnpublished GoogleSearchIdeahubV1alphaIdeaActivityTypeEnum = "POST_UNPUBLISHED"
 )
 
+// GoogleSearchIdeahubV1alphaIdeaActivity
+// An idea activity entry.
 type GoogleSearchIdeahubV1alphaIdeaActivity struct {
 	Ideas  []string                                        `json:"ideas,omitempty"`
 	Name   *string                                         `json:"name,omitempty"`

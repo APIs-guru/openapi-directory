@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AssociateConfigurationItemsToApplicationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=applicationConfigurationId" })
+  @SpeakeasyMetadata({ data: "json, name=applicationConfigurationId" })
   applicationConfigurationId: string;
 
-  @Metadata({ data: "json, name=configurationIds" })
+  @SpeakeasyMetadata({ data: "json, name=configurationIds" })
   configurationIds: string[];
 }

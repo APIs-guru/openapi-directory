@@ -1,81 +1,82 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateNetworkSwitchAccessControlListsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
 export enum UpdateNetworkSwitchAccessControlListsRequestBodyRulesIpVersionEnum {
-    Any = "any"
-,    Ipv4 = "ipv4"
-,    Ipv6 = "ipv6"
+    Any = "any",
+    Ipv4 = "ipv4",
+    Ipv6 = "ipv6"
 }
 
 export enum UpdateNetworkSwitchAccessControlListsRequestBodyRulesPolicyEnum {
-    Allow = "allow"
-,    Deny = "deny"
+    Allow = "allow",
+    Deny = "deny"
 }
 
 export enum UpdateNetworkSwitchAccessControlListsRequestBodyRulesProtocolEnum {
-    Tcp = "tcp"
-,    Udp = "udp"
-,    Any = "any"
+    Tcp = "tcp",
+    Udp = "udp",
+    Any = "any"
 }
 
 
 export class UpdateNetworkSwitchAccessControlListsRequestBodyRules extends SpeakeasyBase {
-  @Metadata({ data: "json, name=comment" })
+  @SpeakeasyMetadata({ data: "json, name=comment" })
   comment?: string;
 
-  @Metadata({ data: "json, name=dstCidr" })
+  @SpeakeasyMetadata({ data: "json, name=dstCidr" })
   dstCidr: string;
 
-  @Metadata({ data: "json, name=dstPort" })
+  @SpeakeasyMetadata({ data: "json, name=dstPort" })
   dstPort?: string;
 
-  @Metadata({ data: "json, name=ipVersion" })
+  @SpeakeasyMetadata({ data: "json, name=ipVersion" })
   ipVersion?: UpdateNetworkSwitchAccessControlListsRequestBodyRulesIpVersionEnum;
 
-  @Metadata({ data: "json, name=policy" })
+  @SpeakeasyMetadata({ data: "json, name=policy" })
   policy: UpdateNetworkSwitchAccessControlListsRequestBodyRulesPolicyEnum;
 
-  @Metadata({ data: "json, name=protocol" })
+  @SpeakeasyMetadata({ data: "json, name=protocol" })
   protocol: UpdateNetworkSwitchAccessControlListsRequestBodyRulesProtocolEnum;
 
-  @Metadata({ data: "json, name=srcCidr" })
+  @SpeakeasyMetadata({ data: "json, name=srcCidr" })
   srcCidr: string;
 
-  @Metadata({ data: "json, name=srcPort" })
+  @SpeakeasyMetadata({ data: "json, name=srcPort" })
   srcPort?: string;
 
-  @Metadata({ data: "json, name=vlan" })
+  @SpeakeasyMetadata({ data: "json, name=vlan" })
   vlan?: string;
 }
 
 
 export class UpdateNetworkSwitchAccessControlListsRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=rules", elemType: operations.UpdateNetworkSwitchAccessControlListsRequestBodyRules })
+  @SpeakeasyMetadata({ data: "json, name=rules", elemType: UpdateNetworkSwitchAccessControlListsRequestBodyRules })
   rules: UpdateNetworkSwitchAccessControlListsRequestBodyRules[];
 }
 
 
 export class UpdateNetworkSwitchAccessControlListsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateNetworkSwitchAccessControlListsPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdateNetworkSwitchAccessControlListsRequestBody;
 }
 
 
 export class UpdateNetworkSwitchAccessControlListsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateNetworkSwitchAccessControlLists200ApplicationJsonObject?: Map<string, any>;
 }

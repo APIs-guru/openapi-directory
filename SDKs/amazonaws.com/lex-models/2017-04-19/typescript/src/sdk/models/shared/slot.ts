@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SlotDefaultValueSpec } from "./slotdefaultvaluespec";
 import { ObfuscationSettingEnum } from "./obfuscationsettingenum";
 import { SlotConstraintEnum } from "./slotconstraintenum";
 import { Prompt } from "./prompt";
+
 
 
 // Slot
@@ -10,36 +11,36 @@ import { Prompt } from "./prompt";
  * Identifies the version of a specific slot.
 **/
 export class Slot extends SpeakeasyBase {
-  @Metadata({ data: "json, name=defaultValueSpec" })
+  @SpeakeasyMetadata({ data: "json, name=defaultValueSpec" })
   defaultValueSpec?: SlotDefaultValueSpec;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=obfuscationSetting" })
+  @SpeakeasyMetadata({ data: "json, name=obfuscationSetting" })
   obfuscationSetting?: ObfuscationSettingEnum;
 
-  @Metadata({ data: "json, name=priority" })
+  @SpeakeasyMetadata({ data: "json, name=priority" })
   priority?: number;
 
-  @Metadata({ data: "json, name=responseCard" })
+  @SpeakeasyMetadata({ data: "json, name=responseCard" })
   responseCard?: string;
 
-  @Metadata({ data: "json, name=sampleUtterances" })
+  @SpeakeasyMetadata({ data: "json, name=sampleUtterances" })
   sampleUtterances?: string[];
 
-  @Metadata({ data: "json, name=slotConstraint" })
+  @SpeakeasyMetadata({ data: "json, name=slotConstraint" })
   slotConstraint: SlotConstraintEnum;
 
-  @Metadata({ data: "json, name=slotType" })
+  @SpeakeasyMetadata({ data: "json, name=slotType" })
   slotType?: string;
 
-  @Metadata({ data: "json, name=slotTypeVersion" })
+  @SpeakeasyMetadata({ data: "json, name=slotTypeVersion" })
   slotTypeVersion?: string;
 
-  @Metadata({ data: "json, name=valueElicitationPrompt" })
+  @SpeakeasyMetadata({ data: "json, name=valueElicitationPrompt" })
   valueElicitationPrompt?: Prompt;
 }

@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import conditionalforwarder
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeConditionalForwardersResult:
-    conditional_forwarders: Optional[List[conditionalforwarder.ConditionalForwarder]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ConditionalForwarders' }})
+    r"""DescribeConditionalForwardersResult
+    The result of a DescribeConditionalForwarder request.
+    """
+    
+    conditional_forwarders: Optional[List[ConditionalForwarder]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ConditionalForwarders') }})
     

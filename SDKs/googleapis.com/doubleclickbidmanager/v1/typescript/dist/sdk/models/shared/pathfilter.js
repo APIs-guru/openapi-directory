@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { EventFilter } from "./eventfilter";
 export var PathFilterPathMatchPositionEnum;
 (function (PathFilterPathMatchPositionEnum) {
     PathFilterPathMatchPositionEnum["Any"] = "ANY";
@@ -40,11 +40,11 @@ var PathFilter = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=eventFilters", elemType: shared.EventFilter }),
+        SpeakeasyMetadata({ data: "json, name=eventFilters", elemType: EventFilter }),
         __metadata("design:type", Array)
     ], PathFilter.prototype, "eventFilters", void 0);
     __decorate([
-        Metadata({ data: "json, name=pathMatchPosition" }),
+        SpeakeasyMetadata({ data: "json, name=pathMatchPosition" }),
         __metadata("design:type", String)
     ], PathFilter.prototype, "pathMatchPosition", void 0);
     return PathFilter;

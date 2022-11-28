@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BeaconInfo } from "./beaconinfo";
+
 
 
 // GetInfoForObservedBeaconsResponse
@@ -8,6 +8,6 @@ import { BeaconInfo } from "./beaconinfo";
  * Information about the requested beacons, optionally including attachment data.
 **/
 export class GetInfoForObservedBeaconsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=beacons", elemType: shared.BeaconInfo })
+  @SpeakeasyMetadata({ data: "json, name=beacons", elemType: BeaconInfo })
   beacons?: BeaconInfo[];
 }

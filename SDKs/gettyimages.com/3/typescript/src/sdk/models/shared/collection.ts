@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Collection extends SpeakeasyBase {
-  @Metadata({ data: "json, name=asset_family" })
+  @SpeakeasyMetadata({ data: "json, name=asset_family" })
   assetFamily?: string;
 
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=license_model" })
+  @SpeakeasyMetadata({ data: "json, name=license_model" })
   licenseModel?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=product_types" })
+  @SpeakeasyMetadata({ data: "json, name=product_types" })
   productTypes?: string[];
 }

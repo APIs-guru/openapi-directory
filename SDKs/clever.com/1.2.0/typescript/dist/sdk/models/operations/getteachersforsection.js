@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetTeachersForSectionPathParams = /** @class */ (function (_super) {
     __extends(GetTeachersForSectionPathParams, _super);
@@ -30,7 +30,7 @@ var GetTeachersForSectionPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], GetTeachersForSectionPathParams.prototype, "id", void 0);
     return GetTeachersForSectionPathParams;
@@ -42,15 +42,15 @@ var GetTeachersForSectionQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ending_before" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ending_before" }),
         __metadata("design:type", String)
     ], GetTeachersForSectionQueryParams.prototype, "endingBefore", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", Number)
     ], GetTeachersForSectionQueryParams.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=starting_after" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=starting_after" }),
         __metadata("design:type", String)
     ], GetTeachersForSectionQueryParams.prototype, "startingAfter", void 0);
     return GetTeachersForSectionQueryParams;
@@ -62,11 +62,11 @@ var GetTeachersForSectionRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetTeachersForSectionPathParams)
     ], GetTeachersForSectionRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetTeachersForSectionQueryParams)
     ], GetTeachersForSectionRequest.prototype, "queryParams", void 0);
     return GetTeachersForSectionRequest;
@@ -78,19 +78,19 @@ var GetTeachersForSectionResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetTeachersForSectionResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.NotFound)
     ], GetTeachersForSectionResponse.prototype, "notFound", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetTeachersForSectionResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.TeachersResponse)
     ], GetTeachersForSectionResponse.prototype, "teachersResponse", void 0);
     return GetTeachersForSectionResponse;

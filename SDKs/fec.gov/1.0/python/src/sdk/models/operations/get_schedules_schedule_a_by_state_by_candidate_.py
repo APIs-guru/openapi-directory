@@ -1,13 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetSchedulesScheduleAByStateByCandidateQueryParams:
-    api_key: str = field(default=None, metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
-    candidate_id: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'candidate_id', 'style': 'form', 'explode': True }})
-    cycle: List[int] = field(default=None, metadata={'query_param': { 'field_name': 'cycle', 'style': 'form', 'explode': True }})
+    api_key: str = field(metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
+    candidate_id: List[str] = field(metadata={'query_param': { 'field_name': 'candidate_id', 'style': 'form', 'explode': True }})
+    cycle: List[int] = field(metadata={'query_param': { 'field_name': 'cycle', 'style': 'form', 'explode': True }})
     election_full: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'election_full', 'style': 'form', 'explode': True }})
     page: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'page', 'style': 'form', 'explode': True }})
     per_page: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'per_page', 'style': 'form', 'explode': True }})
@@ -19,12 +22,12 @@ class GetSchedulesScheduleAByStateByCandidateQueryParams:
 
 @dataclass
 class GetSchedulesScheduleAByStateByCandidateRequest:
-    query_params: GetSchedulesScheduleAByStateByCandidateQueryParams = field(default=None)
+    query_params: GetSchedulesScheduleAByStateByCandidateQueryParams = field()
     
 
 @dataclass
 class GetSchedulesScheduleAByStateByCandidateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     schedule_a_by_state_candidate_page: Optional[shared.ScheduleAByStateCandidatePage] = field(default=None)
-    status_code: int = field(default=None)
     

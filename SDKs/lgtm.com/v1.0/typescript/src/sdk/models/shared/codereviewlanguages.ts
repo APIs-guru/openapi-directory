@@ -1,30 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CodereviewAlerts } from "./codereviewalerts";
 
+
 export enum CodereviewLanguagesStatusEnum {
-    Pending = "pending"
-,    Failure = "failure"
-,    Success = "success"
+    Pending = "pending",
+    Failure = "failure",
+    Success = "success"
 }
 
 
 export class CodereviewLanguages extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alerts", elemType: shared.CodereviewAlerts })
+  @SpeakeasyMetadata({ data: "json, name=alerts", elemType: CodereviewAlerts })
   alerts?: CodereviewAlerts[];
 
-  @Metadata({ data: "json, name=fixed" })
+  @SpeakeasyMetadata({ data: "json, name=fixed" })
   fixed?: number;
 
-  @Metadata({ data: "json, name=language" })
+  @SpeakeasyMetadata({ data: "json, name=language" })
   language?: string;
 
-  @Metadata({ data: "json, name=new" })
+  @SpeakeasyMetadata({ data: "json, name=new" })
   new?: number;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: CodereviewLanguagesStatusEnum;
 
-  @Metadata({ data: "json, name=status-message" })
+  @SpeakeasyMetadata({ data: "json, name=status-message" })
   statusMessage?: string;
 }

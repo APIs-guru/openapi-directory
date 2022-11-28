@@ -13,11 +13,6 @@ type GetMostsharedSectionTimePeriodJSONSecurity struct {
 	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=query"`
 }
 
-type GetMostsharedSectionTimePeriodJSONRequest struct {
-	PathParams GetMostsharedSectionTimePeriodJSONPathParams
-	Security   GetMostsharedSectionTimePeriodJSONSecurity
-}
-
 type GetMostsharedSectionTimePeriodJSON200ApplicationJSON struct {
 	Copyright  *string          `json:"copyright,omitempty"`
 	NumResults *int64           `json:"num_results,omitempty"`
@@ -30,6 +25,11 @@ type GetMostsharedSectionTimePeriodJSON400ApplicationJSON struct {
 	Errors    []string      `json:"errors,omitempty"`
 	Results   []interface{} `json:"results,omitempty"`
 	Status    *string       `json:"status,omitempty"`
+}
+
+type GetMostsharedSectionTimePeriodJSONRequest struct {
+	PathParams GetMostsharedSectionTimePeriodJSONPathParams
+	Security   GetMostsharedSectionTimePeriodJSONSecurity
 }
 
 type GetMostsharedSectionTimePeriodJSONResponse struct {

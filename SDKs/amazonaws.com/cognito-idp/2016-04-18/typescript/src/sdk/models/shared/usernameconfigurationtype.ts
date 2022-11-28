@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // UsernameConfigurationType
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The username configuration type. 
 **/
 export class UsernameConfigurationType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CaseSensitive" })
+  @SpeakeasyMetadata({ data: "json, name=CaseSensitive" })
   caseSensitive: boolean;
 }

@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ConfigSnmPv3 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=context_engine_id" })
+  @SpeakeasyMetadata({ data: "json, name=context_engine_id" })
   contextEngineId?: string;
 
-  @Metadata({ data: "json, name=engine_id" })
+  @SpeakeasyMetadata({ data: "json, name=engine_id" })
   engineId?: string;
 
-  @Metadata({ data: "json, name=usm_db" })
+  @SpeakeasyMetadata({ data: "json, name=usm_db" })
   usmDb?: string;
 
-  @Metadata({ data: "json, name=vacm_db" })
+  @SpeakeasyMetadata({ data: "json, name=vacm_db" })
   vacmDb?: string;
 }

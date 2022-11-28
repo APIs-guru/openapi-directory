@@ -1,5 +1,7 @@
 package shared
 
+// PaginatedPipelineScheduleExecutions
+// A paged list of the executions of a schedule.
 type PaginatedPipelineScheduleExecutions struct {
 	Next     *string                  `json:"next,omitempty"`
 	Page     *int64                   `json:"page,omitempty"`

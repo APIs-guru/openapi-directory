@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GroupV2GetGroupByNamePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=groupName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=groupName" })
   groupName: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=groupType" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=groupType" })
   groupType: number;
 }
 
 
 export class GroupV2GetGroupByNameRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GroupV2GetGroupByNamePathParams;
 }
 
 
 export class GroupV2GetGroupByNameResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

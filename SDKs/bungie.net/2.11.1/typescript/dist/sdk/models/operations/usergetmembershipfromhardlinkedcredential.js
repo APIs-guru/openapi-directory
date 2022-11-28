@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var UserGetMembershipFromHardLinkedCredentialPathParams = /** @class */ (function (_super) {
     __extends(UserGetMembershipFromHardLinkedCredentialPathParams, _super);
     function UserGetMembershipFromHardLinkedCredentialPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=crType" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=crType" }),
         __metadata("design:type", Number)
     ], UserGetMembershipFromHardLinkedCredentialPathParams.prototype, "crType", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=credential" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=credential" }),
         __metadata("design:type", String)
     ], UserGetMembershipFromHardLinkedCredentialPathParams.prototype, "credential", void 0);
     return UserGetMembershipFromHardLinkedCredentialPathParams;
@@ -45,7 +45,7 @@ var UserGetMembershipFromHardLinkedCredentialRequest = /** @class */ (function (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UserGetMembershipFromHardLinkedCredentialPathParams)
     ], UserGetMembershipFromHardLinkedCredentialRequest.prototype, "pathParams", void 0);
     return UserGetMembershipFromHardLinkedCredentialRequest;
@@ -57,15 +57,15 @@ var UserGetMembershipFromHardLinkedCredentialResponse = /** @class */ (function 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], UserGetMembershipFromHardLinkedCredentialResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UserGetMembershipFromHardLinkedCredentialResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UserGetMembershipFromHardLinkedCredentialResponse.prototype, "statusCode", void 0);
     return UserGetMembershipFromHardLinkedCredentialResponse;

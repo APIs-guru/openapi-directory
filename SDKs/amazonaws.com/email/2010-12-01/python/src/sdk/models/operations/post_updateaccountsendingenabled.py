@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostUpdateAccountSendingEnabledActionEnum(str, Enum):
     UPDATE_ACCOUNT_SENDING_ENABLED = "UpdateAccountSendingEnabled"
@@ -10,8 +14,8 @@ class PostUpdateAccountSendingEnabledVersionEnum(str, Enum):
 
 @dataclass
 class PostUpdateAccountSendingEnabledQueryParams:
-    action: PostUpdateAccountSendingEnabledActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostUpdateAccountSendingEnabledVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostUpdateAccountSendingEnabledActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostUpdateAccountSendingEnabledVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,13 +31,13 @@ class PostUpdateAccountSendingEnabledHeaders:
 
 @dataclass
 class PostUpdateAccountSendingEnabledRequest:
-    query_params: PostUpdateAccountSendingEnabledQueryParams = field(default=None)
-    headers: PostUpdateAccountSendingEnabledHeaders = field(default=None)
+    headers: PostUpdateAccountSendingEnabledHeaders = field()
+    query_params: PostUpdateAccountSendingEnabledQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostUpdateAccountSendingEnabledResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

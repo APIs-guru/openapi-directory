@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NodePool } from "./nodepool";
+
 
 
 // ListNodePoolsResponse
@@ -8,6 +8,6 @@ import { NodePool } from "./nodepool";
  * ListNodePoolsResponse is the result of ListNodePoolsRequest.
 **/
 export class ListNodePoolsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nodePools", elemType: shared.NodePool })
+  @SpeakeasyMetadata({ data: "json, name=nodePools", elemType: NodePool })
   nodePools?: NodePool[];
 }

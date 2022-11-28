@@ -4,111 +4,161 @@ type UpdateNetworkFirmwareUpgradesPathParams struct {
 	NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
 }
 
+// UpdateNetworkFirmwareUpgradesRequestBodyProductsApplianceNextUpgradeToVersion
+// The version to be updated to
 type UpdateNetworkFirmwareUpgradesRequestBodyProductsApplianceNextUpgradeToVersion struct {
 	ID *string `json:"id,omitempty"`
 }
 
+// UpdateNetworkFirmwareUpgradesRequestBodyProductsApplianceNextUpgrade
+// The pending firmware upgrade if it exists
 type UpdateNetworkFirmwareUpgradesRequestBodyProductsApplianceNextUpgrade struct {
 	Time      *string                                                                        `json:"time,omitempty"`
 	ToVersion *UpdateNetworkFirmwareUpgradesRequestBodyProductsApplianceNextUpgradeToVersion `json:"toVersion,omitempty"`
 }
 
+// UpdateNetworkFirmwareUpgradesRequestBodyProductsAppliance
+// The network device to be updated
 type UpdateNetworkFirmwareUpgradesRequestBodyProductsAppliance struct {
 	NextUpgrade *UpdateNetworkFirmwareUpgradesRequestBodyProductsApplianceNextUpgrade `json:"nextUpgrade,omitempty"`
 }
 
+// UpdateNetworkFirmwareUpgradesRequestBodyProductsCameraNextUpgradeToVersion
+// The version to be updated to
 type UpdateNetworkFirmwareUpgradesRequestBodyProductsCameraNextUpgradeToVersion struct {
 	ID *string `json:"id,omitempty"`
 }
 
+// UpdateNetworkFirmwareUpgradesRequestBodyProductsCameraNextUpgrade
+// The pending firmware upgrade if it exists
 type UpdateNetworkFirmwareUpgradesRequestBodyProductsCameraNextUpgrade struct {
 	Time      *string                                                                     `json:"time,omitempty"`
 	ToVersion *UpdateNetworkFirmwareUpgradesRequestBodyProductsCameraNextUpgradeToVersion `json:"toVersion,omitempty"`
 }
 
+// UpdateNetworkFirmwareUpgradesRequestBodyProductsCamera
+// The network device to be updated
 type UpdateNetworkFirmwareUpgradesRequestBodyProductsCamera struct {
 	NextUpgrade *UpdateNetworkFirmwareUpgradesRequestBodyProductsCameraNextUpgrade `json:"nextUpgrade,omitempty"`
 }
 
+// UpdateNetworkFirmwareUpgradesRequestBodyProductsCellularGatewayNextUpgradeToVersion
+// The version to be updated to
 type UpdateNetworkFirmwareUpgradesRequestBodyProductsCellularGatewayNextUpgradeToVersion struct {
 	ID *string `json:"id,omitempty"`
 }
 
+// UpdateNetworkFirmwareUpgradesRequestBodyProductsCellularGatewayNextUpgrade
+// The pending firmware upgrade if it exists
 type UpdateNetworkFirmwareUpgradesRequestBodyProductsCellularGatewayNextUpgrade struct {
 	Time      *string                                                                              `json:"time,omitempty"`
 	ToVersion *UpdateNetworkFirmwareUpgradesRequestBodyProductsCellularGatewayNextUpgradeToVersion `json:"toVersion,omitempty"`
 }
 
+// UpdateNetworkFirmwareUpgradesRequestBodyProductsCellularGateway
+// The network device to be updated
 type UpdateNetworkFirmwareUpgradesRequestBodyProductsCellularGateway struct {
 	NextUpgrade *UpdateNetworkFirmwareUpgradesRequestBodyProductsCellularGatewayNextUpgrade `json:"nextUpgrade,omitempty"`
 }
 
+// UpdateNetworkFirmwareUpgradesRequestBodyProductsEnvironmentalNextUpgradeToVersion
+// The version to be updated to
 type UpdateNetworkFirmwareUpgradesRequestBodyProductsEnvironmentalNextUpgradeToVersion struct {
 	ID *string `json:"id,omitempty"`
 }
 
+// UpdateNetworkFirmwareUpgradesRequestBodyProductsEnvironmentalNextUpgrade
+// The pending firmware upgrade if it exists
 type UpdateNetworkFirmwareUpgradesRequestBodyProductsEnvironmentalNextUpgrade struct {
 	Time      *string                                                                            `json:"time,omitempty"`
 	ToVersion *UpdateNetworkFirmwareUpgradesRequestBodyProductsEnvironmentalNextUpgradeToVersion `json:"toVersion,omitempty"`
 }
 
+// UpdateNetworkFirmwareUpgradesRequestBodyProductsEnvironmental
+// The network device to be updated
 type UpdateNetworkFirmwareUpgradesRequestBodyProductsEnvironmental struct {
 	NextUpgrade *UpdateNetworkFirmwareUpgradesRequestBodyProductsEnvironmentalNextUpgrade `json:"nextUpgrade,omitempty"`
 }
 
+// UpdateNetworkFirmwareUpgradesRequestBodyProductsSensorNextUpgradeToVersion
+// The version to be updated to
 type UpdateNetworkFirmwareUpgradesRequestBodyProductsSensorNextUpgradeToVersion struct {
 	ID *string `json:"id,omitempty"`
 }
 
+// UpdateNetworkFirmwareUpgradesRequestBodyProductsSensorNextUpgrade
+// The pending firmware upgrade if it exists
 type UpdateNetworkFirmwareUpgradesRequestBodyProductsSensorNextUpgrade struct {
 	Time      *string                                                                     `json:"time,omitempty"`
 	ToVersion *UpdateNetworkFirmwareUpgradesRequestBodyProductsSensorNextUpgradeToVersion `json:"toVersion,omitempty"`
 }
 
+// UpdateNetworkFirmwareUpgradesRequestBodyProductsSensor
+// The network device to be updated
 type UpdateNetworkFirmwareUpgradesRequestBodyProductsSensor struct {
 	NextUpgrade *UpdateNetworkFirmwareUpgradesRequestBodyProductsSensorNextUpgrade `json:"nextUpgrade,omitempty"`
 }
 
+// UpdateNetworkFirmwareUpgradesRequestBodyProductsSwitchNextUpgradeToVersion
+// The version to be updated to
 type UpdateNetworkFirmwareUpgradesRequestBodyProductsSwitchNextUpgradeToVersion struct {
 	ID *string `json:"id,omitempty"`
 }
 
+// UpdateNetworkFirmwareUpgradesRequestBodyProductsSwitchNextUpgrade
+// The pending firmware upgrade if it exists
 type UpdateNetworkFirmwareUpgradesRequestBodyProductsSwitchNextUpgrade struct {
 	Time      *string                                                                     `json:"time,omitempty"`
 	ToVersion *UpdateNetworkFirmwareUpgradesRequestBodyProductsSwitchNextUpgradeToVersion `json:"toVersion,omitempty"`
 }
 
+// UpdateNetworkFirmwareUpgradesRequestBodyProductsSwitch
+// The network device to be updated
 type UpdateNetworkFirmwareUpgradesRequestBodyProductsSwitch struct {
 	NextUpgrade                  *UpdateNetworkFirmwareUpgradesRequestBodyProductsSwitchNextUpgrade `json:"nextUpgrade,omitempty"`
 	ParticipateInNextBetaRelease *bool                                                              `json:"participateInNextBetaRelease,omitempty"`
 }
 
+// UpdateNetworkFirmwareUpgradesRequestBodyProductsVmxHostNextUpgradeToVersion
+// The version to be updated to
 type UpdateNetworkFirmwareUpgradesRequestBodyProductsVmxHostNextUpgradeToVersion struct {
 	ID *string `json:"id,omitempty"`
 }
 
+// UpdateNetworkFirmwareUpgradesRequestBodyProductsVmxHostNextUpgrade
+// The pending firmware upgrade if it exists
 type UpdateNetworkFirmwareUpgradesRequestBodyProductsVmxHostNextUpgrade struct {
 	Time      *string                                                                      `json:"time,omitempty"`
 	ToVersion *UpdateNetworkFirmwareUpgradesRequestBodyProductsVmxHostNextUpgradeToVersion `json:"toVersion,omitempty"`
 }
 
+// UpdateNetworkFirmwareUpgradesRequestBodyProductsVmxHost
+// The network device to be updated
 type UpdateNetworkFirmwareUpgradesRequestBodyProductsVmxHost struct {
 	NextUpgrade *UpdateNetworkFirmwareUpgradesRequestBodyProductsVmxHostNextUpgrade `json:"nextUpgrade,omitempty"`
 }
 
+// UpdateNetworkFirmwareUpgradesRequestBodyProductsWirelessNextUpgradeToVersion
+// The version to be updated to
 type UpdateNetworkFirmwareUpgradesRequestBodyProductsWirelessNextUpgradeToVersion struct {
 	ID *string `json:"id,omitempty"`
 }
 
+// UpdateNetworkFirmwareUpgradesRequestBodyProductsWirelessNextUpgrade
+// The pending firmware upgrade if it exists
 type UpdateNetworkFirmwareUpgradesRequestBodyProductsWirelessNextUpgrade struct {
 	Time      *string                                                                       `json:"time,omitempty"`
 	ToVersion *UpdateNetworkFirmwareUpgradesRequestBodyProductsWirelessNextUpgradeToVersion `json:"toVersion,omitempty"`
 }
 
+// UpdateNetworkFirmwareUpgradesRequestBodyProductsWireless
+// The network device to be updated
 type UpdateNetworkFirmwareUpgradesRequestBodyProductsWireless struct {
 	NextUpgrade *UpdateNetworkFirmwareUpgradesRequestBodyProductsWirelessNextUpgrade `json:"nextUpgrade,omitempty"`
 }
 
+// UpdateNetworkFirmwareUpgradesRequestBodyProducts
+// Contains information about the network to update
 type UpdateNetworkFirmwareUpgradesRequestBodyProducts struct {
 	Appliance       *UpdateNetworkFirmwareUpgradesRequestBodyProductsAppliance       `json:"appliance,omitempty"`
 	Camera          *UpdateNetworkFirmwareUpgradesRequestBodyProductsCamera          `json:"camera,omitempty"`
@@ -168,6 +218,8 @@ const (
 	UpdateNetworkFirmwareUpgradesRequestBodyUpgradeWindowHourOfDayEnumTwentyThree00 UpdateNetworkFirmwareUpgradesRequestBodyUpgradeWindowHourOfDayEnum = "23:00"
 )
 
+// UpdateNetworkFirmwareUpgradesRequestBodyUpgradeWindow
+// Upgrade window for devices in network
 type UpdateNetworkFirmwareUpgradesRequestBodyUpgradeWindow struct {
 	DayOfWeek *UpdateNetworkFirmwareUpgradesRequestBodyUpgradeWindowDayOfWeekEnum `json:"dayOfWeek,omitempty"`
 	HourOfDay *UpdateNetworkFirmwareUpgradesRequestBodyUpgradeWindowHourOfDayEnum `json:"hourOfDay,omitempty"`

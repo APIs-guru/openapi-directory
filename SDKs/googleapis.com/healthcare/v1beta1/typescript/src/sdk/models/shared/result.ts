@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConsentEvaluation } from "./consentevaluation";
+
 
 
 // Result
@@ -8,12 +8,12 @@ import { ConsentEvaluation } from "./consentevaluation";
  * The consent evaluation result for a single `data_id`.
 **/
 export class Result extends SpeakeasyBase {
-  @Metadata({ data: "json, name=consentDetails", elemType: shared.ConsentEvaluation })
+  @SpeakeasyMetadata({ data: "json, name=consentDetails", elemType: ConsentEvaluation })
   consentDetails?: Map<string, ConsentEvaluation>;
 
-  @Metadata({ data: "json, name=consented" })
+  @SpeakeasyMetadata({ data: "json, name=consented" })
   consented?: boolean;
 
-  @Metadata({ data: "json, name=dataId" })
+  @SpeakeasyMetadata({ data: "json, name=dataId" })
   dataId?: string;
 }

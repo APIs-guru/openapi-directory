@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import List,Optional
@@ -8,7 +8,7 @@ from sdk.models import shared
 
 @dataclass
 class PatchBundlesIDPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -30,13 +30,13 @@ class PatchBundlesIDRequestBody:
 
 @dataclass
 class PatchBundlesIDRequest:
-    path_params: PatchBundlesIDPathParams = field(default=None)
+    path_params: PatchBundlesIDPathParams = field()
     request: Optional[PatchBundlesIDRequestBody] = field(default=None, metadata={'request': { 'media_type': 'multipart/form-data' }})
     
 
 @dataclass
 class PatchBundlesIDResponse:
+    content_type: str = field()
+    status_code: int = field()
     bundle_entity: Optional[shared.BundleEntity] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

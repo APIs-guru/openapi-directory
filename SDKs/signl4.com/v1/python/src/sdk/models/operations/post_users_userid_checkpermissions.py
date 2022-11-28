@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class PostUsersUserIDCheckPermissionsPathParams:
-    user_id: str = field(default=None, metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
+    user_id: str = field(metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,16 +23,16 @@ class PostUsersUserIDCheckPermissionsRequests:
 
 @dataclass
 class PostUsersUserIDCheckPermissionsRequest:
-    path_params: PostUsersUserIDCheckPermissionsPathParams = field(default=None)
-    query_params: PostUsersUserIDCheckPermissionsQueryParams = field(default=None)
+    path_params: PostUsersUserIDCheckPermissionsPathParams = field()
+    query_params: PostUsersUserIDCheckPermissionsQueryParams = field()
     request: Optional[PostUsersUserIDCheckPermissionsRequests] = field(default=None)
     
 
 @dataclass
 class PostUsersUserIDCheckPermissionsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     error_response_content: Optional[shared.ErrorResponseContent] = field(default=None)
-    status_code: int = field(default=None)
     user_image: Optional[shared.UserImage] = field(default=None)
     

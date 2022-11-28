@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SheetProperties } from "./sheetproperties";
+
 
 
 // AddSheetResponse
@@ -7,6 +8,6 @@ import { SheetProperties } from "./sheetproperties";
  * The result of adding a sheet.
 **/
 export class AddSheetResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=properties" })
+  @SpeakeasyMetadata({ data: "json, name=properties" })
   properties?: SheetProperties;
 }

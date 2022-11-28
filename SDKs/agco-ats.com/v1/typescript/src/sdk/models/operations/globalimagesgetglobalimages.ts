@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GlobalImagesGetGlobalImagesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=categoryId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=categoryId" })
   categoryId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=includeDeleted" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=includeDeleted" })
   includeDeleted?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=publisher" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=publisher" })
   publisher?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search" })
   search?: string;
 }
 
 
 export class GlobalImagesGetGlobalImagesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GlobalImagesGetGlobalImagesQueryParams;
 }
 
 
 export class GlobalImagesGetGlobalImagesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiIPagedResponseGlobalResourcesSharedModelsGlobalImage?: shared.ApiIPagedResponseGlobalResourcesSharedModelsGlobalImage;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   apiModelsApiError?: shared.ApiModelsApiError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

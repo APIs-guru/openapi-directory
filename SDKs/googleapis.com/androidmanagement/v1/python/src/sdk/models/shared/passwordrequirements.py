@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class PasswordRequirementsPasswordQualityEnum(str, Enum):
     PASSWORD_QUALITY_UNSPECIFIED = "PASSWORD_QUALITY_UNSPECIFIED"
@@ -34,18 +36,22 @@ class PasswordRequirementsUnifiedLockSettingsEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PasswordRequirements:
-    maximum_failed_passwords_for_wipe: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maximumFailedPasswordsForWipe' }})
-    password_expiration_timeout: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'passwordExpirationTimeout' }})
-    password_history_length: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'passwordHistoryLength' }})
-    password_minimum_length: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'passwordMinimumLength' }})
-    password_minimum_letters: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'passwordMinimumLetters' }})
-    password_minimum_lower_case: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'passwordMinimumLowerCase' }})
-    password_minimum_non_letter: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'passwordMinimumNonLetter' }})
-    password_minimum_numeric: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'passwordMinimumNumeric' }})
-    password_minimum_symbols: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'passwordMinimumSymbols' }})
-    password_minimum_upper_case: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'passwordMinimumUpperCase' }})
-    password_quality: Optional[PasswordRequirementsPasswordQualityEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'passwordQuality' }})
-    password_scope: Optional[PasswordRequirementsPasswordScopeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'passwordScope' }})
-    require_password_unlock: Optional[PasswordRequirementsRequirePasswordUnlockEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'requirePasswordUnlock' }})
-    unified_lock_settings: Optional[PasswordRequirementsUnifiedLockSettingsEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'unifiedLockSettings' }})
+    r"""PasswordRequirements
+    Requirements for the password used to unlock a device.
+    """
+    
+    maximum_failed_passwords_for_wipe: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maximumFailedPasswordsForWipe') }})
+    password_expiration_timeout: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('passwordExpirationTimeout') }})
+    password_history_length: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('passwordHistoryLength') }})
+    password_minimum_length: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('passwordMinimumLength') }})
+    password_minimum_letters: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('passwordMinimumLetters') }})
+    password_minimum_lower_case: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('passwordMinimumLowerCase') }})
+    password_minimum_non_letter: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('passwordMinimumNonLetter') }})
+    password_minimum_numeric: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('passwordMinimumNumeric') }})
+    password_minimum_symbols: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('passwordMinimumSymbols') }})
+    password_minimum_upper_case: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('passwordMinimumUpperCase') }})
+    password_quality: Optional[PasswordRequirementsPasswordQualityEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('passwordQuality') }})
+    password_scope: Optional[PasswordRequirementsPasswordScopeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('passwordScope') }})
+    require_password_unlock: Optional[PasswordRequirementsRequirePasswordUnlockEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('requirePasswordUnlock') }})
+    unified_lock_settings: Optional[PasswordRequirementsUnifiedLockSettingsEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('unifiedLockSettings') }})
     

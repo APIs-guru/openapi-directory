@@ -1,25 +1,25 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ObjectTypeField } from "./objecttypefield";
 import { ObjectTypeKey } from "./objecttypekey";
 
 
+
 export class GetProfileObjectTypeTemplateResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AllowProfileCreation" })
+  @SpeakeasyMetadata({ data: "json, name=AllowProfileCreation" })
   allowProfileCreation?: boolean;
 
-  @Metadata({ data: "json, name=Fields", elemType: shared.ObjectTypeField })
+  @SpeakeasyMetadata({ data: "json, name=Fields", elemType: ObjectTypeField })
   fields?: Map<string, ObjectTypeField>;
 
-  @Metadata({ data: "json, name=Keys", elemType: shared.ObjectTypeKey, elemDepth: 2 })
+  @SpeakeasyMetadata({ data: "json, name=Keys", elemType: ObjectTypeKey, elemDepth: 2 })
   keys?: Map<string, ObjectTypeKey[]>;
 
-  @Metadata({ data: "json, name=SourceName" })
+  @SpeakeasyMetadata({ data: "json, name=SourceName" })
   sourceName?: string;
 
-  @Metadata({ data: "json, name=SourceObject" })
+  @SpeakeasyMetadata({ data: "json, name=SourceObject" })
   sourceObject?: string;
 
-  @Metadata({ data: "json, name=TemplateId" })
+  @SpeakeasyMetadata({ data: "json, name=TemplateId" })
   templateId?: string;
 }

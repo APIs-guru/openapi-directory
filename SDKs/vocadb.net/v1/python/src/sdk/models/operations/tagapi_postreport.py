@@ -1,10 +1,10 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 
 @dataclass
 class TagAPIPostReportPathParams:
-    tag_id: int = field(default=None, metadata={'path_param': { 'field_name': 'tagId', 'style': 'simple', 'explode': False }})
+    tag_id: int = field(metadata={'path_param': { 'field_name': 'tagId', 'style': 'simple', 'explode': False }})
     
 class TagAPIPostReportReportTypeEnum(str, Enum):
     INVALID_INFO = "InvalidInfo"
@@ -15,19 +15,19 @@ class TagAPIPostReportReportTypeEnum(str, Enum):
 
 @dataclass
 class TagAPIPostReportQueryParams:
-    notes: str = field(default=None, metadata={'query_param': { 'field_name': 'notes', 'style': 'form', 'explode': True }})
-    report_type: TagAPIPostReportReportTypeEnum = field(default=None, metadata={'query_param': { 'field_name': 'reportType', 'style': 'form', 'explode': True }})
-    version_number: int = field(default=None, metadata={'query_param': { 'field_name': 'versionNumber', 'style': 'form', 'explode': True }})
+    notes: str = field(metadata={'query_param': { 'field_name': 'notes', 'style': 'form', 'explode': True }})
+    report_type: TagAPIPostReportReportTypeEnum = field(metadata={'query_param': { 'field_name': 'reportType', 'style': 'form', 'explode': True }})
+    version_number: int = field(metadata={'query_param': { 'field_name': 'versionNumber', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class TagAPIPostReportRequest:
-    path_params: TagAPIPostReportPathParams = field(default=None)
-    query_params: TagAPIPostReportQueryParams = field(default=None)
+    path_params: TagAPIPostReportPathParams = field()
+    query_params: TagAPIPostReportQueryParams = field()
     
 
 @dataclass
 class TagAPIPostReportResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

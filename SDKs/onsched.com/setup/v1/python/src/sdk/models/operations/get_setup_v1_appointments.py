@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Any,Optional
@@ -25,12 +25,12 @@ class GetSetupV1AppointmentsQueryParams:
 
 @dataclass
 class GetSetupV1AppointmentsRequest:
-    query_params: GetSetupV1AppointmentsQueryParams = field(default=None)
+    query_params: GetSetupV1AppointmentsQueryParams = field()
     
 
 @dataclass
 class GetSetupV1AppointmentsResponse:
+    content_type: str = field()
+    status_code: int = field()
     appointment_list_view_model: Optional[dict[str, Any]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

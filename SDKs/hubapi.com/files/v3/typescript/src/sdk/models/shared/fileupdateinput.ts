@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum FileUpdateInputAccessEnum {
-    PublicIndexable = "PUBLIC_INDEXABLE"
-,    PublicNotIndexable = "PUBLIC_NOT_INDEXABLE"
-,    HiddenIndexable = "HIDDEN_INDEXABLE"
-,    HiddenNotIndexable = "HIDDEN_NOT_INDEXABLE"
-,    HiddenPrivate = "HIDDEN_PRIVATE"
-,    Private = "PRIVATE"
+    PublicIndexable = "PUBLIC_INDEXABLE",
+    PublicNotIndexable = "PUBLIC_NOT_INDEXABLE",
+    HiddenIndexable = "HIDDEN_INDEXABLE",
+    HiddenNotIndexable = "HIDDEN_NOT_INDEXABLE",
+    HiddenPrivate = "HIDDEN_PRIVATE",
+    Private = "PRIVATE"
 }
 
 
@@ -15,18 +16,18 @@ export enum FileUpdateInputAccessEnum {
  * Object for updating files.
 **/
 export class FileUpdateInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=access" })
+  @SpeakeasyMetadata({ data: "json, name=access" })
   access?: FileUpdateInputAccessEnum;
 
-  @Metadata({ data: "json, name=isUsableInContent" })
+  @SpeakeasyMetadata({ data: "json, name=isUsableInContent" })
   isUsableInContent?: boolean;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=parentFolderId" })
+  @SpeakeasyMetadata({ data: "json, name=parentFolderId" })
   parentFolderId?: string;
 
-  @Metadata({ data: "json, name=parentFolderPath" })
+  @SpeakeasyMetadata({ data: "json, name=parentFolderPath" })
   parentFolderPath?: string;
 }

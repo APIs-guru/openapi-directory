@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetUpdateSynonymOptionsActionEnum(str, Enum):
     UPDATE_SYNONYM_OPTIONS = "UpdateSynonymOptions"
@@ -10,10 +14,10 @@ class GetUpdateSynonymOptionsVersionEnum(str, Enum):
 
 @dataclass
 class GetUpdateSynonymOptionsQueryParams:
-    action: GetUpdateSynonymOptionsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    domain_name: str = field(default=None, metadata={'query_param': { 'field_name': 'DomainName', 'style': 'form', 'explode': True }})
-    synonyms: str = field(default=None, metadata={'query_param': { 'field_name': 'Synonyms', 'style': 'form', 'explode': True }})
-    version: GetUpdateSynonymOptionsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetUpdateSynonymOptionsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    domain_name: str = field(metadata={'query_param': { 'field_name': 'DomainName', 'style': 'form', 'explode': True }})
+    synonyms: str = field(metadata={'query_param': { 'field_name': 'Synonyms', 'style': 'form', 'explode': True }})
+    version: GetUpdateSynonymOptionsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetUpdateSynonymOptionsHeaders:
 
 @dataclass
 class GetUpdateSynonymOptionsRequest:
-    query_params: GetUpdateSynonymOptionsQueryParams = field(default=None)
-    headers: GetUpdateSynonymOptionsHeaders = field(default=None)
+    headers: GetUpdateSynonymOptionsHeaders = field()
+    query_params: GetUpdateSynonymOptionsQueryParams = field()
     
 
 @dataclass
 class GetUpdateSynonymOptionsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

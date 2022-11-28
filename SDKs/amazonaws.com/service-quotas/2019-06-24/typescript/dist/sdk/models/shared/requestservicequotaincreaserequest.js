@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var RequestServiceQuotaIncreaseRequest = /** @class */ (function (_super) {
     __extends(RequestServiceQuotaIncreaseRequest, _super);
     function RequestServiceQuotaIncreaseRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DesiredValue" }),
+        SpeakeasyMetadata({ data: "json, name=DesiredValue" }),
         __metadata("design:type", Number)
     ], RequestServiceQuotaIncreaseRequest.prototype, "desiredValue", void 0);
     __decorate([
-        Metadata({ data: "json, name=QuotaCode" }),
+        SpeakeasyMetadata({ data: "json, name=QuotaCode" }),
         __metadata("design:type", String)
     ], RequestServiceQuotaIncreaseRequest.prototype, "quotaCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServiceCode" }),
+        SpeakeasyMetadata({ data: "json, name=ServiceCode" }),
         __metadata("design:type", String)
     ], RequestServiceQuotaIncreaseRequest.prototype, "serviceCode", void 0);
     return RequestServiceQuotaIncreaseRequest;

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DataSourceConfig
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about a data source.
 **/
 export class DataSourceConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=s3Bucket" })
+  @SpeakeasyMetadata({ data: "json, name=s3Bucket" })
   s3Bucket: string;
 
-  @Metadata({ data: "json, name=s3Keys" })
+  @SpeakeasyMetadata({ data: "json, name=s3Keys" })
   s3Keys: string[];
 }

@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class GetRealmClientScopesIDScopeMappingsRealmPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
-    realm: str = field(default=None, metadata={'path_param': { 'field_name': 'realm', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    realm: str = field(metadata={'path_param': { 'field_name': 'realm', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetRealmClientScopesIDScopeMappingsRealmRequest:
-    path_params: GetRealmClientScopesIDScopeMappingsRealmPathParams = field(default=None)
+    path_params: GetRealmClientScopesIDScopeMappingsRealmPathParams = field()
     
 
 @dataclass
 class GetRealmClientScopesIDScopeMappingsRealmResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     role_representations: Optional[List[shared.RoleRepresentation]] = field(default=None)
-    status_code: int = field(default=None)
     

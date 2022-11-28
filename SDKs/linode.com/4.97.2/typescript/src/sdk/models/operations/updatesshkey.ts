@@ -1,62 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateSshKeyPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=sshKeyId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=sshKeyId" })
   sshKeyId: number;
 }
 
 
-export class UpdateSshKeySecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class UpdateSshKeySecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class UpdateSshKeySecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: UpdateSshKeySecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: UpdateSshKeySecurityOption2;
-}
-
-
-export class UpdateSshKeyRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: UpdateSshKeyPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: shared.SshKey;
-
-  @Metadata()
-  security: UpdateSshKeySecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class UpdateSshKeyDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class UpdateSshKeyRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: UpdateSshKeyPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: shared.SshKeyInput;
+
+  @SpeakeasyMetadata()
+  security: UpdateSshKeySecurity;
+}
+
+
 export class UpdateSshKeyResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   sshKey?: shared.SshKey;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateSshKeyDefaultApplicationJsonObject?: UpdateSshKeyDefaultApplicationJson;
 }

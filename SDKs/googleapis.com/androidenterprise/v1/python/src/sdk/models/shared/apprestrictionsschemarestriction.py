@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import apprestrictionsschemarestrictionrestrictionvalue
-from . import apprestrictionsschemarestriction
+from sdk import utils
+from . import *
 
 class AppRestrictionsSchemaRestrictionRestrictionTypeEnum(str, Enum):
     BOOL = "bool"
@@ -18,12 +19,16 @@ class AppRestrictionsSchemaRestrictionRestrictionTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class AppRestrictionsSchemaRestriction:
-    default_value: Optional[apprestrictionsschemarestrictionrestrictionvalue.AppRestrictionsSchemaRestrictionRestrictionValue] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'defaultValue' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    entry: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'entry' }})
-    entry_value: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'entryValue' }})
-    key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
-    nested_restriction: Optional[List[apprestrictionsschemarestriction.AppRestrictionsSchemaRestriction]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nestedRestriction' }})
-    restriction_type: Optional[AppRestrictionsSchemaRestrictionRestrictionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'restrictionType' }})
-    title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
+    r"""AppRestrictionsSchemaRestriction
+    A restriction in the App Restriction Schema represents a piece of configuration that may be pre-applied.
+    """
+    
+    default_value: Optional[AppRestrictionsSchemaRestrictionRestrictionValue] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('defaultValue') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    entry: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('entry') }})
+    entry_value: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('entryValue') }})
+    key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('key') }})
+    nested_restriction: Optional[List[AppRestrictionsSchemaRestriction]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nestedRestriction') }})
+    restriction_type: Optional[AppRestrictionsSchemaRestrictionRestrictionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('restrictionType') }})
+    title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('title') }})
     

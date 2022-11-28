@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RouteRef
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An object representing a route returned by a list operation.
 **/
 export class RouteRef extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=meshName" })
+  @SpeakeasyMetadata({ data: "json, name=meshName" })
   meshName?: string;
 
-  @Metadata({ data: "json, name=routeName" })
+  @SpeakeasyMetadata({ data: "json, name=routeName" })
   routeName?: string;
 
-  @Metadata({ data: "json, name=virtualRouterName" })
+  @SpeakeasyMetadata({ data: "json, name=virtualRouterName" })
   virtualRouterName?: string;
 }

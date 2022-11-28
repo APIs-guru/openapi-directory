@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ConnectedDevice } from "./connecteddevice";
 import { RemoteSink } from "./remotesink";
 var Example110 = /** @class */ (function (_super) {
     __extends(Example110, _super);
@@ -31,27 +31,27 @@ var Example110 = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=audio_mode" }),
+        SpeakeasyMetadata({ data: "json, name=audio_mode" }),
         __metadata("design:type", Number)
     ], Example110.prototype, "audioMode", void 0);
     __decorate([
-        Metadata({ data: "json, name=connected_devices", elemType: shared.ConnectedDevice }),
+        SpeakeasyMetadata({ data: "json, name=connected_devices", elemType: ConnectedDevice }),
         __metadata("design:type", Array)
     ], Example110.prototype, "connectedDevices", void 0);
     __decorate([
-        Metadata({ data: "json, name=connecting_devices" }),
+        SpeakeasyMetadata({ data: "json, name=connecting_devices" }),
         __metadata("design:type", Array)
     ], Example110.prototype, "connectingDevices", void 0);
     __decorate([
-        Metadata({ data: "json, name=discovery_enabled" }),
+        SpeakeasyMetadata({ data: "json, name=discovery_enabled" }),
         __metadata("design:type", Boolean)
     ], Example110.prototype, "discoveryEnabled", void 0);
     __decorate([
-        Metadata({ data: "json, name=remote_sink" }),
+        SpeakeasyMetadata({ data: "json, name=remote_sink" }),
         __metadata("design:type", RemoteSink)
     ], Example110.prototype, "remoteSink", void 0);
     __decorate([
-        Metadata({ data: "json, name=scanning_enabled" }),
+        SpeakeasyMetadata({ data: "json, name=scanning_enabled" }),
         __metadata("design:type", Boolean)
     ], Example110.prototype, "scanningEnabled", void 0);
     return Example110;

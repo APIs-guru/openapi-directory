@@ -1,5 +1,8 @@
 package shared
 
+// CreateControlMappingSource
+//
+//	Control mapping fields that represent the source for evidence collection, along with related parameters and metadata. This does not contain <code>mappingID</code>.
 type CreateControlMappingSource struct {
 	SourceDescription   *string                `json:"sourceDescription,omitempty"`
 	SourceFrequency     *SourceFrequencyEnum   `json:"sourceFrequency,omitempty"`

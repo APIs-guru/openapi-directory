@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CloudPubsubTopic } from "./cloudpubsubtopic";
 import { Feed } from "./feed";
 /**

@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InstanceGroupDetail } from "./instancegroupdetail";
 import { PlacementType } from "./placementtype";
+
 
 
 // JobFlowInstancesDetail
@@ -9,42 +9,42 @@ import { PlacementType } from "./placementtype";
  * Specify the type of Amazon EC2 instances that the cluster (job flow) runs on.
 **/
 export class JobFlowInstancesDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Ec2KeyName" })
+  @SpeakeasyMetadata({ data: "json, name=Ec2KeyName" })
   ec2KeyName?: string;
 
-  @Metadata({ data: "json, name=Ec2SubnetId" })
+  @SpeakeasyMetadata({ data: "json, name=Ec2SubnetId" })
   ec2SubnetId?: string;
 
-  @Metadata({ data: "json, name=HadoopVersion" })
+  @SpeakeasyMetadata({ data: "json, name=HadoopVersion" })
   hadoopVersion?: string;
 
-  @Metadata({ data: "json, name=InstanceCount" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceCount" })
   instanceCount: number;
 
-  @Metadata({ data: "json, name=InstanceGroups", elemType: shared.InstanceGroupDetail })
+  @SpeakeasyMetadata({ data: "json, name=InstanceGroups", elemType: InstanceGroupDetail })
   instanceGroups?: InstanceGroupDetail[];
 
-  @Metadata({ data: "json, name=KeepJobFlowAliveWhenNoSteps" })
+  @SpeakeasyMetadata({ data: "json, name=KeepJobFlowAliveWhenNoSteps" })
   keepJobFlowAliveWhenNoSteps?: boolean;
 
-  @Metadata({ data: "json, name=MasterInstanceId" })
+  @SpeakeasyMetadata({ data: "json, name=MasterInstanceId" })
   masterInstanceId?: string;
 
-  @Metadata({ data: "json, name=MasterInstanceType" })
+  @SpeakeasyMetadata({ data: "json, name=MasterInstanceType" })
   masterInstanceType: string;
 
-  @Metadata({ data: "json, name=MasterPublicDnsName" })
+  @SpeakeasyMetadata({ data: "json, name=MasterPublicDnsName" })
   masterPublicDnsName?: string;
 
-  @Metadata({ data: "json, name=NormalizedInstanceHours" })
+  @SpeakeasyMetadata({ data: "json, name=NormalizedInstanceHours" })
   normalizedInstanceHours?: number;
 
-  @Metadata({ data: "json, name=Placement" })
+  @SpeakeasyMetadata({ data: "json, name=Placement" })
   placement?: PlacementType;
 
-  @Metadata({ data: "json, name=SlaveInstanceType" })
+  @SpeakeasyMetadata({ data: "json, name=SlaveInstanceType" })
   slaveInstanceType: string;
 
-  @Metadata({ data: "json, name=TerminationProtected" })
+  @SpeakeasyMetadata({ data: "json, name=TerminationProtected" })
   terminationProtected?: boolean;
 }

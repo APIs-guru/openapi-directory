@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class SecuritycenterProjectsBigQueryExportsListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class SecuritycenterProjectsBigQueryExportsListQueryParams:
 
 @dataclass
 class SecuritycenterProjectsBigQueryExportsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class SecuritycenterProjectsBigQueryExportsListRequest:
-    path_params: SecuritycenterProjectsBigQueryExportsListPathParams = field(default=None)
-    query_params: SecuritycenterProjectsBigQueryExportsListQueryParams = field(default=None)
-    security: SecuritycenterProjectsBigQueryExportsListSecurity = field(default=None)
+    path_params: SecuritycenterProjectsBigQueryExportsListPathParams = field()
+    query_params: SecuritycenterProjectsBigQueryExportsListQueryParams = field()
+    security: SecuritycenterProjectsBigQueryExportsListSecurity = field()
     
 
 @dataclass
 class SecuritycenterProjectsBigQueryExportsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_big_query_exports_response: Optional[shared.ListBigQueryExportsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

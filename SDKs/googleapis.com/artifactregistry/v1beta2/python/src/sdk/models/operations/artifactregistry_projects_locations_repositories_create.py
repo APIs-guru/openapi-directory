@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ArtifactregistryProjectsLocationsRepositoriesCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +27,21 @@ class ArtifactregistryProjectsLocationsRepositoriesCreateQueryParams:
 
 @dataclass
 class ArtifactregistryProjectsLocationsRepositoriesCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ArtifactregistryProjectsLocationsRepositoriesCreateRequest:
-    path_params: ArtifactregistryProjectsLocationsRepositoriesCreatePathParams = field(default=None)
-    query_params: ArtifactregistryProjectsLocationsRepositoriesCreateQueryParams = field(default=None)
-    request: Optional[shared.Repository] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ArtifactregistryProjectsLocationsRepositoriesCreateSecurity = field(default=None)
+    path_params: ArtifactregistryProjectsLocationsRepositoriesCreatePathParams = field()
+    query_params: ArtifactregistryProjectsLocationsRepositoriesCreateQueryParams = field()
+    security: ArtifactregistryProjectsLocationsRepositoriesCreateSecurity = field()
+    request: Optional[shared.RepositoryInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ArtifactregistryProjectsLocationsRepositoriesCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

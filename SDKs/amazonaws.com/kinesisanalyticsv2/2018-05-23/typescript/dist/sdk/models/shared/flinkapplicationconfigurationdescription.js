@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CheckpointConfigurationDescription } from "./checkpointconfigurationdescription";
 import { MonitoringConfigurationDescription } from "./monitoringconfigurationdescription";
 import { ParallelismConfigurationDescription } from "./parallelismconfigurationdescription";
@@ -36,19 +36,19 @@ var FlinkApplicationConfigurationDescription = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CheckpointConfigurationDescription" }),
+        SpeakeasyMetadata({ data: "json, name=CheckpointConfigurationDescription" }),
         __metadata("design:type", CheckpointConfigurationDescription)
     ], FlinkApplicationConfigurationDescription.prototype, "checkpointConfigurationDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=JobPlanDescription" }),
+        SpeakeasyMetadata({ data: "json, name=JobPlanDescription" }),
         __metadata("design:type", String)
     ], FlinkApplicationConfigurationDescription.prototype, "jobPlanDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=MonitoringConfigurationDescription" }),
+        SpeakeasyMetadata({ data: "json, name=MonitoringConfigurationDescription" }),
         __metadata("design:type", MonitoringConfigurationDescription)
     ], FlinkApplicationConfigurationDescription.prototype, "monitoringConfigurationDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=ParallelismConfigurationDescription" }),
+        SpeakeasyMetadata({ data: "json, name=ParallelismConfigurationDescription" }),
         __metadata("design:type", ParallelismConfigurationDescription)
     ], FlinkApplicationConfigurationDescription.prototype, "parallelismConfigurationDescription", void 0);
     return FlinkApplicationConfigurationDescription;

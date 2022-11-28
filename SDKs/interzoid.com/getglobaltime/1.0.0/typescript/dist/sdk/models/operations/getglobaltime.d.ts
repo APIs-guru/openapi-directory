@@ -1,10 +1,7 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class GetglobaltimeQueryParams extends SpeakeasyBase {
     license: string;
     locale: string;
-}
-export declare class GetglobaltimeRequest extends SpeakeasyBase {
-    queryParams: GetglobaltimeQueryParams;
 }
 export declare class Getglobaltime200ApplicationJson extends SpeakeasyBase {
     clockTime?: string;
@@ -23,6 +20,9 @@ export declare class Getglobaltime200ApplicationJson extends SpeakeasyBase {
     weekday?: string;
     year?: string;
     zone?: string;
+}
+export declare class GetglobaltimeRequest extends SpeakeasyBase {
+    queryParams: GetglobaltimeQueryParams;
 }
 export declare class GetglobaltimeResponse extends SpeakeasyBase {
     contentType: string;

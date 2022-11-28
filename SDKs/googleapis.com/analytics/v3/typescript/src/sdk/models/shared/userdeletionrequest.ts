@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // UserDeletionRequestId
@@ -6,10 +7,10 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * User ID.
 **/
 export class UserDeletionRequestId extends SpeakeasyBase {
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 
-  @Metadata({ data: "json, name=userId" })
+  @SpeakeasyMetadata({ data: "json, name=userId" })
   userId?: string;
 }
 
@@ -19,21 +20,43 @@ export class UserDeletionRequestId extends SpeakeasyBase {
  * JSON template for a user deletion request resource.
 **/
 export class UserDeletionRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deletionRequestTime" })
+  @SpeakeasyMetadata({ data: "json, name=deletionRequestTime" })
   deletionRequestTime?: Date;
 
-  @Metadata({ data: "json, name=firebaseProjectId" })
+  @SpeakeasyMetadata({ data: "json, name=firebaseProjectId" })
   firebaseProjectId?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: UserDeletionRequestId;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=propertyId" })
+  @SpeakeasyMetadata({ data: "json, name=propertyId" })
   propertyId?: string;
 
-  @Metadata({ data: "json, name=webPropertyId" })
+  @SpeakeasyMetadata({ data: "json, name=webPropertyId" })
+  webPropertyId?: string;
+}
+
+
+// UserDeletionRequestInput
+/** 
+ * JSON template for a user deletion request resource.
+**/
+export class UserDeletionRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=firebaseProjectId" })
+  firebaseProjectId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=id" })
+  id?: UserDeletionRequestId;
+
+  @SpeakeasyMetadata({ data: "json, name=kind" })
+  kind?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=propertyId" })
+  propertyId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=webPropertyId" })
   webPropertyId?: string;
 }

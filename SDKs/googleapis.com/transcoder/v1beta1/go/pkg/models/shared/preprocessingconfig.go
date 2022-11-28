@@ -1,5 +1,7 @@
 package shared
 
+// PreprocessingConfig
+// Preprocessing configurations.
 type PreprocessingConfig struct {
 	Audio   *Audio   `json:"audio,omitempty"`
 	Color   *Color   `json:"color,omitempty"`

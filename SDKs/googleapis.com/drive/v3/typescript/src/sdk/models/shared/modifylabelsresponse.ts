@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Label } from "./label";
+
 
 
 // ModifyLabelsResponse
@@ -8,9 +8,9 @@ import { Label } from "./label";
  * Response to a ModifyLabels request. This contains only those labels which were added or updated by the request.
 **/
 export class ModifyLabelsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=modifiedLabels", elemType: shared.Label })
+  @SpeakeasyMetadata({ data: "json, name=modifiedLabels", elemType: Label })
   modifiedLabels?: Label[];
 }

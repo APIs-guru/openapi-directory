@@ -9,6 +9,8 @@ const (
 	ReturnPolicyOnlinePolicyTypeEnumLifetimeReturns           ReturnPolicyOnlinePolicyTypeEnum = "LIFETIME_RETURNS"
 )
 
+// ReturnPolicyOnlinePolicy
+// The available policies.
 type ReturnPolicyOnlinePolicy struct {
 	Days *string                           `json:"days,omitempty"`
 	Type *ReturnPolicyOnlinePolicyTypeEnum `json:"type,omitempty"`

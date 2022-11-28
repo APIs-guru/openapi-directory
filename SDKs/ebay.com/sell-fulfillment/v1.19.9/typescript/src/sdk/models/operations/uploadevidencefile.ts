@@ -1,42 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export const UPLOADEVIDENCEFILE_SERVERS = [
-	"https://apiz.ebay.com{basePath}",
-];
 
+export const UploadEvidenceFileServerList = [
+	"https://apiz.ebay.com{basePath}",
+] as const;
 
 
 export class UploadEvidenceFilePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=payment_dispute_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=payment_dispute_id" })
   paymentDisputeId: string;
 }
 
 
 export class UploadEvidenceFileSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   apiAuth: shared.SchemeApiAuth;
 }
 
 
 export class UploadEvidenceFileRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   serverUrl?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UploadEvidenceFilePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: UploadEvidenceFileSecurity;
 }
 
 
 export class UploadEvidenceFileResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   fileEvidence?: shared.FileEvidence;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

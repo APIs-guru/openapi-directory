@@ -1,19 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { QualityFilterEnum } from "./qualityfilterenum";
 import { Image } from "./image";
-import { Image } from "./image";
+
 
 
 export class CompareFacesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=QualityFilter" })
+  @SpeakeasyMetadata({ data: "json, name=QualityFilter" })
   qualityFilter?: QualityFilterEnum;
 
-  @Metadata({ data: "json, name=SimilarityThreshold" })
+  @SpeakeasyMetadata({ data: "json, name=SimilarityThreshold" })
   similarityThreshold?: number;
 
-  @Metadata({ data: "json, name=SourceImage" })
+  @SpeakeasyMetadata({ data: "json, name=SourceImage" })
   sourceImage: Image;
 
-  @Metadata({ data: "json, name=TargetImage" })
+  @SpeakeasyMetadata({ data: "json, name=TargetImage" })
   targetImage: Image;
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleTypeDecimal } from "./googletypedecimal";
+
 
 
 // GoogleCloudChannelV1PercentageAdjustment
@@ -7,6 +8,6 @@ import { GoogleTypeDecimal } from "./googletypedecimal";
  * An adjustment that applies a flat markup or markdown to an entire bill.
 **/
 export class GoogleCloudChannelV1PercentageAdjustment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=percentage" })
+  @SpeakeasyMetadata({ data: "json, name=percentage" })
   percentage?: GoogleTypeDecimal;
 }

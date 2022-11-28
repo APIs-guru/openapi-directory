@@ -1,5 +1,18 @@
 package shared
 
+type GoogleCloudApigeeV1DeveloperInput struct {
+	AccessType  *string                        `json:"accessType,omitempty"`
+	AppFamily   *string                        `json:"appFamily,omitempty"`
+	Apps        []string                       `json:"apps,omitempty"`
+	Attributes  []GoogleCloudApigeeV1Attribute `json:"attributes,omitempty"`
+	Companies   []string                       `json:"companies,omitempty"`
+	DeveloperID *string                        `json:"developerId,omitempty"`
+	Email       *string                        `json:"email,omitempty"`
+	FirstName   *string                        `json:"firstName,omitempty"`
+	LastName    *string                        `json:"lastName,omitempty"`
+	UserName    *string                        `json:"userName,omitempty"`
+}
+
 type GoogleCloudApigeeV1Developer struct {
 	AccessType       *string                        `json:"accessType,omitempty"`
 	AppFamily        *string                        `json:"appFamily,omitempty"`

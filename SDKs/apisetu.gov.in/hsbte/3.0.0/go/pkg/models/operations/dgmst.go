@@ -28,11 +28,6 @@ type DgmstSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type DgmstRequest struct {
-	Request  *DgmstRequestBody `request:"mediaType=application/json"`
-	Security DgmstSecurity
-}
-
 type Dgmst400ApplicationJSONErrorEnum string
 
 const (
@@ -162,6 +157,11 @@ const (
 type Dgmst504ApplicationJSON struct {
 	Error            *Dgmst504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Dgmst504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type DgmstRequest struct {
+	Request  *DgmstRequestBody `request:"mediaType=application/json"`
+	Security DgmstSecurity
 }
 
 type DgmstResponse struct {

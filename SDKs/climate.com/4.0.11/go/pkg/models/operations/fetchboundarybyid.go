@@ -8,17 +8,9 @@ type FetchBoundaryByIDPathParams struct {
 	BoundaryID string `pathParam:"style=simple,explode=false,name=boundaryId"`
 }
 
-type FetchBoundaryByIDSecurityOption1 struct {
-	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
-}
-
-type FetchBoundaryByIDSecurityOption2 struct {
-	Oauth2AuthorizationCode shared.SchemeOauth2AuthorizationCode `security:"scheme,type=oauth2"`
-}
-
 type FetchBoundaryByIDSecurity struct {
-	Option1 *FetchBoundaryByIDSecurityOption1 `security:"option"`
-	Option2 *FetchBoundaryByIDSecurityOption2 `security:"option"`
+	APIKey                  *shared.SchemeAPIKey                  `security:"scheme,type=apiKey,subtype=header"`
+	Oauth2AuthorizationCode *shared.SchemeOauth2AuthorizationCode `security:"scheme,type=oauth2"`
 }
 
 type FetchBoundaryByIDRequest struct {

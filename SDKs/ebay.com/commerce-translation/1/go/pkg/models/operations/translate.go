@@ -8,17 +8,17 @@ type TranslateSecurity struct {
 	APIAuth shared.SchemeAPIAuth `security:"scheme,type=oauth2"`
 }
 
-type TranslateRequest struct {
-	Request  shared.TranslateRequest `request:"mediaType=application/json"`
-	Security TranslateSecurity
-}
-
 type Translate400ApplicationJSON struct {
 	Errors []shared.Error `json:"errors,omitempty"`
 }
 
 type Translate500ApplicationJSON struct {
 	Errors []shared.Error `json:"errors,omitempty"`
+}
+
+type TranslateRequest struct {
+	Request  shared.TranslateRequest `request:"mediaType=application/json"`
+	Security TranslateSecurity
 }
 
 type TranslateResponse struct {

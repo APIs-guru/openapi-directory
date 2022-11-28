@@ -1,13 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import subtitle
-from . import pagination
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CaptionsListResponse:
-    data: Optional[List[subtitle.Subtitle]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
-    pagination: Optional[pagination.Pagination] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pagination' }})
+    data: Optional[List[Subtitle]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
+    pagination: Optional[Pagination] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pagination') }})
     

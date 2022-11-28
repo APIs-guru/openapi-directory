@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetIndexDocumentsActionEnum(str, Enum):
     INDEX_DOCUMENTS = "IndexDocuments"
@@ -10,9 +14,9 @@ class GetIndexDocumentsVersionEnum(str, Enum):
 
 @dataclass
 class GetIndexDocumentsQueryParams:
-    action: GetIndexDocumentsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    domain_name: str = field(default=None, metadata={'query_param': { 'field_name': 'DomainName', 'style': 'form', 'explode': True }})
-    version: GetIndexDocumentsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetIndexDocumentsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    domain_name: str = field(metadata={'query_param': { 'field_name': 'DomainName', 'style': 'form', 'explode': True }})
+    version: GetIndexDocumentsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetIndexDocumentsHeaders:
 
 @dataclass
 class GetIndexDocumentsRequest:
-    query_params: GetIndexDocumentsQueryParams = field(default=None)
-    headers: GetIndexDocumentsHeaders = field(default=None)
+    headers: GetIndexDocumentsHeaders = field()
+    query_params: GetIndexDocumentsQueryParams = field()
     
 
 @dataclass
 class GetIndexDocumentsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

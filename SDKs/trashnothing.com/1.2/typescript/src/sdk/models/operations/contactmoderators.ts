@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ContactModeratorsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=group_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=group_id" })
   groupId: string;
 }
 
 
 export class ContactModeratorsRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, name=message" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=message" })
   message: string;
 
-  @Metadata({ data: "multipart_form, name=subject" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=subject" })
   subject: string;
 }
 
 
 export class ContactModeratorsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ContactModeratorsPathParams;
 
-  @Metadata({ data: "request, media_type=multipart/form-data" })
+  @SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" })
   request: ContactModeratorsRequestBody;
 }
 
 
 export class ContactModeratorsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

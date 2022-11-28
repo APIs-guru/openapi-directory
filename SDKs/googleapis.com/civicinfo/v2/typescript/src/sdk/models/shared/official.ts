@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SimpleAddressType } from "./simpleaddresstype";
 import { Channel } from "./channel";
 import { GeocodingSummary } from "./geocodingsummary";
+
 
 
 // Official
@@ -10,30 +10,30 @@ import { GeocodingSummary } from "./geocodingsummary";
  * Information about a person holding an elected office.
 **/
 export class Official extends SpeakeasyBase {
-  @Metadata({ data: "json, name=address", elemType: shared.SimpleAddressType })
+  @SpeakeasyMetadata({ data: "json, name=address", elemType: SimpleAddressType })
   address?: SimpleAddressType[];
 
-  @Metadata({ data: "json, name=channels", elemType: shared.Channel })
+  @SpeakeasyMetadata({ data: "json, name=channels", elemType: Channel })
   channels?: Channel[];
 
-  @Metadata({ data: "json, name=emails" })
+  @SpeakeasyMetadata({ data: "json, name=emails" })
   emails?: string[];
 
-  @Metadata({ data: "json, name=geocodingSummaries", elemType: shared.GeocodingSummary })
+  @SpeakeasyMetadata({ data: "json, name=geocodingSummaries", elemType: GeocodingSummary })
   geocodingSummaries?: GeocodingSummary[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=party" })
+  @SpeakeasyMetadata({ data: "json, name=party" })
   party?: string;
 
-  @Metadata({ data: "json, name=phones" })
+  @SpeakeasyMetadata({ data: "json, name=phones" })
   phones?: string[];
 
-  @Metadata({ data: "json, name=photoUrl" })
+  @SpeakeasyMetadata({ data: "json, name=photoUrl" })
   photoUrl?: string;
 
-  @Metadata({ data: "json, name=urls" })
+  @SpeakeasyMetadata({ data: "json, name=urls" })
   urls?: string[];
 }

@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum VeteranStatusRequestGenderEnum {
-    M = "M"
-,    F = "F"
+    M = "M",
+    F = "F"
 }
 
 
@@ -11,21 +12,21 @@ export enum VeteranStatusRequestGenderEnum {
  * Attributes required to retrieve a Veteran's status
 **/
 export class VeteranStatusRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=birth_date" })
+  @SpeakeasyMetadata({ data: "json, name=birth_date" })
   birthDate: string;
 
-  @Metadata({ data: "json, name=first_name" })
+  @SpeakeasyMetadata({ data: "json, name=first_name" })
   firstName: string;
 
-  @Metadata({ data: "json, name=gender" })
+  @SpeakeasyMetadata({ data: "json, name=gender" })
   gender?: VeteranStatusRequestGenderEnum;
 
-  @Metadata({ data: "json, name=last_name" })
+  @SpeakeasyMetadata({ data: "json, name=last_name" })
   lastName: string;
 
-  @Metadata({ data: "json, name=middle_name" })
+  @SpeakeasyMetadata({ data: "json, name=middle_name" })
   middleName?: string;
 
-  @Metadata({ data: "json, name=ssn" })
+  @SpeakeasyMetadata({ data: "json, name=ssn" })
   ssn: string;
 }

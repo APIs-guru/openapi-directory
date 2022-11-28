@@ -1,5 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
@@ -22,16 +25,16 @@ class ListDataflowEndpointGroupsHeaders:
 
 @dataclass
 class ListDataflowEndpointGroupsRequest:
-    query_params: ListDataflowEndpointGroupsQueryParams = field(default=None)
-    headers: ListDataflowEndpointGroupsHeaders = field(default=None)
+    headers: ListDataflowEndpointGroupsHeaders = field()
+    query_params: ListDataflowEndpointGroupsQueryParams = field()
     
 
 @dataclass
 class ListDataflowEndpointGroupsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     dependency_exception: Optional[Any] = field(default=None)
     invalid_parameter_exception: Optional[Any] = field(default=None)
     list_dataflow_endpoint_groups_response: Optional[shared.ListDataflowEndpointGroupsResponse] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

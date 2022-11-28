@@ -1,59 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DisableManagedServicePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=serviceId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=serviceId" })
   serviceId: number;
 }
 
 
-export class DisableManagedServiceSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class DisableManagedServiceSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class DisableManagedServiceSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: DisableManagedServiceSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: DisableManagedServiceSecurityOption2;
-}
-
-
-export class DisableManagedServiceRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: DisableManagedServicePathParams;
-
-  @Metadata()
-  security: DisableManagedServiceSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class DisableManagedServiceDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class DisableManagedServiceRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: DisableManagedServicePathParams;
+
+  @SpeakeasyMetadata()
+  security: DisableManagedServiceSecurity;
+}
+
+
 export class DisableManagedServiceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   managedService?: shared.ManagedService;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   disableManagedServiceDefaultApplicationJsonObject?: DisableManagedServiceDefaultApplicationJson;
 }

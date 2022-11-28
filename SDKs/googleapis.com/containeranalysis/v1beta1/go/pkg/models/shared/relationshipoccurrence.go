@@ -49,6 +49,16 @@ const (
 	RelationshipOccurrenceTypeEnumOther                       RelationshipOccurrenceTypeEnum = "OTHER"
 )
 
+// RelationshipOccurrenceInput
+// RelationshipOccurrence represents an SPDX Relationship section: https://spdx.github.io/spdx-spec/7-relationships-between-SPDX-elements/
+type RelationshipOccurrenceInput struct {
+	Comment *string `json:"comment,omitempty"`
+	Source  *string `json:"source,omitempty"`
+	Target  *string `json:"target,omitempty"`
+}
+
+// RelationshipOccurrence
+// RelationshipOccurrence represents an SPDX Relationship section: https://spdx.github.io/spdx-spec/7-relationships-between-SPDX-elements/
 type RelationshipOccurrence struct {
 	Comment *string                         `json:"comment,omitempty"`
 	Source  *string                         `json:"source,omitempty"`

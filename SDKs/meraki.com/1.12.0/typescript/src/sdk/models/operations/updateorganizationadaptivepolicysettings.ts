@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateOrganizationAdaptivePolicySettingsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=organizationId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=organizationId" })
   organizationId: string;
 }
 
 
 export class UpdateOrganizationAdaptivePolicySettingsRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enabledNetworks" })
+  @SpeakeasyMetadata({ data: "json, name=enabledNetworks" })
   enabledNetworks?: string[];
 }
 
 
 export class UpdateOrganizationAdaptivePolicySettingsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateOrganizationAdaptivePolicySettingsPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: UpdateOrganizationAdaptivePolicySettingsRequestBody;
 }
 
 
 export class UpdateOrganizationAdaptivePolicySettingsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateOrganizationAdaptivePolicySettings200ApplicationJsonObject?: Map<string, any>;
 }

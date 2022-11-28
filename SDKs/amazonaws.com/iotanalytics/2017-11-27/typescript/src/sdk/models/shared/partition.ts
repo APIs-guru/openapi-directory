@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Partition
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  A partition dimension defined by an attribute. 
 **/
 export class Partition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attributeName" })
+  @SpeakeasyMetadata({ data: "json, name=attributeName" })
   attributeName: string;
 }

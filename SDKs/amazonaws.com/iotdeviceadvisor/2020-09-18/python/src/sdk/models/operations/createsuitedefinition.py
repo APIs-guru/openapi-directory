@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,31 +22,35 @@ class CreateSuiteDefinitionHeaders:
 @dataclass_json
 @dataclass
 class CreateSuiteDefinitionRequestBodySuiteDefinitionConfiguration:
-    device_permission_role_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'devicePermissionRoleArn' }})
-    devices: Optional[List[shared.DeviceUnderTest]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'devices' }})
-    intended_for_qualification: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'intendedForQualification' }})
-    root_group: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rootGroup' }})
-    suite_definition_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'suiteDefinitionName' }})
+    r"""CreateSuiteDefinitionRequestBodySuiteDefinitionConfiguration
+    Gets Suite Definition Configuration.
+    """
+    
+    device_permission_role_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('devicePermissionRoleArn') }})
+    devices: Optional[List[shared.DeviceUnderTest]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('devices') }})
+    intended_for_qualification: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('intendedForQualification') }})
+    root_group: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rootGroup') }})
+    suite_definition_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('suiteDefinitionName') }})
     
 
 @dataclass_json
 @dataclass
 class CreateSuiteDefinitionRequestBody:
-    suite_definition_configuration: Optional[CreateSuiteDefinitionRequestBodySuiteDefinitionConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'suiteDefinitionConfiguration' }})
-    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
+    suite_definition_configuration: Optional[CreateSuiteDefinitionRequestBodySuiteDefinitionConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('suiteDefinitionConfiguration') }})
+    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     
 
 @dataclass
 class CreateSuiteDefinitionRequest:
-    headers: CreateSuiteDefinitionHeaders = field(default=None)
-    request: CreateSuiteDefinitionRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateSuiteDefinitionHeaders = field()
+    request: CreateSuiteDefinitionRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateSuiteDefinitionResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     create_suite_definition_response: Optional[shared.CreateSuiteDefinitionResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

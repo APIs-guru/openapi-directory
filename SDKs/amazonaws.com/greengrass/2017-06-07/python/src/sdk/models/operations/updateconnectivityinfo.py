@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdateConnectivityInfoPathParams:
-    thing_name: str = field(default=None, metadata={'path_param': { 'field_name': 'ThingName', 'style': 'simple', 'explode': False }})
+    thing_name: str = field(metadata={'path_param': { 'field_name': 'ThingName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,21 +27,21 @@ class UpdateConnectivityInfoHeaders:
 @dataclass_json
 @dataclass
 class UpdateConnectivityInfoRequestBody:
-    connectivity_info: Optional[List[shared.ConnectivityInfo]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ConnectivityInfo' }})
+    connectivity_info: Optional[List[shared.ConnectivityInfo]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ConnectivityInfo') }})
     
 
 @dataclass
 class UpdateConnectivityInfoRequest:
-    path_params: UpdateConnectivityInfoPathParams = field(default=None)
-    headers: UpdateConnectivityInfoHeaders = field(default=None)
-    request: UpdateConnectivityInfoRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateConnectivityInfoHeaders = field()
+    path_params: UpdateConnectivityInfoPathParams = field()
+    request: UpdateConnectivityInfoRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateConnectivityInfoResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_error_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     update_connectivity_info_response: Optional[shared.UpdateConnectivityInfoResponse] = field(default=None)
     

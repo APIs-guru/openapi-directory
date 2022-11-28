@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteApplicationSnapshotRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApplicationName" })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationName" })
   applicationName: string;
 
-  @Metadata({ data: "json, name=SnapshotCreationTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=SnapshotCreationTimestamp" })
   snapshotCreationTimestamp: Date;
 
-  @Metadata({ data: "json, name=SnapshotName" })
+  @SpeakeasyMetadata({ data: "json, name=SnapshotName" })
   snapshotName: string;
 }

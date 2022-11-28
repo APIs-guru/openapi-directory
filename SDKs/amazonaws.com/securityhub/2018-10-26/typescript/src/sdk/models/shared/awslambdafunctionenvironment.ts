@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsLambdaFunctionEnvironmentError } from "./awslambdafunctionenvironmenterror";
+
 
 
 // AwsLambdaFunctionEnvironment
@@ -7,9 +8,9 @@ import { AwsLambdaFunctionEnvironmentError } from "./awslambdafunctionenvironmen
  * A function's environment variable settings.
 **/
 export class AwsLambdaFunctionEnvironment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Error" })
+  @SpeakeasyMetadata({ data: "json, name=Error" })
   error?: AwsLambdaFunctionEnvironmentError;
 
-  @Metadata({ data: "json, name=Variables" })
+  @SpeakeasyMetadata({ data: "json, name=Variables" })
   variables?: Map<string, string>;
 }

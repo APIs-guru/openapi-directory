@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Release
+// A release.
 type Release struct {
 	Assets          []ReleaseAsset `json:"assets"`
 	AssetsURL       string         `json:"assets_url"`

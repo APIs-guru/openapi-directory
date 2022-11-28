@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetJournalLinesFromSubContractorPathParams = /** @class */ (function (_super) {
     __extends(GetJournalLinesFromSubContractorPathParams, _super);
@@ -30,11 +30,11 @@ var GetJournalLinesFromSubContractorPathParams = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=EmployerId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=EmployerId" }),
         __metadata("design:type", String)
     ], GetJournalLinesFromSubContractorPathParams.prototype, "employerId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=SubContractorId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=SubContractorId" }),
         __metadata("design:type", String)
     ], GetJournalLinesFromSubContractorPathParams.prototype, "subContractorId", void 0);
     return GetJournalLinesFromSubContractorPathParams;
@@ -46,11 +46,11 @@ var GetJournalLinesFromSubContractorHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
         __metadata("design:type", String)
     ], GetJournalLinesFromSubContractorHeaders.prototype, "apiVersion", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Authorization" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" }),
         __metadata("design:type", String)
     ], GetJournalLinesFromSubContractorHeaders.prototype, "authorization", void 0);
     return GetJournalLinesFromSubContractorHeaders;
@@ -62,11 +62,11 @@ var GetJournalLinesFromSubContractorRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetJournalLinesFromSubContractorPathParams)
     ], GetJournalLinesFromSubContractorRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetJournalLinesFromSubContractorHeaders)
     ], GetJournalLinesFromSubContractorRequest.prototype, "headers", void 0);
     return GetJournalLinesFromSubContractorRequest;
@@ -78,19 +78,19 @@ var GetJournalLinesFromSubContractorResponse = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetJournalLinesFromSubContractorResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorModel)
     ], GetJournalLinesFromSubContractorResponse.prototype, "errorModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.LinkCollection)
     ], GetJournalLinesFromSubContractorResponse.prototype, "linkCollection", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetJournalLinesFromSubContractorResponse.prototype, "statusCode", void 0);
     return GetJournalLinesFromSubContractorResponse;

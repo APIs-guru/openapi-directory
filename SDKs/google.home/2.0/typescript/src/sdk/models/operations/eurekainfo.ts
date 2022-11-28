@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class EurekaInfoQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=nonce" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=nonce" })
   nonce: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=options" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=options" })
   options: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=params" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=params" })
   params: string;
 }
 
 
 export class EurekaInfoRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: EurekaInfoQueryParams;
 }
 
 
 export class EurekaInfoResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   example1?: shared.Example1;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

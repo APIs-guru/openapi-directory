@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // CognitoIdentityProvider
 /**
  * A provider representing an Amazon Cognito user pool and its client ID.
@@ -33,15 +33,15 @@ var CognitoIdentityProvider = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ClientId" }),
+        SpeakeasyMetadata({ data: "json, name=ClientId" }),
         __metadata("design:type", String)
     ], CognitoIdentityProvider.prototype, "clientId", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProviderName" }),
+        SpeakeasyMetadata({ data: "json, name=ProviderName" }),
         __metadata("design:type", String)
     ], CognitoIdentityProvider.prototype, "providerName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServerSideTokenCheck" }),
+        SpeakeasyMetadata({ data: "json, name=ServerSideTokenCheck" }),
         __metadata("design:type", Boolean)
     ], CognitoIdentityProvider.prototype, "serverSideTokenCheck", void 0);
     return CognitoIdentityProvider;

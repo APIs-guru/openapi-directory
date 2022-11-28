@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsEcsServiceDeploymentConfigurationDeploymentCircuitBreakerDetails } from "./awsecsservicedeploymentconfigurationdeploymentcircuitbreakerdetails";
+
 
 
 // AwsEcsServiceDeploymentConfigurationDetails
@@ -7,12 +8,12 @@ import { AwsEcsServiceDeploymentConfigurationDeploymentCircuitBreakerDetails } f
  * Optional deployment parameters for the service.
 **/
 export class AwsEcsServiceDeploymentConfigurationDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DeploymentCircuitBreaker" })
+  @SpeakeasyMetadata({ data: "json, name=DeploymentCircuitBreaker" })
   deploymentCircuitBreaker?: AwsEcsServiceDeploymentConfigurationDeploymentCircuitBreakerDetails;
 
-  @Metadata({ data: "json, name=MaximumPercent" })
+  @SpeakeasyMetadata({ data: "json, name=MaximumPercent" })
   maximumPercent?: number;
 
-  @Metadata({ data: "json, name=MinimumHealthyPercent" })
+  @SpeakeasyMetadata({ data: "json, name=MinimumHealthyPercent" })
   minimumHealthyPercent?: number;
 }

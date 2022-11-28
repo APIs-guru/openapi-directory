@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Job } from "./job";
 
 
+
 export class DescribeJobResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=documentSource" })
+  @SpeakeasyMetadata({ data: "json, name=documentSource" })
   documentSource?: string;
 
-  @Metadata({ data: "json, name=job" })
+  @SpeakeasyMetadata({ data: "json, name=job" })
   job?: Job;
 }

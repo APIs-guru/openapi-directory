@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AliasContext } from "./aliascontext";
+
 
 
 // GerritSourceContext
@@ -7,18 +8,18 @@ import { AliasContext } from "./aliascontext";
  * A SourceContext referring to a Gerrit project.
 **/
 export class GerritSourceContext extends SpeakeasyBase {
-  @Metadata({ data: "json, name=aliasContext" })
+  @SpeakeasyMetadata({ data: "json, name=aliasContext" })
   aliasContext?: AliasContext;
 
-  @Metadata({ data: "json, name=aliasName" })
+  @SpeakeasyMetadata({ data: "json, name=aliasName" })
   aliasName?: string;
 
-  @Metadata({ data: "json, name=gerritProject" })
+  @SpeakeasyMetadata({ data: "json, name=gerritProject" })
   gerritProject?: string;
 
-  @Metadata({ data: "json, name=hostUri" })
+  @SpeakeasyMetadata({ data: "json, name=hostUri" })
   hostUri?: string;
 
-  @Metadata({ data: "json, name=revisionId" })
+  @SpeakeasyMetadata({ data: "json, name=revisionId" })
   revisionId?: string;
 }

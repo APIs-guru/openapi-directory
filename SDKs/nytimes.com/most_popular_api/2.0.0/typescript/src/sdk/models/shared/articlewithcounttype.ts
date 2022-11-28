@@ -1,80 +1,80 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ArticleWithCountTypeMediaMediaMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=format" })
+  @SpeakeasyMetadata({ data: "json, name=format" })
   format?: string;
 
-  @Metadata({ data: "json, name=height" })
+  @SpeakeasyMetadata({ data: "json, name=height" })
   height?: number;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 
-  @Metadata({ data: "json, name=width" })
+  @SpeakeasyMetadata({ data: "json, name=width" })
   width?: number;
 }
 
 
 export class ArticleWithCountTypeMedia extends SpeakeasyBase {
-  @Metadata({ data: "json, name=caption" })
+  @SpeakeasyMetadata({ data: "json, name=caption" })
   caption?: string;
 
-  @Metadata({ data: "json, name=copyright" })
+  @SpeakeasyMetadata({ data: "json, name=copyright" })
   copyright?: string;
 
-  @Metadata({ data: "json, name=media-metadata" })
+  @SpeakeasyMetadata({ data: "json, name=media-metadata" })
   mediaMetadata?: ArticleWithCountTypeMediaMediaMetadata;
 
-  @Metadata({ data: "json, name=subtype" })
+  @SpeakeasyMetadata({ data: "json, name=subtype" })
   subtype?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }
 
 
 export class ArticleWithCountType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=abstract" })
+  @SpeakeasyMetadata({ data: "json, name=abstract" })
   abstract?: string;
 
-  @Metadata({ data: "json, name=byline" })
+  @SpeakeasyMetadata({ data: "json, name=byline" })
   byline?: string;
 
-  @Metadata({ data: "json, name=column" })
+  @SpeakeasyMetadata({ data: "json, name=column" })
   column?: string;
 
-  @Metadata({ data: "json, name=count_type" })
+  @SpeakeasyMetadata({ data: "json, name=count_type" })
   countType?: string;
 
-  @Metadata({ data: "json, name=des_facet" })
+  @SpeakeasyMetadata({ data: "json, name=des_facet" })
   desFacet?: any;
 
-  @Metadata({ data: "json, name=geo_facet" })
+  @SpeakeasyMetadata({ data: "json, name=geo_facet" })
   geoFacet?: any;
 
-  @Metadata({ data: "json, name=media", elemType: shared.ArticleWithCountTypeMedia })
+  @SpeakeasyMetadata({ data: "json, name=media", elemType: ArticleWithCountTypeMedia })
   media?: ArticleWithCountTypeMedia[];
 
-  @Metadata({ data: "json, name=org_facet" })
+  @SpeakeasyMetadata({ data: "json, name=org_facet" })
   orgFacet?: any[];
 
-  @Metadata({ data: "json, name=per_facet" })
+  @SpeakeasyMetadata({ data: "json, name=per_facet" })
   perFacet?: any[];
 
-  @Metadata({ data: "json, name=published_date" })
+  @SpeakeasyMetadata({ data: "json, name=published_date" })
   publishedDate?: string;
 
-  @Metadata({ data: "json, name=section" })
+  @SpeakeasyMetadata({ data: "json, name=section" })
   section?: string;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }

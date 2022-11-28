@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Job } from "./job";
+
 
 
 // ListJobsResponse
@@ -8,12 +8,12 @@ import { Job } from "./job";
  * Response message for `TranscoderService.ListJobs`.
 **/
 export class ListJobsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=jobs", elemType: shared.Job })
+  @SpeakeasyMetadata({ data: "json, name=jobs", elemType: Job })
   jobs?: Job[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=unreachable" })
+  @SpeakeasyMetadata({ data: "json, name=unreachable" })
   unreachable?: string[];
 }

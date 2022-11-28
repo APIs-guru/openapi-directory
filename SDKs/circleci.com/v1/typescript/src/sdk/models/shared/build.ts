@@ -1,60 +1,61 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LifecycleEnum } from "./lifecycleenum";
 import { PreviousBuild } from "./previousbuild";
 
 
+
 export class Build extends SpeakeasyBase {
-  @Metadata({ data: "json, name=body" })
+  @SpeakeasyMetadata({ data: "json, name=body" })
   body?: string;
 
-  @Metadata({ data: "json, name=branch" })
+  @SpeakeasyMetadata({ data: "json, name=branch" })
   branch?: string;
 
-  @Metadata({ data: "json, name=build_time_millis" })
+  @SpeakeasyMetadata({ data: "json, name=build_time_millis" })
   buildTimeMillis?: number;
 
-  @Metadata({ data: "json, name=build_url" })
+  @SpeakeasyMetadata({ data: "json, name=build_url" })
   buildUrl?: string;
 
-  @Metadata({ data: "json, name=committer_email" })
+  @SpeakeasyMetadata({ data: "json, name=committer_email" })
   committerEmail?: string;
 
-  @Metadata({ data: "json, name=committer_name" })
+  @SpeakeasyMetadata({ data: "json, name=committer_name" })
   committerName?: string;
 
-  @Metadata({ data: "json, name=dont_build" })
+  @SpeakeasyMetadata({ data: "json, name=dont_build" })
   dontBuild?: string;
 
-  @Metadata({ data: "json, name=lifecycle" })
+  @SpeakeasyMetadata({ data: "json, name=lifecycle" })
   lifecycle?: LifecycleEnum;
 
-  @Metadata({ data: "json, name=previous" })
+  @SpeakeasyMetadata({ data: "json, name=previous" })
   previous?: PreviousBuild;
 
-  @Metadata({ data: "json, name=queued_at" })
+  @SpeakeasyMetadata({ data: "json, name=queued_at" })
   queuedAt?: Date;
 
-  @Metadata({ data: "json, name=reponame" })
+  @SpeakeasyMetadata({ data: "json, name=reponame" })
   reponame?: string;
 
-  @Metadata({ data: "json, name=retry_of" })
+  @SpeakeasyMetadata({ data: "json, name=retry_of" })
   retryOf?: number;
 
-  @Metadata({ data: "json, name=start_time" })
+  @SpeakeasyMetadata({ data: "json, name=start_time" })
   startTime?: Date;
 
-  @Metadata({ data: "json, name=stop_time" })
+  @SpeakeasyMetadata({ data: "json, name=stop_time" })
   stopTime?: Date;
 
-  @Metadata({ data: "json, name=subject" })
+  @SpeakeasyMetadata({ data: "json, name=subject" })
   subject?: string;
 
-  @Metadata({ data: "json, name=username" })
+  @SpeakeasyMetadata({ data: "json, name=username" })
   username?: string;
 
-  @Metadata({ data: "json, name=vcs_url" })
+  @SpeakeasyMetadata({ data: "json, name=vcs_url" })
   vcsUrl?: string;
 
-  @Metadata({ data: "json, name=why" })
+  @SpeakeasyMetadata({ data: "json, name=why" })
   why?: string;
 }

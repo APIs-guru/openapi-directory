@@ -1,6 +1,7 @@
 
 
+
 export enum ResolverEndpointDirectionEnum {
-    Inbound = "INBOUND"
-,    Outbound = "OUTBOUND"
+    Inbound = "INBOUND",
+    Outbound = "OUTBOUND"
 }

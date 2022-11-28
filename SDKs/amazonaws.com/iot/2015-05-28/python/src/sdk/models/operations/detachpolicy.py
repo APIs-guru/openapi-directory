@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
 class DetachPolicyPathParams:
-    policy_name: str = field(default=None, metadata={'path_param': { 'field_name': 'policyName', 'style': 'simple', 'explode': False }})
+    policy_name: str = field(metadata={'path_param': { 'field_name': 'policyName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,24 +26,24 @@ class DetachPolicyHeaders:
 @dataclass_json
 @dataclass
 class DetachPolicyRequestBody:
-    target: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'target' }})
+    target: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('target') }})
     
 
 @dataclass
 class DetachPolicyRequest:
-    path_params: DetachPolicyPathParams = field(default=None)
-    headers: DetachPolicyHeaders = field(default=None)
-    request: DetachPolicyRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: DetachPolicyHeaders = field()
+    path_params: DetachPolicyPathParams = field()
+    request: DetachPolicyRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DetachPolicyResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

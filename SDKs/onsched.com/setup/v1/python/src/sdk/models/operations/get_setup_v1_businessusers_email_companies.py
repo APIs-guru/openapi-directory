@@ -1,11 +1,11 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetSetupV1BusinessusersEmailCompaniesPathParams:
-    email: str = field(default=None, metadata={'path_param': { 'field_name': 'email', 'style': 'simple', 'explode': False }})
+    email: str = field(metadata={'path_param': { 'field_name': 'email', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,13 +17,13 @@ class GetSetupV1BusinessusersEmailCompaniesQueryParams:
 
 @dataclass
 class GetSetupV1BusinessusersEmailCompaniesRequest:
-    path_params: GetSetupV1BusinessusersEmailCompaniesPathParams = field(default=None)
-    query_params: GetSetupV1BusinessusersEmailCompaniesQueryParams = field(default=None)
+    path_params: GetSetupV1BusinessusersEmailCompaniesPathParams = field()
+    query_params: GetSetupV1BusinessusersEmailCompaniesQueryParams = field()
     
 
 @dataclass
 class GetSetupV1BusinessusersEmailCompaniesResponse:
+    content_type: str = field()
+    status_code: int = field()
     authorized_company_list_view_model: Optional[shared.AuthorizedCompanyListViewModel] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

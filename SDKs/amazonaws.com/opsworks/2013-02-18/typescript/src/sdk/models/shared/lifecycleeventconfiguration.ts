@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ShutdownEventConfiguration } from "./shutdowneventconfiguration";
+
 
 
 // LifecycleEventConfiguration
@@ -7,6 +8,6 @@ import { ShutdownEventConfiguration } from "./shutdowneventconfiguration";
  * Specifies the lifecycle event configuration
 **/
 export class LifecycleEventConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Shutdown" })
+  @SpeakeasyMetadata({ data: "json, name=Shutdown" })
   shutdown?: ShutdownEventConfiguration;
 }

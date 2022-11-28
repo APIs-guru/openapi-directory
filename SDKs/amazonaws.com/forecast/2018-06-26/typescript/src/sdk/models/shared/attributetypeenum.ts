@@ -1,9 +1,10 @@
 
 
+
 export enum AttributeTypeEnum {
-    String = "string"
-,    Integer = "integer"
-,    Float = "float"
-,    Timestamp = "timestamp"
-,    Geolocation = "geolocation"
+    String = "string",
+    Integer = "integer",
+    Float = "float",
+    Timestamp = "timestamp",
+    Geolocation = "geolocation"
 }

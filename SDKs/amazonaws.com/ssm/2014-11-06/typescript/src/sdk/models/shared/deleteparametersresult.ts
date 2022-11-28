@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteParametersResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DeletedParameters" })
+  @SpeakeasyMetadata({ data: "json, name=DeletedParameters" })
   deletedParameters?: string[];
 
-  @Metadata({ data: "json, name=InvalidParameters" })
+  @SpeakeasyMetadata({ data: "json, name=InvalidParameters" })
   invalidParameters?: string[];
 }

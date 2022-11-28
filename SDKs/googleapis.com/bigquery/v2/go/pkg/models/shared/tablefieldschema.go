@@ -1,5 +1,7 @@
 package shared
 
+// TableFieldSchemaCategories
+// [Optional] The categories attached to this field, used for field-level access control.
 type TableFieldSchemaCategories struct {
 	Names []string `json:"names,omitempty"`
 }

@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -24,23 +28,23 @@ class DescribeJobLogItemsHeaders:
 @dataclass_json
 @dataclass
 class DescribeJobLogItemsRequestBody:
-    job_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'jobID' }})
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxResults' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextToken' }})
+    job_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('jobID') }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxResults') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextToken') }})
     
 
 @dataclass
 class DescribeJobLogItemsRequest:
-    query_params: DescribeJobLogItemsQueryParams = field(default=None)
-    headers: DescribeJobLogItemsHeaders = field(default=None)
-    request: DescribeJobLogItemsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: DescribeJobLogItemsHeaders = field()
+    query_params: DescribeJobLogItemsQueryParams = field()
+    request: DescribeJobLogItemsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DescribeJobLogItemsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     describe_job_log_items_response: Optional[shared.DescribeJobLogItemsResponse] = field(default=None)
-    status_code: int = field(default=None)
     uninitialized_account_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

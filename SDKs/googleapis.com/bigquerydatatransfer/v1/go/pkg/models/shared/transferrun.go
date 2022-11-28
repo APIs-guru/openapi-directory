@@ -11,6 +11,8 @@ const (
 	TransferRunStateEnumCancelled                TransferRunStateEnum = "CANCELLED"
 )
 
+// TransferRun
+// Represents a data transfer run.
 type TransferRun struct {
 	DataSourceID            *string                `json:"dataSourceId,omitempty"`
 	DestinationDatasetID    *string                `json:"destinationDatasetId,omitempty"`

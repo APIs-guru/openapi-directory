@@ -2,21 +2,20 @@ package operations
 
 import (
 	"openapi/pkg/models/shared"
+	"time"
 )
 
 type GetCmsV3DomainsGetPageQueryParams struct {
-	After         *string  `queryParam:"style=form,explode=true,name=after"`
-	Archived      *bool    `queryParam:"style=form,explode=true,name=archived"`
-	Before        *string  `queryParam:"style=form,explode=true,name=before"`
-	CreatedAfter  *int64   `queryParam:"style=form,explode=true,name=createdAfter"`
-	CreatedAt     *int64   `queryParam:"style=form,explode=true,name=createdAt"`
-	CreatedBefore *int64   `queryParam:"style=form,explode=true,name=createdBefore"`
-	Limit         *int32   `queryParam:"style=form,explode=true,name=limit"`
-	Properties    []string `queryParam:"style=form,explode=true,name=properties"`
-	Sort          []string `queryParam:"style=form,explode=true,name=sort"`
-	UpdatedAfter  *int64   `queryParam:"style=form,explode=true,name=updatedAfter"`
-	UpdatedAt     *int64   `queryParam:"style=form,explode=true,name=updatedAt"`
-	UpdatedBefore *int64   `queryParam:"style=form,explode=true,name=updatedBefore"`
+	After         *string    `queryParam:"style=form,explode=true,name=after"`
+	Archived      *bool      `queryParam:"style=form,explode=true,name=archived"`
+	CreatedAfter  *time.Time `queryParam:"style=form,explode=true,name=createdAfter"`
+	CreatedAt     *time.Time `queryParam:"style=form,explode=true,name=createdAt"`
+	CreatedBefore *time.Time `queryParam:"style=form,explode=true,name=createdBefore"`
+	Limit         *int32     `queryParam:"style=form,explode=true,name=limit"`
+	Sort          []string   `queryParam:"style=form,explode=true,name=sort"`
+	UpdatedAfter  *time.Time `queryParam:"style=form,explode=true,name=updatedAfter"`
+	UpdatedAt     *time.Time `queryParam:"style=form,explode=true,name=updatedAt"`
+	UpdatedBefore *time.Time `queryParam:"style=form,explode=true,name=updatedBefore"`
 }
 
 type GetCmsV3DomainsGetPageSecurity struct {
@@ -29,8 +28,8 @@ type GetCmsV3DomainsGetPageRequest struct {
 }
 
 type GetCmsV3DomainsGetPageResponse struct {
-	Body                              []byte
-	CollectionResponseWithTotalDomain *shared.CollectionResponseWithTotalDomain
-	ContentType                       string
-	StatusCode                        int64
+	Body                                           []byte
+	CollectionResponseWithTotalDomainForwardPaging *shared.CollectionResponseWithTotalDomainForwardPaging
+	ContentType                                    string
+	StatusCode                                     int64
 }

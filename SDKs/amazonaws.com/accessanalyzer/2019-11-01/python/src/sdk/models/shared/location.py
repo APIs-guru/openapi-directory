@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import pathelement
-from . import span
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Location:
-    path: List[pathelement.PathElement] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'path' }})
-    span: span.Span = field(default=None, metadata={'dataclasses_json': { 'field_name': 'span' }})
+    r"""Location
+    A location in a policy that is represented as a path through the JSON representation and a corresponding span.
+    """
+    
+    path: List[PathElement] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('path') }})
+    span: Span = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('span') }})
     

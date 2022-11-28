@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Instance } from "./instance";
 import { Parent } from "./parent";
+
 
 
 // Label
@@ -9,15 +9,15 @@ import { Parent } from "./parent";
  * <p>Structure containing details about the detected label, including the name, detected instances, parent labels, and level of confidence.</p> <p> </p>
 **/
 export class Label extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Confidence" })
+  @SpeakeasyMetadata({ data: "json, name=Confidence" })
   confidence?: number;
 
-  @Metadata({ data: "json, name=Instances", elemType: shared.Instance })
+  @SpeakeasyMetadata({ data: "json, name=Instances", elemType: Instance })
   instances?: Instance[];
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Parents", elemType: shared.Parent })
+  @SpeakeasyMetadata({ data: "json, name=Parents", elemType: Parent })
   parents?: Parent[];
 }

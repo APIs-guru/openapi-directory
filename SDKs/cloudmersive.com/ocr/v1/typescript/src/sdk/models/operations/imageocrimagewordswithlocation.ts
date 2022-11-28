@@ -1,59 +1,60 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ImageOcrImageWordsWithLocationHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=language" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=language" })
   language?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=preprocessing" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=preprocessing" })
   preprocessing?: string;
 }
 
 
 export class ImageOcrImageWordsWithLocationRequestBodyImageFile extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, content=true" })
+  @SpeakeasyMetadata({ data: "multipart_form, content=true" })
   content: Uint8Array;
 
-  @Metadata({ data: "multipart_form, name=imageFile" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=imageFile" })
   imageFile: string;
 }
 
 
 export class ImageOcrImageWordsWithLocationRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, file=true" })
+  @SpeakeasyMetadata({ data: "multipart_form, file=true" })
   imageFile: ImageOcrImageWordsWithLocationRequestBodyImageFile;
 }
 
 
 export class ImageOcrImageWordsWithLocationSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   apikey: shared.SchemeApikey;
 }
 
 
 export class ImageOcrImageWordsWithLocationRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: ImageOcrImageWordsWithLocationHeaders;
 
-  @Metadata({ data: "request, media_type=multipart/form-data" })
+  @SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" })
   request: ImageOcrImageWordsWithLocationRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: ImageOcrImageWordsWithLocationSecurity;
 }
 
 
 export class ImageOcrImageWordsWithLocationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   imageToWordsWithLocationResult?: shared.ImageToWordsWithLocationResult;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

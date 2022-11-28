@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { History } from "./history";
+
 
 
 // ListHistoriesResponse
@@ -8,9 +8,9 @@ import { History } from "./history";
  * Response message for HistoryService.List
 **/
 export class ListHistoriesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=histories", elemType: shared.History })
+  @SpeakeasyMetadata({ data: "json, name=histories", elemType: History })
   histories?: History[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

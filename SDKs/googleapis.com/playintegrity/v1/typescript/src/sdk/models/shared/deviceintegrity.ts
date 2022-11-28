@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum DeviceIntegrityDeviceRecognitionVerdictEnum {
-    Unknown = "UNKNOWN"
-,    MeetsBasicIntegrity = "MEETS_BASIC_INTEGRITY"
-,    MeetsDeviceIntegrity = "MEETS_DEVICE_INTEGRITY"
-,    MeetsStrongIntegrity = "MEETS_STRONG_INTEGRITY"
-,    MeetsVirtualIntegrity = "MEETS_VIRTUAL_INTEGRITY"
+    Unknown = "UNKNOWN",
+    MeetsBasicIntegrity = "MEETS_BASIC_INTEGRITY",
+    MeetsDeviceIntegrity = "MEETS_DEVICE_INTEGRITY",
+    MeetsStrongIntegrity = "MEETS_STRONG_INTEGRITY",
+    MeetsVirtualIntegrity = "MEETS_VIRTUAL_INTEGRITY"
 }
 
 
@@ -14,6 +15,6 @@ export enum DeviceIntegrityDeviceRecognitionVerdictEnum {
  * Contains the device attestation information.
 **/
 export class DeviceIntegrity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deviceRecognitionVerdict" })
+  @SpeakeasyMetadata({ data: "json, name=deviceRecognitionVerdict" })
   deviceRecognitionVerdict?: DeviceIntegrityDeviceRecognitionVerdictEnum[];
 }

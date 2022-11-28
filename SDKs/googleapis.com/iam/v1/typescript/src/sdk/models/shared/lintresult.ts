@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum LintResultLevelEnum {
-    LevelUnspecified = "LEVEL_UNSPECIFIED"
-,    Condition = "CONDITION"
+    LevelUnspecified = "LEVEL_UNSPECIFIED",
+    Condition = "CONDITION"
 }
 
 export enum LintResultSeverityEnum {
-    SeverityUnspecified = "SEVERITY_UNSPECIFIED"
-,    Error = "ERROR"
-,    Warning = "WARNING"
-,    Notice = "NOTICE"
-,    Info = "INFO"
-,    Deprecated = "DEPRECATED"
+    SeverityUnspecified = "SEVERITY_UNSPECIFIED",
+    Error = "ERROR",
+    Warning = "WARNING",
+    Notice = "NOTICE",
+    Info = "INFO",
+    Deprecated = "DEPRECATED"
 }
 
 
@@ -20,21 +21,21 @@ export enum LintResultSeverityEnum {
  * Structured response of a single validation unit.
 **/
 export class LintResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=debugMessage" })
+  @SpeakeasyMetadata({ data: "json, name=debugMessage" })
   debugMessage?: string;
 
-  @Metadata({ data: "json, name=fieldName" })
+  @SpeakeasyMetadata({ data: "json, name=fieldName" })
   fieldName?: string;
 
-  @Metadata({ data: "json, name=level" })
+  @SpeakeasyMetadata({ data: "json, name=level" })
   level?: LintResultLevelEnum;
 
-  @Metadata({ data: "json, name=locationOffset" })
+  @SpeakeasyMetadata({ data: "json, name=locationOffset" })
   locationOffset?: number;
 
-  @Metadata({ data: "json, name=severity" })
+  @SpeakeasyMetadata({ data: "json, name=severity" })
   severity?: LintResultSeverityEnum;
 
-  @Metadata({ data: "json, name=validationUnitName" })
+  @SpeakeasyMetadata({ data: "json, name=validationUnitName" })
   validationUnitName?: string;
 }

@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ToolresultsProjectsHistoriesExecutionsClustersListPathParams:
-    execution_id: str = field(default=None, metadata={'path_param': { 'field_name': 'executionId', 'style': 'simple', 'explode': False }})
-    history_id: str = field(default=None, metadata={'path_param': { 'field_name': 'historyId', 'style': 'simple', 'explode': False }})
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
+    execution_id: str = field(metadata={'path_param': { 'field_name': 'executionId', 'style': 'simple', 'explode': False }})
+    history_id: str = field(metadata={'path_param': { 'field_name': 'historyId', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class ToolresultsProjectsHistoriesExecutionsClustersListQueryParams:
 
 @dataclass
 class ToolresultsProjectsHistoriesExecutionsClustersListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ToolresultsProjectsHistoriesExecutionsClustersListRequest:
-    path_params: ToolresultsProjectsHistoriesExecutionsClustersListPathParams = field(default=None)
-    query_params: ToolresultsProjectsHistoriesExecutionsClustersListQueryParams = field(default=None)
-    security: ToolresultsProjectsHistoriesExecutionsClustersListSecurity = field(default=None)
+    path_params: ToolresultsProjectsHistoriesExecutionsClustersListPathParams = field()
+    query_params: ToolresultsProjectsHistoriesExecutionsClustersListQueryParams = field()
+    security: ToolresultsProjectsHistoriesExecutionsClustersListSecurity = field()
     
 
 @dataclass
 class ToolresultsProjectsHistoriesExecutionsClustersListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_screenshot_clusters_response: Optional[shared.ListScreenshotClustersResponse] = field(default=None)
-    status_code: int = field(default=None)
     

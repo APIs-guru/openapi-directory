@@ -1,5 +1,7 @@
 package shared
 
+// LabelSearchResultItem
+// Label Search Result Item
 type LabelSearchResultItem struct {
 	Color       string                    `json:"color"`
 	Default     bool                      `json:"default"`

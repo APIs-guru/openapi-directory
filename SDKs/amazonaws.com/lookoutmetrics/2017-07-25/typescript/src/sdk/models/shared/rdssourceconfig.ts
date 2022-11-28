@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VpcConfiguration } from "./vpcconfiguration";
+
 
 
 // RdsSourceConfig
@@ -7,27 +8,27 @@ import { VpcConfiguration } from "./vpcconfiguration";
  * Contains information about the Amazon Relational Database Service (RDS) configuration.
 **/
 export class RdsSourceConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DBInstanceIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=DBInstanceIdentifier" })
   dbInstanceIdentifier: string;
 
-  @Metadata({ data: "json, name=DatabaseHost" })
+  @SpeakeasyMetadata({ data: "json, name=DatabaseHost" })
   databaseHost: string;
 
-  @Metadata({ data: "json, name=DatabaseName" })
+  @SpeakeasyMetadata({ data: "json, name=DatabaseName" })
   databaseName: string;
 
-  @Metadata({ data: "json, name=DatabasePort" })
+  @SpeakeasyMetadata({ data: "json, name=DatabasePort" })
   databasePort: number;
 
-  @Metadata({ data: "json, name=RoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=RoleArn" })
   roleArn: string;
 
-  @Metadata({ data: "json, name=SecretManagerArn" })
+  @SpeakeasyMetadata({ data: "json, name=SecretManagerArn" })
   secretManagerArn: string;
 
-  @Metadata({ data: "json, name=TableName" })
+  @SpeakeasyMetadata({ data: "json, name=TableName" })
   tableName: string;
 
-  @Metadata({ data: "json, name=VpcConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=VpcConfiguration" })
   vpcConfiguration: VpcConfiguration;
 }

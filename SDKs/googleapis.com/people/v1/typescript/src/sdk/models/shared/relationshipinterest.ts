@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FieldMetadata } from "./fieldmetadata";
+
 
 
 // RelationshipInterest
@@ -7,12 +8,12 @@ import { FieldMetadata } from "./fieldmetadata";
  * **DEPRECATED**: No data will be returned A person's relationship interest .
 **/
 export class RelationshipInterest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=formattedValue" })
+  @SpeakeasyMetadata({ data: "json, name=formattedValue" })
   formattedValue?: string;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: FieldMetadata;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }

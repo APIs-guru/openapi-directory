@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { EnvironmentAccessTypeEnum } from "./environmentaccesstypeenum";
 export declare class EnvironmentAccessModel extends SpeakeasyBase {
     environmentAccessType?: EnvironmentAccessTypeEnum;

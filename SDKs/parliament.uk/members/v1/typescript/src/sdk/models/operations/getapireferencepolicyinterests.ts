@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetApiReferencePolicyInterestsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.GenericReferenceData })
+  @SpeakeasyMetadata({ elemType: shared.GenericReferenceData })
   genericReferenceData?: shared.GenericReferenceData[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

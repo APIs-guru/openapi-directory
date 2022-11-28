@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import paging
-from . import file
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CollectionResponseFile:
-    paging: Optional[paging.Paging] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'paging' }})
-    results: List[file.File] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'results' }})
+    r"""CollectionResponseFile
+    Collections of files
+    """
+    
+    results: List[File] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('results') }})
+    paging: Optional[Paging] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('paging') }})
     

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// LandlordAccountingEntryModel
+// Landlord Accounting - Finance Entry
 type LandlordAccountingEntryModel struct {
 	Amount            *float64   `json:"Amount,omitempty"`
 	Date              *time.Time `json:"Date,omitempty"`

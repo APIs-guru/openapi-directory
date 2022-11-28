@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class ActionsGetPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ActionsGetRequest:
-    path_params: ActionsGetPathParams = field(default=None)
+    path_params: ActionsGetPathParams = field()
     
 
 @dataclass
 class ActionsGetResponse:
+    content_type: str = field()
+    status_code: int = field()
     action_informations: Optional[List[shared.ActionInformation]] = field(default=None)
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    body: Optional[bytes] = field(default=None)
     

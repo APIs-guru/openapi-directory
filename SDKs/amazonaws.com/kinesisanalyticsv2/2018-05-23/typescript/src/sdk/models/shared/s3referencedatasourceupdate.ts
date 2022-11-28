@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // S3ReferenceDataSourceUpdate
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * For a SQL-based Kinesis Data Analytics application, describes the Amazon S3 bucket name and object key name for an in-application reference table. 
 **/
 export class S3ReferenceDataSourceUpdate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BucketARNUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=BucketARNUpdate" })
   bucketArnUpdate?: string;
 
-  @Metadata({ data: "json, name=FileKeyUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=FileKeyUpdate" })
   fileKeyUpdate?: string;
 }

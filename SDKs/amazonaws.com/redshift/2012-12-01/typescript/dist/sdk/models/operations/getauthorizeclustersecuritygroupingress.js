@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetAuthorizeClusterSecurityGroupIngressActionEnum;
 (function (GetAuthorizeClusterSecurityGroupIngressActionEnum) {
     GetAuthorizeClusterSecurityGroupIngressActionEnum["AuthorizeClusterSecurityGroupIngress"] = "AuthorizeClusterSecurityGroupIngress";
@@ -37,27 +37,27 @@ var GetAuthorizeClusterSecurityGroupIngressQueryParams = /** @class */ (function
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" }),
         __metadata("design:type", String)
     ], GetAuthorizeClusterSecurityGroupIngressQueryParams.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=CIDRIP" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=CIDRIP" }),
         __metadata("design:type", String)
     ], GetAuthorizeClusterSecurityGroupIngressQueryParams.prototype, "cidrip", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ClusterSecurityGroupName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ClusterSecurityGroupName" }),
         __metadata("design:type", String)
     ], GetAuthorizeClusterSecurityGroupIngressQueryParams.prototype, "clusterSecurityGroupName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=EC2SecurityGroupName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=EC2SecurityGroupName" }),
         __metadata("design:type", String)
     ], GetAuthorizeClusterSecurityGroupIngressQueryParams.prototype, "ec2SecurityGroupName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=EC2SecurityGroupOwnerId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=EC2SecurityGroupOwnerId" }),
         __metadata("design:type", String)
     ], GetAuthorizeClusterSecurityGroupIngressQueryParams.prototype, "ec2SecurityGroupOwnerId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" }),
         __metadata("design:type", String)
     ], GetAuthorizeClusterSecurityGroupIngressQueryParams.prototype, "version", void 0);
     return GetAuthorizeClusterSecurityGroupIngressQueryParams;
@@ -69,31 +69,31 @@ var GetAuthorizeClusterSecurityGroupIngressHeaders = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], GetAuthorizeClusterSecurityGroupIngressHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], GetAuthorizeClusterSecurityGroupIngressHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], GetAuthorizeClusterSecurityGroupIngressHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], GetAuthorizeClusterSecurityGroupIngressHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], GetAuthorizeClusterSecurityGroupIngressHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], GetAuthorizeClusterSecurityGroupIngressHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], GetAuthorizeClusterSecurityGroupIngressHeaders.prototype, "xAmzSignedHeaders", void 0);
     return GetAuthorizeClusterSecurityGroupIngressHeaders;
@@ -105,11 +105,11 @@ var GetAuthorizeClusterSecurityGroupIngressRequest = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAuthorizeClusterSecurityGroupIngressQueryParams)
     ], GetAuthorizeClusterSecurityGroupIngressRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAuthorizeClusterSecurityGroupIngressHeaders)
     ], GetAuthorizeClusterSecurityGroupIngressRequest.prototype, "headers", void 0);
     return GetAuthorizeClusterSecurityGroupIngressRequest;
@@ -121,15 +121,15 @@ var GetAuthorizeClusterSecurityGroupIngressResponse = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetAuthorizeClusterSecurityGroupIngressResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetAuthorizeClusterSecurityGroupIngressResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetAuthorizeClusterSecurityGroupIngressResponse.prototype, "statusCode", void 0);
     return GetAuthorizeClusterSecurityGroupIngressResponse;

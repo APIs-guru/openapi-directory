@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class PatchActionEnum(str, Enum):
     ALLOW_AS_DEPENDENCY = "ALLOW_AS_DEPENDENCY"

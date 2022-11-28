@@ -5,10 +5,6 @@ type GetDocumentationRelationsPathParams struct {
 	APIVersionID string `pathParam:"style=simple,explode=false,name=apiVersionId"`
 }
 
-type GetDocumentationRelationsRequest struct {
-	PathParams GetDocumentationRelationsPathParams
-}
-
 type GetDocumentationRelations200ApplicationJSONDocumentation struct {
 	CollectionID *string `json:"collectionId,omitempty"`
 	ID           *string `json:"id,omitempty"`
@@ -18,6 +14,10 @@ type GetDocumentationRelations200ApplicationJSONDocumentation struct {
 
 type GetDocumentationRelations200ApplicationJSON struct {
 	Documentation []GetDocumentationRelations200ApplicationJSONDocumentation `json:"documentation,omitempty"`
+}
+
+type GetDocumentationRelationsRequest struct {
+	PathParams GetDocumentationRelationsPathParams
 }
 
 type GetDocumentationRelationsResponse struct {

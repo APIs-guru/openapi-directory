@@ -22,9 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { V2AndroidKeyRestrictions } from "./v2androidkeyrestrictions";
+import { V2ApiTarget } from "./v2apitarget";
 import { V2BrowserKeyRestrictions } from "./v2browserkeyrestrictions";
 import { V2IosKeyRestrictions } from "./v2ioskeyrestrictions";
 import { V2ServerKeyRestrictions } from "./v2serverkeyrestrictions";
@@ -38,23 +38,23 @@ var V2Restrictions = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=androidKeyRestrictions" }),
+        SpeakeasyMetadata({ data: "json, name=androidKeyRestrictions" }),
         __metadata("design:type", V2AndroidKeyRestrictions)
     ], V2Restrictions.prototype, "androidKeyRestrictions", void 0);
     __decorate([
-        Metadata({ data: "json, name=apiTargets", elemType: shared.V2ApiTarget }),
+        SpeakeasyMetadata({ data: "json, name=apiTargets", elemType: V2ApiTarget }),
         __metadata("design:type", Array)
     ], V2Restrictions.prototype, "apiTargets", void 0);
     __decorate([
-        Metadata({ data: "json, name=browserKeyRestrictions" }),
+        SpeakeasyMetadata({ data: "json, name=browserKeyRestrictions" }),
         __metadata("design:type", V2BrowserKeyRestrictions)
     ], V2Restrictions.prototype, "browserKeyRestrictions", void 0);
     __decorate([
-        Metadata({ data: "json, name=iosKeyRestrictions" }),
+        SpeakeasyMetadata({ data: "json, name=iosKeyRestrictions" }),
         __metadata("design:type", V2IosKeyRestrictions)
     ], V2Restrictions.prototype, "iosKeyRestrictions", void 0);
     __decorate([
-        Metadata({ data: "json, name=serverKeyRestrictions" }),
+        SpeakeasyMetadata({ data: "json, name=serverKeyRestrictions" }),
         __metadata("design:type", V2ServerKeyRestrictions)
     ], V2Restrictions.prototype, "serverKeyRestrictions", void 0);
     return V2Restrictions;

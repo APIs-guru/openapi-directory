@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UserConsentRepresentation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clientId" })
+  @SpeakeasyMetadata({ data: "json, name=clientId" })
   clientId?: string;
 
-  @Metadata({ data: "json, name=createdDate" })
+  @SpeakeasyMetadata({ data: "json, name=createdDate" })
   createdDate?: number;
 
-  @Metadata({ data: "json, name=grantedClientScopes" })
+  @SpeakeasyMetadata({ data: "json, name=grantedClientScopes" })
   grantedClientScopes?: string[];
 
-  @Metadata({ data: "json, name=lastUpdatedDate" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdatedDate" })
   lastUpdatedDate?: number;
 }

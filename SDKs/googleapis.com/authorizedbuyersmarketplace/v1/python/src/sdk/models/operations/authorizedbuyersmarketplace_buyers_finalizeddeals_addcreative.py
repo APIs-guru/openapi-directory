@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AuthorizedbuyersmarketplaceBuyersFinalizedDealsAddCreativePathParams:
-    deal: str = field(default=None, metadata={'path_param': { 'field_name': 'deal', 'style': 'simple', 'explode': False }})
+    deal: str = field(metadata={'path_param': { 'field_name': 'deal', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class AuthorizedbuyersmarketplaceBuyersFinalizedDealsAddCreativeQueryParams:
 
 @dataclass
 class AuthorizedbuyersmarketplaceBuyersFinalizedDealsAddCreativeSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AuthorizedbuyersmarketplaceBuyersFinalizedDealsAddCreativeRequest:
-    path_params: AuthorizedbuyersmarketplaceBuyersFinalizedDealsAddCreativePathParams = field(default=None)
-    query_params: AuthorizedbuyersmarketplaceBuyersFinalizedDealsAddCreativeQueryParams = field(default=None)
+    path_params: AuthorizedbuyersmarketplaceBuyersFinalizedDealsAddCreativePathParams = field()
+    query_params: AuthorizedbuyersmarketplaceBuyersFinalizedDealsAddCreativeQueryParams = field()
+    security: AuthorizedbuyersmarketplaceBuyersFinalizedDealsAddCreativeSecurity = field()
     request: Optional[shared.AddCreativeRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AuthorizedbuyersmarketplaceBuyersFinalizedDealsAddCreativeSecurity = field(default=None)
     
 
 @dataclass
 class AuthorizedbuyersmarketplaceBuyersFinalizedDealsAddCreativeResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     finalized_deal: Optional[shared.FinalizedDeal] = field(default=None)
-    status_code: int = field(default=None)
     

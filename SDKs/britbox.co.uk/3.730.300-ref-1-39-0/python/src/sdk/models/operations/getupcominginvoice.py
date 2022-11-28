@@ -10,19 +10,19 @@ class GetUpcomingInvoiceQueryParams:
 
 @dataclass
 class GetUpcomingInvoiceSecurity:
-    account_auth: shared.SchemeAccountAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    account_auth: shared.SchemeAccountAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetUpcomingInvoiceRequest:
-    query_params: GetUpcomingInvoiceQueryParams = field(default=None)
-    security: GetUpcomingInvoiceSecurity = field(default=None)
+    query_params: GetUpcomingInvoiceQueryParams = field()
+    security: GetUpcomingInvoiceSecurity = field()
     
 
 @dataclass
 class GetUpcomingInvoiceResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     itv_get_discount_response: Optional[shared.ItvGetDiscountResponse] = field(default=None)
     service_error: Optional[shared.ServiceError] = field(default=None)
-    status_code: int = field(default=None)
     

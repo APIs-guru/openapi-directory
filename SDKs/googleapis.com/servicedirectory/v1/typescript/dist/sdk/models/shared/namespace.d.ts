@@ -1,8 +1,16 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
+/**
+ * A container for services. Namespaces allow administrators to group services together and define permissions for a collection of services.
+**/
+export declare class NamespaceInput extends SpeakeasyBase {
+    labels?: Map<string, string>;
+    name?: string;
+}
 /**
  * A container for services. Namespaces allow administrators to group services together and define permissions for a collection of services.
 **/
 export declare class Namespace extends SpeakeasyBase {
     labels?: Map<string, string>;
     name?: string;
+    uid?: string;
 }

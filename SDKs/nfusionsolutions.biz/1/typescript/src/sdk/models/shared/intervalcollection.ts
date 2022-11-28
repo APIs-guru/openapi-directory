@@ -1,18 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Interval } from "./interval";
 
 
+
 export class IntervalCollection extends SpeakeasyBase {
-  @Metadata({ data: "json, name=baseCurrency" })
+  @SpeakeasyMetadata({ data: "json, name=baseCurrency" })
   baseCurrency?: string;
 
-  @Metadata({ data: "json, name=intervals", elemType: shared.Interval })
+  @SpeakeasyMetadata({ data: "json, name=intervals", elemType: Interval })
   intervals?: Interval[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=symbol" })
+  @SpeakeasyMetadata({ data: "json, name=symbol" })
   symbol?: string;
 }

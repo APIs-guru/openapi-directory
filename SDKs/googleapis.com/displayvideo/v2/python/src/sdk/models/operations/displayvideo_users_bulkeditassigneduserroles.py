@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DisplayvideoUsersBulkEditAssignedUserRolesPathParams:
-    user_id: str = field(default=None, metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
+    user_id: str = field(metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class DisplayvideoUsersBulkEditAssignedUserRolesQueryParams:
 
 @dataclass
 class DisplayvideoUsersBulkEditAssignedUserRolesSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DisplayvideoUsersBulkEditAssignedUserRolesRequest:
-    path_params: DisplayvideoUsersBulkEditAssignedUserRolesPathParams = field(default=None)
-    query_params: DisplayvideoUsersBulkEditAssignedUserRolesQueryParams = field(default=None)
-    request: Optional[shared.BulkEditAssignedUserRolesRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DisplayvideoUsersBulkEditAssignedUserRolesSecurity = field(default=None)
+    path_params: DisplayvideoUsersBulkEditAssignedUserRolesPathParams = field()
+    query_params: DisplayvideoUsersBulkEditAssignedUserRolesQueryParams = field()
+    security: DisplayvideoUsersBulkEditAssignedUserRolesSecurity = field()
+    request: Optional[shared.BulkEditAssignedUserRolesRequestInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DisplayvideoUsersBulkEditAssignedUserRolesResponse:
+    content_type: str = field()
+    status_code: int = field()
     bulk_edit_assigned_user_roles_response: Optional[shared.BulkEditAssignedUserRolesResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

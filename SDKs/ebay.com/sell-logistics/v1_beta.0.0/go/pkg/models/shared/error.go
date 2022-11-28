@@ -1,5 +1,7 @@
 package shared
 
+// Error
+// A container that defines the elements of error and warning message.
 type Error struct {
 	Category     *string          `json:"category,omitempty"`
 	Domain       *string          `json:"domain,omitempty"`

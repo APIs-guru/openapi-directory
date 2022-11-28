@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// UpdateRoomRequest
+// Request model for updating room's metadata
 type UpdateRoomRequest struct {
 	Name                  *string    `json:"name,omitempty"`
 	Notes                 *string    `json:"notes,omitempty"`

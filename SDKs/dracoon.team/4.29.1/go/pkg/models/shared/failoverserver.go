@@ -1,5 +1,7 @@
 package shared
 
+// FailoverServer
+// Failover server information
 type FailoverServer struct {
 	FailoverEnabled   bool   `json:"failoverEnabled"`
 	FailoverIPAddress string `json:"failoverIpAddress"`

@@ -13,12 +13,12 @@ type GetWebhooksQueryParams struct {
 	Workspace string   `queryParam:"style=form,explode=true,name=workspace"`
 }
 
-type GetWebhooksRequest struct {
-	QueryParams GetWebhooksQueryParams
-}
-
 type GetWebhooks200ApplicationJSON struct {
 	Data []shared.WebhookResponse `json:"data,omitempty"`
+}
+
+type GetWebhooksRequest struct {
+	QueryParams GetWebhooksQueryParams
 }
 
 type GetWebhooksResponse struct {

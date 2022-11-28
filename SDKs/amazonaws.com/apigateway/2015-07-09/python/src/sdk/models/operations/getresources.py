@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetResourcesPathParams:
-    restapi_id: str = field(default=None, metadata={'path_param': { 'field_name': 'restapi_id', 'style': 'simple', 'explode': False }})
+    restapi_id: str = field(metadata={'path_param': { 'field_name': 'restapi_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,18 +31,18 @@ class GetResourcesHeaders:
 
 @dataclass
 class GetResourcesRequest:
-    path_params: GetResourcesPathParams = field(default=None)
-    query_params: GetResourcesQueryParams = field(default=None)
-    headers: GetResourcesHeaders = field(default=None)
+    headers: GetResourcesHeaders = field()
+    path_params: GetResourcesPathParams = field()
+    query_params: GetResourcesQueryParams = field()
     
 
 @dataclass
 class GetResourcesResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
     resources: Optional[shared.Resources] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

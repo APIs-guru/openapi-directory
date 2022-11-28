@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ChangedAssetDetail } from "./changedassetdetail";
 
 
+
 export class AssetChanges extends SpeakeasyBase {
-  @Metadata({ data: "json, name=change_set_id" })
+  @SpeakeasyMetadata({ data: "json, name=change_set_id" })
   changeSetId?: string;
 
-  @Metadata({ data: "json, name=changed_assets", elemType: shared.ChangedAssetDetail })
+  @SpeakeasyMetadata({ data: "json, name=changed_assets", elemType: ChangedAssetDetail })
   changedAssets?: ChangedAssetDetail[];
 }

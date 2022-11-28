@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var DeleteFileAssociationPathParams = /** @class */ (function (_super) {
     __extends(DeleteFileAssociationPathParams, _super);
@@ -30,11 +30,11 @@ var DeleteFileAssociationPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=FileId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=FileId" }),
         __metadata("design:type", String)
     ], DeleteFileAssociationPathParams.prototype, "fileId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=ObjectId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ObjectId" }),
         __metadata("design:type", String)
     ], DeleteFileAssociationPathParams.prototype, "objectId", void 0);
     return DeleteFileAssociationPathParams;
@@ -46,7 +46,7 @@ var DeleteFileAssociationHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=xero-tenant-id" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=xero-tenant-id" }),
         __metadata("design:type", String)
     ], DeleteFileAssociationHeaders.prototype, "xeroTenantId", void 0);
     return DeleteFileAssociationHeaders;
@@ -58,7 +58,7 @@ var DeleteFileAssociationSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOAuth2)
     ], DeleteFileAssociationSecurity.prototype, "oAuth2", void 0);
     return DeleteFileAssociationSecurity;
@@ -70,15 +70,15 @@ var DeleteFileAssociationRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteFileAssociationPathParams)
     ], DeleteFileAssociationRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteFileAssociationHeaders)
     ], DeleteFileAssociationRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteFileAssociationSecurity)
     ], DeleteFileAssociationRequest.prototype, "security", void 0);
     return DeleteFileAssociationRequest;
@@ -90,11 +90,11 @@ var DeleteFileAssociationResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DeleteFileAssociationResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DeleteFileAssociationResponse.prototype, "statusCode", void 0);
     return DeleteFileAssociationResponse;

@@ -10,7 +10,7 @@ type ExtrasGraphsUpdatePathParams struct {
 
 type ExtrasGraphsUpdateRequest struct {
 	PathParams ExtrasGraphsUpdatePathParams
-	Request    shared.Graph `request:"mediaType=application/json"`
+	Request    shared.GraphInput `request:"mediaType=application/json"`
 }
 
 type ExtrasGraphsUpdateResponse struct {

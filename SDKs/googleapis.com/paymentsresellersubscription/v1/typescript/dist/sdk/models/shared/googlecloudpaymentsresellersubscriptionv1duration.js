@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GoogleCloudPaymentsResellerSubscriptionV1DurationUnitEnum;
 (function (GoogleCloudPaymentsResellerSubscriptionV1DurationUnitEnum) {
     GoogleCloudPaymentsResellerSubscriptionV1DurationUnitEnum["UnitUnspecified"] = "UNIT_UNSPECIFIED";
@@ -39,11 +39,11 @@ var GoogleCloudPaymentsResellerSubscriptionV1Duration = /** @class */ (function 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=count" }),
+        SpeakeasyMetadata({ data: "json, name=count" }),
         __metadata("design:type", Number)
     ], GoogleCloudPaymentsResellerSubscriptionV1Duration.prototype, "count", void 0);
     __decorate([
-        Metadata({ data: "json, name=unit" }),
+        SpeakeasyMetadata({ data: "json, name=unit" }),
         __metadata("design:type", String)
     ], GoogleCloudPaymentsResellerSubscriptionV1Duration.prototype, "unit", void 0);
     return GoogleCloudPaymentsResellerSubscriptionV1Duration;

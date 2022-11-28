@@ -5,3 +5,7 @@ type WorkspaceCompact struct {
 	Name         *string `json:"name,omitempty"`
 	ResourceType *string `json:"resource_type,omitempty"`
 }
+
+type WorkspaceCompactInput struct {
+	Name *string `json:"name,omitempty"`
+}

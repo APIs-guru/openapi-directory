@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class CreateFromShippingQuoteSecurity:
-    api_auth: shared.SchemeAPIAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    api_auth: shared.SchemeAPIAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CreateFromShippingQuoteRequest:
-    request: shared.CreateShipmentFromQuoteRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: CreateFromShippingQuoteSecurity = field(default=None)
+    request: shared.CreateShipmentFromQuoteRequest = field(metadata={'request': { 'media_type': 'application/json' }})
+    security: CreateFromShippingQuoteSecurity = field()
     
 
 @dataclass
 class CreateFromShippingQuoteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     shipment: Optional[shared.Shipment] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -19,6 +19,8 @@ type RegisterCaCertificateHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// RegisterCaCertificateRequestBodyRegistrationConfig
+// The registration configuration.
 type RegisterCaCertificateRequestBodyRegistrationConfig struct {
 	RoleArn      *string `json:"roleArn,omitempty"`
 	TemplateBody *string `json:"templateBody,omitempty"`

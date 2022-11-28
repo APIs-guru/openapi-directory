@@ -9,6 +9,8 @@ const (
 	ParagraphBorderDashStyleEnumDash                 ParagraphBorderDashStyleEnum = "DASH"
 )
 
+// ParagraphBorder
+// A border around a paragraph.
 type ParagraphBorder struct {
 	Color     *OptionalColor                `json:"color,omitempty"`
 	DashStyle *ParagraphBorderDashStyleEnum `json:"dashStyle,omitempty"`

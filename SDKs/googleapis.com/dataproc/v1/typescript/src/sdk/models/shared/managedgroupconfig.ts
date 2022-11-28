@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ManagedGroupConfig
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies the resources used to actively manage an instance group.
 **/
 export class ManagedGroupConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=instanceGroupManagerName" })
+  @SpeakeasyMetadata({ data: "json, name=instanceGroupManagerName" })
   instanceGroupManagerName?: string;
 
-  @Metadata({ data: "json, name=instanceTemplateName" })
+  @SpeakeasyMetadata({ data: "json, name=instanceTemplateName" })
   instanceTemplateName?: string;
 }

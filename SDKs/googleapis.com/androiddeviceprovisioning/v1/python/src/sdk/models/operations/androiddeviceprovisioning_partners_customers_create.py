@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AndroiddeviceprovisioningPartnersCustomersCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class AndroiddeviceprovisioningPartnersCustomersCreateQueryParams:
 
 @dataclass
 class AndroiddeviceprovisioningPartnersCustomersCreateRequest:
-    path_params: AndroiddeviceprovisioningPartnersCustomersCreatePathParams = field(default=None)
-    query_params: AndroiddeviceprovisioningPartnersCustomersCreateQueryParams = field(default=None)
-    request: Optional[shared.CreateCustomerRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    path_params: AndroiddeviceprovisioningPartnersCustomersCreatePathParams = field()
+    query_params: AndroiddeviceprovisioningPartnersCustomersCreateQueryParams = field()
+    request: Optional[shared.CreateCustomerRequestInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class AndroiddeviceprovisioningPartnersCustomersCreateResponse:
+    content_type: str = field()
+    status_code: int = field()
     company: Optional[shared.Company] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

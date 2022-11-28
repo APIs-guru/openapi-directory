@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ClientCertAuthSettings } from "./clientcertauthsettings";
 import { CertificateStateEnum } from "./certificatestateenum";
 import { CertificateTypeEnum } from "./certificatetypeenum";

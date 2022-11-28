@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class BinaryauthorizationProjectsPolicyGetIamPolicyPathParams:
-    resource: str = field(default=None, metadata={'path_param': { 'field_name': 'resource', 'style': 'simple', 'explode': False }})
+    resource: str = field(metadata={'path_param': { 'field_name': 'resource', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +27,20 @@ class BinaryauthorizationProjectsPolicyGetIamPolicyQueryParams:
 
 @dataclass
 class BinaryauthorizationProjectsPolicyGetIamPolicySecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BinaryauthorizationProjectsPolicyGetIamPolicyRequest:
-    path_params: BinaryauthorizationProjectsPolicyGetIamPolicyPathParams = field(default=None)
-    query_params: BinaryauthorizationProjectsPolicyGetIamPolicyQueryParams = field(default=None)
-    security: BinaryauthorizationProjectsPolicyGetIamPolicySecurity = field(default=None)
+    path_params: BinaryauthorizationProjectsPolicyGetIamPolicyPathParams = field()
+    query_params: BinaryauthorizationProjectsPolicyGetIamPolicyQueryParams = field()
+    security: BinaryauthorizationProjectsPolicyGetIamPolicySecurity = field()
     
 
 @dataclass
 class BinaryauthorizationProjectsPolicyGetIamPolicyResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     iam_policy: Optional[shared.IamPolicy] = field(default=None)
-    status_code: int = field(default=None)
     

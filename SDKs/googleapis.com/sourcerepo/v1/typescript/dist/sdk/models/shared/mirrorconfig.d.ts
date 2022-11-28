@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * Configuration to automatically mirror a repository from another hosting service, for example GitHub or Bitbucket.
 **/

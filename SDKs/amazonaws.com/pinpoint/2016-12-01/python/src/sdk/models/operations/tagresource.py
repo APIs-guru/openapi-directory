@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
 class TagResourcePathParams:
-    resource_arn: str = field(default=None, metadata={'path_param': { 'field_name': 'resource-arn', 'style': 'simple', 'explode': False }})
+    resource_arn: str = field(metadata={'path_param': { 'field_name': 'resource-arn', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,24 +26,28 @@ class TagResourceHeaders:
 @dataclass_json
 @dataclass
 class TagResourceRequestBodyTagsModel:
-    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
+    r"""TagResourceRequestBodyTagsModel
+    Specifies the tags (keys and values) for an application, campaign, message template, or segment.
+    """
+    
+    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     
 
 @dataclass_json
 @dataclass
 class TagResourceRequestBody:
-    tags_model: TagResourceRequestBodyTagsModel = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TagsModel' }})
+    tags_model: TagResourceRequestBodyTagsModel = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('TagsModel') }})
     
 
 @dataclass
 class TagResourceRequest:
-    path_params: TagResourcePathParams = field(default=None)
-    headers: TagResourceHeaders = field(default=None)
-    request: TagResourceRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: TagResourceHeaders = field()
+    path_params: TagResourcePathParams = field()
+    request: TagResourceRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class TagResourceResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

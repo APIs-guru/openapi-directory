@@ -1,65 +1,66 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ScheduledTransactionSummaryFlagColorEnum {
-    Red = "red"
-,    Orange = "orange"
-,    Yellow = "yellow"
-,    Green = "green"
-,    Blue = "blue"
-,    Purple = "purple"
+    Red = "red",
+    Orange = "orange",
+    Yellow = "yellow",
+    Green = "green",
+    Blue = "blue",
+    Purple = "purple"
 }
 
 export enum ScheduledTransactionSummaryFrequencyEnum {
-    Never = "never"
-,    Daily = "daily"
-,    Weekly = "weekly"
-,    EveryOtherWeek = "everyOtherWeek"
-,    TwiceAMonth = "twiceAMonth"
-,    Every4Weeks = "every4Weeks"
-,    Monthly = "monthly"
-,    EveryOtherMonth = "everyOtherMonth"
-,    Every3Months = "every3Months"
-,    Every4Months = "every4Months"
-,    TwiceAYear = "twiceAYear"
-,    Yearly = "yearly"
-,    EveryOtherYear = "everyOtherYear"
+    Never = "never",
+    Daily = "daily",
+    Weekly = "weekly",
+    EveryOtherWeek = "everyOtherWeek",
+    TwiceAMonth = "twiceAMonth",
+    Every4Weeks = "every4Weeks",
+    Monthly = "monthly",
+    EveryOtherMonth = "everyOtherMonth",
+    Every3Months = "every3Months",
+    Every4Months = "every4Months",
+    TwiceAYear = "twiceAYear",
+    Yearly = "yearly",
+    EveryOtherYear = "everyOtherYear"
 }
 
 
 export class ScheduledTransactionSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=account_id" })
+  @SpeakeasyMetadata({ data: "json, name=account_id" })
   accountId: string;
 
-  @Metadata({ data: "json, name=amount" })
+  @SpeakeasyMetadata({ data: "json, name=amount" })
   amount: number;
 
-  @Metadata({ data: "json, name=category_id" })
+  @SpeakeasyMetadata({ data: "json, name=category_id" })
   categoryId?: string;
 
-  @Metadata({ data: "json, name=date_first" })
+  @SpeakeasyMetadata({ data: "json, name=date_first" })
   dateFirst: Date;
 
-  @Metadata({ data: "json, name=date_next" })
+  @SpeakeasyMetadata({ data: "json, name=date_next" })
   dateNext: Date;
 
-  @Metadata({ data: "json, name=deleted" })
+  @SpeakeasyMetadata({ data: "json, name=deleted" })
   deleted: boolean;
 
-  @Metadata({ data: "json, name=flag_color" })
+  @SpeakeasyMetadata({ data: "json, name=flag_color" })
   flagColor?: ScheduledTransactionSummaryFlagColorEnum;
 
-  @Metadata({ data: "json, name=frequency" })
+  @SpeakeasyMetadata({ data: "json, name=frequency" })
   frequency: ScheduledTransactionSummaryFrequencyEnum;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=memo" })
+  @SpeakeasyMetadata({ data: "json, name=memo" })
   memo?: string;
 
-  @Metadata({ data: "json, name=payee_id" })
+  @SpeakeasyMetadata({ data: "json, name=payee_id" })
   payeeId?: string;
 
-  @Metadata({ data: "json, name=transfer_account_id" })
+  @SpeakeasyMetadata({ data: "json, name=transfer_account_id" })
   transferAccountId?: string;
 }

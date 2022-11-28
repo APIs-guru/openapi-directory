@@ -1,5 +1,7 @@
 package shared
 
-type AttachTrustRequest struct {
-	Trust *Trust `json:"trust,omitempty"`
+// AttachTrustRequestInput
+// Request message for AttachTrust
+type AttachTrustRequestInput struct {
+	Trust *TrustInput `json:"trust,omitempty"`
 }

@@ -1,65 +1,66 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ChefConfiguration } from "./chefconfiguration";
 import { StackConfigurationManager } from "./stackconfigurationmanager";
 import { Source } from "./source";
 import { RootDeviceTypeEnum } from "./rootdevicetypeenum";
 
 
+
 export class CreateStackRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AgentVersion" })
+  @SpeakeasyMetadata({ data: "json, name=AgentVersion" })
   agentVersion?: string;
 
-  @Metadata({ data: "json, name=Attributes" })
+  @SpeakeasyMetadata({ data: "json, name=Attributes" })
   attributes?: Map<string, string>;
 
-  @Metadata({ data: "json, name=ChefConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=ChefConfiguration" })
   chefConfiguration?: ChefConfiguration;
 
-  @Metadata({ data: "json, name=ConfigurationManager" })
+  @SpeakeasyMetadata({ data: "json, name=ConfigurationManager" })
   configurationManager?: StackConfigurationManager;
 
-  @Metadata({ data: "json, name=CustomCookbooksSource" })
+  @SpeakeasyMetadata({ data: "json, name=CustomCookbooksSource" })
   customCookbooksSource?: Source;
 
-  @Metadata({ data: "json, name=CustomJson" })
+  @SpeakeasyMetadata({ data: "json, name=CustomJson" })
   customJson?: string;
 
-  @Metadata({ data: "json, name=DefaultAvailabilityZone" })
+  @SpeakeasyMetadata({ data: "json, name=DefaultAvailabilityZone" })
   defaultAvailabilityZone?: string;
 
-  @Metadata({ data: "json, name=DefaultInstanceProfileArn" })
+  @SpeakeasyMetadata({ data: "json, name=DefaultInstanceProfileArn" })
   defaultInstanceProfileArn: string;
 
-  @Metadata({ data: "json, name=DefaultOs" })
+  @SpeakeasyMetadata({ data: "json, name=DefaultOs" })
   defaultOs?: string;
 
-  @Metadata({ data: "json, name=DefaultRootDeviceType" })
+  @SpeakeasyMetadata({ data: "json, name=DefaultRootDeviceType" })
   defaultRootDeviceType?: RootDeviceTypeEnum;
 
-  @Metadata({ data: "json, name=DefaultSshKeyName" })
+  @SpeakeasyMetadata({ data: "json, name=DefaultSshKeyName" })
   defaultSshKeyName?: string;
 
-  @Metadata({ data: "json, name=DefaultSubnetId" })
+  @SpeakeasyMetadata({ data: "json, name=DefaultSubnetId" })
   defaultSubnetId?: string;
 
-  @Metadata({ data: "json, name=HostnameTheme" })
+  @SpeakeasyMetadata({ data: "json, name=HostnameTheme" })
   hostnameTheme?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 
-  @Metadata({ data: "json, name=Region" })
+  @SpeakeasyMetadata({ data: "json, name=Region" })
   region: string;
 
-  @Metadata({ data: "json, name=ServiceRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceRoleArn" })
   serviceRoleArn: string;
 
-  @Metadata({ data: "json, name=UseCustomCookbooks" })
+  @SpeakeasyMetadata({ data: "json, name=UseCustomCookbooks" })
   useCustomCookbooks?: boolean;
 
-  @Metadata({ data: "json, name=UseOpsworksSecurityGroups" })
+  @SpeakeasyMetadata({ data: "json, name=UseOpsworksSecurityGroups" })
   useOpsworksSecurityGroups?: boolean;
 
-  @Metadata({ data: "json, name=VpcId" })
+  @SpeakeasyMetadata({ data: "json, name=VpcId" })
   vpcId?: string;
 }

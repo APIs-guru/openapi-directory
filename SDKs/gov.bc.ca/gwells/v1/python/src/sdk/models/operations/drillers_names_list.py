@@ -10,12 +10,12 @@ class DrillersNamesListQueryParams:
 
 @dataclass
 class DrillersNamesListRequest:
-    query_params: DrillersNamesListQueryParams = field(default=None)
+    query_params: DrillersNamesListQueryParams = field()
     
 
 @dataclass
 class DrillersNamesListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     person_names: Optional[List[shared.PersonName]] = field(default=None)
-    status_code: int = field(default=None)
     

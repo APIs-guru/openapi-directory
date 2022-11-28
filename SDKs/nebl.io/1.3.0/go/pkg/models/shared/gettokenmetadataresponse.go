@@ -5,6 +5,8 @@ type GetTokenMetadataResponseMetadataOfIssuanceDataUserDataMeta struct {
 	Value *string `json:"value,omitempty"`
 }
 
+// GetTokenMetadataResponseMetadataOfIssuanceDataUserData
+// Metadata set by user on token
 type GetTokenMetadataResponseMetadataOfIssuanceDataUserData struct {
 	Meta []GetTokenMetadataResponseMetadataOfIssuanceDataUserDataMeta `json:"meta,omitempty"`
 }
@@ -16,14 +18,20 @@ type GetTokenMetadataResponseMetadataOfIssuanceData struct {
 	UserData    *GetTokenMetadataResponseMetadataOfIssuanceDataUserData `json:"userData,omitempty"`
 }
 
+// GetTokenMetadataResponseMetadataOfIssuance
+// Metadata set at issuance
 type GetTokenMetadataResponseMetadataOfIssuance struct {
 	Data *GetTokenMetadataResponseMetadataOfIssuanceData `json:"data,omitempty"`
 }
 
+// GetTokenMetadataResponseMetadataOfUtxoUserData
+// Metadata set by user on token for UTXO
 type GetTokenMetadataResponseMetadataOfUtxoUserData struct {
 	Meta []map[string]interface{} `json:"meta,omitempty"`
 }
 
+// GetTokenMetadataResponseMetadataOfUtxo
+// Metadata set for UTXO
 type GetTokenMetadataResponseMetadataOfUtxo struct {
 	UserData *GetTokenMetadataResponseMetadataOfUtxoUserData `json:"userData,omitempty"`
 }

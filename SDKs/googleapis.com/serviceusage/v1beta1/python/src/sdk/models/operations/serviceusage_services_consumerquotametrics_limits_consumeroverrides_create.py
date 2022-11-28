@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ServiceusageServicesConsumerQuotaMetricsLimitsConsumerOverridesCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 class ServiceusageServicesConsumerQuotaMetricsLimitsConsumerOverridesCreateForceOnlyEnum(str, Enum):
     QUOTA_SAFETY_CHECK_UNSPECIFIED = "QUOTA_SAFETY_CHECK_UNSPECIFIED"
@@ -32,14 +33,14 @@ class ServiceusageServicesConsumerQuotaMetricsLimitsConsumerOverridesCreateQuery
 
 @dataclass
 class ServiceusageServicesConsumerQuotaMetricsLimitsConsumerOverridesCreateSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ServiceusageServicesConsumerQuotaMetricsLimitsConsumerOverridesCreateSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -50,15 +51,15 @@ class ServiceusageServicesConsumerQuotaMetricsLimitsConsumerOverridesCreateSecur
 
 @dataclass
 class ServiceusageServicesConsumerQuotaMetricsLimitsConsumerOverridesCreateRequest:
-    path_params: ServiceusageServicesConsumerQuotaMetricsLimitsConsumerOverridesCreatePathParams = field(default=None)
-    query_params: ServiceusageServicesConsumerQuotaMetricsLimitsConsumerOverridesCreateQueryParams = field(default=None)
+    path_params: ServiceusageServicesConsumerQuotaMetricsLimitsConsumerOverridesCreatePathParams = field()
+    query_params: ServiceusageServicesConsumerQuotaMetricsLimitsConsumerOverridesCreateQueryParams = field()
+    security: ServiceusageServicesConsumerQuotaMetricsLimitsConsumerOverridesCreateSecurity = field()
     request: Optional[shared.QuotaOverride] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ServiceusageServicesConsumerQuotaMetricsLimitsConsumerOverridesCreateSecurity = field(default=None)
     
 
 @dataclass
 class ServiceusageServicesConsumerQuotaMetricsLimitsConsumerOverridesCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

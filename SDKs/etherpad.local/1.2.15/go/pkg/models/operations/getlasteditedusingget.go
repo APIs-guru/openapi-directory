@@ -4,10 +4,6 @@ type GetLastEditedUsingGetQueryParams struct {
 	PadID *string `queryParam:"style=form,explode=true,name=padID"`
 }
 
-type GetLastEditedUsingGetRequest struct {
-	QueryParams GetLastEditedUsingGetQueryParams
-}
-
 type GetLastEditedUsingGet200ApplicationJSONData struct {
 	LastEdited *int64 `json:"lastEdited,omitempty"`
 }
@@ -34,6 +30,10 @@ type GetLastEditedUsingGet500ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
 	Message *string                `json:"message,omitempty"`
+}
+
+type GetLastEditedUsingGetRequest struct {
+	QueryParams GetLastEditedUsingGetQueryParams
 }
 
 type GetLastEditedUsingGetResponse struct {

@@ -41,6 +41,8 @@ const (
 	ObWritePaymentDetailsResponse1DataPaymentStatusStatusDetailStatusReasonEnumUnmatched                ObWritePaymentDetailsResponse1DataPaymentStatusStatusDetailStatusReasonEnum = "Unmatched"
 )
 
+// ObWritePaymentDetailsResponse1DataPaymentStatusStatusDetail
+// Payment status details as per underlying Payment Rail.
 type ObWritePaymentDetailsResponse1DataPaymentStatusStatusDetail struct {
 	LocalInstrument         *string                                                                      `json:"LocalInstrument,omitempty"`
 	Status                  string                                                                       `json:"Status"`
@@ -48,6 +50,8 @@ type ObWritePaymentDetailsResponse1DataPaymentStatusStatusDetail struct {
 	StatusReasonDescription *string                                                                      `json:"StatusReasonDescription,omitempty"`
 }
 
+// ObWritePaymentDetailsResponse1DataPaymentStatus
+// Payment status details.
 type ObWritePaymentDetailsResponse1DataPaymentStatus struct {
 	PaymentTransactionID string                                                       `json:"PaymentTransactionId"`
 	Status               ObWritePaymentDetailsResponse1DataPaymentStatusStatusEnum    `json:"Status"`

@@ -1,54 +1,63 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
 class GetServersIDPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
-    
-
-@dataclass
-class GetServersIDRequest:
-    path_params: GetServersIDPathParams = field(default=None)
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass_json
 @dataclass
 class GetServersID200ApplicationJSONServerDatacenterLocation:
-    city: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'city' }})
-    country: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'country' }})
-    description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    id: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    latitude: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'latitude' }})
-    longitude: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'longitude' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    network_zone: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'network_zone' }})
+    city: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('city') }})
+    country: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('country') }})
+    description: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    id: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    latitude: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('latitude') }})
+    longitude: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('longitude') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    network_zone: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('network_zone') }})
     
 
 @dataclass_json
 @dataclass
 class GetServersID200ApplicationJSONServerDatacenterServerTypes:
-    available: List[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'available' }})
-    available_for_migration: List[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'available_for_migration' }})
-    supported: List[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'supported' }})
+    r"""GetServersID200ApplicationJSONServerDatacenterServerTypes
+    The Server types the Datacenter can handle
+    """
+    
+    available: List[float] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('available') }})
+    available_for_migration: List[float] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('available_for_migration') }})
+    supported: List[float] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('supported') }})
     
 
 @dataclass_json
 @dataclass
 class GetServersID200ApplicationJSONServerDatacenter:
-    description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    location: GetServersID200ApplicationJSONServerDatacenterLocation = field(default=None, metadata={'dataclasses_json': { 'field_name': 'location' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    server_types: GetServersID200ApplicationJSONServerDatacenterServerTypes = field(default=None, metadata={'dataclasses_json': { 'field_name': 'server_types' }})
+    r"""GetServersID200ApplicationJSONServerDatacenter
+    Datacenter this Resource is located at
+    """
+    
+    description: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    id: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    location: GetServersID200ApplicationJSONServerDatacenterLocation = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('location') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    server_types: GetServersID200ApplicationJSONServerDatacenterServerTypes = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('server_types') }})
     
 
 @dataclass_json
 @dataclass
 class GetServersID200ApplicationJSONServerImageCreatedFrom:
-    id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
+    r"""GetServersID200ApplicationJSONServerImageCreatedFrom
+    Information about the Server the Image was created from
+    """
+    
+    id: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
     
 class GetServersID200ApplicationJSONServerImageOsFlavorEnum(str, Enum):
     UBUNTU = "ubuntu"
@@ -61,7 +70,11 @@ class GetServersID200ApplicationJSONServerImageOsFlavorEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GetServersID200ApplicationJSONServerImageProtection:
-    delete: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'delete' }})
+    r"""GetServersID200ApplicationJSONServerImageProtection
+    Protection configuration for the Resource
+    """
+    
+    delete: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('delete') }})
     
 class GetServersID200ApplicationJSONServerImageStatusEnum(str, Enum):
     AVAILABLE = "available"
@@ -79,24 +92,24 @@ class GetServersID200ApplicationJSONServerImageTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GetServersID200ApplicationJSONServerImage:
-    bound_to: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bound_to' }})
-    build_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'build_id' }})
-    created: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created' }})
-    created_from: GetServersID200ApplicationJSONServerImageCreatedFrom = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created_from' }})
-    deleted: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deleted' }})
-    deprecated: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deprecated' }})
-    description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    disk_size: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'disk_size' }})
-    id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    image_size: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'image_size' }})
-    labels: dict[str, str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labels' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    os_flavor: GetServersID200ApplicationJSONServerImageOsFlavorEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'os_flavor' }})
-    os_version: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'os_version' }})
-    protection: GetServersID200ApplicationJSONServerImageProtection = field(default=None, metadata={'dataclasses_json': { 'field_name': 'protection' }})
-    rapid_deploy: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rapid_deploy' }})
-    status: GetServersID200ApplicationJSONServerImageStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    type: GetServersID200ApplicationJSONServerImageTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    bound_to: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('bound_to') }})
+    created: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('created') }})
+    created_from: GetServersID200ApplicationJSONServerImageCreatedFrom = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('created_from') }})
+    deleted: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('deleted') }})
+    deprecated: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('deprecated') }})
+    description: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    disk_size: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('disk_size') }})
+    id: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    image_size: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('image_size') }})
+    labels: dict[str, str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('labels') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    os_flavor: GetServersID200ApplicationJSONServerImageOsFlavorEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('os_flavor') }})
+    os_version: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('os_version') }})
+    protection: GetServersID200ApplicationJSONServerImageProtection = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('protection') }})
+    status: GetServersID200ApplicationJSONServerImageStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    type: GetServersID200ApplicationJSONServerImageTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    build_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('build_id') }})
+    rapid_deploy: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rapid_deploy') }})
     
 class GetServersID200ApplicationJSONServerIsoTypeEnum(str, Enum):
     PUBLIC = "public"
@@ -106,11 +119,15 @@ class GetServersID200ApplicationJSONServerIsoTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GetServersID200ApplicationJSONServerIso:
-    deprecated: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deprecated' }})
-    description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    type: GetServersID200ApplicationJSONServerIsoTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""GetServersID200ApplicationJSONServerIso
+    ISO Image that is attached to this Server. Null if no ISO is attached.
+    """
+    
+    deprecated: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('deprecated') }})
+    description: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    id: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    type: GetServersID200ApplicationJSONServerIsoTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     
 class GetServersID200ApplicationJSONServerPlacementGroupNullableTypeEnum(str, Enum):
     SPREAD = "spread"
@@ -119,28 +136,32 @@ class GetServersID200ApplicationJSONServerPlacementGroupNullableTypeEnum(str, En
 @dataclass_json
 @dataclass
 class GetServersID200ApplicationJSONServerPlacementGroupNullable:
-    created: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created' }})
-    id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    labels: dict[str, str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labels' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    servers: List[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'servers' }})
-    type: GetServersID200ApplicationJSONServerPlacementGroupNullableTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    created: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('created') }})
+    id: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    labels: dict[str, str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('labels') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    servers: List[int] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('servers') }})
+    type: GetServersID200ApplicationJSONServerPlacementGroupNullableTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     
 
 @dataclass_json
 @dataclass
 class GetServersID200ApplicationJSONServerPrivateNet:
-    alias_ips: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'alias_ips' }})
-    ip: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ip' }})
-    mac_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mac_address' }})
-    network: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'network' }})
+    alias_ips: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('alias_ips') }})
+    ip: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ip') }})
+    mac_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mac_address') }})
+    network: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('network') }})
     
 
 @dataclass_json
 @dataclass
 class GetServersID200ApplicationJSONServerProtection:
-    delete: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'delete' }})
-    rebuild: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rebuild' }})
+    r"""GetServersID200ApplicationJSONServerProtection
+    Protection configuration for the Server
+    """
+    
+    delete: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('delete') }})
+    rebuild: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('rebuild') }})
     
 class GetServersID200ApplicationJSONServerPublicNetServerPublicNetFirewallStatusEnum(str, Enum):
     APPLIED = "applied"
@@ -150,40 +171,52 @@ class GetServersID200ApplicationJSONServerPublicNetServerPublicNetFirewallStatus
 @dataclass_json
 @dataclass
 class GetServersID200ApplicationJSONServerPublicNetServerPublicNetFirewall:
-    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    status: Optional[GetServersID200ApplicationJSONServerPublicNetServerPublicNetFirewallStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    status: Optional[GetServersID200ApplicationJSONServerPublicNetServerPublicNetFirewallStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     
 
 @dataclass_json
 @dataclass
 class GetServersID200ApplicationJSONServerPublicNetIpv4:
-    blocked: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'blocked' }})
-    dns_ptr: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dns_ptr' }})
-    ip: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ip' }})
+    r"""GetServersID200ApplicationJSONServerPublicNetIpv4
+    IP address (v4) and its reverse DNS entry of this Server
+    """
+    
+    blocked: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('blocked') }})
+    dns_ptr: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('dns_ptr') }})
+    ip: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ip') }})
     
 
 @dataclass_json
 @dataclass
 class GetServersID200ApplicationJSONServerPublicNetIpv6DNSPtr:
-    dns_ptr: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dns_ptr' }})
-    ip: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ip' }})
+    dns_ptr: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('dns_ptr') }})
+    ip: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ip') }})
     
 
 @dataclass_json
 @dataclass
 class GetServersID200ApplicationJSONServerPublicNetIpv6:
-    blocked: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'blocked' }})
-    dns_ptr: List[GetServersID200ApplicationJSONServerPublicNetIpv6DNSPtr] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dns_ptr' }})
-    ip: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ip' }})
+    r"""GetServersID200ApplicationJSONServerPublicNetIpv6
+    IPv6 network assigned to this Server and its reverse DNS entry
+    """
+    
+    blocked: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('blocked') }})
+    dns_ptr: List[GetServersID200ApplicationJSONServerPublicNetIpv6DNSPtr] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('dns_ptr') }})
+    ip: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ip') }})
     
 
 @dataclass_json
 @dataclass
 class GetServersID200ApplicationJSONServerPublicNet:
-    firewalls: Optional[List[GetServersID200ApplicationJSONServerPublicNetServerPublicNetFirewall]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'firewalls' }})
-    floating_ips: List[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'floating_ips' }})
-    ipv4: GetServersID200ApplicationJSONServerPublicNetIpv4 = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ipv4' }})
-    ipv6: GetServersID200ApplicationJSONServerPublicNetIpv6 = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ipv6' }})
+    r"""GetServersID200ApplicationJSONServerPublicNet
+    Public network information. The Server's IPv4 address can be found in `public_net->ipv4->ip`
+    """
+    
+    floating_ips: List[int] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('floating_ips') }})
+    ipv4: GetServersID200ApplicationJSONServerPublicNetIpv4 = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ipv4') }})
+    ipv6: GetServersID200ApplicationJSONServerPublicNetIpv6 = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ipv6') }})
+    firewalls: Optional[List[GetServersID200ApplicationJSONServerPublicNetServerPublicNetFirewall]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('firewalls') }})
     
 class GetServersID200ApplicationJSONServerServerTypeCPUTypeEnum(str, Enum):
     SHARED = "shared"
@@ -193,23 +226,31 @@ class GetServersID200ApplicationJSONServerServerTypeCPUTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GetServersID200ApplicationJSONServerServerTypePricesPriceHourly:
-    gross: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gross' }})
-    net: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'net' }})
+    r"""GetServersID200ApplicationJSONServerServerTypePricesPriceHourly
+    Hourly costs for a Server type in this Location
+    """
+    
+    gross: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('gross') }})
+    net: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('net') }})
     
 
 @dataclass_json
 @dataclass
 class GetServersID200ApplicationJSONServerServerTypePricesPriceMonthly:
-    gross: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gross' }})
-    net: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'net' }})
+    r"""GetServersID200ApplicationJSONServerServerTypePricesPriceMonthly
+    Monthly costs for a Server type in this Location
+    """
+    
+    gross: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('gross') }})
+    net: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('net') }})
     
 
 @dataclass_json
 @dataclass
 class GetServersID200ApplicationJSONServerServerTypePrices:
-    location: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'location' }})
-    price_hourly: GetServersID200ApplicationJSONServerServerTypePricesPriceHourly = field(default=None, metadata={'dataclasses_json': { 'field_name': 'price_hourly' }})
-    price_monthly: GetServersID200ApplicationJSONServerServerTypePricesPriceMonthly = field(default=None, metadata={'dataclasses_json': { 'field_name': 'price_monthly' }})
+    location: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('location') }})
+    price_hourly: GetServersID200ApplicationJSONServerServerTypePricesPriceHourly = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('price_hourly') }})
+    price_monthly: GetServersID200ApplicationJSONServerServerTypePricesPriceMonthly = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('price_monthly') }})
     
 class GetServersID200ApplicationJSONServerServerTypeStorageTypeEnum(str, Enum):
     LOCAL = "local"
@@ -219,16 +260,20 @@ class GetServersID200ApplicationJSONServerServerTypeStorageTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GetServersID200ApplicationJSONServerServerType:
-    cores: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cores' }})
-    cpu_type: GetServersID200ApplicationJSONServerServerTypeCPUTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cpu_type' }})
-    deprecated: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deprecated' }})
-    description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    disk: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'disk' }})
-    id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    memory: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'memory' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    prices: List[GetServersID200ApplicationJSONServerServerTypePrices] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'prices' }})
-    storage_type: GetServersID200ApplicationJSONServerServerTypeStorageTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'storage_type' }})
+    r"""GetServersID200ApplicationJSONServerServerType
+    Type of Server - determines how much ram, disk and cpu a Server has
+    """
+    
+    cores: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('cores') }})
+    cpu_type: GetServersID200ApplicationJSONServerServerTypeCPUTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('cpu_type') }})
+    deprecated: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('deprecated') }})
+    description: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    disk: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('disk') }})
+    id: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    memory: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('memory') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    prices: List[GetServersID200ApplicationJSONServerServerTypePrices] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('prices') }})
+    storage_type: GetServersID200ApplicationJSONServerServerTypeStorageTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('storage_type') }})
     
 class GetServersID200ApplicationJSONServerStatusEnum(str, Enum):
     RUNNING = "running"
@@ -245,39 +290,44 @@ class GetServersID200ApplicationJSONServerStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GetServersID200ApplicationJSONServer:
-    backup_window: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'backup_window' }})
-    created: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created' }})
-    datacenter: GetServersID200ApplicationJSONServerDatacenter = field(default=None, metadata={'dataclasses_json': { 'field_name': 'datacenter' }})
-    id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    image: GetServersID200ApplicationJSONServerImage = field(default=None, metadata={'dataclasses_json': { 'field_name': 'image' }})
-    included_traffic: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'included_traffic' }})
-    ingoing_traffic: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ingoing_traffic' }})
-    iso: GetServersID200ApplicationJSONServerIso = field(default=None, metadata={'dataclasses_json': { 'field_name': 'iso' }})
-    labels: dict[str, str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labels' }})
-    load_balancers: Optional[List[int]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'load_balancers' }})
-    locked: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'locked' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    outgoing_traffic: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'outgoing_traffic' }})
-    placement_group: Optional[GetServersID200ApplicationJSONServerPlacementGroupNullable] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'placement_group' }})
-    primary_disk_size: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'primary_disk_size' }})
-    private_net: List[GetServersID200ApplicationJSONServerPrivateNet] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'private_net' }})
-    protection: GetServersID200ApplicationJSONServerProtection = field(default=None, metadata={'dataclasses_json': { 'field_name': 'protection' }})
-    public_net: GetServersID200ApplicationJSONServerPublicNet = field(default=None, metadata={'dataclasses_json': { 'field_name': 'public_net' }})
-    rescue_enabled: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rescue_enabled' }})
-    server_type: GetServersID200ApplicationJSONServerServerType = field(default=None, metadata={'dataclasses_json': { 'field_name': 'server_type' }})
-    status: GetServersID200ApplicationJSONServerStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    volumes: Optional[List[int]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'volumes' }})
+    backup_window: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('backup_window') }})
+    created: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('created') }})
+    datacenter: GetServersID200ApplicationJSONServerDatacenter = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('datacenter') }})
+    id: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    image: GetServersID200ApplicationJSONServerImage = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('image') }})
+    included_traffic: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('included_traffic') }})
+    ingoing_traffic: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ingoing_traffic') }})
+    iso: GetServersID200ApplicationJSONServerIso = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('iso') }})
+    labels: dict[str, str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('labels') }})
+    locked: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('locked') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    outgoing_traffic: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('outgoing_traffic') }})
+    primary_disk_size: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('primary_disk_size') }})
+    private_net: List[GetServersID200ApplicationJSONServerPrivateNet] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('private_net') }})
+    protection: GetServersID200ApplicationJSONServerProtection = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('protection') }})
+    public_net: GetServersID200ApplicationJSONServerPublicNet = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('public_net') }})
+    rescue_enabled: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('rescue_enabled') }})
+    server_type: GetServersID200ApplicationJSONServerServerType = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('server_type') }})
+    status: GetServersID200ApplicationJSONServerStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    load_balancers: Optional[List[int]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('load_balancers') }})
+    placement_group: Optional[GetServersID200ApplicationJSONServerPlacementGroupNullable] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('placement_group') }})
+    volumes: Optional[List[int]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('volumes') }})
     
 
 @dataclass_json
 @dataclass
 class GetServersID200ApplicationJSON:
-    server: Optional[GetServersID200ApplicationJSONServer] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'server' }})
+    server: Optional[GetServersID200ApplicationJSONServer] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('server') }})
+    
+
+@dataclass
+class GetServersIDRequest:
+    path_params: GetServersIDPathParams = field()
     
 
 @dataclass
 class GetServersIDResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_servers_id_200_application_json_object: Optional[GetServersID200ApplicationJSON] = field(default=None)
-    status_code: int = field(default=None)
     

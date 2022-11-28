@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ConfigFileFileTypeEnum(str, Enum):
     FILE_TYPE_UNSPECIFIED = "FILE_TYPE_UNSPECIFIED"
@@ -14,7 +16,11 @@ class ConfigFileFileTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ConfigFile:
-    file_contents: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fileContents' }})
-    file_path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'filePath' }})
-    file_type: Optional[ConfigFileFileTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fileType' }})
+    r"""ConfigFile
+    Generic specification of a source configuration file
+    """
+    
+    file_contents: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fileContents') }})
+    file_path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('filePath') }})
+    file_type: Optional[ConfigFileFileTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fileType') }})
     

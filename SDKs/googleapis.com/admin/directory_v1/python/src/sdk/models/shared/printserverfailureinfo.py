@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import printserver
+from sdk import utils
+from . import *
 
 class PrintServerFailureInfoErrorCodeEnum(str, Enum):
     OK = "OK"
@@ -26,8 +28,12 @@ class PrintServerFailureInfoErrorCodeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PrintServerFailureInfo:
-    error_code: Optional[PrintServerFailureInfoErrorCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorCode' }})
-    error_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorMessage' }})
-    print_server: Optional[printserver.PrintServer] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'printServer' }})
-    print_server_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'printServerId' }})
+    r"""PrintServerFailureInfo
+    Info about failures
+    """
+    
+    error_code: Optional[PrintServerFailureInfoErrorCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorCode') }})
+    error_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorMessage') }})
+    print_server: Optional[PrintServer] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('printServer') }})
+    print_server_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('printServerId') }})
     

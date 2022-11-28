@@ -1,20 +1,17 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
 class GetBusinessCurrentAccountsHeaders:
     if_modified_since: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'If-Modified-Since', 'style': 'simple', 'explode': False }})
     if_none_match: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'If-None-Match', 'style': 'simple', 'explode': False }})
-    
-
-@dataclass
-class GetBusinessCurrentAccountsRequest:
-    headers: GetBusinessCurrentAccountsHeaders = field(default=None)
     
 class GetBusinessCurrentAccounts400ErrorObjectDescriptionEnum(str, Enum):
     YOU_HAVE_SENT_A_REQUEST_WHICH_COULD_NOT_BE_UNDERSTOOD_ = "You have sent a request which could not be understood."
@@ -29,9 +26,9 @@ class GetBusinessCurrentAccounts400ErrorObjectTitleEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GetBusinessCurrentAccounts400ErrorObject:
-    description: GetBusinessCurrentAccounts400ErrorObjectDescriptionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    status: GetBusinessCurrentAccounts400ErrorObjectStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    title: GetBusinessCurrentAccounts400ErrorObjectTitleEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
+    description: GetBusinessCurrentAccounts400ErrorObjectDescriptionEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    status: GetBusinessCurrentAccounts400ErrorObjectStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    title: GetBusinessCurrentAccounts400ErrorObjectTitleEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('title') }})
     
 class GetBusinessCurrentAccounts408ErrorObjectDescriptionEnum(str, Enum):
     YOUR_CLIENT_HAS_FAILED_TO_SUBMIT_A_REQUEST_AND_A_TIMEOUT_HAS_OCCURRED_ = "Your client has failed to submit a request, and a timeout has occurred."
@@ -46,9 +43,9 @@ class GetBusinessCurrentAccounts408ErrorObjectTitleEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GetBusinessCurrentAccounts408ErrorObject:
-    description: GetBusinessCurrentAccounts408ErrorObjectDescriptionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    status: GetBusinessCurrentAccounts408ErrorObjectStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    title: GetBusinessCurrentAccounts408ErrorObjectTitleEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
+    description: GetBusinessCurrentAccounts408ErrorObjectDescriptionEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    status: GetBusinessCurrentAccounts408ErrorObjectStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    title: GetBusinessCurrentAccounts408ErrorObjectTitleEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('title') }})
     
 class GetBusinessCurrentAccounts429ErrorObjectDescriptionEnum(str, Enum):
     YOU_HAVE_REQUESTED_THIS_RESOURCE_TOO_OFTEN_SLOW_DOWN_ = "You have requested this resource too often. Slow down."
@@ -63,9 +60,9 @@ class GetBusinessCurrentAccounts429ErrorObjectTitleEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GetBusinessCurrentAccounts429ErrorObject:
-    description: GetBusinessCurrentAccounts429ErrorObjectDescriptionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    status: GetBusinessCurrentAccounts429ErrorObjectStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    title: GetBusinessCurrentAccounts429ErrorObjectTitleEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
+    description: GetBusinessCurrentAccounts429ErrorObjectDescriptionEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    status: GetBusinessCurrentAccounts429ErrorObjectStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    title: GetBusinessCurrentAccounts429ErrorObjectTitleEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('title') }})
     
 class GetBusinessCurrentAccounts500ErrorObjectDescriptionEnum(str, Enum):
     AN_ERROR_OCCURRED_ON_THE_SERVER_NO_FURTHER_INFORMATION_IS_AVAILABLE_ = "An error occurred on the server. No further information is available."
@@ -80,9 +77,9 @@ class GetBusinessCurrentAccounts500ErrorObjectTitleEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GetBusinessCurrentAccounts500ErrorObject:
-    description: GetBusinessCurrentAccounts500ErrorObjectDescriptionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    status: GetBusinessCurrentAccounts500ErrorObjectStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    title: GetBusinessCurrentAccounts500ErrorObjectTitleEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
+    description: GetBusinessCurrentAccounts500ErrorObjectDescriptionEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    status: GetBusinessCurrentAccounts500ErrorObjectStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    title: GetBusinessCurrentAccounts500ErrorObjectTitleEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('title') }})
     
 class GetBusinessCurrentAccounts503ErrorObjectDescriptionEnum(str, Enum):
     THE_SERVICE_IS_TEMPORARILY_UNAVAILABLE_ = "The service is temporarily unavailable."
@@ -97,17 +94,17 @@ class GetBusinessCurrentAccounts503ErrorObjectTitleEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GetBusinessCurrentAccounts503ErrorObject:
-    description: GetBusinessCurrentAccounts503ErrorObjectDescriptionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    status: GetBusinessCurrentAccounts503ErrorObjectStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    title: GetBusinessCurrentAccounts503ErrorObjectTitleEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
+    description: GetBusinessCurrentAccounts503ErrorObjectDescriptionEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    status: GetBusinessCurrentAccounts503ErrorObjectStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    title: GetBusinessCurrentAccounts503ErrorObjectTitleEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('title') }})
     
 
 @dataclass_json
 @dataclass
 class GetBusinessCurrentAccountsErrorObject:
-    description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    status: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    title: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
+    description: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    status: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    title: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('title') }})
     
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountAccessChannelsEnum(str, Enum):
     ATM = "ATM"
@@ -136,28 +133,36 @@ class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONB
 @dataclass_json
 @dataclass
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountBenefitsBenefitGroupBenefitItemBenefitDetail:
-    benefit_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BenefitDescription' }})
-    benefit_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BenefitID' }})
-    benefit_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BenefitName' }})
-    benefit_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BenefitType' }})
-    benefit_value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BenefitValue' }})
-    counter: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Counter' }})
-    criteria_type: Optional[List[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountBenefitsBenefitGroupBenefitItemBenefitDetailCriteriaTypeEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CriteriaType' }})
-    default_to_accounts: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DefaultToAccounts' }})
-    maximum_criteria: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MaximumCriteria' }})
-    minimum_criteria: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MinimumCriteria' }})
-    promotion_end_date: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PromotionEndDate' }})
-    promotion_start_date: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PromotionStartDate' }})
+    r"""GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountBenefitsBenefitGroupBenefitItemBenefitDetail
+    Benefit detail
+    """
+    
+    benefit_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('BenefitDescription') }})
+    benefit_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('BenefitID') }})
+    benefit_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('BenefitName') }})
+    benefit_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('BenefitType') }})
+    benefit_value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('BenefitValue') }})
+    counter: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Counter') }})
+    criteria_type: Optional[List[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountBenefitsBenefitGroupBenefitItemBenefitDetailCriteriaTypeEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CriteriaType') }})
+    default_to_accounts: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DefaultToAccounts') }})
+    maximum_criteria: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MaximumCriteria') }})
+    minimum_criteria: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MinimumCriteria') }})
+    promotion_end_date: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PromotionEndDate') }})
+    promotion_start_date: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PromotionStartDate') }})
     
 
 @dataclass_json
 @dataclass
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountBenefitsBenefitGroupBenefitItem:
-    benefit_detail: Optional[List[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountBenefitsBenefitGroupBenefitItemBenefitDetail]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BenefitDetail' }})
-    date_of_change: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DateOfChange' }})
-    length_promotional_in_days: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LengthPromotionalInDays' }})
-    start_promotion_or_future_terms: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StartPromotionOrFutureTerms' }})
-    stop_promotion_or_future_terms: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StopPromotionOrFutureTerms' }})
+    r"""GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountBenefitsBenefitGroupBenefitItem
+    Benefit Item
+    """
+    
+    benefit_detail: Optional[List[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountBenefitsBenefitGroupBenefitItemBenefitDetail]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('BenefitDetail') }})
+    date_of_change: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DateOfChange') }})
+    length_promotional_in_days: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('LengthPromotionalInDays') }})
+    start_promotion_or_future_terms: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StartPromotionOrFutureTerms') }})
+    stop_promotion_or_future_terms: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StopPromotionOrFutureTerms') }})
     
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountBenefitsBenefitGroupBenefitSubTypeEnum(str, Enum):
     FUTURE_MULTIPLE_TERMS = "FutureMultipleTerms"
@@ -168,25 +173,37 @@ class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONB
 @dataclass_json
 @dataclass
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountBenefitsBenefitGroup:
-    benefit_item: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountBenefitsBenefitGroupBenefitItem = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BenefitItem' }})
-    benefit_sub_type: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountBenefitsBenefitGroupBenefitSubTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BenefitSubType' }})
+    r"""GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountBenefitsBenefitGroup
+    Benefit Interest Group
+    """
+    
+    benefit_item: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountBenefitsBenefitGroupBenefitItem = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('BenefitItem') }})
+    benefit_sub_type: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountBenefitsBenefitGroupBenefitSubTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('BenefitSubType') }})
     
 
 @dataclass_json
 @dataclass
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountBenefits:
-    benefit: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Benefit' }})
-    benefit_group: Optional[List[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountBenefitsBenefitGroup]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BenefitGroup' }})
+    r"""GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountBenefits
+    Benefit
+    """
+    
+    benefit: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Benefit') }})
+    benefit_group: Optional[List[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountBenefitsBenefitGroup]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('BenefitGroup') }})
     
 
 @dataclass_json
 @dataclass
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountCaPricingCaPricingItem:
-    date_of_change: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DateOfChange' }})
-    exchange_rate_adjustment: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ExchangeRateAdjustment' }})
-    length_promotional_in_days: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LengthPromotionalInDays' }})
-    start_promotion_or_future_terms: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StartPromotionOrFutureTerms' }})
-    stop_promotion_or_future_terms: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StopPromotionOrFutureTerms' }})
+    r"""GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountCaPricingCaPricingItem
+    Card Pricing
+    """
+    
+    date_of_change: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DateOfChange') }})
+    exchange_rate_adjustment: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ExchangeRateAdjustment') }})
+    length_promotional_in_days: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('LengthPromotionalInDays') }})
+    start_promotion_or_future_terms: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StartPromotionOrFutureTerms') }})
+    stop_promotion_or_future_terms: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StopPromotionOrFutureTerms') }})
     
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountCaPricingProductStateEnum(str, Enum):
     FUTURE_MULTIPLE_TERMS = "FutureMultipleTerms"
@@ -197,8 +214,12 @@ class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONB
 @dataclass_json
 @dataclass
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountCaPricing:
-    ca_pricing_item: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountCaPricingCaPricingItem = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CAPricingItem' }})
-    product_state: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountCaPricingProductStateEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProductState' }})
+    r"""GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountCaPricing
+    Card Price
+    """
+    
+    ca_pricing_item: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountCaPricingCaPricingItem = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('CAPricingItem') }})
+    product_state: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountCaPricingProductStateEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ProductState') }})
     
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountCardTypeEnum(str, Enum):
     BASIC_CARD = "BasicCard"
@@ -242,14 +263,18 @@ class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONB
 @dataclass_json
 @dataclass
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountCreditInterestCreditInterestGroupCreditInterestItemInterestTiers:
-    apraer_rate: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'APRAERRate' }})
-    daily_charge_for_maximum: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DailyChargeForMaximum' }})
-    daily_charge_for_minimum: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DailyChargeForMinimum' }})
-    interest_tier: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'InterestTier' }})
-    rate: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Rate' }})
-    rate_comparison_type: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountCreditInterestCreditInterestGroupCreditInterestItemInterestTiersRateComparisonTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RateComparisonType' }})
-    tier_value_maximum: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TierValueMaximum' }})
-    tier_value_minimum: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TierValueMinimum' }})
+    r"""GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountCreditInterestCreditInterestGroupCreditInterestItemInterestTiers
+    Credit Interest Tiers
+    """
+    
+    apraer_rate: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('APRAERRate') }})
+    daily_charge_for_maximum: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DailyChargeForMaximum') }})
+    daily_charge_for_minimum: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DailyChargeForMinimum') }})
+    interest_tier: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('InterestTier') }})
+    rate: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Rate') }})
+    rate_comparison_type: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountCreditInterestCreditInterestGroupCreditInterestItemInterestTiersRateComparisonTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('RateComparisonType') }})
+    tier_value_maximum: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TierValueMaximum') }})
+    tier_value_minimum: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TierValueMinimum') }})
     
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountCreditInterestCreditInterestGroupCreditInterestItemPaymentMethodEnum(str, Enum):
     COMPOUND = "Compound"
@@ -261,19 +286,23 @@ class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONB
 @dataclass_json
 @dataclass
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountCreditInterestCreditInterestGroupCreditInterestItem:
-    calculation_frequency: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountCreditInterestCreditInterestGroupCreditInterestItemCalculationFrequencyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CalculationFrequency' }})
-    calculation_method: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountCreditInterestCreditInterestGroupCreditInterestItemCalculationMethodEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CalculationMethod' }})
-    date_of_change: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DateOfChange' }})
-    end_date: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EndDate' }})
-    fixed_interest_length: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FixedInterestLength' }})
-    interest_notes: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'InterestNotes' }})
-    interest_rate_type: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountCreditInterestCreditInterestGroupCreditInterestItemInterestRateTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'InterestRateType' }})
-    interest_tiers: Optional[List[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountCreditInterestCreditInterestGroupCreditInterestItemInterestTiers]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'InterestTiers' }})
-    length_promotional_in_days: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LengthPromotionalInDays' }})
-    payment_method: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountCreditInterestCreditInterestGroupCreditInterestItemPaymentMethodEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PaymentMethod' }})
-    start_date: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StartDate' }})
-    start_promotion_or_future_terms: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StartPromotionOrFutureTerms' }})
-    stop_promotion_or_future_terms: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StopPromotionOrFutureTerms' }})
+    r"""GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountCreditInterestCreditInterestGroupCreditInterestItem
+    Credit Interest item
+    """
+    
+    calculation_frequency: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountCreditInterestCreditInterestGroupCreditInterestItemCalculationFrequencyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CalculationFrequency') }})
+    calculation_method: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountCreditInterestCreditInterestGroupCreditInterestItemCalculationMethodEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CalculationMethod') }})
+    date_of_change: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DateOfChange') }})
+    end_date: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('EndDate') }})
+    fixed_interest_length: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FixedInterestLength') }})
+    interest_notes: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('InterestNotes') }})
+    interest_rate_type: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountCreditInterestCreditInterestGroupCreditInterestItemInterestRateTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('InterestRateType') }})
+    interest_tiers: Optional[List[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountCreditInterestCreditInterestGroupCreditInterestItemInterestTiers]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('InterestTiers') }})
+    length_promotional_in_days: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('LengthPromotionalInDays') }})
+    payment_method: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountCreditInterestCreditInterestGroupCreditInterestItemPaymentMethodEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PaymentMethod') }})
+    start_date: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StartDate') }})
+    start_promotion_or_future_terms: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StartPromotionOrFutureTerms') }})
+    stop_promotion_or_future_terms: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StopPromotionOrFutureTerms') }})
     
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountCreditInterestCreditInterestGroupInterestTierSubTypeEnum(str, Enum):
     FUTURE_MULTIPLE_TERMS = "FutureMultipleTerms"
@@ -284,15 +313,23 @@ class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONB
 @dataclass_json
 @dataclass
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountCreditInterestCreditInterestGroup:
-    credit_interest_item: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountCreditInterestCreditInterestGroupCreditInterestItem = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CreditInterestItem' }})
-    interest_tier_sub_type: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountCreditInterestCreditInterestGroupInterestTierSubTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'InterestTierSubType' }})
+    r"""GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountCreditInterestCreditInterestGroup
+    Credit Interest Group
+    """
+    
+    credit_interest_item: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountCreditInterestCreditInterestGroupCreditInterestItem = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('CreditInterestItem') }})
+    interest_tier_sub_type: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountCreditInterestCreditInterestGroupInterestTierSubTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('InterestTierSubType') }})
     
 
 @dataclass_json
 @dataclass
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountCreditInterest:
-    credit_charged: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CreditCharged' }})
-    credit_interest_group: Optional[List[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountCreditInterestCreditInterestGroup]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CreditInterestGroup' }})
+    r"""GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountCreditInterest
+    Credit Interest
+    """
+    
+    credit_charged: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('CreditCharged') }})
+    credit_interest_group: Optional[List[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountCreditInterestCreditInterestGroup]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CreditInterestGroup') }})
     
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountCreditScoringPartOfAccountOpeningIDVerificationIsAHardOrSoftCreditScoreEnum(str, Enum):
     HARD = "Hard"
@@ -358,39 +395,43 @@ class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONB
 @dataclass_json
 @dataclass
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountEligibility:
-    age_restricted: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AgeRestricted' }})
-    annual_business_turnover: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AnnualBusinessTurnover' }})
-    annual_business_turnover_currency: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AnnualBusinessTurnoverCurrency' }})
-    description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
-    eligibility_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EligibilityName' }})
-    eligibility_notes: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EligibilityNotes' }})
-    eligibility_type: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountEligibilityEligibilityTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EligibilityType' }})
-    income_condition: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IncomeCondition' }})
-    income_turnover_related: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IncomeTurnoverRelated' }})
-    marketing_eligibility: Optional[List[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountEligibilityMarketingEligibilityEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MarketingEligibility' }})
-    max_number_of_accounts: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MaxNumberOfAccounts' }})
-    maximum_age: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MaximumAge' }})
-    maximum_age_to_open: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MaximumAgeToOpen' }})
-    maximum_opening_amount: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MaximumOpeningAmount' }})
-    min_income_turnover_paid_into_account: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MinIncomeTurnoverPaidIntoAccount' }})
-    minimum_age: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MinimumAge' }})
-    minimum_deposit: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MinimumDeposit' }})
-    minimum_income_frequency: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountEligibilityMinimumIncomeFrequencyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MinimumIncomeFrequency' }})
-    minimum_income_turnover_amount: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MinimumIncomeTurnoverAmount' }})
-    minimum_income_turnover_currency: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MinimumIncomeTurnoverCurrency' }})
-    minimum_operating_balance: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MinimumOperatingBalance' }})
-    minimum_operating_balance_currency: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MinimumOperatingBalanceCurrency' }})
-    minimum_operating_balance_exists: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MinimumOperatingBalanceExists' }})
-    opening_deposit_maximum_amount: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OpeningDepositMaximumAmount' }})
-    opening_deposit_maximum_currency: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OpeningDepositMaximumCurrency' }})
-    opening_deposit_minimum: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OpeningDepositMinimum' }})
-    opening_deposit_minimum_currency: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OpeningDepositMinimumCurrency' }})
-    other_financial_holding_required: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OtherFinancialHoldingRequired' }})
-    previous_bankruptcy: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PreviousBankruptcy' }})
-    residency_restricted: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ResidencyRestricted' }})
-    residency_restricted_region: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountEligibilityResidencyRestrictedRegionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ResidencyRestrictedRegion' }})
-    single_joint_income: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountEligibilitySingleJointIncomeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SingleJointIncome' }})
-    third_sector_organisations: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ThirdSectorOrganisations' }})
+    r"""GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountEligibility
+    Eligibility
+    """
+    
+    age_restricted: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('AgeRestricted') }})
+    description: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Description') }})
+    income_turnover_related: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('IncomeTurnoverRelated') }})
+    other_financial_holding_required: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('OtherFinancialHoldingRequired') }})
+    previous_bankruptcy: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('PreviousBankruptcy') }})
+    residency_restricted: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ResidencyRestricted') }})
+    third_sector_organisations: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ThirdSectorOrganisations') }})
+    annual_business_turnover: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AnnualBusinessTurnover') }})
+    annual_business_turnover_currency: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AnnualBusinessTurnoverCurrency') }})
+    eligibility_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('EligibilityName') }})
+    eligibility_notes: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('EligibilityNotes') }})
+    eligibility_type: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountEligibilityEligibilityTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('EligibilityType') }})
+    income_condition: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('IncomeCondition') }})
+    marketing_eligibility: Optional[List[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountEligibilityMarketingEligibilityEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MarketingEligibility') }})
+    max_number_of_accounts: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MaxNumberOfAccounts') }})
+    maximum_age: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MaximumAge') }})
+    maximum_age_to_open: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MaximumAgeToOpen') }})
+    maximum_opening_amount: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MaximumOpeningAmount') }})
+    min_income_turnover_paid_into_account: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MinIncomeTurnoverPaidIntoAccount') }})
+    minimum_age: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MinimumAge') }})
+    minimum_deposit: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MinimumDeposit') }})
+    minimum_income_frequency: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountEligibilityMinimumIncomeFrequencyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MinimumIncomeFrequency') }})
+    minimum_income_turnover_amount: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MinimumIncomeTurnoverAmount') }})
+    minimum_income_turnover_currency: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MinimumIncomeTurnoverCurrency') }})
+    minimum_operating_balance: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MinimumOperatingBalance') }})
+    minimum_operating_balance_currency: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MinimumOperatingBalanceCurrency') }})
+    minimum_operating_balance_exists: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MinimumOperatingBalanceExists') }})
+    opening_deposit_maximum_amount: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('OpeningDepositMaximumAmount') }})
+    opening_deposit_maximum_currency: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('OpeningDepositMaximumCurrency') }})
+    opening_deposit_minimum: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('OpeningDepositMinimum') }})
+    opening_deposit_minimum_currency: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('OpeningDepositMinimumCurrency') }})
+    residency_restricted_region: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountEligibilityResidencyRestrictedRegionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ResidencyRestrictedRegion') }})
+    single_joint_income: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountEligibilitySingleJointIncomeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SingleJointIncome') }})
     
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountFeatureFeatureDetailsFeatureSubTypeEnum(str, Enum):
     FUTURE_MULTIPLE_TERMS = "FutureMultipleTerms"
@@ -401,16 +442,20 @@ class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONB
 @dataclass_json
 @dataclass
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountFeatureFeatureDetails:
-    criteria_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CriteriaType' }})
-    date_of_change: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DateOfChange' }})
-    feature_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeatureDescription' }})
-    feature_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeatureName' }})
-    feature_sub_type: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountFeatureFeatureDetailsFeatureSubTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeatureSubType' }})
-    feature_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeatureType' }})
-    feature_value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeatureValue' }})
-    length_promotional_in_days: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LengthPromotionalInDays' }})
-    start_promotion_or_future_terms: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StartPromotionOrFutureTerms' }})
-    stop_promotion_or_future_terms: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StopPromotionOrFutureTerms' }})
+    r"""GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountFeatureFeatureDetails
+    Feature Details
+    """
+    
+    criteria_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CriteriaType') }})
+    date_of_change: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DateOfChange') }})
+    feature_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeatureDescription') }})
+    feature_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeatureName') }})
+    feature_sub_type: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountFeatureFeatureDetailsFeatureSubTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeatureSubType') }})
+    feature_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeatureType') }})
+    feature_value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeatureValue') }})
+    length_promotional_in_days: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('LengthPromotionalInDays') }})
+    start_promotion_or_future_terms: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StartPromotionOrFutureTerms') }})
+    stop_promotion_or_future_terms: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StopPromotionOrFutureTerms') }})
     
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountFeatureProductStateEnum(str, Enum):
     FUTURE_MULTIPLE_TERMS = "FutureMultipleTerms"
@@ -421,13 +466,17 @@ class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONB
 @dataclass_json
 @dataclass
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountFeature:
-    date_of_change: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DateOfChange' }})
-    existing_feature: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ExistingFeature' }})
-    feature_details: Optional[List[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountFeatureFeatureDetails]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeatureDetails' }})
-    length_promotional_in_days: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LengthPromotionalInDays' }})
-    product_state: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountFeatureProductStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProductState' }})
-    start_promotion_or_future_terms: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StartPromotionOrFutureTerms' }})
-    stop_promotion_or_future_terms: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StopPromotionOrFutureTerms' }})
+    r"""GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountFeature
+    Account Features
+    """
+    
+    existing_feature: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ExistingFeature') }})
+    date_of_change: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DateOfChange') }})
+    feature_details: Optional[List[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountFeatureFeatureDetails]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeatureDetails') }})
+    length_promotional_in_days: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('LengthPromotionalInDays') }})
+    product_state: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountFeatureProductStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ProductState') }})
+    start_promotion_or_future_terms: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StartPromotionOrFutureTerms') }})
+    stop_promotion_or_future_terms: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StopPromotionOrFutureTerms') }})
     
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnum(str, Enum):
     ACADEMIC_TERM = "AcademicTerm"
@@ -456,16 +505,20 @@ class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONB
 @dataclass_json
 @dataclass
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetails:
-    fee_amount: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeAmount' }})
-    fee_frequency: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeFrequency' }})
-    fee_higher_tier: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeHigherTier' }})
-    fee_lower_tier: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeLowerTier' }})
-    fee_max: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeMax' }})
-    fee_min: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeMin' }})
-    fee_rate: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeRate' }})
-    fees_and_charges_notes: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeesAndChargesNotes' }})
-    negotiable: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Negotiable' }})
-    representative_rate: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RepresentativeRate' }})
+    r"""GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetails
+    Fee Sub Details
+    """
+    
+    fee_frequency: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeeFrequency') }})
+    negotiable: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Negotiable') }})
+    fee_amount: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeeAmount') }})
+    fee_higher_tier: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeeHigherTier') }})
+    fee_lower_tier: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeeLowerTier') }})
+    fee_max: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeeMax') }})
+    fee_min: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeeMin') }})
+    fee_rate: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeeRate') }})
+    fees_and_charges_notes: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeesAndChargesNotes') }})
+    representative_rate: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('RepresentativeRate') }})
     
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum(str, Enum):
     OTHER = "Other"
@@ -496,7 +549,7 @@ class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONB
     BACS_BATCH = "BACSBatch"
     BACS_ON_LINE_FILE = "BACSOnLineFile"
     BACS_FILE_ITEM = "BACSFileItem"
-    BACS_ON_LINE_SETUP_ = "BACSOnLineSetup "
+    BACS_ON_LINE_SETUP = "BACSOnLineSetup "
     BACS_ITEM = "BACSItem"
     BACS_ITEM_INTERBRANCH = "BACSItemInterbranch"
     BACS_BULK_BATCH = "BACSBulkBatch"
@@ -516,7 +569,7 @@ class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONB
     BACSTEL_ANCILLIARY = "BACSTELAncilliary"
     BACSTEL_SMART_CARD = "BACSTELSmartCard"
     BACSTEL_FILE = "BACSTELFile"
-    BACSTEL_SETUP_ = "BACSTELSetup "
+    BACSTEL_SETUP = "BACSTELSetup "
     BACSTEL_OVERLIMIT = "BACSTELOverlimit"
     BACSTEL_PAYMENT = "BACSTELPayment"
     BACSTEL_SERVICE = "BACSTELService"
@@ -843,13 +896,17 @@ class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONB
 @dataclass_json
 @dataclass
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountFeesAndChargesFeesFeeDetailsFeeDetail:
-    date_of_change: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DateOfChange' }})
-    fee_sub_details: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetails = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeSubDetails' }})
-    fee_type: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeType' }})
-    length_promotional_in_days: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LengthPromotionalInDays' }})
-    other: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Other' }})
-    start_promotion_or_future_terms: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StartPromotionOrFutureTerms' }})
-    stop_promotion_or_future_terms: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StopPromotionOrFutureTerms' }})
+    r"""GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountFeesAndChargesFeesFeeDetailsFeeDetail
+    Fee Detail
+    """
+    
+    fee_sub_details: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetails = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeeSubDetails') }})
+    fee_type: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeeType') }})
+    date_of_change: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DateOfChange') }})
+    length_promotional_in_days: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('LengthPromotionalInDays') }})
+    other: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Other') }})
+    start_promotion_or_future_terms: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StartPromotionOrFutureTerms') }})
+    stop_promotion_or_future_terms: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StopPromotionOrFutureTerms') }})
     
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountFeesAndChargesFeesFeeDetailsFeeSubTypeEnum(str, Enum):
     FUTURE_MULTIPLE_TERMS = "FutureMultipleTerms"
@@ -860,20 +917,28 @@ class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONB
 @dataclass_json
 @dataclass
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountFeesAndChargesFeesFeeDetails:
-    fee_detail: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountFeesAndChargesFeesFeeDetailsFeeDetail = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeDetail' }})
-    fee_sub_type: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountFeesAndChargesFeesFeeDetailsFeeSubTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeSubType' }})
+    r"""GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountFeesAndChargesFeesFeeDetails
+    Fee Details
+    """
+    
+    fee_detail: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountFeesAndChargesFeesFeeDetailsFeeDetail = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeeDetail') }})
+    fee_sub_type: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountFeesAndChargesFeesFeeDetailsFeeSubTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeeSubType') }})
     
 
 @dataclass_json
 @dataclass
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountFeesAndChargesFees:
-    date_of_change: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DateOfChange' }})
-    fee_details: List[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountFeesAndChargesFeesFeeDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeDetails' }})
-    fee_higher_tier: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeHigherTier' }})
-    fee_lower_tier: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeLowerTier' }})
-    length_promotional_in_days: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LengthPromotionalInDays' }})
-    start_promotion_or_future_terms: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StartPromotionOrFutureTerms' }})
-    stop_promotion_or_future_terms: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StopPromotionOrFutureTerms' }})
+    r"""GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountFeesAndChargesFees
+    Fees
+    """
+    
+    fee_details: List[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountFeesAndChargesFeesFeeDetails] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeeDetails') }})
+    date_of_change: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DateOfChange') }})
+    fee_higher_tier: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeeHigherTier') }})
+    fee_lower_tier: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeeLowerTier') }})
+    length_promotional_in_days: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('LengthPromotionalInDays') }})
+    start_promotion_or_future_terms: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StartPromotionOrFutureTerms') }})
+    stop_promotion_or_future_terms: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StopPromotionOrFutureTerms') }})
     
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountFeesAndChargesProductStateEnum(str, Enum):
     FUTURE_MULTIPLE_TERMS = "FutureMultipleTerms"
@@ -884,8 +949,12 @@ class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONB
 @dataclass_json
 @dataclass
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountFeesAndCharges:
-    fees: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountFeesAndChargesFees = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Fees' }})
-    product_state: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountFeesAndChargesProductStateEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProductState' }})
+    r"""GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountFeesAndCharges
+    Fees And Charges
+    """
+    
+    fees: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountFeesAndChargesFees = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Fees') }})
+    product_state: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountFeesAndChargesProductStateEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ProductState') }})
     
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountMobileWalletEnum(str, Enum):
     ANDROID_PAY = "AndroidPay"
@@ -905,29 +974,45 @@ class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONB
 @dataclass_json
 @dataclass
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOrganisationBrand:
-    trademark_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TrademarkID' }})
-    trademark_ipo_code: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOrganisationBrandTrademarkIpoCodeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TrademarkIPOCode' }})
+    r"""GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOrganisationBrand
+    Brand
+    """
+    
+    trademark_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('TrademarkID') }})
+    trademark_ipo_code: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOrganisationBrandTrademarkIpoCodeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('TrademarkIPOCode') }})
     
 
 @dataclass_json
 @dataclass
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOrganisationParentOrganisationOrganisationName:
-    legal_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LegalName' }})
+    r"""GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOrganisationParentOrganisationOrganisationName
+    Organisation Name
+    """
+    
+    legal_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('LegalName') }})
     
 
 @dataclass_json
 @dataclass
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOrganisationParentOrganisation:
-    bic: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BIC' }})
-    lei: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LEI' }})
-    organisation_name: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOrganisationParentOrganisationOrganisationName = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OrganisationName' }})
+    r"""GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOrganisationParentOrganisation
+    Parent organisation
+    """
+    
+    organisation_name: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOrganisationParentOrganisationOrganisationName = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('OrganisationName') }})
+    bic: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('BIC') }})
+    lei: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('LEI') }})
     
 
 @dataclass_json
 @dataclass
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOrganisation:
-    brand: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOrganisationBrand = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Brand' }})
-    parent_organisation: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOrganisationParentOrganisation = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ParentOrganisation' }})
+    r"""GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOrganisation
+    Organisation
+    """
+    
+    brand: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOrganisationBrand = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Brand') }})
+    parent_organisation: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOrganisationParentOrganisation = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ParentOrganisation') }})
     
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftFeeChargeNegotiableIndicatorEnum(str, Enum):
     NO = "No"
@@ -959,33 +1044,49 @@ class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONB
 @dataclass_json
 @dataclass
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftFeesAndChargesFeeChargeOtherApplicationFrequency:
-    code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Code' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
+    r"""GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftFeesAndChargesFeeChargeOtherApplicationFrequency
+    Other Code Type
+    """
+    
+    code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Code') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Description') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
     
 
 @dataclass_json
 @dataclass
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftFeesAndChargesFeeChargeOtherCalculationFrequency:
-    code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Code' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
+    r"""GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftFeesAndChargesFeeChargeOtherCalculationFrequency
+    Other Code Type
+    """
+    
+    code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Code') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Description') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
     
 
 @dataclass_json
 @dataclass
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftFeesAndChargesFeeChargeOtherType:
-    code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Code' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
+    r"""GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftFeesAndChargesFeeChargeOtherType
+    Other Code Type
+    """
+    
+    code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Code') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Description') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
     
 
 @dataclass_json
 @dataclass
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftFeesAndChargesFeeChargeRateOtherType:
-    code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Code' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
+    r"""GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftFeesAndChargesFeeChargeRateOtherType
+    Other Code Type
+    """
+    
+    code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Code') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Description') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
     
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftFeesAndChargesFeeChargeRateTypeEnum(str, Enum):
     GROSS = "Gross"
@@ -1010,16 +1111,20 @@ class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONB
 @dataclass_json
 @dataclass
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftFeesAndCharges:
-    fee_charge_amount: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeChargeAmount' }})
-    fee_charge_application_frequency: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftFeesAndChargesFeeChargeApplicationFrequencyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeChargeApplicationFrequency' }})
-    fee_charge_calculation_frequency: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftFeesAndChargesFeeChargeCalculationFrequencyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeChargeCalculationFrequency' }})
-    fee_charge_other_application_frequency: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftFeesAndChargesFeeChargeOtherApplicationFrequency] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeChargeOtherApplicationFrequency' }})
-    fee_charge_other_calculation_frequency: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftFeesAndChargesFeeChargeOtherCalculationFrequency] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeChargeOtherCalculationFrequency' }})
-    fee_charge_other_type: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftFeesAndChargesFeeChargeOtherType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeChargeOtherType' }})
-    fee_charge_rate: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeChargeRate' }})
-    fee_charge_rate_other_type: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftFeesAndChargesFeeChargeRateOtherType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeChargeRateOtherType' }})
-    fee_charge_rate_type: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftFeesAndChargesFeeChargeRateTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeChargeRateType' }})
-    fee_charge_type: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftFeesAndChargesFeeChargeTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeChargeType' }})
+    r"""GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftFeesAndCharges
+    Overdraft Fees Charges
+    """
+    
+    fee_charge_type: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftFeesAndChargesFeeChargeTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeeChargeType') }})
+    fee_charge_amount: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeeChargeAmount') }})
+    fee_charge_application_frequency: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftFeesAndChargesFeeChargeApplicationFrequencyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeeChargeApplicationFrequency') }})
+    fee_charge_calculation_frequency: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftFeesAndChargesFeeChargeCalculationFrequencyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeeChargeCalculationFrequency') }})
+    fee_charge_other_application_frequency: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftFeesAndChargesFeeChargeOtherApplicationFrequency] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeeChargeOtherApplicationFrequency') }})
+    fee_charge_other_calculation_frequency: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftFeesAndChargesFeeChargeOtherCalculationFrequency] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeeChargeOtherCalculationFrequency') }})
+    fee_charge_other_type: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftFeesAndChargesFeeChargeOtherType] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeeChargeOtherType') }})
+    fee_charge_rate: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeeChargeRate') }})
+    fee_charge_rate_other_type: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftFeesAndChargesFeeChargeRateOtherType] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeeChargeRateOtherType') }})
+    fee_charge_rate_type: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftFeesAndChargesFeeChargeRateTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeeChargeRateType') }})
     
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftProductStateEnum(str, Enum):
     FUTURE_MULTIPLE_TERMS = "FutureMultipleTerms"
@@ -1030,9 +1135,13 @@ class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONB
 @dataclass_json
 @dataclass
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetArrangementOtherType:
-    code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Code' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
+    r"""GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetArrangementOtherType
+    Other Code Type
+    """
+    
+    code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Code') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Description') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
     
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetArrangementTypeEnum(str, Enum):
     UNARRANGED = "Unarranged"
@@ -1065,33 +1174,49 @@ class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONB
 @dataclass_json
 @dataclass
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetFeesAndChargesFeeChargeOtherApplicationFrequency:
-    code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Code' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
+    r"""GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetFeesAndChargesFeeChargeOtherApplicationFrequency
+    Other Code Type
+    """
+    
+    code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Code') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Description') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
     
 
 @dataclass_json
 @dataclass
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetFeesAndChargesFeeChargeOtherCalculationFrequency:
-    code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Code' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
+    r"""GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetFeesAndChargesFeeChargeOtherCalculationFrequency
+    Other Code Type
+    """
+    
+    code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Code') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Description') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
     
 
 @dataclass_json
 @dataclass
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetFeesAndChargesFeeChargeOtherType:
-    code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Code' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
+    r"""GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetFeesAndChargesFeeChargeOtherType
+    Other Code Type
+    """
+    
+    code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Code') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Description') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
     
 
 @dataclass_json
 @dataclass
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetFeesAndChargesFeeChargeRateOtherType:
-    code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Code' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
+    r"""GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetFeesAndChargesFeeChargeRateOtherType
+    Other Code Type
+    """
+    
+    code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Code') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Description') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
     
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetFeesAndChargesFeeChargeRateTypeEnum(str, Enum):
     GROSS = "Gross"
@@ -1116,16 +1241,20 @@ class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONB
 @dataclass_json
 @dataclass
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetFeesAndCharges:
-    fee_charge_amount: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeChargeAmount' }})
-    fee_charge_application_frequency: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetFeesAndChargesFeeChargeApplicationFrequencyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeChargeApplicationFrequency' }})
-    fee_charge_calculation_frequency: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetFeesAndChargesFeeChargeCalculationFrequencyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeChargeCalculationFrequency' }})
-    fee_charge_other_application_frequency: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetFeesAndChargesFeeChargeOtherApplicationFrequency] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeChargeOtherApplicationFrequency' }})
-    fee_charge_other_calculation_frequency: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetFeesAndChargesFeeChargeOtherCalculationFrequency] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeChargeOtherCalculationFrequency' }})
-    fee_charge_other_type: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetFeesAndChargesFeeChargeOtherType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeChargeOtherType' }})
-    fee_charge_rate: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeChargeRate' }})
-    fee_charge_rate_other_type: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetFeesAndChargesFeeChargeRateOtherType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeChargeRateOtherType' }})
-    fee_charge_rate_type: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetFeesAndChargesFeeChargeRateTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeChargeRateType' }})
-    fee_charge_type: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetFeesAndChargesFeeChargeTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeChargeType' }})
+    r"""GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetFeesAndCharges
+    Overdraft Fees Charges
+    """
+    
+    fee_charge_type: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetFeesAndChargesFeeChargeTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeeChargeType') }})
+    fee_charge_amount: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeeChargeAmount') }})
+    fee_charge_application_frequency: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetFeesAndChargesFeeChargeApplicationFrequencyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeeChargeApplicationFrequency') }})
+    fee_charge_calculation_frequency: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetFeesAndChargesFeeChargeCalculationFrequencyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeeChargeCalculationFrequency') }})
+    fee_charge_other_application_frequency: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetFeesAndChargesFeeChargeOtherApplicationFrequency] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeeChargeOtherApplicationFrequency') }})
+    fee_charge_other_calculation_frequency: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetFeesAndChargesFeeChargeOtherCalculationFrequency] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeeChargeOtherCalculationFrequency') }})
+    fee_charge_other_type: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetFeesAndChargesFeeChargeOtherType] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeeChargeOtherType') }})
+    fee_charge_rate: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeeChargeRate') }})
+    fee_charge_rate_other_type: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetFeesAndChargesFeeChargeRateOtherType] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeeChargeRateOtherType') }})
+    fee_charge_rate_type: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetFeesAndChargesFeeChargeRateTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeeChargeRateType') }})
     
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetOverdraftTierBandFeesAndChargesFeeChargeApplicationFrequencyEnum(str, Enum):
     ACADEMIC_TERM = "AcademicTerm"
@@ -1153,33 +1282,49 @@ class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONB
 @dataclass_json
 @dataclass
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetOverdraftTierBandFeesAndChargesFeeChargeOtherApplicationFrequency:
-    code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Code' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
+    r"""GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetOverdraftTierBandFeesAndChargesFeeChargeOtherApplicationFrequency
+    Other Code Type
+    """
+    
+    code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Code') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Description') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
     
 
 @dataclass_json
 @dataclass
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetOverdraftTierBandFeesAndChargesFeeChargeOtherCalculationFrequency:
-    code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Code' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
+    r"""GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetOverdraftTierBandFeesAndChargesFeeChargeOtherCalculationFrequency
+    Other Code Type
+    """
+    
+    code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Code') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Description') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
     
 
 @dataclass_json
 @dataclass
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetOverdraftTierBandFeesAndChargesFeeChargeOtherType:
-    code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Code' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
+    r"""GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetOverdraftTierBandFeesAndChargesFeeChargeOtherType
+    Other Code Type
+    """
+    
+    code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Code') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Description') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
     
 
 @dataclass_json
 @dataclass
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetOverdraftTierBandFeesAndChargesFeeChargeRateOtherType:
-    code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Code' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
+    r"""GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetOverdraftTierBandFeesAndChargesFeeChargeRateOtherType
+    Other Code Type
+    """
+    
+    code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Code') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Description') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
     
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetOverdraftTierBandFeesAndChargesFeeChargeRateTypeEnum(str, Enum):
     GROSS = "Gross"
@@ -1204,41 +1349,53 @@ class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONB
 @dataclass_json
 @dataclass
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetOverdraftTierBandFeesAndCharges:
-    fee_charge_amount: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeChargeAmount' }})
-    fee_charge_application_frequency: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetOverdraftTierBandFeesAndChargesFeeChargeApplicationFrequencyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeChargeApplicationFrequency' }})
-    fee_charge_calculation_frequency: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetOverdraftTierBandFeesAndChargesFeeChargeCalculationFrequencyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeChargeCalculationFrequency' }})
-    fee_charge_other_application_frequency: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetOverdraftTierBandFeesAndChargesFeeChargeOtherApplicationFrequency] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeChargeOtherApplicationFrequency' }})
-    fee_charge_other_calculation_frequency: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetOverdraftTierBandFeesAndChargesFeeChargeOtherCalculationFrequency] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeChargeOtherCalculationFrequency' }})
-    fee_charge_other_type: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetOverdraftTierBandFeesAndChargesFeeChargeOtherType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeChargeOtherType' }})
-    fee_charge_rate: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeChargeRate' }})
-    fee_charge_rate_other_type: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetOverdraftTierBandFeesAndChargesFeeChargeRateOtherType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeChargeRateOtherType' }})
-    fee_charge_rate_type: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetOverdraftTierBandFeesAndChargesFeeChargeRateTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeChargeRateType' }})
-    fee_charge_type: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetOverdraftTierBandFeesAndChargesFeeChargeTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeChargeType' }})
+    r"""GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetOverdraftTierBandFeesAndCharges
+    Overdraft Fees Charges
+    """
+    
+    fee_charge_type: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetOverdraftTierBandFeesAndChargesFeeChargeTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeeChargeType') }})
+    fee_charge_amount: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeeChargeAmount') }})
+    fee_charge_application_frequency: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetOverdraftTierBandFeesAndChargesFeeChargeApplicationFrequencyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeeChargeApplicationFrequency') }})
+    fee_charge_calculation_frequency: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetOverdraftTierBandFeesAndChargesFeeChargeCalculationFrequencyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeeChargeCalculationFrequency') }})
+    fee_charge_other_application_frequency: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetOverdraftTierBandFeesAndChargesFeeChargeOtherApplicationFrequency] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeeChargeOtherApplicationFrequency') }})
+    fee_charge_other_calculation_frequency: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetOverdraftTierBandFeesAndChargesFeeChargeOtherCalculationFrequency] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeeChargeOtherCalculationFrequency') }})
+    fee_charge_other_type: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetOverdraftTierBandFeesAndChargesFeeChargeOtherType] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeeChargeOtherType') }})
+    fee_charge_rate: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeeChargeRate') }})
+    fee_charge_rate_other_type: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetOverdraftTierBandFeesAndChargesFeeChargeRateOtherType] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeeChargeRateOtherType') }})
+    fee_charge_rate_type: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetOverdraftTierBandFeesAndChargesFeeChargeRateTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeeChargeRateType') }})
     
 
 @dataclass_json
 @dataclass
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetOverdraftTierBand:
-    ear: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EAR' }})
-    fees_and_charges: Optional[List[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetOverdraftTierBandFeesAndCharges]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeesAndCharges' }})
-    notes: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Notes' }})
-    tier_band_identification: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TierBandIdentification' }})
-    tier_value_maximum: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TierValueMaximum' }})
-    tier_value_minimum: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TierValueMinimum' }})
+    r"""GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetOverdraftTierBand
+    Tiers
+    """
+    
+    tier_value_maximum: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('TierValueMaximum') }})
+    tier_value_minimum: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('TierValueMinimum') }})
+    ear: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('EAR') }})
+    fees_and_charges: Optional[List[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetOverdraftTierBandFeesAndCharges]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeesAndCharges') }})
+    notes: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Notes') }})
+    tier_band_identification: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TierBandIdentification') }})
     
 
 @dataclass_json
 @dataclass
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSet:
-    arrangement_other_type: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetArrangementOtherType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ArrangementOtherType' }})
-    arrangement_type: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetArrangementTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ArrangementType' }})
-    buffer_amount: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BufferAmount' }})
-    cma_defined_indicator: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CMADefinedIndicator' }})
-    ear: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EAR' }})
-    fees_and_charges: Optional[List[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetFeesAndCharges]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeesAndCharges' }})
-    notes: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Notes' }})
-    overdraft_tier_band: Optional[List[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetOverdraftTierBand]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OverdraftTierBand' }})
-    tier_band_set_identification: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TierBandSetIdentification' }})
+    r"""GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSet
+    Tier Bandset
+    """
+    
+    arrangement_type: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetArrangementTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ArrangementType') }})
+    cma_defined_indicator: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('CMADefinedIndicator') }})
+    arrangement_other_type: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetArrangementOtherType] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ArrangementOtherType') }})
+    buffer_amount: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('BufferAmount') }})
+    ear: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('EAR') }})
+    fees_and_charges: Optional[List[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetFeesAndCharges]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeesAndCharges') }})
+    notes: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Notes') }})
+    overdraft_tier_band: Optional[List[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSetOverdraftTierBand]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('OverdraftTierBand') }})
+    tier_band_set_identification: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TierBandSetIdentification') }})
     
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTypeEnum(str, Enum):
     COMMITTED = "Committed"
@@ -1248,18 +1405,22 @@ class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONB
 @dataclass_json
 @dataclass
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraft:
-    date_of_change: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DateOfChange' }})
-    fee_charge_negotiable_indicator: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftFeeChargeNegotiableIndicatorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeChargeNegotiableIndicator' }})
-    fees_and_charges: Optional[List[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftFeesAndCharges]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeesAndCharges' }})
-    length_promotional_in_days: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LengthPromotionalInDays' }})
-    maximum_monthly_overdraft_charge: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MaximumMonthlyOverdraftCharge' }})
-    notes: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Notes' }})
-    overdraft_product_state: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftProductStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OverdraftProductState' }})
-    overdraft_tier_band_set: Optional[List[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSet]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OverdraftTierBandSet' }})
-    overdraft_type: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OverdraftType' }})
-    start_promotion_or_future_terms: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StartPromotionOrFutureTerms' }})
-    stop_promotion_or_future_terms: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StopPromotionOrFutureTerms' }})
-    term: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Term' }})
+    r"""GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraft
+    Overdraft
+    """
+    
+    date_of_change: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DateOfChange') }})
+    fee_charge_negotiable_indicator: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftFeeChargeNegotiableIndicatorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeeChargeNegotiableIndicator') }})
+    fees_and_charges: Optional[List[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftFeesAndCharges]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeesAndCharges') }})
+    length_promotional_in_days: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('LengthPromotionalInDays') }})
+    maximum_monthly_overdraft_charge: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MaximumMonthlyOverdraftCharge') }})
+    notes: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Notes') }})
+    overdraft_product_state: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftProductStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('OverdraftProductState') }})
+    overdraft_tier_band_set: Optional[List[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTierBandSet]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('OverdraftTierBandSet') }})
+    overdraft_type: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraftOverdraftTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('OverdraftType') }})
+    start_promotion_or_future_terms: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StartPromotionOrFutureTerms') }})
+    stop_promotion_or_future_terms: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StopPromotionOrFutureTerms') }})
+    term: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Term') }})
     
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountProductSegmentEnum(str, Enum):
     BASIC = "Basic"
@@ -1283,38 +1444,42 @@ class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONB
 @dataclass_json
 @dataclass
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccount:
-    access_channels: List[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountAccessChannelsEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AccessChannels' }})
-    benefits: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountBenefits = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Benefits' }})
-    ca_pricing: List[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountCaPricing] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CAPricing' }})
-    card_notes: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CardNotes' }})
-    card_type: List[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountCardTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CardType' }})
-    card_withdrawal_limit: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CardWithdrawalLimit' }})
-    cheque_book_available: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ChequeBookAvailable' }})
-    contactless: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Contactless' }})
-    credit_interest: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountCreditInterest = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CreditInterest' }})
-    credit_scoring_part_of_account_opening_for_getting_an_account: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CreditScoringPartOfAccountOpeningForGettingAnAccount' }})
-    credit_scoring_part_of_account_opening_for_id_verification: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CreditScoringPartOfAccountOpeningForIDVerification' }})
-    credit_scoring_part_of_account_opening_id_verification_is_a_hard_or_soft_credit_score: Optional[List[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountCreditScoringPartOfAccountOpeningIDVerificationIsAHardOrSoftCreditScoreEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CreditScoringPartOfAccountOpeningIDVerificationIsAHardOrSoftCreditScore' }})
-    credit_scoring_part_of_account_opening_id_verification_text: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CreditScoringPartOfAccountOpeningIDVerificationText' }})
-    credit_scoring_part_of_account_opening_is_a_hard_or_soft_credit_score: Optional[List[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountCreditScoringPartOfAccountOpeningIsAHardOrSoftCreditScoreEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CreditScoringPartOfAccountOpeningIsAHardOrSoftCreditScore' }})
-    credit_scoring_part_of_account_opening_text: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CreditScoringPartOfAccountOpeningText' }})
-    currency: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Currency' }})
-    eligibility: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountEligibility = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Eligibility' }})
-    feature: Optional[List[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountFeature]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Feature' }})
-    fees_and_charges: List[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountFeesAndCharges] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeesAndCharges' }})
-    international_payments_supported: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'InternationalPaymentsSupported' }})
-    maximum_monthly_charge: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MaximumMonthlyCharge' }})
-    mobile_wallet: Optional[List[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountMobileWalletEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MobileWallet' }})
-    organisation: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOrganisation = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Organisation' }})
-    overdraft: Optional[List[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraft]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Overdraft' }})
-    overdraft_offered: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OverdraftOffered' }})
-    product_description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProductDescription' }})
-    product_identifier: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProductIdentifier' }})
-    product_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProductName' }})
-    product_segment: List[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountProductSegmentEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProductSegment' }})
-    product_type: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountProductTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProductType' }})
-    product_url: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProductURL' }})
-    tsand_cs: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TsandCs' }})
+    r"""GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccount
+    Business current account
+    """
+    
+    access_channels: List[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountAccessChannelsEnum] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('AccessChannels') }})
+    benefits: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountBenefits = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Benefits') }})
+    ca_pricing: List[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountCaPricing] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('CAPricing') }})
+    card_type: List[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountCardTypeEnum] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('CardType') }})
+    card_withdrawal_limit: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('CardWithdrawalLimit') }})
+    cheque_book_available: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ChequeBookAvailable') }})
+    contactless: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Contactless') }})
+    credit_interest: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountCreditInterest = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('CreditInterest') }})
+    credit_scoring_part_of_account_opening_for_getting_an_account: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('CreditScoringPartOfAccountOpeningForGettingAnAccount') }})
+    currency: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Currency') }})
+    eligibility: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountEligibility = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Eligibility') }})
+    fees_and_charges: List[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountFeesAndCharges] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeesAndCharges') }})
+    international_payments_supported: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('InternationalPaymentsSupported') }})
+    organisation: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOrganisation = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Organisation') }})
+    overdraft_offered: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('OverdraftOffered') }})
+    product_description: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ProductDescription') }})
+    product_identifier: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ProductIdentifier') }})
+    product_segment: List[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountProductSegmentEnum] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ProductSegment') }})
+    product_type: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountProductTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ProductType') }})
+    product_url: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ProductURL') }})
+    tsand_cs: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('TsandCs') }})
+    card_notes: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CardNotes') }})
+    credit_scoring_part_of_account_opening_for_id_verification: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CreditScoringPartOfAccountOpeningForIDVerification') }})
+    credit_scoring_part_of_account_opening_id_verification_is_a_hard_or_soft_credit_score: Optional[List[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountCreditScoringPartOfAccountOpeningIDVerificationIsAHardOrSoftCreditScoreEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CreditScoringPartOfAccountOpeningIDVerificationIsAHardOrSoftCreditScore') }})
+    credit_scoring_part_of_account_opening_id_verification_text: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CreditScoringPartOfAccountOpeningIDVerificationText') }})
+    credit_scoring_part_of_account_opening_is_a_hard_or_soft_credit_score: Optional[List[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountCreditScoringPartOfAccountOpeningIsAHardOrSoftCreditScoreEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CreditScoringPartOfAccountOpeningIsAHardOrSoftCreditScore') }})
+    credit_scoring_part_of_account_opening_text: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CreditScoringPartOfAccountOpeningText') }})
+    feature: Optional[List[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountFeature]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Feature') }})
+    maximum_monthly_charge: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MaximumMonthlyCharge') }})
+    mobile_wallet: Optional[List[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountMobileWalletEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MobileWallet') }})
+    overdraft: Optional[List[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccountOverdraft]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Overdraft') }})
+    product_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ProductName') }})
     
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataAgreementEnum(str, Enum):
     USE_OF_THE_AP_IS_AND_ANY_RELATED_DATA_WILL_BE_SUBJECT_TO_THE_TERMS_OF_THE_OPEN_LICENCE_AND_SUBJECT_TO_TERMS_AND_CONDITIONS = "Use of the APIs and any related data will be subject to the terms of the Open Licence and subject to terms and conditions"
@@ -1329,30 +1494,35 @@ class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONM
 @dataclass_json
 @dataclass
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaData:
-    agreement: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataAgreementEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Agreement' }})
-    last_updated: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LastUpdated', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    license: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataLicenseEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'License' }})
-    terms_of_use: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataTermsOfUseEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TermsOfUse' }})
-    total_results: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TotalResults' }})
+    agreement: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataAgreementEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Agreement') }})
+    last_updated: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('LastUpdated'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    license: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataLicenseEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('License') }})
+    terms_of_use: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataTermsOfUseEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('TermsOfUse') }})
+    total_results: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('TotalResults') }})
     
 
 @dataclass_json
 @dataclass
 class GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSON:
-    data: List[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccount] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
-    meta: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaData = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    data: List[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONBusinessCurrentAccount] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
+    meta: GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaData = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('meta') }})
+    
+
+@dataclass
+class GetBusinessCurrentAccountsRequest:
+    headers: GetBusinessCurrentAccountsHeaders = field()
     
 
 @dataclass
 class GetBusinessCurrentAccountsResponse:
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     four_hundred_error_object: Optional[GetBusinessCurrentAccounts400ErrorObject] = field(default=None)
     four_hundred_and_eight_error_object: Optional[GetBusinessCurrentAccounts408ErrorObject] = field(default=None)
     four_hundred_and_twenty_nine_error_object: Optional[GetBusinessCurrentAccounts429ErrorObject] = field(default=None)
     five_hundred_error_object: Optional[GetBusinessCurrentAccounts500ErrorObject] = field(default=None)
     five_hundred_and_three_error_object: Optional[GetBusinessCurrentAccounts503ErrorObject] = field(default=None)
-    content_type: str = field(default=None)
     error_object: Optional[GetBusinessCurrentAccountsErrorObject] = field(default=None)
     get_business_current_accounts_200_application_prs_openbanking_opendata_v1_3_plus_json_object: Optional[GetBusinessCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSON] = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
     

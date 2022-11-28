@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RegisterDeviceResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Response to a RegisterDevice request.
 **/
 export class RegisterDeviceResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DeviceId" })
+  @SpeakeasyMetadata({ data: "json, name=DeviceId" })
   deviceId?: string;
 }

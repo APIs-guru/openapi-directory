@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Currency
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Currency
 **/
 export class Currency extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code: string;
 
-  @Metadata({ data: "json, name=decimalDigits" })
+  @SpeakeasyMetadata({ data: "json, name=decimalDigits" })
   decimalDigits: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=namePlural" })
+  @SpeakeasyMetadata({ data: "json, name=namePlural" })
   namePlural: string;
 
-  @Metadata({ data: "json, name=rounding" })
+  @SpeakeasyMetadata({ data: "json, name=rounding" })
   rounding: number;
 
-  @Metadata({ data: "json, name=symbol" })
+  @SpeakeasyMetadata({ data: "json, name=symbol" })
   symbol: string;
 
-  @Metadata({ data: "json, name=symbolNative" })
+  @SpeakeasyMetadata({ data: "json, name=symbolNative" })
   symbolNative: string;
 }

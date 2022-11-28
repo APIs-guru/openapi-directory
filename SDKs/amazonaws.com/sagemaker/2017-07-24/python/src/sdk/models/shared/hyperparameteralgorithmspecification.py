@@ -1,15 +1,20 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import metricdefinition
-from . import traininginputmode_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class HyperParameterAlgorithmSpecification:
-    algorithm_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AlgorithmName' }})
-    metric_definitions: Optional[List[metricdefinition.MetricDefinition]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MetricDefinitions' }})
-    training_image: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TrainingImage' }})
-    training_input_mode: traininginputmode_enum.TrainingInputModeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TrainingInputMode' }})
+    r"""HyperParameterAlgorithmSpecification
+    Specifies which training algorithm to use for training jobs that a hyperparameter tuning job launches and the metrics to monitor.
+    """
+    
+    training_input_mode: TrainingInputModeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('TrainingInputMode') }})
+    algorithm_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AlgorithmName') }})
+    metric_definitions: Optional[List[MetricDefinition]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MetricDefinitions') }})
+    training_image: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TrainingImage') }})
     

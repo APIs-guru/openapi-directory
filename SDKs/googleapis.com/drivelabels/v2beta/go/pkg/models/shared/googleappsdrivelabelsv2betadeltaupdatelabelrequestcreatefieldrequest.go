@@ -1,5 +1,7 @@
 package shared
 
-type GoogleAppsDriveLabelsV2betaDeltaUpdateLabelRequestCreateFieldRequest struct {
-	Field *GoogleAppsDriveLabelsV2betaField `json:"field,omitempty"`
+// GoogleAppsDriveLabelsV2betaDeltaUpdateLabelRequestCreateFieldRequestInput
+// Request to create a Field within a Label.
+type GoogleAppsDriveLabelsV2betaDeltaUpdateLabelRequestCreateFieldRequestInput struct {
+	Field *GoogleAppsDriveLabelsV2betaFieldInput `json:"field,omitempty"`
 }

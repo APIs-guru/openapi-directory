@@ -13,13 +13,13 @@ type GetSectionQueryParams struct {
 	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
+type GetSection200ApplicationJSON struct {
+	Data *shared.SectionResponse `json:"data,omitempty"`
+}
+
 type GetSectionRequest struct {
 	PathParams  GetSectionPathParams
 	QueryParams GetSectionQueryParams
-}
-
-type GetSection200ApplicationJSON struct {
-	Data *shared.SectionResponse `json:"data,omitempty"`
 }
 
 type GetSectionResponse struct {

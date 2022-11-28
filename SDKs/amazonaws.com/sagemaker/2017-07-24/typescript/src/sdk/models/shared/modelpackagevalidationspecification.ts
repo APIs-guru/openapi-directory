@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ModelPackageValidationProfile } from "./modelpackagevalidationprofile";
+
 
 
 // ModelPackageValidationSpecification
@@ -8,9 +8,9 @@ import { ModelPackageValidationProfile } from "./modelpackagevalidationprofile";
  * Specifies batch transform jobs that Amazon SageMaker runs to validate your model package.
 **/
 export class ModelPackageValidationSpecification extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ValidationProfiles", elemType: shared.ModelPackageValidationProfile })
+  @SpeakeasyMetadata({ data: "json, name=ValidationProfiles", elemType: ModelPackageValidationProfile })
   validationProfiles: ModelPackageValidationProfile[];
 
-  @Metadata({ data: "json, name=ValidationRole" })
+  @SpeakeasyMetadata({ data: "json, name=ValidationRole" })
   validationRole: string;
 }

@@ -1,52 +1,53 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ListInflectedFormsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=family" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=family" })
   family?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=language" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=language" })
   language?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=lexeme" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lexeme" })
   lexeme?: string;
 }
 
 
-export class ListInflectedFormsRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: ListInflectedFormsQueryParams;
-}
-
-
 export class ListInflectedForms200ApplicationJsonFeatures extends SpeakeasyBase {
-  @Metadata({ data: "json, name=index" })
+  @SpeakeasyMetadata({ data: "json, name=index" })
   index?: number;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }
 
 
 export class ListInflectedForms200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=features", elemType: operations.ListInflectedForms200ApplicationJsonFeatures })
+  @SpeakeasyMetadata({ data: "json, name=features", elemType: ListInflectedForms200ApplicationJsonFeatures })
   features?: ListInflectedForms200ApplicationJsonFeatures[];
 
-  @Metadata({ data: "json, name=isLemma" })
+  @SpeakeasyMetadata({ data: "json, name=isLemma" })
   isLemma?: boolean;
 
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: string;
 }
 
 
+export class ListInflectedFormsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: ListInflectedFormsQueryParams;
+}
+
+
 export class ListInflectedFormsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: operations.ListInflectedForms200ApplicationJson })
+  @SpeakeasyMetadata({ elemType: ListInflectedForms200ApplicationJson })
   listInflectedForms200ApplicationJsonObjects?: ListInflectedForms200ApplicationJson[];
 }

@@ -5,24 +5,24 @@ from sdk.models import shared
 
 @dataclass
 class AddVideoToProjectAlt1PathParams:
-    project_id: float = field(default=None, metadata={'path_param': { 'field_name': 'project_id', 'style': 'simple', 'explode': False }})
-    video_id: float = field(default=None, metadata={'path_param': { 'field_name': 'video_id', 'style': 'simple', 'explode': False }})
+    project_id: float = field(metadata={'path_param': { 'field_name': 'project_id', 'style': 'simple', 'explode': False }})
+    video_id: float = field(metadata={'path_param': { 'field_name': 'video_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class AddVideoToProjectAlt1Security:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AddVideoToProjectAlt1Request:
-    path_params: AddVideoToProjectAlt1PathParams = field(default=None)
-    security: AddVideoToProjectAlt1Security = field(default=None)
+    path_params: AddVideoToProjectAlt1PathParams = field()
+    security: AddVideoToProjectAlt1Security = field()
     
 
 @dataclass
 class AddVideoToProjectAlt1Response:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[shared.Error] = field(default=None)
     

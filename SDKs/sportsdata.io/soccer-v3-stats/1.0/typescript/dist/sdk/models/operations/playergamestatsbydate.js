@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var PlayerGameStatsByDateFormatEnum;
 (function (PlayerGameStatsByDateFormatEnum) {
     PlayerGameStatsByDateFormatEnum["Xml"] = "xml";
@@ -34,11 +34,11 @@ var PlayerGameStatsByDatePathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=date" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=date" }),
         __metadata("design:type", String)
     ], PlayerGameStatsByDatePathParams.prototype, "date", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=format" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" }),
         __metadata("design:type", String)
     ], PlayerGameStatsByDatePathParams.prototype, "format", void 0);
     return PlayerGameStatsByDatePathParams;
@@ -50,7 +50,7 @@ var PlayerGameStatsByDateRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PlayerGameStatsByDatePathParams)
     ], PlayerGameStatsByDateRequest.prototype, "pathParams", void 0);
     return PlayerGameStatsByDateRequest;
@@ -62,15 +62,15 @@ var PlayerGameStatsByDateResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PlayerGameStatsByDateResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Array)
     ], PlayerGameStatsByDateResponse.prototype, "playerGames", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PlayerGameStatsByDateResponse.prototype, "statusCode", void 0);
     return PlayerGameStatsByDateResponse;

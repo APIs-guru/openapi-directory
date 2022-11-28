@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GoogleFirebaseAppcheckV1ExchangeAppAttestAttestationRequest
 /**
  * Request message for the ExchangeAppAttestAttestation method.
@@ -33,15 +33,15 @@ var GoogleFirebaseAppcheckV1ExchangeAppAttestAttestationRequest = /** @class */ 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=attestationStatement" }),
+        SpeakeasyMetadata({ data: "json, name=attestationStatement" }),
         __metadata("design:type", String)
     ], GoogleFirebaseAppcheckV1ExchangeAppAttestAttestationRequest.prototype, "attestationStatement", void 0);
     __decorate([
-        Metadata({ data: "json, name=challenge" }),
+        SpeakeasyMetadata({ data: "json, name=challenge" }),
         __metadata("design:type", String)
     ], GoogleFirebaseAppcheckV1ExchangeAppAttestAttestationRequest.prototype, "challenge", void 0);
     __decorate([
-        Metadata({ data: "json, name=keyId" }),
+        SpeakeasyMetadata({ data: "json, name=keyId" }),
         __metadata("design:type", String)
     ], GoogleFirebaseAppcheckV1ExchangeAppAttestAttestationRequest.prototype, "keyId", void 0);
     return GoogleFirebaseAppcheckV1ExchangeAppAttestAttestationRequest;

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetAssociateRouteTableActionEnum(str, Enum):
     ASSOCIATE_ROUTE_TABLE = "AssociateRouteTable"
@@ -10,12 +14,12 @@ class GetAssociateRouteTableVersionEnum(str, Enum):
 
 @dataclass
 class GetAssociateRouteTableQueryParams:
-    action: GetAssociateRouteTableActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetAssociateRouteTableActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    route_table_id: str = field(metadata={'query_param': { 'field_name': 'RouteTableId', 'style': 'form', 'explode': True }})
+    version: GetAssociateRouteTableVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
     gateway_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'GatewayId', 'style': 'form', 'explode': True }})
-    route_table_id: str = field(default=None, metadata={'query_param': { 'field_name': 'RouteTableId', 'style': 'form', 'explode': True }})
     subnet_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'SubnetId', 'style': 'form', 'explode': True }})
-    version: GetAssociateRouteTableVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -31,13 +35,13 @@ class GetAssociateRouteTableHeaders:
 
 @dataclass
 class GetAssociateRouteTableRequest:
-    query_params: GetAssociateRouteTableQueryParams = field(default=None)
-    headers: GetAssociateRouteTableHeaders = field(default=None)
+    headers: GetAssociateRouteTableHeaders = field()
+    query_params: GetAssociateRouteTableQueryParams = field()
     
 
 @dataclass
 class GetAssociateRouteTableResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

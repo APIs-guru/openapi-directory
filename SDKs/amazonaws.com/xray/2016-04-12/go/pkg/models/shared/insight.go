@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Insight
+// When fault rates go outside of the expected range, X-Ray creates an insight. Insights tracks emergent issues within your applications.
 type Insight struct {
 	Categories                              []InsightCategoryEnum    `json:"Categories,omitempty"`
 	ClientRequestImpactStatistics           *RequestImpactStatistics `json:"ClientRequestImpactStatistics,omitempty"`

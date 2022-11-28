@@ -1,31 +1,50 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
+
+
+export class ImageAttachmentInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=content_type" })
+  contentType: string;
+
+  @SpeakeasyMetadata({ data: "json, name=image_height" })
+  imageHeight: number;
+
+  @SpeakeasyMetadata({ data: "json, name=image_width" })
+  imageWidth: number;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=object_id" })
+  objectId: number;
+}
 
 
 export class ImageAttachment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=content_type" })
+  @SpeakeasyMetadata({ data: "json, name=content_type" })
   contentType: string;
 
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=image" })
+  @SpeakeasyMetadata({ data: "json, name=image" })
   image?: string;
 
-  @Metadata({ data: "json, name=image_height" })
+  @SpeakeasyMetadata({ data: "json, name=image_height" })
   imageHeight: number;
 
-  @Metadata({ data: "json, name=image_width" })
+  @SpeakeasyMetadata({ data: "json, name=image_width" })
   imageWidth: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=object_id" })
+  @SpeakeasyMetadata({ data: "json, name=object_id" })
   objectId: number;
 
-  @Metadata({ data: "json, name=parent" })
+  @SpeakeasyMetadata({ data: "json, name=parent" })
   parent?: string;
 }

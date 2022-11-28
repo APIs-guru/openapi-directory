@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OrganizationOwner } from "./organizationowner";
 
+
 export enum OrganizationLifecycleStateEnum {
-    LifecycleStateUnspecified = "LIFECYCLE_STATE_UNSPECIFIED"
-,    Active = "ACTIVE"
-,    DeleteRequested = "DELETE_REQUESTED"
+    LifecycleStateUnspecified = "LIFECYCLE_STATE_UNSPECIFIED",
+    Active = "ACTIVE",
+    DeleteRequested = "DELETE_REQUESTED"
 }
 
 
@@ -13,18 +14,18 @@ export enum OrganizationLifecycleStateEnum {
  * The root node in the resource hierarchy to which a particular entity's (e.g., company) resources belong.
 **/
 export class Organization extends SpeakeasyBase {
-  @Metadata({ data: "json, name=creationTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationTime" })
   creationTime?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=lifecycleState" })
+  @SpeakeasyMetadata({ data: "json, name=lifecycleState" })
   lifecycleState?: OrganizationLifecycleStateEnum;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=owner" })
+  @SpeakeasyMetadata({ data: "json, name=owner" })
   owner?: OrganizationOwner;
 }

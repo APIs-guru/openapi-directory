@@ -1,30 +1,33 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import comparisonoperatortype_enum
-from . import metricname_enum
-from . import policytype_enum
-from . import scalingadjustmenttype_enum
-from . import scalingstatustype_enum
-from . import targetconfiguration
-from . import locationupdatestatus_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ScalingPolicy:
-    comparison_operator: Optional[comparisonoperatortype_enum.ComparisonOperatorTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ComparisonOperator' }})
-    evaluation_periods: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EvaluationPeriods' }})
-    fleet_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FleetArn' }})
-    fleet_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FleetId' }})
-    location: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Location' }})
-    metric_name: Optional[metricname_enum.MetricNameEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MetricName' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
-    policy_type: Optional[policytype_enum.PolicyTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PolicyType' }})
-    scaling_adjustment: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ScalingAdjustment' }})
-    scaling_adjustment_type: Optional[scalingadjustmenttype_enum.ScalingAdjustmentTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ScalingAdjustmentType' }})
-    status: Optional[scalingstatustype_enum.ScalingStatusTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Status' }})
-    target_configuration: Optional[targetconfiguration.TargetConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TargetConfiguration' }})
-    threshold: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Threshold' }})
-    update_status: Optional[locationupdatestatus_enum.LocationUpdateStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'UpdateStatus' }})
+    r"""ScalingPolicy
+    <p>Rule that controls how a fleet is scaled. Scaling policies are uniquely identified by the combination of name and fleet ID.</p> <p> <b>Related actions</b> </p> <p> <a>DescribeFleetCapacity</a> | <a>UpdateFleetCapacity</a> | <a>DescribeEC2InstanceLimits</a> | <a>PutScalingPolicy</a> | <a>DescribeScalingPolicies</a> | <a>DeleteScalingPolicy</a> | <a>StopFleetActions</a> | <a>StartFleetActions</a> | <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets\">All APIs by task</a> </p>
+    """
+    
+    comparison_operator: Optional[ComparisonOperatorTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ComparisonOperator') }})
+    evaluation_periods: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('EvaluationPeriods') }})
+    fleet_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FleetArn') }})
+    fleet_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FleetId') }})
+    location: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Location') }})
+    metric_name: Optional[MetricNameEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MetricName') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
+    policy_type: Optional[PolicyTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PolicyType') }})
+    scaling_adjustment: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ScalingAdjustment') }})
+    scaling_adjustment_type: Optional[ScalingAdjustmentTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ScalingAdjustmentType') }})
+    status: Optional[ScalingStatusTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Status') }})
+    target_configuration: Optional[TargetConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TargetConfiguration') }})
+    threshold: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Threshold') }})
+    update_status: Optional[LocationUpdateStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('UpdateStatus') }})
     

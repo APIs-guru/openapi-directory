@@ -1,12 +1,20 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import filterview
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateFilterViewRequest:
-    fields: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fields' }})
-    filter: Optional[filterview.FilterView] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'filter' }})
+    r"""UpdateFilterViewRequest
+    Updates properties of the filter view.
+    """
+    
+    fields: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fields') }})
+    filter: Optional[FilterView] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('filter') }})
     

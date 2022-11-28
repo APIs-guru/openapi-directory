@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class DescribeBillingGroupPathParams:
-    billing_group_name: str = field(default=None, metadata={'path_param': { 'field_name': 'billingGroupName', 'style': 'simple', 'explode': False }})
+    billing_group_name: str = field(metadata={'path_param': { 'field_name': 'billingGroupName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,17 +24,17 @@ class DescribeBillingGroupHeaders:
 
 @dataclass
 class DescribeBillingGroupRequest:
-    path_params: DescribeBillingGroupPathParams = field(default=None)
-    headers: DescribeBillingGroupHeaders = field(default=None)
+    headers: DescribeBillingGroupHeaders = field()
+    path_params: DescribeBillingGroupPathParams = field()
     
 
 @dataclass
 class DescribeBillingGroupResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     describe_billing_group_response: Optional[shared.DescribeBillingGroupResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

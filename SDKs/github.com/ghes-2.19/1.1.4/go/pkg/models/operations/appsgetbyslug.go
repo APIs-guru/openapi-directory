@@ -8,13 +8,13 @@ type AppsGetBySlugPathParams struct {
 	AppSlug string `pathParam:"style=simple,explode=false,name=app_slug"`
 }
 
-type AppsGetBySlugRequest struct {
-	PathParams AppsGetBySlugPathParams
-}
-
 type AppsGetBySlug415ApplicationJSON struct {
 	DocumentationURL string `json:"documentation_url"`
 	Message          string `json:"message"`
+}
+
+type AppsGetBySlugRequest struct {
+	PathParams AppsGetBySlugPathParams
 }
 
 type AppsGetBySlugResponse struct {

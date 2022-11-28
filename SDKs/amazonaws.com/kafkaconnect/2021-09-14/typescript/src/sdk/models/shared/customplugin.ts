@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CustomPlugin
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A plugin is an AWS resource that contains the code that defines a connector's logic.
 **/
 export class CustomPlugin extends SpeakeasyBase {
-  @Metadata({ data: "json, name=customPluginArn" })
+  @SpeakeasyMetadata({ data: "json, name=customPluginArn" })
   customPluginArn: string;
 
-  @Metadata({ data: "json, name=revision" })
+  @SpeakeasyMetadata({ data: "json, name=revision" })
   revision: number;
 }

@@ -22,8 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { RegistryCredential } from "./registrycredential";
+import { EventNotificationConfig } from "./eventnotificationconfig";
 import { HttpConfig } from "./httpconfig";
 import { MqttConfig } from "./mqttconfig";
 import { StateNotificationConfig } from "./statenotificationconfig";
@@ -45,35 +46,35 @@ var DeviceRegistry = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=credentials", elemType: shared.RegistryCredential }),
+        SpeakeasyMetadata({ data: "json, name=credentials", elemType: RegistryCredential }),
         __metadata("design:type", Array)
     ], DeviceRegistry.prototype, "credentials", void 0);
     __decorate([
-        Metadata({ data: "json, name=eventNotificationConfigs", elemType: shared.EventNotificationConfig }),
+        SpeakeasyMetadata({ data: "json, name=eventNotificationConfigs", elemType: EventNotificationConfig }),
         __metadata("design:type", Array)
     ], DeviceRegistry.prototype, "eventNotificationConfigs", void 0);
     __decorate([
-        Metadata({ data: "json, name=httpConfig" }),
+        SpeakeasyMetadata({ data: "json, name=httpConfig" }),
         __metadata("design:type", HttpConfig)
     ], DeviceRegistry.prototype, "httpConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], DeviceRegistry.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=logLevel" }),
+        SpeakeasyMetadata({ data: "json, name=logLevel" }),
         __metadata("design:type", String)
     ], DeviceRegistry.prototype, "logLevel", void 0);
     __decorate([
-        Metadata({ data: "json, name=mqttConfig" }),
+        SpeakeasyMetadata({ data: "json, name=mqttConfig" }),
         __metadata("design:type", MqttConfig)
     ], DeviceRegistry.prototype, "mqttConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], DeviceRegistry.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=stateNotificationConfig" }),
+        SpeakeasyMetadata({ data: "json, name=stateNotificationConfig" }),
         __metadata("design:type", StateNotificationConfig)
     ], DeviceRegistry.prototype, "stateNotificationConfig", void 0);
     return DeviceRegistry;

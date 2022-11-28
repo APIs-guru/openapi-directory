@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ScopedPlayerIds
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Scoped player identifiers.
 **/
 export class ScopedPlayerIds extends SpeakeasyBase {
-  @Metadata({ data: "json, name=developerPlayerKey" })
+  @SpeakeasyMetadata({ data: "json, name=developerPlayerKey" })
   developerPlayerKey?: string;
 
-  @Metadata({ data: "json, name=gamePlayerId" })
+  @SpeakeasyMetadata({ data: "json, name=gamePlayerId" })
   gamePlayerId?: string;
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AgentDeviceId } from "./agentdeviceid";
+
 
 
 // QueryRequestPayload
@@ -8,6 +8,6 @@ import { AgentDeviceId } from "./agentdeviceid";
  * Payload containing device IDs.
 **/
 export class QueryRequestPayload extends SpeakeasyBase {
-  @Metadata({ data: "json, name=devices", elemType: shared.AgentDeviceId })
+  @SpeakeasyMetadata({ data: "json, name=devices", elemType: AgentDeviceId })
   devices?: AgentDeviceId[];
 }

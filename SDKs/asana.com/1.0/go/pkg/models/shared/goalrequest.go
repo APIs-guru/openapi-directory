@@ -1,11 +1,5 @@
 package shared
 
-type GoalRequestMetricResourceSubtypeEnum string
-
-const (
-	GoalRequestMetricResourceSubtypeEnumNumber GoalRequestMetricResourceSubtypeEnum = "number"
-)
-
 type GoalRequestMetricUnitEnum string
 
 const (
@@ -14,29 +8,24 @@ const (
 	GoalRequestMetricUnitEnumPercentage GoalRequestMetricUnitEnum = "percentage"
 )
 
-type GoalRequestMetric struct {
-	CurrencyCode        *string                               `json:"currency_code,omitempty"`
-	CurrentDisplayValue *string                               `json:"current_display_value,omitempty"`
-	CurrentNumberValue  *float64                              `json:"current_number_value,omitempty"`
-	Gid                 *string                               `json:"gid,omitempty"`
-	InitialNumberValue  *float64                              `json:"initial_number_value,omitempty"`
-	Precision           *int64                                `json:"precision,omitempty"`
-	ResourceSubtype     *GoalRequestMetricResourceSubtypeEnum `json:"resource_subtype,omitempty"`
-	ResourceType        *string                               `json:"resource_type,omitempty"`
-	TargetNumberValue   *float64                              `json:"target_number_value,omitempty"`
-	Unit                *GoalRequestMetricUnitEnum            `json:"unit,omitempty"`
+type GoalRequestMetricInput struct {
+	CurrencyCode        *string                    `json:"currency_code,omitempty"`
+	CurrentDisplayValue *string                    `json:"current_display_value,omitempty"`
+	CurrentNumberValue  *float64                   `json:"current_number_value,omitempty"`
+	InitialNumberValue  *float64                   `json:"initial_number_value,omitempty"`
+	Precision           *int64                     `json:"precision,omitempty"`
+	TargetNumberValue   *float64                   `json:"target_number_value,omitempty"`
+	Unit                *GoalRequestMetricUnitEnum `json:"unit,omitempty"`
 }
 
-type GoalRequestOwner struct {
-	Gid          *string `json:"gid,omitempty"`
-	Name         *string `json:"name,omitempty"`
-	ResourceType *string `json:"resource_type,omitempty"`
+type GoalRequestOwnerInput struct {
+	Name *string `json:"name,omitempty"`
 }
 
-type GoalRequestTeam struct {
-	Gid          *string `json:"gid,omitempty"`
-	Name         *string `json:"name,omitempty"`
-	ResourceType *string `json:"resource_type,omitempty"`
+// GoalRequestTeamInput
+// *Conditional*. This property is only present when the `workspace` provided is an organization.
+type GoalRequestTeamInput struct {
+	Name *string `json:"name,omitempty"`
 }
 
 type GoalRequestTimePeriodPeriodEnum string
@@ -51,35 +40,29 @@ const (
 	GoalRequestTimePeriodPeriodEnumQ4 GoalRequestTimePeriodPeriodEnum = "Q4"
 )
 
-type GoalRequestTimePeriod struct {
-	EndOn        *string                          `json:"end_on,omitempty"`
-	Gid          *string                          `json:"gid,omitempty"`
-	Period       *GoalRequestTimePeriodPeriodEnum `json:"period,omitempty"`
-	ResourceType *string                          `json:"resource_type,omitempty"`
-	StartOn      *string                          `json:"start_on,omitempty"`
+type GoalRequestTimePeriodInput struct {
+	EndOn   *string                          `json:"end_on,omitempty"`
+	Period  *GoalRequestTimePeriodPeriodEnum `json:"period,omitempty"`
+	StartOn *string                          `json:"start_on,omitempty"`
 }
 
-type GoalRequestWorkspace struct {
-	Gid          *string `json:"gid,omitempty"`
-	Name         *string `json:"name,omitempty"`
-	ResourceType *string `json:"resource_type,omitempty"`
+type GoalRequestWorkspaceInput struct {
+	Name *string `json:"name,omitempty"`
 }
 
-type GoalRequest struct {
-	DueOn            *string                `json:"due_on,omitempty"`
-	Followers        []UserCompact          `json:"followers,omitempty"`
-	Gid              *string                `json:"gid,omitempty"`
-	HTMLNotes        *string                `json:"html_notes,omitempty"`
-	IsWorkspaceLevel *bool                  `json:"is_workspace_level,omitempty"`
-	Liked            *bool                  `json:"liked,omitempty"`
-	Metric           *GoalRequestMetric     `json:"metric,omitempty"`
-	Name             *string                `json:"name,omitempty"`
-	Notes            *string                `json:"notes,omitempty"`
-	Owner            *GoalRequestOwner      `json:"owner,omitempty"`
-	ResourceType     *string                `json:"resource_type,omitempty"`
-	StartOn          *string                `json:"start_on,omitempty"`
-	Status           *string                `json:"status,omitempty"`
-	Team             *GoalRequestTeam       `json:"team,omitempty"`
-	TimePeriod       *GoalRequestTimePeriod `json:"time_period,omitempty"`
-	Workspace        *GoalRequestWorkspace  `json:"workspace,omitempty"`
+type GoalRequestInput struct {
+	DueOn            *string                     `json:"due_on,omitempty"`
+	Followers        []UserCompactInput          `json:"followers,omitempty"`
+	HTMLNotes        *string                     `json:"html_notes,omitempty"`
+	IsWorkspaceLevel *bool                       `json:"is_workspace_level,omitempty"`
+	Liked            *bool                       `json:"liked,omitempty"`
+	Metric           *GoalRequestMetricInput     `json:"metric,omitempty"`
+	Name             *string                     `json:"name,omitempty"`
+	Notes            *string                     `json:"notes,omitempty"`
+	Owner            *GoalRequestOwnerInput      `json:"owner,omitempty"`
+	StartOn          *string                     `json:"start_on,omitempty"`
+	Status           *string                     `json:"status,omitempty"`
+	Team             *GoalRequestTeamInput       `json:"team,omitempty"`
+	TimePeriod       *GoalRequestTimePeriodInput `json:"time_period,omitempty"`
+	Workspace        *GoalRequestWorkspaceInput  `json:"workspace,omitempty"`
 }

@@ -1,8 +1,9 @@
 
 
+
 export enum PortInfoSourceTypeEnum {
-    Default = "DEFAULT"
-,    Instance = "INSTANCE"
-,    None = "NONE"
-,    Closed = "CLOSED"
+    Default = "DEFAULT",
+    Instance = "INSTANCE",
+    None = "NONE",
+    Closed = "CLOSED"
 }

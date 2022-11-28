@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// JournalLineJournalLineEmployee
+// The journal lines' employee
 type JournalLineJournalLineEmployee struct {
 	AtHref  *string `json:"@href,omitempty"`
 	AtRel   *string `json:"@rel,omitempty"`
@@ -20,12 +22,16 @@ const (
 	JournalLineJournalLinePayFrequencyEnumYearly     JournalLineJournalLinePayFrequencyEnum = "Yearly"
 )
 
+// JournalLineJournalLinePayRun
+// The journal lines' pay run
 type JournalLineJournalLinePayRun struct {
 	AtHref  *string `json:"@href,omitempty"`
 	AtRel   *string `json:"@rel,omitempty"`
 	AtTitle *string `json:"@title,omitempty"`
 }
 
+// JournalLineJournalLineSubContractor
+// The journal lines' sub contractor
 type JournalLineJournalLineSubContractor struct {
 	AtHref  *string `json:"@href,omitempty"`
 	AtRel   *string `json:"@rel,omitempty"`

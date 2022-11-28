@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudChannelV1AdminUser
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information needed to create an Admin User for Google Workspace.
 **/
 export class GoogleCloudChannelV1AdminUser extends SpeakeasyBase {
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=familyName" })
+  @SpeakeasyMetadata({ data: "json, name=familyName" })
   familyName?: string;
 
-  @Metadata({ data: "json, name=givenName" })
+  @SpeakeasyMetadata({ data: "json, name=givenName" })
   givenName?: string;
 }

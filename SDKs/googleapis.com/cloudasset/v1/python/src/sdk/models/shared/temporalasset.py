@@ -1,9 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import asset
-from . import asset
-from . import timewindow
+from sdk import utils
+from . import *
 
 class TemporalAssetPriorAssetStateEnum(str, Enum):
     PRIOR_ASSET_STATE_UNSPECIFIED = "PRIOR_ASSET_STATE_UNSPECIFIED"
@@ -16,9 +16,13 @@ class TemporalAssetPriorAssetStateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class TemporalAsset:
-    asset: Optional[asset.Asset] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'asset' }})
-    deleted: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deleted' }})
-    prior_asset: Optional[asset.Asset] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'priorAsset' }})
-    prior_asset_state: Optional[TemporalAssetPriorAssetStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'priorAssetState' }})
-    window: Optional[timewindow.TimeWindow] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'window' }})
+    r"""TemporalAsset
+    An asset in Google Cloud and its temporal metadata, including the time window when it was observed and its status during that window.
+    """
+    
+    asset: Optional[Asset] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('asset') }})
+    deleted: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('deleted') }})
+    prior_asset: Optional[Asset] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('priorAsset') }})
+    prior_asset_state: Optional[TemporalAssetPriorAssetStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('priorAssetState') }})
+    window: Optional[TimeWindow] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('window') }})
     

@@ -1,5 +1,7 @@
 package shared
 
+// SetNetworkPolicyRequest
+// SetNetworkPolicyRequest enables/disables network policy for a cluster.
 type SetNetworkPolicyRequest struct {
 	ClusterID     *string        `json:"clusterId,omitempty"`
 	Name          *string        `json:"name,omitempty"`

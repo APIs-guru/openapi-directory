@@ -11,15 +11,15 @@ type TenancyTenantGroupsListQueryParams struct {
 	Slug   *string `queryParam:"style=form,explode=true,name=slug"`
 }
 
-type TenancyTenantGroupsListRequest struct {
-	QueryParams TenancyTenantGroupsListQueryParams
-}
-
 type TenancyTenantGroupsList200ApplicationJSON struct {
 	Count    int64                `json:"count"`
 	Next     *string              `json:"next,omitempty"`
 	Previous *string              `json:"previous,omitempty"`
 	Results  []shared.TenantGroup `json:"results"`
+}
+
+type TenancyTenantGroupsListRequest struct {
+	QueryParams TenancyTenantGroupsListQueryParams
 }
 
 type TenancyTenantGroupsListResponse struct {

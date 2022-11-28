@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudRetailV2Audience
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An intended audience of the Product for whom it's sold.
 **/
 export class GoogleCloudRetailV2Audience extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ageGroups" })
+  @SpeakeasyMetadata({ data: "json, name=ageGroups" })
   ageGroups?: string[];
 
-  @Metadata({ data: "json, name=genders" })
+  @SpeakeasyMetadata({ data: "json, name=genders" })
   genders?: string[];
 }

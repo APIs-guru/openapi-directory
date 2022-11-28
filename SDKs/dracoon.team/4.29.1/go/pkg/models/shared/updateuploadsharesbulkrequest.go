@@ -1,5 +1,7 @@
 package shared
 
+// UpdateUploadSharesBulkRequest
+// Request model for updating a list of Download Shares
 type UpdateUploadSharesBulkRequest struct {
 	Expiration             *ObjectExpiration `json:"expiration,omitempty"`
 	FilesExpiryPeriod      *int32            `json:"filesExpiryPeriod,omitempty"`

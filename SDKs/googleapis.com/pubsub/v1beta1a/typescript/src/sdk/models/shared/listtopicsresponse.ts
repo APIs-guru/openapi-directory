@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Topic } from "./topic";
+
 
 
 // ListTopicsResponse
@@ -8,9 +8,9 @@ import { Topic } from "./topic";
  * Response for the ListTopics method.
 **/
 export class ListTopicsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=topic", elemType: shared.Topic })
+  @SpeakeasyMetadata({ data: "json, name=topic", elemType: Topic })
   topic?: Topic[];
 }

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DlpProjectsLocationsJobTriggersActivatePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class DlpProjectsLocationsJobTriggersActivateQueryParams:
 
 @dataclass
 class DlpProjectsLocationsJobTriggersActivateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DlpProjectsLocationsJobTriggersActivateRequest:
-    path_params: DlpProjectsLocationsJobTriggersActivatePathParams = field(default=None)
-    query_params: DlpProjectsLocationsJobTriggersActivateQueryParams = field(default=None)
+    path_params: DlpProjectsLocationsJobTriggersActivatePathParams = field()
+    query_params: DlpProjectsLocationsJobTriggersActivateQueryParams = field()
+    security: DlpProjectsLocationsJobTriggersActivateSecurity = field()
     request: Optional[dict[str, Any]] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DlpProjectsLocationsJobTriggersActivateSecurity = field(default=None)
     
 
 @dataclass
 class DlpProjectsLocationsJobTriggersActivateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_privacy_dlp_v2_dlp_job: Optional[shared.GooglePrivacyDlpV2DlpJob] = field(default=None)
-    status_code: int = field(default=None)
     

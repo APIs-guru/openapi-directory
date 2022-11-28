@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ApproveDecision } from "./approvedecision";
 import { DismissDecision } from "./dismissdecision";
 import { AccessLocations } from "./accesslocations";

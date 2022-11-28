@@ -4,10 +4,6 @@ type GetIsosIDPathParams struct {
 	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type GetIsosIDRequest struct {
-	PathParams GetIsosIDPathParams
-}
-
 type GetIsosID200ApplicationJSONIsoTypeEnum string
 
 const (
@@ -25,6 +21,10 @@ type GetIsosID200ApplicationJSONIso struct {
 
 type GetIsosID200ApplicationJSON struct {
 	Iso GetIsosID200ApplicationJSONIso `json:"iso"`
+}
+
+type GetIsosIDRequest struct {
+	PathParams GetIsosIDPathParams
 }
 
 type GetIsosIDResponse struct {

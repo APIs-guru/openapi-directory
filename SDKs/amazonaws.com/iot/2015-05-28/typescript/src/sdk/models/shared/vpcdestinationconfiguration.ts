@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // VpcDestinationConfiguration
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The configuration information for a virtual private cloud (VPC) destination.
 **/
 export class VpcDestinationConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=roleArn" })
+  @SpeakeasyMetadata({ data: "json, name=roleArn" })
   roleArn: string;
 
-  @Metadata({ data: "json, name=securityGroups" })
+  @SpeakeasyMetadata({ data: "json, name=securityGroups" })
   securityGroups?: string[];
 
-  @Metadata({ data: "json, name=subnetIds" })
+  @SpeakeasyMetadata({ data: "json, name=subnetIds" })
   subnetIds: string[];
 
-  @Metadata({ data: "json, name=vpcId" })
+  @SpeakeasyMetadata({ data: "json, name=vpcId" })
   vpcId: string;
 }

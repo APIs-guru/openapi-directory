@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ActionExecution
+// Represents information about the run of an action.
 type ActionExecution struct {
 	ActionExecutionID    *string                    `json:"actionExecutionId,omitempty"`
 	ErrorDetails         *ErrorDetails              `json:"errorDetails,omitempty"`

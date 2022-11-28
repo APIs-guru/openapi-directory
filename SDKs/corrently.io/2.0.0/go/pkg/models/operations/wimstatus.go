@@ -4,13 +4,13 @@ type WimstatusQueryParams struct {
 	Vid *string `queryParam:"style=form,explode=true,name=vid"`
 }
 
-type WimstatusRequest struct {
-	QueryParams WimstatusQueryParams
-}
-
 type Wimstatus200ApplicationJSON struct {
 	WimStarted *int64  `json:"wim_started,omitempty"`
 	WimStatus  *string `json:"wim_status,omitempty"`
+}
+
+type WimstatusRequest struct {
+	QueryParams WimstatusQueryParams
 }
 
 type WimstatusResponse struct {

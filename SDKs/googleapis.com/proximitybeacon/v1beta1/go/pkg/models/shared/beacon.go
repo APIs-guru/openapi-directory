@@ -19,6 +19,8 @@ const (
 	BeaconStatusEnumInactive          BeaconStatusEnum = "INACTIVE"
 )
 
+// Beacon
+// Details of a beacon device.
 type Beacon struct {
 	AdvertisedID            *AdvertisedID                `json:"advertisedId,omitempty"`
 	BeaconName              *string                      `json:"beaconName,omitempty"`

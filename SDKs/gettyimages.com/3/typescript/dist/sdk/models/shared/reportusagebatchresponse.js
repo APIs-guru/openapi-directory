@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ReportUsageBatchResponse
 /**
  * Specifies the response from the Batch Usages endpoint.
@@ -33,11 +33,11 @@ var ReportUsageBatchResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=invalid_assets" }),
+        SpeakeasyMetadata({ data: "json, name=invalid_assets" }),
         __metadata("design:type", Array)
     ], ReportUsageBatchResponse.prototype, "invalidAssets", void 0);
     __decorate([
-        Metadata({ data: "json, name=total_asset_usages_processed" }),
+        SpeakeasyMetadata({ data: "json, name=total_asset_usages_processed" }),
         __metadata("design:type", Number)
     ], ReportUsageBatchResponse.prototype, "totalAssetUsagesProcessed", void 0);
     return ReportUsageBatchResponse;

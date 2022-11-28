@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // UpdateInstanceMetadataItemsRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request for adding/changing metadata items for an instance.
 **/
 export class UpdateInstanceMetadataItemsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items" })
+  @SpeakeasyMetadata({ data: "json, name=items" })
   items?: Map<string, string>;
 }

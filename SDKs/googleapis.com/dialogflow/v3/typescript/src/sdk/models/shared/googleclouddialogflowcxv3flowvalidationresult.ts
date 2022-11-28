@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowCxV3ValidationMessage } from "./googleclouddialogflowcxv3validationmessage";
+
 
 
 // GoogleCloudDialogflowCxV3FlowValidationResult
@@ -8,12 +8,12 @@ import { GoogleCloudDialogflowCxV3ValidationMessage } from "./googleclouddialogf
  * The response message for Flows.GetFlowValidationResult.
 **/
 export class GoogleCloudDialogflowCxV3FlowValidationResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 
-  @Metadata({ data: "json, name=validationMessages", elemType: shared.GoogleCloudDialogflowCxV3ValidationMessage })
+  @SpeakeasyMetadata({ data: "json, name=validationMessages", elemType: GoogleCloudDialogflowCxV3ValidationMessage })
   validationMessages?: GoogleCloudDialogflowCxV3ValidationMessage[];
 }

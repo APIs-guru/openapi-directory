@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class WellsReadPathParams:
-    well_tag_number: int = field(default=None, metadata={'path_param': { 'field_name': 'well_tag_number', 'style': 'simple', 'explode': False }})
+    well_tag_number: int = field(metadata={'path_param': { 'field_name': 'well_tag_number', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class WellsReadRequest:
-    path_params: WellsReadPathParams = field(default=None)
+    path_params: WellsReadPathParams = field()
     
 
 @dataclass
 class WellsReadResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     well_detail: Optional[shared.WellDetail] = field(default=None)
     

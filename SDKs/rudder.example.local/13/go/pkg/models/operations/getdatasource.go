@@ -8,10 +8,6 @@ type GetDataSourcePathParams struct {
 	DatasourceID string `pathParam:"style=simple,explode=false,name=datasourceId"`
 }
 
-type GetDataSourceRequest struct {
-	PathParams GetDataSourcePathParams
-}
-
 type GetDataSource200ApplicationJSONActionEnum string
 
 const (
@@ -33,6 +29,10 @@ type GetDataSource200ApplicationJSON struct {
 	Action GetDataSource200ApplicationJSONActionEnum `json:"action"`
 	Data   GetDataSource200ApplicationJSONData       `json:"data"`
 	Result GetDataSource200ApplicationJSONResultEnum `json:"result"`
+}
+
+type GetDataSourceRequest struct {
+	PathParams GetDataSourcePathParams
 }
 
 type GetDataSourceResponse struct {

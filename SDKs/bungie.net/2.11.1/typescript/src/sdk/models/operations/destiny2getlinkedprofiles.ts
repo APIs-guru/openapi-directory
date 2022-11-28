@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Destiny2GetLinkedProfilesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=membershipId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=membershipId" })
   membershipId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=membershipType" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=membershipType" })
   membershipType: number;
 }
 
 
 export class Destiny2GetLinkedProfilesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=getAllMemberships" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=getAllMemberships" })
   getAllMemberships?: boolean;
 }
 
 
 export class Destiny2GetLinkedProfilesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: Destiny2GetLinkedProfilesPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: Destiny2GetLinkedProfilesQueryParams;
 }
 
 
 export class Destiny2GetLinkedProfilesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { JobStatusEnum } from "./jobstatusenum";
 import { OutputDataConfig } from "./outputdataconfig";
 // ExportJobProperties
@@ -35,39 +35,39 @@ var ExportJobProperties = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DataAccessRoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=DataAccessRoleArn" }),
         __metadata("design:type", String)
     ], ExportJobProperties.prototype, "dataAccessRoleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=DatastoreId" }),
+        SpeakeasyMetadata({ data: "json, name=DatastoreId" }),
         __metadata("design:type", String)
     ], ExportJobProperties.prototype, "datastoreId", void 0);
     __decorate([
-        Metadata({ data: "json, name=EndTime" }),
+        SpeakeasyMetadata({ data: "json, name=EndTime" }),
         __metadata("design:type", Date)
     ], ExportJobProperties.prototype, "endTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=JobId" }),
+        SpeakeasyMetadata({ data: "json, name=JobId" }),
         __metadata("design:type", String)
     ], ExportJobProperties.prototype, "jobId", void 0);
     __decorate([
-        Metadata({ data: "json, name=JobName" }),
+        SpeakeasyMetadata({ data: "json, name=JobName" }),
         __metadata("design:type", String)
     ], ExportJobProperties.prototype, "jobName", void 0);
     __decorate([
-        Metadata({ data: "json, name=JobStatus" }),
+        SpeakeasyMetadata({ data: "json, name=JobStatus" }),
         __metadata("design:type", String)
     ], ExportJobProperties.prototype, "jobStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=Message" }),
+        SpeakeasyMetadata({ data: "json, name=Message" }),
         __metadata("design:type", String)
     ], ExportJobProperties.prototype, "message", void 0);
     __decorate([
-        Metadata({ data: "json, name=OutputDataConfig" }),
+        SpeakeasyMetadata({ data: "json, name=OutputDataConfig" }),
         __metadata("design:type", OutputDataConfig)
     ], ExportJobProperties.prototype, "outputDataConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=SubmitTime" }),
+        SpeakeasyMetadata({ data: "json, name=SubmitTime" }),
         __metadata("design:type", Date)
     ], ExportJobProperties.prototype, "submitTime", void 0);
     return ExportJobProperties;

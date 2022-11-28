@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class LongviewPlanLongviewSubscriptionEnum(str, Enum):
     LONGVIEW_3 = "longview-3"
@@ -12,5 +14,10 @@ class LongviewPlanLongviewSubscriptionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class LongviewPlan:
-    longview_subscription: Optional[LongviewPlanLongviewSubscriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'longview_subscription' }})
+    r"""LongviewPlan
+    Longview Plan object.
+    
+    """
+    
+    longview_subscription: Optional[LongviewPlanLongviewSubscriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('longview_subscription') }})
     

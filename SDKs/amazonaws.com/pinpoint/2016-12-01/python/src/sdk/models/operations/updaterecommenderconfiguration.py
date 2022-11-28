@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdateRecommenderConfigurationPathParams:
-    recommender_id: str = field(default=None, metadata={'path_param': { 'field_name': 'recommender-id', 'style': 'simple', 'explode': False }})
+    recommender_id: str = field(metadata={'path_param': { 'field_name': 'recommender-id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,40 +27,44 @@ class UpdateRecommenderConfigurationHeaders:
 @dataclass_json
 @dataclass
 class UpdateRecommenderConfigurationRequestBodyUpdateRecommenderConfiguration:
-    attributes: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Attributes' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
-    recommendation_provider_id_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RecommendationProviderIdType' }})
-    recommendation_provider_role_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RecommendationProviderRoleArn' }})
-    recommendation_provider_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RecommendationProviderUri' }})
-    recommendation_transformer_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RecommendationTransformerUri' }})
-    recommendations_display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RecommendationsDisplayName' }})
-    recommendations_per_message: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RecommendationsPerMessage' }})
+    r"""UpdateRecommenderConfigurationRequestBodyUpdateRecommenderConfiguration
+    Specifies Amazon Pinpoint configuration settings for retrieving and processing recommendation data from a recommender model.
+    """
+    
+    attributes: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Attributes') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Description') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
+    recommendation_provider_id_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('RecommendationProviderIdType') }})
+    recommendation_provider_role_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('RecommendationProviderRoleArn') }})
+    recommendation_provider_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('RecommendationProviderUri') }})
+    recommendation_transformer_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('RecommendationTransformerUri') }})
+    recommendations_display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('RecommendationsDisplayName') }})
+    recommendations_per_message: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('RecommendationsPerMessage') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateRecommenderConfigurationRequestBody:
-    update_recommender_configuration: UpdateRecommenderConfigurationRequestBodyUpdateRecommenderConfiguration = field(default=None, metadata={'dataclasses_json': { 'field_name': 'UpdateRecommenderConfiguration' }})
+    update_recommender_configuration: UpdateRecommenderConfigurationRequestBodyUpdateRecommenderConfiguration = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('UpdateRecommenderConfiguration') }})
     
 
 @dataclass
 class UpdateRecommenderConfigurationRequest:
-    path_params: UpdateRecommenderConfigurationPathParams = field(default=None)
-    headers: UpdateRecommenderConfigurationHeaders = field(default=None)
-    request: UpdateRecommenderConfigurationRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateRecommenderConfigurationHeaders = field()
+    path_params: UpdateRecommenderConfigurationPathParams = field()
+    request: UpdateRecommenderConfigurationRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateRecommenderConfigurationResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     forbidden_exception: Optional[Any] = field(default=None)
     internal_server_error_exception: Optional[Any] = field(default=None)
     method_not_allowed_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
     payload_too_large_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     update_recommender_configuration_response: Optional[shared.UpdateRecommenderConfigurationResponse] = field(default=None)
     

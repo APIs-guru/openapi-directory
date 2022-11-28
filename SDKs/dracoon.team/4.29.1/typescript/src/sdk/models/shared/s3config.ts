@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // S3Config
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * S3 configuration
 **/
 export class S3Config extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessKeyDefined" })
+  @SpeakeasyMetadata({ data: "json, name=accessKeyDefined" })
   accessKeyDefined: boolean;
 
-  @Metadata({ data: "json, name=bucketName" })
+  @SpeakeasyMetadata({ data: "json, name=bucketName" })
   bucketName?: string;
 
-  @Metadata({ data: "json, name=bucketUrl" })
+  @SpeakeasyMetadata({ data: "json, name=bucketUrl" })
   bucketUrl: string;
 
-  @Metadata({ data: "json, name=endpointUrl" })
+  @SpeakeasyMetadata({ data: "json, name=endpointUrl" })
   endpointUrl?: string;
 
-  @Metadata({ data: "json, name=region" })
+  @SpeakeasyMetadata({ data: "json, name=region" })
   region?: string;
 
-  @Metadata({ data: "json, name=secretKeyDefined" })
+  @SpeakeasyMetadata({ data: "json, name=secretKeyDefined" })
   secretKeyDefined: boolean;
 }

@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ActivityMarkNotificationsAsReadRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=last_read_at" })
+  @SpeakeasyMetadata({ data: "json, name=last_read_at" })
   lastReadAt?: Date;
 
-  @Metadata({ data: "json, name=read" })
+  @SpeakeasyMetadata({ data: "json, name=read" })
   read?: boolean;
 }
 
 
-export class ActivityMarkNotificationsAsReadRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: ActivityMarkNotificationsAsReadRequestBody;
-}
-
-
 export class ActivityMarkNotificationsAsRead202ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class ActivityMarkNotificationsAsReadRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: ActivityMarkNotificationsAsReadRequestBody;
+}
+
+
 export class ActivityMarkNotificationsAsReadResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   activityMarkNotificationsAsRead202ApplicationJsonObject?: ActivityMarkNotificationsAsRead202ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 }

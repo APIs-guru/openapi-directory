@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GooglePrivacyDlpV2RequestedOptions } from "./googleprivacydlpv2requestedoptions";
 import { GooglePrivacyDlpV2Result } from "./googleprivacydlpv2result";
+
 
 
 // GooglePrivacyDlpV2InspectDataSourceDetails
@@ -8,9 +9,9 @@ import { GooglePrivacyDlpV2Result } from "./googleprivacydlpv2result";
  * The results of an inspect DataSource job.
 **/
 export class GooglePrivacyDlpV2InspectDataSourceDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=requestedOptions" })
+  @SpeakeasyMetadata({ data: "json, name=requestedOptions" })
   requestedOptions?: GooglePrivacyDlpV2RequestedOptions;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result?: GooglePrivacyDlpV2Result;
 }

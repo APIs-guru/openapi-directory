@@ -1,6 +1,7 @@
 
 
+
 export enum FindingsFilterActionEnum {
-    Archive = "ARCHIVE"
-,    Noop = "NOOP"
+    Archive = "ARCHIVE",
+    Noop = "NOOP"
 }

@@ -1,22 +1,27 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import applicationstate_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeApplicationResponse:
-    application_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'applicationArn' }})
-    application_creation_date: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'applicationCreationDate' }})
-    application_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'applicationDescription' }})
-    application_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'applicationId' }})
-    application_last_update_date: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'applicationLastUpdateDate' }})
-    application_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'applicationName' }})
-    application_state: applicationstate_enum.ApplicationStateEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'applicationState' }})
-    application_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'applicationUrl' }})
-    error_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorMessage' }})
-    role_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'roleArn' }})
-    sso_client_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ssoClientId' }})
-    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
+    application_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('applicationArn') }})
+    application_creation_date: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('applicationCreationDate') }})
+    application_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('applicationId') }})
+    application_last_update_date: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('applicationLastUpdateDate') }})
+    application_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('applicationName') }})
+    application_state: ApplicationStateEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('applicationState') }})
+    application_url: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('applicationUrl') }})
+    role_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('roleArn') }})
+    application_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('applicationDescription') }})
+    error_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorMessage') }})
+    sso_client_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ssoClientId') }})
+    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     

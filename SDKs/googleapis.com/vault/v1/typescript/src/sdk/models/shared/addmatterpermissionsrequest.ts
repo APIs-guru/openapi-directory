@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MatterPermission } from "./matterpermission";
+
 
 
 // AddMatterPermissionsRequest
@@ -7,12 +8,12 @@ import { MatterPermission } from "./matterpermission";
  * Add an account with the permission specified. The role cannot be owner. If an account already has a role in the matter, the existing role is overwritten.
 **/
 export class AddMatterPermissionsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ccMe" })
+  @SpeakeasyMetadata({ data: "json, name=ccMe" })
   ccMe?: boolean;
 
-  @Metadata({ data: "json, name=matterPermission" })
+  @SpeakeasyMetadata({ data: "json, name=matterPermission" })
   matterPermission?: MatterPermission;
 
-  @Metadata({ data: "json, name=sendEmails" })
+  @SpeakeasyMetadata({ data: "json, name=sendEmails" })
   sendEmails?: boolean;
 }

@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DomainEntry } from "./domainentry";
 
 
+
 export class CreateDomainEntryRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=domainEntry" })
+  @SpeakeasyMetadata({ data: "json, name=domainEntry" })
   domainEntry: DomainEntry;
 
-  @Metadata({ data: "json, name=domainName" })
+  @SpeakeasyMetadata({ data: "json, name=domainName" })
   domainName: string;
 }

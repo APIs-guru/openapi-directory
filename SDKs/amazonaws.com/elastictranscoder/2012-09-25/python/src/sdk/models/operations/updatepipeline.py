@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdatePipelinePathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'Id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'Id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,56 +27,68 @@ class UpdatePipelineHeaders:
 @dataclass_json
 @dataclass
 class UpdatePipelineRequestBodyContentConfig:
-    bucket: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Bucket' }})
-    permissions: Optional[List[shared.Permission]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Permissions' }})
-    storage_class: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StorageClass' }})
+    r"""UpdatePipelineRequestBodyContentConfig
+    The <code>PipelineOutputConfig</code> structure.
+    """
+    
+    bucket: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Bucket') }})
+    permissions: Optional[List[shared.Permission]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Permissions') }})
+    storage_class: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StorageClass') }})
     
 
 @dataclass_json
 @dataclass
 class UpdatePipelineRequestBodyNotifications:
-    completed: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Completed' }})
-    error: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Error' }})
-    progressing: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Progressing' }})
-    warning: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Warning' }})
+    r"""UpdatePipelineRequestBodyNotifications
+    <p>The Amazon Simple Notification Service (Amazon SNS) topic or topics to notify in order to report job status.</p> <important> <p>To receive notifications, you must also subscribe to the new topic in the Amazon SNS console.</p> </important>
+    """
+    
+    completed: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Completed') }})
+    error: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Error') }})
+    progressing: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Progressing') }})
+    warning: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Warning') }})
     
 
 @dataclass_json
 @dataclass
 class UpdatePipelineRequestBodyThumbnailConfig:
-    bucket: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Bucket' }})
-    permissions: Optional[List[shared.Permission]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Permissions' }})
-    storage_class: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StorageClass' }})
+    r"""UpdatePipelineRequestBodyThumbnailConfig
+    The <code>PipelineOutputConfig</code> structure.
+    """
+    
+    bucket: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Bucket') }})
+    permissions: Optional[List[shared.Permission]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Permissions') }})
+    storage_class: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StorageClass') }})
     
 
 @dataclass_json
 @dataclass
 class UpdatePipelineRequestBody:
-    aws_kms_key_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AwsKmsKeyArn' }})
-    content_config: Optional[UpdatePipelineRequestBodyContentConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ContentConfig' }})
-    input_bucket: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'InputBucket' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
-    notifications: Optional[UpdatePipelineRequestBodyNotifications] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Notifications' }})
-    role: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Role' }})
-    thumbnail_config: Optional[UpdatePipelineRequestBodyThumbnailConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ThumbnailConfig' }})
+    aws_kms_key_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AwsKmsKeyArn') }})
+    content_config: Optional[UpdatePipelineRequestBodyContentConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ContentConfig') }})
+    input_bucket: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('InputBucket') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
+    notifications: Optional[UpdatePipelineRequestBodyNotifications] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Notifications') }})
+    role: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Role') }})
+    thumbnail_config: Optional[UpdatePipelineRequestBodyThumbnailConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ThumbnailConfig') }})
     
 
 @dataclass
 class UpdatePipelineRequest:
-    path_params: UpdatePipelinePathParams = field(default=None)
-    headers: UpdatePipelineHeaders = field(default=None)
-    request: UpdatePipelineRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdatePipelineHeaders = field()
+    path_params: UpdatePipelinePathParams = field()
+    request: UpdatePipelineRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdatePipelineResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     incompatible_version_exception: Optional[Any] = field(default=None)
     internal_service_exception: Optional[Any] = field(default=None)
     resource_in_use_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     update_pipeline_response: Optional[shared.UpdatePipelineResponse] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

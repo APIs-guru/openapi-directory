@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudRecaptchaenterpriseV1ChallengeMetrics } from "./googlecloudrecaptchaenterprisev1challengemetrics";
 import { GoogleCloudRecaptchaenterpriseV1ScoreMetrics } from "./googlecloudrecaptchaenterprisev1scoremetrics";
+
 
 
 // GoogleCloudRecaptchaenterpriseV1Metrics
@@ -9,15 +9,15 @@ import { GoogleCloudRecaptchaenterpriseV1ScoreMetrics } from "./googlecloudrecap
  * Metrics for a single Key.
 **/
 export class GoogleCloudRecaptchaenterpriseV1Metrics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=challengeMetrics", elemType: shared.GoogleCloudRecaptchaenterpriseV1ChallengeMetrics })
+  @SpeakeasyMetadata({ data: "json, name=challengeMetrics", elemType: GoogleCloudRecaptchaenterpriseV1ChallengeMetrics })
   challengeMetrics?: GoogleCloudRecaptchaenterpriseV1ChallengeMetrics[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=scoreMetrics", elemType: shared.GoogleCloudRecaptchaenterpriseV1ScoreMetrics })
+  @SpeakeasyMetadata({ data: "json, name=scoreMetrics", elemType: GoogleCloudRecaptchaenterpriseV1ScoreMetrics })
   scoreMetrics?: GoogleCloudRecaptchaenterpriseV1ScoreMetrics[];
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: string;
 }

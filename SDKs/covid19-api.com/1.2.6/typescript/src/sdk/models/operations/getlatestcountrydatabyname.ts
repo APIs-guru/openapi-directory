@@ -1,66 +1,67 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetLatestCountryDataByNameFormatEnum {
-    Json = "json"
-,    Xml = "xml"
+    Json = "json",
+    Xml = "xml"
 }
 
 
 export class GetLatestCountryDataByNameQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=format" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=format" })
   format?: GetLatestCountryDataByNameFormatEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name" })
   name: string;
 }
 
 
-export class GetLatestCountryDataByNameRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetLatestCountryDataByNameQueryParams;
-}
-
-
 export class GetLatestCountryDataByName200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=confirmed" })
+  @SpeakeasyMetadata({ data: "json, name=confirmed" })
   confirmed?: number;
 
-  @Metadata({ data: "json, name=country" })
+  @SpeakeasyMetadata({ data: "json, name=country" })
   country?: string;
 
-  @Metadata({ data: "json, name=critical" })
+  @SpeakeasyMetadata({ data: "json, name=critical" })
   critical?: number;
 
-  @Metadata({ data: "json, name=deaths" })
+  @SpeakeasyMetadata({ data: "json, name=deaths" })
   deaths?: number;
 
-  @Metadata({ data: "json, name=lastChange" })
+  @SpeakeasyMetadata({ data: "json, name=lastChange" })
   lastChange?: Date;
 
-  @Metadata({ data: "json, name=lastUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdate" })
   lastUpdate?: Date;
 
-  @Metadata({ data: "json, name=latitude" })
+  @SpeakeasyMetadata({ data: "json, name=latitude" })
   latitude?: number;
 
-  @Metadata({ data: "json, name=longitude" })
+  @SpeakeasyMetadata({ data: "json, name=longitude" })
   longitude?: number;
 
-  @Metadata({ data: "json, name=recovered" })
+  @SpeakeasyMetadata({ data: "json, name=recovered" })
   recovered?: number;
 }
 
 
+export class GetLatestCountryDataByNameRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetLatestCountryDataByNameQueryParams;
+}
+
+
 export class GetLatestCountryDataByNameResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: operations.GetLatestCountryDataByName200ApplicationJson })
+  @SpeakeasyMetadata({ elemType: GetLatestCountryDataByName200ApplicationJson })
   getLatestCountryDataByName200ApplicationJsonObjects?: GetLatestCountryDataByName200ApplicationJson[];
 }

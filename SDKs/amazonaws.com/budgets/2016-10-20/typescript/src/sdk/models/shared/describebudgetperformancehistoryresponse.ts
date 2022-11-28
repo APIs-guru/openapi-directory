@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BudgetPerformanceHistory } from "./budgetperformancehistory";
 
 
+
 export class DescribeBudgetPerformanceHistoryResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BudgetPerformanceHistory" })
+  @SpeakeasyMetadata({ data: "json, name=BudgetPerformanceHistory" })
   budgetPerformanceHistory?: BudgetPerformanceHistory;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PostgresqlColumn } from "./postgresqlcolumn";
+
 
 
 // PostgresqlTable
@@ -8,9 +8,9 @@ import { PostgresqlColumn } from "./postgresqlcolumn";
  * PostgreSQL table.
 **/
 export class PostgresqlTable extends SpeakeasyBase {
-  @Metadata({ data: "json, name=postgresqlColumns", elemType: shared.PostgresqlColumn })
+  @SpeakeasyMetadata({ data: "json, name=postgresqlColumns", elemType: PostgresqlColumn })
   postgresqlColumns?: PostgresqlColumn[];
 
-  @Metadata({ data: "json, name=table" })
+  @SpeakeasyMetadata({ data: "json, name=table" })
   table?: string;
 }

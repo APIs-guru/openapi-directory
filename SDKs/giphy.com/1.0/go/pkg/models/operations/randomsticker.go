@@ -9,13 +9,13 @@ type RandomStickerQueryParams struct {
 	Tag    *string `queryParam:"style=form,explode=true,name=tag"`
 }
 
-type RandomStickerRequest struct {
-	QueryParams RandomStickerQueryParams
-}
-
 type RandomSticker200ApplicationJSON struct {
 	Data *shared.Gif  `json:"data,omitempty"`
 	Meta *shared.Meta `json:"meta,omitempty"`
+}
+
+type RandomStickerRequest struct {
+	QueryParams RandomStickerQueryParams
 }
 
 type RandomStickerResponse struct {

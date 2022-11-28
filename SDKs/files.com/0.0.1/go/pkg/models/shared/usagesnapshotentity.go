@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// UsageSnapshotEntity
+// List Usage Snapshots
 type UsageSnapshotEntity struct {
 	CreatedAt                    *time.Time             `json:"created_at,omitempty"`
 	CurrentStorage               *float64               `json:"current_storage,omitempty"`

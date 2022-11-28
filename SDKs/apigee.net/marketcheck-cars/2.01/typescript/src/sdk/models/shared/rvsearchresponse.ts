@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RvBaseListing } from "./rvbaselisting";
+
 
 
 // RvSearchResponse
@@ -8,18 +8,18 @@ import { RvBaseListing } from "./rvbaselisting";
  * RV search query response
 **/
 export class RvSearchResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=facets" })
+  @SpeakeasyMetadata({ data: "json, name=facets" })
   facets?: Map<string, any>;
 
-  @Metadata({ data: "json, name=listings", elemType: shared.RvBaseListing })
+  @SpeakeasyMetadata({ data: "json, name=listings", elemType: RvBaseListing })
   listings?: RvBaseListing[];
 
-  @Metadata({ data: "json, name=num_found" })
+  @SpeakeasyMetadata({ data: "json, name=num_found" })
   numFound?: number;
 
-  @Metadata({ data: "json, name=range_facets" })
+  @SpeakeasyMetadata({ data: "json, name=range_facets" })
   rangeFacets?: Map<string, any>;
 
-  @Metadata({ data: "json, name=stats" })
+  @SpeakeasyMetadata({ data: "json, name=stats" })
   stats?: Map<string, any>;
 }

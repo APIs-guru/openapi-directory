@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import sizeconstraintset
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateSizeConstraintSetResponse:
-    change_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ChangeToken' }})
-    size_constraint_set: Optional[sizeconstraintset.SizeConstraintSet] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SizeConstraintSet' }})
+    change_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ChangeToken') }})
+    size_constraint_set: Optional[SizeConstraintSet] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SizeConstraintSet') }})
     

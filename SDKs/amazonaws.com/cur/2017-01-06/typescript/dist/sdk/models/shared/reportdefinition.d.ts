@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AdditionalArtifactEnum } from "./additionalartifactenum";
 import { SchemaElementEnum } from "./schemaelementenum";
 import { CompressionFormatEnum } from "./compressionformatenum";

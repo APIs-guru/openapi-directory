@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleApiServiceusageV1Service } from "./googleapiserviceusagev1service";
+
 
 
 // BatchGetServicesResponse
@@ -8,6 +8,6 @@ import { GoogleApiServiceusageV1Service } from "./googleapiserviceusagev1service
  * Response message for the `BatchGetServices` method.
 **/
 export class BatchGetServicesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=services", elemType: shared.GoogleApiServiceusageV1Service })
+  @SpeakeasyMetadata({ data: "json, name=services", elemType: GoogleApiServiceusageV1Service })
   services?: GoogleApiServiceusageV1Service[];
 }

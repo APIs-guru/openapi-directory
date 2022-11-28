@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ListDevicesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DeviceFleetName" })
+  @SpeakeasyMetadata({ data: "json, name=DeviceFleetName" })
   deviceFleetName?: string;
 
-  @Metadata({ data: "json, name=LatestHeartbeatAfter" })
+  @SpeakeasyMetadata({ data: "json, name=LatestHeartbeatAfter" })
   latestHeartbeatAfter?: Date;
 
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=ModelName" })
+  @SpeakeasyMetadata({ data: "json, name=ModelName" })
   modelName?: string;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

@@ -1,10 +1,18 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class DeploymentCircuitBreaker:
-    enable: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enable' }})
-    rollback: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rollback' }})
+    r"""DeploymentCircuitBreaker
+    <note> <p>The deployment circuit breaker can only be used for services using the rolling update (<code>ECS</code>) deployment type that are not behind a Classic Load Balancer.</p> </note> <p>The <b>deployment circuit breaker</b> determines whether a service deployment will fail if the service can't reach a steady state. If enabled, a service deployment will transition to a failed state and stop launching new tasks. You can also enable Amazon ECS to roll back your service to the last completed deployment after a failure. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html\">Rolling update</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    """
+    
+    enable: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('enable') }})
+    rollback: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('rollback') }})
     

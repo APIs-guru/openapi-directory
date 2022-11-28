@@ -1,33 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class StartAuditMitigationActionsTaskPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=taskId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=taskId" })
   taskId: string;
 }
 
 
 export class StartAuditMitigationActionsTaskHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -37,63 +38,63 @@ export class StartAuditMitigationActionsTaskHeaders extends SpeakeasyBase {
  * Used in MitigationActionParams, this information identifies the target findings to which the mitigation actions are applied. Only one entry appears.
 **/
 export class StartAuditMitigationActionsTaskRequestBodyTarget extends SpeakeasyBase {
-  @Metadata({ data: "json, name=auditCheckToReasonCodeFilter" })
+  @SpeakeasyMetadata({ data: "json, name=auditCheckToReasonCodeFilter" })
   auditCheckToReasonCodeFilter?: Map<string, string[]>;
 
-  @Metadata({ data: "json, name=auditTaskId" })
+  @SpeakeasyMetadata({ data: "json, name=auditTaskId" })
   auditTaskId?: string;
 
-  @Metadata({ data: "json, name=findingIds" })
+  @SpeakeasyMetadata({ data: "json, name=findingIds" })
   findingIds?: string[];
 }
 
 
 export class StartAuditMitigationActionsTaskRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=auditCheckToActionsMapping" })
+  @SpeakeasyMetadata({ data: "json, name=auditCheckToActionsMapping" })
   auditCheckToActionsMapping: Map<string, string[]>;
 
-  @Metadata({ data: "json, name=clientRequestToken" })
+  @SpeakeasyMetadata({ data: "json, name=clientRequestToken" })
   clientRequestToken: string;
 
-  @Metadata({ data: "json, name=target" })
+  @SpeakeasyMetadata({ data: "json, name=target" })
   target: StartAuditMitigationActionsTaskRequestBodyTarget;
 }
 
 
 export class StartAuditMitigationActionsTaskRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: StartAuditMitigationActionsTaskPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: StartAuditMitigationActionsTaskHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: StartAuditMitigationActionsTaskRequestBody;
 }
 
 
 export class StartAuditMitigationActionsTaskResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalFailureException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   limitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   startAuditMitigationActionsTaskResponse?: shared.StartAuditMitigationActionsTaskResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   taskAlreadyExistsException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 }

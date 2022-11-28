@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConditionalFormatRule } from "./conditionalformatrule";
-import { ConditionalFormatRule } from "./conditionalformatrule";
+
 
 
 // UpdateConditionalFormatRuleResponse
@@ -8,15 +8,15 @@ import { ConditionalFormatRule } from "./conditionalformatrule";
  * The result of updating a conditional format rule.
 **/
 export class UpdateConditionalFormatRuleResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=newIndex" })
+  @SpeakeasyMetadata({ data: "json, name=newIndex" })
   newIndex?: number;
 
-  @Metadata({ data: "json, name=newRule" })
+  @SpeakeasyMetadata({ data: "json, name=newRule" })
   newRule?: ConditionalFormatRule;
 
-  @Metadata({ data: "json, name=oldIndex" })
+  @SpeakeasyMetadata({ data: "json, name=oldIndex" })
   oldIndex?: number;
 
-  @Metadata({ data: "json, name=oldRule" })
+  @SpeakeasyMetadata({ data: "json, name=oldRule" })
   oldRule?: ConditionalFormatRule;
 }

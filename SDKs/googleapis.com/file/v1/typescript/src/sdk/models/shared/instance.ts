@@ -1,32 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FileShareConfig } from "./fileshareconfig";
 import { NetworkConfig } from "./networkconfig";
+import { NetworkConfigInput } from "./networkconfig";
+
 
 export enum InstanceStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Creating = "CREATING"
-,    Ready = "READY"
-,    Repairing = "REPAIRING"
-,    Deleting = "DELETING"
-,    Error = "ERROR"
-,    Restoring = "RESTORING"
-,    Suspended = "SUSPENDED"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Creating = "CREATING",
+    Ready = "READY",
+    Repairing = "REPAIRING",
+    Deleting = "DELETING",
+    Error = "ERROR",
+    Restoring = "RESTORING",
+    Suspended = "SUSPENDED",
+    Suspending = "SUSPENDING",
+    Resuming = "RESUMING"
 }
 
 export enum InstanceSuspensionReasonsEnum {
-    SuspensionReasonUnspecified = "SUSPENSION_REASON_UNSPECIFIED"
-,    KmsKeyIssue = "KMS_KEY_ISSUE"
+    SuspensionReasonUnspecified = "SUSPENSION_REASON_UNSPECIFIED",
+    KmsKeyIssue = "KMS_KEY_ISSUE"
 }
 
 export enum InstanceTierEnum {
-    TierUnspecified = "TIER_UNSPECIFIED"
-,    Standard = "STANDARD"
-,    Premium = "PREMIUM"
-,    BasicHdd = "BASIC_HDD"
-,    BasicSsd = "BASIC_SSD"
-,    HighScaleSsd = "HIGH_SCALE_SSD"
-,    Enterprise = "ENTERPRISE"
+    TierUnspecified = "TIER_UNSPECIFIED",
+    Standard = "STANDARD",
+    Premium = "PREMIUM",
+    BasicHdd = "BASIC_HDD",
+    BasicSsd = "BASIC_SSD",
+    HighScaleSsd = "HIGH_SCALE_SSD",
+    Enterprise = "ENTERPRISE"
 }
 
 
@@ -35,42 +38,70 @@ export enum InstanceTierEnum {
  * A Filestore instance.
 **/
 export class Instance extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=fileShares", elemType: shared.FileShareConfig })
+  @SpeakeasyMetadata({ data: "json, name=fileShares", elemType: FileShareConfig })
   fileShares?: FileShareConfig[];
 
-  @Metadata({ data: "json, name=kmsKeyName" })
+  @SpeakeasyMetadata({ data: "json, name=kmsKeyName" })
   kmsKeyName?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=networks", elemType: shared.NetworkConfig })
+  @SpeakeasyMetadata({ data: "json, name=networks", elemType: NetworkConfig })
   networks?: NetworkConfig[];
 
-  @Metadata({ data: "json, name=satisfiesPzs" })
+  @SpeakeasyMetadata({ data: "json, name=satisfiesPzs" })
   satisfiesPzs?: boolean;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: InstanceStateEnum;
 
-  @Metadata({ data: "json, name=statusMessage" })
+  @SpeakeasyMetadata({ data: "json, name=statusMessage" })
   statusMessage?: string;
 
-  @Metadata({ data: "json, name=suspensionReasons" })
+  @SpeakeasyMetadata({ data: "json, name=suspensionReasons" })
   suspensionReasons?: InstanceSuspensionReasonsEnum[];
 
-  @Metadata({ data: "json, name=tier" })
+  @SpeakeasyMetadata({ data: "json, name=tier" })
+  tier?: InstanceTierEnum;
+}
+
+
+// InstanceInput
+/** 
+ * A Filestore instance.
+**/
+export class InstanceInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=etag" })
+  etag?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=fileShares", elemType: FileShareConfig })
+  fileShares?: FileShareConfig[];
+
+  @SpeakeasyMetadata({ data: "json, name=kmsKeyName" })
+  kmsKeyName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=networks", elemType: NetworkConfigInput })
+  networks?: NetworkConfigInput[];
+
+  @SpeakeasyMetadata({ data: "json, name=tier" })
   tier?: InstanceTierEnum;
 }

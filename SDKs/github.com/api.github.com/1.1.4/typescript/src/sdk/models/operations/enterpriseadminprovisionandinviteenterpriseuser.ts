@@ -1,74 +1,75 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class EnterpriseAdminProvisionAndInviteEnterpriseUserPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=enterprise" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=enterprise" })
   enterprise: string;
 }
 
 
 export class EnterpriseAdminProvisionAndInviteEnterpriseUserRequestBodyEmails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=primary" })
+  @SpeakeasyMetadata({ data: "json, name=primary" })
   primary: boolean;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value: string;
 }
 
 
 export class EnterpriseAdminProvisionAndInviteEnterpriseUserRequestBodyGroups extends SpeakeasyBase {
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }
 
 
 export class EnterpriseAdminProvisionAndInviteEnterpriseUserRequestBodyName extends SpeakeasyBase {
-  @Metadata({ data: "json, name=familyName" })
+  @SpeakeasyMetadata({ data: "json, name=familyName" })
   familyName: string;
 
-  @Metadata({ data: "json, name=givenName" })
+  @SpeakeasyMetadata({ data: "json, name=givenName" })
   givenName: string;
 }
 
 
 export class EnterpriseAdminProvisionAndInviteEnterpriseUserRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=emails", elemType: operations.EnterpriseAdminProvisionAndInviteEnterpriseUserRequestBodyEmails })
+  @SpeakeasyMetadata({ data: "json, name=emails", elemType: EnterpriseAdminProvisionAndInviteEnterpriseUserRequestBodyEmails })
   emails: EnterpriseAdminProvisionAndInviteEnterpriseUserRequestBodyEmails[];
 
-  @Metadata({ data: "json, name=groups", elemType: operations.EnterpriseAdminProvisionAndInviteEnterpriseUserRequestBodyGroups })
+  @SpeakeasyMetadata({ data: "json, name=groups", elemType: EnterpriseAdminProvisionAndInviteEnterpriseUserRequestBodyGroups })
   groups?: EnterpriseAdminProvisionAndInviteEnterpriseUserRequestBodyGroups[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: EnterpriseAdminProvisionAndInviteEnterpriseUserRequestBodyName;
 
-  @Metadata({ data: "json, name=schemas" })
+  @SpeakeasyMetadata({ data: "json, name=schemas" })
   schemas: string[];
 
-  @Metadata({ data: "json, name=userName" })
+  @SpeakeasyMetadata({ data: "json, name=userName" })
   userName: string;
 }
 
 
 export class EnterpriseAdminProvisionAndInviteEnterpriseUserRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: EnterpriseAdminProvisionAndInviteEnterpriseUserPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: EnterpriseAdminProvisionAndInviteEnterpriseUserRequestBody;
 }
 
 
 export class EnterpriseAdminProvisionAndInviteEnterpriseUserResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   scimEnterpriseUser?: shared.ScimEnterpriseUser;
 }

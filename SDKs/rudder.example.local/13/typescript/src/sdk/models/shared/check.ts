@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum CheckStatusEnum {
-    Critical = "Critical"
-,    Warning = "Warning"
-,    Ok = "Ok"
+    Critical = "Critical",
+    Warning = "Warning",
+    Ok = "Ok"
 }
 
 
 export class Check extends SpeakeasyBase {
-  @Metadata({ data: "json, name=msg" })
+  @SpeakeasyMetadata({ data: "json, name=msg" })
   msg: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: CheckStatusEnum;
 }

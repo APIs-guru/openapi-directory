@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ApigeeOrganizationsSecurityProfilesEnvironmentsComputeEnvironmentScoresPathParams:
-    profile_environment: str = field(default=None, metadata={'path_param': { 'field_name': 'profileEnvironment', 'style': 'simple', 'explode': False }})
+    profile_environment: str = field(metadata={'path_param': { 'field_name': 'profileEnvironment', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class ApigeeOrganizationsSecurityProfilesEnvironmentsComputeEnvironmentScoresQue
 
 @dataclass
 class ApigeeOrganizationsSecurityProfilesEnvironmentsComputeEnvironmentScoresSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ApigeeOrganizationsSecurityProfilesEnvironmentsComputeEnvironmentScoresRequest:
-    path_params: ApigeeOrganizationsSecurityProfilesEnvironmentsComputeEnvironmentScoresPathParams = field(default=None)
-    query_params: ApigeeOrganizationsSecurityProfilesEnvironmentsComputeEnvironmentScoresQueryParams = field(default=None)
+    path_params: ApigeeOrganizationsSecurityProfilesEnvironmentsComputeEnvironmentScoresPathParams = field()
+    query_params: ApigeeOrganizationsSecurityProfilesEnvironmentsComputeEnvironmentScoresQueryParams = field()
+    security: ApigeeOrganizationsSecurityProfilesEnvironmentsComputeEnvironmentScoresSecurity = field()
     request: Optional[shared.GoogleCloudApigeeV1ComputeEnvironmentScoresRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ApigeeOrganizationsSecurityProfilesEnvironmentsComputeEnvironmentScoresSecurity = field(default=None)
     
 
 @dataclass
 class ApigeeOrganizationsSecurityProfilesEnvironmentsComputeEnvironmentScoresResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_apigee_v1_compute_environment_scores_response: Optional[shared.GoogleCloudApigeeV1ComputeEnvironmentScoresResponse] = field(default=None)
-    status_code: int = field(default=None)
     

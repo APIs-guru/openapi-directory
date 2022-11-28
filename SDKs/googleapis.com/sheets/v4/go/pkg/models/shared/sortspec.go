@@ -8,6 +8,8 @@ const (
 	SortSpecSortOrderEnumDescending           SortSpecSortOrderEnum = "DESCENDING"
 )
 
+// SortSpec
+// A sort order associated with a specific column or row.
 type SortSpec struct {
 	BackgroundColor           *Color                     `json:"backgroundColor,omitempty"`
 	BackgroundColorStyle      *ColorStyle                `json:"backgroundColorStyle,omitempty"`

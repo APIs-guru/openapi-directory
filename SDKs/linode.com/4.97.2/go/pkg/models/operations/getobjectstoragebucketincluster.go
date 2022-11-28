@@ -4,7 +4,7 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-var GetObjectStorageBucketinClusterServers = []string{
+var GetObjectStorageBucketinClusterServerList = []string{
 	"https://api.linode.com/v4",
 }
 
@@ -12,23 +12,9 @@ type GetObjectStorageBucketinClusterPathParams struct {
 	ClusterID string `pathParam:"style=simple,explode=false,name=clusterId"`
 }
 
-type GetObjectStorageBucketinClusterSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type GetObjectStorageBucketinClusterSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type GetObjectStorageBucketinClusterSecurity struct {
-	Option1 *GetObjectStorageBucketinClusterSecurityOption1 `security:"option"`
-	Option2 *GetObjectStorageBucketinClusterSecurityOption2 `security:"option"`
-}
-
-type GetObjectStorageBucketinClusterRequest struct {
-	ServerURL  *string
-	PathParams GetObjectStorageBucketinClusterPathParams
-	Security   GetObjectStorageBucketinClusterSecurity
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
 }
 
 type GetObjectStorageBucketinCluster200ApplicationJSON struct {
@@ -40,6 +26,12 @@ type GetObjectStorageBucketinCluster200ApplicationJSON struct {
 
 type GetObjectStorageBucketinClusterDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type GetObjectStorageBucketinClusterRequest struct {
+	ServerURL  *string
+	PathParams GetObjectStorageBucketinClusterPathParams
+	Security   GetObjectStorageBucketinClusterSecurity
 }
 
 type GetObjectStorageBucketinClusterResponse struct {

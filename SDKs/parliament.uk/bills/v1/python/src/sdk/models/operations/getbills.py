@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -24,14 +25,14 @@ class GetBillsQueryParams:
 
 @dataclass
 class GetBillsRequest:
-    query_params: GetBillsQueryParams = field(default=None)
+    query_params: GetBillsQueryParams = field()
     
 
 @dataclass
 class GetBillsResponse:
+    content_type: str = field()
+    status_code: int = field()
     bill_summary_search_result: Optional[shared.BillSummarySearchResult] = field(default=None)
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    body: Optional[bytes] = field(default=None)
     problem_details: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

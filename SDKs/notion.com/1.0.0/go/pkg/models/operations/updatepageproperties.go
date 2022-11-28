@@ -20,11 +20,6 @@ type UpdatePagePropertiesRequestBody struct {
 	Properties *UpdatePagePropertiesRequestBodyProperties `json:"properties,omitempty"`
 }
 
-type UpdatePagePropertiesRequest struct {
-	PathParams UpdatePagePropertiesPathParams
-	Request    *UpdatePagePropertiesRequestBody `request:"mediaType=application/json"`
-}
-
 type UpdatePageProperties200ApplicationJSONParent struct {
 	DatabaseID *string `json:"database_id,omitempty"`
 	Type       *string `json:"type,omitempty"`
@@ -190,6 +185,11 @@ type UpdatePageProperties200ApplicationJSON struct {
 	Object         *string                                           `json:"object,omitempty"`
 	Parent         *UpdatePageProperties200ApplicationJSONParent     `json:"parent,omitempty"`
 	Properties     *UpdatePageProperties200ApplicationJSONProperties `json:"properties,omitempty"`
+}
+
+type UpdatePagePropertiesRequest struct {
+	PathParams UpdatePagePropertiesPathParams
+	Request    *UpdatePagePropertiesRequestBody `request:"mediaType=application/json"`
 }
 
 type UpdatePagePropertiesResponse struct {

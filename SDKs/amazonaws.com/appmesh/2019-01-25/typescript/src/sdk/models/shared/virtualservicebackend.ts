@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ClientPolicy } from "./clientpolicy";
+
 
 
 // VirtualServiceBackend
@@ -7,9 +8,9 @@ import { ClientPolicy } from "./clientpolicy";
  * An object that represents a virtual service backend for a virtual node.
 **/
 export class VirtualServiceBackend extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clientPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=clientPolicy" })
   clientPolicy?: ClientPolicy;
 
-  @Metadata({ data: "json, name=virtualServiceName" })
+  @SpeakeasyMetadata({ data: "json, name=virtualServiceName" })
   virtualServiceName: string;
 }

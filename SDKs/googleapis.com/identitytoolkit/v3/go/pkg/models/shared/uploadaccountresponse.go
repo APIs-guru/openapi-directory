@@ -5,6 +5,8 @@ type UploadAccountResponseError struct {
 	Message *string `json:"message,omitempty"`
 }
 
+// UploadAccountResponse
+// Respone of uploading accounts in batch.
 type UploadAccountResponse struct {
 	Error []UploadAccountResponseError `json:"error,omitempty"`
 	Kind  *string                      `json:"kind,omitempty"`

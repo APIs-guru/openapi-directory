@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import scalingtype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateShardCountInput:
-    scaling_type: scalingtype_enum.ScalingTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ScalingType' }})
-    stream_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StreamName' }})
-    target_shard_count: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TargetShardCount' }})
+    scaling_type: ScalingTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ScalingType') }})
+    stream_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('StreamName') }})
+    target_shard_count: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('TargetShardCount') }})
     

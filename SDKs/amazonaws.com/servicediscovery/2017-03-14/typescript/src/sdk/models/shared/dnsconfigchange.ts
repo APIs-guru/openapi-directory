@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DnsRecord } from "./dnsrecord";
+
 
 
 // DnsConfigChange
@@ -8,6 +8,6 @@ import { DnsRecord } from "./dnsrecord";
  * A complex type that contains information about changes to the Route 53 DNS records that Cloud Map creates when you register an instance.
 **/
 export class DnsConfigChange extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DnsRecords", elemType: shared.DnsRecord })
+  @SpeakeasyMetadata({ data: "json, name=DnsRecords", elemType: DnsRecord })
   dnsRecords: DnsRecord[];
 }

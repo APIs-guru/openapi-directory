@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WkHtmlToPdfAdvancedOptions } from "./wkhtmltopdfadvancedoptions";
 
 
+
 export class WkHtmlToPdfUrlToPdfRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fileName" })
+  @SpeakeasyMetadata({ data: "json, name=fileName" })
   fileName?: string;
 
-  @Metadata({ data: "json, name=inlinePdf" })
+  @SpeakeasyMetadata({ data: "json, name=inlinePdf" })
   inlinePdf?: boolean;
 
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options?: WkHtmlToPdfAdvancedOptions;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url: string;
 }

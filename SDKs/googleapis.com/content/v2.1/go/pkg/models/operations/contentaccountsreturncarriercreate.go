@@ -30,7 +30,7 @@ type ContentAccountsReturncarrierCreateSecurity struct {
 type ContentAccountsReturncarrierCreateRequest struct {
 	PathParams  ContentAccountsReturncarrierCreatePathParams
 	QueryParams ContentAccountsReturncarrierCreateQueryParams
-	Request     *shared.AccountReturnCarrier `request:"mediaType=application/json"`
+	Request     *shared.AccountReturnCarrierInput `request:"mediaType=application/json"`
 	Security    ContentAccountsReturncarrierCreateSecurity
 }
 

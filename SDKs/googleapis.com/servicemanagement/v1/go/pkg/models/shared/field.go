@@ -33,6 +33,8 @@ const (
 	FieldKindEnumTypeSint64   FieldKindEnum = "TYPE_SINT64"
 )
 
+// Field
+// A single field of a message type.
 type Field struct {
 	Cardinality  *FieldCardinalityEnum `json:"cardinality,omitempty"`
 	DefaultValue *string               `json:"defaultValue,omitempty"`

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AnalyticsadminPropertiesUserLinksBatchCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class AnalyticsadminPropertiesUserLinksBatchCreateQueryParams:
 
 @dataclass
 class AnalyticsadminPropertiesUserLinksBatchCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AnalyticsadminPropertiesUserLinksBatchCreateRequest:
-    path_params: AnalyticsadminPropertiesUserLinksBatchCreatePathParams = field(default=None)
-    query_params: AnalyticsadminPropertiesUserLinksBatchCreateQueryParams = field(default=None)
-    request: Optional[shared.GoogleAnalyticsAdminV1alphaBatchCreateUserLinksRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AnalyticsadminPropertiesUserLinksBatchCreateSecurity = field(default=None)
+    path_params: AnalyticsadminPropertiesUserLinksBatchCreatePathParams = field()
+    query_params: AnalyticsadminPropertiesUserLinksBatchCreateQueryParams = field()
+    security: AnalyticsadminPropertiesUserLinksBatchCreateSecurity = field()
+    request: Optional[shared.GoogleAnalyticsAdminV1alphaBatchCreateUserLinksRequestInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class AnalyticsadminPropertiesUserLinksBatchCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_analytics_admin_v1alpha_batch_create_user_links_response: Optional[shared.GoogleAnalyticsAdminV1alphaBatchCreateUserLinksResponse] = field(default=None)
-    status_code: int = field(default=None)
     

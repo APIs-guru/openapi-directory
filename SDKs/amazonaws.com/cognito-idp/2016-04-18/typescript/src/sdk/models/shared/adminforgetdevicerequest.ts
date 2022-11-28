@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AdminForgetDeviceRequest
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Sends the forgot device request, as an administrator.
 **/
 export class AdminForgetDeviceRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DeviceKey" })
+  @SpeakeasyMetadata({ data: "json, name=DeviceKey" })
   deviceKey: string;
 
-  @Metadata({ data: "json, name=UserPoolId" })
+  @SpeakeasyMetadata({ data: "json, name=UserPoolId" })
   userPoolId: string;
 
-  @Metadata({ data: "json, name=Username" })
+  @SpeakeasyMetadata({ data: "json, name=Username" })
   username: string;
 }

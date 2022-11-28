@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudApigeeV1ComputeEnvironmentScoresRequest
+// Request for ComputeEnvironmentScores.
 type GoogleCloudApigeeV1ComputeEnvironmentScoresRequest struct {
 	Filters   []GoogleCloudApigeeV1ComputeEnvironmentScoresRequestFilter `json:"filters,omitempty"`
 	PageSize  *int32                                                     `json:"pageSize,omitempty"`

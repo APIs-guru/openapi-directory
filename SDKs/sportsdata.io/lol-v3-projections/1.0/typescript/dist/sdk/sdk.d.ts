@@ -1,24 +1,35 @@
 import { AxiosInstance, AxiosRequestConfig } from "axios";
 import * as operations from "./models/operations";
 import { Security } from "./models/shared";
-declare type OptsFunc = (sdk: SDK) => void;
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["http://api.sportsdata.io", "https://api.sportsdata.io", "http://azure-api.sportsdata.io", "https://azure-api.sportsdata.io"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare function WithSecurity(security: Security): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _security?: Security;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
-    DfsSlatesByDate(req: operations.DfsSlatesByDateRequest, config?: AxiosRequestConfig): Promise<operations.DfsSlatesByDateResponse>;
     /**
+     * dfsSlatesByDate - Dfs Slates By Date
+    **/
+    dfsSlatesByDate(req: operations.DfsSlatesByDateRequest, config?: AxiosRequestConfig): Promise<operations.DfsSlatesByDateResponse>;
+    /**
+     * projectedPlayerGameStatsByDate - Projected Player Game Stats by Date
+     *
      * Projected Player Game Stats by Date
     **/
-    ProjectedPlayerGameStatsByDate(req: operations.ProjectedPlayerGameStatsByDateRequest, config?: AxiosRequestConfig): Promise<operations.ProjectedPlayerGameStatsByDateResponse>;
+    projectedPlayerGameStatsByDate(req: operations.ProjectedPlayerGameStatsByDateRequest, config?: AxiosRequestConfig): Promise<operations.ProjectedPlayerGameStatsByDateResponse>;
     /**
+     * projectedPlayerGameStatsByPlayer - Projected Player Game Stats by Player
+     *
      * Projected Player Game Stats by Date
     **/
-    ProjectedPlayerGameStatsByPlayer(req: operations.ProjectedPlayerGameStatsByPlayerRequest, config?: AxiosRequestConfig): Promise<operations.ProjectedPlayerGameStatsByPlayerResponse>;
+    projectedPlayerGameStatsByPlayer(req: operations.ProjectedPlayerGameStatsByPlayerRequest, config?: AxiosRequestConfig): Promise<operations.ProjectedPlayerGameStatsByPlayerResponse>;
 }
 export {};

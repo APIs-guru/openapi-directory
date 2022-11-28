@@ -19,6 +19,8 @@ type UpdateJourneyStateHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateJourneyStateRequestBodyJourneyStateRequest
+// Changes the status of a journey.
 type UpdateJourneyStateRequestBodyJourneyStateRequest struct {
 	State *shared.StateEnum `json:"State,omitempty"`
 }

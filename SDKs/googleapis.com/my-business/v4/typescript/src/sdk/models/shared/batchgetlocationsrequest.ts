@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BatchGetLocationsRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request message for Locations.BatchGetLocations.
 **/
 export class BatchGetLocationsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=locationNames" })
+  @SpeakeasyMetadata({ data: "json, name=locationNames" })
   locationNames?: string[];
 }

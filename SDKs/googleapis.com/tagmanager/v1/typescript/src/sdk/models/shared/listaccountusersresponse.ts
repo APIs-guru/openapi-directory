@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserAccess } from "./useraccess";
+
 
 
 // ListAccountUsersResponse
@@ -8,6 +8,6 @@ import { UserAccess } from "./useraccess";
  * List AccountUsers Response.
 **/
 export class ListAccountUsersResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=userAccess", elemType: shared.UserAccess })
+  @SpeakeasyMetadata({ data: "json, name=userAccess", elemType: UserAccess })
   userAccess?: UserAccess[];
 }

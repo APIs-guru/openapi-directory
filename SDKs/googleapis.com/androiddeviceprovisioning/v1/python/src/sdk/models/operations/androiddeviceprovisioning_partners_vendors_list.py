@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AndroiddeviceprovisioningPartnersVendorsListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,13 +28,13 @@ class AndroiddeviceprovisioningPartnersVendorsListQueryParams:
 
 @dataclass
 class AndroiddeviceprovisioningPartnersVendorsListRequest:
-    path_params: AndroiddeviceprovisioningPartnersVendorsListPathParams = field(default=None)
-    query_params: AndroiddeviceprovisioningPartnersVendorsListQueryParams = field(default=None)
+    path_params: AndroiddeviceprovisioningPartnersVendorsListPathParams = field()
+    query_params: AndroiddeviceprovisioningPartnersVendorsListQueryParams = field()
     
 
 @dataclass
 class AndroiddeviceprovisioningPartnersVendorsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_vendors_response: Optional[shared.ListVendorsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

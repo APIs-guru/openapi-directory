@@ -5,25 +5,25 @@ from sdk.models import shared
 
 @dataclass
 class DeleteSubContractorPathParams:
-    employer_id: str = field(default=None, metadata={'path_param': { 'field_name': 'EmployerId', 'style': 'simple', 'explode': False }})
-    sub_contractor_id: str = field(default=None, metadata={'path_param': { 'field_name': 'SubContractorId', 'style': 'simple', 'explode': False }})
+    employer_id: str = field(metadata={'path_param': { 'field_name': 'EmployerId', 'style': 'simple', 'explode': False }})
+    sub_contractor_id: str = field(metadata={'path_param': { 'field_name': 'SubContractorId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DeleteSubContractorHeaders:
-    api_version: str = field(default=None, metadata={'header': { 'field_name': 'Api-Version', 'style': 'simple', 'explode': False }})
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
+    api_version: str = field(metadata={'header': { 'field_name': 'Api-Version', 'style': 'simple', 'explode': False }})
+    authorization: str = field(metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DeleteSubContractorRequest:
-    path_params: DeleteSubContractorPathParams = field(default=None)
-    headers: DeleteSubContractorHeaders = field(default=None)
+    headers: DeleteSubContractorHeaders = field()
+    path_params: DeleteSubContractorPathParams = field()
     
 
 @dataclass
 class DeleteSubContractorResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_model: Optional[shared.ErrorModel] = field(default=None)
-    status_code: int = field(default=None)
     

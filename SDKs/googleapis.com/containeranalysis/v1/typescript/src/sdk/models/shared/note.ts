@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AttestationNote } from "./attestationnote";
 import { BuildNote } from "./buildnote";
 import { ComplianceNote } from "./compliancenote";
@@ -12,18 +11,19 @@ import { RelatedUrl } from "./relatedurl";
 import { UpgradeNote } from "./upgradenote";
 import { VulnerabilityNote } from "./vulnerabilitynote";
 
+
 export enum NoteKindEnum {
-    NoteKindUnspecified = "NOTE_KIND_UNSPECIFIED"
-,    Vulnerability = "VULNERABILITY"
-,    Build = "BUILD"
-,    Image = "IMAGE"
-,    Package = "PACKAGE"
-,    Deployment = "DEPLOYMENT"
-,    Discovery = "DISCOVERY"
-,    Attestation = "ATTESTATION"
-,    Upgrade = "UPGRADE"
-,    Compliance = "COMPLIANCE"
-,    DsseAttestation = "DSSE_ATTESTATION"
+    NoteKindUnspecified = "NOTE_KIND_UNSPECIFIED",
+    Vulnerability = "VULNERABILITY",
+    Build = "BUILD",
+    Image = "IMAGE",
+    Package = "PACKAGE",
+    Deployment = "DEPLOYMENT",
+    Discovery = "DISCOVERY",
+    Attestation = "ATTESTATION",
+    Upgrade = "UPGRADE",
+    Compliance = "COMPLIANCE",
+    DsseAttestation = "DSSE_ATTESTATION"
 }
 
 
@@ -32,60 +32,60 @@ export enum NoteKindEnum {
  * A type of analysis that can be done for a resource.
 **/
 export class Note extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attestation" })
+  @SpeakeasyMetadata({ data: "json, name=attestation" })
   attestation?: AttestationNote;
 
-  @Metadata({ data: "json, name=build" })
+  @SpeakeasyMetadata({ data: "json, name=build" })
   build?: BuildNote;
 
-  @Metadata({ data: "json, name=compliance" })
+  @SpeakeasyMetadata({ data: "json, name=compliance" })
   compliance?: ComplianceNote;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=deployment" })
+  @SpeakeasyMetadata({ data: "json, name=deployment" })
   deployment?: DeploymentNote;
 
-  @Metadata({ data: "json, name=discovery" })
+  @SpeakeasyMetadata({ data: "json, name=discovery" })
   discovery?: DiscoveryNote;
 
-  @Metadata({ data: "json, name=dsseAttestation" })
+  @SpeakeasyMetadata({ data: "json, name=dsseAttestation" })
   dsseAttestation?: DsseAttestationNote;
 
-  @Metadata({ data: "json, name=expirationTime" })
+  @SpeakeasyMetadata({ data: "json, name=expirationTime" })
   expirationTime?: string;
 
-  @Metadata({ data: "json, name=image" })
+  @SpeakeasyMetadata({ data: "json, name=image" })
   image?: ImageNote;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: NoteKindEnum;
 
-  @Metadata({ data: "json, name=longDescription" })
+  @SpeakeasyMetadata({ data: "json, name=longDescription" })
   longDescription?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=package" })
+  @SpeakeasyMetadata({ data: "json, name=package" })
   package?: PackageNote;
 
-  @Metadata({ data: "json, name=relatedNoteNames" })
+  @SpeakeasyMetadata({ data: "json, name=relatedNoteNames" })
   relatedNoteNames?: string[];
 
-  @Metadata({ data: "json, name=relatedUrl", elemType: shared.RelatedUrl })
+  @SpeakeasyMetadata({ data: "json, name=relatedUrl", elemType: RelatedUrl })
   relatedUrl?: RelatedUrl[];
 
-  @Metadata({ data: "json, name=shortDescription" })
+  @SpeakeasyMetadata({ data: "json, name=shortDescription" })
   shortDescription?: string;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 
-  @Metadata({ data: "json, name=upgrade" })
+  @SpeakeasyMetadata({ data: "json, name=upgrade" })
   upgrade?: UpgradeNote;
 
-  @Metadata({ data: "json, name=vulnerability" })
+  @SpeakeasyMetadata({ data: "json, name=vulnerability" })
   vulnerability?: VulnerabilityNote;
 }

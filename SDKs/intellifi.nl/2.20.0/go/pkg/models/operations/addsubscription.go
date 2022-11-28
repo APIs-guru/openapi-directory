@@ -5,7 +5,7 @@ import (
 )
 
 type AddSubscriptionRequest struct {
-	Request shared.Subscription `request:"mediaType=application/json"`
+	Request shared.SubscriptionInput `request:"mediaType=application/json"`
 }
 
 type AddSubscriptionResponse struct {

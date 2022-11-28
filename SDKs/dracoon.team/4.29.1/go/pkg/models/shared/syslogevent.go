@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// SyslogEvent
+// Syslog event information
 type SyslogEvent struct {
 	Attribute1       *string   `json:"attribute1,omitempty"`
 	Attribute2       *string   `json:"attribute2,omitempty"`

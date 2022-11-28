@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum CreateSqlInjectionMatchSetXAmzTargetEnum {
     Awswaf20150824CreateSqlInjectionMatchSet = "AWSWAF_20150824.CreateSqlInjectionMatchSet"

@@ -17,14 +17,14 @@ type RemoveFollowersForProjectRequestBody struct {
 	Data *shared.RemoveFollowersRequest `json:"data,omitempty"`
 }
 
+type RemoveFollowersForProject200ApplicationJSON struct {
+	Data map[string]interface{} `json:"data,omitempty"`
+}
+
 type RemoveFollowersForProjectRequest struct {
 	PathParams  RemoveFollowersForProjectPathParams
 	QueryParams RemoveFollowersForProjectQueryParams
 	Request     RemoveFollowersForProjectRequestBody `request:"mediaType=application/json"`
-}
-
-type RemoveFollowersForProject200ApplicationJSON struct {
-	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type RemoveFollowersForProjectResponse struct {

@@ -1,5 +1,7 @@
 package shared
 
+// ProductstatusesCustomBatchRequestEntry
+// A batch entry encoding a single non-batch productstatuses request.
 type ProductstatusesCustomBatchRequestEntry struct {
 	BatchID           *int64   `json:"batchId,omitempty"`
 	Destinations      []string `json:"destinations,omitempty"`

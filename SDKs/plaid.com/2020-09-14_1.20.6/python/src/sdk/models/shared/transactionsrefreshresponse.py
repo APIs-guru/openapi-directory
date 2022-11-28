@@ -1,9 +1,14 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class TransactionsRefreshResponse:
-    request_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'request_id' }})
+    r"""TransactionsRefreshResponse
+    TransactionsRefreshResponse defines the response schema for `/transactions/refresh`
+    """
+    
+    request_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('request_id') }})
     

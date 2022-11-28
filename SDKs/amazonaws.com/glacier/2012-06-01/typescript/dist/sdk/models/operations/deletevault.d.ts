@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class DeleteVaultPathParams extends SpeakeasyBase {
     accountId: string;
     vaultName: string;

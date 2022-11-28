@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetCreateConfigurationSetActionEnum(str, Enum):
     CREATE_CONFIGURATION_SET = "CreateConfigurationSet"
@@ -7,7 +11,11 @@ class GetCreateConfigurationSetActionEnum(str, Enum):
 
 @dataclass
 class GetCreateConfigurationSetConfigurationSet:
-    name: str = field(default=None, metadata={'query_param': { 'field_name': 'Name' }})
+    r"""GetCreateConfigurationSetConfigurationSet
+    <p>The name of the configuration set.</p> <p>Configuration sets let you create groups of rules that you can apply to the emails you send using Amazon SES. For more information about using configuration sets, see <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/using-configuration-sets.html\">Using Amazon SES Configuration Sets</a> in the <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/\">Amazon SES Developer Guide</a>.</p>
+    """
+    
+    name: str = field(metadata={'query_param': { 'field_name': 'Name' }})
     
 class GetCreateConfigurationSetVersionEnum(str, Enum):
     TWO_THOUSAND_AND_TEN_12_01 = "2010-12-01"
@@ -15,9 +23,9 @@ class GetCreateConfigurationSetVersionEnum(str, Enum):
 
 @dataclass
 class GetCreateConfigurationSetQueryParams:
-    action: GetCreateConfigurationSetActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    configuration_set: GetCreateConfigurationSetConfigurationSet = field(default=None, metadata={'query_param': { 'field_name': 'ConfigurationSet', 'style': 'form', 'explode': True }})
-    version: GetCreateConfigurationSetVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetCreateConfigurationSetActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    configuration_set: GetCreateConfigurationSetConfigurationSet = field(metadata={'query_param': { 'field_name': 'ConfigurationSet', 'style': 'form', 'explode': True }})
+    version: GetCreateConfigurationSetVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -33,13 +41,13 @@ class GetCreateConfigurationSetHeaders:
 
 @dataclass
 class GetCreateConfigurationSetRequest:
-    query_params: GetCreateConfigurationSetQueryParams = field(default=None)
-    headers: GetCreateConfigurationSetHeaders = field(default=None)
+    headers: GetCreateConfigurationSetHeaders = field()
+    query_params: GetCreateConfigurationSetQueryParams = field()
     
 
 @dataclass
 class GetCreateConfigurationSetResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

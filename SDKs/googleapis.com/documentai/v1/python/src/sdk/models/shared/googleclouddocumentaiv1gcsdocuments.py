@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import googleclouddocumentaiv1gcsdocument
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleCloudDocumentaiV1GcsDocuments:
-    documents: Optional[List[googleclouddocumentaiv1gcsdocument.GoogleCloudDocumentaiV1GcsDocument]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'documents' }})
+    r"""GoogleCloudDocumentaiV1GcsDocuments
+    Specifies a set of documents on Cloud Storage.
+    """
+    
+    documents: Optional[List[GoogleCloudDocumentaiV1GcsDocument]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('documents') }})
     

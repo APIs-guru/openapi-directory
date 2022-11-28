@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteHsmClientCertificateActionEnum(str, Enum):
     DELETE_HSM_CLIENT_CERTIFICATE = "DeleteHsmClientCertificate"
@@ -10,9 +14,9 @@ class GetDeleteHsmClientCertificateVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteHsmClientCertificateQueryParams:
-    action: GetDeleteHsmClientCertificateActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    hsm_client_certificate_identifier: str = field(default=None, metadata={'query_param': { 'field_name': 'HsmClientCertificateIdentifier', 'style': 'form', 'explode': True }})
-    version: GetDeleteHsmClientCertificateVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetDeleteHsmClientCertificateActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    hsm_client_certificate_identifier: str = field(metadata={'query_param': { 'field_name': 'HsmClientCertificateIdentifier', 'style': 'form', 'explode': True }})
+    version: GetDeleteHsmClientCertificateVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetDeleteHsmClientCertificateHeaders:
 
 @dataclass
 class GetDeleteHsmClientCertificateRequest:
-    query_params: GetDeleteHsmClientCertificateQueryParams = field(default=None)
-    headers: GetDeleteHsmClientCertificateHeaders = field(default=None)
+    headers: GetDeleteHsmClientCertificateHeaders = field()
+    query_params: GetDeleteHsmClientCertificateQueryParams = field()
     
 
 @dataclass
 class GetDeleteHsmClientCertificateResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

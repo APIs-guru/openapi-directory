@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PubsubEvent } from "./pubsubevent";
+
 
 
 // PullResponse
@@ -7,9 +8,9 @@ import { PubsubEvent } from "./pubsubevent";
  * Either a PubsubMessage or a truncation event. One of these two must be populated.
 **/
 export class PullResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ackId" })
+  @SpeakeasyMetadata({ data: "json, name=ackId" })
   ackId?: string;
 
-  @Metadata({ data: "json, name=pubsubEvent" })
+  @SpeakeasyMetadata({ data: "json, name=pubsubEvent" })
   pubsubEvent?: PubsubEvent;
 }

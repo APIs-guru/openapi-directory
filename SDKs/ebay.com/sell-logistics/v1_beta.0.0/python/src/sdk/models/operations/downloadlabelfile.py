@@ -1,26 +1,27 @@
 from dataclasses import dataclass, field
-
+from typing import Optional
+from sdk.models import shared
 
 
 @dataclass
 class DownloadLabelFilePathParams:
-    shipment_id: str = field(default=None, metadata={'path_param': { 'field_name': 'shipmentId', 'style': 'simple', 'explode': False }})
+    shipment_id: str = field(metadata={'path_param': { 'field_name': 'shipmentId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DownloadLabelFileSecurity:
-    api_auth: shared.SchemeAPIAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    api_auth: shared.SchemeAPIAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DownloadLabelFileRequest:
-    path_params: DownloadLabelFilePathParams = field(default=None)
-    security: DownloadLabelFileSecurity = field(default=None)
+    path_params: DownloadLabelFilePathParams = field()
+    security: DownloadLabelFileSecurity = field()
     
 
 @dataclass
 class DownloadLabelFileResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -30,19 +34,19 @@ class BooksMylibraryAnnotationsListQueryParams:
 
 @dataclass
 class BooksMylibraryAnnotationsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BooksMylibraryAnnotationsListRequest:
-    query_params: BooksMylibraryAnnotationsListQueryParams = field(default=None)
-    security: BooksMylibraryAnnotationsListSecurity = field(default=None)
+    query_params: BooksMylibraryAnnotationsListQueryParams = field()
+    security: BooksMylibraryAnnotationsListSecurity = field()
     
 
 @dataclass
 class BooksMylibraryAnnotationsListResponse:
+    content_type: str = field()
+    status_code: int = field()
     annotations: Optional[shared.Annotations] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

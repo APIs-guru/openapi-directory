@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googlecloudbeyondcorpsaasplatforminsightsv1alphacustomgrouping
+from sdk import utils
+from . import *
 
 class GoogleCloudBeyondcorpSaasplatformInsightsV1alphaAppliedConfigAggregationEnum(str, Enum):
     AGGREGATION_UNSPECIFIED = "AGGREGATION_UNSPECIFIED"
@@ -15,10 +17,14 @@ class GoogleCloudBeyondcorpSaasplatformInsightsV1alphaAppliedConfigAggregationEn
 @dataclass_json
 @dataclass
 class GoogleCloudBeyondcorpSaasplatformInsightsV1alphaAppliedConfig:
-    aggregation: Optional[GoogleCloudBeyondcorpSaasplatformInsightsV1alphaAppliedConfigAggregationEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'aggregation' }})
-    custom_grouping: Optional[googlecloudbeyondcorpsaasplatforminsightsv1alphacustomgrouping.GoogleCloudBeyondcorpSaasplatformInsightsV1alphaCustomGrouping] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'customGrouping' }})
-    end_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'endTime' }})
-    field_filter: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fieldFilter' }})
-    group: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'group' }})
-    start_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'startTime' }})
+    r"""GoogleCloudBeyondcorpSaasplatformInsightsV1alphaAppliedConfig
+    The configuration that was applied to generate the result.
+    """
+    
+    aggregation: Optional[GoogleCloudBeyondcorpSaasplatformInsightsV1alphaAppliedConfigAggregationEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('aggregation') }})
+    custom_grouping: Optional[GoogleCloudBeyondcorpSaasplatformInsightsV1alphaCustomGrouping] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('customGrouping') }})
+    end_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('endTime') }})
+    field_filter: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fieldFilter') }})
+    group: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('group') }})
+    start_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('startTime') }})
     

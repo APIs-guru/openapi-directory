@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class ListIntegrationsPathParams:
-    domain_name: str = field(default=None, metadata={'path_param': { 'field_name': 'DomainName', 'style': 'simple', 'explode': False }})
+    domain_name: str = field(metadata={'path_param': { 'field_name': 'DomainName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,19 +30,19 @@ class ListIntegrationsHeaders:
 
 @dataclass
 class ListIntegrationsRequest:
-    path_params: ListIntegrationsPathParams = field(default=None)
-    query_params: ListIntegrationsQueryParams = field(default=None)
-    headers: ListIntegrationsHeaders = field(default=None)
+    headers: ListIntegrationsHeaders = field()
+    path_params: ListIntegrationsPathParams = field()
+    query_params: ListIntegrationsQueryParams = field()
     
 
 @dataclass
 class ListIntegrationsResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     list_integrations_response: Optional[shared.ListIntegrationsResponse] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

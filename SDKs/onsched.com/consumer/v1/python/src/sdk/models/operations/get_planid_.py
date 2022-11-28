@@ -4,7 +4,7 @@ from typing import Optional
 
 @dataclass
 class GetPlanIDPathParams:
-    plan_id: str = field(default=None, metadata={'path_param': { 'field_name': 'planId', 'style': 'simple', 'explode': False }})
+    plan_id: str = field(metadata={'path_param': { 'field_name': 'planId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -14,12 +14,12 @@ class GetPlanIDQueryParams:
 
 @dataclass
 class GetPlanIDRequest:
-    path_params: GetPlanIDPathParams = field(default=None)
-    query_params: GetPlanIDQueryParams = field(default=None)
+    path_params: GetPlanIDPathParams = field()
+    query_params: GetPlanIDQueryParams = field()
     
 
 @dataclass
 class GetPlanIDResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

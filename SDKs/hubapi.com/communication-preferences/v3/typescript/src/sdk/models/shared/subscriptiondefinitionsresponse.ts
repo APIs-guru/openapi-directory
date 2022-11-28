@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SubscriptionDefinition } from "./subscriptiondefinition";
+
 
 
 // SubscriptionDefinitionsResponse
@@ -8,6 +8,6 @@ import { SubscriptionDefinition } from "./subscriptiondefinition";
  * A collection of subscription definitions for the portal.
 **/
 export class SubscriptionDefinitionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=subscriptionDefinitions", elemType: shared.SubscriptionDefinition })
+  @SpeakeasyMetadata({ data: "json, name=subscriptionDefinitions", elemType: SubscriptionDefinition })
   subscriptionDefinitions: SubscriptionDefinition[];
 }

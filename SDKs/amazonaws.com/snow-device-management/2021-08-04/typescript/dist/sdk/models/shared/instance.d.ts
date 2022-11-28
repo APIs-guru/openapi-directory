@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { InstanceBlockDeviceMapping } from "./instanceblockdevicemapping";
 import { CpuOptions } from "./cpuoptions";
 import { SecurityGroupIdentifier } from "./securitygroupidentifier";

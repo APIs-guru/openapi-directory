@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import googlecloudretailv2alphaproduct
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
-class GoogleCloudRetailV2alphaProductInlineSource:
-    products: Optional[List[googlecloudretailv2alphaproduct.GoogleCloudRetailV2alphaProduct]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'products' }})
+class GoogleCloudRetailV2alphaProductInlineSourceInput:
+    r"""GoogleCloudRetailV2alphaProductInlineSourceInput
+    The inline source for the input config for ImportProducts method.
+    """
+    
+    products: Optional[List[GoogleCloudRetailV2alphaProductInput]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('products') }})
     

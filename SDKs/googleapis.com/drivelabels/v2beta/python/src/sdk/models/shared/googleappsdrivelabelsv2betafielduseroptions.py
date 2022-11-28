@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from dataclasses_json import dataclass_json
-from . import googleappsdrivelabelsv2betafieldlistoptions
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleAppsDriveLabelsV2betaFieldUserOptions:
-    list_options: Optional[googleappsdrivelabelsv2betafieldlistoptions.GoogleAppsDriveLabelsV2betaFieldListOptions] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'listOptions' }})
+    r"""GoogleAppsDriveLabelsV2betaFieldUserOptions
+    Options for the user field type.
+    """
+    
+    list_options: Optional[GoogleAppsDriveLabelsV2betaFieldListOptions] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('listOptions') }})
     

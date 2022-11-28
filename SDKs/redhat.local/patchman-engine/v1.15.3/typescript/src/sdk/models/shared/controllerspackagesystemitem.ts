@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ControllersPackageSystemItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=available_evra" })
+  @SpeakeasyMetadata({ data: "json, name=available_evra" })
   availableEvra?: string;
 
-  @Metadata({ data: "json, name=display_name" })
+  @SpeakeasyMetadata({ data: "json, name=display_name" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=installed_evra" })
+  @SpeakeasyMetadata({ data: "json, name=installed_evra" })
   installedEvra?: string;
 
-  @Metadata({ data: "json, name=updatable" })
+  @SpeakeasyMetadata({ data: "json, name=updatable" })
   updatable?: boolean;
 }

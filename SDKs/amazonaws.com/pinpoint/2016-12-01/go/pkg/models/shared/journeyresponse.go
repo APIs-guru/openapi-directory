@@ -1,5 +1,7 @@
 package shared
 
+// JourneyResponse
+// Provides information about the status, configuration, and other settings for a journey.
 type JourneyResponse struct {
 	Activities             map[string]Activity `json:"Activities,omitempty"`
 	ApplicationID          string              `json:"ApplicationId"`

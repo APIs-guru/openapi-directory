@@ -1,5 +1,7 @@
 package shared
 
+// ListPaymentsResponseV3
+// List Payments Response Object
 type ListPaymentsResponseV3 struct {
 	Content []PaymentResponseV3 `json:"content,omitempty"`
 	Links   []interface{}       `json:"links,omitempty"`

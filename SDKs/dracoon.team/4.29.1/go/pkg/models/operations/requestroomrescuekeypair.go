@@ -23,9 +23,9 @@ type RequestRoomRescueKeyPairRequest struct {
 	Headers     RequestRoomRescueKeyPairHeaders
 }
 
-type RequestRoomRescueKeyPairResponse struct {
+type RequestRoomRescueKeyPairResponseOutput struct {
 	ContentType          string
 	ErrorResponse        *shared.ErrorResponse
 	StatusCode           int64
-	UserKeyPairContainer *shared.UserKeyPairContainer
+	UserKeyPairContainer *shared.UserKeyPairContainerOutput
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { EntityType } from "./entitytype";
 /**
  * Response message for EntityService.ListEntityTypes

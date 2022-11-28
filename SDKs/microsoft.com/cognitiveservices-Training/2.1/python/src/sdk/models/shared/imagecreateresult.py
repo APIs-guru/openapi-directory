@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import image
+from sdk import utils
+from . import *
 
 class ImageCreateResultStatusEnum(str, Enum):
     OK = "OK"
@@ -19,7 +21,7 @@ class ImageCreateResultStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ImageCreateResult:
-    image: Optional[image.Image] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'image' }})
-    source_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sourceUrl' }})
-    status: Optional[ImageCreateResultStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    image: Optional[Image] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('image') }})
+    source_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sourceUrl') }})
+    status: Optional[ImageCreateResultStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     

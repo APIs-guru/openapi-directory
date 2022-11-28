@@ -22,30 +22,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Example13 = /** @class */ (function (_super) {
     __extends(Example13, _super);
     function Example13() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=can_enroll" }),
+        SpeakeasyMetadata({ data: "json, name=can_enroll" }),
         __metadata("design:type", Boolean)
     ], Example13.prototype, "canEnroll", void 0);
     __decorate([
-        Metadata({ data: "json, name=enrollment_state" }),
+        SpeakeasyMetadata({ data: "json, name=enrollment_state" }),
         __metadata("design:type", Number)
     ], Example13.prototype, "enrollmentState", void 0);
     __decorate([
-        Metadata({ data: "json, name=error_code" }),
+        SpeakeasyMetadata({ data: "json, name=error_code" }),
         __metadata("design:type", Number)
     ], Example13.prototype, "errorCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=ready" }),
+        SpeakeasyMetadata({ data: "json, name=ready" }),
         __metadata("design:type", Boolean)
     ], Example13.prototype, "ready", void 0);
     __decorate([
-        Metadata({ data: "json, name=retryable" }),
+        SpeakeasyMetadata({ data: "json, name=retryable" }),
         __metadata("design:type", Boolean)
     ], Example13.prototype, "retryable", void 0);
     return Example13;

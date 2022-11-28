@@ -8,6 +8,19 @@ const (
 	GoogleCloudIntegrationsV1alphaCertificateCertificateStatusEnumExpired          GoogleCloudIntegrationsV1alphaCertificateCertificateStatusEnum = "EXPIRED"
 )
 
+// GoogleCloudIntegrationsV1alphaCertificateInput
+// The certificate definition
+type GoogleCloudIntegrationsV1alphaCertificateInput struct {
+	CertificateStatus *GoogleCloudIntegrationsV1alphaCertificateCertificateStatusEnum `json:"certificateStatus,omitempty"`
+	CredentialID      *string                                                         `json:"credentialId,omitempty"`
+	Description       *string                                                         `json:"description,omitempty"`
+	DisplayName       *string                                                         `json:"displayName,omitempty"`
+	RawCertificate    *GoogleCloudIntegrationsV1alphaClientCertificate                `json:"rawCertificate,omitempty"`
+	RequestorID       *string                                                         `json:"requestorId,omitempty"`
+}
+
+// GoogleCloudIntegrationsV1alphaCertificate
+// The certificate definition
 type GoogleCloudIntegrationsV1alphaCertificate struct {
 	CertificateStatus *GoogleCloudIntegrationsV1alphaCertificateCertificateStatusEnum `json:"certificateStatus,omitempty"`
 	CredentialID      *string                                                         `json:"credentialId,omitempty"`

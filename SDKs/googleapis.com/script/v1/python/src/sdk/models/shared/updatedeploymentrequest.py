@@ -1,11 +1,19 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import deploymentconfig
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateDeploymentRequest:
-    deployment_config: Optional[deploymentconfig.DeploymentConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deploymentConfig' }})
+    r"""UpdateDeploymentRequest
+    Request with deployment information to update an existing deployment.
+    """
+    
+    deployment_config: Optional[DeploymentConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('deploymentConfig') }})
     

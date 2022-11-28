@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class MediaFileDeliveryTypeEnum(str, Enum):
     STREAM = "Stream"
@@ -19,14 +21,14 @@ class MediaFileResolutionEnum1(str, Enum):
 @dataclass_json
 @dataclass
 class MediaFile:
-    channels: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'channels' }})
-    delivery_type: MediaFileDeliveryTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deliveryType' }})
-    drm: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'drm' }})
-    format: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'format' }})
-    height: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'height' }})
-    language: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'language' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    resolution: MediaFileResolutionEnum1 = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resolution' }})
-    url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
-    width: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'width' }})
+    delivery_type: MediaFileDeliveryTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('deliveryType') }})
+    drm: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('drm') }})
+    format: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('format') }})
+    height: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('height') }})
+    language: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('language') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    resolution: MediaFileResolutionEnum1 = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('resolution') }})
+    url: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('url') }})
+    width: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('width') }})
+    channels: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('channels') }})
     

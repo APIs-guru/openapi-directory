@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Response } from "./response";
 import { Spreadsheet } from "./spreadsheet";
+
 
 
 // BatchUpdateSpreadsheetResponse
@@ -9,12 +9,12 @@ import { Spreadsheet } from "./spreadsheet";
  * The reply for batch updating a spreadsheet.
 **/
 export class BatchUpdateSpreadsheetResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=replies", elemType: shared.Response })
+  @SpeakeasyMetadata({ data: "json, name=replies", elemType: Response })
   replies?: Response[];
 
-  @Metadata({ data: "json, name=spreadsheetId" })
+  @SpeakeasyMetadata({ data: "json, name=spreadsheetId" })
   spreadsheetId?: string;
 
-  @Metadata({ data: "json, name=updatedSpreadsheet" })
+  @SpeakeasyMetadata({ data: "json, name=updatedSpreadsheet" })
   updatedSpreadsheet?: Spreadsheet;
 }

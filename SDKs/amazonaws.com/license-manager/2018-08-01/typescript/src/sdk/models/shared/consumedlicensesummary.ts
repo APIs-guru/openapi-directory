@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceTypeEnum } from "./resourcetypeenum";
+
 
 
 // ConsumedLicenseSummary
@@ -7,9 +8,9 @@ import { ResourceTypeEnum } from "./resourcetypeenum";
  * Details about license consumption.
 **/
 export class ConsumedLicenseSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConsumedLicenses" })
+  @SpeakeasyMetadata({ data: "json, name=ConsumedLicenses" })
   consumedLicenses?: number;
 
-  @Metadata({ data: "json, name=ResourceType" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceType" })
   resourceType?: ResourceTypeEnum;
 }

@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import paragraphstyle
-from . import textstyle
+from sdk import utils
+from . import *
 
 class NamedStyleNamedStyleTypeEnum(str, Enum):
     NAMED_STYLE_TYPE_UNSPECIFIED = "NAMED_STYLE_TYPE_UNSPECIFIED"
@@ -20,7 +21,11 @@ class NamedStyleNamedStyleTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class NamedStyle:
-    named_style_type: Optional[NamedStyleNamedStyleTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'namedStyleType' }})
-    paragraph_style: Optional[paragraphstyle.ParagraphStyle] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'paragraphStyle' }})
-    text_style: Optional[textstyle.TextStyle] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'textStyle' }})
+    r"""NamedStyle
+    A named style. Paragraphs in the document can inherit their TextStyle and ParagraphStyle from this named style when they have the same named style type.
+    """
+    
+    named_style_type: Optional[NamedStyleNamedStyleTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('namedStyleType') }})
+    paragraph_style: Optional[ParagraphStyle] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('paragraphStyle') }})
+    text_style: Optional[TextStyle] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('textStyle') }})
     

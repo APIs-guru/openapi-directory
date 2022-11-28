@@ -29,6 +29,19 @@ const (
 	CustomBiddingAlgorithmEntityStatusEnumEntityStatusScheduledForDeletion CustomBiddingAlgorithmEntityStatusEnum = "ENTITY_STATUS_SCHEDULED_FOR_DELETION"
 )
 
+// CustomBiddingAlgorithmInput
+// A single custom bidding algorithm.
+type CustomBiddingAlgorithmInput struct {
+	AdvertiserID               *string                                               `json:"advertiserId,omitempty"`
+	CustomBiddingAlgorithmType *CustomBiddingAlgorithmCustomBiddingAlgorithmTypeEnum `json:"customBiddingAlgorithmType,omitempty"`
+	DisplayName                *string                                               `json:"displayName,omitempty"`
+	EntityStatus               *CustomBiddingAlgorithmEntityStatusEnum               `json:"entityStatus,omitempty"`
+	PartnerID                  *string                                               `json:"partnerId,omitempty"`
+	SharedAdvertiserIds        []string                                              `json:"sharedAdvertiserIds,omitempty"`
+}
+
+// CustomBiddingAlgorithm
+// A single custom bidding algorithm.
 type CustomBiddingAlgorithm struct {
 	AdvertiserID                *string                                                `json:"advertiserId,omitempty"`
 	CustomBiddingAlgorithmID    *string                                                `json:"customBiddingAlgorithmId,omitempty"`

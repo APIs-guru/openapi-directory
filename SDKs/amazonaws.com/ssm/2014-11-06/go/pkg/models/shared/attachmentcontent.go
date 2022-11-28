@@ -1,5 +1,7 @@
 package shared
 
+// AttachmentContent
+// A structure that includes attributes that describe a document attachment.
 type AttachmentContent struct {
 	Hash     *string                 `json:"Hash,omitempty"`
 	HashType *AttachmentHashTypeEnum `json:"HashType,omitempty"`

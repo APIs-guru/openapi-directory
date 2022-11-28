@@ -11,12 +11,12 @@ class GetRecruitingTeamsQueryParams:
 
 @dataclass
 class GetRecruitingTeamsRequest:
-    query_params: GetRecruitingTeamsQueryParams = field(default=None)
+    query_params: GetRecruitingTeamsQueryParams = field()
     
 
 @dataclass
 class GetRecruitingTeamsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     team_recruiting_ranks: Optional[List[shared.TeamRecruitingRank]] = field(default=None)
     

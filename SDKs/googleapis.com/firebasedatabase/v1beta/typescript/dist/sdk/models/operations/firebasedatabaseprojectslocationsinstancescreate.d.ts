@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class FirebasedatabaseProjectsLocationsInstancesCreatePathParams extends SpeakeasyBase {
     parent: string;
@@ -33,7 +33,7 @@ export declare class FirebasedatabaseProjectsLocationsInstancesCreateSecurity ex
 export declare class FirebasedatabaseProjectsLocationsInstancesCreateRequest extends SpeakeasyBase {
     pathParams: FirebasedatabaseProjectsLocationsInstancesCreatePathParams;
     queryParams: FirebasedatabaseProjectsLocationsInstancesCreateQueryParams;
-    request?: shared.DatabaseInstance;
+    request?: shared.DatabaseInstanceInput;
     security: FirebasedatabaseProjectsLocationsInstancesCreateSecurity;
 }
 export declare class FirebasedatabaseProjectsLocationsInstancesCreateResponse extends SpeakeasyBase {

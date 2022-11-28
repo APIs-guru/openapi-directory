@@ -22,8 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RuleSource } from "./rulesource";
 export var ZapierRuleResponseRequestModeEnum;
 (function (ZapierRuleResponseRequestModeEnum) {
@@ -45,11 +44,11 @@ var ZapierRuleResponseTargetHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], ZapierRuleResponseTargetHeaders.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=value" }),
+        SpeakeasyMetadata({ data: "json, name=value" }),
         __metadata("design:type", String)
     ], ZapierRuleResponseTargetHeaders.prototype, "value", void 0);
     return ZapierRuleResponseTargetHeaders;
@@ -61,15 +60,15 @@ var ZapierRuleResponseTarget = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=headers", elemType: shared.ZapierRuleResponseTargetHeaders }),
+        SpeakeasyMetadata({ data: "json, name=headers", elemType: ZapierRuleResponseTargetHeaders }),
         __metadata("design:type", Array)
     ], ZapierRuleResponseTarget.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "json, name=signingKeyId" }),
+        SpeakeasyMetadata({ data: "json, name=signingKeyId" }),
         __metadata("design:type", String)
     ], ZapierRuleResponseTarget.prototype, "signingKeyId", void 0);
     __decorate([
-        Metadata({ data: "json, name=url" }),
+        SpeakeasyMetadata({ data: "json, name=url" }),
         __metadata("design:type", String)
     ], ZapierRuleResponseTarget.prototype, "url", void 0);
     return ZapierRuleResponseTarget;
@@ -81,47 +80,47 @@ var ZapierRuleResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=_links" }),
+        SpeakeasyMetadata({ data: "json, name=_links" }),
         __metadata("design:type", Map)
     ], ZapierRuleResponse.prototype, "links", void 0);
     __decorate([
-        Metadata({ data: "json, name=appId" }),
+        SpeakeasyMetadata({ data: "json, name=appId" }),
         __metadata("design:type", String)
     ], ZapierRuleResponse.prototype, "appId", void 0);
     __decorate([
-        Metadata({ data: "json, name=created" }),
+        SpeakeasyMetadata({ data: "json, name=created" }),
         __metadata("design:type", Number)
     ], ZapierRuleResponse.prototype, "created", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], ZapierRuleResponse.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=modified" }),
+        SpeakeasyMetadata({ data: "json, name=modified" }),
         __metadata("design:type", Number)
     ], ZapierRuleResponse.prototype, "modified", void 0);
     __decorate([
-        Metadata({ data: "json, name=requestMode" }),
+        SpeakeasyMetadata({ data: "json, name=requestMode" }),
         __metadata("design:type", String)
     ], ZapierRuleResponse.prototype, "requestMode", void 0);
     __decorate([
-        Metadata({ data: "json, name=ruleType" }),
+        SpeakeasyMetadata({ data: "json, name=ruleType" }),
         __metadata("design:type", String)
     ], ZapierRuleResponse.prototype, "ruleType", void 0);
     __decorate([
-        Metadata({ data: "json, name=source" }),
+        SpeakeasyMetadata({ data: "json, name=source" }),
         __metadata("design:type", RuleSource)
     ], ZapierRuleResponse.prototype, "source", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], ZapierRuleResponse.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=target" }),
+        SpeakeasyMetadata({ data: "json, name=target" }),
         __metadata("design:type", ZapierRuleResponseTarget)
     ], ZapierRuleResponse.prototype, "target", void 0);
     __decorate([
-        Metadata({ data: "json, name=version" }),
+        SpeakeasyMetadata({ data: "json, name=version" }),
         __metadata("design:type", String)
     ], ZapierRuleResponse.prototype, "version", void 0);
     return ZapierRuleResponse;

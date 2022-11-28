@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OrganizationConfiguration } from "./organizationconfiguration";
 
 
+
 export class GetServiceSettingsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EnableCrossAccountsDiscovery" })
+  @SpeakeasyMetadata({ data: "json, name=EnableCrossAccountsDiscovery" })
   enableCrossAccountsDiscovery?: boolean;
 
-  @Metadata({ data: "json, name=LicenseManagerResourceShareArn" })
+  @SpeakeasyMetadata({ data: "json, name=LicenseManagerResourceShareArn" })
   licenseManagerResourceShareArn?: string;
 
-  @Metadata({ data: "json, name=OrganizationConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=OrganizationConfiguration" })
   organizationConfiguration?: OrganizationConfiguration;
 
-  @Metadata({ data: "json, name=S3BucketArn" })
+  @SpeakeasyMetadata({ data: "json, name=S3BucketArn" })
   s3BucketArn?: string;
 
-  @Metadata({ data: "json, name=SnsTopicArn" })
+  @SpeakeasyMetadata({ data: "json, name=SnsTopicArn" })
   snsTopicArn?: string;
 }

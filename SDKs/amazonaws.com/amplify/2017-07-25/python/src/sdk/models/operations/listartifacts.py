@@ -1,13 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class ListArtifactsPathParams:
-    app_id: str = field(default=None, metadata={'path_param': { 'field_name': 'appId', 'style': 'simple', 'explode': False }})
-    branch_name: str = field(default=None, metadata={'path_param': { 'field_name': 'branchName', 'style': 'simple', 'explode': False }})
-    job_id: str = field(default=None, metadata={'path_param': { 'field_name': 'jobId', 'style': 'simple', 'explode': False }})
+    app_id: str = field(metadata={'path_param': { 'field_name': 'appId', 'style': 'simple', 'explode': False }})
+    branch_name: str = field(metadata={'path_param': { 'field_name': 'branchName', 'style': 'simple', 'explode': False }})
+    job_id: str = field(metadata={'path_param': { 'field_name': 'jobId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -29,18 +32,18 @@ class ListArtifactsHeaders:
 
 @dataclass
 class ListArtifactsRequest:
-    path_params: ListArtifactsPathParams = field(default=None)
-    query_params: ListArtifactsQueryParams = field(default=None)
-    headers: ListArtifactsHeaders = field(default=None)
+    headers: ListArtifactsHeaders = field()
+    path_params: ListArtifactsPathParams = field()
+    query_params: ListArtifactsQueryParams = field()
     
 
 @dataclass
 class ListArtifactsResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     list_artifacts_result: Optional[shared.ListArtifactsResult] = field(default=None)
-    status_code: int = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PutRegistryNamespacesNamespacePathParams = /** @class */ (function (_super) {
     __extends(PutRegistryNamespacesNamespacePathParams, _super);
@@ -30,7 +30,7 @@ var PutRegistryNamespacesNamespacePathParams = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=namespace" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=namespace" }),
         __metadata("design:type", String)
     ], PutRegistryNamespacesNamespacePathParams.prototype, "namespace", void 0);
     return PutRegistryNamespacesNamespacePathParams;
@@ -42,11 +42,11 @@ var PutRegistryNamespacesNamespaceHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Auth-Project-Id" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Auth-Project-Id" }),
         __metadata("design:type", String)
     ], PutRegistryNamespacesNamespaceHeaders.prototype, "xAuthProjectId", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Auth-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Auth-Token" }),
         __metadata("design:type", String)
     ], PutRegistryNamespacesNamespaceHeaders.prototype, "xAuthToken", void 0);
     return PutRegistryNamespacesNamespaceHeaders;
@@ -58,11 +58,11 @@ var PutRegistryNamespacesNamespaceRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PutRegistryNamespacesNamespacePathParams)
     ], PutRegistryNamespacesNamespaceRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PutRegistryNamespacesNamespaceHeaders)
     ], PutRegistryNamespacesNamespaceRequest.prototype, "headers", void 0);
     return PutRegistryNamespacesNamespaceRequest;
@@ -74,15 +74,15 @@ var PutRegistryNamespacesNamespaceResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PutRegistryNamespacesNamespaceResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Namespace)
     ], PutRegistryNamespacesNamespaceResponse.prototype, "namespace", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PutRegistryNamespacesNamespaceResponse.prototype, "statusCode", void 0);
     return PutRegistryNamespacesNamespaceResponse;

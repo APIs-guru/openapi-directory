@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class DescribeChangeSetQueryParams:
-    catalog: str = field(default=None, metadata={'query_param': { 'field_name': 'catalog', 'style': 'form', 'explode': True }})
-    change_set_id: str = field(default=None, metadata={'query_param': { 'field_name': 'changeSetId', 'style': 'form', 'explode': True }})
+    catalog: str = field(metadata={'query_param': { 'field_name': 'catalog', 'style': 'form', 'explode': True }})
+    change_set_id: str = field(metadata={'query_param': { 'field_name': 'changeSetId', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -22,18 +25,18 @@ class DescribeChangeSetHeaders:
 
 @dataclass
 class DescribeChangeSetRequest:
-    query_params: DescribeChangeSetQueryParams = field(default=None)
-    headers: DescribeChangeSetHeaders = field(default=None)
+    headers: DescribeChangeSetHeaders = field()
+    query_params: DescribeChangeSetQueryParams = field()
     
 
 @dataclass
 class DescribeChangeSetResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     describe_change_set_response: Optional[shared.DescribeChangeSetResponse] = field(default=None)
     internal_service_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

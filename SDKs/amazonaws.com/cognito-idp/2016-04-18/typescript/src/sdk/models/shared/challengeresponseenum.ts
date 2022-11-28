@@ -1,6 +1,7 @@
 
 
+
 export enum ChallengeResponseEnum {
-    Success = "Success"
-,    Failure = "Failure"
+    Success = "Success",
+    Failure = "Failure"
 }

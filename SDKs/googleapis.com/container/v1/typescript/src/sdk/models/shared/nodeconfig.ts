@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AcceleratorConfig } from "./acceleratorconfig";
 import { AdvancedMachineFeatures } from "./advancedmachinefeatures";
 import { ConfidentialNodes } from "./confidentialnodes";
+import { FastSocket } from "./fastsocket";
 import { GcfsConfig } from "./gcfsconfig";
 import { VirtualNic } from "./virtualnic";
 import { NodeKubeletConfig } from "./nodekubeletconfig";
@@ -15,92 +15,99 @@ import { NodeTaint } from "./nodetaint";
 import { WorkloadMetadataConfig } from "./workloadmetadataconfig";
 
 
+
 // NodeConfig
 /** 
  * Parameters that describe the nodes in a cluster. GKE Autopilot clusters do not recognize parameters in `NodeConfig`. Use AutoprovisioningNodePoolDefaults instead.
 **/
 export class NodeConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accelerators", elemType: shared.AcceleratorConfig })
+  @SpeakeasyMetadata({ data: "json, name=accelerators", elemType: AcceleratorConfig })
   accelerators?: AcceleratorConfig[];
 
-  @Metadata({ data: "json, name=advancedMachineFeatures" })
+  @SpeakeasyMetadata({ data: "json, name=advancedMachineFeatures" })
   advancedMachineFeatures?: AdvancedMachineFeatures;
 
-  @Metadata({ data: "json, name=bootDiskKmsKey" })
+  @SpeakeasyMetadata({ data: "json, name=bootDiskKmsKey" })
   bootDiskKmsKey?: string;
 
-  @Metadata({ data: "json, name=confidentialNodes" })
+  @SpeakeasyMetadata({ data: "json, name=confidentialNodes" })
   confidentialNodes?: ConfidentialNodes;
 
-  @Metadata({ data: "json, name=diskSizeGb" })
+  @SpeakeasyMetadata({ data: "json, name=diskSizeGb" })
   diskSizeGb?: number;
 
-  @Metadata({ data: "json, name=diskType" })
+  @SpeakeasyMetadata({ data: "json, name=diskType" })
   diskType?: string;
 
-  @Metadata({ data: "json, name=gcfsConfig" })
+  @SpeakeasyMetadata({ data: "json, name=fastSocket" })
+  fastSocket?: FastSocket;
+
+  @SpeakeasyMetadata({ data: "json, name=gcfsConfig" })
   gcfsConfig?: GcfsConfig;
 
-  @Metadata({ data: "json, name=gvnic" })
+  @SpeakeasyMetadata({ data: "json, name=gvnic" })
   gvnic?: VirtualNic;
 
-  @Metadata({ data: "json, name=imageType" })
+  @SpeakeasyMetadata({ data: "json, name=imageType" })
   imageType?: string;
 
-  @Metadata({ data: "json, name=kubeletConfig" })
+  @SpeakeasyMetadata({ data: "json, name=kubeletConfig" })
   kubeletConfig?: NodeKubeletConfig;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=linuxNodeConfig" })
+  @SpeakeasyMetadata({ data: "json, name=linuxNodeConfig" })
   linuxNodeConfig?: LinuxNodeConfig;
 
-  @Metadata({ data: "json, name=localSsdCount" })
+  @SpeakeasyMetadata({ data: "json, name=localSsdCount" })
   localSsdCount?: number;
 
-  @Metadata({ data: "json, name=loggingConfig" })
+  @SpeakeasyMetadata({ data: "json, name=loggingConfig" })
   loggingConfig?: NodePoolLoggingConfig;
 
-  @Metadata({ data: "json, name=machineType" })
+  @SpeakeasyMetadata({ data: "json, name=machineType" })
   machineType?: string;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: Map<string, string>;
 
-  @Metadata({ data: "json, name=minCpuPlatform" })
+  @SpeakeasyMetadata({ data: "json, name=minCpuPlatform" })
   minCpuPlatform?: string;
 
-  @Metadata({ data: "json, name=nodeGroup" })
+  @SpeakeasyMetadata({ data: "json, name=nodeGroup" })
   nodeGroup?: string;
 
-  @Metadata({ data: "json, name=oauthScopes" })
+  @SpeakeasyMetadata({ data: "json, name=oauthScopes" })
   oauthScopes?: string[];
 
-  @Metadata({ data: "json, name=preemptible" })
+  @SpeakeasyMetadata({ data: "json, name=preemptible" })
   preemptible?: boolean;
 
-  @Metadata({ data: "json, name=reservationAffinity" })
+  @SpeakeasyMetadata({ data: "json, name=reservationAffinity" })
   reservationAffinity?: ReservationAffinity;
 
-  @Metadata({ data: "json, name=sandboxConfig" })
+  @SpeakeasyMetadata({ data: "json, name=resourceLabels" })
+  resourceLabels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=sandboxConfig" })
   sandboxConfig?: SandboxConfig;
 
-  @Metadata({ data: "json, name=serviceAccount" })
+  @SpeakeasyMetadata({ data: "json, name=serviceAccount" })
   serviceAccount?: string;
 
-  @Metadata({ data: "json, name=shieldedInstanceConfig" })
+  @SpeakeasyMetadata({ data: "json, name=shieldedInstanceConfig" })
   shieldedInstanceConfig?: ShieldedInstanceConfig;
 
-  @Metadata({ data: "json, name=spot" })
+  @SpeakeasyMetadata({ data: "json, name=spot" })
   spot?: boolean;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: string[];
 
-  @Metadata({ data: "json, name=taints", elemType: shared.NodeTaint })
+  @SpeakeasyMetadata({ data: "json, name=taints", elemType: NodeTaint })
   taints?: NodeTaint[];
 
-  @Metadata({ data: "json, name=workloadMetadataConfig" })
+  @SpeakeasyMetadata({ data: "json, name=workloadMetadataConfig" })
   workloadMetadataConfig?: WorkloadMetadataConfig;
 }

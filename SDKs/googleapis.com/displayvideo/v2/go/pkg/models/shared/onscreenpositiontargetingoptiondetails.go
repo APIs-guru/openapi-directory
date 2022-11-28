@@ -9,6 +9,8 @@ const (
 	OnScreenPositionTargetingOptionDetailsOnScreenPositionEnumOnScreenPositionBelowTheFold OnScreenPositionTargetingOptionDetailsOnScreenPositionEnum = "ON_SCREEN_POSITION_BELOW_THE_FOLD"
 )
 
+// OnScreenPositionTargetingOptionDetails
+// Represents a targetable on screen position, which could be used by display and video ads. This will be populated in the on_screen_position_details field when targeting_type is `TARGETING_TYPE_ON_SCREEN_POSITION`.
 type OnScreenPositionTargetingOptionDetails struct {
 	OnScreenPosition *OnScreenPositionTargetingOptionDetailsOnScreenPositionEnum `json:"onScreenPosition,omitempty"`
 }

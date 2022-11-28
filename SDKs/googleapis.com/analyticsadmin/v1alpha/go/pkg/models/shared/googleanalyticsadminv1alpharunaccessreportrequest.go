@@ -1,5 +1,7 @@
 package shared
 
+// GoogleAnalyticsAdminV1alphaRunAccessReportRequest
+// The request for a Data Access Record Report.
 type GoogleAnalyticsAdminV1alphaRunAccessReportRequest struct {
 	DateRanges        []GoogleAnalyticsAdminV1alphaAccessDateRange       `json:"dateRanges,omitempty"`
 	DimensionFilter   *GoogleAnalyticsAdminV1alphaAccessFilterExpression `json:"dimensionFilter,omitempty"`

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // DeviceTemplate
 /**
  * An object representing a device for a placement template (see <a>PlacementTemplate</a>).
@@ -33,11 +33,11 @@ var DeviceTemplate = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=callbackOverrides" }),
+        SpeakeasyMetadata({ data: "json, name=callbackOverrides" }),
         __metadata("design:type", Map)
     ], DeviceTemplate.prototype, "callbackOverrides", void 0);
     __decorate([
-        Metadata({ data: "json, name=deviceType" }),
+        SpeakeasyMetadata({ data: "json, name=deviceType" }),
         __metadata("design:type", String)
     ], DeviceTemplate.prototype, "deviceType", void 0);
     return DeviceTemplate;

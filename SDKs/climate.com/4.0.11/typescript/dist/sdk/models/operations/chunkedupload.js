@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ChunkedUploadPathParams = /** @class */ (function (_super) {
     __extends(ChunkedUploadPathParams, _super);
@@ -30,7 +30,7 @@ var ChunkedUploadPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=uploadId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=uploadId" }),
         __metadata("design:type", String)
     ], ChunkedUploadPathParams.prototype, "uploadId", void 0);
     return ChunkedUploadPathParams;
@@ -42,53 +42,29 @@ var ChunkedUploadHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Content-Range" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Content-Range" }),
         __metadata("design:type", String)
     ], ChunkedUploadHeaders.prototype, "contentRange", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Content-Type" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Content-Type" }),
         __metadata("design:type", String)
     ], ChunkedUploadHeaders.prototype, "contentType", void 0);
     return ChunkedUploadHeaders;
 }(SpeakeasyBase));
 export { ChunkedUploadHeaders };
-var ChunkedUploadSecurityOption1 = /** @class */ (function (_super) {
-    __extends(ChunkedUploadSecurityOption1, _super);
-    function ChunkedUploadSecurityOption1() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
-        __metadata("design:type", shared.SchemeApiKey)
-    ], ChunkedUploadSecurityOption1.prototype, "apiKey", void 0);
-    return ChunkedUploadSecurityOption1;
-}(SpeakeasyBase));
-export { ChunkedUploadSecurityOption1 };
-var ChunkedUploadSecurityOption2 = /** @class */ (function (_super) {
-    __extends(ChunkedUploadSecurityOption2, _super);
-    function ChunkedUploadSecurityOption2() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
-        __metadata("design:type", shared.SchemeOauth2AuthorizationCode)
-    ], ChunkedUploadSecurityOption2.prototype, "oauth2AuthorizationCode", void 0);
-    return ChunkedUploadSecurityOption2;
-}(SpeakeasyBase));
-export { ChunkedUploadSecurityOption2 };
 var ChunkedUploadSecurity = /** @class */ (function (_super) {
     __extends(ChunkedUploadSecurity, _super);
     function ChunkedUploadSecurity() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", ChunkedUploadSecurityOption1)
-    ], ChunkedUploadSecurity.prototype, "option1", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        __metadata("design:type", shared.SchemeApiKey)
+    ], ChunkedUploadSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", ChunkedUploadSecurityOption2)
-    ], ChunkedUploadSecurity.prototype, "option2", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
+        __metadata("design:type", shared.SchemeOauth2AuthorizationCode)
+    ], ChunkedUploadSecurity.prototype, "oauth2AuthorizationCode", void 0);
     return ChunkedUploadSecurity;
 }(SpeakeasyBase));
 export { ChunkedUploadSecurity };
@@ -98,15 +74,15 @@ var ChunkedUploadRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ChunkedUploadPathParams)
     ], ChunkedUploadRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ChunkedUploadHeaders)
     ], ChunkedUploadRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ChunkedUploadSecurity)
     ], ChunkedUploadRequest.prototype, "security", void 0);
     return ChunkedUploadRequest;
@@ -118,19 +94,19 @@ var ChunkedUploadResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ChunkedUploadResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Error)
     ], ChunkedUploadResponse.prototype, "error", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], ChunkedUploadResponse.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ChunkedUploadResponse.prototype, "statusCode", void 0);
     return ChunkedUploadResponse;

@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class OauthAuthorizationsGetOrCreateAuthorizationForAppPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=client_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=client_id" })
   clientId: string;
 }
 
 
 export class OauthAuthorizationsGetOrCreateAuthorizationForAppRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=client_secret" })
+  @SpeakeasyMetadata({ data: "json, name=client_secret" })
   clientSecret: string;
 
-  @Metadata({ data: "json, name=fingerprint" })
+  @SpeakeasyMetadata({ data: "json, name=fingerprint" })
   fingerprint?: string;
 
-  @Metadata({ data: "json, name=note" })
+  @SpeakeasyMetadata({ data: "json, name=note" })
   note?: string;
 
-  @Metadata({ data: "json, name=note_url" })
+  @SpeakeasyMetadata({ data: "json, name=note_url" })
   noteUrl?: string;
 
-  @Metadata({ data: "json, name=scopes" })
+  @SpeakeasyMetadata({ data: "json, name=scopes" })
   scopes?: string[];
 }
 
 
 export class OauthAuthorizationsGetOrCreateAuthorizationForAppRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: OauthAuthorizationsGetOrCreateAuthorizationForAppPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: OauthAuthorizationsGetOrCreateAuthorizationForAppRequestBody;
 }
 
 
 export class OauthAuthorizationsGetOrCreateAuthorizationForAppResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   authorization?: shared.Authorization;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationError?: shared.ValidationError;
 }

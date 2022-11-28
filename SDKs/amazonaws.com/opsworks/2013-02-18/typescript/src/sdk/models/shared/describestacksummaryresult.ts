@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StackSummary } from "./stacksummary";
+
 
 
 // DescribeStackSummaryResult
@@ -7,6 +8,6 @@ import { StackSummary } from "./stacksummary";
  * Contains the response to a <code>DescribeStackSummary</code> request.
 **/
 export class DescribeStackSummaryResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=StackSummary" })
+  @SpeakeasyMetadata({ data: "json, name=StackSummary" })
   stackSummary?: StackSummary;
 }

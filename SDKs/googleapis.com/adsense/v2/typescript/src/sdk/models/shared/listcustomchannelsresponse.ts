@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CustomChannel } from "./customchannel";
+
 
 
 // ListCustomChannelsResponse
@@ -8,9 +8,9 @@ import { CustomChannel } from "./customchannel";
  * Response definition for the custom channel list rpc.
 **/
 export class ListCustomChannelsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=customChannels", elemType: shared.CustomChannel })
+  @SpeakeasyMetadata({ data: "json, name=customChannels", elemType: CustomChannel })
   customChannels?: CustomChannel[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

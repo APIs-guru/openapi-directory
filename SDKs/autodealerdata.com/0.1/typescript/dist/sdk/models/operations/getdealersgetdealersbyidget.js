@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetDealersGetDealersByIdGetQueryParams = /** @class */ (function (_super) {
     __extends(GetDealersGetDealersByIdGetQueryParams, _super);
@@ -30,11 +30,11 @@ var GetDealersGetDealersByIdGetQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=dealerID" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dealerID" }),
         __metadata("design:type", Number)
     ], GetDealersGetDealersByIdGetQueryParams.prototype, "dealerId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=jwt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=jwt" }),
         __metadata("design:type", String)
     ], GetDealersGetDealersByIdGetQueryParams.prototype, "jwt", void 0);
     return GetDealersGetDealersByIdGetQueryParams;
@@ -46,7 +46,7 @@ var GetDealersGetDealersByIdGetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetDealersGetDealersByIdGetQueryParams)
     ], GetDealersGetDealersByIdGetRequest.prototype, "queryParams", void 0);
     return GetDealersGetDealersByIdGetRequest;
@@ -58,19 +58,19 @@ var GetDealersGetDealersByIdGetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetDealersGetDealersByIdGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.DealershipDataResp)
     ], GetDealersGetDealersByIdGetResponse.prototype, "dealershipDataResp", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.HttpValidationError)
     ], GetDealersGetDealersByIdGetResponse.prototype, "httpValidationError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetDealersGetDealersByIdGetResponse.prototype, "statusCode", void 0);
     return GetDealersGetDealersByIdGetResponse;

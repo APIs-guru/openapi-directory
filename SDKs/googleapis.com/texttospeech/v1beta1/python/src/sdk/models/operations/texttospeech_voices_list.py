@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -21,19 +22,19 @@ class TexttospeechVoicesListQueryParams:
 
 @dataclass
 class TexttospeechVoicesListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class TexttospeechVoicesListRequest:
-    query_params: TexttospeechVoicesListQueryParams = field(default=None)
-    security: TexttospeechVoicesListSecurity = field(default=None)
+    query_params: TexttospeechVoicesListQueryParams = field()
+    security: TexttospeechVoicesListSecurity = field()
     
 
 @dataclass
 class TexttospeechVoicesListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_voices_response: Optional[shared.ListVoicesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

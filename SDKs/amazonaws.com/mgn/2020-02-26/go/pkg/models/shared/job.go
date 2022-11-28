@@ -1,5 +1,7 @@
 package shared
 
+// Job
+// Job.
 type Job struct {
 	Arn                  *string               `json:"arn,omitempty"`
 	CreationDateTime     *string               `json:"creationDateTime,omitempty"`

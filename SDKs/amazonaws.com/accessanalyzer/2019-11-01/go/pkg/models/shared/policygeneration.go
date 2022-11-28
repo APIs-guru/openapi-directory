@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// PolicyGeneration
+// Contains details about the policy generation status and properties.
 type PolicyGeneration struct {
 	CompletedOn  *time.Time    `json:"completedOn,omitempty"`
 	JobID        string        `json:"jobId"`

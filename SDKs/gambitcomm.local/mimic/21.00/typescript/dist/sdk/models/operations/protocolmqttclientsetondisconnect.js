@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ProtocolMqttClientSetOnDisconnectPathParams = /** @class */ (function (_super) {
     __extends(ProtocolMqttClientSetOnDisconnectPathParams, _super);
     function ProtocolMqttClientSetOnDisconnectPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=action" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=action" }),
         __metadata("design:type", String)
     ], ProtocolMqttClientSetOnDisconnectPathParams.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
         __metadata("design:type", Number)
     ], ProtocolMqttClientSetOnDisconnectPathParams.prototype, "agentNum", void 0);
     return ProtocolMqttClientSetOnDisconnectPathParams;
@@ -45,7 +45,7 @@ var ProtocolMqttClientSetOnDisconnectRequest = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProtocolMqttClientSetOnDisconnectPathParams)
     ], ProtocolMqttClientSetOnDisconnectRequest.prototype, "pathParams", void 0);
     return ProtocolMqttClientSetOnDisconnectRequest;
@@ -57,15 +57,15 @@ var ProtocolMqttClientSetOnDisconnectResponse = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolMqttClientSetOnDisconnectResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProtocolMqttClientSetOnDisconnectResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Array)
     ], ProtocolMqttClientSetOnDisconnectResponse.prototype, "protocolMqttClientSetOnDisconnect200ApplicationJsonInt32Integers", void 0);
     return ProtocolMqttClientSetOnDisconnectResponse;

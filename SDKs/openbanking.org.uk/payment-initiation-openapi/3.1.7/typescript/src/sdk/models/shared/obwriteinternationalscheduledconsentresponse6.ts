@@ -1,19 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ObActiveOrHistoricCurrencyAndAmount } from "./obactiveorhistoriccurrencyandamount";
 import { ObChargeBearerType1CodeEnum } from "./obchargebearertype1codeenum";
 import { ObCashAccountDebtor4 } from "./obcashaccountdebtor4";
-import { ObChargeBearerType1CodeEnum } from "./obchargebearertype1codeenum";
-import { ObPostalAddress6 } from "./obpostaladdress6";
 import { ObPostalAddress6 } from "./obpostaladdress6";
 import { ObscaSupportData1 } from "./obscasupportdata1";
 import { Links } from "./links";
 import { Meta } from "./meta";
 import { ObRisk1 } from "./obrisk1";
 
+
 export enum ObWriteInternationalScheduledConsentResponse6DataAuthorisationAuthorisationTypeEnum {
-    Any = "Any"
-,    Single = "Single"
+    Any = "Any",
+    Single = "Single"
 }
 
 
@@ -22,10 +20,10 @@ export enum ObWriteInternationalScheduledConsentResponse6DataAuthorisationAuthor
  * The authorisation type request from the TPP.
 **/
 export class ObWriteInternationalScheduledConsentResponse6DataAuthorisation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AuthorisationType" })
+  @SpeakeasyMetadata({ data: "json, name=AuthorisationType" })
   authorisationType: ObWriteInternationalScheduledConsentResponse6DataAuthorisationAuthorisationTypeEnum;
 
-  @Metadata({ data: "json, name=CompletionDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=CompletionDateTime" })
   completionDateTime?: Date;
 }
 
@@ -35,20 +33,20 @@ export class ObWriteInternationalScheduledConsentResponse6DataAuthorisation exte
  * Set of elements used to provide details of a charge for the payment initiation.
 **/
 export class ObWriteInternationalScheduledConsentResponse6DataCharges extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Amount" })
+  @SpeakeasyMetadata({ data: "json, name=Amount" })
   amount: ObActiveOrHistoricCurrencyAndAmount;
 
-  @Metadata({ data: "json, name=ChargeBearer" })
+  @SpeakeasyMetadata({ data: "json, name=ChargeBearer" })
   chargeBearer: ObChargeBearerType1CodeEnum;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type: string;
 }
 
 export enum ObWriteInternationalScheduledConsentResponse6DataExchangeRateInformationRateTypeEnum {
-    Actual = "Actual"
-,    Agreed = "Agreed"
-,    Indicative = "Indicative"
+    Actual = "Actual",
+    Agreed = "Agreed",
+    Indicative = "Indicative"
 }
 
 
@@ -57,19 +55,19 @@ export enum ObWriteInternationalScheduledConsentResponse6DataExchangeRateInforma
  * Further detailed information on the exchange rate that has been used in the payment transaction.
 **/
 export class ObWriteInternationalScheduledConsentResponse6DataExchangeRateInformation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ContractIdentification" })
+  @SpeakeasyMetadata({ data: "json, name=ContractIdentification" })
   contractIdentification?: string;
 
-  @Metadata({ data: "json, name=ExchangeRate" })
+  @SpeakeasyMetadata({ data: "json, name=ExchangeRate" })
   exchangeRate: number;
 
-  @Metadata({ data: "json, name=ExpirationDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=ExpirationDateTime" })
   expirationDateTime?: Date;
 
-  @Metadata({ data: "json, name=RateType" })
+  @SpeakeasyMetadata({ data: "json, name=RateType" })
   rateType: ObWriteInternationalScheduledConsentResponse6DataExchangeRateInformationRateTypeEnum;
 
-  @Metadata({ data: "json, name=UnitCurrency" })
+  @SpeakeasyMetadata({ data: "json, name=UnitCurrency" })
   unitCurrency: string;
 }
 
@@ -79,10 +77,10 @@ export class ObWriteInternationalScheduledConsentResponse6DataExchangeRateInform
  * Party to which an amount of money is due.
 **/
 export class ObWriteInternationalScheduledConsentResponse6DataInitiationCreditor extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=PostalAddress" })
+  @SpeakeasyMetadata({ data: "json, name=PostalAddress" })
   postalAddress?: ObPostalAddress6;
 }
 
@@ -92,16 +90,16 @@ export class ObWriteInternationalScheduledConsentResponse6DataInitiationCreditor
  * Unambiguous identification of the account of the creditor to which a credit entry will be posted as a result of the payment transaction.
 **/
 export class ObWriteInternationalScheduledConsentResponse6DataInitiationCreditorAccount extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Identification" })
+  @SpeakeasyMetadata({ data: "json, name=Identification" })
   identification: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 
-  @Metadata({ data: "json, name=SchemeName" })
+  @SpeakeasyMetadata({ data: "json, name=SchemeName" })
   schemeName: string;
 
-  @Metadata({ data: "json, name=SecondaryIdentification" })
+  @SpeakeasyMetadata({ data: "json, name=SecondaryIdentification" })
   secondaryIdentification?: string;
 }
 
@@ -111,16 +109,16 @@ export class ObWriteInternationalScheduledConsentResponse6DataInitiationCreditor
  * Financial institution servicing an account for the creditor.
 **/
 export class ObWriteInternationalScheduledConsentResponse6DataInitiationCreditorAgent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Identification" })
+  @SpeakeasyMetadata({ data: "json, name=Identification" })
   identification?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=PostalAddress" })
+  @SpeakeasyMetadata({ data: "json, name=PostalAddress" })
   postalAddress?: ObPostalAddress6;
 
-  @Metadata({ data: "json, name=SchemeName" })
+  @SpeakeasyMetadata({ data: "json, name=SchemeName" })
   schemeName?: string;
 }
 
@@ -130,23 +128,23 @@ export class ObWriteInternationalScheduledConsentResponse6DataInitiationCreditor
  * Unambiguous identification of the account of the debtor to which a debit entry will be made as a result of the transaction.
 **/
 export class ObWriteInternationalScheduledConsentResponse6DataInitiationDebtorAccount extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Identification" })
+  @SpeakeasyMetadata({ data: "json, name=Identification" })
   identification: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=SchemeName" })
+  @SpeakeasyMetadata({ data: "json, name=SchemeName" })
   schemeName: string;
 
-  @Metadata({ data: "json, name=SecondaryIdentification" })
+  @SpeakeasyMetadata({ data: "json, name=SecondaryIdentification" })
   secondaryIdentification?: string;
 }
 
 export enum ObWriteInternationalScheduledConsentResponse6DataInitiationExchangeRateInformationRateTypeEnum {
-    Actual = "Actual"
-,    Agreed = "Agreed"
-,    Indicative = "Indicative"
+    Actual = "Actual",
+    Agreed = "Agreed",
+    Indicative = "Indicative"
 }
 
 
@@ -155,16 +153,16 @@ export enum ObWriteInternationalScheduledConsentResponse6DataInitiationExchangeR
  * Provides details on the currency exchange rate and contract.
 **/
 export class ObWriteInternationalScheduledConsentResponse6DataInitiationExchangeRateInformation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ContractIdentification" })
+  @SpeakeasyMetadata({ data: "json, name=ContractIdentification" })
   contractIdentification?: string;
 
-  @Metadata({ data: "json, name=ExchangeRate" })
+  @SpeakeasyMetadata({ data: "json, name=ExchangeRate" })
   exchangeRate?: number;
 
-  @Metadata({ data: "json, name=RateType" })
+  @SpeakeasyMetadata({ data: "json, name=RateType" })
   rateType: ObWriteInternationalScheduledConsentResponse6DataInitiationExchangeRateInformationRateTypeEnum;
 
-  @Metadata({ data: "json, name=UnitCurrency" })
+  @SpeakeasyMetadata({ data: "json, name=UnitCurrency" })
   unitCurrency: string;
 }
 
@@ -175,16 +173,16 @@ export class ObWriteInternationalScheduledConsentResponse6DataInitiationExchange
  * Usage: This amount has to be transported unchanged through the transaction chain.
 **/
 export class ObWriteInternationalScheduledConsentResponse6DataInitiationInstructedAmount extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Amount" })
+  @SpeakeasyMetadata({ data: "json, name=Amount" })
   amount: string;
 
-  @Metadata({ data: "json, name=Currency" })
+  @SpeakeasyMetadata({ data: "json, name=Currency" })
   currency: string;
 }
 
 export enum ObWriteInternationalScheduledConsentResponse6DataInitiationInstructionPriorityEnum {
-    Normal = "Normal"
-,    Urgent = "Urgent"
+    Normal = "Normal",
+    Urgent = "Urgent"
 }
 
 
@@ -193,10 +191,10 @@ export enum ObWriteInternationalScheduledConsentResponse6DataInitiationInstructi
  * Information supplied to enable the matching of an entry with the items that the transfer is intended to settle, such as commercial invoices in an accounts' receivable system.
 **/
 export class ObWriteInternationalScheduledConsentResponse6DataInitiationRemittanceInformation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Reference" })
+  @SpeakeasyMetadata({ data: "json, name=Reference" })
   reference?: string;
 
-  @Metadata({ data: "json, name=Unstructured" })
+  @SpeakeasyMetadata({ data: "json, name=Unstructured" })
   unstructured?: string;
 }
 
@@ -206,58 +204,58 @@ export class ObWriteInternationalScheduledConsentResponse6DataInitiationRemittan
  * The Initiation payload is sent by the initiating party to the ASPSP. It is used to request movement of funds from the debtor account to a creditor for a single scheduled international payment.
 **/
 export class ObWriteInternationalScheduledConsentResponse6DataInitiation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ChargeBearer" })
+  @SpeakeasyMetadata({ data: "json, name=ChargeBearer" })
   chargeBearer?: ObChargeBearerType1CodeEnum;
 
-  @Metadata({ data: "json, name=Creditor" })
+  @SpeakeasyMetadata({ data: "json, name=Creditor" })
   creditor?: ObWriteInternationalScheduledConsentResponse6DataInitiationCreditor;
 
-  @Metadata({ data: "json, name=CreditorAccount" })
+  @SpeakeasyMetadata({ data: "json, name=CreditorAccount" })
   creditorAccount: ObWriteInternationalScheduledConsentResponse6DataInitiationCreditorAccount;
 
-  @Metadata({ data: "json, name=CreditorAgent" })
+  @SpeakeasyMetadata({ data: "json, name=CreditorAgent" })
   creditorAgent?: ObWriteInternationalScheduledConsentResponse6DataInitiationCreditorAgent;
 
-  @Metadata({ data: "json, name=CurrencyOfTransfer" })
+  @SpeakeasyMetadata({ data: "json, name=CurrencyOfTransfer" })
   currencyOfTransfer: string;
 
-  @Metadata({ data: "json, name=DebtorAccount" })
+  @SpeakeasyMetadata({ data: "json, name=DebtorAccount" })
   debtorAccount?: ObWriteInternationalScheduledConsentResponse6DataInitiationDebtorAccount;
 
-  @Metadata({ data: "json, name=DestinationCountryCode" })
+  @SpeakeasyMetadata({ data: "json, name=DestinationCountryCode" })
   destinationCountryCode?: string;
 
-  @Metadata({ data: "json, name=EndToEndIdentification" })
+  @SpeakeasyMetadata({ data: "json, name=EndToEndIdentification" })
   endToEndIdentification?: string;
 
-  @Metadata({ data: "json, name=ExchangeRateInformation" })
+  @SpeakeasyMetadata({ data: "json, name=ExchangeRateInformation" })
   exchangeRateInformation?: ObWriteInternationalScheduledConsentResponse6DataInitiationExchangeRateInformation;
 
-  @Metadata({ data: "json, name=ExtendedPurpose" })
+  @SpeakeasyMetadata({ data: "json, name=ExtendedPurpose" })
   extendedPurpose?: string;
 
-  @Metadata({ data: "json, name=InstructedAmount" })
+  @SpeakeasyMetadata({ data: "json, name=InstructedAmount" })
   instructedAmount: ObWriteInternationalScheduledConsentResponse6DataInitiationInstructedAmount;
 
-  @Metadata({ data: "json, name=InstructionIdentification" })
+  @SpeakeasyMetadata({ data: "json, name=InstructionIdentification" })
   instructionIdentification: string;
 
-  @Metadata({ data: "json, name=InstructionPriority" })
+  @SpeakeasyMetadata({ data: "json, name=InstructionPriority" })
   instructionPriority?: ObWriteInternationalScheduledConsentResponse6DataInitiationInstructionPriorityEnum;
 
-  @Metadata({ data: "json, name=LocalInstrument" })
+  @SpeakeasyMetadata({ data: "json, name=LocalInstrument" })
   localInstrument?: string;
 
-  @Metadata({ data: "json, name=Purpose" })
+  @SpeakeasyMetadata({ data: "json, name=Purpose" })
   purpose?: string;
 
-  @Metadata({ data: "json, name=RemittanceInformation" })
+  @SpeakeasyMetadata({ data: "json, name=RemittanceInformation" })
   remittanceInformation?: ObWriteInternationalScheduledConsentResponse6DataInitiationRemittanceInformation;
 
-  @Metadata({ data: "json, name=RequestedExecutionDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=RequestedExecutionDateTime" })
   requestedExecutionDateTime: Date;
 
-  @Metadata({ data: "json, name=SupplementaryData" })
+  @SpeakeasyMetadata({ data: "json, name=SupplementaryData" })
   supplementaryData?: Map<string, any>;
 }
 
@@ -266,76 +264,76 @@ export enum ObWriteInternationalScheduledConsentResponse6DataPermissionEnum {
 }
 
 export enum ObWriteInternationalScheduledConsentResponse6DataReadRefundAccountEnum {
-    No = "No"
-,    Yes = "Yes"
+    No = "No",
+    Yes = "Yes"
 }
 
 export enum ObWriteInternationalScheduledConsentResponse6DataStatusEnum {
-    Authorised = "Authorised"
-,    AwaitingAuthorisation = "AwaitingAuthorisation"
-,    Consumed = "Consumed"
-,    Rejected = "Rejected"
+    Authorised = "Authorised",
+    AwaitingAuthorisation = "AwaitingAuthorisation",
+    Consumed = "Consumed",
+    Rejected = "Rejected"
 }
 
 
 export class ObWriteInternationalScheduledConsentResponse6Data extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Authorisation" })
+  @SpeakeasyMetadata({ data: "json, name=Authorisation" })
   authorisation?: ObWriteInternationalScheduledConsentResponse6DataAuthorisation;
 
-  @Metadata({ data: "json, name=Charges", elemType: shared.ObWriteInternationalScheduledConsentResponse6DataCharges })
+  @SpeakeasyMetadata({ data: "json, name=Charges", elemType: ObWriteInternationalScheduledConsentResponse6DataCharges })
   charges?: ObWriteInternationalScheduledConsentResponse6DataCharges[];
 
-  @Metadata({ data: "json, name=ConsentId" })
+  @SpeakeasyMetadata({ data: "json, name=ConsentId" })
   consentId: string;
 
-  @Metadata({ data: "json, name=CreationDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationDateTime" })
   creationDateTime: Date;
 
-  @Metadata({ data: "json, name=CutOffDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=CutOffDateTime" })
   cutOffDateTime?: Date;
 
-  @Metadata({ data: "json, name=Debtor" })
+  @SpeakeasyMetadata({ data: "json, name=Debtor" })
   debtor?: ObCashAccountDebtor4;
 
-  @Metadata({ data: "json, name=ExchangeRateInformation" })
+  @SpeakeasyMetadata({ data: "json, name=ExchangeRateInformation" })
   exchangeRateInformation?: ObWriteInternationalScheduledConsentResponse6DataExchangeRateInformation;
 
-  @Metadata({ data: "json, name=ExpectedExecutionDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=ExpectedExecutionDateTime" })
   expectedExecutionDateTime?: Date;
 
-  @Metadata({ data: "json, name=ExpectedSettlementDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=ExpectedSettlementDateTime" })
   expectedSettlementDateTime?: Date;
 
-  @Metadata({ data: "json, name=Initiation" })
+  @SpeakeasyMetadata({ data: "json, name=Initiation" })
   initiation: ObWriteInternationalScheduledConsentResponse6DataInitiation;
 
-  @Metadata({ data: "json, name=Permission" })
+  @SpeakeasyMetadata({ data: "json, name=Permission" })
   permission: ObWriteInternationalScheduledConsentResponse6DataPermissionEnum;
 
-  @Metadata({ data: "json, name=ReadRefundAccount" })
+  @SpeakeasyMetadata({ data: "json, name=ReadRefundAccount" })
   readRefundAccount?: ObWriteInternationalScheduledConsentResponse6DataReadRefundAccountEnum;
 
-  @Metadata({ data: "json, name=SCASupportData" })
+  @SpeakeasyMetadata({ data: "json, name=SCASupportData" })
   scaSupportData?: ObscaSupportData1;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status: ObWriteInternationalScheduledConsentResponse6DataStatusEnum;
 
-  @Metadata({ data: "json, name=StatusUpdateDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=StatusUpdateDateTime" })
   statusUpdateDateTime: Date;
 }
 
 
 export class ObWriteInternationalScheduledConsentResponse6 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Data" })
+  @SpeakeasyMetadata({ data: "json, name=Data" })
   data: ObWriteInternationalScheduledConsentResponse6Data;
 
-  @Metadata({ data: "json, name=Links" })
+  @SpeakeasyMetadata({ data: "json, name=Links" })
   links?: Links;
 
-  @Metadata({ data: "json, name=Meta" })
+  @SpeakeasyMetadata({ data: "json, name=Meta" })
   meta?: Meta;
 
-  @Metadata({ data: "json, name=Risk" })
+  @SpeakeasyMetadata({ data: "json, name=Risk" })
   risk: ObRisk1;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BatchClearValuesRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The request for clearing more than one range of values in a spreadsheet.
 **/
 export class BatchClearValuesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ranges" })
+  @SpeakeasyMetadata({ data: "json, name=ranges" })
   ranges?: string[];
 }

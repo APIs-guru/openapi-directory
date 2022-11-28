@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import plan
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AppConfigSubscription:
-    plans: Optional[List[plan.Plan]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'plans' }})
+    plans: Optional[List[Plan]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('plans') }})
     

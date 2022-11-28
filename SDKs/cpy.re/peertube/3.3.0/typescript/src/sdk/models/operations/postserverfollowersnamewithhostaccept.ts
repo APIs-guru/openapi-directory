@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostServerFollowersNameWithHostAcceptPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=nameWithHost" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=nameWithHost" })
   nameWithHost: string;
 }
 
 
 export class PostServerFollowersNameWithHostAcceptSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oAuth2: shared.SchemeOAuth2;
 }
 
 
 export class PostServerFollowersNameWithHostAcceptRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PostServerFollowersNameWithHostAcceptPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: PostServerFollowersNameWithHostAcceptSecurity;
 }
 
 
 export class PostServerFollowersNameWithHostAcceptResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

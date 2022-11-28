@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import customlisttargetingsetting
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CustomListGroup:
-    settings: Optional[List[customlisttargetingsetting.CustomListTargetingSetting]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'settings' }})
+    r"""CustomListGroup
+    Details of custom list group. All custom list targeting settings are logically ‘OR’ of each other.
+    """
+    
+    settings: Optional[List[CustomListTargetingSetting]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('settings') }})
     

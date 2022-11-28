@@ -8,3 +8,10 @@ type Tag struct {
 	Slug        string  `json:"slug"`
 	TaggedItems *int64  `json:"tagged_items,omitempty"`
 }
+
+type TagInput struct {
+	Color       *string `json:"color,omitempty"`
+	Description *string `json:"description,omitempty"`
+	Name        string  `json:"name"`
+	Slug        string  `json:"slug"`
+}

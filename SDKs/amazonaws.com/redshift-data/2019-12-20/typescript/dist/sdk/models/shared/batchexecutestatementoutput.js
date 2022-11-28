@@ -22,34 +22,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var BatchExecuteStatementOutput = /** @class */ (function (_super) {
     __extends(BatchExecuteStatementOutput, _super);
     function BatchExecuteStatementOutput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ClusterIdentifier" }),
+        SpeakeasyMetadata({ data: "json, name=ClusterIdentifier" }),
         __metadata("design:type", String)
     ], BatchExecuteStatementOutput.prototype, "clusterIdentifier", void 0);
     __decorate([
-        Metadata({ data: "json, name=CreatedAt" }),
+        SpeakeasyMetadata({ data: "json, name=CreatedAt" }),
         __metadata("design:type", Date)
     ], BatchExecuteStatementOutput.prototype, "createdAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=Database" }),
+        SpeakeasyMetadata({ data: "json, name=Database" }),
         __metadata("design:type", String)
     ], BatchExecuteStatementOutput.prototype, "database", void 0);
     __decorate([
-        Metadata({ data: "json, name=DbUser" }),
+        SpeakeasyMetadata({ data: "json, name=DbUser" }),
         __metadata("design:type", String)
     ], BatchExecuteStatementOutput.prototype, "dbUser", void 0);
     __decorate([
-        Metadata({ data: "json, name=Id" }),
+        SpeakeasyMetadata({ data: "json, name=Id" }),
         __metadata("design:type", String)
     ], BatchExecuteStatementOutput.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=SecretArn" }),
+        SpeakeasyMetadata({ data: "json, name=SecretArn" }),
         __metadata("design:type", String)
     ], BatchExecuteStatementOutput.prototype, "secretArn", void 0);
     return BatchExecuteStatementOutput;

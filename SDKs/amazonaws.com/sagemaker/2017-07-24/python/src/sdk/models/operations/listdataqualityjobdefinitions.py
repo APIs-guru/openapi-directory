@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -14,6 +18,7 @@ class ListDataQualityJobDefinitionsXAmzTargetEnum(str, Enum):
 
 @dataclass
 class ListDataQualityJobDefinitionsHeaders:
+    x_amz_target: ListDataQualityJobDefinitionsXAmzTargetEnum = field(metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm', 'style': 'simple', 'explode': False }})
     x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256', 'style': 'simple', 'explode': False }})
     x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential', 'style': 'simple', 'explode': False }})
@@ -21,19 +26,18 @@ class ListDataQualityJobDefinitionsHeaders:
     x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token', 'style': 'simple', 'explode': False }})
     x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature', 'style': 'simple', 'explode': False }})
     x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders', 'style': 'simple', 'explode': False }})
-    x_amz_target: ListDataQualityJobDefinitionsXAmzTargetEnum = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ListDataQualityJobDefinitionsRequest:
-    query_params: ListDataQualityJobDefinitionsQueryParams = field(default=None)
-    headers: ListDataQualityJobDefinitionsHeaders = field(default=None)
-    request: shared.ListDataQualityJobDefinitionsRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ListDataQualityJobDefinitionsHeaders = field()
+    query_params: ListDataQualityJobDefinitionsQueryParams = field()
+    request: shared.ListDataQualityJobDefinitionsRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ListDataQualityJobDefinitionsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_data_quality_job_definitions_response: Optional[shared.ListDataQualityJobDefinitionsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

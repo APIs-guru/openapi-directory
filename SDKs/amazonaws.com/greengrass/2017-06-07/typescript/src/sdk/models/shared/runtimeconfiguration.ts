@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TelemetryConfiguration } from "./telemetryconfiguration";
+
 
 
 // RuntimeConfiguration
@@ -7,6 +8,6 @@ import { TelemetryConfiguration } from "./telemetryconfiguration";
  * Runtime configuration for a thing.
 **/
 export class RuntimeConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=TelemetryConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=TelemetryConfiguration" })
   telemetryConfiguration?: TelemetryConfiguration;
 }

@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum LogicalNetworkInterfaceNetworkTypeEnum {
-    TypeUnspecified = "TYPE_UNSPECIFIED"
-,    Client = "CLIENT"
-,    Private = "PRIVATE"
+    TypeUnspecified = "TYPE_UNSPECIFIED",
+    Client = "CLIENT",
+    Private = "PRIVATE"
 }
 
 
@@ -12,18 +13,18 @@ export enum LogicalNetworkInterfaceNetworkTypeEnum {
  * Each logical network interface is effectively a network and IP pair.
 **/
 export class LogicalNetworkInterface extends SpeakeasyBase {
-  @Metadata({ data: "json, name=defaultGateway" })
+  @SpeakeasyMetadata({ data: "json, name=defaultGateway" })
   defaultGateway?: boolean;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=ipAddress" })
+  @SpeakeasyMetadata({ data: "json, name=ipAddress" })
   ipAddress?: string;
 
-  @Metadata({ data: "json, name=network" })
+  @SpeakeasyMetadata({ data: "json, name=network" })
   network?: string;
 
-  @Metadata({ data: "json, name=networkType" })
+  @SpeakeasyMetadata({ data: "json, name=networkType" })
   networkType?: LogicalNetworkInterfaceNetworkTypeEnum;
 }

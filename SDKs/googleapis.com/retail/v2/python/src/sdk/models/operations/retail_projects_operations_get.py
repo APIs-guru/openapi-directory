@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class RetailProjectsOperationsGetPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class RetailProjectsOperationsGetQueryParams:
 
 @dataclass
 class RetailProjectsOperationsGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class RetailProjectsOperationsGetRequest:
-    path_params: RetailProjectsOperationsGetPathParams = field(default=None)
-    query_params: RetailProjectsOperationsGetQueryParams = field(default=None)
-    security: RetailProjectsOperationsGetSecurity = field(default=None)
+    path_params: RetailProjectsOperationsGetPathParams = field()
+    query_params: RetailProjectsOperationsGetQueryParams = field()
+    security: RetailProjectsOperationsGetSecurity = field()
     
 
 @dataclass
 class RetailProjectsOperationsGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_longrunning_operation: Optional[shared.GoogleLongrunningOperation] = field(default=None)
-    status_code: int = field(default=None)
     

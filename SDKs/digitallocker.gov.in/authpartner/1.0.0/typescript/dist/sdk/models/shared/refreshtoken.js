@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var RefreshTokenGrantTypeEnum;
 (function (RefreshTokenGrantTypeEnum) {
     RefreshTokenGrantTypeEnum["RefreshToken"] = "refresh_token";
@@ -33,19 +33,19 @@ var RefreshToken = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=client_id" }),
+        SpeakeasyMetadata({ data: "json, name=client_id" }),
         __metadata("design:type", String)
     ], RefreshToken.prototype, "clientId", void 0);
     __decorate([
-        Metadata({ data: "json, name=client_secret" }),
+        SpeakeasyMetadata({ data: "json, name=client_secret" }),
         __metadata("design:type", String)
     ], RefreshToken.prototype, "clientSecret", void 0);
     __decorate([
-        Metadata({ data: "json, name=grant_type" }),
+        SpeakeasyMetadata({ data: "json, name=grant_type" }),
         __metadata("design:type", String)
     ], RefreshToken.prototype, "grantType", void 0);
     __decorate([
-        Metadata({ data: "json, name=refresh_token" }),
+        SpeakeasyMetadata({ data: "json, name=refresh_token" }),
         __metadata("design:type", String)
     ], RefreshToken.prototype, "refreshToken", void 0);
     return RefreshToken;

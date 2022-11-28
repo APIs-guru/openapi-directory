@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudHealthcareV1beta1ConsentGcsDestination } from "./googlecloudhealthcarev1beta1consentgcsdestination";
+
 
 
 // QueryAccessibleDataRequest
@@ -7,12 +8,12 @@ import { GoogleCloudHealthcareV1beta1ConsentGcsDestination } from "./googlecloud
  * Queries all data_ids that are consented for a given use in the given consent store and writes them to a specified destination. The returned Operation includes a progress counter for the number of User data mappings processed. Errors are logged to Cloud Logging (see [Viewing error logs in Cloud Logging] (https://cloud.google.com/healthcare/docs/how-tos/logging) and [QueryAccessibleData] for a sample log entry).
 **/
 export class QueryAccessibleDataRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=gcsDestination" })
+  @SpeakeasyMetadata({ data: "json, name=gcsDestination" })
   gcsDestination?: GoogleCloudHealthcareV1beta1ConsentGcsDestination;
 
-  @Metadata({ data: "json, name=requestAttributes" })
+  @SpeakeasyMetadata({ data: "json, name=requestAttributes" })
   requestAttributes?: Map<string, string>;
 
-  @Metadata({ data: "json, name=resourceAttributes" })
+  @SpeakeasyMetadata({ data: "json, name=resourceAttributes" })
   resourceAttributes?: Map<string, string>;
 }

@@ -1,7 +1,8 @@
 
 
+
 export enum StatementTypeEnum {
-    Ddl = "DDL"
-,    Dml = "DML"
-,    Utility = "UTILITY"
+    Ddl = "DDL",
+    Dml = "DML",
+    Utility = "UTILITY"
 }

@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class VatComprehensivePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=country" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=country" })
   country: string;
 }
 
 
 export class VatComprehensiveRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "form, name=companyAddress;" })
+  @SpeakeasyMetadata({ data: "form, name=companyAddress;" })
   companyAddress?: string;
 
-  @Metadata({ data: "form, name=companyName;" })
+  @SpeakeasyMetadata({ data: "form, name=companyName;" })
   companyName?: string;
 
-  @Metadata({ data: "form, name=companyNumber;" })
+  @SpeakeasyMetadata({ data: "form, name=companyNumber;" })
   companyNumber?: string;
 
-  @Metadata({ data: "form, name=vatNumber;" })
+  @SpeakeasyMetadata({ data: "form, name=vatNumber;" })
   vatNumber: string;
 }
 
 
 export class VatComprehensiveSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   userKey: shared.SchemeUserKey;
 }
 
 
 export class VatComprehensiveRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: VatComprehensivePathParams;
 
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
   request: VatComprehensiveRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: VatComprehensiveSecurity;
 }
 
 
 export class VatComprehensiveResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   vatComprehensive200ApplicationJsonAny?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   vatComprehensiveDefaultApplicationJsonAny?: any;
 }

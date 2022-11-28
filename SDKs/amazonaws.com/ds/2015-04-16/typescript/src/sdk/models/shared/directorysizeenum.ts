@@ -1,6 +1,7 @@
 
 
+
 export enum DirectorySizeEnum {
-    Small = "Small"
-,    Large = "Large"
+    Small = "Small",
+    Large = "Large"
 }

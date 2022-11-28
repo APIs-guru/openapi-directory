@@ -9,11 +9,6 @@ type InvoiceAPIStatusHeaders struct {
 	XAuthSecret string `header:"style=simple,explode=false,name=x-auth-secret"`
 }
 
-type InvoiceAPIStatusRequest struct {
-	QueryParams InvoiceAPIStatusQueryParams
-	Headers     InvoiceAPIStatusHeaders
-}
-
 type InvoiceAPIStatus200ApplicationJSONEnum string
 
 const (
@@ -33,6 +28,11 @@ const (
 	InvoiceAPIStatus200TextJSONEnumOverdue InvoiceAPIStatus200TextJSONEnum = "Overdue"
 	InvoiceAPIStatus200TextJSONEnumVoid    InvoiceAPIStatus200TextJSONEnum = "Void"
 )
+
+type InvoiceAPIStatusRequest struct {
+	QueryParams InvoiceAPIStatusQueryParams
+	Headers     InvoiceAPIStatusHeaders
+}
 
 type InvoiceAPIStatusResponse struct {
 	Body                                         []byte

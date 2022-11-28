@@ -4,7 +4,7 @@ from typing import Optional
 
 @dataclass
 class GetChargeStationPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,12 +16,12 @@ class GetChargeStationQueryParams:
 
 @dataclass
 class GetChargeStationRequest:
-    path_params: GetChargeStationPathParams = field(default=None)
-    query_params: GetChargeStationQueryParams = field(default=None)
+    path_params: GetChargeStationPathParams = field()
+    query_params: GetChargeStationQueryParams = field()
     
 
 @dataclass
 class GetChargeStationResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

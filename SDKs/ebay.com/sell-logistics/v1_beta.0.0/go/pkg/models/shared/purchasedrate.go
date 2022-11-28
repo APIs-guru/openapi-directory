@@ -1,5 +1,7 @@
 package shared
 
+// PurchasedRate
+// The &quot;rate&quot; that has been selected and purchased for the shipment, as referenced by the rateId value.
 type PurchasedRate struct {
 	AdditionalOptions        []AdditionalOption `json:"additionalOptions,omitempty"`
 	BaseShippingCost         *Amount            `json:"baseShippingCost,omitempty"`

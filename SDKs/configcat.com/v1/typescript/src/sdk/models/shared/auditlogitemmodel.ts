@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AuditLogItemModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actionTarget" })
+  @SpeakeasyMetadata({ data: "json, name=actionTarget" })
   actionTarget?: string;
 
-  @Metadata({ data: "json, name=auditLogDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=auditLogDateTime" })
   auditLogDateTime?: Date;
 
-  @Metadata({ data: "json, name=auditLogId" })
+  @SpeakeasyMetadata({ data: "json, name=auditLogId" })
   auditLogId?: number;
 
-  @Metadata({ data: "json, name=auditLogType" })
+  @SpeakeasyMetadata({ data: "json, name=auditLogType" })
   auditLogType?: string;
 
-  @Metadata({ data: "json, name=details" })
+  @SpeakeasyMetadata({ data: "json, name=details" })
   details?: string;
 
-  @Metadata({ data: "json, name=userEmail" })
+  @SpeakeasyMetadata({ data: "json, name=userEmail" })
   userEmail?: string;
 
-  @Metadata({ data: "json, name=userName" })
+  @SpeakeasyMetadata({ data: "json, name=userName" })
   userName?: string;
 
-  @Metadata({ data: "json, name=where" })
+  @SpeakeasyMetadata({ data: "json, name=where" })
   where?: string;
 
-  @Metadata({ data: "json, name=why" })
+  @SpeakeasyMetadata({ data: "json, name=why" })
   why?: string;
 }

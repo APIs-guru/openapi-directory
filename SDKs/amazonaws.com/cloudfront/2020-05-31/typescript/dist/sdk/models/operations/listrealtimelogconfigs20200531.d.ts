@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class ListRealtimeLogConfigs20200531QueryParams extends SpeakeasyBase {
     marker?: string;
     maxItems?: string;

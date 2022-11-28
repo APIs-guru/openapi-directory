@@ -1,25 +1,25 @@
 from dataclasses import dataclass, field
-
+from sdk.models import shared
 
 
 @dataclass
 class DeleteLiveStreamsLiveStreamIDPathParams:
-    live_stream_id: str = field(default=None, metadata={'path_param': { 'field_name': 'liveStreamId', 'style': 'simple', 'explode': False }})
+    live_stream_id: str = field(metadata={'path_param': { 'field_name': 'liveStreamId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DeleteLiveStreamsLiveStreamIDSecurity:
-    bearer_auth: shared.SchemeBearerAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_auth: shared.SchemeBearerAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class DeleteLiveStreamsLiveStreamIDRequest:
-    path_params: DeleteLiveStreamsLiveStreamIDPathParams = field(default=None)
-    security: DeleteLiveStreamsLiveStreamIDSecurity = field(default=None)
+    path_params: DeleteLiveStreamsLiveStreamIDPathParams = field()
+    security: DeleteLiveStreamsLiveStreamIDSecurity = field()
     
 
 @dataclass
 class DeleteLiveStreamsLiveStreamIDResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LicenseeDaily } from "./licenseedaily";
 var Licensee = /** @class */ (function (_super) {
     __extends(Licensee, _super);
@@ -30,35 +30,35 @@ var Licensee = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=address" }),
+        SpeakeasyMetadata({ data: "json, name=address" }),
         __metadata("design:type", String)
     ], Licensee.prototype, "address", void 0);
     __decorate([
-        Metadata({ data: "json, name=createdAt" }),
+        SpeakeasyMetadata({ data: "json, name=createdAt" }),
         __metadata("design:type", String)
     ], Licensee.prototype, "createdAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=daily" }),
+        SpeakeasyMetadata({ data: "json, name=daily" }),
         __metadata("design:type", LicenseeDaily)
     ], Licensee.prototype, "daily", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], Licensee.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=key" }),
+        SpeakeasyMetadata({ data: "json, name=key" }),
         __metadata("design:type", String)
     ], Licensee.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Licensee.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=postcode" }),
+        SpeakeasyMetadata({ data: "json, name=postcode" }),
         __metadata("design:type", String)
     ], Licensee.prototype, "postcode", void 0);
     __decorate([
-        Metadata({ data: "json, name=whitelist" }),
+        SpeakeasyMetadata({ data: "json, name=whitelist" }),
         __metadata("design:type", Array)
     ], Licensee.prototype, "whitelist", void 0);
     return Licensee;

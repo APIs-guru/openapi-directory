@@ -1,11 +1,11 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetAnalyticsLiveStreamsLiveStreamIDPathParams:
-    live_stream_id: str = field(default=None, metadata={'path_param': { 'field_name': 'liveStreamId', 'style': 'simple', 'explode': False }})
+    live_stream_id: str = field(metadata={'path_param': { 'field_name': 'liveStreamId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,20 +17,20 @@ class GetAnalyticsLiveStreamsLiveStreamIDQueryParams:
 
 @dataclass
 class GetAnalyticsLiveStreamsLiveStreamIDSecurity:
-    bearer_auth: shared.SchemeBearerAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_auth: shared.SchemeBearerAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class GetAnalyticsLiveStreamsLiveStreamIDRequest:
-    path_params: GetAnalyticsLiveStreamsLiveStreamIDPathParams = field(default=None)
-    query_params: GetAnalyticsLiveStreamsLiveStreamIDQueryParams = field(default=None)
-    security: GetAnalyticsLiveStreamsLiveStreamIDSecurity = field(default=None)
+    path_params: GetAnalyticsLiveStreamsLiveStreamIDPathParams = field()
+    query_params: GetAnalyticsLiveStreamsLiveStreamIDQueryParams = field()
+    security: GetAnalyticsLiveStreamsLiveStreamIDSecurity = field()
     
 
 @dataclass
 class GetAnalyticsLiveStreamsLiveStreamIDResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     not_found: Optional[shared.NotFound] = field(default=None)
     raw_statistics_list_live_stream_analytics_response: Optional[shared.RawStatisticsListLiveStreamAnalyticsResponse] = field(default=None)
     

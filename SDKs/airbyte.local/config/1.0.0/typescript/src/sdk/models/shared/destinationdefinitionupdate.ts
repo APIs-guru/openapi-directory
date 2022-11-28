@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DestinationDefinitionUpdate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=destinationDefinitionId" })
+  @SpeakeasyMetadata({ data: "json, name=destinationDefinitionId" })
   destinationDefinitionId: string;
 
-  @Metadata({ data: "json, name=dockerImageTag" })
+  @SpeakeasyMetadata({ data: "json, name=dockerImageTag" })
   dockerImageTag?: string;
 }

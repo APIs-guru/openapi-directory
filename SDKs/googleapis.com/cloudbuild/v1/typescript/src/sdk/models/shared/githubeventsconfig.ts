@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PullRequestFilter } from "./pullrequestfilter";
 import { PushFilter } from "./pushfilter";
+
 
 
 // GitHubEventsConfig
@@ -8,21 +9,21 @@ import { PushFilter } from "./pushfilter";
  * GitHubEventsConfig describes the configuration of a trigger that creates a build whenever a GitHub event is received.
 **/
 export class GitHubEventsConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enterpriseConfigResourceName" })
+  @SpeakeasyMetadata({ data: "json, name=enterpriseConfigResourceName" })
   enterpriseConfigResourceName?: string;
 
-  @Metadata({ data: "json, name=installationId" })
+  @SpeakeasyMetadata({ data: "json, name=installationId" })
   installationId?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=owner" })
+  @SpeakeasyMetadata({ data: "json, name=owner" })
   owner?: string;
 
-  @Metadata({ data: "json, name=pullRequest" })
+  @SpeakeasyMetadata({ data: "json, name=pullRequest" })
   pullRequest?: PullRequestFilter;
 
-  @Metadata({ data: "json, name=push" })
+  @SpeakeasyMetadata({ data: "json, name=push" })
   push?: PushFilter;
 }

@@ -1,20 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ExpectedAttributeValue } from "./expectedattributevalue";
 import { AttributeValue } from "./attributevalue";
 import { ReturnValueEnum } from "./returnvalueenum";
 
 
+
 export class PutItemInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Expected", elemType: shared.ExpectedAttributeValue })
+  @SpeakeasyMetadata({ data: "json, name=Expected", elemType: ExpectedAttributeValue })
   expected?: Map<string, ExpectedAttributeValue>;
 
-  @Metadata({ data: "json, name=Item", elemType: shared.AttributeValue })
+  @SpeakeasyMetadata({ data: "json, name=Item", elemType: AttributeValue })
   item: Map<string, AttributeValue>;
 
-  @Metadata({ data: "json, name=ReturnValues" })
+  @SpeakeasyMetadata({ data: "json, name=ReturnValues" })
   returnValues?: ReturnValueEnum;
 
-  @Metadata({ data: "json, name=TableName" })
+  @SpeakeasyMetadata({ data: "json, name=TableName" })
   tableName: string;
 }

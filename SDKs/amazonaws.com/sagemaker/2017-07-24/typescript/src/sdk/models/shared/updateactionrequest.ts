@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActionStatusEnum } from "./actionstatusenum";
 
 
+
 export class UpdateActionRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ActionName" })
+  @SpeakeasyMetadata({ data: "json, name=ActionName" })
   actionName: string;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=Properties" })
+  @SpeakeasyMetadata({ data: "json, name=Properties" })
   properties?: Map<string, string>;
 
-  @Metadata({ data: "json, name=PropertiesToRemove" })
+  @SpeakeasyMetadata({ data: "json, name=PropertiesToRemove" })
   propertiesToRemove?: string[];
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: ActionStatusEnum;
 }

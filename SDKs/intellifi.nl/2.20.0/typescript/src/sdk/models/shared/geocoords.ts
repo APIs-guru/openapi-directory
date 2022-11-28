@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GeoCoords
@@ -6,12 +7,25 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Last known geolocation estimate of this object. Not guaranteed to be included in response.
 **/
 export class GeoCoords extends SpeakeasyBase {
-  @Metadata({ data: "json, name=lat" })
+  @SpeakeasyMetadata({ data: "json, name=lat" })
   lat?: number;
 
-  @Metadata({ data: "json, name=lng" })
+  @SpeakeasyMetadata({ data: "json, name=lng" })
   lng?: number;
 
-  @Metadata({ data: "json, name=time_updated" })
+  @SpeakeasyMetadata({ data: "json, name=time_updated" })
   timeUpdated?: string;
+}
+
+
+// GeoCoordsInput
+/** 
+ * Last known geolocation estimate of this object. Not guaranteed to be included in response.
+**/
+export class GeoCoordsInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=lat" })
+  lat?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=lng" })
+  lng?: number;
 }

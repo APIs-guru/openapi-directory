@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CustomerSubscriptionViewModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=customerId" })
+  @SpeakeasyMetadata({ data: "json, name=customerId" })
   customerId?: string;
 
-  @Metadata({ data: "json, name=customerPlanId" })
+  @SpeakeasyMetadata({ data: "json, name=customerPlanId" })
   customerPlanId?: string;
 
-  @Metadata({ data: "json, name=customerPlanName" })
+  @SpeakeasyMetadata({ data: "json, name=customerPlanName" })
   customerPlanName?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=objectName" })
+  @SpeakeasyMetadata({ data: "json, name=objectName" })
   objectName?: string;
 
-  @Metadata({ data: "json, name=planStart" })
+  @SpeakeasyMetadata({ data: "json, name=planStart" })
   planStart?: Date;
 
-  @Metadata({ data: "json, name=trialPeriodEnd" })
+  @SpeakeasyMetadata({ data: "json, name=trialPeriodEnd" })
   trialPeriodEnd?: Date;
 
-  @Metadata({ data: "json, name=trialPeriodStart" })
+  @SpeakeasyMetadata({ data: "json, name=trialPeriodStart" })
   trialPeriodStart?: Date;
 }

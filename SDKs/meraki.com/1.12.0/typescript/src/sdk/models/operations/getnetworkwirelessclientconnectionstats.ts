@@ -1,60 +1,61 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetNetworkWirelessClientConnectionStatsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=clientId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=clientId" })
   clientId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
 export enum GetNetworkWirelessClientConnectionStatsBandEnum {
-    Two4 = "2.4"
-,    Five = "5"
+    Two4 = "2.4",
+    Five = "5"
 }
 
 
 export class GetNetworkWirelessClientConnectionStatsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=apTag" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=apTag" })
   apTag?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=band" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=band" })
   band?: GetNetworkWirelessClientConnectionStatsBandEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ssid" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ssid" })
   ssid?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=t0" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=t0" })
   t0?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=t1" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=t1" })
   t1?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=timespan" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timespan" })
   timespan?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=vlan" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=vlan" })
   vlan?: number;
 }
 
 
 export class GetNetworkWirelessClientConnectionStatsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetNetworkWirelessClientConnectionStatsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetNetworkWirelessClientConnectionStatsQueryParams;
 }
 
 
 export class GetNetworkWirelessClientConnectionStatsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getNetworkWirelessClientConnectionStats200ApplicationJsonObject?: Map<string, any>;
 }

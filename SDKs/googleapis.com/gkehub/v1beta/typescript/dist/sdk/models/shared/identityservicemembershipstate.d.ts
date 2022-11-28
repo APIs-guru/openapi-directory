@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { IdentityServiceMembershipSpec } from "./identityservicemembershipspec";
 export declare enum IdentityServiceMembershipStateStateEnum {
     DeploymentStateUnspecified = "DEPLOYMENT_STATE_UNSPECIFIED",

@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CancelBatchPaymentPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=batchUuid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=batchUuid" })
   batchUuid: string;
 }
 
 
 export class CancelBatchPaymentRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CancelBatchPaymentPathParams;
 }
 
 
 export class CancelBatchPaymentResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// PromotionReportDetail
+// This type defines the fields in a promotion-level report.
 type PromotionReportDetail struct {
 	AverageItemDiscount  *Amount `json:"averageItemDiscount,omitempty"`
 	AverageItemRevenue   *Amount `json:"averageItemRevenue,omitempty"`

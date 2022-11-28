@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Places } from "./places";
 import { PointRadius } from "./pointradius";
 
+
 export enum ServiceAreaBusinessBusinessTypeEnum {
-    BusinessTypeUnspecified = "BUSINESS_TYPE_UNSPECIFIED"
-,    CustomerLocationOnly = "CUSTOMER_LOCATION_ONLY"
-,    CustomerAndBusinessLocation = "CUSTOMER_AND_BUSINESS_LOCATION"
+    BusinessTypeUnspecified = "BUSINESS_TYPE_UNSPECIFIED",
+    CustomerLocationOnly = "CUSTOMER_LOCATION_ONLY",
+    CustomerAndBusinessLocation = "CUSTOMER_AND_BUSINESS_LOCATION"
 }
 
 
@@ -14,12 +15,12 @@ export enum ServiceAreaBusinessBusinessTypeEnum {
  * Service area businesses provide their service at the customer's location (for example, a locksmith or plumber).
 **/
 export class ServiceAreaBusiness extends SpeakeasyBase {
-  @Metadata({ data: "json, name=businessType" })
+  @SpeakeasyMetadata({ data: "json, name=businessType" })
   businessType?: ServiceAreaBusinessBusinessTypeEnum;
 
-  @Metadata({ data: "json, name=places" })
+  @SpeakeasyMetadata({ data: "json, name=places" })
   places?: Places;
 
-  @Metadata({ data: "json, name=radius" })
+  @SpeakeasyMetadata({ data: "json, name=radius" })
   radius?: PointRadius;
 }

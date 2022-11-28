@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { GoogleCloudRetailV2UserEvent } from "./googlecloudretailv2userevent";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GoogleCloudRetailV2UserEventInput } from "./googlecloudretailv2userevent";
 
 
-// GoogleCloudRetailV2UserEventInlineSource
+
+// GoogleCloudRetailV2UserEventInlineSourceInput
 /** 
  * The inline source for the input config for ImportUserEvents method.
 **/
-export class GoogleCloudRetailV2UserEventInlineSource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=userEvents", elemType: shared.GoogleCloudRetailV2UserEvent })
-  userEvents?: GoogleCloudRetailV2UserEvent[];
+export class GoogleCloudRetailV2UserEventInlineSourceInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=userEvents", elemType: GoogleCloudRetailV2UserEventInput })
+  userEvents?: GoogleCloudRetailV2UserEventInput[];
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { MetricValueSet } from "./metricvalueset";
 export declare enum QuotaOperationQuotaModeEnum {
     Unspecified = "UNSPECIFIED",

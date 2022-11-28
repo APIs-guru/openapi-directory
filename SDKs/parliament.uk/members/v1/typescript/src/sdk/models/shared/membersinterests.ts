@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RegisteredInterestCategory } from "./registeredinterestcategory";
 import { Member } from "./member";
 
 
+
 export class MembersInterests extends SpeakeasyBase {
-  @Metadata({ data: "json, name=interestCategories", elemType: shared.RegisteredInterestCategory })
+  @SpeakeasyMetadata({ data: "json, name=interestCategories", elemType: RegisteredInterestCategory })
   interestCategories?: RegisteredInterestCategory[];
 
-  @Metadata({ data: "json, name=member" })
+  @SpeakeasyMetadata({ data: "json, name=member" })
   member?: Member;
 }

@@ -31,7 +31,7 @@ type AnalyticsadminPropertiesUserLinksPatchSecurity struct {
 type AnalyticsadminPropertiesUserLinksPatchRequest struct {
 	PathParams  AnalyticsadminPropertiesUserLinksPatchPathParams
 	QueryParams AnalyticsadminPropertiesUserLinksPatchQueryParams
-	Request     *shared.GoogleAnalyticsAdminV1alphaUserLink `request:"mediaType=application/json"`
+	Request     *shared.GoogleAnalyticsAdminV1alphaUserLinkInput `request:"mediaType=application/json"`
 	Security    AnalyticsadminPropertiesUserLinksPatchSecurity
 }
 

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { S3DataConfig } from "./s3dataconfig";
+
 
 
 // DatasetExportJobOutput
@@ -7,6 +8,6 @@ import { S3DataConfig } from "./s3dataconfig";
  * The output configuration parameters of a dataset export job.
 **/
 export class DatasetExportJobOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=s3DataDestination" })
+  @SpeakeasyMetadata({ data: "json, name=s3DataDestination" })
   s3DataDestination: S3DataConfig;
 }

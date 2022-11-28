@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ReplicaInfoTypeEnum(str, Enum):
     TYPE_UNSPECIFIED = "TYPE_UNSPECIFIED"
@@ -12,7 +14,7 @@ class ReplicaInfoTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ReplicaInfo:
-    default_leader_location: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'defaultLeaderLocation' }})
-    location: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'location' }})
-    type: Optional[ReplicaInfoTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    default_leader_location: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('defaultLeaderLocation') }})
+    location: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('location') }})
+    type: Optional[ReplicaInfoTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

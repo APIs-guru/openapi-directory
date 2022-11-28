@@ -10,12 +10,16 @@ type GitCreateCommitPathParams struct {
 	Repo  string `pathParam:"style=simple,explode=false,name=repo"`
 }
 
+// GitCreateCommitRequestBodyAuthor
+// Information about the author of the commit. By default, the `author` will be the authenticated user and the current date. See the `author` and `committer` object below for details.
 type GitCreateCommitRequestBodyAuthor struct {
 	Date  *time.Time `json:"date,omitempty"`
 	Email string     `json:"email"`
 	Name  string     `json:"name"`
 }
 
+// GitCreateCommitRequestBodyCommitter
+// Information about the person who is making the commit. By default, `committer` will use the information set in `author`. See the `author` and `committer` object below for details.
 type GitCreateCommitRequestBodyCommitter struct {
 	Date  *time.Time `json:"date,omitempty"`
 	Email *string    `json:"email,omitempty"`

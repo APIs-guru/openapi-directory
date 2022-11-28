@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum OutputInformationActionTypeEnum {
-    OnOffAction = "OnOffAction"
-,    AnalogAction = "AnalogAction"
+    OnOffAction = "OnOffAction",
+    AnalogAction = "AnalogAction"
 }
 
 
@@ -11,15 +12,15 @@ export enum OutputInformationActionTypeEnum {
  * Informations about the Outputs of a Meter or Folder
 **/
 export class OutputInformation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ActionType" })
+  @SpeakeasyMetadata({ data: "json, name=ActionType" })
   actionType?: OutputInformationActionTypeEnum;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Number" })
+  @SpeakeasyMetadata({ data: "json, name=Number" })
   number?: number;
 
-  @Metadata({ data: "json, name=ObisCode" })
+  @SpeakeasyMetadata({ data: "json, name=ObisCode" })
   obisCode?: string;
 }

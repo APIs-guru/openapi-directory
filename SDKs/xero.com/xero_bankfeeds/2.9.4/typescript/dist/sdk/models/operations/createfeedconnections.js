@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CreateFeedConnectionsHeaders = /** @class */ (function (_super) {
     __extends(CreateFeedConnectionsHeaders, _super);
@@ -30,7 +30,7 @@ var CreateFeedConnectionsHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Xero-Tenant-Id" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Xero-Tenant-Id" }),
         __metadata("design:type", String)
     ], CreateFeedConnectionsHeaders.prototype, "xeroTenantId", void 0);
     return CreateFeedConnectionsHeaders;
@@ -42,7 +42,7 @@ var CreateFeedConnectionsSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOAuth2)
     ], CreateFeedConnectionsSecurity.prototype, "oAuth2", void 0);
     return CreateFeedConnectionsSecurity;
@@ -54,15 +54,15 @@ var CreateFeedConnectionsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateFeedConnectionsHeaders)
     ], CreateFeedConnectionsRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.FeedConnections)
     ], CreateFeedConnectionsRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateFeedConnectionsSecurity)
     ], CreateFeedConnectionsRequest.prototype, "security", void 0);
     return CreateFeedConnectionsRequest;
@@ -74,19 +74,19 @@ var CreateFeedConnectionsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CreateFeedConnectionsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Error)
     ], CreateFeedConnectionsResponse.prototype, "error", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.FeedConnections)
     ], CreateFeedConnectionsResponse.prototype, "feedConnections", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CreateFeedConnectionsResponse.prototype, "statusCode", void 0);
     return CreateFeedConnectionsResponse;

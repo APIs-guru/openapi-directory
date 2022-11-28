@@ -1,19 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleDatastoreAdminV1IndexedProperty } from "./googledatastoreadminv1indexedproperty";
 
+
 export enum GoogleDatastoreAdminV1IndexAncestorEnum {
-    AncestorModeUnspecified = "ANCESTOR_MODE_UNSPECIFIED"
-,    None = "NONE"
-,    AllAncestors = "ALL_ANCESTORS"
+    AncestorModeUnspecified = "ANCESTOR_MODE_UNSPECIFIED",
+    None = "NONE",
+    AllAncestors = "ALL_ANCESTORS"
 }
 
 export enum GoogleDatastoreAdminV1IndexStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Creating = "CREATING"
-,    Ready = "READY"
-,    Deleting = "DELETING"
-,    Error = "ERROR"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Creating = "CREATING",
+    Ready = "READY",
+    Deleting = "DELETING",
+    Error = "ERROR"
 }
 
 
@@ -22,21 +22,37 @@ export enum GoogleDatastoreAdminV1IndexStateEnum {
  * Datastore composite index definition.
 **/
 export class GoogleDatastoreAdminV1Index extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ancestor" })
+  @SpeakeasyMetadata({ data: "json, name=ancestor" })
   ancestor?: GoogleDatastoreAdminV1IndexAncestorEnum;
 
-  @Metadata({ data: "json, name=indexId" })
+  @SpeakeasyMetadata({ data: "json, name=indexId" })
   indexId?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=projectId" })
+  @SpeakeasyMetadata({ data: "json, name=projectId" })
   projectId?: string;
 
-  @Metadata({ data: "json, name=properties", elemType: shared.GoogleDatastoreAdminV1IndexedProperty })
+  @SpeakeasyMetadata({ data: "json, name=properties", elemType: GoogleDatastoreAdminV1IndexedProperty })
   properties?: GoogleDatastoreAdminV1IndexedProperty[];
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: GoogleDatastoreAdminV1IndexStateEnum;
+}
+
+
+// GoogleDatastoreAdminV1IndexInput
+/** 
+ * Datastore composite index definition.
+**/
+export class GoogleDatastoreAdminV1IndexInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=ancestor" })
+  ancestor?: GoogleDatastoreAdminV1IndexAncestorEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=kind" })
+  kind?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=properties", elemType: GoogleDatastoreAdminV1IndexedProperty })
+  properties?: GoogleDatastoreAdminV1IndexedProperty[];
 }

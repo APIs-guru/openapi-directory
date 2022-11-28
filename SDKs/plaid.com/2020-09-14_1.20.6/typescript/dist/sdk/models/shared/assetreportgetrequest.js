@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // AssetReportGetRequest
 /**
  * AssetReportGetRequest defines the request schema for `/asset_report/get`
@@ -33,19 +33,19 @@ var AssetReportGetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=asset_report_token" }),
+        SpeakeasyMetadata({ data: "json, name=asset_report_token" }),
         __metadata("design:type", String)
     ], AssetReportGetRequest.prototype, "assetReportToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=client_id" }),
+        SpeakeasyMetadata({ data: "json, name=client_id" }),
         __metadata("design:type", String)
     ], AssetReportGetRequest.prototype, "clientId", void 0);
     __decorate([
-        Metadata({ data: "json, name=include_insights" }),
+        SpeakeasyMetadata({ data: "json, name=include_insights" }),
         __metadata("design:type", Boolean)
     ], AssetReportGetRequest.prototype, "includeInsights", void 0);
     __decorate([
-        Metadata({ data: "json, name=secret" }),
+        SpeakeasyMetadata({ data: "json, name=secret" }),
         __metadata("design:type", String)
     ], AssetReportGetRequest.prototype, "secret", void 0);
     return AssetReportGetRequest;

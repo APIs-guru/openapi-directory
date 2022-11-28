@@ -16,6 +16,8 @@ const (
 	ThirdPartyVendorConfigVendorEnumThirdPartyVendorDynata            ThirdPartyVendorConfigVendorEnum = "THIRD_PARTY_VENDOR_DYNATA"
 )
 
+// ThirdPartyVendorConfig
+// Settings that control how third-party measurement vendors are configured.
 type ThirdPartyVendorConfig struct {
 	PlacementID *string                           `json:"placementId,omitempty"`
 	Vendor      *ThirdPartyVendorConfigVendorEnum `json:"vendor,omitempty"`

@@ -1,9 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 
 @dataclass
 class GetModifyVpcPeeringConnectionOptionsAccepterPeeringConnectionOptions:
+    r"""GetModifyVpcPeeringConnectionOptionsAccepterPeeringConnectionOptions
+    The VPC peering connection options.
+    """
+    
     allow_dns_resolution_from_remote_vpc: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'AllowDnsResolutionFromRemoteVpc' }})
     allow_egress_from_local_classic_link_to_remote_vpc: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'AllowEgressFromLocalClassicLinkToRemoteVpc' }})
     allow_egress_from_local_vpc_to_remote_classic_link: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'AllowEgressFromLocalVpcToRemoteClassicLink' }})
@@ -14,6 +22,10 @@ class GetModifyVpcPeeringConnectionOptionsActionEnum(str, Enum):
 
 @dataclass
 class GetModifyVpcPeeringConnectionOptionsRequesterPeeringConnectionOptions:
+    r"""GetModifyVpcPeeringConnectionOptionsRequesterPeeringConnectionOptions
+    The VPC peering connection options.
+    """
+    
     allow_dns_resolution_from_remote_vpc: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'AllowDnsResolutionFromRemoteVpc' }})
     allow_egress_from_local_classic_link_to_remote_vpc: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'AllowEgressFromLocalClassicLinkToRemoteVpc' }})
     allow_egress_from_local_vpc_to_remote_classic_link: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'AllowEgressFromLocalVpcToRemoteClassicLink' }})
@@ -24,12 +36,12 @@ class GetModifyVpcPeeringConnectionOptionsVersionEnum(str, Enum):
 
 @dataclass
 class GetModifyVpcPeeringConnectionOptionsQueryParams:
+    action: GetModifyVpcPeeringConnectionOptionsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetModifyVpcPeeringConnectionOptionsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    vpc_peering_connection_id: str = field(metadata={'query_param': { 'field_name': 'VpcPeeringConnectionId', 'style': 'form', 'explode': True }})
     accepter_peering_connection_options: Optional[GetModifyVpcPeeringConnectionOptionsAccepterPeeringConnectionOptions] = field(default=None, metadata={'query_param': { 'field_name': 'AccepterPeeringConnectionOptions', 'style': 'form', 'explode': True }})
-    action: GetModifyVpcPeeringConnectionOptionsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
     requester_peering_connection_options: Optional[GetModifyVpcPeeringConnectionOptionsRequesterPeeringConnectionOptions] = field(default=None, metadata={'query_param': { 'field_name': 'RequesterPeeringConnectionOptions', 'style': 'form', 'explode': True }})
-    version: GetModifyVpcPeeringConnectionOptionsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
-    vpc_peering_connection_id: str = field(default=None, metadata={'query_param': { 'field_name': 'VpcPeeringConnectionId', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -45,13 +57,13 @@ class GetModifyVpcPeeringConnectionOptionsHeaders:
 
 @dataclass
 class GetModifyVpcPeeringConnectionOptionsRequest:
-    query_params: GetModifyVpcPeeringConnectionOptionsQueryParams = field(default=None)
-    headers: GetModifyVpcPeeringConnectionOptionsHeaders = field(default=None)
+    headers: GetModifyVpcPeeringConnectionOptionsHeaders = field()
+    query_params: GetModifyVpcPeeringConnectionOptionsQueryParams = field()
     
 
 @dataclass
 class GetModifyVpcPeeringConnectionOptionsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

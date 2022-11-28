@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InventoryDeletionSummaryItem } from "./inventorydeletionsummaryitem";
+
 
 
 // InventoryDeletionSummary
@@ -8,12 +8,12 @@ import { InventoryDeletionSummaryItem } from "./inventorydeletionsummaryitem";
  * Information about the delete operation.
 **/
 export class InventoryDeletionSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=RemainingCount" })
+  @SpeakeasyMetadata({ data: "json, name=RemainingCount" })
   remainingCount?: number;
 
-  @Metadata({ data: "json, name=SummaryItems", elemType: shared.InventoryDeletionSummaryItem })
+  @SpeakeasyMetadata({ data: "json, name=SummaryItems", elemType: InventoryDeletionSummaryItem })
   summaryItems?: InventoryDeletionSummaryItem[];
 
-  @Metadata({ data: "json, name=TotalCount" })
+  @SpeakeasyMetadata({ data: "json, name=TotalCount" })
   totalCount?: number;
 }

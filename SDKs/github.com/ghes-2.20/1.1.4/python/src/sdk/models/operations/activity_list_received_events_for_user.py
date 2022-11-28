@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class ActivityListReceivedEventsForUserPathParams:
-    username: str = field(default=None, metadata={'path_param': { 'field_name': 'username', 'style': 'simple', 'explode': False }})
+    username: str = field(metadata={'path_param': { 'field_name': 'username', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,13 +16,13 @@ class ActivityListReceivedEventsForUserQueryParams:
 
 @dataclass
 class ActivityListReceivedEventsForUserRequest:
-    path_params: ActivityListReceivedEventsForUserPathParams = field(default=None)
-    query_params: ActivityListReceivedEventsForUserQueryParams = field(default=None)
+    path_params: ActivityListReceivedEventsForUserPathParams = field()
+    query_params: ActivityListReceivedEventsForUserQueryParams = field()
     
 
 @dataclass
 class ActivityListReceivedEventsForUserResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     events: Optional[List[shared.Event]] = field(default=None)
     

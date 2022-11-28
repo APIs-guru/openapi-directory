@@ -52,6 +52,8 @@ const (
 	RemoteServerEntitySslEnumNever           RemoteServerEntitySslEnum = "never"
 )
 
+// RemoteServerEntity
+// Create Remote Server
 type RemoteServerEntity struct {
 	AuthAccountName             *string                                    `json:"auth_account_name,omitempty"`
 	AuthSetupLink               *string                                    `json:"auth_setup_link,omitempty"`

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NormalizedCoordinate } from "./normalizedcoordinate";
+
 
 
 // Image
@@ -7,12 +8,12 @@ import { NormalizedCoordinate } from "./normalizedcoordinate";
  * Overlaid jpeg image.
 **/
 export class Image extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alpha" })
+  @SpeakeasyMetadata({ data: "json, name=alpha" })
   alpha?: number;
 
-  @Metadata({ data: "json, name=resolution" })
+  @SpeakeasyMetadata({ data: "json, name=resolution" })
   resolution?: NormalizedCoordinate;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri?: string;
 }

@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetAuthorizableKeystorePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=authorizableId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=authorizableId" })
   authorizableId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=intermediatePath" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=intermediatePath" })
   intermediatePath: string;
 }
 
 
 export class GetAuthorizableKeystoreRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetAuthorizableKeystorePathParams;
 }
 
 
 export class GetAuthorizableKeystoreResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getAuthorizableKeystoreDefaultTextPlainString?: string;
 }

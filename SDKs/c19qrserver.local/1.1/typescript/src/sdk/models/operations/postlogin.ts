@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum PostLoginSampleSourceEnum {
-    IOs = "iOS"
-,    Android = "android"
-,    Web = "web"
+    IOs = "iOS",
+    Android = "android",
+    Web = "web"
 }
 
 
 export class PostLoginSample extends SpeakeasyBase {
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=password" })
+  @SpeakeasyMetadata({ data: "json, name=password" })
   password?: string;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: PostLoginSampleSourceEnum;
 }
 
 
 export class PostLoginRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: PostLoginSample;
 }
 
 
 export class PostLoginResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidToken?: shared.InvalidToken;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   loginResponse?: shared.LoginResponse;
 }

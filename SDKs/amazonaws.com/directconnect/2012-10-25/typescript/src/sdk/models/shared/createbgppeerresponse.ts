@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VirtualInterface } from "./virtualinterface";
 
 
+
 export class CreateBgpPeerResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=virtualInterface" })
+  @SpeakeasyMetadata({ data: "json, name=virtualInterface" })
   virtualInterface?: VirtualInterface;
 }

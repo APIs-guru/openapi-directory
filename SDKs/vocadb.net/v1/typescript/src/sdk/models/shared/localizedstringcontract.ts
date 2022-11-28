@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum LocalizedStringContractLanguageEnum {
-    Unspecified = "Unspecified"
-,    Japanese = "Japanese"
-,    Romaji = "Romaji"
-,    English = "English"
+    Unspecified = "Unspecified",
+    Japanese = "Japanese",
+    Romaji = "Romaji",
+    English = "English"
 }
 
 
 export class LocalizedStringContract extends SpeakeasyBase {
-  @Metadata({ data: "json, name=language" })
+  @SpeakeasyMetadata({ data: "json, name=language" })
   language?: LocalizedStringContractLanguageEnum;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }

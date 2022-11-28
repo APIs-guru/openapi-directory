@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import Any,List,Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,35 +14,56 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def broadcast_tx(self, request: operations.BroadcastTxRequest) -> operations.BroadcastTxResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Broadcasts a signed raw transaction to the network
+        Broadcasts a signed raw transaction to the network. If successful returns the txid of the broadcast trasnaction.
+        
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/ntp1/broadcast"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -58,22 +82,24 @@ class SDK:
 
     
     def burn_token(self, request: operations.BurnTokenRequest) -> operations.BurnTokenResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Builds a transaction that burns an NTP1 Token
+        Builds an unsigned raw transaction that burns an NTP1 token on the Neblio blockchain.
+        
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/ntp1/burntoken"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -92,13 +118,17 @@ class SDK:
 
     
     def get_address(self, request: operations.GetAddressRequest) -> operations.GetAddressResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns address object
+        Returns NEBL address object containing information on a specific address
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/ins/addr/{address}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -113,13 +143,17 @@ class SDK:
 
     
     def get_address_balance(self, request: operations.GetAddressBalanceRequest) -> operations.GetAddressBalanceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns address balance in sats
+        Returns NEBL address balance in satoshis
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/ins/addr/{address}/balance", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -134,13 +168,18 @@ class SDK:
 
     
     def get_address_info(self, request: operations.GetAddressInfoRequest) -> operations.GetAddressInfoResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Information On a Neblio Address
+        Returns both NEBL and NTP1 token UTXOs held at the given address.
+        
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/ntp1/addressinfo/{address}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -159,13 +198,17 @@ class SDK:
 
     
     def get_address_total_received(self, request: operations.GetAddressTotalReceivedRequest) -> operations.GetAddressTotalReceivedResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns total received by address in sats
+        Returns total NEBL received by address in satoshis
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/ins/addr/{address}/totalReceived", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -180,13 +223,17 @@ class SDK:
 
     
     def get_address_total_sent(self, request: operations.GetAddressTotalSentRequest) -> operations.GetAddressTotalSentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns total sent by address in sats
+        Returns total NEBL sent by address in satoshis
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/ins/addr/{address}/totalSent", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -201,13 +248,17 @@ class SDK:
 
     
     def get_address_unconfirmed_balance(self, request: operations.GetAddressUnconfirmedBalanceRequest) -> operations.GetAddressUnconfirmedBalanceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns address unconfirmed balance in sats
+        Returns NEBL address unconfirmed balance in satoshis
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/ins/addr/{address}/unconfirmedBalance", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -222,13 +273,17 @@ class SDK:
 
     
     def get_address_utxos(self, request: operations.GetAddressUtxosRequest) -> operations.GetAddressUtxosResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns all UTXOs at a given address
+        Returns information on each Unspent Transaction Output contained at an address
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/ins/addr/{address}/utxo", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -243,13 +298,17 @@ class SDK:
 
     
     def get_block(self, request: operations.GetBlockRequest) -> operations.GetBlockResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns information regarding a Neblio block
+        Returns blockchain data for a given block based upon the block hash
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/ins/block/{blockhash}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -264,13 +323,17 @@ class SDK:
 
     
     def get_block_index(self, request: operations.GetBlockIndexRequest) -> operations.GetBlockIndexResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns block hash of block
+        Returns the block hash of a block at a given block index
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/ins/block-index/{blockindex}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -285,13 +348,17 @@ class SDK:
 
     
     def get_raw_tx(self, request: operations.GetRawTxRequest) -> operations.GetRawTxResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns raw transaction hex
+        Returns raw transaction hex representing a NEBL transaction
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/ins/rawtx/{txid}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -306,15 +373,18 @@ class SDK:
 
     
     def get_status(self, request: operations.GetStatusRequest) -> operations.GetStatusResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Utility API for calling several blockchain node functions
+        Utility API for calling several blockchain node functions - getInfo, getDifficulty, getBestBlockHash, getLastBlockHash
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/ins/status"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -329,13 +399,17 @@ class SDK:
 
     
     def get_sync(self) -> operations.GetSyncResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get node sync status
+        Returns information on the node's sync progress
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/ins/sync"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -350,13 +424,18 @@ class SDK:
 
     
     def get_token_holders(self, request: operations.GetTokenHoldersRequest) -> operations.GetTokenHoldersResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Addresses Holding a Token
+        Returns the the the addresses holding a token and how many tokens are held
+        
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/ntp1/stakeholders/{tokenid}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -375,13 +454,18 @@ class SDK:
 
     
     def get_token_id(self, request: operations.GetTokenIDRequest) -> operations.GetTokenIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns the tokenId representing a token
+        Translates a token symbol to a tokenId if a token exists with that symbol on the network
+        
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/ntp1/tokenid/{tokensymbol}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -396,15 +480,19 @@ class SDK:
 
     
     def get_token_metadata(self, request: operations.GetTokenMetadataRequest) -> operations.GetTokenMetadataResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Metadata of Token
+        Returns the metadata associated with a token.
+        
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/ntp1/tokenmetadata/{tokenid}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -423,15 +511,19 @@ class SDK:
 
     
     def get_token_metadata_of_utxo(self, request: operations.GetTokenMetadataOfUtxoRequest) -> operations.GetTokenMetadataOfUtxoResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get UTXO Metadata of Token
+        Returns the metadata associated with a token for that specific utxo instead of the issuance transaction.
+        
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/ntp1/tokenmetadata/{tokenid}/{utxo}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -450,13 +542,18 @@ class SDK:
 
     
     def get_transaction_info(self, request: operations.GetTransactionInfoRequest) -> operations.GetTransactionInfoResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Information On an NTP1 Transaction
+        Returns detailed information regarding an NTP1 transaction.
+        
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/ntp1/transactioninfo/{txid}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -475,13 +572,17 @@ class SDK:
 
     
     def get_tx(self, request: operations.GetTxRequest) -> operations.GetTxResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns transaction object
+        Returns NEBL transaction object representing a NEBL transaction
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/ins/tx/{txid}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -496,15 +597,18 @@ class SDK:
 
     
     def get_txs(self, request: operations.GetTxsRequest) -> operations.GetTxsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get transactions by block or address
+        Returns all transactions by block or address
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/ins/txs"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -519,22 +623,24 @@ class SDK:
 
     
     def issue_token(self, request: operations.IssueTokenRequest) -> operations.IssueTokenResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Builds a transaction that issues a new NTP1 Token
+        Builds an unsigned raw transaction that issues a new NTP1 token on the Neblio blockchain.
+        
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/ntp1/issue"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -553,24 +659,26 @@ class SDK:
 
     
     def json_rpc(self, request: operations.JSONRPCRequest) -> operations.JSONRPCResponse:
-        warnings.simplefilter("ignore")
-
+        r"""Send a JSON-RPC call to a localhost neblio-Qt or nebliod node
+        Call any Neblio RPC command from the Neblio API libraries. Useful for signing transactions with a local node and other functions. Will not work from a browser due to CORS restrictions. Requires a node to be running locally at 127.0.0.1
+        """
+        
         base_url = operations.JSON_RPC_SERVERS[0]
-        if not request.server_url is None:
+        if request.server_url is not None:
             base_url = request.server_url
+        
+        
         url = base_url.removesuffix("/") + "/"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -588,22 +696,24 @@ class SDK:
 
     
     def send_token(self, request: operations.SendTokenRequest) -> operations.SendTokenResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Builds a transaction that sends an NTP1 Token
+        Builds an unsigned raw transaction that sends an NTP1 token on the Neblio blockchain.
+        
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/ntp1/sendtoken"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -622,22 +732,24 @@ class SDK:
 
     
     def send_tx(self, request: operations.SendTxRequest) -> operations.SendTxResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Broadcasts a signed raw transaction to the network (not NTP1 specific)
+        Broadcasts a signed raw transaction to the network. If successful returns the txid of the broadcast trasnaction.
+        
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/ins/tx/send"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -656,22 +768,24 @@ class SDK:
 
     
     def testnet_broadcast_tx(self, request: operations.TestnetBroadcastTxRequest) -> operations.TestnetBroadcastTxResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Broadcasts a signed raw transaction to the network
+        Broadcasts a signed raw transaction to the network. If successful returns the txid of the broadcast trasnaction.
+        
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/testnet/ntp1/broadcast"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -690,22 +804,24 @@ class SDK:
 
     
     def testnet_burn_token(self, request: operations.TestnetBurnTokenRequest) -> operations.TestnetBurnTokenResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Builds a transaction that burns an NTP1 Token
+        Builds an unsigned raw transaction that burns an NTP1 token on the Neblio blockchain.
+        
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/testnet/ntp1/burntoken"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -724,13 +840,17 @@ class SDK:
 
     
     def testnet_get_address(self, request: operations.TestnetGetAddressRequest) -> operations.TestnetGetAddressResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns address object
+        Returns NEBL address object containing information on a specific address
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/testnet/ins/addr/{address}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -745,13 +865,17 @@ class SDK:
 
     
     def testnet_get_address_balance(self, request: operations.TestnetGetAddressBalanceRequest) -> operations.TestnetGetAddressBalanceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns address balance in sats
+        Returns NEBL address balance in satoshis
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/testnet/ins/addr/{address}/balance", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -766,13 +890,18 @@ class SDK:
 
     
     def testnet_get_address_info(self, request: operations.TestnetGetAddressInfoRequest) -> operations.TestnetGetAddressInfoResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Information On a Neblio Address
+        Returns both NEBL and NTP1 token UTXOs held at the given address.
+        
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/testnet/ntp1/addressinfo/{address}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -791,13 +920,17 @@ class SDK:
 
     
     def testnet_get_address_total_received(self, request: operations.TestnetGetAddressTotalReceivedRequest) -> operations.TestnetGetAddressTotalReceivedResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns total received by address in sats
+        Returns total NEBL received by address in satoshis
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/testnet/ins/addr/{address}/totalReceived", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -812,13 +945,17 @@ class SDK:
 
     
     def testnet_get_address_total_sent(self, request: operations.TestnetGetAddressTotalSentRequest) -> operations.TestnetGetAddressTotalSentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns total sent by address in sats
+        Returns total NEBL sent by address in satoshis
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/testnet/ins/addr/{address}/totalSent", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -833,13 +970,17 @@ class SDK:
 
     
     def testnet_get_address_unconfirmed_balance(self, request: operations.TestnetGetAddressUnconfirmedBalanceRequest) -> operations.TestnetGetAddressUnconfirmedBalanceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns address unconfirmed balance in sats
+        Returns NEBL address unconfirmed balance in satoshis
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/testnet/ins/addr/{address}/unconfirmedBalance", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -854,13 +995,17 @@ class SDK:
 
     
     def testnet_get_address_utxos(self, request: operations.TestnetGetAddressUtxosRequest) -> operations.TestnetGetAddressUtxosResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns all UTXOs at a given address
+        Returns information on each Unspent Transaction Output contained at an address
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/testnet/ins/addr/{address}/utxo", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -875,13 +1020,17 @@ class SDK:
 
     
     def testnet_get_block(self, request: operations.TestnetGetBlockRequest) -> operations.TestnetGetBlockResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns information regarding a Neblio block
+        Returns blockchain data for a given block based upon the block hash
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/testnet/ins/block/{blockhash}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -896,13 +1045,17 @@ class SDK:
 
     
     def testnet_get_block_index(self, request: operations.TestnetGetBlockIndexRequest) -> operations.TestnetGetBlockIndexResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns block hash of block
+        Returns the block hash of a block at a given block index
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/testnet/ins/block-index/{blockindex}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -917,15 +1070,19 @@ class SDK:
 
     
     def testnet_get_faucet(self, request: operations.TestnetGetFaucetRequest) -> operations.TestnetGetFaucetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Withdraws testnet NEBL to the specified address
+        Withdraw testnet NEBL to your Neblio Testnet address. By default amount is 1500000000 or 15 NEBL and has a max of 50 NEBL. Only 2 withdrawals allowed per 24 hour period.
+        
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/testnet/faucet"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -940,13 +1097,17 @@ class SDK:
 
     
     def testnet_get_raw_tx(self, request: operations.TestnetGetRawTxRequest) -> operations.TestnetGetRawTxResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns raw transaction hex
+        Returns raw transaction hex representing a NEBL transaction
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/testnet/ins/rawtx/{txid}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -961,15 +1122,18 @@ class SDK:
 
     
     def testnet_get_status(self, request: operations.TestnetGetStatusRequest) -> operations.TestnetGetStatusResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Utility API for calling several blockchain node functions
+        Utility API for calling several blockchain node functions - getInfo, getDifficulty, getBestBlockHash, getLastBlockHash
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/testnet/ins/status"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -984,13 +1148,17 @@ class SDK:
 
     
     def testnet_get_sync(self) -> operations.TestnetGetSyncResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get node sync status
+        Returns information on the node's sync progress
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/testnet/ins/sync"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1005,13 +1173,18 @@ class SDK:
 
     
     def testnet_get_token_holders(self, request: operations.TestnetGetTokenHoldersRequest) -> operations.TestnetGetTokenHoldersResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Addresses Holding a Token
+        Returns the the the addresses holding a token and how many tokens are held
+        
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/testnet/ntp1/stakeholders/{tokenid}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1030,13 +1203,18 @@ class SDK:
 
     
     def testnet_get_token_id(self, request: operations.TestnetGetTokenIDRequest) -> operations.TestnetGetTokenIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns the tokenId representing a token
+        Translates a token symbol to a tokenId if a token exists with that symbol on the network
+        
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/testnet/ntp1/tokenid/{tokensymbol}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1051,15 +1229,19 @@ class SDK:
 
     
     def testnet_get_token_metadata(self, request: operations.TestnetGetTokenMetadataRequest) -> operations.TestnetGetTokenMetadataResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Metadata of Token
+        Returns the metadata associated with a token.
+        
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/testnet/ntp1/tokenmetadata/{tokenid}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1078,15 +1260,19 @@ class SDK:
 
     
     def testnet_get_token_metadata_of_utxo(self, request: operations.TestnetGetTokenMetadataOfUtxoRequest) -> operations.TestnetGetTokenMetadataOfUtxoResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get UTXO Metadata of Token
+        Returns the metadata associated with a token for that specific utxo instead of the issuance transaction.
+        
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/testnet/ntp1/tokenmetadata/{tokenid}/{utxo}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1105,13 +1291,18 @@ class SDK:
 
     
     def testnet_get_transaction_info(self, request: operations.TestnetGetTransactionInfoRequest) -> operations.TestnetGetTransactionInfoResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Information On an NTP1 Transaction
+        Returns detailed information regarding an NTP1 transaction.
+        
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/testnet/ntp1/transactioninfo/{txid}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1130,13 +1321,17 @@ class SDK:
 
     
     def testnet_get_tx(self, request: operations.TestnetGetTxRequest) -> operations.TestnetGetTxResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns transaction object
+        Returns NEBL transaction object representing a NEBL transaction
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/testnet/ins/tx/{txid}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1151,15 +1346,18 @@ class SDK:
 
     
     def testnet_get_txs(self, request: operations.TestnetGetTxsRequest) -> operations.TestnetGetTxsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get transactions by block or address
+        Returns all transactions by block or address
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/testnet/ins/txs"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1174,22 +1372,24 @@ class SDK:
 
     
     def testnet_issue_token(self, request: operations.TestnetIssueTokenRequest) -> operations.TestnetIssueTokenResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Builds a transaction that issues a new NTP1 Token
+        Builds an unsigned raw transaction that issues a new NTP1 token on the Neblio blockchain.
+        
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/testnet/ntp1/issue"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1208,22 +1408,24 @@ class SDK:
 
     
     def testnet_send_token(self, request: operations.TestnetSendTokenRequest) -> operations.TestnetSendTokenResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Builds a transaction that sends an NTP1 Token
+        Builds an unsigned raw transaction that sends an NTP1 token on the Neblio blockchain.
+        
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/testnet/ntp1/sendtoken"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1242,22 +1444,24 @@ class SDK:
 
     
     def testnet_send_tx(self, request: operations.TestnetSendTxRequest) -> operations.TestnetSendTxResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Broadcasts a signed raw transaction to the network (not NTP1 specific)
+        Broadcasts a signed raw transaction to the network. If successful returns the txid of the broadcast trasnaction.
+        
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/testnet/ins/tx/send"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

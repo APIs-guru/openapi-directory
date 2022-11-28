@@ -1,118 +1,119 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostSamlConfigurationQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=$location" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$location" })
   dollarLocation?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=action" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=action" })
   action?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=addGroupMemberships" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=addGroupMemberships" })
   addGroupMemberships?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=apply" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=apply" })
   apply?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=assertionConsumerServiceURL" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=assertionConsumerServiceURL" })
   assertionConsumerServiceUrl?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=clockTolerance" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=clockTolerance" })
   clockTolerance?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=createUser" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=createUser" })
   createUser?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=defaultGroups" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=defaultGroups" })
   defaultGroups?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=defaultRedirectUrl" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=defaultRedirectUrl" })
   defaultRedirectUrl?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=delete" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=delete" })
   delete?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=digestMethod" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=digestMethod" })
   digestMethod?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=groupMembershipAttribute" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=groupMembershipAttribute" })
   groupMembershipAttribute?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=handleLogout" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=handleLogout" })
   handleLogout?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=idpCertAlias" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=idpCertAlias" })
   idpCertAlias?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=idpHttpRedirect" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=idpHttpRedirect" })
   idpHttpRedirect?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=idpUrl" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=idpUrl" })
   idpUrl?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=keyStorePassword" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=keyStorePassword" })
   keyStorePassword?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=logoutUrl" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=logoutUrl" })
   logoutUrl?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=nameIdFormat" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=nameIdFormat" })
   nameIdFormat?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=path" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=path" })
   path?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=post" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=post" })
   post?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=propertylist" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=propertylist" })
   propertylist?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=service.ranking" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=service.ranking" })
   serviceRanking?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=serviceProviderEntityId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=serviceProviderEntityId" })
   serviceProviderEntityId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=signatureMethod" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=signatureMethod" })
   signatureMethod?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=spPrivateKeyAlias" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=spPrivateKeyAlias" })
   spPrivateKeyAlias?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=synchronizeAttributes" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=synchronizeAttributes" })
   synchronizeAttributes?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=useEncryption" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=useEncryption" })
   useEncryption?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=userIDAttribute" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userIDAttribute" })
   userIdAttribute?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=userIntermediatePath" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userIntermediatePath" })
   userIntermediatePath?: string;
 }
 
 
 export class PostSamlConfigurationRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PostSamlConfigurationQueryParams;
 }
 
 
 export class PostSamlConfigurationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postSamlConfiguration302TextPlainString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postSamlConfigurationDefaultTextPlainString?: string;
 }

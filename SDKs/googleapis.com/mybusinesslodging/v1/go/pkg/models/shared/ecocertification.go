@@ -42,6 +42,8 @@ const (
 	EcoCertificationEcoCertificateEnumVireoSrl                                         EcoCertificationEcoCertificateEnum = "VIREO_SRL"
 )
 
+// EcoCertification
+// An eco certificate awarded to the hotel.
 type EcoCertification struct {
 	Awarded          *bool                                 `json:"awarded,omitempty"`
 	AwardedException *EcoCertificationAwardedExceptionEnum `json:"awardedException,omitempty"`

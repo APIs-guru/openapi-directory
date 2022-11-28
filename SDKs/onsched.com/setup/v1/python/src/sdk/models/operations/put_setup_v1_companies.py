@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from sdk.models import shared
 
@@ -18,7 +21,7 @@ class PutSetupV1CompaniesRequest:
 
 @dataclass
 class PutSetupV1CompaniesResponse:
+    content_type: str = field()
+    status_code: int = field()
     company_view_model: Optional[shared.CompanyViewModel] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

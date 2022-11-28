@@ -1,91 +1,67 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class NodesContributorsCreatePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=node_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=node_id" })
   nodeId: string;
 }
 
 export enum NodesContributorsCreateContributorAttributesPermissionEnum {
-    Read = "read"
-,    Write = "write"
-,    Admin = "admin"
+    Read = "read",
+    Write = "write",
+    Admin = "admin"
 }
 
 
-// NodesContributorsCreateContributorAttributes
+// NodesContributorsCreateContributorAttributesInput
 /** 
  * The properties of the contributor entity.
 **/
-export class NodesContributorsCreateContributorAttributes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bibliographic" })
+export class NodesContributorsCreateContributorAttributesInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=bibliographic" })
   bibliographic?: boolean;
 
-  @Metadata({ data: "json, name=index" })
+  @SpeakeasyMetadata({ data: "json, name=index" })
   index?: number;
 
-  @Metadata({ data: "json, name=permission" })
+  @SpeakeasyMetadata({ data: "json, name=permission" })
   permission?: NodesContributorsCreateContributorAttributesPermissionEnum;
-
-  @Metadata({ data: "json, name=unregistered_contributor" })
-  unregisteredContributor?: string;
 }
 
 
-// NodesContributorsCreateContributorLinks
-/** 
- * URLs to alternative representations of the contributor entity.
-**/
-export class NodesContributorsCreateContributorLinks extends SpeakeasyBase {
-  @Metadata({ data: "json, name=self" })
-  self?: string;
-}
-
-
-// NodesContributorsCreateContributorRelationships
+// NodesContributorsCreateContributorRelationshipsInput
 /** 
  * URLs to other entities or entity collections that have a relationship to the contributor entity.
 **/
-export class NodesContributorsCreateContributorRelationships extends SpeakeasyBase {
-  @Metadata({ data: "json, name=node" })
-  node: string;
-
-  @Metadata({ data: "json, name=user" })
+export class NodesContributorsCreateContributorRelationshipsInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=user" })
   user: string;
 }
 
 
-export class NodesContributorsCreateContributor extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attributes" })
-  attributes?: NodesContributorsCreateContributorAttributes;
+export class NodesContributorsCreateContributorInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=attributes" })
+  attributes?: NodesContributorsCreateContributorAttributesInput;
 
-  @Metadata({ data: "json, name=id" })
-  id?: string;
-
-  @Metadata({ data: "json, name=links" })
-  links?: NodesContributorsCreateContributorLinks;
-
-  @Metadata({ data: "json, name=relationships" })
-  relationships: NodesContributorsCreateContributorRelationships;
-
-  @Metadata({ data: "json, name=type" })
-  type: string;
+  @SpeakeasyMetadata({ data: "json, name=relationships" })
+  relationships: NodesContributorsCreateContributorRelationshipsInput;
 }
 
 
 export class NodesContributorsCreateRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: NodesContributorsCreatePathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
-  request: NodesContributorsCreateContributor;
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: NodesContributorsCreateContributorInput;
 }
 
 
 export class NodesContributorsCreateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

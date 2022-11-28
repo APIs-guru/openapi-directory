@@ -10,7 +10,7 @@ type UpdateTaskPathParams struct {
 
 type UpdateTaskRequest struct {
 	PathParams UpdateTaskPathParams
-	Request    shared.Task `request:"mediaType=application/json"`
+	Request    shared.TaskInput `request:"mediaType=application/json"`
 }
 
 type UpdateTaskResponse struct {

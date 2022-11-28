@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TranslationsResource } from "./translationsresource";
+
 
 
 // TranslationsListResponse
@@ -8,6 +8,6 @@ import { TranslationsResource } from "./translationsresource";
  * The main language translation response message.
 **/
 export class TranslationsListResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=translations", elemType: shared.TranslationsResource })
+  @SpeakeasyMetadata({ data: "json, name=translations", elemType: TranslationsResource })
   translations?: TranslationsResource[];
 }

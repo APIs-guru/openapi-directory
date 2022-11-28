@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BuiltInSlotTypeSummary
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides summary information about a built-in slot type for the <a>ListBuiltInSlotTypes</a> operation.
 **/
 export class BuiltInSlotTypeSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=slotTypeSignature" })
+  @SpeakeasyMetadata({ data: "json, name=slotTypeSignature" })
   slotTypeSignature?: string;
 }

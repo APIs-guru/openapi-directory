@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// GameSessionPlacement
+// <p>Object that describes a <a>StartGameSessionPlacement</a> request. This object includes the full details of the original request plus the current status and start/end time stamps.</p> <p>Game session placement-related operations include:</p> <ul> <li> <p> <a>StartGameSessionPlacement</a> </p> </li> <li> <p> <a>DescribeGameSessionPlacement</a> </p> </li> <li> <p> <a>StopGameSessionPlacement</a> </p> </li> </ul>
 type GameSessionPlacement struct {
 	DNSName                   *string                        `json:"DnsName,omitempty"`
 	EndTime                   *time.Time                     `json:"EndTime,omitempty"`

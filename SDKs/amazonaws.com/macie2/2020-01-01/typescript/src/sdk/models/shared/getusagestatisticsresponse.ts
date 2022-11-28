@@ -1,16 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UsageRecord } from "./usagerecord";
 import { TimeRangeEnum } from "./timerangeenum";
 
 
+
 export class GetUsageStatisticsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=records", elemType: shared.UsageRecord })
+  @SpeakeasyMetadata({ data: "json, name=records", elemType: UsageRecord })
   records?: UsageRecord[];
 
-  @Metadata({ data: "json, name=timeRange" })
+  @SpeakeasyMetadata({ data: "json, name=timeRange" })
   timeRange?: TimeRangeEnum;
 }

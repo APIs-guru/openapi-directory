@@ -1,5 +1,7 @@
 package shared
 
+// S3DataSource
+// Describes the S3 data source.
 type S3DataSource struct {
 	AttributeNames         []string                `json:"AttributeNames,omitempty"`
 	S3DataDistributionType *S3DataDistributionEnum `json:"S3DataDistributionType,omitempty"`

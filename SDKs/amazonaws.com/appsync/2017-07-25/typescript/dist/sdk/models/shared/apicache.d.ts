@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ApiCachingBehaviorEnum } from "./apicachingbehaviorenum";
 import { ApiCacheStatusEnum } from "./apicachestatusenum";
 import { ApiCacheTypeEnum } from "./apicachetypeenum";

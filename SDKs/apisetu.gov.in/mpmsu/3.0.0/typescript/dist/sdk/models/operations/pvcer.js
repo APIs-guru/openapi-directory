@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PvcerRequestBodyCertificateParameters = /** @class */ (function (_super) {
     __extends(PvcerRequestBodyCertificateParameters, _super);
@@ -30,19 +30,19 @@ var PvcerRequestBodyCertificateParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=APPNO" }),
+        SpeakeasyMetadata({ data: "json, name=APPNO" }),
         __metadata("design:type", String)
     ], PvcerRequestBodyCertificateParameters.prototype, "appno", void 0);
     __decorate([
-        Metadata({ data: "json, name=Date_Of_Birth" }),
+        SpeakeasyMetadata({ data: "json, name=Date_Of_Birth" }),
         __metadata("design:type", String)
     ], PvcerRequestBodyCertificateParameters.prototype, "dateOfBirth", void 0);
     __decorate([
-        Metadata({ data: "json, name=ENROLNO" }),
+        SpeakeasyMetadata({ data: "json, name=ENROLNO" }),
         __metadata("design:type", String)
     ], PvcerRequestBodyCertificateParameters.prototype, "enrolno", void 0);
     __decorate([
-        Metadata({ data: "json, name=ROLLNO" }),
+        SpeakeasyMetadata({ data: "json, name=ROLLNO" }),
         __metadata("design:type", String)
     ], PvcerRequestBodyCertificateParameters.prototype, "rollno", void 0);
     return PvcerRequestBodyCertificateParameters;
@@ -58,19 +58,19 @@ var PvcerRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=certificateParameters" }),
+        SpeakeasyMetadata({ data: "json, name=certificateParameters" }),
         __metadata("design:type", PvcerRequestBodyCertificateParameters)
     ], PvcerRequestBody.prototype, "certificateParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=consentArtifact" }),
+        SpeakeasyMetadata({ data: "json, name=consentArtifact" }),
         __metadata("design:type", Object)
     ], PvcerRequestBody.prototype, "consentArtifact", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], PvcerRequestBody.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=txnId" }),
+        SpeakeasyMetadata({ data: "json, name=txnId" }),
         __metadata("design:type", String)
     ], PvcerRequestBody.prototype, "txnId", void 0);
     return PvcerRequestBody;
@@ -82,32 +82,16 @@ var PvcerSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], PvcerSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeClientId)
     ], PvcerSecurity.prototype, "clientId", void 0);
     return PvcerSecurity;
 }(SpeakeasyBase));
 export { PvcerSecurity };
-var PvcerRequest = /** @class */ (function (_super) {
-    __extends(PvcerRequest, _super);
-    function PvcerRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", PvcerRequestBody)
-    ], PvcerRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", PvcerSecurity)
-    ], PvcerRequest.prototype, "security", void 0);
-    return PvcerRequest;
-}(SpeakeasyBase));
-export { PvcerRequest };
 export var Pvcer400ApplicationJsonErrorEnum;
 (function (Pvcer400ApplicationJsonErrorEnum) {
     Pvcer400ApplicationJsonErrorEnum["MissingParameter"] = "missing_parameter";
@@ -130,11 +114,11 @@ var Pvcer400ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Pvcer400ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Pvcer400ApplicationJson.prototype, "errorDescription", void 0);
     return Pvcer400ApplicationJson;
@@ -156,11 +140,11 @@ var Pvcer401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Pvcer401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Pvcer401ApplicationJson.prototype, "errorDescription", void 0);
     return Pvcer401ApplicationJson;
@@ -182,11 +166,11 @@ var Pvcer404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Pvcer404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Pvcer404ApplicationJson.prototype, "errorDescription", void 0);
     return Pvcer404ApplicationJson;
@@ -206,11 +190,11 @@ var Pvcer500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Pvcer500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Pvcer500ApplicationJson.prototype, "errorDescription", void 0);
     return Pvcer500ApplicationJson;
@@ -230,11 +214,11 @@ var Pvcer502ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Pvcer502ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Pvcer502ApplicationJson.prototype, "errorDescription", void 0);
     return Pvcer502ApplicationJson;
@@ -254,11 +238,11 @@ var Pvcer503ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Pvcer503ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Pvcer503ApplicationJson.prototype, "errorDescription", void 0);
     return Pvcer503ApplicationJson;
@@ -278,55 +262,71 @@ var Pvcer504ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Pvcer504ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Pvcer504ApplicationJson.prototype, "errorDescription", void 0);
     return Pvcer504ApplicationJson;
 }(SpeakeasyBase));
 export { Pvcer504ApplicationJson };
+var PvcerRequest = /** @class */ (function (_super) {
+    __extends(PvcerRequest, _super);
+    function PvcerRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", PvcerRequestBody)
+    ], PvcerRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", PvcerSecurity)
+    ], PvcerRequest.prototype, "security", void 0);
+    return PvcerRequest;
+}(SpeakeasyBase));
+export { PvcerRequest };
 var PvcerResponse = /** @class */ (function (_super) {
     __extends(PvcerResponse, _super);
     function PvcerResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PvcerResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PvcerResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Pvcer400ApplicationJson)
     ], PvcerResponse.prototype, "pvcer400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Pvcer401ApplicationJson)
     ], PvcerResponse.prototype, "pvcer401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Pvcer404ApplicationJson)
     ], PvcerResponse.prototype, "pvcer404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Pvcer500ApplicationJson)
     ], PvcerResponse.prototype, "pvcer500ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Pvcer502ApplicationJson)
     ], PvcerResponse.prototype, "pvcer502ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Pvcer503ApplicationJson)
     ], PvcerResponse.prototype, "pvcer503ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Pvcer504ApplicationJson)
     ], PvcerResponse.prototype, "pvcer504ApplicationJsonObject", void 0);
     return PvcerResponse;

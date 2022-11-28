@@ -1,80 +1,81 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PullsListPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=owner" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=owner" })
   owner: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repo" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repo" })
   repo: string;
 }
 
 export enum PullsListDirectionEnum {
-    Asc = "asc"
-,    Desc = "desc"
+    Asc = "asc",
+    Desc = "desc"
 }
 
 export enum PullsListSortEnum {
-    Created = "created"
-,    Updated = "updated"
-,    Popularity = "popularity"
-,    LongRunning = "long-running"
+    Created = "created",
+    Updated = "updated",
+    Popularity = "popularity",
+    LongRunning = "long-running"
 }
 
 export enum PullsListStateEnum {
-    Open = "open"
-,    Closed = "closed"
-,    All = "all"
+    Open = "open",
+    Closed = "closed",
+    All = "all"
 }
 
 
 export class PullsListQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=base" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=base" })
   base?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=direction" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=direction" })
   direction?: PullsListDirectionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=head" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=head" })
   head?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: PullsListSortEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=state" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=state" })
   state?: PullsListStateEnum;
 }
 
 
 export class PullsListRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PullsListPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PullsListQueryParams;
 }
 
 
 export class PullsListResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.PullRequestSimple })
+  @SpeakeasyMetadata({ elemType: shared.PullRequestSimple })
   pullRequestSimples?: shared.PullRequestSimple[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationError?: shared.ValidationError;
 }

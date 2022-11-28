@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CreateAlarmModelHeaders = /** @class */ (function (_super) {
     __extends(CreateAlarmModelHeaders, _super);
@@ -30,31 +30,31 @@ var CreateAlarmModelHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], CreateAlarmModelHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], CreateAlarmModelHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], CreateAlarmModelHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], CreateAlarmModelHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], CreateAlarmModelHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], CreateAlarmModelHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], CreateAlarmModelHeaders.prototype, "xAmzSignedHeaders", void 0);
     return CreateAlarmModelHeaders;
@@ -70,11 +70,11 @@ var CreateAlarmModelRequestBodyAlarmCapabilities = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=acknowledgeFlow" }),
+        SpeakeasyMetadata({ data: "json, name=acknowledgeFlow" }),
         __metadata("design:type", shared.AcknowledgeFlow)
     ], CreateAlarmModelRequestBodyAlarmCapabilities.prototype, "acknowledgeFlow", void 0);
     __decorate([
-        Metadata({ data: "json, name=initializationConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=initializationConfiguration" }),
         __metadata("design:type", shared.InitializationConfiguration)
     ], CreateAlarmModelRequestBodyAlarmCapabilities.prototype, "initializationConfiguration", void 0);
     return CreateAlarmModelRequestBodyAlarmCapabilities;
@@ -90,7 +90,7 @@ var CreateAlarmModelRequestBodyAlarmEventActions = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=alarmActions", elemType: shared.AlarmAction }),
+        SpeakeasyMetadata({ data: "json, name=alarmActions", elemType: shared.AlarmAction }),
         __metadata("design:type", Array)
     ], CreateAlarmModelRequestBodyAlarmEventActions.prototype, "alarmActions", void 0);
     return CreateAlarmModelRequestBodyAlarmEventActions;
@@ -106,7 +106,7 @@ var CreateAlarmModelRequestBodyAlarmNotification = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=notificationActions", elemType: shared.NotificationAction }),
+        SpeakeasyMetadata({ data: "json, name=notificationActions", elemType: shared.NotificationAction }),
         __metadata("design:type", Array)
     ], CreateAlarmModelRequestBodyAlarmNotification.prototype, "notificationActions", void 0);
     return CreateAlarmModelRequestBodyAlarmNotification;
@@ -122,7 +122,7 @@ var CreateAlarmModelRequestBodyAlarmRule = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=simpleRule" }),
+        SpeakeasyMetadata({ data: "json, name=simpleRule" }),
         __metadata("design:type", shared.SimpleRule)
     ], CreateAlarmModelRequestBodyAlarmRule.prototype, "simpleRule", void 0);
     return CreateAlarmModelRequestBodyAlarmRule;
@@ -134,43 +134,43 @@ var CreateAlarmModelRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=alarmCapabilities" }),
+        SpeakeasyMetadata({ data: "json, name=alarmCapabilities" }),
         __metadata("design:type", CreateAlarmModelRequestBodyAlarmCapabilities)
     ], CreateAlarmModelRequestBody.prototype, "alarmCapabilities", void 0);
     __decorate([
-        Metadata({ data: "json, name=alarmEventActions" }),
+        SpeakeasyMetadata({ data: "json, name=alarmEventActions" }),
         __metadata("design:type", CreateAlarmModelRequestBodyAlarmEventActions)
     ], CreateAlarmModelRequestBody.prototype, "alarmEventActions", void 0);
     __decorate([
-        Metadata({ data: "json, name=alarmModelDescription" }),
+        SpeakeasyMetadata({ data: "json, name=alarmModelDescription" }),
         __metadata("design:type", String)
     ], CreateAlarmModelRequestBody.prototype, "alarmModelDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=alarmModelName" }),
+        SpeakeasyMetadata({ data: "json, name=alarmModelName" }),
         __metadata("design:type", String)
     ], CreateAlarmModelRequestBody.prototype, "alarmModelName", void 0);
     __decorate([
-        Metadata({ data: "json, name=alarmNotification" }),
+        SpeakeasyMetadata({ data: "json, name=alarmNotification" }),
         __metadata("design:type", CreateAlarmModelRequestBodyAlarmNotification)
     ], CreateAlarmModelRequestBody.prototype, "alarmNotification", void 0);
     __decorate([
-        Metadata({ data: "json, name=alarmRule" }),
+        SpeakeasyMetadata({ data: "json, name=alarmRule" }),
         __metadata("design:type", CreateAlarmModelRequestBodyAlarmRule)
     ], CreateAlarmModelRequestBody.prototype, "alarmRule", void 0);
     __decorate([
-        Metadata({ data: "json, name=key" }),
+        SpeakeasyMetadata({ data: "json, name=key" }),
         __metadata("design:type", String)
     ], CreateAlarmModelRequestBody.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "json, name=roleArn" }),
+        SpeakeasyMetadata({ data: "json, name=roleArn" }),
         __metadata("design:type", String)
     ], CreateAlarmModelRequestBody.prototype, "roleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=severity" }),
+        SpeakeasyMetadata({ data: "json, name=severity" }),
         __metadata("design:type", Number)
     ], CreateAlarmModelRequestBody.prototype, "severity", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags", elemType: shared.Tag }),
+        SpeakeasyMetadata({ data: "json, name=tags", elemType: shared.Tag }),
         __metadata("design:type", Array)
     ], CreateAlarmModelRequestBody.prototype, "tags", void 0);
     return CreateAlarmModelRequestBody;
@@ -182,11 +182,11 @@ var CreateAlarmModelRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateAlarmModelHeaders)
     ], CreateAlarmModelRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", CreateAlarmModelRequestBody)
     ], CreateAlarmModelRequest.prototype, "request", void 0);
     return CreateAlarmModelRequest;
@@ -198,43 +198,43 @@ var CreateAlarmModelResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CreateAlarmModelResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.CreateAlarmModelResponse)
     ], CreateAlarmModelResponse.prototype, "createAlarmModelResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateAlarmModelResponse.prototype, "internalFailureException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateAlarmModelResponse.prototype, "invalidRequestException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateAlarmModelResponse.prototype, "limitExceededException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateAlarmModelResponse.prototype, "resourceAlreadyExistsException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateAlarmModelResponse.prototype, "resourceInUseException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateAlarmModelResponse.prototype, "serviceUnavailableException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CreateAlarmModelResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateAlarmModelResponse.prototype, "throttlingException", void 0);
     return CreateAlarmModelResponse;

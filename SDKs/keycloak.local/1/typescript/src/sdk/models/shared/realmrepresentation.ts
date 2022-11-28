@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AuthenticationFlowRepresentation } from "./authenticationflowrepresentation";
 import { AuthenticatorConfigRepresentation } from "./authenticatorconfigrepresentation";
 import { ClientScopeRepresentation } from "./clientscoperepresentation";
@@ -15,352 +14,352 @@ import { RolesRepresentation } from "./rolesrepresentation";
 import { ScopeMappingRepresentation } from "./scopemappingrepresentation";
 import { UserFederationMapperRepresentation } from "./userfederationmapperrepresentation";
 import { UserFederationProviderRepresentation } from "./userfederationproviderrepresentation";
-import { UserRepresentation } from "./userrepresentation";
+
 
 
 export class RealmRepresentation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessCodeLifespan" })
+  @SpeakeasyMetadata({ data: "json, name=accessCodeLifespan" })
   accessCodeLifespan?: number;
 
-  @Metadata({ data: "json, name=accessCodeLifespanLogin" })
+  @SpeakeasyMetadata({ data: "json, name=accessCodeLifespanLogin" })
   accessCodeLifespanLogin?: number;
 
-  @Metadata({ data: "json, name=accessCodeLifespanUserAction" })
+  @SpeakeasyMetadata({ data: "json, name=accessCodeLifespanUserAction" })
   accessCodeLifespanUserAction?: number;
 
-  @Metadata({ data: "json, name=accessTokenLifespan" })
+  @SpeakeasyMetadata({ data: "json, name=accessTokenLifespan" })
   accessTokenLifespan?: number;
 
-  @Metadata({ data: "json, name=accessTokenLifespanForImplicitFlow" })
+  @SpeakeasyMetadata({ data: "json, name=accessTokenLifespanForImplicitFlow" })
   accessTokenLifespanForImplicitFlow?: number;
 
-  @Metadata({ data: "json, name=accountTheme" })
+  @SpeakeasyMetadata({ data: "json, name=accountTheme" })
   accountTheme?: string;
 
-  @Metadata({ data: "json, name=actionTokenGeneratedByAdminLifespan" })
+  @SpeakeasyMetadata({ data: "json, name=actionTokenGeneratedByAdminLifespan" })
   actionTokenGeneratedByAdminLifespan?: number;
 
-  @Metadata({ data: "json, name=actionTokenGeneratedByUserLifespan" })
+  @SpeakeasyMetadata({ data: "json, name=actionTokenGeneratedByUserLifespan" })
   actionTokenGeneratedByUserLifespan?: number;
 
-  @Metadata({ data: "json, name=adminEventsDetailsEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=adminEventsDetailsEnabled" })
   adminEventsDetailsEnabled?: boolean;
 
-  @Metadata({ data: "json, name=adminEventsEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=adminEventsEnabled" })
   adminEventsEnabled?: boolean;
 
-  @Metadata({ data: "json, name=adminTheme" })
+  @SpeakeasyMetadata({ data: "json, name=adminTheme" })
   adminTheme?: string;
 
-  @Metadata({ data: "json, name=attributes" })
+  @SpeakeasyMetadata({ data: "json, name=attributes" })
   attributes?: Map<string, any>;
 
-  @Metadata({ data: "json, name=authenticationFlows", elemType: shared.AuthenticationFlowRepresentation })
+  @SpeakeasyMetadata({ data: "json, name=authenticationFlows", elemType: AuthenticationFlowRepresentation })
   authenticationFlows?: AuthenticationFlowRepresentation[];
 
-  @Metadata({ data: "json, name=authenticatorConfig", elemType: shared.AuthenticatorConfigRepresentation })
+  @SpeakeasyMetadata({ data: "json, name=authenticatorConfig", elemType: AuthenticatorConfigRepresentation })
   authenticatorConfig?: AuthenticatorConfigRepresentation[];
 
-  @Metadata({ data: "json, name=browserFlow" })
+  @SpeakeasyMetadata({ data: "json, name=browserFlow" })
   browserFlow?: string;
 
-  @Metadata({ data: "json, name=browserSecurityHeaders" })
+  @SpeakeasyMetadata({ data: "json, name=browserSecurityHeaders" })
   browserSecurityHeaders?: Map<string, any>;
 
-  @Metadata({ data: "json, name=bruteForceProtected" })
+  @SpeakeasyMetadata({ data: "json, name=bruteForceProtected" })
   bruteForceProtected?: boolean;
 
-  @Metadata({ data: "json, name=clientAuthenticationFlow" })
+  @SpeakeasyMetadata({ data: "json, name=clientAuthenticationFlow" })
   clientAuthenticationFlow?: string;
 
-  @Metadata({ data: "json, name=clientScopeMappings" })
+  @SpeakeasyMetadata({ data: "json, name=clientScopeMappings" })
   clientScopeMappings?: Map<string, any>;
 
-  @Metadata({ data: "json, name=clientScopes", elemType: shared.ClientScopeRepresentation })
+  @SpeakeasyMetadata({ data: "json, name=clientScopes", elemType: ClientScopeRepresentation })
   clientScopes?: ClientScopeRepresentation[];
 
-  @Metadata({ data: "json, name=clientSessionIdleTimeout" })
+  @SpeakeasyMetadata({ data: "json, name=clientSessionIdleTimeout" })
   clientSessionIdleTimeout?: number;
 
-  @Metadata({ data: "json, name=clientSessionMaxLifespan" })
+  @SpeakeasyMetadata({ data: "json, name=clientSessionMaxLifespan" })
   clientSessionMaxLifespan?: number;
 
-  @Metadata({ data: "json, name=clients", elemType: shared.ClientRepresentation })
+  @SpeakeasyMetadata({ data: "json, name=clients", elemType: ClientRepresentation })
   clients?: ClientRepresentation[];
 
-  @Metadata({ data: "json, name=components" })
+  @SpeakeasyMetadata({ data: "json, name=components" })
   components?: MultivaluedHashMap;
 
-  @Metadata({ data: "json, name=defaultDefaultClientScopes" })
+  @SpeakeasyMetadata({ data: "json, name=defaultDefaultClientScopes" })
   defaultDefaultClientScopes?: string[];
 
-  @Metadata({ data: "json, name=defaultGroups" })
+  @SpeakeasyMetadata({ data: "json, name=defaultGroups" })
   defaultGroups?: string[];
 
-  @Metadata({ data: "json, name=defaultLocale" })
+  @SpeakeasyMetadata({ data: "json, name=defaultLocale" })
   defaultLocale?: string;
 
-  @Metadata({ data: "json, name=defaultOptionalClientScopes" })
+  @SpeakeasyMetadata({ data: "json, name=defaultOptionalClientScopes" })
   defaultOptionalClientScopes?: string[];
 
-  @Metadata({ data: "json, name=defaultRoles" })
+  @SpeakeasyMetadata({ data: "json, name=defaultRoles" })
   defaultRoles?: string[];
 
-  @Metadata({ data: "json, name=defaultSignatureAlgorithm" })
+  @SpeakeasyMetadata({ data: "json, name=defaultSignatureAlgorithm" })
   defaultSignatureAlgorithm?: string;
 
-  @Metadata({ data: "json, name=directGrantFlow" })
+  @SpeakeasyMetadata({ data: "json, name=directGrantFlow" })
   directGrantFlow?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=displayNameHtml" })
+  @SpeakeasyMetadata({ data: "json, name=displayNameHtml" })
   displayNameHtml?: string;
 
-  @Metadata({ data: "json, name=dockerAuthenticationFlow" })
+  @SpeakeasyMetadata({ data: "json, name=dockerAuthenticationFlow" })
   dockerAuthenticationFlow?: string;
 
-  @Metadata({ data: "json, name=duplicateEmailsAllowed" })
+  @SpeakeasyMetadata({ data: "json, name=duplicateEmailsAllowed" })
   duplicateEmailsAllowed?: boolean;
 
-  @Metadata({ data: "json, name=editUsernameAllowed" })
+  @SpeakeasyMetadata({ data: "json, name=editUsernameAllowed" })
   editUsernameAllowed?: boolean;
 
-  @Metadata({ data: "json, name=emailTheme" })
+  @SpeakeasyMetadata({ data: "json, name=emailTheme" })
   emailTheme?: string;
 
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=enabledEventTypes" })
+  @SpeakeasyMetadata({ data: "json, name=enabledEventTypes" })
   enabledEventTypes?: string[];
 
-  @Metadata({ data: "json, name=eventsEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=eventsEnabled" })
   eventsEnabled?: boolean;
 
-  @Metadata({ data: "json, name=eventsExpiration" })
+  @SpeakeasyMetadata({ data: "json, name=eventsExpiration" })
   eventsExpiration?: number;
 
-  @Metadata({ data: "json, name=eventsListeners" })
+  @SpeakeasyMetadata({ data: "json, name=eventsListeners" })
   eventsListeners?: string[];
 
-  @Metadata({ data: "json, name=failureFactor" })
+  @SpeakeasyMetadata({ data: "json, name=failureFactor" })
   failureFactor?: number;
 
-  @Metadata({ data: "json, name=federatedUsers", elemType: shared.UserRepresentation })
+  @SpeakeasyMetadata({ data: "json, name=federatedUsers", elemType: UserRepresentation })
   federatedUsers?: UserRepresentation[];
 
-  @Metadata({ data: "json, name=groups", elemType: shared.GroupRepresentation })
+  @SpeakeasyMetadata({ data: "json, name=groups", elemType: GroupRepresentation })
   groups?: GroupRepresentation[];
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=identityProviderMappers", elemType: shared.IdentityProviderMapperRepresentation })
+  @SpeakeasyMetadata({ data: "json, name=identityProviderMappers", elemType: IdentityProviderMapperRepresentation })
   identityProviderMappers?: IdentityProviderMapperRepresentation[];
 
-  @Metadata({ data: "json, name=identityProviders", elemType: shared.IdentityProviderRepresentation })
+  @SpeakeasyMetadata({ data: "json, name=identityProviders", elemType: IdentityProviderRepresentation })
   identityProviders?: IdentityProviderRepresentation[];
 
-  @Metadata({ data: "json, name=internationalizationEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=internationalizationEnabled" })
   internationalizationEnabled?: boolean;
 
-  @Metadata({ data: "json, name=keycloakVersion" })
+  @SpeakeasyMetadata({ data: "json, name=keycloakVersion" })
   keycloakVersion?: string;
 
-  @Metadata({ data: "json, name=loginTheme" })
+  @SpeakeasyMetadata({ data: "json, name=loginTheme" })
   loginTheme?: string;
 
-  @Metadata({ data: "json, name=loginWithEmailAllowed" })
+  @SpeakeasyMetadata({ data: "json, name=loginWithEmailAllowed" })
   loginWithEmailAllowed?: boolean;
 
-  @Metadata({ data: "json, name=maxDeltaTimeSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=maxDeltaTimeSeconds" })
   maxDeltaTimeSeconds?: number;
 
-  @Metadata({ data: "json, name=maxFailureWaitSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=maxFailureWaitSeconds" })
   maxFailureWaitSeconds?: number;
 
-  @Metadata({ data: "json, name=minimumQuickLoginWaitSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=minimumQuickLoginWaitSeconds" })
   minimumQuickLoginWaitSeconds?: number;
 
-  @Metadata({ data: "json, name=notBefore" })
+  @SpeakeasyMetadata({ data: "json, name=notBefore" })
   notBefore?: number;
 
-  @Metadata({ data: "json, name=offlineSessionIdleTimeout" })
+  @SpeakeasyMetadata({ data: "json, name=offlineSessionIdleTimeout" })
   offlineSessionIdleTimeout?: number;
 
-  @Metadata({ data: "json, name=offlineSessionMaxLifespan" })
+  @SpeakeasyMetadata({ data: "json, name=offlineSessionMaxLifespan" })
   offlineSessionMaxLifespan?: number;
 
-  @Metadata({ data: "json, name=offlineSessionMaxLifespanEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=offlineSessionMaxLifespanEnabled" })
   offlineSessionMaxLifespanEnabled?: boolean;
 
-  @Metadata({ data: "json, name=otpPolicyAlgorithm" })
+  @SpeakeasyMetadata({ data: "json, name=otpPolicyAlgorithm" })
   otpPolicyAlgorithm?: string;
 
-  @Metadata({ data: "json, name=otpPolicyDigits" })
+  @SpeakeasyMetadata({ data: "json, name=otpPolicyDigits" })
   otpPolicyDigits?: number;
 
-  @Metadata({ data: "json, name=otpPolicyInitialCounter" })
+  @SpeakeasyMetadata({ data: "json, name=otpPolicyInitialCounter" })
   otpPolicyInitialCounter?: number;
 
-  @Metadata({ data: "json, name=otpPolicyLookAheadWindow" })
+  @SpeakeasyMetadata({ data: "json, name=otpPolicyLookAheadWindow" })
   otpPolicyLookAheadWindow?: number;
 
-  @Metadata({ data: "json, name=otpPolicyPeriod" })
+  @SpeakeasyMetadata({ data: "json, name=otpPolicyPeriod" })
   otpPolicyPeriod?: number;
 
-  @Metadata({ data: "json, name=otpPolicyType" })
+  @SpeakeasyMetadata({ data: "json, name=otpPolicyType" })
   otpPolicyType?: string;
 
-  @Metadata({ data: "json, name=otpSupportedApplications" })
+  @SpeakeasyMetadata({ data: "json, name=otpSupportedApplications" })
   otpSupportedApplications?: string[];
 
-  @Metadata({ data: "json, name=passwordPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=passwordPolicy" })
   passwordPolicy?: string;
 
-  @Metadata({ data: "json, name=permanentLockout" })
+  @SpeakeasyMetadata({ data: "json, name=permanentLockout" })
   permanentLockout?: boolean;
 
-  @Metadata({ data: "json, name=protocolMappers", elemType: shared.ProtocolMapperRepresentation })
+  @SpeakeasyMetadata({ data: "json, name=protocolMappers", elemType: ProtocolMapperRepresentation })
   protocolMappers?: ProtocolMapperRepresentation[];
 
-  @Metadata({ data: "json, name=quickLoginCheckMilliSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=quickLoginCheckMilliSeconds" })
   quickLoginCheckMilliSeconds?: number;
 
-  @Metadata({ data: "json, name=realm" })
+  @SpeakeasyMetadata({ data: "json, name=realm" })
   realm?: string;
 
-  @Metadata({ data: "json, name=refreshTokenMaxReuse" })
+  @SpeakeasyMetadata({ data: "json, name=refreshTokenMaxReuse" })
   refreshTokenMaxReuse?: number;
 
-  @Metadata({ data: "json, name=registrationAllowed" })
+  @SpeakeasyMetadata({ data: "json, name=registrationAllowed" })
   registrationAllowed?: boolean;
 
-  @Metadata({ data: "json, name=registrationEmailAsUsername" })
+  @SpeakeasyMetadata({ data: "json, name=registrationEmailAsUsername" })
   registrationEmailAsUsername?: boolean;
 
-  @Metadata({ data: "json, name=registrationFlow" })
+  @SpeakeasyMetadata({ data: "json, name=registrationFlow" })
   registrationFlow?: string;
 
-  @Metadata({ data: "json, name=rememberMe" })
+  @SpeakeasyMetadata({ data: "json, name=rememberMe" })
   rememberMe?: boolean;
 
-  @Metadata({ data: "json, name=requiredActions", elemType: shared.RequiredActionProviderRepresentation })
+  @SpeakeasyMetadata({ data: "json, name=requiredActions", elemType: RequiredActionProviderRepresentation })
   requiredActions?: RequiredActionProviderRepresentation[];
 
-  @Metadata({ data: "json, name=resetCredentialsFlow" })
+  @SpeakeasyMetadata({ data: "json, name=resetCredentialsFlow" })
   resetCredentialsFlow?: string;
 
-  @Metadata({ data: "json, name=resetPasswordAllowed" })
+  @SpeakeasyMetadata({ data: "json, name=resetPasswordAllowed" })
   resetPasswordAllowed?: boolean;
 
-  @Metadata({ data: "json, name=revokeRefreshToken" })
+  @SpeakeasyMetadata({ data: "json, name=revokeRefreshToken" })
   revokeRefreshToken?: boolean;
 
-  @Metadata({ data: "json, name=roles" })
+  @SpeakeasyMetadata({ data: "json, name=roles" })
   roles?: RolesRepresentation;
 
-  @Metadata({ data: "json, name=scopeMappings", elemType: shared.ScopeMappingRepresentation })
+  @SpeakeasyMetadata({ data: "json, name=scopeMappings", elemType: ScopeMappingRepresentation })
   scopeMappings?: ScopeMappingRepresentation[];
 
-  @Metadata({ data: "json, name=smtpServer" })
+  @SpeakeasyMetadata({ data: "json, name=smtpServer" })
   smtpServer?: Map<string, any>;
 
-  @Metadata({ data: "json, name=sslRequired" })
+  @SpeakeasyMetadata({ data: "json, name=sslRequired" })
   sslRequired?: string;
 
-  @Metadata({ data: "json, name=ssoSessionIdleTimeout" })
+  @SpeakeasyMetadata({ data: "json, name=ssoSessionIdleTimeout" })
   ssoSessionIdleTimeout?: number;
 
-  @Metadata({ data: "json, name=ssoSessionIdleTimeoutRememberMe" })
+  @SpeakeasyMetadata({ data: "json, name=ssoSessionIdleTimeoutRememberMe" })
   ssoSessionIdleTimeoutRememberMe?: number;
 
-  @Metadata({ data: "json, name=ssoSessionMaxLifespan" })
+  @SpeakeasyMetadata({ data: "json, name=ssoSessionMaxLifespan" })
   ssoSessionMaxLifespan?: number;
 
-  @Metadata({ data: "json, name=ssoSessionMaxLifespanRememberMe" })
+  @SpeakeasyMetadata({ data: "json, name=ssoSessionMaxLifespanRememberMe" })
   ssoSessionMaxLifespanRememberMe?: number;
 
-  @Metadata({ data: "json, name=supportedLocales" })
+  @SpeakeasyMetadata({ data: "json, name=supportedLocales" })
   supportedLocales?: string[];
 
-  @Metadata({ data: "json, name=userFederationMappers", elemType: shared.UserFederationMapperRepresentation })
+  @SpeakeasyMetadata({ data: "json, name=userFederationMappers", elemType: UserFederationMapperRepresentation })
   userFederationMappers?: UserFederationMapperRepresentation[];
 
-  @Metadata({ data: "json, name=userFederationProviders", elemType: shared.UserFederationProviderRepresentation })
+  @SpeakeasyMetadata({ data: "json, name=userFederationProviders", elemType: UserFederationProviderRepresentation })
   userFederationProviders?: UserFederationProviderRepresentation[];
 
-  @Metadata({ data: "json, name=userManagedAccessAllowed" })
+  @SpeakeasyMetadata({ data: "json, name=userManagedAccessAllowed" })
   userManagedAccessAllowed?: boolean;
 
-  @Metadata({ data: "json, name=users", elemType: shared.UserRepresentation })
+  @SpeakeasyMetadata({ data: "json, name=users", elemType: UserRepresentation })
   users?: UserRepresentation[];
 
-  @Metadata({ data: "json, name=verifyEmail" })
+  @SpeakeasyMetadata({ data: "json, name=verifyEmail" })
   verifyEmail?: boolean;
 
-  @Metadata({ data: "json, name=waitIncrementSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=waitIncrementSeconds" })
   waitIncrementSeconds?: number;
 
-  @Metadata({ data: "json, name=webAuthnPolicyAcceptableAaguids" })
+  @SpeakeasyMetadata({ data: "json, name=webAuthnPolicyAcceptableAaguids" })
   webAuthnPolicyAcceptableAaguids?: string[];
 
-  @Metadata({ data: "json, name=webAuthnPolicyAttestationConveyancePreference" })
+  @SpeakeasyMetadata({ data: "json, name=webAuthnPolicyAttestationConveyancePreference" })
   webAuthnPolicyAttestationConveyancePreference?: string;
 
-  @Metadata({ data: "json, name=webAuthnPolicyAuthenticatorAttachment" })
+  @SpeakeasyMetadata({ data: "json, name=webAuthnPolicyAuthenticatorAttachment" })
   webAuthnPolicyAuthenticatorAttachment?: string;
 
-  @Metadata({ data: "json, name=webAuthnPolicyAvoidSameAuthenticatorRegister" })
+  @SpeakeasyMetadata({ data: "json, name=webAuthnPolicyAvoidSameAuthenticatorRegister" })
   webAuthnPolicyAvoidSameAuthenticatorRegister?: boolean;
 
-  @Metadata({ data: "json, name=webAuthnPolicyCreateTimeout" })
+  @SpeakeasyMetadata({ data: "json, name=webAuthnPolicyCreateTimeout" })
   webAuthnPolicyCreateTimeout?: number;
 
-  @Metadata({ data: "json, name=webAuthnPolicyPasswordlessAcceptableAaguids" })
+  @SpeakeasyMetadata({ data: "json, name=webAuthnPolicyPasswordlessAcceptableAaguids" })
   webAuthnPolicyPasswordlessAcceptableAaguids?: string[];
 
-  @Metadata({ data: "json, name=webAuthnPolicyPasswordlessAttestationConveyancePreference" })
+  @SpeakeasyMetadata({ data: "json, name=webAuthnPolicyPasswordlessAttestationConveyancePreference" })
   webAuthnPolicyPasswordlessAttestationConveyancePreference?: string;
 
-  @Metadata({ data: "json, name=webAuthnPolicyPasswordlessAuthenticatorAttachment" })
+  @SpeakeasyMetadata({ data: "json, name=webAuthnPolicyPasswordlessAuthenticatorAttachment" })
   webAuthnPolicyPasswordlessAuthenticatorAttachment?: string;
 
-  @Metadata({ data: "json, name=webAuthnPolicyPasswordlessAvoidSameAuthenticatorRegister" })
+  @SpeakeasyMetadata({ data: "json, name=webAuthnPolicyPasswordlessAvoidSameAuthenticatorRegister" })
   webAuthnPolicyPasswordlessAvoidSameAuthenticatorRegister?: boolean;
 
-  @Metadata({ data: "json, name=webAuthnPolicyPasswordlessCreateTimeout" })
+  @SpeakeasyMetadata({ data: "json, name=webAuthnPolicyPasswordlessCreateTimeout" })
   webAuthnPolicyPasswordlessCreateTimeout?: number;
 
-  @Metadata({ data: "json, name=webAuthnPolicyPasswordlessRequireResidentKey" })
+  @SpeakeasyMetadata({ data: "json, name=webAuthnPolicyPasswordlessRequireResidentKey" })
   webAuthnPolicyPasswordlessRequireResidentKey?: string;
 
-  @Metadata({ data: "json, name=webAuthnPolicyPasswordlessRpEntityName" })
+  @SpeakeasyMetadata({ data: "json, name=webAuthnPolicyPasswordlessRpEntityName" })
   webAuthnPolicyPasswordlessRpEntityName?: string;
 
-  @Metadata({ data: "json, name=webAuthnPolicyPasswordlessRpId" })
+  @SpeakeasyMetadata({ data: "json, name=webAuthnPolicyPasswordlessRpId" })
   webAuthnPolicyPasswordlessRpId?: string;
 
-  @Metadata({ data: "json, name=webAuthnPolicyPasswordlessSignatureAlgorithms" })
+  @SpeakeasyMetadata({ data: "json, name=webAuthnPolicyPasswordlessSignatureAlgorithms" })
   webAuthnPolicyPasswordlessSignatureAlgorithms?: string[];
 
-  @Metadata({ data: "json, name=webAuthnPolicyPasswordlessUserVerificationRequirement" })
+  @SpeakeasyMetadata({ data: "json, name=webAuthnPolicyPasswordlessUserVerificationRequirement" })
   webAuthnPolicyPasswordlessUserVerificationRequirement?: string;
 
-  @Metadata({ data: "json, name=webAuthnPolicyRequireResidentKey" })
+  @SpeakeasyMetadata({ data: "json, name=webAuthnPolicyRequireResidentKey" })
   webAuthnPolicyRequireResidentKey?: string;
 
-  @Metadata({ data: "json, name=webAuthnPolicyRpEntityName" })
+  @SpeakeasyMetadata({ data: "json, name=webAuthnPolicyRpEntityName" })
   webAuthnPolicyRpEntityName?: string;
 
-  @Metadata({ data: "json, name=webAuthnPolicyRpId" })
+  @SpeakeasyMetadata({ data: "json, name=webAuthnPolicyRpId" })
   webAuthnPolicyRpId?: string;
 
-  @Metadata({ data: "json, name=webAuthnPolicySignatureAlgorithms" })
+  @SpeakeasyMetadata({ data: "json, name=webAuthnPolicySignatureAlgorithms" })
   webAuthnPolicySignatureAlgorithms?: string[];
 
-  @Metadata({ data: "json, name=webAuthnPolicyUserVerificationRequirement" })
+  @SpeakeasyMetadata({ data: "json, name=webAuthnPolicyUserVerificationRequirement" })
   webAuthnPolicyUserVerificationRequirement?: string;
 }

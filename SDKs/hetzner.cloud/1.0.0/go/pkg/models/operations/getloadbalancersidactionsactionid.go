@@ -5,10 +5,8 @@ type GetLoadBalancersIDActionsActionIDPathParams struct {
 	ID       int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type GetLoadBalancersIDActionsActionIDRequest struct {
-	PathParams GetLoadBalancersIDActionsActionIDPathParams
-}
-
+// GetLoadBalancersIDActionsActionIDActionResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type GetLoadBalancersIDActionsActionIDActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -40,6 +38,10 @@ type GetLoadBalancersIDActionsActionIDActionResponseAction struct {
 
 type GetLoadBalancersIDActionsActionIDActionResponse struct {
 	Action GetLoadBalancersIDActionsActionIDActionResponseAction `json:"action"`
+}
+
+type GetLoadBalancersIDActionsActionIDRequest struct {
+	PathParams GetLoadBalancersIDActionsActionIDPathParams
 }
 
 type GetLoadBalancersIDActionsActionIDResponse struct {

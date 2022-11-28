@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ImportYumArtifactsGcsSource } from "./importyumartifactsgcssource";
 /**
  * The request to import new yum artifacts.

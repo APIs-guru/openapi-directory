@@ -4,17 +4,17 @@ from typing import Any,Optional
 
 @dataclass
 class DeleteKeyKeyPathParams:
-    key: str = field(default=None, metadata={'path_param': { 'field_name': 'key', 'style': 'simple', 'explode': False }})
+    key: str = field(metadata={'path_param': { 'field_name': 'key', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DeleteKeyKeyRequest:
-    path_params: DeleteKeyKeyPathParams = field(default=None)
+    path_params: DeleteKeyKeyPathParams = field()
     
 
 @dataclass
 class DeleteKeyKeyResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

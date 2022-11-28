@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class GetAPIIndexTermIndexTermIDPathParams:
-    index_term_id: int = field(default=None, metadata={'path_param': { 'field_name': 'indexTermId', 'style': 'simple', 'explode': False }})
+    index_term_id: int = field(metadata={'path_param': { 'field_name': 'indexTermId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetAPIIndexTermIndexTermIDRequest:
-    path_params: GetAPIIndexTermIndexTermIDPathParams = field(default=None)
+    path_params: GetAPIIndexTermIndexTermIDPathParams = field()
     
 
 @dataclass
 class GetAPIIndexTermIndexTermIDResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     erskine_may_index_term: Optional[shared.ErskineMayIndexTerm] = field(default=None)
-    status_code: int = field(default=None)
     

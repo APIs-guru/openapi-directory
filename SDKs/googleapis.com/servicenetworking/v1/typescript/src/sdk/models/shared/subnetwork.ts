@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SecondaryIpRange } from "./secondaryiprange";
+
 
 
 // Subnetwork
@@ -8,21 +8,21 @@ import { SecondaryIpRange } from "./secondaryiprange";
  * Represents a subnet that was created or discovered by a private access management service.
 **/
 export class Subnetwork extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ipCidrRange" })
+  @SpeakeasyMetadata({ data: "json, name=ipCidrRange" })
   ipCidrRange?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=network" })
+  @SpeakeasyMetadata({ data: "json, name=network" })
   network?: string;
 
-  @Metadata({ data: "json, name=outsideAllocation" })
+  @SpeakeasyMetadata({ data: "json, name=outsideAllocation" })
   outsideAllocation?: boolean;
 
-  @Metadata({ data: "json, name=region" })
+  @SpeakeasyMetadata({ data: "json, name=region" })
   region?: string;
 
-  @Metadata({ data: "json, name=secondaryIpRanges", elemType: shared.SecondaryIpRange })
+  @SpeakeasyMetadata({ data: "json, name=secondaryIpRanges", elemType: SecondaryIpRange })
   secondaryIpRanges?: SecondaryIpRange[];
 }

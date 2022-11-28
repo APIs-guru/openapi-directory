@@ -10,11 +10,11 @@ class PostConfigAemPasswordResetQueryParams:
 
 @dataclass
 class PostConfigAemPasswordResetRequest:
-    query_params: PostConfigAemPasswordResetQueryParams = field(default=None)
+    query_params: PostConfigAemPasswordResetQueryParams = field()
     
 
 @dataclass
 class PostConfigAemPasswordResetResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

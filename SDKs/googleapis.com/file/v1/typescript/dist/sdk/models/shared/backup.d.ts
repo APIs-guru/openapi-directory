@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum BackupSourceInstanceTierEnum {
     TierUnspecified = "TIER_UNSPECIFIED",
     Standard = "STANDARD",
@@ -14,6 +14,15 @@ export declare enum BackupStateEnum {
     Finalizing = "FINALIZING",
     Ready = "READY",
     Deleting = "DELETING"
+}
+/**
+ * A Filestore backup.
+**/
+export declare class BackupInput extends SpeakeasyBase {
+    description?: string;
+    labels?: Map<string, string>;
+    sourceFileShare?: string;
+    sourceInstance?: string;
 }
 /**
  * A Filestore backup.

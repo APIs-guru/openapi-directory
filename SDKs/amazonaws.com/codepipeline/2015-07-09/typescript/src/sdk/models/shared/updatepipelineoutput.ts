@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PipelineDeclaration } from "./pipelinedeclaration";
+
 
 
 // UpdatePipelineOutput
@@ -7,6 +8,6 @@ import { PipelineDeclaration } from "./pipelinedeclaration";
  * Represents the output of an <code>UpdatePipeline</code> action.
 **/
 export class UpdatePipelineOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pipeline" })
+  @SpeakeasyMetadata({ data: "json, name=pipeline" })
   pipeline?: PipelineDeclaration;
 }

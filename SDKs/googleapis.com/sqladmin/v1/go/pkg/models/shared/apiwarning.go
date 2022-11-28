@@ -8,6 +8,8 @@ const (
 	APIWarningCodeEnumMaxResultsExceedsLimit       APIWarningCodeEnum = "MAX_RESULTS_EXCEEDS_LIMIT"
 )
 
+// APIWarning
+// An Admin API warning message.
 type APIWarning struct {
 	Code    *APIWarningCodeEnum `json:"code,omitempty"`
 	Message *string             `json:"message,omitempty"`

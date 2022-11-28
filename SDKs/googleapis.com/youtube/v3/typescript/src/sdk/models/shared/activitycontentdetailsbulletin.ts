@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceId } from "./resourceid";
+
 
 
 // ActivityContentDetailsBulletin
@@ -7,6 +8,6 @@ import { ResourceId } from "./resourceid";
  * Details about a channel bulletin post.
 **/
 export class ActivityContentDetailsBulletin extends SpeakeasyBase {
-  @Metadata({ data: "json, name=resourceId" })
+  @SpeakeasyMetadata({ data: "json, name=resourceId" })
   resourceId?: ResourceId;
 }

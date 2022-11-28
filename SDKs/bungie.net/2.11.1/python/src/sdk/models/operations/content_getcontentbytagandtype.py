@@ -4,9 +4,9 @@ from typing import Optional
 
 @dataclass
 class ContentGetContentByTagAndTypePathParams:
-    locale: str = field(default=None, metadata={'path_param': { 'field_name': 'locale', 'style': 'simple', 'explode': False }})
-    tag: str = field(default=None, metadata={'path_param': { 'field_name': 'tag', 'style': 'simple', 'explode': False }})
-    type: str = field(default=None, metadata={'path_param': { 'field_name': 'type', 'style': 'simple', 'explode': False }})
+    locale: str = field(metadata={'path_param': { 'field_name': 'locale', 'style': 'simple', 'explode': False }})
+    tag: str = field(metadata={'path_param': { 'field_name': 'tag', 'style': 'simple', 'explode': False }})
+    type: str = field(metadata={'path_param': { 'field_name': 'type', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,13 +16,13 @@ class ContentGetContentByTagAndTypeQueryParams:
 
 @dataclass
 class ContentGetContentByTagAndTypeRequest:
-    path_params: ContentGetContentByTagAndTypePathParams = field(default=None)
-    query_params: ContentGetContentByTagAndTypeQueryParams = field(default=None)
+    path_params: ContentGetContentByTagAndTypePathParams = field()
+    query_params: ContentGetContentByTagAndTypeQueryParams = field()
     
 
 @dataclass
 class ContentGetContentByTagAndTypeResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

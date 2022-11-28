@@ -1,5 +1,7 @@
 package shared
 
+// MaintenanceWindowIdentity
+// Information about the maintenance window.
 type MaintenanceWindowIdentity struct {
 	Cutoff            *int64  `json:"Cutoff,omitempty"`
 	Description       *string `json:"Description,omitempty"`

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GoogleFirestoreAdminV1beta2IndexConfig } from "./googlefirestoreadminv1beta2indexconfig";
 /**
  * Represents a single field in the database. Fields are grouped by their "Collection Group", which represent all collections in the database with the same id.

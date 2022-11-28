@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SchemaGroup } from "./schemagroup";
 import { SchemaSegment } from "./schemasegment";
+
 
 
 // GroupOrSegment
@@ -8,9 +9,9 @@ import { SchemaSegment } from "./schemasegment";
  * Construct representing a logical group or a segment.
 **/
 export class GroupOrSegment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=group" })
+  @SpeakeasyMetadata({ data: "json, name=group" })
   group?: SchemaGroup;
 
-  @Metadata({ data: "json, name=segment" })
+  @SpeakeasyMetadata({ data: "json, name=segment" })
   segment?: SchemaSegment;
 }

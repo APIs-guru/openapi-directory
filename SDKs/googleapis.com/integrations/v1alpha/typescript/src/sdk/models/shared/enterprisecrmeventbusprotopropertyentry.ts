@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EnterpriseCrmEventbusProtoValueType } from "./enterprisecrmeventbusprotovaluetype";
+
 
 
 // EnterpriseCrmEventbusProtoPropertyEntry
@@ -7,9 +8,9 @@ import { EnterpriseCrmEventbusProtoValueType } from "./enterprisecrmeventbusprot
  * Key-value pair of EventBus property.
 **/
 export class EnterpriseCrmEventbusProtoPropertyEntry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: EnterpriseCrmEventbusProtoValueType;
 }

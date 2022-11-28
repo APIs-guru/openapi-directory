@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { FeaturizationMethod } from "./featurizationmethod";
 // Featurization
 /**
  * <p>Provides featurization (transformation) information for a dataset field. This object is part of the <a>FeaturizationConfig</a> object.</p> <p>For example:</p> <p> <code>{</code> </p> <p> <code>"AttributeName": "demand",</code> </p> <p> <code>FeaturizationPipeline [ {</code> </p> <p> <code>"FeaturizationMethodName": "filling",</code> </p> <p> <code>"FeaturizationMethodParameters": {"aggregation": "avg", "backfill": "nan"}</code> </p> <p> <code>} ]</code> </p> <p> <code>}</code> </p>
@@ -34,11 +34,11 @@ var Featurization = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AttributeName" }),
+        SpeakeasyMetadata({ data: "json, name=AttributeName" }),
         __metadata("design:type", String)
     ], Featurization.prototype, "attributeName", void 0);
     __decorate([
-        Metadata({ data: "json, name=FeaturizationPipeline", elemType: shared.FeaturizationMethod }),
+        SpeakeasyMetadata({ data: "json, name=FeaturizationPipeline", elemType: FeaturizationMethod }),
         __metadata("design:type", Array)
     ], Featurization.prototype, "featurizationPipeline", void 0);
     return Featurization;

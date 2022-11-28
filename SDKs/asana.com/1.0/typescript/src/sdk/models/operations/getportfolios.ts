@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetPortfoliosQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
   optFields?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
   optPretty?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=owner" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=owner" })
   owner: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=workspace" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=workspace" })
   workspace: string;
 }
 
 
-export class GetPortfoliosRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetPortfoliosQueryParams;
-}
-
-
 export class GetPortfolios200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data", elemType: shared.PortfolioCompact })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: shared.PortfolioCompact })
   data?: shared.PortfolioCompact[];
 }
 
 
+export class GetPortfoliosRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetPortfoliosQueryParams;
+}
+
+
 export class GetPortfoliosResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getPortfolios200ApplicationJsonObject?: GetPortfolios200ApplicationJson;
 }

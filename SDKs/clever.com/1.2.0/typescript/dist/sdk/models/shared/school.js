@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Location } from "./location";
 import { Principal } from "./principal";
 export var SchoolHighGradeEnum;
@@ -69,63 +69,63 @@ var School = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=created" }),
+        SpeakeasyMetadata({ data: "json, name=created" }),
         __metadata("design:type", String)
     ], School.prototype, "created", void 0);
     __decorate([
-        Metadata({ data: "json, name=district" }),
+        SpeakeasyMetadata({ data: "json, name=district" }),
         __metadata("design:type", String)
     ], School.prototype, "district", void 0);
     __decorate([
-        Metadata({ data: "json, name=high_grade" }),
+        SpeakeasyMetadata({ data: "json, name=high_grade" }),
         __metadata("design:type", String)
     ], School.prototype, "highGrade", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], School.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=last_modified" }),
+        SpeakeasyMetadata({ data: "json, name=last_modified" }),
         __metadata("design:type", String)
     ], School.prototype, "lastModified", void 0);
     __decorate([
-        Metadata({ data: "json, name=location" }),
+        SpeakeasyMetadata({ data: "json, name=location" }),
         __metadata("design:type", Location)
     ], School.prototype, "location", void 0);
     __decorate([
-        Metadata({ data: "json, name=low_grade" }),
+        SpeakeasyMetadata({ data: "json, name=low_grade" }),
         __metadata("design:type", String)
     ], School.prototype, "lowGrade", void 0);
     __decorate([
-        Metadata({ data: "json, name=mdr_number" }),
+        SpeakeasyMetadata({ data: "json, name=mdr_number" }),
         __metadata("design:type", String)
     ], School.prototype, "mdrNumber", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], School.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=nces_id" }),
+        SpeakeasyMetadata({ data: "json, name=nces_id" }),
         __metadata("design:type", String)
     ], School.prototype, "ncesId", void 0);
     __decorate([
-        Metadata({ data: "json, name=phone" }),
+        SpeakeasyMetadata({ data: "json, name=phone" }),
         __metadata("design:type", String)
     ], School.prototype, "phone", void 0);
     __decorate([
-        Metadata({ data: "json, name=principal" }),
+        SpeakeasyMetadata({ data: "json, name=principal" }),
         __metadata("design:type", Principal)
     ], School.prototype, "principal", void 0);
     __decorate([
-        Metadata({ data: "json, name=school_number" }),
+        SpeakeasyMetadata({ data: "json, name=school_number" }),
         __metadata("design:type", String)
     ], School.prototype, "schoolNumber", void 0);
     __decorate([
-        Metadata({ data: "json, name=sis_id" }),
+        SpeakeasyMetadata({ data: "json, name=sis_id" }),
         __metadata("design:type", String)
     ], School.prototype, "sisId", void 0);
     __decorate([
-        Metadata({ data: "json, name=state_id" }),
+        SpeakeasyMetadata({ data: "json, name=state_id" }),
         __metadata("design:type", String)
     ], School.prototype, "stateId", void 0);
     return School;

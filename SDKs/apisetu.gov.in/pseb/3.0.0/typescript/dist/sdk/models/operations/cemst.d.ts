@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class CemstRequestBodyCertificateParameters extends SpeakeasyBase {
     fullName: string;
@@ -18,10 +18,6 @@ export declare class CemstRequestBody extends SpeakeasyBase {
 export declare class CemstSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class CemstRequest extends SpeakeasyBase {
-    request?: CemstRequestBody;
-    security: CemstSecurity;
 }
 export declare enum Cemst400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -104,6 +100,10 @@ export declare enum Cemst504ApplicationJsonErrorDescriptionEnum {
 export declare class Cemst504ApplicationJson extends SpeakeasyBase {
     error?: Cemst504ApplicationJsonErrorEnum;
     errorDescription?: Cemst504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class CemstRequest extends SpeakeasyBase {
+    request?: CemstRequestBody;
+    security: CemstSecurity;
 }
 export declare class CemstResponse extends SpeakeasyBase {
     contentType: string;

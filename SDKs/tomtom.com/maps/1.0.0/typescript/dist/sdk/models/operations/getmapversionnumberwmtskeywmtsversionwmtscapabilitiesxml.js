@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetMapVersionNumberWmtsKeyWmtsVersionWmtsCapabilitiesXmlWmtsVersionEnum;
 (function (GetMapVersionNumberWmtsKeyWmtsVersionWmtsCapabilitiesXmlWmtsVersionEnum) {
     GetMapVersionNumberWmtsKeyWmtsVersionWmtsCapabilitiesXmlWmtsVersionEnum["One00"] = "1.0.0";
@@ -33,15 +33,15 @@ var GetMapVersionNumberWmtsKeyWmtsVersionWmtsCapabilitiesXmlPathParams = /** @cl
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=key" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=key" }),
         __metadata("design:type", String)
     ], GetMapVersionNumberWmtsKeyWmtsVersionWmtsCapabilitiesXmlPathParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=versionNumber" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=versionNumber" }),
         __metadata("design:type", Number)
     ], GetMapVersionNumberWmtsKeyWmtsVersionWmtsCapabilitiesXmlPathParams.prototype, "versionNumber", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=wmtsVersion" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=wmtsVersion" }),
         __metadata("design:type", String)
     ], GetMapVersionNumberWmtsKeyWmtsVersionWmtsCapabilitiesXmlPathParams.prototype, "wmtsVersion", void 0);
     return GetMapVersionNumberWmtsKeyWmtsVersionWmtsCapabilitiesXmlPathParams;
@@ -53,7 +53,7 @@ var GetMapVersionNumberWmtsKeyWmtsVersionWmtsCapabilitiesXmlRequest = /** @class
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetMapVersionNumberWmtsKeyWmtsVersionWmtsCapabilitiesXmlPathParams)
     ], GetMapVersionNumberWmtsKeyWmtsVersionWmtsCapabilitiesXmlRequest.prototype, "pathParams", void 0);
     return GetMapVersionNumberWmtsKeyWmtsVersionWmtsCapabilitiesXmlRequest;
@@ -65,11 +65,11 @@ var GetMapVersionNumberWmtsKeyWmtsVersionWmtsCapabilitiesXmlResponse = /** @clas
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetMapVersionNumberWmtsKeyWmtsVersionWmtsCapabilitiesXmlResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetMapVersionNumberWmtsKeyWmtsVersionWmtsCapabilitiesXmlResponse.prototype, "statusCode", void 0);
     return GetMapVersionNumberWmtsKeyWmtsVersionWmtsCapabilitiesXmlResponse;

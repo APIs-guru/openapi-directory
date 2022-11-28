@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { CheckError } from "./checkerror";
 import { CheckInfo } from "./checkinfo";
 import { QuotaInfo } from "./quotainfo";
 // CheckResponse
@@ -36,27 +36,27 @@ var CheckResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=checkErrors", elemType: shared.CheckError }),
+        SpeakeasyMetadata({ data: "json, name=checkErrors", elemType: CheckError }),
         __metadata("design:type", Array)
     ], CheckResponse.prototype, "checkErrors", void 0);
     __decorate([
-        Metadata({ data: "json, name=checkInfo" }),
+        SpeakeasyMetadata({ data: "json, name=checkInfo" }),
         __metadata("design:type", CheckInfo)
     ], CheckResponse.prototype, "checkInfo", void 0);
     __decorate([
-        Metadata({ data: "json, name=operationId" }),
+        SpeakeasyMetadata({ data: "json, name=operationId" }),
         __metadata("design:type", String)
     ], CheckResponse.prototype, "operationId", void 0);
     __decorate([
-        Metadata({ data: "json, name=quotaInfo" }),
+        SpeakeasyMetadata({ data: "json, name=quotaInfo" }),
         __metadata("design:type", QuotaInfo)
     ], CheckResponse.prototype, "quotaInfo", void 0);
     __decorate([
-        Metadata({ data: "json, name=serviceConfigId" }),
+        SpeakeasyMetadata({ data: "json, name=serviceConfigId" }),
         __metadata("design:type", String)
     ], CheckResponse.prototype, "serviceConfigId", void 0);
     __decorate([
-        Metadata({ data: "json, name=serviceRolloutId" }),
+        SpeakeasyMetadata({ data: "json, name=serviceRolloutId" }),
         __metadata("design:type", String)
     ], CheckResponse.prototype, "serviceRolloutId", void 0);
     return CheckResponse;

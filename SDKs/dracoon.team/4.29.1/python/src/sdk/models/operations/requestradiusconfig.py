@@ -10,13 +10,13 @@ class RequestRadiusConfigHeaders:
 
 @dataclass
 class RequestRadiusConfigRequest:
-    headers: RequestRadiusConfigHeaders = field(default=None)
+    headers: RequestRadiusConfigHeaders = field()
     
 
 @dataclass
 class RequestRadiusConfigResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     radius_config: Optional[shared.RadiusConfig] = field(default=None)
-    status_code: int = field(default=None)
     

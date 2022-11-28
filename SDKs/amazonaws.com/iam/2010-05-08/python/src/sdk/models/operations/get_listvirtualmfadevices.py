@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 
 class GetListVirtualMfaDevicesActionEnum(str, Enum):
     LIST_VIRTUAL_MFA_DEVICES = "ListVirtualMFADevices"
@@ -15,11 +19,11 @@ class GetListVirtualMfaDevicesVersionEnum(str, Enum):
 
 @dataclass
 class GetListVirtualMfaDevicesQueryParams:
-    action: GetListVirtualMfaDevicesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetListVirtualMfaDevicesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetListVirtualMfaDevicesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     assignment_status: Optional[GetListVirtualMfaDevicesAssignmentStatusEnum] = field(default=None, metadata={'query_param': { 'field_name': 'AssignmentStatus', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
     max_items: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxItems', 'style': 'form', 'explode': True }})
-    version: GetListVirtualMfaDevicesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -35,13 +39,13 @@ class GetListVirtualMfaDevicesHeaders:
 
 @dataclass
 class GetListVirtualMfaDevicesRequest:
-    query_params: GetListVirtualMfaDevicesQueryParams = field(default=None)
-    headers: GetListVirtualMfaDevicesHeaders = field(default=None)
+    headers: GetListVirtualMfaDevicesHeaders = field()
+    query_params: GetListVirtualMfaDevicesQueryParams = field()
     
 
 @dataclass
 class GetListVirtualMfaDevicesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

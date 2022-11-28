@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ManagedCertificateStatusEnum {
-    ManagementStatusUnspecified = "MANAGEMENT_STATUS_UNSPECIFIED"
-,    Ok = "OK"
-,    Pending = "PENDING"
-,    FailedRetryingNotVisible = "FAILED_RETRYING_NOT_VISIBLE"
-,    FailedPermanent = "FAILED_PERMANENT"
-,    FailedRetryingCaaForbidden = "FAILED_RETRYING_CAA_FORBIDDEN"
-,    FailedRetryingCaaChecking = "FAILED_RETRYING_CAA_CHECKING"
+    ManagementStatusUnspecified = "MANAGEMENT_STATUS_UNSPECIFIED",
+    Ok = "OK",
+    Pending = "PENDING",
+    FailedRetryingNotVisible = "FAILED_RETRYING_NOT_VISIBLE",
+    FailedPermanent = "FAILED_PERMANENT",
+    FailedRetryingCaaForbidden = "FAILED_RETRYING_CAA_FORBIDDEN",
+    FailedRetryingCaaChecking = "FAILED_RETRYING_CAA_CHECKING"
 }
 
 
@@ -16,9 +17,9 @@ export enum ManagedCertificateStatusEnum {
  * A certificate managed by App Engine.
 **/
 export class ManagedCertificate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=lastRenewalTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastRenewalTime" })
   lastRenewalTime?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: ManagedCertificateStatusEnum;
 }

@@ -1,27 +1,28 @@
 from dataclasses import dataclass, field
-
+from typing import Optional
+from sdk.models import shared
 
 
 @dataclass
 class FireteamGetClanFireteamPathParams:
-    fireteam_id: int = field(default=None, metadata={'path_param': { 'field_name': 'fireteamId', 'style': 'simple', 'explode': False }})
-    group_id: int = field(default=None, metadata={'path_param': { 'field_name': 'groupId', 'style': 'simple', 'explode': False }})
+    fireteam_id: int = field(metadata={'path_param': { 'field_name': 'fireteamId', 'style': 'simple', 'explode': False }})
+    group_id: int = field(metadata={'path_param': { 'field_name': 'groupId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class FireteamGetClanFireteamSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FireteamGetClanFireteamRequest:
-    path_params: FireteamGetClanFireteamPathParams = field(default=None)
-    security: FireteamGetClanFireteamSecurity = field(default=None)
+    path_params: FireteamGetClanFireteamPathParams = field()
+    security: FireteamGetClanFireteamSecurity = field()
     
 
 @dataclass
 class FireteamGetClanFireteamResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

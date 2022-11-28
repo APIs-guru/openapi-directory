@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateNetworkSwitchAccessPolicyPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=accessPolicyNumber" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=accessPolicyNumber" })
   accessPolicyNumber: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
 export enum UpdateNetworkSwitchAccessPolicyRequestBodyAccessPolicyTypeEnum {
-    EightHundredAndTwo1x = "802.1x"
-,    MacAuthenticationBypass = "MAC authentication bypass"
-,    HybridAuthentication = "Hybrid authentication"
+    EightHundredAndTwo1x = "802.1x",
+    MacAuthenticationBypass = "MAC authentication bypass",
+    HybridAuthentication = "Hybrid authentication"
 }
 
 export enum UpdateNetworkSwitchAccessPolicyRequestBodyHostModeEnum {
-    SingleHost = "Single-Host"
-,    MultiDomain = "Multi-Domain"
-,    MultiHost = "Multi-Host"
-,    MultiAuth = "Multi-Auth"
+    SingleHost = "Single-Host",
+    MultiDomain = "Multi-Domain",
+    MultiHost = "Multi-Host",
+    MultiAuth = "Multi-Auth"
 }
 
 
@@ -28,13 +29,13 @@ export enum UpdateNetworkSwitchAccessPolicyRequestBodyHostModeEnum {
  * Critical auth settings for when authentication is rejected by the RADIUS server
 **/
 export class UpdateNetworkSwitchAccessPolicyRequestBodyRadiusCriticalAuth extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataVlanId" })
+  @SpeakeasyMetadata({ data: "json, name=dataVlanId" })
   dataVlanId?: number;
 
-  @Metadata({ data: "json, name=suspendPortBounce" })
+  @SpeakeasyMetadata({ data: "json, name=suspendPortBounce" })
   suspendPortBounce?: boolean;
 
-  @Metadata({ data: "json, name=voiceVlanId" })
+  @SpeakeasyMetadata({ data: "json, name=voiceVlanId" })
   voiceVlanId?: number;
 }
 
@@ -44,99 +45,99 @@ export class UpdateNetworkSwitchAccessPolicyRequestBodyRadiusCriticalAuth extend
  * Object for RADIUS Settings
 **/
 export class UpdateNetworkSwitchAccessPolicyRequestBodyRadius extends SpeakeasyBase {
-  @Metadata({ data: "json, name=criticalAuth" })
+  @SpeakeasyMetadata({ data: "json, name=criticalAuth" })
   criticalAuth?: UpdateNetworkSwitchAccessPolicyRequestBodyRadiusCriticalAuth;
 }
 
 
 export class UpdateNetworkSwitchAccessPolicyRequestBodyRadiusAccountingServers extends SpeakeasyBase {
-  @Metadata({ data: "json, name=host" })
+  @SpeakeasyMetadata({ data: "json, name=host" })
   host: string;
 
-  @Metadata({ data: "json, name=port" })
+  @SpeakeasyMetadata({ data: "json, name=port" })
   port: number;
 
-  @Metadata({ data: "json, name=secret" })
+  @SpeakeasyMetadata({ data: "json, name=secret" })
   secret: string;
 }
 
 
 export class UpdateNetworkSwitchAccessPolicyRequestBodyRadiusServers extends SpeakeasyBase {
-  @Metadata({ data: "json, name=host" })
+  @SpeakeasyMetadata({ data: "json, name=host" })
   host: string;
 
-  @Metadata({ data: "json, name=port" })
+  @SpeakeasyMetadata({ data: "json, name=port" })
   port: number;
 
-  @Metadata({ data: "json, name=secret" })
+  @SpeakeasyMetadata({ data: "json, name=secret" })
   secret: string;
 }
 
 
 export class UpdateNetworkSwitchAccessPolicyRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessPolicyType" })
+  @SpeakeasyMetadata({ data: "json, name=accessPolicyType" })
   accessPolicyType?: UpdateNetworkSwitchAccessPolicyRequestBodyAccessPolicyTypeEnum;
 
-  @Metadata({ data: "json, name=guestVlanId" })
+  @SpeakeasyMetadata({ data: "json, name=guestVlanId" })
   guestVlanId?: number;
 
-  @Metadata({ data: "json, name=hostMode" })
+  @SpeakeasyMetadata({ data: "json, name=hostMode" })
   hostMode?: UpdateNetworkSwitchAccessPolicyRequestBodyHostModeEnum;
 
-  @Metadata({ data: "json, name=increaseAccessSpeed" })
+  @SpeakeasyMetadata({ data: "json, name=increaseAccessSpeed" })
   increaseAccessSpeed?: boolean;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=radius" })
+  @SpeakeasyMetadata({ data: "json, name=radius" })
   radius?: UpdateNetworkSwitchAccessPolicyRequestBodyRadius;
 
-  @Metadata({ data: "json, name=radiusAccountingEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=radiusAccountingEnabled" })
   radiusAccountingEnabled?: boolean;
 
-  @Metadata({ data: "json, name=radiusAccountingServers", elemType: operations.UpdateNetworkSwitchAccessPolicyRequestBodyRadiusAccountingServers })
+  @SpeakeasyMetadata({ data: "json, name=radiusAccountingServers", elemType: UpdateNetworkSwitchAccessPolicyRequestBodyRadiusAccountingServers })
   radiusAccountingServers?: UpdateNetworkSwitchAccessPolicyRequestBodyRadiusAccountingServers[];
 
-  @Metadata({ data: "json, name=radiusCoaSupportEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=radiusCoaSupportEnabled" })
   radiusCoaSupportEnabled?: boolean;
 
-  @Metadata({ data: "json, name=radiusGroupAttribute" })
+  @SpeakeasyMetadata({ data: "json, name=radiusGroupAttribute" })
   radiusGroupAttribute?: string;
 
-  @Metadata({ data: "json, name=radiusServers", elemType: operations.UpdateNetworkSwitchAccessPolicyRequestBodyRadiusServers })
+  @SpeakeasyMetadata({ data: "json, name=radiusServers", elemType: UpdateNetworkSwitchAccessPolicyRequestBodyRadiusServers })
   radiusServers?: UpdateNetworkSwitchAccessPolicyRequestBodyRadiusServers[];
 
-  @Metadata({ data: "json, name=radiusTestingEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=radiusTestingEnabled" })
   radiusTestingEnabled?: boolean;
 
-  @Metadata({ data: "json, name=urlRedirectWalledGardenEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=urlRedirectWalledGardenEnabled" })
   urlRedirectWalledGardenEnabled?: boolean;
 
-  @Metadata({ data: "json, name=urlRedirectWalledGardenRanges" })
+  @SpeakeasyMetadata({ data: "json, name=urlRedirectWalledGardenRanges" })
   urlRedirectWalledGardenRanges?: string[];
 
-  @Metadata({ data: "json, name=voiceVlanClients" })
+  @SpeakeasyMetadata({ data: "json, name=voiceVlanClients" })
   voiceVlanClients?: boolean;
 }
 
 
 export class UpdateNetworkSwitchAccessPolicyRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateNetworkSwitchAccessPolicyPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: UpdateNetworkSwitchAccessPolicyRequestBody;
 }
 
 
 export class UpdateNetworkSwitchAccessPolicyResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateNetworkSwitchAccessPolicy200ApplicationJsonObject?: Map<string, any>;
 }

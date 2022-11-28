@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetUnassignPrivateIpAddressesActionEnum;
 (function (GetUnassignPrivateIpAddressesActionEnum) {
     GetUnassignPrivateIpAddressesActionEnum["UnassignPrivateIpAddresses"] = "UnassignPrivateIpAddresses";
@@ -37,23 +37,23 @@ var GetUnassignPrivateIpAddressesQueryParams = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" }),
         __metadata("design:type", String)
     ], GetUnassignPrivateIpAddressesQueryParams.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Ipv4Prefix" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Ipv4Prefix" }),
         __metadata("design:type", Array)
     ], GetUnassignPrivateIpAddressesQueryParams.prototype, "ipv4Prefix", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=NetworkInterfaceId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=NetworkInterfaceId" }),
         __metadata("design:type", String)
     ], GetUnassignPrivateIpAddressesQueryParams.prototype, "networkInterfaceId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=PrivateIpAddress" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=PrivateIpAddress" }),
         __metadata("design:type", Array)
     ], GetUnassignPrivateIpAddressesQueryParams.prototype, "privateIpAddress", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" }),
         __metadata("design:type", String)
     ], GetUnassignPrivateIpAddressesQueryParams.prototype, "version", void 0);
     return GetUnassignPrivateIpAddressesQueryParams;
@@ -65,31 +65,31 @@ var GetUnassignPrivateIpAddressesHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], GetUnassignPrivateIpAddressesHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], GetUnassignPrivateIpAddressesHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], GetUnassignPrivateIpAddressesHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], GetUnassignPrivateIpAddressesHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], GetUnassignPrivateIpAddressesHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], GetUnassignPrivateIpAddressesHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], GetUnassignPrivateIpAddressesHeaders.prototype, "xAmzSignedHeaders", void 0);
     return GetUnassignPrivateIpAddressesHeaders;
@@ -101,11 +101,11 @@ var GetUnassignPrivateIpAddressesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetUnassignPrivateIpAddressesQueryParams)
     ], GetUnassignPrivateIpAddressesRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetUnassignPrivateIpAddressesHeaders)
     ], GetUnassignPrivateIpAddressesRequest.prototype, "headers", void 0);
     return GetUnassignPrivateIpAddressesRequest;
@@ -117,11 +117,11 @@ var GetUnassignPrivateIpAddressesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetUnassignPrivateIpAddressesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetUnassignPrivateIpAddressesResponse.prototype, "statusCode", void 0);
     return GetUnassignPrivateIpAddressesResponse;

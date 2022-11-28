@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ListVirtualInterfaceTestHistoryRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bgpPeers" })
+  @SpeakeasyMetadata({ data: "json, name=bgpPeers" })
   bgpPeers?: string[];
 
-  @Metadata({ data: "json, name=maxResults" })
+  @SpeakeasyMetadata({ data: "json, name=maxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 
-  @Metadata({ data: "json, name=testId" })
+  @SpeakeasyMetadata({ data: "json, name=testId" })
   testId?: string;
 
-  @Metadata({ data: "json, name=virtualInterfaceId" })
+  @SpeakeasyMetadata({ data: "json, name=virtualInterfaceId" })
   virtualInterfaceId?: string;
 }

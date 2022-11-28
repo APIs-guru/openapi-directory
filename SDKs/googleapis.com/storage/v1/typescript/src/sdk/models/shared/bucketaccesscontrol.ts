@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BucketAccessControlProjectTeam
@@ -6,10 +7,10 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The project team associated with the entity, if any.
 **/
 export class BucketAccessControlProjectTeam extends SpeakeasyBase {
-  @Metadata({ data: "json, name=projectNumber" })
+  @SpeakeasyMetadata({ data: "json, name=projectNumber" })
   projectNumber?: string;
 
-  @Metadata({ data: "json, name=team" })
+  @SpeakeasyMetadata({ data: "json, name=team" })
   team?: string;
 }
 
@@ -19,36 +20,36 @@ export class BucketAccessControlProjectTeam extends SpeakeasyBase {
  * An access-control entry.
 **/
 export class BucketAccessControl extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bucket" })
+  @SpeakeasyMetadata({ data: "json, name=bucket" })
   bucket?: string;
 
-  @Metadata({ data: "json, name=domain" })
+  @SpeakeasyMetadata({ data: "json, name=domain" })
   domain?: string;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=entity" })
+  @SpeakeasyMetadata({ data: "json, name=entity" })
   entity?: string;
 
-  @Metadata({ data: "json, name=entityId" })
+  @SpeakeasyMetadata({ data: "json, name=entityId" })
   entityId?: string;
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=projectTeam" })
+  @SpeakeasyMetadata({ data: "json, name=projectTeam" })
   projectTeam?: BucketAccessControlProjectTeam;
 
-  @Metadata({ data: "json, name=role" })
+  @SpeakeasyMetadata({ data: "json, name=role" })
   role?: string;
 
-  @Metadata({ data: "json, name=selfLink" })
+  @SpeakeasyMetadata({ data: "json, name=selfLink" })
   selfLink?: string;
 }

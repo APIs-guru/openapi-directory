@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GroupV2GetGroupByNamePathParams = /** @class */ (function (_super) {
     __extends(GroupV2GetGroupByNamePathParams, _super);
     function GroupV2GetGroupByNamePathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=groupName" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=groupName" }),
         __metadata("design:type", String)
     ], GroupV2GetGroupByNamePathParams.prototype, "groupName", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=groupType" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=groupType" }),
         __metadata("design:type", Number)
     ], GroupV2GetGroupByNamePathParams.prototype, "groupType", void 0);
     return GroupV2GetGroupByNamePathParams;
@@ -45,7 +45,7 @@ var GroupV2GetGroupByNameRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GroupV2GetGroupByNamePathParams)
     ], GroupV2GetGroupByNameRequest.prototype, "pathParams", void 0);
     return GroupV2GetGroupByNameRequest;
@@ -57,15 +57,15 @@ var GroupV2GetGroupByNameResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GroupV2GetGroupByNameResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GroupV2GetGroupByNameResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GroupV2GetGroupByNameResponse.prototype, "statusCode", void 0);
     return GroupV2GetGroupByNameResponse;

@@ -1,5 +1,7 @@
 package shared
 
+// QueryTimeSeriesResponse
+// The QueryTimeSeries response.
 type QueryTimeSeriesResponse struct {
 	NextPageToken        *string               `json:"nextPageToken,omitempty"`
 	PartialErrors        []Status              `json:"partialErrors,omitempty"`

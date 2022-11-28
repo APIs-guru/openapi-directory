@@ -1,16 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AdvancedEventSelector } from "./advancedeventselector";
 import { EventSelector } from "./eventselector";
 
 
+
 export class PutEventSelectorsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AdvancedEventSelectors", elemType: shared.AdvancedEventSelector })
+  @SpeakeasyMetadata({ data: "json, name=AdvancedEventSelectors", elemType: AdvancedEventSelector })
   advancedEventSelectors?: AdvancedEventSelector[];
 
-  @Metadata({ data: "json, name=EventSelectors", elemType: shared.EventSelector })
+  @SpeakeasyMetadata({ data: "json, name=EventSelectors", elemType: EventSelector })
   eventSelectors?: EventSelector[];
 
-  @Metadata({ data: "json, name=TrailName" })
+  @SpeakeasyMetadata({ data: "json, name=TrailName" })
   trailName: string;
 }

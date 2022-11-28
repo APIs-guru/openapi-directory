@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AssetHierarchyInfo } from "./assethierarchyinfo";
 import { AssetRelationshipTypeEnum } from "./assetrelationshiptypeenum";
 /**

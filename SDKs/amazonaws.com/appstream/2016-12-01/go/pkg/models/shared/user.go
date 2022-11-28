@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// User
+// Describes a user in the user pool.
 type User struct {
 	Arn                *string                `json:"Arn,omitempty"`
 	AuthenticationType AuthenticationTypeEnum `json:"AuthenticationType"`

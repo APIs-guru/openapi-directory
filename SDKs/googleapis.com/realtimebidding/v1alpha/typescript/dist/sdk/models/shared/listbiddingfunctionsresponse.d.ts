@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { BiddingFunction } from "./biddingfunction";
 /**
  * A response containing a list of a bidder's bidding functions.

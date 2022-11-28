@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class InviteMemberPathParams:
-    product_id: str = field(default=None, metadata={'path_param': { 'field_name': 'productId', 'style': 'simple', 'explode': False }})
+    product_id: str = field(metadata={'path_param': { 'field_name': 'productId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,12 +17,12 @@ class InviteMemberRequests:
 
 @dataclass
 class InviteMemberRequest:
-    path_params: InviteMemberPathParams = field(default=None)
-    request: InviteMemberRequests = field(default=None)
+    path_params: InviteMemberPathParams = field()
+    request: InviteMemberRequests = field()
     
 
 @dataclass
 class InviteMemberResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

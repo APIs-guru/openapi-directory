@@ -1,5 +1,7 @@
 package shared
 
+// Authorizer
+// Represents an authorizer.
 type Authorizer struct {
 	AuthorizerCredentialsArn       *string             `json:"AuthorizerCredentialsArn,omitempty"`
 	AuthorizerID                   *string             `json:"AuthorizerId,omitempty"`

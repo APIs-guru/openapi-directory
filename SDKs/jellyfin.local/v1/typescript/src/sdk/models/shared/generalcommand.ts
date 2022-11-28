@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GeneralCommandTypeEnum } from "./generalcommandtypeenum";
 
 
+
 export class GeneralCommand extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Arguments" })
+  @SpeakeasyMetadata({ data: "json, name=Arguments" })
   arguments?: Map<string, string>;
 
-  @Metadata({ data: "json, name=ControllingUserId" })
+  @SpeakeasyMetadata({ data: "json, name=ControllingUserId" })
   controllingUserId?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: GeneralCommandTypeEnum;
 }

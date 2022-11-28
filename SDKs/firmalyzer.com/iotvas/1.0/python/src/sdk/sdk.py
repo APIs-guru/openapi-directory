@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import List,Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,35 +14,55 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def detect_device_detect_post(self, request: operations.DetectDeviceDetectPostRequest) -> operations.DetectDeviceDetectPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Detect iot device by service banners and mac address
+        Use device service banners and mac address captured by your network port scanner, vulnerability assessment or asset discovery tools to detect device maker, model and firmware information
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/device/detect"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -58,13 +81,16 @@ class SDK:
 
     
     def firmware_accounts_firmware_firmware_hash_accounts_get(self, request: operations.FirmwareAccountsFirmwareFirmwareHashAccountsGetRequest) -> operations.FirmwareAccountsFirmwareFirmwareHashAccountsGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get default accounts and password hashes of a firmware
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/firmware/{firmware_hash}/accounts", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -83,13 +109,16 @@ class SDK:
 
     
     def firmware_config_issues_firmware_firmware_hash_config_issues_get(self, request: operations.FirmwareConfigIssuesFirmwareFirmwareHashConfigIssuesGetRequest) -> operations.FirmwareConfigIssuesFirmwareFirmwareHashConfigIssuesGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get default OS configuration issues of a device firmware
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/firmware/{firmware_hash}/config-issues", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -108,13 +137,16 @@ class SDK:
 
     
     def firmware_expired_certs_firmware_firmware_hash_expired_certs_get(self, request: operations.FirmwareExpiredCertsFirmwareFirmwareHashExpiredCertsGetRequest) -> operations.FirmwareExpiredCertsFirmwareFirmwareHashExpiredCertsGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get expired digital certificates embedded in a device firmware
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/firmware/{firmware_hash}/expired-certs", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -133,13 +165,16 @@ class SDK:
 
     
     def firmware_private_keys_firmware_firmware_hash_private_keys_get(self, request: operations.FirmwarePrivateKeysFirmwareFirmwareHashPrivateKeysGetRequest) -> operations.FirmwarePrivateKeysFirmwareFirmwareHashPrivateKeysGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get private crypto keys embedded in a device firmware
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/firmware/{firmware_hash}/private-keys", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -158,13 +193,16 @@ class SDK:
 
     
     def firmware_risk_firmware_firmware_hash_risk_get(self, request: operations.FirmwareRiskFirmwareFirmwareHashRiskGetRequest) -> operations.FirmwareRiskFirmwareFirmwareHashRiskGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get iot device firmware risk analysis
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/firmware/{firmware_hash}/risk", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -183,13 +221,16 @@ class SDK:
 
     
     def firmware_weak_certs_firmware_firmware_hash_weak_certs_get(self, request: operations.FirmwareWeakCertsFirmwareFirmwareHashWeakCertsGetRequest) -> operations.FirmwareWeakCertsFirmwareFirmwareHashWeakCertsGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get certificates with weak fingerprinting algorithms that are mebedded in a device firmware
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/firmware/{firmware_hash}/weak-certs", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -208,13 +249,16 @@ class SDK:
 
     
     def firmware_weak_keys_firmware_firmware_hash_weak_keys_get(self, request: operations.FirmwareWeakKeysFirmwareFirmwareHashWeakKeysGetRequest) -> operations.FirmwareWeakKeysFirmwareFirmwareHashWeakKeysGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get weak crypto keys with short length
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/firmware/{firmware_hash}/weak-keys", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 

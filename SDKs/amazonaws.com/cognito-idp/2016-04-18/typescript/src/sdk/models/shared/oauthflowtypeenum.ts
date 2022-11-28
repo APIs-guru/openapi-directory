@@ -1,7 +1,8 @@
 
 
+
 export enum OAuthFlowTypeEnum {
-    Code = "code"
-,    Implicit = "implicit"
-,    ClientCredentials = "client_credentials"
+    Code = "code",
+    Implicit = "implicit",
+    ClientCredentials = "client_credentials"
 }

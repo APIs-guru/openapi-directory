@@ -1,22 +1,27 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import environmentaccountconnectionstatus_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class EnvironmentAccountConnectionSummary:
-    arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'arn' }})
-    environment_account_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'environmentAccountId' }})
-    environment_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'environmentName' }})
-    id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    last_modified_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lastModifiedAt', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    management_account_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'managementAccountId' }})
-    requested_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'requestedAt', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    role_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'roleArn' }})
-    status: environmentaccountconnectionstatus_enum.EnvironmentAccountConnectionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    r"""EnvironmentAccountConnectionSummary
+    A summary of the environment account connection detail data.
+    """
+    
+    arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('arn') }})
+    environment_account_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('environmentAccountId') }})
+    environment_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('environmentName') }})
+    id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    last_modified_at: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('lastModifiedAt'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    management_account_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('managementAccountId') }})
+    requested_at: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('requestedAt'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    role_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('roleArn') }})
+    status: EnvironmentAccountConnectionStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     

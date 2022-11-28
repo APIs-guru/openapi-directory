@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ConfigurationEventStatusEnum } from "./configurationeventstatusenum";
 export declare class ListConfigurationHistoryRequest extends SpeakeasyBase {
     endTime?: Date;

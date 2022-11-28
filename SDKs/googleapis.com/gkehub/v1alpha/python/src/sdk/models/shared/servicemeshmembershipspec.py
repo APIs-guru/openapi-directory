@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ServiceMeshMembershipSpecControlPlaneEnum(str, Enum):
     CONTROL_PLANE_MANAGEMENT_UNSPECIFIED = "CONTROL_PLANE_MANAGEMENT_UNSPECIFIED"
@@ -22,7 +24,11 @@ class ServiceMeshMembershipSpecManagementEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ServiceMeshMembershipSpec:
-    control_plane: Optional[ServiceMeshMembershipSpecControlPlaneEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'controlPlane' }})
-    default_channel: Optional[ServiceMeshMembershipSpecDefaultChannelEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'defaultChannel' }})
-    management: Optional[ServiceMeshMembershipSpecManagementEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'management' }})
+    r"""ServiceMeshMembershipSpec
+    **Service Mesh**: Spec for a single Membership for the servicemesh feature
+    """
+    
+    control_plane: Optional[ServiceMeshMembershipSpecControlPlaneEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('controlPlane') }})
+    default_channel: Optional[ServiceMeshMembershipSpecDefaultChannelEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('defaultChannel') }})
+    management: Optional[ServiceMeshMembershipSpecManagementEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('management') }})
     

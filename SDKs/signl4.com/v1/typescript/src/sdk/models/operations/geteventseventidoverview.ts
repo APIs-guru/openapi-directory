@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetEventsEventIdOverviewPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=eventId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=eventId" })
   eventId: string;
 }
 
 
 export class GetEventsEventIdOverviewRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetEventsEventIdOverviewPathParams;
 }
 
 
 export class GetEventsEventIdOverviewResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponseContent?: shared.ErrorResponseContent;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   overviewEvent?: shared.OverviewEvent;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

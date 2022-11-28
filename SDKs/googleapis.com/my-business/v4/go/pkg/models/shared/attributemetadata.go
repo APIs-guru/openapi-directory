@@ -10,6 +10,8 @@ const (
 	AttributeMetadataValueTypeEnumRepeatedEnum                  AttributeMetadataValueTypeEnum = "REPEATED_ENUM"
 )
 
+// AttributeMetadata
+// Metadata for an attribute. Contains display information for the attribute, including a localized name and a heading for grouping related attributes together.
 type AttributeMetadata struct {
 	AttributeID      *string                         `json:"attributeId,omitempty"`
 	DisplayName      *string                         `json:"displayName,omitempty"`

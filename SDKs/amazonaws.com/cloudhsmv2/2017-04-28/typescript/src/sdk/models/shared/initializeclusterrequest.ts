@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class InitializeClusterRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClusterId" })
+  @SpeakeasyMetadata({ data: "json, name=ClusterId" })
   clusterId: string;
 
-  @Metadata({ data: "json, name=SignedCert" })
+  @SpeakeasyMetadata({ data: "json, name=SignedCert" })
   signedCert: string;
 
-  @Metadata({ data: "json, name=TrustAnchor" })
+  @SpeakeasyMetadata({ data: "json, name=TrustAnchor" })
   trustAnchor: string;
 }

@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SlotTypeMetadata } from "./slottypemetadata";
 
 
+
 export class GetSlotTypeVersionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=slotTypes", elemType: shared.SlotTypeMetadata })
+  @SpeakeasyMetadata({ data: "json, name=slotTypes", elemType: SlotTypeMetadata })
   slotTypes?: SlotTypeMetadata[];
 }

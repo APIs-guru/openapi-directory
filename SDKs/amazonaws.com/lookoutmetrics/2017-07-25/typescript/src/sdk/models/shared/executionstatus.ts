@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AnomalyDetectionTaskStatusEnum } from "./anomalydetectiontaskstatusenum";
+
 
 
 // ExecutionStatus
@@ -7,12 +8,12 @@ import { AnomalyDetectionTaskStatusEnum } from "./anomalydetectiontaskstatusenum
  * The status of an anomaly detector run.
 **/
 export class ExecutionStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FailureReason" })
+  @SpeakeasyMetadata({ data: "json, name=FailureReason" })
   failureReason?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: AnomalyDetectionTaskStatusEnum;
 
-  @Metadata({ data: "json, name=Timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=Timestamp" })
   timestamp?: string;
 }

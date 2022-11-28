@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * ItemApplicationScopesUpdateResponse defines the response schema for `/item/application/scopes/update`
 **/

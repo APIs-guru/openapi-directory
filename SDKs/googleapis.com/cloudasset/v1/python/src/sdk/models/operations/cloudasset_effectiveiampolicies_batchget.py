@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudassetEffectiveIamPoliciesBatchGetPathParams:
-    scope: str = field(default=None, metadata={'path_param': { 'field_name': 'scope', 'style': 'simple', 'explode': False }})
+    scope: str = field(metadata={'path_param': { 'field_name': 'scope', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +27,20 @@ class CloudassetEffectiveIamPoliciesBatchGetQueryParams:
 
 @dataclass
 class CloudassetEffectiveIamPoliciesBatchGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudassetEffectiveIamPoliciesBatchGetRequest:
-    path_params: CloudassetEffectiveIamPoliciesBatchGetPathParams = field(default=None)
-    query_params: CloudassetEffectiveIamPoliciesBatchGetQueryParams = field(default=None)
-    security: CloudassetEffectiveIamPoliciesBatchGetSecurity = field(default=None)
+    path_params: CloudassetEffectiveIamPoliciesBatchGetPathParams = field()
+    query_params: CloudassetEffectiveIamPoliciesBatchGetQueryParams = field()
+    security: CloudassetEffectiveIamPoliciesBatchGetSecurity = field()
     
 
 @dataclass
 class CloudassetEffectiveIamPoliciesBatchGetResponse:
+    content_type: str = field()
+    status_code: int = field()
     batch_get_effective_iam_policies_response: Optional[shared.BatchGetEffectiveIamPoliciesResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

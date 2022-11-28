@@ -1,46 +1,47 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PhotoControllerGetPhotoDownloadPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=shortName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=shortName" })
   shortName: string;
 }
 
 
 export class PhotoControllerGetPhotoDownloadQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=height" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=height" })
   height?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=photoID" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=photoID" })
   photoId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=token" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=token" })
   token: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=width" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=width" })
   width?: number;
 }
 
 
 export class PhotoControllerGetPhotoDownloadRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PhotoControllerGetPhotoDownloadPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PhotoControllerGetPhotoDownloadQueryParams;
 }
 
 
 export class PhotoControllerGetPhotoDownloadResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   object?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

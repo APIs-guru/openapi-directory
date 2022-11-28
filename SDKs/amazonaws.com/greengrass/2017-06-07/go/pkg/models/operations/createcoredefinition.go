@@ -15,6 +15,8 @@ type CreateCoreDefinitionHeaders struct {
 	XAmznClientToken  *string `header:"style=simple,explode=false,name=X-Amzn-Client-Token"`
 }
 
+// CreateCoreDefinitionRequestBodyInitialVersion
+// Information about a core definition version.
 type CreateCoreDefinitionRequestBodyInitialVersion struct {
 	Cores []shared.Core `json:"Cores,omitempty"`
 }

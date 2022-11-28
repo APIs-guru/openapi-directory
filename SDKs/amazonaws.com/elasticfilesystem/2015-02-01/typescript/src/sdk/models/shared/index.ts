@@ -3,7 +3,6 @@ export * from "./backuppolicy";
 export * from "./backuppolicydescription";
 export * from "./creationinfo";
 export * from "./describeaccesspointsresponse";
-export * from "./describeaccountpreferencesresponse";
 export * from "./describefilesystemsresponse";
 export * from "./describemounttargetsecuritygroupsresponse";
 export * from "./describemounttargetsresponse";

@@ -1,16 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DeleteInstallationSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oAuth2: shared.SchemeOAuth2;
-}
-
-
-export class DeleteInstallationRequest extends SpeakeasyBase {
-  @Metadata()
-  security: DeleteInstallationSecurity;
 }
 
 
@@ -19,39 +14,45 @@ export class DeleteInstallationRequest extends SpeakeasyBase {
  * （従量課金の場合）従量課金アンインストール情報
 **/
 export class DeleteInstallation200ApplicationJsonUsageCharge extends SpeakeasyBase {
-  @Metadata({ data: "json, name=api_token" })
+  @SpeakeasyMetadata({ data: "json, name=api_token" })
   apiToken?: string;
 
-  @Metadata({ data: "json, name=closing_on" })
+  @SpeakeasyMetadata({ data: "json, name=closing_on" })
   closingOn?: number;
 }
 
 
 export class DeleteInstallation200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=account_id" })
+  @SpeakeasyMetadata({ data: "json, name=account_id" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=application_charge_source_id" })
+  @SpeakeasyMetadata({ data: "json, name=application_charge_source_id" })
   applicationChargeSourceId?: string;
 
-  @Metadata({ data: "json, name=recurring_application_charge_id" })
+  @SpeakeasyMetadata({ data: "json, name=recurring_application_charge_id" })
   recurringApplicationChargeId?: string;
 
-  @Metadata({ data: "json, name=uninstalled_at" })
+  @SpeakeasyMetadata({ data: "json, name=uninstalled_at" })
   uninstalledAt?: number;
 
-  @Metadata({ data: "json, name=usage_charge" })
+  @SpeakeasyMetadata({ data: "json, name=usage_charge" })
   usageCharge?: DeleteInstallation200ApplicationJsonUsageCharge;
 }
 
 
+export class DeleteInstallationRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  security: DeleteInstallationSecurity;
+}
+
+
 export class DeleteInstallationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteInstallation200ApplicationJsonObject?: DeleteInstallation200ApplicationJson;
 }

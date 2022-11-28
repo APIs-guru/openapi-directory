@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OrderMerchantProvidedAnnotation } from "./ordermerchantprovidedannotation";
 
 
+
 export class OrdersCustomBatchRequestEntrySetLineItemMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=annotations", elemType: shared.OrderMerchantProvidedAnnotation })
+  @SpeakeasyMetadata({ data: "json, name=annotations", elemType: OrderMerchantProvidedAnnotation })
   annotations?: OrderMerchantProvidedAnnotation[];
 
-  @Metadata({ data: "json, name=lineItemId" })
+  @SpeakeasyMetadata({ data: "json, name=lineItemId" })
   lineItemId?: string;
 
-  @Metadata({ data: "json, name=productId" })
+  @SpeakeasyMetadata({ data: "json, name=productId" })
   productId?: string;
 }

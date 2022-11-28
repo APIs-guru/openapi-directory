@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Person } from "./person";
+
 
 
 // ListOtherContactsResponse
@@ -8,15 +8,15 @@ import { Person } from "./person";
  * The response to a request for the authenticated user's "Other contacts".
 **/
 export class ListOtherContactsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=nextSyncToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextSyncToken" })
   nextSyncToken?: string;
 
-  @Metadata({ data: "json, name=otherContacts", elemType: shared.Person })
+  @SpeakeasyMetadata({ data: "json, name=otherContacts", elemType: Person })
   otherContacts?: Person[];
 
-  @Metadata({ data: "json, name=totalSize" })
+  @SpeakeasyMetadata({ data: "json, name=totalSize" })
   totalSize?: number;
 }

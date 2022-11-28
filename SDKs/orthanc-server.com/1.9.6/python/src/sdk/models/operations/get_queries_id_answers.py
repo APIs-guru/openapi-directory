@@ -4,7 +4,7 @@ from typing import Any,Optional
 
 @dataclass
 class GetQueriesIDAnswersPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,13 +16,13 @@ class GetQueriesIDAnswersQueryParams:
 
 @dataclass
 class GetQueriesIDAnswersRequest:
-    path_params: GetQueriesIDAnswersPathParams = field(default=None)
-    query_params: GetQueriesIDAnswersQueryParams = field(default=None)
+    path_params: GetQueriesIDAnswersPathParams = field()
+    query_params: GetQueriesIDAnswersQueryParams = field()
     
 
 @dataclass
 class GetQueriesIDAnswersResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_queries_id_answers_200_application_json_any: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

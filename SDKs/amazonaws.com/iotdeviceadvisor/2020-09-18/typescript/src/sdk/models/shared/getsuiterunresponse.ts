@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SuiteRunStatusEnum } from "./suiterunstatusenum";
 import { SuiteRunConfiguration } from "./suiterunconfiguration";
 import { TestResult } from "./testresult";
 
 
+
 export class GetSuiteRunResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=endTime" })
+  @SpeakeasyMetadata({ data: "json, name=endTime" })
   endTime?: Date;
 
-  @Metadata({ data: "json, name=errorReason" })
+  @SpeakeasyMetadata({ data: "json, name=errorReason" })
   errorReason?: string;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: Date;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: SuiteRunStatusEnum;
 
-  @Metadata({ data: "json, name=suiteDefinitionId" })
+  @SpeakeasyMetadata({ data: "json, name=suiteDefinitionId" })
   suiteDefinitionId?: string;
 
-  @Metadata({ data: "json, name=suiteDefinitionVersion" })
+  @SpeakeasyMetadata({ data: "json, name=suiteDefinitionVersion" })
   suiteDefinitionVersion?: string;
 
-  @Metadata({ data: "json, name=suiteRunArn" })
+  @SpeakeasyMetadata({ data: "json, name=suiteRunArn" })
   suiteRunArn?: string;
 
-  @Metadata({ data: "json, name=suiteRunConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=suiteRunConfiguration" })
   suiteRunConfiguration?: SuiteRunConfiguration;
 
-  @Metadata({ data: "json, name=suiteRunId" })
+  @SpeakeasyMetadata({ data: "json, name=suiteRunId" })
   suiteRunId?: string;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 
-  @Metadata({ data: "json, name=testResult" })
+  @SpeakeasyMetadata({ data: "json, name=testResult" })
   testResult?: TestResult;
 }

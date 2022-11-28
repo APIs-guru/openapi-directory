@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // FilteringAttribute
 /**
  * A representation of the FilteringAttribute resource. Filtering attributes are per event type.
@@ -33,19 +33,19 @@ var FilteringAttribute = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=attribute" }),
+        SpeakeasyMetadata({ data: "json, name=attribute" }),
         __metadata("design:type", String)
     ], FilteringAttribute.prototype, "attribute", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], FilteringAttribute.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=pathPatternSupported" }),
+        SpeakeasyMetadata({ data: "json, name=pathPatternSupported" }),
         __metadata("design:type", Boolean)
     ], FilteringAttribute.prototype, "pathPatternSupported", void 0);
     __decorate([
-        Metadata({ data: "json, name=required" }),
+        SpeakeasyMetadata({ data: "json, name=required" }),
         __metadata("design:type", Boolean)
     ], FilteringAttribute.prototype, "required", void 0);
     return FilteringAttribute;

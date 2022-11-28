@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Filter } from "./filter";
 import { RecommendationPreferences } from "./recommendationpreferences";
 var GetEc2InstanceRecommendationsRequest = /** @class */ (function (_super) {
     __extends(GetEc2InstanceRecommendationsRequest, _super);
@@ -31,27 +31,27 @@ var GetEc2InstanceRecommendationsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=accountIds" }),
+        SpeakeasyMetadata({ data: "json, name=accountIds" }),
         __metadata("design:type", Array)
     ], GetEc2InstanceRecommendationsRequest.prototype, "accountIds", void 0);
     __decorate([
-        Metadata({ data: "json, name=filters", elemType: shared.Filter }),
+        SpeakeasyMetadata({ data: "json, name=filters", elemType: Filter }),
         __metadata("design:type", Array)
     ], GetEc2InstanceRecommendationsRequest.prototype, "filters", void 0);
     __decorate([
-        Metadata({ data: "json, name=instanceArns" }),
+        SpeakeasyMetadata({ data: "json, name=instanceArns" }),
         __metadata("design:type", Array)
     ], GetEc2InstanceRecommendationsRequest.prototype, "instanceArns", void 0);
     __decorate([
-        Metadata({ data: "json, name=maxResults" }),
+        SpeakeasyMetadata({ data: "json, name=maxResults" }),
         __metadata("design:type", Number)
     ], GetEc2InstanceRecommendationsRequest.prototype, "maxResults", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextToken" }),
         __metadata("design:type", String)
     ], GetEc2InstanceRecommendationsRequest.prototype, "nextToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=recommendationPreferences" }),
+        SpeakeasyMetadata({ data: "json, name=recommendationPreferences" }),
         __metadata("design:type", RecommendationPreferences)
     ], GetEc2InstanceRecommendationsRequest.prototype, "recommendationPreferences", void 0);
     return GetEc2InstanceRecommendationsRequest;

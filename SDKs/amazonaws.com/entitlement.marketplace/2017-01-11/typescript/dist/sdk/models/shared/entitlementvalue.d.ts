@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * The EntitlementValue represents the amount of capacity that the customer is entitled to for the product.
 **/

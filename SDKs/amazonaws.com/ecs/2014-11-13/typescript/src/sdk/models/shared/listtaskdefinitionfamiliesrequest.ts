@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TaskDefinitionFamilyStatusEnum } from "./taskdefinitionfamilystatusenum";
 
 
+
 export class ListTaskDefinitionFamiliesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=familyPrefix" })
+  @SpeakeasyMetadata({ data: "json, name=familyPrefix" })
   familyPrefix?: string;
 
-  @Metadata({ data: "json, name=maxResults" })
+  @SpeakeasyMetadata({ data: "json, name=maxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: TaskDefinitionFamilyStatusEnum;
 }

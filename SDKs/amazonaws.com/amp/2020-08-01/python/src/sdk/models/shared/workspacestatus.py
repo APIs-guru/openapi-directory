@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import workspacestatuscode_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class WorkspaceStatus:
-    status_code: workspacestatuscode_enum.WorkspaceStatusCodeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'statusCode' }})
+    r"""WorkspaceStatus
+    Represents the status of a workspace.
+    """
+    
+    status_code: WorkspaceStatusCodeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('statusCode') }})
     

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Entry } from "./entry";
+
 
 
 // Row
@@ -8,9 +8,9 @@ import { Entry } from "./entry";
  * A single row in the confusion matrix.
 **/
 export class Row extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actualLabel" })
+  @SpeakeasyMetadata({ data: "json, name=actualLabel" })
   actualLabel?: string;
 
-  @Metadata({ data: "json, name=entries", elemType: shared.Entry })
+  @SpeakeasyMetadata({ data: "json, name=entries", elemType: Entry })
   entries?: Entry[];
 }

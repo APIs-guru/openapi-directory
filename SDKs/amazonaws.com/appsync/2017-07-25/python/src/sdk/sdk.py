@@ -1,8 +1,11 @@
-import warnings
+
+__doc__ = """ SDK Documentation: https://docs.aws.amazon.com/appsync/ - Amazon Web Services documentation"""
 import requests
-from typing import Any,List,Optional
-from sdk.models import operations, shared
+from typing import Any,Optional
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -14,37 +17,63 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    r"""SDK Documentation: https://docs.aws.amazon.com/appsync/ - Amazon Web Services documentation"""
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
-    
-    def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
+            self._server_url = server_url
 
+        
+    
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        
+    
+
+    def config_security(self, security: shared.Security):
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        
+    
+    
     
     def create_api_cache(self, request: operations.CreateAPICacheRequest) -> operations.CreateAPICacheResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a cache for the GraphQL API.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apis/{apiId}/ApiCaches", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -79,22 +108,22 @@ class SDK:
 
     
     def create_api_key(self, request: operations.CreateAPIKeyRequest) -> operations.CreateAPIKeyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a unique key that you can distribute to clients who are executing your API.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apis/{apiId}/apikeys", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -141,22 +170,22 @@ class SDK:
 
     
     def create_data_source(self, request: operations.CreateDataSourceRequest) -> operations.CreateDataSourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a <code>DataSource</code> object.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apis/{apiId}/datasources", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -191,22 +220,22 @@ class SDK:
 
     
     def create_function(self, request: operations.CreateFunctionRequest) -> operations.CreateFunctionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Creates a <code>Function</code> object.</p> <p>A function is a reusable entity. Multiple functions can be used to compose the resolver logic.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apis/{apiId}/functions", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -237,22 +266,22 @@ class SDK:
 
     
     def create_graphql_api(self, request: operations.CreateGraphqlAPIRequest) -> operations.CreateGraphqlAPIResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a <code>GraphqlApi</code> object.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/apis"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -291,22 +320,22 @@ class SDK:
 
     
     def create_resolver(self, request: operations.CreateResolverRequest) -> operations.CreateResolverResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Creates a <code>Resolver</code> object.</p> <p>A resolver converts incoming requests into a format that a data source can understand and converts the data source's responses into GraphQL.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apis/{apiId}/types/{typeName}/resolvers", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -337,22 +366,22 @@ class SDK:
 
     
     def create_type(self, request: operations.CreateTypeRequest) -> operations.CreateTypeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a <code>Type</code> object.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apis/{apiId}/types", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -387,15 +416,17 @@ class SDK:
 
     
     def delete_api_cache(self, request: operations.DeleteAPICacheRequest) -> operations.DeleteAPICacheResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes an <code>ApiCache</code> object.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apis/{apiId}/ApiCaches", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -430,15 +461,17 @@ class SDK:
 
     
     def delete_api_key(self, request: operations.DeleteAPIKeyRequest) -> operations.DeleteAPIKeyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes an API key.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apis/{apiId}/apikeys/{id}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -469,15 +502,17 @@ class SDK:
 
     
     def delete_data_source(self, request: operations.DeleteDataSourceRequest) -> operations.DeleteDataSourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a <code>DataSource</code> object.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apis/{apiId}/datasources/{name}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -512,15 +547,17 @@ class SDK:
 
     
     def delete_function(self, request: operations.DeleteFunctionRequest) -> operations.DeleteFunctionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a <code>Function</code>.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apis/{apiId}/functions/{functionId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -551,15 +588,17 @@ class SDK:
 
     
     def delete_graphql_api(self, request: operations.DeleteGraphqlAPIRequest) -> operations.DeleteGraphqlAPIResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a <code>GraphqlApi</code> object.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apis/{apiId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -598,15 +637,17 @@ class SDK:
 
     
     def delete_resolver(self, request: operations.DeleteResolverRequest) -> operations.DeleteResolverResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a <code>Resolver</code> object.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apis/{apiId}/types/{typeName}/resolvers/{fieldName}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -637,15 +678,17 @@ class SDK:
 
     
     def delete_type(self, request: operations.DeleteTypeRequest) -> operations.DeleteTypeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a <code>Type</code> object.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apis/{apiId}/types/{typeName}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -680,15 +723,17 @@ class SDK:
 
     
     def flush_api_cache(self, request: operations.FlushAPICacheRequest) -> operations.FlushAPICacheResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Flushes an <code>ApiCache</code> object.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apis/{apiId}/FlushCache", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -723,15 +768,17 @@ class SDK:
 
     
     def get_api_cache(self, request: operations.GetAPICacheRequest) -> operations.GetAPICacheResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves an <code>ApiCache</code> object.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apis/{apiId}/ApiCaches", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -766,15 +813,17 @@ class SDK:
 
     
     def get_data_source(self, request: operations.GetDataSourceRequest) -> operations.GetDataSourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves a <code>DataSource</code> object.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apis/{apiId}/datasources/{name}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -809,15 +858,17 @@ class SDK:
 
     
     def get_function(self, request: operations.GetFunctionRequest) -> operations.GetFunctionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a <code>Function</code>.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apis/{apiId}/functions/{functionId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -844,15 +895,17 @@ class SDK:
 
     
     def get_graphql_api(self, request: operations.GetGraphqlAPIRequest) -> operations.GetGraphqlAPIResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves a <code>GraphqlApi</code> object.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apis/{apiId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -887,17 +940,18 @@ class SDK:
 
     
     def get_introspection_schema(self, request: operations.GetIntrospectionSchemaRequest) -> operations.GetIntrospectionSchemaResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves the introspection schema for a GraphQL API.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apis/{apiId}/schema#format", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -928,15 +982,17 @@ class SDK:
 
     
     def get_resolver(self, request: operations.GetResolverRequest) -> operations.GetResolverResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves a <code>Resolver</code> object.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apis/{apiId}/types/{typeName}/resolvers/{fieldName}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -963,15 +1019,17 @@ class SDK:
 
     
     def get_schema_creation_status(self, request: operations.GetSchemaCreationStatusRequest) -> operations.GetSchemaCreationStatusResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves the current status of a schema creation operation.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apis/{apiId}/schemacreation", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1002,17 +1060,18 @@ class SDK:
 
     
     def get_type(self, request: operations.GetTypeRequest) -> operations.GetTypeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves a <code>Type</code> object.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apis/{apiId}/types/{typeName}#format", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1047,17 +1106,18 @@ class SDK:
 
     
     def list_api_keys(self, request: operations.ListAPIKeysRequest) -> operations.ListAPIKeysResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Lists the API keys for a given API.</p> <note> <p>API keys are deleted automatically 60 days after they expire. However, they may still be included in the response until they have actually been deleted. You can safely call <code>DeleteApiKey</code> to manually delete a key before it's automatically deleted.</p> </note>
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apis/{apiId}/apikeys", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1088,17 +1148,18 @@ class SDK:
 
     
     def list_data_sources(self, request: operations.ListDataSourcesRequest) -> operations.ListDataSourcesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists the data sources for a given API.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apis/{apiId}/datasources", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1129,17 +1190,18 @@ class SDK:
 
     
     def list_functions(self, request: operations.ListFunctionsRequest) -> operations.ListFunctionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List multiple functions.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apis/{apiId}/functions", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1170,17 +1232,18 @@ class SDK:
 
     
     def list_graphql_apis(self, request: operations.ListGraphqlApisRequest) -> operations.ListGraphqlApisResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists your GraphQL APIs.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/apis"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1207,17 +1270,18 @@ class SDK:
 
     
     def list_resolvers(self, request: operations.ListResolversRequest) -> operations.ListResolversResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists the resolvers for a given API and type.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apis/{apiId}/types/{typeName}/resolvers", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1248,17 +1312,18 @@ class SDK:
 
     
     def list_resolvers_by_function(self, request: operations.ListResolversByFunctionRequest) -> operations.ListResolversByFunctionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List the resolvers that are associated with a specific function.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apis/{apiId}/functions/{functionId}/resolvers", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1289,15 +1354,17 @@ class SDK:
 
     
     def list_tags_for_resource(self, request: operations.ListTagsForResourceRequest) -> operations.ListTagsForResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists the tags for a resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/tags/{resourceArn}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1336,17 +1403,18 @@ class SDK:
 
     
     def list_types(self, request: operations.ListTypesRequest) -> operations.ListTypesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists the types for a given API.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apis/{apiId}/types#format", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1381,22 +1449,22 @@ class SDK:
 
     
     def start_schema_creation(self, request: operations.StartSchemaCreationRequest) -> operations.StartSchemaCreationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Adds a new schema to your GraphQL API.</p> <p>This operation is asynchronous. Use to determine when it has completed.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apis/{apiId}/schemacreation", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1431,22 +1499,22 @@ class SDK:
 
     
     def tag_resource(self, request: operations.TagResourceRequest) -> operations.TagResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Tags a resource with user-supplied tags.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/tags/{resourceArn}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1485,17 +1553,18 @@ class SDK:
 
     
     def untag_resource(self, request: operations.UntagResourceRequest) -> operations.UntagResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Untags a resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/tags/{resourceArn}#tagKeys", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1534,22 +1603,22 @@ class SDK:
 
     
     def update_api_cache(self, request: operations.UpdateAPICacheRequest) -> operations.UpdateAPICacheResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates the cache for the GraphQL API.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apis/{apiId}/ApiCaches/update", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1584,22 +1653,22 @@ class SDK:
 
     
     def update_api_key(self, request: operations.UpdateAPIKeyRequest) -> operations.UpdateAPIKeyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates an API key. The key can be updated while it is not deleted.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apis/{apiId}/apikeys/{id}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1638,22 +1707,22 @@ class SDK:
 
     
     def update_data_source(self, request: operations.UpdateDataSourceRequest) -> operations.UpdateDataSourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates a <code>DataSource</code> object.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apis/{apiId}/datasources/{name}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1688,22 +1757,22 @@ class SDK:
 
     
     def update_function(self, request: operations.UpdateFunctionRequest) -> operations.UpdateFunctionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates a <code>Function</code> object.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apis/{apiId}/functions/{functionId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1734,22 +1803,22 @@ class SDK:
 
     
     def update_graphql_api(self, request: operations.UpdateGraphqlAPIRequest) -> operations.UpdateGraphqlAPIResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates a <code>GraphqlApi</code> object.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apis/{apiId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1788,22 +1857,22 @@ class SDK:
 
     
     def update_resolver(self, request: operations.UpdateResolverRequest) -> operations.UpdateResolverResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates a <code>Resolver</code> object.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apis/{apiId}/types/{typeName}/resolvers/{fieldName}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1834,22 +1903,22 @@ class SDK:
 
     
     def update_type(self, request: operations.UpdateTypeRequest) -> operations.UpdateTypeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates a <code>Type</code> object.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apis/{apiId}/types/{typeName}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

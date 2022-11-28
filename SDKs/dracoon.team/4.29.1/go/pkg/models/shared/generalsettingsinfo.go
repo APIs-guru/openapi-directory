@@ -1,5 +1,7 @@
 package shared
 
+// GeneralSettingsInfo
+// General settings
 type GeneralSettingsInfo struct {
 	CryptoEnabled                  *bool  `json:"cryptoEnabled,omitempty"`
 	EmailNotificationButtonEnabled *bool  `json:"emailNotificationButtonEnabled,omitempty"`

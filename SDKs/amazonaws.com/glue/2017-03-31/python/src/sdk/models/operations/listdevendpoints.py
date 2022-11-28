@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -14,6 +18,7 @@ class ListDevEndpointsXAmzTargetEnum(str, Enum):
 
 @dataclass
 class ListDevEndpointsHeaders:
+    x_amz_target: ListDevEndpointsXAmzTargetEnum = field(metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm', 'style': 'simple', 'explode': False }})
     x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256', 'style': 'simple', 'explode': False }})
     x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential', 'style': 'simple', 'explode': False }})
@@ -21,23 +26,22 @@ class ListDevEndpointsHeaders:
     x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token', 'style': 'simple', 'explode': False }})
     x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature', 'style': 'simple', 'explode': False }})
     x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders', 'style': 'simple', 'explode': False }})
-    x_amz_target: ListDevEndpointsXAmzTargetEnum = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ListDevEndpointsRequest:
-    query_params: ListDevEndpointsQueryParams = field(default=None)
-    headers: ListDevEndpointsHeaders = field(default=None)
-    request: shared.ListDevEndpointsRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ListDevEndpointsHeaders = field()
+    query_params: ListDevEndpointsQueryParams = field()
+    request: shared.ListDevEndpointsRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ListDevEndpointsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     entity_not_found_exception: Optional[Any] = field(default=None)
     internal_service_exception: Optional[Any] = field(default=None)
     invalid_input_exception: Optional[Any] = field(default=None)
     list_dev_endpoints_response: Optional[shared.ListDevEndpointsResponse] = field(default=None)
     operation_timeout_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

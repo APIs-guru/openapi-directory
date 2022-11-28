@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class TransferBalanceOrCreditRequest:
-    amount: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'amount' }})
-    from_: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'from' }})
-    reference: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reference' }})
-    to: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'to' }})
+    amount: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('amount') }})
+    from_: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('from') }})
+    to: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('to') }})
+    reference: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('reference') }})
     

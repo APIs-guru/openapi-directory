@@ -9,11 +9,8 @@ type PostLoadBalancersIDActionsAttachToNetworkRequestBody struct {
 	Network float64 `json:"network"`
 }
 
-type PostLoadBalancersIDActionsAttachToNetworkRequest struct {
-	PathParams PostLoadBalancersIDActionsAttachToNetworkPathParams
-	Request    *PostLoadBalancersIDActionsAttachToNetworkRequestBody `request:"mediaType=application/json"`
-}
-
+// PostLoadBalancersIDActionsAttachToNetworkActionResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type PostLoadBalancersIDActionsAttachToNetworkActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -45,6 +42,11 @@ type PostLoadBalancersIDActionsAttachToNetworkActionResponseAction struct {
 
 type PostLoadBalancersIDActionsAttachToNetworkActionResponse struct {
 	Action PostLoadBalancersIDActionsAttachToNetworkActionResponseAction `json:"action"`
+}
+
+type PostLoadBalancersIDActionsAttachToNetworkRequest struct {
+	PathParams PostLoadBalancersIDActionsAttachToNetworkPathParams
+	Request    *PostLoadBalancersIDActionsAttachToNetworkRequestBody `request:"mediaType=application/json"`
 }
 
 type PostLoadBalancersIDActionsAttachToNetworkResponse struct {

@@ -1,5 +1,7 @@
 package shared
 
+// ChildWorkflowExecutionTerminatedEventAttributes
+// Provides the details of the <code>ChildWorkflowExecutionTerminated</code> event.
 type ChildWorkflowExecutionTerminatedEventAttributes struct {
 	InitiatedEventID  int64             `json:"initiatedEventId"`
 	StartedEventID    int64             `json:"startedEventId"`

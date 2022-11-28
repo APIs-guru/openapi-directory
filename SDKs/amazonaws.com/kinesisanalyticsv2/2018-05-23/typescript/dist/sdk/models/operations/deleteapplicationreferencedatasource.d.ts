@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum DeleteApplicationReferenceDataSourceXAmzTargetEnum {
     KinesisAnalytics20180523DeleteApplicationReferenceDataSource = "KinesisAnalytics_20180523.DeleteApplicationReferenceDataSource"

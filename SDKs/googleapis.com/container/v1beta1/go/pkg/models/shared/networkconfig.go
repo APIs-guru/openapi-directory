@@ -17,12 +17,15 @@ const (
 	NetworkConfigPrivateIpv6GoogleAccessEnumPrivateIpv6GoogleAccessBidirectional NetworkConfigPrivateIpv6GoogleAccessEnum = "PRIVATE_IPV6_GOOGLE_ACCESS_BIDIRECTIONAL"
 )
 
+// NetworkConfig
+// NetworkConfig reports the relative names of network & subnetwork.
 type NetworkConfig struct {
 	DatapathProvider          *NetworkConfigDatapathProviderEnum        `json:"datapathProvider,omitempty"`
 	DefaultSnatStatus         *DefaultSnatStatus                        `json:"defaultSnatStatus,omitempty"`
 	DNSConfig                 *DNSConfig                                `json:"dnsConfig,omitempty"`
 	EnableIntraNodeVisibility *bool                                     `json:"enableIntraNodeVisibility,omitempty"`
 	EnableL4ilbSubsetting     *bool                                     `json:"enableL4ilbSubsetting,omitempty"`
+	GatewayAPIConfig          *GatewayAPIConfig                         `json:"gatewayApiConfig,omitempty"`
 	Network                   *string                                   `json:"network,omitempty"`
 	PrivateIpv6GoogleAccess   *NetworkConfigPrivateIpv6GoogleAccessEnum `json:"privateIpv6GoogleAccess,omitempty"`
 	ServiceExternalIpsConfig  *ServiceExternalIPsConfig                 `json:"serviceExternalIpsConfig,omitempty"`

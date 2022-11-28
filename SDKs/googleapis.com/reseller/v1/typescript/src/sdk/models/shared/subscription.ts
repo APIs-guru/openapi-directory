@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RenewalSettings } from "./renewalsettings";
 import { Seats } from "./seats";
+
 
 
 // SubscriptionPlanCommitmentInterval
@@ -8,10 +9,10 @@ import { Seats } from "./seats";
  * In this version of the API, annual commitment plan's interval is one year. *Note: *When `billingMethod` value is `OFFLINE`, the subscription property object `plan.commitmentInterval` is omitted in all API responses. 
 **/
 export class SubscriptionPlanCommitmentInterval extends SpeakeasyBase {
-  @Metadata({ data: "json, name=endTime" })
+  @SpeakeasyMetadata({ data: "json, name=endTime" })
   endTime?: string;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: string;
 }
 
@@ -21,13 +22,13 @@ export class SubscriptionPlanCommitmentInterval extends SpeakeasyBase {
  * The `plan` property is required. In this version of the API, the G Suite plans are the flexible plan, annual commitment plan, and the 30-day free trial plan. For more information about the API"s payment plans, see the API concepts.
 **/
 export class SubscriptionPlan extends SpeakeasyBase {
-  @Metadata({ data: "json, name=commitmentInterval" })
+  @SpeakeasyMetadata({ data: "json, name=commitmentInterval" })
   commitmentInterval?: SubscriptionPlanCommitmentInterval;
 
-  @Metadata({ data: "json, name=isCommitmentPlan" })
+  @SpeakeasyMetadata({ data: "json, name=isCommitmentPlan" })
   isCommitmentPlan?: boolean;
 
-  @Metadata({ data: "json, name=planName" })
+  @SpeakeasyMetadata({ data: "json, name=planName" })
   planName?: string;
 }
 
@@ -37,13 +38,13 @@ export class SubscriptionPlan extends SpeakeasyBase {
  * Read-only transfer related information for the subscription. For more information, see retrieve transferable subscriptions for a customer.
 **/
 export class SubscriptionTransferInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=currentLegacySkuId" })
+  @SpeakeasyMetadata({ data: "json, name=currentLegacySkuId" })
   currentLegacySkuId?: string;
 
-  @Metadata({ data: "json, name=minimumTransferableSeats" })
+  @SpeakeasyMetadata({ data: "json, name=minimumTransferableSeats" })
   minimumTransferableSeats?: number;
 
-  @Metadata({ data: "json, name=transferabilityExpirationTime" })
+  @SpeakeasyMetadata({ data: "json, name=transferabilityExpirationTime" })
   transferabilityExpirationTime?: string;
 }
 
@@ -53,10 +54,10 @@ export class SubscriptionTransferInfo extends SpeakeasyBase {
  * The G Suite annual commitment and flexible payment plans can be in a 30-day free trial. For more information, see the API concepts.
 **/
 export class SubscriptionTrialSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=isInTrial" })
+  @SpeakeasyMetadata({ data: "json, name=isInTrial" })
   isInTrial?: boolean;
 
-  @Metadata({ data: "json, name=trialEndTime" })
+  @SpeakeasyMetadata({ data: "json, name=trialEndTime" })
   trialEndTime?: string;
 }
 
@@ -66,57 +67,57 @@ export class SubscriptionTrialSettings extends SpeakeasyBase {
  * JSON template for a subscription.
 **/
 export class Subscription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=billingMethod" })
+  @SpeakeasyMetadata({ data: "json, name=billingMethod" })
   billingMethod?: string;
 
-  @Metadata({ data: "json, name=creationTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationTime" })
   creationTime?: string;
 
-  @Metadata({ data: "json, name=customerDomain" })
+  @SpeakeasyMetadata({ data: "json, name=customerDomain" })
   customerDomain?: string;
 
-  @Metadata({ data: "json, name=customerId" })
+  @SpeakeasyMetadata({ data: "json, name=customerId" })
   customerId?: string;
 
-  @Metadata({ data: "json, name=dealCode" })
+  @SpeakeasyMetadata({ data: "json, name=dealCode" })
   dealCode?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=plan" })
+  @SpeakeasyMetadata({ data: "json, name=plan" })
   plan?: SubscriptionPlan;
 
-  @Metadata({ data: "json, name=purchaseOrderId" })
+  @SpeakeasyMetadata({ data: "json, name=purchaseOrderId" })
   purchaseOrderId?: string;
 
-  @Metadata({ data: "json, name=renewalSettings" })
+  @SpeakeasyMetadata({ data: "json, name=renewalSettings" })
   renewalSettings?: RenewalSettings;
 
-  @Metadata({ data: "json, name=resourceUiUrl" })
+  @SpeakeasyMetadata({ data: "json, name=resourceUiUrl" })
   resourceUiUrl?: string;
 
-  @Metadata({ data: "json, name=seats" })
+  @SpeakeasyMetadata({ data: "json, name=seats" })
   seats?: Seats;
 
-  @Metadata({ data: "json, name=skuId" })
+  @SpeakeasyMetadata({ data: "json, name=skuId" })
   skuId?: string;
 
-  @Metadata({ data: "json, name=skuName" })
+  @SpeakeasyMetadata({ data: "json, name=skuName" })
   skuName?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 
-  @Metadata({ data: "json, name=subscriptionId" })
+  @SpeakeasyMetadata({ data: "json, name=subscriptionId" })
   subscriptionId?: string;
 
-  @Metadata({ data: "json, name=suspensionReasons" })
+  @SpeakeasyMetadata({ data: "json, name=suspensionReasons" })
   suspensionReasons?: string[];
 
-  @Metadata({ data: "json, name=transferInfo" })
+  @SpeakeasyMetadata({ data: "json, name=transferInfo" })
   transferInfo?: SubscriptionTransferInfo;
 
-  @Metadata({ data: "json, name=trialSettings" })
+  @SpeakeasyMetadata({ data: "json, name=trialSettings" })
   trialSettings?: SubscriptionTrialSettings;
 }

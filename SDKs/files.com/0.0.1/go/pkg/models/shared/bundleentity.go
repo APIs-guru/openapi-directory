@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// BundleEntity
+// Create Bundle
 type BundleEntity struct {
 	ClickwrapBody         *string             `json:"clickwrap_body,omitempty"`
 	ClickwrapID           *int32              `json:"clickwrap_id,omitempty"`

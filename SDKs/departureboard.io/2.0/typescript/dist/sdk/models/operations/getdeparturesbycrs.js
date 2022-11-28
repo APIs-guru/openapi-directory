@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetDeparturesByCrsPathParams = /** @class */ (function (_super) {
     __extends(GetDeparturesByCrsPathParams, _super);
     function GetDeparturesByCrsPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=CRS" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=CRS" }),
         __metadata("design:type", String)
     ], GetDeparturesByCrsPathParams.prototype, "crs", void 0);
     return GetDeparturesByCrsPathParams;
@@ -41,27 +41,27 @@ var GetDeparturesByCrsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=apiKey" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=apiKey" }),
         __metadata("design:type", String)
     ], GetDeparturesByCrsQueryParams.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=filterStation" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filterStation" }),
         __metadata("design:type", String)
     ], GetDeparturesByCrsQueryParams.prototype, "filterStation", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=numServices" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=numServices" }),
         __metadata("design:type", Number)
     ], GetDeparturesByCrsQueryParams.prototype, "numServices", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=serviceDetails" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=serviceDetails" }),
         __metadata("design:type", Boolean)
     ], GetDeparturesByCrsQueryParams.prototype, "serviceDetails", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=timeOffset" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timeOffset" }),
         __metadata("design:type", Number)
     ], GetDeparturesByCrsQueryParams.prototype, "timeOffset", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=timeWindow" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timeWindow" }),
         __metadata("design:type", Number)
     ], GetDeparturesByCrsQueryParams.prototype, "timeWindow", void 0);
     return GetDeparturesByCrsQueryParams;
@@ -73,11 +73,11 @@ var GetDeparturesByCrsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetDeparturesByCrsPathParams)
     ], GetDeparturesByCrsRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetDeparturesByCrsQueryParams)
     ], GetDeparturesByCrsRequest.prototype, "queryParams", void 0);
     return GetDeparturesByCrsRequest;
@@ -89,11 +89,11 @@ var GetDeparturesByCrsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetDeparturesByCrsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetDeparturesByCrsResponse.prototype, "statusCode", void 0);
     return GetDeparturesByCrsResponse;

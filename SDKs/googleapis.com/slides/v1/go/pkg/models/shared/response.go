@@ -1,5 +1,7 @@
 package shared
 
+// Response
+// A single response from an update.
 type Response struct {
 	CreateImage                     *CreateImageResponse                     `json:"createImage,omitempty"`
 	CreateLine                      *CreateLineResponse                      `json:"createLine,omitempty"`

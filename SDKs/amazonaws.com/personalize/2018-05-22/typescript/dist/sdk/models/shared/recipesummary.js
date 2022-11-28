@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // RecipeSummary
 /**
  * Provides a summary of the properties of a recipe. For a complete listing, call the <a>DescribeRecipe</a> API.
@@ -33,23 +33,23 @@ var RecipeSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=creationDateTime" }),
+        SpeakeasyMetadata({ data: "json, name=creationDateTime" }),
         __metadata("design:type", Date)
     ], RecipeSummary.prototype, "creationDateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastUpdatedDateTime" }),
+        SpeakeasyMetadata({ data: "json, name=lastUpdatedDateTime" }),
         __metadata("design:type", Date)
     ], RecipeSummary.prototype, "lastUpdatedDateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], RecipeSummary.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=recipeArn" }),
+        SpeakeasyMetadata({ data: "json, name=recipeArn" }),
         __metadata("design:type", String)
     ], RecipeSummary.prototype, "recipeArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], RecipeSummary.prototype, "status", void 0);
     return RecipeSummary;

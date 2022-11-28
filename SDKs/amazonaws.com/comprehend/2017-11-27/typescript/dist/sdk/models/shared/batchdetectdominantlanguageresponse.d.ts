@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { BatchItemError } from "./batchitemerror";
 import { BatchDetectDominantLanguageItemResult } from "./batchdetectdominantlanguageitemresult";
 export declare class BatchDetectDominantLanguageResponse extends SpeakeasyBase {

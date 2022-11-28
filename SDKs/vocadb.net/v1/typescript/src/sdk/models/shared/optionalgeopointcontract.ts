@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class OptionalGeoPointContract extends SpeakeasyBase {
-  @Metadata({ data: "json, name=formatted" })
+  @SpeakeasyMetadata({ data: "json, name=formatted" })
   formatted?: string;
 
-  @Metadata({ data: "json, name=hasValue" })
+  @SpeakeasyMetadata({ data: "json, name=hasValue" })
   hasValue?: boolean;
 
-  @Metadata({ data: "json, name=latitude" })
+  @SpeakeasyMetadata({ data: "json, name=latitude" })
   latitude?: number;
 
-  @Metadata({ data: "json, name=longitude" })
+  @SpeakeasyMetadata({ data: "json, name=longitude" })
   longitude?: number;
 }

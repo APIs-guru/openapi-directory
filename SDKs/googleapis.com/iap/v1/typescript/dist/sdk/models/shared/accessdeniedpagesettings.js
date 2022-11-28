@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // AccessDeniedPageSettings
 /**
  * Custom content configuration for access denied page. IAP allows customers to define a custom URI to use as the error page when access is denied to users. If IAP prevents access to this page, the default IAP error page will be displayed instead.
@@ -33,15 +33,15 @@ var AccessDeniedPageSettings = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=accessDeniedPageUri" }),
+        SpeakeasyMetadata({ data: "json, name=accessDeniedPageUri" }),
         __metadata("design:type", String)
     ], AccessDeniedPageSettings.prototype, "accessDeniedPageUri", void 0);
     __decorate([
-        Metadata({ data: "json, name=generateTroubleshootingUri" }),
+        SpeakeasyMetadata({ data: "json, name=generateTroubleshootingUri" }),
         __metadata("design:type", Boolean)
     ], AccessDeniedPageSettings.prototype, "generateTroubleshootingUri", void 0);
     __decorate([
-        Metadata({ data: "json, name=remediationTokenGenerationEnabled" }),
+        SpeakeasyMetadata({ data: "json, name=remediationTokenGenerationEnabled" }),
         __metadata("design:type", Boolean)
     ], AccessDeniedPageSettings.prototype, "remediationTokenGenerationEnabled", void 0);
     return AccessDeniedPageSettings;

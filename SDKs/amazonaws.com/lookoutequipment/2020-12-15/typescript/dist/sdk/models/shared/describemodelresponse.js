@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataPreProcessingConfiguration } from "./datapreprocessingconfiguration";
 import { LabelsInputConfiguration } from "./labelsinputconfiguration";
 import { ModelStatusEnum } from "./modelstatusenum";
@@ -32,87 +32,87 @@ var DescribeModelResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CreatedAt" }),
+        SpeakeasyMetadata({ data: "json, name=CreatedAt" }),
         __metadata("design:type", Date)
     ], DescribeModelResponse.prototype, "createdAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=DataPreProcessingConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=DataPreProcessingConfiguration" }),
         __metadata("design:type", DataPreProcessingConfiguration)
     ], DescribeModelResponse.prototype, "dataPreProcessingConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=DatasetArn" }),
+        SpeakeasyMetadata({ data: "json, name=DatasetArn" }),
         __metadata("design:type", String)
     ], DescribeModelResponse.prototype, "datasetArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=DatasetName" }),
+        SpeakeasyMetadata({ data: "json, name=DatasetName" }),
         __metadata("design:type", String)
     ], DescribeModelResponse.prototype, "datasetName", void 0);
     __decorate([
-        Metadata({ data: "json, name=EvaluationDataEndTime" }),
+        SpeakeasyMetadata({ data: "json, name=EvaluationDataEndTime" }),
         __metadata("design:type", Date)
     ], DescribeModelResponse.prototype, "evaluationDataEndTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=EvaluationDataStartTime" }),
+        SpeakeasyMetadata({ data: "json, name=EvaluationDataStartTime" }),
         __metadata("design:type", Date)
     ], DescribeModelResponse.prototype, "evaluationDataStartTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=FailedReason" }),
+        SpeakeasyMetadata({ data: "json, name=FailedReason" }),
         __metadata("design:type", String)
     ], DescribeModelResponse.prototype, "failedReason", void 0);
     __decorate([
-        Metadata({ data: "json, name=LabelsInputConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=LabelsInputConfiguration" }),
         __metadata("design:type", LabelsInputConfiguration)
     ], DescribeModelResponse.prototype, "labelsInputConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastUpdatedTime" }),
+        SpeakeasyMetadata({ data: "json, name=LastUpdatedTime" }),
         __metadata("design:type", Date)
     ], DescribeModelResponse.prototype, "lastUpdatedTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=ModelArn" }),
+        SpeakeasyMetadata({ data: "json, name=ModelArn" }),
         __metadata("design:type", String)
     ], DescribeModelResponse.prototype, "modelArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=ModelMetrics" }),
+        SpeakeasyMetadata({ data: "json, name=ModelMetrics" }),
         __metadata("design:type", String)
     ], DescribeModelResponse.prototype, "modelMetrics", void 0);
     __decorate([
-        Metadata({ data: "json, name=ModelName" }),
+        SpeakeasyMetadata({ data: "json, name=ModelName" }),
         __metadata("design:type", String)
     ], DescribeModelResponse.prototype, "modelName", void 0);
     __decorate([
-        Metadata({ data: "json, name=OffCondition" }),
+        SpeakeasyMetadata({ data: "json, name=OffCondition" }),
         __metadata("design:type", String)
     ], DescribeModelResponse.prototype, "offCondition", void 0);
     __decorate([
-        Metadata({ data: "json, name=RoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=RoleArn" }),
         __metadata("design:type", String)
     ], DescribeModelResponse.prototype, "roleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=Schema" }),
+        SpeakeasyMetadata({ data: "json, name=Schema" }),
         __metadata("design:type", String)
     ], DescribeModelResponse.prototype, "schema", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServerSideKmsKeyId" }),
+        SpeakeasyMetadata({ data: "json, name=ServerSideKmsKeyId" }),
         __metadata("design:type", String)
     ], DescribeModelResponse.prototype, "serverSideKmsKeyId", void 0);
     __decorate([
-        Metadata({ data: "json, name=Status" }),
+        SpeakeasyMetadata({ data: "json, name=Status" }),
         __metadata("design:type", String)
     ], DescribeModelResponse.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=TrainingDataEndTime" }),
+        SpeakeasyMetadata({ data: "json, name=TrainingDataEndTime" }),
         __metadata("design:type", Date)
     ], DescribeModelResponse.prototype, "trainingDataEndTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=TrainingDataStartTime" }),
+        SpeakeasyMetadata({ data: "json, name=TrainingDataStartTime" }),
         __metadata("design:type", Date)
     ], DescribeModelResponse.prototype, "trainingDataStartTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=TrainingExecutionEndTime" }),
+        SpeakeasyMetadata({ data: "json, name=TrainingExecutionEndTime" }),
         __metadata("design:type", Date)
     ], DescribeModelResponse.prototype, "trainingExecutionEndTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=TrainingExecutionStartTime" }),
+        SpeakeasyMetadata({ data: "json, name=TrainingExecutionStartTime" }),
         __metadata("design:type", Date)
     ], DescribeModelResponse.prototype, "trainingExecutionStartTime", void 0);
     return DescribeModelResponse;

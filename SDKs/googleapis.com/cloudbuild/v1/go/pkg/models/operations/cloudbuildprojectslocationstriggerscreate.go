@@ -31,7 +31,7 @@ type CloudbuildProjectsLocationsTriggersCreateSecurity struct {
 type CloudbuildProjectsLocationsTriggersCreateRequest struct {
 	PathParams  CloudbuildProjectsLocationsTriggersCreatePathParams
 	QueryParams CloudbuildProjectsLocationsTriggersCreateQueryParams
-	Request     *shared.BuildTrigger `request:"mediaType=application/json"`
+	Request     *shared.BuildTriggerInput `request:"mediaType=application/json"`
 	Security    CloudbuildProjectsLocationsTriggersCreateSecurity
 }
 

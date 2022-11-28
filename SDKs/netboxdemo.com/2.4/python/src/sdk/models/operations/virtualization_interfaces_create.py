@@ -5,12 +5,12 @@ from sdk.models import shared
 
 @dataclass
 class VirtualizationInterfacesCreateRequest:
-    request: shared.WritableInterface = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.WritableInterfaceInput = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class VirtualizationInterfacesCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     interface: Optional[shared.Interface] = field(default=None)
-    status_code: int = field(default=None)
     

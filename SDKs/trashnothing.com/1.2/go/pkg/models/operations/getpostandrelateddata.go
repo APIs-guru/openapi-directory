@@ -8,27 +8,10 @@ type GetPostAndRelatedDataPathParams struct {
 	PostID string `pathParam:"style=simple,explode=false,name=post_id"`
 }
 
-type GetPostAndRelatedDataSecurityOption1 struct {
-	Oauth2Implicit shared.SchemeOauth2Implicit `security:"scheme,type=oauth2"`
-}
-
-type GetPostAndRelatedDataSecurityOption2 struct {
-	Oauth2Code shared.SchemeOauth2Code `security:"scheme,type=oauth2"`
-}
-
-type GetPostAndRelatedDataSecurityOption3 struct {
-	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=query"`
-}
-
 type GetPostAndRelatedDataSecurity struct {
-	Option1 *GetPostAndRelatedDataSecurityOption1 `security:"option"`
-	Option2 *GetPostAndRelatedDataSecurityOption2 `security:"option"`
-	Option3 *GetPostAndRelatedDataSecurityOption3 `security:"option"`
-}
-
-type GetPostAndRelatedDataRequest struct {
-	PathParams GetPostAndRelatedDataPathParams
-	Security   GetPostAndRelatedDataSecurity
+	Oauth2Implicit *shared.SchemeOauth2Implicit `security:"scheme,type=oauth2"`
+	Oauth2Code     *shared.SchemeOauth2Code     `security:"scheme,type=oauth2"`
+	APIKey         *shared.SchemeAPIKey         `security:"scheme,type=apiKey,subtype=query"`
 }
 
 type GetPostAndRelatedData200ApplicationJSON struct {
@@ -44,6 +27,11 @@ type GetPostAndRelatedData200ApplicationJSON struct {
 	Replied           *bool                   `json:"replied,omitempty"`
 	UserCanReply      *bool                   `json:"user_can_reply,omitempty"`
 	Viewed            *bool                   `json:"viewed,omitempty"`
+}
+
+type GetPostAndRelatedDataRequest struct {
+	PathParams GetPostAndRelatedDataPathParams
+	Security   GetPostAndRelatedDataSecurity
 }
 
 type GetPostAndRelatedDataResponse struct {

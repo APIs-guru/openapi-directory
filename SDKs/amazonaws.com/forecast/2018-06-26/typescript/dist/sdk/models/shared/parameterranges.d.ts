@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CategoricalParameterRange } from "./categoricalparameterrange";
 import { ContinuousParameterRange } from "./continuousparameterrange";
 import { IntegerParameterRange } from "./integerparameterrange";

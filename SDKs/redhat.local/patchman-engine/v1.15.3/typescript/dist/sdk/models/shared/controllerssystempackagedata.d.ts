@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ModelsPackageUpdate } from "./modelspackageupdate";
 export declare class ControllersSystemPackageData extends SpeakeasyBase {
     description?: string;

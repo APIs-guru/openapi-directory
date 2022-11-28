@@ -11,12 +11,12 @@ class GetConferenceSpRatingsQueryParams:
 
 @dataclass
 class GetConferenceSpRatingsRequest:
-    query_params: GetConferenceSpRatingsQueryParams = field(default=None)
+    query_params: GetConferenceSpRatingsQueryParams = field()
     
 
 @dataclass
 class GetConferenceSpRatingsResponse:
+    content_type: str = field()
+    status_code: int = field()
     conference_sp_ratings: Optional[List[shared.ConferenceSpRating]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

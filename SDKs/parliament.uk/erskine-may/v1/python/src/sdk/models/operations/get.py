@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class GetPathParams:
-    chapter_number: int = field(default=None, metadata={'path_param': { 'field_name': 'chapterNumber', 'style': 'simple', 'explode': False }})
+    chapter_number: int = field(metadata={'path_param': { 'field_name': 'chapterNumber', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetRequest:
-    path_params: GetPathParams = field(default=None)
+    path_params: GetPathParams = field()
     
 
 @dataclass
 class GetResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     erskine_may_chapter_overview: Optional[shared.ErskineMayChapterOverview] = field(default=None)
-    status_code: int = field(default=None)
     

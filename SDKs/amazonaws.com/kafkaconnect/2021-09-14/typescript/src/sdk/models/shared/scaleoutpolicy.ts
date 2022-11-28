@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ScaleOutPolicy
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The scale-out policy for the connector.
 **/
 export class ScaleOutPolicy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cpuUtilizationPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=cpuUtilizationPercentage" })
   cpuUtilizationPercentage: number;
 }

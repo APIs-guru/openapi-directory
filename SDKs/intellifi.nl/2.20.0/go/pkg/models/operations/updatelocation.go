@@ -10,7 +10,7 @@ type UpdateLocationPathParams struct {
 
 type UpdateLocationRequest struct {
 	PathParams UpdateLocationPathParams
-	Request    shared.Location `request:"mediaType=application/json"`
+	Request    shared.LocationInput `request:"mediaType=application/json"`
 }
 
 type UpdateLocationResponse struct {

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // StatusCheckPolicy
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Status Check Policy
 **/
 export class StatusCheckPolicy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=contexts" })
+  @SpeakeasyMetadata({ data: "json, name=contexts" })
   contexts: string[];
 
-  @Metadata({ data: "json, name=contexts_url" })
+  @SpeakeasyMetadata({ data: "json, name=contexts_url" })
   contextsUrl: string;
 
-  @Metadata({ data: "json, name=strict" })
+  @SpeakeasyMetadata({ data: "json, name=strict" })
   strict: boolean;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url: string;
 }

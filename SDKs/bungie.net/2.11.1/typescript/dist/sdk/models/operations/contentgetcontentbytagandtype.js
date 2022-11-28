@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ContentGetContentByTagAndTypePathParams = /** @class */ (function (_super) {
     __extends(ContentGetContentByTagAndTypePathParams, _super);
     function ContentGetContentByTagAndTypePathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=locale" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=locale" }),
         __metadata("design:type", String)
     ], ContentGetContentByTagAndTypePathParams.prototype, "locale", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=tag" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=tag" }),
         __metadata("design:type", String)
     ], ContentGetContentByTagAndTypePathParams.prototype, "tag", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=type" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=type" }),
         __metadata("design:type", String)
     ], ContentGetContentByTagAndTypePathParams.prototype, "type", void 0);
     return ContentGetContentByTagAndTypePathParams;
@@ -49,7 +49,7 @@ var ContentGetContentByTagAndTypeQueryParams = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=head" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=head" }),
         __metadata("design:type", Boolean)
     ], ContentGetContentByTagAndTypeQueryParams.prototype, "head", void 0);
     return ContentGetContentByTagAndTypeQueryParams;
@@ -61,11 +61,11 @@ var ContentGetContentByTagAndTypeRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ContentGetContentByTagAndTypePathParams)
     ], ContentGetContentByTagAndTypeRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ContentGetContentByTagAndTypeQueryParams)
     ], ContentGetContentByTagAndTypeRequest.prototype, "queryParams", void 0);
     return ContentGetContentByTagAndTypeRequest;
@@ -77,15 +77,15 @@ var ContentGetContentByTagAndTypeResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], ContentGetContentByTagAndTypeResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ContentGetContentByTagAndTypeResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ContentGetContentByTagAndTypeResponse.prototype, "statusCode", void 0);
     return ContentGetContentByTagAndTypeResponse;

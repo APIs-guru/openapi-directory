@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class FolderListForPathPathParams:
-    path: str = field(default=None, metadata={'path_param': { 'field_name': 'path', 'style': 'simple', 'explode': False }})
+    path: str = field(metadata={'path_param': { 'field_name': 'path', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,13 +22,13 @@ class FolderListForPathQueryParams:
 
 @dataclass
 class FolderListForPathRequest:
-    path_params: FolderListForPathPathParams = field(default=None)
-    query_params: FolderListForPathQueryParams = field(default=None)
+    path_params: FolderListForPathPathParams = field()
+    query_params: FolderListForPathQueryParams = field()
     
 
 @dataclass
 class FolderListForPathResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     file_entities: Optional[List[shared.FileEntity]] = field(default=None)
-    status_code: int = field(default=None)
     

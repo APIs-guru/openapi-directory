@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PaymentsresellersubscriptionPartnersSubscriptionsCancelPathParams = /** @class */ (function (_super) {
     __extends(PaymentsresellersubscriptionPartnersSubscriptionsCancelPathParams, _super);
@@ -30,7 +30,7 @@ var PaymentsresellersubscriptionPartnersSubscriptionsCancelPathParams = /** @cla
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=name" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=name" }),
         __metadata("design:type", String)
     ], PaymentsresellersubscriptionPartnersSubscriptionsCancelPathParams.prototype, "name", void 0);
     return PaymentsresellersubscriptionPartnersSubscriptionsCancelPathParams;
@@ -42,47 +42,47 @@ var PaymentsresellersubscriptionPartnersSubscriptionsCancelQueryParams = /** @cl
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], PaymentsresellersubscriptionPartnersSubscriptionsCancelQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], PaymentsresellersubscriptionPartnersSubscriptionsCancelQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], PaymentsresellersubscriptionPartnersSubscriptionsCancelQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], PaymentsresellersubscriptionPartnersSubscriptionsCancelQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], PaymentsresellersubscriptionPartnersSubscriptionsCancelQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], PaymentsresellersubscriptionPartnersSubscriptionsCancelQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], PaymentsresellersubscriptionPartnersSubscriptionsCancelQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], PaymentsresellersubscriptionPartnersSubscriptionsCancelQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], PaymentsresellersubscriptionPartnersSubscriptionsCancelQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], PaymentsresellersubscriptionPartnersSubscriptionsCancelQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], PaymentsresellersubscriptionPartnersSubscriptionsCancelQueryParams.prototype, "uploadProtocol", void 0);
     return PaymentsresellersubscriptionPartnersSubscriptionsCancelQueryParams;
@@ -94,15 +94,15 @@ var PaymentsresellersubscriptionPartnersSubscriptionsCancelRequest = /** @class 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PaymentsresellersubscriptionPartnersSubscriptionsCancelPathParams)
     ], PaymentsresellersubscriptionPartnersSubscriptionsCancelRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PaymentsresellersubscriptionPartnersSubscriptionsCancelQueryParams)
     ], PaymentsresellersubscriptionPartnersSubscriptionsCancelRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.GoogleCloudPaymentsResellerSubscriptionV1CancelSubscriptionRequest)
     ], PaymentsresellersubscriptionPartnersSubscriptionsCancelRequest.prototype, "request", void 0);
     return PaymentsresellersubscriptionPartnersSubscriptionsCancelRequest;
@@ -114,15 +114,15 @@ var PaymentsresellersubscriptionPartnersSubscriptionsCancelResponse = /** @class
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PaymentsresellersubscriptionPartnersSubscriptionsCancelResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.GoogleCloudPaymentsResellerSubscriptionV1CancelSubscriptionResponse)
     ], PaymentsresellersubscriptionPartnersSubscriptionsCancelResponse.prototype, "googleCloudPaymentsResellerSubscriptionV1CancelSubscriptionResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PaymentsresellersubscriptionPartnersSubscriptionsCancelResponse.prototype, "statusCode", void 0);
     return PaymentsresellersubscriptionPartnersSubscriptionsCancelResponse;

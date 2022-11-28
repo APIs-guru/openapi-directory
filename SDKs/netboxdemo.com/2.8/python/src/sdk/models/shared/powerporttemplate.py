@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import nesteddevicetype
+from sdk import utils
+from . import *
 
 class PowerPortTemplateTypeLabelEnum(str, Enum):
     C6 = "C6"
@@ -143,17 +145,17 @@ class PowerPortTemplateTypeValueEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PowerPortTemplateType:
-    label: PowerPortTemplateTypeLabelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
-    value: PowerPortTemplateTypeValueEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    label: PowerPortTemplateTypeLabelEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('label') }})
+    value: PowerPortTemplateTypeValueEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     
 
 @dataclass_json
 @dataclass
 class PowerPortTemplate:
-    allocated_draw: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'allocated_draw' }})
-    device_type: nesteddevicetype.NestedDeviceType = field(default=None, metadata={'dataclasses_json': { 'field_name': 'device_type' }})
-    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    maximum_draw: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maximum_draw' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    type: Optional[PowerPortTemplateType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    device_type: NestedDeviceType = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('device_type') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    allocated_draw: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('allocated_draw') }})
+    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    maximum_draw: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maximum_draw') }})
+    type: Optional[PowerPortTemplateType] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

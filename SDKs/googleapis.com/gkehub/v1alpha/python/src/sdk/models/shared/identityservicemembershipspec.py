@@ -1,11 +1,26 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import identityserviceauthmethod
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
+class IdentityServiceMembershipSpecInput:
+    r"""IdentityServiceMembershipSpecInput
+    **Anthos Identity Service**: Configuration for a single Membership.
+    """
+    
+    auth_methods: Optional[List[IdentityServiceAuthMethodInput]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('authMethods') }})
+    
+
+@dataclass_json
+@dataclass
 class IdentityServiceMembershipSpec:
-    auth_methods: Optional[List[identityserviceauthmethod.IdentityServiceAuthMethod]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'authMethods' }})
+    r"""IdentityServiceMembershipSpec
+    **Anthos Identity Service**: Configuration for a single Membership.
+    """
+    
+    auth_methods: Optional[List[IdentityServiceAuthMethod]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('authMethods') }})
     

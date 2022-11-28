@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetFindingPagePathParams = /** @class */ (function (_super) {
     __extends(GetFindingPagePathParams, _super);
@@ -30,7 +30,7 @@ var GetFindingPagePathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=scanId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=scanId" }),
         __metadata("design:type", Number)
     ], GetFindingPagePathParams.prototype, "scanId", void 0);
     return GetFindingPagePathParams;
@@ -42,7 +42,7 @@ var GetFindingPageRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetFindingPagePathParams)
     ], GetFindingPageRequest.prototype, "pathParams", void 0);
     return GetFindingPageRequest;
@@ -54,15 +54,15 @@ var GetFindingPageResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetFindingPageResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata({ elemType: shared.Findings }),
+        SpeakeasyMetadata({ elemType: shared.Findings }),
         __metadata("design:type", Array)
     ], GetFindingPageResponse.prototype, "findings", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetFindingPageResponse.prototype, "statusCode", void 0);
     return GetFindingPageResponse;

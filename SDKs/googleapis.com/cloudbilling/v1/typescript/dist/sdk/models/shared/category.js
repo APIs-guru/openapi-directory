@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Category
 /**
  * Represents the category hierarchy of a SKU.
@@ -33,19 +33,19 @@ var Category = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=resourceFamily" }),
+        SpeakeasyMetadata({ data: "json, name=resourceFamily" }),
         __metadata("design:type", String)
     ], Category.prototype, "resourceFamily", void 0);
     __decorate([
-        Metadata({ data: "json, name=resourceGroup" }),
+        SpeakeasyMetadata({ data: "json, name=resourceGroup" }),
         __metadata("design:type", String)
     ], Category.prototype, "resourceGroup", void 0);
     __decorate([
-        Metadata({ data: "json, name=serviceDisplayName" }),
+        SpeakeasyMetadata({ data: "json, name=serviceDisplayName" }),
         __metadata("design:type", String)
     ], Category.prototype, "serviceDisplayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=usageType" }),
+        SpeakeasyMetadata({ data: "json, name=usageType" }),
         __metadata("design:type", String)
     ], Category.prototype, "usageType", void 0);
     return Category;

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleTypeDecimal } from "./googletypedecimal";
+
 
 
 // GooglePlayDeveloperReportingV1beta1MetricValue
@@ -7,9 +8,9 @@ import { GoogleTypeDecimal } from "./googletypedecimal";
  * Represents the value of a metric.
 **/
 export class GooglePlayDeveloperReportingV1beta1MetricValue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=decimalValue" })
+  @SpeakeasyMetadata({ data: "json, name=decimalValue" })
   decimalValue?: GoogleTypeDecimal;
 
-  @Metadata({ data: "json, name=metric" })
+  @SpeakeasyMetadata({ data: "json, name=metric" })
   metric?: string;
 }

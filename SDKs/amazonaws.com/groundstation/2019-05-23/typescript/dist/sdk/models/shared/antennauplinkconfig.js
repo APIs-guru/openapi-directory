@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UplinkSpectrumConfig } from "./uplinkspectrumconfig";
 import { Eirp } from "./eirp";
 // AntennaUplinkConfig
@@ -35,15 +35,15 @@ var AntennaUplinkConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=spectrumConfig" }),
+        SpeakeasyMetadata({ data: "json, name=spectrumConfig" }),
         __metadata("design:type", UplinkSpectrumConfig)
     ], AntennaUplinkConfig.prototype, "spectrumConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=targetEirp" }),
+        SpeakeasyMetadata({ data: "json, name=targetEirp" }),
         __metadata("design:type", Eirp)
     ], AntennaUplinkConfig.prototype, "targetEirp", void 0);
     __decorate([
-        Metadata({ data: "json, name=transmitDisabled" }),
+        SpeakeasyMetadata({ data: "json, name=transmitDisabled" }),
         __metadata("design:type", Boolean)
     ], AntennaUplinkConfig.prototype, "transmitDisabled", void 0);
     return AntennaUplinkConfig;

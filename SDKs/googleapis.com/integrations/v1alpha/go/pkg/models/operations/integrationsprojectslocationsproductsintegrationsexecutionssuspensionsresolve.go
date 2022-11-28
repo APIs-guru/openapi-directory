@@ -30,7 +30,7 @@ type IntegrationsProjectsLocationsProductsIntegrationsExecutionsSuspensionsResol
 type IntegrationsProjectsLocationsProductsIntegrationsExecutionsSuspensionsResolveRequest struct {
 	PathParams  IntegrationsProjectsLocationsProductsIntegrationsExecutionsSuspensionsResolvePathParams
 	QueryParams IntegrationsProjectsLocationsProductsIntegrationsExecutionsSuspensionsResolveQueryParams
-	Request     *shared.GoogleCloudIntegrationsV1alphaResolveSuspensionRequest `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudIntegrationsV1alphaResolveSuspensionRequestInput `request:"mediaType=application/json"`
 	Security    IntegrationsProjectsLocationsProductsIntegrationsExecutionsSuspensionsResolveSecurity
 }
 

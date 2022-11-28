@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var LanguageDocumentsAnalyzeEntitySentimentQueryParams = /** @class */ (function (_super) {
     __extends(LanguageDocumentsAnalyzeEntitySentimentQueryParams, _super);
@@ -30,47 +30,47 @@ var LanguageDocumentsAnalyzeEntitySentimentQueryParams = /** @class */ (function
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], LanguageDocumentsAnalyzeEntitySentimentQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], LanguageDocumentsAnalyzeEntitySentimentQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], LanguageDocumentsAnalyzeEntitySentimentQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], LanguageDocumentsAnalyzeEntitySentimentQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], LanguageDocumentsAnalyzeEntitySentimentQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], LanguageDocumentsAnalyzeEntitySentimentQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], LanguageDocumentsAnalyzeEntitySentimentQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], LanguageDocumentsAnalyzeEntitySentimentQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], LanguageDocumentsAnalyzeEntitySentimentQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], LanguageDocumentsAnalyzeEntitySentimentQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], LanguageDocumentsAnalyzeEntitySentimentQueryParams.prototype, "uploadProtocol", void 0);
     return LanguageDocumentsAnalyzeEntitySentimentQueryParams;
@@ -82,11 +82,11 @@ var LanguageDocumentsAnalyzeEntitySentimentSecurityOption1 = /** @class */ (func
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], LanguageDocumentsAnalyzeEntitySentimentSecurityOption1.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], LanguageDocumentsAnalyzeEntitySentimentSecurityOption1.prototype, "oauth2c", void 0);
     return LanguageDocumentsAnalyzeEntitySentimentSecurityOption1;
@@ -98,11 +98,11 @@ var LanguageDocumentsAnalyzeEntitySentimentSecurityOption2 = /** @class */ (func
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], LanguageDocumentsAnalyzeEntitySentimentSecurityOption2.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], LanguageDocumentsAnalyzeEntitySentimentSecurityOption2.prototype, "oauth2c", void 0);
     return LanguageDocumentsAnalyzeEntitySentimentSecurityOption2;
@@ -114,11 +114,11 @@ var LanguageDocumentsAnalyzeEntitySentimentSecurity = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", LanguageDocumentsAnalyzeEntitySentimentSecurityOption1)
     ], LanguageDocumentsAnalyzeEntitySentimentSecurity.prototype, "option1", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", LanguageDocumentsAnalyzeEntitySentimentSecurityOption2)
     ], LanguageDocumentsAnalyzeEntitySentimentSecurity.prototype, "option2", void 0);
     return LanguageDocumentsAnalyzeEntitySentimentSecurity;
@@ -130,15 +130,15 @@ var LanguageDocumentsAnalyzeEntitySentimentRequest = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", LanguageDocumentsAnalyzeEntitySentimentQueryParams)
     ], LanguageDocumentsAnalyzeEntitySentimentRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.AnalyzeEntitySentimentRequest)
     ], LanguageDocumentsAnalyzeEntitySentimentRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", LanguageDocumentsAnalyzeEntitySentimentSecurity)
     ], LanguageDocumentsAnalyzeEntitySentimentRequest.prototype, "security", void 0);
     return LanguageDocumentsAnalyzeEntitySentimentRequest;
@@ -150,15 +150,15 @@ var LanguageDocumentsAnalyzeEntitySentimentResponse = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.AnalyzeEntitySentimentResponse)
     ], LanguageDocumentsAnalyzeEntitySentimentResponse.prototype, "analyzeEntitySentimentResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], LanguageDocumentsAnalyzeEntitySentimentResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], LanguageDocumentsAnalyzeEntitySentimentResponse.prototype, "statusCode", void 0);
     return LanguageDocumentsAnalyzeEntitySentimentResponse;

@@ -1,0 +1,103 @@
+# openapi
+
+<!-- Start SDK Installation -->
+## SDK Installation
+```bash
+go get openapi
+```
+<!-- End SDK Installation -->
+
+<!-- Start SDK Example Usage -->
+## SDK Example Usage
+```go
+package main
+
+import (
+	"openapi"
+	"openapi/pkg/models/shared"
+	"openapi/pkg/models/operations"
+)
+
+func main() {
+	s := sdk.New()
+    
+    req := operations.CreateDocumentRequest{
+        Security: operations.CreateDocumentSecurity{
+            AccountSidAuthToken: shared.SchemeAccountSidAuthToken{
+                Password: "YOUR_PASSWORD_HERE",
+                Username: "YOUR_USERNAME_HERE",
+            },
+        },
+        PathParams: operations.CreateDocumentPathParams{
+            ServiceSid: "nesciunt",
+        },
+        Request: &operations.CreateDocumentCreateDocumentRequest{
+            Data: "culpa",
+            TTL: 7943009243181636411,
+            UniqueName: "architecto",
+        },
+    }
+    
+    res, err := s.CreateDocument(ctx, req)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    if res.SyncV1ServiceDocument != nil {
+        // handle response
+    }
+```
+<!-- End SDK Example Usage -->
+
+<!-- Start SDK Available Operations -->
+## SDK Available Operations
+* `CreateDocument`
+* `CreateService`
+* `CreateStreamMessage` - Create a new Stream Message.
+* `CreateSyncList`
+* `CreateSyncListItem`
+* `CreateSyncMap`
+* `CreateSyncMapItem`
+* `CreateSyncStream` - Create a new Stream.
+* `DeleteDocument`
+* `DeleteDocumentPermission` - Delete a specific Sync Document Permission.
+* `DeleteService`
+* `DeleteSyncList`
+* `DeleteSyncListItem`
+* `DeleteSyncListPermission` - Delete a specific Sync List Permission.
+* `DeleteSyncMap`
+* `DeleteSyncMapItem`
+* `DeleteSyncMapPermission` - Delete a specific Sync Map Permission.
+* `DeleteSyncStream` - Delete a specific Stream.
+* `FetchDocument`
+* `FetchDocumentPermission` - Fetch a specific Sync Document Permission.
+* `FetchService`
+* `FetchSyncList`
+* `FetchSyncListItem`
+* `FetchSyncListPermission` - Fetch a specific Sync List Permission.
+* `FetchSyncMap`
+* `FetchSyncMapItem`
+* `FetchSyncMapPermission` - Fetch a specific Sync Map Permission.
+* `FetchSyncStream` - Fetch a specific Stream.
+* `ListDocument`
+* `ListDocumentPermission` - Retrieve a list of all Permissions applying to a Sync Document.
+* `ListService`
+* `ListSyncList`
+* `ListSyncListItem`
+* `ListSyncListPermission` - Retrieve a list of all Permissions applying to a Sync List.
+* `ListSyncMap`
+* `ListSyncMapItem`
+* `ListSyncMapPermission` - Retrieve a list of all Permissions applying to a Sync Map.
+* `ListSyncStream` - Retrieve a list of all Streams in a Service Instance.
+* `UpdateDocument`
+* `UpdateDocumentPermission` - Update an identity's access to a specific Sync Document.
+* `UpdateService`
+* `UpdateSyncList`
+* `UpdateSyncListItem`
+* `UpdateSyncListPermission` - Update an identity's access to a specific Sync List.
+* `UpdateSyncMap`
+* `UpdateSyncMapItem`
+* `UpdateSyncMapPermission` - Update an identity's access to a specific Sync Map.
+* `UpdateSyncStream` - Update a specific Stream.
+
+<!-- End SDK Available Operations -->

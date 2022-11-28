@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AndroidFcmOptions } from "./androidfcmoptions";
 import { AndroidNotification } from "./androidnotification";
 
+
 export enum AndroidConfigPriorityEnum {
-    Normal = "NORMAL"
-,    High = "HIGH"
+    Normal = "NORMAL",
+    High = "HIGH"
 }
 
 
@@ -13,27 +14,27 @@ export enum AndroidConfigPriorityEnum {
  * Android specific options for messages sent through [FCM connection server](https://goo.gl/4GLdUl).
 **/
 export class AndroidConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=collapseKey" })
+  @SpeakeasyMetadata({ data: "json, name=collapseKey" })
   collapseKey?: string;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, string>;
 
-  @Metadata({ data: "json, name=directBootOk" })
+  @SpeakeasyMetadata({ data: "json, name=directBootOk" })
   directBootOk?: boolean;
 
-  @Metadata({ data: "json, name=fcmOptions" })
+  @SpeakeasyMetadata({ data: "json, name=fcmOptions" })
   fcmOptions?: AndroidFcmOptions;
 
-  @Metadata({ data: "json, name=notification" })
+  @SpeakeasyMetadata({ data: "json, name=notification" })
   notification?: AndroidNotification;
 
-  @Metadata({ data: "json, name=priority" })
+  @SpeakeasyMetadata({ data: "json, name=priority" })
   priority?: AndroidConfigPriorityEnum;
 
-  @Metadata({ data: "json, name=restrictedPackageName" })
+  @SpeakeasyMetadata({ data: "json, name=restrictedPackageName" })
   restrictedPackageName?: string;
 
-  @Metadata({ data: "json, name=ttl" })
+  @SpeakeasyMetadata({ data: "json, name=ttl" })
   ttl?: string;
 }

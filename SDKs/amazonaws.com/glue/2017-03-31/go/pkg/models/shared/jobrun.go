@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// JobRun
+// Contains information about a job run.
 type JobRun struct {
 	AllocatedCapacity     *int64                `json:"AllocatedCapacity,omitempty"`
 	Arguments             map[string]string     `json:"Arguments,omitempty"`

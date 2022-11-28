@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HttpRouteAction } from "./httprouteaction";
 import { HttpRouteMatch } from "./httproutematch";
+
 
 
 // HttpRoute
@@ -8,9 +9,9 @@ import { HttpRouteMatch } from "./httproutematch";
  * An object representing the HTTP routing specification for a route.
 **/
 export class HttpRoute extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action?: HttpRouteAction;
 
-  @Metadata({ data: "json, name=match" })
+  @SpeakeasyMetadata({ data: "json, name=match" })
   match?: HttpRouteMatch;
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ForwardingAddress } from "./forwardingaddress";
+
 
 
 // ListForwardingAddressesResponse
@@ -8,6 +8,6 @@ import { ForwardingAddress } from "./forwardingaddress";
  * Response for the ListForwardingAddresses method.
 **/
 export class ListForwardingAddressesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=forwardingAddresses", elemType: shared.ForwardingAddress })
+  @SpeakeasyMetadata({ data: "json, name=forwardingAddresses", elemType: ForwardingAddress })
   forwardingAddresses?: ForwardingAddress[];
 }

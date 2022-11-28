@@ -1,5 +1,7 @@
 package shared
 
+// Resource
+// This message defines core attributes for a resource. A resource is an addressable (named) entity provided by the destination service. For example, a file stored on a network storage service.
 type Resource struct {
 	Annotations map[string]string `json:"annotations,omitempty"`
 	CreateTime  *string           `json:"createTime,omitempty"`

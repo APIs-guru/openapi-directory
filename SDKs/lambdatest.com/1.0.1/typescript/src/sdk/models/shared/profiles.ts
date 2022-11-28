@@ -1,80 +1,80 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ProfilesProfilesProfileConfigCredentials extends SpeakeasyBase {
-  @Metadata({ data: "json, name=password" })
+  @SpeakeasyMetadata({ data: "json, name=password" })
   password?: string;
 
-  @Metadata({ data: "json, name=username" })
+  @SpeakeasyMetadata({ data: "json, name=username" })
   username?: string;
 }
 
 
 export class ProfilesProfilesProfileConfigLocatorsPassword extends SpeakeasyBase {
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }
 
 
 export class ProfilesProfilesProfileConfigLocatorsSubmit extends SpeakeasyBase {
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }
 
 
 export class ProfilesProfilesProfileConfigLocatorsUsername extends SpeakeasyBase {
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }
 
 
 export class ProfilesProfilesProfileConfigLocators extends SpeakeasyBase {
-  @Metadata({ data: "json, name=password" })
+  @SpeakeasyMetadata({ data: "json, name=password" })
   password?: ProfilesProfilesProfileConfigLocatorsPassword;
 
-  @Metadata({ data: "json, name=submit" })
+  @SpeakeasyMetadata({ data: "json, name=submit" })
   submit?: ProfilesProfilesProfileConfigLocatorsSubmit;
 
-  @Metadata({ data: "json, name=username" })
+  @SpeakeasyMetadata({ data: "json, name=username" })
   username?: ProfilesProfilesProfileConfigLocatorsUsername;
 }
 
 
 export class ProfilesProfilesProfileConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=credentials" })
+  @SpeakeasyMetadata({ data: "json, name=credentials" })
   credentials?: ProfilesProfilesProfileConfigCredentials;
 
-  @Metadata({ data: "json, name=locators" })
+  @SpeakeasyMetadata({ data: "json, name=locators" })
   locators?: ProfilesProfilesProfileConfigLocators;
 
-  @Metadata({ data: "json, name=login_url" })
+  @SpeakeasyMetadata({ data: "json, name=login_url" })
   loginUrl?: string;
 
-  @Metadata({ data: "json, name=profile_name" })
+  @SpeakeasyMetadata({ data: "json, name=profile_name" })
   profileName?: string;
 }
 
 
 export class ProfilesProfiles extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=profile_config" })
+  @SpeakeasyMetadata({ data: "json, name=profile_config" })
   profileConfig?: ProfilesProfilesProfileConfig;
 }
 
 
 export class Profiles extends SpeakeasyBase {
-  @Metadata({ data: "json, name=profiles", elemType: shared.ProfilesProfiles })
+  @SpeakeasyMetadata({ data: "json, name=profiles", elemType: ProfilesProfiles })
   profiles?: ProfilesProfiles[];
 }

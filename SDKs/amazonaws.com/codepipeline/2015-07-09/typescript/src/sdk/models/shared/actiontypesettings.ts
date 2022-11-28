@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ActionTypeSettings
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Returns information about the settings for an action type.
 **/
 export class ActionTypeSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=entityUrlTemplate" })
+  @SpeakeasyMetadata({ data: "json, name=entityUrlTemplate" })
   entityUrlTemplate?: string;
 
-  @Metadata({ data: "json, name=executionUrlTemplate" })
+  @SpeakeasyMetadata({ data: "json, name=executionUrlTemplate" })
   executionUrlTemplate?: string;
 
-  @Metadata({ data: "json, name=revisionUrlTemplate" })
+  @SpeakeasyMetadata({ data: "json, name=revisionUrlTemplate" })
   revisionUrlTemplate?: string;
 
-  @Metadata({ data: "json, name=thirdPartyConfigurationUrl" })
+  @SpeakeasyMetadata({ data: "json, name=thirdPartyConfigurationUrl" })
   thirdPartyConfigurationUrl?: string;
 }

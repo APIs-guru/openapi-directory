@@ -1,43 +1,44 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class HealthCheckHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Accept-Language" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept-Language" })
   acceptLanguage: string;
 }
 
 
-export class HealthCheckRequest extends SpeakeasyBase {
-  @Metadata()
-  headers: HealthCheckHeaders;
-}
-
-
 export class HealthCheck200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allGood" })
+  @SpeakeasyMetadata({ data: "json, name=allGood" })
   allGood?: boolean;
 
-  @Metadata({ data: "json, name=capiOk" })
+  @SpeakeasyMetadata({ data: "json, name=capiOk" })
   capiOk?: boolean;
 
-  @Metadata({ data: "json, name=dbOk" })
+  @SpeakeasyMetadata({ data: "json, name=dbOk" })
   dbOk?: boolean;
 
-  @Metadata({ data: "json, name=memcachedOk" })
+  @SpeakeasyMetadata({ data: "json, name=memcachedOk" })
   memcachedOk?: boolean;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class HealthCheckRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  headers: HealthCheckHeaders;
+}
+
+
 export class HealthCheckResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   healthCheck200ApplicationJsonObject?: HealthCheck200ApplicationJson;
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AutoscalingPolicy } from "./autoscalingpolicy";
+
 
 
 // ListAutoscalingPoliciesResponse
@@ -8,9 +8,9 @@ import { AutoscalingPolicy } from "./autoscalingpolicy";
  * A response to a request to list autoscaling policies in a project.
 **/
 export class ListAutoscalingPoliciesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=policies", elemType: shared.AutoscalingPolicy })
+  @SpeakeasyMetadata({ data: "json, name=policies", elemType: AutoscalingPolicy })
   policies?: AutoscalingPolicy[];
 }

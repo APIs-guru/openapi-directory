@@ -4,7 +4,7 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-var GetObjectStorageSslServers = []string{
+var GetObjectStorageSslServerList = []string{
 	"https://api.linode.com/v4",
 }
 
@@ -13,27 +13,19 @@ type GetObjectStorageSslPathParams struct {
 	ClusterID string `pathParam:"style=simple,explode=false,name=clusterId"`
 }
 
-type GetObjectStorageSslSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type GetObjectStorageSslSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type GetObjectStorageSslSecurity struct {
-	Option1 *GetObjectStorageSslSecurityOption1 `security:"option"`
-	Option2 *GetObjectStorageSslSecurityOption2 `security:"option"`
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
+}
+
+type GetObjectStorageSslDefaultApplicationJSON struct {
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type GetObjectStorageSslRequest struct {
 	ServerURL  *string
 	PathParams GetObjectStorageSslPathParams
 	Security   GetObjectStorageSslSecurity
-}
-
-type GetObjectStorageSslDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type GetObjectStorageSslResponse struct {

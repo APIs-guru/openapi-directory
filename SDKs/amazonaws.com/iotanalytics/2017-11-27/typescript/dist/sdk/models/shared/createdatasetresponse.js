@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RetentionPeriod } from "./retentionperiod";
 var CreateDatasetResponse = /** @class */ (function (_super) {
     __extends(CreateDatasetResponse, _super);
@@ -30,15 +30,15 @@ var CreateDatasetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=datasetArn" }),
+        SpeakeasyMetadata({ data: "json, name=datasetArn" }),
         __metadata("design:type", String)
     ], CreateDatasetResponse.prototype, "datasetArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=datasetName" }),
+        SpeakeasyMetadata({ data: "json, name=datasetName" }),
         __metadata("design:type", String)
     ], CreateDatasetResponse.prototype, "datasetName", void 0);
     __decorate([
-        Metadata({ data: "json, name=retentionPeriod" }),
+        SpeakeasyMetadata({ data: "json, name=retentionPeriod" }),
         __metadata("design:type", RetentionPeriod)
     ], CreateDatasetResponse.prototype, "retentionPeriod", void 0);
     return CreateDatasetResponse;

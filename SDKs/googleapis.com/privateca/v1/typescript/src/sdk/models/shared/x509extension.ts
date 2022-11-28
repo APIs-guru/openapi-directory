@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ObjectId } from "./objectid";
+
 
 
 // X509Extension
@@ -7,12 +8,12 @@ import { ObjectId } from "./objectid";
  * An X509Extension specifies an X.509 extension, which may be used in different parts of X.509 objects like certificates, CSRs, and CRLs.
 **/
 export class X509Extension extends SpeakeasyBase {
-  @Metadata({ data: "json, name=critical" })
+  @SpeakeasyMetadata({ data: "json, name=critical" })
   critical?: boolean;
 
-  @Metadata({ data: "json, name=objectId" })
+  @SpeakeasyMetadata({ data: "json, name=objectId" })
   objectId?: ObjectId;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }

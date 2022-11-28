@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// SandboxBankAccountInfo
+// General account information
 type SandboxBankAccountInfo struct {
 	AccountSubType   string     `json:"accountSubType"`
 	AccountType      string     `json:"accountType"`

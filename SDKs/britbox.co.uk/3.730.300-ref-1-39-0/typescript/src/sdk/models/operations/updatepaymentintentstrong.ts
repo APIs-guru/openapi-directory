@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdatePaymentIntentStrongPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=platform" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=platform" })
   platform: string;
 }
 
 
 export class UpdatePaymentIntentStrongQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=lang" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lang" })
   lang?: string;
 }
 
 
 export class UpdatePaymentIntentStrongSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   accountAuth: shared.SchemeAccountAuth;
 }
 
 
 export class UpdatePaymentIntentStrongRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdatePaymentIntentStrongPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: UpdatePaymentIntentStrongQueryParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.ItvUpdateIntentStrongRequest;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: UpdatePaymentIntentStrongSecurity;
 }
 
 
 export class UpdatePaymentIntentStrongResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   itvUpdateIntentStrongResponse?: shared.ItvUpdateIntentStrongResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceError?: shared.ServiceError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

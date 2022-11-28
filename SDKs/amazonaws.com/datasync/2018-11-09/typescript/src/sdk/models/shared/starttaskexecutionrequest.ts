@@ -1,8 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { FilterRule } from "./filterrule";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FilterRule } from "./filterrule";
 import { Options } from "./options";
+
 
 
 // StartTaskExecutionRequest
@@ -10,15 +9,15 @@ import { Options } from "./options";
  * StartTaskExecutionRequest
 **/
 export class StartTaskExecutionRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Excludes", elemType: shared.FilterRule })
+  @SpeakeasyMetadata({ data: "json, name=Excludes", elemType: FilterRule })
   excludes?: FilterRule[];
 
-  @Metadata({ data: "json, name=Includes", elemType: shared.FilterRule })
+  @SpeakeasyMetadata({ data: "json, name=Includes", elemType: FilterRule })
   includes?: FilterRule[];
 
-  @Metadata({ data: "json, name=OverrideOptions" })
+  @SpeakeasyMetadata({ data: "json, name=OverrideOptions" })
   overrideOptions?: Options;
 
-  @Metadata({ data: "json, name=TaskArn" })
+  @SpeakeasyMetadata({ data: "json, name=TaskArn" })
   taskArn: string;
 }

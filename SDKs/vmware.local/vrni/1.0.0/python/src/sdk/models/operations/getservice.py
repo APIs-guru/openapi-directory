@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetServicePathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,20 +15,20 @@ class GetServiceQueryParams:
 
 @dataclass
 class GetServiceSecurity:
-    api_key_auth: shared.SchemeAPIKeyAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    api_key_auth: shared.SchemeAPIKeyAuth = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetServiceRequest:
-    path_params: GetServicePathParams = field(default=None)
-    query_params: GetServiceQueryParams = field(default=None)
-    security: GetServiceSecurity = field(default=None)
+    path_params: GetServicePathParams = field()
+    query_params: GetServiceQueryParams = field()
+    security: GetServiceSecurity = field()
     
 
 @dataclass
 class GetServiceResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_error: Optional[shared.APIError] = field(default=None)
     base_service: Optional[shared.BaseService] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

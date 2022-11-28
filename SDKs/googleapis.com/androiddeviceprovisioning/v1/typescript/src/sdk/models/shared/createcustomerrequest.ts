@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { Company } from "./company";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { CompanyInput } from "./company";
 
 
-// CreateCustomerRequest
+
+// CreateCustomerRequestInput
 /** 
  * Request message to create a customer.
 **/
-export class CreateCustomerRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=customer" })
-  customer?: Company;
+export class CreateCustomerRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=customer" })
+  customer?: CompanyInput;
 }

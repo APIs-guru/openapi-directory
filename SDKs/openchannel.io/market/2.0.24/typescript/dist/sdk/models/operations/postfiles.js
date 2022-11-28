@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PostFilesQueryParams = /** @class */ (function (_super) {
     __extends(PostFilesQueryParams, _super);
     function PostFilesQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=hash" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=hash" }),
         __metadata("design:type", String)
     ], PostFilesQueryParams.prototype, "hash", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=isPrivate" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=isPrivate" }),
         __metadata("design:type", Boolean)
     ], PostFilesQueryParams.prototype, "isPrivate", void 0);
     return PostFilesQueryParams;
@@ -45,11 +45,11 @@ var PostFilesRequestBodyFile = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "multipart_form, content=true" }),
+        SpeakeasyMetadata({ data: "multipart_form, content=true" }),
         __metadata("design:type", Uint8Array)
     ], PostFilesRequestBodyFile.prototype, "content", void 0);
     __decorate([
-        Metadata({ data: "multipart_form, name=file" }),
+        SpeakeasyMetadata({ data: "multipart_form, name=file" }),
         __metadata("design:type", String)
     ], PostFilesRequestBodyFile.prototype, "file", void 0);
     return PostFilesRequestBodyFile;
@@ -61,7 +61,7 @@ var PostFilesRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "multipart_form, file=true" }),
+        SpeakeasyMetadata({ data: "multipart_form, file=true" }),
         __metadata("design:type", PostFilesRequestBodyFile)
     ], PostFilesRequestBody.prototype, "file", void 0);
     return PostFilesRequestBody;
@@ -73,11 +73,11 @@ var PostFilesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostFilesQueryParams)
     ], PostFilesRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=multipart/form-data" }),
+        SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" }),
         __metadata("design:type", PostFilesRequestBody)
     ], PostFilesRequest.prototype, "request", void 0);
     return PostFilesRequest;
@@ -89,15 +89,15 @@ var PostFilesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], PostFilesResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostFilesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostFilesResponse.prototype, "statusCode", void 0);
     return PostFilesResponse;

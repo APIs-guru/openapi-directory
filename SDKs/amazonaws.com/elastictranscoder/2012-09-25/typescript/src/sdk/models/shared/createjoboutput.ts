@@ -1,11 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { JobAlbumArt } from "./jobalbumart";
 import { Captions } from "./captions";
 import { Clip } from "./clip";
 import { Encryption } from "./encryption";
-import { Encryption } from "./encryption";
 import { JobWatermark } from "./jobwatermark";
+
 
 
 // CreateJobOutput
@@ -13,36 +12,36 @@ import { JobWatermark } from "./jobwatermark";
  * The <code>CreateJobOutput</code> structure.
 **/
 export class CreateJobOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AlbumArt" })
+  @SpeakeasyMetadata({ data: "json, name=AlbumArt" })
   albumArt?: JobAlbumArt;
 
-  @Metadata({ data: "json, name=Captions" })
+  @SpeakeasyMetadata({ data: "json, name=Captions" })
   captions?: Captions;
 
-  @Metadata({ data: "json, name=Composition", elemType: shared.Clip })
+  @SpeakeasyMetadata({ data: "json, name=Composition", elemType: Clip })
   composition?: Clip[];
 
-  @Metadata({ data: "json, name=Encryption" })
+  @SpeakeasyMetadata({ data: "json, name=Encryption" })
   encryption?: Encryption;
 
-  @Metadata({ data: "json, name=Key" })
+  @SpeakeasyMetadata({ data: "json, name=Key" })
   key?: string;
 
-  @Metadata({ data: "json, name=PresetId" })
+  @SpeakeasyMetadata({ data: "json, name=PresetId" })
   presetId?: string;
 
-  @Metadata({ data: "json, name=Rotate" })
+  @SpeakeasyMetadata({ data: "json, name=Rotate" })
   rotate?: string;
 
-  @Metadata({ data: "json, name=SegmentDuration" })
+  @SpeakeasyMetadata({ data: "json, name=SegmentDuration" })
   segmentDuration?: string;
 
-  @Metadata({ data: "json, name=ThumbnailEncryption" })
+  @SpeakeasyMetadata({ data: "json, name=ThumbnailEncryption" })
   thumbnailEncryption?: Encryption;
 
-  @Metadata({ data: "json, name=ThumbnailPattern" })
+  @SpeakeasyMetadata({ data: "json, name=ThumbnailPattern" })
   thumbnailPattern?: string;
 
-  @Metadata({ data: "json, name=Watermarks", elemType: shared.JobWatermark })
+  @SpeakeasyMetadata({ data: "json, name=Watermarks", elemType: JobWatermark })
   watermarks?: JobWatermark[];
 }

@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { TenancyUnit } from "./tenancyunit";
 // SearchTenancyUnitsResponse
 /**
  * Response for the search query.
@@ -34,11 +34,11 @@ var SearchTenancyUnitsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=nextPageToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextPageToken" }),
         __metadata("design:type", String)
     ], SearchTenancyUnitsResponse.prototype, "nextPageToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=tenancyUnits", elemType: shared.TenancyUnit }),
+        SpeakeasyMetadata({ data: "json, name=tenancyUnits", elemType: TenancyUnit }),
         __metadata("design:type", Array)
     ], SearchTenancyUnitsResponse.prototype, "tenancyUnits", void 0);
     return SearchTenancyUnitsResponse;

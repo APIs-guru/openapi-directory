@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * Limits that are related to concurrency and storage. All file and storage sizes are in bytes.
 **/

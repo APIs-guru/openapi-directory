@@ -1,11 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import clientinfo
-from . import environmentmatrix
-from . import resultstorage
-from . import testexecution
-from . import testspecification
+from sdk import utils
+from . import *
 
 class TestMatrixInvalidMatrixDetailsEnum(str, Enum):
     INVALID_MATRIX_DETAILS_UNSPECIFIED = "INVALID_MATRIX_DETAILS_UNSPECIFIED"
@@ -69,17 +67,21 @@ class TestMatrixStateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class TestMatrix:
-    client_info: Optional[clientinfo.ClientInfo] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clientInfo' }})
-    environment_matrix: Optional[environmentmatrix.EnvironmentMatrix] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'environmentMatrix' }})
-    fail_fast: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'failFast' }})
-    flaky_test_attempts: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'flakyTestAttempts' }})
-    invalid_matrix_details: Optional[TestMatrixInvalidMatrixDetailsEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'invalidMatrixDetails' }})
-    outcome_summary: Optional[TestMatrixOutcomeSummaryEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'outcomeSummary' }})
-    project_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'projectId' }})
-    result_storage: Optional[resultstorage.ResultStorage] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resultStorage' }})
-    state: Optional[TestMatrixStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
-    test_executions: Optional[List[testexecution.TestExecution]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'testExecutions' }})
-    test_matrix_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'testMatrixId' }})
-    test_specification: Optional[testspecification.TestSpecification] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'testSpecification' }})
-    timestamp: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timestamp' }})
+    r"""TestMatrix
+    TestMatrix captures all details about a test. It contains the environment configuration, test specification, test executions and overall state and outcome.
+    """
+    
+    client_info: Optional[ClientInfo] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clientInfo') }})
+    environment_matrix: Optional[EnvironmentMatrix] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('environmentMatrix') }})
+    fail_fast: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('failFast') }})
+    flaky_test_attempts: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('flakyTestAttempts') }})
+    invalid_matrix_details: Optional[TestMatrixInvalidMatrixDetailsEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('invalidMatrixDetails') }})
+    outcome_summary: Optional[TestMatrixOutcomeSummaryEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('outcomeSummary') }})
+    project_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('projectId') }})
+    result_storage: Optional[ResultStorage] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resultStorage') }})
+    state: Optional[TestMatrixStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
+    test_executions: Optional[List[TestExecution]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('testExecutions') }})
+    test_matrix_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('testMatrixId') }})
+    test_specification: Optional[TestSpecification] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('testSpecification') }})
+    timestamp: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('timestamp') }})
     

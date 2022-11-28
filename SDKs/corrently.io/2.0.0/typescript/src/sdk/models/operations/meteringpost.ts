@@ -1,67 +1,68 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class MeteringPostRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=1.8.0" })
+  @SpeakeasyMetadata({ data: "json, name=1.8.0" })
   one80?: number;
 
-  @Metadata({ data: "json, name=account" })
+  @SpeakeasyMetadata({ data: "json, name=account" })
   account?: string;
 
-  @Metadata({ data: "json, name=energy" })
+  @SpeakeasyMetadata({ data: "json, name=energy" })
   energy?: number;
 
-  @Metadata({ data: "json, name=secret" })
+  @SpeakeasyMetadata({ data: "json, name=secret" })
   secret?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: number;
 
-  @Metadata({ data: "json, name=zip" })
+  @SpeakeasyMetadata({ data: "json, name=zip" })
   zip?: string;
 }
 
 
-export class MeteringPostRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: MeteringPostRequestBody;
-}
-
-
 export class MeteringPost200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=1.8.0" })
+  @SpeakeasyMetadata({ data: "json, name=1.8.0" })
   one80?: number;
 
-  @Metadata({ data: "json, name=1.8.1" })
+  @SpeakeasyMetadata({ data: "json, name=1.8.1" })
   one81?: number;
 
-  @Metadata({ data: "json, name=1.8.2" })
+  @SpeakeasyMetadata({ data: "json, name=1.8.2" })
   one82?: number;
 
-  @Metadata({ data: "json, name=_processingTime" })
+  @SpeakeasyMetadata({ data: "json, name=_processingTime" })
   processingTime?: number;
 
-  @Metadata({ data: "json, name=account" })
+  @SpeakeasyMetadata({ data: "json, name=account" })
   account?: string;
 
-  @Metadata({ data: "json, name=co2_g_oekostrom" })
+  @SpeakeasyMetadata({ data: "json, name=co2_g_oekostrom" })
   co2GOekostrom?: number;
 
-  @Metadata({ data: "json, name=co2_g_standard" })
+  @SpeakeasyMetadata({ data: "json, name=co2_g_standard" })
   co2GStandard?: number;
 
-  @Metadata({ data: "json, name=timeStamp" })
+  @SpeakeasyMetadata({ data: "json, name=timeStamp" })
   timeStamp?: number;
 }
 
 
+export class MeteringPostRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: MeteringPostRequestBody;
+}
+
+
 export class MeteringPostResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   meteringPost200ApplicationJsonObject?: MeteringPost200ApplicationJson;
 }

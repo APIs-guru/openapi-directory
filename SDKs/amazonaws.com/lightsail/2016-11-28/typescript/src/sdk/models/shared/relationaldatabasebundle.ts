@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RelationalDatabaseBundle
@@ -6,30 +7,30 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes a database bundle. A bundle describes the performance specifications of the database.
 **/
 export class RelationalDatabaseBundle extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bundleId" })
+  @SpeakeasyMetadata({ data: "json, name=bundleId" })
   bundleId?: string;
 
-  @Metadata({ data: "json, name=cpuCount" })
+  @SpeakeasyMetadata({ data: "json, name=cpuCount" })
   cpuCount?: number;
 
-  @Metadata({ data: "json, name=diskSizeInGb" })
+  @SpeakeasyMetadata({ data: "json, name=diskSizeInGb" })
   diskSizeInGb?: number;
 
-  @Metadata({ data: "json, name=isActive" })
+  @SpeakeasyMetadata({ data: "json, name=isActive" })
   isActive?: boolean;
 
-  @Metadata({ data: "json, name=isEncrypted" })
+  @SpeakeasyMetadata({ data: "json, name=isEncrypted" })
   isEncrypted?: boolean;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=price" })
+  @SpeakeasyMetadata({ data: "json, name=price" })
   price?: number;
 
-  @Metadata({ data: "json, name=ramSizeInGb" })
+  @SpeakeasyMetadata({ data: "json, name=ramSizeInGb" })
   ramSizeInGb?: number;
 
-  @Metadata({ data: "json, name=transferPerMonthInGb" })
+  @SpeakeasyMetadata({ data: "json, name=transferPerMonthInGb" })
   transferPerMonthInGb?: number;
 }

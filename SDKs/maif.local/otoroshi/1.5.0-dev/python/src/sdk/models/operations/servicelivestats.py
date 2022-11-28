@@ -5,24 +5,24 @@ from sdk.models import shared
 
 @dataclass
 class ServiceLiveStatsPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ServiceLiveStatsSecurity:
-    otoroshi_auth: shared.SchemeOtoroshiAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    otoroshi_auth: shared.SchemeOtoroshiAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
     
 
 @dataclass
 class ServiceLiveStatsRequest:
-    path_params: ServiceLiveStatsPathParams = field(default=None)
-    security: ServiceLiveStatsSecurity = field(default=None)
+    path_params: ServiceLiveStatsPathParams = field()
+    security: ServiceLiveStatsSecurity = field()
     
 
 @dataclass
 class ServiceLiveStatsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     stats: Optional[shared.Stats] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Range } from "./range";
 import { TextStyle } from "./textstyle";
+
 
 
 // UpdateTextStyleRequest
@@ -8,12 +9,12 @@ import { TextStyle } from "./textstyle";
  * Update the styling of text.
 **/
 export class UpdateTextStyleRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fields" })
+  @SpeakeasyMetadata({ data: "json, name=fields" })
   fields?: string;
 
-  @Metadata({ data: "json, name=range" })
+  @SpeakeasyMetadata({ data: "json, name=range" })
   range?: Range;
 
-  @Metadata({ data: "json, name=textStyle" })
+  @SpeakeasyMetadata({ data: "json, name=textStyle" })
   textStyle?: TextStyle;
 }

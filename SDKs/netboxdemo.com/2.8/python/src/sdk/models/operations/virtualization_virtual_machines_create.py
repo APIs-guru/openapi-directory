@@ -5,12 +5,12 @@ from sdk.models import shared
 
 @dataclass
 class VirtualizationVirtualMachinesCreateRequest:
-    request: shared.WritableVirtualMachineWithConfigContext = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.WritableVirtualMachineWithConfigContextInput = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class VirtualizationVirtualMachinesCreateResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     virtual_machine_with_config_context: Optional[shared.VirtualMachineWithConfigContext] = field(default=None)
     

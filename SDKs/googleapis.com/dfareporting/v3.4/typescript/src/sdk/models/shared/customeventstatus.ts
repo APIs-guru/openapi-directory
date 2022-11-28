@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CustomEvent } from "./customevent";
 import { CustomEventError } from "./customeventerror";
+
 
 
 // CustomEventStatus
@@ -9,12 +9,12 @@ import { CustomEventError } from "./customeventerror";
  * The original custom event that was inserted and whether there were any errors.
 **/
 export class CustomEventStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=customEvent" })
+  @SpeakeasyMetadata({ data: "json, name=customEvent" })
   customEvent?: CustomEvent;
 
-  @Metadata({ data: "json, name=errors", elemType: shared.CustomEventError })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: CustomEventError })
   errors?: CustomEventError[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 }

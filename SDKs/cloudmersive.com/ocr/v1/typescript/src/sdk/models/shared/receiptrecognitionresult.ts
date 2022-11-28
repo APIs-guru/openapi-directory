@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReceiptLineItem } from "./receiptlineitem";
+
 
 
 // ReceiptRecognitionResult
@@ -8,30 +8,30 @@ import { ReceiptLineItem } from "./receiptlineitem";
  * Result of recognizing a receipt, to extract the key information from the receipt
 **/
 export class ReceiptRecognitionResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AddressString" })
+  @SpeakeasyMetadata({ data: "json, name=AddressString" })
   addressString?: string;
 
-  @Metadata({ data: "json, name=BusinessName" })
+  @SpeakeasyMetadata({ data: "json, name=BusinessName" })
   businessName?: string;
 
-  @Metadata({ data: "json, name=BusinessWebsite" })
+  @SpeakeasyMetadata({ data: "json, name=BusinessWebsite" })
   businessWebsite?: string;
 
-  @Metadata({ data: "json, name=PhoneNumber" })
+  @SpeakeasyMetadata({ data: "json, name=PhoneNumber" })
   phoneNumber?: string;
 
-  @Metadata({ data: "json, name=ReceiptItems", elemType: shared.ReceiptLineItem })
+  @SpeakeasyMetadata({ data: "json, name=ReceiptItems", elemType: ReceiptLineItem })
   receiptItems?: ReceiptLineItem[];
 
-  @Metadata({ data: "json, name=ReceiptSubTotal" })
+  @SpeakeasyMetadata({ data: "json, name=ReceiptSubTotal" })
   receiptSubTotal?: number;
 
-  @Metadata({ data: "json, name=ReceiptTotal" })
+  @SpeakeasyMetadata({ data: "json, name=ReceiptTotal" })
   receiptTotal?: number;
 
-  @Metadata({ data: "json, name=Successful" })
+  @SpeakeasyMetadata({ data: "json, name=Successful" })
   successful?: boolean;
 
-  @Metadata({ data: "json, name=Timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=Timestamp" })
   timestamp?: Date;
 }

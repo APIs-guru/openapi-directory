@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CreateDeploymentGroupOutput
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the output of a <code>CreateDeploymentGroup</code> operation.
 **/
 export class CreateDeploymentGroupOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deploymentGroupId" })
+  @SpeakeasyMetadata({ data: "json, name=deploymentGroupId" })
   deploymentGroupId?: string;
 }

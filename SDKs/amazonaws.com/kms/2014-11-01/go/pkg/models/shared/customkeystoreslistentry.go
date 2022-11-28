@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// CustomKeyStoresListEntry
+// Contains information about each custom key store in the custom key store list.
 type CustomKeyStoresListEntry struct {
 	CloudHsmClusterID      *string                      `json:"CloudHsmClusterId,omitempty"`
 	ConnectionErrorCode    *ConnectionErrorCodeTypeEnum `json:"ConnectionErrorCode,omitempty"`

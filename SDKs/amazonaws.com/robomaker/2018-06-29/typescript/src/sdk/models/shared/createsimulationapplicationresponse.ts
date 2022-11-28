@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Environment } from "./environment";
 import { RenderingEngine } from "./renderingengine";
 import { RobotSoftwareSuite } from "./robotsoftwaresuite";
@@ -7,37 +6,38 @@ import { SimulationSoftwareSuite } from "./simulationsoftwaresuite";
 import { Source } from "./source";
 
 
+
 export class CreateSimulationApplicationResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=environment" })
+  @SpeakeasyMetadata({ data: "json, name=environment" })
   environment?: Environment;
 
-  @Metadata({ data: "json, name=lastUpdatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdatedAt" })
   lastUpdatedAt?: Date;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=renderingEngine" })
+  @SpeakeasyMetadata({ data: "json, name=renderingEngine" })
   renderingEngine?: RenderingEngine;
 
-  @Metadata({ data: "json, name=revisionId" })
+  @SpeakeasyMetadata({ data: "json, name=revisionId" })
   revisionId?: string;
 
-  @Metadata({ data: "json, name=robotSoftwareSuite" })
+  @SpeakeasyMetadata({ data: "json, name=robotSoftwareSuite" })
   robotSoftwareSuite?: RobotSoftwareSuite;
 
-  @Metadata({ data: "json, name=simulationSoftwareSuite" })
+  @SpeakeasyMetadata({ data: "json, name=simulationSoftwareSuite" })
   simulationSoftwareSuite?: SimulationSoftwareSuite;
 
-  @Metadata({ data: "json, name=sources", elemType: shared.Source })
+  @SpeakeasyMetadata({ data: "json, name=sources", elemType: Source })
   sources?: Source[];
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 }

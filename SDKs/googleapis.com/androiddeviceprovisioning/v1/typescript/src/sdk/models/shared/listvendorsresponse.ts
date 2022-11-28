@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Company } from "./company";
+
 
 
 // ListVendorsResponse
@@ -8,12 +8,12 @@ import { Company } from "./company";
  * Response message to list vendors of the partner.
 **/
 export class ListVendorsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=totalSize" })
+  @SpeakeasyMetadata({ data: "json, name=totalSize" })
   totalSize?: number;
 
-  @Metadata({ data: "json, name=vendors", elemType: shared.Company })
+  @SpeakeasyMetadata({ data: "json, name=vendors", elemType: Company })
   vendors?: Company[];
 }

@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GeoMatchSetUpdate } from "./geomatchsetupdate";
 
 
+
 export class UpdateGeoMatchSetRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ChangeToken" })
+  @SpeakeasyMetadata({ data: "json, name=ChangeToken" })
   changeToken: string;
 
-  @Metadata({ data: "json, name=GeoMatchSetId" })
+  @SpeakeasyMetadata({ data: "json, name=GeoMatchSetId" })
   geoMatchSetId: string;
 
-  @Metadata({ data: "json, name=Updates", elemType: shared.GeoMatchSetUpdate })
+  @SpeakeasyMetadata({ data: "json, name=Updates", elemType: GeoMatchSetUpdate })
   updates: GeoMatchSetUpdate[];
 }

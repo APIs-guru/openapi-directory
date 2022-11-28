@@ -21,6 +21,8 @@ const (
 	NotificationChannelDescriptorSupportedTiersEnumServiceTierPremium     NotificationChannelDescriptorSupportedTiersEnum = "SERVICE_TIER_PREMIUM"
 )
 
+// NotificationChannelDescriptor
+// A description of a notification channel. The descriptor includes the properties of the channel and the set of labels or fields that must be specified to configure channels of a given type.
 type NotificationChannelDescriptor struct {
 	Description    *string                                           `json:"description,omitempty"`
 	DisplayName    *string                                           `json:"displayName,omitempty"`

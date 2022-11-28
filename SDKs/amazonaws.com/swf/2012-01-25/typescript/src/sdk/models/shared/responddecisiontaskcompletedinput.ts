@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Decision } from "./decision";
+
 
 
 // RespondDecisionTaskCompletedInput
@@ -8,12 +8,12 @@ import { Decision } from "./decision";
  * Input data for a TaskCompleted response to a decision task.
 **/
 export class RespondDecisionTaskCompletedInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=decisions", elemType: shared.Decision })
+  @SpeakeasyMetadata({ data: "json, name=decisions", elemType: Decision })
   decisions?: Decision[];
 
-  @Metadata({ data: "json, name=executionContext" })
+  @SpeakeasyMetadata({ data: "json, name=executionContext" })
   executionContext?: string;
 
-  @Metadata({ data: "json, name=taskToken" })
+  @SpeakeasyMetadata({ data: "json, name=taskToken" })
   taskToken: string;
 }

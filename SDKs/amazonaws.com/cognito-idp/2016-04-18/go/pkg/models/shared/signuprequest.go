@@ -1,5 +1,7 @@
 package shared
 
+// SignUpRequest
+// Represents the request to register a user.
 type SignUpRequest struct {
 	AnalyticsMetadata *AnalyticsMetadataType `json:"AnalyticsMetadata,omitempty"`
 	ClientID          string                 `json:"ClientId"`

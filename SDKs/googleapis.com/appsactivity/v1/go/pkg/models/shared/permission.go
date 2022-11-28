@@ -20,6 +20,8 @@ const (
 	PermissionTypeEnumUser   PermissionTypeEnum = "user"
 )
 
+// Permission
+// Contains information about the permissions and type of access allowed with regards to a Google Drive object. This is a subset of the fields contained in a corresponding Drive Permissions object.
 type Permission struct {
 	Name         *string             `json:"name,omitempty"`
 	PermissionID *string             `json:"permissionId,omitempty"`

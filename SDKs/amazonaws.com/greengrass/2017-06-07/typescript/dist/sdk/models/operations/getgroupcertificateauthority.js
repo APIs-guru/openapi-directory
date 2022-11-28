@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetGroupCertificateAuthorityPathParams = /** @class */ (function (_super) {
     __extends(GetGroupCertificateAuthorityPathParams, _super);
@@ -30,11 +30,11 @@ var GetGroupCertificateAuthorityPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=CertificateAuthorityId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=CertificateAuthorityId" }),
         __metadata("design:type", String)
     ], GetGroupCertificateAuthorityPathParams.prototype, "certificateAuthorityId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=GroupId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=GroupId" }),
         __metadata("design:type", String)
     ], GetGroupCertificateAuthorityPathParams.prototype, "groupId", void 0);
     return GetGroupCertificateAuthorityPathParams;
@@ -46,31 +46,31 @@ var GetGroupCertificateAuthorityHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], GetGroupCertificateAuthorityHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], GetGroupCertificateAuthorityHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], GetGroupCertificateAuthorityHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], GetGroupCertificateAuthorityHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], GetGroupCertificateAuthorityHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], GetGroupCertificateAuthorityHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], GetGroupCertificateAuthorityHeaders.prototype, "xAmzSignedHeaders", void 0);
     return GetGroupCertificateAuthorityHeaders;
@@ -82,11 +82,11 @@ var GetGroupCertificateAuthorityRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetGroupCertificateAuthorityPathParams)
     ], GetGroupCertificateAuthorityRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetGroupCertificateAuthorityHeaders)
     ], GetGroupCertificateAuthorityRequest.prototype, "headers", void 0);
     return GetGroupCertificateAuthorityRequest;
@@ -98,23 +98,23 @@ var GetGroupCertificateAuthorityResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], GetGroupCertificateAuthorityResponse.prototype, "badRequestException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetGroupCertificateAuthorityResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.GetGroupCertificateAuthorityResponse)
     ], GetGroupCertificateAuthorityResponse.prototype, "getGroupCertificateAuthorityResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], GetGroupCertificateAuthorityResponse.prototype, "internalServerErrorException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetGroupCertificateAuthorityResponse.prototype, "statusCode", void 0);
     return GetGroupCertificateAuthorityResponse;

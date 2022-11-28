@@ -9,6 +9,8 @@ const (
 	ReservationAffinityConsumeReservationTypeEnumSpecificReservation ReservationAffinityConsumeReservationTypeEnum = "SPECIFIC_RESERVATION"
 )
 
+// ReservationAffinity
+// Reservation Affinity for consuming Zonal reservation.
 type ReservationAffinity struct {
 	ConsumeReservationType *ReservationAffinityConsumeReservationTypeEnum `json:"consumeReservationType,omitempty"`
 	Key                    *string                                        `json:"key,omitempty"`

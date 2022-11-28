@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetApplySecurityGroupsToClientVpnTargetNetworkActionEnum;
 (function (GetApplySecurityGroupsToClientVpnTargetNetworkActionEnum) {
     GetApplySecurityGroupsToClientVpnTargetNetworkActionEnum["ApplySecurityGroupsToClientVpnTargetNetwork"] = "ApplySecurityGroupsToClientVpnTargetNetwork";
@@ -37,27 +37,27 @@ var GetApplySecurityGroupsToClientVpnTargetNetworkQueryParams = /** @class */ (f
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" }),
         __metadata("design:type", String)
     ], GetApplySecurityGroupsToClientVpnTargetNetworkQueryParams.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ClientVpnEndpointId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ClientVpnEndpointId" }),
         __metadata("design:type", String)
     ], GetApplySecurityGroupsToClientVpnTargetNetworkQueryParams.prototype, "clientVpnEndpointId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=DryRun" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DryRun" }),
         __metadata("design:type", Boolean)
     ], GetApplySecurityGroupsToClientVpnTargetNetworkQueryParams.prototype, "dryRun", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=SecurityGroupId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=SecurityGroupId" }),
         __metadata("design:type", Array)
     ], GetApplySecurityGroupsToClientVpnTargetNetworkQueryParams.prototype, "securityGroupId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" }),
         __metadata("design:type", String)
     ], GetApplySecurityGroupsToClientVpnTargetNetworkQueryParams.prototype, "version", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=VpcId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=VpcId" }),
         __metadata("design:type", String)
     ], GetApplySecurityGroupsToClientVpnTargetNetworkQueryParams.prototype, "vpcId", void 0);
     return GetApplySecurityGroupsToClientVpnTargetNetworkQueryParams;
@@ -69,31 +69,31 @@ var GetApplySecurityGroupsToClientVpnTargetNetworkHeaders = /** @class */ (funct
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], GetApplySecurityGroupsToClientVpnTargetNetworkHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], GetApplySecurityGroupsToClientVpnTargetNetworkHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], GetApplySecurityGroupsToClientVpnTargetNetworkHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], GetApplySecurityGroupsToClientVpnTargetNetworkHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], GetApplySecurityGroupsToClientVpnTargetNetworkHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], GetApplySecurityGroupsToClientVpnTargetNetworkHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], GetApplySecurityGroupsToClientVpnTargetNetworkHeaders.prototype, "xAmzSignedHeaders", void 0);
     return GetApplySecurityGroupsToClientVpnTargetNetworkHeaders;
@@ -105,11 +105,11 @@ var GetApplySecurityGroupsToClientVpnTargetNetworkRequest = /** @class */ (funct
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetApplySecurityGroupsToClientVpnTargetNetworkQueryParams)
     ], GetApplySecurityGroupsToClientVpnTargetNetworkRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetApplySecurityGroupsToClientVpnTargetNetworkHeaders)
     ], GetApplySecurityGroupsToClientVpnTargetNetworkRequest.prototype, "headers", void 0);
     return GetApplySecurityGroupsToClientVpnTargetNetworkRequest;
@@ -121,15 +121,15 @@ var GetApplySecurityGroupsToClientVpnTargetNetworkResponse = /** @class */ (func
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetApplySecurityGroupsToClientVpnTargetNetworkResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetApplySecurityGroupsToClientVpnTargetNetworkResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetApplySecurityGroupsToClientVpnTargetNetworkResponse.prototype, "statusCode", void 0);
     return GetApplySecurityGroupsToClientVpnTargetNetworkResponse;

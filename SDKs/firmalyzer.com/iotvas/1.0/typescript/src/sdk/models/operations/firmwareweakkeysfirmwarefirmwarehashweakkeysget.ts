@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class FirmwareWeakKeysFirmwareFirmwareHashWeakKeysGetPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=firmware_hash" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=firmware_hash" })
   firmwareHash: string;
 }
 
 
 export class FirmwareWeakKeysFirmwareFirmwareHashWeakKeysGetSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   apiKeyHeader: shared.SchemeApiKeyHeader;
 }
 
 
 export class FirmwareWeakKeysFirmwareFirmwareHashWeakKeysGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: FirmwareWeakKeysFirmwareFirmwareHashWeakKeysGetPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: FirmwareWeakKeysFirmwareFirmwareHashWeakKeysGetSecurity;
 }
 
 
 export class FirmwareWeakKeysFirmwareFirmwareHashWeakKeysGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.CryptoKey })
+  @SpeakeasyMetadata({ elemType: shared.CryptoKey })
   cryptoKeys?: shared.CryptoKey[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   httpValidationError?: shared.HttpValidationError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

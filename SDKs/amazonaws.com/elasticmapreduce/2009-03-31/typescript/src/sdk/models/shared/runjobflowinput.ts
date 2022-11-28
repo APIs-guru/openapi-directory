@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Application } from "./application";
 import { AutoTerminationPolicy } from "./autoterminationpolicy";
 import { BootstrapActionConfig } from "./bootstrapactionconfig";
@@ -15,92 +14,93 @@ import { StepConfig } from "./stepconfig";
 import { Tag } from "./tag";
 
 
+
 // RunJobFlowInput
 /** 
  *  Input to the <a>RunJobFlow</a> operation. 
 **/
 export class RunJobFlowInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AdditionalInfo" })
+  @SpeakeasyMetadata({ data: "json, name=AdditionalInfo" })
   additionalInfo?: string;
 
-  @Metadata({ data: "json, name=AmiVersion" })
+  @SpeakeasyMetadata({ data: "json, name=AmiVersion" })
   amiVersion?: string;
 
-  @Metadata({ data: "json, name=Applications", elemType: shared.Application })
+  @SpeakeasyMetadata({ data: "json, name=Applications", elemType: Application })
   applications?: Application[];
 
-  @Metadata({ data: "json, name=AutoScalingRole" })
+  @SpeakeasyMetadata({ data: "json, name=AutoScalingRole" })
   autoScalingRole?: string;
 
-  @Metadata({ data: "json, name=AutoTerminationPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=AutoTerminationPolicy" })
   autoTerminationPolicy?: AutoTerminationPolicy;
 
-  @Metadata({ data: "json, name=BootstrapActions", elemType: shared.BootstrapActionConfig })
+  @SpeakeasyMetadata({ data: "json, name=BootstrapActions", elemType: BootstrapActionConfig })
   bootstrapActions?: BootstrapActionConfig[];
 
-  @Metadata({ data: "json, name=Configurations", elemType: shared.Configuration })
+  @SpeakeasyMetadata({ data: "json, name=Configurations", elemType: Configuration })
   configurations?: Configuration[];
 
-  @Metadata({ data: "json, name=CustomAmiId" })
+  @SpeakeasyMetadata({ data: "json, name=CustomAmiId" })
   customAmiId?: string;
 
-  @Metadata({ data: "json, name=EbsRootVolumeSize" })
+  @SpeakeasyMetadata({ data: "json, name=EbsRootVolumeSize" })
   ebsRootVolumeSize?: number;
 
-  @Metadata({ data: "json, name=Instances" })
+  @SpeakeasyMetadata({ data: "json, name=Instances" })
   instances: JobFlowInstancesConfig;
 
-  @Metadata({ data: "json, name=JobFlowRole" })
+  @SpeakeasyMetadata({ data: "json, name=JobFlowRole" })
   jobFlowRole?: string;
 
-  @Metadata({ data: "json, name=KerberosAttributes" })
+  @SpeakeasyMetadata({ data: "json, name=KerberosAttributes" })
   kerberosAttributes?: KerberosAttributes;
 
-  @Metadata({ data: "json, name=LogEncryptionKmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=LogEncryptionKmsKeyId" })
   logEncryptionKmsKeyId?: string;
 
-  @Metadata({ data: "json, name=LogUri" })
+  @SpeakeasyMetadata({ data: "json, name=LogUri" })
   logUri?: string;
 
-  @Metadata({ data: "json, name=ManagedScalingPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=ManagedScalingPolicy" })
   managedScalingPolicy?: ManagedScalingPolicy;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 
-  @Metadata({ data: "json, name=NewSupportedProducts", elemType: shared.SupportedProductConfig })
+  @SpeakeasyMetadata({ data: "json, name=NewSupportedProducts", elemType: SupportedProductConfig })
   newSupportedProducts?: SupportedProductConfig[];
 
-  @Metadata({ data: "json, name=PlacementGroupConfigs", elemType: shared.PlacementGroupConfig })
+  @SpeakeasyMetadata({ data: "json, name=PlacementGroupConfigs", elemType: PlacementGroupConfig })
   placementGroupConfigs?: PlacementGroupConfig[];
 
-  @Metadata({ data: "json, name=ReleaseLabel" })
+  @SpeakeasyMetadata({ data: "json, name=ReleaseLabel" })
   releaseLabel?: string;
 
-  @Metadata({ data: "json, name=RepoUpgradeOnBoot" })
+  @SpeakeasyMetadata({ data: "json, name=RepoUpgradeOnBoot" })
   repoUpgradeOnBoot?: RepoUpgradeOnBootEnum;
 
-  @Metadata({ data: "json, name=ScaleDownBehavior" })
+  @SpeakeasyMetadata({ data: "json, name=ScaleDownBehavior" })
   scaleDownBehavior?: ScaleDownBehaviorEnum;
 
-  @Metadata({ data: "json, name=SecurityConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=SecurityConfiguration" })
   securityConfiguration?: string;
 
-  @Metadata({ data: "json, name=ServiceRole" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceRole" })
   serviceRole?: string;
 
-  @Metadata({ data: "json, name=StepConcurrencyLevel" })
+  @SpeakeasyMetadata({ data: "json, name=StepConcurrencyLevel" })
   stepConcurrencyLevel?: number;
 
-  @Metadata({ data: "json, name=Steps", elemType: shared.StepConfig })
+  @SpeakeasyMetadata({ data: "json, name=Steps", elemType: StepConfig })
   steps?: StepConfig[];
 
-  @Metadata({ data: "json, name=SupportedProducts" })
+  @SpeakeasyMetadata({ data: "json, name=SupportedProducts" })
   supportedProducts?: string[];
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 
-  @Metadata({ data: "json, name=VisibleToAllUsers" })
+  @SpeakeasyMetadata({ data: "json, name=VisibleToAllUsers" })
   visibleToAllUsers?: boolean;
 }

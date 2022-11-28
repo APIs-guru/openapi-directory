@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDeleteAccountAliasActionEnum(str, Enum):
     DELETE_ACCOUNT_ALIAS = "DeleteAccountAlias"
@@ -10,8 +14,8 @@ class PostDeleteAccountAliasVersionEnum(str, Enum):
 
 @dataclass
 class PostDeleteAccountAliasQueryParams:
-    action: PostDeleteAccountAliasActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDeleteAccountAliasVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDeleteAccountAliasActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDeleteAccountAliasVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDeleteAccountAliasHeaders:
 
 @dataclass
 class PostDeleteAccountAliasRequest:
-    query_params: PostDeleteAccountAliasQueryParams = field(default=None)
-    headers: PostDeleteAccountAliasHeaders = field(default=None)
+    headers: PostDeleteAccountAliasHeaders = field()
+    query_params: PostDeleteAccountAliasQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDeleteAccountAliasResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

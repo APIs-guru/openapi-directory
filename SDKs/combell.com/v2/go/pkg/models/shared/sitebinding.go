@@ -1,5 +1,7 @@
 package shared
 
+// SiteBinding
+// A site binding identifies a web domain.
 type SiteBinding struct {
 	CertThumbprint *string `json:"cert_thumbprint,omitempty"`
 	HostName       *string `json:"host_name,omitempty"`

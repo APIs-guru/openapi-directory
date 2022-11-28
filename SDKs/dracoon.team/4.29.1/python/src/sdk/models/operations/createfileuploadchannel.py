@@ -10,14 +10,14 @@ class CreateFileUploadChannelHeaders:
 
 @dataclass
 class CreateFileUploadChannelRequest:
-    headers: CreateFileUploadChannelHeaders = field(default=None)
-    request: shared.CreateFileUploadRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateFileUploadChannelHeaders = field()
+    request: shared.CreateFileUploadRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateFileUploadChannelResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     create_file_upload_response: Optional[shared.CreateFileUploadResponse] = field(default=None)
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

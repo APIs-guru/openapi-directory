@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ContentSubmissionTypesGetContentSubmissionTypesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=enabled" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=enabled" })
   enabled?: boolean;
 }
 
 
 export class ContentSubmissionTypesGetContentSubmissionTypesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ContentSubmissionTypesGetContentSubmissionTypesQueryParams;
 }
 
 
 export class ContentSubmissionTypesGetContentSubmissionTypesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiModelsApiError?: shared.ApiModelsApiError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata({ elemType: shared.ContentSubmissionSharedBusinessEntitiesContentSubmissionType })
+  @SpeakeasyMetadata({ elemType: shared.ContentSubmissionSharedBusinessEntitiesContentSubmissionType })
   contentSubmissionSharedBusinessEntitiesContentSubmissionTypes?: shared.ContentSubmissionSharedBusinessEntitiesContentSubmissionType[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

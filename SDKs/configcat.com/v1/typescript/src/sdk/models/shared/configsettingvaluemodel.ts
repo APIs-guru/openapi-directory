@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IntegrationLinkModel } from "./integrationlinkmodel";
 import { RolloutPercentageItemModel } from "./rolloutpercentageitemmodel";
 import { RolloutRuleModel } from "./rolloutrulemodel";
@@ -7,31 +6,32 @@ import { SettingDataModel } from "./settingdatamodel";
 import { SettingTagModel } from "./settingtagmodel";
 
 
+
 export class ConfigSettingValueModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=integrationLinks", elemType: shared.IntegrationLinkModel })
+  @SpeakeasyMetadata({ data: "json, name=integrationLinks", elemType: IntegrationLinkModel })
   integrationLinks?: IntegrationLinkModel[];
 
-  @Metadata({ data: "json, name=lastUpdaterUserEmail" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdaterUserEmail" })
   lastUpdaterUserEmail?: string;
 
-  @Metadata({ data: "json, name=lastUpdaterUserFullName" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdaterUserFullName" })
   lastUpdaterUserFullName?: string;
 
-  @Metadata({ data: "json, name=rolloutPercentageItems", elemType: shared.RolloutPercentageItemModel })
+  @SpeakeasyMetadata({ data: "json, name=rolloutPercentageItems", elemType: RolloutPercentageItemModel })
   rolloutPercentageItems?: RolloutPercentageItemModel[];
 
-  @Metadata({ data: "json, name=rolloutRules", elemType: shared.RolloutRuleModel })
+  @SpeakeasyMetadata({ data: "json, name=rolloutRules", elemType: RolloutRuleModel })
   rolloutRules?: RolloutRuleModel[];
 
-  @Metadata({ data: "json, name=setting" })
+  @SpeakeasyMetadata({ data: "json, name=setting" })
   setting?: SettingDataModel;
 
-  @Metadata({ data: "json, name=settingTags", elemType: shared.SettingTagModel })
+  @SpeakeasyMetadata({ data: "json, name=settingTags", elemType: SettingTagModel })
   settingTags?: SettingTagModel[];
 
-  @Metadata({ data: "json, name=updatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=updatedAt" })
   updatedAt?: Date;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: Map<string, any>;
 }

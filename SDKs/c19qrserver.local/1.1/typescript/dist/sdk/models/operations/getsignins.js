@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetSigninsQueryParams = /** @class */ (function (_super) {
     __extends(GetSigninsQueryParams, _super);
@@ -30,11 +30,11 @@ var GetSigninsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=less_than" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=less_than" }),
         __metadata("design:type", Number)
     ], GetSigninsQueryParams.prototype, "lessThan", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=return_count" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=return_count" }),
         __metadata("design:type", Number)
     ], GetSigninsQueryParams.prototype, "returnCount", void 0);
     return GetSigninsQueryParams;
@@ -46,7 +46,7 @@ var GetSigninsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetSigninsQueryParams)
     ], GetSigninsRequest.prototype, "queryParams", void 0);
     return GetSigninsRequest;
@@ -58,23 +58,23 @@ var GetSigninsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetSigninsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetSigninsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.InvalidToken)
     ], GetSigninsResponse.prototype, "invalidToken", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.KeyFailure)
     ], GetSigninsResponse.prototype, "keyFailure", void 0);
     __decorate([
-        Metadata({ elemType: shared.Signin }),
+        SpeakeasyMetadata({ elemType: shared.Signin }),
         __metadata("design:type", Array)
     ], GetSigninsResponse.prototype, "signins", void 0);
     return GetSigninsResponse;

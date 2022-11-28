@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { BidPercentages } from "./bidpercentages";
 /**
  * A complex type that contains recommendations and information on how to configure Promoted Listings ad campaigns.

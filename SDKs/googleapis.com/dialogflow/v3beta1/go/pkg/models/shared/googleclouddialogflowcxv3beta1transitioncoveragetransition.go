@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDialogflowCxV3beta1TransitionCoverageTransition
+// A transition in a page.
 type GoogleCloudDialogflowCxV3beta1TransitionCoverageTransition struct {
 	Covered         *bool                                                           `json:"covered,omitempty"`
 	EventHandler    *GoogleCloudDialogflowCxV3beta1EventHandler                     `json:"eventHandler,omitempty"`

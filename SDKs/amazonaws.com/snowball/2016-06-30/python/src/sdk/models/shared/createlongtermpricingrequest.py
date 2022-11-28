@@ -1,14 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import longtermpricingtype_enum
-from . import snowballtype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateLongTermPricingRequest:
-    is_long_term_pricing_auto_renew: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IsLongTermPricingAutoRenew' }})
-    long_term_pricing_type: longtermpricingtype_enum.LongTermPricingTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LongTermPricingType' }})
-    snowball_type: Optional[snowballtype_enum.SnowballTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SnowballType' }})
+    long_term_pricing_type: LongTermPricingTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('LongTermPricingType') }})
+    is_long_term_pricing_auto_renew: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('IsLongTermPricingAutoRenew') }})
+    snowball_type: Optional[SnowballTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SnowballType') }})
     

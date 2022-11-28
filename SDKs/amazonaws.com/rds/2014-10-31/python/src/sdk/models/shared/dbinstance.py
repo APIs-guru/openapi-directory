@@ -1,0 +1,86 @@
+from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
+from . import *
+
+
+@dataclass
+class DbInstance:
+    r"""DbInstance
+    <p>Contains the details of an Amazon RDS DB instance. </p> <p>This data type is used as a response element in the <code>DescribeDBInstances</code> action. </p>
+    """
+    
+    activity_stream_engine_native_audit_fields_included: Optional[bool] = field(default=None)
+    activity_stream_kinesis_stream_name: Optional[str] = field(default=None)
+    activity_stream_kms_key_id: Optional[str] = field(default=None)
+    activity_stream_mode: Optional[ActivityStreamModeEnum] = field(default=None)
+    activity_stream_status: Optional[ActivityStreamStatusEnum] = field(default=None)
+    allocated_storage: Optional[int] = field(default=None)
+    associated_roles: Optional[List[DbInstanceRole]] = field(default=None)
+    auto_minor_version_upgrade: Optional[bool] = field(default=None)
+    automatic_restart_time: Optional[datetime] = field(default=None)
+    availability_zone: Optional[str] = field(default=None)
+    aws_backup_recovery_point_arn: Optional[str] = field(default=None)
+    backup_retention_period: Optional[int] = field(default=None)
+    ca_certificate_identifier: Optional[str] = field(default=None)
+    character_set_name: Optional[str] = field(default=None)
+    copy_tags_to_snapshot: Optional[bool] = field(default=None)
+    customer_owned_ip_enabled: Optional[bool] = field(default=None)
+    db_cluster_identifier: Optional[str] = field(default=None)
+    db_instance_arn: Optional[str] = field(default=None)
+    db_instance_automated_backups_replications: Optional[List[DbInstanceAutomatedBackupsReplication]] = field(default=None)
+    db_instance_class: Optional[str] = field(default=None)
+    db_instance_identifier: Optional[str] = field(default=None)
+    db_instance_status: Optional[str] = field(default=None)
+    db_name: Optional[str] = field(default=None)
+    db_parameter_groups: Optional[List[DbParameterGroupStatus]] = field(default=None)
+    db_security_groups: Optional[List[DbSecurityGroupMembership]] = field(default=None)
+    db_subnet_group: Optional[DbSubnetGroup] = field(default=None)
+    db_instance_port: Optional[int] = field(default=None)
+    dbi_resource_id: Optional[str] = field(default=None)
+    deletion_protection: Optional[bool] = field(default=None)
+    domain_memberships: Optional[List[DomainMembership]] = field(default=None)
+    enabled_cloudwatch_logs_exports: Optional[List[str]] = field(default=None)
+    endpoint: Optional[Endpoint] = field(default=None)
+    engine: Optional[str] = field(default=None)
+    engine_version: Optional[str] = field(default=None)
+    enhanced_monitoring_resource_arn: Optional[str] = field(default=None)
+    iam_database_authentication_enabled: Optional[bool] = field(default=None)
+    instance_create_time: Optional[datetime] = field(default=None)
+    iops: Optional[int] = field(default=None)
+    kms_key_id: Optional[str] = field(default=None)
+    latest_restorable_time: Optional[datetime] = field(default=None)
+    license_model: Optional[str] = field(default=None)
+    listener_endpoint: Optional[Endpoint] = field(default=None)
+    master_username: Optional[str] = field(default=None)
+    max_allocated_storage: Optional[int] = field(default=None)
+    monitoring_interval: Optional[int] = field(default=None)
+    monitoring_role_arn: Optional[str] = field(default=None)
+    multi_az: Optional[bool] = field(default=None)
+    nchar_character_set_name: Optional[str] = field(default=None)
+    option_group_memberships: Optional[List[OptionGroupMembership]] = field(default=None)
+    pending_modified_values: Optional[PendingModifiedValues] = field(default=None)
+    performance_insights_enabled: Optional[bool] = field(default=None)
+    performance_insights_kms_key_id: Optional[str] = field(default=None)
+    performance_insights_retention_period: Optional[int] = field(default=None)
+    preferred_backup_window: Optional[str] = field(default=None)
+    preferred_maintenance_window: Optional[str] = field(default=None)
+    processor_features: Optional[List[ProcessorFeature]] = field(default=None)
+    promotion_tier: Optional[int] = field(default=None)
+    publicly_accessible: Optional[bool] = field(default=None)
+    read_replica_db_cluster_identifiers: Optional[List[str]] = field(default=None)
+    read_replica_db_instance_identifiers: Optional[List[str]] = field(default=None)
+    read_replica_source_db_instance_identifier: Optional[str] = field(default=None)
+    replica_mode: Optional[ReplicaModeEnum] = field(default=None)
+    secondary_availability_zone: Optional[str] = field(default=None)
+    status_infos: Optional[List[DbInstanceStatusInfo]] = field(default=None)
+    storage_encrypted: Optional[bool] = field(default=None)
+    storage_type: Optional[str] = field(default=None)
+    tag_list: Optional[List[Tag]] = field(default=None)
+    tde_credential_arn: Optional[str] = field(default=None)
+    timezone: Optional[str] = field(default=None)
+    vpc_security_groups: Optional[List[VpcSecurityGroupMembership]] = field(default=None)
+    

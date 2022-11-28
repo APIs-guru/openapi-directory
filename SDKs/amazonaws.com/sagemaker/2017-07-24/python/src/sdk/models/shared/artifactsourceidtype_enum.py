@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ArtifactSourceIDTypeEnum(str, Enum):
     MD5_HASH = "MD5Hash"

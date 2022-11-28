@@ -1,17 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import clientaffinity_enum
-from . import portrange
-from . import protocol_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateListenerRequest:
-    accelerator_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AcceleratorArn' }})
-    client_affinity: Optional[clientaffinity_enum.ClientAffinityEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ClientAffinity' }})
-    idempotency_token: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IdempotencyToken' }})
-    port_ranges: List[portrange.PortRange] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PortRanges' }})
-    protocol: protocol_enum.ProtocolEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Protocol' }})
+    accelerator_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('AcceleratorArn') }})
+    idempotency_token: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('IdempotencyToken') }})
+    port_ranges: List[PortRange] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('PortRanges') }})
+    protocol: ProtocolEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Protocol') }})
+    client_affinity: Optional[ClientAffinityEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ClientAffinity') }})
     

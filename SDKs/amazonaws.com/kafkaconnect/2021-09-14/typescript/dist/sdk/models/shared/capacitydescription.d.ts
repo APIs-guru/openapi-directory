@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AutoScalingDescription } from "./autoscalingdescription";
 import { ProvisionedCapacityDescription } from "./provisionedcapacitydescription";
 /**

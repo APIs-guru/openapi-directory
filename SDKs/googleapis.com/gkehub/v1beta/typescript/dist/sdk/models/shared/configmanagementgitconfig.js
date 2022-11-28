@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ConfigManagementGitConfig
 /**
  * Git repo configuration for a single cluster.
@@ -33,35 +33,35 @@ var ConfigManagementGitConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=gcpServiceAccountEmail" }),
+        SpeakeasyMetadata({ data: "json, name=gcpServiceAccountEmail" }),
         __metadata("design:type", String)
     ], ConfigManagementGitConfig.prototype, "gcpServiceAccountEmail", void 0);
     __decorate([
-        Metadata({ data: "json, name=httpsProxy" }),
+        SpeakeasyMetadata({ data: "json, name=httpsProxy" }),
         __metadata("design:type", String)
     ], ConfigManagementGitConfig.prototype, "httpsProxy", void 0);
     __decorate([
-        Metadata({ data: "json, name=policyDir" }),
+        SpeakeasyMetadata({ data: "json, name=policyDir" }),
         __metadata("design:type", String)
     ], ConfigManagementGitConfig.prototype, "policyDir", void 0);
     __decorate([
-        Metadata({ data: "json, name=secretType" }),
+        SpeakeasyMetadata({ data: "json, name=secretType" }),
         __metadata("design:type", String)
     ], ConfigManagementGitConfig.prototype, "secretType", void 0);
     __decorate([
-        Metadata({ data: "json, name=syncBranch" }),
+        SpeakeasyMetadata({ data: "json, name=syncBranch" }),
         __metadata("design:type", String)
     ], ConfigManagementGitConfig.prototype, "syncBranch", void 0);
     __decorate([
-        Metadata({ data: "json, name=syncRepo" }),
+        SpeakeasyMetadata({ data: "json, name=syncRepo" }),
         __metadata("design:type", String)
     ], ConfigManagementGitConfig.prototype, "syncRepo", void 0);
     __decorate([
-        Metadata({ data: "json, name=syncRev" }),
+        SpeakeasyMetadata({ data: "json, name=syncRev" }),
         __metadata("design:type", String)
     ], ConfigManagementGitConfig.prototype, "syncRev", void 0);
     __decorate([
-        Metadata({ data: "json, name=syncWaitSecs" }),
+        SpeakeasyMetadata({ data: "json, name=syncWaitSecs" }),
         __metadata("design:type", String)
     ], ConfigManagementGitConfig.prototype, "syncWaitSecs", void 0);
     return ConfigManagementGitConfig;

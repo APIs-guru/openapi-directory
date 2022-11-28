@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class AppPkcs12P12File extends SpeakeasyBase {
     content: Uint8Array;
     p12File: string;

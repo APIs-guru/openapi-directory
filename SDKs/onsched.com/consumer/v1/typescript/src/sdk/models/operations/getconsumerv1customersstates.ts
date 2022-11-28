@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetConsumerV1CustomersStatesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=country" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=country" })
   country?: string;
 }
 
 
 export class GetConsumerV1CustomersStatesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetConsumerV1CustomersStatesQueryParams;
 }
 
 
 export class GetConsumerV1CustomersStatesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.StateViewModel })
+  @SpeakeasyMetadata({ elemType: shared.StateViewModel })
   stateViewModels?: shared.StateViewModel[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

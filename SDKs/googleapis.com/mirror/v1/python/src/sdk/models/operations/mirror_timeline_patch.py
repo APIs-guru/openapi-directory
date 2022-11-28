@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class MirrorTimelinePatchPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,14 +22,14 @@ class MirrorTimelinePatchQueryParams:
 
 @dataclass
 class MirrorTimelinePatchSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class MirrorTimelinePatchSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -39,15 +40,15 @@ class MirrorTimelinePatchSecurity:
 
 @dataclass
 class MirrorTimelinePatchRequest:
-    path_params: MirrorTimelinePatchPathParams = field(default=None)
-    query_params: MirrorTimelinePatchQueryParams = field(default=None)
+    path_params: MirrorTimelinePatchPathParams = field()
+    query_params: MirrorTimelinePatchQueryParams = field()
+    security: MirrorTimelinePatchSecurity = field()
     request: Optional[shared.TimelineItem] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: MirrorTimelinePatchSecurity = field(default=None)
     
 
 @dataclass
 class MirrorTimelinePatchResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

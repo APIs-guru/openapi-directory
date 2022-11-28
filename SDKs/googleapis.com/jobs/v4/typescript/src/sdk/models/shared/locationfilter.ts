@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LatLng } from "./latlng";
 
+
 export enum LocationFilterTelecommutePreferenceEnum {
-    TelecommutePreferenceUnspecified = "TELECOMMUTE_PREFERENCE_UNSPECIFIED"
-,    TelecommuteExcluded = "TELECOMMUTE_EXCLUDED"
-,    TelecommuteAllowed = "TELECOMMUTE_ALLOWED"
-,    TelecommuteJobsExcluded = "TELECOMMUTE_JOBS_EXCLUDED"
+    TelecommutePreferenceUnspecified = "TELECOMMUTE_PREFERENCE_UNSPECIFIED",
+    TelecommuteExcluded = "TELECOMMUTE_EXCLUDED",
+    TelecommuteAllowed = "TELECOMMUTE_ALLOWED",
+    TelecommuteJobsExcluded = "TELECOMMUTE_JOBS_EXCLUDED"
 }
 
 
@@ -14,18 +15,18 @@ export enum LocationFilterTelecommutePreferenceEnum {
  * Geographic region of the search.
 **/
 export class LocationFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=address" })
+  @SpeakeasyMetadata({ data: "json, name=address" })
   address?: string;
 
-  @Metadata({ data: "json, name=distanceInMiles" })
+  @SpeakeasyMetadata({ data: "json, name=distanceInMiles" })
   distanceInMiles?: number;
 
-  @Metadata({ data: "json, name=latLng" })
+  @SpeakeasyMetadata({ data: "json, name=latLng" })
   latLng?: LatLng;
 
-  @Metadata({ data: "json, name=regionCode" })
+  @SpeakeasyMetadata({ data: "json, name=regionCode" })
   regionCode?: string;
 
-  @Metadata({ data: "json, name=telecommutePreference" })
+  @SpeakeasyMetadata({ data: "json, name=telecommutePreference" })
   telecommutePreference?: LocationFilterTelecommutePreferenceEnum;
 }

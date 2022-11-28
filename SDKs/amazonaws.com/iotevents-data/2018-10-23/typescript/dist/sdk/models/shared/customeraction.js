@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AcknowledgeActionConfiguration } from "./acknowledgeactionconfiguration";
 import { CustomerActionNameEnum } from "./customeractionnameenum";
 import { DisableActionConfiguration } from "./disableactionconfiguration";
@@ -39,27 +39,27 @@ var CustomerAction = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=acknowledgeActionConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=acknowledgeActionConfiguration" }),
         __metadata("design:type", AcknowledgeActionConfiguration)
     ], CustomerAction.prototype, "acknowledgeActionConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=actionName" }),
+        SpeakeasyMetadata({ data: "json, name=actionName" }),
         __metadata("design:type", String)
     ], CustomerAction.prototype, "actionName", void 0);
     __decorate([
-        Metadata({ data: "json, name=disableActionConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=disableActionConfiguration" }),
         __metadata("design:type", DisableActionConfiguration)
     ], CustomerAction.prototype, "disableActionConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=enableActionConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=enableActionConfiguration" }),
         __metadata("design:type", EnableActionConfiguration)
     ], CustomerAction.prototype, "enableActionConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=resetActionConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=resetActionConfiguration" }),
         __metadata("design:type", ResetActionConfiguration)
     ], CustomerAction.prototype, "resetActionConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=snoozeActionConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=snoozeActionConfiguration" }),
         __metadata("design:type", SnoozeActionConfiguration)
     ], CustomerAction.prototype, "snoozeActionConfiguration", void 0);
     return CustomerAction;

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CaCertificateUpdateActionEnum } from "./cacertificateupdateactionenum";
+
 
 
 // UpdateCaCertificateParams
@@ -7,6 +8,6 @@ import { CaCertificateUpdateActionEnum } from "./cacertificateupdateactionenum";
  * Parameters to define a mitigation action that changes the state of the CA certificate to inactive.
 **/
 export class UpdateCaCertificateParams extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: CaCertificateUpdateActionEnum;
 }

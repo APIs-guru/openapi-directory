@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class GetThirdPartyJobDetailsInput:
-    client_token: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clientToken' }})
-    job_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'jobId' }})
+    r"""GetThirdPartyJobDetailsInput
+    Represents the input of a <code>GetThirdPartyJobDetails</code> action.
+    """
+    
+    client_token: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('clientToken') }})
+    job_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('jobId') }})
     

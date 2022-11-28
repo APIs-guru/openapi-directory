@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsElasticsearchDomainServiceSoftwareOptions
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about the state of the domain relative to the latest service software.
 **/
 export class AwsElasticsearchDomainServiceSoftwareOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AutomatedUpdateDate" })
+  @SpeakeasyMetadata({ data: "json, name=AutomatedUpdateDate" })
   automatedUpdateDate?: string;
 
-  @Metadata({ data: "json, name=Cancellable" })
+  @SpeakeasyMetadata({ data: "json, name=Cancellable" })
   cancellable?: boolean;
 
-  @Metadata({ data: "json, name=CurrentVersion" })
+  @SpeakeasyMetadata({ data: "json, name=CurrentVersion" })
   currentVersion?: string;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=NewVersion" })
+  @SpeakeasyMetadata({ data: "json, name=NewVersion" })
   newVersion?: string;
 
-  @Metadata({ data: "json, name=UpdateAvailable" })
+  @SpeakeasyMetadata({ data: "json, name=UpdateAvailable" })
   updateAvailable?: boolean;
 
-  @Metadata({ data: "json, name=UpdateStatus" })
+  @SpeakeasyMetadata({ data: "json, name=UpdateStatus" })
   updateStatus?: string;
 }

@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class LinodeConfigInterfacePurposeEnum(str, Enum):
     PUBLIC = "public"
@@ -10,7 +12,12 @@ class LinodeConfigInterfacePurposeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class LinodeConfigInterface:
-    ipam_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ipam_address' }})
-    label: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
-    purpose: Optional[LinodeConfigInterfacePurposeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'purpose' }})
+    r"""LinodeConfigInterface
+    The Network Interface to apply to this Linode's configuration profile.
+    
+    """
+    
+    ipam_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ipam_address') }})
+    label: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('label') }})
+    purpose: Optional[LinodeConfigInterfacePurposeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('purpose') }})
     

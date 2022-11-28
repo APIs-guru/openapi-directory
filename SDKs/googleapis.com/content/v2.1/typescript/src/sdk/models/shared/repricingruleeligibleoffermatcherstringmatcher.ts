@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RepricingRuleEligibleOfferMatcherStringMatcher
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Matcher by string attributes.
 **/
 export class RepricingRuleEligibleOfferMatcherStringMatcher extends SpeakeasyBase {
-  @Metadata({ data: "json, name=strAttributes" })
+  @SpeakeasyMetadata({ data: "json, name=strAttributes" })
   strAttributes?: string[];
 }

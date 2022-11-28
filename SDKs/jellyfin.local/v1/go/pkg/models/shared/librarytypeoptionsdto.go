@@ -1,5 +1,7 @@
 package shared
 
+// LibraryTypeOptionsDto
+// Library type options dto.
 type LibraryTypeOptionsDto struct {
 	DefaultImageOptions []ImageOption          `json:"DefaultImageOptions,omitempty"`
 	ImageFetchers       []LibraryOptionInfoDto `json:"ImageFetchers,omitempty"`

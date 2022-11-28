@@ -1,5 +1,7 @@
 package shared
 
+// IPAddressEntity
+// List IP Addresses associated with the current site
 type IPAddressEntity struct {
 	AssociatedWith *string  `json:"associated_with,omitempty"`
 	GroupID        *int32   `json:"group_id,omitempty"`

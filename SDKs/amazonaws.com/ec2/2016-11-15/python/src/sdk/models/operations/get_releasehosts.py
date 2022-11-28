@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetReleaseHostsActionEnum(str, Enum):
     RELEASE_HOSTS = "ReleaseHosts"
@@ -10,9 +14,9 @@ class GetReleaseHostsVersionEnum(str, Enum):
 
 @dataclass
 class GetReleaseHostsQueryParams:
-    action: GetReleaseHostsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    host_id: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'HostId', 'style': 'form', 'explode': True }})
-    version: GetReleaseHostsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetReleaseHostsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    host_id: List[str] = field(metadata={'query_param': { 'field_name': 'HostId', 'style': 'form', 'explode': True }})
+    version: GetReleaseHostsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetReleaseHostsHeaders:
 
 @dataclass
 class GetReleaseHostsRequest:
-    query_params: GetReleaseHostsQueryParams = field(default=None)
-    headers: GetReleaseHostsHeaders = field(default=None)
+    headers: GetReleaseHostsHeaders = field()
+    query_params: GetReleaseHostsQueryParams = field()
     
 
 @dataclass
 class GetReleaseHostsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

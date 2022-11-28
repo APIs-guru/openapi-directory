@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ReplayStateEnum } from "./replaystateenum";
 /**
  * A <code>Replay</code> object that contains details about a replay.

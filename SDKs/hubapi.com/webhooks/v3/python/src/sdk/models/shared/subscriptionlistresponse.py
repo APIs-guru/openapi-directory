@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import subscriptionresponse
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SubscriptionListResponse:
-    results: List[subscriptionresponse.SubscriptionResponse] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'results' }})
+    r"""SubscriptionListResponse
+    List of event subscriptions for your app
+    """
+    
+    results: List[SubscriptionResponse] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('results') }})
     

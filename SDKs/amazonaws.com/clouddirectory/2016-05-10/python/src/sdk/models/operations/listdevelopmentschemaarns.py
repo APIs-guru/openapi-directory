@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -24,21 +28,22 @@ class ListDevelopmentSchemaArnsHeaders:
 @dataclass_json
 @dataclass
 class ListDevelopmentSchemaArnsRequestBody:
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MaxResults' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MaxResults') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
     
 
 @dataclass
 class ListDevelopmentSchemaArnsRequest:
-    query_params: ListDevelopmentSchemaArnsQueryParams = field(default=None)
-    headers: ListDevelopmentSchemaArnsHeaders = field(default=None)
-    request: ListDevelopmentSchemaArnsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ListDevelopmentSchemaArnsHeaders = field()
+    query_params: ListDevelopmentSchemaArnsQueryParams = field()
+    request: ListDevelopmentSchemaArnsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ListDevelopmentSchemaArnsResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[shared.AccessDeniedException] = field(default=None)
-    content_type: str = field(default=None)
     internal_service_exception: Optional[shared.InternalServiceException] = field(default=None)
     invalid_arn_exception: Optional[shared.InvalidArnException] = field(default=None)
     invalid_next_token_exception: Optional[shared.InvalidNextTokenException] = field(default=None)
@@ -46,6 +51,5 @@ class ListDevelopmentSchemaArnsResponse:
     list_development_schema_arns_response: Optional[shared.ListDevelopmentSchemaArnsResponse] = field(default=None)
     resource_not_found_exception: Optional[shared.ResourceNotFoundException] = field(default=None)
     retryable_conflict_exception: Optional[shared.RetryableConflictException] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[shared.ValidationException] = field(default=None)
     

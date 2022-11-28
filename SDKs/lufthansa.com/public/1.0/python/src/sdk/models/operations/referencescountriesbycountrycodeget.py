@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
 from typing import Any,Optional
+from sdk.models import shared
 
 
 @dataclass
 class ReferencesCountriesByCountryCodeGetPathParams:
-    country_code: str = field(default=None, metadata={'path_param': { 'field_name': 'countryCode', 'style': 'simple', 'explode': False }})
+    country_code: str = field(metadata={'path_param': { 'field_name': 'countryCode', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,25 +17,25 @@ class ReferencesCountriesByCountryCodeGetQueryParams:
 
 @dataclass
 class ReferencesCountriesByCountryCodeGetHeaders:
-    accept: str = field(default=None, metadata={'header': { 'field_name': 'Accept', 'style': 'simple', 'explode': False }})
+    accept: str = field(metadata={'header': { 'field_name': 'Accept', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ReferencesCountriesByCountryCodeGetSecurity:
-    auth: shared.SchemeAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    auth: shared.SchemeAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ReferencesCountriesByCountryCodeGetRequest:
-    path_params: ReferencesCountriesByCountryCodeGetPathParams = field(default=None)
-    query_params: ReferencesCountriesByCountryCodeGetQueryParams = field(default=None)
-    headers: ReferencesCountriesByCountryCodeGetHeaders = field(default=None)
-    security: ReferencesCountriesByCountryCodeGetSecurity = field(default=None)
+    headers: ReferencesCountriesByCountryCodeGetHeaders = field()
+    path_params: ReferencesCountriesByCountryCodeGetPathParams = field()
+    query_params: ReferencesCountriesByCountryCodeGetQueryParams = field()
+    security: ReferencesCountriesByCountryCodeGetSecurity = field()
     
 
 @dataclass
 class ReferencesCountriesByCountryCodeGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     references_countries_by_country_code_get_200_application_json_object: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

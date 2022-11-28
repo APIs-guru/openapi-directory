@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class DynamicLinkEventStatEventEnum(str, Enum):
     DYNAMIC_LINK_EVENT_UNSPECIFIED = "DYNAMIC_LINK_EVENT_UNSPECIFIED"
@@ -21,7 +23,11 @@ class DynamicLinkEventStatPlatformEnum(str, Enum):
 @dataclass_json
 @dataclass
 class DynamicLinkEventStat:
-    count: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'count' }})
-    event: Optional[DynamicLinkEventStatEventEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'event' }})
-    platform: Optional[DynamicLinkEventStatPlatformEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'platform' }})
+    r"""DynamicLinkEventStat
+    Dynamic Link event stat.
+    """
+    
+    count: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('count') }})
+    event: Optional[DynamicLinkEventStatEventEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('event') }})
+    platform: Optional[DynamicLinkEventStatPlatformEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('platform') }})
     

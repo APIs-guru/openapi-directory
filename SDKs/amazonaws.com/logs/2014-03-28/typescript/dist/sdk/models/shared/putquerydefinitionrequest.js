@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PutQueryDefinitionRequest = /** @class */ (function (_super) {
     __extends(PutQueryDefinitionRequest, _super);
     function PutQueryDefinitionRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=logGroupNames" }),
+        SpeakeasyMetadata({ data: "json, name=logGroupNames" }),
         __metadata("design:type", Array)
     ], PutQueryDefinitionRequest.prototype, "logGroupNames", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], PutQueryDefinitionRequest.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=queryDefinitionId" }),
+        SpeakeasyMetadata({ data: "json, name=queryDefinitionId" }),
         __metadata("design:type", String)
     ], PutQueryDefinitionRequest.prototype, "queryDefinitionId", void 0);
     __decorate([
-        Metadata({ data: "json, name=queryString" }),
+        SpeakeasyMetadata({ data: "json, name=queryString" }),
         __metadata("design:type", String)
     ], PutQueryDefinitionRequest.prototype, "queryString", void 0);
     return PutQueryDefinitionRequest;

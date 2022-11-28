@@ -65,24 +65,32 @@ const (
 	ObpcaData1CreditInterestTierBandSetTierBandFixedVariableInterestRateTypeEnumVariable ObpcaData1CreditInterestTierBandSetTierBandFixedVariableInterestRateTypeEnum = "Variable"
 )
 
+// ObpcaData1CreditInterestTierBandSetTierBandOtherApplicationFrequency
+// Other application frequencies that are not available in the standard code list
 type ObpcaData1CreditInterestTierBandSetTierBandOtherApplicationFrequency struct {
 	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
+// ObpcaData1CreditInterestTierBandSetTierBandOtherBankInterestType
+// Other interest rate types which are not available in the standard code list
 type ObpcaData1CreditInterestTierBandSetTierBandOtherBankInterestType struct {
 	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
+// ObpcaData1CreditInterestTierBandSetTierBandOtherCalculationFrequency
+// Other calculation frequency which is not available in the standard code set.
 type ObpcaData1CreditInterestTierBandSetTierBandOtherCalculationFrequency struct {
 	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
+// ObpcaData1CreditInterestTierBandSetTierBand
+// Tier Band Details
 type ObpcaData1CreditInterestTierBandSetTierBand struct {
 	Aer                            string                                                                         `json:"AER"`
 	ApplicationFrequency           ObpcaData1CreditInterestTierBandSetTierBandApplicationFrequencyEnum            `json:"ApplicationFrequency"`
@@ -107,6 +115,8 @@ const (
 	ObpcaData1CreditInterestTierBandSetTierBandMethodEnumWhole  ObpcaData1CreditInterestTierBandSetTierBandMethodEnum = "Whole"
 )
 
+// ObpcaData1CreditInterestTierBandSet
+// The group of tiers or bands for which credit interest can be applied.
 type ObpcaData1CreditInterestTierBandSet struct {
 	CalculationMethod *ObpcaData1CreditInterestTierBandSetCalculationMethodEnum `json:"CalculationMethod,omitempty"`
 	Destination       *ObpcaData1CreditInterestTierBandSetDestinationEnum       `json:"Destination,omitempty"`
@@ -115,6 +125,8 @@ type ObpcaData1CreditInterestTierBandSet struct {
 	TierBandMethod    ObpcaData1CreditInterestTierBandSetTierBandMethodEnum     `json:"TierBandMethod"`
 }
 
+// ObpcaData1CreditInterest
+// Details about the interest that may be payable to the PCA account holders
 type ObpcaData1CreditInterest struct {
 	TierBandSet []ObpcaData1CreditInterestTierBandSet `json:"TierBandSet"`
 }
@@ -147,12 +159,16 @@ const (
 	ObpcaData1OtherFeesChargesFeeChargeCapMinMaxTypeEnumMaximum ObpcaData1OtherFeesChargesFeeChargeCapMinMaxTypeEnum = "Maximum"
 )
 
+// ObpcaData1OtherFeesChargesFeeChargeCapOtherFeeType
+// Other fee type code which is not available in the standard code set
 type ObpcaData1OtherFeesChargesFeeChargeCapOtherFeeType struct {
 	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
+// ObpcaData1OtherFeesChargesFeeChargeCap
+// Details about any caps (maximum charges) that apply to a particular fee/charge
 type ObpcaData1OtherFeesChargesFeeChargeCap struct {
 	CappingPeriod    *ObpcaData1OtherFeesChargesFeeChargeCapCappingPeriodEnum `json:"CappingPeriod,omitempty"`
 	FeeCapAmount     *string                                                  `json:"FeeCapAmount,omitempty"`
@@ -213,6 +229,8 @@ const (
 	ObpcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnumYearly                   ObpcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnum = "Yearly"
 )
 
+// ObpcaData1OtherFeesChargesFeeChargeDetailFeeApplicableRange
+// Range or amounts or rates for which the fee/charge applies
 type ObpcaData1OtherFeesChargesFeeChargeDetailFeeApplicableRange struct {
 	MaximumAmount *string `json:"MaximumAmount,omitempty"`
 	MaximumRate   *string `json:"MaximumRate,omitempty"`
@@ -255,12 +273,16 @@ const (
 	ObpcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapMinMaxTypeEnumMaximum ObpcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapMinMaxTypeEnum = "Maximum"
 )
 
+// ObpcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapOtherFeeType
+// Other fee type code which is not available in the standard code set
 type ObpcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapOtherFeeType struct {
 	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
+// ObpcaData1OtherFeesChargesFeeChargeDetailFeeChargeCap
+// Details about any caps (maximum charges) that apply to a particular fee/charge
 type ObpcaData1OtherFeesChargesFeeChargeDetailFeeChargeCap struct {
 	CappingPeriod    *ObpcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapCappingPeriodEnum `json:"CappingPeriod,omitempty"`
 	FeeCapAmount     *string                                                                 `json:"FeeCapAmount,omitempty"`
@@ -289,12 +311,16 @@ const (
 	ObpcaData1OtherFeesChargesFeeChargeDetailFeeTypeEnumOther                     ObpcaData1OtherFeesChargesFeeChargeDetailFeeTypeEnum = "Other"
 )
 
+// ObpcaData1OtherFeesChargesFeeChargeDetailOtherApplicationFrequency
+// Other application frequencies not covered in the standard code list
 type ObpcaData1OtherFeesChargesFeeChargeDetailOtherApplicationFrequency struct {
 	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
+// ObpcaData1OtherFeesChargesFeeChargeDetailOtherCalculationFrequency
+// Other calculation frequency which is not available in standard code set.
 type ObpcaData1OtherFeesChargesFeeChargeDetailOtherCalculationFrequency struct {
 	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
@@ -307,6 +333,8 @@ type ObpcaData1OtherFeesChargesFeeChargeDetailOtherFeeCategoryType struct {
 	Name        string  `json:"Name"`
 }
 
+// ObpcaData1OtherFeesChargesFeeChargeDetailOtherFeeRateType
+// Other fee rate type which is not available in the standard code set
 type ObpcaData1OtherFeesChargesFeeChargeDetailOtherFeeRateType struct {
 	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
@@ -320,6 +348,8 @@ const (
 	ObpcaData1OtherFeesChargesFeeChargeDetailOtherFeeTypeFeeCategoryEnumServicing ObpcaData1OtherFeesChargesFeeChargeDetailOtherFeeTypeFeeCategoryEnum = "Servicing"
 )
 
+// ObpcaData1OtherFeesChargesFeeChargeDetailOtherFeeType
+// Other Fee/charge type which is not available in the standard code set
 type ObpcaData1OtherFeesChargesFeeChargeDetailOtherFeeType struct {
 	Code        *string                                                              `json:"Code,omitempty"`
 	Description string                                                               `json:"Description"`
@@ -327,6 +357,8 @@ type ObpcaData1OtherFeesChargesFeeChargeDetailOtherFeeType struct {
 	Name        string                                                               `json:"Name"`
 }
 
+// ObpcaData1OtherFeesChargesFeeChargeDetail
+// Other fees/charges details
 type ObpcaData1OtherFeesChargesFeeChargeDetail struct {
 	ApplicationFrequency      ObpcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnum   `json:"ApplicationFrequency"`
 	CalculationFrequency      *ObpcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnum  `json:"CalculationFrequency,omitempty"`
@@ -345,6 +377,8 @@ type ObpcaData1OtherFeesChargesFeeChargeDetail struct {
 	OtherFeeType              *ObpcaData1OtherFeesChargesFeeChargeDetailOtherFeeType              `json:"OtherFeeType,omitempty"`
 }
 
+// ObpcaData1OtherFeesCharges
+// Contains details of fees and charges which are not associated with either borrowing or features/benefits
 type ObpcaData1OtherFeesCharges struct {
 	FeeChargeCap    []ObpcaData1OtherFeesChargesFeeChargeCap    `json:"FeeChargeCap,omitempty"`
 	FeeChargeDetail []ObpcaData1OtherFeesChargesFeeChargeDetail `json:"FeeChargeDetail"`
@@ -386,12 +420,16 @@ const (
 	ObpcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapMinMaxTypeEnumMaximum ObpcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapMinMaxTypeEnum = "Maximum"
 )
 
+// ObpcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapOtherFeeType
+// Other fee type code which is not available in the standard code set
 type ObpcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapOtherFeeType struct {
 	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
+// ObpcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCap
+// Details about any caps (maximum charges) that apply to a particular fee/charge
 type ObpcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCap struct {
 	CappingPeriod             *ObpcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnum `json:"CappingPeriod,omitempty"`
 	FeeCapAmount              *string                                                                                            `json:"FeeCapAmount,omitempty"`
@@ -479,24 +517,32 @@ const (
 	ObpcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnumUnauthorisedUnpaidTrans ObpcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum = "UnauthorisedUnpaidTrans"
 )
 
+// ObpcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOtherApplicationFrequency
+// Other application frequencies that are not available in the standard code list
 type ObpcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOtherApplicationFrequency struct {
 	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
+// ObpcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOtherCalculationFrequency
+// Other calculation frequency which is not available in the standard code set.
 type ObpcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOtherCalculationFrequency struct {
 	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
+// ObpcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOtherFeeRateType
+// Other fee rate type code which is not available in the standard code set
 type ObpcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOtherFeeRateType struct {
 	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
+// ObpcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOtherFeeType
+// Other Fee type which is not available in the standard code set
 type ObpcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOtherFeeType struct {
 	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
@@ -539,12 +585,16 @@ const (
 	ObpcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapMinMaxTypeEnumMaximum ObpcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapMinMaxTypeEnum = "Maximum"
 )
 
+// ObpcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapOtherFeeType
+// Other fee type code which is not available in the standard code set
 type ObpcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapOtherFeeType struct {
 	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
+// ObpcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCap
+// Details about any caps (maximum charges) that apply to a particular fee/charge
 type ObpcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCap struct {
 	CappingPeriod             *ObpcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnum `json:"CappingPeriod,omitempty"`
 	FeeCapAmount              *string                                                                                                                    `json:"FeeCapAmount,omitempty"`
@@ -556,6 +606,8 @@ type ObpcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChar
 	OverdraftControlIndicator *bool                                                                                                                      `json:"OverdraftControlIndicator,omitempty"`
 }
 
+// ObpcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetail
+// Details about the fees/charges
 type ObpcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetail struct {
 	ApplicationFrequency       ObpcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum   `json:"ApplicationFrequency"`
 	CalculationFrequency       *ObpcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum  `json:"CalculationFrequency,omitempty"`
@@ -573,6 +625,8 @@ type ObpcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChar
 	OverdraftFeeChargeCap      *ObpcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCap     `json:"OverdraftFeeChargeCap,omitempty"`
 }
 
+// ObpcaData1OverdraftOverdraftTierBandSetOverdraftFeesCharges
+// Overdraft fees and charges details
 type ObpcaData1OverdraftOverdraftTierBandSetOverdraftFeesCharges struct {
 	OverdraftFeeChargeCap    []ObpcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCap    `json:"OverdraftFeeChargeCap,omitempty"`
 	OverdraftFeeChargeDetail []ObpcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetail `json:"OverdraftFeeChargeDetail"`
@@ -614,12 +668,16 @@ const (
 	ObpcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapMinMaxTypeEnumMaximum ObpcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapMinMaxTypeEnum = "Maximum"
 )
 
+// ObpcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapOtherFeeType
+// Other fee type code which is not available in the standard code set
 type ObpcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapOtherFeeType struct {
 	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
+// ObpcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCap
+// Details about any caps (maximum charges) that apply to a particular fee/charge
 type ObpcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCap struct {
 	CappingPeriod             *ObpcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnum `json:"CappingPeriod,omitempty"`
 	FeeCapAmount              *string                                                                                                             `json:"FeeCapAmount,omitempty"`
@@ -707,24 +765,32 @@ const (
 	ObpcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnumUnauthorisedUnpaidTrans ObpcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum = "UnauthorisedUnpaidTrans"
 )
 
+// ObpcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOtherApplicationFrequency
+// Other application frequencies that are not available in the standard code list
 type ObpcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOtherApplicationFrequency struct {
 	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
+// ObpcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOtherCalculationFrequency
+// Other calculation frequency which is not available in the standard code set.
 type ObpcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOtherCalculationFrequency struct {
 	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
+// ObpcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOtherFeeRateType
+// Other fee rate type code which is not available in the standard code set
 type ObpcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOtherFeeRateType struct {
 	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
+// ObpcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOtherFeeType
+// Other Fee type which is not available in the standard code set
 type ObpcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOtherFeeType struct {
 	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
@@ -767,12 +833,16 @@ const (
 	ObpcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapMinMaxTypeEnumMaximum ObpcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapMinMaxTypeEnum = "Maximum"
 )
 
+// ObpcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapOtherFeeType
+// Other fee type code which is not available in the standard code set
 type ObpcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapOtherFeeType struct {
 	Code        *string `json:"Code,omitempty"`
 	Description string  `json:"Description"`
 	Name        string  `json:"Name"`
 }
 
+// ObpcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCap
+// Details about any caps (maximum charges) that apply to a particular fee/charge
 type ObpcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCap struct {
 	CappingPeriod             *ObpcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnum `json:"CappingPeriod,omitempty"`
 	FeeCapAmount              *string                                                                                                                                     `json:"FeeCapAmount,omitempty"`
@@ -784,6 +854,8 @@ type ObpcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesCharge
 	OverdraftControlIndicator *bool                                                                                                                                       `json:"OverdraftControlIndicator,omitempty"`
 }
 
+// ObpcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetail
+// Details about the fees/charges
 type ObpcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetail struct {
 	ApplicationFrequency       ObpcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum   `json:"ApplicationFrequency"`
 	CalculationFrequency       *ObpcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum  `json:"CalculationFrequency,omitempty"`
@@ -801,6 +873,8 @@ type ObpcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesCharge
 	OverdraftFeeChargeCap      *ObpcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCap     `json:"OverdraftFeeChargeCap,omitempty"`
 }
 
+// ObpcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesCharges
+// Overdraft fees and charges
 type ObpcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesCharges struct {
 	OverdraftFeeChargeCap    []ObpcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCap    `json:"OverdraftFeeChargeCap,omitempty"`
 	OverdraftFeeChargeDetail []ObpcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetail `json:"OverdraftFeeChargeDetail"`
@@ -813,6 +887,8 @@ const (
 	ObpcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftInterestChargingCoverageEnumWhole  ObpcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftInterestChargingCoverageEnum = "Whole"
 )
 
+// ObpcaData1OverdraftOverdraftTierBandSetOverdraftTierBand
+// Provides overdraft details for a specific tier or band
 type ObpcaData1OverdraftOverdraftTierBandSetOverdraftTierBand struct {
 	BankGuaranteedIndicator           *bool                                                                                          `json:"BankGuaranteedIndicator,omitempty"`
 	Ear                               *string                                                                                        `json:"EAR,omitempty"`
@@ -841,6 +917,8 @@ const (
 	ObpcaData1OverdraftOverdraftTierBandSetTierBandMethodEnumBanded ObpcaData1OverdraftOverdraftTierBandSetTierBandMethodEnum = "Banded"
 )
 
+// ObpcaData1OverdraftOverdraftTierBandSet
+// Tier band set details
 type ObpcaData1OverdraftOverdraftTierBandSet struct {
 	AuthorisedIndicator  *bool                                                         `json:"AuthorisedIndicator,omitempty"`
 	BufferAmount         *string                                                       `json:"BufferAmount,omitempty"`
@@ -852,6 +930,8 @@ type ObpcaData1OverdraftOverdraftTierBandSet struct {
 	TierBandMethod       ObpcaData1OverdraftOverdraftTierBandSetTierBandMethodEnum     `json:"TierBandMethod"`
 }
 
+// ObpcaData1Overdraft
+// Details about Overdraft rates, fees & charges
 type ObpcaData1Overdraft struct {
 	Notes                []string                                  `json:"Notes,omitempty"`
 	OverdraftTierBandSet []ObpcaData1OverdraftOverdraftTierBandSet `json:"OverdraftTierBandSet"`

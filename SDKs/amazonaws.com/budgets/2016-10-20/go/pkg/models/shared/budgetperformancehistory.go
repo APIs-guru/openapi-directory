@@ -1,5 +1,7 @@
 package shared
 
+// BudgetPerformanceHistory
+// A history of the state of a budget at the end of the budget's specified time period.
 type BudgetPerformanceHistory struct {
 	BudgetName                   *string                    `json:"BudgetName,omitempty"`
 	BudgetType                   *BudgetTypeEnum            `json:"BudgetType,omitempty"`

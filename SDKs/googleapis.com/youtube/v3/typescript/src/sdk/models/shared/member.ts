@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MemberSnippet } from "./membersnippet";
+
 
 
 // Member
@@ -7,12 +8,12 @@ import { MemberSnippet } from "./membersnippet";
  * A *member* resource represents a member for a YouTube channel. A member provides recurring monetary support to a creator and receives special benefits.
 **/
 export class Member extends SpeakeasyBase {
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=snippet" })
+  @SpeakeasyMetadata({ data: "json, name=snippet" })
   snippet?: MemberSnippet;
 }

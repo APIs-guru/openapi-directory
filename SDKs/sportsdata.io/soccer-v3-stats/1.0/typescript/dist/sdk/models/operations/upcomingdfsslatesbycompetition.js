@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var UpcomingDfsSlatesByCompetitionFormatEnum;
 (function (UpcomingDfsSlatesByCompetitionFormatEnum) {
     UpcomingDfsSlatesByCompetitionFormatEnum["Json"] = "json";
@@ -34,11 +34,11 @@ var UpcomingDfsSlatesByCompetitionPathParams = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=competitionId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=competitionId" }),
         __metadata("design:type", String)
     ], UpcomingDfsSlatesByCompetitionPathParams.prototype, "competitionId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=format" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" }),
         __metadata("design:type", String)
     ], UpcomingDfsSlatesByCompetitionPathParams.prototype, "format", void 0);
     return UpcomingDfsSlatesByCompetitionPathParams;
@@ -50,7 +50,7 @@ var UpcomingDfsSlatesByCompetitionRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpcomingDfsSlatesByCompetitionPathParams)
     ], UpcomingDfsSlatesByCompetitionRequest.prototype, "pathParams", void 0);
     return UpcomingDfsSlatesByCompetitionRequest;
@@ -62,15 +62,15 @@ var UpcomingDfsSlatesByCompetitionResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UpcomingDfsSlatesByCompetitionResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Array)
     ], UpcomingDfsSlatesByCompetitionResponse.prototype, "dfsSlates", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UpcomingDfsSlatesByCompetitionResponse.prototype, "statusCode", void 0);
     return UpcomingDfsSlatesByCompetitionResponse;

@@ -1,38 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AttachmentStateChange } from "./attachmentstatechange";
 import { ContainerStateChange } from "./containerstatechange";
 import { ManagedAgentStateChange } from "./managedagentstatechange";
 
 
+
 export class SubmitTaskStateChangeRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attachments", elemType: shared.AttachmentStateChange })
+  @SpeakeasyMetadata({ data: "json, name=attachments", elemType: AttachmentStateChange })
   attachments?: AttachmentStateChange[];
 
-  @Metadata({ data: "json, name=cluster" })
+  @SpeakeasyMetadata({ data: "json, name=cluster" })
   cluster?: string;
 
-  @Metadata({ data: "json, name=containers", elemType: shared.ContainerStateChange })
+  @SpeakeasyMetadata({ data: "json, name=containers", elemType: ContainerStateChange })
   containers?: ContainerStateChange[];
 
-  @Metadata({ data: "json, name=executionStoppedAt" })
+  @SpeakeasyMetadata({ data: "json, name=executionStoppedAt" })
   executionStoppedAt?: Date;
 
-  @Metadata({ data: "json, name=managedAgents", elemType: shared.ManagedAgentStateChange })
+  @SpeakeasyMetadata({ data: "json, name=managedAgents", elemType: ManagedAgentStateChange })
   managedAgents?: ManagedAgentStateChange[];
 
-  @Metadata({ data: "json, name=pullStartedAt" })
+  @SpeakeasyMetadata({ data: "json, name=pullStartedAt" })
   pullStartedAt?: Date;
 
-  @Metadata({ data: "json, name=pullStoppedAt" })
+  @SpeakeasyMetadata({ data: "json, name=pullStoppedAt" })
   pullStoppedAt?: Date;
 
-  @Metadata({ data: "json, name=reason" })
+  @SpeakeasyMetadata({ data: "json, name=reason" })
   reason?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 
-  @Metadata({ data: "json, name=task" })
+  @SpeakeasyMetadata({ data: "json, name=task" })
   task?: string;
 }

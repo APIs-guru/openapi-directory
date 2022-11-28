@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetQualificationTypeXAmzTargetEnum(str, Enum):
@@ -8,6 +12,7 @@ class GetQualificationTypeXAmzTargetEnum(str, Enum):
 
 @dataclass
 class GetQualificationTypeHeaders:
+    x_amz_target: GetQualificationTypeXAmzTargetEnum = field(metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm', 'style': 'simple', 'explode': False }})
     x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256', 'style': 'simple', 'explode': False }})
     x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential', 'style': 'simple', 'explode': False }})
@@ -15,20 +20,19 @@ class GetQualificationTypeHeaders:
     x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token', 'style': 'simple', 'explode': False }})
     x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature', 'style': 'simple', 'explode': False }})
     x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders', 'style': 'simple', 'explode': False }})
-    x_amz_target: GetQualificationTypeXAmzTargetEnum = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetQualificationTypeRequest:
-    headers: GetQualificationTypeHeaders = field(default=None)
-    request: shared.GetQualificationTypeRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: GetQualificationTypeHeaders = field()
+    request: shared.GetQualificationTypeRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class GetQualificationTypeResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_qualification_type_response: Optional[shared.GetQualificationTypeResponse] = field(default=None)
     request_error: Optional[Any] = field(default=None)
     service_fault: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

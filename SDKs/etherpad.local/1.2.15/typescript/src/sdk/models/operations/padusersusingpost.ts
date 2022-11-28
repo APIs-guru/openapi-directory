@@ -1,103 +1,104 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PadUsersUsingPostQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=padID" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=padID" })
   padId?: string;
 }
 
 
-export class PadUsersUsingPostRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: PadUsersUsingPostQueryParams;
-}
-
-
 export class PadUsersUsingPost200ApplicationJsonDataPadUsers extends SpeakeasyBase {
-  @Metadata({ data: "json, name=colorId" })
+  @SpeakeasyMetadata({ data: "json, name=colorId" })
   colorId?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=timestamp" })
   timestamp?: number;
 }
 
 
 export class PadUsersUsingPost200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=padUsers", elemType: operations.PadUsersUsingPost200ApplicationJsonDataPadUsers })
+  @SpeakeasyMetadata({ data: "json, name=padUsers", elemType: PadUsersUsingPost200ApplicationJsonDataPadUsers })
   padUsers?: PadUsersUsingPost200ApplicationJsonDataPadUsers[];
 }
 
 
 export class PadUsersUsingPost200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: PadUsersUsingPost200ApplicationJsonData;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PadUsersUsingPost400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PadUsersUsingPost401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PadUsersUsingPost500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class PadUsersUsingPostRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: PadUsersUsingPostQueryParams;
+}
+
+
 export class PadUsersUsingPostResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   padUsersUsingPost200ApplicationJsonObject?: PadUsersUsingPost200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   padUsersUsingPost400ApplicationJsonObject?: PadUsersUsingPost400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   padUsersUsingPost401ApplicationJsonObject?: PadUsersUsingPost401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   padUsersUsingPost500ApplicationJsonObject?: PadUsersUsingPost500ApplicationJson;
 }

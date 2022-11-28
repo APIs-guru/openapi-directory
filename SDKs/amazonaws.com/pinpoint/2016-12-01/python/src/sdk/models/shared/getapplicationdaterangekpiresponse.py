@@ -1,10 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from dataclasses_json import dataclass_json
-from . import applicationdaterangekpiresponse
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetApplicationDateRangeKpiResponse:
-    application_date_range_kpi_response: applicationdaterangekpiresponse.ApplicationDateRangeKpiResponse = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ApplicationDateRangeKpiResponse' }})
+    application_date_range_kpi_response: ApplicationDateRangeKpiResponse = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ApplicationDateRangeKpiResponse') }})
     

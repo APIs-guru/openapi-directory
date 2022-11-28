@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { KeywordInputTypeEnum } from "./keywordinputtypeenum";
 // SourceKeyword
 /**
@@ -34,11 +34,11 @@ var SourceKeyword = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=keywordInputType" }),
+        SpeakeasyMetadata({ data: "json, name=keywordInputType" }),
         __metadata("design:type", String)
     ], SourceKeyword.prototype, "keywordInputType", void 0);
     __decorate([
-        Metadata({ data: "json, name=keywordValue" }),
+        SpeakeasyMetadata({ data: "json, name=keywordValue" }),
         __metadata("design:type", String)
     ], SourceKeyword.prototype, "keywordValue", void 0);
     return SourceKeyword;

@@ -10,14 +10,14 @@ class CreateS3ConfigHeaders:
 
 @dataclass
 class CreateS3ConfigRequest:
-    headers: CreateS3ConfigHeaders = field(default=None)
-    request: shared.S3ConfigCreateRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateS3ConfigHeaders = field()
+    request: shared.S3ConfigCreateRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateS3ConfigResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     s3_config: Optional[shared.S3Config] = field(default=None)
-    status_code: int = field(default=None)
     

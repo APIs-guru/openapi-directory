@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MappingRule } from "./mappingrule";
+
 
 
 // RulesConfigurationType
@@ -8,6 +8,6 @@ import { MappingRule } from "./mappingrule";
  * A container for rules.
 **/
 export class RulesConfigurationType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Rules", elemType: shared.MappingRule })
+  @SpeakeasyMetadata({ data: "json, name=Rules", elemType: MappingRule })
   rules: MappingRule[];
 }

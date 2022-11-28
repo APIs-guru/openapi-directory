@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from sdk.models import shared
 
 
 @dataclass
 class UpdateDatasetAsyncPathParams:
-    dataset_id: str = field(default=None, metadata={'path_param': { 'field_name': 'datasetId', 'style': 'simple', 'explode': False }})
+    dataset_id: str = field(metadata={'path_param': { 'field_name': 'datasetId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,19 +19,19 @@ class UpdateDatasetAsyncRequestBody:
 
 @dataclass
 class UpdateDatasetAsyncSecurity:
-    bearer_token: shared.SchemeBearerToken = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_token: shared.SchemeBearerToken = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class UpdateDatasetAsyncRequest:
-    path_params: UpdateDatasetAsyncPathParams = field(default=None)
+    path_params: UpdateDatasetAsyncPathParams = field()
+    security: UpdateDatasetAsyncSecurity = field()
     request: Optional[UpdateDatasetAsyncRequestBody] = field(default=None, metadata={'request': { 'media_type': 'multipart/form-data' }})
-    security: UpdateDatasetAsyncSecurity = field(default=None)
     
 
 @dataclass
 class UpdateDatasetAsyncResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     dataset: Optional[shared.Dataset] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class BigqueryreservationProjectsLocationsSearchAssignmentsPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,14 +29,14 @@ class BigqueryreservationProjectsLocationsSearchAssignmentsQueryParams:
 
 @dataclass
 class BigqueryreservationProjectsLocationsSearchAssignmentsSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BigqueryreservationProjectsLocationsSearchAssignmentsSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -46,14 +47,14 @@ class BigqueryreservationProjectsLocationsSearchAssignmentsSecurity:
 
 @dataclass
 class BigqueryreservationProjectsLocationsSearchAssignmentsRequest:
-    path_params: BigqueryreservationProjectsLocationsSearchAssignmentsPathParams = field(default=None)
-    query_params: BigqueryreservationProjectsLocationsSearchAssignmentsQueryParams = field(default=None)
-    security: BigqueryreservationProjectsLocationsSearchAssignmentsSecurity = field(default=None)
+    path_params: BigqueryreservationProjectsLocationsSearchAssignmentsPathParams = field()
+    query_params: BigqueryreservationProjectsLocationsSearchAssignmentsQueryParams = field()
+    security: BigqueryreservationProjectsLocationsSearchAssignmentsSecurity = field()
     
 
 @dataclass
 class BigqueryreservationProjectsLocationsSearchAssignmentsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     search_assignments_response: Optional[shared.SearchAssignmentsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class GetProductPathParams:
-    product_id: str = field(default=None, metadata={'path_param': { 'field_name': 'productId', 'style': 'simple', 'explode': False }})
+    product_id: str = field(metadata={'path_param': { 'field_name': 'productId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetProductRequest:
-    path_params: GetProductPathParams = field(default=None)
+    path_params: GetProductPathParams = field()
     
 
 @dataclass
 class GetProductResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     product_model: Optional[shared.ProductModel] = field(default=None)
     product_model_haljson: Optional[shared.ProductModelHaljson] = field(default=None)
-    status_code: int = field(default=None)
     

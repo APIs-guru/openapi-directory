@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Crypto } from "./crypto";
 export declare class Content extends SpeakeasyBase {
     address: string;

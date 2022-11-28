@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Pipeline } from "./pipeline";
 import { Warning } from "./warning";
+
 
 
 // ReadPipelineResponse
@@ -9,9 +9,9 @@ import { Warning } from "./warning";
  * The <code>ReadPipelineResponse</code> structure.
 **/
 export class ReadPipelineResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Pipeline" })
+  @SpeakeasyMetadata({ data: "json, name=Pipeline" })
   pipeline?: Pipeline;
 
-  @Metadata({ data: "json, name=Warnings", elemType: shared.Warning })
+  @SpeakeasyMetadata({ data: "json, name=Warnings", elemType: Warning })
   warnings?: Warning[];
 }

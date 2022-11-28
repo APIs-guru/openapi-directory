@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { MetadataExport } from "./metadataexport";
 import { Restore } from "./restore";
 /**

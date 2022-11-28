@@ -1,116 +1,117 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateLaunchProfilePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=launchProfileId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=launchProfileId" })
   launchProfileId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=studioId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=studioId" })
   studioId: string;
 }
 
 
 export class UpdateLaunchProfileHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Client-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Client-Token" })
   xAmzClientToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class UpdateLaunchProfileRequestBodyStreamConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clipboardMode" })
+  @SpeakeasyMetadata({ data: "json, name=clipboardMode" })
   clipboardMode?: shared.StreamingClipboardModeEnum;
 
-  @Metadata({ data: "json, name=ec2InstanceTypes" })
+  @SpeakeasyMetadata({ data: "json, name=ec2InstanceTypes" })
   ec2InstanceTypes?: shared.StreamingInstanceTypeEnum[];
 
-  @Metadata({ data: "json, name=maxSessionLengthInMinutes" })
+  @SpeakeasyMetadata({ data: "json, name=maxSessionLengthInMinutes" })
   maxSessionLengthInMinutes?: number;
 
-  @Metadata({ data: "json, name=streamingImageIds" })
+  @SpeakeasyMetadata({ data: "json, name=streamingImageIds" })
   streamingImageIds?: string[];
 }
 
 
 export class UpdateLaunchProfileRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=launchProfileProtocolVersions" })
+  @SpeakeasyMetadata({ data: "json, name=launchProfileProtocolVersions" })
   launchProfileProtocolVersions?: string[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=streamConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=streamConfiguration" })
   streamConfiguration?: UpdateLaunchProfileRequestBodyStreamConfiguration;
 
-  @Metadata({ data: "json, name=studioComponentIds" })
+  @SpeakeasyMetadata({ data: "json, name=studioComponentIds" })
   studioComponentIds?: string[];
 }
 
 
 export class UpdateLaunchProfileRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateLaunchProfilePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdateLaunchProfileHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdateLaunchProfileRequestBody;
 }
 
 
 export class UpdateLaunchProfileResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   accessDeniedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   conflictException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerErrorException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceQuotaExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateLaunchProfileResponse?: shared.UpdateLaunchProfileResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationException?: any;
 }

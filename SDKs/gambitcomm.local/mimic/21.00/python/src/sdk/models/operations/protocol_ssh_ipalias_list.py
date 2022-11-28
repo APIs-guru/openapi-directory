@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class ProtocolSSHIpaliasListPathParams:
-    agent_num: int = field(default=None, metadata={'path_param': { 'field_name': 'agentNum', 'style': 'simple', 'explode': False }})
+    agent_num: int = field(metadata={'path_param': { 'field_name': 'agentNum', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ProtocolSSHIpaliasListRequest:
-    path_params: ProtocolSSHIpaliasListPathParams = field(default=None)
+    path_params: ProtocolSSHIpaliasListPathParams = field()
     
 
 @dataclass
 class ProtocolSSHIpaliasListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     ip_aliases: Optional[List[shared.IPAlias]] = field(default=None)
-    status_code: int = field(default=None)
     

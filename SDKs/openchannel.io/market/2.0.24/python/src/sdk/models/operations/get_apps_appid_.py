@@ -4,7 +4,7 @@ from typing import Optional
 
 @dataclass
 class GetAppsAppIDPathParams:
-    app_id: str = field(default=None, metadata={'path_param': { 'field_name': 'appId', 'style': 'simple', 'explode': False }})
+    app_id: str = field(metadata={'path_param': { 'field_name': 'appId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,13 +15,13 @@ class GetAppsAppIDQueryParams:
 
 @dataclass
 class GetAppsAppIDRequest:
-    path_params: GetAppsAppIDPathParams = field(default=None)
-    query_params: GetAppsAppIDQueryParams = field(default=None)
+    path_params: GetAppsAppIDPathParams = field()
+    query_params: GetAppsAppIDQueryParams = field()
     
 
 @dataclass
 class GetAppsAppIDResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

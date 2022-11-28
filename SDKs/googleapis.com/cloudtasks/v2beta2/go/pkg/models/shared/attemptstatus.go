@@ -1,5 +1,7 @@
 package shared
 
+// AttemptStatus
+// The status of a task attempt.
 type AttemptStatus struct {
 	DispatchTime   *string `json:"dispatchTime,omitempty"`
 	ResponseStatus *Status `json:"responseStatus,omitempty"`

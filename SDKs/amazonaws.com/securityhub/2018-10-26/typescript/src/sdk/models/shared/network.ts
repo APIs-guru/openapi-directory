@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NetworkDirectionEnum } from "./networkdirectionenum";
 import { PortRange } from "./portrange";
+
 
 
 // Network
@@ -8,39 +9,39 @@ import { PortRange } from "./portrange";
  * The details of network-related information about a finding.
 **/
 export class Network extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DestinationDomain" })
+  @SpeakeasyMetadata({ data: "json, name=DestinationDomain" })
   destinationDomain?: string;
 
-  @Metadata({ data: "json, name=DestinationIpV4" })
+  @SpeakeasyMetadata({ data: "json, name=DestinationIpV4" })
   destinationIpV4?: string;
 
-  @Metadata({ data: "json, name=DestinationIpV6" })
+  @SpeakeasyMetadata({ data: "json, name=DestinationIpV6" })
   destinationIpV6?: string;
 
-  @Metadata({ data: "json, name=DestinationPort" })
+  @SpeakeasyMetadata({ data: "json, name=DestinationPort" })
   destinationPort?: number;
 
-  @Metadata({ data: "json, name=Direction" })
+  @SpeakeasyMetadata({ data: "json, name=Direction" })
   direction?: NetworkDirectionEnum;
 
-  @Metadata({ data: "json, name=OpenPortRange" })
+  @SpeakeasyMetadata({ data: "json, name=OpenPortRange" })
   openPortRange?: PortRange;
 
-  @Metadata({ data: "json, name=Protocol" })
+  @SpeakeasyMetadata({ data: "json, name=Protocol" })
   protocol?: string;
 
-  @Metadata({ data: "json, name=SourceDomain" })
+  @SpeakeasyMetadata({ data: "json, name=SourceDomain" })
   sourceDomain?: string;
 
-  @Metadata({ data: "json, name=SourceIpV4" })
+  @SpeakeasyMetadata({ data: "json, name=SourceIpV4" })
   sourceIpV4?: string;
 
-  @Metadata({ data: "json, name=SourceIpV6" })
+  @SpeakeasyMetadata({ data: "json, name=SourceIpV6" })
   sourceIpV6?: string;
 
-  @Metadata({ data: "json, name=SourceMac" })
+  @SpeakeasyMetadata({ data: "json, name=SourceMac" })
   sourceMac?: string;
 
-  @Metadata({ data: "json, name=SourcePort" })
+  @SpeakeasyMetadata({ data: "json, name=SourcePort" })
   sourcePort?: number;
 }

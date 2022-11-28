@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // StartupConfigurationDto
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The startup configuration DTO.
 **/
 export class StartupConfigurationDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MetadataCountryCode" })
+  @SpeakeasyMetadata({ data: "json, name=MetadataCountryCode" })
   metadataCountryCode?: string;
 
-  @Metadata({ data: "json, name=PreferredMetadataLanguage" })
+  @SpeakeasyMetadata({ data: "json, name=PreferredMetadataLanguage" })
   preferredMetadataLanguage?: string;
 
-  @Metadata({ data: "json, name=UICulture" })
+  @SpeakeasyMetadata({ data: "json, name=UICulture" })
   uiCulture?: string;
 }

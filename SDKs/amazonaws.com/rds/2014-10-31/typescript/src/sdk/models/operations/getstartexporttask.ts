@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetStartExportTaskActionEnum {
     StartExportTask = "StartExportTask"
@@ -10,75 +11,75 @@ export enum GetStartExportTaskVersionEnum {
 
 
 export class GetStartExportTaskQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Action" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" })
   action: GetStartExportTaskActionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ExportOnly" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ExportOnly" })
   exportOnly?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ExportTaskIdentifier" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ExportTaskIdentifier" })
   exportTaskIdentifier: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=IamRoleArn" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=IamRoleArn" })
   iamRoleArn: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=KmsKeyId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=KmsKeyId" })
   kmsKeyId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=S3BucketName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=S3BucketName" })
   s3BucketName: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=S3Prefix" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=S3Prefix" })
   s3Prefix?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=SourceArn" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=SourceArn" })
   sourceArn: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" })
   version: GetStartExportTaskVersionEnum;
 }
 
 
 export class GetStartExportTaskHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class GetStartExportTaskRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetStartExportTaskQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetStartExportTaskHeaders;
 }
 
 
 export class GetStartExportTaskResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

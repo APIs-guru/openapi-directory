@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import googlecloudchannelv1media
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleCloudChannelV1MarketingInfo:
-    default_logo: Optional[googlecloudchannelv1media.GoogleCloudChannelV1Media] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'defaultLogo' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayName' }})
+    r"""GoogleCloudChannelV1MarketingInfo
+    Represents the marketing information for a Product, SKU or Offer.
+    """
+    
+    default_logo: Optional[GoogleCloudChannelV1Media] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('defaultLogo') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
     

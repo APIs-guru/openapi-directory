@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CancelReplicationTaskAssessmentRunMessage
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * <p/>
 **/
 export class CancelReplicationTaskAssessmentRunMessage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ReplicationTaskAssessmentRunArn" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicationTaskAssessmentRunArn" })
   replicationTaskAssessmentRunArn: string;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudVisionV1p1beta1TextDetectionParams
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Parameters for text detections. This is used to control TEXT_DETECTION and DOCUMENT_TEXT_DETECTION features.
 **/
 export class GoogleCloudVisionV1p1beta1TextDetectionParams extends SpeakeasyBase {
-  @Metadata({ data: "json, name=advancedOcrOptions" })
+  @SpeakeasyMetadata({ data: "json, name=advancedOcrOptions" })
   advancedOcrOptions?: string[];
 
-  @Metadata({ data: "json, name=enableTextDetectionConfidenceScore" })
+  @SpeakeasyMetadata({ data: "json, name=enableTextDetectionConfidenceScore" })
   enableTextDetectionConfidenceScore?: boolean;
 }

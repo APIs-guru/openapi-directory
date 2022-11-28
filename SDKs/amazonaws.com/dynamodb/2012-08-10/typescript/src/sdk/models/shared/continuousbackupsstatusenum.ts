@@ -1,6 +1,7 @@
 
 
+
 export enum ContinuousBackupsStatusEnum {
-    Enabled = "ENABLED"
-,    Disabled = "DISABLED"
+    Enabled = "ENABLED",
+    Disabled = "DISABLED"
 }

@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetChartInfoUsingGet1PathParams = /** @class */ (function (_super) {
     __extends(GetChartInfoUsingGet1PathParams, _super);
     function GetChartInfoUsingGet1PathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=speciesTypeKey" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=speciesTypeKey" }),
         __metadata("design:type", Number)
     ], GetChartInfoUsingGet1PathParams.prototype, "speciesTypeKey", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=termString" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=termString" }),
         __metadata("design:type", String)
     ], GetChartInfoUsingGet1PathParams.prototype, "termString", void 0);
     return GetChartInfoUsingGet1PathParams;
@@ -45,7 +45,7 @@ var GetChartInfoUsingGet1Request = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetChartInfoUsingGet1PathParams)
     ], GetChartInfoUsingGet1Request.prototype, "pathParams", void 0);
     return GetChartInfoUsingGet1Request;
@@ -57,15 +57,15 @@ var GetChartInfoUsingGet1Response = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetChartInfoUsingGet1Response.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetChartInfoUsingGet1Response.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetChartInfoUsingGet1Response.prototype, "statusCode", void 0);
     return GetChartInfoUsingGet1Response;

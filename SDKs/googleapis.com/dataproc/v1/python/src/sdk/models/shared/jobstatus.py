@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class JobStatusStateEnum(str, Enum):
     STATE_UNSPECIFIED = "STATE_UNSPECIFIED"
@@ -24,8 +26,12 @@ class JobStatusSubstateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class JobStatus:
-    details: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'details' }})
-    state: Optional[JobStatusStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
-    state_start_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stateStartTime' }})
-    substate: Optional[JobStatusSubstateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'substate' }})
+    r"""JobStatus
+    Dataproc job status.
+    """
+    
+    details: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('details') }})
+    state: Optional[JobStatusStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
+    state_start_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('stateStartTime') }})
+    substate: Optional[JobStatusSubstateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('substate') }})
     

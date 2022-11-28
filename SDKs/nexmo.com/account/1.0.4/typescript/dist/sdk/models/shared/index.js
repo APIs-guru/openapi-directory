@@ -7,6 +7,8 @@ export * from "./errorauthenticationfailed";
 export * from "./errorauthenticationfailedaccountbalance";
 export * from "./errorautoreloadnotenabled";
 export * from "./errorsecretidnotfound";
+export * from "./registeremailrequest";
+export * from "./registeremailresponse";
 export * from "./secretinfo";
 export * from "./secretmgmtlinks";
 export * from "./security";

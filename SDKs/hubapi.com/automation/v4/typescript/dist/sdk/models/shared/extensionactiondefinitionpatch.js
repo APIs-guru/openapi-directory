@@ -22,8 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { InputFieldDefinition } from "./inputfielddefinition";
+import { ActionLabels } from "./actionlabels";
 import { ObjectRequestOptions } from "./objectrequestoptions";
 // ExtensionActionDefinitionPatch
 /**
@@ -35,31 +36,31 @@ var ExtensionActionDefinitionPatch = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=actionUrl" }),
+        SpeakeasyMetadata({ data: "json, name=actionUrl" }),
         __metadata("design:type", String)
     ], ExtensionActionDefinitionPatch.prototype, "actionUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=inputFieldDependencies" }),
+        SpeakeasyMetadata({ data: "json, name=inputFieldDependencies" }),
         __metadata("design:type", Array)
     ], ExtensionActionDefinitionPatch.prototype, "inputFieldDependencies", void 0);
     __decorate([
-        Metadata({ data: "json, name=inputFields", elemType: shared.InputFieldDefinition }),
+        SpeakeasyMetadata({ data: "json, name=inputFields", elemType: InputFieldDefinition }),
         __metadata("design:type", Array)
     ], ExtensionActionDefinitionPatch.prototype, "inputFields", void 0);
     __decorate([
-        Metadata({ data: "json, name=labels", elemType: shared.ActionLabels }),
+        SpeakeasyMetadata({ data: "json, name=labels", elemType: ActionLabels }),
         __metadata("design:type", Map)
     ], ExtensionActionDefinitionPatch.prototype, "labels", void 0);
     __decorate([
-        Metadata({ data: "json, name=objectRequestOptions" }),
+        SpeakeasyMetadata({ data: "json, name=objectRequestOptions" }),
         __metadata("design:type", ObjectRequestOptions)
     ], ExtensionActionDefinitionPatch.prototype, "objectRequestOptions", void 0);
     __decorate([
-        Metadata({ data: "json, name=objectTypes" }),
+        SpeakeasyMetadata({ data: "json, name=objectTypes" }),
         __metadata("design:type", Array)
     ], ExtensionActionDefinitionPatch.prototype, "objectTypes", void 0);
     __decorate([
-        Metadata({ data: "json, name=published" }),
+        SpeakeasyMetadata({ data: "json, name=published" }),
         __metadata("design:type", Boolean)
     ], ExtensionActionDefinitionPatch.prototype, "published", void 0);
     return ExtensionActionDefinitionPatch;

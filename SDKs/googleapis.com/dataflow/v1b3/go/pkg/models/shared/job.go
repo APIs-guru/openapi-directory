@@ -44,6 +44,8 @@ const (
 	JobTypeEnumJobTypeStreaming JobTypeEnum = "JOB_TYPE_STREAMING"
 )
 
+// Job
+// Defines a job to be run by the Cloud Dataflow service. Do not enter confidential information when you supply string values using the API.
 type Job struct {
 	ClientRequestID       *string                `json:"clientRequestId,omitempty"`
 	CreateTime            *string                `json:"createTime,omitempty"`
@@ -51,6 +53,36 @@ type Job struct {
 	CurrentState          *JobCurrentStateEnum   `json:"currentState,omitempty"`
 	CurrentStateTime      *string                `json:"currentStateTime,omitempty"`
 	Environment           *Environment           `json:"environment,omitempty"`
+	ExecutionInfo         *JobExecutionInfo      `json:"executionInfo,omitempty"`
+	ID                    *string                `json:"id,omitempty"`
+	JobMetadata           *JobMetadata           `json:"jobMetadata,omitempty"`
+	Labels                map[string]string      `json:"labels,omitempty"`
+	Location              *string                `json:"location,omitempty"`
+	Name                  *string                `json:"name,omitempty"`
+	PipelineDescription   *PipelineDescription   `json:"pipelineDescription,omitempty"`
+	ProjectID             *string                `json:"projectId,omitempty"`
+	ReplaceJobID          *string                `json:"replaceJobId,omitempty"`
+	ReplacedByJobID       *string                `json:"replacedByJobId,omitempty"`
+	RequestedState        *JobRequestedStateEnum `json:"requestedState,omitempty"`
+	SatisfiesPzs          *bool                  `json:"satisfiesPzs,omitempty"`
+	StageStates           []ExecutionStageState  `json:"stageStates,omitempty"`
+	StartTime             *string                `json:"startTime,omitempty"`
+	Steps                 []Step                 `json:"steps,omitempty"`
+	StepsLocation         *string                `json:"stepsLocation,omitempty"`
+	TempFiles             []string               `json:"tempFiles,omitempty"`
+	TransformNameMapping  map[string]string      `json:"transformNameMapping,omitempty"`
+	Type                  *JobTypeEnum           `json:"type,omitempty"`
+}
+
+// JobInput
+// Defines a job to be run by the Cloud Dataflow service. Do not enter confidential information when you supply string values using the API.
+type JobInput struct {
+	ClientRequestID       *string                `json:"clientRequestId,omitempty"`
+	CreateTime            *string                `json:"createTime,omitempty"`
+	CreatedFromSnapshotID *string                `json:"createdFromSnapshotId,omitempty"`
+	CurrentState          *JobCurrentStateEnum   `json:"currentState,omitempty"`
+	CurrentStateTime      *string                `json:"currentStateTime,omitempty"`
+	Environment           *EnvironmentInput      `json:"environment,omitempty"`
 	ExecutionInfo         *JobExecutionInfo      `json:"executionInfo,omitempty"`
 	ID                    *string                `json:"id,omitempty"`
 	JobMetadata           *JobMetadata           `json:"jobMetadata,omitempty"`

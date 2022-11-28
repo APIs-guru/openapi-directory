@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -24,14 +25,14 @@ class PeopleContactGroupsListQueryParams:
 
 @dataclass
 class PeopleContactGroupsListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class PeopleContactGroupsListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -42,13 +43,13 @@ class PeopleContactGroupsListSecurity:
 
 @dataclass
 class PeopleContactGroupsListRequest:
-    query_params: PeopleContactGroupsListQueryParams = field(default=None)
-    security: PeopleContactGroupsListSecurity = field(default=None)
+    query_params: PeopleContactGroupsListQueryParams = field()
+    security: PeopleContactGroupsListSecurity = field()
     
 
 @dataclass
 class PeopleContactGroupsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_contact_groups_response: Optional[shared.ListContactGroupsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

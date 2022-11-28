@@ -1,9 +1,10 @@
 
 
+
 export enum PlayCommandEnum {
-    PlayNow = "PlayNow"
-,    PlayNext = "PlayNext"
-,    PlayLast = "PlayLast"
-,    PlayInstantMix = "PlayInstantMix"
-,    PlayShuffle = "PlayShuffle"
+    PlayNow = "PlayNow",
+    PlayNext = "PlayNext",
+    PlayLast = "PlayLast",
+    PlayInstantMix = "PlayInstantMix",
+    PlayShuffle = "PlayShuffle"
 }

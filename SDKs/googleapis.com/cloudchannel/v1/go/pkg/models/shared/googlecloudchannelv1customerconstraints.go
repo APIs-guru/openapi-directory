@@ -17,6 +17,8 @@ const (
 	GoogleCloudChannelV1CustomerConstraintsPromotionalOrderTypesEnumPromotionSwitch            GoogleCloudChannelV1CustomerConstraintsPromotionalOrderTypesEnum = "PROMOTION_SWITCH"
 )
 
+// GoogleCloudChannelV1CustomerConstraints
+// Represents constraints required to purchase the Offer for a customer.
 type GoogleCloudChannelV1CustomerConstraints struct {
 	AllowedCustomerTypes  []GoogleCloudChannelV1CustomerConstraintsAllowedCustomerTypesEnum  `json:"allowedCustomerTypes,omitempty"`
 	AllowedRegions        []string                                                           `json:"allowedRegions,omitempty"`

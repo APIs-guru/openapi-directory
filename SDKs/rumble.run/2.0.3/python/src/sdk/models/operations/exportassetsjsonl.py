@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 from typing import Optional
+from sdk.models import shared
 
 
 @dataclass
@@ -10,18 +11,18 @@ class ExportAssetsJsonlQueryParams:
 
 @dataclass
 class ExportAssetsJsonlSecurity:
-    bearer_auth: shared.SchemeBearerAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_auth: shared.SchemeBearerAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class ExportAssetsJsonlRequest:
-    query_params: ExportAssetsJsonlQueryParams = field(default=None)
-    security: ExportAssetsJsonlSecurity = field(default=None)
+    query_params: ExportAssetsJsonlQueryParams = field()
+    security: ExportAssetsJsonlSecurity = field()
     
 
 @dataclass
 class ExportAssetsJsonlResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     export_assets_jsonl_200_application_json_binary_string: Optional[bytes] = field(default=None)
     

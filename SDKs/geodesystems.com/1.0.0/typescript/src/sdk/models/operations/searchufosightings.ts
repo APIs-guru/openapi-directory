@@ -1,103 +1,104 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SearchUfoSightingsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=changedate.from" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=changedate.from" })
   changedateFrom?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=changedate.to" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=changedate.to" })
   changedateTo?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=createdate.from" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=createdate.from" })
   createdateFrom?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=createdate.to" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=createdate.to" })
   createdateTo?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=description" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=description" })
   description?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filesuffix" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filesuffix" })
   filesuffix?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fromdate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fromdate" })
   fromdate?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=group" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=group" })
   group?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=max" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=max" })
   max?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxlatitude" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxlatitude" })
   maxlatitude?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxlongitude" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxlongitude" })
   maxlongitude?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=minlatitude" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=minlatitude" })
   minlatitude?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=minlongitude" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=minlongitude" })
   minlongitude?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name" })
   name?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search.db_ufo_sightings.city" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_ufo_sightings.city" })
   searchDbUfoSightingsCity?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search.db_ufo_sightings.comments" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_ufo_sightings.comments" })
   searchDbUfoSightingsComments?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search.db_ufo_sightings.country" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_ufo_sightings.country" })
   searchDbUfoSightingsCountry?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search.db_ufo_sightings.date_posted" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_ufo_sightings.date_posted" })
   searchDbUfoSightingsDatePosted?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search.db_ufo_sightings.datetime" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_ufo_sightings.datetime" })
   searchDbUfoSightingsDatetime?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search.db_ufo_sightings.duration_hours_min" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_ufo_sightings.duration_hours_min" })
   searchDbUfoSightingsDurationHoursMin?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search.db_ufo_sightings.duration_seconds" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_ufo_sightings.duration_seconds" })
   searchDbUfoSightingsDurationSeconds?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search.db_ufo_sightings.latitude" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_ufo_sightings.latitude" })
   searchDbUfoSightingsLatitude?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search.db_ufo_sightings.longitude" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_ufo_sightings.longitude" })
   searchDbUfoSightingsLongitude?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search.db_ufo_sightings.shape" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_ufo_sightings.shape" })
   searchDbUfoSightingsShape?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search.db_ufo_sightings.state" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_ufo_sightings.state" })
   searchDbUfoSightingsState?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=skip" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=skip" })
   skip?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=text" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=text" })
   text?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=todate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=todate" })
   todate?: Date;
 }
 
 
 export class SearchUfoSightingsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: SearchUfoSightingsQueryParams;
 }
 
 
 export class SearchUfoSightingsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ListAssociatedAttributeGroupsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attributeGroups" })
+  @SpeakeasyMetadata({ data: "json, name=attributeGroups" })
   attributeGroups?: string[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

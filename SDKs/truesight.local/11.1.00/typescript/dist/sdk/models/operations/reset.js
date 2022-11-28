@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ResetPathParams = /** @class */ (function (_super) {
     __extends(ResetPathParams, _super);
     function ResetPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=deviceId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=deviceId" }),
         __metadata("design:type", Number)
     ], ResetPathParams.prototype, "deviceId", void 0);
     return ResetPathParams;
@@ -41,11 +41,11 @@ var ResetQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=monitorClass" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=monitorClass" }),
         __metadata("design:type", String)
     ], ResetQueryParams.prototype, "monitorClass", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=monitorSid" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=monitorSid" }),
         __metadata("design:type", String)
     ], ResetQueryParams.prototype, "monitorSid", void 0);
     return ResetQueryParams;
@@ -57,11 +57,11 @@ var ResetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ResetPathParams)
     ], ResetRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ResetQueryParams)
     ], ResetRequest.prototype, "queryParams", void 0);
     return ResetRequest;
@@ -73,15 +73,15 @@ var ResetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], ResetResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ResetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ResetResponse.prototype, "statusCode", void 0);
     return ResetResponse;

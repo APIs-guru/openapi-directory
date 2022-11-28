@@ -1,106 +1,107 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SearchCampaignDonorsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=changedate.from" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=changedate.from" })
   changedateFrom?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=changedate.to" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=changedate.to" })
   changedateTo?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=createdate.from" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=createdate.from" })
   createdateFrom?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=createdate.to" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=createdate.to" })
   createdateTo?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=description" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=description" })
   description?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filesuffix" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filesuffix" })
   filesuffix?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fromdate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fromdate" })
   fromdate?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=group" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=group" })
   group?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=max" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=max" })
   max?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxlatitude" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxlatitude" })
   maxlatitude?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxlongitude" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxlongitude" })
   maxlongitude?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=minlatitude" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=minlatitude" })
   minlatitude?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=minlongitude" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=minlongitude" })
   minlongitude?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name" })
   name?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search.db_campaign_donors.amount" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_campaign_donors.amount" })
   searchDbCampaignDonorsAmount?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search.db_campaign_donors.city" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_campaign_donors.city" })
   searchDbCampaignDonorsCity?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search.db_campaign_donors.committee" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_campaign_donors.committee" })
   searchDbCampaignDonorsCommittee?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search.db_campaign_donors.date" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_campaign_donors.date" })
   searchDbCampaignDonorsDate?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search.db_campaign_donors.donor" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_campaign_donors.donor" })
   searchDbCampaignDonorsDonor?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search.db_campaign_donors.employer" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_campaign_donors.employer" })
   searchDbCampaignDonorsEmployer?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search.db_campaign_donors.gender" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_campaign_donors.gender" })
   searchDbCampaignDonorsGender?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search.db_campaign_donors.location" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_campaign_donors.location" })
   searchDbCampaignDonorsLocation?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search.db_campaign_donors.occupation" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_campaign_donors.occupation" })
   searchDbCampaignDonorsOccupation?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search.db_campaign_donors.party" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_campaign_donors.party" })
   searchDbCampaignDonorsParty?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search.db_campaign_donors.state" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_campaign_donors.state" })
   searchDbCampaignDonorsState?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search.db_campaign_donors.zip_code" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_campaign_donors.zip_code" })
   searchDbCampaignDonorsZipCode?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=skip" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=skip" })
   skip?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=text" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=text" })
   text?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=todate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=todate" })
   todate?: Date;
 }
 
 
 export class SearchCampaignDonorsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: SearchCampaignDonorsQueryParams;
 }
 
 
 export class SearchCampaignDonorsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

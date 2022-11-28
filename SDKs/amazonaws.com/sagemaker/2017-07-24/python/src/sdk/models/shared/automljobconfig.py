@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import automljobcompletioncriteria
-from . import automlsecurityconfig
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AutoMlJobConfig:
-    completion_criteria: Optional[automljobcompletioncriteria.AutoMlJobCompletionCriteria] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CompletionCriteria' }})
-    security_config: Optional[automlsecurityconfig.AutoMlSecurityConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SecurityConfig' }})
+    r"""AutoMlJobConfig
+    A collection of settings used for an AutoML job.
+    """
+    
+    completion_criteria: Optional[AutoMlJobCompletionCriteria] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CompletionCriteria') }})
+    security_config: Optional[AutoMlSecurityConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SecurityConfig') }})
     

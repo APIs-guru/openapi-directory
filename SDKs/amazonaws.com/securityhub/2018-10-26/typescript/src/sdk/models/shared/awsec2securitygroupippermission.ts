@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsEc2SecurityGroupIpRange } from "./awsec2securitygroupiprange";
 import { AwsEc2SecurityGroupIpv6Range } from "./awsec2securitygroupipv6range";
 import { AwsEc2SecurityGroupPrefixListId } from "./awsec2securitygroupprefixlistid";
 import { AwsEc2SecurityGroupUserIdGroupPair } from "./awsec2securitygroupuseridgrouppair";
+
 
 
 // AwsEc2SecurityGroupIpPermission
@@ -11,24 +11,24 @@ import { AwsEc2SecurityGroupUserIdGroupPair } from "./awsec2securitygroupuseridg
  * An IP permission for an EC2 security group.
 **/
 export class AwsEc2SecurityGroupIpPermission extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FromPort" })
+  @SpeakeasyMetadata({ data: "json, name=FromPort" })
   fromPort?: number;
 
-  @Metadata({ data: "json, name=IpProtocol" })
+  @SpeakeasyMetadata({ data: "json, name=IpProtocol" })
   ipProtocol?: string;
 
-  @Metadata({ data: "json, name=IpRanges", elemType: shared.AwsEc2SecurityGroupIpRange })
+  @SpeakeasyMetadata({ data: "json, name=IpRanges", elemType: AwsEc2SecurityGroupIpRange })
   ipRanges?: AwsEc2SecurityGroupIpRange[];
 
-  @Metadata({ data: "json, name=Ipv6Ranges", elemType: shared.AwsEc2SecurityGroupIpv6Range })
+  @SpeakeasyMetadata({ data: "json, name=Ipv6Ranges", elemType: AwsEc2SecurityGroupIpv6Range })
   ipv6Ranges?: AwsEc2SecurityGroupIpv6Range[];
 
-  @Metadata({ data: "json, name=PrefixListIds", elemType: shared.AwsEc2SecurityGroupPrefixListId })
+  @SpeakeasyMetadata({ data: "json, name=PrefixListIds", elemType: AwsEc2SecurityGroupPrefixListId })
   prefixListIds?: AwsEc2SecurityGroupPrefixListId[];
 
-  @Metadata({ data: "json, name=ToPort" })
+  @SpeakeasyMetadata({ data: "json, name=ToPort" })
   toPort?: number;
 
-  @Metadata({ data: "json, name=UserIdGroupPairs", elemType: shared.AwsEc2SecurityGroupUserIdGroupPair })
+  @SpeakeasyMetadata({ data: "json, name=UserIdGroupPairs", elemType: AwsEc2SecurityGroupUserIdGroupPair })
   userIdGroupPairs?: AwsEc2SecurityGroupUserIdGroupPair[];
 }

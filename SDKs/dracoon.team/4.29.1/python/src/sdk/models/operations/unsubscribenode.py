@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class UnsubscribeNodePathParams:
-    node_id: int = field(default=None, metadata={'path_param': { 'field_name': 'node_id', 'style': 'simple', 'explode': False }})
+    node_id: int = field(metadata={'path_param': { 'field_name': 'node_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,13 +15,13 @@ class UnsubscribeNodeHeaders:
 
 @dataclass
 class UnsubscribeNodeRequest:
-    path_params: UnsubscribeNodePathParams = field(default=None)
-    headers: UnsubscribeNodeHeaders = field(default=None)
+    headers: UnsubscribeNodeHeaders = field()
+    path_params: UnsubscribeNodePathParams = field()
     
 
 @dataclass
 class UnsubscribeNodeResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

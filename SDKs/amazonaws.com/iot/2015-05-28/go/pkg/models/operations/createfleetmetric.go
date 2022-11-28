@@ -18,6 +18,8 @@ type CreateFleetMetricHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateFleetMetricRequestBodyAggregationType
+// The type of aggregation queries.
 type CreateFleetMetricRequestBodyAggregationType struct {
 	Name   *shared.AggregationTypeNameEnum `json:"name,omitempty"`
 	Values []string                        `json:"values,omitempty"`

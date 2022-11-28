@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GenerateUploadUrlResponse
 /**
  * Response of `GenerateSourceUploadUrl` method.
@@ -33,7 +33,7 @@ var GenerateUploadUrlResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=uploadUrl" }),
+        SpeakeasyMetadata({ data: "json, name=uploadUrl" }),
         __metadata("design:type", String)
     ], GenerateUploadUrlResponse.prototype, "uploadUrl", void 0);
     return GenerateUploadUrlResponse;

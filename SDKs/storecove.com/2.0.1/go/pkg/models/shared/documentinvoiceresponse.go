@@ -11,6 +11,8 @@ const (
 	DocumentInvoiceResponseResponseCodeEnumPd DocumentInvoiceResponseResponseCodeEnum = "PD"
 )
 
+// DocumentInvoiceResponse
+// The invoice response to send.
 type DocumentInvoiceResponse struct {
 	Clarifications []InvoiceResponseClarification          `json:"clarifications,omitempty"`
 	EffectiveDate  *string                                 `json:"effectiveDate,omitempty"`

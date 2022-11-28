@@ -1,8 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import geometry
-from . import properties
+from sdk import utils
+from . import *
 
 class GeoFacilityReadResponseTypeEnum(str, Enum):
     FEATURE = "Feature"
@@ -11,7 +11,7 @@ class GeoFacilityReadResponseTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GeoFacilityReadResponse:
-    geometry: geometry.Geometry = field(default=None, metadata={'dataclasses_json': { 'field_name': 'geometry' }})
-    properties: properties.Properties = field(default=None, metadata={'dataclasses_json': { 'field_name': 'properties' }})
-    type: GeoFacilityReadResponseTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    geometry: Geometry = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('geometry') }})
+    properties: Properties = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('properties') }})
+    type: GeoFacilityReadResponseTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

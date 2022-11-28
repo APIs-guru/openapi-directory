@@ -40,7 +40,7 @@ type OsloginUsersSSHPublicKeysCreateSecurity struct {
 type OsloginUsersSSHPublicKeysCreateRequest struct {
 	PathParams  OsloginUsersSSHPublicKeysCreatePathParams
 	QueryParams OsloginUsersSSHPublicKeysCreateQueryParams
-	Request     *shared.SSHPublicKey `request:"mediaType=application/json"`
+	Request     *shared.SSHPublicKeyInput `request:"mediaType=application/json"`
 	Security    OsloginUsersSSHPublicKeysCreateSecurity
 }
 

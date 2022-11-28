@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetOperationsLogStatusNumEnum(str, Enum):
@@ -12,17 +13,17 @@ class GetOperationsLogStatusNumEnum(str, Enum):
 
 @dataclass
 class GetOperationsLogQueryParams:
+    api_key: str = field(metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
     amendment_indicator: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'amendment_indicator', 'style': 'form', 'explode': True }})
-    api_key: str = field(default=None, metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
     beginning_image_number: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'beginning_image_number', 'style': 'form', 'explode': True }})
     candidate_committee_id: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'candidate_committee_id', 'style': 'form', 'explode': True }})
     form_type: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'form_type', 'style': 'form', 'explode': True }})
-    max_coverage_end_date: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'max_coverage_end_date', 'style': 'form', 'explode': True }})
-    max_receipt_date: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'max_receipt_date', 'style': 'form', 'explode': True }})
-    max_transaction_data_complete_date: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'max_transaction_data_complete_date', 'style': 'form', 'explode': True }})
-    min_coverage_end_date: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'min_coverage_end_date', 'style': 'form', 'explode': True }})
-    min_receipt_date: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'min_receipt_date', 'style': 'form', 'explode': True }})
-    min_transaction_data_complete_date: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'min_transaction_data_complete_date', 'style': 'form', 'explode': True }})
+    max_coverage_end_date: Optional[date] = field(default=None, metadata={'query_param': { 'field_name': 'max_coverage_end_date', 'style': 'form', 'explode': True }})
+    max_receipt_date: Optional[date] = field(default=None, metadata={'query_param': { 'field_name': 'max_receipt_date', 'style': 'form', 'explode': True }})
+    max_transaction_data_complete_date: Optional[date] = field(default=None, metadata={'query_param': { 'field_name': 'max_transaction_data_complete_date', 'style': 'form', 'explode': True }})
+    min_coverage_end_date: Optional[date] = field(default=None, metadata={'query_param': { 'field_name': 'min_coverage_end_date', 'style': 'form', 'explode': True }})
+    min_receipt_date: Optional[date] = field(default=None, metadata={'query_param': { 'field_name': 'min_receipt_date', 'style': 'form', 'explode': True }})
+    min_transaction_data_complete_date: Optional[date] = field(default=None, metadata={'query_param': { 'field_name': 'min_transaction_data_complete_date', 'style': 'form', 'explode': True }})
     page: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'page', 'style': 'form', 'explode': True }})
     per_page: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'per_page', 'style': 'form', 'explode': True }})
     report_type: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'report_type', 'style': 'form', 'explode': True }})
@@ -36,12 +37,12 @@ class GetOperationsLogQueryParams:
 
 @dataclass
 class GetOperationsLogRequest:
-    query_params: GetOperationsLogQueryParams = field(default=None)
+    query_params: GetOperationsLogQueryParams = field()
     
 
 @dataclass
 class GetOperationsLogResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operations_log_page: Optional[shared.OperationsLogPage] = field(default=None)
-    status_code: int = field(default=None)
     

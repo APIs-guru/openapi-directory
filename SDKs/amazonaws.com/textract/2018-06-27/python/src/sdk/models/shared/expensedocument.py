@@ -1,14 +1,18 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import lineitemgroup
-from . import expensefield
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ExpenseDocument:
-    expense_index: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ExpenseIndex' }})
-    line_item_groups: Optional[List[lineitemgroup.LineItemGroup]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LineItemGroups' }})
-    summary_fields: Optional[List[expensefield.ExpenseField]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SummaryFields' }})
+    r"""ExpenseDocument
+    The structure holding all the information returned by AnalyzeExpense
+    """
+    
+    expense_index: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ExpenseIndex') }})
+    line_item_groups: Optional[List[LineItemGroup]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('LineItemGroups') }})
+    summary_fields: Optional[List[ExpenseField]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SummaryFields') }})
     

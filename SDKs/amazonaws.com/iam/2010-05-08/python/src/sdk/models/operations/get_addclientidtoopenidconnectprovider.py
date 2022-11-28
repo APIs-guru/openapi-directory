@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetAddClientIDToOpenIDConnectProviderActionEnum(str, Enum):
     ADD_CLIENT_ID_TO_OPEN_ID_CONNECT_PROVIDER = "AddClientIDToOpenIDConnectProvider"
@@ -10,10 +14,10 @@ class GetAddClientIDToOpenIDConnectProviderVersionEnum(str, Enum):
 
 @dataclass
 class GetAddClientIDToOpenIDConnectProviderQueryParams:
-    action: GetAddClientIDToOpenIDConnectProviderActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    client_id: str = field(default=None, metadata={'query_param': { 'field_name': 'ClientID', 'style': 'form', 'explode': True }})
-    open_id_connect_provider_arn: str = field(default=None, metadata={'query_param': { 'field_name': 'OpenIDConnectProviderArn', 'style': 'form', 'explode': True }})
-    version: GetAddClientIDToOpenIDConnectProviderVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetAddClientIDToOpenIDConnectProviderActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    client_id: str = field(metadata={'query_param': { 'field_name': 'ClientID', 'style': 'form', 'explode': True }})
+    open_id_connect_provider_arn: str = field(metadata={'query_param': { 'field_name': 'OpenIDConnectProviderArn', 'style': 'form', 'explode': True }})
+    version: GetAddClientIDToOpenIDConnectProviderVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetAddClientIDToOpenIDConnectProviderHeaders:
 
 @dataclass
 class GetAddClientIDToOpenIDConnectProviderRequest:
-    query_params: GetAddClientIDToOpenIDConnectProviderQueryParams = field(default=None)
-    headers: GetAddClientIDToOpenIDConnectProviderHeaders = field(default=None)
+    headers: GetAddClientIDToOpenIDConnectProviderHeaders = field()
+    query_params: GetAddClientIDToOpenIDConnectProviderQueryParams = field()
     
 
 @dataclass
 class GetAddClientIDToOpenIDConnectProviderResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

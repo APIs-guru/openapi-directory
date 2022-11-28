@@ -24,6 +24,8 @@ const (
 	SetV2LoggingLevelRequestBodyLogLevelEnumDisabled SetV2LoggingLevelRequestBodyLogLevelEnum = "DISABLED"
 )
 
+// SetV2LoggingLevelRequestBodyLogTarget
+// A log target.
 type SetV2LoggingLevelRequestBodyLogTarget struct {
 	TargetName *string                   `json:"targetName,omitempty"`
 	TargetType *shared.LogTargetTypeEnum `json:"targetType,omitempty"`

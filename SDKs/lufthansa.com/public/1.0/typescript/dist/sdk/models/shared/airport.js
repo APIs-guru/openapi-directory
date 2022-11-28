@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Name } from "./name";
 import { Coordinate } from "./coordinate";
 // AirportNames
 /**
@@ -35,7 +35,7 @@ var AirportNames = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Name", elemType: shared.Name }),
+        SpeakeasyMetadata({ data: "json, name=Name", elemType: Name }),
         __metadata("design:type", Array)
     ], AirportNames.prototype, "name", void 0);
     return AirportNames;
@@ -51,7 +51,7 @@ var AirportPosition = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Coordinate" }),
+        SpeakeasyMetadata({ data: "json, name=Coordinate" }),
         __metadata("design:type", Coordinate)
     ], AirportPosition.prototype, "coordinate", void 0);
     return AirportPosition;
@@ -67,35 +67,35 @@ var Airport = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AirportCode" }),
+        SpeakeasyMetadata({ data: "json, name=AirportCode" }),
         __metadata("design:type", String)
     ], Airport.prototype, "airportCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=CityCode" }),
+        SpeakeasyMetadata({ data: "json, name=CityCode" }),
         __metadata("design:type", String)
     ], Airport.prototype, "cityCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=CountryCode" }),
+        SpeakeasyMetadata({ data: "json, name=CountryCode" }),
         __metadata("design:type", String)
     ], Airport.prototype, "countryCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=LocationType" }),
+        SpeakeasyMetadata({ data: "json, name=LocationType" }),
         __metadata("design:type", String)
     ], Airport.prototype, "locationType", void 0);
     __decorate([
-        Metadata({ data: "json, name=Names" }),
+        SpeakeasyMetadata({ data: "json, name=Names" }),
         __metadata("design:type", AirportNames)
     ], Airport.prototype, "names", void 0);
     __decorate([
-        Metadata({ data: "json, name=Position" }),
+        SpeakeasyMetadata({ data: "json, name=Position" }),
         __metadata("design:type", AirportPosition)
     ], Airport.prototype, "position", void 0);
     __decorate([
-        Metadata({ data: "json, name=TimeZoneId" }),
+        SpeakeasyMetadata({ data: "json, name=TimeZoneId" }),
         __metadata("design:type", String)
     ], Airport.prototype, "timeZoneId", void 0);
     __decorate([
-        Metadata({ data: "json, name=UtcOffset" }),
+        SpeakeasyMetadata({ data: "json, name=UtcOffset" }),
         __metadata("design:type", Number)
     ], Airport.prototype, "utcOffset", void 0);
     return Airport;

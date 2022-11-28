@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// DelegatedAdministrator
+// Contains information about the delegated administrator.
 type DelegatedAdministrator struct {
 	Arn                   *string                  `json:"Arn,omitempty"`
 	DelegationEnabledDate *time.Time               `json:"DelegationEnabledDate,omitempty"`

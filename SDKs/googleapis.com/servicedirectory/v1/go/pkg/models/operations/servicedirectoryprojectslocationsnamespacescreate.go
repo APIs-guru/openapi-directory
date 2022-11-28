@@ -31,7 +31,7 @@ type ServicedirectoryProjectsLocationsNamespacesCreateSecurity struct {
 type ServicedirectoryProjectsLocationsNamespacesCreateRequest struct {
 	PathParams  ServicedirectoryProjectsLocationsNamespacesCreatePathParams
 	QueryParams ServicedirectoryProjectsLocationsNamespacesCreateQueryParams
-	Request     *shared.Namespace `request:"mediaType=application/json"`
+	Request     *shared.NamespaceInput `request:"mediaType=application/json"`
 	Security    ServicedirectoryProjectsLocationsNamespacesCreateSecurity
 }
 

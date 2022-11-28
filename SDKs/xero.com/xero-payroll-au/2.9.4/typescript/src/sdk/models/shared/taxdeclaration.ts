@@ -1,55 +1,104 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EmploymentBasisEnum } from "./employmentbasisenum";
 import { ResidencyStatusEnum } from "./residencystatusenum";
 import { TfnExemptionTypeEnum } from "./tfnexemptiontypeenum";
 
 
+
 export class TaxDeclaration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApprovedWithholdingVariationPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=ApprovedWithholdingVariationPercentage" })
   approvedWithholdingVariationPercentage?: number;
 
-  @Metadata({ data: "json, name=AustralianResidentForTaxPurposes" })
+  @SpeakeasyMetadata({ data: "json, name=AustralianResidentForTaxPurposes" })
   australianResidentForTaxPurposes?: boolean;
 
-  @Metadata({ data: "json, name=EligibleToReceiveLeaveLoading" })
+  @SpeakeasyMetadata({ data: "json, name=EligibleToReceiveLeaveLoading" })
   eligibleToReceiveLeaveLoading?: boolean;
 
-  @Metadata({ data: "json, name=EmployeeID" })
+  @SpeakeasyMetadata({ data: "json, name=EmployeeID" })
   employeeId?: string;
 
-  @Metadata({ data: "json, name=EmploymentBasis" })
+  @SpeakeasyMetadata({ data: "json, name=EmploymentBasis" })
   employmentBasis?: EmploymentBasisEnum;
 
-  @Metadata({ data: "json, name=HasHELPDebt" })
+  @SpeakeasyMetadata({ data: "json, name=HasHELPDebt" })
   hasHelpDebt?: boolean;
 
-  @Metadata({ data: "json, name=HasSFSSDebt" })
+  @SpeakeasyMetadata({ data: "json, name=HasSFSSDebt" })
   hasSfssDebt?: boolean;
 
-  @Metadata({ data: "json, name=HasStudentStartupLoan" })
+  @SpeakeasyMetadata({ data: "json, name=HasStudentStartupLoan" })
   hasStudentStartupLoan?: boolean;
 
-  @Metadata({ data: "json, name=HasTradeSupportLoanDebt" })
+  @SpeakeasyMetadata({ data: "json, name=HasTradeSupportLoanDebt" })
   hasTradeSupportLoanDebt?: boolean;
 
-  @Metadata({ data: "json, name=ResidencyStatus" })
+  @SpeakeasyMetadata({ data: "json, name=ResidencyStatus" })
   residencyStatus?: ResidencyStatusEnum;
 
-  @Metadata({ data: "json, name=TFNExemptionType" })
+  @SpeakeasyMetadata({ data: "json, name=TFNExemptionType" })
   tfnExemptionType?: TfnExemptionTypeEnum;
 
-  @Metadata({ data: "json, name=TaxFileNumber" })
+  @SpeakeasyMetadata({ data: "json, name=TaxFileNumber" })
   taxFileNumber?: string;
 
-  @Metadata({ data: "json, name=TaxFreeThresholdClaimed" })
+  @SpeakeasyMetadata({ data: "json, name=TaxFreeThresholdClaimed" })
   taxFreeThresholdClaimed?: boolean;
 
-  @Metadata({ data: "json, name=TaxOffsetEstimatedAmount" })
+  @SpeakeasyMetadata({ data: "json, name=TaxOffsetEstimatedAmount" })
   taxOffsetEstimatedAmount?: number;
 
-  @Metadata({ data: "json, name=UpdatedDateUTC" })
+  @SpeakeasyMetadata({ data: "json, name=UpdatedDateUTC" })
   updatedDateUtc?: string;
 
-  @Metadata({ data: "json, name=UpwardVariationTaxWithholdingAmount" })
+  @SpeakeasyMetadata({ data: "json, name=UpwardVariationTaxWithholdingAmount" })
+  upwardVariationTaxWithholdingAmount?: number;
+}
+
+
+export class TaxDeclarationInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=ApprovedWithholdingVariationPercentage" })
+  approvedWithholdingVariationPercentage?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=AustralianResidentForTaxPurposes" })
+  australianResidentForTaxPurposes?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=EligibleToReceiveLeaveLoading" })
+  eligibleToReceiveLeaveLoading?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=EmployeeID" })
+  employeeId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=EmploymentBasis" })
+  employmentBasis?: EmploymentBasisEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=HasHELPDebt" })
+  hasHelpDebt?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=HasSFSSDebt" })
+  hasSfssDebt?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=HasStudentStartupLoan" })
+  hasStudentStartupLoan?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=HasTradeSupportLoanDebt" })
+  hasTradeSupportLoanDebt?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=ResidencyStatus" })
+  residencyStatus?: ResidencyStatusEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=TFNExemptionType" })
+  tfnExemptionType?: TfnExemptionTypeEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=TaxFileNumber" })
+  taxFileNumber?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=TaxFreeThresholdClaimed" })
+  taxFreeThresholdClaimed?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=TaxOffsetEstimatedAmount" })
+  taxOffsetEstimatedAmount?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=UpwardVariationTaxWithholdingAmount" })
   upwardVariationTaxWithholdingAmount?: number;
 }

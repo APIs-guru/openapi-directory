@@ -1,5 +1,7 @@
 package shared
 
+// IdentitytoolkitRelyingpartyUploadAccountRequest
+// Request to upload user account in batch.
 type IdentitytoolkitRelyingpartyUploadAccountRequest struct {
 	AllowOverwrite         *bool      `json:"allowOverwrite,omitempty"`
 	BlockSize              *int32     `json:"blockSize,omitempty"`

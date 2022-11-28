@@ -1,5 +1,7 @@
 package shared
 
+// EventPeriodRange
+// An event period time range.
 type EventPeriodRange struct {
 	Kind              *string `json:"kind,omitempty"`
 	PeriodEndMillis   *string `json:"periodEndMillis,omitempty"`

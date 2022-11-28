@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetFailoverDbClusterActionEnum(str, Enum):
     FAILOVER_DB_CLUSTER = "FailoverDBCluster"
@@ -10,10 +14,10 @@ class GetFailoverDbClusterVersionEnum(str, Enum):
 
 @dataclass
 class GetFailoverDbClusterQueryParams:
-    action: GetFailoverDbClusterActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetFailoverDbClusterActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetFailoverDbClusterVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     db_cluster_identifier: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'DBClusterIdentifier', 'style': 'form', 'explode': True }})
     target_db_instance_identifier: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'TargetDBInstanceIdentifier', 'style': 'form', 'explode': True }})
-    version: GetFailoverDbClusterVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetFailoverDbClusterHeaders:
 
 @dataclass
 class GetFailoverDbClusterRequest:
-    query_params: GetFailoverDbClusterQueryParams = field(default=None)
-    headers: GetFailoverDbClusterHeaders = field(default=None)
+    headers: GetFailoverDbClusterHeaders = field()
+    query_params: GetFailoverDbClusterQueryParams = field()
     
 
 @dataclass
 class GetFailoverDbClusterResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

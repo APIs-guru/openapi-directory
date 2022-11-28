@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StepSummary } from "./stepsummary";
+
 
 
 // ListStepsOutput
@@ -8,9 +8,9 @@ import { StepSummary } from "./stepsummary";
  * This output contains the list of steps returned in reverse order. This means that the last step is the first element in the list.
 **/
 export class ListStepsOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Marker" })
+  @SpeakeasyMetadata({ data: "json, name=Marker" })
   marker?: string;
 
-  @Metadata({ data: "json, name=Steps", elemType: shared.StepSummary })
+  @SpeakeasyMetadata({ data: "json, name=Steps", elemType: StepSummary })
   steps?: StepSummary[];
 }

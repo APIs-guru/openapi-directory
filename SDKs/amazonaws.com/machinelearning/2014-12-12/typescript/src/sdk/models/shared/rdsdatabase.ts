@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RdsDatabase
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The database details of an Amazon RDS database.
 **/
 export class RdsDatabase extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DatabaseName" })
+  @SpeakeasyMetadata({ data: "json, name=DatabaseName" })
   databaseName: string;
 
-  @Metadata({ data: "json, name=InstanceIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceIdentifier" })
   instanceIdentifier: string;
 }

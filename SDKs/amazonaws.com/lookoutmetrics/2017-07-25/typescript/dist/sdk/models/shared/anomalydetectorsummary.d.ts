@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AnomalyDetectorStatusEnum } from "./anomalydetectorstatusenum";
 /**
  * Contains information about an an anomaly detector.

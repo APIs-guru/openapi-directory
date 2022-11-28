@@ -22,9 +22,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FindingEnum } from "./findingenum";
+import { InstanceRecommendationOption } from "./instancerecommendationoption";
+import { RecommendationSource } from "./recommendationsource";
+import { UtilizationMetric } from "./utilizationmetric";
 // InstanceRecommendation
 /**
  * Describes an Amazon EC2 instance recommendation.
@@ -35,47 +37,47 @@ var InstanceRecommendation = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=accountId" }),
+        SpeakeasyMetadata({ data: "json, name=accountId" }),
         __metadata("design:type", String)
     ], InstanceRecommendation.prototype, "accountId", void 0);
     __decorate([
-        Metadata({ data: "json, name=currentInstanceType" }),
+        SpeakeasyMetadata({ data: "json, name=currentInstanceType" }),
         __metadata("design:type", String)
     ], InstanceRecommendation.prototype, "currentInstanceType", void 0);
     __decorate([
-        Metadata({ data: "json, name=finding" }),
+        SpeakeasyMetadata({ data: "json, name=finding" }),
         __metadata("design:type", String)
     ], InstanceRecommendation.prototype, "finding", void 0);
     __decorate([
-        Metadata({ data: "json, name=findingReasonCodes" }),
+        SpeakeasyMetadata({ data: "json, name=findingReasonCodes" }),
         __metadata("design:type", Array)
     ], InstanceRecommendation.prototype, "findingReasonCodes", void 0);
     __decorate([
-        Metadata({ data: "json, name=instanceArn" }),
+        SpeakeasyMetadata({ data: "json, name=instanceArn" }),
         __metadata("design:type", String)
     ], InstanceRecommendation.prototype, "instanceArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=instanceName" }),
+        SpeakeasyMetadata({ data: "json, name=instanceName" }),
         __metadata("design:type", String)
     ], InstanceRecommendation.prototype, "instanceName", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastRefreshTimestamp" }),
+        SpeakeasyMetadata({ data: "json, name=lastRefreshTimestamp" }),
         __metadata("design:type", Date)
     ], InstanceRecommendation.prototype, "lastRefreshTimestamp", void 0);
     __decorate([
-        Metadata({ data: "json, name=lookBackPeriodInDays" }),
+        SpeakeasyMetadata({ data: "json, name=lookBackPeriodInDays" }),
         __metadata("design:type", Number)
     ], InstanceRecommendation.prototype, "lookBackPeriodInDays", void 0);
     __decorate([
-        Metadata({ data: "json, name=recommendationOptions", elemType: shared.InstanceRecommendationOption }),
+        SpeakeasyMetadata({ data: "json, name=recommendationOptions", elemType: InstanceRecommendationOption }),
         __metadata("design:type", Array)
     ], InstanceRecommendation.prototype, "recommendationOptions", void 0);
     __decorate([
-        Metadata({ data: "json, name=recommendationSources", elemType: shared.RecommendationSource }),
+        SpeakeasyMetadata({ data: "json, name=recommendationSources", elemType: RecommendationSource }),
         __metadata("design:type", Array)
     ], InstanceRecommendation.prototype, "recommendationSources", void 0);
     __decorate([
-        Metadata({ data: "json, name=utilizationMetrics", elemType: shared.UtilizationMetric }),
+        SpeakeasyMetadata({ data: "json, name=utilizationMetrics", elemType: UtilizationMetric }),
         __metadata("design:type", Array)
     ], InstanceRecommendation.prototype, "utilizationMetrics", void 0);
     return InstanceRecommendation;

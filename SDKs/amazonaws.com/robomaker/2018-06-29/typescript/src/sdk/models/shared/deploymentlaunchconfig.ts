@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DeploymentLaunchConfig
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configuration information for a deployment launch.
 **/
 export class DeploymentLaunchConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=environmentVariables" })
+  @SpeakeasyMetadata({ data: "json, name=environmentVariables" })
   environmentVariables?: Map<string, string>;
 
-  @Metadata({ data: "json, name=launchFile" })
+  @SpeakeasyMetadata({ data: "json, name=launchFile" })
   launchFile: string;
 
-  @Metadata({ data: "json, name=packageName" })
+  @SpeakeasyMetadata({ data: "json, name=packageName" })
   packageName: string;
 
-  @Metadata({ data: "json, name=postLaunchFile" })
+  @SpeakeasyMetadata({ data: "json, name=postLaunchFile" })
   postLaunchFile?: string;
 
-  @Metadata({ data: "json, name=preLaunchFile" })
+  @SpeakeasyMetadata({ data: "json, name=preLaunchFile" })
   preLaunchFile?: string;
 }

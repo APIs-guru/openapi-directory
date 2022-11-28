@@ -22,39 +22,39 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ModelDict } from "./modeldict";
 var ModelResp = /** @class */ (function (_super) {
     __extends(ModelResp, _super);
     function ModelResp() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=brandName" }),
+        SpeakeasyMetadata({ data: "json, name=brandName" }),
         __metadata("design:type", String)
     ], ModelResp.prototype, "brandName", void 0);
     __decorate([
-        Metadata({ data: "json, name=cacheTimeLimit" }),
+        SpeakeasyMetadata({ data: "json, name=cacheTimeLimit" }),
         __metadata("design:type", Number)
     ], ModelResp.prototype, "cacheTimeLimit", void 0);
     __decorate([
-        Metadata({ data: "json, name=condition" }),
+        SpeakeasyMetadata({ data: "json, name=condition" }),
         __metadata("design:type", String)
     ], ModelResp.prototype, "condition", void 0);
     __decorate([
-        Metadata({ data: "json, name=data", elemType: shared.ModelDict }),
+        SpeakeasyMetadata({ data: "json, name=data", elemType: ModelDict }),
         __metadata("design:type", Array)
     ], ModelResp.prototype, "data", void 0);
     __decorate([
-        Metadata({ data: "json, name=modelName" }),
+        SpeakeasyMetadata({ data: "json, name=modelName" }),
         __metadata("design:type", String)
     ], ModelResp.prototype, "modelName", void 0);
     __decorate([
-        Metadata({ data: "json, name=msg" }),
+        SpeakeasyMetadata({ data: "json, name=msg" }),
         __metadata("design:type", String)
     ], ModelResp.prototype, "msg", void 0);
     __decorate([
-        Metadata({ data: "json, name=regionName" }),
+        SpeakeasyMetadata({ data: "json, name=regionName" }),
         __metadata("design:type", String)
     ], ModelResp.prototype, "regionName", void 0);
     return ModelResp;

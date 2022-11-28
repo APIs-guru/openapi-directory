@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SectionObject
@@ -6,39 +7,39 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * https://developer.spotify.com/documentation/web-api/reference/tracks/get-audio-analysis/#section-object - Find more info on the official Spotify Web API Reference
 **/
 export class SectionObject extends SpeakeasyBase {
-  @Metadata({ data: "json, name=confidence" })
+  @SpeakeasyMetadata({ data: "json, name=confidence" })
   confidence?: number;
 
-  @Metadata({ data: "json, name=duration" })
+  @SpeakeasyMetadata({ data: "json, name=duration" })
   duration?: number;
 
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: number;
 
-  @Metadata({ data: "json, name=key_confidence" })
+  @SpeakeasyMetadata({ data: "json, name=key_confidence" })
   keyConfidence?: number;
 
-  @Metadata({ data: "json, name=loudness" })
+  @SpeakeasyMetadata({ data: "json, name=loudness" })
   loudness?: number;
 
-  @Metadata({ data: "json, name=mode" })
+  @SpeakeasyMetadata({ data: "json, name=mode" })
   mode?: number;
 
-  @Metadata({ data: "json, name=mode_confidence" })
+  @SpeakeasyMetadata({ data: "json, name=mode_confidence" })
   modeConfidence?: number;
 
-  @Metadata({ data: "json, name=start" })
+  @SpeakeasyMetadata({ data: "json, name=start" })
   start?: number;
 
-  @Metadata({ data: "json, name=tempo" })
+  @SpeakeasyMetadata({ data: "json, name=tempo" })
   tempo?: number;
 
-  @Metadata({ data: "json, name=tempo_confidence" })
+  @SpeakeasyMetadata({ data: "json, name=tempo_confidence" })
   tempoConfidence?: number;
 
-  @Metadata({ data: "json, name=time_signature" })
+  @SpeakeasyMetadata({ data: "json, name=time_signature" })
   timeSignature?: number;
 
-  @Metadata({ data: "json, name=time_signature_confidence" })
+  @SpeakeasyMetadata({ data: "json, name=time_signature_confidence" })
   timeSignatureConfidence?: number;
 }

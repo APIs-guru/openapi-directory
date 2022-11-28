@@ -20,6 +20,8 @@ const (
 	ConfigVariableTemplateValueTypeEnumAuthorizationCode    ConfigVariableTemplateValueTypeEnum = "AUTHORIZATION_CODE"
 )
 
+// ConfigVariableTemplate
+// ConfigVariableTemplate provides metadata about a `ConfigVariable` that is used in a Connection.
 type ConfigVariableTemplate struct {
 	AuthorizationCodeLink *AuthorizationCodeLink               `json:"authorizationCodeLink,omitempty"`
 	Description           *string                              `json:"description,omitempty"`

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ApplicationTransferParam } from "./applicationtransferparam";
 /**
  * Template to map fields of ApplicationDataTransfer resource.

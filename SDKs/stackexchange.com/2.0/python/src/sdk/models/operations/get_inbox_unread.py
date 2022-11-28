@@ -13,12 +13,12 @@ class GetInboxUnreadQueryParams:
 
 @dataclass
 class GetInboxUnreadRequest:
-    query_params: GetInboxUnreadQueryParams = field(default=None)
+    query_params: GetInboxUnreadQueryParams = field()
     
 
 @dataclass
 class GetInboxUnreadResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

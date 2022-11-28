@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetSearchCarIncentiveOemOfferTypeEnum(str, Enum):
@@ -57,13 +58,13 @@ class GetSearchCarIncentiveOemQueryParams:
 
 @dataclass
 class GetSearchCarIncentiveOemRequest:
-    query_params: GetSearchCarIncentiveOemQueryParams = field(default=None)
+    query_params: GetSearchCarIncentiveOemQueryParams = field()
     
 
 @dataclass
 class GetSearchCarIncentiveOemResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[shared.Error] = field(default=None)
     search_response: Optional[shared.SearchResponse] = field(default=None)
-    status_code: int = field(default=None)
     

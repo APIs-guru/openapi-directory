@@ -27,6 +27,8 @@ type AccountResourceRelationships struct {
 	Transactions AccountResourceRelationshipsTransactions `json:"transactions"`
 }
 
+// AccountResource
+// Provides information about an Up bank account.
 type AccountResource struct {
 	Attributes    AccountResourceAttributes    `json:"attributes"`
 	ID            string                       `json:"id"`

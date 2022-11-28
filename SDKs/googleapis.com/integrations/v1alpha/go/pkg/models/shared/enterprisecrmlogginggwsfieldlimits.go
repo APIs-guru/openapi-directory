@@ -29,6 +29,8 @@ const (
 	EnterpriseCrmLoggingGwsFieldLimitsShortenerTypeEnumShortenDomain            EnterpriseCrmLoggingGwsFieldLimitsShortenerTypeEnum = "SHORTEN_DOMAIN"
 )
 
+// EnterpriseCrmLoggingGwsFieldLimits
+// Describes string and array limits when writing to logs. When a limit is exceeded the *shortener_type* describes how to shorten the field. next_id: 6
 type EnterpriseCrmLoggingGwsFieldLimits struct {
 	LogAction       *EnterpriseCrmLoggingGwsFieldLimitsLogActionEnum     `json:"logAction,omitempty"`
 	LogType         []EnterpriseCrmLoggingGwsFieldLimitsLogTypeEnum      `json:"logType,omitempty"`

@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ConnectivityFreeWifiExceptionEnum {
-    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED"
-,    UnderConstruction = "UNDER_CONSTRUCTION"
-,    DependentOnSeason = "DEPENDENT_ON_SEASON"
-,    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
+    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED",
+    UnderConstruction = "UNDER_CONSTRUCTION",
+    DependentOnSeason = "DEPENDENT_ON_SEASON",
+    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
 }
 
 export enum ConnectivityPublicAreaWifiAvailableExceptionEnum {
-    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED"
-,    UnderConstruction = "UNDER_CONSTRUCTION"
-,    DependentOnSeason = "DEPENDENT_ON_SEASON"
-,    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
+    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED",
+    UnderConstruction = "UNDER_CONSTRUCTION",
+    DependentOnSeason = "DEPENDENT_ON_SEASON",
+    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
 }
 
 export enum ConnectivityPublicInternetTerminalExceptionEnum {
-    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED"
-,    UnderConstruction = "UNDER_CONSTRUCTION"
-,    DependentOnSeason = "DEPENDENT_ON_SEASON"
-,    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
+    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED",
+    UnderConstruction = "UNDER_CONSTRUCTION",
+    DependentOnSeason = "DEPENDENT_ON_SEASON",
+    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
 }
 
 export enum ConnectivityWifiAvailableExceptionEnum {
-    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED"
-,    UnderConstruction = "UNDER_CONSTRUCTION"
-,    DependentOnSeason = "DEPENDENT_ON_SEASON"
-,    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
+    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED",
+    UnderConstruction = "UNDER_CONSTRUCTION",
+    DependentOnSeason = "DEPENDENT_ON_SEASON",
+    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
 }
 
 
@@ -34,27 +35,27 @@ export enum ConnectivityWifiAvailableExceptionEnum {
  * The ways in which the property provides guests with the ability to access the internet.
 **/
 export class Connectivity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=freeWifi" })
+  @SpeakeasyMetadata({ data: "json, name=freeWifi" })
   freeWifi?: boolean;
 
-  @Metadata({ data: "json, name=freeWifiException" })
+  @SpeakeasyMetadata({ data: "json, name=freeWifiException" })
   freeWifiException?: ConnectivityFreeWifiExceptionEnum;
 
-  @Metadata({ data: "json, name=publicAreaWifiAvailable" })
+  @SpeakeasyMetadata({ data: "json, name=publicAreaWifiAvailable" })
   publicAreaWifiAvailable?: boolean;
 
-  @Metadata({ data: "json, name=publicAreaWifiAvailableException" })
+  @SpeakeasyMetadata({ data: "json, name=publicAreaWifiAvailableException" })
   publicAreaWifiAvailableException?: ConnectivityPublicAreaWifiAvailableExceptionEnum;
 
-  @Metadata({ data: "json, name=publicInternetTerminal" })
+  @SpeakeasyMetadata({ data: "json, name=publicInternetTerminal" })
   publicInternetTerminal?: boolean;
 
-  @Metadata({ data: "json, name=publicInternetTerminalException" })
+  @SpeakeasyMetadata({ data: "json, name=publicInternetTerminalException" })
   publicInternetTerminalException?: ConnectivityPublicInternetTerminalExceptionEnum;
 
-  @Metadata({ data: "json, name=wifiAvailable" })
+  @SpeakeasyMetadata({ data: "json, name=wifiAvailable" })
   wifiAvailable?: boolean;
 
-  @Metadata({ data: "json, name=wifiAvailableException" })
+  @SpeakeasyMetadata({ data: "json, name=wifiAvailableException" })
   wifiAvailableException?: ConnectivityWifiAvailableExceptionEnum;
 }

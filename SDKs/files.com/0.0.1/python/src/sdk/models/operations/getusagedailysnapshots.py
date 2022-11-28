@@ -18,12 +18,12 @@ class GetUsageDailySnapshotsQueryParams:
 
 @dataclass
 class GetUsageDailySnapshotsRequest:
-    query_params: GetUsageDailySnapshotsQueryParams = field(default=None)
+    query_params: GetUsageDailySnapshotsQueryParams = field()
     
 
 @dataclass
 class GetUsageDailySnapshotsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     usage_daily_snapshot_entities: Optional[List[shared.UsageDailySnapshotEntity]] = field(default=None)
     

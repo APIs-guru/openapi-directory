@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 
 
 @dataclass
 class GetNetworkWirelessDataRateHistoryPathParams:
-    network_id: str = field(default=None, metadata={'path_param': { 'field_name': 'networkId', 'style': 'simple', 'explode': False }})
+    network_id: str = field(metadata={'path_param': { 'field_name': 'networkId', 'style': 'simple', 'explode': False }})
     
 class GetNetworkWirelessDataRateHistoryBandEnum(str, Enum):
     TWO_4 = "2.4"
@@ -27,13 +28,13 @@ class GetNetworkWirelessDataRateHistoryQueryParams:
 
 @dataclass
 class GetNetworkWirelessDataRateHistoryRequest:
-    path_params: GetNetworkWirelessDataRateHistoryPathParams = field(default=None)
-    query_params: GetNetworkWirelessDataRateHistoryQueryParams = field(default=None)
+    path_params: GetNetworkWirelessDataRateHistoryPathParams = field()
+    query_params: GetNetworkWirelessDataRateHistoryQueryParams = field()
     
 
 @dataclass
 class GetNetworkWirelessDataRateHistoryResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_network_wireless_data_rate_history_200_application_json_object: Optional[dict[str, Any]] = field(default=None)
     

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// BotAliasSummary
+// Summary information about bot aliases returned from the <a>ListBotAliases</a> operation.
 type BotAliasSummary struct {
 	BotAliasID          *string             `json:"botAliasId,omitempty"`
 	BotAliasName        *string             `json:"botAliasName,omitempty"`

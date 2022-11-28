@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { Watch } from "./watch";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { WatchInput } from "./watch";
 
 
-// CreateWatchRequest
+
+// CreateWatchRequestInput
 /** 
  * Create a new watch.
 **/
-export class CreateWatchRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=watch" })
-  watch?: Watch;
+export class CreateWatchRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=watch" })
+  watch?: WatchInput;
 
-  @Metadata({ data: "json, name=watchId" })
+  @SpeakeasyMetadata({ data: "json, name=watchId" })
   watchId?: string;
 }

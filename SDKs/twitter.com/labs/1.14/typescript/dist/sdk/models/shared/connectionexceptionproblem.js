@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var ConnectionExceptionProblemConnectionIssueEnum;
 (function (ConnectionExceptionProblemConnectionIssueEnum) {
     ConnectionExceptionProblemConnectionIssueEnum["TooManyConnections"] = "TooManyConnections";
@@ -38,19 +38,19 @@ var ConnectionExceptionProblem = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=connection_issue" }),
+        SpeakeasyMetadata({ data: "json, name=connection_issue" }),
         __metadata("design:type", String)
     ], ConnectionExceptionProblem.prototype, "connectionIssue", void 0);
     __decorate([
-        Metadata({ data: "json, name=detail" }),
+        SpeakeasyMetadata({ data: "json, name=detail" }),
         __metadata("design:type", String)
     ], ConnectionExceptionProblem.prototype, "detail", void 0);
     __decorate([
-        Metadata({ data: "json, name=title" }),
+        SpeakeasyMetadata({ data: "json, name=title" }),
         __metadata("design:type", String)
     ], ConnectionExceptionProblem.prototype, "title", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], ConnectionExceptionProblem.prototype, "type", void 0);
     return ConnectionExceptionProblem;

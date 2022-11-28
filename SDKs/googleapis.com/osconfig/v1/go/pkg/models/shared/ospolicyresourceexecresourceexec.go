@@ -9,6 +9,8 @@ const (
 	OsPolicyResourceExecResourceExecInterpreterEnumPowershell             OsPolicyResourceExecResourceExecInterpreterEnum = "POWERSHELL"
 )
 
+// OsPolicyResourceExecResourceExec
+// A file or script to execute.
 type OsPolicyResourceExecResourceExec struct {
 	Args           []string                                         `json:"args,omitempty"`
 	File           *OsPolicyResourceFile                            `json:"file,omitempty"`

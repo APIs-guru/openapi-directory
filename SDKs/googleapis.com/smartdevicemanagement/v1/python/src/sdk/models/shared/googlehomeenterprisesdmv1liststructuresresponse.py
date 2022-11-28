@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import googlehomeenterprisesdmv1structure
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleHomeEnterpriseSdmV1ListStructuresResponse:
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextPageToken' }})
-    structures: Optional[List[googlehomeenterprisesdmv1structure.GoogleHomeEnterpriseSdmV1Structure]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'structures' }})
+    r"""GoogleHomeEnterpriseSdmV1ListStructuresResponse
+    Response message for SmartDeviceManagementService.ListStructures
+    """
+    
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextPageToken') }})
+    structures: Optional[List[GoogleHomeEnterpriseSdmV1Structure]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('structures') }})
     

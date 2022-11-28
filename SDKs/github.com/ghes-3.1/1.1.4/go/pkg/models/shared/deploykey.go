@@ -1,5 +1,7 @@
 package shared
 
+// DeployKey
+// An SSH key granting access to a single repository.
 type DeployKey struct {
 	CreatedAt string `json:"created_at"`
 	ID        int64  `json:"id"`

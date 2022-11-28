@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HttpHeader } from "./httpheader";
+
 
 
 // ContextDataType
@@ -8,18 +8,18 @@ import { HttpHeader } from "./httpheader";
  * Contextual user data type used for evaluating the risk of an unexpected event by Amazon Cognito advanced security.
 **/
 export class ContextDataType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EncodedData" })
+  @SpeakeasyMetadata({ data: "json, name=EncodedData" })
   encodedData?: string;
 
-  @Metadata({ data: "json, name=HttpHeaders", elemType: shared.HttpHeader })
+  @SpeakeasyMetadata({ data: "json, name=HttpHeaders", elemType: HttpHeader })
   httpHeaders: HttpHeader[];
 
-  @Metadata({ data: "json, name=IpAddress" })
+  @SpeakeasyMetadata({ data: "json, name=IpAddress" })
   ipAddress: string;
 
-  @Metadata({ data: "json, name=ServerName" })
+  @SpeakeasyMetadata({ data: "json, name=ServerName" })
   serverName: string;
 
-  @Metadata({ data: "json, name=ServerPath" })
+  @SpeakeasyMetadata({ data: "json, name=ServerPath" })
   serverPath: string;
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NetworkProfileTypeEnum } from "./networkprofiletypeenum";
+
 
 
 // NetworkProfile
@@ -7,39 +8,39 @@ import { NetworkProfileTypeEnum } from "./networkprofiletypeenum";
  * An array of settings that describes characteristics of a network profile.
 **/
 export class NetworkProfile extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=downlinkBandwidthBits" })
+  @SpeakeasyMetadata({ data: "json, name=downlinkBandwidthBits" })
   downlinkBandwidthBits?: number;
 
-  @Metadata({ data: "json, name=downlinkDelayMs" })
+  @SpeakeasyMetadata({ data: "json, name=downlinkDelayMs" })
   downlinkDelayMs?: number;
 
-  @Metadata({ data: "json, name=downlinkJitterMs" })
+  @SpeakeasyMetadata({ data: "json, name=downlinkJitterMs" })
   downlinkJitterMs?: number;
 
-  @Metadata({ data: "json, name=downlinkLossPercent" })
+  @SpeakeasyMetadata({ data: "json, name=downlinkLossPercent" })
   downlinkLossPercent?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: NetworkProfileTypeEnum;
 
-  @Metadata({ data: "json, name=uplinkBandwidthBits" })
+  @SpeakeasyMetadata({ data: "json, name=uplinkBandwidthBits" })
   uplinkBandwidthBits?: number;
 
-  @Metadata({ data: "json, name=uplinkDelayMs" })
+  @SpeakeasyMetadata({ data: "json, name=uplinkDelayMs" })
   uplinkDelayMs?: number;
 
-  @Metadata({ data: "json, name=uplinkJitterMs" })
+  @SpeakeasyMetadata({ data: "json, name=uplinkJitterMs" })
   uplinkJitterMs?: number;
 
-  @Metadata({ data: "json, name=uplinkLossPercent" })
+  @SpeakeasyMetadata({ data: "json, name=uplinkLossPercent" })
   uplinkLossPercent?: number;
 }

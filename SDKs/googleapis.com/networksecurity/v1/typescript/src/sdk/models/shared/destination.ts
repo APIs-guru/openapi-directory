@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HttpHeaderMatch } from "./httpheadermatch";
+
 
 
 // Destination
@@ -7,15 +8,15 @@ import { HttpHeaderMatch } from "./httpheadermatch";
  * Specification of traffic destination attributes.
 **/
 export class Destination extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hosts" })
+  @SpeakeasyMetadata({ data: "json, name=hosts" })
   hosts?: string[];
 
-  @Metadata({ data: "json, name=httpHeaderMatch" })
+  @SpeakeasyMetadata({ data: "json, name=httpHeaderMatch" })
   httpHeaderMatch?: HttpHeaderMatch;
 
-  @Metadata({ data: "json, name=methods" })
+  @SpeakeasyMetadata({ data: "json, name=methods" })
   methods?: string[];
 
-  @Metadata({ data: "json, name=ports" })
+  @SpeakeasyMetadata({ data: "json, name=ports" })
   ports?: number[];
 }

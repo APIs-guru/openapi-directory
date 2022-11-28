@@ -22,23 +22,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Listing } from "./listing";
 var ListingRespPaginated = /** @class */ (function (_super) {
     __extends(ListingRespPaginated, _super);
     function ListingRespPaginated() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=listings", elemType: shared.Listing }),
+        SpeakeasyMetadata({ data: "json, name=listings", elemType: Listing }),
         __metadata("design:type", Array)
     ], ListingRespPaginated.prototype, "listings", void 0);
     __decorate([
-        Metadata({ data: "json, name=maxPages" }),
+        SpeakeasyMetadata({ data: "json, name=maxPages" }),
         __metadata("design:type", Number)
     ], ListingRespPaginated.prototype, "maxPages", void 0);
     __decorate([
-        Metadata({ data: "json, name=page" }),
+        SpeakeasyMetadata({ data: "json, name=page" }),
         __metadata("design:type", Number)
     ], ListingRespPaginated.prototype, "page", void 0);
     return ListingRespPaginated;

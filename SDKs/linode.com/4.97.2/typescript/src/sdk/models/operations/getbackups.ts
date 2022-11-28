@@ -1,129 +1,118 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetBackupsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=linodeId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=linodeId" })
   linodeId: number;
 }
 
 
-export class GetBackupsSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class GetBackupsSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class GetBackupsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: GetBackupsSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: GetBackupsSecurityOption2;
-}
-
-
-export class GetBackupsRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetBackupsPathParams;
-
-  @Metadata()
-  security: GetBackupsSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class GetBackups200ApplicationJsonAutomaticDisks extends SpeakeasyBase {
-  @Metadata({ data: "json, name=filesystem" })
+  @SpeakeasyMetadata({ data: "json, name=filesystem" })
   filesystem?: shared.FilesystemEnum;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 
-  @Metadata({ data: "json, name=size" })
+  @SpeakeasyMetadata({ data: "json, name=size" })
   size?: number;
 }
 
 export enum GetBackups200ApplicationJsonAutomaticStatusEnum {
-    Paused = "paused"
-,    Pending = "pending"
-,    Running = "running"
-,    NeedsPostProcessing = "needsPostProcessing"
-,    Successful = "successful"
-,    Failed = "failed"
-,    UserAborted = "userAborted"
+    Paused = "paused",
+    Pending = "pending",
+    Running = "running",
+    NeedsPostProcessing = "needsPostProcessing",
+    Successful = "successful",
+    Failed = "failed",
+    UserAborted = "userAborted"
 }
 
 
 export class GetBackups200ApplicationJsonAutomatic extends SpeakeasyBase {
-  @Metadata({ data: "json, name=configs" })
+  @SpeakeasyMetadata({ data: "json, name=configs" })
   configs?: string[];
 
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=disks", elemType: operations.GetBackups200ApplicationJsonAutomaticDisks })
+  @SpeakeasyMetadata({ data: "json, name=disks", elemType: GetBackups200ApplicationJsonAutomaticDisks })
   disks?: GetBackups200ApplicationJsonAutomaticDisks[];
 
-  @Metadata({ data: "json, name=finished" })
+  @SpeakeasyMetadata({ data: "json, name=finished" })
   finished?: Date;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: GetBackups200ApplicationJsonAutomaticStatusEnum;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 
-  @Metadata({ data: "json, name=updated" })
+  @SpeakeasyMetadata({ data: "json, name=updated" })
   updated?: Date;
 }
 
 
 export class GetBackups200ApplicationJsonSnapshot extends SpeakeasyBase {
-  @Metadata({ data: "json, name=current" })
+  @SpeakeasyMetadata({ data: "json, name=current" })
   current?: shared.Backup;
 
-  @Metadata({ data: "json, name=in_progress" })
+  @SpeakeasyMetadata({ data: "json, name=in_progress" })
   inProgress?: shared.Backup;
 }
 
 
 export class GetBackups200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=automatic", elemType: operations.GetBackups200ApplicationJsonAutomatic })
+  @SpeakeasyMetadata({ data: "json, name=automatic", elemType: GetBackups200ApplicationJsonAutomatic })
   automatic?: GetBackups200ApplicationJsonAutomatic[];
 
-  @Metadata({ data: "json, name=snapshot" })
+  @SpeakeasyMetadata({ data: "json, name=snapshot" })
   snapshot?: GetBackups200ApplicationJsonSnapshot;
 }
 
 
 export class GetBackupsDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class GetBackupsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetBackupsPathParams;
+
+  @SpeakeasyMetadata()
+  security: GetBackupsSecurity;
+}
+
+
 export class GetBackupsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getBackups200ApplicationJsonObject?: GetBackups200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getBackupsDefaultApplicationJsonObject?: GetBackupsDefaultApplicationJson;
 }

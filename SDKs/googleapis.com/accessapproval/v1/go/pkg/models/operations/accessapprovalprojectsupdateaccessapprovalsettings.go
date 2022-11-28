@@ -31,7 +31,7 @@ type AccessapprovalProjectsUpdateAccessApprovalSettingsSecurity struct {
 type AccessapprovalProjectsUpdateAccessApprovalSettingsRequest struct {
 	PathParams  AccessapprovalProjectsUpdateAccessApprovalSettingsPathParams
 	QueryParams AccessapprovalProjectsUpdateAccessApprovalSettingsQueryParams
-	Request     *shared.AccessApprovalSettings `request:"mediaType=application/json"`
+	Request     *shared.AccessApprovalSettingsInput `request:"mediaType=application/json"`
 	Security    AccessapprovalProjectsUpdateAccessApprovalSettingsSecurity
 }
 

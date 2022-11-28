@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DisplayvideoInventorySourceGroupsAssignedInventorySourcesCreatePathParams:
-    inventory_source_group_id: str = field(default=None, metadata={'path_param': { 'field_name': 'inventorySourceGroupId', 'style': 'simple', 'explode': False }})
+    inventory_source_group_id: str = field(metadata={'path_param': { 'field_name': 'inventorySourceGroupId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,21 +28,21 @@ class DisplayvideoInventorySourceGroupsAssignedInventorySourcesCreateQueryParams
 
 @dataclass
 class DisplayvideoInventorySourceGroupsAssignedInventorySourcesCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DisplayvideoInventorySourceGroupsAssignedInventorySourcesCreateRequest:
-    path_params: DisplayvideoInventorySourceGroupsAssignedInventorySourcesCreatePathParams = field(default=None)
-    query_params: DisplayvideoInventorySourceGroupsAssignedInventorySourcesCreateQueryParams = field(default=None)
-    request: Optional[shared.AssignedInventorySource] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DisplayvideoInventorySourceGroupsAssignedInventorySourcesCreateSecurity = field(default=None)
+    path_params: DisplayvideoInventorySourceGroupsAssignedInventorySourcesCreatePathParams = field()
+    query_params: DisplayvideoInventorySourceGroupsAssignedInventorySourcesCreateQueryParams = field()
+    security: DisplayvideoInventorySourceGroupsAssignedInventorySourcesCreateSecurity = field()
+    request: Optional[shared.AssignedInventorySourceInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DisplayvideoInventorySourceGroupsAssignedInventorySourcesCreateResponse:
+    content_type: str = field()
+    status_code: int = field()
     assigned_inventory_source: Optional[shared.AssignedInventorySource] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

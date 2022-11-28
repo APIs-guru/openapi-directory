@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostCreateCacheSecurityGroupActionEnum(str, Enum):
     CREATE_CACHE_SECURITY_GROUP = "CreateCacheSecurityGroup"
@@ -10,8 +14,8 @@ class PostCreateCacheSecurityGroupVersionEnum(str, Enum):
 
 @dataclass
 class PostCreateCacheSecurityGroupQueryParams:
-    action: PostCreateCacheSecurityGroupActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostCreateCacheSecurityGroupVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostCreateCacheSecurityGroupActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostCreateCacheSecurityGroupVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostCreateCacheSecurityGroupHeaders:
 
 @dataclass
 class PostCreateCacheSecurityGroupRequest:
-    query_params: PostCreateCacheSecurityGroupQueryParams = field(default=None)
-    headers: PostCreateCacheSecurityGroupHeaders = field(default=None)
+    headers: PostCreateCacheSecurityGroupHeaders = field()
+    query_params: PostCreateCacheSecurityGroupQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostCreateCacheSecurityGroupResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

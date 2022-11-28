@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ChangeDiscoverabilityRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enable_discovery" })
+  @SpeakeasyMetadata({ data: "json, name=enable_discovery" })
   enableDiscovery: boolean;
 }

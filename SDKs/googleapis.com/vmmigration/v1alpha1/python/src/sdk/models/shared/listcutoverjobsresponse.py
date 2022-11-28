@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import cutoverjob
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListCutoverJobsResponse:
-    cutover_jobs: Optional[List[cutoverjob.CutoverJob]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cutoverJobs' }})
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextPageToken' }})
-    unreachable: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'unreachable' }})
+    r"""ListCutoverJobsResponse
+    Response message for 'ListCutoverJobs' request.
+    """
+    
+    cutover_jobs: Optional[List[CutoverJob]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cutoverJobs') }})
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextPageToken') }})
+    unreachable: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('unreachable') }})
     

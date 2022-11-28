@@ -9,6 +9,8 @@ const (
 	WebAppDisplayModeEnumFullScreen             WebAppDisplayModeEnum = "FULL_SCREEN"
 )
 
+// WebApp
+// A web app.
 type WebApp struct {
 	DisplayMode *WebAppDisplayModeEnum `json:"displayMode,omitempty"`
 	Icons       []WebAppIcon           `json:"icons,omitempty"`

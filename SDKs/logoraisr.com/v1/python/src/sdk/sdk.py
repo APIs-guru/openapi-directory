@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
-from typing import List,Optional
-from sdk.models import operations, shared
+from typing import Optional
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,28 +14,58 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
-    
-    def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
+            self._server_url = server_url
 
+        
+    
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        
+    
+
+    def config_security(self, security: shared.Security):
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        
+    
+    
     
     def previews_read(self, request: operations.PreviewsReadRequest) -> operations.PreviewsReadResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get preview image of uploaded file
+        This GET-Method returns the URL where the preview image of uploaded file can downloaded from.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/previews/{file_id}/", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -51,13 +84,17 @@ class SDK:
 
     
     def processes_list(self) -> operations.ProcessesListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get process list.
+        This GET-Method lists all on logoraisr available processes.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/processes/"
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -72,22 +109,23 @@ class SDK:
 
     
     def projects_create(self, request: operations.ProjectsCreateRequest) -> operations.ProjectsCreateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new project.
+        This POST-Method creates a new project.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/projects/"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -108,13 +146,17 @@ class SDK:
 
     
     def projects_list(self) -> operations.ProjectsListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get user project list.
+        This GET-Method lists the user's projects.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/projects/"
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -133,13 +175,17 @@ class SDK:
 
     
     def projects_read(self, request: operations.ProjectsReadRequest) -> operations.ProjectsReadResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get project details.
+        This GET-Method returns a specific project.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/projects/{project_number}/", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -158,22 +204,23 @@ class SDK:
 
     
     def reports_create(self, request: operations.ReportsCreateRequest) -> operations.ReportsCreateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new report.
+        This POST-Method creates a new report.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/reports/"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -194,13 +241,17 @@ class SDK:
 
     
     def reports_list(self) -> operations.ReportsListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get user report list.
+        This GET method lists the user's reports.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/reports/"
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -219,13 +270,17 @@ class SDK:
 
     
     def reports_read(self, request: operations.ReportsReadRequest) -> operations.ReportsReadResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get report details.
+        This GET-Method returns the details of a specific report.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/reports/{report_number}/", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -244,13 +299,17 @@ class SDK:
 
     
     def results_read(self, request: operations.ResultsReadRequest) -> operations.ResultsReadResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get the result from image processing
+        This GET-Method returns the URL where the result can downloaded from.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/results/{result_file_id}/", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -269,22 +328,23 @@ class SDK:
 
     
     def uploads_create(self, request: operations.UploadsCreateRequest) -> operations.UploadsCreateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Upload a new image
+        This POST-Method uploads a new file on the server.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/uploads/"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

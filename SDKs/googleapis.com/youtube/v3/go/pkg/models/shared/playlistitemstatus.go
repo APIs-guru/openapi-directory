@@ -8,6 +8,8 @@ const (
 	PlaylistItemStatusPrivacyStatusEnumPrivate  PlaylistItemStatusPrivacyStatusEnum = "private"
 )
 
+// PlaylistItemStatus
+// Information about the playlist item's privacy status.
 type PlaylistItemStatus struct {
 	PrivacyStatus *PlaylistItemStatusPrivacyStatusEnum `json:"privacyStatus,omitempty"`
 }

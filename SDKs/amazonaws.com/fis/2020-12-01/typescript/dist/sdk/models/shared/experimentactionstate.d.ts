@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ExperimentActionStatusEnum } from "./experimentactionstatusenum";
 /**
  * Describes the state of an action.

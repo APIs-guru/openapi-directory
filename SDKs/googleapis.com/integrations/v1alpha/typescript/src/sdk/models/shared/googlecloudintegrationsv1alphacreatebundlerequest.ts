@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudIntegrationsV1alphaCreateBundleRequest
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * PROTECT WITH A VISIBILITY LABEL. THIS METHOD WILL BE MOVED TO A SEPARATE SERVICE. Request to create a new Bundle.
 **/
 export class GoogleCloudIntegrationsV1alphaCreateBundleRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bundleId" })
+  @SpeakeasyMetadata({ data: "json, name=bundleId" })
   bundleId?: string;
 
-  @Metadata({ data: "json, name=integrations" })
+  @SpeakeasyMetadata({ data: "json, name=integrations" })
   integrations?: string[];
 
-  @Metadata({ data: "json, name=secondaryCustomerOrgId" })
+  @SpeakeasyMetadata({ data: "json, name=secondaryCustomerOrgId" })
   secondaryCustomerOrgId?: string;
 }

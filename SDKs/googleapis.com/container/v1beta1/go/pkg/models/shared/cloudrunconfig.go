@@ -8,6 +8,8 @@ const (
 	CloudRunConfigLoadBalancerTypeEnumLoadBalancerTypeInternal    CloudRunConfigLoadBalancerTypeEnum = "LOAD_BALANCER_TYPE_INTERNAL"
 )
 
+// CloudRunConfig
+// Configuration options for the Cloud Run feature.
 type CloudRunConfig struct {
 	Disabled         *bool                               `json:"disabled,omitempty"`
 	LoadBalancerType *CloudRunConfigLoadBalancerTypeEnum `json:"loadBalancerType,omitempty"`

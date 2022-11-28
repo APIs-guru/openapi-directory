@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
+
 
 export enum PostCommentForComparedCommitXAmzTargetEnum {
     CodeCommit20150413PostCommentForComparedCommit = "CodeCommit_20150413.PostCommentForComparedCommit"
@@ -7,117 +8,117 @@ export enum PostCommentForComparedCommitXAmzTargetEnum {
 
 
 export class PostCommentForComparedCommitHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Target" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Target" })
   xAmzTarget: PostCommentForComparedCommitXAmzTargetEnum;
 }
 
 
 export class PostCommentForComparedCommitRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: PostCommentForComparedCommitHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.PostCommentForComparedCommitInput;
 }
 
 
 export class PostCommentForComparedCommitResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   beforeCommitIdAndAfterCommitIdAreSameException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   clientRequestTokenRequiredException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   commentContentRequiredException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   commentContentSizeLimitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   commitDoesNotExistException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   commitIdRequiredException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   encryptionIntegrityChecksFailedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   encryptionKeyAccessDeniedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   encryptionKeyDisabledException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   encryptionKeyNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   encryptionKeyUnavailableException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   idempotencyParameterMismatchException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidClientRequestTokenException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidCommitIdException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidFileLocationException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidFilePositionException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidPathException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRelativeFileVersionEnumException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRepositoryNameException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   pathDoesNotExistException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   pathRequiredException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postCommentForComparedCommitOutput?: shared.PostCommentForComparedCommitOutput;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   repositoryDoesNotExistException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   repositoryNameRequiredException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

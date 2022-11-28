@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import timestamp
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DeveloperComment:
-    last_modified: Optional[timestamp.Timestamp] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lastModified' }})
-    text: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'text' }})
+    r"""DeveloperComment
+    Developer entry from conversation between user and developer.
+    """
+    
+    last_modified: Optional[Timestamp] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lastModified') }})
+    text: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('text') }})
     

@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AddressUpdateModel } from "./addressupdatemodel";
 import { ContactUpdateModel } from "./contactupdatemodel";
 import { CustomFieldUpdateModel } from "./customfieldupdatemodel";
 
 
+
 export class CustomerUpdateModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=address" })
+  @SpeakeasyMetadata({ data: "json, name=address" })
   address?: AddressUpdateModel;
 
-  @Metadata({ data: "json, name=contact" })
+  @SpeakeasyMetadata({ data: "json, name=contact" })
   contact?: ContactUpdateModel;
 
-  @Metadata({ data: "json, name=customFields" })
+  @SpeakeasyMetadata({ data: "json, name=customFields" })
   customFields?: CustomFieldUpdateModel;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=firstname" })
+  @SpeakeasyMetadata({ data: "json, name=firstname" })
   firstname?: string;
 
-  @Metadata({ data: "json, name=lastname" })
+  @SpeakeasyMetadata({ data: "json, name=lastname" })
   lastname?: string;
 
-  @Metadata({ data: "json, name=locationId" })
+  @SpeakeasyMetadata({ data: "json, name=locationId" })
   locationId?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=notificationType" })
+  @SpeakeasyMetadata({ data: "json, name=notificationType" })
   notificationType?: string;
 
-  @Metadata({ data: "json, name=stripeCustomerId" })
+  @SpeakeasyMetadata({ data: "json, name=stripeCustomerId" })
   stripeCustomerId?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: number;
 }

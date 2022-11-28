@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ListGeofenceCollectionsResponseEntry } from "./listgeofencecollectionsresponseentry";
 
 
+
 export class ListGeofenceCollectionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Entries", elemType: shared.ListGeofenceCollectionsResponseEntry })
+  @SpeakeasyMetadata({ data: "json, name=Entries", elemType: ListGeofenceCollectionsResponseEntry })
   entries: ListGeofenceCollectionsResponseEntry[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

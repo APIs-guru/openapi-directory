@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TflApiCommonJourneyPlannerJpElevation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=distance" })
+  @SpeakeasyMetadata({ data: "json, name=distance" })
   distance?: number;
 
-  @Metadata({ data: "json, name=endLat" })
+  @SpeakeasyMetadata({ data: "json, name=endLat" })
   endLat?: number;
 
-  @Metadata({ data: "json, name=endLon" })
+  @SpeakeasyMetadata({ data: "json, name=endLon" })
   endLon?: number;
 
-  @Metadata({ data: "json, name=gradient" })
+  @SpeakeasyMetadata({ data: "json, name=gradient" })
   gradient?: number;
 
-  @Metadata({ data: "json, name=heightFromPreviousPoint" })
+  @SpeakeasyMetadata({ data: "json, name=heightFromPreviousPoint" })
   heightFromPreviousPoint?: number;
 
-  @Metadata({ data: "json, name=startLat" })
+  @SpeakeasyMetadata({ data: "json, name=startLat" })
   startLat?: number;
 
-  @Metadata({ data: "json, name=startLon" })
+  @SpeakeasyMetadata({ data: "json, name=startLon" })
   startLon?: number;
 }

@@ -5,10 +5,6 @@ type CreateAuthorIfNotExistsForUsingGetQueryParams struct {
 	Name         *string `queryParam:"style=form,explode=true,name=name"`
 }
 
-type CreateAuthorIfNotExistsForUsingGetRequest struct {
-	QueryParams CreateAuthorIfNotExistsForUsingGetQueryParams
-}
-
 type CreateAuthorIfNotExistsForUsingGet200ApplicationJSONData struct {
 	AuthorID *string `json:"authorID,omitempty"`
 }
@@ -35,6 +31,10 @@ type CreateAuthorIfNotExistsForUsingGet500ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
 	Message *string                `json:"message,omitempty"`
+}
+
+type CreateAuthorIfNotExistsForUsingGetRequest struct {
+	QueryParams CreateAuthorIfNotExistsForUsingGetQueryParams
 }
 
 type CreateAuthorIfNotExistsForUsingGetResponse struct {

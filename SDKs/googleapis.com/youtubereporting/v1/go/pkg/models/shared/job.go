@@ -1,5 +1,7 @@
 package shared
 
+// Job
+// A job creating reports of a specific type.
 type Job struct {
 	CreateTime    *string `json:"createTime,omitempty"`
 	ExpireTime    *string `json:"expireTime,omitempty"`

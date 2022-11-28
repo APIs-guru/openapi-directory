@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Filter } from "./filter";
 // DescribeReplicationTasksMessage
 /**
  * <p/>
@@ -34,19 +34,19 @@ var DescribeReplicationTasksMessage = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Filters", elemType: shared.Filter }),
+        SpeakeasyMetadata({ data: "json, name=Filters", elemType: Filter }),
         __metadata("design:type", Array)
     ], DescribeReplicationTasksMessage.prototype, "filters", void 0);
     __decorate([
-        Metadata({ data: "json, name=Marker" }),
+        SpeakeasyMetadata({ data: "json, name=Marker" }),
         __metadata("design:type", String)
     ], DescribeReplicationTasksMessage.prototype, "marker", void 0);
     __decorate([
-        Metadata({ data: "json, name=MaxRecords" }),
+        SpeakeasyMetadata({ data: "json, name=MaxRecords" }),
         __metadata("design:type", Number)
     ], DescribeReplicationTasksMessage.prototype, "maxRecords", void 0);
     __decorate([
-        Metadata({ data: "json, name=WithoutSettings" }),
+        SpeakeasyMetadata({ data: "json, name=WithoutSettings" }),
         __metadata("design:type", Boolean)
     ], DescribeReplicationTasksMessage.prototype, "withoutSettings", void 0);
     return DescribeReplicationTasksMessage;

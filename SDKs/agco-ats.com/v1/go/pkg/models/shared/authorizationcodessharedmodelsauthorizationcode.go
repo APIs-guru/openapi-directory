@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// AuthorizationCodesSharedModelsAuthorizationCode
+// Represents the model containing an authorization code used to unlock a feature in machines and EDT
 type AuthorizationCodesSharedModelsAuthorizationCode struct {
 	Code                 *string                                   `json:"Code,omitempty"`
 	CreatedByUserID      *int32                                    `json:"CreatedByUserID,omitempty"`

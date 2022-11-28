@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ExtensionConfig
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configuration to enable an app as an extension app, with the capability of interacting with Android Device Policy offline.
 **/
 export class ExtensionConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=notificationReceiver" })
+  @SpeakeasyMetadata({ data: "json, name=notificationReceiver" })
   notificationReceiver?: string;
 
-  @Metadata({ data: "json, name=signingKeyFingerprintsSha256" })
+  @SpeakeasyMetadata({ data: "json, name=signingKeyFingerprintsSha256" })
   signingKeyFingerprintsSha256?: string[];
 }

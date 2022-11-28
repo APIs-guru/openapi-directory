@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InferenceInputConfiguration } from "./inferenceinputconfiguration";
 import { InferenceOutputConfiguration } from "./inferenceoutputconfiguration";
 import { DataUploadFrequencyEnum } from "./datauploadfrequencyenum";
@@ -32,27 +32,27 @@ var UpdateInferenceSchedulerRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DataDelayOffsetInMinutes" }),
+        SpeakeasyMetadata({ data: "json, name=DataDelayOffsetInMinutes" }),
         __metadata("design:type", Number)
     ], UpdateInferenceSchedulerRequest.prototype, "dataDelayOffsetInMinutes", void 0);
     __decorate([
-        Metadata({ data: "json, name=DataInputConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=DataInputConfiguration" }),
         __metadata("design:type", InferenceInputConfiguration)
     ], UpdateInferenceSchedulerRequest.prototype, "dataInputConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=DataOutputConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=DataOutputConfiguration" }),
         __metadata("design:type", InferenceOutputConfiguration)
     ], UpdateInferenceSchedulerRequest.prototype, "dataOutputConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=DataUploadFrequency" }),
+        SpeakeasyMetadata({ data: "json, name=DataUploadFrequency" }),
         __metadata("design:type", String)
     ], UpdateInferenceSchedulerRequest.prototype, "dataUploadFrequency", void 0);
     __decorate([
-        Metadata({ data: "json, name=InferenceSchedulerName" }),
+        SpeakeasyMetadata({ data: "json, name=InferenceSchedulerName" }),
         __metadata("design:type", String)
     ], UpdateInferenceSchedulerRequest.prototype, "inferenceSchedulerName", void 0);
     __decorate([
-        Metadata({ data: "json, name=RoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=RoleArn" }),
         __metadata("design:type", String)
     ], UpdateInferenceSchedulerRequest.prototype, "roleArn", void 0);
     return UpdateInferenceSchedulerRequest;

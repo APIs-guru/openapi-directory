@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ComprehendMedicalAsyncJobProperties } from "./comprehendmedicalasyncjobproperties";
 var DescribeEntitiesDetectionV2JobResponse = /** @class */ (function (_super) {
     __extends(DescribeEntitiesDetectionV2JobResponse, _super);
@@ -30,7 +30,7 @@ var DescribeEntitiesDetectionV2JobResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ComprehendMedicalAsyncJobProperties" }),
+        SpeakeasyMetadata({ data: "json, name=ComprehendMedicalAsyncJobProperties" }),
         __metadata("design:type", ComprehendMedicalAsyncJobProperties)
     ], DescribeEntitiesDetectionV2JobResponse.prototype, "comprehendMedicalAsyncJobProperties", void 0);
     return DescribeEntitiesDetectionV2JobResponse;

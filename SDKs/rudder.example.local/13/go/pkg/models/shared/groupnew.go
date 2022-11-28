@@ -19,6 +19,8 @@ type GroupNewQueryWhere struct {
 	Value      *string `json:"value,omitempty"`
 }
 
+// GroupNewQuery
+// The criteria defining the group. If not provided, the group will be empty.
 type GroupNewQuery struct {
 	Composition *GroupNewQueryCompositionEnum `json:"composition,omitempty"`
 	Select      *string                       `json:"select,omitempty"`

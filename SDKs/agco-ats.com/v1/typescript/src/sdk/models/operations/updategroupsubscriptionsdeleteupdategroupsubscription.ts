@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateGroupSubscriptionsDeleteUpdateGroupSubscriptionPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=UpdateGroupSubscriptionID" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=UpdateGroupSubscriptionID" })
   updateGroupSubscriptionId: number;
 }
 
 
 export class UpdateGroupSubscriptionsDeleteUpdateGroupSubscriptionRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateGroupSubscriptionsDeleteUpdateGroupSubscriptionPathParams;
 }
 
 
 export class UpdateGroupSubscriptionsDeleteUpdateGroupSubscriptionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDescribeVolumeAttributeActionEnum(str, Enum):
     DESCRIBE_VOLUME_ATTRIBUTE = "DescribeVolumeAttribute"
@@ -14,11 +18,11 @@ class GetDescribeVolumeAttributeVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeVolumeAttributeQueryParams:
-    action: GetDescribeVolumeAttributeActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    attribute: GetDescribeVolumeAttributeAttributeEnum = field(default=None, metadata={'query_param': { 'field_name': 'Attribute', 'style': 'form', 'explode': True }})
+    action: GetDescribeVolumeAttributeActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    attribute: GetDescribeVolumeAttributeAttributeEnum = field(metadata={'query_param': { 'field_name': 'Attribute', 'style': 'form', 'explode': True }})
+    version: GetDescribeVolumeAttributeVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    volume_id: str = field(metadata={'query_param': { 'field_name': 'VolumeId', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    version: GetDescribeVolumeAttributeVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
-    volume_id: str = field(default=None, metadata={'query_param': { 'field_name': 'VolumeId', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -34,13 +38,13 @@ class GetDescribeVolumeAttributeHeaders:
 
 @dataclass
 class GetDescribeVolumeAttributeRequest:
-    query_params: GetDescribeVolumeAttributeQueryParams = field(default=None)
-    headers: GetDescribeVolumeAttributeHeaders = field(default=None)
+    headers: GetDescribeVolumeAttributeHeaders = field()
+    query_params: GetDescribeVolumeAttributeQueryParams = field()
     
 
 @dataclass
 class GetDescribeVolumeAttributeResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

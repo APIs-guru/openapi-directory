@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum PasswordPoliciesContextPasswordPolicyScopeEnum {
-    ScopeUnspecified = "SCOPE_UNSPECIFIED"
-,    ScopeDevice = "SCOPE_DEVICE"
-,    ScopeProfile = "SCOPE_PROFILE"
+    ScopeUnspecified = "SCOPE_UNSPECIFIED",
+    ScopeDevice = "SCOPE_DEVICE",
+    ScopeProfile = "SCOPE_PROFILE"
 }
 
 
@@ -12,6 +13,6 @@ export enum PasswordPoliciesContextPasswordPolicyScopeEnum {
  * Additional context for non-compliance related to password policies.
 **/
 export class PasswordPoliciesContext extends SpeakeasyBase {
-  @Metadata({ data: "json, name=passwordPolicyScope" })
+  @SpeakeasyMetadata({ data: "json, name=passwordPolicyScope" })
   passwordPolicyScope?: PasswordPoliciesContextPasswordPolicyScopeEnum;
 }

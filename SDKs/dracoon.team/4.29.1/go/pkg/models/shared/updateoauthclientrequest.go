@@ -17,6 +17,8 @@ const (
 	UpdateOAuthClientRequestGrantTypesEnumRefreshToken      UpdateOAuthClientRequestGrantTypesEnum = "refresh_token"
 )
 
+// UpdateOAuthClientRequest
+// Request model for updating an OAuth client
 type UpdateOAuthClientRequest struct {
 	AccessTokenValidity  *int32                                   `json:"accessTokenValidity,omitempty"`
 	ApprovalValidity     *int32                                   `json:"approvalValidity,omitempty"`

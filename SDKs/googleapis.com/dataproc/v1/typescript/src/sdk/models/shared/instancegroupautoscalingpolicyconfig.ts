@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // InstanceGroupAutoscalingPolicyConfig
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configuration for the size bounds of an instance group, including its proportional size to other groups.
 **/
 export class InstanceGroupAutoscalingPolicyConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=maxInstances" })
+  @SpeakeasyMetadata({ data: "json, name=maxInstances" })
   maxInstances?: number;
 
-  @Metadata({ data: "json, name=minInstances" })
+  @SpeakeasyMetadata({ data: "json, name=minInstances" })
   minInstances?: number;
 
-  @Metadata({ data: "json, name=weight" })
+  @SpeakeasyMetadata({ data: "json, name=weight" })
   weight?: number;
 }

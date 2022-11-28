@@ -1,0 +1,33 @@
+from dataclasses import dataclass, field
+from typing import Optional
+from sdk.models import shared
+
+
+FETCH_VOICE_COUNTRY_SERVERS = [
+	"https://pricing.twilio.com",
+]
+
+
+@dataclass
+class FetchVoiceCountryPathParams:
+    iso_country: str = field(metadata={'path_param': { 'field_name': 'IsoCountry', 'style': 'simple', 'explode': False }})
+    
+
+@dataclass
+class FetchVoiceCountrySecurity:
+    account_sid_auth_token: shared.SchemeAccountSidAuthToken = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    
+
+@dataclass
+class FetchVoiceCountryRequest:
+    path_params: FetchVoiceCountryPathParams = field()
+    security: FetchVoiceCountrySecurity = field()
+    server_url: Optional[str] = field(default=None)
+    
+
+@dataclass
+class FetchVoiceCountryResponse:
+    content_type: str = field()
+    status_code: int = field()
+    pricing_v1_voice_voice_country_instance: Optional[shared.PricingV1VoiceVoiceCountryInstance] = field(default=None)
+    

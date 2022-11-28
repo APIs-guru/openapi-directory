@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class Locationsv1GetV1LocationsLocationIdGetPathParams extends SpeakeasyBase {
     locationId: number;

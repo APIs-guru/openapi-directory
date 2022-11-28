@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Dimensions } from "./dimensions";
+
 
 
 // InventorySourceDisplayCreativeConfig
@@ -7,6 +8,6 @@ import { Dimensions } from "./dimensions";
  * The configuration for display creatives.
 **/
 export class InventorySourceDisplayCreativeConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=creativeSize" })
+  @SpeakeasyMetadata({ data: "json, name=creativeSize" })
   creativeSize?: Dimensions;
 }

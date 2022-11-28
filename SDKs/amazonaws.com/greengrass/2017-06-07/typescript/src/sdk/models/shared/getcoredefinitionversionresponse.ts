@@ -1,23 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CoreDefinitionVersion } from "./coredefinitionversion";
 
 
+
 export class GetCoreDefinitionVersionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Arn" })
+  @SpeakeasyMetadata({ data: "json, name=Arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=CreationTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTimestamp" })
   creationTimestamp?: string;
 
-  @Metadata({ data: "json, name=Definition" })
+  @SpeakeasyMetadata({ data: "json, name=Definition" })
   definition?: CoreDefinitionVersion;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=Version" })
+  @SpeakeasyMetadata({ data: "json, name=Version" })
   version?: string;
 }

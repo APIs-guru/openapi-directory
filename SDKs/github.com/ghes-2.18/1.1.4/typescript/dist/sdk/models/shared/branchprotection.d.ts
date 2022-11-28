@@ -1,0 +1,31 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import { ProtectedBranchAdminEnforced } from "./protectedbranchadminenforced";
+import { ProtectedBranchPullRequestReview } from "./protectedbranchpullrequestreview";
+import { BranchRestrictionPolicy } from "./branchrestrictionpolicy";
+export declare class BranchProtectionRequiredConversationResolution extends SpeakeasyBase {
+    enabled?: boolean;
+}
+export declare class BranchProtectionRequiredSignatures extends SpeakeasyBase {
+    enabled: boolean;
+    url: string;
+}
+export declare class BranchProtectionRequiredStatusChecks extends SpeakeasyBase {
+    contexts: string[];
+    contextsUrl?: string;
+    enforcementLevel?: string;
+    url?: string;
+}
+/**
+ * Branch Protection
+**/
+export declare class BranchProtection extends SpeakeasyBase {
+    enforceAdmins?: ProtectedBranchAdminEnforced;
+    name?: string;
+    protectionUrl?: string;
+    requiredConversationResolution?: BranchProtectionRequiredConversationResolution;
+    requiredPullRequestReviews?: ProtectedBranchPullRequestReview;
+    requiredSignatures?: BranchProtectionRequiredSignatures;
+    requiredStatusChecks?: BranchProtectionRequiredStatusChecks;
+    restrictions?: BranchRestrictionPolicy;
+    url?: string;
+}

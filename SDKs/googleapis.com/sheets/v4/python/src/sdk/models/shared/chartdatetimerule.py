@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ChartDateTimeRuleTypeEnum(str, Enum):
     CHART_DATE_TIME_RULE_TYPE_UNSPECIFIED = "CHART_DATE_TIME_RULE_TYPE_UNSPECIFIED"
@@ -24,5 +29,9 @@ class ChartDateTimeRuleTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ChartDateTimeRule:
-    type: Optional[ChartDateTimeRuleTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""ChartDateTimeRule
+    Allows you to organize the date-time values in a source data column into buckets based on selected parts of their date or time values.
+    """
+    
+    type: Optional[ChartDateTimeRuleTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

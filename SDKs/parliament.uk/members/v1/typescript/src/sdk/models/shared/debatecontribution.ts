@@ -1,49 +1,50 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DebateContribution extends SpeakeasyBase {
-  @Metadata({ data: "json, name=answerCount" })
+  @SpeakeasyMetadata({ data: "json, name=answerCount" })
   answerCount?: number;
 
-  @Metadata({ data: "json, name=debateId" })
+  @SpeakeasyMetadata({ data: "json, name=debateId" })
   debateId?: number;
 
-  @Metadata({ data: "json, name=debateTitle" })
+  @SpeakeasyMetadata({ data: "json, name=debateTitle" })
   debateTitle?: string;
 
-  @Metadata({ data: "json, name=debateWebsiteId" })
+  @SpeakeasyMetadata({ data: "json, name=debateWebsiteId" })
   debateWebsiteId?: string;
 
-  @Metadata({ data: "json, name=firstTimecode" })
+  @SpeakeasyMetadata({ data: "json, name=firstTimecode" })
   firstTimecode?: Date;
 
-  @Metadata({ data: "json, name=house" })
+  @SpeakeasyMetadata({ data: "json, name=house" })
   house?: string;
 
-  @Metadata({ data: "json, name=interventionCount" })
+  @SpeakeasyMetadata({ data: "json, name=interventionCount" })
   interventionCount?: number;
 
-  @Metadata({ data: "json, name=pointsOfOrderCount" })
+  @SpeakeasyMetadata({ data: "json, name=pointsOfOrderCount" })
   pointsOfOrderCount?: number;
 
-  @Metadata({ data: "json, name=questionCount" })
+  @SpeakeasyMetadata({ data: "json, name=questionCount" })
   questionCount?: number;
 
-  @Metadata({ data: "json, name=section" })
+  @SpeakeasyMetadata({ data: "json, name=section" })
   section?: string;
 
-  @Metadata({ data: "json, name=sittingDate" })
+  @SpeakeasyMetadata({ data: "json, name=sittingDate" })
   sittingDate?: Date;
 
-  @Metadata({ data: "json, name=speechCount" })
+  @SpeakeasyMetadata({ data: "json, name=speechCount" })
   speechCount?: number;
 
-  @Metadata({ data: "json, name=statementsCount" })
+  @SpeakeasyMetadata({ data: "json, name=statementsCount" })
   statementsCount?: number;
 
-  @Metadata({ data: "json, name=supplementaryQuestionCount" })
+  @SpeakeasyMetadata({ data: "json, name=supplementaryQuestionCount" })
   supplementaryQuestionCount?: number;
 
-  @Metadata({ data: "json, name=totalContributions" })
+  @SpeakeasyMetadata({ data: "json, name=totalContributions" })
   totalContributions?: number;
 }

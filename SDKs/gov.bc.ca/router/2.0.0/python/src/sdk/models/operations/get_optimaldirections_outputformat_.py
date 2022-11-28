@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 
 class GetOptimalDirectionsOutputFormatOutputFormatEnum(str, Enum):
     JSON = "json"
@@ -12,7 +13,7 @@ class GetOptimalDirectionsOutputFormatOutputFormatEnum(str, Enum):
 
 @dataclass
 class GetOptimalDirectionsOutputFormatPathParams:
-    output_format: GetOptimalDirectionsOutputFormatOutputFormatEnum = field(default=None, metadata={'path_param': { 'field_name': 'outputFormat', 'style': 'simple', 'explode': False }})
+    output_format: GetOptimalDirectionsOutputFormatOutputFormatEnum = field(metadata={'path_param': { 'field_name': 'outputFormat', 'style': 'simple', 'explode': False }})
     
 class GetOptimalDirectionsOutputFormatCriteriaEnum(str, Enum):
     SHORTEST = "shortest"
@@ -25,25 +26,25 @@ class GetOptimalDirectionsOutputFormatDistanceUnitEnum(str, Enum):
 
 @dataclass
 class GetOptimalDirectionsOutputFormatQueryParams:
+    points: str = field(metadata={'query_param': { 'field_name': 'points', 'style': 'form', 'explode': True }})
     correct_side: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'correctSide', 'style': 'form', 'explode': True }})
     criteria: Optional[GetOptimalDirectionsOutputFormatCriteriaEnum] = field(default=None, metadata={'query_param': { 'field_name': 'criteria', 'style': 'form', 'explode': True }})
     departure: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'departure', 'style': 'form', 'explode': True }})
     disable: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'disable', 'style': 'form', 'explode': True }})
     distance_unit: Optional[GetOptimalDirectionsOutputFormatDistanceUnitEnum] = field(default=None, metadata={'query_param': { 'field_name': 'distanceUnit', 'style': 'form', 'explode': True }})
     output_srs: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'outputSRS', 'style': 'form', 'explode': True }})
-    points: str = field(default=None, metadata={'query_param': { 'field_name': 'points', 'style': 'form', 'explode': True }})
     round_trip: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'roundTrip', 'style': 'form', 'explode': True }})
     route_description: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'routeDescription', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class GetOptimalDirectionsOutputFormatRequest:
-    path_params: GetOptimalDirectionsOutputFormatPathParams = field(default=None)
-    query_params: GetOptimalDirectionsOutputFormatQueryParams = field(default=None)
+    path_params: GetOptimalDirectionsOutputFormatPathParams = field()
+    query_params: GetOptimalDirectionsOutputFormatQueryParams = field()
     
 
 @dataclass
 class GetOptimalDirectionsOutputFormatResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

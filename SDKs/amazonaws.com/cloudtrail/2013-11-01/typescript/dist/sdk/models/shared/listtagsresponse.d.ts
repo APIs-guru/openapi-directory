@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ResourceTag } from "./resourcetag";
 /**
  * Returns the objects or data listed below if successful. Otherwise, returns an error.

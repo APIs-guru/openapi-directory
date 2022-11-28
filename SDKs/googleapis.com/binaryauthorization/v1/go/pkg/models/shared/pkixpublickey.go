@@ -24,6 +24,8 @@ const (
 	PkixPublicKeySignatureAlgorithmEnumEcSignP521Sha512              PkixPublicKeySignatureAlgorithmEnum = "EC_SIGN_P521_SHA512"
 )
 
+// PkixPublicKey
+// A public key in the PkixPublicKey format (see https://tools.ietf.org/html/rfc5280#section-4.1.2.7 for details). Public keys of this type are typically textually encoded using the PEM format.
 type PkixPublicKey struct {
 	PublicKeyPem       *string                              `json:"publicKeyPem,omitempty"`
 	SignatureAlgorithm *PkixPublicKeySignatureAlgorithmEnum `json:"signatureAlgorithm,omitempty"`

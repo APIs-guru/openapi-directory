@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Presale } from "./presale";
 import { PublicSaleDates } from "./publicsaledates";
+
 
 
 // EventSalesDates
@@ -9,9 +9,9 @@ import { PublicSaleDates } from "./publicsaledates";
  * Event's Sales Dates
 **/
 export class EventSalesDates extends SpeakeasyBase {
-  @Metadata({ data: "json, name=presales", elemType: shared.Presale })
+  @SpeakeasyMetadata({ data: "json, name=presales", elemType: Presale })
   presales?: Presale[];
 
-  @Metadata({ data: "json, name=public" })
+  @SpeakeasyMetadata({ data: "json, name=public" })
   public?: PublicSaleDates;
 }

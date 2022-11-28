@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // VpcConfig
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about the VPC configuration that CodeBuild accesses.
 **/
 export class VpcConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=securityGroupIds" })
+  @SpeakeasyMetadata({ data: "json, name=securityGroupIds" })
   securityGroupIds?: string[];
 
-  @Metadata({ data: "json, name=subnets" })
+  @SpeakeasyMetadata({ data: "json, name=subnets" })
   subnets?: string[];
 
-  @Metadata({ data: "json, name=vpcId" })
+  @SpeakeasyMetadata({ data: "json, name=vpcId" })
   vpcId?: string;
 }

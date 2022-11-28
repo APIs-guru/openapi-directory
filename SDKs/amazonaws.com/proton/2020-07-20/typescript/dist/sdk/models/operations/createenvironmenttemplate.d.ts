@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum CreateEnvironmentTemplateXAmzTargetEnum {
     AwsProton20200720CreateEnvironmentTemplate = "AwsProton20200720.CreateEnvironmentTemplate"

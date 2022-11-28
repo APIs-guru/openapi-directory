@@ -11,18 +11,18 @@ class GetBlockedNumbersQueryParams:
 
 @dataclass
 class GetBlockedNumbersSecurity:
-    basic_auth: shared.SchemeBasicAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    basic_auth: shared.SchemeBasicAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
     
 
 @dataclass
 class GetBlockedNumbersRequest:
-    query_params: GetBlockedNumbersQueryParams = field(default=None)
-    security: GetBlockedNumbersSecurity = field(default=None)
+    query_params: GetBlockedNumbersQueryParams = field()
+    security: GetBlockedNumbersSecurity = field()
     
 
 @dataclass
 class GetBlockedNumbersResponse:
+    content_type: str = field()
+    status_code: int = field()
     blocked_number: Optional[shared.BlockedNumber] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

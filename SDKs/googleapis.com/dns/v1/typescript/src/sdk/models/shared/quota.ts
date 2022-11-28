@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DnsKeySpec } from "./dnskeyspec";
+
 
 
 // Quota
@@ -8,75 +8,75 @@ import { DnsKeySpec } from "./dnskeyspec";
  * Limits associated with a Project.
 **/
 export class Quota extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dnsKeysPerManagedZone" })
+  @SpeakeasyMetadata({ data: "json, name=dnsKeysPerManagedZone" })
   dnsKeysPerManagedZone?: number;
 
-  @Metadata({ data: "json, name=gkeClustersPerManagedZone" })
+  @SpeakeasyMetadata({ data: "json, name=gkeClustersPerManagedZone" })
   gkeClustersPerManagedZone?: number;
 
-  @Metadata({ data: "json, name=gkeClustersPerPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=gkeClustersPerPolicy" })
   gkeClustersPerPolicy?: number;
 
-  @Metadata({ data: "json, name=gkeClustersPerResponsePolicy" })
+  @SpeakeasyMetadata({ data: "json, name=gkeClustersPerResponsePolicy" })
   gkeClustersPerResponsePolicy?: number;
 
-  @Metadata({ data: "json, name=itemsPerRoutingPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=itemsPerRoutingPolicy" })
   itemsPerRoutingPolicy?: number;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=managedZones" })
+  @SpeakeasyMetadata({ data: "json, name=managedZones" })
   managedZones?: number;
 
-  @Metadata({ data: "json, name=managedZonesPerGkeCluster" })
+  @SpeakeasyMetadata({ data: "json, name=managedZonesPerGkeCluster" })
   managedZonesPerGkeCluster?: number;
 
-  @Metadata({ data: "json, name=managedZonesPerNetwork" })
+  @SpeakeasyMetadata({ data: "json, name=managedZonesPerNetwork" })
   managedZonesPerNetwork?: number;
 
-  @Metadata({ data: "json, name=networksPerManagedZone" })
+  @SpeakeasyMetadata({ data: "json, name=networksPerManagedZone" })
   networksPerManagedZone?: number;
 
-  @Metadata({ data: "json, name=networksPerPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=networksPerPolicy" })
   networksPerPolicy?: number;
 
-  @Metadata({ data: "json, name=networksPerResponsePolicy" })
+  @SpeakeasyMetadata({ data: "json, name=networksPerResponsePolicy" })
   networksPerResponsePolicy?: number;
 
-  @Metadata({ data: "json, name=peeringZonesPerTargetNetwork" })
+  @SpeakeasyMetadata({ data: "json, name=peeringZonesPerTargetNetwork" })
   peeringZonesPerTargetNetwork?: number;
 
-  @Metadata({ data: "json, name=policies" })
+  @SpeakeasyMetadata({ data: "json, name=policies" })
   policies?: number;
 
-  @Metadata({ data: "json, name=resourceRecordsPerRrset" })
+  @SpeakeasyMetadata({ data: "json, name=resourceRecordsPerRrset" })
   resourceRecordsPerRrset?: number;
 
-  @Metadata({ data: "json, name=responsePolicies" })
+  @SpeakeasyMetadata({ data: "json, name=responsePolicies" })
   responsePolicies?: number;
 
-  @Metadata({ data: "json, name=responsePolicyRulesPerResponsePolicy" })
+  @SpeakeasyMetadata({ data: "json, name=responsePolicyRulesPerResponsePolicy" })
   responsePolicyRulesPerResponsePolicy?: number;
 
-  @Metadata({ data: "json, name=rrsetAdditionsPerChange" })
+  @SpeakeasyMetadata({ data: "json, name=rrsetAdditionsPerChange" })
   rrsetAdditionsPerChange?: number;
 
-  @Metadata({ data: "json, name=rrsetDeletionsPerChange" })
+  @SpeakeasyMetadata({ data: "json, name=rrsetDeletionsPerChange" })
   rrsetDeletionsPerChange?: number;
 
-  @Metadata({ data: "json, name=rrsetsPerManagedZone" })
+  @SpeakeasyMetadata({ data: "json, name=rrsetsPerManagedZone" })
   rrsetsPerManagedZone?: number;
 
-  @Metadata({ data: "json, name=targetNameServersPerManagedZone" })
+  @SpeakeasyMetadata({ data: "json, name=targetNameServersPerManagedZone" })
   targetNameServersPerManagedZone?: number;
 
-  @Metadata({ data: "json, name=targetNameServersPerPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=targetNameServersPerPolicy" })
   targetNameServersPerPolicy?: number;
 
-  @Metadata({ data: "json, name=totalRrdataSizePerChange" })
+  @SpeakeasyMetadata({ data: "json, name=totalRrdataSizePerChange" })
   totalRrdataSizePerChange?: number;
 
-  @Metadata({ data: "json, name=whitelistedKeySpecs", elemType: shared.DnsKeySpec })
+  @SpeakeasyMetadata({ data: "json, name=whitelistedKeySpecs", elemType: DnsKeySpec })
   whitelistedKeySpecs?: DnsKeySpec[];
 }

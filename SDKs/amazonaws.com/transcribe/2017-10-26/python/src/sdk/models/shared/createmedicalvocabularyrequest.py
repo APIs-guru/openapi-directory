@@ -1,15 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import languagecode_enum
-from . import tag
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateMedicalVocabularyRequest:
-    language_code: languagecode_enum.LanguageCodeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LanguageCode' }})
-    tags: Optional[List[tag.Tag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Tags' }})
-    vocabulary_file_uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'VocabularyFileUri' }})
-    vocabulary_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'VocabularyName' }})
+    language_code: LanguageCodeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('LanguageCode') }})
+    vocabulary_file_uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('VocabularyFileUri') }})
+    vocabulary_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('VocabularyName') }})
+    tags: Optional[List[Tag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Tags') }})
     

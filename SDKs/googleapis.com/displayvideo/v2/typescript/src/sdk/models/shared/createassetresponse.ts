@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Asset } from "./asset";
+
 
 
 // CreateAssetResponse
@@ -7,6 +8,6 @@ import { Asset } from "./asset";
  * A response message for CreateAsset.
 **/
 export class CreateAssetResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=asset" })
+  @SpeakeasyMetadata({ data: "json, name=asset" })
   asset?: Asset;
 }

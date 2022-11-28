@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // QueryStatistics
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains the number of log events scanned by the query, the number of log events that matched the query criteria, and the total number of bytes in the log events that were scanned.
 **/
 export class QueryStatistics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bytesScanned" })
+  @SpeakeasyMetadata({ data: "json, name=bytesScanned" })
   bytesScanned?: number;
 
-  @Metadata({ data: "json, name=recordsMatched" })
+  @SpeakeasyMetadata({ data: "json, name=recordsMatched" })
   recordsMatched?: number;
 
-  @Metadata({ data: "json, name=recordsScanned" })
+  @SpeakeasyMetadata({ data: "json, name=recordsScanned" })
   recordsScanned?: number;
 }

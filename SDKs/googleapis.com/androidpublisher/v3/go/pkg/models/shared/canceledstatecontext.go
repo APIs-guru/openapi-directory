@@ -1,5 +1,7 @@
 package shared
 
+// CanceledStateContext
+// Information specific to a subscription in canceled state.
 type CanceledStateContext struct {
 	DeveloperInitiatedCancellation map[string]interface{}     `json:"developerInitiatedCancellation,omitempty"`
 	ReplacementCancellation        map[string]interface{}     `json:"replacementCancellation,omitempty"`

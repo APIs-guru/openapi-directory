@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ExecutionStateEnum } from "./executionstateenum";
+
 
 
 // ExecutionSummary
@@ -7,15 +8,15 @@ import { ExecutionStateEnum } from "./executionstateenum";
  * The summary of a task execution on a specified device.
 **/
 export class ExecutionSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=executionId" })
+  @SpeakeasyMetadata({ data: "json, name=executionId" })
   executionId?: string;
 
-  @Metadata({ data: "json, name=managedDeviceId" })
+  @SpeakeasyMetadata({ data: "json, name=managedDeviceId" })
   managedDeviceId?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: ExecutionStateEnum;
 
-  @Metadata({ data: "json, name=taskId" })
+  @SpeakeasyMetadata({ data: "json, name=taskId" })
   taskId?: string;
 }

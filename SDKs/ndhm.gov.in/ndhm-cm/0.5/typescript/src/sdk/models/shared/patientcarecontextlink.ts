@@ -1,24 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CareContextRepresentation } from "./carecontextrepresentation";
 
 
+
 export class PatientCareContextLinkPatient extends SpeakeasyBase {
-  @Metadata({ data: "json, name=careContexts", elemType: shared.CareContextRepresentation })
+  @SpeakeasyMetadata({ data: "json, name=careContexts", elemType: CareContextRepresentation })
   careContexts: CareContextRepresentation[];
 
-  @Metadata({ data: "json, name=display" })
+  @SpeakeasyMetadata({ data: "json, name=display" })
   display: string;
 
-  @Metadata({ data: "json, name=referenceNumber" })
+  @SpeakeasyMetadata({ data: "json, name=referenceNumber" })
   referenceNumber: string;
 }
 
 
 export class PatientCareContextLink extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessToken" })
+  @SpeakeasyMetadata({ data: "json, name=accessToken" })
   accessToken: string;
 
-  @Metadata({ data: "json, name=patient" })
+  @SpeakeasyMetadata({ data: "json, name=patient" })
   patient: PatientCareContextLinkPatient;
 }

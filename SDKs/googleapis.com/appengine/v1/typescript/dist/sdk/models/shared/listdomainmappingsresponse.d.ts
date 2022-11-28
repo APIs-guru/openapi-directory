@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DomainMapping } from "./domainmapping";
 /**
  * Response message for DomainMappings.ListDomainMappings.

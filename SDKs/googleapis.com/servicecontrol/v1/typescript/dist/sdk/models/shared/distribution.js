@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Exemplar } from "./exemplar";
 import { ExplicitBuckets } from "./explicitbuckets";
 import { ExponentialBuckets } from "./exponentialbuckets";
 import { LinearBuckets } from "./linearbuckets";
@@ -37,43 +37,43 @@ var Distribution = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=bucketCounts" }),
+        SpeakeasyMetadata({ data: "json, name=bucketCounts" }),
         __metadata("design:type", Array)
     ], Distribution.prototype, "bucketCounts", void 0);
     __decorate([
-        Metadata({ data: "json, name=count" }),
+        SpeakeasyMetadata({ data: "json, name=count" }),
         __metadata("design:type", String)
     ], Distribution.prototype, "count", void 0);
     __decorate([
-        Metadata({ data: "json, name=exemplars", elemType: shared.Exemplar }),
+        SpeakeasyMetadata({ data: "json, name=exemplars", elemType: Exemplar }),
         __metadata("design:type", Array)
     ], Distribution.prototype, "exemplars", void 0);
     __decorate([
-        Metadata({ data: "json, name=explicitBuckets" }),
+        SpeakeasyMetadata({ data: "json, name=explicitBuckets" }),
         __metadata("design:type", ExplicitBuckets)
     ], Distribution.prototype, "explicitBuckets", void 0);
     __decorate([
-        Metadata({ data: "json, name=exponentialBuckets" }),
+        SpeakeasyMetadata({ data: "json, name=exponentialBuckets" }),
         __metadata("design:type", ExponentialBuckets)
     ], Distribution.prototype, "exponentialBuckets", void 0);
     __decorate([
-        Metadata({ data: "json, name=linearBuckets" }),
+        SpeakeasyMetadata({ data: "json, name=linearBuckets" }),
         __metadata("design:type", LinearBuckets)
     ], Distribution.prototype, "linearBuckets", void 0);
     __decorate([
-        Metadata({ data: "json, name=maximum" }),
+        SpeakeasyMetadata({ data: "json, name=maximum" }),
         __metadata("design:type", Number)
     ], Distribution.prototype, "maximum", void 0);
     __decorate([
-        Metadata({ data: "json, name=mean" }),
+        SpeakeasyMetadata({ data: "json, name=mean" }),
         __metadata("design:type", Number)
     ], Distribution.prototype, "mean", void 0);
     __decorate([
-        Metadata({ data: "json, name=minimum" }),
+        SpeakeasyMetadata({ data: "json, name=minimum" }),
         __metadata("design:type", Number)
     ], Distribution.prototype, "minimum", void 0);
     __decorate([
-        Metadata({ data: "json, name=sumOfSquaredDeviation" }),
+        SpeakeasyMetadata({ data: "json, name=sumOfSquaredDeviation" }),
         __metadata("design:type", Number)
     ], Distribution.prototype, "sumOfSquaredDeviation", void 0);
     return Distribution;

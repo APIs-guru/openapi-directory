@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ResolveCaseRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=caseId" })
+  @SpeakeasyMetadata({ data: "json, name=caseId" })
   caseId?: string;
 }

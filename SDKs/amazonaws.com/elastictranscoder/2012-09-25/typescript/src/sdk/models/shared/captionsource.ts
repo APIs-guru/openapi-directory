@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Encryption } from "./encryption";
+
 
 
 // CaptionSource
@@ -7,18 +8,18 @@ import { Encryption } from "./encryption";
  * A source file for the input sidecar captions used during the transcoding process.
 **/
 export class CaptionSource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Encryption" })
+  @SpeakeasyMetadata({ data: "json, name=Encryption" })
   encryption?: Encryption;
 
-  @Metadata({ data: "json, name=Key" })
+  @SpeakeasyMetadata({ data: "json, name=Key" })
   key?: string;
 
-  @Metadata({ data: "json, name=Label" })
+  @SpeakeasyMetadata({ data: "json, name=Label" })
   label?: string;
 
-  @Metadata({ data: "json, name=Language" })
+  @SpeakeasyMetadata({ data: "json, name=Language" })
   language?: string;
 
-  @Metadata({ data: "json, name=TimeOffset" })
+  @SpeakeasyMetadata({ data: "json, name=TimeOffset" })
   timeOffset?: string;
 }

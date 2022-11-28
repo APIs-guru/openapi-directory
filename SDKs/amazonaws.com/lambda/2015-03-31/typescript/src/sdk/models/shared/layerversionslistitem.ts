@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RuntimeEnum } from "./runtimeenum";
+
 
 
 // LayerVersionsListItem
@@ -7,21 +8,21 @@ import { RuntimeEnum } from "./runtimeenum";
  * Details about a version of an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">Lambda layer</a>.
 **/
 export class LayerVersionsListItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CompatibleRuntimes" })
+  @SpeakeasyMetadata({ data: "json, name=CompatibleRuntimes" })
   compatibleRuntimes?: RuntimeEnum[];
 
-  @Metadata({ data: "json, name=CreatedDate" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedDate" })
   createdDate?: string;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=LayerVersionArn" })
+  @SpeakeasyMetadata({ data: "json, name=LayerVersionArn" })
   layerVersionArn?: string;
 
-  @Metadata({ data: "json, name=LicenseInfo" })
+  @SpeakeasyMetadata({ data: "json, name=LicenseInfo" })
   licenseInfo?: string;
 
-  @Metadata({ data: "json, name=Version" })
+  @SpeakeasyMetadata({ data: "json, name=Version" })
   version?: number;
 }

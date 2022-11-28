@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ChainName } from "./chainname";
 import { ChainUri } from "./chainuri";
+
 
 
 // Chain
@@ -9,15 +9,15 @@ import { ChainUri } from "./chainuri";
  * A chain is a brand that your business's locations can be affiliated with.
 **/
 export class Chain extends SpeakeasyBase {
-  @Metadata({ data: "json, name=chainNames", elemType: shared.ChainName })
+  @SpeakeasyMetadata({ data: "json, name=chainNames", elemType: ChainName })
   chainNames?: ChainName[];
 
-  @Metadata({ data: "json, name=locationCount" })
+  @SpeakeasyMetadata({ data: "json, name=locationCount" })
   locationCount?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=websites", elemType: shared.ChainUri })
+  @SpeakeasyMetadata({ data: "json, name=websites", elemType: ChainUri })
   websites?: ChainUri[];
 }

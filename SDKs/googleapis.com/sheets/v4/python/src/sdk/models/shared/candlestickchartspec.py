@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import candlestickdata
-from . import candlestickdomain
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CandlestickChartSpec:
-    data: Optional[List[candlestickdata.CandlestickData]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
-    domain: Optional[candlestickdomain.CandlestickDomain] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'domain' }})
+    r"""CandlestickChartSpec
+    A candlestick chart.
+    """
+    
+    data: Optional[List[CandlestickData]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
+    domain: Optional[CandlestickDomain] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('domain') }})
     

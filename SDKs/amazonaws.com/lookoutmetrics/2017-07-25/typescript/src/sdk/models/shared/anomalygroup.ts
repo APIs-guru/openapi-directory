@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MetricLevelImpact } from "./metriclevelimpact";
+
 
 
 // AnomalyGroup
@@ -8,21 +8,21 @@ import { MetricLevelImpact } from "./metriclevelimpact";
  * A group of anomalous metrics
 **/
 export class AnomalyGroup extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AnomalyGroupId" })
+  @SpeakeasyMetadata({ data: "json, name=AnomalyGroupId" })
   anomalyGroupId?: string;
 
-  @Metadata({ data: "json, name=AnomalyGroupScore" })
+  @SpeakeasyMetadata({ data: "json, name=AnomalyGroupScore" })
   anomalyGroupScore?: number;
 
-  @Metadata({ data: "json, name=EndTime" })
+  @SpeakeasyMetadata({ data: "json, name=EndTime" })
   endTime?: string;
 
-  @Metadata({ data: "json, name=MetricLevelImpactList", elemType: shared.MetricLevelImpact })
+  @SpeakeasyMetadata({ data: "json, name=MetricLevelImpactList", elemType: MetricLevelImpact })
   metricLevelImpactList?: MetricLevelImpact[];
 
-  @Metadata({ data: "json, name=PrimaryMetricName" })
+  @SpeakeasyMetadata({ data: "json, name=PrimaryMetricName" })
   primaryMetricName?: string;
 
-  @Metadata({ data: "json, name=StartTime" })
+  @SpeakeasyMetadata({ data: "json, name=StartTime" })
   startTime?: string;
 }

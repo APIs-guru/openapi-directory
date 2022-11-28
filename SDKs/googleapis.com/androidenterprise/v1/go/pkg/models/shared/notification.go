@@ -15,6 +15,8 @@ const (
 	NotificationNotificationTypeEnumDeviceReportUpdate         NotificationNotificationTypeEnum = "deviceReportUpdate"
 )
 
+// Notification
+// A notification of one event relating to an enterprise.
 type Notification struct {
 	AppRestrictionsSchemaChangeEvent *AppRestrictionsSchemaChangeEvent `json:"appRestrictionsSchemaChangeEvent,omitempty"`
 	AppUpdateEvent                   *AppUpdateEvent                   `json:"appUpdateEvent,omitempty"`

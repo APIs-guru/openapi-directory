@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RetrieveApplicationPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=app_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=app_id" })
   appId: string;
 }
 
 
 export class RetrieveApplicationQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=api_key" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_key" })
   apiKey: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=api_secret" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_secret" })
   apiSecret: string;
 }
 
 
 export class RetrieveApplicationRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: RetrieveApplicationPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: RetrieveApplicationQueryParams;
 }
 
 
 export class RetrieveApplicationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   application?: shared.Application;
 }

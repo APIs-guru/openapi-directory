@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // MetricInfo
 /**
  * Information about the CloudWatch metric that reflects quota usage.
@@ -33,19 +33,19 @@ var MetricInfo = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=MetricDimensions" }),
+        SpeakeasyMetadata({ data: "json, name=MetricDimensions" }),
         __metadata("design:type", Map)
     ], MetricInfo.prototype, "metricDimensions", void 0);
     __decorate([
-        Metadata({ data: "json, name=MetricName" }),
+        SpeakeasyMetadata({ data: "json, name=MetricName" }),
         __metadata("design:type", String)
     ], MetricInfo.prototype, "metricName", void 0);
     __decorate([
-        Metadata({ data: "json, name=MetricNamespace" }),
+        SpeakeasyMetadata({ data: "json, name=MetricNamespace" }),
         __metadata("design:type", String)
     ], MetricInfo.prototype, "metricNamespace", void 0);
     __decorate([
-        Metadata({ data: "json, name=MetricStatisticRecommendation" }),
+        SpeakeasyMetadata({ data: "json, name=MetricStatisticRecommendation" }),
         __metadata("design:type", String)
     ], MetricInfo.prototype, "metricStatisticRecommendation", void 0);
     return MetricInfo;

@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NewPublicVirtualInterfaceAllocation } from "./newpublicvirtualinterfaceallocation";
 
 
+
 export class AllocatePublicVirtualInterfaceRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=connectionId" })
+  @SpeakeasyMetadata({ data: "json, name=connectionId" })
   connectionId: string;
 
-  @Metadata({ data: "json, name=newPublicVirtualInterfaceAllocation" })
+  @SpeakeasyMetadata({ data: "json, name=newPublicVirtualInterfaceAllocation" })
   newPublicVirtualInterfaceAllocation: NewPublicVirtualInterfaceAllocation;
 
-  @Metadata({ data: "json, name=ownerAccount" })
+  @SpeakeasyMetadata({ data: "json, name=ownerAccount" })
   ownerAccount: string;
 }

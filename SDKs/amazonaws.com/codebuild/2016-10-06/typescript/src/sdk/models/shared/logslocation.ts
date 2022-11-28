@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CloudWatchLogsConfig } from "./cloudwatchlogsconfig";
 import { S3LogsConfig } from "./s3logsconfig";
+
 
 
 // LogsLocation
@@ -8,27 +9,27 @@ import { S3LogsConfig } from "./s3logsconfig";
  * Information about build logs in CloudWatch Logs.
 **/
 export class LogsLocation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cloudWatchLogs" })
+  @SpeakeasyMetadata({ data: "json, name=cloudWatchLogs" })
   cloudWatchLogs?: CloudWatchLogsConfig;
 
-  @Metadata({ data: "json, name=cloudWatchLogsArn" })
+  @SpeakeasyMetadata({ data: "json, name=cloudWatchLogsArn" })
   cloudWatchLogsArn?: string;
 
-  @Metadata({ data: "json, name=deepLink" })
+  @SpeakeasyMetadata({ data: "json, name=deepLink" })
   deepLink?: string;
 
-  @Metadata({ data: "json, name=groupName" })
+  @SpeakeasyMetadata({ data: "json, name=groupName" })
   groupName?: string;
 
-  @Metadata({ data: "json, name=s3DeepLink" })
+  @SpeakeasyMetadata({ data: "json, name=s3DeepLink" })
   s3DeepLink?: string;
 
-  @Metadata({ data: "json, name=s3Logs" })
+  @SpeakeasyMetadata({ data: "json, name=s3Logs" })
   s3Logs?: S3LogsConfig;
 
-  @Metadata({ data: "json, name=s3LogsArn" })
+  @SpeakeasyMetadata({ data: "json, name=s3LogsArn" })
   s3LogsArn?: string;
 
-  @Metadata({ data: "json, name=streamName" })
+  @SpeakeasyMetadata({ data: "json, name=streamName" })
   streamName?: string;
 }

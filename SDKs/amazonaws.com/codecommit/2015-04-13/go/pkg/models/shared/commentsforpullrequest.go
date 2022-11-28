@@ -1,5 +1,7 @@
 package shared
 
+// CommentsForPullRequest
+// Returns information about comments on a pull request.
 type CommentsForPullRequest struct {
 	AfterBlobID    *string   `json:"afterBlobId,omitempty"`
 	AfterCommitID  *string   `json:"afterCommitId,omitempty"`

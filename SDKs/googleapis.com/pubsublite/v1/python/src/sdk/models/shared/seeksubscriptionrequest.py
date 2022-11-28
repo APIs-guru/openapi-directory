@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import timetarget
+from sdk import utils
+from . import *
 
 class SeekSubscriptionRequestNamedTargetEnum(str, Enum):
     NAMED_TARGET_UNSPECIFIED = "NAMED_TARGET_UNSPECIFIED"
@@ -12,6 +14,10 @@ class SeekSubscriptionRequestNamedTargetEnum(str, Enum):
 @dataclass_json
 @dataclass
 class SeekSubscriptionRequest:
-    named_target: Optional[SeekSubscriptionRequestNamedTargetEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'namedTarget' }})
-    time_target: Optional[timetarget.TimeTarget] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timeTarget' }})
+    r"""SeekSubscriptionRequest
+    Request for SeekSubscription.
+    """
+    
+    named_target: Optional[SeekSubscriptionRequestNamedTargetEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('namedTarget') }})
+    time_target: Optional[TimeTarget] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('timeTarget') }})
     

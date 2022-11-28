@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CardActions } from "./cardactions";
 import { CardDisplayBody } from "./carddisplaybody";
 import { CardFetchBodyPatch } from "./cardfetchbodypatch";
+
 
 
 // CardPatchRequest
@@ -9,15 +10,15 @@ import { CardFetchBodyPatch } from "./cardfetchbodypatch";
  * Body for a patch with optional fields
 **/
 export class CardPatchRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actions" })
+  @SpeakeasyMetadata({ data: "json, name=actions" })
   actions?: CardActions;
 
-  @Metadata({ data: "json, name=display" })
+  @SpeakeasyMetadata({ data: "json, name=display" })
   display?: CardDisplayBody;
 
-  @Metadata({ data: "json, name=fetch" })
+  @SpeakeasyMetadata({ data: "json, name=fetch" })
   fetch?: CardFetchBodyPatch;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

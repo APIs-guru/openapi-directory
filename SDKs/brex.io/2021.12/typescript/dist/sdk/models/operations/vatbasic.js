@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var VatBasicPathParams = /** @class */ (function (_super) {
     __extends(VatBasicPathParams, _super);
@@ -30,7 +30,7 @@ var VatBasicPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=country" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=country" }),
         __metadata("design:type", String)
     ], VatBasicPathParams.prototype, "country", void 0);
     return VatBasicPathParams;
@@ -42,19 +42,19 @@ var VatBasicRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "form, name=companyAddress;" }),
+        SpeakeasyMetadata({ data: "form, name=companyAddress;" }),
         __metadata("design:type", String)
     ], VatBasicRequestBody.prototype, "companyAddress", void 0);
     __decorate([
-        Metadata({ data: "form, name=companyName;" }),
+        SpeakeasyMetadata({ data: "form, name=companyName;" }),
         __metadata("design:type", String)
     ], VatBasicRequestBody.prototype, "companyName", void 0);
     __decorate([
-        Metadata({ data: "form, name=companyNumber;" }),
+        SpeakeasyMetadata({ data: "form, name=companyNumber;" }),
         __metadata("design:type", String)
     ], VatBasicRequestBody.prototype, "companyNumber", void 0);
     __decorate([
-        Metadata({ data: "form, name=vatNumber;" }),
+        SpeakeasyMetadata({ data: "form, name=vatNumber;" }),
         __metadata("design:type", String)
     ], VatBasicRequestBody.prototype, "vatNumber", void 0);
     return VatBasicRequestBody;
@@ -66,7 +66,7 @@ var VatBasicSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeUserKey)
     ], VatBasicSecurity.prototype, "userKey", void 0);
     return VatBasicSecurity;
@@ -78,15 +78,15 @@ var VatBasicRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", VatBasicPathParams)
     ], VatBasicRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
         __metadata("design:type", VatBasicRequestBody)
     ], VatBasicRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", VatBasicSecurity)
     ], VatBasicRequest.prototype, "security", void 0);
     return VatBasicRequest;
@@ -98,19 +98,19 @@ var VatBasicResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], VatBasicResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], VatBasicResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], VatBasicResponse.prototype, "vatBasic200ApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], VatBasicResponse.prototype, "vatBasicDefaultApplicationJsonAny", void 0);
     return VatBasicResponse;

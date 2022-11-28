@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetChannelPrivacyUsersPathParams:
-    channel_id: float = field(default=None, metadata={'path_param': { 'field_name': 'channel_id', 'style': 'simple', 'explode': False }})
+    channel_id: float = field(metadata={'path_param': { 'field_name': 'channel_id', 'style': 'simple', 'explode': False }})
     
 class GetChannelPrivacyUsersDirectionEnum(str, Enum):
     ASC = "asc"
@@ -21,14 +22,14 @@ class GetChannelPrivacyUsersQueryParams:
 
 @dataclass
 class GetChannelPrivacyUsersRequest:
-    path_params: GetChannelPrivacyUsersPathParams = field(default=None)
-    query_params: GetChannelPrivacyUsersQueryParams = field(default=None)
+    path_params: GetChannelPrivacyUsersPathParams = field()
+    query_params: GetChannelPrivacyUsersQueryParams = field()
     
 
 @dataclass
 class GetChannelPrivacyUsersResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[shared.Error] = field(default=None)
     users: Optional[List[shared.User]] = field(default=None)
     

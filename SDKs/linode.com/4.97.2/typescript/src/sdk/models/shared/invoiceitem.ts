@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum InvoiceItemTypeEnum {
-    Hourly = "hourly"
-,    Misc = "misc"
+    Hourly = "hourly",
+    Misc = "misc"
 }
 
 
@@ -11,30 +12,30 @@ export enum InvoiceItemTypeEnum {
  * An InvoiceItem object.
 **/
 export class InvoiceItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=amount" })
+  @SpeakeasyMetadata({ data: "json, name=amount" })
   amount?: number;
 
-  @Metadata({ data: "json, name=from" })
+  @SpeakeasyMetadata({ data: "json, name=from" })
   from?: Date;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 
-  @Metadata({ data: "json, name=quantity" })
+  @SpeakeasyMetadata({ data: "json, name=quantity" })
   quantity?: number;
 
-  @Metadata({ data: "json, name=tax" })
+  @SpeakeasyMetadata({ data: "json, name=tax" })
   tax?: number;
 
-  @Metadata({ data: "json, name=to" })
+  @SpeakeasyMetadata({ data: "json, name=to" })
   to?: Date;
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total?: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: InvoiceItemTypeEnum;
 
-  @Metadata({ data: "json, name=unit_price" })
+  @SpeakeasyMetadata({ data: "json, name=unit_price" })
   unitPrice?: string;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // CorsRule
 /**
  * A rule for a CORS policy. You can add up to 100 rules to a CORS policy. If more than one rule applies, the service uses the first applicable rule listed.
@@ -33,23 +33,23 @@ var CorsRule = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AllowedHeaders" }),
+        SpeakeasyMetadata({ data: "json, name=AllowedHeaders" }),
         __metadata("design:type", Array)
     ], CorsRule.prototype, "allowedHeaders", void 0);
     __decorate([
-        Metadata({ data: "json, name=AllowedMethods" }),
+        SpeakeasyMetadata({ data: "json, name=AllowedMethods" }),
         __metadata("design:type", Array)
     ], CorsRule.prototype, "allowedMethods", void 0);
     __decorate([
-        Metadata({ data: "json, name=AllowedOrigins" }),
+        SpeakeasyMetadata({ data: "json, name=AllowedOrigins" }),
         __metadata("design:type", Array)
     ], CorsRule.prototype, "allowedOrigins", void 0);
     __decorate([
-        Metadata({ data: "json, name=ExposeHeaders" }),
+        SpeakeasyMetadata({ data: "json, name=ExposeHeaders" }),
         __metadata("design:type", Array)
     ], CorsRule.prototype, "exposeHeaders", void 0);
     __decorate([
-        Metadata({ data: "json, name=MaxAgeSeconds" }),
+        SpeakeasyMetadata({ data: "json, name=MaxAgeSeconds" }),
         __metadata("design:type", Number)
     ], CorsRule.prototype, "maxAgeSeconds", void 0);
     return CorsRule;

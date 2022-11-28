@@ -18,16 +18,16 @@ type GetMediaByPersonIDQueryParams struct {
 	UserID        string   `queryParam:"style=form,explode=true,name=user_id"`
 }
 
-type GetMediaByPersonIDRequest struct {
-	QueryParams GetMediaByPersonIDQueryParams
-}
-
 type GetMediaByPersonID200ApplicationJSON struct {
 	Page    *float64       `json:"page,omitempty"`
 	Pages   *float64       `json:"pages,omitempty"`
 	Perpage *float64       `json:"perpage,omitempty"`
 	Photos  []shared.Photo `json:"photos,omitempty"`
 	Total   *float64       `json:"total,omitempty"`
+}
+
+type GetMediaByPersonIDRequest struct {
+	QueryParams GetMediaByPersonIDQueryParams
 }
 
 type GetMediaByPersonIDResponse struct {

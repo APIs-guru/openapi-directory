@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Node } from "./node";
 import { Range } from "./range";
+
 
 
 // NodeList
@@ -9,9 +9,9 @@ import { Range } from "./range";
  * List of nodes
 **/
 export class NodeList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.Node })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: Node })
   items: Node[];
 
-  @Metadata({ data: "json, name=range" })
+  @SpeakeasyMetadata({ data: "json, name=range" })
   range: Range;
 }

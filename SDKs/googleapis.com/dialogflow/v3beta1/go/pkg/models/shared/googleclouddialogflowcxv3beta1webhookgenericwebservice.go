@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDialogflowCxV3beta1WebhookGenericWebService
+// Represents configuration for a generic web service.
 type GoogleCloudDialogflowCxV3beta1WebhookGenericWebService struct {
 	AllowedCaCerts []string          `json:"allowedCaCerts,omitempty"`
 	Password       *string           `json:"password,omitempty"`

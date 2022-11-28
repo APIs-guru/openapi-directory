@@ -10,6 +10,8 @@ const (
 	DeviceLogLevelEnumDebug               DeviceLogLevelEnum = "DEBUG"
 )
 
+// Device
+// The device resource.
 type Device struct {
 	Blocked            *bool               `json:"blocked,omitempty"`
 	Config             *DeviceConfig       `json:"config,omitempty"`

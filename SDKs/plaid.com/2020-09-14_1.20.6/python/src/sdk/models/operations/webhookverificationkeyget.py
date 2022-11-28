@@ -5,12 +5,12 @@ from sdk.models import shared
 
 @dataclass
 class WebhookVerificationKeyGetRequest:
-    request: shared.WebhookVerificationKeyGetRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.WebhookVerificationKeyGetRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class WebhookVerificationKeyGetResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     webhook_verification_key_get_response: Optional[dict[str, Any]] = field(default=None)
     

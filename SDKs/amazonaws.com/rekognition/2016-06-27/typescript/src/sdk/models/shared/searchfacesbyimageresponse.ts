@@ -1,19 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FaceMatch } from "./facematch";
 import { BoundingBox } from "./boundingbox";
 
 
+
 export class SearchFacesByImageResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FaceMatches", elemType: shared.FaceMatch })
+  @SpeakeasyMetadata({ data: "json, name=FaceMatches", elemType: FaceMatch })
   faceMatches?: FaceMatch[];
 
-  @Metadata({ data: "json, name=FaceModelVersion" })
+  @SpeakeasyMetadata({ data: "json, name=FaceModelVersion" })
   faceModelVersion?: string;
 
-  @Metadata({ data: "json, name=SearchedFaceBoundingBox" })
+  @SpeakeasyMetadata({ data: "json, name=SearchedFaceBoundingBox" })
   searchedFaceBoundingBox?: BoundingBox;
 
-  @Metadata({ data: "json, name=SearchedFaceConfidence" })
+  @SpeakeasyMetadata({ data: "json, name=SearchedFaceConfidence" })
   searchedFaceConfidence?: number;
 }

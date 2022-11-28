@@ -1,7 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContactDetail } from "./contactdetail";
-import { ContactDetail } from "./contactdetail";
-import { ContactDetail } from "./contactdetail";
+
 
 
 // UpdateDomainContactRequest
@@ -9,15 +8,15 @@ import { ContactDetail } from "./contactdetail";
  * The UpdateDomainContact request includes the following elements.
 **/
 export class UpdateDomainContactRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AdminContact" })
+  @SpeakeasyMetadata({ data: "json, name=AdminContact" })
   adminContact?: ContactDetail;
 
-  @Metadata({ data: "json, name=DomainName" })
+  @SpeakeasyMetadata({ data: "json, name=DomainName" })
   domainName: string;
 
-  @Metadata({ data: "json, name=RegistrantContact" })
+  @SpeakeasyMetadata({ data: "json, name=RegistrantContact" })
   registrantContact?: ContactDetail;
 
-  @Metadata({ data: "json, name=TechContact" })
+  @SpeakeasyMetadata({ data: "json, name=TechContact" })
   techContact?: ContactDetail;
 }

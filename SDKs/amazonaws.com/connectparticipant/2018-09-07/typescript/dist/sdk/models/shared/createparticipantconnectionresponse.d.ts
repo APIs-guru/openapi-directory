@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ConnectionCredentials } from "./connectioncredentials";
 import { Websocket } from "./websocket";
 export declare class CreateParticipantConnectionResponse extends SpeakeasyBase {

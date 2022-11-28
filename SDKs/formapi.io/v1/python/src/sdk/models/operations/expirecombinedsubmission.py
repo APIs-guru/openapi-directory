@@ -1,23 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class ExpireCombinedSubmissionPathParams:
-    combined_submission_id: str = field(default=None, metadata={'path_param': { 'field_name': 'combined_submission_id', 'style': 'simple', 'explode': False }})
+    combined_submission_id: str = field(metadata={'path_param': { 'field_name': 'combined_submission_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ExpireCombinedSubmissionSecurity:
-    api_token_basic: shared.SchemeAPITokenBasic = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
-    
-
-@dataclass
-class ExpireCombinedSubmissionRequest:
-    path_params: ExpireCombinedSubmissionPathParams = field(default=None)
-    security: ExpireCombinedSubmissionSecurity = field(default=None)
+    api_token_basic: shared.SchemeAPITokenBasic = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
     
 class ExpireCombinedSubmissionCombinedSubmissionSourcePdfs1TypeEnum(str, Enum):
     SUBMISSION = "submission"
@@ -29,8 +25,8 @@ class ExpireCombinedSubmissionCombinedSubmissionSourcePdfs1TypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ExpireCombinedSubmissionCombinedSubmissionSourcePdfs1:
-    id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    type: ExpireCombinedSubmissionCombinedSubmissionSourcePdfs1TypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    type: ExpireCombinedSubmissionCombinedSubmissionSourcePdfs1TypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     
 class ExpireCombinedSubmissionCombinedSubmissionSourcePdfs2TypeEnum(str, Enum):
     URL = "url"
@@ -39,8 +35,8 @@ class ExpireCombinedSubmissionCombinedSubmissionSourcePdfs2TypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ExpireCombinedSubmissionCombinedSubmissionSourcePdfs2:
-    type: ExpireCombinedSubmissionCombinedSubmissionSourcePdfs2TypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
+    type: ExpireCombinedSubmissionCombinedSubmissionSourcePdfs2TypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    url: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('url') }})
     
 class ExpireCombinedSubmissionCombinedSubmissionStateEnum(str, Enum):
     PENDING = "pending"
@@ -51,22 +47,28 @@ class ExpireCombinedSubmissionCombinedSubmissionStateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ExpireCombinedSubmissionCombinedSubmission:
-    actions: Optional[List[shared.CombinedSubmissionAction]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'actions' }})
-    download_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'download_url' }})
-    expired: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expired' }})
-    expires_at: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expires_at' }})
-    id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    metadata: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadata' }})
-    pdf_hash: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pdf_hash' }})
-    source_pdfs: List[Any] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'source_pdfs' }})
-    state: ExpireCombinedSubmissionCombinedSubmissionStateEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
-    submission_ids: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'submission_ids' }})
+    expired: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('expired') }})
+    id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    source_pdfs: List[Any] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('source_pdfs') }})
+    state: ExpireCombinedSubmissionCombinedSubmissionStateEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
+    submission_ids: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('submission_ids') }})
+    actions: Optional[List[shared.CombinedSubmissionAction]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('actions') }})
+    download_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('download_url') }})
+    expires_at: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('expires_at') }})
+    metadata: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('metadata') }})
+    pdf_hash: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pdf_hash') }})
+    
+
+@dataclass
+class ExpireCombinedSubmissionRequest:
+    path_params: ExpireCombinedSubmissionPathParams = field()
+    security: ExpireCombinedSubmissionSecurity = field()
     
 
 @dataclass
 class ExpireCombinedSubmissionResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     authentication_error: Optional[shared.AuthenticationError] = field(default=None)
     combined_submission: Optional[ExpireCombinedSubmissionCombinedSubmission] = field(default=None)
     error: Optional[shared.Error] = field(default=None)

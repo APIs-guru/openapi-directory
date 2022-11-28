@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import status
-from . import vmutilizationinfo
+from sdk import utils
+from . import *
 
 class UtilizationReportStateEnum(str, Enum):
     STATE_UNSPECIFIED = "STATE_UNSPECIFIED"
@@ -20,15 +21,32 @@ class UtilizationReportTimeFrameEnum(str, Enum):
 @dataclass_json
 @dataclass
 class UtilizationReport:
-    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createTime' }})
-    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayName' }})
-    error: Optional[status.Status] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    frame_end_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'frameEndTime' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    state: Optional[UtilizationReportStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
-    state_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stateTime' }})
-    time_frame: Optional[UtilizationReportTimeFrameEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timeFrame' }})
-    vm_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'vmCount' }})
-    vms: Optional[List[vmutilizationinfo.VMUtilizationInfo]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'vms' }})
-    vms_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'vmsCount' }})
+    r"""UtilizationReport
+    Utilization report details the utilization (CPU, memory, etc.) of selected source VMs.
+    """
+    
+    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createTime') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    error: Optional[Status] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    frame_end_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('frameEndTime') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    state: Optional[UtilizationReportStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
+    state_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('stateTime') }})
+    time_frame: Optional[UtilizationReportTimeFrameEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('timeFrame') }})
+    vm_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('vmCount') }})
+    vms: Optional[List[VMUtilizationInfo]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('vms') }})
+    vms_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('vmsCount') }})
+    
+
+@dataclass_json
+@dataclass
+class UtilizationReportInput:
+    r"""UtilizationReportInput
+    Utilization report details the utilization (CPU, memory, etc.) of selected source VMs.
+    """
+    
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    error: Optional[Status] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    time_frame: Optional[UtilizationReportTimeFrameEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('timeFrame') }})
+    vms: Optional[List[VMUtilizationInfoInput]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('vms') }})
     

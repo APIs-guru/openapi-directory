@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class LpgtvRequestBodyCertificateParameters extends SpeakeasyBase {
     uid: string;
@@ -15,10 +15,6 @@ export declare class LpgtvRequestBody extends SpeakeasyBase {
 export declare class LpgtvSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class LpgtvRequest extends SpeakeasyBase {
-    request?: LpgtvRequestBody;
-    security: LpgtvSecurity;
 }
 export declare enum Lpgtv400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -101,6 +97,10 @@ export declare enum Lpgtv504ApplicationJsonErrorDescriptionEnum {
 export declare class Lpgtv504ApplicationJson extends SpeakeasyBase {
     error?: Lpgtv504ApplicationJsonErrorEnum;
     errorDescription?: Lpgtv504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class LpgtvRequest extends SpeakeasyBase {
+    request?: LpgtvRequestBody;
+    security: LpgtvSecurity;
 }
 export declare class LpgtvResponse extends SpeakeasyBase {
     contentType: string;

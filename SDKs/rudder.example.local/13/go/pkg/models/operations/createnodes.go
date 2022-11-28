@@ -8,10 +8,6 @@ type CreateNodesQueryParams struct {
 	NodeParameters []shared.NodeAdd `queryParam:"serialization=json,name=Node parameters"`
 }
 
-type CreateNodesRequest struct {
-	QueryParams CreateNodesQueryParams
-}
-
 type CreateNodes200ApplicationJSONActionEnum string
 
 const (
@@ -34,6 +30,10 @@ type CreateNodes200ApplicationJSON struct {
 	Action CreateNodes200ApplicationJSONActionEnum `json:"action"`
 	Data   CreateNodes200ApplicationJSONData       `json:"data"`
 	Result CreateNodes200ApplicationJSONResultEnum `json:"result"`
+}
+
+type CreateNodesRequest struct {
+	QueryParams CreateNodesQueryParams
 }
 
 type CreateNodesResponse struct {

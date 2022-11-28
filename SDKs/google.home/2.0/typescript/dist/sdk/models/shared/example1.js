@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Aogh } from "./aogh";
 import { Audio } from "./audio";
 import { BuildInfo } from "./buildinfo";
@@ -45,75 +45,75 @@ var Example1 = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=aogh" }),
+        SpeakeasyMetadata({ data: "json, name=aogh" }),
         __metadata("design:type", Aogh)
     ], Example1.prototype, "aogh", void 0);
     __decorate([
-        Metadata({ data: "json, name=audio" }),
+        SpeakeasyMetadata({ data: "json, name=audio" }),
         __metadata("design:type", Audio)
     ], Example1.prototype, "audio", void 0);
     __decorate([
-        Metadata({ data: "json, name=build_info" }),
+        SpeakeasyMetadata({ data: "json, name=build_info" }),
         __metadata("design:type", BuildInfo)
     ], Example1.prototype, "buildInfo", void 0);
     __decorate([
-        Metadata({ data: "json, name=detail" }),
+        SpeakeasyMetadata({ data: "json, name=detail" }),
         __metadata("design:type", Detail)
     ], Example1.prototype, "detail", void 0);
     __decorate([
-        Metadata({ data: "json, name=device_info" }),
+        SpeakeasyMetadata({ data: "json, name=device_info" }),
         __metadata("design:type", DeviceInfo)
     ], Example1.prototype, "deviceInfo", void 0);
     __decorate([
-        Metadata({ data: "json, name=multizone" }),
+        SpeakeasyMetadata({ data: "json, name=multizone" }),
         __metadata("design:type", Multizone)
     ], Example1.prototype, "multizone", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Example1.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=net" }),
+        SpeakeasyMetadata({ data: "json, name=net" }),
         __metadata("design:type", Net)
     ], Example1.prototype, "net", void 0);
     __decorate([
-        Metadata({ data: "json, name=night_mode_params" }),
+        SpeakeasyMetadata({ data: "json, name=night_mode_params" }),
         __metadata("design:type", NightModeParams)
     ], Example1.prototype, "nightModeParams", void 0);
     __decorate([
-        Metadata({ data: "json, name=opencast" }),
+        SpeakeasyMetadata({ data: "json, name=opencast" }),
         __metadata("design:type", Opencast)
     ], Example1.prototype, "opencast", void 0);
     __decorate([
-        Metadata({ data: "json, name=opt_in" }),
+        SpeakeasyMetadata({ data: "json, name=opt_in" }),
         __metadata("design:type", OptIn)
     ], Example1.prototype, "optIn", void 0);
     __decorate([
-        Metadata({ data: "json, name=proxy" }),
+        SpeakeasyMetadata({ data: "json, name=proxy" }),
         __metadata("design:type", Proxy)
     ], Example1.prototype, "proxy", void 0);
     __decorate([
-        Metadata({ data: "json, name=settings" }),
+        SpeakeasyMetadata({ data: "json, name=settings" }),
         __metadata("design:type", Settings)
     ], Example1.prototype, "settings", void 0);
     __decorate([
-        Metadata({ data: "json, name=setup" }),
+        SpeakeasyMetadata({ data: "json, name=setup" }),
         __metadata("design:type", Setup)
     ], Example1.prototype, "setup", void 0);
     __decorate([
-        Metadata({ data: "json, name=sign" }),
+        SpeakeasyMetadata({ data: "json, name=sign" }),
         __metadata("design:type", Sign)
     ], Example1.prototype, "sign", void 0);
     __decorate([
-        Metadata({ data: "json, name=user_eq" }),
+        SpeakeasyMetadata({ data: "json, name=user_eq" }),
         __metadata("design:type", UserEq)
     ], Example1.prototype, "userEq", void 0);
     __decorate([
-        Metadata({ data: "json, name=version" }),
+        SpeakeasyMetadata({ data: "json, name=version" }),
         __metadata("design:type", Number)
     ], Example1.prototype, "version", void 0);
     __decorate([
-        Metadata({ data: "json, name=wifi" }),
+        SpeakeasyMetadata({ data: "json, name=wifi" }),
         __metadata("design:type", Wifi)
     ], Example1.prototype, "wifi", void 0);
     return Example1;

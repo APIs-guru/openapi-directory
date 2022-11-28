@@ -1,28 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CallToAction } from "./calltoaction";
 import { LocalPostEvent } from "./localpostevent";
 import { MediaItem } from "./mediaitem";
 import { LocalPostOffer } from "./localpostoffer";
 
+
 export enum LocalPostAlertTypeEnum {
-    AlertTypeUnspecified = "ALERT_TYPE_UNSPECIFIED"
-,    Covid19 = "COVID_19"
+    AlertTypeUnspecified = "ALERT_TYPE_UNSPECIFIED",
+    Covid19 = "COVID_19"
 }
 
 export enum LocalPostStateEnum {
-    LocalPostStateUnspecified = "LOCAL_POST_STATE_UNSPECIFIED"
-,    Rejected = "REJECTED"
-,    Live = "LIVE"
-,    Processing = "PROCESSING"
+    LocalPostStateUnspecified = "LOCAL_POST_STATE_UNSPECIFIED",
+    Rejected = "REJECTED",
+    Live = "LIVE",
+    Processing = "PROCESSING"
 }
 
 export enum LocalPostTopicTypeEnum {
-    LocalPostTopicTypeUnspecified = "LOCAL_POST_TOPIC_TYPE_UNSPECIFIED"
-,    Standard = "STANDARD"
-,    Event = "EVENT"
-,    Offer = "OFFER"
-,    Alert = "ALERT"
+    LocalPostTopicTypeUnspecified = "LOCAL_POST_TOPIC_TYPE_UNSPECIFIED",
+    Standard = "STANDARD",
+    Event = "EVENT",
+    Offer = "OFFER",
+    Alert = "ALERT"
 }
 
 
@@ -31,42 +31,42 @@ export enum LocalPostTopicTypeEnum {
  * Represents a [local post](https://support.google.com/business/answer/7662907) for a location.
 **/
 export class LocalPost extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alertType" })
+  @SpeakeasyMetadata({ data: "json, name=alertType" })
   alertType?: LocalPostAlertTypeEnum;
 
-  @Metadata({ data: "json, name=callToAction" })
+  @SpeakeasyMetadata({ data: "json, name=callToAction" })
   callToAction?: CallToAction;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=event" })
+  @SpeakeasyMetadata({ data: "json, name=event" })
   event?: LocalPostEvent;
 
-  @Metadata({ data: "json, name=languageCode" })
+  @SpeakeasyMetadata({ data: "json, name=languageCode" })
   languageCode?: string;
 
-  @Metadata({ data: "json, name=media", elemType: shared.MediaItem })
+  @SpeakeasyMetadata({ data: "json, name=media", elemType: MediaItem })
   media?: MediaItem[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=offer" })
+  @SpeakeasyMetadata({ data: "json, name=offer" })
   offer?: LocalPostOffer;
 
-  @Metadata({ data: "json, name=searchUrl" })
+  @SpeakeasyMetadata({ data: "json, name=searchUrl" })
   searchUrl?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: LocalPostStateEnum;
 
-  @Metadata({ data: "json, name=summary" })
+  @SpeakeasyMetadata({ data: "json, name=summary" })
   summary?: string;
 
-  @Metadata({ data: "json, name=topicType" })
+  @SpeakeasyMetadata({ data: "json, name=topicType" })
   topicType?: LocalPostTopicTypeEnum;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 }

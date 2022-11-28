@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DialogflowProjectsLocationsAgentsFlowsPagesCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,14 +27,14 @@ class DialogflowProjectsLocationsAgentsFlowsPagesCreateQueryParams:
 
 @dataclass
 class DialogflowProjectsLocationsAgentsFlowsPagesCreateSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DialogflowProjectsLocationsAgentsFlowsPagesCreateSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -44,15 +45,15 @@ class DialogflowProjectsLocationsAgentsFlowsPagesCreateSecurity:
 
 @dataclass
 class DialogflowProjectsLocationsAgentsFlowsPagesCreateRequest:
-    path_params: DialogflowProjectsLocationsAgentsFlowsPagesCreatePathParams = field(default=None)
-    query_params: DialogflowProjectsLocationsAgentsFlowsPagesCreateQueryParams = field(default=None)
-    request: Optional[shared.GoogleCloudDialogflowCxV3Page] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DialogflowProjectsLocationsAgentsFlowsPagesCreateSecurity = field(default=None)
+    path_params: DialogflowProjectsLocationsAgentsFlowsPagesCreatePathParams = field()
+    query_params: DialogflowProjectsLocationsAgentsFlowsPagesCreateQueryParams = field()
+    security: DialogflowProjectsLocationsAgentsFlowsPagesCreateSecurity = field()
+    request: Optional[shared.GoogleCloudDialogflowCxV3PageInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DialogflowProjectsLocationsAgentsFlowsPagesCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_dialogflow_cx_v3_page: Optional[shared.GoogleCloudDialogflowCxV3Page] = field(default=None)
-    status_code: int = field(default=None)
     

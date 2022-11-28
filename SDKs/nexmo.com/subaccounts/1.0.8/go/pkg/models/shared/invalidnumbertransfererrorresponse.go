@@ -1,5 +1,7 @@
 package shared
 
+// InvalidNumberTransferErrorResponse
+// Invalid Transfer
 type InvalidNumberTransferErrorResponse struct {
 	Detail   string `json:"detail"`
 	Instance string `json:"instance"`

@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConflictDetailLevelTypeEnumEnum } from "./conflictdetailleveltypeenumenum";
 import { ConflictResolution } from "./conflictresolution";
 import { ConflictResolutionStrategyTypeEnumEnum } from "./conflictresolutionstrategytypeenumenum";
 import { MergeOptionTypeEnumEnum } from "./mergeoptiontypeenumenum";
 
 
+
 export class CreateUnreferencedMergeCommitInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authorName" })
+  @SpeakeasyMetadata({ data: "json, name=authorName" })
   authorName?: string;
 
-  @Metadata({ data: "json, name=commitMessage" })
+  @SpeakeasyMetadata({ data: "json, name=commitMessage" })
   commitMessage?: string;
 
-  @Metadata({ data: "json, name=conflictDetailLevel" })
+  @SpeakeasyMetadata({ data: "json, name=conflictDetailLevel" })
   conflictDetailLevel?: ConflictDetailLevelTypeEnumEnum;
 
-  @Metadata({ data: "json, name=conflictResolution" })
+  @SpeakeasyMetadata({ data: "json, name=conflictResolution" })
   conflictResolution?: ConflictResolution;
 
-  @Metadata({ data: "json, name=conflictResolutionStrategy" })
+  @SpeakeasyMetadata({ data: "json, name=conflictResolutionStrategy" })
   conflictResolutionStrategy?: ConflictResolutionStrategyTypeEnumEnum;
 
-  @Metadata({ data: "json, name=destinationCommitSpecifier" })
+  @SpeakeasyMetadata({ data: "json, name=destinationCommitSpecifier" })
   destinationCommitSpecifier: string;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=keepEmptyFolders" })
+  @SpeakeasyMetadata({ data: "json, name=keepEmptyFolders" })
   keepEmptyFolders?: boolean;
 
-  @Metadata({ data: "json, name=mergeOption" })
+  @SpeakeasyMetadata({ data: "json, name=mergeOption" })
   mergeOption: MergeOptionTypeEnumEnum;
 
-  @Metadata({ data: "json, name=repositoryName" })
+  @SpeakeasyMetadata({ data: "json, name=repositoryName" })
   repositoryName: string;
 
-  @Metadata({ data: "json, name=sourceCommitSpecifier" })
+  @SpeakeasyMetadata({ data: "json, name=sourceCommitSpecifier" })
   sourceCommitSpecifier: string;
 }

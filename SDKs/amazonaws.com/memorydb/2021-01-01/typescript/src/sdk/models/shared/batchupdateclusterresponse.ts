@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Cluster } from "./cluster";
 import { UnprocessedCluster } from "./unprocessedcluster";
 
 
+
 export class BatchUpdateClusterResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ProcessedClusters", elemType: shared.Cluster })
+  @SpeakeasyMetadata({ data: "json, name=ProcessedClusters", elemType: Cluster })
   processedClusters?: Cluster[];
 
-  @Metadata({ data: "json, name=UnprocessedClusters", elemType: shared.UnprocessedCluster })
+  @SpeakeasyMetadata({ data: "json, name=UnprocessedClusters", elemType: UnprocessedCluster })
   unprocessedClusters?: UnprocessedCluster[];
 }

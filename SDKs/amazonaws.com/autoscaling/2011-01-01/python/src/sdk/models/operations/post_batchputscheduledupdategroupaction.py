@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostBatchPutScheduledUpdateGroupActionActionEnum(str, Enum):
     BATCH_PUT_SCHEDULED_UPDATE_GROUP_ACTION = "BatchPutScheduledUpdateGroupAction"
@@ -10,8 +14,8 @@ class PostBatchPutScheduledUpdateGroupActionVersionEnum(str, Enum):
 
 @dataclass
 class PostBatchPutScheduledUpdateGroupActionQueryParams:
-    action: PostBatchPutScheduledUpdateGroupActionActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostBatchPutScheduledUpdateGroupActionVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostBatchPutScheduledUpdateGroupActionActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostBatchPutScheduledUpdateGroupActionVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostBatchPutScheduledUpdateGroupActionHeaders:
 
 @dataclass
 class PostBatchPutScheduledUpdateGroupActionRequest:
-    query_params: PostBatchPutScheduledUpdateGroupActionQueryParams = field(default=None)
-    headers: PostBatchPutScheduledUpdateGroupActionHeaders = field(default=None)
+    headers: PostBatchPutScheduledUpdateGroupActionHeaders = field()
+    query_params: PostBatchPutScheduledUpdateGroupActionQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostBatchPutScheduledUpdateGroupActionResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

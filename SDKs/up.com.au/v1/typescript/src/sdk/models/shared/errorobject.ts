@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ErrorObjectSource
@@ -9,10 +10,10 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * 
 **/
 export class ErrorObjectSource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=parameter" })
+  @SpeakeasyMetadata({ data: "json, name=parameter" })
   parameter?: string;
 
-  @Metadata({ data: "json, name=pointer" })
+  @SpeakeasyMetadata({ data: "json, name=pointer" })
   pointer?: string;
 }
 
@@ -23,15 +24,15 @@ export class ErrorObjectSource extends SpeakeasyBase {
  * 
 **/
 export class ErrorObject extends SpeakeasyBase {
-  @Metadata({ data: "json, name=detail" })
+  @SpeakeasyMetadata({ data: "json, name=detail" })
   detail: string;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: ErrorObjectSource;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title: string;
 }

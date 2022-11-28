@@ -22,12 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { AttachedDisk } from "./attacheddisk";
 import { NetworkConfig } from "./networkconfig";
+import { NetworkEndpoint } from "./networkendpoint";
 import { SchedulingConfig } from "./schedulingconfig";
 import { ServiceAccount } from "./serviceaccount";
 import { ShieldedInstanceConfig } from "./shieldedinstanceconfig";
+import { Symptom } from "./symptom";
 export var NodeApiVersionEnum;
 (function (NodeApiVersionEnum) {
     NodeApiVersionEnum["ApiVersionUnspecified"] = "API_VERSION_UNSPECIFIED";
@@ -35,14 +37,6 @@ export var NodeApiVersionEnum;
     NodeApiVersionEnum["V1"] = "V1";
     NodeApiVersionEnum["V2Alpha1"] = "V2_ALPHA1";
 })(NodeApiVersionEnum || (NodeApiVersionEnum = {}));
-export var NodeHealthEnum;
-(function (NodeHealthEnum) {
-    NodeHealthEnum["HealthUnspecified"] = "HEALTH_UNSPECIFIED";
-    NodeHealthEnum["Healthy"] = "HEALTHY";
-    NodeHealthEnum["Timeout"] = "TIMEOUT";
-    NodeHealthEnum["UnhealthyTensorflow"] = "UNHEALTHY_TENSORFLOW";
-    NodeHealthEnum["UnhealthyMaintenance"] = "UNHEALTHY_MAINTENANCE";
-})(NodeHealthEnum || (NodeHealthEnum = {}));
 export var NodeStateEnum;
 (function (NodeStateEnum) {
     NodeStateEnum["StateUnspecified"] = "STATE_UNSPECIFIED";
@@ -61,6 +55,14 @@ export var NodeStateEnum;
     NodeStateEnum["Hidden"] = "HIDDEN";
     NodeStateEnum["Unhiding"] = "UNHIDING";
 })(NodeStateEnum || (NodeStateEnum = {}));
+export var NodeHealthEnum;
+(function (NodeHealthEnum) {
+    NodeHealthEnum["HealthUnspecified"] = "HEALTH_UNSPECIFIED";
+    NodeHealthEnum["Healthy"] = "HEALTHY";
+    NodeHealthEnum["Timeout"] = "TIMEOUT";
+    NodeHealthEnum["UnhealthyTensorflow"] = "UNHEALTHY_TENSORFLOW";
+    NodeHealthEnum["UnhealthyMaintenance"] = "UNHEALTHY_MAINTENANCE";
+})(NodeHealthEnum || (NodeHealthEnum = {}));
 // Node
 /**
  * A TPU instance.
@@ -71,89 +73,157 @@ var Node = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=acceleratorType" }),
+        SpeakeasyMetadata({ data: "json, name=acceleratorType" }),
         __metadata("design:type", String)
     ], Node.prototype, "acceleratorType", void 0);
     __decorate([
-        Metadata({ data: "json, name=apiVersion" }),
+        SpeakeasyMetadata({ data: "json, name=apiVersion" }),
         __metadata("design:type", String)
     ], Node.prototype, "apiVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=cidrBlock" }),
+        SpeakeasyMetadata({ data: "json, name=cidrBlock" }),
         __metadata("design:type", String)
     ], Node.prototype, "cidrBlock", void 0);
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", String)
     ], Node.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=dataDisks", elemType: shared.AttachedDisk }),
+        SpeakeasyMetadata({ data: "json, name=dataDisks", elemType: AttachedDisk }),
         __metadata("design:type", Array)
     ], Node.prototype, "dataDisks", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], Node.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=health" }),
+        SpeakeasyMetadata({ data: "json, name=health" }),
         __metadata("design:type", String)
     ], Node.prototype, "health", void 0);
     __decorate([
-        Metadata({ data: "json, name=healthDescription" }),
+        SpeakeasyMetadata({ data: "json, name=healthDescription" }),
         __metadata("design:type", String)
     ], Node.prototype, "healthDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], Node.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=labels" }),
+        SpeakeasyMetadata({ data: "json, name=labels" }),
         __metadata("design:type", Map)
     ], Node.prototype, "labels", void 0);
     __decorate([
-        Metadata({ data: "json, name=metadata" }),
+        SpeakeasyMetadata({ data: "json, name=metadata" }),
         __metadata("design:type", Map)
     ], Node.prototype, "metadata", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Node.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=networkConfig" }),
+        SpeakeasyMetadata({ data: "json, name=networkConfig" }),
         __metadata("design:type", NetworkConfig)
     ], Node.prototype, "networkConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=networkEndpoints", elemType: shared.NetworkEndpoint }),
+        SpeakeasyMetadata({ data: "json, name=networkEndpoints", elemType: NetworkEndpoint }),
         __metadata("design:type", Array)
     ], Node.prototype, "networkEndpoints", void 0);
     __decorate([
-        Metadata({ data: "json, name=runtimeVersion" }),
+        SpeakeasyMetadata({ data: "json, name=queuedResource" }),
+        __metadata("design:type", String)
+    ], Node.prototype, "queuedResource", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=runtimeVersion" }),
         __metadata("design:type", String)
     ], Node.prototype, "runtimeVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=schedulingConfig" }),
+        SpeakeasyMetadata({ data: "json, name=schedulingConfig" }),
         __metadata("design:type", SchedulingConfig)
     ], Node.prototype, "schedulingConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=serviceAccount" }),
+        SpeakeasyMetadata({ data: "json, name=serviceAccount" }),
         __metadata("design:type", ServiceAccount)
     ], Node.prototype, "serviceAccount", void 0);
     __decorate([
-        Metadata({ data: "json, name=shieldedInstanceConfig" }),
+        SpeakeasyMetadata({ data: "json, name=shieldedInstanceConfig" }),
         __metadata("design:type", ShieldedInstanceConfig)
     ], Node.prototype, "shieldedInstanceConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], Node.prototype, "state", void 0);
     __decorate([
-        Metadata({ data: "json, name=symptoms", elemType: shared.Symptom }),
+        SpeakeasyMetadata({ data: "json, name=symptoms", elemType: Symptom }),
         __metadata("design:type", Array)
     ], Node.prototype, "symptoms", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags" }),
+        SpeakeasyMetadata({ data: "json, name=tags" }),
         __metadata("design:type", Array)
     ], Node.prototype, "tags", void 0);
     return Node;
 }(SpeakeasyBase));
 export { Node };
+// NodeInput
+/**
+ * A TPU instance.
+**/
+var NodeInput = /** @class */ (function (_super) {
+    __extends(NodeInput, _super);
+    function NodeInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=acceleratorType" }),
+        __metadata("design:type", String)
+    ], NodeInput.prototype, "acceleratorType", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=cidrBlock" }),
+        __metadata("design:type", String)
+    ], NodeInput.prototype, "cidrBlock", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=dataDisks", elemType: AttachedDisk }),
+        __metadata("design:type", Array)
+    ], NodeInput.prototype, "dataDisks", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=description" }),
+        __metadata("design:type", String)
+    ], NodeInput.prototype, "description", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=health" }),
+        __metadata("design:type", String)
+    ], NodeInput.prototype, "health", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=labels" }),
+        __metadata("design:type", Map)
+    ], NodeInput.prototype, "labels", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=metadata" }),
+        __metadata("design:type", Map)
+    ], NodeInput.prototype, "metadata", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=networkConfig" }),
+        __metadata("design:type", NetworkConfig)
+    ], NodeInput.prototype, "networkConfig", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=runtimeVersion" }),
+        __metadata("design:type", String)
+    ], NodeInput.prototype, "runtimeVersion", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=schedulingConfig" }),
+        __metadata("design:type", SchedulingConfig)
+    ], NodeInput.prototype, "schedulingConfig", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=serviceAccount" }),
+        __metadata("design:type", ServiceAccount)
+    ], NodeInput.prototype, "serviceAccount", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=shieldedInstanceConfig" }),
+        __metadata("design:type", ShieldedInstanceConfig)
+    ], NodeInput.prototype, "shieldedInstanceConfig", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=tags" }),
+        __metadata("design:type", Array)
+    ], NodeInput.prototype, "tags", void 0);
+    return NodeInput;
+}(SpeakeasyBase));
+export { NodeInput };

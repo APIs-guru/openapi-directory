@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Arc } from "./arc";
 import { Word } from "./word";
 export declare class DependenciesOut extends SpeakeasyBase {

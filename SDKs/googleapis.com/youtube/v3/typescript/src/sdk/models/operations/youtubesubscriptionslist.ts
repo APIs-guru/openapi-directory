@@ -1,153 +1,154 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum YoutubeSubscriptionsListOrderEnum {
-    SubscriptionOrderUnspecified = "subscriptionOrderUnspecified"
-,    Relevance = "relevance"
-,    Unread = "unread"
-,    Alphabetical = "alphabetical"
+    SubscriptionOrderUnspecified = "subscriptionOrderUnspecified",
+    Relevance = "relevance",
+    Unread = "unread",
+    Alphabetical = "alphabetical"
 }
 
 
 export class YoutubeSubscriptionsListQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" })
   dollarXgafv?: shared.XgafvEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=access_token" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" })
   accessToken?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=alt" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" })
   alt?: shared.AltEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=callback" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" })
   callback?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=channelId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=channelId" })
   channelId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" })
   fields?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=forChannelId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=forChannelId" })
   forChannelId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=id" })
   id?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=key" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" })
   key?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxResults" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=mine" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=mine" })
   mine?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=myRecentSubscribers" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=myRecentSubscribers" })
   myRecentSubscribers?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=mySubscribers" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=mySubscribers" })
   mySubscribers?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" })
   oauthToken?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=onBehalfOfContentOwner" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=onBehalfOfContentOwner" })
   onBehalfOfContentOwner?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=onBehalfOfContentOwnerChannel" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=onBehalfOfContentOwnerChannel" })
   onBehalfOfContentOwnerChannel?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=order" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=order" })
   order?: YoutubeSubscriptionsListOrderEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=pageToken" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pageToken" })
   pageToken?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=part" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=part" })
   part: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" })
   prettyPrint?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" })
   quotaUser?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" })
   uploadType?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" })
   uploadProtocol?: string;
 }
 
 
 export class YoutubeSubscriptionsListSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2: shared.SchemeOauth2;
 
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2c: shared.SchemeOauth2c;
 }
 
 
 export class YoutubeSubscriptionsListSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2: shared.SchemeOauth2;
 
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2c: shared.SchemeOauth2c;
 }
 
 
 export class YoutubeSubscriptionsListSecurityOption3 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2: shared.SchemeOauth2;
 
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2c: shared.SchemeOauth2c;
 }
 
 
 export class YoutubeSubscriptionsListSecurityOption4 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2: shared.SchemeOauth2;
 
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2c: shared.SchemeOauth2c;
 }
 
 
 export class YoutubeSubscriptionsListSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
+  @SpeakeasyMetadata({ data: "security, option=true" })
   option1?: YoutubeSubscriptionsListSecurityOption1;
 
-  @Metadata({ data: "security, option=true" })
+  @SpeakeasyMetadata({ data: "security, option=true" })
   option2?: YoutubeSubscriptionsListSecurityOption2;
 
-  @Metadata({ data: "security, option=true" })
+  @SpeakeasyMetadata({ data: "security, option=true" })
   option3?: YoutubeSubscriptionsListSecurityOption3;
 
-  @Metadata({ data: "security, option=true" })
+  @SpeakeasyMetadata({ data: "security, option=true" })
   option4?: YoutubeSubscriptionsListSecurityOption4;
 }
 
 
 export class YoutubeSubscriptionsListRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: YoutubeSubscriptionsListQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: YoutubeSubscriptionsListSecurity;
 }
 
 
 export class YoutubeSubscriptionsListResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   subscriptionListResponse?: shared.SubscriptionListResponse;
 }

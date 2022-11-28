@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsDynamoDbTableSseDescription
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about the server-side encryption for the table.
 **/
 export class AwsDynamoDbTableSseDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=InaccessibleEncryptionDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=InaccessibleEncryptionDateTime" })
   inaccessibleEncryptionDateTime?: string;
 
-  @Metadata({ data: "json, name=KmsMasterKeyArn" })
+  @SpeakeasyMetadata({ data: "json, name=KmsMasterKeyArn" })
   kmsMasterKeyArn?: string;
 
-  @Metadata({ data: "json, name=SseType" })
+  @SpeakeasyMetadata({ data: "json, name=SseType" })
   sseType?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: string;
 }

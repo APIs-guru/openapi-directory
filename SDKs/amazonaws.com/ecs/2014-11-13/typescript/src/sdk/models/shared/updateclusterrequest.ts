@@ -1,16 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ClusterConfiguration } from "./clusterconfiguration";
 import { ClusterSetting } from "./clustersetting";
 
 
+
 export class UpdateClusterRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cluster" })
+  @SpeakeasyMetadata({ data: "json, name=cluster" })
   cluster: string;
 
-  @Metadata({ data: "json, name=configuration" })
+  @SpeakeasyMetadata({ data: "json, name=configuration" })
   configuration?: ClusterConfiguration;
 
-  @Metadata({ data: "json, name=settings", elemType: shared.ClusterSetting })
+  @SpeakeasyMetadata({ data: "json, name=settings", elemType: ClusterSetting })
   settings?: ClusterSetting[];
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class CloudresourcemanagerProjectsSearchQueryParams extends SpeakeasyBase {
     dollarXgafv?: shared.XgafvEnum;
@@ -16,9 +16,17 @@ export declare class CloudresourcemanagerProjectsSearchQueryParams extends Speak
     uploadType?: string;
     uploadProtocol?: string;
 }
-export declare class CloudresourcemanagerProjectsSearchSecurity extends SpeakeasyBase {
+export declare class CloudresourcemanagerProjectsSearchSecurityOption1 extends SpeakeasyBase {
     oauth2: shared.SchemeOauth2;
     oauth2c: shared.SchemeOauth2c;
+}
+export declare class CloudresourcemanagerProjectsSearchSecurityOption2 extends SpeakeasyBase {
+    oauth2: shared.SchemeOauth2;
+    oauth2c: shared.SchemeOauth2c;
+}
+export declare class CloudresourcemanagerProjectsSearchSecurity extends SpeakeasyBase {
+    option1?: CloudresourcemanagerProjectsSearchSecurityOption1;
+    option2?: CloudresourcemanagerProjectsSearchSecurityOption2;
 }
 export declare class CloudresourcemanagerProjectsSearchRequest extends SpeakeasyBase {
     queryParams: CloudresourcemanagerProjectsSearchQueryParams;

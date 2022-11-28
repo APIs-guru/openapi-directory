@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ProtocolTodGettimePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" })
   agentNum: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=numRetries" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=numRetries" })
   numRetries: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=portNum" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=portNum" })
   portNum: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=scriptName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=scriptName" })
   scriptName: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=serverAddr" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=serverAddr" })
   serverAddr: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=timeSec" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=timeSec" })
   timeSec: number;
 }
 
 
 export class ProtocolTodGettimeRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ProtocolTodGettimePathParams;
 }
 
 
 export class ProtocolTodGettimeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   protocolTodGettime200ApplicationJsonStrings?: string[];
 }

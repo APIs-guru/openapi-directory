@@ -31,7 +31,7 @@ type CloudsupportCasesPatchSecurity struct {
 type CloudsupportCasesPatchRequest struct {
 	PathParams  CloudsupportCasesPatchPathParams
 	QueryParams CloudsupportCasesPatchQueryParams
-	Request     *shared.Case `request:"mediaType=application/json"`
+	Request     *shared.CaseInput `request:"mediaType=application/json"`
 	Security    CloudsupportCasesPatchSecurity
 }
 

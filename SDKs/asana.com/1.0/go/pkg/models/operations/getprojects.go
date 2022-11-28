@@ -14,12 +14,12 @@ type GetProjectsQueryParams struct {
 	Workspace *string  `queryParam:"style=form,explode=true,name=workspace"`
 }
 
-type GetProjectsRequest struct {
-	QueryParams GetProjectsQueryParams
-}
-
 type GetProjects200ApplicationJSON struct {
 	Data []shared.ProjectCompact `json:"data,omitempty"`
+}
+
+type GetProjectsRequest struct {
+	QueryParams GetProjectsQueryParams
 }
 
 type GetProjectsResponse struct {

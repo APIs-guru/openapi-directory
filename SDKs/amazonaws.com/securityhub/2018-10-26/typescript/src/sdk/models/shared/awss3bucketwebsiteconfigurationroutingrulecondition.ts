@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsS3BucketWebsiteConfigurationRoutingRuleCondition
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The condition that must be met in order to apply the routing rule.
 **/
 export class AwsS3BucketWebsiteConfigurationRoutingRuleCondition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=HttpErrorCodeReturnedEquals" })
+  @SpeakeasyMetadata({ data: "json, name=HttpErrorCodeReturnedEquals" })
   httpErrorCodeReturnedEquals?: string;
 
-  @Metadata({ data: "json, name=KeyPrefixEquals" })
+  @SpeakeasyMetadata({ data: "json, name=KeyPrefixEquals" })
   keyPrefixEquals?: string;
 }

@@ -22,30 +22,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var OverallQualityResponse = /** @class */ (function (_super) {
     __extends(OverallQualityResponse, _super);
     function OverallQualityResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=data_quality" }),
+        SpeakeasyMetadata({ data: "json, name=data_quality" }),
         __metadata("design:type", Number)
     ], OverallQualityResponse.prototype, "dataQuality", void 0);
     __decorate([
-        Metadata({ data: "json, name=end_date" }),
+        SpeakeasyMetadata({ data: "json, name=end_date" }),
         __metadata("design:type", String)
     ], OverallQualityResponse.prototype, "endDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=row_count" }),
+        SpeakeasyMetadata({ data: "json, name=row_count" }),
         __metadata("design:type", Number)
     ], OverallQualityResponse.prototype, "rowCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=sites" }),
+        SpeakeasyMetadata({ data: "json, name=sites" }),
         __metadata("design:type", String)
     ], OverallQualityResponse.prototype, "sites", void 0);
     __decorate([
-        Metadata({ data: "json, name=start_date" }),
+        SpeakeasyMetadata({ data: "json, name=start_date" }),
         __metadata("design:type", String)
     ], OverallQualityResponse.prototype, "startDate", void 0);
     return OverallQualityResponse;

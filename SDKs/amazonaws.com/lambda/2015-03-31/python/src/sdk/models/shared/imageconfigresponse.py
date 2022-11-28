@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import imageconfigerror
-from . import imageconfig
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ImageConfigResponse:
-    error: Optional[imageconfigerror.ImageConfigError] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Error' }})
-    image_config: Optional[imageconfig.ImageConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ImageConfig' }})
+    r"""ImageConfigResponse
+    Response to GetFunctionConfiguration request.
+    """
+    
+    error: Optional[ImageConfigError] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Error') }})
+    image_config: Optional[ImageConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ImageConfig') }})
     

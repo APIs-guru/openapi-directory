@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Response } from "./response";
 import { WriteControl } from "./writecontrol";
+
 
 
 // BatchUpdatePresentationResponse
@@ -9,12 +9,12 @@ import { WriteControl } from "./writecontrol";
  * Response message from a batch update.
 **/
 export class BatchUpdatePresentationResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=presentationId" })
+  @SpeakeasyMetadata({ data: "json, name=presentationId" })
   presentationId?: string;
 
-  @Metadata({ data: "json, name=replies", elemType: shared.Response })
+  @SpeakeasyMetadata({ data: "json, name=replies", elemType: Response })
   replies?: Response[];
 
-  @Metadata({ data: "json, name=writeControl" })
+  @SpeakeasyMetadata({ data: "json, name=writeControl" })
   writeControl?: WriteControl;
 }

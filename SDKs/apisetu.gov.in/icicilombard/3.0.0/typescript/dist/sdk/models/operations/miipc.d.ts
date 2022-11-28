@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class MiipcRequestBodyCertificateParameters extends SpeakeasyBase {
     insuredDob: string;
@@ -16,10 +16,6 @@ export declare class MiipcRequestBody extends SpeakeasyBase {
 export declare class MiipcSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class MiipcRequest extends SpeakeasyBase {
-    request?: MiipcRequestBody;
-    security: MiipcSecurity;
 }
 export declare enum Miipc400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -102,6 +98,10 @@ export declare enum Miipc504ApplicationJsonErrorDescriptionEnum {
 export declare class Miipc504ApplicationJson extends SpeakeasyBase {
     error?: Miipc504ApplicationJsonErrorEnum;
     errorDescription?: Miipc504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class MiipcRequest extends SpeakeasyBase {
+    request?: MiipcRequestBody;
+    security: MiipcSecurity;
 }
 export declare class MiipcResponse extends SpeakeasyBase {
     contentType: string;

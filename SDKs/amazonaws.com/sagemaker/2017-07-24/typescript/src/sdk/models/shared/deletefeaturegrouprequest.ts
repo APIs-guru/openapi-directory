@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteFeatureGroupRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FeatureGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=FeatureGroupName" })
   featureGroupName: string;
 }

@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import buildsystem_shared_dto_job
-from . import api_pagedresponsemetadata
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class APIPagedResponseBuildSystemSharedDtoJob:
-    entities: List[buildsystem_shared_dto_job.BuildSystemSharedDtoJob] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Entities' }})
-    metadata: api_pagedresponsemetadata.APIPagedResponseMetadata = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Metadata' }})
+    r"""APIPagedResponseBuildSystemSharedDtoJob
+    A response containing a page of results and metadata concerning the results
+    """
+    
+    entities: List[BuildSystemSharedDtoJob] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Entities') }})
+    metadata: APIPagedResponseMetadata = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Metadata') }})
     

@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum GetAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionTypeFunctionIdGetByIdFunctionTypeEnum {
-    PreActionExecution = "PRE_ACTION_EXECUTION"
-,    PreFetchOptions = "PRE_FETCH_OPTIONS"
-,    PostFetchOptions = "POST_FETCH_OPTIONS"
+    PreActionExecution = "PRE_ACTION_EXECUTION",
+    PreFetchOptions = "PRE_FETCH_OPTIONS",
+    PostFetchOptions = "POST_FETCH_OPTIONS"
 }
 
 
 export class GetAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionTypeFunctionIdGetByIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=appId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=appId" })
   appId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=definitionId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=definitionId" })
   definitionId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=functionId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=functionId" })
   functionId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=functionType" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=functionType" })
   functionType: GetAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionTypeFunctionIdGetByIdFunctionTypeEnum;
 }
 
 
 export class GetAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionTypeFunctionIdGetByIdSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
   developerHapikey: shared.SchemeDeveloperHapikey;
 }
 
 
 export class GetAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionTypeFunctionIdGetByIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionTypeFunctionIdGetByIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionTypeFunctionIdGetByIdSecurity;
 }
 
 
 export class GetAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionTypeFunctionIdGetByIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   actionFunction?: shared.ActionFunction;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

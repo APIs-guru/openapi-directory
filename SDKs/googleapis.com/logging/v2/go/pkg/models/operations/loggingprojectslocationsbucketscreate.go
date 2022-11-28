@@ -41,7 +41,7 @@ type LoggingProjectsLocationsBucketsCreateSecurity struct {
 type LoggingProjectsLocationsBucketsCreateRequest struct {
 	PathParams  LoggingProjectsLocationsBucketsCreatePathParams
 	QueryParams LoggingProjectsLocationsBucketsCreateQueryParams
-	Request     *shared.LogBucket `request:"mediaType=application/json"`
+	Request     *shared.LogBucketInput `request:"mediaType=application/json"`
 	Security    LoggingProjectsLocationsBucketsCreateSecurity
 }
 

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActionTypeId } from "./actiontypeid";
+
 
 
 // PollForJobsInput
@@ -7,12 +8,12 @@ import { ActionTypeId } from "./actiontypeid";
  * Represents the input of a <code>PollForJobs</code> action.
 **/
 export class PollForJobsInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actionTypeId" })
+  @SpeakeasyMetadata({ data: "json, name=actionTypeId" })
   actionTypeId: ActionTypeId;
 
-  @Metadata({ data: "json, name=maxBatchSize" })
+  @SpeakeasyMetadata({ data: "json, name=maxBatchSize" })
   maxBatchSize?: number;
 
-  @Metadata({ data: "json, name=queryParam" })
+  @SpeakeasyMetadata({ data: "json, name=queryParam" })
   queryParam?: Map<string, string>;
 }

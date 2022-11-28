@@ -11,6 +11,8 @@ const (
 	GooglePrivacyDlpV2OutputStorageConfigOutputSchemaEnumAllColumns              GooglePrivacyDlpV2OutputStorageConfigOutputSchemaEnum = "ALL_COLUMNS"
 )
 
+// GooglePrivacyDlpV2OutputStorageConfig
+// Cloud repository for storing output.
 type GooglePrivacyDlpV2OutputStorageConfig struct {
 	OutputSchema *GooglePrivacyDlpV2OutputStorageConfigOutputSchemaEnum `json:"outputSchema,omitempty"`
 	Table        *GooglePrivacyDlpV2BigQueryTable                       `json:"table,omitempty"`

@@ -1,5 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { FieldMetadataInput } from "./fieldmetadata";
 import { FieldMetadata } from "./fieldmetadata";
+
+
+
+// SkillInput
+/** 
+ * A skill that the person has.
+**/
+export class SkillInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
+  metadata?: FieldMetadataInput;
+
+  @SpeakeasyMetadata({ data: "json, name=value" })
+  value?: string;
+}
 
 
 // Skill
@@ -7,9 +22,9 @@ import { FieldMetadata } from "./fieldmetadata";
  * A skill that the person has.
 **/
 export class Skill extends SpeakeasyBase {
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: FieldMetadata;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }

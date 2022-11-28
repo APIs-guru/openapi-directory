@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TestTargetsForShard } from "./testtargetsforshard";
+
 
 
 // Shard
@@ -7,12 +8,12 @@ import { TestTargetsForShard } from "./testtargetsforshard";
  * Output only. Details about the shard.
 **/
 export class Shard extends SpeakeasyBase {
-  @Metadata({ data: "json, name=numShards" })
+  @SpeakeasyMetadata({ data: "json, name=numShards" })
   numShards?: number;
 
-  @Metadata({ data: "json, name=shardIndex" })
+  @SpeakeasyMetadata({ data: "json, name=shardIndex" })
   shardIndex?: number;
 
-  @Metadata({ data: "json, name=testTargetsForShard" })
+  @SpeakeasyMetadata({ data: "json, name=testTargetsForShard" })
   testTargetsForShard?: TestTargetsForShard;
 }

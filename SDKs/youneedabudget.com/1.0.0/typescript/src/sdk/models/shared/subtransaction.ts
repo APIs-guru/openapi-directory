@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SubTransaction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=amount" })
+  @SpeakeasyMetadata({ data: "json, name=amount" })
   amount: number;
 
-  @Metadata({ data: "json, name=category_id" })
+  @SpeakeasyMetadata({ data: "json, name=category_id" })
   categoryId?: string;
 
-  @Metadata({ data: "json, name=category_name" })
+  @SpeakeasyMetadata({ data: "json, name=category_name" })
   categoryName?: string;
 
-  @Metadata({ data: "json, name=deleted" })
+  @SpeakeasyMetadata({ data: "json, name=deleted" })
   deleted: boolean;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=memo" })
+  @SpeakeasyMetadata({ data: "json, name=memo" })
   memo?: string;
 
-  @Metadata({ data: "json, name=payee_id" })
+  @SpeakeasyMetadata({ data: "json, name=payee_id" })
   payeeId?: string;
 
-  @Metadata({ data: "json, name=payee_name" })
+  @SpeakeasyMetadata({ data: "json, name=payee_name" })
   payeeName?: string;
 
-  @Metadata({ data: "json, name=transaction_id" })
+  @SpeakeasyMetadata({ data: "json, name=transaction_id" })
   transactionId: string;
 
-  @Metadata({ data: "json, name=transfer_account_id" })
+  @SpeakeasyMetadata({ data: "json, name=transfer_account_id" })
   transferAccountId?: string;
 
-  @Metadata({ data: "json, name=transfer_transaction_id" })
+  @SpeakeasyMetadata({ data: "json, name=transfer_transaction_id" })
   transferTransactionId?: string;
 }

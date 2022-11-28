@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import replicationinstance
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ModifyReplicationInstanceResponse:
-    replication_instance: Optional[replicationinstance.ReplicationInstance] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ReplicationInstance' }})
+    r"""ModifyReplicationInstanceResponse
+    <p/>
+    """
+    
+    replication_instance: Optional[ReplicationInstance] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ReplicationInstance') }})
     

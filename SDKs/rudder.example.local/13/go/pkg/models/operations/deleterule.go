@@ -8,10 +8,6 @@ type DeleteRulePathParams struct {
 	RuleID string `pathParam:"style=simple,explode=false,name=ruleId"`
 }
 
-type DeleteRuleRequest struct {
-	PathParams DeleteRulePathParams
-}
-
 type DeleteRule200ApplicationJSONActionEnum string
 
 const (
@@ -33,6 +29,10 @@ type DeleteRule200ApplicationJSON struct {
 	Action DeleteRule200ApplicationJSONActionEnum `json:"action"`
 	Data   DeleteRule200ApplicationJSONData       `json:"data"`
 	Result DeleteRule200ApplicationJSONResultEnum `json:"result"`
+}
+
+type DeleteRuleRequest struct {
+	PathParams DeleteRulePathParams
 }
 
 type DeleteRuleResponse struct {

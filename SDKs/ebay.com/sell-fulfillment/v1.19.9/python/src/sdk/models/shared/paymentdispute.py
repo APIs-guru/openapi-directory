@@ -1,36 +1,37 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import simpleamount
-from . import infofrombuyer
-from . import disputeevidence
-from . import evidencerequest
-from . import orderlineitems
-from . import monetarytransaction
-from . import paymentdisputeoutcomedetail
-from . import returnaddress
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class PaymentDispute:
-    amount: Optional[simpleamount.SimpleAmount] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'amount' }})
-    available_choices: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'availableChoices' }})
-    buyer_provided: Optional[infofrombuyer.InfoFromBuyer] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'buyerProvided' }})
-    buyer_username: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'buyerUsername' }})
-    closed_date: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'closedDate' }})
-    evidence: Optional[List[disputeevidence.DisputeEvidence]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'evidence' }})
-    evidence_requests: Optional[List[evidencerequest.EvidenceRequest]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'evidenceRequests' }})
-    line_items: Optional[List[orderlineitems.OrderLineItems]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lineItems' }})
-    monetary_transactions: Optional[List[monetarytransaction.MonetaryTransaction]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'monetaryTransactions' }})
-    open_date: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'openDate' }})
-    order_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'orderId' }})
-    payment_dispute_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'paymentDisputeId' }})
-    payment_dispute_status: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'paymentDisputeStatus' }})
-    reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reason' }})
-    resolution: Optional[paymentdisputeoutcomedetail.PaymentDisputeOutcomeDetail] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resolution' }})
-    respond_by_date: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'respondByDate' }})
-    return_address: Optional[returnaddress.ReturnAddress] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'returnAddress' }})
-    revision: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'revision' }})
-    seller_response: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sellerResponse' }})
+    r"""PaymentDispute
+    This type is used by the base response of the getPaymentDispute method. The getPaymentDispute method retrieves detailed information on a specific payment dispute.
+    """
+    
+    amount: Optional[SimpleAmount] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('amount') }})
+    available_choices: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('availableChoices') }})
+    buyer_provided: Optional[InfoFromBuyer] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('buyerProvided') }})
+    buyer_username: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('buyerUsername') }})
+    closed_date: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('closedDate') }})
+    evidence: Optional[List[DisputeEvidence]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('evidence') }})
+    evidence_requests: Optional[List[EvidenceRequest]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('evidenceRequests') }})
+    line_items: Optional[List[OrderLineItems]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lineItems') }})
+    monetary_transactions: Optional[List[MonetaryTransaction]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('monetaryTransactions') }})
+    open_date: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('openDate') }})
+    order_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('orderId') }})
+    payment_dispute_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('paymentDisputeId') }})
+    payment_dispute_status: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('paymentDisputeStatus') }})
+    reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('reason') }})
+    resolution: Optional[PaymentDisputeOutcomeDetail] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resolution') }})
+    respond_by_date: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('respondByDate') }})
+    return_address: Optional[ReturnAddress] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('returnAddress') }})
+    revision: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('revision') }})
+    seller_response: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sellerResponse') }})
     

@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var SchemeApiKey = /** @class */ (function (_super) {
     __extends(SchemeApiKey, _super);
     function SchemeApiKey() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, name=api_key" }),
+        SpeakeasyMetadata({ data: "security, name=api_key" }),
         __metadata("design:type", String)
     ], SchemeApiKey.prototype, "apiKey", void 0);
     return SchemeApiKey;
@@ -41,51 +41,51 @@ var SchemeApiSecret = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, name=api_secret" }),
+        SpeakeasyMetadata({ data: "security, name=api_secret" }),
         __metadata("design:type", String)
     ], SchemeApiSecret.prototype, "apiKey", void 0);
     return SchemeApiSecret;
 }(SpeakeasyBase));
 export { SchemeApiSecret };
-var SchemeApiSig = /** @class */ (function (_super) {
-    __extends(SchemeApiSig, _super);
-    function SchemeApiSig() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, name=sig" }),
-        __metadata("design:type", String)
-    ], SchemeApiSig.prototype, "apiKey", void 0);
-    return SchemeApiSig;
-}(SpeakeasyBase));
-export { SchemeApiSig };
 var SecurityOption1 = /** @class */ (function (_super) {
     __extends(SecurityOption1, _super);
     function SecurityOption1() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
         __metadata("design:type", SchemeApiKey)
     ], SecurityOption1.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
         __metadata("design:type", SchemeApiSecret)
     ], SecurityOption1.prototype, "apiSecret", void 0);
     return SecurityOption1;
 }(SpeakeasyBase));
 export { SecurityOption1 };
+var SchemeApiSig = /** @class */ (function (_super) {
+    __extends(SchemeApiSig, _super);
+    function SchemeApiSig() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "security, name=sig" }),
+        __metadata("design:type", String)
+    ], SchemeApiSig.prototype, "apiKey", void 0);
+    return SchemeApiSig;
+}(SpeakeasyBase));
+export { SchemeApiSig };
 var SecurityOption2 = /** @class */ (function (_super) {
     __extends(SecurityOption2, _super);
     function SecurityOption2() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
         __metadata("design:type", SchemeApiKey)
     ], SecurityOption2.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
         __metadata("design:type", SchemeApiSig)
     ], SecurityOption2.prototype, "apiSig", void 0);
     return SecurityOption2;
@@ -97,11 +97,11 @@ var Security = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", SecurityOption1)
     ], Security.prototype, "option1", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", SecurityOption2)
     ], Security.prototype, "option2", void 0);
     return Security;

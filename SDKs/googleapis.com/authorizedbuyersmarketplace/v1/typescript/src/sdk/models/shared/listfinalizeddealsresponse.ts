@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FinalizedDeal } from "./finalizeddeal";
+
 
 
 // ListFinalizedDealsResponse
@@ -8,9 +8,9 @@ import { FinalizedDeal } from "./finalizeddeal";
  * Response message for listing finalized deals.
 **/
 export class ListFinalizedDealsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=finalizedDeals", elemType: shared.FinalizedDeal })
+  @SpeakeasyMetadata({ data: "json, name=finalizedDeals", elemType: FinalizedDeal })
   finalizedDeals?: FinalizedDeal[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

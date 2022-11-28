@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SetTimerAction
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information needed to set the timer.
 **/
 export class SetTimerAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=durationExpression" })
+  @SpeakeasyMetadata({ data: "json, name=durationExpression" })
   durationExpression?: string;
 
-  @Metadata({ data: "json, name=seconds" })
+  @SpeakeasyMetadata({ data: "json, name=seconds" })
   seconds?: number;
 
-  @Metadata({ data: "json, name=timerName" })
+  @SpeakeasyMetadata({ data: "json, name=timerName" })
   timerName: string;
 }

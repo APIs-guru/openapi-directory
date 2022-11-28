@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GkebackupProjectsLocationsOperationsListPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,20 +29,20 @@ class GkebackupProjectsLocationsOperationsListQueryParams:
 
 @dataclass
 class GkebackupProjectsLocationsOperationsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GkebackupProjectsLocationsOperationsListRequest:
-    path_params: GkebackupProjectsLocationsOperationsListPathParams = field(default=None)
-    query_params: GkebackupProjectsLocationsOperationsListQueryParams = field(default=None)
-    security: GkebackupProjectsLocationsOperationsListSecurity = field(default=None)
+    path_params: GkebackupProjectsLocationsOperationsListPathParams = field()
+    query_params: GkebackupProjectsLocationsOperationsListQueryParams = field()
+    security: GkebackupProjectsLocationsOperationsListSecurity = field()
     
 
 @dataclass
 class GkebackupProjectsLocationsOperationsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_longrunning_list_operations_response: Optional[shared.GoogleLongrunningListOperationsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

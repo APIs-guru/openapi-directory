@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var ListPolicyAllValuesEnum;
 (function (ListPolicyAllValuesEnum) {
     ListPolicyAllValuesEnum["AllValuesUnspecified"] = "ALL_VALUES_UNSPECIFIED";
@@ -39,23 +39,23 @@ var ListPolicy = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=allValues" }),
+        SpeakeasyMetadata({ data: "json, name=allValues" }),
         __metadata("design:type", String)
     ], ListPolicy.prototype, "allValues", void 0);
     __decorate([
-        Metadata({ data: "json, name=allowedValues" }),
+        SpeakeasyMetadata({ data: "json, name=allowedValues" }),
         __metadata("design:type", Array)
     ], ListPolicy.prototype, "allowedValues", void 0);
     __decorate([
-        Metadata({ data: "json, name=deniedValues" }),
+        SpeakeasyMetadata({ data: "json, name=deniedValues" }),
         __metadata("design:type", Array)
     ], ListPolicy.prototype, "deniedValues", void 0);
     __decorate([
-        Metadata({ data: "json, name=inheritFromParent" }),
+        SpeakeasyMetadata({ data: "json, name=inheritFromParent" }),
         __metadata("design:type", Boolean)
     ], ListPolicy.prototype, "inheritFromParent", void 0);
     __decorate([
-        Metadata({ data: "json, name=suggestedValue" }),
+        SpeakeasyMetadata({ data: "json, name=suggestedValue" }),
         __metadata("design:type", String)
     ], ListPolicy.prototype, "suggestedValue", void 0);
     return ListPolicy;

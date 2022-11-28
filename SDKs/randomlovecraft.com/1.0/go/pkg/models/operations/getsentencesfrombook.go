@@ -12,13 +12,13 @@ type GetSentencesFromBookQueryParams struct {
 	Limit *int64 `queryParam:"style=form,explode=true,name=limit"`
 }
 
+type GetSentencesFromBook200ApplicationJSON struct {
+	Data []shared.Sentence `json:"data,omitempty"`
+}
+
 type GetSentencesFromBookRequest struct {
 	PathParams  GetSentencesFromBookPathParams
 	QueryParams GetSentencesFromBookQueryParams
-}
-
-type GetSentencesFromBook200ApplicationJSON struct {
-	Data []shared.Sentence `json:"data,omitempty"`
 }
 
 type GetSentencesFromBookResponse struct {

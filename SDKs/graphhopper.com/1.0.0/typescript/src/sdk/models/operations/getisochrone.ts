@@ -1,52 +1,53 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum GetIsochroneWeightingEnum {
-    Fastest = "fastest"
-,    Shortest = "shortest"
+    Fastest = "fastest",
+    Shortest = "shortest"
 }
 
 
 export class GetIsochroneQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=buckets" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=buckets" })
   buckets?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=distance_limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=distance_limit" })
   distanceLimit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=point" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=point" })
   point: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=reverse_flow" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=reverse_flow" })
   reverseFlow?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=time_limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=time_limit" })
   timeLimit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=vehicle" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=vehicle" })
   vehicle?: shared.VehicleProfileIdEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=weighting" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=weighting" })
   weighting?: GetIsochroneWeightingEnum;
 }
 
 
 export class GetIsochroneRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetIsochroneQueryParams;
 }
 
 
 export class GetIsochroneResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   ghError?: shared.GhError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   isochroneResponse?: shared.IsochroneResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

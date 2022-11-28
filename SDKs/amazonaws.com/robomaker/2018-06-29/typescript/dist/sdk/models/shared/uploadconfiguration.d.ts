@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { UploadBehaviorEnum } from "./uploadbehaviorenum";
 /**
  * Provides upload configuration information. Files are uploaded from the simulation job to a location you specify.

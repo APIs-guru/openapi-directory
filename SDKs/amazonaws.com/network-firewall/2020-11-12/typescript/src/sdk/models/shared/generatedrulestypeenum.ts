@@ -1,6 +1,7 @@
 
 
+
 export enum GeneratedRulesTypeEnum {
-    Allowlist = "ALLOWLIST"
-,    Denylist = "DENYLIST"
+    Allowlist = "ALLOWLIST",
+    Denylist = "DENYLIST"
 }

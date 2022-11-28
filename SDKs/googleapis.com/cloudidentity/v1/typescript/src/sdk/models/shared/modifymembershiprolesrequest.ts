@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { MembershipRole } from "./membershiprole";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { MembershipRole1 } from "./membershiprole1";
 import { UpdateMembershipRolesParams } from "./updatemembershiprolesparams";
+
 
 
 // ModifyMembershipRolesRequest
@@ -9,12 +9,12 @@ import { UpdateMembershipRolesParams } from "./updatemembershiprolesparams";
  * The request message for MembershipsService.ModifyMembershipRoles.
 **/
 export class ModifyMembershipRolesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=addRoles", elemType: shared.MembershipRole })
-  addRoles?: MembershipRole[];
+  @SpeakeasyMetadata({ data: "json, name=addRoles", elemType: MembershipRole1 })
+  addRoles?: MembershipRole1[];
 
-  @Metadata({ data: "json, name=removeRoles" })
+  @SpeakeasyMetadata({ data: "json, name=removeRoles" })
   removeRoles?: string[];
 
-  @Metadata({ data: "json, name=updateRolesParams", elemType: shared.UpdateMembershipRolesParams })
+  @SpeakeasyMetadata({ data: "json, name=updateRolesParams", elemType: UpdateMembershipRolesParams })
   updateRolesParams?: UpdateMembershipRolesParams[];
 }

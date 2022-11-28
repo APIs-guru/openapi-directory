@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -25,19 +26,19 @@ class DisplayvideoCustomListsListQueryParams:
 
 @dataclass
 class DisplayvideoCustomListsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DisplayvideoCustomListsListRequest:
-    query_params: DisplayvideoCustomListsListQueryParams = field(default=None)
-    security: DisplayvideoCustomListsListSecurity = field(default=None)
+    query_params: DisplayvideoCustomListsListQueryParams = field()
+    security: DisplayvideoCustomListsListSecurity = field()
     
 
 @dataclass
 class DisplayvideoCustomListsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_custom_lists_response: Optional[shared.ListCustomListsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

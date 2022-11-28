@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HistoryEvent } from "./historyevent";
 import { WorkflowExecution } from "./workflowexecution";
 import { WorkflowType } from "./workflowtype";
+
 
 
 // DecisionTask
@@ -10,24 +10,24 @@ import { WorkflowType } from "./workflowtype";
  * A structure that represents a decision task. Decision tasks are sent to deciders in order for them to make decisions.
 **/
 export class DecisionTask extends SpeakeasyBase {
-  @Metadata({ data: "json, name=events", elemType: shared.HistoryEvent })
+  @SpeakeasyMetadata({ data: "json, name=events", elemType: HistoryEvent })
   events: HistoryEvent[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=previousStartedEventId" })
+  @SpeakeasyMetadata({ data: "json, name=previousStartedEventId" })
   previousStartedEventId?: number;
 
-  @Metadata({ data: "json, name=startedEventId" })
+  @SpeakeasyMetadata({ data: "json, name=startedEventId" })
   startedEventId: number;
 
-  @Metadata({ data: "json, name=taskToken" })
+  @SpeakeasyMetadata({ data: "json, name=taskToken" })
   taskToken: string;
 
-  @Metadata({ data: "json, name=workflowExecution" })
+  @SpeakeasyMetadata({ data: "json, name=workflowExecution" })
   workflowExecution: WorkflowExecution;
 
-  @Metadata({ data: "json, name=workflowType" })
+  @SpeakeasyMetadata({ data: "json, name=workflowType" })
   workflowType: WorkflowType;
 }

@@ -5,27 +5,27 @@ from sdk.models import shared
 
 @dataclass
 class GetTagsFromPayInstructionPathParams:
-    employee_id: str = field(default=None, metadata={'path_param': { 'field_name': 'EmployeeId', 'style': 'simple', 'explode': False }})
-    employer_id: str = field(default=None, metadata={'path_param': { 'field_name': 'EmployerId', 'style': 'simple', 'explode': False }})
-    pay_instruction_id: str = field(default=None, metadata={'path_param': { 'field_name': 'PayInstructionId', 'style': 'simple', 'explode': False }})
+    employee_id: str = field(metadata={'path_param': { 'field_name': 'EmployeeId', 'style': 'simple', 'explode': False }})
+    employer_id: str = field(metadata={'path_param': { 'field_name': 'EmployerId', 'style': 'simple', 'explode': False }})
+    pay_instruction_id: str = field(metadata={'path_param': { 'field_name': 'PayInstructionId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetTagsFromPayInstructionHeaders:
-    api_version: str = field(default=None, metadata={'header': { 'field_name': 'Api-Version', 'style': 'simple', 'explode': False }})
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
+    api_version: str = field(metadata={'header': { 'field_name': 'Api-Version', 'style': 'simple', 'explode': False }})
+    authorization: str = field(metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetTagsFromPayInstructionRequest:
-    path_params: GetTagsFromPayInstructionPathParams = field(default=None)
-    headers: GetTagsFromPayInstructionHeaders = field(default=None)
+    headers: GetTagsFromPayInstructionHeaders = field()
+    path_params: GetTagsFromPayInstructionPathParams = field()
     
 
 @dataclass
 class GetTagsFromPayInstructionResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_model: Optional[shared.ErrorModel] = field(default=None)
     link_collection: Optional[shared.LinkCollection] = field(default=None)
-    status_code: int = field(default=None)
     

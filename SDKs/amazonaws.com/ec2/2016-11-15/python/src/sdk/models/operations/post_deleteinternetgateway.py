@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDeleteInternetGatewayActionEnum(str, Enum):
     DELETE_INTERNET_GATEWAY = "DeleteInternetGateway"
@@ -10,8 +14,8 @@ class PostDeleteInternetGatewayVersionEnum(str, Enum):
 
 @dataclass
 class PostDeleteInternetGatewayQueryParams:
-    action: PostDeleteInternetGatewayActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDeleteInternetGatewayVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDeleteInternetGatewayActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDeleteInternetGatewayVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,13 +31,13 @@ class PostDeleteInternetGatewayHeaders:
 
 @dataclass
 class PostDeleteInternetGatewayRequest:
-    query_params: PostDeleteInternetGatewayQueryParams = field(default=None)
-    headers: PostDeleteInternetGatewayHeaders = field(default=None)
+    headers: PostDeleteInternetGatewayHeaders = field()
+    query_params: PostDeleteInternetGatewayQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDeleteInternetGatewayResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

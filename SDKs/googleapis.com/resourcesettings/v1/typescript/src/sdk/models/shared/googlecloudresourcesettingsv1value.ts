@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudResourcesettingsV1ValueEnumValue } from "./googlecloudresourcesettingsv1valueenumvalue";
 import { GoogleCloudResourcesettingsV1ValueStringMap } from "./googlecloudresourcesettingsv1valuestringmap";
 import { GoogleCloudResourcesettingsV1ValueStringSet } from "./googlecloudresourcesettingsv1valuestringset";
+
 
 
 // GoogleCloudResourcesettingsV1Value
@@ -9,21 +10,21 @@ import { GoogleCloudResourcesettingsV1ValueStringSet } from "./googlecloudresour
  * The data in a setting value.
 **/
 export class GoogleCloudResourcesettingsV1Value extends SpeakeasyBase {
-  @Metadata({ data: "json, name=booleanValue" })
+  @SpeakeasyMetadata({ data: "json, name=booleanValue" })
   booleanValue?: boolean;
 
-  @Metadata({ data: "json, name=durationValue" })
+  @SpeakeasyMetadata({ data: "json, name=durationValue" })
   durationValue?: string;
 
-  @Metadata({ data: "json, name=enumValue" })
+  @SpeakeasyMetadata({ data: "json, name=enumValue" })
   enumValue?: GoogleCloudResourcesettingsV1ValueEnumValue;
 
-  @Metadata({ data: "json, name=stringMapValue" })
+  @SpeakeasyMetadata({ data: "json, name=stringMapValue" })
   stringMapValue?: GoogleCloudResourcesettingsV1ValueStringMap;
 
-  @Metadata({ data: "json, name=stringSetValue" })
+  @SpeakeasyMetadata({ data: "json, name=stringSetValue" })
   stringSetValue?: GoogleCloudResourcesettingsV1ValueStringSet;
 
-  @Metadata({ data: "json, name=stringValue" })
+  @SpeakeasyMetadata({ data: "json, name=stringValue" })
   stringValue?: string;
 }

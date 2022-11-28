@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetRatingsListOrderByEnum(str, Enum):
@@ -23,19 +27,19 @@ class GetRatingsListQueryParams:
 
 @dataclass
 class GetRatingsListSecurity:
-    profile_auth: shared.SchemeProfileAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    profile_auth: shared.SchemeProfileAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetRatingsListRequest:
-    query_params: GetRatingsListQueryParams = field(default=None)
-    security: GetRatingsListSecurity = field(default=None)
+    query_params: GetRatingsListQueryParams = field()
+    security: GetRatingsListSecurity = field()
     
 
 @dataclass
 class GetRatingsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     item_list: Optional[shared.ItemList] = field(default=None)
     service_error: Optional[shared.ServiceError] = field(default=None)
-    status_code: int = field(default=None)
     

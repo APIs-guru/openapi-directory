@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SshKey } from "./sshkey";
+
 
 
 // ListSshKeysResponse
@@ -8,9 +8,9 @@ import { SshKey } from "./sshkey";
  * Message for response of ListSSHKeys.
 **/
 export class ListSshKeysResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=sshKeys", elemType: shared.SshKey })
+  @SpeakeasyMetadata({ data: "json, name=sshKeys", elemType: SshKey })
   sshKeys?: SshKey[];
 }

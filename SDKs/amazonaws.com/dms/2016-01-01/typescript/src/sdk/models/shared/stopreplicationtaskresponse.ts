@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReplicationTask } from "./replicationtask";
+
 
 
 // StopReplicationTaskResponse
@@ -7,6 +8,6 @@ import { ReplicationTask } from "./replicationtask";
  * <p/>
 **/
 export class StopReplicationTaskResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ReplicationTask" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicationTask" })
   replicationTask?: ReplicationTask;
 }

@@ -4,7 +4,7 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-var PostV05LinksLinkInitServers = []string{
+var PostV05LinksLinkInitServerList = []string{
 	"https://your-hrp-server.com",
 }
 

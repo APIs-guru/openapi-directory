@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Observation } from "./observation";
 /**
  * Request for beacon and attachment information about beacons that a mobile client has encountered "in the wild".

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetModifyDbSubnetGroupActionEnum(str, Enum):
     MODIFY_DB_SUBNET_GROUP = "ModifyDBSubnetGroup"
@@ -10,11 +14,11 @@ class GetModifyDbSubnetGroupVersionEnum(str, Enum):
 
 @dataclass
 class GetModifyDbSubnetGroupQueryParams:
-    action: GetModifyDbSubnetGroupActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetModifyDbSubnetGroupActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    db_subnet_group_name: str = field(metadata={'query_param': { 'field_name': 'DBSubnetGroupName', 'style': 'form', 'explode': True }})
+    subnet_ids: List[str] = field(metadata={'query_param': { 'field_name': 'SubnetIds', 'style': 'form', 'explode': True }})
+    version: GetModifyDbSubnetGroupVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     db_subnet_group_description: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'DBSubnetGroupDescription', 'style': 'form', 'explode': True }})
-    db_subnet_group_name: str = field(default=None, metadata={'query_param': { 'field_name': 'DBSubnetGroupName', 'style': 'form', 'explode': True }})
-    subnet_ids: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'SubnetIds', 'style': 'form', 'explode': True }})
-    version: GetModifyDbSubnetGroupVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetModifyDbSubnetGroupHeaders:
 
 @dataclass
 class GetModifyDbSubnetGroupRequest:
-    query_params: GetModifyDbSubnetGroupQueryParams = field(default=None)
-    headers: GetModifyDbSubnetGroupHeaders = field(default=None)
+    headers: GetModifyDbSubnetGroupHeaders = field()
+    query_params: GetModifyDbSubnetGroupQueryParams = field()
     
 
 @dataclass
 class GetModifyDbSubnetGroupResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

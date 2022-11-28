@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from sdk.models import shared
 
 
 @dataclass
 class PutUsersUserIDChangePasswordPathParams:
-    user_id: str = field(default=None, metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
+    user_id: str = field(metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,14 +21,14 @@ class PutUsersUserIDChangePasswordRequests:
 
 @dataclass
 class PutUsersUserIDChangePasswordRequest:
-    path_params: PutUsersUserIDChangePasswordPathParams = field(default=None)
+    path_params: PutUsersUserIDChangePasswordPathParams = field()
     request: Optional[PutUsersUserIDChangePasswordRequests] = field(default=None)
     
 
 @dataclass
 class PutUsersUserIDChangePasswordResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     error_response_content: Optional[shared.ErrorResponseContent] = field(default=None)
-    status_code: int = field(default=None)
     

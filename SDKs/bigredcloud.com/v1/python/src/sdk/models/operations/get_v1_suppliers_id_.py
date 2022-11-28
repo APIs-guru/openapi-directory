@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetV1SuppliersIDPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,13 +15,13 @@ class GetV1SuppliersIDQueryParams:
 
 @dataclass
 class GetV1SuppliersIDRequest:
-    path_params: GetV1SuppliersIDPathParams = field(default=None)
-    query_params: GetV1SuppliersIDQueryParams = field(default=None)
+    path_params: GetV1SuppliersIDPathParams = field()
+    query_params: GetV1SuppliersIDQueryParams = field()
     
 
 @dataclass
 class GetV1SuppliersIDResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     supplier_dto: Optional[shared.SupplierDto] = field(default=None)
     

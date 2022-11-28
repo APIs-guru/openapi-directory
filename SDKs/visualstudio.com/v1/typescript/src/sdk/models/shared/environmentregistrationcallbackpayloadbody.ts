@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class EnvironmentRegistrationCallbackPayloadBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=sessionId" })
+  @SpeakeasyMetadata({ data: "json, name=sessionId" })
   sessionId?: string;
 
-  @Metadata({ data: "json, name=sessionPath" })
+  @SpeakeasyMetadata({ data: "json, name=sessionPath" })
   sessionPath?: string;
 }

@@ -1,13 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googlecloudintegrationsv1alphaintegrationparameter
-from . import enterprisecrmfrontendseventbusprotoworkflowparameters
-from . import googlecloudintegrationsv1alphataskconfig
-from . import enterprisecrmfrontendseventbusprototaskconfig
-from . import enterprisecrmeventbusprototeardown
-from . import googlecloudintegrationsv1alphatriggerconfig
-from . import enterprisecrmfrontendseventbusprototriggerconfig
+from sdk import utils
+from . import *
 
 class GoogleCloudIntegrationsV1alphaIntegrationVersionDatabasePersistencePolicyEnum(str, Enum):
     DATABASE_PERSISTENCE_POLICY_UNSPECIFIED = "DATABASE_PERSISTENCE_POLICY_UNSPECIFIED"
@@ -38,24 +37,28 @@ class GoogleCloudIntegrationsV1alphaIntegrationVersionStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleCloudIntegrationsV1alphaIntegrationVersion:
-    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createTime' }})
-    database_persistence_policy: Optional[GoogleCloudIntegrationsV1alphaIntegrationVersionDatabasePersistencePolicyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'databasePersistencePolicy' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    integration_parameters: Optional[List[googlecloudintegrationsv1alphaintegrationparameter.GoogleCloudIntegrationsV1alphaIntegrationParameter]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'integrationParameters' }})
-    integration_parameters_internal: Optional[enterprisecrmfrontendseventbusprotoworkflowparameters.EnterpriseCrmFrontendsEventbusProtoWorkflowParameters] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'integrationParametersInternal' }})
-    last_modifier_email: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lastModifierEmail' }})
-    lock_holder: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lockHolder' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    origin: Optional[GoogleCloudIntegrationsV1alphaIntegrationVersionOriginEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'origin' }})
-    parent_template_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'parentTemplateId' }})
-    snapshot_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'snapshotNumber' }})
-    state: Optional[GoogleCloudIntegrationsV1alphaIntegrationVersionStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
-    status: Optional[GoogleCloudIntegrationsV1alphaIntegrationVersionStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    task_configs: Optional[List[googlecloudintegrationsv1alphataskconfig.GoogleCloudIntegrationsV1alphaTaskConfig]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'taskConfigs' }})
-    task_configs_internal: Optional[List[enterprisecrmfrontendseventbusprototaskconfig.EnterpriseCrmFrontendsEventbusProtoTaskConfig]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'taskConfigsInternal' }})
-    teardown: Optional[enterprisecrmeventbusprototeardown.EnterpriseCrmEventbusProtoTeardown] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'teardown' }})
-    trigger_configs: Optional[List[googlecloudintegrationsv1alphatriggerconfig.GoogleCloudIntegrationsV1alphaTriggerConfig]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'triggerConfigs' }})
-    trigger_configs_internal: Optional[List[enterprisecrmfrontendseventbusprototriggerconfig.EnterpriseCrmFrontendsEventbusProtoTriggerConfig]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'triggerConfigsInternal' }})
-    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updateTime' }})
-    user_label: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'userLabel' }})
+    r"""GoogleCloudIntegrationsV1alphaIntegrationVersion
+    The integration version definition.
+    """
+    
+    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createTime') }})
+    database_persistence_policy: Optional[GoogleCloudIntegrationsV1alphaIntegrationVersionDatabasePersistencePolicyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('databasePersistencePolicy') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    integration_parameters: Optional[List[GoogleCloudIntegrationsV1alphaIntegrationParameter]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('integrationParameters') }})
+    integration_parameters_internal: Optional[EnterpriseCrmFrontendsEventbusProtoWorkflowParameters] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('integrationParametersInternal') }})
+    last_modifier_email: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lastModifierEmail') }})
+    lock_holder: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lockHolder') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    origin: Optional[GoogleCloudIntegrationsV1alphaIntegrationVersionOriginEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('origin') }})
+    parent_template_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('parentTemplateId') }})
+    snapshot_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('snapshotNumber') }})
+    state: Optional[GoogleCloudIntegrationsV1alphaIntegrationVersionStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
+    status: Optional[GoogleCloudIntegrationsV1alphaIntegrationVersionStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    task_configs: Optional[List[GoogleCloudIntegrationsV1alphaTaskConfig]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('taskConfigs') }})
+    task_configs_internal: Optional[List[EnterpriseCrmFrontendsEventbusProtoTaskConfig]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('taskConfigsInternal') }})
+    teardown: Optional[EnterpriseCrmEventbusProtoTeardown] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('teardown') }})
+    trigger_configs: Optional[List[GoogleCloudIntegrationsV1alphaTriggerConfig]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('triggerConfigs') }})
+    trigger_configs_internal: Optional[List[EnterpriseCrmFrontendsEventbusProtoTriggerConfig]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('triggerConfigsInternal') }})
+    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('updateTime') }})
+    user_label: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('userLabel') }})
     

@@ -5,20 +5,20 @@ from sdk.models import shared
 
 @dataclass
 class PostCheckoutCustomFieldsJSONQueryParams:
-    authtoken: str = field(default=None, metadata={'query_param': { 'field_name': 'authtoken', 'style': 'form', 'explode': True }})
-    login: str = field(default=None, metadata={'query_param': { 'field_name': 'login', 'style': 'form', 'explode': True }})
+    authtoken: str = field(metadata={'query_param': { 'field_name': 'authtoken', 'style': 'form', 'explode': True }})
+    login: str = field(metadata={'query_param': { 'field_name': 'login', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class PostCheckoutCustomFieldsJSONRequest:
-    query_params: PostCheckoutCustomFieldsJSONQueryParams = field(default=None)
-    request: shared.CheckoutCustomFieldEdit = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    query_params: PostCheckoutCustomFieldsJSONQueryParams = field()
+    request: shared.CheckoutCustomFieldEdit = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PostCheckoutCustomFieldsJSONResponse:
+    content_type: str = field()
+    status_code: int = field()
     checkout_custom_field: Optional[shared.CheckoutCustomField] = field(default=None)
-    content_type: str = field(default=None)
     not_found: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

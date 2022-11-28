@@ -1,31 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetInlineScriptTagPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=inlineScriptTagId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=inlineScriptTagId" })
   inlineScriptTagId: number;
 }
 
 
 export class GetInlineScriptTagSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oAuth2: shared.SchemeOAuth2;
 }
 
-
-export class GetInlineScriptTagRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetInlineScriptTagPathParams;
-
-  @Metadata()
-  security: GetInlineScriptTagSecurity;
-}
-
 export enum GetInlineScriptTag200ApplicationJsonInlineScriptTagDisplayScopeEnum {
-    All = "all"
-,    ThanksPage = "thanks_page"
-,    Cart = "cart"
+    All = "all",
+    ThanksPage = "thanks_page",
+    Cart = "cart"
 }
 
 export enum GetInlineScriptTag200ApplicationJsonInlineScriptTagTriggerEventEnum {
@@ -34,45 +26,54 @@ export enum GetInlineScriptTag200ApplicationJsonInlineScriptTagTriggerEventEnum 
 
 
 export class GetInlineScriptTag200ApplicationJsonInlineScriptTag extends SpeakeasyBase {
-  @Metadata({ data: "json, name=account_id" })
+  @SpeakeasyMetadata({ data: "json, name=account_id" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=display_scope" })
+  @SpeakeasyMetadata({ data: "json, name=display_scope" })
   displayScope?: GetInlineScriptTag200ApplicationJsonInlineScriptTagDisplayScopeEnum;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=make_date" })
+  @SpeakeasyMetadata({ data: "json, name=make_date" })
   makeDate?: number;
 
-  @Metadata({ data: "json, name=oauth_application_id" })
+  @SpeakeasyMetadata({ data: "json, name=oauth_application_id" })
   oauthApplicationId?: number;
 
-  @Metadata({ data: "json, name=script" })
+  @SpeakeasyMetadata({ data: "json, name=script" })
   script?: string;
 
-  @Metadata({ data: "json, name=trigger_event" })
+  @SpeakeasyMetadata({ data: "json, name=trigger_event" })
   triggerEvent?: GetInlineScriptTag200ApplicationJsonInlineScriptTagTriggerEventEnum;
 
-  @Metadata({ data: "json, name=update_date" })
+  @SpeakeasyMetadata({ data: "json, name=update_date" })
   updateDate?: number;
 }
 
 
 export class GetInlineScriptTag200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=inline_script_tag" })
+  @SpeakeasyMetadata({ data: "json, name=inline_script_tag" })
   inlineScriptTag?: GetInlineScriptTag200ApplicationJsonInlineScriptTag;
 }
 
 
+export class GetInlineScriptTagRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetInlineScriptTagPathParams;
+
+  @SpeakeasyMetadata()
+  security: GetInlineScriptTagSecurity;
+}
+
+
 export class GetInlineScriptTagResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getInlineScriptTag200ApplicationJsonObject?: GetInlineScriptTag200ApplicationJson;
 }

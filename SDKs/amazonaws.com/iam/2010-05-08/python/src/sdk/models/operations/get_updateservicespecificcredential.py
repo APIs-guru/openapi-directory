@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetUpdateServiceSpecificCredentialActionEnum(str, Enum):
     UPDATE_SERVICE_SPECIFIC_CREDENTIAL = "UpdateServiceSpecificCredential"
@@ -14,11 +18,11 @@ class GetUpdateServiceSpecificCredentialVersionEnum(str, Enum):
 
 @dataclass
 class GetUpdateServiceSpecificCredentialQueryParams:
-    action: GetUpdateServiceSpecificCredentialActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    service_specific_credential_id: str = field(default=None, metadata={'query_param': { 'field_name': 'ServiceSpecificCredentialId', 'style': 'form', 'explode': True }})
-    status: GetUpdateServiceSpecificCredentialStatusEnum = field(default=None, metadata={'query_param': { 'field_name': 'Status', 'style': 'form', 'explode': True }})
+    action: GetUpdateServiceSpecificCredentialActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    service_specific_credential_id: str = field(metadata={'query_param': { 'field_name': 'ServiceSpecificCredentialId', 'style': 'form', 'explode': True }})
+    status: GetUpdateServiceSpecificCredentialStatusEnum = field(metadata={'query_param': { 'field_name': 'Status', 'style': 'form', 'explode': True }})
+    version: GetUpdateServiceSpecificCredentialVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     user_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'UserName', 'style': 'form', 'explode': True }})
-    version: GetUpdateServiceSpecificCredentialVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -34,13 +38,13 @@ class GetUpdateServiceSpecificCredentialHeaders:
 
 @dataclass
 class GetUpdateServiceSpecificCredentialRequest:
-    query_params: GetUpdateServiceSpecificCredentialQueryParams = field(default=None)
-    headers: GetUpdateServiceSpecificCredentialHeaders = field(default=None)
+    headers: GetUpdateServiceSpecificCredentialHeaders = field()
+    query_params: GetUpdateServiceSpecificCredentialQueryParams = field()
     
 
 @dataclass
 class GetUpdateServiceSpecificCredentialResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

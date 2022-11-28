@@ -11,6 +11,8 @@ const (
 	AuthConfigTemplateAuthTypeEnumOauth2AuthCodeFlow      AuthConfigTemplateAuthTypeEnum = "OAUTH2_AUTH_CODE_FLOW"
 )
 
+// AuthConfigTemplate
+// AuthConfigTemplate defines required field over an authentication type.
 type AuthConfigTemplate struct {
 	AuthType                *AuthConfigTemplateAuthTypeEnum `json:"authType,omitempty"`
 	ConfigVariableTemplates []ConfigVariableTemplate        `json:"configVariableTemplates,omitempty"`

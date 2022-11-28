@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AlgorithmValidationProfile } from "./algorithmvalidationprofile";
+
 
 
 // AlgorithmValidationSpecification
@@ -8,9 +8,9 @@ import { AlgorithmValidationProfile } from "./algorithmvalidationprofile";
  * Specifies configurations for one or more training jobs that Amazon SageMaker runs to test the algorithm.
 **/
 export class AlgorithmValidationSpecification extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ValidationProfiles", elemType: shared.AlgorithmValidationProfile })
+  @SpeakeasyMetadata({ data: "json, name=ValidationProfiles", elemType: AlgorithmValidationProfile })
   validationProfiles: AlgorithmValidationProfile[];
 
-  @Metadata({ data: "json, name=ValidationRole" })
+  @SpeakeasyMetadata({ data: "json, name=ValidationRole" })
   validationRole: string;
 }

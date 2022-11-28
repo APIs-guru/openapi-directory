@@ -8,26 +8,18 @@ type DeleteProfileAppPathParams struct {
 	AppID int64 `pathParam:"style=simple,explode=false,name=appId"`
 }
 
-type DeleteProfileAppSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type DeleteProfileAppSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type DeleteProfileAppSecurity struct {
-	Option1 *DeleteProfileAppSecurityOption1 `security:"option"`
-	Option2 *DeleteProfileAppSecurityOption2 `security:"option"`
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
+}
+
+type DeleteProfileAppDefaultApplicationJSON struct {
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type DeleteProfileAppRequest struct {
 	PathParams DeleteProfileAppPathParams
 	Security   DeleteProfileAppSecurity
-}
-
-type DeleteProfileAppDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type DeleteProfileAppResponse struct {

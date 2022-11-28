@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class VerifyModeEnum(str, Enum):
     POINT_IN_TIME_CONSISTENT = "POINT_IN_TIME_CONSISTENT"

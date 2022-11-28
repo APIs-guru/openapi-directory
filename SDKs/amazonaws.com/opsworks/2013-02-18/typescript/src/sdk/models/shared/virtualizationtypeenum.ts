@@ -1,6 +1,7 @@
 
 
+
 export enum VirtualizationTypeEnum {
-    Paravirtual = "paravirtual"
-,    Hvm = "hvm"
+    Paravirtual = "paravirtual",
+    Hvm = "hvm"
 }

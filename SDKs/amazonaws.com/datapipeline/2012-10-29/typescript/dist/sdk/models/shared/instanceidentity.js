@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // InstanceIdentity
 /**
  * <p><p>Identity information for the EC2 instance that is hosting the task runner. You can get this value by calling a metadata URI from the EC2 instance. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AESDG-chapter-instancedata.html">Instance Metadata</a> in the <i>Amazon Elastic Compute Cloud User Guide.</i> Passing in this value proves that your task runner is running on an EC2 instance, and ensures the proper AWS Data Pipeline service charges are applied to your pipeline.</p></p>
@@ -33,11 +33,11 @@ var InstanceIdentity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=document" }),
+        SpeakeasyMetadata({ data: "json, name=document" }),
         __metadata("design:type", String)
     ], InstanceIdentity.prototype, "document", void 0);
     __decorate([
-        Metadata({ data: "json, name=signature" }),
+        SpeakeasyMetadata({ data: "json, name=signature" }),
         __metadata("design:type", String)
     ], InstanceIdentity.prototype, "signature", void 0);
     return InstanceIdentity;

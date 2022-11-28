@@ -22,30 +22,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var UpdateModel = /** @class */ (function (_super) {
     __extends(UpdateModel, _super);
     function UpdateModel() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=added" }),
+        SpeakeasyMetadata({ data: "json, name=added" }),
         __metadata("design:type", String)
     ], UpdateModel.prototype, "added", void 0);
     __decorate([
-        Metadata({ data: "json, name=added_download" }),
+        SpeakeasyMetadata({ data: "json, name=added_download" }),
         __metadata("design:type", String)
     ], UpdateModel.prototype, "addedDownload", void 0);
     __decorate([
-        Metadata({ data: "json, name=date" }),
+        SpeakeasyMetadata({ data: "json, name=date" }),
         __metadata("design:type", String)
     ], UpdateModel.prototype, "date", void 0);
     __decorate([
-        Metadata({ data: "json, name=deleted" }),
+        SpeakeasyMetadata({ data: "json, name=deleted" }),
         __metadata("design:type", String)
     ], UpdateModel.prototype, "deleted", void 0);
     __decorate([
-        Metadata({ data: "json, name=deleted_download" }),
+        SpeakeasyMetadata({ data: "json, name=deleted_download" }),
         __metadata("design:type", String)
     ], UpdateModel.prototype, "deletedDownload", void 0);
     return UpdateModel;

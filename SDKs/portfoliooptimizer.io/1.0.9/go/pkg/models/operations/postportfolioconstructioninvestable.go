@@ -13,13 +13,13 @@ type PostPortfolioConstructionInvestableRequestBody struct {
 	PortfolioValue              float64   `json:"portfolioValue"`
 }
 
-type PostPortfolioConstructionInvestableRequest struct {
-	Request PostPortfolioConstructionInvestableRequestBody `request:"mediaType=application/json"`
-}
-
 type PostPortfolioConstructionInvestable200ApplicationJSON struct {
 	AssetsPositions []float64 `json:"assetsPositions"`
 	AssetsWeights   []float64 `json:"assetsWeights"`
+}
+
+type PostPortfolioConstructionInvestableRequest struct {
+	Request PostPortfolioConstructionInvestableRequestBody `request:"mediaType=application/json"`
 }
 
 type PostPortfolioConstructionInvestableResponse struct {

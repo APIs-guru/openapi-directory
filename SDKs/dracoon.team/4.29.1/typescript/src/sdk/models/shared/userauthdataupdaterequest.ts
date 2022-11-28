@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // UserAuthDataUpdateRequest
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * User Authentication Data Update Request
 **/
 export class UserAuthDataUpdateRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=adConfigId" })
+  @SpeakeasyMetadata({ data: "json, name=adConfigId" })
   adConfigId?: number;
 
-  @Metadata({ data: "json, name=login" })
+  @SpeakeasyMetadata({ data: "json, name=login" })
   login?: string;
 
-  @Metadata({ data: "json, name=method" })
+  @SpeakeasyMetadata({ data: "json, name=method" })
   method?: string;
 
-  @Metadata({ data: "json, name=oidConfigId" })
+  @SpeakeasyMetadata({ data: "json, name=oidConfigId" })
   oidConfigId?: number;
 }

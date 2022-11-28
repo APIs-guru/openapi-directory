@@ -9,6 +9,8 @@ const (
 	PathReportDimensionValueMatchTypeEnumWildcardExpression PathReportDimensionValueMatchTypeEnum = "WILDCARD_EXPRESSION"
 )
 
+// PathReportDimensionValue
+// Represents a PathReportDimensionValue resource.
 type PathReportDimensionValue struct {
 	DimensionName *string                                `json:"dimensionName,omitempty"`
 	Ids           []string                               `json:"ids,omitempty"`

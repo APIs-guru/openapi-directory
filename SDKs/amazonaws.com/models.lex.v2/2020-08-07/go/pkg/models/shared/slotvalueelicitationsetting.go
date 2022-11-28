@@ -1,5 +1,7 @@
 package shared
 
+// SlotValueElicitationSetting
+// Settings that you can use for eliciting a slot value.
 type SlotValueElicitationSetting struct {
 	DefaultValueSpecification    *SlotDefaultValueSpecification `json:"defaultValueSpecification,omitempty"`
 	PromptSpecification          *PromptSpecification           `json:"promptSpecification,omitempty"`

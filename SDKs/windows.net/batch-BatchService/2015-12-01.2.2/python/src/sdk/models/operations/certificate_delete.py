@@ -1,16 +1,19 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 
 
 @dataclass
 class CertificateDeletePathParams:
-    thumbprint: str = field(default=None, metadata={'path_param': { 'field_name': 'thumbprint', 'style': 'simple', 'explode': False }})
-    thumbprint_algorithm: str = field(default=None, metadata={'path_param': { 'field_name': 'thumbprintAlgorithm', 'style': 'simple', 'explode': False }})
+    thumbprint: str = field(metadata={'path_param': { 'field_name': 'thumbprint', 'style': 'simple', 'explode': False }})
+    thumbprint_algorithm: str = field(metadata={'path_param': { 'field_name': 'thumbprintAlgorithm', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class CertificateDeleteQueryParams:
-    api_version: str = field(default=None, metadata={'query_param': { 'field_name': 'api-version', 'style': 'form', 'explode': True }})
+    api_version: str = field(metadata={'query_param': { 'field_name': 'api-version', 'style': 'form', 'explode': True }})
     timeout: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'timeout', 'style': 'form', 'explode': True }})
     
 
@@ -23,15 +26,15 @@ class CertificateDeleteHeaders:
 
 @dataclass
 class CertificateDeleteRequest:
-    path_params: CertificateDeletePathParams = field(default=None)
-    query_params: CertificateDeleteQueryParams = field(default=None)
-    headers: CertificateDeleteHeaders = field(default=None)
+    headers: CertificateDeleteHeaders = field()
+    path_params: CertificateDeletePathParams = field()
+    query_params: CertificateDeleteQueryParams = field()
     
 
 @dataclass
 class CertificateDeleteResponse:
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     batch_error: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
     

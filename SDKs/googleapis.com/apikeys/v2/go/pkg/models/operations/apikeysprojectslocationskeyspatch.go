@@ -31,7 +31,7 @@ type ApikeysProjectsLocationsKeysPatchSecurity struct {
 type ApikeysProjectsLocationsKeysPatchRequest struct {
 	PathParams  ApikeysProjectsLocationsKeysPatchPathParams
 	QueryParams ApikeysProjectsLocationsKeysPatchQueryParams
-	Request     *shared.V2Key `request:"mediaType=application/json"`
+	Request     *shared.V2KeyInput `request:"mediaType=application/json"`
 	Security    ApikeysProjectsLocationsKeysPatchSecurity
 }
 

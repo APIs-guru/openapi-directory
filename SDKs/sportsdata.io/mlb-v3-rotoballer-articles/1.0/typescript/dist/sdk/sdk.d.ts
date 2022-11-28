@@ -1,18 +1,31 @@
 import { AxiosInstance, AxiosRequestConfig } from "axios";
 import * as operations from "./models/operations";
 import { Security } from "./models/shared";
-declare type OptsFunc = (sdk: SDK) => void;
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["http://api.sportsdata.io", "https://api.sportsdata.io", "http://azure-api.sportsdata.io", "https://azure-api.sportsdata.io"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare function WithSecurity(security: Security): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _security?: Security;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
-    RotoballerArticles(req: operations.RotoballerArticlesRequest, config?: AxiosRequestConfig): Promise<operations.RotoballerArticlesResponse>;
-    RotoballerArticlesByDate(req: operations.RotoballerArticlesByDateRequest, config?: AxiosRequestConfig): Promise<operations.RotoballerArticlesByDateResponse>;
-    RotoballerArticlesByPlayer(req: operations.RotoballerArticlesByPlayerRequest, config?: AxiosRequestConfig): Promise<operations.RotoballerArticlesByPlayerResponse>;
+    /**
+     * rotoballerArticles - RotoBaller Articles
+    **/
+    rotoballerArticles(req: operations.RotoballerArticlesRequest, config?: AxiosRequestConfig): Promise<operations.RotoballerArticlesResponse>;
+    /**
+     * rotoballerArticlesByDate - RotoBaller Articles By Date
+    **/
+    rotoballerArticlesByDate(req: operations.RotoballerArticlesByDateRequest, config?: AxiosRequestConfig): Promise<operations.RotoballerArticlesByDateResponse>;
+    /**
+     * rotoballerArticlesByPlayer - RotoBaller Articles By Player
+    **/
+    rotoballerArticlesByPlayer(req: operations.RotoballerArticlesByPlayerRequest, config?: AxiosRequestConfig): Promise<operations.RotoballerArticlesByPlayerResponse>;
 }
 export {};

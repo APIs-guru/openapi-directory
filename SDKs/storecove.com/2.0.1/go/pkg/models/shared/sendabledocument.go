@@ -7,6 +7,8 @@ const (
 	SendableDocumentDocumentTypeEnumInvoiceResponse SendableDocumentDocumentTypeEnum = "invoice_response"
 )
 
+// SendableDocument
+// The document to send.
 type SendableDocument struct {
 	DocumentType    SendableDocumentDocumentTypeEnum `json:"documentType"`
 	Invoice         *Invoice                         `json:"invoice,omitempty"`

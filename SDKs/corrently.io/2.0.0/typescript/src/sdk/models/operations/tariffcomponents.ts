@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class TariffcomponentsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=email" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=email" })
   email?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=kwha" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=kwha" })
   kwha?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=milliseconds" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=milliseconds" })
   milliseconds?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=wh" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=wh" })
   wh?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=zipcode" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=zipcode" })
   zipcode?: string;
 }
 
 
 export class TariffcomponentsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: TariffcomponentsQueryParams;
 }
 
 
 export class TariffcomponentsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   componentsh0?: shared.Componentsh0;
 }

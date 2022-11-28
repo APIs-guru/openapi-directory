@@ -31,7 +31,7 @@ type IntegrationsProjectsLocationsProductsIntegrationtemplatesVersionsCreateSecu
 type IntegrationsProjectsLocationsProductsIntegrationtemplatesVersionsCreateRequest struct {
 	PathParams  IntegrationsProjectsLocationsProductsIntegrationtemplatesVersionsCreatePathParams
 	QueryParams IntegrationsProjectsLocationsProductsIntegrationtemplatesVersionsCreateQueryParams
-	Request     *shared.GoogleCloudIntegrationsV1alphaIntegrationTemplateVersion `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudIntegrationsV1alphaIntegrationTemplateVersionInput `request:"mediaType=application/json"`
 	Security    IntegrationsProjectsLocationsProductsIntegrationtemplatesVersionsCreateSecurity
 }
 

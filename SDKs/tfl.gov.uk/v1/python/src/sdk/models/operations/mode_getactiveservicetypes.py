@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class ModeGetActiveServiceTypesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     tfl_api_presentation_entities_active_service_types: Optional[List[shared.TflAPIPresentationEntitiesActiveServiceType]] = field(default=None)
     

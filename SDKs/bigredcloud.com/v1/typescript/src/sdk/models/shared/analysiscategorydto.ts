@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AnalysisCategoryDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountCode" })
+  @SpeakeasyMetadata({ data: "json, name=accountCode" })
   accountCode?: string;
 
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: number;
 
-  @Metadata({ data: "json, name=categoryTypeId" })
+  @SpeakeasyMetadata({ data: "json, name=categoryTypeId" })
   categoryTypeId?: number;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=orderIndex" })
+  @SpeakeasyMetadata({ data: "json, name=orderIndex" })
   orderIndex?: number;
 }

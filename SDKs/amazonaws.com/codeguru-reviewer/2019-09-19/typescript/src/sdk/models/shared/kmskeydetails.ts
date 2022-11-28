@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EncryptionOptionEnum } from "./encryptionoptionenum";
+
 
 
 // KmsKeyDetails
@@ -7,9 +8,9 @@ import { EncryptionOptionEnum } from "./encryptionoptionenum";
  * <p>An object that contains:</p> <ul> <li> <p>The encryption option for a repository association. It is either owned by Amazon Web Services Key Management Service (KMS) (<code>AWS_OWNED_CMK</code>) or customer managed (<code>CUSTOMER_MANAGED_CMK</code>).</p> </li> <li> <p>The ID of the Amazon Web Services KMS key that is associated with a respository association.</p> </li> </ul>
 **/
 export class KmsKeyDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EncryptionOption" })
+  @SpeakeasyMetadata({ data: "json, name=EncryptionOption" })
   encryptionOption?: EncryptionOptionEnum;
 
-  @Metadata({ data: "json, name=KMSKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=KMSKeyId" })
   kmsKeyId?: string;
 }

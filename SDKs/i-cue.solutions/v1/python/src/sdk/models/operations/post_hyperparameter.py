@@ -17,12 +17,12 @@ class PostHyperparameterRequests:
 
 @dataclass
 class PostHyperparameterRequest:
-    headers: PostHyperparameterHeaders = field(default=None)
+    headers: PostHyperparameterHeaders = field()
     request: Optional[PostHyperparameterRequests] = field(default=None)
     
 
 @dataclass
 class PostHyperparameterResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

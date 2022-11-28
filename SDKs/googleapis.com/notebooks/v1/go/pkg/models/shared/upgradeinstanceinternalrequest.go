@@ -10,6 +10,8 @@ const (
 	UpgradeInstanceInternalRequestTypeEnumUpgradeAll             UpgradeInstanceInternalRequestTypeEnum = "UPGRADE_ALL"
 )
 
+// UpgradeInstanceInternalRequest
+// Request for upgrading a notebook instance from within the VM
 type UpgradeInstanceInternalRequest struct {
 	Type *UpgradeInstanceInternalRequestTypeEnum `json:"type,omitempty"`
 	VMID *string                                 `json:"vmId,omitempty"`

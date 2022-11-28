@@ -10,7 +10,7 @@ type UpdateServicePathParams struct {
 
 type UpdateServiceRequest struct {
 	PathParams UpdateServicePathParams
-	Request    shared.Service `request:"mediaType=application/json"`
+	Request    shared.ServiceInput `request:"mediaType=application/json"`
 }
 
 type UpdateServiceResponse struct {

@@ -1,5 +1,7 @@
 package shared
 
+// DataReplicationInfo
+// Request data replication info.
 type DataReplicationInfo struct {
 	DataReplicationError      *DataReplicationError               `json:"dataReplicationError,omitempty"`
 	DataReplicationInitiation *DataReplicationInitiation          `json:"dataReplicationInitiation,omitempty"`

@@ -1,52 +1,53 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetOrganizationCellularGatewayUplinkStatusesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=organizationId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=organizationId" })
   organizationId: string;
 }
 
 
 export class GetOrganizationCellularGatewayUplinkStatusesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=endingBefore" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=endingBefore" })
   endingBefore?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=iccids" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=iccids" })
   iccids?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=networkIds" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=networkIds" })
   networkIds?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=perPage" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=perPage" })
   perPage?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=serials" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=serials" })
   serials?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=startingAfter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=startingAfter" })
   startingAfter?: string;
 }
 
 
 export class GetOrganizationCellularGatewayUplinkStatusesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetOrganizationCellularGatewayUplinkStatusesPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetOrganizationCellularGatewayUplinkStatusesQueryParams;
 }
 
 
 export class GetOrganizationCellularGatewayUplinkStatusesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getOrganizationCellularGatewayUplinkStatuses200ApplicationJsonObject?: Map<string, any>;
 }

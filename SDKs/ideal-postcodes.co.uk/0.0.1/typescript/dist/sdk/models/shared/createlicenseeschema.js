@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CreateLicenseeDaily } from "./createlicenseedaily";
 var CreateLicenseeSchema = /** @class */ (function (_super) {
     __extends(CreateLicenseeSchema, _super);
@@ -30,23 +30,23 @@ var CreateLicenseeSchema = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=address" }),
+        SpeakeasyMetadata({ data: "json, name=address" }),
         __metadata("design:type", String)
     ], CreateLicenseeSchema.prototype, "address", void 0);
     __decorate([
-        Metadata({ data: "json, name=daily" }),
+        SpeakeasyMetadata({ data: "json, name=daily" }),
         __metadata("design:type", CreateLicenseeDaily)
     ], CreateLicenseeSchema.prototype, "daily", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], CreateLicenseeSchema.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=postcode" }),
+        SpeakeasyMetadata({ data: "json, name=postcode" }),
         __metadata("design:type", String)
     ], CreateLicenseeSchema.prototype, "postcode", void 0);
     __decorate([
-        Metadata({ data: "json, name=whitelist" }),
+        SpeakeasyMetadata({ data: "json, name=whitelist" }),
         __metadata("design:type", Array)
     ], CreateLicenseeSchema.prototype, "whitelist", void 0);
     return CreateLicenseeSchema;

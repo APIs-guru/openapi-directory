@@ -19,6 +19,8 @@ type StartPipelineReprocessingHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// StartPipelineReprocessingRequestBodyChannelMessages
+// Specifies one or more sets of channel messages.
 type StartPipelineReprocessingRequestBodyChannelMessages struct {
 	S3Paths []string `json:"s3Paths,omitempty"`
 }

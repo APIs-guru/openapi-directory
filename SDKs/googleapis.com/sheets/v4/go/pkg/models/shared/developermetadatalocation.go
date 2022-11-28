@@ -10,6 +10,8 @@ const (
 	DeveloperMetadataLocationLocationTypeEnumSpreadsheet                              DeveloperMetadataLocationLocationTypeEnum = "SPREADSHEET"
 )
 
+// DeveloperMetadataLocation
+// A location where metadata may be associated in a spreadsheet.
 type DeveloperMetadataLocation struct {
 	DimensionRange *DimensionRange                            `json:"dimensionRange,omitempty"`
 	LocationType   *DeveloperMetadataLocationLocationTypeEnum `json:"locationType,omitempty"`

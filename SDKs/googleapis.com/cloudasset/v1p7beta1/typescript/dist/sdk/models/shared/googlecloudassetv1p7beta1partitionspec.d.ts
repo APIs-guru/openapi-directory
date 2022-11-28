@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum GoogleCloudAssetV1p7beta1PartitionSpecPartitionKeyEnum {
     PartitionKeyUnspecified = "PARTITION_KEY_UNSPECIFIED",
     ReadTime = "READ_TIME",

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // FailureDetail
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Details for an outcome with a FAILURE outcome summary.
 **/
 export class FailureDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=crashed" })
+  @SpeakeasyMetadata({ data: "json, name=crashed" })
   crashed?: boolean;
 
-  @Metadata({ data: "json, name=deviceOutOfMemory" })
+  @SpeakeasyMetadata({ data: "json, name=deviceOutOfMemory" })
   deviceOutOfMemory?: boolean;
 
-  @Metadata({ data: "json, name=failedRoboscript" })
+  @SpeakeasyMetadata({ data: "json, name=failedRoboscript" })
   failedRoboscript?: boolean;
 
-  @Metadata({ data: "json, name=notInstalled" })
+  @SpeakeasyMetadata({ data: "json, name=notInstalled" })
   notInstalled?: boolean;
 
-  @Metadata({ data: "json, name=otherNativeCrash" })
+  @SpeakeasyMetadata({ data: "json, name=otherNativeCrash" })
   otherNativeCrash?: boolean;
 
-  @Metadata({ data: "json, name=timedOut" })
+  @SpeakeasyMetadata({ data: "json, name=timedOut" })
   timedOut?: boolean;
 
-  @Metadata({ data: "json, name=unableToCrawl" })
+  @SpeakeasyMetadata({ data: "json, name=unableToCrawl" })
   unableToCrawl?: boolean;
 }

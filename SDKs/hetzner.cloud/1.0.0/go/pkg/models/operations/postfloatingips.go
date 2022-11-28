@@ -16,10 +16,8 @@ type PostFloatingIpsCreateFloatingIPRequest struct {
 	Type         PostFloatingIpsCreateFloatingIPRequestTypeEnum `json:"type"`
 }
 
-type PostFloatingIpsRequest struct {
-	Request *PostFloatingIpsCreateFloatingIPRequest `request:"mediaType=application/json"`
-}
-
+// PostFloatingIps201ApplicationJSONActionError
+// Error message for the Action if error occurred, otherwise null
 type PostFloatingIps201ApplicationJSONActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -54,6 +52,8 @@ type PostFloatingIps201ApplicationJSONFloatingIPDNSPtr struct {
 	IP     string `json:"ip"`
 }
 
+// PostFloatingIps201ApplicationJSONFloatingIPHomeLocation
+// Location the Floating IP was created in. Routing is optimized for this Location.
 type PostFloatingIps201ApplicationJSONFloatingIPHomeLocation struct {
 	City        string  `json:"city"`
 	Country     string  `json:"country"`
@@ -65,6 +65,8 @@ type PostFloatingIps201ApplicationJSONFloatingIPHomeLocation struct {
 	NetworkZone string  `json:"network_zone"`
 }
 
+// PostFloatingIps201ApplicationJSONFloatingIPProtection
+// Protection configuration for the Resource
 type PostFloatingIps201ApplicationJSONFloatingIPProtection struct {
 	Delete bool `json:"delete"`
 }
@@ -94,6 +96,10 @@ type PostFloatingIps201ApplicationJSONFloatingIP struct {
 type PostFloatingIps201ApplicationJSON struct {
 	Action     *PostFloatingIps201ApplicationJSONAction    `json:"action,omitempty"`
 	FloatingIP PostFloatingIps201ApplicationJSONFloatingIP `json:"floating_ip"`
+}
+
+type PostFloatingIpsRequest struct {
+	Request *PostFloatingIpsCreateFloatingIPRequest `request:"mediaType=application/json"`
 }
 
 type PostFloatingIpsResponse struct {

@@ -4,10 +4,6 @@ type RetrieveAPagePathParams struct {
 	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type RetrieveAPageRequest struct {
-	PathParams RetrieveAPagePathParams
-}
-
 type RetrieveAPage200ApplicationJSONParent struct {
 	DatabaseID *string `json:"database_id,omitempty"`
 	Type       *string `json:"type,omitempty"`
@@ -160,6 +156,10 @@ type RetrieveAPage200ApplicationJSON struct {
 	Object         *string                                    `json:"object,omitempty"`
 	Parent         *RetrieveAPage200ApplicationJSONParent     `json:"parent,omitempty"`
 	Properties     *RetrieveAPage200ApplicationJSONProperties `json:"properties,omitempty"`
+}
+
+type RetrieveAPageRequest struct {
+	PathParams RetrieveAPagePathParams
 }
 
 type RetrieveAPageResponse struct {

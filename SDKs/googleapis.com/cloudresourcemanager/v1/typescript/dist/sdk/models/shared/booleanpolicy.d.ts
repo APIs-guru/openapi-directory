@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * Used in `policy_type` to specify how `boolean_policy` will behave at this resource.
 **/

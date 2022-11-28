@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import patchrule
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class PatchRuleGroup:
-    patch_rules: List[patchrule.PatchRule] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PatchRules' }})
+    r"""PatchRuleGroup
+    A set of rules defining the approval rules for a patch baseline.
+    """
+    
+    patch_rules: List[PatchRule] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('PatchRules') }})
     

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConformancePackInputParameter } from "./conformancepackinputparameter";
+
 
 
 // OrganizationConformancePack
@@ -8,24 +8,24 @@ import { ConformancePackInputParameter } from "./conformancepackinputparameter";
  * An organization conformance pack that has information about conformance packs that Config creates in member accounts. 
 **/
 export class OrganizationConformancePack extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConformancePackInputParameters", elemType: shared.ConformancePackInputParameter })
+  @SpeakeasyMetadata({ data: "json, name=ConformancePackInputParameters", elemType: ConformancePackInputParameter })
   conformancePackInputParameters?: ConformancePackInputParameter[];
 
-  @Metadata({ data: "json, name=DeliveryS3Bucket" })
+  @SpeakeasyMetadata({ data: "json, name=DeliveryS3Bucket" })
   deliveryS3Bucket?: string;
 
-  @Metadata({ data: "json, name=DeliveryS3KeyPrefix" })
+  @SpeakeasyMetadata({ data: "json, name=DeliveryS3KeyPrefix" })
   deliveryS3KeyPrefix?: string;
 
-  @Metadata({ data: "json, name=ExcludedAccounts" })
+  @SpeakeasyMetadata({ data: "json, name=ExcludedAccounts" })
   excludedAccounts?: string[];
 
-  @Metadata({ data: "json, name=LastUpdateTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastUpdateTime" })
   lastUpdateTime: Date;
 
-  @Metadata({ data: "json, name=OrganizationConformancePackArn" })
+  @SpeakeasyMetadata({ data: "json, name=OrganizationConformancePackArn" })
   organizationConformancePackArn: string;
 
-  @Metadata({ data: "json, name=OrganizationConformancePackName" })
+  @SpeakeasyMetadata({ data: "json, name=OrganizationConformancePackName" })
   organizationConformancePackName: string;
 }

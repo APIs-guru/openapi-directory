@@ -1,48 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Browsers } from "./browsers";
-import { Browsers } from "./browsers";
+
 
 
 export class ScreenshotPayloadConfigs extends SpeakeasyBase {
-  @Metadata({ data: "json, name=macos mojave" })
+  @SpeakeasyMetadata({ data: "json, name=macos mojave" })
   macosMojave?: Browsers;
 
-  @Metadata({ data: "json, name=windows 10" })
+  @SpeakeasyMetadata({ data: "json, name=windows 10" })
   windows10?: Browsers;
 }
 
 
 export class ScreenshotPayload extends SpeakeasyBase {
-  @Metadata({ data: "json, name=callback_url" })
+  @SpeakeasyMetadata({ data: "json, name=callback_url" })
   callbackUrl?: string;
 
-  @Metadata({ data: "json, name=configs" })
+  @SpeakeasyMetadata({ data: "json, name=configs" })
   configs?: ScreenshotPayloadConfigs;
 
-  @Metadata({ data: "json, name=defer_time" })
+  @SpeakeasyMetadata({ data: "json, name=defer_time" })
   deferTime?: number;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: boolean;
 
-  @Metadata({ data: "json, name=mac_res" })
+  @SpeakeasyMetadata({ data: "json, name=mac_res" })
   macRes?: string;
 
-  @Metadata({ data: "json, name=password" })
+  @SpeakeasyMetadata({ data: "json, name=password" })
   password?: string;
 
-  @Metadata({ data: "json, name=tunnel" })
+  @SpeakeasyMetadata({ data: "json, name=tunnel" })
   tunnel?: boolean;
 
-  @Metadata({ data: "json, name=tunnel_identifier" })
+  @SpeakeasyMetadata({ data: "json, name=tunnel_identifier" })
   tunnelIdentifier?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 
-  @Metadata({ data: "json, name=username" })
+  @SpeakeasyMetadata({ data: "json, name=username" })
   username?: string;
 
-  @Metadata({ data: "json, name=win_res" })
+  @SpeakeasyMetadata({ data: "json, name=win_res" })
   winRes?: string;
 }

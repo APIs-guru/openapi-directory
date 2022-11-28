@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 
-export enum SdkVersionSdkSupportStatusEnum {
-    Unknown = "UNKNOWN"
-,    Supported = "SUPPORTED"
-,    Stale = "STALE"
-,    Deprecated = "DEPRECATED"
-,    Unsupported = "UNSUPPORTED"
+
+export enum SDKVersionSDKSupportStatusEnum {
+    Unknown = "UNKNOWN",
+    Supported = "SUPPORTED",
+    Stale = "STALE",
+    Deprecated = "DEPRECATED",
+    Unsupported = "UNSUPPORTED"
 }
 
 
-// SdkVersion
+// SDKVersion
 /** 
  * The version of the SDK used to run the job.
 **/
-export class SdkVersion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=sdkSupportStatus" })
-  sdkSupportStatus?: SdkVersionSdkSupportStatusEnum;
+export class SDKVersion extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=sdkSupportStatus" })
+  sdkSupportStatus?: SDKVersionSDKSupportStatusEnum;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 
-  @Metadata({ data: "json, name=versionDisplayName" })
+  @SpeakeasyMetadata({ data: "json, name=versionDisplayName" })
   versionDisplayName?: string;
 }

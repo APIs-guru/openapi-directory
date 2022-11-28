@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Date } from "./date";
 import { QueryCountByStatus } from "./querycountbystatus";
 
 
+
 export class CustomerQueryStats extends SpeakeasyBase {
-  @Metadata({ data: "json, name=date" })
+  @SpeakeasyMetadata({ data: "json, name=date" })
   date?: Date;
 
-  @Metadata({ data: "json, name=queryCountByStatus", elemType: shared.QueryCountByStatus })
+  @SpeakeasyMetadata({ data: "json, name=queryCountByStatus", elemType: QueryCountByStatus })
   queryCountByStatus?: QueryCountByStatus[];
 }

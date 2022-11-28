@@ -15,13 +15,13 @@ type GetTeamQueryParams struct {
 	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
+type GetTeam200ApplicationJSON struct {
+	Data *shared.TeamResponse `json:"data,omitempty"`
+}
+
 type GetTeamRequest struct {
 	PathParams  GetTeamPathParams
 	QueryParams GetTeamQueryParams
-}
-
-type GetTeam200ApplicationJSON struct {
-	Data *shared.TeamResponse `json:"data,omitempty"`
 }
 
 type GetTeamResponse struct {

@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ApplicationDataTransfer } from "./applicationdatatransfer";
 // DataTransfer
 /**
  * A Transfer resource represents the transfer of the ownership of user data between users.
@@ -34,35 +34,35 @@ var DataTransfer = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=applicationDataTransfers", elemType: shared.ApplicationDataTransfer }),
+        SpeakeasyMetadata({ data: "json, name=applicationDataTransfers", elemType: ApplicationDataTransfer }),
         __metadata("design:type", Array)
     ], DataTransfer.prototype, "applicationDataTransfers", void 0);
     __decorate([
-        Metadata({ data: "json, name=etag" }),
+        SpeakeasyMetadata({ data: "json, name=etag" }),
         __metadata("design:type", String)
     ], DataTransfer.prototype, "etag", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], DataTransfer.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=kind" }),
+        SpeakeasyMetadata({ data: "json, name=kind" }),
         __metadata("design:type", String)
     ], DataTransfer.prototype, "kind", void 0);
     __decorate([
-        Metadata({ data: "json, name=newOwnerUserId" }),
+        SpeakeasyMetadata({ data: "json, name=newOwnerUserId" }),
         __metadata("design:type", String)
     ], DataTransfer.prototype, "newOwnerUserId", void 0);
     __decorate([
-        Metadata({ data: "json, name=oldOwnerUserId" }),
+        SpeakeasyMetadata({ data: "json, name=oldOwnerUserId" }),
         __metadata("design:type", String)
     ], DataTransfer.prototype, "oldOwnerUserId", void 0);
     __decorate([
-        Metadata({ data: "json, name=overallTransferStatusCode" }),
+        SpeakeasyMetadata({ data: "json, name=overallTransferStatusCode" }),
         __metadata("design:type", String)
     ], DataTransfer.prototype, "overallTransferStatusCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=requestTime" }),
+        SpeakeasyMetadata({ data: "json, name=requestTime" }),
         __metadata("design:type", Date)
     ], DataTransfer.prototype, "requestTime", void 0);
     return DataTransfer;

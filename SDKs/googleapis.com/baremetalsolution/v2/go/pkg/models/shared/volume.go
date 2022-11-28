@@ -9,14 +9,6 @@ const (
 	VolumePerformanceTierEnumVolumePerformanceTierHt          VolumePerformanceTierEnum = "VOLUME_PERFORMANCE_TIER_HT"
 )
 
-type VolumeProtocolEnum string
-
-const (
-	VolumeProtocolEnumProtocolUnspecified VolumeProtocolEnum = "PROTOCOL_UNSPECIFIED"
-	VolumeProtocolEnumFibreChannel        VolumeProtocolEnum = "FIBRE_CHANNEL"
-	VolumeProtocolEnumNfs                 VolumeProtocolEnum = "NFS"
-)
-
 type VolumeSnapshotAutoDeleteBehaviorEnum string
 
 const (
@@ -44,6 +36,39 @@ const (
 	VolumeStorageTypeEnumHdd                    VolumeStorageTypeEnum = "HDD"
 )
 
+type VolumeProtocolEnum string
+
+const (
+	VolumeProtocolEnumProtocolUnspecified VolumeProtocolEnum = "PROTOCOL_UNSPECIFIED"
+	VolumeProtocolEnumFibreChannel        VolumeProtocolEnum = "FIBRE_CHANNEL"
+	VolumeProtocolEnumNfs                 VolumeProtocolEnum = "NFS"
+)
+
+// VolumeInput
+// A storage volume.
+type VolumeInput struct {
+	AutoGrownSizeGib           *string                               `json:"autoGrownSizeGib,omitempty"`
+	CurrentSizeGib             *string                               `json:"currentSizeGib,omitempty"`
+	EmergencySizeGib           *string                               `json:"emergencySizeGib,omitempty"`
+	ID                         *string                               `json:"id,omitempty"`
+	Labels                     map[string]string                     `json:"labels,omitempty"`
+	MaxSizeGib                 *string                               `json:"maxSizeGib,omitempty"`
+	Notes                      *string                               `json:"notes,omitempty"`
+	OriginallyRequestedSizeGib *string                               `json:"originallyRequestedSizeGib,omitempty"`
+	PerformanceTier            *VolumePerformanceTierEnum            `json:"performanceTier,omitempty"`
+	Pod                        *string                               `json:"pod,omitempty"`
+	RemainingSpaceGib          *string                               `json:"remainingSpaceGib,omitempty"`
+	RequestedSizeGib           *string                               `json:"requestedSizeGib,omitempty"`
+	SnapshotAutoDeleteBehavior *VolumeSnapshotAutoDeleteBehaviorEnum `json:"snapshotAutoDeleteBehavior,omitempty"`
+	SnapshotEnabled            *bool                                 `json:"snapshotEnabled,omitempty"`
+	SnapshotReservationDetail  *SnapshotReservationDetail            `json:"snapshotReservationDetail,omitempty"`
+	SnapshotSchedulePolicy     *string                               `json:"snapshotSchedulePolicy,omitempty"`
+	State                      *VolumeStateEnum                      `json:"state,omitempty"`
+	StorageType                *VolumeStorageTypeEnum                `json:"storageType,omitempty"`
+}
+
+// Volume
+// A storage volume.
 type Volume struct {
 	AutoGrownSizeGib           *string                               `json:"autoGrownSizeGib,omitempty"`
 	BootVolume                 *bool                                 `json:"bootVolume,omitempty"`

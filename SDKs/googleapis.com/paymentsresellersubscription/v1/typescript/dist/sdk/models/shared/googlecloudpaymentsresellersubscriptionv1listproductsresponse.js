@@ -22,19 +22,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GoogleCloudPaymentsResellerSubscriptionV1Product } from "./googlecloudpaymentsresellersubscriptionv1product";
 var GoogleCloudPaymentsResellerSubscriptionV1ListProductsResponse = /** @class */ (function (_super) {
     __extends(GoogleCloudPaymentsResellerSubscriptionV1ListProductsResponse, _super);
     function GoogleCloudPaymentsResellerSubscriptionV1ListProductsResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=nextPageToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextPageToken" }),
         __metadata("design:type", String)
     ], GoogleCloudPaymentsResellerSubscriptionV1ListProductsResponse.prototype, "nextPageToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=products", elemType: shared.GoogleCloudPaymentsResellerSubscriptionV1Product }),
+        SpeakeasyMetadata({ data: "json, name=products", elemType: GoogleCloudPaymentsResellerSubscriptionV1Product }),
         __metadata("design:type", Array)
     ], GoogleCloudPaymentsResellerSubscriptionV1ListProductsResponse.prototype, "products", void 0);
     return GoogleCloudPaymentsResellerSubscriptionV1ListProductsResponse;

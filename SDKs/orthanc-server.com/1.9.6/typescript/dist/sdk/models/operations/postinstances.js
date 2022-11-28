@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PostInstancesRequests = /** @class */ (function (_super) {
     __extends(PostInstancesRequests, _super);
     function PostInstancesRequests() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/dicom" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/dicom" }),
         __metadata("design:type", Uint8Array)
     ], PostInstancesRequests.prototype, "applicationDicom", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/zip" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/zip" }),
         __metadata("design:type", Uint8Array)
     ], PostInstancesRequests.prototype, "applicationZip", void 0);
     return PostInstancesRequests;
@@ -45,7 +45,7 @@ var PostInstancesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostInstancesRequests)
     ], PostInstancesRequest.prototype, "request", void 0);
     return PostInstancesRequest;
@@ -57,15 +57,15 @@ var PostInstancesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostInstancesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PostInstancesResponse.prototype, "postInstances200ApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostInstancesResponse.prototype, "statusCode", void 0);
     return PostInstancesResponse;

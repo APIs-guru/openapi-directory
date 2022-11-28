@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum LongviewSubscriptionIdEnum {
-    Longview3 = "longview-3"
-,    Longview10 = "longview-10"
-,    Longview40 = "longview-40"
-,    Longview100 = "longview-100"
+    Longview3 = "longview-3",
+    Longview10 = "longview-10",
+    Longview40 = "longview-40",
+    Longview100 = "longview-100"
 }
 
 
@@ -14,10 +15,10 @@ export enum LongviewSubscriptionIdEnum {
  * 
 **/
 export class LongviewSubscriptionPrice extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hourly" })
+  @SpeakeasyMetadata({ data: "json, name=hourly" })
   hourly?: number;
 
-  @Metadata({ data: "json, name=monthly" })
+  @SpeakeasyMetadata({ data: "json, name=monthly" })
   monthly?: number;
 }
 
@@ -28,15 +29,15 @@ export class LongviewSubscriptionPrice extends SpeakeasyBase {
  * 
 **/
 export class LongviewSubscription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clients_included" })
+  @SpeakeasyMetadata({ data: "json, name=clients_included" })
   clientsIncluded?: number;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: LongviewSubscriptionIdEnum;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 
-  @Metadata({ data: "json, name=price" })
+  @SpeakeasyMetadata({ data: "json, name=price" })
   price?: LongviewSubscriptionPrice;
 }

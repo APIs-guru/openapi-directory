@@ -31,7 +31,7 @@ type NetworkservicesProjectsLocationsGrpcRoutesCreateSecurity struct {
 type NetworkservicesProjectsLocationsGrpcRoutesCreateRequest struct {
 	PathParams  NetworkservicesProjectsLocationsGrpcRoutesCreatePathParams
 	QueryParams NetworkservicesProjectsLocationsGrpcRoutesCreateQueryParams
-	Request     *shared.GrpcRoute `request:"mediaType=application/json"`
+	Request     *shared.GrpcRouteInput `request:"mediaType=application/json"`
 	Security    NetworkservicesProjectsLocationsGrpcRoutesCreateSecurity
 }
 

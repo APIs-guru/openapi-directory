@@ -1,5 +1,7 @@
 package shared
 
+// CloudWatchAlarmDefinition
+// The definition of a CloudWatch metric alarm, which determines when an automatic scaling activity is triggered. When the defined alarm conditions are satisfied, scaling activity begins.
 type CloudWatchAlarmDefinition struct {
 	ComparisonOperator ComparisonOperatorEnum `json:"ComparisonOperator"`
 	Dimensions         []MetricDimension      `json:"Dimensions,omitempty"`

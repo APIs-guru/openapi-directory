@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StandardUnitEnum } from "./standardunitenum";
 // MetricTransformation
 /**
@@ -34,27 +34,27 @@ var MetricTransformation = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=defaultValue" }),
+        SpeakeasyMetadata({ data: "json, name=defaultValue" }),
         __metadata("design:type", Number)
     ], MetricTransformation.prototype, "defaultValue", void 0);
     __decorate([
-        Metadata({ data: "json, name=dimensions" }),
+        SpeakeasyMetadata({ data: "json, name=dimensions" }),
         __metadata("design:type", Map)
     ], MetricTransformation.prototype, "dimensions", void 0);
     __decorate([
-        Metadata({ data: "json, name=metricName" }),
+        SpeakeasyMetadata({ data: "json, name=metricName" }),
         __metadata("design:type", String)
     ], MetricTransformation.prototype, "metricName", void 0);
     __decorate([
-        Metadata({ data: "json, name=metricNamespace" }),
+        SpeakeasyMetadata({ data: "json, name=metricNamespace" }),
         __metadata("design:type", String)
     ], MetricTransformation.prototype, "metricNamespace", void 0);
     __decorate([
-        Metadata({ data: "json, name=metricValue" }),
+        SpeakeasyMetadata({ data: "json, name=metricValue" }),
         __metadata("design:type", String)
     ], MetricTransformation.prototype, "metricValue", void 0);
     __decorate([
-        Metadata({ data: "json, name=unit" }),
+        SpeakeasyMetadata({ data: "json, name=unit" }),
         __metadata("design:type", String)
     ], MetricTransformation.prototype, "unit", void 0);
     return MetricTransformation;

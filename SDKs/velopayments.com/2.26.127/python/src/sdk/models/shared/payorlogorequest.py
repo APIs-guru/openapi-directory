@@ -4,8 +4,8 @@ from typing import Optional
 
 @dataclass
 class PayorLogoRequestLogo:
-    content: bytes = field(default=None, metadata={'multipart_form': { 'content': True }})
-    logo: str = field(default=None, metadata={'multipart_form': { 'field_name': 'logo' }})
+    content: bytes = field(metadata={'multipart_form': { 'content': True }})
+    logo: str = field(metadata={'multipart_form': { 'field_name': 'logo' }})
     
 
 @dataclass

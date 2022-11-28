@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class InitSnapshotUploadPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=language" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=language" })
   language: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=project-id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=project-id" })
   projectId: number;
 }
 
 
 export class InitSnapshotUploadQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=commit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=commit" })
   commit: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=date" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=date" })
   date?: Date;
 }
 
 
 export class InitSnapshotUploadSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   accessToken: shared.SchemeAccessToken;
 }
 
 
 export class InitSnapshotUploadRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: InitSnapshotUploadPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: InitSnapshotUploadQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: InitSnapshotUploadSecurity;
 }
 
 
 export class InitSnapshotUploadResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   uploadSession?: shared.UploadSession;
 }

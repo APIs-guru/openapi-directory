@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class BillingGetSharedStorageBillingOrgPathParams:
-    org: str = field(default=None, metadata={'path_param': { 'field_name': 'org', 'style': 'simple', 'explode': False }})
+    org: str = field(metadata={'path_param': { 'field_name': 'org', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class BillingGetSharedStorageBillingOrgRequest:
-    path_params: BillingGetSharedStorageBillingOrgPathParams = field(default=None)
+    path_params: BillingGetSharedStorageBillingOrgPathParams = field()
     
 
 @dataclass
 class BillingGetSharedStorageBillingOrgResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     combined_billing_usage: Optional[shared.CombinedBillingUsage] = field(default=None)
     

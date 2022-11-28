@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BatchItemError } from "./batchitemerror";
 import { BatchDetectSentimentItemResult } from "./batchdetectsentimentitemresult";
 
 
+
 export class BatchDetectSentimentResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ErrorList", elemType: shared.BatchItemError })
+  @SpeakeasyMetadata({ data: "json, name=ErrorList", elemType: BatchItemError })
   errorList: BatchItemError[];
 
-  @Metadata({ data: "json, name=ResultList", elemType: shared.BatchDetectSentimentItemResult })
+  @SpeakeasyMetadata({ data: "json, name=ResultList", elemType: BatchDetectSentimentItemResult })
   resultList: BatchDetectSentimentItemResult[];
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Tag } from "./tag";
+
 
 
 // ListTagsForStreamOutput
@@ -8,9 +8,9 @@ import { Tag } from "./tag";
  * Represents the output for <code>ListTagsForStream</code>.
 **/
 export class ListTagsForStreamOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=HasMoreTags" })
+  @SpeakeasyMetadata({ data: "json, name=HasMoreTags" })
   hasMoreTags: boolean;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags: Tag[];
 }

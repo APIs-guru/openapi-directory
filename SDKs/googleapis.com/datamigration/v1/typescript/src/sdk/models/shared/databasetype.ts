@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum DatabaseTypeEngineEnum {
-    DatabaseEngineUnspecified = "DATABASE_ENGINE_UNSPECIFIED"
-,    Mysql = "MYSQL"
-,    Postgresql = "POSTGRESQL"
+    DatabaseEngineUnspecified = "DATABASE_ENGINE_UNSPECIFIED",
+    Mysql = "MYSQL",
+    Postgresql = "POSTGRESQL"
 }
 
 export enum DatabaseTypeProviderEnum {
-    DatabaseProviderUnspecified = "DATABASE_PROVIDER_UNSPECIFIED"
-,    Cloudsql = "CLOUDSQL"
-,    Rds = "RDS"
-,    Aurora = "AURORA"
-,    Alloydb = "ALLOYDB"
+    DatabaseProviderUnspecified = "DATABASE_PROVIDER_UNSPECIFIED",
+    Cloudsql = "CLOUDSQL",
+    Rds = "RDS",
+    Aurora = "AURORA",
+    Alloydb = "ALLOYDB"
 }
 
 
@@ -20,9 +21,9 @@ export enum DatabaseTypeProviderEnum {
  * A message defining the database engine and provider.
 **/
 export class DatabaseType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=engine" })
+  @SpeakeasyMetadata({ data: "json, name=engine" })
   engine?: DatabaseTypeEngineEnum;
 
-  @Metadata({ data: "json, name=provider" })
+  @SpeakeasyMetadata({ data: "json, name=provider" })
   provider?: DatabaseTypeProviderEnum;
 }

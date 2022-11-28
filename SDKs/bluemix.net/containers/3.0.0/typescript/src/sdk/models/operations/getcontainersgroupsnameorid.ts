@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetContainersGroupsNameOrIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=name_or_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=name_or_id" })
   nameOrId: string;
 }
 
 
 export class GetContainersGroupsNameOrIdHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Auth-Project-Id" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Auth-Project-Id" })
   xAuthProjectId: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Auth-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Auth-Token" })
   xAuthToken: string;
 }
 
 
 export class GetContainersGroupsNameOrIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetContainersGroupsNameOrIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetContainersGroupsNameOrIdHeaders;
 }
 
 
 export class GetContainersGroupsNameOrIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   containersGroupsNameOrIdGetDetails?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

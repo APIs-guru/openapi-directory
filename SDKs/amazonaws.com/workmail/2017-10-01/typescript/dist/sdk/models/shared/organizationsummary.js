@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // OrganizationSummary
 /**
  * The representation of an organization.
@@ -33,23 +33,23 @@ var OrganizationSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Alias" }),
+        SpeakeasyMetadata({ data: "json, name=Alias" }),
         __metadata("design:type", String)
     ], OrganizationSummary.prototype, "alias", void 0);
     __decorate([
-        Metadata({ data: "json, name=DefaultMailDomain" }),
+        SpeakeasyMetadata({ data: "json, name=DefaultMailDomain" }),
         __metadata("design:type", String)
     ], OrganizationSummary.prototype, "defaultMailDomain", void 0);
     __decorate([
-        Metadata({ data: "json, name=ErrorMessage" }),
+        SpeakeasyMetadata({ data: "json, name=ErrorMessage" }),
         __metadata("design:type", String)
     ], OrganizationSummary.prototype, "errorMessage", void 0);
     __decorate([
-        Metadata({ data: "json, name=OrganizationId" }),
+        SpeakeasyMetadata({ data: "json, name=OrganizationId" }),
         __metadata("design:type", String)
     ], OrganizationSummary.prototype, "organizationId", void 0);
     __decorate([
-        Metadata({ data: "json, name=State" }),
+        SpeakeasyMetadata({ data: "json, name=State" }),
         __metadata("design:type", String)
     ], OrganizationSummary.prototype, "state", void 0);
     return OrganizationSummary;

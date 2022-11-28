@@ -8,6 +8,8 @@ const (
 	GoogleCloudDataplexV1TaskTriggerSpecTypeEnumRecurring       GoogleCloudDataplexV1TaskTriggerSpecTypeEnum = "RECURRING"
 )
 
+// GoogleCloudDataplexV1TaskTriggerSpec
+// Task scheduling and trigger settings.
 type GoogleCloudDataplexV1TaskTriggerSpec struct {
 	Disabled   *bool                                         `json:"disabled,omitempty"`
 	MaxRetries *int32                                        `json:"maxRetries,omitempty"`

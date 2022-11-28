@@ -7,6 +7,8 @@ const (
 	SortedDimensionSortOrderEnumDescending SortedDimensionSortOrderEnum = "DESCENDING"
 )
 
+// SortedDimension
+// Represents a sorted dimension.
 type SortedDimension struct {
 	Kind      *string                       `json:"kind,omitempty"`
 	Name      *string                       `json:"name,omitempty"`

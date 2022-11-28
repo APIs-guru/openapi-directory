@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DNSPoliciesUpdatePathParams:
-    policy: str = field(default=None, metadata={'path_param': { 'field_name': 'policy', 'style': 'simple', 'explode': False }})
-    project: str = field(default=None, metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
+    policy: str = field(metadata={'path_param': { 'field_name': 'policy', 'style': 'simple', 'explode': False }})
+    project: str = field(metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class DNSPoliciesUpdateQueryParams:
 
 @dataclass
 class DNSPoliciesUpdateSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DNSPoliciesUpdateSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -45,15 +49,15 @@ class DNSPoliciesUpdateSecurity:
 
 @dataclass
 class DNSPoliciesUpdateRequest:
-    path_params: DNSPoliciesUpdatePathParams = field(default=None)
-    query_params: DNSPoliciesUpdateQueryParams = field(default=None)
+    path_params: DNSPoliciesUpdatePathParams = field()
+    query_params: DNSPoliciesUpdateQueryParams = field()
+    security: DNSPoliciesUpdateSecurity = field()
     request: Optional[shared.Policy] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DNSPoliciesUpdateSecurity = field(default=None)
     
 
 @dataclass
 class DNSPoliciesUpdateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     policies_update_response: Optional[shared.PoliciesUpdateResponse] = field(default=None)
-    status_code: int = field(default=None)
     

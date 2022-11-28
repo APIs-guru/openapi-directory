@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Cipherparams } from "./cipherparams";
 import { Kdfparams } from "./kdfparams";
 var Crypto = /** @class */ (function (_super) {
@@ -31,27 +31,27 @@ var Crypto = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=cipher" }),
+        SpeakeasyMetadata({ data: "json, name=cipher" }),
         __metadata("design:type", String)
     ], Crypto.prototype, "cipher", void 0);
     __decorate([
-        Metadata({ data: "json, name=cipherparams" }),
+        SpeakeasyMetadata({ data: "json, name=cipherparams" }),
         __metadata("design:type", Cipherparams)
     ], Crypto.prototype, "cipherparams", void 0);
     __decorate([
-        Metadata({ data: "json, name=ciphertext" }),
+        SpeakeasyMetadata({ data: "json, name=ciphertext" }),
         __metadata("design:type", String)
     ], Crypto.prototype, "ciphertext", void 0);
     __decorate([
-        Metadata({ data: "json, name=kdf" }),
+        SpeakeasyMetadata({ data: "json, name=kdf" }),
         __metadata("design:type", String)
     ], Crypto.prototype, "kdf", void 0);
     __decorate([
-        Metadata({ data: "json, name=kdfparams" }),
+        SpeakeasyMetadata({ data: "json, name=kdfparams" }),
         __metadata("design:type", Kdfparams)
     ], Crypto.prototype, "kdfparams", void 0);
     __decorate([
-        Metadata({ data: "json, name=mac" }),
+        SpeakeasyMetadata({ data: "json, name=mac" }),
         __metadata("design:type", String)
     ], Crypto.prototype, "mac", void 0);
     return Crypto;

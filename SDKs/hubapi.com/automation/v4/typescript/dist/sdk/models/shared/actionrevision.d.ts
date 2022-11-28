@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ExtensionActionDefinition } from "./extensionactiondefinition";
 /**
  * A revision of this custom action.

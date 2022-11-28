@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DirectorySite } from "./directorysite";
+
 
 
 // DirectorySitesListResponse
@@ -8,12 +8,12 @@ import { DirectorySite } from "./directorysite";
  * Directory Site List Response
 **/
 export class DirectorySitesListResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=directorySites", elemType: shared.DirectorySite })
+  @SpeakeasyMetadata({ data: "json, name=directorySites", elemType: DirectorySite })
   directorySites?: DirectorySite[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

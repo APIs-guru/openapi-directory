@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MarketingEventSubscriber } from "./marketingeventsubscriber";
+
 
 
 // BatchInputMarketingEventSubscriber
@@ -8,6 +8,6 @@ import { MarketingEventSubscriber } from "./marketingeventsubscriber";
  * List of HubSpot contacts to subscribe to the marketing event
 **/
 export class BatchInputMarketingEventSubscriber extends SpeakeasyBase {
-  @Metadata({ data: "json, name=inputs", elemType: shared.MarketingEventSubscriber })
+  @SpeakeasyMetadata({ data: "json, name=inputs", elemType: MarketingEventSubscriber })
   inputs: MarketingEventSubscriber[];
 }

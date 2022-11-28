@@ -1,0 +1,31 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import { ApiCoreDtoClickStreamHitBrowserInfo } from "./apicoredtoclickstreamhitbrowserinfo";
+import { ApiCoreDtoClickStreamHitConversionInfo } from "./apicoredtoclickstreamhitconversioninfo";
+import { ApiCoreDtoClickStreamHitDatapointInfo } from "./apicoredtoclickstreamhitdatapointinfo";
+import { ApiCoreDtoClickStreamHitLocationInfo } from "./apicoredtoclickstreamhitlocationinfo";
+import { ApiCoreDtoClickStreamHitOsInfo } from "./apicoredtoclickstreamhitosinfo";
+import { ApiCoreDtoClickStreamHitSource } from "./apicoredtoclickstreamhitsource";
+export declare class ApiCoreDtoClickStreamHit extends SpeakeasyBase {
+    accessTime?: string;
+    browser?: ApiCoreDtoClickStreamHitBrowserInfo;
+    clientLanguage?: string;
+    conversion1?: ApiCoreDtoClickStreamHitConversionInfo;
+    conversion2?: ApiCoreDtoClickStreamHitConversionInfo;
+    conversion3?: ApiCoreDtoClickStreamHitConversionInfo;
+    conversion4?: ApiCoreDtoClickStreamHitConversionInfo;
+    conversion5?: ApiCoreDtoClickStreamHitConversionInfo;
+    conversions?: ApiCoreDtoClickStreamHitConversionInfo[];
+    entity?: ApiCoreDtoClickStreamHitDatapointInfo;
+    ip?: string;
+    isProxy?: string;
+    isSpider?: string;
+    isUnique?: string;
+    location?: ApiCoreDtoClickStreamHitLocationInfo;
+    org?: string;
+    os?: ApiCoreDtoClickStreamHitOsInfo;
+    queryParams?: string;
+    realDestinationUrl?: string;
+    referer?: string;
+    source?: ApiCoreDtoClickStreamHitSource;
+    type?: string;
+}

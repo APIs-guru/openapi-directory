@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OffsetInfo } from "./offsetinfo";
 import { CalendarDate } from "./calendardate";
 
 
+
 export class CalendarDatePage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pagination" })
+  @SpeakeasyMetadata({ data: "json, name=pagination" })
   pagination?: OffsetInfo;
 
-  @Metadata({ data: "json, name=results", elemType: shared.CalendarDate })
+  @SpeakeasyMetadata({ data: "json, name=results", elemType: CalendarDate })
   results?: CalendarDate[];
 }

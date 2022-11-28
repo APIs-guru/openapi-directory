@@ -31,6 +31,8 @@ const (
 	GoogleChromeManagementV1InstalledAppAppTypeEnumAndroidApp         GoogleChromeManagementV1InstalledAppAppTypeEnum = "ANDROID_APP"
 )
 
+// GoogleChromeManagementV1InstalledApp
+// Describes an installed app.
 type GoogleChromeManagementV1InstalledApp struct {
 	AppID              *string                                                 `json:"appId,omitempty"`
 	AppInstallType     *GoogleChromeManagementV1InstalledAppAppInstallTypeEnum `json:"appInstallType,omitempty"`

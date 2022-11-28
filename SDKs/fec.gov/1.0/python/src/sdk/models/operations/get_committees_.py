@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetCommitteesCommitteeTypeEnum(str, Enum):
@@ -56,17 +57,17 @@ class GetCommitteesOrganizationTypeEnum(str, Enum):
 
 @dataclass
 class GetCommitteesQueryParams:
-    api_key: str = field(default=None, metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
+    api_key: str = field(metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
     candidate_id: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'candidate_id', 'style': 'form', 'explode': True }})
     committee_id: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'committee_id', 'style': 'form', 'explode': True }})
     committee_type: Optional[List[GetCommitteesCommitteeTypeEnum]] = field(default=None, metadata={'query_param': { 'field_name': 'committee_type', 'style': 'form', 'explode': True }})
     cycle: Optional[List[int]] = field(default=None, metadata={'query_param': { 'field_name': 'cycle', 'style': 'form', 'explode': True }})
     designation: Optional[List[GetCommitteesDesignationEnum]] = field(default=None, metadata={'query_param': { 'field_name': 'designation', 'style': 'form', 'explode': True }})
     filing_frequency: Optional[List[GetCommitteesFilingFrequencyEnum]] = field(default=None, metadata={'query_param': { 'field_name': 'filing_frequency', 'style': 'form', 'explode': True }})
-    max_first_file_date: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'max_first_file_date', 'style': 'form', 'explode': True }})
-    max_last_f1_date: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'max_last_f1_date', 'style': 'form', 'explode': True }})
-    min_first_file_date: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'min_first_file_date', 'style': 'form', 'explode': True }})
-    min_last_f1_date: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'min_last_f1_date', 'style': 'form', 'explode': True }})
+    max_first_file_date: Optional[date] = field(default=None, metadata={'query_param': { 'field_name': 'max_first_file_date', 'style': 'form', 'explode': True }})
+    max_last_f1_date: Optional[date] = field(default=None, metadata={'query_param': { 'field_name': 'max_last_f1_date', 'style': 'form', 'explode': True }})
+    min_first_file_date: Optional[date] = field(default=None, metadata={'query_param': { 'field_name': 'min_first_file_date', 'style': 'form', 'explode': True }})
+    min_last_f1_date: Optional[date] = field(default=None, metadata={'query_param': { 'field_name': 'min_last_f1_date', 'style': 'form', 'explode': True }})
     organization_type: Optional[List[GetCommitteesOrganizationTypeEnum]] = field(default=None, metadata={'query_param': { 'field_name': 'organization_type', 'style': 'form', 'explode': True }})
     page: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'page', 'style': 'form', 'explode': True }})
     party: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'party', 'style': 'form', 'explode': True }})
@@ -84,12 +85,12 @@ class GetCommitteesQueryParams:
 
 @dataclass
 class GetCommitteesRequest:
-    query_params: GetCommitteesQueryParams = field(default=None)
+    query_params: GetCommitteesQueryParams = field()
     
 
 @dataclass
 class GetCommitteesResponse:
+    content_type: str = field()
+    status_code: int = field()
     committee_page: Optional[shared.CommitteePage] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

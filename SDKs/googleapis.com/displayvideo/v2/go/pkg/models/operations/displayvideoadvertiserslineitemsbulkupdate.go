@@ -30,7 +30,7 @@ type DisplayvideoAdvertisersLineItemsBulkUpdateSecurity struct {
 type DisplayvideoAdvertisersLineItemsBulkUpdateRequest struct {
 	PathParams  DisplayvideoAdvertisersLineItemsBulkUpdatePathParams
 	QueryParams DisplayvideoAdvertisersLineItemsBulkUpdateQueryParams
-	Request     *shared.BulkUpdateLineItemsRequest `request:"mediaType=application/json"`
+	Request     *shared.BulkUpdateLineItemsRequestInput `request:"mediaType=application/json"`
 	Security    DisplayvideoAdvertisersLineItemsBulkUpdateSecurity
 }
 

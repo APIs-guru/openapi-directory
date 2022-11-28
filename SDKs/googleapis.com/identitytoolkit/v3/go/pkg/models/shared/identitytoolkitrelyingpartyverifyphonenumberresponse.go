@@ -1,5 +1,7 @@
 package shared
 
+// IdentitytoolkitRelyingpartyVerifyPhoneNumberResponse
+// Response for Identitytoolkit-VerifyPhoneNumber
 type IdentitytoolkitRelyingpartyVerifyPhoneNumberResponse struct {
 	ExpiresIn                  *string `json:"expiresIn,omitempty"`
 	IDToken                    *string `json:"idToken,omitempty"`

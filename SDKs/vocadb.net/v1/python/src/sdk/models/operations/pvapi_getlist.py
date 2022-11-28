@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class PvAPIGetListLangEnum(str, Enum):
@@ -33,13 +34,13 @@ class PvAPIGetListQueryParams:
 
 @dataclass
 class PvAPIGetListRequest:
-    query_params: PvAPIGetListQueryParams = field(default=None)
+    query_params: PvAPIGetListQueryParams = field()
     
 
 @dataclass
 class PvAPIGetListResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     partial_find_result_pv_for_song_contract_: Optional[shared.PartialFindResultPvForSongContract] = field(default=None)
-    status_code: int = field(default=None)
     

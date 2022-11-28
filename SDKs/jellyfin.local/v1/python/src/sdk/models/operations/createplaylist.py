@@ -20,19 +20,19 @@ class CreatePlaylistRequests:
 
 @dataclass
 class CreatePlaylistSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class CreatePlaylistRequest:
-    query_params: CreatePlaylistQueryParams = field(default=None)
+    query_params: CreatePlaylistQueryParams = field()
+    security: CreatePlaylistSecurity = field()
     request: Optional[CreatePlaylistRequests] = field(default=None)
-    security: CreatePlaylistSecurity = field(default=None)
     
 
 @dataclass
 class CreatePlaylistResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     playlist_creation_result: Optional[shared.PlaylistCreationResult] = field(default=None)
-    status_code: int = field(default=None)
     

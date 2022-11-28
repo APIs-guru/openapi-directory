@@ -1,15 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import artifacttype_enum
-from . import mavenreference
-from . import s3contentlocation
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CustomArtifactConfigurationDescription:
-    artifact_type: Optional[artifacttype_enum.ArtifactTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ArtifactType' }})
-    maven_reference_description: Optional[mavenreference.MavenReference] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MavenReferenceDescription' }})
-    s3_content_location_description: Optional[s3contentlocation.S3ContentLocation] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'S3ContentLocationDescription' }})
+    r"""CustomArtifactConfigurationDescription
+    Specifies a dependency JAR or a JAR of user-defined functions.
+    """
+    
+    artifact_type: Optional[ArtifactTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ArtifactType') }})
+    maven_reference_description: Optional[MavenReference] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MavenReferenceDescription') }})
+    s3_content_location_description: Optional[S3ContentLocation] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('S3ContentLocationDescription') }})
     

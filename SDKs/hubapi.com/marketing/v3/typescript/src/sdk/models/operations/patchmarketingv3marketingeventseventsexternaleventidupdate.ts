@@ -1,65 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PatchMarketingV3MarketingEventsEventsExternalEventIdUpdatePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=externalEventId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=externalEventId" })
   externalEventId: string;
 }
 
 
 export class PatchMarketingV3MarketingEventsEventsExternalEventIdUpdateQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=externalAccountId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=externalAccountId" })
   externalAccountId: string;
 }
 
 
-export class PatchMarketingV3MarketingEventsEventsExternalEventIdUpdateSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
-  hapikey: shared.SchemeHapikey;
-}
-
-
-export class PatchMarketingV3MarketingEventsEventsExternalEventIdUpdateSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth2Legacy: shared.SchemeOauth2Legacy;
-}
-
-
 export class PatchMarketingV3MarketingEventsEventsExternalEventIdUpdateSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: PatchMarketingV3MarketingEventsEventsExternalEventIdUpdateSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
+  hapikey?: shared.SchemeHapikey;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: PatchMarketingV3MarketingEventsEventsExternalEventIdUpdateSecurityOption2;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  privateAppsLegacy?: shared.SchemePrivateAppsLegacy;
+
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth2Legacy?: shared.SchemeOauth2Legacy;
 }
 
 
 export class PatchMarketingV3MarketingEventsEventsExternalEventIdUpdateRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PatchMarketingV3MarketingEventsEventsExternalEventIdUpdatePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PatchMarketingV3MarketingEventsEventsExternalEventIdUpdateQueryParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.MarketingEventUpdateRequestParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: PatchMarketingV3MarketingEventsEventsExternalEventIdUpdateSecurity;
 }
 
 
 export class PatchMarketingV3MarketingEventsEventsExternalEventIdUpdateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   marketingEventPublicDefaultResponse?: shared.MarketingEventPublicDefaultResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

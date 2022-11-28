@@ -8,6 +8,8 @@ const (
 	AcceleratorAcceleratorTypeEnumHealthcare                 AcceleratorAcceleratorTypeEnum = "HEALTHCARE"
 )
 
+// Accelerator
+// Identifies Data Fusion accelerators for an instance.
 type Accelerator struct {
 	AcceleratorType *AcceleratorAcceleratorTypeEnum `json:"acceleratorType,omitempty"`
 }

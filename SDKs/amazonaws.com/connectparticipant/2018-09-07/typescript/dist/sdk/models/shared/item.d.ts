@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AttachmentItem } from "./attachmentitem";
 import { ParticipantRoleEnum } from "./participantroleenum";
 import { ChatItemTypeEnum } from "./chatitemtypeenum";

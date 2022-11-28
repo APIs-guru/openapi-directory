@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SyncJobEntity
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * List Sync Jobs
 **/
 export class SyncJobEntity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=folder_behavior_id" })
+  @SpeakeasyMetadata({ data: "json, name=folder_behavior_id" })
   folderBehaviorId?: number;
 
-  @Metadata({ data: "json, name=queued_at" })
+  @SpeakeasyMetadata({ data: "json, name=queued_at" })
   queuedAt?: Date;
 
-  @Metadata({ data: "json, name=regional_worker_status" })
+  @SpeakeasyMetadata({ data: "json, name=regional_worker_status" })
   regionalWorkerStatus?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 
-  @Metadata({ data: "json, name=updated_at" })
+  @SpeakeasyMetadata({ data: "json, name=updated_at" })
   updatedAt?: Date;
 
-  @Metadata({ data: "json, name=uuid" })
+  @SpeakeasyMetadata({ data: "json, name=uuid" })
   uuid?: string;
 }

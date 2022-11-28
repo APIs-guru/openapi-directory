@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceKey } from "./resourcekey";
 
 
+
 export class BatchGetResourceConfigRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=resourceKeys", elemType: shared.ResourceKey })
+  @SpeakeasyMetadata({ data: "json, name=resourceKeys", elemType: ResourceKey })
   resourceKeys: ResourceKey[];
 }

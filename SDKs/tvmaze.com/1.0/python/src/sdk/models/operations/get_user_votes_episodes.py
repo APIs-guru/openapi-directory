@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetUserVotesEpisodesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     episode_votes: Optional[List[shared.EpisodeVote]] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -4,6 +4,8 @@ type CreateNetworkCameraWirelessProfilePathParams struct {
 	NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
 }
 
+// CreateNetworkCameraWirelessProfileRequestBodyIdentity
+// The identity of the wireless profile. Required for creating wireless profiles in 8021x-radius auth mode.
 type CreateNetworkCameraWirelessProfileRequestBodyIdentity struct {
 	Password *string `json:"password,omitempty"`
 	Username *string `json:"username,omitempty"`
@@ -16,6 +18,8 @@ const (
 	CreateNetworkCameraWirelessProfileRequestBodySsidAuthModeEnumEightThousandAndTwentyOnexRadius CreateNetworkCameraWirelessProfileRequestBodySsidAuthModeEnum = "8021x-radius"
 )
 
+// CreateNetworkCameraWirelessProfileRequestBodySsid
+// The details of the SSID config.
 type CreateNetworkCameraWirelessProfileRequestBodySsid struct {
 	AuthMode       *CreateNetworkCameraWirelessProfileRequestBodySsidAuthModeEnum `json:"authMode,omitempty"`
 	EncryptionMode *string                                                        `json:"encryptionMode,omitempty"`

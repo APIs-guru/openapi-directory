@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RefreshTokenInfoResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=client_id" })
+  @SpeakeasyMetadata({ data: "json, name=client_id" })
   clientId: string;
 
-  @Metadata({ data: "json, name=hub_domain" })
+  @SpeakeasyMetadata({ data: "json, name=hub_domain" })
   hubDomain?: string;
 
-  @Metadata({ data: "json, name=hub_id" })
+  @SpeakeasyMetadata({ data: "json, name=hub_id" })
   hubId: number;
 
-  @Metadata({ data: "json, name=scopes" })
+  @SpeakeasyMetadata({ data: "json, name=scopes" })
   scopes: string[];
 
-  @Metadata({ data: "json, name=token" })
+  @SpeakeasyMetadata({ data: "json, name=token" })
   token: string;
 
-  @Metadata({ data: "json, name=token_type" })
+  @SpeakeasyMetadata({ data: "json, name=token_type" })
   tokenType: string;
 
-  @Metadata({ data: "json, name=user" })
+  @SpeakeasyMetadata({ data: "json, name=user" })
   user?: string;
 
-  @Metadata({ data: "json, name=user_id" })
+  @SpeakeasyMetadata({ data: "json, name=user_id" })
   userId: number;
 }

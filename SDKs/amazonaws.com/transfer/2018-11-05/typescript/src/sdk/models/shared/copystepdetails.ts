@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InputFileLocation } from "./inputfilelocation";
 import { OverwriteExistingEnum } from "./overwriteexistingenum";
+
 
 
 // CopyStepDetails
@@ -8,12 +9,12 @@ import { OverwriteExistingEnum } from "./overwriteexistingenum";
  * Each step type has its own <code>StepDetails</code> structure.
 **/
 export class CopyStepDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DestinationFileLocation" })
+  @SpeakeasyMetadata({ data: "json, name=DestinationFileLocation" })
   destinationFileLocation?: InputFileLocation;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=OverwriteExisting" })
+  @SpeakeasyMetadata({ data: "json, name=OverwriteExisting" })
   overwriteExisting?: OverwriteExistingEnum;
 }

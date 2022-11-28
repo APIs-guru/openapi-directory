@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EnterpriseCrmCardsTemplatesAplosSeriesListData } from "./enterprisecrmcardstemplatesaplosserieslistdata";
 import { EnterpriseCrmCardsTabularData } from "./enterprisecrmcardstabulardata";
+
 
 
 // GoogleCloudIntegrationsV1alphaMonitorExecutionStatsResponse
@@ -8,9 +9,9 @@ import { EnterpriseCrmCardsTabularData } from "./enterprisecrmcardstabulardata";
  * The response for getting Execution stats.
 **/
 export class GoogleCloudIntegrationsV1alphaMonitorExecutionStatsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=aplosSeriesListData" })
+  @SpeakeasyMetadata({ data: "json, name=aplosSeriesListData" })
   aplosSeriesListData?: EnterpriseCrmCardsTemplatesAplosSeriesListData;
 
-  @Metadata({ data: "json, name=tableData" })
+  @SpeakeasyMetadata({ data: "json, name=tableData" })
   tableData?: EnterpriseCrmCardsTabularData;
 }

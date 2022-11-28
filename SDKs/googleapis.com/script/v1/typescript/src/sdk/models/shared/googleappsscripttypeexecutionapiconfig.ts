@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleAppsScriptTypeExecutionApiConfigAccessEnum {
-    UnknownAccess = "UNKNOWN_ACCESS"
-,    Myself = "MYSELF"
-,    Domain = "DOMAIN"
-,    Anyone = "ANYONE"
-,    AnyoneAnonymous = "ANYONE_ANONYMOUS"
+    UnknownAccess = "UNKNOWN_ACCESS",
+    Myself = "MYSELF",
+    Domain = "DOMAIN",
+    Anyone = "ANYONE",
+    AnyoneAnonymous = "ANYONE_ANONYMOUS"
 }
 
 
@@ -14,6 +15,6 @@ export enum GoogleAppsScriptTypeExecutionApiConfigAccessEnum {
  * API executable entry point configuration.
 **/
 export class GoogleAppsScriptTypeExecutionApiConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=access" })
+  @SpeakeasyMetadata({ data: "json, name=access" })
   access?: GoogleAppsScriptTypeExecutionApiConfigAccessEnum;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResolverEndpointDirectionEnum } from "./resolverendpointdirectionenum";
 import { ResolverEndpointStatusEnum } from "./resolverendpointstatusenum";
 // ResolverEndpoint
@@ -35,51 +35,51 @@ var ResolverEndpoint = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Arn" }),
+        SpeakeasyMetadata({ data: "json, name=Arn" }),
         __metadata("design:type", String)
     ], ResolverEndpoint.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=CreationTime" }),
+        SpeakeasyMetadata({ data: "json, name=CreationTime" }),
         __metadata("design:type", String)
     ], ResolverEndpoint.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=CreatorRequestId" }),
+        SpeakeasyMetadata({ data: "json, name=CreatorRequestId" }),
         __metadata("design:type", String)
     ], ResolverEndpoint.prototype, "creatorRequestId", void 0);
     __decorate([
-        Metadata({ data: "json, name=Direction" }),
+        SpeakeasyMetadata({ data: "json, name=Direction" }),
         __metadata("design:type", String)
     ], ResolverEndpoint.prototype, "direction", void 0);
     __decorate([
-        Metadata({ data: "json, name=HostVPCId" }),
+        SpeakeasyMetadata({ data: "json, name=HostVPCId" }),
         __metadata("design:type", String)
     ], ResolverEndpoint.prototype, "hostVpcId", void 0);
     __decorate([
-        Metadata({ data: "json, name=Id" }),
+        SpeakeasyMetadata({ data: "json, name=Id" }),
         __metadata("design:type", String)
     ], ResolverEndpoint.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=IpAddressCount" }),
+        SpeakeasyMetadata({ data: "json, name=IpAddressCount" }),
         __metadata("design:type", Number)
     ], ResolverEndpoint.prototype, "ipAddressCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=ModificationTime" }),
+        SpeakeasyMetadata({ data: "json, name=ModificationTime" }),
         __metadata("design:type", String)
     ], ResolverEndpoint.prototype, "modificationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], ResolverEndpoint.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=SecurityGroupIds" }),
+        SpeakeasyMetadata({ data: "json, name=SecurityGroupIds" }),
         __metadata("design:type", Array)
     ], ResolverEndpoint.prototype, "securityGroupIds", void 0);
     __decorate([
-        Metadata({ data: "json, name=Status" }),
+        SpeakeasyMetadata({ data: "json, name=Status" }),
         __metadata("design:type", String)
     ], ResolverEndpoint.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=StatusMessage" }),
+        SpeakeasyMetadata({ data: "json, name=StatusMessage" }),
         __metadata("design:type", String)
     ], ResolverEndpoint.prototype, "statusMessage", void 0);
     return ResolverEndpoint;

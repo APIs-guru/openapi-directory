@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -24,14 +25,14 @@ class AnalyticsadminPropertiesListQueryParams:
 
 @dataclass
 class AnalyticsadminPropertiesListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AnalyticsadminPropertiesListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -42,13 +43,13 @@ class AnalyticsadminPropertiesListSecurity:
 
 @dataclass
 class AnalyticsadminPropertiesListRequest:
-    query_params: AnalyticsadminPropertiesListQueryParams = field(default=None)
-    security: AnalyticsadminPropertiesListSecurity = field(default=None)
+    query_params: AnalyticsadminPropertiesListQueryParams = field()
+    security: AnalyticsadminPropertiesListSecurity = field()
     
 
 @dataclass
 class AnalyticsadminPropertiesListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_analytics_admin_v1alpha_list_properties_response: Optional[shared.GoogleAnalyticsAdminV1alphaListPropertiesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

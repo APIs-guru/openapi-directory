@@ -11,13 +11,13 @@ class StoryGetQueryParams:
 
 @dataclass
 class StoryGetRequest:
-    query_params: StoryGetQueryParams = field(default=None)
+    query_params: StoryGetQueryParams = field()
     
 
 @dataclass
 class StoryGetResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     problem_detail: Optional[Any] = field(default=None)
     stories: Optional[List[shared.Story]] = field(default=None)
     

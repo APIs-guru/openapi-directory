@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleIdentityStsV1IntrospectTokenRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request message for IntrospectToken.
 **/
 export class GoogleIdentityStsV1IntrospectTokenRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=token" })
+  @SpeakeasyMetadata({ data: "json, name=token" })
   token?: string;
 
-  @Metadata({ data: "json, name=tokenTypeHint" })
+  @SpeakeasyMetadata({ data: "json, name=tokenTypeHint" })
   tokenTypeHint?: string;
 }

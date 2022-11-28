@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { InputDescription } from "./inputdescription";
 export declare class AddApplicationInputResponse extends SpeakeasyBase {
     applicationArn?: string;

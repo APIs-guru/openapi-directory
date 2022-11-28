@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDataplexV1AssetDiscoverySpecCsvOptions
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describe CSV and similar semi-structured data formats.
 **/
 export class GoogleCloudDataplexV1AssetDiscoverySpecCsvOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=delimiter" })
+  @SpeakeasyMetadata({ data: "json, name=delimiter" })
   delimiter?: string;
 
-  @Metadata({ data: "json, name=disableTypeInference" })
+  @SpeakeasyMetadata({ data: "json, name=disableTypeInference" })
   disableTypeInference?: boolean;
 
-  @Metadata({ data: "json, name=encoding" })
+  @SpeakeasyMetadata({ data: "json, name=encoding" })
   encoding?: string;
 
-  @Metadata({ data: "json, name=headerRows" })
+  @SpeakeasyMetadata({ data: "json, name=headerRows" })
   headerRows?: number;
 }

@@ -1,104 +1,105 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class LoggingProjectsSinksPatchPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=sinkName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=sinkName" })
   sinkName: string;
 }
 
 
 export class LoggingProjectsSinksPatchQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" })
   dollarXgafv?: shared.XgafvEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=access_token" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" })
   accessToken?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=alt" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" })
   alt?: shared.AltEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=callback" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" })
   callback?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" })
   fields?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=key" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" })
   key?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" })
   oauthToken?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" })
   prettyPrint?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" })
   quotaUser?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=uniqueWriterIdentity" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uniqueWriterIdentity" })
   uniqueWriterIdentity?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=updateMask" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=updateMask" })
   updateMask?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" })
   uploadType?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" })
   uploadProtocol?: string;
 }
 
 
 export class LoggingProjectsSinksPatchSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2: shared.SchemeOauth2;
 
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2c: shared.SchemeOauth2c;
 }
 
 
 export class LoggingProjectsSinksPatchSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2: shared.SchemeOauth2;
 
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2c: shared.SchemeOauth2c;
 }
 
 
 export class LoggingProjectsSinksPatchSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
+  @SpeakeasyMetadata({ data: "security, option=true" })
   option1?: LoggingProjectsSinksPatchSecurityOption1;
 
-  @Metadata({ data: "security, option=true" })
+  @SpeakeasyMetadata({ data: "security, option=true" })
   option2?: LoggingProjectsSinksPatchSecurityOption2;
 }
 
 
 export class LoggingProjectsSinksPatchRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: LoggingProjectsSinksPatchPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: LoggingProjectsSinksPatchQueryParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: shared.LogSink;
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: shared.LogSinkInput;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: LoggingProjectsSinksPatchSecurity;
 }
 
 
 export class LoggingProjectsSinksPatchResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   logSink?: shared.LogSink;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

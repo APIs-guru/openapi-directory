@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // S3FileUploadPart
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * S3 file upload part information
 **/
 export class S3FileUploadPart extends SpeakeasyBase {
-  @Metadata({ data: "json, name=partEtag" })
+  @SpeakeasyMetadata({ data: "json, name=partEtag" })
   partEtag: string;
 
-  @Metadata({ data: "json, name=partNumber" })
+  @SpeakeasyMetadata({ data: "json, name=partNumber" })
   partNumber: number;
 }

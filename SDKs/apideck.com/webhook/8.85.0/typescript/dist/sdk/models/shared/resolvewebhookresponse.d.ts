@@ -1,0 +1,7 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+export declare class ResolveWebhookResponse extends SpeakeasyBase {
+    requestId?: string;
+    status: string;
+    statusCode: number;
+    timestamp?: string;
+}

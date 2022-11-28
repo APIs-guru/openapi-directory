@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetModifyDbProxyTargetGroupActionEnum(str, Enum):
     MODIFY_DB_PROXY_TARGET_GROUP = "ModifyDBProxyTargetGroup"
@@ -7,6 +11,10 @@ class GetModifyDbProxyTargetGroupActionEnum(str, Enum):
 
 @dataclass
 class GetModifyDbProxyTargetGroupConnectionPoolConfig:
+    r"""GetModifyDbProxyTargetGroupConnectionPoolConfig
+    Specifies the settings that control the size and behavior of the connection pool associated with a <code>DBProxyTargetGroup</code>.
+    """
+    
     connection_borrow_timeout: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'ConnectionBorrowTimeout' }})
     init_query: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'InitQuery' }})
     max_connections_percent: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxConnectionsPercent' }})
@@ -19,12 +27,12 @@ class GetModifyDbProxyTargetGroupVersionEnum(str, Enum):
 
 @dataclass
 class GetModifyDbProxyTargetGroupQueryParams:
-    action: GetModifyDbProxyTargetGroupActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetModifyDbProxyTargetGroupActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    db_proxy_name: str = field(metadata={'query_param': { 'field_name': 'DBProxyName', 'style': 'form', 'explode': True }})
+    target_group_name: str = field(metadata={'query_param': { 'field_name': 'TargetGroupName', 'style': 'form', 'explode': True }})
+    version: GetModifyDbProxyTargetGroupVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     connection_pool_config: Optional[GetModifyDbProxyTargetGroupConnectionPoolConfig] = field(default=None, metadata={'query_param': { 'field_name': 'ConnectionPoolConfig', 'style': 'form', 'explode': True }})
-    db_proxy_name: str = field(default=None, metadata={'query_param': { 'field_name': 'DBProxyName', 'style': 'form', 'explode': True }})
     new_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NewName', 'style': 'form', 'explode': True }})
-    target_group_name: str = field(default=None, metadata={'query_param': { 'field_name': 'TargetGroupName', 'style': 'form', 'explode': True }})
-    version: GetModifyDbProxyTargetGroupVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -40,13 +48,13 @@ class GetModifyDbProxyTargetGroupHeaders:
 
 @dataclass
 class GetModifyDbProxyTargetGroupRequest:
-    query_params: GetModifyDbProxyTargetGroupQueryParams = field(default=None)
-    headers: GetModifyDbProxyTargetGroupHeaders = field(default=None)
+    headers: GetModifyDbProxyTargetGroupHeaders = field()
+    query_params: GetModifyDbProxyTargetGroupQueryParams = field()
     
 
 @dataclass
 class GetModifyDbProxyTargetGroupResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

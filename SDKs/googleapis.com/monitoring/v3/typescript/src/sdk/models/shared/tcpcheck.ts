@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PingConfig } from "./pingconfig";
+
 
 
 // TcpCheck
@@ -7,9 +8,9 @@ import { PingConfig } from "./pingconfig";
  * Information required for a TCP Uptime check request.
 **/
 export class TcpCheck extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pingConfig" })
+  @SpeakeasyMetadata({ data: "json, name=pingConfig" })
   pingConfig?: PingConfig;
 
-  @Metadata({ data: "json, name=port" })
+  @SpeakeasyMetadata({ data: "json, name=port" })
   port?: number;
 }

@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -24,34 +29,38 @@ class ListChangeSetsHeaders:
 @dataclass_json
 @dataclass
 class ListChangeSetsRequestBodySort:
-    sort_by: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SortBy' }})
-    sort_order: Optional[shared.SortOrderEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SortOrder' }})
+    r"""ListChangeSetsRequestBodySort
+    An object that contains two attributes, <code>SortBy</code> and <code>SortOrder</code>.
+    """
+    
+    sort_by: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SortBy') }})
+    sort_order: Optional[shared.SortOrderEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SortOrder') }})
     
 
 @dataclass_json
 @dataclass
 class ListChangeSetsRequestBody:
-    catalog: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Catalog' }})
-    filter_list: Optional[List[shared.Filter]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FilterList' }})
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MaxResults' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
-    sort: Optional[ListChangeSetsRequestBodySort] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Sort' }})
+    catalog: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Catalog') }})
+    filter_list: Optional[List[shared.Filter]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FilterList') }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MaxResults') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
+    sort: Optional[ListChangeSetsRequestBodySort] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Sort') }})
     
 
 @dataclass
 class ListChangeSetsRequest:
-    query_params: ListChangeSetsQueryParams = field(default=None)
-    headers: ListChangeSetsHeaders = field(default=None)
-    request: ListChangeSetsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ListChangeSetsHeaders = field()
+    query_params: ListChangeSetsQueryParams = field()
+    request: ListChangeSetsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ListChangeSetsResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_service_exception: Optional[Any] = field(default=None)
     list_change_sets_response: Optional[shared.ListChangeSetsResponse] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

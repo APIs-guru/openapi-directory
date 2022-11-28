@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MoveReplicationTaskMessage
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * <p/>
 **/
 export class MoveReplicationTaskMessage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ReplicationTaskArn" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicationTaskArn" })
   replicationTaskArn: string;
 
-  @Metadata({ data: "json, name=TargetReplicationInstanceArn" })
+  @SpeakeasyMetadata({ data: "json, name=TargetReplicationInstanceArn" })
   targetReplicationInstanceArn: string;
 }

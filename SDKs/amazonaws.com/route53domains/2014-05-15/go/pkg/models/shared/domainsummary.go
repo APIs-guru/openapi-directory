@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// DomainSummary
+// Summary information about one domain.
 type DomainSummary struct {
 	AutoRenew    *bool      `json:"AutoRenew,omitempty"`
 	DomainName   string     `json:"DomainName"`

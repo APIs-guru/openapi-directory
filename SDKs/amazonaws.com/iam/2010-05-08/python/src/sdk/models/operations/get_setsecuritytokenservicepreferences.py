@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetSetSecurityTokenServicePreferencesActionEnum(str, Enum):
     SET_SECURITY_TOKEN_SERVICE_PREFERENCES = "SetSecurityTokenServicePreferences"
@@ -14,9 +18,9 @@ class GetSetSecurityTokenServicePreferencesVersionEnum(str, Enum):
 
 @dataclass
 class GetSetSecurityTokenServicePreferencesQueryParams:
-    action: GetSetSecurityTokenServicePreferencesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    global_endpoint_token_version: GetSetSecurityTokenServicePreferencesGlobalEndpointTokenVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'GlobalEndpointTokenVersion', 'style': 'form', 'explode': True }})
-    version: GetSetSecurityTokenServicePreferencesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetSetSecurityTokenServicePreferencesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    global_endpoint_token_version: GetSetSecurityTokenServicePreferencesGlobalEndpointTokenVersionEnum = field(metadata={'query_param': { 'field_name': 'GlobalEndpointTokenVersion', 'style': 'form', 'explode': True }})
+    version: GetSetSecurityTokenServicePreferencesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -32,13 +36,13 @@ class GetSetSecurityTokenServicePreferencesHeaders:
 
 @dataclass
 class GetSetSecurityTokenServicePreferencesRequest:
-    query_params: GetSetSecurityTokenServicePreferencesQueryParams = field(default=None)
-    headers: GetSetSecurityTokenServicePreferencesHeaders = field(default=None)
+    headers: GetSetSecurityTokenServicePreferencesHeaders = field()
+    query_params: GetSetSecurityTokenServicePreferencesQueryParams = field()
     
 
 @dataclass
 class GetSetSecurityTokenServicePreferencesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

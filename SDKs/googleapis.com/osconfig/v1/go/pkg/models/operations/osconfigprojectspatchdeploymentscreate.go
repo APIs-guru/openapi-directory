@@ -31,7 +31,7 @@ type OsconfigProjectsPatchDeploymentsCreateSecurity struct {
 type OsconfigProjectsPatchDeploymentsCreateRequest struct {
 	PathParams  OsconfigProjectsPatchDeploymentsCreatePathParams
 	QueryParams OsconfigProjectsPatchDeploymentsCreateQueryParams
-	Request     *shared.PatchDeployment `request:"mediaType=application/json"`
+	Request     *shared.PatchDeploymentInput `request:"mediaType=application/json"`
 	Security    OsconfigProjectsPatchDeploymentsCreateSecurity
 }
 

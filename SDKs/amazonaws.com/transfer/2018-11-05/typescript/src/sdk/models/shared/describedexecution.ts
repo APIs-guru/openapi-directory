@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FileLocation } from "./filelocation";
 import { LoggingConfiguration } from "./loggingconfiguration";
 import { PosixProfile } from "./posixprofile";
@@ -7,32 +7,33 @@ import { ServiceMetadata } from "./servicemetadata";
 import { ExecutionStatusEnum } from "./executionstatusenum";
 
 
+
 // DescribedExecution
 /** 
  * The details for an execution object.
 **/
 export class DescribedExecution extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ExecutionId" })
+  @SpeakeasyMetadata({ data: "json, name=ExecutionId" })
   executionId?: string;
 
-  @Metadata({ data: "json, name=ExecutionRole" })
+  @SpeakeasyMetadata({ data: "json, name=ExecutionRole" })
   executionRole?: string;
 
-  @Metadata({ data: "json, name=InitialFileLocation" })
+  @SpeakeasyMetadata({ data: "json, name=InitialFileLocation" })
   initialFileLocation?: FileLocation;
 
-  @Metadata({ data: "json, name=LoggingConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=LoggingConfiguration" })
   loggingConfiguration?: LoggingConfiguration;
 
-  @Metadata({ data: "json, name=PosixProfile" })
+  @SpeakeasyMetadata({ data: "json, name=PosixProfile" })
   posixProfile?: PosixProfile;
 
-  @Metadata({ data: "json, name=Results" })
+  @SpeakeasyMetadata({ data: "json, name=Results" })
   results?: ExecutionResults;
 
-  @Metadata({ data: "json, name=ServiceMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceMetadata" })
   serviceMetadata?: ServiceMetadata;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: ExecutionStatusEnum;
 }

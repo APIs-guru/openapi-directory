@@ -16,10 +16,6 @@ type GetLatestCountryDataByNameQueryParams struct {
 	Name   string                                `queryParam:"style=form,explode=true,name=name"`
 }
 
-type GetLatestCountryDataByNameRequest struct {
-	QueryParams GetLatestCountryDataByNameQueryParams
-}
-
 type GetLatestCountryDataByName200ApplicationJSON struct {
 	Confirmed  *int64     `json:"confirmed,omitempty"`
 	Country    *string    `json:"country,omitempty"`
@@ -30,6 +26,10 @@ type GetLatestCountryDataByName200ApplicationJSON struct {
 	Latitude   *float32   `json:"latitude,omitempty"`
 	Longitude  *float32   `json:"longitude,omitempty"`
 	Recovered  *int64     `json:"recovered,omitempty"`
+}
+
+type GetLatestCountryDataByNameRequest struct {
+	QueryParams GetLatestCountryDataByNameQueryParams
 }
 
 type GetLatestCountryDataByNameResponse struct {

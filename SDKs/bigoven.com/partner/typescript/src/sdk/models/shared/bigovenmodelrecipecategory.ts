@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class BigOvenModelRecipeCategory extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Category" })
+  @SpeakeasyMetadata({ data: "json, name=Category" })
   category?: string;
 
-  @Metadata({ data: "json, name=DefaultActiveMinutes" })
+  @SpeakeasyMetadata({ data: "json, name=DefaultActiveMinutes" })
   defaultActiveMinutes?: number;
 
-  @Metadata({ data: "json, name=DefaultTotalMinutes" })
+  @SpeakeasyMetadata({ data: "json, name=DefaultTotalMinutes" })
   defaultTotalMinutes?: number;
 
-  @Metadata({ data: "json, name=ID" })
+  @SpeakeasyMetadata({ data: "json, name=ID" })
   id?: number;
 
-  @Metadata({ data: "json, name=ParentID" })
+  @SpeakeasyMetadata({ data: "json, name=ParentID" })
   parentId?: number;
 
-  @Metadata({ data: "json, name=PrimaryImage" })
+  @SpeakeasyMetadata({ data: "json, name=PrimaryImage" })
   primaryImage?: string;
 
-  @Metadata({ data: "json, name=ShortDescription" })
+  @SpeakeasyMetadata({ data: "json, name=ShortDescription" })
   shortDescription?: string;
 }

@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class UpdateUserAttributesPathParams:
-    user_id: int = field(default=None, metadata={'path_param': { 'field_name': 'user_id', 'style': 'simple', 'explode': False }})
+    user_id: int = field(metadata={'path_param': { 'field_name': 'user_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,15 +19,15 @@ class UpdateUserAttributesHeaders:
 
 @dataclass
 class UpdateUserAttributesRequest:
-    path_params: UpdateUserAttributesPathParams = field(default=None)
-    headers: UpdateUserAttributesHeaders = field(default=None)
-    request: shared.UserAttributes = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateUserAttributesHeaders = field()
+    path_params: UpdateUserAttributesPathParams = field()
+    request: shared.UserAttributes = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
-class UpdateUserAttributesResponse:
-    content_type: str = field(default=None)
+class UpdateUserAttributesResponseOutput:
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
-    user_data: Optional[shared.UserData] = field(default=None)
+    user_data: Optional[shared.UserDataOutput] = field(default=None)
     

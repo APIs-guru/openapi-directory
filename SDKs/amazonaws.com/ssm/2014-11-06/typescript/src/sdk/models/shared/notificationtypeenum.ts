@@ -1,6 +1,7 @@
 
 
+
 export enum NotificationTypeEnum {
-    Command = "Command"
-,    Invocation = "Invocation"
+    Command = "Command",
+    Invocation = "Invocation"
 }

@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class FitnessUsersDataSourcesUpdatePathParams:
-    data_source_id: str = field(default=None, metadata={'path_param': { 'field_name': 'dataSourceId', 'style': 'simple', 'explode': False }})
-    user_id: str = field(default=None, metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
+    data_source_id: str = field(metadata={'path_param': { 'field_name': 'dataSourceId', 'style': 'simple', 'explode': False }})
+    user_id: str = field(metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,73 +30,75 @@ class FitnessUsersDataSourcesUpdateQueryParams:
 
 @dataclass
 class FitnessUsersDataSourcesUpdateSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FitnessUsersDataSourcesUpdateSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FitnessUsersDataSourcesUpdateSecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FitnessUsersDataSourcesUpdateSecurityOption4:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FitnessUsersDataSourcesUpdateSecurityOption5:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FitnessUsersDataSourcesUpdateSecurityOption6:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FitnessUsersDataSourcesUpdateSecurityOption7:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FitnessUsersDataSourcesUpdateSecurityOption8:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FitnessUsersDataSourcesUpdateSecurityOption9:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FitnessUsersDataSourcesUpdateSecurityOption10:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FitnessUsersDataSourcesUpdateSecurityOption11:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FitnessUsersDataSourcesUpdateSecurity:
     option1: Optional[FitnessUsersDataSourcesUpdateSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
+    option10: Optional[FitnessUsersDataSourcesUpdateSecurityOption10] = field(default=None, metadata={'security': { 'option': True }})
+    option11: Optional[FitnessUsersDataSourcesUpdateSecurityOption11] = field(default=None, metadata={'security': { 'option': True }})
     option2: Optional[FitnessUsersDataSourcesUpdateSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
     option3: Optional[FitnessUsersDataSourcesUpdateSecurityOption3] = field(default=None, metadata={'security': { 'option': True }})
     option4: Optional[FitnessUsersDataSourcesUpdateSecurityOption4] = field(default=None, metadata={'security': { 'option': True }})
@@ -101,21 +107,19 @@ class FitnessUsersDataSourcesUpdateSecurity:
     option7: Optional[FitnessUsersDataSourcesUpdateSecurityOption7] = field(default=None, metadata={'security': { 'option': True }})
     option8: Optional[FitnessUsersDataSourcesUpdateSecurityOption8] = field(default=None, metadata={'security': { 'option': True }})
     option9: Optional[FitnessUsersDataSourcesUpdateSecurityOption9] = field(default=None, metadata={'security': { 'option': True }})
-    option10: Optional[FitnessUsersDataSourcesUpdateSecurityOption10] = field(default=None, metadata={'security': { 'option': True }})
-    option11: Optional[FitnessUsersDataSourcesUpdateSecurityOption11] = field(default=None, metadata={'security': { 'option': True }})
     
 
 @dataclass
 class FitnessUsersDataSourcesUpdateRequest:
-    path_params: FitnessUsersDataSourcesUpdatePathParams = field(default=None)
-    query_params: FitnessUsersDataSourcesUpdateQueryParams = field(default=None)
+    path_params: FitnessUsersDataSourcesUpdatePathParams = field()
+    query_params: FitnessUsersDataSourcesUpdateQueryParams = field()
+    security: FitnessUsersDataSourcesUpdateSecurity = field()
     request: Optional[shared.DataSource] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: FitnessUsersDataSourcesUpdateSecurity = field(default=None)
     
 
 @dataclass
 class FitnessUsersDataSourcesUpdateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     data_source: Optional[shared.DataSource] = field(default=None)
-    status_code: int = field(default=None)
     

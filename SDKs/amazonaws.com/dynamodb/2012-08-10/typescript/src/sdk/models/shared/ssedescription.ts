@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SseTypeEnum } from "./ssetypeenum";
 import { SseStatusEnum } from "./ssestatusenum";
+
 
 
 // SseDescription
@@ -8,15 +9,15 @@ import { SseStatusEnum } from "./ssestatusenum";
  * The description of the server-side encryption status on the specified table.
 **/
 export class SseDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=InaccessibleEncryptionDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=InaccessibleEncryptionDateTime" })
   inaccessibleEncryptionDateTime?: Date;
 
-  @Metadata({ data: "json, name=KMSMasterKeyArn" })
+  @SpeakeasyMetadata({ data: "json, name=KMSMasterKeyArn" })
   kmsMasterKeyArn?: string;
 
-  @Metadata({ data: "json, name=SSEType" })
+  @SpeakeasyMetadata({ data: "json, name=SSEType" })
   sseType?: SseTypeEnum;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: SseStatusEnum;
 }

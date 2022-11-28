@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetRealmUsersPathParams:
-    realm: str = field(default=None, metadata={'path_param': { 'field_name': 'realm', 'style': 'simple', 'explode': False }})
+    realm: str = field(metadata={'path_param': { 'field_name': 'realm', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,13 +22,13 @@ class GetRealmUsersQueryParams:
 
 @dataclass
 class GetRealmUsersRequest:
-    path_params: GetRealmUsersPathParams = field(default=None)
-    query_params: GetRealmUsersQueryParams = field(default=None)
+    path_params: GetRealmUsersPathParams = field()
+    query_params: GetRealmUsersQueryParams = field()
     
 
 @dataclass
 class GetRealmUsersResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     user_representations: Optional[List[shared.UserRepresentation]] = field(default=None)
     

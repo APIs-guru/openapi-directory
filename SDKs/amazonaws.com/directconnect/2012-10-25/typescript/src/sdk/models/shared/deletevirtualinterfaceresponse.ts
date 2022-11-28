@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VirtualInterfaceStateEnum } from "./virtualinterfacestateenum";
 
 
+
 export class DeleteVirtualInterfaceResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=virtualInterfaceState" })
+  @SpeakeasyMetadata({ data: "json, name=virtualInterfaceState" })
   virtualInterfaceState?: VirtualInterfaceStateEnum;
 }

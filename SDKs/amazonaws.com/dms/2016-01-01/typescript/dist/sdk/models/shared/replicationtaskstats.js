@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ReplicationTaskStats
 /**
  * In response to a request by the <code>DescribeReplicationTasks</code> operation, this object provides a collection of statistics about a replication task.
@@ -33,47 +33,47 @@ var ReplicationTaskStats = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ElapsedTimeMillis" }),
+        SpeakeasyMetadata({ data: "json, name=ElapsedTimeMillis" }),
         __metadata("design:type", Number)
     ], ReplicationTaskStats.prototype, "elapsedTimeMillis", void 0);
     __decorate([
-        Metadata({ data: "json, name=FreshStartDate" }),
+        SpeakeasyMetadata({ data: "json, name=FreshStartDate" }),
         __metadata("design:type", Date)
     ], ReplicationTaskStats.prototype, "freshStartDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=FullLoadFinishDate" }),
+        SpeakeasyMetadata({ data: "json, name=FullLoadFinishDate" }),
         __metadata("design:type", Date)
     ], ReplicationTaskStats.prototype, "fullLoadFinishDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=FullLoadProgressPercent" }),
+        SpeakeasyMetadata({ data: "json, name=FullLoadProgressPercent" }),
         __metadata("design:type", Number)
     ], ReplicationTaskStats.prototype, "fullLoadProgressPercent", void 0);
     __decorate([
-        Metadata({ data: "json, name=FullLoadStartDate" }),
+        SpeakeasyMetadata({ data: "json, name=FullLoadStartDate" }),
         __metadata("design:type", Date)
     ], ReplicationTaskStats.prototype, "fullLoadStartDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=StartDate" }),
+        SpeakeasyMetadata({ data: "json, name=StartDate" }),
         __metadata("design:type", Date)
     ], ReplicationTaskStats.prototype, "startDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=StopDate" }),
+        SpeakeasyMetadata({ data: "json, name=StopDate" }),
         __metadata("design:type", Date)
     ], ReplicationTaskStats.prototype, "stopDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=TablesErrored" }),
+        SpeakeasyMetadata({ data: "json, name=TablesErrored" }),
         __metadata("design:type", Number)
     ], ReplicationTaskStats.prototype, "tablesErrored", void 0);
     __decorate([
-        Metadata({ data: "json, name=TablesLoaded" }),
+        SpeakeasyMetadata({ data: "json, name=TablesLoaded" }),
         __metadata("design:type", Number)
     ], ReplicationTaskStats.prototype, "tablesLoaded", void 0);
     __decorate([
-        Metadata({ data: "json, name=TablesLoading" }),
+        SpeakeasyMetadata({ data: "json, name=TablesLoading" }),
         __metadata("design:type", Number)
     ], ReplicationTaskStats.prototype, "tablesLoading", void 0);
     __decorate([
-        Metadata({ data: "json, name=TablesQueued" }),
+        SpeakeasyMetadata({ data: "json, name=TablesQueued" }),
         __metadata("design:type", Number)
     ], ReplicationTaskStats.prototype, "tablesQueued", void 0);
     return ReplicationTaskStats;

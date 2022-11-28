@@ -1,14 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class CampaignRequestFilters:
-    attributes: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'attributes' }})
-    contacts: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'contacts' }})
-    tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
+    attributes: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('attributes') }})
+    contacts: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('contacts') }})
+    tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     
 class CampaignRequestTriggerCodeEnum(str, Enum):
     M = "M"
@@ -19,13 +21,13 @@ class CampaignRequestTriggerCodeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CampaignRequestTrigger:
-    code: Optional[CampaignRequestTriggerCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
+    code: Optional[CampaignRequestTriggerCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('code') }})
     
 
 @dataclass_json
 @dataclass
 class CampaignRequest:
-    filters: Optional[CampaignRequestFilters] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'filters' }})
-    template: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'template' }})
-    trigger: Optional[CampaignRequestTrigger] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'trigger' }})
+    filters: Optional[CampaignRequestFilters] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('filters') }})
+    template: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('template') }})
+    trigger: Optional[CampaignRequestTrigger] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('trigger') }})
     

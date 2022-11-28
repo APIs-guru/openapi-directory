@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PutV3BoardsBoardIdAssetsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=board_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=board_id" })
   boardId: string;
 }
 
 
 export class PutV3BoardsBoardIdAssetsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PutV3BoardsBoardIdAssetsPathParams;
 
-  @Metadata({ data: "request, media_type=application/json", elemType: shared.BoardAsset })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json", elemType: shared.BoardAsset })
   request?: shared.BoardAsset[];
 }
 
 
 export class PutV3BoardsBoardIdAssetsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   addBoardAssetsResult?: shared.AddBoardAssetsResult;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

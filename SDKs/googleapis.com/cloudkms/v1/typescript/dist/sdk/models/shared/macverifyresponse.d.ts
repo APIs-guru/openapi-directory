@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum MacVerifyResponseProtectionLevelEnum {
     ProtectionLevelUnspecified = "PROTECTION_LEVEL_UNSPECIFIED",
     Software = "SOFTWARE",

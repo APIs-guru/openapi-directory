@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import achievementconfigurationdetail
-from . import achievementconfigurationdetail
+from sdk import utils
+from . import *
 
 class AchievementConfigurationAchievementTypeEnum(str, Enum):
     ACHIEVEMENT_TYPE_UNSPECIFIED = "ACHIEVEMENT_TYPE_UNSPECIFIED"
@@ -18,12 +19,16 @@ class AchievementConfigurationInitialStateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class AchievementConfiguration:
-    achievement_type: Optional[AchievementConfigurationAchievementTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'achievementType' }})
-    draft: Optional[achievementconfigurationdetail.AchievementConfigurationDetail] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'draft' }})
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    initial_state: Optional[AchievementConfigurationInitialStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'initialState' }})
-    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
-    published: Optional[achievementconfigurationdetail.AchievementConfigurationDetail] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'published' }})
-    steps_to_unlock: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stepsToUnlock' }})
-    token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'token' }})
+    r"""AchievementConfiguration
+    An achievement configuration resource.
+    """
+    
+    achievement_type: Optional[AchievementConfigurationAchievementTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('achievementType') }})
+    draft: Optional[AchievementConfigurationDetail] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('draft') }})
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    initial_state: Optional[AchievementConfigurationInitialStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('initialState') }})
+    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
+    published: Optional[AchievementConfigurationDetail] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('published') }})
+    steps_to_unlock: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('stepsToUnlock') }})
+    token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('token') }})
     

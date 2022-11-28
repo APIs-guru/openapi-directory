@@ -1,5 +1,7 @@
 package shared
 
+// FunctionConfiguration
+// A function is a reusable entity. Multiple functions can be used to compose the resolver logic.
 type FunctionConfiguration struct {
 	DataSourceName          *string     `json:"dataSourceName,omitempty"`
 	Description             *string     `json:"description,omitempty"`

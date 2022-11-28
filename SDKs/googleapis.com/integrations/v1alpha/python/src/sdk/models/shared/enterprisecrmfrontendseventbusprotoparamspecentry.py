@@ -1,10 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import enterprisecrmeventbusprotoparamspecentryconfig
-from . import enterprisecrmfrontendseventbusprotoparametervaluetype
-from . import enterprisecrmeventbusprotoparamspecentryprotodefinition
-from . import enterprisecrmeventbusprotoparamspecentryvalidationrule
+from sdk import utils
+from . import *
 
 class EnterpriseCrmFrontendsEventbusProtoParamSpecEntryDataTypeEnum(str, Enum):
     DATA_TYPE_UNSPECIFIED = "DATA_TYPE_UNSPECIFIED"
@@ -30,16 +29,20 @@ class EnterpriseCrmFrontendsEventbusProtoParamSpecEntryDataTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class EnterpriseCrmFrontendsEventbusProtoParamSpecEntry:
-    class_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'className' }})
-    collection_element_class_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'collectionElementClassName' }})
-    config: Optional[enterprisecrmeventbusprotoparamspecentryconfig.EnterpriseCrmEventbusProtoParamSpecEntryConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'config' }})
-    data_type: Optional[EnterpriseCrmFrontendsEventbusProtoParamSpecEntryDataTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dataType' }})
-    default_value: Optional[enterprisecrmfrontendseventbusprotoparametervaluetype.EnterpriseCrmFrontendsEventbusProtoParameterValueType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'defaultValue' }})
-    is_deprecated: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'isDeprecated' }})
-    is_output: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'isOutput' }})
-    json_schema: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'jsonSchema' }})
-    key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
-    proto_def: Optional[enterprisecrmeventbusprotoparamspecentryprotodefinition.EnterpriseCrmEventbusProtoParamSpecEntryProtoDefinition] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'protoDef' }})
-    required: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'required' }})
-    validation_rule: Optional[enterprisecrmeventbusprotoparamspecentryvalidationrule.EnterpriseCrmEventbusProtoParamSpecEntryValidationRule] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'validationRule' }})
+    r"""EnterpriseCrmFrontendsEventbusProtoParamSpecEntry
+    Key-value pair of EventBus task parameters. Next id: 13
+    """
+    
+    class_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('className') }})
+    collection_element_class_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('collectionElementClassName') }})
+    config: Optional[EnterpriseCrmEventbusProtoParamSpecEntryConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('config') }})
+    data_type: Optional[EnterpriseCrmFrontendsEventbusProtoParamSpecEntryDataTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dataType') }})
+    default_value: Optional[EnterpriseCrmFrontendsEventbusProtoParameterValueType] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('defaultValue') }})
+    is_deprecated: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('isDeprecated') }})
+    is_output: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('isOutput') }})
+    json_schema: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('jsonSchema') }})
+    key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('key') }})
+    proto_def: Optional[EnterpriseCrmEventbusProtoParamSpecEntryProtoDefinition] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('protoDef') }})
+    required: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('required') }})
+    validation_rule: Optional[EnterpriseCrmEventbusProtoParamSpecEntryValidationRule] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('validationRule') }})
     

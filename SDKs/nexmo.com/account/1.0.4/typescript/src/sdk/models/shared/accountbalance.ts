@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AccountBalance extends SpeakeasyBase {
-  @Metadata({ data: "json, name=autoReload" })
+  @SpeakeasyMetadata({ data: "json, name=autoReload" })
   autoReload?: boolean;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: number;
 }

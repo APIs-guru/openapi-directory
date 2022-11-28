@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PullUriHeaders = /** @class */ (function (_super) {
     __extends(PullUriHeaders, _super);
     function PullUriHeaders() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Content-Type" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Content-Type" }),
         __metadata("design:type", String)
     ], PullUriHeaders.prototype, "contentType", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=x-digilocker-hmac" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-digilocker-hmac" }),
         __metadata("design:type", String)
     ], PullUriHeaders.prototype, "xDigilockerHmac", void 0);
     return PullUriHeaders;
@@ -45,11 +45,11 @@ var PullUriRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PullUriHeaders)
     ], PullUriRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/xml" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/xml" }),
         __metadata("design:type", Uint8Array)
     ], PullUriRequest.prototype, "request", void 0);
     return PullUriRequest;
@@ -61,15 +61,15 @@ var PullUriResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], PullUriResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PullUriResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PullUriResponse.prototype, "statusCode", void 0);
     return PullUriResponse;

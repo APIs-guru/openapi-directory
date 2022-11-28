@@ -4,16 +4,16 @@ from dataclasses import dataclass, field
 
 @dataclass
 class GetTransactionCostPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetTransactionCostRequest:
-    path_params: GetTransactionCostPathParams = field(default=None)
+    path_params: GetTransactionCostPathParams = field()
     
 
 @dataclass
 class GetTransactionCostResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

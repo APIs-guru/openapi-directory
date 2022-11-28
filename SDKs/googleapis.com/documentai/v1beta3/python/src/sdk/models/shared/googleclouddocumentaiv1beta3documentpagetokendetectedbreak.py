@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GoogleCloudDocumentaiV1beta3DocumentPageTokenDetectedBreakTypeEnum(str, Enum):
     TYPE_UNSPECIFIED = "TYPE_UNSPECIFIED"
@@ -12,5 +14,9 @@ class GoogleCloudDocumentaiV1beta3DocumentPageTokenDetectedBreakTypeEnum(str, En
 @dataclass_json
 @dataclass
 class GoogleCloudDocumentaiV1beta3DocumentPageTokenDetectedBreak:
-    type: Optional[GoogleCloudDocumentaiV1beta3DocumentPageTokenDetectedBreakTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""GoogleCloudDocumentaiV1beta3DocumentPageTokenDetectedBreak
+    Detected break at the end of a Token.
+    """
+    
+    type: Optional[GoogleCloudDocumentaiV1beta3DocumentPageTokenDetectedBreakTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

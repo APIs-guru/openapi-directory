@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetDescribeSnapshotCopyGrantsActionEnum {
     DescribeSnapshotCopyGrants = "DescribeSnapshotCopyGrants"
@@ -10,69 +11,69 @@ export enum GetDescribeSnapshotCopyGrantsVersionEnum {
 
 
 export class GetDescribeSnapshotCopyGrantsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Action" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" })
   action: GetDescribeSnapshotCopyGrantsActionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Marker" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Marker" })
   marker?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=MaxRecords" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MaxRecords" })
   maxRecords?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=SnapshotCopyGrantName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=SnapshotCopyGrantName" })
   snapshotCopyGrantName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=TagKeys" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=TagKeys" })
   tagKeys?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=TagValues" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=TagValues" })
   tagValues?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" })
   version: GetDescribeSnapshotCopyGrantsVersionEnum;
 }
 
 
 export class GetDescribeSnapshotCopyGrantsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class GetDescribeSnapshotCopyGrantsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetDescribeSnapshotCopyGrantsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetDescribeSnapshotCopyGrantsHeaders;
 }
 
 
 export class GetDescribeSnapshotCopyGrantsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

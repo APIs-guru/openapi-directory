@@ -41,7 +41,7 @@ type LoggingUpdateCmekSettingsSecurity struct {
 type LoggingUpdateCmekSettingsRequest struct {
 	PathParams  LoggingUpdateCmekSettingsPathParams
 	QueryParams LoggingUpdateCmekSettingsQueryParams
-	Request     *shared.CmekSettings `request:"mediaType=application/json"`
+	Request     *shared.CmekSettingsInput `request:"mediaType=application/json"`
 	Security    LoggingUpdateCmekSettingsSecurity
 }
 

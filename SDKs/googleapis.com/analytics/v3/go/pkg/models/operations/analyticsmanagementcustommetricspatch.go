@@ -29,7 +29,7 @@ type AnalyticsManagementCustomMetricsPatchSecurity struct {
 type AnalyticsManagementCustomMetricsPatchRequest struct {
 	PathParams  AnalyticsManagementCustomMetricsPatchPathParams
 	QueryParams AnalyticsManagementCustomMetricsPatchQueryParams
-	Request     *shared.CustomMetric `request:"mediaType=application/json"`
+	Request     *shared.CustomMetricInput `request:"mediaType=application/json"`
 	Security    AnalyticsManagementCustomMetricsPatchSecurity
 }
 

@@ -26,7 +26,7 @@ type CloudidentityDevicesCreateSecurity struct {
 
 type CloudidentityDevicesCreateRequest struct {
 	QueryParams CloudidentityDevicesCreateQueryParams
-	Request     *shared.GoogleAppsCloudidentityDevicesV1Device `request:"mediaType=application/json"`
+	Request     *shared.GoogleAppsCloudidentityDevicesV1DeviceInput `request:"mediaType=application/json"`
 	Security    CloudidentityDevicesCreateSecurity
 }
 

@@ -76,6 +76,8 @@ const (
 	JobVisibilityEnumSharedWithPublic      JobVisibilityEnum = "SHARED_WITH_PUBLIC"
 )
 
+// Job
+// A Job resource represents a job posting (also referred to as a "job listing" or "job requisition"). A job belongs to a Company, which is the hiring entity responsible for the job.
 type Job struct {
 	Addresses          []string                   `json:"addresses,omitempty"`
 	ApplicationInfo    *ApplicationInfo           `json:"applicationInfo,omitempty"`

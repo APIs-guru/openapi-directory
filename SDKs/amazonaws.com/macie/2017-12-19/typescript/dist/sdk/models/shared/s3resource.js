@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // S3Resource
 /**
  * Contains information about the S3 resource. This data type is used as a request parameter in the DisassociateS3Resources action and can be used as a response parameter in the AssociateS3Resources and UpdateS3Resources actions.
@@ -33,11 +33,11 @@ var S3Resource = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=bucketName" }),
+        SpeakeasyMetadata({ data: "json, name=bucketName" }),
         __metadata("design:type", String)
     ], S3Resource.prototype, "bucketName", void 0);
     __decorate([
-        Metadata({ data: "json, name=prefix" }),
+        SpeakeasyMetadata({ data: "json, name=prefix" }),
         __metadata("design:type", String)
     ], S3Resource.prototype, "prefix", void 0);
     return S3Resource;

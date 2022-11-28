@@ -1,33 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AgentVersion } from "./agentversion";
 import { DeviceStats } from "./devicestats";
 import { EdgeModelStat } from "./edgemodelstat";
 import { EdgeOutputConfig } from "./edgeoutputconfig";
 
 
+
 export class GetDeviceFleetReportResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AgentVersions", elemType: shared.AgentVersion })
+  @SpeakeasyMetadata({ data: "json, name=AgentVersions", elemType: AgentVersion })
   agentVersions?: AgentVersion[];
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=DeviceFleetArn" })
+  @SpeakeasyMetadata({ data: "json, name=DeviceFleetArn" })
   deviceFleetArn: string;
 
-  @Metadata({ data: "json, name=DeviceFleetName" })
+  @SpeakeasyMetadata({ data: "json, name=DeviceFleetName" })
   deviceFleetName: string;
 
-  @Metadata({ data: "json, name=DeviceStats" })
+  @SpeakeasyMetadata({ data: "json, name=DeviceStats" })
   deviceStats?: DeviceStats;
 
-  @Metadata({ data: "json, name=ModelStats", elemType: shared.EdgeModelStat })
+  @SpeakeasyMetadata({ data: "json, name=ModelStats", elemType: EdgeModelStat })
   modelStats?: EdgeModelStat[];
 
-  @Metadata({ data: "json, name=OutputConfig" })
+  @SpeakeasyMetadata({ data: "json, name=OutputConfig" })
   outputConfig?: EdgeOutputConfig;
 
-  @Metadata({ data: "json, name=ReportGenerated" })
+  @SpeakeasyMetadata({ data: "json, name=ReportGenerated" })
   reportGenerated?: Date;
 }

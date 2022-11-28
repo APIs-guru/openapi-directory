@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ExternalConnection extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccessToken" })
+  @SpeakeasyMetadata({ data: "json, name=AccessToken" })
   accessToken?: string;
 
-  @Metadata({ data: "json, name=AccessTokenSecret" })
+  @SpeakeasyMetadata({ data: "json, name=AccessTokenSecret" })
   accessTokenSecret?: string;
 
-  @Metadata({ data: "json, name=Data" })
+  @SpeakeasyMetadata({ data: "json, name=Data" })
   data?: string;
 
-  @Metadata({ data: "json, name=ExpiresOn" })
+  @SpeakeasyMetadata({ data: "json, name=ExpiresOn" })
   expiresOn?: Date;
 
-  @Metadata({ data: "json, name=ExternalUserId" })
+  @SpeakeasyMetadata({ data: "json, name=ExternalUserId" })
   externalUserId?: string;
 
-  @Metadata({ data: "json, name=ExternalUsername" })
+  @SpeakeasyMetadata({ data: "json, name=ExternalUsername" })
   externalUsername?: string;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: number;
 
-  @Metadata({ data: "json, name=Provider" })
+  @SpeakeasyMetadata({ data: "json, name=Provider" })
   provider?: string;
 
-  @Metadata({ data: "json, name=UserId" })
+  @SpeakeasyMetadata({ data: "json, name=UserId" })
   userId?: number;
 }

@@ -11,12 +11,12 @@ class EaseeSessionsQueryParams:
 
 @dataclass
 class EaseeSessionsRequest:
-    query_params: EaseeSessionsQueryParams = field(default=None)
+    query_params: EaseeSessionsQueryParams = field()
     
 
 @dataclass
 class EaseeSessionsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     easee_chargers: Optional[List[shared.EaseeCharger]] = field(default=None)
     

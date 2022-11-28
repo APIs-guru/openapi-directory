@@ -1,11 +1,11 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from sdk.models import shared
 
 
 @dataclass
 class ScimListProvisionedIdentitiesPathParams:
-    org: str = field(default=None, metadata={'path_param': { 'field_name': 'org', 'style': 'simple', 'explode': False }})
+    org: str = field(metadata={'path_param': { 'field_name': 'org', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,14 +17,14 @@ class ScimListProvisionedIdentitiesQueryParams:
 
 @dataclass
 class ScimListProvisionedIdentitiesRequest:
-    path_params: ScimListProvisionedIdentitiesPathParams = field(default=None)
-    query_params: ScimListProvisionedIdentitiesQueryParams = field(default=None)
+    path_params: ScimListProvisionedIdentitiesPathParams = field()
+    query_params: ScimListProvisionedIdentitiesQueryParams = field()
     
 
 @dataclass
 class ScimListProvisionedIdentitiesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     scim_error: Optional[shared.ScimError] = field(default=None)
     scim_user_list: Optional[shared.ScimUserList] = field(default=None)
     

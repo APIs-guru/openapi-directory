@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // CreateWorkloadShareOutput
 /**
  * Input for Create Workload Share
@@ -33,11 +33,11 @@ var CreateWorkloadShareOutput = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ShareId" }),
+        SpeakeasyMetadata({ data: "json, name=ShareId" }),
         __metadata("design:type", String)
     ], CreateWorkloadShareOutput.prototype, "shareId", void 0);
     __decorate([
-        Metadata({ data: "json, name=WorkloadId" }),
+        SpeakeasyMetadata({ data: "json, name=WorkloadId" }),
         __metadata("design:type", String)
     ], CreateWorkloadShareOutput.prototype, "workloadId", void 0);
     return CreateWorkloadShareOutput;

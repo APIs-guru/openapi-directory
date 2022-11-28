@@ -1,60 +1,61 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum DiscussionApiGetTopicsFieldsEnum {
-    None = "None"
-,    Comments = "Comments"
-,    CommentCount = "CommentCount"
-,    Content = "Content"
-,    LastComment = "LastComment"
-,    All = "All"
+    None = "None",
+    Comments = "Comments",
+    CommentCount = "CommentCount",
+    Content = "Content",
+    LastComment = "LastComment",
+    All = "All"
 }
 
 export enum DiscussionApiGetTopicsSortEnum {
-    None = "None"
-,    Name = "Name"
-,    DateCreated = "DateCreated"
-,    LastCommentDate = "LastCommentDate"
+    None = "None",
+    Name = "Name",
+    DateCreated = "DateCreated",
+    LastCommentDate = "LastCommentDate"
 }
 
 
 export class DiscussionApiGetTopicsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" })
   fields?: DiscussionApiGetTopicsFieldsEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=folderId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=folderId" })
   folderId?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=getTotalCount" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=getTotalCount" })
   getTotalCount?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxResults" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: DiscussionApiGetTopicsSortEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=start" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=start" })
   start?: number;
 }
 
 
 export class DiscussionApiGetTopicsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: DiscussionApiGetTopicsQueryParams;
 }
 
 
 export class DiscussionApiGetTopicsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   partialFindResultDiscussionTopicContract?: shared.PartialFindResultDiscussionTopicContract;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

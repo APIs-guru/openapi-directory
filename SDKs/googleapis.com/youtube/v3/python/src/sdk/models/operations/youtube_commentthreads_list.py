@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class YoutubeCommentThreadsListModerationStatusEnum(str, Enum):
@@ -21,6 +22,7 @@ class YoutubeCommentThreadsListTextFormatEnum(str, Enum):
 
 @dataclass
 class YoutubeCommentThreadsListQueryParams:
+    part: List[str] = field(metadata={'query_param': { 'field_name': 'part', 'style': 'form', 'explode': True }})
     dollar_xgafv: Optional[shared.XgafvEnum] = field(default=None, metadata={'query_param': { 'field_name': '$.xgafv', 'style': 'form', 'explode': True }})
     access_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'access_token', 'style': 'form', 'explode': True }})
     all_threads_related_to_channel_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'allThreadsRelatedToChannelId', 'style': 'form', 'explode': True }})
@@ -35,7 +37,6 @@ class YoutubeCommentThreadsListQueryParams:
     oauth_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'oauth_token', 'style': 'form', 'explode': True }})
     order: Optional[YoutubeCommentThreadsListOrderEnum] = field(default=None, metadata={'query_param': { 'field_name': 'order', 'style': 'form', 'explode': True }})
     page_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'pageToken', 'style': 'form', 'explode': True }})
-    part: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'part', 'style': 'form', 'explode': True }})
     pretty_print: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'prettyPrint', 'style': 'form', 'explode': True }})
     quota_user: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'quotaUser', 'style': 'form', 'explode': True }})
     search_terms: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'searchTerms', 'style': 'form', 'explode': True }})
@@ -47,19 +48,19 @@ class YoutubeCommentThreadsListQueryParams:
 
 @dataclass
 class YoutubeCommentThreadsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class YoutubeCommentThreadsListRequest:
-    query_params: YoutubeCommentThreadsListQueryParams = field(default=None)
-    security: YoutubeCommentThreadsListSecurity = field(default=None)
+    query_params: YoutubeCommentThreadsListQueryParams = field()
+    security: YoutubeCommentThreadsListSecurity = field()
     
 
 @dataclass
 class YoutubeCommentThreadsListResponse:
+    content_type: str = field()
+    status_code: int = field()
     comment_thread_list_response: Optional[shared.CommentThreadListResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

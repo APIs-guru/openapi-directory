@@ -1,6 +1,7 @@
 
 
+
 export enum TaskQueueingEnum {
-    Enabled = "ENABLED"
-,    Disabled = "DISABLED"
+    Enabled = "ENABLED",
+    Disabled = "DISABLED"
 }

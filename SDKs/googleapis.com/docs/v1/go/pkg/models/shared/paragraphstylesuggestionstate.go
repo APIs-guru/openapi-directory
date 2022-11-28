@@ -1,5 +1,7 @@
 package shared
 
+// ParagraphStyleSuggestionState
+// A mask that indicates which of the fields on the base ParagraphStyle have been changed in this suggestion. For any field set to true, there's a new suggested value.
 type ParagraphStyleSuggestionState struct {
 	AlignmentSuggested           *bool                   `json:"alignmentSuggested,omitempty"`
 	AvoidWidowAndOrphanSuggested *bool                   `json:"avoidWidowAndOrphanSuggested,omitempty"`

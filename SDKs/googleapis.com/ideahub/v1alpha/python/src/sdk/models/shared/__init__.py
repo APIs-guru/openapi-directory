@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .alt_enum import *
 from .googlesearchideahubv1alphaavailablelocale import *
 from .googlesearchideahubv1alphaidea import *

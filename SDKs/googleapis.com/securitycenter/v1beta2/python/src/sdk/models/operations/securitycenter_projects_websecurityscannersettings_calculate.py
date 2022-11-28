@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class SecuritycenterProjectsWebSecurityScannerSettingsCalculatePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class SecuritycenterProjectsWebSecurityScannerSettingsCalculateQueryParams:
 
 @dataclass
 class SecuritycenterProjectsWebSecurityScannerSettingsCalculateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class SecuritycenterProjectsWebSecurityScannerSettingsCalculateRequest:
-    path_params: SecuritycenterProjectsWebSecurityScannerSettingsCalculatePathParams = field(default=None)
-    query_params: SecuritycenterProjectsWebSecurityScannerSettingsCalculateQueryParams = field(default=None)
-    security: SecuritycenterProjectsWebSecurityScannerSettingsCalculateSecurity = field(default=None)
+    path_params: SecuritycenterProjectsWebSecurityScannerSettingsCalculatePathParams = field()
+    query_params: SecuritycenterProjectsWebSecurityScannerSettingsCalculateQueryParams = field()
+    security: SecuritycenterProjectsWebSecurityScannerSettingsCalculateSecurity = field()
     
 
 @dataclass
 class SecuritycenterProjectsWebSecurityScannerSettingsCalculateResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     web_security_scanner_settings: Optional[shared.WebSecurityScannerSettings] = field(default=None)
     

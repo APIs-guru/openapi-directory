@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // DescribeVaultOutput
 /**
  * Contains the Amazon S3 Glacier response to your request.
@@ -33,27 +33,27 @@ var DescribeVaultOutput = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CreationDate" }),
+        SpeakeasyMetadata({ data: "json, name=CreationDate" }),
         __metadata("design:type", String)
     ], DescribeVaultOutput.prototype, "creationDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastInventoryDate" }),
+        SpeakeasyMetadata({ data: "json, name=LastInventoryDate" }),
         __metadata("design:type", String)
     ], DescribeVaultOutput.prototype, "lastInventoryDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=NumberOfArchives" }),
+        SpeakeasyMetadata({ data: "json, name=NumberOfArchives" }),
         __metadata("design:type", Number)
     ], DescribeVaultOutput.prototype, "numberOfArchives", void 0);
     __decorate([
-        Metadata({ data: "json, name=SizeInBytes" }),
+        SpeakeasyMetadata({ data: "json, name=SizeInBytes" }),
         __metadata("design:type", Number)
     ], DescribeVaultOutput.prototype, "sizeInBytes", void 0);
     __decorate([
-        Metadata({ data: "json, name=VaultARN" }),
+        SpeakeasyMetadata({ data: "json, name=VaultARN" }),
         __metadata("design:type", String)
     ], DescribeVaultOutput.prototype, "vaultArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=VaultName" }),
+        SpeakeasyMetadata({ data: "json, name=VaultName" }),
         __metadata("design:type", String)
     ], DescribeVaultOutput.prototype, "vaultName", void 0);
     return DescribeVaultOutput;

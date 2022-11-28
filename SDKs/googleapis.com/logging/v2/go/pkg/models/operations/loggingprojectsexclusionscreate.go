@@ -40,7 +40,7 @@ type LoggingProjectsExclusionsCreateSecurity struct {
 type LoggingProjectsExclusionsCreateRequest struct {
 	PathParams  LoggingProjectsExclusionsCreatePathParams
 	QueryParams LoggingProjectsExclusionsCreateQueryParams
-	Request     *shared.LogExclusion `request:"mediaType=application/json"`
+	Request     *shared.LogExclusionInput `request:"mediaType=application/json"`
 	Security    LoggingProjectsExclusionsCreateSecurity
 }
 

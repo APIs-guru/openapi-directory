@@ -1,5 +1,7 @@
 package shared
 
+// AggregateMetrics
+// Metrics aggregated over the input time range.
 type AggregateMetrics struct {
 	AnsweredCallsCount *int32           `json:"answeredCallsCount,omitempty"`
 	EndDate            *Date            `json:"endDate,omitempty"`

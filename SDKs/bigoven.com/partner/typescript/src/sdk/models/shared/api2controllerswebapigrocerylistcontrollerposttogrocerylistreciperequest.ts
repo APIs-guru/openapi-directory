@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Api2ControllersWebApiGroceryListControllerPostToGroceryListRecipeRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=department, form, name=department;" })
+  @SpeakeasyMetadata({ data: "json, name=department, form, name=department;" })
   department?: string;
 
-  @Metadata({ data: "json, name=name, form, name=name;" })
+  @SpeakeasyMetadata({ data: "json, name=name, form, name=name;" })
   name?: string;
 
-  @Metadata({ data: "json, name=notes, form, name=notes;" })
+  @SpeakeasyMetadata({ data: "json, name=notes, form, name=notes;" })
   notes?: string;
 
-  @Metadata({ data: "json, name=quantity, form, name=quantity;" })
+  @SpeakeasyMetadata({ data: "json, name=quantity, form, name=quantity;" })
   quantity?: string;
 
-  @Metadata({ data: "json, name=unit, form, name=unit;" })
+  @SpeakeasyMetadata({ data: "json, name=unit, form, name=unit;" })
   unit?: string;
 }

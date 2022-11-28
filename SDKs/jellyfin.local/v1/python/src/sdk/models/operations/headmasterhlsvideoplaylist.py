@@ -1,15 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class HeadMasterHlsVideoPlaylistPathParams:
-    item_id: str = field(default=None, metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
+    item_id: str = field(metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class HeadMasterHlsVideoPlaylistQueryParams:
+    media_source_id: str = field(metadata={'query_param': { 'field_name': 'mediaSourceId', 'style': 'form', 'explode': True }})
     allow_audio_stream_copy: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'allowAudioStreamCopy', 'style': 'form', 'explode': True }})
     allow_video_stream_copy: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'allowVideoStreamCopy', 'style': 'form', 'explode': True }})
     audio_bit_rate: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'audioBitRate', 'style': 'form', 'explode': True }})
@@ -36,7 +38,6 @@ class HeadMasterHlsVideoPlaylistQueryParams:
     max_framerate: Optional[float] = field(default=None, metadata={'query_param': { 'field_name': 'maxFramerate', 'style': 'form', 'explode': True }})
     max_ref_frames: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'maxRefFrames', 'style': 'form', 'explode': True }})
     max_video_bit_depth: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'maxVideoBitDepth', 'style': 'form', 'explode': True }})
-    media_source_id: str = field(default=None, metadata={'query_param': { 'field_name': 'mediaSourceId', 'style': 'form', 'explode': True }})
     min_segments: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'minSegments', 'style': 'form', 'explode': True }})
     params: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'params', 'style': 'form', 'explode': True }})
     play_session_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'playSessionId', 'style': 'form', 'explode': True }})
@@ -62,19 +63,19 @@ class HeadMasterHlsVideoPlaylistQueryParams:
 
 @dataclass
 class HeadMasterHlsVideoPlaylistSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class HeadMasterHlsVideoPlaylistRequest:
-    path_params: HeadMasterHlsVideoPlaylistPathParams = field(default=None)
-    query_params: HeadMasterHlsVideoPlaylistQueryParams = field(default=None)
-    security: HeadMasterHlsVideoPlaylistSecurity = field(default=None)
+    path_params: HeadMasterHlsVideoPlaylistPathParams = field()
+    query_params: HeadMasterHlsVideoPlaylistQueryParams = field()
+    security: HeadMasterHlsVideoPlaylistSecurity = field()
     
 
 @dataclass
 class HeadMasterHlsVideoPlaylistResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     head_master_hls_video_playlist_200_application_x_mpegurl_binary_string: Optional[bytes] = field(default=None)
-    status_code: int = field(default=None)
     

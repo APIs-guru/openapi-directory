@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { FirewallRule } from "./firewallrule";
 /**
  * Request message for Firewall.BatchUpdateIngressRules.

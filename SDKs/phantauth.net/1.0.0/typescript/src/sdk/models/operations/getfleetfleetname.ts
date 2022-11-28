@@ -1,49 +1,50 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetFleetFleetnamePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=fleetname" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=fleetname" })
   fleetname: string;
 }
 
 
-export class GetFleetFleetnameRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetFleetFleetnamePathParams;
-}
-
-
 export class GetFleetFleetname200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=@id" })
+  @SpeakeasyMetadata({ data: "json, name=@id" })
   atId?: string;
 
-  @Metadata({ data: "json, name=logo" })
+  @SpeakeasyMetadata({ data: "json, name=logo" })
   logo?: string;
 
-  @Metadata({ data: "json, name=logo_email" })
+  @SpeakeasyMetadata({ data: "json, name=logo_email" })
   logoEmail?: string;
 
-  @Metadata({ data: "json, name=members" })
+  @SpeakeasyMetadata({ data: "json, name=members" })
   members?: any[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=profile" })
+  @SpeakeasyMetadata({ data: "json, name=profile" })
   profile?: string;
 
-  @Metadata({ data: "json, name=sub" })
+  @SpeakeasyMetadata({ data: "json, name=sub" })
   sub: string;
 }
 
 
+export class GetFleetFleetnameRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetFleetFleetnamePathParams;
+}
+
+
 export class GetFleetFleetnameResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getFleetFleetname200ApplicationJsonObject?: GetFleetFleetname200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -33,7 +33,7 @@ type DisplayvideoInventorySourcesPatchSecurity struct {
 type DisplayvideoInventorySourcesPatchRequest struct {
 	PathParams  DisplayvideoInventorySourcesPatchPathParams
 	QueryParams DisplayvideoInventorySourcesPatchQueryParams
-	Request     *shared.InventorySource `request:"mediaType=application/json"`
+	Request     *shared.InventorySourceInput `request:"mediaType=application/json"`
 	Security    DisplayvideoInventorySourcesPatchSecurity
 }
 

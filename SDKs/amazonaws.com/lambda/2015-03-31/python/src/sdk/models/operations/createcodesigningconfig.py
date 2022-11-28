@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,34 +23,42 @@ class CreateCodeSigningConfigHeaders:
 @dataclass_json
 @dataclass
 class CreateCodeSigningConfigRequestBodyAllowedPublishers:
-    signing_profile_version_arns: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SigningProfileVersionArns' }})
+    r"""CreateCodeSigningConfigRequestBodyAllowedPublishers
+    List of signing profiles that can sign a code package. 
+    """
+    
+    signing_profile_version_arns: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SigningProfileVersionArns') }})
     
 
 @dataclass_json
 @dataclass
 class CreateCodeSigningConfigRequestBodyCodeSigningPolicies:
-    untrusted_artifact_on_deployment: Optional[shared.CodeSigningPolicyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'UntrustedArtifactOnDeployment' }})
+    r"""CreateCodeSigningConfigRequestBodyCodeSigningPolicies
+    Code signing configuration <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-policies\">policies</a> specify the validation failure action for signature mismatch or expiry.
+    """
+    
+    untrusted_artifact_on_deployment: Optional[shared.CodeSigningPolicyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('UntrustedArtifactOnDeployment') }})
     
 
 @dataclass_json
 @dataclass
 class CreateCodeSigningConfigRequestBody:
-    allowed_publishers: CreateCodeSigningConfigRequestBodyAllowedPublishers = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AllowedPublishers' }})
-    code_signing_policies: Optional[CreateCodeSigningConfigRequestBodyCodeSigningPolicies] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CodeSigningPolicies' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
+    allowed_publishers: CreateCodeSigningConfigRequestBodyAllowedPublishers = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('AllowedPublishers') }})
+    code_signing_policies: Optional[CreateCodeSigningConfigRequestBodyCodeSigningPolicies] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CodeSigningPolicies') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Description') }})
     
 
 @dataclass
 class CreateCodeSigningConfigRequest:
-    headers: CreateCodeSigningConfigHeaders = field(default=None)
-    request: CreateCodeSigningConfigRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateCodeSigningConfigHeaders = field()
+    request: CreateCodeSigningConfigRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateCodeSigningConfigResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     create_code_signing_config_response: Optional[shared.CreateCodeSigningConfigResponse] = field(default=None)
     invalid_parameter_value_exception: Optional[Any] = field(default=None)
     service_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

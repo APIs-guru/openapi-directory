@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class IdentitytoolkitProjectsTenantsGetIamPolicyPathParams:
-    resource: str = field(default=None, metadata={'path_param': { 'field_name': 'resource', 'style': 'simple', 'explode': False }})
+    resource: str = field(metadata={'path_param': { 'field_name': 'resource', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class IdentitytoolkitProjectsTenantsGetIamPolicyQueryParams:
 
 @dataclass
 class IdentitytoolkitProjectsTenantsGetIamPolicySecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class IdentitytoolkitProjectsTenantsGetIamPolicySecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class IdentitytoolkitProjectsTenantsGetIamPolicySecurity:
 
 @dataclass
 class IdentitytoolkitProjectsTenantsGetIamPolicyRequest:
-    path_params: IdentitytoolkitProjectsTenantsGetIamPolicyPathParams = field(default=None)
-    query_params: IdentitytoolkitProjectsTenantsGetIamPolicyQueryParams = field(default=None)
+    path_params: IdentitytoolkitProjectsTenantsGetIamPolicyPathParams = field()
+    query_params: IdentitytoolkitProjectsTenantsGetIamPolicyQueryParams = field()
+    security: IdentitytoolkitProjectsTenantsGetIamPolicySecurity = field()
     request: Optional[shared.GoogleIamV1GetIamPolicyRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: IdentitytoolkitProjectsTenantsGetIamPolicySecurity = field(default=None)
     
 
 @dataclass
 class IdentitytoolkitProjectsTenantsGetIamPolicyResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_iam_v1_policy: Optional[shared.GoogleIamV1Policy] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class GeoLocation:
-    lat: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Lat' }})
-    lon: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Lon' }})
+    r"""GeoLocation
+    Provides the latitude and longitude coordinates of a location.
+    """
+    
+    lat: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Lat') }})
+    lon: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Lon') }})
     

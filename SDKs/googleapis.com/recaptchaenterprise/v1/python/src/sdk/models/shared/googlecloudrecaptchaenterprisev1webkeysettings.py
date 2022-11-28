@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GoogleCloudRecaptchaenterpriseV1WebKeySettingsChallengeSecurityPreferenceEnum(str, Enum):
     CHALLENGE_SECURITY_PREFERENCE_UNSPECIFIED = "CHALLENGE_SECURITY_PREFERENCE_UNSPECIFIED"
@@ -18,9 +20,13 @@ class GoogleCloudRecaptchaenterpriseV1WebKeySettingsIntegrationTypeEnum(str, Enu
 @dataclass_json
 @dataclass
 class GoogleCloudRecaptchaenterpriseV1WebKeySettings:
-    allow_all_domains: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'allowAllDomains' }})
-    allow_amp_traffic: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'allowAmpTraffic' }})
-    allowed_domains: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'allowedDomains' }})
-    challenge_security_preference: Optional[GoogleCloudRecaptchaenterpriseV1WebKeySettingsChallengeSecurityPreferenceEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'challengeSecurityPreference' }})
-    integration_type: Optional[GoogleCloudRecaptchaenterpriseV1WebKeySettingsIntegrationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'integrationType' }})
+    r"""GoogleCloudRecaptchaenterpriseV1WebKeySettings
+    Settings specific to keys that can be used by websites.
+    """
+    
+    allow_all_domains: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('allowAllDomains') }})
+    allow_amp_traffic: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('allowAmpTraffic') }})
+    allowed_domains: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('allowedDomains') }})
+    challenge_security_preference: Optional[GoogleCloudRecaptchaenterpriseV1WebKeySettingsChallengeSecurityPreferenceEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('challengeSecurityPreference') }})
+    integration_type: Optional[GoogleCloudRecaptchaenterpriseV1WebKeySettingsIntegrationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('integrationType') }})
     

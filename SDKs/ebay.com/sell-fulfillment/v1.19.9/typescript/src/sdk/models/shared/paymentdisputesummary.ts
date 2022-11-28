@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SimpleAmount } from "./simpleamount";
+
 
 
 // PaymentDisputeSummary
@@ -7,30 +8,30 @@ import { SimpleAmount } from "./simpleamount";
  * This type is used by each payment dispute that is returned with the getPaymentDisputeSummaries method.
 **/
 export class PaymentDisputeSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=amount" })
+  @SpeakeasyMetadata({ data: "json, name=amount" })
   amount?: SimpleAmount;
 
-  @Metadata({ data: "json, name=buyerUsername" })
+  @SpeakeasyMetadata({ data: "json, name=buyerUsername" })
   buyerUsername?: string;
 
-  @Metadata({ data: "json, name=closedDate" })
+  @SpeakeasyMetadata({ data: "json, name=closedDate" })
   closedDate?: string;
 
-  @Metadata({ data: "json, name=openDate" })
+  @SpeakeasyMetadata({ data: "json, name=openDate" })
   openDate?: string;
 
-  @Metadata({ data: "json, name=orderId" })
+  @SpeakeasyMetadata({ data: "json, name=orderId" })
   orderId?: string;
 
-  @Metadata({ data: "json, name=paymentDisputeId" })
+  @SpeakeasyMetadata({ data: "json, name=paymentDisputeId" })
   paymentDisputeId?: string;
 
-  @Metadata({ data: "json, name=paymentDisputeStatus" })
+  @SpeakeasyMetadata({ data: "json, name=paymentDisputeStatus" })
   paymentDisputeStatus?: string;
 
-  @Metadata({ data: "json, name=reason" })
+  @SpeakeasyMetadata({ data: "json, name=reason" })
   reason?: string;
 
-  @Metadata({ data: "json, name=respondByDate" })
+  @SpeakeasyMetadata({ data: "json, name=respondByDate" })
   respondByDate?: string;
 }

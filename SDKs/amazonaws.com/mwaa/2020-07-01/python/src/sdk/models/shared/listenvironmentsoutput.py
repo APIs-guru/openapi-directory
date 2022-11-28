@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class ListEnvironmentsOutput:
-    environments: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Environments' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
+    environments: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Environments') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
     

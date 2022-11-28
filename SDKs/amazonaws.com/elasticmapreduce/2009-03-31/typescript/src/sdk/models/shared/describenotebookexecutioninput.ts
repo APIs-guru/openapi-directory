@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DescribeNotebookExecutionInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NotebookExecutionId" })
+  @SpeakeasyMetadata({ data: "json, name=NotebookExecutionId" })
   notebookExecutionId: string;
 }

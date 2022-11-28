@@ -1,59 +1,60 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class AddTextItemWithParentPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=convId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=convId" })
   convId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=itemId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=itemId" })
   itemId: string;
 }
 
 
 export class AddTextItemWithParentRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "form, name=attachments;" })
+  @SpeakeasyMetadata({ data: "form, name=attachments;" })
   attachments?: string[];
 
-  @Metadata({ data: "form, name=content;" })
+  @SpeakeasyMetadata({ data: "form, name=content;" })
   content?: string;
 
-  @Metadata({ data: "form, name=formMetaData;" })
+  @SpeakeasyMetadata({ data: "form, name=formMetaData;" })
   formMetaData?: string;
 
-  @Metadata({ data: "form, name=subject;" })
+  @SpeakeasyMetadata({ data: "form, name=subject;" })
   subject?: string;
 }
 
 
 export class AddTextItemWithParentSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth: shared.SchemeOauth;
 }
 
 
 export class AddTextItemWithParentRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: AddTextItemWithParentPathParams;
 
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
   request?: AddTextItemWithParentRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: AddTextItemWithParentSecurity;
 }
 
 
 export class AddTextItemWithParentResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   conversationItem?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

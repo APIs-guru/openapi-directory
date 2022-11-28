@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DocumentationRule
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A documentation rule provides information about individual API elements.
 **/
 export class DocumentationRule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deprecationDescription" })
+  @SpeakeasyMetadata({ data: "json, name=deprecationDescription" })
   deprecationDescription?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=selector" })
+  @SpeakeasyMetadata({ data: "json, name=selector" })
   selector?: string;
 }

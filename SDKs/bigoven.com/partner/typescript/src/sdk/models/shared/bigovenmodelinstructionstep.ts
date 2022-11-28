@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class BigOvenModelInstructionStep extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EndGantt" })
+  @SpeakeasyMetadata({ data: "json, name=EndGantt" })
   endGantt?: number;
 
-  @Metadata({ data: "json, name=StartGantt" })
+  @SpeakeasyMetadata({ data: "json, name=StartGantt" })
   startGantt?: number;
 
-  @Metadata({ data: "json, name=Text" })
+  @SpeakeasyMetadata({ data: "json, name=Text" })
   text?: string;
 }

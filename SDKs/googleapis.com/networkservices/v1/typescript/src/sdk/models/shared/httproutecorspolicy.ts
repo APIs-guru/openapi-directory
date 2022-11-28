@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // HttpRouteCorsPolicy
@@ -6,27 +7,27 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The Specification for allowing client side cross-origin requests.
 **/
 export class HttpRouteCorsPolicy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowCredentials" })
+  @SpeakeasyMetadata({ data: "json, name=allowCredentials" })
   allowCredentials?: boolean;
 
-  @Metadata({ data: "json, name=allowHeaders" })
+  @SpeakeasyMetadata({ data: "json, name=allowHeaders" })
   allowHeaders?: string[];
 
-  @Metadata({ data: "json, name=allowMethods" })
+  @SpeakeasyMetadata({ data: "json, name=allowMethods" })
   allowMethods?: string[];
 
-  @Metadata({ data: "json, name=allowOriginRegexes" })
+  @SpeakeasyMetadata({ data: "json, name=allowOriginRegexes" })
   allowOriginRegexes?: string[];
 
-  @Metadata({ data: "json, name=allowOrigins" })
+  @SpeakeasyMetadata({ data: "json, name=allowOrigins" })
   allowOrigins?: string[];
 
-  @Metadata({ data: "json, name=disabled" })
+  @SpeakeasyMetadata({ data: "json, name=disabled" })
   disabled?: boolean;
 
-  @Metadata({ data: "json, name=exposeHeaders" })
+  @SpeakeasyMetadata({ data: "json, name=exposeHeaders" })
   exposeHeaders?: string[];
 
-  @Metadata({ data: "json, name=maxAge" })
+  @SpeakeasyMetadata({ data: "json, name=maxAge" })
   maxAge?: string;
 }

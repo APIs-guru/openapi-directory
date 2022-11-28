@@ -29,11 +29,6 @@ type LcsagSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type LcsagRequest struct {
-	Request  *LcsagRequestBody `request:"mediaType=application/json"`
-	Security LcsagSecurity
-}
-
 type Lcsag400ApplicationJSONErrorEnum string
 
 const (
@@ -163,6 +158,11 @@ const (
 type Lcsag504ApplicationJSON struct {
 	Error            *Lcsag504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Lcsag504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type LcsagRequest struct {
+	Request  *LcsagRequestBody `request:"mediaType=application/json"`
+	Security LcsagSecurity
 }
 
 type LcsagResponse struct {

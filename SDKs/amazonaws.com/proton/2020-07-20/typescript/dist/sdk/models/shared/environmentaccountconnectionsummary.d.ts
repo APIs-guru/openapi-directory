@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { EnvironmentAccountConnectionStatusEnum } from "./environmentaccountconnectionstatusenum";
 /**
  * A summary of the environment account connection detail data.

@@ -1,5 +1,7 @@
 package shared
 
+// IdentitytoolkitRelyingpartyVerifyPhoneNumberRequest
+// Request for Identitytoolkit-VerifyPhoneNumber
 type IdentitytoolkitRelyingpartyVerifyPhoneNumberRequest struct {
 	Code              *string `json:"code,omitempty"`
 	IDToken           *string `json:"idToken,omitempty"`

@@ -1,7 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DevicePoolCompatibilityResult } from "./devicepoolcompatibilityresult";
-import { DevicePoolCompatibilityResult } from "./devicepoolcompatibilityresult";
+
 
 
 // GetDevicePoolCompatibilityResult
@@ -9,9 +8,9 @@ import { DevicePoolCompatibilityResult } from "./devicepoolcompatibilityresult";
  * Represents the result of describe device pool compatibility request.
 **/
 export class GetDevicePoolCompatibilityResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=compatibleDevices", elemType: shared.DevicePoolCompatibilityResult })
+  @SpeakeasyMetadata({ data: "json, name=compatibleDevices", elemType: DevicePoolCompatibilityResult })
   compatibleDevices?: DevicePoolCompatibilityResult[];
 
-  @Metadata({ data: "json, name=incompatibleDevices", elemType: shared.DevicePoolCompatibilityResult })
+  @SpeakeasyMetadata({ data: "json, name=incompatibleDevices", elemType: DevicePoolCompatibilityResult })
   incompatibleDevices?: DevicePoolCompatibilityResult[];
 }

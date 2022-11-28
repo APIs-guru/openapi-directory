@@ -10,22 +10,10 @@ type PostRepositoriesWorkspaceRepoSlugCommitCommitStatusesBuildPathParams struct
 	Workspace string `pathParam:"style=simple,explode=false,name=workspace"`
 }
 
-type PostRepositoriesWorkspaceRepoSlugCommitCommitStatusesBuildSecurityOption1 struct {
-	Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
-}
-
-type PostRepositoriesWorkspaceRepoSlugCommitCommitStatusesBuildSecurityOption2 struct {
-	Basic shared.SchemeBasic `security:"scheme,type=http,subtype=basic"`
-}
-
-type PostRepositoriesWorkspaceRepoSlugCommitCommitStatusesBuildSecurityOption3 struct {
-	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
-}
-
 type PostRepositoriesWorkspaceRepoSlugCommitCommitStatusesBuildSecurity struct {
-	Option1 *PostRepositoriesWorkspaceRepoSlugCommitCommitStatusesBuildSecurityOption1 `security:"option"`
-	Option2 *PostRepositoriesWorkspaceRepoSlugCommitCommitStatusesBuildSecurityOption2 `security:"option"`
-	Option3 *PostRepositoriesWorkspaceRepoSlugCommitCommitStatusesBuildSecurityOption3 `security:"option"`
+	Oauth2 *shared.SchemeOauth2 `security:"scheme,type=oauth2"`
+	Basic  *shared.SchemeBasic  `security:"scheme,type=http,subtype=basic"`
+	APIKey *shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type PostRepositoriesWorkspaceRepoSlugCommitCommitStatusesBuildRequest struct {

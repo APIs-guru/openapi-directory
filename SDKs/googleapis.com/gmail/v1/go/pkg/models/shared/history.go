@@ -1,5 +1,7 @@
 package shared
 
+// History
+// A record of a change to the user's mailbox. Each history change may affect multiple messages in multiple ways.
 type History struct {
 	ID              *string                 `json:"id,omitempty"`
 	LabelsAdded     []HistoryLabelAdded     `json:"labelsAdded,omitempty"`

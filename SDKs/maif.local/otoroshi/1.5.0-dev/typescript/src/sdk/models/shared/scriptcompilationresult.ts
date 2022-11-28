@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ScriptCompilationError } from "./scriptcompilationerror";
+
 
 
 // ScriptCompilationResult
@@ -7,9 +8,9 @@ import { ScriptCompilationError } from "./scriptcompilationerror";
  * The result of the compilation of a Script
 **/
 export class ScriptCompilationResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=done" })
+  @SpeakeasyMetadata({ data: "json, name=done" })
   done: boolean;
 
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: ScriptCompilationError;
 }

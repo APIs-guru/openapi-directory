@@ -14,6 +14,8 @@ const (
 	GoogleCloudPaymentsResellerSubscriptionV1SubscriptionCancellationDetailsReasonEnumCancellationReasonOther              GoogleCloudPaymentsResellerSubscriptionV1SubscriptionCancellationDetailsReasonEnum = "CANCELLATION_REASON_OTHER"
 )
 
+// GoogleCloudPaymentsResellerSubscriptionV1SubscriptionCancellationDetails
+// Describes the details of a cancelled or cancelling subscription.
 type GoogleCloudPaymentsResellerSubscriptionV1SubscriptionCancellationDetails struct {
 	Reason *GoogleCloudPaymentsResellerSubscriptionV1SubscriptionCancellationDetailsReasonEnum `json:"reason,omitempty"`
 }

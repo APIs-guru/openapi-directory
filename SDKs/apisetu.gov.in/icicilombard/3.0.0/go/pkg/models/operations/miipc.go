@@ -27,11 +27,6 @@ type MiipcSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type MiipcRequest struct {
-	Request  *MiipcRequestBody `request:"mediaType=application/json"`
-	Security MiipcSecurity
-}
-
 type Miipc400ApplicationJSONErrorEnum string
 
 const (
@@ -161,6 +156,11 @@ const (
 type Miipc504ApplicationJSON struct {
 	Error            *Miipc504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Miipc504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type MiipcRequest struct {
+	Request  *MiipcRequestBody `request:"mediaType=application/json"`
+	Security MiipcSecurity
 }
 
 type MiipcResponse struct {

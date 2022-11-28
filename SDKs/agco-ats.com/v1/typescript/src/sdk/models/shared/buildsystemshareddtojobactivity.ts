@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BuildSystemSharedDtoParameterMapping } from "./buildsystemshareddtoparametermapping";
+
 
 
 // BuildSystemSharedDtoJobActivity
@@ -8,18 +8,18 @@ import { BuildSystemSharedDtoParameterMapping } from "./buildsystemshareddtopara
  * A DTO for an IJobActivity
 **/
 export class BuildSystemSharedDtoJobActivity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ActivityID" })
+  @SpeakeasyMetadata({ data: "json, name=ActivityID" })
   activityId?: number;
 
-  @Metadata({ data: "json, name=JobActivityID" })
+  @SpeakeasyMetadata({ data: "json, name=JobActivityID" })
   jobActivityId?: number;
 
-  @Metadata({ data: "json, name=JobID" })
+  @SpeakeasyMetadata({ data: "json, name=JobID" })
   jobId?: number;
 
-  @Metadata({ data: "json, name=ParameterMappings", elemType: shared.BuildSystemSharedDtoParameterMapping })
+  @SpeakeasyMetadata({ data: "json, name=ParameterMappings", elemType: BuildSystemSharedDtoParameterMapping })
   parameterMappings?: BuildSystemSharedDtoParameterMapping[];
 
-  @Metadata({ data: "json, name=RunOrder" })
+  @SpeakeasyMetadata({ data: "json, name=RunOrder" })
   runOrder?: number;
 }

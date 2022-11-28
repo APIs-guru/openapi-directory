@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from dataclasses_json import dataclass_json
-from . import taginfoforresource
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListTagsForResourceResponse:
-    next_marker: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextMarker' }})
-    tag_info_for_resource: Optional[taginfoforresource.TagInfoForResource] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TagInfoForResource' }})
+    next_marker: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextMarker') }})
+    tag_info_for_resource: Optional[TagInfoForResource] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TagInfoForResource') }})
     

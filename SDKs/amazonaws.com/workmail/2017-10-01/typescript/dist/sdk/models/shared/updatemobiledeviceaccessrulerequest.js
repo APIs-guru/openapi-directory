@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MobileDeviceAccessRuleEffectEnum } from "./mobiledeviceaccessruleeffectenum";
 var UpdateMobileDeviceAccessRuleRequest = /** @class */ (function (_super) {
     __extends(UpdateMobileDeviceAccessRuleRequest, _super);
@@ -30,55 +30,55 @@ var UpdateMobileDeviceAccessRuleRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], UpdateMobileDeviceAccessRuleRequest.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=DeviceModels" }),
+        SpeakeasyMetadata({ data: "json, name=DeviceModels" }),
         __metadata("design:type", Array)
     ], UpdateMobileDeviceAccessRuleRequest.prototype, "deviceModels", void 0);
     __decorate([
-        Metadata({ data: "json, name=DeviceOperatingSystems" }),
+        SpeakeasyMetadata({ data: "json, name=DeviceOperatingSystems" }),
         __metadata("design:type", Array)
     ], UpdateMobileDeviceAccessRuleRequest.prototype, "deviceOperatingSystems", void 0);
     __decorate([
-        Metadata({ data: "json, name=DeviceTypes" }),
+        SpeakeasyMetadata({ data: "json, name=DeviceTypes" }),
         __metadata("design:type", Array)
     ], UpdateMobileDeviceAccessRuleRequest.prototype, "deviceTypes", void 0);
     __decorate([
-        Metadata({ data: "json, name=DeviceUserAgents" }),
+        SpeakeasyMetadata({ data: "json, name=DeviceUserAgents" }),
         __metadata("design:type", Array)
     ], UpdateMobileDeviceAccessRuleRequest.prototype, "deviceUserAgents", void 0);
     __decorate([
-        Metadata({ data: "json, name=Effect" }),
+        SpeakeasyMetadata({ data: "json, name=Effect" }),
         __metadata("design:type", String)
     ], UpdateMobileDeviceAccessRuleRequest.prototype, "effect", void 0);
     __decorate([
-        Metadata({ data: "json, name=MobileDeviceAccessRuleId" }),
+        SpeakeasyMetadata({ data: "json, name=MobileDeviceAccessRuleId" }),
         __metadata("design:type", String)
     ], UpdateMobileDeviceAccessRuleRequest.prototype, "mobileDeviceAccessRuleId", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], UpdateMobileDeviceAccessRuleRequest.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=NotDeviceModels" }),
+        SpeakeasyMetadata({ data: "json, name=NotDeviceModels" }),
         __metadata("design:type", Array)
     ], UpdateMobileDeviceAccessRuleRequest.prototype, "notDeviceModels", void 0);
     __decorate([
-        Metadata({ data: "json, name=NotDeviceOperatingSystems" }),
+        SpeakeasyMetadata({ data: "json, name=NotDeviceOperatingSystems" }),
         __metadata("design:type", Array)
     ], UpdateMobileDeviceAccessRuleRequest.prototype, "notDeviceOperatingSystems", void 0);
     __decorate([
-        Metadata({ data: "json, name=NotDeviceTypes" }),
+        SpeakeasyMetadata({ data: "json, name=NotDeviceTypes" }),
         __metadata("design:type", Array)
     ], UpdateMobileDeviceAccessRuleRequest.prototype, "notDeviceTypes", void 0);
     __decorate([
-        Metadata({ data: "json, name=NotDeviceUserAgents" }),
+        SpeakeasyMetadata({ data: "json, name=NotDeviceUserAgents" }),
         __metadata("design:type", Array)
     ], UpdateMobileDeviceAccessRuleRequest.prototype, "notDeviceUserAgents", void 0);
     __decorate([
-        Metadata({ data: "json, name=OrganizationId" }),
+        SpeakeasyMetadata({ data: "json, name=OrganizationId" }),
         __metadata("design:type", String)
     ], UpdateMobileDeviceAccessRuleRequest.prototype, "organizationId", void 0);
     return UpdateMobileDeviceAccessRuleRequest;

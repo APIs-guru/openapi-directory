@@ -16,3 +16,12 @@ type Graph struct {
 	Type             string                     `json:"type"`
 	Weight           *int64                     `json:"weight,omitempty"`
 }
+
+type GraphInput struct {
+	Link             *string                    `json:"link,omitempty"`
+	Name             string                     `json:"name"`
+	Source           string                     `json:"source"`
+	TemplateLanguage *GraphTemplateLanguageEnum `json:"template_language,omitempty"`
+	Type             string                     `json:"type"`
+	Weight           *int64                     `json:"weight,omitempty"`
+}

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class OrgpolicyOrganizationsCustomConstraintsCreatePathParams extends SpeakeasyBase {
     parent: string;
@@ -23,7 +23,7 @@ export declare class OrgpolicyOrganizationsCustomConstraintsCreateSecurity exten
 export declare class OrgpolicyOrganizationsCustomConstraintsCreateRequest extends SpeakeasyBase {
     pathParams: OrgpolicyOrganizationsCustomConstraintsCreatePathParams;
     queryParams: OrgpolicyOrganizationsCustomConstraintsCreateQueryParams;
-    request?: shared.GoogleCloudOrgpolicyV2CustomConstraint;
+    request?: shared.GoogleCloudOrgpolicyV2CustomConstraintInput;
     security: OrgpolicyOrganizationsCustomConstraintsCreateSecurity;
 }
 export declare class OrgpolicyOrganizationsCustomConstraintsCreateResponse extends SpeakeasyBase {

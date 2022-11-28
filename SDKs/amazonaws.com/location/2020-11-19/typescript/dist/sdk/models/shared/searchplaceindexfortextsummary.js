@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // SearchPlaceIndexForTextSummary
 /**
  * A summary of the geocoding request sent using <code>SearchPlaceIndexForText</code>.
@@ -33,31 +33,31 @@ var SearchPlaceIndexForTextSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=BiasPosition" }),
+        SpeakeasyMetadata({ data: "json, name=BiasPosition" }),
         __metadata("design:type", Array)
     ], SearchPlaceIndexForTextSummary.prototype, "biasPosition", void 0);
     __decorate([
-        Metadata({ data: "json, name=DataSource" }),
+        SpeakeasyMetadata({ data: "json, name=DataSource" }),
         __metadata("design:type", String)
     ], SearchPlaceIndexForTextSummary.prototype, "dataSource", void 0);
     __decorate([
-        Metadata({ data: "json, name=FilterBBox" }),
+        SpeakeasyMetadata({ data: "json, name=FilterBBox" }),
         __metadata("design:type", Array)
     ], SearchPlaceIndexForTextSummary.prototype, "filterBBox", void 0);
     __decorate([
-        Metadata({ data: "json, name=FilterCountries" }),
+        SpeakeasyMetadata({ data: "json, name=FilterCountries" }),
         __metadata("design:type", Array)
     ], SearchPlaceIndexForTextSummary.prototype, "filterCountries", void 0);
     __decorate([
-        Metadata({ data: "json, name=MaxResults" }),
+        SpeakeasyMetadata({ data: "json, name=MaxResults" }),
         __metadata("design:type", Number)
     ], SearchPlaceIndexForTextSummary.prototype, "maxResults", void 0);
     __decorate([
-        Metadata({ data: "json, name=ResultBBox" }),
+        SpeakeasyMetadata({ data: "json, name=ResultBBox" }),
         __metadata("design:type", Array)
     ], SearchPlaceIndexForTextSummary.prototype, "resultBBox", void 0);
     __decorate([
-        Metadata({ data: "json, name=Text" }),
+        SpeakeasyMetadata({ data: "json, name=Text" }),
         __metadata("design:type", String)
     ], SearchPlaceIndexForTextSummary.prototype, "text", void 0);
     return SearchPlaceIndexForTextSummary;

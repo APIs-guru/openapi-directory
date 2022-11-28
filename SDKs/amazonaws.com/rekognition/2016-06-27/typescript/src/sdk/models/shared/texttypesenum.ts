@@ -1,6 +1,7 @@
 
 
+
 export enum TextTypesEnum {
-    Line = "LINE"
-,    Word = "WORD"
+    Line = "LINE",
+    Word = "WORD"
 }

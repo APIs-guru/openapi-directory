@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CreateDeviceDefinitionVersionPathParams = /** @class */ (function (_super) {
     __extends(CreateDeviceDefinitionVersionPathParams, _super);
@@ -30,7 +30,7 @@ var CreateDeviceDefinitionVersionPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=DeviceDefinitionId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=DeviceDefinitionId" }),
         __metadata("design:type", String)
     ], CreateDeviceDefinitionVersionPathParams.prototype, "deviceDefinitionId", void 0);
     return CreateDeviceDefinitionVersionPathParams;
@@ -42,35 +42,35 @@ var CreateDeviceDefinitionVersionHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], CreateDeviceDefinitionVersionHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], CreateDeviceDefinitionVersionHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], CreateDeviceDefinitionVersionHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], CreateDeviceDefinitionVersionHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], CreateDeviceDefinitionVersionHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], CreateDeviceDefinitionVersionHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], CreateDeviceDefinitionVersionHeaders.prototype, "xAmzSignedHeaders", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amzn-Client-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amzn-Client-Token" }),
         __metadata("design:type", String)
     ], CreateDeviceDefinitionVersionHeaders.prototype, "xAmznClientToken", void 0);
     return CreateDeviceDefinitionVersionHeaders;
@@ -82,7 +82,7 @@ var CreateDeviceDefinitionVersionRequestBody = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Devices", elemType: shared.Device }),
+        SpeakeasyMetadata({ data: "json, name=Devices", elemType: shared.Device }),
         __metadata("design:type", Array)
     ], CreateDeviceDefinitionVersionRequestBody.prototype, "devices", void 0);
     return CreateDeviceDefinitionVersionRequestBody;
@@ -94,15 +94,15 @@ var CreateDeviceDefinitionVersionRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateDeviceDefinitionVersionPathParams)
     ], CreateDeviceDefinitionVersionRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateDeviceDefinitionVersionHeaders)
     ], CreateDeviceDefinitionVersionRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", CreateDeviceDefinitionVersionRequestBody)
     ], CreateDeviceDefinitionVersionRequest.prototype, "request", void 0);
     return CreateDeviceDefinitionVersionRequest;
@@ -114,19 +114,19 @@ var CreateDeviceDefinitionVersionResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateDeviceDefinitionVersionResponse.prototype, "badRequestException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CreateDeviceDefinitionVersionResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.CreateDeviceDefinitionVersionResponse)
     ], CreateDeviceDefinitionVersionResponse.prototype, "createDeviceDefinitionVersionResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CreateDeviceDefinitionVersionResponse.prototype, "statusCode", void 0);
     return CreateDeviceDefinitionVersionResponse;

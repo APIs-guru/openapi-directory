@@ -1,22 +1,19 @@
-import { AxiosInstance, AxiosRequestConfig } from "axios";
-import * as operations from "./models/operations";
-declare type OptsFunc = (sdk: SDK) => void;
+import { AxiosInstance } from "axios";
+import { Organizations } from "./organizations";
+import { Projects } from "./projects";
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://orgpolicy.googleapis.com/"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    organizations: Organizations;
+    projects: Projects;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
-    OrgpolicyOrganizationsCustomConstraintsCreate(req: operations.OrgpolicyOrganizationsCustomConstraintsCreateRequest, config?: AxiosRequestConfig): Promise<operations.OrgpolicyOrganizationsCustomConstraintsCreateResponse>;
-    OrgpolicyOrganizationsCustomConstraintsList(req: operations.OrgpolicyOrganizationsCustomConstraintsListRequest, config?: AxiosRequestConfig): Promise<operations.OrgpolicyOrganizationsCustomConstraintsListResponse>;
-    OrgpolicyProjectsConstraintsList(req: operations.OrgpolicyProjectsConstraintsListRequest, config?: AxiosRequestConfig): Promise<operations.OrgpolicyProjectsConstraintsListResponse>;
-    OrgpolicyProjectsPoliciesCreate(req: operations.OrgpolicyProjectsPoliciesCreateRequest, config?: AxiosRequestConfig): Promise<operations.OrgpolicyProjectsPoliciesCreateResponse>;
-    OrgpolicyProjectsPoliciesDelete(req: operations.OrgpolicyProjectsPoliciesDeleteRequest, config?: AxiosRequestConfig): Promise<operations.OrgpolicyProjectsPoliciesDeleteResponse>;
-    OrgpolicyProjectsPoliciesGet(req: operations.OrgpolicyProjectsPoliciesGetRequest, config?: AxiosRequestConfig): Promise<operations.OrgpolicyProjectsPoliciesGetResponse>;
-    OrgpolicyProjectsPoliciesGetEffectivePolicy(req: operations.OrgpolicyProjectsPoliciesGetEffectivePolicyRequest, config?: AxiosRequestConfig): Promise<operations.OrgpolicyProjectsPoliciesGetEffectivePolicyResponse>;
-    OrgpolicyProjectsPoliciesList(req: operations.OrgpolicyProjectsPoliciesListRequest, config?: AxiosRequestConfig): Promise<operations.OrgpolicyProjectsPoliciesListResponse>;
-    OrgpolicyProjectsPoliciesPatch(req: operations.OrgpolicyProjectsPoliciesPatchRequest, config?: AxiosRequestConfig): Promise<operations.OrgpolicyProjectsPoliciesPatchResponse>;
 }
 export {};

@@ -8,6 +8,14 @@ const (
 	CloudSQLSettingsActivationPolicyEnumNever                          CloudSQLSettingsActivationPolicyEnum = "NEVER"
 )
 
+type CloudSQLSettingsAvailabilityTypeEnum string
+
+const (
+	CloudSQLSettingsAvailabilityTypeEnumSQLAvailabilityTypeUnspecified CloudSQLSettingsAvailabilityTypeEnum = "SQL_AVAILABILITY_TYPE_UNSPECIFIED"
+	CloudSQLSettingsAvailabilityTypeEnumZonal                          CloudSQLSettingsAvailabilityTypeEnum = "ZONAL"
+	CloudSQLSettingsAvailabilityTypeEnumRegional                       CloudSQLSettingsAvailabilityTypeEnum = "REGIONAL"
+)
+
 type CloudSQLSettingsDataDiskTypeEnum string
 
 const (
@@ -31,9 +39,12 @@ const (
 	CloudSQLSettingsDatabaseVersionEnumPostgres14                    CloudSQLSettingsDatabaseVersionEnum = "POSTGRES_14"
 )
 
+// CloudSQLSettings
+// Settings for creating a Cloud SQL database instance.
 type CloudSQLSettings struct {
 	ActivationPolicy       *CloudSQLSettingsActivationPolicyEnum `json:"activationPolicy,omitempty"`
 	AutoStorageIncrease    *bool                                 `json:"autoStorageIncrease,omitempty"`
+	AvailabilityType       *CloudSQLSettingsAvailabilityTypeEnum `json:"availabilityType,omitempty"`
 	CmekKeyName            *string                               `json:"cmekKeyName,omitempty"`
 	Collation              *string                               `json:"collation,omitempty"`
 	DataDiskSizeGb         *string                               `json:"dataDiskSizeGb,omitempty"`
@@ -43,6 +54,29 @@ type CloudSQLSettings struct {
 	IPConfig               *SQLIPConfig                          `json:"ipConfig,omitempty"`
 	RootPassword           *string                               `json:"rootPassword,omitempty"`
 	RootPasswordSet        *bool                                 `json:"rootPasswordSet,omitempty"`
+	SecondaryZone          *string                               `json:"secondaryZone,omitempty"`
+	SourceID               *string                               `json:"sourceId,omitempty"`
+	StorageAutoResizeLimit *string                               `json:"storageAutoResizeLimit,omitempty"`
+	Tier                   *string                               `json:"tier,omitempty"`
+	UserLabels             map[string]string                     `json:"userLabels,omitempty"`
+	Zone                   *string                               `json:"zone,omitempty"`
+}
+
+// CloudSQLSettingsInput
+// Settings for creating a Cloud SQL database instance.
+type CloudSQLSettingsInput struct {
+	ActivationPolicy       *CloudSQLSettingsActivationPolicyEnum `json:"activationPolicy,omitempty"`
+	AutoStorageIncrease    *bool                                 `json:"autoStorageIncrease,omitempty"`
+	AvailabilityType       *CloudSQLSettingsAvailabilityTypeEnum `json:"availabilityType,omitempty"`
+	CmekKeyName            *string                               `json:"cmekKeyName,omitempty"`
+	Collation              *string                               `json:"collation,omitempty"`
+	DataDiskSizeGb         *string                               `json:"dataDiskSizeGb,omitempty"`
+	DataDiskType           *CloudSQLSettingsDataDiskTypeEnum     `json:"dataDiskType,omitempty"`
+	DatabaseFlags          map[string]string                     `json:"databaseFlags,omitempty"`
+	DatabaseVersion        *CloudSQLSettingsDatabaseVersionEnum  `json:"databaseVersion,omitempty"`
+	IPConfig               *SQLIPConfig                          `json:"ipConfig,omitempty"`
+	RootPassword           *string                               `json:"rootPassword,omitempty"`
+	SecondaryZone          *string                               `json:"secondaryZone,omitempty"`
 	SourceID               *string                               `json:"sourceId,omitempty"`
 	StorageAutoResizeLimit *string                               `json:"storageAutoResizeLimit,omitempty"`
 	Tier                   *string                               `json:"tier,omitempty"`

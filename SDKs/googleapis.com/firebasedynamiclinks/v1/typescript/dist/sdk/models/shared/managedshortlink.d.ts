@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DynamicLinkInfo } from "./dynamiclinkinfo";
 export declare enum ManagedShortLinkFlaggedAttributeEnum {
     UnspecifiedAttribute = "UNSPECIFIED_ATTRIBUTE",

@@ -115,6 +115,8 @@ const (
 	PolicyStayOnPluggedModesEnumWireless                      PolicyStayOnPluggedModesEnum = "WIRELESS"
 )
 
+// Policy
+// A policy resource represents a group of settings that govern the behavior of a managed device and the apps installed on it.
 type Policy struct {
 	AccountTypesWithManagementDisabled []string                              `json:"accountTypesWithManagementDisabled,omitempty"`
 	AddUserDisabled                    *bool                                 `json:"addUserDisabled,omitempty"`

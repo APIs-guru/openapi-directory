@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -24,25 +28,25 @@ class SearchDevicesHeaders:
 @dataclass_json
 @dataclass
 class SearchDevicesRequestBody:
-    filters: List[shared.SearchDevicesFilter] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'filters' }})
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxResults' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextToken' }})
+    filters: List[shared.SearchDevicesFilter] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('filters') }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxResults') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextToken') }})
     
 
 @dataclass
 class SearchDevicesRequest:
-    query_params: SearchDevicesQueryParams = field(default=None)
-    headers: SearchDevicesHeaders = field(default=None)
-    request: SearchDevicesRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: SearchDevicesHeaders = field()
+    query_params: SearchDevicesQueryParams = field()
+    request: SearchDevicesRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class SearchDevicesResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_service_exception: Optional[Any] = field(default=None)
     search_devices_response: Optional[shared.SearchDevicesResponse] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

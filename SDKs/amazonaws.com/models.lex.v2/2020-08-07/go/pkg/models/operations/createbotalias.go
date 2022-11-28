@@ -18,11 +18,15 @@ type CreateBotAliasHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateBotAliasRequestBodyConversationLogSettings
+// Configures conversation logging that saves audio, text, and metadata for the conversations with your users.
 type CreateBotAliasRequestBodyConversationLogSettings struct {
 	AudioLogSettings []shared.AudioLogSetting `json:"audioLogSettings,omitempty"`
 	TextLogSettings  []shared.TextLogSetting  `json:"textLogSettings,omitempty"`
 }
 
+// CreateBotAliasRequestBodySentimentAnalysisSettings
+// Determines whether Amazon Lex will use Amazon Comprehend to detect the sentiment of user utterances.
 type CreateBotAliasRequestBodySentimentAnalysisSettings struct {
 	DetectSentiment *bool `json:"detectSentiment,omitempty"`
 }

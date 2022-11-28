@@ -1,6 +1,7 @@
 
 
+
 export enum CaptureStatusEnum {
-    Started = "Started"
-,    Stopped = "Stopped"
+    Started = "Started",
+    Stopped = "Stopped"
 }

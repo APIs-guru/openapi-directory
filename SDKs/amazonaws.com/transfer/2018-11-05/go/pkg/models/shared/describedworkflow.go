@@ -1,5 +1,7 @@
 package shared
 
+// DescribedWorkflow
+// Describes the properties of the specified workflow
 type DescribedWorkflow struct {
 	Arn              string         `json:"Arn"`
 	Description      *string        `json:"Description,omitempty"`

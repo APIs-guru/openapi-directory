@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AddOnRequest } from "./addonrequest";
 
 
+
 export class EnableAddOnRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=addOnRequest" })
+  @SpeakeasyMetadata({ data: "json, name=addOnRequest" })
   addOnRequest: AddOnRequest;
 
-  @Metadata({ data: "json, name=resourceName" })
+  @SpeakeasyMetadata({ data: "json, name=resourceName" })
   resourceName: string;
 }

@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class ListBuiltInIntentsPathParams:
-    locale_id: str = field(default=None, metadata={'path_param': { 'field_name': 'localeId', 'style': 'simple', 'explode': False }})
+    locale_id: str = field(metadata={'path_param': { 'field_name': 'localeId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -29,33 +34,37 @@ class ListBuiltInIntentsHeaders:
 @dataclass_json
 @dataclass
 class ListBuiltInIntentsRequestBodySortBy:
-    attribute: Optional[shared.BuiltInIntentSortAttributeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'attribute' }})
-    order: Optional[shared.SortOrderEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'order' }})
+    r"""ListBuiltInIntentsRequestBodySortBy
+    Specifies attributes for sorting a list of built-in intents.
+    """
+    
+    attribute: Optional[shared.BuiltInIntentSortAttributeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('attribute') }})
+    order: Optional[shared.SortOrderEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('order') }})
     
 
 @dataclass_json
 @dataclass
 class ListBuiltInIntentsRequestBody:
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxResults' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextToken' }})
-    sort_by: Optional[ListBuiltInIntentsRequestBodySortBy] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sortBy' }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxResults') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextToken') }})
+    sort_by: Optional[ListBuiltInIntentsRequestBodySortBy] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sortBy') }})
     
 
 @dataclass
 class ListBuiltInIntentsRequest:
-    path_params: ListBuiltInIntentsPathParams = field(default=None)
-    query_params: ListBuiltInIntentsQueryParams = field(default=None)
-    headers: ListBuiltInIntentsHeaders = field(default=None)
-    request: ListBuiltInIntentsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ListBuiltInIntentsHeaders = field()
+    path_params: ListBuiltInIntentsPathParams = field()
+    query_params: ListBuiltInIntentsQueryParams = field()
+    request: ListBuiltInIntentsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ListBuiltInIntentsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_server_exception: Optional[Any] = field(default=None)
     list_built_in_intents_response: Optional[shared.ListBuiltInIntentsResponse] = field(default=None)
     service_quota_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

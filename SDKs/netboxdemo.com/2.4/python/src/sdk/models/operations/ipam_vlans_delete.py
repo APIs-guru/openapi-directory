@@ -4,16 +4,16 @@ from dataclasses import dataclass, field
 
 @dataclass
 class IpamVlansDeletePathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class IpamVlansDeleteRequest:
-    path_params: IpamVlansDeletePathParams = field(default=None)
+    path_params: IpamVlansDeletePathParams = field()
     
 
 @dataclass
 class IpamVlansDeleteResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

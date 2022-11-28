@@ -13,17 +13,9 @@ type ChunkedUploadHeaders struct {
 	ContentType  string `header:"style=simple,explode=false,name=Content-Type"`
 }
 
-type ChunkedUploadSecurityOption1 struct {
-	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
-}
-
-type ChunkedUploadSecurityOption2 struct {
-	Oauth2AuthorizationCode shared.SchemeOauth2AuthorizationCode `security:"scheme,type=oauth2"`
-}
-
 type ChunkedUploadSecurity struct {
-	Option1 *ChunkedUploadSecurityOption1 `security:"option"`
-	Option2 *ChunkedUploadSecurityOption2 `security:"option"`
+	APIKey                  *shared.SchemeAPIKey                  `security:"scheme,type=apiKey,subtype=header"`
+	Oauth2AuthorizationCode *shared.SchemeOauth2AuthorizationCode `security:"scheme,type=oauth2"`
 }
 
 type ChunkedUploadRequest struct {

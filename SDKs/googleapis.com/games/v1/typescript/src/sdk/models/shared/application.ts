@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ImageAsset } from "./imageasset";
 import { ApplicationCategory } from "./applicationcategory";
 import { Instance } from "./instance";
 
+
 export enum ApplicationEnabledFeaturesEnum {
-    ApplicationFeatureUnspecified = "APPLICATION_FEATURE_UNSPECIFIED"
-,    Snapshots = "SNAPSHOTS"
+    ApplicationFeatureUnspecified = "APPLICATION_FEATURE_UNSPECIFIED",
+    Snapshots = "SNAPSHOTS"
 }
 
 
@@ -15,42 +15,42 @@ export enum ApplicationEnabledFeaturesEnum {
  * The Application resource.
 **/
 export class Application extends SpeakeasyBase {
-  @Metadata({ data: "json, name=achievement_count" })
+  @SpeakeasyMetadata({ data: "json, name=achievement_count" })
   achievementCount?: number;
 
-  @Metadata({ data: "json, name=assets", elemType: shared.ImageAsset })
+  @SpeakeasyMetadata({ data: "json, name=assets", elemType: ImageAsset })
   assets?: ImageAsset[];
 
-  @Metadata({ data: "json, name=author" })
+  @SpeakeasyMetadata({ data: "json, name=author" })
   author?: string;
 
-  @Metadata({ data: "json, name=category" })
+  @SpeakeasyMetadata({ data: "json, name=category" })
   category?: ApplicationCategory;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=enabledFeatures" })
+  @SpeakeasyMetadata({ data: "json, name=enabledFeatures" })
   enabledFeatures?: ApplicationEnabledFeaturesEnum[];
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=instances", elemType: shared.Instance })
+  @SpeakeasyMetadata({ data: "json, name=instances", elemType: Instance })
   instances?: Instance[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=lastUpdatedTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdatedTimestamp" })
   lastUpdatedTimestamp?: string;
 
-  @Metadata({ data: "json, name=leaderboard_count" })
+  @SpeakeasyMetadata({ data: "json, name=leaderboard_count" })
   leaderboardCount?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=themeColor" })
+  @SpeakeasyMetadata({ data: "json, name=themeColor" })
   themeColor?: string;
 }

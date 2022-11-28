@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DataprocProjectsRegionsJobsDeletePathParams:
-    job_id: str = field(default=None, metadata={'path_param': { 'field_name': 'jobId', 'style': 'simple', 'explode': False }})
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
-    region: str = field(default=None, metadata={'path_param': { 'field_name': 'region', 'style': 'simple', 'explode': False }})
+    job_id: str = field(metadata={'path_param': { 'field_name': 'jobId', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
+    region: str = field(metadata={'path_param': { 'field_name': 'region', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class DataprocProjectsRegionsJobsDeleteQueryParams:
 
 @dataclass
 class DataprocProjectsRegionsJobsDeleteSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DataprocProjectsRegionsJobsDeleteRequest:
-    path_params: DataprocProjectsRegionsJobsDeletePathParams = field(default=None)
-    query_params: DataprocProjectsRegionsJobsDeleteQueryParams = field(default=None)
-    security: DataprocProjectsRegionsJobsDeleteSecurity = field(default=None)
+    path_params: DataprocProjectsRegionsJobsDeletePathParams = field()
+    query_params: DataprocProjectsRegionsJobsDeleteQueryParams = field()
+    security: DataprocProjectsRegionsJobsDeleteSecurity = field()
     
 
 @dataclass
 class DataprocProjectsRegionsJobsDeleteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

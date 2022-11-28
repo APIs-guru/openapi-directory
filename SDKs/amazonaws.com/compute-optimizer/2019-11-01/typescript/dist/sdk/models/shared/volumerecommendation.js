@@ -22,10 +22,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VolumeConfiguration } from "./volumeconfiguration";
 import { EbsFindingEnum } from "./ebsfindingenum";
+import { EbsUtilizationMetric } from "./ebsutilizationmetric";
+import { VolumeRecommendationOption } from "./volumerecommendationoption";
 // VolumeRecommendation
 /**
  * Describes an Amazon Elastic Block Store (Amazon EBS) volume recommendation.
@@ -36,35 +37,35 @@ var VolumeRecommendation = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=accountId" }),
+        SpeakeasyMetadata({ data: "json, name=accountId" }),
         __metadata("design:type", String)
     ], VolumeRecommendation.prototype, "accountId", void 0);
     __decorate([
-        Metadata({ data: "json, name=currentConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=currentConfiguration" }),
         __metadata("design:type", VolumeConfiguration)
     ], VolumeRecommendation.prototype, "currentConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=finding" }),
+        SpeakeasyMetadata({ data: "json, name=finding" }),
         __metadata("design:type", String)
     ], VolumeRecommendation.prototype, "finding", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastRefreshTimestamp" }),
+        SpeakeasyMetadata({ data: "json, name=lastRefreshTimestamp" }),
         __metadata("design:type", Date)
     ], VolumeRecommendation.prototype, "lastRefreshTimestamp", void 0);
     __decorate([
-        Metadata({ data: "json, name=lookBackPeriodInDays" }),
+        SpeakeasyMetadata({ data: "json, name=lookBackPeriodInDays" }),
         __metadata("design:type", Number)
     ], VolumeRecommendation.prototype, "lookBackPeriodInDays", void 0);
     __decorate([
-        Metadata({ data: "json, name=utilizationMetrics", elemType: shared.EbsUtilizationMetric }),
+        SpeakeasyMetadata({ data: "json, name=utilizationMetrics", elemType: EbsUtilizationMetric }),
         __metadata("design:type", Array)
     ], VolumeRecommendation.prototype, "utilizationMetrics", void 0);
     __decorate([
-        Metadata({ data: "json, name=volumeArn" }),
+        SpeakeasyMetadata({ data: "json, name=volumeArn" }),
         __metadata("design:type", String)
     ], VolumeRecommendation.prototype, "volumeArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=volumeRecommendationOptions", elemType: shared.VolumeRecommendationOption }),
+        SpeakeasyMetadata({ data: "json, name=volumeRecommendationOptions", elemType: VolumeRecommendationOption }),
         __metadata("design:type", Array)
     ], VolumeRecommendation.prototype, "volumeRecommendationOptions", void 0);
     return VolumeRecommendation;

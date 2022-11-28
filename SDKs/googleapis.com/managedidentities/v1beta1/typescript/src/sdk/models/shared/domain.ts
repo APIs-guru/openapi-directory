@@ -1,16 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Trust } from "./trust";
 
+
 export enum DomainStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Creating = "CREATING"
-,    Ready = "READY"
-,    Updating = "UPDATING"
-,    Deleting = "DELETING"
-,    Repairing = "REPAIRING"
-,    PerformingMaintenance = "PERFORMING_MAINTENANCE"
-,    Unavailable = "UNAVAILABLE"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Creating = "CREATING",
+    Ready = "READY",
+    Updating = "UPDATING",
+    Deleting = "DELETING",
+    Repairing = "REPAIRING",
+    PerformingMaintenance = "PERFORMING_MAINTENANCE",
+    Unavailable = "UNAVAILABLE"
 }
 
 
@@ -19,42 +19,67 @@ export enum DomainStateEnum {
  * Represents a managed Microsoft Active Directory domain. If the domain is being changed, it will be placed into the UPDATING state, which indicates that the resource is being reconciled. At this point, Get will reflect an intermediate state.
 **/
 export class Domain extends SpeakeasyBase {
-  @Metadata({ data: "json, name=admin" })
+  @SpeakeasyMetadata({ data: "json, name=admin" })
   admin?: string;
 
-  @Metadata({ data: "json, name=auditLogsEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=auditLogsEnabled" })
   auditLogsEnabled?: boolean;
 
-  @Metadata({ data: "json, name=authorizedNetworks" })
+  @SpeakeasyMetadata({ data: "json, name=authorizedNetworks" })
   authorizedNetworks?: string[];
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=fqdn" })
+  @SpeakeasyMetadata({ data: "json, name=fqdn" })
   fqdn?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=locations" })
+  @SpeakeasyMetadata({ data: "json, name=locations" })
   locations?: string[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=reservedIpRange" })
+  @SpeakeasyMetadata({ data: "json, name=reservedIpRange" })
   reservedIpRange?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: DomainStateEnum;
 
-  @Metadata({ data: "json, name=statusMessage" })
+  @SpeakeasyMetadata({ data: "json, name=statusMessage" })
   statusMessage?: string;
 
-  @Metadata({ data: "json, name=trusts", elemType: shared.Trust })
+  @SpeakeasyMetadata({ data: "json, name=trusts", elemType: Trust })
   trusts?: Trust[];
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
+}
+
+
+// DomainInput
+/** 
+ * Represents a managed Microsoft Active Directory domain. If the domain is being changed, it will be placed into the UPDATING state, which indicates that the resource is being reconciled. At this point, Get will reflect an intermediate state.
+**/
+export class DomainInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=admin" })
+  admin?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=auditLogsEnabled" })
+  auditLogsEnabled?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=authorizedNetworks" })
+  authorizedNetworks?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=locations" })
+  locations?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=reservedIpRange" })
+  reservedIpRange?: string;
 }

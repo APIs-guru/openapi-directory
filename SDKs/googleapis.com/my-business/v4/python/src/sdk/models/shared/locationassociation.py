@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class LocationAssociationCategoryEnum(str, Enum):
     CATEGORY_UNSPECIFIED = "CATEGORY_UNSPECIFIED"
@@ -22,6 +24,10 @@ class LocationAssociationCategoryEnum(str, Enum):
 @dataclass_json
 @dataclass
 class LocationAssociation:
-    category: Optional[LocationAssociationCategoryEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'category' }})
-    price_list_item_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'priceListItemId' }})
+    r"""LocationAssociation
+    How the media item is associated with its location.
+    """
+    
+    category: Optional[LocationAssociationCategoryEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('category') }})
+    price_list_item_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('priceListItemId') }})
     

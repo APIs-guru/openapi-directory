@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Contact } from "./contact";
 import { Money } from "./money";
 import { CriteriaTargeting } from "./criteriatargeting";
@@ -8,44 +7,45 @@ import { PreferredDealTerms } from "./preferreddealterms";
 import { ProgrammaticGuaranteedTerms } from "./programmaticguaranteedterms";
 
 
+
 // SendRfpRequest
 /** 
  * Request to send an RFP. All fields in this request are proposed to publisher and subject to changes by publisher during later negotiation.
 **/
 export class SendRfpRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=buyerContacts", elemType: shared.Contact })
+  @SpeakeasyMetadata({ data: "json, name=buyerContacts", elemType: Contact })
   buyerContacts?: Contact[];
 
-  @Metadata({ data: "json, name=client" })
+  @SpeakeasyMetadata({ data: "json, name=client" })
   client?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=estimatedGrossSpend" })
+  @SpeakeasyMetadata({ data: "json, name=estimatedGrossSpend" })
   estimatedGrossSpend?: Money;
 
-  @Metadata({ data: "json, name=flightEndTime" })
+  @SpeakeasyMetadata({ data: "json, name=flightEndTime" })
   flightEndTime?: string;
 
-  @Metadata({ data: "json, name=flightStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=flightStartTime" })
   flightStartTime?: string;
 
-  @Metadata({ data: "json, name=geoTargeting" })
+  @SpeakeasyMetadata({ data: "json, name=geoTargeting" })
   geoTargeting?: CriteriaTargeting;
 
-  @Metadata({ data: "json, name=inventorySizeTargeting" })
+  @SpeakeasyMetadata({ data: "json, name=inventorySizeTargeting" })
   inventorySizeTargeting?: InventorySizeTargeting;
 
-  @Metadata({ data: "json, name=note" })
+  @SpeakeasyMetadata({ data: "json, name=note" })
   note?: string;
 
-  @Metadata({ data: "json, name=preferredDealTerms" })
+  @SpeakeasyMetadata({ data: "json, name=preferredDealTerms" })
   preferredDealTerms?: PreferredDealTerms;
 
-  @Metadata({ data: "json, name=programmaticGuaranteedTerms" })
+  @SpeakeasyMetadata({ data: "json, name=programmaticGuaranteedTerms" })
   programmaticGuaranteedTerms?: ProgrammaticGuaranteedTerms;
 
-  @Metadata({ data: "json, name=publisherProfile" })
+  @SpeakeasyMetadata({ data: "json, name=publisherProfile" })
   publisherProfile?: string;
 }

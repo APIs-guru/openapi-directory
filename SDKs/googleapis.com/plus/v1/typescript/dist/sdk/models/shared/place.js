@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // PlaceAddress
 /**
  * The physical address of the place.
@@ -33,7 +33,7 @@ var PlaceAddress = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=formatted" }),
+        SpeakeasyMetadata({ data: "json, name=formatted" }),
         __metadata("design:type", String)
     ], PlaceAddress.prototype, "formatted", void 0);
     return PlaceAddress;
@@ -49,11 +49,11 @@ var PlacePosition = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=latitude" }),
+        SpeakeasyMetadata({ data: "json, name=latitude" }),
         __metadata("design:type", Number)
     ], PlacePosition.prototype, "latitude", void 0);
     __decorate([
-        Metadata({ data: "json, name=longitude" }),
+        SpeakeasyMetadata({ data: "json, name=longitude" }),
         __metadata("design:type", Number)
     ], PlacePosition.prototype, "longitude", void 0);
     return PlacePosition;
@@ -65,23 +65,23 @@ var Place = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=address" }),
+        SpeakeasyMetadata({ data: "json, name=address" }),
         __metadata("design:type", PlaceAddress)
     ], Place.prototype, "address", void 0);
     __decorate([
-        Metadata({ data: "json, name=displayName" }),
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
         __metadata("design:type", String)
     ], Place.prototype, "displayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], Place.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=kind" }),
+        SpeakeasyMetadata({ data: "json, name=kind" }),
         __metadata("design:type", String)
     ], Place.prototype, "kind", void 0);
     __decorate([
-        Metadata({ data: "json, name=position" }),
+        SpeakeasyMetadata({ data: "json, name=position" }),
         __metadata("design:type", PlacePosition)
     ], Place.prototype, "position", void 0);
     return Place;

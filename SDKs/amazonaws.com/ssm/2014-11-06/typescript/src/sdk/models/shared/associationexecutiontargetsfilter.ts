@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AssociationExecutionTargetsFilterKeyEnum } from "./associationexecutiontargetsfilterkeyenum";
+
 
 
 // AssociationExecutionTargetsFilter
@@ -7,9 +8,9 @@ import { AssociationExecutionTargetsFilterKeyEnum } from "./associationexecution
  * Filters for the association execution.
 **/
 export class AssociationExecutionTargetsFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Key" })
+  @SpeakeasyMetadata({ data: "json, name=Key" })
   key: AssociationExecutionTargetsFilterKeyEnum;
 
-  @Metadata({ data: "json, name=Value" })
+  @SpeakeasyMetadata({ data: "json, name=Value" })
   value: string;
 }

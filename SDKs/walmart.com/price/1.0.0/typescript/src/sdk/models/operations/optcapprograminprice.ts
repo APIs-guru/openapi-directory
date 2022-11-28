@@ -1,67 +1,68 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class OptCapProgramInPriceHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Authorization" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" })
   authorization: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=WM_CONSUMER.CHANNEL.TYPE" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=WM_CONSUMER.CHANNEL.TYPE" })
   wmConsumerChannelType?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=WM_QOS.CORRELATION_ID" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=WM_QOS.CORRELATION_ID" })
   wmQosCorrelationId: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=WM_SEC.ACCESS_TOKEN" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=WM_SEC.ACCESS_TOKEN" })
   wmSecAccessToken: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=WM_SVC.NAME" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=WM_SVC.NAME" })
   wmSvcName: string;
 }
 
 
 export class OptCapProgramInPriceRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=subsidyEnrolled" })
+  @SpeakeasyMetadata({ data: "json, name=subsidyEnrolled" })
   subsidyEnrolled?: boolean;
 
-  @Metadata({ data: "json, name=subsidyPreference" })
+  @SpeakeasyMetadata({ data: "json, name=subsidyPreference" })
   subsidyPreference?: boolean;
 }
 
 
-export class OptCapProgramInPriceRequest extends SpeakeasyBase {
-  @Metadata()
-  headers: OptCapProgramInPriceHeaders;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: OptCapProgramInPriceRequestBody;
-}
-
-
 export class OptCapProgramInPrice200ApplicationJsonStatusInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=subsidyEnrolled" })
+  @SpeakeasyMetadata({ data: "json, name=subsidyEnrolled" })
   subsidyEnrolled?: boolean;
 
-  @Metadata({ data: "json, name=subsidyPreference" })
+  @SpeakeasyMetadata({ data: "json, name=subsidyPreference" })
   subsidyPreference?: boolean;
 }
 
 
 export class OptCapProgramInPrice200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=martId" })
+  @SpeakeasyMetadata({ data: "json, name=martId" })
   martId?: string;
 
-  @Metadata({ data: "json, name=statusInfo" })
+  @SpeakeasyMetadata({ data: "json, name=statusInfo" })
   statusInfo?: OptCapProgramInPrice200ApplicationJsonStatusInfo;
 }
 
 
+export class OptCapProgramInPriceRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  headers: OptCapProgramInPriceHeaders;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: OptCapProgramInPriceRequestBody;
+}
+
+
 export class OptCapProgramInPriceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   optCapProgramInPrice200ApplicationJsonObject?: OptCapProgramInPrice200ApplicationJson;
 }

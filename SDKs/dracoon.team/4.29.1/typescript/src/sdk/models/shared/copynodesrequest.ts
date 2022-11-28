@@ -1,11 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CopyNode } from "./copynode";
 
+
 export enum CopyNodesRequestResolutionStrategyEnum {
-    Autorename = "autorename"
-,    Overwrite = "overwrite"
-,    Fail = "fail"
+    Autorename = "autorename",
+    Overwrite = "overwrite",
+    Fail = "fail"
 }
 
 
@@ -14,15 +14,15 @@ export enum CopyNodesRequestResolutionStrategyEnum {
  * Request model for copying nodes
 **/
 export class CopyNodesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.CopyNode })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: CopyNode })
   items?: CopyNode[];
 
-  @Metadata({ data: "json, name=keepShareLinks" })
+  @SpeakeasyMetadata({ data: "json, name=keepShareLinks" })
   keepShareLinks?: boolean;
 
-  @Metadata({ data: "json, name=nodeIds" })
+  @SpeakeasyMetadata({ data: "json, name=nodeIds" })
   nodeIds?: number[];
 
-  @Metadata({ data: "json, name=resolutionStrategy" })
+  @SpeakeasyMetadata({ data: "json, name=resolutionStrategy" })
   resolutionStrategy?: CopyNodesRequestResolutionStrategyEnum;
 }

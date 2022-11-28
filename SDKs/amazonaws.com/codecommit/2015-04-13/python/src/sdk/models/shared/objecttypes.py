@@ -1,15 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import objecttypeenum_enum
-from . import objecttypeenum_enum
-from . import objecttypeenum_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ObjectTypes:
-    base: Optional[objecttypeenum_enum.ObjectTypeEnumEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'base' }})
-    destination: Optional[objecttypeenum_enum.ObjectTypeEnumEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'destination' }})
-    source: Optional[objecttypeenum_enum.ObjectTypeEnumEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'source' }})
+    r"""ObjectTypes
+    Information about the type of an object in a merge operation.
+    """
+    
+    base: Optional[ObjectTypeEnumEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('base') }})
+    destination: Optional[ObjectTypeEnumEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('destination') }})
+    source: Optional[ObjectTypeEnumEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('source') }})
     

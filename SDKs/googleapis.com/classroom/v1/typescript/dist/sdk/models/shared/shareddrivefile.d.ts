@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DriveFile } from "./drivefile";
 export declare enum SharedDriveFileShareModeEnum {
     UnknownShareMode = "UNKNOWN_SHARE_MODE",

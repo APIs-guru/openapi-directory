@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BatchDeletePrintersRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request for deleting existing printers in batch.
 **/
 export class BatchDeletePrintersRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=printerIds" })
+  @SpeakeasyMetadata({ data: "json, name=printerIds" })
   printerIds?: string[];
 }

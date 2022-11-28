@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -20,13 +21,13 @@ class MybusinessverificationsVerificationTokensGenerateQueryParams:
 
 @dataclass
 class MybusinessverificationsVerificationTokensGenerateRequest:
-    query_params: MybusinessverificationsVerificationTokensGenerateQueryParams = field(default=None)
+    query_params: MybusinessverificationsVerificationTokensGenerateQueryParams = field()
     request: Optional[shared.GenerateVerificationTokenRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class MybusinessverificationsVerificationTokensGenerateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     generate_verification_token_response: Optional[shared.GenerateVerificationTokenResponse] = field(default=None)
-    status_code: int = field(default=None)
     

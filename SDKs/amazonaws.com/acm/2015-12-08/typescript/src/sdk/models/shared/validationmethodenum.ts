@@ -1,6 +1,7 @@
 
 
+
 export enum ValidationMethodEnum {
-    Email = "EMAIL"
-,    Dns = "DNS"
+    Email = "EMAIL",
+    Dns = "DNS"
 }

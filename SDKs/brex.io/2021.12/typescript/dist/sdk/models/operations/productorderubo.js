@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ProductOrderUboRequestBody = /** @class */ (function (_super) {
     __extends(ProductOrderUboRequestBody, _super);
@@ -30,27 +30,27 @@ var ProductOrderUboRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "form, name=callbackUrl;" }),
+        SpeakeasyMetadata({ data: "form, name=callbackUrl;" }),
         __metadata("design:type", String)
     ], ProductOrderUboRequestBody.prototype, "callbackUrl", void 0);
     __decorate([
-        Metadata({ data: "form, name=credits;" }),
+        SpeakeasyMetadata({ data: "form, name=credits;" }),
         __metadata("design:type", Number)
     ], ProductOrderUboRequestBody.prototype, "credits", void 0);
     __decorate([
-        Metadata({ data: "form, name=includeDocs;" }),
+        SpeakeasyMetadata({ data: "form, name=includeDocs;" }),
         __metadata("design:type", Boolean)
     ], ProductOrderUboRequestBody.prototype, "includeDocs", void 0);
     __decorate([
-        Metadata({ data: "form, name=levels;" }),
+        SpeakeasyMetadata({ data: "form, name=levels;" }),
         __metadata("design:type", String)
     ], ProductOrderUboRequestBody.prototype, "levels", void 0);
     __decorate([
-        Metadata({ data: "form, name=strategy;" }),
+        SpeakeasyMetadata({ data: "form, name=strategy;" }),
         __metadata("design:type", String)
     ], ProductOrderUboRequestBody.prototype, "strategy", void 0);
     __decorate([
-        Metadata({ data: "form, name=subjectId;" }),
+        SpeakeasyMetadata({ data: "form, name=subjectId;" }),
         __metadata("design:type", String)
     ], ProductOrderUboRequestBody.prototype, "subjectId", void 0);
     return ProductOrderUboRequestBody;
@@ -62,7 +62,7 @@ var ProductOrderUboSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeUserKey)
     ], ProductOrderUboSecurity.prototype, "userKey", void 0);
     return ProductOrderUboSecurity;
@@ -74,11 +74,11 @@ var ProductOrderUboRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
         __metadata("design:type", ProductOrderUboRequestBody)
     ], ProductOrderUboRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProductOrderUboSecurity)
     ], ProductOrderUboRequest.prototype, "security", void 0);
     return ProductOrderUboRequest;
@@ -90,19 +90,19 @@ var ProductOrderUboResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProductOrderUboResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ProductOrderUboResponse.prototype, "productOrderUbo200ApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ProductOrderUboResponse.prototype, "productOrderUboDefaultApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProductOrderUboResponse.prototype, "statusCode", void 0);
     return ProductOrderUboResponse;

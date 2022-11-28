@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum AppIntegrityAppRecognitionVerdictEnum {
-    Unknown = "UNKNOWN"
-,    PlayRecognized = "PLAY_RECOGNIZED"
-,    UnrecognizedVersion = "UNRECOGNIZED_VERSION"
-,    Unevaluated = "UNEVALUATED"
+    Unknown = "UNKNOWN",
+    PlayRecognized = "PLAY_RECOGNIZED",
+    UnrecognizedVersion = "UNRECOGNIZED_VERSION",
+    Unevaluated = "UNEVALUATED"
 }
 
 
@@ -13,15 +14,15 @@ export enum AppIntegrityAppRecognitionVerdictEnum {
  * Contains the application integrity information.
 **/
 export class AppIntegrity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=appRecognitionVerdict" })
+  @SpeakeasyMetadata({ data: "json, name=appRecognitionVerdict" })
   appRecognitionVerdict?: AppIntegrityAppRecognitionVerdictEnum;
 
-  @Metadata({ data: "json, name=certificateSha256Digest" })
+  @SpeakeasyMetadata({ data: "json, name=certificateSha256Digest" })
   certificateSha256Digest?: string[];
 
-  @Metadata({ data: "json, name=packageName" })
+  @SpeakeasyMetadata({ data: "json, name=packageName" })
   packageName?: string;
 
-  @Metadata({ data: "json, name=versionCode" })
+  @SpeakeasyMetadata({ data: "json, name=versionCode" })
   versionCode?: string;
 }

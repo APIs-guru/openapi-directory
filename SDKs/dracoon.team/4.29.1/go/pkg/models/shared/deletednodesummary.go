@@ -11,6 +11,8 @@ const (
 	DeletedNodeSummaryTypeEnumFile   DeletedNodeSummaryTypeEnum = "file"
 )
 
+// DeletedNodeSummary
+// Deleted node information (Deleted node can be a folder or file)
 type DeletedNodeSummary struct {
 	CntVersions           int32                      `json:"cntVersions"`
 	FirstDeletedAt        time.Time                  `json:"firstDeletedAt"`

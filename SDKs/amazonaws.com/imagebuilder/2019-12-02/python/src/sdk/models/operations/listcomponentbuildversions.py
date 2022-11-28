@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -24,28 +28,28 @@ class ListComponentBuildVersionsHeaders:
 @dataclass_json
 @dataclass
 class ListComponentBuildVersionsRequestBody:
-    component_version_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'componentVersionArn' }})
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxResults' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextToken' }})
+    component_version_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('componentVersionArn') }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxResults') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextToken') }})
     
 
 @dataclass
 class ListComponentBuildVersionsRequest:
-    query_params: ListComponentBuildVersionsQueryParams = field(default=None)
-    headers: ListComponentBuildVersionsHeaders = field(default=None)
-    request: ListComponentBuildVersionsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ListComponentBuildVersionsHeaders = field()
+    query_params: ListComponentBuildVersionsQueryParams = field()
+    request: ListComponentBuildVersionsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ListComponentBuildVersionsResponse:
+    content_type: str = field()
+    status_code: int = field()
     call_rate_limit_exceeded_exception: Optional[Any] = field(default=None)
     client_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     forbidden_exception: Optional[Any] = field(default=None)
     invalid_pagination_token_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     list_component_build_versions_response: Optional[shared.ListComponentBuildVersionsResponse] = field(default=None)
     service_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,7 @@
 package shared
 
+// GroupAssetsRequest
+// Request message for grouping by assets.
 type GroupAssetsRequest struct {
 	CompareDuration *string `json:"compareDuration,omitempty"`
 	Filter          *string `json:"filter,omitempty"`

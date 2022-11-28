@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SubjectTypesRepositoryLink
@@ -6,16 +7,16 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A link to a resource related to this object.
 **/
 export class SubjectTypesRepositoryLink extends SpeakeasyBase {
-  @Metadata({ data: "json, name=href" })
+  @SpeakeasyMetadata({ data: "json, name=href" })
   href?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
 
 
 export class SubjectTypesRepository extends SpeakeasyBase {
-  @Metadata({ data: "json, name=events" })
+  @SpeakeasyMetadata({ data: "json, name=events" })
   events?: SubjectTypesRepositoryLink;
 }
 
@@ -25,16 +26,16 @@ export class SubjectTypesRepository extends SpeakeasyBase {
  * A link to a resource related to this object.
 **/
 export class SubjectTypesTeamLink extends SpeakeasyBase {
-  @Metadata({ data: "json, name=href" })
+  @SpeakeasyMetadata({ data: "json, name=href" })
   href?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
 
 
 export class SubjectTypesTeam extends SpeakeasyBase {
-  @Metadata({ data: "json, name=events" })
+  @SpeakeasyMetadata({ data: "json, name=events" })
   events?: SubjectTypesTeamLink;
 }
 
@@ -44,16 +45,16 @@ export class SubjectTypesTeam extends SpeakeasyBase {
  * A link to a resource related to this object.
 **/
 export class SubjectTypesUserLink extends SpeakeasyBase {
-  @Metadata({ data: "json, name=href" })
+  @SpeakeasyMetadata({ data: "json, name=href" })
   href?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
 
 
 export class SubjectTypesUser extends SpeakeasyBase {
-  @Metadata({ data: "json, name=events" })
+  @SpeakeasyMetadata({ data: "json, name=events" })
   events?: SubjectTypesUserLink;
 }
 
@@ -63,12 +64,12 @@ export class SubjectTypesUser extends SpeakeasyBase {
  * The mapping of resource/subject types pointing to their individual event types.
 **/
 export class SubjectTypes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=repository" })
+  @SpeakeasyMetadata({ data: "json, name=repository" })
   repository?: SubjectTypesRepository;
 
-  @Metadata({ data: "json, name=team" })
+  @SpeakeasyMetadata({ data: "json, name=team" })
   team?: SubjectTypesTeam;
 
-  @Metadata({ data: "json, name=user" })
+  @SpeakeasyMetadata({ data: "json, name=user" })
   user?: SubjectTypesUser;
 }

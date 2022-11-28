@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var UpdateAssessmentPathParams = /** @class */ (function (_super) {
     __extends(UpdateAssessmentPathParams, _super);
@@ -30,7 +30,7 @@ var UpdateAssessmentPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=assessmentId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=assessmentId" }),
         __metadata("design:type", String)
     ], UpdateAssessmentPathParams.prototype, "assessmentId", void 0);
     return UpdateAssessmentPathParams;
@@ -42,31 +42,31 @@ var UpdateAssessmentHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], UpdateAssessmentHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], UpdateAssessmentHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], UpdateAssessmentHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], UpdateAssessmentHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], UpdateAssessmentHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], UpdateAssessmentHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], UpdateAssessmentHeaders.prototype, "xAmzSignedHeaders", void 0);
     return UpdateAssessmentHeaders;
@@ -82,11 +82,11 @@ var UpdateAssessmentRequestBodyAssessmentReportsDestination = /** @class */ (fun
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=destination" }),
+        SpeakeasyMetadata({ data: "json, name=destination" }),
         __metadata("design:type", String)
     ], UpdateAssessmentRequestBodyAssessmentReportsDestination.prototype, "destination", void 0);
     __decorate([
-        Metadata({ data: "json, name=destinationType" }),
+        SpeakeasyMetadata({ data: "json, name=destinationType" }),
         __metadata("design:type", String)
     ], UpdateAssessmentRequestBodyAssessmentReportsDestination.prototype, "destinationType", void 0);
     return UpdateAssessmentRequestBodyAssessmentReportsDestination;
@@ -102,11 +102,11 @@ var UpdateAssessmentRequestBodyScope = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=awsAccounts", elemType: shared.AwsAccount }),
+        SpeakeasyMetadata({ data: "json, name=awsAccounts", elemType: shared.AwsAccount }),
         __metadata("design:type", Array)
     ], UpdateAssessmentRequestBodyScope.prototype, "awsAccounts", void 0);
     __decorate([
-        Metadata({ data: "json, name=awsServices", elemType: shared.AwsService }),
+        SpeakeasyMetadata({ data: "json, name=awsServices", elemType: shared.AwsService }),
         __metadata("design:type", Array)
     ], UpdateAssessmentRequestBodyScope.prototype, "awsServices", void 0);
     return UpdateAssessmentRequestBodyScope;
@@ -118,23 +118,23 @@ var UpdateAssessmentRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=assessmentDescription" }),
+        SpeakeasyMetadata({ data: "json, name=assessmentDescription" }),
         __metadata("design:type", String)
     ], UpdateAssessmentRequestBody.prototype, "assessmentDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=assessmentName" }),
+        SpeakeasyMetadata({ data: "json, name=assessmentName" }),
         __metadata("design:type", String)
     ], UpdateAssessmentRequestBody.prototype, "assessmentName", void 0);
     __decorate([
-        Metadata({ data: "json, name=assessmentReportsDestination" }),
+        SpeakeasyMetadata({ data: "json, name=assessmentReportsDestination" }),
         __metadata("design:type", UpdateAssessmentRequestBodyAssessmentReportsDestination)
     ], UpdateAssessmentRequestBody.prototype, "assessmentReportsDestination", void 0);
     __decorate([
-        Metadata({ data: "json, name=roles", elemType: shared.Role }),
+        SpeakeasyMetadata({ data: "json, name=roles", elemType: shared.Role }),
         __metadata("design:type", Array)
     ], UpdateAssessmentRequestBody.prototype, "roles", void 0);
     __decorate([
-        Metadata({ data: "json, name=scope" }),
+        SpeakeasyMetadata({ data: "json, name=scope" }),
         __metadata("design:type", UpdateAssessmentRequestBodyScope)
     ], UpdateAssessmentRequestBody.prototype, "scope", void 0);
     return UpdateAssessmentRequestBody;
@@ -146,15 +146,15 @@ var UpdateAssessmentRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateAssessmentPathParams)
     ], UpdateAssessmentRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateAssessmentHeaders)
     ], UpdateAssessmentRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", UpdateAssessmentRequestBody)
     ], UpdateAssessmentRequest.prototype, "request", void 0);
     return UpdateAssessmentRequest;
@@ -166,31 +166,31 @@ var UpdateAssessmentResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateAssessmentResponse.prototype, "accessDeniedException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UpdateAssessmentResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateAssessmentResponse.prototype, "internalServerException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateAssessmentResponse.prototype, "resourceNotFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UpdateAssessmentResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.UpdateAssessmentResponse)
     ], UpdateAssessmentResponse.prototype, "updateAssessmentResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateAssessmentResponse.prototype, "validationException", void 0);
     return UpdateAssessmentResponse;

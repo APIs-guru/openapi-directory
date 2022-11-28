@@ -1,13 +1,20 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List
 from dataclasses_json import dataclass_json
-from . import updatesystem_models_clientstatus
-from . import updatesystem_models_pagedclientstatusmetadata
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class APIPagedResponseUpdateSystemModelsClientStatusUpdateSystemModelsPagedClientStatusMetadata:
-    entities: List[updatesystem_models_clientstatus.UpdateSystemModelsClientStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Entities' }})
-    metadata: updatesystem_models_pagedclientstatusmetadata.UpdateSystemModelsPagedClientStatusMetadata = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Metadata' }})
+    r"""APIPagedResponseUpdateSystemModelsClientStatusUpdateSystemModelsPagedClientStatusMetadata
+    A response containing a page of results and metadata concerning the results
+    """
+    
+    entities: List[UpdateSystemModelsClientStatus] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Entities') }})
+    metadata: UpdateSystemModelsPagedClientStatusMetadata = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Metadata') }})
     

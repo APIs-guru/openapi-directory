@@ -1,5 +1,7 @@
 package shared
 
+// SsmValidationParameters
+// Contains validation parameters.
 type SsmValidationParameters struct {
 	Command                 *string         `json:"command,omitempty"`
 	ExecutionTimeoutSeconds *int64          `json:"executionTimeoutSeconds,omitempty"`

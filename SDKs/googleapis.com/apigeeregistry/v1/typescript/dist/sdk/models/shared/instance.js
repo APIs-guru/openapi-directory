@@ -22,51 +22,25 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { Config } from "./config";
-export var InstanceStateEnum;
-(function (InstanceStateEnum) {
-    InstanceStateEnum["StateUnspecified"] = "STATE_UNSPECIFIED";
-    InstanceStateEnum["Inactive"] = "INACTIVE";
-    InstanceStateEnum["Creating"] = "CREATING";
-    InstanceStateEnum["Active"] = "ACTIVE";
-    InstanceStateEnum["Updating"] = "UPDATING";
-    InstanceStateEnum["Deleting"] = "DELETING";
-    InstanceStateEnum["Failed"] = "FAILED";
-})(InstanceStateEnum || (InstanceStateEnum = {}));
-// Instance
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ConfigInput } from "./config";
+// InstanceInput
 /**
  * An Instance represents the instance resources of the Registry. Currently, only one instance is allowed for each project.
 **/
-var Instance = /** @class */ (function (_super) {
-    __extends(Instance, _super);
-    function Instance() {
+var InstanceInput = /** @class */ (function (_super) {
+    __extends(InstanceInput, _super);
+    function InstanceInput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=config" }),
-        __metadata("design:type", Config)
-    ], Instance.prototype, "config", void 0);
+        SpeakeasyMetadata({ data: "json, name=config" }),
+        __metadata("design:type", ConfigInput)
+    ], InstanceInput.prototype, "config", void 0);
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
-    ], Instance.prototype, "createTime", void 0);
-    __decorate([
-        Metadata({ data: "json, name=name" }),
-        __metadata("design:type", String)
-    ], Instance.prototype, "name", void 0);
-    __decorate([
-        Metadata({ data: "json, name=state" }),
-        __metadata("design:type", String)
-    ], Instance.prototype, "state", void 0);
-    __decorate([
-        Metadata({ data: "json, name=stateMessage" }),
-        __metadata("design:type", String)
-    ], Instance.prototype, "stateMessage", void 0);
-    __decorate([
-        Metadata({ data: "json, name=updateTime" }),
-        __metadata("design:type", String)
-    ], Instance.prototype, "updateTime", void 0);
-    return Instance;
+    ], InstanceInput.prototype, "name", void 0);
+    return InstanceInput;
 }(SpeakeasyBase));
-export { Instance };
+export { InstanceInput };

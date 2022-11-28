@@ -1,100 +1,101 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PutSlotTypePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=name" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=name" })
   name: string;
 }
 
 
 export class PutSlotTypeHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 export enum PutSlotTypeRequestBodyValueSelectionStrategyEnum {
-    OriginalValue = "ORIGINAL_VALUE"
-,    TopResolution = "TOP_RESOLUTION"
+    OriginalValue = "ORIGINAL_VALUE",
+    TopResolution = "TOP_RESOLUTION"
 }
 
 
 export class PutSlotTypeRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=checksum" })
+  @SpeakeasyMetadata({ data: "json, name=checksum" })
   checksum?: string;
 
-  @Metadata({ data: "json, name=createVersion" })
+  @SpeakeasyMetadata({ data: "json, name=createVersion" })
   createVersion?: boolean;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=enumerationValues", elemType: shared.EnumerationValue })
+  @SpeakeasyMetadata({ data: "json, name=enumerationValues", elemType: shared.EnumerationValue })
   enumerationValues?: shared.EnumerationValue[];
 
-  @Metadata({ data: "json, name=parentSlotTypeSignature" })
+  @SpeakeasyMetadata({ data: "json, name=parentSlotTypeSignature" })
   parentSlotTypeSignature?: string;
 
-  @Metadata({ data: "json, name=slotTypeConfigurations", elemType: shared.SlotTypeConfiguration })
+  @SpeakeasyMetadata({ data: "json, name=slotTypeConfigurations", elemType: shared.SlotTypeConfiguration })
   slotTypeConfigurations?: shared.SlotTypeConfiguration[];
 
-  @Metadata({ data: "json, name=valueSelectionStrategy" })
+  @SpeakeasyMetadata({ data: "json, name=valueSelectionStrategy" })
   valueSelectionStrategy?: PutSlotTypeRequestBodyValueSelectionStrategyEnum;
 }
 
 
 export class PutSlotTypeRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PutSlotTypePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: PutSlotTypeHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: PutSlotTypeRequestBody;
 }
 
 
 export class PutSlotTypeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   badRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   conflictException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalFailureException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   limitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   preconditionFailedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   putSlotTypeResponse?: shared.PutSlotTypeResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,8 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googlecloudretailv2betaimporterrorsconfig
-from . import googlecloudretailv2betaproductinputconfig
+from sdk import utils
+from . import *
 
 class GoogleCloudRetailV2betaImportProductsRequestReconciliationModeEnum(str, Enum):
     RECONCILIATION_MODE_UNSPECIFIED = "RECONCILIATION_MODE_UNSPECIFIED"
@@ -12,11 +16,15 @@ class GoogleCloudRetailV2betaImportProductsRequestReconciliationModeEnum(str, En
 
 @dataclass_json
 @dataclass
-class GoogleCloudRetailV2betaImportProductsRequest:
-    errors_config: Optional[googlecloudretailv2betaimporterrorsconfig.GoogleCloudRetailV2betaImportErrorsConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorsConfig' }})
-    input_config: Optional[googlecloudretailv2betaproductinputconfig.GoogleCloudRetailV2betaProductInputConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'inputConfig' }})
-    notification_pubsub_topic: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'notificationPubsubTopic' }})
-    reconciliation_mode: Optional[GoogleCloudRetailV2betaImportProductsRequestReconciliationModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reconciliationMode' }})
-    request_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'requestId' }})
-    update_mask: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updateMask' }})
+class GoogleCloudRetailV2betaImportProductsRequestInput:
+    r"""GoogleCloudRetailV2betaImportProductsRequestInput
+    Request message for Import methods.
+    """
+    
+    errors_config: Optional[GoogleCloudRetailV2betaImportErrorsConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorsConfig') }})
+    input_config: Optional[GoogleCloudRetailV2betaProductInputConfigInput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('inputConfig') }})
+    notification_pubsub_topic: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('notificationPubsubTopic') }})
+    reconciliation_mode: Optional[GoogleCloudRetailV2betaImportProductsRequestReconciliationModeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('reconciliationMode') }})
+    request_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('requestId') }})
+    update_mask: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('updateMask') }})
     

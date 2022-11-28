@@ -1,24 +1,25 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum FamiliesBabysittingExceptionEnum {
-    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED"
-,    UnderConstruction = "UNDER_CONSTRUCTION"
-,    DependentOnSeason = "DEPENDENT_ON_SEASON"
-,    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
+    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED",
+    UnderConstruction = "UNDER_CONSTRUCTION",
+    DependentOnSeason = "DEPENDENT_ON_SEASON",
+    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
 }
 
 export enum FamiliesKidsActivitiesExceptionEnum {
-    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED"
-,    UnderConstruction = "UNDER_CONSTRUCTION"
-,    DependentOnSeason = "DEPENDENT_ON_SEASON"
-,    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
+    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED",
+    UnderConstruction = "UNDER_CONSTRUCTION",
+    DependentOnSeason = "DEPENDENT_ON_SEASON",
+    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
 }
 
 export enum FamiliesKidsClubExceptionEnum {
-    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED"
-,    UnderConstruction = "UNDER_CONSTRUCTION"
-,    DependentOnSeason = "DEPENDENT_ON_SEASON"
-,    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
+    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED",
+    UnderConstruction = "UNDER_CONSTRUCTION",
+    DependentOnSeason = "DEPENDENT_ON_SEASON",
+    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
 }
 
 
@@ -27,21 +28,21 @@ export enum FamiliesKidsClubExceptionEnum {
  * Services and amenities for families and young guests.
 **/
 export class Families extends SpeakeasyBase {
-  @Metadata({ data: "json, name=babysitting" })
+  @SpeakeasyMetadata({ data: "json, name=babysitting" })
   babysitting?: boolean;
 
-  @Metadata({ data: "json, name=babysittingException" })
+  @SpeakeasyMetadata({ data: "json, name=babysittingException" })
   babysittingException?: FamiliesBabysittingExceptionEnum;
 
-  @Metadata({ data: "json, name=kidsActivities" })
+  @SpeakeasyMetadata({ data: "json, name=kidsActivities" })
   kidsActivities?: boolean;
 
-  @Metadata({ data: "json, name=kidsActivitiesException" })
+  @SpeakeasyMetadata({ data: "json, name=kidsActivitiesException" })
   kidsActivitiesException?: FamiliesKidsActivitiesExceptionEnum;
 
-  @Metadata({ data: "json, name=kidsClub" })
+  @SpeakeasyMetadata({ data: "json, name=kidsClub" })
   kidsClub?: boolean;
 
-  @Metadata({ data: "json, name=kidsClubException" })
+  @SpeakeasyMetadata({ data: "json, name=kidsClubException" })
   kidsClubException?: FamiliesKidsClubExceptionEnum;
 }

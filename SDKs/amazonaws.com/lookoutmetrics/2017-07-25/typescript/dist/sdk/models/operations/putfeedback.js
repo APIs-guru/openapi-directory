@@ -22,38 +22,38 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PutFeedbackHeaders = /** @class */ (function (_super) {
     __extends(PutFeedbackHeaders, _super);
     function PutFeedbackHeaders() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], PutFeedbackHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], PutFeedbackHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], PutFeedbackHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], PutFeedbackHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], PutFeedbackHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], PutFeedbackHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], PutFeedbackHeaders.prototype, "xAmzSignedHeaders", void 0);
     return PutFeedbackHeaders;
@@ -69,15 +69,15 @@ var PutFeedbackRequestBodyAnomalyGroupTimeSeriesFeedback = /** @class */ (functi
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AnomalyGroupId" }),
+        SpeakeasyMetadata({ data: "json, name=AnomalyGroupId" }),
         __metadata("design:type", String)
     ], PutFeedbackRequestBodyAnomalyGroupTimeSeriesFeedback.prototype, "anomalyGroupId", void 0);
     __decorate([
-        Metadata({ data: "json, name=IsAnomaly" }),
+        SpeakeasyMetadata({ data: "json, name=IsAnomaly" }),
         __metadata("design:type", Boolean)
     ], PutFeedbackRequestBodyAnomalyGroupTimeSeriesFeedback.prototype, "isAnomaly", void 0);
     __decorate([
-        Metadata({ data: "json, name=TimeSeriesId" }),
+        SpeakeasyMetadata({ data: "json, name=TimeSeriesId" }),
         __metadata("design:type", String)
     ], PutFeedbackRequestBodyAnomalyGroupTimeSeriesFeedback.prototype, "timeSeriesId", void 0);
     return PutFeedbackRequestBodyAnomalyGroupTimeSeriesFeedback;
@@ -89,11 +89,11 @@ var PutFeedbackRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AnomalyDetectorArn" }),
+        SpeakeasyMetadata({ data: "json, name=AnomalyDetectorArn" }),
         __metadata("design:type", String)
     ], PutFeedbackRequestBody.prototype, "anomalyDetectorArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=AnomalyGroupTimeSeriesFeedback" }),
+        SpeakeasyMetadata({ data: "json, name=AnomalyGroupTimeSeriesFeedback" }),
         __metadata("design:type", PutFeedbackRequestBodyAnomalyGroupTimeSeriesFeedback)
     ], PutFeedbackRequestBody.prototype, "anomalyGroupTimeSeriesFeedback", void 0);
     return PutFeedbackRequestBody;
@@ -105,11 +105,11 @@ var PutFeedbackRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PutFeedbackHeaders)
     ], PutFeedbackRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", PutFeedbackRequestBody)
     ], PutFeedbackRequest.prototype, "request", void 0);
     return PutFeedbackRequest;
@@ -121,35 +121,35 @@ var PutFeedbackResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PutFeedbackResponse.prototype, "accessDeniedException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PutFeedbackResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PutFeedbackResponse.prototype, "internalServerException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], PutFeedbackResponse.prototype, "putFeedbackResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PutFeedbackResponse.prototype, "resourceNotFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PutFeedbackResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PutFeedbackResponse.prototype, "tooManyRequestsException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PutFeedbackResponse.prototype, "validationException", void 0);
     return PutFeedbackResponse;

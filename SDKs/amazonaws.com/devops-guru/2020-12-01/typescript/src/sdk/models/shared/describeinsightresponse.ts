@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProactiveInsight } from "./proactiveinsight";
 import { ReactiveInsight } from "./reactiveinsight";
 
 
+
 export class DescribeInsightResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ProactiveInsight" })
+  @SpeakeasyMetadata({ data: "json, name=ProactiveInsight" })
   proactiveInsight?: ProactiveInsight;
 
-  @Metadata({ data: "json, name=ReactiveInsight" })
+  @SpeakeasyMetadata({ data: "json, name=ReactiveInsight" })
   reactiveInsight?: ReactiveInsight;
 }

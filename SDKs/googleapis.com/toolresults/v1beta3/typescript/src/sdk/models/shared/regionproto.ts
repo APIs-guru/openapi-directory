@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RegionProto
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A rectangular region.
 **/
 export class RegionProto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=heightPx" })
+  @SpeakeasyMetadata({ data: "json, name=heightPx" })
   heightPx?: number;
 
-  @Metadata({ data: "json, name=leftPx" })
+  @SpeakeasyMetadata({ data: "json, name=leftPx" })
   leftPx?: number;
 
-  @Metadata({ data: "json, name=topPx" })
+  @SpeakeasyMetadata({ data: "json, name=topPx" })
   topPx?: number;
 
-  @Metadata({ data: "json, name=widthPx" })
+  @SpeakeasyMetadata({ data: "json, name=widthPx" })
   widthPx?: number;
 }

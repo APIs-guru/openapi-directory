@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InsightFeedbackOptionEnum } from "./insightfeedbackoptionenum";
+
 
 
 // InsightFeedback
@@ -7,9 +8,9 @@ import { InsightFeedbackOptionEnum } from "./insightfeedbackoptionenum";
  *  Information about insight feedback received from a customer. 
 **/
 export class InsightFeedback extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Feedback" })
+  @SpeakeasyMetadata({ data: "json, name=Feedback" })
   feedback?: InsightFeedbackOptionEnum;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 }

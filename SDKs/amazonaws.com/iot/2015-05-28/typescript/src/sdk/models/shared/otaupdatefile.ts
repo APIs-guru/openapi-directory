@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CodeSigning } from "./codesigning";
 import { FileLocation } from "./filelocation";
+
 
 
 // OtaUpdateFile
@@ -8,21 +9,21 @@ import { FileLocation } from "./filelocation";
  * Describes a file to be associated with an OTA update.
 **/
 export class OtaUpdateFile extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attributes" })
+  @SpeakeasyMetadata({ data: "json, name=attributes" })
   attributes?: Map<string, string>;
 
-  @Metadata({ data: "json, name=codeSigning" })
+  @SpeakeasyMetadata({ data: "json, name=codeSigning" })
   codeSigning?: CodeSigning;
 
-  @Metadata({ data: "json, name=fileLocation" })
+  @SpeakeasyMetadata({ data: "json, name=fileLocation" })
   fileLocation?: FileLocation;
 
-  @Metadata({ data: "json, name=fileName" })
+  @SpeakeasyMetadata({ data: "json, name=fileName" })
   fileName?: string;
 
-  @Metadata({ data: "json, name=fileType" })
+  @SpeakeasyMetadata({ data: "json, name=fileType" })
   fileType?: number;
 
-  @Metadata({ data: "json, name=fileVersion" })
+  @SpeakeasyMetadata({ data: "json, name=fileVersion" })
   fileVersion?: string;
 }

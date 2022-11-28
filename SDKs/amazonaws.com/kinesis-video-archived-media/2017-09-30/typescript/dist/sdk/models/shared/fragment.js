@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Fragment
 /**
  * Represents a segment of video or other time-delimited data.
@@ -33,23 +33,23 @@ var Fragment = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=FragmentLengthInMilliseconds" }),
+        SpeakeasyMetadata({ data: "json, name=FragmentLengthInMilliseconds" }),
         __metadata("design:type", Number)
     ], Fragment.prototype, "fragmentLengthInMilliseconds", void 0);
     __decorate([
-        Metadata({ data: "json, name=FragmentNumber" }),
+        SpeakeasyMetadata({ data: "json, name=FragmentNumber" }),
         __metadata("design:type", String)
     ], Fragment.prototype, "fragmentNumber", void 0);
     __decorate([
-        Metadata({ data: "json, name=FragmentSizeInBytes" }),
+        SpeakeasyMetadata({ data: "json, name=FragmentSizeInBytes" }),
         __metadata("design:type", Number)
     ], Fragment.prototype, "fragmentSizeInBytes", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProducerTimestamp" }),
+        SpeakeasyMetadata({ data: "json, name=ProducerTimestamp" }),
         __metadata("design:type", Date)
     ], Fragment.prototype, "producerTimestamp", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServerTimestamp" }),
+        SpeakeasyMetadata({ data: "json, name=ServerTimestamp" }),
         __metadata("design:type", Date)
     ], Fragment.prototype, "serverTimestamp", void 0);
     return Fragment;

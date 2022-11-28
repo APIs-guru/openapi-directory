@@ -1,6 +1,7 @@
 
 
+
 export enum AlertStatusEnum {
-    Active = "ACTIVE"
-,    Inactive = "INACTIVE"
+    Active = "ACTIVE",
+    Inactive = "INACTIVE"
 }

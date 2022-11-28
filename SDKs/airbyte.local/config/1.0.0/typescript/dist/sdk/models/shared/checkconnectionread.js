@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SynchronousJobRead } from "./synchronousjobread";
 export var CheckConnectionReadStatusEnum;
 (function (CheckConnectionReadStatusEnum) {
@@ -35,15 +35,15 @@ var CheckConnectionRead = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=jobInfo" }),
+        SpeakeasyMetadata({ data: "json, name=jobInfo" }),
         __metadata("design:type", SynchronousJobRead)
     ], CheckConnectionRead.prototype, "jobInfo", void 0);
     __decorate([
-        Metadata({ data: "json, name=message" }),
+        SpeakeasyMetadata({ data: "json, name=message" }),
         __metadata("design:type", String)
     ], CheckConnectionRead.prototype, "message", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], CheckConnectionRead.prototype, "status", void 0);
     return CheckConnectionRead;

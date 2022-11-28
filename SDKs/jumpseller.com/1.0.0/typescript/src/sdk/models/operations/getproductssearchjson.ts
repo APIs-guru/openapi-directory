@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum GetProductsSearchJsonFieldsEnum {
-    Sku = "sku"
-,    Barcode = "barcode"
-,    Brand = "brand"
-,    Name = "name"
-,    Description = "description"
-,    Variants = "variants"
-,    OptionName = "option_name"
-,    CustomFields = "custom_fields"
-,    CustomFieldsSelects = "custom_fields_selects"
+    Sku = "sku",
+    Barcode = "barcode",
+    Brand = "brand",
+    Name = "name",
+    Description = "description",
+    Variants = "variants",
+    OptionName = "option_name",
+    CustomFields = "custom_fields",
+    CustomFieldsSelects = "custom_fields_selects"
 }
 
 
 export class GetProductsSearchJsonQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=authtoken" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=authtoken" })
   authtoken: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" })
   fields?: GetProductsSearchJsonFieldsEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=locale" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=locale" })
   locale?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=login" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=login" })
   login: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=query" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=query" })
   query: string;
 }
 
 
 export class GetProductsSearchJsonRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetProductsSearchJsonQueryParams;
 }
 
 
 export class GetProductsSearchJsonResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   notFound?: any;
 
-  @Metadata({ elemType: shared.Product })
+  @SpeakeasyMetadata({ elemType: shared.Product })
   products?: shared.Product[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

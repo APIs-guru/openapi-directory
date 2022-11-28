@@ -1,9 +1,10 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class PermissionAccessModeEnum(str, Enum):
     VIEW = "VIEW"
@@ -15,8 +16,8 @@ class PermissionAccessModeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PermissionDateRange:
-    from_: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'from', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    to: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'to', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    from_: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('from'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    to: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('to'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     
 class PermissionFrequencyUnitEnum(str, Enum):
     HOUR = "HOUR"
@@ -29,16 +30,16 @@ class PermissionFrequencyUnitEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PermissionFrequency:
-    repeats: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'repeats' }})
-    unit: PermissionFrequencyUnitEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'unit' }})
-    value: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    repeats: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('repeats') }})
+    unit: PermissionFrequencyUnitEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('unit') }})
+    value: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     
 
 @dataclass_json
 @dataclass
 class Permission:
-    access_mode: PermissionAccessModeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'accessMode' }})
-    data_erase_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dataEraseAt', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    date_range: PermissionDateRange = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dateRange' }})
-    frequency: PermissionFrequency = field(default=None, metadata={'dataclasses_json': { 'field_name': 'frequency' }})
+    access_mode: PermissionAccessModeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('accessMode') }})
+    data_erase_at: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('dataEraseAt'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    date_range: PermissionDateRange = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('dateRange') }})
+    frequency: PermissionFrequency = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('frequency') }})
     

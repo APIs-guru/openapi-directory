@@ -14,6 +14,8 @@ type CreateInputHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateInputRequestBodyInputDefinition
+// The definition of the input.
 type CreateInputRequestBodyInputDefinition struct {
 	Attributes []shared.Attribute `json:"attributes,omitempty"`
 }

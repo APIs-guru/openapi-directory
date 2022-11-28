@@ -19,6 +19,19 @@ const (
 	GoogleCloudChannelV1EntitlementSuspensionReasonsEnumOther                       GoogleCloudChannelV1EntitlementSuspensionReasonsEnum = "OTHER"
 )
 
+// GoogleCloudChannelV1EntitlementInput
+// An entitlement is a representation of a customer's ability to use a service.
+type GoogleCloudChannelV1EntitlementInput struct {
+	AssociationInfo    *GoogleCloudChannelV1AssociationInfo         `json:"associationInfo,omitempty"`
+	CommitmentSettings *GoogleCloudChannelV1CommitmentSettingsInput `json:"commitmentSettings,omitempty"`
+	Offer              *string                                      `json:"offer,omitempty"`
+	Parameters         []GoogleCloudChannelV1ParameterInput         `json:"parameters,omitempty"`
+	PurchaseOrderID    *string                                      `json:"purchaseOrderId,omitempty"`
+	TrialSettings      *GoogleCloudChannelV1TrialSettings           `json:"trialSettings,omitempty"`
+}
+
+// GoogleCloudChannelV1Entitlement
+// An entitlement is a representation of a customer's ability to use a service.
 type GoogleCloudChannelV1Entitlement struct {
 	AssociationInfo    *GoogleCloudChannelV1AssociationInfo                   `json:"associationInfo,omitempty"`
 	CommitmentSettings *GoogleCloudChannelV1CommitmentSettings                `json:"commitmentSettings,omitempty"`

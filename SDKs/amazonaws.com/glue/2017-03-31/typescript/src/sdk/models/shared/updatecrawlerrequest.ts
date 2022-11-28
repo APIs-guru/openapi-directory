@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LineageConfiguration } from "./lineageconfiguration";
 import { RecrawlPolicy } from "./recrawlpolicy";
 import { SchemaChangePolicy } from "./schemachangepolicy";
 import { CrawlerTargets } from "./crawlertargets";
 
 
+
 export class UpdateCrawlerRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Classifiers" })
+  @SpeakeasyMetadata({ data: "json, name=Classifiers" })
   classifiers?: string[];
 
-  @Metadata({ data: "json, name=Configuration" })
+  @SpeakeasyMetadata({ data: "json, name=Configuration" })
   configuration?: string;
 
-  @Metadata({ data: "json, name=CrawlerSecurityConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=CrawlerSecurityConfiguration" })
   crawlerSecurityConfiguration?: string;
 
-  @Metadata({ data: "json, name=DatabaseName" })
+  @SpeakeasyMetadata({ data: "json, name=DatabaseName" })
   databaseName?: string;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=LineageConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=LineageConfiguration" })
   lineageConfiguration?: LineageConfiguration;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 
-  @Metadata({ data: "json, name=RecrawlPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=RecrawlPolicy" })
   recrawlPolicy?: RecrawlPolicy;
 
-  @Metadata({ data: "json, name=Role" })
+  @SpeakeasyMetadata({ data: "json, name=Role" })
   role?: string;
 
-  @Metadata({ data: "json, name=Schedule" })
+  @SpeakeasyMetadata({ data: "json, name=Schedule" })
   schedule?: string;
 
-  @Metadata({ data: "json, name=SchemaChangePolicy" })
+  @SpeakeasyMetadata({ data: "json, name=SchemaChangePolicy" })
   schemaChangePolicy?: SchemaChangePolicy;
 
-  @Metadata({ data: "json, name=TablePrefix" })
+  @SpeakeasyMetadata({ data: "json, name=TablePrefix" })
   tablePrefix?: string;
 
-  @Metadata({ data: "json, name=Targets" })
+  @SpeakeasyMetadata({ data: "json, name=Targets" })
   targets?: CrawlerTargets;
 }

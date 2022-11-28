@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetTimePeriodsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=end_on" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=end_on" })
   endOn?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
   optFields?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
   optPretty?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=start_on" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=start_on" })
   startOn?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=workspace" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=workspace" })
   workspace: string;
 }
 
 
-export class GetTimePeriodsRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetTimePeriodsQueryParams;
-}
-
-
 export class GetTimePeriods200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data", elemType: shared.TimePeriodCompact })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: shared.TimePeriodCompact })
   data?: shared.TimePeriodCompact[];
 }
 
 
+export class GetTimePeriodsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetTimePeriodsQueryParams;
+}
+
+
 export class GetTimePeriodsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getTimePeriods200ApplicationJsonObject?: GetTimePeriods200ApplicationJson;
 }

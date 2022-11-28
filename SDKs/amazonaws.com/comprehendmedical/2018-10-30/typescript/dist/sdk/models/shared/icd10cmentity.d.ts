@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Icd10CmAttribute } from "./icd10cmattribute";
 import { Icd10CmEntityCategoryEnum } from "./icd10cmentitycategoryenum";
 import { Icd10CmConcept } from "./icd10cmconcept";

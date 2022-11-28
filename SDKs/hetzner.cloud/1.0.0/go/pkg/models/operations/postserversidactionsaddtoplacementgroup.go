@@ -8,11 +8,8 @@ type PostServersIDActionsAddToPlacementGroupAddToPlacementGroupRequest struct {
 	PlacementGroup int64 `json:"placement_group"`
 }
 
-type PostServersIDActionsAddToPlacementGroupRequest struct {
-	PathParams PostServersIDActionsAddToPlacementGroupPathParams
-	Request    *PostServersIDActionsAddToPlacementGroupAddToPlacementGroupRequest `request:"mediaType=application/json"`
-}
-
+// PostServersIDActionsAddToPlacementGroupActionResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type PostServersIDActionsAddToPlacementGroupActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -44,6 +41,11 @@ type PostServersIDActionsAddToPlacementGroupActionResponseAction struct {
 
 type PostServersIDActionsAddToPlacementGroupActionResponse struct {
 	Action PostServersIDActionsAddToPlacementGroupActionResponseAction `json:"action"`
+}
+
+type PostServersIDActionsAddToPlacementGroupRequest struct {
+	PathParams PostServersIDActionsAddToPlacementGroupPathParams
+	Request    *PostServersIDActionsAddToPlacementGroupAddToPlacementGroupRequest `request:"mediaType=application/json"`
 }
 
 type PostServersIDActionsAddToPlacementGroupResponse struct {

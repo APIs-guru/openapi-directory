@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var SicerRequestBodyCertificateParameters = /** @class */ (function (_super) {
     __extends(SicerRequestBodyCertificateParameters, _super);
@@ -30,11 +30,11 @@ var SicerRequestBodyCertificateParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=_name" }),
+        SpeakeasyMetadata({ data: "json, name=_name" }),
         __metadata("design:type", String)
     ], SicerRequestBodyCertificateParameters.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=consumer_id" }),
+        SpeakeasyMetadata({ data: "json, name=consumer_id" }),
         __metadata("design:type", String)
     ], SicerRequestBodyCertificateParameters.prototype, "consumerId", void 0);
     return SicerRequestBodyCertificateParameters;
@@ -50,19 +50,19 @@ var SicerRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=certificateParameters" }),
+        SpeakeasyMetadata({ data: "json, name=certificateParameters" }),
         __metadata("design:type", SicerRequestBodyCertificateParameters)
     ], SicerRequestBody.prototype, "certificateParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=consentArtifact" }),
+        SpeakeasyMetadata({ data: "json, name=consentArtifact" }),
         __metadata("design:type", Object)
     ], SicerRequestBody.prototype, "consentArtifact", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], SicerRequestBody.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=txnId" }),
+        SpeakeasyMetadata({ data: "json, name=txnId" }),
         __metadata("design:type", String)
     ], SicerRequestBody.prototype, "txnId", void 0);
     return SicerRequestBody;
@@ -74,32 +74,16 @@ var SicerSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], SicerSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeClientId)
     ], SicerSecurity.prototype, "clientId", void 0);
     return SicerSecurity;
 }(SpeakeasyBase));
 export { SicerSecurity };
-var SicerRequest = /** @class */ (function (_super) {
-    __extends(SicerRequest, _super);
-    function SicerRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", SicerRequestBody)
-    ], SicerRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", SicerSecurity)
-    ], SicerRequest.prototype, "security", void 0);
-    return SicerRequest;
-}(SpeakeasyBase));
-export { SicerRequest };
 export var Sicer400ApplicationJsonErrorEnum;
 (function (Sicer400ApplicationJsonErrorEnum) {
     Sicer400ApplicationJsonErrorEnum["MissingParameter"] = "missing_parameter";
@@ -122,11 +106,11 @@ var Sicer400ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Sicer400ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Sicer400ApplicationJson.prototype, "errorDescription", void 0);
     return Sicer400ApplicationJson;
@@ -148,11 +132,11 @@ var Sicer401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Sicer401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Sicer401ApplicationJson.prototype, "errorDescription", void 0);
     return Sicer401ApplicationJson;
@@ -174,11 +158,11 @@ var Sicer404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Sicer404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Sicer404ApplicationJson.prototype, "errorDescription", void 0);
     return Sicer404ApplicationJson;
@@ -198,11 +182,11 @@ var Sicer500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Sicer500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Sicer500ApplicationJson.prototype, "errorDescription", void 0);
     return Sicer500ApplicationJson;
@@ -222,11 +206,11 @@ var Sicer502ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Sicer502ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Sicer502ApplicationJson.prototype, "errorDescription", void 0);
     return Sicer502ApplicationJson;
@@ -246,11 +230,11 @@ var Sicer503ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Sicer503ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Sicer503ApplicationJson.prototype, "errorDescription", void 0);
     return Sicer503ApplicationJson;
@@ -270,55 +254,71 @@ var Sicer504ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Sicer504ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Sicer504ApplicationJson.prototype, "errorDescription", void 0);
     return Sicer504ApplicationJson;
 }(SpeakeasyBase));
 export { Sicer504ApplicationJson };
+var SicerRequest = /** @class */ (function (_super) {
+    __extends(SicerRequest, _super);
+    function SicerRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", SicerRequestBody)
+    ], SicerRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", SicerSecurity)
+    ], SicerRequest.prototype, "security", void 0);
+    return SicerRequest;
+}(SpeakeasyBase));
+export { SicerRequest };
 var SicerResponse = /** @class */ (function (_super) {
     __extends(SicerResponse, _super);
     function SicerResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], SicerResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], SicerResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Sicer400ApplicationJson)
     ], SicerResponse.prototype, "sicer400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Sicer401ApplicationJson)
     ], SicerResponse.prototype, "sicer401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Sicer404ApplicationJson)
     ], SicerResponse.prototype, "sicer404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Sicer500ApplicationJson)
     ], SicerResponse.prototype, "sicer500ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Sicer502ApplicationJson)
     ], SicerResponse.prototype, "sicer502ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Sicer503ApplicationJson)
     ], SicerResponse.prototype, "sicer503ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Sicer504ApplicationJson)
     ], SicerResponse.prototype, "sicer504ApplicationJsonObject", void 0);
     return SicerResponse;

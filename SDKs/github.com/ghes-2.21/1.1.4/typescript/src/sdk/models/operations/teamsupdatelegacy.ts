@@ -1,64 +1,65 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class TeamsUpdateLegacyPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=team_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=team_id" })
   teamId: number;
 }
 
 export enum TeamsUpdateLegacyRequestBodyPermissionEnum {
-    Pull = "pull"
-,    Push = "push"
-,    Admin = "admin"
+    Pull = "pull",
+    Push = "push",
+    Admin = "admin"
 }
 
 export enum TeamsUpdateLegacyRequestBodyPrivacyEnum {
-    Secret = "secret"
-,    Closed = "closed"
+    Secret = "secret",
+    Closed = "closed"
 }
 
 
 export class TeamsUpdateLegacyRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=parent_team_id" })
+  @SpeakeasyMetadata({ data: "json, name=parent_team_id" })
   parentTeamId?: number;
 
-  @Metadata({ data: "json, name=permission" })
+  @SpeakeasyMetadata({ data: "json, name=permission" })
   permission?: TeamsUpdateLegacyRequestBodyPermissionEnum;
 
-  @Metadata({ data: "json, name=privacy" })
+  @SpeakeasyMetadata({ data: "json, name=privacy" })
   privacy?: TeamsUpdateLegacyRequestBodyPrivacyEnum;
 }
 
 
 export class TeamsUpdateLegacyRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: TeamsUpdateLegacyPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: TeamsUpdateLegacyRequestBody;
 }
 
 
 export class TeamsUpdateLegacyResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   teamFull?: shared.TeamFull;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationError?: shared.ValidationError;
 }

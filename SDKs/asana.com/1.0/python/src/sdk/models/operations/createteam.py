@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -14,26 +15,26 @@ class CreateTeamQueryParams:
 
 @dataclass_json
 @dataclass
-class CreateTeamRequestBody:
-    data: Optional[shared.TeamRequest] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
-    
-
-@dataclass
-class CreateTeamRequest:
-    query_params: CreateTeamQueryParams = field(default=None)
-    request: CreateTeamRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+class CreateTeamRequestBodyInput:
+    data: Optional[shared.TeamRequestInput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
     
 
 @dataclass_json
 @dataclass
 class CreateTeam201ApplicationJSON:
-    data: Optional[shared.TeamResponse] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
+    data: Optional[shared.TeamResponse] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
+    
+
+@dataclass
+class CreateTeamRequest:
+    query_params: CreateTeamQueryParams = field()
+    request: CreateTeamRequestBodyInput = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateTeamResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     create_team_201_application_json_object: Optional[CreateTeam201ApplicationJSON] = field(default=None)
     

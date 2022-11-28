@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BucketOptions } from "./bucketoptions";
 import { MetricDescriptor } from "./metricdescriptor";
 export var LogMetricVersionEnum;
@@ -30,6 +30,58 @@ export var LogMetricVersionEnum;
     LogMetricVersionEnum["V2"] = "V2";
     LogMetricVersionEnum["V1"] = "V1";
 })(LogMetricVersionEnum || (LogMetricVersionEnum = {}));
+// LogMetricInput
+/**
+ * Describes a logs-based metric. The value of the metric is the number of log entries that match a logs filter in a given time interval.Logs-based metrics can also be used to extract values from logs and create a distribution of the values. The distribution records the statistics of the extracted values along with an optional histogram of the values as specified by the bucket options.
+**/
+var LogMetricInput = /** @class */ (function (_super) {
+    __extends(LogMetricInput, _super);
+    function LogMetricInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=bucketName" }),
+        __metadata("design:type", String)
+    ], LogMetricInput.prototype, "bucketName", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=bucketOptions" }),
+        __metadata("design:type", BucketOptions)
+    ], LogMetricInput.prototype, "bucketOptions", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=description" }),
+        __metadata("design:type", String)
+    ], LogMetricInput.prototype, "description", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=disabled" }),
+        __metadata("design:type", Boolean)
+    ], LogMetricInput.prototype, "disabled", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=filter" }),
+        __metadata("design:type", String)
+    ], LogMetricInput.prototype, "filter", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=labelExtractors" }),
+        __metadata("design:type", Map)
+    ], LogMetricInput.prototype, "labelExtractors", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=metricDescriptor" }),
+        __metadata("design:type", MetricDescriptor)
+    ], LogMetricInput.prototype, "metricDescriptor", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=name" }),
+        __metadata("design:type", String)
+    ], LogMetricInput.prototype, "name", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=valueExtractor" }),
+        __metadata("design:type", String)
+    ], LogMetricInput.prototype, "valueExtractor", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=version" }),
+        __metadata("design:type", String)
+    ], LogMetricInput.prototype, "version", void 0);
+    return LogMetricInput;
+}(SpeakeasyBase));
+export { LogMetricInput };
 // LogMetric
 /**
  * Describes a logs-based metric. The value of the metric is the number of log entries that match a logs filter in a given time interval.Logs-based metrics can also be used to extract values from logs and create a distribution of the values. The distribution records the statistics of the extracted values along with an optional histogram of the values as specified by the bucket options.
@@ -40,51 +92,51 @@ var LogMetric = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=bucketName" }),
+        SpeakeasyMetadata({ data: "json, name=bucketName" }),
         __metadata("design:type", String)
     ], LogMetric.prototype, "bucketName", void 0);
     __decorate([
-        Metadata({ data: "json, name=bucketOptions" }),
+        SpeakeasyMetadata({ data: "json, name=bucketOptions" }),
         __metadata("design:type", BucketOptions)
     ], LogMetric.prototype, "bucketOptions", void 0);
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", String)
     ], LogMetric.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], LogMetric.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=disabled" }),
+        SpeakeasyMetadata({ data: "json, name=disabled" }),
         __metadata("design:type", Boolean)
     ], LogMetric.prototype, "disabled", void 0);
     __decorate([
-        Metadata({ data: "json, name=filter" }),
+        SpeakeasyMetadata({ data: "json, name=filter" }),
         __metadata("design:type", String)
     ], LogMetric.prototype, "filter", void 0);
     __decorate([
-        Metadata({ data: "json, name=labelExtractors" }),
+        SpeakeasyMetadata({ data: "json, name=labelExtractors" }),
         __metadata("design:type", Map)
     ], LogMetric.prototype, "labelExtractors", void 0);
     __decorate([
-        Metadata({ data: "json, name=metricDescriptor" }),
+        SpeakeasyMetadata({ data: "json, name=metricDescriptor" }),
         __metadata("design:type", MetricDescriptor)
     ], LogMetric.prototype, "metricDescriptor", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], LogMetric.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateTime" }),
+        SpeakeasyMetadata({ data: "json, name=updateTime" }),
         __metadata("design:type", String)
     ], LogMetric.prototype, "updateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=valueExtractor" }),
+        SpeakeasyMetadata({ data: "json, name=valueExtractor" }),
         __metadata("design:type", String)
     ], LogMetric.prototype, "valueExtractor", void 0);
     __decorate([
-        Metadata({ data: "json, name=version" }),
+        SpeakeasyMetadata({ data: "json, name=version" }),
         __metadata("design:type", String)
     ], LogMetric.prototype, "version", void 0);
     return LogMetric;

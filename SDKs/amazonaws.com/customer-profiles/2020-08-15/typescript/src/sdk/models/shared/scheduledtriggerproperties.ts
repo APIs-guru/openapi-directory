@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataPullModeEnum } from "./datapullmodeenum";
+
 
 
 // ScheduledTriggerProperties
@@ -7,24 +8,24 @@ import { DataPullModeEnum } from "./datapullmodeenum";
  * Specifies the configuration details of a scheduled-trigger flow that you define. Currently, these settings only apply to the scheduled-trigger type.
 **/
 export class ScheduledTriggerProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DataPullMode" })
+  @SpeakeasyMetadata({ data: "json, name=DataPullMode" })
   dataPullMode?: DataPullModeEnum;
 
-  @Metadata({ data: "json, name=FirstExecutionFrom" })
+  @SpeakeasyMetadata({ data: "json, name=FirstExecutionFrom" })
   firstExecutionFrom?: Date;
 
-  @Metadata({ data: "json, name=ScheduleEndTime" })
+  @SpeakeasyMetadata({ data: "json, name=ScheduleEndTime" })
   scheduleEndTime?: Date;
 
-  @Metadata({ data: "json, name=ScheduleExpression" })
+  @SpeakeasyMetadata({ data: "json, name=ScheduleExpression" })
   scheduleExpression: string;
 
-  @Metadata({ data: "json, name=ScheduleOffset" })
+  @SpeakeasyMetadata({ data: "json, name=ScheduleOffset" })
   scheduleOffset?: number;
 
-  @Metadata({ data: "json, name=ScheduleStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=ScheduleStartTime" })
   scheduleStartTime?: Date;
 
-  @Metadata({ data: "json, name=Timezone" })
+  @SpeakeasyMetadata({ data: "json, name=Timezone" })
   timezone?: string;
 }

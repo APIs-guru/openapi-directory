@@ -32,11 +32,6 @@ type PancrSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type PancrRequest struct {
-	Request  *PancrRequestBody `request:"mediaType=application/json"`
-	Security PancrSecurity
-}
-
 type Pancr400ApplicationJSONErrorEnum string
 
 const (
@@ -166,6 +161,11 @@ const (
 type Pancr504ApplicationJSON struct {
 	Error            *Pancr504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Pancr504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type PancrRequest struct {
+	Request  *PancrRequestBody `request:"mediaType=application/json"`
+	Security PancrSecurity
 }
 
 type PancrResponse struct {

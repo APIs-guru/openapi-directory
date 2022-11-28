@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Trail } from "./trail";
+
 
 
 // DescribeTrailsResponse
@@ -8,6 +8,6 @@ import { Trail } from "./trail";
  * Returns the objects or data listed below if successful. Otherwise, returns an error.
 **/
 export class DescribeTrailsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=trailList", elemType: shared.Trail })
+  @SpeakeasyMetadata({ data: "json, name=trailList", elemType: Trail })
   trailList?: Trail[];
 }

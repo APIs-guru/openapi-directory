@@ -22,30 +22,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ProfileCommerceAddress = /** @class */ (function (_super) {
     __extends(ProfileCommerceAddress, _super);
     function ProfileCommerceAddress() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=city" }),
+        SpeakeasyMetadata({ data: "json, name=city" }),
         __metadata("design:type", String)
     ], ProfileCommerceAddress.prototype, "city", void 0);
     __decorate([
-        Metadata({ data: "json, name=country" }),
+        SpeakeasyMetadata({ data: "json, name=country" }),
         __metadata("design:type", String)
     ], ProfileCommerceAddress.prototype, "country", void 0);
     __decorate([
-        Metadata({ data: "json, name=postalCode" }),
+        SpeakeasyMetadata({ data: "json, name=postalCode" }),
         __metadata("design:type", String)
     ], ProfileCommerceAddress.prototype, "postalCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=region" }),
+        SpeakeasyMetadata({ data: "json, name=region" }),
         __metadata("design:type", String)
     ], ProfileCommerceAddress.prototype, "region", void 0);
     __decorate([
-        Metadata({ data: "json, name=street" }),
+        SpeakeasyMetadata({ data: "json, name=street" }),
         __metadata("design:type", Array)
     ], ProfileCommerceAddress.prototype, "street", void 0);
     return ProfileCommerceAddress;
@@ -57,11 +57,11 @@ var ProfileCommerce = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=address" }),
+        SpeakeasyMetadata({ data: "json, name=address" }),
         __metadata("design:type", ProfileCommerceAddress)
     ], ProfileCommerce.prototype, "address", void 0);
     __decorate([
-        Metadata({ data: "json, name=bankPaymentReference" }),
+        SpeakeasyMetadata({ data: "json, name=bankPaymentReference" }),
         __metadata("design:type", String)
     ], ProfileCommerce.prototype, "bankPaymentReference", void 0);
     return ProfileCommerce;
@@ -73,11 +73,11 @@ var ProfileCompany = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], ProfileCompany.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=taxReference" }),
+        SpeakeasyMetadata({ data: "json, name=taxReference" }),
         __metadata("design:type", String)
     ], ProfileCompany.prototype, "taxReference", void 0);
     return ProfileCompany;
@@ -89,15 +89,15 @@ var ProfileCredits = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=balance" }),
+        SpeakeasyMetadata({ data: "json, name=balance" }),
         __metadata("design:type", Number)
     ], ProfileCredits.prototype, "balance", void 0);
     __decorate([
-        Metadata({ data: "json, name=isTransferAllowed" }),
+        SpeakeasyMetadata({ data: "json, name=isTransferAllowed" }),
         __metadata("design:type", Boolean)
     ], ProfileCredits.prototype, "isTransferAllowed", void 0);
     __decorate([
-        Metadata({ data: "json, name=limit" }),
+        SpeakeasyMetadata({ data: "json, name=limit" }),
         __metadata("design:type", Number)
     ], ProfileCredits.prototype, "limit", void 0);
     return ProfileCredits;
@@ -109,11 +109,11 @@ var ProfileOriginAddresses = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=allowed" }),
+        SpeakeasyMetadata({ data: "json, name=allowed" }),
         __metadata("design:type", Array)
     ], ProfileOriginAddresses.prototype, "allowed", void 0);
     __decorate([
-        Metadata({ data: "json, name=isFullControlAllowed" }),
+        SpeakeasyMetadata({ data: "json, name=isFullControlAllowed" }),
         __metadata("design:type", Boolean)
     ], ProfileOriginAddresses.prototype, "isFullControlAllowed", void 0);
     return ProfileOriginAddresses;
@@ -125,11 +125,11 @@ var ProfileQuota = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=remaining" }),
+        SpeakeasyMetadata({ data: "json, name=remaining" }),
         __metadata("design:type", Number)
     ], ProfileQuota.prototype, "remaining", void 0);
     __decorate([
-        Metadata({ data: "json, name=size" }),
+        SpeakeasyMetadata({ data: "json, name=size" }),
         __metadata("design:type", Number)
     ], ProfileQuota.prototype, "size", void 0);
     return ProfileQuota;
@@ -141,35 +141,35 @@ var Profile = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=commerce" }),
+        SpeakeasyMetadata({ data: "json, name=commerce" }),
         __metadata("design:type", ProfileCommerce)
     ], Profile.prototype, "commerce", void 0);
     __decorate([
-        Metadata({ data: "json, name=company" }),
+        SpeakeasyMetadata({ data: "json, name=company" }),
         __metadata("design:type", ProfileCompany)
     ], Profile.prototype, "company", void 0);
     __decorate([
-        Metadata({ data: "json, name=created" }),
+        SpeakeasyMetadata({ data: "json, name=created" }),
         __metadata("design:type", Date)
     ], Profile.prototype, "created", void 0);
     __decorate([
-        Metadata({ data: "json, name=credits" }),
+        SpeakeasyMetadata({ data: "json, name=credits" }),
         __metadata("design:type", ProfileCredits)
     ], Profile.prototype, "credits", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], Profile.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=originAddresses" }),
+        SpeakeasyMetadata({ data: "json, name=originAddresses" }),
         __metadata("design:type", ProfileOriginAddresses)
     ], Profile.prototype, "originAddresses", void 0);
     __decorate([
-        Metadata({ data: "json, name=quota" }),
+        SpeakeasyMetadata({ data: "json, name=quota" }),
         __metadata("design:type", ProfileQuota)
     ], Profile.prototype, "quota", void 0);
     __decorate([
-        Metadata({ data: "json, name=username" }),
+        SpeakeasyMetadata({ data: "json, name=username" }),
         __metadata("design:type", String)
     ], Profile.prototype, "username", void 0);
     return Profile;

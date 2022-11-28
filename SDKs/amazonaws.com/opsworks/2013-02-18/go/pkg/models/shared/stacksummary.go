@@ -1,5 +1,7 @@
 package shared
 
+// StackSummary
+// Summarizes the number of layers, instances, and apps in a stack.
 type StackSummary struct {
 	AppsCount      *int64          `json:"AppsCount,omitempty"`
 	Arn            *string         `json:"Arn,omitempty"`

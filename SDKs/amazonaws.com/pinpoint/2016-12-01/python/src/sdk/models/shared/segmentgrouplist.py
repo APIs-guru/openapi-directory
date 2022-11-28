@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import segmentgroup
-from . import include_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SegmentGroupList:
-    groups: Optional[List[segmentgroup.SegmentGroup]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Groups' }})
-    include: Optional[include_enum.IncludeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Include' }})
+    r"""SegmentGroupList
+    Specifies the settings that define the relationships between segment groups for a segment.
+    """
+    
+    groups: Optional[List[SegmentGroup]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Groups') }})
+    include: Optional[IncludeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Include') }})
     

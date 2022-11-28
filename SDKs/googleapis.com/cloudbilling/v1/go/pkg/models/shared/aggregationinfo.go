@@ -16,6 +16,8 @@ const (
 	AggregationInfoAggregationLevelEnumProject                     AggregationInfoAggregationLevelEnum = "PROJECT"
 )
 
+// AggregationInfo
+// Represents the aggregation level and interval for pricing of a single SKU.
 type AggregationInfo struct {
 	AggregationCount    *int32                                  `json:"aggregationCount,omitempty"`
 	AggregationInterval *AggregationInfoAggregationIntervalEnum `json:"aggregationInterval,omitempty"`

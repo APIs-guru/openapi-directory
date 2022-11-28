@@ -14,11 +14,6 @@ type CreateAPIRequestBody struct {
 	API *CreateAPIRequestBodyAPI `json:"api,omitempty"`
 }
 
-type CreateAPIRequest struct {
-	QueryParams CreateAPIQueryParams
-	Request     *CreateAPIRequestBody `request:"mediaType=application/json"`
-}
-
 type CreateAPI200ApplicationJSONAPI struct {
 	CreatedAt   *string `json:"createdAt,omitempty"`
 	CreatedBy   *string `json:"createdBy,omitempty"`
@@ -31,6 +26,11 @@ type CreateAPI200ApplicationJSONAPI struct {
 
 type CreateAPI200ApplicationJSON struct {
 	API *CreateAPI200ApplicationJSONAPI `json:"api,omitempty"`
+}
+
+type CreateAPIRequest struct {
+	QueryParams CreateAPIQueryParams
+	Request     *CreateAPIRequestBody `request:"mediaType=application/json"`
 }
 
 type CreateAPIResponse struct {

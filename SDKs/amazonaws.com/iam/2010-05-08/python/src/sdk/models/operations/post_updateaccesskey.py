@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostUpdateAccessKeyActionEnum(str, Enum):
     UPDATE_ACCESS_KEY = "UpdateAccessKey"
@@ -10,8 +14,8 @@ class PostUpdateAccessKeyVersionEnum(str, Enum):
 
 @dataclass
 class PostUpdateAccessKeyQueryParams:
-    action: PostUpdateAccessKeyActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostUpdateAccessKeyVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostUpdateAccessKeyActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostUpdateAccessKeyVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostUpdateAccessKeyHeaders:
 
 @dataclass
 class PostUpdateAccessKeyRequest:
-    query_params: PostUpdateAccessKeyQueryParams = field(default=None)
-    headers: PostUpdateAccessKeyHeaders = field(default=None)
+    headers: PostUpdateAccessKeyHeaders = field()
+    query_params: PostUpdateAccessKeyQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostUpdateAccessKeyResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

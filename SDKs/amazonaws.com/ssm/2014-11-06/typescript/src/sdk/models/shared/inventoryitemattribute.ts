@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InventoryAttributeDataTypeEnum } from "./inventoryattributedatatypeenum";
+
 
 
 // InventoryItemAttribute
@@ -7,9 +8,9 @@ import { InventoryAttributeDataTypeEnum } from "./inventoryattributedatatypeenum
  * Attributes are the entries within the inventory item content. It contains name and value.
 **/
 export class InventoryItemAttribute extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DataType" })
+  @SpeakeasyMetadata({ data: "json, name=DataType" })
   dataType: InventoryAttributeDataTypeEnum;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 }

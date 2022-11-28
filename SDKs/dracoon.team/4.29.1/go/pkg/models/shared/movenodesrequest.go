@@ -8,6 +8,8 @@ const (
 	MoveNodesRequestResolutionStrategyEnumFail       MoveNodesRequestResolutionStrategyEnum = "fail"
 )
 
+// MoveNodesRequest
+// Request model for moving nodes
 type MoveNodesRequest struct {
 	Items              []MoveNode                              `json:"items,omitempty"`
 	KeepShareLinks     *bool                                   `json:"keepShareLinks,omitempty"`

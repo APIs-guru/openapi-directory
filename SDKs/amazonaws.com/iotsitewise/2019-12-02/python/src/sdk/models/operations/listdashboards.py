@@ -1,13 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class ListDashboardsQueryParams:
+    project_id: str = field(metadata={'query_param': { 'field_name': 'projectId', 'style': 'form', 'explode': True }})
     max_results: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'maxResults', 'style': 'form', 'explode': True }})
     next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'nextToken', 'style': 'form', 'explode': True }})
-    project_id: str = field(default=None, metadata={'query_param': { 'field_name': 'projectId', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -23,16 +26,16 @@ class ListDashboardsHeaders:
 
 @dataclass
 class ListDashboardsRequest:
-    query_params: ListDashboardsQueryParams = field(default=None)
-    headers: ListDashboardsHeaders = field(default=None)
+    headers: ListDashboardsHeaders = field()
+    query_params: ListDashboardsQueryParams = field()
     
 
 @dataclass
 class ListDashboardsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     list_dashboards_response: Optional[shared.ListDashboardsResponse] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LanguageModel } from "./languagemodel";
 
 
+
 export class DescribeLanguageModelResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LanguageModel" })
+  @SpeakeasyMetadata({ data: "json, name=LanguageModel" })
   languageModel?: LanguageModel;
 }

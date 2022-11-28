@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class VmmigrationProjectsLocationsSourcesUtilizationReportsListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 class VmmigrationProjectsLocationsSourcesUtilizationReportsListViewEnum(str, Enum):
     UTILIZATION_REPORT_VIEW_UNSPECIFIED = "UTILIZATION_REPORT_VIEW_UNSPECIFIED"
@@ -35,20 +36,20 @@ class VmmigrationProjectsLocationsSourcesUtilizationReportsListQueryParams:
 
 @dataclass
 class VmmigrationProjectsLocationsSourcesUtilizationReportsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class VmmigrationProjectsLocationsSourcesUtilizationReportsListRequest:
-    path_params: VmmigrationProjectsLocationsSourcesUtilizationReportsListPathParams = field(default=None)
-    query_params: VmmigrationProjectsLocationsSourcesUtilizationReportsListQueryParams = field(default=None)
-    security: VmmigrationProjectsLocationsSourcesUtilizationReportsListSecurity = field(default=None)
+    path_params: VmmigrationProjectsLocationsSourcesUtilizationReportsListPathParams = field()
+    query_params: VmmigrationProjectsLocationsSourcesUtilizationReportsListQueryParams = field()
+    security: VmmigrationProjectsLocationsSourcesUtilizationReportsListSecurity = field()
     
 
 @dataclass
 class VmmigrationProjectsLocationsSourcesUtilizationReportsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_utilization_reports_response: Optional[shared.ListUtilizationReportsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

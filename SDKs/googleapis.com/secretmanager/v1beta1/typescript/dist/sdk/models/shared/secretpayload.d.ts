@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * A secret payload resource in the Secret Manager API. This contains the sensitive secret data that is associated with a SecretVersion.
 **/

@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateGroupClientRelationshipsPutSubscriptionByClientIdUpdateGroupIdQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Active" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Active" })
   active: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ClientID" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ClientID" })
   clientId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=UpdateGroupID" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=UpdateGroupID" })
   updateGroupId: string;
 }
 
 
 export class UpdateGroupClientRelationshipsPutSubscriptionByClientIdUpdateGroupIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: UpdateGroupClientRelationshipsPutSubscriptionByClientIdUpdateGroupIdQueryParams;
 }
 
 
 export class UpdateGroupClientRelationshipsPutSubscriptionByClientIdUpdateGroupIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -11,15 +11,15 @@ type ExtractPagesV1RequestBody struct {
 	LastPage  *int32                        `multipartForm:"name=last_page"`
 }
 
-type ExtractPagesV1Request struct {
-	Request ExtractPagesV1RequestBody `request:"mediaType=multipart/form-data"`
-}
-
 type ExtractPagesV14XxApplicationProblemPlusJSON struct {
 	Errors map[string]interface{} `json:"errors,omitempty"`
 	Status *int64                 `json:"status,omitempty"`
 	Title  *string                `json:"title,omitempty"`
 	Type   *string                `json:"type,omitempty"`
+}
+
+type ExtractPagesV1Request struct {
+	Request ExtractPagesV1RequestBody `request:"mediaType=multipart/form-data"`
 }
 
 type ExtractPagesV1Response struct {

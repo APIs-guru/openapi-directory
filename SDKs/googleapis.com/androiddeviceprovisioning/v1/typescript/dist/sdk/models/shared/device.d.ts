@@ -1,9 +1,9 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DeviceClaim } from "./deviceclaim";
 import { DeviceIdentifier } from "./deviceidentifier";
 import { DeviceMetadata } from "./devicemetadata";
 /**
- * An Android device registered for zero-touch enrollment.
+ * An Android or Chrome OS device registered for zero-touch enrollment.
 **/
 export declare class Device extends SpeakeasyBase {
     claims?: DeviceClaim[];

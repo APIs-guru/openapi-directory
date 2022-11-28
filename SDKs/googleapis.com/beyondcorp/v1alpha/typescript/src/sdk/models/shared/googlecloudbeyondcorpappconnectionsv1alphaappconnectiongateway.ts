@@ -1,8 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleCloudBeyondcorpAppconnectionsV1alphaAppConnectionGatewayTypeEnum {
-    TypeUnspecified = "TYPE_UNSPECIFIED"
-,    GcpRegionalMig = "GCP_REGIONAL_MIG"
+    TypeUnspecified = "TYPE_UNSPECIFIED",
+    GcpRegionalMig = "GCP_REGIONAL_MIG"
+}
+
+
+// GoogleCloudBeyondcorpAppconnectionsV1alphaAppConnectionGatewayInput
+/** 
+ * Gateway represents a user facing component that serves as an entrance to enable connectivity.
+**/
+export class GoogleCloudBeyondcorpAppconnectionsV1alphaAppConnectionGatewayInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=appGateway" })
+  appGateway?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=type" })
+  type?: GoogleCloudBeyondcorpAppconnectionsV1alphaAppConnectionGatewayTypeEnum;
 }
 
 
@@ -11,18 +25,18 @@ export enum GoogleCloudBeyondcorpAppconnectionsV1alphaAppConnectionGatewayTypeEn
  * Gateway represents a user facing component that serves as an entrance to enable connectivity.
 **/
 export class GoogleCloudBeyondcorpAppconnectionsV1alphaAppConnectionGateway extends SpeakeasyBase {
-  @Metadata({ data: "json, name=appGateway" })
+  @SpeakeasyMetadata({ data: "json, name=appGateway" })
   appGateway?: string;
 
-  @Metadata({ data: "json, name=ingressPort" })
+  @SpeakeasyMetadata({ data: "json, name=ingressPort" })
   ingressPort?: number;
 
-  @Metadata({ data: "json, name=l7psc" })
+  @SpeakeasyMetadata({ data: "json, name=l7psc" })
   l7psc?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: GoogleCloudBeyondcorpAppconnectionsV1alphaAppConnectionGatewayTypeEnum;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri?: string;
 }

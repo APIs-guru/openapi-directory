@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum DeleteGatewayResponseResponseTypeEnum {
     Default4Xx = "DEFAULT_4XX",
     Default5Xx = "DEFAULT_5XX",

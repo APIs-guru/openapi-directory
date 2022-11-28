@@ -1,5 +1,7 @@
 package shared
 
+// ColumnDescription
+// Details on a column in the table.
 type ColumnDescription struct {
 	DataType                 *string              `json:"dataType,omitempty"`
 	DateDetails              *DateDetails         `json:"dateDetails,omitempty"`

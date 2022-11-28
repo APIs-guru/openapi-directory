@@ -1,39 +1,40 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NestedCircuit } from "./nestedcircuit";
 import { NestedInterface } from "./nestedinterface";
 import { NestedSite } from "./nestedsite";
 
+
 export enum CircuitTerminationTerminationEnum {
-    A = "A"
-,    Z = "Z"
+    A = "A",
+    Z = "Z"
 }
 
 
 export class CircuitTermination extends SpeakeasyBase {
-  @Metadata({ data: "json, name=circuit" })
+  @SpeakeasyMetadata({ data: "json, name=circuit" })
   circuit: NestedCircuit;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=interface" })
+  @SpeakeasyMetadata({ data: "json, name=interface" })
   interface?: NestedInterface;
 
-  @Metadata({ data: "json, name=port_speed" })
+  @SpeakeasyMetadata({ data: "json, name=port_speed" })
   portSpeed: number;
 
-  @Metadata({ data: "json, name=pp_info" })
+  @SpeakeasyMetadata({ data: "json, name=pp_info" })
   ppInfo?: string;
 
-  @Metadata({ data: "json, name=site" })
+  @SpeakeasyMetadata({ data: "json, name=site" })
   site: NestedSite;
 
-  @Metadata({ data: "json, name=term_side" })
+  @SpeakeasyMetadata({ data: "json, name=term_side" })
   termSide: CircuitTerminationTerminationEnum;
 
-  @Metadata({ data: "json, name=upstream_speed" })
+  @SpeakeasyMetadata({ data: "json, name=upstream_speed" })
   upstreamSpeed?: number;
 
-  @Metadata({ data: "json, name=xconnect_id" })
+  @SpeakeasyMetadata({ data: "json, name=xconnect_id" })
   xconnectId?: string;
 }

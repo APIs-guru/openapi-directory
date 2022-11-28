@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class GetRecordsFormatPathParams extends SpeakeasyBase {
     format: shared.FormatEnum;
@@ -93,10 +93,6 @@ export declare class GetRecordsFormatQueryParams extends SpeakeasyBase {
     text?: string;
     withoutFilterField?: string;
 }
-export declare class GetRecordsFormatRequest extends SpeakeasyBase {
-    pathParams: GetRecordsFormatPathParams;
-    queryParams: GetRecordsFormatQueryParams;
-}
 export declare class GetRecordsFormat200ApplicationJson extends SpeakeasyBase {
     facets?: Map<string, Map<string, number>>;
     page?: number;
@@ -104,6 +100,10 @@ export declare class GetRecordsFormat200ApplicationJson extends SpeakeasyBase {
     records?: shared.Record[];
     requestUrl?: string;
     resultCount?: number;
+}
+export declare class GetRecordsFormatRequest extends SpeakeasyBase {
+    pathParams: GetRecordsFormatPathParams;
+    queryParams: GetRecordsFormatQueryParams;
 }
 export declare class GetRecordsFormatResponse extends SpeakeasyBase {
     body?: Uint8Array;

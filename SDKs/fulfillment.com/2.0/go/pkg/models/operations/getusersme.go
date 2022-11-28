@@ -9,10 +9,6 @@ type GetUsersMeSecurity struct {
 	FdcAuth shared.SchemeFdcAuth `security:"scheme,type=oauth2"`
 }
 
-type GetUsersMeRequest struct {
-	Security GetUsersMeSecurity
-}
-
 type GetUsersMeUserContactV2UserContactV2Merchant struct {
 	ID *int64 `json:"id,omitempty"`
 }
@@ -47,6 +43,10 @@ type GetUsersMeUserContactV2 struct {
 	UpdatedAt   *time.Time                            `json:"updatedAt,omitempty"`
 	UpdatedBy   *time.Time                            `json:"updatedBy,omitempty"`
 	Username    *string                               `json:"username,omitempty"`
+}
+
+type GetUsersMeRequest struct {
+	Security GetUsersMeSecurity
 }
 
 type GetUsersMeResponse struct {

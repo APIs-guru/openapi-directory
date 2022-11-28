@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ComplianceStatusEnum } from "./compliancestatusenum";
 import { StatusReason } from "./statusreason";
+
 
 
 // Compliance
@@ -9,12 +9,12 @@ import { StatusReason } from "./statusreason";
  * Contains finding details that are specific to control-based findings. Only returned for findings generated from controls.
 **/
 export class Compliance extends SpeakeasyBase {
-  @Metadata({ data: "json, name=RelatedRequirements" })
+  @SpeakeasyMetadata({ data: "json, name=RelatedRequirements" })
   relatedRequirements?: string[];
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: ComplianceStatusEnum;
 
-  @Metadata({ data: "json, name=StatusReasons", elemType: shared.StatusReason })
+  @SpeakeasyMetadata({ data: "json, name=StatusReasons", elemType: StatusReason })
   statusReasons?: StatusReason[];
 }

@@ -23,11 +23,9 @@ const (
 	TagRequestColorEnumLightWarmGray TagRequestColorEnum = "light-warm-gray"
 )
 
-type TagRequest struct {
-	Color        *TagRequestColorEnum `json:"color,omitempty"`
-	Followers    []string             `json:"followers,omitempty"`
-	Gid          *string              `json:"gid,omitempty"`
-	Name         *string              `json:"name,omitempty"`
-	ResourceType *string              `json:"resource_type,omitempty"`
-	Workspace    *string              `json:"workspace,omitempty"`
+type TagRequestInput struct {
+	Color     *TagRequestColorEnum `json:"color,omitempty"`
+	Followers []string             `json:"followers,omitempty"`
+	Name      *string              `json:"name,omitempty"`
+	Workspace *string              `json:"workspace,omitempty"`
 }

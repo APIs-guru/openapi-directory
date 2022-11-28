@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var ShaCertificateCertTypeEnum;
 (function (ShaCertificateCertTypeEnum) {
     ShaCertificateCertTypeEnum["ShaCertificateTypeUnspecified"] = "SHA_CERTIFICATE_TYPE_UNSPECIFIED";
@@ -39,15 +39,15 @@ var ShaCertificate = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=certType" }),
+        SpeakeasyMetadata({ data: "json, name=certType" }),
         __metadata("design:type", String)
     ], ShaCertificate.prototype, "certType", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], ShaCertificate.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=shaHash" }),
+        SpeakeasyMetadata({ data: "json, name=shaHash" }),
         __metadata("design:type", String)
     ], ShaCertificate.prototype, "shaHash", void 0);
     return ShaCertificate;

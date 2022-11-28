@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RealtimeEndpointStatusEnum } from "./realtimeendpointstatusenum";
+
 
 
 // RealtimeEndpointInfo
@@ -7,15 +8,15 @@ import { RealtimeEndpointStatusEnum } from "./realtimeendpointstatusenum";
  *  Describes the real-time endpoint information for an <code>MLModel</code>.
 **/
 export class RealtimeEndpointInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=EndpointStatus" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointStatus" })
   endpointStatus?: RealtimeEndpointStatusEnum;
 
-  @Metadata({ data: "json, name=EndpointUrl" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointUrl" })
   endpointUrl?: string;
 
-  @Metadata({ data: "json, name=PeakRequestsPerSecond" })
+  @SpeakeasyMetadata({ data: "json, name=PeakRequestsPerSecond" })
   peakRequestsPerSecond?: number;
 }

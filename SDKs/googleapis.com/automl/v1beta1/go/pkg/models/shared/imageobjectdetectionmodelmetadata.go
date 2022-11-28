@@ -1,5 +1,7 @@
 package shared
 
+// ImageObjectDetectionModelMetadata
+// Model metadata specific to image object detection.
 type ImageObjectDetectionModelMetadata struct {
 	ModelType                 *string  `json:"modelType,omitempty"`
 	NodeCount                 *string  `json:"nodeCount,omitempty"`

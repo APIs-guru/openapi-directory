@@ -1,5 +1,7 @@
 package shared
 
+// CreateActiveDirectoryConfigRequest
+// Request model for creating an Active Directory configuration
 type CreateActiveDirectoryConfigRequest struct {
 	AdExportGroup       *string `json:"adExportGroup,omitempty"`
 	Alias               string  `json:"alias"`

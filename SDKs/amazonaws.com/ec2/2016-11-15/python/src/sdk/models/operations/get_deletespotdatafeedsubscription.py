@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteSpotDatafeedSubscriptionActionEnum(str, Enum):
     DELETE_SPOT_DATAFEED_SUBSCRIPTION = "DeleteSpotDatafeedSubscription"
@@ -10,9 +14,9 @@ class GetDeleteSpotDatafeedSubscriptionVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteSpotDatafeedSubscriptionQueryParams:
-    action: GetDeleteSpotDatafeedSubscriptionActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDeleteSpotDatafeedSubscriptionActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDeleteSpotDatafeedSubscriptionVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    version: GetDeleteSpotDatafeedSubscriptionVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,12 +32,12 @@ class GetDeleteSpotDatafeedSubscriptionHeaders:
 
 @dataclass
 class GetDeleteSpotDatafeedSubscriptionRequest:
-    query_params: GetDeleteSpotDatafeedSubscriptionQueryParams = field(default=None)
-    headers: GetDeleteSpotDatafeedSubscriptionHeaders = field(default=None)
+    headers: GetDeleteSpotDatafeedSubscriptionHeaders = field()
+    query_params: GetDeleteSpotDatafeedSubscriptionQueryParams = field()
     
 
 @dataclass
 class GetDeleteSpotDatafeedSubscriptionResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

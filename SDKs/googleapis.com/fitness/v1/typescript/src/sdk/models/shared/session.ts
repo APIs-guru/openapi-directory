@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Application } from "./application";
+
 
 
 // Session
@@ -7,30 +8,30 @@ import { Application } from "./application";
  * Sessions contain metadata, such as a user-friendly name and time interval information.
 **/
 export class Session extends SpeakeasyBase {
-  @Metadata({ data: "json, name=activeTimeMillis" })
+  @SpeakeasyMetadata({ data: "json, name=activeTimeMillis" })
   activeTimeMillis?: string;
 
-  @Metadata({ data: "json, name=activityType" })
+  @SpeakeasyMetadata({ data: "json, name=activityType" })
   activityType?: number;
 
-  @Metadata({ data: "json, name=application" })
+  @SpeakeasyMetadata({ data: "json, name=application" })
   application?: Application;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=endTimeMillis" })
+  @SpeakeasyMetadata({ data: "json, name=endTimeMillis" })
   endTimeMillis?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=modifiedTimeMillis" })
+  @SpeakeasyMetadata({ data: "json, name=modifiedTimeMillis" })
   modifiedTimeMillis?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=startTimeMillis" })
+  @SpeakeasyMetadata({ data: "json, name=startTimeMillis" })
   startTimeMillis?: string;
 }

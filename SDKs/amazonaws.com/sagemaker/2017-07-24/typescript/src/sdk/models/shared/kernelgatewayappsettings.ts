@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CustomImage } from "./customimage";
 import { ResourceSpec } from "./resourcespec";
+
 
 
 // KernelGatewayAppSettings
@@ -9,12 +9,12 @@ import { ResourceSpec } from "./resourcespec";
  * The KernelGateway app settings.
 **/
 export class KernelGatewayAppSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CustomImages", elemType: shared.CustomImage })
+  @SpeakeasyMetadata({ data: "json, name=CustomImages", elemType: CustomImage })
   customImages?: CustomImage[];
 
-  @Metadata({ data: "json, name=DefaultResourceSpec" })
+  @SpeakeasyMetadata({ data: "json, name=DefaultResourceSpec" })
   defaultResourceSpec?: ResourceSpec;
 
-  @Metadata({ data: "json, name=LifecycleConfigArns" })
+  @SpeakeasyMetadata({ data: "json, name=LifecycleConfigArns" })
   lifecycleConfigArns?: string[];
 }

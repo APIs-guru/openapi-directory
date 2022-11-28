@@ -1,20 +1,20 @@
 from dataclasses import dataclass, field
-
+from typing import Optional
 
 
 @dataclass
 class GetInfoQueryParams:
-    site: str = field(default=None, metadata={'query_param': { 'field_name': 'site', 'style': 'form', 'explode': True }})
+    site: str = field(metadata={'query_param': { 'field_name': 'site', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class GetInfoRequest:
-    query_params: GetInfoQueryParams = field(default=None)
+    query_params: GetInfoQueryParams = field()
     
 
 @dataclass
 class GetInfoResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

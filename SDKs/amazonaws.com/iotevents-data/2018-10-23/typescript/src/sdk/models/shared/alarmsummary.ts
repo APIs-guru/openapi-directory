@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AlarmStateNameEnum } from "./alarmstatenameenum";
+
 
 
 // AlarmSummary
@@ -7,21 +8,21 @@ import { AlarmStateNameEnum } from "./alarmstatenameenum";
  * Contains a summary of an alarm.
 **/
 export class AlarmSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alarmModelName" })
+  @SpeakeasyMetadata({ data: "json, name=alarmModelName" })
   alarmModelName?: string;
 
-  @Metadata({ data: "json, name=alarmModelVersion" })
+  @SpeakeasyMetadata({ data: "json, name=alarmModelVersion" })
   alarmModelVersion?: string;
 
-  @Metadata({ data: "json, name=creationTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=keyValue" })
+  @SpeakeasyMetadata({ data: "json, name=keyValue" })
   keyValue?: string;
 
-  @Metadata({ data: "json, name=lastUpdateTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdateTime" })
   lastUpdateTime?: Date;
 
-  @Metadata({ data: "json, name=stateName" })
+  @SpeakeasyMetadata({ data: "json, name=stateName" })
   stateName?: AlarmStateNameEnum;
 }

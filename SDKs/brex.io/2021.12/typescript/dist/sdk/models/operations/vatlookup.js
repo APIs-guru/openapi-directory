@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var VatLookupPathParams = /** @class */ (function (_super) {
     __extends(VatLookupPathParams, _super);
@@ -30,7 +30,7 @@ var VatLookupPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=country" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=country" }),
         __metadata("design:type", String)
     ], VatLookupPathParams.prototype, "country", void 0);
     return VatLookupPathParams;
@@ -42,11 +42,11 @@ var VatLookupRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "form, name=address;" }),
+        SpeakeasyMetadata({ data: "form, name=address;" }),
         __metadata("design:type", String)
     ], VatLookupRequestBody.prototype, "address", void 0);
     __decorate([
-        Metadata({ data: "form, name=name;" }),
+        SpeakeasyMetadata({ data: "form, name=name;" }),
         __metadata("design:type", String)
     ], VatLookupRequestBody.prototype, "name", void 0);
     return VatLookupRequestBody;
@@ -58,7 +58,7 @@ var VatLookupSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeUserKey)
     ], VatLookupSecurity.prototype, "userKey", void 0);
     return VatLookupSecurity;
@@ -70,15 +70,15 @@ var VatLookupRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", VatLookupPathParams)
     ], VatLookupRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
         __metadata("design:type", VatLookupRequestBody)
     ], VatLookupRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", VatLookupSecurity)
     ], VatLookupRequest.prototype, "security", void 0);
     return VatLookupRequest;
@@ -90,19 +90,19 @@ var VatLookupResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], VatLookupResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], VatLookupResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], VatLookupResponse.prototype, "vatLookup200ApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], VatLookupResponse.prototype, "vatLookupDefaultApplicationJsonAny", void 0);
     return VatLookupResponse;

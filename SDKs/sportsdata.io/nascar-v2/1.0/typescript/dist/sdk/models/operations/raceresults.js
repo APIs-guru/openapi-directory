@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var RaceResultsFormatEnum;
 (function (RaceResultsFormatEnum) {
     RaceResultsFormatEnum["Xml"] = "xml";
@@ -34,11 +34,11 @@ var RaceResultsPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=format" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" }),
         __metadata("design:type", String)
     ], RaceResultsPathParams.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=raceid" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=raceid" }),
         __metadata("design:type", String)
     ], RaceResultsPathParams.prototype, "raceid", void 0);
     return RaceResultsPathParams;
@@ -50,7 +50,7 @@ var RaceResultsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", RaceResultsPathParams)
     ], RaceResultsRequest.prototype, "pathParams", void 0);
     return RaceResultsRequest;
@@ -62,15 +62,15 @@ var RaceResultsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], RaceResultsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], RaceResultsResponse.prototype, "raceResult", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], RaceResultsResponse.prototype, "statusCode", void 0);
     return RaceResultsResponse;

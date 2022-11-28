@@ -5,23 +5,23 @@ from sdk.models import shared
 
 @dataclass
 class GetAccountCredentialPathParams:
-    credential_id: str = field(default=None, metadata={'path_param': { 'field_name': 'credential_id', 'style': 'simple', 'explode': False }})
+    credential_id: str = field(metadata={'path_param': { 'field_name': 'credential_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetAccountCredentialSecurity:
-    bearer_auth: shared.SchemeBearerAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_auth: shared.SchemeBearerAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class GetAccountCredentialRequest:
-    path_params: GetAccountCredentialPathParams = field(default=None)
-    security: GetAccountCredentialSecurity = field(default=None)
+    path_params: GetAccountCredentialPathParams = field()
+    security: GetAccountCredentialSecurity = field()
     
 
 @dataclass
 class GetAccountCredentialResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     credential: Optional[shared.Credential] = field(default=None)
-    status_code: int = field(default=None)
     

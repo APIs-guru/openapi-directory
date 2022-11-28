@@ -1,52 +1,53 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ActionsReviewPendingDeploymentsForRunPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=owner" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=owner" })
   owner: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repo" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repo" })
   repo: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=run_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=run_id" })
   runId: number;
 }
 
 export enum ActionsReviewPendingDeploymentsForRunRequestBodyStateEnum {
-    Approved = "approved"
-,    Rejected = "rejected"
+    Approved = "approved",
+    Rejected = "rejected"
 }
 
 
 export class ActionsReviewPendingDeploymentsForRunRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=comment" })
+  @SpeakeasyMetadata({ data: "json, name=comment" })
   comment: string;
 
-  @Metadata({ data: "json, name=environment_ids" })
+  @SpeakeasyMetadata({ data: "json, name=environment_ids" })
   environmentIds: number[];
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state: ActionsReviewPendingDeploymentsForRunRequestBodyStateEnum;
 }
 
 
 export class ActionsReviewPendingDeploymentsForRunRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ActionsReviewPendingDeploymentsForRunPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: ActionsReviewPendingDeploymentsForRunRequestBody;
 }
 
 
 export class ActionsReviewPendingDeploymentsForRunResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.Deployment })
+  @SpeakeasyMetadata({ elemType: shared.Deployment })
   deployments?: shared.Deployment[];
 }

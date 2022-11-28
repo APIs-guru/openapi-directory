@@ -1,5 +1,7 @@
 package shared
 
+// CollectionStatusDestinationStatus
+// Destination status message.
 type CollectionStatusDestinationStatus struct {
 	ApprovedCountries    []string `json:"approvedCountries,omitempty"`
 	Destination          *string  `json:"destination,omitempty"`

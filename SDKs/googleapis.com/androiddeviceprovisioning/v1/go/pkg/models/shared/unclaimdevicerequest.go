@@ -8,6 +8,8 @@ const (
 	UnclaimDeviceRequestSectionTypeEnumSectionTypeZeroTouch   UnclaimDeviceRequestSectionTypeEnum = "SECTION_TYPE_ZERO_TOUCH"
 )
 
+// UnclaimDeviceRequest
+// Request message to unclaim a device.
 type UnclaimDeviceRequest struct {
 	DeviceID               *string                              `json:"deviceId,omitempty"`
 	DeviceIdentifier       *DeviceIdentifier                    `json:"deviceIdentifier,omitempty"`

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Environment
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Message containing environment configuration for a Lighthouse run.
 **/
 export class Environment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=benchmarkIndex" })
+  @SpeakeasyMetadata({ data: "json, name=benchmarkIndex" })
   benchmarkIndex?: number;
 
-  @Metadata({ data: "json, name=hostUserAgent" })
+  @SpeakeasyMetadata({ data: "json, name=hostUserAgent" })
   hostUserAgent?: string;
 
-  @Metadata({ data: "json, name=networkUserAgent" })
+  @SpeakeasyMetadata({ data: "json, name=networkUserAgent" })
   networkUserAgent?: string;
 }

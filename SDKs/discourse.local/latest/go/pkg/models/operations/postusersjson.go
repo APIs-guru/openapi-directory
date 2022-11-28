@@ -15,16 +15,16 @@ type PostUsersJSONRequestBody struct {
 	Username    string  `json:"username"`
 }
 
-type PostUsersJSONRequest struct {
-	Headers PostUsersJSONHeaders
-	Request *PostUsersJSONRequestBody `request:"mediaType=application/json"`
-}
-
 type PostUsersJSON200ApplicationJSON struct {
 	Active  *bool   `json:"active,omitempty"`
 	Message *string `json:"message,omitempty"`
 	Success *bool   `json:"success,omitempty"`
 	UserID  *int64  `json:"user_id,omitempty"`
+}
+
+type PostUsersJSONRequest struct {
+	Headers PostUsersJSONHeaders
+	Request *PostUsersJSONRequestBody `request:"mediaType=application/json"`
 }
 
 type PostUsersJSONResponse struct {

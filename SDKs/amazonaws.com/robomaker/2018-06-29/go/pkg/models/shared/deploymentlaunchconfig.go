@@ -1,5 +1,7 @@
 package shared
 
+// DeploymentLaunchConfig
+// Configuration information for a deployment launch.
 type DeploymentLaunchConfig struct {
 	EnvironmentVariables map[string]string `json:"environmentVariables,omitempty"`
 	LaunchFile           string            `json:"launchFile"`

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { H264CodecSettings } from "./h264codecsettings";
 import { H265CodecSettings } from "./h265codecsettings";
 import { Vp9CodecSettings } from "./vp9codecsettings";

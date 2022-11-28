@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // HttpHeader
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The HTTP header.
 **/
 export class HttpHeader extends SpeakeasyBase {
-  @Metadata({ data: "json, name=headerName" })
+  @SpeakeasyMetadata({ data: "json, name=headerName" })
   headerName?: string;
 
-  @Metadata({ data: "json, name=headerValue" })
+  @SpeakeasyMetadata({ data: "json, name=headerValue" })
   headerValue?: string;
 }

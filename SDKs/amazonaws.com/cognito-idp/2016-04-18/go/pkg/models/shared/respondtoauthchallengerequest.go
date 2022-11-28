@@ -1,5 +1,7 @@
 package shared
 
+// RespondToAuthChallengeRequest
+// The request to respond to an authentication challenge.
 type RespondToAuthChallengeRequest struct {
 	AnalyticsMetadata  *AnalyticsMetadataType `json:"AnalyticsMetadata,omitempty"`
 	ChallengeName      ChallengeNameTypeEnum  `json:"ChallengeName"`

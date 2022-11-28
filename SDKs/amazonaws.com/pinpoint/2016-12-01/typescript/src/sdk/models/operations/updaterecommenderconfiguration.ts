@@ -1,33 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateRecommenderConfigurationPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=recommender-id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=recommender-id" })
   recommenderId: string;
 }
 
 
 export class UpdateRecommenderConfigurationHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -37,81 +38,81 @@ export class UpdateRecommenderConfigurationHeaders extends SpeakeasyBase {
  * Specifies Amazon Pinpoint configuration settings for retrieving and processing recommendation data from a recommender model.
 **/
 export class UpdateRecommenderConfigurationRequestBodyUpdateRecommenderConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Attributes" })
+  @SpeakeasyMetadata({ data: "json, name=Attributes" })
   attributes?: Map<string, string>;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=RecommendationProviderIdType" })
+  @SpeakeasyMetadata({ data: "json, name=RecommendationProviderIdType" })
   recommendationProviderIdType?: string;
 
-  @Metadata({ data: "json, name=RecommendationProviderRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=RecommendationProviderRoleArn" })
   recommendationProviderRoleArn?: string;
 
-  @Metadata({ data: "json, name=RecommendationProviderUri" })
+  @SpeakeasyMetadata({ data: "json, name=RecommendationProviderUri" })
   recommendationProviderUri?: string;
 
-  @Metadata({ data: "json, name=RecommendationTransformerUri" })
+  @SpeakeasyMetadata({ data: "json, name=RecommendationTransformerUri" })
   recommendationTransformerUri?: string;
 
-  @Metadata({ data: "json, name=RecommendationsDisplayName" })
+  @SpeakeasyMetadata({ data: "json, name=RecommendationsDisplayName" })
   recommendationsDisplayName?: string;
 
-  @Metadata({ data: "json, name=RecommendationsPerMessage" })
+  @SpeakeasyMetadata({ data: "json, name=RecommendationsPerMessage" })
   recommendationsPerMessage?: number;
 }
 
 
 export class UpdateRecommenderConfigurationRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=UpdateRecommenderConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=UpdateRecommenderConfiguration" })
   updateRecommenderConfiguration: UpdateRecommenderConfigurationRequestBodyUpdateRecommenderConfiguration;
 }
 
 
 export class UpdateRecommenderConfigurationRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateRecommenderConfigurationPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdateRecommenderConfigurationHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdateRecommenderConfigurationRequestBody;
 }
 
 
 export class UpdateRecommenderConfigurationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   badRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   forbiddenException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerErrorException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   methodNotAllowedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   notFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   payloadTooLargeException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tooManyRequestsException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateRecommenderConfigurationResponse?: shared.UpdateRecommenderConfigurationResponse;
 }

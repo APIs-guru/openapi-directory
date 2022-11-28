@@ -1,43 +1,44 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SavePostLocationRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, name=latitude" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=latitude" })
   latitude: number;
 
-  @Metadata({ data: "multipart_form, name=longitude" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=longitude" })
   longitude: number;
 
-  @Metadata({ data: "multipart_form, name=name" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=name" })
   name: string;
 }
 
 
-export class SavePostLocationRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=multipart/form-data" })
-  request: SavePostLocationRequestBody;
-}
-
-
 export class SavePostLocation200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=latitude" })
+  @SpeakeasyMetadata({ data: "json, name=latitude" })
   latitude?: number;
 
-  @Metadata({ data: "json, name=longitude" })
+  @SpeakeasyMetadata({ data: "json, name=longitude" })
   longitude?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
 
 
+export class SavePostLocationRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" })
+  request: SavePostLocationRequestBody;
+}
+
+
 export class SavePostLocationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: operations.SavePostLocation200ApplicationJson })
+  @SpeakeasyMetadata({ elemType: SavePostLocation200ApplicationJson })
   savePostLocation200ApplicationJsonObjects?: SavePostLocation200ApplicationJson[];
 }

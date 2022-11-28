@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class StatusConditionCanonicalCodeEnum(str, Enum):
     OK = "OK"
@@ -34,7 +36,11 @@ class StatusConditionCodeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class StatusCondition:
-    canonical_code: Optional[StatusConditionCanonicalCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'canonicalCode' }})
-    code: Optional[StatusConditionCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
-    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
+    r"""StatusCondition
+    StatusCondition describes why a cluster or a node pool has a certain status (e.g., ERROR or DEGRADED).
+    """
+    
+    canonical_code: Optional[StatusConditionCanonicalCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('canonicalCode') }})
+    code: Optional[StatusConditionCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('code') }})
+    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('message') }})
     

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RegisterParameters } from "./registerparameters";
+
 
 
 // RetrieveRegisterParametersResponse
@@ -7,6 +8,6 @@ import { RegisterParameters } from "./registerparameters";
  * Response for the `RetrieveRegisterParameters` method.
 **/
 export class RetrieveRegisterParametersResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=registerParameters" })
+  @SpeakeasyMetadata({ data: "json, name=registerParameters" })
   registerParameters?: RegisterParameters;
 }

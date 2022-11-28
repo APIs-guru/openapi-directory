@@ -1,0 +1,6 @@
+export declare enum DiskSnapshotStateEnum {
+    Pending = "pending",
+    Completed = "completed",
+    Error = "error",
+    Unknown = "unknown"
+}

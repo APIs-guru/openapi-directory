@@ -1,6 +1,7 @@
 
 
+
 export enum HomeDirectoryTypeEnum {
-    Path = "PATH"
-,    Logical = "LOGICAL"
+    Path = "PATH",
+    Logical = "LOGICAL"
 }

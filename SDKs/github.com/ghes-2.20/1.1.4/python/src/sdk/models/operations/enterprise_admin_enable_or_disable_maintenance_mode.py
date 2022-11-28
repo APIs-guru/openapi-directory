@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass_json
 @dataclass
 class EnterpriseAdminEnableOrDisableMaintenanceModeRequestBody:
-    maintenance: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maintenance' }})
+    maintenance: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('maintenance') }})
     
 
 @dataclass
@@ -17,7 +18,7 @@ class EnterpriseAdminEnableOrDisableMaintenanceModeRequest:
 
 @dataclass
 class EnterpriseAdminEnableOrDisableMaintenanceModeResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     maintenance_status: Optional[shared.MaintenanceStatus] = field(default=None)
     

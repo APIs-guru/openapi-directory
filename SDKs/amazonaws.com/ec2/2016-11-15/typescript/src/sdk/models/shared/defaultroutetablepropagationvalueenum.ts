@@ -1,6 +1,7 @@
 
 
+
 export enum DefaultRouteTablePropagationValueEnum {
-    Enable = "enable"
-,    Disable = "disable"
+    Enable = "enable",
+    Disable = "disable"
 }

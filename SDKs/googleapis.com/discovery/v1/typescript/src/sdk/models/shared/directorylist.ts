@@ -1,5 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DirectoryListItemsIcons
@@ -7,60 +7,60 @@ import * as shared from "../shared";
  * Links to 16x16 and 32x32 icons representing the API.
 **/
 export class DirectoryListItemsIcons extends SpeakeasyBase {
-  @Metadata({ data: "json, name=x16" })
+  @SpeakeasyMetadata({ data: "json, name=x16" })
   x16?: string;
 
-  @Metadata({ data: "json, name=x32" })
+  @SpeakeasyMetadata({ data: "json, name=x32" })
   x32?: string;
 }
 
 
 export class DirectoryListItems extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=discoveryLink" })
+  @SpeakeasyMetadata({ data: "json, name=discoveryLink" })
   discoveryLink?: string;
 
-  @Metadata({ data: "json, name=discoveryRestUrl" })
+  @SpeakeasyMetadata({ data: "json, name=discoveryRestUrl" })
   discoveryRestUrl?: string;
 
-  @Metadata({ data: "json, name=documentationLink" })
+  @SpeakeasyMetadata({ data: "json, name=documentationLink" })
   documentationLink?: string;
 
-  @Metadata({ data: "json, name=icons" })
+  @SpeakeasyMetadata({ data: "json, name=icons" })
   icons?: DirectoryListItemsIcons;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: string[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=preferred" })
+  @SpeakeasyMetadata({ data: "json, name=preferred" })
   preferred?: boolean;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 }
 
 
 export class DirectoryList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=discoveryVersion" })
+  @SpeakeasyMetadata({ data: "json, name=discoveryVersion" })
   discoveryVersion?: string;
 
-  @Metadata({ data: "json, name=items", elemType: shared.DirectoryListItems })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: DirectoryListItems })
   items?: DirectoryListItems[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 }

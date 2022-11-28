@@ -4,16 +4,16 @@ from dataclasses import dataclass, field
 
 @dataclass
 class GetVariablesPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetVariablesRequest:
-    path_params: GetVariablesPathParams = field(default=None)
+    path_params: GetVariablesPathParams = field()
     
 
 @dataclass
 class GetVariablesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

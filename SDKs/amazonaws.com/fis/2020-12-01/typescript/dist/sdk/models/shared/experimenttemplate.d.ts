@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ExperimentTemplateAction } from "./experimenttemplateaction";
 import { ExperimentTemplateStopCondition } from "./experimenttemplatestopcondition";
 import { ExperimentTemplateTarget } from "./experimenttemplatetarget";

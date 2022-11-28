@@ -1,5 +1,7 @@
 package shared
 
+// CreateNodePoolRequest
+// CreateNodePoolRequest creates a node pool for a cluster.
 type CreateNodePoolRequest struct {
 	ClusterID *string   `json:"clusterId,omitempty"`
 	NodePool  *NodePool `json:"nodePool,omitempty"`

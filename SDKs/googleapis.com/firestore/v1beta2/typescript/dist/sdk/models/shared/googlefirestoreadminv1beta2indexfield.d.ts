@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum GoogleFirestoreAdminV1beta2IndexFieldArrayConfigEnum {
     ArrayConfigUnspecified = "ARRAY_CONFIG_UNSPECIFIED",
     Contains = "CONTAINS"

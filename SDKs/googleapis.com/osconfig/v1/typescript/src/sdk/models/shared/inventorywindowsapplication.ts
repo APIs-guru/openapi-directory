@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Date } from "./date";
+
 
 
 // InventoryWindowsApplication
@@ -7,18 +8,18 @@ import { Date } from "./date";
  * Contains information about a Windows application that is retrieved from the Windows Registry. For more information about these fields, see: https://docs.microsoft.com/en-us/windows/win32/msi/uninstall-registry-key
 **/
 export class InventoryWindowsApplication extends SpeakeasyBase {
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=displayVersion" })
+  @SpeakeasyMetadata({ data: "json, name=displayVersion" })
   displayVersion?: string;
 
-  @Metadata({ data: "json, name=helpLink" })
+  @SpeakeasyMetadata({ data: "json, name=helpLink" })
   helpLink?: string;
 
-  @Metadata({ data: "json, name=installDate" })
+  @SpeakeasyMetadata({ data: "json, name=installDate" })
   installDate?: Date;
 
-  @Metadata({ data: "json, name=publisher" })
+  @SpeakeasyMetadata({ data: "json, name=publisher" })
   publisher?: string;
 }

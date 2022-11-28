@@ -34,6 +34,8 @@ type CommunityProfileFiles struct {
 	Readme              CommunityProfileFilesCommunityHealthFile `json:"readme"`
 }
 
+// CommunityProfile
+// Community Profile
 type CommunityProfile struct {
 	ContentReportsEnabled *bool                 `json:"content_reports_enabled,omitempty"`
 	Description           string                `json:"description"`

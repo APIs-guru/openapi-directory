@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostQueryQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=1_property" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=1_property" })
   oneProperty: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=1_property.value" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=1_property.value" })
   onePropertyValue: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=p.limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=p.limit" })
   pLimit: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=path" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=path" })
   path: string;
 }
 
 
 export class PostQueryRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PostQueryQueryParams;
 }
 
 
 export class PostQueryResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postQueryDefaultApplicationJsonString?: string;
 }

@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PullRequestEventTypeEnum } from "./pullrequesteventtypeenum";
 
 
+
 export class DescribePullRequestEventsInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actorArn" })
+  @SpeakeasyMetadata({ data: "json, name=actorArn" })
   actorArn?: string;
 
-  @Metadata({ data: "json, name=maxResults" })
+  @SpeakeasyMetadata({ data: "json, name=maxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=pullRequestEventType" })
+  @SpeakeasyMetadata({ data: "json, name=pullRequestEventType" })
   pullRequestEventType?: PullRequestEventTypeEnum;
 
-  @Metadata({ data: "json, name=pullRequestId" })
+  @SpeakeasyMetadata({ data: "json, name=pullRequestId" })
   pullRequestId: string;
 }

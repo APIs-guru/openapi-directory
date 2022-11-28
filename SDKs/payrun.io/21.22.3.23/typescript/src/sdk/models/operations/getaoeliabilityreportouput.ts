@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetAoeLiabilityReportOuputQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=EmployerKey" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=EmployerKey" })
   employerKey: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=PayScheduleKey" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=PayScheduleKey" })
   payScheduleKey: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=TaxPeriod" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=TaxPeriod" })
   taxPeriod?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=TaxYear" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=TaxYear" })
   taxYear: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=TransformDefinitionKey" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=TransformDefinitionKey" })
   transformDefinitionKey?: string;
 }
 
 
 export class GetAoeLiabilityReportOuputHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Api-Version" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Version" })
   apiVersion: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=Authorization" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" })
   authorization: string;
 }
 
 
 export class GetAoeLiabilityReportOuputRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetAoeLiabilityReportOuputQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetAoeLiabilityReportOuputHeaders;
 }
 
 
 export class GetAoeLiabilityReportOuputResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorModel?: shared.ErrorModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getAoeLiabilityReportOuput200ApplicationJsonBinaryString?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

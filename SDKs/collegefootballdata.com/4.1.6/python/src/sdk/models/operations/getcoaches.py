@@ -15,12 +15,12 @@ class GetCoachesQueryParams:
 
 @dataclass
 class GetCoachesRequest:
-    query_params: GetCoachesQueryParams = field(default=None)
+    query_params: GetCoachesQueryParams = field()
     
 
 @dataclass
 class GetCoachesResponse:
+    content_type: str = field()
+    status_code: int = field()
     coaches: Optional[List[shared.Coach]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

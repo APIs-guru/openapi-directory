@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ShipmentCancellation
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * This type defines a shipment cancellation by the date and time the cancellation request was made and the current status of the request.
 **/
 export class ShipmentCancellation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cancellationRequestedDate" })
+  @SpeakeasyMetadata({ data: "json, name=cancellationRequestedDate" })
   cancellationRequestedDate?: string;
 
-  @Metadata({ data: "json, name=cancellationStatus" })
+  @SpeakeasyMetadata({ data: "json, name=cancellationStatus" })
   cancellationStatus?: string;
 }

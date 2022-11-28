@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ReposListDeploymentsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=owner" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=owner" })
   owner: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repo" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repo" })
   repo: string;
 }
 
 
 export class ReposListDeploymentsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=environment" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=environment" })
   environment?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ref" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ref" })
   ref?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sha" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sha" })
   sha?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=task" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=task" })
   task?: string;
 }
 
 
 export class ReposListDeploymentsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ReposListDeploymentsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ReposListDeploymentsQueryParams;
 }
 
 
 export class ReposListDeploymentsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.Deployment })
+  @SpeakeasyMetadata({ elemType: shared.Deployment })
   deployments?: shared.Deployment[];
 }

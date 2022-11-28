@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProtectionGroupLimits } from "./protectiongrouplimits";
 import { ProtectionLimits } from "./protectionlimits";
+
 
 
 // SubscriptionLimits
@@ -8,9 +9,9 @@ import { ProtectionLimits } from "./protectionlimits";
  * Limits settings for your subscription. 
 **/
 export class SubscriptionLimits extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ProtectionGroupLimits" })
+  @SpeakeasyMetadata({ data: "json, name=ProtectionGroupLimits" })
   protectionGroupLimits: ProtectionGroupLimits;
 
-  @Metadata({ data: "json, name=ProtectionLimits" })
+  @SpeakeasyMetadata({ data: "json, name=ProtectionLimits" })
   protectionLimits: ProtectionLimits;
 }

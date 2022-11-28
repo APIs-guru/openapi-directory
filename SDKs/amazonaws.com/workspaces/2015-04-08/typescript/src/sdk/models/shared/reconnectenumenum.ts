@@ -1,6 +1,7 @@
 
 
+
 export enum ReconnectEnumEnum {
-    Enabled = "ENABLED"
-,    Disabled = "DISABLED"
+    Enabled = "ENABLED",
+    Disabled = "DISABLED"
 }

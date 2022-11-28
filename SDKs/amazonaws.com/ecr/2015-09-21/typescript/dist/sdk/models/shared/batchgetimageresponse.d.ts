@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ImageFailure } from "./imagefailure";
 import { Image } from "./image";
 export declare class BatchGetImageResponse extends SpeakeasyBase {

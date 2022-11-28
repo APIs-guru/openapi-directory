@@ -1,5 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CveCheckPackages
@@ -7,21 +7,21 @@ import * as shared from "../shared";
  * Packages affected by this CVE
 **/
 export class CveCheckPackages extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 }
 
 
 export class CveCheck extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cveId" })
+  @SpeakeasyMetadata({ data: "json, name=cveId" })
   cveId?: string;
 
-  @Metadata({ data: "json, name=nodes" })
+  @SpeakeasyMetadata({ data: "json, name=nodes" })
   nodes?: string[];
 
-  @Metadata({ data: "json, name=packages", elemType: shared.CveCheckPackages })
+  @SpeakeasyMetadata({ data: "json, name=packages", elemType: CveCheckPackages })
   packages?: CveCheckPackages[];
 }

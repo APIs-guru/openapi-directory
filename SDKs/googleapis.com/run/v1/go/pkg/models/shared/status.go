@@ -1,5 +1,7 @@
 package shared
 
+// Status
+// Status is a return value for calls that don't return other objects.
 type Status struct {
 	Code     *int32         `json:"code,omitempty"`
 	Details  *StatusDetails `json:"details,omitempty"`

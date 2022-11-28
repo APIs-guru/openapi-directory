@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// RemediationExecutionStep
+// Name of the step from the SSM document.
 type RemediationExecutionStep struct {
 	ErrorMessage *string                            `json:"ErrorMessage,omitempty"`
 	Name         *string                            `json:"Name,omitempty"`

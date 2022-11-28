@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -11,14 +12,14 @@ class RegisterQueryParams:
 
 @dataclass
 class RegisterRequest:
-    query_params: RegisterQueryParams = field(default=None)
-    request: shared.RegistrationRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    query_params: RegisterQueryParams = field()
+    request: shared.RegistrationRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class RegisterResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_tokens: Optional[List[shared.AccessToken]] = field(default=None)
-    content_type: str = field(default=None)
     service_error: Optional[shared.ServiceError] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudVideointelligenceV1p3beta1ExplicitContentDetectionConfig } from "./googlecloudvideointelligencev1p3beta1explicitcontentdetectionconfig";
 import { GoogleCloudVideointelligenceV1p3beta1FaceDetectionConfig } from "./googlecloudvideointelligencev1p3beta1facedetectionconfig";
 import { GoogleCloudVideointelligenceV1p3beta1LabelDetectionConfig } from "./googlecloudvideointelligencev1p3beta1labeldetectionconfig";

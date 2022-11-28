@@ -1,23 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ArchivedWebLinkContractCategoryEnum {
-    Official = "Official"
-,    Commercial = "Commercial"
-,    Reference = "Reference"
-,    Other = "Other"
+    Official = "Official",
+    Commercial = "Commercial",
+    Reference = "Reference",
+    Other = "Other"
 }
 
 
 export class ArchivedWebLinkContract extends SpeakeasyBase {
-  @Metadata({ data: "json, name=category" })
+  @SpeakeasyMetadata({ data: "json, name=category" })
   category?: ArchivedWebLinkContractCategoryEnum;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=disabled" })
+  @SpeakeasyMetadata({ data: "json, name=disabled" })
   disabled?: boolean;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }

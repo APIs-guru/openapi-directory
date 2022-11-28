@@ -12,6 +12,8 @@ const (
 	MobileFriendlyIssueRuleEnumTapTargetsTooClose            MobileFriendlyIssueRuleEnum = "TAP_TARGETS_TOO_CLOSE"
 )
 
+// MobileFriendlyIssue
+// Mobile-friendly issue.
 type MobileFriendlyIssue struct {
 	Rule *MobileFriendlyIssueRuleEnum `json:"rule,omitempty"`
 }

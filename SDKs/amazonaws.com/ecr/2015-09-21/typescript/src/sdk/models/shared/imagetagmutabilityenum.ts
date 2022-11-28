@@ -1,6 +1,7 @@
 
 
+
 export enum ImageTagMutabilityEnum {
-    Mutable = "MUTABLE"
-,    Immutable = "IMMUTABLE"
+    Mutable = "MUTABLE",
+    Immutable = "IMMUTABLE"
 }

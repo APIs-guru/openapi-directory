@@ -1,16 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SamplingTargetDocument } from "./samplingtargetdocument";
 import { UnprocessedStatistics } from "./unprocessedstatistics";
 
 
+
 export class GetSamplingTargetsResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LastRuleModification" })
+  @SpeakeasyMetadata({ data: "json, name=LastRuleModification" })
   lastRuleModification?: Date;
 
-  @Metadata({ data: "json, name=SamplingTargetDocuments", elemType: shared.SamplingTargetDocument })
+  @SpeakeasyMetadata({ data: "json, name=SamplingTargetDocuments", elemType: SamplingTargetDocument })
   samplingTargetDocuments?: SamplingTargetDocument[];
 
-  @Metadata({ data: "json, name=UnprocessedStatistics", elemType: shared.UnprocessedStatistics })
+  @SpeakeasyMetadata({ data: "json, name=UnprocessedStatistics", elemType: UnprocessedStatistics })
   unprocessedStatistics?: UnprocessedStatistics[];
 }

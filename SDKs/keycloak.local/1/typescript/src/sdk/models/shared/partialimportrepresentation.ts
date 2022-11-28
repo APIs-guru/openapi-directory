@@ -1,37 +1,37 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ClientRepresentation } from "./clientrepresentation";
 import { GroupRepresentation } from "./grouprepresentation";
 import { IdentityProviderRepresentation } from "./identityproviderrepresentation";
 import { RolesRepresentation } from "./rolesrepresentation";
 import { UserRepresentation } from "./userrepresentation";
 
+
 export enum PartialImportRepresentationPolicyEnum {
-    Skip = "SKIP"
-,    Overwrite = "OVERWRITE"
-,    Fail = "FAIL"
+    Skip = "SKIP",
+    Overwrite = "OVERWRITE",
+    Fail = "FAIL"
 }
 
 
 export class PartialImportRepresentation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clients", elemType: shared.ClientRepresentation })
+  @SpeakeasyMetadata({ data: "json, name=clients", elemType: ClientRepresentation })
   clients?: ClientRepresentation[];
 
-  @Metadata({ data: "json, name=groups", elemType: shared.GroupRepresentation })
+  @SpeakeasyMetadata({ data: "json, name=groups", elemType: GroupRepresentation })
   groups?: GroupRepresentation[];
 
-  @Metadata({ data: "json, name=identityProviders", elemType: shared.IdentityProviderRepresentation })
+  @SpeakeasyMetadata({ data: "json, name=identityProviders", elemType: IdentityProviderRepresentation })
   identityProviders?: IdentityProviderRepresentation[];
 
-  @Metadata({ data: "json, name=ifResourceExists" })
+  @SpeakeasyMetadata({ data: "json, name=ifResourceExists" })
   ifResourceExists?: string;
 
-  @Metadata({ data: "json, name=policy" })
+  @SpeakeasyMetadata({ data: "json, name=policy" })
   policy?: PartialImportRepresentationPolicyEnum;
 
-  @Metadata({ data: "json, name=roles" })
+  @SpeakeasyMetadata({ data: "json, name=roles" })
   roles?: RolesRepresentation;
 
-  @Metadata({ data: "json, name=users", elemType: shared.UserRepresentation })
+  @SpeakeasyMetadata({ data: "json, name=users", elemType: UserRepresentation })
   users?: UserRepresentation[];
 }

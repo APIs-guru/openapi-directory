@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { MlModelTypeEnum } from "./mlmodeltypeenum";
 export declare class CreateMlModelInput extends SpeakeasyBase {
     mlModelId: string;

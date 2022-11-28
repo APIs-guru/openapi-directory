@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ResourceProperties
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The properties associated with the resource of the request.
 **/
 export class ResourceProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=excludesDescendants" })
+  @SpeakeasyMetadata({ data: "json, name=excludesDescendants" })
   excludesDescendants?: boolean;
 }

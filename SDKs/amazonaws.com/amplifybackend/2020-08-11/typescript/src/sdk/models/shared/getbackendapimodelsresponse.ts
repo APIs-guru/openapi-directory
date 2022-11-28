@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StatusEnum } from "./statusenum";
 
 
+
 export class GetBackendApiModelsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Models" })
+  @SpeakeasyMetadata({ data: "json, name=Models" })
   models?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: StatusEnum;
 }

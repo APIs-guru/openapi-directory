@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 
 class GameStatsBySeasonDeprecatedUseTeamGameStatsInsteadFormatEnum(str, Enum):
     XML = "XML"
@@ -8,18 +9,18 @@ class GameStatsBySeasonDeprecatedUseTeamGameStatsInsteadFormatEnum(str, Enum):
 
 @dataclass
 class GameStatsBySeasonDeprecatedUseTeamGameStatsInsteadPathParams:
-    format: GameStatsBySeasonDeprecatedUseTeamGameStatsInsteadFormatEnum = field(default=None, metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
-    season: str = field(default=None, metadata={'path_param': { 'field_name': 'season', 'style': 'simple', 'explode': False }})
+    format: GameStatsBySeasonDeprecatedUseTeamGameStatsInsteadFormatEnum = field(metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
+    season: str = field(metadata={'path_param': { 'field_name': 'season', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GameStatsBySeasonDeprecatedUseTeamGameStatsInsteadRequest:
-    path_params: GameStatsBySeasonDeprecatedUseTeamGameStatsInsteadPathParams = field(default=None)
+    path_params: GameStatsBySeasonDeprecatedUseTeamGameStatsInsteadPathParams = field()
     
 
 @dataclass
 class GameStatsBySeasonDeprecatedUseTeamGameStatsInsteadResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     games: Optional[List[Any]] = field(default=None)
-    status_code: int = field(default=None)
     

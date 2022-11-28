@@ -1,14 +1,15 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class PostGroupsGroupIDUsersPathParams:
-    group_id: int = field(default=None, metadata={'path_param': { 'field_name': 'group_id', 'style': 'simple', 'explode': False }})
+    group_id: int = field(metadata={'path_param': { 'field_name': 'group_id', 'style': 'simple', 'explode': False }})
     
 class PostGroupsGroupIDUsersRequestBodyAuthenticationMethodEnum(str, Enum):
     PASSWORD = "password"
@@ -20,8 +21,8 @@ class PostGroupsGroupIDUsersRequestBodyAuthenticationMethodEnum(str, Enum):
 
 @dataclass
 class PostGroupsGroupIDUsersRequestBodyAvatarFile:
-    avatar_file: str = field(default=None, metadata={'multipart_form': { 'field_name': 'avatar_file' }})
-    content: bytes = field(default=None, metadata={'multipart_form': { 'content': True }})
+    avatar_file: str = field(metadata={'multipart_form': { 'field_name': 'avatar_file' }})
+    content: bytes = field(metadata={'multipart_form': { 'content': True }})
     
 class PostGroupsGroupIDUsersRequestBodyRequire2faEnum(str, Enum):
     USE_SYSTEM_SETTING = "use_system_setting"
@@ -82,13 +83,13 @@ class PostGroupsGroupIDUsersRequestBody:
 
 @dataclass
 class PostGroupsGroupIDUsersRequest:
-    path_params: PostGroupsGroupIDUsersPathParams = field(default=None)
+    path_params: PostGroupsGroupIDUsersPathParams = field()
     request: Optional[PostGroupsGroupIDUsersRequestBody] = field(default=None, metadata={'request': { 'media_type': 'multipart/form-data' }})
     
 
 @dataclass
 class PostGroupsGroupIDUsersResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     user_entity: Optional[shared.UserEntity] = field(default=None)
     

@@ -16,6 +16,8 @@ const (
 	ListResponseErrorCodeEnumErrorCodeFetchBudgetExhausted        ListResponseErrorCodeEnum = "ERROR_CODE_FETCH_BUDGET_EXHAUSTED"
 )
 
+// ListResponse
+// Response message for the List call.
 type ListResponse struct {
 	DebugString *string                     `json:"debugString,omitempty"`
 	ErrorCode   []ListResponseErrorCodeEnum `json:"errorCode,omitempty"`

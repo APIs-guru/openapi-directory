@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsCodeBuildProjectEnvironmentRegistryCredential
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The credentials for access to a private registry.
 **/
 export class AwsCodeBuildProjectEnvironmentRegistryCredential extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Credential" })
+  @SpeakeasyMetadata({ data: "json, name=Credential" })
   credential?: string;
 
-  @Metadata({ data: "json, name=CredentialProvider" })
+  @SpeakeasyMetadata({ data: "json, name=CredentialProvider" })
   credentialProvider?: string;
 }

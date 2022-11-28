@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PolicyTypeValuesEnum } from "./policytypevaluesenum";
 import { GettablePolicyStateValuesEnum } from "./gettablepolicystatevaluesenum";
+
 
 
 // LifecyclePolicySummary
@@ -8,18 +9,18 @@ import { GettablePolicyStateValuesEnum } from "./gettablepolicystatevaluesenum";
  * Summary information about a lifecycle policy.
 **/
 export class LifecyclePolicySummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=PolicyId" })
+  @SpeakeasyMetadata({ data: "json, name=PolicyId" })
   policyId?: string;
 
-  @Metadata({ data: "json, name=PolicyType" })
+  @SpeakeasyMetadata({ data: "json, name=PolicyType" })
   policyType?: PolicyTypeValuesEnum;
 
-  @Metadata({ data: "json, name=State" })
+  @SpeakeasyMetadata({ data: "json, name=State" })
   state?: GettablePolicyStateValuesEnum;
 
-  @Metadata({ data: "json, name=Tags" })
+  @SpeakeasyMetadata({ data: "json, name=Tags" })
   tags?: Map<string, string>;
 }

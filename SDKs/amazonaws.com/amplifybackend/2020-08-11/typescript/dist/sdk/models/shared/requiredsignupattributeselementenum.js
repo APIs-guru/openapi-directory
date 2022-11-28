@@ -1,0 +1,20 @@
+export var RequiredSignUpAttributesElementEnum;
+(function (RequiredSignUpAttributesElementEnum) {
+    RequiredSignUpAttributesElementEnum["Address"] = "ADDRESS";
+    RequiredSignUpAttributesElementEnum["Birthdate"] = "BIRTHDATE";
+    RequiredSignUpAttributesElementEnum["Email"] = "EMAIL";
+    RequiredSignUpAttributesElementEnum["FamilyName"] = "FAMILY_NAME";
+    RequiredSignUpAttributesElementEnum["Gender"] = "GENDER";
+    RequiredSignUpAttributesElementEnum["GivenName"] = "GIVEN_NAME";
+    RequiredSignUpAttributesElementEnum["Locale"] = "LOCALE";
+    RequiredSignUpAttributesElementEnum["MiddleName"] = "MIDDLE_NAME";
+    RequiredSignUpAttributesElementEnum["Name"] = "NAME";
+    RequiredSignUpAttributesElementEnum["Nickname"] = "NICKNAME";
+    RequiredSignUpAttributesElementEnum["PhoneNumber"] = "PHONE_NUMBER";
+    RequiredSignUpAttributesElementEnum["Picture"] = "PICTURE";
+    RequiredSignUpAttributesElementEnum["PreferredUsername"] = "PREFERRED_USERNAME";
+    RequiredSignUpAttributesElementEnum["Profile"] = "PROFILE";
+    RequiredSignUpAttributesElementEnum["UpdatedAt"] = "UPDATED_AT";
+    RequiredSignUpAttributesElementEnum["Website"] = "WEBSITE";
+    RequiredSignUpAttributesElementEnum["ZoneInfo"] = "ZONE_INFO";
+})(RequiredSignUpAttributesElementEnum || (RequiredSignUpAttributesElementEnum = {}));

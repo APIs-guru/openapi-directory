@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeviceUnderTest } from "./deviceundertest";
+
 
 
 // SuiteDefinitionInformation
@@ -8,18 +8,18 @@ import { DeviceUnderTest } from "./deviceundertest";
  * Information about the suite definition.
 **/
 export class SuiteDefinitionInformation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=defaultDevices", elemType: shared.DeviceUnderTest })
+  @SpeakeasyMetadata({ data: "json, name=defaultDevices", elemType: DeviceUnderTest })
   defaultDevices?: DeviceUnderTest[];
 
-  @Metadata({ data: "json, name=intendedForQualification" })
+  @SpeakeasyMetadata({ data: "json, name=intendedForQualification" })
   intendedForQualification?: boolean;
 
-  @Metadata({ data: "json, name=suiteDefinitionId" })
+  @SpeakeasyMetadata({ data: "json, name=suiteDefinitionId" })
   suiteDefinitionId?: string;
 
-  @Metadata({ data: "json, name=suiteDefinitionName" })
+  @SpeakeasyMetadata({ data: "json, name=suiteDefinitionName" })
   suiteDefinitionName?: string;
 }

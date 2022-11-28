@@ -1,5 +1,7 @@
 package shared
 
+// ContainerOverrides
+// The overrides that should be sent to a container.
 type ContainerOverrides struct {
 	Command              []string              `json:"command,omitempty"`
 	Environment          []KeyValuePair        `json:"environment,omitempty"`

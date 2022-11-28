@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AuthenticationExecutionExportRepresentation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authenticator" })
+  @SpeakeasyMetadata({ data: "json, name=authenticator" })
   authenticator?: string;
 
-  @Metadata({ data: "json, name=authenticatorConfig" })
+  @SpeakeasyMetadata({ data: "json, name=authenticatorConfig" })
   authenticatorConfig?: string;
 
-  @Metadata({ data: "json, name=authenticatorFlow" })
+  @SpeakeasyMetadata({ data: "json, name=authenticatorFlow" })
   authenticatorFlow?: boolean;
 
-  @Metadata({ data: "json, name=autheticatorFlow" })
+  @SpeakeasyMetadata({ data: "json, name=autheticatorFlow" })
   autheticatorFlow?: boolean;
 
-  @Metadata({ data: "json, name=flowAlias" })
+  @SpeakeasyMetadata({ data: "json, name=flowAlias" })
   flowAlias?: string;
 
-  @Metadata({ data: "json, name=priority" })
+  @SpeakeasyMetadata({ data: "json, name=priority" })
   priority?: number;
 
-  @Metadata({ data: "json, name=requirement" })
+  @SpeakeasyMetadata({ data: "json, name=requirement" })
   requirement?: string;
 
-  @Metadata({ data: "json, name=userSetupAllowed" })
+  @SpeakeasyMetadata({ data: "json, name=userSetupAllowed" })
   userSetupAllowed?: boolean;
 }

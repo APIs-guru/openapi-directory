@@ -31,6 +31,8 @@ const (
 	CommandTypeEnumClearAppData           CommandTypeEnum = "CLEAR_APP_DATA"
 )
 
+// Command
+// A command.
 type Command struct {
 	ClearAppsDataParams *ClearAppsDataParams            `json:"clearAppsDataParams,omitempty"`
 	ClearAppsDataStatus *ClearAppsDataStatus            `json:"clearAppsDataStatus,omitempty"`

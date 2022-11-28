@@ -1,8 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import forecastperformancedatarequest
-from . import planninglevelinforequest
+from sdk import utils
+from . import *
 
 class ForecastPerformanceRequestMethodEnum(str, Enum):
     AUTO_BEST_PICK = "AutoBestPick"
@@ -27,11 +31,11 @@ class ForecastPerformanceRequestMethodEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ForecastPerformanceRequest:
-    cost_of_error: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'costOfError' }})
-    data: Optional[List[forecastperformancedatarequest.ForecastPerformanceDataRequest]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
-    method: ForecastPerformanceRequestMethodEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'method' }})
-    params: Optional[planninglevelinforequest.PlanningLevelInfoRequest] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'params' }})
-    planning_level_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'planningLevelId' }})
-    rewind_time_frame: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rewindTimeFrame' }})
-    start_date: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'startDate' }})
+    method: ForecastPerformanceRequestMethodEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('method') }})
+    planning_level_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('planningLevelId') }})
+    rewind_time_frame: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('rewindTimeFrame') }})
+    start_date: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('startDate') }})
+    cost_of_error: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('costOfError') }})
+    data: Optional[List[ForecastPerformanceDataRequest]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
+    params: Optional[PlanningLevelInfoRequest] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('params') }})
     

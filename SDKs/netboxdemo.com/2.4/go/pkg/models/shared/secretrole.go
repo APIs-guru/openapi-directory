@@ -5,3 +5,8 @@ type SecretRole struct {
 	Name string `json:"name"`
 	Slug string `json:"slug"`
 }
+
+type SecretRoleInput struct {
+	Name string `json:"name"`
+	Slug string `json:"slug"`
+}

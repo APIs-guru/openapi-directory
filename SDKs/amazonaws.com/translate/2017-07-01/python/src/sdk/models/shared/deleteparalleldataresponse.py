@@ -1,12 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import paralleldatastatus_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DeleteParallelDataResponse:
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
-    status: Optional[paralleldatastatus_enum.ParallelDataStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Status' }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
+    status: Optional[ParallelDataStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Status') }})
     

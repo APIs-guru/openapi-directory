@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 from typing import Optional
+from sdk.models import shared
 
 
 @dataclass
@@ -9,18 +10,18 @@ class ExportServicesCsvQueryParams:
 
 @dataclass
 class ExportServicesCsvSecurity:
-    bearer_auth: shared.SchemeBearerAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_auth: shared.SchemeBearerAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class ExportServicesCsvRequest:
-    query_params: ExportServicesCsvQueryParams = field(default=None)
-    security: ExportServicesCsvSecurity = field(default=None)
+    query_params: ExportServicesCsvQueryParams = field()
+    security: ExportServicesCsvSecurity = field()
     
 
 @dataclass
 class ExportServicesCsvResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     export_services_csv_200_text_csv_binary_string: Optional[bytes] = field(default=None)
     

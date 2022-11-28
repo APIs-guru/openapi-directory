@@ -9,6 +9,8 @@ const (
 	FieldMetadataActionEnumDoNotTransform      FieldMetadataActionEnum = "DO_NOT_TRANSFORM"
 )
 
+// FieldMetadata
+// Specifies FHIR paths to match, and how to handle de-identification of matching fields.
 type FieldMetadata struct {
 	Action *FieldMetadataActionEnum `json:"action,omitempty"`
 	Paths  []string                 `json:"paths,omitempty"`

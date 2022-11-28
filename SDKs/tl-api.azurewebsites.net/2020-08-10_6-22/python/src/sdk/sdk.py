@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import List,Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -12,37 +15,63 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
-    
-    def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
+            self._server_url = server_url
 
+        
+    
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        
+    
+
+    def config_security(self, security: shared.Security):
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        
+    
+    
     
     def article_add_measure_unit(self, request: operations.ArticleAddMeasureUnitRequest) -> operations.ArticleAddMeasureUnitResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add measure unit
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/Article/MeasureUnit"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -61,15 +90,18 @@ class SDK:
 
     
     def article_delete(self, request: operations.ArticleDeleteRequest) -> operations.ArticleDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete article from the system
+                    
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/Article"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -92,15 +124,14 @@ class SDK:
 
     
     def article_get_addons(self, request: operations.ArticleGetAddonsRequest) -> operations.ArticleGetAddonsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/Article/GetAddons"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -123,15 +154,17 @@ class SDK:
 
     
     def article_get_measure_units(self, request: operations.ArticleGetMeasureUnitsRequest) -> operations.ArticleGetMeasureUnitsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get mesure units
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/Article/MeasureUnits"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -150,13 +183,16 @@ class SDK:
 
     
     def article_get_revenue_accounts(self) -> operations.ArticleGetRevenueAccountsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Revenue Accounts 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/Article/RevenueAccounts"
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -175,13 +211,17 @@ class SDK:
 
     
     def article_gym_article_details(self, request: operations.ArticleGymArticleDetailsRequest) -> operations.ArticleGymArticleDetailsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Gym specific properties for article
+                    
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/Article/GymArticle/{articleId}/{gymId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -204,22 +244,23 @@ class SDK:
 
     
     def article_post(self, request: operations.ArticlePostRequest) -> operations.ArticlePostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add new article
+                    
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/Article"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -238,22 +279,23 @@ class SDK:
 
     
     def article_put(self, request: operations.ArticlePutRequest) -> operations.ArticlePutResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""update existing article
+                    
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/Article"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -272,15 +314,19 @@ class SDK:
 
     
     def article_search(self, request: operations.ArticleSearchRequest) -> operations.ArticleSearchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Search articles
+        It will only return basic information of article
+                    
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/Article/Search"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -303,22 +349,23 @@ class SDK:
 
     
     def article_update_article_gym_details(self, request: operations.ArticleUpdateArticleGymDetailsRequest) -> operations.ArticleUpdateArticleGymDetailsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add article details that associate with a Gym
+                    
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/Article/ArticleGymDetails"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -337,15 +384,17 @@ class SDK:
 
     
     def article_update_status(self, request: operations.ArticleUpdateStatusRequest) -> operations.ArticleUpdateStatusResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deactivate existing article 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/Article/UpdateStatus"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -368,13 +417,18 @@ class SDK:
 
     
     def article_get(self, request: operations.ArticleGetRequest) -> operations.ArticleGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get article details
+        This will return all properties related to article entity
+                    
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/Article/{articleID}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -393,22 +447,23 @@ class SDK:
 
     
     def auth_login(self, request: operations.AuthLoginRequest) -> operations.AuthLoginResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Authenticate and provide token for autherizations.
+                    
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/Auth/login"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -422,13 +477,18 @@ class SDK:
 
     
     def gym_get(self, request: operations.GymGetRequest) -> operations.GymGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get gym details
+        This will return all properties related to gym entity
+                    
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/Gym/{gymID}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -447,13 +507,18 @@ class SDK:
 
     
     def membership_get(self, request: operations.MembershipGetRequest) -> operations.MembershipGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get all of the members details
+        This will return all properties related to member entity
+                    
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/Membership"
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -472,22 +537,23 @@ class SDK:
 
     
     def membership_post(self, request: operations.MembershipPostRequest) -> operations.MembershipPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add new Member
+                    
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/Membership"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -506,15 +572,18 @@ class SDK:
 
     
     def package_delete(self, request: operations.PackageDeleteRequest) -> operations.PackageDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete existing package
+                    
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/Package"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -541,15 +610,18 @@ class SDK:
 
     
     def package_get(self, request: operations.PackageGetRequest) -> operations.PackageGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get package details by packageId
+                    
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/Package"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -572,22 +644,23 @@ class SDK:
 
     
     def package_post(self, request: operations.PackagePostRequest) -> operations.PackagePostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Insert new package into the system
+                    
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/Package"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -606,22 +679,23 @@ class SDK:
 
     
     def package_put(self, request: operations.PackagePutRequest) -> operations.PackagePutResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update existing package by its ID
+                    
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/Package"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -640,15 +714,18 @@ class SDK:
 
     
     def package_search(self, request: operations.PackageSearchRequest) -> operations.PackageSearchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Search packages
+                    
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/Package/Search"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -671,15 +748,17 @@ class SDK:
 
     
     def package_update_status(self, request: operations.PackageUpdateStatusRequest) -> operations.PackageUpdateStatusResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Status update of existing package 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/Package/UpdateStatus"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -706,15 +785,17 @@ class SDK:
 
     
     def status_get(self, request: operations.StatusGetRequest) -> operations.StatusGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get the current status of message
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/Status"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -733,13 +814,17 @@ class SDK:
 
     
     def test_get(self) -> operations.TestGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get the all Test objects.
+                    
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/Test"
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -754,13 +839,18 @@ class SDK:
 
     
     def user_get(self) -> operations.UserGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get all Users detail
+        This will return all properties related to User entity
+                    
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/User"
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -775,15 +865,18 @@ class SDK:
 
     
     def user_register_user(self, request: operations.UserRegisterUserRequest) -> operations.UserRegisterUserResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Register a new User
+                    
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/User/registerUser"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -798,15 +891,18 @@ class SDK:
 
     
     def user_update_user(self, request: operations.UserUpdateUserRequest) -> operations.UserUpdateUserResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update an exsisting User
+                    
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/User/updateuser"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 

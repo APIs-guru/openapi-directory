@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum StartOnDemandReplicationRunXAmzTargetEnum {
     AwsServerMigrationServiceV20161024StartOnDemandReplicationRun = "AWSServerMigrationService_V2016_10_24.StartOnDemandReplicationRun"

@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import apnschannelresponse
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetApnsChannelResponse:
-    apns_channel_response: apnschannelresponse.ApnsChannelResponse = field(default=None, metadata={'dataclasses_json': { 'field_name': 'APNSChannelResponse' }})
+    apns_channel_response: ApnsChannelResponse = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('APNSChannelResponse') }})
     

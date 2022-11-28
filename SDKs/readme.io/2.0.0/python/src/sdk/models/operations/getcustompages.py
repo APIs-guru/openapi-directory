@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
+from sdk.models import shared
 
 
 @dataclass
@@ -10,18 +11,18 @@ class GetCustomPagesQueryParams:
 
 @dataclass
 class GetCustomPagesSecurity:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    api_key: shared.SchemeAPIKey = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
     
 
 @dataclass
 class GetCustomPagesRequest:
-    query_params: GetCustomPagesQueryParams = field(default=None)
-    security: GetCustomPagesSecurity = field(default=None)
+    query_params: GetCustomPagesQueryParams = field()
+    security: GetCustomPagesSecurity = field()
     
 
 @dataclass
 class GetCustomPagesResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     

@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var SubscriptionsApiDeleteSubscription2PathParams = /** @class */ (function (_super) {
     __extends(SubscriptionsApiDeleteSubscription2PathParams, _super);
     function SubscriptionsApiDeleteSubscription2PathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=serial" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=serial" }),
         __metadata("design:type", String)
     ], SubscriptionsApiDeleteSubscription2PathParams.prototype, "serial", void 0);
     return SubscriptionsApiDeleteSubscription2PathParams;
@@ -41,7 +41,7 @@ var SubscriptionsApiDeleteSubscription2QueryParams = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=keep" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=keep" }),
         __metadata("design:type", Boolean)
     ], SubscriptionsApiDeleteSubscription2QueryParams.prototype, "keep", void 0);
     return SubscriptionsApiDeleteSubscription2QueryParams;
@@ -53,7 +53,7 @@ var SubscriptionsApiDeleteSubscription2Headers = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Api-Key" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Api-Key" }),
         __metadata("design:type", String)
     ], SubscriptionsApiDeleteSubscription2Headers.prototype, "xApiKey", void 0);
     return SubscriptionsApiDeleteSubscription2Headers;
@@ -65,15 +65,15 @@ var SubscriptionsApiDeleteSubscription2Request = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SubscriptionsApiDeleteSubscription2PathParams)
     ], SubscriptionsApiDeleteSubscription2Request.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SubscriptionsApiDeleteSubscription2QueryParams)
     ], SubscriptionsApiDeleteSubscription2Request.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SubscriptionsApiDeleteSubscription2Headers)
     ], SubscriptionsApiDeleteSubscription2Request.prototype, "headers", void 0);
     return SubscriptionsApiDeleteSubscription2Request;
@@ -85,11 +85,11 @@ var SubscriptionsApiDeleteSubscription2Response = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], SubscriptionsApiDeleteSubscription2Response.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], SubscriptionsApiDeleteSubscription2Response.prototype, "statusCode", void 0);
     return SubscriptionsApiDeleteSubscription2Response;

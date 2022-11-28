@@ -1,4 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
+
+
+// AdvertiserGeneralConfigInput
+/** 
+ * General settings of an advertiser.
+**/
+export class AdvertiserGeneralConfigInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=currencyCode" })
+  currencyCode?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=domainUrl" })
+  domainUrl?: string;
+}
 
 
 // AdvertiserGeneralConfig
@@ -6,12 +20,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * General settings of an advertiser.
 **/
 export class AdvertiserGeneralConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=currencyCode" })
+  @SpeakeasyMetadata({ data: "json, name=currencyCode" })
   currencyCode?: string;
 
-  @Metadata({ data: "json, name=domainUrl" })
+  @SpeakeasyMetadata({ data: "json, name=domainUrl" })
   domainUrl?: string;
 
-  @Metadata({ data: "json, name=timeZone" })
+  @SpeakeasyMetadata({ data: "json, name=timeZone" })
   timeZone?: string;
 }

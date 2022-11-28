@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DeleteWordListPathParams = /** @class */ (function (_super) {
     __extends(DeleteWordListPathParams, _super);
     function DeleteWordListPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=permalink" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=permalink" }),
         __metadata("design:type", String)
     ], DeleteWordListPathParams.prototype, "permalink", void 0);
     return DeleteWordListPathParams;
@@ -41,7 +41,7 @@ var DeleteWordListHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=auth_token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=auth_token" }),
         __metadata("design:type", String)
     ], DeleteWordListHeaders.prototype, "authToken", void 0);
     return DeleteWordListHeaders;
@@ -53,11 +53,11 @@ var DeleteWordListRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteWordListPathParams)
     ], DeleteWordListRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteWordListHeaders)
     ], DeleteWordListRequest.prototype, "headers", void 0);
     return DeleteWordListRequest;
@@ -69,15 +69,15 @@ var DeleteWordListResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], DeleteWordListResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DeleteWordListResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DeleteWordListResponse.prototype, "statusCode", void 0);
     return DeleteWordListResponse;

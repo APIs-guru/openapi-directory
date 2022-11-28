@@ -1,34 +1,33 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import googleappsdrivelabelsv2fieldselectionoptionschoiceappliedcapabilities
-from . import googleappsdrivelabelsv2userinfo
-from . import googleappsdrivelabelsv2userinfo
-from . import googleappsdrivelabelsv2fieldselectionoptionschoicedisplayhints
-from . import googleappsdrivelabelsv2lifecycle
-from . import googleappsdrivelabelsv2lockstatus
-from . import googleappsdrivelabelsv2fieldselectionoptionschoiceproperties
-from . import googleappsdrivelabelsv2userinfo
-from . import googleappsdrivelabelsv2fieldselectionoptionschoiceschemacapabilities
-from . import googleappsdrivelabelsv2userinfo
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleAppsDriveLabelsV2FieldSelectionOptionsChoice:
-    applied_capabilities: Optional[googleappsdrivelabelsv2fieldselectionoptionschoiceappliedcapabilities.GoogleAppsDriveLabelsV2FieldSelectionOptionsChoiceAppliedCapabilities] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'appliedCapabilities' }})
-    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createTime' }})
-    creator: Optional[googleappsdrivelabelsv2userinfo.GoogleAppsDriveLabelsV2UserInfo] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'creator' }})
-    disable_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'disableTime' }})
-    disabler: Optional[googleappsdrivelabelsv2userinfo.GoogleAppsDriveLabelsV2UserInfo] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'disabler' }})
-    display_hints: Optional[googleappsdrivelabelsv2fieldselectionoptionschoicedisplayhints.GoogleAppsDriveLabelsV2FieldSelectionOptionsChoiceDisplayHints] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayHints' }})
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    lifecycle: Optional[googleappsdrivelabelsv2lifecycle.GoogleAppsDriveLabelsV2Lifecycle] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lifecycle' }})
-    lock_status: Optional[googleappsdrivelabelsv2lockstatus.GoogleAppsDriveLabelsV2LockStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lockStatus' }})
-    properties: Optional[googleappsdrivelabelsv2fieldselectionoptionschoiceproperties.GoogleAppsDriveLabelsV2FieldSelectionOptionsChoiceProperties] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'properties' }})
-    publish_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'publishTime' }})
-    publisher: Optional[googleappsdrivelabelsv2userinfo.GoogleAppsDriveLabelsV2UserInfo] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'publisher' }})
-    schema_capabilities: Optional[googleappsdrivelabelsv2fieldselectionoptionschoiceschemacapabilities.GoogleAppsDriveLabelsV2FieldSelectionOptionsChoiceSchemaCapabilities] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'schemaCapabilities' }})
-    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updateTime' }})
-    updater: Optional[googleappsdrivelabelsv2userinfo.GoogleAppsDriveLabelsV2UserInfo] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updater' }})
+    r"""GoogleAppsDriveLabelsV2FieldSelectionOptionsChoice
+    Selection field choice.
+    """
+    
+    applied_capabilities: Optional[GoogleAppsDriveLabelsV2FieldSelectionOptionsChoiceAppliedCapabilities] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('appliedCapabilities') }})
+    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createTime') }})
+    creator: Optional[GoogleAppsDriveLabelsV2UserInfo] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('creator') }})
+    disable_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('disableTime') }})
+    disabler: Optional[GoogleAppsDriveLabelsV2UserInfo] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('disabler') }})
+    display_hints: Optional[GoogleAppsDriveLabelsV2FieldSelectionOptionsChoiceDisplayHints] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayHints') }})
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    lifecycle: Optional[GoogleAppsDriveLabelsV2Lifecycle] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lifecycle') }})
+    lock_status: Optional[GoogleAppsDriveLabelsV2LockStatus] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lockStatus') }})
+    properties: Optional[GoogleAppsDriveLabelsV2FieldSelectionOptionsChoiceProperties] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('properties') }})
+    publish_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('publishTime') }})
+    publisher: Optional[GoogleAppsDriveLabelsV2UserInfo] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('publisher') }})
+    schema_capabilities: Optional[GoogleAppsDriveLabelsV2FieldSelectionOptionsChoiceSchemaCapabilities] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('schemaCapabilities') }})
+    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('updateTime') }})
+    updater: Optional[GoogleAppsDriveLabelsV2UserInfo] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('updater') }})
     

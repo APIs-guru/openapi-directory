@@ -1,42 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PropertyValue } from "./propertyvalue";
 
 
+
 export class MarketingEventPublicDefaultResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt: Date;
 
-  @Metadata({ data: "json, name=customProperties", elemType: shared.PropertyValue })
+  @SpeakeasyMetadata({ data: "json, name=customProperties", elemType: PropertyValue })
   customProperties?: PropertyValue[];
 
-  @Metadata({ data: "json, name=endDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=endDateTime" })
   endDateTime?: Date;
 
-  @Metadata({ data: "json, name=eventCancelled" })
+  @SpeakeasyMetadata({ data: "json, name=eventCancelled" })
   eventCancelled?: boolean;
 
-  @Metadata({ data: "json, name=eventDescription" })
+  @SpeakeasyMetadata({ data: "json, name=eventDescription" })
   eventDescription?: string;
 
-  @Metadata({ data: "json, name=eventName" })
+  @SpeakeasyMetadata({ data: "json, name=eventName" })
   eventName: string;
 
-  @Metadata({ data: "json, name=eventOrganizer" })
+  @SpeakeasyMetadata({ data: "json, name=eventOrganizer" })
   eventOrganizer: string;
 
-  @Metadata({ data: "json, name=eventType" })
+  @SpeakeasyMetadata({ data: "json, name=eventType" })
   eventType?: string;
 
-  @Metadata({ data: "json, name=eventUrl" })
+  @SpeakeasyMetadata({ data: "json, name=eventUrl" })
   eventUrl?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=startDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=startDateTime" })
   startDateTime?: Date;
 
-  @Metadata({ data: "json, name=updatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=updatedAt" })
   updatedAt: Date;
 }

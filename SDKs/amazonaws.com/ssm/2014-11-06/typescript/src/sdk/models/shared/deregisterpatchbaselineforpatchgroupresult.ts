@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeregisterPatchBaselineForPatchGroupResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BaselineId" })
+  @SpeakeasyMetadata({ data: "json, name=BaselineId" })
   baselineId?: string;
 
-  @Metadata({ data: "json, name=PatchGroup" })
+  @SpeakeasyMetadata({ data: "json, name=PatchGroup" })
   patchGroup?: string;
 }

@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { BitbucketServerRepositoryId } from "./bitbucketserverrepositoryid";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { BitbucketServerRepositoryIdInput } from "./bitbucketserverrepositoryid";
 
 
-// RemoveBitbucketServerConnectedRepositoryRequest
+
+// RemoveBitbucketServerConnectedRepositoryRequestInput
 /** 
  * RPC request object accepted by RemoveBitbucketServerConnectedRepository RPC method.
 **/
-export class RemoveBitbucketServerConnectedRepositoryRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=connectedRepository" })
-  connectedRepository?: BitbucketServerRepositoryId;
+export class RemoveBitbucketServerConnectedRepositoryRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=connectedRepository" })
+  connectedRepository?: BitbucketServerRepositoryIdInput;
 }

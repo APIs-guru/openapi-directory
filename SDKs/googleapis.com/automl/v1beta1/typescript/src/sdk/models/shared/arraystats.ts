@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataStats } from "./datastats";
+
 
 
 // ArrayStats
@@ -7,6 +8,6 @@ import { DataStats } from "./datastats";
  * The data statistics of a series of ARRAY values.
 **/
 export class ArrayStats extends SpeakeasyBase {
-  @Metadata({ data: "json, name=memberStats" })
+  @SpeakeasyMetadata({ data: "json, name=memberStats" })
   memberStats?: DataStats;
 }

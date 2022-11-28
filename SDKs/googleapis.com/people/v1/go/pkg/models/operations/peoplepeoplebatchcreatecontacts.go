@@ -25,7 +25,7 @@ type PeoplePeopleBatchCreateContactsSecurity struct {
 
 type PeoplePeopleBatchCreateContactsRequest struct {
 	QueryParams PeoplePeopleBatchCreateContactsQueryParams
-	Request     *shared.BatchCreateContactsRequest `request:"mediaType=application/json"`
+	Request     *shared.BatchCreateContactsRequestInput `request:"mediaType=application/json"`
 	Security    PeoplePeopleBatchCreateContactsSecurity
 }
 

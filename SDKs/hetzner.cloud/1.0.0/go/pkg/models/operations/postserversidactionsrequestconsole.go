@@ -4,10 +4,8 @@ type PostServersIDActionsRequestConsolePathParams struct {
 	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type PostServersIDActionsRequestConsoleRequest struct {
-	PathParams PostServersIDActionsRequestConsolePathParams
-}
-
+// PostServersIDActionsRequestConsole201ApplicationJSONActionError
+// Error message for the Action if error occurred, otherwise null
 type PostServersIDActionsRequestConsole201ApplicationJSONActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -41,6 +39,10 @@ type PostServersIDActionsRequestConsole201ApplicationJSON struct {
 	Action   PostServersIDActionsRequestConsole201ApplicationJSONAction `json:"action"`
 	Password string                                                     `json:"password"`
 	WssURL   string                                                     `json:"wss_url"`
+}
+
+type PostServersIDActionsRequestConsoleRequest struct {
+	PathParams PostServersIDActionsRequestConsolePathParams
 }
 
 type PostServersIDActionsRequestConsoleResponse struct {

@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 
 
 @dataclass
 class GetDeviceEnergyUsagePathParams:
-    device_id: int = field(default=None, metadata={'path_param': { 'field_name': 'deviceId', 'style': 'simple', 'explode': False }})
+    device_id: int = field(metadata={'path_param': { 'field_name': 'deviceId', 'style': 'simple', 'explode': False }})
     
 class GetDeviceEnergyUsageBasisEnum(str, Enum):
     MONTHLY = "MONTHLY"
@@ -27,13 +28,13 @@ class GetDeviceEnergyUsageQueryParams:
 
 @dataclass
 class GetDeviceEnergyUsageRequest:
-    path_params: GetDeviceEnergyUsagePathParams = field(default=None)
-    query_params: GetDeviceEnergyUsageQueryParams = field(default=None)
+    path_params: GetDeviceEnergyUsagePathParams = field()
+    query_params: GetDeviceEnergyUsageQueryParams = field()
     
 
 @dataclass
 class GetDeviceEnergyUsageResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

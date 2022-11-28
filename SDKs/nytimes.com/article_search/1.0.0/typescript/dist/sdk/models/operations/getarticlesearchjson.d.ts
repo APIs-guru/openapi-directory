@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum GetArticlesearchJsonSortEnum {
     Newest = "newest",
@@ -16,9 +16,6 @@ export declare class GetArticlesearchJsonQueryParams extends SpeakeasyBase {
     q?: string;
     sort?: GetArticlesearchJsonSortEnum;
 }
-export declare class GetArticlesearchJsonRequest extends SpeakeasyBase {
-    queryParams: GetArticlesearchJsonQueryParams;
-}
 export declare class GetArticlesearchJson200ApplicationJsonResponseMeta extends SpeakeasyBase {
     hits?: number;
     offset?: number;
@@ -30,6 +27,9 @@ export declare class GetArticlesearchJson200ApplicationJsonResponse extends Spea
 }
 export declare class GetArticlesearchJson200ApplicationJson extends SpeakeasyBase {
     response?: GetArticlesearchJson200ApplicationJsonResponse;
+}
+export declare class GetArticlesearchJsonRequest extends SpeakeasyBase {
+    queryParams: GetArticlesearchJsonQueryParams;
 }
 export declare class GetArticlesearchJsonResponse extends SpeakeasyBase {
     contentType: string;

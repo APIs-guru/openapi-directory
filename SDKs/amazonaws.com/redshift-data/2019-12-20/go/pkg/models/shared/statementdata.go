@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// StatementData
+// The SQL statement to run.
 type StatementData struct {
 	CreatedAt        *time.Time        `json:"CreatedAt,omitempty"`
 	ID               string            `json:"Id"`

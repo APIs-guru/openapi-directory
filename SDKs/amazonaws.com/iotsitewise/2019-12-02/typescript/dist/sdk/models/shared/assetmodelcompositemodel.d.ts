@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * Contains information about a composite model in an asset model. This object contains the asset property definitions that you define in the composite model.
 **/

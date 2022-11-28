@@ -1,5 +1,7 @@
 package shared
 
+// ApnsSandboxChannelResponse
+// Provides information about the status and settings of the APNs (Apple Push Notification service) sandbox channel for an application.
 type ApnsSandboxChannelResponse struct {
 	ApplicationID               *string `json:"ApplicationId,omitempty"`
 	CreationDate                *string `json:"CreationDate,omitempty"`

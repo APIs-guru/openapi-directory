@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class EndpointTransferAUsersPlaybackHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Authorization" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" })
   authorization: string;
 }
 
 
 export class EndpointTransferAUsersPlaybackRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=device_ids" })
+  @SpeakeasyMetadata({ data: "json, name=device_ids" })
   deviceIds: string[];
 
-  @Metadata({ data: "json, name=play" })
+  @SpeakeasyMetadata({ data: "json, name=play" })
   play?: boolean;
 }
 
 
 export class EndpointTransferAUsersPlaybackSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   spotifyAuth: shared.SchemeSpotifyAuth;
 }
 
 
 export class EndpointTransferAUsersPlaybackRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: EndpointTransferAUsersPlaybackHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: EndpointTransferAUsersPlaybackRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: EndpointTransferAUsersPlaybackSecurity;
 }
 
 
 export class EndpointTransferAUsersPlaybackResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponseObject?: shared.ErrorResponseObject;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

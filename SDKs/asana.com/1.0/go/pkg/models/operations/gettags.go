@@ -12,12 +12,12 @@ type GetTagsQueryParams struct {
 	Workspace *string  `queryParam:"style=form,explode=true,name=workspace"`
 }
 
-type GetTagsRequest struct {
-	QueryParams GetTagsQueryParams
-}
-
 type GetTags200ApplicationJSON struct {
 	Data []shared.TagCompact `json:"data,omitempty"`
+}
+
+type GetTagsRequest struct {
+	QueryParams GetTagsQueryParams
 }
 
 type GetTagsResponse struct {

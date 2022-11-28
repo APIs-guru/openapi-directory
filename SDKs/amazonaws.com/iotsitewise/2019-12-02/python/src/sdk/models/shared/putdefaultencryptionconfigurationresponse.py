@@ -1,14 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import configurationstatus
-from . import encryptiontype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class PutDefaultEncryptionConfigurationResponse:
-    configuration_status: configurationstatus.ConfigurationStatus = field(default=None, metadata={'dataclasses_json': { 'field_name': 'configurationStatus' }})
-    encryption_type: encryptiontype_enum.EncryptionTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'encryptionType' }})
-    kms_key_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kmsKeyArn' }})
+    configuration_status: ConfigurationStatus = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('configurationStatus') }})
+    encryption_type: EncryptionTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('encryptionType') }})
+    kms_key_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kmsKeyArn') }})
     

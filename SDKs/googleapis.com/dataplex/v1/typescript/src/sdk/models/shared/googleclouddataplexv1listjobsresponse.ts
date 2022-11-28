@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDataplexV1Job } from "./googleclouddataplexv1job";
+
 
 
 // GoogleCloudDataplexV1ListJobsResponse
@@ -8,9 +8,9 @@ import { GoogleCloudDataplexV1Job } from "./googleclouddataplexv1job";
  * List jobs response.
 **/
 export class GoogleCloudDataplexV1ListJobsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=jobs", elemType: shared.GoogleCloudDataplexV1Job })
+  @SpeakeasyMetadata({ data: "json, name=jobs", elemType: GoogleCloudDataplexV1Job })
   jobs?: GoogleCloudDataplexV1Job[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

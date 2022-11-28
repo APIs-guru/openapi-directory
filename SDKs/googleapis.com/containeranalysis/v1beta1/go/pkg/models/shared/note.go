@@ -18,6 +18,8 @@ const (
 	NoteKindEnumSpdxRelationship    NoteKindEnum = "SPDX_RELATIONSHIP"
 )
 
+// Note
+// A type of analysis that can be done for a resource.
 type Note struct {
 	AttestationAuthority *Authority        `json:"attestationAuthority,omitempty"`
 	BaseImage            *Basis            `json:"baseImage,omitempty"`

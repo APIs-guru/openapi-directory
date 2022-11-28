@@ -1,15 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import size
-from . import creativeassetid
-from . import creativecustomevent
-from . import size
-from . import size
-from . import dimensionvalue
-from . import offsetposition
-from . import offsetposition
-from . import size
+from sdk import utils
+from . import *
 
 class CreativeAssetAlignmentEnum(str, Enum):
     ALIGNMENT_TOP = "ALIGNMENT_TOP"
@@ -154,54 +148,58 @@ class CreativeAssetWindowModeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CreativeAsset:
-    action_script3: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'actionScript3' }})
-    active: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'active' }})
-    additional_sizes: Optional[List[size.Size]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'additionalSizes' }})
-    alignment: Optional[CreativeAssetAlignmentEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'alignment' }})
-    artwork_type: Optional[CreativeAssetArtworkTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'artworkType' }})
-    asset_identifier: Optional[creativeassetid.CreativeAssetID] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'assetIdentifier' }})
-    audio_bit_rate: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'audioBitRate' }})
-    audio_sample_rate: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'audioSampleRate' }})
-    backup_image_exit: Optional[creativecustomevent.CreativeCustomEvent] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'backupImageExit' }})
-    bit_rate: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bitRate' }})
-    child_asset_type: Optional[CreativeAssetChildAssetTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'childAssetType' }})
-    collapsed_size: Optional[size.Size] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'collapsedSize' }})
-    companion_creative_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'companionCreativeIds' }})
-    custom_start_time_value: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'customStartTimeValue' }})
-    detected_features: Optional[List[CreativeAssetDetectedFeaturesEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'detectedFeatures' }})
-    display_type: Optional[CreativeAssetDisplayTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayType' }})
-    duration: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'duration' }})
-    duration_type: Optional[CreativeAssetDurationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'durationType' }})
-    expanded_dimension: Optional[size.Size] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expandedDimension' }})
-    file_size: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fileSize' }})
-    flash_version: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'flashVersion' }})
-    frame_rate: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'frameRate' }})
-    hide_flash_objects: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'hideFlashObjects' }})
-    hide_selection_boxes: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'hideSelectionBoxes' }})
-    horizontally_locked: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'horizontallyLocked' }})
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    id_dimension_value: Optional[dimensionvalue.DimensionValue] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'idDimensionValue' }})
-    media_duration: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mediaDuration' }})
-    mime_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mimeType' }})
-    offset: Optional[offsetposition.OffsetPosition] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'offset' }})
-    orientation: Optional[CreativeAssetOrientationEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'orientation' }})
-    original_backup: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'originalBackup' }})
-    polite_load: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'politeLoad' }})
-    position: Optional[offsetposition.OffsetPosition] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'position' }})
-    position_left_unit: Optional[CreativeAssetPositionLeftUnitEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'positionLeftUnit' }})
-    position_top_unit: Optional[CreativeAssetPositionTopUnitEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'positionTopUnit' }})
-    progressive_serving_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'progressiveServingUrl' }})
-    pushdown: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pushdown' }})
-    pushdown_duration: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pushdownDuration' }})
-    role: Optional[CreativeAssetRoleEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'role' }})
-    size: Optional[size.Size] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'size' }})
-    ssl_compliant: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sslCompliant' }})
-    start_time_type: Optional[CreativeAssetStartTimeTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'startTimeType' }})
-    streaming_serving_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'streamingServingUrl' }})
-    transparency: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'transparency' }})
-    vertically_locked: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'verticallyLocked' }})
-    window_mode: Optional[CreativeAssetWindowModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'windowMode' }})
-    z_index: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'zIndex' }})
-    zip_filename: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'zipFilename' }})
-    zip_filesize: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'zipFilesize' }})
+    r"""CreativeAsset
+    Creative Asset.
+    """
+    
+    action_script3: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('actionScript3') }})
+    active: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('active') }})
+    additional_sizes: Optional[List[Size]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('additionalSizes') }})
+    alignment: Optional[CreativeAssetAlignmentEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('alignment') }})
+    artwork_type: Optional[CreativeAssetArtworkTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('artworkType') }})
+    asset_identifier: Optional[CreativeAssetID] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('assetIdentifier') }})
+    audio_bit_rate: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('audioBitRate') }})
+    audio_sample_rate: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('audioSampleRate') }})
+    backup_image_exit: Optional[CreativeCustomEvent] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('backupImageExit') }})
+    bit_rate: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('bitRate') }})
+    child_asset_type: Optional[CreativeAssetChildAssetTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('childAssetType') }})
+    collapsed_size: Optional[Size] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('collapsedSize') }})
+    companion_creative_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('companionCreativeIds') }})
+    custom_start_time_value: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('customStartTimeValue') }})
+    detected_features: Optional[List[CreativeAssetDetectedFeaturesEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('detectedFeatures') }})
+    display_type: Optional[CreativeAssetDisplayTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayType') }})
+    duration: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('duration') }})
+    duration_type: Optional[CreativeAssetDurationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('durationType') }})
+    expanded_dimension: Optional[Size] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('expandedDimension') }})
+    file_size: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fileSize') }})
+    flash_version: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('flashVersion') }})
+    frame_rate: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('frameRate') }})
+    hide_flash_objects: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('hideFlashObjects') }})
+    hide_selection_boxes: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('hideSelectionBoxes') }})
+    horizontally_locked: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('horizontallyLocked') }})
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    id_dimension_value: Optional[DimensionValue] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('idDimensionValue') }})
+    media_duration: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mediaDuration') }})
+    mime_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mimeType') }})
+    offset: Optional[OffsetPosition] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('offset') }})
+    orientation: Optional[CreativeAssetOrientationEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('orientation') }})
+    original_backup: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('originalBackup') }})
+    polite_load: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('politeLoad') }})
+    position: Optional[OffsetPosition] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('position') }})
+    position_left_unit: Optional[CreativeAssetPositionLeftUnitEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('positionLeftUnit') }})
+    position_top_unit: Optional[CreativeAssetPositionTopUnitEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('positionTopUnit') }})
+    progressive_serving_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('progressiveServingUrl') }})
+    pushdown: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pushdown') }})
+    pushdown_duration: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pushdownDuration') }})
+    role: Optional[CreativeAssetRoleEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('role') }})
+    size: Optional[Size] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('size') }})
+    ssl_compliant: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sslCompliant') }})
+    start_time_type: Optional[CreativeAssetStartTimeTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('startTimeType') }})
+    streaming_serving_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('streamingServingUrl') }})
+    transparency: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('transparency') }})
+    vertically_locked: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('verticallyLocked') }})
+    window_mode: Optional[CreativeAssetWindowModeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('windowMode') }})
+    z_index: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('zIndex') }})
+    zip_filename: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('zipFilename') }})
+    zip_filesize: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('zipFilesize') }})
     

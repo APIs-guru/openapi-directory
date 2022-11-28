@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { XssMatchTuple } from "./xssmatchtuple";
 // XssMatchSet
 /**
  * <note> <p>This is <b>AWS WAF Classic</b> documentation. For more information, see <a href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p> <p> <b>For the latest version of AWS WAF</b>, use the AWS WAFV2 API and see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. With the latest version, AWS WAF has a single set of endpoints for regional and global use. </p> </note> <p>A complex type that contains <code>XssMatchTuple</code> objects, which specify the parts of web requests that you want AWS WAF to inspect for cross-site scripting attacks and, if you want AWS WAF to inspect a header, the name of the header. If a <code>XssMatchSet</code> contains more than one <code>XssMatchTuple</code> object, a request needs to include cross-site scripting attacks in only one of the specified parts of the request to be considered a match.</p>
@@ -34,15 +34,15 @@ var XssMatchSet = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], XssMatchSet.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=XssMatchSetId" }),
+        SpeakeasyMetadata({ data: "json, name=XssMatchSetId" }),
         __metadata("design:type", String)
     ], XssMatchSet.prototype, "xssMatchSetId", void 0);
     __decorate([
-        Metadata({ data: "json, name=XssMatchTuples", elemType: shared.XssMatchTuple }),
+        SpeakeasyMetadata({ data: "json, name=XssMatchTuples", elemType: XssMatchTuple }),
         __metadata("design:type", Array)
     ], XssMatchSet.prototype, "xssMatchTuples", void 0);
     return XssMatchSet;

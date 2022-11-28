@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AdsenseAccountsAlertsListPathParams:
-    account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
+    account_id: str = field(metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,14 +23,14 @@ class AdsenseAccountsAlertsListQueryParams:
 
 @dataclass
 class AdsenseAccountsAlertsListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AdsenseAccountsAlertsListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -40,14 +41,14 @@ class AdsenseAccountsAlertsListSecurity:
 
 @dataclass
 class AdsenseAccountsAlertsListRequest:
-    path_params: AdsenseAccountsAlertsListPathParams = field(default=None)
-    query_params: AdsenseAccountsAlertsListQueryParams = field(default=None)
-    security: AdsenseAccountsAlertsListSecurity = field(default=None)
+    path_params: AdsenseAccountsAlertsListPathParams = field()
+    query_params: AdsenseAccountsAlertsListQueryParams = field()
+    security: AdsenseAccountsAlertsListSecurity = field()
     
 
 @dataclass
 class AdsenseAccountsAlertsListResponse:
+    content_type: str = field()
+    status_code: int = field()
     alerts: Optional[shared.Alerts] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

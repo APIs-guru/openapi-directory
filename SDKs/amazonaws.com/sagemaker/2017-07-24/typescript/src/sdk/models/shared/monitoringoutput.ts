@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MonitoringS3Output } from "./monitorings3output";
+
 
 
 // MonitoringOutput
@@ -7,6 +8,6 @@ import { MonitoringS3Output } from "./monitorings3output";
  * The output object for a monitoring job.
 **/
 export class MonitoringOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=S3Output" })
+  @SpeakeasyMetadata({ data: "json, name=S3Output" })
   s3Output: MonitoringS3Output;
 }

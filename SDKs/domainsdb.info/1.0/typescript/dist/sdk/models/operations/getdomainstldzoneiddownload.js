@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetDomainsTldZoneIdDownloadPathParams = /** @class */ (function (_super) {
     __extends(GetDomainsTldZoneIdDownloadPathParams, _super);
     function GetDomainsTldZoneIdDownloadPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=zone_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=zone_id" }),
         __metadata("design:type", String)
     ], GetDomainsTldZoneIdDownloadPathParams.prototype, "zoneId", void 0);
     return GetDomainsTldZoneIdDownloadPathParams;
@@ -41,11 +41,11 @@ var GetDomainsTldZoneIdDownloadQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=api_key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_key" }),
         __metadata("design:type", String)
     ], GetDomainsTldZoneIdDownloadQueryParams.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=date" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=date" }),
         __metadata("design:type", String)
     ], GetDomainsTldZoneIdDownloadQueryParams.prototype, "date", void 0);
     return GetDomainsTldZoneIdDownloadQueryParams;
@@ -57,11 +57,11 @@ var GetDomainsTldZoneIdDownloadRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetDomainsTldZoneIdDownloadPathParams)
     ], GetDomainsTldZoneIdDownloadRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetDomainsTldZoneIdDownloadQueryParams)
     ], GetDomainsTldZoneIdDownloadRequest.prototype, "queryParams", void 0);
     return GetDomainsTldZoneIdDownloadRequest;
@@ -73,11 +73,11 @@ var GetDomainsTldZoneIdDownloadResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetDomainsTldZoneIdDownloadResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetDomainsTldZoneIdDownloadResponse.prototype, "statusCode", void 0);
     return GetDomainsTldZoneIdDownloadResponse;

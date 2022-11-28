@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var UpdateMissionProfilePathParams = /** @class */ (function (_super) {
     __extends(UpdateMissionProfilePathParams, _super);
@@ -30,7 +30,7 @@ var UpdateMissionProfilePathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=missionProfileId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=missionProfileId" }),
         __metadata("design:type", String)
     ], UpdateMissionProfilePathParams.prototype, "missionProfileId", void 0);
     return UpdateMissionProfilePathParams;
@@ -42,31 +42,31 @@ var UpdateMissionProfileHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], UpdateMissionProfileHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], UpdateMissionProfileHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], UpdateMissionProfileHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], UpdateMissionProfileHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], UpdateMissionProfileHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], UpdateMissionProfileHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], UpdateMissionProfileHeaders.prototype, "xAmzSignedHeaders", void 0);
     return UpdateMissionProfileHeaders;
@@ -78,27 +78,27 @@ var UpdateMissionProfileRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=contactPostPassDurationSeconds" }),
+        SpeakeasyMetadata({ data: "json, name=contactPostPassDurationSeconds" }),
         __metadata("design:type", Number)
     ], UpdateMissionProfileRequestBody.prototype, "contactPostPassDurationSeconds", void 0);
     __decorate([
-        Metadata({ data: "json, name=contactPrePassDurationSeconds" }),
+        SpeakeasyMetadata({ data: "json, name=contactPrePassDurationSeconds" }),
         __metadata("design:type", Number)
     ], UpdateMissionProfileRequestBody.prototype, "contactPrePassDurationSeconds", void 0);
     __decorate([
-        Metadata({ data: "json, name=dataflowEdges" }),
+        SpeakeasyMetadata({ data: "json, name=dataflowEdges" }),
         __metadata("design:type", Array)
     ], UpdateMissionProfileRequestBody.prototype, "dataflowEdges", void 0);
     __decorate([
-        Metadata({ data: "json, name=minimumViableContactDurationSeconds" }),
+        SpeakeasyMetadata({ data: "json, name=minimumViableContactDurationSeconds" }),
         __metadata("design:type", Number)
     ], UpdateMissionProfileRequestBody.prototype, "minimumViableContactDurationSeconds", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], UpdateMissionProfileRequestBody.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=trackingConfigArn" }),
+        SpeakeasyMetadata({ data: "json, name=trackingConfigArn" }),
         __metadata("design:type", String)
     ], UpdateMissionProfileRequestBody.prototype, "trackingConfigArn", void 0);
     return UpdateMissionProfileRequestBody;
@@ -110,15 +110,15 @@ var UpdateMissionProfileRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateMissionProfilePathParams)
     ], UpdateMissionProfileRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateMissionProfileHeaders)
     ], UpdateMissionProfileRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", UpdateMissionProfileRequestBody)
     ], UpdateMissionProfileRequest.prototype, "request", void 0);
     return UpdateMissionProfileRequest;
@@ -130,27 +130,27 @@ var UpdateMissionProfileResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UpdateMissionProfileResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateMissionProfileResponse.prototype, "dependencyException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateMissionProfileResponse.prototype, "invalidParameterException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.MissionProfileIdResponse)
     ], UpdateMissionProfileResponse.prototype, "missionProfileIdResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateMissionProfileResponse.prototype, "resourceNotFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UpdateMissionProfileResponse.prototype, "statusCode", void 0);
     return UpdateMissionProfileResponse;

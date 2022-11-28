@@ -1,0 +1,70 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import * as shared from "../shared";
+export declare class GetMdsQueryParams extends SpeakeasyBase {
+    apiKey?: string;
+    baseExteriorColor?: string;
+    baseInteriorColor?: string;
+    bodySubtype?: string;
+    bodyType?: string;
+    carType?: shared.CarCarTypeEnum;
+    carfax1Owner?: shared.Carfax1OwnerEnum;
+    carfaxCleanTitle?: shared.CarfaxCleanTitleEnum;
+    city?: string;
+    cityMpgRange?: string;
+    country?: shared.CountryEnum;
+    cylinders?: string;
+    dealerId?: string;
+    dealerType?: shared.DealerTypeEnum;
+    dealershipGroupName?: string;
+    debug?: boolean;
+    dom180Range?: string;
+    domActiveRange?: string;
+    domRange?: string;
+    doors?: string;
+    drivetrain?: string;
+    engine?: string;
+    engineAspiration?: string;
+    engineBlock?: string;
+    engineSize?: string;
+    exact?: boolean;
+    exteriorColor?: string;
+    financeDownPayment?: string;
+    financeDownPaymentPer?: string;
+    financeEmp?: string;
+    financeLoanApr?: string;
+    financeLoanTerm?: string;
+    fuelType?: string;
+    highwayMpgRange?: string;
+    includeSold?: boolean;
+    interiorColor?: string;
+    latitude?: number;
+    leaseDownPayment?: string;
+    leaseEmp?: string;
+    leaseTerm?: string;
+    longitude?: number;
+    make?: string;
+    milesRange?: string;
+    model?: string;
+    msaCode?: string;
+    msrpRange?: string;
+    priceRange?: string;
+    radius?: number;
+    source?: string;
+    state?: string;
+    transmission?: string;
+    trim?: string;
+    vehicleType?: string;
+    vin?: string;
+    year?: string;
+    ymmt?: string;
+    zip?: string;
+}
+export declare class GetMdsRequest extends SpeakeasyBase {
+    queryParams: GetMdsQueryParams;
+}
+export declare class GetMdsResponse extends SpeakeasyBase {
+    contentType: string;
+    error?: shared.Error;
+    mds?: shared.Mds;
+    statusCode: number;
+}

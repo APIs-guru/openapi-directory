@@ -1,5 +1,7 @@
 package shared
 
+// ScheduleRunRequest
+// Represents a request to the schedule run operation.
 type ScheduleRunRequest struct {
 	AppArn                       *string                       `json:"appArn,omitempty"`
 	Configuration                *ScheduleRunConfiguration     `json:"configuration,omitempty"`

@@ -1,8 +1,11 @@
-import warnings
+
+__doc__ = """ SDK Documentation: https://docs.aws.amazon.com/clouddirectory/ - Amazon Web Services documentation"""
 import requests
-from typing import Any,List,Optional
-from sdk.models import operations, shared
+from typing import Any,Optional
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -14,37 +17,63 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    r"""SDK Documentation: https://docs.aws.amazon.com/clouddirectory/ - Amazon Web Services documentation"""
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
-    
-    def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
+            self._server_url = server_url
 
+        
+    
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        
+    
+
+    def config_security(self, security: shared.Security):
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        
+    
+    
     
     def add_facet_to_object(self, request: operations.AddFacetToObjectRequest) -> operations.AddFacetToObjectResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Adds a new <a>Facet</a> to an object. An object can have more than one facet applied on it.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/object/facets#x-amz-data-partition"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -95,22 +124,22 @@ class SDK:
 
     
     def apply_schema(self, request: operations.ApplySchemaRequest) -> operations.ApplySchemaResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Copies the input published schema, at the specified version, into the <a>Directory</a> with the same name and version as that of the published schema.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/schema/apply#x-amz-data-partition"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -157,22 +186,22 @@ class SDK:
 
     
     def attach_object(self, request: operations.AttachObjectRequest) -> operations.AttachObjectResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Attaches an existing object to another object. An object can be accessed in two ways:</p> <ol> <li> <p>Using the path</p> </li> <li> <p>Using <code>ObjectIdentifier</code> </p> </li> </ol>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/object/attach#x-amz-data-partition"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -235,22 +264,22 @@ class SDK:
 
     
     def attach_policy(self, request: operations.AttachPolicyRequest) -> operations.AttachPolicyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Attaches a policy object to a regular object. An object can have a limited number of attached policies.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/policy/attach#x-amz-data-partition"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -301,22 +330,22 @@ class SDK:
 
     
     def attach_to_index(self, request: operations.AttachToIndexRequest) -> operations.AttachToIndexResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Attaches the specified object to the specified index.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/index/attach#x-amz-data-partition"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -379,22 +408,22 @@ class SDK:
 
     
     def attach_typed_link(self, request: operations.AttachTypedLinkRequest) -> operations.AttachTypedLinkResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Attaches a typed link to a specified source and target object. For more information, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink\">Typed link</a>.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/typedlink/attach#x-amz-data-partition"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -453,22 +482,22 @@ class SDK:
 
     
     def batch_read(self, request: operations.BatchReadRequest) -> operations.BatchReadResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Performs all the read operations in a batch. 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/batchread#x-amz-data-partition"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -511,22 +540,22 @@ class SDK:
 
     
     def batch_write(self, request: operations.BatchWriteRequest) -> operations.BatchWriteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Performs all the write operations in a batch. Either all the operations succeed or none.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/batchwrite#x-amz-data-partition"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -573,22 +602,22 @@ class SDK:
 
     
     def create_directory(self, request: operations.CreateDirectoryRequest) -> operations.CreateDirectoryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a <a>Directory</a> by copying the published schema into the directory. A directory cannot be created without a schema.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/directory/create#x-amz-data-partition"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -635,22 +664,22 @@ class SDK:
 
     
     def create_facet(self, request: operations.CreateFacetRequest) -> operations.CreateFacetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a new <a>Facet</a> in a schema. Facet creation is allowed only in development or applied schemas.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/facet/create#x-amz-data-partition"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -705,22 +734,22 @@ class SDK:
 
     
     def create_index(self, request: operations.CreateIndexRequest) -> operations.CreateIndexResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates an index object. See <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_indexing.html\">Indexing</a> for more information.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/index#x-amz-data-partition"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -779,22 +808,22 @@ class SDK:
 
     
     def create_object(self, request: operations.CreateObjectRequest) -> operations.CreateObjectResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates an object in a <a>Directory</a>. Additionally attaches the object to a parent, if a parent reference and <code>LinkName</code> is specified. An object is simply a collection of <a>Facet</a> attributes. You can also use this API call to create a policy object, if the facet from which you create the object is a policy facet. 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/object#x-amz-data-partition"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -853,22 +882,22 @@ class SDK:
 
     
     def create_schema(self, request: operations.CreateSchemaRequest) -> operations.CreateSchemaResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Creates a new schema in a development state. A schema can exist in three phases:</p> <ul> <li> <p> <i>Development:</i> This is a mutable phase of the schema. All new schemas are in the development phase. Once the schema is finalized, it can be published.</p> </li> <li> <p> <i>Published:</i> Published schemas are immutable and have a version associated with them.</p> </li> <li> <p> <i>Applied:</i> Applied schemas are mutable in a way that allows you to add new schema facets. You can also add new, nonrequired attributes to existing schema facets. You can apply only published schemas to directories. </p> </li> </ul>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/schema/create"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -915,22 +944,22 @@ class SDK:
 
     
     def create_typed_link_facet(self, request: operations.CreateTypedLinkFacetRequest) -> operations.CreateTypedLinkFacetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a <a>TypedLinkFacet</a>. For more information, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink\">Typed link</a>.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/typedlink/facet/create#x-amz-data-partition"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -985,15 +1014,17 @@ class SDK:
 
     
     def delete_directory(self, request: operations.DeleteDirectoryRequest) -> operations.DeleteDirectoryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a directory. Only disabled directories can be deleted. A deleted directory cannot be undone. Exercise extreme caution when deleting directories.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/directory#x-amz-data-partition"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1044,22 +1075,22 @@ class SDK:
 
     
     def delete_facet(self, request: operations.DeleteFacetRequest) -> operations.DeleteFacetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a given <a>Facet</a>. All attributes and <a>Rule</a>s that are associated with the facet will be deleted. Only development schema facets are allowed deletion.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/facet/delete#x-amz-data-partition"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1110,22 +1141,22 @@ class SDK:
 
     
     def delete_object(self, request: operations.DeleteObjectRequest) -> operations.DeleteObjectResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes an object and its associated attributes. Only objects with no children and no parents can be deleted.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/object/delete#x-amz-data-partition"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1176,15 +1207,17 @@ class SDK:
 
     
     def delete_schema(self, request: operations.DeleteSchemaRequest) -> operations.DeleteSchemaResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a given schema. Schemas in a development and published state can only be deleted. 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/schema#x-amz-data-partition"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1231,22 +1264,22 @@ class SDK:
 
     
     def delete_typed_link_facet(self, request: operations.DeleteTypedLinkFacetRequest) -> operations.DeleteTypedLinkFacetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a <a>TypedLinkFacet</a>. For more information, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink\">Typed link</a>.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/typedlink/facet/delete#x-amz-data-partition"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1293,22 +1326,22 @@ class SDK:
 
     
     def detach_from_index(self, request: operations.DetachFromIndexRequest) -> operations.DetachFromIndexResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Detaches the specified object from the specified index.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/index/detach#x-amz-data-partition"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1363,22 +1396,22 @@ class SDK:
 
     
     def detach_object(self, request: operations.DetachObjectRequest) -> operations.DetachObjectResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Detaches a given object from the parent object. The object that is to be detached from the parent is specified by the link name.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/object/detach#x-amz-data-partition"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1429,22 +1462,22 @@ class SDK:
 
     
     def detach_policy(self, request: operations.DetachPolicyRequest) -> operations.DetachPolicyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Detaches a policy from an object.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/policy/detach#x-amz-data-partition"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1495,22 +1528,22 @@ class SDK:
 
     
     def detach_typed_link(self, request: operations.DetachTypedLinkRequest) -> operations.DetachTypedLinkResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Detaches a typed link from a specified source and target object. For more information, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink\">Typed link</a>.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/typedlink/detach#x-amz-data-partition"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1559,15 +1592,17 @@ class SDK:
 
     
     def disable_directory(self, request: operations.DisableDirectoryRequest) -> operations.DisableDirectoryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Disables the specified directory. Disabled directories cannot be read or written to. Only enabled directories can be disabled. Disabled directories may be reenabled.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/directory/disable#x-amz-data-partition"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1614,15 +1649,17 @@ class SDK:
 
     
     def enable_directory(self, request: operations.EnableDirectoryRequest) -> operations.EnableDirectoryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Enables the specified directory. Only disabled directories can be enabled. Once enabled, the directory can then be read and written to.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/directory/enable#x-amz-data-partition"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1669,22 +1706,22 @@ class SDK:
 
     
     def get_applied_schema_version(self, request: operations.GetAppliedSchemaVersionRequest) -> operations.GetAppliedSchemaVersionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns current applied schema version ARN, including the minor version in use.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/schema/getappliedschema"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1727,15 +1764,17 @@ class SDK:
 
     
     def get_directory(self, request: operations.GetDirectoryRequest) -> operations.GetDirectoryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves metadata about a directory.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/directory/get#x-amz-data-partition"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1774,22 +1813,22 @@ class SDK:
 
     
     def get_facet(self, request: operations.GetFacetRequest) -> operations.GetFacetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets details of the <a>Facet</a>, such as facet name, attributes, <a>Rule</a>s, or <code>ObjectType</code>. You can call this on all kinds of schema facets -- published, development, or applied.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/facet#x-amz-data-partition"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1836,22 +1875,22 @@ class SDK:
 
     
     def get_link_attributes(self, request: operations.GetLinkAttributesRequest) -> operations.GetLinkAttributesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves attributes that are associated with a typed link.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/typedlink/attributes/get#x-amz-data-partition"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1902,22 +1941,22 @@ class SDK:
 
     
     def get_object_attributes(self, request: operations.GetObjectAttributesRequest) -> operations.GetObjectAttributesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves attributes within a facet that are associated with an object.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/object/attributes/get#x-amz-data-partition"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1968,22 +2007,22 @@ class SDK:
 
     
     def get_object_information(self, request: operations.GetObjectInformationRequest) -> operations.GetObjectInformationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves metadata about an object.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/object/information#x-amz-data-partition"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2030,15 +2069,17 @@ class SDK:
 
     
     def get_schema_as_json(self, request: operations.GetSchemaAsJSONRequest) -> operations.GetSchemaAsJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves a JSON representation of the schema. See <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_schemas.html#jsonformat\">JSON Schema Format</a> for more information.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/schema/json#x-amz-data-partition"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2085,22 +2126,22 @@ class SDK:
 
     
     def get_typed_link_facet_information(self, request: operations.GetTypedLinkFacetInformationRequest) -> operations.GetTypedLinkFacetInformationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns the identity attribute order for a specific <a>TypedLinkFacet</a>. For more information, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink\">Typed link</a>.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/typedlink/facet/get#x-amz-data-partition"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2151,24 +2192,23 @@ class SDK:
 
     
     def list_applied_schema_arns(self, request: operations.ListAppliedSchemaArnsRequest) -> operations.ListAppliedSchemaArnsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists schema major versions applied to a directory. If <code>SchemaArn</code> is provided, lists the minor version.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/schema/applied"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2215,24 +2255,23 @@ class SDK:
 
     
     def list_attached_indices(self, request: operations.ListAttachedIndicesRequest) -> operations.ListAttachedIndicesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists indices attached to the specified object.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/object/indices#x-amz-data-partition"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2279,24 +2318,23 @@ class SDK:
 
     
     def list_development_schema_arns(self, request: operations.ListDevelopmentSchemaArnsRequest) -> operations.ListDevelopmentSchemaArnsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves each Amazon Resource Name (ARN) of schemas in the development state.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/schema/development"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2343,24 +2381,23 @@ class SDK:
 
     
     def list_directories(self, request: operations.ListDirectoriesRequest) -> operations.ListDirectoriesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists directories created within an account.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/directory/list"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2403,24 +2440,23 @@ class SDK:
 
     
     def list_facet_attributes(self, request: operations.ListFacetAttributesRequest) -> operations.ListFacetAttributesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves attributes attached to the facet.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/facet/attributes#x-amz-data-partition"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2471,24 +2507,23 @@ class SDK:
 
     
     def list_facet_names(self, request: operations.ListFacetNamesRequest) -> operations.ListFacetNamesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves the names of facets that exist in a schema.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/facet/list#x-amz-data-partition"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2535,22 +2570,22 @@ class SDK:
 
     
     def list_incoming_typed_links(self, request: operations.ListIncomingTypedLinksRequest) -> operations.ListIncomingTypedLinksResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a paginated list of all the incoming <a>TypedLinkSpecifier</a> information for an object. It also supports filtering by typed link facet and identity attributes. For more information, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink\">Typed link</a>.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/typedlink/incoming#x-amz-data-partition"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2605,24 +2640,23 @@ class SDK:
 
     
     def list_index(self, request: operations.ListIndexRequest) -> operations.ListIndexResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists objects attached to the specified index.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/index/targets#x-amz-data-partition"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2681,24 +2715,23 @@ class SDK:
 
     
     def list_object_attributes(self, request: operations.ListObjectAttributesRequest) -> operations.ListObjectAttributesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists all attributes that are associated with an object. 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/object/attributes#x-amz-data-partition"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2753,24 +2786,23 @@ class SDK:
 
     
     def list_object_children(self, request: operations.ListObjectChildrenRequest) -> operations.ListObjectChildrenResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a paginated list of child objects that are associated with a given object.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/object/children#x-amz-data-partition"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2825,24 +2857,23 @@ class SDK:
 
     
     def list_object_parent_paths(self, request: operations.ListObjectParentPathsRequest) -> operations.ListObjectParentPathsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Retrieves all available parent paths for any object type such as node, leaf node, policy node, and index node objects. For more information about objects, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#dirstructure\">Directory Structure</a>.</p> <p>Use this API to evaluate all parents for an object. The call returns all objects from the root of the directory up to the requested object. The API returns the number of paths based on user-defined <code>MaxResults</code>, in case there are multiple paths to the parent. The order of the paths and nodes returned is consistent among multiple API calls unless the objects are deleted or moved. Paths not leading to the directory root are ignored from the target object.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/object/parentpaths#x-amz-data-partition"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2893,24 +2924,23 @@ class SDK:
 
     
     def list_object_parents(self, request: operations.ListObjectParentsRequest) -> operations.ListObjectParentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists parent objects that are associated with a given object in pagination fashion.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/object/parent#x-amz-data-partition"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2965,24 +2995,23 @@ class SDK:
 
     
     def list_object_policies(self, request: operations.ListObjectPoliciesRequest) -> operations.ListObjectPoliciesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns policies attached to an object in pagination fashion.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/object/policy#x-amz-data-partition"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3033,22 +3062,22 @@ class SDK:
 
     
     def list_outgoing_typed_links(self, request: operations.ListOutgoingTypedLinksRequest) -> operations.ListOutgoingTypedLinksResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a paginated list of all the outgoing <a>TypedLinkSpecifier</a> information for an object. It also supports filtering by typed link facet and identity attributes. For more information, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink\">Typed link</a>.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/typedlink/outgoing#x-amz-data-partition"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3103,24 +3132,23 @@ class SDK:
 
     
     def list_policy_attachments(self, request: operations.ListPolicyAttachmentsRequest) -> operations.ListPolicyAttachmentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns all of the <code>ObjectIdentifiers</code> to which a given policy is attached.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/policy/attachment#x-amz-data-partition"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3175,24 +3203,23 @@ class SDK:
 
     
     def list_published_schema_arns(self, request: operations.ListPublishedSchemaArnsRequest) -> operations.ListPublishedSchemaArnsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists the major version families of each published schema. If a major version ARN is provided as <code>SchemaArn</code>, the minor version revisions in that family are listed instead.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/schema/published"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3239,24 +3266,23 @@ class SDK:
 
     
     def list_tags_for_resource(self, request: operations.ListTagsForResourceRequest) -> operations.ListTagsForResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns tags for a resource. Tagging is currently supported only for directories with a limit of 50 tags per directory. All 50 tags are returned for a given directory with this API call.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/tags"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3303,24 +3329,23 @@ class SDK:
 
     
     def list_typed_link_facet_attributes(self, request: operations.ListTypedLinkFacetAttributesRequest) -> operations.ListTypedLinkFacetAttributesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a paginated list of all attribute definitions for a particular <a>TypedLinkFacet</a>. For more information, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink\">Typed link</a>.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/typedlink/facet/attributes#x-amz-data-partition"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3371,24 +3396,23 @@ class SDK:
 
     
     def list_typed_link_facet_names(self, request: operations.ListTypedLinkFacetNamesRequest) -> operations.ListTypedLinkFacetNamesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a paginated list of <code>TypedLink</code> facet names for a particular schema. For more information, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink\">Typed link</a>.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/typedlink/facet/list#x-amz-data-partition"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3435,24 +3459,23 @@ class SDK:
 
     
     def lookup_policy(self, request: operations.LookupPolicyRequest) -> operations.LookupPolicyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists all policies from the root of the <a>Directory</a> to the object specified. If there are no policies present, an empty list is returned. If policies are present, and if some objects don't have the policies attached, it returns the <code>ObjectIdentifier</code> for such objects. If policies are present, it returns <code>ObjectIdentifier</code>, <code>policyId</code>, and <code>policyType</code>. Paths that don't lead to the root from the target object are ignored. For more information, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies\">Policies</a>.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/policy/lookup#x-amz-data-partition"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3503,22 +3526,22 @@ class SDK:
 
     
     def publish_schema(self, request: operations.PublishSchemaRequest) -> operations.PublishSchemaResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Publishes a development schema with a major version and a recommended minor version.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/schema/publish#x-amz-data-partition"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3565,22 +3588,22 @@ class SDK:
 
     
     def put_schema_from_json(self, request: operations.PutSchemaFromJSONRequest) -> operations.PutSchemaFromJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Allows a schema to be updated using JSON upload. Only available for development schemas. See <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_schemas.html#jsonformat\">JSON Schema Format</a> for more information.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/schema/json#x-amz-data-partition"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3627,22 +3650,22 @@ class SDK:
 
     
     def remove_facet_from_object(self, request: operations.RemoveFacetFromObjectRequest) -> operations.RemoveFacetFromObjectResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Removes the specified facet from the specified object.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/object/facets/delete#x-amz-data-partition"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3693,22 +3716,22 @@ class SDK:
 
     
     def tag_resource(self, request: operations.TagResourceRequest) -> operations.TagResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""An API operation for adding tags to a resource.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/tags/add"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3755,22 +3778,22 @@ class SDK:
 
     
     def untag_resource(self, request: operations.UntagResourceRequest) -> operations.UntagResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""An API operation for removing tags from a resource.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/tags/remove"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3817,22 +3840,22 @@ class SDK:
 
     
     def update_facet(self, request: operations.UpdateFacetRequest) -> operations.UpdateFacetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Does the following:</p> <ol> <li> <p>Adds new <code>Attributes</code>, <code>Rules</code>, or <code>ObjectTypes</code>.</p> </li> <li> <p>Updates existing <code>Attributes</code>, <code>Rules</code>, or <code>ObjectTypes</code>.</p> </li> <li> <p>Deletes existing <code>Attributes</code>, <code>Rules</code>, or <code>ObjectTypes</code>.</p> </li> </ol>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/facet#x-amz-data-partition"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3887,22 +3910,22 @@ class SDK:
 
     
     def update_link_attributes(self, request: operations.UpdateLinkAttributesRequest) -> operations.UpdateLinkAttributesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates a given typed link’s attributes. Attributes to be updated must not contribute to the typed link’s identity, as defined by its <code>IdentityAttributeOrder</code>.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/typedlink/attributes/update#x-amz-data-partition"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3953,22 +3976,22 @@ class SDK:
 
     
     def update_object_attributes(self, request: operations.UpdateObjectAttributesRequest) -> operations.UpdateObjectAttributesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates a given object's attributes.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/object/update#x-amz-data-partition"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4023,22 +4046,22 @@ class SDK:
 
     
     def update_schema(self, request: operations.UpdateSchemaRequest) -> operations.UpdateSchemaResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates the schema name with a new name. Only development schema names can be updated.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/schema/update#x-amz-data-partition"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4081,22 +4104,22 @@ class SDK:
 
     
     def update_typed_link_facet(self, request: operations.UpdateTypedLinkFacetRequest) -> operations.UpdateTypedLinkFacetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates a <a>TypedLinkFacet</a>. For more information, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink\">Typed link</a>.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/typedlink/facet#x-amz-data-partition"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4155,22 +4178,22 @@ class SDK:
 
     
     def upgrade_applied_schema(self, request: operations.UpgradeAppliedSchemaRequest) -> operations.UpgradeAppliedSchemaResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Upgrades a single directory in-place using the <code>PublishedSchemaArn</code> with schema updates found in <code>MinorVersion</code>. Backwards-compatible minor version upgrades are instantaneously available for readers on all objects in the directory. Note: This is a synchronous API call and upgrades only one schema on a given directory per call. To upgrade multiple directories from one schema, you would need to call this API on each directory.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/schema/upgradeapplied"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4217,22 +4240,22 @@ class SDK:
 
     
     def upgrade_published_schema(self, request: operations.UpgradePublishedSchemaRequest) -> operations.UpgradePublishedSchemaResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Upgrades a published schema under a new minor version revision using the current contents of <code>DevelopmentSchemaArn</code>.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/amazonclouddirectory/2017-01-11/schema/upgradepublished"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

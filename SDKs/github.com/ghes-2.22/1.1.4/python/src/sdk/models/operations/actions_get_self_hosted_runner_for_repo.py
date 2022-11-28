@@ -5,19 +5,19 @@ from sdk.models import shared
 
 @dataclass
 class ActionsGetSelfHostedRunnerForRepoPathParams:
-    owner: str = field(default=None, metadata={'path_param': { 'field_name': 'owner', 'style': 'simple', 'explode': False }})
-    repo: str = field(default=None, metadata={'path_param': { 'field_name': 'repo', 'style': 'simple', 'explode': False }})
-    runner_id: int = field(default=None, metadata={'path_param': { 'field_name': 'runner_id', 'style': 'simple', 'explode': False }})
+    owner: str = field(metadata={'path_param': { 'field_name': 'owner', 'style': 'simple', 'explode': False }})
+    repo: str = field(metadata={'path_param': { 'field_name': 'repo', 'style': 'simple', 'explode': False }})
+    runner_id: int = field(metadata={'path_param': { 'field_name': 'runner_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ActionsGetSelfHostedRunnerForRepoRequest:
-    path_params: ActionsGetSelfHostedRunnerForRepoPathParams = field(default=None)
+    path_params: ActionsGetSelfHostedRunnerForRepoPathParams = field()
     
 
 @dataclass
 class ActionsGetSelfHostedRunnerForRepoResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     runner_no_labels: Optional[shared.RunnerNoLabels] = field(default=None)
     

@@ -1,6 +1,7 @@
 
 
+
 export enum ConditionOutcomeEnum {
-    True = "True"
-,    False = "False"
+    True = "True",
+    False = "False"
 }

@@ -1,13 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import channel
-from . import batcherror
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BatchGetChannelResponse:
-    channels: Optional[List[channel.Channel]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'channels' }})
-    errors: Optional[List[batcherror.BatchError]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errors' }})
+    channels: Optional[List[Channel]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('channels') }})
+    errors: Optional[List[BatchError]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errors') }})
     

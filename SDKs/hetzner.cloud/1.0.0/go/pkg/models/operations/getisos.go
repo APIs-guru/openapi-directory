@@ -4,10 +4,6 @@ type GetIsosQueryParams struct {
 	Name *string `queryParam:"style=form,explode=true,name=name"`
 }
 
-type GetIsosRequest struct {
-	QueryParams GetIsosQueryParams
-}
-
 type GetIsos200ApplicationJSONIsosTypeEnum string
 
 const (
@@ -39,6 +35,10 @@ type GetIsos200ApplicationJSONMeta struct {
 type GetIsos200ApplicationJSON struct {
 	Isos []GetIsos200ApplicationJSONIsos `json:"isos"`
 	Meta *GetIsos200ApplicationJSONMeta  `json:"meta,omitempty"`
+}
+
+type GetIsosRequest struct {
+	QueryParams GetIsosQueryParams
 }
 
 type GetIsosResponse struct {

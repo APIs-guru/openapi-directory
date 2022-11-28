@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserCompact } from "./usercompact";
+
 
 
 // Like
@@ -7,9 +8,9 @@ import { UserCompact } from "./usercompact";
  * An object to represent a user's like.
 **/
 export class Like extends SpeakeasyBase {
-  @Metadata({ data: "json, name=gid" })
+  @SpeakeasyMetadata({ data: "json, name=gid" })
   gid?: string;
 
-  @Metadata({ data: "json, name=user" })
+  @SpeakeasyMetadata({ data: "json, name=user" })
   user?: UserCompact;
 }

@@ -9,6 +9,8 @@ const (
 	GoogleCloudIntegrationsV1alphaOAuth2ResourceOwnerCredentialsRequestTypeEnumEncodedHeader          GoogleCloudIntegrationsV1alphaOAuth2ResourceOwnerCredentialsRequestTypeEnum = "ENCODED_HEADER"
 )
 
+// GoogleCloudIntegrationsV1alphaOAuth2ResourceOwnerCredentials
+// For resource owner credentials grant, the client will ask the user for their authorization credentials (ususally a username and password) and send a POST request to the authorization server. The authorization server will respond with a JSON object containing the access token.
 type GoogleCloudIntegrationsV1alphaOAuth2ResourceOwnerCredentials struct {
 	AccessToken   *GoogleCloudIntegrationsV1alphaAccessToken                                   `json:"accessToken,omitempty"`
 	ClientID      *string                                                                      `json:"clientId,omitempty"`

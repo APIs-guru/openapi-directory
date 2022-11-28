@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AttributeValue } from "./attributevalue";
+
 
 
 // Attributes
@@ -8,9 +8,9 @@ import { AttributeValue } from "./attributevalue";
  * A set of attributes, each in the format `[KEY]:[VALUE]`.
 **/
 export class Attributes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attributeMap", elemType: shared.AttributeValue })
+  @SpeakeasyMetadata({ data: "json, name=attributeMap", elemType: AttributeValue })
   attributeMap?: Map<string, AttributeValue>;
 
-  @Metadata({ data: "json, name=droppedAttributesCount" })
+  @SpeakeasyMetadata({ data: "json, name=droppedAttributesCount" })
   droppedAttributesCount?: number;
 }

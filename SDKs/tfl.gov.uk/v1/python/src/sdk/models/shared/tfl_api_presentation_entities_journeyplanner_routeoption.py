@@ -1,14 +1,15 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import tfl_api_presentation_entities_identifier
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class TflAPIPresentationEntitiesJourneyPlannerRouteOption:
-    directions: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'directions' }})
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    line_identifier: Optional[tfl_api_presentation_entities_identifier.TflAPIPresentationEntitiesIdentifier] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lineIdentifier' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
+    directions: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('directions') }})
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    line_identifier: Optional[TflAPIPresentationEntitiesIdentifier] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lineIdentifier') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
     

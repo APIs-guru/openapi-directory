@@ -1,23 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BackupTypeFilterEnum } from "./backuptypefilterenum";
 
 
+
 export class ListBackupsInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BackupType" })
+  @SpeakeasyMetadata({ data: "json, name=BackupType" })
   backupType?: BackupTypeFilterEnum;
 
-  @Metadata({ data: "json, name=ExclusiveStartBackupArn" })
+  @SpeakeasyMetadata({ data: "json, name=ExclusiveStartBackupArn" })
   exclusiveStartBackupArn?: string;
 
-  @Metadata({ data: "json, name=Limit" })
+  @SpeakeasyMetadata({ data: "json, name=Limit" })
   limit?: number;
 
-  @Metadata({ data: "json, name=TableName" })
+  @SpeakeasyMetadata({ data: "json, name=TableName" })
   tableName?: string;
 
-  @Metadata({ data: "json, name=TimeRangeLowerBound" })
+  @SpeakeasyMetadata({ data: "json, name=TimeRangeLowerBound" })
   timeRangeLowerBound?: Date;
 
-  @Metadata({ data: "json, name=TimeRangeUpperBound" })
+  @SpeakeasyMetadata({ data: "json, name=TimeRangeUpperBound" })
   timeRangeUpperBound?: Date;
 }

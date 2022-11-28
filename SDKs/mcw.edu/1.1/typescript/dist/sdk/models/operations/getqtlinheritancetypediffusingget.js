@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetQtlInheritanceTypeDiffUsingGetPathParams = /** @class */ (function (_super) {
     __extends(GetQtlInheritanceTypeDiffUsingGetPathParams, _super);
     function GetQtlInheritanceTypeDiffUsingGetPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=dateFromYYYYMMDD" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=dateFromYYYYMMDD" }),
         __metadata("design:type", String)
     ], GetQtlInheritanceTypeDiffUsingGetPathParams.prototype, "dateFromYyyymmdd", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=dateToYYYYMMDD" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=dateToYYYYMMDD" }),
         __metadata("design:type", String)
     ], GetQtlInheritanceTypeDiffUsingGetPathParams.prototype, "dateToYyyymmdd", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=speciesTypeKey" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=speciesTypeKey" }),
         __metadata("design:type", Number)
     ], GetQtlInheritanceTypeDiffUsingGetPathParams.prototype, "speciesTypeKey", void 0);
     return GetQtlInheritanceTypeDiffUsingGetPathParams;
@@ -49,7 +49,7 @@ var GetQtlInheritanceTypeDiffUsingGetRequest = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetQtlInheritanceTypeDiffUsingGetPathParams)
     ], GetQtlInheritanceTypeDiffUsingGetRequest.prototype, "pathParams", void 0);
     return GetQtlInheritanceTypeDiffUsingGetRequest;
@@ -61,15 +61,15 @@ var GetQtlInheritanceTypeDiffUsingGetResponse = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetQtlInheritanceTypeDiffUsingGetResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetQtlInheritanceTypeDiffUsingGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetQtlInheritanceTypeDiffUsingGetResponse.prototype, "statusCode", void 0);
     return GetQtlInheritanceTypeDiffUsingGetResponse;

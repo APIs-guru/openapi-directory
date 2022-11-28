@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// FeatureTransformation
+// Provides feature transformation information. Feature transformation is the process of modifying raw input data into a form more suitable for model training.
 type FeatureTransformation struct {
 	CreationDateTime         *time.Time        `json:"creationDateTime,omitempty"`
 	DefaultParameters        map[string]string `json:"defaultParameters,omitempty"`

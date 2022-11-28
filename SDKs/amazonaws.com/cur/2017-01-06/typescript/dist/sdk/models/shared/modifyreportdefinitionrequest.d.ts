@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ReportDefinition } from "./reportdefinition";
 export declare class ModifyReportDefinitionRequest extends SpeakeasyBase {
     reportDefinition: ReportDefinition;

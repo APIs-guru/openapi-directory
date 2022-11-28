@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VerificationToken } from "./verificationtoken";
+
 
 
 // GenerateVerificationTokenResponse
@@ -7,6 +8,6 @@ import { VerificationToken } from "./verificationtoken";
  * Response message for Verifications.GenerateVerificationToken.
 **/
 export class GenerateVerificationTokenResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=token" })
+  @SpeakeasyMetadata({ data: "json, name=token" })
   token?: VerificationToken;
 }

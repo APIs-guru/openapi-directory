@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudidentityDevicesDeviceUsersLookupPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -30,20 +31,20 @@ class CloudidentityDevicesDeviceUsersLookupQueryParams:
 
 @dataclass
 class CloudidentityDevicesDeviceUsersLookupSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudidentityDevicesDeviceUsersLookupRequest:
-    path_params: CloudidentityDevicesDeviceUsersLookupPathParams = field(default=None)
-    query_params: CloudidentityDevicesDeviceUsersLookupQueryParams = field(default=None)
-    security: CloudidentityDevicesDeviceUsersLookupSecurity = field(default=None)
+    path_params: CloudidentityDevicesDeviceUsersLookupPathParams = field()
+    query_params: CloudidentityDevicesDeviceUsersLookupQueryParams = field()
+    security: CloudidentityDevicesDeviceUsersLookupSecurity = field()
     
 
 @dataclass
 class CloudidentityDevicesDeviceUsersLookupResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_apps_cloudidentity_devices_v1_lookup_self_device_users_response: Optional[shared.GoogleAppsCloudidentityDevicesV1LookupSelfDeviceUsersResponse] = field(default=None)
-    status_code: int = field(default=None)
     

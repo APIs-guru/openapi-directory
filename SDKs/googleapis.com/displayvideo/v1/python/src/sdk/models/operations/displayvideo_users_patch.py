@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DisplayvideoUsersPatchPathParams:
-    user_id: str = field(default=None, metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
+    user_id: str = field(metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +30,21 @@ class DisplayvideoUsersPatchQueryParams:
 
 @dataclass
 class DisplayvideoUsersPatchSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DisplayvideoUsersPatchRequest:
-    path_params: DisplayvideoUsersPatchPathParams = field(default=None)
-    query_params: DisplayvideoUsersPatchQueryParams = field(default=None)
-    request: Optional[shared.User] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DisplayvideoUsersPatchSecurity = field(default=None)
+    path_params: DisplayvideoUsersPatchPathParams = field()
+    query_params: DisplayvideoUsersPatchQueryParams = field()
+    security: DisplayvideoUsersPatchSecurity = field()
+    request: Optional[shared.UserInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DisplayvideoUsersPatchResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     user: Optional[shared.User] = field(default=None)
     

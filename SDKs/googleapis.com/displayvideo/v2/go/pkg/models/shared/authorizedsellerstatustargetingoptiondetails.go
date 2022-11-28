@@ -8,6 +8,8 @@ const (
 	AuthorizedSellerStatusTargetingOptionDetailsAuthorizedSellerStatusEnumAuthorizedSellerStatusAuthorizedAndNonParticipatingPublishers AuthorizedSellerStatusTargetingOptionDetailsAuthorizedSellerStatusEnum = "AUTHORIZED_SELLER_STATUS_AUTHORIZED_AND_NON_PARTICIPATING_PUBLISHERS"
 )
 
+// AuthorizedSellerStatusTargetingOptionDetails
+// Represents a targetable authorized seller status. This will be populated in the authorized_seller_status_details field when targeting_type is `TARGETING_TYPE_AUTHORIZED_SELLER_STATUS`.
 type AuthorizedSellerStatusTargetingOptionDetails struct {
 	AuthorizedSellerStatus *AuthorizedSellerStatusTargetingOptionDetailsAuthorizedSellerStatusEnum `json:"authorizedSellerStatus,omitempty"`
 }

@@ -1,5 +1,7 @@
 package shared
 
+// DataTransfersListResponse
+// Template for a collection of DataTransfer resources.
 type DataTransfersListResponse struct {
 	DataTransfers []DataTransfer `json:"dataTransfers,omitempty"`
 	Etag          *string        `json:"etag,omitempty"`

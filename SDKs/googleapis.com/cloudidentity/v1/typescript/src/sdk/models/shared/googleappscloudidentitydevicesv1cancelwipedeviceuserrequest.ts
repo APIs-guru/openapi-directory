@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleAppsCloudidentityDevicesV1CancelWipeDeviceUserRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request message for cancelling an unfinished user account wipe.
 **/
 export class GoogleAppsCloudidentityDevicesV1CancelWipeDeviceUserRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=customer" })
+  @SpeakeasyMetadata({ data: "json, name=customer" })
   customer?: string;
 }

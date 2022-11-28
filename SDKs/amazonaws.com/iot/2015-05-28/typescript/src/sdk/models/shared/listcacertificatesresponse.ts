@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CaCertificate } from "./cacertificate";
+
 
 
 // ListCaCertificatesResponse
@@ -8,9 +8,9 @@ import { CaCertificate } from "./cacertificate";
  * The output from the ListCACertificates operation.
 **/
 export class ListCaCertificatesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=certificates", elemType: shared.CaCertificate })
+  @SpeakeasyMetadata({ data: "json, name=certificates", elemType: CaCertificate })
   certificates?: CaCertificate[];
 
-  @Metadata({ data: "json, name=nextMarker" })
+  @SpeakeasyMetadata({ data: "json, name=nextMarker" })
   nextMarker?: string;
 }

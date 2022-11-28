@@ -1,80 +1,76 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Breadcrumb } from "./breadcrumb";
 import { Item } from "./item";
-import { Item } from "./item";
-import { Item } from "./item";
-import { Item } from "./item";
-import { Item } from "./item";
+
 
 
 export class MessageOverview extends SpeakeasyBase {
-  @Metadata({ data: "json, name=application" })
+  @SpeakeasyMetadata({ data: "json, name=application" })
   application?: string;
 
-  @Metadata({ data: "json, name=breadcrumbs", elemType: shared.Breadcrumb })
+  @SpeakeasyMetadata({ data: "json, name=breadcrumbs", elemType: Breadcrumb })
   breadcrumbs?: Breadcrumb[];
 
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: string;
 
-  @Metadata({ data: "json, name=cookies", elemType: shared.Item })
+  @SpeakeasyMetadata({ data: "json, name=cookies", elemType: Item })
   cookies?: Item[];
 
-  @Metadata({ data: "json, name=correlationId" })
+  @SpeakeasyMetadata({ data: "json, name=correlationId" })
   correlationId?: string;
 
-  @Metadata({ data: "json, name=data", elemType: shared.Item })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: Item })
   data?: Item[];
 
-  @Metadata({ data: "json, name=dateTime" })
+  @SpeakeasyMetadata({ data: "json, name=dateTime" })
   dateTime?: Date;
 
-  @Metadata({ data: "json, name=detail" })
+  @SpeakeasyMetadata({ data: "json, name=detail" })
   detail?: string;
 
-  @Metadata({ data: "json, name=form", elemType: shared.Item })
+  @SpeakeasyMetadata({ data: "json, name=form", elemType: Item })
   form?: Item[];
 
-  @Metadata({ data: "json, name=hostname" })
+  @SpeakeasyMetadata({ data: "json, name=hostname" })
   hostname?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=method" })
+  @SpeakeasyMetadata({ data: "json, name=method" })
   method?: string;
 
-  @Metadata({ data: "json, name=queryString", elemType: shared.Item })
+  @SpeakeasyMetadata({ data: "json, name=queryString", elemType: Item })
   queryString?: Item[];
 
-  @Metadata({ data: "json, name=serverVariables", elemType: shared.Item })
+  @SpeakeasyMetadata({ data: "json, name=serverVariables", elemType: Item })
   serverVariables?: Item[];
 
-  @Metadata({ data: "json, name=severity" })
+  @SpeakeasyMetadata({ data: "json, name=severity" })
   severity?: string;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: string;
 
-  @Metadata({ data: "json, name=statusCode" })
+  @SpeakeasyMetadata({ data: "json, name=statusCode" })
   statusCode?: number;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=titleTemplate" })
+  @SpeakeasyMetadata({ data: "json, name=titleTemplate" })
   titleTemplate?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 
-  @Metadata({ data: "json, name=user" })
+  @SpeakeasyMetadata({ data: "json, name=user" })
   user?: string;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 }

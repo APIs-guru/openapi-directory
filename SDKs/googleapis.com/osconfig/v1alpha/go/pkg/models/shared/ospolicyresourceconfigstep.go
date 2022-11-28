@@ -18,6 +18,8 @@ const (
 	OsPolicyResourceConfigStepTypeEnumDesiredStateCheckPostEnforcement OsPolicyResourceConfigStepTypeEnum = "DESIRED_STATE_CHECK_POST_ENFORCEMENT"
 )
 
+// OsPolicyResourceConfigStep
+// Step performed by the OS Config agent for configuring an `OSPolicyResource` to its desired state.
 type OsPolicyResourceConfigStep struct {
 	ErrorMessage *string                                `json:"errorMessage,omitempty"`
 	Outcome      *OsPolicyResourceConfigStepOutcomeEnum `json:"outcome,omitempty"`

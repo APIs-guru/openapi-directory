@@ -1,101 +1,102 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetAnnotationLayerInfoQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, serialization=json;name=q" })
+  @SpeakeasyMetadata({ data: "queryParam, serialization=json;name=q" })
   q?: shared.GetInfoSchema;
 }
 
 
 export class GetAnnotationLayerInfoSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   jwt: shared.SchemeJwt;
 }
 
 
-export class GetAnnotationLayerInfoRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetAnnotationLayerInfoQueryParams;
-
-  @Metadata()
-  security: GetAnnotationLayerInfoSecurity;
-}
-
-
 export class GetAnnotationLayerInfo200ApplicationJsonFiltersColumnName extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=operator" })
+  @SpeakeasyMetadata({ data: "json, name=operator" })
   operator?: string;
 }
 
 
 export class GetAnnotationLayerInfo200ApplicationJsonFilters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=column_name", elemType: operations.GetAnnotationLayerInfo200ApplicationJsonFiltersColumnName })
+  @SpeakeasyMetadata({ data: "json, name=column_name", elemType: GetAnnotationLayerInfo200ApplicationJsonFiltersColumnName })
   columnName?: GetAnnotationLayerInfo200ApplicationJsonFiltersColumnName[];
 }
 
 
 export class GetAnnotationLayerInfo200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=add_columns" })
+  @SpeakeasyMetadata({ data: "json, name=add_columns" })
   addColumns?: Map<string, any>;
 
-  @Metadata({ data: "json, name=edit_columns" })
+  @SpeakeasyMetadata({ data: "json, name=edit_columns" })
   editColumns?: Map<string, any>;
 
-  @Metadata({ data: "json, name=filters" })
+  @SpeakeasyMetadata({ data: "json, name=filters" })
   filters?: GetAnnotationLayerInfo200ApplicationJsonFilters;
 
-  @Metadata({ data: "json, name=permissions" })
+  @SpeakeasyMetadata({ data: "json, name=permissions" })
   permissions?: string[];
 }
 
 
 export class GetAnnotationLayerInfo400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetAnnotationLayerInfo401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetAnnotationLayerInfo422ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetAnnotationLayerInfo500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class GetAnnotationLayerInfoRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetAnnotationLayerInfoQueryParams;
+
+  @SpeakeasyMetadata()
+  security: GetAnnotationLayerInfoSecurity;
+}
+
+
 export class GetAnnotationLayerInfoResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getAnnotationLayerInfo200ApplicationJsonObject?: GetAnnotationLayerInfo200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getAnnotationLayerInfo400ApplicationJsonObject?: GetAnnotationLayerInfo400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getAnnotationLayerInfo401ApplicationJsonObject?: GetAnnotationLayerInfo401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getAnnotationLayerInfo422ApplicationJsonObject?: GetAnnotationLayerInfo422ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getAnnotationLayerInfo500ApplicationJsonObject?: GetAnnotationLayerInfo500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

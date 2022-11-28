@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import privatednspropertiesmutable
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class PrivateDNSNamespaceProperties:
-    dns_properties: privatednspropertiesmutable.PrivateDNSPropertiesMutable = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DnsProperties' }})
+    r"""PrivateDNSNamespaceProperties
+    DNS properties for the private DNS namespace.
+    """
+    
+    dns_properties: PrivateDNSPropertiesMutable = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('DnsProperties') }})
     

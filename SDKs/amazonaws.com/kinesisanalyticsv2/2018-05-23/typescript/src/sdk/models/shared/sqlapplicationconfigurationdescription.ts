@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InputDescription } from "./inputdescription";
 import { OutputDescription } from "./outputdescription";
 import { ReferenceDataSourceDescription } from "./referencedatasourcedescription";
+
 
 
 // SqlApplicationConfigurationDescription
@@ -10,12 +10,12 @@ import { ReferenceDataSourceDescription } from "./referencedatasourcedescription
  * Describes the inputs, outputs, and reference data sources for a SQL-based Kinesis Data Analytics application.
 **/
 export class SqlApplicationConfigurationDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=InputDescriptions", elemType: shared.InputDescription })
+  @SpeakeasyMetadata({ data: "json, name=InputDescriptions", elemType: InputDescription })
   inputDescriptions?: InputDescription[];
 
-  @Metadata({ data: "json, name=OutputDescriptions", elemType: shared.OutputDescription })
+  @SpeakeasyMetadata({ data: "json, name=OutputDescriptions", elemType: OutputDescription })
   outputDescriptions?: OutputDescription[];
 
-  @Metadata({ data: "json, name=ReferenceDataSourceDescriptions", elemType: shared.ReferenceDataSourceDescription })
+  @SpeakeasyMetadata({ data: "json, name=ReferenceDataSourceDescriptions", elemType: ReferenceDataSourceDescription })
   referenceDataSourceDescriptions?: ReferenceDataSourceDescription[];
 }

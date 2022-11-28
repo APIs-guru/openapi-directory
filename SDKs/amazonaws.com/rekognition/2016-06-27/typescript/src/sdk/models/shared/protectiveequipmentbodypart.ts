@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EquipmentDetection } from "./equipmentdetection";
 import { BodyPartEnum } from "./bodypartenum";
+
 
 
 // ProtectiveEquipmentBodyPart
@@ -9,12 +9,12 @@ import { BodyPartEnum } from "./bodypartenum";
  * Information about a body part detected by <a>DetectProtectiveEquipment</a> that contains PPE. An array of <code>ProtectiveEquipmentBodyPart</code> objects is returned for each person detected by <code>DetectProtectiveEquipment</code>. 
 **/
 export class ProtectiveEquipmentBodyPart extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Confidence" })
+  @SpeakeasyMetadata({ data: "json, name=Confidence" })
   confidence?: number;
 
-  @Metadata({ data: "json, name=EquipmentDetections", elemType: shared.EquipmentDetection })
+  @SpeakeasyMetadata({ data: "json, name=EquipmentDetections", elemType: EquipmentDetection })
   equipmentDetections?: EquipmentDetection[];
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: BodyPartEnum;
 }

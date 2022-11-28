@@ -1,5 +1,7 @@
 package shared
 
+// UserProfile
+// Describes a user's SSH information.
 type UserProfile struct {
 	AllowSelfManagement *bool   `json:"AllowSelfManagement,omitempty"`
 	IamUserArn          *string `json:"IamUserArn,omitempty"`

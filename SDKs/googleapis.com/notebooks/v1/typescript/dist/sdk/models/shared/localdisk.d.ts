@@ -1,6 +1,16 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
-import { RuntimeGuestOsFeature } from "./runtimeguestosfeature";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { LocalDiskInitializeParams } from "./localdiskinitializeparams";
+import { RuntimeGuestOsFeature } from "./runtimeguestosfeature";
+/**
+ * A Local attached disk resource.
+**/
+export declare class LocalDiskInput extends SpeakeasyBase {
+    initializeParams?: LocalDiskInitializeParams;
+    interface?: string;
+    mode?: string;
+    source?: string;
+    type?: string;
+}
 /**
  * A Local attached disk resource.
 **/

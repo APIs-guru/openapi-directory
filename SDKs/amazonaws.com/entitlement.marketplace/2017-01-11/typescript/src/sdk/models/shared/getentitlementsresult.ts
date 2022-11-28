@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Entitlement } from "./entitlement";
+
 
 
 // GetEntitlementsResult
@@ -8,9 +8,9 @@ import { Entitlement } from "./entitlement";
  * The GetEntitlementsRequest contains results from the GetEntitlements operation.
 **/
 export class GetEntitlementsResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Entitlements", elemType: shared.Entitlement })
+  @SpeakeasyMetadata({ data: "json, name=Entitlements", elemType: Entitlement })
   entitlements?: Entitlement[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

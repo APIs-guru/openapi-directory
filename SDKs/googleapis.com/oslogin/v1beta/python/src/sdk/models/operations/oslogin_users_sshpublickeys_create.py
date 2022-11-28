@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class OsloginUsersSSHPublicKeysCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class OsloginUsersSSHPublicKeysCreateQueryParams:
 
 @dataclass
 class OsloginUsersSSHPublicKeysCreateSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class OsloginUsersSSHPublicKeysCreateSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class OsloginUsersSSHPublicKeysCreateSecurity:
 
 @dataclass
 class OsloginUsersSSHPublicKeysCreateRequest:
-    path_params: OsloginUsersSSHPublicKeysCreatePathParams = field(default=None)
-    query_params: OsloginUsersSSHPublicKeysCreateQueryParams = field(default=None)
-    request: Optional[shared.SSHPublicKey] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: OsloginUsersSSHPublicKeysCreateSecurity = field(default=None)
+    path_params: OsloginUsersSSHPublicKeysCreatePathParams = field()
+    query_params: OsloginUsersSSHPublicKeysCreateQueryParams = field()
+    security: OsloginUsersSSHPublicKeysCreateSecurity = field()
+    request: Optional[shared.SSHPublicKeyInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class OsloginUsersSSHPublicKeysCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     ssh_public_key: Optional[shared.SSHPublicKey] = field(default=None)
-    status_code: int = field(default=None)
     

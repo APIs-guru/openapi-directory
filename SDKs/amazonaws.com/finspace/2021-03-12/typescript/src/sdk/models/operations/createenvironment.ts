@@ -1,33 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateEnvironmentHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 export enum CreateEnvironmentRequestBodyFederationModeEnum {
-    Federated = "FEDERATED"
-,    Local = "LOCAL"
+    Federated = "FEDERATED",
+    Local = "LOCAL"
 }
 
 
@@ -36,81 +37,81 @@ export enum CreateEnvironmentRequestBodyFederationModeEnum {
  * Configuration information when authentication mode is FEDERATED.
 **/
 export class CreateEnvironmentRequestBodyFederationParameters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=applicationCallBackURL" })
+  @SpeakeasyMetadata({ data: "json, name=applicationCallBackURL" })
   applicationCallBackUrl?: string;
 
-  @Metadata({ data: "json, name=attributeMap" })
+  @SpeakeasyMetadata({ data: "json, name=attributeMap" })
   attributeMap?: Map<string, string>;
 
-  @Metadata({ data: "json, name=federationProviderName" })
+  @SpeakeasyMetadata({ data: "json, name=federationProviderName" })
   federationProviderName?: string;
 
-  @Metadata({ data: "json, name=federationURN" })
+  @SpeakeasyMetadata({ data: "json, name=federationURN" })
   federationUrn?: string;
 
-  @Metadata({ data: "json, name=samlMetadataDocument" })
+  @SpeakeasyMetadata({ data: "json, name=samlMetadataDocument" })
   samlMetadataDocument?: string;
 
-  @Metadata({ data: "json, name=samlMetadataURL" })
+  @SpeakeasyMetadata({ data: "json, name=samlMetadataURL" })
   samlMetadataUrl?: string;
 }
 
 
 export class CreateEnvironmentRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=federationMode" })
+  @SpeakeasyMetadata({ data: "json, name=federationMode" })
   federationMode?: CreateEnvironmentRequestBodyFederationModeEnum;
 
-  @Metadata({ data: "json, name=federationParameters" })
+  @SpeakeasyMetadata({ data: "json, name=federationParameters" })
   federationParameters?: CreateEnvironmentRequestBodyFederationParameters;
 
-  @Metadata({ data: "json, name=kmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=kmsKeyId" })
   kmsKeyId?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 }
 
 
 export class CreateEnvironmentRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateEnvironmentHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateEnvironmentRequestBody;
 }
 
 
 export class CreateEnvironmentResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   accessDeniedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createEnvironmentResponse?: shared.CreateEnvironmentResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   limitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceQuotaExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationException?: any;
 }

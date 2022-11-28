@@ -6,6 +6,8 @@ type PolicyBindings struct {
 	Role      *string  `json:"role,omitempty"`
 }
 
+// Policy
+// A bucket/object IAM policy.
 type Policy struct {
 	Bindings   []PolicyBindings `json:"bindings,omitempty"`
 	Etag       *string          `json:"etag,omitempty"`

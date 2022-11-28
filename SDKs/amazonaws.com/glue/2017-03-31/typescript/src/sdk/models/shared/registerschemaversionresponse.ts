@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SchemaVersionStatusEnum } from "./schemaversionstatusenum";
 
 
+
 export class RegisterSchemaVersionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SchemaVersionId" })
+  @SpeakeasyMetadata({ data: "json, name=SchemaVersionId" })
   schemaVersionId?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: SchemaVersionStatusEnum;
 
-  @Metadata({ data: "json, name=VersionNumber" })
+  @SpeakeasyMetadata({ data: "json, name=VersionNumber" })
   versionNumber?: number;
 }

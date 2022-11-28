@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceAttributeEnum } from "./resourceattributeenum";
 import { RequiresRecreationEnum } from "./requiresrecreationenum";
+
 
 
 // ResourceTargetDefinition
@@ -8,12 +9,12 @@ import { RequiresRecreationEnum } from "./requiresrecreationenum";
  * Information about a change to a resource attribute.
 **/
 export class ResourceTargetDefinition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Attribute" })
+  @SpeakeasyMetadata({ data: "json, name=Attribute" })
   attribute?: ResourceAttributeEnum;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=RequiresRecreation" })
+  @SpeakeasyMetadata({ data: "json, name=RequiresRecreation" })
   requiresRecreation?: RequiresRecreationEnum;
 }

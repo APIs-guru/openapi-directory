@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BatchInferenceJobConfig } from "./batchinferencejobconfig";
 import { BatchInferenceJobInput } from "./batchinferencejobinput";
 import { BatchInferenceJobOutput } from "./batchinferencejoboutput";
@@ -32,35 +32,35 @@ var CreateBatchInferenceJobRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=batchInferenceJobConfig" }),
+        SpeakeasyMetadata({ data: "json, name=batchInferenceJobConfig" }),
         __metadata("design:type", BatchInferenceJobConfig)
     ], CreateBatchInferenceJobRequest.prototype, "batchInferenceJobConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=filterArn" }),
+        SpeakeasyMetadata({ data: "json, name=filterArn" }),
         __metadata("design:type", String)
     ], CreateBatchInferenceJobRequest.prototype, "filterArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=jobInput" }),
+        SpeakeasyMetadata({ data: "json, name=jobInput" }),
         __metadata("design:type", BatchInferenceJobInput)
     ], CreateBatchInferenceJobRequest.prototype, "jobInput", void 0);
     __decorate([
-        Metadata({ data: "json, name=jobName" }),
+        SpeakeasyMetadata({ data: "json, name=jobName" }),
         __metadata("design:type", String)
     ], CreateBatchInferenceJobRequest.prototype, "jobName", void 0);
     __decorate([
-        Metadata({ data: "json, name=jobOutput" }),
+        SpeakeasyMetadata({ data: "json, name=jobOutput" }),
         __metadata("design:type", BatchInferenceJobOutput)
     ], CreateBatchInferenceJobRequest.prototype, "jobOutput", void 0);
     __decorate([
-        Metadata({ data: "json, name=numResults" }),
+        SpeakeasyMetadata({ data: "json, name=numResults" }),
         __metadata("design:type", Number)
     ], CreateBatchInferenceJobRequest.prototype, "numResults", void 0);
     __decorate([
-        Metadata({ data: "json, name=roleArn" }),
+        SpeakeasyMetadata({ data: "json, name=roleArn" }),
         __metadata("design:type", String)
     ], CreateBatchInferenceJobRequest.prototype, "roleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=solutionVersionArn" }),
+        SpeakeasyMetadata({ data: "json, name=solutionVersionArn" }),
         __metadata("design:type", String)
     ], CreateBatchInferenceJobRequest.prototype, "solutionVersionArn", void 0);
     return CreateBatchInferenceJobRequest;

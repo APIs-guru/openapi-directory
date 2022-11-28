@@ -1,47 +1,47 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class OffersItemsItems extends SpeakeasyBase {
-  @Metadata({ data: "json, name=author" })
+  @SpeakeasyMetadata({ data: "json, name=author" })
   author?: string;
 
-  @Metadata({ data: "json, name=canonicalVolumeLink" })
+  @SpeakeasyMetadata({ data: "json, name=canonicalVolumeLink" })
   canonicalVolumeLink?: string;
 
-  @Metadata({ data: "json, name=coverUrl" })
+  @SpeakeasyMetadata({ data: "json, name=coverUrl" })
   coverUrl?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=volumeId" })
+  @SpeakeasyMetadata({ data: "json, name=volumeId" })
   volumeId?: string;
 }
 
 
 export class OffersItems extends SpeakeasyBase {
-  @Metadata({ data: "json, name=artUrl" })
+  @SpeakeasyMetadata({ data: "json, name=artUrl" })
   artUrl?: string;
 
-  @Metadata({ data: "json, name=gservicesKey" })
+  @SpeakeasyMetadata({ data: "json, name=gservicesKey" })
   gservicesKey?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=items", elemType: shared.OffersItemsItems })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: OffersItemsItems })
   items?: OffersItemsItems[];
 }
 
 
 export class Offers extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.OffersItems })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: OffersItems })
   items?: OffersItems[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AutoScalingGroup } from "./autoscalinggroup";
+
 
 
 // DeleteDeploymentGroupOutput
@@ -8,6 +8,6 @@ import { AutoScalingGroup } from "./autoscalinggroup";
  * Represents the output of a <code>DeleteDeploymentGroup</code> operation.
 **/
 export class DeleteDeploymentGroupOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hooksNotCleanedUp", elemType: shared.AutoScalingGroup })
+  @SpeakeasyMetadata({ data: "json, name=hooksNotCleanedUp", elemType: AutoScalingGroup })
   hooksNotCleanedUp?: AutoScalingGroup[];
 }

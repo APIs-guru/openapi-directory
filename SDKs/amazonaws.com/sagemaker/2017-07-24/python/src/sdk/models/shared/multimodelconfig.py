@@ -1,11 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import modelcachesetting_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class MultiModelConfig:
-    model_cache_setting: Optional[modelcachesetting_enum.ModelCacheSettingEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ModelCacheSetting' }})
+    r"""MultiModelConfig
+    Specifies additional configuration for hosting multi-model endpoints.
+    """
+    
+    model_cache_setting: Optional[ModelCacheSettingEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ModelCacheSetting') }})
     

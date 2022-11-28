@@ -1,5 +1,7 @@
 package shared
 
+// IosVersion
+// An iOS version.
 type IosVersion struct {
 	ID                       *string  `json:"id,omitempty"`
 	MajorVersion             *int32   `json:"majorVersion,omitempty"`

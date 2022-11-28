@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class AssociateEncryptionConfigPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,26 +27,26 @@ class AssociateEncryptionConfigHeaders:
 @dataclass_json
 @dataclass
 class AssociateEncryptionConfigRequestBody:
-    client_request_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clientRequestToken' }})
-    encryption_config: List[shared.EncryptionConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'encryptionConfig' }})
+    encryption_config: List[shared.EncryptionConfig] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('encryptionConfig') }})
+    client_request_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clientRequestToken') }})
     
 
 @dataclass
 class AssociateEncryptionConfigRequest:
-    path_params: AssociateEncryptionConfigPathParams = field(default=None)
-    headers: AssociateEncryptionConfigHeaders = field(default=None)
-    request: AssociateEncryptionConfigRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: AssociateEncryptionConfigHeaders = field()
+    path_params: AssociateEncryptionConfigPathParams = field()
+    request: AssociateEncryptionConfigRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class AssociateEncryptionConfigResponse:
+    content_type: str = field()
+    status_code: int = field()
     associate_encryption_config_response: Optional[shared.AssociateEncryptionConfigResponse] = field(default=None)
     client_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     invalid_parameter_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     resource_in_use_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     server_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

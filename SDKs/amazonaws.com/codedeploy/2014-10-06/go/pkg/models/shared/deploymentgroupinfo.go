@@ -1,5 +1,7 @@
 package shared
 
+// DeploymentGroupInfo
+// Information about a deployment group.
 type DeploymentGroupInfo struct {
 	AlarmConfiguration               *AlarmConfiguration               `json:"alarmConfiguration,omitempty"`
 	ApplicationName                  *string                           `json:"applicationName,omitempty"`

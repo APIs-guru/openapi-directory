@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CaptureContentTypeHeader } from "./capturecontenttypeheader";
 import { CaptureOption } from "./captureoption";
+
 
 
 // DataCaptureConfig
@@ -9,21 +9,21 @@ import { CaptureOption } from "./captureoption";
  * <p/>
 **/
 export class DataCaptureConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CaptureContentTypeHeader" })
+  @SpeakeasyMetadata({ data: "json, name=CaptureContentTypeHeader" })
   captureContentTypeHeader?: CaptureContentTypeHeader;
 
-  @Metadata({ data: "json, name=CaptureOptions", elemType: shared.CaptureOption })
+  @SpeakeasyMetadata({ data: "json, name=CaptureOptions", elemType: CaptureOption })
   captureOptions: CaptureOption[];
 
-  @Metadata({ data: "json, name=DestinationS3Uri" })
+  @SpeakeasyMetadata({ data: "json, name=DestinationS3Uri" })
   destinationS3Uri: string;
 
-  @Metadata({ data: "json, name=EnableCapture" })
+  @SpeakeasyMetadata({ data: "json, name=EnableCapture" })
   enableCapture?: boolean;
 
-  @Metadata({ data: "json, name=InitialSamplingPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=InitialSamplingPercentage" })
   initialSamplingPercentage: number;
 
-  @Metadata({ data: "json, name=KmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=KmsKeyId" })
   kmsKeyId?: string;
 }

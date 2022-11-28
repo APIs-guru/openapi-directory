@@ -1,5 +1,7 @@
 package shared
 
+// SourceOperationRequest
+// A work item that represents the different operations that can be performed on a user-defined Source specification.
 type SourceOperationRequest struct {
 	GetMetadata  *SourceGetMetadataRequest `json:"getMetadata,omitempty"`
 	Name         *string                   `json:"name,omitempty"`

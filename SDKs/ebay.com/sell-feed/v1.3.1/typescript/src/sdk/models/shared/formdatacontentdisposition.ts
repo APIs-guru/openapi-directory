@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // FormDataContentDisposition
@@ -6,27 +7,27 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The metadata for the file.
 **/
 export class FormDataContentDisposition extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, name=creationDate" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=creationDate" })
   creationDate?: string;
 
-  @Metadata({ data: "multipart_form, name=fileName" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=fileName" })
   fileName?: string;
 
-  @Metadata({ data: "multipart_form, name=modificationDate" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=modificationDate" })
   modificationDate?: string;
 
-  @Metadata({ data: "multipart_form, name=name" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=name" })
   name?: string;
 
-  @Metadata({ data: "multipart_form, name=parameters;json=true" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=parameters;json=true" })
   parameters?: Map<string, string>;
 
-  @Metadata({ data: "multipart_form, name=readDate" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=readDate" })
   readDate?: string;
 
-  @Metadata({ data: "multipart_form, name=size" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=size" })
   size?: number;
 
-  @Metadata({ data: "multipart_form, name=type" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=type" })
   type?: string;
 }

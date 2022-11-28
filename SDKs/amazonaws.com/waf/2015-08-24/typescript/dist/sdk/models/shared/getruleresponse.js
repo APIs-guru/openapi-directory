@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Rule } from "./rule";
 var GetRuleResponse = /** @class */ (function (_super) {
     __extends(GetRuleResponse, _super);
@@ -30,7 +30,7 @@ var GetRuleResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Rule" }),
+        SpeakeasyMetadata({ data: "json, name=Rule" }),
         __metadata("design:type", Rule)
     ], GetRuleResponse.prototype, "rule", void 0);
     return GetRuleResponse;

@@ -12,18 +12,18 @@ class GetBoxSetRemoteSearchResultsRequests:
 
 @dataclass
 class GetBoxSetRemoteSearchResultsSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetBoxSetRemoteSearchResultsRequest:
-    request: GetBoxSetRemoteSearchResultsRequests = field(default=None)
-    security: GetBoxSetRemoteSearchResultsSecurity = field(default=None)
+    request: GetBoxSetRemoteSearchResultsRequests = field()
+    security: GetBoxSetRemoteSearchResultsSecurity = field()
     
 
 @dataclass
 class GetBoxSetRemoteSearchResultsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     remote_search_results: Optional[List[shared.RemoteSearchResult]] = field(default=None)
-    status_code: int = field(default=None)
     

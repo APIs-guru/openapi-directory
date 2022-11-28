@@ -25,13 +25,13 @@ type GetFavoritesForUserQueryParams struct {
 	Workspace    string                              `queryParam:"style=form,explode=true,name=workspace"`
 }
 
+type GetFavoritesForUser200ApplicationJSON struct {
+	Data []shared.AsanaNamedResource `json:"data,omitempty"`
+}
+
 type GetFavoritesForUserRequest struct {
 	PathParams  GetFavoritesForUserPathParams
 	QueryParams GetFavoritesForUserQueryParams
-}
-
-type GetFavoritesForUser200ApplicationJSON struct {
-	Data []shared.AsanaNamedResource `json:"data,omitempty"`
 }
 
 type GetFavoritesForUserResponse struct {

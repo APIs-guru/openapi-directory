@@ -4,18 +4,18 @@ from typing import Any,List,Optional
 
 @dataclass
 class StoryIDMessagesGetPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class StoryIDMessagesGetRequest:
-    path_params: StoryIDMessagesGetPathParams = field(default=None)
+    path_params: StoryIDMessagesGetPathParams = field()
     
 
 @dataclass
 class StoryIDMessagesGetResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     messages: Optional[List[Any]] = field(default=None)
     problem_detail: Optional[Any] = field(default=None)
     

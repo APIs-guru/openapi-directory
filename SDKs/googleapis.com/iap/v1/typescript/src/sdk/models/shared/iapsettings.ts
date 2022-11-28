@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccessSettings } from "./accesssettings";
 import { ApplicationSettings } from "./applicationsettings";
+
 
 
 // IapSettings
@@ -8,12 +9,12 @@ import { ApplicationSettings } from "./applicationsettings";
  * The IAP configurable settings.
 **/
 export class IapSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessSettings" })
+  @SpeakeasyMetadata({ data: "json, name=accessSettings" })
   accessSettings?: AccessSettings;
 
-  @Metadata({ data: "json, name=applicationSettings" })
+  @SpeakeasyMetadata({ data: "json, name=applicationSettings" })
   applicationSettings?: ApplicationSettings;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

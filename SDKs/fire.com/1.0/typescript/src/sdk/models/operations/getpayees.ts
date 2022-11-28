@@ -1,66 +1,67 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum GetPayeesPayeeCreatedByEnum {
-    Customer = "CUSTOMER"
-,    Lodgement = "LODGEMENT"
-,    DirectDebit = "DIRECT DEBIT"
-,    OpenBanking = "OPEN BANKING"
-,    FireOpenPayment = "FIRE OPEN PAYMENT"
-,    FireDirect = "FIRE DIRECT"
+    Customer = "CUSTOMER",
+    Lodgement = "LODGEMENT",
+    DirectDebit = "DIRECT DEBIT",
+    OpenBanking = "OPEN BANKING",
+    FireOpenPayment = "FIRE OPEN PAYMENT",
+    FireDirect = "FIRE DIRECT"
 }
 
 export enum GetPayeesPayeeStatusEnum {
-    Created = "CREATED"
-,    Live = "LIVE"
-,    Closed = "CLOSED"
-,    Archived = "ARCHIVED"
+    Created = "CREATED",
+    Live = "LIVE",
+    Closed = "CLOSED",
+    Archived = "ARCHIVED"
 }
 
 
 export class GetPayeesPayee extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountHolderName" })
+  @SpeakeasyMetadata({ data: "json, name=accountHolderName" })
   accountHolderName?: string;
 
-  @Metadata({ data: "json, name=accountName" })
+  @SpeakeasyMetadata({ data: "json, name=accountName" })
   accountName?: string;
 
-  @Metadata({ data: "json, name=accountNumber" })
+  @SpeakeasyMetadata({ data: "json, name=accountNumber" })
   accountNumber?: string;
 
-  @Metadata({ data: "json, name=bic" })
+  @SpeakeasyMetadata({ data: "json, name=bic" })
   bic?: string;
 
-  @Metadata({ data: "json, name=createdBy" })
+  @SpeakeasyMetadata({ data: "json, name=createdBy" })
   createdBy?: GetPayeesPayeeCreatedByEnum;
 
-  @Metadata({ data: "json, name=currency" })
+  @SpeakeasyMetadata({ data: "json, name=currency" })
   currency?: shared.OneaccountsGetResponses200ContentApplication1jsonSchemaPropertiesAccountsItemsPropertiesCurrency;
 
-  @Metadata({ data: "json, name=dateCreated" })
+  @SpeakeasyMetadata({ data: "json, name=dateCreated" })
   dateCreated?: Date;
 
-  @Metadata({ data: "json, name=iban" })
+  @SpeakeasyMetadata({ data: "json, name=iban" })
   iban?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=nsc" })
+  @SpeakeasyMetadata({ data: "json, name=nsc" })
   nsc?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: GetPayeesPayeeStatusEnum;
 }
 
 
 export class GetPayeesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   payee?: GetPayeesPayee;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

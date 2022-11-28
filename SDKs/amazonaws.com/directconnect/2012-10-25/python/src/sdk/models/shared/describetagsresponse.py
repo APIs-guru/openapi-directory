@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import resourcetag
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeTagsResponse:
-    resource_tags: Optional[List[resourcetag.ResourceTag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceTags' }})
+    resource_tags: Optional[List[ResourceTag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceTags') }})
     

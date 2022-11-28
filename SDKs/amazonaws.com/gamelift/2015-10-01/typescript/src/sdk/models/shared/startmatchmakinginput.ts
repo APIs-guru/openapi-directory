@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Player } from "./player";
+
 
 
 // StartMatchmakingInput
@@ -8,12 +8,12 @@ import { Player } from "./player";
  * Represents the input for a request operation.
 **/
 export class StartMatchmakingInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConfigurationName" })
+  @SpeakeasyMetadata({ data: "json, name=ConfigurationName" })
   configurationName: string;
 
-  @Metadata({ data: "json, name=Players", elemType: shared.Player })
+  @SpeakeasyMetadata({ data: "json, name=Players", elemType: Player })
   players: Player[];
 
-  @Metadata({ data: "json, name=TicketId" })
+  @SpeakeasyMetadata({ data: "json, name=TicketId" })
   ticketId?: string;
 }

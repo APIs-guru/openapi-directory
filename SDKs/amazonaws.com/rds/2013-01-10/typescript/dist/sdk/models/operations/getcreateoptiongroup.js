@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetCreateOptionGroupActionEnum;
 (function (GetCreateOptionGroupActionEnum) {
     GetCreateOptionGroupActionEnum["CreateOptionGroup"] = "CreateOptionGroup";
@@ -37,27 +37,27 @@ var GetCreateOptionGroupQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" }),
         __metadata("design:type", String)
     ], GetCreateOptionGroupQueryParams.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=EngineName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=EngineName" }),
         __metadata("design:type", String)
     ], GetCreateOptionGroupQueryParams.prototype, "engineName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=MajorEngineVersion" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MajorEngineVersion" }),
         __metadata("design:type", String)
     ], GetCreateOptionGroupQueryParams.prototype, "majorEngineVersion", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=OptionGroupDescription" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=OptionGroupDescription" }),
         __metadata("design:type", String)
     ], GetCreateOptionGroupQueryParams.prototype, "optionGroupDescription", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=OptionGroupName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=OptionGroupName" }),
         __metadata("design:type", String)
     ], GetCreateOptionGroupQueryParams.prototype, "optionGroupName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" }),
         __metadata("design:type", String)
     ], GetCreateOptionGroupQueryParams.prototype, "version", void 0);
     return GetCreateOptionGroupQueryParams;
@@ -69,31 +69,31 @@ var GetCreateOptionGroupHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], GetCreateOptionGroupHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], GetCreateOptionGroupHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], GetCreateOptionGroupHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], GetCreateOptionGroupHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], GetCreateOptionGroupHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], GetCreateOptionGroupHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], GetCreateOptionGroupHeaders.prototype, "xAmzSignedHeaders", void 0);
     return GetCreateOptionGroupHeaders;
@@ -105,11 +105,11 @@ var GetCreateOptionGroupRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetCreateOptionGroupQueryParams)
     ], GetCreateOptionGroupRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetCreateOptionGroupHeaders)
     ], GetCreateOptionGroupRequest.prototype, "headers", void 0);
     return GetCreateOptionGroupRequest;
@@ -121,15 +121,15 @@ var GetCreateOptionGroupResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetCreateOptionGroupResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetCreateOptionGroupResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetCreateOptionGroupResponse.prototype, "statusCode", void 0);
     return GetCreateOptionGroupResponse;

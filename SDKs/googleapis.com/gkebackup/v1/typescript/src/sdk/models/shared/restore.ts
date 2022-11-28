@@ -1,13 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RestoreConfig } from "./restoreconfig";
 
+
 export enum RestoreStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Creating = "CREATING"
-,    InProgress = "IN_PROGRESS"
-,    Succeeded = "SUCCEEDED"
-,    Failed = "FAILED"
-,    Deleting = "DELETING"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Creating = "CREATING",
+    InProgress = "IN_PROGRESS",
+    Succeeded = "SUCCEEDED",
+    Failed = "FAILED",
+    Deleting = "DELETING"
+}
+
+
+// RestoreInput
+/** 
+ * Represents both a request to Restore some portion of a Backup into a target GKE cluster and a record of the restore operation itself. Next id: 18
+**/
+export class RestoreInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=backup" })
+  backup?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=restoreConfig" })
+  restoreConfig?: RestoreConfig;
 }
 
 
@@ -16,54 +36,54 @@ export enum RestoreStateEnum {
  * Represents both a request to Restore some portion of a Backup into a target GKE cluster and a record of the restore operation itself. Next id: 18
 **/
 export class Restore extends SpeakeasyBase {
-  @Metadata({ data: "json, name=backup" })
+  @SpeakeasyMetadata({ data: "json, name=backup" })
   backup?: string;
 
-  @Metadata({ data: "json, name=cluster" })
+  @SpeakeasyMetadata({ data: "json, name=cluster" })
   cluster?: string;
 
-  @Metadata({ data: "json, name=completeTime" })
+  @SpeakeasyMetadata({ data: "json, name=completeTime" })
   completeTime?: string;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=resourcesExcludedCount" })
+  @SpeakeasyMetadata({ data: "json, name=resourcesExcludedCount" })
   resourcesExcludedCount?: number;
 
-  @Metadata({ data: "json, name=resourcesFailedCount" })
+  @SpeakeasyMetadata({ data: "json, name=resourcesFailedCount" })
   resourcesFailedCount?: number;
 
-  @Metadata({ data: "json, name=resourcesRestoredCount" })
+  @SpeakeasyMetadata({ data: "json, name=resourcesRestoredCount" })
   resourcesRestoredCount?: number;
 
-  @Metadata({ data: "json, name=restoreConfig" })
+  @SpeakeasyMetadata({ data: "json, name=restoreConfig" })
   restoreConfig?: RestoreConfig;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: RestoreStateEnum;
 
-  @Metadata({ data: "json, name=stateReason" })
+  @SpeakeasyMetadata({ data: "json, name=stateReason" })
   stateReason?: string;
 
-  @Metadata({ data: "json, name=uid" })
+  @SpeakeasyMetadata({ data: "json, name=uid" })
   uid?: string;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 
-  @Metadata({ data: "json, name=volumesRestoredCount" })
+  @SpeakeasyMetadata({ data: "json, name=volumesRestoredCount" })
   volumesRestoredCount?: number;
 }

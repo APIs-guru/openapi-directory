@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CustomErrorRule } from "./customerrorrule";
+
 
 
 // CustomError
@@ -8,9 +8,9 @@ import { CustomErrorRule } from "./customerrorrule";
  * Customize service error responses. For example, list any service specific protobuf types that can appear in error detail lists of error responses. Example: custom_error: types: - google.foo.v1.CustomError - google.foo.v1.AnotherError
 **/
 export class CustomError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=rules", elemType: shared.CustomErrorRule })
+  @SpeakeasyMetadata({ data: "json, name=rules", elemType: CustomErrorRule })
   rules?: CustomErrorRule[];
 
-  @Metadata({ data: "json, name=types" })
+  @SpeakeasyMetadata({ data: "json, name=types" })
   types?: string[];
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ShadingSuggestionState } from "./shadingsuggestionstate";
+
 
 
 // ParagraphStyleSuggestionState
@@ -7,66 +8,66 @@ import { ShadingSuggestionState } from "./shadingsuggestionstate";
  * A mask that indicates which of the fields on the base ParagraphStyle have been changed in this suggestion. For any field set to true, there's a new suggested value.
 **/
 export class ParagraphStyleSuggestionState extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alignmentSuggested" })
+  @SpeakeasyMetadata({ data: "json, name=alignmentSuggested" })
   alignmentSuggested?: boolean;
 
-  @Metadata({ data: "json, name=avoidWidowAndOrphanSuggested" })
+  @SpeakeasyMetadata({ data: "json, name=avoidWidowAndOrphanSuggested" })
   avoidWidowAndOrphanSuggested?: boolean;
 
-  @Metadata({ data: "json, name=borderBetweenSuggested" })
+  @SpeakeasyMetadata({ data: "json, name=borderBetweenSuggested" })
   borderBetweenSuggested?: boolean;
 
-  @Metadata({ data: "json, name=borderBottomSuggested" })
+  @SpeakeasyMetadata({ data: "json, name=borderBottomSuggested" })
   borderBottomSuggested?: boolean;
 
-  @Metadata({ data: "json, name=borderLeftSuggested" })
+  @SpeakeasyMetadata({ data: "json, name=borderLeftSuggested" })
   borderLeftSuggested?: boolean;
 
-  @Metadata({ data: "json, name=borderRightSuggested" })
+  @SpeakeasyMetadata({ data: "json, name=borderRightSuggested" })
   borderRightSuggested?: boolean;
 
-  @Metadata({ data: "json, name=borderTopSuggested" })
+  @SpeakeasyMetadata({ data: "json, name=borderTopSuggested" })
   borderTopSuggested?: boolean;
 
-  @Metadata({ data: "json, name=directionSuggested" })
+  @SpeakeasyMetadata({ data: "json, name=directionSuggested" })
   directionSuggested?: boolean;
 
-  @Metadata({ data: "json, name=headingIdSuggested" })
+  @SpeakeasyMetadata({ data: "json, name=headingIdSuggested" })
   headingIdSuggested?: boolean;
 
-  @Metadata({ data: "json, name=indentEndSuggested" })
+  @SpeakeasyMetadata({ data: "json, name=indentEndSuggested" })
   indentEndSuggested?: boolean;
 
-  @Metadata({ data: "json, name=indentFirstLineSuggested" })
+  @SpeakeasyMetadata({ data: "json, name=indentFirstLineSuggested" })
   indentFirstLineSuggested?: boolean;
 
-  @Metadata({ data: "json, name=indentStartSuggested" })
+  @SpeakeasyMetadata({ data: "json, name=indentStartSuggested" })
   indentStartSuggested?: boolean;
 
-  @Metadata({ data: "json, name=keepLinesTogetherSuggested" })
+  @SpeakeasyMetadata({ data: "json, name=keepLinesTogetherSuggested" })
   keepLinesTogetherSuggested?: boolean;
 
-  @Metadata({ data: "json, name=keepWithNextSuggested" })
+  @SpeakeasyMetadata({ data: "json, name=keepWithNextSuggested" })
   keepWithNextSuggested?: boolean;
 
-  @Metadata({ data: "json, name=lineSpacingSuggested" })
+  @SpeakeasyMetadata({ data: "json, name=lineSpacingSuggested" })
   lineSpacingSuggested?: boolean;
 
-  @Metadata({ data: "json, name=namedStyleTypeSuggested" })
+  @SpeakeasyMetadata({ data: "json, name=namedStyleTypeSuggested" })
   namedStyleTypeSuggested?: boolean;
 
-  @Metadata({ data: "json, name=pageBreakBeforeSuggested" })
+  @SpeakeasyMetadata({ data: "json, name=pageBreakBeforeSuggested" })
   pageBreakBeforeSuggested?: boolean;
 
-  @Metadata({ data: "json, name=shadingSuggestionState" })
+  @SpeakeasyMetadata({ data: "json, name=shadingSuggestionState" })
   shadingSuggestionState?: ShadingSuggestionState;
 
-  @Metadata({ data: "json, name=spaceAboveSuggested" })
+  @SpeakeasyMetadata({ data: "json, name=spaceAboveSuggested" })
   spaceAboveSuggested?: boolean;
 
-  @Metadata({ data: "json, name=spaceBelowSuggested" })
+  @SpeakeasyMetadata({ data: "json, name=spaceBelowSuggested" })
   spaceBelowSuggested?: boolean;
 
-  @Metadata({ data: "json, name=spacingModeSuggested" })
+  @SpeakeasyMetadata({ data: "json, name=spacingModeSuggested" })
   spacingModeSuggested?: boolean;
 }

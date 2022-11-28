@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GooglePrivacyDlpV2WordList
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Message defining a list of words or phrases to search for in the data.
 **/
 export class GooglePrivacyDlpV2WordList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=words" })
+  @SpeakeasyMetadata({ data: "json, name=words" })
   words?: string[];
 }

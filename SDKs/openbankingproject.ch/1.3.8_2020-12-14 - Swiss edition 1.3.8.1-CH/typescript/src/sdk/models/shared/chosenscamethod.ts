@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AuthenticationTypeEnum } from "./authenticationtypeenum";
+
 
 
 // ChosenScaMethod
@@ -8,18 +9,18 @@ import { AuthenticationTypeEnum } from "./authenticationtypeenum";
  * 
 **/
 export class ChosenScaMethod extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authenticationMethodId" })
+  @SpeakeasyMetadata({ data: "json, name=authenticationMethodId" })
   authenticationMethodId: string;
 
-  @Metadata({ data: "json, name=authenticationType" })
+  @SpeakeasyMetadata({ data: "json, name=authenticationType" })
   authenticationType: AuthenticationTypeEnum;
 
-  @Metadata({ data: "json, name=authenticationVersion" })
+  @SpeakeasyMetadata({ data: "json, name=authenticationVersion" })
   authenticationVersion?: string;
 
-  @Metadata({ data: "json, name=explanation" })
+  @SpeakeasyMetadata({ data: "json, name=explanation" })
   explanation?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

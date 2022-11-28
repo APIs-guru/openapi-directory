@@ -8,10 +8,6 @@ type PostSecurityRefreshSecurity struct {
 	JwtRefresh shared.SchemeJwtRefresh `security:"scheme,type=http,subtype=bearer"`
 }
 
-type PostSecurityRefreshRequest struct {
-	Security PostSecurityRefreshSecurity
-}
-
 type PostSecurityRefresh200ApplicationJSON struct {
 	AccessToken *string `json:"access_token,omitempty"`
 }
@@ -22,6 +18,10 @@ type PostSecurityRefresh401ApplicationJSON struct {
 
 type PostSecurityRefresh500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type PostSecurityRefreshRequest struct {
+	Security PostSecurityRefreshSecurity
 }
 
 type PostSecurityRefreshResponse struct {

@@ -19,12 +19,12 @@ type GetQueryJSONQueryParams struct {
 	Sw        *string `queryParam:"style=form,explode=true,name=sw"`
 }
 
-type GetQueryJSONRequest struct {
-	QueryParams GetQueryJSONQueryParams
-}
-
 type GetQueryJSON200ApplicationJSON struct {
 	Results []shared.Event `json:"results,omitempty"`
+}
+
+type GetQueryJSONRequest struct {
+	QueryParams GetQueryJSONQueryParams
 }
 
 type GetQueryJSONResponse struct {

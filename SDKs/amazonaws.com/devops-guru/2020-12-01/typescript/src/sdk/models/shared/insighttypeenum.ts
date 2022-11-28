@@ -1,6 +1,7 @@
 
 
+
 export enum InsightTypeEnum {
-    Reactive = "REACTIVE"
-,    Proactive = "PROACTIVE"
+    Reactive = "REACTIVE",
+    Proactive = "PROACTIVE"
 }

@@ -30,7 +30,7 @@ type CloudbuildProjectsLocationsGitLabConfigsRemoveGitLabConnectedRepositorySecu
 type CloudbuildProjectsLocationsGitLabConfigsRemoveGitLabConnectedRepositoryRequest struct {
 	PathParams  CloudbuildProjectsLocationsGitLabConfigsRemoveGitLabConnectedRepositoryPathParams
 	QueryParams CloudbuildProjectsLocationsGitLabConfigsRemoveGitLabConnectedRepositoryQueryParams
-	Request     *shared.RemoveGitLabConnectedRepositoryRequest `request:"mediaType=application/json"`
+	Request     *shared.RemoveGitLabConnectedRepositoryRequestInput `request:"mediaType=application/json"`
 	Security    CloudbuildProjectsLocationsGitLabConfigsRemoveGitLabConnectedRepositorySecurity
 }
 

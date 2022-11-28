@@ -1,52 +1,53 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PepRetrievePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 export enum PepRetrieveAcceptEnum {
-    ApplicationJson = "application/json"
-,    ApplicationPdf = "application/pdf"
+    ApplicationJson = "application/json",
+    ApplicationPdf = "application/pdf"
 }
 
 
 export class PepRetrieveHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=accept" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=accept" })
   accept?: PepRetrieveAcceptEnum;
 }
 
 
 export class PepRetrieveSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   userKey: shared.SchemeUserKey;
 }
 
 
 export class PepRetrieveRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PepRetrievePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: PepRetrieveHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: PepRetrieveSecurity;
 }
 
 
 export class PepRetrieveResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   pepRetrieve200ApplicationJsonAny?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   pepRetrieveDefaultApplicationJsonAny?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

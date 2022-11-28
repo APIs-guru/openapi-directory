@@ -1,7 +1,8 @@
 
 
+
 export enum ChangeTokenStatusEnum {
-    Provisioned = "PROVISIONED"
-,    Pending = "PENDING"
-,    Insync = "INSYNC"
+    Provisioned = "PROVISIONED",
+    Pending = "PENDING",
+    Insync = "INSYNC"
 }

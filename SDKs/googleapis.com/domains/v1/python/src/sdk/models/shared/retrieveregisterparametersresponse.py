@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import registerparameters
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class RetrieveRegisterParametersResponse:
-    register_parameters: Optional[registerparameters.RegisterParameters] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'registerParameters' }})
+    r"""RetrieveRegisterParametersResponse
+    Response for the `RetrieveRegisterParameters` method.
+    """
+    
+    register_parameters: Optional[RegisterParameters] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('registerParameters') }})
     

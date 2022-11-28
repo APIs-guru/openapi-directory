@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -13,6 +17,7 @@ class ListJobsXAmzTargetEnum(str, Enum):
 
 @dataclass
 class ListJobsHeaders:
+    x_amz_target: ListJobsXAmzTargetEnum = field(metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm', 'style': 'simple', 'explode': False }})
     x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256', 'style': 'simple', 'explode': False }})
     x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential', 'style': 'simple', 'explode': False }})
@@ -20,23 +25,22 @@ class ListJobsHeaders:
     x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token', 'style': 'simple', 'explode': False }})
     x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature', 'style': 'simple', 'explode': False }})
     x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders', 'style': 'simple', 'explode': False }})
-    x_amz_target: ListJobsXAmzTargetEnum = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ListJobsRequest:
-    query_params: ListJobsQueryParams = field(default=None)
-    headers: ListJobsHeaders = field(default=None)
-    request: shared.ListJobsRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ListJobsHeaders = field()
+    query_params: ListJobsQueryParams = field()
+    request: shared.ListJobsRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ListJobsResponse:
+    content_type: str = field()
+    status_code: int = field()
     argument_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     list_jobs_result: Optional[shared.ListJobsResult] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
     service_account_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

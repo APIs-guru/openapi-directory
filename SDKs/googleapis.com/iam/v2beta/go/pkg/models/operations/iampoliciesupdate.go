@@ -30,7 +30,7 @@ type IamPoliciesUpdateSecurity struct {
 type IamPoliciesUpdateRequest struct {
 	PathParams  IamPoliciesUpdatePathParams
 	QueryParams IamPoliciesUpdateQueryParams
-	Request     *shared.GoogleIamV2betaPolicy `request:"mediaType=application/json"`
+	Request     *shared.GoogleIamV2betaPolicyInput `request:"mediaType=application/json"`
 	Security    IamPoliciesUpdateSecurity
 }
 

@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Program extends SpeakeasyBase {
-  @Metadata({ data: "json, name=airlines" })
+  @SpeakeasyMetadata({ data: "json, name=airlines" })
   airlines?: string[];
 
-  @Metadata({ data: "json, name=denomination" })
+  @SpeakeasyMetadata({ data: "json, name=denomination" })
   denomination?: string;
 
-  @Metadata({ data: "json, name=fullName" })
+  @SpeakeasyMetadata({ data: "json, name=fullName" })
   fullName?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=programName" })
+  @SpeakeasyMetadata({ data: "json, name=programName" })
   programName?: string;
 
-  @Metadata({ data: "json, name=tierNames" })
+  @SpeakeasyMetadata({ data: "json, name=tierNames" })
   tierNames?: string[];
 }

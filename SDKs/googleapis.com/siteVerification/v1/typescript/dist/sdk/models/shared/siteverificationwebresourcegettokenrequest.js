@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // SiteVerificationWebResourceGettokenRequestSite
 /**
  * The site for which a verification token will be generated.
@@ -33,11 +33,11 @@ var SiteVerificationWebResourceGettokenRequestSite = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=identifier" }),
+        SpeakeasyMetadata({ data: "json, name=identifier" }),
         __metadata("design:type", String)
     ], SiteVerificationWebResourceGettokenRequestSite.prototype, "identifier", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], SiteVerificationWebResourceGettokenRequestSite.prototype, "type", void 0);
     return SiteVerificationWebResourceGettokenRequestSite;
@@ -49,11 +49,11 @@ var SiteVerificationWebResourceGettokenRequest = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=site" }),
+        SpeakeasyMetadata({ data: "json, name=site" }),
         __metadata("design:type", SiteVerificationWebResourceGettokenRequestSite)
     ], SiteVerificationWebResourceGettokenRequest.prototype, "site", void 0);
     __decorate([
-        Metadata({ data: "json, name=verificationMethod" }),
+        SpeakeasyMetadata({ data: "json, name=verificationMethod" }),
         __metadata("design:type", String)
     ], SiteVerificationWebResourceGettokenRequest.prototype, "verificationMethod", void 0);
     return SiteVerificationWebResourceGettokenRequest;

@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class CivicinfoRepresentativesRepresentativeInfoByAddressLevelsEnum(str, Enum):
@@ -49,12 +50,12 @@ class CivicinfoRepresentativesRepresentativeInfoByAddressQueryParams:
 
 @dataclass
 class CivicinfoRepresentativesRepresentativeInfoByAddressRequest:
-    query_params: CivicinfoRepresentativesRepresentativeInfoByAddressQueryParams = field(default=None)
+    query_params: CivicinfoRepresentativesRepresentativeInfoByAddressQueryParams = field()
     
 
 @dataclass
 class CivicinfoRepresentativesRepresentativeInfoByAddressResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     representative_info_response: Optional[shared.RepresentativeInfoResponse] = field(default=None)
-    status_code: int = field(default=None)
     

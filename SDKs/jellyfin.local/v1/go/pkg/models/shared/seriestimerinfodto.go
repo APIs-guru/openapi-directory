@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// SeriesTimerInfoDto
+// Class SeriesTimerInfoDto.
 type SeriesTimerInfoDto struct {
 	ChannelID                *string           `json:"ChannelId,omitempty"`
 	ChannelName              *string           `json:"ChannelName,omitempty"`

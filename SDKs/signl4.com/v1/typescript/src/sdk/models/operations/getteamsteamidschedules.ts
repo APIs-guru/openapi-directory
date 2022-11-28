@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetTeamsTeamIdSchedulesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=teamId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=teamId" })
   teamId: string;
 }
 
 
 export class GetTeamsTeamIdSchedulesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=MinDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MinDate" })
   minDate?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=UserId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=UserId" })
   userId?: string;
 }
 
 
 export class GetTeamsTeamIdSchedulesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetTeamsTeamIdSchedulesPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetTeamsTeamIdSchedulesQueryParams;
 }
 
 
 export class GetTeamsTeamIdSchedulesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponseContent?: shared.ErrorResponseContent;
 
-  @Metadata({ elemType: shared.ScheduleInfo })
+  @SpeakeasyMetadata({ elemType: shared.ScheduleInfo })
   scheduleInfos?: shared.ScheduleInfo[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

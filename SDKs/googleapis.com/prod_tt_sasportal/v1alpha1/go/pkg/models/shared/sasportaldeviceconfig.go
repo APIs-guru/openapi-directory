@@ -24,6 +24,8 @@ const (
 	SasPortalDeviceConfigStateEnumFinal                        SasPortalDeviceConfigStateEnum = "FINAL"
 )
 
+// SasPortalDeviceConfig
+// Information about the device configuration.
 type SasPortalDeviceConfig struct {
 	AirInterface            *SasPortalDeviceAirInterface                       `json:"airInterface,omitempty"`
 	CallSign                *string                                            `json:"callSign,omitempty"`

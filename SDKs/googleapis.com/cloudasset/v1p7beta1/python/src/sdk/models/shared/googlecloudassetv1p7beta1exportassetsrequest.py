@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googlecloudassetv1p7beta1outputconfig
+from sdk import utils
+from . import *
 
 class GoogleCloudAssetV1p7beta1ExportAssetsRequestContentTypeEnum(str, Enum):
     CONTENT_TYPE_UNSPECIFIED = "CONTENT_TYPE_UNSPECIFIED"
@@ -15,9 +17,13 @@ class GoogleCloudAssetV1p7beta1ExportAssetsRequestContentTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleCloudAssetV1p7beta1ExportAssetsRequest:
-    asset_types: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'assetTypes' }})
-    content_type: Optional[GoogleCloudAssetV1p7beta1ExportAssetsRequestContentTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'contentType' }})
-    output_config: Optional[googlecloudassetv1p7beta1outputconfig.GoogleCloudAssetV1p7beta1OutputConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'outputConfig' }})
-    read_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'readTime' }})
-    relationship_types: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'relationshipTypes' }})
+    r"""GoogleCloudAssetV1p7beta1ExportAssetsRequest
+    Export asset request.
+    """
+    
+    asset_types: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('assetTypes') }})
+    content_type: Optional[GoogleCloudAssetV1p7beta1ExportAssetsRequestContentTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('contentType') }})
+    output_config: Optional[GoogleCloudAssetV1p7beta1OutputConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('outputConfig') }})
+    read_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('readTime') }})
+    relationship_types: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('relationshipTypes') }})
     

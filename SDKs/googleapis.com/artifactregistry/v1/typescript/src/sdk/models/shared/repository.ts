@@ -1,15 +1,47 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MavenRepositoryConfig } from "./mavenrepositoryconfig";
 
+
 export enum RepositoryFormatEnum {
-    FormatUnspecified = "FORMAT_UNSPECIFIED"
-,    Docker = "DOCKER"
-,    Maven = "MAVEN"
-,    Npm = "NPM"
-,    Apt = "APT"
-,    Yum = "YUM"
-,    Python = "PYTHON"
-,    Kfp = "KFP"
+    FormatUnspecified = "FORMAT_UNSPECIFIED",
+    Docker = "DOCKER",
+    Maven = "MAVEN",
+    Npm = "NPM",
+    Apt = "APT",
+    Yum = "YUM",
+    Python = "PYTHON",
+    Kfp = "KFP"
+}
+
+
+// RepositoryInput
+/** 
+ * A Repository for storing artifacts with a specific format.
+**/
+export class RepositoryInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
+  createTime?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=format" })
+  format?: RepositoryFormatEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=kmsKeyName" })
+  kmsKeyName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=mavenConfig" })
+  mavenConfig?: MavenRepositoryConfig;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
+  updateTime?: string;
 }
 
 
@@ -18,30 +50,33 @@ export enum RepositoryFormatEnum {
  * A Repository for storing artifacts with a specific format.
 **/
 export class Repository extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=format" })
+  @SpeakeasyMetadata({ data: "json, name=format" })
   format?: RepositoryFormatEnum;
 
-  @Metadata({ data: "json, name=kmsKeyName" })
+  @SpeakeasyMetadata({ data: "json, name=kmsKeyName" })
   kmsKeyName?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=mavenConfig" })
+  @SpeakeasyMetadata({ data: "json, name=mavenConfig" })
   mavenConfig?: MavenRepositoryConfig;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=sizeBytes" })
+  @SpeakeasyMetadata({ data: "json, name=satisfiesPzs" })
+  satisfiesPzs?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=sizeBytes" })
   sizeBytes?: string;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 }

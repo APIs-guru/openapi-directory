@@ -5,24 +5,24 @@ from sdk.models import shared
 
 @dataclass
 class DeleteVideoFromVodPathParams:
-    ondemand_id: float = field(default=None, metadata={'path_param': { 'field_name': 'ondemand_id', 'style': 'simple', 'explode': False }})
-    video_id: float = field(default=None, metadata={'path_param': { 'field_name': 'video_id', 'style': 'simple', 'explode': False }})
+    ondemand_id: float = field(metadata={'path_param': { 'field_name': 'ondemand_id', 'style': 'simple', 'explode': False }})
+    video_id: float = field(metadata={'path_param': { 'field_name': 'video_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DeleteVideoFromVodSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DeleteVideoFromVodRequest:
-    path_params: DeleteVideoFromVodPathParams = field(default=None)
-    security: DeleteVideoFromVodSecurity = field(default=None)
+    path_params: DeleteVideoFromVodPathParams = field()
+    security: DeleteVideoFromVodSecurity = field()
     
 
 @dataclass
 class DeleteVideoFromVodResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     legacy_error: Optional[shared.LegacyError] = field(default=None)
     

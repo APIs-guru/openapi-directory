@@ -4,16 +4,16 @@ from dataclasses import dataclass, field
 
 @dataclass
 class GetTargetByEnsgidPathParams:
-    target: str = field(default=None, metadata={'path_param': { 'field_name': 'target', 'style': 'simple', 'explode': False }})
+    target: str = field(metadata={'path_param': { 'field_name': 'target', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetTargetByEnsgidRequest:
-    path_params: GetTargetByEnsgidPathParams = field(default=None)
+    path_params: GetTargetByEnsgidPathParams = field()
     
 
 @dataclass
 class GetTargetByEnsgidResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

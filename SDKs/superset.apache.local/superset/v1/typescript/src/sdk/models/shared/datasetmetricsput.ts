@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DatasetMetricsPut extends SpeakeasyBase {
-  @Metadata({ data: "json, name=d3format" })
+  @SpeakeasyMetadata({ data: "json, name=d3format" })
   d3format?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=expression" })
+  @SpeakeasyMetadata({ data: "json, name=expression" })
   expression: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=metric_name" })
+  @SpeakeasyMetadata({ data: "json, name=metric_name" })
   metricName: string;
 
-  @Metadata({ data: "json, name=metric_type" })
+  @SpeakeasyMetadata({ data: "json, name=metric_type" })
   metricType?: string;
 
-  @Metadata({ data: "json, name=warning_text" })
+  @SpeakeasyMetadata({ data: "json, name=warning_text" })
   warningText?: string;
 }

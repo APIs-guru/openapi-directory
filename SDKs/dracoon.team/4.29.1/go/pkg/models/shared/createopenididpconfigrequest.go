@@ -14,6 +14,8 @@ const (
 	CreateOpenIDIdpConfigRequestUserInfoSourceEnumIDToken          CreateOpenIDIdpConfigRequestUserInfoSourceEnum = "id_token"
 )
 
+// CreateOpenIDIdpConfigRequest
+// Request model for creating an OpenID Connect IDP configuration
 type CreateOpenIDIdpConfigRequest struct {
 	AuthorizationEndPointURL string                                          `json:"authorizationEndPointUrl"`
 	ClientID                 string                                          `json:"clientId"`

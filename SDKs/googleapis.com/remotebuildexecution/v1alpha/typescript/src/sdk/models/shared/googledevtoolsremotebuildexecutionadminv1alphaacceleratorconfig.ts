@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleDevtoolsRemotebuildexecutionAdminV1alphaAcceleratorConfig
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * AcceleratorConfig defines the accelerator cards to attach to the VM.
 **/
 export class GoogleDevtoolsRemotebuildexecutionAdminV1alphaAcceleratorConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=acceleratorCount" })
+  @SpeakeasyMetadata({ data: "json, name=acceleratorCount" })
   acceleratorCount?: string;
 
-  @Metadata({ data: "json, name=acceleratorType" })
+  @SpeakeasyMetadata({ data: "json, name=acceleratorType" })
   acceleratorType?: string;
 }

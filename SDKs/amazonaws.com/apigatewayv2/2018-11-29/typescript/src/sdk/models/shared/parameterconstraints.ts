@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ParameterConstraints
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Validation constraints imposed on parameters of a request (path, query string, headers).
 **/
 export class ParameterConstraints extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Required" })
+  @SpeakeasyMetadata({ data: "json, name=Required" })
   required?: boolean;
 }

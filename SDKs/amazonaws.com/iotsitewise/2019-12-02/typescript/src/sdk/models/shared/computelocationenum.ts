@@ -1,6 +1,7 @@
 
 
+
 export enum ComputeLocationEnum {
-    Edge = "EDGE"
-,    Cloud = "CLOUD"
+    Edge = "EDGE",
+    Cloud = "CLOUD"
 }

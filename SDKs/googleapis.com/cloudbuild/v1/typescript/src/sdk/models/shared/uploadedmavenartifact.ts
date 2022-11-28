@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FileHashes } from "./filehashes";
 import { TimeSpan } from "./timespan";
+
 
 
 // UploadedMavenArtifact
@@ -8,12 +9,12 @@ import { TimeSpan } from "./timespan";
  * A Maven artifact uploaded using the MavenArtifact directive.
 **/
 export class UploadedMavenArtifact extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fileHashes" })
+  @SpeakeasyMetadata({ data: "json, name=fileHashes" })
   fileHashes?: FileHashes;
 
-  @Metadata({ data: "json, name=pushTiming" })
+  @SpeakeasyMetadata({ data: "json, name=pushTiming" })
   pushTiming?: TimeSpan;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri?: string;
 }

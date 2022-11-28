@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CompanyNotificationListSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   userKey: shared.SchemeUserKey;
 }
 
 
 export class CompanyNotificationListRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   security: CompanyNotificationListSecurity;
 }
 
 
 export class CompanyNotificationListResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   companyNotificationList200ApplicationJsonAnies?: any[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   companyNotificationListDefaultApplicationJsonAny?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

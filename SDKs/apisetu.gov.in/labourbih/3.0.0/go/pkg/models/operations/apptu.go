@@ -27,11 +27,6 @@ type ApptuSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type ApptuRequest struct {
-	Request  *ApptuRequestBody `request:"mediaType=application/json"`
-	Security ApptuSecurity
-}
-
 type Apptu400ApplicationJSONErrorEnum string
 
 const (
@@ -161,6 +156,11 @@ const (
 type Apptu504ApplicationJSON struct {
 	Error            *Apptu504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Apptu504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type ApptuRequest struct {
+	Request  *ApptuRequestBody `request:"mediaType=application/json"`
+	Security ApptuSecurity
 }
 
 type ApptuResponse struct {

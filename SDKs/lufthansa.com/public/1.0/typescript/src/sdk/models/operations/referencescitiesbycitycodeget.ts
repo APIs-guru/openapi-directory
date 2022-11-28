@@ -1,59 +1,60 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ReferencesCitiesByCityCodeGetPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=cityCode" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=cityCode" })
   cityCode: string;
 }
 
 
 export class ReferencesCitiesByCityCodeGetQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=lang" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lang" })
   lang?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: string;
 }
 
 
 export class ReferencesCitiesByCityCodeGetHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Accept" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept" })
   accept: string;
 }
 
 
 export class ReferencesCitiesByCityCodeGetSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   auth: shared.SchemeAuth;
 }
 
 
 export class ReferencesCitiesByCityCodeGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ReferencesCitiesByCityCodeGetPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ReferencesCitiesByCityCodeGetQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: ReferencesCitiesByCityCodeGetHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: ReferencesCitiesByCityCodeGetSecurity;
 }
 
 
 export class ReferencesCitiesByCityCodeGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   referencesCitiesByCityCodeGet200ApplicationJsonObject?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

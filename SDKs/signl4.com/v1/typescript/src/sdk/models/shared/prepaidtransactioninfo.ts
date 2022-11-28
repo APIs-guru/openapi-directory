@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PrepaidTransactionInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=autoTopUpId" })
+  @SpeakeasyMetadata({ data: "json, name=autoTopUpId" })
   autoTopUpId?: string;
 
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=createdBy" })
+  @SpeakeasyMetadata({ data: "json, name=createdBy" })
   createdBy?: string;
 
-  @Metadata({ data: "json, name=credits" })
+  @SpeakeasyMetadata({ data: "json, name=credits" })
   credits?: number;
 
-  @Metadata({ data: "json, name=currency" })
+  @SpeakeasyMetadata({ data: "json, name=currency" })
   currency?: string;
 
-  @Metadata({ data: "json, name=modified" })
+  @SpeakeasyMetadata({ data: "json, name=modified" })
   modified?: Date;
 
-  @Metadata({ data: "json, name=packageCode" })
+  @SpeakeasyMetadata({ data: "json, name=packageCode" })
   packageCode?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 
-  @Metadata({ data: "json, name=statusCode" })
+  @SpeakeasyMetadata({ data: "json, name=statusCode" })
   statusCode?: number;
 
-  @Metadata({ data: "json, name=subscriptionId" })
+  @SpeakeasyMetadata({ data: "json, name=subscriptionId" })
   subscriptionId?: string;
 
-  @Metadata({ data: "json, name=transactionId" })
+  @SpeakeasyMetadata({ data: "json, name=transactionId" })
   transactionId?: string;
 }

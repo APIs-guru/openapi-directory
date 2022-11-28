@@ -4,11 +4,15 @@ import (
 	"time"
 )
 
+// ObReadBalance1DataBalanceAmount
+// Amount of money of the cash balance.
 type ObReadBalance1DataBalanceAmount struct {
 	Amount   string `json:"Amount"`
 	Currency string `json:"Currency"`
 }
 
+// ObReadBalance1DataBalanceCreditLineAmount
+// Amount of money of the credit line.
 type ObReadBalance1DataBalanceCreditLineAmount struct {
 	Amount   string `json:"Amount"`
 	Currency string `json:"Currency"`
@@ -24,12 +28,16 @@ const (
 	ObReadBalance1DataBalanceCreditLineTypeEnumTemporary ObReadBalance1DataBalanceCreditLineTypeEnum = "Temporary"
 )
 
+// ObReadBalance1DataBalanceCreditLine
+// Set of elements used to provide details on the credit line.
 type ObReadBalance1DataBalanceCreditLine struct {
 	Amount   *ObReadBalance1DataBalanceCreditLineAmount   `json:"Amount,omitempty"`
 	Included bool                                         `json:"Included"`
 	Type     *ObReadBalance1DataBalanceCreditLineTypeEnum `json:"Type,omitempty"`
 }
 
+// ObReadBalance1DataBalance
+// Set of elements used to define the balance details.
 type ObReadBalance1DataBalance struct {
 	AccountID            string                                `json:"AccountId"`
 	Amount               ObReadBalance1DataBalanceAmount       `json:"Amount"`

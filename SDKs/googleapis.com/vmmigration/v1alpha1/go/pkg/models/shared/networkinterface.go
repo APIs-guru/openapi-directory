@@ -1,5 +1,7 @@
 package shared
 
+// NetworkInterface
+// NetworkInterface represents a NIC of a VM.
 type NetworkInterface struct {
 	ExternalIP *string `json:"externalIp,omitempty"`
 	InternalIP *string `json:"internalIp,omitempty"`

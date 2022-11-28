@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GroupV2GetAdminsAndFounderOfGroupPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=groupId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=groupId" })
   groupId: number;
 }
 
 
 export class GroupV2GetAdminsAndFounderOfGroupQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=currentpage" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=currentpage" })
   currentpage: number;
 }
 
 
 export class GroupV2GetAdminsAndFounderOfGroupRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GroupV2GetAdminsAndFounderOfGroupPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GroupV2GetAdminsAndFounderOfGroupQueryParams;
 }
 
 
 export class GroupV2GetAdminsAndFounderOfGroupResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

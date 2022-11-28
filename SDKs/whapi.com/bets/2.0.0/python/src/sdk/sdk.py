@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import List,Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,30 +14,51 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def cashin(self, request: operations.CashinRequest) -> operations.CashinResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Allows a trusted application to cash in a bet (take a return on a bet) on behalf of the customer
+        Allows a trusted application to cash in a bet (take a return on a bet) on behalf of the customer. If the customers monitor bets they can cash in a bet at any point before the event ends.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{betId}/cashin", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -57,17 +81,19 @@ class SDK:
 
     
     def get_bet_history(self, request: operations.GetBetHistoryRequest) -> operations.GetBetHistoryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves the customer’s bet history.
+        Retrieves the customer’s bet history. Options are available to organise the history in terms of date, bet type and settled and unsettled bets. The maximum number of bets and bet history pages retrieved can also be set.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/history"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -86,17 +112,19 @@ class SDK:
 
     
     def get_free_bets(self, request: operations.GetFreeBetsRequest) -> operations.GetFreeBetsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns available free bets
+        Retrieves the current free bets available for a customer.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/freebets"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -113,24 +141,24 @@ class SDK:
 
     
     def place_complex_bet(self, request: operations.PlaceComplexBetRequest) -> operations.PlaceComplexBetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Places a multiple or a complex bet.
+        Places a multiple or a complex bet.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/bet/complex"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -153,24 +181,24 @@ class SDK:
 
     
     def place_single_bet(self, request: operations.PlaceSingleBetRequest) -> operations.PlaceSingleBetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Places a single bet
+        Places a single bet. When placing a single bet using live inplay bets, the system might generate a bet delay to allow a time margin to negate the effects of major changes (for example, goals) to the market. Note that the amount of bet delay will vary by category and event type. A delayedBetId will be recieved that can be used to resubmit the bet.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/bet/single"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -193,24 +221,23 @@ class SDK:
 
     
     def validate_betslip(self, request: operations.ValidateBetslipRequest) -> operations.ValidateBetslipResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Organises the betslip when one or more selections are made. It returns a bet slip structure organised by betting opportunities.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/betslips"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

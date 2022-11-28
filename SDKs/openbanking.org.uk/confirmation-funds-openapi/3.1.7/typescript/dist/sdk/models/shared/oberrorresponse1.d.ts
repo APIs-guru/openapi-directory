@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ObError1 } from "./oberror1";
 /**
  * An array of detail error codes, and messages, and URLs to documentation to help remediation.

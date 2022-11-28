@@ -17,7 +17,10 @@ const (
 	MigratingVMStateEnumError            MigratingVMStateEnum = "ERROR"
 )
 
+// MigratingVM
+// MigratingVm describes the VM that will be migrated from a Source environment and its replication state.
 type MigratingVM struct {
+	AwsSourceVMDetails          *AwsSourceVMDetails          `json:"awsSourceVmDetails,omitempty"`
 	ComputeEngineTargetDefaults *ComputeEngineTargetDefaults `json:"computeEngineTargetDefaults,omitempty"`
 	ComputeEngineVMDefaults     *TargetVMDetails             `json:"computeEngineVmDefaults,omitempty"`
 	CreateTime                  *string                      `json:"createTime,omitempty"`
@@ -37,4 +40,21 @@ type MigratingVM struct {
 	StateTime                   *string                      `json:"stateTime,omitempty"`
 	TargetDefaults              *TargetVMDetails             `json:"targetDefaults,omitempty"`
 	UpdateTime                  *string                      `json:"updateTime,omitempty"`
+}
+
+// MigratingVMInput
+// MigratingVm describes the VM that will be migrated from a Source environment and its replication state.
+type MigratingVMInput struct {
+	AwsSourceVMDetails          *AwsSourceVMDetails               `json:"awsSourceVmDetails,omitempty"`
+	ComputeEngineTargetDefaults *ComputeEngineTargetDefaultsInput `json:"computeEngineTargetDefaults,omitempty"`
+	ComputeEngineVMDefaults     *TargetVMDetailsInput             `json:"computeEngineVmDefaults,omitempty"`
+	CurrentSyncInfo             *ReplicationCycle                 `json:"currentSyncInfo,omitempty"`
+	Description                 *string                           `json:"description,omitempty"`
+	DisplayName                 *string                           `json:"displayName,omitempty"`
+	Error                       *Status                           `json:"error,omitempty"`
+	Labels                      map[string]string                 `json:"labels,omitempty"`
+	LastSync                    *ReplicationSync                  `json:"lastSync,omitempty"`
+	Policy                      *SchedulePolicy                   `json:"policy,omitempty"`
+	SourceVMID                  *string                           `json:"sourceVmId,omitempty"`
+	TargetDefaults              *TargetVMDetailsInput             `json:"targetDefaults,omitempty"`
 }

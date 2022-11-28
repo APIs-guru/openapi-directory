@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://fax.twilio.com",
 }
 
@@ -19,9 +19,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -32,27 +36,45 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// DeleteFax - Delete a specific fax and its associated media.
 func (s *SDK) DeleteFax(ctx context.Context, request operations.DeleteFaxRequest) (*operations.DeleteFaxResponse, error) {
-	baseURL := operations.DeleteFaxServers[0]
+	baseURL := operations.DeleteFaxServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -64,7 +86,7 @@ func (s *SDK) DeleteFax(ctx context.Context, request operations.DeleteFaxRequest
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -85,8 +107,9 @@ func (s *SDK) DeleteFax(ctx context.Context, request operations.DeleteFaxRequest
 	return res, nil
 }
 
+// DeleteFaxMedia - Delete a specific fax media instance.
 func (s *SDK) DeleteFaxMedia(ctx context.Context, request operations.DeleteFaxMediaRequest) (*operations.DeleteFaxMediaResponse, error) {
-	baseURL := operations.DeleteFaxMediaServers[0]
+	baseURL := operations.DeleteFaxMediaServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -98,7 +121,7 @@ func (s *SDK) DeleteFaxMedia(ctx context.Context, request operations.DeleteFaxMe
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -119,8 +142,9 @@ func (s *SDK) DeleteFaxMedia(ctx context.Context, request operations.DeleteFaxMe
 	return res, nil
 }
 
+// FetchFax - Fetch a specific fax.
 func (s *SDK) FetchFax(ctx context.Context, request operations.FetchFaxRequest) (*operations.FetchFaxResponse, error) {
-	baseURL := operations.FetchFaxServers[0]
+	baseURL := operations.FetchFaxServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -132,7 +156,7 @@ func (s *SDK) FetchFax(ctx context.Context, request operations.FetchFaxRequest) 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -162,8 +186,9 @@ func (s *SDK) FetchFax(ctx context.Context, request operations.FetchFaxRequest) 
 	return res, nil
 }
 
+// FetchFaxMedia - Fetch a specific fax media instance.
 func (s *SDK) FetchFaxMedia(ctx context.Context, request operations.FetchFaxMediaRequest) (*operations.FetchFaxMediaResponse, error) {
-	baseURL := operations.FetchFaxMediaServers[0]
+	baseURL := operations.FetchFaxMediaServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -175,7 +200,7 @@ func (s *SDK) FetchFaxMedia(ctx context.Context, request operations.FetchFaxMedi
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -205,8 +230,9 @@ func (s *SDK) FetchFaxMedia(ctx context.Context, request operations.FetchFaxMedi
 	return res, nil
 }
 
+// ListFax - Retrieve a list of all faxes.
 func (s *SDK) ListFax(ctx context.Context, request operations.ListFaxRequest) (*operations.ListFaxResponse, error) {
-	baseURL := operations.ListFaxServers[0]
+	baseURL := operations.ListFaxServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -220,7 +246,7 @@ func (s *SDK) ListFax(ctx context.Context, request operations.ListFaxRequest) (*
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -250,8 +276,9 @@ func (s *SDK) ListFax(ctx context.Context, request operations.ListFaxRequest) (*
 	return res, nil
 }
 
+// ListFaxMedia - Retrieve a list of all fax media instances for the specified fax.
 func (s *SDK) ListFaxMedia(ctx context.Context, request operations.ListFaxMediaRequest) (*operations.ListFaxMediaResponse, error) {
-	baseURL := operations.ListFaxMediaServers[0]
+	baseURL := operations.ListFaxMediaServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -265,7 +292,7 @@ func (s *SDK) ListFaxMedia(ctx context.Context, request operations.ListFaxMediaR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {

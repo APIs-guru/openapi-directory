@@ -1,7 +1,8 @@
 
 
+
 export enum EnvironmentAccountConnectionStatusEnum {
-    Pending = "PENDING"
-,    Connected = "CONNECTED"
-,    Rejected = "REJECTED"
+    Pending = "PENDING",
+    Connected = "CONNECTED",
+    Rejected = "REJECTED"
 }

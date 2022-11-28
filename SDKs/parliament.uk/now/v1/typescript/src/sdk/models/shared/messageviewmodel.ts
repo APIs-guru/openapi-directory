@@ -1,37 +1,37 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ScrollingMessageViewModel } from "./scrollingmessageviewmodel";
 import { SlideViewModel } from "./slideviewmodel";
 
+
 export enum MessageViewModelAnnunciatorTypeEnum {
-    CommonsMain = "CommonsMain"
-,    LordsMain = "LordsMain"
-,    Security = "Security"
+    CommonsMain = "CommonsMain",
+    LordsMain = "LordsMain",
+    Security = "Security"
 }
 
 
 export class MessageViewModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=annunciatorType" })
+  @SpeakeasyMetadata({ data: "json, name=annunciatorType" })
   annunciatorType?: MessageViewModelAnnunciatorTypeEnum;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=isSecurityOverride" })
+  @SpeakeasyMetadata({ data: "json, name=isSecurityOverride" })
   isSecurityOverride?: boolean;
 
-  @Metadata({ data: "json, name=publishTime" })
+  @SpeakeasyMetadata({ data: "json, name=publishTime" })
   publishTime?: Date;
 
-  @Metadata({ data: "json, name=scrollingMessages", elemType: shared.ScrollingMessageViewModel })
+  @SpeakeasyMetadata({ data: "json, name=scrollingMessages", elemType: ScrollingMessageViewModel })
   scrollingMessages?: ScrollingMessageViewModel[];
 
-  @Metadata({ data: "json, name=showCommonsBell" })
+  @SpeakeasyMetadata({ data: "json, name=showCommonsBell" })
   showCommonsBell?: boolean;
 
-  @Metadata({ data: "json, name=showLordsBell" })
+  @SpeakeasyMetadata({ data: "json, name=showLordsBell" })
   showLordsBell?: boolean;
 
-  @Metadata({ data: "json, name=slides", elemType: shared.SlideViewModel })
+  @SpeakeasyMetadata({ data: "json, name=slides", elemType: SlideViewModel })
   slides?: SlideViewModel[];
 }

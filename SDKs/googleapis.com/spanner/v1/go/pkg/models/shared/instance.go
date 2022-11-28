@@ -16,6 +16,8 @@ const (
 	InstanceStateEnumReady            InstanceStateEnum = "READY"
 )
 
+// Instance
+// An isolated set of Cloud Spanner resources on which databases can be hosted.
 type Instance struct {
 	Config               *string                   `json:"config,omitempty"`
 	CreateTime           *string                   `json:"createTime,omitempty"`
@@ -29,4 +31,18 @@ type Instance struct {
 	ProcessingUnits      *int32                    `json:"processingUnits,omitempty"`
 	State                *InstanceStateEnum        `json:"state,omitempty"`
 	UpdateTime           *string                   `json:"updateTime,omitempty"`
+}
+
+// InstanceInput
+// An isolated set of Cloud Spanner resources on which databases can be hosted.
+type InstanceInput struct {
+	Config               *string                    `json:"config,omitempty"`
+	DisplayName          *string                    `json:"displayName,omitempty"`
+	EndpointUris         []string                   `json:"endpointUris,omitempty"`
+	FreeInstanceMetadata *FreeInstanceMetadataInput `json:"freeInstanceMetadata,omitempty"`
+	InstanceType         *InstanceInstanceTypeEnum  `json:"instanceType,omitempty"`
+	Labels               map[string]string          `json:"labels,omitempty"`
+	Name                 *string                    `json:"name,omitempty"`
+	NodeCount            *int32                     `json:"nodeCount,omitempty"`
+	ProcessingUnits      *int32                     `json:"processingUnits,omitempty"`
 }

@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetOntDagsUsingGetPathParams = /** @class */ (function (_super) {
     __extends(GetOntDagsUsingGetPathParams, _super);
     function GetOntDagsUsingGetPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=accId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=accId" }),
         __metadata("design:type", String)
     ], GetOntDagsUsingGetPathParams.prototype, "accId", void 0);
     return GetOntDagsUsingGetPathParams;
@@ -41,7 +41,7 @@ var GetOntDagsUsingGetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetOntDagsUsingGetPathParams)
     ], GetOntDagsUsingGetRequest.prototype, "pathParams", void 0);
     return GetOntDagsUsingGetRequest;
@@ -53,15 +53,15 @@ var GetOntDagsUsingGetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetOntDagsUsingGetResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetOntDagsUsingGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetOntDagsUsingGetResponse.prototype, "statusCode", void 0);
     return GetOntDagsUsingGetResponse;

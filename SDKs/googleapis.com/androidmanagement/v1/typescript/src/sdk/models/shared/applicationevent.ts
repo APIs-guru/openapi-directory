@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ApplicationEventEventTypeEnum {
-    ApplicationEventTypeUnspecified = "APPLICATION_EVENT_TYPE_UNSPECIFIED"
-,    Installed = "INSTALLED"
-,    Changed = "CHANGED"
-,    DataCleared = "DATA_CLEARED"
-,    Removed = "REMOVED"
-,    Replaced = "REPLACED"
-,    Restarted = "RESTARTED"
-,    Pinned = "PINNED"
-,    Unpinned = "UNPINNED"
+    ApplicationEventTypeUnspecified = "APPLICATION_EVENT_TYPE_UNSPECIFIED",
+    Installed = "INSTALLED",
+    Changed = "CHANGED",
+    DataCleared = "DATA_CLEARED",
+    Removed = "REMOVED",
+    Replaced = "REPLACED",
+    Restarted = "RESTARTED",
+    Pinned = "PINNED",
+    Unpinned = "UNPINNED"
 }
 
 
@@ -18,9 +19,9 @@ export enum ApplicationEventEventTypeEnum {
  * An app-related event.
 **/
 export class ApplicationEvent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=eventType" })
+  @SpeakeasyMetadata({ data: "json, name=eventType" })
   eventType?: ApplicationEventEventTypeEnum;
 }

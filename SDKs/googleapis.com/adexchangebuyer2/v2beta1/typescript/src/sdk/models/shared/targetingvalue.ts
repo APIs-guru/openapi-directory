@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CreativeSize } from "./creativesize";
 import { DayPartTargeting } from "./dayparttargeting";
+
 
 
 // TargetingValue
@@ -8,15 +9,15 @@ import { DayPartTargeting } from "./dayparttargeting";
  * A polymorphic targeting value used as part of Shared Targeting.
 **/
 export class TargetingValue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=creativeSizeValue" })
+  @SpeakeasyMetadata({ data: "json, name=creativeSizeValue" })
   creativeSizeValue?: CreativeSize;
 
-  @Metadata({ data: "json, name=dayPartTargetingValue" })
+  @SpeakeasyMetadata({ data: "json, name=dayPartTargetingValue" })
   dayPartTargetingValue?: DayPartTargeting;
 
-  @Metadata({ data: "json, name=longValue" })
+  @SpeakeasyMetadata({ data: "json, name=longValue" })
   longValue?: string;
 
-  @Metadata({ data: "json, name=stringValue" })
+  @SpeakeasyMetadata({ data: "json, name=stringValue" })
   stringValue?: string;
 }

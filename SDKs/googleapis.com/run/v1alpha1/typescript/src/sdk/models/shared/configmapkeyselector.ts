@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LocalObjectReference } from "./localobjectreference";
+
 
 
 // ConfigMapKeySelector
@@ -7,15 +8,15 @@ import { LocalObjectReference } from "./localobjectreference";
  * Not supported by Cloud Run Selects a key from a ConfigMap.
 **/
 export class ConfigMapKeySelector extends SpeakeasyBase {
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: string;
 
-  @Metadata({ data: "json, name=localObjectReference" })
+  @SpeakeasyMetadata({ data: "json, name=localObjectReference" })
   localObjectReference?: LocalObjectReference;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=optional" })
+  @SpeakeasyMetadata({ data: "json, name=optional" })
   optional?: boolean;
 }

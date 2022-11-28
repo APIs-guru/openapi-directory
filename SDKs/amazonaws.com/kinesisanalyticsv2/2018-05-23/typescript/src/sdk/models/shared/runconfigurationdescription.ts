@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApplicationRestoreConfiguration } from "./applicationrestoreconfiguration";
 import { FlinkRunConfiguration } from "./flinkrunconfiguration";
+
 
 
 // RunConfigurationDescription
@@ -8,9 +9,9 @@ import { FlinkRunConfiguration } from "./flinkrunconfiguration";
  * Describes the starting properties for a Kinesis Data Analytics application.
 **/
 export class RunConfigurationDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApplicationRestoreConfigurationDescription" })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationRestoreConfigurationDescription" })
   applicationRestoreConfigurationDescription?: ApplicationRestoreConfiguration;
 
-  @Metadata({ data: "json, name=FlinkRunConfigurationDescription" })
+  @SpeakeasyMetadata({ data: "json, name=FlinkRunConfigurationDescription" })
   flinkRunConfigurationDescription?: FlinkRunConfiguration;
 }

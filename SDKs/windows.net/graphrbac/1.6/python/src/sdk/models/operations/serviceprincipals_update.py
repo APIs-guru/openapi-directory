@@ -1,17 +1,20 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from sdk.models import shared
 
 
 @dataclass
 class ServicePrincipalsUpdatePathParams:
-    object_id: str = field(default=None, metadata={'path_param': { 'field_name': 'objectId', 'style': 'simple', 'explode': False }})
-    tenant_id: str = field(default=None, metadata={'path_param': { 'field_name': 'tenantID', 'style': 'simple', 'explode': False }})
+    object_id: str = field(metadata={'path_param': { 'field_name': 'objectId', 'style': 'simple', 'explode': False }})
+    tenant_id: str = field(metadata={'path_param': { 'field_name': 'tenantID', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ServicePrincipalsUpdateQueryParams:
-    api_version: str = field(default=None, metadata={'query_param': { 'field_name': 'api-version', 'style': 'form', 'explode': True }})
+    api_version: str = field(metadata={'query_param': { 'field_name': 'api-version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -22,14 +25,14 @@ class ServicePrincipalsUpdateRequests:
 
 @dataclass
 class ServicePrincipalsUpdateRequest:
-    path_params: ServicePrincipalsUpdatePathParams = field(default=None)
-    query_params: ServicePrincipalsUpdateQueryParams = field(default=None)
-    request: ServicePrincipalsUpdateRequests = field(default=None)
+    path_params: ServicePrincipalsUpdatePathParams = field()
+    query_params: ServicePrincipalsUpdateQueryParams = field()
+    request: ServicePrincipalsUpdateRequests = field()
     
 
 @dataclass
 class ServicePrincipalsUpdateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     graph_error: Optional[shared.GraphError] = field(default=None)
-    status_code: int = field(default=None)
     

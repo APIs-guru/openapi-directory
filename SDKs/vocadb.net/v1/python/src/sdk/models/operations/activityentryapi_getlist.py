@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class ActivityEntryAPIGetListEditEventEnum(str, Enum):
@@ -68,13 +69,13 @@ class ActivityEntryAPIGetListQueryParams:
 
 @dataclass
 class ActivityEntryAPIGetListRequest:
-    query_params: ActivityEntryAPIGetListQueryParams = field(default=None)
+    query_params: ActivityEntryAPIGetListQueryParams = field()
     
 
 @dataclass
 class ActivityEntryAPIGetListResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     partial_find_result_activity_entry_for_api_contract_: Optional[shared.PartialFindResultActivityEntryForAPIContract] = field(default=None)
-    status_code: int = field(default=None)
     

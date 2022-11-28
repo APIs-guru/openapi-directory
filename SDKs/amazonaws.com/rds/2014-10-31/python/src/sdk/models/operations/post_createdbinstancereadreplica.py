@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostCreateDbInstanceReadReplicaActionEnum(str, Enum):
     CREATE_DB_INSTANCE_READ_REPLICA = "CreateDBInstanceReadReplica"
@@ -10,8 +14,8 @@ class PostCreateDbInstanceReadReplicaVersionEnum(str, Enum):
 
 @dataclass
 class PostCreateDbInstanceReadReplicaQueryParams:
-    action: PostCreateDbInstanceReadReplicaActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostCreateDbInstanceReadReplicaVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostCreateDbInstanceReadReplicaActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostCreateDbInstanceReadReplicaVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostCreateDbInstanceReadReplicaHeaders:
 
 @dataclass
 class PostCreateDbInstanceReadReplicaRequest:
-    query_params: PostCreateDbInstanceReadReplicaQueryParams = field(default=None)
-    headers: PostCreateDbInstanceReadReplicaHeaders = field(default=None)
+    headers: PostCreateDbInstanceReadReplicaHeaders = field()
+    query_params: PostCreateDbInstanceReadReplicaQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostCreateDbInstanceReadReplicaResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

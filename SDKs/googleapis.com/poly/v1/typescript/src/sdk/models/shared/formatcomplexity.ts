@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // FormatComplexity
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information on the complexity of this Format.
 **/
 export class FormatComplexity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=lodHint" })
+  @SpeakeasyMetadata({ data: "json, name=lodHint" })
   lodHint?: number;
 
-  @Metadata({ data: "json, name=triangleCount" })
+  @SpeakeasyMetadata({ data: "json, name=triangleCount" })
   triangleCount?: string;
 }

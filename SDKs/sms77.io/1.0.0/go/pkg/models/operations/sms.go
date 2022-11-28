@@ -19,10 +19,6 @@ type SmsQueryParams struct {
 	UTF8                *float64 `queryParam:"style=form,explode=true,name=utf8"`
 }
 
-type SmsRequest struct {
-	QueryParams SmsQueryParams
-}
-
 type Sms200ApplicationJSONMessages struct {
 	Encoding  *string  `json:"encoding,omitempty"`
 	Error     *string  `json:"error,omitempty"`
@@ -51,6 +47,10 @@ type Sms200ApplicationJSON struct {
 	SmsType    *Sms200ApplicationJSONSmsTypeEnum `json:"sms_type,omitempty"`
 	Success    *string                           `json:"success,omitempty"`
 	TotalPrice *float32                          `json:"total_price,omitempty"`
+}
+
+type SmsRequest struct {
+	QueryParams SmsQueryParams
 }
 
 type SmsResponse struct {

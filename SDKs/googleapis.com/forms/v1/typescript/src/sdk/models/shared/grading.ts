@@ -1,8 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CorrectAnswers } from "./correctanswers";
 import { Feedback } from "./feedback";
-import { Feedback } from "./feedback";
-import { Feedback } from "./feedback";
+
 
 
 // Grading
@@ -10,18 +9,18 @@ import { Feedback } from "./feedback";
  * Grading for a single question
 **/
 export class Grading extends SpeakeasyBase {
-  @Metadata({ data: "json, name=correctAnswers" })
+  @SpeakeasyMetadata({ data: "json, name=correctAnswers" })
   correctAnswers?: CorrectAnswers;
 
-  @Metadata({ data: "json, name=generalFeedback" })
+  @SpeakeasyMetadata({ data: "json, name=generalFeedback" })
   generalFeedback?: Feedback;
 
-  @Metadata({ data: "json, name=pointValue" })
+  @SpeakeasyMetadata({ data: "json, name=pointValue" })
   pointValue?: number;
 
-  @Metadata({ data: "json, name=whenRight" })
+  @SpeakeasyMetadata({ data: "json, name=whenRight" })
   whenRight?: Feedback;
 
-  @Metadata({ data: "json, name=whenWrong" })
+  @SpeakeasyMetadata({ data: "json, name=whenWrong" })
   whenWrong?: Feedback;
 }

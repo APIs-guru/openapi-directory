@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConfigMapKeySelector } from "./configmapkeyselector";
 import { SecretKeySelector } from "./secretkeyselector";
+
 
 
 // EnvVarSource
@@ -8,9 +9,9 @@ import { SecretKeySelector } from "./secretkeyselector";
  * EnvVarSource represents a source for the value of an EnvVar.
 **/
 export class EnvVarSource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=configMapKeyRef" })
+  @SpeakeasyMetadata({ data: "json, name=configMapKeyRef" })
   configMapKeyRef?: ConfigMapKeySelector;
 
-  @Metadata({ data: "json, name=secretKeyRef" })
+  @SpeakeasyMetadata({ data: "json, name=secretKeyRef" })
   secretKeyRef?: SecretKeySelector;
 }

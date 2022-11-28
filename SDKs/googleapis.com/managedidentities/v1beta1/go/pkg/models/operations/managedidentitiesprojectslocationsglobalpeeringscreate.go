@@ -31,7 +31,7 @@ type ManagedidentitiesProjectsLocationsGlobalPeeringsCreateSecurity struct {
 type ManagedidentitiesProjectsLocationsGlobalPeeringsCreateRequest struct {
 	PathParams  ManagedidentitiesProjectsLocationsGlobalPeeringsCreatePathParams
 	QueryParams ManagedidentitiesProjectsLocationsGlobalPeeringsCreateQueryParams
-	Request     *shared.Peering `request:"mediaType=application/json"`
+	Request     *shared.PeeringInput `request:"mediaType=application/json"`
 	Security    ManagedidentitiesProjectsLocationsGlobalPeeringsCreateSecurity
 }
 

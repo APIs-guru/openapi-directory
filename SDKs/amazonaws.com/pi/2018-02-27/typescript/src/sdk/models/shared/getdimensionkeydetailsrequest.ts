@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ServiceTypeEnum } from "./servicetypeenum";
 
 
+
 export class GetDimensionKeyDetailsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Group" })
+  @SpeakeasyMetadata({ data: "json, name=Group" })
   group: string;
 
-  @Metadata({ data: "json, name=GroupIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=GroupIdentifier" })
   groupIdentifier: string;
 
-  @Metadata({ data: "json, name=Identifier" })
+  @SpeakeasyMetadata({ data: "json, name=Identifier" })
   identifier: string;
 
-  @Metadata({ data: "json, name=RequestedDimensions" })
+  @SpeakeasyMetadata({ data: "json, name=RequestedDimensions" })
   requestedDimensions?: string[];
 
-  @Metadata({ data: "json, name=ServiceType" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceType" })
   serviceType: ServiceTypeEnum;
 }

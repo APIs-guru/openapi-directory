@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class LoggingUpdateCmekSettingsPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,14 +30,14 @@ class LoggingUpdateCmekSettingsQueryParams:
 
 @dataclass
 class LoggingUpdateCmekSettingsSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class LoggingUpdateCmekSettingsSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -44,15 +48,15 @@ class LoggingUpdateCmekSettingsSecurity:
 
 @dataclass
 class LoggingUpdateCmekSettingsRequest:
-    path_params: LoggingUpdateCmekSettingsPathParams = field(default=None)
-    query_params: LoggingUpdateCmekSettingsQueryParams = field(default=None)
-    request: Optional[shared.CmekSettings] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: LoggingUpdateCmekSettingsSecurity = field(default=None)
+    path_params: LoggingUpdateCmekSettingsPathParams = field()
+    query_params: LoggingUpdateCmekSettingsQueryParams = field()
+    security: LoggingUpdateCmekSettingsSecurity = field()
+    request: Optional[shared.CmekSettingsInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class LoggingUpdateCmekSettingsResponse:
+    content_type: str = field()
+    status_code: int = field()
     cmek_settings: Optional[shared.CmekSettings] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

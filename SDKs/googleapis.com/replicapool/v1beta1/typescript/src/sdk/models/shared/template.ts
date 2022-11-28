@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Action } from "./action";
 import { HealthCheck } from "./healthcheck";
 import { VmParams } from "./vmparams";
+
 
 
 // Template
@@ -10,15 +10,15 @@ import { VmParams } from "./vmparams";
  * The template used for creating replicas in the pool.
 **/
 export class Template extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action?: Action;
 
-  @Metadata({ data: "json, name=healthChecks", elemType: shared.HealthCheck })
+  @SpeakeasyMetadata({ data: "json, name=healthChecks", elemType: HealthCheck })
   healthChecks?: HealthCheck[];
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 
-  @Metadata({ data: "json, name=vmParams" })
+  @SpeakeasyMetadata({ data: "json, name=vmParams" })
   vmParams?: VmParams;
 }

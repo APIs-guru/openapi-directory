@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetPlanIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=planId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=planId" })
   planId: string;
 }
 
 
 export class GetPlanIdQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=locationId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=locationId" })
   locationId?: string;
 }
 
 
 export class GetPlanIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetPlanIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetPlanIdQueryParams;
 }
 
 
 export class GetPlanIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

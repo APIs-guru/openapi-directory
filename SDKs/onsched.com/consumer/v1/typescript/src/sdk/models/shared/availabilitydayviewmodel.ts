@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AvailabilityDayViewModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=objectName" })
+  @SpeakeasyMetadata({ data: "json, name=objectName" })
   objectName?: string;
 
-  @Metadata({ data: "json, name=resourceDescription" })
+  @SpeakeasyMetadata({ data: "json, name=resourceDescription" })
   resourceDescription?: string;
 
-  @Metadata({ data: "json, name=resourceId" })
+  @SpeakeasyMetadata({ data: "json, name=resourceId" })
   resourceId?: string;
 
-  @Metadata({ data: "json, name=resourceName" })
+  @SpeakeasyMetadata({ data: "json, name=resourceName" })
   resourceName?: string;
 
-  @Metadata({ data: "json, name=serviceDescription" })
+  @SpeakeasyMetadata({ data: "json, name=serviceDescription" })
   serviceDescription?: string;
 
-  @Metadata({ data: "json, name=serviceId" })
+  @SpeakeasyMetadata({ data: "json, name=serviceId" })
   serviceId?: string;
 
-  @Metadata({ data: "json, name=serviceName" })
+  @SpeakeasyMetadata({ data: "json, name=serviceName" })
   serviceName?: string;
 
-  @Metadata({ data: "json, name=tzRequested" })
+  @SpeakeasyMetadata({ data: "json, name=tzRequested" })
   tzRequested?: number;
 }

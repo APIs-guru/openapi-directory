@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ManagedidentitiesProjectsLocationsGlobalPeeringsListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -29,20 +30,20 @@ class ManagedidentitiesProjectsLocationsGlobalPeeringsListQueryParams:
 
 @dataclass
 class ManagedidentitiesProjectsLocationsGlobalPeeringsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ManagedidentitiesProjectsLocationsGlobalPeeringsListRequest:
-    path_params: ManagedidentitiesProjectsLocationsGlobalPeeringsListPathParams = field(default=None)
-    query_params: ManagedidentitiesProjectsLocationsGlobalPeeringsListQueryParams = field(default=None)
-    security: ManagedidentitiesProjectsLocationsGlobalPeeringsListSecurity = field(default=None)
+    path_params: ManagedidentitiesProjectsLocationsGlobalPeeringsListPathParams = field()
+    query_params: ManagedidentitiesProjectsLocationsGlobalPeeringsListQueryParams = field()
+    security: ManagedidentitiesProjectsLocationsGlobalPeeringsListSecurity = field()
     
 
 @dataclass
 class ManagedidentitiesProjectsLocationsGlobalPeeringsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_peerings_response: Optional[shared.ListPeeringsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

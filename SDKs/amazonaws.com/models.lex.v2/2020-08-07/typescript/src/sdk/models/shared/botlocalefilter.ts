@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BotLocaleFilterNameEnum } from "./botlocalefilternameenum";
 import { BotLocaleFilterOperatorEnum } from "./botlocalefilteroperatorenum";
+
 
 
 // BotLocaleFilter
@@ -8,12 +9,12 @@ import { BotLocaleFilterOperatorEnum } from "./botlocalefilteroperatorenum";
  * Filters responses returned by the <code>ListBotLocales</code> operation.
 **/
 export class BotLocaleFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: BotLocaleFilterNameEnum;
 
-  @Metadata({ data: "json, name=operator" })
+  @SpeakeasyMetadata({ data: "json, name=operator" })
   operator: BotLocaleFilterOperatorEnum;
 
-  @Metadata({ data: "json, name=values" })
+  @SpeakeasyMetadata({ data: "json, name=values" })
   values: string[];
 }

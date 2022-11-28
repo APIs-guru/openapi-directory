@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import List,Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,35 +14,54 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def create_account_credential(self, request: operations.CreateAccountCredentialRequest) -> operations.CreateAccountCredentialResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new credential
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/account/credentials"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -58,22 +80,22 @@ class SDK:
 
     
     def create_account_key(self, request: operations.CreateAccountKeyRequest) -> operations.CreateAccountKeyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new key
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/account/keys"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -92,22 +114,22 @@ class SDK:
 
     
     def create_account_organization(self, request: operations.CreateAccountOrganizationRequest) -> operations.CreateAccountOrganizationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new organization
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/account/orgs"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -126,22 +148,22 @@ class SDK:
 
     
     def create_account_user(self, request: operations.CreateAccountUserRequest) -> operations.CreateAccountUserResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new user account
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/account/users"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -160,22 +182,22 @@ class SDK:
 
     
     def create_account_user_invite(self, request: operations.CreateAccountUserInviteRequest) -> operations.CreateAccountUserInviteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new user account and send an email invite
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/account/users/invite"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -194,19 +216,20 @@ class SDK:
 
     
     def create_scan(self, request: operations.CreateScanRequest) -> operations.CreateScanResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a scan task for a given site
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/org/sites/{site_id}/scan", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -229,22 +252,22 @@ class SDK:
 
     
     def create_site(self, request: operations.CreateSiteRequest) -> operations.CreateSiteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new site
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/org/sites"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -263,13 +286,16 @@ class SDK:
 
     
     def delete_account_organization_export_token(self, request: operations.DeleteAccountOrganizationExportTokenRequest) -> operations.DeleteAccountOrganizationExportTokenResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Removes the export token from the specified organization
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/account/orgs/{org_id}/exportToken", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -284,15 +310,17 @@ class SDK:
 
     
     def export_assets_csv(self, request: operations.ExportAssetsCsvRequest) -> operations.ExportAssetsCsvResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Asset inventory as CSV
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/export/org/assets.csv"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -308,15 +336,17 @@ class SDK:
 
     
     def export_assets_cisco_csv(self, request: operations.ExportAssetsCiscoCsvRequest) -> operations.ExportAssetsCiscoCsvResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Cisco serial number and model name export for Cisco Smart Net Total Care Service.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/export/org/assets.cisco.csv"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -332,15 +362,17 @@ class SDK:
 
     
     def export_assets_json(self, request: operations.ExportAssetsJSONRequest) -> operations.ExportAssetsJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Exports the asset inventory
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/export/org/assets.json"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -357,15 +389,17 @@ class SDK:
 
     
     def export_assets_jsonl(self, request: operations.ExportAssetsJsonlRequest) -> operations.ExportAssetsJsonlResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Asset inventory as JSON line-delimited
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/export/org/assets.jsonl"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -382,15 +416,17 @@ class SDK:
 
     
     def export_assets_nmap_xml(self, request: operations.ExportAssetsNmapXMLRequest) -> operations.ExportAssetsNmapXMLResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Asset inventory as Nmap-style XML
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/export/org/assets.nmap.xml"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -406,15 +442,17 @@ class SDK:
 
     
     def export_events_json(self, request: operations.ExportEventsJSONRequest) -> operations.ExportEventsJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""System event log as JSON
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/account/events.json"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -431,15 +469,17 @@ class SDK:
 
     
     def export_events_jsonl(self, request: operations.ExportEventsJsonlRequest) -> operations.ExportEventsJsonlResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""System event log as JSON line-delimited
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/account/events.jsonl"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -456,15 +496,17 @@ class SDK:
 
     
     def export_services_csv(self, request: operations.ExportServicesCsvRequest) -> operations.ExportServicesCsvResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Service inventory as CSV
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/export/org/services.csv"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -480,15 +522,17 @@ class SDK:
 
     
     def export_services_json(self, request: operations.ExportServicesJSONRequest) -> operations.ExportServicesJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Service inventory as JSON
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/export/org/services.json"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -505,15 +549,17 @@ class SDK:
 
     
     def export_services_jsonl(self, request: operations.ExportServicesJsonlRequest) -> operations.ExportServicesJsonlResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Service inventory as JSON line-delimited
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/export/org/services.jsonl"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -530,13 +576,16 @@ class SDK:
 
     
     def export_sites_csv(self, request: operations.ExportSitesCsvRequest) -> operations.ExportSitesCsvResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Site list as CSV
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/export/org/sites.csv"
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -552,15 +601,17 @@ class SDK:
 
     
     def export_sites_json(self, request: operations.ExportSitesJSONRequest) -> operations.ExportSitesJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Export all sites
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/export/org/sites.json"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -577,15 +628,17 @@ class SDK:
 
     
     def export_sites_jsonl(self, request: operations.ExportSitesJsonlRequest) -> operations.ExportSitesJsonlResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Site list as JSON line-delimited
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/export/org/sites.jsonl"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -602,15 +655,17 @@ class SDK:
 
     
     def export_wireless_csv(self, request: operations.ExportWirelessCsvRequest) -> operations.ExportWirelessCsvResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Wireless inventory as CSV
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/export/org/wireless.csv"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -626,15 +681,17 @@ class SDK:
 
     
     def export_wireless_json(self, request: operations.ExportWirelessJSONRequest) -> operations.ExportWirelessJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Wireless inventory as JSON
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/export/org/wireless.json"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -651,15 +708,17 @@ class SDK:
 
     
     def export_wireless_jsonl(self, request: operations.ExportWirelessJsonlRequest) -> operations.ExportWirelessJsonlResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Wireless inventory as JSON line-delimited
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/export/org/wireless.jsonl"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -676,15 +735,17 @@ class SDK:
 
     
     def get_account_agents(self, request: operations.GetAccountAgentsRequest) -> operations.GetAccountAgentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get all agents across all organizations
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/account/agents"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -701,13 +762,16 @@ class SDK:
 
     
     def get_account_credential(self, request: operations.GetAccountCredentialRequest) -> operations.GetAccountCredentialResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get credential details
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/account/credentials/{credential_id}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -726,15 +790,17 @@ class SDK:
 
     
     def get_account_credentials(self, request: operations.GetAccountCredentialsRequest) -> operations.GetAccountCredentialsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get all account credentials
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/account/credentials"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -751,13 +817,16 @@ class SDK:
 
     
     def get_account_key(self, request: operations.GetAccountKeyRequest) -> operations.GetAccountKeyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get key details
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/account/keys/{key_id}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -773,13 +842,16 @@ class SDK:
 
     
     def get_account_keys(self, request: operations.GetAccountKeysRequest) -> operations.GetAccountKeysResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get all active API keys
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/account/keys"
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -796,13 +868,16 @@ class SDK:
 
     
     def get_account_license(self, request: operations.GetAccountLicenseRequest) -> operations.GetAccountLicenseResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get license details
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/account/license"
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -818,13 +893,16 @@ class SDK:
 
     
     def get_account_organization(self, request: operations.GetAccountOrganizationRequest) -> operations.GetAccountOrganizationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get organization details
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/account/orgs/{org_id}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -840,15 +918,17 @@ class SDK:
 
     
     def get_account_organizations(self, request: operations.GetAccountOrganizationsRequest) -> operations.GetAccountOrganizationsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get all organization details
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/account/orgs"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -865,15 +945,17 @@ class SDK:
 
     
     def get_account_sites(self, request: operations.GetAccountSitesRequest) -> operations.GetAccountSitesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get all sites details across all organizations
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/account/sites"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -890,15 +972,17 @@ class SDK:
 
     
     def get_account_tasks(self, request: operations.GetAccountTasksRequest) -> operations.GetAccountTasksResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get all task details across all organizations (up to 1000)
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/account/tasks"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -915,13 +999,16 @@ class SDK:
 
     
     def get_account_user(self, request: operations.GetAccountUserRequest) -> operations.GetAccountUserResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get user details
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/account/users/{user_id}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -937,13 +1024,16 @@ class SDK:
 
     
     def get_account_users(self, request: operations.GetAccountUsersRequest) -> operations.GetAccountUsersResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get all users
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/account/users"
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -960,13 +1050,16 @@ class SDK:
 
     
     def get_agent(self, request: operations.GetAgentRequest) -> operations.GetAgentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get details for a single agent
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/org/agents/{agent_id}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -985,13 +1078,16 @@ class SDK:
 
     
     def get_agents(self, request: operations.GetAgentsRequest) -> operations.GetAgentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get all agents
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/org/agents"
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1008,13 +1104,16 @@ class SDK:
 
     
     def get_asset(self, request: operations.GetAssetRequest) -> operations.GetAssetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get asset details
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/org/assets/{asset_id}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1033,15 +1132,17 @@ class SDK:
 
     
     def get_assets(self, request: operations.GetAssetsRequest) -> operations.GetAssetsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get all assets
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/org/assets"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1058,13 +1159,16 @@ class SDK:
 
     
     def get_key(self, request: operations.GetKeyRequest) -> operations.GetKeyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get API key details
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/org/key"
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1081,13 +1185,16 @@ class SDK:
 
     
     def get_latest_agent_version(self) -> operations.GetLatestAgentVersionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns latest agent version
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/releases/agent/version"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1102,13 +1209,16 @@ class SDK:
 
     
     def get_latest_platform_version(self) -> operations.GetLatestPlatformVersionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns latest platform version
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/releases/platform/version"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1123,13 +1233,16 @@ class SDK:
 
     
     def get_latest_scanner_version(self) -> operations.GetLatestScannerVersionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns latest scanner version
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/releases/scanner/version"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1144,13 +1257,16 @@ class SDK:
 
     
     def get_organization(self, request: operations.GetOrganizationRequest) -> operations.GetOrganizationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get organization details
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/org"
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1167,13 +1283,16 @@ class SDK:
 
     
     def get_service(self, request: operations.GetServiceRequest) -> operations.GetServiceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get service details
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/org/services/{service_id}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1192,15 +1311,17 @@ class SDK:
 
     
     def get_services(self, request: operations.GetServicesRequest) -> operations.GetServicesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get all services
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/org/services"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1217,13 +1338,16 @@ class SDK:
 
     
     def get_site(self, request: operations.GetSiteRequest) -> operations.GetSiteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get site details
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/org/sites/{site_id}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1242,13 +1366,16 @@ class SDK:
 
     
     def get_sites(self, request: operations.GetSitesRequest) -> operations.GetSitesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get all sites
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/org/sites"
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1265,13 +1392,16 @@ class SDK:
 
     
     def get_task(self, request: operations.GetTaskRequest) -> operations.GetTaskResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get task details
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/org/tasks/{task_id}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1288,13 +1418,16 @@ class SDK:
 
     
     def get_task_change_report(self, request: operations.GetTaskChangeReportRequest) -> operations.GetTaskChangeReportResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a temporary task change report data url
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/org/tasks/{task_id}/changes", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1312,13 +1445,16 @@ class SDK:
 
     
     def get_task_scan_data(self, request: operations.GetTaskScanDataRequest) -> operations.GetTaskScanDataResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a temporary task scan data url
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/org/tasks/{task_id}/data", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1336,15 +1472,17 @@ class SDK:
 
     
     def get_tasks(self, request: operations.GetTasksRequest) -> operations.GetTasksResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get all tasks (last 1000)
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/org/tasks"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1361,13 +1499,16 @@ class SDK:
 
     
     def get_wireless_lan(self, request: operations.GetWirelessLanRequest) -> operations.GetWirelessLanResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get wireless LAN details
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/org/wirelesss/{wireless_id}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1384,15 +1525,17 @@ class SDK:
 
     
     def get_wireless_la_ns(self, request: operations.GetWirelessLaNsRequest) -> operations.GetWirelessLaNsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get all wireless LANs
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/org/wireless"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1409,13 +1552,16 @@ class SDK:
 
     
     def hide_task(self, request: operations.HideTaskRequest) -> operations.HideTaskResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Signal that a completed task should be hidden
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/org/tasks/{task_id}/hide", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1433,19 +1579,20 @@ class SDK:
 
     
     def import_scan_data(self, request: operations.ImportScanDataRequest) -> operations.ImportScanDataResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Import a scan data file into a site
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/org/sites/{site_id}/import", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1468,13 +1615,16 @@ class SDK:
 
     
     def remove_account_credential(self, request: operations.RemoveAccountCredentialRequest) -> operations.RemoveAccountCredentialResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Remove this credential
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/account/credentials/{credential_id}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1491,13 +1641,16 @@ class SDK:
 
     
     def remove_account_key(self, request: operations.RemoveAccountKeyRequest) -> operations.RemoveAccountKeyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Remove this key
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/account/keys/{key_id}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1512,13 +1665,16 @@ class SDK:
 
     
     def remove_account_organization(self, request: operations.RemoveAccountOrganizationRequest) -> operations.RemoveAccountOrganizationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Remove this organization
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/account/orgs/{org_id}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1533,13 +1689,16 @@ class SDK:
 
     
     def remove_account_user(self, request: operations.RemoveAccountUserRequest) -> operations.RemoveAccountUserResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Remove this user
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/account/users/{user_id}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1554,13 +1713,16 @@ class SDK:
 
     
     def remove_agent(self, request: operations.RemoveAgentRequest) -> operations.RemoveAgentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Remove and uninstall an agent
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/org/agents/{agent_id}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1577,13 +1739,16 @@ class SDK:
 
     
     def remove_asset(self, request: operations.RemoveAssetRequest) -> operations.RemoveAssetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Remove an asset
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/org/assets/{asset_id}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1600,13 +1765,16 @@ class SDK:
 
     
     def remove_key(self, request: operations.RemoveKeyRequest) -> operations.RemoveKeyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Remove the current API key
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/org/key"
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1621,13 +1789,16 @@ class SDK:
 
     
     def remove_service(self, request: operations.RemoveServiceRequest) -> operations.RemoveServiceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Remove a service
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/org/services/{service_id}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1644,13 +1815,16 @@ class SDK:
 
     
     def remove_site(self, request: operations.RemoveSiteRequest) -> operations.RemoveSiteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Remove a site and associated assets
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/org/sites/{site_id}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1667,13 +1841,16 @@ class SDK:
 
     
     def remove_wireless_lan(self, request: operations.RemoveWirelessLanRequest) -> operations.RemoveWirelessLanResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Remove a wireless LAN
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/org/wirelesss/{wireless_id}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1690,13 +1867,16 @@ class SDK:
 
     
     def reset_account_user_lockout(self, request: operations.ResetAccountUserLockoutRequest) -> operations.ResetAccountUserLockoutResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Resets the user's lockout status
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/account/users/{user_id}/resetLockout", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("PATCH", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1712,13 +1892,16 @@ class SDK:
 
     
     def reset_account_user_mfa(self, request: operations.ResetAccountUserMfaRequest) -> operations.ResetAccountUserMfaResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Resets the user's MFA tokens
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/account/users/{user_id}/resetMFA", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("PATCH", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1734,13 +1917,16 @@ class SDK:
 
     
     def reset_account_user_password(self, request: operations.ResetAccountUserPasswordRequest) -> operations.ResetAccountUserPasswordResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Sends the user a password reset email
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/account/users/{user_id}/resetPassword", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("PATCH", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1756,13 +1942,16 @@ class SDK:
 
     
     def rotate_account_key(self, request: operations.RotateAccountKeyRequest) -> operations.RotateAccountKeyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Rotates the key secret
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/account/keys/{key_id}/rotate", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("PATCH", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1779,13 +1968,16 @@ class SDK:
 
     
     def rotate_account_organization_export_token(self, request: operations.RotateAccountOrganizationExportTokenRequest) -> operations.RotateAccountOrganizationExportTokenResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Rotates the organization export token and returns the updated organization
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/account/orgs/{org_id}/exportToken/rotate", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("PATCH", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1802,13 +1994,16 @@ class SDK:
 
     
     def rotate_key(self, request: operations.RotateKeyRequest) -> operations.RotateKeyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Rotate the API key secret and return the updated key
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/org/key/rotate"
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("PATCH", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1825,13 +2020,16 @@ class SDK:
 
     
     def snow_export_assets_csv(self, request: operations.SnowExportAssetsCsvRequest) -> operations.SnowExportAssetsCsvResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Export an asset inventory as CSV for ServiceNow integration
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/export/org/assets.servicenow.csv"
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1847,13 +2045,16 @@ class SDK:
 
     
     def snow_export_assets_json(self, request: operations.SnowExportAssetsJSONRequest) -> operations.SnowExportAssetsJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Exports the asset inventory as JSON
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/export/org/assets.servicenow.json"
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1870,13 +2071,16 @@ class SDK:
 
     
     def snow_export_services_csv(self, request: operations.SnowExportServicesCsvRequest) -> operations.SnowExportServicesCsvResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Export a service inventory as CSV for ServiceNow integration
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/export/org/services.servicenow.csv"
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1892,15 +2096,17 @@ class SDK:
 
     
     def splunk_asset_sync_created_json(self, request: operations.SplunkAssetSyncCreatedJSONRequest) -> operations.SplunkAssetSyncCreatedJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Exports the asset inventory in a sync-friendly manner using created_at as a checkpoint. Requires the Splunk entitlement.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/export/org/assets/sync/created/assets.json"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1917,15 +2123,17 @@ class SDK:
 
     
     def splunk_asset_sync_updated_json(self, request: operations.SplunkAssetSyncUpdatedJSONRequest) -> operations.SplunkAssetSyncUpdatedJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Exports the asset inventory in a sync-friendly manner using updated_at as a checkpoint. Requires the Splunk entitlement.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/export/org/assets/sync/updated/assets.json"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1942,13 +2150,16 @@ class SDK:
 
     
     def stop_task(self, request: operations.StopTaskRequest) -> operations.StopTaskResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Signal that a task should be stopped or canceledThis will also remove recurring and scheduled tasks
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/org/tasks/{task_id}/stop", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1966,22 +2177,22 @@ class SDK:
 
     
     def update_account_organization(self, request: operations.UpdateAccountOrganizationRequest) -> operations.UpdateAccountOrganizationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update organization details
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/account/orgs/{org_id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1998,22 +2209,22 @@ class SDK:
 
     
     def update_account_user(self, request: operations.UpdateAccountUserRequest) -> operations.UpdateAccountUserResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a user's details
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/account/users/{user_id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2029,22 +2240,22 @@ class SDK:
 
     
     def update_agent_site(self, request: operations.UpdateAgentSiteRequest) -> operations.UpdateAgentSiteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update the site associated with agent
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/org/agents/{agent_id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2063,22 +2274,22 @@ class SDK:
 
     
     def update_asset_comments(self, request: operations.UpdateAssetCommentsRequest) -> operations.UpdateAssetCommentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update asset comments
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/org/assets/{asset_id}/comments", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2097,22 +2308,22 @@ class SDK:
 
     
     def update_asset_tags(self, request: operations.UpdateAssetTagsRequest) -> operations.UpdateAssetTagsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update asset tags
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/org/assets/{asset_id}/tags", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2131,22 +2342,22 @@ class SDK:
 
     
     def update_organization(self, request: operations.UpdateOrganizationRequest) -> operations.UpdateOrganizationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update organization details
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/org"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2163,22 +2374,22 @@ class SDK:
 
     
     def update_site(self, request: operations.UpdateSiteRequest) -> operations.UpdateSiteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a site definition
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/org/sites/{site_id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2197,22 +2408,22 @@ class SDK:
 
     
     def update_task(self, request: operations.UpdateTaskRequest) -> operations.UpdateTaskResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update task parameters
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/org/tasks/{task_id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2231,13 +2442,16 @@ class SDK:
 
     
     def upgrade_agent(self, request: operations.UpgradeAgentRequest) -> operations.UpgradeAgentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Force an agent to update and restart
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/org/agents/{agent_id}/update", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 

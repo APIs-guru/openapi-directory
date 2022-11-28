@@ -74,6 +74,8 @@ const (
 	CreativeRestrictedCategoriesEnumAlcohol                CreativeRestrictedCategoriesEnum = "ALCOHOL"
 )
 
+// Creative
+// A creative and its classification data.
 type Creative struct {
 	AccountID                   *string                            `json:"accountId,omitempty"`
 	AdChoicesDestinationURL     *string                            `json:"adChoicesDestinationUrl,omitempty"`

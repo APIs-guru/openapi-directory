@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ApplicationsUpdateKeyCredentialsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=applicationObjectId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=applicationObjectId" })
   applicationObjectId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=tenantID" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=tenantID" })
   tenantId: string;
 }
 
 
 export class ApplicationsUpdateKeyCredentialsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=api-version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api-version" })
   apiVersion: string;
 }
 
 
 export class ApplicationsUpdateKeyCredentialsRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   keyCredentialsUpdateParameters?: shared.KeyCredentialsUpdateParameters;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   keyCredentialsUpdateParameters1?: shared.KeyCredentialsUpdateParameters;
 }
 
 
 export class ApplicationsUpdateKeyCredentialsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ApplicationsUpdateKeyCredentialsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ApplicationsUpdateKeyCredentialsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request: ApplicationsUpdateKeyCredentialsRequests;
 }
 
 
 export class ApplicationsUpdateKeyCredentialsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   graphError?: shared.GraphError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

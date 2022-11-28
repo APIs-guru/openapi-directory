@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AllocateInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=unusedArguments" })
+  @SpeakeasyMetadata({ data: "json, name=unusedArguments" })
   unusedArguments?: string[];
 }

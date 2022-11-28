@@ -15,6 +15,7 @@ const (
 	DropInfoCauseEnumNoExternalAddress                               DropInfoCauseEnum = "NO_EXTERNAL_ADDRESS"
 	DropInfoCauseEnumUnknownInternalAddress                          DropInfoCauseEnum = "UNKNOWN_INTERNAL_ADDRESS"
 	DropInfoCauseEnumForwardingRuleMismatch                          DropInfoCauseEnum = "FORWARDING_RULE_MISMATCH"
+	DropInfoCauseEnumForwardingRuleRegionMismatch                    DropInfoCauseEnum = "FORWARDING_RULE_REGION_MISMATCH"
 	DropInfoCauseEnumForwardingRuleNoInstances                       DropInfoCauseEnum = "FORWARDING_RULE_NO_INSTANCES"
 	DropInfoCauseEnumFirewallBlockingLoadBalancerBackendHealthCheck  DropInfoCauseEnum = "FIREWALL_BLOCKING_LOAD_BALANCER_BACKEND_HEALTH_CHECK"
 	DropInfoCauseEnumInstanceNotRunning                              DropInfoCauseEnum = "INSTANCE_NOT_RUNNING"
@@ -26,6 +27,7 @@ const (
 	DropInfoCauseEnumDroppedInsideGkeService                         DropInfoCauseEnum = "DROPPED_INSIDE_GKE_SERVICE"
 	DropInfoCauseEnumDroppedInsideCloudSQLService                    DropInfoCauseEnum = "DROPPED_INSIDE_CLOUD_SQL_SERVICE"
 	DropInfoCauseEnumGoogleManagedServiceNoPeering                   DropInfoCauseEnum = "GOOGLE_MANAGED_SERVICE_NO_PEERING"
+	DropInfoCauseEnumGkePscEndpointMissing                           DropInfoCauseEnum = "GKE_PSC_ENDPOINT_MISSING"
 	DropInfoCauseEnumCloudSQLInstanceNoIPAddress                     DropInfoCauseEnum = "CLOUD_SQL_INSTANCE_NO_IP_ADDRESS"
 	DropInfoCauseEnumGkeControlPlaneRegionMismatch                   DropInfoCauseEnum = "GKE_CONTROL_PLANE_REGION_MISMATCH"
 	DropInfoCauseEnumPublicGkeControlPlaneToPrivateDestination       DropInfoCauseEnum = "PUBLIC_GKE_CONTROL_PLANE_TO_PRIVATE_DESTINATION"
@@ -36,10 +38,12 @@ const (
 	DropInfoCauseEnumCloudFunctionNotActive                          DropInfoCauseEnum = "CLOUD_FUNCTION_NOT_ACTIVE"
 	DropInfoCauseEnumVpcConnectorNotSet                              DropInfoCauseEnum = "VPC_CONNECTOR_NOT_SET"
 	DropInfoCauseEnumVpcConnectorNotRunning                          DropInfoCauseEnum = "VPC_CONNECTOR_NOT_RUNNING"
-	DropInfoCauseEnumForwardingRuleRegionMismatch                    DropInfoCauseEnum = "FORWARDING_RULE_REGION_MISMATCH"
 	DropInfoCauseEnumPscConnectionNotAccepted                        DropInfoCauseEnum = "PSC_CONNECTION_NOT_ACCEPTED"
+	DropInfoCauseEnumCloudRunRevisionNotReady                        DropInfoCauseEnum = "CLOUD_RUN_REVISION_NOT_READY"
 )
 
+// DropInfo
+// Details of the final state "drop" and associated resource.
 type DropInfo struct {
 	Cause       *DropInfoCauseEnum `json:"cause,omitempty"`
 	ResourceURI *string            `json:"resourceUri,omitempty"`

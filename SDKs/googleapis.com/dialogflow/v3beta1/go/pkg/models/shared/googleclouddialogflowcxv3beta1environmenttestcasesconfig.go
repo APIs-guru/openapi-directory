@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDialogflowCxV3beta1EnvironmentTestCasesConfig
+// The configuration for continuous tests.
 type GoogleCloudDialogflowCxV3beta1EnvironmentTestCasesConfig struct {
 	EnableContinuousRun    *bool    `json:"enableContinuousRun,omitempty"`
 	EnablePredeploymentRun *bool    `json:"enablePredeploymentRun,omitempty"`

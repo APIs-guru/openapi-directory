@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ResourceAttributeEnum } from "./resourceattributeenum";
 import { RequiresRecreationEnum } from "./requiresrecreationenum";
 /**

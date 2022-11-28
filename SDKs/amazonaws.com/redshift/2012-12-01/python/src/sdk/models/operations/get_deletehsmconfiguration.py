@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteHsmConfigurationActionEnum(str, Enum):
     DELETE_HSM_CONFIGURATION = "DeleteHsmConfiguration"
@@ -10,9 +14,9 @@ class GetDeleteHsmConfigurationVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteHsmConfigurationQueryParams:
-    action: GetDeleteHsmConfigurationActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    hsm_configuration_identifier: str = field(default=None, metadata={'query_param': { 'field_name': 'HsmConfigurationIdentifier', 'style': 'form', 'explode': True }})
-    version: GetDeleteHsmConfigurationVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetDeleteHsmConfigurationActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    hsm_configuration_identifier: str = field(metadata={'query_param': { 'field_name': 'HsmConfigurationIdentifier', 'style': 'form', 'explode': True }})
+    version: GetDeleteHsmConfigurationVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetDeleteHsmConfigurationHeaders:
 
 @dataclass
 class GetDeleteHsmConfigurationRequest:
-    query_params: GetDeleteHsmConfigurationQueryParams = field(default=None)
-    headers: GetDeleteHsmConfigurationHeaders = field(default=None)
+    headers: GetDeleteHsmConfigurationHeaders = field()
+    query_params: GetDeleteHsmConfigurationQueryParams = field()
     
 
 @dataclass
 class GetDeleteHsmConfigurationResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

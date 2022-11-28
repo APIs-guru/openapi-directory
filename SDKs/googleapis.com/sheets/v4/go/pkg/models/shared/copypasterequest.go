@@ -19,6 +19,8 @@ const (
 	CopyPasteRequestPasteTypeEnumPasteConditionalFormatting CopyPasteRequestPasteTypeEnum = "PASTE_CONDITIONAL_FORMATTING"
 )
 
+// CopyPasteRequest
+// Copies data from the source to the destination.
 type CopyPasteRequest struct {
 	Destination      *GridRange                            `json:"destination,omitempty"`
 	PasteOrientation *CopyPasteRequestPasteOrientationEnum `json:"pasteOrientation,omitempty"`

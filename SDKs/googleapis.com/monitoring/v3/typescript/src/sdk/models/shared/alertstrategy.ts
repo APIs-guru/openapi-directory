@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NotificationRateLimit } from "./notificationratelimit";
+
 
 
 // AlertStrategy
@@ -7,9 +8,9 @@ import { NotificationRateLimit } from "./notificationratelimit";
  * Control over how the notification channels in notification_channels are notified when this alert fires.
 **/
 export class AlertStrategy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=autoClose" })
+  @SpeakeasyMetadata({ data: "json, name=autoClose" })
   autoClose?: string;
 
-  @Metadata({ data: "json, name=notificationRateLimit" })
+  @SpeakeasyMetadata({ data: "json, name=notificationRateLimit" })
   notificationRateLimit?: NotificationRateLimit;
 }

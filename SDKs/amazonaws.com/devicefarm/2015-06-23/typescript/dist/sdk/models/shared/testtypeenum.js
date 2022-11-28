@@ -1,0 +1,24 @@
+export var TestTypeEnum;
+(function (TestTypeEnum) {
+    TestTypeEnum["BuiltinFuzz"] = "BUILTIN_FUZZ";
+    TestTypeEnum["BuiltinExplorer"] = "BUILTIN_EXPLORER";
+    TestTypeEnum["WebPerformanceProfile"] = "WEB_PERFORMANCE_PROFILE";
+    TestTypeEnum["AppiumJavaJunit"] = "APPIUM_JAVA_JUNIT";
+    TestTypeEnum["AppiumJavaTestng"] = "APPIUM_JAVA_TESTNG";
+    TestTypeEnum["AppiumPython"] = "APPIUM_PYTHON";
+    TestTypeEnum["AppiumNode"] = "APPIUM_NODE";
+    TestTypeEnum["AppiumRuby"] = "APPIUM_RUBY";
+    TestTypeEnum["AppiumWebJavaJunit"] = "APPIUM_WEB_JAVA_JUNIT";
+    TestTypeEnum["AppiumWebJavaTestng"] = "APPIUM_WEB_JAVA_TESTNG";
+    TestTypeEnum["AppiumWebPython"] = "APPIUM_WEB_PYTHON";
+    TestTypeEnum["AppiumWebNode"] = "APPIUM_WEB_NODE";
+    TestTypeEnum["AppiumWebRuby"] = "APPIUM_WEB_RUBY";
+    TestTypeEnum["Calabash"] = "CALABASH";
+    TestTypeEnum["Instrumentation"] = "INSTRUMENTATION";
+    TestTypeEnum["Uiautomation"] = "UIAUTOMATION";
+    TestTypeEnum["Uiautomator"] = "UIAUTOMATOR";
+    TestTypeEnum["Xctest"] = "XCTEST";
+    TestTypeEnum["XctestUi"] = "XCTEST_UI";
+    TestTypeEnum["RemoteAccessRecord"] = "REMOTE_ACCESS_RECORD";
+    TestTypeEnum["RemoteAccessReplay"] = "REMOTE_ACCESS_REPLAY";
+})(TestTypeEnum || (TestTypeEnum = {}));

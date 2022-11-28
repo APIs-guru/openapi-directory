@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var StorageGetFilePreviewPathParams = /** @class */ (function (_super) {
     __extends(StorageGetFilePreviewPathParams, _super);
@@ -30,7 +30,7 @@ var StorageGetFilePreviewPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=fileId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=fileId" }),
         __metadata("design:type", String)
     ], StorageGetFilePreviewPathParams.prototype, "fileId", void 0);
     return StorageGetFilePreviewPathParams;
@@ -42,47 +42,47 @@ var StorageGetFilePreviewQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=background" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=background" }),
         __metadata("design:type", String)
     ], StorageGetFilePreviewQueryParams.prototype, "background", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=borderColor" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=borderColor" }),
         __metadata("design:type", String)
     ], StorageGetFilePreviewQueryParams.prototype, "borderColor", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=borderRadius" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=borderRadius" }),
         __metadata("design:type", Number)
     ], StorageGetFilePreviewQueryParams.prototype, "borderRadius", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=borderWidth" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=borderWidth" }),
         __metadata("design:type", Number)
     ], StorageGetFilePreviewQueryParams.prototype, "borderWidth", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=gravity" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=gravity" }),
         __metadata("design:type", String)
     ], StorageGetFilePreviewQueryParams.prototype, "gravity", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=height" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=height" }),
         __metadata("design:type", Number)
     ], StorageGetFilePreviewQueryParams.prototype, "height", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=opacity" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=opacity" }),
         __metadata("design:type", Number)
     ], StorageGetFilePreviewQueryParams.prototype, "opacity", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=output" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=output" }),
         __metadata("design:type", String)
     ], StorageGetFilePreviewQueryParams.prototype, "output", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quality" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quality" }),
         __metadata("design:type", Number)
     ], StorageGetFilePreviewQueryParams.prototype, "quality", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=rotation" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=rotation" }),
         __metadata("design:type", Number)
     ], StorageGetFilePreviewQueryParams.prototype, "rotation", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=width" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=width" }),
         __metadata("design:type", Number)
     ], StorageGetFilePreviewQueryParams.prototype, "width", void 0);
     return StorageGetFilePreviewQueryParams;
@@ -94,15 +94,15 @@ var StorageGetFilePreviewSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeJwt)
     ], StorageGetFilePreviewSecurity.prototype, "jwt", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeKey)
     ], StorageGetFilePreviewSecurity.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeProject)
     ], StorageGetFilePreviewSecurity.prototype, "project", void 0);
     return StorageGetFilePreviewSecurity;
@@ -114,15 +114,15 @@ var StorageGetFilePreviewRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", StorageGetFilePreviewPathParams)
     ], StorageGetFilePreviewRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", StorageGetFilePreviewQueryParams)
     ], StorageGetFilePreviewRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", StorageGetFilePreviewSecurity)
     ], StorageGetFilePreviewRequest.prototype, "security", void 0);
     return StorageGetFilePreviewRequest;
@@ -134,11 +134,11 @@ var StorageGetFilePreviewResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], StorageGetFilePreviewResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], StorageGetFilePreviewResponse.prototype, "statusCode", void 0);
     return StorageGetFilePreviewResponse;

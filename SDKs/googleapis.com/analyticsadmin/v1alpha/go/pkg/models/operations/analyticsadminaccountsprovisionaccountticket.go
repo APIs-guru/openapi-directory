@@ -25,7 +25,7 @@ type AnalyticsadminAccountsProvisionAccountTicketSecurity struct {
 
 type AnalyticsadminAccountsProvisionAccountTicketRequest struct {
 	QueryParams AnalyticsadminAccountsProvisionAccountTicketQueryParams
-	Request     *shared.GoogleAnalyticsAdminV1alphaProvisionAccountTicketRequest `request:"mediaType=application/json"`
+	Request     *shared.GoogleAnalyticsAdminV1alphaProvisionAccountTicketRequestInput `request:"mediaType=application/json"`
 	Security    AnalyticsadminAccountsProvisionAccountTicketSecurity
 }
 

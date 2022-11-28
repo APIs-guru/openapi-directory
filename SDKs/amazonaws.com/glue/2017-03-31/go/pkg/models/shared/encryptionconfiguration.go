@@ -1,5 +1,7 @@
 package shared
 
+// EncryptionConfiguration
+// Specifies an encryption configuration.
 type EncryptionConfiguration struct {
 	CloudWatchEncryption   *CloudWatchEncryption   `json:"CloudWatchEncryption,omitempty"`
 	JobBookmarksEncryption *JobBookmarksEncryption `json:"JobBookmarksEncryption,omitempty"`

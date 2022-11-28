@@ -1,20 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { Headers } from "./headers";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Headers } from "./headers";
 import { Row } from "./row";
 
 
+
 export class Table extends SpeakeasyBase {
-  @Metadata({ data: "json, name=columnHeaders" })
+  @SpeakeasyMetadata({ data: "json, name=columnHeaders" })
   columnHeaders?: Headers;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=rowHeaders" })
+  @SpeakeasyMetadata({ data: "json, name=rowHeaders" })
   rowHeaders?: Headers;
 
-  @Metadata({ data: "json, name=rows", elemType: shared.Row })
+  @SpeakeasyMetadata({ data: "json, name=rows", elemType: Row })
   rows?: Row[];
 }

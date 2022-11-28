@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GetCallResponse } from "./getcallresponse";
 // GetCallsResponseEmbedded
 /**
  * A list of call objects. See the [get details of a specific call](#getCall) response fields for a description of the nested objects
@@ -34,7 +34,7 @@ var GetCallsResponseEmbedded = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=calls", elemType: shared.GetCallResponse }),
+        SpeakeasyMetadata({ data: "json, name=calls", elemType: GetCallResponse }),
         __metadata("design:type", Array)
     ], GetCallsResponseEmbedded.prototype, "calls", void 0);
     return GetCallsResponseEmbedded;
@@ -46,7 +46,7 @@ var GetCallsResponseLinksSelf = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=href" }),
+        SpeakeasyMetadata({ data: "json, name=href" }),
         __metadata("design:type", String)
     ], GetCallsResponseLinksSelf.prototype, "href", void 0);
     return GetCallsResponseLinksSelf;
@@ -58,7 +58,7 @@ var GetCallsResponseLinks = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=self" }),
+        SpeakeasyMetadata({ data: "json, name=self" }),
         __metadata("design:type", GetCallsResponseLinksSelf)
     ], GetCallsResponseLinks.prototype, "self", void 0);
     return GetCallsResponseLinks;
@@ -70,23 +70,23 @@ var GetCallsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=_embedded" }),
+        SpeakeasyMetadata({ data: "json, name=_embedded" }),
         __metadata("design:type", GetCallsResponseEmbedded)
     ], GetCallsResponse.prototype, "embedded", void 0);
     __decorate([
-        Metadata({ data: "json, name=_links" }),
+        SpeakeasyMetadata({ data: "json, name=_links" }),
         __metadata("design:type", GetCallsResponseLinks)
     ], GetCallsResponse.prototype, "links", void 0);
     __decorate([
-        Metadata({ data: "json, name=count" }),
+        SpeakeasyMetadata({ data: "json, name=count" }),
         __metadata("design:type", Number)
     ], GetCallsResponse.prototype, "count", void 0);
     __decorate([
-        Metadata({ data: "json, name=page_size" }),
+        SpeakeasyMetadata({ data: "json, name=page_size" }),
         __metadata("design:type", Number)
     ], GetCallsResponse.prototype, "pageSize", void 0);
     __decorate([
-        Metadata({ data: "json, name=record_index" }),
+        SpeakeasyMetadata({ data: "json, name=record_index" }),
         __metadata("design:type", Number)
     ], GetCallsResponse.prototype, "recordIndex", void 0);
     return GetCallsResponse;

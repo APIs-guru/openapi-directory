@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import dailyvolume
-from . import overallvolume
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetDomainStatisticsReportResponse:
-    daily_volumes: List[dailyvolume.DailyVolume] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DailyVolumes' }})
-    overall_volume: overallvolume.OverallVolume = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OverallVolume' }})
+    r"""GetDomainStatisticsReportResponse
+    An object that includes statistics that are related to the domain that you specified.
+    """
+    
+    daily_volumes: List[DailyVolume] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('DailyVolumes') }})
+    overall_volume: OverallVolume = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('OverallVolume') }})
     

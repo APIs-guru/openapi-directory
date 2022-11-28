@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ControlComment } from "./controlcomment";
 import { ControlResponseEnum } from "./controlresponseenum";
 import { ControlStatusEnum } from "./controlstatusenum";

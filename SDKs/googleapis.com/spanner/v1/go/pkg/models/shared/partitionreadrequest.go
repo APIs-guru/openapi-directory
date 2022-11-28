@@ -1,5 +1,7 @@
 package shared
 
+// PartitionReadRequest
+// The request for PartitionRead
 type PartitionReadRequest struct {
 	Columns          []string             `json:"columns,omitempty"`
 	Index            *string              `json:"index,omitempty"`

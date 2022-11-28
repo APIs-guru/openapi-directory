@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CrawlerMetrics } from "./crawlermetrics";
 
 
+
 export class GetCrawlerMetricsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CrawlerMetricsList", elemType: shared.CrawlerMetrics })
+  @SpeakeasyMetadata({ data: "json, name=CrawlerMetricsList", elemType: CrawlerMetrics })
   crawlerMetricsList?: CrawlerMetrics[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

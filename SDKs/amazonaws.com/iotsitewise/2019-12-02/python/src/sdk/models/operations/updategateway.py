@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
 class UpdateGatewayPathParams:
-    gateway_id: str = field(default=None, metadata={'path_param': { 'field_name': 'gatewayId', 'style': 'simple', 'explode': False }})
+    gateway_id: str = field(metadata={'path_param': { 'field_name': 'gatewayId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,23 +26,23 @@ class UpdateGatewayHeaders:
 @dataclass_json
 @dataclass
 class UpdateGatewayRequestBody:
-    gateway_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gatewayName' }})
+    gateway_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('gatewayName') }})
     
 
 @dataclass
 class UpdateGatewayRequest:
-    path_params: UpdateGatewayPathParams = field(default=None)
-    headers: UpdateGatewayHeaders = field(default=None)
-    request: UpdateGatewayRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateGatewayHeaders = field()
+    path_params: UpdateGatewayPathParams = field()
+    request: UpdateGatewayRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateGatewayResponse:
+    content_type: str = field()
+    status_code: int = field()
     conflicting_operation_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

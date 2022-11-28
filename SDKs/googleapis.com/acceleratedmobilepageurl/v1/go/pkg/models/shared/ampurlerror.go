@@ -11,6 +11,8 @@ const (
 	AmpURLErrorErrorCodeEnumURLIsInvalidAmp      AmpURLErrorErrorCodeEnum = "URL_IS_INVALID_AMP"
 )
 
+// AmpURLError
+// AMP URL Error resource for a requested URL that couldn't be found.
 type AmpURLError struct {
 	ErrorCode    *AmpURLErrorErrorCodeEnum `json:"errorCode,omitempty"`
 	ErrorMessage *string                   `json:"errorMessage,omitempty"`

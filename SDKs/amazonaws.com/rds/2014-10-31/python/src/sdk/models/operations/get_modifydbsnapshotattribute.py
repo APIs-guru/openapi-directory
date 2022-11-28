@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetModifyDbSnapshotAttributeActionEnum(str, Enum):
     MODIFY_DB_SNAPSHOT_ATTRIBUTE = "ModifyDBSnapshotAttribute"
@@ -10,12 +14,12 @@ class GetModifyDbSnapshotAttributeVersionEnum(str, Enum):
 
 @dataclass
 class GetModifyDbSnapshotAttributeQueryParams:
-    action: GetModifyDbSnapshotAttributeActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    attribute_name: str = field(default=None, metadata={'query_param': { 'field_name': 'AttributeName', 'style': 'form', 'explode': True }})
-    db_snapshot_identifier: str = field(default=None, metadata={'query_param': { 'field_name': 'DBSnapshotIdentifier', 'style': 'form', 'explode': True }})
+    action: GetModifyDbSnapshotAttributeActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    attribute_name: str = field(metadata={'query_param': { 'field_name': 'AttributeName', 'style': 'form', 'explode': True }})
+    db_snapshot_identifier: str = field(metadata={'query_param': { 'field_name': 'DBSnapshotIdentifier', 'style': 'form', 'explode': True }})
+    version: GetModifyDbSnapshotAttributeVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     values_to_add: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'ValuesToAdd', 'style': 'form', 'explode': True }})
     values_to_remove: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'ValuesToRemove', 'style': 'form', 'explode': True }})
-    version: GetModifyDbSnapshotAttributeVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -31,13 +35,13 @@ class GetModifyDbSnapshotAttributeHeaders:
 
 @dataclass
 class GetModifyDbSnapshotAttributeRequest:
-    query_params: GetModifyDbSnapshotAttributeQueryParams = field(default=None)
-    headers: GetModifyDbSnapshotAttributeHeaders = field(default=None)
+    headers: GetModifyDbSnapshotAttributeHeaders = field()
+    query_params: GetModifyDbSnapshotAttributeQueryParams = field()
     
 
 @dataclass
 class GetModifyDbSnapshotAttributeResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

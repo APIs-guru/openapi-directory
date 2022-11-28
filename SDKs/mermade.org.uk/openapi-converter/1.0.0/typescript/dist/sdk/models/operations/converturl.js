@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ConvertUrlQueryParams = /** @class */ (function (_super) {
     __extends(ConvertUrlQueryParams, _super);
     function ConvertUrlQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=url" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=url" }),
         __metadata("design:type", String)
     ], ConvertUrlQueryParams.prototype, "url", void 0);
     return ConvertUrlQueryParams;
@@ -41,7 +41,7 @@ var ConvertUrlRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ConvertUrlQueryParams)
     ], ConvertUrlRequest.prototype, "queryParams", void 0);
     return ConvertUrlRequest;
@@ -53,19 +53,19 @@ var ConvertUrlResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], ConvertUrlResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ConvertUrlResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ConvertUrlResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ConvertUrlResponse.prototype, "convertUrl200ApplicationJsonAny", void 0);
     return ConvertUrlResponse;

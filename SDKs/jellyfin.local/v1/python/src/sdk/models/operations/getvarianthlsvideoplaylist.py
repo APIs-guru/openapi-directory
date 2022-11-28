@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetVariantHlsVideoPlaylistPathParams:
-    item_id: str = field(default=None, metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
+    item_id: str = field(metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -61,19 +62,19 @@ class GetVariantHlsVideoPlaylistQueryParams:
 
 @dataclass
 class GetVariantHlsVideoPlaylistSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetVariantHlsVideoPlaylistRequest:
-    path_params: GetVariantHlsVideoPlaylistPathParams = field(default=None)
-    query_params: GetVariantHlsVideoPlaylistQueryParams = field(default=None)
-    security: GetVariantHlsVideoPlaylistSecurity = field(default=None)
+    path_params: GetVariantHlsVideoPlaylistPathParams = field()
+    query_params: GetVariantHlsVideoPlaylistQueryParams = field()
+    security: GetVariantHlsVideoPlaylistSecurity = field()
     
 
 @dataclass
 class GetVariantHlsVideoPlaylistResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_variant_hls_video_playlist_200_application_x_mpegurl_binary_string: Optional[bytes] = field(default=None)
-    status_code: int = field(default=None)
     

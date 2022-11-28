@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Date } from "./date";
+
 
 
 // Value
@@ -7,21 +8,21 @@ import { Date } from "./date";
  * Definition of a single value with generic type.
 **/
 export class Value extends SpeakeasyBase {
-  @Metadata({ data: "json, name=booleanValue" })
+  @SpeakeasyMetadata({ data: "json, name=booleanValue" })
   booleanValue?: boolean;
 
-  @Metadata({ data: "json, name=dateValue" })
+  @SpeakeasyMetadata({ data: "json, name=dateValue" })
   dateValue?: Date;
 
-  @Metadata({ data: "json, name=doubleValue" })
+  @SpeakeasyMetadata({ data: "json, name=doubleValue" })
   doubleValue?: number;
 
-  @Metadata({ data: "json, name=integerValue" })
+  @SpeakeasyMetadata({ data: "json, name=integerValue" })
   integerValue?: string;
 
-  @Metadata({ data: "json, name=stringValue" })
+  @SpeakeasyMetadata({ data: "json, name=stringValue" })
   stringValue?: string;
 
-  @Metadata({ data: "json, name=timestampValue" })
+  @SpeakeasyMetadata({ data: "json, name=timestampValue" })
   timestampValue?: string;
 }

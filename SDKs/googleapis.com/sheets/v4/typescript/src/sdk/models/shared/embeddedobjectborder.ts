@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Color } from "./color";
 import { ColorStyle } from "./colorstyle";
+
 
 
 // EmbeddedObjectBorder
@@ -8,9 +9,9 @@ import { ColorStyle } from "./colorstyle";
  * A border along an embedded object.
 **/
 export class EmbeddedObjectBorder extends SpeakeasyBase {
-  @Metadata({ data: "json, name=color" })
+  @SpeakeasyMetadata({ data: "json, name=color" })
   color?: Color;
 
-  @Metadata({ data: "json, name=colorStyle" })
+  @SpeakeasyMetadata({ data: "json, name=colorStyle" })
   colorStyle?: ColorStyle;
 }

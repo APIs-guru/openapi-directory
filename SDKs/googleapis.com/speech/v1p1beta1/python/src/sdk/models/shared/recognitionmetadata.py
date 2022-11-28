@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class RecognitionMetadataInteractionTypeEnum(str, Enum):
     INTERACTION_TYPE_UNSPECIFIED = "INTERACTION_TYPE_UNSPECIFIED"
@@ -37,13 +39,17 @@ class RecognitionMetadataRecordingDeviceTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class RecognitionMetadata:
-    audio_topic: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'audioTopic' }})
-    industry_naics_code_of_audio: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'industryNaicsCodeOfAudio' }})
-    interaction_type: Optional[RecognitionMetadataInteractionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'interactionType' }})
-    microphone_distance: Optional[RecognitionMetadataMicrophoneDistanceEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'microphoneDistance' }})
-    obfuscated_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'obfuscatedId' }})
-    original_media_type: Optional[RecognitionMetadataOriginalMediaTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'originalMediaType' }})
-    original_mime_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'originalMimeType' }})
-    recording_device_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'recordingDeviceName' }})
-    recording_device_type: Optional[RecognitionMetadataRecordingDeviceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'recordingDeviceType' }})
+    r"""RecognitionMetadata
+    Description of audio data to be recognized.
+    """
+    
+    audio_topic: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('audioTopic') }})
+    industry_naics_code_of_audio: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('industryNaicsCodeOfAudio') }})
+    interaction_type: Optional[RecognitionMetadataInteractionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('interactionType') }})
+    microphone_distance: Optional[RecognitionMetadataMicrophoneDistanceEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('microphoneDistance') }})
+    obfuscated_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('obfuscatedId') }})
+    original_media_type: Optional[RecognitionMetadataOriginalMediaTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('originalMediaType') }})
+    original_mime_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('originalMimeType') }})
+    recording_device_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('recordingDeviceName') }})
+    recording_device_type: Optional[RecognitionMetadataRecordingDeviceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('recordingDeviceType') }})
     

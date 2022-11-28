@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MetricMetadata } from "./metricmetadata";
 
+
 export enum MetricCompatibilityCompatibilityEnum {
-    CompatibilityUnspecified = "COMPATIBILITY_UNSPECIFIED"
-,    Compatible = "COMPATIBLE"
-,    Incompatible = "INCOMPATIBLE"
+    CompatibilityUnspecified = "COMPATIBILITY_UNSPECIFIED",
+    Compatible = "COMPATIBLE",
+    Incompatible = "INCOMPATIBLE"
 }
 
 
@@ -13,9 +14,9 @@ export enum MetricCompatibilityCompatibilityEnum {
  * The compatibility for a single metric.
 **/
 export class MetricCompatibility extends SpeakeasyBase {
-  @Metadata({ data: "json, name=compatibility" })
+  @SpeakeasyMetadata({ data: "json, name=compatibility" })
   compatibility?: MetricCompatibilityCompatibilityEnum;
 
-  @Metadata({ data: "json, name=metricMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=metricMetadata" })
   metricMetadata?: MetricMetadata;
 }

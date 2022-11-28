@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IncludeConditions } from "./includeconditions";
 import { LinkedForeignAccount } from "./linkedforeignaccount";
-import { IncludeConditions } from "./includeconditions";
+import { LinkedForeignAccountInput } from "./linkedforeignaccount";
+
 
 
 // RemarketingAudienceAudienceDefinition
@@ -10,7 +10,7 @@ import { IncludeConditions } from "./includeconditions";
  * The simple audience definition that will cause a user to be added to an audience.
 **/
 export class RemarketingAudienceAudienceDefinition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=includeConditions" })
+  @SpeakeasyMetadata({ data: "json, name=includeConditions" })
   includeConditions?: IncludeConditions;
 }
 
@@ -20,10 +20,10 @@ export class RemarketingAudienceAudienceDefinition extends SpeakeasyBase {
  * Defines the conditions to exclude users from the audience.
 **/
 export class RemarketingAudienceStateBasedAudienceDefinitionExcludeConditions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=exclusionDuration" })
+  @SpeakeasyMetadata({ data: "json, name=exclusionDuration" })
   exclusionDuration?: string;
 
-  @Metadata({ data: "json, name=segment" })
+  @SpeakeasyMetadata({ data: "json, name=segment" })
   segment?: string;
 }
 
@@ -33,10 +33,10 @@ export class RemarketingAudienceStateBasedAudienceDefinitionExcludeConditions ex
  * A state based audience definition that will cause a user to be added or removed from an audience.
 **/
 export class RemarketingAudienceStateBasedAudienceDefinition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=excludeConditions" })
+  @SpeakeasyMetadata({ data: "json, name=excludeConditions" })
   excludeConditions?: RemarketingAudienceStateBasedAudienceDefinitionExcludeConditions;
 
-  @Metadata({ data: "json, name=includeConditions" })
+  @SpeakeasyMetadata({ data: "json, name=includeConditions" })
   includeConditions?: IncludeConditions;
 }
 
@@ -46,45 +46,82 @@ export class RemarketingAudienceStateBasedAudienceDefinition extends SpeakeasyBa
  * JSON template for an Analytics remarketing audience.
 **/
 export class RemarketingAudience extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=audienceDefinition" })
+  @SpeakeasyMetadata({ data: "json, name=audienceDefinition" })
   audienceDefinition?: RemarketingAudienceAudienceDefinition;
 
-  @Metadata({ data: "json, name=audienceType" })
+  @SpeakeasyMetadata({ data: "json, name=audienceType" })
   audienceType?: string;
 
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=internalWebPropertyId" })
+  @SpeakeasyMetadata({ data: "json, name=internalWebPropertyId" })
   internalWebPropertyId?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=linkedAdAccounts", elemType: shared.LinkedForeignAccount })
+  @SpeakeasyMetadata({ data: "json, name=linkedAdAccounts", elemType: LinkedForeignAccount })
   linkedAdAccounts?: LinkedForeignAccount[];
 
-  @Metadata({ data: "json, name=linkedViews" })
+  @SpeakeasyMetadata({ data: "json, name=linkedViews" })
   linkedViews?: string[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=stateBasedAudienceDefinition" })
+  @SpeakeasyMetadata({ data: "json, name=stateBasedAudienceDefinition" })
   stateBasedAudienceDefinition?: RemarketingAudienceStateBasedAudienceDefinition;
 
-  @Metadata({ data: "json, name=updated" })
+  @SpeakeasyMetadata({ data: "json, name=updated" })
   updated?: Date;
 
-  @Metadata({ data: "json, name=webPropertyId" })
+  @SpeakeasyMetadata({ data: "json, name=webPropertyId" })
+  webPropertyId?: string;
+}
+
+
+// RemarketingAudienceInput
+/** 
+ * JSON template for an Analytics remarketing audience.
+**/
+export class RemarketingAudienceInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
+  accountId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=audienceDefinition" })
+  audienceDefinition?: RemarketingAudienceAudienceDefinition;
+
+  @SpeakeasyMetadata({ data: "json, name=audienceType" })
+  audienceType?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=id" })
+  id?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=kind" })
+  kind?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=linkedAdAccounts", elemType: LinkedForeignAccountInput })
+  linkedAdAccounts?: LinkedForeignAccountInput[];
+
+  @SpeakeasyMetadata({ data: "json, name=linkedViews" })
+  linkedViews?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=stateBasedAudienceDefinition" })
+  stateBasedAudienceDefinition?: RemarketingAudienceStateBasedAudienceDefinition;
+
+  @SpeakeasyMetadata({ data: "json, name=webPropertyId" })
   webPropertyId?: string;
 }

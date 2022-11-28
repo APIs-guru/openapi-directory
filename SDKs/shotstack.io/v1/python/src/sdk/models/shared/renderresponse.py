@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import renderresponsedata
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class RenderResponse:
-    message: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
-    response: renderresponsedata.RenderResponseData = field(default=None, metadata={'dataclasses_json': { 'field_name': 'response' }})
-    success: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'success' }})
+    r"""RenderResponse
+    The response received after a [render status request](#get-render-status) is submitted. The response includes  details about status of a render and the output URL.
+    """
+    
+    message: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('message') }})
+    response: RenderResponseData = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('response') }})
+    success: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('success') }})
     

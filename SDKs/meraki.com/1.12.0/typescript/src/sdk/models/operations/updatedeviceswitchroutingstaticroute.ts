@@ -1,49 +1,50 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateDeviceSwitchRoutingStaticRoutePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=serial" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=serial" })
   serial: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=staticRouteId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=staticRouteId" })
   staticRouteId: string;
 }
 
 
 export class UpdateDeviceSwitchRoutingStaticRouteRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=advertiseViaOspfEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=advertiseViaOspfEnabled" })
   advertiseViaOspfEnabled?: boolean;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=nextHopIp" })
+  @SpeakeasyMetadata({ data: "json, name=nextHopIp" })
   nextHopIp?: string;
 
-  @Metadata({ data: "json, name=preferOverOspfRoutesEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=preferOverOspfRoutesEnabled" })
   preferOverOspfRoutesEnabled?: boolean;
 
-  @Metadata({ data: "json, name=subnet" })
+  @SpeakeasyMetadata({ data: "json, name=subnet" })
   subnet?: string;
 }
 
 
 export class UpdateDeviceSwitchRoutingStaticRouteRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateDeviceSwitchRoutingStaticRoutePathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: UpdateDeviceSwitchRoutingStaticRouteRequestBody;
 }
 
 
 export class UpdateDeviceSwitchRoutingStaticRouteResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateDeviceSwitchRoutingStaticRoute200ApplicationJsonObject?: Map<string, any>;
 }

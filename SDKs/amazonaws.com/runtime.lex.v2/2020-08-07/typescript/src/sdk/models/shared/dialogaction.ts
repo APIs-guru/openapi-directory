@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DialogActionTypeEnum } from "./dialogactiontypeenum";
+
 
 
 // DialogAction
@@ -7,9 +8,9 @@ import { DialogActionTypeEnum } from "./dialogactiontypeenum";
  * The next action that Amazon Lex V2 should take.
 **/
 export class DialogAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=slotToElicit" })
+  @SpeakeasyMetadata({ data: "json, name=slotToElicit" })
   slotToElicit?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: DialogActionTypeEnum;
 }

@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 class DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnum(str, Enum):
@@ -53,9 +54,9 @@ class DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargeti
 
 @dataclass
 class DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeletePathParams:
-    advertiser_id: str = field(default=None, metadata={'path_param': { 'field_name': 'advertiserId', 'style': 'simple', 'explode': False }})
-    assigned_targeting_option_id: str = field(default=None, metadata={'path_param': { 'field_name': 'assignedTargetingOptionId', 'style': 'simple', 'explode': False }})
-    targeting_type: DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnum = field(default=None, metadata={'path_param': { 'field_name': 'targetingType', 'style': 'simple', 'explode': False }})
+    advertiser_id: str = field(metadata={'path_param': { 'field_name': 'advertiserId', 'style': 'simple', 'explode': False }})
+    assigned_targeting_option_id: str = field(metadata={'path_param': { 'field_name': 'assignedTargetingOptionId', 'style': 'simple', 'explode': False }})
+    targeting_type: DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteTargetingTypeEnum = field(metadata={'path_param': { 'field_name': 'targetingType', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -75,20 +76,20 @@ class DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteQueryPa
 
 @dataclass
 class DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteRequest:
-    path_params: DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeletePathParams = field(default=None)
-    query_params: DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteQueryParams = field(default=None)
-    security: DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteSecurity = field(default=None)
+    path_params: DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeletePathParams = field()
+    query_params: DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteQueryParams = field()
+    security: DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteSecurity = field()
     
 
 @dataclass
 class DisplayvideoAdvertisersTargetingTypesAssignedTargetingOptionsDeleteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

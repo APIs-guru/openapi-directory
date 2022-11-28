@@ -30,7 +30,7 @@ type MlProjectsModelsCreateSecurity struct {
 type MlProjectsModelsCreateRequest struct {
 	PathParams  MlProjectsModelsCreatePathParams
 	QueryParams MlProjectsModelsCreateQueryParams
-	Request     *shared.GoogleCloudMlV1Model `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudMlV1ModelInput `request:"mediaType=application/json"`
 	Security    MlProjectsModelsCreateSecurity
 }
 

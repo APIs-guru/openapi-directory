@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AssessmentTargetFilter
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Used as the request parameter in the <a>ListAssessmentTargets</a> action.
 **/
 export class AssessmentTargetFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assessmentTargetNamePattern" })
+  @SpeakeasyMetadata({ data: "json, name=assessmentTargetNamePattern" })
   assessmentTargetNamePattern?: string;
 }

@@ -1,52 +1,96 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum EnergyEfficiencyCarbonFreeEnergySourcesExceptionEnum {
-    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED"
-,    UnderConstruction = "UNDER_CONSTRUCTION"
-,    DependentOnSeason = "DEPENDENT_ON_SEASON"
-,    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
+    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED",
+    UnderConstruction = "UNDER_CONSTRUCTION",
+    DependentOnSeason = "DEPENDENT_ON_SEASON",
+    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
 }
 
 export enum EnergyEfficiencyEnergyConservationProgramExceptionEnum {
-    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED"
-,    UnderConstruction = "UNDER_CONSTRUCTION"
-,    DependentOnSeason = "DEPENDENT_ON_SEASON"
-,    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
+    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED",
+    UnderConstruction = "UNDER_CONSTRUCTION",
+    DependentOnSeason = "DEPENDENT_ON_SEASON",
+    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
 }
 
 export enum EnergyEfficiencyEnergyEfficientHeatingAndCoolingSystemsExceptionEnum {
-    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED"
-,    UnderConstruction = "UNDER_CONSTRUCTION"
-,    DependentOnSeason = "DEPENDENT_ON_SEASON"
-,    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
+    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED",
+    UnderConstruction = "UNDER_CONSTRUCTION",
+    DependentOnSeason = "DEPENDENT_ON_SEASON",
+    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
 }
 
 export enum EnergyEfficiencyEnergyEfficientLightingExceptionEnum {
-    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED"
-,    UnderConstruction = "UNDER_CONSTRUCTION"
-,    DependentOnSeason = "DEPENDENT_ON_SEASON"
-,    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
+    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED",
+    UnderConstruction = "UNDER_CONSTRUCTION",
+    DependentOnSeason = "DEPENDENT_ON_SEASON",
+    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
 }
 
 export enum EnergyEfficiencyEnergySavingThermostatsExceptionEnum {
-    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED"
-,    UnderConstruction = "UNDER_CONSTRUCTION"
-,    DependentOnSeason = "DEPENDENT_ON_SEASON"
-,    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
+    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED",
+    UnderConstruction = "UNDER_CONSTRUCTION",
+    DependentOnSeason = "DEPENDENT_ON_SEASON",
+    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
 }
 
 export enum EnergyEfficiencyGreenBuildingDesignExceptionEnum {
-    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED"
-,    UnderConstruction = "UNDER_CONSTRUCTION"
-,    DependentOnSeason = "DEPENDENT_ON_SEASON"
-,    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
+    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED",
+    UnderConstruction = "UNDER_CONSTRUCTION",
+    DependentOnSeason = "DEPENDENT_ON_SEASON",
+    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
 }
 
 export enum EnergyEfficiencyIndependentOrganizationAuditsEnergyUseExceptionEnum {
-    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED"
-,    UnderConstruction = "UNDER_CONSTRUCTION"
-,    DependentOnSeason = "DEPENDENT_ON_SEASON"
-,    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
+    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED",
+    UnderConstruction = "UNDER_CONSTRUCTION",
+    DependentOnSeason = "DEPENDENT_ON_SEASON",
+    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
+}
+
+
+// EnergyEfficiencyInput
+/** 
+ * Energy efficiency practices implemented at the hotel.
+**/
+export class EnergyEfficiencyInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=carbonFreeEnergySources" })
+  carbonFreeEnergySources?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=carbonFreeEnergySourcesException" })
+  carbonFreeEnergySourcesException?: EnergyEfficiencyCarbonFreeEnergySourcesExceptionEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=energyConservationProgram" })
+  energyConservationProgram?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=energyConservationProgramException" })
+  energyConservationProgramException?: EnergyEfficiencyEnergyConservationProgramExceptionEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=energyEfficientHeatingAndCoolingSystems" })
+  energyEfficientHeatingAndCoolingSystems?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=energyEfficientHeatingAndCoolingSystemsException" })
+  energyEfficientHeatingAndCoolingSystemsException?: EnergyEfficiencyEnergyEfficientHeatingAndCoolingSystemsExceptionEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=energyEfficientLighting" })
+  energyEfficientLighting?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=energyEfficientLightingException" })
+  energyEfficientLightingException?: EnergyEfficiencyEnergyEfficientLightingExceptionEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=energySavingThermostats" })
+  energySavingThermostats?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=energySavingThermostatsException" })
+  energySavingThermostatsException?: EnergyEfficiencyEnergySavingThermostatsExceptionEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=independentOrganizationAuditsEnergyUse" })
+  independentOrganizationAuditsEnergyUse?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=independentOrganizationAuditsEnergyUseException" })
+  independentOrganizationAuditsEnergyUseException?: EnergyEfficiencyIndependentOrganizationAuditsEnergyUseExceptionEnum;
 }
 
 
@@ -55,45 +99,45 @@ export enum EnergyEfficiencyIndependentOrganizationAuditsEnergyUseExceptionEnum 
  * Energy efficiency practices implemented at the hotel.
 **/
 export class EnergyEfficiency extends SpeakeasyBase {
-  @Metadata({ data: "json, name=carbonFreeEnergySources" })
+  @SpeakeasyMetadata({ data: "json, name=carbonFreeEnergySources" })
   carbonFreeEnergySources?: boolean;
 
-  @Metadata({ data: "json, name=carbonFreeEnergySourcesException" })
+  @SpeakeasyMetadata({ data: "json, name=carbonFreeEnergySourcesException" })
   carbonFreeEnergySourcesException?: EnergyEfficiencyCarbonFreeEnergySourcesExceptionEnum;
 
-  @Metadata({ data: "json, name=energyConservationProgram" })
+  @SpeakeasyMetadata({ data: "json, name=energyConservationProgram" })
   energyConservationProgram?: boolean;
 
-  @Metadata({ data: "json, name=energyConservationProgramException" })
+  @SpeakeasyMetadata({ data: "json, name=energyConservationProgramException" })
   energyConservationProgramException?: EnergyEfficiencyEnergyConservationProgramExceptionEnum;
 
-  @Metadata({ data: "json, name=energyEfficientHeatingAndCoolingSystems" })
+  @SpeakeasyMetadata({ data: "json, name=energyEfficientHeatingAndCoolingSystems" })
   energyEfficientHeatingAndCoolingSystems?: boolean;
 
-  @Metadata({ data: "json, name=energyEfficientHeatingAndCoolingSystemsException" })
+  @SpeakeasyMetadata({ data: "json, name=energyEfficientHeatingAndCoolingSystemsException" })
   energyEfficientHeatingAndCoolingSystemsException?: EnergyEfficiencyEnergyEfficientHeatingAndCoolingSystemsExceptionEnum;
 
-  @Metadata({ data: "json, name=energyEfficientLighting" })
+  @SpeakeasyMetadata({ data: "json, name=energyEfficientLighting" })
   energyEfficientLighting?: boolean;
 
-  @Metadata({ data: "json, name=energyEfficientLightingException" })
+  @SpeakeasyMetadata({ data: "json, name=energyEfficientLightingException" })
   energyEfficientLightingException?: EnergyEfficiencyEnergyEfficientLightingExceptionEnum;
 
-  @Metadata({ data: "json, name=energySavingThermostats" })
+  @SpeakeasyMetadata({ data: "json, name=energySavingThermostats" })
   energySavingThermostats?: boolean;
 
-  @Metadata({ data: "json, name=energySavingThermostatsException" })
+  @SpeakeasyMetadata({ data: "json, name=energySavingThermostatsException" })
   energySavingThermostatsException?: EnergyEfficiencyEnergySavingThermostatsExceptionEnum;
 
-  @Metadata({ data: "json, name=greenBuildingDesign" })
+  @SpeakeasyMetadata({ data: "json, name=greenBuildingDesign" })
   greenBuildingDesign?: boolean;
 
-  @Metadata({ data: "json, name=greenBuildingDesignException" })
+  @SpeakeasyMetadata({ data: "json, name=greenBuildingDesignException" })
   greenBuildingDesignException?: EnergyEfficiencyGreenBuildingDesignExceptionEnum;
 
-  @Metadata({ data: "json, name=independentOrganizationAuditsEnergyUse" })
+  @SpeakeasyMetadata({ data: "json, name=independentOrganizationAuditsEnergyUse" })
   independentOrganizationAuditsEnergyUse?: boolean;
 
-  @Metadata({ data: "json, name=independentOrganizationAuditsEnergyUseException" })
+  @SpeakeasyMetadata({ data: "json, name=independentOrganizationAuditsEnergyUseException" })
   independentOrganizationAuditsEnergyUseException?: EnergyEfficiencyIndependentOrganizationAuditsEnergyUseExceptionEnum;
 }

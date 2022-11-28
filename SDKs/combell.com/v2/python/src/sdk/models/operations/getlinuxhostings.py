@@ -11,13 +11,13 @@ class GetLinuxHostingsQueryParams:
 
 @dataclass
 class GetLinuxHostingsRequest:
-    query_params: GetLinuxHostingsQueryParams = field(default=None)
+    query_params: GetLinuxHostingsQueryParams = field()
     
 
 @dataclass
 class GetLinuxHostingsResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     linux_hostings: Optional[List[shared.LinuxHosting]] = field(default=None)
-    status_code: int = field(default=None)
     

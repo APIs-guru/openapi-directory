@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DeleteTeamsTeamIdMembershipsUserIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=teamId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=teamId" })
   teamId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=userId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=userId" })
   userId: string;
 }
 
 
 export class DeleteTeamsTeamIdMembershipsUserIdQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=requesterUserId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=requesterUserId" })
   requesterUserId?: string;
 }
 
 
 export class DeleteTeamsTeamIdMembershipsUserIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DeleteTeamsTeamIdMembershipsUserIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: DeleteTeamsTeamIdMembershipsUserIdQueryParams;
 }
 
 
 export class DeleteTeamsTeamIdMembershipsUserIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteTeamsTeamIdMembershipsUserId200ApplicationJsonString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteTeamsTeamIdMembershipsUserId200TextJsonString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteTeamsTeamIdMembershipsUserId200TextPlainString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponseContent?: shared.ErrorResponseContent;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

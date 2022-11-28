@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { RadiusSettings } from "./radiussettings";
 import { RadiusStatusEnum } from "./radiusstatusenum";
 import { DirectoryVpcSettingsDescription } from "./directoryvpcsettingsdescription";

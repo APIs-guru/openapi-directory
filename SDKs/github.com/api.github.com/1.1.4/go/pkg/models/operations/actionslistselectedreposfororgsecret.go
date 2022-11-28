@@ -14,14 +14,14 @@ type ActionsListSelectedReposForOrgSecretQueryParams struct {
 	PerPage *int64 `queryParam:"style=form,explode=true,name=per_page"`
 }
 
-type ActionsListSelectedReposForOrgSecretRequest struct {
-	PathParams  ActionsListSelectedReposForOrgSecretPathParams
-	QueryParams ActionsListSelectedReposForOrgSecretQueryParams
-}
-
 type ActionsListSelectedReposForOrgSecret200ApplicationJSON struct {
 	Repositories []shared.MinimalRepository `json:"repositories"`
 	TotalCount   int64                      `json:"total_count"`
+}
+
+type ActionsListSelectedReposForOrgSecretRequest struct {
+	PathParams  ActionsListSelectedReposForOrgSecretPathParams
+	QueryParams ActionsListSelectedReposForOrgSecretQueryParams
 }
 
 type ActionsListSelectedReposForOrgSecretResponse struct {

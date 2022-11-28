@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum VersionKindEnum {
-    VersionKindUnspecified = "VERSION_KIND_UNSPECIFIED"
-,    Normal = "NORMAL"
-,    Minimum = "MINIMUM"
-,    Maximum = "MAXIMUM"
+    VersionKindUnspecified = "VERSION_KIND_UNSPECIFIED",
+    Normal = "NORMAL",
+    Minimum = "MINIMUM",
+    Maximum = "MAXIMUM"
 }
 
 
@@ -13,18 +14,18 @@ export enum VersionKindEnum {
  * Version contains structured information about the version of a package.
 **/
 export class Version extends SpeakeasyBase {
-  @Metadata({ data: "json, name=epoch" })
+  @SpeakeasyMetadata({ data: "json, name=epoch" })
   epoch?: number;
 
-  @Metadata({ data: "json, name=inclusive" })
+  @SpeakeasyMetadata({ data: "json, name=inclusive" })
   inclusive?: boolean;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: VersionKindEnum;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=revision" })
+  @SpeakeasyMetadata({ data: "json, name=revision" })
   revision?: string;
 }

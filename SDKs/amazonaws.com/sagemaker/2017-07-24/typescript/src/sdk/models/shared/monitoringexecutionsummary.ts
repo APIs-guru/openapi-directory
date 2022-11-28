@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ExecutionStatusEnum } from "./executionstatusenum";
 import { MonitoringTypeEnum } from "./monitoringtypeenum";
+
 
 
 // MonitoringExecutionSummary
@@ -8,33 +9,33 @@ import { MonitoringTypeEnum } from "./monitoringtypeenum";
  * Summary of information about the last monitoring job to run.
 **/
 export class MonitoringExecutionSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime: Date;
 
-  @Metadata({ data: "json, name=EndpointName" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointName" })
   endpointName?: string;
 
-  @Metadata({ data: "json, name=FailureReason" })
+  @SpeakeasyMetadata({ data: "json, name=FailureReason" })
   failureReason?: string;
 
-  @Metadata({ data: "json, name=LastModifiedTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedTime" })
   lastModifiedTime: Date;
 
-  @Metadata({ data: "json, name=MonitoringExecutionStatus" })
+  @SpeakeasyMetadata({ data: "json, name=MonitoringExecutionStatus" })
   monitoringExecutionStatus: ExecutionStatusEnum;
 
-  @Metadata({ data: "json, name=MonitoringJobDefinitionName" })
+  @SpeakeasyMetadata({ data: "json, name=MonitoringJobDefinitionName" })
   monitoringJobDefinitionName?: string;
 
-  @Metadata({ data: "json, name=MonitoringScheduleName" })
+  @SpeakeasyMetadata({ data: "json, name=MonitoringScheduleName" })
   monitoringScheduleName: string;
 
-  @Metadata({ data: "json, name=MonitoringType" })
+  @SpeakeasyMetadata({ data: "json, name=MonitoringType" })
   monitoringType?: MonitoringTypeEnum;
 
-  @Metadata({ data: "json, name=ProcessingJobArn" })
+  @SpeakeasyMetadata({ data: "json, name=ProcessingJobArn" })
   processingJobArn?: string;
 
-  @Metadata({ data: "json, name=ScheduledTime" })
+  @SpeakeasyMetadata({ data: "json, name=ScheduledTime" })
   scheduledTime: Date;
 }

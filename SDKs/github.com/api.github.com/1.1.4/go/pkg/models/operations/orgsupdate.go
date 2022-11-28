@@ -47,14 +47,14 @@ type OrgsUpdateRequestBody struct {
 	TwitterUsername                      *string                                                        `json:"twitter_username,omitempty"`
 }
 
-type OrgsUpdateRequest struct {
-	PathParams OrgsUpdatePathParams
-	Request    *OrgsUpdateRequestBody `request:"mediaType=application/json"`
-}
-
 type OrgsUpdate415ApplicationJSON struct {
 	DocumentationURL string `json:"documentation_url"`
 	Message          string `json:"message"`
+}
+
+type OrgsUpdateRequest struct {
+	PathParams OrgsUpdatePathParams
+	Request    *OrgsUpdateRequestBody `request:"mediaType=application/json"`
 }
 
 type OrgsUpdateResponse struct {

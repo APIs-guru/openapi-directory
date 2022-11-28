@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// MatchmakingConfiguration
+// Guidelines for use with FlexMatch to match players into games. All matchmaking requests must specify a matchmaking configuration.
 type MatchmakingConfiguration struct {
 	AcceptanceRequired       *bool              `json:"AcceptanceRequired,omitempty"`
 	AcceptanceTimeoutSeconds *int64             `json:"AcceptanceTimeoutSeconds,omitempty"`

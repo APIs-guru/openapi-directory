@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProductInformationFilter } from "./productinformationfilter";
+
 
 
 // ProductInformation
@@ -8,9 +8,9 @@ import { ProductInformationFilter } from "./productinformationfilter";
  * Describes product information for a license configuration.
 **/
 export class ProductInformation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ProductInformationFilterList", elemType: shared.ProductInformationFilter })
+  @SpeakeasyMetadata({ data: "json, name=ProductInformationFilterList", elemType: ProductInformationFilter })
   productInformationFilterList: ProductInformationFilter[];
 
-  @Metadata({ data: "json, name=ResourceType" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceType" })
   resourceType: string;
 }

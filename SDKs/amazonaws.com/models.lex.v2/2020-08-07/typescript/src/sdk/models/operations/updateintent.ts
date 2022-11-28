@@ -1,42 +1,43 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateIntentPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=botId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=botId" })
   botId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=botVersion" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=botVersion" })
   botVersion: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=intentId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=intentId" })
   intentId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=localeId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=localeId" })
   localeId: string;
 }
 
 
 export class UpdateIntentHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -46,7 +47,7 @@ export class UpdateIntentHeaders extends SpeakeasyBase {
  * Settings that determine the Lambda function that Amazon Lex uses for processing user responses.
 **/
 export class UpdateIntentRequestBodyDialogCodeHook extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 }
 
@@ -56,7 +57,7 @@ export class UpdateIntentRequestBodyDialogCodeHook extends SpeakeasyBase {
  * Determines if a Lambda function should be invoked for a specific intent.
 **/
 export class UpdateIntentRequestBodyFulfillmentCodeHook extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 }
 
@@ -66,10 +67,10 @@ export class UpdateIntentRequestBodyFulfillmentCodeHook extends SpeakeasyBase {
  * Provides a statement the Amazon Lex conveys to the user when the intent is successfully fulfilled.
 **/
 export class UpdateIntentRequestBodyIntentClosingSetting extends SpeakeasyBase {
-  @Metadata({ data: "json, name=active" })
+  @SpeakeasyMetadata({ data: "json, name=active" })
   active?: boolean;
 
-  @Metadata({ data: "json, name=closingResponse" })
+  @SpeakeasyMetadata({ data: "json, name=closingResponse" })
   closingResponse?: shared.ResponseSpecification;
 }
 
@@ -79,13 +80,13 @@ export class UpdateIntentRequestBodyIntentClosingSetting extends SpeakeasyBase {
  * Provides a prompt for making sure that the user is ready for the intent to be fulfilled.
 **/
 export class UpdateIntentRequestBodyIntentConfirmationSetting extends SpeakeasyBase {
-  @Metadata({ data: "json, name=active" })
+  @SpeakeasyMetadata({ data: "json, name=active" })
   active?: boolean;
 
-  @Metadata({ data: "json, name=declinationResponse" })
+  @SpeakeasyMetadata({ data: "json, name=declinationResponse" })
   declinationResponse?: shared.ResponseSpecification;
 
-  @Metadata({ data: "json, name=promptSpecification" })
+  @SpeakeasyMetadata({ data: "json, name=promptSpecification" })
   promptSpecification?: shared.PromptSpecification;
 }
 
@@ -95,93 +96,93 @@ export class UpdateIntentRequestBodyIntentConfirmationSetting extends SpeakeasyB
  * Provides configuration information for the AMAZON.KendraSearchIntent intent. When you use this intent, Amazon Lex searches the specified Amazon Kendra index and returns documents from the index that match the user's utterance.
 **/
 export class UpdateIntentRequestBodyKendraConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=kendraIndex" })
+  @SpeakeasyMetadata({ data: "json, name=kendraIndex" })
   kendraIndex?: string;
 
-  @Metadata({ data: "json, name=queryFilterString" })
+  @SpeakeasyMetadata({ data: "json, name=queryFilterString" })
   queryFilterString?: string;
 
-  @Metadata({ data: "json, name=queryFilterStringEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=queryFilterStringEnabled" })
   queryFilterStringEnabled?: boolean;
 }
 
 
 export class UpdateIntentRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=dialogCodeHook" })
+  @SpeakeasyMetadata({ data: "json, name=dialogCodeHook" })
   dialogCodeHook?: UpdateIntentRequestBodyDialogCodeHook;
 
-  @Metadata({ data: "json, name=fulfillmentCodeHook" })
+  @SpeakeasyMetadata({ data: "json, name=fulfillmentCodeHook" })
   fulfillmentCodeHook?: UpdateIntentRequestBodyFulfillmentCodeHook;
 
-  @Metadata({ data: "json, name=inputContexts", elemType: shared.InputContext })
+  @SpeakeasyMetadata({ data: "json, name=inputContexts", elemType: shared.InputContext })
   inputContexts?: shared.InputContext[];
 
-  @Metadata({ data: "json, name=intentClosingSetting" })
+  @SpeakeasyMetadata({ data: "json, name=intentClosingSetting" })
   intentClosingSetting?: UpdateIntentRequestBodyIntentClosingSetting;
 
-  @Metadata({ data: "json, name=intentConfirmationSetting" })
+  @SpeakeasyMetadata({ data: "json, name=intentConfirmationSetting" })
   intentConfirmationSetting?: UpdateIntentRequestBodyIntentConfirmationSetting;
 
-  @Metadata({ data: "json, name=intentName" })
+  @SpeakeasyMetadata({ data: "json, name=intentName" })
   intentName: string;
 
-  @Metadata({ data: "json, name=kendraConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=kendraConfiguration" })
   kendraConfiguration?: UpdateIntentRequestBodyKendraConfiguration;
 
-  @Metadata({ data: "json, name=outputContexts", elemType: shared.OutputContext })
+  @SpeakeasyMetadata({ data: "json, name=outputContexts", elemType: shared.OutputContext })
   outputContexts?: shared.OutputContext[];
 
-  @Metadata({ data: "json, name=parentIntentSignature" })
+  @SpeakeasyMetadata({ data: "json, name=parentIntentSignature" })
   parentIntentSignature?: string;
 
-  @Metadata({ data: "json, name=sampleUtterances", elemType: shared.SampleUtterance })
+  @SpeakeasyMetadata({ data: "json, name=sampleUtterances", elemType: shared.SampleUtterance })
   sampleUtterances?: shared.SampleUtterance[];
 
-  @Metadata({ data: "json, name=slotPriorities", elemType: shared.SlotPriority })
+  @SpeakeasyMetadata({ data: "json, name=slotPriorities", elemType: shared.SlotPriority })
   slotPriorities?: shared.SlotPriority[];
 }
 
 
 export class UpdateIntentRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateIntentPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdateIntentHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdateIntentRequestBody;
 }
 
 
 export class UpdateIntentResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   conflictException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   preconditionFailedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceQuotaExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateIntentResponse?: shared.UpdateIntentResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationException?: any;
 }

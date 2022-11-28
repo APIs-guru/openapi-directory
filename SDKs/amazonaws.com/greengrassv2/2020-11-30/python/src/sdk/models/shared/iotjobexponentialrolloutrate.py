@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import iotjobrateincreasecriteria
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class IoTJobExponentialRolloutRate:
-    base_rate_per_minute: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'baseRatePerMinute' }})
-    increment_factor: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'incrementFactor' }})
-    rate_increase_criteria: iotjobrateincreasecriteria.IoTJobRateIncreaseCriteria = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rateIncreaseCriteria' }})
+    r"""IoTJobExponentialRolloutRate
+    Contains information about an exponential rollout rate for a configuration deployment job.
+    """
+    
+    base_rate_per_minute: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('baseRatePerMinute') }})
+    increment_factor: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('incrementFactor') }})
+    rate_increase_criteria: IoTJobRateIncreaseCriteria = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('rateIncreaseCriteria') }})
     

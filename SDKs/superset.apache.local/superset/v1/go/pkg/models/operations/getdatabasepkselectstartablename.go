@@ -17,12 +17,6 @@ type GetDatabasePkSelectStarTableNameSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type GetDatabasePkSelectStarTableNameRequest struct {
-	PathParams  GetDatabasePkSelectStarTableNamePathParams
-	QueryParams GetDatabasePkSelectStarTableNameQueryParams
-	Security    GetDatabasePkSelectStarTableNameSecurity
-}
-
 type GetDatabasePkSelectStarTableName400ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
 }
@@ -41,6 +35,12 @@ type GetDatabasePkSelectStarTableName422ApplicationJSON struct {
 
 type GetDatabasePkSelectStarTableName500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type GetDatabasePkSelectStarTableNameRequest struct {
+	PathParams  GetDatabasePkSelectStarTableNamePathParams
+	QueryParams GetDatabasePkSelectStarTableNameQueryParams
+	Security    GetDatabasePkSelectStarTableNameSecurity
 }
 
 type GetDatabasePkSelectStarTableNameResponse struct {

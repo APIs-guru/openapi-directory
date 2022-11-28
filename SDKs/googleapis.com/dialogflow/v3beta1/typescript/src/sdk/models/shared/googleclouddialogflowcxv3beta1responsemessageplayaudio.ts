@@ -1,4 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
+
+
+// GoogleCloudDialogflowCxV3beta1ResponseMessagePlayAudioInput
+/** 
+ * Specifies an audio clip to be played by the client as part of the response.
+**/
+export class GoogleCloudDialogflowCxV3beta1ResponseMessagePlayAudioInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=audioUri" })
+  audioUri?: string;
+}
 
 
 // GoogleCloudDialogflowCxV3beta1ResponseMessagePlayAudio
@@ -6,9 +17,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies an audio clip to be played by the client as part of the response.
 **/
 export class GoogleCloudDialogflowCxV3beta1ResponseMessagePlayAudio extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowPlaybackInterruption" })
+  @SpeakeasyMetadata({ data: "json, name=allowPlaybackInterruption" })
   allowPlaybackInterruption?: boolean;
 
-  @Metadata({ data: "json, name=audioUri" })
+  @SpeakeasyMetadata({ data: "json, name=audioUri" })
   audioUri?: string;
 }

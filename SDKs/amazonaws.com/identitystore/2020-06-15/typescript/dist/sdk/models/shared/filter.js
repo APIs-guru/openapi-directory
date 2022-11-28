@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Filter
 /**
  * A query filter used by <code>ListUsers</code> and <code>ListGroup</code>. This filter object provides the attribute name and attribute value to search users or groups.
@@ -33,11 +33,11 @@ var Filter = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AttributePath" }),
+        SpeakeasyMetadata({ data: "json, name=AttributePath" }),
         __metadata("design:type", String)
     ], Filter.prototype, "attributePath", void 0);
     __decorate([
-        Metadata({ data: "json, name=AttributeValue" }),
+        SpeakeasyMetadata({ data: "json, name=AttributeValue" }),
         __metadata("design:type", String)
     ], Filter.prototype, "attributeValue", void 0);
     return Filter;

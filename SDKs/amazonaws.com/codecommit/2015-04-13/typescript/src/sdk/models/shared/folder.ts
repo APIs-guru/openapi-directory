@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Folder
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Returns information about a folder in a repository.
 **/
 export class Folder extends SpeakeasyBase {
-  @Metadata({ data: "json, name=absolutePath" })
+  @SpeakeasyMetadata({ data: "json, name=absolutePath" })
   absolutePath?: string;
 
-  @Metadata({ data: "json, name=relativePath" })
+  @SpeakeasyMetadata({ data: "json, name=relativePath" })
   relativePath?: string;
 
-  @Metadata({ data: "json, name=treeId" })
+  @SpeakeasyMetadata({ data: "json, name=treeId" })
   treeId?: string;
 }

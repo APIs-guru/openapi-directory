@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetAppsAppIdRulesPathParams = /** @class */ (function (_super) {
     __extends(GetAppsAppIdRulesPathParams, _super);
@@ -30,7 +30,7 @@ var GetAppsAppIdRulesPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=app_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=app_id" }),
         __metadata("design:type", String)
     ], GetAppsAppIdRulesPathParams.prototype, "appId", void 0);
     return GetAppsAppIdRulesPathParams;
@@ -42,7 +42,7 @@ var GetAppsAppIdRulesSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
         __metadata("design:type", shared.SchemeBearerAuth)
     ], GetAppsAppIdRulesSecurity.prototype, "bearerAuth", void 0);
     return GetAppsAppIdRulesSecurity;
@@ -54,11 +54,11 @@ var GetAppsAppIdRulesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAppsAppIdRulesPathParams)
     ], GetAppsAppIdRulesRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAppsAppIdRulesSecurity)
     ], GetAppsAppIdRulesRequest.prototype, "security", void 0);
     return GetAppsAppIdRulesRequest;
@@ -70,19 +70,19 @@ var GetAppsAppIdRulesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetAppsAppIdRulesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetAppsAppIdRulesResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Error)
     ], GetAppsAppIdRulesResponse.prototype, "error", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Array)
     ], GetAppsAppIdRulesResponse.prototype, "ruleResponses", void 0);
     return GetAppsAppIdRulesResponse;

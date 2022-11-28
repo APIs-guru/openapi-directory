@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -24,23 +28,23 @@ class ImportAPIHeaders:
 @dataclass_json
 @dataclass
 class ImportAPIRequestBody:
-    body: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'body' }})
+    body: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('body') }})
     
 
 @dataclass
 class ImportAPIRequest:
-    query_params: ImportAPIQueryParams = field(default=None)
-    headers: ImportAPIHeaders = field(default=None)
-    request: ImportAPIRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ImportAPIHeaders = field()
+    query_params: ImportAPIQueryParams = field()
+    request: ImportAPIRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ImportAPIResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     import_api_response: Optional[shared.ImportAPIResponse] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

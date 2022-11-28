@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApiConfigHandler } from "./apiconfighandler";
 import { AutomaticScaling } from "./automaticscaling";
 import { BasicScaling } from "./basicscaling";
@@ -17,22 +16,23 @@ import { ReadinessCheck } from "./readinesscheck";
 import { Resources } from "./resources";
 import { VpcAccessConnector } from "./vpcaccessconnector";
 
+
 export enum VersionInboundServicesEnum {
-    InboundServiceUnspecified = "INBOUND_SERVICE_UNSPECIFIED"
-,    InboundServiceMail = "INBOUND_SERVICE_MAIL"
-,    InboundServiceMailBounce = "INBOUND_SERVICE_MAIL_BOUNCE"
-,    InboundServiceXmppError = "INBOUND_SERVICE_XMPP_ERROR"
-,    InboundServiceXmppMessage = "INBOUND_SERVICE_XMPP_MESSAGE"
-,    InboundServiceXmppSubscribe = "INBOUND_SERVICE_XMPP_SUBSCRIBE"
-,    InboundServiceXmppPresence = "INBOUND_SERVICE_XMPP_PRESENCE"
-,    InboundServiceChannelPresence = "INBOUND_SERVICE_CHANNEL_PRESENCE"
-,    InboundServiceWarmup = "INBOUND_SERVICE_WARMUP"
+    InboundServiceUnspecified = "INBOUND_SERVICE_UNSPECIFIED",
+    InboundServiceMail = "INBOUND_SERVICE_MAIL",
+    InboundServiceMailBounce = "INBOUND_SERVICE_MAIL_BOUNCE",
+    InboundServiceXmppError = "INBOUND_SERVICE_XMPP_ERROR",
+    InboundServiceXmppMessage = "INBOUND_SERVICE_XMPP_MESSAGE",
+    InboundServiceXmppSubscribe = "INBOUND_SERVICE_XMPP_SUBSCRIBE",
+    InboundServiceXmppPresence = "INBOUND_SERVICE_XMPP_PRESENCE",
+    InboundServiceChannelPresence = "INBOUND_SERVICE_CHANNEL_PRESENCE",
+    InboundServiceWarmup = "INBOUND_SERVICE_WARMUP"
 }
 
 export enum VersionServingStatusEnum {
-    ServingStatusUnspecified = "SERVING_STATUS_UNSPECIFIED"
-,    Serving = "SERVING"
-,    Stopped = "STOPPED"
+    ServingStatusUnspecified = "SERVING_STATUS_UNSPECIFIED",
+    Serving = "SERVING",
+    Stopped = "STOPPED"
 }
 
 
@@ -41,123 +41,123 @@ export enum VersionServingStatusEnum {
  * A Version resource is a specific set of source code and configuration files that are deployed into a service.
 **/
 export class Version extends SpeakeasyBase {
-  @Metadata({ data: "json, name=apiConfig" })
+  @SpeakeasyMetadata({ data: "json, name=apiConfig" })
   apiConfig?: ApiConfigHandler;
 
-  @Metadata({ data: "json, name=appEngineApis" })
+  @SpeakeasyMetadata({ data: "json, name=appEngineApis" })
   appEngineApis?: boolean;
 
-  @Metadata({ data: "json, name=automaticScaling" })
+  @SpeakeasyMetadata({ data: "json, name=automaticScaling" })
   automaticScaling?: AutomaticScaling;
 
-  @Metadata({ data: "json, name=basicScaling" })
+  @SpeakeasyMetadata({ data: "json, name=basicScaling" })
   basicScaling?: BasicScaling;
 
-  @Metadata({ data: "json, name=betaSettings" })
+  @SpeakeasyMetadata({ data: "json, name=betaSettings" })
   betaSettings?: Map<string, string>;
 
-  @Metadata({ data: "json, name=buildEnvVariables" })
+  @SpeakeasyMetadata({ data: "json, name=buildEnvVariables" })
   buildEnvVariables?: Map<string, string>;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=createdBy" })
+  @SpeakeasyMetadata({ data: "json, name=createdBy" })
   createdBy?: string;
 
-  @Metadata({ data: "json, name=defaultExpiration" })
+  @SpeakeasyMetadata({ data: "json, name=defaultExpiration" })
   defaultExpiration?: string;
 
-  @Metadata({ data: "json, name=deployment" })
+  @SpeakeasyMetadata({ data: "json, name=deployment" })
   deployment?: Deployment;
 
-  @Metadata({ data: "json, name=diskUsageBytes" })
+  @SpeakeasyMetadata({ data: "json, name=diskUsageBytes" })
   diskUsageBytes?: string;
 
-  @Metadata({ data: "json, name=endpointsApiService" })
+  @SpeakeasyMetadata({ data: "json, name=endpointsApiService" })
   endpointsApiService?: EndpointsApiService;
 
-  @Metadata({ data: "json, name=entrypoint" })
+  @SpeakeasyMetadata({ data: "json, name=entrypoint" })
   entrypoint?: Entrypoint;
 
-  @Metadata({ data: "json, name=env" })
+  @SpeakeasyMetadata({ data: "json, name=env" })
   env?: string;
 
-  @Metadata({ data: "json, name=envVariables" })
+  @SpeakeasyMetadata({ data: "json, name=envVariables" })
   envVariables?: Map<string, string>;
 
-  @Metadata({ data: "json, name=errorHandlers", elemType: shared.ErrorHandler })
+  @SpeakeasyMetadata({ data: "json, name=errorHandlers", elemType: ErrorHandler })
   errorHandlers?: ErrorHandler[];
 
-  @Metadata({ data: "json, name=handlers", elemType: shared.UrlMap })
+  @SpeakeasyMetadata({ data: "json, name=handlers", elemType: UrlMap })
   handlers?: UrlMap[];
 
-  @Metadata({ data: "json, name=healthCheck" })
+  @SpeakeasyMetadata({ data: "json, name=healthCheck" })
   healthCheck?: HealthCheck;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=inboundServices" })
+  @SpeakeasyMetadata({ data: "json, name=inboundServices" })
   inboundServices?: VersionInboundServicesEnum[];
 
-  @Metadata({ data: "json, name=instanceClass" })
+  @SpeakeasyMetadata({ data: "json, name=instanceClass" })
   instanceClass?: string;
 
-  @Metadata({ data: "json, name=libraries", elemType: shared.Library })
+  @SpeakeasyMetadata({ data: "json, name=libraries", elemType: Library })
   libraries?: Library[];
 
-  @Metadata({ data: "json, name=livenessCheck" })
+  @SpeakeasyMetadata({ data: "json, name=livenessCheck" })
   livenessCheck?: LivenessCheck;
 
-  @Metadata({ data: "json, name=manualScaling" })
+  @SpeakeasyMetadata({ data: "json, name=manualScaling" })
   manualScaling?: ManualScaling;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=network" })
+  @SpeakeasyMetadata({ data: "json, name=network" })
   network?: Network;
 
-  @Metadata({ data: "json, name=nobuildFilesRegex" })
+  @SpeakeasyMetadata({ data: "json, name=nobuildFilesRegex" })
   nobuildFilesRegex?: string;
 
-  @Metadata({ data: "json, name=readinessCheck" })
+  @SpeakeasyMetadata({ data: "json, name=readinessCheck" })
   readinessCheck?: ReadinessCheck;
 
-  @Metadata({ data: "json, name=resources" })
+  @SpeakeasyMetadata({ data: "json, name=resources" })
   resources?: Resources;
 
-  @Metadata({ data: "json, name=runtime" })
+  @SpeakeasyMetadata({ data: "json, name=runtime" })
   runtime?: string;
 
-  @Metadata({ data: "json, name=runtimeApiVersion" })
+  @SpeakeasyMetadata({ data: "json, name=runtimeApiVersion" })
   runtimeApiVersion?: string;
 
-  @Metadata({ data: "json, name=runtimeChannel" })
+  @SpeakeasyMetadata({ data: "json, name=runtimeChannel" })
   runtimeChannel?: string;
 
-  @Metadata({ data: "json, name=runtimeMainExecutablePath" })
+  @SpeakeasyMetadata({ data: "json, name=runtimeMainExecutablePath" })
   runtimeMainExecutablePath?: string;
 
-  @Metadata({ data: "json, name=serviceAccount" })
+  @SpeakeasyMetadata({ data: "json, name=serviceAccount" })
   serviceAccount?: string;
 
-  @Metadata({ data: "json, name=servingStatus" })
+  @SpeakeasyMetadata({ data: "json, name=servingStatus" })
   servingStatus?: VersionServingStatusEnum;
 
-  @Metadata({ data: "json, name=threadsafe" })
+  @SpeakeasyMetadata({ data: "json, name=threadsafe" })
   threadsafe?: boolean;
 
-  @Metadata({ data: "json, name=versionUrl" })
+  @SpeakeasyMetadata({ data: "json, name=versionUrl" })
   versionUrl?: string;
 
-  @Metadata({ data: "json, name=vm" })
+  @SpeakeasyMetadata({ data: "json, name=vm" })
   vm?: boolean;
 
-  @Metadata({ data: "json, name=vpcAccessConnector" })
+  @SpeakeasyMetadata({ data: "json, name=vpcAccessConnector" })
   vpcAccessConnector?: VpcAccessConnector;
 
-  @Metadata({ data: "json, name=zones" })
+  @SpeakeasyMetadata({ data: "json, name=zones" })
   zones?: string[];
 }

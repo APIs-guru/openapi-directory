@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DiscvoverTunersQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=newDevicesOnly" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=newDevicesOnly" })
   newDevicesOnly?: boolean;
 }
 
 
 export class DiscvoverTunersSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   customAuthentication: shared.SchemeCustomAuthentication;
 }
 
 
 export class DiscvoverTunersRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: DiscvoverTunersQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: DiscvoverTunersSecurity;
 }
 
 
 export class DiscvoverTunersResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.TunerHostInfo })
+  @SpeakeasyMetadata({ elemType: shared.TunerHostInfo })
   tunerHostInfos?: shared.TunerHostInfo[];
 }

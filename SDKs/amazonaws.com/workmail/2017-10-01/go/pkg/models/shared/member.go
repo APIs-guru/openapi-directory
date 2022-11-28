@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Member
+// The representation of a user or group.
 type Member struct {
 	DisabledDate *time.Time       `json:"DisabledDate,omitempty"`
 	EnabledDate  *time.Time       `json:"EnabledDate,omitempty"`

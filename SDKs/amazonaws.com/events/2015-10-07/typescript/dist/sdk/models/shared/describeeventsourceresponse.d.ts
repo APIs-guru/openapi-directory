@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { EventSourceStateEnum } from "./eventsourcestateenum";
 export declare class DescribeEventSourceResponse extends SpeakeasyBase {
     arn?: string;

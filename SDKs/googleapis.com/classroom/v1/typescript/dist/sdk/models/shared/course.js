@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { CourseMaterialSet } from "./coursematerialset";
 import { GradebookSettings } from "./gradebooksettings";
 import { DriveFolder } from "./drivefolder";
 export var CourseCourseStateEnum;
@@ -45,79 +45,79 @@ var Course = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=alternateLink" }),
+        SpeakeasyMetadata({ data: "json, name=alternateLink" }),
         __metadata("design:type", String)
     ], Course.prototype, "alternateLink", void 0);
     __decorate([
-        Metadata({ data: "json, name=calendarId" }),
+        SpeakeasyMetadata({ data: "json, name=calendarId" }),
         __metadata("design:type", String)
     ], Course.prototype, "calendarId", void 0);
     __decorate([
-        Metadata({ data: "json, name=courseGroupEmail" }),
+        SpeakeasyMetadata({ data: "json, name=courseGroupEmail" }),
         __metadata("design:type", String)
     ], Course.prototype, "courseGroupEmail", void 0);
     __decorate([
-        Metadata({ data: "json, name=courseMaterialSets", elemType: shared.CourseMaterialSet }),
+        SpeakeasyMetadata({ data: "json, name=courseMaterialSets", elemType: CourseMaterialSet }),
         __metadata("design:type", Array)
     ], Course.prototype, "courseMaterialSets", void 0);
     __decorate([
-        Metadata({ data: "json, name=courseState" }),
+        SpeakeasyMetadata({ data: "json, name=courseState" }),
         __metadata("design:type", String)
     ], Course.prototype, "courseState", void 0);
     __decorate([
-        Metadata({ data: "json, name=creationTime" }),
+        SpeakeasyMetadata({ data: "json, name=creationTime" }),
         __metadata("design:type", String)
     ], Course.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], Course.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=descriptionHeading" }),
+        SpeakeasyMetadata({ data: "json, name=descriptionHeading" }),
         __metadata("design:type", String)
     ], Course.prototype, "descriptionHeading", void 0);
     __decorate([
-        Metadata({ data: "json, name=enrollmentCode" }),
+        SpeakeasyMetadata({ data: "json, name=enrollmentCode" }),
         __metadata("design:type", String)
     ], Course.prototype, "enrollmentCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=gradebookSettings" }),
+        SpeakeasyMetadata({ data: "json, name=gradebookSettings" }),
         __metadata("design:type", GradebookSettings)
     ], Course.prototype, "gradebookSettings", void 0);
     __decorate([
-        Metadata({ data: "json, name=guardiansEnabled" }),
+        SpeakeasyMetadata({ data: "json, name=guardiansEnabled" }),
         __metadata("design:type", Boolean)
     ], Course.prototype, "guardiansEnabled", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], Course.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Course.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=ownerId" }),
+        SpeakeasyMetadata({ data: "json, name=ownerId" }),
         __metadata("design:type", String)
     ], Course.prototype, "ownerId", void 0);
     __decorate([
-        Metadata({ data: "json, name=room" }),
+        SpeakeasyMetadata({ data: "json, name=room" }),
         __metadata("design:type", String)
     ], Course.prototype, "room", void 0);
     __decorate([
-        Metadata({ data: "json, name=section" }),
+        SpeakeasyMetadata({ data: "json, name=section" }),
         __metadata("design:type", String)
     ], Course.prototype, "section", void 0);
     __decorate([
-        Metadata({ data: "json, name=teacherFolder" }),
+        SpeakeasyMetadata({ data: "json, name=teacherFolder" }),
         __metadata("design:type", DriveFolder)
     ], Course.prototype, "teacherFolder", void 0);
     __decorate([
-        Metadata({ data: "json, name=teacherGroupEmail" }),
+        SpeakeasyMetadata({ data: "json, name=teacherGroupEmail" }),
         __metadata("design:type", String)
     ], Course.prototype, "teacherGroupEmail", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateTime" }),
+        SpeakeasyMetadata({ data: "json, name=updateTime" }),
         __metadata("design:type", String)
     ], Course.prototype, "updateTime", void 0);
     return Course;

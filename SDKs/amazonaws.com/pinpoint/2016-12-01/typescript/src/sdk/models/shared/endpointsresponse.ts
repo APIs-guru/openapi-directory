@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EndpointResponse } from "./endpointresponse";
+
 
 
 // EndpointsResponse
@@ -8,6 +8,6 @@ import { EndpointResponse } from "./endpointresponse";
  * Provides information about all the endpoints that are associated with a user ID.
 **/
 export class EndpointsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Item", elemType: shared.EndpointResponse })
+  @SpeakeasyMetadata({ data: "json, name=Item", elemType: EndpointResponse })
   item: EndpointResponse[];
 }

@@ -1,62 +1,63 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetSyndicatedCommentsFormatEnum {
-    Xml = "xml"
-,    Rss = "rss"
-,    Rss2 = "rss2"
-,    Atom = "atom"
-,    Atom1 = "atom1"
-,    Json = "json"
-,    Json1 = "json1"
+    Xml = "xml",
+    Rss = "rss",
+    Rss2 = "rss2",
+    Atom = "atom",
+    Atom1 = "atom1",
+    Json = "json",
+    Json1 = "json1"
 }
 
 
 export class GetSyndicatedCommentsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=format" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" })
   format: GetSyndicatedCommentsFormatEnum;
 }
 
 
 export class GetSyndicatedCommentsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=accountId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=accountId" })
   accountId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=accountName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=accountName" })
   accountName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=videoChannelId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=videoChannelId" })
   videoChannelId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=videoChannelName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=videoChannelName" })
   videoChannelName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=videoId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=videoId" })
   videoId?: string;
 }
 
 
 export class GetSyndicatedCommentsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetSyndicatedCommentsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetSyndicatedCommentsQueryParams;
 }
 
 
 export class GetSyndicatedCommentsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getSyndicatedComments204ApplicationJsonObject?: Map<string, any>;
 }

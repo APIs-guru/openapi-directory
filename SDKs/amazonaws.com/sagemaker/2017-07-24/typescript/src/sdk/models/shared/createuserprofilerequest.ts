@@ -1,25 +1,25 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Tag } from "./tag";
 import { UserSettings } from "./usersettings";
 
 
+
 export class CreateUserProfileRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DomainId" })
+  @SpeakeasyMetadata({ data: "json, name=DomainId" })
   domainId: string;
 
-  @Metadata({ data: "json, name=SingleSignOnUserIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=SingleSignOnUserIdentifier" })
   singleSignOnUserIdentifier?: string;
 
-  @Metadata({ data: "json, name=SingleSignOnUserValue" })
+  @SpeakeasyMetadata({ data: "json, name=SingleSignOnUserValue" })
   singleSignOnUserValue?: string;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 
-  @Metadata({ data: "json, name=UserProfileName" })
+  @SpeakeasyMetadata({ data: "json, name=UserProfileName" })
   userProfileName: string;
 
-  @Metadata({ data: "json, name=UserSettings" })
+  @SpeakeasyMetadata({ data: "json, name=UserSettings" })
   userSettings?: UserSettings;
 }

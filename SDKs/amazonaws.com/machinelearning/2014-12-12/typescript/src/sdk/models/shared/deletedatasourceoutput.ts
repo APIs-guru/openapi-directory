@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DeleteDataSourceOutput
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  Represents the output of a <code>DeleteDataSource</code> operation.
 **/
 export class DeleteDataSourceOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DataSourceId" })
+  @SpeakeasyMetadata({ data: "json, name=DataSourceId" })
   dataSourceId?: string;
 }

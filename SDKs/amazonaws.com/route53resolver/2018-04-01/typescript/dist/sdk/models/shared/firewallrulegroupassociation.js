@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MutationProtectionStatusEnum } from "./mutationprotectionstatusenum";
 import { FirewallRuleGroupAssociationStatusEnum } from "./firewallrulegroupassociationstatusenum";
 // FirewallRuleGroupAssociation
@@ -35,55 +35,55 @@ var FirewallRuleGroupAssociation = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Arn" }),
+        SpeakeasyMetadata({ data: "json, name=Arn" }),
         __metadata("design:type", String)
     ], FirewallRuleGroupAssociation.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=CreationTime" }),
+        SpeakeasyMetadata({ data: "json, name=CreationTime" }),
         __metadata("design:type", String)
     ], FirewallRuleGroupAssociation.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=CreatorRequestId" }),
+        SpeakeasyMetadata({ data: "json, name=CreatorRequestId" }),
         __metadata("design:type", String)
     ], FirewallRuleGroupAssociation.prototype, "creatorRequestId", void 0);
     __decorate([
-        Metadata({ data: "json, name=FirewallRuleGroupId" }),
+        SpeakeasyMetadata({ data: "json, name=FirewallRuleGroupId" }),
         __metadata("design:type", String)
     ], FirewallRuleGroupAssociation.prototype, "firewallRuleGroupId", void 0);
     __decorate([
-        Metadata({ data: "json, name=Id" }),
+        SpeakeasyMetadata({ data: "json, name=Id" }),
         __metadata("design:type", String)
     ], FirewallRuleGroupAssociation.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=ManagedOwnerName" }),
+        SpeakeasyMetadata({ data: "json, name=ManagedOwnerName" }),
         __metadata("design:type", String)
     ], FirewallRuleGroupAssociation.prototype, "managedOwnerName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ModificationTime" }),
+        SpeakeasyMetadata({ data: "json, name=ModificationTime" }),
         __metadata("design:type", String)
     ], FirewallRuleGroupAssociation.prototype, "modificationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=MutationProtection" }),
+        SpeakeasyMetadata({ data: "json, name=MutationProtection" }),
         __metadata("design:type", String)
     ], FirewallRuleGroupAssociation.prototype, "mutationProtection", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], FirewallRuleGroupAssociation.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=Priority" }),
+        SpeakeasyMetadata({ data: "json, name=Priority" }),
         __metadata("design:type", Number)
     ], FirewallRuleGroupAssociation.prototype, "priority", void 0);
     __decorate([
-        Metadata({ data: "json, name=Status" }),
+        SpeakeasyMetadata({ data: "json, name=Status" }),
         __metadata("design:type", String)
     ], FirewallRuleGroupAssociation.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=StatusMessage" }),
+        SpeakeasyMetadata({ data: "json, name=StatusMessage" }),
         __metadata("design:type", String)
     ], FirewallRuleGroupAssociation.prototype, "statusMessage", void 0);
     __decorate([
-        Metadata({ data: "json, name=VpcId" }),
+        SpeakeasyMetadata({ data: "json, name=VpcId" }),
         __metadata("design:type", String)
     ], FirewallRuleGroupAssociation.prototype, "vpcId", void 0);
     return FirewallRuleGroupAssociation;

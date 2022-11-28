@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetRecordsRecordIdJsonPathParams = /** @class */ (function (_super) {
     __extends(GetRecordsRecordIdJsonPathParams, _super);
@@ -30,7 +30,7 @@ var GetRecordsRecordIdJsonPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=record_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=record_id" }),
         __metadata("design:type", Number)
     ], GetRecordsRecordIdJsonPathParams.prototype, "recordId", void 0);
     return GetRecordsRecordIdJsonPathParams;
@@ -47,15 +47,15 @@ var GetRecordsRecordIdJsonQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=api_key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_key" }),
         __metadata("design:type", String)
     ], GetRecordsRecordIdJsonQueryParams.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=fields" }),
         __metadata("design:type", String)
     ], GetRecordsRecordIdJsonQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=format" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=format" }),
         __metadata("design:type", String)
     ], GetRecordsRecordIdJsonQueryParams.prototype, "format", void 0);
     return GetRecordsRecordIdJsonQueryParams;
@@ -67,11 +67,11 @@ var GetRecordsRecordIdJsonRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetRecordsRecordIdJsonPathParams)
     ], GetRecordsRecordIdJsonRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetRecordsRecordIdJsonQueryParams)
     ], GetRecordsRecordIdJsonRequest.prototype, "queryParams", void 0);
     return GetRecordsRecordIdJsonRequest;
@@ -83,27 +83,27 @@ var GetRecordsRecordIdJsonResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetRecordsRecordIdJsonResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetRecordsRecordIdJsonResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], GetRecordsRecordIdJsonResponse.prototype, "getRecordsRecordIdJson403ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], GetRecordsRecordIdJsonResponse.prototype, "getRecordsRecordIdJson404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetRecordsRecordIdJsonResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Record)
     ], GetRecordsRecordIdJsonResponse.prototype, "record", void 0);
     return GetRecordsRecordIdJsonResponse;

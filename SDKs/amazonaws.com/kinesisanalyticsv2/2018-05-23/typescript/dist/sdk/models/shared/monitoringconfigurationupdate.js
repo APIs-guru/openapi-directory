@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConfigurationTypeEnum } from "./configurationtypeenum";
 import { LogLevelEnum } from "./loglevelenum";
 import { MetricsLevelEnum } from "./metricslevelenum";
@@ -36,15 +36,15 @@ var MonitoringConfigurationUpdate = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ConfigurationTypeUpdate" }),
+        SpeakeasyMetadata({ data: "json, name=ConfigurationTypeUpdate" }),
         __metadata("design:type", String)
     ], MonitoringConfigurationUpdate.prototype, "configurationTypeUpdate", void 0);
     __decorate([
-        Metadata({ data: "json, name=LogLevelUpdate" }),
+        SpeakeasyMetadata({ data: "json, name=LogLevelUpdate" }),
         __metadata("design:type", String)
     ], MonitoringConfigurationUpdate.prototype, "logLevelUpdate", void 0);
     __decorate([
-        Metadata({ data: "json, name=MetricsLevelUpdate" }),
+        SpeakeasyMetadata({ data: "json, name=MetricsLevelUpdate" }),
         __metadata("design:type", String)
     ], MonitoringConfigurationUpdate.prototype, "metricsLevelUpdate", void 0);
     return MonitoringConfigurationUpdate;

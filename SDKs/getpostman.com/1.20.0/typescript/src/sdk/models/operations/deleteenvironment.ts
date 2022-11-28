@@ -1,58 +1,59 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteEnvironmentPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=environment_uid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=environment_uid" })
   environmentUid: string;
 }
 
 
-export class DeleteEnvironmentRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: DeleteEnvironmentPathParams;
-}
-
-
 export class DeleteEnvironment200ApplicationJsonEnvironment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=uid" })
+  @SpeakeasyMetadata({ data: "json, name=uid" })
   uid?: string;
 }
 
 
 export class DeleteEnvironment200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=environment" })
+  @SpeakeasyMetadata({ data: "json, name=environment" })
   environment?: DeleteEnvironment200ApplicationJsonEnvironment;
 }
 
 
 export class DeleteEnvironment404ApplicationJsonError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
 
 
 export class DeleteEnvironment404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: DeleteEnvironment404ApplicationJsonError;
 }
 
 
+export class DeleteEnvironmentRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: DeleteEnvironmentPathParams;
+}
+
+
 export class DeleteEnvironmentResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteEnvironment200ApplicationJsonObject?: DeleteEnvironment200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteEnvironment404ApplicationJsonObject?: DeleteEnvironment404ApplicationJson;
 }

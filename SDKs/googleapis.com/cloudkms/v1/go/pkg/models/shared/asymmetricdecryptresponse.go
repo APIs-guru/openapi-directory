@@ -10,6 +10,8 @@ const (
 	AsymmetricDecryptResponseProtectionLevelEnumExternalVpc                AsymmetricDecryptResponseProtectionLevelEnum = "EXTERNAL_VPC"
 )
 
+// AsymmetricDecryptResponse
+// Response message for KeyManagementService.AsymmetricDecrypt.
 type AsymmetricDecryptResponse struct {
 	Plaintext                *string                                       `json:"plaintext,omitempty"`
 	PlaintextCrc32c          *string                                       `json:"plaintextCrc32c,omitempty"`

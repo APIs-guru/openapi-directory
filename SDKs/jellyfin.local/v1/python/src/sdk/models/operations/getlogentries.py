@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Optional
@@ -16,18 +16,18 @@ class GetLogEntriesQueryParams:
 
 @dataclass
 class GetLogEntriesSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetLogEntriesRequest:
-    query_params: GetLogEntriesQueryParams = field(default=None)
-    security: GetLogEntriesSecurity = field(default=None)
+    query_params: GetLogEntriesQueryParams = field()
+    security: GetLogEntriesSecurity = field()
     
 
 @dataclass
 class GetLogEntriesResponse:
+    content_type: str = field()
+    status_code: int = field()
     activity_log_entry_query_result: Optional[shared.ActivityLogEntryQueryResult] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

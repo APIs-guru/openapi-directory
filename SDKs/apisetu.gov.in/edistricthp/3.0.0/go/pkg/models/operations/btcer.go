@@ -26,11 +26,6 @@ type BtcerSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type BtcerRequest struct {
-	Request  *BtcerRequestBody `request:"mediaType=application/json"`
-	Security BtcerSecurity
-}
-
 type Btcer400ApplicationJSONErrorEnum string
 
 const (
@@ -160,6 +155,11 @@ const (
 type Btcer504ApplicationJSON struct {
 	Error            *Btcer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Btcer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type BtcerRequest struct {
+	Request  *BtcerRequestBody `request:"mediaType=application/json"`
+	Security BtcerSecurity
 }
 
 type BtcerResponse struct {

@@ -22,19 +22,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { MemberDetail } from "./memberdetail";
+import { UnprocessedAccount } from "./unprocessedaccount";
 var CreateMembersResponse = /** @class */ (function (_super) {
     __extends(CreateMembersResponse, _super);
     function CreateMembersResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Members", elemType: shared.MemberDetail }),
+        SpeakeasyMetadata({ data: "json, name=Members", elemType: MemberDetail }),
         __metadata("design:type", Array)
     ], CreateMembersResponse.prototype, "members", void 0);
     __decorate([
-        Metadata({ data: "json, name=UnprocessedAccounts", elemType: shared.UnprocessedAccount }),
+        SpeakeasyMetadata({ data: "json, name=UnprocessedAccounts", elemType: UnprocessedAccount }),
         __metadata("design:type", Array)
     ], CreateMembersResponse.prototype, "unprocessedAccounts", void 0);
     return CreateMembersResponse;

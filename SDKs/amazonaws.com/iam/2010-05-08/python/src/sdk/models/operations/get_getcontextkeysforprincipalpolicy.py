@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetGetContextKeysForPrincipalPolicyActionEnum(str, Enum):
     GET_CONTEXT_KEYS_FOR_PRINCIPAL_POLICY = "GetContextKeysForPrincipalPolicy"
@@ -10,10 +14,10 @@ class GetGetContextKeysForPrincipalPolicyVersionEnum(str, Enum):
 
 @dataclass
 class GetGetContextKeysForPrincipalPolicyQueryParams:
-    action: GetGetContextKeysForPrincipalPolicyActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetGetContextKeysForPrincipalPolicyActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    policy_source_arn: str = field(metadata={'query_param': { 'field_name': 'PolicySourceArn', 'style': 'form', 'explode': True }})
+    version: GetGetContextKeysForPrincipalPolicyVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     policy_input_list: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'PolicyInputList', 'style': 'form', 'explode': True }})
-    policy_source_arn: str = field(default=None, metadata={'query_param': { 'field_name': 'PolicySourceArn', 'style': 'form', 'explode': True }})
-    version: GetGetContextKeysForPrincipalPolicyVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetGetContextKeysForPrincipalPolicyHeaders:
 
 @dataclass
 class GetGetContextKeysForPrincipalPolicyRequest:
-    query_params: GetGetContextKeysForPrincipalPolicyQueryParams = field(default=None)
-    headers: GetGetContextKeysForPrincipalPolicyHeaders = field(default=None)
+    headers: GetGetContextKeysForPrincipalPolicyHeaders = field()
+    query_params: GetGetContextKeysForPrincipalPolicyQueryParams = field()
     
 
 @dataclass
 class GetGetContextKeysForPrincipalPolicyResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -8,6 +8,8 @@ const (
 	GoogleCloudIntegrationsV1alphaUploadIntegrationVersionRequestFileFormatEnumYaml                  GoogleCloudIntegrationsV1alphaUploadIntegrationVersionRequestFileFormatEnum = "YAML"
 )
 
+// GoogleCloudIntegrationsV1alphaUploadIntegrationVersionRequest
+// Request for UploadIntegrationVersion.
 type GoogleCloudIntegrationsV1alphaUploadIntegrationVersionRequest struct {
 	Content    *string                                                                      `json:"content,omitempty"`
 	FileFormat *GoogleCloudIntegrationsV1alphaUploadIntegrationVersionRequestFileFormatEnum `json:"fileFormat,omitempty"`

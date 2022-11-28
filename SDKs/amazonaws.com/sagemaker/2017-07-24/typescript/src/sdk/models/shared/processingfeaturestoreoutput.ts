@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ProcessingFeatureStoreOutput
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configuration for processing job outputs in Amazon SageMaker Feature Store.
 **/
 export class ProcessingFeatureStoreOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FeatureGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=FeatureGroupName" })
   featureGroupName: string;
 }

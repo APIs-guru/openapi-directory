@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DescribeInterconnectsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=interconnectId" })
+  @SpeakeasyMetadata({ data: "json, name=interconnectId" })
   interconnectId?: string;
 }

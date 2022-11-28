@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetLongviewSubscriptionPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=subscriptionId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=subscriptionId" })
   subscriptionId: string;
 }
 
 
-export class GetLongviewSubscriptionRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetLongviewSubscriptionPathParams;
-}
-
-
 export class GetLongviewSubscriptionDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class GetLongviewSubscriptionRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetLongviewSubscriptionPathParams;
+}
+
+
 export class GetLongviewSubscriptionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   longviewSubscription?: shared.LongviewSubscription;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getLongviewSubscriptionDefaultApplicationJsonObject?: GetLongviewSubscriptionDefaultApplicationJson;
 }

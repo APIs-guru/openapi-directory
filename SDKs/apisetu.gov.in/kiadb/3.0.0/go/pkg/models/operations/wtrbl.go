@@ -29,11 +29,6 @@ type WtrblSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type WtrblRequest struct {
-	Request  *WtrblRequestBody `request:"mediaType=application/json"`
-	Security WtrblSecurity
-}
-
 type Wtrbl400ApplicationJSONErrorEnum string
 
 const (
@@ -163,6 +158,11 @@ const (
 type Wtrbl504ApplicationJSON struct {
 	Error            *Wtrbl504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Wtrbl504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type WtrblRequest struct {
+	Request  *WtrblRequestBody `request:"mediaType=application/json"`
+	Security WtrblSecurity
 }
 
 type WtrblResponse struct {

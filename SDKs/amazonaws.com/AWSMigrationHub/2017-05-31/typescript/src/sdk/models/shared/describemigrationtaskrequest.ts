@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DescribeMigrationTaskRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MigrationTaskName" })
+  @SpeakeasyMetadata({ data: "json, name=MigrationTaskName" })
   migrationTaskName: string;
 
-  @Metadata({ data: "json, name=ProgressUpdateStream" })
+  @SpeakeasyMetadata({ data: "json, name=ProgressUpdateStream" })
   progressUpdateStream: string;
 }

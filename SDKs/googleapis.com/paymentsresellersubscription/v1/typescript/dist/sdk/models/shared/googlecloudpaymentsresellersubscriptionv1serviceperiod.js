@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GoogleCloudPaymentsResellerSubscriptionV1ServicePeriod
 /**
  * A description of what time period or moment in time the product or service is being delivered over.
@@ -33,11 +33,11 @@ var GoogleCloudPaymentsResellerSubscriptionV1ServicePeriod = /** @class */ (func
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=endTime" }),
+        SpeakeasyMetadata({ data: "json, name=endTime" }),
         __metadata("design:type", String)
     ], GoogleCloudPaymentsResellerSubscriptionV1ServicePeriod.prototype, "endTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=startTime" }),
+        SpeakeasyMetadata({ data: "json, name=startTime" }),
         __metadata("design:type", String)
     ], GoogleCloudPaymentsResellerSubscriptionV1ServicePeriod.prototype, "startTime", void 0);
     return GoogleCloudPaymentsResellerSubscriptionV1ServicePeriod;

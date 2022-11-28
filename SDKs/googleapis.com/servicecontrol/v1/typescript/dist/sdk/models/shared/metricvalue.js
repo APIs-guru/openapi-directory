@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Distribution } from "./distribution";
 import { Money } from "./money";
 // MetricValue
@@ -35,39 +35,39 @@ var MetricValue = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=boolValue" }),
+        SpeakeasyMetadata({ data: "json, name=boolValue" }),
         __metadata("design:type", Boolean)
     ], MetricValue.prototype, "boolValue", void 0);
     __decorate([
-        Metadata({ data: "json, name=distributionValue" }),
+        SpeakeasyMetadata({ data: "json, name=distributionValue" }),
         __metadata("design:type", Distribution)
     ], MetricValue.prototype, "distributionValue", void 0);
     __decorate([
-        Metadata({ data: "json, name=doubleValue" }),
+        SpeakeasyMetadata({ data: "json, name=doubleValue" }),
         __metadata("design:type", Number)
     ], MetricValue.prototype, "doubleValue", void 0);
     __decorate([
-        Metadata({ data: "json, name=endTime" }),
+        SpeakeasyMetadata({ data: "json, name=endTime" }),
         __metadata("design:type", String)
     ], MetricValue.prototype, "endTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=int64Value" }),
+        SpeakeasyMetadata({ data: "json, name=int64Value" }),
         __metadata("design:type", String)
     ], MetricValue.prototype, "int64Value", void 0);
     __decorate([
-        Metadata({ data: "json, name=labels" }),
+        SpeakeasyMetadata({ data: "json, name=labels" }),
         __metadata("design:type", Map)
     ], MetricValue.prototype, "labels", void 0);
     __decorate([
-        Metadata({ data: "json, name=moneyValue" }),
+        SpeakeasyMetadata({ data: "json, name=moneyValue" }),
         __metadata("design:type", Money)
     ], MetricValue.prototype, "moneyValue", void 0);
     __decorate([
-        Metadata({ data: "json, name=startTime" }),
+        SpeakeasyMetadata({ data: "json, name=startTime" }),
         __metadata("design:type", String)
     ], MetricValue.prototype, "startTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=stringValue" }),
+        SpeakeasyMetadata({ data: "json, name=stringValue" }),
         __metadata("design:type", String)
     ], MetricValue.prototype, "stringValue", void 0);
     return MetricValue;

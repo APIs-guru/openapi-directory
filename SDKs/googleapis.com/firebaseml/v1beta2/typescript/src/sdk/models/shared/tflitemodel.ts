@@ -1,4 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
+
+
+// TfLiteModelInput
+/** 
+ * Information that is specific to TfLite models.
+**/
+export class TfLiteModelInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=automlModel" })
+  automlModel?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=gcsTfliteUri" })
+  gcsTfliteUri?: string;
+}
 
 
 // TfLiteModel
@@ -6,12 +20,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information that is specific to TfLite models.
 **/
 export class TfLiteModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=automlModel" })
+  @SpeakeasyMetadata({ data: "json, name=automlModel" })
   automlModel?: string;
 
-  @Metadata({ data: "json, name=gcsTfliteUri" })
+  @SpeakeasyMetadata({ data: "json, name=gcsTfliteUri" })
   gcsTfliteUri?: string;
 
-  @Metadata({ data: "json, name=sizeBytes" })
+  @SpeakeasyMetadata({ data: "json, name=sizeBytes" })
   sizeBytes?: string;
 }

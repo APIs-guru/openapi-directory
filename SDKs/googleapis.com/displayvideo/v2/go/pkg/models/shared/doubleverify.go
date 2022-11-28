@@ -12,6 +12,8 @@ const (
 	DoubleVerifyAvoidedAgeRatingsEnumAppAgeRate18Plus     DoubleVerifyAvoidedAgeRatingsEnum = "APP_AGE_RATE_18_PLUS"
 )
 
+// DoubleVerify
+// Details of DoubleVerify settings.
 type DoubleVerify struct {
 	AppStarRating         *DoubleVerifyAppStarRating          `json:"appStarRating,omitempty"`
 	AvoidedAgeRatings     []DoubleVerifyAvoidedAgeRatingsEnum `json:"avoidedAgeRatings,omitempty"`

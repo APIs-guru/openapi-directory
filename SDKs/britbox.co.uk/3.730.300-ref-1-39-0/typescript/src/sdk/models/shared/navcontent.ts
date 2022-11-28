@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ItemList } from "./itemlist";
 
 
+
 export class NavContent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=imageType" })
+  @SpeakeasyMetadata({ data: "json, name=imageType" })
   imageType?: string;
 
-  @Metadata({ data: "json, name=list" })
+  @SpeakeasyMetadata({ data: "json, name=list" })
   list?: ItemList;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ChangePinRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pin" })
+  @SpeakeasyMetadata({ data: "json, name=pin" })
   pin: string;
 }

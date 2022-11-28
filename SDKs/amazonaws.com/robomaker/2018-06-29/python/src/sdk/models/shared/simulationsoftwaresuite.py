@@ -1,12 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import simulationsoftwaresuitetype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SimulationSoftwareSuite:
-    name: Optional[simulationsoftwaresuitetype_enum.SimulationSoftwareSuiteTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'version' }})
+    r"""SimulationSoftwareSuite
+    Information about a simulation software suite.
+    """
+    
+    name: Optional[SimulationSoftwareSuiteTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('version') }})
     

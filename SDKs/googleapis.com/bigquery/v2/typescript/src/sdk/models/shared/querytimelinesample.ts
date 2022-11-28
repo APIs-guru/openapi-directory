@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class QueryTimelineSample extends SpeakeasyBase {
-  @Metadata({ data: "json, name=activeUnits" })
+  @SpeakeasyMetadata({ data: "json, name=activeUnits" })
   activeUnits?: string;
 
-  @Metadata({ data: "json, name=completedUnits" })
+  @SpeakeasyMetadata({ data: "json, name=completedUnits" })
   completedUnits?: string;
 
-  @Metadata({ data: "json, name=elapsedMs" })
+  @SpeakeasyMetadata({ data: "json, name=elapsedMs" })
   elapsedMs?: string;
 
-  @Metadata({ data: "json, name=estimatedRunnableUnits" })
+  @SpeakeasyMetadata({ data: "json, name=estimatedRunnableUnits" })
   estimatedRunnableUnits?: string;
 
-  @Metadata({ data: "json, name=pendingUnits" })
+  @SpeakeasyMetadata({ data: "json, name=pendingUnits" })
   pendingUnits?: string;
 
-  @Metadata({ data: "json, name=totalSlotMs" })
+  @SpeakeasyMetadata({ data: "json, name=totalSlotMs" })
   totalSlotMs?: string;
 }

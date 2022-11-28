@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Alarm } from "./alarm";
 import { PolicyTypeEnum } from "./policytypeenum";
 import { ScalableDimensionEnum } from "./scalabledimensionenum";

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CanaryCodeOutput } from "./canarycodeoutput";
 import { CanaryRunConfigOutput } from "./canaryrunconfigoutput";
 import { CanaryScheduleOutput } from "./canaryscheduleoutput";

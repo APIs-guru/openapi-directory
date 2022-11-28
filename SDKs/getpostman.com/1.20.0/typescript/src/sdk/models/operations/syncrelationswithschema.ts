@@ -1,58 +1,59 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SyncRelationsWithSchemaPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=apiId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=apiId" })
   apiId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=apiVersionId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=apiVersionId" })
   apiVersionId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=entityId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=entityId" })
   entityId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=entityType" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=entityType" })
   entityType: string;
 }
 
 
-export class SyncRelationsWithSchemaRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: SyncRelationsWithSchemaPathParams;
-}
-
-
 export class SyncRelationsWithSchema200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=success" })
+  @SpeakeasyMetadata({ data: "json, name=success" })
   success?: boolean;
 }
 
 
 export class SyncRelationsWithSchema400ApplicationJsonError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
 
 
 export class SyncRelationsWithSchema400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: SyncRelationsWithSchema400ApplicationJsonError;
 }
 
 
+export class SyncRelationsWithSchemaRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: SyncRelationsWithSchemaPathParams;
+}
+
+
 export class SyncRelationsWithSchemaResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   syncRelationsWithSchema200ApplicationJsonObject?: SyncRelationsWithSchema200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   syncRelationsWithSchema400ApplicationJsonObject?: SyncRelationsWithSchema400ApplicationJson;
 }

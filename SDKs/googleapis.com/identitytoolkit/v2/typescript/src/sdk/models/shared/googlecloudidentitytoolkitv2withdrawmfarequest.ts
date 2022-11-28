@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudIdentitytoolkitV2WithdrawMfaRequest
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Withdraws MFA.
 **/
 export class GoogleCloudIdentitytoolkitV2WithdrawMfaRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=idToken" })
+  @SpeakeasyMetadata({ data: "json, name=idToken" })
   idToken?: string;
 
-  @Metadata({ data: "json, name=mfaEnrollmentId" })
+  @SpeakeasyMetadata({ data: "json, name=mfaEnrollmentId" })
   mfaEnrollmentId?: string;
 
-  @Metadata({ data: "json, name=tenantId" })
+  @SpeakeasyMetadata({ data: "json, name=tenantId" })
   tenantId?: string;
 }

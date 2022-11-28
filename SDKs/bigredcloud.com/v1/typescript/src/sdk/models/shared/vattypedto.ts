@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class VatTypeDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=isNotApplicable" })
+  @SpeakeasyMetadata({ data: "json, name=isNotApplicable" })
   isNotApplicable?: boolean;
 
-  @Metadata({ data: "json, name=isOnlyZero" })
+  @SpeakeasyMetadata({ data: "json, name=isOnlyZero" })
   isOnlyZero?: boolean;
 }

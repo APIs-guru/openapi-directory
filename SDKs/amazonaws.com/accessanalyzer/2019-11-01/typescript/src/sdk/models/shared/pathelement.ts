@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Substring } from "./substring";
+
 
 
 // PathElement
@@ -7,15 +8,15 @@ import { Substring } from "./substring";
  * A single element in a path through the JSON representation of a policy.
 **/
 export class PathElement extends SpeakeasyBase {
-  @Metadata({ data: "json, name=index" })
+  @SpeakeasyMetadata({ data: "json, name=index" })
   index?: number;
 
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: string;
 
-  @Metadata({ data: "json, name=substring" })
+  @SpeakeasyMetadata({ data: "json, name=substring" })
   substring?: Substring;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }

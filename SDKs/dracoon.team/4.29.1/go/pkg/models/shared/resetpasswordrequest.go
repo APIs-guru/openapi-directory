@@ -1,5 +1,7 @@
 package shared
 
+// ResetPasswordRequest
+// Request model for reseting user's login password
 type ResetPasswordRequest struct {
 	CreatorLanguage *string `json:"creatorLanguage,omitempty"`
 	Language        *string `json:"language,omitempty"`

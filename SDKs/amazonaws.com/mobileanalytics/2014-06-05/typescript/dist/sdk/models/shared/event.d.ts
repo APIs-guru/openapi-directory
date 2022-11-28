@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Session } from "./session";
 /**
  * A JSON object representing a batch of unique event occurrences in your app.

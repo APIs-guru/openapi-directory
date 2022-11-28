@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudbuildProjectsLocationsTriggersPatchPathParams:
-    resource_name: str = field(default=None, metadata={'path_param': { 'field_name': 'resourceName', 'style': 'simple', 'explode': False }})
+    resource_name: str = field(metadata={'path_param': { 'field_name': 'resourceName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,21 +28,21 @@ class CloudbuildProjectsLocationsTriggersPatchQueryParams:
 
 @dataclass
 class CloudbuildProjectsLocationsTriggersPatchSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudbuildProjectsLocationsTriggersPatchRequest:
-    path_params: CloudbuildProjectsLocationsTriggersPatchPathParams = field(default=None)
-    query_params: CloudbuildProjectsLocationsTriggersPatchQueryParams = field(default=None)
-    request: Optional[shared.BuildTrigger] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: CloudbuildProjectsLocationsTriggersPatchSecurity = field(default=None)
+    path_params: CloudbuildProjectsLocationsTriggersPatchPathParams = field()
+    query_params: CloudbuildProjectsLocationsTriggersPatchQueryParams = field()
+    security: CloudbuildProjectsLocationsTriggersPatchSecurity = field()
+    request: Optional[shared.BuildTriggerInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CloudbuildProjectsLocationsTriggersPatchResponse:
+    content_type: str = field()
+    status_code: int = field()
     build_trigger: Optional[shared.BuildTrigger] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

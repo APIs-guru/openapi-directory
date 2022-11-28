@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 
 
 @dataclass
 class DeleteContactPathParams:
-    contact_list_name: str = field(default=None, metadata={'path_param': { 'field_name': 'ContactListName', 'style': 'simple', 'explode': False }})
-    email_address: str = field(default=None, metadata={'path_param': { 'field_name': 'EmailAddress', 'style': 'simple', 'explode': False }})
+    contact_list_name: str = field(metadata={'path_param': { 'field_name': 'ContactListName', 'style': 'simple', 'explode': False }})
+    email_address: str = field(metadata={'path_param': { 'field_name': 'EmailAddress', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,16 +24,16 @@ class DeleteContactHeaders:
 
 @dataclass
 class DeleteContactRequest:
-    path_params: DeleteContactPathParams = field(default=None)
-    headers: DeleteContactHeaders = field(default=None)
+    headers: DeleteContactHeaders = field()
+    path_params: DeleteContactPathParams = field()
     
 
 @dataclass
 class DeleteContactResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     delete_contact_response: Optional[dict[str, Any]] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * ProcessorIdentityGetRequest defines the request schema for `/processor/identity/get`
 **/

@@ -1,8 +1,11 @@
-import warnings
+
+__doc__ = """ SDK Documentation: https://docs.joinpeertube.org/api-rest-reference.html"""
 import requests
 from typing import Any,List,Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -13,26 +16,48 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    r"""SDK Documentation: https://docs.joinpeertube.org/api-rest-reference.html"""
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def delete_abuses_abuse_id_(self, request: operations.DeleteAbusesAbuseIDRequest) -> operations.DeleteAbusesAbuseIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete an abuse
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/abuses/{abuseId}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -47,13 +72,16 @@ class SDK:
 
     
     def delete_abuses_abuse_id_messages_abuse_message_id_(self, request: operations.DeleteAbusesAbuseIDMessagesAbuseMessageIDRequest) -> operations.DeleteAbusesAbuseIDMessagesAbuseMessageIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete an abuse message
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/abuses/{abuseId}/messages/{abuseMessageId}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -66,13 +94,16 @@ class SDK:
 
     
     def delete_server_blocklist_accounts_account_name_(self, request: operations.DeleteServerBlocklistAccountsAccountNameRequest) -> operations.DeleteServerBlocklistAccountsAccountNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Unblock an account by its handle
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/server/blocklist/accounts/{accountName}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -87,13 +118,16 @@ class SDK:
 
     
     def delete_server_blocklist_servers_host_(self, request: operations.DeleteServerBlocklistServersHostRequest) -> operations.DeleteServerBlocklistServersHostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Unblock a server by its domain
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/server/blocklist/servers/{host}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -108,13 +142,16 @@ class SDK:
 
     
     def delete_server_followers_name_with_host_(self, request: operations.DeleteServerFollowersNameWithHostRequest) -> operations.DeleteServerFollowersNameWithHostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Remove or reject a follower to your server
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/server/followers/{nameWithHost}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -129,13 +166,16 @@ class SDK:
 
     
     def delete_server_following_host_or_handle_(self, request: operations.DeleteServerFollowingHostOrHandleRequest) -> operations.DeleteServerFollowingHostOrHandleResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Unfollow an actor (PeerTube instance, channel or account)
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/server/following/{hostOrHandle}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -150,13 +190,16 @@ class SDK:
 
     
     def delete_users_me_avatar(self, request: operations.DeleteUsersMeAvatarRequest) -> operations.DeleteUsersMeAvatarResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete my avatar
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/users/me/avatar"
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -169,13 +212,16 @@ class SDK:
 
     
     def delete_users_me_subscriptions_subscription_handle_(self, request: operations.DeleteUsersMeSubscriptionsSubscriptionHandleRequest) -> operations.DeleteUsersMeSubscriptionsSubscriptionHandleResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete subscription of my user
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/users/me/subscriptions/{subscriptionHandle}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -188,13 +234,16 @@ class SDK:
 
     
     def delete_video_channels_channel_handle_avatar(self, request: operations.DeleteVideoChannelsChannelHandleAvatarRequest) -> operations.DeleteVideoChannelsChannelHandleAvatarResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete channel avatar
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/video-channels/{channelHandle}/avatar", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -207,13 +256,16 @@ class SDK:
 
     
     def delete_video_channels_channel_handle_banner(self, request: operations.DeleteVideoChannelsChannelHandleBannerRequest) -> operations.DeleteVideoChannelsChannelHandleBannerResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete channel banner
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/video-channels/{channelHandle}/banner", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -226,13 +278,16 @@ class SDK:
 
     
     def delete_video_playlists_playlist_id_(self, request: operations.DeleteVideoPlaylistsPlaylistIDRequest) -> operations.DeleteVideoPlaylistsPlaylistIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a video playlist
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/video-playlists/{playlistId}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -245,13 +300,16 @@ class SDK:
 
     
     def delete_videos_id_comments_comment_id_(self, request: operations.DeleteVideosIDCommentsCommentIDRequest) -> operations.DeleteVideosIDCommentsCommentIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a comment or a reply
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/videos/{id}/comments/{commentId}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -270,13 +328,16 @@ class SDK:
 
     
     def get_abuses_abuse_id_messages(self, request: operations.GetAbusesAbuseIDMessagesRequest) -> operations.GetAbusesAbuseIDMessagesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List messages of an abuse
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/abuses/{abuseId}/messages", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -291,15 +352,17 @@ class SDK:
 
     
     def get_accounts_name_ratings(self, request: operations.GetAccountsNameRatingsRequest) -> operations.GetAccountsNameRatingsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List ratings of an account
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/accounts/{name}/ratings", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -314,15 +377,17 @@ class SDK:
 
     
     def get_accounts_name_video_channels(self, request: operations.GetAccountsNameVideoChannelsRequest) -> operations.GetAccountsNameVideoChannelsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List video channels of an account
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/accounts/{name}/video-channels", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -337,13 +402,16 @@ class SDK:
 
     
     def get_custom_pages_homepage_instance(self) -> operations.GetCustomPagesHomepageInstanceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get instance custom homepage
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/custom-pages/homepage/instance"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -360,13 +428,16 @@ class SDK:
 
     
     def get_plugins_npm_name_public_settings(self, request: operations.GetPluginsNpmNamePublicSettingsRequest) -> operations.GetPluginsNpmNamePublicSettingsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a plugin's public settings
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/plugins/{npmName}/public-settings", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -383,13 +454,16 @@ class SDK:
 
     
     def get_plugins_npm_name_registered_settings(self, request: operations.GetPluginsNpmNameRegisteredSettingsRequest) -> operations.GetPluginsNpmNameRegisteredSettingsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a plugin's registered settings
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/plugins/{npmName}/registered-settings", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -406,15 +480,17 @@ class SDK:
 
     
     def get_server_blocklist_accounts(self, request: operations.GetServerBlocklistAccountsRequest) -> operations.GetServerBlocklistAccountsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List account blocks
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/server/blocklist/accounts"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -427,15 +503,17 @@ class SDK:
 
     
     def get_server_blocklist_servers(self, request: operations.GetServerBlocklistServersRequest) -> operations.GetServerBlocklistServersResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List server blocks
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/server/blocklist/servers"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -448,15 +526,17 @@ class SDK:
 
     
     def get_server_followers(self, request: operations.GetServerFollowersRequest) -> operations.GetServerFollowersResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List instances following the server
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/server/followers"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -471,15 +551,17 @@ class SDK:
 
     
     def get_server_following(self, request: operations.GetServerFollowingRequest) -> operations.GetServerFollowingResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List instances followed by the server
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/server/following"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -494,15 +576,17 @@ class SDK:
 
     
     def get_users_me_history_videos(self, request: operations.GetUsersMeHistoryVideosRequest) -> operations.GetUsersMeHistoryVideosResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List watched videos history
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/users/me/history/videos"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -517,15 +601,17 @@ class SDK:
 
     
     def get_users_me_notifications(self, request: operations.GetUsersMeNotificationsRequest) -> operations.GetUsersMeNotificationsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List my notifications
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/users/me/notifications"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -540,15 +626,17 @@ class SDK:
 
     
     def get_users_me_subscriptions(self, request: operations.GetUsersMeSubscriptionsRequest) -> operations.GetUsersMeSubscriptionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get my user subscriptions
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/users/me/subscriptions"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -563,15 +651,17 @@ class SDK:
 
     
     def get_users_me_subscriptions_exist(self, request: operations.GetUsersMeSubscriptionsExistRequest) -> operations.GetUsersMeSubscriptionsExistResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get if subscriptions exist for my user
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/users/me/subscriptions/exist"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -586,13 +676,16 @@ class SDK:
 
     
     def get_users_me_subscriptions_subscription_handle_(self, request: operations.GetUsersMeSubscriptionsSubscriptionHandleRequest) -> operations.GetUsersMeSubscriptionsSubscriptionHandleResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get subscription of my user
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/users/me/subscriptions/{subscriptionHandle}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -607,15 +700,17 @@ class SDK:
 
     
     def get_users_me_subscriptions_videos(self, request: operations.GetUsersMeSubscriptionsVideosRequest) -> operations.GetUsersMeSubscriptionsVideosResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List videos of subscriptions of my user
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/users/me/subscriptions/videos"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -630,15 +725,17 @@ class SDK:
 
     
     def get_users_me_video_playlists_videos_exist(self, request: operations.GetUsersMeVideoPlaylistsVideosExistRequest) -> operations.GetUsersMeVideoPlaylistsVideosExistResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Check video exists in my playlists
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/users/me/video-playlists/videos-exist"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -653,13 +750,16 @@ class SDK:
 
     
     def get_users_me_video_quota_used(self, request: operations.GetUsersMeVideoQuotaUsedRequest) -> operations.GetUsersMeVideoQuotaUsedResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get my user used quota
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/users/me/video-quota-used"
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -674,15 +774,17 @@ class SDK:
 
     
     def get_users_me_videos(self, request: operations.GetUsersMeVideosRequest) -> operations.GetUsersMeVideosResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get videos of my user
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/users/me/videos"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -697,15 +799,17 @@ class SDK:
 
     
     def get_users_me_videos_imports(self, request: operations.GetUsersMeVideosImportsRequest) -> operations.GetUsersMeVideosImportsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get video imports of my user
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/users/me/videos/imports"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -720,13 +824,16 @@ class SDK:
 
     
     def get_users_me_videos_video_id_rating(self, request: operations.GetUsersMeVideosVideoIDRatingRequest) -> operations.GetUsersMeVideosVideoIDRatingResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get rate of my user for a video
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/users/me/videos/{videoId}/rating", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -741,13 +848,16 @@ class SDK:
 
     
     def get_video_playlists_playlist_id_(self, request: operations.GetVideoPlaylistsPlaylistIDRequest) -> operations.GetVideoPlaylistsPlaylistIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a video playlist
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/video-playlists/{playlistId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -762,15 +872,17 @@ class SDK:
 
     
     def get_videos_id_comment_threads(self, request: operations.GetVideosIDCommentThreadsRequest) -> operations.GetVideosIDCommentThreadsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List threads of a video
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/videos/{id}/comment-threads", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -785,13 +897,16 @@ class SDK:
 
     
     def get_videos_id_comment_threads_thread_id_(self, request: operations.GetVideosIDCommentThreadsThreadIDRequest) -> operations.GetVideosIDCommentThreadsThreadIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a thread
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/videos/{id}/comment-threads/{threadId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -806,13 +921,16 @@ class SDK:
 
     
     def get_videos_ownership(self, request: operations.GetVideosOwnershipRequest) -> operations.GetVideosOwnershipResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List video ownership changes
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/videos/ownership"
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -825,22 +943,22 @@ class SDK:
 
     
     def post_abuses(self, request: operations.PostAbusesRequest) -> operations.PostAbusesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Report an abuse
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/abuses"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -857,22 +975,22 @@ class SDK:
 
     
     def post_abuses_abuse_id_messages(self, request: operations.PostAbusesAbuseIDMessagesRequest) -> operations.PostAbusesAbuseIDMessagesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add message to an abuse
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/abuses/{abuseId}/messages", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -887,19 +1005,20 @@ class SDK:
 
     
     def post_server_blocklist_accounts(self, request: operations.PostServerBlocklistAccountsRequest) -> operations.PostServerBlocklistAccountsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Block an account
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/server/blocklist/accounts"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -914,19 +1033,20 @@ class SDK:
 
     
     def post_server_blocklist_servers(self, request: operations.PostServerBlocklistServersRequest) -> operations.PostServerBlocklistServersResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Block a server
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/server/blocklist/servers"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -941,13 +1061,16 @@ class SDK:
 
     
     def post_server_followers_name_with_host_accept(self, request: operations.PostServerFollowersNameWithHostAcceptRequest) -> operations.PostServerFollowersNameWithHostAcceptResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Accept a pending follower to your server
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/server/followers/{nameWithHost}/accept", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -962,13 +1085,16 @@ class SDK:
 
     
     def post_server_followers_name_with_host_reject(self, request: operations.PostServerFollowersNameWithHostRejectRequest) -> operations.PostServerFollowersNameWithHostRejectResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Reject a pending follower to your server
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/server/followers/{nameWithHost}/reject", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -983,19 +1109,20 @@ class SDK:
 
     
     def post_server_following(self, request: operations.PostServerFollowingRequest) -> operations.PostServerFollowingResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Follow a list of actors (PeerTube instance, channel or account)
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/server/following"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1010,19 +1137,20 @@ class SDK:
 
     
     def post_users_me_history_videos_remove(self, request: operations.PostUsersMeHistoryVideosRemoveRequest) -> operations.PostUsersMeHistoryVideosRemoveResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Clear video history
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/users/me/history/videos/remove"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1035,19 +1163,20 @@ class SDK:
 
     
     def post_users_me_notifications_read(self, request: operations.PostUsersMeNotificationsReadRequest) -> operations.PostUsersMeNotificationsReadResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Mark notifications as read by their id
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/users/me/notifications/read"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1060,13 +1189,16 @@ class SDK:
 
     
     def post_users_me_notifications_read_all(self, request: operations.PostUsersMeNotificationsReadAllRequest) -> operations.PostUsersMeNotificationsReadAllResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Mark all my notification as read
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/users/me/notifications/read-all"
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1079,19 +1211,20 @@ class SDK:
 
     
     def post_users_me_subscriptions(self, request: operations.PostUsersMeSubscriptionsRequest) -> operations.PostUsersMeSubscriptionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add subscription to my user
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/users/me/subscriptions"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1104,19 +1237,20 @@ class SDK:
 
     
     def post_videos_id_comment_threads(self, request: operations.PostVideosIDCommentThreadsRequest) -> operations.PostVideosIDCommentThreadsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a thread
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/videos/{id}/comment-threads", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1133,19 +1267,20 @@ class SDK:
 
     
     def post_videos_id_comments_comment_id_(self, request: operations.PostVideosIDCommentsCommentIDRequest) -> operations.PostVideosIDCommentsCommentIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Reply to a thread of a video
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/videos/{id}/comments/{commentId}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1162,22 +1297,22 @@ class SDK:
 
     
     def post_videos_id_give_ownership(self, request: operations.PostVideosIDGiveOwnershipRequest) -> operations.PostVideosIDGiveOwnershipResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Request ownership change
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/videos/{id}/give-ownership", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1194,13 +1329,16 @@ class SDK:
 
     
     def post_videos_ownership_id_accept(self, request: operations.PostVideosOwnershipIDAcceptRequest) -> operations.PostVideosOwnershipIDAcceptResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Accept ownership change request
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/videos/ownership/{id}/accept", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1217,13 +1355,16 @@ class SDK:
 
     
     def post_videos_ownership_id_refuse(self, request: operations.PostVideosOwnershipIDRefuseRequest) -> operations.PostVideosOwnershipIDRefuseResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Refuse ownership change request
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/videos/ownership/{id}/refuse", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1240,19 +1381,20 @@ class SDK:
 
     
     def put_abuses_abuse_id_(self, request: operations.PutAbusesAbuseIDRequest) -> operations.PutAbusesAbuseIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update an abuse
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/abuses/{abuseId}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1267,19 +1409,20 @@ class SDK:
 
     
     def put_custom_pages_homepage_instance(self, request: operations.PutCustomPagesHomepageInstanceRequest) -> operations.PutCustomPagesHomepageInstanceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Set instance custom homepage
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/custom-pages/homepage/instance"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1292,19 +1435,20 @@ class SDK:
 
     
     def put_plugins_npm_name_settings(self, request: operations.PutPluginsNpmNameSettingsRequest) -> operations.PutPluginsNpmNameSettingsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Set a plugin's settings
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/plugins/{npmName}/settings", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1319,19 +1463,20 @@ class SDK:
 
     
     def put_server_redundancy_host_(self, request: operations.PutServerRedundancyHostRequest) -> operations.PutServerRedundancyHostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a server redundancy policy
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/server/redundancy/{host}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1346,19 +1491,20 @@ class SDK:
 
     
     def put_users_me_notification_settings(self, request: operations.PutUsersMeNotificationSettingsRequest) -> operations.PutUsersMeNotificationSettingsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update my notification settings
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/users/me/notification-settings"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1371,19 +1517,20 @@ class SDK:
 
     
     def put_videos_id_rate(self, request: operations.PutVideosIDRateRequest) -> operations.PutVideosIDRateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Like/dislike a video
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/videos/{id}/rate", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1398,19 +1545,20 @@ class SDK:
 
     
     def add_plugin(self, request: operations.AddPluginRequest) -> operations.AddPluginResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Install a plugin
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/plugins/install"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1425,22 +1573,22 @@ class SDK:
 
     
     def add_user(self, request: operations.AddUserRequest) -> operations.AddUserResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a user
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/users"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1457,13 +1605,16 @@ class SDK:
 
     
     def add_video_block(self, request: operations.AddVideoBlockRequest) -> operations.AddVideoBlockResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Block a video
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/videos/{id}/blacklist", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1476,19 +1627,20 @@ class SDK:
 
     
     def add_video_channel(self, request: operations.AddVideoChannelRequest) -> operations.AddVideoChannelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a video channel
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/video-channels"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1503,19 +1655,20 @@ class SDK:
 
     
     def add_video_playlist_video(self, request: operations.AddVideoPlaylistVideoRequest) -> operations.AddVideoPlaylistVideoResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add a video in a playlist
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/video-playlists/{playlistId}/videos", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1530,13 +1683,16 @@ class SDK:
 
     
     def add_view(self, request: operations.AddViewRequest) -> operations.AddViewResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add a view to a video
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/videos/{id}/views", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1549,13 +1705,16 @@ class SDK:
 
     
     def del_custom_config(self, request: operations.DelCustomConfigRequest) -> operations.DelCustomConfigResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete instance runtime configuration
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/config/custom"
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1568,13 +1727,16 @@ class SDK:
 
     
     def del_mirrored_video(self, request: operations.DelMirroredVideoRequest) -> operations.DelMirroredVideoResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a mirror done on a video
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/server/redundancy/videos/{redundancyId}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1589,13 +1751,16 @@ class SDK:
 
     
     def del_user(self, request: operations.DelUserRequest) -> operations.DelUserResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a user
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/users/{id}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1608,13 +1773,16 @@ class SDK:
 
     
     def del_video(self, request: operations.DelVideoRequest) -> operations.DelVideoResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a video
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/videos/{id}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1627,13 +1795,16 @@ class SDK:
 
     
     def del_video_block(self, request: operations.DelVideoBlockRequest) -> operations.DelVideoBlockResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Unblock a video by its id
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/videos/{id}/blacklist", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1648,13 +1819,16 @@ class SDK:
 
     
     def del_video_caption(self, request: operations.DelVideoCaptionRequest) -> operations.DelVideoCaptionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a video caption
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/videos/{id}/captions/{captionLanguage}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1669,13 +1843,16 @@ class SDK:
 
     
     def del_video_channel(self, request: operations.DelVideoChannelRequest) -> operations.DelVideoChannelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a video channel
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/video-channels/{channelHandle}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1688,13 +1865,16 @@ class SDK:
 
     
     def del_video_playlist_video(self, request: operations.DelVideoPlaylistVideoRequest) -> operations.DelVideoPlaylistVideoResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete an element from a playlist
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/video-playlists/{playlistId}/videos/{playlistElementId}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1707,13 +1887,16 @@ class SDK:
 
     
     def get_about(self) -> operations.GetAboutResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get instance \"About\" information
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/config/about"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1728,15 +1911,17 @@ class SDK:
 
     
     def get_abuses(self, request: operations.GetAbusesRequest) -> operations.GetAbusesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List abuses
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/abuses"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1751,13 +1936,16 @@ class SDK:
 
     
     def get_account(self, request: operations.GetAccountRequest) -> operations.GetAccountResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get an account
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/accounts/{name}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1774,15 +1962,17 @@ class SDK:
 
     
     def get_account_videos(self, request: operations.GetAccountVideosRequest) -> operations.GetAccountVideosResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List videos of an account
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/accounts/{name}/videos", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1797,15 +1987,17 @@ class SDK:
 
     
     def get_accounts(self, request: operations.GetAccountsRequest) -> operations.GetAccountsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List accounts
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/accounts"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1820,15 +2012,17 @@ class SDK:
 
     
     def get_available_plugins(self, request: operations.GetAvailablePluginsRequest) -> operations.GetAvailablePluginsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List available plugins
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/plugins/available"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1845,13 +2039,16 @@ class SDK:
 
     
     def get_categories(self) -> operations.GetCategoriesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List available video categories
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/videos/categories"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1866,13 +2063,16 @@ class SDK:
 
     
     def get_config(self) -> operations.GetConfigResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get instance public configuration
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/config"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1887,13 +2087,16 @@ class SDK:
 
     
     def get_custom_config(self, request: operations.GetCustomConfigRequest) -> operations.GetCustomConfigResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get instance runtime configuration
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/config/custom"
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1908,15 +2111,17 @@ class SDK:
 
     
     def get_jobs(self, request: operations.GetJobsRequest) -> operations.GetJobsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List instance jobs
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/jobs/{state}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1931,13 +2136,16 @@ class SDK:
 
     
     def get_languages(self) -> operations.GetLanguagesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List available video languages
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/videos/languages"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1952,13 +2160,16 @@ class SDK:
 
     
     def get_licences(self) -> operations.GetLicencesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List available video licences
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/videos/licences"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1973,13 +2184,16 @@ class SDK:
 
     
     def get_live_id(self, request: operations.GetLiveIDRequest) -> operations.GetLiveIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get information about a live
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/videos/live/{id}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1994,15 +2208,17 @@ class SDK:
 
     
     def get_mirrored_videos(self, request: operations.GetMirroredVideosRequest) -> operations.GetMirroredVideosResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List videos being mirrored
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/server/redundancy/videos"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2017,15 +2233,17 @@ class SDK:
 
     
     def get_my_abuses(self, request: operations.GetMyAbusesRequest) -> operations.GetMyAbusesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List my abuses
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/users/me/abuses"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2040,13 +2258,17 @@ class SDK:
 
     
     def get_o_auth_client(self) -> operations.GetOAuthClientResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Login prerequisite
+        You need to retrieve a client id and secret before [logging in](#operation/getOAuthToken).
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/oauth-clients/local"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2061,19 +2283,21 @@ class SDK:
 
     
     def get_o_auth_token(self, request: operations.GetOAuthTokenRequest) -> operations.GetOAuthTokenResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Login
+        With your [client id and secret](#operation/getOAuthClient), you can retrieve an access and refresh tokens.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/users/token"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2092,13 +2316,16 @@ class SDK:
 
     
     def get_playlist_privacy_policies(self) -> operations.GetPlaylistPrivacyPoliciesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List available playlist privacy policies
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/video-playlists/privacies"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2113,15 +2340,17 @@ class SDK:
 
     
     def get_playlists(self, request: operations.GetPlaylistsRequest) -> operations.GetPlaylistsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List video playlists
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/video-playlists"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2136,13 +2365,16 @@ class SDK:
 
     
     def get_plugin(self, request: operations.GetPluginRequest) -> operations.GetPluginResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a plugin
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/plugins/{npmName}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2159,15 +2391,17 @@ class SDK:
 
     
     def get_plugins(self, request: operations.GetPluginsRequest) -> operations.GetPluginsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List plugins
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/plugins"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2182,13 +2416,16 @@ class SDK:
 
     
     def get_privacy_policies(self) -> operations.GetPrivacyPoliciesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List available video privacy policies
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/videos/privacies"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2203,15 +2440,17 @@ class SDK:
 
     
     def get_syndicated_comments(self, request: operations.GetSyndicatedCommentsRequest) -> operations.GetSyndicatedCommentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List comments on videos
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/feeds/video-comments.{format}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2242,15 +2481,17 @@ class SDK:
 
     
     def get_syndicated_subscription_videos(self, request: operations.GetSyndicatedSubscriptionVideosRequest) -> operations.GetSyndicatedSubscriptionVideosResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List videos of subscriptions tied to a token
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/feeds/subscriptions.{format}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2277,15 +2518,17 @@ class SDK:
 
     
     def get_syndicated_videos(self, request: operations.GetSyndicatedVideosRequest) -> operations.GetSyndicatedVideosResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List videos
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/feeds/videos.{format}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2314,15 +2557,17 @@ class SDK:
 
     
     def get_user(self, request: operations.GetUserRequest) -> operations.GetUserResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a user
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/users/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2337,13 +2582,16 @@ class SDK:
 
     
     def get_user_info(self, request: operations.GetUserInfoRequest) -> operations.GetUserInfoResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get my user information
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/users/me"
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2358,15 +2606,17 @@ class SDK:
 
     
     def get_users(self, request: operations.GetUsersRequest) -> operations.GetUsersResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List users
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/users"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2381,13 +2631,16 @@ class SDK:
 
     
     def get_video(self, request: operations.GetVideoRequest) -> operations.GetVideoResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a video
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/videos/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2402,15 +2655,17 @@ class SDK:
 
     
     def get_video_blocks(self, request: operations.GetVideoBlocksRequest) -> operations.GetVideoBlocksResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List video blocks
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/videos/blacklist"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2425,13 +2680,16 @@ class SDK:
 
     
     def get_video_captions(self, request: operations.GetVideoCaptionsRequest) -> operations.GetVideoCaptionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List captions of a video
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/videos/{id}/captions", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2446,13 +2704,16 @@ class SDK:
 
     
     def get_video_channel(self, request: operations.GetVideoChannelRequest) -> operations.GetVideoChannelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a video channel
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/video-channels/{channelHandle}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2467,15 +2728,17 @@ class SDK:
 
     
     def get_video_channel_videos(self, request: operations.GetVideoChannelVideosRequest) -> operations.GetVideoChannelVideosResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List videos of a video channel
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/video-channels/{channelHandle}/videos", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2490,15 +2753,17 @@ class SDK:
 
     
     def get_video_channels(self, request: operations.GetVideoChannelsRequest) -> operations.GetVideoChannelsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List video channels
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/video-channels"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2513,13 +2778,16 @@ class SDK:
 
     
     def get_video_desc(self, request: operations.GetVideoDescRequest) -> operations.GetVideoDescResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get complete video description
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/videos/{id}/description", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2533,13 +2801,16 @@ class SDK:
 
     
     def get_video_playlist_videos(self, request: operations.GetVideoPlaylistVideosRequest) -> operations.GetVideoPlaylistVideosResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List videos of a playlist
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/video-playlists/{playlistId}/videos", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2554,15 +2825,17 @@ class SDK:
 
     
     def get_videos(self, request: operations.GetVideosRequest) -> operations.GetVideosResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List videos
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/videos"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2577,13 +2850,16 @@ class SDK:
 
     
     def put_custom_config(self, request: operations.PutCustomConfigRequest) -> operations.PutCustomConfigResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Set instance runtime configuration
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/config/custom"
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("PUT", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2598,19 +2874,20 @@ class SDK:
 
     
     def put_mirrored_video(self, request: operations.PutMirroredVideoRequest) -> operations.PutMirroredVideoResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Mirror a video
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/server/redundancy/videos"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2629,22 +2906,22 @@ class SDK:
 
     
     def put_user(self, request: operations.PutUserRequest) -> operations.PutUserResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a user
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/users/{id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2657,22 +2934,22 @@ class SDK:
 
     
     def put_user_info(self, request: operations.PutUserInfoRequest) -> operations.PutUserInfoResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update my user information
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/users/me"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2685,19 +2962,20 @@ class SDK:
 
     
     def put_video_channel(self, request: operations.PutVideoChannelRequest) -> operations.PutVideoChannelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a video channel
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/video-channels/{channelHandle}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2710,19 +2988,20 @@ class SDK:
 
     
     def put_video_playlist_video(self, request: operations.PutVideoPlaylistVideoRequest) -> operations.PutVideoPlaylistVideoResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a playlist element
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/video-playlists/{playlistId}/videos/{playlistElementId}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2735,22 +3014,22 @@ class SDK:
 
     
     def register_user(self, request: operations.RegisterUserRequest) -> operations.RegisterUserResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Register a user
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/users/register"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2763,19 +3042,20 @@ class SDK:
 
     
     def reorder_video_playlist(self, request: operations.ReorderVideoPlaylistRequest) -> operations.ReorderVideoPlaylistResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Reorder a playlist
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/video-playlists/{playlistId}/videos/reorder", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2788,13 +3068,16 @@ class SDK:
 
     
     def resend_email_to_verify_user(self) -> operations.ResendEmailToVerifyUserResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Resend user verification link
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/users/ask-send-verify-email"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2807,13 +3090,17 @@ class SDK:
 
     
     def revoke_o_auth_token(self, request: operations.RevokeOAuthTokenRequest) -> operations.RevokeOAuthTokenResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Logout
+        Revokes your access token and its associated refresh token, destroying your current session.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/users/revoke-token"
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2826,22 +3113,22 @@ class SDK:
 
     
     def set_progress(self, request: operations.SetProgressRequest) -> operations.SetProgressResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Set watching progress of a video
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/videos/{id}/watching", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2854,19 +3141,20 @@ class SDK:
 
     
     def uninstall_plugin(self, request: operations.UninstallPluginRequest) -> operations.UninstallPluginResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Uninstall a plugin
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/plugins/uninstall"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2881,19 +3169,20 @@ class SDK:
 
     
     def update_live_id(self, request: operations.UpdateLiveIDRequest) -> operations.UpdateLiveIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update information about a live
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/videos/live/{id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2910,19 +3199,20 @@ class SDK:
 
     
     def update_plugin(self, request: operations.UpdatePluginRequest) -> operations.UpdatePluginResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a plugin
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/plugins/update"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2939,21 +3229,22 @@ class SDK:
 
     
     def upload_resumable(self, request: operations.UploadResumableRequest) -> operations.UploadResumableResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Send chunk for the resumable upload of a video
+        Uses [a resumable protocol](https://github.com/kukhariev/node-uploadx/blob/master/proto.md) to continue, pause or resume the upload of a video
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/videos/upload-resumable"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2983,17 +3274,19 @@ class SDK:
 
     
     def upload_resumable_cancel(self, request: operations.UploadResumableCancelRequest) -> operations.UploadResumableCancelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Cancel the resumable upload of a video, deleting any data uploaded so far
+        Uses [a resumable protocol](https://github.com/kukhariev/node-uploadx/blob/master/proto.md) to cancel the upload of a video
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/videos/upload-resumable"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3009,19 +3302,21 @@ class SDK:
 
     
     def upload_resumable_init(self, request: operations.UploadResumableInitRequest) -> operations.UploadResumableInitResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Initialize the resumable upload of a video
+        Uses [a resumable protocol](https://github.com/kukhariev/node-uploadx/blob/master/proto.md) to initialize the upload of a video
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/videos/upload-resumable"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3041,19 +3336,23 @@ class SDK:
 
     
     def verify_user(self, request: operations.VerifyUserRequest) -> operations.VerifyUserResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Verify a user
+        Following a user registration, the new user will receive an email asking to click a link
+        containing a secret.
+        
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/users/{id}/verify-email", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

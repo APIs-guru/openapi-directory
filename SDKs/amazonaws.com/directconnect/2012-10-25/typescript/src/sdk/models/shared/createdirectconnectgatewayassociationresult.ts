@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DirectConnectGatewayAssociation } from "./directconnectgatewayassociation";
 
 
+
 export class CreateDirectConnectGatewayAssociationResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=directConnectGatewayAssociation" })
+  @SpeakeasyMetadata({ data: "json, name=directConnectGatewayAssociation" })
   directConnectGatewayAssociation?: DirectConnectGatewayAssociation;
 }

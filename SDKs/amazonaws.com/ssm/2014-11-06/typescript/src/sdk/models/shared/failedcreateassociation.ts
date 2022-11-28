@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CreateAssociationBatchRequestEntry } from "./createassociationbatchrequestentry";
 import { FaultEnum } from "./faultenum";
+
 
 
 // FailedCreateAssociation
@@ -8,12 +9,12 @@ import { FaultEnum } from "./faultenum";
  * Describes a failed association.
 **/
 export class FailedCreateAssociation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Entry" })
+  @SpeakeasyMetadata({ data: "json, name=Entry" })
   entry?: CreateAssociationBatchRequestEntry;
 
-  @Metadata({ data: "json, name=Fault" })
+  @SpeakeasyMetadata({ data: "json, name=Fault" })
   fault?: FaultEnum;
 
-  @Metadata({ data: "json, name=Message" })
+  @SpeakeasyMetadata({ data: "json, name=Message" })
   message?: string;
 }

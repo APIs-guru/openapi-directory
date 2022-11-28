@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BigOvenModelApi2RecipeInfox } from "./bigovenmodelapi2recipeinfox";
 
 
+
 export class BigOvenModelRecipeInfoDateTuple2 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=date" })
+  @SpeakeasyMetadata({ data: "json, name=date" })
   date?: Date;
 
-  @Metadata({ data: "json, name=recipeInfo" })
+  @SpeakeasyMetadata({ data: "json, name=recipeInfo" })
   recipeInfo?: BigOvenModelApi2RecipeInfox;
 }

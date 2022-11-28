@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FindingTypeStats } from "./findingtypestats";
+
 
 
 // ListFindingTypeStatsResponse
@@ -8,6 +8,6 @@ import { FindingTypeStats } from "./findingtypestats";
  * Response for the `ListFindingTypeStats` method.
 **/
 export class ListFindingTypeStatsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=findingTypeStats", elemType: shared.FindingTypeStats })
+  @SpeakeasyMetadata({ data: "json, name=findingTypeStats", elemType: FindingTypeStats })
   findingTypeStats?: FindingTypeStats[];
 }

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudiotProjectsLocationsRegistriesDevicesSendCommandToDevicePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class CloudiotProjectsLocationsRegistriesDevicesSendCommandToDeviceQueryParams:
 
 @dataclass
 class CloudiotProjectsLocationsRegistriesDevicesSendCommandToDeviceSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudiotProjectsLocationsRegistriesDevicesSendCommandToDeviceSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class CloudiotProjectsLocationsRegistriesDevicesSendCommandToDeviceSecurity:
 
 @dataclass
 class CloudiotProjectsLocationsRegistriesDevicesSendCommandToDeviceRequest:
-    path_params: CloudiotProjectsLocationsRegistriesDevicesSendCommandToDevicePathParams = field(default=None)
-    query_params: CloudiotProjectsLocationsRegistriesDevicesSendCommandToDeviceQueryParams = field(default=None)
+    path_params: CloudiotProjectsLocationsRegistriesDevicesSendCommandToDevicePathParams = field()
+    query_params: CloudiotProjectsLocationsRegistriesDevicesSendCommandToDeviceQueryParams = field()
+    security: CloudiotProjectsLocationsRegistriesDevicesSendCommandToDeviceSecurity = field()
     request: Optional[shared.SendCommandToDeviceRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: CloudiotProjectsLocationsRegistriesDevicesSendCommandToDeviceSecurity = field(default=None)
     
 
 @dataclass
 class CloudiotProjectsLocationsRegistriesDevicesSendCommandToDeviceResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     send_command_to_device_response: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

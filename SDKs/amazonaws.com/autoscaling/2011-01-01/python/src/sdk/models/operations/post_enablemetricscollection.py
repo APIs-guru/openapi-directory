@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostEnableMetricsCollectionActionEnum(str, Enum):
     ENABLE_METRICS_COLLECTION = "EnableMetricsCollection"
@@ -10,8 +14,8 @@ class PostEnableMetricsCollectionVersionEnum(str, Enum):
 
 @dataclass
 class PostEnableMetricsCollectionQueryParams:
-    action: PostEnableMetricsCollectionActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostEnableMetricsCollectionVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostEnableMetricsCollectionActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostEnableMetricsCollectionVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostEnableMetricsCollectionHeaders:
 
 @dataclass
 class PostEnableMetricsCollectionRequest:
-    query_params: PostEnableMetricsCollectionQueryParams = field(default=None)
-    headers: PostEnableMetricsCollectionHeaders = field(default=None)
+    headers: PostEnableMetricsCollectionHeaders = field()
+    query_params: PostEnableMetricsCollectionQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostEnableMetricsCollectionResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

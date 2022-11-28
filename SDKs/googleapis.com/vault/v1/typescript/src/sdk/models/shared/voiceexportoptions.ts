@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum VoiceExportOptionsExportFormatEnum {
-    ExportFormatUnspecified = "EXPORT_FORMAT_UNSPECIFIED"
-,    Mbox = "MBOX"
-,    Pst = "PST"
+    ExportFormatUnspecified = "EXPORT_FORMAT_UNSPECIFIED",
+    Mbox = "MBOX",
+    Pst = "PST"
 }
 
 
@@ -12,6 +13,6 @@ export enum VoiceExportOptionsExportFormatEnum {
  * The options for Voice exports.
 **/
 export class VoiceExportOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=exportFormat" })
+  @SpeakeasyMetadata({ data: "json, name=exportFormat" })
   exportFormat?: VoiceExportOptionsExportFormatEnum;
 }

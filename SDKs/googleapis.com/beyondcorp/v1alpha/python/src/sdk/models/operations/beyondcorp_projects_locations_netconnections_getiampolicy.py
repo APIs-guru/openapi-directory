@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class BeyondcorpProjectsLocationsNetConnectionsGetIamPolicyPathParams:
-    resource: str = field(default=None, metadata={'path_param': { 'field_name': 'resource', 'style': 'simple', 'explode': False }})
+    resource: str = field(metadata={'path_param': { 'field_name': 'resource', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +27,20 @@ class BeyondcorpProjectsLocationsNetConnectionsGetIamPolicyQueryParams:
 
 @dataclass
 class BeyondcorpProjectsLocationsNetConnectionsGetIamPolicySecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BeyondcorpProjectsLocationsNetConnectionsGetIamPolicyRequest:
-    path_params: BeyondcorpProjectsLocationsNetConnectionsGetIamPolicyPathParams = field(default=None)
-    query_params: BeyondcorpProjectsLocationsNetConnectionsGetIamPolicyQueryParams = field(default=None)
-    security: BeyondcorpProjectsLocationsNetConnectionsGetIamPolicySecurity = field(default=None)
+    path_params: BeyondcorpProjectsLocationsNetConnectionsGetIamPolicyPathParams = field()
+    query_params: BeyondcorpProjectsLocationsNetConnectionsGetIamPolicyQueryParams = field()
+    security: BeyondcorpProjectsLocationsNetConnectionsGetIamPolicySecurity = field()
     
 
 @dataclass
 class BeyondcorpProjectsLocationsNetConnectionsGetIamPolicyResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_iam_v1_policy: Optional[shared.GoogleIamV1Policy] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum AmpIssueSeverityEnum {
-    SeverityUnspecified = "SEVERITY_UNSPECIFIED"
-,    Warning = "WARNING"
-,    Error = "ERROR"
+    SeverityUnspecified = "SEVERITY_UNSPECIFIED",
+    Warning = "WARNING",
+    Error = "ERROR"
 }
 
 
@@ -12,9 +13,9 @@ export enum AmpIssueSeverityEnum {
  * AMP issue.
 **/
 export class AmpIssue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=issueMessage" })
+  @SpeakeasyMetadata({ data: "json, name=issueMessage" })
   issueMessage?: string;
 
-  @Metadata({ data: "json, name=severity" })
+  @SpeakeasyMetadata({ data: "json, name=severity" })
   severity?: AmpIssueSeverityEnum;
 }

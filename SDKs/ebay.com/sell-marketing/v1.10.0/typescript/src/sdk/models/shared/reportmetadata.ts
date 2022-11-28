@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DimensionMetadata } from "./dimensionmetadata";
 import { MetricMetadata } from "./metricmetadata";
+
 
 
 // ReportMetadata
@@ -9,18 +9,18 @@ import { MetricMetadata } from "./metricmetadata";
  * This type defines the fields included in the report.
 **/
 export class ReportMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dimensionMetadata", elemType: shared.DimensionMetadata })
+  @SpeakeasyMetadata({ data: "json, name=dimensionMetadata", elemType: DimensionMetadata })
   dimensionMetadata?: DimensionMetadata[];
 
-  @Metadata({ data: "json, name=maxNumberOfDimensionsToRequest" })
+  @SpeakeasyMetadata({ data: "json, name=maxNumberOfDimensionsToRequest" })
   maxNumberOfDimensionsToRequest?: number;
 
-  @Metadata({ data: "json, name=maxNumberOfMetricsToRequest" })
+  @SpeakeasyMetadata({ data: "json, name=maxNumberOfMetricsToRequest" })
   maxNumberOfMetricsToRequest?: number;
 
-  @Metadata({ data: "json, name=metricMetadata", elemType: shared.MetricMetadata })
+  @SpeakeasyMetadata({ data: "json, name=metricMetadata", elemType: MetricMetadata })
   metricMetadata?: MetricMetadata[];
 
-  @Metadata({ data: "json, name=reportType" })
+  @SpeakeasyMetadata({ data: "json, name=reportType" })
   reportType?: string;
 }

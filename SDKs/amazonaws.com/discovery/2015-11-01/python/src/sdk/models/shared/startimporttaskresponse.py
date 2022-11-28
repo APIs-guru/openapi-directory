@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import importtask
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class StartImportTaskResponse:
-    task: Optional[importtask.ImportTask] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'task' }})
+    task: Optional[ImportTask] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('task') }})
     

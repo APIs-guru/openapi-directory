@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import processings3uploadmode_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ProcessingS3Output:
-    local_path: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LocalPath' }})
-    s3_upload_mode: processings3uploadmode_enum.ProcessingS3UploadModeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'S3UploadMode' }})
-    s3_uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'S3Uri' }})
+    r"""ProcessingS3Output
+    Configuration for uploading output data to Amazon S3 from the processing container.
+    """
+    
+    local_path: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('LocalPath') }})
+    s3_upload_mode: ProcessingS3UploadModeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('S3UploadMode') }})
+    s3_uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('S3Uri') }})
     

@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -54,23 +55,23 @@ class DcimFrontPortsListQueryParams:
     type_n: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'type__n', 'style': 'form', 'explode': True }})
     
 
-@dataclass
-class DcimFrontPortsListRequest:
-    query_params: DcimFrontPortsListQueryParams = field(default=None)
-    
-
 @dataclass_json
 @dataclass
 class DcimFrontPortsList200ApplicationJSON:
-    count: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'count' }})
-    next: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next' }})
-    previous: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'previous' }})
-    results: List[shared.FrontPort] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'results' }})
+    count: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('count') }})
+    results: List[shared.FrontPort] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('results') }})
+    next: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('next') }})
+    previous: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('previous') }})
+    
+
+@dataclass
+class DcimFrontPortsListRequest:
+    query_params: DcimFrontPortsListQueryParams = field()
     
 
 @dataclass
 class DcimFrontPortsListResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     dcim_front_ports_list_200_application_json_object: Optional[DcimFrontPortsList200ApplicationJSON] = field(default=None)
     

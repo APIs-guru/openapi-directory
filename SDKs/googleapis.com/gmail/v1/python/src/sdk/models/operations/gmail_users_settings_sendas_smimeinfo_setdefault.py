@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GmailUsersSettingsSendAsSmimeInfoSetDefaultPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
-    send_as_email: str = field(default=None, metadata={'path_param': { 'field_name': 'sendAsEmail', 'style': 'simple', 'explode': False }})
-    user_id: str = field(default=None, metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    send_as_email: str = field(metadata={'path_param': { 'field_name': 'sendAsEmail', 'style': 'simple', 'explode': False }})
+    user_id: str = field(metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,14 +28,14 @@ class GmailUsersSettingsSendAsSmimeInfoSetDefaultQueryParams:
 
 @dataclass
 class GmailUsersSettingsSendAsSmimeInfoSetDefaultSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GmailUsersSettingsSendAsSmimeInfoSetDefaultSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -45,13 +46,13 @@ class GmailUsersSettingsSendAsSmimeInfoSetDefaultSecurity:
 
 @dataclass
 class GmailUsersSettingsSendAsSmimeInfoSetDefaultRequest:
-    path_params: GmailUsersSettingsSendAsSmimeInfoSetDefaultPathParams = field(default=None)
-    query_params: GmailUsersSettingsSendAsSmimeInfoSetDefaultQueryParams = field(default=None)
-    security: GmailUsersSettingsSendAsSmimeInfoSetDefaultSecurity = field(default=None)
+    path_params: GmailUsersSettingsSendAsSmimeInfoSetDefaultPathParams = field()
+    query_params: GmailUsersSettingsSendAsSmimeInfoSetDefaultQueryParams = field()
+    security: GmailUsersSettingsSendAsSmimeInfoSetDefaultSecurity = field()
     
 
 @dataclass
 class GmailUsersSettingsSendAsSmimeInfoSetDefaultResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

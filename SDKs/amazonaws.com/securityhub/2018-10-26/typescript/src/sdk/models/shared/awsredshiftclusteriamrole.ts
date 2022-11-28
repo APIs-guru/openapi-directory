@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsRedshiftClusterIamRole
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An IAM role that the cluster can use to access other Amazon Web Services services.
 **/
 export class AwsRedshiftClusterIamRole extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApplyStatus" })
+  @SpeakeasyMetadata({ data: "json, name=ApplyStatus" })
   applyStatus?: string;
 
-  @Metadata({ data: "json, name=IamRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=IamRoleArn" })
   iamRoleArn?: string;
 }

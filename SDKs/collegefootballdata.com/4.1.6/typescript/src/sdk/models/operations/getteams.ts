@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetTeamsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=conference" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=conference" })
   conference?: string;
 }
 
 
 export class GetTeamsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetTeamsQueryParams;
 }
 
 
 export class GetTeamsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.Team })
+  @SpeakeasyMetadata({ elemType: shared.Team })
   teams?: shared.Team[];
 }

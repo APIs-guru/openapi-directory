@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // MetricPolicyRule
 /**
  * A setting that enables metrics at the object level. Each rule contains an object group and an object group name. If the policy includes the MetricPolicyRules parameter, you must include at least one rule. Each metric policy can include up to five rules by default. You can also <a href="https://console.aws.amazon.com/servicequotas/home?region=us-east-1#!/services/mediastore/quotas">request a quota increase</a> to allow up to 300 rules per policy.
@@ -33,11 +33,11 @@ var MetricPolicyRule = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ObjectGroup" }),
+        SpeakeasyMetadata({ data: "json, name=ObjectGroup" }),
         __metadata("design:type", String)
     ], MetricPolicyRule.prototype, "objectGroup", void 0);
     __decorate([
-        Metadata({ data: "json, name=ObjectGroupName" }),
+        SpeakeasyMetadata({ data: "json, name=ObjectGroupName" }),
         __metadata("design:type", String)
     ], MetricPolicyRule.prototype, "objectGroupName", void 0);
     return MetricPolicyRule;

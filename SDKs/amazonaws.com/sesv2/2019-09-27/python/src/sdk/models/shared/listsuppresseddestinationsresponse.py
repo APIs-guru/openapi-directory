@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import suppresseddestinationsummary
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListSuppressedDestinationsResponse:
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
-    suppressed_destination_summaries: Optional[List[suppresseddestinationsummary.SuppressedDestinationSummary]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SuppressedDestinationSummaries' }})
+    r"""ListSuppressedDestinationsResponse
+    A list of suppressed email addresses.
+    """
+    
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
+    suppressed_destination_summaries: Optional[List[SuppressedDestinationSummary]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SuppressedDestinationSummaries') }})
     

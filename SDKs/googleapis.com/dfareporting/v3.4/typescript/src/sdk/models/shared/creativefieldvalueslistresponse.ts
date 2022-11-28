@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CreativeFieldValue } from "./creativefieldvalue";
+
 
 
 // CreativeFieldValuesListResponse
@@ -8,12 +8,12 @@ import { CreativeFieldValue } from "./creativefieldvalue";
  * Creative Field Value List Response
 **/
 export class CreativeFieldValuesListResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=creativeFieldValues", elemType: shared.CreativeFieldValue })
+  @SpeakeasyMetadata({ data: "json, name=creativeFieldValues", elemType: CreativeFieldValue })
   creativeFieldValues?: CreativeFieldValue[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

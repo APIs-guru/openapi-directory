@@ -4,7 +4,7 @@ from typing import Optional
 
 @dataclass
 class PatchOwnershipOwnershipIDPathParams:
-    ownership_id: str = field(default=None, metadata={'path_param': { 'field_name': 'ownershipId', 'style': 'simple', 'explode': False }})
+    ownership_id: str = field(metadata={'path_param': { 'field_name': 'ownershipId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,13 +15,13 @@ class PatchOwnershipOwnershipIDQueryParams:
 
 @dataclass
 class PatchOwnershipOwnershipIDRequest:
-    path_params: PatchOwnershipOwnershipIDPathParams = field(default=None)
-    query_params: PatchOwnershipOwnershipIDQueryParams = field(default=None)
+    path_params: PatchOwnershipOwnershipIDPathParams = field()
+    query_params: PatchOwnershipOwnershipIDQueryParams = field()
     
 
 @dataclass
 class PatchOwnershipOwnershipIDResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

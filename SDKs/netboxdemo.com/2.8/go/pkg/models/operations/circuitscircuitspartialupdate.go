@@ -10,7 +10,7 @@ type CircuitsCircuitsPartialUpdatePathParams struct {
 
 type CircuitsCircuitsPartialUpdateRequest struct {
 	PathParams CircuitsCircuitsPartialUpdatePathParams
-	Request    shared.WritableCircuit `request:"mediaType=application/json"`
+	Request    shared.WritableCircuitInput `request:"mediaType=application/json"`
 }
 
 type CircuitsCircuitsPartialUpdateResponse struct {

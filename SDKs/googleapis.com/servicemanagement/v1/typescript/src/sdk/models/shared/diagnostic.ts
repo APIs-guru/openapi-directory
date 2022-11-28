@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum DiagnosticKindEnum {
-    Warning = "WARNING"
-,    Error = "ERROR"
+    Warning = "WARNING",
+    Error = "ERROR"
 }
 
 
@@ -11,12 +12,12 @@ export enum DiagnosticKindEnum {
  * Represents a diagnostic message (error or warning)
 **/
 export class Diagnostic extends SpeakeasyBase {
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: DiagnosticKindEnum;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EventType } from "./eventtype";
+
 
 
 // Provider
@@ -8,12 +8,12 @@ import { EventType } from "./eventtype";
  * A representation of the Provider resource.
 **/
 export class Provider extends SpeakeasyBase {
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=eventTypes", elemType: shared.EventType })
+  @SpeakeasyMetadata({ data: "json, name=eventTypes", elemType: EventType })
   eventTypes?: EventType[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

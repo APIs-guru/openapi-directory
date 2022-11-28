@@ -1,16 +1,20 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import mirrorconfig
-from . import pubsubconfig
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Repo:
-    mirror_config: Optional[mirrorconfig.MirrorConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mirrorConfig' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    pubsub_configs: Optional[dict[str, pubsubconfig.PubsubConfig]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pubsubConfigs' }})
-    size: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'size' }})
-    url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
+    r"""Repo
+    A repository (or repo) is a Git repository storing versioned source content.
+    """
+    
+    mirror_config: Optional[MirrorConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mirrorConfig') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    pubsub_configs: Optional[dict[str, PubsubConfig]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pubsubConfigs') }})
+    size: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('size') }})
+    url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('url') }})
     

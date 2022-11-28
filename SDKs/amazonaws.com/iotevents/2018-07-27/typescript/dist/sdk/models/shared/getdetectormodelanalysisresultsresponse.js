@@ -22,19 +22,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { AnalysisResult } from "./analysisresult";
 var GetDetectorModelAnalysisResultsResponse = /** @class */ (function (_super) {
     __extends(GetDetectorModelAnalysisResultsResponse, _super);
     function GetDetectorModelAnalysisResultsResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=analysisResults", elemType: shared.AnalysisResult }),
+        SpeakeasyMetadata({ data: "json, name=analysisResults", elemType: AnalysisResult }),
         __metadata("design:type", Array)
     ], GetDetectorModelAnalysisResultsResponse.prototype, "analysisResults", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextToken" }),
         __metadata("design:type", String)
     ], GetDetectorModelAnalysisResultsResponse.prototype, "nextToken", void 0);
     return GetDetectorModelAnalysisResultsResponse;

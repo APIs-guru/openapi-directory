@@ -1,5 +1,7 @@
 package shared
 
+// RdsDbInstance
+// Describes an Amazon RDS instance.
 type RdsDbInstance struct {
 	Address              *string `json:"Address,omitempty"`
 	DbInstanceIdentifier *string `json:"DbInstanceIdentifier,omitempty"`

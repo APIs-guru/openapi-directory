@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class BlockTypeEnum(str, Enum):
     KEY_VALUE_SET = "KEY_VALUE_SET"

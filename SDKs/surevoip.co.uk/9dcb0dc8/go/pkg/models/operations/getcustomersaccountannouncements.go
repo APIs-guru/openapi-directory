@@ -8,12 +8,12 @@ type GetCustomersAccountAnnouncementsPathParams struct {
 	Account int64 `pathParam:"style=simple,explode=false,name=account"`
 }
 
-type GetCustomersAccountAnnouncementsRequest struct {
-	PathParams GetCustomersAccountAnnouncementsPathParams
-}
-
 type GetCustomersAccountAnnouncements200ApplicationJSON struct {
 	List []shared.OneannouncementsPostResponses201ContentApplication1jsonSchema `json:"list,omitempty"`
+}
+
+type GetCustomersAccountAnnouncementsRequest struct {
+	PathParams GetCustomersAccountAnnouncementsPathParams
 }
 
 type GetCustomersAccountAnnouncementsResponse struct {

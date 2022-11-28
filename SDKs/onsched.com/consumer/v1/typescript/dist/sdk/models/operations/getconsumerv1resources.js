@@ -22,38 +22,38 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetConsumerV1ResourcesQueryParams = /** @class */ (function (_super) {
     __extends(GetConsumerV1ResourcesQueryParams, _super);
     function GetConsumerV1ResourcesQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=email" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=email" }),
         __metadata("design:type", String)
     ], GetConsumerV1ResourcesQueryParams.prototype, "email", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", Number)
     ], GetConsumerV1ResourcesQueryParams.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=locationId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=locationId" }),
         __metadata("design:type", String)
     ], GetConsumerV1ResourcesQueryParams.prototype, "locationId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=name" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name" }),
         __metadata("design:type", String)
     ], GetConsumerV1ResourcesQueryParams.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=offset" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" }),
         __metadata("design:type", Number)
     ], GetConsumerV1ResourcesQueryParams.prototype, "offset", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=resourceGroupId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=resourceGroupId" }),
         __metadata("design:type", Number)
     ], GetConsumerV1ResourcesQueryParams.prototype, "resourceGroupId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sortOrder" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sortOrder" }),
         __metadata("design:type", String)
     ], GetConsumerV1ResourcesQueryParams.prototype, "sortOrder", void 0);
     return GetConsumerV1ResourcesQueryParams;
@@ -65,7 +65,7 @@ var GetConsumerV1ResourcesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetConsumerV1ResourcesQueryParams)
     ], GetConsumerV1ResourcesRequest.prototype, "queryParams", void 0);
     return GetConsumerV1ResourcesRequest;
@@ -77,15 +77,15 @@ var GetConsumerV1ResourcesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetConsumerV1ResourcesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], GetConsumerV1ResourcesResponse.prototype, "resourceListViewModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetConsumerV1ResourcesResponse.prototype, "statusCode", void 0);
     return GetConsumerV1ResourcesResponse;

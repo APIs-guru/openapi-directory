@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -13,36 +14,41 @@ class EndpointGetRecentlyPlayedQueryParams:
 
 @dataclass
 class EndpointGetRecentlyPlayedHeaders:
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
+    authorization: str = field(metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class EndpointGetRecentlyPlayedSecurity:
-    spotify_auth: shared.SchemeSpotifyAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    
-
-@dataclass
-class EndpointGetRecentlyPlayedRequest:
-    query_params: EndpointGetRecentlyPlayedQueryParams = field(default=None)
-    headers: EndpointGetRecentlyPlayedHeaders = field(default=None)
-    security: EndpointGetRecentlyPlayedSecurity = field(default=None)
+    spotify_auth: shared.SchemeSpotifyAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass_json
 @dataclass
 class EndpointGetRecentlyPlayed200ApplicationJSON:
-    cursors: Optional[shared.CursorObject] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cursors' }})
-    href: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'href' }})
-    items: Optional[List[shared.PlayHistoryObject]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'items' }})
-    limit: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'limit' }})
-    next: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next' }})
-    total: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
+    r"""EndpointGetRecentlyPlayed200ApplicationJSON
+
+    https://developer.spotify.com/documentation/web-api/reference/#object-cursorpagingobject - Find more info on the official Spotify Web API Reference
+    """
+    
+    cursors: Optional[shared.CursorObject] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cursors') }})
+    href: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('href') }})
+    items: Optional[List[shared.PlayHistoryObject]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('items') }})
+    limit: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('limit') }})
+    next: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('next') }})
+    total: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    
+
+@dataclass
+class EndpointGetRecentlyPlayedRequest:
+    headers: EndpointGetRecentlyPlayedHeaders = field()
+    query_params: EndpointGetRecentlyPlayedQueryParams = field()
+    security: EndpointGetRecentlyPlayedSecurity = field()
     
 
 @dataclass
 class EndpointGetRecentlyPlayedResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response_object: Optional[shared.ErrorResponseObject] = field(default=None)
-    status_code: int = field(default=None)
     endpoint_get_recently_played_200_application_json_object: Optional[EndpointGetRecentlyPlayed200ApplicationJSON] = field(default=None)
     

@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TlsConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=insecureSkipVerification" })
+  @SpeakeasyMetadata({ data: "json, name=insecureSkipVerification" })
   insecureSkipVerification?: boolean;
 }

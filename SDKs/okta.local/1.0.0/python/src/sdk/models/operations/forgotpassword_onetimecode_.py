@@ -4,7 +4,7 @@ from typing import Optional
 
 @dataclass
 class ForgotPasswordOneTimeCodePathParams:
-    user_id: str = field(default=None, metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
+    user_id: str = field(metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -14,13 +14,13 @@ class ForgotPasswordOneTimeCodeQueryParams:
 
 @dataclass
 class ForgotPasswordOneTimeCodeRequest:
-    path_params: ForgotPasswordOneTimeCodePathParams = field(default=None)
-    query_params: ForgotPasswordOneTimeCodeQueryParams = field(default=None)
+    path_params: ForgotPasswordOneTimeCodePathParams = field()
+    query_params: ForgotPasswordOneTimeCodeQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/plain' }})
     
 
 @dataclass
 class ForgotPasswordOneTimeCodeResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

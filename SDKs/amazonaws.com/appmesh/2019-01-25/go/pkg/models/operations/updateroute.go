@@ -24,6 +24,8 @@ type UpdateRouteHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateRouteRequestBodySpec
+// An object that represents a route specification. Specify one route type.
 type UpdateRouteRequestBodySpec struct {
 	GrpcRoute  *shared.GrpcRoute `json:"grpcRoute,omitempty"`
 	Http2Route *shared.HTTPRoute `json:"http2Route,omitempty"`

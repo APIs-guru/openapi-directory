@@ -34,15 +34,15 @@ type PostOauthAccessTokenRequestBodyAccessTokenRequestBaseV3 struct {
 	Scope        PostOauthAccessTokenRequestBodyAccessTokenRequestBaseV2ScopeEnum     `json:"scope"`
 }
 
-type PostOauthAccessTokenRequest struct {
-	Request interface{} `request:"mediaType=application/json"`
-}
-
 type PostOauthAccessTokenAccessTokenResponseV2 struct {
 	AccessToken  *string `json:"access_token,omitempty"`
 	ExpiresIn    *int64  `json:"expires_in,omitempty"`
 	RefreshToken *string `json:"refresh_token,omitempty"`
 	TokenType    *string `json:"token_type,omitempty"`
+}
+
+type PostOauthAccessTokenRequest struct {
+	Request interface{} `request:"mediaType=application/json"`
 }
 
 type PostOauthAccessTokenResponse struct {

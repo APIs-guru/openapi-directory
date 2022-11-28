@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DateRangeValues } from "./daterangevalues";
+
 
 
 // ReportRow
@@ -8,9 +8,9 @@ import { DateRangeValues } from "./daterangevalues";
  * A row in the report.
 **/
 export class ReportRow extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dimensions" })
+  @SpeakeasyMetadata({ data: "json, name=dimensions" })
   dimensions?: string[];
 
-  @Metadata({ data: "json, name=metrics", elemType: shared.DateRangeValues })
+  @SpeakeasyMetadata({ data: "json, name=metrics", elemType: DateRangeValues })
   metrics?: DateRangeValues[];
 }

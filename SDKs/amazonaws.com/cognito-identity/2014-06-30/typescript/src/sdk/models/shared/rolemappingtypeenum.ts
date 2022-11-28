@@ -1,6 +1,7 @@
 
 
+
 export enum RoleMappingTypeEnum {
-    Token = "Token"
-,    Rules = "Rules"
+    Token = "Token",
+    Rules = "Rules"
 }

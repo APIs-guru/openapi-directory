@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ApigeeOrganizationsInstancesReportStatusPathParams:
-    instance: str = field(default=None, metadata={'path_param': { 'field_name': 'instance', 'style': 'simple', 'explode': False }})
+    instance: str = field(metadata={'path_param': { 'field_name': 'instance', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class ApigeeOrganizationsInstancesReportStatusQueryParams:
 
 @dataclass
 class ApigeeOrganizationsInstancesReportStatusSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ApigeeOrganizationsInstancesReportStatusRequest:
-    path_params: ApigeeOrganizationsInstancesReportStatusPathParams = field(default=None)
-    query_params: ApigeeOrganizationsInstancesReportStatusQueryParams = field(default=None)
+    path_params: ApigeeOrganizationsInstancesReportStatusPathParams = field()
+    query_params: ApigeeOrganizationsInstancesReportStatusQueryParams = field()
+    security: ApigeeOrganizationsInstancesReportStatusSecurity = field()
     request: Optional[shared.GoogleCloudApigeeV1ReportInstanceStatusRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ApigeeOrganizationsInstancesReportStatusSecurity = field(default=None)
     
 
 @dataclass
 class ApigeeOrganizationsInstancesReportStatusResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_apigee_v1_report_instance_status_response: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

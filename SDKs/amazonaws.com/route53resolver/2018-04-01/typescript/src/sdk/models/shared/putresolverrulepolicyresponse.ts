@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PutResolverRulePolicyResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The response to a <code>PutResolverRulePolicy</code> request.
 **/
 export class PutResolverRulePolicyResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ReturnValue" })
+  @SpeakeasyMetadata({ data: "json, name=ReturnValue" })
   returnValue?: boolean;
 }

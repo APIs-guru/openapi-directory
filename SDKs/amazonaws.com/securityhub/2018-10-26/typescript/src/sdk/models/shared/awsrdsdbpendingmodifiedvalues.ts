@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsRdsPendingCloudWatchLogsExports } from "./awsrdspendingcloudwatchlogsexports";
 import { AwsRdsDbProcessorFeature } from "./awsrdsdbprocessorfeature";
+
 
 
 // AwsRdsDbPendingModifiedValues
@@ -9,48 +9,48 @@ import { AwsRdsDbProcessorFeature } from "./awsrdsdbprocessorfeature";
  * Changes to a DB instance that are currently pending.
 **/
 export class AwsRdsDbPendingModifiedValues extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AllocatedStorage" })
+  @SpeakeasyMetadata({ data: "json, name=AllocatedStorage" })
   allocatedStorage?: number;
 
-  @Metadata({ data: "json, name=BackupRetentionPeriod" })
+  @SpeakeasyMetadata({ data: "json, name=BackupRetentionPeriod" })
   backupRetentionPeriod?: number;
 
-  @Metadata({ data: "json, name=CaCertificateIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=CaCertificateIdentifier" })
   caCertificateIdentifier?: string;
 
-  @Metadata({ data: "json, name=DbInstanceClass" })
+  @SpeakeasyMetadata({ data: "json, name=DbInstanceClass" })
   dbInstanceClass?: string;
 
-  @Metadata({ data: "json, name=DbInstanceIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=DbInstanceIdentifier" })
   dbInstanceIdentifier?: string;
 
-  @Metadata({ data: "json, name=DbSubnetGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=DbSubnetGroupName" })
   dbSubnetGroupName?: string;
 
-  @Metadata({ data: "json, name=EngineVersion" })
+  @SpeakeasyMetadata({ data: "json, name=EngineVersion" })
   engineVersion?: string;
 
-  @Metadata({ data: "json, name=Iops" })
+  @SpeakeasyMetadata({ data: "json, name=Iops" })
   iops?: number;
 
-  @Metadata({ data: "json, name=LicenseModel" })
+  @SpeakeasyMetadata({ data: "json, name=LicenseModel" })
   licenseModel?: string;
 
-  @Metadata({ data: "json, name=MasterUserPassword" })
+  @SpeakeasyMetadata({ data: "json, name=MasterUserPassword" })
   masterUserPassword?: string;
 
-  @Metadata({ data: "json, name=MultiAZ" })
+  @SpeakeasyMetadata({ data: "json, name=MultiAZ" })
   multiAz?: boolean;
 
-  @Metadata({ data: "json, name=PendingCloudWatchLogsExports" })
+  @SpeakeasyMetadata({ data: "json, name=PendingCloudWatchLogsExports" })
   pendingCloudWatchLogsExports?: AwsRdsPendingCloudWatchLogsExports;
 
-  @Metadata({ data: "json, name=Port" })
+  @SpeakeasyMetadata({ data: "json, name=Port" })
   port?: number;
 
-  @Metadata({ data: "json, name=ProcessorFeatures", elemType: shared.AwsRdsDbProcessorFeature })
+  @SpeakeasyMetadata({ data: "json, name=ProcessorFeatures", elemType: AwsRdsDbProcessorFeature })
   processorFeatures?: AwsRdsDbProcessorFeature[];
 
-  @Metadata({ data: "json, name=StorageType" })
+  @SpeakeasyMetadata({ data: "json, name=StorageType" })
   storageType?: string;
 }

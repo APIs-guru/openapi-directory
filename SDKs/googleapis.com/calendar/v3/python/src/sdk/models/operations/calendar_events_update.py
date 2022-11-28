@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CalendarEventsUpdatePathParams:
-    calendar_id: str = field(default=None, metadata={'path_param': { 'field_name': 'calendarId', 'style': 'simple', 'explode': False }})
-    event_id: str = field(default=None, metadata={'path_param': { 'field_name': 'eventId', 'style': 'simple', 'explode': False }})
+    calendar_id: str = field(metadata={'path_param': { 'field_name': 'calendarId', 'style': 'simple', 'explode': False }})
+    event_id: str = field(metadata={'path_param': { 'field_name': 'eventId', 'style': 'simple', 'explode': False }})
     
 class CalendarEventsUpdateSendUpdatesEnum(str, Enum):
     ALL = "all"
@@ -33,14 +37,14 @@ class CalendarEventsUpdateQueryParams:
 
 @dataclass
 class CalendarEventsUpdateSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CalendarEventsUpdateSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -51,15 +55,15 @@ class CalendarEventsUpdateSecurity:
 
 @dataclass
 class CalendarEventsUpdateRequest:
-    path_params: CalendarEventsUpdatePathParams = field(default=None)
-    query_params: CalendarEventsUpdateQueryParams = field(default=None)
+    path_params: CalendarEventsUpdatePathParams = field()
+    query_params: CalendarEventsUpdateQueryParams = field()
+    security: CalendarEventsUpdateSecurity = field()
     request: Optional[shared.Event] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: CalendarEventsUpdateSecurity = field(default=None)
     
 
 @dataclass
 class CalendarEventsUpdateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     event: Optional[shared.Event] = field(default=None)
-    status_code: int = field(default=None)
     

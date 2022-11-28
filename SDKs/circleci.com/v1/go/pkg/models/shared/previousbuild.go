@@ -1,5 +1,7 @@
 package shared
 
+// PreviousBuild
+// previous build
 type PreviousBuild struct {
 	BuildNum        *int64      `json:"build_num,omitempty"`
 	BuildTimeMillis *int64      `json:"build_time_millis,omitempty"`

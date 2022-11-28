@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MetricShortId
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The metric short id is returned to the user alongside an offset into ReportWorkItemStatusRequest
 **/
 export class MetricShortId extends SpeakeasyBase {
-  @Metadata({ data: "json, name=metricIndex" })
+  @SpeakeasyMetadata({ data: "json, name=metricIndex" })
   metricIndex?: number;
 
-  @Metadata({ data: "json, name=shortId" })
+  @SpeakeasyMetadata({ data: "json, name=shortId" })
   shortId?: string;
 }

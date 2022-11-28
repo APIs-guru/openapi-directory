@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AppEngineHttpTarget } from "./appenginehttptarget";
 import { HttpTarget } from "./httptarget";
 import { PubsubTarget } from "./pubsubtarget";

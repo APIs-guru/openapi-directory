@@ -17,12 +17,12 @@ class PutAdministrationUserLockRequests:
 
 @dataclass
 class PutAdministrationUserLockRequest:
-    headers: PutAdministrationUserLockHeaders = field(default=None)
+    headers: PutAdministrationUserLockHeaders = field()
     request: Optional[PutAdministrationUserLockRequests] = field(default=None)
     
 
 @dataclass
 class PutAdministrationUserLockResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

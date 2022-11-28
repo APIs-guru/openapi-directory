@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum GoogleCloudWebriskV1SearchUrisResponseThreatUriThreatTypesEnum {
     ThreatTypeUnspecified = "THREAT_TYPE_UNSPECIFIED",
     Malware = "MALWARE",

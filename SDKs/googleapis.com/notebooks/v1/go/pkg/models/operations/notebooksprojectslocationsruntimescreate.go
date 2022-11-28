@@ -32,7 +32,7 @@ type NotebooksProjectsLocationsRuntimesCreateSecurity struct {
 type NotebooksProjectsLocationsRuntimesCreateRequest struct {
 	PathParams  NotebooksProjectsLocationsRuntimesCreatePathParams
 	QueryParams NotebooksProjectsLocationsRuntimesCreateQueryParams
-	Request     *shared.Runtime `request:"mediaType=application/json"`
+	Request     *shared.RuntimeInput `request:"mediaType=application/json"`
 	Security    NotebooksProjectsLocationsRuntimesCreateSecurity
 }
 

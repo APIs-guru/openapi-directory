@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataFormatEnum } from "./dataformatenum";
 
 
+
 export class CheckSchemaVersionValidityInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DataFormat" })
+  @SpeakeasyMetadata({ data: "json, name=DataFormat" })
   dataFormat: DataFormatEnum;
 
-  @Metadata({ data: "json, name=SchemaDefinition" })
+  @SpeakeasyMetadata({ data: "json, name=SchemaDefinition" })
   schemaDefinition: string;
 }

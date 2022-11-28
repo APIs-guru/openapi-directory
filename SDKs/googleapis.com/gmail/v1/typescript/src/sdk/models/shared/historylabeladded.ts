@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Message } from "./message";
 
 
+
 export class HistoryLabelAdded extends SpeakeasyBase {
-  @Metadata({ data: "json, name=labelIds" })
+  @SpeakeasyMetadata({ data: "json, name=labelIds" })
   labelIds?: string[];
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: Message;
 }

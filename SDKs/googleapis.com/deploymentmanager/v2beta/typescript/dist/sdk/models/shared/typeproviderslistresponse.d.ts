@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { TypeProvider } from "./typeprovider";
 /**
  * A response that returns all Type Providers supported by Deployment Manager

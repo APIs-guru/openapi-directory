@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { H264CodecSettings } from "./h264codecsettings";
 import { H265CodecSettings } from "./h265codecsettings";
 import { Vp9CodecSettings } from "./vp9codecsettings";
+
 
 
 // VideoStream
@@ -9,12 +10,12 @@ import { Vp9CodecSettings } from "./vp9codecsettings";
  * Video stream resource.
 **/
 export class VideoStream extends SpeakeasyBase {
-  @Metadata({ data: "json, name=h264" })
+  @SpeakeasyMetadata({ data: "json, name=h264" })
   h264?: H264CodecSettings;
 
-  @Metadata({ data: "json, name=h265" })
+  @SpeakeasyMetadata({ data: "json, name=h265" })
   h265?: H265CodecSettings;
 
-  @Metadata({ data: "json, name=vp9" })
+  @SpeakeasyMetadata({ data: "json, name=vp9" })
   vp9?: Vp9CodecSettings;
 }

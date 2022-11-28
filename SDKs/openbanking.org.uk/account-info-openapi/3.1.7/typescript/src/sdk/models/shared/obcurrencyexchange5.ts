@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ObCurrencyExchange5InstructedAmount
@@ -6,10 +7,10 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Amount of money to be moved between the debtor and creditor, before deduction of charges, expressed in the currency as ordered by the initiating party.
 **/
 export class ObCurrencyExchange5InstructedAmount extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Amount" })
+  @SpeakeasyMetadata({ data: "json, name=Amount" })
   amount: string;
 
-  @Metadata({ data: "json, name=Currency" })
+  @SpeakeasyMetadata({ data: "json, name=Currency" })
   currency: string;
 }
 
@@ -19,24 +20,24 @@ export class ObCurrencyExchange5InstructedAmount extends SpeakeasyBase {
  * Set of elements used to provide details on the currency exchange.
 **/
 export class ObCurrencyExchange5 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ContractIdentification" })
+  @SpeakeasyMetadata({ data: "json, name=ContractIdentification" })
   contractIdentification?: string;
 
-  @Metadata({ data: "json, name=ExchangeRate" })
+  @SpeakeasyMetadata({ data: "json, name=ExchangeRate" })
   exchangeRate: number;
 
-  @Metadata({ data: "json, name=InstructedAmount" })
+  @SpeakeasyMetadata({ data: "json, name=InstructedAmount" })
   instructedAmount?: ObCurrencyExchange5InstructedAmount;
 
-  @Metadata({ data: "json, name=QuotationDate" })
+  @SpeakeasyMetadata({ data: "json, name=QuotationDate" })
   quotationDate?: Date;
 
-  @Metadata({ data: "json, name=SourceCurrency" })
+  @SpeakeasyMetadata({ data: "json, name=SourceCurrency" })
   sourceCurrency: string;
 
-  @Metadata({ data: "json, name=TargetCurrency" })
+  @SpeakeasyMetadata({ data: "json, name=TargetCurrency" })
   targetCurrency?: string;
 
-  @Metadata({ data: "json, name=UnitCurrency" })
+  @SpeakeasyMetadata({ data: "json, name=UnitCurrency" })
   unitCurrency?: string;
 }

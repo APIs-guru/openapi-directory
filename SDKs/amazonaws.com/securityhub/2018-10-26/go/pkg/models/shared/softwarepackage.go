@@ -1,5 +1,7 @@
 package shared
 
+// SoftwarePackage
+// Information about a software package.
 type SoftwarePackage struct {
 	Architecture   *string `json:"Architecture,omitempty"`
 	Epoch          *string `json:"Epoch,omitempty"`

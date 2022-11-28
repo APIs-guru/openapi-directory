@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AutoTerminationPolicy } from "./autoterminationpolicy";
 
 
+
 export class PutAutoTerminationPolicyInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AutoTerminationPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=AutoTerminationPolicy" })
   autoTerminationPolicy?: AutoTerminationPolicy;
 
-  @Metadata({ data: "json, name=ClusterId" })
+  @SpeakeasyMetadata({ data: "json, name=ClusterId" })
   clusterId: string;
 }

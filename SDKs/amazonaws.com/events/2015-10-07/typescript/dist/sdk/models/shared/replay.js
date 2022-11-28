@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReplayStateEnum } from "./replaystateenum";
 // Replay
 /**
@@ -34,39 +34,39 @@ var Replay = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=EventEndTime" }),
+        SpeakeasyMetadata({ data: "json, name=EventEndTime" }),
         __metadata("design:type", Date)
     ], Replay.prototype, "eventEndTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=EventLastReplayedTime" }),
+        SpeakeasyMetadata({ data: "json, name=EventLastReplayedTime" }),
         __metadata("design:type", Date)
     ], Replay.prototype, "eventLastReplayedTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=EventSourceArn" }),
+        SpeakeasyMetadata({ data: "json, name=EventSourceArn" }),
         __metadata("design:type", String)
     ], Replay.prototype, "eventSourceArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=EventStartTime" }),
+        SpeakeasyMetadata({ data: "json, name=EventStartTime" }),
         __metadata("design:type", Date)
     ], Replay.prototype, "eventStartTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=ReplayEndTime" }),
+        SpeakeasyMetadata({ data: "json, name=ReplayEndTime" }),
         __metadata("design:type", Date)
     ], Replay.prototype, "replayEndTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=ReplayName" }),
+        SpeakeasyMetadata({ data: "json, name=ReplayName" }),
         __metadata("design:type", String)
     ], Replay.prototype, "replayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ReplayStartTime" }),
+        SpeakeasyMetadata({ data: "json, name=ReplayStartTime" }),
         __metadata("design:type", Date)
     ], Replay.prototype, "replayStartTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=State" }),
+        SpeakeasyMetadata({ data: "json, name=State" }),
         __metadata("design:type", String)
     ], Replay.prototype, "state", void 0);
     __decorate([
-        Metadata({ data: "json, name=StateReason" }),
+        SpeakeasyMetadata({ data: "json, name=StateReason" }),
         __metadata("design:type", String)
     ], Replay.prototype, "stateReason", void 0);
     return Replay;

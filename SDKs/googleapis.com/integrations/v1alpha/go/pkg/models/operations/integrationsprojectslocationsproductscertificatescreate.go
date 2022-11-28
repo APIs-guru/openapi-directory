@@ -30,7 +30,7 @@ type IntegrationsProjectsLocationsProductsCertificatesCreateSecurity struct {
 type IntegrationsProjectsLocationsProductsCertificatesCreateRequest struct {
 	PathParams  IntegrationsProjectsLocationsProductsCertificatesCreatePathParams
 	QueryParams IntegrationsProjectsLocationsProductsCertificatesCreateQueryParams
-	Request     *shared.GoogleCloudIntegrationsV1alphaCertificate `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudIntegrationsV1alphaCertificateInput `request:"mediaType=application/json"`
 	Security    IntegrationsProjectsLocationsProductsCertificatesCreateSecurity
 }
 

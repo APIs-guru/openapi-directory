@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GoogleCloudOrgpolicyV2CustomConstraint } from "./googlecloudorgpolicyv2customconstraint";
 // GoogleCloudOrgpolicyV2ListCustomConstraintsResponse
 /**
  * The response returned from the ListCustomConstraints method. It will be empty if no `CustomConstraints` are set on the organization resource.
@@ -34,11 +34,11 @@ var GoogleCloudOrgpolicyV2ListCustomConstraintsResponse = /** @class */ (functio
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=customConstraints", elemType: shared.GoogleCloudOrgpolicyV2CustomConstraint }),
+        SpeakeasyMetadata({ data: "json, name=customConstraints", elemType: GoogleCloudOrgpolicyV2CustomConstraint }),
         __metadata("design:type", Array)
     ], GoogleCloudOrgpolicyV2ListCustomConstraintsResponse.prototype, "customConstraints", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextPageToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextPageToken" }),
         __metadata("design:type", String)
     ], GoogleCloudOrgpolicyV2ListCustomConstraintsResponse.prototype, "nextPageToken", void 0);
     return GoogleCloudOrgpolicyV2ListCustomConstraintsResponse;

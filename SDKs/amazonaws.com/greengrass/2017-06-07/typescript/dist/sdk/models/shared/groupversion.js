@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GroupVersion
 /**
  * Information about a group version.
@@ -33,31 +33,31 @@ var GroupVersion = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ConnectorDefinitionVersionArn" }),
+        SpeakeasyMetadata({ data: "json, name=ConnectorDefinitionVersionArn" }),
         __metadata("design:type", String)
     ], GroupVersion.prototype, "connectorDefinitionVersionArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=CoreDefinitionVersionArn" }),
+        SpeakeasyMetadata({ data: "json, name=CoreDefinitionVersionArn" }),
         __metadata("design:type", String)
     ], GroupVersion.prototype, "coreDefinitionVersionArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=DeviceDefinitionVersionArn" }),
+        SpeakeasyMetadata({ data: "json, name=DeviceDefinitionVersionArn" }),
         __metadata("design:type", String)
     ], GroupVersion.prototype, "deviceDefinitionVersionArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=FunctionDefinitionVersionArn" }),
+        SpeakeasyMetadata({ data: "json, name=FunctionDefinitionVersionArn" }),
         __metadata("design:type", String)
     ], GroupVersion.prototype, "functionDefinitionVersionArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=LoggerDefinitionVersionArn" }),
+        SpeakeasyMetadata({ data: "json, name=LoggerDefinitionVersionArn" }),
         __metadata("design:type", String)
     ], GroupVersion.prototype, "loggerDefinitionVersionArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=ResourceDefinitionVersionArn" }),
+        SpeakeasyMetadata({ data: "json, name=ResourceDefinitionVersionArn" }),
         __metadata("design:type", String)
     ], GroupVersion.prototype, "resourceDefinitionVersionArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=SubscriptionDefinitionVersionArn" }),
+        SpeakeasyMetadata({ data: "json, name=SubscriptionDefinitionVersionArn" }),
         __metadata("design:type", String)
     ], GroupVersion.prototype, "subscriptionDefinitionVersionArn", void 0);
     return GroupVersion;

@@ -22,74 +22,74 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReplicationConfigurationDataPlaneRoutingEnum } from "./replicationconfigurationdataplaneroutingenum";
 import { ReplicationConfigurationDefaultLargeStagingDiskTypeEnum } from "./replicationconfigurationdefaultlargestagingdisktypeenum";
 import { ReplicationConfigurationEbsEncryptionEnum } from "./replicationconfigurationebsencryptionenum";
+import { ReplicationConfigurationReplicatedDisk } from "./replicationconfigurationreplicateddisk";
 var ReplicationConfiguration = /** @class */ (function (_super) {
     __extends(ReplicationConfiguration, _super);
     function ReplicationConfiguration() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=associateDefaultSecurityGroup" }),
+        SpeakeasyMetadata({ data: "json, name=associateDefaultSecurityGroup" }),
         __metadata("design:type", Boolean)
     ], ReplicationConfiguration.prototype, "associateDefaultSecurityGroup", void 0);
     __decorate([
-        Metadata({ data: "json, name=bandwidthThrottling" }),
+        SpeakeasyMetadata({ data: "json, name=bandwidthThrottling" }),
         __metadata("design:type", Number)
     ], ReplicationConfiguration.prototype, "bandwidthThrottling", void 0);
     __decorate([
-        Metadata({ data: "json, name=createPublicIP" }),
+        SpeakeasyMetadata({ data: "json, name=createPublicIP" }),
         __metadata("design:type", Boolean)
     ], ReplicationConfiguration.prototype, "createPublicIp", void 0);
     __decorate([
-        Metadata({ data: "json, name=dataPlaneRouting" }),
+        SpeakeasyMetadata({ data: "json, name=dataPlaneRouting" }),
         __metadata("design:type", String)
     ], ReplicationConfiguration.prototype, "dataPlaneRouting", void 0);
     __decorate([
-        Metadata({ data: "json, name=defaultLargeStagingDiskType" }),
+        SpeakeasyMetadata({ data: "json, name=defaultLargeStagingDiskType" }),
         __metadata("design:type", String)
     ], ReplicationConfiguration.prototype, "defaultLargeStagingDiskType", void 0);
     __decorate([
-        Metadata({ data: "json, name=ebsEncryption" }),
+        SpeakeasyMetadata({ data: "json, name=ebsEncryption" }),
         __metadata("design:type", String)
     ], ReplicationConfiguration.prototype, "ebsEncryption", void 0);
     __decorate([
-        Metadata({ data: "json, name=ebsEncryptionKeyArn" }),
+        SpeakeasyMetadata({ data: "json, name=ebsEncryptionKeyArn" }),
         __metadata("design:type", String)
     ], ReplicationConfiguration.prototype, "ebsEncryptionKeyArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], ReplicationConfiguration.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=replicatedDisks", elemType: shared.ReplicationConfigurationReplicatedDisk }),
+        SpeakeasyMetadata({ data: "json, name=replicatedDisks", elemType: ReplicationConfigurationReplicatedDisk }),
         __metadata("design:type", Array)
     ], ReplicationConfiguration.prototype, "replicatedDisks", void 0);
     __decorate([
-        Metadata({ data: "json, name=replicationServerInstanceType" }),
+        SpeakeasyMetadata({ data: "json, name=replicationServerInstanceType" }),
         __metadata("design:type", String)
     ], ReplicationConfiguration.prototype, "replicationServerInstanceType", void 0);
     __decorate([
-        Metadata({ data: "json, name=replicationServersSecurityGroupsIDs" }),
+        SpeakeasyMetadata({ data: "json, name=replicationServersSecurityGroupsIDs" }),
         __metadata("design:type", Array)
     ], ReplicationConfiguration.prototype, "replicationServersSecurityGroupsIDs", void 0);
     __decorate([
-        Metadata({ data: "json, name=sourceServerID" }),
+        SpeakeasyMetadata({ data: "json, name=sourceServerID" }),
         __metadata("design:type", String)
     ], ReplicationConfiguration.prototype, "sourceServerId", void 0);
     __decorate([
-        Metadata({ data: "json, name=stagingAreaSubnetId" }),
+        SpeakeasyMetadata({ data: "json, name=stagingAreaSubnetId" }),
         __metadata("design:type", String)
     ], ReplicationConfiguration.prototype, "stagingAreaSubnetId", void 0);
     __decorate([
-        Metadata({ data: "json, name=stagingAreaTags" }),
+        SpeakeasyMetadata({ data: "json, name=stagingAreaTags" }),
         __metadata("design:type", Map)
     ], ReplicationConfiguration.prototype, "stagingAreaTags", void 0);
     __decorate([
-        Metadata({ data: "json, name=useDedicatedReplicationServer" }),
+        SpeakeasyMetadata({ data: "json, name=useDedicatedReplicationServer" }),
         __metadata("design:type", Boolean)
     ], ReplicationConfiguration.prototype, "useDedicatedReplicationServer", void 0);
     return ReplicationConfiguration;

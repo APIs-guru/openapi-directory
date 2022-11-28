@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 
 
 @dataclass
 class PostAppsAppIDVersionsVersionStatusPathParams:
-    app_id: str = field(default=None, metadata={'path_param': { 'field_name': 'appId', 'style': 'simple', 'explode': False }})
-    version: int = field(default=None, metadata={'path_param': { 'field_name': 'version', 'style': 'simple', 'explode': False }})
+    app_id: str = field(metadata={'path_param': { 'field_name': 'appId', 'style': 'simple', 'explode': False }})
+    version: int = field(metadata={'path_param': { 'field_name': 'version', 'style': 'simple', 'explode': False }})
     
 class PostAppsAppIDVersionsVersionStatusModifiedByEnum(str, Enum):
     DEVELOPER = "developer"
@@ -28,12 +29,12 @@ class PostAppsAppIDVersionsVersionStatusQueryParams:
 
 @dataclass
 class PostAppsAppIDVersionsVersionStatusRequest:
-    path_params: PostAppsAppIDVersionsVersionStatusPathParams = field(default=None)
-    query_params: PostAppsAppIDVersionsVersionStatusQueryParams = field(default=None)
+    path_params: PostAppsAppIDVersionsVersionStatusPathParams = field()
+    query_params: PostAppsAppIDVersionsVersionStatusQueryParams = field()
     
 
 @dataclass
 class PostAppsAppIDVersionsVersionStatusResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetImagesNameOrIdJsonPathParams = /** @class */ (function (_super) {
     __extends(GetImagesNameOrIdJsonPathParams, _super);
@@ -30,7 +30,7 @@ var GetImagesNameOrIdJsonPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=name_or_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=name_or_id" }),
         __metadata("design:type", String)
     ], GetImagesNameOrIdJsonPathParams.prototype, "nameOrId", void 0);
     return GetImagesNameOrIdJsonPathParams;
@@ -42,11 +42,11 @@ var GetImagesNameOrIdJsonHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Auth-Project-Id" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Auth-Project-Id" }),
         __metadata("design:type", String)
     ], GetImagesNameOrIdJsonHeaders.prototype, "xAuthProjectId", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Auth-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Auth-Token" }),
         __metadata("design:type", String)
     ], GetImagesNameOrIdJsonHeaders.prototype, "xAuthToken", void 0);
     return GetImagesNameOrIdJsonHeaders;
@@ -58,11 +58,11 @@ var GetImagesNameOrIdJsonRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetImagesNameOrIdJsonPathParams)
     ], GetImagesNameOrIdJsonRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetImagesNameOrIdJsonHeaders)
     ], GetImagesNameOrIdJsonRequest.prototype, "headers", void 0);
     return GetImagesNameOrIdJsonRequest;
@@ -74,15 +74,15 @@ var GetImagesNameOrIdJsonResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetImagesNameOrIdJsonResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ImageDetail)
     ], GetImagesNameOrIdJsonResponse.prototype, "imageDetail", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetImagesNameOrIdJsonResponse.prototype, "statusCode", void 0);
     return GetImagesNameOrIdJsonResponse;

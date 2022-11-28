@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AssetPropertyValue } from "./assetpropertyvalue";
+
 
 
 // PutAssetPropertyValueEntry
@@ -8,18 +8,18 @@ import { AssetPropertyValue } from "./assetpropertyvalue";
  * An asset property value entry containing the following information.
 **/
 export class PutAssetPropertyValueEntry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assetId" })
+  @SpeakeasyMetadata({ data: "json, name=assetId" })
   assetId?: string;
 
-  @Metadata({ data: "json, name=entryId" })
+  @SpeakeasyMetadata({ data: "json, name=entryId" })
   entryId?: string;
 
-  @Metadata({ data: "json, name=propertyAlias" })
+  @SpeakeasyMetadata({ data: "json, name=propertyAlias" })
   propertyAlias?: string;
 
-  @Metadata({ data: "json, name=propertyId" })
+  @SpeakeasyMetadata({ data: "json, name=propertyId" })
   propertyId?: string;
 
-  @Metadata({ data: "json, name=propertyValues", elemType: shared.AssetPropertyValue })
+  @SpeakeasyMetadata({ data: "json, name=propertyValues", elemType: AssetPropertyValue })
   propertyValues: AssetPropertyValue[];
 }

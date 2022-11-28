@@ -1,7 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MergeHunkDetail } from "./mergehunkdetail";
-import { MergeHunkDetail } from "./mergehunkdetail";
-import { MergeHunkDetail } from "./mergehunkdetail";
+
 
 
 // MergeHunk
@@ -9,15 +8,15 @@ import { MergeHunkDetail } from "./mergehunkdetail";
  * Information about merge hunks in a merge or pull request operation.
 **/
 export class MergeHunk extends SpeakeasyBase {
-  @Metadata({ data: "json, name=base" })
+  @SpeakeasyMetadata({ data: "json, name=base" })
   base?: MergeHunkDetail;
 
-  @Metadata({ data: "json, name=destination" })
+  @SpeakeasyMetadata({ data: "json, name=destination" })
   destination?: MergeHunkDetail;
 
-  @Metadata({ data: "json, name=isConflict" })
+  @SpeakeasyMetadata({ data: "json, name=isConflict" })
   isConflict?: boolean;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: MergeHunkDetail;
 }

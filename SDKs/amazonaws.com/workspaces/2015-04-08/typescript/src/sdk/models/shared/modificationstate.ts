@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ModificationResourceEnumEnum } from "./modificationresourceenumenum";
 import { ModificationStateEnumEnum } from "./modificationstateenumenum";
+
 
 
 // ModificationState
@@ -8,9 +9,9 @@ import { ModificationStateEnumEnum } from "./modificationstateenumenum";
  * Describes a WorkSpace modification.
 **/
 export class ModificationState extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Resource" })
+  @SpeakeasyMetadata({ data: "json, name=Resource" })
   resource?: ModificationResourceEnumEnum;
 
-  @Metadata({ data: "json, name=State" })
+  @SpeakeasyMetadata({ data: "json, name=State" })
   state?: ModificationStateEnumEnum;
 }

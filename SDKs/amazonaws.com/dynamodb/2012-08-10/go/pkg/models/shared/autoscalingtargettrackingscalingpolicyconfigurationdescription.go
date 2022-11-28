@@ -1,5 +1,7 @@
 package shared
 
+// AutoScalingTargetTrackingScalingPolicyConfigurationDescription
+// Represents the properties of a target tracking scaling policy.
 type AutoScalingTargetTrackingScalingPolicyConfigurationDescription struct {
 	DisableScaleIn   *bool   `json:"DisableScaleIn,omitempty"`
 	ScaleInCooldown  *int64  `json:"ScaleInCooldown,omitempty"`

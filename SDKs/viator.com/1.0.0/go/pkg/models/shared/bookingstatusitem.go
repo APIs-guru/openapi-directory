@@ -23,6 +23,8 @@ const (
 	BookingStatusItemTypeEnumOnHold       BookingStatusItemTypeEnum = "ON_HOLD"
 )
 
+// BookingStatusItem
+// **object** containing item booking status information
 type BookingStatusItem struct {
 	Amended   *bool                       `json:"amended,omitempty"`
 	Cancelled *bool                       `json:"cancelled,omitempty"`

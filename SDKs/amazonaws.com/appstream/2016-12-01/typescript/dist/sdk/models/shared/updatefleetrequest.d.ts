@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { FleetAttributeEnum } from "./fleetattributeenum";
 import { ComputeCapacity } from "./computecapacity";
 import { DomainJoinInfo } from "./domainjoininfo";

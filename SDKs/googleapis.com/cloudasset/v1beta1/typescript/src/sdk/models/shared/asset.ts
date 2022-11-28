@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleIdentityAccesscontextmanagerV1AccessLevel } from "./googleidentityaccesscontextmanagerv1accesslevel";
 import { GoogleIdentityAccesscontextmanagerV1AccessPolicy } from "./googleidentityaccesscontextmanagerv1accesspolicy";
 import { Policy } from "./policy";
@@ -8,32 +7,33 @@ import { Resource } from "./resource";
 import { GoogleIdentityAccesscontextmanagerV1ServicePerimeter } from "./googleidentityaccesscontextmanagerv1serviceperimeter";
 
 
+
 // Asset
 /** 
  * An asset in Google Cloud. An asset can be any resource in the Google Cloud [resource hierarchy](https://cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy), a resource outside the Google Cloud resource hierarchy (such as Google Kubernetes Engine clusters and objects), or a policy (e.g. Cloud IAM policy). See [Supported asset types](https://cloud.google.com/asset-inventory/docs/supported-asset-types) for more information.
 **/
 export class Asset extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessLevel" })
+  @SpeakeasyMetadata({ data: "json, name=accessLevel" })
   accessLevel?: GoogleIdentityAccesscontextmanagerV1AccessLevel;
 
-  @Metadata({ data: "json, name=accessPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=accessPolicy" })
   accessPolicy?: GoogleIdentityAccesscontextmanagerV1AccessPolicy;
 
-  @Metadata({ data: "json, name=assetType" })
+  @SpeakeasyMetadata({ data: "json, name=assetType" })
   assetType?: string;
 
-  @Metadata({ data: "json, name=iamPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=iamPolicy" })
   iamPolicy?: Policy;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=orgPolicy", elemType: shared.GoogleCloudOrgpolicyV1Policy })
+  @SpeakeasyMetadata({ data: "json, name=orgPolicy", elemType: GoogleCloudOrgpolicyV1Policy })
   orgPolicy?: GoogleCloudOrgpolicyV1Policy[];
 
-  @Metadata({ data: "json, name=resource" })
+  @SpeakeasyMetadata({ data: "json, name=resource" })
   resource?: Resource;
 
-  @Metadata({ data: "json, name=servicePerimeter" })
+  @SpeakeasyMetadata({ data: "json, name=servicePerimeter" })
   servicePerimeter?: GoogleIdentityAccesscontextmanagerV1ServicePerimeter;
 }

@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import actiontarget
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Ec2CreateRouteTableAction:
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
-    vpc_id: actiontarget.ActionTarget = field(default=None, metadata={'dataclasses_json': { 'field_name': 'VpcId' }})
+    r"""Ec2CreateRouteTableAction
+    Information about the CreateRouteTable action in Amazon EC2.
+    """
+    
+    vpc_id: ActionTarget = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('VpcId') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Description') }})
     

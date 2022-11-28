@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleDevtoolsRemotebuildexecutionAdminV1alphaAutoscale
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Autoscale defines the autoscaling policy of a worker pool.
 **/
 export class GoogleDevtoolsRemotebuildexecutionAdminV1alphaAutoscale extends SpeakeasyBase {
-  @Metadata({ data: "json, name=maxSize" })
+  @SpeakeasyMetadata({ data: "json, name=maxSize" })
   maxSize?: string;
 
-  @Metadata({ data: "json, name=minSize" })
+  @SpeakeasyMetadata({ data: "json, name=minSize" })
   minSize?: string;
 }

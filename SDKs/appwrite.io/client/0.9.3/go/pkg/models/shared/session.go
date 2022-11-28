@@ -1,5 +1,7 @@
 package shared
 
+// Session
+// Session
 type Session struct {
 	DollarID            string `json:"$id"`
 	ClientCode          string `json:"clientCode"`

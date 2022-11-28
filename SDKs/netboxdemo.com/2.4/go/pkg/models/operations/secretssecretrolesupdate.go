@@ -10,7 +10,7 @@ type SecretsSecretRolesUpdatePathParams struct {
 
 type SecretsSecretRolesUpdateRequest struct {
 	PathParams SecretsSecretRolesUpdatePathParams
-	Request    shared.SecretRole `request:"mediaType=application/json"`
+	Request    shared.SecretRoleInput `request:"mediaType=application/json"`
 }
 
 type SecretsSecretRolesUpdateResponse struct {

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AutoCorrections } from "./autocorrections";
 import { ImageSearchItemCreative } from "./imagesearchitemcreative";
 import { RelatedSearch } from "./relatedsearch";

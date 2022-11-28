@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ButtonActionEnum } from "./buttonactionenum";
+
 
 
 // OverrideButtonConfiguration
@@ -7,9 +8,9 @@ import { ButtonActionEnum } from "./buttonactionenum";
  * Override button configuration.
 **/
 export class OverrideButtonConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ButtonAction" })
+  @SpeakeasyMetadata({ data: "json, name=ButtonAction" })
   buttonAction: ButtonActionEnum;
 
-  @Metadata({ data: "json, name=Link" })
+  @SpeakeasyMetadata({ data: "json, name=Link" })
   link?: string;
 }

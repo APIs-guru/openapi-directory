@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudIntegrationsV1alphaLinkAppsScriptProjectResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Response for LinkAppsScriptProject rpc call.
 **/
 export class GoogleCloudIntegrationsV1alphaLinkAppsScriptProjectResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=scriptId" })
+  @SpeakeasyMetadata({ data: "json, name=scriptId" })
   scriptId?: string;
 }

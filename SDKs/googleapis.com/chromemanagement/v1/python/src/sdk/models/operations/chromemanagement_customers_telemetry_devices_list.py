@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ChromemanagementCustomersTelemetryDevicesListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -29,20 +30,20 @@ class ChromemanagementCustomersTelemetryDevicesListQueryParams:
 
 @dataclass
 class ChromemanagementCustomersTelemetryDevicesListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ChromemanagementCustomersTelemetryDevicesListRequest:
-    path_params: ChromemanagementCustomersTelemetryDevicesListPathParams = field(default=None)
-    query_params: ChromemanagementCustomersTelemetryDevicesListQueryParams = field(default=None)
-    security: ChromemanagementCustomersTelemetryDevicesListSecurity = field(default=None)
+    path_params: ChromemanagementCustomersTelemetryDevicesListPathParams = field()
+    query_params: ChromemanagementCustomersTelemetryDevicesListQueryParams = field()
+    security: ChromemanagementCustomersTelemetryDevicesListSecurity = field()
     
 
 @dataclass
 class ChromemanagementCustomersTelemetryDevicesListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_chrome_management_v1_list_telemetry_devices_response: Optional[shared.GoogleChromeManagementV1ListTelemetryDevicesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

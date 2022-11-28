@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum GetQueryResultsXAmzTargetEnum {
     Logs20140328GetQueryResults = "Logs_20140328.GetQueryResults"

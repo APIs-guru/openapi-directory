@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetPersonRemoteSearchResultsRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
   personLookupInfoRemoteSearchQuery?: shared.PersonLookupInfoRemoteSearchQuery;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   personLookupInfoRemoteSearchQuery1?: shared.PersonLookupInfoRemoteSearchQuery;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   personLookupInfoRemoteSearchQuery2?: shared.PersonLookupInfoRemoteSearchQuery;
 }
 
 
 export class GetPersonRemoteSearchResultsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   customAuthentication: shared.SchemeCustomAuthentication;
 }
 
 
 export class GetPersonRemoteSearchResultsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   request: GetPersonRemoteSearchResultsRequests;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetPersonRemoteSearchResultsSecurity;
 }
 
 
 export class GetPersonRemoteSearchResultsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.RemoteSearchResult })
+  @SpeakeasyMetadata({ elemType: shared.RemoteSearchResult })
   remoteSearchResults?: shared.RemoteSearchResult[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

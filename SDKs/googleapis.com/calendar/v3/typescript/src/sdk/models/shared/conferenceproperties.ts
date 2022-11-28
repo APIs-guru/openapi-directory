@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ConferenceProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowedConferenceSolutionTypes" })
+  @SpeakeasyMetadata({ data: "json, name=allowedConferenceSolutionTypes" })
   allowedConferenceSolutionTypes?: string[];
 }

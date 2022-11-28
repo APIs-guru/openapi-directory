@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -20,20 +21,20 @@ class AnalyticsadminAccountsProvisionAccountTicketQueryParams:
 
 @dataclass
 class AnalyticsadminAccountsProvisionAccountTicketSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AnalyticsadminAccountsProvisionAccountTicketRequest:
-    query_params: AnalyticsadminAccountsProvisionAccountTicketQueryParams = field(default=None)
-    request: Optional[shared.GoogleAnalyticsAdminV1alphaProvisionAccountTicketRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AnalyticsadminAccountsProvisionAccountTicketSecurity = field(default=None)
+    query_params: AnalyticsadminAccountsProvisionAccountTicketQueryParams = field()
+    security: AnalyticsadminAccountsProvisionAccountTicketSecurity = field()
+    request: Optional[shared.GoogleAnalyticsAdminV1alphaProvisionAccountTicketRequestInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class AnalyticsadminAccountsProvisionAccountTicketResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_analytics_admin_v1alpha_provision_account_ticket_response: Optional[shared.GoogleAnalyticsAdminV1alphaProvisionAccountTicketResponse] = field(default=None)
-    status_code: int = field(default=None)
     

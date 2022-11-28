@@ -1,58 +1,59 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateNetworkSwitchLinkAggregationPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=linkAggregationId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=linkAggregationId" })
   linkAggregationId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
 
 export class UpdateNetworkSwitchLinkAggregationRequestBodySwitchPorts extends SpeakeasyBase {
-  @Metadata({ data: "json, name=portId" })
+  @SpeakeasyMetadata({ data: "json, name=portId" })
   portId: string;
 
-  @Metadata({ data: "json, name=serial" })
+  @SpeakeasyMetadata({ data: "json, name=serial" })
   serial: string;
 }
 
 
 export class UpdateNetworkSwitchLinkAggregationRequestBodySwitchProfilePorts extends SpeakeasyBase {
-  @Metadata({ data: "json, name=portId" })
+  @SpeakeasyMetadata({ data: "json, name=portId" })
   portId: string;
 
-  @Metadata({ data: "json, name=profile" })
+  @SpeakeasyMetadata({ data: "json, name=profile" })
   profile: string;
 }
 
 
 export class UpdateNetworkSwitchLinkAggregationRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=switchPorts", elemType: operations.UpdateNetworkSwitchLinkAggregationRequestBodySwitchPorts })
+  @SpeakeasyMetadata({ data: "json, name=switchPorts", elemType: UpdateNetworkSwitchLinkAggregationRequestBodySwitchPorts })
   switchPorts?: UpdateNetworkSwitchLinkAggregationRequestBodySwitchPorts[];
 
-  @Metadata({ data: "json, name=switchProfilePorts", elemType: operations.UpdateNetworkSwitchLinkAggregationRequestBodySwitchProfilePorts })
+  @SpeakeasyMetadata({ data: "json, name=switchProfilePorts", elemType: UpdateNetworkSwitchLinkAggregationRequestBodySwitchProfilePorts })
   switchProfilePorts?: UpdateNetworkSwitchLinkAggregationRequestBodySwitchProfilePorts[];
 }
 
 
 export class UpdateNetworkSwitchLinkAggregationRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateNetworkSwitchLinkAggregationPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: UpdateNetworkSwitchLinkAggregationRequestBody;
 }
 
 
 export class UpdateNetworkSwitchLinkAggregationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateNetworkSwitchLinkAggregation200ApplicationJsonObject?: Map<string, any>;
 }

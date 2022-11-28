@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { BigQueryConfig } from "./bigqueryconfig";
 import { DeadLetterPolicy } from "./deadletterpolicy";
 import { ExpirationPolicy } from "./expirationpolicy";

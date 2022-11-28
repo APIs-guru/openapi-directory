@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ParquetVersionValueEnum(str, Enum):
     PARQUET_1_0 = "parquet-1-0"

@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class SslConfiguration:
-    certificate: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Certificate' }})
-    chain: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Chain' }})
-    private_key: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PrivateKey' }})
+    r"""SslConfiguration
+    Describes an app's SSL configuration.
+    """
+    
+    certificate: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Certificate') }})
+    private_key: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('PrivateKey') }})
+    chain: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Chain') }})
     

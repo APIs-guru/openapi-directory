@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RunJobFlowOutput
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  The result of the <a>RunJobFlow</a> operation. 
 **/
 export class RunJobFlowOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClusterArn" })
+  @SpeakeasyMetadata({ data: "json, name=ClusterArn" })
   clusterArn?: string;
 
-  @Metadata({ data: "json, name=JobFlowId" })
+  @SpeakeasyMetadata({ data: "json, name=JobFlowId" })
   jobFlowId?: string;
 }

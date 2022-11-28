@@ -1,5 +1,7 @@
 package shared
 
+// Schedule
+// Transfers can be scheduled to recur or to run just once.
 type Schedule struct {
 	EndTimeOfDay      *TimeOfDay `json:"endTimeOfDay,omitempty"`
 	RepeatInterval    *string    `json:"repeatInterval,omitempty"`

@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetSubscriptionDefinitionPathParams:
-    subscription_definition_id: str = field(default=None, metadata={'path_param': { 'field_name': 'SubscriptionDefinitionId', 'style': 'simple', 'explode': False }})
+    subscription_definition_id: str = field(metadata={'path_param': { 'field_name': 'SubscriptionDefinitionId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,14 +24,14 @@ class GetSubscriptionDefinitionHeaders:
 
 @dataclass
 class GetSubscriptionDefinitionRequest:
-    path_params: GetSubscriptionDefinitionPathParams = field(default=None)
-    headers: GetSubscriptionDefinitionHeaders = field(default=None)
+    headers: GetSubscriptionDefinitionHeaders = field()
+    path_params: GetSubscriptionDefinitionPathParams = field()
     
 
 @dataclass
 class GetSubscriptionDefinitionResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_subscription_definition_response: Optional[shared.GetSubscriptionDefinitionResponse] = field(default=None)
-    status_code: int = field(default=None)
     

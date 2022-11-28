@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SlideProperties } from "./slideproperties";
+
 
 
 // UpdateSlidePropertiesRequest
@@ -7,12 +8,12 @@ import { SlideProperties } from "./slideproperties";
  * Updates the properties of a Slide.
 **/
 export class UpdateSlidePropertiesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fields" })
+  @SpeakeasyMetadata({ data: "json, name=fields" })
   fields?: string;
 
-  @Metadata({ data: "json, name=objectId" })
+  @SpeakeasyMetadata({ data: "json, name=objectId" })
   objectId?: string;
 
-  @Metadata({ data: "json, name=slideProperties" })
+  @SpeakeasyMetadata({ data: "json, name=slideProperties" })
   slideProperties?: SlideProperties;
 }

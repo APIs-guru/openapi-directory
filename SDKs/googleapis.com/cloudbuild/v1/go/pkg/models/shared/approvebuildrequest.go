@@ -1,5 +1,7 @@
 package shared
 
-type ApproveBuildRequest struct {
-	ApprovalResult *ApprovalResult `json:"approvalResult,omitempty"`
+// ApproveBuildRequestInput
+// Request to approve or reject a pending build.
+type ApproveBuildRequestInput struct {
+	ApprovalResult *ApprovalResultInput `json:"approvalResult,omitempty"`
 }

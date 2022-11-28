@@ -75,7 +75,6 @@ from .servicetransfer import *
 from .sshkey import *
 from .sshkeyrequest import *
 from .stackscript import *
-from .status_enum import *
 from .supportticket import *
 from .supportticketreply import *
 from .supportticketrequest import *

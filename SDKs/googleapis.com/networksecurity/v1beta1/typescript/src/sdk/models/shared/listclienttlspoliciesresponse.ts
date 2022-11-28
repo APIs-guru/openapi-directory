@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ClientTlsPolicy } from "./clienttlspolicy";
+
 
 
 // ListClientTlsPoliciesResponse
@@ -8,9 +8,9 @@ import { ClientTlsPolicy } from "./clienttlspolicy";
  * Response returned by the ListClientTlsPolicies method.
 **/
 export class ListClientTlsPoliciesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clientTlsPolicies", elemType: shared.ClientTlsPolicy })
+  @SpeakeasyMetadata({ data: "json, name=clientTlsPolicies", elemType: ClientTlsPolicy })
   clientTlsPolicies?: ClientTlsPolicy[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

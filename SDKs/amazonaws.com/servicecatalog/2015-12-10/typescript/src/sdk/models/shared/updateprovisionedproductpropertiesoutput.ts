@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RecordStatusEnum } from "./recordstatusenum";
 
 
+
 export class UpdateProvisionedProductPropertiesOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ProvisionedProductId" })
+  @SpeakeasyMetadata({ data: "json, name=ProvisionedProductId" })
   provisionedProductId?: string;
 
-  @Metadata({ data: "json, name=ProvisionedProductProperties" })
+  @SpeakeasyMetadata({ data: "json, name=ProvisionedProductProperties" })
   provisionedProductProperties?: Map<string, string>;
 
-  @Metadata({ data: "json, name=RecordId" })
+  @SpeakeasyMetadata({ data: "json, name=RecordId" })
   recordId?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: RecordStatusEnum;
 }

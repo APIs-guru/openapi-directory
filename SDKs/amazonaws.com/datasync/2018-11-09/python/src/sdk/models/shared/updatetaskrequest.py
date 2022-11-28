@@ -1,20 +1,25 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import filterrule
-from . import filterrule
-from . import options
-from . import taskschedule
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateTaskRequest:
-    cloud_watch_log_group_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CloudWatchLogGroupArn' }})
-    excludes: Optional[List[filterrule.FilterRule]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Excludes' }})
-    includes: Optional[List[filterrule.FilterRule]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Includes' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
-    options: Optional[options.Options] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Options' }})
-    schedule: Optional[taskschedule.TaskSchedule] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Schedule' }})
-    task_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TaskArn' }})
+    r"""UpdateTaskRequest
+    UpdateTaskResponse
+    """
+    
+    task_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('TaskArn') }})
+    cloud_watch_log_group_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CloudWatchLogGroupArn') }})
+    excludes: Optional[List[FilterRule]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Excludes') }})
+    includes: Optional[List[FilterRule]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Includes') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
+    options: Optional[Options] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Options') }})
+    schedule: Optional[TaskSchedule] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Schedule') }})
     

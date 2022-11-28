@@ -1,6 +1,7 @@
 
 
+
 export enum PackageTypeEnum {
-    Zip = "Zip"
-,    Image = "Image"
+    Zip = "Zip",
+    Image = "Image"
 }

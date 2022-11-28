@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Dimension } from "./dimension";
 
+
 export enum TabStopAlignmentEnum {
-    TabStopAlignmentUnspecified = "TAB_STOP_ALIGNMENT_UNSPECIFIED"
-,    Start = "START"
-,    Center = "CENTER"
-,    End = "END"
+    TabStopAlignmentUnspecified = "TAB_STOP_ALIGNMENT_UNSPECIFIED",
+    Start = "START",
+    Center = "CENTER",
+    End = "END"
 }
 
 
@@ -14,9 +15,9 @@ export enum TabStopAlignmentEnum {
  * A tab stop within a paragraph.
 **/
 export class TabStop extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alignment" })
+  @SpeakeasyMetadata({ data: "json, name=alignment" })
   alignment?: TabStopAlignmentEnum;
 
-  @Metadata({ data: "json, name=offset" })
+  @SpeakeasyMetadata({ data: "json, name=offset" })
   offset?: Dimension;
 }

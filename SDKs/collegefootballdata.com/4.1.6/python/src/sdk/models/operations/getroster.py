@@ -11,12 +11,12 @@ class GetRosterQueryParams:
 
 @dataclass
 class GetRosterRequest:
-    query_params: GetRosterQueryParams = field(default=None)
+    query_params: GetRosterQueryParams = field()
     
 
 @dataclass
 class GetRosterResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     players: Optional[List[shared.Player]] = field(default=None)
-    status_code: int = field(default=None)
     

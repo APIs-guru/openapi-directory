@@ -1,16 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ExclusionPreview } from "./exclusionpreview";
 import { PreviewStatusEnum } from "./previewstatusenum";
 
 
+
 export class GetExclusionsPreviewResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=exclusionPreviews", elemType: shared.ExclusionPreview })
+  @SpeakeasyMetadata({ data: "json, name=exclusionPreviews", elemType: ExclusionPreview })
   exclusionPreviews?: ExclusionPreview[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=previewStatus" })
+  @SpeakeasyMetadata({ data: "json, name=previewStatus" })
   previewStatus: PreviewStatusEnum;
 }

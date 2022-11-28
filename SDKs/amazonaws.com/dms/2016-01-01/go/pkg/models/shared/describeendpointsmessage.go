@@ -1,5 +1,7 @@
 package shared
 
+// DescribeEndpointsMessage
+// <p/>
 type DescribeEndpointsMessage struct {
 	Filters    []Filter `json:"Filters,omitempty"`
 	Marker     *string  `json:"Marker,omitempty"`

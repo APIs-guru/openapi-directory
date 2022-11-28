@@ -1,5 +1,7 @@
 package shared
 
+// CustomAudio
+// A custom audio in a playlist, which is a type of playlist item.
 type CustomAudio struct {
 	Audio          *string `json:"audio,omitempty"`
 	AudioLengthSec *int64  `json:"audio_length_sec,omitempty"`

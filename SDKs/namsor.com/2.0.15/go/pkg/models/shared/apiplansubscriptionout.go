@@ -1,5 +1,7 @@
 package shared
 
+// APIPlanSubscriptionOut
+// The API Plan governing the subscription.
 type APIPlanSubscriptionOut struct {
 	APIKey             *string  `json:"apiKey,omitempty"`
 	Currency           *string  `json:"currency,omitempty"`

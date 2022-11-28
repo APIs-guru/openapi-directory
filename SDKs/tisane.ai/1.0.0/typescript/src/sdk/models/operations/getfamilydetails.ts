@@ -1,49 +1,50 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetFamilyDetailsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=id" })
   id?: string;
 }
 
 
-export class GetFamilyDetailsRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetFamilyDetailsQueryParams;
-}
-
-
 export class GetFamilyDetails200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=definition" })
+  @SpeakeasyMetadata({ data: "json, name=definition" })
   definition?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=hypernyms" })
+  @SpeakeasyMetadata({ data: "json, name=hypernyms" })
   hypernyms?: number[][];
 
-  @Metadata({ data: "json, name=permId" })
+  @SpeakeasyMetadata({ data: "json, name=permId" })
   permId?: string;
 
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId?: string;
 
-  @Metadata({ data: "json, name=wikidata" })
+  @SpeakeasyMetadata({ data: "json, name=wikidata" })
   wikidata?: string;
 
-  @Metadata({ data: "json, name=wordnet30" })
+  @SpeakeasyMetadata({ data: "json, name=wordnet30" })
   wordnet30?: string;
 }
 
 
+export class GetFamilyDetailsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetFamilyDetailsQueryParams;
+}
+
+
 export class GetFamilyDetailsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getFamilyDetails200ApplicationJsonObject?: GetFamilyDetails200ApplicationJson;
 }

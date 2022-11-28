@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostRemoveRoleFromDbInstanceActionEnum(str, Enum):
     REMOVE_ROLE_FROM_DB_INSTANCE = "RemoveRoleFromDBInstance"
@@ -10,8 +14,8 @@ class PostRemoveRoleFromDbInstanceVersionEnum(str, Enum):
 
 @dataclass
 class PostRemoveRoleFromDbInstanceQueryParams:
-    action: PostRemoveRoleFromDbInstanceActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostRemoveRoleFromDbInstanceVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostRemoveRoleFromDbInstanceActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostRemoveRoleFromDbInstanceVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostRemoveRoleFromDbInstanceHeaders:
 
 @dataclass
 class PostRemoveRoleFromDbInstanceRequest:
-    query_params: PostRemoveRoleFromDbInstanceQueryParams = field(default=None)
-    headers: PostRemoveRoleFromDbInstanceHeaders = field(default=None)
+    headers: PostRemoveRoleFromDbInstanceHeaders = field()
+    query_params: PostRemoveRoleFromDbInstanceQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostRemoveRoleFromDbInstanceResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

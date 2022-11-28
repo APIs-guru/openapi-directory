@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LightSettings } from "./lightsettings";
 export var AndroidNotificationNotificationPriorityEnum;
 (function (AndroidNotificationNotificationPriorityEnum) {
@@ -50,107 +50,107 @@ var AndroidNotification = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=body" }),
+        SpeakeasyMetadata({ data: "json, name=body" }),
         __metadata("design:type", String)
     ], AndroidNotification.prototype, "body", void 0);
     __decorate([
-        Metadata({ data: "json, name=bodyLocArgs" }),
+        SpeakeasyMetadata({ data: "json, name=bodyLocArgs" }),
         __metadata("design:type", Array)
     ], AndroidNotification.prototype, "bodyLocArgs", void 0);
     __decorate([
-        Metadata({ data: "json, name=bodyLocKey" }),
+        SpeakeasyMetadata({ data: "json, name=bodyLocKey" }),
         __metadata("design:type", String)
     ], AndroidNotification.prototype, "bodyLocKey", void 0);
     __decorate([
-        Metadata({ data: "json, name=bypassProxyNotification" }),
+        SpeakeasyMetadata({ data: "json, name=bypassProxyNotification" }),
         __metadata("design:type", Boolean)
     ], AndroidNotification.prototype, "bypassProxyNotification", void 0);
     __decorate([
-        Metadata({ data: "json, name=channelId" }),
+        SpeakeasyMetadata({ data: "json, name=channelId" }),
         __metadata("design:type", String)
     ], AndroidNotification.prototype, "channelId", void 0);
     __decorate([
-        Metadata({ data: "json, name=clickAction" }),
+        SpeakeasyMetadata({ data: "json, name=clickAction" }),
         __metadata("design:type", String)
     ], AndroidNotification.prototype, "clickAction", void 0);
     __decorate([
-        Metadata({ data: "json, name=color" }),
+        SpeakeasyMetadata({ data: "json, name=color" }),
         __metadata("design:type", String)
     ], AndroidNotification.prototype, "color", void 0);
     __decorate([
-        Metadata({ data: "json, name=defaultLightSettings" }),
+        SpeakeasyMetadata({ data: "json, name=defaultLightSettings" }),
         __metadata("design:type", Boolean)
     ], AndroidNotification.prototype, "defaultLightSettings", void 0);
     __decorate([
-        Metadata({ data: "json, name=defaultSound" }),
+        SpeakeasyMetadata({ data: "json, name=defaultSound" }),
         __metadata("design:type", Boolean)
     ], AndroidNotification.prototype, "defaultSound", void 0);
     __decorate([
-        Metadata({ data: "json, name=defaultVibrateTimings" }),
+        SpeakeasyMetadata({ data: "json, name=defaultVibrateTimings" }),
         __metadata("design:type", Boolean)
     ], AndroidNotification.prototype, "defaultVibrateTimings", void 0);
     __decorate([
-        Metadata({ data: "json, name=eventTime" }),
+        SpeakeasyMetadata({ data: "json, name=eventTime" }),
         __metadata("design:type", String)
     ], AndroidNotification.prototype, "eventTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=icon" }),
+        SpeakeasyMetadata({ data: "json, name=icon" }),
         __metadata("design:type", String)
     ], AndroidNotification.prototype, "icon", void 0);
     __decorate([
-        Metadata({ data: "json, name=image" }),
+        SpeakeasyMetadata({ data: "json, name=image" }),
         __metadata("design:type", String)
     ], AndroidNotification.prototype, "image", void 0);
     __decorate([
-        Metadata({ data: "json, name=lightSettings" }),
+        SpeakeasyMetadata({ data: "json, name=lightSettings" }),
         __metadata("design:type", LightSettings)
     ], AndroidNotification.prototype, "lightSettings", void 0);
     __decorate([
-        Metadata({ data: "json, name=localOnly" }),
+        SpeakeasyMetadata({ data: "json, name=localOnly" }),
         __metadata("design:type", Boolean)
     ], AndroidNotification.prototype, "localOnly", void 0);
     __decorate([
-        Metadata({ data: "json, name=notificationCount" }),
+        SpeakeasyMetadata({ data: "json, name=notificationCount" }),
         __metadata("design:type", Number)
     ], AndroidNotification.prototype, "notificationCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=notificationPriority" }),
+        SpeakeasyMetadata({ data: "json, name=notificationPriority" }),
         __metadata("design:type", String)
     ], AndroidNotification.prototype, "notificationPriority", void 0);
     __decorate([
-        Metadata({ data: "json, name=sound" }),
+        SpeakeasyMetadata({ data: "json, name=sound" }),
         __metadata("design:type", String)
     ], AndroidNotification.prototype, "sound", void 0);
     __decorate([
-        Metadata({ data: "json, name=sticky" }),
+        SpeakeasyMetadata({ data: "json, name=sticky" }),
         __metadata("design:type", Boolean)
     ], AndroidNotification.prototype, "sticky", void 0);
     __decorate([
-        Metadata({ data: "json, name=tag" }),
+        SpeakeasyMetadata({ data: "json, name=tag" }),
         __metadata("design:type", String)
     ], AndroidNotification.prototype, "tag", void 0);
     __decorate([
-        Metadata({ data: "json, name=ticker" }),
+        SpeakeasyMetadata({ data: "json, name=ticker" }),
         __metadata("design:type", String)
     ], AndroidNotification.prototype, "ticker", void 0);
     __decorate([
-        Metadata({ data: "json, name=title" }),
+        SpeakeasyMetadata({ data: "json, name=title" }),
         __metadata("design:type", String)
     ], AndroidNotification.prototype, "title", void 0);
     __decorate([
-        Metadata({ data: "json, name=titleLocArgs" }),
+        SpeakeasyMetadata({ data: "json, name=titleLocArgs" }),
         __metadata("design:type", Array)
     ], AndroidNotification.prototype, "titleLocArgs", void 0);
     __decorate([
-        Metadata({ data: "json, name=titleLocKey" }),
+        SpeakeasyMetadata({ data: "json, name=titleLocKey" }),
         __metadata("design:type", String)
     ], AndroidNotification.prototype, "titleLocKey", void 0);
     __decorate([
-        Metadata({ data: "json, name=vibrateTimings" }),
+        SpeakeasyMetadata({ data: "json, name=vibrateTimings" }),
         __metadata("design:type", Array)
     ], AndroidNotification.prototype, "vibrateTimings", void 0);
     __decorate([
-        Metadata({ data: "json, name=visibility" }),
+        SpeakeasyMetadata({ data: "json, name=visibility" }),
         __metadata("design:type", String)
     ], AndroidNotification.prototype, "visibility", void 0);
     return AndroidNotification;

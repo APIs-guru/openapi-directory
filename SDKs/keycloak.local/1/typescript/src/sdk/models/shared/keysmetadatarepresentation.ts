@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { KeysMetadataRepresentationKeyMetadataRepresentation } from "./keysmetadatarepresentationkeymetadatarepresentation";
 
 
+
 export class KeysMetadataRepresentation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=active" })
+  @SpeakeasyMetadata({ data: "json, name=active" })
   active?: Map<string, any>;
 
-  @Metadata({ data: "json, name=keys", elemType: shared.KeysMetadataRepresentationKeyMetadataRepresentation })
+  @SpeakeasyMetadata({ data: "json, name=keys", elemType: KeysMetadataRepresentationKeyMetadataRepresentation })
   keys?: KeysMetadataRepresentationKeyMetadataRepresentation[];
 }

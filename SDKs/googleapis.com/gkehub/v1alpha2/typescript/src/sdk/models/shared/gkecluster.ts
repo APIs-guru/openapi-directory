@@ -1,4 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
+
+
+// GkeClusterInput
+/** 
+ * GkeCluster contains information specific to GKE clusters.
+**/
+export class GkeClusterInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=resourceLink" })
+  resourceLink?: string;
+}
 
 
 // GkeCluster
@@ -6,9 +17,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * GkeCluster contains information specific to GKE clusters.
 **/
 export class GkeCluster extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clusterMissing" })
+  @SpeakeasyMetadata({ data: "json, name=clusterMissing" })
   clusterMissing?: boolean;
 
-  @Metadata({ data: "json, name=resourceLink" })
+  @SpeakeasyMetadata({ data: "json, name=resourceLink" })
   resourceLink?: string;
 }

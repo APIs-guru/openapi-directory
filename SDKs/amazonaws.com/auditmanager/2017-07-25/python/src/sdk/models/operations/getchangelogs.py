@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetChangeLogsPathParams:
-    assessment_id: str = field(default=None, metadata={'path_param': { 'field_name': 'assessmentId', 'style': 'simple', 'explode': False }})
+    assessment_id: str = field(metadata={'path_param': { 'field_name': 'assessmentId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -29,18 +32,18 @@ class GetChangeLogsHeaders:
 
 @dataclass
 class GetChangeLogsRequest:
-    path_params: GetChangeLogsPathParams = field(default=None)
-    query_params: GetChangeLogsQueryParams = field(default=None)
-    headers: GetChangeLogsHeaders = field(default=None)
+    headers: GetChangeLogsHeaders = field()
+    path_params: GetChangeLogsPathParams = field()
+    query_params: GetChangeLogsQueryParams = field()
     
 
 @dataclass
 class GetChangeLogsResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_change_logs_response: Optional[shared.GetChangeLogsResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

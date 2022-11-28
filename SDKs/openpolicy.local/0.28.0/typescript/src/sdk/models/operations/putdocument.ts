@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PutDocumentPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=path" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=path" })
   path: string;
 }
 
 
 export class PutDocumentHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=If-None-Match" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=If-None-Match" })
   ifNoneMatch?: string;
 }
 
 
 export class PutDocumentRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PutDocumentPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: PutDocumentHeaders;
 }
 
 
 export class PutDocumentResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   fourHundred?: shared.FourHundred;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   fourHundredAndFour?: shared.FourHundredAndFour;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

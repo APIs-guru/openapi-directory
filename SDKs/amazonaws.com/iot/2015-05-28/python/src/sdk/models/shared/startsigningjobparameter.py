@@ -1,14 +1,18 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import destination
-from . import signingprofileparameter
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class StartSigningJobParameter:
-    destination: Optional[destination.Destination] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'destination' }})
-    signing_profile_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'signingProfileName' }})
-    signing_profile_parameter: Optional[signingprofileparameter.SigningProfileParameter] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'signingProfileParameter' }})
+    r"""StartSigningJobParameter
+    Information required to start a signing job.
+    """
+    
+    destination: Optional[Destination] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('destination') }})
+    signing_profile_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('signingProfileName') }})
+    signing_profile_parameter: Optional[SigningProfileParameter] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('signingProfileParameter') }})
     

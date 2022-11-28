@@ -10,8 +10,8 @@ class InteractionsSetRestrictionsForAuthenticatedUserRequest:
 
 @dataclass
 class InteractionsSetRestrictionsForAuthenticatedUserResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     interaction_limit_response: Optional[shared.InteractionLimitResponse] = field(default=None)
     validation_error: Optional[shared.ValidationError] = field(default=None)
     

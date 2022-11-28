@@ -1,5 +1,7 @@
 package shared
 
+// NpmPackage
+// NpmPackage represents an npm artifact.
 type NpmPackage struct {
 	CreateTime  *string  `json:"createTime,omitempty"`
 	Name        *string  `json:"name,omitempty"`

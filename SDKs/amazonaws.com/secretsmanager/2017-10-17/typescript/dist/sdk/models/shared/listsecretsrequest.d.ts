@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Filter } from "./filter";
 import { SortOrderTypeEnum } from "./sortordertypeenum";
 export declare class ListSecretsRequest extends SpeakeasyBase {

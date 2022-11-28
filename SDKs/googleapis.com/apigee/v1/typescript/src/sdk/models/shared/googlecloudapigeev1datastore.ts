@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudApigeeV1DatastoreConfig } from "./googlecloudapigeev1datastoreconfig";
+
 
 
 // GoogleCloudApigeeV1Datastore
@@ -7,24 +8,40 @@ import { GoogleCloudApigeeV1DatastoreConfig } from "./googlecloudapigeev1datasto
  * The data store defines the connection to export data repository (Cloud Storage, BigQuery), including the credentials used to access the data repository.
 **/
 export class GoogleCloudApigeeV1Datastore extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=datastoreConfig" })
+  @SpeakeasyMetadata({ data: "json, name=datastoreConfig" })
   datastoreConfig?: GoogleCloudApigeeV1DatastoreConfig;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=lastUpdateTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdateTime" })
   lastUpdateTime?: string;
 
-  @Metadata({ data: "json, name=org" })
+  @SpeakeasyMetadata({ data: "json, name=org" })
   org?: string;
 
-  @Metadata({ data: "json, name=self" })
+  @SpeakeasyMetadata({ data: "json, name=self" })
   self?: string;
 
-  @Metadata({ data: "json, name=targetType" })
+  @SpeakeasyMetadata({ data: "json, name=targetType" })
+  targetType?: string;
+}
+
+
+// GoogleCloudApigeeV1DatastoreInput
+/** 
+ * The data store defines the connection to export data repository (Cloud Storage, BigQuery), including the credentials used to access the data repository.
+**/
+export class GoogleCloudApigeeV1DatastoreInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=datastoreConfig" })
+  datastoreConfig?: GoogleCloudApigeeV1DatastoreConfig;
+
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
+  displayName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=targetType" })
   targetType?: string;
 }

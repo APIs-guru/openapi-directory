@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GenerateDataKeyResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CiphertextBlob" })
+  @SpeakeasyMetadata({ data: "json, name=CiphertextBlob" })
   ciphertextBlob?: string;
 
-  @Metadata({ data: "json, name=KeyId" })
+  @SpeakeasyMetadata({ data: "json, name=KeyId" })
   keyId?: string;
 
-  @Metadata({ data: "json, name=Plaintext" })
+  @SpeakeasyMetadata({ data: "json, name=Plaintext" })
   plaintext?: string;
 }

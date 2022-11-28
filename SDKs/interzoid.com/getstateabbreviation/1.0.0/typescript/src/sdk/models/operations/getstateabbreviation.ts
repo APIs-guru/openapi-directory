@@ -1,43 +1,44 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetstateabbreviationQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=license" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=license" })
   license: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=state" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=state" })
   state: string;
 }
 
 
-export class GetstateabbreviationRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetstateabbreviationQueryParams;
-}
-
-
 export class Getstateabbreviation200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Abbreviation" })
+  @SpeakeasyMetadata({ data: "json, name=Abbreviation" })
   abbreviation?: string;
 
-  @Metadata({ data: "json, name=Code" })
+  @SpeakeasyMetadata({ data: "json, name=Code" })
   code?: string;
 
-  @Metadata({ data: "json, name=Credits" })
+  @SpeakeasyMetadata({ data: "json, name=Credits" })
   credits?: string;
 
-  @Metadata({ data: "json, name=State" })
+  @SpeakeasyMetadata({ data: "json, name=State" })
   state?: string;
 }
 
 
+export class GetstateabbreviationRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetstateabbreviationQueryParams;
+}
+
+
 export class GetstateabbreviationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getstateabbreviation200ApplicationJsonObject?: Getstateabbreviation200ApplicationJson;
 }

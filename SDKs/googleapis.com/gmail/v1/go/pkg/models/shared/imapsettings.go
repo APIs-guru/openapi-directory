@@ -9,6 +9,8 @@ const (
 	ImapSettingsExpungeBehaviorEnumDeleteForever              ImapSettingsExpungeBehaviorEnum = "deleteForever"
 )
 
+// ImapSettings
+// IMAP settings for an account.
 type ImapSettings struct {
 	AutoExpunge     *bool                            `json:"autoExpunge,omitempty"`
 	Enabled         *bool                            `json:"enabled,omitempty"`

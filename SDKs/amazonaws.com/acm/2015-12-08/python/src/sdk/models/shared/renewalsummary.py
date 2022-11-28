@@ -1,19 +1,23 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import domainvalidation
-from . import renewalstatus_enum
-from . import failurereason_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class RenewalSummary:
-    domain_validation_options: List[domainvalidation.DomainValidation] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DomainValidationOptions' }})
-    renewal_status: renewalstatus_enum.RenewalStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RenewalStatus' }})
-    renewal_status_reason: Optional[failurereason_enum.FailureReasonEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RenewalStatusReason' }})
-    updated_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'UpdatedAt', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    r"""RenewalSummary
+    Contains information about the status of ACM's <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html\">managed renewal</a> for the certificate. This structure exists only when the certificate type is <code>AMAZON_ISSUED</code>.
+    """
+    
+    domain_validation_options: List[DomainValidation] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('DomainValidationOptions') }})
+    renewal_status: RenewalStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('RenewalStatus') }})
+    updated_at: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('UpdatedAt'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    renewal_status_reason: Optional[FailureReasonEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('RenewalStatusReason') }})
     

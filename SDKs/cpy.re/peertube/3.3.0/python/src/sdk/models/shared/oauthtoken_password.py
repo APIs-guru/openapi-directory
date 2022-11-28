@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class OAuthTokenPasswordGrantTypeEnum(str, Enum):
     PASSWORD = "password"
@@ -8,9 +8,9 @@ class OAuthTokenPasswordGrantTypeEnum(str, Enum):
 
 @dataclass
 class OAuthTokenPassword:
-    client_id: str = field(default=None, metadata={'form': { 'field_name': 'client_id' }})
-    client_secret: str = field(default=None, metadata={'form': { 'field_name': 'client_secret' }})
-    grant_type: OAuthTokenPasswordGrantTypeEnum = field(default=None, metadata={'form': { 'field_name': 'grant_type' }})
-    password: str = field(default=None, metadata={'form': { 'field_name': 'password' }})
-    username: str = field(default=None, metadata={'form': { 'field_name': 'username' }})
+    client_id: str = field(metadata={'form': { 'field_name': 'client_id' }})
+    client_secret: str = field(metadata={'form': { 'field_name': 'client_secret' }})
+    grant_type: OAuthTokenPasswordGrantTypeEnum = field(metadata={'form': { 'field_name': 'grant_type' }})
+    password: str = field(metadata={'form': { 'field_name': 'password' }})
+    username: str = field(metadata={'form': { 'field_name': 'username' }})
     

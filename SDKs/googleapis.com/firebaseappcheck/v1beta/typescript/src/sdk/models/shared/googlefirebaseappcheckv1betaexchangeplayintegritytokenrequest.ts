@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleFirebaseAppcheckV1betaExchangePlayIntegrityTokenRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request message for the ExchangePlayIntegrityToken method.
 **/
 export class GoogleFirebaseAppcheckV1betaExchangePlayIntegrityTokenRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=playIntegrityToken" })
+  @SpeakeasyMetadata({ data: "json, name=playIntegrityToken" })
   playIntegrityToken?: string;
 }

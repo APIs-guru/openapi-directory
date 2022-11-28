@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Commit } from "./commit";
+
 
 
 // GetCommitOutput
@@ -7,6 +8,6 @@ import { Commit } from "./commit";
  * Represents the output of a get commit operation.
 **/
 export class GetCommitOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=commit" })
+  @SpeakeasyMetadata({ data: "json, name=commit" })
   commit: Commit;
 }

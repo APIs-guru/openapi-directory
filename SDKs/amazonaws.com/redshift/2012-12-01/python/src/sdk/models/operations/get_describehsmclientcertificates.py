@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetDescribeHsmClientCertificatesActionEnum(str, Enum):
     DESCRIBE_HSM_CLIENT_CERTIFICATES = "DescribeHsmClientCertificates"
@@ -10,13 +14,13 @@ class GetDescribeHsmClientCertificatesVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeHsmClientCertificatesQueryParams:
-    action: GetDescribeHsmClientCertificatesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribeHsmClientCertificatesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDescribeHsmClientCertificatesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     hsm_client_certificate_identifier: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'HsmClientCertificateIdentifier', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
     max_records: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxRecords', 'style': 'form', 'explode': True }})
     tag_keys: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'TagKeys', 'style': 'form', 'explode': True }})
     tag_values: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'TagValues', 'style': 'form', 'explode': True }})
-    version: GetDescribeHsmClientCertificatesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -32,13 +36,13 @@ class GetDescribeHsmClientCertificatesHeaders:
 
 @dataclass
 class GetDescribeHsmClientCertificatesRequest:
-    query_params: GetDescribeHsmClientCertificatesQueryParams = field(default=None)
-    headers: GetDescribeHsmClientCertificatesHeaders = field(default=None)
+    headers: GetDescribeHsmClientCertificatesHeaders = field()
+    query_params: GetDescribeHsmClientCertificatesQueryParams = field()
     
 
 @dataclass
 class GetDescribeHsmClientCertificatesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class StreamingSessionStatusCodeEnum(str, Enum):
     STREAMING_SESSION_READY = "STREAMING_SESSION_READY"

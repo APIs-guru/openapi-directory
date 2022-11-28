@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ElasticsearchSettings
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides information that defines an Elasticsearch endpoint.
 **/
 export class ElasticsearchSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EndpointUri" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointUri" })
   endpointUri: string;
 
-  @Metadata({ data: "json, name=ErrorRetryDuration" })
+  @SpeakeasyMetadata({ data: "json, name=ErrorRetryDuration" })
   errorRetryDuration?: number;
 
-  @Metadata({ data: "json, name=FullLoadErrorPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=FullLoadErrorPercentage" })
   fullLoadErrorPercentage?: number;
 
-  @Metadata({ data: "json, name=ServiceAccessRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceAccessRoleArn" })
   serviceAccessRoleArn: string;
 }

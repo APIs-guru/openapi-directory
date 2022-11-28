@@ -18,7 +18,7 @@ class PostConsumerV1CustomersRequest:
 
 @dataclass
 class PostConsumerV1CustomersResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     customer_view_model: Optional[shared.CustomerViewModel] = field(default=None)
-    status_code: int = field(default=None)
     

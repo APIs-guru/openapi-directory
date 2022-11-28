@@ -1,28 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SimpleUser } from "./simpleuser";
 
 
+
 export class GistSimpleFiles extends SpeakeasyBase {
-  @Metadata({ data: "json, name=content" })
+  @SpeakeasyMetadata({ data: "json, name=content" })
   content?: string;
 
-  @Metadata({ data: "json, name=filename" })
+  @SpeakeasyMetadata({ data: "json, name=filename" })
   filename?: string;
 
-  @Metadata({ data: "json, name=language" })
+  @SpeakeasyMetadata({ data: "json, name=language" })
   language?: string;
 
-  @Metadata({ data: "json, name=raw_url" })
+  @SpeakeasyMetadata({ data: "json, name=raw_url" })
   rawUrl?: string;
 
-  @Metadata({ data: "json, name=size" })
+  @SpeakeasyMetadata({ data: "json, name=size" })
   size?: number;
 
-  @Metadata({ data: "json, name=truncated" })
+  @SpeakeasyMetadata({ data: "json, name=truncated" })
   truncated?: boolean;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }
 
@@ -32,57 +32,57 @@ export class GistSimpleFiles extends SpeakeasyBase {
  * Gist Simple
 **/
 export class GistSimple extends SpeakeasyBase {
-  @Metadata({ data: "json, name=comments" })
+  @SpeakeasyMetadata({ data: "json, name=comments" })
   comments?: number;
 
-  @Metadata({ data: "json, name=comments_url" })
+  @SpeakeasyMetadata({ data: "json, name=comments_url" })
   commentsUrl?: string;
 
-  @Metadata({ data: "json, name=commits_url" })
+  @SpeakeasyMetadata({ data: "json, name=commits_url" })
   commitsUrl?: string;
 
-  @Metadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata({ data: "json, name=created_at" })
   createdAt?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=files", elemType: shared.GistSimpleFiles })
+  @SpeakeasyMetadata({ data: "json, name=files", elemType: GistSimpleFiles })
   files?: Map<string, GistSimpleFiles>;
 
-  @Metadata({ data: "json, name=forks_url" })
+  @SpeakeasyMetadata({ data: "json, name=forks_url" })
   forksUrl?: string;
 
-  @Metadata({ data: "json, name=git_pull_url" })
+  @SpeakeasyMetadata({ data: "json, name=git_pull_url" })
   gitPullUrl?: string;
 
-  @Metadata({ data: "json, name=git_push_url" })
+  @SpeakeasyMetadata({ data: "json, name=git_push_url" })
   gitPushUrl?: string;
 
-  @Metadata({ data: "json, name=html_url" })
+  @SpeakeasyMetadata({ data: "json, name=html_url" })
   htmlUrl?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=node_id" })
+  @SpeakeasyMetadata({ data: "json, name=node_id" })
   nodeId?: string;
 
-  @Metadata({ data: "json, name=owner" })
+  @SpeakeasyMetadata({ data: "json, name=owner" })
   owner?: SimpleUser;
 
-  @Metadata({ data: "json, name=public" })
+  @SpeakeasyMetadata({ data: "json, name=public" })
   public?: boolean;
 
-  @Metadata({ data: "json, name=truncated" })
+  @SpeakeasyMetadata({ data: "json, name=truncated" })
   truncated?: boolean;
 
-  @Metadata({ data: "json, name=updated_at" })
+  @SpeakeasyMetadata({ data: "json, name=updated_at" })
   updatedAt?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 
-  @Metadata({ data: "json, name=user" })
+  @SpeakeasyMetadata({ data: "json, name=user" })
   user?: string;
 }

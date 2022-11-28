@@ -1,19 +1,44 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowV2ArticleSuggestionModelMetadata } from "./googleclouddialogflowv2articlesuggestionmodelmetadata";
 import { GoogleCloudDialogflowV2InputDataset } from "./googleclouddialogflowv2inputdataset";
 import { GoogleCloudDialogflowV2SmartReplyModelMetadata } from "./googleclouddialogflowv2smartreplymodelmetadata";
 
+
 export enum GoogleCloudDialogflowV2ConversationModelStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Creating = "CREATING"
-,    Undeployed = "UNDEPLOYED"
-,    Deploying = "DEPLOYING"
-,    Deployed = "DEPLOYED"
-,    Undeploying = "UNDEPLOYING"
-,    Deleting = "DELETING"
-,    Failed = "FAILED"
-,    Pending = "PENDING"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Creating = "CREATING",
+    Undeployed = "UNDEPLOYED",
+    Deploying = "DEPLOYING",
+    Deployed = "DEPLOYED",
+    Undeploying = "UNDEPLOYING",
+    Deleting = "DELETING",
+    Failed = "FAILED",
+    Pending = "PENDING"
+}
+
+
+// GoogleCloudDialogflowV2ConversationModelInput
+/** 
+ * Represents a conversation model.
+**/
+export class GoogleCloudDialogflowV2ConversationModelInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=articleSuggestionModelMetadata" })
+  articleSuggestionModelMetadata?: GoogleCloudDialogflowV2ArticleSuggestionModelMetadata;
+
+  @SpeakeasyMetadata({ data: "json, name=datasets", elemType: GoogleCloudDialogflowV2InputDataset })
+  datasets?: GoogleCloudDialogflowV2InputDataset[];
+
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
+  displayName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=languageCode" })
+  languageCode?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=smartReplyModelMetadata" })
+  smartReplyModelMetadata?: GoogleCloudDialogflowV2SmartReplyModelMetadata;
 }
 
 
@@ -22,27 +47,27 @@ export enum GoogleCloudDialogflowV2ConversationModelStateEnum {
  * Represents a conversation model.
 **/
 export class GoogleCloudDialogflowV2ConversationModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=articleSuggestionModelMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=articleSuggestionModelMetadata" })
   articleSuggestionModelMetadata?: GoogleCloudDialogflowV2ArticleSuggestionModelMetadata;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=datasets", elemType: shared.GoogleCloudDialogflowV2InputDataset })
+  @SpeakeasyMetadata({ data: "json, name=datasets", elemType: GoogleCloudDialogflowV2InputDataset })
   datasets?: GoogleCloudDialogflowV2InputDataset[];
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=languageCode" })
+  @SpeakeasyMetadata({ data: "json, name=languageCode" })
   languageCode?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=smartReplyModelMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=smartReplyModelMetadata" })
   smartReplyModelMetadata?: GoogleCloudDialogflowV2SmartReplyModelMetadata;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: GoogleCloudDialogflowV2ConversationModelStateEnum;
 }

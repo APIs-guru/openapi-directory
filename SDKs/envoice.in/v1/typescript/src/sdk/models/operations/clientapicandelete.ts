@@ -1,43 +1,44 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ClientApiCanDeleteQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=id" })
   id: number;
 }
 
 
 export class ClientApiCanDeleteHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=x-auth-key" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-auth-key" })
   xAuthKey: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=x-auth-secret" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-auth-secret" })
   xAuthSecret: string;
 }
 
 
 export class ClientApiCanDeleteRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ClientApiCanDeleteQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: ClientApiCanDeleteHeaders;
 }
 
 
 export class ClientApiCanDeleteResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   clientApiCanDelete200ApplicationJsonBoolean?: boolean;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   clientApiCanDelete200TextJsonBoolean?: boolean;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

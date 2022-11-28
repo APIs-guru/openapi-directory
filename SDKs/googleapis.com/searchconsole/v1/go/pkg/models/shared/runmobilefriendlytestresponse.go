@@ -8,6 +8,8 @@ const (
 	RunMobileFriendlyTestResponseMobileFriendlinessEnumNotMobileFriendly                   RunMobileFriendlyTestResponseMobileFriendlinessEnum = "NOT_MOBILE_FRIENDLY"
 )
 
+// RunMobileFriendlyTestResponse
+// Mobile-friendly test response, including mobile-friendly issues and resource issues.
 type RunMobileFriendlyTestResponse struct {
 	MobileFriendliness   *RunMobileFriendlyTestResponseMobileFriendlinessEnum `json:"mobileFriendliness,omitempty"`
 	MobileFriendlyIssues []MobileFriendlyIssue                                `json:"mobileFriendlyIssues,omitempty"`

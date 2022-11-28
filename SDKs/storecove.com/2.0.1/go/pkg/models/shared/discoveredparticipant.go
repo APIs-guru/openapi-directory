@@ -7,6 +7,8 @@ const (
 	DiscoveredParticipantCodeEnumNok DiscoveredParticipantCodeEnum = "NOK"
 )
 
+// DiscoveredParticipant
+// A public identifier for this customer.
 type DiscoveredParticipant struct {
 	Code  *DiscoveredParticipantCodeEnum `json:"code,omitempty"`
 	Email *bool                          `json:"email,omitempty"`

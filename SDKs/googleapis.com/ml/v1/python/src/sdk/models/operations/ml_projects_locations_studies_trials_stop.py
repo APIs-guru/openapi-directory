@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class MlProjectsLocationsStudiesTrialsStopPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class MlProjectsLocationsStudiesTrialsStopQueryParams:
 
 @dataclass
 class MlProjectsLocationsStudiesTrialsStopSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class MlProjectsLocationsStudiesTrialsStopRequest:
-    path_params: MlProjectsLocationsStudiesTrialsStopPathParams = field(default=None)
-    query_params: MlProjectsLocationsStudiesTrialsStopQueryParams = field(default=None)
+    path_params: MlProjectsLocationsStudiesTrialsStopPathParams = field()
+    query_params: MlProjectsLocationsStudiesTrialsStopQueryParams = field()
+    security: MlProjectsLocationsStudiesTrialsStopSecurity = field()
     request: Optional[dict[str, Any]] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: MlProjectsLocationsStudiesTrialsStopSecurity = field(default=None)
     
 
 @dataclass
 class MlProjectsLocationsStudiesTrialsStopResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_ml_v1_trial: Optional[shared.GoogleCloudMlV1Trial] = field(default=None)
-    status_code: int = field(default=None)
     

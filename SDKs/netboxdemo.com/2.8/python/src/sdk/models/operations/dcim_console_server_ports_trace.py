@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class DcimConsoleServerPortsTracePathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DcimConsoleServerPortsTraceRequest:
-    path_params: DcimConsoleServerPortsTracePathParams = field(default=None)
+    path_params: DcimConsoleServerPortsTracePathParams = field()
     
 
 @dataclass
 class DcimConsoleServerPortsTraceResponse:
+    content_type: str = field()
+    status_code: int = field()
     console_server_port: Optional[shared.ConsoleServerPort] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

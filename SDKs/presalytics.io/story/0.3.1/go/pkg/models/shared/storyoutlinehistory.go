@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// StoryOutlineHistory
+// A revision repository for story outlines
 type StoryOutlineHistory struct {
 	CollaboratorUserID *string    `json:"collaborator_user_id,omitempty"`
 	CreatedAt          *time.Time `json:"created_at,omitempty"`

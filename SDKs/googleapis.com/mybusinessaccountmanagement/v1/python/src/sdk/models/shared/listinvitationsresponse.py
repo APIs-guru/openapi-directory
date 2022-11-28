@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import invitation
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListInvitationsResponse:
-    invitations: Optional[List[invitation.Invitation]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'invitations' }})
+    r"""ListInvitationsResponse
+    Response message for AccessControl.ListInvitations.
+    """
+    
+    invitations: Optional[List[Invitation]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('invitations') }})
     

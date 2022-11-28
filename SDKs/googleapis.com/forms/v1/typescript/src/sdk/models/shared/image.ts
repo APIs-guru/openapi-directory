@@ -1,5 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MediaProperties } from "./mediaproperties";
+
+
+
+// ImageInput
+/** 
+ * Data representing an image.
+**/
+export class ImageInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=altText" })
+  altText?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=properties" })
+  properties?: MediaProperties;
+
+  @SpeakeasyMetadata({ data: "json, name=sourceUri" })
+  sourceUri?: string;
+}
 
 
 // Image
@@ -7,15 +24,15 @@ import { MediaProperties } from "./mediaproperties";
  * Data representing an image.
 **/
 export class Image extends SpeakeasyBase {
-  @Metadata({ data: "json, name=altText" })
+  @SpeakeasyMetadata({ data: "json, name=altText" })
   altText?: string;
 
-  @Metadata({ data: "json, name=contentUri" })
+  @SpeakeasyMetadata({ data: "json, name=contentUri" })
   contentUri?: string;
 
-  @Metadata({ data: "json, name=properties" })
+  @SpeakeasyMetadata({ data: "json, name=properties" })
   properties?: MediaProperties;
 
-  @Metadata({ data: "json, name=sourceUri" })
+  @SpeakeasyMetadata({ data: "json, name=sourceUri" })
   sourceUri?: string;
 }

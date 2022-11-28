@@ -11,14 +11,14 @@ class UsersListEmailsForAuthenticatedQueryParams:
 
 @dataclass
 class UsersListEmailsForAuthenticatedRequest:
-    query_params: UsersListEmailsForAuthenticatedQueryParams = field(default=None)
+    query_params: UsersListEmailsForAuthenticatedQueryParams = field()
     
 
 @dataclass
 class UsersListEmailsForAuthenticatedResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     basic_error: Optional[shared.BasicError] = field(default=None)
     emails: Optional[List[shared.Email]] = field(default=None)
     

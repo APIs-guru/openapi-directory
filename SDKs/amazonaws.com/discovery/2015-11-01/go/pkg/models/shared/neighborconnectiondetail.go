@@ -1,5 +1,7 @@
 package shared
 
+// NeighborConnectionDetail
+// Details about neighboring servers.
 type NeighborConnectionDetail struct {
 	ConnectionsCount    int64   `json:"connectionsCount"`
 	DestinationPort     *int64  `json:"destinationPort,omitempty"`

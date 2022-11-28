@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum NfsExportPermissionsEnum {
-    PermissionsUnspecified = "PERMISSIONS_UNSPECIFIED"
-,    ReadOnly = "READ_ONLY"
-,    ReadWrite = "READ_WRITE"
+    PermissionsUnspecified = "PERMISSIONS_UNSPECIFIED",
+    ReadOnly = "READ_ONLY",
+    ReadWrite = "READ_WRITE"
 }
 
 
@@ -12,24 +13,24 @@ export enum NfsExportPermissionsEnum {
  * A NFS export entry.
 **/
 export class NfsExport extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowDev" })
+  @SpeakeasyMetadata({ data: "json, name=allowDev" })
   allowDev?: boolean;
 
-  @Metadata({ data: "json, name=allowSuid" })
+  @SpeakeasyMetadata({ data: "json, name=allowSuid" })
   allowSuid?: boolean;
 
-  @Metadata({ data: "json, name=cidr" })
+  @SpeakeasyMetadata({ data: "json, name=cidr" })
   cidr?: string;
 
-  @Metadata({ data: "json, name=machineId" })
+  @SpeakeasyMetadata({ data: "json, name=machineId" })
   machineId?: string;
 
-  @Metadata({ data: "json, name=networkId" })
+  @SpeakeasyMetadata({ data: "json, name=networkId" })
   networkId?: string;
 
-  @Metadata({ data: "json, name=noRootSquash" })
+  @SpeakeasyMetadata({ data: "json, name=noRootSquash" })
   noRootSquash?: boolean;
 
-  @Metadata({ data: "json, name=permissions" })
+  @SpeakeasyMetadata({ data: "json, name=permissions" })
   permissions?: NfsExportPermissionsEnum;
 }

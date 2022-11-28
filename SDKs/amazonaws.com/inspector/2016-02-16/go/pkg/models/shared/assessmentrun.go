@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// AssessmentRun
+// <p>A snapshot of an Amazon Inspector assessment run that contains the findings of the assessment run .</p> <p>Used as the response element in the <a>DescribeAssessmentRuns</a> action.</p>
 type AssessmentRun struct {
 	Arn                       string                      `json:"arn"`
 	AssessmentTemplateArn     string                      `json:"assessmentTemplateArn"`

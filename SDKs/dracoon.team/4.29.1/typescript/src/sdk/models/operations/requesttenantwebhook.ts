@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RequestTenantWebhookPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=webhook_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=webhook_id" })
   webhookId: number;
 }
 
 
 export class RequestTenantWebhookHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Sds-Date-Format" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Sds-Date-Format" })
   xSdsDateFormat?: any;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Sds-Service-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Sds-Service-Token" })
   xSdsServiceToken?: string;
 }
 
 
 export class RequestTenantWebhookRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: RequestTenantWebhookPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: RequestTenantWebhookHeaders;
 }
 
 
 export class RequestTenantWebhookResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   webhook?: shared.Webhook;
 }

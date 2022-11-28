@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ShotstackDestination
 /**
  * Send rendered assets to the Shotstack hosting and CDN service. This destination is enabled by default.
@@ -33,11 +33,11 @@ var ShotstackDestination = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=exclude" }),
+        SpeakeasyMetadata({ data: "json, name=exclude" }),
         __metadata("design:type", Boolean)
     ], ShotstackDestination.prototype, "exclude", void 0);
     __decorate([
-        Metadata({ data: "json, name=provider" }),
+        SpeakeasyMetadata({ data: "json, name=provider" }),
         __metadata("design:type", String)
     ], ShotstackDestination.prototype, "provider", void 0);
     return ShotstackDestination;

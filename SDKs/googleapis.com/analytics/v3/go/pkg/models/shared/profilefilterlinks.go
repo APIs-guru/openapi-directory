@@ -1,5 +1,7 @@
 package shared
 
+// ProfileFilterLinks
+// A profile filter link collection lists profile filter links between profiles and filters. Each resource in the collection corresponds to a profile filter link.
 type ProfileFilterLinks struct {
 	Items        []ProfileFilterLink `json:"items,omitempty"`
 	ItemsPerPage *int32              `json:"itemsPerPage,omitempty"`

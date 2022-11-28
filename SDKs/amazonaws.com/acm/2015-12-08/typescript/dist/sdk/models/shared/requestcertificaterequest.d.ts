@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DomainValidationOption } from "./domainvalidationoption";
 import { CertificateOptions } from "./certificateoptions";
 import { Tag } from "./tag";

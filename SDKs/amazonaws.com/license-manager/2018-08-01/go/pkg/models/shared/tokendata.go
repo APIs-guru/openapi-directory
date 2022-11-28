@@ -1,5 +1,7 @@
 package shared
 
+// TokenData
+// Describes a token.
 type TokenData struct {
 	ExpirationTime  *string  `json:"ExpirationTime,omitempty"`
 	LicenseArn      *string  `json:"LicenseArn,omitempty"`

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Test
+// Represents a condition that is evaluated.
 type Test struct {
 	Arn           *string              `json:"arn,omitempty"`
 	Counters      *Counters            `json:"counters,omitempty"`

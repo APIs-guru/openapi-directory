@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SuggestStatus } from "./suggeststatus";
 import { SuggestModel } from "./suggestmodel";
+
 
 
 // SuggestResponse
@@ -8,9 +9,9 @@ import { SuggestModel } from "./suggestmodel";
  * Contains the response to a <code>Suggest</code> request.
 **/
 export class SuggestResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: SuggestStatus;
 
-  @Metadata({ data: "json, name=suggest" })
+  @SpeakeasyMetadata({ data: "json, name=suggest" })
   suggest?: SuggestModel;
 }

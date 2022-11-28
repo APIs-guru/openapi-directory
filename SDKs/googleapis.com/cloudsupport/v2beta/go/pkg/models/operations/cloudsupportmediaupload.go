@@ -22,9 +22,9 @@ type CloudsupportMediaUploadQueryParams struct {
 	UploadProtocol *string           `queryParam:"style=form,explode=true,name=upload_protocol"`
 }
 
-type CloudsupportMediaUploadRequests struct {
-	ApplicationOctetStream  []byte                          `request:"mediaType=application/octet-stream"`
-	CreateAttachmentRequest *shared.CreateAttachmentRequest `request:"mediaType=application/json"`
+type CloudsupportMediaUploadRequestsInput struct {
+	ApplicationOctetStream  []byte                               `request:"mediaType=application/octet-stream"`
+	CreateAttachmentRequest *shared.CreateAttachmentRequestInput `request:"mediaType=application/json"`
 }
 
 type CloudsupportMediaUploadSecurity struct {
@@ -35,7 +35,7 @@ type CloudsupportMediaUploadSecurity struct {
 type CloudsupportMediaUploadRequest struct {
 	PathParams  CloudsupportMediaUploadPathParams
 	QueryParams CloudsupportMediaUploadQueryParams
-	Request     *CloudsupportMediaUploadRequests
+	Request     *CloudsupportMediaUploadRequestsInput
 	Security    CloudsupportMediaUploadSecurity
 }
 

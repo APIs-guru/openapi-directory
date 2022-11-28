@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Alias } from "./alias";
 import { AntiSpam } from "./antispam";
 import { MailZoneAccount } from "./mailzoneaccount";
@@ -7,25 +6,26 @@ import { CatchAll } from "./catchall";
 import { SmtpDomain } from "./smtpdomain";
 
 
+
 export class MailZone extends SpeakeasyBase {
-  @Metadata({ data: "json, name=aliases", elemType: shared.Alias })
+  @SpeakeasyMetadata({ data: "json, name=aliases", elemType: Alias })
   aliases?: Alias[];
 
-  @Metadata({ data: "json, name=anti_spam" })
+  @SpeakeasyMetadata({ data: "json, name=anti_spam" })
   antiSpam?: AntiSpam;
 
-  @Metadata({ data: "json, name=available_accounts", elemType: shared.MailZoneAccount })
+  @SpeakeasyMetadata({ data: "json, name=available_accounts", elemType: MailZoneAccount })
   availableAccounts?: MailZoneAccount[];
 
-  @Metadata({ data: "json, name=catch_all" })
+  @SpeakeasyMetadata({ data: "json, name=catch_all" })
   catchAll?: CatchAll;
 
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=smtp_domains", elemType: shared.SmtpDomain })
+  @SpeakeasyMetadata({ data: "json, name=smtp_domains", elemType: SmtpDomain })
   smtpDomains?: SmtpDomain[];
 }

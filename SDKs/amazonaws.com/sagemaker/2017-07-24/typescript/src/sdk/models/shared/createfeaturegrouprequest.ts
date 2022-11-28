@@ -1,36 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FeatureDefinition } from "./featuredefinition";
 import { OfflineStoreConfig } from "./offlinestoreconfig";
 import { OnlineStoreConfig } from "./onlinestoreconfig";
 import { Tag } from "./tag";
 
 
+
 export class CreateFeatureGroupRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=EventTimeFeatureName" })
+  @SpeakeasyMetadata({ data: "json, name=EventTimeFeatureName" })
   eventTimeFeatureName: string;
 
-  @Metadata({ data: "json, name=FeatureDefinitions", elemType: shared.FeatureDefinition })
+  @SpeakeasyMetadata({ data: "json, name=FeatureDefinitions", elemType: FeatureDefinition })
   featureDefinitions: FeatureDefinition[];
 
-  @Metadata({ data: "json, name=FeatureGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=FeatureGroupName" })
   featureGroupName: string;
 
-  @Metadata({ data: "json, name=OfflineStoreConfig" })
+  @SpeakeasyMetadata({ data: "json, name=OfflineStoreConfig" })
   offlineStoreConfig?: OfflineStoreConfig;
 
-  @Metadata({ data: "json, name=OnlineStoreConfig" })
+  @SpeakeasyMetadata({ data: "json, name=OnlineStoreConfig" })
   onlineStoreConfig?: OnlineStoreConfig;
 
-  @Metadata({ data: "json, name=RecordIdentifierFeatureName" })
+  @SpeakeasyMetadata({ data: "json, name=RecordIdentifierFeatureName" })
   recordIdentifierFeatureName: string;
 
-  @Metadata({ data: "json, name=RoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=RoleArn" })
   roleArn?: string;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 }

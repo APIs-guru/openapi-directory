@@ -1,8 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import planningleveldatadto
-from . import planninglevelinforequest
+from sdk import utils
+from . import *
 
 class AiPlanningLevelRequestMethodEnum(str, Enum):
     ICUE_MLP = "icueMLP"
@@ -12,9 +16,9 @@ class AiPlanningLevelRequestMethodEnum(str, Enum):
 @dataclass_json
 @dataclass
 class AiPlanningLevelRequest:
-    data: Optional[List[planningleveldatadto.PlanningLevelDataDto]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
-    method: AiPlanningLevelRequestMethodEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'method' }})
-    params: Optional[planninglevelinforequest.PlanningLevelInfoRequest] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'params' }})
-    planning_level_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'planningLevelId' }})
-    start_date: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'startDate' }})
+    method: AiPlanningLevelRequestMethodEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('method') }})
+    planning_level_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('planningLevelId') }})
+    start_date: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('startDate') }})
+    data: Optional[List[PlanningLevelDataDto]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
+    params: Optional[PlanningLevelInfoRequest] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('params') }})
     

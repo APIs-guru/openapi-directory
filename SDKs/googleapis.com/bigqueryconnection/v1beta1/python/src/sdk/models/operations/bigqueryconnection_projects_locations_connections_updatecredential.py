@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class BigqueryconnectionProjectsLocationsConnectionsUpdateCredentialPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +29,14 @@ class BigqueryconnectionProjectsLocationsConnectionsUpdateCredentialQueryParams:
 
 @dataclass
 class BigqueryconnectionProjectsLocationsConnectionsUpdateCredentialSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BigqueryconnectionProjectsLocationsConnectionsUpdateCredentialSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +47,15 @@ class BigqueryconnectionProjectsLocationsConnectionsUpdateCredentialSecurity:
 
 @dataclass
 class BigqueryconnectionProjectsLocationsConnectionsUpdateCredentialRequest:
-    path_params: BigqueryconnectionProjectsLocationsConnectionsUpdateCredentialPathParams = field(default=None)
-    query_params: BigqueryconnectionProjectsLocationsConnectionsUpdateCredentialQueryParams = field(default=None)
+    path_params: BigqueryconnectionProjectsLocationsConnectionsUpdateCredentialPathParams = field()
+    query_params: BigqueryconnectionProjectsLocationsConnectionsUpdateCredentialQueryParams = field()
+    security: BigqueryconnectionProjectsLocationsConnectionsUpdateCredentialSecurity = field()
     request: Optional[shared.ConnectionCredential] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: BigqueryconnectionProjectsLocationsConnectionsUpdateCredentialSecurity = field(default=None)
     
 
 @dataclass
 class BigqueryconnectionProjectsLocationsConnectionsUpdateCredentialResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

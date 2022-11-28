@@ -72,6 +72,8 @@ const (
 	ActionEntityInterfaceEnumMobile        ActionEntityInterfaceEnum = "mobile"
 )
 
+// ActionEntity
+// List site full action history.
 type ActionEntity struct {
 	Action      *ActionEntityActionEnum      `json:"action,omitempty"`
 	Destination *string                      `json:"destination,omitempty"`

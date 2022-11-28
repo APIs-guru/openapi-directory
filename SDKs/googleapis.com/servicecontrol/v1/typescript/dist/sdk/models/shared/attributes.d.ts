@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AttributeValue } from "./attributevalue";
 /**
  * A set of attributes, each in the format `[KEY]:[VALUE]`.

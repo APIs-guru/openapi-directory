@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetInsightResultsPathParams:
-    insight_arn: str = field(default=None, metadata={'path_param': { 'field_name': 'InsightArn', 'style': 'simple', 'explode': False }})
+    insight_arn: str = field(metadata={'path_param': { 'field_name': 'InsightArn', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,18 +24,18 @@ class GetInsightResultsHeaders:
 
 @dataclass
 class GetInsightResultsRequest:
-    path_params: GetInsightResultsPathParams = field(default=None)
-    headers: GetInsightResultsHeaders = field(default=None)
+    headers: GetInsightResultsHeaders = field()
+    path_params: GetInsightResultsPathParams = field()
     
 
 @dataclass
 class GetInsightResultsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_insight_results_response: Optional[shared.GetInsightResultsResponse] = field(default=None)
     internal_exception: Optional[Any] = field(default=None)
     invalid_access_exception: Optional[Any] = field(default=None)
     invalid_input_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

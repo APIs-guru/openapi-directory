@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Connector
+// Represents a connector.
 type Connector struct {
 	AssociatedOn   *time.Time                `json:"associatedOn,omitempty"`
 	CapabilityList []ConnectorCapabilityEnum `json:"capabilityList,omitempty"`

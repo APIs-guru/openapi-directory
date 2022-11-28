@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AuthResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=access_token" })
+  @SpeakeasyMetadata({ data: "json, name=access_token" })
   accessToken: string;
 
-  @Metadata({ data: "json, name=entityIds" })
+  @SpeakeasyMetadata({ data: "json, name=entityIds" })
   entityIds?: string[];
 
-  @Metadata({ data: "json, name=expires_in" })
+  @SpeakeasyMetadata({ data: "json, name=expires_in" })
   expiresIn?: number;
 
-  @Metadata({ data: "json, name=refresh_token" })
+  @SpeakeasyMetadata({ data: "json, name=refresh_token" })
   refreshToken?: string;
 
-  @Metadata({ data: "json, name=scope" })
+  @SpeakeasyMetadata({ data: "json, name=scope" })
   scope?: string;
 
-  @Metadata({ data: "json, name=token_type" })
+  @SpeakeasyMetadata({ data: "json, name=token_type" })
   tokenType: string;
 }

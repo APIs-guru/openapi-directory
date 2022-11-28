@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BatchEnableServicesRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request message for the `BatchEnableServices` method.
 **/
 export class BatchEnableServicesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=serviceIds" })
+  @SpeakeasyMetadata({ data: "json, name=serviceIds" })
   serviceIds?: string[];
 }

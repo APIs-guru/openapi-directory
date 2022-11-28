@@ -15,6 +15,8 @@ type CreateTypedLinkFacetHeaders struct {
 	XAmzDataPartition string  `header:"style=simple,explode=false,name=x-amz-data-partition"`
 }
 
+// CreateTypedLinkFacetRequestBodyFacet
+// Defines the typed links structure and its attributes. To create a typed link facet, use the <a>CreateTypedLinkFacet</a> API.
 type CreateTypedLinkFacetRequestBodyFacet struct {
 	Attributes             []shared.TypedLinkAttributeDefinition `json:"Attributes,omitempty"`
 	IdentityAttributeOrder []string                              `json:"IdentityAttributeOrder,omitempty"`

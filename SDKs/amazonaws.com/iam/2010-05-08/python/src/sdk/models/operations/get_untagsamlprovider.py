@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetUntagSamlProviderActionEnum(str, Enum):
     UNTAG_SAML_PROVIDER = "UntagSAMLProvider"
@@ -10,10 +14,10 @@ class GetUntagSamlProviderVersionEnum(str, Enum):
 
 @dataclass
 class GetUntagSamlProviderQueryParams:
-    action: GetUntagSamlProviderActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    saml_provider_arn: str = field(default=None, metadata={'query_param': { 'field_name': 'SAMLProviderArn', 'style': 'form', 'explode': True }})
-    tag_keys: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'TagKeys', 'style': 'form', 'explode': True }})
-    version: GetUntagSamlProviderVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetUntagSamlProviderActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    saml_provider_arn: str = field(metadata={'query_param': { 'field_name': 'SAMLProviderArn', 'style': 'form', 'explode': True }})
+    tag_keys: List[str] = field(metadata={'query_param': { 'field_name': 'TagKeys', 'style': 'form', 'explode': True }})
+    version: GetUntagSamlProviderVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetUntagSamlProviderHeaders:
 
 @dataclass
 class GetUntagSamlProviderRequest:
-    query_params: GetUntagSamlProviderQueryParams = field(default=None)
-    headers: GetUntagSamlProviderHeaders = field(default=None)
+    headers: GetUntagSamlProviderHeaders = field()
+    query_params: GetUntagSamlProviderQueryParams = field()
     
 
 @dataclass
 class GetUntagSamlProviderResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

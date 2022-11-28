@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CreateRowRequest } from "./createrowrequest";
 /**
  * Request message for TablesService.BatchCreateRows.

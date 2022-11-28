@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class RecipeGetV2PathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,14 +15,14 @@ class RecipeGetV2QueryParams:
 
 @dataclass
 class RecipeGetV2Request:
-    path_params: RecipeGetV2PathParams = field(default=None)
-    query_params: RecipeGetV2QueryParams = field(default=None)
+    path_params: RecipeGetV2PathParams = field()
+    query_params: RecipeGetV2QueryParams = field()
     
 
 @dataclass
 class RecipeGetV2Response:
+    content_type: str = field()
+    status_code: int = field()
     api2_models_recipes_recipe_response: Optional[shared.Api2ModelsRecipesRecipeResponse] = field(default=None)
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    body: Optional[bytes] = field(default=None)
     

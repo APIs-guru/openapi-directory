@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudContactcenterinsightsV1RuntimeAnnotation
+// An annotation that was generated during the customer and agent interaction.
 type GoogleCloudContactcenterinsightsV1RuntimeAnnotation struct {
 	AnnotationID           *string                                                       `json:"annotationId,omitempty"`
 	AnswerFeedback         *GoogleCloudContactcenterinsightsV1AnswerFeedback             `json:"answerFeedback,omitempty"`

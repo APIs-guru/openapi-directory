@@ -1,5 +1,11 @@
 package shared
 
+type SpotListInput struct {
+	Custom   *interface{}           `json:"custom,omitempty"`
+	Label    *string                `json:"label,omitempty"`
+	Metadata map[string]interface{} `json:"metadata,omitempty"`
+}
+
 type SpotList struct {
 	Custom      *interface{}           `json:"custom,omitempty"`
 	ID          *string                `json:"id,omitempty"`

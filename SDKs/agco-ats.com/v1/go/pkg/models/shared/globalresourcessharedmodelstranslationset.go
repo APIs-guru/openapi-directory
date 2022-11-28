@@ -15,6 +15,8 @@ const (
 	GlobalResourcesSharedModelsTranslationSetStateEnumCompleted         GlobalResourcesSharedModelsTranslationSetStateEnum = "Completed"
 )
 
+// GlobalResourcesSharedModelsTranslationSet
+// A set of strings submitted for translation
 type GlobalResourcesSharedModelsTranslationSet struct {
 	Attributes           []GlobalResourcesSharedModelsTranslationSetAttribute `json:"Attributes,omitempty"`
 	FileIDs              []string                                             `json:"FileIDs"`

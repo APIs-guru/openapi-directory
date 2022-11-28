@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MetricSetSummary
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains information about a dataset.
 **/
 export class MetricSetSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AnomalyDetectorArn" })
+  @SpeakeasyMetadata({ data: "json, name=AnomalyDetectorArn" })
   anomalyDetectorArn?: string;
 
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=LastModificationTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastModificationTime" })
   lastModificationTime?: Date;
 
-  @Metadata({ data: "json, name=MetricSetArn" })
+  @SpeakeasyMetadata({ data: "json, name=MetricSetArn" })
   metricSetArn?: string;
 
-  @Metadata({ data: "json, name=MetricSetDescription" })
+  @SpeakeasyMetadata({ data: "json, name=MetricSetDescription" })
   metricSetDescription?: string;
 
-  @Metadata({ data: "json, name=MetricSetName" })
+  @SpeakeasyMetadata({ data: "json, name=MetricSetName" })
   metricSetName?: string;
 
-  @Metadata({ data: "json, name=Tags" })
+  @SpeakeasyMetadata({ data: "json, name=Tags" })
   tags?: Map<string, string>;
 }

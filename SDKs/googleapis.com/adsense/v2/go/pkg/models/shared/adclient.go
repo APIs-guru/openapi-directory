@@ -9,6 +9,8 @@ const (
 	AdClientStateEnumRequiresReview   AdClientStateEnum = "REQUIRES_REVIEW"
 )
 
+// AdClient
+// Representation of an ad client. An ad client represents a user's subscription with a specific AdSense product.
 type AdClient struct {
 	Name                 *string            `json:"name,omitempty"`
 	ProductCode          *string            `json:"productCode,omitempty"`

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Invoice
+// Account Invoice object
 type Invoice struct {
 	Date     *time.Time `json:"date,omitempty"`
 	ID       *int64     `json:"id,omitempty"`

@@ -10,6 +10,8 @@ const (
 	MembershipRoleRestrictionEvaluationStateEnumEvaluating       MembershipRoleRestrictionEvaluationStateEnum = "EVALUATING"
 )
 
+// MembershipRoleRestrictionEvaluation
+// The evaluated state of this restriction.
 type MembershipRoleRestrictionEvaluation struct {
 	State *MembershipRoleRestrictionEvaluationStateEnum `json:"state,omitempty"`
 }

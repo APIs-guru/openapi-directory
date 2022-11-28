@@ -11,6 +11,8 @@ const (
 	FederationStateEnumError            FederationStateEnum = "ERROR"
 )
 
+// Federation
+// Represents a federation of multiple backend metastores.
 type Federation struct {
 	BackendMetastores map[string]BackendMetastore `json:"backendMetastores,omitempty"`
 	CreateTime        *string                     `json:"createTime,omitempty"`
@@ -21,5 +23,14 @@ type Federation struct {
 	StateMessage      *string                     `json:"stateMessage,omitempty"`
 	UID               *string                     `json:"uid,omitempty"`
 	UpdateTime        *string                     `json:"updateTime,omitempty"`
+	Version           *string                     `json:"version,omitempty"`
+}
+
+// FederationInput
+// Represents a federation of multiple backend metastores.
+type FederationInput struct {
+	BackendMetastores map[string]BackendMetastore `json:"backendMetastores,omitempty"`
+	Labels            map[string]string           `json:"labels,omitempty"`
+	Name              *string                     `json:"name,omitempty"`
 	Version           *string                     `json:"version,omitempty"`
 }

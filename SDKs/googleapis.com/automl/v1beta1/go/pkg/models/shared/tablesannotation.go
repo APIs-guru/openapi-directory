@@ -1,5 +1,7 @@
 package shared
 
+// TablesAnnotation
+// Contains annotation details specific to Tables.
 type TablesAnnotation struct {
 	BaselineScore         *float32                `json:"baselineScore,omitempty"`
 	PredictionInterval    *DoubleRange            `json:"predictionInterval,omitempty"`

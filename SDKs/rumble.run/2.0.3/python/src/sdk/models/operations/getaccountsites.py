@@ -10,18 +10,18 @@ class GetAccountSitesQueryParams:
 
 @dataclass
 class GetAccountSitesSecurity:
-    bearer_auth: shared.SchemeBearerAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_auth: shared.SchemeBearerAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class GetAccountSitesRequest:
-    query_params: GetAccountSitesQueryParams = field(default=None)
-    security: GetAccountSitesSecurity = field(default=None)
+    query_params: GetAccountSitesQueryParams = field()
+    security: GetAccountSitesSecurity = field()
     
 
 @dataclass
 class GetAccountSitesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     sites: Optional[List[shared.Site]] = field(default=None)
-    status_code: int = field(default=None)
     

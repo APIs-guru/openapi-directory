@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export var GetReviewsResourceTypeJsonResourceTypeEnum;
 (function (GetReviewsResourceTypeJsonResourceTypeEnum) {
@@ -35,7 +35,7 @@ var GetReviewsResourceTypeJsonPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=resource-type" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=resource-type" }),
         __metadata("design:type", String)
     ], GetReviewsResourceTypeJsonPathParams.prototype, "resourceType", void 0);
     return GetReviewsResourceTypeJsonPathParams;
@@ -53,71 +53,71 @@ var GetReviewsResourceTypeJsonQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=offset" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" }),
         __metadata("design:type", Number)
     ], GetReviewsResourceTypeJsonQueryParams.prototype, "offset", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=order" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=order" }),
         __metadata("design:type", String)
     ], GetReviewsResourceTypeJsonQueryParams.prototype, "order", void 0);
     return GetReviewsResourceTypeJsonQueryParams;
 }(SpeakeasyBase));
 export { GetReviewsResourceTypeJsonQueryParams };
-var GetReviewsResourceTypeJsonRequest = /** @class */ (function (_super) {
-    __extends(GetReviewsResourceTypeJsonRequest, _super);
-    function GetReviewsResourceTypeJsonRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata(),
-        __metadata("design:type", GetReviewsResourceTypeJsonPathParams)
-    ], GetReviewsResourceTypeJsonRequest.prototype, "pathParams", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", GetReviewsResourceTypeJsonQueryParams)
-    ], GetReviewsResourceTypeJsonRequest.prototype, "queryParams", void 0);
-    return GetReviewsResourceTypeJsonRequest;
-}(SpeakeasyBase));
-export { GetReviewsResourceTypeJsonRequest };
 var GetReviewsResourceTypeJson200ApplicationJson = /** @class */ (function (_super) {
     __extends(GetReviewsResourceTypeJson200ApplicationJson, _super);
     function GetReviewsResourceTypeJson200ApplicationJson() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=copyright" }),
+        SpeakeasyMetadata({ data: "json, name=copyright" }),
         __metadata("design:type", String)
     ], GetReviewsResourceTypeJson200ApplicationJson.prototype, "copyright", void 0);
     __decorate([
-        Metadata({ data: "json, name=num_results" }),
+        SpeakeasyMetadata({ data: "json, name=num_results" }),
         __metadata("design:type", Number)
     ], GetReviewsResourceTypeJson200ApplicationJson.prototype, "numResults", void 0);
     __decorate([
-        Metadata({ data: "json, name=results", elemType: shared.Movie }),
+        SpeakeasyMetadata({ data: "json, name=results", elemType: shared.Movie }),
         __metadata("design:type", Array)
     ], GetReviewsResourceTypeJson200ApplicationJson.prototype, "results", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], GetReviewsResourceTypeJson200ApplicationJson.prototype, "status", void 0);
     return GetReviewsResourceTypeJson200ApplicationJson;
 }(SpeakeasyBase));
 export { GetReviewsResourceTypeJson200ApplicationJson };
+var GetReviewsResourceTypeJsonRequest = /** @class */ (function (_super) {
+    __extends(GetReviewsResourceTypeJsonRequest, _super);
+    function GetReviewsResourceTypeJsonRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", GetReviewsResourceTypeJsonPathParams)
+    ], GetReviewsResourceTypeJsonRequest.prototype, "pathParams", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", GetReviewsResourceTypeJsonQueryParams)
+    ], GetReviewsResourceTypeJsonRequest.prototype, "queryParams", void 0);
+    return GetReviewsResourceTypeJsonRequest;
+}(SpeakeasyBase));
+export { GetReviewsResourceTypeJsonRequest };
 var GetReviewsResourceTypeJsonResponse = /** @class */ (function (_super) {
     __extends(GetReviewsResourceTypeJsonResponse, _super);
     function GetReviewsResourceTypeJsonResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetReviewsResourceTypeJsonResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetReviewsResourceTypeJson200ApplicationJson)
     ], GetReviewsResourceTypeJsonResponse.prototype, "getReviewsResourceTypeJson200ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetReviewsResourceTypeJsonResponse.prototype, "statusCode", void 0);
     return GetReviewsResourceTypeJsonResponse;

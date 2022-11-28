@@ -1,17 +1,20 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 
 
 @dataclass
 class FileGetNodeFilePropertiesFromComputeNodePathParams:
-    file_name: str = field(default=None, metadata={'path_param': { 'field_name': 'fileName', 'style': 'simple', 'explode': False }})
-    node_id: str = field(default=None, metadata={'path_param': { 'field_name': 'nodeId', 'style': 'simple', 'explode': False }})
-    pool_id: str = field(default=None, metadata={'path_param': { 'field_name': 'poolId', 'style': 'simple', 'explode': False }})
+    file_name: str = field(metadata={'path_param': { 'field_name': 'fileName', 'style': 'simple', 'explode': False }})
+    node_id: str = field(metadata={'path_param': { 'field_name': 'nodeId', 'style': 'simple', 'explode': False }})
+    pool_id: str = field(metadata={'path_param': { 'field_name': 'poolId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class FileGetNodeFilePropertiesFromComputeNodeQueryParams:
-    api_version: str = field(default=None, metadata={'query_param': { 'field_name': 'api-version', 'style': 'form', 'explode': True }})
+    api_version: str = field(metadata={'query_param': { 'field_name': 'api-version', 'style': 'form', 'explode': True }})
     timeout: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'timeout', 'style': 'form', 'explode': True }})
     
 
@@ -26,15 +29,15 @@ class FileGetNodeFilePropertiesFromComputeNodeHeaders:
 
 @dataclass
 class FileGetNodeFilePropertiesFromComputeNodeRequest:
-    path_params: FileGetNodeFilePropertiesFromComputeNodePathParams = field(default=None)
-    query_params: FileGetNodeFilePropertiesFromComputeNodeQueryParams = field(default=None)
-    headers: FileGetNodeFilePropertiesFromComputeNodeHeaders = field(default=None)
+    headers: FileGetNodeFilePropertiesFromComputeNodeHeaders = field()
+    path_params: FileGetNodeFilePropertiesFromComputeNodePathParams = field()
+    query_params: FileGetNodeFilePropertiesFromComputeNodeQueryParams = field()
     
 
 @dataclass
 class FileGetNodeFilePropertiesFromComputeNodeResponse:
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     batch_error: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,13 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class CreateNodeBalancerNodePathParams:
-    config_id: int = field(default=None, metadata={'path_param': { 'field_name': 'configId', 'style': 'simple', 'explode': False }})
-    node_balancer_id: int = field(default=None, metadata={'path_param': { 'field_name': 'nodeBalancerId', 'style': 'simple', 'explode': False }})
+    config_id: int = field(metadata={'path_param': { 'field_name': 'configId', 'style': 'simple', 'explode': False }})
+    node_balancer_id: int = field(metadata={'path_param': { 'field_name': 'nodeBalancerId', 'style': 'simple', 'explode': False }})
     
 class CreateNodeBalancerNodeRequestBodyModeEnum(str, Enum):
     ACCEPT = "accept"
@@ -15,58 +17,39 @@ class CreateNodeBalancerNodeRequestBodyModeEnum(str, Enum):
     DRAIN = "drain"
     BACKUP = "backup"
 
-class CreateNodeBalancerNodeRequestBodyStatusEnum(str, Enum):
-    UNKNOWN = "unknown"
-    UP = "UP"
-    DOWN = "DOWN"
-
 
 @dataclass_json
 @dataclass
-class CreateNodeBalancerNodeRequestBody:
-    address: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'address' }})
-    config_id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'config_id' }})
-    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    label: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
-    mode: Optional[CreateNodeBalancerNodeRequestBodyModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mode' }})
-    nodebalancer_id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nodebalancer_id' }})
-    status: Optional[CreateNodeBalancerNodeRequestBodyStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    weight: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'weight' }})
-    
-
-@dataclass
-class CreateNodeBalancerNodeSecurityOption1:
-    personal_access_token: shared.SchemePersonalAccessToken = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
-    
-
-@dataclass
-class CreateNodeBalancerNodeSecurityOption2:
-    oauth: shared.SchemeOauth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+class CreateNodeBalancerNodeRequestBodyInput:
+    address: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('address') }})
+    label: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('label') }})
+    mode: Optional[CreateNodeBalancerNodeRequestBodyModeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mode') }})
+    weight: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('weight') }})
     
 
 @dataclass
 class CreateNodeBalancerNodeSecurity:
-    option1: Optional[CreateNodeBalancerNodeSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[CreateNodeBalancerNodeSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
-    
-
-@dataclass
-class CreateNodeBalancerNodeRequest:
-    path_params: CreateNodeBalancerNodePathParams = field(default=None)
-    request: CreateNodeBalancerNodeRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: CreateNodeBalancerNodeSecurity = field(default=None)
+    oauth: Optional[shared.SchemeOauth] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    personal_access_token: Optional[shared.SchemePersonalAccessToken] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass_json
 @dataclass
 class CreateNodeBalancerNodeDefaultApplicationJSON:
-    errors: Optional[List[shared.ErrorObject]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errors' }})
+    errors: Optional[List[shared.ErrorObject]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errors') }})
+    
+
+@dataclass
+class CreateNodeBalancerNodeRequest:
+    path_params: CreateNodeBalancerNodePathParams = field()
+    request: CreateNodeBalancerNodeRequestBodyInput = field(metadata={'request': { 'media_type': 'application/json' }})
+    security: CreateNodeBalancerNodeSecurity = field()
     
 
 @dataclass
 class CreateNodeBalancerNodeResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     node_balancer_node: Optional[shared.NodeBalancerNode] = field(default=None)
-    status_code: int = field(default=None)
     create_node_balancer_node_default_application_json_object: Optional[CreateNodeBalancerNodeDefaultApplicationJSON] = field(default=None)
     

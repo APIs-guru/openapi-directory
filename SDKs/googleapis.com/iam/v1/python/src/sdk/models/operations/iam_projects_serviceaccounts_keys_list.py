@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class IamProjectsServiceAccountsKeysListPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 class IamProjectsServiceAccountsKeysListKeyTypesEnum(str, Enum):
     KEY_TYPE_UNSPECIFIED = "KEY_TYPE_UNSPECIFIED"
@@ -31,20 +32,20 @@ class IamProjectsServiceAccountsKeysListQueryParams:
 
 @dataclass
 class IamProjectsServiceAccountsKeysListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class IamProjectsServiceAccountsKeysListRequest:
-    path_params: IamProjectsServiceAccountsKeysListPathParams = field(default=None)
-    query_params: IamProjectsServiceAccountsKeysListQueryParams = field(default=None)
-    security: IamProjectsServiceAccountsKeysListSecurity = field(default=None)
+    path_params: IamProjectsServiceAccountsKeysListPathParams = field()
+    query_params: IamProjectsServiceAccountsKeysListQueryParams = field()
+    security: IamProjectsServiceAccountsKeysListSecurity = field()
     
 
 @dataclass
 class IamProjectsServiceAccountsKeysListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_service_account_keys_response: Optional[shared.ListServiceAccountKeysResponse] = field(default=None)
-    status_code: int = field(default=None)
     

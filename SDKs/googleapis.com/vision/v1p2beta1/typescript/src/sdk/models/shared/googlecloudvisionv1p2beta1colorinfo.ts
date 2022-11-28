@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Color } from "./color";
+
 
 
 // GoogleCloudVisionV1p2beta1ColorInfo
@@ -7,12 +8,12 @@ import { Color } from "./color";
  * Color information consists of RGB channels, score, and the fraction of the image that the color occupies in the image.
 **/
 export class GoogleCloudVisionV1p2beta1ColorInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=color" })
+  @SpeakeasyMetadata({ data: "json, name=color" })
   color?: Color;
 
-  @Metadata({ data: "json, name=pixelFraction" })
+  @SpeakeasyMetadata({ data: "json, name=pixelFraction" })
   pixelFraction?: number;
 
-  @Metadata({ data: "json, name=score" })
+  @SpeakeasyMetadata({ data: "json, name=score" })
   score?: number;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// GoogleIdentityAccesscontextmanagerV1ServicePerimeterConfig
+// `ServicePerimeterConfig` specifies a set of Google Cloud resources that describe specific Service Perimeter configuration.
 type GoogleIdentityAccesscontextmanagerV1ServicePerimeterConfig struct {
 	AccessLevels          []string                                                   `json:"accessLevels,omitempty"`
 	EgressPolicies        []GoogleIdentityAccesscontextmanagerV1EgressPolicy         `json:"egressPolicies,omitempty"`

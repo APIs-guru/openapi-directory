@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BillingInfo
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The configuration data for an Ad Exchange billing info.
 **/
 export class BillingInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: number;
 
-  @Metadata({ data: "json, name=accountName" })
+  @SpeakeasyMetadata({ data: "json, name=accountName" })
   accountName?: string;
 
-  @Metadata({ data: "json, name=billingId" })
+  @SpeakeasyMetadata({ data: "json, name=billingId" })
   billingId?: string[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 }

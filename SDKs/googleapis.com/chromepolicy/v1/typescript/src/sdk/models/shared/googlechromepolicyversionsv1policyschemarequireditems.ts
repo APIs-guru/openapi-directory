@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleChromePolicyVersionsV1PolicySchemaRequiredItems
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The fields that will become required based on the value of this field.
 **/
 export class GoogleChromePolicyVersionsV1PolicySchemaRequiredItems extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fieldConditions" })
+  @SpeakeasyMetadata({ data: "json, name=fieldConditions" })
   fieldConditions?: string[];
 
-  @Metadata({ data: "json, name=requiredFields" })
+  @SpeakeasyMetadata({ data: "json, name=requiredFields" })
   requiredFields?: string[];
 }

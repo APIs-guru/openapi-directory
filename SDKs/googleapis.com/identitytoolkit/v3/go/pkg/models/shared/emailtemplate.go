@@ -1,5 +1,7 @@
 package shared
 
+// EmailTemplate
+// Template for an email template.
 type EmailTemplate struct {
 	Body            *string `json:"body,omitempty"`
 	Format          *string `json:"format,omitempty"`

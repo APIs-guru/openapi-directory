@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Tag extends SpeakeasyBase {
-  @Metadata({ data: "json, name=_content" })
+  @SpeakeasyMetadata({ data: "json, name=_content" })
   content?: string;
 
-  @Metadata({ data: "json, name=author" })
+  @SpeakeasyMetadata({ data: "json, name=author" })
   author?: string;
 
-  @Metadata({ data: "json, name=authorname" })
+  @SpeakeasyMetadata({ data: "json, name=authorname" })
   authorname?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=machine_tag" })
+  @SpeakeasyMetadata({ data: "json, name=machine_tag" })
   machineTag?: boolean;
 
-  @Metadata({ data: "json, name=raw" })
+  @SpeakeasyMetadata({ data: "json, name=raw" })
   raw?: string;
 }

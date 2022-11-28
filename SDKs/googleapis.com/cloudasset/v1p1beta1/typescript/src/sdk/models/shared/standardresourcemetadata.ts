@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // StandardResourceMetadata
@@ -6,30 +7,30 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The standard metadata of a cloud resource.
 **/
 export class StandardResourceMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=additionalAttributes" })
+  @SpeakeasyMetadata({ data: "json, name=additionalAttributes" })
   additionalAttributes?: string[];
 
-  @Metadata({ data: "json, name=assetType" })
+  @SpeakeasyMetadata({ data: "json, name=assetType" })
   assetType?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=networkTags" })
+  @SpeakeasyMetadata({ data: "json, name=networkTags" })
   networkTags?: string[];
 
-  @Metadata({ data: "json, name=project" })
+  @SpeakeasyMetadata({ data: "json, name=project" })
   project?: string;
 }

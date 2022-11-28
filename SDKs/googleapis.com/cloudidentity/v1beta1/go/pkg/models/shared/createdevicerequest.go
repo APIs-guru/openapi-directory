@@ -1,5 +1,7 @@
 package shared
 
-type CreateDeviceRequest struct {
-	Device *Device `json:"device,omitempty"`
+// CreateDeviceRequestInput
+// Request message for creating a Company Owned device.
+type CreateDeviceRequestInput struct {
+	Device *DeviceInput `json:"device,omitempty"`
 }

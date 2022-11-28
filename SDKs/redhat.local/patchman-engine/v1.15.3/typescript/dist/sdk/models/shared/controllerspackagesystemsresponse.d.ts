@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ControllersPackageSystemItem } from "./controllerspackagesystemitem";
 import { ControllersLinks } from "./controllerslinks";
 import { ControllersListMeta } from "./controllerslistmeta";

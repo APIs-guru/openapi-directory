@@ -1,24 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Tag } from "./tag";
 
 
+
 export class ReplicateKeyRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BypassPolicyLockoutSafetyCheck" })
+  @SpeakeasyMetadata({ data: "json, name=BypassPolicyLockoutSafetyCheck" })
   bypassPolicyLockoutSafetyCheck?: boolean;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=KeyId" })
+  @SpeakeasyMetadata({ data: "json, name=KeyId" })
   keyId: string;
 
-  @Metadata({ data: "json, name=Policy" })
+  @SpeakeasyMetadata({ data: "json, name=Policy" })
   policy?: string;
 
-  @Metadata({ data: "json, name=ReplicaRegion" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicaRegion" })
   replicaRegion: string;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 }

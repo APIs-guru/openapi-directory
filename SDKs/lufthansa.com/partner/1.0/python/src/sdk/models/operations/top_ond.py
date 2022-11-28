@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 from typing import Optional
+from sdk.models import shared
 
 
 @dataclass
@@ -10,24 +11,24 @@ class TopOndQueryParams:
 
 @dataclass
 class TopOndHeaders:
-    accept: str = field(default=None, metadata={'header': { 'field_name': 'Accept', 'style': 'simple', 'explode': False }})
+    accept: str = field(metadata={'header': { 'field_name': 'Accept', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class TopOndSecurity:
-    auth: shared.SchemeAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    auth: shared.SchemeAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class TopOndRequest:
-    query_params: TopOndQueryParams = field(default=None)
-    headers: TopOndHeaders = field(default=None)
-    security: TopOndSecurity = field(default=None)
+    headers: TopOndHeaders = field()
+    query_params: TopOndQueryParams = field()
+    security: TopOndSecurity = field()
     
 
 @dataclass
 class TopOndResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     top_ond_200_application_json_string: Optional[str] = field(default=None)
     

@@ -1,6 +1,7 @@
 
 
+
 export enum ReturnValuesOnConditionCheckFailureEnum {
-    AllOld = "ALL_OLD"
-,    None = "NONE"
+    AllOld = "ALL_OLD",
+    None = "NONE"
 }

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DisplayvideoAdvertisersBulkListAdvertiserAssignedTargetingOptionsPathParams:
-    advertiser_id: str = field(default=None, metadata={'path_param': { 'field_name': 'advertiserId', 'style': 'simple', 'explode': False }})
+    advertiser_id: str = field(metadata={'path_param': { 'field_name': 'advertiserId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -29,20 +30,20 @@ class DisplayvideoAdvertisersBulkListAdvertiserAssignedTargetingOptionsQueryPara
 
 @dataclass
 class DisplayvideoAdvertisersBulkListAdvertiserAssignedTargetingOptionsSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DisplayvideoAdvertisersBulkListAdvertiserAssignedTargetingOptionsRequest:
-    path_params: DisplayvideoAdvertisersBulkListAdvertiserAssignedTargetingOptionsPathParams = field(default=None)
-    query_params: DisplayvideoAdvertisersBulkListAdvertiserAssignedTargetingOptionsQueryParams = field(default=None)
-    security: DisplayvideoAdvertisersBulkListAdvertiserAssignedTargetingOptionsSecurity = field(default=None)
+    path_params: DisplayvideoAdvertisersBulkListAdvertiserAssignedTargetingOptionsPathParams = field()
+    query_params: DisplayvideoAdvertisersBulkListAdvertiserAssignedTargetingOptionsQueryParams = field()
+    security: DisplayvideoAdvertisersBulkListAdvertiserAssignedTargetingOptionsSecurity = field()
     
 
 @dataclass
 class DisplayvideoAdvertisersBulkListAdvertiserAssignedTargetingOptionsResponse:
+    content_type: str = field()
+    status_code: int = field()
     bulk_list_advertiser_assigned_targeting_options_response: Optional[shared.BulkListAdvertiserAssignedTargetingOptionsResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

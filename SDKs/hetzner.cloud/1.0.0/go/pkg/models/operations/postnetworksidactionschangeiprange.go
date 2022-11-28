@@ -8,11 +8,8 @@ type PostNetworksIDActionsChangeIPRangeChangeIPRangeRequest struct {
 	IPRange string `json:"ip_range"`
 }
 
-type PostNetworksIDActionsChangeIPRangeRequest struct {
-	PathParams PostNetworksIDActionsChangeIPRangePathParams
-	Request    *PostNetworksIDActionsChangeIPRangeChangeIPRangeRequest `request:"mediaType=application/json"`
-}
-
+// PostNetworksIDActionsChangeIPRangeActionResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type PostNetworksIDActionsChangeIPRangeActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -44,6 +41,11 @@ type PostNetworksIDActionsChangeIPRangeActionResponseAction struct {
 
 type PostNetworksIDActionsChangeIPRangeActionResponse struct {
 	Action PostNetworksIDActionsChangeIPRangeActionResponseAction `json:"action"`
+}
+
+type PostNetworksIDActionsChangeIPRangeRequest struct {
+	PathParams PostNetworksIDActionsChangeIPRangePathParams
+	Request    *PostNetworksIDActionsChangeIPRangeChangeIPRangeRequest `request:"mediaType=application/json"`
 }
 
 type PostNetworksIDActionsChangeIPRangeResponse struct {

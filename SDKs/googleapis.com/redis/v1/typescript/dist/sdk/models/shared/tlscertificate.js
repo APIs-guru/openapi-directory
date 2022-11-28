@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // TlsCertificate
 /**
  * TlsCertificate Resource
@@ -33,23 +33,23 @@ var TlsCertificate = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=cert" }),
+        SpeakeasyMetadata({ data: "json, name=cert" }),
         __metadata("design:type", String)
     ], TlsCertificate.prototype, "cert", void 0);
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", String)
     ], TlsCertificate.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=expireTime" }),
+        SpeakeasyMetadata({ data: "json, name=expireTime" }),
         __metadata("design:type", String)
     ], TlsCertificate.prototype, "expireTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=serialNumber" }),
+        SpeakeasyMetadata({ data: "json, name=serialNumber" }),
         __metadata("design:type", String)
     ], TlsCertificate.prototype, "serialNumber", void 0);
     __decorate([
-        Metadata({ data: "json, name=sha1Fingerprint" }),
+        SpeakeasyMetadata({ data: "json, name=sha1Fingerprint" }),
         __metadata("design:type", String)
     ], TlsCertificate.prototype, "sha1Fingerprint", void 0);
     return TlsCertificate;

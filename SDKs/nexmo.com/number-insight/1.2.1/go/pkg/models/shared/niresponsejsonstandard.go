@@ -39,6 +39,8 @@ const (
 	NiResponseJSONStandardPortedEnumNull             NiResponseJSONStandardPortedEnum = "null"
 )
 
+// NiResponseJSONStandard
+// Standard Response
 type NiResponseJSONStandard struct {
 	CallerIdentity            *NiCallerIdentity                     `json:"caller_identity,omitempty"`
 	CallerName                *string                               `json:"caller_name,omitempty"`

@@ -1,50 +1,50 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-export const ROADDISTANCE_SERVERS = [
-	"http://api.climatekuul.com:8000/footprint",
-];
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 
+export const RoadDistanceServerList = [
+	"http://api.climatekuul.com:8000/footprint",
+] as const;
 
 
 export class RoadDistanceRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "form, name=apiKey_l1;" })
+  @SpeakeasyMetadata({ data: "form, name=apiKey_l1;" })
   apiKeyL1: string;
 
-  @Metadata({ data: "form, name=apiKey_l2;" })
+  @SpeakeasyMetadata({ data: "form, name=apiKey_l2;" })
   apiKeyL2: string;
 
-  @Metadata({ data: "form, name=travel_distance;" })
+  @SpeakeasyMetadata({ data: "form, name=travel_distance;" })
   travelDistance: number;
 
-  @Metadata({ data: "form, name=trip_end;" })
+  @SpeakeasyMetadata({ data: "form, name=trip_end;" })
   tripEnd: number;
 
-  @Metadata({ data: "form, name=trip_start;" })
+  @SpeakeasyMetadata({ data: "form, name=trip_start;" })
   tripStart: number;
 
-  @Metadata({ data: "form, name=vehicle_make;" })
+  @SpeakeasyMetadata({ data: "form, name=vehicle_make;" })
   vehicleMake?: string;
 
-  @Metadata({ data: "form, name=vehicle_type;" })
+  @SpeakeasyMetadata({ data: "form, name=vehicle_type;" })
   vehicleType: string;
 
-  @Metadata({ data: "form, name=vehicle_year;" })
+  @SpeakeasyMetadata({ data: "form, name=vehicle_year;" })
   vehicleYear?: number;
 }
 
 
 export class RoadDistanceRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   serverUrl?: string;
 
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
   request?: RoadDistanceRequestBody;
 }
 
 
 export class RoadDistanceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Polygon extends SpeakeasyBase {
-  @Metadata({ data: "json, name=coordinates" })
+  @SpeakeasyMetadata({ data: "json, name=coordinates" })
   coordinates?: number[][][];
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }

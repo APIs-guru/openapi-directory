@@ -12,25 +12,25 @@ class EndpointGetNewReleasesQueryParams:
 
 @dataclass
 class EndpointGetNewReleasesHeaders:
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
+    authorization: str = field(metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class EndpointGetNewReleasesSecurity:
-    spotify_auth: shared.SchemeSpotifyAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    spotify_auth: shared.SchemeSpotifyAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class EndpointGetNewReleasesRequest:
-    query_params: EndpointGetNewReleasesQueryParams = field(default=None)
-    headers: EndpointGetNewReleasesHeaders = field(default=None)
-    security: EndpointGetNewReleasesSecurity = field(default=None)
+    headers: EndpointGetNewReleasesHeaders = field()
+    query_params: EndpointGetNewReleasesQueryParams = field()
+    security: EndpointGetNewReleasesSecurity = field()
     
 
 @dataclass
 class EndpointGetNewReleasesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response_object: Optional[shared.ErrorResponseObject] = field(default=None)
     new_releases_object: Optional[shared.NewReleasesObject] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetSecurityGroupPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,20 +15,20 @@ class GetSecurityGroupQueryParams:
 
 @dataclass
 class GetSecurityGroupSecurity:
-    api_key_auth: shared.SchemeAPIKeyAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    api_key_auth: shared.SchemeAPIKeyAuth = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetSecurityGroupRequest:
-    path_params: GetSecurityGroupPathParams = field(default=None)
-    query_params: GetSecurityGroupQueryParams = field(default=None)
-    security: GetSecurityGroupSecurity = field(default=None)
+    path_params: GetSecurityGroupPathParams = field()
+    query_params: GetSecurityGroupQueryParams = field()
+    security: GetSecurityGroupSecurity = field()
     
 
 @dataclass
 class GetSecurityGroupResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_error: Optional[shared.APIError] = field(default=None)
     base_security_group: Optional[shared.BaseSecurityGroup] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

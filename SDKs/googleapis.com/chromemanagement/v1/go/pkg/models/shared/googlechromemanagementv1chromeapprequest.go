@@ -1,5 +1,7 @@
 package shared
 
+// GoogleChromeManagementV1ChromeAppRequest
+// Details of an app installation request.
 type GoogleChromeManagementV1ChromeAppRequest struct {
 	AppDetails        *string `json:"appDetails,omitempty"`
 	AppID             *string `json:"appId,omitempty"`

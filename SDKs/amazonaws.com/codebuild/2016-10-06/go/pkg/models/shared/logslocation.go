@@ -1,5 +1,7 @@
 package shared
 
+// LogsLocation
+// Information about build logs in CloudWatch Logs.
 type LogsLocation struct {
 	CloudWatchLogs    *CloudWatchLogsConfig `json:"cloudWatchLogs,omitempty"`
 	CloudWatchLogsArn *string               `json:"cloudWatchLogsArn,omitempty"`

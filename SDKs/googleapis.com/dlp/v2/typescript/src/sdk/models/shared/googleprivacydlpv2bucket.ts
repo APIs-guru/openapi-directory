@@ -1,7 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GooglePrivacyDlpV2Value } from "./googleprivacydlpv2value";
-import { GooglePrivacyDlpV2Value } from "./googleprivacydlpv2value";
-import { GooglePrivacyDlpV2Value } from "./googleprivacydlpv2value";
+
 
 
 // GooglePrivacyDlpV2Bucket
@@ -9,12 +8,12 @@ import { GooglePrivacyDlpV2Value } from "./googleprivacydlpv2value";
  * Bucket is represented as a range, along with replacement values.
 **/
 export class GooglePrivacyDlpV2Bucket extends SpeakeasyBase {
-  @Metadata({ data: "json, name=max" })
+  @SpeakeasyMetadata({ data: "json, name=max" })
   max?: GooglePrivacyDlpV2Value;
 
-  @Metadata({ data: "json, name=min" })
+  @SpeakeasyMetadata({ data: "json, name=min" })
   min?: GooglePrivacyDlpV2Value;
 
-  @Metadata({ data: "json, name=replacementValue" })
+  @SpeakeasyMetadata({ data: "json, name=replacementValue" })
   replacementValue?: GooglePrivacyDlpV2Value;
 }

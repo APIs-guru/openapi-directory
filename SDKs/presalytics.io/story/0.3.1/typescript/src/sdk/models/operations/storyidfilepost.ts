@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class StoryIdFilePostPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class StoryIdFilePostQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=include_outline" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=include_outline" })
   includeOutline?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=obsolete_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=obsolete_id" })
   obsoleteId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=replace_existing" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=replace_existing" })
   replaceExisting?: boolean;
 }
 
 
 export class StoryIdFilePostRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: StoryIdFilePostPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: StoryIdFilePostQueryParams;
 
-  @Metadata({ data: "request, media_type=multipart/form-data" })
+  @SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" })
   request: any;
 }
 
 
 export class StoryIdFilePostResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetail?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   story?: shared.Story;
 }

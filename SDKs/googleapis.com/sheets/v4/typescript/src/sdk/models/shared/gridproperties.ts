@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GridProperties
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Properties of a grid.
 **/
 export class GridProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=columnCount" })
+  @SpeakeasyMetadata({ data: "json, name=columnCount" })
   columnCount?: number;
 
-  @Metadata({ data: "json, name=columnGroupControlAfter" })
+  @SpeakeasyMetadata({ data: "json, name=columnGroupControlAfter" })
   columnGroupControlAfter?: boolean;
 
-  @Metadata({ data: "json, name=frozenColumnCount" })
+  @SpeakeasyMetadata({ data: "json, name=frozenColumnCount" })
   frozenColumnCount?: number;
 
-  @Metadata({ data: "json, name=frozenRowCount" })
+  @SpeakeasyMetadata({ data: "json, name=frozenRowCount" })
   frozenRowCount?: number;
 
-  @Metadata({ data: "json, name=hideGridlines" })
+  @SpeakeasyMetadata({ data: "json, name=hideGridlines" })
   hideGridlines?: boolean;
 
-  @Metadata({ data: "json, name=rowCount" })
+  @SpeakeasyMetadata({ data: "json, name=rowCount" })
   rowCount?: number;
 
-  @Metadata({ data: "json, name=rowGroupControlAfter" })
+  @SpeakeasyMetadata({ data: "json, name=rowGroupControlAfter" })
   rowGroupControlAfter?: boolean;
 }

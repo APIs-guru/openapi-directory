@@ -1,5 +1,7 @@
 package shared
 
+// RvBaseListing
+// Base RV listing
 type RvBaseListing struct {
 	Build           *RvBuild          `json:"build,omitempty"`
 	Dealer          *NestDealer       `json:"dealer,omitempty"`

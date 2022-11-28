@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Thing
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An AWS IoT thing.
 **/
 export class Thing extends SpeakeasyBase {
-  @Metadata({ data: "json, name=thingArn" })
+  @SpeakeasyMetadata({ data: "json, name=thingArn" })
   thingArn?: string;
 
-  @Metadata({ data: "json, name=thingName" })
+  @SpeakeasyMetadata({ data: "json, name=thingName" })
   thingName?: string;
 }

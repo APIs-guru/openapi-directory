@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AnalyticsadminPropertiesUserLinksBatchUpdatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +29,21 @@ class AnalyticsadminPropertiesUserLinksBatchUpdateQueryParams:
 
 @dataclass
 class AnalyticsadminPropertiesUserLinksBatchUpdateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AnalyticsadminPropertiesUserLinksBatchUpdateRequest:
-    path_params: AnalyticsadminPropertiesUserLinksBatchUpdatePathParams = field(default=None)
-    query_params: AnalyticsadminPropertiesUserLinksBatchUpdateQueryParams = field(default=None)
-    request: Optional[shared.GoogleAnalyticsAdminV1alphaBatchUpdateUserLinksRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AnalyticsadminPropertiesUserLinksBatchUpdateSecurity = field(default=None)
+    path_params: AnalyticsadminPropertiesUserLinksBatchUpdatePathParams = field()
+    query_params: AnalyticsadminPropertiesUserLinksBatchUpdateQueryParams = field()
+    security: AnalyticsadminPropertiesUserLinksBatchUpdateSecurity = field()
+    request: Optional[shared.GoogleAnalyticsAdminV1alphaBatchUpdateUserLinksRequestInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class AnalyticsadminPropertiesUserLinksBatchUpdateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_analytics_admin_v1alpha_batch_update_user_links_response: Optional[shared.GoogleAnalyticsAdminV1alphaBatchUpdateUserLinksResponse] = field(default=None)
-    status_code: int = field(default=None)
     

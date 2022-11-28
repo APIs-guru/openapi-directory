@@ -1,16 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { FirewallRuleConfig } from "./firewallruleconfig";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FirewallRuleConfig } from "./firewallruleconfig";
 
+
 export enum RulesInboundPolicyEnum {
-    Accept = "ACCEPT"
-,    Drop = "DROP"
+    Accept = "ACCEPT",
+    Drop = "DROP"
 }
 
 export enum RulesOutboundPolicyEnum {
-    Accept = "ACCEPT"
-,    Drop = "DROP"
+    Accept = "ACCEPT",
+    Drop = "DROP"
 }
 
 
@@ -22,15 +21,15 @@ export enum RulesOutboundPolicyEnum {
  * 
 **/
 export class Rules extends SpeakeasyBase {
-  @Metadata({ data: "json, name=inbound", elemType: shared.FirewallRuleConfig })
+  @SpeakeasyMetadata({ data: "json, name=inbound", elemType: FirewallRuleConfig })
   inbound?: FirewallRuleConfig[];
 
-  @Metadata({ data: "json, name=inbound_policy" })
+  @SpeakeasyMetadata({ data: "json, name=inbound_policy" })
   inboundPolicy?: RulesInboundPolicyEnum;
 
-  @Metadata({ data: "json, name=outbound", elemType: shared.FirewallRuleConfig })
+  @SpeakeasyMetadata({ data: "json, name=outbound", elemType: FirewallRuleConfig })
   outbound?: FirewallRuleConfig[];
 
-  @Metadata({ data: "json, name=outbound_policy" })
+  @SpeakeasyMetadata({ data: "json, name=outbound_policy" })
   outboundPolicy?: RulesOutboundPolicyEnum;
 }

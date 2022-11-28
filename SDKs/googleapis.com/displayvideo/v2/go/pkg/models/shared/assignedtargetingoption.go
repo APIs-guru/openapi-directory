@@ -60,6 +60,8 @@ const (
 	AssignedTargetingOptionTargetingTypeEnumTargetingTypeContentGenre                 AssignedTargetingOptionTargetingTypeEnum = "TARGETING_TYPE_CONTENT_GENRE"
 )
 
+// AssignedTargetingOption
+// A single assigned targeting option, which defines the state of a targeting option for an entity with targeting settings.
 type AssignedTargetingOption struct {
 	AgeRangeDetails                     *AgeRangeAssignedTargetingOptionDetails                 `json:"ageRangeDetails,omitempty"`
 	AppCategoryDetails                  *AppCategoryAssignedTargetingOptionDetails              `json:"appCategoryDetails,omitempty"`
@@ -110,4 +112,54 @@ type AssignedTargetingOption struct {
 	UserRewardedContentDetails          *UserRewardedContentAssignedTargetingOptionDetails      `json:"userRewardedContentDetails,omitempty"`
 	VideoPlayerSizeDetails              *VideoPlayerSizeAssignedTargetingOptionDetails          `json:"videoPlayerSizeDetails,omitempty"`
 	ViewabilityDetails                  *ViewabilityAssignedTargetingOptionDetails              `json:"viewabilityDetails,omitempty"`
+}
+
+// AssignedTargetingOptionInput
+// A single assigned targeting option, which defines the state of a targeting option for an entity with targeting settings.
+type AssignedTargetingOptionInput struct {
+	AgeRangeDetails                     *AgeRangeAssignedTargetingOptionDetails                      `json:"ageRangeDetails,omitempty"`
+	AppCategoryDetails                  *AppCategoryAssignedTargetingOptionDetailsInput              `json:"appCategoryDetails,omitempty"`
+	AppDetails                          *AppAssignedTargetingOptionDetailsInput                      `json:"appDetails,omitempty"`
+	AudienceGroupDetails                *AudienceGroupAssignedTargetingOptionDetails                 `json:"audienceGroupDetails,omitempty"`
+	AudioContentTypeDetails             *AudioContentTypeAssignedTargetingOptionDetails              `json:"audioContentTypeDetails,omitempty"`
+	AuthorizedSellerStatusDetails       *AuthorizedSellerStatusAssignedTargetingOptionDetailsInput   `json:"authorizedSellerStatusDetails,omitempty"`
+	BrowserDetails                      *BrowserAssignedTargetingOptionDetailsInput                  `json:"browserDetails,omitempty"`
+	BusinessChainDetails                *BusinessChainAssignedTargetingOptionDetailsInput            `json:"businessChainDetails,omitempty"`
+	CarrierAndIspDetails                *CarrierAndIspAssignedTargetingOptionDetailsInput            `json:"carrierAndIspDetails,omitempty"`
+	CategoryDetails                     *CategoryAssignedTargetingOptionDetailsInput                 `json:"categoryDetails,omitempty"`
+	ChannelDetails                      *ChannelAssignedTargetingOptionDetails                       `json:"channelDetails,omitempty"`
+	ContentDurationDetails              *ContentDurationAssignedTargetingOptionDetailsInput          `json:"contentDurationDetails,omitempty"`
+	ContentGenreDetails                 *ContentGenreAssignedTargetingOptionDetailsInput             `json:"contentGenreDetails,omitempty"`
+	ContentInstreamPositionDetails      *ContentInstreamPositionAssignedTargetingOptionDetailsInput  `json:"contentInstreamPositionDetails,omitempty"`
+	ContentOutstreamPositionDetails     *ContentOutstreamPositionAssignedTargetingOptionDetailsInput `json:"contentOutstreamPositionDetails,omitempty"`
+	ContentStreamTypeDetails            *ContentStreamTypeAssignedTargetingOptionDetailsInput        `json:"contentStreamTypeDetails,omitempty"`
+	DayAndTimeDetails                   *DayAndTimeAssignedTargetingOptionDetails                    `json:"dayAndTimeDetails,omitempty"`
+	DeviceMakeModelDetails              *DeviceMakeModelAssignedTargetingOptionDetailsInput          `json:"deviceMakeModelDetails,omitempty"`
+	DeviceTypeDetails                   *DeviceTypeAssignedTargetingOptionDetailsInput               `json:"deviceTypeDetails,omitempty"`
+	DigitalContentLabelExclusionDetails *DigitalContentLabelAssignedTargetingOptionDetails           `json:"digitalContentLabelExclusionDetails,omitempty"`
+	EnvironmentDetails                  *EnvironmentAssignedTargetingOptionDetails                   `json:"environmentDetails,omitempty"`
+	ExchangeDetails                     *ExchangeAssignedTargetingOptionDetails                      `json:"exchangeDetails,omitempty"`
+	GenderDetails                       *GenderAssignedTargetingOptionDetails                        `json:"genderDetails,omitempty"`
+	GeoRegionDetails                    *GeoRegionAssignedTargetingOptionDetailsInput                `json:"geoRegionDetails,omitempty"`
+	HouseholdIncomeDetails              *HouseholdIncomeAssignedTargetingOptionDetails               `json:"householdIncomeDetails,omitempty"`
+	InventorySourceDetails              *InventorySourceAssignedTargetingOptionDetails               `json:"inventorySourceDetails,omitempty"`
+	InventorySourceGroupDetails         *InventorySourceGroupAssignedTargetingOptionDetails          `json:"inventorySourceGroupDetails,omitempty"`
+	KeywordDetails                      *KeywordAssignedTargetingOptionDetails                       `json:"keywordDetails,omitempty"`
+	LanguageDetails                     *LanguageAssignedTargetingOptionDetailsInput                 `json:"languageDetails,omitempty"`
+	NativeContentPositionDetails        *NativeContentPositionAssignedTargetingOptionDetails         `json:"nativeContentPositionDetails,omitempty"`
+	NegativeKeywordListDetails          *NegativeKeywordListAssignedTargetingOptionDetails           `json:"negativeKeywordListDetails,omitempty"`
+	OmidDetails                         *OmidAssignedTargetingOptionDetails                          `json:"omidDetails,omitempty"`
+	OnScreenPositionDetails             *OnScreenPositionAssignedTargetingOptionDetailsInput         `json:"onScreenPositionDetails,omitempty"`
+	OperatingSystemDetails              *OperatingSystemAssignedTargetingOptionDetailsInput          `json:"operatingSystemDetails,omitempty"`
+	ParentalStatusDetails               *ParentalStatusAssignedTargetingOptionDetails                `json:"parentalStatusDetails,omitempty"`
+	PoiDetails                          *PoiAssignedTargetingOptionDetailsInput                      `json:"poiDetails,omitempty"`
+	ProximityLocationListDetails        *ProximityLocationListAssignedTargetingOptionDetails         `json:"proximityLocationListDetails,omitempty"`
+	RegionalLocationListDetails         *RegionalLocationListAssignedTargetingOptionDetails          `json:"regionalLocationListDetails,omitempty"`
+	SensitiveCategoryExclusionDetails   *SensitiveCategoryAssignedTargetingOptionDetails             `json:"sensitiveCategoryExclusionDetails,omitempty"`
+	SubExchangeDetails                  *SubExchangeAssignedTargetingOptionDetails                   `json:"subExchangeDetails,omitempty"`
+	ThirdPartyVerifierDetails           *ThirdPartyVerifierAssignedTargetingOptionDetails            `json:"thirdPartyVerifierDetails,omitempty"`
+	URLDetails                          *URLAssignedTargetingOptionDetails                           `json:"urlDetails,omitempty"`
+	UserRewardedContentDetails          *UserRewardedContentAssignedTargetingOptionDetailsInput      `json:"userRewardedContentDetails,omitempty"`
+	VideoPlayerSizeDetails              *VideoPlayerSizeAssignedTargetingOptionDetails               `json:"videoPlayerSizeDetails,omitempty"`
+	ViewabilityDetails                  *ViewabilityAssignedTargetingOptionDetails                   `json:"viewabilityDetails,omitempty"`
 }

@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List
 from dataclasses_json import dataclass_json
-from . import updateroutingcontrolstateentry
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateRoutingControlStatesRequest:
-    update_routing_control_state_entries: List[updateroutingcontrolstateentry.UpdateRoutingControlStateEntry] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'UpdateRoutingControlStateEntries' }})
+    update_routing_control_state_entries: List[UpdateRoutingControlStateEntry] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('UpdateRoutingControlStateEntries') }})
     

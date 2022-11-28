@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class PayorLinksResponse:
-    links: Optional[List[Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'links' }})
-    payors: Optional[List[Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'payors' }})
+    r"""PayorLinksResponse
+    List Payor Links Response Object
+    """
+    
+    links: Optional[List[Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('links') }})
+    payors: Optional[List[Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('payors') }})
     

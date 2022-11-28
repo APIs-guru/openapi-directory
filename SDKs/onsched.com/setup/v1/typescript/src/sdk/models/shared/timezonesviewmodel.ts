@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TimezonesViewModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=region" })
+  @SpeakeasyMetadata({ data: "json, name=region" })
   region?: string;
 
-  @Metadata({ data: "json, name=timezoneIanna" })
+  @SpeakeasyMetadata({ data: "json, name=timezoneIanna" })
   timezoneIanna?: string;
 
-  @Metadata({ data: "json, name=tzOffset" })
+  @SpeakeasyMetadata({ data: "json, name=tzOffset" })
   tzOffset?: number;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ForgotPasswordDto
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Forgot Password request body DTO.
 **/
 export class ForgotPasswordDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EnteredUsername" })
+  @SpeakeasyMetadata({ data: "json, name=EnteredUsername" })
   enteredUsername: string;
 }

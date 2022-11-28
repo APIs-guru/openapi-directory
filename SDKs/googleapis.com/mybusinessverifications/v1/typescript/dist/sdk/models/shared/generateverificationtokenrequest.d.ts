@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Location } from "./location";
 /**
  * Request message for Verifications.GenerateVerificationToken.

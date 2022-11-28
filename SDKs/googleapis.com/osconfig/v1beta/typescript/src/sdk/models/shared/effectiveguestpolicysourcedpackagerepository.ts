@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PackageRepository } from "./packagerepository";
+
 
 
 // EffectiveGuestPolicySourcedPackageRepository
@@ -7,9 +8,9 @@ import { PackageRepository } from "./packagerepository";
  * A guest policy package repository including its source.
 **/
 export class EffectiveGuestPolicySourcedPackageRepository extends SpeakeasyBase {
-  @Metadata({ data: "json, name=packageRepository" })
+  @SpeakeasyMetadata({ data: "json, name=packageRepository" })
   packageRepository?: PackageRepository;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: string;
 }

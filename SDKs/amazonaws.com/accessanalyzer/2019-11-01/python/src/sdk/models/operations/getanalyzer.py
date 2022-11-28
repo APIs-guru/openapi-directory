@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetAnalyzerPathParams:
-    analyzer_name: str = field(default=None, metadata={'path_param': { 'field_name': 'analyzerName', 'style': 'simple', 'explode': False }})
+    analyzer_name: str = field(metadata={'path_param': { 'field_name': 'analyzerName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,18 +24,18 @@ class GetAnalyzerHeaders:
 
 @dataclass
 class GetAnalyzerRequest:
-    path_params: GetAnalyzerPathParams = field(default=None)
-    headers: GetAnalyzerHeaders = field(default=None)
+    headers: GetAnalyzerHeaders = field()
+    path_params: GetAnalyzerPathParams = field()
     
 
 @dataclass
 class GetAnalyzerResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_analyzer_response: Optional[shared.GetAnalyzerResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

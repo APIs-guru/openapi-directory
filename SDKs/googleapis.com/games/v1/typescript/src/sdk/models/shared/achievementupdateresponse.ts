@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum AchievementUpdateResponseCurrentStateEnum {
-    UpdatedAchievementStateUnspecified = "UPDATED_ACHIEVEMENT_STATE_UNSPECIFIED"
-,    Hidden = "HIDDEN"
-,    Revealed = "REVEALED"
-,    Unlocked = "UNLOCKED"
+    UpdatedAchievementStateUnspecified = "UPDATED_ACHIEVEMENT_STATE_UNSPECIFIED",
+    Hidden = "HIDDEN",
+    Revealed = "REVEALED",
+    Unlocked = "UNLOCKED"
 }
 
 
@@ -13,21 +14,21 @@ export enum AchievementUpdateResponseCurrentStateEnum {
  * An updated achievement.
 **/
 export class AchievementUpdateResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=achievementId" })
+  @SpeakeasyMetadata({ data: "json, name=achievementId" })
   achievementId?: string;
 
-  @Metadata({ data: "json, name=currentState" })
+  @SpeakeasyMetadata({ data: "json, name=currentState" })
   currentState?: AchievementUpdateResponseCurrentStateEnum;
 
-  @Metadata({ data: "json, name=currentSteps" })
+  @SpeakeasyMetadata({ data: "json, name=currentSteps" })
   currentSteps?: number;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=newlyUnlocked" })
+  @SpeakeasyMetadata({ data: "json, name=newlyUnlocked" })
   newlyUnlocked?: boolean;
 
-  @Metadata({ data: "json, name=updateOccurred" })
+  @SpeakeasyMetadata({ data: "json, name=updateOccurred" })
   updateOccurred?: boolean;
 }

@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ObjectFilterStatusEnum {
-    None = "NONE"
-,    Assigned = "ASSIGNED"
-,    All = "ALL"
+    None = "NONE",
+    Assigned = "ASSIGNED",
+    All = "ALL"
 }
 
 
@@ -12,12 +13,12 @@ export enum ObjectFilterStatusEnum {
  * Object Filter.
 **/
 export class ObjectFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=objectIds" })
+  @SpeakeasyMetadata({ data: "json, name=objectIds" })
   objectIds?: string[];
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: ObjectFilterStatusEnum;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { QueryMetadata } from "./querymetadata";
 import { Parameters } from "./parameters";
 import { QuerySchedule } from "./queryschedule";

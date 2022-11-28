@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CustomViewabilityMetricConfiguration } from "./customviewabilitymetricconfiguration";
+
 
 
 // CustomViewabilityMetric
@@ -7,12 +8,12 @@ import { CustomViewabilityMetricConfiguration } from "./customviewabilitymetricc
  * Custom Viewability Metric
 **/
 export class CustomViewabilityMetric extends SpeakeasyBase {
-  @Metadata({ data: "json, name=configuration" })
+  @SpeakeasyMetadata({ data: "json, name=configuration" })
   configuration?: CustomViewabilityMetricConfiguration;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

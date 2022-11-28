@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DeleteEnvironmentPathParams = /** @class */ (function (_super) {
     __extends(DeleteEnvironmentPathParams, _super);
     function DeleteEnvironmentPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=environmentId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=environmentId" }),
         __metadata("design:type", String)
     ], DeleteEnvironmentPathParams.prototype, "environmentId", void 0);
     return DeleteEnvironmentPathParams;
@@ -41,7 +41,7 @@ var DeleteEnvironmentRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteEnvironmentPathParams)
     ], DeleteEnvironmentRequest.prototype, "pathParams", void 0);
     return DeleteEnvironmentRequest;
@@ -53,11 +53,11 @@ var DeleteEnvironmentResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DeleteEnvironmentResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DeleteEnvironmentResponse.prototype, "statusCode", void 0);
     return DeleteEnvironmentResponse;

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CreateFunctionDefinitionVersionPathParams = /** @class */ (function (_super) {
     __extends(CreateFunctionDefinitionVersionPathParams, _super);
@@ -30,7 +30,7 @@ var CreateFunctionDefinitionVersionPathParams = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=FunctionDefinitionId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=FunctionDefinitionId" }),
         __metadata("design:type", String)
     ], CreateFunctionDefinitionVersionPathParams.prototype, "functionDefinitionId", void 0);
     return CreateFunctionDefinitionVersionPathParams;
@@ -42,35 +42,35 @@ var CreateFunctionDefinitionVersionHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], CreateFunctionDefinitionVersionHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], CreateFunctionDefinitionVersionHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], CreateFunctionDefinitionVersionHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], CreateFunctionDefinitionVersionHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], CreateFunctionDefinitionVersionHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], CreateFunctionDefinitionVersionHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], CreateFunctionDefinitionVersionHeaders.prototype, "xAmzSignedHeaders", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amzn-Client-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amzn-Client-Token" }),
         __metadata("design:type", String)
     ], CreateFunctionDefinitionVersionHeaders.prototype, "xAmznClientToken", void 0);
     return CreateFunctionDefinitionVersionHeaders;
@@ -86,7 +86,7 @@ var CreateFunctionDefinitionVersionRequestBodyDefaultConfig = /** @class */ (fun
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Execution" }),
+        SpeakeasyMetadata({ data: "json, name=Execution" }),
         __metadata("design:type", shared.FunctionDefaultExecutionConfig)
     ], CreateFunctionDefinitionVersionRequestBodyDefaultConfig.prototype, "execution", void 0);
     return CreateFunctionDefinitionVersionRequestBodyDefaultConfig;
@@ -98,11 +98,11 @@ var CreateFunctionDefinitionVersionRequestBody = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DefaultConfig" }),
+        SpeakeasyMetadata({ data: "json, name=DefaultConfig" }),
         __metadata("design:type", CreateFunctionDefinitionVersionRequestBodyDefaultConfig)
     ], CreateFunctionDefinitionVersionRequestBody.prototype, "defaultConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=Functions", elemType: shared.Function }),
+        SpeakeasyMetadata({ data: "json, name=Functions", elemType: shared.Function }),
         __metadata("design:type", Array)
     ], CreateFunctionDefinitionVersionRequestBody.prototype, "functions", void 0);
     return CreateFunctionDefinitionVersionRequestBody;
@@ -114,15 +114,15 @@ var CreateFunctionDefinitionVersionRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateFunctionDefinitionVersionPathParams)
     ], CreateFunctionDefinitionVersionRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateFunctionDefinitionVersionHeaders)
     ], CreateFunctionDefinitionVersionRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", CreateFunctionDefinitionVersionRequestBody)
     ], CreateFunctionDefinitionVersionRequest.prototype, "request", void 0);
     return CreateFunctionDefinitionVersionRequest;
@@ -134,19 +134,19 @@ var CreateFunctionDefinitionVersionResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateFunctionDefinitionVersionResponse.prototype, "badRequestException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CreateFunctionDefinitionVersionResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.CreateFunctionDefinitionVersionResponse)
     ], CreateFunctionDefinitionVersionResponse.prototype, "createFunctionDefinitionVersionResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CreateFunctionDefinitionVersionResponse.prototype, "statusCode", void 0);
     return CreateFunctionDefinitionVersionResponse;

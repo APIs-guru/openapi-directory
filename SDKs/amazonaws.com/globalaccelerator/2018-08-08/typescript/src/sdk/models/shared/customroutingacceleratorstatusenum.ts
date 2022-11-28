@@ -1,6 +1,7 @@
 
 
+
 export enum CustomRoutingAcceleratorStatusEnum {
-    Deployed = "DEPLOYED"
-,    InProgress = "IN_PROGRESS"
+    Deployed = "DEPLOYED",
+    InProgress = "IN_PROGRESS"
 }

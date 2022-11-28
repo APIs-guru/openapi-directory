@@ -14,6 +14,8 @@ type GroupUpdateQueryWhere struct {
 	Value      *string `json:"value,omitempty"`
 }
 
+// GroupUpdateQuery
+// The criteria defining the group. If not provided, the group will be empty.
 type GroupUpdateQuery struct {
 	Composition *GroupUpdateQueryCompositionEnum `json:"composition,omitempty"`
 	Select      *string                          `json:"select,omitempty"`

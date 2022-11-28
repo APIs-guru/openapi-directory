@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Admin } from "./admin";
+
 
 
 // ListLocationAdminsResponse
@@ -8,6 +8,6 @@ import { Admin } from "./admin";
  * Response message for AccessControl.ListLocationAdmins.
 **/
 export class ListLocationAdminsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=admins", elemType: shared.Admin })
+  @SpeakeasyMetadata({ data: "json, name=admins", elemType: Admin })
   admins?: Admin[];
 }

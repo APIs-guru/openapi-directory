@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Greengrass } from "./greengrass";
 import { GreengrassV2 } from "./greengrassv2";
+
 
 
 // GatewayPlatform
@@ -8,9 +9,9 @@ import { GreengrassV2 } from "./greengrassv2";
  * Contains a gateway's platform information.
 **/
 export class GatewayPlatform extends SpeakeasyBase {
-  @Metadata({ data: "json, name=greengrass" })
+  @SpeakeasyMetadata({ data: "json, name=greengrass" })
   greengrass?: Greengrass;
 
-  @Metadata({ data: "json, name=greengrassV2" })
+  @SpeakeasyMetadata({ data: "json, name=greengrassV2" })
   greengrassV2?: GreengrassV2;
 }

@@ -8,15 +8,7 @@ type SchemeAPIKeyQuery struct {
 	APIKey string `security:"name=subscription-key"`
 }
 
-type SecurityOption1 struct {
-	APIKeyHeader SchemeAPIKeyHeader `security:"scheme,type=apiKey,subtype=header"`
-}
-
-type SecurityOption2 struct {
-	APIKeyQuery SchemeAPIKeyQuery `security:"scheme,type=apiKey,subtype=query"`
-}
-
 type Security struct {
-	Option1 *SecurityOption1 `security:"option"`
-	Option2 *SecurityOption2 `security:"option"`
+	APIKeyHeader *SchemeAPIKeyHeader `security:"scheme,type=apiKey,subtype=header"`
+	APIKeyQuery  *SchemeAPIKeyQuery  `security:"scheme,type=apiKey,subtype=query"`
 }

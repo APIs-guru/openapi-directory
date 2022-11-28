@@ -22,34 +22,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var SubUserJsonWebToken = /** @class */ (function (_super) {
     __extends(SubUserJsonWebToken, _super);
     function SubUserJsonWebToken() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=createdOn" }),
+        SpeakeasyMetadata({ data: "json, name=createdOn" }),
         __metadata("design:type", Number)
     ], SubUserJsonWebToken.prototype, "createdOn", void 0);
     __decorate([
-        Metadata({ data: "json, name=domain" }),
+        SpeakeasyMetadata({ data: "json, name=domain" }),
         __metadata("design:type", String)
     ], SubUserJsonWebToken.prototype, "domain", void 0);
     __decorate([
-        Metadata({ data: "json, name=endPoints" }),
+        SpeakeasyMetadata({ data: "json, name=endPoints" }),
         __metadata("design:type", Array)
     ], SubUserJsonWebToken.prototype, "endPoints", void 0);
     __decorate([
-        Metadata({ data: "json, name=expires" }),
+        SpeakeasyMetadata({ data: "json, name=expires" }),
         __metadata("design:type", Number)
     ], SubUserJsonWebToken.prototype, "expires", void 0);
     __decorate([
-        Metadata({ data: "json, name=token" }),
+        SpeakeasyMetadata({ data: "json, name=token" }),
         __metadata("design:type", String)
     ], SubUserJsonWebToken.prototype, "token", void 0);
     __decorate([
-        Metadata({ data: "json, name=uuid" }),
+        SpeakeasyMetadata({ data: "json, name=uuid" }),
         __metadata("design:type", String)
     ], SubUserJsonWebToken.prototype, "uuid", void 0);
     return SubUserJsonWebToken;

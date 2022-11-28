@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Destiny2GetHistoricalStatsForAccountPathParams = /** @class */ (function (_super) {
     __extends(Destiny2GetHistoricalStatsForAccountPathParams, _super);
     function Destiny2GetHistoricalStatsForAccountPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=destinyMembershipId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=destinyMembershipId" }),
         __metadata("design:type", Number)
     ], Destiny2GetHistoricalStatsForAccountPathParams.prototype, "destinyMembershipId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=membershipType" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=membershipType" }),
         __metadata("design:type", Number)
     ], Destiny2GetHistoricalStatsForAccountPathParams.prototype, "membershipType", void 0);
     return Destiny2GetHistoricalStatsForAccountPathParams;
@@ -45,7 +45,7 @@ var Destiny2GetHistoricalStatsForAccountQueryParams = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=groups" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=groups" }),
         __metadata("design:type", Array)
     ], Destiny2GetHistoricalStatsForAccountQueryParams.prototype, "groups", void 0);
     return Destiny2GetHistoricalStatsForAccountQueryParams;
@@ -57,11 +57,11 @@ var Destiny2GetHistoricalStatsForAccountRequest = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Destiny2GetHistoricalStatsForAccountPathParams)
     ], Destiny2GetHistoricalStatsForAccountRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Destiny2GetHistoricalStatsForAccountQueryParams)
     ], Destiny2GetHistoricalStatsForAccountRequest.prototype, "queryParams", void 0);
     return Destiny2GetHistoricalStatsForAccountRequest;
@@ -73,15 +73,15 @@ var Destiny2GetHistoricalStatsForAccountResponse = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], Destiny2GetHistoricalStatsForAccountResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], Destiny2GetHistoricalStatsForAccountResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], Destiny2GetHistoricalStatsForAccountResponse.prototype, "statusCode", void 0);
     return Destiny2GetHistoricalStatsForAccountResponse;

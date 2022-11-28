@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsElbLoadBalancerConnectionSettings
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains connection settings for the load balancer.
 **/
 export class AwsElbLoadBalancerConnectionSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=IdleTimeout" })
+  @SpeakeasyMetadata({ data: "json, name=IdleTimeout" })
   idleTimeout?: number;
 }

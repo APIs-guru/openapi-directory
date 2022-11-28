@@ -1,11 +1,11 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetPlanByTokenPathParams:
-    token: str = field(default=None, metadata={'path_param': { 'field_name': 'token', 'style': 'simple', 'explode': False }})
+    token: str = field(metadata={'path_param': { 'field_name': 'token', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,14 +15,14 @@ class GetPlanByTokenQueryParams:
 
 @dataclass
 class GetPlanByTokenRequest:
-    path_params: GetPlanByTokenPathParams = field(default=None)
-    query_params: GetPlanByTokenQueryParams = field(default=None)
+    path_params: GetPlanByTokenPathParams = field()
+    query_params: GetPlanByTokenQueryParams = field()
     
 
 @dataclass
 class GetPlanByTokenResponse:
+    content_type: str = field()
+    status_code: int = field()
     bt_plan_list_item: Optional[shared.BtPlanListItem] = field(default=None)
-    content_type: str = field(default=None)
     service_error: Optional[shared.ServiceError] = field(default=None)
-    status_code: int = field(default=None)
     

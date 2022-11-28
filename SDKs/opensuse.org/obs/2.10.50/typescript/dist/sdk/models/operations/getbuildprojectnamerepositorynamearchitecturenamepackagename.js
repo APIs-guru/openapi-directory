@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetBuildProjectNameRepositoryNameArchitectureNamePackageNamePathParams = /** @class */ (function (_super) {
     __extends(GetBuildProjectNameRepositoryNameArchitectureNamePackageNamePathParams, _super);
@@ -30,19 +30,19 @@ var GetBuildProjectNameRepositoryNameArchitectureNamePackageNamePathParams = /**
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=architecture_name" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=architecture_name" }),
         __metadata("design:type", String)
     ], GetBuildProjectNameRepositoryNameArchitectureNamePackageNamePathParams.prototype, "architectureName", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=package_name" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=package_name" }),
         __metadata("design:type", String)
     ], GetBuildProjectNameRepositoryNameArchitectureNamePackageNamePathParams.prototype, "packageName", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=project_name" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=project_name" }),
         __metadata("design:type", String)
     ], GetBuildProjectNameRepositoryNameArchitectureNamePackageNamePathParams.prototype, "projectName", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=repository_name" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repository_name" }),
         __metadata("design:type", String)
     ], GetBuildProjectNameRepositoryNameArchitectureNamePackageNamePathParams.prototype, "repositoryName", void 0);
     return GetBuildProjectNameRepositoryNameArchitectureNamePackageNamePathParams;
@@ -54,7 +54,7 @@ var GetBuildProjectNameRepositoryNameArchitectureNamePackageNameSecurity = /** @
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
         __metadata("design:type", shared.SchemeBasicAuthentication)
     ], GetBuildProjectNameRepositoryNameArchitectureNamePackageNameSecurity.prototype, "basicAuthentication", void 0);
     return GetBuildProjectNameRepositoryNameArchitectureNamePackageNameSecurity;
@@ -66,11 +66,11 @@ var GetBuildProjectNameRepositoryNameArchitectureNamePackageNameRequest = /** @c
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetBuildProjectNameRepositoryNameArchitectureNamePackageNamePathParams)
     ], GetBuildProjectNameRepositoryNameArchitectureNamePackageNameRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetBuildProjectNameRepositoryNameArchitectureNamePackageNameSecurity)
     ], GetBuildProjectNameRepositoryNameArchitectureNamePackageNameRequest.prototype, "security", void 0);
     return GetBuildProjectNameRepositoryNameArchitectureNamePackageNameRequest;
@@ -82,15 +82,15 @@ var GetBuildProjectNameRepositoryNameArchitectureNamePackageNameResponse = /** @
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetBuildProjectNameRepositoryNameArchitectureNamePackageNameResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetBuildProjectNameRepositoryNameArchitectureNamePackageNameResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetBuildProjectNameRepositoryNameArchitectureNamePackageNameResponse.prototype, "statusCode", void 0);
     return GetBuildProjectNameRepositoryNameArchitectureNamePackageNameResponse;

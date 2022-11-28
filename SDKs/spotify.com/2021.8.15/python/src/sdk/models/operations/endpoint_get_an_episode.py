@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class EndpointGetAnEpisodePathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,26 +15,26 @@ class EndpointGetAnEpisodeQueryParams:
 
 @dataclass
 class EndpointGetAnEpisodeHeaders:
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
+    authorization: str = field(metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class EndpointGetAnEpisodeSecurity:
-    spotify_auth: shared.SchemeSpotifyAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    spotify_auth: shared.SchemeSpotifyAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class EndpointGetAnEpisodeRequest:
-    path_params: EndpointGetAnEpisodePathParams = field(default=None)
-    query_params: EndpointGetAnEpisodeQueryParams = field(default=None)
-    headers: EndpointGetAnEpisodeHeaders = field(default=None)
-    security: EndpointGetAnEpisodeSecurity = field(default=None)
+    headers: EndpointGetAnEpisodeHeaders = field()
+    path_params: EndpointGetAnEpisodePathParams = field()
+    query_params: EndpointGetAnEpisodeQueryParams = field()
+    security: EndpointGetAnEpisodeSecurity = field()
     
 
 @dataclass
 class EndpointGetAnEpisodeResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     episode_object: Optional[shared.EpisodeObject] = field(default=None)
     error_response_object: Optional[shared.ErrorResponseObject] = field(default=None)
-    status_code: int = field(default=None)
     

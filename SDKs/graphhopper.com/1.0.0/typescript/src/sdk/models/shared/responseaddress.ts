@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SnappedWaypoint } from "./snappedwaypoint";
+
 
 
 // ResponseAddress
@@ -7,21 +8,21 @@ import { SnappedWaypoint } from "./snappedwaypoint";
  * Address of activity
 **/
 export class ResponseAddress extends SpeakeasyBase {
-  @Metadata({ data: "json, name=lat" })
+  @SpeakeasyMetadata({ data: "json, name=lat" })
   lat?: number;
 
-  @Metadata({ data: "json, name=location_id" })
+  @SpeakeasyMetadata({ data: "json, name=location_id" })
   locationId?: string;
 
-  @Metadata({ data: "json, name=lon" })
+  @SpeakeasyMetadata({ data: "json, name=lon" })
   lon?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=snapped_waypoint" })
+  @SpeakeasyMetadata({ data: "json, name=snapped_waypoint" })
   snappedWaypoint?: SnappedWaypoint;
 
-  @Metadata({ data: "json, name=street_hint" })
+  @SpeakeasyMetadata({ data: "json, name=street_hint" })
   streetHint?: string;
 }

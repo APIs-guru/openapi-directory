@@ -16,12 +16,6 @@ type GetQueryRelatedColumnNameSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type GetQueryRelatedColumnNameRequest struct {
-	PathParams  GetQueryRelatedColumnNamePathParams
-	QueryParams GetQueryRelatedColumnNameQueryParams
-	Security    GetQueryRelatedColumnNameSecurity
-}
-
 type GetQueryRelatedColumnName400ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
 }
@@ -36,6 +30,12 @@ type GetQueryRelatedColumnName404ApplicationJSON struct {
 
 type GetQueryRelatedColumnName500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type GetQueryRelatedColumnNameRequest struct {
+	PathParams  GetQueryRelatedColumnNamePathParams
+	QueryParams GetQueryRelatedColumnNameQueryParams
+	Security    GetQueryRelatedColumnNameSecurity
 }
 
 type GetQueryRelatedColumnNameResponse struct {

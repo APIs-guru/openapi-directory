@@ -1,9 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum UriOverrideSchemeEnum {
-    SchemeUnspecified = "SCHEME_UNSPECIFIED"
-,    Http = "HTTP"
-,    Https = "HTTPS"
+    SchemeUnspecified = "SCHEME_UNSPECIFIED",
+    Http = "HTTP",
+    Https = "HTTPS"
+}
+
+export enum UriOverrideUriOverrideEnforceModeEnum {
+    UriOverrideEnforceModeUnspecified = "URI_OVERRIDE_ENFORCE_MODE_UNSPECIFIED",
+    IfNotExists = "IF_NOT_EXISTS",
+    Always = "ALWAYS"
 }
 
 
@@ -12,18 +19,21 @@ export enum UriOverrideSchemeEnum {
  * Uri Override. When specified, all the HTTP tasks inside the queue will be partially or fully overridden depending on the configured values.
 **/
 export class UriOverride extends SpeakeasyBase {
-  @Metadata({ data: "json, name=host" })
+  @SpeakeasyMetadata({ data: "json, name=host" })
   host?: string;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path?: string;
 
-  @Metadata({ data: "json, name=port" })
+  @SpeakeasyMetadata({ data: "json, name=port" })
   port?: string;
 
-  @Metadata({ data: "json, name=query" })
+  @SpeakeasyMetadata({ data: "json, name=query" })
   query?: string;
 
-  @Metadata({ data: "json, name=scheme" })
+  @SpeakeasyMetadata({ data: "json, name=scheme" })
   scheme?: UriOverrideSchemeEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=uriOverrideEnforceMode" })
+  uriOverrideEnforceMode?: UriOverrideUriOverrideEnforceModeEnum;
 }

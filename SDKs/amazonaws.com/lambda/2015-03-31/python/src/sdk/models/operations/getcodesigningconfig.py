@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetCodeSigningConfigPathParams:
-    code_signing_config_arn: str = field(default=None, metadata={'path_param': { 'field_name': 'CodeSigningConfigArn', 'style': 'simple', 'explode': False }})
+    code_signing_config_arn: str = field(metadata={'path_param': { 'field_name': 'CodeSigningConfigArn', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,16 +24,16 @@ class GetCodeSigningConfigHeaders:
 
 @dataclass
 class GetCodeSigningConfigRequest:
-    path_params: GetCodeSigningConfigPathParams = field(default=None)
-    headers: GetCodeSigningConfigHeaders = field(default=None)
+    headers: GetCodeSigningConfigHeaders = field()
+    path_params: GetCodeSigningConfigPathParams = field()
     
 
 @dataclass
 class GetCodeSigningConfigResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_code_signing_config_response: Optional[shared.GetCodeSigningConfigResponse] = field(default=None)
     invalid_parameter_value_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

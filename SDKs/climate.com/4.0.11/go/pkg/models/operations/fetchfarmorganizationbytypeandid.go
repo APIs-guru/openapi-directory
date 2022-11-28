@@ -9,17 +9,9 @@ type FetchFarmOrganizationByTypeAndIDPathParams struct {
 	FarmOrganizationType shared.FarmOrganizationTypeEnum `pathParam:"style=simple,explode=false,name=farmOrganizationType"`
 }
 
-type FetchFarmOrganizationByTypeAndIDSecurityOption1 struct {
-	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
-}
-
-type FetchFarmOrganizationByTypeAndIDSecurityOption2 struct {
-	Oauth2AuthorizationCode shared.SchemeOauth2AuthorizationCode `security:"scheme,type=oauth2"`
-}
-
 type FetchFarmOrganizationByTypeAndIDSecurity struct {
-	Option1 *FetchFarmOrganizationByTypeAndIDSecurityOption1 `security:"option"`
-	Option2 *FetchFarmOrganizationByTypeAndIDSecurityOption2 `security:"option"`
+	APIKey                  *shared.SchemeAPIKey                  `security:"scheme,type=apiKey,subtype=header"`
+	Oauth2AuthorizationCode *shared.SchemeOauth2AuthorizationCode `security:"scheme,type=oauth2"`
 }
 
 type FetchFarmOrganizationByTypeAndIDRequest struct {

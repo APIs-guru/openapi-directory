@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PermissionEnum } from "./permissionenum";
+
 
 
 // ResourceAccessPolicy
@@ -7,9 +8,9 @@ import { PermissionEnum } from "./permissionenum";
  * A policy used by the function to access a resource.
 **/
 export class ResourceAccessPolicy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Permission" })
+  @SpeakeasyMetadata({ data: "json, name=Permission" })
   permission?: PermissionEnum;
 
-  @Metadata({ data: "json, name=ResourceId" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceId" })
   resourceId: string;
 }

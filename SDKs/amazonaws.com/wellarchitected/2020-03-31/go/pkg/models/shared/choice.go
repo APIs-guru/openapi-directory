@@ -1,5 +1,7 @@
 package shared
 
+// Choice
+// A choice available to answer question.
 type Choice struct {
 	ChoiceID    *string `json:"ChoiceId,omitempty"`
 	Description *string `json:"Description,omitempty"`

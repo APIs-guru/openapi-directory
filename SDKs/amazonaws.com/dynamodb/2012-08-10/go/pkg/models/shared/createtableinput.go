@@ -1,5 +1,7 @@
 package shared
 
+// CreateTableInput
+// Represents the input of a <code>CreateTable</code> operation.
 type CreateTableInput struct {
 	AttributeDefinitions   []AttributeDefinition  `json:"AttributeDefinitions"`
 	BillingMode            *BillingModeEnum       `json:"BillingMode,omitempty"`

@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdateVirtualGatewayPathParams:
-    mesh_name: str = field(default=None, metadata={'path_param': { 'field_name': 'meshName', 'style': 'simple', 'explode': False }})
-    virtual_gateway_name: str = field(default=None, metadata={'path_param': { 'field_name': 'virtualGatewayName', 'style': 'simple', 'explode': False }})
+    mesh_name: str = field(metadata={'path_param': { 'field_name': 'meshName', 'style': 'simple', 'explode': False }})
+    virtual_gateway_name: str = field(metadata={'path_param': { 'field_name': 'virtualGatewayName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -29,37 +33,41 @@ class UpdateVirtualGatewayHeaders:
 @dataclass_json
 @dataclass
 class UpdateVirtualGatewayRequestBodySpec:
-    backend_defaults: Optional[shared.VirtualGatewayBackendDefaults] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'backendDefaults' }})
-    listeners: Optional[List[shared.VirtualGatewayListener]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'listeners' }})
-    logging: Optional[shared.VirtualGatewayLogging] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'logging' }})
+    r"""UpdateVirtualGatewayRequestBodySpec
+    An object that represents the specification of a service mesh resource.
+    """
+    
+    backend_defaults: Optional[shared.VirtualGatewayBackendDefaults] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('backendDefaults') }})
+    listeners: Optional[List[shared.VirtualGatewayListener]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('listeners') }})
+    logging: Optional[shared.VirtualGatewayLogging] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('logging') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateVirtualGatewayRequestBody:
-    client_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clientToken' }})
-    spec: UpdateVirtualGatewayRequestBodySpec = field(default=None, metadata={'dataclasses_json': { 'field_name': 'spec' }})
+    spec: UpdateVirtualGatewayRequestBodySpec = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('spec') }})
+    client_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clientToken') }})
     
 
 @dataclass
 class UpdateVirtualGatewayRequest:
-    path_params: UpdateVirtualGatewayPathParams = field(default=None)
-    query_params: UpdateVirtualGatewayQueryParams = field(default=None)
-    headers: UpdateVirtualGatewayHeaders = field(default=None)
-    request: UpdateVirtualGatewayRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateVirtualGatewayHeaders = field()
+    path_params: UpdateVirtualGatewayPathParams = field()
+    query_params: UpdateVirtualGatewayQueryParams = field()
+    request: UpdateVirtualGatewayRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateVirtualGatewayResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     forbidden_exception: Optional[Any] = field(default=None)
     internal_server_error_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     update_virtual_gateway_output: Optional[shared.UpdateVirtualGatewayOutput] = field(default=None)
     

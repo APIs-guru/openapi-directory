@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDialogflowCxV3RolloutState
+// State of the auto-rollout process.
 type GoogleCloudDialogflowCxV3RolloutState struct {
 	StartTime *string `json:"startTime,omitempty"`
 	Step      *string `json:"step,omitempty"`

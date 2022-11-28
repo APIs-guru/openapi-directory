@@ -92,6 +92,8 @@ type IssueSearchResultItemPullRequest struct {
 	URL      string     `json:"url"`
 }
 
+// IssueSearchResultItem
+// Issue Search Result Item
 type IssueSearchResultItem struct {
 	ActiveLockReason      *string                           `json:"active_lock_reason,omitempty"`
 	Assignee              IssueSearchResultItemSimpleUser   `json:"assignee"`

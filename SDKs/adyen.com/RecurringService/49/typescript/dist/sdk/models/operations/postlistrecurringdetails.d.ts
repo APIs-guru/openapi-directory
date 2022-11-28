@@ -1,14 +1,8 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export declare class PostListRecurringDetailsSecurityOption1 extends SpeakeasyBase {
-    basicAuth: shared.SchemeBasicAuth;
-}
-export declare class PostListRecurringDetailsSecurityOption2 extends SpeakeasyBase {
-    apiKeyAuth: shared.SchemeApiKeyAuth;
-}
 export declare class PostListRecurringDetailsSecurity extends SpeakeasyBase {
-    option1?: PostListRecurringDetailsSecurityOption1;
-    option2?: PostListRecurringDetailsSecurityOption2;
+    basicAuth?: shared.SchemeBasicAuth;
+    apiKeyAuth?: shared.SchemeApiKeyAuth;
 }
 export declare class PostListRecurringDetailsRequest extends SpeakeasyBase {
     request?: any;

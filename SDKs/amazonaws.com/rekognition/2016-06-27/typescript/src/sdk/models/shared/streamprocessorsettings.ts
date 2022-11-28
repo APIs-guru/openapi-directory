@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FaceSearchSettings } from "./facesearchsettings";
+
 
 
 // StreamProcessorSettings
@@ -7,6 +8,6 @@ import { FaceSearchSettings } from "./facesearchsettings";
  * Input parameters used to recognize faces in a streaming video analyzed by a Amazon Rekognition stream processor.
 **/
 export class StreamProcessorSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FaceSearch" })
+  @SpeakeasyMetadata({ data: "json, name=FaceSearch" })
   faceSearch?: FaceSearchSettings;
 }

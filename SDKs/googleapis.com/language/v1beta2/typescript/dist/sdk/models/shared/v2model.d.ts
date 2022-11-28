@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum V2ModelContentCategoriesVersionEnum {
     ContentCategoriesVersionUnspecified = "CONTENT_CATEGORIES_VERSION_UNSPECIFIED",
     V1 = "V1",

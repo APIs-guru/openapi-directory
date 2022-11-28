@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AnalyticsManagementWebPropertyAdWordsLinksDeletePathParams:
-    account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
-    web_property_ad_words_link_id: str = field(default=None, metadata={'path_param': { 'field_name': 'webPropertyAdWordsLinkId', 'style': 'simple', 'explode': False }})
-    web_property_id: str = field(default=None, metadata={'path_param': { 'field_name': 'webPropertyId', 'style': 'simple', 'explode': False }})
+    account_id: str = field(metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
+    web_property_ad_words_link_id: str = field(metadata={'path_param': { 'field_name': 'webPropertyAdWordsLinkId', 'style': 'simple', 'explode': False }})
+    web_property_id: str = field(metadata={'path_param': { 'field_name': 'webPropertyId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,19 +24,19 @@ class AnalyticsManagementWebPropertyAdWordsLinksDeleteQueryParams:
 
 @dataclass
 class AnalyticsManagementWebPropertyAdWordsLinksDeleteSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AnalyticsManagementWebPropertyAdWordsLinksDeleteRequest:
-    path_params: AnalyticsManagementWebPropertyAdWordsLinksDeletePathParams = field(default=None)
-    query_params: AnalyticsManagementWebPropertyAdWordsLinksDeleteQueryParams = field(default=None)
-    security: AnalyticsManagementWebPropertyAdWordsLinksDeleteSecurity = field(default=None)
+    path_params: AnalyticsManagementWebPropertyAdWordsLinksDeletePathParams = field()
+    query_params: AnalyticsManagementWebPropertyAdWordsLinksDeleteQueryParams = field()
+    security: AnalyticsManagementWebPropertyAdWordsLinksDeleteSecurity = field()
     
 
 @dataclass
 class AnalyticsManagementWebPropertyAdWordsLinksDeleteResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

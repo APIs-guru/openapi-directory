@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// PipelineExecutionSummary
+// A pipeline execution summary.
 type PipelineExecutionSummary struct {
 	PipelineExecutionArn         *string                      `json:"PipelineExecutionArn,omitempty"`
 	PipelineExecutionDescription *string                      `json:"PipelineExecutionDescription,omitempty"`

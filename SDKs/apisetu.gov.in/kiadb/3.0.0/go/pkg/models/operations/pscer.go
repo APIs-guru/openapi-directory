@@ -29,11 +29,6 @@ type PscerSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type PscerRequest struct {
-	Request  *PscerRequestBody `request:"mediaType=application/json"`
-	Security PscerSecurity
-}
-
 type Pscer400ApplicationJSONErrorEnum string
 
 const (
@@ -163,6 +158,11 @@ const (
 type Pscer504ApplicationJSON struct {
 	Error            *Pscer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Pscer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type PscerRequest struct {
+	Request  *PscerRequestBody `request:"mediaType=application/json"`
+	Security PscerSecurity
 }
 
 type PscerResponse struct {

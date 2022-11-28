@@ -1,21 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EbsFilter } from "./ebsfilter";
 
 
+
 export class GetEbsVolumeRecommendationsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountIds" })
+  @SpeakeasyMetadata({ data: "json, name=accountIds" })
   accountIds?: string[];
 
-  @Metadata({ data: "json, name=filters", elemType: shared.EbsFilter })
+  @SpeakeasyMetadata({ data: "json, name=filters", elemType: EbsFilter })
   filters?: EbsFilter[];
 
-  @Metadata({ data: "json, name=maxResults" })
+  @SpeakeasyMetadata({ data: "json, name=maxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=volumeArns" })
+  @SpeakeasyMetadata({ data: "json, name=volumeArns" })
   volumeArns?: string[];
 }

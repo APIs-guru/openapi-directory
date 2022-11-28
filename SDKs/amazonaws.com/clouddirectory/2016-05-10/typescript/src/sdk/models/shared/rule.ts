@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RuleTypeEnum } from "./ruletypeenum";
+
 
 
 // Rule
@@ -7,9 +8,9 @@ import { RuleTypeEnum } from "./ruletypeenum";
  * Contains an Amazon Resource Name (ARN) and parameters that are associated with the rule.
 **/
 export class Rule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Parameters" })
+  @SpeakeasyMetadata({ data: "json, name=Parameters" })
   parameters?: Map<string, string>;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: RuleTypeEnum;
 }

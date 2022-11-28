@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DistrictsInARegionPathParams = /** @class */ (function (_super) {
     __extends(DistrictsInARegionPathParams, _super);
     function DistrictsInARegionPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=country" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=country" }),
         __metadata("design:type", String)
     ], DistrictsInARegionPathParams.prototype, "country", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=region" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=region" }),
         __metadata("design:type", String)
     ], DistrictsInARegionPathParams.prototype, "region", void 0);
     return DistrictsInARegionPathParams;
@@ -45,7 +45,7 @@ var DistrictsInARegionRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DistrictsInARegionPathParams)
     ], DistrictsInARegionRequest.prototype, "pathParams", void 0);
     return DistrictsInARegionRequest;
@@ -57,11 +57,11 @@ var DistrictsInARegionResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DistrictsInARegionResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DistrictsInARegionResponse.prototype, "statusCode", void 0);
     return DistrictsInARegionResponse;

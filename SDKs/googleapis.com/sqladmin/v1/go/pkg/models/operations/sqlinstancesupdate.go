@@ -41,7 +41,7 @@ type SQLInstancesUpdateSecurity struct {
 type SQLInstancesUpdateRequest struct {
 	PathParams  SQLInstancesUpdatePathParams
 	QueryParams SQLInstancesUpdateQueryParams
-	Request     *shared.DatabaseInstance `request:"mediaType=application/json"`
+	Request     *shared.DatabaseInstanceInput `request:"mediaType=application/json"`
 	Security    SQLInstancesUpdateSecurity
 }
 

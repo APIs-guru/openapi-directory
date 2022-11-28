@@ -1,6 +1,7 @@
 
 
+
 export enum RegionTypeEnum {
-    Primary = "Primary"
-,    Additional = "Additional"
+    Primary = "Primary",
+    Additional = "Additional"
 }

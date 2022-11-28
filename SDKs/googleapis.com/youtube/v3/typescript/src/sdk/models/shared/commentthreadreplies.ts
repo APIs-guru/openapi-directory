@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Comment } from "./comment";
+
 
 
 // CommentThreadReplies
@@ -8,6 +8,6 @@ import { Comment } from "./comment";
  * Comments written in (direct or indirect) reply to the top level comment.
 **/
 export class CommentThreadReplies extends SpeakeasyBase {
-  @Metadata({ data: "json, name=comments", elemType: shared.Comment })
+  @SpeakeasyMetadata({ data: "json, name=comments", elemType: Comment })
   comments?: Comment[];
 }

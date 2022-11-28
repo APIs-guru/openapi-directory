@@ -1,5 +1,7 @@
 package shared
 
+// IdentitytoolkitRelyingpartyVerifyAssertionRequest
+// Request to verify the IDP assertion.
 type IdentitytoolkitRelyingpartyVerifyAssertionRequest struct {
 	AutoCreate             *bool   `json:"autoCreate,omitempty"`
 	DelegatedProjectNumber *string `json:"delegatedProjectNumber,omitempty"`

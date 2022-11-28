@@ -1,13 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import offsetinfo
-from . import communicationcostbycandidate
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CommunicationCostByCandidatePage:
-    pagination: Optional[offsetinfo.OffsetInfo] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pagination' }})
-    results: Optional[List[communicationcostbycandidate.CommunicationCostByCandidate]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'results' }})
+    pagination: Optional[OffsetInfo] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pagination') }})
+    results: Optional[List[CommunicationCostByCandidate]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('results') }})
     

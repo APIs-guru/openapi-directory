@@ -18,6 +18,8 @@ type PutEmailIdentityDkimSigningAttributesHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// PutEmailIdentityDkimSigningAttributesRequestBodySigningAttributes
+// An object that contains information about the tokens used for setting up Bring Your Own DKIM (BYODKIM).
 type PutEmailIdentityDkimSigningAttributesRequestBodySigningAttributes struct {
 	DomainSigningPrivateKey *string `json:"DomainSigningPrivateKey,omitempty"`
 	DomainSigningSelector   *string `json:"DomainSigningSelector,omitempty"`

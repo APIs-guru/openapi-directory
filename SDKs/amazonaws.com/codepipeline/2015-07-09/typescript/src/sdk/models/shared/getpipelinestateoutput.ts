@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StageState } from "./stagestate";
+
 
 
 // GetPipelineStateOutput
@@ -8,18 +8,18 @@ import { StageState } from "./stagestate";
  * Represents the output of a <code>GetPipelineState</code> action.
 **/
 export class GetPipelineStateOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=pipelineName" })
+  @SpeakeasyMetadata({ data: "json, name=pipelineName" })
   pipelineName?: string;
 
-  @Metadata({ data: "json, name=pipelineVersion" })
+  @SpeakeasyMetadata({ data: "json, name=pipelineVersion" })
   pipelineVersion?: number;
 
-  @Metadata({ data: "json, name=stageStates", elemType: shared.StageState })
+  @SpeakeasyMetadata({ data: "json, name=stageStates", elemType: StageState })
   stageStates?: StageState[];
 
-  @Metadata({ data: "json, name=updated" })
+  @SpeakeasyMetadata({ data: "json, name=updated" })
   updated?: Date;
 }

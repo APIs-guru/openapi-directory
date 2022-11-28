@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// IntentMetadata
+// Provides information about an intent.
 type IntentMetadata struct {
 	CreatedDate     *time.Time `json:"createdDate,omitempty"`
 	Description     *string    `json:"description,omitempty"`

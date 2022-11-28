@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DomainStats
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Usage-specific statistics about the domain.
 **/
 export class DomainStats extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MeteringProfileCount" })
+  @SpeakeasyMetadata({ data: "json, name=MeteringProfileCount" })
   meteringProfileCount?: number;
 
-  @Metadata({ data: "json, name=ObjectCount" })
+  @SpeakeasyMetadata({ data: "json, name=ObjectCount" })
   objectCount?: number;
 
-  @Metadata({ data: "json, name=ProfileCount" })
+  @SpeakeasyMetadata({ data: "json, name=ProfileCount" })
   profileCount?: number;
 
-  @Metadata({ data: "json, name=TotalSize" })
+  @SpeakeasyMetadata({ data: "json, name=TotalSize" })
   totalSize?: number;
 }

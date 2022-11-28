@@ -1,12 +1,12 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from sdk.models import shared
 
 
 @dataclass
 class GroceryListGroceryListRemoveMarkedItemsResponse:
+    content_type: str = field()
+    status_code: int = field()
     big_oven_model_api2_grocery_list: Optional[shared.BigOvenModelApi2GroceryList] = field(default=None)
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    body: Optional[bytes] = field(default=None)
     

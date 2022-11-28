@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AdexchangebuyerCreativesAddDealPathParams:
-    account_id: int = field(default=None, metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
-    buyer_creative_id: str = field(default=None, metadata={'path_param': { 'field_name': 'buyerCreativeId', 'style': 'simple', 'explode': False }})
-    deal_id: str = field(default=None, metadata={'path_param': { 'field_name': 'dealId', 'style': 'simple', 'explode': False }})
+    account_id: int = field(metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
+    buyer_creative_id: str = field(metadata={'path_param': { 'field_name': 'buyerCreativeId', 'style': 'simple', 'explode': False }})
+    deal_id: str = field(metadata={'path_param': { 'field_name': 'dealId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,19 +24,19 @@ class AdexchangebuyerCreativesAddDealQueryParams:
 
 @dataclass
 class AdexchangebuyerCreativesAddDealSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AdexchangebuyerCreativesAddDealRequest:
-    path_params: AdexchangebuyerCreativesAddDealPathParams = field(default=None)
-    query_params: AdexchangebuyerCreativesAddDealQueryParams = field(default=None)
-    security: AdexchangebuyerCreativesAddDealSecurity = field(default=None)
+    path_params: AdexchangebuyerCreativesAddDealPathParams = field()
+    query_params: AdexchangebuyerCreativesAddDealQueryParams = field()
+    security: AdexchangebuyerCreativesAddDealSecurity = field()
     
 
 @dataclass
 class AdexchangebuyerCreativesAddDealResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

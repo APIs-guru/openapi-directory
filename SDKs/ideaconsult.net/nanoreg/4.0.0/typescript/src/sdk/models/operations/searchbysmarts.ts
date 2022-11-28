@@ -1,68 +1,69 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class SearchBySmartsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=db" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=db" })
   db: shared.AmbitDatabaseIdEnum;
 }
 
 export enum SearchBySmartsTypeEnum {
-    Smiles = "smiles"
-,    Mol = "mol"
-,    Url = "url"
+    Smiles = "smiles",
+    Mol = "mol",
+    Url = "url"
 }
 
 
 export class SearchBySmartsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=b64search" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=b64search" })
   b64search?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=bundle_uri" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=bundle_uri" })
   bundleUri?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=dataset_uri" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dataset_uri" })
   datasetUri?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filterBySubstance" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filterBySubstance" })
   filterBySubstance?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=mol" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=mol" })
   mol?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=pagesize" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pagesize" })
   pagesize?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sameas" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sameas" })
   sameas?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search" })
   search?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=type" })
   type?: SearchBySmartsTypeEnum;
 }
 
 
 export class SearchBySmartsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: SearchBySmartsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: SearchBySmartsQueryParams;
 }
 
 
 export class SearchBySmartsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   dataset?: shared.Dataset;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

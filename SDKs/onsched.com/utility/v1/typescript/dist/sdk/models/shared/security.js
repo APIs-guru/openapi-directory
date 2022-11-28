@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var SchemeOauth2 = /** @class */ (function (_super) {
     __extends(SchemeOauth2, _super);
     function SchemeOauth2() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, name=Authorization" }),
+        SpeakeasyMetadata({ data: "security, name=Authorization" }),
         __metadata("design:type", String)
     ], SchemeOauth2.prototype, "authorization", void 0);
     return SchemeOauth2;
@@ -41,7 +41,7 @@ var Security = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", SchemeOauth2)
     ], Security.prototype, "oauth2", void 0);
     return Security;

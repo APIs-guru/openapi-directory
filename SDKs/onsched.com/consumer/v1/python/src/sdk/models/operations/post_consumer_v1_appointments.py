@@ -18,13 +18,13 @@ class PostConsumerV1AppointmentsRequests:
 
 @dataclass
 class PostConsumerV1AppointmentsRequest:
-    query_params: PostConsumerV1AppointmentsQueryParams = field(default=None)
+    query_params: PostConsumerV1AppointmentsQueryParams = field()
     request: Optional[PostConsumerV1AppointmentsRequests] = field(default=None)
     
 
 @dataclass
 class PostConsumerV1AppointmentsResponse:
+    content_type: str = field()
+    status_code: int = field()
     appointment_initial_view_model: Optional[shared.AppointmentInitialViewModel] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

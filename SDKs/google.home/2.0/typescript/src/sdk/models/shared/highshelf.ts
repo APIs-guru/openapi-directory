@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class HighShelf extends SpeakeasyBase {
-  @Metadata({ data: "json, name=frequency" })
+  @SpeakeasyMetadata({ data: "json, name=frequency" })
   frequency: number;
 
-  @Metadata({ data: "json, name=gain_db" })
+  @SpeakeasyMetadata({ data: "json, name=gain_db" })
   gainDb: number;
 
-  @Metadata({ data: "json, name=quality" })
+  @SpeakeasyMetadata({ data: "json, name=quality" })
   quality: number;
 }

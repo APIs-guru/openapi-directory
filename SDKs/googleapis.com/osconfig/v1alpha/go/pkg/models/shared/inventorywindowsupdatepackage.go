@@ -1,5 +1,7 @@
 package shared
 
+// InventoryWindowsUpdatePackage
+// Details related to a Windows Update package. Field data and names are taken from Windows Update API IUpdate Interface: https://docs.microsoft.com/en-us/windows/win32/api/_wua/ Descriptive fields like title, and description are localized based on the locale of the VM being updated.
 type InventoryWindowsUpdatePackage struct {
 	Categories               []InventoryWindowsUpdatePackageWindowsUpdateCategory `json:"categories,omitempty"`
 	Description              *string                                              `json:"description,omitempty"`

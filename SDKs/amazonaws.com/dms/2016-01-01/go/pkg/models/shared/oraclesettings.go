@@ -1,5 +1,7 @@
 package shared
 
+// OracleSettings
+// Provides information that defines an Oracle endpoint.
 type OracleSettings struct {
 	AccessAlternateDirectly                *bool                    `json:"AccessAlternateDirectly,omitempty"`
 	AddSupplementalLogging                 *bool                    `json:"AddSupplementalLogging,omitempty"`

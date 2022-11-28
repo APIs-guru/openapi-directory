@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // InventoryRetrievalJobDescription
 /**
  * Describes the options for a range inventory retrieval job.
@@ -33,23 +33,23 @@ var InventoryRetrievalJobDescription = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=EndDate" }),
+        SpeakeasyMetadata({ data: "json, name=EndDate" }),
         __metadata("design:type", String)
     ], InventoryRetrievalJobDescription.prototype, "endDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=Format" }),
+        SpeakeasyMetadata({ data: "json, name=Format" }),
         __metadata("design:type", String)
     ], InventoryRetrievalJobDescription.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=Limit" }),
+        SpeakeasyMetadata({ data: "json, name=Limit" }),
         __metadata("design:type", String)
     ], InventoryRetrievalJobDescription.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "json, name=Marker" }),
+        SpeakeasyMetadata({ data: "json, name=Marker" }),
         __metadata("design:type", String)
     ], InventoryRetrievalJobDescription.prototype, "marker", void 0);
     __decorate([
-        Metadata({ data: "json, name=StartDate" }),
+        SpeakeasyMetadata({ data: "json, name=StartDate" }),
         __metadata("design:type", String)
     ], InventoryRetrievalJobDescription.prototype, "startDate", void 0);
     return InventoryRetrievalJobDescription;

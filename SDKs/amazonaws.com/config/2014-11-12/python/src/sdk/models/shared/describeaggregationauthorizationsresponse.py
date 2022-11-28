@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import aggregationauthorization
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeAggregationAuthorizationsResponse:
-    aggregation_authorizations: Optional[List[aggregationauthorization.AggregationAuthorization]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AggregationAuthorizations' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
+    aggregation_authorizations: Optional[List[AggregationAuthorization]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AggregationAuthorizations') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
     

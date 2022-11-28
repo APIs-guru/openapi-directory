@@ -1,7 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import spacedetails
+from sdk import utils
+from . import *
+
+class SpaceSpaceThreadingStateEnum(str, Enum):
+    SPACE_THREADING_STATE_UNSPECIFIED = "SPACE_THREADING_STATE_UNSPECIFIED"
+    THREADED_MESSAGES = "THREADED_MESSAGES"
+    GROUPED_MESSAGES = "GROUPED_MESSAGES"
+    UNTHREADED_MESSAGES = "UNTHREADED_MESSAGES"
 
 class SpaceTypeEnum(str, Enum):
     TYPE_UNSPECIFIED = "TYPE_UNSPECIFIED"
@@ -12,10 +20,28 @@ class SpaceTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Space:
-    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayName' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    single_user_bot_dm: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'singleUserBotDm' }})
-    space_details: Optional[spacedetails.SpaceDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'spaceDetails' }})
-    threaded: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'threaded' }})
-    type: Optional[SpaceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""Space
+    A space in Google Chat. Spaces are conversations between two or more users or 1:1 messages between a user and a Chat app.
+    """
+    
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    single_user_bot_dm: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('singleUserBotDm') }})
+    space_details: Optional[SpaceDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('spaceDetails') }})
+    space_threading_state: Optional[SpaceSpaceThreadingStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('spaceThreadingState') }})
+    threaded: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('threaded') }})
+    type: Optional[SpaceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    
+
+@dataclass_json
+@dataclass
+class SpaceInput:
+    r"""SpaceInput
+    A space in Google Chat. Spaces are conversations between two or more users or 1:1 messages between a user and a Chat app.
+    """
+    
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    single_user_bot_dm: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('singleUserBotDm') }})
+    space_details: Optional[SpaceDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('spaceDetails') }})
     

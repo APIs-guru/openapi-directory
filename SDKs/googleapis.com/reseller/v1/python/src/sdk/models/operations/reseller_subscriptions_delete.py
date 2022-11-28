@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ResellerSubscriptionsDeletePathParams:
-    customer_id: str = field(default=None, metadata={'path_param': { 'field_name': 'customerId', 'style': 'simple', 'explode': False }})
-    subscription_id: str = field(default=None, metadata={'path_param': { 'field_name': 'subscriptionId', 'style': 'simple', 'explode': False }})
+    customer_id: str = field(metadata={'path_param': { 'field_name': 'customerId', 'style': 'simple', 'explode': False }})
+    subscription_id: str = field(metadata={'path_param': { 'field_name': 'subscriptionId', 'style': 'simple', 'explode': False }})
     
 class ResellerSubscriptionsDeleteDeletionTypeEnum(str, Enum):
     DELETION_TYPE_UNDEFINED = "deletion_type_undefined"
@@ -16,11 +17,11 @@ class ResellerSubscriptionsDeleteDeletionTypeEnum(str, Enum):
 
 @dataclass
 class ResellerSubscriptionsDeleteQueryParams:
+    deletion_type: ResellerSubscriptionsDeleteDeletionTypeEnum = field(metadata={'query_param': { 'field_name': 'deletionType', 'style': 'form', 'explode': True }})
     dollar_xgafv: Optional[shared.XgafvEnum] = field(default=None, metadata={'query_param': { 'field_name': '$.xgafv', 'style': 'form', 'explode': True }})
     access_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'access_token', 'style': 'form', 'explode': True }})
     alt: Optional[shared.AltEnum] = field(default=None, metadata={'query_param': { 'field_name': 'alt', 'style': 'form', 'explode': True }})
     callback: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'callback', 'style': 'form', 'explode': True }})
-    deletion_type: ResellerSubscriptionsDeleteDeletionTypeEnum = field(default=None, metadata={'query_param': { 'field_name': 'deletionType', 'style': 'form', 'explode': True }})
     fields: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'fields', 'style': 'form', 'explode': True }})
     key: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'key', 'style': 'form', 'explode': True }})
     oauth_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'oauth_token', 'style': 'form', 'explode': True }})
@@ -32,19 +33,19 @@ class ResellerSubscriptionsDeleteQueryParams:
 
 @dataclass
 class ResellerSubscriptionsDeleteSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ResellerSubscriptionsDeleteRequest:
-    path_params: ResellerSubscriptionsDeletePathParams = field(default=None)
-    query_params: ResellerSubscriptionsDeleteQueryParams = field(default=None)
-    security: ResellerSubscriptionsDeleteSecurity = field(default=None)
+    path_params: ResellerSubscriptionsDeletePathParams = field()
+    query_params: ResellerSubscriptionsDeleteQueryParams = field()
+    security: ResellerSubscriptionsDeleteSecurity = field()
     
 
 @dataclass
 class ResellerSubscriptionsDeleteResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

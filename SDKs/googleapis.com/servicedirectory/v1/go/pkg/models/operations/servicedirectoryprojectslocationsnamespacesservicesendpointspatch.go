@@ -31,7 +31,7 @@ type ServicedirectoryProjectsLocationsNamespacesServicesEndpointsPatchSecurity s
 type ServicedirectoryProjectsLocationsNamespacesServicesEndpointsPatchRequest struct {
 	PathParams  ServicedirectoryProjectsLocationsNamespacesServicesEndpointsPatchPathParams
 	QueryParams ServicedirectoryProjectsLocationsNamespacesServicesEndpointsPatchQueryParams
-	Request     *shared.Endpoint `request:"mediaType=application/json"`
+	Request     *shared.EndpointInput `request:"mediaType=application/json"`
 	Security    ServicedirectoryProjectsLocationsNamespacesServicesEndpointsPatchSecurity
 }
 

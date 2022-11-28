@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { KeyPhrase } from "./keyphrase";
 /**
  * The result of calling the operation. The operation returns one object for each document that is successfully processed by the operation.

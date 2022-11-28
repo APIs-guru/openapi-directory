@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudWebriskV1Submission } from "./googlecloudwebriskv1submission";
 /**
  * Request to send a potentially malicious URI to WebRisk.

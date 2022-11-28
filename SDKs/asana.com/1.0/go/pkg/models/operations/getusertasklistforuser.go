@@ -14,13 +14,13 @@ type GetUserTaskListForUserQueryParams struct {
 	Workspace string   `queryParam:"style=form,explode=true,name=workspace"`
 }
 
+type GetUserTaskListForUser200ApplicationJSON struct {
+	Data *shared.UserTaskListResponse `json:"data,omitempty"`
+}
+
 type GetUserTaskListForUserRequest struct {
 	PathParams  GetUserTaskListForUserPathParams
 	QueryParams GetUserTaskListForUserQueryParams
-}
-
-type GetUserTaskListForUser200ApplicationJSON struct {
-	Data *shared.UserTaskListResponse `json:"data,omitempty"`
 }
 
 type GetUserTaskListForUserResponse struct {

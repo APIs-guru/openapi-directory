@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum VeteranStatusConfirmationVeteranStatusEnum {
-    Confirmed = "confirmed"
-,    NotConfirmed = "not confirmed"
+    Confirmed = "confirmed",
+    NotConfirmed = "not confirmed"
 }
 
 
@@ -11,6 +12,6 @@ export enum VeteranStatusConfirmationVeteranStatusEnum {
  * Veteran status confirmation for an individual
 **/
 export class VeteranStatusConfirmation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=veteran_status" })
+  @SpeakeasyMetadata({ data: "json, name=veteran_status" })
   veteranStatus?: VeteranStatusConfirmationVeteranStatusEnum;
 }

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDescribeAccountAttributesActionEnum(str, Enum):
     DESCRIBE_ACCOUNT_ATTRIBUTES = "DescribeAccountAttributes"
@@ -10,8 +14,8 @@ class GetDescribeAccountAttributesVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeAccountAttributesQueryParams:
-    action: GetDescribeAccountAttributesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: GetDescribeAccountAttributesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetDescribeAccountAttributesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDescribeAccountAttributesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,13 +31,13 @@ class GetDescribeAccountAttributesHeaders:
 
 @dataclass
 class GetDescribeAccountAttributesRequest:
-    query_params: GetDescribeAccountAttributesQueryParams = field(default=None)
-    headers: GetDescribeAccountAttributesHeaders = field(default=None)
+    headers: GetDescribeAccountAttributesHeaders = field()
+    query_params: GetDescribeAccountAttributesQueryParams = field()
     
 
 @dataclass
 class GetDescribeAccountAttributesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

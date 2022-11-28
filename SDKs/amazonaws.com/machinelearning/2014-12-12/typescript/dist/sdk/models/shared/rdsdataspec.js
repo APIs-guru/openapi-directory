@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RdsDatabaseCredentials } from "./rdsdatabasecredentials";
 import { RdsDatabase } from "./rdsdatabase";
 // RdsDataSpec
@@ -35,47 +35,47 @@ var RdsDataSpec = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DataRearrangement" }),
+        SpeakeasyMetadata({ data: "json, name=DataRearrangement" }),
         __metadata("design:type", String)
     ], RdsDataSpec.prototype, "dataRearrangement", void 0);
     __decorate([
-        Metadata({ data: "json, name=DataSchema" }),
+        SpeakeasyMetadata({ data: "json, name=DataSchema" }),
         __metadata("design:type", String)
     ], RdsDataSpec.prototype, "dataSchema", void 0);
     __decorate([
-        Metadata({ data: "json, name=DataSchemaUri" }),
+        SpeakeasyMetadata({ data: "json, name=DataSchemaUri" }),
         __metadata("design:type", String)
     ], RdsDataSpec.prototype, "dataSchemaUri", void 0);
     __decorate([
-        Metadata({ data: "json, name=DatabaseCredentials" }),
+        SpeakeasyMetadata({ data: "json, name=DatabaseCredentials" }),
         __metadata("design:type", RdsDatabaseCredentials)
     ], RdsDataSpec.prototype, "databaseCredentials", void 0);
     __decorate([
-        Metadata({ data: "json, name=DatabaseInformation" }),
+        SpeakeasyMetadata({ data: "json, name=DatabaseInformation" }),
         __metadata("design:type", RdsDatabase)
     ], RdsDataSpec.prototype, "databaseInformation", void 0);
     __decorate([
-        Metadata({ data: "json, name=ResourceRole" }),
+        SpeakeasyMetadata({ data: "json, name=ResourceRole" }),
         __metadata("design:type", String)
     ], RdsDataSpec.prototype, "resourceRole", void 0);
     __decorate([
-        Metadata({ data: "json, name=S3StagingLocation" }),
+        SpeakeasyMetadata({ data: "json, name=S3StagingLocation" }),
         __metadata("design:type", String)
     ], RdsDataSpec.prototype, "s3StagingLocation", void 0);
     __decorate([
-        Metadata({ data: "json, name=SecurityGroupIds" }),
+        SpeakeasyMetadata({ data: "json, name=SecurityGroupIds" }),
         __metadata("design:type", Array)
     ], RdsDataSpec.prototype, "securityGroupIds", void 0);
     __decorate([
-        Metadata({ data: "json, name=SelectSqlQuery" }),
+        SpeakeasyMetadata({ data: "json, name=SelectSqlQuery" }),
         __metadata("design:type", String)
     ], RdsDataSpec.prototype, "selectSqlQuery", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServiceRole" }),
+        SpeakeasyMetadata({ data: "json, name=ServiceRole" }),
         __metadata("design:type", String)
     ], RdsDataSpec.prototype, "serviceRole", void 0);
     __decorate([
-        Metadata({ data: "json, name=SubnetId" }),
+        SpeakeasyMetadata({ data: "json, name=SubnetId" }),
         __metadata("design:type", String)
     ], RdsDataSpec.prototype, "subnetId", void 0);
     return RdsDataSpec;

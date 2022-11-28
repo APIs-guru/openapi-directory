@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum AudioAssetEffectEnum {
-    FadeIn = "fadeIn"
-,    FadeOut = "fadeOut"
-,    FadeInFadeOut = "fadeInFadeOut"
+    FadeIn = "fadeIn",
+    FadeOut = "fadeOut",
+    FadeInFadeOut = "fadeInFadeOut"
 }
 
 
@@ -12,18 +13,18 @@ export enum AudioAssetEffectEnum {
  * The AudioAsset is used to add sound effects and audio at specific intervals on the timeline. The src must be a publicly accessible URL to an audio resource such  as an mp3 file.
 **/
 export class AudioAsset extends SpeakeasyBase {
-  @Metadata({ data: "json, name=effect" })
+  @SpeakeasyMetadata({ data: "json, name=effect" })
   effect?: AudioAssetEffectEnum;
 
-  @Metadata({ data: "json, name=src" })
+  @SpeakeasyMetadata({ data: "json, name=src" })
   src: string;
 
-  @Metadata({ data: "json, name=trim" })
+  @SpeakeasyMetadata({ data: "json, name=trim" })
   trim?: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 
-  @Metadata({ data: "json, name=volume" })
+  @SpeakeasyMetadata({ data: "json, name=volume" })
   volume?: number;
 }

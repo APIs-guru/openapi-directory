@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DriveFile } from "./drivefile";
 import { Form } from "./form";
 import { Link } from "./link";

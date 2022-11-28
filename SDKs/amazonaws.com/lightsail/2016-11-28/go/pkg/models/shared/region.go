@@ -1,5 +1,7 @@
 package shared
 
+// Region
+// Describes the AWS Region.
 type Region struct {
 	AvailabilityZones                   []AvailabilityZone `json:"availabilityZones,omitempty"`
 	ContinentCode                       *string            `json:"continentCode,omitempty"`

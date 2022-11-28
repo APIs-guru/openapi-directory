@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// OrganizationConfigRuleStatus
+// Returns the status for an organization config rule in an organization.
 type OrganizationConfigRuleStatus struct {
 	ErrorCode                  *string                    `json:"ErrorCode,omitempty"`
 	ErrorMessage               *string                    `json:"ErrorMessage,omitempty"`

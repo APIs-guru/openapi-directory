@@ -1,42 +1,43 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum JournalInstructionJournalInstructionAccountingTypeEnum {
-    Credit = "Credit"
-,    Debit = "Debit"
+    Credit = "Credit",
+    Debit = "Debit"
 }
 
 
 export class JournalInstructionJournalInstruction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccountingType" })
+  @SpeakeasyMetadata({ data: "json, name=AccountingType" })
   accountingType?: JournalInstructionJournalInstructionAccountingTypeEnum;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=EndDate" })
+  @SpeakeasyMetadata({ data: "json, name=EndDate" })
   endDate?: Date;
 
-  @Metadata({ data: "json, name=Expression" })
+  @SpeakeasyMetadata({ data: "json, name=Expression" })
   expression?: string;
 
-  @Metadata({ data: "json, name=JournalLineTag" })
+  @SpeakeasyMetadata({ data: "json, name=JournalLineTag" })
   journalLineTag?: string;
 
-  @Metadata({ data: "json, name=LedgerTarget" })
+  @SpeakeasyMetadata({ data: "json, name=LedgerTarget" })
   ledgerTarget?: string;
 
-  @Metadata({ data: "json, name=NomCode" })
+  @SpeakeasyMetadata({ data: "json, name=NomCode" })
   nomCode?: string;
 
-  @Metadata({ data: "json, name=StartDate" })
+  @SpeakeasyMetadata({ data: "json, name=StartDate" })
   startDate?: Date;
 
-  @Metadata({ data: "json, name=SubNomCode" })
+  @SpeakeasyMetadata({ data: "json, name=SubNomCode" })
   subNomCode?: string;
 }
 
 
 export class JournalInstruction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=JournalInstruction" })
+  @SpeakeasyMetadata({ data: "json, name=JournalInstruction" })
   journalInstruction?: JournalInstructionJournalInstruction;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// Resource
+// Describes the resources available for a container instance.
 type Resource struct {
 	DoubleValue    *float64 `json:"doubleValue,omitempty"`
 	IntegerValue   *int64   `json:"integerValue,omitempty"`

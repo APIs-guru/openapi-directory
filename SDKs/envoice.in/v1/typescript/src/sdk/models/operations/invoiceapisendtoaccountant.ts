@@ -1,59 +1,60 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class InvoiceApiSendToAccountantHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=x-auth-key" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-auth-key" })
   xAuthKey: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=x-auth-secret" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-auth-secret" })
   xAuthSecret: string;
 }
 
 
 export class InvoiceApiSendToAccountantRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/xml" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/xml" })
   applicationXml: Uint8Array;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   sendInvoiceToAccountantApiModel?: shared.SendInvoiceToAccountantApiModel;
 
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
   sendInvoiceToAccountantApiModel1?: shared.SendInvoiceToAccountantApiModel;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   sendInvoiceToAccountantApiModel2?: shared.SendInvoiceToAccountantApiModel;
 
-  @Metadata({ data: "request, media_type=text/html" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/html" })
   textHtml: Uint8Array;
 
-  @Metadata({ data: "request, media_type=text/xml" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/xml" })
   textXml: Uint8Array;
 }
 
 
 export class InvoiceApiSendToAccountantRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: InvoiceApiSendToAccountantHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request: InvoiceApiSendToAccountantRequests;
 }
 
 
 export class InvoiceApiSendToAccountantResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invoiceApiSendToAccountant200ApplicationJsonInt32Integer?: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invoiceApiSendToAccountant200TextJsonInt32Integer?: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

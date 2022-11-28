@@ -1,0 +1,36 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+export declare class BaseF3XFiling extends SpeakeasyBase {
+    amendAddress?: string;
+    amendedBy?: number;
+    amendment?: string;
+    amendmentChain?: number[];
+    beginningImageNumber?: string;
+    city?: string;
+    committeeId?: string;
+    committeeName?: string;
+    coverageEndDate?: Date;
+    coverageStartDate?: Date;
+    csvUrl?: string;
+    documentDescription?: string;
+    electionDate?: Date;
+    electionState?: string;
+    fecFileId?: string;
+    fecUrl?: string;
+    fileNumber?: number;
+    isAmended?: boolean;
+    mostRecent?: boolean;
+    mostRecentFiling?: number;
+    pdfUrl?: string;
+    qualifiedMulticandidateCommittee?: string;
+    receiptDate?: Date;
+    report?: string;
+    reportType?: string;
+    reportYear?: number;
+    rptPgi?: string;
+    signDate?: Date;
+    state?: string;
+    street1?: string;
+    street2?: string;
+    summaryLines?: string;
+    zip?: string;
+}

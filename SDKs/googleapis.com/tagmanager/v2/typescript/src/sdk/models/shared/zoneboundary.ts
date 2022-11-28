@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Condition } from "./condition";
+
 
 
 // ZoneBoundary
@@ -8,9 +8,9 @@ import { Condition } from "./condition";
  * Represents a Zone's boundaries.
 **/
 export class ZoneBoundary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=condition", elemType: shared.Condition })
+  @SpeakeasyMetadata({ data: "json, name=condition", elemType: Condition })
   condition?: Condition[];
 
-  @Metadata({ data: "json, name=customEvaluationTriggerId" })
+  @SpeakeasyMetadata({ data: "json, name=customEvaluationTriggerId" })
   customEvaluationTriggerId?: string[];
 }

@@ -11,7 +11,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://rds.{region}.amazonaws.com",
 	"https://rds.{region}.amazonaws.com",
 	"http://rds.amazonaws.com",
@@ -24,10 +24,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/rds/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -38,33 +43,54 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
 func (s *SDK) GetAddSourceIdentifierToSubscription(ctx context.Context, request operations.GetAddSourceIdentifierToSubscriptionRequest) (*operations.GetAddSourceIdentifierToSubscriptionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AddSourceIdentifierToSubscription"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -76,7 +102,7 @@ func (s *SDK) GetAddSourceIdentifierToSubscription(ctx context.Context, request 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -127,7 +153,7 @@ func (s *SDK) GetAddSourceIdentifierToSubscription(ctx context.Context, request 
 }
 
 func (s *SDK) GetAuthorizeDbSecurityGroupIngress(ctx context.Context, request operations.GetAuthorizeDbSecurityGroupIngressRequest) (*operations.GetAuthorizeDbSecurityGroupIngressResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AuthorizeDBSecurityGroupIngress"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -139,7 +165,7 @@ func (s *SDK) GetAuthorizeDbSecurityGroupIngress(ctx context.Context, request op
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -210,7 +236,7 @@ func (s *SDK) GetAuthorizeDbSecurityGroupIngress(ctx context.Context, request op
 }
 
 func (s *SDK) GetCopyDbSnapshot(ctx context.Context, request operations.GetCopyDbSnapshotRequest) (*operations.GetCopyDbSnapshotResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CopyDBSnapshot"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -222,7 +248,7 @@ func (s *SDK) GetCopyDbSnapshot(ctx context.Context, request operations.GetCopyD
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -293,7 +319,7 @@ func (s *SDK) GetCopyDbSnapshot(ctx context.Context, request operations.GetCopyD
 }
 
 func (s *SDK) GetCreateDbInstance(ctx context.Context, request operations.GetCreateDbInstanceRequest) (*operations.GetCreateDbInstanceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateDBInstance"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -305,7 +331,7 @@ func (s *SDK) GetCreateDbInstance(ctx context.Context, request operations.GetCre
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -456,7 +482,7 @@ func (s *SDK) GetCreateDbInstance(ctx context.Context, request operations.GetCre
 }
 
 func (s *SDK) GetCreateDbInstanceReadReplica(ctx context.Context, request operations.GetCreateDbInstanceReadReplicaRequest) (*operations.GetCreateDbInstanceReadReplicaResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateDBInstanceReadReplica"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -468,7 +494,7 @@ func (s *SDK) GetCreateDbInstanceReadReplica(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -639,7 +665,7 @@ func (s *SDK) GetCreateDbInstanceReadReplica(ctx context.Context, request operat
 }
 
 func (s *SDK) GetCreateDbParameterGroup(ctx context.Context, request operations.GetCreateDbParameterGroupRequest) (*operations.GetCreateDbParameterGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateDBParameterGroup"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -651,7 +677,7 @@ func (s *SDK) GetCreateDbParameterGroup(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -702,7 +728,7 @@ func (s *SDK) GetCreateDbParameterGroup(ctx context.Context, request operations.
 }
 
 func (s *SDK) GetCreateDbSecurityGroup(ctx context.Context, request operations.GetCreateDbSecurityGroupRequest) (*operations.GetCreateDbSecurityGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateDBSecurityGroup"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -714,7 +740,7 @@ func (s *SDK) GetCreateDbSecurityGroup(ctx context.Context, request operations.G
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -775,7 +801,7 @@ func (s *SDK) GetCreateDbSecurityGroup(ctx context.Context, request operations.G
 }
 
 func (s *SDK) GetCreateDbSnapshot(ctx context.Context, request operations.GetCreateDbSnapshotRequest) (*operations.GetCreateDbSnapshotResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateDBSnapshot"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -787,7 +813,7 @@ func (s *SDK) GetCreateDbSnapshot(ctx context.Context, request operations.GetCre
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -858,7 +884,7 @@ func (s *SDK) GetCreateDbSnapshot(ctx context.Context, request operations.GetCre
 }
 
 func (s *SDK) GetCreateDbSubnetGroup(ctx context.Context, request operations.GetCreateDbSubnetGroupRequest) (*operations.GetCreateDbSubnetGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateDBSubnetGroup"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -870,7 +896,7 @@ func (s *SDK) GetCreateDbSubnetGroup(ctx context.Context, request operations.Get
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -951,7 +977,7 @@ func (s *SDK) GetCreateDbSubnetGroup(ctx context.Context, request operations.Get
 }
 
 func (s *SDK) GetCreateEventSubscription(ctx context.Context, request operations.GetCreateEventSubscriptionRequest) (*operations.GetCreateEventSubscriptionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateEventSubscription"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -963,7 +989,7 @@ func (s *SDK) GetCreateEventSubscription(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1064,7 +1090,7 @@ func (s *SDK) GetCreateEventSubscription(ctx context.Context, request operations
 }
 
 func (s *SDK) GetCreateOptionGroup(ctx context.Context, request operations.GetCreateOptionGroupRequest) (*operations.GetCreateOptionGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateOptionGroup"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1076,7 +1102,7 @@ func (s *SDK) GetCreateOptionGroup(ctx context.Context, request operations.GetCr
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1127,7 +1153,7 @@ func (s *SDK) GetCreateOptionGroup(ctx context.Context, request operations.GetCr
 }
 
 func (s *SDK) GetDeleteDbInstance(ctx context.Context, request operations.GetDeleteDbInstanceRequest) (*operations.GetDeleteDbInstanceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteDBInstance"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1139,7 +1165,7 @@ func (s *SDK) GetDeleteDbInstance(ctx context.Context, request operations.GetDel
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1210,7 +1236,7 @@ func (s *SDK) GetDeleteDbInstance(ctx context.Context, request operations.GetDel
 }
 
 func (s *SDK) GetDeleteDbParameterGroup(ctx context.Context, request operations.GetDeleteDbParameterGroupRequest) (*operations.GetDeleteDbParameterGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteDBParameterGroup"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1222,7 +1248,7 @@ func (s *SDK) GetDeleteDbParameterGroup(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1264,7 +1290,7 @@ func (s *SDK) GetDeleteDbParameterGroup(ctx context.Context, request operations.
 }
 
 func (s *SDK) GetDeleteDbSecurityGroup(ctx context.Context, request operations.GetDeleteDbSecurityGroupRequest) (*operations.GetDeleteDbSecurityGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteDBSecurityGroup"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1276,7 +1302,7 @@ func (s *SDK) GetDeleteDbSecurityGroup(ctx context.Context, request operations.G
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1318,7 +1344,7 @@ func (s *SDK) GetDeleteDbSecurityGroup(ctx context.Context, request operations.G
 }
 
 func (s *SDK) GetDeleteDbSnapshot(ctx context.Context, request operations.GetDeleteDbSnapshotRequest) (*operations.GetDeleteDbSnapshotResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteDBSnapshot"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1330,7 +1356,7 @@ func (s *SDK) GetDeleteDbSnapshot(ctx context.Context, request operations.GetDel
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1381,7 +1407,7 @@ func (s *SDK) GetDeleteDbSnapshot(ctx context.Context, request operations.GetDel
 }
 
 func (s *SDK) GetDeleteDbSubnetGroup(ctx context.Context, request operations.GetDeleteDbSubnetGroupRequest) (*operations.GetDeleteDbSubnetGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteDBSubnetGroup"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1393,7 +1419,7 @@ func (s *SDK) GetDeleteDbSubnetGroup(ctx context.Context, request operations.Get
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1445,7 +1471,7 @@ func (s *SDK) GetDeleteDbSubnetGroup(ctx context.Context, request operations.Get
 }
 
 func (s *SDK) GetDeleteEventSubscription(ctx context.Context, request operations.GetDeleteEventSubscriptionRequest) (*operations.GetDeleteEventSubscriptionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteEventSubscription"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1457,7 +1483,7 @@ func (s *SDK) GetDeleteEventSubscription(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1508,7 +1534,7 @@ func (s *SDK) GetDeleteEventSubscription(ctx context.Context, request operations
 }
 
 func (s *SDK) GetDeleteOptionGroup(ctx context.Context, request operations.GetDeleteOptionGroupRequest) (*operations.GetDeleteOptionGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteOptionGroup"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1520,7 +1546,7 @@ func (s *SDK) GetDeleteOptionGroup(ctx context.Context, request operations.GetDe
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1562,7 +1588,7 @@ func (s *SDK) GetDeleteOptionGroup(ctx context.Context, request operations.GetDe
 }
 
 func (s *SDK) GetDescribeDbEngineVersions(ctx context.Context, request operations.GetDescribeDbEngineVersionsRequest) (*operations.GetDescribeDbEngineVersionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeDBEngineVersions"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1574,7 +1600,7 @@ func (s *SDK) GetDescribeDbEngineVersions(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1605,7 +1631,7 @@ func (s *SDK) GetDescribeDbEngineVersions(ctx context.Context, request operation
 }
 
 func (s *SDK) GetDescribeDbInstances(ctx context.Context, request operations.GetDescribeDbInstancesRequest) (*operations.GetDescribeDbInstancesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeDBInstances"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1617,7 +1643,7 @@ func (s *SDK) GetDescribeDbInstances(ctx context.Context, request operations.Get
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1658,7 +1684,7 @@ func (s *SDK) GetDescribeDbInstances(ctx context.Context, request operations.Get
 }
 
 func (s *SDK) GetDescribeDbLogFiles(ctx context.Context, request operations.GetDescribeDbLogFilesRequest) (*operations.GetDescribeDbLogFilesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeDBLogFiles"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1670,7 +1696,7 @@ func (s *SDK) GetDescribeDbLogFiles(ctx context.Context, request operations.GetD
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1711,7 +1737,7 @@ func (s *SDK) GetDescribeDbLogFiles(ctx context.Context, request operations.GetD
 }
 
 func (s *SDK) GetDescribeDbParameterGroups(ctx context.Context, request operations.GetDescribeDbParameterGroupsRequest) (*operations.GetDescribeDbParameterGroupsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeDBParameterGroups"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1723,7 +1749,7 @@ func (s *SDK) GetDescribeDbParameterGroups(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1764,7 +1790,7 @@ func (s *SDK) GetDescribeDbParameterGroups(ctx context.Context, request operatio
 }
 
 func (s *SDK) GetDescribeDbParameters(ctx context.Context, request operations.GetDescribeDbParametersRequest) (*operations.GetDescribeDbParametersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeDBParameters"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1776,7 +1802,7 @@ func (s *SDK) GetDescribeDbParameters(ctx context.Context, request operations.Ge
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1817,7 +1843,7 @@ func (s *SDK) GetDescribeDbParameters(ctx context.Context, request operations.Ge
 }
 
 func (s *SDK) GetDescribeDbSecurityGroups(ctx context.Context, request operations.GetDescribeDbSecurityGroupsRequest) (*operations.GetDescribeDbSecurityGroupsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeDBSecurityGroups"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1829,7 +1855,7 @@ func (s *SDK) GetDescribeDbSecurityGroups(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1870,7 +1896,7 @@ func (s *SDK) GetDescribeDbSecurityGroups(ctx context.Context, request operation
 }
 
 func (s *SDK) GetDescribeDbSnapshots(ctx context.Context, request operations.GetDescribeDbSnapshotsRequest) (*operations.GetDescribeDbSnapshotsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeDBSnapshots"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1882,7 +1908,7 @@ func (s *SDK) GetDescribeDbSnapshots(ctx context.Context, request operations.Get
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1923,7 +1949,7 @@ func (s *SDK) GetDescribeDbSnapshots(ctx context.Context, request operations.Get
 }
 
 func (s *SDK) GetDescribeDbSubnetGroups(ctx context.Context, request operations.GetDescribeDbSubnetGroupsRequest) (*operations.GetDescribeDbSubnetGroupsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeDBSubnetGroups"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1935,7 +1961,7 @@ func (s *SDK) GetDescribeDbSubnetGroups(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1976,7 +2002,7 @@ func (s *SDK) GetDescribeDbSubnetGroups(ctx context.Context, request operations.
 }
 
 func (s *SDK) GetDescribeEngineDefaultParameters(ctx context.Context, request operations.GetDescribeEngineDefaultParametersRequest) (*operations.GetDescribeEngineDefaultParametersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeEngineDefaultParameters"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1988,7 +2014,7 @@ func (s *SDK) GetDescribeEngineDefaultParameters(ctx context.Context, request op
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2019,7 +2045,7 @@ func (s *SDK) GetDescribeEngineDefaultParameters(ctx context.Context, request op
 }
 
 func (s *SDK) GetDescribeEventCategories(ctx context.Context, request operations.GetDescribeEventCategoriesRequest) (*operations.GetDescribeEventCategoriesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeEventCategories"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2031,7 +2057,7 @@ func (s *SDK) GetDescribeEventCategories(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2062,7 +2088,7 @@ func (s *SDK) GetDescribeEventCategories(ctx context.Context, request operations
 }
 
 func (s *SDK) GetDescribeEventSubscriptions(ctx context.Context, request operations.GetDescribeEventSubscriptionsRequest) (*operations.GetDescribeEventSubscriptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeEventSubscriptions"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2074,7 +2100,7 @@ func (s *SDK) GetDescribeEventSubscriptions(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2115,7 +2141,7 @@ func (s *SDK) GetDescribeEventSubscriptions(ctx context.Context, request operati
 }
 
 func (s *SDK) GetDescribeEvents(ctx context.Context, request operations.GetDescribeEventsRequest) (*operations.GetDescribeEventsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeEvents"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2127,7 +2153,7 @@ func (s *SDK) GetDescribeEvents(ctx context.Context, request operations.GetDescr
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2158,7 +2184,7 @@ func (s *SDK) GetDescribeEvents(ctx context.Context, request operations.GetDescr
 }
 
 func (s *SDK) GetDescribeOptionGroupOptions(ctx context.Context, request operations.GetDescribeOptionGroupOptionsRequest) (*operations.GetDescribeOptionGroupOptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeOptionGroupOptions"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2170,7 +2196,7 @@ func (s *SDK) GetDescribeOptionGroupOptions(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2201,7 +2227,7 @@ func (s *SDK) GetDescribeOptionGroupOptions(ctx context.Context, request operati
 }
 
 func (s *SDK) GetDescribeOptionGroups(ctx context.Context, request operations.GetDescribeOptionGroupsRequest) (*operations.GetDescribeOptionGroupsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeOptionGroups"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2213,7 +2239,7 @@ func (s *SDK) GetDescribeOptionGroups(ctx context.Context, request operations.Ge
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2254,7 +2280,7 @@ func (s *SDK) GetDescribeOptionGroups(ctx context.Context, request operations.Ge
 }
 
 func (s *SDK) GetDescribeOrderableDbInstanceOptions(ctx context.Context, request operations.GetDescribeOrderableDbInstanceOptionsRequest) (*operations.GetDescribeOrderableDbInstanceOptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeOrderableDBInstanceOptions"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2266,7 +2292,7 @@ func (s *SDK) GetDescribeOrderableDbInstanceOptions(ctx context.Context, request
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2297,7 +2323,7 @@ func (s *SDK) GetDescribeOrderableDbInstanceOptions(ctx context.Context, request
 }
 
 func (s *SDK) GetDescribeReservedDbInstances(ctx context.Context, request operations.GetDescribeReservedDbInstancesRequest) (*operations.GetDescribeReservedDbInstancesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeReservedDBInstances"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2309,7 +2335,7 @@ func (s *SDK) GetDescribeReservedDbInstances(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2350,7 +2376,7 @@ func (s *SDK) GetDescribeReservedDbInstances(ctx context.Context, request operat
 }
 
 func (s *SDK) GetDescribeReservedDbInstancesOfferings(ctx context.Context, request operations.GetDescribeReservedDbInstancesOfferingsRequest) (*operations.GetDescribeReservedDbInstancesOfferingsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeReservedDBInstancesOfferings"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2362,7 +2388,7 @@ func (s *SDK) GetDescribeReservedDbInstancesOfferings(ctx context.Context, reque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2403,7 +2429,7 @@ func (s *SDK) GetDescribeReservedDbInstancesOfferings(ctx context.Context, reque
 }
 
 func (s *SDK) GetDownloadDbLogFilePortion(ctx context.Context, request operations.GetDownloadDbLogFilePortionRequest) (*operations.GetDownloadDbLogFilePortionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DownloadDBLogFilePortion"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2415,7 +2441,7 @@ func (s *SDK) GetDownloadDbLogFilePortion(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2466,7 +2492,7 @@ func (s *SDK) GetDownloadDbLogFilePortion(ctx context.Context, request operation
 }
 
 func (s *SDK) GetListTagsForResource(ctx context.Context, request operations.GetListTagsForResourceRequest) (*operations.GetListTagsForResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ListTagsForResource"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2478,7 +2504,7 @@ func (s *SDK) GetListTagsForResource(ctx context.Context, request operations.Get
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2529,7 +2555,7 @@ func (s *SDK) GetListTagsForResource(ctx context.Context, request operations.Get
 }
 
 func (s *SDK) GetModifyDbInstance(ctx context.Context, request operations.GetModifyDbInstanceRequest) (*operations.GetModifyDbInstanceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyDBInstance"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2541,7 +2567,7 @@ func (s *SDK) GetModifyDbInstance(ctx context.Context, request operations.GetMod
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2692,7 +2718,7 @@ func (s *SDK) GetModifyDbInstance(ctx context.Context, request operations.GetMod
 }
 
 func (s *SDK) GetModifyDbSubnetGroup(ctx context.Context, request operations.GetModifyDbSubnetGroupRequest) (*operations.GetModifyDbSubnetGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyDBSubnetGroup"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2704,7 +2730,7 @@ func (s *SDK) GetModifyDbSubnetGroup(ctx context.Context, request operations.Get
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2785,7 +2811,7 @@ func (s *SDK) GetModifyDbSubnetGroup(ctx context.Context, request operations.Get
 }
 
 func (s *SDK) GetModifyEventSubscription(ctx context.Context, request operations.GetModifyEventSubscriptionRequest) (*operations.GetModifyEventSubscriptionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyEventSubscription"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2797,7 +2823,7 @@ func (s *SDK) GetModifyEventSubscription(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2888,7 +2914,7 @@ func (s *SDK) GetModifyEventSubscription(ctx context.Context, request operations
 }
 
 func (s *SDK) GetPromoteReadReplica(ctx context.Context, request operations.GetPromoteReadReplicaRequest) (*operations.GetPromoteReadReplicaResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=PromoteReadReplica"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2900,7 +2926,7 @@ func (s *SDK) GetPromoteReadReplica(ctx context.Context, request operations.GetP
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2951,7 +2977,7 @@ func (s *SDK) GetPromoteReadReplica(ctx context.Context, request operations.GetP
 }
 
 func (s *SDK) GetPurchaseReservedDbInstancesOffering(ctx context.Context, request operations.GetPurchaseReservedDbInstancesOfferingRequest) (*operations.GetPurchaseReservedDbInstancesOfferingResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=PurchaseReservedDBInstancesOffering"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2963,7 +2989,7 @@ func (s *SDK) GetPurchaseReservedDbInstancesOffering(ctx context.Context, reques
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3024,7 +3050,7 @@ func (s *SDK) GetPurchaseReservedDbInstancesOffering(ctx context.Context, reques
 }
 
 func (s *SDK) GetRebootDbInstance(ctx context.Context, request operations.GetRebootDbInstanceRequest) (*operations.GetRebootDbInstanceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=RebootDBInstance"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3036,7 +3062,7 @@ func (s *SDK) GetRebootDbInstance(ctx context.Context, request operations.GetReb
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3087,7 +3113,7 @@ func (s *SDK) GetRebootDbInstance(ctx context.Context, request operations.GetReb
 }
 
 func (s *SDK) GetRemoveSourceIdentifierFromSubscription(ctx context.Context, request operations.GetRemoveSourceIdentifierFromSubscriptionRequest) (*operations.GetRemoveSourceIdentifierFromSubscriptionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=RemoveSourceIdentifierFromSubscription"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3099,7 +3125,7 @@ func (s *SDK) GetRemoveSourceIdentifierFromSubscription(ctx context.Context, req
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3150,7 +3176,7 @@ func (s *SDK) GetRemoveSourceIdentifierFromSubscription(ctx context.Context, req
 }
 
 func (s *SDK) GetRemoveTagsFromResource(ctx context.Context, request operations.GetRemoveTagsFromResourceRequest) (*operations.GetRemoveTagsFromResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=RemoveTagsFromResource"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3162,7 +3188,7 @@ func (s *SDK) GetRemoveTagsFromResource(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3204,7 +3230,7 @@ func (s *SDK) GetRemoveTagsFromResource(ctx context.Context, request operations.
 }
 
 func (s *SDK) GetRestoreDbInstanceFromDbSnapshot(ctx context.Context, request operations.GetRestoreDbInstanceFromDbSnapshotRequest) (*operations.GetRestoreDbInstanceFromDbSnapshotResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=RestoreDBInstanceFromDBSnapshot"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3216,7 +3242,7 @@ func (s *SDK) GetRestoreDbInstanceFromDbSnapshot(ctx context.Context, request op
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3377,7 +3403,7 @@ func (s *SDK) GetRestoreDbInstanceFromDbSnapshot(ctx context.Context, request op
 }
 
 func (s *SDK) GetRestoreDbInstanceToPointInTime(ctx context.Context, request operations.GetRestoreDbInstanceToPointInTimeRequest) (*operations.GetRestoreDbInstanceToPointInTimeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=RestoreDBInstanceToPointInTime"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3389,7 +3415,7 @@ func (s *SDK) GetRestoreDbInstanceToPointInTime(ctx context.Context, request ope
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3560,7 +3586,7 @@ func (s *SDK) GetRestoreDbInstanceToPointInTime(ctx context.Context, request ope
 }
 
 func (s *SDK) GetRevokeDbSecurityGroupIngress(ctx context.Context, request operations.GetRevokeDbSecurityGroupIngressRequest) (*operations.GetRevokeDbSecurityGroupIngressResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=RevokeDBSecurityGroupIngress"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3572,7 +3598,7 @@ func (s *SDK) GetRevokeDbSecurityGroupIngress(ctx context.Context, request opera
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3633,7 +3659,7 @@ func (s *SDK) GetRevokeDbSecurityGroupIngress(ctx context.Context, request opera
 }
 
 func (s *SDK) PostAddSourceIdentifierToSubscription(ctx context.Context, request operations.PostAddSourceIdentifierToSubscriptionRequest) (*operations.PostAddSourceIdentifierToSubscriptionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AddSourceIdentifierToSubscription"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3652,7 +3678,7 @@ func (s *SDK) PostAddSourceIdentifierToSubscription(ctx context.Context, request
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3703,7 +3729,7 @@ func (s *SDK) PostAddSourceIdentifierToSubscription(ctx context.Context, request
 }
 
 func (s *SDK) PostAddTagsToResource(ctx context.Context, request operations.PostAddTagsToResourceRequest) (*operations.PostAddTagsToResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AddTagsToResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3722,7 +3748,7 @@ func (s *SDK) PostAddTagsToResource(ctx context.Context, request operations.Post
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3764,7 +3790,7 @@ func (s *SDK) PostAddTagsToResource(ctx context.Context, request operations.Post
 }
 
 func (s *SDK) PostAuthorizeDbSecurityGroupIngress(ctx context.Context, request operations.PostAuthorizeDbSecurityGroupIngressRequest) (*operations.PostAuthorizeDbSecurityGroupIngressResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=AuthorizeDBSecurityGroupIngress"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3783,7 +3809,7 @@ func (s *SDK) PostAuthorizeDbSecurityGroupIngress(ctx context.Context, request o
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3854,7 +3880,7 @@ func (s *SDK) PostAuthorizeDbSecurityGroupIngress(ctx context.Context, request o
 }
 
 func (s *SDK) PostCopyDbSnapshot(ctx context.Context, request operations.PostCopyDbSnapshotRequest) (*operations.PostCopyDbSnapshotResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CopyDBSnapshot"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3873,7 +3899,7 @@ func (s *SDK) PostCopyDbSnapshot(ctx context.Context, request operations.PostCop
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3944,7 +3970,7 @@ func (s *SDK) PostCopyDbSnapshot(ctx context.Context, request operations.PostCop
 }
 
 func (s *SDK) PostCreateDbInstance(ctx context.Context, request operations.PostCreateDbInstanceRequest) (*operations.PostCreateDbInstanceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateDBInstance"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3963,7 +3989,7 @@ func (s *SDK) PostCreateDbInstance(ctx context.Context, request operations.PostC
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4114,7 +4140,7 @@ func (s *SDK) PostCreateDbInstance(ctx context.Context, request operations.PostC
 }
 
 func (s *SDK) PostCreateDbInstanceReadReplica(ctx context.Context, request operations.PostCreateDbInstanceReadReplicaRequest) (*operations.PostCreateDbInstanceReadReplicaResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateDBInstanceReadReplica"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4133,7 +4159,7 @@ func (s *SDK) PostCreateDbInstanceReadReplica(ctx context.Context, request opera
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4304,7 +4330,7 @@ func (s *SDK) PostCreateDbInstanceReadReplica(ctx context.Context, request opera
 }
 
 func (s *SDK) PostCreateDbParameterGroup(ctx context.Context, request operations.PostCreateDbParameterGroupRequest) (*operations.PostCreateDbParameterGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateDBParameterGroup"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4323,7 +4349,7 @@ func (s *SDK) PostCreateDbParameterGroup(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4374,7 +4400,7 @@ func (s *SDK) PostCreateDbParameterGroup(ctx context.Context, request operations
 }
 
 func (s *SDK) PostCreateDbSecurityGroup(ctx context.Context, request operations.PostCreateDbSecurityGroupRequest) (*operations.PostCreateDbSecurityGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateDBSecurityGroup"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4393,7 +4419,7 @@ func (s *SDK) PostCreateDbSecurityGroup(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4454,7 +4480,7 @@ func (s *SDK) PostCreateDbSecurityGroup(ctx context.Context, request operations.
 }
 
 func (s *SDK) PostCreateDbSnapshot(ctx context.Context, request operations.PostCreateDbSnapshotRequest) (*operations.PostCreateDbSnapshotResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateDBSnapshot"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4473,7 +4499,7 @@ func (s *SDK) PostCreateDbSnapshot(ctx context.Context, request operations.PostC
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4544,7 +4570,7 @@ func (s *SDK) PostCreateDbSnapshot(ctx context.Context, request operations.PostC
 }
 
 func (s *SDK) PostCreateDbSubnetGroup(ctx context.Context, request operations.PostCreateDbSubnetGroupRequest) (*operations.PostCreateDbSubnetGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateDBSubnetGroup"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4563,7 +4589,7 @@ func (s *SDK) PostCreateDbSubnetGroup(ctx context.Context, request operations.Po
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4644,7 +4670,7 @@ func (s *SDK) PostCreateDbSubnetGroup(ctx context.Context, request operations.Po
 }
 
 func (s *SDK) PostCreateEventSubscription(ctx context.Context, request operations.PostCreateEventSubscriptionRequest) (*operations.PostCreateEventSubscriptionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateEventSubscription"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4663,7 +4689,7 @@ func (s *SDK) PostCreateEventSubscription(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4764,7 +4790,7 @@ func (s *SDK) PostCreateEventSubscription(ctx context.Context, request operation
 }
 
 func (s *SDK) PostCreateOptionGroup(ctx context.Context, request operations.PostCreateOptionGroupRequest) (*operations.PostCreateOptionGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=CreateOptionGroup"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4783,7 +4809,7 @@ func (s *SDK) PostCreateOptionGroup(ctx context.Context, request operations.Post
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4834,7 +4860,7 @@ func (s *SDK) PostCreateOptionGroup(ctx context.Context, request operations.Post
 }
 
 func (s *SDK) PostDeleteDbInstance(ctx context.Context, request operations.PostDeleteDbInstanceRequest) (*operations.PostDeleteDbInstanceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteDBInstance"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4853,7 +4879,7 @@ func (s *SDK) PostDeleteDbInstance(ctx context.Context, request operations.PostD
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4924,7 +4950,7 @@ func (s *SDK) PostDeleteDbInstance(ctx context.Context, request operations.PostD
 }
 
 func (s *SDK) PostDeleteDbParameterGroup(ctx context.Context, request operations.PostDeleteDbParameterGroupRequest) (*operations.PostDeleteDbParameterGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteDBParameterGroup"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4943,7 +4969,7 @@ func (s *SDK) PostDeleteDbParameterGroup(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4985,7 +5011,7 @@ func (s *SDK) PostDeleteDbParameterGroup(ctx context.Context, request operations
 }
 
 func (s *SDK) PostDeleteDbSecurityGroup(ctx context.Context, request operations.PostDeleteDbSecurityGroupRequest) (*operations.PostDeleteDbSecurityGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteDBSecurityGroup"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5004,7 +5030,7 @@ func (s *SDK) PostDeleteDbSecurityGroup(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5046,7 +5072,7 @@ func (s *SDK) PostDeleteDbSecurityGroup(ctx context.Context, request operations.
 }
 
 func (s *SDK) PostDeleteDbSnapshot(ctx context.Context, request operations.PostDeleteDbSnapshotRequest) (*operations.PostDeleteDbSnapshotResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteDBSnapshot"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5065,7 +5091,7 @@ func (s *SDK) PostDeleteDbSnapshot(ctx context.Context, request operations.PostD
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5116,7 +5142,7 @@ func (s *SDK) PostDeleteDbSnapshot(ctx context.Context, request operations.PostD
 }
 
 func (s *SDK) PostDeleteDbSubnetGroup(ctx context.Context, request operations.PostDeleteDbSubnetGroupRequest) (*operations.PostDeleteDbSubnetGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteDBSubnetGroup"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5135,7 +5161,7 @@ func (s *SDK) PostDeleteDbSubnetGroup(ctx context.Context, request operations.Po
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5187,7 +5213,7 @@ func (s *SDK) PostDeleteDbSubnetGroup(ctx context.Context, request operations.Po
 }
 
 func (s *SDK) PostDeleteEventSubscription(ctx context.Context, request operations.PostDeleteEventSubscriptionRequest) (*operations.PostDeleteEventSubscriptionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteEventSubscription"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5206,7 +5232,7 @@ func (s *SDK) PostDeleteEventSubscription(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5257,7 +5283,7 @@ func (s *SDK) PostDeleteEventSubscription(ctx context.Context, request operation
 }
 
 func (s *SDK) PostDeleteOptionGroup(ctx context.Context, request operations.PostDeleteOptionGroupRequest) (*operations.PostDeleteOptionGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DeleteOptionGroup"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5276,7 +5302,7 @@ func (s *SDK) PostDeleteOptionGroup(ctx context.Context, request operations.Post
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5318,7 +5344,7 @@ func (s *SDK) PostDeleteOptionGroup(ctx context.Context, request operations.Post
 }
 
 func (s *SDK) PostDescribeDbEngineVersions(ctx context.Context, request operations.PostDescribeDbEngineVersionsRequest) (*operations.PostDescribeDbEngineVersionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeDBEngineVersions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5337,7 +5363,7 @@ func (s *SDK) PostDescribeDbEngineVersions(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5368,7 +5394,7 @@ func (s *SDK) PostDescribeDbEngineVersions(ctx context.Context, request operatio
 }
 
 func (s *SDK) PostDescribeDbInstances(ctx context.Context, request operations.PostDescribeDbInstancesRequest) (*operations.PostDescribeDbInstancesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeDBInstances"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5387,7 +5413,7 @@ func (s *SDK) PostDescribeDbInstances(ctx context.Context, request operations.Po
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5428,7 +5454,7 @@ func (s *SDK) PostDescribeDbInstances(ctx context.Context, request operations.Po
 }
 
 func (s *SDK) PostDescribeDbLogFiles(ctx context.Context, request operations.PostDescribeDbLogFilesRequest) (*operations.PostDescribeDbLogFilesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeDBLogFiles"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5447,7 +5473,7 @@ func (s *SDK) PostDescribeDbLogFiles(ctx context.Context, request operations.Pos
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5488,7 +5514,7 @@ func (s *SDK) PostDescribeDbLogFiles(ctx context.Context, request operations.Pos
 }
 
 func (s *SDK) PostDescribeDbParameterGroups(ctx context.Context, request operations.PostDescribeDbParameterGroupsRequest) (*operations.PostDescribeDbParameterGroupsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeDBParameterGroups"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5507,7 +5533,7 @@ func (s *SDK) PostDescribeDbParameterGroups(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5548,7 +5574,7 @@ func (s *SDK) PostDescribeDbParameterGroups(ctx context.Context, request operati
 }
 
 func (s *SDK) PostDescribeDbParameters(ctx context.Context, request operations.PostDescribeDbParametersRequest) (*operations.PostDescribeDbParametersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeDBParameters"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5567,7 +5593,7 @@ func (s *SDK) PostDescribeDbParameters(ctx context.Context, request operations.P
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5608,7 +5634,7 @@ func (s *SDK) PostDescribeDbParameters(ctx context.Context, request operations.P
 }
 
 func (s *SDK) PostDescribeDbSecurityGroups(ctx context.Context, request operations.PostDescribeDbSecurityGroupsRequest) (*operations.PostDescribeDbSecurityGroupsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeDBSecurityGroups"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5627,7 +5653,7 @@ func (s *SDK) PostDescribeDbSecurityGroups(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5668,7 +5694,7 @@ func (s *SDK) PostDescribeDbSecurityGroups(ctx context.Context, request operatio
 }
 
 func (s *SDK) PostDescribeDbSnapshots(ctx context.Context, request operations.PostDescribeDbSnapshotsRequest) (*operations.PostDescribeDbSnapshotsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeDBSnapshots"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5687,7 +5713,7 @@ func (s *SDK) PostDescribeDbSnapshots(ctx context.Context, request operations.Po
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5728,7 +5754,7 @@ func (s *SDK) PostDescribeDbSnapshots(ctx context.Context, request operations.Po
 }
 
 func (s *SDK) PostDescribeDbSubnetGroups(ctx context.Context, request operations.PostDescribeDbSubnetGroupsRequest) (*operations.PostDescribeDbSubnetGroupsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeDBSubnetGroups"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5747,7 +5773,7 @@ func (s *SDK) PostDescribeDbSubnetGroups(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5788,7 +5814,7 @@ func (s *SDK) PostDescribeDbSubnetGroups(ctx context.Context, request operations
 }
 
 func (s *SDK) PostDescribeEngineDefaultParameters(ctx context.Context, request operations.PostDescribeEngineDefaultParametersRequest) (*operations.PostDescribeEngineDefaultParametersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeEngineDefaultParameters"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5807,7 +5833,7 @@ func (s *SDK) PostDescribeEngineDefaultParameters(ctx context.Context, request o
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5838,7 +5864,7 @@ func (s *SDK) PostDescribeEngineDefaultParameters(ctx context.Context, request o
 }
 
 func (s *SDK) PostDescribeEventCategories(ctx context.Context, request operations.PostDescribeEventCategoriesRequest) (*operations.PostDescribeEventCategoriesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeEventCategories"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5857,7 +5883,7 @@ func (s *SDK) PostDescribeEventCategories(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5888,7 +5914,7 @@ func (s *SDK) PostDescribeEventCategories(ctx context.Context, request operation
 }
 
 func (s *SDK) PostDescribeEventSubscriptions(ctx context.Context, request operations.PostDescribeEventSubscriptionsRequest) (*operations.PostDescribeEventSubscriptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeEventSubscriptions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5907,7 +5933,7 @@ func (s *SDK) PostDescribeEventSubscriptions(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5948,7 +5974,7 @@ func (s *SDK) PostDescribeEventSubscriptions(ctx context.Context, request operat
 }
 
 func (s *SDK) PostDescribeEvents(ctx context.Context, request operations.PostDescribeEventsRequest) (*operations.PostDescribeEventsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeEvents"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5967,7 +5993,7 @@ func (s *SDK) PostDescribeEvents(ctx context.Context, request operations.PostDes
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5998,7 +6024,7 @@ func (s *SDK) PostDescribeEvents(ctx context.Context, request operations.PostDes
 }
 
 func (s *SDK) PostDescribeOptionGroupOptions(ctx context.Context, request operations.PostDescribeOptionGroupOptionsRequest) (*operations.PostDescribeOptionGroupOptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeOptionGroupOptions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6017,7 +6043,7 @@ func (s *SDK) PostDescribeOptionGroupOptions(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6048,7 +6074,7 @@ func (s *SDK) PostDescribeOptionGroupOptions(ctx context.Context, request operat
 }
 
 func (s *SDK) PostDescribeOptionGroups(ctx context.Context, request operations.PostDescribeOptionGroupsRequest) (*operations.PostDescribeOptionGroupsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeOptionGroups"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6067,7 +6093,7 @@ func (s *SDK) PostDescribeOptionGroups(ctx context.Context, request operations.P
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6108,7 +6134,7 @@ func (s *SDK) PostDescribeOptionGroups(ctx context.Context, request operations.P
 }
 
 func (s *SDK) PostDescribeOrderableDbInstanceOptions(ctx context.Context, request operations.PostDescribeOrderableDbInstanceOptionsRequest) (*operations.PostDescribeOrderableDbInstanceOptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeOrderableDBInstanceOptions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6127,7 +6153,7 @@ func (s *SDK) PostDescribeOrderableDbInstanceOptions(ctx context.Context, reques
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6158,7 +6184,7 @@ func (s *SDK) PostDescribeOrderableDbInstanceOptions(ctx context.Context, reques
 }
 
 func (s *SDK) PostDescribeReservedDbInstances(ctx context.Context, request operations.PostDescribeReservedDbInstancesRequest) (*operations.PostDescribeReservedDbInstancesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeReservedDBInstances"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6177,7 +6203,7 @@ func (s *SDK) PostDescribeReservedDbInstances(ctx context.Context, request opera
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6218,7 +6244,7 @@ func (s *SDK) PostDescribeReservedDbInstances(ctx context.Context, request opera
 }
 
 func (s *SDK) PostDescribeReservedDbInstancesOfferings(ctx context.Context, request operations.PostDescribeReservedDbInstancesOfferingsRequest) (*operations.PostDescribeReservedDbInstancesOfferingsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DescribeReservedDBInstancesOfferings"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6237,7 +6263,7 @@ func (s *SDK) PostDescribeReservedDbInstancesOfferings(ctx context.Context, requ
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6278,7 +6304,7 @@ func (s *SDK) PostDescribeReservedDbInstancesOfferings(ctx context.Context, requ
 }
 
 func (s *SDK) PostDownloadDbLogFilePortion(ctx context.Context, request operations.PostDownloadDbLogFilePortionRequest) (*operations.PostDownloadDbLogFilePortionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=DownloadDBLogFilePortion"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6297,7 +6323,7 @@ func (s *SDK) PostDownloadDbLogFilePortion(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6348,7 +6374,7 @@ func (s *SDK) PostDownloadDbLogFilePortion(ctx context.Context, request operatio
 }
 
 func (s *SDK) PostListTagsForResource(ctx context.Context, request operations.PostListTagsForResourceRequest) (*operations.PostListTagsForResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ListTagsForResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6367,7 +6393,7 @@ func (s *SDK) PostListTagsForResource(ctx context.Context, request operations.Po
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6418,7 +6444,7 @@ func (s *SDK) PostListTagsForResource(ctx context.Context, request operations.Po
 }
 
 func (s *SDK) PostModifyDbInstance(ctx context.Context, request operations.PostModifyDbInstanceRequest) (*operations.PostModifyDbInstanceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyDBInstance"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6437,7 +6463,7 @@ func (s *SDK) PostModifyDbInstance(ctx context.Context, request operations.PostM
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6588,7 +6614,7 @@ func (s *SDK) PostModifyDbInstance(ctx context.Context, request operations.PostM
 }
 
 func (s *SDK) PostModifyDbParameterGroup(ctx context.Context, request operations.PostModifyDbParameterGroupRequest) (*operations.PostModifyDbParameterGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyDBParameterGroup"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6607,7 +6633,7 @@ func (s *SDK) PostModifyDbParameterGroup(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6658,7 +6684,7 @@ func (s *SDK) PostModifyDbParameterGroup(ctx context.Context, request operations
 }
 
 func (s *SDK) PostModifyDbSubnetGroup(ctx context.Context, request operations.PostModifyDbSubnetGroupRequest) (*operations.PostModifyDbSubnetGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyDBSubnetGroup"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6677,7 +6703,7 @@ func (s *SDK) PostModifyDbSubnetGroup(ctx context.Context, request operations.Po
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6758,7 +6784,7 @@ func (s *SDK) PostModifyDbSubnetGroup(ctx context.Context, request operations.Po
 }
 
 func (s *SDK) PostModifyEventSubscription(ctx context.Context, request operations.PostModifyEventSubscriptionRequest) (*operations.PostModifyEventSubscriptionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyEventSubscription"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6777,7 +6803,7 @@ func (s *SDK) PostModifyEventSubscription(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6868,7 +6894,7 @@ func (s *SDK) PostModifyEventSubscription(ctx context.Context, request operation
 }
 
 func (s *SDK) PostModifyOptionGroup(ctx context.Context, request operations.PostModifyOptionGroupRequest) (*operations.PostModifyOptionGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ModifyOptionGroup"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6887,7 +6913,7 @@ func (s *SDK) PostModifyOptionGroup(ctx context.Context, request operations.Post
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6938,7 +6964,7 @@ func (s *SDK) PostModifyOptionGroup(ctx context.Context, request operations.Post
 }
 
 func (s *SDK) PostPromoteReadReplica(ctx context.Context, request operations.PostPromoteReadReplicaRequest) (*operations.PostPromoteReadReplicaResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=PromoteReadReplica"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6957,7 +6983,7 @@ func (s *SDK) PostPromoteReadReplica(ctx context.Context, request operations.Pos
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7008,7 +7034,7 @@ func (s *SDK) PostPromoteReadReplica(ctx context.Context, request operations.Pos
 }
 
 func (s *SDK) PostPurchaseReservedDbInstancesOffering(ctx context.Context, request operations.PostPurchaseReservedDbInstancesOfferingRequest) (*operations.PostPurchaseReservedDbInstancesOfferingResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=PurchaseReservedDBInstancesOffering"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7027,7 +7053,7 @@ func (s *SDK) PostPurchaseReservedDbInstancesOffering(ctx context.Context, reque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7088,7 +7114,7 @@ func (s *SDK) PostPurchaseReservedDbInstancesOffering(ctx context.Context, reque
 }
 
 func (s *SDK) PostRebootDbInstance(ctx context.Context, request operations.PostRebootDbInstanceRequest) (*operations.PostRebootDbInstanceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=RebootDBInstance"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7107,7 +7133,7 @@ func (s *SDK) PostRebootDbInstance(ctx context.Context, request operations.PostR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7158,7 +7184,7 @@ func (s *SDK) PostRebootDbInstance(ctx context.Context, request operations.PostR
 }
 
 func (s *SDK) PostRemoveSourceIdentifierFromSubscription(ctx context.Context, request operations.PostRemoveSourceIdentifierFromSubscriptionRequest) (*operations.PostRemoveSourceIdentifierFromSubscriptionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=RemoveSourceIdentifierFromSubscription"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7177,7 +7203,7 @@ func (s *SDK) PostRemoveSourceIdentifierFromSubscription(ctx context.Context, re
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7228,7 +7254,7 @@ func (s *SDK) PostRemoveSourceIdentifierFromSubscription(ctx context.Context, re
 }
 
 func (s *SDK) PostRemoveTagsFromResource(ctx context.Context, request operations.PostRemoveTagsFromResourceRequest) (*operations.PostRemoveTagsFromResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=RemoveTagsFromResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7247,7 +7273,7 @@ func (s *SDK) PostRemoveTagsFromResource(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7289,7 +7315,7 @@ func (s *SDK) PostRemoveTagsFromResource(ctx context.Context, request operations
 }
 
 func (s *SDK) PostResetDbParameterGroup(ctx context.Context, request operations.PostResetDbParameterGroupRequest) (*operations.PostResetDbParameterGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=ResetDBParameterGroup"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7308,7 +7334,7 @@ func (s *SDK) PostResetDbParameterGroup(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7359,7 +7385,7 @@ func (s *SDK) PostResetDbParameterGroup(ctx context.Context, request operations.
 }
 
 func (s *SDK) PostRestoreDbInstanceFromDbSnapshot(ctx context.Context, request operations.PostRestoreDbInstanceFromDbSnapshotRequest) (*operations.PostRestoreDbInstanceFromDbSnapshotResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=RestoreDBInstanceFromDBSnapshot"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7378,7 +7404,7 @@ func (s *SDK) PostRestoreDbInstanceFromDbSnapshot(ctx context.Context, request o
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7539,7 +7565,7 @@ func (s *SDK) PostRestoreDbInstanceFromDbSnapshot(ctx context.Context, request o
 }
 
 func (s *SDK) PostRestoreDbInstanceToPointInTime(ctx context.Context, request operations.PostRestoreDbInstanceToPointInTimeRequest) (*operations.PostRestoreDbInstanceToPointInTimeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=RestoreDBInstanceToPointInTime"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7558,7 +7584,7 @@ func (s *SDK) PostRestoreDbInstanceToPointInTime(ctx context.Context, request op
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7729,7 +7755,7 @@ func (s *SDK) PostRestoreDbInstanceToPointInTime(ctx context.Context, request op
 }
 
 func (s *SDK) PostRevokeDbSecurityGroupIngress(ctx context.Context, request operations.PostRevokeDbSecurityGroupIngressRequest) (*operations.PostRevokeDbSecurityGroupIngressResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#Action=RevokeDBSecurityGroupIngress"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7748,7 +7774,7 @@ func (s *SDK) PostRevokeDbSecurityGroupIngress(ctx context.Context, request oper
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

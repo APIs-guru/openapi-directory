@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GeneratorRecipeCharacterSetsEnum(str, Enum):
     LETTERS = "LETTERS"
@@ -11,6 +13,10 @@ class GeneratorRecipeCharacterSetsEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GeneratorRecipe:
-    character_sets: Optional[List[GeneratorRecipeCharacterSetsEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'characterSets' }})
-    length: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'length' }})
+    r"""GeneratorRecipe
+    The recipe is used in conjunction with the \"generate\" property to set the character set used to generate a new secure value
+    """
+    
+    character_sets: Optional[List[GeneratorRecipeCharacterSetsEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('characterSets') }})
+    length: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('length') }})
     

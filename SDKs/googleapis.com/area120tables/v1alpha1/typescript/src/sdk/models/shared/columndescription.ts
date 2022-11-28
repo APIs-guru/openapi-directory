@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DateDetails } from "./datedetails";
 import { LabeledItem } from "./labeleditem";
 import { LookupDetails } from "./lookupdetails";
 import { RelationshipDetails } from "./relationshipdetails";
+
 
 
 // ColumnDescription
@@ -11,30 +11,30 @@ import { RelationshipDetails } from "./relationshipdetails";
  * Details on a column in the table.
 **/
 export class ColumnDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataType" })
+  @SpeakeasyMetadata({ data: "json, name=dataType" })
   dataType?: string;
 
-  @Metadata({ data: "json, name=dateDetails" })
+  @SpeakeasyMetadata({ data: "json, name=dateDetails" })
   dateDetails?: DateDetails;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=labels", elemType: shared.LabeledItem })
+  @SpeakeasyMetadata({ data: "json, name=labels", elemType: LabeledItem })
   labels?: LabeledItem[];
 
-  @Metadata({ data: "json, name=lookupDetails" })
+  @SpeakeasyMetadata({ data: "json, name=lookupDetails" })
   lookupDetails?: LookupDetails;
 
-  @Metadata({ data: "json, name=multipleValuesDisallowed" })
+  @SpeakeasyMetadata({ data: "json, name=multipleValuesDisallowed" })
   multipleValuesDisallowed?: boolean;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=readonly" })
+  @SpeakeasyMetadata({ data: "json, name=readonly" })
   readonly?: boolean;
 
-  @Metadata({ data: "json, name=relationshipDetails" })
+  @SpeakeasyMetadata({ data: "json, name=relationshipDetails" })
   relationshipDetails?: RelationshipDetails;
 }

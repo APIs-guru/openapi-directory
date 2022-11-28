@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PaymentDeltaV1 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=paymentAmount" })
+  @SpeakeasyMetadata({ data: "json, name=paymentAmount" })
   paymentAmount?: number;
 
-  @Metadata({ data: "json, name=paymentCurrency" })
+  @SpeakeasyMetadata({ data: "json, name=paymentCurrency" })
   paymentCurrency?: string;
 
-  @Metadata({ data: "json, name=paymentId" })
+  @SpeakeasyMetadata({ data: "json, name=paymentId" })
   paymentId: string;
 
-  @Metadata({ data: "json, name=payorPaymentId" })
+  @SpeakeasyMetadata({ data: "json, name=payorPaymentId" })
   payorPaymentId?: string;
 
-  @Metadata({ data: "json, name=payoutId" })
+  @SpeakeasyMetadata({ data: "json, name=payoutId" })
   payoutId: string;
 
-  @Metadata({ data: "json, name=sourceAmount" })
+  @SpeakeasyMetadata({ data: "json, name=sourceAmount" })
   sourceAmount?: number;
 
-  @Metadata({ data: "json, name=sourceCurrency" })
+  @SpeakeasyMetadata({ data: "json, name=sourceCurrency" })
   sourceCurrency?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 }

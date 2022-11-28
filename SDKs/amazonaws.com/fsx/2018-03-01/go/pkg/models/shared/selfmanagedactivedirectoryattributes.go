@@ -1,5 +1,7 @@
 package shared
 
+// SelfManagedActiveDirectoryAttributes
+// The configuration of the self-managed Microsoft Active Directory (AD) directory to which the Windows File Server or ONTAP storage virtual machine (SVM) instance is joined.
 type SelfManagedActiveDirectoryAttributes struct {
 	DNSIps                              []string `json:"DnsIps,omitempty"`
 	DomainName                          *string  `json:"DomainName,omitempty"`

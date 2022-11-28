@@ -1,58 +1,50 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostFirewallsIdActionsSetRulesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
 export enum PostFirewallsIdActionsSetRulesSetRulesRequestRuleDirectionEnum {
-    In = "in"
-,    Out = "out"
+    In = "in",
+    Out = "out"
 }
 
 export enum PostFirewallsIdActionsSetRulesSetRulesRequestRuleProtocolEnum {
-    Tcp = "tcp"
-,    Udp = "udp"
-,    Icmp = "icmp"
-,    Esp = "esp"
-,    Gre = "gre"
+    Tcp = "tcp",
+    Udp = "udp",
+    Icmp = "icmp",
+    Esp = "esp",
+    Gre = "gre"
 }
 
 
 export class PostFirewallsIdActionsSetRulesSetRulesRequestRule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=destination_ips" })
+  @SpeakeasyMetadata({ data: "json, name=destination_ips" })
   destinationIps?: string[];
 
-  @Metadata({ data: "json, name=direction" })
+  @SpeakeasyMetadata({ data: "json, name=direction" })
   direction: PostFirewallsIdActionsSetRulesSetRulesRequestRuleDirectionEnum;
 
-  @Metadata({ data: "json, name=port" })
+  @SpeakeasyMetadata({ data: "json, name=port" })
   port?: string;
 
-  @Metadata({ data: "json, name=protocol" })
+  @SpeakeasyMetadata({ data: "json, name=protocol" })
   protocol: PostFirewallsIdActionsSetRulesSetRulesRequestRuleProtocolEnum;
 
-  @Metadata({ data: "json, name=source_ips" })
+  @SpeakeasyMetadata({ data: "json, name=source_ips" })
   sourceIps?: string[];
 }
 
 
 export class PostFirewallsIdActionsSetRulesSetRulesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=rules", elemType: operations.PostFirewallsIdActionsSetRulesSetRulesRequestRule })
+  @SpeakeasyMetadata({ data: "json, name=rules", elemType: PostFirewallsIdActionsSetRulesSetRulesRequestRule })
   rules: PostFirewallsIdActionsSetRulesSetRulesRequestRule[];
-}
-
-
-export class PostFirewallsIdActionsSetRulesRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: PostFirewallsIdActionsSetRulesPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: PostFirewallsIdActionsSetRulesSetRulesRequest;
 }
 
 
@@ -61,99 +53,108 @@ export class PostFirewallsIdActionsSetRulesRequest extends SpeakeasyBase {
  * Error message for the Action if error occurred, otherwise null
 **/
 export class PostFirewallsIdActionsSetRulesActionsResponseActionError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 }
 
 
 export class PostFirewallsIdActionsSetRulesActionsResponseActionResources extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }
 
 export enum PostFirewallsIdActionsSetRulesActionsResponseActionStatusEnum {
-    Success = "success"
-,    Running = "running"
-,    Error = "error"
+    Success = "success",
+    Running = "running",
+    Error = "error"
 }
 
 
 export class PostFirewallsIdActionsSetRulesActionsResponseAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=command" })
+  @SpeakeasyMetadata({ data: "json, name=command" })
   command: string;
 
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error: PostFirewallsIdActionsSetRulesActionsResponseActionError;
 
-  @Metadata({ data: "json, name=finished" })
+  @SpeakeasyMetadata({ data: "json, name=finished" })
   finished: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=progress" })
+  @SpeakeasyMetadata({ data: "json, name=progress" })
   progress: number;
 
-  @Metadata({ data: "json, name=resources", elemType: operations.PostFirewallsIdActionsSetRulesActionsResponseActionResources })
+  @SpeakeasyMetadata({ data: "json, name=resources", elemType: PostFirewallsIdActionsSetRulesActionsResponseActionResources })
   resources: PostFirewallsIdActionsSetRulesActionsResponseActionResources[];
 
-  @Metadata({ data: "json, name=started" })
+  @SpeakeasyMetadata({ data: "json, name=started" })
   started: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: PostFirewallsIdActionsSetRulesActionsResponseActionStatusEnum;
 }
 
 
 export class PostFirewallsIdActionsSetRulesActionsResponseMetaPagination extends SpeakeasyBase {
-  @Metadata({ data: "json, name=last_page" })
+  @SpeakeasyMetadata({ data: "json, name=last_page" })
   lastPage: number;
 
-  @Metadata({ data: "json, name=next_page" })
+  @SpeakeasyMetadata({ data: "json, name=next_page" })
   nextPage: number;
 
-  @Metadata({ data: "json, name=page" })
+  @SpeakeasyMetadata({ data: "json, name=page" })
   page: number;
 
-  @Metadata({ data: "json, name=per_page" })
+  @SpeakeasyMetadata({ data: "json, name=per_page" })
   perPage: number;
 
-  @Metadata({ data: "json, name=previous_page" })
+  @SpeakeasyMetadata({ data: "json, name=previous_page" })
   previousPage: number;
 
-  @Metadata({ data: "json, name=total_entries" })
+  @SpeakeasyMetadata({ data: "json, name=total_entries" })
   totalEntries: number;
 }
 
 
 export class PostFirewallsIdActionsSetRulesActionsResponseMeta extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pagination" })
+  @SpeakeasyMetadata({ data: "json, name=pagination" })
   pagination: PostFirewallsIdActionsSetRulesActionsResponseMetaPagination;
 }
 
 
 export class PostFirewallsIdActionsSetRulesActionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actions", elemType: operations.PostFirewallsIdActionsSetRulesActionsResponseAction })
+  @SpeakeasyMetadata({ data: "json, name=actions", elemType: PostFirewallsIdActionsSetRulesActionsResponseAction })
   actions: PostFirewallsIdActionsSetRulesActionsResponseAction[];
 
-  @Metadata({ data: "json, name=meta" })
+  @SpeakeasyMetadata({ data: "json, name=meta" })
   meta?: PostFirewallsIdActionsSetRulesActionsResponseMeta;
 }
 
 
+export class PostFirewallsIdActionsSetRulesRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: PostFirewallsIdActionsSetRulesPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: PostFirewallsIdActionsSetRulesSetRulesRequest;
+}
+
+
 export class PostFirewallsIdActionsSetRulesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   actionsResponse?: PostFirewallsIdActionsSetRulesActionsResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

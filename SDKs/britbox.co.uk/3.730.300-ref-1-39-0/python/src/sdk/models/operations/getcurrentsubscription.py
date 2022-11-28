@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetCurrentSubscriptionPathParams:
-    platform: str = field(default=None, metadata={'path_param': { 'field_name': 'platform', 'style': 'simple', 'explode': False }})
+    platform: str = field(metadata={'path_param': { 'field_name': 'platform', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,20 +15,20 @@ class GetCurrentSubscriptionQueryParams:
 
 @dataclass
 class GetCurrentSubscriptionSecurity:
-    account_auth: shared.SchemeAccountAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    account_auth: shared.SchemeAccountAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetCurrentSubscriptionRequest:
-    path_params: GetCurrentSubscriptionPathParams = field(default=None)
-    query_params: GetCurrentSubscriptionQueryParams = field(default=None)
-    security: GetCurrentSubscriptionSecurity = field(default=None)
+    path_params: GetCurrentSubscriptionPathParams = field()
+    query_params: GetCurrentSubscriptionQueryParams = field()
+    security: GetCurrentSubscriptionSecurity = field()
     
 
 @dataclass
 class GetCurrentSubscriptionResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     itv_current_subscription: Optional[shared.ItvCurrentSubscription] = field(default=None)
     service_error: Optional[shared.ServiceError] = field(default=None)
-    status_code: int = field(default=None)
     

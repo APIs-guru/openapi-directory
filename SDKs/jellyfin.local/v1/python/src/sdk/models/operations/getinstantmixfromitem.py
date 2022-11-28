@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetInstantMixFromItemPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,19 +22,19 @@ class GetInstantMixFromItemQueryParams:
 
 @dataclass
 class GetInstantMixFromItemSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetInstantMixFromItemRequest:
-    path_params: GetInstantMixFromItemPathParams = field(default=None)
-    query_params: GetInstantMixFromItemQueryParams = field(default=None)
-    security: GetInstantMixFromItemSecurity = field(default=None)
+    path_params: GetInstantMixFromItemPathParams = field()
+    query_params: GetInstantMixFromItemQueryParams = field()
+    security: GetInstantMixFromItemSecurity = field()
     
 
 @dataclass
 class GetInstantMixFromItemResponse:
+    content_type: str = field()
+    status_code: int = field()
     base_item_dto_query_result: Optional[shared.BaseItemDtoQueryResult] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetLinksNOffsetPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=n" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=n" })
   n: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=offset" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=offset" })
   offset: number;
 }
 
 
 export class GetLinksNOffsetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetLinksNOffsetPathParams;
 }
 
 
 export class GetLinksNOffsetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

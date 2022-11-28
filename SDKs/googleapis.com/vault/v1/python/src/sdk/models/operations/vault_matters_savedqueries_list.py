@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class VaultMattersSavedQueriesListPathParams:
-    matter_id: str = field(default=None, metadata={'path_param': { 'field_name': 'matterId', 'style': 'simple', 'explode': False }})
+    matter_id: str = field(metadata={'path_param': { 'field_name': 'matterId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,14 +28,14 @@ class VaultMattersSavedQueriesListQueryParams:
 
 @dataclass
 class VaultMattersSavedQueriesListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class VaultMattersSavedQueriesListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -45,14 +46,14 @@ class VaultMattersSavedQueriesListSecurity:
 
 @dataclass
 class VaultMattersSavedQueriesListRequest:
-    path_params: VaultMattersSavedQueriesListPathParams = field(default=None)
-    query_params: VaultMattersSavedQueriesListQueryParams = field(default=None)
-    security: VaultMattersSavedQueriesListSecurity = field(default=None)
+    path_params: VaultMattersSavedQueriesListPathParams = field()
+    query_params: VaultMattersSavedQueriesListQueryParams = field()
+    security: VaultMattersSavedQueriesListSecurity = field()
     
 
 @dataclass
 class VaultMattersSavedQueriesListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_saved_queries_response: Optional[shared.ListSavedQueriesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

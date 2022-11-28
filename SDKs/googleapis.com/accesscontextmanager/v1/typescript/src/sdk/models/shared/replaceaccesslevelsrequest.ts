@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccessLevel } from "./accesslevel";
+
 
 
 // ReplaceAccessLevelsRequest
@@ -8,9 +8,9 @@ import { AccessLevel } from "./accesslevel";
  * A request to replace all existing Access Levels in an Access Policy with the Access Levels provided. This is done atomically.
 **/
 export class ReplaceAccessLevelsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessLevels", elemType: shared.AccessLevel })
+  @SpeakeasyMetadata({ data: "json, name=accessLevels", elemType: AccessLevel })
   accessLevels?: AccessLevel[];
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 }

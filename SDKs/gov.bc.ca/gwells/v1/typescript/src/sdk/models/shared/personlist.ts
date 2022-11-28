@@ -1,27 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RegistrationsList } from "./registrationslist";
 
 
+
 export class PersonList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=contact_cell" })
+  @SpeakeasyMetadata({ data: "json, name=contact_cell" })
   contactCell?: string;
 
-  @Metadata({ data: "json, name=contact_email" })
+  @SpeakeasyMetadata({ data: "json, name=contact_email" })
   contactEmail?: string;
 
-  @Metadata({ data: "json, name=contact_tel" })
+  @SpeakeasyMetadata({ data: "json, name=contact_tel" })
   contactTel?: string;
 
-  @Metadata({ data: "json, name=first_name" })
+  @SpeakeasyMetadata({ data: "json, name=first_name" })
   firstName: string;
 
-  @Metadata({ data: "json, name=person_guid" })
+  @SpeakeasyMetadata({ data: "json, name=person_guid" })
   personGuid?: string;
 
-  @Metadata({ data: "json, name=registrations", elemType: shared.RegistrationsList })
+  @SpeakeasyMetadata({ data: "json, name=registrations", elemType: RegistrationsList })
   registrations?: RegistrationsList[];
 
-  @Metadata({ data: "json, name=surname" })
+  @SpeakeasyMetadata({ data: "json, name=surname" })
   surname: string;
 }

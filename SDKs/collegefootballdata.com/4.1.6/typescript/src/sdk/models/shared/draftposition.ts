@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DraftPosition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=abbreviation" })
+  @SpeakeasyMetadata({ data: "json, name=abbreviation" })
   abbreviation?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

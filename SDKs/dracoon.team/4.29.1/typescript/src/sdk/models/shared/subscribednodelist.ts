@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SubscribedNode } from "./subscribednode";
 import { Range } from "./range";
+
 
 
 // SubscribedNodeList
@@ -9,9 +9,9 @@ import { Range } from "./range";
  * List of subscribed nodes
 **/
 export class SubscribedNodeList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.SubscribedNode })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: SubscribedNode })
   items: SubscribedNode[];
 
-  @Metadata({ data: "json, name=range" })
+  @SpeakeasyMetadata({ data: "json, name=range" })
   range: Range;
 }

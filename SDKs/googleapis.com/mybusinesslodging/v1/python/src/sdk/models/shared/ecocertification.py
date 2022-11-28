@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class EcoCertificationAwardedExceptionEnum(str, Enum):
     EXCEPTION_UNSPECIFIED = "EXCEPTION_UNSPECIFIED"
@@ -42,7 +44,11 @@ class EcoCertificationEcoCertificateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class EcoCertification:
-    awarded: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'awarded' }})
-    awarded_exception: Optional[EcoCertificationAwardedExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'awardedException' }})
-    eco_certificate: Optional[EcoCertificationEcoCertificateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ecoCertificate' }})
+    r"""EcoCertification
+    An eco certificate awarded to the hotel.
+    """
+    
+    awarded: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('awarded') }})
+    awarded_exception: Optional[EcoCertificationAwardedExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('awardedException') }})
+    eco_certificate: Optional[EcoCertificationEcoCertificateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ecoCertificate') }})
     

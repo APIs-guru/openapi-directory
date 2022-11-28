@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StatusEnum } from "./statusenum";
 
 
+
 export class UpdateEnrollmentStatusResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: StatusEnum;
 
-  @Metadata({ data: "json, name=statusReason" })
+  @SpeakeasyMetadata({ data: "json, name=statusReason" })
   statusReason?: string;
 }

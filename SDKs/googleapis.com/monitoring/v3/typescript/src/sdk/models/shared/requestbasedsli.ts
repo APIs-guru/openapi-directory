@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DistributionCut } from "./distributioncut";
 import { TimeSeriesRatio } from "./timeseriesratio";
+
 
 
 // RequestBasedSli
@@ -8,9 +9,9 @@ import { TimeSeriesRatio } from "./timeseriesratio";
  * Service Level Indicators for which atomic units of service are counted directly.
 **/
 export class RequestBasedSli extends SpeakeasyBase {
-  @Metadata({ data: "json, name=distributionCut" })
+  @SpeakeasyMetadata({ data: "json, name=distributionCut" })
   distributionCut?: DistributionCut;
 
-  @Metadata({ data: "json, name=goodTotalRatio" })
+  @SpeakeasyMetadata({ data: "json, name=goodTotalRatio" })
   goodTotalRatio?: TimeSeriesRatio;
 }

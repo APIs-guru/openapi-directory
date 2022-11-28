@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ReplicationTaskAssessmentRunProgress
 /**
  * The progress values reported by the <code>AssessmentProgress</code> response element.
@@ -33,11 +33,11 @@ var ReplicationTaskAssessmentRunProgress = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=IndividualAssessmentCompletedCount" }),
+        SpeakeasyMetadata({ data: "json, name=IndividualAssessmentCompletedCount" }),
         __metadata("design:type", Number)
     ], ReplicationTaskAssessmentRunProgress.prototype, "individualAssessmentCompletedCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=IndividualAssessmentCount" }),
+        SpeakeasyMetadata({ data: "json, name=IndividualAssessmentCount" }),
         __metadata("design:type", Number)
     ], ReplicationTaskAssessmentRunProgress.prototype, "individualAssessmentCount", void 0);
     return ReplicationTaskAssessmentRunProgress;

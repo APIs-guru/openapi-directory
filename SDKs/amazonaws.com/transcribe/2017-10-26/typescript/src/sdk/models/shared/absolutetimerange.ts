@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AbsoluteTimeRange
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A time range, set in seconds, between two points in the call.
 **/
 export class AbsoluteTimeRange extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EndTime" })
+  @SpeakeasyMetadata({ data: "json, name=EndTime" })
   endTime?: number;
 
-  @Metadata({ data: "json, name=First" })
+  @SpeakeasyMetadata({ data: "json, name=First" })
   first?: number;
 
-  @Metadata({ data: "json, name=Last" })
+  @SpeakeasyMetadata({ data: "json, name=Last" })
   last?: number;
 
-  @Metadata({ data: "json, name=StartTime" })
+  @SpeakeasyMetadata({ data: "json, name=StartTime" })
   startTime?: number;
 }

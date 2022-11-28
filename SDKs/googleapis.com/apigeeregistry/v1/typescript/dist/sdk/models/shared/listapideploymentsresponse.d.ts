@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ApiDeployment } from "./apideployment";
 /**
  * Response message for ListApiDeployments.

@@ -1,19 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DefaultSnatStatus } from "./defaultsnatstatus";
 import { DnsConfig } from "./dnsconfig";
+import { GatewayApiConfig } from "./gatewayapiconfig";
 import { ServiceExternalIPsConfig } from "./serviceexternalipsconfig";
 
+
 export enum NetworkConfigDatapathProviderEnum {
-    DatapathProviderUnspecified = "DATAPATH_PROVIDER_UNSPECIFIED"
-,    LegacyDatapath = "LEGACY_DATAPATH"
-,    AdvancedDatapath = "ADVANCED_DATAPATH"
+    DatapathProviderUnspecified = "DATAPATH_PROVIDER_UNSPECIFIED",
+    LegacyDatapath = "LEGACY_DATAPATH",
+    AdvancedDatapath = "ADVANCED_DATAPATH"
 }
 
 export enum NetworkConfigPrivateIpv6GoogleAccessEnum {
-    PrivateIpv6GoogleAccessUnspecified = "PRIVATE_IPV6_GOOGLE_ACCESS_UNSPECIFIED"
-,    PrivateIpv6GoogleAccessDisabled = "PRIVATE_IPV6_GOOGLE_ACCESS_DISABLED"
-,    PrivateIpv6GoogleAccessToGoogle = "PRIVATE_IPV6_GOOGLE_ACCESS_TO_GOOGLE"
-,    PrivateIpv6GoogleAccessBidirectional = "PRIVATE_IPV6_GOOGLE_ACCESS_BIDIRECTIONAL"
+    PrivateIpv6GoogleAccessUnspecified = "PRIVATE_IPV6_GOOGLE_ACCESS_UNSPECIFIED",
+    PrivateIpv6GoogleAccessDisabled = "PRIVATE_IPV6_GOOGLE_ACCESS_DISABLED",
+    PrivateIpv6GoogleAccessToGoogle = "PRIVATE_IPV6_GOOGLE_ACCESS_TO_GOOGLE",
+    PrivateIpv6GoogleAccessBidirectional = "PRIVATE_IPV6_GOOGLE_ACCESS_BIDIRECTIONAL"
 }
 
 
@@ -22,30 +24,33 @@ export enum NetworkConfigPrivateIpv6GoogleAccessEnum {
  * NetworkConfig reports the relative names of network & subnetwork.
 **/
 export class NetworkConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=datapathProvider" })
+  @SpeakeasyMetadata({ data: "json, name=datapathProvider" })
   datapathProvider?: NetworkConfigDatapathProviderEnum;
 
-  @Metadata({ data: "json, name=defaultSnatStatus" })
+  @SpeakeasyMetadata({ data: "json, name=defaultSnatStatus" })
   defaultSnatStatus?: DefaultSnatStatus;
 
-  @Metadata({ data: "json, name=dnsConfig" })
+  @SpeakeasyMetadata({ data: "json, name=dnsConfig" })
   dnsConfig?: DnsConfig;
 
-  @Metadata({ data: "json, name=enableIntraNodeVisibility" })
+  @SpeakeasyMetadata({ data: "json, name=enableIntraNodeVisibility" })
   enableIntraNodeVisibility?: boolean;
 
-  @Metadata({ data: "json, name=enableL4ilbSubsetting" })
+  @SpeakeasyMetadata({ data: "json, name=enableL4ilbSubsetting" })
   enableL4ilbSubsetting?: boolean;
 
-  @Metadata({ data: "json, name=network" })
+  @SpeakeasyMetadata({ data: "json, name=gatewayApiConfig" })
+  gatewayApiConfig?: GatewayApiConfig;
+
+  @SpeakeasyMetadata({ data: "json, name=network" })
   network?: string;
 
-  @Metadata({ data: "json, name=privateIpv6GoogleAccess" })
+  @SpeakeasyMetadata({ data: "json, name=privateIpv6GoogleAccess" })
   privateIpv6GoogleAccess?: NetworkConfigPrivateIpv6GoogleAccessEnum;
 
-  @Metadata({ data: "json, name=serviceExternalIpsConfig" })
+  @SpeakeasyMetadata({ data: "json, name=serviceExternalIpsConfig" })
   serviceExternalIpsConfig?: ServiceExternalIPsConfig;
 
-  @Metadata({ data: "json, name=subnetwork" })
+  @SpeakeasyMetadata({ data: "json, name=subnetwork" })
   subnetwork?: string;
 }

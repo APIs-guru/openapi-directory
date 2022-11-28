@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -26,13 +27,13 @@ class ProjectsGetV2ProjectsGetQueryParams:
 
 @dataclass
 class ProjectsGetV2ProjectsGetRequest:
-    query_params: ProjectsGetV2ProjectsGetQueryParams = field(default=None)
+    query_params: ProjectsGetV2ProjectsGetQueryParams = field()
     
 
 @dataclass
 class ProjectsGetV2ProjectsGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     http_validation_error: Optional[shared.HTTPValidationError] = field(default=None)
     open_aq_projects_result: Optional[shared.OpenAqProjectsResult] = field(default=None)
-    status_code: int = field(default=None)
     

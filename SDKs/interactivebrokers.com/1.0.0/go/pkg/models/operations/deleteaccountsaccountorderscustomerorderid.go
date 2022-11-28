@@ -9,10 +9,6 @@ type DeleteAccountsAccountOrdersCustomerOrderIDPathParams struct {
 	Account         string `pathParam:"style=simple,explode=false,name=account"`
 }
 
-type DeleteAccountsAccountOrdersCustomerOrderIDRequest struct {
-	PathParams DeleteAccountsAccountOrdersCustomerOrderIDPathParams
-}
-
 type DeleteAccountsAccountOrdersCustomerOrderID200ApplicationJSON struct {
 	CustomerOrderID *string                 `json:"CustomerOrderId,omitempty"`
 	OrderQty        *float64                `json:"OrderQty,omitempty"`
@@ -22,6 +18,10 @@ type DeleteAccountsAccountOrdersCustomerOrderID200ApplicationJSON struct {
 	Status          *shared.OrderStatusEnum `json:"Status,omitempty"`
 	Symbol          *float64                `json:"Symbol,omitempty"`
 	Warning         *string                 `json:"Warning,omitempty"`
+}
+
+type DeleteAccountsAccountOrdersCustomerOrderIDRequest struct {
+	PathParams DeleteAccountsAccountOrdersCustomerOrderIDPathParams
 }
 
 type DeleteAccountsAccountOrdersCustomerOrderIDResponse struct {

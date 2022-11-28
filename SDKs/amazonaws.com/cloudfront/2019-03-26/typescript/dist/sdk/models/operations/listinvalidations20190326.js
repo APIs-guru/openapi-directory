@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ListInvalidations20190326PathParams = /** @class */ (function (_super) {
     __extends(ListInvalidations20190326PathParams, _super);
     function ListInvalidations20190326PathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=DistributionId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=DistributionId" }),
         __metadata("design:type", String)
     ], ListInvalidations20190326PathParams.prototype, "distributionId", void 0);
     return ListInvalidations20190326PathParams;
@@ -41,11 +41,11 @@ var ListInvalidations20190326QueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Marker" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Marker" }),
         __metadata("design:type", String)
     ], ListInvalidations20190326QueryParams.prototype, "marker", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=MaxItems" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MaxItems" }),
         __metadata("design:type", String)
     ], ListInvalidations20190326QueryParams.prototype, "maxItems", void 0);
     return ListInvalidations20190326QueryParams;
@@ -57,31 +57,31 @@ var ListInvalidations20190326Headers = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], ListInvalidations20190326Headers.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], ListInvalidations20190326Headers.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], ListInvalidations20190326Headers.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], ListInvalidations20190326Headers.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], ListInvalidations20190326Headers.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], ListInvalidations20190326Headers.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], ListInvalidations20190326Headers.prototype, "xAmzSignedHeaders", void 0);
     return ListInvalidations20190326Headers;
@@ -93,15 +93,15 @@ var ListInvalidations20190326Request = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ListInvalidations20190326PathParams)
     ], ListInvalidations20190326Request.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ListInvalidations20190326QueryParams)
     ], ListInvalidations20190326Request.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ListInvalidations20190326Headers)
     ], ListInvalidations20190326Request.prototype, "headers", void 0);
     return ListInvalidations20190326Request;
@@ -113,15 +113,15 @@ var ListInvalidations20190326Response = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], ListInvalidations20190326Response.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ListInvalidations20190326Response.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ListInvalidations20190326Response.prototype, "statusCode", void 0);
     return ListInvalidations20190326Response;

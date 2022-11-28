@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GoogleCloudPaymentsResellerSubscriptionV1Location
 /**
  * Describes a location of an end user.
@@ -33,11 +33,11 @@ var GoogleCloudPaymentsResellerSubscriptionV1Location = /** @class */ (function 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=postalCode" }),
+        SpeakeasyMetadata({ data: "json, name=postalCode" }),
         __metadata("design:type", String)
     ], GoogleCloudPaymentsResellerSubscriptionV1Location.prototype, "postalCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=regionCode" }),
+        SpeakeasyMetadata({ data: "json, name=regionCode" }),
         __metadata("design:type", String)
     ], GoogleCloudPaymentsResellerSubscriptionV1Location.prototype, "regionCode", void 0);
     return GoogleCloudPaymentsResellerSubscriptionV1Location;

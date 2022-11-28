@@ -1,28 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { QueryParameterType } from "./queryparametertype";
-import { QueryParameterType } from "./queryparametertype";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class QueryParameterTypeStructTypes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: QueryParameterType;
 }
 
 
 export class QueryParameterType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arrayType" })
+  @SpeakeasyMetadata({ data: "json, name=arrayType" })
   arrayType?: QueryParameterType;
 
-  @Metadata({ data: "json, name=structTypes", elemType: shared.QueryParameterTypeStructTypes })
+  @SpeakeasyMetadata({ data: "json, name=structTypes", elemType: QueryParameterTypeStructTypes })
   structTypes?: QueryParameterTypeStructTypes[];
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }

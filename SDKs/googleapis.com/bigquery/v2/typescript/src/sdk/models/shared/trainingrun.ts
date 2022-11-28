@@ -1,11 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GlobalExplanation } from "./globalexplanation";
 import { DataSplitResult } from "./datasplitresult";
 import { EvaluationMetrics } from "./evaluationmetrics";
-import { GlobalExplanation } from "./globalexplanation";
 import { IterationResult } from "./iterationresult";
 import { TrainingOptions } from "./trainingoptions";
+
 
 
 // TrainingRun
@@ -13,33 +12,55 @@ import { TrainingOptions } from "./trainingoptions";
  * Information about a single training query run for the model.
 **/
 export class TrainingRun extends SpeakeasyBase {
-  @Metadata({ data: "json, name=classLevelGlobalExplanations", elemType: shared.GlobalExplanation })
+  @SpeakeasyMetadata({ data: "json, name=classLevelGlobalExplanations", elemType: GlobalExplanation })
   classLevelGlobalExplanations?: GlobalExplanation[];
 
-  @Metadata({ data: "json, name=dataSplitResult" })
+  @SpeakeasyMetadata({ data: "json, name=dataSplitResult" })
   dataSplitResult?: DataSplitResult;
 
-  @Metadata({ data: "json, name=evaluationMetrics" })
+  @SpeakeasyMetadata({ data: "json, name=evaluationMetrics" })
   evaluationMetrics?: EvaluationMetrics;
 
-  @Metadata({ data: "json, name=modelLevelGlobalExplanation" })
+  @SpeakeasyMetadata({ data: "json, name=modelLevelGlobalExplanation" })
   modelLevelGlobalExplanation?: GlobalExplanation;
 
-  @Metadata({ data: "json, name=results", elemType: shared.IterationResult })
+  @SpeakeasyMetadata({ data: "json, name=results", elemType: IterationResult })
   results?: IterationResult[];
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: string;
 
-  @Metadata({ data: "json, name=trainingOptions" })
+  @SpeakeasyMetadata({ data: "json, name=trainingOptions" })
   trainingOptions?: TrainingOptions;
 
-  @Metadata({ data: "json, name=trainingStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=trainingStartTime" })
   trainingStartTime?: string;
 
-  @Metadata({ data: "json, name=vertexAiModelId" })
+  @SpeakeasyMetadata({ data: "json, name=vertexAiModelId" })
   vertexAiModelId?: string;
 
-  @Metadata({ data: "json, name=vertexAiModelVersion" })
+  @SpeakeasyMetadata({ data: "json, name=vertexAiModelVersion" })
   vertexAiModelVersion?: string;
+}
+
+
+// TrainingRunInput
+/** 
+ * Information about a single training query run for the model.
+**/
+export class TrainingRunInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=dataSplitResult" })
+  dataSplitResult?: DataSplitResult;
+
+  @SpeakeasyMetadata({ data: "json, name=evaluationMetrics" })
+  evaluationMetrics?: EvaluationMetrics;
+
+  @SpeakeasyMetadata({ data: "json, name=modelLevelGlobalExplanation" })
+  modelLevelGlobalExplanation?: GlobalExplanation;
+
+  @SpeakeasyMetadata({ data: "json, name=trainingOptions" })
+  trainingOptions?: TrainingOptions;
+
+  @SpeakeasyMetadata({ data: "json, name=vertexAiModelId" })
+  vertexAiModelId?: string;
 }

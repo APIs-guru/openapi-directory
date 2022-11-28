@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PutEventsRequestEntry
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents an event to be submitted.
 **/
 export class PutEventsRequestEntry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Detail" })
+  @SpeakeasyMetadata({ data: "json, name=Detail" })
   detail?: string;
 
-  @Metadata({ data: "json, name=DetailType" })
+  @SpeakeasyMetadata({ data: "json, name=DetailType" })
   detailType?: string;
 
-  @Metadata({ data: "json, name=EventBusName" })
+  @SpeakeasyMetadata({ data: "json, name=EventBusName" })
   eventBusName?: string;
 
-  @Metadata({ data: "json, name=Resources" })
+  @SpeakeasyMetadata({ data: "json, name=Resources" })
   resources?: string[];
 
-  @Metadata({ data: "json, name=Source" })
+  @SpeakeasyMetadata({ data: "json, name=Source" })
   source?: string;
 
-  @Metadata({ data: "json, name=Time" })
+  @SpeakeasyMetadata({ data: "json, name=Time" })
   time?: Date;
 
-  @Metadata({ data: "json, name=TraceHeader" })
+  @SpeakeasyMetadata({ data: "json, name=TraceHeader" })
   traceHeader?: string;
 }

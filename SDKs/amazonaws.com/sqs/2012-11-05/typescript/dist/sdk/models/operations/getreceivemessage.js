@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetReceiveMessagePathParams = /** @class */ (function (_super) {
     __extends(GetReceiveMessagePathParams, _super);
     function GetReceiveMessagePathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=AccountNumber" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=AccountNumber" }),
         __metadata("design:type", Number)
     ], GetReceiveMessagePathParams.prototype, "accountNumber", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=QueueName" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=QueueName" }),
         __metadata("design:type", String)
     ], GetReceiveMessagePathParams.prototype, "queueName", void 0);
     return GetReceiveMessagePathParams;
@@ -53,35 +53,35 @@ var GetReceiveMessageQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" }),
         __metadata("design:type", String)
     ], GetReceiveMessageQueryParams.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=AttributeNames" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=AttributeNames" }),
         __metadata("design:type", Array)
     ], GetReceiveMessageQueryParams.prototype, "attributeNames", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=MaxNumberOfMessages" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MaxNumberOfMessages" }),
         __metadata("design:type", Number)
     ], GetReceiveMessageQueryParams.prototype, "maxNumberOfMessages", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=MessageAttributeNames" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MessageAttributeNames" }),
         __metadata("design:type", Array)
     ], GetReceiveMessageQueryParams.prototype, "messageAttributeNames", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ReceiveRequestAttemptId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ReceiveRequestAttemptId" }),
         __metadata("design:type", String)
     ], GetReceiveMessageQueryParams.prototype, "receiveRequestAttemptId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" }),
         __metadata("design:type", String)
     ], GetReceiveMessageQueryParams.prototype, "version", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=VisibilityTimeout" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=VisibilityTimeout" }),
         __metadata("design:type", Number)
     ], GetReceiveMessageQueryParams.prototype, "visibilityTimeout", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=WaitTimeSeconds" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=WaitTimeSeconds" }),
         __metadata("design:type", Number)
     ], GetReceiveMessageQueryParams.prototype, "waitTimeSeconds", void 0);
     return GetReceiveMessageQueryParams;
@@ -93,31 +93,31 @@ var GetReceiveMessageHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], GetReceiveMessageHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], GetReceiveMessageHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], GetReceiveMessageHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], GetReceiveMessageHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], GetReceiveMessageHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], GetReceiveMessageHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], GetReceiveMessageHeaders.prototype, "xAmzSignedHeaders", void 0);
     return GetReceiveMessageHeaders;
@@ -129,15 +129,15 @@ var GetReceiveMessageRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetReceiveMessagePathParams)
     ], GetReceiveMessageRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetReceiveMessageQueryParams)
     ], GetReceiveMessageRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetReceiveMessageHeaders)
     ], GetReceiveMessageRequest.prototype, "headers", void 0);
     return GetReceiveMessageRequest;
@@ -149,15 +149,15 @@ var GetReceiveMessageResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetReceiveMessageResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetReceiveMessageResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetReceiveMessageResponse.prototype, "statusCode", void 0);
     return GetReceiveMessageResponse;

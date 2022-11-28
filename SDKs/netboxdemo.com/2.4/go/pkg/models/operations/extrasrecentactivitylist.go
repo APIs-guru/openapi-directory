@@ -11,15 +11,15 @@ type ExtrasRecentActivityListQueryParams struct {
 	Username *string `queryParam:"style=form,explode=true,name=username"`
 }
 
-type ExtrasRecentActivityListRequest struct {
-	QueryParams ExtrasRecentActivityListQueryParams
-}
-
 type ExtrasRecentActivityList200ApplicationJSON struct {
 	Count    int64               `json:"count"`
 	Next     *string             `json:"next,omitempty"`
 	Previous *string             `json:"previous,omitempty"`
 	Results  []shared.UserAction `json:"results"`
+}
+
+type ExtrasRecentActivityListRequest struct {
+	QueryParams ExtrasRecentActivityListQueryParams
 }
 
 type ExtrasRecentActivityListResponse struct {

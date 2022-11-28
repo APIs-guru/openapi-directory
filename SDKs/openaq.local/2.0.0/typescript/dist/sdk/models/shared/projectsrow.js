@@ -22,75 +22,75 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ProjectParameterDetails } from "./projectparameterdetails";
 var ProjectsRow = /** @class */ (function (_super) {
     __extends(ProjectsRow, _super);
     function ProjectsRow() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=bbox" }),
+        SpeakeasyMetadata({ data: "json, name=bbox" }),
         __metadata("design:type", Array)
     ], ProjectsRow.prototype, "bbox", void 0);
     __decorate([
-        Metadata({ data: "json, name=countries" }),
+        SpeakeasyMetadata({ data: "json, name=countries" }),
         __metadata("design:type", Array)
     ], ProjectsRow.prototype, "countries", void 0);
     __decorate([
-        Metadata({ data: "json, name=entity" }),
+        SpeakeasyMetadata({ data: "json, name=entity" }),
         __metadata("design:type", String)
     ], ProjectsRow.prototype, "entity", void 0);
     __decorate([
-        Metadata({ data: "json, name=firstUpdated" }),
+        SpeakeasyMetadata({ data: "json, name=firstUpdated" }),
         __metadata("design:type", Date)
     ], ProjectsRow.prototype, "firstUpdated", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", Number)
     ], ProjectsRow.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=isAnalysis" }),
+        SpeakeasyMetadata({ data: "json, name=isAnalysis" }),
         __metadata("design:type", Boolean)
     ], ProjectsRow.prototype, "isAnalysis", void 0);
     __decorate([
-        Metadata({ data: "json, name=isMobile" }),
+        SpeakeasyMetadata({ data: "json, name=isMobile" }),
         __metadata("design:type", Boolean)
     ], ProjectsRow.prototype, "isMobile", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastUpdated" }),
+        SpeakeasyMetadata({ data: "json, name=lastUpdated" }),
         __metadata("design:type", Date)
     ], ProjectsRow.prototype, "lastUpdated", void 0);
     __decorate([
-        Metadata({ data: "json, name=locationIds" }),
+        SpeakeasyMetadata({ data: "json, name=locationIds" }),
         __metadata("design:type", Array)
     ], ProjectsRow.prototype, "locationIds", void 0);
     __decorate([
-        Metadata({ data: "json, name=locations" }),
+        SpeakeasyMetadata({ data: "json, name=locations" }),
         __metadata("design:type", Number)
     ], ProjectsRow.prototype, "locations", void 0);
     __decorate([
-        Metadata({ data: "json, name=measurements" }),
+        SpeakeasyMetadata({ data: "json, name=measurements" }),
         __metadata("design:type", Number)
     ], ProjectsRow.prototype, "measurements", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], ProjectsRow.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=parameters", elemType: shared.ProjectParameterDetails }),
+        SpeakeasyMetadata({ data: "json, name=parameters", elemType: ProjectParameterDetails }),
         __metadata("design:type", Array)
     ], ProjectsRow.prototype, "parameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=sensorType" }),
+        SpeakeasyMetadata({ data: "json, name=sensorType" }),
         __metadata("design:type", String)
     ], ProjectsRow.prototype, "sensorType", void 0);
     __decorate([
-        Metadata({ data: "json, name=sources" }),
+        SpeakeasyMetadata({ data: "json, name=sources" }),
         __metadata("design:type", Array)
     ], ProjectsRow.prototype, "sources", void 0);
     __decorate([
-        Metadata({ data: "json, name=subtitle" }),
+        SpeakeasyMetadata({ data: "json, name=subtitle" }),
         __metadata("design:type", String)
     ], ProjectsRow.prototype, "subtitle", void 0);
     return ProjectsRow;

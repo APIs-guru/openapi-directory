@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudBeyondcorpAppconnectorsV1alphaNotificationConfig
+// NotificationConfig defines the mechanisms to notify instance agent.
 type GoogleCloudBeyondcorpAppconnectorsV1alphaNotificationConfig struct {
 	PubsubNotification *GoogleCloudBeyondcorpAppconnectorsV1alphaNotificationConfigCloudPubSubNotificationConfig `json:"pubsubNotification,omitempty"`
 }

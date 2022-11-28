@@ -1,110 +1,111 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetReportQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, serialization=json;name=q" })
+  @SpeakeasyMetadata({ data: "queryParam, serialization=json;name=q" })
   q?: shared.GetListSchema;
 }
 
 
 export class GetReportSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   jwt: shared.SchemeJwt;
 }
 
 
-export class GetReportRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetReportQueryParams;
-
-  @Metadata()
-  security: GetReportSecurity;
-}
-
-
 export class GetReport200ApplicationJsonDescriptionColumns extends SpeakeasyBase {
-  @Metadata({ data: "json, name=column_name" })
+  @SpeakeasyMetadata({ data: "json, name=column_name" })
   columnName?: string;
 }
 
 
 export class GetReport200ApplicationJsonLabelColumns extends SpeakeasyBase {
-  @Metadata({ data: "json, name=column_name" })
+  @SpeakeasyMetadata({ data: "json, name=column_name" })
   columnName?: string;
 }
 
 
 export class GetReport200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count?: number;
 
-  @Metadata({ data: "json, name=description_columns" })
+  @SpeakeasyMetadata({ data: "json, name=description_columns" })
   descriptionColumns?: GetReport200ApplicationJsonDescriptionColumns;
 
-  @Metadata({ data: "json, name=ids" })
+  @SpeakeasyMetadata({ data: "json, name=ids" })
   ids?: string[];
 
-  @Metadata({ data: "json, name=label_columns" })
+  @SpeakeasyMetadata({ data: "json, name=label_columns" })
   labelColumns?: GetReport200ApplicationJsonLabelColumns;
 
-  @Metadata({ data: "json, name=list_columns" })
+  @SpeakeasyMetadata({ data: "json, name=list_columns" })
   listColumns?: string[];
 
-  @Metadata({ data: "json, name=list_title" })
+  @SpeakeasyMetadata({ data: "json, name=list_title" })
   listTitle?: string;
 
-  @Metadata({ data: "json, name=order_columns" })
+  @SpeakeasyMetadata({ data: "json, name=order_columns" })
   orderColumns?: string[];
 
-  @Metadata({ data: "json, name=result", elemType: shared.ReportScheduleRestApiGetList })
+  @SpeakeasyMetadata({ data: "json, name=result", elemType: shared.ReportScheduleRestApiGetList })
   result?: shared.ReportScheduleRestApiGetList[];
 }
 
 
 export class GetReport400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetReport401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetReport422ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetReport500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class GetReportRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetReportQueryParams;
+
+  @SpeakeasyMetadata()
+  security: GetReportSecurity;
+}
+
+
 export class GetReportResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getReport200ApplicationJsonObject?: GetReport200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getReport400ApplicationJsonObject?: GetReport400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getReport401ApplicationJsonObject?: GetReport401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getReport422ApplicationJsonObject?: GetReport422ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getReport500ApplicationJsonObject?: GetReport500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleIdentityStsV1IntrospectTokenResponse
@@ -6,27 +7,27 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Response message for IntrospectToken.
 **/
 export class GoogleIdentityStsV1IntrospectTokenResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=active" })
+  @SpeakeasyMetadata({ data: "json, name=active" })
   active?: boolean;
 
-  @Metadata({ data: "json, name=client_id" })
+  @SpeakeasyMetadata({ data: "json, name=client_id" })
   clientId?: string;
 
-  @Metadata({ data: "json, name=exp" })
+  @SpeakeasyMetadata({ data: "json, name=exp" })
   exp?: string;
 
-  @Metadata({ data: "json, name=iat" })
+  @SpeakeasyMetadata({ data: "json, name=iat" })
   iat?: string;
 
-  @Metadata({ data: "json, name=iss" })
+  @SpeakeasyMetadata({ data: "json, name=iss" })
   iss?: string;
 
-  @Metadata({ data: "json, name=scope" })
+  @SpeakeasyMetadata({ data: "json, name=scope" })
   scope?: string;
 
-  @Metadata({ data: "json, name=sub" })
+  @SpeakeasyMetadata({ data: "json, name=sub" })
   sub?: string;
 
-  @Metadata({ data: "json, name=username" })
+  @SpeakeasyMetadata({ data: "json, name=username" })
   username?: string;
 }

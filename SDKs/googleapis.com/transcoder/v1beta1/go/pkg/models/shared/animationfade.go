@@ -8,6 +8,8 @@ const (
 	AnimationFadeFadeTypeEnumFadeOut             AnimationFadeFadeTypeEnum = "FADE_OUT"
 )
 
+// AnimationFade
+// Display overlay object with fade animation.
 type AnimationFade struct {
 	EndTimeOffset   *string                    `json:"endTimeOffset,omitempty"`
 	FadeType        *AnimationFadeFadeTypeEnum `json:"fadeType,omitempty"`

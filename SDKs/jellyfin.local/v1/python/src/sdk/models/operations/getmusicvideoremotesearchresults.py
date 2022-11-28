@@ -12,18 +12,18 @@ class GetMusicVideoRemoteSearchResultsRequests:
 
 @dataclass
 class GetMusicVideoRemoteSearchResultsSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetMusicVideoRemoteSearchResultsRequest:
-    request: GetMusicVideoRemoteSearchResultsRequests = field(default=None)
-    security: GetMusicVideoRemoteSearchResultsSecurity = field(default=None)
+    request: GetMusicVideoRemoteSearchResultsRequests = field()
+    security: GetMusicVideoRemoteSearchResultsSecurity = field()
     
 
 @dataclass
 class GetMusicVideoRemoteSearchResultsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     remote_search_results: Optional[List[shared.RemoteSearchResult]] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsEc2VpnConnectionRoutesDetails
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A static routes associated with the VPN connection.
 **/
 export class AwsEc2VpnConnectionRoutesDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DestinationCidrBlock" })
+  @SpeakeasyMetadata({ data: "json, name=DestinationCidrBlock" })
   destinationCidrBlock?: string;
 
-  @Metadata({ data: "json, name=State" })
+  @SpeakeasyMetadata({ data: "json, name=State" })
   state?: string;
 }

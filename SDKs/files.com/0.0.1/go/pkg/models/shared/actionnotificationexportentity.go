@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ActionNotificationExportEntity
+// Show Action Notification Export
 type ActionNotificationExportEntity struct {
 	EndAt              *time.Time `json:"end_at,omitempty"`
 	ExportVersion      *string    `json:"export_version,omitempty"`

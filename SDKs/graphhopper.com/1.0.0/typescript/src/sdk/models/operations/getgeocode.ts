@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetGeocodeQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=debug" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=debug" })
   debug?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=locale" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=locale" })
   locale?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=point" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=point" })
   point?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=provider" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=provider" })
   provider?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=q" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=q" })
   q?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=reverse" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=reverse" })
   reverse?: boolean;
 }
 
 
 export class GetGeocodeRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetGeocodeQueryParams;
 }
 
 
 export class GetGeocodeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   ghError?: shared.GhError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   geocodingResponse?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ApigeeOrganizationsEnvironmentsArchiveDeploymentsGenerateUploadURLPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class ApigeeOrganizationsEnvironmentsArchiveDeploymentsGenerateUploadURLQueryPar
 
 @dataclass
 class ApigeeOrganizationsEnvironmentsArchiveDeploymentsGenerateUploadURLSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ApigeeOrganizationsEnvironmentsArchiveDeploymentsGenerateUploadURLRequest:
-    path_params: ApigeeOrganizationsEnvironmentsArchiveDeploymentsGenerateUploadURLPathParams = field(default=None)
-    query_params: ApigeeOrganizationsEnvironmentsArchiveDeploymentsGenerateUploadURLQueryParams = field(default=None)
+    path_params: ApigeeOrganizationsEnvironmentsArchiveDeploymentsGenerateUploadURLPathParams = field()
+    query_params: ApigeeOrganizationsEnvironmentsArchiveDeploymentsGenerateUploadURLQueryParams = field()
+    security: ApigeeOrganizationsEnvironmentsArchiveDeploymentsGenerateUploadURLSecurity = field()
     request: Optional[dict[str, Any]] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ApigeeOrganizationsEnvironmentsArchiveDeploymentsGenerateUploadURLSecurity = field(default=None)
     
 
 @dataclass
 class ApigeeOrganizationsEnvironmentsArchiveDeploymentsGenerateUploadURLResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_apigee_v1_generate_upload_url_response: Optional[shared.GoogleCloudApigeeV1GenerateUploadURLResponse] = field(default=None)
-    status_code: int = field(default=None)
     

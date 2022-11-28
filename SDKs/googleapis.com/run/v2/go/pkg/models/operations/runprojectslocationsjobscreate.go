@@ -32,7 +32,7 @@ type RunProjectsLocationsJobsCreateSecurity struct {
 type RunProjectsLocationsJobsCreateRequest struct {
 	PathParams  RunProjectsLocationsJobsCreatePathParams
 	QueryParams RunProjectsLocationsJobsCreateQueryParams
-	Request     *shared.GoogleCloudRunV2Job `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudRunV2JobInput `request:"mediaType=application/json"`
 	Security    RunProjectsLocationsJobsCreateSecurity
 }
 

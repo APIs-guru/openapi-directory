@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var StorageDefaultObjectAccessControlsInsertPathParams = /** @class */ (function (_super) {
     __extends(StorageDefaultObjectAccessControlsInsertPathParams, _super);
@@ -30,7 +30,7 @@ var StorageDefaultObjectAccessControlsInsertPathParams = /** @class */ (function
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=bucket" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=bucket" }),
         __metadata("design:type", String)
     ], StorageDefaultObjectAccessControlsInsertPathParams.prototype, "bucket", void 0);
     return StorageDefaultObjectAccessControlsInsertPathParams;
@@ -42,39 +42,39 @@ var StorageDefaultObjectAccessControlsInsertQueryParams = /** @class */ (functio
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], StorageDefaultObjectAccessControlsInsertQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], StorageDefaultObjectAccessControlsInsertQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], StorageDefaultObjectAccessControlsInsertQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], StorageDefaultObjectAccessControlsInsertQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], StorageDefaultObjectAccessControlsInsertQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], StorageDefaultObjectAccessControlsInsertQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], StorageDefaultObjectAccessControlsInsertQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=userIp" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userIp" }),
         __metadata("design:type", String)
     ], StorageDefaultObjectAccessControlsInsertQueryParams.prototype, "userIp", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=userProject" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userProject" }),
         __metadata("design:type", String)
     ], StorageDefaultObjectAccessControlsInsertQueryParams.prototype, "userProject", void 0);
     return StorageDefaultObjectAccessControlsInsertQueryParams;
@@ -86,11 +86,11 @@ var StorageDefaultObjectAccessControlsInsertSecurityOption1 = /** @class */ (fun
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], StorageDefaultObjectAccessControlsInsertSecurityOption1.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], StorageDefaultObjectAccessControlsInsertSecurityOption1.prototype, "oauth2c", void 0);
     return StorageDefaultObjectAccessControlsInsertSecurityOption1;
@@ -102,11 +102,11 @@ var StorageDefaultObjectAccessControlsInsertSecurityOption2 = /** @class */ (fun
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], StorageDefaultObjectAccessControlsInsertSecurityOption2.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], StorageDefaultObjectAccessControlsInsertSecurityOption2.prototype, "oauth2c", void 0);
     return StorageDefaultObjectAccessControlsInsertSecurityOption2;
@@ -118,11 +118,11 @@ var StorageDefaultObjectAccessControlsInsertSecurity = /** @class */ (function (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", StorageDefaultObjectAccessControlsInsertSecurityOption1)
     ], StorageDefaultObjectAccessControlsInsertSecurity.prototype, "option1", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", StorageDefaultObjectAccessControlsInsertSecurityOption2)
     ], StorageDefaultObjectAccessControlsInsertSecurity.prototype, "option2", void 0);
     return StorageDefaultObjectAccessControlsInsertSecurity;
@@ -134,19 +134,19 @@ var StorageDefaultObjectAccessControlsInsertRequest = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", StorageDefaultObjectAccessControlsInsertPathParams)
     ], StorageDefaultObjectAccessControlsInsertRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", StorageDefaultObjectAccessControlsInsertQueryParams)
     ], StorageDefaultObjectAccessControlsInsertRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.ObjectAccessControl)
     ], StorageDefaultObjectAccessControlsInsertRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", StorageDefaultObjectAccessControlsInsertSecurity)
     ], StorageDefaultObjectAccessControlsInsertRequest.prototype, "security", void 0);
     return StorageDefaultObjectAccessControlsInsertRequest;
@@ -158,15 +158,15 @@ var StorageDefaultObjectAccessControlsInsertResponse = /** @class */ (function (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], StorageDefaultObjectAccessControlsInsertResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ObjectAccessControl)
     ], StorageDefaultObjectAccessControlsInsertResponse.prototype, "objectAccessControl", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], StorageDefaultObjectAccessControlsInsertResponse.prototype, "statusCode", void 0);
     return StorageDefaultObjectAccessControlsInsertResponse;

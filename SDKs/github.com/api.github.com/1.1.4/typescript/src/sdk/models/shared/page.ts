@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PagesSourceHash } from "./pagessourcehash";
 
+
 export enum PageStatusEnum {
-    Built = "built"
-,    Building = "building"
-,    Errored = "errored"
+    Built = "built",
+    Building = "building",
+    Errored = "errored"
 }
 
 
@@ -13,24 +14,24 @@ export enum PageStatusEnum {
  * The configuration for GitHub Pages for a repository.
 **/
 export class Page extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cname" })
+  @SpeakeasyMetadata({ data: "json, name=cname" })
   cname: string;
 
-  @Metadata({ data: "json, name=custom_404" })
+  @SpeakeasyMetadata({ data: "json, name=custom_404" })
   custom404: boolean;
 
-  @Metadata({ data: "json, name=html_url" })
+  @SpeakeasyMetadata({ data: "json, name=html_url" })
   htmlUrl?: string;
 
-  @Metadata({ data: "json, name=public" })
+  @SpeakeasyMetadata({ data: "json, name=public" })
   public: boolean;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: PagesSourceHash;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: PageStatusEnum;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url: string;
 }

@@ -1,0 +1,34 @@
+import { AxiosInstance } from "axios";
+import { Security } from "./models/shared";
+import { Administrations } from "./administrations";
+import { Discovery } from "./discovery";
+import { DocumentSubmissions } from "./documentsubmissions";
+import { InvoiceSubmissions } from "./invoicesubmissions";
+import { LegalEntities } from "./legalentities";
+import { PeppolIdentifiers } from "./peppolidentifiers";
+import { PurchaseInvoices } from "./purchaseinvoices";
+import { WebhookInstances } from "./webhookinstances";
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://api.storecove.com/api/v2"];
+export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
+export declare function WithClient(client: AxiosInstance): OptsFunc;
+export declare function WithSecurity(security: Security): OptsFunc;
+export declare class SDK {
+    administrations: Administrations;
+    discovery: Discovery;
+    documentSubmissions: DocumentSubmissions;
+    invoiceSubmissions: InvoiceSubmissions;
+    legalEntities: LegalEntities;
+    peppolIdentifiers: PeppolIdentifiers;
+    purchaseInvoices: PurchaseInvoices;
+    webhookInstances: WebhookInstances;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _security?: Security;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
+    constructor(...opts: OptsFunc[]);
+}
+export {};

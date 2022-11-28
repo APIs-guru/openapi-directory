@@ -1,5 +1,7 @@
 package shared
 
+// Place
+// Contains details about addresses or points of interest that match the search criteria.
 type Place struct {
 	AddressNumber *string       `json:"AddressNumber,omitempty"`
 	Country       *string       `json:"Country,omitempty"`

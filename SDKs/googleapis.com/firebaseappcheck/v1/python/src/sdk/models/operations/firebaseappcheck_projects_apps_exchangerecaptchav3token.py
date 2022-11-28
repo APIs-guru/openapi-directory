@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class FirebaseappcheckProjectsAppsExchangeRecaptchaV3TokenPathParams:
-    app: str = field(default=None, metadata={'path_param': { 'field_name': 'app', 'style': 'simple', 'explode': False }})
+    app: str = field(metadata={'path_param': { 'field_name': 'app', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class FirebaseappcheckProjectsAppsExchangeRecaptchaV3TokenQueryParams:
 
 @dataclass
 class FirebaseappcheckProjectsAppsExchangeRecaptchaV3TokenSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FirebaseappcheckProjectsAppsExchangeRecaptchaV3TokenSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class FirebaseappcheckProjectsAppsExchangeRecaptchaV3TokenSecurity:
 
 @dataclass
 class FirebaseappcheckProjectsAppsExchangeRecaptchaV3TokenRequest:
-    path_params: FirebaseappcheckProjectsAppsExchangeRecaptchaV3TokenPathParams = field(default=None)
-    query_params: FirebaseappcheckProjectsAppsExchangeRecaptchaV3TokenQueryParams = field(default=None)
+    path_params: FirebaseappcheckProjectsAppsExchangeRecaptchaV3TokenPathParams = field()
+    query_params: FirebaseappcheckProjectsAppsExchangeRecaptchaV3TokenQueryParams = field()
+    security: FirebaseappcheckProjectsAppsExchangeRecaptchaV3TokenSecurity = field()
     request: Optional[shared.GoogleFirebaseAppcheckV1ExchangeRecaptchaV3TokenRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: FirebaseappcheckProjectsAppsExchangeRecaptchaV3TokenSecurity = field(default=None)
     
 
 @dataclass
 class FirebaseappcheckProjectsAppsExchangeRecaptchaV3TokenResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_firebase_appcheck_v1_app_check_token: Optional[shared.GoogleFirebaseAppcheckV1AppCheckToken] = field(default=None)
-    status_code: int = field(default=None)
     

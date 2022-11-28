@@ -1,6 +1,7 @@
 
 
+
 export enum ConfigurationSyncStatusEnum {
-    InSync = "InSync"
-,    OutOfSync = "OutOfSync"
+    InSync = "InSync",
+    OutOfSync = "OutOfSync"
 }

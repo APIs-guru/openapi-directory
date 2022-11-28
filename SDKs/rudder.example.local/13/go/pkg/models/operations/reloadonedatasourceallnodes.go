@@ -4,10 +4,6 @@ type ReloadOneDatasourceAllNodesPathParams struct {
 	DatasourceID string `pathParam:"style=simple,explode=false,name=datasourceId"`
 }
 
-type ReloadOneDatasourceAllNodesRequest struct {
-	PathParams ReloadOneDatasourceAllNodesPathParams
-}
-
 type ReloadOneDatasourceAllNodes200ApplicationJSONActionEnum string
 
 const (
@@ -25,6 +21,10 @@ type ReloadOneDatasourceAllNodes200ApplicationJSON struct {
 	Action ReloadOneDatasourceAllNodes200ApplicationJSONActionEnum `json:"action"`
 	Data   string                                                  `json:"data"`
 	Result ReloadOneDatasourceAllNodes200ApplicationJSONResultEnum `json:"result"`
+}
+
+type ReloadOneDatasourceAllNodesRequest struct {
+	PathParams ReloadOneDatasourceAllNodesPathParams
 }
 
 type ReloadOneDatasourceAllNodesResponse struct {

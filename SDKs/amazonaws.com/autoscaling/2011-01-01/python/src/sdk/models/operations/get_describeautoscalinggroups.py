@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetDescribeAutoScalingGroupsActionEnum(str, Enum):
     DESCRIBE_AUTO_SCALING_GROUPS = "DescribeAutoScalingGroups"
@@ -10,11 +14,11 @@ class GetDescribeAutoScalingGroupsVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeAutoScalingGroupsQueryParams:
-    action: GetDescribeAutoScalingGroupsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribeAutoScalingGroupsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDescribeAutoScalingGroupsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     auto_scaling_group_names: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'AutoScalingGroupNames', 'style': 'form', 'explode': True }})
     max_records: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxRecords', 'style': 'form', 'explode': True }})
     next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NextToken', 'style': 'form', 'explode': True }})
-    version: GetDescribeAutoScalingGroupsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetDescribeAutoScalingGroupsHeaders:
 
 @dataclass
 class GetDescribeAutoScalingGroupsRequest:
-    query_params: GetDescribeAutoScalingGroupsQueryParams = field(default=None)
-    headers: GetDescribeAutoScalingGroupsHeaders = field(default=None)
+    headers: GetDescribeAutoScalingGroupsHeaders = field()
+    query_params: GetDescribeAutoScalingGroupsQueryParams = field()
     
 
 @dataclass
 class GetDescribeAutoScalingGroupsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

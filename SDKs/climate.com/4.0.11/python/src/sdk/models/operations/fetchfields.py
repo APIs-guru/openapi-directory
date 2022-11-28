@@ -15,34 +15,24 @@ class FetchFieldsHeaders:
     
 
 @dataclass
-class FetchFieldsSecurityOption1:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
-    
-
-@dataclass
-class FetchFieldsSecurityOption2:
-    oauth2_authorization_code: shared.SchemeOauth2AuthorizationCode = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    
-
-@dataclass
 class FetchFieldsSecurity:
-    option1: Optional[FetchFieldsSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[FetchFieldsSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
+    api_key: Optional[shared.SchemeAPIKey] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    oauth2_authorization_code: Optional[shared.SchemeOauth2AuthorizationCode] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FetchFieldsRequest:
-    query_params: FetchFieldsQueryParams = field(default=None)
-    headers: FetchFieldsHeaders = field(default=None)
-    security: FetchFieldsSecurity = field(default=None)
+    headers: FetchFieldsHeaders = field()
+    query_params: FetchFieldsQueryParams = field()
+    security: FetchFieldsSecurity = field()
     
 
 @dataclass
 class FetchFieldsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
     error: Optional[shared.Error] = field(default=None)
     fields: Optional[Any] = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
     

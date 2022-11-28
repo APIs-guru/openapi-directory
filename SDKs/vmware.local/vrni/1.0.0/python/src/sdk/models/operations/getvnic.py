@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetVnicPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,20 +15,20 @@ class GetVnicQueryParams:
 
 @dataclass
 class GetVnicSecurity:
-    api_key_auth: shared.SchemeAPIKeyAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    api_key_auth: shared.SchemeAPIKeyAuth = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetVnicRequest:
-    path_params: GetVnicPathParams = field(default=None)
-    query_params: GetVnicQueryParams = field(default=None)
-    security: GetVnicSecurity = field(default=None)
+    path_params: GetVnicPathParams = field()
+    query_params: GetVnicQueryParams = field()
+    security: GetVnicSecurity = field()
     
 
 @dataclass
 class GetVnicResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_error: Optional[shared.APIError] = field(default=None)
     base_vnic: Optional[shared.BaseVnic] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

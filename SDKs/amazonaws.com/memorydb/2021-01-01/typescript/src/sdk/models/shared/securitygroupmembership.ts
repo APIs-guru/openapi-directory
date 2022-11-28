@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SecurityGroupMembership
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents a single security group and its status.
 **/
 export class SecurityGroupMembership extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SecurityGroupId" })
+  @SpeakeasyMetadata({ data: "json, name=SecurityGroupId" })
   securityGroupId?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: string;
 }

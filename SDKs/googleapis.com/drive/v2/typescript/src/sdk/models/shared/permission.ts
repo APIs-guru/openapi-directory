@@ -1,39 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PermissionPermissionDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=additionalRoles" })
+  @SpeakeasyMetadata({ data: "json, name=additionalRoles" })
   additionalRoles?: string[];
 
-  @Metadata({ data: "json, name=inherited" })
+  @SpeakeasyMetadata({ data: "json, name=inherited" })
   inherited?: boolean;
 
-  @Metadata({ data: "json, name=inheritedFrom" })
+  @SpeakeasyMetadata({ data: "json, name=inheritedFrom" })
   inheritedFrom?: string;
 
-  @Metadata({ data: "json, name=permissionType" })
+  @SpeakeasyMetadata({ data: "json, name=permissionType" })
   permissionType?: string;
 
-  @Metadata({ data: "json, name=role" })
+  @SpeakeasyMetadata({ data: "json, name=role" })
   role?: string;
 }
 
 
 export class PermissionTeamDrivePermissionDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=additionalRoles" })
+  @SpeakeasyMetadata({ data: "json, name=additionalRoles" })
   additionalRoles?: string[];
 
-  @Metadata({ data: "json, name=inherited" })
+  @SpeakeasyMetadata({ data: "json, name=inherited" })
   inherited?: boolean;
 
-  @Metadata({ data: "json, name=inheritedFrom" })
+  @SpeakeasyMetadata({ data: "json, name=inheritedFrom" })
   inheritedFrom?: string;
 
-  @Metadata({ data: "json, name=role" })
+  @SpeakeasyMetadata({ data: "json, name=role" })
   role?: string;
 
-  @Metadata({ data: "json, name=teamDrivePermissionType" })
+  @SpeakeasyMetadata({ data: "json, name=teamDrivePermissionType" })
   teamDrivePermissionType?: string;
 }
 
@@ -43,63 +43,124 @@ export class PermissionTeamDrivePermissionDetails extends SpeakeasyBase {
  * A permission for a file.
 **/
 export class Permission extends SpeakeasyBase {
-  @Metadata({ data: "json, name=additionalRoles" })
+  @SpeakeasyMetadata({ data: "json, name=additionalRoles" })
   additionalRoles?: string[];
 
-  @Metadata({ data: "json, name=authKey" })
+  @SpeakeasyMetadata({ data: "json, name=authKey" })
   authKey?: string;
 
-  @Metadata({ data: "json, name=deleted" })
+  @SpeakeasyMetadata({ data: "json, name=deleted" })
   deleted?: boolean;
 
-  @Metadata({ data: "json, name=domain" })
+  @SpeakeasyMetadata({ data: "json, name=domain" })
   domain?: string;
 
-  @Metadata({ data: "json, name=emailAddress" })
+  @SpeakeasyMetadata({ data: "json, name=emailAddress" })
   emailAddress?: string;
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=expirationDate" })
+  @SpeakeasyMetadata({ data: "json, name=expirationDate" })
   expirationDate?: Date;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=pendingOwner" })
+  @SpeakeasyMetadata({ data: "json, name=pendingOwner" })
   pendingOwner?: boolean;
 
-  @Metadata({ data: "json, name=permissionDetails", elemType: shared.PermissionPermissionDetails })
+  @SpeakeasyMetadata({ data: "json, name=permissionDetails", elemType: PermissionPermissionDetails })
   permissionDetails?: PermissionPermissionDetails[];
 
-  @Metadata({ data: "json, name=photoLink" })
+  @SpeakeasyMetadata({ data: "json, name=photoLink" })
   photoLink?: string;
 
-  @Metadata({ data: "json, name=role" })
+  @SpeakeasyMetadata({ data: "json, name=role" })
   role?: string;
 
-  @Metadata({ data: "json, name=selfLink" })
+  @SpeakeasyMetadata({ data: "json, name=selfLink" })
   selfLink?: string;
 
-  @Metadata({ data: "json, name=teamDrivePermissionDetails", elemType: shared.PermissionTeamDrivePermissionDetails })
+  @SpeakeasyMetadata({ data: "json, name=teamDrivePermissionDetails", elemType: PermissionTeamDrivePermissionDetails })
   teamDrivePermissionDetails?: PermissionTeamDrivePermissionDetails[];
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 
-  @Metadata({ data: "json, name=view" })
+  @SpeakeasyMetadata({ data: "json, name=view" })
   view?: string;
 
-  @Metadata({ data: "json, name=withLink" })
+  @SpeakeasyMetadata({ data: "json, name=withLink" })
+  withLink?: boolean;
+}
+
+
+// PermissionInput
+/** 
+ * A permission for a file.
+**/
+export class PermissionInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=additionalRoles" })
+  additionalRoles?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=authKey" })
+  authKey?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=deleted" })
+  deleted?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=domain" })
+  domain?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=emailAddress" })
+  emailAddress?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=etag" })
+  etag?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=expirationDate" })
+  expirationDate?: Date;
+
+  @SpeakeasyMetadata({ data: "json, name=id" })
+  id?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=kind" })
+  kind?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=pendingOwner" })
+  pendingOwner?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=photoLink" })
+  photoLink?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=role" })
+  role?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=selfLink" })
+  selfLink?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=type" })
+  type?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=value" })
+  value?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=view" })
+  view?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=withLink" })
   withLink?: boolean;
 }

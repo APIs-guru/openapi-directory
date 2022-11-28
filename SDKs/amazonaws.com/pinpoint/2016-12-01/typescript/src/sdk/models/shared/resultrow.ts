@@ -1,7 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResultRowValue } from "./resultrowvalue";
-import { ResultRowValue } from "./resultrowvalue";
+
 
 
 // ResultRow
@@ -9,9 +8,9 @@ import { ResultRowValue } from "./resultrowvalue";
  * Provides the results of a query that retrieved the data for a standard metric that applies to an application, campaign, or journey.
 **/
 export class ResultRow extends SpeakeasyBase {
-  @Metadata({ data: "json, name=GroupedBys", elemType: shared.ResultRowValue })
+  @SpeakeasyMetadata({ data: "json, name=GroupedBys", elemType: ResultRowValue })
   groupedBys: ResultRowValue[];
 
-  @Metadata({ data: "json, name=Values", elemType: shared.ResultRowValue })
+  @SpeakeasyMetadata({ data: "json, name=Values", elemType: ResultRowValue })
   values: ResultRowValue[];
 }

@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class LicenseActivationsPostRegisterEdtLiteRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/xml" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/xml" })
   applicationXml: Uint8Array;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   dealerDbModelsEdtLiteRegistration?: shared.DealerDbModelsEdtLiteRegistration;
 
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
   dealerDbModelsEdtLiteRegistration1?: shared.DealerDbModelsEdtLiteRegistration;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   dealerDbModelsEdtLiteRegistration2?: shared.DealerDbModelsEdtLiteRegistration;
 
-  @Metadata({ data: "request, media_type=text/xml" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/xml" })
   textXml: Uint8Array;
 }
 
 
 export class LicenseActivationsPostRegisterEdtLiteRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   request: LicenseActivationsPostRegisterEdtLiteRequests;
 }
 
 
 export class LicenseActivationsPostRegisterEdtLiteResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiModelsApiError?: shared.ApiModelsApiError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   licenseActivationsPostRegisterEdtLite200ApplicationJsonBoolean?: boolean;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   licenseActivationsPostRegisterEdtLite200TextJsonBoolean?: boolean;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

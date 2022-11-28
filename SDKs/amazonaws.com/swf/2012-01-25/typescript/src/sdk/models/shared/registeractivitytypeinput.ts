@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TaskList } from "./tasklist";
 
 
+
 export class RegisterActivityTypeInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=defaultTaskHeartbeatTimeout" })
+  @SpeakeasyMetadata({ data: "json, name=defaultTaskHeartbeatTimeout" })
   defaultTaskHeartbeatTimeout?: string;
 
-  @Metadata({ data: "json, name=defaultTaskList" })
+  @SpeakeasyMetadata({ data: "json, name=defaultTaskList" })
   defaultTaskList?: TaskList;
 
-  @Metadata({ data: "json, name=defaultTaskPriority" })
+  @SpeakeasyMetadata({ data: "json, name=defaultTaskPriority" })
   defaultTaskPriority?: string;
 
-  @Metadata({ data: "json, name=defaultTaskScheduleToCloseTimeout" })
+  @SpeakeasyMetadata({ data: "json, name=defaultTaskScheduleToCloseTimeout" })
   defaultTaskScheduleToCloseTimeout?: string;
 
-  @Metadata({ data: "json, name=defaultTaskScheduleToStartTimeout" })
+  @SpeakeasyMetadata({ data: "json, name=defaultTaskScheduleToStartTimeout" })
   defaultTaskScheduleToStartTimeout?: string;
 
-  @Metadata({ data: "json, name=defaultTaskStartToCloseTimeout" })
+  @SpeakeasyMetadata({ data: "json, name=defaultTaskStartToCloseTimeout" })
   defaultTaskStartToCloseTimeout?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=domain" })
+  @SpeakeasyMetadata({ data: "json, name=domain" })
   domain: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version: string;
 }

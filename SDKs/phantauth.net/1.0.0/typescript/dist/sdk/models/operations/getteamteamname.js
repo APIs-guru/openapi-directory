@@ -22,82 +22,82 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetTeamTeamnamePathParams = /** @class */ (function (_super) {
     __extends(GetTeamTeamnamePathParams, _super);
     function GetTeamTeamnamePathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=teamname" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=teamname" }),
         __metadata("design:type", String)
     ], GetTeamTeamnamePathParams.prototype, "teamname", void 0);
     return GetTeamTeamnamePathParams;
 }(SpeakeasyBase));
 export { GetTeamTeamnamePathParams };
-var GetTeamTeamnameRequest = /** @class */ (function (_super) {
-    __extends(GetTeamTeamnameRequest, _super);
-    function GetTeamTeamnameRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata(),
-        __metadata("design:type", GetTeamTeamnamePathParams)
-    ], GetTeamTeamnameRequest.prototype, "pathParams", void 0);
-    return GetTeamTeamnameRequest;
-}(SpeakeasyBase));
-export { GetTeamTeamnameRequest };
 var GetTeamTeamname200ApplicationJson = /** @class */ (function (_super) {
     __extends(GetTeamTeamname200ApplicationJson, _super);
     function GetTeamTeamname200ApplicationJson() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=@id" }),
+        SpeakeasyMetadata({ data: "json, name=@id" }),
         __metadata("design:type", String)
     ], GetTeamTeamname200ApplicationJson.prototype, "atId", void 0);
     __decorate([
-        Metadata({ data: "json, name=logo" }),
+        SpeakeasyMetadata({ data: "json, name=logo" }),
         __metadata("design:type", String)
     ], GetTeamTeamname200ApplicationJson.prototype, "logo", void 0);
     __decorate([
-        Metadata({ data: "json, name=logo_email" }),
+        SpeakeasyMetadata({ data: "json, name=logo_email" }),
         __metadata("design:type", String)
     ], GetTeamTeamname200ApplicationJson.prototype, "logoEmail", void 0);
     __decorate([
-        Metadata({ data: "json, name=members" }),
+        SpeakeasyMetadata({ data: "json, name=members" }),
         __metadata("design:type", Array)
     ], GetTeamTeamname200ApplicationJson.prototype, "members", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], GetTeamTeamname200ApplicationJson.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=profile" }),
+        SpeakeasyMetadata({ data: "json, name=profile" }),
         __metadata("design:type", String)
     ], GetTeamTeamname200ApplicationJson.prototype, "profile", void 0);
     __decorate([
-        Metadata({ data: "json, name=sub" }),
+        SpeakeasyMetadata({ data: "json, name=sub" }),
         __metadata("design:type", String)
     ], GetTeamTeamname200ApplicationJson.prototype, "sub", void 0);
     return GetTeamTeamname200ApplicationJson;
 }(SpeakeasyBase));
 export { GetTeamTeamname200ApplicationJson };
+var GetTeamTeamnameRequest = /** @class */ (function (_super) {
+    __extends(GetTeamTeamnameRequest, _super);
+    function GetTeamTeamnameRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", GetTeamTeamnamePathParams)
+    ], GetTeamTeamnameRequest.prototype, "pathParams", void 0);
+    return GetTeamTeamnameRequest;
+}(SpeakeasyBase));
+export { GetTeamTeamnameRequest };
 var GetTeamTeamnameResponse = /** @class */ (function (_super) {
     __extends(GetTeamTeamnameResponse, _super);
     function GetTeamTeamnameResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetTeamTeamnameResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetTeamTeamname200ApplicationJson)
     ], GetTeamTeamnameResponse.prototype, "getTeamTeamname200ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetTeamTeamnameResponse.prototype, "statusCode", void 0);
     return GetTeamTeamnameResponse;

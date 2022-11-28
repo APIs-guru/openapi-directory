@@ -1,0 +1,47 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { HttpRouteFaultInjectionPolicyAbort } from "./httproutefaultinjectionpolicyabort";
+import { HttpRouteFaultInjectionPolicyDelay } from "./httproutefaultinjectionpolicydelay";
+// HttpRouteFaultInjectionPolicy
+/**
+ * The specification for fault injection introduced into traffic to test the resiliency of clients to destination service failure. As part of fault injection, when clients send requests to a destination, delays can be introduced by client proxy on a percentage of requests before sending those requests to the destination service. Similarly requests can be aborted by client proxy for a percentage of requests.
+**/
+var HttpRouteFaultInjectionPolicy = /** @class */ (function (_super) {
+    __extends(HttpRouteFaultInjectionPolicy, _super);
+    function HttpRouteFaultInjectionPolicy() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=abort" }),
+        __metadata("design:type", HttpRouteFaultInjectionPolicyAbort)
+    ], HttpRouteFaultInjectionPolicy.prototype, "abort", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=delay" }),
+        __metadata("design:type", HttpRouteFaultInjectionPolicyDelay)
+    ], HttpRouteFaultInjectionPolicy.prototype, "delay", void 0);
+    return HttpRouteFaultInjectionPolicy;
+}(SpeakeasyBase));
+export { HttpRouteFaultInjectionPolicy };

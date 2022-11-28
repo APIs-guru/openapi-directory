@@ -16,6 +16,8 @@ const (
 	OccurrenceKindEnumDsseAttestation     OccurrenceKindEnum = "DSSE_ATTESTATION"
 )
 
+// Occurrence
+// An instance of an analysis type that has been found on a resource.
 type Occurrence struct {
 	Attestation     *AttestationOccurrence     `json:"attestation,omitempty"`
 	Build           *BuildOccurrence           `json:"build,omitempty"`

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum NetworkInstanceIpModeEnum {
     InstanceIpModeUnspecified = "INSTANCE_IP_MODE_UNSPECIFIED",
     External = "EXTERNAL",

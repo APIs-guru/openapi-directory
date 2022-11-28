@@ -15,6 +15,8 @@ const (
 	NameAndKindKindEnumLatestValue  NameAndKindKindEnum = "LATEST_VALUE"
 )
 
+// NameAndKind
+// Basic metadata about a counter.
 type NameAndKind struct {
 	Kind *NameAndKindKindEnum `json:"kind,omitempty"`
 	Name *string              `json:"name,omitempty"`

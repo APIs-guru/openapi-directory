@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetModifyIdentityIDFormatActionEnum(str, Enum):
     MODIFY_IDENTITY_ID_FORMAT = "ModifyIdentityIdFormat"
@@ -10,11 +14,11 @@ class GetModifyIdentityIDFormatVersionEnum(str, Enum):
 
 @dataclass
 class GetModifyIdentityIDFormatQueryParams:
-    action: GetModifyIdentityIDFormatActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    principal_arn: str = field(default=None, metadata={'query_param': { 'field_name': 'PrincipalArn', 'style': 'form', 'explode': True }})
-    resource: str = field(default=None, metadata={'query_param': { 'field_name': 'Resource', 'style': 'form', 'explode': True }})
-    use_long_ids: bool = field(default=None, metadata={'query_param': { 'field_name': 'UseLongIds', 'style': 'form', 'explode': True }})
-    version: GetModifyIdentityIDFormatVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetModifyIdentityIDFormatActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    principal_arn: str = field(metadata={'query_param': { 'field_name': 'PrincipalArn', 'style': 'form', 'explode': True }})
+    resource: str = field(metadata={'query_param': { 'field_name': 'Resource', 'style': 'form', 'explode': True }})
+    use_long_ids: bool = field(metadata={'query_param': { 'field_name': 'UseLongIds', 'style': 'form', 'explode': True }})
+    version: GetModifyIdentityIDFormatVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,12 +34,12 @@ class GetModifyIdentityIDFormatHeaders:
 
 @dataclass
 class GetModifyIdentityIDFormatRequest:
-    query_params: GetModifyIdentityIDFormatQueryParams = field(default=None)
-    headers: GetModifyIdentityIDFormatHeaders = field(default=None)
+    headers: GetModifyIdentityIDFormatHeaders = field()
+    query_params: GetModifyIdentityIDFormatQueryParams = field()
     
 
 @dataclass
 class GetModifyIdentityIDFormatResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

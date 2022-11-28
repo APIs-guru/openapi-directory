@@ -14,6 +14,8 @@ const (
 	UpdateTableBorderPropertiesRequestBorderPositionEnumTop             UpdateTableBorderPropertiesRequestBorderPositionEnum = "TOP"
 )
 
+// UpdateTableBorderPropertiesRequest
+// Updates the properties of the table borders in a Table.
 type UpdateTableBorderPropertiesRequest struct {
 	BorderPosition        *UpdateTableBorderPropertiesRequestBorderPositionEnum `json:"borderPosition,omitempty"`
 	Fields                *string                                               `json:"fields,omitempty"`

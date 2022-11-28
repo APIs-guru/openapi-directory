@@ -1,36 +1,37 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class RateItemPathParams:
-    item_id: str = field(default=None, metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
+    item_id: str = field(metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class RateItemQueryParams:
+    rating: int = field(metadata={'query_param': { 'field_name': 'rating', 'style': 'form', 'explode': True }})
     ff: Optional[List[shared.FeatureFlagsEnum]] = field(default=None, metadata={'query_param': { 'field_name': 'ff', 'style': 'form', 'explode': False }})
     lang: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'lang', 'style': 'form', 'explode': True }})
-    rating: int = field(default=None, metadata={'query_param': { 'field_name': 'rating', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class RateItemSecurity:
-    profile_auth: shared.SchemeProfileAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    profile_auth: shared.SchemeProfileAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class RateItemRequest:
-    path_params: RateItemPathParams = field(default=None)
-    query_params: RateItemQueryParams = field(default=None)
-    security: RateItemSecurity = field(default=None)
+    path_params: RateItemPathParams = field()
+    query_params: RateItemQueryParams = field()
+    security: RateItemSecurity = field()
     
 
 @dataclass
 class RateItemResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     service_error: Optional[shared.ServiceError] = field(default=None)
-    status_code: int = field(default=None)
     user_rating: Optional[shared.UserRating] = field(default=None)
     

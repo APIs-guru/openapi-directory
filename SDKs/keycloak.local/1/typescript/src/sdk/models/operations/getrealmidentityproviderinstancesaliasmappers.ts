@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetRealmIdentityProviderInstancesAliasMappersPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=alias" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=alias" })
   alias: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=realm" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=realm" })
   realm: string;
 }
 
 
 export class GetRealmIdentityProviderInstancesAliasMappersRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetRealmIdentityProviderInstancesAliasMappersPathParams;
 }
 
 
 export class GetRealmIdentityProviderInstancesAliasMappersResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.IdentityProviderMapperRepresentation })
+  @SpeakeasyMetadata({ elemType: shared.IdentityProviderMapperRepresentation })
   identityProviderMapperRepresentations?: shared.IdentityProviderMapperRepresentation[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

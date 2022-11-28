@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetModifyAvailabilityZoneGroupActionEnum(str, Enum):
     MODIFY_AVAILABILITY_ZONE_GROUP = "ModifyAvailabilityZoneGroup"
@@ -14,11 +18,11 @@ class GetModifyAvailabilityZoneGroupVersionEnum(str, Enum):
 
 @dataclass
 class GetModifyAvailabilityZoneGroupQueryParams:
-    action: GetModifyAvailabilityZoneGroupActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetModifyAvailabilityZoneGroupActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    group_name: str = field(metadata={'query_param': { 'field_name': 'GroupName', 'style': 'form', 'explode': True }})
+    opt_in_status: GetModifyAvailabilityZoneGroupOptInStatusEnum = field(metadata={'query_param': { 'field_name': 'OptInStatus', 'style': 'form', 'explode': True }})
+    version: GetModifyAvailabilityZoneGroupVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    group_name: str = field(default=None, metadata={'query_param': { 'field_name': 'GroupName', 'style': 'form', 'explode': True }})
-    opt_in_status: GetModifyAvailabilityZoneGroupOptInStatusEnum = field(default=None, metadata={'query_param': { 'field_name': 'OptInStatus', 'style': 'form', 'explode': True }})
-    version: GetModifyAvailabilityZoneGroupVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -34,13 +38,13 @@ class GetModifyAvailabilityZoneGroupHeaders:
 
 @dataclass
 class GetModifyAvailabilityZoneGroupRequest:
-    query_params: GetModifyAvailabilityZoneGroupQueryParams = field(default=None)
-    headers: GetModifyAvailabilityZoneGroupHeaders = field(default=None)
+    headers: GetModifyAvailabilityZoneGroupHeaders = field()
+    query_params: GetModifyAvailabilityZoneGroupQueryParams = field()
     
 
 @dataclass
 class GetModifyAvailabilityZoneGroupResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

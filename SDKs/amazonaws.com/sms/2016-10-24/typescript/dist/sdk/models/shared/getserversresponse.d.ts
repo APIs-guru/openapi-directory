@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ServerCatalogStatusEnum } from "./servercatalogstatusenum";
 import { Server } from "./server";
 export declare class GetServersResponse extends SpeakeasyBase {

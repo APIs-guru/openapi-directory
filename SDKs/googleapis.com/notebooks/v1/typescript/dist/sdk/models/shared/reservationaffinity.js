@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var ReservationAffinityConsumeReservationTypeEnum;
 (function (ReservationAffinityConsumeReservationTypeEnum) {
     ReservationAffinityConsumeReservationTypeEnum["TypeUnspecified"] = "TYPE_UNSPECIFIED";
@@ -40,15 +40,15 @@ var ReservationAffinity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=consumeReservationType" }),
+        SpeakeasyMetadata({ data: "json, name=consumeReservationType" }),
         __metadata("design:type", String)
     ], ReservationAffinity.prototype, "consumeReservationType", void 0);
     __decorate([
-        Metadata({ data: "json, name=key" }),
+        SpeakeasyMetadata({ data: "json, name=key" }),
         __metadata("design:type", String)
     ], ReservationAffinity.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "json, name=values" }),
+        SpeakeasyMetadata({ data: "json, name=values" }),
         __metadata("design:type", Array)
     ], ReservationAffinity.prototype, "values", void 0);
     return ReservationAffinity;

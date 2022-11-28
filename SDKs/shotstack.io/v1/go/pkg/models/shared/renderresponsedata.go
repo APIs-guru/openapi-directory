@@ -11,6 +11,8 @@ const (
 	RenderResponseDataStatusEnumFailed    RenderResponseDataStatusEnum = "failed"
 )
 
+// RenderResponseData
+// The response data returned with the [RenderResponse](#tocs_renderresponse) including status and URL.
 type RenderResponseData struct {
 	Created    string                       `json:"created"`
 	Data       Edit                         `json:"data"`

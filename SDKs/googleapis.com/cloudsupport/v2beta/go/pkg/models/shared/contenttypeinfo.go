@@ -1,5 +1,7 @@
 package shared
 
+// ContentTypeInfo
+// # gdata.* are outside protos with mising documentation
 type ContentTypeInfo struct {
 	BestGuess    *string `json:"bestGuess,omitempty"`
 	FromBytes    *string `json:"fromBytes,omitempty"`

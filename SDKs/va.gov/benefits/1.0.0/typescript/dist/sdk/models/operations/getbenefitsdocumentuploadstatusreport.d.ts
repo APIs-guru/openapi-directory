@@ -1,11 +1,7 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class GetBenefitsDocumentUploadStatusReportSecurity extends SpeakeasyBase {
     apikey: shared.SchemeApikey;
-}
-export declare class GetBenefitsDocumentUploadStatusReportRequest extends SpeakeasyBase {
-    request: shared.DocumentUploadStatusGuidList;
-    security: GetBenefitsDocumentUploadStatusReportSecurity;
 }
 export declare class GetBenefitsDocumentUploadStatusReport200ApplicationJson extends SpeakeasyBase {
     data: any[];
@@ -27,6 +23,10 @@ export declare class GetBenefitsDocumentUploadStatusReport500ApplicationJson ext
     detail?: string;
     status?: string;
     title?: string;
+}
+export declare class GetBenefitsDocumentUploadStatusReportRequest extends SpeakeasyBase {
+    request: shared.DocumentUploadStatusGuidList;
+    security: GetBenefitsDocumentUploadStatusReportSecurity;
 }
 export declare class GetBenefitsDocumentUploadStatusReportResponse extends SpeakeasyBase {
     contentType: string;

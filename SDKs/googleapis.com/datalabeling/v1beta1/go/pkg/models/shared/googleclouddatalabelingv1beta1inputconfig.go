@@ -29,6 +29,8 @@ const (
 	GoogleCloudDatalabelingV1beta1InputConfigDataTypeEnumGeneralData         GoogleCloudDatalabelingV1beta1InputConfigDataTypeEnum = "GENERAL_DATA"
 )
 
+// GoogleCloudDatalabelingV1beta1InputConfig
+// The configuration of input data, including data type, location, etc.
 type GoogleCloudDatalabelingV1beta1InputConfig struct {
 	AnnotationType         *GoogleCloudDatalabelingV1beta1InputConfigAnnotationTypeEnum `json:"annotationType,omitempty"`
 	BigquerySource         *GoogleCloudDatalabelingV1beta1BigQuerySource                `json:"bigquerySource,omitempty"`

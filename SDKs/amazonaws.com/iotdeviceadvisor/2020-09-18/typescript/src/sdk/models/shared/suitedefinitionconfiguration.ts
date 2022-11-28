@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeviceUnderTest } from "./deviceundertest";
+
 
 
 // SuiteDefinitionConfiguration
@@ -8,18 +8,18 @@ import { DeviceUnderTest } from "./deviceundertest";
  * Gets Suite Definition Configuration.
 **/
 export class SuiteDefinitionConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=devicePermissionRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=devicePermissionRoleArn" })
   devicePermissionRoleArn?: string;
 
-  @Metadata({ data: "json, name=devices", elemType: shared.DeviceUnderTest })
+  @SpeakeasyMetadata({ data: "json, name=devices", elemType: DeviceUnderTest })
   devices?: DeviceUnderTest[];
 
-  @Metadata({ data: "json, name=intendedForQualification" })
+  @SpeakeasyMetadata({ data: "json, name=intendedForQualification" })
   intendedForQualification?: boolean;
 
-  @Metadata({ data: "json, name=rootGroup" })
+  @SpeakeasyMetadata({ data: "json, name=rootGroup" })
   rootGroup?: string;
 
-  @Metadata({ data: "json, name=suiteDefinitionName" })
+  @SpeakeasyMetadata({ data: "json, name=suiteDefinitionName" })
   suiteDefinitionName?: string;
 }

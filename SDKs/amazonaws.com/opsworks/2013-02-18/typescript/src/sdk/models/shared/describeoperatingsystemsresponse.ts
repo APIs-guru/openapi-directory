@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OperatingSystem } from "./operatingsystem";
+
 
 
 // DescribeOperatingSystemsResponse
@@ -8,6 +8,6 @@ import { OperatingSystem } from "./operatingsystem";
  * The response to a <code>DescribeOperatingSystems</code> request.
 **/
 export class DescribeOperatingSystemsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=OperatingSystems", elemType: shared.OperatingSystem })
+  @SpeakeasyMetadata({ data: "json, name=OperatingSystems", elemType: OperatingSystem })
   operatingSystems?: OperatingSystem[];
 }

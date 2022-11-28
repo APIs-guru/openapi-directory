@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GoogleCloudSecuritycenterV1beta1SecurityMarks
 /**
  * User specified security marks that are attached to the parent Security Command Center resource. Security marks are scoped within a Security Command Center organization -- they can be modified and viewed by all users who have proper permissions on the organization.
@@ -33,11 +33,11 @@ var GoogleCloudSecuritycenterV1beta1SecurityMarks = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=marks" }),
+        SpeakeasyMetadata({ data: "json, name=marks" }),
         __metadata("design:type", Map)
     ], GoogleCloudSecuritycenterV1beta1SecurityMarks.prototype, "marks", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], GoogleCloudSecuritycenterV1beta1SecurityMarks.prototype, "name", void 0);
     return GoogleCloudSecuritycenterV1beta1SecurityMarks;

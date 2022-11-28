@@ -1,5 +1,7 @@
 package shared
 
+// PushNotificationTemplateResponse
+// Provides information about the content and settings for a message template that can be used in messages that are sent through a push notification channel.
 type PushNotificationTemplateResponse struct {
 	Adm                  *AndroidPushNotificationTemplate `json:"ADM,omitempty"`
 	Apns                 *ApnsPushNotificationTemplate    `json:"APNS,omitempty"`

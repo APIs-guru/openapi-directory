@@ -8,6 +8,8 @@ const (
 	InvoiceInvoiceTypeEnumInvoiceTypeInvoice     InvoiceInvoiceTypeEnum = "INVOICE_TYPE_INVOICE"
 )
 
+// Invoice
+// Contains information about a single invoice
 type Invoice struct {
 	CampaignSummaries    []CampaignSummary       `json:"campaign_summaries,omitempty"`
 	CorrectedInvoiceID   *string                 `json:"correctedInvoiceId,omitempty"`

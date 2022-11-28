@@ -10,14 +10,14 @@ class SlackPostSlackPostHeaders:
 
 @dataclass
 class SlackPostSlackPostRequest:
-    headers: SlackPostSlackPostHeaders = field(default=None)
-    request: shared.SlackMessageRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: SlackPostSlackPostHeaders = field()
+    request: shared.SlackMessageRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class SlackPostSlackPostResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     http_validation_error: Optional[shared.HTTPValidationError] = field(default=None)
-    status_code: int = field(default=None)
     slack_post_slack_post_200_application_json_any: Optional[Any] = field(default=None)
     

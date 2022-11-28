@@ -1,7 +1,8 @@
 
 
+
 export enum ActionCodeEnum {
-    ArchiveRetrieval = "ArchiveRetrieval"
-,    InventoryRetrieval = "InventoryRetrieval"
-,    Select = "Select"
+    ArchiveRetrieval = "ArchiveRetrieval",
+    InventoryRetrieval = "InventoryRetrieval",
+    Select = "Select"
 }

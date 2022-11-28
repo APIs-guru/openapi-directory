@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ScopeFilterKeyEnum(str, Enum):
     OBJECT_EXTENSION = "OBJECT_EXTENSION"

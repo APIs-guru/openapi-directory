@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ApigeeregistryProjectsLocationsApisDeploymentsCreatePathParams = /** @class */ (function (_super) {
     __extends(ApigeeregistryProjectsLocationsApisDeploymentsCreatePathParams, _super);
@@ -30,7 +30,7 @@ var ApigeeregistryProjectsLocationsApisDeploymentsCreatePathParams = /** @class 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=parent" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=parent" }),
         __metadata("design:type", String)
     ], ApigeeregistryProjectsLocationsApisDeploymentsCreatePathParams.prototype, "parent", void 0);
     return ApigeeregistryProjectsLocationsApisDeploymentsCreatePathParams;
@@ -42,51 +42,51 @@ var ApigeeregistryProjectsLocationsApisDeploymentsCreateQueryParams = /** @class
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], ApigeeregistryProjectsLocationsApisDeploymentsCreateQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], ApigeeregistryProjectsLocationsApisDeploymentsCreateQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], ApigeeregistryProjectsLocationsApisDeploymentsCreateQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=apiDeploymentId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=apiDeploymentId" }),
         __metadata("design:type", String)
     ], ApigeeregistryProjectsLocationsApisDeploymentsCreateQueryParams.prototype, "apiDeploymentId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], ApigeeregistryProjectsLocationsApisDeploymentsCreateQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], ApigeeregistryProjectsLocationsApisDeploymentsCreateQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], ApigeeregistryProjectsLocationsApisDeploymentsCreateQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], ApigeeregistryProjectsLocationsApisDeploymentsCreateQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], ApigeeregistryProjectsLocationsApisDeploymentsCreateQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], ApigeeregistryProjectsLocationsApisDeploymentsCreateQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], ApigeeregistryProjectsLocationsApisDeploymentsCreateQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], ApigeeregistryProjectsLocationsApisDeploymentsCreateQueryParams.prototype, "uploadProtocol", void 0);
     return ApigeeregistryProjectsLocationsApisDeploymentsCreateQueryParams;
@@ -98,11 +98,11 @@ var ApigeeregistryProjectsLocationsApisDeploymentsCreateSecurity = /** @class */
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], ApigeeregistryProjectsLocationsApisDeploymentsCreateSecurity.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], ApigeeregistryProjectsLocationsApisDeploymentsCreateSecurity.prototype, "oauth2c", void 0);
     return ApigeeregistryProjectsLocationsApisDeploymentsCreateSecurity;
@@ -114,19 +114,19 @@ var ApigeeregistryProjectsLocationsApisDeploymentsCreateRequest = /** @class */ 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ApigeeregistryProjectsLocationsApisDeploymentsCreatePathParams)
     ], ApigeeregistryProjectsLocationsApisDeploymentsCreateRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ApigeeregistryProjectsLocationsApisDeploymentsCreateQueryParams)
     ], ApigeeregistryProjectsLocationsApisDeploymentsCreateRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", shared.ApiDeployment)
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", shared.ApiDeploymentInput)
     ], ApigeeregistryProjectsLocationsApisDeploymentsCreateRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ApigeeregistryProjectsLocationsApisDeploymentsCreateSecurity)
     ], ApigeeregistryProjectsLocationsApisDeploymentsCreateRequest.prototype, "security", void 0);
     return ApigeeregistryProjectsLocationsApisDeploymentsCreateRequest;
@@ -138,15 +138,15 @@ var ApigeeregistryProjectsLocationsApisDeploymentsCreateResponse = /** @class */
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ApiDeployment)
     ], ApigeeregistryProjectsLocationsApisDeploymentsCreateResponse.prototype, "apiDeployment", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ApigeeregistryProjectsLocationsApisDeploymentsCreateResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ApigeeregistryProjectsLocationsApisDeploymentsCreateResponse.prototype, "statusCode", void 0);
     return ApigeeregistryProjectsLocationsApisDeploymentsCreateResponse;

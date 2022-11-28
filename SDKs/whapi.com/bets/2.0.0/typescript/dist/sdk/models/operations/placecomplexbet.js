@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PlaceComplexBetQueryParams = /** @class */ (function (_super) {
     __extends(PlaceComplexBetQueryParams, _super);
@@ -30,15 +30,15 @@ var PlaceComplexBetQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=exclude" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=exclude" }),
         __metadata("design:type", Array)
     ], PlaceComplexBetQueryParams.prototype, "exclude", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=fields" }),
         __metadata("design:type", Array)
     ], PlaceComplexBetQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=include" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=include" }),
         __metadata("design:type", Array)
     ], PlaceComplexBetQueryParams.prototype, "include", void 0);
     return PlaceComplexBetQueryParams;
@@ -50,15 +50,15 @@ var PlaceComplexBetHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=apiKey" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=apiKey" }),
         __metadata("design:type", String)
     ], PlaceComplexBetHeaders.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=apiSecret" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=apiSecret" }),
         __metadata("design:type", String)
     ], PlaceComplexBetHeaders.prototype, "apiSecret", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=apiTicket" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=apiTicket" }),
         __metadata("design:type", String)
     ], PlaceComplexBetHeaders.prototype, "apiTicket", void 0);
     return PlaceComplexBetHeaders;
@@ -70,15 +70,15 @@ var PlaceComplexBetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PlaceComplexBetQueryParams)
     ], PlaceComplexBetRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PlaceComplexBetHeaders)
     ], PlaceComplexBetRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.ComplexBetRequestBody)
     ], PlaceComplexBetRequest.prototype, "request", void 0);
     return PlaceComplexBetRequest;
@@ -90,23 +90,23 @@ var PlaceComplexBetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PlaceComplexBetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PlaceComplexBetResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata({ elemType: shared.BetDelayed }),
+        SpeakeasyMetadata({ elemType: shared.BetDelayed }),
         __metadata("design:type", Array)
     ], PlaceComplexBetResponse.prototype, "betDelayedResponse", void 0);
     __decorate([
-        Metadata({ elemType: shared.BetPlaced }),
+        SpeakeasyMetadata({ elemType: shared.BetPlaced }),
         __metadata("design:type", Array)
     ], PlaceComplexBetResponse.prototype, "betPlacedResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Errors)
     ], PlaceComplexBetResponse.prototype, "errors", void 0);
     return PlaceComplexBetResponse;

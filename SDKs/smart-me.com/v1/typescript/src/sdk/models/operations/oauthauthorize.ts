@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class OAuthAuthorizeQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=client_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=client_id" })
   clientId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=client_secret" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=client_secret" })
   clientSecret?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=redirect_uri" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=redirect_uri" })
   redirectUri: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=scope" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=scope" })
   scope?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=state" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=state" })
   state: string;
 }
 
 
 export class OAuthAuthorizeRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: OAuthAuthorizeQueryParams;
 }
 
 
 export class OAuthAuthorizeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   object?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

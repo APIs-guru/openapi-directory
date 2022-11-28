@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ActionExecutionStatusEnum(str, Enum):
     IN_PROGRESS = "InProgress"

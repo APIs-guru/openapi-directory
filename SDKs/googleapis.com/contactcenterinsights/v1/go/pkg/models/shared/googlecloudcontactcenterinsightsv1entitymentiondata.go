@@ -8,6 +8,8 @@ const (
 	GoogleCloudContactcenterinsightsV1EntityMentionDataTypeEnumCommon                 GoogleCloudContactcenterinsightsV1EntityMentionDataTypeEnum = "COMMON"
 )
 
+// GoogleCloudContactcenterinsightsV1EntityMentionData
+// The data for an entity mention annotation. This represents a mention of an `Entity` in the conversation.
 type GoogleCloudContactcenterinsightsV1EntityMentionData struct {
 	EntityUniqueID *string                                                      `json:"entityUniqueId,omitempty"`
 	Sentiment      *GoogleCloudContactcenterinsightsV1SentimentData             `json:"sentiment,omitempty"`

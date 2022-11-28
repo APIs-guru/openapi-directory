@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RiskDecisionTypeEnum } from "./riskdecisiontypeenum";
 import { RiskLevelTypeEnum } from "./riskleveltypeenum";
+
 
 
 // EventRiskType
@@ -8,12 +9,12 @@ import { RiskLevelTypeEnum } from "./riskleveltypeenum";
  * The event risk type.
 **/
 export class EventRiskType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CompromisedCredentialsDetected" })
+  @SpeakeasyMetadata({ data: "json, name=CompromisedCredentialsDetected" })
   compromisedCredentialsDetected?: boolean;
 
-  @Metadata({ data: "json, name=RiskDecision" })
+  @SpeakeasyMetadata({ data: "json, name=RiskDecision" })
   riskDecision?: RiskDecisionTypeEnum;
 
-  @Metadata({ data: "json, name=RiskLevel" })
+  @SpeakeasyMetadata({ data: "json, name=RiskLevel" })
   riskLevel?: RiskLevelTypeEnum;
 }

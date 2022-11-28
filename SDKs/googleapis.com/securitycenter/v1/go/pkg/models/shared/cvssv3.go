@@ -70,6 +70,8 @@ const (
 	Cvssv3UserInteractionEnumUserInteractionRequired    Cvssv3UserInteractionEnum = "USER_INTERACTION_REQUIRED"
 )
 
+// Cvssv3
+// Common Vulnerability Scoring System version 3.
 type Cvssv3 struct {
 	AttackComplexity      *Cvssv3AttackComplexityEnum      `json:"attackComplexity,omitempty"`
 	AttackVector          *Cvssv3AttackVectorEnum          `json:"attackVector,omitempty"`

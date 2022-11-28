@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Model } from "./model";
 // ListModelsResponse
 /**
  * The response for list models
@@ -34,11 +34,11 @@ var ListModelsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=models", elemType: shared.Model }),
+        SpeakeasyMetadata({ data: "json, name=models", elemType: Model }),
         __metadata("design:type", Array)
     ], ListModelsResponse.prototype, "models", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextPageToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextPageToken" }),
         __metadata("design:type", String)
     ], ListModelsResponse.prototype, "nextPageToken", void 0);
     return ListModelsResponse;

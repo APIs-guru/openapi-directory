@@ -11,18 +11,18 @@ class GetLibraryOptionsInfoQueryParams:
 
 @dataclass
 class GetLibraryOptionsInfoSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetLibraryOptionsInfoRequest:
-    query_params: GetLibraryOptionsInfoQueryParams = field(default=None)
-    security: GetLibraryOptionsInfoSecurity = field(default=None)
+    query_params: GetLibraryOptionsInfoQueryParams = field()
+    security: GetLibraryOptionsInfoSecurity = field()
     
 
 @dataclass
 class GetLibraryOptionsInfoResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     library_options_result_dto: Optional[shared.LibraryOptionsResultDto] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 
 class SongListAPIGetFeaturedListNamesFeaturedCategoryEnum(str, Enum):
     NOTHING = "Nothing"
@@ -26,15 +27,15 @@ class SongListAPIGetFeaturedListNamesQueryParams:
 
 @dataclass
 class SongListAPIGetFeaturedListNamesRequest:
-    query_params: SongListAPIGetFeaturedListNamesQueryParams = field(default=None)
+    query_params: SongListAPIGetFeaturedListNamesQueryParams = field()
     
 
 @dataclass
 class SongListAPIGetFeaturedListNamesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     song_list_api_get_featured_list_names_200_application_json_strings: Optional[List[str]] = field(default=None)
     song_list_api_get_featured_list_names_200_application_jsonp_strings: Optional[List[str]] = field(default=None)
     song_list_api_get_featured_list_names_200_text_json_strings: Optional[List[str]] = field(default=None)
-    status_code: int = field(default=None)
     

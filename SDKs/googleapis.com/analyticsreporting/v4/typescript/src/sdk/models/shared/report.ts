@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ColumnHeader } from "./columnheader";
 import { ReportData } from "./reportdata";
+
 
 
 // Report
@@ -8,12 +9,12 @@ import { ReportData } from "./reportdata";
  * The data response corresponding to the request.
 **/
 export class Report extends SpeakeasyBase {
-  @Metadata({ data: "json, name=columnHeader" })
+  @SpeakeasyMetadata({ data: "json, name=columnHeader" })
   columnHeader?: ColumnHeader;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: ReportData;
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

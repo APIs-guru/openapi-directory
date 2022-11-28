@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // RunCommandTarget
 /**
  * Information about the EC2 instances that are to be sent the command, specified as key-value pairs. Each <code>RunCommandTarget</code> block can include only one key, but this key may specify multiple values.
@@ -33,11 +33,11 @@ var RunCommandTarget = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Key" }),
+        SpeakeasyMetadata({ data: "json, name=Key" }),
         __metadata("design:type", String)
     ], RunCommandTarget.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "json, name=Values" }),
+        SpeakeasyMetadata({ data: "json, name=Values" }),
         __metadata("design:type", Array)
     ], RunCommandTarget.prototype, "values", void 0);
     return RunCommandTarget;

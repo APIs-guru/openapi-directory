@@ -1,17 +1,17 @@
-import { AxiosInstance, AxiosRequestConfig } from "axios";
-import * as operations from "./models/operations";
-declare type OptsFunc = (sdk: SDK) => void;
+import { AxiosInstance } from "axios";
+import { User } from "./user";
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://extpose.com/api/v1"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    user: User;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
-    /**
-     * This endpoint allows you to get list of your extensions including extensions from the watchlist.
-    **/
-    GetUserExtensions(req: operations.GetUserExtensionsRequest, config?: AxiosRequestConfig): Promise<operations.GetUserExtensionsResponse>;
 }
 export {};

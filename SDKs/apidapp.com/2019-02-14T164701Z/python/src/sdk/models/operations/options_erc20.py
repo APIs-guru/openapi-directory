@@ -4,8 +4,8 @@ from typing import Any,List,Optional
 
 @dataclass
 class OptionsErc20Response:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
     

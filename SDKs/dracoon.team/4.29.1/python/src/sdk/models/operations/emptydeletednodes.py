@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class EmptyDeletedNodesPathParams:
-    node_id: int = field(default=None, metadata={'path_param': { 'field_name': 'node_id', 'style': 'simple', 'explode': False }})
+    node_id: int = field(metadata={'path_param': { 'field_name': 'node_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,13 +15,13 @@ class EmptyDeletedNodesHeaders:
 
 @dataclass
 class EmptyDeletedNodesRequest:
-    path_params: EmptyDeletedNodesPathParams = field(default=None)
-    headers: EmptyDeletedNodesHeaders = field(default=None)
+    headers: EmptyDeletedNodesHeaders = field()
+    path_params: EmptyDeletedNodesPathParams = field()
     
 
 @dataclass
 class EmptyDeletedNodesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

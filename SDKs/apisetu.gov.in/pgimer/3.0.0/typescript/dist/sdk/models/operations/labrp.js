@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var LabrpRequestBodyCertificateParameters = /** @class */ (function (_super) {
     __extends(LabrpRequestBodyCertificateParameters, _super);
@@ -30,19 +30,19 @@ var LabrpRequestBodyCertificateParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DOB" }),
+        SpeakeasyMetadata({ data: "json, name=DOB" }),
         __metadata("design:type", String)
     ], LabrpRequestBodyCertificateParameters.prototype, "dob", void 0);
     __decorate([
-        Metadata({ data: "json, name=FullName" }),
+        SpeakeasyMetadata({ data: "json, name=FullName" }),
         __metadata("design:type", String)
     ], LabrpRequestBodyCertificateParameters.prototype, "fullName", void 0);
     __decorate([
-        Metadata({ data: "json, name=GENDER" }),
+        SpeakeasyMetadata({ data: "json, name=GENDER" }),
         __metadata("design:type", String)
     ], LabrpRequestBodyCertificateParameters.prototype, "gender", void 0);
     __decorate([
-        Metadata({ data: "json, name=MobileNoRQ" }),
+        SpeakeasyMetadata({ data: "json, name=MobileNoRQ" }),
         __metadata("design:type", String)
     ], LabrpRequestBodyCertificateParameters.prototype, "mobileNoRq", void 0);
     return LabrpRequestBodyCertificateParameters;
@@ -58,19 +58,19 @@ var LabrpRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=certificateParameters" }),
+        SpeakeasyMetadata({ data: "json, name=certificateParameters" }),
         __metadata("design:type", LabrpRequestBodyCertificateParameters)
     ], LabrpRequestBody.prototype, "certificateParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=consentArtifact" }),
+        SpeakeasyMetadata({ data: "json, name=consentArtifact" }),
         __metadata("design:type", Object)
     ], LabrpRequestBody.prototype, "consentArtifact", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], LabrpRequestBody.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=txnId" }),
+        SpeakeasyMetadata({ data: "json, name=txnId" }),
         __metadata("design:type", String)
     ], LabrpRequestBody.prototype, "txnId", void 0);
     return LabrpRequestBody;
@@ -82,32 +82,16 @@ var LabrpSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], LabrpSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeClientId)
     ], LabrpSecurity.prototype, "clientId", void 0);
     return LabrpSecurity;
 }(SpeakeasyBase));
 export { LabrpSecurity };
-var LabrpRequest = /** @class */ (function (_super) {
-    __extends(LabrpRequest, _super);
-    function LabrpRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", LabrpRequestBody)
-    ], LabrpRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", LabrpSecurity)
-    ], LabrpRequest.prototype, "security", void 0);
-    return LabrpRequest;
-}(SpeakeasyBase));
-export { LabrpRequest };
 export var Labrp400ApplicationJsonErrorEnum;
 (function (Labrp400ApplicationJsonErrorEnum) {
     Labrp400ApplicationJsonErrorEnum["MissingParameter"] = "missing_parameter";
@@ -130,11 +114,11 @@ var Labrp400ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Labrp400ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Labrp400ApplicationJson.prototype, "errorDescription", void 0);
     return Labrp400ApplicationJson;
@@ -156,11 +140,11 @@ var Labrp401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Labrp401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Labrp401ApplicationJson.prototype, "errorDescription", void 0);
     return Labrp401ApplicationJson;
@@ -182,11 +166,11 @@ var Labrp404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Labrp404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Labrp404ApplicationJson.prototype, "errorDescription", void 0);
     return Labrp404ApplicationJson;
@@ -206,11 +190,11 @@ var Labrp500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Labrp500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Labrp500ApplicationJson.prototype, "errorDescription", void 0);
     return Labrp500ApplicationJson;
@@ -230,11 +214,11 @@ var Labrp502ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Labrp502ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Labrp502ApplicationJson.prototype, "errorDescription", void 0);
     return Labrp502ApplicationJson;
@@ -254,11 +238,11 @@ var Labrp503ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Labrp503ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Labrp503ApplicationJson.prototype, "errorDescription", void 0);
     return Labrp503ApplicationJson;
@@ -278,55 +262,71 @@ var Labrp504ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Labrp504ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Labrp504ApplicationJson.prototype, "errorDescription", void 0);
     return Labrp504ApplicationJson;
 }(SpeakeasyBase));
 export { Labrp504ApplicationJson };
+var LabrpRequest = /** @class */ (function (_super) {
+    __extends(LabrpRequest, _super);
+    function LabrpRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", LabrpRequestBody)
+    ], LabrpRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", LabrpSecurity)
+    ], LabrpRequest.prototype, "security", void 0);
+    return LabrpRequest;
+}(SpeakeasyBase));
+export { LabrpRequest };
 var LabrpResponse = /** @class */ (function (_super) {
     __extends(LabrpResponse, _super);
     function LabrpResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], LabrpResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], LabrpResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Labrp400ApplicationJson)
     ], LabrpResponse.prototype, "labrp400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Labrp401ApplicationJson)
     ], LabrpResponse.prototype, "labrp401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Labrp404ApplicationJson)
     ], LabrpResponse.prototype, "labrp404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Labrp500ApplicationJson)
     ], LabrpResponse.prototype, "labrp500ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Labrp502ApplicationJson)
     ], LabrpResponse.prototype, "labrp502ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Labrp503ApplicationJson)
     ], LabrpResponse.prototype, "labrp503ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Labrp504ApplicationJson)
     ], LabrpResponse.prototype, "labrp504ApplicationJsonObject", void 0);
     return LabrpResponse;

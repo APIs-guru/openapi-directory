@@ -1,5 +1,7 @@
 package shared
 
+// Resource
+// A structure for the resource.
 type Resource struct {
 	Catalog          map[string]interface{}    `json:"Catalog,omitempty"`
 	DataLocation     *DataLocationResource     `json:"DataLocation,omitempty"`

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TagInputResourceIdentifier } from "./taginputresourceidentifier";
+
 
 
 // UpdateTransactionTagsRequest
@@ -9,6 +9,6 @@ import { TagInputResourceIdentifier } from "./taginputresourceidentifier";
  * 
 **/
 export class UpdateTransactionTagsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data", elemType: shared.TagInputResourceIdentifier })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: TagInputResourceIdentifier })
   data: TagInputResourceIdentifier[];
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ChannelTopicDetails
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Freebase topic information related to the channel.
 **/
 export class ChannelTopicDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=topicCategories" })
+  @SpeakeasyMetadata({ data: "json, name=topicCategories" })
   topicCategories?: string[];
 
-  @Metadata({ data: "json, name=topicIds" })
+  @SpeakeasyMetadata({ data: "json, name=topicIds" })
   topicIds?: string[];
 }

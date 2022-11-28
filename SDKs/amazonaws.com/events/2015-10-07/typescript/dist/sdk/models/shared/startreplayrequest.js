@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReplayDestination } from "./replaydestination";
 var StartReplayRequest = /** @class */ (function (_super) {
     __extends(StartReplayRequest, _super);
@@ -30,27 +30,27 @@ var StartReplayRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], StartReplayRequest.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=Destination" }),
+        SpeakeasyMetadata({ data: "json, name=Destination" }),
         __metadata("design:type", ReplayDestination)
     ], StartReplayRequest.prototype, "destination", void 0);
     __decorate([
-        Metadata({ data: "json, name=EventEndTime" }),
+        SpeakeasyMetadata({ data: "json, name=EventEndTime" }),
         __metadata("design:type", Date)
     ], StartReplayRequest.prototype, "eventEndTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=EventSourceArn" }),
+        SpeakeasyMetadata({ data: "json, name=EventSourceArn" }),
         __metadata("design:type", String)
     ], StartReplayRequest.prototype, "eventSourceArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=EventStartTime" }),
+        SpeakeasyMetadata({ data: "json, name=EventStartTime" }),
         __metadata("design:type", Date)
     ], StartReplayRequest.prototype, "eventStartTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=ReplayName" }),
+        SpeakeasyMetadata({ data: "json, name=ReplayName" }),
         __metadata("design:type", String)
     ], StartReplayRequest.prototype, "replayName", void 0);
     return StartReplayRequest;

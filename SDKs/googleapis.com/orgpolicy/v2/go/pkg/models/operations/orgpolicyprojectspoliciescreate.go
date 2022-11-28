@@ -30,7 +30,7 @@ type OrgpolicyProjectsPoliciesCreateSecurity struct {
 type OrgpolicyProjectsPoliciesCreateRequest struct {
 	PathParams  OrgpolicyProjectsPoliciesCreatePathParams
 	QueryParams OrgpolicyProjectsPoliciesCreateQueryParams
-	Request     *shared.GoogleCloudOrgpolicyV2Policy `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudOrgpolicyV2PolicyInput `request:"mediaType=application/json"`
 	Security    OrgpolicyProjectsPoliciesCreateSecurity
 }
 

@@ -1,5 +1,7 @@
 package shared
 
+// EnvironmentImage
+// Information about a Docker image that is managed by CodeBuild.
 type EnvironmentImage struct {
 	Description *string  `json:"description,omitempty"`
 	Name        *string  `json:"name,omitempty"`

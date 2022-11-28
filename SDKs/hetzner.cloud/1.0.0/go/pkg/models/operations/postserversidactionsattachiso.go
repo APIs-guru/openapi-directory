@@ -8,11 +8,8 @@ type PostServersIDActionsAttachIsoRequestBody struct {
 	Iso string `json:"iso"`
 }
 
-type PostServersIDActionsAttachIsoRequest struct {
-	PathParams PostServersIDActionsAttachIsoPathParams
-	Request    *PostServersIDActionsAttachIsoRequestBody `request:"mediaType=application/json"`
-}
-
+// PostServersIDActionsAttachIsoActionResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type PostServersIDActionsAttachIsoActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -44,6 +41,11 @@ type PostServersIDActionsAttachIsoActionResponseAction struct {
 
 type PostServersIDActionsAttachIsoActionResponse struct {
 	Action PostServersIDActionsAttachIsoActionResponseAction `json:"action"`
+}
+
+type PostServersIDActionsAttachIsoRequest struct {
+	PathParams PostServersIDActionsAttachIsoPathParams
+	Request    *PostServersIDActionsAttachIsoRequestBody `request:"mediaType=application/json"`
 }
 
 type PostServersIDActionsAttachIsoResponse struct {

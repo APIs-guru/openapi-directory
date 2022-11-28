@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TrustedAdvisorCheckDescription } from "./trustedadvisorcheckdescription";
+
 
 
 // DescribeTrustedAdvisorChecksResponse
@@ -8,6 +8,6 @@ import { TrustedAdvisorCheckDescription } from "./trustedadvisorcheckdescription
  * Information about the Trusted Advisor checks returned by the <a>DescribeTrustedAdvisorChecks</a> operation.
 **/
 export class DescribeTrustedAdvisorChecksResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=checks", elemType: shared.TrustedAdvisorCheckDescription })
+  @SpeakeasyMetadata({ data: "json, name=checks", elemType: TrustedAdvisorCheckDescription })
   checks: TrustedAdvisorCheckDescription[];
 }

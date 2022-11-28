@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Folder
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Message that contains the resource name and display name of a folder resource.
 **/
 export class Folder extends SpeakeasyBase {
-  @Metadata({ data: "json, name=resourceFolder" })
+  @SpeakeasyMetadata({ data: "json, name=resourceFolder" })
   resourceFolder?: string;
 
-  @Metadata({ data: "json, name=resourceFolderDisplayName" })
+  @SpeakeasyMetadata({ data: "json, name=resourceFolderDisplayName" })
   resourceFolderDisplayName?: string;
 }

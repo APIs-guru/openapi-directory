@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://iotanalytics.{region}.amazonaws.com",
 	"https://iotanalytics.{region}.amazonaws.com",
 	"http://iotanalytics.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/iotanalytics/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// BatchPutMessage - Sends messages to a channel.
 func (s *SDK) BatchPutMessage(ctx context.Context, request operations.BatchPutMessageRequest) (*operations.BatchPutMessageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/messages/batch"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -81,7 +108,7 @@ func (s *SDK) BatchPutMessage(ctx context.Context, request operations.BatchPutMe
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -161,8 +188,9 @@ func (s *SDK) BatchPutMessage(ctx context.Context, request operations.BatchPutMe
 	return res, nil
 }
 
+// CancelPipelineReprocessing - Cancels the reprocessing of data through the pipeline.
 func (s *SDK) CancelPipelineReprocessing(ctx context.Context, request operations.CancelPipelineReprocessingRequest) (*operations.CancelPipelineReprocessingResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/pipelines/{pipelineName}/reprocessing/{reprocessingId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -172,7 +200,7 @@ func (s *SDK) CancelPipelineReprocessing(ctx context.Context, request operations
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -252,8 +280,9 @@ func (s *SDK) CancelPipelineReprocessing(ctx context.Context, request operations
 	return res, nil
 }
 
+// CreateChannel - Used to create a channel. A channel collects data from an MQTT topic and archives the raw, unprocessed messages before publishing the data to a pipeline.
 func (s *SDK) CreateChannel(ctx context.Context, request operations.CreateChannelRequest) (*operations.CreateChannelResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/channels"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -273,7 +302,7 @@ func (s *SDK) CreateChannel(ctx context.Context, request operations.CreateChanne
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -363,8 +392,9 @@ func (s *SDK) CreateChannel(ctx context.Context, request operations.CreateChanne
 	return res, nil
 }
 
+// CreateDataset - Used to create a dataset. A dataset stores data retrieved from a data store by applying a <code>queryAction</code> (a SQL query) or a <code>containerAction</code> (executing a containerized application). This operation creates the skeleton of a dataset. The dataset can be populated manually by calling <code>CreateDatasetContent</code> or automatically according to a trigger you specify.
 func (s *SDK) CreateDataset(ctx context.Context, request operations.CreateDatasetRequest) (*operations.CreateDatasetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/datasets"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -384,7 +414,7 @@ func (s *SDK) CreateDataset(ctx context.Context, request operations.CreateDatase
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -474,8 +504,9 @@ func (s *SDK) CreateDataset(ctx context.Context, request operations.CreateDatase
 	return res, nil
 }
 
+// CreateDatasetContent - Creates the content of a dataset by applying a <code>queryAction</code> (a SQL query) or a <code>containerAction</code> (executing a containerized application).
 func (s *SDK) CreateDatasetContent(ctx context.Context, request operations.CreateDatasetContentRequest) (*operations.CreateDatasetContentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/datasets/{datasetName}/content", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -495,7 +526,7 @@ func (s *SDK) CreateDatasetContent(ctx context.Context, request operations.Creat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -575,8 +606,9 @@ func (s *SDK) CreateDatasetContent(ctx context.Context, request operations.Creat
 	return res, nil
 }
 
+// CreateDatastore - Creates a data store, which is a repository for messages.
 func (s *SDK) CreateDatastore(ctx context.Context, request operations.CreateDatastoreRequest) (*operations.CreateDatastoreResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/datastores"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -596,7 +628,7 @@ func (s *SDK) CreateDatastore(ctx context.Context, request operations.CreateData
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -686,8 +718,9 @@ func (s *SDK) CreateDatastore(ctx context.Context, request operations.CreateData
 	return res, nil
 }
 
+// CreatePipeline - Creates a pipeline. A pipeline consumes messages from a channel and allows you to process the messages before storing them in a data store. You must specify both a <code>channel</code> and a <code>datastore</code> activity and, optionally, as many as 23 additional activities in the <code>pipelineActivities</code> array.
 func (s *SDK) CreatePipeline(ctx context.Context, request operations.CreatePipelineRequest) (*operations.CreatePipelineResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/pipelines"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -707,7 +740,7 @@ func (s *SDK) CreatePipeline(ctx context.Context, request operations.CreatePipel
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -797,8 +830,9 @@ func (s *SDK) CreatePipeline(ctx context.Context, request operations.CreatePipel
 	return res, nil
 }
 
+// DeleteChannel - Deletes the specified channel.
 func (s *SDK) DeleteChannel(ctx context.Context, request operations.DeleteChannelRequest) (*operations.DeleteChannelResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/channels/{channelName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -808,7 +842,7 @@ func (s *SDK) DeleteChannel(ctx context.Context, request operations.DeleteChanne
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -879,8 +913,9 @@ func (s *SDK) DeleteChannel(ctx context.Context, request operations.DeleteChanne
 	return res, nil
 }
 
+// DeleteDataset - <p>Deletes the specified dataset.</p> <p>You do not have to delete the content of the dataset before you perform this operation.</p>
 func (s *SDK) DeleteDataset(ctx context.Context, request operations.DeleteDatasetRequest) (*operations.DeleteDatasetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/datasets/{datasetName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -890,7 +925,7 @@ func (s *SDK) DeleteDataset(ctx context.Context, request operations.DeleteDatase
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -961,8 +996,9 @@ func (s *SDK) DeleteDataset(ctx context.Context, request operations.DeleteDatase
 	return res, nil
 }
 
+// DeleteDatasetContent - Deletes the content of the specified dataset.
 func (s *SDK) DeleteDatasetContent(ctx context.Context, request operations.DeleteDatasetContentRequest) (*operations.DeleteDatasetContentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/datasets/{datasetName}/content", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -974,7 +1010,7 @@ func (s *SDK) DeleteDatasetContent(ctx context.Context, request operations.Delet
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1045,8 +1081,9 @@ func (s *SDK) DeleteDatasetContent(ctx context.Context, request operations.Delet
 	return res, nil
 }
 
+// DeleteDatastore - Deletes the specified data store.
 func (s *SDK) DeleteDatastore(ctx context.Context, request operations.DeleteDatastoreRequest) (*operations.DeleteDatastoreResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/datastores/{datastoreName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1056,7 +1093,7 @@ func (s *SDK) DeleteDatastore(ctx context.Context, request operations.DeleteData
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1127,8 +1164,9 @@ func (s *SDK) DeleteDatastore(ctx context.Context, request operations.DeleteData
 	return res, nil
 }
 
+// DeletePipeline - Deletes the specified pipeline.
 func (s *SDK) DeletePipeline(ctx context.Context, request operations.DeletePipelineRequest) (*operations.DeletePipelineResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/pipelines/{pipelineName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1138,7 +1176,7 @@ func (s *SDK) DeletePipeline(ctx context.Context, request operations.DeletePipel
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1209,8 +1247,9 @@ func (s *SDK) DeletePipeline(ctx context.Context, request operations.DeletePipel
 	return res, nil
 }
 
+// DescribeChannel - Retrieves information about a channel.
 func (s *SDK) DescribeChannel(ctx context.Context, request operations.DescribeChannelRequest) (*operations.DescribeChannelResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/channels/{channelName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1222,7 +1261,7 @@ func (s *SDK) DescribeChannel(ctx context.Context, request operations.DescribeCh
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1302,8 +1341,9 @@ func (s *SDK) DescribeChannel(ctx context.Context, request operations.DescribeCh
 	return res, nil
 }
 
+// DescribeDataset - Retrieves information about a dataset.
 func (s *SDK) DescribeDataset(ctx context.Context, request operations.DescribeDatasetRequest) (*operations.DescribeDatasetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/datasets/{datasetName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1313,7 +1353,7 @@ func (s *SDK) DescribeDataset(ctx context.Context, request operations.DescribeDa
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1393,8 +1433,9 @@ func (s *SDK) DescribeDataset(ctx context.Context, request operations.DescribeDa
 	return res, nil
 }
 
+// DescribeDatastore - Retrieves information about a data store.
 func (s *SDK) DescribeDatastore(ctx context.Context, request operations.DescribeDatastoreRequest) (*operations.DescribeDatastoreResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/datastores/{datastoreName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1406,7 +1447,7 @@ func (s *SDK) DescribeDatastore(ctx context.Context, request operations.Describe
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1486,8 +1527,9 @@ func (s *SDK) DescribeDatastore(ctx context.Context, request operations.Describe
 	return res, nil
 }
 
+// DescribeLoggingOptions - Retrieves the current settings of the IoT Analytics logging options.
 func (s *SDK) DescribeLoggingOptions(ctx context.Context, request operations.DescribeLoggingOptionsRequest) (*operations.DescribeLoggingOptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/logging"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1497,7 +1539,7 @@ func (s *SDK) DescribeLoggingOptions(ctx context.Context, request operations.Des
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1577,8 +1619,9 @@ func (s *SDK) DescribeLoggingOptions(ctx context.Context, request operations.Des
 	return res, nil
 }
 
+// DescribePipeline - Retrieves information about a pipeline.
 func (s *SDK) DescribePipeline(ctx context.Context, request operations.DescribePipelineRequest) (*operations.DescribePipelineResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/pipelines/{pipelineName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1588,7 +1631,7 @@ func (s *SDK) DescribePipeline(ctx context.Context, request operations.DescribeP
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1668,8 +1711,9 @@ func (s *SDK) DescribePipeline(ctx context.Context, request operations.DescribeP
 	return res, nil
 }
 
+// GetDatasetContent - Retrieves the contents of a dataset as presigned URIs.
 func (s *SDK) GetDatasetContent(ctx context.Context, request operations.GetDatasetContentRequest) (*operations.GetDatasetContentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/datasets/{datasetName}/content", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1681,7 +1725,7 @@ func (s *SDK) GetDatasetContent(ctx context.Context, request operations.GetDatas
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1761,8 +1805,9 @@ func (s *SDK) GetDatasetContent(ctx context.Context, request operations.GetDatas
 	return res, nil
 }
 
+// ListChannels - Retrieves a list of channels.
 func (s *SDK) ListChannels(ctx context.Context, request operations.ListChannelsRequest) (*operations.ListChannelsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/channels"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1774,7 +1819,7 @@ func (s *SDK) ListChannels(ctx context.Context, request operations.ListChannelsR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1844,8 +1889,9 @@ func (s *SDK) ListChannels(ctx context.Context, request operations.ListChannelsR
 	return res, nil
 }
 
+// ListDatasetContents - Lists information about dataset contents that have been created.
 func (s *SDK) ListDatasetContents(ctx context.Context, request operations.ListDatasetContentsRequest) (*operations.ListDatasetContentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/datasets/{datasetName}/contents", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1857,7 +1903,7 @@ func (s *SDK) ListDatasetContents(ctx context.Context, request operations.ListDa
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1937,8 +1983,9 @@ func (s *SDK) ListDatasetContents(ctx context.Context, request operations.ListDa
 	return res, nil
 }
 
+// ListDatasets - Retrieves information about datasets.
 func (s *SDK) ListDatasets(ctx context.Context, request operations.ListDatasetsRequest) (*operations.ListDatasetsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/datasets"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1950,7 +1997,7 @@ func (s *SDK) ListDatasets(ctx context.Context, request operations.ListDatasetsR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2020,8 +2067,9 @@ func (s *SDK) ListDatasets(ctx context.Context, request operations.ListDatasetsR
 	return res, nil
 }
 
+// ListDatastores - Retrieves a list of data stores.
 func (s *SDK) ListDatastores(ctx context.Context, request operations.ListDatastoresRequest) (*operations.ListDatastoresResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/datastores"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2033,7 +2081,7 @@ func (s *SDK) ListDatastores(ctx context.Context, request operations.ListDatasto
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2103,8 +2151,9 @@ func (s *SDK) ListDatastores(ctx context.Context, request operations.ListDatasto
 	return res, nil
 }
 
+// ListPipelines - Retrieves a list of pipelines.
 func (s *SDK) ListPipelines(ctx context.Context, request operations.ListPipelinesRequest) (*operations.ListPipelinesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/pipelines"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2116,7 +2165,7 @@ func (s *SDK) ListPipelines(ctx context.Context, request operations.ListPipeline
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2186,8 +2235,9 @@ func (s *SDK) ListPipelines(ctx context.Context, request operations.ListPipeline
 	return res, nil
 }
 
+// ListTagsForResource - Lists the tags (metadata) that you have assigned to the resource.
 func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTagsForResourceRequest) (*operations.ListTagsForResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/tags#resourceArn"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2199,7 +2249,7 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2289,8 +2339,9 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 	return res, nil
 }
 
+// PutLoggingOptions - <p>Sets or updates the IoT Analytics logging options.</p> <p>If you update the value of any <code>loggingOptions</code> field, it takes up to one minute for the change to take effect. Also, if you change the policy attached to the role you specified in the <code>roleArn</code> field (for example, to correct an invalid policy), it takes up to five minutes for that change to take effect. </p>
 func (s *SDK) PutLoggingOptions(ctx context.Context, request operations.PutLoggingOptionsRequest) (*operations.PutLoggingOptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/logging"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2310,7 +2361,7 @@ func (s *SDK) PutLoggingOptions(ctx context.Context, request operations.PutLoggi
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2371,8 +2422,9 @@ func (s *SDK) PutLoggingOptions(ctx context.Context, request operations.PutLoggi
 	return res, nil
 }
 
+// RunPipelineActivity - Simulates the results of running a pipeline activity on a message payload.
 func (s *SDK) RunPipelineActivity(ctx context.Context, request operations.RunPipelineActivityRequest) (*operations.RunPipelineActivityResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/pipelineactivities/run"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2392,7 +2444,7 @@ func (s *SDK) RunPipelineActivity(ctx context.Context, request operations.RunPip
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2462,8 +2514,9 @@ func (s *SDK) RunPipelineActivity(ctx context.Context, request operations.RunPip
 	return res, nil
 }
 
+// SampleChannelData - Retrieves a sample of messages from the specified channel ingested during the specified timeframe. Up to 10 messages can be retrieved.
 func (s *SDK) SampleChannelData(ctx context.Context, request operations.SampleChannelDataRequest) (*operations.SampleChannelDataResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/channels/{channelName}/sample", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2475,7 +2528,7 @@ func (s *SDK) SampleChannelData(ctx context.Context, request operations.SampleCh
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2555,8 +2608,9 @@ func (s *SDK) SampleChannelData(ctx context.Context, request operations.SampleCh
 	return res, nil
 }
 
+// StartPipelineReprocessing - Starts the reprocessing of raw message data through the pipeline.
 func (s *SDK) StartPipelineReprocessing(ctx context.Context, request operations.StartPipelineReprocessingRequest) (*operations.StartPipelineReprocessingResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/pipelines/{pipelineName}/reprocessing", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2576,7 +2630,7 @@ func (s *SDK) StartPipelineReprocessing(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2666,8 +2720,9 @@ func (s *SDK) StartPipelineReprocessing(ctx context.Context, request operations.
 	return res, nil
 }
 
+// TagResource - Adds to or modifies the tags of the given resource. Tags are metadata that can be used to manage a resource.
 func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceRequest) (*operations.TagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/tags#resourceArn"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2689,7 +2744,7 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2779,8 +2834,9 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 	return res, nil
 }
 
+// UntagResource - Removes the given tags (metadata) from the resource.
 func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourceRequest) (*operations.UntagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/tags#resourceArn&tagKeys"
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -2792,7 +2848,7 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2882,8 +2938,9 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 	return res, nil
 }
 
+// UpdateChannel - Used to update the settings of a channel.
 func (s *SDK) UpdateChannel(ctx context.Context, request operations.UpdateChannelRequest) (*operations.UpdateChannelResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/channels/{channelName}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2903,7 +2960,7 @@ func (s *SDK) UpdateChannel(ctx context.Context, request operations.UpdateChanne
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2974,8 +3031,9 @@ func (s *SDK) UpdateChannel(ctx context.Context, request operations.UpdateChanne
 	return res, nil
 }
 
+// UpdateDataset - Updates the settings of a dataset.
 func (s *SDK) UpdateDataset(ctx context.Context, request operations.UpdateDatasetRequest) (*operations.UpdateDatasetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/datasets/{datasetName}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2995,7 +3053,7 @@ func (s *SDK) UpdateDataset(ctx context.Context, request operations.UpdateDatase
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3066,8 +3124,9 @@ func (s *SDK) UpdateDataset(ctx context.Context, request operations.UpdateDatase
 	return res, nil
 }
 
+// UpdateDatastore - Used to update the settings of a data store.
 func (s *SDK) UpdateDatastore(ctx context.Context, request operations.UpdateDatastoreRequest) (*operations.UpdateDatastoreResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/datastores/{datastoreName}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3087,7 +3146,7 @@ func (s *SDK) UpdateDatastore(ctx context.Context, request operations.UpdateData
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3158,8 +3217,9 @@ func (s *SDK) UpdateDatastore(ctx context.Context, request operations.UpdateData
 	return res, nil
 }
 
+// UpdatePipeline - Updates the settings of a pipeline. You must specify both a <code>channel</code> and a <code>datastore</code> activity and, optionally, as many as 23 additional activities in the <code>pipelineActivities</code> array.
 func (s *SDK) UpdatePipeline(ctx context.Context, request operations.UpdatePipelineRequest) (*operations.UpdatePipelineResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/pipelines/{pipelineName}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3179,7 +3239,7 @@ func (s *SDK) UpdatePipeline(ctx context.Context, request operations.UpdatePipel
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

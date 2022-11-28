@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Destiny2SearchDestinyEntitiesPathParams = /** @class */ (function (_super) {
     __extends(Destiny2SearchDestinyEntitiesPathParams, _super);
     function Destiny2SearchDestinyEntitiesPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=searchTerm" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=searchTerm" }),
         __metadata("design:type", String)
     ], Destiny2SearchDestinyEntitiesPathParams.prototype, "searchTerm", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=type" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=type" }),
         __metadata("design:type", String)
     ], Destiny2SearchDestinyEntitiesPathParams.prototype, "type", void 0);
     return Destiny2SearchDestinyEntitiesPathParams;
@@ -45,7 +45,7 @@ var Destiny2SearchDestinyEntitiesQueryParams = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" }),
         __metadata("design:type", Number)
     ], Destiny2SearchDestinyEntitiesQueryParams.prototype, "page", void 0);
     return Destiny2SearchDestinyEntitiesQueryParams;
@@ -57,11 +57,11 @@ var Destiny2SearchDestinyEntitiesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Destiny2SearchDestinyEntitiesPathParams)
     ], Destiny2SearchDestinyEntitiesRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Destiny2SearchDestinyEntitiesQueryParams)
     ], Destiny2SearchDestinyEntitiesRequest.prototype, "queryParams", void 0);
     return Destiny2SearchDestinyEntitiesRequest;
@@ -73,15 +73,15 @@ var Destiny2SearchDestinyEntitiesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], Destiny2SearchDestinyEntitiesResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], Destiny2SearchDestinyEntitiesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], Destiny2SearchDestinyEntitiesResponse.prototype, "statusCode", void 0);
     return Destiny2SearchDestinyEntitiesResponse;

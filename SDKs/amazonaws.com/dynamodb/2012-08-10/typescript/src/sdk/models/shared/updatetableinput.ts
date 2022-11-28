@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AttributeDefinition } from "./attributedefinition";
 import { BillingModeEnum } from "./billingmodeenum";
 import { GlobalSecondaryIndexUpdate } from "./globalsecondaryindexupdate";
@@ -9,32 +8,33 @@ import { SseSpecification } from "./ssespecification";
 import { StreamSpecification } from "./streamspecification";
 
 
+
 // UpdateTableInput
 /** 
  * Represents the input of an <code>UpdateTable</code> operation.
 **/
 export class UpdateTableInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AttributeDefinitions", elemType: shared.AttributeDefinition })
+  @SpeakeasyMetadata({ data: "json, name=AttributeDefinitions", elemType: AttributeDefinition })
   attributeDefinitions?: AttributeDefinition[];
 
-  @Metadata({ data: "json, name=BillingMode" })
+  @SpeakeasyMetadata({ data: "json, name=BillingMode" })
   billingMode?: BillingModeEnum;
 
-  @Metadata({ data: "json, name=GlobalSecondaryIndexUpdates", elemType: shared.GlobalSecondaryIndexUpdate })
+  @SpeakeasyMetadata({ data: "json, name=GlobalSecondaryIndexUpdates", elemType: GlobalSecondaryIndexUpdate })
   globalSecondaryIndexUpdates?: GlobalSecondaryIndexUpdate[];
 
-  @Metadata({ data: "json, name=ProvisionedThroughput" })
+  @SpeakeasyMetadata({ data: "json, name=ProvisionedThroughput" })
   provisionedThroughput?: ProvisionedThroughput;
 
-  @Metadata({ data: "json, name=ReplicaUpdates", elemType: shared.ReplicationGroupUpdate })
+  @SpeakeasyMetadata({ data: "json, name=ReplicaUpdates", elemType: ReplicationGroupUpdate })
   replicaUpdates?: ReplicationGroupUpdate[];
 
-  @Metadata({ data: "json, name=SSESpecification" })
+  @SpeakeasyMetadata({ data: "json, name=SSESpecification" })
   sseSpecification?: SseSpecification;
 
-  @Metadata({ data: "json, name=StreamSpecification" })
+  @SpeakeasyMetadata({ data: "json, name=StreamSpecification" })
   streamSpecification?: StreamSpecification;
 
-  @Metadata({ data: "json, name=TableName" })
+  @SpeakeasyMetadata({ data: "json, name=TableName" })
   tableName: string;
 }

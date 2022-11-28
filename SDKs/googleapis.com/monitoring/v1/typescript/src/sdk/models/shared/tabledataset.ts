@@ -1,5 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { TableDisplayOptions } from "./tabledisplayoptions";
 import { TimeSeriesQuery } from "./timeseriesquery";
+
 
 
 // TableDataSet
@@ -7,15 +9,15 @@ import { TimeSeriesQuery } from "./timeseriesquery";
  * Groups a time series query definition with table options.
 **/
 export class TableDataSet extends SpeakeasyBase {
-  @Metadata({ data: "json, name=minAlignmentPeriod" })
+  @SpeakeasyMetadata({ data: "json, name=minAlignmentPeriod" })
   minAlignmentPeriod?: string;
 
-  @Metadata({ data: "json, name=tableDisplayOptions" })
-  tableDisplayOptions?: Map<string, any>;
+  @SpeakeasyMetadata({ data: "json, name=tableDisplayOptions" })
+  tableDisplayOptions?: TableDisplayOptions;
 
-  @Metadata({ data: "json, name=tableTemplate" })
+  @SpeakeasyMetadata({ data: "json, name=tableTemplate" })
   tableTemplate?: string;
 
-  @Metadata({ data: "json, name=timeSeriesQuery" })
+  @SpeakeasyMetadata({ data: "json, name=timeSeriesQuery" })
   timeSeriesQuery?: TimeSeriesQuery;
 }

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDeleteAnomalyDetectorActionEnum(str, Enum):
     DELETE_ANOMALY_DETECTOR = "DeleteAnomalyDetector"
@@ -10,8 +14,8 @@ class PostDeleteAnomalyDetectorVersionEnum(str, Enum):
 
 @dataclass
 class PostDeleteAnomalyDetectorQueryParams:
-    action: PostDeleteAnomalyDetectorActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDeleteAnomalyDetectorVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDeleteAnomalyDetectorActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDeleteAnomalyDetectorVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDeleteAnomalyDetectorHeaders:
 
 @dataclass
 class PostDeleteAnomalyDetectorRequest:
-    query_params: PostDeleteAnomalyDetectorQueryParams = field(default=None)
-    headers: PostDeleteAnomalyDetectorHeaders = field(default=None)
+    headers: PostDeleteAnomalyDetectorHeaders = field()
+    query_params: PostDeleteAnomalyDetectorQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDeleteAnomalyDetectorResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

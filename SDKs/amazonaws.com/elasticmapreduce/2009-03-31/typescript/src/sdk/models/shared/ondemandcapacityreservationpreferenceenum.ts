@@ -1,6 +1,7 @@
 
 
+
 export enum OnDemandCapacityReservationPreferenceEnum {
-    Open = "open"
-,    None = "none"
+    Open = "open",
+    None = "none"
 }

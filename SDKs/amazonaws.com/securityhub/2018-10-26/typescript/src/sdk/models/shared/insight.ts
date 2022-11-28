@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsSecurityFindingFilters } from "./awssecurityfindingfilters";
+
 
 
 // Insight
@@ -7,15 +8,15 @@ import { AwsSecurityFindingFilters } from "./awssecurityfindingfilters";
  * Contains information about a Security Hub insight.
 **/
 export class Insight extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Filters" })
+  @SpeakeasyMetadata({ data: "json, name=Filters" })
   filters: AwsSecurityFindingFilters;
 
-  @Metadata({ data: "json, name=GroupByAttribute" })
+  @SpeakeasyMetadata({ data: "json, name=GroupByAttribute" })
   groupByAttribute: string;
 
-  @Metadata({ data: "json, name=InsightArn" })
+  @SpeakeasyMetadata({ data: "json, name=InsightArn" })
   insightArn: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 }

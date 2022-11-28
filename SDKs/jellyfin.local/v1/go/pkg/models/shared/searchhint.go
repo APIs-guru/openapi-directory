@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// SearchHint
+// Class SearchHintResult.
 type SearchHint struct {
 	Album                   *string    `json:"Album,omitempty"`
 	AlbumArtist             *string    `json:"AlbumArtist,omitempty"`

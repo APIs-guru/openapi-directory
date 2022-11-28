@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import processorparametername_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ProcessorParameter:
-    parameter_name: processorparametername_enum.ProcessorParameterNameEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ParameterName' }})
-    parameter_value: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ParameterValue' }})
+    r"""ProcessorParameter
+    Describes the processor parameter.
+    """
+    
+    parameter_name: ProcessorParameterNameEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ParameterName') }})
+    parameter_value: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ParameterValue') }})
     

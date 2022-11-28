@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetModifyUsageLimitActionEnum {
     ModifyUsageLimit = "ModifyUsageLimit"
 }
 
 export enum GetModifyUsageLimitBreachActionEnum {
-    Log = "log"
-,    EmitMetric = "emit-metric"
-,    Disable = "disable"
+    Log = "log",
+    EmitMetric = "emit-metric",
+    Disable = "disable"
 }
 
 export enum GetModifyUsageLimitVersionEnum {
@@ -16,63 +17,63 @@ export enum GetModifyUsageLimitVersionEnum {
 
 
 export class GetModifyUsageLimitQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Action" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" })
   action: GetModifyUsageLimitActionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Amount" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Amount" })
   amount?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=BreachAction" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=BreachAction" })
   breachAction?: GetModifyUsageLimitBreachActionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=UsageLimitId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=UsageLimitId" })
   usageLimitId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" })
   version: GetModifyUsageLimitVersionEnum;
 }
 
 
 export class GetModifyUsageLimitHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class GetModifyUsageLimitRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetModifyUsageLimitQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetModifyUsageLimitHeaders;
 }
 
 
 export class GetModifyUsageLimitResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

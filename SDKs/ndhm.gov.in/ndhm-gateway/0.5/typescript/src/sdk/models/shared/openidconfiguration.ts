@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class OpenIdConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=jwks_uri" })
+  @SpeakeasyMetadata({ data: "json, name=jwks_uri" })
   jwksUri?: string;
 }

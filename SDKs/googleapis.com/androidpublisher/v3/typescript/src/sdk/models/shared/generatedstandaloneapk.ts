@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GeneratedStandaloneApk
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Download metadata for a standalone APK.
 **/
 export class GeneratedStandaloneApk extends SpeakeasyBase {
-  @Metadata({ data: "json, name=downloadId" })
+  @SpeakeasyMetadata({ data: "json, name=downloadId" })
   downloadId?: string;
 
-  @Metadata({ data: "json, name=variantId" })
+  @SpeakeasyMetadata({ data: "json, name=variantId" })
   variantId?: number;
 }

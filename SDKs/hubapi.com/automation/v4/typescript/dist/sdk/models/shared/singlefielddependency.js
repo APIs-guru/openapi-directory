@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var SingleFieldDependencyDependencyTypeEnum;
 (function (SingleFieldDependencyDependencyTypeEnum) {
     SingleFieldDependencyDependencyTypeEnum["SingleField"] = "SINGLE_FIELD";
@@ -33,15 +33,15 @@ var SingleFieldDependency = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=controllingFieldName" }),
+        SpeakeasyMetadata({ data: "json, name=controllingFieldName" }),
         __metadata("design:type", String)
     ], SingleFieldDependency.prototype, "controllingFieldName", void 0);
     __decorate([
-        Metadata({ data: "json, name=dependencyType" }),
+        SpeakeasyMetadata({ data: "json, name=dependencyType" }),
         __metadata("design:type", String)
     ], SingleFieldDependency.prototype, "dependencyType", void 0);
     __decorate([
-        Metadata({ data: "json, name=dependentFieldNames" }),
+        SpeakeasyMetadata({ data: "json, name=dependentFieldNames" }),
         __metadata("design:type", Array)
     ], SingleFieldDependency.prototype, "dependentFieldNames", void 0);
     return SingleFieldDependency;

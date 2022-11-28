@@ -1,9 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import sasportaldeviceairinterface
-from . import sasportalinstallationparams
-from . import sasportaldevicemodel
+from sdk import utils
+from . import *
 
 class SasPortalDeviceConfigCategoryEnum(str, Enum):
     DEVICE_CATEGORY_UNSPECIFIED = "DEVICE_CATEGORY_UNSPECIFIED"
@@ -24,14 +27,18 @@ class SasPortalDeviceConfigStateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class SasPortalDeviceConfig:
-    air_interface: Optional[sasportaldeviceairinterface.SasPortalDeviceAirInterface] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'airInterface' }})
-    call_sign: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'callSign' }})
-    category: Optional[SasPortalDeviceConfigCategoryEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'category' }})
-    installation_params: Optional[sasportalinstallationparams.SasPortalInstallationParams] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'installationParams' }})
-    is_signed: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'isSigned' }})
-    measurement_capabilities: Optional[List[SasPortalDeviceConfigMeasurementCapabilitiesEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'measurementCapabilities' }})
-    model: Optional[sasportaldevicemodel.SasPortalDeviceModel] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'model' }})
-    state: Optional[SasPortalDeviceConfigStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
-    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updateTime' }})
-    user_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'userId' }})
+    r"""SasPortalDeviceConfig
+    Information about the device configuration.
+    """
+    
+    air_interface: Optional[SasPortalDeviceAirInterface] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('airInterface') }})
+    call_sign: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('callSign') }})
+    category: Optional[SasPortalDeviceConfigCategoryEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('category') }})
+    installation_params: Optional[SasPortalInstallationParams] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('installationParams') }})
+    is_signed: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('isSigned') }})
+    measurement_capabilities: Optional[List[SasPortalDeviceConfigMeasurementCapabilitiesEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('measurementCapabilities') }})
+    model: Optional[SasPortalDeviceModel] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('model') }})
+    state: Optional[SasPortalDeviceConfigStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
+    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('updateTime') }})
+    user_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('userId') }})
     

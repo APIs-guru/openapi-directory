@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CategoricalHyperParameterRange } from "./categoricalhyperparameterrange";
 import { ContinuousHyperParameterRange } from "./continuoushyperparameterrange";
 import { IntegerHyperParameterRange } from "./integerhyperparameterrange";
+
 
 
 // HyperParameterRanges
@@ -10,12 +10,12 @@ import { IntegerHyperParameterRange } from "./integerhyperparameterrange";
  * Specifies the hyperparameters and their ranges. Hyperparameters can be categorical, continuous, or integer-valued.
 **/
 export class HyperParameterRanges extends SpeakeasyBase {
-  @Metadata({ data: "json, name=categoricalHyperParameterRanges", elemType: shared.CategoricalHyperParameterRange })
+  @SpeakeasyMetadata({ data: "json, name=categoricalHyperParameterRanges", elemType: CategoricalHyperParameterRange })
   categoricalHyperParameterRanges?: CategoricalHyperParameterRange[];
 
-  @Metadata({ data: "json, name=continuousHyperParameterRanges", elemType: shared.ContinuousHyperParameterRange })
+  @SpeakeasyMetadata({ data: "json, name=continuousHyperParameterRanges", elemType: ContinuousHyperParameterRange })
   continuousHyperParameterRanges?: ContinuousHyperParameterRange[];
 
-  @Metadata({ data: "json, name=integerHyperParameterRanges", elemType: shared.IntegerHyperParameterRange })
+  @SpeakeasyMetadata({ data: "json, name=integerHyperParameterRanges", elemType: IntegerHyperParameterRange })
   integerHyperParameterRanges?: IntegerHyperParameterRange[];
 }

@@ -1,14 +1,14 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import applicationsource
-from . import scalinginstruction
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateScalingPlanRequest:
-    application_source: applicationsource.ApplicationSource = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ApplicationSource' }})
-    scaling_instructions: List[scalinginstruction.ScalingInstruction] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ScalingInstructions' }})
-    scaling_plan_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ScalingPlanName' }})
+    application_source: ApplicationSource = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ApplicationSource') }})
+    scaling_instructions: List[ScalingInstruction] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ScalingInstructions') }})
+    scaling_plan_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ScalingPlanName') }})
     

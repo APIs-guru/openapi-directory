@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { SourceSchema } from "./sourceschema";
 import { S3ReferenceDataSource } from "./s3referencedatasource";
 /**

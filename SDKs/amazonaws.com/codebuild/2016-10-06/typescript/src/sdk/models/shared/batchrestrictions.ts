@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BatchRestrictions
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies restrictions for the batch build.
 **/
 export class BatchRestrictions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=computeTypesAllowed" })
+  @SpeakeasyMetadata({ data: "json, name=computeTypesAllowed" })
   computeTypesAllowed?: string[];
 
-  @Metadata({ data: "json, name=maximumBuildsAllowed" })
+  @SpeakeasyMetadata({ data: "json, name=maximumBuildsAllowed" })
   maximumBuildsAllowed?: number;
 }

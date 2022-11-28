@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import registrycatalogdata
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class PutRegistryCatalogDataResponse:
-    registry_catalog_data: registrycatalogdata.RegistryCatalogData = field(default=None, metadata={'dataclasses_json': { 'field_name': 'registryCatalogData' }})
+    registry_catalog_data: RegistryCatalogData = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('registryCatalogData') }})
     

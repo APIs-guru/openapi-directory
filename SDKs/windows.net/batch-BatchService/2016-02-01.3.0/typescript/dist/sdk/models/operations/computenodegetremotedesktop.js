@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ComputeNodeGetRemoteDesktopPathParams = /** @class */ (function (_super) {
     __extends(ComputeNodeGetRemoteDesktopPathParams, _super);
     function ComputeNodeGetRemoteDesktopPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=nodeId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=nodeId" }),
         __metadata("design:type", String)
     ], ComputeNodeGetRemoteDesktopPathParams.prototype, "nodeId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=poolId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=poolId" }),
         __metadata("design:type", String)
     ], ComputeNodeGetRemoteDesktopPathParams.prototype, "poolId", void 0);
     return ComputeNodeGetRemoteDesktopPathParams;
@@ -45,11 +45,11 @@ var ComputeNodeGetRemoteDesktopQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=api-version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api-version" }),
         __metadata("design:type", String)
     ], ComputeNodeGetRemoteDesktopQueryParams.prototype, "apiVersion", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=timeout" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timeout" }),
         __metadata("design:type", Number)
     ], ComputeNodeGetRemoteDesktopQueryParams.prototype, "timeout", void 0);
     return ComputeNodeGetRemoteDesktopQueryParams;
@@ -61,15 +61,15 @@ var ComputeNodeGetRemoteDesktopHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=client-request-id" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=client-request-id" }),
         __metadata("design:type", String)
     ], ComputeNodeGetRemoteDesktopHeaders.prototype, "clientRequestId", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=ocp-date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=ocp-date" }),
         __metadata("design:type", String)
     ], ComputeNodeGetRemoteDesktopHeaders.prototype, "ocpDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=return-client-request-id" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=return-client-request-id" }),
         __metadata("design:type", Boolean)
     ], ComputeNodeGetRemoteDesktopHeaders.prototype, "returnClientRequestId", void 0);
     return ComputeNodeGetRemoteDesktopHeaders;
@@ -81,15 +81,15 @@ var ComputeNodeGetRemoteDesktopRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ComputeNodeGetRemoteDesktopPathParams)
     ], ComputeNodeGetRemoteDesktopRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ComputeNodeGetRemoteDesktopQueryParams)
     ], ComputeNodeGetRemoteDesktopRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ComputeNodeGetRemoteDesktopHeaders)
     ], ComputeNodeGetRemoteDesktopRequest.prototype, "headers", void 0);
     return ComputeNodeGetRemoteDesktopRequest;
@@ -101,23 +101,23 @@ var ComputeNodeGetRemoteDesktopResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ComputeNodeGetRemoteDesktopResponse.prototype, "batchError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], ComputeNodeGetRemoteDesktopResponse.prototype, "computeNodeGetRemoteDesktop200ApplicationJsonBinaryString", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ComputeNodeGetRemoteDesktopResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], ComputeNodeGetRemoteDesktopResponse.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ComputeNodeGetRemoteDesktopResponse.prototype, "statusCode", void 0);
     return ComputeNodeGetRemoteDesktopResponse;

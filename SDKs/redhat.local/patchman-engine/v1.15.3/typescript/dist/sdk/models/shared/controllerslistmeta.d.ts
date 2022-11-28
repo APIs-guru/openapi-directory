@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ControllersFilterData } from "./controllersfilterdata";
 export declare class ControllersListMeta extends SpeakeasyBase {
     filter?: Map<string, ControllersFilterData>;

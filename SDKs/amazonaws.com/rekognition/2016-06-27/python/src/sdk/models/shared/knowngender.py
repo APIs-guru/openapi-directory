@@ -1,11 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import knowngendertype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class KnownGender:
-    type: Optional[knowngendertype_enum.KnownGenderTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
+    r"""KnownGender
+    The known gender identity for the celebrity that matches the provided ID.
+    """
+    
+    type: Optional[KnownGenderTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Type') }})
     

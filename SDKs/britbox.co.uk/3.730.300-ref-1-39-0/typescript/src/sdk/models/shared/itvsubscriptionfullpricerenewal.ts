@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ItvSubscriptionFullPriceRenewal extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fullPriceRenewal" })
+  @SpeakeasyMetadata({ data: "json, name=fullPriceRenewal" })
   fullPriceRenewal: boolean;
 
-  @Metadata({ data: "json, name=reason" })
+  @SpeakeasyMetadata({ data: "json, name=reason" })
   reason: string;
 }

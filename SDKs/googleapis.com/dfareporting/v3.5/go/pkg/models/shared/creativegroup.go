@@ -1,5 +1,7 @@
 package shared
 
+// CreativeGroup
+// Contains properties of a creative group.
 type CreativeGroup struct {
 	AccountID                  *string         `json:"accountId,omitempty"`
 	AdvertiserID               *string         `json:"advertiserId,omitempty"`

@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from sdk.models import shared
 
 
@@ -10,12 +10,12 @@ class GetV3CountriesHeaders:
 
 @dataclass
 class GetV3CountriesRequest:
-    headers: GetV3CountriesHeaders = field(default=None)
+    headers: GetV3CountriesHeaders = field()
     
 
 @dataclass
 class GetV3CountriesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     countries_list: Optional[shared.CountriesList] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ChannelStatistics
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Statistics about a channel: number of subscribers, number of videos in the channel, etc.
 **/
 export class ChannelStatistics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=commentCount" })
+  @SpeakeasyMetadata({ data: "json, name=commentCount" })
   commentCount?: string;
 
-  @Metadata({ data: "json, name=hiddenSubscriberCount" })
+  @SpeakeasyMetadata({ data: "json, name=hiddenSubscriberCount" })
   hiddenSubscriberCount?: boolean;
 
-  @Metadata({ data: "json, name=subscriberCount" })
+  @SpeakeasyMetadata({ data: "json, name=subscriberCount" })
   subscriberCount?: string;
 
-  @Metadata({ data: "json, name=videoCount" })
+  @SpeakeasyMetadata({ data: "json, name=videoCount" })
   videoCount?: string;
 
-  @Metadata({ data: "json, name=viewCount" })
+  @SpeakeasyMetadata({ data: "json, name=viewCount" })
   viewCount?: string;
 }

@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class GetRealmEventsConfigPathParams:
-    realm: str = field(default=None, metadata={'path_param': { 'field_name': 'realm', 'style': 'simple', 'explode': False }})
+    realm: str = field(metadata={'path_param': { 'field_name': 'realm', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetRealmEventsConfigRequest:
-    path_params: GetRealmEventsConfigPathParams = field(default=None)
+    path_params: GetRealmEventsConfigPathParams = field()
     
 
 @dataclass
 class GetRealmEventsConfigResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     realm_events_config_representation: Optional[shared.RealmEventsConfigRepresentation] = field(default=None)
-    status_code: int = field(default=None)
     

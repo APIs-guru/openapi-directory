@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleHomeEnterpriseSdmV1Device } from "./googlehomeenterprisesdmv1device";
+
 
 
 // GoogleHomeEnterpriseSdmV1ListDevicesResponse
@@ -8,9 +8,9 @@ import { GoogleHomeEnterpriseSdmV1Device } from "./googlehomeenterprisesdmv1devi
  * Response message for SmartDeviceManagementService.ListDevices
 **/
 export class GoogleHomeEnterpriseSdmV1ListDevicesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=devices", elemType: shared.GoogleHomeEnterpriseSdmV1Device })
+  @SpeakeasyMetadata({ data: "json, name=devices", elemType: GoogleHomeEnterpriseSdmV1Device })
   devices?: GoogleHomeEnterpriseSdmV1Device[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

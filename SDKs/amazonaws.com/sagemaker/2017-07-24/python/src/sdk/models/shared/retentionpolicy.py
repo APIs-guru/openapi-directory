@@ -1,11 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import retentiontype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class RetentionPolicy:
-    home_efs_file_system: Optional[retentiontype_enum.RetentionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'HomeEfsFileSystem' }})
+    r"""RetentionPolicy
+    The retention policy for data stored on an Amazon Elastic File System (EFS) volume.
+    """
+    
+    home_efs_file_system: Optional[RetentionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('HomeEfsFileSystem') }})
     

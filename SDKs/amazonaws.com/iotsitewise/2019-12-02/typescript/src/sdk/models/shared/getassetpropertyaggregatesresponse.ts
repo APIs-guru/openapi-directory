@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AggregatedValue } from "./aggregatedvalue";
 
 
+
 export class GetAssetPropertyAggregatesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=aggregatedValues", elemType: shared.AggregatedValue })
+  @SpeakeasyMetadata({ data: "json, name=aggregatedValues", elemType: AggregatedValue })
   aggregatedValues: AggregatedValue[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

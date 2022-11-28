@@ -19,11 +19,8 @@ type PostNetworksIDActionsAddSubnetAddSubnetRequest struct {
 	VswitchID   *int64                                                 `json:"vswitch_id,omitempty"`
 }
 
-type PostNetworksIDActionsAddSubnetRequest struct {
-	PathParams PostNetworksIDActionsAddSubnetPathParams
-	Request    *PostNetworksIDActionsAddSubnetAddSubnetRequest `request:"mediaType=application/json"`
-}
-
+// PostNetworksIDActionsAddSubnetActionResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type PostNetworksIDActionsAddSubnetActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -55,6 +52,11 @@ type PostNetworksIDActionsAddSubnetActionResponseAction struct {
 
 type PostNetworksIDActionsAddSubnetActionResponse struct {
 	Action PostNetworksIDActionsAddSubnetActionResponseAction `json:"action"`
+}
+
+type PostNetworksIDActionsAddSubnetRequest struct {
+	PathParams PostNetworksIDActionsAddSubnetPathParams
+	Request    *PostNetworksIDActionsAddSubnetAddSubnetRequest `request:"mediaType=application/json"`
 }
 
 type PostNetworksIDActionsAddSubnetResponse struct {

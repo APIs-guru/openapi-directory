@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // UserItemDataDto
@@ -6,36 +7,36 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Class UserItemDataDto.
 **/
 export class UserItemDataDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=IsFavorite" })
+  @SpeakeasyMetadata({ data: "json, name=IsFavorite" })
   isFavorite?: boolean;
 
-  @Metadata({ data: "json, name=ItemId" })
+  @SpeakeasyMetadata({ data: "json, name=ItemId" })
   itemId?: string;
 
-  @Metadata({ data: "json, name=Key" })
+  @SpeakeasyMetadata({ data: "json, name=Key" })
   key?: string;
 
-  @Metadata({ data: "json, name=LastPlayedDate" })
+  @SpeakeasyMetadata({ data: "json, name=LastPlayedDate" })
   lastPlayedDate?: Date;
 
-  @Metadata({ data: "json, name=Likes" })
+  @SpeakeasyMetadata({ data: "json, name=Likes" })
   likes?: boolean;
 
-  @Metadata({ data: "json, name=PlayCount" })
+  @SpeakeasyMetadata({ data: "json, name=PlayCount" })
   playCount?: number;
 
-  @Metadata({ data: "json, name=PlaybackPositionTicks" })
+  @SpeakeasyMetadata({ data: "json, name=PlaybackPositionTicks" })
   playbackPositionTicks?: number;
 
-  @Metadata({ data: "json, name=Played" })
+  @SpeakeasyMetadata({ data: "json, name=Played" })
   played?: boolean;
 
-  @Metadata({ data: "json, name=PlayedPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=PlayedPercentage" })
   playedPercentage?: number;
 
-  @Metadata({ data: "json, name=Rating" })
+  @SpeakeasyMetadata({ data: "json, name=Rating" })
   rating?: number;
 
-  @Metadata({ data: "json, name=UnplayedItemCount" })
+  @SpeakeasyMetadata({ data: "json, name=UnplayedItemCount" })
   unplayedItemCount?: number;
 }

@@ -1,17 +1,23 @@
 package shared
 
+// AdUnitContentAdsSettingsBackupOption
+// The backup option to be used in instances where no ad is available.
 type AdUnitContentAdsSettingsBackupOption struct {
 	Color *string `json:"color,omitempty"`
 	Type  *string `json:"type,omitempty"`
 	URL   *string `json:"url,omitempty"`
 }
 
+// AdUnitContentAdsSettings
+// Settings specific to content ads (AFC) and highend mobile content ads (AFMC - deprecated).
 type AdUnitContentAdsSettings struct {
 	BackupOption *AdUnitContentAdsSettingsBackupOption `json:"backupOption,omitempty"`
 	Size         *string                               `json:"size,omitempty"`
 	Type         *string                               `json:"type,omitempty"`
 }
 
+// AdUnitMobileContentAdsSettings
+// Settings specific to WAP mobile content ads (AFMC - deprecated).
 type AdUnitMobileContentAdsSettings struct {
 	MarkupLanguage    *string `json:"markupLanguage,omitempty"`
 	ScriptingLanguage *string `json:"scriptingLanguage,omitempty"`

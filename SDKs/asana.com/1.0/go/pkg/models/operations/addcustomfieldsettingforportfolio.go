@@ -16,14 +16,14 @@ type AddCustomFieldSettingForPortfolioRequestBody struct {
 	Data *shared.AddCustomFieldSettingRequest `json:"data,omitempty"`
 }
 
+type AddCustomFieldSettingForPortfolio200ApplicationJSON struct {
+	Data map[string]interface{} `json:"data,omitempty"`
+}
+
 type AddCustomFieldSettingForPortfolioRequest struct {
 	PathParams  AddCustomFieldSettingForPortfolioPathParams
 	QueryParams AddCustomFieldSettingForPortfolioQueryParams
 	Request     AddCustomFieldSettingForPortfolioRequestBody `request:"mediaType=application/json"`
-}
-
-type AddCustomFieldSettingForPortfolio200ApplicationJSON struct {
-	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type AddCustomFieldSettingForPortfolioResponse struct {

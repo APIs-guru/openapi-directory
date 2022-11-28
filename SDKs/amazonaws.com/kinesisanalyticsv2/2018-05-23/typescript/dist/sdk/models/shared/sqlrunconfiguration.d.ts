@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { InputStartingPositionConfiguration } from "./inputstartingpositionconfiguration";
 /**
  * Describes the starting parameters for a SQL-based Kinesis Data Analytics application.

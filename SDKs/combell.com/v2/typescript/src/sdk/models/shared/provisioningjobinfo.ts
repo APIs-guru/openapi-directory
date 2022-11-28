@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CompletionEstimation } from "./completionestimation";
 import { ProvisioningJobStatusEnum } from "./provisioningjobstatusenum";
 
 
+
 export class ProvisioningJobInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=completion" })
+  @SpeakeasyMetadata({ data: "json, name=completion" })
   completion?: CompletionEstimation;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: ProvisioningJobStatusEnum;
 }

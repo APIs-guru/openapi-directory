@@ -1,18 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleCloudMlV1ParameterSpecScaleTypeEnum {
-    None = "NONE"
-,    UnitLinearScale = "UNIT_LINEAR_SCALE"
-,    UnitLogScale = "UNIT_LOG_SCALE"
-,    UnitReverseLogScale = "UNIT_REVERSE_LOG_SCALE"
+    None = "NONE",
+    UnitLinearScale = "UNIT_LINEAR_SCALE",
+    UnitLogScale = "UNIT_LOG_SCALE",
+    UnitReverseLogScale = "UNIT_REVERSE_LOG_SCALE"
 }
 
 export enum GoogleCloudMlV1ParameterSpecTypeEnum {
-    ParameterTypeUnspecified = "PARAMETER_TYPE_UNSPECIFIED"
-,    Double = "DOUBLE"
-,    Integer = "INTEGER"
-,    Categorical = "CATEGORICAL"
-,    Discrete = "DISCRETE"
+    ParameterTypeUnspecified = "PARAMETER_TYPE_UNSPECIFIED",
+    Double = "DOUBLE",
+    Integer = "INTEGER",
+    Categorical = "CATEGORICAL",
+    Discrete = "DISCRETE"
 }
 
 
@@ -21,24 +22,24 @@ export enum GoogleCloudMlV1ParameterSpecTypeEnum {
  * Represents a single hyperparameter to optimize.
 **/
 export class GoogleCloudMlV1ParameterSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=categoricalValues" })
+  @SpeakeasyMetadata({ data: "json, name=categoricalValues" })
   categoricalValues?: string[];
 
-  @Metadata({ data: "json, name=discreteValues" })
+  @SpeakeasyMetadata({ data: "json, name=discreteValues" })
   discreteValues?: number[];
 
-  @Metadata({ data: "json, name=maxValue" })
+  @SpeakeasyMetadata({ data: "json, name=maxValue" })
   maxValue?: number;
 
-  @Metadata({ data: "json, name=minValue" })
+  @SpeakeasyMetadata({ data: "json, name=minValue" })
   minValue?: number;
 
-  @Metadata({ data: "json, name=parameterName" })
+  @SpeakeasyMetadata({ data: "json, name=parameterName" })
   parameterName?: string;
 
-  @Metadata({ data: "json, name=scaleType" })
+  @SpeakeasyMetadata({ data: "json, name=scaleType" })
   scaleType?: GoogleCloudMlV1ParameterSpecScaleTypeEnum;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: GoogleCloudMlV1ParameterSpecTypeEnum;
 }

@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeliverabilityTestReport } from "./deliverabilitytestreport";
 import { IspPlacement } from "./ispplacement";
 import { PlacementStatistics } from "./placementstatistics";
 import { Tag } from "./tag";
+
 
 
 // GetDeliverabilityTestReportResponse
@@ -11,18 +11,18 @@ import { Tag } from "./tag";
  * The results of the predictive inbox placement test.
 **/
 export class GetDeliverabilityTestReportResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DeliverabilityTestReport" })
+  @SpeakeasyMetadata({ data: "json, name=DeliverabilityTestReport" })
   deliverabilityTestReport: DeliverabilityTestReport;
 
-  @Metadata({ data: "json, name=IspPlacements", elemType: shared.IspPlacement })
+  @SpeakeasyMetadata({ data: "json, name=IspPlacements", elemType: IspPlacement })
   ispPlacements: IspPlacement[];
 
-  @Metadata({ data: "json, name=Message" })
+  @SpeakeasyMetadata({ data: "json, name=Message" })
   message?: string;
 
-  @Metadata({ data: "json, name=OverallPlacement" })
+  @SpeakeasyMetadata({ data: "json, name=OverallPlacement" })
   overallPlacement: PlacementStatistics;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 }

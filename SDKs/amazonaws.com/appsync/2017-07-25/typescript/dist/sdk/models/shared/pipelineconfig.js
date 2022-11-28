@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // PipelineConfig
 /**
  * The pipeline configuration for a resolver of kind <code>PIPELINE</code>.
@@ -33,7 +33,7 @@ var PipelineConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=functions" }),
+        SpeakeasyMetadata({ data: "json, name=functions" }),
         __metadata("design:type", Array)
     ], PipelineConfig.prototype, "functions", void 0);
     return PipelineConfig;

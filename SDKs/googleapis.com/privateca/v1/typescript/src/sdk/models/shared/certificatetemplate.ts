@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CertificateIdentityConstraints } from "./certificateidentityconstraints";
 import { CertificateExtensionConstraints } from "./certificateextensionconstraints";
 import { X509Parameters } from "./x509parameters";
+
 
 
 // CertificateTemplate
@@ -9,27 +10,49 @@ import { X509Parameters } from "./x509parameters";
  * A CertificateTemplate refers to a managed template for certificate issuance.
 **/
 export class CertificateTemplate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=identityConstraints" })
+  @SpeakeasyMetadata({ data: "json, name=identityConstraints" })
   identityConstraints?: CertificateIdentityConstraints;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=passthroughExtensions" })
+  @SpeakeasyMetadata({ data: "json, name=passthroughExtensions" })
   passthroughExtensions?: CertificateExtensionConstraints;
 
-  @Metadata({ data: "json, name=predefinedValues" })
+  @SpeakeasyMetadata({ data: "json, name=predefinedValues" })
   predefinedValues?: X509Parameters;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
+}
+
+
+// CertificateTemplateInput
+/** 
+ * A CertificateTemplate refers to a managed template for certificate issuance.
+**/
+export class CertificateTemplateInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=identityConstraints" })
+  identityConstraints?: CertificateIdentityConstraints;
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=passthroughExtensions" })
+  passthroughExtensions?: CertificateExtensionConstraints;
+
+  @SpeakeasyMetadata({ data: "json, name=predefinedValues" })
+  predefinedValues?: X509Parameters;
 }

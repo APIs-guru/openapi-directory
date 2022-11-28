@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsRedshiftClusterResizeInfo
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about the resize operation for the cluster.
 **/
 export class AwsRedshiftClusterResizeInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AllowCancelResize" })
+  @SpeakeasyMetadata({ data: "json, name=AllowCancelResize" })
   allowCancelResize?: boolean;
 
-  @Metadata({ data: "json, name=ResizeType" })
+  @SpeakeasyMetadata({ data: "json, name=ResizeType" })
   resizeType?: string;
 }

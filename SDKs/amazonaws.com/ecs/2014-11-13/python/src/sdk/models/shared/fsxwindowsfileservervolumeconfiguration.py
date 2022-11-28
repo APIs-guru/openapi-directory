@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import fsxwindowsfileserverauthorizationconfig
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class FSxWindowsFileServerVolumeConfiguration:
-    authorization_config: fsxwindowsfileserverauthorizationconfig.FSxWindowsFileServerAuthorizationConfig = field(default=None, metadata={'dataclasses_json': { 'field_name': 'authorizationConfig' }})
-    file_system_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fileSystemId' }})
-    root_directory: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rootDirectory' }})
+    r"""FSxWindowsFileServerVolumeConfiguration
+    <p>This parameter is specified when you are using <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/what-is.html\">Amazon FSx for Windows File Server</a> file system for task storage.</p> <p>For more information and the input format, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/wfsx-volumes.html\">Amazon FSx for Windows File Server Volumes</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    """
+    
+    authorization_config: FSxWindowsFileServerAuthorizationConfig = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('authorizationConfig') }})
+    file_system_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('fileSystemId') }})
+    root_directory: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('rootDirectory') }})
     

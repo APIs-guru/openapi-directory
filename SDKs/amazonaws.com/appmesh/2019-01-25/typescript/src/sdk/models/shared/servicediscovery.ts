@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsCloudMapServiceDiscovery } from "./awscloudmapservicediscovery";
 import { DnsServiceDiscovery } from "./dnsservicediscovery";
+
 
 
 // ServiceDiscovery
@@ -8,9 +9,9 @@ import { DnsServiceDiscovery } from "./dnsservicediscovery";
  * An object that represents the service discovery information for a virtual node.
 **/
 export class ServiceDiscovery extends SpeakeasyBase {
-  @Metadata({ data: "json, name=awsCloudMap" })
+  @SpeakeasyMetadata({ data: "json, name=awsCloudMap" })
   awsCloudMap?: AwsCloudMapServiceDiscovery;
 
-  @Metadata({ data: "json, name=dns" })
+  @SpeakeasyMetadata({ data: "json, name=dns" })
   dns?: DnsServiceDiscovery;
 }

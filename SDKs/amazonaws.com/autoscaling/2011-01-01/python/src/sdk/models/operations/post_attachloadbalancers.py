@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostAttachLoadBalancersActionEnum(str, Enum):
     ATTACH_LOAD_BALANCERS = "AttachLoadBalancers"
@@ -10,8 +14,8 @@ class PostAttachLoadBalancersVersionEnum(str, Enum):
 
 @dataclass
 class PostAttachLoadBalancersQueryParams:
-    action: PostAttachLoadBalancersActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostAttachLoadBalancersVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostAttachLoadBalancersActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostAttachLoadBalancersVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostAttachLoadBalancersHeaders:
 
 @dataclass
 class PostAttachLoadBalancersRequest:
-    query_params: PostAttachLoadBalancersQueryParams = field(default=None)
-    headers: PostAttachLoadBalancersHeaders = field(default=None)
+    headers: PostAttachLoadBalancersHeaders = field()
+    query_params: PostAttachLoadBalancersQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostAttachLoadBalancersResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

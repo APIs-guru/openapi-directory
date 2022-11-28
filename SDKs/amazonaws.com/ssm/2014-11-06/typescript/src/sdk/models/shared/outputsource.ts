@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // OutputSource
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about the source where the association execution details are stored.
 **/
 export class OutputSource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=OutputSourceId" })
+  @SpeakeasyMetadata({ data: "json, name=OutputSourceId" })
   outputSourceId?: string;
 
-  @Metadata({ data: "json, name=OutputSourceType" })
+  @SpeakeasyMetadata({ data: "json, name=OutputSourceType" })
   outputSourceType?: string;
 }

@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudRetailV2ImportErrorsConfig } from "./googlecloudretailv2importerrorsconfig";
-import { GoogleCloudRetailV2UserEventInputConfig } from "./googlecloudretailv2usereventinputconfig";
+import { GoogleCloudRetailV2UserEventInputConfigInput } from "./googlecloudretailv2usereventinputconfig";
 
 
-// GoogleCloudRetailV2ImportUserEventsRequest
+
+// GoogleCloudRetailV2ImportUserEventsRequestInput
 /** 
  * Request message for the ImportUserEvents request.
 **/
-export class GoogleCloudRetailV2ImportUserEventsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errorsConfig" })
+export class GoogleCloudRetailV2ImportUserEventsRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=errorsConfig" })
   errorsConfig?: GoogleCloudRetailV2ImportErrorsConfig;
 
-  @Metadata({ data: "json, name=inputConfig" })
-  inputConfig?: GoogleCloudRetailV2UserEventInputConfig;
+  @SpeakeasyMetadata({ data: "json, name=inputConfig" })
+  inputConfig?: GoogleCloudRetailV2UserEventInputConfigInput;
 }

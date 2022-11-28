@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum NfsExportOptionsAccessModeEnum {
     AccessModeUnspecified = "ACCESS_MODE_UNSPECIFIED",
     ReadOnly = "READ_ONLY",

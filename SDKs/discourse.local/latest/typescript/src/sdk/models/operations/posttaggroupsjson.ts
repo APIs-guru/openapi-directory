@@ -1,52 +1,53 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostTagGroupsJsonRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
-}
-
-
-export class PostTagGroupsJsonRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: PostTagGroupsJsonRequestBody;
 }
 
 
 export class PostTagGroupsJson200ApplicationJsonTagGroup extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=one_per_topic" })
+  @SpeakeasyMetadata({ data: "json, name=one_per_topic" })
   onePerTopic: boolean;
 
-  @Metadata({ data: "json, name=parent_tag_name" })
+  @SpeakeasyMetadata({ data: "json, name=parent_tag_name" })
   parentTagName: any[];
 
-  @Metadata({ data: "json, name=permissions" })
+  @SpeakeasyMetadata({ data: "json, name=permissions" })
   permissions: Map<string, any>;
 
-  @Metadata({ data: "json, name=tag_names" })
+  @SpeakeasyMetadata({ data: "json, name=tag_names" })
   tagNames: any[];
 }
 
 
 export class PostTagGroupsJson200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=tag_group" })
+  @SpeakeasyMetadata({ data: "json, name=tag_group" })
   tagGroup: PostTagGroupsJson200ApplicationJsonTagGroup;
 }
 
 
+export class PostTagGroupsJsonRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: PostTagGroupsJsonRequestBody;
+}
+
+
 export class PostTagGroupsJsonResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postTagGroupsJson200ApplicationJsonObject?: PostTagGroupsJson200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

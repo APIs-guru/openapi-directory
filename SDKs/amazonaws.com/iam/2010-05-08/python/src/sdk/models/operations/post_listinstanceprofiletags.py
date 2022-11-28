@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostListInstanceProfileTagsActionEnum(str, Enum):
     LIST_INSTANCE_PROFILE_TAGS = "ListInstanceProfileTags"
@@ -10,8 +14,8 @@ class PostListInstanceProfileTagsVersionEnum(str, Enum):
 
 @dataclass
 class PostListInstanceProfileTagsQueryParams:
-    action: PostListInstanceProfileTagsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostListInstanceProfileTagsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostListInstanceProfileTagsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostListInstanceProfileTagsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostListInstanceProfileTagsHeaders:
 
 @dataclass
 class PostListInstanceProfileTagsRequest:
-    query_params: PostListInstanceProfileTagsQueryParams = field(default=None)
-    headers: PostListInstanceProfileTagsHeaders = field(default=None)
+    headers: PostListInstanceProfileTagsHeaders = field()
+    query_params: PostListInstanceProfileTagsQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostListInstanceProfileTagsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

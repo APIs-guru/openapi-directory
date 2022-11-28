@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ReplicationTaskAssessmentResult
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  The task assessment report in JSON format. 
 **/
 export class ReplicationTaskAssessmentResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AssessmentResults" })
+  @SpeakeasyMetadata({ data: "json, name=AssessmentResults" })
   assessmentResults?: string;
 
-  @Metadata({ data: "json, name=AssessmentResultsFile" })
+  @SpeakeasyMetadata({ data: "json, name=AssessmentResultsFile" })
   assessmentResultsFile?: string;
 
-  @Metadata({ data: "json, name=AssessmentStatus" })
+  @SpeakeasyMetadata({ data: "json, name=AssessmentStatus" })
   assessmentStatus?: string;
 
-  @Metadata({ data: "json, name=ReplicationTaskArn" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicationTaskArn" })
   replicationTaskArn?: string;
 
-  @Metadata({ data: "json, name=ReplicationTaskIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicationTaskIdentifier" })
   replicationTaskIdentifier?: string;
 
-  @Metadata({ data: "json, name=ReplicationTaskLastAssessmentDate" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicationTaskLastAssessmentDate" })
   replicationTaskLastAssessmentDate?: Date;
 
-  @Metadata({ data: "json, name=S3ObjectUrl" })
+  @SpeakeasyMetadata({ data: "json, name=S3ObjectUrl" })
   s3ObjectUrl?: string;
 }

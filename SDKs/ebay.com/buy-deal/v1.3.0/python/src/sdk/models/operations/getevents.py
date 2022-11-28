@@ -11,24 +11,24 @@ class GetEventsQueryParams:
 
 @dataclass
 class GetEventsHeaders:
-    x_ebay_c_marketplace_id: str = field(default=None, metadata={'header': { 'field_name': 'X-EBAY-C-MARKETPLACE-ID', 'style': 'simple', 'explode': False }})
+    x_ebay_c_marketplace_id: str = field(metadata={'header': { 'field_name': 'X-EBAY-C-MARKETPLACE-ID', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetEventsSecurity:
-    api_auth: shared.SchemeAPIAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    api_auth: shared.SchemeAPIAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetEventsRequest:
-    query_params: GetEventsQueryParams = field(default=None)
-    headers: GetEventsHeaders = field(default=None)
-    security: GetEventsSecurity = field(default=None)
+    headers: GetEventsHeaders = field()
+    query_params: GetEventsQueryParams = field()
+    security: GetEventsSecurity = field()
     
 
 @dataclass
 class GetEventsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     event_search_response: Optional[shared.EventSearchResponse] = field(default=None)
-    status_code: int = field(default=None)
     

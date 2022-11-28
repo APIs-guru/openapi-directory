@@ -4,22 +4,9 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-type CreatePayPalPaymentSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type CreatePayPalPaymentSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type CreatePayPalPaymentSecurity struct {
-	Option1 *CreatePayPalPaymentSecurityOption1 `security:"option"`
-	Option2 *CreatePayPalPaymentSecurityOption2 `security:"option"`
-}
-
-type CreatePayPalPaymentRequest struct {
-	Request  shared.PayPal `request:"mediaType=application/json"`
-	Security CreatePayPalPaymentSecurity
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
 }
 
 type CreatePayPalPayment200ApplicationJSON struct {
@@ -29,6 +16,11 @@ type CreatePayPalPayment200ApplicationJSON struct {
 
 type CreatePayPalPaymentDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type CreatePayPalPaymentRequest struct {
+	Request  shared.PayPal `request:"mediaType=application/json"`
+	Security CreatePayPalPaymentSecurity
 }
 
 type CreatePayPalPaymentResponse struct {

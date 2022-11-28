@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
@@ -16,16 +19,16 @@ class GetOrganizationAdminAccountHeaders:
 
 @dataclass
 class GetOrganizationAdminAccountRequest:
-    headers: GetOrganizationAdminAccountHeaders = field(default=None)
+    headers: GetOrganizationAdminAccountHeaders = field()
     
 
 @dataclass
 class GetOrganizationAdminAccountResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_organization_admin_account_response: Optional[shared.GetOrganizationAdminAccountResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

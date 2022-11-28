@@ -1,5 +1,7 @@
 package shared
 
+// InstanceQuota
+// A resource budget.
 type InstanceQuota struct {
 	AvailableMachineCount *int32  `json:"availableMachineCount,omitempty"`
 	GcpService            *string `json:"gcpService,omitempty"`

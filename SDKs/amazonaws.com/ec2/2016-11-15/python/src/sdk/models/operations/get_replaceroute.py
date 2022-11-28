@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetReplaceRouteActionEnum(str, Enum):
     REPLACE_ROUTE = "ReplaceRoute"
@@ -10,7 +14,9 @@ class GetReplaceRouteVersionEnum(str, Enum):
 
 @dataclass
 class GetReplaceRouteQueryParams:
-    action: GetReplaceRouteActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetReplaceRouteActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    route_table_id: str = field(metadata={'query_param': { 'field_name': 'RouteTableId', 'style': 'form', 'explode': True }})
+    version: GetReplaceRouteVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     carrier_gateway_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'CarrierGatewayId', 'style': 'form', 'explode': True }})
     destination_cidr_block: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'DestinationCidrBlock', 'style': 'form', 'explode': True }})
     destination_ipv6_cidr_block: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'DestinationIpv6CidrBlock', 'style': 'form', 'explode': True }})
@@ -23,9 +29,7 @@ class GetReplaceRouteQueryParams:
     local_target: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'LocalTarget', 'style': 'form', 'explode': True }})
     nat_gateway_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NatGatewayId', 'style': 'form', 'explode': True }})
     network_interface_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NetworkInterfaceId', 'style': 'form', 'explode': True }})
-    route_table_id: str = field(default=None, metadata={'query_param': { 'field_name': 'RouteTableId', 'style': 'form', 'explode': True }})
     transit_gateway_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'TransitGatewayId', 'style': 'form', 'explode': True }})
-    version: GetReplaceRouteVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     vpc_endpoint_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'VpcEndpointId', 'style': 'form', 'explode': True }})
     vpc_peering_connection_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'VpcPeeringConnectionId', 'style': 'form', 'explode': True }})
     
@@ -43,12 +47,12 @@ class GetReplaceRouteHeaders:
 
 @dataclass
 class GetReplaceRouteRequest:
-    query_params: GetReplaceRouteQueryParams = field(default=None)
-    headers: GetReplaceRouteHeaders = field(default=None)
+    headers: GetReplaceRouteHeaders = field()
+    query_params: GetReplaceRouteQueryParams = field()
     
 
 @dataclass
 class GetReplaceRouteResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var LowestFaresQueryParams = /** @class */ (function (_super) {
     __extends(LowestFaresQueryParams, _super);
@@ -30,39 +30,39 @@ var LowestFaresQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=cabin-class" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=cabin-class" }),
         __metadata("design:type", String)
     ], LowestFaresQueryParams.prototype, "cabinClass", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=catalogues" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=catalogues" }),
         __metadata("design:type", String)
     ], LowestFaresQueryParams.prototype, "catalogues", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=country" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=country" }),
         __metadata("design:type", String)
     ], LowestFaresQueryParams.prototype, "country", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=destination" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=destination" }),
         __metadata("design:type", String)
     ], LowestFaresQueryParams.prototype, "destination", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fare-family" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fare-family" }),
         __metadata("design:type", String)
     ], LowestFaresQueryParams.prototype, "fareFamily", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=origin" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=origin" }),
         __metadata("design:type", String)
     ], LowestFaresQueryParams.prototype, "origin", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=return-date" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=return-date" }),
         __metadata("design:type", String)
     ], LowestFaresQueryParams.prototype, "returnDate", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=travel-date" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=travel-date" }),
         __metadata("design:type", String)
     ], LowestFaresQueryParams.prototype, "travelDate", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=travelers" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=travelers" }),
         __metadata("design:type", String)
     ], LowestFaresQueryParams.prototype, "travelers", void 0);
     return LowestFaresQueryParams;
@@ -74,7 +74,7 @@ var LowestFaresHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Accept" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept" }),
         __metadata("design:type", String)
     ], LowestFaresHeaders.prototype, "accept", void 0);
     return LowestFaresHeaders;
@@ -86,7 +86,7 @@ var LowestFaresSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeAuth)
     ], LowestFaresSecurity.prototype, "auth", void 0);
     return LowestFaresSecurity;
@@ -98,15 +98,15 @@ var LowestFaresRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", LowestFaresQueryParams)
     ], LowestFaresRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", LowestFaresHeaders)
     ], LowestFaresRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", LowestFaresSecurity)
     ], LowestFaresRequest.prototype, "security", void 0);
     return LowestFaresRequest;
@@ -118,15 +118,15 @@ var LowestFaresResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], LowestFaresResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], LowestFaresResponse.prototype, "lowestFares200ApplicationJsonString", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], LowestFaresResponse.prototype, "statusCode", void 0);
     return LowestFaresResponse;

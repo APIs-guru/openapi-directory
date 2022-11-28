@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Subscriber } from "./subscriber";
 import { Notification } from "./notification";
-import { Subscriber } from "./subscriber";
+
 
 
 // UpdateSubscriberRequest
@@ -9,18 +9,18 @@ import { Subscriber } from "./subscriber";
  *  Request of UpdateSubscriber 
 **/
 export class UpdateSubscriberRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccountId" })
+  @SpeakeasyMetadata({ data: "json, name=AccountId" })
   accountId: string;
 
-  @Metadata({ data: "json, name=BudgetName" })
+  @SpeakeasyMetadata({ data: "json, name=BudgetName" })
   budgetName: string;
 
-  @Metadata({ data: "json, name=NewSubscriber" })
+  @SpeakeasyMetadata({ data: "json, name=NewSubscriber" })
   newSubscriber: Subscriber;
 
-  @Metadata({ data: "json, name=Notification" })
+  @SpeakeasyMetadata({ data: "json, name=Notification" })
   notification: Notification;
 
-  @Metadata({ data: "json, name=OldSubscriber" })
+  @SpeakeasyMetadata({ data: "json, name=OldSubscriber" })
   oldSubscriber: Subscriber;
 }

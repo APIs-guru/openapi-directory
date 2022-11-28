@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ModerationLabel } from "./moderationlabel";
+
 
 
 // ContentModerationDetection
@@ -7,9 +8,9 @@ import { ModerationLabel } from "./moderationlabel";
  * Information about an inappropriate, unwanted, or offensive content label detection in a stored video.
 **/
 export class ContentModerationDetection extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ModerationLabel" })
+  @SpeakeasyMetadata({ data: "json, name=ModerationLabel" })
   moderationLabel?: ModerationLabel;
 
-  @Metadata({ data: "json, name=Timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=Timestamp" })
   timestamp?: number;
 }

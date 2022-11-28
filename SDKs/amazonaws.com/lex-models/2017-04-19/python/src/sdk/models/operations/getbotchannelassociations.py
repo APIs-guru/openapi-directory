@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetBotChannelAssociationsPathParams:
-    alias_name: str = field(default=None, metadata={'path_param': { 'field_name': 'aliasName', 'style': 'simple', 'explode': False }})
-    bot_name: str = field(default=None, metadata={'path_param': { 'field_name': 'botName', 'style': 'simple', 'explode': False }})
+    alias_name: str = field(metadata={'path_param': { 'field_name': 'aliasName', 'style': 'simple', 'explode': False }})
+    bot_name: str = field(metadata={'path_param': { 'field_name': 'botName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -29,17 +32,17 @@ class GetBotChannelAssociationsHeaders:
 
 @dataclass
 class GetBotChannelAssociationsRequest:
-    path_params: GetBotChannelAssociationsPathParams = field(default=None)
-    query_params: GetBotChannelAssociationsQueryParams = field(default=None)
-    headers: GetBotChannelAssociationsHeaders = field(default=None)
+    headers: GetBotChannelAssociationsHeaders = field()
+    path_params: GetBotChannelAssociationsPathParams = field()
+    query_params: GetBotChannelAssociationsQueryParams = field()
     
 
 @dataclass
 class GetBotChannelAssociationsResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_bot_channel_associations_response: Optional[shared.GetBotChannelAssociationsResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

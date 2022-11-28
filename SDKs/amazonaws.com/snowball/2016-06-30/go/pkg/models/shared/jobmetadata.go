@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// JobMetadata
+// Contains information about a specific job including shipping information, job status, and other important metadata. This information is returned as a part of the response syntax of the <code>DescribeJob</code> action.
 type JobMetadata struct {
 	AddressID                    *string                       `json:"AddressId,omitempty"`
 	ClusterID                    *string                       `json:"ClusterId,omitempty"`

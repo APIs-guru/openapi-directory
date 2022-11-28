@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Evaluation
+// Identifies an Amazon Web Services resource and indicates whether it complies with the Config rule that it was evaluated against.
 type Evaluation struct {
 	Annotation             *string            `json:"Annotation,omitempty"`
 	ComplianceResourceID   string             `json:"ComplianceResourceId"`

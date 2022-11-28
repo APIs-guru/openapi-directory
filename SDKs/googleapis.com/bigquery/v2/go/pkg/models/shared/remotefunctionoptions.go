@@ -1,5 +1,7 @@
 package shared
 
+// RemoteFunctionOptions
+// Options for a remote user-defined function.
 type RemoteFunctionOptions struct {
 	Connection         *string           `json:"connection,omitempty"`
 	Endpoint           *string           `json:"endpoint,omitempty"`

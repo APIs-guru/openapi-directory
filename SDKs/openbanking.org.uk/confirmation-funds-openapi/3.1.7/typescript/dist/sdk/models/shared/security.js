@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var SchemePsuoAuth2Security = /** @class */ (function (_super) {
     __extends(SchemePsuoAuth2Security, _super);
     function SchemePsuoAuth2Security() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, name=Authorization" }),
+        SpeakeasyMetadata({ data: "security, name=Authorization" }),
         __metadata("design:type", String)
     ], SchemePsuoAuth2Security.prototype, "authorization", void 0);
     return SchemePsuoAuth2Security;
@@ -41,7 +41,7 @@ var SchemeTppoAuth2Security = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, name=Authorization" }),
+        SpeakeasyMetadata({ data: "security, name=Authorization" }),
         __metadata("design:type", String)
     ], SchemeTppoAuth2Security.prototype, "authorization", void 0);
     return SchemeTppoAuth2Security;

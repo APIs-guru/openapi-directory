@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetEpisodeByIDPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,20 +15,20 @@ class GetEpisodeByIDQueryParams:
 
 @dataclass
 class GetEpisodeByIDHeaders:
-    x_listen_api_key: str = field(default=None, metadata={'header': { 'field_name': 'X-ListenAPI-Key', 'style': 'simple', 'explode': False }})
+    x_listen_api_key: str = field(metadata={'header': { 'field_name': 'X-ListenAPI-Key', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetEpisodeByIDRequest:
-    path_params: GetEpisodeByIDPathParams = field(default=None)
-    query_params: GetEpisodeByIDQueryParams = field(default=None)
-    headers: GetEpisodeByIDHeaders = field(default=None)
+    headers: GetEpisodeByIDHeaders = field()
+    path_params: GetEpisodeByIDPathParams = field()
+    query_params: GetEpisodeByIDQueryParams = field()
     
 
 @dataclass
 class GetEpisodeByIDResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     episode_full: Optional[shared.EpisodeFull] = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
     

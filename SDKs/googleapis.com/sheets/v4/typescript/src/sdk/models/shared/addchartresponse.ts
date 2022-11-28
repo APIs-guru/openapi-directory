@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EmbeddedChart } from "./embeddedchart";
+
 
 
 // AddChartResponse
@@ -7,6 +8,6 @@ import { EmbeddedChart } from "./embeddedchart";
  * The result of adding a chart to a spreadsheet.
 **/
 export class AddChartResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=chart" })
+  @SpeakeasyMetadata({ data: "json, name=chart" })
   chart?: EmbeddedChart;
 }

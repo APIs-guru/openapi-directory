@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RevisionLocation } from "./revisionlocation";
+
 
 
 // BatchGetApplicationRevisionsInput
@@ -8,9 +8,9 @@ import { RevisionLocation } from "./revisionlocation";
  * Represents the input of a <code>BatchGetApplicationRevisions</code> operation.
 **/
 export class BatchGetApplicationRevisionsInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=applicationName" })
+  @SpeakeasyMetadata({ data: "json, name=applicationName" })
   applicationName: string;
 
-  @Metadata({ data: "json, name=revisions", elemType: shared.RevisionLocation })
+  @SpeakeasyMetadata({ data: "json, name=revisions", elemType: RevisionLocation })
   revisions: RevisionLocation[];
 }

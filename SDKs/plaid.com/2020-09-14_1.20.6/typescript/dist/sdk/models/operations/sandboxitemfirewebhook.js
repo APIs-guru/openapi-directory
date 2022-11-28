@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var SandboxItemFireWebhookRequest = /** @class */ (function (_super) {
     __extends(SandboxItemFireWebhookRequest, _super);
@@ -30,7 +30,7 @@ var SandboxItemFireWebhookRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.SandboxItemFireWebhookRequest)
     ], SandboxItemFireWebhookRequest.prototype, "request", void 0);
     return SandboxItemFireWebhookRequest;
@@ -42,19 +42,19 @@ var SandboxItemFireWebhookResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], SandboxItemFireWebhookResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], SandboxItemFireWebhookResponse.prototype, "error", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], SandboxItemFireWebhookResponse.prototype, "sandboxItemFireWebhookResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], SandboxItemFireWebhookResponse.prototype, "statusCode", void 0);
     return SandboxItemFireWebhookResponse;

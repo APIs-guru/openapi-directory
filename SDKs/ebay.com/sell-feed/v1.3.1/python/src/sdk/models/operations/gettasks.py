@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from sdk.models import shared
 
@@ -15,18 +18,18 @@ class GetTasksQueryParams:
 
 @dataclass
 class GetTasksSecurity:
-    api_auth: shared.SchemeAPIAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    api_auth: shared.SchemeAPIAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetTasksRequest:
-    query_params: GetTasksQueryParams = field(default=None)
-    security: GetTasksSecurity = field(default=None)
+    query_params: GetTasksQueryParams = field()
+    security: GetTasksSecurity = field()
     
 
 @dataclass
 class GetTasksResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     task_collection: Optional[shared.TaskCollection] = field(default=None)
     

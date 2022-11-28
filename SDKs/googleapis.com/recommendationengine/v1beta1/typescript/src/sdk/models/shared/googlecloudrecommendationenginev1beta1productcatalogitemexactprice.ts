@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudRecommendationengineV1beta1ProductCatalogItemExactPrice
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Exact product price.
 **/
 export class GoogleCloudRecommendationengineV1beta1ProductCatalogItemExactPrice extends SpeakeasyBase {
-  @Metadata({ data: "json, name=displayPrice" })
+  @SpeakeasyMetadata({ data: "json, name=displayPrice" })
   displayPrice?: number;
 
-  @Metadata({ data: "json, name=originalPrice" })
+  @SpeakeasyMetadata({ data: "json, name=originalPrice" })
   originalPrice?: number;
 }

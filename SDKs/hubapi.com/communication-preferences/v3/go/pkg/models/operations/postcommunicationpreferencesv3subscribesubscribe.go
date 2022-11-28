@@ -4,22 +4,12 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-type PostCommunicationPreferencesV3SubscribeSubscribeSecurityOption1 struct {
-	Oauth2Legacy shared.SchemeOauth2Legacy `security:"scheme,type=oauth2"`
-}
-
-type PostCommunicationPreferencesV3SubscribeSubscribeSecurityOption2 struct {
-	Hapikey shared.SchemeHapikey `security:"scheme,type=apiKey,subtype=query"`
-}
-
-type PostCommunicationPreferencesV3SubscribeSubscribeSecurityOption3 struct {
-	Oauth2Legacy shared.SchemeOauth2Legacy `security:"scheme,type=oauth2"`
-}
-
 type PostCommunicationPreferencesV3SubscribeSubscribeSecurity struct {
-	Option1 *PostCommunicationPreferencesV3SubscribeSubscribeSecurityOption1 `security:"option"`
-	Option2 *PostCommunicationPreferencesV3SubscribeSubscribeSecurityOption2 `security:"option"`
-	Option3 *PostCommunicationPreferencesV3SubscribeSubscribeSecurityOption3 `security:"option"`
+	Oauth2Legacy       *shared.SchemeOauth2Legacy      `security:"scheme,type=oauth2"`
+	Hapikey            *shared.SchemeHapikey           `security:"scheme,type=apiKey,subtype=query"`
+	Oauth2Legacy1      *shared.SchemeOauth2Legacy      `security:"scheme,type=oauth2"`
+	PrivateAppsLegacy  *shared.SchemePrivateAppsLegacy `security:"scheme,type=apiKey,subtype=header"`
+	PrivateAppsLegacy1 *shared.SchemePrivateAppsLegacy `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type PostCommunicationPreferencesV3SubscribeSubscribeRequest struct {

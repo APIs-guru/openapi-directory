@@ -9,17 +9,17 @@ type CreatePortfolioQueryParams struct {
 	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
-type CreatePortfolioRequestBody struct {
-	Data *shared.PortfolioRequest `json:"data,omitempty"`
-}
-
-type CreatePortfolioRequest struct {
-	QueryParams CreatePortfolioQueryParams
-	Request     CreatePortfolioRequestBody `request:"mediaType=application/json"`
+type CreatePortfolioRequestBodyInput struct {
+	Data *shared.PortfolioRequestInput `json:"data,omitempty"`
 }
 
 type CreatePortfolio201ApplicationJSON struct {
 	Data *shared.PortfolioResponse `json:"data,omitempty"`
+}
+
+type CreatePortfolioRequest struct {
+	QueryParams CreatePortfolioQueryParams
+	Request     CreatePortfolioRequestBodyInput `request:"mediaType=application/json"`
 }
 
 type CreatePortfolioResponse struct {

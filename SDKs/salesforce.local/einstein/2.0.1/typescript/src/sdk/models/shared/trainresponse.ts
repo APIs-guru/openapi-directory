@@ -1,67 +1,68 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum TrainResponseStatusEnum {
-    Queued = "QUEUED"
-,    Running = "RUNNING"
-,    Succeeded = "SUCCEEDED"
-,    Failed = "FAILED"
-,    Killed = "KILLED"
-,    FailedWithRetries = "FAILED_WITH_RETRIES"
+    Queued = "QUEUED",
+    Running = "RUNNING",
+    Succeeded = "SUCCEEDED",
+    Failed = "FAILED",
+    Killed = "KILLED",
+    FailedWithRetries = "FAILED_WITH_RETRIES"
 }
 
 
 export class TrainResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=algorithm" })
+  @SpeakeasyMetadata({ data: "json, name=algorithm" })
   algorithm?: string;
 
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=datasetId" })
+  @SpeakeasyMetadata({ data: "json, name=datasetId" })
   datasetId: number;
 
-  @Metadata({ data: "json, name=datasetVersionId" })
+  @SpeakeasyMetadata({ data: "json, name=datasetVersionId" })
   datasetVersionId: number;
 
-  @Metadata({ data: "json, name=epochs" })
+  @SpeakeasyMetadata({ data: "json, name=epochs" })
   epochs?: number;
 
-  @Metadata({ data: "json, name=failureMsg" })
+  @SpeakeasyMetadata({ data: "json, name=failureMsg" })
   failureMsg?: string;
 
-  @Metadata({ data: "json, name=language" })
+  @SpeakeasyMetadata({ data: "json, name=language" })
   language: string;
 
-  @Metadata({ data: "json, name=learningRate" })
+  @SpeakeasyMetadata({ data: "json, name=learningRate" })
   learningRate?: number;
 
-  @Metadata({ data: "json, name=modelId" })
+  @SpeakeasyMetadata({ data: "json, name=modelId" })
   modelId: string;
 
-  @Metadata({ data: "json, name=modelType" })
+  @SpeakeasyMetadata({ data: "json, name=modelType" })
   modelType?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=object" })
+  @SpeakeasyMetadata({ data: "json, name=object" })
   object?: string;
 
-  @Metadata({ data: "json, name=progress" })
+  @SpeakeasyMetadata({ data: "json, name=progress" })
   progress: number;
 
-  @Metadata({ data: "json, name=queuePosition" })
+  @SpeakeasyMetadata({ data: "json, name=queuePosition" })
   queuePosition?: number;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: TrainResponseStatusEnum;
 
-  @Metadata({ data: "json, name=trainParams" })
+  @SpeakeasyMetadata({ data: "json, name=trainParams" })
   trainParams?: string;
 
-  @Metadata({ data: "json, name=trainStats" })
+  @SpeakeasyMetadata({ data: "json, name=trainStats" })
   trainStats?: string;
 
-  @Metadata({ data: "json, name=updatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=updatedAt" })
   updatedAt?: Date;
 }

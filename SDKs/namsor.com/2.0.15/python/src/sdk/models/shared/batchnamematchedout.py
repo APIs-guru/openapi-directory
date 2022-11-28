@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import namematchedout
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BatchNameMatchedOut:
-    matched_names: Optional[List[namematchedout.NameMatchedOut]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'matchedNames' }})
+    matched_names: Optional[List[NameMatchedOut]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('matchedNames') }})
     

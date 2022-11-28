@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApiClassifierOut } from "./apiclassifierout";
 import { SoftwareVersionOut } from "./softwareversionout";
 
 
+
 export class ApiClassifiersStatusOut extends SpeakeasyBase {
-  @Metadata({ data: "json, name=classifiers", elemType: shared.ApiClassifierOut })
+  @SpeakeasyMetadata({ data: "json, name=classifiers", elemType: ApiClassifierOut })
   classifiers?: ApiClassifierOut[];
 
-  @Metadata({ data: "json, name=softwareVersion" })
+  @SpeakeasyMetadata({ data: "json, name=softwareVersion" })
   softwareVersion?: SoftwareVersionOut;
 }

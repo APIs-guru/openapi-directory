@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserInfo } from "./userinfo";
-import { UserInfo } from "./userinfo";
+
 
 
 // Comment
@@ -8,27 +8,27 @@ import { UserInfo } from "./userinfo";
  * Node comment information
 **/
 export class Comment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt: Date;
 
-  @Metadata({ data: "json, name=createdBy" })
+  @SpeakeasyMetadata({ data: "json, name=createdBy" })
   createdBy: UserInfo;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=isChanged" })
+  @SpeakeasyMetadata({ data: "json, name=isChanged" })
   isChanged: boolean;
 
-  @Metadata({ data: "json, name=isDeleted" })
+  @SpeakeasyMetadata({ data: "json, name=isDeleted" })
   isDeleted: boolean;
 
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text: string;
 
-  @Metadata({ data: "json, name=updatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=updatedAt" })
   updatedAt: Date;
 
-  @Metadata({ data: "json, name=updatedBy" })
+  @SpeakeasyMetadata({ data: "json, name=updatedBy" })
   updatedBy: UserInfo;
 }

@@ -1,6 +1,7 @@
 export * from "./batchinputsubscriptionbatchupdaterequest";
 export * from "./batchresponsesubscriptionresponse";
 export * from "./batchresponsesubscriptionresponsewitherrors";
+export * from "./error";
 export * from "./errorcategory";
 export * from "./errordetail";
 export * from "./security";

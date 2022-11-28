@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // StartSessionRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies a request to start a new session.
 **/
 export class StartSessionRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LedgerName" })
+  @SpeakeasyMetadata({ data: "json, name=LedgerName" })
   ledgerName: string;
 }

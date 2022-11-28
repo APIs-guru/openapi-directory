@@ -9,6 +9,8 @@ const (
 	PathFilterPathMatchPositionEnumLast                         PathFilterPathMatchPositionEnum = "LAST"
 )
 
+// PathFilter
+// Represents a DfaReporting path filter.
 type PathFilter struct {
 	EventFilters      []EventFilter                    `json:"eventFilters,omitempty"`
 	Kind              *string                          `json:"kind,omitempty"`

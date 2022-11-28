@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class PaymentsresellersubscriptionPartnersSubscriptionsCreatePathParams extends SpeakeasyBase {
     parent: string;
@@ -20,7 +20,7 @@ export declare class PaymentsresellersubscriptionPartnersSubscriptionsCreateQuer
 export declare class PaymentsresellersubscriptionPartnersSubscriptionsCreateRequest extends SpeakeasyBase {
     pathParams: PaymentsresellersubscriptionPartnersSubscriptionsCreatePathParams;
     queryParams: PaymentsresellersubscriptionPartnersSubscriptionsCreateQueryParams;
-    request?: shared.GoogleCloudPaymentsResellerSubscriptionV1Subscription;
+    request?: shared.GoogleCloudPaymentsResellerSubscriptionV1SubscriptionInput;
 }
 export declare class PaymentsresellersubscriptionPartnersSubscriptionsCreateResponse extends SpeakeasyBase {
     contentType: string;

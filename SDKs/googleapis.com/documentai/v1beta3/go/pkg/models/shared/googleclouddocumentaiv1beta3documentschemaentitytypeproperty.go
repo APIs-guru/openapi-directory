@@ -10,9 +10,10 @@ const (
 	GoogleCloudDocumentaiV1beta3DocumentSchemaEntityTypePropertyOccurrenceTypeEnumRequiredMultiple          GoogleCloudDocumentaiV1beta3DocumentSchemaEntityTypePropertyOccurrenceTypeEnum = "REQUIRED_MULTIPLE"
 )
 
+// GoogleCloudDocumentaiV1beta3DocumentSchemaEntityTypeProperty
+// Defines properties that can be part of the entity type.
 type GoogleCloudDocumentaiV1beta3DocumentSchemaEntityTypeProperty struct {
-	Name             *string                                                                         `json:"name,omitempty"`
-	OccurrenceType   *GoogleCloudDocumentaiV1beta3DocumentSchemaEntityTypePropertyOccurrenceTypeEnum `json:"occurrenceType,omitempty"`
-	PropertyMetadata *GoogleCloudDocumentaiV1beta3PropertyMetadata                                   `json:"propertyMetadata,omitempty"`
-	ValueType        *string                                                                         `json:"valueType,omitempty"`
+	Name           *string                                                                         `json:"name,omitempty"`
+	OccurrenceType *GoogleCloudDocumentaiV1beta3DocumentSchemaEntityTypePropertyOccurrenceTypeEnum `json:"occurrenceType,omitempty"`
+	ValueType      *string                                                                         `json:"valueType,omitempty"`
 }

@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDatacatalogV1DataplexSpec
+// Common Dataplex fields.
 type GoogleCloudDatacatalogV1DataplexSpec struct {
 	Asset             *string                                 `json:"asset,omitempty"`
 	CompressionFormat *string                                 `json:"compressionFormat,omitempty"`

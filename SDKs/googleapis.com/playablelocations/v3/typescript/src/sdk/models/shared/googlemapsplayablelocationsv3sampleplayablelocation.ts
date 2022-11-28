@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleTypeLatLng } from "./googletypelatlng";
-import { GoogleTypeLatLng } from "./googletypelatlng";
+
 
 
 // GoogleMapsPlayablelocationsV3SamplePlayableLocation
@@ -8,21 +8,21 @@ import { GoogleTypeLatLng } from "./googletypelatlng";
  * A geographical point suitable for placing game objects in location-based games.
 **/
 export class GoogleMapsPlayablelocationsV3SamplePlayableLocation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=centerPoint" })
+  @SpeakeasyMetadata({ data: "json, name=centerPoint" })
   centerPoint?: GoogleTypeLatLng;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=placeId" })
+  @SpeakeasyMetadata({ data: "json, name=placeId" })
   placeId?: string;
 
-  @Metadata({ data: "json, name=plusCode" })
+  @SpeakeasyMetadata({ data: "json, name=plusCode" })
   plusCode?: string;
 
-  @Metadata({ data: "json, name=snappedPoint" })
+  @SpeakeasyMetadata({ data: "json, name=snappedPoint" })
   snappedPoint?: GoogleTypeLatLng;
 
-  @Metadata({ data: "json, name=types" })
+  @SpeakeasyMetadata({ data: "json, name=types" })
   types?: string[];
 }

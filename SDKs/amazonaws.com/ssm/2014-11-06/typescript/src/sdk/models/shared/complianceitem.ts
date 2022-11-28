@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ComplianceExecutionSummary } from "./complianceexecutionsummary";
 import { ComplianceSeverityEnum } from "./complianceseverityenum";
 import { ComplianceStatusEnum } from "./compliancestatusenum";
+
 
 
 // ComplianceItem
@@ -9,30 +10,30 @@ import { ComplianceStatusEnum } from "./compliancestatusenum";
  * Information about the compliance as defined by the resource type. For example, for a patch resource type, <code>Items</code> includes information about the PatchSeverity, Classification, and so on.
 **/
 export class ComplianceItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ComplianceType" })
+  @SpeakeasyMetadata({ data: "json, name=ComplianceType" })
   complianceType?: string;
 
-  @Metadata({ data: "json, name=Details" })
+  @SpeakeasyMetadata({ data: "json, name=Details" })
   details?: Map<string, string>;
 
-  @Metadata({ data: "json, name=ExecutionSummary" })
+  @SpeakeasyMetadata({ data: "json, name=ExecutionSummary" })
   executionSummary?: ComplianceExecutionSummary;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=ResourceId" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceId" })
   resourceId?: string;
 
-  @Metadata({ data: "json, name=ResourceType" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceType" })
   resourceType?: string;
 
-  @Metadata({ data: "json, name=Severity" })
+  @SpeakeasyMetadata({ data: "json, name=Severity" })
   severity?: ComplianceSeverityEnum;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: ComplianceStatusEnum;
 
-  @Metadata({ data: "json, name=Title" })
+  @SpeakeasyMetadata({ data: "json, name=Title" })
   title?: string;
 }

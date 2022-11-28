@@ -1,6 +1,7 @@
 
 
+
 export enum RootDeviceTypeEnum {
-    Ebs = "ebs"
-,    InstanceStore = "instance-store"
+    Ebs = "ebs",
+    InstanceStore = "instance-store"
 }

@@ -1,45 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FhirContact } from "./fhircontact";
 
 
+
 export class FhirPractitioner extends SpeakeasyBase {
-  @Metadata({ data: "json, name=address1" })
+  @SpeakeasyMetadata({ data: "json, name=address1" })
   address1?: string;
 
-  @Metadata({ data: "json, name=address2" })
+  @SpeakeasyMetadata({ data: "json, name=address2" })
   address2?: string;
 
-  @Metadata({ data: "json, name=address3" })
+  @SpeakeasyMetadata({ data: "json, name=address3" })
   address3?: string;
 
-  @Metadata({ data: "json, name=address4" })
+  @SpeakeasyMetadata({ data: "json, name=address4" })
   address4?: string;
 
-  @Metadata({ data: "json, name=allowInviteGp" })
+  @SpeakeasyMetadata({ data: "json, name=allowInviteGp" })
   allowInviteGp?: boolean;
 
-  @Metadata({ data: "json, name=contacts", elemType: shared.FhirContact })
+  @SpeakeasyMetadata({ data: "json, name=contacts", elemType: FhirContact })
   contacts?: FhirContact[];
 
-  @Metadata({ data: "json, name=gender" })
+  @SpeakeasyMetadata({ data: "json, name=gender" })
   gender?: string;
 
-  @Metadata({ data: "json, name=groupCode" })
+  @SpeakeasyMetadata({ data: "json, name=groupCode" })
   groupCode?: string;
 
-  @Metadata({ data: "json, name=identifier" })
+  @SpeakeasyMetadata({ data: "json, name=identifier" })
   identifier?: string;
 
-  @Metadata({ data: "json, name=inviteDate" })
+  @SpeakeasyMetadata({ data: "json, name=inviteDate" })
   inviteDate?: Date;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=postcode" })
+  @SpeakeasyMetadata({ data: "json, name=postcode" })
   postcode?: string;
 
-  @Metadata({ data: "json, name=role" })
+  @SpeakeasyMetadata({ data: "json, name=role" })
   role?: string;
 }

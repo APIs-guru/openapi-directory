@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetFilesDownloadQueryParams = /** @class */ (function (_super) {
     __extends(GetFilesDownloadQueryParams, _super);
     function GetFilesDownloadQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fileId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fileId" }),
         __metadata("design:type", String)
     ], GetFilesDownloadQueryParams.prototype, "fileId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=validSeconds" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=validSeconds" }),
         __metadata("design:type", Number)
     ], GetFilesDownloadQueryParams.prototype, "validSeconds", void 0);
     return GetFilesDownloadQueryParams;
@@ -45,7 +45,7 @@ var GetFilesDownloadRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetFilesDownloadQueryParams)
     ], GetFilesDownloadRequest.prototype, "queryParams", void 0);
     return GetFilesDownloadRequest;
@@ -57,15 +57,15 @@ var GetFilesDownloadResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetFilesDownloadResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetFilesDownloadResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetFilesDownloadResponse.prototype, "statusCode", void 0);
     return GetFilesDownloadResponse;

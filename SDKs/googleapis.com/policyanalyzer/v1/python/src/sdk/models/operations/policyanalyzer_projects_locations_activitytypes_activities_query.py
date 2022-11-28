@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class PolicyanalyzerProjectsLocationsActivityTypesActivitiesQueryPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,20 +29,20 @@ class PolicyanalyzerProjectsLocationsActivityTypesActivitiesQueryQueryParams:
 
 @dataclass
 class PolicyanalyzerProjectsLocationsActivityTypesActivitiesQuerySecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class PolicyanalyzerProjectsLocationsActivityTypesActivitiesQueryRequest:
-    path_params: PolicyanalyzerProjectsLocationsActivityTypesActivitiesQueryPathParams = field(default=None)
-    query_params: PolicyanalyzerProjectsLocationsActivityTypesActivitiesQueryQueryParams = field(default=None)
-    security: PolicyanalyzerProjectsLocationsActivityTypesActivitiesQuerySecurity = field(default=None)
+    path_params: PolicyanalyzerProjectsLocationsActivityTypesActivitiesQueryPathParams = field()
+    query_params: PolicyanalyzerProjectsLocationsActivityTypesActivitiesQueryQueryParams = field()
+    security: PolicyanalyzerProjectsLocationsActivityTypesActivitiesQuerySecurity = field()
     
 
 @dataclass
 class PolicyanalyzerProjectsLocationsActivityTypesActivitiesQueryResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_policyanalyzer_v1_query_activity_response: Optional[shared.GoogleCloudPolicyanalyzerV1QueryActivityResponse] = field(default=None)
-    status_code: int = field(default=None)
     

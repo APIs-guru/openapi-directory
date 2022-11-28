@@ -11,12 +11,12 @@ class GetSyncJobsQueryParams:
 
 @dataclass
 class GetSyncJobsRequest:
-    query_params: GetSyncJobsQueryParams = field(default=None)
+    query_params: GetSyncJobsQueryParams = field()
     
 
 @dataclass
 class GetSyncJobsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     sync_job_entities: Optional[List[shared.SyncJobEntity]] = field(default=None)
     

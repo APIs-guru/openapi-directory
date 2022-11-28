@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * SandboxItemResetLoginRequest defines the request schema for `/sandbox/item/reset_login`
 **/

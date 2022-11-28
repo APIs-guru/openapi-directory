@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class BetDelayed extends SpeakeasyBase {
-  @Metadata({ data: "json, name=delayPeriodSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=delayPeriodSeconds" })
   delayPeriodSeconds: number;
 
-  @Metadata({ data: "json, name=delayedBetId" })
+  @SpeakeasyMetadata({ data: "json, name=delayedBetId" })
   delayedBetId: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=number" })
+  @SpeakeasyMetadata({ data: "json, name=number" })
   number?: number;
 }

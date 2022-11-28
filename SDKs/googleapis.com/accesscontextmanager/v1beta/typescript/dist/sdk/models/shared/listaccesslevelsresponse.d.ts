@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AccessLevel } from "./accesslevel";
 /**
  * A response to `ListAccessLevelsRequest`.

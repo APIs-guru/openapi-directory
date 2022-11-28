@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { AttemptRead } from "./attemptread";
 import { JobRead } from "./jobread";
 var JobWithAttemptsRead = /** @class */ (function (_super) {
     __extends(JobWithAttemptsRead, _super);
@@ -31,11 +31,11 @@ var JobWithAttemptsRead = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=attempts", elemType: shared.AttemptRead }),
+        SpeakeasyMetadata({ data: "json, name=attempts", elemType: AttemptRead }),
         __metadata("design:type", Array)
     ], JobWithAttemptsRead.prototype, "attempts", void 0);
     __decorate([
-        Metadata({ data: "json, name=job" }),
+        SpeakeasyMetadata({ data: "json, name=job" }),
         __metadata("design:type", JobRead)
     ], JobWithAttemptsRead.prototype, "job", void 0);
     return JobWithAttemptsRead;

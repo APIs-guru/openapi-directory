@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum SetFindingStateRequestStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Active = "ACTIVE"
-,    Inactive = "INACTIVE"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Active = "ACTIVE",
+    Inactive = "INACTIVE"
 }
 
 
@@ -12,9 +13,9 @@ export enum SetFindingStateRequestStateEnum {
  * Request message for updating a finding's state.
 **/
 export class SetFindingStateRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: SetFindingStateRequestStateEnum;
 }

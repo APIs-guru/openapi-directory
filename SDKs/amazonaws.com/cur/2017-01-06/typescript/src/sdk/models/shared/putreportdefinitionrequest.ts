@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReportDefinition } from "./reportdefinition";
+
 
 
 // PutReportDefinitionRequest
@@ -7,6 +8,6 @@ import { ReportDefinition } from "./reportdefinition";
  * Creates a Cost and Usage Report.
 **/
 export class PutReportDefinitionRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ReportDefinition" })
+  @SpeakeasyMetadata({ data: "json, name=ReportDefinition" })
   reportDefinition: ReportDefinition;
 }

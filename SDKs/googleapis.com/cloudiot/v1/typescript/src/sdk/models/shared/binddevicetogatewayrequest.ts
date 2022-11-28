@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BindDeviceToGatewayRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request for `BindDeviceToGateway`.
 **/
 export class BindDeviceToGatewayRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deviceId" })
+  @SpeakeasyMetadata({ data: "json, name=deviceId" })
   deviceId?: string;
 
-  @Metadata({ data: "json, name=gatewayId" })
+  @SpeakeasyMetadata({ data: "json, name=gatewayId" })
   gatewayId?: string;
 }

@@ -27,6 +27,8 @@ const (
 	PutListingsSlugRequestBodyConditionUUIDEnumSevenc3f45de2ae04c818400Fdb6b1d74890                                                                  PutListingsSlugRequestBodyConditionUUIDEnum = "7c3f45de-2ae0-4c81-8400-fdb6b1d74890"
 )
 
+// PutListingsSlugRequestBodyCondition
+// Condition
 type PutListingsSlugRequestBodyCondition struct {
 	UUID PutListingsSlugRequestBodyConditionUUIDEnum `json:"uuid"`
 }
@@ -52,6 +54,8 @@ const (
 	PutListingsSlugRequestBodyPreorderInfoLeadTimeUnitEnumWeeks PutListingsSlugRequestBodyPreorderInfoLeadTimeUnitEnum = "weeks"
 )
 
+// PutListingsSlugRequestBodyPreorderInfo
+// Create or update a preorder listing. Requires opt-in. Please contact sales@reverb.com if you would like to activate this feature.
 type PutListingsSlugRequestBodyPreorderInfo struct {
 	LeadTime     *int64                                                 `json:"lead_time,omitempty"`
 	LeadTimeUnit PutListingsSlugRequestBodyPreorderInfoLeadTimeUnitEnum `json:"lead_time_unit"`

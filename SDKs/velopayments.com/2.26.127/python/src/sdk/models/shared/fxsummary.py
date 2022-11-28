@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import paymentauditcurrency_enum
-from . import paymentauditcurrency_enum
+from sdk import utils
+from . import *
 
 class FxSummaryFundingStatusEnum(str, Enum):
     FUNDED = "FUNDED"
@@ -22,14 +23,14 @@ class FxSummaryStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class FxSummary:
-    creation_date_time: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'creationDateTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    funding_status: FxSummaryFundingStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fundingStatus' }})
-    inverted_rate: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'invertedRate' }})
-    payment_currency: Optional[paymentauditcurrency_enum.PaymentAuditCurrencyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'paymentCurrency' }})
-    quote_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'quoteId' }})
-    rate: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rate' }})
-    source_currency: Optional[paymentauditcurrency_enum.PaymentAuditCurrencyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sourceCurrency' }})
-    status: FxSummaryStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    total_cost: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'totalCost' }})
-    total_payment_amount: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'totalPaymentAmount' }})
+    creation_date_time: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('creationDateTime'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    funding_status: FxSummaryFundingStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('fundingStatus') }})
+    inverted_rate: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('invertedRate') }})
+    quote_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('quoteId') }})
+    rate: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('rate') }})
+    status: FxSummaryStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    total_cost: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('totalCost') }})
+    total_payment_amount: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('totalPaymentAmount') }})
+    payment_currency: Optional[PaymentAuditCurrencyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('paymentCurrency') }})
+    source_currency: Optional[PaymentAuditCurrencyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sourceCurrency') }})
     

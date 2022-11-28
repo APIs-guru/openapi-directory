@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WorldExportJobErrorCodeEnum } from "./worldexportjoberrorcodeenum";
 import { OutputLocation } from "./outputlocation";
 import { WorldExportJobStatusEnum } from "./worldexportjobstatusenum";
 
 
+
 export class CreateWorldExportJobResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=clientRequestToken" })
+  @SpeakeasyMetadata({ data: "json, name=clientRequestToken" })
   clientRequestToken?: string;
 
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=failureCode" })
+  @SpeakeasyMetadata({ data: "json, name=failureCode" })
   failureCode?: WorldExportJobErrorCodeEnum;
 
-  @Metadata({ data: "json, name=iamRole" })
+  @SpeakeasyMetadata({ data: "json, name=iamRole" })
   iamRole?: string;
 
-  @Metadata({ data: "json, name=outputLocation" })
+  @SpeakeasyMetadata({ data: "json, name=outputLocation" })
   outputLocation?: OutputLocation;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: WorldExportJobStatusEnum;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 }

@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class VaultMattersSavedQueriesGetPathParams:
-    matter_id: str = field(default=None, metadata={'path_param': { 'field_name': 'matterId', 'style': 'simple', 'explode': False }})
-    saved_query_id: str = field(default=None, metadata={'path_param': { 'field_name': 'savedQueryId', 'style': 'simple', 'explode': False }})
+    matter_id: str = field(metadata={'path_param': { 'field_name': 'matterId', 'style': 'simple', 'explode': False }})
+    saved_query_id: str = field(metadata={'path_param': { 'field_name': 'savedQueryId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,14 +27,14 @@ class VaultMattersSavedQueriesGetQueryParams:
 
 @dataclass
 class VaultMattersSavedQueriesGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class VaultMattersSavedQueriesGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -44,14 +45,14 @@ class VaultMattersSavedQueriesGetSecurity:
 
 @dataclass
 class VaultMattersSavedQueriesGetRequest:
-    path_params: VaultMattersSavedQueriesGetPathParams = field(default=None)
-    query_params: VaultMattersSavedQueriesGetQueryParams = field(default=None)
-    security: VaultMattersSavedQueriesGetSecurity = field(default=None)
+    path_params: VaultMattersSavedQueriesGetPathParams = field()
+    query_params: VaultMattersSavedQueriesGetQueryParams = field()
+    security: VaultMattersSavedQueriesGetSecurity = field()
     
 
 @dataclass
 class VaultMattersSavedQueriesGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     saved_query: Optional[shared.SavedQuery] = field(default=None)
-    status_code: int = field(default=None)
     

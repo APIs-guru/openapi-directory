@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetMaintenanceWindowExecutionTaskInvocationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=InvocationId" })
+  @SpeakeasyMetadata({ data: "json, name=InvocationId" })
   invocationId: string;
 
-  @Metadata({ data: "json, name=TaskId" })
+  @SpeakeasyMetadata({ data: "json, name=TaskId" })
   taskId: string;
 
-  @Metadata({ data: "json, name=WindowExecutionId" })
+  @SpeakeasyMetadata({ data: "json, name=WindowExecutionId" })
   windowExecutionId: string;
 }

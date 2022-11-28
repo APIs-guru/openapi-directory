@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CloudWatchLoggingOptionUpdate } from "./cloudwatchloggingoptionupdate";
 import { InputUpdate } from "./inputupdate";
 import { OutputUpdate } from "./outputupdate";
 import { ReferenceDataSourceUpdate } from "./referencedatasourceupdate";
+
 
 
 // ApplicationUpdate
@@ -11,18 +11,18 @@ import { ReferenceDataSourceUpdate } from "./referencedatasourceupdate";
  * Describes updates to apply to an existing Amazon Kinesis Analytics application.
 **/
 export class ApplicationUpdate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApplicationCodeUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationCodeUpdate" })
   applicationCodeUpdate?: string;
 
-  @Metadata({ data: "json, name=CloudWatchLoggingOptionUpdates", elemType: shared.CloudWatchLoggingOptionUpdate })
+  @SpeakeasyMetadata({ data: "json, name=CloudWatchLoggingOptionUpdates", elemType: CloudWatchLoggingOptionUpdate })
   cloudWatchLoggingOptionUpdates?: CloudWatchLoggingOptionUpdate[];
 
-  @Metadata({ data: "json, name=InputUpdates", elemType: shared.InputUpdate })
+  @SpeakeasyMetadata({ data: "json, name=InputUpdates", elemType: InputUpdate })
   inputUpdates?: InputUpdate[];
 
-  @Metadata({ data: "json, name=OutputUpdates", elemType: shared.OutputUpdate })
+  @SpeakeasyMetadata({ data: "json, name=OutputUpdates", elemType: OutputUpdate })
   outputUpdates?: OutputUpdate[];
 
-  @Metadata({ data: "json, name=ReferenceDataSourceUpdates", elemType: shared.ReferenceDataSourceUpdate })
+  @SpeakeasyMetadata({ data: "json, name=ReferenceDataSourceUpdates", elemType: ReferenceDataSourceUpdate })
   referenceDataSourceUpdates?: ReferenceDataSourceUpdate[];
 }

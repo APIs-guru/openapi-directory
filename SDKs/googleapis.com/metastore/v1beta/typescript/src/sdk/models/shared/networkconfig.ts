@@ -1,6 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ConsumerInput } from "./consumer";
 import { Consumer } from "./consumer";
+
+
+
+// NetworkConfigInput
+/** 
+ * Network configuration for the Dataproc Metastore service.
+**/
+export class NetworkConfigInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=consumers", elemType: ConsumerInput })
+  consumers?: ConsumerInput[];
+}
 
 
 // NetworkConfig
@@ -8,6 +19,6 @@ import { Consumer } from "./consumer";
  * Network configuration for the Dataproc Metastore service.
 **/
 export class NetworkConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=consumers", elemType: shared.Consumer })
+  @SpeakeasyMetadata({ data: "json, name=consumers", elemType: Consumer })
   consumers?: Consumer[];
 }

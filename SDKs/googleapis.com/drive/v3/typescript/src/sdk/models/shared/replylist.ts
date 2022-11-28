@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Reply } from "./reply";
+
 
 
 // ReplyList
@@ -8,12 +8,12 @@ import { Reply } from "./reply";
  * A list of replies to a comment on a file.
 **/
 export class ReplyList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=replies", elemType: shared.Reply })
+  @SpeakeasyMetadata({ data: "json, name=replies", elemType: Reply })
   replies?: Reply[];
 }

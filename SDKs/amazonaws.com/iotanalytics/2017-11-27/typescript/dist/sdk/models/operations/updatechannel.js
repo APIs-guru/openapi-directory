@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var UpdateChannelPathParams = /** @class */ (function (_super) {
     __extends(UpdateChannelPathParams, _super);
@@ -30,7 +30,7 @@ var UpdateChannelPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=channelName" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=channelName" }),
         __metadata("design:type", String)
     ], UpdateChannelPathParams.prototype, "channelName", void 0);
     return UpdateChannelPathParams;
@@ -42,31 +42,31 @@ var UpdateChannelHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], UpdateChannelHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], UpdateChannelHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], UpdateChannelHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], UpdateChannelHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], UpdateChannelHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], UpdateChannelHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], UpdateChannelHeaders.prototype, "xAmzSignedHeaders", void 0);
     return UpdateChannelHeaders;
@@ -82,11 +82,11 @@ var UpdateChannelRequestBodyChannelStorage = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=customerManagedS3" }),
+        SpeakeasyMetadata({ data: "json, name=customerManagedS3" }),
         __metadata("design:type", shared.CustomerManagedChannelS3Storage)
     ], UpdateChannelRequestBodyChannelStorage.prototype, "customerManagedS3", void 0);
     __decorate([
-        Metadata({ data: "json, name=serviceManagedS3" }),
+        SpeakeasyMetadata({ data: "json, name=serviceManagedS3" }),
         __metadata("design:type", Map)
     ], UpdateChannelRequestBodyChannelStorage.prototype, "serviceManagedS3", void 0);
     return UpdateChannelRequestBodyChannelStorage;
@@ -102,11 +102,11 @@ var UpdateChannelRequestBodyRetentionPeriod = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=numberOfDays" }),
+        SpeakeasyMetadata({ data: "json, name=numberOfDays" }),
         __metadata("design:type", Number)
     ], UpdateChannelRequestBodyRetentionPeriod.prototype, "numberOfDays", void 0);
     __decorate([
-        Metadata({ data: "json, name=unlimited" }),
+        SpeakeasyMetadata({ data: "json, name=unlimited" }),
         __metadata("design:type", Boolean)
     ], UpdateChannelRequestBodyRetentionPeriod.prototype, "unlimited", void 0);
     return UpdateChannelRequestBodyRetentionPeriod;
@@ -118,11 +118,11 @@ var UpdateChannelRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=channelStorage" }),
+        SpeakeasyMetadata({ data: "json, name=channelStorage" }),
         __metadata("design:type", UpdateChannelRequestBodyChannelStorage)
     ], UpdateChannelRequestBody.prototype, "channelStorage", void 0);
     __decorate([
-        Metadata({ data: "json, name=retentionPeriod" }),
+        SpeakeasyMetadata({ data: "json, name=retentionPeriod" }),
         __metadata("design:type", UpdateChannelRequestBodyRetentionPeriod)
     ], UpdateChannelRequestBody.prototype, "retentionPeriod", void 0);
     return UpdateChannelRequestBody;
@@ -134,15 +134,15 @@ var UpdateChannelRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateChannelPathParams)
     ], UpdateChannelRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateChannelHeaders)
     ], UpdateChannelRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", UpdateChannelRequestBody)
     ], UpdateChannelRequest.prototype, "request", void 0);
     return UpdateChannelRequest;
@@ -154,31 +154,31 @@ var UpdateChannelResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UpdateChannelResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateChannelResponse.prototype, "internalFailureException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateChannelResponse.prototype, "invalidRequestException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateChannelResponse.prototype, "resourceNotFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateChannelResponse.prototype, "serviceUnavailableException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UpdateChannelResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateChannelResponse.prototype, "throttlingException", void 0);
     return UpdateChannelResponse;

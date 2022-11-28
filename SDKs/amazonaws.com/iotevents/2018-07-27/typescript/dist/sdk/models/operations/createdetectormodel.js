@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CreateDetectorModelHeaders = /** @class */ (function (_super) {
     __extends(CreateDetectorModelHeaders, _super);
@@ -30,31 +30,31 @@ var CreateDetectorModelHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], CreateDetectorModelHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], CreateDetectorModelHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], CreateDetectorModelHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], CreateDetectorModelHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], CreateDetectorModelHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], CreateDetectorModelHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], CreateDetectorModelHeaders.prototype, "xAmzSignedHeaders", void 0);
     return CreateDetectorModelHeaders;
@@ -70,11 +70,11 @@ var CreateDetectorModelRequestBodyDetectorModelDefinition = /** @class */ (funct
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=initialStateName" }),
+        SpeakeasyMetadata({ data: "json, name=initialStateName" }),
         __metadata("design:type", String)
     ], CreateDetectorModelRequestBodyDetectorModelDefinition.prototype, "initialStateName", void 0);
     __decorate([
-        Metadata({ data: "json, name=states", elemType: shared.State }),
+        SpeakeasyMetadata({ data: "json, name=states", elemType: shared.State }),
         __metadata("design:type", Array)
     ], CreateDetectorModelRequestBodyDetectorModelDefinition.prototype, "states", void 0);
     return CreateDetectorModelRequestBodyDetectorModelDefinition;
@@ -91,31 +91,31 @@ var CreateDetectorModelRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=detectorModelDefinition" }),
+        SpeakeasyMetadata({ data: "json, name=detectorModelDefinition" }),
         __metadata("design:type", CreateDetectorModelRequestBodyDetectorModelDefinition)
     ], CreateDetectorModelRequestBody.prototype, "detectorModelDefinition", void 0);
     __decorate([
-        Metadata({ data: "json, name=detectorModelDescription" }),
+        SpeakeasyMetadata({ data: "json, name=detectorModelDescription" }),
         __metadata("design:type", String)
     ], CreateDetectorModelRequestBody.prototype, "detectorModelDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=detectorModelName" }),
+        SpeakeasyMetadata({ data: "json, name=detectorModelName" }),
         __metadata("design:type", String)
     ], CreateDetectorModelRequestBody.prototype, "detectorModelName", void 0);
     __decorate([
-        Metadata({ data: "json, name=evaluationMethod" }),
+        SpeakeasyMetadata({ data: "json, name=evaluationMethod" }),
         __metadata("design:type", String)
     ], CreateDetectorModelRequestBody.prototype, "evaluationMethod", void 0);
     __decorate([
-        Metadata({ data: "json, name=key" }),
+        SpeakeasyMetadata({ data: "json, name=key" }),
         __metadata("design:type", String)
     ], CreateDetectorModelRequestBody.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "json, name=roleArn" }),
+        SpeakeasyMetadata({ data: "json, name=roleArn" }),
         __metadata("design:type", String)
     ], CreateDetectorModelRequestBody.prototype, "roleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags", elemType: shared.Tag }),
+        SpeakeasyMetadata({ data: "json, name=tags", elemType: shared.Tag }),
         __metadata("design:type", Array)
     ], CreateDetectorModelRequestBody.prototype, "tags", void 0);
     return CreateDetectorModelRequestBody;
@@ -127,11 +127,11 @@ var CreateDetectorModelRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateDetectorModelHeaders)
     ], CreateDetectorModelRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", CreateDetectorModelRequestBody)
     ], CreateDetectorModelRequest.prototype, "request", void 0);
     return CreateDetectorModelRequest;
@@ -143,43 +143,43 @@ var CreateDetectorModelResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CreateDetectorModelResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.CreateDetectorModelResponse)
     ], CreateDetectorModelResponse.prototype, "createDetectorModelResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateDetectorModelResponse.prototype, "internalFailureException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateDetectorModelResponse.prototype, "invalidRequestException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateDetectorModelResponse.prototype, "limitExceededException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateDetectorModelResponse.prototype, "resourceAlreadyExistsException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateDetectorModelResponse.prototype, "resourceInUseException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateDetectorModelResponse.prototype, "serviceUnavailableException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CreateDetectorModelResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateDetectorModelResponse.prototype, "throttlingException", void 0);
     return CreateDetectorModelResponse;

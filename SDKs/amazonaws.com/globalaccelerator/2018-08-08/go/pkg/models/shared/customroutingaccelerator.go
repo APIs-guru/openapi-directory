@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// CustomRoutingAccelerator
+// Attributes of a custom routing accelerator.
 type CustomRoutingAccelerator struct {
 	AcceleratorArn   *string                             `json:"AcceleratorArn,omitempty"`
 	CreatedTime      *time.Time                          `json:"CreatedTime,omitempty"`

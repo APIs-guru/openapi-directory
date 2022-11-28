@@ -17,11 +17,6 @@ type MerchantCancellationRequestBody struct {
 	ItineraryID    *int64                                       `json:"itineraryId,omitempty"`
 }
 
-type MerchantCancellationRequest struct {
-	Headers MerchantCancellationHeaders
-	Request *MerchantCancellationRequestBody `request:"mediaType=application/json"`
-}
-
 type MerchantCancellation200ApplicationJSONDataCancelItems struct {
 	CancellationResponseDescription *string `json:"cancellationResponseDescription,omitempty"`
 	CancellationResponseStatusCode  *string `json:"cancellationResponseStatusCode,omitempty"`
@@ -72,6 +67,11 @@ type MerchantCancellation400ApplicationJSON struct {
 	Success          *bool                                       `json:"success,omitempty"`
 	TotalCount       *int64                                      `json:"totalCount,omitempty"`
 	Vmid             *string                                     `json:"vmid,omitempty"`
+}
+
+type MerchantCancellationRequest struct {
+	Headers MerchantCancellationHeaders
+	Request *MerchantCancellationRequestBody `request:"mediaType=application/json"`
 }
 
 type MerchantCancellationResponse struct {

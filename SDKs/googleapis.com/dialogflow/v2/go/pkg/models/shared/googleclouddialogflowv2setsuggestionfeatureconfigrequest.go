@@ -9,6 +9,8 @@ const (
 	GoogleCloudDialogflowV2SetSuggestionFeatureConfigRequestParticipantRoleEnumEndUser         GoogleCloudDialogflowV2SetSuggestionFeatureConfigRequestParticipantRoleEnum = "END_USER"
 )
 
+// GoogleCloudDialogflowV2SetSuggestionFeatureConfigRequest
+// The request message for ConversationProfiles.SetSuggestionFeature.
 type GoogleCloudDialogflowV2SetSuggestionFeatureConfigRequest struct {
 	ParticipantRole         *GoogleCloudDialogflowV2SetSuggestionFeatureConfigRequestParticipantRoleEnum `json:"participantRole,omitempty"`
 	SuggestionFeatureConfig *GoogleCloudDialogflowV2HumanAgentAssistantConfigSuggestionFeatureConfig     `json:"suggestionFeatureConfig,omitempty"`

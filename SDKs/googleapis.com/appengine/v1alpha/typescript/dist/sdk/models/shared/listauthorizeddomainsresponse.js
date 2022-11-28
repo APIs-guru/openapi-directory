@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { AuthorizedDomain } from "./authorizeddomain";
 // ListAuthorizedDomainsResponse
 /**
  * Response message for AuthorizedDomains.ListAuthorizedDomains.
@@ -34,11 +34,11 @@ var ListAuthorizedDomainsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=domains", elemType: shared.AuthorizedDomain }),
+        SpeakeasyMetadata({ data: "json, name=domains", elemType: AuthorizedDomain }),
         __metadata("design:type", Array)
     ], ListAuthorizedDomainsResponse.prototype, "domains", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextPageToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextPageToken" }),
         __metadata("design:type", String)
     ], ListAuthorizedDomainsResponse.prototype, "nextPageToken", void 0);
     return ListAuthorizedDomainsResponse;

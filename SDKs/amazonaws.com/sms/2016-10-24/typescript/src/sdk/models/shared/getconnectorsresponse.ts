@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Connector } from "./connector";
 
 
+
 export class GetConnectorsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=connectorList", elemType: shared.Connector })
+  @SpeakeasyMetadata({ data: "json, name=connectorList", elemType: Connector })
   connectorList?: Connector[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

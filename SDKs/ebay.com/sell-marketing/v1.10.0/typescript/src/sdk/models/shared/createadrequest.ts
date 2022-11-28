@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CreateAdRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * This type defines the fields for the create ad request.
 **/
 export class CreateAdRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bidPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=bidPercentage" })
   bidPercentage?: string;
 
-  @Metadata({ data: "json, name=listingId" })
+  @SpeakeasyMetadata({ data: "json, name=listingId" })
   listingId?: string;
 }

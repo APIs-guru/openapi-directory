@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class IamPoliciesListPoliciesPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class IamPoliciesListPoliciesQueryParams:
 
 @dataclass
 class IamPoliciesListPoliciesSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class IamPoliciesListPoliciesRequest:
-    path_params: IamPoliciesListPoliciesPathParams = field(default=None)
-    query_params: IamPoliciesListPoliciesQueryParams = field(default=None)
-    security: IamPoliciesListPoliciesSecurity = field(default=None)
+    path_params: IamPoliciesListPoliciesPathParams = field()
+    query_params: IamPoliciesListPoliciesQueryParams = field()
+    security: IamPoliciesListPoliciesSecurity = field()
     
 
 @dataclass
 class IamPoliciesListPoliciesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_iam_v2beta_list_policies_response: Optional[shared.GoogleIamV2betaListPoliciesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

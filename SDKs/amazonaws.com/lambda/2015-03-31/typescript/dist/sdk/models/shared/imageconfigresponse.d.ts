@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ImageConfigError } from "./imageconfigerror";
 import { ImageConfig } from "./imageconfig";
 /**

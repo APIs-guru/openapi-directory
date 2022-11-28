@@ -1,39 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VoteCount } from "./votecount";
 import { Organization } from "./organization";
 import { Link } from "./link";
 import { PersonVote } from "./personvote";
 
 
+
 export class VoteEvent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=counts", elemType: shared.VoteCount })
+  @SpeakeasyMetadata({ data: "json, name=counts", elemType: VoteCount })
   counts: VoteCount[];
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=identifier" })
+  @SpeakeasyMetadata({ data: "json, name=identifier" })
   identifier: string;
 
-  @Metadata({ data: "json, name=motion_classification" })
+  @SpeakeasyMetadata({ data: "json, name=motion_classification" })
   motionClassification?: string[];
 
-  @Metadata({ data: "json, name=motion_text" })
+  @SpeakeasyMetadata({ data: "json, name=motion_text" })
   motionText: string;
 
-  @Metadata({ data: "json, name=organization" })
+  @SpeakeasyMetadata({ data: "json, name=organization" })
   organization: Organization;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result: string;
 
-  @Metadata({ data: "json, name=sources", elemType: shared.Link })
+  @SpeakeasyMetadata({ data: "json, name=sources", elemType: Link })
   sources: Link[];
 
-  @Metadata({ data: "json, name=start_date" })
+  @SpeakeasyMetadata({ data: "json, name=start_date" })
   startDate: string;
 
-  @Metadata({ data: "json, name=votes", elemType: shared.PersonVote })
+  @SpeakeasyMetadata({ data: "json, name=votes", elemType: PersonVote })
   votes: PersonVote[];
 }

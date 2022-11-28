@@ -12,6 +12,8 @@ const (
 	PrismaConfigPrismaTypeEnumPrismaTypeFee         PrismaConfigPrismaTypeEnum = "PRISMA_TYPE_FEE"
 )
 
+// PrismaConfig
+// Settings specific to the Mediaocean Prisma tool.
 type PrismaConfig struct {
 	PrismaCpeCode *PrismaCpeCode              `json:"prismaCpeCode,omitempty"`
 	PrismaType    *PrismaConfigPrismaTypeEnum `json:"prismaType,omitempty"`

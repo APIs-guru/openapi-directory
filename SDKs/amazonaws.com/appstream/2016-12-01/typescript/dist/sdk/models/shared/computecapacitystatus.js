@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ComputeCapacityStatus
 /**
  * Describes the capacity status for a fleet.
@@ -33,19 +33,19 @@ var ComputeCapacityStatus = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Available" }),
+        SpeakeasyMetadata({ data: "json, name=Available" }),
         __metadata("design:type", Number)
     ], ComputeCapacityStatus.prototype, "available", void 0);
     __decorate([
-        Metadata({ data: "json, name=Desired" }),
+        SpeakeasyMetadata({ data: "json, name=Desired" }),
         __metadata("design:type", Number)
     ], ComputeCapacityStatus.prototype, "desired", void 0);
     __decorate([
-        Metadata({ data: "json, name=InUse" }),
+        SpeakeasyMetadata({ data: "json, name=InUse" }),
         __metadata("design:type", Number)
     ], ComputeCapacityStatus.prototype, "inUse", void 0);
     __decorate([
-        Metadata({ data: "json, name=Running" }),
+        SpeakeasyMetadata({ data: "json, name=Running" }),
         __metadata("design:type", Number)
     ], ComputeCapacityStatus.prototype, "running", void 0);
     return ComputeCapacityStatus;

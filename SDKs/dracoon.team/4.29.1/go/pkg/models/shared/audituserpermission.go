@@ -1,5 +1,7 @@
 package shared
 
+// AuditUserPermission
+// Audit user permissions report
 type AuditUserPermission struct {
 	Permissions   NodePermissions `json:"permissions"`
 	UserFirstName string          `json:"userFirstName"`

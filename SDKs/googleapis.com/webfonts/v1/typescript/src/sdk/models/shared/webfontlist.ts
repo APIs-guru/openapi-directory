@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Webfont } from "./webfont";
+
 
 
 // WebfontList
@@ -8,9 +8,9 @@ import { Webfont } from "./webfont";
  * Response containing the list of fonts currently served by the Google Fonts API.
 **/
 export class WebfontList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.Webfont })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: Webfont })
   items?: Webfont[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 }

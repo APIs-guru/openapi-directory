@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { TrustedAdvisorCheckRefreshStatus } from "./trustedadvisorcheckrefreshstatus";
 /**
  * The current refresh status of a Trusted Advisor check.

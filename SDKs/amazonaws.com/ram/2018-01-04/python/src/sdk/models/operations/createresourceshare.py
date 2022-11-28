@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,24 +22,25 @@ class CreateResourceShareHeaders:
 @dataclass_json
 @dataclass
 class CreateResourceShareRequestBody:
-    allow_external_principals: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'allowExternalPrincipals' }})
-    client_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clientToken' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    permission_arns: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'permissionArns' }})
-    principals: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'principals' }})
-    resource_arns: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceArns' }})
-    tags: Optional[List[shared.Tag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    allow_external_principals: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('allowExternalPrincipals') }})
+    client_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clientToken') }})
+    permission_arns: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('permissionArns') }})
+    principals: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('principals') }})
+    resource_arns: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceArns') }})
+    tags: Optional[List[shared.Tag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     
 
 @dataclass
 class CreateResourceShareRequest:
-    headers: CreateResourceShareHeaders = field(default=None)
-    request: CreateResourceShareRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateResourceShareHeaders = field()
+    request: CreateResourceShareRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateResourceShareResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     create_resource_share_response: Optional[shared.CreateResourceShareResponse] = field(default=None)
     idempotent_parameter_mismatch_exception: Optional[Any] = field(default=None)
     invalid_client_token_exception: Optional[Any] = field(default=None)
@@ -46,7 +51,6 @@ class CreateResourceShareResponse:
     resource_share_limit_exceeded_exception: Optional[Any] = field(default=None)
     server_internal_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     tag_policy_violation_exception: Optional[Any] = field(default=None)
     unknown_resource_exception: Optional[Any] = field(default=None)
     

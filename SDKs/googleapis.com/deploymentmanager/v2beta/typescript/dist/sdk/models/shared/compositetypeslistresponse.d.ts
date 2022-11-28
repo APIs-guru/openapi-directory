@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CompositeType } from "./compositetype";
 /**
  * A response that returns all Composite Types supported by Deployment Manager

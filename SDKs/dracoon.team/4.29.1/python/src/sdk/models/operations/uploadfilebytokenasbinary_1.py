@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class UploadFileByTokenAsBinary1PathParams:
-    token: str = field(default=None, metadata={'path_param': { 'field_name': 'token', 'style': 'simple', 'explode': False }})
+    token: str = field(metadata={'path_param': { 'field_name': 'token', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,8 +15,8 @@ class UploadFileByTokenAsBinary1Headers:
 
 @dataclass
 class UploadFileByTokenAsBinary1RequestBodyFile:
-    content: bytes = field(default=None, metadata={'multipart_form': { 'content': True }})
-    file: str = field(default=None, metadata={'multipart_form': { 'field_name': 'file' }})
+    content: bytes = field(metadata={'multipart_form': { 'content': True }})
+    file: str = field(metadata={'multipart_form': { 'field_name': 'file' }})
     
 
 @dataclass
@@ -26,16 +26,16 @@ class UploadFileByTokenAsBinary1RequestBody:
 
 @dataclass
 class UploadFileByTokenAsBinary1Request:
-    path_params: UploadFileByTokenAsBinary1PathParams = field(default=None)
-    headers: UploadFileByTokenAsBinary1Headers = field(default=None)
-    request: UploadFileByTokenAsBinary1RequestBody = field(default=None, metadata={'request': { 'media_type': 'multipart/form-data' }})
+    headers: UploadFileByTokenAsBinary1Headers = field()
+    path_params: UploadFileByTokenAsBinary1PathParams = field()
+    request: UploadFileByTokenAsBinary1RequestBody = field(metadata={'request': { 'media_type': 'multipart/form-data' }})
     
 
 @dataclass
 class UploadFileByTokenAsBinary1Response:
+    content_type: str = field()
+    status_code: int = field()
     chunk_upload_response: Optional[shared.ChunkUploadResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     upload_file_by_token_as_binary_1_400_application_json_one_of: Optional[Any] = field(default=None)
     upload_file_by_token_as_binary_1_401_application_json_one_of: Optional[Any] = field(default=None)
     upload_file_by_token_as_binary_1_403_application_json_one_of: Optional[Any] = field(default=None)

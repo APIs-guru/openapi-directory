@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ArchivedObjectVersionForApiContract } from "./archivedobjectversionforapicontract";
 import { UserForApiContract } from "./userforapicontract";
 import { EntryForApiContract } from "./entryforapicontract";
 
+
 export enum ActivityEntryForApiContractEditEventEnum {
-    Created = "Created"
-,    Updated = "Updated"
-,    Deleted = "Deleted"
-,    Restored = "Restored"
+    Created = "Created",
+    Updated = "Updated",
+    Deleted = "Deleted",
+    Restored = "Restored"
 }
 
 
 export class ActivityEntryForApiContract extends SpeakeasyBase {
-  @Metadata({ data: "json, name=archivedVersion" })
+  @SpeakeasyMetadata({ data: "json, name=archivedVersion" })
   archivedVersion?: ArchivedObjectVersionForApiContract;
 
-  @Metadata({ data: "json, name=author" })
+  @SpeakeasyMetadata({ data: "json, name=author" })
   author?: UserForApiContract;
 
-  @Metadata({ data: "json, name=createDate" })
+  @SpeakeasyMetadata({ data: "json, name=createDate" })
   createDate?: Date;
 
-  @Metadata({ data: "json, name=editEvent" })
+  @SpeakeasyMetadata({ data: "json, name=editEvent" })
   editEvent?: ActivityEntryForApiContractEditEventEnum;
 
-  @Metadata({ data: "json, name=entry" })
+  @SpeakeasyMetadata({ data: "json, name=entry" })
   entry?: EntryForApiContract;
 }

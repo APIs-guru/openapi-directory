@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // VirtualInterfaceTestHistory
@@ -6,27 +7,27 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about the virtual interface failover test.
 **/
 export class VirtualInterfaceTestHistory extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bgpPeers" })
+  @SpeakeasyMetadata({ data: "json, name=bgpPeers" })
   bgpPeers?: string[];
 
-  @Metadata({ data: "json, name=endTime" })
+  @SpeakeasyMetadata({ data: "json, name=endTime" })
   endTime?: Date;
 
-  @Metadata({ data: "json, name=ownerAccount" })
+  @SpeakeasyMetadata({ data: "json, name=ownerAccount" })
   ownerAccount?: string;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: Date;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 
-  @Metadata({ data: "json, name=testDurationInMinutes" })
+  @SpeakeasyMetadata({ data: "json, name=testDurationInMinutes" })
   testDurationInMinutes?: number;
 
-  @Metadata({ data: "json, name=testId" })
+  @SpeakeasyMetadata({ data: "json, name=testId" })
   testId?: string;
 
-  @Metadata({ data: "json, name=virtualInterfaceId" })
+  @SpeakeasyMetadata({ data: "json, name=virtualInterfaceId" })
   virtualInterfaceId?: string;
 }

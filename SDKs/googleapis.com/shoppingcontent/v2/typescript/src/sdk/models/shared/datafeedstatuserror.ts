@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DatafeedStatusExample } from "./datafeedstatusexample";
+
 
 
 // DatafeedStatusError
@@ -8,15 +8,15 @@ import { DatafeedStatusExample } from "./datafeedstatusexample";
  * An error occurring in the feed, like "invalid price".
 **/
 export class DatafeedStatusError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: string;
 
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count?: string;
 
-  @Metadata({ data: "json, name=examples", elemType: shared.DatafeedStatusExample })
+  @SpeakeasyMetadata({ data: "json, name=examples", elemType: DatafeedStatusExample })
   examples?: DatafeedStatusExample[];
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }

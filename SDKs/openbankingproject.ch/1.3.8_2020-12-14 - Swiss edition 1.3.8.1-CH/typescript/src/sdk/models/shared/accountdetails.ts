@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HrefType } from "./hreftype";
 import { Balance } from "./balance";
 import { AccountStatusEnum } from "./accountstatusenum";
 
+
 export enum AccountDetailsUsageEnum {
-    Priv = "PRIV"
-,    Orga = "ORGA"
+    Priv = "PRIV",
+    Orga = "ORGA"
 }
 
 
@@ -22,54 +22,54 @@ export enum AccountDetailsUsageEnum {
  * 
 **/
 export class AccountDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=_links", elemType: shared.HrefType })
+  @SpeakeasyMetadata({ data: "json, name=_links", elemType: HrefType })
   links?: Map<string, HrefType>;
 
-  @Metadata({ data: "json, name=balances", elemType: shared.Balance })
+  @SpeakeasyMetadata({ data: "json, name=balances", elemType: Balance })
   balances?: Balance[];
 
-  @Metadata({ data: "json, name=bban" })
+  @SpeakeasyMetadata({ data: "json, name=bban" })
   bban?: string;
 
-  @Metadata({ data: "json, name=bic" })
+  @SpeakeasyMetadata({ data: "json, name=bic" })
   bic?: string;
 
-  @Metadata({ data: "json, name=cashAccountType" })
+  @SpeakeasyMetadata({ data: "json, name=cashAccountType" })
   cashAccountType?: string;
 
-  @Metadata({ data: "json, name=currency" })
+  @SpeakeasyMetadata({ data: "json, name=currency" })
   currency: string;
 
-  @Metadata({ data: "json, name=details" })
+  @SpeakeasyMetadata({ data: "json, name=details" })
   details?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=iban" })
+  @SpeakeasyMetadata({ data: "json, name=iban" })
   iban?: string;
 
-  @Metadata({ data: "json, name=linkedAccounts" })
+  @SpeakeasyMetadata({ data: "json, name=linkedAccounts" })
   linkedAccounts?: string;
 
-  @Metadata({ data: "json, name=msisdn" })
+  @SpeakeasyMetadata({ data: "json, name=msisdn" })
   msisdn?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=ownerName" })
+  @SpeakeasyMetadata({ data: "json, name=ownerName" })
   ownerName?: string;
 
-  @Metadata({ data: "json, name=product" })
+  @SpeakeasyMetadata({ data: "json, name=product" })
   product?: string;
 
-  @Metadata({ data: "json, name=resourceId" })
+  @SpeakeasyMetadata({ data: "json, name=resourceId" })
   resourceId?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: AccountStatusEnum;
 
-  @Metadata({ data: "json, name=usage" })
+  @SpeakeasyMetadata({ data: "json, name=usage" })
   usage?: AccountDetailsUsageEnum;
 }

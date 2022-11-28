@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeleteBehaviorEnum } from "./deletebehaviorenum";
 import { UpdateBehaviorEnum } from "./updatebehaviorenum";
+
 
 
 // SchemaChangePolicy
@@ -8,9 +9,9 @@ import { UpdateBehaviorEnum } from "./updatebehaviorenum";
  * A policy that specifies update and deletion behaviors for the crawler.
 **/
 export class SchemaChangePolicy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DeleteBehavior" })
+  @SpeakeasyMetadata({ data: "json, name=DeleteBehavior" })
   deleteBehavior?: DeleteBehaviorEnum;
 
-  @Metadata({ data: "json, name=UpdateBehavior" })
+  @SpeakeasyMetadata({ data: "json, name=UpdateBehavior" })
   updateBehavior?: UpdateBehaviorEnum;
 }

@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum AppPkgInfoModificationsOperationStateEnum {
-    Disabled = "DISABLED"
-,    Enabled = "ENABLED"
+    Disabled = "DISABLED",
+    Enabled = "ENABLED"
 }
 
 
@@ -11,6 +12,6 @@ export enum AppPkgInfoModificationsOperationStateEnum {
  * 'The data type represents the operational state for an application package resource'
 **/
 export class AppPkgInfoModifications extends SpeakeasyBase {
-  @Metadata({ data: "json, name=operationState" })
+  @SpeakeasyMetadata({ data: "json, name=operationState" })
   operationState: AppPkgInfoModificationsOperationStateEnum;
 }

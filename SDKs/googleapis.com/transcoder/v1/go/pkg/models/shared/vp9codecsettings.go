@@ -1,5 +1,7 @@
 package shared
 
+// Vp9CodecSettings
+// VP9 codec settings.
 type Vp9CodecSettings struct {
 	BitrateBps      *int32   `json:"bitrateBps,omitempty"`
 	CrfLevel        *int32   `json:"crfLevel,omitempty"`

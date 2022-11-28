@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GooglePrivacyDlpV2ContentItem } from "./googleprivacydlpv2contentitem";
 import { GooglePrivacyDlpV2TransformationOverview } from "./googleprivacydlpv2transformationoverview";
+
 
 
 // GooglePrivacyDlpV2ReidentifyContentResponse
@@ -8,9 +9,9 @@ import { GooglePrivacyDlpV2TransformationOverview } from "./googleprivacydlpv2tr
  * Results of re-identifying an item.
 **/
 export class GooglePrivacyDlpV2ReidentifyContentResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=item" })
+  @SpeakeasyMetadata({ data: "json, name=item" })
   item?: GooglePrivacyDlpV2ContentItem;
 
-  @Metadata({ data: "json, name=overview" })
+  @SpeakeasyMetadata({ data: "json, name=overview" })
   overview?: GooglePrivacyDlpV2TransformationOverview;
 }

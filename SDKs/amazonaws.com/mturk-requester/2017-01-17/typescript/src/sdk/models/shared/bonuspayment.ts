@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BonusPayment
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An object representing a Bonus payment paid to a Worker.
 **/
 export class BonusPayment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AssignmentId" })
+  @SpeakeasyMetadata({ data: "json, name=AssignmentId" })
   assignmentId?: string;
 
-  @Metadata({ data: "json, name=BonusAmount" })
+  @SpeakeasyMetadata({ data: "json, name=BonusAmount" })
   bonusAmount?: string;
 
-  @Metadata({ data: "json, name=GrantTime" })
+  @SpeakeasyMetadata({ data: "json, name=GrantTime" })
   grantTime?: Date;
 
-  @Metadata({ data: "json, name=Reason" })
+  @SpeakeasyMetadata({ data: "json, name=Reason" })
   reason?: string;
 
-  @Metadata({ data: "json, name=WorkerId" })
+  @SpeakeasyMetadata({ data: "json, name=WorkerId" })
   workerId?: string;
 }

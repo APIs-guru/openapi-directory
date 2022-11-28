@@ -1,5 +1,7 @@
 package shared
 
+// Annotation
+// An annotation record.
 type Annotation struct {
 	AnnotationSource   *AnnotationSource        `json:"annotationSource,omitempty"`
 	CustomData         map[string]string        `json:"customData,omitempty"`

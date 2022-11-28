@@ -8,6 +8,8 @@ const (
 	TableCellBackgroundFillPropertyStateEnumInherit     TableCellBackgroundFillPropertyStateEnum = "INHERIT"
 )
 
+// TableCellBackgroundFill
+// The table cell background fill.
 type TableCellBackgroundFill struct {
 	PropertyState *TableCellBackgroundFillPropertyStateEnum `json:"propertyState,omitempty"`
 	SolidFill     *SolidFill                                `json:"solidFill,omitempty"`

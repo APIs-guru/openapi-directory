@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BigtableColumnFamily } from "./bigtablecolumnfamily";
 
 
+
 export class BigtableOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=columnFamilies", elemType: shared.BigtableColumnFamily })
+  @SpeakeasyMetadata({ data: "json, name=columnFamilies", elemType: BigtableColumnFamily })
   columnFamilies?: BigtableColumnFamily[];
 
-  @Metadata({ data: "json, name=ignoreUnspecifiedColumnFamilies" })
+  @SpeakeasyMetadata({ data: "json, name=ignoreUnspecifiedColumnFamilies" })
   ignoreUnspecifiedColumnFamilies?: boolean;
 
-  @Metadata({ data: "json, name=readRowkeyAsString" })
+  @SpeakeasyMetadata({ data: "json, name=readRowkeyAsString" })
   readRowkeyAsString?: boolean;
 }

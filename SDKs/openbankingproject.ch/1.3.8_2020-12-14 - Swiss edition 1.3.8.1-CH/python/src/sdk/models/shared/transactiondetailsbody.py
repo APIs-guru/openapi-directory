@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import transactions
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class TransactionDetailsBody:
-    transaction_details: transactions.Transactions = field(default=None, metadata={'dataclasses_json': { 'field_name': 'transactionDetails' }})
+    r"""TransactionDetailsBody
+    Transaction details.
+    """
+    
+    transaction_details: Transactions = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('transactionDetails') }})
     

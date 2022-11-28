@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class OtoroshiHealthDatastoreEnum(str, Enum):
     HEALTHY = "healthy"
@@ -16,6 +17,10 @@ class OtoroshiHealthOtoroshiEnum(str, Enum):
 @dataclass_json
 @dataclass
 class OtoroshiHealth:
-    datastore: OtoroshiHealthDatastoreEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'datastore' }})
-    otoroshi: OtoroshiHealthOtoroshiEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'otoroshi' }})
+    r"""OtoroshiHealth
+    The structure that represent current Otoroshi health
+    """
+    
+    datastore: OtoroshiHealthDatastoreEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('datastore') }})
+    otoroshi: OtoroshiHealthOtoroshiEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('otoroshi') }})
     

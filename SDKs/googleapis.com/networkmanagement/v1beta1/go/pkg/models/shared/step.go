@@ -10,6 +10,8 @@ const (
 	StepStateEnumStartFromGkeMaster           StepStateEnum = "START_FROM_GKE_MASTER"
 	StepStateEnumStartFromCloudSQLInstance    StepStateEnum = "START_FROM_CLOUD_SQL_INSTANCE"
 	StepStateEnumStartFromCloudFunction       StepStateEnum = "START_FROM_CLOUD_FUNCTION"
+	StepStateEnumStartFromAppEngineVersion    StepStateEnum = "START_FROM_APP_ENGINE_VERSION"
+	StepStateEnumStartFromCloudRunRevision    StepStateEnum = "START_FROM_CLOUD_RUN_REVISION"
 	StepStateEnumApplyIngressFirewallRule     StepStateEnum = "APPLY_INGRESS_FIREWALL_RULE"
 	StepStateEnumApplyEgressFirewallRule      StepStateEnum = "APPLY_EGRESS_FIREWALL_RULE"
 	StepStateEnumApplyRoute                   StepStateEnum = "APPLY_ROUTE"
@@ -30,10 +32,14 @@ const (
 	StepStateEnumViewerPermissionMissing      StepStateEnum = "VIEWER_PERMISSION_MISSING"
 )
 
+// Step
+// A simulated forwarding path is composed of multiple steps. Each step has a well-defined state and an associated configuration.
 type Step struct {
 	Abort            *AbortInfo            `json:"abort,omitempty"`
+	AppEngineVersion *AppEngineVersionInfo `json:"appEngineVersion,omitempty"`
 	CausesDrop       *bool                 `json:"causesDrop,omitempty"`
 	CloudFunction    *CloudFunctionInfo    `json:"cloudFunction,omitempty"`
+	CloudRunRevision *CloudRunRevisionInfo `json:"cloudRunRevision,omitempty"`
 	CloudSQLInstance *CloudSQLInstanceInfo `json:"cloudSqlInstance,omitempty"`
 	Deliver          *DeliverInfo          `json:"deliver,omitempty"`
 	Description      *string               `json:"description,omitempty"`

@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DestinationFlowConfig } from "./destinationflowconfig";
 import { FlowStatusEnum } from "./flowstatusenum";
 import { ExecutionDetails } from "./executiondetails";
@@ -8,52 +7,53 @@ import { Task } from "./task";
 import { TriggerConfig } from "./triggerconfig";
 
 
+
 export class DescribeFlowResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=createdBy" })
+  @SpeakeasyMetadata({ data: "json, name=createdBy" })
   createdBy?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=destinationFlowConfigList", elemType: shared.DestinationFlowConfig })
+  @SpeakeasyMetadata({ data: "json, name=destinationFlowConfigList", elemType: DestinationFlowConfig })
   destinationFlowConfigList?: DestinationFlowConfig[];
 
-  @Metadata({ data: "json, name=flowArn" })
+  @SpeakeasyMetadata({ data: "json, name=flowArn" })
   flowArn?: string;
 
-  @Metadata({ data: "json, name=flowName" })
+  @SpeakeasyMetadata({ data: "json, name=flowName" })
   flowName?: string;
 
-  @Metadata({ data: "json, name=flowStatus" })
+  @SpeakeasyMetadata({ data: "json, name=flowStatus" })
   flowStatus?: FlowStatusEnum;
 
-  @Metadata({ data: "json, name=flowStatusMessage" })
+  @SpeakeasyMetadata({ data: "json, name=flowStatusMessage" })
   flowStatusMessage?: string;
 
-  @Metadata({ data: "json, name=kmsArn" })
+  @SpeakeasyMetadata({ data: "json, name=kmsArn" })
   kmsArn?: string;
 
-  @Metadata({ data: "json, name=lastRunExecutionDetails" })
+  @SpeakeasyMetadata({ data: "json, name=lastRunExecutionDetails" })
   lastRunExecutionDetails?: ExecutionDetails;
 
-  @Metadata({ data: "json, name=lastUpdatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdatedAt" })
   lastUpdatedAt?: Date;
 
-  @Metadata({ data: "json, name=lastUpdatedBy" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdatedBy" })
   lastUpdatedBy?: string;
 
-  @Metadata({ data: "json, name=sourceFlowConfig" })
+  @SpeakeasyMetadata({ data: "json, name=sourceFlowConfig" })
   sourceFlowConfig?: SourceFlowConfig;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 
-  @Metadata({ data: "json, name=tasks", elemType: shared.Task })
+  @SpeakeasyMetadata({ data: "json, name=tasks", elemType: Task })
   tasks?: Task[];
 
-  @Metadata({ data: "json, name=triggerConfig" })
+  @SpeakeasyMetadata({ data: "json, name=triggerConfig" })
   triggerConfig?: TriggerConfig;
 }

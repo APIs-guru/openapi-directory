@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GetOrgPolicyRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The request sent to the GetOrgPolicy method.
 **/
 export class GetOrgPolicyRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=constraint" })
+  @SpeakeasyMetadata({ data: "json, name=constraint" })
   constraint?: string;
 }

@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SchemeBearer extends SpeakeasyBase {
-  @Metadata({ data: "security, name=JWT" })
+  @SpeakeasyMetadata({ data: "security, name=JWT" })
   apiKey: string;
 }
 
 
 export class Security extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   bearer: SchemeBearer;
 }

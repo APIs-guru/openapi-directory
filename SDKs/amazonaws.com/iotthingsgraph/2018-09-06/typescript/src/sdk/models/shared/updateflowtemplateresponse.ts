@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FlowTemplateSummary } from "./flowtemplatesummary";
 
 
+
 export class UpdateFlowTemplateResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=summary" })
+  @SpeakeasyMetadata({ data: "json, name=summary" })
   summary?: FlowTemplateSummary;
 }

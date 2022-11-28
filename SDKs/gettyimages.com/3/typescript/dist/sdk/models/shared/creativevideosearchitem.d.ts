@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AllowedUse } from "./alloweduse";
 import { VideoSearchItemDisplaySize } from "./videosearchitemdisplaysize";
 import { IStockLicense } from "./istocklicense";

@@ -14,6 +14,8 @@ type UpdateRelatedItemsHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateRelatedItemsRequestBodyRelatedItemsUpdate
+// Details about the related item you're adding.
 type UpdateRelatedItemsRequestBodyRelatedItemsUpdate struct {
 	ItemToAdd    *shared.RelatedItem    `json:"itemToAdd,omitempty"`
 	ItemToRemove *shared.ItemIdentifier `json:"itemToRemove,omitempty"`

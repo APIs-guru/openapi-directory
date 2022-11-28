@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HsAlgoSettings } from "./hsalgosettings";
 import { RsAlgoSettings } from "./rsalgosettings";
 import { EsAlgoSettings } from "./esalgosettings";
@@ -11,26 +11,27 @@ import { Sign } from "./sign";
 import { Transform } from "./transform";
 
 
+
 // LocalJwtVerifier
 /** 
  * A JWT verifier used only for the current service descriptor
 **/
 export class LocalJwtVerifier extends SpeakeasyBase {
-  @Metadata({ data: "json, name=algoSettings" })
+  @SpeakeasyMetadata({ data: "json, name=algoSettings" })
   algoSettings: any;
 
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled: boolean;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source: any;
 
-  @Metadata({ data: "json, name=strategy" })
+  @SpeakeasyMetadata({ data: "json, name=strategy" })
   strategy: any;
 
-  @Metadata({ data: "json, name=strict" })
+  @SpeakeasyMetadata({ data: "json, name=strict" })
   strict: boolean;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }

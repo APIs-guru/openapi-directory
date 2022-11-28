@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// AuthorizedApp
+// An application you have authorized access to your Account through OAuth.
 type AuthorizedApp struct {
 	Created      *time.Time `json:"created,omitempty"`
 	Expiry       *time.Time `json:"expiry,omitempty"`

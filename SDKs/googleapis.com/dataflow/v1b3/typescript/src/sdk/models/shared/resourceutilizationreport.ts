@@ -1,8 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { ResourceUtilizationReport } from "./resourceutilizationreport";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CpuTime } from "./cputime";
 import { MemInfo } from "./meminfo";
+
 
 
 // ResourceUtilizationReport
@@ -10,12 +9,12 @@ import { MemInfo } from "./meminfo";
  * Worker metrics exported from workers. This contains resource utilization metrics accumulated from a variety of sources. For more information, see go/df-resource-signals.
 **/
 export class ResourceUtilizationReport extends SpeakeasyBase {
-  @Metadata({ data: "json, name=containers", elemType: shared.ResourceUtilizationReport })
+  @SpeakeasyMetadata({ data: "json, name=containers", elemType: ResourceUtilizationReport })
   containers?: Map<string, ResourceUtilizationReport>;
 
-  @Metadata({ data: "json, name=cpuTime", elemType: shared.CpuTime })
+  @SpeakeasyMetadata({ data: "json, name=cpuTime", elemType: CpuTime })
   cpuTime?: CpuTime[];
 
-  @Metadata({ data: "json, name=memoryInfo", elemType: shared.MemInfo })
+  @SpeakeasyMetadata({ data: "json, name=memoryInfo", elemType: MemInfo })
   memoryInfo?: MemInfo[];
 }

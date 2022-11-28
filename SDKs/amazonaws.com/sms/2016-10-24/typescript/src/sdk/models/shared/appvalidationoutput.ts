@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SsmOutput } from "./ssmoutput";
+
 
 
 // AppValidationOutput
@@ -7,6 +8,6 @@ import { SsmOutput } from "./ssmoutput";
  * Output from validating an application.
 **/
 export class AppValidationOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ssmOutput" })
+  @SpeakeasyMetadata({ data: "json, name=ssmOutput" })
   ssmOutput?: SsmOutput;
 }

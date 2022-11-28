@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import transforms3datasource
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class TransformDataSource:
-    s3_data_source: transforms3datasource.TransformS3DataSource = field(default=None, metadata={'dataclasses_json': { 'field_name': 'S3DataSource' }})
+    r"""TransformDataSource
+    Describes the location of the channel data.
+    """
+    
+    s3_data_source: TransformS3DataSource = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('S3DataSource') }})
     

@@ -1,5 +1,7 @@
 package shared
 
+// FormFieldDefinition
+// Definition of a form field for OCR data extraction from images
 type FormFieldDefinition struct {
 	AllowNumericDigits              *bool    `json:"AllowNumericDigits,omitempty"`
 	AlternateAnchor                 *string  `json:"AlternateAnchor,omitempty"`

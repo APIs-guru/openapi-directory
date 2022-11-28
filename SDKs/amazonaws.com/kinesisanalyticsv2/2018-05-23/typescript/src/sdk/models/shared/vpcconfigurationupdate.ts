@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // VpcConfigurationUpdate
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes updates to the VPC configuration used by the application.
 **/
 export class VpcConfigurationUpdate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SecurityGroupIdUpdates" })
+  @SpeakeasyMetadata({ data: "json, name=SecurityGroupIdUpdates" })
   securityGroupIdUpdates?: string[];
 
-  @Metadata({ data: "json, name=SubnetIdUpdates" })
+  @SpeakeasyMetadata({ data: "json, name=SubnetIdUpdates" })
   subnetIdUpdates?: string[];
 
-  @Metadata({ data: "json, name=VpcConfigurationId" })
+  @SpeakeasyMetadata({ data: "json, name=VpcConfigurationId" })
   vpcConfigurationId: string;
 }

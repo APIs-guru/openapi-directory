@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Pose
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Indicates the pose of the face as determined by its pitch, roll, and yaw.
 **/
 export class Pose extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Pitch" })
+  @SpeakeasyMetadata({ data: "json, name=Pitch" })
   pitch?: number;
 
-  @Metadata({ data: "json, name=Roll" })
+  @SpeakeasyMetadata({ data: "json, name=Roll" })
   roll?: number;
 
-  @Metadata({ data: "json, name=Yaw" })
+  @SpeakeasyMetadata({ data: "json, name=Yaw" })
   yaw?: number;
 }

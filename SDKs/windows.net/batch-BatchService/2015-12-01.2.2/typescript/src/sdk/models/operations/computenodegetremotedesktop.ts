@@ -1,61 +1,62 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ComputeNodeGetRemoteDesktopPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=nodeId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=nodeId" })
   nodeId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=poolId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=poolId" })
   poolId: string;
 }
 
 
 export class ComputeNodeGetRemoteDesktopQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=api-version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api-version" })
   apiVersion: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=timeout" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timeout" })
   timeout?: number;
 }
 
 
 export class ComputeNodeGetRemoteDesktopHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=client-request-id" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=client-request-id" })
   clientRequestId?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=ocp-date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=ocp-date" })
   ocpDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=return-client-request-id" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=return-client-request-id" })
   returnClientRequestId?: boolean;
 }
 
 
 export class ComputeNodeGetRemoteDesktopRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ComputeNodeGetRemoteDesktopPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ComputeNodeGetRemoteDesktopQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: ComputeNodeGetRemoteDesktopHeaders;
 }
 
 
 export class ComputeNodeGetRemoteDesktopResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   batchError?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   computeNodeGetRemoteDesktop200ApplicationJsonBinaryString?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -30,11 +30,6 @@ type DgcerSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type DgcerRequest struct {
-	Request  *DgcerRequestBody `request:"mediaType=application/json"`
-	Security DgcerSecurity
-}
-
 type Dgcer400ApplicationJSONErrorEnum string
 
 const (
@@ -164,6 +159,11 @@ const (
 type Dgcer504ApplicationJSON struct {
 	Error            *Dgcer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Dgcer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type DgcerRequest struct {
+	Request  *DgcerRequestBody `request:"mediaType=application/json"`
+	Security DgcerSecurity
 }
 
 type DgcerResponse struct {

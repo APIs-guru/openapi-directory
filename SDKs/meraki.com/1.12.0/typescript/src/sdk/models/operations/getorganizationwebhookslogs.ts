@@ -1,55 +1,56 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetOrganizationWebhooksLogsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=organizationId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=organizationId" })
   organizationId: string;
 }
 
 
 export class GetOrganizationWebhooksLogsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=endingBefore" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=endingBefore" })
   endingBefore?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=perPage" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=perPage" })
   perPage?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=startingAfter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=startingAfter" })
   startingAfter?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=t0" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=t0" })
   t0?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=t1" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=t1" })
   t1?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=timespan" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timespan" })
   timespan?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=url" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=url" })
   url?: string;
 }
 
 
 export class GetOrganizationWebhooksLogsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetOrganizationWebhooksLogsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetOrganizationWebhooksLogsQueryParams;
 }
 
 
 export class GetOrganizationWebhooksLogsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getOrganizationWebhooksLogs200ApplicationJsonObject?: Map<string, any>;
 }

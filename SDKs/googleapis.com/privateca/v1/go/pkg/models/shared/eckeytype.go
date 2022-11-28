@@ -9,6 +9,8 @@ const (
 	EcKeyTypeSignatureAlgorithmEnumEddsa25519                      EcKeyTypeSignatureAlgorithmEnum = "EDDSA_25519"
 )
 
+// EcKeyType
+// Describes an Elliptic Curve key that may be used in a Certificate issued from a CaPool.
 type EcKeyType struct {
 	SignatureAlgorithm *EcKeyTypeSignatureAlgorithmEnum `json:"signatureAlgorithm,omitempty"`
 }

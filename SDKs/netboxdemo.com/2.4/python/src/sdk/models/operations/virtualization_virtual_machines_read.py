@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class VirtualizationVirtualMachinesReadPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class VirtualizationVirtualMachinesReadRequest:
-    path_params: VirtualizationVirtualMachinesReadPathParams = field(default=None)
+    path_params: VirtualizationVirtualMachinesReadPathParams = field()
     
 
 @dataclass
 class VirtualizationVirtualMachinesReadResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     virtual_machine_with_config_context: Optional[shared.VirtualMachineWithConfigContext] = field(default=None)
     

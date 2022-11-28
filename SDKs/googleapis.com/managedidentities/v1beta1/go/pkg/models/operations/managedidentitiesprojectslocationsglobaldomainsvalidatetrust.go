@@ -30,7 +30,7 @@ type ManagedidentitiesProjectsLocationsGlobalDomainsValidateTrustSecurity struct
 type ManagedidentitiesProjectsLocationsGlobalDomainsValidateTrustRequest struct {
 	PathParams  ManagedidentitiesProjectsLocationsGlobalDomainsValidateTrustPathParams
 	QueryParams ManagedidentitiesProjectsLocationsGlobalDomainsValidateTrustQueryParams
-	Request     *shared.ValidateTrustRequest `request:"mediaType=application/json"`
+	Request     *shared.ValidateTrustRequestInput `request:"mediaType=application/json"`
 	Security    ManagedidentitiesProjectsLocationsGlobalDomainsValidateTrustSecurity
 }
 

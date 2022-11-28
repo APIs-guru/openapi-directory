@@ -1,5 +1,7 @@
 package shared
 
+// ProjectArtifacts
+// Information about the build output artifacts for the build project.
 type ProjectArtifacts struct {
 	ArtifactIdentifier   *string                `json:"artifactIdentifier,omitempty"`
 	BucketOwnerAccess    *BucketOwnerAccessEnum `json:"bucketOwnerAccess,omitempty"`

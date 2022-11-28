@@ -1,30 +1,25 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RateLimit } from "./ratelimit";
-import { RateLimit } from "./ratelimit";
-import { RateLimit } from "./ratelimit";
-import { RateLimit } from "./ratelimit";
-import { RateLimit } from "./ratelimit";
-import { RateLimit } from "./ratelimit";
-import { RateLimit } from "./ratelimit";
+
 
 
 export class RateLimitOverviewResources extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code_scanning_upload" })
+  @SpeakeasyMetadata({ data: "json, name=code_scanning_upload" })
   codeScanningUpload?: RateLimit;
 
-  @Metadata({ data: "json, name=core" })
+  @SpeakeasyMetadata({ data: "json, name=core" })
   core: RateLimit;
 
-  @Metadata({ data: "json, name=graphql" })
+  @SpeakeasyMetadata({ data: "json, name=graphql" })
   graphql?: RateLimit;
 
-  @Metadata({ data: "json, name=integration_manifest" })
+  @SpeakeasyMetadata({ data: "json, name=integration_manifest" })
   integrationManifest?: RateLimit;
 
-  @Metadata({ data: "json, name=search" })
+  @SpeakeasyMetadata({ data: "json, name=search" })
   search: RateLimit;
 
-  @Metadata({ data: "json, name=source_import" })
+  @SpeakeasyMetadata({ data: "json, name=source_import" })
   sourceImport?: RateLimit;
 }
 
@@ -34,9 +29,9 @@ export class RateLimitOverviewResources extends SpeakeasyBase {
  * Rate Limit Overview
 **/
 export class RateLimitOverview extends SpeakeasyBase {
-  @Metadata({ data: "json, name=rate" })
+  @SpeakeasyMetadata({ data: "json, name=rate" })
   rate: RateLimit;
 
-  @Metadata({ data: "json, name=resources" })
+  @SpeakeasyMetadata({ data: "json, name=resources" })
   resources: RateLimitOverviewResources;
 }

@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FeedbackValueTypeEnum } from "./feedbackvaluetypeenum";
 
 
+
 export class UpdateAuthEventFeedbackRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EventId" })
+  @SpeakeasyMetadata({ data: "json, name=EventId" })
   eventId: string;
 
-  @Metadata({ data: "json, name=FeedbackToken" })
+  @SpeakeasyMetadata({ data: "json, name=FeedbackToken" })
   feedbackToken: string;
 
-  @Metadata({ data: "json, name=FeedbackValue" })
+  @SpeakeasyMetadata({ data: "json, name=FeedbackValue" })
   feedbackValue: FeedbackValueTypeEnum;
 
-  @Metadata({ data: "json, name=UserPoolId" })
+  @SpeakeasyMetadata({ data: "json, name=UserPoolId" })
   userPoolId: string;
 
-  @Metadata({ data: "json, name=Username" })
+  @SpeakeasyMetadata({ data: "json, name=Username" })
   username: string;
 }

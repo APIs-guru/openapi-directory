@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Point } from "./point";
 // OcrPhotoTextElement
 /**
  * A single text in an OCR document
@@ -34,31 +34,31 @@ var OcrPhotoTextElement = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=BoundingPoints", elemType: shared.Point }),
+        SpeakeasyMetadata({ data: "json, name=BoundingPoints", elemType: Point }),
         __metadata("design:type", Array)
     ], OcrPhotoTextElement.prototype, "boundingPoints", void 0);
     __decorate([
-        Metadata({ data: "json, name=ConfidenceLevel" }),
+        SpeakeasyMetadata({ data: "json, name=ConfidenceLevel" }),
         __metadata("design:type", Number)
     ], OcrPhotoTextElement.prototype, "confidenceLevel", void 0);
     __decorate([
-        Metadata({ data: "json, name=Height" }),
+        SpeakeasyMetadata({ data: "json, name=Height" }),
         __metadata("design:type", Number)
     ], OcrPhotoTextElement.prototype, "height", void 0);
     __decorate([
-        Metadata({ data: "json, name=Text" }),
+        SpeakeasyMetadata({ data: "json, name=Text" }),
         __metadata("design:type", String)
     ], OcrPhotoTextElement.prototype, "text", void 0);
     __decorate([
-        Metadata({ data: "json, name=Width" }),
+        SpeakeasyMetadata({ data: "json, name=Width" }),
         __metadata("design:type", Number)
     ], OcrPhotoTextElement.prototype, "width", void 0);
     __decorate([
-        Metadata({ data: "json, name=XLeft" }),
+        SpeakeasyMetadata({ data: "json, name=XLeft" }),
         __metadata("design:type", Number)
     ], OcrPhotoTextElement.prototype, "xLeft", void 0);
     __decorate([
-        Metadata({ data: "json, name=YTop" }),
+        SpeakeasyMetadata({ data: "json, name=YTop" }),
         __metadata("design:type", Number)
     ], OcrPhotoTextElement.prototype, "yTop", void 0);
     return OcrPhotoTextElement;

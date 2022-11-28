@@ -1,5 +1,7 @@
 package shared
 
+// ApplicationResponse
+// Provides information about an application.
 type ApplicationResponse struct {
 	Arn  string            `json:"Arn"`
 	ID   string            `json:"Id"`

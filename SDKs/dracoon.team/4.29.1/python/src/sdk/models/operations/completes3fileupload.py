@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class CompleteS3FileUploadPathParams:
-    upload_id: str = field(default=None, metadata={'path_param': { 'field_name': 'upload_id', 'style': 'simple', 'explode': False }})
+    upload_id: str = field(metadata={'path_param': { 'field_name': 'upload_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,14 +15,14 @@ class CompleteS3FileUploadHeaders:
 
 @dataclass
 class CompleteS3FileUploadRequest:
-    path_params: CompleteS3FileUploadPathParams = field(default=None)
-    headers: CompleteS3FileUploadHeaders = field(default=None)
-    request: shared.CompleteS3FileUploadRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CompleteS3FileUploadHeaders = field()
+    path_params: CompleteS3FileUploadPathParams = field()
+    request: shared.CompleteS3FileUploadRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CompleteS3FileUploadResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

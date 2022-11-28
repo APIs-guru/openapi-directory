@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ReferralDestination extends SpeakeasyBase {
-  @Metadata({ data: "json, name=site_name" })
+  @SpeakeasyMetadata({ data: "json, name=site_name" })
   siteName?: string;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri?: string;
 }

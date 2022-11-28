@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import baselineoverride
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetDeployablePatchSnapshotForInstanceRequest:
-    baseline_override: Optional[baselineoverride.BaselineOverride] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BaselineOverride' }})
-    instance_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'InstanceId' }})
-    snapshot_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SnapshotId' }})
+    instance_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('InstanceId') }})
+    snapshot_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('SnapshotId') }})
+    baseline_override: Optional[BaselineOverride] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('BaselineOverride') }})
     

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDeleteConfigurationTemplateActionEnum(str, Enum):
     DELETE_CONFIGURATION_TEMPLATE = "DeleteConfigurationTemplate"
@@ -10,8 +14,8 @@ class PostDeleteConfigurationTemplateVersionEnum(str, Enum):
 
 @dataclass
 class PostDeleteConfigurationTemplateQueryParams:
-    action: PostDeleteConfigurationTemplateActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDeleteConfigurationTemplateVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDeleteConfigurationTemplateActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDeleteConfigurationTemplateVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDeleteConfigurationTemplateHeaders:
 
 @dataclass
 class PostDeleteConfigurationTemplateRequest:
-    query_params: PostDeleteConfigurationTemplateQueryParams = field(default=None)
-    headers: PostDeleteConfigurationTemplateHeaders = field(default=None)
+    headers: PostDeleteConfigurationTemplateHeaders = field()
+    query_params: PostDeleteConfigurationTemplateQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDeleteConfigurationTemplateResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

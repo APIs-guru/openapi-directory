@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { EntityTypeEnum } from "./entitytypeenum";
 import { EntityFilter } from "./entityfilter";
 export declare class SearchEntitiesRequest extends SpeakeasyBase {

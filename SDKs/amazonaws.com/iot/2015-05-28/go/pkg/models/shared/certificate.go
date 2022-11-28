@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Certificate
+// Information about a certificate.
 type Certificate struct {
 	CertificateArn  *string                `json:"certificateArn,omitempty"`
 	CertificateID   *string                `json:"certificateId,omitempty"`

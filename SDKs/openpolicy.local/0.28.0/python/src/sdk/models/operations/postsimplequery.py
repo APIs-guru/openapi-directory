@@ -10,14 +10,14 @@ class PostSimpleQueryQueryParams:
 
 @dataclass
 class PostSimpleQueryRequest:
-    query_params: PostSimpleQueryQueryParams = field(default=None)
-    request: dict[str, Any] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    query_params: PostSimpleQueryQueryParams = field()
+    request: dict[str, Any] = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PostSimpleQueryResponse:
+    content_type: str = field()
+    status_code: int = field()
     four_hundred: Optional[shared.FourHundred] = field(default=None)
     four_hundred_and_four: Optional[shared.FourHundredAndFour] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

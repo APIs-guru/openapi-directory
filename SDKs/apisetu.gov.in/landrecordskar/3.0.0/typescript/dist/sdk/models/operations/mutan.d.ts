@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class MutanRequestBodyCertificateParameters extends SpeakeasyBase {
     documentNumber: string;
@@ -16,10 +16,6 @@ export declare class MutanRequestBody extends SpeakeasyBase {
 export declare class MutanSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class MutanRequest extends SpeakeasyBase {
-    request?: MutanRequestBody;
-    security: MutanSecurity;
 }
 export declare enum Mutan400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -102,6 +98,10 @@ export declare enum Mutan504ApplicationJsonErrorDescriptionEnum {
 export declare class Mutan504ApplicationJson extends SpeakeasyBase {
     error?: Mutan504ApplicationJsonErrorEnum;
     errorDescription?: Mutan504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class MutanRequest extends SpeakeasyBase {
+    request?: MutanRequestBody;
+    security: MutanSecurity;
 }
 export declare class MutanResponse extends SpeakeasyBase {
     body?: Uint8Array;

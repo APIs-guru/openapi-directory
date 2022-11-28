@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// StepExecution
+// Detailed information about an the execution state of an Automation step.
 type StepExecution struct {
 	Action               *string                        `json:"Action,omitempty"`
 	ExecutionEndTime     *time.Time                     `json:"ExecutionEndTime,omitempty"`

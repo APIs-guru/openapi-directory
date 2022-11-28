@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { BackendMetastore } from "./backendmetastore";
 export var FederationStateEnum;
 (function (FederationStateEnum) {
     FederationStateEnum["StateUnspecified"] = "STATE_UNSPECIFIED";
@@ -43,45 +43,73 @@ var Federation = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=backendMetastores", elemType: shared.BackendMetastore }),
+        SpeakeasyMetadata({ data: "json, name=backendMetastores", elemType: BackendMetastore }),
         __metadata("design:type", Map)
     ], Federation.prototype, "backendMetastores", void 0);
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", String)
     ], Federation.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=endpointUri" }),
+        SpeakeasyMetadata({ data: "json, name=endpointUri" }),
         __metadata("design:type", String)
     ], Federation.prototype, "endpointUri", void 0);
     __decorate([
-        Metadata({ data: "json, name=labels" }),
+        SpeakeasyMetadata({ data: "json, name=labels" }),
         __metadata("design:type", Map)
     ], Federation.prototype, "labels", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Federation.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], Federation.prototype, "state", void 0);
     __decorate([
-        Metadata({ data: "json, name=stateMessage" }),
+        SpeakeasyMetadata({ data: "json, name=stateMessage" }),
         __metadata("design:type", String)
     ], Federation.prototype, "stateMessage", void 0);
     __decorate([
-        Metadata({ data: "json, name=uid" }),
+        SpeakeasyMetadata({ data: "json, name=uid" }),
         __metadata("design:type", String)
     ], Federation.prototype, "uid", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateTime" }),
+        SpeakeasyMetadata({ data: "json, name=updateTime" }),
         __metadata("design:type", String)
     ], Federation.prototype, "updateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=version" }),
+        SpeakeasyMetadata({ data: "json, name=version" }),
         __metadata("design:type", String)
     ], Federation.prototype, "version", void 0);
     return Federation;
 }(SpeakeasyBase));
 export { Federation };
+// FederationInput
+/**
+ * Represents a federation of multiple backend metastores.
+**/
+var FederationInput = /** @class */ (function (_super) {
+    __extends(FederationInput, _super);
+    function FederationInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=backendMetastores", elemType: BackendMetastore }),
+        __metadata("design:type", Map)
+    ], FederationInput.prototype, "backendMetastores", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=labels" }),
+        __metadata("design:type", Map)
+    ], FederationInput.prototype, "labels", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=name" }),
+        __metadata("design:type", String)
+    ], FederationInput.prototype, "name", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=version" }),
+        __metadata("design:type", String)
+    ], FederationInput.prototype, "version", void 0);
+    return FederationInput;
+}(SpeakeasyBase));
+export { FederationInput };

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CreditCard
@@ -8,15 +9,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * 
 **/
 export class CreditCard extends SpeakeasyBase {
-  @Metadata({ data: "json, name=card_number" })
+  @SpeakeasyMetadata({ data: "json, name=card_number" })
   cardNumber: string;
 
-  @Metadata({ data: "json, name=cvv" })
+  @SpeakeasyMetadata({ data: "json, name=cvv" })
   cvv: string;
 
-  @Metadata({ data: "json, name=expiry_month" })
+  @SpeakeasyMetadata({ data: "json, name=expiry_month" })
   expiryMonth: number;
 
-  @Metadata({ data: "json, name=expiry_year" })
+  @SpeakeasyMetadata({ data: "json, name=expiry_year" })
   expiryYear: number;
 }

@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Action } from "./action";
 // ListActionsResponse
 /**
  * Response message for ActionService.ListActions
@@ -34,15 +34,15 @@ var ListActionsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=actions", elemType: shared.Action }),
+        SpeakeasyMetadata({ data: "json, name=actions", elemType: Action }),
         __metadata("design:type", Array)
     ], ListActionsResponse.prototype, "actions", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextPageToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextPageToken" }),
         __metadata("design:type", String)
     ], ListActionsResponse.prototype, "nextPageToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=unsupportedActionNames" }),
+        SpeakeasyMetadata({ data: "json, name=unsupportedActionNames" }),
         __metadata("design:type", Array)
     ], ListActionsResponse.prototype, "unsupportedActionNames", void 0);
     return ListActionsResponse;

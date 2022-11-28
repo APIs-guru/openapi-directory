@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Contact } from "./contact";
 import { UserExtension } from "./userextension";
 export declare class User extends SpeakeasyBase {

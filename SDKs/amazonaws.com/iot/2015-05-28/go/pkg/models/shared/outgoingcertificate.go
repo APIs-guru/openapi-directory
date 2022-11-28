@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// OutgoingCertificate
+// A certificate that has been transferred but not yet accepted.
 type OutgoingCertificate struct {
 	CertificateArn  *string    `json:"certificateArn,omitempty"`
 	CertificateID   *string    `json:"certificateId,omitempty"`

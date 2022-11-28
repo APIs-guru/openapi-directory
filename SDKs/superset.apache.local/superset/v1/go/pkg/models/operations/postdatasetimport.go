@@ -19,11 +19,6 @@ type PostDatasetImportSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type PostDatasetImportRequest struct {
-	Request  PostDatasetImportRequestBody `request:"mediaType=multipart/form-data"`
-	Security PostDatasetImportSecurity
-}
-
 type PostDatasetImport200ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
 }
@@ -42,6 +37,11 @@ type PostDatasetImport422ApplicationJSON struct {
 
 type PostDatasetImport500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type PostDatasetImportRequest struct {
+	Request  PostDatasetImportRequestBody `request:"mediaType=multipart/form-data"`
+	Security PostDatasetImportSecurity
 }
 
 type PostDatasetImportResponse struct {

@@ -1,16 +1,21 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import suppressionlistreason_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SuppressedDestinationSummary:
-    email_address: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EmailAddress' }})
-    last_update_time: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LastUpdateTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    reason: suppressionlistreason_enum.SuppressionListReasonEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Reason' }})
+    r"""SuppressedDestinationSummary
+    A summary that describes the suppressed email address.
+    """
+    
+    email_address: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('EmailAddress') }})
+    last_update_time: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('LastUpdateTime'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    reason: SuppressionListReasonEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Reason') }})
     

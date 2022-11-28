@@ -1,6 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApplianceCluster } from "./appliancecluster";
 import { EdgeCluster } from "./edgecluster";
+import { GkeClusterInput } from "./gkecluster";
+import { KubernetesResourceInput } from "./kubernetesresource";
+import { MultiCloudClusterInput } from "./multicloudcluster";
+import { OnPremClusterInput } from "./onpremcluster";
 import { GkeCluster } from "./gkecluster";
 import { KubernetesMetadata } from "./kubernetesmetadata";
 import { KubernetesResource } from "./kubernetesresource";
@@ -8,29 +12,55 @@ import { MultiCloudCluster } from "./multicloudcluster";
 import { OnPremCluster } from "./onpremcluster";
 
 
+
+// MembershipEndpointInput
+/** 
+ * MembershipEndpoint contains information needed to contact a Kubernetes API, endpoint and any additional Kubernetes metadata.
+**/
+export class MembershipEndpointInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=applianceCluster" })
+  applianceCluster?: ApplianceCluster;
+
+  @SpeakeasyMetadata({ data: "json, name=edgeCluster" })
+  edgeCluster?: EdgeCluster;
+
+  @SpeakeasyMetadata({ data: "json, name=gkeCluster" })
+  gkeCluster?: GkeClusterInput;
+
+  @SpeakeasyMetadata({ data: "json, name=kubernetesResource" })
+  kubernetesResource?: KubernetesResourceInput;
+
+  @SpeakeasyMetadata({ data: "json, name=multiCloudCluster" })
+  multiCloudCluster?: MultiCloudClusterInput;
+
+  @SpeakeasyMetadata({ data: "json, name=onPremCluster" })
+  onPremCluster?: OnPremClusterInput;
+}
+
+
 // MembershipEndpoint
 /** 
  * MembershipEndpoint contains information needed to contact a Kubernetes API, endpoint and any additional Kubernetes metadata.
 **/
 export class MembershipEndpoint extends SpeakeasyBase {
-  @Metadata({ data: "json, name=applianceCluster" })
+  @SpeakeasyMetadata({ data: "json, name=applianceCluster" })
   applianceCluster?: ApplianceCluster;
 
-  @Metadata({ data: "json, name=edgeCluster" })
+  @SpeakeasyMetadata({ data: "json, name=edgeCluster" })
   edgeCluster?: EdgeCluster;
 
-  @Metadata({ data: "json, name=gkeCluster" })
+  @SpeakeasyMetadata({ data: "json, name=gkeCluster" })
   gkeCluster?: GkeCluster;
 
-  @Metadata({ data: "json, name=kubernetesMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=kubernetesMetadata" })
   kubernetesMetadata?: KubernetesMetadata;
 
-  @Metadata({ data: "json, name=kubernetesResource" })
+  @SpeakeasyMetadata({ data: "json, name=kubernetesResource" })
   kubernetesResource?: KubernetesResource;
 
-  @Metadata({ data: "json, name=multiCloudCluster" })
+  @SpeakeasyMetadata({ data: "json, name=multiCloudCluster" })
   multiCloudCluster?: MultiCloudCluster;
 
-  @Metadata({ data: "json, name=onPremCluster" })
+  @SpeakeasyMetadata({ data: "json, name=onPremCluster" })
   onPremCluster?: OnPremCluster;
 }

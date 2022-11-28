@@ -1,62 +1,63 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetDatabaseExportQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, serialization=json;name=q" })
+  @SpeakeasyMetadata({ data: "queryParam, serialization=json;name=q" })
   q?: number[];
 }
 
 
 export class GetDatabaseExportSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   jwt: shared.SchemeJwt;
 }
 
 
-export class GetDatabaseExportRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetDatabaseExportQueryParams;
-
-  @Metadata()
-  security: GetDatabaseExportSecurity;
-}
-
-
 export class GetDatabaseExport401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetDatabaseExport404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetDatabaseExport500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class GetDatabaseExportRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetDatabaseExportQueryParams;
+
+  @SpeakeasyMetadata()
+  security: GetDatabaseExportSecurity;
+}
+
+
 export class GetDatabaseExportResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getDatabaseExport200ApplicationZipBinaryString?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getDatabaseExport401ApplicationJsonObject?: GetDatabaseExport401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getDatabaseExport404ApplicationJsonObject?: GetDatabaseExport404ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getDatabaseExport500ApplicationJsonObject?: GetDatabaseExport500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

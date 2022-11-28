@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudRetailV2betaCompletionDetail
+// Detailed completion information including completion attribution token and clicked completion info.
 type GoogleCloudRetailV2betaCompletionDetail struct {
 	CompletionAttributionToken *string `json:"completionAttributionToken,omitempty"`
 	SelectedPosition           *int32  `json:"selectedPosition,omitempty"`

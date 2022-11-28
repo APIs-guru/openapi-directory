@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ObjectConditions
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Conditions that determine which objects are transferred. Applies only to Cloud Data Sources such as S3, Azure, and Cloud Storage. The "last modification time" refers to the time of the last change to the object's content or metadata — specifically, this is the `updated` property of Cloud Storage objects, the `LastModified` field of S3 objects, and the `Last-Modified` header of Azure blobs. Transfers with a PosixFilesystem source or destination don't support `ObjectConditions`.
 **/
 export class ObjectConditions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=excludePrefixes" })
+  @SpeakeasyMetadata({ data: "json, name=excludePrefixes" })
   excludePrefixes?: string[];
 
-  @Metadata({ data: "json, name=includePrefixes" })
+  @SpeakeasyMetadata({ data: "json, name=includePrefixes" })
   includePrefixes?: string[];
 
-  @Metadata({ data: "json, name=lastModifiedBefore" })
+  @SpeakeasyMetadata({ data: "json, name=lastModifiedBefore" })
   lastModifiedBefore?: string;
 
-  @Metadata({ data: "json, name=lastModifiedSince" })
+  @SpeakeasyMetadata({ data: "json, name=lastModifiedSince" })
   lastModifiedSince?: string;
 
-  @Metadata({ data: "json, name=maxTimeElapsedSinceLastModification" })
+  @SpeakeasyMetadata({ data: "json, name=maxTimeElapsedSinceLastModification" })
   maxTimeElapsedSinceLastModification?: string;
 
-  @Metadata({ data: "json, name=minTimeElapsedSinceLastModification" })
+  @SpeakeasyMetadata({ data: "json, name=minTimeElapsedSinceLastModification" })
   minTimeElapsedSinceLastModification?: string;
 }

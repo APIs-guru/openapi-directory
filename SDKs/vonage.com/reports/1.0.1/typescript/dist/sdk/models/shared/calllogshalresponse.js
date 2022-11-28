@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CallLogsEmbeddedObject } from "./calllogsembeddedobject";
 import { Links } from "./links";
 var CallLogsHalResponse = /** @class */ (function (_super) {
@@ -31,27 +31,27 @@ var CallLogsHalResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=_embedded" }),
+        SpeakeasyMetadata({ data: "json, name=_embedded" }),
         __metadata("design:type", CallLogsEmbeddedObject)
     ], CallLogsHalResponse.prototype, "embedded", void 0);
     __decorate([
-        Metadata({ data: "json, name=_links" }),
+        SpeakeasyMetadata({ data: "json, name=_links" }),
         __metadata("design:type", Links)
     ], CallLogsHalResponse.prototype, "links", void 0);
     __decorate([
-        Metadata({ data: "json, name=page" }),
+        SpeakeasyMetadata({ data: "json, name=page" }),
         __metadata("design:type", Number)
     ], CallLogsHalResponse.prototype, "page", void 0);
     __decorate([
-        Metadata({ data: "json, name=page_size" }),
+        SpeakeasyMetadata({ data: "json, name=page_size" }),
         __metadata("design:type", Number)
     ], CallLogsHalResponse.prototype, "pageSize", void 0);
     __decorate([
-        Metadata({ data: "json, name=total_items" }),
+        SpeakeasyMetadata({ data: "json, name=total_items" }),
         __metadata("design:type", Number)
     ], CallLogsHalResponse.prototype, "totalItems", void 0);
     __decorate([
-        Metadata({ data: "json, name=total_page" }),
+        SpeakeasyMetadata({ data: "json, name=total_page" }),
         __metadata("design:type", Number)
     ], CallLogsHalResponse.prototype, "totalPage", void 0);
     return CallLogsHalResponse;

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ValidationCa } from "./validationca";
+
 
 
 // MtlsPolicy
@@ -8,6 +8,6 @@ import { ValidationCa } from "./validationca";
  * Specification of the MTLSPolicy.
 **/
 export class MtlsPolicy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clientValidationCa", elemType: shared.ValidationCa })
+  @SpeakeasyMetadata({ data: "json, name=clientValidationCa", elemType: ValidationCa })
   clientValidationCa?: ValidationCa[];
 }

@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Optional
@@ -8,9 +8,9 @@ from sdk.models import shared
 
 @dataclass
 class GetConsumerV1AvailabilityServiceIDStartDateEndDatePathParams:
-    end_date: datetime = field(default=None, metadata={'path_param': { 'field_name': 'endDate', 'style': 'simple', 'explode': False }})
-    service_id: str = field(default=None, metadata={'path_param': { 'field_name': 'serviceId', 'style': 'simple', 'explode': False }})
-    start_date: datetime = field(default=None, metadata={'path_param': { 'field_name': 'startDate', 'style': 'simple', 'explode': False }})
+    end_date: datetime = field(metadata={'path_param': { 'field_name': 'endDate', 'style': 'simple', 'explode': False }})
+    service_id: str = field(metadata={'path_param': { 'field_name': 'serviceId', 'style': 'simple', 'explode': False }})
+    start_date: datetime = field(metadata={'path_param': { 'field_name': 'startDate', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -34,13 +34,13 @@ class GetConsumerV1AvailabilityServiceIDStartDateEndDateQueryParams:
 
 @dataclass
 class GetConsumerV1AvailabilityServiceIDStartDateEndDateRequest:
-    path_params: GetConsumerV1AvailabilityServiceIDStartDateEndDatePathParams = field(default=None)
-    query_params: GetConsumerV1AvailabilityServiceIDStartDateEndDateQueryParams = field(default=None)
+    path_params: GetConsumerV1AvailabilityServiceIDStartDateEndDatePathParams = field()
+    query_params: GetConsumerV1AvailabilityServiceIDStartDateEndDateQueryParams = field()
     
 
 @dataclass
 class GetConsumerV1AvailabilityServiceIDStartDateEndDateResponse:
+    content_type: str = field()
+    status_code: int = field()
     availability_view_model: Optional[shared.AvailabilityViewModel] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

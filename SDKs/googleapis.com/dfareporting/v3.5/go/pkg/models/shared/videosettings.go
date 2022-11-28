@@ -8,6 +8,8 @@ const (
 	VideoSettingsOrientationEnumPortrait  VideoSettingsOrientationEnum = "PORTRAIT"
 )
 
+// VideoSettings
+// Video Settings
 type VideoSettings struct {
 	CompanionSettings *CompanionSetting             `json:"companionSettings,omitempty"`
 	DurationSeconds   *int32                        `json:"durationSeconds,omitempty"`

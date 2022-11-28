@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ControllersPackageSystemItem } from "./controllerspackagesystemitem";
 import { ControllersLinks } from "./controllerslinks";
 import { ControllersListMeta } from "./controllerslistmeta";
 var ControllersPackageSystemsResponse = /** @class */ (function (_super) {
@@ -32,15 +32,15 @@ var ControllersPackageSystemsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=data", elemType: shared.ControllersPackageSystemItem }),
+        SpeakeasyMetadata({ data: "json, name=data", elemType: ControllersPackageSystemItem }),
         __metadata("design:type", Array)
     ], ControllersPackageSystemsResponse.prototype, "data", void 0);
     __decorate([
-        Metadata({ data: "json, name=links" }),
+        SpeakeasyMetadata({ data: "json, name=links" }),
         __metadata("design:type", ControllersLinks)
     ], ControllersPackageSystemsResponse.prototype, "links", void 0);
     __decorate([
-        Metadata({ data: "json, name=meta" }),
+        SpeakeasyMetadata({ data: "json, name=meta" }),
         __metadata("design:type", ControllersListMeta)
     ], ControllersPackageSystemsResponse.prototype, "meta", void 0);
     return ControllersPackageSystemsResponse;

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // S3Configuration
 /**
  *  The configuration of the S3 bucket for either an import or export job. This includes assigning permissions for access.
@@ -33,11 +33,11 @@ var S3Configuration = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=KmsKeyId" }),
+        SpeakeasyMetadata({ data: "json, name=KmsKeyId" }),
         __metadata("design:type", String)
     ], S3Configuration.prototype, "kmsKeyId", void 0);
     __decorate([
-        Metadata({ data: "json, name=S3Uri" }),
+        SpeakeasyMetadata({ data: "json, name=S3Uri" }),
         __metadata("design:type", String)
     ], S3Configuration.prototype, "s3Uri", void 0);
     return S3Configuration;

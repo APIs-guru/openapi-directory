@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Message
+// A message between two users.
 type Message struct {
 	Content          *string    `json:"content,omitempty"`
 	Date             *time.Time `json:"date,omitempty"`

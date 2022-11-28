@@ -1,23 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GooglePrivacyDlpV2CustomInfoType } from "./googleprivacydlpv2custominfotype";
 import { GooglePrivacyDlpV2InfoType } from "./googleprivacydlpv2infotype";
 import { GooglePrivacyDlpV2FindingLimits } from "./googleprivacydlpv2findinglimits";
 import { GooglePrivacyDlpV2InspectionRuleSet } from "./googleprivacydlpv2inspectionruleset";
 
+
 export enum GooglePrivacyDlpV2InspectConfigContentOptionsEnum {
-    ContentUnspecified = "CONTENT_UNSPECIFIED"
-,    ContentText = "CONTENT_TEXT"
-,    ContentImage = "CONTENT_IMAGE"
+    ContentUnspecified = "CONTENT_UNSPECIFIED",
+    ContentText = "CONTENT_TEXT",
+    ContentImage = "CONTENT_IMAGE"
 }
 
 export enum GooglePrivacyDlpV2InspectConfigMinLikelihoodEnum {
-    LikelihoodUnspecified = "LIKELIHOOD_UNSPECIFIED"
-,    VeryUnlikely = "VERY_UNLIKELY"
-,    Unlikely = "UNLIKELY"
-,    Possible = "POSSIBLE"
-,    Likely = "LIKELY"
-,    VeryLikely = "VERY_LIKELY"
+    LikelihoodUnspecified = "LIKELIHOOD_UNSPECIFIED",
+    VeryUnlikely = "VERY_UNLIKELY",
+    Unlikely = "UNLIKELY",
+    Possible = "POSSIBLE",
+    Likely = "LIKELY",
+    VeryLikely = "VERY_LIKELY"
 }
 
 
@@ -26,27 +26,27 @@ export enum GooglePrivacyDlpV2InspectConfigMinLikelihoodEnum {
  * Configuration description of the scanning process. When used with redactContent only info_types and min_likelihood are currently used.
 **/
 export class GooglePrivacyDlpV2InspectConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=contentOptions" })
+  @SpeakeasyMetadata({ data: "json, name=contentOptions" })
   contentOptions?: GooglePrivacyDlpV2InspectConfigContentOptionsEnum[];
 
-  @Metadata({ data: "json, name=customInfoTypes", elemType: shared.GooglePrivacyDlpV2CustomInfoType })
+  @SpeakeasyMetadata({ data: "json, name=customInfoTypes", elemType: GooglePrivacyDlpV2CustomInfoType })
   customInfoTypes?: GooglePrivacyDlpV2CustomInfoType[];
 
-  @Metadata({ data: "json, name=excludeInfoTypes" })
+  @SpeakeasyMetadata({ data: "json, name=excludeInfoTypes" })
   excludeInfoTypes?: boolean;
 
-  @Metadata({ data: "json, name=includeQuote" })
+  @SpeakeasyMetadata({ data: "json, name=includeQuote" })
   includeQuote?: boolean;
 
-  @Metadata({ data: "json, name=infoTypes", elemType: shared.GooglePrivacyDlpV2InfoType })
+  @SpeakeasyMetadata({ data: "json, name=infoTypes", elemType: GooglePrivacyDlpV2InfoType })
   infoTypes?: GooglePrivacyDlpV2InfoType[];
 
-  @Metadata({ data: "json, name=limits" })
+  @SpeakeasyMetadata({ data: "json, name=limits" })
   limits?: GooglePrivacyDlpV2FindingLimits;
 
-  @Metadata({ data: "json, name=minLikelihood" })
+  @SpeakeasyMetadata({ data: "json, name=minLikelihood" })
   minLikelihood?: GooglePrivacyDlpV2InspectConfigMinLikelihoodEnum;
 
-  @Metadata({ data: "json, name=ruleSet", elemType: shared.GooglePrivacyDlpV2InspectionRuleSet })
+  @SpeakeasyMetadata({ data: "json, name=ruleSet", elemType: GooglePrivacyDlpV2InspectionRuleSet })
   ruleSet?: GooglePrivacyDlpV2InspectionRuleSet[];
 }

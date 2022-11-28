@@ -1,5 +1,7 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
+from sdk.models import shared
 
 class GetFoldersSortEnum(str, Enum):
     NAME = "Name"
@@ -14,24 +16,24 @@ class GetFoldersQueryParams:
 
 @dataclass
 class GetFoldersHeaders:
-    xero_tenant_id: str = field(default=None, metadata={'header': { 'field_name': 'xero-tenant-id', 'style': 'simple', 'explode': False }})
+    xero_tenant_id: str = field(metadata={'header': { 'field_name': 'xero-tenant-id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetFoldersSecurity:
-    o_auth2: shared.SchemeOAuth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    o_auth2: shared.SchemeOAuth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetFoldersRequest:
-    query_params: GetFoldersQueryParams = field(default=None)
-    headers: GetFoldersHeaders = field(default=None)
-    security: GetFoldersSecurity = field(default=None)
+    headers: GetFoldersHeaders = field()
+    query_params: GetFoldersQueryParams = field()
+    security: GetFoldersSecurity = field()
     
 
 @dataclass
 class GetFoldersResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     folders: Optional[List[Any]] = field(default=None)
-    status_code: int = field(default=None)
     

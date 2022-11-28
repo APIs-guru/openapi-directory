@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RepositoryCatalogData } from "./repositorycatalogdata";
 var PutRepositoryCatalogDataResponse = /** @class */ (function (_super) {
     __extends(PutRepositoryCatalogDataResponse, _super);
@@ -30,7 +30,7 @@ var PutRepositoryCatalogDataResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=catalogData" }),
+        SpeakeasyMetadata({ data: "json, name=catalogData" }),
         __metadata("design:type", RepositoryCatalogData)
     ], PutRepositoryCatalogDataResponse.prototype, "catalogData", void 0);
     return PutRepositoryCatalogDataResponse;

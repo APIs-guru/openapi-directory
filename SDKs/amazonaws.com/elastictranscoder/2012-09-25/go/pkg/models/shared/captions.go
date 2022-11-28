@@ -1,5 +1,7 @@
 package shared
 
+// Captions
+// The captions to be created, if any.
 type Captions struct {
 	CaptionFormats []CaptionFormat `json:"CaptionFormats,omitempty"`
 	CaptionSources []CaptionSource `json:"CaptionSources,omitempty"`

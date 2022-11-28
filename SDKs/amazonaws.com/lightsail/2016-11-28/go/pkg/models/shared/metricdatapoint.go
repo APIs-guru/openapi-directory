@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// MetricDatapoint
+// Describes the metric data point.
 type MetricDatapoint struct {
 	Average     *float64        `json:"average,omitempty"`
 	Maximum     *float64        `json:"maximum,omitempty"`

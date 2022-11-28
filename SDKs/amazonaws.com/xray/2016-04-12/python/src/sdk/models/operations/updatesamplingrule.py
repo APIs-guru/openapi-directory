@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,37 +22,41 @@ class UpdateSamplingRuleHeaders:
 @dataclass_json
 @dataclass
 class UpdateSamplingRuleRequestBodySamplingRuleUpdate:
-    attributes: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Attributes' }})
-    fixed_rate: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FixedRate' }})
-    http_method: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'HTTPMethod' }})
-    host: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Host' }})
-    priority: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Priority' }})
-    reservoir_size: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ReservoirSize' }})
-    resource_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ResourceARN' }})
-    rule_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RuleARN' }})
-    rule_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RuleName' }})
-    service_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ServiceName' }})
-    service_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ServiceType' }})
-    url_path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'URLPath' }})
+    r"""UpdateSamplingRuleRequestBodySamplingRuleUpdate
+    A document specifying changes to a sampling rule's configuration.
+    """
+    
+    attributes: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Attributes') }})
+    fixed_rate: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FixedRate') }})
+    http_method: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('HTTPMethod') }})
+    host: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Host') }})
+    priority: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Priority') }})
+    reservoir_size: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ReservoirSize') }})
+    resource_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ResourceARN') }})
+    rule_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('RuleARN') }})
+    rule_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('RuleName') }})
+    service_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ServiceName') }})
+    service_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ServiceType') }})
+    url_path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('URLPath') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateSamplingRuleRequestBody:
-    sampling_rule_update: UpdateSamplingRuleRequestBodySamplingRuleUpdate = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SamplingRuleUpdate' }})
+    sampling_rule_update: UpdateSamplingRuleRequestBodySamplingRuleUpdate = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('SamplingRuleUpdate') }})
     
 
 @dataclass
 class UpdateSamplingRuleRequest:
-    headers: UpdateSamplingRuleHeaders = field(default=None)
-    request: UpdateSamplingRuleRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateSamplingRuleHeaders = field()
+    request: UpdateSamplingRuleRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateSamplingRuleResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     invalid_request_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttled_exception: Optional[Any] = field(default=None)
     update_sampling_rule_result: Optional[shared.UpdateSamplingRuleResult] = field(default=None)
     

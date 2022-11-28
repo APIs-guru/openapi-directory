@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class PostAlertsAlertIDClosePathParams:
-    alert_id: str = field(default=None, metadata={'path_param': { 'field_name': 'alertId', 'style': 'simple', 'explode': False }})
+    alert_id: str = field(metadata={'path_param': { 'field_name': 'alertId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,15 +18,15 @@ class PostAlertsAlertIDCloseRequests:
 
 @dataclass
 class PostAlertsAlertIDCloseRequest:
-    path_params: PostAlertsAlertIDClosePathParams = field(default=None)
+    path_params: PostAlertsAlertIDClosePathParams = field()
     request: Optional[PostAlertsAlertIDCloseRequests] = field(default=None)
     
 
 @dataclass
 class PostAlertsAlertIDCloseResponse:
+    content_type: str = field()
+    status_code: int = field()
     alert_info: Optional[shared.AlertInfo] = field(default=None)
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    body: Optional[bytes] = field(default=None)
     error_response_content: Optional[shared.ErrorResponseContent] = field(default=None)
-    status_code: int = field(default=None)
     

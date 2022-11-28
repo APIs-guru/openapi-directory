@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import color
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleCloudVisionV1p1beta1ColorInfo:
-    color: Optional[color.Color] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'color' }})
-    pixel_fraction: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pixelFraction' }})
-    score: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'score' }})
+    r"""GoogleCloudVisionV1p1beta1ColorInfo
+    Color information consists of RGB channels, score, and the fraction of the image that the color occupies in the image.
+    """
+    
+    color: Optional[Color] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('color') }})
+    pixel_fraction: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pixelFraction') }})
+    score: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('score') }})
     

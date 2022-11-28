@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GicerRequestBodyCertificateParameters = /** @class */ (function (_super) {
     __extends(GicerRequestBodyCertificateParameters, _super);
@@ -30,15 +30,15 @@ var GicerRequestBodyCertificateParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=PolicyNo" }),
+        SpeakeasyMetadata({ data: "json, name=PolicyNo" }),
         __metadata("design:type", String)
     ], GicerRequestBodyCertificateParameters.prototype, "policyNo", void 0);
     __decorate([
-        Metadata({ data: "json, name=Val" }),
+        SpeakeasyMetadata({ data: "json, name=Val" }),
         __metadata("design:type", String)
     ], GicerRequestBodyCertificateParameters.prototype, "val", void 0);
     __decorate([
-        Metadata({ data: "json, name=Verification" }),
+        SpeakeasyMetadata({ data: "json, name=Verification" }),
         __metadata("design:type", String)
     ], GicerRequestBodyCertificateParameters.prototype, "verification", void 0);
     return GicerRequestBodyCertificateParameters;
@@ -54,19 +54,19 @@ var GicerRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=certificateParameters" }),
+        SpeakeasyMetadata({ data: "json, name=certificateParameters" }),
         __metadata("design:type", GicerRequestBodyCertificateParameters)
     ], GicerRequestBody.prototype, "certificateParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=consentArtifact" }),
+        SpeakeasyMetadata({ data: "json, name=consentArtifact" }),
         __metadata("design:type", Object)
     ], GicerRequestBody.prototype, "consentArtifact", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], GicerRequestBody.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=txnId" }),
+        SpeakeasyMetadata({ data: "json, name=txnId" }),
         __metadata("design:type", String)
     ], GicerRequestBody.prototype, "txnId", void 0);
     return GicerRequestBody;
@@ -78,32 +78,16 @@ var GicerSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], GicerSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeClientId)
     ], GicerSecurity.prototype, "clientId", void 0);
     return GicerSecurity;
 }(SpeakeasyBase));
 export { GicerSecurity };
-var GicerRequest = /** @class */ (function (_super) {
-    __extends(GicerRequest, _super);
-    function GicerRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", GicerRequestBody)
-    ], GicerRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", GicerSecurity)
-    ], GicerRequest.prototype, "security", void 0);
-    return GicerRequest;
-}(SpeakeasyBase));
-export { GicerRequest };
 export var Gicer400ApplicationJsonErrorEnum;
 (function (Gicer400ApplicationJsonErrorEnum) {
     Gicer400ApplicationJsonErrorEnum["MissingParameter"] = "missing_parameter";
@@ -126,11 +110,11 @@ var Gicer400ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Gicer400ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Gicer400ApplicationJson.prototype, "errorDescription", void 0);
     return Gicer400ApplicationJson;
@@ -152,11 +136,11 @@ var Gicer401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Gicer401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Gicer401ApplicationJson.prototype, "errorDescription", void 0);
     return Gicer401ApplicationJson;
@@ -178,11 +162,11 @@ var Gicer404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Gicer404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Gicer404ApplicationJson.prototype, "errorDescription", void 0);
     return Gicer404ApplicationJson;
@@ -202,11 +186,11 @@ var Gicer500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Gicer500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Gicer500ApplicationJson.prototype, "errorDescription", void 0);
     return Gicer500ApplicationJson;
@@ -226,11 +210,11 @@ var Gicer502ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Gicer502ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Gicer502ApplicationJson.prototype, "errorDescription", void 0);
     return Gicer502ApplicationJson;
@@ -250,11 +234,11 @@ var Gicer503ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Gicer503ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Gicer503ApplicationJson.prototype, "errorDescription", void 0);
     return Gicer503ApplicationJson;
@@ -274,55 +258,71 @@ var Gicer504ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Gicer504ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Gicer504ApplicationJson.prototype, "errorDescription", void 0);
     return Gicer504ApplicationJson;
 }(SpeakeasyBase));
 export { Gicer504ApplicationJson };
+var GicerRequest = /** @class */ (function (_super) {
+    __extends(GicerRequest, _super);
+    function GicerRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", GicerRequestBody)
+    ], GicerRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", GicerSecurity)
+    ], GicerRequest.prototype, "security", void 0);
+    return GicerRequest;
+}(SpeakeasyBase));
+export { GicerRequest };
 var GicerResponse = /** @class */ (function (_super) {
     __extends(GicerResponse, _super);
     function GicerResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GicerResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GicerResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Gicer400ApplicationJson)
     ], GicerResponse.prototype, "gicer400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Gicer401ApplicationJson)
     ], GicerResponse.prototype, "gicer401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Gicer404ApplicationJson)
     ], GicerResponse.prototype, "gicer404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Gicer500ApplicationJson)
     ], GicerResponse.prototype, "gicer500ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Gicer502ApplicationJson)
     ], GicerResponse.prototype, "gicer502ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Gicer503ApplicationJson)
     ], GicerResponse.prototype, "gicer503ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Gicer504ApplicationJson)
     ], GicerResponse.prototype, "gicer504ApplicationJsonObject", void 0);
     return GicerResponse;

@@ -10,14 +10,14 @@ class PersonalityQueryParams:
 
 @dataclass
 class PersonalityRequest:
-    query_params: PersonalityQueryParams = field(default=None)
+    query_params: PersonalityQueryParams = field()
     request: Optional[List[shared.Post]] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PersonalityResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     prediction_results: Optional[List[shared.PostPredicted]] = field(default=None)
-    status_code: int = field(default=None)
     validation_errors: Optional[shared.ValidationErrors] = field(default=None)
     

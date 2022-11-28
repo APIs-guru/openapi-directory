@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetSearchParametersForADocumentIdSecurity = /** @class */ (function (_super) {
     __extends(GetSearchParametersForADocumentIdSecurity, _super);
@@ -30,39 +30,23 @@ var GetSearchParametersForADocumentIdSecurity = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauthsecurity)
     ], GetSearchParametersForADocumentIdSecurity.prototype, "oauthsecurity", void 0);
     return GetSearchParametersForADocumentIdSecurity;
 }(SpeakeasyBase));
 export { GetSearchParametersForADocumentIdSecurity };
-var GetSearchParametersForADocumentIdRequest = /** @class */ (function (_super) {
-    __extends(GetSearchParametersForADocumentIdRequest, _super);
-    function GetSearchParametersForADocumentIdRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
-        __metadata("design:type", Object)
-    ], GetSearchParametersForADocumentIdRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", GetSearchParametersForADocumentIdSecurity)
-    ], GetSearchParametersForADocumentIdRequest.prototype, "security", void 0);
-    return GetSearchParametersForADocumentIdRequest;
-}(SpeakeasyBase));
-export { GetSearchParametersForADocumentIdRequest };
 var GetSearchParametersForADocumentId400ApplicationJson = /** @class */ (function (_super) {
     __extends(GetSearchParametersForADocumentId400ApplicationJson, _super);
     function GetSearchParametersForADocumentId400ApplicationJson() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", Object)
     ], GetSearchParametersForADocumentId400ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=error_description" }),
+        SpeakeasyMetadata({ data: "json, name=error_description" }),
         __metadata("design:type", Object)
     ], GetSearchParametersForADocumentId400ApplicationJson.prototype, "errorDescription", void 0);
     return GetSearchParametersForADocumentId400ApplicationJson;
@@ -74,11 +58,11 @@ var GetSearchParametersForADocumentId401ApplicationJson = /** @class */ (functio
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], GetSearchParametersForADocumentId401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=error_description" }),
+        SpeakeasyMetadata({ data: "json, name=error_description" }),
         __metadata("design:type", String)
     ], GetSearchParametersForADocumentId401ApplicationJson.prototype, "errorDescription", void 0);
     return GetSearchParametersForADocumentId401ApplicationJson;
@@ -90,43 +74,59 @@ var GetSearchParametersForADocumentId500ApplicationJson = /** @class */ (functio
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", Object)
     ], GetSearchParametersForADocumentId500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=error_description" }),
+        SpeakeasyMetadata({ data: "json, name=error_description" }),
         __metadata("design:type", Object)
     ], GetSearchParametersForADocumentId500ApplicationJson.prototype, "errorDescription", void 0);
     return GetSearchParametersForADocumentId500ApplicationJson;
 }(SpeakeasyBase));
 export { GetSearchParametersForADocumentId500ApplicationJson };
+var GetSearchParametersForADocumentIdRequest = /** @class */ (function (_super) {
+    __extends(GetSearchParametersForADocumentIdRequest, _super);
+    function GetSearchParametersForADocumentIdRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
+        __metadata("design:type", Object)
+    ], GetSearchParametersForADocumentIdRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", GetSearchParametersForADocumentIdSecurity)
+    ], GetSearchParametersForADocumentIdRequest.prototype, "security", void 0);
+    return GetSearchParametersForADocumentIdRequest;
+}(SpeakeasyBase));
+export { GetSearchParametersForADocumentIdRequest };
 var GetSearchParametersForADocumentIdResponse = /** @class */ (function (_super) {
     __extends(GetSearchParametersForADocumentIdResponse, _super);
     function GetSearchParametersForADocumentIdResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetSearchParametersForADocumentIdResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetSearchParametersForADocumentId400ApplicationJson)
     ], GetSearchParametersForADocumentIdResponse.prototype, "getSearchParametersForADocumentId400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetSearchParametersForADocumentId401ApplicationJson)
     ], GetSearchParametersForADocumentIdResponse.prototype, "getSearchParametersForADocumentId401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetSearchParametersForADocumentId500ApplicationJson)
     ], GetSearchParametersForADocumentIdResponse.prototype, "getSearchParametersForADocumentId500ApplicationJsonObject", void 0);
     __decorate([
-        Metadata({ elemType: shared.SearchParametersResponse }),
+        SpeakeasyMetadata({ elemType: shared.SearchParametersResponse }),
         __metadata("design:type", Array)
     ], GetSearchParametersForADocumentIdResponse.prototype, "searchParametersResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetSearchParametersForADocumentIdResponse.prototype, "statusCode", void 0);
     return GetSearchParametersForADocumentIdResponse;

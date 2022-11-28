@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MediaFile } from "./mediafile";
 
+
 export enum VideoMetadataVastVersionEnum {
-    VastVersionUnspecified = "VAST_VERSION_UNSPECIFIED"
-,    VastVersion10 = "VAST_VERSION_1_0"
-,    VastVersion20 = "VAST_VERSION_2_0"
-,    VastVersion30 = "VAST_VERSION_3_0"
-,    VastVersion40 = "VAST_VERSION_4_0"
+    VastVersionUnspecified = "VAST_VERSION_UNSPECIFIED",
+    VastVersion10 = "VAST_VERSION_1_0",
+    VastVersion20 = "VAST_VERSION_2_0",
+    VastVersion30 = "VAST_VERSION_3_0",
+    VastVersion40 = "VAST_VERSION_4_0"
 }
 
 
@@ -16,21 +16,21 @@ export enum VideoMetadataVastVersionEnum {
  * Video metadata for a creative.
 **/
 export class VideoMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=duration" })
+  @SpeakeasyMetadata({ data: "json, name=duration" })
   duration?: string;
 
-  @Metadata({ data: "json, name=isValidVast" })
+  @SpeakeasyMetadata({ data: "json, name=isValidVast" })
   isValidVast?: boolean;
 
-  @Metadata({ data: "json, name=isVpaid" })
+  @SpeakeasyMetadata({ data: "json, name=isVpaid" })
   isVpaid?: boolean;
 
-  @Metadata({ data: "json, name=mediaFiles", elemType: shared.MediaFile })
+  @SpeakeasyMetadata({ data: "json, name=mediaFiles", elemType: MediaFile })
   mediaFiles?: MediaFile[];
 
-  @Metadata({ data: "json, name=skipOffset" })
+  @SpeakeasyMetadata({ data: "json, name=skipOffset" })
   skipOffset?: string;
 
-  @Metadata({ data: "json, name=vastVersion" })
+  @SpeakeasyMetadata({ data: "json, name=vastVersion" })
   vastVersion?: VideoMetadataVastVersionEnum;
 }

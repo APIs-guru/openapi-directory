@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TransactionData
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents details collected when the visitor performs a transaction on the page.
 **/
 export class TransactionData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=transactionId" })
+  @SpeakeasyMetadata({ data: "json, name=transactionId" })
   transactionId?: string;
 
-  @Metadata({ data: "json, name=transactionRevenue" })
+  @SpeakeasyMetadata({ data: "json, name=transactionRevenue" })
   transactionRevenue?: number;
 
-  @Metadata({ data: "json, name=transactionShipping" })
+  @SpeakeasyMetadata({ data: "json, name=transactionShipping" })
   transactionShipping?: number;
 
-  @Metadata({ data: "json, name=transactionTax" })
+  @SpeakeasyMetadata({ data: "json, name=transactionTax" })
   transactionTax?: number;
 }

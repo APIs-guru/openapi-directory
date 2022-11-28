@@ -1,5 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { RestrictionEvaluation } from "./restrictionevaluation";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MemberRestriction
@@ -7,9 +7,6 @@ import { RestrictionEvaluation } from "./restrictionevaluation";
  * The definition of MemberRestriction
 **/
 export class MemberRestriction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=evaluation" })
-  evaluation?: RestrictionEvaluation;
-
-  @Metadata({ data: "json, name=query" })
+  @SpeakeasyMetadata({ data: "json, name=query" })
   query?: string;
 }

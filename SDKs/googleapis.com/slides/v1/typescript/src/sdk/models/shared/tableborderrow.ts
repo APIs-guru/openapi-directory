@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TableBorderCell } from "./tablebordercell";
+
 
 
 // TableBorderRow
@@ -8,6 +8,6 @@ import { TableBorderCell } from "./tablebordercell";
  * Contents of each border row in a table.
 **/
 export class TableBorderRow extends SpeakeasyBase {
-  @Metadata({ data: "json, name=tableBorderCells", elemType: shared.TableBorderCell })
+  @SpeakeasyMetadata({ data: "json, name=tableBorderCells", elemType: TableBorderCell })
   tableBorderCells?: TableBorderCell[];
 }

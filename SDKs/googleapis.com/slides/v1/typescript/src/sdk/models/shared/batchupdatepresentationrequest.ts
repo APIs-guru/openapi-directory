@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Request } from "./request";
 import { WriteControl } from "./writecontrol";
+
 
 
 // BatchUpdatePresentationRequest
@@ -9,9 +9,9 @@ import { WriteControl } from "./writecontrol";
  * Request message for PresentationsService.BatchUpdatePresentation.
 **/
 export class BatchUpdatePresentationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=requests", elemType: shared.Request })
+  @SpeakeasyMetadata({ data: "json, name=requests", elemType: Request })
   requests?: Request[];
 
-  @Metadata({ data: "json, name=writeControl" })
+  @SpeakeasyMetadata({ data: "json, name=writeControl" })
   writeControl?: WriteControl;
 }

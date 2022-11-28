@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Terms } from "./terms";
+
 
 
 // Coupon
@@ -7,9 +8,9 @@ import { Terms } from "./terms";
  * The details for the coupon available for the item.
 **/
 export class Coupon extends SpeakeasyBase {
-  @Metadata({ data: "json, name=redemptionCode" })
+  @SpeakeasyMetadata({ data: "json, name=redemptionCode" })
   redemptionCode?: string;
 
-  @Metadata({ data: "json, name=terms" })
+  @SpeakeasyMetadata({ data: "json, name=terms" })
   terms?: Terms;
 }

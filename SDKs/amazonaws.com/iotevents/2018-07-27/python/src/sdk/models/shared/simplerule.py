@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import comparisonoperator_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SimpleRule:
-    comparison_operator: comparisonoperator_enum.ComparisonOperatorEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'comparisonOperator' }})
-    input_property: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'inputProperty' }})
-    threshold: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'threshold' }})
+    r"""SimpleRule
+    A rule that compares an input property value to a threshold value with a comparison operator.
+    """
+    
+    comparison_operator: ComparisonOperatorEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('comparisonOperator') }})
+    input_property: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('inputProperty') }})
+    threshold: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('threshold') }})
     

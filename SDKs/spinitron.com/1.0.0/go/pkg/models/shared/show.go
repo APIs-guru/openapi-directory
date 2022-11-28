@@ -10,6 +10,8 @@ type ShowLinks struct {
 	Self      *Link  `json:"self,omitempty"`
 }
 
+// Show
+// A `Show` object describes one occurrence of a radio program. A result set may contain multiple occurrences of the same show with difference `start` and `end` values.
 type Show struct {
 	Links       *ShowLinks `json:"_links,omitempty"`
 	Category    *string    `json:"category,omitempty"`

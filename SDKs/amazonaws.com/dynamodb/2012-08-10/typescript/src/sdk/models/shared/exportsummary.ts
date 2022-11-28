@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ExportStatusEnum } from "./exportstatusenum";
+
 
 
 // ExportSummary
@@ -7,9 +8,9 @@ import { ExportStatusEnum } from "./exportstatusenum";
  * Summary information about an export task.
 **/
 export class ExportSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ExportArn" })
+  @SpeakeasyMetadata({ data: "json, name=ExportArn" })
   exportArn?: string;
 
-  @Metadata({ data: "json, name=ExportStatus" })
+  @SpeakeasyMetadata({ data: "json, name=ExportStatus" })
   exportStatus?: ExportStatusEnum;
 }

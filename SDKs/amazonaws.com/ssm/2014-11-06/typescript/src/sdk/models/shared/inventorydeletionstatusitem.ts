@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InventoryDeletionSummary } from "./inventorydeletionsummary";
 import { InventoryDeletionStatusEnum } from "./inventorydeletionstatusenum";
+
 
 
 // InventoryDeletionStatusItem
@@ -8,24 +9,24 @@ import { InventoryDeletionStatusEnum } from "./inventorydeletionstatusenum";
  * Status information returned by the <code>DeleteInventory</code> operation.
 **/
 export class InventoryDeletionStatusItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DeletionId" })
+  @SpeakeasyMetadata({ data: "json, name=DeletionId" })
   deletionId?: string;
 
-  @Metadata({ data: "json, name=DeletionStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=DeletionStartTime" })
   deletionStartTime?: Date;
 
-  @Metadata({ data: "json, name=DeletionSummary" })
+  @SpeakeasyMetadata({ data: "json, name=DeletionSummary" })
   deletionSummary?: InventoryDeletionSummary;
 
-  @Metadata({ data: "json, name=LastStatus" })
+  @SpeakeasyMetadata({ data: "json, name=LastStatus" })
   lastStatus?: InventoryDeletionStatusEnum;
 
-  @Metadata({ data: "json, name=LastStatusMessage" })
+  @SpeakeasyMetadata({ data: "json, name=LastStatusMessage" })
   lastStatusMessage?: string;
 
-  @Metadata({ data: "json, name=LastStatusUpdateTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastStatusUpdateTime" })
   lastStatusUpdateTime?: Date;
 
-  @Metadata({ data: "json, name=TypeName" })
+  @SpeakeasyMetadata({ data: "json, name=TypeName" })
   typeName?: string;
 }

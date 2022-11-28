@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GeofenceGeometry } from "./geofencegeometry";
 /**
  * Contains a list of geofences stored in a given geofence collection.

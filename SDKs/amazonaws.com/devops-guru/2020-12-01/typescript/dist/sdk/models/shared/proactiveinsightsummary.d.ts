@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { InsightTimeRange } from "./insighttimerange";
 import { PredictionTimeRange } from "./predictiontimerange";
 import { ResourceCollection } from "./resourcecollection";

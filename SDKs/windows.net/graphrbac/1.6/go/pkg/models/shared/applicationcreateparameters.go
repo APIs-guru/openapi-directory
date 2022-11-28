@@ -1,5 +1,7 @@
 package shared
 
+// ApplicationCreateParameters
+// Request parameters for creating a new application.
 type ApplicationCreateParameters struct {
 	AllowGuestsSignIn          *bool                               `json:"allowGuestsSignIn,omitempty"`
 	AllowPassthroughUsers      *bool                               `json:"allowPassthroughUsers,omitempty"`

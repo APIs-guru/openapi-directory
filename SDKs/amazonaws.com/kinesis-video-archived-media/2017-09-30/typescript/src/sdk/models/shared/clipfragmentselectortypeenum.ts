@@ -1,6 +1,7 @@
 
 
+
 export enum ClipFragmentSelectorTypeEnum {
-    ProducerTimestamp = "PRODUCER_TIMESTAMP"
-,    ServerTimestamp = "SERVER_TIMESTAMP"
+    ProducerTimestamp = "PRODUCER_TIMESTAMP",
+    ServerTimestamp = "SERVER_TIMESTAMP"
 }

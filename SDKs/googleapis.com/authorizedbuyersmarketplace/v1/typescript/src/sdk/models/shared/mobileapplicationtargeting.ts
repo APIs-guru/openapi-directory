@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FirstPartyMobileApplicationTargeting } from "./firstpartymobileapplicationtargeting";
+
 
 
 // MobileApplicationTargeting
@@ -7,6 +8,6 @@ import { FirstPartyMobileApplicationTargeting } from "./firstpartymobileapplicat
  * Mobile application targeting settings.
 **/
 export class MobileApplicationTargeting extends SpeakeasyBase {
-  @Metadata({ data: "json, name=firstPartyTargeting" })
+  @SpeakeasyMetadata({ data: "json, name=firstPartyTargeting" })
   firstPartyTargeting?: FirstPartyMobileApplicationTargeting;
 }

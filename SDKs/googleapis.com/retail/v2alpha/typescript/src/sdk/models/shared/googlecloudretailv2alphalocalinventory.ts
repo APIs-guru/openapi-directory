@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudRetailV2alphaCustomAttribute } from "./googlecloudretailv2alphacustomattribute";
 import { GoogleCloudRetailV2alphaPriceInfo } from "./googlecloudretailv2alphapriceinfo";
+
 
 
 // GoogleCloudRetailV2alphaLocalInventory
@@ -9,15 +9,15 @@ import { GoogleCloudRetailV2alphaPriceInfo } from "./googlecloudretailv2alphapri
  * The inventory information at a place (e.g. a store) identified by a place ID.
 **/
 export class GoogleCloudRetailV2alphaLocalInventory extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attributes", elemType: shared.GoogleCloudRetailV2alphaCustomAttribute })
+  @SpeakeasyMetadata({ data: "json, name=attributes", elemType: GoogleCloudRetailV2alphaCustomAttribute })
   attributes?: Map<string, GoogleCloudRetailV2alphaCustomAttribute>;
 
-  @Metadata({ data: "json, name=fulfillmentTypes" })
+  @SpeakeasyMetadata({ data: "json, name=fulfillmentTypes" })
   fulfillmentTypes?: string[];
 
-  @Metadata({ data: "json, name=placeId" })
+  @SpeakeasyMetadata({ data: "json, name=placeId" })
   placeId?: string;
 
-  @Metadata({ data: "json, name=priceInfo" })
+  @SpeakeasyMetadata({ data: "json, name=priceInfo" })
   priceInfo?: GoogleCloudRetailV2alphaPriceInfo;
 }

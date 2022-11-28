@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import device
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ConnectedDevice:
-    device: device.Device = field(default=None, metadata={'dataclasses_json': { 'field_name': 'device' }})
-    enabled_profiles: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enabled_profiles' }})
+    device: Device = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('device') }})
+    enabled_profiles: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('enabled_profiles') }})
     

@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InstancePlatformEnum } from "./instanceplatformenum";
 import { BlueprintTypeEnum } from "./blueprinttypeenum";
+
 
 
 // Blueprint
@@ -8,39 +9,39 @@ import { BlueprintTypeEnum } from "./blueprinttypeenum";
  * Describes a blueprint (a virtual private server image).
 **/
 export class Blueprint extends SpeakeasyBase {
-  @Metadata({ data: "json, name=blueprintId" })
+  @SpeakeasyMetadata({ data: "json, name=blueprintId" })
   blueprintId?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=group" })
+  @SpeakeasyMetadata({ data: "json, name=group" })
   group?: string;
 
-  @Metadata({ data: "json, name=isActive" })
+  @SpeakeasyMetadata({ data: "json, name=isActive" })
   isActive?: boolean;
 
-  @Metadata({ data: "json, name=licenseUrl" })
+  @SpeakeasyMetadata({ data: "json, name=licenseUrl" })
   licenseUrl?: string;
 
-  @Metadata({ data: "json, name=minPower" })
+  @SpeakeasyMetadata({ data: "json, name=minPower" })
   minPower?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=platform" })
+  @SpeakeasyMetadata({ data: "json, name=platform" })
   platform?: InstancePlatformEnum;
 
-  @Metadata({ data: "json, name=productUrl" })
+  @SpeakeasyMetadata({ data: "json, name=productUrl" })
   productUrl?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: BlueprintTypeEnum;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 
-  @Metadata({ data: "json, name=versionCode" })
+  @SpeakeasyMetadata({ data: "json, name=versionCode" })
   versionCode?: string;
 }

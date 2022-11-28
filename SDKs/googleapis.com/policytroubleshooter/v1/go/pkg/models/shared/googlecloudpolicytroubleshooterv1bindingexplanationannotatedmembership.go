@@ -18,6 +18,8 @@ const (
 	GoogleCloudPolicytroubleshooterV1BindingExplanationAnnotatedMembershipRelevanceEnumHigh                          GoogleCloudPolicytroubleshooterV1BindingExplanationAnnotatedMembershipRelevanceEnum = "HIGH"
 )
 
+// GoogleCloudPolicytroubleshooterV1BindingExplanationAnnotatedMembership
+// Details about whether the binding includes the principal.
 type GoogleCloudPolicytroubleshooterV1BindingExplanationAnnotatedMembership struct {
 	Membership *GoogleCloudPolicytroubleshooterV1BindingExplanationAnnotatedMembershipMembershipEnum `json:"membership,omitempty"`
 	Relevance  *GoogleCloudPolicytroubleshooterV1BindingExplanationAnnotatedMembershipRelevanceEnum  `json:"relevance,omitempty"`

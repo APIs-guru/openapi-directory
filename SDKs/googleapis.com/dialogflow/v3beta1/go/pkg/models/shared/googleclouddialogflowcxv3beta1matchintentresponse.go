@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDialogflowCxV3beta1MatchIntentResponse
+// Response of MatchIntent.
 type GoogleCloudDialogflowCxV3beta1MatchIntentResponse struct {
 	CurrentPage   *GoogleCloudDialogflowCxV3beta1Page   `json:"currentPage,omitempty"`
 	Matches       []GoogleCloudDialogflowCxV3beta1Match `json:"matches,omitempty"`

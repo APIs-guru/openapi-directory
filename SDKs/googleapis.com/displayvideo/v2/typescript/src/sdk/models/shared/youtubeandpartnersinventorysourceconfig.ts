@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // YoutubeAndPartnersInventorySourceConfig
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Settings that control what YouTube related inventories the YouTube and Partners line item will target.
 **/
 export class YoutubeAndPartnersInventorySourceConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=includeYoutubeSearch" })
+  @SpeakeasyMetadata({ data: "json, name=includeYoutubeSearch" })
   includeYoutubeSearch?: boolean;
 
-  @Metadata({ data: "json, name=includeYoutubeVideoPartners" })
+  @SpeakeasyMetadata({ data: "json, name=includeYoutubeVideoPartners" })
   includeYoutubeVideoPartners?: boolean;
 
-  @Metadata({ data: "json, name=includeYoutubeVideos" })
+  @SpeakeasyMetadata({ data: "json, name=includeYoutubeVideos" })
   includeYoutubeVideos?: boolean;
 }

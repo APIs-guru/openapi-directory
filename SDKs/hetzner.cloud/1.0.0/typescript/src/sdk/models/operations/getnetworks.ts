@@ -1,44 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetNetworksQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=label_selector" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=label_selector" })
   labelSelector?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name" })
   name?: string;
 }
 
 
-export class GetNetworksRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetNetworksQueryParams;
-}
-
-
 export class GetNetworks200ApplicationJsonMetaPagination extends SpeakeasyBase {
-  @Metadata({ data: "json, name=last_page" })
+  @SpeakeasyMetadata({ data: "json, name=last_page" })
   lastPage: number;
 
-  @Metadata({ data: "json, name=next_page" })
+  @SpeakeasyMetadata({ data: "json, name=next_page" })
   nextPage: number;
 
-  @Metadata({ data: "json, name=page" })
+  @SpeakeasyMetadata({ data: "json, name=page" })
   page: number;
 
-  @Metadata({ data: "json, name=per_page" })
+  @SpeakeasyMetadata({ data: "json, name=per_page" })
   perPage: number;
 
-  @Metadata({ data: "json, name=previous_page" })
+  @SpeakeasyMetadata({ data: "json, name=previous_page" })
   previousPage: number;
 
-  @Metadata({ data: "json, name=total_entries" })
+  @SpeakeasyMetadata({ data: "json, name=total_entries" })
   totalEntries: number;
 }
 
 
 export class GetNetworks200ApplicationJsonMeta extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pagination" })
+  @SpeakeasyMetadata({ data: "json, name=pagination" })
   pagination: GetNetworks200ApplicationJsonMetaPagination;
 }
 
@@ -48,90 +43,96 @@ export class GetNetworks200ApplicationJsonMeta extends SpeakeasyBase {
  * Protection configuration for the Network
 **/
 export class GetNetworks200ApplicationJsonNetworksProtection extends SpeakeasyBase {
-  @Metadata({ data: "json, name=delete" })
+  @SpeakeasyMetadata({ data: "json, name=delete" })
   delete: boolean;
 }
 
 
 export class GetNetworks200ApplicationJsonNetworksRoutes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=destination" })
+  @SpeakeasyMetadata({ data: "json, name=destination" })
   destination: string;
 
-  @Metadata({ data: "json, name=gateway" })
+  @SpeakeasyMetadata({ data: "json, name=gateway" })
   gateway: string;
 }
 
 export enum GetNetworks200ApplicationJsonNetworksSubnetsTypeEnum {
-    Cloud = "cloud"
-,    Server = "server"
-,    Vswitch = "vswitch"
+    Cloud = "cloud",
+    Server = "server",
+    Vswitch = "vswitch"
 }
 
 
 export class GetNetworks200ApplicationJsonNetworksSubnets extends SpeakeasyBase {
-  @Metadata({ data: "json, name=gateway" })
+  @SpeakeasyMetadata({ data: "json, name=gateway" })
   gateway: string;
 
-  @Metadata({ data: "json, name=ip_range" })
+  @SpeakeasyMetadata({ data: "json, name=ip_range" })
   ipRange?: string;
 
-  @Metadata({ data: "json, name=network_zone" })
+  @SpeakeasyMetadata({ data: "json, name=network_zone" })
   networkZone: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: GetNetworks200ApplicationJsonNetworksSubnetsTypeEnum;
 }
 
 
 export class GetNetworks200ApplicationJsonNetworks extends SpeakeasyBase {
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=ip_range" })
+  @SpeakeasyMetadata({ data: "json, name=ip_range" })
   ipRange: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels: Map<string, any>;
 
-  @Metadata({ data: "json, name=load_balancers" })
+  @SpeakeasyMetadata({ data: "json, name=load_balancers" })
   loadBalancers?: number[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=protection" })
+  @SpeakeasyMetadata({ data: "json, name=protection" })
   protection: GetNetworks200ApplicationJsonNetworksProtection;
 
-  @Metadata({ data: "json, name=routes", elemType: operations.GetNetworks200ApplicationJsonNetworksRoutes })
+  @SpeakeasyMetadata({ data: "json, name=routes", elemType: GetNetworks200ApplicationJsonNetworksRoutes })
   routes: GetNetworks200ApplicationJsonNetworksRoutes[];
 
-  @Metadata({ data: "json, name=servers" })
+  @SpeakeasyMetadata({ data: "json, name=servers" })
   servers: number[];
 
-  @Metadata({ data: "json, name=subnets", elemType: operations.GetNetworks200ApplicationJsonNetworksSubnets })
+  @SpeakeasyMetadata({ data: "json, name=subnets", elemType: GetNetworks200ApplicationJsonNetworksSubnets })
   subnets: GetNetworks200ApplicationJsonNetworksSubnets[];
 }
 
 
 export class GetNetworks200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=meta" })
+  @SpeakeasyMetadata({ data: "json, name=meta" })
   meta?: GetNetworks200ApplicationJsonMeta;
 
-  @Metadata({ data: "json, name=networks", elemType: operations.GetNetworks200ApplicationJsonNetworks })
+  @SpeakeasyMetadata({ data: "json, name=networks", elemType: GetNetworks200ApplicationJsonNetworks })
   networks: GetNetworks200ApplicationJsonNetworks[];
 }
 
 
+export class GetNetworksRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetNetworksQueryParams;
+}
+
+
 export class GetNetworksResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getNetworks200ApplicationJsonObject?: GetNetworks200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

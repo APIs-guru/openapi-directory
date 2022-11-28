@@ -6,13 +6,13 @@ type GetPlaylistsQueryParams struct {
 	Start *int64  `queryParam:"style=form,explode=true,name=start"`
 }
 
-type GetPlaylistsRequest struct {
-	QueryParams GetPlaylistsQueryParams
-}
-
 type GetPlaylists200ApplicationJSON struct {
 	Data  []interface{} `json:"data,omitempty"`
 	Total *int64        `json:"total,omitempty"`
+}
+
+type GetPlaylistsRequest struct {
+	QueryParams GetPlaylistsQueryParams
 }
 
 type GetPlaylistsResponse struct {

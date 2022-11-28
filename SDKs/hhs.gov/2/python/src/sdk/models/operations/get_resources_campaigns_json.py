@@ -12,12 +12,12 @@ class GetResourcesCampaignsJSONQueryParams:
 
 @dataclass
 class GetResourcesCampaignsJSONRequest:
-    query_params: GetResourcesCampaignsJSONQueryParams = field(default=None)
+    query_params: GetResourcesCampaignsJSONQueryParams = field()
     
 
 @dataclass
 class GetResourcesCampaignsJSONResponse:
+    content_type: str = field()
+    status_code: int = field()
     campaign_wrapped: Optional[shared.CampaignWrapped] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

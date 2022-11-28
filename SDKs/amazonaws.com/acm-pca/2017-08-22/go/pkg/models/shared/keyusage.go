@@ -1,5 +1,7 @@
 package shared
 
+// KeyUsage
+// Defines one or more purposes for which the key contained in the certificate can be used. Default value for each option is false.
 type KeyUsage struct {
 	CrlSign          *bool `json:"CRLSign,omitempty"`
 	DataEncipherment *bool `json:"DataEncipherment,omitempty"`

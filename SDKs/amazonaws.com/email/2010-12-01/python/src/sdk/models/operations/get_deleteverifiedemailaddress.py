@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteVerifiedEmailAddressActionEnum(str, Enum):
     DELETE_VERIFIED_EMAIL_ADDRESS = "DeleteVerifiedEmailAddress"
@@ -10,9 +14,9 @@ class GetDeleteVerifiedEmailAddressVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteVerifiedEmailAddressQueryParams:
-    action: GetDeleteVerifiedEmailAddressActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    email_address: str = field(default=None, metadata={'query_param': { 'field_name': 'EmailAddress', 'style': 'form', 'explode': True }})
-    version: GetDeleteVerifiedEmailAddressVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetDeleteVerifiedEmailAddressActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    email_address: str = field(metadata={'query_param': { 'field_name': 'EmailAddress', 'style': 'form', 'explode': True }})
+    version: GetDeleteVerifiedEmailAddressVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,12 +32,12 @@ class GetDeleteVerifiedEmailAddressHeaders:
 
 @dataclass
 class GetDeleteVerifiedEmailAddressRequest:
-    query_params: GetDeleteVerifiedEmailAddressQueryParams = field(default=None)
-    headers: GetDeleteVerifiedEmailAddressHeaders = field(default=None)
+    headers: GetDeleteVerifiedEmailAddressHeaders = field()
+    query_params: GetDeleteVerifiedEmailAddressQueryParams = field()
     
 
 @dataclass
 class GetDeleteVerifiedEmailAddressResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

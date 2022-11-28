@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetActiveNamesResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=activeNames" })
+  @SpeakeasyMetadata({ data: "json, name=activeNames" })
   activeNames?: string[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

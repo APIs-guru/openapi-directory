@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class EeCreatePinResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pinReference" })
+  @SpeakeasyMetadata({ data: "json, name=pinReference" })
   pinReference: string;
 
-  @Metadata({ data: "json, name=trackingHeader" })
+  @SpeakeasyMetadata({ data: "json, name=trackingHeader" })
   trackingHeader: string;
 }

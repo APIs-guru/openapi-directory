@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DesiredWeightAndCapacity
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies weight and capacity values for a production variant.
 **/
 export class DesiredWeightAndCapacity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DesiredInstanceCount" })
+  @SpeakeasyMetadata({ data: "json, name=DesiredInstanceCount" })
   desiredInstanceCount?: number;
 
-  @Metadata({ data: "json, name=DesiredWeight" })
+  @SpeakeasyMetadata({ data: "json, name=DesiredWeight" })
   desiredWeight?: number;
 
-  @Metadata({ data: "json, name=VariantName" })
+  @SpeakeasyMetadata({ data: "json, name=VariantName" })
   variantName: string;
 }

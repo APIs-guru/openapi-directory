@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import contactchanneladdress
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateContactChannelRequest:
-    contact_channel_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ContactChannelId' }})
-    delivery_address: Optional[contactchanneladdress.ContactChannelAddress] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DeliveryAddress' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
+    contact_channel_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ContactChannelId') }})
+    delivery_address: Optional[ContactChannelAddress] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DeliveryAddress') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
     

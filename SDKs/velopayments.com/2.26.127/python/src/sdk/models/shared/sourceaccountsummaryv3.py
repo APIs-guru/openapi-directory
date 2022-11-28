@@ -1,13 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import paymentauditcurrencyv3_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SourceAccountSummaryV3:
-    currency: Optional[paymentauditcurrencyv3_enum.PaymentAuditCurrencyV3Enum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'currency' }})
-    source_account_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sourceAccountId' }})
-    total_cost: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'totalCost' }})
+    source_account_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('sourceAccountId') }})
+    total_cost: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('totalCost') }})
+    currency: Optional[PaymentAuditCurrencyV3Enum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('currency') }})
     

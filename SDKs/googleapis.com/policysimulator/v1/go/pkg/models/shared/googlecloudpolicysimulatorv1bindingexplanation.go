@@ -35,6 +35,8 @@ const (
 	GoogleCloudPolicysimulatorV1BindingExplanationRolePermissionRelevanceEnumHigh                          GoogleCloudPolicysimulatorV1BindingExplanationRolePermissionRelevanceEnum = "HIGH"
 )
 
+// GoogleCloudPolicysimulatorV1BindingExplanation
+// Details about how a binding in a policy affects a principal's ability to use a permission.
 type GoogleCloudPolicysimulatorV1BindingExplanation struct {
 	Access                  *GoogleCloudPolicysimulatorV1BindingExplanationAccessEnum                    `json:"access,omitempty"`
 	Condition               *GoogleTypeExpr                                                              `json:"condition,omitempty"`

@@ -10,6 +10,8 @@ type ReposUpdateWebhookPathParams struct {
 	Repo   string `pathParam:"style=simple,explode=false,name=repo"`
 }
 
+// ReposUpdateWebhookRequestBodyConfig
+// Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/enterprise-server@2.20/rest/reference/repos#create-hook-config-params).
 type ReposUpdateWebhookRequestBodyConfig struct {
 	Address     *string      `json:"address,omitempty"`
 	ContentType *string      `json:"content_type,omitempty"`

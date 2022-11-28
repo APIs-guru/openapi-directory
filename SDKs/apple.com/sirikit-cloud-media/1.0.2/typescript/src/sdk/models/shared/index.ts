@@ -7,6 +7,7 @@ export * from "./constraints";
 export * from "./content";
 export * from "./contentattributes";
 export * from "./executionmetrics";
+export * from "./extensionconfig";
 export * from "./playercontext";
 export * from "./playmediacontrol";
 export * from "./playmediacontrolactivity";

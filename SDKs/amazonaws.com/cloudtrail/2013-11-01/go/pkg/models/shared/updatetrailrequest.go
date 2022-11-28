@@ -1,5 +1,7 @@
 package shared
 
+// UpdateTrailRequest
+// Specifies settings to update for the trail.
 type UpdateTrailRequest struct {
 	CloudWatchLogsLogGroupArn  *string `json:"CloudWatchLogsLogGroupArn,omitempty"`
 	CloudWatchLogsRoleArn      *string `json:"CloudWatchLogsRoleArn,omitempty"`

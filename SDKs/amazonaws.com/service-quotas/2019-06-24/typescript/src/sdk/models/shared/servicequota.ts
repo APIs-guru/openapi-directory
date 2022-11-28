@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ErrorReason } from "./errorreason";
 import { QuotaPeriod } from "./quotaperiod";
 import { MetricInfo } from "./metricinfo";
+
 
 
 // ServiceQuota
@@ -9,39 +10,39 @@ import { MetricInfo } from "./metricinfo";
  * Information about a quota.
 **/
 export class ServiceQuota extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Adjustable" })
+  @SpeakeasyMetadata({ data: "json, name=Adjustable" })
   adjustable?: boolean;
 
-  @Metadata({ data: "json, name=ErrorReason" })
+  @SpeakeasyMetadata({ data: "json, name=ErrorReason" })
   errorReason?: ErrorReason;
 
-  @Metadata({ data: "json, name=GlobalQuota" })
+  @SpeakeasyMetadata({ data: "json, name=GlobalQuota" })
   globalQuota?: boolean;
 
-  @Metadata({ data: "json, name=Period" })
+  @SpeakeasyMetadata({ data: "json, name=Period" })
   period?: QuotaPeriod;
 
-  @Metadata({ data: "json, name=QuotaArn" })
+  @SpeakeasyMetadata({ data: "json, name=QuotaArn" })
   quotaArn?: string;
 
-  @Metadata({ data: "json, name=QuotaCode" })
+  @SpeakeasyMetadata({ data: "json, name=QuotaCode" })
   quotaCode?: string;
 
-  @Metadata({ data: "json, name=QuotaName" })
+  @SpeakeasyMetadata({ data: "json, name=QuotaName" })
   quotaName?: string;
 
-  @Metadata({ data: "json, name=ServiceCode" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceCode" })
   serviceCode?: string;
 
-  @Metadata({ data: "json, name=ServiceName" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceName" })
   serviceName?: string;
 
-  @Metadata({ data: "json, name=Unit" })
+  @SpeakeasyMetadata({ data: "json, name=Unit" })
   unit?: string;
 
-  @Metadata({ data: "json, name=UsageMetric" })
+  @SpeakeasyMetadata({ data: "json, name=UsageMetric" })
   usageMetric?: MetricInfo;
 
-  @Metadata({ data: "json, name=Value" })
+  @SpeakeasyMetadata({ data: "json, name=Value" })
   value?: number;
 }

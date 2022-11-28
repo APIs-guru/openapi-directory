@@ -1,7 +1,8 @@
 
 
+
 export enum DeviceCgroupPermissionEnum {
-    Read = "READ"
-,    Write = "WRITE"
-,    Mknod = "MKNOD"
+    Read = "READ",
+    Write = "WRITE",
+    Mknod = "MKNOD"
 }

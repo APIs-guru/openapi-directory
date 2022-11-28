@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AlertFeedback } from "./alertfeedback";
+
 
 
 // ListAlertFeedbackResponse
@@ -8,6 +8,6 @@ import { AlertFeedback } from "./alertfeedback";
  * Response message for an alert feedback listing request.
 **/
 export class ListAlertFeedbackResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=feedback", elemType: shared.AlertFeedback })
+  @SpeakeasyMetadata({ data: "json, name=feedback", elemType: AlertFeedback })
   feedback?: AlertFeedback[];
 }

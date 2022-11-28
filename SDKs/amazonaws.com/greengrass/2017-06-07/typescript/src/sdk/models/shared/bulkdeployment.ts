@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BulkDeployment
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about a bulk deployment. You cannot start a new bulk deployment while another one is still running or in a non-terminal state.
 **/
 export class BulkDeployment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BulkDeploymentArn" })
+  @SpeakeasyMetadata({ data: "json, name=BulkDeploymentArn" })
   bulkDeploymentArn?: string;
 
-  @Metadata({ data: "json, name=BulkDeploymentId" })
+  @SpeakeasyMetadata({ data: "json, name=BulkDeploymentId" })
   bulkDeploymentId?: string;
 
-  @Metadata({ data: "json, name=CreatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedAt" })
   createdAt?: string;
 }

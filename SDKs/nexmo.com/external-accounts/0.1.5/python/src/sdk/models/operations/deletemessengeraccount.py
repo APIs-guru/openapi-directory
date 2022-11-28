@@ -5,35 +5,25 @@ from sdk.models import shared
 
 @dataclass
 class DeleteMessengerAccountPathParams:
-    external_id: str = field(default=None, metadata={'path_param': { 'field_name': 'external_id', 'style': 'simple', 'explode': False }})
-    
-
-@dataclass
-class DeleteMessengerAccountSecurityOption1:
-    bearer_auth: shared.SchemeBearerAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
-    
-
-@dataclass
-class DeleteMessengerAccountSecurityOption2:
-    basic_auth: shared.SchemeBasicAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    external_id: str = field(metadata={'path_param': { 'field_name': 'external_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DeleteMessengerAccountSecurity:
-    option1: Optional[DeleteMessengerAccountSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[DeleteMessengerAccountSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
+    basic_auth: Optional[shared.SchemeBasicAuth] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    bearer_auth: Optional[shared.SchemeBearerAuth] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class DeleteMessengerAccountRequest:
-    path_params: DeleteMessengerAccountPathParams = field(default=None)
-    security: DeleteMessengerAccountSecurity = field(default=None)
+    path_params: DeleteMessengerAccountPathParams = field()
+    security: DeleteMessengerAccountSecurity = field()
     
 
 @dataclass
 class DeleteMessengerAccountResponse:
+    content_type: str = field()
+    status_code: int = field()
     four_hundred_and_one_response: Optional[shared.FourHundredAndOneResponse] = field(default=None)
     four_hundred_and_three_response: Optional[shared.FourHundredAndThreeResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

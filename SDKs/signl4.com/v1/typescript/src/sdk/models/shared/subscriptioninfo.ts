@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SubscriptionInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=branchId" })
+  @SpeakeasyMetadata({ data: "json, name=branchId" })
   branchId?: string;
 
-  @Metadata({ data: "json, name=country" })
+  @SpeakeasyMetadata({ data: "json, name=country" })
   country?: string;
 
-  @Metadata({ data: "json, name=currency" })
+  @SpeakeasyMetadata({ data: "json, name=currency" })
   currency?: string;
 
-  @Metadata({ data: "json, name=externalAccountId" })
+  @SpeakeasyMetadata({ data: "json, name=externalAccountId" })
   externalAccountId?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=nextBilling" })
+  @SpeakeasyMetadata({ data: "json, name=nextBilling" })
   nextBilling?: Date;
 
-  @Metadata({ data: "json, name=ownerId" })
+  @SpeakeasyMetadata({ data: "json, name=ownerId" })
   ownerId?: string;
 
-  @Metadata({ data: "json, name=planCode" })
+  @SpeakeasyMetadata({ data: "json, name=planCode" })
   planCode?: string;
 
-  @Metadata({ data: "json, name=planState" })
+  @SpeakeasyMetadata({ data: "json, name=planState" })
   planState?: number;
 
-  @Metadata({ data: "json, name=referralEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=referralEnabled" })
   referralEnabled?: boolean;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: number;
 }

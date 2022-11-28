@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ShareDetails } from "./sharedetails";
 import { ShareStatusEnum } from "./sharestatusenum";
 export declare class DescribePortfolioShareStatusOutput extends SpeakeasyBase {

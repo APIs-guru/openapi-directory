@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class GetRealmClientsIDEvaluateScopesGenerateExampleAccessTokenPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
-    realm: str = field(default=None, metadata={'path_param': { 'field_name': 'realm', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    realm: str = field(metadata={'path_param': { 'field_name': 'realm', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,13 +17,13 @@ class GetRealmClientsIDEvaluateScopesGenerateExampleAccessTokenQueryParams:
 
 @dataclass
 class GetRealmClientsIDEvaluateScopesGenerateExampleAccessTokenRequest:
-    path_params: GetRealmClientsIDEvaluateScopesGenerateExampleAccessTokenPathParams = field(default=None)
-    query_params: GetRealmClientsIDEvaluateScopesGenerateExampleAccessTokenQueryParams = field(default=None)
+    path_params: GetRealmClientsIDEvaluateScopesGenerateExampleAccessTokenPathParams = field()
+    query_params: GetRealmClientsIDEvaluateScopesGenerateExampleAccessTokenQueryParams = field()
     
 
 @dataclass
 class GetRealmClientsIDEvaluateScopesGenerateExampleAccessTokenResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_token: Optional[shared.AccessToken] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

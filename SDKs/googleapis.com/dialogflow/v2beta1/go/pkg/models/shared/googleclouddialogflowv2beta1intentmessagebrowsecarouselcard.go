@@ -10,6 +10,8 @@ const (
 	GoogleCloudDialogflowV2beta1IntentMessageBrowseCarouselCardImageDisplayOptionsEnumBlurredBackground              GoogleCloudDialogflowV2beta1IntentMessageBrowseCarouselCardImageDisplayOptionsEnum = "BLURRED_BACKGROUND"
 )
 
+// GoogleCloudDialogflowV2beta1IntentMessageBrowseCarouselCard
+// Browse Carousel Card for Actions on Google. https://developers.google.com/actions/assistant/responses#browsing_carousel
 type GoogleCloudDialogflowV2beta1IntentMessageBrowseCarouselCard struct {
 	ImageDisplayOptions *GoogleCloudDialogflowV2beta1IntentMessageBrowseCarouselCardImageDisplayOptionsEnum `json:"imageDisplayOptions,omitempty"`
 	Items               []GoogleCloudDialogflowV2beta1IntentMessageBrowseCarouselCardBrowseCarouselCardItem `json:"items,omitempty"`

@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GooglePrivacyDlpV2EntityId } from "./googleprivacydlpv2entityid";
 import { GooglePrivacyDlpV2FieldId } from "./googleprivacydlpv2fieldid";
+
 
 
 // GooglePrivacyDlpV2KAnonymityConfig
@@ -9,9 +9,9 @@ import { GooglePrivacyDlpV2FieldId } from "./googleprivacydlpv2fieldid";
  * k-anonymity metric, used for analysis of reidentification risk.
 **/
 export class GooglePrivacyDlpV2KAnonymityConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=entityId" })
+  @SpeakeasyMetadata({ data: "json, name=entityId" })
   entityId?: GooglePrivacyDlpV2EntityId;
 
-  @Metadata({ data: "json, name=quasiIds", elemType: shared.GooglePrivacyDlpV2FieldId })
+  @SpeakeasyMetadata({ data: "json, name=quasiIds", elemType: GooglePrivacyDlpV2FieldId })
   quasiIds?: GooglePrivacyDlpV2FieldId[];
 }

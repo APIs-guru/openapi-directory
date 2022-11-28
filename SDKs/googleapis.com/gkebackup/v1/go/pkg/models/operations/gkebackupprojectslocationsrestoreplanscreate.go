@@ -31,7 +31,7 @@ type GkebackupProjectsLocationsRestorePlansCreateSecurity struct {
 type GkebackupProjectsLocationsRestorePlansCreateRequest struct {
 	PathParams  GkebackupProjectsLocationsRestorePlansCreatePathParams
 	QueryParams GkebackupProjectsLocationsRestorePlansCreateQueryParams
-	Request     *shared.RestorePlan `request:"mediaType=application/json"`
+	Request     *shared.RestorePlanInput `request:"mediaType=application/json"`
 	Security    GkebackupProjectsLocationsRestorePlansCreateSecurity
 }
 

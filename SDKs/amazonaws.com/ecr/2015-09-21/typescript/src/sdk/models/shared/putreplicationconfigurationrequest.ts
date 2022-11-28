@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReplicationConfiguration } from "./replicationconfiguration";
 
 
+
 export class PutReplicationConfigurationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=replicationConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=replicationConfiguration" })
   replicationConfiguration: ReplicationConfiguration;
 }

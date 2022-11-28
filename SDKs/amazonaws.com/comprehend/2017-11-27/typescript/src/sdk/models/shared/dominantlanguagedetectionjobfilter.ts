@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { JobStatusEnum } from "./jobstatusenum";
+
 
 
 // DominantLanguageDetectionJobFilter
@@ -7,15 +8,15 @@ import { JobStatusEnum } from "./jobstatusenum";
  * Provides information for filtering a list of dominant language detection jobs. For more information, see the operation.
 **/
 export class DominantLanguageDetectionJobFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=JobName" })
+  @SpeakeasyMetadata({ data: "json, name=JobName" })
   jobName?: string;
 
-  @Metadata({ data: "json, name=JobStatus" })
+  @SpeakeasyMetadata({ data: "json, name=JobStatus" })
   jobStatus?: JobStatusEnum;
 
-  @Metadata({ data: "json, name=SubmitTimeAfter" })
+  @SpeakeasyMetadata({ data: "json, name=SubmitTimeAfter" })
   submitTimeAfter?: Date;
 
-  @Metadata({ data: "json, name=SubmitTimeBefore" })
+  @SpeakeasyMetadata({ data: "json, name=SubmitTimeBefore" })
   submitTimeBefore?: Date;
 }

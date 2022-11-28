@@ -4,10 +4,6 @@ type GetLicenseByIDQueryParams struct {
 	APIKey string `queryParam:"style=form,explode=true,name=api_key"`
 }
 
-type GetLicenseByIDRequest struct {
-	QueryParams GetLicenseByIDQueryParams
-}
-
 type GetLicenseByID200ApplicationJSONLicensesLicense struct {
 	ID   *int64  `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
@@ -21,6 +17,10 @@ type GetLicenseByID200ApplicationJSONLicenses struct {
 type GetLicenseByID200ApplicationJSON struct {
 	Licenses *GetLicenseByID200ApplicationJSONLicenses `json:"licenses,omitempty"`
 	Stat     *string                                   `json:"stat,omitempty"`
+}
+
+type GetLicenseByIDRequest struct {
+	QueryParams GetLicenseByIDQueryParams
 }
 
 type GetLicenseByIDResponse struct {

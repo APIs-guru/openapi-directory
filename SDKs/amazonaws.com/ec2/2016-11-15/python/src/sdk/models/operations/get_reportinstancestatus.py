@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetReportInstanceStatusActionEnum(str, Enum):
@@ -18,15 +19,15 @@ class GetReportInstanceStatusVersionEnum(str, Enum):
 
 @dataclass
 class GetReportInstanceStatusQueryParams:
-    action: GetReportInstanceStatusActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetReportInstanceStatusActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    instance_id: List[str] = field(metadata={'query_param': { 'field_name': 'InstanceId', 'style': 'form', 'explode': True }})
+    reason_code: List[shared.ReportInstanceReasonCodesEnum] = field(metadata={'query_param': { 'field_name': 'ReasonCode', 'style': 'form', 'explode': True }})
+    status: GetReportInstanceStatusStatusEnum = field(metadata={'query_param': { 'field_name': 'Status', 'style': 'form', 'explode': True }})
+    version: GetReportInstanceStatusVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     description: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Description', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
     end_time: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'EndTime', 'style': 'form', 'explode': True }})
-    instance_id: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'InstanceId', 'style': 'form', 'explode': True }})
-    reason_code: List[shared.ReportInstanceReasonCodesEnum] = field(default=None, metadata={'query_param': { 'field_name': 'ReasonCode', 'style': 'form', 'explode': True }})
     start_time: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'StartTime', 'style': 'form', 'explode': True }})
-    status: GetReportInstanceStatusStatusEnum = field(default=None, metadata={'query_param': { 'field_name': 'Status', 'style': 'form', 'explode': True }})
-    version: GetReportInstanceStatusVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -42,12 +43,12 @@ class GetReportInstanceStatusHeaders:
 
 @dataclass
 class GetReportInstanceStatusRequest:
-    query_params: GetReportInstanceStatusQueryParams = field(default=None)
-    headers: GetReportInstanceStatusHeaders = field(default=None)
+    headers: GetReportInstanceStatusHeaders = field()
+    query_params: GetReportInstanceStatusQueryParams = field()
     
 
 @dataclass
 class GetReportInstanceStatusResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

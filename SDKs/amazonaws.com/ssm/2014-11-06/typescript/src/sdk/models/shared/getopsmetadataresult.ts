@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MetadataValue } from "./metadatavalue";
 
 
+
 export class GetOpsMetadataResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Metadata", elemType: shared.MetadataValue })
+  @SpeakeasyMetadata({ data: "json, name=Metadata", elemType: MetadataValue })
   metadata?: Map<string, MetadataValue>;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=ResourceId" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceId" })
   resourceId?: string;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// LogStream
+// Represents a log stream, which is a sequence of log events from a single emitter of logs.
 type LogStream struct {
 	Arn                 *string `json:"arn,omitempty"`
 	CreationTime        *int64  `json:"creationTime,omitempty"`

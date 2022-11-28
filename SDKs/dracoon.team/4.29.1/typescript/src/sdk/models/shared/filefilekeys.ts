@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FileKeyContainer } from "./filekeycontainer";
+
 
 
 // FileFileKeys
@@ -7,9 +8,9 @@ import { FileKeyContainer } from "./filekeycontainer";
  * File key information
 **/
 export class FileFileKeys extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fileKeyContainer" })
+  @SpeakeasyMetadata({ data: "json, name=fileKeyContainer" })
   fileKeyContainer?: FileKeyContainer;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 }

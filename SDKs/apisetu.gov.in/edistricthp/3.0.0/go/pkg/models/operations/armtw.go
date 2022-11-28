@@ -26,11 +26,6 @@ type ArmtwSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type ArmtwRequest struct {
-	Request  *ArmtwRequestBody `request:"mediaType=application/json"`
-	Security ArmtwSecurity
-}
-
 type Armtw400ApplicationJSONErrorEnum string
 
 const (
@@ -160,6 +155,11 @@ const (
 type Armtw504ApplicationJSON struct {
 	Error            *Armtw504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Armtw504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type ArmtwRequest struct {
+	Request  *ArmtwRequestBody `request:"mediaType=application/json"`
+	Security ArmtwSecurity
 }
 
 type ArmtwResponse struct {

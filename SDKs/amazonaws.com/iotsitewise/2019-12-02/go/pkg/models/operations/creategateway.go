@@ -14,6 +14,8 @@ type CreateGatewayHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateGatewayRequestBodyGatewayPlatform
+// Contains a gateway's platform information.
 type CreateGatewayRequestBodyGatewayPlatform struct {
 	Greengrass   *shared.Greengrass   `json:"greengrass,omitempty"`
 	GreengrassV2 *shared.GreengrassV2 `json:"greengrassV2,omitempty"`

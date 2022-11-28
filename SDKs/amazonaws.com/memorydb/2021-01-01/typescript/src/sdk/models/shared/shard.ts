@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Node } from "./node";
+
 
 
 // Shard
@@ -8,18 +8,18 @@ import { Node } from "./node";
  * Represents a collection of nodes in a cluster. One node in the node group is the read/write primary node. All the other nodes are read-only Replica nodes.
 **/
 export class Shard extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Nodes", elemType: shared.Node })
+  @SpeakeasyMetadata({ data: "json, name=Nodes", elemType: Node })
   nodes?: Node[];
 
-  @Metadata({ data: "json, name=NumberOfNodes" })
+  @SpeakeasyMetadata({ data: "json, name=NumberOfNodes" })
   numberOfNodes?: number;
 
-  @Metadata({ data: "json, name=Slots" })
+  @SpeakeasyMetadata({ data: "json, name=Slots" })
   slots?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: string;
 }

@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import cell
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class TableRow:
-    cells: List[cell.Cell] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cells' }})
-    row_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rowId' }})
+    r"""TableRow
+    An object that contains attributes about a single row in a table
+    """
+    
+    cells: List[Cell] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('cells') }})
+    row_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('rowId') }})
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Location
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about an Direct Connect location.
 **/
 export class Location extends SpeakeasyBase {
-  @Metadata({ data: "json, name=availableMacSecPortSpeeds" })
+  @SpeakeasyMetadata({ data: "json, name=availableMacSecPortSpeeds" })
   availableMacSecPortSpeeds?: string[];
 
-  @Metadata({ data: "json, name=availablePortSpeeds" })
+  @SpeakeasyMetadata({ data: "json, name=availablePortSpeeds" })
   availablePortSpeeds?: string[];
 
-  @Metadata({ data: "json, name=availableProviders" })
+  @SpeakeasyMetadata({ data: "json, name=availableProviders" })
   availableProviders?: string[];
 
-  @Metadata({ data: "json, name=locationCode" })
+  @SpeakeasyMetadata({ data: "json, name=locationCode" })
   locationCode?: string;
 
-  @Metadata({ data: "json, name=locationName" })
+  @SpeakeasyMetadata({ data: "json, name=locationName" })
   locationName?: string;
 
-  @Metadata({ data: "json, name=region" })
+  @SpeakeasyMetadata({ data: "json, name=region" })
   region?: string;
 }

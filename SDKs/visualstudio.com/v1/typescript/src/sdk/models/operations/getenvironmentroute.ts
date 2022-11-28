@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetEnvironmentRoutePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=environmentId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=environmentId" })
   environmentId: string;
 }
 
 
 export class GetEnvironmentRouteQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=connect" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=connect" })
   connect?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=pfConnect" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pfConnect" })
   pfConnect?: boolean;
 }
 
 
 export class GetEnvironmentRouteRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetEnvironmentRoutePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetEnvironmentRouteQueryParams;
 }
 
 
 export class GetEnvironmentRouteResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   cloudEnvironmentResult?: shared.CloudEnvironmentResult;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

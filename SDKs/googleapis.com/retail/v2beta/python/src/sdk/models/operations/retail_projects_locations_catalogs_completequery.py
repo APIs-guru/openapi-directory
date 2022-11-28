@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class RetailProjectsLocationsCatalogsCompleteQueryPathParams:
-    catalog: str = field(default=None, metadata={'path_param': { 'field_name': 'catalog', 'style': 'simple', 'explode': False }})
+    catalog: str = field(metadata={'path_param': { 'field_name': 'catalog', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -31,20 +32,20 @@ class RetailProjectsLocationsCatalogsCompleteQueryQueryParams:
 
 @dataclass
 class RetailProjectsLocationsCatalogsCompleteQuerySecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class RetailProjectsLocationsCatalogsCompleteQueryRequest:
-    path_params: RetailProjectsLocationsCatalogsCompleteQueryPathParams = field(default=None)
-    query_params: RetailProjectsLocationsCatalogsCompleteQueryQueryParams = field(default=None)
-    security: RetailProjectsLocationsCatalogsCompleteQuerySecurity = field(default=None)
+    path_params: RetailProjectsLocationsCatalogsCompleteQueryPathParams = field()
+    query_params: RetailProjectsLocationsCatalogsCompleteQueryQueryParams = field()
+    security: RetailProjectsLocationsCatalogsCompleteQuerySecurity = field()
     
 
 @dataclass
 class RetailProjectsLocationsCatalogsCompleteQueryResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_retail_v2beta_complete_query_response: Optional[shared.GoogleCloudRetailV2betaCompleteQueryResponse] = field(default=None)
-    status_code: int = field(default=None)
     

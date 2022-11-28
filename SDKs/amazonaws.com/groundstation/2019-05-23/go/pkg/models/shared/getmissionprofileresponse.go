@@ -1,5 +1,7 @@
 package shared
 
+// GetMissionProfileResponse
+// <p/>
 type GetMissionProfileResponse struct {
 	ContactPostPassDurationSeconds      *int64            `json:"contactPostPassDurationSeconds,omitempty"`
 	ContactPrePassDurationSeconds       *int64            `json:"contactPrePassDurationSeconds,omitempty"`

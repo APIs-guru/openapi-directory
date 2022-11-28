@@ -18,7 +18,7 @@ class PostSetupV1CompaniesDomainsRequest:
 
 @dataclass
 class PostSetupV1CompaniesDomainsResponse:
+    content_type: str = field()
+    status_code: int = field()
     company_domain_view_model: Optional[shared.CompanyDomainViewModel] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

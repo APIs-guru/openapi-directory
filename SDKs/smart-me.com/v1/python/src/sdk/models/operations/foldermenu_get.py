@@ -10,13 +10,13 @@ class FolderMenuGetQueryParams:
 
 @dataclass
 class FolderMenuGetRequest:
-    query_params: FolderMenuGetQueryParams = field(default=None)
+    query_params: FolderMenuGetQueryParams = field()
     
 
 @dataclass
 class FolderMenuGetResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     folder_menu_configuration: Optional[shared.FolderMenuConfiguration] = field(default=None)
-    status_code: int = field(default=None)
     

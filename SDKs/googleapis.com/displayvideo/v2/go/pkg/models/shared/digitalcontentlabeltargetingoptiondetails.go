@@ -12,6 +12,8 @@ const (
 	DigitalContentLabelTargetingOptionDetailsContentRatingTierEnumContentRatingTierFamilies         DigitalContentLabelTargetingOptionDetailsContentRatingTierEnum = "CONTENT_RATING_TIER_FAMILIES"
 )
 
+// DigitalContentLabelTargetingOptionDetails
+// Represents a targetable digital content label rating tier. This will be populated in the digital_content_label_details field of the TargetingOption when targeting_type is `TARGETING_TYPE_DIGITAL_CONTENT_LABEL_EXCLUSION`.
 type DigitalContentLabelTargetingOptionDetails struct {
 	ContentRatingTier *DigitalContentLabelTargetingOptionDetailsContentRatingTierEnum `json:"contentRatingTier,omitempty"`
 }

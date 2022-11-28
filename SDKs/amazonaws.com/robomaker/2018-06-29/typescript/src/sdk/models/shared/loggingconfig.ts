@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LoggingConfig
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The logging configuration.
 **/
 export class LoggingConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=recordAllRosTopics" })
+  @SpeakeasyMetadata({ data: "json, name=recordAllRosTopics" })
   recordAllRosTopics: boolean;
 }

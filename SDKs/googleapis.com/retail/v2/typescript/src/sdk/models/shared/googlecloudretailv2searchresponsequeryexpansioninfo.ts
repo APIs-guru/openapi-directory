@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudRetailV2SearchResponseQueryExpansionInfo
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information describing query expansion including whether expansion has occurred.
 **/
 export class GoogleCloudRetailV2SearchResponseQueryExpansionInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=expandedQuery" })
+  @SpeakeasyMetadata({ data: "json, name=expandedQuery" })
   expandedQuery?: boolean;
 
-  @Metadata({ data: "json, name=pinnedResultCount" })
+  @SpeakeasyMetadata({ data: "json, name=pinnedResultCount" })
   pinnedResultCount?: string;
 }

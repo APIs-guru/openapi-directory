@@ -31,7 +31,7 @@ type BaremetalsolutionProjectsLocationsSSHKeysCreateSecurity struct {
 type BaremetalsolutionProjectsLocationsSSHKeysCreateRequest struct {
 	PathParams  BaremetalsolutionProjectsLocationsSSHKeysCreatePathParams
 	QueryParams BaremetalsolutionProjectsLocationsSSHKeysCreateQueryParams
-	Request     *shared.SSHKey `request:"mediaType=application/json"`
+	Request     *shared.SSHKeyInput `request:"mediaType=application/json"`
 	Security    BaremetalsolutionProjectsLocationsSSHKeysCreateSecurity
 }
 

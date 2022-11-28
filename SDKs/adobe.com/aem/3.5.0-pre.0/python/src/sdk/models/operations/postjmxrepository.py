@@ -4,16 +4,16 @@ from dataclasses import dataclass, field
 
 @dataclass
 class PostJmxRepositoryPathParams:
-    action: str = field(default=None, metadata={'path_param': { 'field_name': 'action', 'style': 'simple', 'explode': False }})
+    action: str = field(metadata={'path_param': { 'field_name': 'action', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class PostJmxRepositoryRequest:
-    path_params: PostJmxRepositoryPathParams = field(default=None)
+    path_params: PostJmxRepositoryPathParams = field()
     
 
 @dataclass
 class PostJmxRepositoryResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

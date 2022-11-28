@@ -18,12 +18,12 @@ class GetBandwidthSnapshotsQueryParams:
 
 @dataclass
 class GetBandwidthSnapshotsRequest:
-    query_params: GetBandwidthSnapshotsQueryParams = field(default=None)
+    query_params: GetBandwidthSnapshotsQueryParams = field()
     
 
 @dataclass
 class GetBandwidthSnapshotsResponse:
+    content_type: str = field()
+    status_code: int = field()
     bandwidth_snapshot_entities: Optional[List[shared.BandwidthSnapshotEntity]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

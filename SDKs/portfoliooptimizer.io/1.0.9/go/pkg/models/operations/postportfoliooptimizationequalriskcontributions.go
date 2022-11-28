@@ -11,12 +11,12 @@ type PostPortfolioOptimizationEqualRiskContributionsRequestBody struct {
 	Constraints            *PostPortfolioOptimizationEqualRiskContributionsRequestBodyConstraints `json:"constraints,omitempty"`
 }
 
-type PostPortfolioOptimizationEqualRiskContributionsRequest struct {
-	Request PostPortfolioOptimizationEqualRiskContributionsRequestBody `request:"mediaType=application/json"`
-}
-
 type PostPortfolioOptimizationEqualRiskContributions200ApplicationJSON struct {
 	AssetsWeights []float64 `json:"assetsWeights"`
+}
+
+type PostPortfolioOptimizationEqualRiskContributionsRequest struct {
+	Request PostPortfolioOptimizationEqualRiskContributionsRequestBody `request:"mediaType=application/json"`
 }
 
 type PostPortfolioOptimizationEqualRiskContributionsResponse struct {

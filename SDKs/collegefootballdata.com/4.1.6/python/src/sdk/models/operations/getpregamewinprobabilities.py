@@ -13,12 +13,12 @@ class GetPregameWinProbabilitiesQueryParams:
 
 @dataclass
 class GetPregameWinProbabilitiesRequest:
-    query_params: GetPregameWinProbabilitiesQueryParams = field(default=None)
+    query_params: GetPregameWinProbabilitiesQueryParams = field()
     
 
 @dataclass
 class GetPregameWinProbabilitiesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     pregame_wps: Optional[List[shared.PregameWp]] = field(default=None)
-    status_code: int = field(default=None)
     

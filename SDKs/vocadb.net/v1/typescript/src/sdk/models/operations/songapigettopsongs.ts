@@ -1,82 +1,83 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum SongApiGetTopSongsFieldsEnum {
-    None = "None"
-,    AdditionalNames = "AdditionalNames"
-,    Albums = "Albums"
-,    Artists = "Artists"
-,    Lyrics = "Lyrics"
-,    MainPicture = "MainPicture"
-,    Names = "Names"
-,    PVs = "PVs"
-,    ReleaseEvent = "ReleaseEvent"
-,    Tags = "Tags"
-,    ThumbUrl = "ThumbUrl"
-,    WebLinks = "WebLinks"
+    None = "None",
+    AdditionalNames = "AdditionalNames",
+    Albums = "Albums",
+    Artists = "Artists",
+    Lyrics = "Lyrics",
+    MainPicture = "MainPicture",
+    Names = "Names",
+    PVs = "PVs",
+    ReleaseEvent = "ReleaseEvent",
+    Tags = "Tags",
+    ThumbUrl = "ThumbUrl",
+    WebLinks = "WebLinks"
 }
 
 export enum SongApiGetTopSongsFilterByEnum {
-    CreateDate = "CreateDate"
-,    PublishDate = "PublishDate"
-,    Popularity = "Popularity"
+    CreateDate = "CreateDate",
+    PublishDate = "PublishDate",
+    Popularity = "Popularity"
 }
 
 export enum SongApiGetTopSongsLanguagePreferenceEnum {
-    Default = "Default"
-,    Japanese = "Japanese"
-,    Romaji = "Romaji"
-,    English = "English"
+    Default = "Default",
+    Japanese = "Japanese",
+    Romaji = "Romaji",
+    English = "English"
 }
 
 export enum SongApiGetTopSongsVocalistEnum {
-    Nothing = "Nothing"
-,    Vocaloid = "Vocaloid"
-,    Utau = "UTAU"
-,    Other = "Other"
+    Nothing = "Nothing",
+    Vocaloid = "Vocaloid",
+    Utau = "UTAU",
+    Other = "Other"
 }
 
 
 export class SongApiGetTopSongsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=durationHours" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=durationHours" })
   durationHours?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" })
   fields?: SongApiGetTopSongsFieldsEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filterBy" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filterBy" })
   filterBy?: SongApiGetTopSongsFilterByEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=languagePreference" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=languagePreference" })
   languagePreference?: SongApiGetTopSongsLanguagePreferenceEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxResults" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=startDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=startDate" })
   startDate?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=vocalist" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=vocalist" })
   vocalist?: SongApiGetTopSongsVocalistEnum;
 }
 
 
 export class SongApiGetTopSongsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: SongApiGetTopSongsQueryParams;
 }
 
 
 export class SongApiGetTopSongsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.SongForApiContract })
+  @SpeakeasyMetadata({ elemType: shared.SongForApiContract })
   songForApiContracts?: shared.SongForApiContract[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

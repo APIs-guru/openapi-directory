@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DirectoryStateEnum } from "./directorystateenum";
+
 
 
 // Directory
@@ -7,15 +8,15 @@ import { DirectoryStateEnum } from "./directorystateenum";
  * Directory structure that includes the directory name and directory ARN.
 **/
 export class Directory extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreationDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationDateTime" })
   creationDateTime?: Date;
 
-  @Metadata({ data: "json, name=DirectoryArn" })
+  @SpeakeasyMetadata({ data: "json, name=DirectoryArn" })
   directoryArn?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=State" })
+  @SpeakeasyMetadata({ data: "json, name=State" })
   state?: DirectoryStateEnum;
 }

@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ComputationTopology } from "./computationtopology";
 import { DataDiskAssignment } from "./datadiskassignment";
+
 
 
 // TopologyConfig
@@ -9,18 +9,18 @@ import { DataDiskAssignment } from "./datadiskassignment";
  * Global topology of the streaming Dataflow job, including all computations and their sharded locations.
 **/
 export class TopologyConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=computations", elemType: shared.ComputationTopology })
+  @SpeakeasyMetadata({ data: "json, name=computations", elemType: ComputationTopology })
   computations?: ComputationTopology[];
 
-  @Metadata({ data: "json, name=dataDiskAssignments", elemType: shared.DataDiskAssignment })
+  @SpeakeasyMetadata({ data: "json, name=dataDiskAssignments", elemType: DataDiskAssignment })
   dataDiskAssignments?: DataDiskAssignment[];
 
-  @Metadata({ data: "json, name=forwardingKeyBits" })
+  @SpeakeasyMetadata({ data: "json, name=forwardingKeyBits" })
   forwardingKeyBits?: number;
 
-  @Metadata({ data: "json, name=persistentStateVersion" })
+  @SpeakeasyMetadata({ data: "json, name=persistentStateVersion" })
   persistentStateVersion?: number;
 
-  @Metadata({ data: "json, name=userStageToComputationNameMap" })
+  @SpeakeasyMetadata({ data: "json, name=userStageToComputationNameMap" })
   userStageToComputationNameMap?: Map<string, string>;
 }

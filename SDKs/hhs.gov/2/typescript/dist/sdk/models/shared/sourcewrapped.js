@@ -22,24 +22,24 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Meta } from "./meta";
+import { Source } from "./source";
 var SourceWrapped = /** @class */ (function (_super) {
     __extends(SourceWrapped, _super);
     function SourceWrapped() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=callback" }),
+        SpeakeasyMetadata({ data: "json, name=callback" }),
         __metadata("design:type", String)
     ], SourceWrapped.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "json, name=meta" }),
+        SpeakeasyMetadata({ data: "json, name=meta" }),
         __metadata("design:type", Meta)
     ], SourceWrapped.prototype, "meta", void 0);
     __decorate([
-        Metadata({ data: "json, name=results", elemType: shared.Source }),
+        SpeakeasyMetadata({ data: "json, name=results", elemType: Source }),
         __metadata("design:type", Array)
     ], SourceWrapped.prototype, "results", void 0);
     return SourceWrapped;

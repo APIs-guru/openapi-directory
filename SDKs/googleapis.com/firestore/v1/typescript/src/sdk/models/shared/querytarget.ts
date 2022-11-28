@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StructuredQuery } from "./structuredquery";
+
 
 
 // QueryTarget
@@ -7,9 +8,9 @@ import { StructuredQuery } from "./structuredquery";
  * A target specified by a query.
 **/
 export class QueryTarget extends SpeakeasyBase {
-  @Metadata({ data: "json, name=parent" })
+  @SpeakeasyMetadata({ data: "json, name=parent" })
   parent?: string;
 
-  @Metadata({ data: "json, name=structuredQuery" })
+  @SpeakeasyMetadata({ data: "json, name=structuredQuery" })
   structuredQuery?: StructuredQuery;
 }

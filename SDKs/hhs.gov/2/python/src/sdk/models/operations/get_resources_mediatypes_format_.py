@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class GetResourcesMediaTypesFormatPathParams:
-    format: str = field(default=None, metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
+    format: str = field(metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetResourcesMediaTypesFormatRequest:
-    path_params: GetResourcesMediaTypesFormatPathParams = field(default=None)
+    path_params: GetResourcesMediaTypesFormatPathParams = field()
     
 
 @dataclass
 class GetResourcesMediaTypesFormatResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     media_type_holder_wrappeds: Optional[List[shared.MediaTypeHolderWrapped]] = field(default=None)
-    status_code: int = field(default=None)
     

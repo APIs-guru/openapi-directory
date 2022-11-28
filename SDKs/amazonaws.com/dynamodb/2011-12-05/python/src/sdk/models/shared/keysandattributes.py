@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import key
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class KeysAndAttributes:
-    attributes_to_get: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AttributesToGet' }})
-    consistent_read: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ConsistentRead' }})
-    keys: List[key.Key] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Keys' }})
+    keys: List[Key] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Keys') }})
+    attributes_to_get: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AttributesToGet') }})
+    consistent_read: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ConsistentRead') }})
     

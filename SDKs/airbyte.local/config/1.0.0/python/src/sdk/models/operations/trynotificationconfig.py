@@ -5,14 +5,14 @@ from sdk.models import shared
 
 @dataclass
 class TryNotificationConfigRequest:
-    request: shared.Notification = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.Notification = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class TryNotificationConfigResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     invalid_input_exception_info: Optional[shared.InvalidInputExceptionInfo] = field(default=None)
     not_found_known_exception_info: Optional[shared.NotFoundKnownExceptionInfo] = field(default=None)
     notification_read: Optional[shared.NotificationRead] = field(default=None)
-    status_code: int = field(default=None)
     

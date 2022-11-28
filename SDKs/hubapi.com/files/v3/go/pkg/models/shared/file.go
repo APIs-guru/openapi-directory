@@ -15,6 +15,8 @@ const (
 	FileAccessEnumPrivate            FileAccessEnum = "PRIVATE"
 )
 
+// File
+// File
 type File struct {
 	Access            FileAccessEnum `json:"access"`
 	Archived          bool           `json:"archived"`

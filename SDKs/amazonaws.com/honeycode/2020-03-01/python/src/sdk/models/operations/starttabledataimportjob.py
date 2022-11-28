@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class StartTableDataImportJobPathParams:
-    table_id: str = field(default=None, metadata={'path_param': { 'field_name': 'tableId', 'style': 'simple', 'explode': False }})
-    workbook_id: str = field(default=None, metadata={'path_param': { 'field_name': 'workbookId', 'style': 'simple', 'explode': False }})
+    table_id: str = field(metadata={'path_param': { 'field_name': 'tableId', 'style': 'simple', 'explode': False }})
+    workbook_id: str = field(metadata={'path_param': { 'field_name': 'workbookId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,41 +32,49 @@ class StartTableDataImportJobRequestBodyDataFormatEnum(str, Enum):
 @dataclass_json
 @dataclass
 class StartTableDataImportJobRequestBodyDataSource:
-    data_source_config: Optional[shared.ImportDataSourceConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dataSourceConfig' }})
+    r"""StartTableDataImportJobRequestBodyDataSource
+    An object that has details about the source of the data that was submitted for import.
+    """
+    
+    data_source_config: Optional[shared.ImportDataSourceConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dataSourceConfig') }})
     
 
 @dataclass_json
 @dataclass
 class StartTableDataImportJobRequestBodyImportOptions:
-    delimited_text_options: Optional[shared.DelimitedTextImportOptions] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'delimitedTextOptions' }})
-    destination_options: Optional[shared.DestinationOptions] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'destinationOptions' }})
+    r"""StartTableDataImportJobRequestBodyImportOptions
+    An object that contains the options specified by the sumitter of the import request.
+    """
+    
+    delimited_text_options: Optional[shared.DelimitedTextImportOptions] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('delimitedTextOptions') }})
+    destination_options: Optional[shared.DestinationOptions] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('destinationOptions') }})
     
 
 @dataclass_json
 @dataclass
 class StartTableDataImportJobRequestBody:
-    client_request_token: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clientRequestToken' }})
-    data_format: StartTableDataImportJobRequestBodyDataFormatEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dataFormat' }})
-    data_source: StartTableDataImportJobRequestBodyDataSource = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dataSource' }})
-    import_options: StartTableDataImportJobRequestBodyImportOptions = field(default=None, metadata={'dataclasses_json': { 'field_name': 'importOptions' }})
+    client_request_token: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('clientRequestToken') }})
+    data_format: StartTableDataImportJobRequestBodyDataFormatEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('dataFormat') }})
+    data_source: StartTableDataImportJobRequestBodyDataSource = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('dataSource') }})
+    import_options: StartTableDataImportJobRequestBodyImportOptions = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('importOptions') }})
     
 
 @dataclass
 class StartTableDataImportJobRequest:
-    path_params: StartTableDataImportJobPathParams = field(default=None)
-    headers: StartTableDataImportJobHeaders = field(default=None)
-    request: StartTableDataImportJobRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: StartTableDataImportJobHeaders = field()
+    path_params: StartTableDataImportJobPathParams = field()
+    request: StartTableDataImportJobRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class StartTableDataImportJobResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
     start_table_data_import_job_result: Optional[shared.StartTableDataImportJobResult] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import typedvalue
+from sdk import utils
+from . import *
 
 class CollectdValueDataSourceTypeEnum(str, Enum):
     UNSPECIFIED_DATA_SOURCE_TYPE = "UNSPECIFIED_DATA_SOURCE_TYPE"
@@ -14,7 +16,11 @@ class CollectdValueDataSourceTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CollectdValue:
-    data_source_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dataSourceName' }})
-    data_source_type: Optional[CollectdValueDataSourceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dataSourceType' }})
-    value: Optional[typedvalue.TypedValue] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    r"""CollectdValue
+    A single data point from a collectd-based plugin.
+    """
+    
+    data_source_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dataSourceName') }})
+    data_source_type: Optional[CollectdValueDataSourceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dataSourceType') }})
+    value: Optional[TypedValue] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     

@@ -19,6 +19,8 @@ type ListStreamsHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// ListStreamsRequestBodyStreamNameCondition
+// Specifies the condition that streams must satisfy to be returned when you list streams (see the <code>ListStreams</code> API). A condition has a comparison operation and a value. Currently, you can specify only the <code>BEGINS_WITH</code> operator, which finds streams whose names start with a given prefix.
 type ListStreamsRequestBodyStreamNameCondition struct {
 	ComparisonOperator *shared.ComparisonOperatorEnum `json:"ComparisonOperator,omitempty"`
 	ComparisonValue    *string                        `json:"ComparisonValue,omitempty"`

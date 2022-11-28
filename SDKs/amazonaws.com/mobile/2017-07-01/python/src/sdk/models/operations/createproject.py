@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -25,26 +29,26 @@ class CreateProjectHeaders:
 @dataclass_json
 @dataclass
 class CreateProjectRequestBody:
-    contents: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'contents' }})
+    contents: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('contents') }})
     
 
 @dataclass
 class CreateProjectRequest:
-    query_params: CreateProjectQueryParams = field(default=None)
-    headers: CreateProjectHeaders = field(default=None)
-    request: CreateProjectRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateProjectHeaders = field()
+    query_params: CreateProjectQueryParams = field()
+    request: CreateProjectRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateProjectResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[shared.BadRequestException] = field(default=None)
-    content_type: str = field(default=None)
     create_project_result: Optional[shared.CreateProjectResult] = field(default=None)
     internal_failure_exception: Optional[shared.InternalFailureException] = field(default=None)
     limit_exceeded_exception: Optional[shared.LimitExceededException] = field(default=None)
     not_found_exception: Optional[shared.NotFoundException] = field(default=None)
     service_unavailable_exception: Optional[shared.ServiceUnavailableException] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[shared.TooManyRequestsException] = field(default=None)
     unauthorized_exception: Optional[shared.UnauthorizedException] = field(default=None)
     

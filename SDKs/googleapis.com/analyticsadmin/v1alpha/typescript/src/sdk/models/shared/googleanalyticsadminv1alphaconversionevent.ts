@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleAnalyticsAdminV1alphaConversionEvent
@@ -6,18 +7,28 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A conversion event in a Google Analytics property.
 **/
 export class GoogleAnalyticsAdminV1alphaConversionEvent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=custom" })
+  @SpeakeasyMetadata({ data: "json, name=custom" })
   custom?: boolean;
 
-  @Metadata({ data: "json, name=deletable" })
+  @SpeakeasyMetadata({ data: "json, name=deletable" })
   deletable?: boolean;
 
-  @Metadata({ data: "json, name=eventName" })
+  @SpeakeasyMetadata({ data: "json, name=eventName" })
   eventName?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
+}
+
+
+// GoogleAnalyticsAdminV1alphaConversionEventInput
+/** 
+ * A conversion event in a Google Analytics property.
+**/
+export class GoogleAnalyticsAdminV1alphaConversionEventInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=eventName" })
+  eventName?: string;
 }

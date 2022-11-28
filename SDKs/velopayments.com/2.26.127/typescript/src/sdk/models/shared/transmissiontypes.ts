@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TransmissionTypes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ACH" })
+  @SpeakeasyMetadata({ data: "json, name=ACH" })
   ach: boolean;
 
-  @Metadata({ data: "json, name=SAME_DAY_ACH" })
+  @SpeakeasyMetadata({ data: "json, name=SAME_DAY_ACH" })
   sameDayAch: boolean;
 
-  @Metadata({ data: "json, name=WIRE" })
+  @SpeakeasyMetadata({ data: "json, name=WIRE" })
   wire: boolean;
 }

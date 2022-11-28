@@ -18,6 +18,8 @@ type UpdateAPIHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateAPIRequestBodyCorsConfiguration
+// Represents a CORS configuration. Supported only for HTTP APIs. See <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-cors.html">Configuring CORS</a> for more information.
 type UpdateAPIRequestBodyCorsConfiguration struct {
 	AllowCredentials *bool    `json:"AllowCredentials,omitempty"`
 	AllowHeaders     []string `json:"AllowHeaders,omitempty"`

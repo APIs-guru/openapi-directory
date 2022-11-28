@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GoogleAppsCloudidentityDevicesV1AndroidAttributesOwnershipPrivilegeEnum;
 (function (GoogleAppsCloudidentityDevicesV1AndroidAttributesOwnershipPrivilegeEnum) {
     GoogleAppsCloudidentityDevicesV1AndroidAttributesOwnershipPrivilegeEnum["OwnershipPrivilegeUnspecified"] = "OWNERSHIP_PRIVILEGE_UNSPECIFIED";
@@ -40,19 +40,19 @@ var GoogleAppsCloudidentityDevicesV1AndroidAttributes = /** @class */ (function 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=enabledUnknownSources" }),
+        SpeakeasyMetadata({ data: "json, name=enabledUnknownSources" }),
         __metadata("design:type", Boolean)
     ], GoogleAppsCloudidentityDevicesV1AndroidAttributes.prototype, "enabledUnknownSources", void 0);
     __decorate([
-        Metadata({ data: "json, name=ownerProfileAccount" }),
+        SpeakeasyMetadata({ data: "json, name=ownerProfileAccount" }),
         __metadata("design:type", Boolean)
     ], GoogleAppsCloudidentityDevicesV1AndroidAttributes.prototype, "ownerProfileAccount", void 0);
     __decorate([
-        Metadata({ data: "json, name=ownershipPrivilege" }),
+        SpeakeasyMetadata({ data: "json, name=ownershipPrivilege" }),
         __metadata("design:type", String)
     ], GoogleAppsCloudidentityDevicesV1AndroidAttributes.prototype, "ownershipPrivilege", void 0);
     __decorate([
-        Metadata({ data: "json, name=supportsWorkProfile" }),
+        SpeakeasyMetadata({ data: "json, name=supportsWorkProfile" }),
         __metadata("design:type", Boolean)
     ], GoogleAppsCloudidentityDevicesV1AndroidAttributes.prototype, "supportsWorkProfile", void 0);
     return GoogleAppsCloudidentityDevicesV1AndroidAttributes;

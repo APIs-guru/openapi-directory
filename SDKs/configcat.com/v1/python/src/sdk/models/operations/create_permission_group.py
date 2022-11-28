@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class CreatePermissionGroupPathParams:
-    product_id: str = field(default=None, metadata={'path_param': { 'field_name': 'productId', 'style': 'simple', 'explode': False }})
+    product_id: str = field(metadata={'path_param': { 'field_name': 'productId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,13 +17,13 @@ class CreatePermissionGroupRequests:
 
 @dataclass
 class CreatePermissionGroupRequest:
-    path_params: CreatePermissionGroupPathParams = field(default=None)
-    request: CreatePermissionGroupRequests = field(default=None)
+    path_params: CreatePermissionGroupPathParams = field()
+    request: CreatePermissionGroupRequests = field()
     
 
 @dataclass
 class CreatePermissionGroupResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     permission_group_model: Optional[shared.PermissionGroupModel] = field(default=None)
-    status_code: int = field(default=None)
     

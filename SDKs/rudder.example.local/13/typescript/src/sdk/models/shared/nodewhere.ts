@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class NodeWhere extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attribute" })
+  @SpeakeasyMetadata({ data: "json, name=attribute" })
   attribute?: string;
 
-  @Metadata({ data: "json, name=comparator" })
+  @SpeakeasyMetadata({ data: "json, name=comparator" })
   comparator?: string;
 
-  @Metadata({ data: "json, name=objectType" })
+  @SpeakeasyMetadata({ data: "json, name=objectType" })
   objectType?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }

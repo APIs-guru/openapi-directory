@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudRunV2RevisionScaling
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Settings for revision-level scaling settings.
 **/
 export class GoogleCloudRunV2RevisionScaling extends SpeakeasyBase {
-  @Metadata({ data: "json, name=maxInstanceCount" })
+  @SpeakeasyMetadata({ data: "json, name=maxInstanceCount" })
   maxInstanceCount?: number;
 
-  @Metadata({ data: "json, name=minInstanceCount" })
+  @SpeakeasyMetadata({ data: "json, name=minInstanceCount" })
   minInstanceCount?: number;
 }

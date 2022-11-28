@@ -10,7 +10,7 @@ class GetAnnotatedGenesUsingPostRequest:
 
 @dataclass
 class GetAnnotatedGenesUsingPostResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PivotHeaderEntry } from "./pivotheaderentry";
+
 
 
 // PivotHeader
@@ -8,9 +8,9 @@ import { PivotHeaderEntry } from "./pivotheaderentry";
  * The headers for each of the pivot sections defined in the request.
 **/
 export class PivotHeader extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pivotHeaderEntries", elemType: shared.PivotHeaderEntry })
+  @SpeakeasyMetadata({ data: "json, name=pivotHeaderEntries", elemType: PivotHeaderEntry })
   pivotHeaderEntries?: PivotHeaderEntry[];
 
-  @Metadata({ data: "json, name=totalPivotGroupsCount" })
+  @SpeakeasyMetadata({ data: "json, name=totalPivotGroupsCount" })
   totalPivotGroupsCount?: number;
 }

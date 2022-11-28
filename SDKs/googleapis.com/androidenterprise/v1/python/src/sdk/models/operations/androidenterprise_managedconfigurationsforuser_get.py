@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AndroidenterpriseManagedconfigurationsforuserGetPathParams:
-    enterprise_id: str = field(default=None, metadata={'path_param': { 'field_name': 'enterpriseId', 'style': 'simple', 'explode': False }})
-    managed_configuration_for_user_id: str = field(default=None, metadata={'path_param': { 'field_name': 'managedConfigurationForUserId', 'style': 'simple', 'explode': False }})
-    user_id: str = field(default=None, metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
+    enterprise_id: str = field(metadata={'path_param': { 'field_name': 'enterpriseId', 'style': 'simple', 'explode': False }})
+    managed_configuration_for_user_id: str = field(metadata={'path_param': { 'field_name': 'managedConfigurationForUserId', 'style': 'simple', 'explode': False }})
+    user_id: str = field(metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class AndroidenterpriseManagedconfigurationsforuserGetQueryParams:
 
 @dataclass
 class AndroidenterpriseManagedconfigurationsforuserGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AndroidenterpriseManagedconfigurationsforuserGetRequest:
-    path_params: AndroidenterpriseManagedconfigurationsforuserGetPathParams = field(default=None)
-    query_params: AndroidenterpriseManagedconfigurationsforuserGetQueryParams = field(default=None)
-    security: AndroidenterpriseManagedconfigurationsforuserGetSecurity = field(default=None)
+    path_params: AndroidenterpriseManagedconfigurationsforuserGetPathParams = field()
+    query_params: AndroidenterpriseManagedconfigurationsforuserGetQueryParams = field()
+    security: AndroidenterpriseManagedconfigurationsforuserGetSecurity = field()
     
 
 @dataclass
 class AndroidenterpriseManagedconfigurationsforuserGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     managed_configuration: Optional[shared.ManagedConfiguration] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 class UpdateGatewayResponseResponseTypeEnum(str, Enum):
@@ -29,8 +34,8 @@ class UpdateGatewayResponseResponseTypeEnum(str, Enum):
 
 @dataclass
 class UpdateGatewayResponsePathParams:
-    response_type: UpdateGatewayResponseResponseTypeEnum = field(default=None, metadata={'path_param': { 'field_name': 'response_type', 'style': 'simple', 'explode': False }})
-    restapi_id: str = field(default=None, metadata={'path_param': { 'field_name': 'restapi_id', 'style': 'simple', 'explode': False }})
+    response_type: UpdateGatewayResponseResponseTypeEnum = field(metadata={'path_param': { 'field_name': 'response_type', 'style': 'simple', 'explode': False }})
+    restapi_id: str = field(metadata={'path_param': { 'field_name': 'restapi_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -47,25 +52,25 @@ class UpdateGatewayResponseHeaders:
 @dataclass_json
 @dataclass
 class UpdateGatewayResponseRequestBody:
-    patch_operations: Optional[List[shared.PatchOperation]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'patchOperations' }})
+    patch_operations: Optional[List[shared.PatchOperation]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('patchOperations') }})
     
 
 @dataclass
 class UpdateGatewayResponseRequest:
-    path_params: UpdateGatewayResponsePathParams = field(default=None)
-    headers: UpdateGatewayResponseHeaders = field(default=None)
-    request: UpdateGatewayResponseRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateGatewayResponseHeaders = field()
+    path_params: UpdateGatewayResponsePathParams = field()
+    request: UpdateGatewayResponseRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateGatewayResponseResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     gateway_response: Optional[shared.GatewayResponse] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

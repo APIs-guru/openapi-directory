@@ -1,5 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { FieldMetadataInput } from "./fieldmetadata";
 import { FieldMetadata } from "./fieldmetadata";
+
+
+
+// GenderInput
+/** 
+ * A person's gender.
+**/
+export class GenderInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=addressMeAs" })
+  addressMeAs?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
+  metadata?: FieldMetadataInput;
+
+  @SpeakeasyMetadata({ data: "json, name=value" })
+  value?: string;
+}
 
 
 // Gender
@@ -7,15 +25,15 @@ import { FieldMetadata } from "./fieldmetadata";
  * A person's gender.
 **/
 export class Gender extends SpeakeasyBase {
-  @Metadata({ data: "json, name=addressMeAs" })
+  @SpeakeasyMetadata({ data: "json, name=addressMeAs" })
   addressMeAs?: string;
 
-  @Metadata({ data: "json, name=formattedValue" })
+  @SpeakeasyMetadata({ data: "json, name=formattedValue" })
   formattedValue?: string;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: FieldMetadata;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }

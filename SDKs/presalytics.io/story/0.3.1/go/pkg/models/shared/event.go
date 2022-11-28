@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Event
+// An Story Event object
 type Event struct {
 	Attributes      *string    `json:"attributes,omitempty"`
 	ChatPrompt      *string    `json:"chat_prompt,omitempty"`

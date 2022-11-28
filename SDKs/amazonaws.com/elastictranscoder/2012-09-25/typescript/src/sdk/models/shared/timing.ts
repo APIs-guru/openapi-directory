@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Timing
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Details about the timing of a job.
 **/
 export class Timing extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FinishTimeMillis" })
+  @SpeakeasyMetadata({ data: "json, name=FinishTimeMillis" })
   finishTimeMillis?: number;
 
-  @Metadata({ data: "json, name=StartTimeMillis" })
+  @SpeakeasyMetadata({ data: "json, name=StartTimeMillis" })
   startTimeMillis?: number;
 
-  @Metadata({ data: "json, name=SubmitTimeMillis" })
+  @SpeakeasyMetadata({ data: "json, name=SubmitTimeMillis" })
   submitTimeMillis?: number;
 }

@@ -1,19 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ListTechniqueVersionDirectivesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=techniqueName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=techniqueName" })
   techniqueName: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=techniqueVersion" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=techniqueVersion" })
   techniqueVersion: string;
-}
-
-
-export class ListTechniqueVersionDirectivesRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: ListTechniqueVersionDirectivesPathParams;
 }
 
 export enum ListTechniqueVersionDirectives200ApplicationJsonActionEnum {
@@ -22,35 +17,41 @@ export enum ListTechniqueVersionDirectives200ApplicationJsonActionEnum {
 
 
 export class ListTechniqueVersionDirectives200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=directives", elemType: shared.Directive })
+  @SpeakeasyMetadata({ data: "json, name=directives", elemType: shared.Directive })
   directives: shared.Directive[];
 }
 
 export enum ListTechniqueVersionDirectives200ApplicationJsonResultEnum {
-    Success = "success"
-,    Error = "error"
+    Success = "success",
+    Error = "error"
 }
 
 
 export class ListTechniqueVersionDirectives200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: ListTechniqueVersionDirectives200ApplicationJsonActionEnum;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: ListTechniqueVersionDirectives200ApplicationJsonData;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result: ListTechniqueVersionDirectives200ApplicationJsonResultEnum;
 }
 
 
+export class ListTechniqueVersionDirectivesRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: ListTechniqueVersionDirectivesPathParams;
+}
+
+
 export class ListTechniqueVersionDirectivesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   listTechniqueVersionDirectives200ApplicationJsonObject?: ListTechniqueVersionDirectives200ApplicationJson;
 }

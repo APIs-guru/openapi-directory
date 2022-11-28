@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ConditionValueRelativeDateEnum(str, Enum):
     RELATIVE_DATE_UNSPECIFIED = "RELATIVE_DATE_UNSPECIFIED"
@@ -15,6 +20,10 @@ class ConditionValueRelativeDateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ConditionValue:
-    relative_date: Optional[ConditionValueRelativeDateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'relativeDate' }})
-    user_entered_value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'userEnteredValue' }})
+    r"""ConditionValue
+    The value of the condition.
+    """
+    
+    relative_date: Optional[ConditionValueRelativeDateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('relativeDate') }})
+    user_entered_value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('userEnteredValue') }})
     

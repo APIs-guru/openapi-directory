@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InTotoProvenance } from "./intotoprovenance";
 import { InTotoStatement } from "./intotostatement";
 import { BuildProvenance } from "./buildprovenance";
+
 
 
 // BuildDetails
@@ -9,15 +10,15 @@ import { BuildProvenance } from "./buildprovenance";
  * Message encapsulating build provenance details.
 **/
 export class BuildDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=intotoProvenance" })
+  @SpeakeasyMetadata({ data: "json, name=intotoProvenance" })
   intotoProvenance?: InTotoProvenance;
 
-  @Metadata({ data: "json, name=intotoStatement" })
+  @SpeakeasyMetadata({ data: "json, name=intotoStatement" })
   intotoStatement?: InTotoStatement;
 
-  @Metadata({ data: "json, name=provenance" })
+  @SpeakeasyMetadata({ data: "json, name=provenance" })
   provenance?: BuildProvenance;
 
-  @Metadata({ data: "json, name=provenanceBytes" })
+  @SpeakeasyMetadata({ data: "json, name=provenanceBytes" })
   provenanceBytes?: string;
 }

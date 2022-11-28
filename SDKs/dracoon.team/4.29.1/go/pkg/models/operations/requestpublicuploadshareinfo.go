@@ -18,9 +18,9 @@ type RequestPublicUploadShareInfoRequest struct {
 	Headers    RequestPublicUploadShareInfoHeaders
 }
 
-type RequestPublicUploadShareInfoResponse struct {
+type RequestPublicUploadShareInfoResponseOutput struct {
 	ContentType       string
 	ErrorResponse     *shared.ErrorResponse
-	PublicUploadShare *shared.PublicUploadShare
+	PublicUploadShare *shared.PublicUploadShareOutput
 	StatusCode        int64
 }

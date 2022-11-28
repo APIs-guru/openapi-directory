@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class SatisfyPostPathParams:
-    post_id: str = field(default=None, metadata={'path_param': { 'field_name': 'post_id', 'style': 'simple', 'explode': False }})
+    post_id: str = field(metadata={'path_param': { 'field_name': 'post_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class SatisfyPostRequest:
-    path_params: SatisfyPostPathParams = field(default=None)
+    path_params: SatisfyPostPathParams = field()
     
 
 @dataclass
 class SatisfyPostResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     post: Optional[shared.Post] = field(default=None)
-    status_code: int = field(default=None)
     

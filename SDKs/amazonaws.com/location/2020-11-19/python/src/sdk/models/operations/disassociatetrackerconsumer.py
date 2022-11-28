@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DisassociateTrackerConsumerPathParams:
-    consumer_arn: str = field(default=None, metadata={'path_param': { 'field_name': 'ConsumerArn', 'style': 'simple', 'explode': False }})
-    tracker_name: str = field(default=None, metadata={'path_param': { 'field_name': 'TrackerName', 'style': 'simple', 'explode': False }})
+    consumer_arn: str = field(metadata={'path_param': { 'field_name': 'ConsumerArn', 'style': 'simple', 'explode': False }})
+    tracker_name: str = field(metadata={'path_param': { 'field_name': 'TrackerName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,18 +24,18 @@ class DisassociateTrackerConsumerHeaders:
 
 @dataclass
 class DisassociateTrackerConsumerRequest:
-    path_params: DisassociateTrackerConsumerPathParams = field(default=None)
-    headers: DisassociateTrackerConsumerHeaders = field(default=None)
+    headers: DisassociateTrackerConsumerHeaders = field()
+    path_params: DisassociateTrackerConsumerPathParams = field()
     
 
 @dataclass
 class DisassociateTrackerConsumerResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     disassociate_tracker_consumer_response: Optional[dict[str, Any]] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

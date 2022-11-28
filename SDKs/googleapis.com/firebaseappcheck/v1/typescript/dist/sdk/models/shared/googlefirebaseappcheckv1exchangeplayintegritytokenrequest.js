@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GoogleFirebaseAppcheckV1ExchangePlayIntegrityTokenRequest
 /**
  * Request message for the ExchangePlayIntegrityToken method.
@@ -33,7 +33,7 @@ var GoogleFirebaseAppcheckV1ExchangePlayIntegrityTokenRequest = /** @class */ (f
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=playIntegrityToken" }),
+        SpeakeasyMetadata({ data: "json, name=playIntegrityToken" }),
         __metadata("design:type", String)
     ], GoogleFirebaseAppcheckV1ExchangePlayIntegrityTokenRequest.prototype, "playIntegrityToken", void 0);
     return GoogleFirebaseAppcheckV1ExchangePlayIntegrityTokenRequest;

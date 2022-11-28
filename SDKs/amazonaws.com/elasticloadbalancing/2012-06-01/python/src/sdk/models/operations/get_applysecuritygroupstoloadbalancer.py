@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetApplySecurityGroupsToLoadBalancerActionEnum(str, Enum):
     APPLY_SECURITY_GROUPS_TO_LOAD_BALANCER = "ApplySecurityGroupsToLoadBalancer"
@@ -10,10 +14,10 @@ class GetApplySecurityGroupsToLoadBalancerVersionEnum(str, Enum):
 
 @dataclass
 class GetApplySecurityGroupsToLoadBalancerQueryParams:
-    action: GetApplySecurityGroupsToLoadBalancerActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    load_balancer_name: str = field(default=None, metadata={'query_param': { 'field_name': 'LoadBalancerName', 'style': 'form', 'explode': True }})
-    security_groups: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'SecurityGroups', 'style': 'form', 'explode': True }})
-    version: GetApplySecurityGroupsToLoadBalancerVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetApplySecurityGroupsToLoadBalancerActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    load_balancer_name: str = field(metadata={'query_param': { 'field_name': 'LoadBalancerName', 'style': 'form', 'explode': True }})
+    security_groups: List[str] = field(metadata={'query_param': { 'field_name': 'SecurityGroups', 'style': 'form', 'explode': True }})
+    version: GetApplySecurityGroupsToLoadBalancerVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetApplySecurityGroupsToLoadBalancerHeaders:
 
 @dataclass
 class GetApplySecurityGroupsToLoadBalancerRequest:
-    query_params: GetApplySecurityGroupsToLoadBalancerQueryParams = field(default=None)
-    headers: GetApplySecurityGroupsToLoadBalancerHeaders = field(default=None)
+    headers: GetApplySecurityGroupsToLoadBalancerHeaders = field()
+    query_params: GetApplySecurityGroupsToLoadBalancerQueryParams = field()
     
 
 @dataclass
 class GetApplySecurityGroupsToLoadBalancerResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

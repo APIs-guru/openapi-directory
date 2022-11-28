@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LifecyclePolicyRuleAction } from "./lifecyclepolicyruleaction";
 // LifecyclePolicyPreviewResult
 /**
@@ -34,23 +34,23 @@ var LifecyclePolicyPreviewResult = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=action" }),
+        SpeakeasyMetadata({ data: "json, name=action" }),
         __metadata("design:type", LifecyclePolicyRuleAction)
     ], LifecyclePolicyPreviewResult.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "json, name=appliedRulePriority" }),
+        SpeakeasyMetadata({ data: "json, name=appliedRulePriority" }),
         __metadata("design:type", Number)
     ], LifecyclePolicyPreviewResult.prototype, "appliedRulePriority", void 0);
     __decorate([
-        Metadata({ data: "json, name=imageDigest" }),
+        SpeakeasyMetadata({ data: "json, name=imageDigest" }),
         __metadata("design:type", String)
     ], LifecyclePolicyPreviewResult.prototype, "imageDigest", void 0);
     __decorate([
-        Metadata({ data: "json, name=imagePushedAt" }),
+        SpeakeasyMetadata({ data: "json, name=imagePushedAt" }),
         __metadata("design:type", Date)
     ], LifecyclePolicyPreviewResult.prototype, "imagePushedAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=imageTags" }),
+        SpeakeasyMetadata({ data: "json, name=imageTags" }),
         __metadata("design:type", Array)
     ], LifecyclePolicyPreviewResult.prototype, "imageTags", void 0);
     return LifecyclePolicyPreviewResult;

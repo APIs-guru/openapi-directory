@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IntentConfidence } from "./intentconfidence";
 // PredictedIntent
 /**
@@ -34,15 +34,15 @@ var PredictedIntent = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=intentName" }),
+        SpeakeasyMetadata({ data: "json, name=intentName" }),
         __metadata("design:type", String)
     ], PredictedIntent.prototype, "intentName", void 0);
     __decorate([
-        Metadata({ data: "json, name=nluIntentConfidence" }),
+        SpeakeasyMetadata({ data: "json, name=nluIntentConfidence" }),
         __metadata("design:type", IntentConfidence)
     ], PredictedIntent.prototype, "nluIntentConfidence", void 0);
     __decorate([
-        Metadata({ data: "json, name=slots" }),
+        SpeakeasyMetadata({ data: "json, name=slots" }),
         __metadata("design:type", Map)
     ], PredictedIntent.prototype, "slots", void 0);
     return PredictedIntent;

@@ -1,5 +1,7 @@
 package shared
 
+// ChannelGrouping
+// Represents a DfaReporting channel grouping.
 type ChannelGrouping struct {
 	FallbackName *string               `json:"fallbackName,omitempty"`
 	Kind         *string               `json:"kind,omitempty"`

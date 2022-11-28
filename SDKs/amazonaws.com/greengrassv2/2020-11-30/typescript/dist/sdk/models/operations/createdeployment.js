@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CreateDeploymentHeaders = /** @class */ (function (_super) {
     __extends(CreateDeploymentHeaders, _super);
@@ -30,31 +30,31 @@ var CreateDeploymentHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], CreateDeploymentHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], CreateDeploymentHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], CreateDeploymentHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], CreateDeploymentHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], CreateDeploymentHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], CreateDeploymentHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], CreateDeploymentHeaders.prototype, "xAmzSignedHeaders", void 0);
     return CreateDeploymentHeaders;
@@ -70,15 +70,15 @@ var CreateDeploymentRequestBodyDeploymentPolicies = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=componentUpdatePolicy" }),
+        SpeakeasyMetadata({ data: "json, name=componentUpdatePolicy" }),
         __metadata("design:type", shared.DeploymentComponentUpdatePolicy)
     ], CreateDeploymentRequestBodyDeploymentPolicies.prototype, "componentUpdatePolicy", void 0);
     __decorate([
-        Metadata({ data: "json, name=configurationValidationPolicy" }),
+        SpeakeasyMetadata({ data: "json, name=configurationValidationPolicy" }),
         __metadata("design:type", shared.DeploymentConfigurationValidationPolicy)
     ], CreateDeploymentRequestBodyDeploymentPolicies.prototype, "configurationValidationPolicy", void 0);
     __decorate([
-        Metadata({ data: "json, name=failureHandlingPolicy" }),
+        SpeakeasyMetadata({ data: "json, name=failureHandlingPolicy" }),
         __metadata("design:type", String)
     ], CreateDeploymentRequestBodyDeploymentPolicies.prototype, "failureHandlingPolicy", void 0);
     return CreateDeploymentRequestBodyDeploymentPolicies;
@@ -94,15 +94,15 @@ var CreateDeploymentRequestBodyIotJobConfiguration = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=abortConfig" }),
+        SpeakeasyMetadata({ data: "json, name=abortConfig" }),
         __metadata("design:type", shared.IoTJobAbortConfig)
     ], CreateDeploymentRequestBodyIotJobConfiguration.prototype, "abortConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=jobExecutionsRolloutConfig" }),
+        SpeakeasyMetadata({ data: "json, name=jobExecutionsRolloutConfig" }),
         __metadata("design:type", shared.IoTJobExecutionsRolloutConfig)
     ], CreateDeploymentRequestBodyIotJobConfiguration.prototype, "jobExecutionsRolloutConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=timeoutConfig" }),
+        SpeakeasyMetadata({ data: "json, name=timeoutConfig" }),
         __metadata("design:type", shared.IoTJobTimeoutConfig)
     ], CreateDeploymentRequestBodyIotJobConfiguration.prototype, "timeoutConfig", void 0);
     return CreateDeploymentRequestBodyIotJobConfiguration;
@@ -114,31 +114,31 @@ var CreateDeploymentRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=clientToken" }),
+        SpeakeasyMetadata({ data: "json, name=clientToken" }),
         __metadata("design:type", String)
     ], CreateDeploymentRequestBody.prototype, "clientToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=components", elemType: shared.ComponentDeploymentSpecification }),
+        SpeakeasyMetadata({ data: "json, name=components", elemType: shared.ComponentDeploymentSpecification }),
         __metadata("design:type", Map)
     ], CreateDeploymentRequestBody.prototype, "components", void 0);
     __decorate([
-        Metadata({ data: "json, name=deploymentName" }),
+        SpeakeasyMetadata({ data: "json, name=deploymentName" }),
         __metadata("design:type", String)
     ], CreateDeploymentRequestBody.prototype, "deploymentName", void 0);
     __decorate([
-        Metadata({ data: "json, name=deploymentPolicies" }),
+        SpeakeasyMetadata({ data: "json, name=deploymentPolicies" }),
         __metadata("design:type", CreateDeploymentRequestBodyDeploymentPolicies)
     ], CreateDeploymentRequestBody.prototype, "deploymentPolicies", void 0);
     __decorate([
-        Metadata({ data: "json, name=iotJobConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=iotJobConfiguration" }),
         __metadata("design:type", CreateDeploymentRequestBodyIotJobConfiguration)
     ], CreateDeploymentRequestBody.prototype, "iotJobConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags" }),
+        SpeakeasyMetadata({ data: "json, name=tags" }),
         __metadata("design:type", Map)
     ], CreateDeploymentRequestBody.prototype, "tags", void 0);
     __decorate([
-        Metadata({ data: "json, name=targetArn" }),
+        SpeakeasyMetadata({ data: "json, name=targetArn" }),
         __metadata("design:type", String)
     ], CreateDeploymentRequestBody.prototype, "targetArn", void 0);
     return CreateDeploymentRequestBody;
@@ -150,11 +150,11 @@ var CreateDeploymentRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateDeploymentHeaders)
     ], CreateDeploymentRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", CreateDeploymentRequestBody)
     ], CreateDeploymentRequest.prototype, "request", void 0);
     return CreateDeploymentRequest;
@@ -166,39 +166,39 @@ var CreateDeploymentResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateDeploymentResponse.prototype, "accessDeniedException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CreateDeploymentResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.CreateDeploymentResponse)
     ], CreateDeploymentResponse.prototype, "createDeploymentResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateDeploymentResponse.prototype, "internalServerException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateDeploymentResponse.prototype, "requestAlreadyInProgressException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateDeploymentResponse.prototype, "resourceNotFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CreateDeploymentResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateDeploymentResponse.prototype, "throttlingException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateDeploymentResponse.prototype, "validationException", void 0);
     return CreateDeploymentResponse;

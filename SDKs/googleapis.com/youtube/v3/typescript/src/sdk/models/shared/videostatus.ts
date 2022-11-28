@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum VideoStatusFailureReasonEnum {
-    Conversion = "conversion"
-,    InvalidFile = "invalidFile"
-,    EmptyFile = "emptyFile"
-,    TooSmall = "tooSmall"
-,    Codec = "codec"
-,    UploadAborted = "uploadAborted"
+    Conversion = "conversion",
+    InvalidFile = "invalidFile",
+    EmptyFile = "emptyFile",
+    TooSmall = "tooSmall",
+    Codec = "codec",
+    UploadAborted = "uploadAborted"
 }
 
 export enum VideoStatusLicenseEnum {
-    Youtube = "youtube"
-,    CreativeCommon = "creativeCommon"
+    Youtube = "youtube",
+    CreativeCommon = "creativeCommon"
 }
 
 export enum VideoStatusPrivacyStatusEnum {
-    Public = "public"
-,    Unlisted = "unlisted"
-,    Private = "private"
+    Public = "public",
+    Unlisted = "unlisted",
+    Private = "private"
 }
 
 export enum VideoStatusRejectionReasonEnum {
-    Copyright = "copyright"
-,    Inappropriate = "inappropriate"
-,    Duplicate = "duplicate"
-,    TermsOfUse = "termsOfUse"
-,    UploaderAccountSuspended = "uploaderAccountSuspended"
-,    Length = "length"
-,    Claim = "claim"
-,    UploaderAccountClosed = "uploaderAccountClosed"
-,    Trademark = "trademark"
-,    Legal = "legal"
+    Copyright = "copyright",
+    Inappropriate = "inappropriate",
+    Duplicate = "duplicate",
+    TermsOfUse = "termsOfUse",
+    UploaderAccountSuspended = "uploaderAccountSuspended",
+    Length = "length",
+    Claim = "claim",
+    UploaderAccountClosed = "uploaderAccountClosed",
+    Trademark = "trademark",
+    Legal = "legal"
 }
 
 export enum VideoStatusUploadStatusEnum {
-    Uploaded = "uploaded"
-,    Processed = "processed"
-,    Failed = "failed"
-,    Rejected = "rejected"
-,    Deleted = "deleted"
+    Uploaded = "uploaded",
+    Processed = "processed",
+    Failed = "failed",
+    Rejected = "rejected",
+    Deleted = "deleted"
 }
 
 
@@ -47,33 +48,33 @@ export enum VideoStatusUploadStatusEnum {
  * Basic details about a video category, such as its localized title. Next Id: 18
 **/
 export class VideoStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=embeddable" })
+  @SpeakeasyMetadata({ data: "json, name=embeddable" })
   embeddable?: boolean;
 
-  @Metadata({ data: "json, name=failureReason" })
+  @SpeakeasyMetadata({ data: "json, name=failureReason" })
   failureReason?: VideoStatusFailureReasonEnum;
 
-  @Metadata({ data: "json, name=license" })
+  @SpeakeasyMetadata({ data: "json, name=license" })
   license?: VideoStatusLicenseEnum;
 
-  @Metadata({ data: "json, name=madeForKids" })
+  @SpeakeasyMetadata({ data: "json, name=madeForKids" })
   madeForKids?: boolean;
 
-  @Metadata({ data: "json, name=privacyStatus" })
+  @SpeakeasyMetadata({ data: "json, name=privacyStatus" })
   privacyStatus?: VideoStatusPrivacyStatusEnum;
 
-  @Metadata({ data: "json, name=publicStatsViewable" })
+  @SpeakeasyMetadata({ data: "json, name=publicStatsViewable" })
   publicStatsViewable?: boolean;
 
-  @Metadata({ data: "json, name=publishAt" })
+  @SpeakeasyMetadata({ data: "json, name=publishAt" })
   publishAt?: Date;
 
-  @Metadata({ data: "json, name=rejectionReason" })
+  @SpeakeasyMetadata({ data: "json, name=rejectionReason" })
   rejectionReason?: VideoStatusRejectionReasonEnum;
 
-  @Metadata({ data: "json, name=selfDeclaredMadeForKids" })
+  @SpeakeasyMetadata({ data: "json, name=selfDeclaredMadeForKids" })
   selfDeclaredMadeForKids?: boolean;
 
-  @Metadata({ data: "json, name=uploadStatus" })
+  @SpeakeasyMetadata({ data: "json, name=uploadStatus" })
   uploadStatus?: VideoStatusUploadStatusEnum;
 }

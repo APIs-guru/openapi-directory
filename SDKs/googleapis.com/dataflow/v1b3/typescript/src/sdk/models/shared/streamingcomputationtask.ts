@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StreamingComputationRanges } from "./streamingcomputationranges";
 import { MountedDataDisk } from "./mounteddatadisk";
 
+
 export enum StreamingComputationTaskTaskTypeEnum {
-    StreamingComputationTaskUnknown = "STREAMING_COMPUTATION_TASK_UNKNOWN"
-,    StreamingComputationTaskStop = "STREAMING_COMPUTATION_TASK_STOP"
-,    StreamingComputationTaskStart = "STREAMING_COMPUTATION_TASK_START"
+    StreamingComputationTaskUnknown = "STREAMING_COMPUTATION_TASK_UNKNOWN",
+    StreamingComputationTaskStop = "STREAMING_COMPUTATION_TASK_STOP",
+    StreamingComputationTaskStart = "STREAMING_COMPUTATION_TASK_START"
 }
 
 
@@ -15,12 +15,12 @@ export enum StreamingComputationTaskTaskTypeEnum {
  * A task which describes what action should be performed for the specified streaming computation ranges.
 **/
 export class StreamingComputationTask extends SpeakeasyBase {
-  @Metadata({ data: "json, name=computationRanges", elemType: shared.StreamingComputationRanges })
+  @SpeakeasyMetadata({ data: "json, name=computationRanges", elemType: StreamingComputationRanges })
   computationRanges?: StreamingComputationRanges[];
 
-  @Metadata({ data: "json, name=dataDisks", elemType: shared.MountedDataDisk })
+  @SpeakeasyMetadata({ data: "json, name=dataDisks", elemType: MountedDataDisk })
   dataDisks?: MountedDataDisk[];
 
-  @Metadata({ data: "json, name=taskType" })
+  @SpeakeasyMetadata({ data: "json, name=taskType" })
   taskType?: StreamingComputationTaskTaskTypeEnum;
 }

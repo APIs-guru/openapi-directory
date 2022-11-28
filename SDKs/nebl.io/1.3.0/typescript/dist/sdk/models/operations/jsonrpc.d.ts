@@ -1,6 +1,6 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export declare const JSONRPC_SERVERS: string[];
+export declare const JsonRpcServerList: readonly ["http://127.0.0.1:6326", "http://127.0.0.1:16326"];
 export declare class JsonRpcSecurity extends SpeakeasyBase {
     rpcAuth: shared.SchemeRpcAuth;
 }

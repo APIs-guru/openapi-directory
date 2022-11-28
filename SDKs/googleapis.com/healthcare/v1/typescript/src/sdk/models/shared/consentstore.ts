@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ConsentStore
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents a consent store.
 **/
 export class ConsentStore extends SpeakeasyBase {
-  @Metadata({ data: "json, name=defaultConsentTtl" })
+  @SpeakeasyMetadata({ data: "json, name=defaultConsentTtl" })
   defaultConsentTtl?: string;
 
-  @Metadata({ data: "json, name=enableConsentCreateOnUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=enableConsentCreateOnUpdate" })
   enableConsentCreateOnUpdate?: boolean;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

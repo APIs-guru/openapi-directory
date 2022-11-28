@@ -25,6 +25,8 @@ const (
 	RunQueryRequestDataRangeEnumLast60Days        RunQueryRequestDataRangeEnum = "LAST_60_DAYS"
 )
 
+// RunQueryRequest
+// Request to run a stored query to generate a report.
 type RunQueryRequest struct {
 	DataRange             *RunQueryRequestDataRangeEnum `json:"dataRange,omitempty"`
 	ReportDataEndTimeMs   *string                       `json:"reportDataEndTimeMs,omitempty"`

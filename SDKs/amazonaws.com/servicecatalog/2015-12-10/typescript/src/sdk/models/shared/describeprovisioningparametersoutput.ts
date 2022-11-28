@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConstraintSummary } from "./constraintsummary";
 import { ProvisioningArtifactOutput } from "./provisioningartifactoutput";
 import { ProvisioningArtifactParameter } from "./provisioningartifactparameter";
@@ -8,22 +7,23 @@ import { TagOptionSummary } from "./tagoptionsummary";
 import { UsageInstruction } from "./usageinstruction";
 
 
+
 export class DescribeProvisioningParametersOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConstraintSummaries", elemType: shared.ConstraintSummary })
+  @SpeakeasyMetadata({ data: "json, name=ConstraintSummaries", elemType: ConstraintSummary })
   constraintSummaries?: ConstraintSummary[];
 
-  @Metadata({ data: "json, name=ProvisioningArtifactOutputs", elemType: shared.ProvisioningArtifactOutput })
+  @SpeakeasyMetadata({ data: "json, name=ProvisioningArtifactOutputs", elemType: ProvisioningArtifactOutput })
   provisioningArtifactOutputs?: ProvisioningArtifactOutput[];
 
-  @Metadata({ data: "json, name=ProvisioningArtifactParameters", elemType: shared.ProvisioningArtifactParameter })
+  @SpeakeasyMetadata({ data: "json, name=ProvisioningArtifactParameters", elemType: ProvisioningArtifactParameter })
   provisioningArtifactParameters?: ProvisioningArtifactParameter[];
 
-  @Metadata({ data: "json, name=ProvisioningArtifactPreferences" })
+  @SpeakeasyMetadata({ data: "json, name=ProvisioningArtifactPreferences" })
   provisioningArtifactPreferences?: ProvisioningArtifactPreferences;
 
-  @Metadata({ data: "json, name=TagOptions", elemType: shared.TagOptionSummary })
+  @SpeakeasyMetadata({ data: "json, name=TagOptions", elemType: TagOptionSummary })
   tagOptions?: TagOptionSummary[];
 
-  @Metadata({ data: "json, name=UsageInstructions", elemType: shared.UsageInstruction })
+  @SpeakeasyMetadata({ data: "json, name=UsageInstructions", elemType: UsageInstruction })
   usageInstructions?: UsageInstruction[];
 }

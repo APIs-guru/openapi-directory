@@ -40,6 +40,8 @@ const (
 	LiveBroadcastStatusRecordingStatusEnumRecorded                                LiveBroadcastStatusRecordingStatusEnum = "recorded"
 )
 
+// LiveBroadcastStatus
+// Live broadcast state.
 type LiveBroadcastStatus struct {
 	LifeCycleStatus         *LiveBroadcastStatusLifeCycleStatusEnum       `json:"lifeCycleStatus,omitempty"`
 	LiveBroadcastPriority   *LiveBroadcastStatusLiveBroadcastPriorityEnum `json:"liveBroadcastPriority,omitempty"`

@@ -18,6 +18,8 @@ type CreateJourneyHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateJourneyRequestBodyWriteJourneyRequest
+// Specifies the configuration and other settings for a journey.
 type CreateJourneyRequestBodyWriteJourneyRequest struct {
 	Activities             map[string]shared.Activity `json:"Activities,omitempty"`
 	CreationDate           *string                    `json:"CreationDate,omitempty"`

@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TestItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=featuredPart" })
+  @SpeakeasyMetadata({ data: "json, name=featuredPart" })
   featuredPart?: boolean;
 
-  @Metadata({ data: "json, name=gaia" })
+  @SpeakeasyMetadata({ data: "json, name=gaia" })
   gaia?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=snippet" })
+  @SpeakeasyMetadata({ data: "json, name=snippet" })
   snippet?: Map<string, any>;
 }

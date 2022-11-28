@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MitigationAction } from "./mitigationaction";
 import { DetectMitigationActionsTaskTarget } from "./detectmitigationactionstasktarget";
 import { DetectMitigationActionsTaskStatistics } from "./detectmitigationactionstaskstatistics";
@@ -7,38 +6,39 @@ import { DetectMitigationActionsTaskStatusEnum } from "./detectmitigationactions
 import { ViolationEventOccurrenceRange } from "./violationeventoccurrencerange";
 
 
+
 // DetectMitigationActionsTaskSummary
 /** 
  *  The summary of the mitigation action tasks. 
 **/
 export class DetectMitigationActionsTaskSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actionsDefinition", elemType: shared.MitigationAction })
+  @SpeakeasyMetadata({ data: "json, name=actionsDefinition", elemType: MitigationAction })
   actionsDefinition?: MitigationAction[];
 
-  @Metadata({ data: "json, name=onlyActiveViolationsIncluded" })
+  @SpeakeasyMetadata({ data: "json, name=onlyActiveViolationsIncluded" })
   onlyActiveViolationsIncluded?: boolean;
 
-  @Metadata({ data: "json, name=suppressedAlertsIncluded" })
+  @SpeakeasyMetadata({ data: "json, name=suppressedAlertsIncluded" })
   suppressedAlertsIncluded?: boolean;
 
-  @Metadata({ data: "json, name=target" })
+  @SpeakeasyMetadata({ data: "json, name=target" })
   target?: DetectMitigationActionsTaskTarget;
 
-  @Metadata({ data: "json, name=taskEndTime" })
+  @SpeakeasyMetadata({ data: "json, name=taskEndTime" })
   taskEndTime?: Date;
 
-  @Metadata({ data: "json, name=taskId" })
+  @SpeakeasyMetadata({ data: "json, name=taskId" })
   taskId?: string;
 
-  @Metadata({ data: "json, name=taskStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=taskStartTime" })
   taskStartTime?: Date;
 
-  @Metadata({ data: "json, name=taskStatistics" })
+  @SpeakeasyMetadata({ data: "json, name=taskStatistics" })
   taskStatistics?: DetectMitigationActionsTaskStatistics;
 
-  @Metadata({ data: "json, name=taskStatus" })
+  @SpeakeasyMetadata({ data: "json, name=taskStatus" })
   taskStatus?: DetectMitigationActionsTaskStatusEnum;
 
-  @Metadata({ data: "json, name=violationEventOccurrenceRange" })
+  @SpeakeasyMetadata({ data: "json, name=violationEventOccurrenceRange" })
   violationEventOccurrenceRange?: ViolationEventOccurrenceRange;
 }

@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RetrieveUserHostedPropertyValuePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=app_key" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=app_key" })
   appKey: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=property_name" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=property_name" })
   propertyName: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=selected_user" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=selected_user" })
   selectedUser: string;
 }
 
 
 export class RetrieveUserHostedPropertyValueRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: RetrieveUserHostedPropertyValuePathParams;
 }
 
 
 export class RetrieveUserHostedPropertyValueResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

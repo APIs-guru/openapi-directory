@@ -1,71 +1,72 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetChartFavoriteStatusQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, serialization=json;name=q" })
+  @SpeakeasyMetadata({ data: "queryParam, serialization=json;name=q" })
   q?: number[];
 }
 
 
 export class GetChartFavoriteStatusSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   jwt: shared.SchemeJwt;
 }
 
 
-export class GetChartFavoriteStatusRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetChartFavoriteStatusQueryParams;
-
-  @Metadata()
-  security: GetChartFavoriteStatusSecurity;
-}
-
-
 export class GetChartFavoriteStatus400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetChartFavoriteStatus401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetChartFavoriteStatus404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetChartFavoriteStatus500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class GetChartFavoriteStatusRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetChartFavoriteStatusQueryParams;
+
+  @SpeakeasyMetadata()
+  security: GetChartFavoriteStatusSecurity;
+}
+
+
 export class GetChartFavoriteStatusResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getChartFavoriteStatus400ApplicationJsonObject?: GetChartFavoriteStatus400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getChartFavoriteStatus401ApplicationJsonObject?: GetChartFavoriteStatus401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getChartFavoriteStatus404ApplicationJsonObject?: GetChartFavoriteStatus404ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getChartFavoriteStatus500ApplicationJsonObject?: GetChartFavoriteStatus500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getFavStarIdsSchema?: shared.GetFavStarIdsSchema;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

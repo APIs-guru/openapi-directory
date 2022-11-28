@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudIdentitytoolkitAdminV2RequestLogging } from "./googlecloudidentitytoolkitadminv2requestlogging";
 /**
  * Configuration related to monitoring project activity.

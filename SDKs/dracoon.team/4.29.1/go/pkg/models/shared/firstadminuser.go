@@ -1,5 +1,7 @@
 package shared
 
+// FirstAdminUser
+// First administrator user
 type FirstAdminUser struct {
 	AuthData              *UserAuthData    `json:"authData,omitempty"`
 	AuthMethods           []UserAuthMethod `json:"authMethods,omitempty"`

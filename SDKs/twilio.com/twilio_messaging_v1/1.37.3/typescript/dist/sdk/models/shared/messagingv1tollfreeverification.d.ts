@@ -1,0 +1,36 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import { TollfreeVerificationEnumOptInTypeEnum } from "./tollfreeverificationenumoptintypeenum";
+import { TollfreeVerificationEnumStatusEnum } from "./tollfreeverificationenumstatusenum";
+export declare class MessagingV1TollfreeVerification extends SpeakeasyBase {
+    accountSid?: string;
+    additionalInformation?: string;
+    businessCity?: string;
+    businessContactEmail?: string;
+    businessContactFirstName?: string;
+    businessContactLastName?: string;
+    businessContactPhone?: string;
+    businessCountry?: string;
+    businessName?: string;
+    businessPostalCode?: string;
+    businessStateProvinceRegion?: string;
+    businessStreetAddress?: string;
+    businessStreetAddress2?: string;
+    businessWebsite?: string;
+    customerProfileSid?: string;
+    dateCreated?: Date;
+    dateUpdated?: Date;
+    messageVolume?: string;
+    notificationEmail?: string;
+    optInImageUrls?: string[];
+    optInType?: TollfreeVerificationEnumOptInTypeEnum;
+    productionMessageSample?: string;
+    regulatedItemSid?: string;
+    resourceLinks?: any;
+    sid?: string;
+    status?: TollfreeVerificationEnumStatusEnum;
+    tollfreePhoneNumberSid?: string;
+    trustProductSid?: string;
+    url?: string;
+    useCaseCategories?: string[];
+    useCaseSummary?: string;
+}

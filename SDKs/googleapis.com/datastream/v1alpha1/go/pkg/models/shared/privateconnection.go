@@ -11,6 +11,8 @@ const (
 	PrivateConnectionStateEnumFailedToDelete   PrivateConnectionStateEnum = "FAILED_TO_DELETE"
 )
 
+// PrivateConnection
+// The PrivateConnection resource is used to establish private connectivity between Datastream and a customer's network.
 type PrivateConnection struct {
 	CreateTime       *string                     `json:"createTime,omitempty"`
 	DisplayName      *string                     `json:"displayName,omitempty"`
@@ -20,4 +22,13 @@ type PrivateConnection struct {
 	State            *PrivateConnectionStateEnum `json:"state,omitempty"`
 	UpdateTime       *string                     `json:"updateTime,omitempty"`
 	VpcPeeringConfig *VpcPeeringConfig           `json:"vpcPeeringConfig,omitempty"`
+}
+
+// PrivateConnectionInput
+// The PrivateConnection resource is used to establish private connectivity between Datastream and a customer's network.
+type PrivateConnectionInput struct {
+	DisplayName      *string           `json:"displayName,omitempty"`
+	Error            *Error            `json:"error,omitempty"`
+	Labels           map[string]string `json:"labels,omitempty"`
+	VpcPeeringConfig *VpcPeeringConfig `json:"vpcPeeringConfig,omitempty"`
 }

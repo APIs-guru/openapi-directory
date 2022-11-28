@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -24,27 +28,27 @@ class ListRealtimeContactAnalysisSegmentsHeaders:
 @dataclass_json
 @dataclass
 class ListRealtimeContactAnalysisSegmentsRequestBody:
-    contact_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ContactId' }})
-    instance_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'InstanceId' }})
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MaxResults' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
+    contact_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ContactId') }})
+    instance_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('InstanceId') }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MaxResults') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
     
 
 @dataclass
 class ListRealtimeContactAnalysisSegmentsRequest:
-    query_params: ListRealtimeContactAnalysisSegmentsQueryParams = field(default=None)
-    headers: ListRealtimeContactAnalysisSegmentsHeaders = field(default=None)
-    request: ListRealtimeContactAnalysisSegmentsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ListRealtimeContactAnalysisSegmentsHeaders = field()
+    query_params: ListRealtimeContactAnalysisSegmentsQueryParams = field()
+    request: ListRealtimeContactAnalysisSegmentsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ListRealtimeContactAnalysisSegmentsResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_service_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     list_realtime_contact_analysis_segments_response: Optional[shared.ListRealtimeContactAnalysisSegmentsResponse] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

@@ -1,9 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { FilterRule } from "./filterrule";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FilterRule } from "./filterrule";
 import { Options } from "./options";
 import { TaskSchedule } from "./taskschedule";
+
 
 
 // UpdateTaskRequest
@@ -11,24 +10,24 @@ import { TaskSchedule } from "./taskschedule";
  * UpdateTaskResponse
 **/
 export class UpdateTaskRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CloudWatchLogGroupArn" })
+  @SpeakeasyMetadata({ data: "json, name=CloudWatchLogGroupArn" })
   cloudWatchLogGroupArn?: string;
 
-  @Metadata({ data: "json, name=Excludes", elemType: shared.FilterRule })
+  @SpeakeasyMetadata({ data: "json, name=Excludes", elemType: FilterRule })
   excludes?: FilterRule[];
 
-  @Metadata({ data: "json, name=Includes", elemType: shared.FilterRule })
+  @SpeakeasyMetadata({ data: "json, name=Includes", elemType: FilterRule })
   includes?: FilterRule[];
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Options" })
+  @SpeakeasyMetadata({ data: "json, name=Options" })
   options?: Options;
 
-  @Metadata({ data: "json, name=Schedule" })
+  @SpeakeasyMetadata({ data: "json, name=Schedule" })
   schedule?: TaskSchedule;
 
-  @Metadata({ data: "json, name=TaskArn" })
+  @SpeakeasyMetadata({ data: "json, name=TaskArn" })
   taskArn: string;
 }

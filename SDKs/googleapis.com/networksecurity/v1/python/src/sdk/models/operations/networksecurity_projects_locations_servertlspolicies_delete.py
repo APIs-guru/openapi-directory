@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class NetworksecurityProjectsLocationsServerTLSPoliciesDeletePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class NetworksecurityProjectsLocationsServerTLSPoliciesDeleteQueryParams:
 
 @dataclass
 class NetworksecurityProjectsLocationsServerTLSPoliciesDeleteSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class NetworksecurityProjectsLocationsServerTLSPoliciesDeleteRequest:
-    path_params: NetworksecurityProjectsLocationsServerTLSPoliciesDeletePathParams = field(default=None)
-    query_params: NetworksecurityProjectsLocationsServerTLSPoliciesDeleteQueryParams = field(default=None)
-    security: NetworksecurityProjectsLocationsServerTLSPoliciesDeleteSecurity = field(default=None)
+    path_params: NetworksecurityProjectsLocationsServerTLSPoliciesDeletePathParams = field()
+    query_params: NetworksecurityProjectsLocationsServerTLSPoliciesDeleteQueryParams = field()
+    security: NetworksecurityProjectsLocationsServerTLSPoliciesDeleteSecurity = field()
     
 
 @dataclass
 class NetworksecurityProjectsLocationsServerTLSPoliciesDeleteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

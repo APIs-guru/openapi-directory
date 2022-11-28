@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum ListAndSearchMediaItemsOrderEnum {
     Ascending = "ascending",
@@ -10,9 +10,6 @@ export declare class ListAndSearchMediaItemsQueryParams extends SpeakeasyBase {
     pageIndex?: number;
     pageSize?: number;
     startTime?: string;
-}
-export declare class ListAndSearchMediaItemsRequest extends SpeakeasyBase {
-    queryParams: ListAndSearchMediaItemsQueryParams;
 }
 /**
  * A collection of media items. See [retrieve a media item](#retrieve-a-media-item) for a description of the returned fields
@@ -40,6 +37,9 @@ export declare class ListAndSearchMediaItems200ApplicationJson extends Speakeasy
     count?: number;
     pageIndex?: number;
     pageSize?: number;
+}
+export declare class ListAndSearchMediaItemsRequest extends SpeakeasyBase {
+    queryParams: ListAndSearchMediaItemsQueryParams;
 }
 export declare class ListAndSearchMediaItemsResponse extends SpeakeasyBase {
     contentType: string;

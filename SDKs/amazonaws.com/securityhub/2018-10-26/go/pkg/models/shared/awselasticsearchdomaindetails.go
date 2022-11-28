@@ -1,5 +1,7 @@
 package shared
 
+// AwsElasticsearchDomainDetails
+// Information about an Amazon Elasticsearch Service domain.
 type AwsElasticsearchDomainDetails struct {
 	AccessPolicies              *string                                                  `json:"AccessPolicies,omitempty"`
 	DomainEndpointOptions       *AwsElasticsearchDomainDomainEndpointOptions             `json:"DomainEndpointOptions,omitempty"`

@@ -1,10 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from dataclasses_json import dataclass_json
-from . import messagebody
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateEndpointsBatchResponse:
-    message_body: messagebody.MessageBody = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MessageBody' }})
+    message_body: MessageBody = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('MessageBody') }})
     

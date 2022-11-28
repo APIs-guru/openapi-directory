@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReplicationConfigurationReplicatedDiskStagingDiskTypeEnum } from "./replicationconfigurationreplicateddiskstagingdisktypeenum";
+
 
 
 // ReplicationConfigurationReplicatedDisk
@@ -7,15 +8,15 @@ import { ReplicationConfigurationReplicatedDiskStagingDiskTypeEnum } from "./rep
  * Replication Configuration replicated disk.
 **/
 export class ReplicationConfigurationReplicatedDisk extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deviceName" })
+  @SpeakeasyMetadata({ data: "json, name=deviceName" })
   deviceName?: string;
 
-  @Metadata({ data: "json, name=iops" })
+  @SpeakeasyMetadata({ data: "json, name=iops" })
   iops?: number;
 
-  @Metadata({ data: "json, name=isBootDisk" })
+  @SpeakeasyMetadata({ data: "json, name=isBootDisk" })
   isBootDisk?: boolean;
 
-  @Metadata({ data: "json, name=stagingDiskType" })
+  @SpeakeasyMetadata({ data: "json, name=stagingDiskType" })
   stagingDiskType?: ReplicationConfigurationReplicatedDiskStagingDiskTypeEnum;
 }

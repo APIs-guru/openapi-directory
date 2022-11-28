@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum PlaceActionTypeMetadataPlaceActionTypeEnum {
     PlaceActionTypeUnspecified = "PLACE_ACTION_TYPE_UNSPECIFIED",
     Appointment = "APPOINTMENT",

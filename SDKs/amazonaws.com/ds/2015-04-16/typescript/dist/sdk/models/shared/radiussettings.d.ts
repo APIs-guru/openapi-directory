@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { RadiusAuthenticationProtocolEnum } from "./radiusauthenticationprotocolenum";
 /**
  * Contains information about a Remote Authentication Dial In User Service (RADIUS) server.

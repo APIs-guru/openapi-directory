@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { SettingTypeEnum } from "./settingtypeenum";
 export declare class SettingModelHaljsonEmbeddedTagsEmbeddedProductEmbeddedOrganizationLinks extends SpeakeasyBase {
     members?: string;

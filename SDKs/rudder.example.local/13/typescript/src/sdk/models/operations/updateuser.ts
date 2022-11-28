@@ -1,19 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateUserPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=username" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=username" })
   username: string;
-}
-
-
-export class UpdateUserRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: UpdateUserPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: shared.Users;
 }
 
 export enum UpdateUser200ApplicationJsonActionEnum {
@@ -22,47 +14,56 @@ export enum UpdateUser200ApplicationJsonActionEnum {
 
 
 export class UpdateUser200ApplicationJsonDataUpdatedUser extends SpeakeasyBase {
-  @Metadata({ data: "json, name=password" })
+  @SpeakeasyMetadata({ data: "json, name=password" })
   password: string;
 
-  @Metadata({ data: "json, name=role" })
+  @SpeakeasyMetadata({ data: "json, name=role" })
   role: string[];
 
-  @Metadata({ data: "json, name=username" })
+  @SpeakeasyMetadata({ data: "json, name=username" })
   username: string;
 }
 
 
 export class UpdateUser200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=updatedUser" })
+  @SpeakeasyMetadata({ data: "json, name=updatedUser" })
   updatedUser: UpdateUser200ApplicationJsonDataUpdatedUser;
 }
 
 export enum UpdateUser200ApplicationJsonResultEnum {
-    Success = "success"
-,    Error = "error"
+    Success = "success",
+    Error = "error"
 }
 
 
 export class UpdateUser200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: UpdateUser200ApplicationJsonActionEnum;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: UpdateUser200ApplicationJsonData;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result: UpdateUser200ApplicationJsonResultEnum;
 }
 
 
+export class UpdateUserRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: UpdateUserPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: shared.Users;
+}
+
+
 export class UpdateUserResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateUser200ApplicationJsonObject?: UpdateUser200ApplicationJson;
 }

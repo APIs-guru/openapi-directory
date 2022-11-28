@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://application-cost-profiler.{region}.amazonaws.com",
 	"https://application-cost-profiler.{region}.amazonaws.com",
 	"http://application-cost-profiler.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/application-cost-profiler/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// DeleteReportDefinition - Deletes the specified report definition in AWS Application Cost Profiler. This stops the report from being generated.
 func (s *SDK) DeleteReportDefinition(ctx context.Context, request operations.DeleteReportDefinitionRequest) (*operations.DeleteReportDefinitionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/reportDefinition/{reportId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -71,7 +98,7 @@ func (s *SDK) DeleteReportDefinition(ctx context.Context, request operations.Del
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -141,8 +168,9 @@ func (s *SDK) DeleteReportDefinition(ctx context.Context, request operations.Del
 	return res, nil
 }
 
+// GetReportDefinition - Retrieves the definition of a report already configured in AWS Application Cost Profiler.
 func (s *SDK) GetReportDefinition(ctx context.Context, request operations.GetReportDefinitionRequest) (*operations.GetReportDefinitionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/reportDefinition/{reportId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -152,7 +180,7 @@ func (s *SDK) GetReportDefinition(ctx context.Context, request operations.GetRep
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -222,8 +250,9 @@ func (s *SDK) GetReportDefinition(ctx context.Context, request operations.GetRep
 	return res, nil
 }
 
+// ImportApplicationUsage - <p>Ingests application usage data from Amazon Simple Storage Service (Amazon S3).</p> <p>The data must already exist in the S3 location. As part of the action, AWS Application Cost Profiler copies the object from your S3 bucket to an S3 bucket owned by Amazon for processing asynchronously.</p>
 func (s *SDK) ImportApplicationUsage(ctx context.Context, request operations.ImportApplicationUsageRequest) (*operations.ImportApplicationUsageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/importApplicationUsage"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -243,7 +272,7 @@ func (s *SDK) ImportApplicationUsage(ctx context.Context, request operations.Imp
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -313,8 +342,9 @@ func (s *SDK) ImportApplicationUsage(ctx context.Context, request operations.Imp
 	return res, nil
 }
 
+// ListReportDefinitions - <p>Retrieves a list of all reports and their configurations for your AWS account.</p> <p>The maximum number of reports is one.</p>
 func (s *SDK) ListReportDefinitions(ctx context.Context, request operations.ListReportDefinitionsRequest) (*operations.ListReportDefinitionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/reportDefinition"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -326,7 +356,7 @@ func (s *SDK) ListReportDefinitions(ctx context.Context, request operations.List
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -396,8 +426,9 @@ func (s *SDK) ListReportDefinitions(ctx context.Context, request operations.List
 	return res, nil
 }
 
+// PutReportDefinition - Creates the report definition for a report in Application Cost Profiler.
 func (s *SDK) PutReportDefinition(ctx context.Context, request operations.PutReportDefinitionRequest) (*operations.PutReportDefinitionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/reportDefinition"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -417,7 +448,7 @@ func (s *SDK) PutReportDefinition(ctx context.Context, request operations.PutRep
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -497,8 +528,9 @@ func (s *SDK) PutReportDefinition(ctx context.Context, request operations.PutRep
 	return res, nil
 }
 
+// UpdateReportDefinition - Updates existing report in AWS Application Cost Profiler.
 func (s *SDK) UpdateReportDefinition(ctx context.Context, request operations.UpdateReportDefinitionRequest) (*operations.UpdateReportDefinitionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/reportDefinition/{reportId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -518,7 +550,7 @@ func (s *SDK) UpdateReportDefinition(ctx context.Context, request operations.Upd
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

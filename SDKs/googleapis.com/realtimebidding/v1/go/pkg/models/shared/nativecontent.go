@@ -1,5 +1,7 @@
 package shared
 
+// NativeContent
+// Native content for a creative.
 type NativeContent struct {
 	AdvertiserName   *string  `json:"advertiserName,omitempty"`
 	AppIcon          *Image   `json:"appIcon,omitempty"`

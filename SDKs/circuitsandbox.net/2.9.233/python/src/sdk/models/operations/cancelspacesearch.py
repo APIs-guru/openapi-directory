@@ -1,25 +1,25 @@
 from dataclasses import dataclass, field
-
+from sdk.models import shared
 
 
 @dataclass
 class CancelSpaceSearchPathParams:
-    search_id: str = field(default=None, metadata={'path_param': { 'field_name': 'searchId', 'style': 'simple', 'explode': False }})
+    search_id: str = field(metadata={'path_param': { 'field_name': 'searchId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class CancelSpaceSearchSecurity:
-    oauth: shared.SchemeOauth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth: shared.SchemeOauth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CancelSpaceSearchRequest:
-    path_params: CancelSpaceSearchPathParams = field(default=None)
-    security: CancelSpaceSearchSecurity = field(default=None)
+    path_params: CancelSpaceSearchPathParams = field()
+    security: CancelSpaceSearchSecurity = field()
     
 
 @dataclass
 class CancelSpaceSearchResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

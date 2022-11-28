@@ -1,36 +1,37 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RegisterCaCertificateQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=allowAutoRegistration" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=allowAutoRegistration" })
   allowAutoRegistration?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=setAsActive" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=setAsActive" })
   setAsActive?: boolean;
 }
 
 
 export class RegisterCaCertificateHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -40,75 +41,75 @@ export class RegisterCaCertificateHeaders extends SpeakeasyBase {
  * The registration configuration.
 **/
 export class RegisterCaCertificateRequestBodyRegistrationConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=roleArn" })
+  @SpeakeasyMetadata({ data: "json, name=roleArn" })
   roleArn?: string;
 
-  @Metadata({ data: "json, name=templateBody" })
+  @SpeakeasyMetadata({ data: "json, name=templateBody" })
   templateBody?: string;
 }
 
 
 export class RegisterCaCertificateRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=caCertificate" })
+  @SpeakeasyMetadata({ data: "json, name=caCertificate" })
   caCertificate: string;
 
-  @Metadata({ data: "json, name=registrationConfig" })
+  @SpeakeasyMetadata({ data: "json, name=registrationConfig" })
   registrationConfig?: RegisterCaCertificateRequestBodyRegistrationConfig;
 
-  @Metadata({ data: "json, name=tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=tags", elemType: shared.Tag })
   tags?: shared.Tag[];
 
-  @Metadata({ data: "json, name=verificationCertificate" })
+  @SpeakeasyMetadata({ data: "json, name=verificationCertificate" })
   verificationCertificate: string;
 }
 
 
 export class RegisterCaCertificateRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: RegisterCaCertificateQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: RegisterCaCertificateHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: RegisterCaCertificateRequestBody;
 }
 
 
 export class RegisterCaCertificateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   certificateValidationException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalFailureException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   limitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   registerCaCertificateResponse?: shared.RegisterCaCertificateResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   registrationCodeValidationException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceAlreadyExistsException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceUnavailableException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   unauthorizedException?: any;
 }

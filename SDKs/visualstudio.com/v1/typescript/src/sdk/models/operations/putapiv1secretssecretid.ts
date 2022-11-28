@@ -1,59 +1,60 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PutApiV1SecretsSecretIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=secretId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=secretId" })
   secretId: string;
 }
 
 
 export class PutApiV1SecretsSecretIdQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=planId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=planId" })
   planId?: string;
 }
 
 
 export class PutApiV1SecretsSecretIdRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
   scopedUpdateSecretBody?: shared.ScopedUpdateSecretBody;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   scopedUpdateSecretBody1?: shared.ScopedUpdateSecretBody;
 
-  @Metadata({ data: "request, media_type=application/json-patch+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json-patch+json" })
   scopedUpdateSecretBody2?: shared.ScopedUpdateSecretBody;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   scopedUpdateSecretBody3?: shared.ScopedUpdateSecretBody;
 }
 
 
 export class PutApiV1SecretsSecretIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PutApiV1SecretsSecretIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PutApiV1SecretsSecretIdQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request?: PutApiV1SecretsSecretIdRequests;
 }
 
 
 export class PutApiV1SecretsSecretIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   scopedSecretResultBody?: shared.ScopedSecretResultBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SearchResult } from "./searchresult";
+
 
 
 // SearchResponse
@@ -8,6 +8,6 @@ import { SearchResult } from "./searchresult";
  * The response to a search request for the authenticated user, given a query.
 **/
 export class SearchResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=results", elemType: shared.SearchResult })
+  @SpeakeasyMetadata({ data: "json, name=results", elemType: SearchResult })
   results?: SearchResult[];
 }

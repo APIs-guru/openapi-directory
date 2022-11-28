@@ -31,7 +31,7 @@ type RealtimebiddingBuyersCreativesPatchSecurity struct {
 type RealtimebiddingBuyersCreativesPatchRequest struct {
 	PathParams  RealtimebiddingBuyersCreativesPatchPathParams
 	QueryParams RealtimebiddingBuyersCreativesPatchQueryParams
-	Request     *shared.Creative `request:"mediaType=application/json"`
+	Request     *shared.CreativeInput `request:"mediaType=application/json"`
 	Security    RealtimebiddingBuyersCreativesPatchSecurity
 }
 

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowCxV3beta1VersionVariantsVariant } from "./googleclouddialogflowcxv3beta1versionvariantsvariant";
+
 
 
 // GoogleCloudDialogflowCxV3beta1VersionVariants
@@ -8,6 +8,6 @@ import { GoogleCloudDialogflowCxV3beta1VersionVariantsVariant } from "./googlecl
  * A list of flow version variants.
 **/
 export class GoogleCloudDialogflowCxV3beta1VersionVariants extends SpeakeasyBase {
-  @Metadata({ data: "json, name=variants", elemType: shared.GoogleCloudDialogflowCxV3beta1VersionVariantsVariant })
+  @SpeakeasyMetadata({ data: "json, name=variants", elemType: GoogleCloudDialogflowCxV3beta1VersionVariantsVariant })
   variants?: GoogleCloudDialogflowCxV3beta1VersionVariantsVariant[];
 }

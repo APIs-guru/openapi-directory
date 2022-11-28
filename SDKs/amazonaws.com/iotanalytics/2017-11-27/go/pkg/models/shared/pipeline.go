@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Pipeline
+// Contains information about a pipeline.
 type Pipeline struct {
 	Activities            []PipelineActivity    `json:"activities,omitempty"`
 	Arn                   *string               `json:"arn,omitempty"`

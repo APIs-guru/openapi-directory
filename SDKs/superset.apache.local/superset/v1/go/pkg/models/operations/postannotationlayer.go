@@ -8,11 +8,6 @@ type PostAnnotationLayerSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type PostAnnotationLayerRequest struct {
-	Request  shared.AnnotationLayerRestAPIPost `request:"mediaType=application/json"`
-	Security PostAnnotationLayerSecurity
-}
-
 type PostAnnotationLayer201ApplicationJSON struct {
 	ID     *float64                           `json:"id,omitempty"`
 	Result *shared.AnnotationLayerRestAPIPost `json:"result,omitempty"`
@@ -32,6 +27,11 @@ type PostAnnotationLayer404ApplicationJSON struct {
 
 type PostAnnotationLayer500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type PostAnnotationLayerRequest struct {
+	Request  shared.AnnotationLayerRestAPIPost `request:"mediaType=application/json"`
+	Security PostAnnotationLayerSecurity
 }
 
 type PostAnnotationLayerResponse struct {

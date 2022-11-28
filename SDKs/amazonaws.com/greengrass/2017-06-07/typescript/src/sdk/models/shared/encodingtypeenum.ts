@@ -1,6 +1,7 @@
 
 
+
 export enum EncodingTypeEnum {
-    Binary = "binary"
-,    Json = "json"
+    Binary = "binary",
+    Json = "json"
 }

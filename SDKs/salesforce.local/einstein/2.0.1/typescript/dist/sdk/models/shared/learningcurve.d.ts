@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class LearningCurve extends SpeakeasyBase {
     epoch?: Map<string, any>;
     epochResults?: Map<string, any>;

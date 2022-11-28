@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var OrganizationModelHaljsonLinks = /** @class */ (function (_super) {
     __extends(OrganizationModelHaljsonLinks, _super);
     function OrganizationModelHaljsonLinks() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=members" }),
+        SpeakeasyMetadata({ data: "json, name=members" }),
         __metadata("design:type", String)
     ], OrganizationModelHaljsonLinks.prototype, "members", void 0);
     __decorate([
-        Metadata({ data: "json, name=products" }),
+        SpeakeasyMetadata({ data: "json, name=products" }),
         __metadata("design:type", String)
     ], OrganizationModelHaljsonLinks.prototype, "products", void 0);
     return OrganizationModelHaljsonLinks;
@@ -45,15 +45,15 @@ var OrganizationModelHaljson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=_links" }),
+        SpeakeasyMetadata({ data: "json, name=_links" }),
         __metadata("design:type", OrganizationModelHaljsonLinks)
     ], OrganizationModelHaljson.prototype, "links", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], OrganizationModelHaljson.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=organizationId" }),
+        SpeakeasyMetadata({ data: "json, name=organizationId" }),
         __metadata("design:type", String)
     ], OrganizationModelHaljson.prototype, "organizationId", void 0);
     return OrganizationModelHaljson;

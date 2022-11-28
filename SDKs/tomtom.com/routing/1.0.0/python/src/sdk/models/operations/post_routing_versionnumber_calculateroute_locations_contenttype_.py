@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class PostRoutingVersionNumberCalculateRouteLocationsContentTypePathParams:
-    content_type: shared.ContentTypeEnum = field(default=None, metadata={'path_param': { 'field_name': 'contentType', 'style': 'simple', 'explode': False }})
-    locations: str = field(default=None, metadata={'path_param': { 'field_name': 'locations', 'style': 'simple', 'explode': False }})
-    version_number: int = field(default=None, metadata={'path_param': { 'field_name': 'versionNumber', 'style': 'simple', 'explode': False }})
+    content_type: shared.ContentTypeEnum = field(metadata={'path_param': { 'field_name': 'contentType', 'style': 'simple', 'explode': False }})
+    locations: str = field(metadata={'path_param': { 'field_name': 'locations', 'style': 'simple', 'explode': False }})
+    version_number: int = field(metadata={'path_param': { 'field_name': 'versionNumber', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -55,19 +56,19 @@ class PostRoutingVersionNumberCalculateRouteLocationsContentTypeQueryParams:
 
 @dataclass
 class PostRoutingVersionNumberCalculateRouteLocationsContentTypeRequests:
-    application_xml: bytes = field(default=None, metadata={'request': { 'media_type': 'application/xml' }})
+    application_xml: bytes = field(metadata={'request': { 'media_type': 'application/xml' }})
     calculate_route_post_data_parameters: Optional[shared.CalculateRoutePostDataParameters] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PostRoutingVersionNumberCalculateRouteLocationsContentTypeRequest:
-    path_params: PostRoutingVersionNumberCalculateRouteLocationsContentTypePathParams = field(default=None)
-    query_params: PostRoutingVersionNumberCalculateRouteLocationsContentTypeQueryParams = field(default=None)
+    path_params: PostRoutingVersionNumberCalculateRouteLocationsContentTypePathParams = field()
+    query_params: PostRoutingVersionNumberCalculateRouteLocationsContentTypeQueryParams = field()
     request: Optional[PostRoutingVersionNumberCalculateRouteLocationsContentTypeRequests] = field(default=None)
     
 
 @dataclass
 class PostRoutingVersionNumberCalculateRouteLocationsContentTypeResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

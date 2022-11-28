@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ComparedFace } from "./comparedface";
 import { KnownGender } from "./knowngender";
+
 
 
 // Celebrity
@@ -8,21 +9,21 @@ import { KnownGender } from "./knowngender";
  * Provides information about a celebrity recognized by the <a>RecognizeCelebrities</a> operation.
 **/
 export class Celebrity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Face" })
+  @SpeakeasyMetadata({ data: "json, name=Face" })
   face?: ComparedFace;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=KnownGender" })
+  @SpeakeasyMetadata({ data: "json, name=KnownGender" })
   knownGender?: KnownGender;
 
-  @Metadata({ data: "json, name=MatchConfidence" })
+  @SpeakeasyMetadata({ data: "json, name=MatchConfidence" })
   matchConfidence?: number;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Urls" })
+  @SpeakeasyMetadata({ data: "json, name=Urls" })
   urls?: string[];
 }

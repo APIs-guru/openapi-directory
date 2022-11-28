@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // WatchSettings
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Branding properties for the watch. All deprecated.
 **/
 export class WatchSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=backgroundColor" })
+  @SpeakeasyMetadata({ data: "json, name=backgroundColor" })
   backgroundColor?: string;
 
-  @Metadata({ data: "json, name=featuredPlaylistId" })
+  @SpeakeasyMetadata({ data: "json, name=featuredPlaylistId" })
   featuredPlaylistId?: string;
 
-  @Metadata({ data: "json, name=textColor" })
+  @SpeakeasyMetadata({ data: "json, name=textColor" })
   textColor?: string;
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Debuggee } from "./debuggee";
+
 
 
 // RegisterDebuggeeRequest
@@ -7,6 +8,6 @@ import { Debuggee } from "./debuggee";
  * Request to register a debuggee.
 **/
 export class RegisterDebuggeeRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=debuggee" })
+  @SpeakeasyMetadata({ data: "json, name=debuggee" })
   debuggee?: Debuggee;
 }

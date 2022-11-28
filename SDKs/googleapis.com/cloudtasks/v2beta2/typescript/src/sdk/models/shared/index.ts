@@ -28,6 +28,7 @@ export * from "./oidctoken";
 export * from "./policy";
 export * from "./pullmessage";
 export * from "./queue";
+export * from "./queue1";
 export * from "./queuestats";
 export * from "./ratelimits";
 export * from "./renewleaserequest";

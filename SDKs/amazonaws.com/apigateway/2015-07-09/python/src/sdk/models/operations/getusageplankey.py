@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetUsagePlanKeyPathParams:
-    key_id: str = field(default=None, metadata={'path_param': { 'field_name': 'keyId', 'style': 'simple', 'explode': False }})
-    usageplan_id: str = field(default=None, metadata={'path_param': { 'field_name': 'usageplanId', 'style': 'simple', 'explode': False }})
+    key_id: str = field(metadata={'path_param': { 'field_name': 'keyId', 'style': 'simple', 'explode': False }})
+    usageplan_id: str = field(metadata={'path_param': { 'field_name': 'usageplanId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,16 +25,16 @@ class GetUsagePlanKeyHeaders:
 
 @dataclass
 class GetUsagePlanKeyRequest:
-    path_params: GetUsagePlanKeyPathParams = field(default=None)
-    headers: GetUsagePlanKeyHeaders = field(default=None)
+    headers: GetUsagePlanKeyHeaders = field()
+    path_params: GetUsagePlanKeyPathParams = field()
     
 
 @dataclass
 class GetUsagePlanKeyResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     usage_plan_key: Optional[shared.UsagePlanKey] = field(default=None)

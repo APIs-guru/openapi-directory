@@ -1,5 +1,7 @@
 package shared
 
+// GroupVersion
+// Information about a group version.
 type GroupVersion struct {
 	ConnectorDefinitionVersionArn    *string `json:"ConnectorDefinitionVersionArn,omitempty"`
 	CoreDefinitionVersionArn         *string `json:"CoreDefinitionVersionArn,omitempty"`

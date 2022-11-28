@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LookbackConfiguration } from "./lookbackconfiguration";
+
 
 
 // ReportsConfiguration
@@ -7,12 +8,12 @@ import { LookbackConfiguration } from "./lookbackconfiguration";
  * Reporting Configuration
 **/
 export class ReportsConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=exposureToConversionEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=exposureToConversionEnabled" })
   exposureToConversionEnabled?: boolean;
 
-  @Metadata({ data: "json, name=lookbackConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=lookbackConfiguration" })
   lookbackConfiguration?: LookbackConfiguration;
 
-  @Metadata({ data: "json, name=reportGenerationTimeZoneId" })
+  @SpeakeasyMetadata({ data: "json, name=reportGenerationTimeZoneId" })
   reportGenerationTimeZoneId?: string;
 }

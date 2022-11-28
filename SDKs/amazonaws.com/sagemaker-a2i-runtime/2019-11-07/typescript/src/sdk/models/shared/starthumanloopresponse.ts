@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class StartHumanLoopResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=HumanLoopArn" })
+  @SpeakeasyMetadata({ data: "json, name=HumanLoopArn" })
   humanLoopArn?: string;
 }

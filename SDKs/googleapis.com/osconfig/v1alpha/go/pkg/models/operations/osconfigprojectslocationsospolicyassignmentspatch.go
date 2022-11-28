@@ -31,7 +31,7 @@ type OsconfigProjectsLocationsOsPolicyAssignmentsPatchSecurity struct {
 type OsconfigProjectsLocationsOsPolicyAssignmentsPatchRequest struct {
 	PathParams  OsconfigProjectsLocationsOsPolicyAssignmentsPatchPathParams
 	QueryParams OsconfigProjectsLocationsOsPolicyAssignmentsPatchQueryParams
-	Request     *shared.OsPolicyAssignment `request:"mediaType=application/json"`
+	Request     *shared.OsPolicyAssignmentInput `request:"mediaType=application/json"`
 	Security    OsconfigProjectsLocationsOsPolicyAssignmentsPatchSecurity
 }
 

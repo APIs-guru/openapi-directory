@@ -1,8 +1,250 @@
-import warnings
+
+
 import requests
-from typing import Any
-from sdk.models import operations
+
 from . import utils
+
+from .service_media_tabular_extractsheet import ServiceMediaTabularExtractsheet
+from .type_2017_boulder_election_expenditures import Type2017BoulderElectionExpenditures
+from .type_any import TypeAny
+from .type_beforeafter import TypeBeforeafter
+from .type_biblio import TypeBiblio
+from .type_bio_dicom import TypeBioDicom
+from .type_bio_dicom_test import TypeBioDicomTest
+from .type_bio_fasta import TypeBioFasta
+from .type_bio_fastq import TypeBioFastq
+from .type_bio_hmmer_index import TypeBioHmmerIndex
+from .type_bio_ome_tiff import TypeBioOmeTiff
+from .type_bio_ontology_assay import TypeBioOntologyAssay
+from .type_bio_ontology_cohort import TypeBioOntologyCohort
+from .type_bio_ontology_person import TypeBioOntologyPerson
+from .type_bio_ontology_sample import TypeBioOntologySample
+from .type_bio_ontology_series import TypeBioOntologySeries
+from .type_bio_ontology_study import TypeBioOntologyStudy
+from .type_bio_sam import TypeBioSam
+from .type_bio_sf_pdb import TypeBioSfPdb
+from .type_bio_sra import TypeBioSra
+from .type_bio_stockholm import TypeBioStockholm
+from .type_bio_taxonomy import TypeBioTaxonomy
+from .type_blogentry import TypeBlogentry
+from .type_bolder_rental_housing import TypeBolderRentalHousing
+from .type_bookmarks import TypeBookmarks
+from .type_boston_crime import TypeBostonCrime
+from .type_boulder_2017_election_contributions import TypeBoulder2017ElectionContributions
+from .type_boulder_campaign_contributions import TypeBoulderCampaignContributions
+from .type_boulder_consulting_services import TypeBoulderConsultingServices
+from .type_boulder_county_voter_details import TypeBoulderCountyVoterDetails
+from .type_boulder_crimes import TypeBoulderCrimes
+from .type_boulder_emails import TypeBoulderEmails
+from .type_boulder_employee_salaries import TypeBoulderEmployeeSalaries
+from .type_calendar import TypeCalendar
+from .type_campaign_donors import TypeCampaignDonors
+from .type_campaign_expenditures import TypeCampaignExpenditures
+from .type_cataloglink import TypeCataloglink
+from .type_cdm_grid import TypeCdmGrid
+from .type_chatroom import TypeChatroom
+from .type_colorado_water_rights import TypeColoradoWaterRights
+from .type_committee_donations import TypeCommitteeDonations
+from .type_community_datahub import TypeCommunityDatahub
+from .type_community_resource import TypeCommunityResource
+from .type_construction_permits import TypeConstructionPermits
+from .type_contact import TypeContact
+from .type_db_co_indicators import TypeDbCoIndicators
+from .type_earth_satellite_landsat import TypeEarthSatelliteLandsat
+from .type_faq import TypeFaq
+from .type_fec_pacs import TypeFecPacs
+from .type_feccandidates import TypeFeccandidates
+from .type_feed import TypeFeed
+from .type_file import TypeFile
+from .type_fits_data import TypeFitsData
+from .type_ftp import TypeFtp
+from .type_gadgets_countdown import TypeGadgetsCountdown
+from .type_gadgets_stock import TypeGadgetsStock
+from .type_gadgets_weather import TypeGadgetsWeather
+from .type_gazeteer_census_tracts import TypeGazeteerCensusTracts
+from .type_gazeteer_counties import TypeGazeteerCounties
+from .type_geo_ge import TypeGeoGe
+from .type_geo_geotiff import TypeGeoGeotiff
+from .type_geo_gpx import TypeGeoGpx
+from .type_geo_hdf5 import TypeGeoHdf5
+from .type_geo_kml import TypeGeoKml
+from .type_geo_shapefile import TypeGeoShapefile
+from .type_geo_shapefile_fips import TypeGeoShapefileFips
+from .type_glossary import TypeGlossary
+from .type_gridaggregation import TypeGridaggregation
+from .type_group import TypeGroup
+from .type_hipchat_group import TypeHipchatGroup
+from .type_homepage import TypeHomepage
+from .type_incident import TypeIncident
+from .type_jeopardy import TypeJeopardy
+from .type_latlonimage import TypeLatlonimage
+from .type_lidar_collection import TypeLidarCollection
+from .type_lidar_las import TypeLidarLas
+from .type_lidar_lvis import TypeLidarLvis
+from .type_link import TypeLink
+from .type_localfiles import TypeLocalfiles
+from .type_locations import TypeLocations
+from .type_map_googlemap import TypeMapGooglemap
+from .type_media_audiofile import TypeMediaAudiofile
+from .type_media_imageloop import TypeMediaImageloop
+from .type_media_photoalbum import TypeMediaPhotoalbum
+from .type_media_video_channel import TypeMediaVideoChannel
+from .type_media_video_quicktime import TypeMediaVideoQuicktime
+from .type_media_youtubevideo import TypeMediaYoutubevideo
+from .type_notes import TypeNotes
+from .type_notes_jsonfile import TypeNotesJsonfile
+from .type_notes_note import TypeNotesNote
+from .type_notes_notebook import TypeNotesNotebook
+from .type_nwsfeed import TypeNwsfeed
+from .type_opendaplink import TypeOpendaplink
+from .type_owl_class import TypeOwlClass
+from .type_owl_ontology import TypeOwlOntology
+from .type_pasteitentry import TypePasteitentry
+from .type_point_text import TypePointText
+from .type_police_stop_data import TypePoliceStopData
+from .type_poll import TypePoll
+from .type_project_campaign import TypeProjectCampaign
+from .type_project_casestudy import TypeProjectCasestudy
+from .type_project_contribution import TypeProjectContribution
+from .type_project_dataformat import TypeProjectDataformat
+from .type_project_dataset import TypeProjectDataset
+from .type_project_deployment import TypeProjectDeployment
+from .type_project_experiment import TypeProjectExperiment
+from .type_project_fieldnote import TypeProjectFieldnote
+from .type_project_gps_controlpoints import TypeProjectGpsControlpoints
+from .type_project_gps_raw import TypeProjectGpsRaw
+from .type_project_gps_rinex import TypeProjectGpsRinex
+from .type_project_instrument import TypeProjectInstrument
+from .type_project_learning_resource import TypeProjectLearningResource
+from .type_project_meeting import TypeProjectMeeting
+from .type_project_organization import TypeProjectOrganization
+from .type_project_program import TypeProjectProgram
+from .type_project_project import TypeProjectProject
+from .type_project_service import TypeProjectService
+from .type_project_site import TypeProjectSite
+from .type_project_softwarepackage import TypeProjectSoftwarepackage
+from .type_project_standard_name import TypeProjectStandardName
+from .type_project_surveylocation import TypeProjectSurveylocation
+from .type_project_term import TypeProjectTerm
+from .type_project_visit import TypeProjectVisit
+from .type_project_vocabulary import TypeProjectVocabulary
+from .type_property_sales import TypePropertySales
+from .type_propertydb import TypePropertydb
+from .type_python_notebook import TypePythonNotebook
+from .type_slack_team import TypeSlackTeam
+from .type_statusboard import TypeStatusboard
+from .type_sunrisesunset import TypeSunrisesunset
+from .type_tasks import TypeTasks
+from .type_tmdbmovies import TypeTmdbmovies
+from .type_todo import TypeTodo
+from .type_trip_event import TypeTripEvent
+from .type_trip_flight import TypeTripFlight
+from .type_trip_hotel import TypeTripHotel
+from .type_trip_report import TypeTripReport
+from .type_trip_trip import TypeTripTrip
+from .type_type_awc_metar import TypeTypeAwcMetar
+from .type_type_biz_stockseries import TypeTypeBizStockseries
+from .type_type_bls_series import TypeTypeBlsSeries
+from .type_type_bls_survey import TypeTypeBlsSurvey
+from .type_type_census_acs import TypeTypeCensusAcs
+from .type_type_daymet import TypeTypeDaymet
+from .type_type_db_table import TypeTypeDbTable
+from .type_type_document_csv import TypeTypeDocumentCsv
+from .type_type_document_doc import TypeTypeDocumentDoc
+from .type_type_document_html import TypeTypeDocumentHTML
+from .type_type_document_pdf import TypeTypeDocumentPdf
+from .type_type_document_ppt import TypeTypeDocumentPpt
+from .type_type_document_xls import TypeTypeDocumentXls
+from .type_type_drilsdown_casestudy import TypeTypeDrilsdownCasestudy
+from .type_type_edgar_filing import TypeTypeEdgarFiling
+from .type_type_eia_category import TypeTypeEiaCategory
+from .type_type_eia_series import TypeTypeEiaSeries
+from .type_type_esri_featureserver import TypeTypeEsriFeatureserver
+from .type_type_esri_geometryserver import TypeTypeEsriGeometryserver
+from .type_type_esri_gpserver import TypeTypeEsriGpserver
+from .type_type_esri_imageserver import TypeTypeEsriImageserver
+from .type_type_esri_layer import TypeTypeEsriLayer
+from .type_type_esri_mapserver import TypeTypeEsriMapserver
+from .type_type_esri_restfolder import TypeTypeEsriRestfolder
+from .type_type_esri_restserver import TypeTypeEsriRestserver
+from .type_type_esri_restservice import TypeTypeEsriRestservice
+from .type_type_extremes import TypeTypeExtremes
+from .type_type_fred_category import TypeTypeFredCategory
+from .type_type_fred_series import TypeTypeFredSeries
+from .type_type_gtfs_agency import TypeTypeGtfsAgency
+from .type_type_gtfs_route import TypeTypeGtfsRoute
+from .type_type_gtfs_routes import TypeTypeGtfsRoutes
+from .type_type_gtfs_stop import TypeTypeGtfsStop
+from .type_type_gtfs_stops import TypeTypeGtfsStops
+from .type_type_gtfs_trip import TypeTypeGtfsTrip
+from .type_type_hazarddata import TypeTypeHazarddata
+from .type_type_hydro_colorado import TypeTypeHydroColorado
+from .type_type_idv_bundle import TypeTypeIdvBundle
+from .type_type_image import TypeTypeImage
+from .type_type_image_airport import TypeTypeImageAirport
+from .type_type_image_webcam import TypeTypeImageWebcam
+from .type_type_mb import TypeTypeMb
+from .type_type_mb_collection import TypeTypeMbCollection
+from .type_type_mb_point_basic import TypeTypeMbPointBasic
+from .type_type_metameta_dictionary import TypeTypeMetametaDictionary
+from .type_type_metameta_field import TypeTypeMetametaField
+from .type_type_nasaames import TypeTypeNasaames
+from .type_type_ncss import TypeTypeNcss
+from .type_type_nitf import TypeTypeNitf
+from .type_type_point_ameriflux_level2 import TypeTypePointAmerifluxLevel2
+from .type_type_point_amrc_final import TypeTypePointAmrcFinal
+from .type_type_point_amrc_freewave import TypeTypePointAmrcFreewave
+from .type_type_point_czo import TypeTypePointCzo
+from .type_type_point_gcnet import TypeTypePointGcnet
+from .type_type_point_geomag_iaga2002 import TypeTypePointGeomagIaga2002
+from .type_type_point_hydro_waterml import TypeTypePointHydroWaterml
+from .type_type_point_icebridge_atm_icessn import TypeTypePointIcebridgeAtmIcessn
+from .type_type_point_icebridge_atm_qfit import TypeTypePointIcebridgeAtmQfit
+from .type_type_point_icebridge_mccords_irmcr2 import TypeTypePointIcebridgeMccordsIrmcr2
+from .type_type_point_icebridge_mccords_irmcr3 import TypeTypePointIcebridgeMccordsIrmcr3
+from .type_type_point_icebridge_paris import TypeTypePointIcebridgeParis
+from .type_type_point_idv import TypeTypePointIdv
+from .type_type_point_inline import TypeTypePointInline
+from .type_type_point_ncdc_climate import TypeTypePointNcdcClimate
+from .type_type_point_netcdf import TypeTypePointNetcdf
+from .type_type_point_noaa_carbon import TypeTypePointNoaaCarbon
+from .type_type_point_noaa_flask_event import TypeTypePointNoaaFlaskEvent
+from .type_type_point_noaa_flask_month import TypeTypePointNoaaFlaskMonth
+from .type_type_point_noaa_madis import TypeTypePointNoaaMadis
+from .type_type_point_noaa_tower import TypeTypePointNoaaTower
+from .type_type_point_ocean_cnv import TypeTypePointOceanCnv
+from .type_type_point_ocean_csv_sado_tts import TypeTypePointOceanCsvSadoTts
+from .type_type_point_ocean_csv_sado_meteo import TypeTypePointOceanCsvSadoMeteo
+from .type_type_point_ocean_csv_sado_position import TypeTypePointOceanCsvSadoPosition
+from .type_type_point_ocean_netcdf_glider import TypeTypePointOceanNetcdfGlider
+from .type_type_point_ocean_netcdf_track import TypeTypePointOceanNetcdfTrack
+from .type_type_point_ocean_ooi_dmgx import TypeTypePointOceanOoiDmgx
+from .type_type_point_openaq import TypeTypePointOpenaq
+from .type_type_point_pbo_position_time_series import TypeTypePointPboPositionTimeSeries
+from .type_type_point_simple_records import TypeTypePointSimpleRecords
+from .type_type_point_snotel import TypeTypePointSnotel
+from .type_type_point_text import TypeTypePointText
+from .type_type_point_wsbb_ggp import TypeTypePointWsbbGgp
+from .type_type_psd_monthly_climate_index import TypeTypePsdMonthlyClimateIndex
+from .type_type_quandl_series import TypeTypeQuandlSeries
+from .type_type_service_group import TypeTypeServiceGroup
+from .type_type_service_link import TypeTypeServiceLink
+from .type_type_socrata_series import TypeTypeSocrataSeries
+from .type_type_sounding_cod import TypeTypeSoundingCod
+from .type_type_sounding_frd import TypeTypeSoundingFrd
+from .type_type_sounding_gsd import TypeTypeSoundingGsd
+from .type_type_sounding_wyoming import TypeTypeSoundingWyoming
+from .type_type_tmy import TypeTypeTmy
+from .type_type_tweet import TypeTypeTweet
+from .type_type_usgs_gauge import TypeTypeUsgsGauge
+from .type_type_virtual import TypeTypeVirtual
+from .type_type_wms_capabilities import TypeTypeWmsCapabilities
+from .type_type_wms_layer import TypeTypeWmsLayer
+from .type_ufo_sightings import TypeUfoSightings
+from .type_us_places import TypeUsPlaces
+from .type_vote_yesno import TypeVoteYesno
+from .type_weblog import TypeWeblog
+from .type_wikipage import TypeWikipage
 
 
 SERVERS = [
@@ -11,5076 +253,2446 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+    service_media_tabular_extractsheet: ServiceMediaTabularExtractsheet
+    type_2017_boulder_election_expenditures: Type2017BoulderElectionExpenditures
+    type_any: TypeAny
+    type_beforeafter: TypeBeforeafter
+    type_biblio: TypeBiblio
+    type_bio_dicom: TypeBioDicom
+    type_bio_dicom_test: TypeBioDicomTest
+    type_bio_fasta: TypeBioFasta
+    type_bio_fastq: TypeBioFastq
+    type_bio_hmmer_index: TypeBioHmmerIndex
+    type_bio_ome_tiff: TypeBioOmeTiff
+    type_bio_ontology_assay: TypeBioOntologyAssay
+    type_bio_ontology_cohort: TypeBioOntologyCohort
+    type_bio_ontology_person: TypeBioOntologyPerson
+    type_bio_ontology_sample: TypeBioOntologySample
+    type_bio_ontology_series: TypeBioOntologySeries
+    type_bio_ontology_study: TypeBioOntologyStudy
+    type_bio_sam: TypeBioSam
+    type_bio_sf_pdb: TypeBioSfPdb
+    type_bio_sra: TypeBioSra
+    type_bio_stockholm: TypeBioStockholm
+    type_bio_taxonomy: TypeBioTaxonomy
+    type_blogentry: TypeBlogentry
+    type_bolder_rental_housing: TypeBolderRentalHousing
+    type_bookmarks: TypeBookmarks
+    type_boston_crime: TypeBostonCrime
+    type_boulder_2017_election_contributions: TypeBoulder2017ElectionContributions
+    type_boulder_campaign_contributions: TypeBoulderCampaignContributions
+    type_boulder_consulting_services: TypeBoulderConsultingServices
+    type_boulder_county_voter_details: TypeBoulderCountyVoterDetails
+    type_boulder_crimes: TypeBoulderCrimes
+    type_boulder_emails: TypeBoulderEmails
+    type_boulder_employee_salaries: TypeBoulderEmployeeSalaries
+    type_calendar: TypeCalendar
+    type_campaign_donors: TypeCampaignDonors
+    type_campaign_expenditures: TypeCampaignExpenditures
+    type_cataloglink: TypeCataloglink
+    type_cdm_grid: TypeCdmGrid
+    type_chatroom: TypeChatroom
+    type_colorado_water_rights: TypeColoradoWaterRights
+    type_committee_donations: TypeCommitteeDonations
+    type_community_datahub: TypeCommunityDatahub
+    type_community_resource: TypeCommunityResource
+    type_construction_permits: TypeConstructionPermits
+    type_contact: TypeContact
+    type_db_co_indicators: TypeDbCoIndicators
+    type_earth_satellite_landsat: TypeEarthSatelliteLandsat
+    type_faq: TypeFaq
+    type_fec_pacs: TypeFecPacs
+    type_feccandidates: TypeFeccandidates
+    type_feed: TypeFeed
+    type_file: TypeFile
+    type_fits_data: TypeFitsData
+    type_ftp: TypeFtp
+    type_gadgets_countdown: TypeGadgetsCountdown
+    type_gadgets_stock: TypeGadgetsStock
+    type_gadgets_weather: TypeGadgetsWeather
+    type_gazeteer_census_tracts: TypeGazeteerCensusTracts
+    type_gazeteer_counties: TypeGazeteerCounties
+    type_geo_ge: TypeGeoGe
+    type_geo_geotiff: TypeGeoGeotiff
+    type_geo_gpx: TypeGeoGpx
+    type_geo_hdf5: TypeGeoHdf5
+    type_geo_kml: TypeGeoKml
+    type_geo_shapefile: TypeGeoShapefile
+    type_geo_shapefile_fips: TypeGeoShapefileFips
+    type_glossary: TypeGlossary
+    type_gridaggregation: TypeGridaggregation
+    type_group: TypeGroup
+    type_hipchat_group: TypeHipchatGroup
+    type_homepage: TypeHomepage
+    type_incident: TypeIncident
+    type_jeopardy: TypeJeopardy
+    type_latlonimage: TypeLatlonimage
+    type_lidar_collection: TypeLidarCollection
+    type_lidar_las: TypeLidarLas
+    type_lidar_lvis: TypeLidarLvis
+    type_link: TypeLink
+    type_localfiles: TypeLocalfiles
+    type_locations: TypeLocations
+    type_map_googlemap: TypeMapGooglemap
+    type_media_audiofile: TypeMediaAudiofile
+    type_media_imageloop: TypeMediaImageloop
+    type_media_photoalbum: TypeMediaPhotoalbum
+    type_media_video_channel: TypeMediaVideoChannel
+    type_media_video_quicktime: TypeMediaVideoQuicktime
+    type_media_youtubevideo: TypeMediaYoutubevideo
+    type_notes: TypeNotes
+    type_notes_jsonfile: TypeNotesJsonfile
+    type_notes_note: TypeNotesNote
+    type_notes_notebook: TypeNotesNotebook
+    type_nwsfeed: TypeNwsfeed
+    type_opendaplink: TypeOpendaplink
+    type_owl_class: TypeOwlClass
+    type_owl_ontology: TypeOwlOntology
+    type_pasteitentry: TypePasteitentry
+    type_point_text: TypePointText
+    type_police_stop_data: TypePoliceStopData
+    type_poll: TypePoll
+    type_project_campaign: TypeProjectCampaign
+    type_project_casestudy: TypeProjectCasestudy
+    type_project_contribution: TypeProjectContribution
+    type_project_dataformat: TypeProjectDataformat
+    type_project_dataset: TypeProjectDataset
+    type_project_deployment: TypeProjectDeployment
+    type_project_experiment: TypeProjectExperiment
+    type_project_fieldnote: TypeProjectFieldnote
+    type_project_gps_controlpoints: TypeProjectGpsControlpoints
+    type_project_gps_raw: TypeProjectGpsRaw
+    type_project_gps_rinex: TypeProjectGpsRinex
+    type_project_instrument: TypeProjectInstrument
+    type_project_learning_resource: TypeProjectLearningResource
+    type_project_meeting: TypeProjectMeeting
+    type_project_organization: TypeProjectOrganization
+    type_project_program: TypeProjectProgram
+    type_project_project: TypeProjectProject
+    type_project_service: TypeProjectService
+    type_project_site: TypeProjectSite
+    type_project_softwarepackage: TypeProjectSoftwarepackage
+    type_project_standard_name: TypeProjectStandardName
+    type_project_surveylocation: TypeProjectSurveylocation
+    type_project_term: TypeProjectTerm
+    type_project_visit: TypeProjectVisit
+    type_project_vocabulary: TypeProjectVocabulary
+    type_property_sales: TypePropertySales
+    type_propertydb: TypePropertydb
+    type_python_notebook: TypePythonNotebook
+    type_slack_team: TypeSlackTeam
+    type_statusboard: TypeStatusboard
+    type_sunrisesunset: TypeSunrisesunset
+    type_tasks: TypeTasks
+    type_tmdbmovies: TypeTmdbmovies
+    type_todo: TypeTodo
+    type_trip_event: TypeTripEvent
+    type_trip_flight: TypeTripFlight
+    type_trip_hotel: TypeTripHotel
+    type_trip_report: TypeTripReport
+    type_trip_trip: TypeTripTrip
+    type_type_awc_metar: TypeTypeAwcMetar
+    type_type_biz_stockseries: TypeTypeBizStockseries
+    type_type_bls_series: TypeTypeBlsSeries
+    type_type_bls_survey: TypeTypeBlsSurvey
+    type_type_census_acs: TypeTypeCensusAcs
+    type_type_daymet: TypeTypeDaymet
+    type_type_db_table: TypeTypeDbTable
+    type_type_document_csv: TypeTypeDocumentCsv
+    type_type_document_doc: TypeTypeDocumentDoc
+    type_type_document_html: TypeTypeDocumentHTML
+    type_type_document_pdf: TypeTypeDocumentPdf
+    type_type_document_ppt: TypeTypeDocumentPpt
+    type_type_document_xls: TypeTypeDocumentXls
+    type_type_drilsdown_casestudy: TypeTypeDrilsdownCasestudy
+    type_type_edgar_filing: TypeTypeEdgarFiling
+    type_type_eia_category: TypeTypeEiaCategory
+    type_type_eia_series: TypeTypeEiaSeries
+    type_type_esri_featureserver: TypeTypeEsriFeatureserver
+    type_type_esri_geometryserver: TypeTypeEsriGeometryserver
+    type_type_esri_gpserver: TypeTypeEsriGpserver
+    type_type_esri_imageserver: TypeTypeEsriImageserver
+    type_type_esri_layer: TypeTypeEsriLayer
+    type_type_esri_mapserver: TypeTypeEsriMapserver
+    type_type_esri_restfolder: TypeTypeEsriRestfolder
+    type_type_esri_restserver: TypeTypeEsriRestserver
+    type_type_esri_restservice: TypeTypeEsriRestservice
+    type_type_extremes: TypeTypeExtremes
+    type_type_fred_category: TypeTypeFredCategory
+    type_type_fred_series: TypeTypeFredSeries
+    type_type_gtfs_agency: TypeTypeGtfsAgency
+    type_type_gtfs_route: TypeTypeGtfsRoute
+    type_type_gtfs_routes: TypeTypeGtfsRoutes
+    type_type_gtfs_stop: TypeTypeGtfsStop
+    type_type_gtfs_stops: TypeTypeGtfsStops
+    type_type_gtfs_trip: TypeTypeGtfsTrip
+    type_type_hazarddata: TypeTypeHazarddata
+    type_type_hydro_colorado: TypeTypeHydroColorado
+    type_type_idv_bundle: TypeTypeIdvBundle
+    type_type_image: TypeTypeImage
+    type_type_image_airport: TypeTypeImageAirport
+    type_type_image_webcam: TypeTypeImageWebcam
+    type_type_mb: TypeTypeMb
+    type_type_mb_collection: TypeTypeMbCollection
+    type_type_mb_point_basic: TypeTypeMbPointBasic
+    type_type_metameta_dictionary: TypeTypeMetametaDictionary
+    type_type_metameta_field: TypeTypeMetametaField
+    type_type_nasaames: TypeTypeNasaames
+    type_type_ncss: TypeTypeNcss
+    type_type_nitf: TypeTypeNitf
+    type_type_point_ameriflux_level2: TypeTypePointAmerifluxLevel2
+    type_type_point_amrc_final: TypeTypePointAmrcFinal
+    type_type_point_amrc_freewave: TypeTypePointAmrcFreewave
+    type_type_point_czo: TypeTypePointCzo
+    type_type_point_gcnet: TypeTypePointGcnet
+    type_type_point_geomag_iaga2002: TypeTypePointGeomagIaga2002
+    type_type_point_hydro_waterml: TypeTypePointHydroWaterml
+    type_type_point_icebridge_atm_icessn: TypeTypePointIcebridgeAtmIcessn
+    type_type_point_icebridge_atm_qfit: TypeTypePointIcebridgeAtmQfit
+    type_type_point_icebridge_mccords_irmcr2: TypeTypePointIcebridgeMccordsIrmcr2
+    type_type_point_icebridge_mccords_irmcr3: TypeTypePointIcebridgeMccordsIrmcr3
+    type_type_point_icebridge_paris: TypeTypePointIcebridgeParis
+    type_type_point_idv: TypeTypePointIdv
+    type_type_point_inline: TypeTypePointInline
+    type_type_point_ncdc_climate: TypeTypePointNcdcClimate
+    type_type_point_netcdf: TypeTypePointNetcdf
+    type_type_point_noaa_carbon: TypeTypePointNoaaCarbon
+    type_type_point_noaa_flask_event: TypeTypePointNoaaFlaskEvent
+    type_type_point_noaa_flask_month: TypeTypePointNoaaFlaskMonth
+    type_type_point_noaa_madis: TypeTypePointNoaaMadis
+    type_type_point_noaa_tower: TypeTypePointNoaaTower
+    type_type_point_ocean_cnv: TypeTypePointOceanCnv
+    type_type_point_ocean_csv_sado_tts: TypeTypePointOceanCsvSadoTts
+    type_type_point_ocean_csv_sado_meteo: TypeTypePointOceanCsvSadoMeteo
+    type_type_point_ocean_csv_sado_position: TypeTypePointOceanCsvSadoPosition
+    type_type_point_ocean_netcdf_glider: TypeTypePointOceanNetcdfGlider
+    type_type_point_ocean_netcdf_track: TypeTypePointOceanNetcdfTrack
+    type_type_point_ocean_ooi_dmgx: TypeTypePointOceanOoiDmgx
+    type_type_point_openaq: TypeTypePointOpenaq
+    type_type_point_pbo_position_time_series: TypeTypePointPboPositionTimeSeries
+    type_type_point_simple_records: TypeTypePointSimpleRecords
+    type_type_point_snotel: TypeTypePointSnotel
+    type_type_point_text: TypeTypePointText
+    type_type_point_wsbb_ggp: TypeTypePointWsbbGgp
+    type_type_psd_monthly_climate_index: TypeTypePsdMonthlyClimateIndex
+    type_type_quandl_series: TypeTypeQuandlSeries
+    type_type_service_group: TypeTypeServiceGroup
+    type_type_service_link: TypeTypeServiceLink
+    type_type_socrata_series: TypeTypeSocrataSeries
+    type_type_sounding_cod: TypeTypeSoundingCod
+    type_type_sounding_frd: TypeTypeSoundingFrd
+    type_type_sounding_gsd: TypeTypeSoundingGsd
+    type_type_sounding_wyoming: TypeTypeSoundingWyoming
+    type_type_tmy: TypeTypeTmy
+    type_type_tweet: TypeTypeTweet
+    type_type_usgs_gauge: TypeTypeUsgsGauge
+    type_type_virtual: TypeTypeVirtual
+    type_type_wms_capabilities: TypeTypeWmsCapabilities
+    type_type_wms_layer: TypeTypeWmsLayer
+    type_ufo_sightings: TypeUfoSightings
+    type_us_places: TypeUsPlaces
+    type_vote_yesno: TypeVoteYesno
+    type_weblog: TypeWeblog
+    type_wikipage: TypeWikipage
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        self._init_sdks()
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        self._init_sdks()
+    
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        self._init_sdks()
+    
+    
+    def _init_sdks(self):
+        
+        self.service_media_tabular_extractsheet = ServiceMediaTabularExtractsheet(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_2017_boulder_election_expenditures = Type2017BoulderElectionExpenditures(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_any = TypeAny(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_beforeafter = TypeBeforeafter(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_biblio = TypeBiblio(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_bio_dicom = TypeBioDicom(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_bio_dicom_test = TypeBioDicomTest(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_bio_fasta = TypeBioFasta(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_bio_fastq = TypeBioFastq(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_bio_hmmer_index = TypeBioHmmerIndex(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_bio_ome_tiff = TypeBioOmeTiff(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_bio_ontology_assay = TypeBioOntologyAssay(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_bio_ontology_cohort = TypeBioOntologyCohort(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_bio_ontology_person = TypeBioOntologyPerson(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_bio_ontology_sample = TypeBioOntologySample(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_bio_ontology_series = TypeBioOntologySeries(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_bio_ontology_study = TypeBioOntologyStudy(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_bio_sam = TypeBioSam(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_bio_sf_pdb = TypeBioSfPdb(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_bio_sra = TypeBioSra(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_bio_stockholm = TypeBioStockholm(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_bio_taxonomy = TypeBioTaxonomy(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_blogentry = TypeBlogentry(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_bolder_rental_housing = TypeBolderRentalHousing(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_bookmarks = TypeBookmarks(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_boston_crime = TypeBostonCrime(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_boulder_2017_election_contributions = TypeBoulder2017ElectionContributions(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_boulder_campaign_contributions = TypeBoulderCampaignContributions(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_boulder_consulting_services = TypeBoulderConsultingServices(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_boulder_county_voter_details = TypeBoulderCountyVoterDetails(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_boulder_crimes = TypeBoulderCrimes(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_boulder_emails = TypeBoulderEmails(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_boulder_employee_salaries = TypeBoulderEmployeeSalaries(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_calendar = TypeCalendar(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_campaign_donors = TypeCampaignDonors(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_campaign_expenditures = TypeCampaignExpenditures(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_cataloglink = TypeCataloglink(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_cdm_grid = TypeCdmGrid(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_chatroom = TypeChatroom(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_colorado_water_rights = TypeColoradoWaterRights(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_committee_donations = TypeCommitteeDonations(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_community_datahub = TypeCommunityDatahub(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_community_resource = TypeCommunityResource(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_construction_permits = TypeConstructionPermits(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_contact = TypeContact(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_db_co_indicators = TypeDbCoIndicators(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_earth_satellite_landsat = TypeEarthSatelliteLandsat(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_faq = TypeFaq(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_fec_pacs = TypeFecPacs(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_feccandidates = TypeFeccandidates(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_feed = TypeFeed(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_file = TypeFile(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_fits_data = TypeFitsData(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_ftp = TypeFtp(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_gadgets_countdown = TypeGadgetsCountdown(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_gadgets_stock = TypeGadgetsStock(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_gadgets_weather = TypeGadgetsWeather(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_gazeteer_census_tracts = TypeGazeteerCensusTracts(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_gazeteer_counties = TypeGazeteerCounties(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_geo_ge = TypeGeoGe(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_geo_geotiff = TypeGeoGeotiff(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_geo_gpx = TypeGeoGpx(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_geo_hdf5 = TypeGeoHdf5(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_geo_kml = TypeGeoKml(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_geo_shapefile = TypeGeoShapefile(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_geo_shapefile_fips = TypeGeoShapefileFips(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_glossary = TypeGlossary(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_gridaggregation = TypeGridaggregation(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_group = TypeGroup(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_hipchat_group = TypeHipchatGroup(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_homepage = TypeHomepage(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_incident = TypeIncident(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_jeopardy = TypeJeopardy(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_latlonimage = TypeLatlonimage(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_lidar_collection = TypeLidarCollection(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_lidar_las = TypeLidarLas(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_lidar_lvis = TypeLidarLvis(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_link = TypeLink(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_localfiles = TypeLocalfiles(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_locations = TypeLocations(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_map_googlemap = TypeMapGooglemap(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_media_audiofile = TypeMediaAudiofile(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_media_imageloop = TypeMediaImageloop(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_media_photoalbum = TypeMediaPhotoalbum(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_media_video_channel = TypeMediaVideoChannel(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_media_video_quicktime = TypeMediaVideoQuicktime(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_media_youtubevideo = TypeMediaYoutubevideo(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_notes = TypeNotes(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_notes_jsonfile = TypeNotesJsonfile(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_notes_note = TypeNotesNote(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_notes_notebook = TypeNotesNotebook(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_nwsfeed = TypeNwsfeed(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_opendaplink = TypeOpendaplink(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_owl_class = TypeOwlClass(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_owl_ontology = TypeOwlOntology(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_pasteitentry = TypePasteitentry(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_point_text = TypePointText(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_police_stop_data = TypePoliceStopData(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_poll = TypePoll(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_project_campaign = TypeProjectCampaign(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_project_casestudy = TypeProjectCasestudy(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_project_contribution = TypeProjectContribution(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_project_dataformat = TypeProjectDataformat(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_project_dataset = TypeProjectDataset(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_project_deployment = TypeProjectDeployment(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_project_experiment = TypeProjectExperiment(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_project_fieldnote = TypeProjectFieldnote(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_project_gps_controlpoints = TypeProjectGpsControlpoints(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_project_gps_raw = TypeProjectGpsRaw(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_project_gps_rinex = TypeProjectGpsRinex(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_project_instrument = TypeProjectInstrument(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_project_learning_resource = TypeProjectLearningResource(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_project_meeting = TypeProjectMeeting(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_project_organization = TypeProjectOrganization(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_project_program = TypeProjectProgram(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_project_project = TypeProjectProject(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_project_service = TypeProjectService(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_project_site = TypeProjectSite(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_project_softwarepackage = TypeProjectSoftwarepackage(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_project_standard_name = TypeProjectStandardName(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_project_surveylocation = TypeProjectSurveylocation(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_project_term = TypeProjectTerm(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_project_visit = TypeProjectVisit(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_project_vocabulary = TypeProjectVocabulary(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_property_sales = TypePropertySales(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_propertydb = TypePropertydb(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_python_notebook = TypePythonNotebook(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_slack_team = TypeSlackTeam(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_statusboard = TypeStatusboard(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_sunrisesunset = TypeSunrisesunset(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_tasks = TypeTasks(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_tmdbmovies = TypeTmdbmovies(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_todo = TypeTodo(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_trip_event = TypeTripEvent(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_trip_flight = TypeTripFlight(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_trip_hotel = TypeTripHotel(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_trip_report = TypeTripReport(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_trip_trip = TypeTripTrip(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_awc_metar = TypeTypeAwcMetar(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_biz_stockseries = TypeTypeBizStockseries(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_bls_series = TypeTypeBlsSeries(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_bls_survey = TypeTypeBlsSurvey(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_census_acs = TypeTypeCensusAcs(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_daymet = TypeTypeDaymet(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_db_table = TypeTypeDbTable(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_document_csv = TypeTypeDocumentCsv(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_document_doc = TypeTypeDocumentDoc(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_document_html = TypeTypeDocumentHTML(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_document_pdf = TypeTypeDocumentPdf(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_document_ppt = TypeTypeDocumentPpt(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_document_xls = TypeTypeDocumentXls(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_drilsdown_casestudy = TypeTypeDrilsdownCasestudy(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_edgar_filing = TypeTypeEdgarFiling(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_eia_category = TypeTypeEiaCategory(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_eia_series = TypeTypeEiaSeries(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_esri_featureserver = TypeTypeEsriFeatureserver(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_esri_geometryserver = TypeTypeEsriGeometryserver(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_esri_gpserver = TypeTypeEsriGpserver(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_esri_imageserver = TypeTypeEsriImageserver(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_esri_layer = TypeTypeEsriLayer(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_esri_mapserver = TypeTypeEsriMapserver(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_esri_restfolder = TypeTypeEsriRestfolder(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_esri_restserver = TypeTypeEsriRestserver(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_esri_restservice = TypeTypeEsriRestservice(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_extremes = TypeTypeExtremes(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_fred_category = TypeTypeFredCategory(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_fred_series = TypeTypeFredSeries(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_gtfs_agency = TypeTypeGtfsAgency(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_gtfs_route = TypeTypeGtfsRoute(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_gtfs_routes = TypeTypeGtfsRoutes(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_gtfs_stop = TypeTypeGtfsStop(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_gtfs_stops = TypeTypeGtfsStops(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_gtfs_trip = TypeTypeGtfsTrip(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_hazarddata = TypeTypeHazarddata(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_hydro_colorado = TypeTypeHydroColorado(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_idv_bundle = TypeTypeIdvBundle(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_image = TypeTypeImage(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_image_airport = TypeTypeImageAirport(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_image_webcam = TypeTypeImageWebcam(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_mb = TypeTypeMb(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_mb_collection = TypeTypeMbCollection(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_mb_point_basic = TypeTypeMbPointBasic(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_metameta_dictionary = TypeTypeMetametaDictionary(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_metameta_field = TypeTypeMetametaField(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_nasaames = TypeTypeNasaames(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_ncss = TypeTypeNcss(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_nitf = TypeTypeNitf(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_point_ameriflux_level2 = TypeTypePointAmerifluxLevel2(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_point_amrc_final = TypeTypePointAmrcFinal(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_point_amrc_freewave = TypeTypePointAmrcFreewave(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_point_czo = TypeTypePointCzo(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_point_gcnet = TypeTypePointGcnet(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_point_geomag_iaga2002 = TypeTypePointGeomagIaga2002(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_point_hydro_waterml = TypeTypePointHydroWaterml(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_point_icebridge_atm_icessn = TypeTypePointIcebridgeAtmIcessn(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_point_icebridge_atm_qfit = TypeTypePointIcebridgeAtmQfit(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_point_icebridge_mccords_irmcr2 = TypeTypePointIcebridgeMccordsIrmcr2(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_point_icebridge_mccords_irmcr3 = TypeTypePointIcebridgeMccordsIrmcr3(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_point_icebridge_paris = TypeTypePointIcebridgeParis(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_point_idv = TypeTypePointIdv(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_point_inline = TypeTypePointInline(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_point_ncdc_climate = TypeTypePointNcdcClimate(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_point_netcdf = TypeTypePointNetcdf(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_point_noaa_carbon = TypeTypePointNoaaCarbon(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_point_noaa_flask_event = TypeTypePointNoaaFlaskEvent(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_point_noaa_flask_month = TypeTypePointNoaaFlaskMonth(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_point_noaa_madis = TypeTypePointNoaaMadis(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_point_noaa_tower = TypeTypePointNoaaTower(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_point_ocean_cnv = TypeTypePointOceanCnv(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_point_ocean_csv_sado_tts = TypeTypePointOceanCsvSadoTts(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_point_ocean_csv_sado_meteo = TypeTypePointOceanCsvSadoMeteo(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_point_ocean_csv_sado_position = TypeTypePointOceanCsvSadoPosition(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_point_ocean_netcdf_glider = TypeTypePointOceanNetcdfGlider(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_point_ocean_netcdf_track = TypeTypePointOceanNetcdfTrack(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_point_ocean_ooi_dmgx = TypeTypePointOceanOoiDmgx(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_point_openaq = TypeTypePointOpenaq(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_point_pbo_position_time_series = TypeTypePointPboPositionTimeSeries(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_point_simple_records = TypeTypePointSimpleRecords(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_point_snotel = TypeTypePointSnotel(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_point_text = TypeTypePointText(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_point_wsbb_ggp = TypeTypePointWsbbGgp(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_psd_monthly_climate_index = TypeTypePsdMonthlyClimateIndex(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_quandl_series = TypeTypeQuandlSeries(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_service_group = TypeTypeServiceGroup(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_service_link = TypeTypeServiceLink(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_socrata_series = TypeTypeSocrataSeries(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_sounding_cod = TypeTypeSoundingCod(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_sounding_frd = TypeTypeSoundingFrd(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_sounding_gsd = TypeTypeSoundingGsd(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_sounding_wyoming = TypeTypeSoundingWyoming(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_tmy = TypeTypeTmy(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_tweet = TypeTypeTweet(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_usgs_gauge = TypeTypeUsgsGauge(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_virtual = TypeTypeVirtual(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_wms_capabilities = TypeTypeWmsCapabilities(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_type_wms_layer = TypeTypeWmsLayer(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_ufo_sightings = TypeUfoSightings(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_us_places = TypeUsPlaces(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_vote_yesno = TypeVoteYesno(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_weblog = TypeWeblog(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.type_wikipage = TypeWikipage(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
     
-
-    
-    def media_tabular_extractsheet(self, request: operations.MediaTabularExtractsheetRequest) -> operations.MediaTabularExtractsheetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/entry/show"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.MediaTabularExtractsheetResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_2017_boulder_election_expenditures(self, request: operations.Search2017BoulderElectionExpendituresRequest) -> operations.Search2017BoulderElectionExpendituresResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/2017_boulder_election_expenditures"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.Search2017BoulderElectionExpendituresResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_any(self, request: operations.SearchAnyRequest) -> operations.SearchAnyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/any"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchAnyResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_beforeafter(self, request: operations.SearchBeforeafterRequest) -> operations.SearchBeforeafterResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/beforeafter"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchBeforeafterResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_biblio(self, request: operations.SearchBiblioRequest) -> operations.SearchBiblioResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/biblio"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchBiblioResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_bio_dicom(self, request: operations.SearchBioDicomRequest) -> operations.SearchBioDicomResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/bio_dicom"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchBioDicomResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_bio_dicom_test(self, request: operations.SearchBioDicomTestRequest) -> operations.SearchBioDicomTestResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/bio_dicom_test"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchBioDicomTestResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_bio_fasta(self, request: operations.SearchBioFastaRequest) -> operations.SearchBioFastaResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/bio_fasta"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchBioFastaResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_bio_fastq(self, request: operations.SearchBioFastqRequest) -> operations.SearchBioFastqResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/bio_fastq"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchBioFastqResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_bio_hmmer_index(self, request: operations.SearchBioHmmerIndexRequest) -> operations.SearchBioHmmerIndexResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/bio_hmmer_index"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchBioHmmerIndexResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_bio_ome_tiff(self, request: operations.SearchBioOmeTiffRequest) -> operations.SearchBioOmeTiffResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/bio_ome_tiff"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchBioOmeTiffResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_bio_ontology_assay(self, request: operations.SearchBioOntologyAssayRequest) -> operations.SearchBioOntologyAssayResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/bio_ontology_assay"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchBioOntologyAssayResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_bio_ontology_cohort(self, request: operations.SearchBioOntologyCohortRequest) -> operations.SearchBioOntologyCohortResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/bio_ontology_cohort"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchBioOntologyCohortResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_bio_ontology_person(self, request: operations.SearchBioOntologyPersonRequest) -> operations.SearchBioOntologyPersonResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/bio_ontology_person"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchBioOntologyPersonResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_bio_ontology_sample(self, request: operations.SearchBioOntologySampleRequest) -> operations.SearchBioOntologySampleResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/bio_ontology_sample"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchBioOntologySampleResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_bio_ontology_series(self, request: operations.SearchBioOntologySeriesRequest) -> operations.SearchBioOntologySeriesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/bio_ontology_series"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchBioOntologySeriesResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_bio_ontology_study(self, request: operations.SearchBioOntologyStudyRequest) -> operations.SearchBioOntologyStudyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/bio_ontology_study"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchBioOntologyStudyResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_bio_sam(self, request: operations.SearchBioSamRequest) -> operations.SearchBioSamResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/bio_sam"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchBioSamResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_bio_sf_pdb(self, request: operations.SearchBioSfPdbRequest) -> operations.SearchBioSfPdbResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/bio_sf_pdb"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchBioSfPdbResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_bio_sra(self, request: operations.SearchBioSraRequest) -> operations.SearchBioSraResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/bio_sra"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchBioSraResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_bio_stockholm(self, request: operations.SearchBioStockholmRequest) -> operations.SearchBioStockholmResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/bio_stockholm"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchBioStockholmResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_bio_taxonomy(self, request: operations.SearchBioTaxonomyRequest) -> operations.SearchBioTaxonomyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/bio_taxonomy"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchBioTaxonomyResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_blogentry(self, request: operations.SearchBlogentryRequest) -> operations.SearchBlogentryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/blogentry"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchBlogentryResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_bolder_rental_housing(self, request: operations.SearchBolderRentalHousingRequest) -> operations.SearchBolderRentalHousingResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/bolder_rental_housing"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchBolderRentalHousingResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_bookmarks(self, request: operations.SearchBookmarksRequest) -> operations.SearchBookmarksResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/bookmarks"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchBookmarksResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_boston_crime(self, request: operations.SearchBostonCrimeRequest) -> operations.SearchBostonCrimeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/boston_crime"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchBostonCrimeResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_boulder_2017_election_contributions(self, request: operations.SearchBoulder2017ElectionContributionsRequest) -> operations.SearchBoulder2017ElectionContributionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/boulder_2017_election_contributions"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchBoulder2017ElectionContributionsResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_boulder_campaign_contributions(self, request: operations.SearchBoulderCampaignContributionsRequest) -> operations.SearchBoulderCampaignContributionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/boulder_campaign_contributions"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchBoulderCampaignContributionsResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_boulder_consulting_services(self, request: operations.SearchBoulderConsultingServicesRequest) -> operations.SearchBoulderConsultingServicesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/boulder_consulting_services"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchBoulderConsultingServicesResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_boulder_county_voter_details(self, request: operations.SearchBoulderCountyVoterDetailsRequest) -> operations.SearchBoulderCountyVoterDetailsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/boulder_county_voter_details"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchBoulderCountyVoterDetailsResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_boulder_crimes(self, request: operations.SearchBoulderCrimesRequest) -> operations.SearchBoulderCrimesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/boulder_crimes"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchBoulderCrimesResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_boulder_emails(self, request: operations.SearchBoulderEmailsRequest) -> operations.SearchBoulderEmailsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/boulder_emails"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchBoulderEmailsResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_boulder_employee_salaries(self, request: operations.SearchBoulderEmployeeSalariesRequest) -> operations.SearchBoulderEmployeeSalariesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/boulder_employee_salaries"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchBoulderEmployeeSalariesResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_calendar(self, request: operations.SearchCalendarRequest) -> operations.SearchCalendarResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/calendar"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchCalendarResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_campaign_donors(self, request: operations.SearchCampaignDonorsRequest) -> operations.SearchCampaignDonorsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/campaign_donors"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchCampaignDonorsResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_campaign_expenditures(self, request: operations.SearchCampaignExpendituresRequest) -> operations.SearchCampaignExpendituresResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/campaign_expenditures"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchCampaignExpendituresResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_cataloglink(self, request: operations.SearchCataloglinkRequest) -> operations.SearchCataloglinkResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/cataloglink"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchCataloglinkResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_cdm_grid(self, request: operations.SearchCdmGridRequest) -> operations.SearchCdmGridResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/cdm_grid"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchCdmGridResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_chatroom(self, request: operations.SearchChatroomRequest) -> operations.SearchChatroomResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/chatroom"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchChatroomResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_colorado_water_rights(self, request: operations.SearchColoradoWaterRightsRequest) -> operations.SearchColoradoWaterRightsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/colorado_water_rights"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchColoradoWaterRightsResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_committee_donations(self, request: operations.SearchCommitteeDonationsRequest) -> operations.SearchCommitteeDonationsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/committee_donations"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchCommitteeDonationsResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_community_datahub(self, request: operations.SearchCommunityDatahubRequest) -> operations.SearchCommunityDatahubResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/community_datahub"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchCommunityDatahubResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_community_resource(self, request: operations.SearchCommunityResourceRequest) -> operations.SearchCommunityResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/community_resource"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchCommunityResourceResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_construction_permits(self, request: operations.SearchConstructionPermitsRequest) -> operations.SearchConstructionPermitsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/construction_permits"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchConstructionPermitsResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_contact(self, request: operations.SearchContactRequest) -> operations.SearchContactResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/contact"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchContactResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_db_co_indicators(self, request: operations.SearchDbCoIndicatorsRequest) -> operations.SearchDbCoIndicatorsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/db_co_indicators"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchDbCoIndicatorsResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_earth_satellite_landsat(self, request: operations.SearchEarthSatelliteLandsatRequest) -> operations.SearchEarthSatelliteLandsatResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/earth_satellite_landsat"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchEarthSatelliteLandsatResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_faq(self, request: operations.SearchFaqRequest) -> operations.SearchFaqResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/faq"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchFaqResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_fec_pacs(self, request: operations.SearchFecPacsRequest) -> operations.SearchFecPacsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/fec_pacs"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchFecPacsResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_feccandidates(self, request: operations.SearchFeccandidatesRequest) -> operations.SearchFeccandidatesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/feccandidates"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchFeccandidatesResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_feed(self, request: operations.SearchFeedRequest) -> operations.SearchFeedResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/feed"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchFeedResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_file(self, request: operations.SearchFileRequest) -> operations.SearchFileResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/file"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchFileResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_fits_data(self, request: operations.SearchFitsDataRequest) -> operations.SearchFitsDataResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/fits_data"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchFitsDataResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_ftp(self, request: operations.SearchFtpRequest) -> operations.SearchFtpResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/ftp"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchFtpResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_gadgets_countdown(self, request: operations.SearchGadgetsCountdownRequest) -> operations.SearchGadgetsCountdownResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/gadgets_countdown"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchGadgetsCountdownResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_gadgets_stock(self, request: operations.SearchGadgetsStockRequest) -> operations.SearchGadgetsStockResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/gadgets_stock"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchGadgetsStockResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_gadgets_weather(self, request: operations.SearchGadgetsWeatherRequest) -> operations.SearchGadgetsWeatherResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/gadgets_weather"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchGadgetsWeatherResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_gazeteer_census_tracts(self, request: operations.SearchGazeteerCensusTractsRequest) -> operations.SearchGazeteerCensusTractsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/gazeteer_census_tracts"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchGazeteerCensusTractsResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_gazeteer_counties(self, request: operations.SearchGazeteerCountiesRequest) -> operations.SearchGazeteerCountiesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/gazeteer_counties"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchGazeteerCountiesResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_geo_geojson(self, request: operations.SearchGeoGeojsonRequest) -> operations.SearchGeoGeojsonResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/geo_geojson"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchGeoGeojsonResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_geo_geotiff(self, request: operations.SearchGeoGeotiffRequest) -> operations.SearchGeoGeotiffResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/geo_geotiff"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchGeoGeotiffResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_geo_gpx(self, request: operations.SearchGeoGpxRequest) -> operations.SearchGeoGpxResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/geo_gpx"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchGeoGpxResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_geo_hdf5(self, request: operations.SearchGeoHdf5Request) -> operations.SearchGeoHdf5Response:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/geo_hdf5"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchGeoHdf5Response(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_geo_kml(self, request: operations.SearchGeoKmlRequest) -> operations.SearchGeoKmlResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/geo_kml"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchGeoKmlResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_geo_shapefile(self, request: operations.SearchGeoShapefileRequest) -> operations.SearchGeoShapefileResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/geo_shapefile"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchGeoShapefileResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_geo_shapefile_fips(self, request: operations.SearchGeoShapefileFipsRequest) -> operations.SearchGeoShapefileFipsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/geo_shapefile_fips"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchGeoShapefileFipsResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_glossary(self, request: operations.SearchGlossaryRequest) -> operations.SearchGlossaryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/glossary"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchGlossaryResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_gridaggregation(self, request: operations.SearchGridaggregationRequest) -> operations.SearchGridaggregationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/gridaggregation"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchGridaggregationResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_group(self, request: operations.SearchGroupRequest) -> operations.SearchGroupResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/group"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchGroupResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_hipchat_group(self, request: operations.SearchHipchatGroupRequest) -> operations.SearchHipchatGroupResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/hipchat_group"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchHipchatGroupResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_homepage(self, request: operations.SearchHomepageRequest) -> operations.SearchHomepageResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/homepage"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchHomepageResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_incident(self, request: operations.SearchIncidentRequest) -> operations.SearchIncidentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/incident"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchIncidentResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_jeopardy(self, request: operations.SearchJeopardyRequest) -> operations.SearchJeopardyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/jeopardy"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchJeopardyResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_latlonimage(self, request: operations.SearchLatlonimageRequest) -> operations.SearchLatlonimageResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/latlonimage"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchLatlonimageResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_lidar_collection(self, request: operations.SearchLidarCollectionRequest) -> operations.SearchLidarCollectionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/lidar_collection"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchLidarCollectionResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_lidar_las(self, request: operations.SearchLidarLasRequest) -> operations.SearchLidarLasResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/lidar_las"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchLidarLasResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_lidar_lvis(self, request: operations.SearchLidarLvisRequest) -> operations.SearchLidarLvisResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/lidar_lvis"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchLidarLvisResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_link(self, request: operations.SearchLinkRequest) -> operations.SearchLinkResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/link"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchLinkResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_localfiles(self, request: operations.SearchLocalfilesRequest) -> operations.SearchLocalfilesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/localfiles"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchLocalfilesResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_locations(self, request: operations.SearchLocationsRequest) -> operations.SearchLocationsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/locations"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchLocationsResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_map_googlemap(self, request: operations.SearchMapGooglemapRequest) -> operations.SearchMapGooglemapResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/map_googlemap"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchMapGooglemapResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_media_audiofile(self, request: operations.SearchMediaAudiofileRequest) -> operations.SearchMediaAudiofileResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/media_audiofile"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchMediaAudiofileResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_media_imageloop(self, request: operations.SearchMediaImageloopRequest) -> operations.SearchMediaImageloopResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/media_imageloop"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchMediaImageloopResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_media_photoalbum(self, request: operations.SearchMediaPhotoalbumRequest) -> operations.SearchMediaPhotoalbumResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/media_photoalbum"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchMediaPhotoalbumResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_media_video_channel(self, request: operations.SearchMediaVideoChannelRequest) -> operations.SearchMediaVideoChannelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/media_video_channel"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchMediaVideoChannelResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_media_video_quicktime(self, request: operations.SearchMediaVideoQuicktimeRequest) -> operations.SearchMediaVideoQuicktimeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/media_video_quicktime"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchMediaVideoQuicktimeResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_media_youtubevideo(self, request: operations.SearchMediaYoutubevideoRequest) -> operations.SearchMediaYoutubevideoResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/media_youtubevideo"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchMediaYoutubevideoResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_notes(self, request: operations.SearchNotesRequest) -> operations.SearchNotesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/notes"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchNotesResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_notes_jsonfile(self, request: operations.SearchNotesJsonfileRequest) -> operations.SearchNotesJsonfileResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/notes_jsonfile"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchNotesJsonfileResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_notes_note(self, request: operations.SearchNotesNoteRequest) -> operations.SearchNotesNoteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/notes_note"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchNotesNoteResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_notes_notebook(self, request: operations.SearchNotesNotebookRequest) -> operations.SearchNotesNotebookResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/notes_notebook"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchNotesNotebookResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_nwsfeed(self, request: operations.SearchNwsfeedRequest) -> operations.SearchNwsfeedResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/nwsfeed"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchNwsfeedResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_opendaplink(self, request: operations.SearchOpendaplinkRequest) -> operations.SearchOpendaplinkResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/opendaplink"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchOpendaplinkResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_owl_class(self, request: operations.SearchOwlClassRequest) -> operations.SearchOwlClassResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/owl.class"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchOwlClassResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_owl_ontology(self, request: operations.SearchOwlOntologyRequest) -> operations.SearchOwlOntologyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/owl.ontology"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchOwlOntologyResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_pasteitentry(self, request: operations.SearchPasteitentryRequest) -> operations.SearchPasteitentryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/pasteitentry"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchPasteitentryResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_point_text(self, request: operations.SearchPointTextRequest) -> operations.SearchPointTextResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/point_text"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchPointTextResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_police_stop_data(self, request: operations.SearchPoliceStopDataRequest) -> operations.SearchPoliceStopDataResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/police_stop_data"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchPoliceStopDataResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_poll(self, request: operations.SearchPollRequest) -> operations.SearchPollResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/poll"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchPollResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_project_campaign(self, request: operations.SearchProjectCampaignRequest) -> operations.SearchProjectCampaignResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/project_campaign"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchProjectCampaignResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_project_casestudy(self, request: operations.SearchProjectCasestudyRequest) -> operations.SearchProjectCasestudyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/project_casestudy"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchProjectCasestudyResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_project_contribution(self, request: operations.SearchProjectContributionRequest) -> operations.SearchProjectContributionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/project_contribution"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchProjectContributionResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_project_dataformat(self, request: operations.SearchProjectDataformatRequest) -> operations.SearchProjectDataformatResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/project_dataformat"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchProjectDataformatResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_project_dataset(self, request: operations.SearchProjectDatasetRequest) -> operations.SearchProjectDatasetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/project_dataset"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchProjectDatasetResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_project_deployment(self, request: operations.SearchProjectDeploymentRequest) -> operations.SearchProjectDeploymentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/project_deployment"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchProjectDeploymentResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_project_experiment(self, request: operations.SearchProjectExperimentRequest) -> operations.SearchProjectExperimentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/project_experiment"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchProjectExperimentResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_project_fieldnote(self, request: operations.SearchProjectFieldnoteRequest) -> operations.SearchProjectFieldnoteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/project_fieldnote"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchProjectFieldnoteResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_project_gps_controlpoints(self, request: operations.SearchProjectGpsControlpointsRequest) -> operations.SearchProjectGpsControlpointsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/project_gps_controlpoints"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchProjectGpsControlpointsResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_project_gps_raw(self, request: operations.SearchProjectGpsRawRequest) -> operations.SearchProjectGpsRawResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/project_gps_raw"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchProjectGpsRawResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_project_gps_rinex(self, request: operations.SearchProjectGpsRinexRequest) -> operations.SearchProjectGpsRinexResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/project_gps_rinex"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchProjectGpsRinexResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_project_instrument(self, request: operations.SearchProjectInstrumentRequest) -> operations.SearchProjectInstrumentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/project_instrument"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchProjectInstrumentResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_project_learning_resource(self, request: operations.SearchProjectLearningResourceRequest) -> operations.SearchProjectLearningResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/project_learning_resource"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchProjectLearningResourceResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_project_meeting(self, request: operations.SearchProjectMeetingRequest) -> operations.SearchProjectMeetingResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/project_meeting"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchProjectMeetingResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_project_organization(self, request: operations.SearchProjectOrganizationRequest) -> operations.SearchProjectOrganizationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/project_organization"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchProjectOrganizationResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_project_program(self, request: operations.SearchProjectProgramRequest) -> operations.SearchProjectProgramResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/project_program"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchProjectProgramResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_project_project(self, request: operations.SearchProjectProjectRequest) -> operations.SearchProjectProjectResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/project_project"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchProjectProjectResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_project_service(self, request: operations.SearchProjectServiceRequest) -> operations.SearchProjectServiceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/project_service"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchProjectServiceResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_project_site(self, request: operations.SearchProjectSiteRequest) -> operations.SearchProjectSiteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/project_site"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchProjectSiteResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_project_softwarepackage(self, request: operations.SearchProjectSoftwarepackageRequest) -> operations.SearchProjectSoftwarepackageResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/project_softwarepackage"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchProjectSoftwarepackageResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_project_standard_name(self, request: operations.SearchProjectStandardNameRequest) -> operations.SearchProjectStandardNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/project_standard_name"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchProjectStandardNameResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_project_surveylocation(self, request: operations.SearchProjectSurveylocationRequest) -> operations.SearchProjectSurveylocationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/project_surveylocation"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchProjectSurveylocationResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_project_term(self, request: operations.SearchProjectTermRequest) -> operations.SearchProjectTermResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/project_term"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchProjectTermResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_project_visit(self, request: operations.SearchProjectVisitRequest) -> operations.SearchProjectVisitResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/project_visit"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchProjectVisitResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_project_vocabulary(self, request: operations.SearchProjectVocabularyRequest) -> operations.SearchProjectVocabularyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/project_vocabulary"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchProjectVocabularyResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_property_sales(self, request: operations.SearchPropertySalesRequest) -> operations.SearchPropertySalesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/property_sales"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchPropertySalesResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_propertydb(self, request: operations.SearchPropertydbRequest) -> operations.SearchPropertydbResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/propertydb"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchPropertydbResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_python_notebook(self, request: operations.SearchPythonNotebookRequest) -> operations.SearchPythonNotebookResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/python_notebook"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchPythonNotebookResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_slack_team(self, request: operations.SearchSlackTeamRequest) -> operations.SearchSlackTeamResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/slack_team"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchSlackTeamResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_statusboard(self, request: operations.SearchStatusboardRequest) -> operations.SearchStatusboardResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/statusboard"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchStatusboardResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_sunrisesunset(self, request: operations.SearchSunrisesunsetRequest) -> operations.SearchSunrisesunsetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/sunrisesunset"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchSunrisesunsetResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_tasks(self, request: operations.SearchTasksRequest) -> operations.SearchTasksResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/tasks"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTasksResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_tmdbmovies(self, request: operations.SearchTmdbmoviesRequest) -> operations.SearchTmdbmoviesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/tmdbmovies"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTmdbmoviesResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_todo(self, request: operations.SearchTodoRequest) -> operations.SearchTodoResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/todo"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTodoResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_trip_event(self, request: operations.SearchTripEventRequest) -> operations.SearchTripEventResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/trip_event"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTripEventResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_trip_flight(self, request: operations.SearchTripFlightRequest) -> operations.SearchTripFlightResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/trip_flight"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTripFlightResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_trip_hotel(self, request: operations.SearchTripHotelRequest) -> operations.SearchTripHotelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/trip_hotel"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTripHotelResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_trip_report(self, request: operations.SearchTripReportRequest) -> operations.SearchTripReportResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/trip_report"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTripReportResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_trip_trip(self, request: operations.SearchTripTripRequest) -> operations.SearchTripTripResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/trip_trip"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTripTripResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_awc_metar(self, request: operations.SearchTypeAwcMetarRequest) -> operations.SearchTypeAwcMetarResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_awc_metar"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeAwcMetarResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_biz_stockseries(self, request: operations.SearchTypeBizStockseriesRequest) -> operations.SearchTypeBizStockseriesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_biz_stockseries"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeBizStockseriesResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_bls_series(self, request: operations.SearchTypeBlsSeriesRequest) -> operations.SearchTypeBlsSeriesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_bls_series"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeBlsSeriesResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_bls_survey(self, request: operations.SearchTypeBlsSurveyRequest) -> operations.SearchTypeBlsSurveyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_bls_survey"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeBlsSurveyResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_census_acs(self, request: operations.SearchTypeCensusAcsRequest) -> operations.SearchTypeCensusAcsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_census_acs"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeCensusAcsResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_daymet(self, request: operations.SearchTypeDaymetRequest) -> operations.SearchTypeDaymetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_daymet"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeDaymetResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_db_table(self, request: operations.SearchTypeDbTableRequest) -> operations.SearchTypeDbTableResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_db_table"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeDbTableResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_document_csv(self, request: operations.SearchTypeDocumentCsvRequest) -> operations.SearchTypeDocumentCsvResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_document_csv"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeDocumentCsvResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_document_doc(self, request: operations.SearchTypeDocumentDocRequest) -> operations.SearchTypeDocumentDocResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_document_doc"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeDocumentDocResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_document_html(self, request: operations.SearchTypeDocumentHTMLRequest) -> operations.SearchTypeDocumentHTMLResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_document_html"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeDocumentHTMLResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_document_pdf(self, request: operations.SearchTypeDocumentPdfRequest) -> operations.SearchTypeDocumentPdfResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_document_pdf"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeDocumentPdfResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_document_ppt(self, request: operations.SearchTypeDocumentPptRequest) -> operations.SearchTypeDocumentPptResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_document_ppt"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeDocumentPptResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_document_xls(self, request: operations.SearchTypeDocumentXlsRequest) -> operations.SearchTypeDocumentXlsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_document_xls"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeDocumentXlsResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_drilsdown_casestudy(self, request: operations.SearchTypeDrilsdownCasestudyRequest) -> operations.SearchTypeDrilsdownCasestudyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_drilsdown_casestudy"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeDrilsdownCasestudyResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_edgar_filing(self, request: operations.SearchTypeEdgarFilingRequest) -> operations.SearchTypeEdgarFilingResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_edgar_filing"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeEdgarFilingResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_eia_category(self, request: operations.SearchTypeEiaCategoryRequest) -> operations.SearchTypeEiaCategoryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_eia_category"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeEiaCategoryResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_eia_series(self, request: operations.SearchTypeEiaSeriesRequest) -> operations.SearchTypeEiaSeriesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_eia_series"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeEiaSeriesResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_esri_featureserver(self, request: operations.SearchTypeEsriFeatureserverRequest) -> operations.SearchTypeEsriFeatureserverResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_esri_featureserver"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeEsriFeatureserverResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_esri_geometryserver(self, request: operations.SearchTypeEsriGeometryserverRequest) -> operations.SearchTypeEsriGeometryserverResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_esri_geometryserver"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeEsriGeometryserverResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_esri_gpserver(self, request: operations.SearchTypeEsriGpserverRequest) -> operations.SearchTypeEsriGpserverResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_esri_gpserver"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeEsriGpserverResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_esri_imageserver(self, request: operations.SearchTypeEsriImageserverRequest) -> operations.SearchTypeEsriImageserverResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_esri_imageserver"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeEsriImageserverResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_esri_layer(self, request: operations.SearchTypeEsriLayerRequest) -> operations.SearchTypeEsriLayerResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_esri_layer"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeEsriLayerResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_esri_mapserver(self, request: operations.SearchTypeEsriMapserverRequest) -> operations.SearchTypeEsriMapserverResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_esri_mapserver"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeEsriMapserverResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_esri_restfolder(self, request: operations.SearchTypeEsriRestfolderRequest) -> operations.SearchTypeEsriRestfolderResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_esri_restfolder"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeEsriRestfolderResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_esri_restserver(self, request: operations.SearchTypeEsriRestserverRequest) -> operations.SearchTypeEsriRestserverResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_esri_restserver"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeEsriRestserverResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_esri_restservice(self, request: operations.SearchTypeEsriRestserviceRequest) -> operations.SearchTypeEsriRestserviceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_esri_restservice"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeEsriRestserviceResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_extremes(self, request: operations.SearchTypeExtremesRequest) -> operations.SearchTypeExtremesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_extremes"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeExtremesResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_fred_category(self, request: operations.SearchTypeFredCategoryRequest) -> operations.SearchTypeFredCategoryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_fred_category"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeFredCategoryResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_fred_series(self, request: operations.SearchTypeFredSeriesRequest) -> operations.SearchTypeFredSeriesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_fred_series"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeFredSeriesResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_gtfs_agency(self, request: operations.SearchTypeGtfsAgencyRequest) -> operations.SearchTypeGtfsAgencyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_gtfs_agency"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeGtfsAgencyResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_gtfs_route(self, request: operations.SearchTypeGtfsRouteRequest) -> operations.SearchTypeGtfsRouteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_gtfs_route"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeGtfsRouteResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_gtfs_routes(self, request: operations.SearchTypeGtfsRoutesRequest) -> operations.SearchTypeGtfsRoutesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_gtfs_routes"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeGtfsRoutesResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_gtfs_stop(self, request: operations.SearchTypeGtfsStopRequest) -> operations.SearchTypeGtfsStopResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_gtfs_stop"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeGtfsStopResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_gtfs_stops(self, request: operations.SearchTypeGtfsStopsRequest) -> operations.SearchTypeGtfsStopsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_gtfs_stops"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeGtfsStopsResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_gtfs_trip(self, request: operations.SearchTypeGtfsTripRequest) -> operations.SearchTypeGtfsTripResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_gtfs_trip"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeGtfsTripResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_hazarddata(self, request: operations.SearchTypeHazarddataRequest) -> operations.SearchTypeHazarddataResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_hazarddata"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeHazarddataResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_hydro_colorado(self, request: operations.SearchTypeHydroColoradoRequest) -> operations.SearchTypeHydroColoradoResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_hydro_colorado"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeHydroColoradoResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_idv_bundle(self, request: operations.SearchTypeIdvBundleRequest) -> operations.SearchTypeIdvBundleResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_idv_bundle"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeIdvBundleResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_image(self, request: operations.SearchTypeImageRequest) -> operations.SearchTypeImageResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_image"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeImageResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_image_airport(self, request: operations.SearchTypeImageAirportRequest) -> operations.SearchTypeImageAirportResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_image_airport"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeImageAirportResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_image_webcam(self, request: operations.SearchTypeImageWebcamRequest) -> operations.SearchTypeImageWebcamResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_image_webcam"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeImageWebcamResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_mb(self, request: operations.SearchTypeMbRequest) -> operations.SearchTypeMbResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_mb"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeMbResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_mb_collection(self, request: operations.SearchTypeMbCollectionRequest) -> operations.SearchTypeMbCollectionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_mb_collection"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeMbCollectionResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_mb_point_basic(self, request: operations.SearchTypeMbPointBasicRequest) -> operations.SearchTypeMbPointBasicResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_mb_point_basic"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeMbPointBasicResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_metameta_dictionary(self, request: operations.SearchTypeMetametaDictionaryRequest) -> operations.SearchTypeMetametaDictionaryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_metameta_dictionary"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeMetametaDictionaryResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_metameta_field(self, request: operations.SearchTypeMetametaFieldRequest) -> operations.SearchTypeMetametaFieldResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_metameta_field"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeMetametaFieldResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_nasaames(self, request: operations.SearchTypeNasaamesRequest) -> operations.SearchTypeNasaamesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_nasaames"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeNasaamesResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_ncss(self, request: operations.SearchTypeNcssRequest) -> operations.SearchTypeNcssResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_ncss"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeNcssResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_nitf(self, request: operations.SearchTypeNitfRequest) -> operations.SearchTypeNitfResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_nitf"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeNitfResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_point_ameriflux_level2(self, request: operations.SearchTypePointAmerifluxLevel2Request) -> operations.SearchTypePointAmerifluxLevel2Response:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_point_ameriflux_level2"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypePointAmerifluxLevel2Response(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_point_amrc_final(self, request: operations.SearchTypePointAmrcFinalRequest) -> operations.SearchTypePointAmrcFinalResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_point_amrc_final"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypePointAmrcFinalResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_point_amrc_freewave(self, request: operations.SearchTypePointAmrcFreewaveRequest) -> operations.SearchTypePointAmrcFreewaveResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_point_amrc_freewave"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypePointAmrcFreewaveResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_point_czo(self, request: operations.SearchTypePointCzoRequest) -> operations.SearchTypePointCzoResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_point_czo"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypePointCzoResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_point_gcnet(self, request: operations.SearchTypePointGcnetRequest) -> operations.SearchTypePointGcnetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_point_gcnet"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypePointGcnetResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_point_geomag_iaga2002(self, request: operations.SearchTypePointGeomagIaga2002Request) -> operations.SearchTypePointGeomagIaga2002Response:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_point_geomag_iaga2002"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypePointGeomagIaga2002Response(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_point_hydro_waterml(self, request: operations.SearchTypePointHydroWatermlRequest) -> operations.SearchTypePointHydroWatermlResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_point_hydro_waterml"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypePointHydroWatermlResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_point_icebridge_atm_icessn(self, request: operations.SearchTypePointIcebridgeAtmIcessnRequest) -> operations.SearchTypePointIcebridgeAtmIcessnResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_point_icebridge_atm_icessn"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypePointIcebridgeAtmIcessnResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_point_icebridge_atm_qfit(self, request: operations.SearchTypePointIcebridgeAtmQfitRequest) -> operations.SearchTypePointIcebridgeAtmQfitResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_point_icebridge_atm_qfit"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypePointIcebridgeAtmQfitResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_point_icebridge_mccords_irmcr2(self, request: operations.SearchTypePointIcebridgeMccordsIrmcr2Request) -> operations.SearchTypePointIcebridgeMccordsIrmcr2Response:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_point_icebridge_mccords_irmcr2"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypePointIcebridgeMccordsIrmcr2Response(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_point_icebridge_mccords_irmcr3(self, request: operations.SearchTypePointIcebridgeMccordsIrmcr3Request) -> operations.SearchTypePointIcebridgeMccordsIrmcr3Response:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_point_icebridge_mccords_irmcr3"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypePointIcebridgeMccordsIrmcr3Response(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_point_icebridge_paris(self, request: operations.SearchTypePointIcebridgeParisRequest) -> operations.SearchTypePointIcebridgeParisResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_point_icebridge_paris"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypePointIcebridgeParisResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_point_idv(self, request: operations.SearchTypePointIdvRequest) -> operations.SearchTypePointIdvResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_point_idv"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypePointIdvResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_point_inline(self, request: operations.SearchTypePointInlineRequest) -> operations.SearchTypePointInlineResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_point_inline"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypePointInlineResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_point_ncdc_climate(self, request: operations.SearchTypePointNcdcClimateRequest) -> operations.SearchTypePointNcdcClimateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_point_ncdc_climate"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypePointNcdcClimateResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_point_netcdf(self, request: operations.SearchTypePointNetcdfRequest) -> operations.SearchTypePointNetcdfResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_point_netcdf"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypePointNetcdfResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_point_noaa_carbon(self, request: operations.SearchTypePointNoaaCarbonRequest) -> operations.SearchTypePointNoaaCarbonResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_point_noaa_carbon"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypePointNoaaCarbonResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_point_noaa_flask_event(self, request: operations.SearchTypePointNoaaFlaskEventRequest) -> operations.SearchTypePointNoaaFlaskEventResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_point_noaa_flask_event"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypePointNoaaFlaskEventResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_point_noaa_flask_month(self, request: operations.SearchTypePointNoaaFlaskMonthRequest) -> operations.SearchTypePointNoaaFlaskMonthResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_point_noaa_flask_month"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypePointNoaaFlaskMonthResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_point_noaa_madis(self, request: operations.SearchTypePointNoaaMadisRequest) -> operations.SearchTypePointNoaaMadisResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_point_noaa_madis"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypePointNoaaMadisResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_point_noaa_tower(self, request: operations.SearchTypePointNoaaTowerRequest) -> operations.SearchTypePointNoaaTowerResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_point_noaa_tower"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypePointNoaaTowerResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_point_ocean_cnv(self, request: operations.SearchTypePointOceanCnvRequest) -> operations.SearchTypePointOceanCnvResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_point_ocean_cnv"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypePointOceanCnvResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_point_ocean_csv_sado_tts(self, request: operations.SearchTypePointOceanCsvSadoTtsRequest) -> operations.SearchTypePointOceanCsvSadoTtsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_point_ocean_csv_sado_TTS"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypePointOceanCsvSadoTtsResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_point_ocean_csv_sado_meteo(self, request: operations.SearchTypePointOceanCsvSadoMeteoRequest) -> operations.SearchTypePointOceanCsvSadoMeteoResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_point_ocean_csv_sado_meteo"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypePointOceanCsvSadoMeteoResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_point_ocean_csv_sado_position(self, request: operations.SearchTypePointOceanCsvSadoPositionRequest) -> operations.SearchTypePointOceanCsvSadoPositionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_point_ocean_csv_sado_position"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypePointOceanCsvSadoPositionResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_point_ocean_netcdf_glider(self, request: operations.SearchTypePointOceanNetcdfGliderRequest) -> operations.SearchTypePointOceanNetcdfGliderResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_point_ocean_netcdf_glider"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypePointOceanNetcdfGliderResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_point_ocean_netcdf_track(self, request: operations.SearchTypePointOceanNetcdfTrackRequest) -> operations.SearchTypePointOceanNetcdfTrackResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_point_ocean_netcdf_track"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypePointOceanNetcdfTrackResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_point_ocean_ooi_dmgx(self, request: operations.SearchTypePointOceanOoiDmgxRequest) -> operations.SearchTypePointOceanOoiDmgxResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_point_ocean_ooi_dmgx"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypePointOceanOoiDmgxResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_point_openaq(self, request: operations.SearchTypePointOpenaqRequest) -> operations.SearchTypePointOpenaqResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_point_openaq"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypePointOpenaqResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_point_pbo_position_time_series(self, request: operations.SearchTypePointPboPositionTimeSeriesRequest) -> operations.SearchTypePointPboPositionTimeSeriesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_point_pbo_position_time_series"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypePointPboPositionTimeSeriesResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_point_simple_records(self, request: operations.SearchTypePointSimpleRecordsRequest) -> operations.SearchTypePointSimpleRecordsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_point_simple_records"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypePointSimpleRecordsResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_point_snotel(self, request: operations.SearchTypePointSnotelRequest) -> operations.SearchTypePointSnotelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_point_snotel"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypePointSnotelResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_point_text(self, request: operations.SearchTypePointTextRequest) -> operations.SearchTypePointTextResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_point_text"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypePointTextResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_point_wsbb_ggp(self, request: operations.SearchTypePointWsbbGgpRequest) -> operations.SearchTypePointWsbbGgpResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_point_wsbb_ggp"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypePointWsbbGgpResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_psd_monthly_climate_index(self, request: operations.SearchTypePsdMonthlyClimateIndexRequest) -> operations.SearchTypePsdMonthlyClimateIndexResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_psd_monthly_climate_index"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypePsdMonthlyClimateIndexResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_quandl_series(self, request: operations.SearchTypeQuandlSeriesRequest) -> operations.SearchTypeQuandlSeriesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_quandl_series"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeQuandlSeriesResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_service_group(self, request: operations.SearchTypeServiceGroupRequest) -> operations.SearchTypeServiceGroupResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_service_group"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeServiceGroupResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_service_link(self, request: operations.SearchTypeServiceLinkRequest) -> operations.SearchTypeServiceLinkResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_service_link"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeServiceLinkResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_socrata_series(self, request: operations.SearchTypeSocrataSeriesRequest) -> operations.SearchTypeSocrataSeriesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_socrata_series"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeSocrataSeriesResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_sounding_cod(self, request: operations.SearchTypeSoundingCodRequest) -> operations.SearchTypeSoundingCodResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_sounding_cod"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeSoundingCodResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_sounding_frd(self, request: operations.SearchTypeSoundingFrdRequest) -> operations.SearchTypeSoundingFrdResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_sounding_frd"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeSoundingFrdResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_sounding_gsd(self, request: operations.SearchTypeSoundingGsdRequest) -> operations.SearchTypeSoundingGsdResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_sounding_gsd"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeSoundingGsdResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_sounding_wyoming(self, request: operations.SearchTypeSoundingWyomingRequest) -> operations.SearchTypeSoundingWyomingResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_sounding_wyoming"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeSoundingWyomingResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_tmy(self, request: operations.SearchTypeTmyRequest) -> operations.SearchTypeTmyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_tmy"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeTmyResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_tweet(self, request: operations.SearchTypeTweetRequest) -> operations.SearchTypeTweetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_tweet"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeTweetResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_usgs_gauge(self, request: operations.SearchTypeUsgsGaugeRequest) -> operations.SearchTypeUsgsGaugeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_usgs_gauge"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeUsgsGaugeResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_virtual(self, request: operations.SearchTypeVirtualRequest) -> operations.SearchTypeVirtualResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_virtual"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeVirtualResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_wms_capabilities(self, request: operations.SearchTypeWmsCapabilitiesRequest) -> operations.SearchTypeWmsCapabilitiesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_wms_capabilities"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeWmsCapabilitiesResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_type_wms_layer(self, request: operations.SearchTypeWmsLayerRequest) -> operations.SearchTypeWmsLayerResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/type_wms_layer"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchTypeWmsLayerResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_ufo_sightings(self, request: operations.SearchUfoSightingsRequest) -> operations.SearchUfoSightingsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/ufo_sightings"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchUfoSightingsResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_us_places(self, request: operations.SearchUsPlacesRequest) -> operations.SearchUsPlacesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/us_places"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchUsPlacesResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_vote_yesno(self, request: operations.SearchVoteYesnoRequest) -> operations.SearchVoteYesnoResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/vote_yesno"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchVoteYesnoResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_weblog(self, request: operations.SearchWeblogRequest) -> operations.SearchWeblogResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/weblog"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchWeblogResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def search_wikipage(self, request: operations.SearchWikipageRequest) -> operations.SearchWikipageResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/repository/search/type/wikipage"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SearchWikipageResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
     

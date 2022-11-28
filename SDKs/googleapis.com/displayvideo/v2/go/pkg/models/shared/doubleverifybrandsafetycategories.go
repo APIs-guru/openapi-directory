@@ -39,6 +39,8 @@ const (
 	DoubleVerifyBrandSafetyCategoriesAvoidedMediumSeverityCategoriesEnumNegativeNewsPharmaceutical  DoubleVerifyBrandSafetyCategoriesAvoidedMediumSeverityCategoriesEnum = "NEGATIVE_NEWS_PHARMACEUTICAL"
 )
 
+// DoubleVerifyBrandSafetyCategories
+// Settings for brand safety controls.
 type DoubleVerifyBrandSafetyCategories struct {
 	AvoidUnknownBrandSafetyCategory *bool                                                                  `json:"avoidUnknownBrandSafetyCategory,omitempty"`
 	AvoidedHighSeverityCategories   []DoubleVerifyBrandSafetyCategoriesAvoidedHighSeverityCategoriesEnum   `json:"avoidedHighSeverityCategories,omitempty"`

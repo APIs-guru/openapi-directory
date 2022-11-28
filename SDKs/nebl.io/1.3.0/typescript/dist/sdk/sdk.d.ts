@@ -1,236 +1,339 @@
 import { AxiosInstance, AxiosRequestConfig } from "axios";
 import * as operations from "./models/operations";
-declare type OptsFunc = (sdk: SDK) => void;
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://ntp1node.nebl.io/"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
     /**
+     * broadcastTx - Broadcasts a signed raw transaction to the network
+     *
      * Broadcasts a signed raw transaction to the network. If successful returns the txid of the broadcast trasnaction.
      *
     **/
-    BroadcastTx(req: operations.BroadcastTxRequest, config?: AxiosRequestConfig): Promise<operations.BroadcastTxResponse>;
+    broadcastTx(req: operations.BroadcastTxRequest, config?: AxiosRequestConfig): Promise<operations.BroadcastTxResponse>;
     /**
+     * burnToken - Builds a transaction that burns an NTP1 Token
+     *
      * Builds an unsigned raw transaction that burns an NTP1 token on the Neblio blockchain.
      *
     **/
-    BurnToken(req: operations.BurnTokenRequest, config?: AxiosRequestConfig): Promise<operations.BurnTokenResponse>;
+    burnToken(req: operations.BurnTokenRequest, config?: AxiosRequestConfig): Promise<operations.BurnTokenResponse>;
     /**
+     * getAddress - Returns address object
+     *
      * Returns NEBL address object containing information on a specific address
     **/
-    GetAddress(req: operations.GetAddressRequest, config?: AxiosRequestConfig): Promise<operations.GetAddressResponse>;
+    getAddress(req: operations.GetAddressRequest, config?: AxiosRequestConfig): Promise<operations.GetAddressResponse>;
     /**
+     * getAddressBalance - Returns address balance in sats
+     *
      * Returns NEBL address balance in satoshis
     **/
-    GetAddressBalance(req: operations.GetAddressBalanceRequest, config?: AxiosRequestConfig): Promise<operations.GetAddressBalanceResponse>;
+    getAddressBalance(req: operations.GetAddressBalanceRequest, config?: AxiosRequestConfig): Promise<operations.GetAddressBalanceResponse>;
     /**
+     * getAddressInfo - Information On a Neblio Address
+     *
      * Returns both NEBL and NTP1 token UTXOs held at the given address.
      *
     **/
-    GetAddressInfo(req: operations.GetAddressInfoRequest, config?: AxiosRequestConfig): Promise<operations.GetAddressInfoResponse>;
+    getAddressInfo(req: operations.GetAddressInfoRequest, config?: AxiosRequestConfig): Promise<operations.GetAddressInfoResponse>;
     /**
+     * getAddressTotalReceived - Returns total received by address in sats
+     *
      * Returns total NEBL received by address in satoshis
     **/
-    GetAddressTotalReceived(req: operations.GetAddressTotalReceivedRequest, config?: AxiosRequestConfig): Promise<operations.GetAddressTotalReceivedResponse>;
+    getAddressTotalReceived(req: operations.GetAddressTotalReceivedRequest, config?: AxiosRequestConfig): Promise<operations.GetAddressTotalReceivedResponse>;
     /**
+     * getAddressTotalSent - Returns total sent by address in sats
+     *
      * Returns total NEBL sent by address in satoshis
     **/
-    GetAddressTotalSent(req: operations.GetAddressTotalSentRequest, config?: AxiosRequestConfig): Promise<operations.GetAddressTotalSentResponse>;
+    getAddressTotalSent(req: operations.GetAddressTotalSentRequest, config?: AxiosRequestConfig): Promise<operations.GetAddressTotalSentResponse>;
     /**
+     * getAddressUnconfirmedBalance - Returns address unconfirmed balance in sats
+     *
      * Returns NEBL address unconfirmed balance in satoshis
     **/
-    GetAddressUnconfirmedBalance(req: operations.GetAddressUnconfirmedBalanceRequest, config?: AxiosRequestConfig): Promise<operations.GetAddressUnconfirmedBalanceResponse>;
+    getAddressUnconfirmedBalance(req: operations.GetAddressUnconfirmedBalanceRequest, config?: AxiosRequestConfig): Promise<operations.GetAddressUnconfirmedBalanceResponse>;
     /**
+     * getAddressUtxos - Returns all UTXOs at a given address
+     *
      * Returns information on each Unspent Transaction Output contained at an address
     **/
-    GetAddressUtxos(req: operations.GetAddressUtxosRequest, config?: AxiosRequestConfig): Promise<operations.GetAddressUtxosResponse>;
+    getAddressUtxos(req: operations.GetAddressUtxosRequest, config?: AxiosRequestConfig): Promise<operations.GetAddressUtxosResponse>;
     /**
+     * getBlock - Returns information regarding a Neblio block
+     *
      * Returns blockchain data for a given block based upon the block hash
     **/
-    GetBlock(req: operations.GetBlockRequest, config?: AxiosRequestConfig): Promise<operations.GetBlockResponse>;
+    getBlock(req: operations.GetBlockRequest, config?: AxiosRequestConfig): Promise<operations.GetBlockResponse>;
     /**
+     * getBlockIndex - Returns block hash of block
+     *
      * Returns the block hash of a block at a given block index
     **/
-    GetBlockIndex(req: operations.GetBlockIndexRequest, config?: AxiosRequestConfig): Promise<operations.GetBlockIndexResponse>;
+    getBlockIndex(req: operations.GetBlockIndexRequest, config?: AxiosRequestConfig): Promise<operations.GetBlockIndexResponse>;
     /**
+     * getRawTx - Returns raw transaction hex
+     *
      * Returns raw transaction hex representing a NEBL transaction
     **/
-    GetRawTx(req: operations.GetRawTxRequest, config?: AxiosRequestConfig): Promise<operations.GetRawTxResponse>;
+    getRawTx(req: operations.GetRawTxRequest, config?: AxiosRequestConfig): Promise<operations.GetRawTxResponse>;
     /**
+     * getStatus - Utility API for calling several blockchain node functions
+     *
      * Utility API for calling several blockchain node functions - getInfo, getDifficulty, getBestBlockHash, getLastBlockHash
     **/
-    GetStatus(req: operations.GetStatusRequest, config?: AxiosRequestConfig): Promise<operations.GetStatusResponse>;
+    getStatus(req: operations.GetStatusRequest, config?: AxiosRequestConfig): Promise<operations.GetStatusResponse>;
     /**
+     * getSync - Get node sync status
+     *
      * Returns information on the node's sync progress
     **/
-    GetSync(config?: AxiosRequestConfig): Promise<operations.GetSyncResponse>;
+    getSync(config?: AxiosRequestConfig): Promise<operations.GetSyncResponse>;
     /**
+     * getTokenHolders - Get Addresses Holding a Token
+     *
      * Returns the the the addresses holding a token and how many tokens are held
      *
     **/
-    GetTokenHolders(req: operations.GetTokenHoldersRequest, config?: AxiosRequestConfig): Promise<operations.GetTokenHoldersResponse>;
+    getTokenHolders(req: operations.GetTokenHoldersRequest, config?: AxiosRequestConfig): Promise<operations.GetTokenHoldersResponse>;
     /**
+     * getTokenId - Returns the tokenId representing a token
+     *
      * Translates a token symbol to a tokenId if a token exists with that symbol on the network
      *
     **/
-    GetTokenId(req: operations.GetTokenIdRequest, config?: AxiosRequestConfig): Promise<operations.GetTokenIdResponse>;
+    getTokenId(req: operations.GetTokenIdRequest, config?: AxiosRequestConfig): Promise<operations.GetTokenIdResponse>;
     /**
+     * getTokenMetadata - Get Metadata of Token
+     *
      * Returns the metadata associated with a token.
      *
     **/
-    GetTokenMetadata(req: operations.GetTokenMetadataRequest, config?: AxiosRequestConfig): Promise<operations.GetTokenMetadataResponse>;
+    getTokenMetadata(req: operations.GetTokenMetadataRequest, config?: AxiosRequestConfig): Promise<operations.GetTokenMetadataResponse>;
     /**
+     * getTokenMetadataOfUtxo - Get UTXO Metadata of Token
+     *
      * Returns the metadata associated with a token for that specific utxo instead of the issuance transaction.
      *
     **/
-    GetTokenMetadataOfUtxo(req: operations.GetTokenMetadataOfUtxoRequest, config?: AxiosRequestConfig): Promise<operations.GetTokenMetadataOfUtxoResponse>;
+    getTokenMetadataOfUtxo(req: operations.GetTokenMetadataOfUtxoRequest, config?: AxiosRequestConfig): Promise<operations.GetTokenMetadataOfUtxoResponse>;
     /**
+     * getTransactionInfo - Information On an NTP1 Transaction
+     *
      * Returns detailed information regarding an NTP1 transaction.
      *
     **/
-    GetTransactionInfo(req: operations.GetTransactionInfoRequest, config?: AxiosRequestConfig): Promise<operations.GetTransactionInfoResponse>;
+    getTransactionInfo(req: operations.GetTransactionInfoRequest, config?: AxiosRequestConfig): Promise<operations.GetTransactionInfoResponse>;
     /**
+     * getTx - Returns transaction object
+     *
      * Returns NEBL transaction object representing a NEBL transaction
     **/
-    GetTx(req: operations.GetTxRequest, config?: AxiosRequestConfig): Promise<operations.GetTxResponse>;
+    getTx(req: operations.GetTxRequest, config?: AxiosRequestConfig): Promise<operations.GetTxResponse>;
     /**
+     * getTxs - Get transactions by block or address
+     *
      * Returns all transactions by block or address
     **/
-    GetTxs(req: operations.GetTxsRequest, config?: AxiosRequestConfig): Promise<operations.GetTxsResponse>;
+    getTxs(req: operations.GetTxsRequest, config?: AxiosRequestConfig): Promise<operations.GetTxsResponse>;
     /**
+     * issueToken - Builds a transaction that issues a new NTP1 Token
+     *
      * Builds an unsigned raw transaction that issues a new NTP1 token on the Neblio blockchain.
      *
     **/
-    IssueToken(req: operations.IssueTokenRequest, config?: AxiosRequestConfig): Promise<operations.IssueTokenResponse>;
+    issueToken(req: operations.IssueTokenRequest, config?: AxiosRequestConfig): Promise<operations.IssueTokenResponse>;
     /**
+     * jsonRpc - Send a JSON-RPC call to a localhost neblio-Qt or nebliod node
+     *
      * Call any Neblio RPC command from the Neblio API libraries. Useful for signing transactions with a local node and other functions. Will not work from a browser due to CORS restrictions. Requires a node to be running locally at 127.0.0.1
     **/
-    JsonRpc(req: operations.JsonRpcRequest, config?: AxiosRequestConfig): Promise<operations.JsonRpcResponse>;
+    jsonRpc(req: operations.JsonRpcRequest, config?: AxiosRequestConfig): Promise<operations.JsonRpcResponse>;
     /**
+     * sendToken - Builds a transaction that sends an NTP1 Token
+     *
      * Builds an unsigned raw transaction that sends an NTP1 token on the Neblio blockchain.
      *
     **/
-    SendToken(req: operations.SendTokenRequest, config?: AxiosRequestConfig): Promise<operations.SendTokenResponse>;
+    sendToken(req: operations.SendTokenRequest, config?: AxiosRequestConfig): Promise<operations.SendTokenResponse>;
     /**
+     * sendTx - Broadcasts a signed raw transaction to the network (not NTP1 specific)
+     *
      * Broadcasts a signed raw transaction to the network. If successful returns the txid of the broadcast trasnaction.
      *
     **/
-    SendTx(req: operations.SendTxRequest, config?: AxiosRequestConfig): Promise<operations.SendTxResponse>;
+    sendTx(req: operations.SendTxRequest, config?: AxiosRequestConfig): Promise<operations.SendTxResponse>;
     /**
+     * testnetBroadcastTx - Broadcasts a signed raw transaction to the network
+     *
      * Broadcasts a signed raw transaction to the network. If successful returns the txid of the broadcast trasnaction.
      *
     **/
-    TestnetBroadcastTx(req: operations.TestnetBroadcastTxRequest, config?: AxiosRequestConfig): Promise<operations.TestnetBroadcastTxResponse>;
+    testnetBroadcastTx(req: operations.TestnetBroadcastTxRequest, config?: AxiosRequestConfig): Promise<operations.TestnetBroadcastTxResponse>;
     /**
+     * testnetBurnToken - Builds a transaction that burns an NTP1 Token
+     *
      * Builds an unsigned raw transaction that burns an NTP1 token on the Neblio blockchain.
      *
     **/
-    TestnetBurnToken(req: operations.TestnetBurnTokenRequest, config?: AxiosRequestConfig): Promise<operations.TestnetBurnTokenResponse>;
+    testnetBurnToken(req: operations.TestnetBurnTokenRequest, config?: AxiosRequestConfig): Promise<operations.TestnetBurnTokenResponse>;
     /**
+     * testnetGetAddress - Returns address object
+     *
      * Returns NEBL address object containing information on a specific address
     **/
-    TestnetGetAddress(req: operations.TestnetGetAddressRequest, config?: AxiosRequestConfig): Promise<operations.TestnetGetAddressResponse>;
+    testnetGetAddress(req: operations.TestnetGetAddressRequest, config?: AxiosRequestConfig): Promise<operations.TestnetGetAddressResponse>;
     /**
+     * testnetGetAddressBalance - Returns address balance in sats
+     *
      * Returns NEBL address balance in satoshis
     **/
-    TestnetGetAddressBalance(req: operations.TestnetGetAddressBalanceRequest, config?: AxiosRequestConfig): Promise<operations.TestnetGetAddressBalanceResponse>;
+    testnetGetAddressBalance(req: operations.TestnetGetAddressBalanceRequest, config?: AxiosRequestConfig): Promise<operations.TestnetGetAddressBalanceResponse>;
     /**
+     * testnetGetAddressInfo - Information On a Neblio Address
+     *
      * Returns both NEBL and NTP1 token UTXOs held at the given address.
      *
     **/
-    TestnetGetAddressInfo(req: operations.TestnetGetAddressInfoRequest, config?: AxiosRequestConfig): Promise<operations.TestnetGetAddressInfoResponse>;
+    testnetGetAddressInfo(req: operations.TestnetGetAddressInfoRequest, config?: AxiosRequestConfig): Promise<operations.TestnetGetAddressInfoResponse>;
     /**
+     * testnetGetAddressTotalReceived - Returns total received by address in sats
+     *
      * Returns total NEBL received by address in satoshis
     **/
-    TestnetGetAddressTotalReceived(req: operations.TestnetGetAddressTotalReceivedRequest, config?: AxiosRequestConfig): Promise<operations.TestnetGetAddressTotalReceivedResponse>;
+    testnetGetAddressTotalReceived(req: operations.TestnetGetAddressTotalReceivedRequest, config?: AxiosRequestConfig): Promise<operations.TestnetGetAddressTotalReceivedResponse>;
     /**
+     * testnetGetAddressTotalSent - Returns total sent by address in sats
+     *
      * Returns total NEBL sent by address in satoshis
     **/
-    TestnetGetAddressTotalSent(req: operations.TestnetGetAddressTotalSentRequest, config?: AxiosRequestConfig): Promise<operations.TestnetGetAddressTotalSentResponse>;
+    testnetGetAddressTotalSent(req: operations.TestnetGetAddressTotalSentRequest, config?: AxiosRequestConfig): Promise<operations.TestnetGetAddressTotalSentResponse>;
     /**
+     * testnetGetAddressUnconfirmedBalance - Returns address unconfirmed balance in sats
+     *
      * Returns NEBL address unconfirmed balance in satoshis
     **/
-    TestnetGetAddressUnconfirmedBalance(req: operations.TestnetGetAddressUnconfirmedBalanceRequest, config?: AxiosRequestConfig): Promise<operations.TestnetGetAddressUnconfirmedBalanceResponse>;
+    testnetGetAddressUnconfirmedBalance(req: operations.TestnetGetAddressUnconfirmedBalanceRequest, config?: AxiosRequestConfig): Promise<operations.TestnetGetAddressUnconfirmedBalanceResponse>;
     /**
+     * testnetGetAddressUtxos - Returns all UTXOs at a given address
+     *
      * Returns information on each Unspent Transaction Output contained at an address
     **/
-    TestnetGetAddressUtxos(req: operations.TestnetGetAddressUtxosRequest, config?: AxiosRequestConfig): Promise<operations.TestnetGetAddressUtxosResponse>;
+    testnetGetAddressUtxos(req: operations.TestnetGetAddressUtxosRequest, config?: AxiosRequestConfig): Promise<operations.TestnetGetAddressUtxosResponse>;
     /**
+     * testnetGetBlock - Returns information regarding a Neblio block
+     *
      * Returns blockchain data for a given block based upon the block hash
     **/
-    TestnetGetBlock(req: operations.TestnetGetBlockRequest, config?: AxiosRequestConfig): Promise<operations.TestnetGetBlockResponse>;
+    testnetGetBlock(req: operations.TestnetGetBlockRequest, config?: AxiosRequestConfig): Promise<operations.TestnetGetBlockResponse>;
     /**
+     * testnetGetBlockIndex - Returns block hash of block
+     *
      * Returns the block hash of a block at a given block index
     **/
-    TestnetGetBlockIndex(req: operations.TestnetGetBlockIndexRequest, config?: AxiosRequestConfig): Promise<operations.TestnetGetBlockIndexResponse>;
+    testnetGetBlockIndex(req: operations.TestnetGetBlockIndexRequest, config?: AxiosRequestConfig): Promise<operations.TestnetGetBlockIndexResponse>;
     /**
+     * testnetGetFaucet - Withdraws testnet NEBL to the specified address
+     *
      * Withdraw testnet NEBL to your Neblio Testnet address. By default amount is 1500000000 or 15 NEBL and has a max of 50 NEBL. Only 2 withdrawals allowed per 24 hour period.
      *
     **/
-    TestnetGetFaucet(req: operations.TestnetGetFaucetRequest, config?: AxiosRequestConfig): Promise<operations.TestnetGetFaucetResponse>;
+    testnetGetFaucet(req: operations.TestnetGetFaucetRequest, config?: AxiosRequestConfig): Promise<operations.TestnetGetFaucetResponse>;
     /**
+     * testnetGetRawTx - Returns raw transaction hex
+     *
      * Returns raw transaction hex representing a NEBL transaction
     **/
-    TestnetGetRawTx(req: operations.TestnetGetRawTxRequest, config?: AxiosRequestConfig): Promise<operations.TestnetGetRawTxResponse>;
+    testnetGetRawTx(req: operations.TestnetGetRawTxRequest, config?: AxiosRequestConfig): Promise<operations.TestnetGetRawTxResponse>;
     /**
+     * testnetGetStatus - Utility API for calling several blockchain node functions
+     *
      * Utility API for calling several blockchain node functions - getInfo, getDifficulty, getBestBlockHash, getLastBlockHash
     **/
-    TestnetGetStatus(req: operations.TestnetGetStatusRequest, config?: AxiosRequestConfig): Promise<operations.TestnetGetStatusResponse>;
+    testnetGetStatus(req: operations.TestnetGetStatusRequest, config?: AxiosRequestConfig): Promise<operations.TestnetGetStatusResponse>;
     /**
+     * testnetGetSync - Get node sync status
+     *
      * Returns information on the node's sync progress
     **/
-    TestnetGetSync(config?: AxiosRequestConfig): Promise<operations.TestnetGetSyncResponse>;
+    testnetGetSync(config?: AxiosRequestConfig): Promise<operations.TestnetGetSyncResponse>;
     /**
+     * testnetGetTokenHolders - Get Addresses Holding a Token
+     *
      * Returns the the the addresses holding a token and how many tokens are held
      *
     **/
-    TestnetGetTokenHolders(req: operations.TestnetGetTokenHoldersRequest, config?: AxiosRequestConfig): Promise<operations.TestnetGetTokenHoldersResponse>;
+    testnetGetTokenHolders(req: operations.TestnetGetTokenHoldersRequest, config?: AxiosRequestConfig): Promise<operations.TestnetGetTokenHoldersResponse>;
     /**
+     * testnetGetTokenId - Returns the tokenId representing a token
+     *
      * Translates a token symbol to a tokenId if a token exists with that symbol on the network
      *
     **/
-    TestnetGetTokenId(req: operations.TestnetGetTokenIdRequest, config?: AxiosRequestConfig): Promise<operations.TestnetGetTokenIdResponse>;
+    testnetGetTokenId(req: operations.TestnetGetTokenIdRequest, config?: AxiosRequestConfig): Promise<operations.TestnetGetTokenIdResponse>;
     /**
+     * testnetGetTokenMetadata - Get Metadata of Token
+     *
      * Returns the metadata associated with a token.
      *
     **/
-    TestnetGetTokenMetadata(req: operations.TestnetGetTokenMetadataRequest, config?: AxiosRequestConfig): Promise<operations.TestnetGetTokenMetadataResponse>;
+    testnetGetTokenMetadata(req: operations.TestnetGetTokenMetadataRequest, config?: AxiosRequestConfig): Promise<operations.TestnetGetTokenMetadataResponse>;
     /**
+     * testnetGetTokenMetadataOfUtxo - Get UTXO Metadata of Token
+     *
      * Returns the metadata associated with a token for that specific utxo instead of the issuance transaction.
      *
     **/
-    TestnetGetTokenMetadataOfUtxo(req: operations.TestnetGetTokenMetadataOfUtxoRequest, config?: AxiosRequestConfig): Promise<operations.TestnetGetTokenMetadataOfUtxoResponse>;
+    testnetGetTokenMetadataOfUtxo(req: operations.TestnetGetTokenMetadataOfUtxoRequest, config?: AxiosRequestConfig): Promise<operations.TestnetGetTokenMetadataOfUtxoResponse>;
     /**
+     * testnetGetTransactionInfo - Information On an NTP1 Transaction
+     *
      * Returns detailed information regarding an NTP1 transaction.
      *
     **/
-    TestnetGetTransactionInfo(req: operations.TestnetGetTransactionInfoRequest, config?: AxiosRequestConfig): Promise<operations.TestnetGetTransactionInfoResponse>;
+    testnetGetTransactionInfo(req: operations.TestnetGetTransactionInfoRequest, config?: AxiosRequestConfig): Promise<operations.TestnetGetTransactionInfoResponse>;
     /**
+     * testnetGetTx - Returns transaction object
+     *
      * Returns NEBL transaction object representing a NEBL transaction
     **/
-    TestnetGetTx(req: operations.TestnetGetTxRequest, config?: AxiosRequestConfig): Promise<operations.TestnetGetTxResponse>;
+    testnetGetTx(req: operations.TestnetGetTxRequest, config?: AxiosRequestConfig): Promise<operations.TestnetGetTxResponse>;
     /**
+     * testnetGetTxs - Get transactions by block or address
+     *
      * Returns all transactions by block or address
     **/
-    TestnetGetTxs(req: operations.TestnetGetTxsRequest, config?: AxiosRequestConfig): Promise<operations.TestnetGetTxsResponse>;
+    testnetGetTxs(req: operations.TestnetGetTxsRequest, config?: AxiosRequestConfig): Promise<operations.TestnetGetTxsResponse>;
     /**
+     * testnetIssueToken - Builds a transaction that issues a new NTP1 Token
+     *
      * Builds an unsigned raw transaction that issues a new NTP1 token on the Neblio blockchain.
      *
     **/
-    TestnetIssueToken(req: operations.TestnetIssueTokenRequest, config?: AxiosRequestConfig): Promise<operations.TestnetIssueTokenResponse>;
+    testnetIssueToken(req: operations.TestnetIssueTokenRequest, config?: AxiosRequestConfig): Promise<operations.TestnetIssueTokenResponse>;
     /**
+     * testnetSendToken - Builds a transaction that sends an NTP1 Token
+     *
      * Builds an unsigned raw transaction that sends an NTP1 token on the Neblio blockchain.
      *
     **/
-    TestnetSendToken(req: operations.TestnetSendTokenRequest, config?: AxiosRequestConfig): Promise<operations.TestnetSendTokenResponse>;
+    testnetSendToken(req: operations.TestnetSendTokenRequest, config?: AxiosRequestConfig): Promise<operations.TestnetSendTokenResponse>;
     /**
+     * testnetSendTx - Broadcasts a signed raw transaction to the network (not NTP1 specific)
+     *
      * Broadcasts a signed raw transaction to the network. If successful returns the txid of the broadcast trasnaction.
      *
     **/
-    TestnetSendTx(req: operations.TestnetSendTxRequest, config?: AxiosRequestConfig): Promise<operations.TestnetSendTxResponse>;
+    testnetSendTx(req: operations.TestnetSendTxRequest, config?: AxiosRequestConfig): Promise<operations.TestnetSendTxResponse>;
 }
 export {};

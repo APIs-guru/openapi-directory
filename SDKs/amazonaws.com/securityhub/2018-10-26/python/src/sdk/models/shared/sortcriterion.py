@@ -1,12 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import sortorder_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SortCriterion:
-    field: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Field' }})
-    sort_order: Optional[sortorder_enum.SortOrderEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SortOrder' }})
+    r"""SortCriterion
+    A collection of finding attributes used to sort findings.
+    """
+    
+    field: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Field') }})
+    sort_order: Optional[SortOrderEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SortOrder') }})
     

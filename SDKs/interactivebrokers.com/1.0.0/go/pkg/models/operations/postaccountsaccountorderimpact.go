@@ -19,11 +19,6 @@ type PostAccountsAccountOrderImpactRequestBody struct {
 	TimeInForce     *float64 `json:"Time in Force,omitempty"`
 }
 
-type PostAccountsAccountOrderImpactRequest struct {
-	PathParams PostAccountsAccountOrderImpactPathParams
-	Request    PostAccountsAccountOrderImpactRequestBody `request:"mediaType=application/json"`
-}
-
 type PostAccountsAccountOrderImpact200ApplicationJSON struct {
 	Commission          *float64 `json:"Commission,omitempty"`
 	CommissionsCurrency *string  `json:"CommissionsCurrency,omitempty"`
@@ -35,6 +30,11 @@ type PostAccountsAccountOrderImpact200ApplicationJSON struct {
 	MarginCurrency      *string  `json:"MarginCurrency,omitempty"`
 	MaxCommissions      *float64 `json:"MaxCommissions,omitempty"`
 	MinCommissions      *float64 `json:"MinCommissions,omitempty"`
+}
+
+type PostAccountsAccountOrderImpactRequest struct {
+	PathParams PostAccountsAccountOrderImpactPathParams
+	Request    PostAccountsAccountOrderImpactRequestBody `request:"mediaType=application/json"`
 }
 
 type PostAccountsAccountOrderImpactResponse struct {

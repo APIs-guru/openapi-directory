@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ResourceSharePermissionSummary } from "./resourcesharepermissionsummary";
 export declare class ListResourceSharePermissionsResponse extends SpeakeasyBase {
     nextToken?: string;

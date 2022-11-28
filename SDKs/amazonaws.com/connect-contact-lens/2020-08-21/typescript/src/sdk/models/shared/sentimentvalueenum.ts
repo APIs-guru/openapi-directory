@@ -1,7 +1,8 @@
 
 
+
 export enum SentimentValueEnum {
-    Positive = "POSITIVE"
-,    Neutral = "NEUTRAL"
-,    Negative = "NEGATIVE"
+    Positive = "POSITIVE",
+    Neutral = "NEUTRAL",
+    Negative = "NEGATIVE"
 }

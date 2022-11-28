@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { QualityEnum } from "./qualityenum";
 import { TimeInNanos } from "./timeinnanos";
 import { Variant } from "./variant";
+
 
 
 // AssetPropertyValue
@@ -9,12 +10,12 @@ import { Variant } from "./variant";
  * Contains asset property value information.
 **/
 export class AssetPropertyValue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=quality" })
+  @SpeakeasyMetadata({ data: "json, name=quality" })
   quality?: QualityEnum;
 
-  @Metadata({ data: "json, name=timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=timestamp" })
   timestamp: TimeInNanos;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value: Variant;
 }

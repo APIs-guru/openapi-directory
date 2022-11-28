@@ -14,4 +14,5 @@ from .datastore_projects_operations_get import *
 from .datastore_projects_operations_list import *
 from .datastore_projects_reserveids import *
 from .datastore_projects_rollback import *
+from .datastore_projects_runaggregationquery import *
 from .datastore_projects_runquery import *

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ObFundsConfirmationConsent1DataDebtorAccount
 /**
  * Unambiguous identification of the account of the debtor to which a confirmation of funds consent will be applied.
@@ -33,19 +33,19 @@ var ObFundsConfirmationConsent1DataDebtorAccount = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Identification" }),
+        SpeakeasyMetadata({ data: "json, name=Identification" }),
         __metadata("design:type", String)
     ], ObFundsConfirmationConsent1DataDebtorAccount.prototype, "identification", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], ObFundsConfirmationConsent1DataDebtorAccount.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=SchemeName" }),
+        SpeakeasyMetadata({ data: "json, name=SchemeName" }),
         __metadata("design:type", String)
     ], ObFundsConfirmationConsent1DataDebtorAccount.prototype, "schemeName", void 0);
     __decorate([
-        Metadata({ data: "json, name=SecondaryIdentification" }),
+        SpeakeasyMetadata({ data: "json, name=SecondaryIdentification" }),
         __metadata("design:type", String)
     ], ObFundsConfirmationConsent1DataDebtorAccount.prototype, "secondaryIdentification", void 0);
     return ObFundsConfirmationConsent1DataDebtorAccount;
@@ -57,11 +57,11 @@ var ObFundsConfirmationConsent1Data = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DebtorAccount" }),
+        SpeakeasyMetadata({ data: "json, name=DebtorAccount" }),
         __metadata("design:type", ObFundsConfirmationConsent1DataDebtorAccount)
     ], ObFundsConfirmationConsent1Data.prototype, "debtorAccount", void 0);
     __decorate([
-        Metadata({ data: "json, name=ExpirationDateTime" }),
+        SpeakeasyMetadata({ data: "json, name=ExpirationDateTime" }),
         __metadata("design:type", Date)
     ], ObFundsConfirmationConsent1Data.prototype, "expirationDateTime", void 0);
     return ObFundsConfirmationConsent1Data;
@@ -73,7 +73,7 @@ var ObFundsConfirmationConsent1 = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Data" }),
+        SpeakeasyMetadata({ data: "json, name=Data" }),
         __metadata("design:type", ObFundsConfirmationConsent1Data)
     ], ObFundsConfirmationConsent1.prototype, "data", void 0);
     return ObFundsConfirmationConsent1;

@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateNetworkGroupPolicyPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
@@ -12,17 +13,17 @@ export class CreateNetworkGroupPolicyPathParams extends SpeakeasyBase {
  * The bandwidth limits object, specifying upload and download speed for clients bound to the group policy. These are only enforced if 'settings' is set to 'custom'.
 **/
 export class CreateNetworkGroupPolicyRequestBodyBandwidthBandwidthLimits extends SpeakeasyBase {
-  @Metadata({ data: "json, name=limitDown" })
+  @SpeakeasyMetadata({ data: "json, name=limitDown" })
   limitDown?: number;
 
-  @Metadata({ data: "json, name=limitUp" })
+  @SpeakeasyMetadata({ data: "json, name=limitUp" })
   limitUp?: number;
 }
 
 export enum CreateNetworkGroupPolicyRequestBodyBandwidthSettingsEnum {
-    NetworkDefault = "network default"
-,    Ignore = "ignore"
-,    Custom = "custom"
+    NetworkDefault = "network default",
+    Ignore = "ignore",
+    Custom = "custom"
 }
 
 
@@ -32,43 +33,43 @@ export enum CreateNetworkGroupPolicyRequestBodyBandwidthSettingsEnum {
  * 
 **/
 export class CreateNetworkGroupPolicyRequestBodyBandwidth extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bandwidthLimits" })
+  @SpeakeasyMetadata({ data: "json, name=bandwidthLimits" })
   bandwidthLimits?: CreateNetworkGroupPolicyRequestBodyBandwidthBandwidthLimits;
 
-  @Metadata({ data: "json, name=settings" })
+  @SpeakeasyMetadata({ data: "json, name=settings" })
   settings?: CreateNetworkGroupPolicyRequestBodyBandwidthSettingsEnum;
 }
 
 export enum CreateNetworkGroupPolicyRequestBodyBonjourForwardingRulesServicesEnum {
-    AllServices = "All Services"
-,    AirPlay = "AirPlay"
-,    Afp = "AFP"
-,    BitTorrent = "BitTorrent"
-,    Ftp = "FTP"
-,    IChat = "iChat"
-,    ITunes = "iTunes"
-,    Printers = "Printers"
-,    Samba = "Samba"
-,    Scanners = "Scanners"
-,    Ssh = "SSH"
+    AllServices = "All Services",
+    AirPlay = "AirPlay",
+    Afp = "AFP",
+    BitTorrent = "BitTorrent",
+    Ftp = "FTP",
+    IChat = "iChat",
+    ITunes = "iTunes",
+    Printers = "Printers",
+    Samba = "Samba",
+    Scanners = "Scanners",
+    Ssh = "SSH"
 }
 
 
 export class CreateNetworkGroupPolicyRequestBodyBonjourForwardingRules extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=services" })
+  @SpeakeasyMetadata({ data: "json, name=services" })
   services: CreateNetworkGroupPolicyRequestBodyBonjourForwardingRulesServicesEnum[];
 
-  @Metadata({ data: "json, name=vlanId" })
+  @SpeakeasyMetadata({ data: "json, name=vlanId" })
   vlanId: string;
 }
 
 export enum CreateNetworkGroupPolicyRequestBodyBonjourForwardingSettingsEnum {
-    NetworkDefault = "network default"
-,    Ignore = "ignore"
-,    Custom = "custom"
+    NetworkDefault = "network default",
+    Ignore = "ignore",
+    Custom = "custom"
 }
 
 
@@ -77,17 +78,17 @@ export enum CreateNetworkGroupPolicyRequestBodyBonjourForwardingSettingsEnum {
  * The Bonjour settings for your group policy. Only valid if your network has a wireless configuration.
 **/
 export class CreateNetworkGroupPolicyRequestBodyBonjourForwarding extends SpeakeasyBase {
-  @Metadata({ data: "json, name=rules", elemType: operations.CreateNetworkGroupPolicyRequestBodyBonjourForwardingRules })
+  @SpeakeasyMetadata({ data: "json, name=rules", elemType: CreateNetworkGroupPolicyRequestBodyBonjourForwardingRules })
   rules?: CreateNetworkGroupPolicyRequestBodyBonjourForwardingRules[];
 
-  @Metadata({ data: "json, name=settings" })
+  @SpeakeasyMetadata({ data: "json, name=settings" })
   settings?: CreateNetworkGroupPolicyRequestBodyBonjourForwardingSettingsEnum;
 }
 
 export enum CreateNetworkGroupPolicyRequestBodyContentFilteringAllowedUrlPatternsSettingsEnum {
-    NetworkDefault = "network default"
-,    Append = "append"
-,    Override = "override"
+    NetworkDefault = "network default",
+    Append = "append",
+    Override = "override"
 }
 
 
@@ -96,17 +97,17 @@ export enum CreateNetworkGroupPolicyRequestBodyContentFilteringAllowedUrlPattern
  * Settings for allowed URL patterns
 **/
 export class CreateNetworkGroupPolicyRequestBodyContentFilteringAllowedUrlPatterns extends SpeakeasyBase {
-  @Metadata({ data: "json, name=patterns" })
+  @SpeakeasyMetadata({ data: "json, name=patterns" })
   patterns?: string[];
 
-  @Metadata({ data: "json, name=settings" })
+  @SpeakeasyMetadata({ data: "json, name=settings" })
   settings?: CreateNetworkGroupPolicyRequestBodyContentFilteringAllowedUrlPatternsSettingsEnum;
 }
 
 export enum CreateNetworkGroupPolicyRequestBodyContentFilteringBlockedUrlCategoriesSettingsEnum {
-    NetworkDefault = "network default"
-,    Append = "append"
-,    Override = "override"
+    NetworkDefault = "network default",
+    Append = "append",
+    Override = "override"
 }
 
 
@@ -115,17 +116,17 @@ export enum CreateNetworkGroupPolicyRequestBodyContentFilteringBlockedUrlCategor
  * Settings for blocked URL categories
 **/
 export class CreateNetworkGroupPolicyRequestBodyContentFilteringBlockedUrlCategories extends SpeakeasyBase {
-  @Metadata({ data: "json, name=categories" })
+  @SpeakeasyMetadata({ data: "json, name=categories" })
   categories?: string[];
 
-  @Metadata({ data: "json, name=settings" })
+  @SpeakeasyMetadata({ data: "json, name=settings" })
   settings?: CreateNetworkGroupPolicyRequestBodyContentFilteringBlockedUrlCategoriesSettingsEnum;
 }
 
 export enum CreateNetworkGroupPolicyRequestBodyContentFilteringBlockedUrlPatternsSettingsEnum {
-    NetworkDefault = "network default"
-,    Append = "append"
-,    Override = "override"
+    NetworkDefault = "network default",
+    Append = "append",
+    Override = "override"
 }
 
 
@@ -134,10 +135,10 @@ export enum CreateNetworkGroupPolicyRequestBodyContentFilteringBlockedUrlPattern
  * Settings for blocked URL patterns
 **/
 export class CreateNetworkGroupPolicyRequestBodyContentFilteringBlockedUrlPatterns extends SpeakeasyBase {
-  @Metadata({ data: "json, name=patterns" })
+  @SpeakeasyMetadata({ data: "json, name=patterns" })
   patterns?: string[];
 
-  @Metadata({ data: "json, name=settings" })
+  @SpeakeasyMetadata({ data: "json, name=settings" })
   settings?: CreateNetworkGroupPolicyRequestBodyContentFilteringBlockedUrlPatternsSettingsEnum;
 }
 
@@ -147,31 +148,31 @@ export class CreateNetworkGroupPolicyRequestBodyContentFilteringBlockedUrlPatter
  * The content filtering settings for your group policy
 **/
 export class CreateNetworkGroupPolicyRequestBodyContentFiltering extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowedUrlPatterns" })
+  @SpeakeasyMetadata({ data: "json, name=allowedUrlPatterns" })
   allowedUrlPatterns?: CreateNetworkGroupPolicyRequestBodyContentFilteringAllowedUrlPatterns;
 
-  @Metadata({ data: "json, name=blockedUrlCategories" })
+  @SpeakeasyMetadata({ data: "json, name=blockedUrlCategories" })
   blockedUrlCategories?: CreateNetworkGroupPolicyRequestBodyContentFilteringBlockedUrlCategories;
 
-  @Metadata({ data: "json, name=blockedUrlPatterns" })
+  @SpeakeasyMetadata({ data: "json, name=blockedUrlPatterns" })
   blockedUrlPatterns?: CreateNetworkGroupPolicyRequestBodyContentFilteringBlockedUrlPatterns;
 }
 
 
 export class CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingL3FirewallRules extends SpeakeasyBase {
-  @Metadata({ data: "json, name=comment" })
+  @SpeakeasyMetadata({ data: "json, name=comment" })
   comment?: string;
 
-  @Metadata({ data: "json, name=destCidr" })
+  @SpeakeasyMetadata({ data: "json, name=destCidr" })
   destCidr: string;
 
-  @Metadata({ data: "json, name=destPort" })
+  @SpeakeasyMetadata({ data: "json, name=destPort" })
   destPort?: string;
 
-  @Metadata({ data: "json, name=policy" })
+  @SpeakeasyMetadata({ data: "json, name=policy" })
   policy: string;
 
-  @Metadata({ data: "json, name=protocol" })
+  @SpeakeasyMetadata({ data: "json, name=protocol" })
   protocol: string;
 }
 
@@ -180,46 +181,46 @@ export enum CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingL7Firewa
 }
 
 export enum CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingL7FirewallRulesTypeEnum {
-    Application = "application"
-,    ApplicationCategory = "applicationCategory"
-,    Host = "host"
-,    Port = "port"
-,    IpRange = "ipRange"
+    Application = "application",
+    ApplicationCategory = "applicationCategory",
+    Host = "host",
+    Port = "port",
+    IpRange = "ipRange"
 }
 
 
 export class CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingL7FirewallRules extends SpeakeasyBase {
-  @Metadata({ data: "json, name=policy" })
+  @SpeakeasyMetadata({ data: "json, name=policy" })
   policy?: CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingL7FirewallRulesPolicyEnum;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingL7FirewallRulesTypeEnum;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }
 
 export enum CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingSettingsEnum {
-    NetworkDefault = "network default"
-,    Ignore = "ignore"
-,    Custom = "custom"
+    NetworkDefault = "network default",
+    Ignore = "ignore",
+    Custom = "custom"
 }
 
 export enum CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingTrafficShapingRulesDefinitionsTypeEnum {
-    Application = "application"
-,    ApplicationCategory = "applicationCategory"
-,    Host = "host"
-,    Port = "port"
-,    IpRange = "ipRange"
-,    LocalNet = "localNet"
+    Application = "application",
+    ApplicationCategory = "applicationCategory",
+    Host = "host",
+    Port = "port",
+    IpRange = "ipRange",
+    LocalNet = "localNet"
 }
 
 
 export class CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingTrafficShapingRulesDefinitions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingTrafficShapingRulesDefinitionsTypeEnum;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value: string;
 }
 
@@ -229,10 +230,10 @@ export class CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingTraffic
  * The bandwidth limits object, specifying the upload ('limitUp') and download ('limitDown') speed in Kbps. These are only enforced if 'settings' is set to 'custom'.
 **/
 export class CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingTrafficShapingRulesPerClientBandwidthLimitsBandwidthLimits extends SpeakeasyBase {
-  @Metadata({ data: "json, name=limitDown" })
+  @SpeakeasyMetadata({ data: "json, name=limitDown" })
   limitDown?: number;
 
-  @Metadata({ data: "json, name=limitUp" })
+  @SpeakeasyMetadata({ data: "json, name=limitUp" })
   limitUp?: number;
 }
 
@@ -243,28 +244,28 @@ export class CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingTraffic
  * 
 **/
 export class CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingTrafficShapingRulesPerClientBandwidthLimits extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bandwidthLimits" })
+  @SpeakeasyMetadata({ data: "json, name=bandwidthLimits" })
   bandwidthLimits?: CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingTrafficShapingRulesPerClientBandwidthLimitsBandwidthLimits;
 
-  @Metadata({ data: "json, name=settings" })
+  @SpeakeasyMetadata({ data: "json, name=settings" })
   settings?: string;
 }
 
 
 export class CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingTrafficShapingRules extends SpeakeasyBase {
-  @Metadata({ data: "json, name=definitions", elemType: operations.CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingTrafficShapingRulesDefinitions })
+  @SpeakeasyMetadata({ data: "json, name=definitions", elemType: CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingTrafficShapingRulesDefinitions })
   definitions: CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingTrafficShapingRulesDefinitions[];
 
-  @Metadata({ data: "json, name=dscpTagValue" })
+  @SpeakeasyMetadata({ data: "json, name=dscpTagValue" })
   dscpTagValue?: number;
 
-  @Metadata({ data: "json, name=pcpTagValue" })
+  @SpeakeasyMetadata({ data: "json, name=pcpTagValue" })
   pcpTagValue?: number;
 
-  @Metadata({ data: "json, name=perClientBandwidthLimits" })
+  @SpeakeasyMetadata({ data: "json, name=perClientBandwidthLimits" })
   perClientBandwidthLimits?: CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingTrafficShapingRulesPerClientBandwidthLimits;
 
-  @Metadata({ data: "json, name=priority" })
+  @SpeakeasyMetadata({ data: "json, name=priority" })
   priority?: string;
 }
 
@@ -275,16 +276,16 @@ export class CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingTraffic
  * 
 **/
 export class CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShaping extends SpeakeasyBase {
-  @Metadata({ data: "json, name=l3FirewallRules", elemType: operations.CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingL3FirewallRules })
+  @SpeakeasyMetadata({ data: "json, name=l3FirewallRules", elemType: CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingL3FirewallRules })
   l3FirewallRules?: CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingL3FirewallRules[];
 
-  @Metadata({ data: "json, name=l7FirewallRules", elemType: operations.CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingL7FirewallRules })
+  @SpeakeasyMetadata({ data: "json, name=l7FirewallRules", elemType: CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingL7FirewallRules })
   l7FirewallRules?: CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingL7FirewallRules[];
 
-  @Metadata({ data: "json, name=settings" })
+  @SpeakeasyMetadata({ data: "json, name=settings" })
   settings?: CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingSettingsEnum;
 
-  @Metadata({ data: "json, name=trafficShapingRules", elemType: operations.CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingTrafficShapingRules })
+  @SpeakeasyMetadata({ data: "json, name=trafficShapingRules", elemType: CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingTrafficShapingRules })
   trafficShapingRules?: CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingTrafficShapingRules[];
 }
 
@@ -294,13 +295,13 @@ export class CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShaping extend
  * The schedule object for Friday.
 **/
 export class CreateNetworkGroupPolicyRequestBodySchedulingFriday extends SpeakeasyBase {
-  @Metadata({ data: "json, name=active" })
+  @SpeakeasyMetadata({ data: "json, name=active" })
   active?: boolean;
 
-  @Metadata({ data: "json, name=from" })
+  @SpeakeasyMetadata({ data: "json, name=from" })
   from?: string;
 
-  @Metadata({ data: "json, name=to" })
+  @SpeakeasyMetadata({ data: "json, name=to" })
   to?: string;
 }
 
@@ -310,13 +311,13 @@ export class CreateNetworkGroupPolicyRequestBodySchedulingFriday extends Speakea
  * The schedule object for Monday.
 **/
 export class CreateNetworkGroupPolicyRequestBodySchedulingMonday extends SpeakeasyBase {
-  @Metadata({ data: "json, name=active" })
+  @SpeakeasyMetadata({ data: "json, name=active" })
   active?: boolean;
 
-  @Metadata({ data: "json, name=from" })
+  @SpeakeasyMetadata({ data: "json, name=from" })
   from?: string;
 
-  @Metadata({ data: "json, name=to" })
+  @SpeakeasyMetadata({ data: "json, name=to" })
   to?: string;
 }
 
@@ -326,13 +327,13 @@ export class CreateNetworkGroupPolicyRequestBodySchedulingMonday extends Speakea
  * The schedule object for Saturday.
 **/
 export class CreateNetworkGroupPolicyRequestBodySchedulingSaturday extends SpeakeasyBase {
-  @Metadata({ data: "json, name=active" })
+  @SpeakeasyMetadata({ data: "json, name=active" })
   active?: boolean;
 
-  @Metadata({ data: "json, name=from" })
+  @SpeakeasyMetadata({ data: "json, name=from" })
   from?: string;
 
-  @Metadata({ data: "json, name=to" })
+  @SpeakeasyMetadata({ data: "json, name=to" })
   to?: string;
 }
 
@@ -342,13 +343,13 @@ export class CreateNetworkGroupPolicyRequestBodySchedulingSaturday extends Speak
  * The schedule object for Sunday.
 **/
 export class CreateNetworkGroupPolicyRequestBodySchedulingSunday extends SpeakeasyBase {
-  @Metadata({ data: "json, name=active" })
+  @SpeakeasyMetadata({ data: "json, name=active" })
   active?: boolean;
 
-  @Metadata({ data: "json, name=from" })
+  @SpeakeasyMetadata({ data: "json, name=from" })
   from?: string;
 
-  @Metadata({ data: "json, name=to" })
+  @SpeakeasyMetadata({ data: "json, name=to" })
   to?: string;
 }
 
@@ -358,13 +359,13 @@ export class CreateNetworkGroupPolicyRequestBodySchedulingSunday extends Speakea
  * The schedule object for Thursday.
 **/
 export class CreateNetworkGroupPolicyRequestBodySchedulingThursday extends SpeakeasyBase {
-  @Metadata({ data: "json, name=active" })
+  @SpeakeasyMetadata({ data: "json, name=active" })
   active?: boolean;
 
-  @Metadata({ data: "json, name=from" })
+  @SpeakeasyMetadata({ data: "json, name=from" })
   from?: string;
 
-  @Metadata({ data: "json, name=to" })
+  @SpeakeasyMetadata({ data: "json, name=to" })
   to?: string;
 }
 
@@ -374,13 +375,13 @@ export class CreateNetworkGroupPolicyRequestBodySchedulingThursday extends Speak
  * The schedule object for Tuesday.
 **/
 export class CreateNetworkGroupPolicyRequestBodySchedulingTuesday extends SpeakeasyBase {
-  @Metadata({ data: "json, name=active" })
+  @SpeakeasyMetadata({ data: "json, name=active" })
   active?: boolean;
 
-  @Metadata({ data: "json, name=from" })
+  @SpeakeasyMetadata({ data: "json, name=from" })
   from?: string;
 
-  @Metadata({ data: "json, name=to" })
+  @SpeakeasyMetadata({ data: "json, name=to" })
   to?: string;
 }
 
@@ -390,13 +391,13 @@ export class CreateNetworkGroupPolicyRequestBodySchedulingTuesday extends Speake
  * The schedule object for Wednesday.
 **/
 export class CreateNetworkGroupPolicyRequestBodySchedulingWednesday extends SpeakeasyBase {
-  @Metadata({ data: "json, name=active" })
+  @SpeakeasyMetadata({ data: "json, name=active" })
   active?: boolean;
 
-  @Metadata({ data: "json, name=from" })
+  @SpeakeasyMetadata({ data: "json, name=from" })
   from?: string;
 
-  @Metadata({ data: "json, name=to" })
+  @SpeakeasyMetadata({ data: "json, name=to" })
   to?: string;
 }
 
@@ -407,40 +408,40 @@ export class CreateNetworkGroupPolicyRequestBodySchedulingWednesday extends Spea
  * 
 **/
 export class CreateNetworkGroupPolicyRequestBodyScheduling extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=friday" })
+  @SpeakeasyMetadata({ data: "json, name=friday" })
   friday?: CreateNetworkGroupPolicyRequestBodySchedulingFriday;
 
-  @Metadata({ data: "json, name=monday" })
+  @SpeakeasyMetadata({ data: "json, name=monday" })
   monday?: CreateNetworkGroupPolicyRequestBodySchedulingMonday;
 
-  @Metadata({ data: "json, name=saturday" })
+  @SpeakeasyMetadata({ data: "json, name=saturday" })
   saturday?: CreateNetworkGroupPolicyRequestBodySchedulingSaturday;
 
-  @Metadata({ data: "json, name=sunday" })
+  @SpeakeasyMetadata({ data: "json, name=sunday" })
   sunday?: CreateNetworkGroupPolicyRequestBodySchedulingSunday;
 
-  @Metadata({ data: "json, name=thursday" })
+  @SpeakeasyMetadata({ data: "json, name=thursday" })
   thursday?: CreateNetworkGroupPolicyRequestBodySchedulingThursday;
 
-  @Metadata({ data: "json, name=tuesday" })
+  @SpeakeasyMetadata({ data: "json, name=tuesday" })
   tuesday?: CreateNetworkGroupPolicyRequestBodySchedulingTuesday;
 
-  @Metadata({ data: "json, name=wednesday" })
+  @SpeakeasyMetadata({ data: "json, name=wednesday" })
   wednesday?: CreateNetworkGroupPolicyRequestBodySchedulingWednesday;
 }
 
 export enum CreateNetworkGroupPolicyRequestBodySplashAuthSettingsEnum {
-    NetworkDefault = "network default"
-,    Bypass = "bypass"
+    NetworkDefault = "network default",
+    Bypass = "bypass"
 }
 
 export enum CreateNetworkGroupPolicyRequestBodyVlanTaggingSettingsEnum {
-    NetworkDefault = "network default"
-,    Ignore = "ignore"
-,    Custom = "custom"
+    NetworkDefault = "network default",
+    Ignore = "ignore",
+    Custom = "custom"
 }
 
 
@@ -449,57 +450,57 @@ export enum CreateNetworkGroupPolicyRequestBodyVlanTaggingSettingsEnum {
  * The VLAN tagging settings for your group policy. Only available if your network has a wireless configuration.
 **/
 export class CreateNetworkGroupPolicyRequestBodyVlanTagging extends SpeakeasyBase {
-  @Metadata({ data: "json, name=settings" })
+  @SpeakeasyMetadata({ data: "json, name=settings" })
   settings?: CreateNetworkGroupPolicyRequestBodyVlanTaggingSettingsEnum;
 
-  @Metadata({ data: "json, name=vlanId" })
+  @SpeakeasyMetadata({ data: "json, name=vlanId" })
   vlanId?: string;
 }
 
 
 export class CreateNetworkGroupPolicyRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bandwidth" })
+  @SpeakeasyMetadata({ data: "json, name=bandwidth" })
   bandwidth?: CreateNetworkGroupPolicyRequestBodyBandwidth;
 
-  @Metadata({ data: "json, name=bonjourForwarding" })
+  @SpeakeasyMetadata({ data: "json, name=bonjourForwarding" })
   bonjourForwarding?: CreateNetworkGroupPolicyRequestBodyBonjourForwarding;
 
-  @Metadata({ data: "json, name=contentFiltering" })
+  @SpeakeasyMetadata({ data: "json, name=contentFiltering" })
   contentFiltering?: CreateNetworkGroupPolicyRequestBodyContentFiltering;
 
-  @Metadata({ data: "json, name=firewallAndTrafficShaping" })
+  @SpeakeasyMetadata({ data: "json, name=firewallAndTrafficShaping" })
   firewallAndTrafficShaping?: CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShaping;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=scheduling" })
+  @SpeakeasyMetadata({ data: "json, name=scheduling" })
   scheduling?: CreateNetworkGroupPolicyRequestBodyScheduling;
 
-  @Metadata({ data: "json, name=splashAuthSettings" })
+  @SpeakeasyMetadata({ data: "json, name=splashAuthSettings" })
   splashAuthSettings?: CreateNetworkGroupPolicyRequestBodySplashAuthSettingsEnum;
 
-  @Metadata({ data: "json, name=vlanTagging" })
+  @SpeakeasyMetadata({ data: "json, name=vlanTagging" })
   vlanTagging?: CreateNetworkGroupPolicyRequestBodyVlanTagging;
 }
 
 
 export class CreateNetworkGroupPolicyRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CreateNetworkGroupPolicyPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateNetworkGroupPolicyRequestBody;
 }
 
 
 export class CreateNetworkGroupPolicyResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createNetworkGroupPolicy201ApplicationJsonObject?: Map<string, any>;
 }

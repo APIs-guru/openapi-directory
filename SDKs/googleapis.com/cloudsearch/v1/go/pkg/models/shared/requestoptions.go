@@ -1,5 +1,7 @@
 package shared
 
+// RequestOptions
+// Shared request options for all RPC methods.
 type RequestOptions struct {
 	DebugOptions        *DebugOptions `json:"debugOptions,omitempty"`
 	LanguageCode        *string       `json:"languageCode,omitempty"`

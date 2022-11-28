@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum VideoTargetingExcludedPositionTypesEnum {
-    PositionTypeUnspecified = "POSITION_TYPE_UNSPECIFIED"
-,    Preroll = "PREROLL"
-,    Midroll = "MIDROLL"
-,    Postroll = "POSTROLL"
+    PositionTypeUnspecified = "POSITION_TYPE_UNSPECIFIED",
+    Preroll = "PREROLL",
+    Midroll = "MIDROLL",
+    Postroll = "POSTROLL"
 }
 
 export enum VideoTargetingTargetedPositionTypesEnum {
-    PositionTypeUnspecified = "POSITION_TYPE_UNSPECIFIED"
-,    Preroll = "PREROLL"
-,    Midroll = "MIDROLL"
-,    Postroll = "POSTROLL"
+    PositionTypeUnspecified = "POSITION_TYPE_UNSPECIFIED",
+    Preroll = "PREROLL",
+    Midroll = "MIDROLL",
+    Postroll = "POSTROLL"
 }
 
 
@@ -20,9 +21,9 @@ export enum VideoTargetingTargetedPositionTypesEnum {
  * Represents targeting information about video.
 **/
 export class VideoTargeting extends SpeakeasyBase {
-  @Metadata({ data: "json, name=excludedPositionTypes" })
+  @SpeakeasyMetadata({ data: "json, name=excludedPositionTypes" })
   excludedPositionTypes?: VideoTargetingExcludedPositionTypesEnum[];
 
-  @Metadata({ data: "json, name=targetedPositionTypes" })
+  @SpeakeasyMetadata({ data: "json, name=targetedPositionTypes" })
   targetedPositionTypes?: VideoTargetingTargetedPositionTypesEnum[];
 }

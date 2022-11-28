@@ -1,14 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import filtercondition_enum
-from . import operationfiltername_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class OperationFilter:
-    condition: Optional[filtercondition_enum.FilterConditionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Condition' }})
-    name: operationfiltername_enum.OperationFilterNameEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
-    values: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Values' }})
+    r"""OperationFilter
+    A complex type that lets you select the operations that you want to list.
+    """
+    
+    name: OperationFilterNameEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
+    values: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Values') }})
+    condition: Optional[FilterConditionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Condition') }})
     

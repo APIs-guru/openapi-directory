@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ReferencesAircraftByAircraftCodeGetPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=aircraftCode" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=aircraftCode" })
   aircraftCode: string;
 }
 
 
 export class ReferencesAircraftByAircraftCodeGetQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: string;
 }
 
 
 export class ReferencesAircraftByAircraftCodeGetHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Accept" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept" })
   accept: string;
 }
 
 
 export class ReferencesAircraftByAircraftCodeGetSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   auth: shared.SchemeAuth;
 }
 
 
 export class ReferencesAircraftByAircraftCodeGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ReferencesAircraftByAircraftCodeGetPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ReferencesAircraftByAircraftCodeGetQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: ReferencesAircraftByAircraftCodeGetHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: ReferencesAircraftByAircraftCodeGetSecurity;
 }
 
 
 export class ReferencesAircraftByAircraftCodeGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   referencesAircraftByAircraftCodeGet200ApplicationJsonObject?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

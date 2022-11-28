@@ -1,6 +1,7 @@
 
 
+
 export enum AccessTypeEnum {
-    Public = "public"
-,    Private = "private"
+    Public = "public",
+    Private = "private"
 }

@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 
-
-export class KeyRegisterRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/jwt" })
-  request: Uint8Array;
-}
 
 
 export class KeyRegister201ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=secret" })
+  @SpeakeasyMetadata({ data: "json, name=secret" })
   secret?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 }
 
 
+export class KeyRegisterRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/jwt" })
+  request: Uint8Array;
+}
+
+
 export class KeyRegisterResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   keyRegister201ApplicationJsonObject?: KeyRegister201ApplicationJson;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// AssociatedGateway
+// Information about the associated gateway.
 type AssociatedGateway struct {
 	ID           *string          `json:"id,omitempty"`
 	OwnerAccount *string          `json:"ownerAccount,omitempty"`

@@ -1,46 +1,47 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateNetworkSyslogServersPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
 
 export class UpdateNetworkSyslogServersRequestBodyServers extends SpeakeasyBase {
-  @Metadata({ data: "json, name=host" })
+  @SpeakeasyMetadata({ data: "json, name=host" })
   host: string;
 
-  @Metadata({ data: "json, name=port" })
+  @SpeakeasyMetadata({ data: "json, name=port" })
   port: number;
 
-  @Metadata({ data: "json, name=roles" })
+  @SpeakeasyMetadata({ data: "json, name=roles" })
   roles: string[];
 }
 
 
 export class UpdateNetworkSyslogServersRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=servers", elemType: operations.UpdateNetworkSyslogServersRequestBodyServers })
+  @SpeakeasyMetadata({ data: "json, name=servers", elemType: UpdateNetworkSyslogServersRequestBodyServers })
   servers: UpdateNetworkSyslogServersRequestBodyServers[];
 }
 
 
 export class UpdateNetworkSyslogServersRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateNetworkSyslogServersPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdateNetworkSyslogServersRequestBody;
 }
 
 
 export class UpdateNetworkSyslogServersResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateNetworkSyslogServers200ApplicationJsonObject?: Map<string, any>;
 }

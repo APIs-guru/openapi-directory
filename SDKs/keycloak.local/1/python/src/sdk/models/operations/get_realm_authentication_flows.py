@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class GetRealmAuthenticationFlowsPathParams:
-    realm: str = field(default=None, metadata={'path_param': { 'field_name': 'realm', 'style': 'simple', 'explode': False }})
+    realm: str = field(metadata={'path_param': { 'field_name': 'realm', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetRealmAuthenticationFlowsRequest:
-    path_params: GetRealmAuthenticationFlowsPathParams = field(default=None)
+    path_params: GetRealmAuthenticationFlowsPathParams = field()
     
 
 @dataclass
 class GetRealmAuthenticationFlowsResponse:
+    content_type: str = field()
+    status_code: int = field()
     authentication_flow_representations: Optional[List[shared.AuthenticationFlowRepresentation]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

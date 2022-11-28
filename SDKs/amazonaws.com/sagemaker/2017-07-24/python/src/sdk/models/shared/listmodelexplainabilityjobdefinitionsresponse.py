@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import monitoringjobdefinitionsummary
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListModelExplainabilityJobDefinitionsResponse:
-    job_definition_summaries: List[monitoringjobdefinitionsummary.MonitoringJobDefinitionSummary] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'JobDefinitionSummaries' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
+    job_definition_summaries: List[MonitoringJobDefinitionSummary] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('JobDefinitionSummaries') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
     

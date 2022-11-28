@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// AssociationExecution
+// Includes information about the specified association.
 type AssociationExecution struct {
 	AssociationID         *string    `json:"AssociationId,omitempty"`
 	AssociationVersion    *string    `json:"AssociationVersion,omitempty"`

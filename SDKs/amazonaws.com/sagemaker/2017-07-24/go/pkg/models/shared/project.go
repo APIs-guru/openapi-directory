@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Project
+// The properties of a project as returned by the Search API.
 type Project struct {
 	CreatedBy                               *UserContext                             `json:"CreatedBy,omitempty"`
 	CreationTime                            *time.Time                               `json:"CreationTime,omitempty"`

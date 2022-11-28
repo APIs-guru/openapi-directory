@@ -7,6 +7,8 @@ const (
 	CreativeGroupAssignmentCreativeGroupNumberEnumCreativeGroupTwo CreativeGroupAssignmentCreativeGroupNumberEnum = "CREATIVE_GROUP_TWO"
 )
 
+// CreativeGroupAssignment
+// Creative Group Assignment.
 type CreativeGroupAssignment struct {
 	CreativeGroupID     *string                                         `json:"creativeGroupId,omitempty"`
 	CreativeGroupNumber *CreativeGroupAssignmentCreativeGroupNumberEnum `json:"creativeGroupNumber,omitempty"`

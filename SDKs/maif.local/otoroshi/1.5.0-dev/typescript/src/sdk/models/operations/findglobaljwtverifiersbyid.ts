@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class FindGlobalJwtVerifiersByIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=verifierId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=verifierId" })
   verifierId: string;
 }
 
 
 export class FindGlobalJwtVerifiersByIdSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   otoroshiAuth: shared.SchemeOtoroshiAuth;
 }
 
 
 export class FindGlobalJwtVerifiersByIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: FindGlobalJwtVerifiersByIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: FindGlobalJwtVerifiersByIdSecurity;
 }
 
 
 export class FindGlobalJwtVerifiersByIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   globalJwtVerifier?: shared.GlobalJwtVerifier;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

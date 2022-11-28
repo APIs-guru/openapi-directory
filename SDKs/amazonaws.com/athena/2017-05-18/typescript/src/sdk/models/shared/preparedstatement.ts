@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PreparedStatement
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A prepared SQL statement for use with Athena.
 **/
 export class PreparedStatement extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=LastModifiedTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedTime" })
   lastModifiedTime?: Date;
 
-  @Metadata({ data: "json, name=QueryStatement" })
+  @SpeakeasyMetadata({ data: "json, name=QueryStatement" })
   queryStatement?: string;
 
-  @Metadata({ data: "json, name=StatementName" })
+  @SpeakeasyMetadata({ data: "json, name=StatementName" })
   statementName?: string;
 
-  @Metadata({ data: "json, name=WorkGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=WorkGroupName" })
   workGroupName?: string;
 }

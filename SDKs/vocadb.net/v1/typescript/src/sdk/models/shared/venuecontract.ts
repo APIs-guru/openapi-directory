@@ -1,47 +1,47 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OptionalGeoPointContract } from "./optionalgeopointcontract";
 import { WebLinkContract } from "./weblinkcontract";
 
+
 export enum VenueContractStatusEnum {
-    Draft = "Draft"
-,    Finished = "Finished"
-,    Approved = "Approved"
-,    Locked = "Locked"
+    Draft = "Draft",
+    Finished = "Finished",
+    Approved = "Approved",
+    Locked = "Locked"
 }
 
 
 export class VenueContract extends SpeakeasyBase {
-  @Metadata({ data: "json, name=additionalNames" })
+  @SpeakeasyMetadata({ data: "json, name=additionalNames" })
   additionalNames?: string;
 
-  @Metadata({ data: "json, name=address" })
+  @SpeakeasyMetadata({ data: "json, name=address" })
   address?: string;
 
-  @Metadata({ data: "json, name=addressCountryCode" })
+  @SpeakeasyMetadata({ data: "json, name=addressCountryCode" })
   addressCountryCode?: string;
 
-  @Metadata({ data: "json, name=coordinates" })
+  @SpeakeasyMetadata({ data: "json, name=coordinates" })
   coordinates?: OptionalGeoPointContract;
 
-  @Metadata({ data: "json, name=deleted" })
+  @SpeakeasyMetadata({ data: "json, name=deleted" })
   deleted?: boolean;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: VenueContractStatusEnum;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: number;
 
-  @Metadata({ data: "json, name=webLinks", elemType: shared.WebLinkContract })
+  @SpeakeasyMetadata({ data: "json, name=webLinks", elemType: WebLinkContract })
   webLinks?: WebLinkContract[];
 }

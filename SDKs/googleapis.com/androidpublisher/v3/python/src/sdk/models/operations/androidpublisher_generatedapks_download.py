@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AndroidpublisherGeneratedapksDownloadPathParams:
-    download_id: str = field(default=None, metadata={'path_param': { 'field_name': 'downloadId', 'style': 'simple', 'explode': False }})
-    package_name: str = field(default=None, metadata={'path_param': { 'field_name': 'packageName', 'style': 'simple', 'explode': False }})
-    version_code: int = field(default=None, metadata={'path_param': { 'field_name': 'versionCode', 'style': 'simple', 'explode': False }})
+    download_id: str = field(metadata={'path_param': { 'field_name': 'downloadId', 'style': 'simple', 'explode': False }})
+    package_name: str = field(metadata={'path_param': { 'field_name': 'packageName', 'style': 'simple', 'explode': False }})
+    version_code: int = field(metadata={'path_param': { 'field_name': 'versionCode', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,19 +28,19 @@ class AndroidpublisherGeneratedapksDownloadQueryParams:
 
 @dataclass
 class AndroidpublisherGeneratedapksDownloadSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AndroidpublisherGeneratedapksDownloadRequest:
-    path_params: AndroidpublisherGeneratedapksDownloadPathParams = field(default=None)
-    query_params: AndroidpublisherGeneratedapksDownloadQueryParams = field(default=None)
-    security: AndroidpublisherGeneratedapksDownloadSecurity = field(default=None)
+    path_params: AndroidpublisherGeneratedapksDownloadPathParams = field()
+    query_params: AndroidpublisherGeneratedapksDownloadQueryParams = field()
+    security: AndroidpublisherGeneratedapksDownloadSecurity = field()
     
 
 @dataclass
 class AndroidpublisherGeneratedapksDownloadResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

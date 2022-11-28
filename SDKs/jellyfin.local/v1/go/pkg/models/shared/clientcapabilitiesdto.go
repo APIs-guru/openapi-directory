@@ -1,5 +1,7 @@
 package shared
 
+// ClientCapabilitiesDto
+// Client capabilities dto.
 type ClientCapabilitiesDto struct {
 	AppStoreURL                  *string                  `json:"AppStoreUrl,omitempty"`
 	DeviceProfile                *DeviceProfile           `json:"DeviceProfile,omitempty"`

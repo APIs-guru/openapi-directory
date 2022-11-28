@@ -5,12 +5,12 @@ from sdk.models import shared
 
 @dataclass
 class ProcessorApexProcessorTokenCreateRequest:
-    request: shared.ProcessorApexProcessorTokenCreateRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.ProcessorApexProcessorTokenCreateRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ProcessorApexProcessorTokenCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     processor_token_create_response: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

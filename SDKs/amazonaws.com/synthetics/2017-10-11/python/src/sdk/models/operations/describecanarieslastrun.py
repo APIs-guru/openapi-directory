@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -24,22 +28,22 @@ class DescribeCanariesLastRunHeaders:
 @dataclass_json
 @dataclass
 class DescribeCanariesLastRunRequestBody:
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MaxResults' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MaxResults') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
     
 
 @dataclass
 class DescribeCanariesLastRunRequest:
-    query_params: DescribeCanariesLastRunQueryParams = field(default=None)
-    headers: DescribeCanariesLastRunHeaders = field(default=None)
-    request: DescribeCanariesLastRunRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: DescribeCanariesLastRunHeaders = field()
+    query_params: DescribeCanariesLastRunQueryParams = field()
+    request: DescribeCanariesLastRunRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DescribeCanariesLastRunResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     describe_canaries_last_run_response: Optional[shared.DescribeCanariesLastRunResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

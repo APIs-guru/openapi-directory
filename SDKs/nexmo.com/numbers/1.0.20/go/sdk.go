@@ -11,7 +11,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://rest.nexmo.com",
 }
 
@@ -19,10 +19,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://developer.nexmo.com/numbers/overview - Numbers product documentation on the Vonage Developer Portal
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -33,33 +38,56 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// BuyANumber - Buy a number
+// Request to purchase a specific inbound number.
 func (s *SDK) BuyANumber(ctx context.Context, request operations.BuyANumberRequest) (*operations.BuyANumberResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/number/buy"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -77,7 +105,7 @@ func (s *SDK) BuyANumber(ctx context.Context, request operations.BuyANumberReque
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -148,8 +176,10 @@ func (s *SDK) BuyANumber(ctx context.Context, request operations.BuyANumberReque
 	return res, nil
 }
 
+// CancelANumber - Cancel a number
+// Cancel your subscription for a specific inbound number.
 func (s *SDK) CancelANumber(ctx context.Context, request operations.CancelANumberRequest) (*operations.CancelANumberResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/number/cancel"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -167,7 +197,7 @@ func (s *SDK) CancelANumber(ctx context.Context, request operations.CancelANumbe
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -221,8 +251,10 @@ func (s *SDK) CancelANumber(ctx context.Context, request operations.CancelANumbe
 	return res, nil
 }
 
+// GetAvailableNumbers - Search available numbers
+// Retrieve inbound numbers that are available for the specified country.
 func (s *SDK) GetAvailableNumbers(ctx context.Context, request operations.GetAvailableNumbersRequest) (*operations.GetAvailableNumbersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/number/search"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -232,7 +264,7 @@ func (s *SDK) GetAvailableNumbers(ctx context.Context, request operations.GetAva
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -286,8 +318,10 @@ func (s *SDK) GetAvailableNumbers(ctx context.Context, request operations.GetAva
 	return res, nil
 }
 
+// GetOwnedNumbers - List the numbers you own
+// Retrieve all the inbound numbers associated with your Vonage account.
 func (s *SDK) GetOwnedNumbers(ctx context.Context, request operations.GetOwnedNumbersRequest) (*operations.GetOwnedNumbersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account/numbers"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -297,7 +331,7 @@ func (s *SDK) GetOwnedNumbers(ctx context.Context, request operations.GetOwnedNu
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -351,8 +385,10 @@ func (s *SDK) GetOwnedNumbers(ctx context.Context, request operations.GetOwnedNu
 	return res, nil
 }
 
+// UpdateANumber - Update a number
+// Change the behaviour of a number that you own.
 func (s *SDK) UpdateANumber(ctx context.Context, request operations.UpdateANumberRequest) (*operations.UpdateANumberResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/number/update"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -370,7 +406,7 @@ func (s *SDK) UpdateANumber(ctx context.Context, request operations.UpdateANumbe
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

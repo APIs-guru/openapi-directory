@@ -1,10 +1,11 @@
 
 
+
 export enum ReplayStateEnum {
-    Starting = "STARTING"
-,    Running = "RUNNING"
-,    Cancelling = "CANCELLING"
-,    Completed = "COMPLETED"
-,    Cancelled = "CANCELLED"
-,    Failed = "FAILED"
+    Starting = "STARTING",
+    Running = "RUNNING",
+    Cancelling = "CANCELLING",
+    Completed = "COMPLETED",
+    Cancelled = "CANCELLED",
+    Failed = "FAILED"
 }

@@ -1,20 +1,20 @@
 from dataclasses import dataclass, field
-
+from typing import Optional
 
 
 @dataclass
 class SearchPathwaysUsingGetPathParams:
-    search_string: str = field(default=None, metadata={'path_param': { 'field_name': 'searchString', 'style': 'simple', 'explode': False }})
+    search_string: str = field(metadata={'path_param': { 'field_name': 'searchString', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class SearchPathwaysUsingGetRequest:
-    path_params: SearchPathwaysUsingGetPathParams = field(default=None)
+    path_params: SearchPathwaysUsingGetPathParams = field()
     
 
 @dataclass
 class SearchPathwaysUsingGetResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

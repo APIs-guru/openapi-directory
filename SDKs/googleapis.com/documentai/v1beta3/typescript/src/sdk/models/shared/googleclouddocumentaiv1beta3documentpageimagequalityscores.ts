@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDocumentaiV1beta3DocumentPageImageQualityScoresDetectedDefect } from "./googleclouddocumentaiv1beta3documentpageimagequalityscoresdetecteddefect";
+
 
 
 // GoogleCloudDocumentaiV1beta3DocumentPageImageQualityScores
@@ -8,9 +8,9 @@ import { GoogleCloudDocumentaiV1beta3DocumentPageImageQualityScoresDetectedDefec
  * Image Quality Scores for the page image
 **/
 export class GoogleCloudDocumentaiV1beta3DocumentPageImageQualityScores extends SpeakeasyBase {
-  @Metadata({ data: "json, name=detectedDefects", elemType: shared.GoogleCloudDocumentaiV1beta3DocumentPageImageQualityScoresDetectedDefect })
+  @SpeakeasyMetadata({ data: "json, name=detectedDefects", elemType: GoogleCloudDocumentaiV1beta3DocumentPageImageQualityScoresDetectedDefect })
   detectedDefects?: GoogleCloudDocumentaiV1beta3DocumentPageImageQualityScoresDetectedDefect[];
 
-  @Metadata({ data: "json, name=qualityScore" })
+  @SpeakeasyMetadata({ data: "json, name=qualityScore" })
   qualityScore?: number;
 }

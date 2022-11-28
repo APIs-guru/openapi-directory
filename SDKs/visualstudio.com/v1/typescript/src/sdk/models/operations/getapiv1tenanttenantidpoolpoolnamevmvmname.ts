@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetApiV1TenantTenantIdPoolPoolNameVmVmNamePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=poolName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=poolName" })
   poolName: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=tenantId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=tenantId" })
   tenantId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=vmName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=vmName" })
   vmName: string;
 }
 
 
 export class GetApiV1TenantTenantIdPoolPoolNameVmVmNameRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetApiV1TenantTenantIdPoolPoolNameVmVmNamePathParams;
 }
 
 
 export class GetApiV1TenantTenantIdPoolPoolNameVmVmNameResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   vmResult?: shared.VmResult;
 }

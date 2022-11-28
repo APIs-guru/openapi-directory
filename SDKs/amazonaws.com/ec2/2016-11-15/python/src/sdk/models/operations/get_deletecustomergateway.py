@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteCustomerGatewayActionEnum(str, Enum):
     DELETE_CUSTOMER_GATEWAY = "DeleteCustomerGateway"
@@ -10,10 +14,10 @@ class GetDeleteCustomerGatewayVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteCustomerGatewayQueryParams:
-    action: GetDeleteCustomerGatewayActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    customer_gateway_id: str = field(default=None, metadata={'query_param': { 'field_name': 'CustomerGatewayId', 'style': 'form', 'explode': True }})
+    action: GetDeleteCustomerGatewayActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    customer_gateway_id: str = field(metadata={'query_param': { 'field_name': 'CustomerGatewayId', 'style': 'form', 'explode': True }})
+    version: GetDeleteCustomerGatewayVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    version: GetDeleteCustomerGatewayVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,12 +33,12 @@ class GetDeleteCustomerGatewayHeaders:
 
 @dataclass
 class GetDeleteCustomerGatewayRequest:
-    query_params: GetDeleteCustomerGatewayQueryParams = field(default=None)
-    headers: GetDeleteCustomerGatewayHeaders = field(default=None)
+    headers: GetDeleteCustomerGatewayHeaders = field()
+    query_params: GetDeleteCustomerGatewayQueryParams = field()
     
 
 @dataclass
 class GetDeleteCustomerGatewayResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

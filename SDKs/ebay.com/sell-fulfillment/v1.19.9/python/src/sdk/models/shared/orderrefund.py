@@ -1,15 +1,23 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import amount
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class OrderRefund:
-    amount: Optional[amount.Amount] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'amount' }})
-    refund_date: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'refundDate' }})
-    refund_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'refundId' }})
-    refund_reference_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'refundReferenceId' }})
-    refund_status: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'refundStatus' }})
+    r"""OrderRefund
+    This type contains information about a refund issued for an order. This does not include line item level refunds.
+    """
+    
+    amount: Optional[Amount] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('amount') }})
+    refund_date: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('refundDate') }})
+    refund_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('refundId') }})
+    refund_reference_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('refundReferenceId') }})
+    refund_status: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('refundStatus') }})
     

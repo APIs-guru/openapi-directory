@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DeleteRegexPatternSetRequest = /** @class */ (function (_super) {
     __extends(DeleteRegexPatternSetRequest, _super);
     function DeleteRegexPatternSetRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ChangeToken" }),
+        SpeakeasyMetadata({ data: "json, name=ChangeToken" }),
         __metadata("design:type", String)
     ], DeleteRegexPatternSetRequest.prototype, "changeToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=RegexPatternSetId" }),
+        SpeakeasyMetadata({ data: "json, name=RegexPatternSetId" }),
         __metadata("design:type", String)
     ], DeleteRegexPatternSetRequest.prototype, "regexPatternSetId", void 0);
     return DeleteRegexPatternSetRequest;

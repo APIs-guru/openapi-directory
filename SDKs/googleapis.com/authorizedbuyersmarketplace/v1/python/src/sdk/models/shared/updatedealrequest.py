@@ -1,12 +1,20 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import deal
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
-class UpdateDealRequest:
-    deal: Optional[deal.Deal] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deal' }})
-    update_mask: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updateMask' }})
+class UpdateDealRequestInput:
+    r"""UpdateDealRequestInput
+    Request message for updating the deal at the given revision number.
+    """
+    
+    deal: Optional[DealInput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('deal') }})
+    update_mask: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('updateMask') }})
     

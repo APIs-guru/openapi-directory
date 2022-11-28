@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var ProjectedPlayerGameStatsByDateWInjuriesDfsSalariesFormatEnum;
 (function (ProjectedPlayerGameStatsByDateWInjuriesDfsSalariesFormatEnum) {
     ProjectedPlayerGameStatsByDateWInjuriesDfsSalariesFormatEnum["Xml"] = "XML";
@@ -34,11 +34,11 @@ var ProjectedPlayerGameStatsByDateWInjuriesDfsSalariesPathParams = /** @class */
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=date" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=date" }),
         __metadata("design:type", String)
     ], ProjectedPlayerGameStatsByDateWInjuriesDfsSalariesPathParams.prototype, "date", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=format" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" }),
         __metadata("design:type", String)
     ], ProjectedPlayerGameStatsByDateWInjuriesDfsSalariesPathParams.prototype, "format", void 0);
     return ProjectedPlayerGameStatsByDateWInjuriesDfsSalariesPathParams;
@@ -50,7 +50,7 @@ var ProjectedPlayerGameStatsByDateWInjuriesDfsSalariesRequest = /** @class */ (f
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProjectedPlayerGameStatsByDateWInjuriesDfsSalariesPathParams)
     ], ProjectedPlayerGameStatsByDateWInjuriesDfsSalariesRequest.prototype, "pathParams", void 0);
     return ProjectedPlayerGameStatsByDateWInjuriesDfsSalariesRequest;
@@ -62,15 +62,15 @@ var ProjectedPlayerGameStatsByDateWInjuriesDfsSalariesResponse = /** @class */ (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProjectedPlayerGameStatsByDateWInjuriesDfsSalariesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Array)
     ], ProjectedPlayerGameStatsByDateWInjuriesDfsSalariesResponse.prototype, "playerGameProjections", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProjectedPlayerGameStatsByDateWInjuriesDfsSalariesResponse.prototype, "statusCode", void 0);
     return ProjectedPlayerGameStatsByDateWInjuriesDfsSalariesResponse;

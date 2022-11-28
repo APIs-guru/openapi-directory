@@ -5,7 +5,7 @@ import (
 )
 
 type AddBlobRequest struct {
-	Request shared.Blob `request:"mediaType=application/json"`
+	Request shared.BlobInput `request:"mediaType=application/json"`
 }
 
 type AddBlobResponse struct {

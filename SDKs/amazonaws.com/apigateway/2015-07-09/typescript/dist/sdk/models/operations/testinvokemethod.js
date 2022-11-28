@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var TestInvokeMethodPathParams = /** @class */ (function (_super) {
     __extends(TestInvokeMethodPathParams, _super);
@@ -30,15 +30,15 @@ var TestInvokeMethodPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=http_method" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=http_method" }),
         __metadata("design:type", String)
     ], TestInvokeMethodPathParams.prototype, "httpMethod", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=resource_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=resource_id" }),
         __metadata("design:type", String)
     ], TestInvokeMethodPathParams.prototype, "resourceId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=restapi_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=restapi_id" }),
         __metadata("design:type", String)
     ], TestInvokeMethodPathParams.prototype, "restapiId", void 0);
     return TestInvokeMethodPathParams;
@@ -50,31 +50,31 @@ var TestInvokeMethodHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], TestInvokeMethodHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], TestInvokeMethodHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], TestInvokeMethodHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], TestInvokeMethodHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], TestInvokeMethodHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], TestInvokeMethodHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], TestInvokeMethodHeaders.prototype, "xAmzSignedHeaders", void 0);
     return TestInvokeMethodHeaders;
@@ -86,27 +86,27 @@ var TestInvokeMethodRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=body" }),
+        SpeakeasyMetadata({ data: "json, name=body" }),
         __metadata("design:type", String)
     ], TestInvokeMethodRequestBody.prototype, "body", void 0);
     __decorate([
-        Metadata({ data: "json, name=clientCertificateId" }),
+        SpeakeasyMetadata({ data: "json, name=clientCertificateId" }),
         __metadata("design:type", String)
     ], TestInvokeMethodRequestBody.prototype, "clientCertificateId", void 0);
     __decorate([
-        Metadata({ data: "json, name=headers" }),
+        SpeakeasyMetadata({ data: "json, name=headers" }),
         __metadata("design:type", Map)
     ], TestInvokeMethodRequestBody.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "json, name=multiValueHeaders" }),
+        SpeakeasyMetadata({ data: "json, name=multiValueHeaders" }),
         __metadata("design:type", Map)
     ], TestInvokeMethodRequestBody.prototype, "multiValueHeaders", void 0);
     __decorate([
-        Metadata({ data: "json, name=pathWithQueryString" }),
+        SpeakeasyMetadata({ data: "json, name=pathWithQueryString" }),
         __metadata("design:type", String)
     ], TestInvokeMethodRequestBody.prototype, "pathWithQueryString", void 0);
     __decorate([
-        Metadata({ data: "json, name=stageVariables" }),
+        SpeakeasyMetadata({ data: "json, name=stageVariables" }),
         __metadata("design:type", Map)
     ], TestInvokeMethodRequestBody.prototype, "stageVariables", void 0);
     return TestInvokeMethodRequestBody;
@@ -118,15 +118,15 @@ var TestInvokeMethodRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", TestInvokeMethodPathParams)
     ], TestInvokeMethodRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", TestInvokeMethodHeaders)
     ], TestInvokeMethodRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", TestInvokeMethodRequestBody)
     ], TestInvokeMethodRequest.prototype, "request", void 0);
     return TestInvokeMethodRequest;
@@ -138,31 +138,31 @@ var TestInvokeMethodResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], TestInvokeMethodResponse.prototype, "badRequestException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], TestInvokeMethodResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], TestInvokeMethodResponse.prototype, "notFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], TestInvokeMethodResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.TestInvokeMethodResponse)
     ], TestInvokeMethodResponse.prototype, "testInvokeMethodResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], TestInvokeMethodResponse.prototype, "tooManyRequestsException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], TestInvokeMethodResponse.prototype, "unauthorizedException", void 0);
     return TestInvokeMethodResponse;

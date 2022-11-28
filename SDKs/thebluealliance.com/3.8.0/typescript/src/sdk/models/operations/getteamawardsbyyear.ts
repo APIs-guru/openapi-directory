@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetTeamAwardsByYearPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=team_key" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=team_key" })
   teamKey: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=year" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=year" })
   year: number;
 }
 
 
 export class GetTeamAwardsByYearHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=If-Modified-Since" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=If-Modified-Since" })
   ifModifiedSince?: string;
 }
 
 
 export class GetTeamAwardsByYearSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   apiKey: shared.SchemeApiKey;
 }
 
 
 export class GetTeamAwardsByYearRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetTeamAwardsByYearPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetTeamAwardsByYearHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetTeamAwardsByYearSecurity;
 }
 
 
 export class GetTeamAwardsByYearResponse extends SpeakeasyBase {
-  @Metadata({ elemType: shared.Award })
+  @SpeakeasyMetadata({ elemType: shared.Award })
   awards?: shared.Award[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

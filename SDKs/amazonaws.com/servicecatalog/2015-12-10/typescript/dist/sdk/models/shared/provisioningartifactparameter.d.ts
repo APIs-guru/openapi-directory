@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ParameterConstraints } from "./parameterconstraints";
 /**
  * Information about a parameter used to provision a product.

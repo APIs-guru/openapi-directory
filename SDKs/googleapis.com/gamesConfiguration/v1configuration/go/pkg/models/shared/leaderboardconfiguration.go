@@ -8,6 +8,8 @@ const (
 	LeaderboardConfigurationScoreOrderEnumSmallerIsBetter       LeaderboardConfigurationScoreOrderEnum = "SMALLER_IS_BETTER"
 )
 
+// LeaderboardConfiguration
+// An leaderboard configuration resource.
 type LeaderboardConfiguration struct {
 	Draft      *LeaderboardConfigurationDetail         `json:"draft,omitempty"`
 	ID         *string                                 `json:"id,omitempty"`

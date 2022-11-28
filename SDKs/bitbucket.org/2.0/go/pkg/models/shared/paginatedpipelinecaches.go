@@ -1,5 +1,7 @@
 package shared
 
+// PaginatedPipelineCaches
+// A paged list of pipeline caches
 type PaginatedPipelineCaches struct {
 	Next     *string                  `json:"next,omitempty"`
 	Page     *int64                   `json:"page,omitempty"`

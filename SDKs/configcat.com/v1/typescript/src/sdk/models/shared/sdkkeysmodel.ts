@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 
 
-export class SdkKeysModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=primary" })
+
+export class SDKKeysModel extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=primary" })
   primary?: string;
 
-  @Metadata({ data: "json, name=secondary" })
+  @SpeakeasyMetadata({ data: "json, name=secondary" })
   secondary?: string;
 }

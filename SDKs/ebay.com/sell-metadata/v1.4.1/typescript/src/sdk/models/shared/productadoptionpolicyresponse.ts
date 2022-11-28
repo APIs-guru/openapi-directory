@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProductAdoptionPolicy } from "./productadoptionpolicy";
 import { Error } from "./error";
+
 
 
 // ProductAdoptionPolicyResponse
@@ -9,9 +9,9 @@ import { Error } from "./error";
  * This is the response object returned by a call to getProductAdoptionPolicies.
 **/
 export class ProductAdoptionPolicyResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=productAdoptionPolicies", elemType: shared.ProductAdoptionPolicy })
+  @SpeakeasyMetadata({ data: "json, name=productAdoptionPolicies", elemType: ProductAdoptionPolicy })
   productAdoptionPolicies?: ProductAdoptionPolicy[];
 
-  @Metadata({ data: "json, name=warnings", elemType: shared.Error })
+  @SpeakeasyMetadata({ data: "json, name=warnings", elemType: Error })
   warnings?: Error[];
 }

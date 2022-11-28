@@ -30,7 +30,7 @@ type DomainsProjectsLocationsRegistrationsConfigureDNSSettingsSecurity struct {
 type DomainsProjectsLocationsRegistrationsConfigureDNSSettingsRequest struct {
 	PathParams  DomainsProjectsLocationsRegistrationsConfigureDNSSettingsPathParams
 	QueryParams DomainsProjectsLocationsRegistrationsConfigureDNSSettingsQueryParams
-	Request     *shared.ConfigureDNSSettingsRequest `request:"mediaType=application/json"`
+	Request     *shared.ConfigureDNSSettingsRequestInput `request:"mediaType=application/json"`
 	Security    DomainsProjectsLocationsRegistrationsConfigureDNSSettingsSecurity
 }
 

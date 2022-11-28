@@ -1,5 +1,7 @@
 package shared
 
+// FolderData
+// Container class for the folder API
 type FolderData struct {
 	ElectricityCounterValue *float64 `json:"ElectricityCounterValue,omitempty"`
 	ElectricityPower        *float64 `json:"ElectricityPower,omitempty"`

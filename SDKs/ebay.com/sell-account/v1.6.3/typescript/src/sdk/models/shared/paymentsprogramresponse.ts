@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PaymentsProgramResponse
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The response object containing the sellers status with regards to the specified payment program.
 **/
 export class PaymentsProgramResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=marketplaceId" })
+  @SpeakeasyMetadata({ data: "json, name=marketplaceId" })
   marketplaceId?: string;
 
-  @Metadata({ data: "json, name=paymentsProgramType" })
+  @SpeakeasyMetadata({ data: "json, name=paymentsProgramType" })
   paymentsProgramType?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 
-  @Metadata({ data: "json, name=wasPreviouslyOptedIn" })
+  @SpeakeasyMetadata({ data: "json, name=wasPreviouslyOptedIn" })
   wasPreviouslyOptedIn?: boolean;
 }

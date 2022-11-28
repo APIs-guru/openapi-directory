@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDocumentaiV1beta3DocumentEntityNormalizedValue
+// Parsed and normalized entity value.
 type GoogleCloudDocumentaiV1beta3DocumentEntityNormalizedValue struct {
 	AddressValue  *GoogleTypePostalAddress `json:"addressValue,omitempty"`
 	BooleanValue  *bool                    `json:"booleanValue,omitempty"`

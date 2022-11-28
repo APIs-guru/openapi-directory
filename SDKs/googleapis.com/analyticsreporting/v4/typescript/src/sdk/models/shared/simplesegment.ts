@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OrFiltersForSegment } from "./orfiltersforsegment";
+
 
 
 // SimpleSegment
@@ -8,6 +8,6 @@ import { OrFiltersForSegment } from "./orfiltersforsegment";
  * A Simple segment conditions consist of one or more dimension/metric conditions that can be combined.
 **/
 export class SimpleSegment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=orFiltersForSegment", elemType: shared.OrFiltersForSegment })
+  @SpeakeasyMetadata({ data: "json, name=orFiltersForSegment", elemType: OrFiltersForSegment })
   orFiltersForSegment?: OrFiltersForSegment[];
 }

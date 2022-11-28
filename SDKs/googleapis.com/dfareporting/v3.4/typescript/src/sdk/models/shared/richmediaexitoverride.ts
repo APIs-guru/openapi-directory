@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ClickThroughUrl } from "./clickthroughurl";
+
 
 
 // RichMediaExitOverride
@@ -7,12 +8,12 @@ import { ClickThroughUrl } from "./clickthroughurl";
  * Rich Media Exit Override.
 **/
 export class RichMediaExitOverride extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clickThroughUrl" })
+  @SpeakeasyMetadata({ data: "json, name=clickThroughUrl" })
   clickThroughUrl?: ClickThroughUrl;
 
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=exitId" })
+  @SpeakeasyMetadata({ data: "json, name=exitId" })
   exitId?: string;
 }

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostRevokeSnapshotAccessActionEnum(str, Enum):
     REVOKE_SNAPSHOT_ACCESS = "RevokeSnapshotAccess"
@@ -10,8 +14,8 @@ class PostRevokeSnapshotAccessVersionEnum(str, Enum):
 
 @dataclass
 class PostRevokeSnapshotAccessQueryParams:
-    action: PostRevokeSnapshotAccessActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostRevokeSnapshotAccessVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostRevokeSnapshotAccessActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostRevokeSnapshotAccessVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostRevokeSnapshotAccessHeaders:
 
 @dataclass
 class PostRevokeSnapshotAccessRequest:
-    query_params: PostRevokeSnapshotAccessQueryParams = field(default=None)
-    headers: PostRevokeSnapshotAccessHeaders = field(default=None)
+    headers: PostRevokeSnapshotAccessHeaders = field()
+    query_params: PostRevokeSnapshotAccessQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostRevokeSnapshotAccessResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

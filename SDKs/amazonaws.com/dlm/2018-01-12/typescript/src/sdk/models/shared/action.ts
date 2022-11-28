@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CrossRegionCopyAction } from "./crossregioncopyaction";
+
 
 
 // Action
@@ -8,9 +8,9 @@ import { CrossRegionCopyAction } from "./crossregioncopyaction";
  * Specifies an action for an event-based policy.
 **/
 export class Action extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CrossRegionCopy", elemType: shared.CrossRegionCopyAction })
+  @SpeakeasyMetadata({ data: "json, name=CrossRegionCopy", elemType: CrossRegionCopyAction })
   crossRegionCopy: CrossRegionCopyAction[];
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 }

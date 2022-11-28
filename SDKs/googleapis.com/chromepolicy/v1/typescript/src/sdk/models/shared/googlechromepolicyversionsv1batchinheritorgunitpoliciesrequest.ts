@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleChromePolicyVersionsV1InheritOrgUnitPolicyRequest } from "./googlechromepolicyversionsv1inheritorgunitpolicyrequest";
+
 
 
 // GoogleChromePolicyVersionsV1BatchInheritOrgUnitPoliciesRequest
@@ -8,6 +8,6 @@ import { GoogleChromePolicyVersionsV1InheritOrgUnitPolicyRequest } from "./googl
  * Request message for specifying that multiple policy values inherit their value from their parents.
 **/
 export class GoogleChromePolicyVersionsV1BatchInheritOrgUnitPoliciesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=requests", elemType: shared.GoogleChromePolicyVersionsV1InheritOrgUnitPolicyRequest })
+  @SpeakeasyMetadata({ data: "json, name=requests", elemType: GoogleChromePolicyVersionsV1InheritOrgUnitPolicyRequest })
   requests?: GoogleChromePolicyVersionsV1InheritOrgUnitPolicyRequest[];
 }

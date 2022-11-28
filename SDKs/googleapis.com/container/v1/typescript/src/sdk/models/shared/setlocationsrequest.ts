@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SetLocationsRequest
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * SetLocationsRequest sets the locations of the cluster.
 **/
 export class SetLocationsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clusterId" })
+  @SpeakeasyMetadata({ data: "json, name=clusterId" })
   clusterId?: string;
 
-  @Metadata({ data: "json, name=locations" })
+  @SpeakeasyMetadata({ data: "json, name=locations" })
   locations?: string[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=projectId" })
+  @SpeakeasyMetadata({ data: "json, name=projectId" })
   projectId?: string;
 
-  @Metadata({ data: "json, name=zone" })
+  @SpeakeasyMetadata({ data: "json, name=zone" })
   zone?: string;
 }

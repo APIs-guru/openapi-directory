@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { MappingParameters } from "./mappingparameters";
 import { RecordFormatTypeEnum } from "./recordformattypeenum";
 /**

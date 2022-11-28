@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class CreateSubscriptionDefinitionVersionPathParams:
-    subscription_definition_id: str = field(default=None, metadata={'path_param': { 'field_name': 'SubscriptionDefinitionId', 'style': 'simple', 'explode': False }})
+    subscription_definition_id: str = field(metadata={'path_param': { 'field_name': 'SubscriptionDefinitionId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -24,20 +28,20 @@ class CreateSubscriptionDefinitionVersionHeaders:
 @dataclass_json
 @dataclass
 class CreateSubscriptionDefinitionVersionRequestBody:
-    subscriptions: Optional[List[shared.Subscription]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Subscriptions' }})
+    subscriptions: Optional[List[shared.Subscription]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Subscriptions') }})
     
 
 @dataclass
 class CreateSubscriptionDefinitionVersionRequest:
-    path_params: CreateSubscriptionDefinitionVersionPathParams = field(default=None)
-    headers: CreateSubscriptionDefinitionVersionHeaders = field(default=None)
-    request: CreateSubscriptionDefinitionVersionRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateSubscriptionDefinitionVersionHeaders = field()
+    path_params: CreateSubscriptionDefinitionVersionPathParams = field()
+    request: CreateSubscriptionDefinitionVersionRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateSubscriptionDefinitionVersionResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     create_subscription_definition_version_response: Optional[shared.CreateSubscriptionDefinitionVersionResponse] = field(default=None)
-    status_code: int = field(default=None)
     

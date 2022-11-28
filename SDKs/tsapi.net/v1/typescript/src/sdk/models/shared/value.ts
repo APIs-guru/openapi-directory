@@ -1,27 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AltLabel } from "./altlabel";
 
 
+
 export class ValueLabel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=altLabels", elemType: shared.AltLabel })
+  @SpeakeasyMetadata({ data: "json, name=altLabels", elemType: AltLabel })
   altLabels?: AltLabel[];
 
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: string;
 }
 
 
 export class Value extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: string;
 
-  @Metadata({ data: "json, name=ident" })
+  @SpeakeasyMetadata({ data: "json, name=ident" })
   ident?: string;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: ValueLabel;
 
-  @Metadata({ data: "json, name=score" })
+  @SpeakeasyMetadata({ data: "json, name=score" })
   score?: number;
 }

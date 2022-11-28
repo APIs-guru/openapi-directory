@@ -9,6 +9,8 @@ const (
 	SiteSettingsVpaidAdapterChoiceTemplateEnumBoth    SiteSettingsVpaidAdapterChoiceTemplateEnum = "BOTH"
 )
 
+// SiteSettings
+// Site Settings
 type SiteSettings struct {
 	ActiveViewOptOut              *bool                                       `json:"activeViewOptOut,omitempty"`
 	AdBlockingOptOut              *bool                                       `json:"adBlockingOptOut,omitempty"`

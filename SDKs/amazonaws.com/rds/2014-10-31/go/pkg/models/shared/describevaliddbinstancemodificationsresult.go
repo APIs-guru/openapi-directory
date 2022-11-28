@@ -1,0 +1,5 @@
+package shared
+
+type DescribeValidDbInstanceModificationsResult struct {
+	ValidDbInstanceModificationsMessage *ValidDbInstanceModificationsMessage
+}

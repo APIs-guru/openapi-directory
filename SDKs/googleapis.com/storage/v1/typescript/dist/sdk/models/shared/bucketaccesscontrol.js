@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // BucketAccessControlProjectTeam
 /**
  * The project team associated with the entity, if any.
@@ -33,11 +33,11 @@ var BucketAccessControlProjectTeam = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=projectNumber" }),
+        SpeakeasyMetadata({ data: "json, name=projectNumber" }),
         __metadata("design:type", String)
     ], BucketAccessControlProjectTeam.prototype, "projectNumber", void 0);
     __decorate([
-        Metadata({ data: "json, name=team" }),
+        SpeakeasyMetadata({ data: "json, name=team" }),
         __metadata("design:type", String)
     ], BucketAccessControlProjectTeam.prototype, "team", void 0);
     return BucketAccessControlProjectTeam;
@@ -53,47 +53,47 @@ var BucketAccessControl = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=bucket" }),
+        SpeakeasyMetadata({ data: "json, name=bucket" }),
         __metadata("design:type", String)
     ], BucketAccessControl.prototype, "bucket", void 0);
     __decorate([
-        Metadata({ data: "json, name=domain" }),
+        SpeakeasyMetadata({ data: "json, name=domain" }),
         __metadata("design:type", String)
     ], BucketAccessControl.prototype, "domain", void 0);
     __decorate([
-        Metadata({ data: "json, name=email" }),
+        SpeakeasyMetadata({ data: "json, name=email" }),
         __metadata("design:type", String)
     ], BucketAccessControl.prototype, "email", void 0);
     __decorate([
-        Metadata({ data: "json, name=entity" }),
+        SpeakeasyMetadata({ data: "json, name=entity" }),
         __metadata("design:type", String)
     ], BucketAccessControl.prototype, "entity", void 0);
     __decorate([
-        Metadata({ data: "json, name=entityId" }),
+        SpeakeasyMetadata({ data: "json, name=entityId" }),
         __metadata("design:type", String)
     ], BucketAccessControl.prototype, "entityId", void 0);
     __decorate([
-        Metadata({ data: "json, name=etag" }),
+        SpeakeasyMetadata({ data: "json, name=etag" }),
         __metadata("design:type", String)
     ], BucketAccessControl.prototype, "etag", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], BucketAccessControl.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=kind" }),
+        SpeakeasyMetadata({ data: "json, name=kind" }),
         __metadata("design:type", String)
     ], BucketAccessControl.prototype, "kind", void 0);
     __decorate([
-        Metadata({ data: "json, name=projectTeam" }),
+        SpeakeasyMetadata({ data: "json, name=projectTeam" }),
         __metadata("design:type", BucketAccessControlProjectTeam)
     ], BucketAccessControl.prototype, "projectTeam", void 0);
     __decorate([
-        Metadata({ data: "json, name=role" }),
+        SpeakeasyMetadata({ data: "json, name=role" }),
         __metadata("design:type", String)
     ], BucketAccessControl.prototype, "role", void 0);
     __decorate([
-        Metadata({ data: "json, name=selfLink" }),
+        SpeakeasyMetadata({ data: "json, name=selfLink" }),
         __metadata("design:type", String)
     ], BucketAccessControl.prototype, "selfLink", void 0);
     return BucketAccessControl;

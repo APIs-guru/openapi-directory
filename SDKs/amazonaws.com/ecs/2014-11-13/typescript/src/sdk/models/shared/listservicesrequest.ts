@@ -1,21 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LaunchTypeEnum } from "./launchtypeenum";
 import { SchedulingStrategyEnum } from "./schedulingstrategyenum";
 
 
+
 export class ListServicesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cluster" })
+  @SpeakeasyMetadata({ data: "json, name=cluster" })
   cluster?: string;
 
-  @Metadata({ data: "json, name=launchType" })
+  @SpeakeasyMetadata({ data: "json, name=launchType" })
   launchType?: LaunchTypeEnum;
 
-  @Metadata({ data: "json, name=maxResults" })
+  @SpeakeasyMetadata({ data: "json, name=maxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=schedulingStrategy" })
+  @SpeakeasyMetadata({ data: "json, name=schedulingStrategy" })
   schedulingStrategy?: SchedulingStrategyEnum;
 }

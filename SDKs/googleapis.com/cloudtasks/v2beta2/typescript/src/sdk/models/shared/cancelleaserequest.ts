@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum CancelLeaseRequestResponseViewEnum {
-    ViewUnspecified = "VIEW_UNSPECIFIED"
-,    Basic = "BASIC"
-,    Full = "FULL"
+    ViewUnspecified = "VIEW_UNSPECIFIED",
+    Basic = "BASIC",
+    Full = "FULL"
 }
 
 
@@ -12,9 +13,9 @@ export enum CancelLeaseRequestResponseViewEnum {
  * Request message for canceling a lease using CancelLease.
 **/
 export class CancelLeaseRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=responseView" })
+  @SpeakeasyMetadata({ data: "json, name=responseView" })
   responseView?: CancelLeaseRequestResponseViewEnum;
 
-  @Metadata({ data: "json, name=scheduleTime" })
+  @SpeakeasyMetadata({ data: "json, name=scheduleTime" })
   scheduleTime?: string;
 }

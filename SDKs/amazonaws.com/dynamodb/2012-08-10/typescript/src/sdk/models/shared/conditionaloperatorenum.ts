@@ -1,6 +1,7 @@
 
 
+
 export enum ConditionalOperatorEnum {
-    And = "AND"
-,    Or = "OR"
+    And = "AND",
+    Or = "OR"
 }

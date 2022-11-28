@@ -16,6 +16,8 @@ const (
 	GoogleCloudMlV1AcceleratorConfigTypeEnumTpuV3Pod                   GoogleCloudMlV1AcceleratorConfigTypeEnum = "TPU_V3_POD"
 )
 
+// GoogleCloudMlV1AcceleratorConfig
+// Represents a hardware accelerator request config. Note that the AcceleratorConfig can be used in both Jobs and Versions. Learn more about [accelerators for training](/ml-engine/docs/using-gpus) and [accelerators for online prediction](/ml-engine/docs/machine-types-online-prediction#gpus).
 type GoogleCloudMlV1AcceleratorConfig struct {
 	Count *string                                   `json:"count,omitempty"`
 	Type  *GoogleCloudMlV1AcceleratorConfigTypeEnum `json:"type,omitempty"`

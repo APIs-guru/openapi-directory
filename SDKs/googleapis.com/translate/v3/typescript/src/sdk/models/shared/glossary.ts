@@ -1,7 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GlossaryInputConfig } from "./glossaryinputconfig";
 import { LanguageCodesSet } from "./languagecodesset";
 import { LanguageCodePair } from "./languagecodepair";
+
+
+
+// GlossaryInput
+/** 
+ * Represents a glossary built from user provided data.
+**/
+export class GlossaryInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
+  displayName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=inputConfig" })
+  inputConfig?: GlossaryInputConfig;
+
+  @SpeakeasyMetadata({ data: "json, name=languageCodesSet" })
+  languageCodesSet?: LanguageCodesSet;
+
+  @SpeakeasyMetadata({ data: "json, name=languagePair" })
+  languagePair?: LanguageCodePair;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+}
 
 
 // Glossary
@@ -9,27 +32,27 @@ import { LanguageCodePair } from "./languagecodepair";
  * Represents a glossary built from user provided data.
 **/
 export class Glossary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=endTime" })
+  @SpeakeasyMetadata({ data: "json, name=endTime" })
   endTime?: string;
 
-  @Metadata({ data: "json, name=entryCount" })
+  @SpeakeasyMetadata({ data: "json, name=entryCount" })
   entryCount?: number;
 
-  @Metadata({ data: "json, name=inputConfig" })
+  @SpeakeasyMetadata({ data: "json, name=inputConfig" })
   inputConfig?: GlossaryInputConfig;
 
-  @Metadata({ data: "json, name=languageCodesSet" })
+  @SpeakeasyMetadata({ data: "json, name=languageCodesSet" })
   languageCodesSet?: LanguageCodesSet;
 
-  @Metadata({ data: "json, name=languagePair" })
+  @SpeakeasyMetadata({ data: "json, name=languagePair" })
   languagePair?: LanguageCodePair;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=submitTime" })
+  @SpeakeasyMetadata({ data: "json, name=submitTime" })
   submitTime?: string;
 }

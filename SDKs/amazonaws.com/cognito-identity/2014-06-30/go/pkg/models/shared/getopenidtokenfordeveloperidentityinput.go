@@ -1,5 +1,7 @@
 package shared
 
+// GetOpenIDTokenForDeveloperIdentityInput
+// Input to the <code>GetOpenIdTokenForDeveloperIdentity</code> action.
 type GetOpenIDTokenForDeveloperIdentityInput struct {
 	IdentityID     *string           `json:"IdentityId,omitempty"`
 	IdentityPoolID string            `json:"IdentityPoolId"`

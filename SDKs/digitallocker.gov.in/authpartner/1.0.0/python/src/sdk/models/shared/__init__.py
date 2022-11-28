@@ -2,6 +2,7 @@ from .accessresponse import *
 from .accesstoken import *
 from .deviceauthorizationcoderesponse import *
 from .doctyperesponse import *
+from .eaadharxamlschema import *
 from .getstatisticsresponse import *
 from .issuerresponse import *
 from .refreshtoken import *
@@ -33,3 +34,4 @@ from .responsetwo import *
 from .searchparametersresponse import *
 from .security import *
 from .verifyaccountresponse import *
+from .xmlformatschema import *

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetSampleDataResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=HeaderValues" })
+  @SpeakeasyMetadata({ data: "json, name=HeaderValues" })
   headerValues?: string[];
 
-  @Metadata({ data: "json, name=SampleRows" })
+  @SpeakeasyMetadata({ data: "json, name=SampleRows" })
   sampleRows?: string[][];
 }

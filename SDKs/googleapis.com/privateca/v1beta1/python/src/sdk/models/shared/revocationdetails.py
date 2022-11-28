@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class RevocationDetailsRevocationStateEnum(str, Enum):
     REVOCATION_REASON_UNSPECIFIED = "REVOCATION_REASON_UNSPECIFIED"
@@ -17,6 +19,10 @@ class RevocationDetailsRevocationStateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class RevocationDetails:
-    revocation_state: Optional[RevocationDetailsRevocationStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'revocationState' }})
-    revocation_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'revocationTime' }})
+    r"""RevocationDetails
+    Describes fields that are relavent to the revocation of a Certificate.
+    """
+    
+    revocation_state: Optional[RevocationDetailsRevocationStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('revocationState') }})
+    revocation_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('revocationTime') }})
     

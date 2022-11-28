@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetAPIV1BillsBillIDStagesPathParams:
-    bill_id: int = field(default=None, metadata={'path_param': { 'field_name': 'billId', 'style': 'simple', 'explode': False }})
+    bill_id: int = field(metadata={'path_param': { 'field_name': 'billId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,15 +16,15 @@ class GetAPIV1BillsBillIDStagesQueryParams:
 
 @dataclass
 class GetAPIV1BillsBillIDStagesRequest:
-    path_params: GetAPIV1BillsBillIDStagesPathParams = field(default=None)
-    query_params: GetAPIV1BillsBillIDStagesQueryParams = field(default=None)
+    path_params: GetAPIV1BillsBillIDStagesPathParams = field()
+    query_params: GetAPIV1BillsBillIDStagesQueryParams = field()
     
 
 @dataclass
 class GetAPIV1BillsBillIDStagesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     problem_details: Optional[dict[str, Any]] = field(default=None)
     stage_summary_search_result: Optional[shared.StageSummarySearchResult] = field(default=None)
-    status_code: int = field(default=None)
     

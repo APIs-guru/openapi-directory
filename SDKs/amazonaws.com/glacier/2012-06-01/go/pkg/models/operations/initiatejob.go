@@ -19,6 +19,8 @@ type InitiateJobHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// InitiateJobRequestBodyJobParameters
+// Provides options for defining a job.
 type InitiateJobRequestBodyJobParameters struct {
 	ArchiveID                    *string                            `json:"ArchiveId,omitempty"`
 	Description                  *string                            `json:"Description,omitempty"`

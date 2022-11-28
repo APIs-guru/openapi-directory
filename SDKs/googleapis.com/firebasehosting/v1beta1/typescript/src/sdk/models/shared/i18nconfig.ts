@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // I18nConfig
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * If provided, i18n rewrites are enabled.
 **/
 export class I18nConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=root" })
+  @SpeakeasyMetadata({ data: "json, name=root" })
   root?: string;
 }

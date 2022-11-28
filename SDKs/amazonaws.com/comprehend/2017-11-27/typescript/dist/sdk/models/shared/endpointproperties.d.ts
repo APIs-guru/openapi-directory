@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { EndpointStatusEnum } from "./endpointstatusenum";
 /**
  * Specifies information about the specified endpoint.

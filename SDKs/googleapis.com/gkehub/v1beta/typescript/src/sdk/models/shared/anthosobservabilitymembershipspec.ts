@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AnthosObservabilityMembershipSpec
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * **Anthosobservability**: Per-Membership Feature spec.
 **/
 export class AnthosObservabilityMembershipSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=doNotOptimizeMetrics" })
+  @SpeakeasyMetadata({ data: "json, name=doNotOptimizeMetrics" })
   doNotOptimizeMetrics?: boolean;
 
-  @Metadata({ data: "json, name=enableStackdriverOnApplications" })
+  @SpeakeasyMetadata({ data: "json, name=enableStackdriverOnApplications" })
   enableStackdriverOnApplications?: boolean;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 }

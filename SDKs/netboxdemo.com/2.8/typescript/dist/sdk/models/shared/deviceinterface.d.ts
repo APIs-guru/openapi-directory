@@ -1,0 +1,200 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import { NestedCable } from "./nestedcable";
+import { NestedDevice } from "./nesteddevice";
+import { NestedInterface } from "./nestedinterface";
+import { NestedVlan } from "./nestedvlan";
+export declare enum DeviceInterfaceConnectionStatusLabelEnum {
+    NotConnected = "Not Connected",
+    Connected = "Connected"
+}
+export declare class DeviceInterfaceConnectionStatus extends SpeakeasyBase {
+    label: DeviceInterfaceConnectionStatusLabelEnum;
+    value: boolean;
+}
+export declare enum DeviceInterfaceModeLabelEnum {
+    Access = "Access",
+    Tagged = "Tagged",
+    TaggedAll = "Tagged (All)"
+}
+export declare enum DeviceInterfaceModeValueEnum {
+    Access = "access",
+    Tagged = "tagged",
+    TaggedAll = "tagged-all"
+}
+export declare class DeviceInterfaceMode extends SpeakeasyBase {
+    label: DeviceInterfaceModeLabelEnum;
+    value: DeviceInterfaceModeValueEnum;
+}
+export declare enum DeviceInterfaceTypeLabelEnum {
+    Virtual = "Virtual",
+    LinkAggregationGroupLag = "Link Aggregation Group (LAG)",
+    OneHundredBaseTx10100Me = "100BASE-TX (10/100ME)",
+    OneThousandBaseT1Ge = "1000BASE-T (1GE)",
+    Two5GbaseT25Ge = "2.5GBASE-T (2.5GE)",
+    FiveGbaseT5Ge = "5GBASE-T (5GE)",
+    TenGbaseT10Ge = "10GBASE-T (10GE)",
+    TenGbaseCx410Ge = "10GBASE-CX4 (10GE)",
+    Gbic1Ge = "GBIC (1GE)",
+    Sfp1Ge = "SFP (1GE)",
+    SfpPlus10Ge = "SFP+ (10GE)",
+    Xfp10Ge = "XFP (10GE)",
+    Xenpak10Ge = "XENPAK (10GE)",
+    X210Ge = "X2 (10GE)",
+    Sfp2825Ge = "SFP28 (25GE)",
+    QsfpPlus40Ge = "QSFP+ (40GE)",
+    Qsfp2850Ge = "QSFP28 (50GE)",
+    Cfp100Ge = "CFP (100GE)",
+    Cfp2100Ge = "CFP2 (100GE)",
+    Cfp2200Ge = "CFP2 (200GE)",
+    Cfp4100Ge = "CFP4 (100GE)",
+    CiscoCpak100Ge = "Cisco CPAK (100GE)",
+    Qsfp28100Ge = "QSFP28 (100GE)",
+    Qsfp56200Ge = "QSFP56 (200GE)",
+    QsfpDd400Ge = "QSFP-DD (400GE)",
+    Osfp400Ge = "OSFP (400GE)",
+    Ieee80211a = "IEEE 802.11a",
+    Ieee80211bG = "IEEE 802.11b/g",
+    Ieee80211n = "IEEE 802.11n",
+    Ieee80211ac = "IEEE 802.11ac",
+    Ieee80211ad = "IEEE 802.11ad",
+    Ieee80211ax = "IEEE 802.11ax",
+    Gsm = "GSM",
+    Cdma = "CDMA",
+    Lte = "LTE",
+    Oc3Stm1 = "OC-3/STM-1",
+    Oc12Stm4 = "OC-12/STM-4",
+    Oc48Stm16 = "OC-48/STM-16",
+    Oc192Stm64 = "OC-192/STM-64",
+    Oc768Stm256 = "OC-768/STM-256",
+    Oc1920Stm640 = "OC-1920/STM-640",
+    Oc3840Stm1234 = "OC-3840/STM-1234",
+    Sfp1Gfc = "SFP (1GFC)",
+    Sfp2Gfc = "SFP (2GFC)",
+    Sfp4Gfc = "SFP (4GFC)",
+    SfpPlus8Gfc = "SFP+ (8GFC)",
+    SfpPlus16Gfc = "SFP+ (16GFC)",
+    Sfp2832Gfc = "SFP28 (32GFC)",
+    Qsfp28128Gfc = "QSFP28 (128GFC)",
+    Sdr2Gbps = "SDR (2 Gbps)",
+    Ddr4Gbps = "DDR (4 Gbps)",
+    Qdr8Gbps = "QDR (8 Gbps)",
+    Fdr1010Gbps = "FDR10 (10 Gbps)",
+    Fdr135Gbps = "FDR (13.5 Gbps)",
+    Edr25Gbps = "EDR (25 Gbps)",
+    Hdr50Gbps = "HDR (50 Gbps)",
+    Ndr100Gbps = "NDR (100 Gbps)",
+    Xdr250Gbps = "XDR (250 Gbps)",
+    T11544Mbps = "T1 (1.544 Mbps)",
+    E12048Mbps = "E1 (2.048 Mbps)",
+    T345Mbps = "T3 (45 Mbps)",
+    E334Mbps = "E3 (34 Mbps)",
+    CiscoStackWise = "Cisco StackWise",
+    CiscoStackWisePlus = "Cisco StackWise Plus",
+    CiscoFlexStack = "Cisco FlexStack",
+    CiscoFlexStackPlus = "Cisco FlexStack Plus",
+    JuniperVcp = "Juniper VCP",
+    ExtremeSummitStack = "Extreme SummitStack",
+    ExtremeSummitStack128 = "Extreme SummitStack-128",
+    ExtremeSummitStack256 = "Extreme SummitStack-256",
+    ExtremeSummitStack512 = "Extreme SummitStack-512",
+    Other = "Other"
+}
+export declare enum DeviceInterfaceTypeValueEnum {
+    Virtual = "virtual",
+    Lag = "lag",
+    OneHundredbaseTx = "100base-tx",
+    OneThousandbaseT = "1000base-t",
+    Two5gbaseT = "2.5gbase-t",
+    FivegbaseT = "5gbase-t",
+    TengbaseT = "10gbase-t",
+    TengbaseCx4 = "10gbase-cx4",
+    OneThousandbaseXGbic = "1000base-x-gbic",
+    OneThousandbaseXSfp = "1000base-x-sfp",
+    TengbaseXSfpp = "10gbase-x-sfpp",
+    TengbaseXXfp = "10gbase-x-xfp",
+    TengbaseXXenpak = "10gbase-x-xenpak",
+    TengbaseXX2 = "10gbase-x-x2",
+    TwentyFivegbaseXSfp28 = "25gbase-x-sfp28",
+    FortygbaseXQsfpp = "40gbase-x-qsfpp",
+    FiftygbaseXSfp28 = "50gbase-x-sfp28",
+    OneHundredgbaseXCfp = "100gbase-x-cfp",
+    OneHundredgbaseXCfp2 = "100gbase-x-cfp2",
+    TwoHundredgbaseXCfp2 = "200gbase-x-cfp2",
+    OneHundredgbaseXCfp4 = "100gbase-x-cfp4",
+    OneHundredgbaseXCpak = "100gbase-x-cpak",
+    OneHundredgbaseXQsfp28 = "100gbase-x-qsfp28",
+    TwoHundredgbaseXQsfp56 = "200gbase-x-qsfp56",
+    FourHundredgbaseXQsfpdd = "400gbase-x-qsfpdd",
+    FourHundredgbaseXOsfp = "400gbase-x-osfp",
+    Ieee80211a = "ieee802.11a",
+    Ieee80211g = "ieee802.11g",
+    Ieee80211n = "ieee802.11n",
+    Ieee80211ac = "ieee802.11ac",
+    Ieee80211ad = "ieee802.11ad",
+    Ieee80211ax = "ieee802.11ax",
+    Gsm = "gsm",
+    Cdma = "cdma",
+    Lte = "lte",
+    SonetOc3 = "sonet-oc3",
+    SonetOc12 = "sonet-oc12",
+    SonetOc48 = "sonet-oc48",
+    SonetOc192 = "sonet-oc192",
+    SonetOc768 = "sonet-oc768",
+    SonetOc1920 = "sonet-oc1920",
+    SonetOc3840 = "sonet-oc3840",
+    OnegfcSfp = "1gfc-sfp",
+    TwogfcSfp = "2gfc-sfp",
+    FourgfcSfp = "4gfc-sfp",
+    EightgfcSfpp = "8gfc-sfpp",
+    SixteengfcSfpp = "16gfc-sfpp",
+    ThirtyTwogfcSfp28 = "32gfc-sfp28",
+    OneHundredAndTwentyEightgfcSfp28 = "128gfc-sfp28",
+    InfinibandSdr = "infiniband-sdr",
+    InfinibandDdr = "infiniband-ddr",
+    InfinibandQdr = "infiniband-qdr",
+    InfinibandFdr10 = "infiniband-fdr10",
+    InfinibandFdr = "infiniband-fdr",
+    InfinibandEdr = "infiniband-edr",
+    InfinibandHdr = "infiniband-hdr",
+    InfinibandNdr = "infiniband-ndr",
+    InfinibandXdr = "infiniband-xdr",
+    T1 = "t1",
+    E1 = "e1",
+    T3 = "t3",
+    E3 = "e3",
+    CiscoStackwise = "cisco-stackwise",
+    CiscoStackwisePlus = "cisco-stackwise-plus",
+    CiscoFlexstack = "cisco-flexstack",
+    CiscoFlexstackPlus = "cisco-flexstack-plus",
+    JuniperVcp = "juniper-vcp",
+    ExtremeSummitstack = "extreme-summitstack",
+    ExtremeSummitstack128 = "extreme-summitstack-128",
+    ExtremeSummitstack256 = "extreme-summitstack-256",
+    ExtremeSummitstack512 = "extreme-summitstack-512",
+    Other = "other"
+}
+export declare class DeviceInterfaceType extends SpeakeasyBase {
+    label: DeviceInterfaceTypeLabelEnum;
+    value: DeviceInterfaceTypeValueEnum;
+}
+export declare class DeviceInterface extends SpeakeasyBase {
+    cable?: NestedCable;
+    connectedEndpoint?: Map<string, string>;
+    connectedEndpointType?: string;
+    connectionStatus?: DeviceInterfaceConnectionStatus;
+    countIpaddresses?: number;
+    description?: string;
+    device: NestedDevice;
+    enabled?: boolean;
+    id?: number;
+    lag?: NestedInterface;
+    macAddress?: string;
+    mgmtOnly?: boolean;
+    mode?: DeviceInterfaceMode;
+    mtu?: number;
+    name: string;
+    taggedVlans?: NestedVlan[];
+    tags?: string[];
+    type: DeviceInterfaceType;
+    untaggedVlan?: NestedVlan;
+}

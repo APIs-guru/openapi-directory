@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class AutoRollbackEventEnum(str, Enum):
     DEPLOYMENT_FAILURE = "DEPLOYMENT_FAILURE"

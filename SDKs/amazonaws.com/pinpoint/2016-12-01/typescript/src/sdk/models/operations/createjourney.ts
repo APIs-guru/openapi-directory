@@ -1,33 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateJourneyPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=application-id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=application-id" })
   applicationId: string;
 }
 
 
 export class CreateJourneyHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -37,96 +38,96 @@ export class CreateJourneyHeaders extends SpeakeasyBase {
  * Specifies the configuration and other settings for a journey.
 **/
 export class CreateJourneyRequestBodyWriteJourneyRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Activities", elemType: shared.Activity })
+  @SpeakeasyMetadata({ data: "json, name=Activities", elemType: shared.Activity })
   activities?: Map<string, shared.Activity>;
 
-  @Metadata({ data: "json, name=CreationDate" })
+  @SpeakeasyMetadata({ data: "json, name=CreationDate" })
   creationDate?: string;
 
-  @Metadata({ data: "json, name=LastModifiedDate" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedDate" })
   lastModifiedDate?: string;
 
-  @Metadata({ data: "json, name=Limits" })
+  @SpeakeasyMetadata({ data: "json, name=Limits" })
   limits?: shared.JourneyLimits;
 
-  @Metadata({ data: "json, name=LocalTime" })
+  @SpeakeasyMetadata({ data: "json, name=LocalTime" })
   localTime?: boolean;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=QuietTime" })
+  @SpeakeasyMetadata({ data: "json, name=QuietTime" })
   quietTime?: shared.QuietTime;
 
-  @Metadata({ data: "json, name=RefreshFrequency" })
+  @SpeakeasyMetadata({ data: "json, name=RefreshFrequency" })
   refreshFrequency?: string;
 
-  @Metadata({ data: "json, name=RefreshOnSegmentUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=RefreshOnSegmentUpdate" })
   refreshOnSegmentUpdate?: boolean;
 
-  @Metadata({ data: "json, name=Schedule" })
+  @SpeakeasyMetadata({ data: "json, name=Schedule" })
   schedule?: shared.JourneySchedule;
 
-  @Metadata({ data: "json, name=StartActivity" })
+  @SpeakeasyMetadata({ data: "json, name=StartActivity" })
   startActivity?: string;
 
-  @Metadata({ data: "json, name=StartCondition" })
+  @SpeakeasyMetadata({ data: "json, name=StartCondition" })
   startCondition?: shared.StartCondition;
 
-  @Metadata({ data: "json, name=State" })
+  @SpeakeasyMetadata({ data: "json, name=State" })
   state?: shared.StateEnum;
 
-  @Metadata({ data: "json, name=WaitForQuietTime" })
+  @SpeakeasyMetadata({ data: "json, name=WaitForQuietTime" })
   waitForQuietTime?: boolean;
 }
 
 
 export class CreateJourneyRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=WriteJourneyRequest" })
+  @SpeakeasyMetadata({ data: "json, name=WriteJourneyRequest" })
   writeJourneyRequest: CreateJourneyRequestBodyWriteJourneyRequest;
 }
 
 
 export class CreateJourneyRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CreateJourneyPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateJourneyHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateJourneyRequestBody;
 }
 
 
 export class CreateJourneyResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   badRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createJourneyResponse?: shared.CreateJourneyResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   forbiddenException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerErrorException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   methodNotAllowedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   notFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   payloadTooLargeException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tooManyRequestsException?: any;
 }

@@ -1,6 +1,7 @@
 
 
+
 export enum EvaluationTypeEnum {
-    Summary = "SUMMARY"
-,    Computed = "COMPUTED"
+    Summary = "SUMMARY",
+    Computed = "COMPUTED"
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // IotEventsAction
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Sends an input to an IoT Events detector.
 **/
 export class IotEventsAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=batchMode" })
+  @SpeakeasyMetadata({ data: "json, name=batchMode" })
   batchMode?: boolean;
 
-  @Metadata({ data: "json, name=inputName" })
+  @SpeakeasyMetadata({ data: "json, name=inputName" })
   inputName: string;
 
-  @Metadata({ data: "json, name=messageId" })
+  @SpeakeasyMetadata({ data: "json, name=messageId" })
   messageId?: string;
 
-  @Metadata({ data: "json, name=roleArn" })
+  @SpeakeasyMetadata({ data: "json, name=roleArn" })
   roleArn: string;
 }

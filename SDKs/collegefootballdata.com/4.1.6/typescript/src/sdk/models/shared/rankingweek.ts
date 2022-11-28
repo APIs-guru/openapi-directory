@@ -1,44 +1,44 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RankingWeekPollsRanks extends SpeakeasyBase {
-  @Metadata({ data: "json, name=conference" })
+  @SpeakeasyMetadata({ data: "json, name=conference" })
   conference?: string;
 
-  @Metadata({ data: "json, name=firstPlaceVotes" })
+  @SpeakeasyMetadata({ data: "json, name=firstPlaceVotes" })
   firstPlaceVotes?: number;
 
-  @Metadata({ data: "json, name=points" })
+  @SpeakeasyMetadata({ data: "json, name=points" })
   points?: number;
 
-  @Metadata({ data: "json, name=rank" })
+  @SpeakeasyMetadata({ data: "json, name=rank" })
   rank?: number;
 
-  @Metadata({ data: "json, name=school" })
+  @SpeakeasyMetadata({ data: "json, name=school" })
   school?: string;
 }
 
 
 export class RankingWeekPolls extends SpeakeasyBase {
-  @Metadata({ data: "json, name=poll" })
+  @SpeakeasyMetadata({ data: "json, name=poll" })
   poll?: string;
 
-  @Metadata({ data: "json, name=ranks", elemType: shared.RankingWeekPollsRanks })
+  @SpeakeasyMetadata({ data: "json, name=ranks", elemType: RankingWeekPollsRanks })
   ranks?: RankingWeekPollsRanks[];
 }
 
 
 export class RankingWeek extends SpeakeasyBase {
-  @Metadata({ data: "json, name=polls", elemType: shared.RankingWeekPolls })
+  @SpeakeasyMetadata({ data: "json, name=polls", elemType: RankingWeekPolls })
   polls?: RankingWeekPolls[];
 
-  @Metadata({ data: "json, name=season" })
+  @SpeakeasyMetadata({ data: "json, name=season" })
   season?: number;
 
-  @Metadata({ data: "json, name=seasonType" })
+  @SpeakeasyMetadata({ data: "json, name=seasonType" })
   seasonType?: string;
 
-  @Metadata({ data: "json, name=week" })
+  @SpeakeasyMetadata({ data: "json, name=week" })
   week?: number;
 }

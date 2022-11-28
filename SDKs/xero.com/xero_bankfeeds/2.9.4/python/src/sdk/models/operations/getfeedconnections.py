@@ -11,24 +11,24 @@ class GetFeedConnectionsQueryParams:
 
 @dataclass
 class GetFeedConnectionsHeaders:
-    xero_tenant_id: str = field(default=None, metadata={'header': { 'field_name': 'Xero-Tenant-Id', 'style': 'simple', 'explode': False }})
+    xero_tenant_id: str = field(metadata={'header': { 'field_name': 'Xero-Tenant-Id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetFeedConnectionsSecurity:
-    o_auth2: shared.SchemeOAuth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    o_auth2: shared.SchemeOAuth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetFeedConnectionsRequest:
-    query_params: GetFeedConnectionsQueryParams = field(default=None)
-    headers: GetFeedConnectionsHeaders = field(default=None)
-    security: GetFeedConnectionsSecurity = field(default=None)
+    headers: GetFeedConnectionsHeaders = field()
+    query_params: GetFeedConnectionsQueryParams = field()
+    security: GetFeedConnectionsSecurity = field()
     
 
 @dataclass
 class GetFeedConnectionsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     feed_connections: Optional[shared.FeedConnections] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -9,6 +9,8 @@ const (
 	CompletionResultTypeEnumCombined                  CompletionResultTypeEnum = "COMBINED"
 )
 
+// CompletionResult
+// Resource that represents completion results.
 type CompletionResult struct {
 	ImageURI   *string                   `json:"imageUri,omitempty"`
 	Suggestion *string                   `json:"suggestion,omitempty"`

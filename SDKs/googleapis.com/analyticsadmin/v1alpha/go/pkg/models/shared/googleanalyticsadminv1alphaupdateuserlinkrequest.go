@@ -1,5 +1,7 @@
 package shared
 
-type GoogleAnalyticsAdminV1alphaUpdateUserLinkRequest struct {
-	UserLink *GoogleAnalyticsAdminV1alphaUserLink `json:"userLink,omitempty"`
+// GoogleAnalyticsAdminV1alphaUpdateUserLinkRequestInput
+// Request message for UpdateUserLink RPC.
+type GoogleAnalyticsAdminV1alphaUpdateUserLinkRequestInput struct {
+	UserLink *GoogleAnalyticsAdminV1alphaUserLinkInput `json:"userLink,omitempty"`
 }

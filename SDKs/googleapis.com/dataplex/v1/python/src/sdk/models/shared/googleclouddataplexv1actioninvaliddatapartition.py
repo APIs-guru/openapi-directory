@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GoogleCloudDataplexV1ActionInvalidDataPartitionExpectedStructureEnum(str, Enum):
     PARTITION_STRUCTURE_UNSPECIFIED = "PARTITION_STRUCTURE_UNSPECIFIED"
@@ -11,5 +13,9 @@ class GoogleCloudDataplexV1ActionInvalidDataPartitionExpectedStructureEnum(str, 
 @dataclass_json
 @dataclass
 class GoogleCloudDataplexV1ActionInvalidDataPartition:
-    expected_structure: Optional[GoogleCloudDataplexV1ActionInvalidDataPartitionExpectedStructureEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expectedStructure' }})
+    r"""GoogleCloudDataplexV1ActionInvalidDataPartition
+    Action details for invalid or unsupported partitions detected by discovery.
+    """
+    
+    expected_structure: Optional[GoogleCloudDataplexV1ActionInvalidDataPartitionExpectedStructureEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('expectedStructure') }})
     

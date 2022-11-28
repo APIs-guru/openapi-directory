@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class BoardAsset extends SpeakeasyBase {
-  @Metadata({ data: "json, name=asset_id" })
+  @SpeakeasyMetadata({ data: "json, name=asset_id" })
   assetId: string;
 }

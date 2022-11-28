@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Policy } from "./policy";
 import { DeviceReport } from "./devicereport";
 
+
 export enum DeviceManagementTypeEnum {
-    ManagedDevice = "managedDevice"
-,    ManagedProfile = "managedProfile"
-,    ContainerApp = "containerApp"
-,    UnmanagedProfile = "unmanagedProfile"
+    ManagedDevice = "managedDevice",
+    ManagedProfile = "managedProfile",
+    ContainerApp = "containerApp",
+    UnmanagedProfile = "unmanagedProfile"
 }
 
 
@@ -15,15 +16,15 @@ export enum DeviceManagementTypeEnum {
  * A Devices resource represents a mobile device managed by the EMM and belonging to a specific enterprise user.
 **/
 export class Device extends SpeakeasyBase {
-  @Metadata({ data: "json, name=androidId" })
+  @SpeakeasyMetadata({ data: "json, name=androidId" })
   androidId?: string;
 
-  @Metadata({ data: "json, name=managementType" })
+  @SpeakeasyMetadata({ data: "json, name=managementType" })
   managementType?: DeviceManagementTypeEnum;
 
-  @Metadata({ data: "json, name=policy" })
+  @SpeakeasyMetadata({ data: "json, name=policy" })
   policy?: Policy;
 
-  @Metadata({ data: "json, name=report" })
+  @SpeakeasyMetadata({ data: "json, name=report" })
   report?: DeviceReport;
 }

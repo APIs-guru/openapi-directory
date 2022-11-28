@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class AddPresenceWebHookRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "form, name=url;" })
+  @SpeakeasyMetadata({ data: "form, name=url;" })
   url: string;
 
-  @Metadata({ data: "form, name=userIds;" })
+  @SpeakeasyMetadata({ data: "form, name=userIds;" })
   userIds: string[];
 }
 
 
 export class AddPresenceWebHookSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth: shared.SchemeOauth;
 }
 
 
 export class AddPresenceWebHookRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
   request: AddPresenceWebHookRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: AddPresenceWebHookSecurity;
 }
 
 
 export class AddPresenceWebHookResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   webHook?: any;
 }

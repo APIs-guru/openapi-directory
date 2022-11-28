@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProductViewItemIssueItemIssueType } from "./productviewitemissueitemissuetype";
 import { ProductViewItemIssueItemIssueSeverity } from "./productviewitemissueitemissueseverity";
 
+
 export enum ProductViewItemIssueResolutionEnum {
-    Unknown = "UNKNOWN"
-,    MerchantAction = "MERCHANT_ACTION"
-,    PendingProcessing = "PENDING_PROCESSING"
+    Unknown = "UNKNOWN",
+    MerchantAction = "MERCHANT_ACTION",
+    PendingProcessing = "PENDING_PROCESSING"
 }
 
 
@@ -14,12 +15,12 @@ export enum ProductViewItemIssueResolutionEnum {
  * Item issue associated with the product.
 **/
 export class ProductViewItemIssue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=issueType" })
+  @SpeakeasyMetadata({ data: "json, name=issueType" })
   issueType?: ProductViewItemIssueItemIssueType;
 
-  @Metadata({ data: "json, name=resolution" })
+  @SpeakeasyMetadata({ data: "json, name=resolution" })
   resolution?: ProductViewItemIssueResolutionEnum;
 
-  @Metadata({ data: "json, name=severity" })
+  @SpeakeasyMetadata({ data: "json, name=severity" })
   severity?: ProductViewItemIssueItemIssueSeverity;
 }

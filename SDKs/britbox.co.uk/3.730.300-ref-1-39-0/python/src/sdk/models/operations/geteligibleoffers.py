@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -11,14 +12,14 @@ class GetEligibleOffersQueryParams:
 
 @dataclass
 class GetEligibleOffersRequest:
-    query_params: GetEligibleOffersQueryParams = field(default=None)
-    request: shared.EeOffersRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    query_params: GetEligibleOffersQueryParams = field()
+    request: shared.EeOffersRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class GetEligibleOffersResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     ee_offers_response: Optional[shared.EeOffersResponse] = field(default=None)
     service_error: Optional[shared.ServiceError] = field(default=None)
-    status_code: int = field(default=None)
     

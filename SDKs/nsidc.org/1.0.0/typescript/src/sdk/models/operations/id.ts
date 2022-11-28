@@ -1,33 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum IdSourceEnum {
-    Nsidc = "NSIDC"
-,    Ade = "ADE"
+    Nsidc = "NSIDC",
+    Ade = "ADE"
 }
 
 
 export class IdQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=q" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=q" })
   q: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=source" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=source" })
   source: IdSourceEnum;
 }
 
 
 export class IdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: IdQueryParams;
 }
 
 
 export class IdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   id200ApplicationXSuggestionsPlusJsonString?: string;
 }

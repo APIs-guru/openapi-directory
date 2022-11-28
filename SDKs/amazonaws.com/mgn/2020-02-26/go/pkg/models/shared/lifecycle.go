@@ -1,5 +1,7 @@
 package shared
 
+// LifeCycle
+// Lifecycle.
 type LifeCycle struct {
 	AddedToServiceDateTime     *string               `json:"addedToServiceDateTime,omitempty"`
 	ElapsedReplicationDuration *string               `json:"elapsedReplicationDuration,omitempty"`

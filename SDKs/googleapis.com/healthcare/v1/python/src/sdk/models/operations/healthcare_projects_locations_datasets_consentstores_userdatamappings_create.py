@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsCreateQuer
 
 @dataclass
 class HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsCreateRequest:
-    path_params: HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsCreatePathParams = field(default=None)
-    query_params: HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsCreateQueryParams = field(default=None)
-    request: Optional[shared.UserDataMapping] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsCreateSecurity = field(default=None)
+    path_params: HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsCreatePathParams = field()
+    query_params: HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsCreateQueryParams = field()
+    security: HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsCreateSecurity = field()
+    request: Optional[shared.UserDataMappingInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsCreateResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     user_data_mapping: Optional[shared.UserDataMapping] = field(default=None)
     

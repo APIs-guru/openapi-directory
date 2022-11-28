@@ -9,3 +9,12 @@ type PayrollCalendar struct {
 	UpdatedDateUtc    *string           `json:"UpdatedDateUTC,omitempty"`
 	ValidationErrors  []ValidationError `json:"ValidationErrors,omitempty"`
 }
+
+type PayrollCalendarInput struct {
+	CalendarType      *CalendarTypeEnum `json:"CalendarType,omitempty"`
+	Name              *string           `json:"Name,omitempty"`
+	PaymentDate       *string           `json:"PaymentDate,omitempty"`
+	PayrollCalendarID *string           `json:"PayrollCalendarID,omitempty"`
+	StartDate         *string           `json:"StartDate,omitempty"`
+	ValidationErrors  []ValidationError `json:"ValidationErrors,omitempty"`
+}

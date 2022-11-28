@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TransferRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fromOfferingId" })
+  @SpeakeasyMetadata({ data: "json, name=fromOfferingId" })
   fromOfferingId?: string;
 
-  @Metadata({ data: "json, name=sendInvite" })
+  @SpeakeasyMetadata({ data: "json, name=sendInvite" })
   sendInvite?: boolean;
 
-  @Metadata({ data: "json, name=toOfferingId" })
+  @SpeakeasyMetadata({ data: "json, name=toOfferingId" })
   toOfferingId?: string;
 }

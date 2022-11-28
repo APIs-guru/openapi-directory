@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetReportsEntityTypeEntityTypeEnum(str, Enum):
@@ -14,7 +15,7 @@ class GetReportsEntityTypeEntityTypeEnum(str, Enum):
 
 @dataclass
 class GetReportsEntityTypePathParams:
-    entity_type: GetReportsEntityTypeEntityTypeEnum = field(default=None, metadata={'path_param': { 'field_name': 'entity_type', 'style': 'simple', 'explode': False }})
+    entity_type: GetReportsEntityTypeEntityTypeEnum = field(metadata={'path_param': { 'field_name': 'entity_type', 'style': 'simple', 'explode': False }})
     
 class GetReportsEntityTypeAmendmentIndicatorEnum(str, Enum):
     UNKNOWN = ""
@@ -32,8 +33,8 @@ class GetReportsEntityTypeFilerTypeEnum(str, Enum):
 
 @dataclass
 class GetReportsEntityTypeQueryParams:
+    api_key: str = field(metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
     amendment_indicator: Optional[List[GetReportsEntityTypeAmendmentIndicatorEnum]] = field(default=None, metadata={'query_param': { 'field_name': 'amendment_indicator', 'style': 'form', 'explode': True }})
-    api_key: str = field(default=None, metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
     beginning_image_number: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'beginning_image_number', 'style': 'form', 'explode': True }})
     candidate_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'candidate_id', 'style': 'form', 'explode': True }})
     committee_id: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'committee_id', 'style': 'form', 'explode': True }})
@@ -45,7 +46,7 @@ class GetReportsEntityTypeQueryParams:
     max_disbursements_amount: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'max_disbursements_amount', 'style': 'form', 'explode': True }})
     max_independent_expenditures: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'max_independent_expenditures', 'style': 'form', 'explode': True }})
     max_party_coordinated_expenditures: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'max_party_coordinated_expenditures', 'style': 'form', 'explode': True }})
-    max_receipt_date: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'max_receipt_date', 'style': 'form', 'explode': True }})
+    max_receipt_date: Optional[date] = field(default=None, metadata={'query_param': { 'field_name': 'max_receipt_date', 'style': 'form', 'explode': True }})
     max_receipts_amount: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'max_receipts_amount', 'style': 'form', 'explode': True }})
     max_total_contributions: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'max_total_contributions', 'style': 'form', 'explode': True }})
     min_cash_on_hand_end_period_amount: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'min_cash_on_hand_end_period_amount', 'style': 'form', 'explode': True }})
@@ -53,7 +54,7 @@ class GetReportsEntityTypeQueryParams:
     min_disbursements_amount: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'min_disbursements_amount', 'style': 'form', 'explode': True }})
     min_independent_expenditures: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'min_independent_expenditures', 'style': 'form', 'explode': True }})
     min_party_coordinated_expenditures: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'min_party_coordinated_expenditures', 'style': 'form', 'explode': True }})
-    min_receipt_date: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'min_receipt_date', 'style': 'form', 'explode': True }})
+    min_receipt_date: Optional[date] = field(default=None, metadata={'query_param': { 'field_name': 'min_receipt_date', 'style': 'form', 'explode': True }})
     min_receipts_amount: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'min_receipts_amount', 'style': 'form', 'explode': True }})
     min_total_contributions: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'min_total_contributions', 'style': 'form', 'explode': True }})
     most_recent: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'most_recent', 'style': 'form', 'explode': True }})
@@ -70,13 +71,13 @@ class GetReportsEntityTypeQueryParams:
 
 @dataclass
 class GetReportsEntityTypeRequest:
-    path_params: GetReportsEntityTypePathParams = field(default=None)
-    query_params: GetReportsEntityTypeQueryParams = field(default=None)
+    path_params: GetReportsEntityTypePathParams = field()
+    query_params: GetReportsEntityTypeQueryParams = field()
     
 
 @dataclass
 class GetReportsEntityTypeResponse:
+    content_type: str = field()
+    status_code: int = field()
     committee_reports_page: Optional[shared.CommitteeReportsPage] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Secret } from "./secret";
 /**
  * Configuration information for a Kerberos principal.

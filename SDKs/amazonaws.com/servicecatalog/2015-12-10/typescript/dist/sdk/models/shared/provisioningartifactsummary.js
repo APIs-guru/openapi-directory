@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ProvisioningArtifactSummary
 /**
  * Summary information about a provisioning artifact (also known as a version) for a product.
@@ -33,23 +33,23 @@ var ProvisioningArtifactSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CreatedTime" }),
+        SpeakeasyMetadata({ data: "json, name=CreatedTime" }),
         __metadata("design:type", Date)
     ], ProvisioningArtifactSummary.prototype, "createdTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], ProvisioningArtifactSummary.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=Id" }),
+        SpeakeasyMetadata({ data: "json, name=Id" }),
         __metadata("design:type", String)
     ], ProvisioningArtifactSummary.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], ProvisioningArtifactSummary.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProvisioningArtifactMetadata" }),
+        SpeakeasyMetadata({ data: "json, name=ProvisioningArtifactMetadata" }),
         __metadata("design:type", Map)
     ], ProvisioningArtifactSummary.prototype, "provisioningArtifactMetadata", void 0);
     return ProvisioningArtifactSummary;

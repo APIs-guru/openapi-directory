@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetSettingPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=settingId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=settingId" })
   settingId: number;
 }
 
 
 export class GetSettingRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetSettingPathParams;
 }
 
 
 export class GetSettingResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   settingModel?: shared.SettingModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   settingModelHaljson?: shared.SettingModelHaljson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

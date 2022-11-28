@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BundleTypeEnum } from "./bundletypeenum";
+
 
 
 // S3Location
@@ -7,18 +8,18 @@ import { BundleTypeEnum } from "./bundletypeenum";
  * Information about the location of application artifacts stored in Amazon S3.
 **/
 export class S3Location extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bucket" })
+  @SpeakeasyMetadata({ data: "json, name=bucket" })
   bucket?: string;
 
-  @Metadata({ data: "json, name=bundleType" })
+  @SpeakeasyMetadata({ data: "json, name=bundleType" })
   bundleType?: BundleTypeEnum;
 
-  @Metadata({ data: "json, name=eTag" })
+  @SpeakeasyMetadata({ data: "json, name=eTag" })
   eTag?: string;
 
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: string;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 }

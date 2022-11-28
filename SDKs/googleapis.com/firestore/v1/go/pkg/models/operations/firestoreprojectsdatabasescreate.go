@@ -41,7 +41,7 @@ type FirestoreProjectsDatabasesCreateSecurity struct {
 type FirestoreProjectsDatabasesCreateRequest struct {
 	PathParams  FirestoreProjectsDatabasesCreatePathParams
 	QueryParams FirestoreProjectsDatabasesCreateQueryParams
-	Request     *shared.GoogleFirestoreAdminV1Database `request:"mediaType=application/json"`
+	Request     *shared.GoogleFirestoreAdminV1DatabaseInput `request:"mediaType=application/json"`
 	Security    FirestoreProjectsDatabasesCreateSecurity
 }
 

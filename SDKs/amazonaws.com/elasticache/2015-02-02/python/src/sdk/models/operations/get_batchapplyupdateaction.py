@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetBatchApplyUpdateActionActionEnum(str, Enum):
     BATCH_APPLY_UPDATE_ACTION = "BatchApplyUpdateAction"
@@ -10,11 +14,11 @@ class GetBatchApplyUpdateActionVersionEnum(str, Enum):
 
 @dataclass
 class GetBatchApplyUpdateActionQueryParams:
-    action: GetBatchApplyUpdateActionActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetBatchApplyUpdateActionActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    service_update_name: str = field(metadata={'query_param': { 'field_name': 'ServiceUpdateName', 'style': 'form', 'explode': True }})
+    version: GetBatchApplyUpdateActionVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     cache_cluster_ids: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'CacheClusterIds', 'style': 'form', 'explode': True }})
     replication_group_ids: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'ReplicationGroupIds', 'style': 'form', 'explode': True }})
-    service_update_name: str = field(default=None, metadata={'query_param': { 'field_name': 'ServiceUpdateName', 'style': 'form', 'explode': True }})
-    version: GetBatchApplyUpdateActionVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetBatchApplyUpdateActionHeaders:
 
 @dataclass
 class GetBatchApplyUpdateActionRequest:
-    query_params: GetBatchApplyUpdateActionQueryParams = field(default=None)
-    headers: GetBatchApplyUpdateActionHeaders = field(default=None)
+    headers: GetBatchApplyUpdateActionHeaders = field()
+    query_params: GetBatchApplyUpdateActionQueryParams = field()
     
 
 @dataclass
 class GetBatchApplyUpdateActionResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

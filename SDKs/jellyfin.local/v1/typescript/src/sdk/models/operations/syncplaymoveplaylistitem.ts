@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class SyncPlayMovePlaylistItemRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
   movePlaylistItemRequestDto?: shared.MovePlaylistItemRequestDto;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   movePlaylistItemRequestDto1?: shared.MovePlaylistItemRequestDto;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   movePlaylistItemRequestDto2?: shared.MovePlaylistItemRequestDto;
 }
 
 
 export class SyncPlayMovePlaylistItemSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   customAuthentication: shared.SchemeCustomAuthentication;
 }
 
 
 export class SyncPlayMovePlaylistItemRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   request: SyncPlayMovePlaylistItemRequests;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: SyncPlayMovePlaylistItemSecurity;
 }
 
 
 export class SyncPlayMovePlaylistItemResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

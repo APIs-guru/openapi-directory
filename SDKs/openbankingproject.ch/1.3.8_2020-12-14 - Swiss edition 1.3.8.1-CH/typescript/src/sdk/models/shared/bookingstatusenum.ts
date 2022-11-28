@@ -1,8 +1,9 @@
 
 
+
 export enum BookingStatusEnum {
-    Information = "information"
-,    Booked = "booked"
-,    Pending = "pending"
-,    Both = "both"
+    Information = "information",
+    Booked = "booked",
+    Pending = "pending",
+    Both = "both"
 }

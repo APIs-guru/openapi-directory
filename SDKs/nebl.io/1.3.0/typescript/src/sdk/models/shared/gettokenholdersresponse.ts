@@ -1,32 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetTokenHoldersResponseHolders extends SpeakeasyBase {
-  @Metadata({ data: "json, name=address" })
+  @SpeakeasyMetadata({ data: "json, name=address" })
   address?: string;
 
-  @Metadata({ data: "json, name=amount" })
+  @SpeakeasyMetadata({ data: "json, name=amount" })
   amount?: number;
 }
 
 
 export class GetTokenHoldersResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=aggregationPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=aggregationPolicy" })
   aggregationPolicy?: string;
 
-  @Metadata({ data: "json, name=divibility" })
+  @SpeakeasyMetadata({ data: "json, name=divibility" })
   divibility?: number;
 
-  @Metadata({ data: "json, name=holders", elemType: shared.GetTokenHoldersResponseHolders })
+  @SpeakeasyMetadata({ data: "json, name=holders", elemType: GetTokenHoldersResponseHolders })
   holders?: GetTokenHoldersResponseHolders[];
 
-  @Metadata({ data: "json, name=lockStatus" })
+  @SpeakeasyMetadata({ data: "json, name=lockStatus" })
   lockStatus?: boolean;
 
-  @Metadata({ data: "json, name=someUtxo" })
+  @SpeakeasyMetadata({ data: "json, name=someUtxo" })
   someUtxo?: string;
 
-  @Metadata({ data: "json, name=tokenId" })
+  @SpeakeasyMetadata({ data: "json, name=tokenId" })
   tokenId?: string;
 }

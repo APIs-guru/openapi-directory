@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EventSubscription } from "./eventsubscription";
+
 
 
 // CreateEventSubscriptionResponse
@@ -7,6 +8,6 @@ import { EventSubscription } from "./eventsubscription";
  * <p/>
 **/
 export class CreateEventSubscriptionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EventSubscription" })
+  @SpeakeasyMetadata({ data: "json, name=EventSubscription" })
   eventSubscription?: EventSubscription;
 }

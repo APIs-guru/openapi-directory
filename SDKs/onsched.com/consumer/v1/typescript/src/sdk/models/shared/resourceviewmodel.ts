@@ -1,79 +1,80 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ResourceViewModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bioLink" })
+  @SpeakeasyMetadata({ data: "json, name=bioLink" })
   bioLink?: string;
 
-  @Metadata({ data: "json, name=bookingNotification" })
+  @SpeakeasyMetadata({ data: "json, name=bookingNotification" })
   bookingNotification?: number;
 
-  @Metadata({ data: "json, name=calendarAvailability" })
+  @SpeakeasyMetadata({ data: "json, name=calendarAvailability" })
   calendarAvailability?: number;
 
-  @Metadata({ data: "json, name=deletedStatus" })
+  @SpeakeasyMetadata({ data: "json, name=deletedStatus" })
   deletedStatus?: boolean;
 
-  @Metadata({ data: "json, name=deletedTime" })
+  @SpeakeasyMetadata({ data: "json, name=deletedTime" })
   deletedTime?: Date;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=effectiveDate" })
+  @SpeakeasyMetadata({ data: "json, name=effectiveDate" })
   effectiveDate?: Date;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=gender" })
+  @SpeakeasyMetadata({ data: "json, name=gender" })
   gender?: string;
 
-  @Metadata({ data: "json, name=googleCalendarId" })
+  @SpeakeasyMetadata({ data: "json, name=googleCalendarId" })
   googleCalendarId?: string;
 
-  @Metadata({ data: "json, name=groupId" })
+  @SpeakeasyMetadata({ data: "json, name=groupId" })
   groupId?: string;
 
-  @Metadata({ data: "json, name=hourly" })
+  @SpeakeasyMetadata({ data: "json, name=hourly" })
   hourly?: number;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=ignoreBusinessHours" })
+  @SpeakeasyMetadata({ data: "json, name=ignoreBusinessHours" })
   ignoreBusinessHours?: boolean;
 
-  @Metadata({ data: "json, name=imageUrl" })
+  @SpeakeasyMetadata({ data: "json, name=imageUrl" })
   imageUrl?: string;
 
-  @Metadata({ data: "json, name=locationId" })
+  @SpeakeasyMetadata({ data: "json, name=locationId" })
   locationId?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=notificationType" })
+  @SpeakeasyMetadata({ data: "json, name=notificationType" })
   notificationType?: number;
 
-  @Metadata({ data: "json, name=objectName" })
+  @SpeakeasyMetadata({ data: "json, name=objectName" })
   objectName?: string;
 
-  @Metadata({ data: "json, name=outlookCalendarId" })
+  @SpeakeasyMetadata({ data: "json, name=outlookCalendarId" })
   outlookCalendarId?: string;
 
-  @Metadata({ data: "json, name=skypeName" })
+  @SpeakeasyMetadata({ data: "json, name=skypeName" })
   skypeName?: string;
 
-  @Metadata({ data: "json, name=sortKey" })
+  @SpeakeasyMetadata({ data: "json, name=sortKey" })
   sortKey?: number;
 
-  @Metadata({ data: "json, name=timezoneIana" })
+  @SpeakeasyMetadata({ data: "json, name=timezoneIana" })
   timezoneIana?: string;
 
-  @Metadata({ data: "json, name=timezoneId" })
+  @SpeakeasyMetadata({ data: "json, name=timezoneId" })
   timezoneId?: string;
 
-  @Metadata({ data: "json, name=timezoneOffset" })
+  @SpeakeasyMetadata({ data: "json, name=timezoneOffset" })
   timezoneOffset?: number;
 }

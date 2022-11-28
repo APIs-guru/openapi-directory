@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class EnterpriseAdminListSelfHostedRunnersInGroupForEnterprisePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=enterprise" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=enterprise" })
   enterprise: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=runner_group_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=runner_group_id" })
   runnerGroupId: number;
 }
 
 
 export class EnterpriseAdminListSelfHostedRunnersInGroupForEnterpriseQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 }
 
 
-export class EnterpriseAdminListSelfHostedRunnersInGroupForEnterpriseRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: EnterpriseAdminListSelfHostedRunnersInGroupForEnterprisePathParams;
-
-  @Metadata()
-  queryParams: EnterpriseAdminListSelfHostedRunnersInGroupForEnterpriseQueryParams;
-}
-
-
 export class EnterpriseAdminListSelfHostedRunnersInGroupForEnterprise200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=runners", elemType: shared.RunnerNoLabels })
+  @SpeakeasyMetadata({ data: "json, name=runners", elemType: shared.RunnerNoLabels })
   runners: shared.RunnerNoLabels[];
 
-  @Metadata({ data: "json, name=total_count" })
+  @SpeakeasyMetadata({ data: "json, name=total_count" })
   totalCount: number;
 }
 
 
+export class EnterpriseAdminListSelfHostedRunnersInGroupForEnterpriseRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: EnterpriseAdminListSelfHostedRunnersInGroupForEnterprisePathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: EnterpriseAdminListSelfHostedRunnersInGroupForEnterpriseQueryParams;
+}
+
+
 export class EnterpriseAdminListSelfHostedRunnersInGroupForEnterpriseResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   enterpriseAdminListSelfHostedRunnersInGroupForEnterprise200ApplicationJsonObject?: EnterpriseAdminListSelfHostedRunnersInGroupForEnterprise200ApplicationJson;
 }

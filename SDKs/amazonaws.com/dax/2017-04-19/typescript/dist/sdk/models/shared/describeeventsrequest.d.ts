@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { SourceTypeEnum } from "./sourcetypeenum";
 export declare class DescribeEventsRequest extends SpeakeasyBase {
     duration?: number;

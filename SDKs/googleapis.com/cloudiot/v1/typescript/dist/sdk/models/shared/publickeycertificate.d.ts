@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { X509CertificateDetails } from "./x509certificatedetails";
 export declare enum PublicKeyCertificateFormatEnum {
     UnspecifiedPublicKeyCertificateFormat = "UNSPECIFIED_PUBLIC_KEY_CERTIFICATE_FORMAT",

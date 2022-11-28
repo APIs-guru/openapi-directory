@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TransactionResource } from "./transactionresource";
+
 
 
 // GetTransactionResponse
@@ -8,6 +9,6 @@ import { TransactionResource } from "./transactionresource";
  * 
 **/
 export class GetTransactionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: TransactionResource;
 }

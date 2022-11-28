@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Write } from "./write";
+
 
 
 // CommitRequest
@@ -8,9 +8,9 @@ import { Write } from "./write";
  * The request for Firestore.Commit.
 **/
 export class CommitRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=transaction" })
+  @SpeakeasyMetadata({ data: "json, name=transaction" })
   transaction?: string;
 
-  @Metadata({ data: "json, name=writes", elemType: shared.Write })
+  @SpeakeasyMetadata({ data: "json, name=writes", elemType: Write })
   writes?: Write[];
 }

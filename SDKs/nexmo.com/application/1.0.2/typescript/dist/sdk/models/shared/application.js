@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Links } from "./links";
 import { Keys } from "./keys";
 import { Messages } from "./messages";
@@ -33,27 +33,27 @@ var Application = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=_links" }),
+        SpeakeasyMetadata({ data: "json, name=_links" }),
         __metadata("design:type", Links)
     ], Application.prototype, "links", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], Application.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=keys" }),
+        SpeakeasyMetadata({ data: "json, name=keys" }),
         __metadata("design:type", Keys)
     ], Application.prototype, "keys", void 0);
     __decorate([
-        Metadata({ data: "json, name=messages" }),
+        SpeakeasyMetadata({ data: "json, name=messages" }),
         __metadata("design:type", Messages)
     ], Application.prototype, "messages", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Application.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=voice" }),
+        SpeakeasyMetadata({ data: "json, name=voice" }),
         __metadata("design:type", Voice)
     ], Application.prototype, "voice", void 0);
     return Application;

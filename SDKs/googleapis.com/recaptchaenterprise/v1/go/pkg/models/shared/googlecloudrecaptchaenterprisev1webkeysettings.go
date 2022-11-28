@@ -18,6 +18,8 @@ const (
 	GoogleCloudRecaptchaenterpriseV1WebKeySettingsIntegrationTypeEnumInvisible                  GoogleCloudRecaptchaenterpriseV1WebKeySettingsIntegrationTypeEnum = "INVISIBLE"
 )
 
+// GoogleCloudRecaptchaenterpriseV1WebKeySettings
+// Settings specific to keys that can be used by websites.
 type GoogleCloudRecaptchaenterpriseV1WebKeySettings struct {
 	AllowAllDomains             *bool                                                                          `json:"allowAllDomains,omitempty"`
 	AllowAmpTraffic             *bool                                                                          `json:"allowAmpTraffic,omitempty"`

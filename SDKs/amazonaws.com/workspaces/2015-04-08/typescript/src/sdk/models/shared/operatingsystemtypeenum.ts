@@ -1,6 +1,7 @@
 
 
+
 export enum OperatingSystemTypeEnum {
-    Windows = "WINDOWS"
-,    Linux = "LINUX"
+    Windows = "WINDOWS",
+    Linux = "LINUX"
 }

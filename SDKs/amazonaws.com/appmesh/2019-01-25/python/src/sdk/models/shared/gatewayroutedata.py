@@ -1,17 +1,20 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import resourcemetadata
-from . import gatewayroutespec
-from . import gatewayroutestatus
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GatewayRouteData:
-    gateway_route_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gatewayRouteName' }})
-    mesh_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meshName' }})
-    metadata: resourcemetadata.ResourceMetadata = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadata' }})
-    spec: gatewayroutespec.GatewayRouteSpec = field(default=None, metadata={'dataclasses_json': { 'field_name': 'spec' }})
-    status: gatewayroutestatus.GatewayRouteStatus = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    virtual_gateway_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'virtualGatewayName' }})
+    r"""GatewayRouteData
+    An object that represents a gateway route returned by a describe operation.
+    """
+    
+    gateway_route_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('gatewayRouteName') }})
+    mesh_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('meshName') }})
+    metadata: ResourceMetadata = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('metadata') }})
+    spec: GatewayRouteSpec = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('spec') }})
+    status: GatewayRouteStatus = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    virtual_gateway_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('virtualGatewayName') }})
     

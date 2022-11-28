@@ -1,14 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FilterExpression } from "./filterexpression";
 import { Dimension } from "./dimension";
-import { FilterExpression } from "./filterexpression";
 import { Metric } from "./metric";
 
+
 export enum CheckCompatibilityRequestCompatibilityFilterEnum {
-    CompatibilityUnspecified = "COMPATIBILITY_UNSPECIFIED"
-,    Compatible = "COMPATIBLE"
-,    Incompatible = "INCOMPATIBLE"
+    CompatibilityUnspecified = "COMPATIBILITY_UNSPECIFIED",
+    Compatible = "COMPATIBLE",
+    Incompatible = "INCOMPATIBLE"
 }
 
 
@@ -17,18 +16,18 @@ export enum CheckCompatibilityRequestCompatibilityFilterEnum {
  * The request for compatibility information for a report's dimensions and metrics. Check compatibility provides a preview of the compatibility of a report; fields shared with the `runReport` request should be the same values as in your `runReport` request.
 **/
 export class CheckCompatibilityRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=compatibilityFilter" })
+  @SpeakeasyMetadata({ data: "json, name=compatibilityFilter" })
   compatibilityFilter?: CheckCompatibilityRequestCompatibilityFilterEnum;
 
-  @Metadata({ data: "json, name=dimensionFilter" })
+  @SpeakeasyMetadata({ data: "json, name=dimensionFilter" })
   dimensionFilter?: FilterExpression;
 
-  @Metadata({ data: "json, name=dimensions", elemType: shared.Dimension })
+  @SpeakeasyMetadata({ data: "json, name=dimensions", elemType: Dimension })
   dimensions?: Dimension[];
 
-  @Metadata({ data: "json, name=metricFilter" })
+  @SpeakeasyMetadata({ data: "json, name=metricFilter" })
   metricFilter?: FilterExpression;
 
-  @Metadata({ data: "json, name=metrics", elemType: shared.Metric })
+  @SpeakeasyMetadata({ data: "json, name=metrics", elemType: Metric })
   metrics?: Metric[];
 }

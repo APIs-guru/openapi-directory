@@ -1,43 +1,44 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Dimensions } from "./dimensions";
 import { DownloadDetails } from "./downloaddetails";
 import { User } from "./user";
 
 
+
 export class HistoricalDownload extends SpeakeasyBase {
-  @Metadata({ data: "json, name=agreement_name" })
+  @SpeakeasyMetadata({ data: "json, name=agreement_name" })
   agreementName?: string;
 
-  @Metadata({ data: "json, name=asset_type" })
+  @SpeakeasyMetadata({ data: "json, name=asset_type" })
   assetType?: string;
 
-  @Metadata({ data: "json, name=date_downloaded" })
+  @SpeakeasyMetadata({ data: "json, name=date_downloaded" })
   dateDownloaded?: Date;
 
-  @Metadata({ data: "json, name=dimensions" })
+  @SpeakeasyMetadata({ data: "json, name=dimensions" })
   dimensions?: Dimensions;
 
-  @Metadata({ data: "json, name=download_details" })
+  @SpeakeasyMetadata({ data: "json, name=download_details" })
   downloadDetails?: DownloadDetails;
 
-  @Metadata({ data: "json, name=download_source" })
+  @SpeakeasyMetadata({ data: "json, name=download_source" })
   downloadSource?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=product_id" })
+  @SpeakeasyMetadata({ data: "json, name=product_id" })
   productId?: number;
 
-  @Metadata({ data: "json, name=product_type" })
+  @SpeakeasyMetadata({ data: "json, name=product_type" })
   productType?: string;
 
-  @Metadata({ data: "json, name=size_name" })
+  @SpeakeasyMetadata({ data: "json, name=size_name" })
   sizeName?: string;
 
-  @Metadata({ data: "json, name=thumb_uri" })
+  @SpeakeasyMetadata({ data: "json, name=thumb_uri" })
   thumbUri?: string;
 
-  @Metadata({ data: "json, name=user" })
+  @SpeakeasyMetadata({ data: "json, name=user" })
   user?: User;
 }

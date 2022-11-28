@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import rolegroup
-from . import range
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class RoleGroupList:
-    items: List[rolegroup.RoleGroup] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'items' }})
-    range: range.Range = field(default=None, metadata={'dataclasses_json': { 'field_name': 'range' }})
+    r"""RoleGroupList
+    List of groups with assigned role
+    """
+    
+    items: List[RoleGroup] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('items') }})
+    range: Range = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('range') }})
     

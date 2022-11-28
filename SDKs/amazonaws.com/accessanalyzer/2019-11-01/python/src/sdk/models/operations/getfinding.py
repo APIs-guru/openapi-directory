@@ -1,16 +1,19 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetFindingPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetFindingQueryParams:
-    analyzer_arn: str = field(default=None, metadata={'query_param': { 'field_name': 'analyzerArn', 'style': 'form', 'explode': True }})
+    analyzer_arn: str = field(metadata={'query_param': { 'field_name': 'analyzerArn', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -26,19 +29,19 @@ class GetFindingHeaders:
 
 @dataclass
 class GetFindingRequest:
-    path_params: GetFindingPathParams = field(default=None)
-    query_params: GetFindingQueryParams = field(default=None)
-    headers: GetFindingHeaders = field(default=None)
+    headers: GetFindingHeaders = field()
+    path_params: GetFindingPathParams = field()
+    query_params: GetFindingQueryParams = field()
     
 
 @dataclass
 class GetFindingResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_finding_response: Optional[shared.GetFindingResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

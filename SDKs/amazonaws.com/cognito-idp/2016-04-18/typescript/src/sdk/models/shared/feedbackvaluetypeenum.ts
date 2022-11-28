@@ -1,6 +1,7 @@
 
 
+
 export enum FeedbackValueTypeEnum {
-    Valid = "Valid"
-,    Invalid = "Invalid"
+    Valid = "Valid",
+    Invalid = "Invalid"
 }

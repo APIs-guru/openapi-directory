@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InputDataConfig } from "./inputdataconfig";
 import { JobStatusEnum } from "./jobstatusenum";
 import { LanguageCodeEnum } from "./languagecodeenum";
 import { OutputDataConfig } from "./outputdataconfig";
+
 
 
 // EventsDetectionJobProperties
@@ -10,39 +11,39 @@ import { OutputDataConfig } from "./outputdataconfig";
  * Provides information about an events detection job.
 **/
 export class EventsDetectionJobProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DataAccessRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=DataAccessRoleArn" })
   dataAccessRoleArn?: string;
 
-  @Metadata({ data: "json, name=EndTime" })
+  @SpeakeasyMetadata({ data: "json, name=EndTime" })
   endTime?: Date;
 
-  @Metadata({ data: "json, name=InputDataConfig" })
+  @SpeakeasyMetadata({ data: "json, name=InputDataConfig" })
   inputDataConfig?: InputDataConfig;
 
-  @Metadata({ data: "json, name=JobArn" })
+  @SpeakeasyMetadata({ data: "json, name=JobArn" })
   jobArn?: string;
 
-  @Metadata({ data: "json, name=JobId" })
+  @SpeakeasyMetadata({ data: "json, name=JobId" })
   jobId?: string;
 
-  @Metadata({ data: "json, name=JobName" })
+  @SpeakeasyMetadata({ data: "json, name=JobName" })
   jobName?: string;
 
-  @Metadata({ data: "json, name=JobStatus" })
+  @SpeakeasyMetadata({ data: "json, name=JobStatus" })
   jobStatus?: JobStatusEnum;
 
-  @Metadata({ data: "json, name=LanguageCode" })
+  @SpeakeasyMetadata({ data: "json, name=LanguageCode" })
   languageCode?: LanguageCodeEnum;
 
-  @Metadata({ data: "json, name=Message" })
+  @SpeakeasyMetadata({ data: "json, name=Message" })
   message?: string;
 
-  @Metadata({ data: "json, name=OutputDataConfig" })
+  @SpeakeasyMetadata({ data: "json, name=OutputDataConfig" })
   outputDataConfig?: OutputDataConfig;
 
-  @Metadata({ data: "json, name=SubmitTime" })
+  @SpeakeasyMetadata({ data: "json, name=SubmitTime" })
   submitTime?: Date;
 
-  @Metadata({ data: "json, name=TargetEventTypes" })
+  @SpeakeasyMetadata({ data: "json, name=TargetEventTypes" })
   targetEventTypes?: string[];
 }

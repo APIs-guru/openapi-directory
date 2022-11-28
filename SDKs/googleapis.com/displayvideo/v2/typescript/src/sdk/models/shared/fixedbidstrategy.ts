@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // FixedBidStrategy
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A strategy that uses a fixed bidding price.
 **/
 export class FixedBidStrategy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bidAmountMicros" })
+  @SpeakeasyMetadata({ data: "json, name=bidAmountMicros" })
   bidAmountMicros?: string;
 }

@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class StartPolicyGenerationHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -31,16 +32,16 @@ export class StartPolicyGenerationHeaders extends SpeakeasyBase {
  * Contains information about CloudTrail access.
 **/
 export class StartPolicyGenerationRequestBodyCloudTrailDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessRole" })
+  @SpeakeasyMetadata({ data: "json, name=accessRole" })
   accessRole?: string;
 
-  @Metadata({ data: "json, name=endTime" })
+  @SpeakeasyMetadata({ data: "json, name=endTime" })
   endTime?: Date;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: Date;
 
-  @Metadata({ data: "json, name=trails", elemType: shared.Trail })
+  @SpeakeasyMetadata({ data: "json, name=trails", elemType: shared.Trail })
   trails?: shared.Trail[];
 }
 
@@ -50,57 +51,57 @@ export class StartPolicyGenerationRequestBodyCloudTrailDetails extends Speakeasy
  * Contains the ARN details about the IAM entity for which the policy is generated.
 **/
 export class StartPolicyGenerationRequestBodyPolicyGenerationDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=principalArn" })
+  @SpeakeasyMetadata({ data: "json, name=principalArn" })
   principalArn?: string;
 }
 
 
 export class StartPolicyGenerationRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clientToken" })
+  @SpeakeasyMetadata({ data: "json, name=clientToken" })
   clientToken?: string;
 
-  @Metadata({ data: "json, name=cloudTrailDetails" })
+  @SpeakeasyMetadata({ data: "json, name=cloudTrailDetails" })
   cloudTrailDetails?: StartPolicyGenerationRequestBodyCloudTrailDetails;
 
-  @Metadata({ data: "json, name=policyGenerationDetails" })
+  @SpeakeasyMetadata({ data: "json, name=policyGenerationDetails" })
   policyGenerationDetails: StartPolicyGenerationRequestBodyPolicyGenerationDetails;
 }
 
 
 export class StartPolicyGenerationRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: StartPolicyGenerationHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: StartPolicyGenerationRequestBody;
 }
 
 
 export class StartPolicyGenerationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   accessDeniedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   conflictException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceQuotaExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   startPolicyGenerationResponse?: shared.StartPolicyGenerationResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationException?: any;
 }

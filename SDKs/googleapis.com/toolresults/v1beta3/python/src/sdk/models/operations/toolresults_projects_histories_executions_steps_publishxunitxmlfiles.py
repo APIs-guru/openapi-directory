@@ -1,14 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ToolresultsProjectsHistoriesExecutionsStepsPublishXunitXMLFilesPathParams:
-    execution_id: str = field(default=None, metadata={'path_param': { 'field_name': 'executionId', 'style': 'simple', 'explode': False }})
-    history_id: str = field(default=None, metadata={'path_param': { 'field_name': 'historyId', 'style': 'simple', 'explode': False }})
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
-    step_id: str = field(default=None, metadata={'path_param': { 'field_name': 'stepId', 'style': 'simple', 'explode': False }})
+    execution_id: str = field(metadata={'path_param': { 'field_name': 'executionId', 'style': 'simple', 'explode': False }})
+    history_id: str = field(metadata={'path_param': { 'field_name': 'historyId', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
+    step_id: str = field(metadata={'path_param': { 'field_name': 'stepId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,21 +29,21 @@ class ToolresultsProjectsHistoriesExecutionsStepsPublishXunitXMLFilesQueryParams
 
 @dataclass
 class ToolresultsProjectsHistoriesExecutionsStepsPublishXunitXMLFilesSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ToolresultsProjectsHistoriesExecutionsStepsPublishXunitXMLFilesRequest:
-    path_params: ToolresultsProjectsHistoriesExecutionsStepsPublishXunitXMLFilesPathParams = field(default=None)
-    query_params: ToolresultsProjectsHistoriesExecutionsStepsPublishXunitXMLFilesQueryParams = field(default=None)
+    path_params: ToolresultsProjectsHistoriesExecutionsStepsPublishXunitXMLFilesPathParams = field()
+    query_params: ToolresultsProjectsHistoriesExecutionsStepsPublishXunitXMLFilesQueryParams = field()
+    security: ToolresultsProjectsHistoriesExecutionsStepsPublishXunitXMLFilesSecurity = field()
     request: Optional[shared.PublishXunitXMLFilesRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ToolresultsProjectsHistoriesExecutionsStepsPublishXunitXMLFilesSecurity = field(default=None)
     
 
 @dataclass
 class ToolresultsProjectsHistoriesExecutionsStepsPublishXunitXMLFilesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     step: Optional[shared.Step] = field(default=None)
     

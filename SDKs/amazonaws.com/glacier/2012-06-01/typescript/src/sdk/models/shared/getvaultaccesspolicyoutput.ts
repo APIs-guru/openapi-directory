@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VaultAccessPolicy } from "./vaultaccesspolicy";
+
 
 
 // GetVaultAccessPolicyOutput
@@ -7,6 +8,6 @@ import { VaultAccessPolicy } from "./vaultaccesspolicy";
  * Output for GetVaultAccessPolicy.
 **/
 export class GetVaultAccessPolicyOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=policy" })
+  @SpeakeasyMetadata({ data: "json, name=policy" })
   policy?: VaultAccessPolicy;
 }

@@ -13,6 +13,8 @@ const (
 	MaintenanceWindowDayOfWeekEnumSunday               MaintenanceWindowDayOfWeekEnum = "SUNDAY"
 )
 
+// MaintenanceWindow
+// Maintenance window. This specifies when Dataproc Metastore may perform system maintenance operation to the service.
 type MaintenanceWindow struct {
 	DayOfWeek *MaintenanceWindowDayOfWeekEnum `json:"dayOfWeek,omitempty"`
 	HourOfDay *int32                          `json:"hourOfDay,omitempty"`

@@ -1,5 +1,7 @@
 package shared
 
+// StartReplicationTaskAssessmentRunMessage
+// <p/>
 type StartReplicationTaskAssessmentRunMessage struct {
 	AssessmentRunName    string   `json:"AssessmentRunName"`
 	Exclude              []string `json:"Exclude,omitempty"`

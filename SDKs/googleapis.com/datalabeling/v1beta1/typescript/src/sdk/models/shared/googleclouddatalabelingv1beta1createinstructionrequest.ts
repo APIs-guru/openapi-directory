@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDatalabelingV1beta1Instruction } from "./googleclouddatalabelingv1beta1instruction";
+
 
 
 // GoogleCloudDatalabelingV1beta1CreateInstructionRequest
@@ -7,6 +8,6 @@ import { GoogleCloudDatalabelingV1beta1Instruction } from "./googleclouddatalabe
  * Request message for CreateInstruction.
 **/
 export class GoogleCloudDatalabelingV1beta1CreateInstructionRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=instruction" })
+  @SpeakeasyMetadata({ data: "json, name=instruction" })
   instruction?: GoogleCloudDatalabelingV1beta1Instruction;
 }

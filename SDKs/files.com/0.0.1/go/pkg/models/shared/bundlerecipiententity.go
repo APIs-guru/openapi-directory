@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// BundleRecipientEntity
+// List Bundle Recipients
 type BundleRecipientEntity struct {
 	Company   *string    `json:"company,omitempty"`
 	Name      *string    `json:"name,omitempty"`

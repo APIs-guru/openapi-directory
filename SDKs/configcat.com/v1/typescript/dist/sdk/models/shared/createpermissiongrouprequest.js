@@ -22,9 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccessTypeEnum } from "./accesstypeenum";
+import { EnvironmentAccessModel } from "./environmentaccessmodel";
 import { EnvironmentAccessTypeEnum } from "./environmentaccesstypeenum";
 var CreatePermissionGroupRequest = /** @class */ (function (_super) {
     __extends(CreatePermissionGroupRequest, _super);
@@ -32,91 +32,91 @@ var CreatePermissionGroupRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=accessType" }),
+        SpeakeasyMetadata({ data: "json, name=accessType" }),
         __metadata("design:type", String)
     ], CreatePermissionGroupRequest.prototype, "accessType", void 0);
     __decorate([
-        Metadata({ data: "json, name=canCreateOrUpdateConfig" }),
+        SpeakeasyMetadata({ data: "json, name=canCreateOrUpdateConfig" }),
         __metadata("design:type", Boolean)
     ], CreatePermissionGroupRequest.prototype, "canCreateOrUpdateConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=canCreateOrUpdateEnvironment" }),
+        SpeakeasyMetadata({ data: "json, name=canCreateOrUpdateEnvironment" }),
         __metadata("design:type", Boolean)
     ], CreatePermissionGroupRequest.prototype, "canCreateOrUpdateEnvironment", void 0);
     __decorate([
-        Metadata({ data: "json, name=canCreateOrUpdateSetting" }),
+        SpeakeasyMetadata({ data: "json, name=canCreateOrUpdateSetting" }),
         __metadata("design:type", Boolean)
     ], CreatePermissionGroupRequest.prototype, "canCreateOrUpdateSetting", void 0);
     __decorate([
-        Metadata({ data: "json, name=canCreateOrUpdateTag" }),
+        SpeakeasyMetadata({ data: "json, name=canCreateOrUpdateTag" }),
         __metadata("design:type", Boolean)
     ], CreatePermissionGroupRequest.prototype, "canCreateOrUpdateTag", void 0);
     __decorate([
-        Metadata({ data: "json, name=canDeleteConfig" }),
+        SpeakeasyMetadata({ data: "json, name=canDeleteConfig" }),
         __metadata("design:type", Boolean)
     ], CreatePermissionGroupRequest.prototype, "canDeleteConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=canDeleteEnvironment" }),
+        SpeakeasyMetadata({ data: "json, name=canDeleteEnvironment" }),
         __metadata("design:type", Boolean)
     ], CreatePermissionGroupRequest.prototype, "canDeleteEnvironment", void 0);
     __decorate([
-        Metadata({ data: "json, name=canDeleteSetting" }),
+        SpeakeasyMetadata({ data: "json, name=canDeleteSetting" }),
         __metadata("design:type", Boolean)
     ], CreatePermissionGroupRequest.prototype, "canDeleteSetting", void 0);
     __decorate([
-        Metadata({ data: "json, name=canDeleteTag" }),
+        SpeakeasyMetadata({ data: "json, name=canDeleteTag" }),
         __metadata("design:type", Boolean)
     ], CreatePermissionGroupRequest.prototype, "canDeleteTag", void 0);
     __decorate([
-        Metadata({ data: "json, name=canManageIntegrations" }),
+        SpeakeasyMetadata({ data: "json, name=canManageIntegrations" }),
         __metadata("design:type", Boolean)
     ], CreatePermissionGroupRequest.prototype, "canManageIntegrations", void 0);
     __decorate([
-        Metadata({ data: "json, name=canManageMembers" }),
+        SpeakeasyMetadata({ data: "json, name=canManageMembers" }),
         __metadata("design:type", Boolean)
     ], CreatePermissionGroupRequest.prototype, "canManageMembers", void 0);
     __decorate([
-        Metadata({ data: "json, name=canManageProductPreferences" }),
+        SpeakeasyMetadata({ data: "json, name=canManageProductPreferences" }),
         __metadata("design:type", Boolean)
     ], CreatePermissionGroupRequest.prototype, "canManageProductPreferences", void 0);
     __decorate([
-        Metadata({ data: "json, name=canManageWebhook" }),
+        SpeakeasyMetadata({ data: "json, name=canManageWebhook" }),
         __metadata("design:type", Boolean)
     ], CreatePermissionGroupRequest.prototype, "canManageWebhook", void 0);
     __decorate([
-        Metadata({ data: "json, name=canRotateSdkKey" }),
+        SpeakeasyMetadata({ data: "json, name=canRotateSdkKey" }),
         __metadata("design:type", Boolean)
     ], CreatePermissionGroupRequest.prototype, "canRotateSdkKey", void 0);
     __decorate([
-        Metadata({ data: "json, name=canTagSetting" }),
+        SpeakeasyMetadata({ data: "json, name=canTagSetting" }),
         __metadata("design:type", Boolean)
     ], CreatePermissionGroupRequest.prototype, "canTagSetting", void 0);
     __decorate([
-        Metadata({ data: "json, name=canUseExportImport" }),
+        SpeakeasyMetadata({ data: "json, name=canUseExportImport" }),
         __metadata("design:type", Boolean)
     ], CreatePermissionGroupRequest.prototype, "canUseExportImport", void 0);
     __decorate([
-        Metadata({ data: "json, name=canViewProductAuditLog" }),
+        SpeakeasyMetadata({ data: "json, name=canViewProductAuditLog" }),
         __metadata("design:type", Boolean)
     ], CreatePermissionGroupRequest.prototype, "canViewProductAuditLog", void 0);
     __decorate([
-        Metadata({ data: "json, name=canViewProductStatistics" }),
+        SpeakeasyMetadata({ data: "json, name=canViewProductStatistics" }),
         __metadata("design:type", Boolean)
     ], CreatePermissionGroupRequest.prototype, "canViewProductStatistics", void 0);
     __decorate([
-        Metadata({ data: "json, name=canViewSdkKey" }),
+        SpeakeasyMetadata({ data: "json, name=canViewSdkKey" }),
         __metadata("design:type", Boolean)
     ], CreatePermissionGroupRequest.prototype, "canViewSdkKey", void 0);
     __decorate([
-        Metadata({ data: "json, name=environmentAccesses", elemType: shared.EnvironmentAccessModel }),
+        SpeakeasyMetadata({ data: "json, name=environmentAccesses", elemType: EnvironmentAccessModel }),
         __metadata("design:type", Array)
     ], CreatePermissionGroupRequest.prototype, "environmentAccesses", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], CreatePermissionGroupRequest.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=newEnvironmentAccessType" }),
+        SpeakeasyMetadata({ data: "json, name=newEnvironmentAccessType" }),
         __metadata("design:type", String)
     ], CreatePermissionGroupRequest.prototype, "newEnvironmentAccessType", void 0);
     return CreatePermissionGroupRequest;

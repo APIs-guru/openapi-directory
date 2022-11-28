@@ -20,12 +20,12 @@ class GetBundleDownloadsQueryParams:
 
 @dataclass
 class GetBundleDownloadsRequest:
-    query_params: GetBundleDownloadsQueryParams = field(default=None)
+    query_params: GetBundleDownloadsQueryParams = field()
     
 
 @dataclass
 class GetBundleDownloadsResponse:
+    content_type: str = field()
+    status_code: int = field()
     bundle_download_entities: Optional[List[shared.BundleDownloadEntity]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

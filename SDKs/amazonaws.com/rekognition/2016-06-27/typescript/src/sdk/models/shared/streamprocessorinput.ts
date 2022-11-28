@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { KinesisVideoStream } from "./kinesisvideostream";
+
 
 
 // StreamProcessorInput
@@ -7,6 +8,6 @@ import { KinesisVideoStream } from "./kinesisvideostream";
  * Information about the source streaming video. 
 **/
 export class StreamProcessorInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=KinesisVideoStream" })
+  @SpeakeasyMetadata({ data: "json, name=KinesisVideoStream" })
   kinesisVideoStream?: KinesisVideoStream;
 }

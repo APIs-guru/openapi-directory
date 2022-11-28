@@ -1,73 +1,74 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class TeamsAddOrUpdateMembershipForUserLegacyPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=team_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=team_id" })
   teamId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=username" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=username" })
   username: string;
 }
 
 export enum TeamsAddOrUpdateMembershipForUserLegacyRequestBodyRoleEnum {
-    Member = "member"
-,    Maintainer = "maintainer"
+    Member = "member",
+    Maintainer = "maintainer"
 }
 
 
 export class TeamsAddOrUpdateMembershipForUserLegacyRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=role" })
+  @SpeakeasyMetadata({ data: "json, name=role" })
   role?: TeamsAddOrUpdateMembershipForUserLegacyRequestBodyRoleEnum;
 }
 
 
-export class TeamsAddOrUpdateMembershipForUserLegacyRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: TeamsAddOrUpdateMembershipForUserLegacyPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: TeamsAddOrUpdateMembershipForUserLegacyRequestBody;
-}
-
-
 export class TeamsAddOrUpdateMembershipForUserLegacy422ApplicationJsonErrors extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: string;
 
-  @Metadata({ data: "json, name=field" })
+  @SpeakeasyMetadata({ data: "json, name=field" })
   field?: string;
 
-  @Metadata({ data: "json, name=resource" })
+  @SpeakeasyMetadata({ data: "json, name=resource" })
   resource?: string;
 }
 
 
 export class TeamsAddOrUpdateMembershipForUserLegacy422ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=documentation_url" })
+  @SpeakeasyMetadata({ data: "json, name=documentation_url" })
   documentationUrl?: string;
 
-  @Metadata({ data: "json, name=errors", elemType: operations.TeamsAddOrUpdateMembershipForUserLegacy422ApplicationJsonErrors })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: TeamsAddOrUpdateMembershipForUserLegacy422ApplicationJsonErrors })
   errors?: TeamsAddOrUpdateMembershipForUserLegacy422ApplicationJsonErrors[];
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class TeamsAddOrUpdateMembershipForUserLegacyRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: TeamsAddOrUpdateMembershipForUserLegacyPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: TeamsAddOrUpdateMembershipForUserLegacyRequestBody;
+}
+
+
 export class TeamsAddOrUpdateMembershipForUserLegacyResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   teamMembership?: shared.TeamMembership;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   teamsAddOrUpdateMembershipForUserLegacy422ApplicationJsonObject?: TeamsAddOrUpdateMembershipForUserLegacy422ApplicationJson;
 }

@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetTeamSeasonStatsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=conference" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=conference" })
   conference?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=endWeek" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=endWeek" })
   endWeek?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=startWeek" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=startWeek" })
   startWeek?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=team" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=team" })
   team?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=year" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=year" })
   year?: number;
 }
 
 
 export class GetTeamSeasonStatsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetTeamSeasonStatsQueryParams;
 }
 
 
 export class GetTeamSeasonStatsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.TeamSeasonStat })
+  @SpeakeasyMetadata({ elemType: shared.TeamSeasonStat })
   teamSeasonStats?: shared.TeamSeasonStat[];
 }

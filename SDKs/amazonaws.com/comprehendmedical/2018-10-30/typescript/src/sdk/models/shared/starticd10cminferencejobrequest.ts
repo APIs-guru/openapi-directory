@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InputDataConfig } from "./inputdataconfig";
 import { LanguageCodeEnum } from "./languagecodeenum";
 import { OutputDataConfig } from "./outputdataconfig";
 
 
+
 export class StartIcd10CmInferenceJobRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClientRequestToken" })
+  @SpeakeasyMetadata({ data: "json, name=ClientRequestToken" })
   clientRequestToken?: string;
 
-  @Metadata({ data: "json, name=DataAccessRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=DataAccessRoleArn" })
   dataAccessRoleArn: string;
 
-  @Metadata({ data: "json, name=InputDataConfig" })
+  @SpeakeasyMetadata({ data: "json, name=InputDataConfig" })
   inputDataConfig: InputDataConfig;
 
-  @Metadata({ data: "json, name=JobName" })
+  @SpeakeasyMetadata({ data: "json, name=JobName" })
   jobName?: string;
 
-  @Metadata({ data: "json, name=KMSKey" })
+  @SpeakeasyMetadata({ data: "json, name=KMSKey" })
   kmsKey?: string;
 
-  @Metadata({ data: "json, name=LanguageCode" })
+  @SpeakeasyMetadata({ data: "json, name=LanguageCode" })
   languageCode: LanguageCodeEnum;
 
-  @Metadata({ data: "json, name=OutputDataConfig" })
+  @SpeakeasyMetadata({ data: "json, name=OutputDataConfig" })
   outputDataConfig: OutputDataConfig;
 }

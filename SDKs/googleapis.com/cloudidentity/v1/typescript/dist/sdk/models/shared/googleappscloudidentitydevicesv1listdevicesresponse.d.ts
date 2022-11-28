@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GoogleAppsCloudidentityDevicesV1Device } from "./googleappscloudidentitydevicesv1device";
 /**
  * Response message that is returned from the ListDevices method.

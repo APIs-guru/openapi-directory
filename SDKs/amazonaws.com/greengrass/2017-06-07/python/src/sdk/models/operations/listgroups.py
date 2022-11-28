@@ -1,5 +1,8 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
 from sdk.models import shared
 
 
@@ -22,13 +25,13 @@ class ListGroupsHeaders:
 
 @dataclass
 class ListGroupsRequest:
-    query_params: ListGroupsQueryParams = field(default=None)
-    headers: ListGroupsHeaders = field(default=None)
+    headers: ListGroupsHeaders = field()
+    query_params: ListGroupsQueryParams = field()
     
 
 @dataclass
 class ListGroupsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_groups_response: Optional[shared.ListGroupsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

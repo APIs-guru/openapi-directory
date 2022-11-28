@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDeleteVirtualMfaDeviceActionEnum(str, Enum):
     DELETE_VIRTUAL_MFA_DEVICE = "DeleteVirtualMFADevice"
@@ -10,8 +14,8 @@ class PostDeleteVirtualMfaDeviceVersionEnum(str, Enum):
 
 @dataclass
 class PostDeleteVirtualMfaDeviceQueryParams:
-    action: PostDeleteVirtualMfaDeviceActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDeleteVirtualMfaDeviceVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDeleteVirtualMfaDeviceActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDeleteVirtualMfaDeviceVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDeleteVirtualMfaDeviceHeaders:
 
 @dataclass
 class PostDeleteVirtualMfaDeviceRequest:
-    query_params: PostDeleteVirtualMfaDeviceQueryParams = field(default=None)
-    headers: PostDeleteVirtualMfaDeviceHeaders = field(default=None)
+    headers: PostDeleteVirtualMfaDeviceHeaders = field()
+    query_params: PostDeleteVirtualMfaDeviceQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDeleteVirtualMfaDeviceResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

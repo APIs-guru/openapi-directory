@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import actiontarget
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeActionTargetsResponse:
-    action_targets: List[actiontarget.ActionTarget] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ActionTargets' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
+    action_targets: List[ActionTarget] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ActionTargets') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
     

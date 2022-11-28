@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Size } from "./size";
 import { AffineTransform } from "./affinetransform";
+
 
 
 // PageElementProperties
@@ -8,12 +9,12 @@ import { AffineTransform } from "./affinetransform";
  * Common properties for a page element. Note: When you initially create a PageElement, the API may modify the values of both `size` and `transform`, but the visual size will be unchanged.
 **/
 export class PageElementProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pageObjectId" })
+  @SpeakeasyMetadata({ data: "json, name=pageObjectId" })
   pageObjectId?: string;
 
-  @Metadata({ data: "json, name=size" })
+  @SpeakeasyMetadata({ data: "json, name=size" })
   size?: Size;
 
-  @Metadata({ data: "json, name=transform" })
+  @SpeakeasyMetadata({ data: "json, name=transform" })
   transform?: AffineTransform;
 }

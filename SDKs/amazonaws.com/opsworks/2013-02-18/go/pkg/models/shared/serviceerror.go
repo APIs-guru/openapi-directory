@@ -1,5 +1,7 @@
 package shared
 
+// ServiceError
+// Describes an AWS OpsWorks Stacks service error.
 type ServiceError struct {
 	CreatedAt      *string `json:"CreatedAt,omitempty"`
 	InstanceID     *string `json:"InstanceId,omitempty"`

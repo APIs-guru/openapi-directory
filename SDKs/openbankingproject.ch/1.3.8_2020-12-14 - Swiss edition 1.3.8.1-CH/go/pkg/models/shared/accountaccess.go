@@ -21,6 +21,8 @@ const (
 	AccountAccessAvailableAccountsWithBalanceEnumAllAccountsWithOwnerName AccountAccessAvailableAccountsWithBalanceEnum = "allAccountsWithOwnerName"
 )
 
+// AccountAccess
+// Requested access services for a consent.
 type AccountAccess struct {
 	Accounts                     []AccountReference16Ch                         `json:"accounts,omitempty"`
 	AdditionalInformation        *AdditionalInformationAccess                   `json:"additionalInformation,omitempty"`

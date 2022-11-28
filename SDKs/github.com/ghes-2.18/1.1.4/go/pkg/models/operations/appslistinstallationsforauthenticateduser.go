@@ -13,11 +13,6 @@ type AppsListInstallationsForAuthenticatedUserHeaders struct {
 	Accept string `header:"style=simple,explode=false,name=accept"`
 }
 
-type AppsListInstallationsForAuthenticatedUserRequest struct {
-	QueryParams AppsListInstallationsForAuthenticatedUserQueryParams
-	Headers     AppsListInstallationsForAuthenticatedUserHeaders
-}
-
 type AppsListInstallationsForAuthenticatedUser200ApplicationJSON struct {
 	Installations []shared.InstallationGhes2 `json:"installations"`
 	TotalCount    int64                      `json:"total_count"`
@@ -26,6 +21,11 @@ type AppsListInstallationsForAuthenticatedUser200ApplicationJSON struct {
 type AppsListInstallationsForAuthenticatedUser415ApplicationJSON struct {
 	DocumentationURL string `json:"documentation_url"`
 	Message          string `json:"message"`
+}
+
+type AppsListInstallationsForAuthenticatedUserRequest struct {
+	QueryParams AppsListInstallationsForAuthenticatedUserQueryParams
+	Headers     AppsListInstallationsForAuthenticatedUserHeaders
 }
 
 type AppsListInstallationsForAuthenticatedUserResponse struct {

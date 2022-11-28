@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import containerversionheader
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListContainerVersionsResponse:
-    container_version_header: Optional[List[containerversionheader.ContainerVersionHeader]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'containerVersionHeader' }})
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextPageToken' }})
+    r"""ListContainerVersionsResponse
+    List container versions response.
+    """
+    
+    container_version_header: Optional[List[ContainerVersionHeader]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('containerVersionHeader') }})
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextPageToken') }})
     

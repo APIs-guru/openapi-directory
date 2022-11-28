@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceId } from "./resourceid";
 
+
 export enum ProjectLifecycleStateEnum {
-    LifecycleStateUnspecified = "LIFECYCLE_STATE_UNSPECIFIED"
-,    Active = "ACTIVE"
-,    DeleteRequested = "DELETE_REQUESTED"
-,    DeleteInProgress = "DELETE_IN_PROGRESS"
+    LifecycleStateUnspecified = "LIFECYCLE_STATE_UNSPECIFIED",
+    Active = "ACTIVE",
+    DeleteRequested = "DELETE_REQUESTED",
+    DeleteInProgress = "DELETE_IN_PROGRESS"
 }
 
 
@@ -14,24 +15,24 @@ export enum ProjectLifecycleStateEnum {
  * A Project is a high-level Google Cloud Platform entity. It is a container for ACLs, APIs, App Engine Apps, VMs, and other Google Cloud Platform resources.
 **/
 export class Project extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=lifecycleState" })
+  @SpeakeasyMetadata({ data: "json, name=lifecycleState" })
   lifecycleState?: ProjectLifecycleStateEnum;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=parent" })
+  @SpeakeasyMetadata({ data: "json, name=parent" })
   parent?: ResourceId;
 
-  @Metadata({ data: "json, name=projectId" })
+  @SpeakeasyMetadata({ data: "json, name=projectId" })
   projectId?: string;
 
-  @Metadata({ data: "json, name=projectNumber" })
+  @SpeakeasyMetadata({ data: "json, name=projectNumber" })
   projectNumber?: string;
 }

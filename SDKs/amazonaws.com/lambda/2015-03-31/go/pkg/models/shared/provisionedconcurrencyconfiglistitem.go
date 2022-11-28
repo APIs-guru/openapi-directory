@@ -1,5 +1,7 @@
 package shared
 
+// ProvisionedConcurrencyConfigListItem
+// Details about the provisioned concurrency configuration for a function alias or version.
 type ProvisionedConcurrencyConfigListItem struct {
 	AllocatedProvisionedConcurrentExecutions *int64                                `json:"AllocatedProvisionedConcurrentExecutions,omitempty"`
 	AvailableProvisionedConcurrentExecutions *int64                                `json:"AvailableProvisionedConcurrentExecutions,omitempty"`

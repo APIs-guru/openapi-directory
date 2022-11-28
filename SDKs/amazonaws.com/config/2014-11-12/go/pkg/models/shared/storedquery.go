@@ -1,5 +1,7 @@
 package shared
 
+// StoredQuery
+// Provides the details of a stored query.
 type StoredQuery struct {
 	Description *string `json:"Description,omitempty"`
 	Expression  *string `json:"Expression,omitempty"`

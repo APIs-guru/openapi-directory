@@ -4,12 +4,8 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-var GetObjectStorageClustersServers = []string{
+var GetObjectStorageClustersServerList = []string{
 	"https://api.linode.com/v4",
-}
-
-type GetObjectStorageClustersRequest struct {
-	ServerURL *string
 }
 
 type GetObjectStorageClusters200ApplicationJSON struct {
@@ -21,6 +17,10 @@ type GetObjectStorageClusters200ApplicationJSON struct {
 
 type GetObjectStorageClustersDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type GetObjectStorageClustersRequest struct {
+	ServerURL *string
 }
 
 type GetObjectStorageClustersResponse struct {

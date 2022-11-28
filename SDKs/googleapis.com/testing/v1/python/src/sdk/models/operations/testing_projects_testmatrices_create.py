@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class TestingProjectsTestMatricesCreatePathParams:
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +27,21 @@ class TestingProjectsTestMatricesCreateQueryParams:
 
 @dataclass
 class TestingProjectsTestMatricesCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class TestingProjectsTestMatricesCreateRequest:
-    path_params: TestingProjectsTestMatricesCreatePathParams = field(default=None)
-    query_params: TestingProjectsTestMatricesCreateQueryParams = field(default=None)
+    path_params: TestingProjectsTestMatricesCreatePathParams = field()
+    query_params: TestingProjectsTestMatricesCreateQueryParams = field()
+    security: TestingProjectsTestMatricesCreateSecurity = field()
     request: Optional[shared.TestMatrix] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: TestingProjectsTestMatricesCreateSecurity = field(default=None)
     
 
 @dataclass
 class TestingProjectsTestMatricesCreateResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     test_matrix: Optional[shared.TestMatrix] = field(default=None)
     

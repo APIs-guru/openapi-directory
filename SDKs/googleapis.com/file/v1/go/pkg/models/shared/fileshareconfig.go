@@ -1,5 +1,7 @@
 package shared
 
+// FileShareConfig
+// File share configuration for the instance.
 type FileShareConfig struct {
 	CapacityGb       *string            `json:"capacityGb,omitempty"`
 	Name             *string            `json:"name,omitempty"`

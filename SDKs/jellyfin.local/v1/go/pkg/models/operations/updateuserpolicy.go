@@ -8,10 +8,10 @@ type UpdateUserPolicyPathParams struct {
 	UserID string `pathParam:"style=simple,explode=false,name=userId"`
 }
 
-type UpdateUserPolicyRequests struct {
-	UserPolicy  *shared.UserPolicy `request:"mediaType=application/*+json"`
-	UserPolicy1 *shared.UserPolicy `request:"mediaType=application/json"`
-	UserPolicy2 *shared.UserPolicy `request:"mediaType=text/json"`
+type UpdateUserPolicyRequestsInput struct {
+	UserPolicy  *shared.UserPolicyInput `request:"mediaType=application/*+json"`
+	UserPolicy1 *shared.UserPolicyInput `request:"mediaType=application/json"`
+	UserPolicy2 *shared.UserPolicyInput `request:"mediaType=text/json"`
 }
 
 type UpdateUserPolicySecurity struct {
@@ -20,7 +20,7 @@ type UpdateUserPolicySecurity struct {
 
 type UpdateUserPolicyRequest struct {
 	PathParams UpdateUserPolicyPathParams
-	Request    UpdateUserPolicyRequests
+	Request    UpdateUserPolicyRequestsInput
 	Security   UpdateUserPolicySecurity
 }
 

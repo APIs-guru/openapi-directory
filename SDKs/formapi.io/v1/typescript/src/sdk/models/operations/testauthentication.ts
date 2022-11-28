@@ -1,16 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class TestAuthenticationSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   apiTokenBasic: shared.SchemeApiTokenBasic;
-}
-
-
-export class TestAuthenticationRequest extends SpeakeasyBase {
-  @Metadata()
-  security: TestAuthenticationSecurity;
 }
 
 export enum TestAuthenticationAuthenticationSuccessResponseStatusEnum {
@@ -19,21 +14,27 @@ export enum TestAuthenticationAuthenticationSuccessResponseStatusEnum {
 
 
 export class TestAuthenticationAuthenticationSuccessResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: TestAuthenticationAuthenticationSuccessResponseStatusEnum;
 }
 
 
+export class TestAuthenticationRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  security: TestAuthenticationSecurity;
+}
+
+
 export class TestAuthenticationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   authenticationError?: shared.AuthenticationError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   authenticationSuccessResponse?: TestAuthenticationAuthenticationSuccessResponse;
 }

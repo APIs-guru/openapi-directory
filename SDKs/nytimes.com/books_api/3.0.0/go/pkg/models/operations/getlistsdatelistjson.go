@@ -33,12 +33,6 @@ type GetListsDateListJSONSecurity struct {
 	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=query"`
 }
 
-type GetListsDateListJSONRequest struct {
-	PathParams  GetListsDateListJSONPathParams
-	QueryParams GetListsDateListJSONQueryParams
-	Security    GetListsDateListJSONSecurity
-}
-
 type GetListsDateListJSON200ApplicationJSONResultsBooksIsbns struct {
 	Isbn10 *string `json:"isbn10,omitempty"`
 	Isbn13 *string `json:"isbn13,omitempty"`
@@ -86,6 +80,12 @@ type GetListsDateListJSON200ApplicationJSON struct {
 	NumResults   *int64                                         `json:"num_results,omitempty"`
 	Results      *GetListsDateListJSON200ApplicationJSONResults `json:"results,omitempty"`
 	Status       *string                                        `json:"status,omitempty"`
+}
+
+type GetListsDateListJSONRequest struct {
+	PathParams  GetListsDateListJSONPathParams
+	QueryParams GetListsDateListJSONQueryParams
+	Security    GetListsDateListJSONSecurity
 }
 
 type GetListsDateListJSONResponse struct {

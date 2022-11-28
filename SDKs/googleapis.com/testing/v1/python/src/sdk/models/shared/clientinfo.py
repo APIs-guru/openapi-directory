@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import clientinfodetail
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ClientInfo:
-    client_info_details: Optional[List[clientinfodetail.ClientInfoDetail]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clientInfoDetails' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
+    r"""ClientInfo
+    Information about the client which invoked the test.
+    """
+    
+    client_info_details: Optional[List[ClientInfoDetail]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clientInfoDetails') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
     

@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RemoveFollowersForProjectPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=project_gid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=project_gid" })
   projectGid: string;
 }
 
 
 export class RemoveFollowersForProjectQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
   optFields?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
   optPretty?: boolean;
 }
 
 
 export class RemoveFollowersForProjectRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: shared.RemoveFollowersRequest;
 }
 
 
-export class RemoveFollowersForProjectRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: RemoveFollowersForProjectPathParams;
-
-  @Metadata()
-  queryParams: RemoveFollowersForProjectQueryParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: RemoveFollowersForProjectRequestBody;
-}
-
-
 export class RemoveFollowersForProject200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 }
 
 
+export class RemoveFollowersForProjectRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: RemoveFollowersForProjectPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: RemoveFollowersForProjectQueryParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: RemoveFollowersForProjectRequestBody;
+}
+
+
 export class RemoveFollowersForProjectResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   removeFollowersForProject200ApplicationJsonObject?: RemoveFollowersForProject200ApplicationJson;
 }

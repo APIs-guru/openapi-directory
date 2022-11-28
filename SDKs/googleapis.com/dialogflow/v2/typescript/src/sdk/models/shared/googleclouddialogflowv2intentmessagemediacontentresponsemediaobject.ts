@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowV2IntentMessageImage } from "./googleclouddialogflowv2intentmessageimage";
-import { GoogleCloudDialogflowV2IntentMessageImage } from "./googleclouddialogflowv2intentmessageimage";
+
 
 
 // GoogleCloudDialogflowV2IntentMessageMediaContentResponseMediaObject
@@ -8,18 +8,18 @@ import { GoogleCloudDialogflowV2IntentMessageImage } from "./googleclouddialogfl
  * Response media object for media content card.
 **/
 export class GoogleCloudDialogflowV2IntentMessageMediaContentResponseMediaObject extends SpeakeasyBase {
-  @Metadata({ data: "json, name=contentUrl" })
+  @SpeakeasyMetadata({ data: "json, name=contentUrl" })
   contentUrl?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=icon" })
+  @SpeakeasyMetadata({ data: "json, name=icon" })
   icon?: GoogleCloudDialogflowV2IntentMessageImage;
 
-  @Metadata({ data: "json, name=largeImage" })
+  @SpeakeasyMetadata({ data: "json, name=largeImage" })
   largeImage?: GoogleCloudDialogflowV2IntentMessageImage;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

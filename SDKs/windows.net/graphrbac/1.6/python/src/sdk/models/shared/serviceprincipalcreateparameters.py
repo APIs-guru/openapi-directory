@@ -1,16 +1,21 @@
 from dataclasses import dataclass, field
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class ServicePrincipalCreateParameters:
-    account_enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'accountEnabled' }})
-    app_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'appId' }})
-    app_role_assignment_required: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'appRoleAssignmentRequired' }})
-    key_credentials: Optional[List[dict[str, dict[str, Any]]]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'keyCredentials' }})
-    password_credentials: Optional[List[dict[str, dict[str, Any]]]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'passwordCredentials' }})
-    service_principal_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'servicePrincipalType' }})
-    tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
+    r"""ServicePrincipalCreateParameters
+    Request parameters for creating a new service principal.
+    """
+    
+    app_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('appId') }})
+    account_enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('accountEnabled') }})
+    app_role_assignment_required: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('appRoleAssignmentRequired') }})
+    key_credentials: Optional[List[dict[str, dict[str, Any]]]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('keyCredentials') }})
+    password_credentials: Optional[List[dict[str, dict[str, Any]]]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('passwordCredentials') }})
+    service_principal_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('servicePrincipalType') }})
+    tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     

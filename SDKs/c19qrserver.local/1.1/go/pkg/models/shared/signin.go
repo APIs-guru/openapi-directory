@@ -1,5 +1,7 @@
 package shared
 
+// Signin
+// Payload of signin object
 type Signin struct {
 	Dt    *float64 `json:"dt,omitempty"`
 	Email *string  `json:"email,omitempty"`

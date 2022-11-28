@@ -5,19 +5,19 @@ from sdk.models import shared
 
 @dataclass
 class AddNsxvManagerDatasourceSecurity:
-    api_key_auth: shared.SchemeAPIKeyAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    api_key_auth: shared.SchemeAPIKeyAuth = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class AddNsxvManagerDatasourceRequest:
+    security: AddNsxvManagerDatasourceSecurity = field()
     request: Optional[shared.NsxvManagerDataSourceRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AddNsxvManagerDatasourceSecurity = field(default=None)
     
 
 @dataclass
 class AddNsxvManagerDatasourceResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_error: Optional[shared.APIError] = field(default=None)
-    content_type: str = field(default=None)
     nsxv_manager_data_source: Optional[shared.NsxvManagerDataSource] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ListConfigurationSetsResponse
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A list of configuration sets in your Amazon Pinpoint account in the current AWS Region.
 **/
 export class ListConfigurationSetsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConfigurationSets" })
+  @SpeakeasyMetadata({ data: "json, name=ConfigurationSets" })
   configurationSets?: string[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

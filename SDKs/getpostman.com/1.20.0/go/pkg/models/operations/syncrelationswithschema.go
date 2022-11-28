@@ -7,10 +7,6 @@ type SyncRelationsWithSchemaPathParams struct {
 	EntityType   string `pathParam:"style=simple,explode=false,name=entityType"`
 }
 
-type SyncRelationsWithSchemaRequest struct {
-	PathParams SyncRelationsWithSchemaPathParams
-}
-
 type SyncRelationsWithSchema200ApplicationJSON struct {
 	Success *bool `json:"success,omitempty"`
 }
@@ -22,6 +18,10 @@ type SyncRelationsWithSchema400ApplicationJSONError struct {
 
 type SyncRelationsWithSchema400ApplicationJSON struct {
 	Error *SyncRelationsWithSchema400ApplicationJSONError `json:"error,omitempty"`
+}
+
+type SyncRelationsWithSchemaRequest struct {
+	PathParams SyncRelationsWithSchemaPathParams
 }
 
 type SyncRelationsWithSchemaResponse struct {

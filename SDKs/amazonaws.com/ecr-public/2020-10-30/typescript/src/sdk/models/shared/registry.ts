@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RegistryAlias } from "./registryalias";
+
 
 
 // Registry
@@ -8,18 +8,18 @@ import { RegistryAlias } from "./registryalias";
  * The details of a public registry.
 **/
 export class Registry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=aliases", elemType: shared.RegistryAlias })
+  @SpeakeasyMetadata({ data: "json, name=aliases", elemType: RegistryAlias })
   aliases: RegistryAlias[];
 
-  @Metadata({ data: "json, name=registryArn" })
+  @SpeakeasyMetadata({ data: "json, name=registryArn" })
   registryArn: string;
 
-  @Metadata({ data: "json, name=registryId" })
+  @SpeakeasyMetadata({ data: "json, name=registryId" })
   registryId: string;
 
-  @Metadata({ data: "json, name=registryUri" })
+  @SpeakeasyMetadata({ data: "json, name=registryUri" })
   registryUri: string;
 
-  @Metadata({ data: "json, name=verified" })
+  @SpeakeasyMetadata({ data: "json, name=verified" })
   verified: boolean;
 }

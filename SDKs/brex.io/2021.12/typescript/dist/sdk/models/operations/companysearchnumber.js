@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CompanySearchNumberPathParams = /** @class */ (function (_super) {
     __extends(CompanySearchNumberPathParams, _super);
@@ -30,11 +30,11 @@ var CompanySearchNumberPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=country" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=country" }),
         __metadata("design:type", String)
     ], CompanySearchNumberPathParams.prototype, "country", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=number" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=number" }),
         __metadata("design:type", String)
     ], CompanySearchNumberPathParams.prototype, "number", void 0);
     return CompanySearchNumberPathParams;
@@ -46,7 +46,7 @@ var CompanySearchNumberQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", Number)
     ], CompanySearchNumberQueryParams.prototype, "limit", void 0);
     return CompanySearchNumberQueryParams;
@@ -58,7 +58,7 @@ var CompanySearchNumberSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeUserKey)
     ], CompanySearchNumberSecurity.prototype, "userKey", void 0);
     return CompanySearchNumberSecurity;
@@ -70,15 +70,15 @@ var CompanySearchNumberRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CompanySearchNumberPathParams)
     ], CompanySearchNumberRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CompanySearchNumberQueryParams)
     ], CompanySearchNumberRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CompanySearchNumberSecurity)
     ], CompanySearchNumberRequest.prototype, "security", void 0);
     return CompanySearchNumberRequest;
@@ -90,19 +90,19 @@ var CompanySearchNumberResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Array)
     ], CompanySearchNumberResponse.prototype, "companySearchNumber200ApplicationJsonAnies", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CompanySearchNumberResponse.prototype, "companySearchNumberDefaultApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CompanySearchNumberResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CompanySearchNumberResponse.prototype, "statusCode", void 0);
     return CompanySearchNumberResponse;

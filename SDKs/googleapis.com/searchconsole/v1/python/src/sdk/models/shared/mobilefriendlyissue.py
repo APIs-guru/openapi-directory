@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class MobileFriendlyIssueRuleEnum(str, Enum):
     MOBILE_FRIENDLY_RULE_UNSPECIFIED = "MOBILE_FRIENDLY_RULE_UNSPECIFIED"
@@ -15,5 +17,9 @@ class MobileFriendlyIssueRuleEnum(str, Enum):
 @dataclass_json
 @dataclass
 class MobileFriendlyIssue:
-    rule: Optional[MobileFriendlyIssueRuleEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rule' }})
+    r"""MobileFriendlyIssue
+    Mobile-friendly issue.
+    """
+    
+    rule: Optional[MobileFriendlyIssueRuleEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rule') }})
     

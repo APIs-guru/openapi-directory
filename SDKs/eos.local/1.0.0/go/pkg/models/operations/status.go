@@ -4,10 +4,8 @@ type StatusRequestBody struct {
 	Endpoint string `json:"endpoint"`
 }
 
-type StatusRequest struct {
-	Request *StatusRequestBody `request:"mediaType=application/json"`
-}
-
+// Status200ApplicationJSONLastHandshake
+// Structure holding detailed information about the connection
 type Status200ApplicationJSONLastHandshake struct {
 	Agent                    *string `json:"agent,omitempty"`
 	ChainID                  *string `json:"chain_id,omitempty"`
@@ -31,6 +29,10 @@ type Status200ApplicationJSON struct {
 	LastHandshake *Status200ApplicationJSONLastHandshake `json:"last_handshake,omitempty"`
 	Peer          *string                                `json:"peer,omitempty"`
 	Syncing       *bool                                  `json:"syncing,omitempty"`
+}
+
+type StatusRequest struct {
+	Request *StatusRequestBody `request:"mediaType=application/json"`
 }
 
 type StatusResponse struct {

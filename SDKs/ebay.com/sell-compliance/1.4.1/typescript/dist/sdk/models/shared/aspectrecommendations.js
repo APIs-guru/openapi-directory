@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // AspectRecommendations
 /**
  * This type is used by the aspectsRecommendation container, which is returned if eBay has found a listing with missing or invalid item aspects (ASPECTS_ADOPTION compliance type).
@@ -33,11 +33,11 @@ var AspectRecommendations = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=localizedAspectName" }),
+        SpeakeasyMetadata({ data: "json, name=localizedAspectName" }),
         __metadata("design:type", String)
     ], AspectRecommendations.prototype, "localizedAspectName", void 0);
     __decorate([
-        Metadata({ data: "json, name=suggestedValues" }),
+        SpeakeasyMetadata({ data: "json, name=suggestedValues" }),
         __metadata("design:type", Array)
     ], AspectRecommendations.prototype, "suggestedValues", void 0);
     return AspectRecommendations;

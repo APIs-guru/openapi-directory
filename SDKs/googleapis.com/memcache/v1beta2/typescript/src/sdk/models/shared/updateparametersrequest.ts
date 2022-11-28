@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { MemcacheParameters } from "./memcacheparameters";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { MemcacheParametersInput } from "./memcacheparameters";
 
 
-// UpdateParametersRequest
+
+// UpdateParametersRequestInput
 /** 
  * Request for UpdateParameters.
 **/
-export class UpdateParametersRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=parameters" })
-  parameters?: MemcacheParameters;
+export class UpdateParametersRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=parameters" })
+  parameters?: MemcacheParametersInput;
 
-  @Metadata({ data: "json, name=updateMask" })
+  @SpeakeasyMetadata({ data: "json, name=updateMask" })
   updateMask?: string;
 }

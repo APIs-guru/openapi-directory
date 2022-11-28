@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 
 
 @dataclass
 class UntagResourceQueryParams:
-    resource_arn: str = field(default=None, metadata={'query_param': { 'field_name': 'resourceArn', 'style': 'form', 'explode': True }})
-    tag_keys: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'tagKeys', 'style': 'form', 'explode': True }})
+    resource_arn: str = field(metadata={'query_param': { 'field_name': 'resourceArn', 'style': 'form', 'explode': True }})
+    tag_keys: List[str] = field(metadata={'query_param': { 'field_name': 'tagKeys', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -21,19 +24,19 @@ class UntagResourceHeaders:
 
 @dataclass
 class UntagResourceRequest:
-    query_params: UntagResourceQueryParams = field(default=None)
-    headers: UntagResourceHeaders = field(default=None)
+    headers: UntagResourceHeaders = field()
+    query_params: UntagResourceQueryParams = field()
     
 
 @dataclass
 class UntagResourceResponse:
+    content_type: str = field()
+    status_code: int = field()
     conflicting_operation_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     untag_resource_response: Optional[dict[str, Any]] = field(default=None)

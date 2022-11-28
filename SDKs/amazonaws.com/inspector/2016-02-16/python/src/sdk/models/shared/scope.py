@@ -1,12 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import scopetype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Scope:
-    key: Optional[scopetype_enum.ScopeTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
-    value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    r"""Scope
+    This data type contains key-value pairs that identify various Amazon resources.
+    """
+    
+    key: Optional[ScopeTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('key') }})
+    value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     

@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ListingStructurePolicy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=categoryId" })
+  @SpeakeasyMetadata({ data: "json, name=categoryId" })
   categoryId?: string;
 
-  @Metadata({ data: "json, name=categoryTreeId" })
+  @SpeakeasyMetadata({ data: "json, name=categoryTreeId" })
   categoryTreeId?: string;
 
-  @Metadata({ data: "json, name=variationsSupported" })
+  @SpeakeasyMetadata({ data: "json, name=variationsSupported" })
   variationsSupported?: boolean;
 }

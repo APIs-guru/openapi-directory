@@ -1,5 +1,7 @@
 package shared
 
+// InstanceAccess
+// Information required to remotely connect to a fleet instance. Access is requested by calling <a>GetInstanceAccess</a>.
 type InstanceAccess struct {
 	Credentials     *InstanceCredentials `json:"Credentials,omitempty"`
 	FleetID         *string              `json:"FleetId,omitempty"`

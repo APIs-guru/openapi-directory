@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
 from typing import Any,List,Optional
+from sdk.models import shared
 
 
 @dataclass
 class CompanyAlternativeSearchPathParams:
-    country: str = field(default=None, metadata={'path_param': { 'field_name': 'country', 'style': 'simple', 'explode': False }})
+    country: str = field(metadata={'path_param': { 'field_name': 'country', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -19,20 +20,20 @@ class CompanyAlternativeSearchRequestBody:
 
 @dataclass
 class CompanyAlternativeSearchSecurity:
-    user_key: shared.SchemeUserKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    user_key: shared.SchemeUserKey = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class CompanyAlternativeSearchRequest:
-    path_params: CompanyAlternativeSearchPathParams = field(default=None)
+    path_params: CompanyAlternativeSearchPathParams = field()
+    security: CompanyAlternativeSearchSecurity = field()
     request: Optional[CompanyAlternativeSearchRequestBody] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
-    security: CompanyAlternativeSearchSecurity = field(default=None)
     
 
 @dataclass
 class CompanyAlternativeSearchResponse:
+    content_type: str = field()
+    status_code: int = field()
     company_alternative_search_200_application_json_anies: Optional[List[Any]] = field(default=None)
     company_alternative_search_default_application_json_any: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

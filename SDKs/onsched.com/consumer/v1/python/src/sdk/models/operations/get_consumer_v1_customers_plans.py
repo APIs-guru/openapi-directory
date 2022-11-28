@@ -12,12 +12,12 @@ class GetConsumerV1CustomersPlansQueryParams:
 
 @dataclass
 class GetConsumerV1CustomersPlansRequest:
-    query_params: GetConsumerV1CustomersPlansQueryParams = field(default=None)
+    query_params: GetConsumerV1CustomersPlansQueryParams = field()
     
 
 @dataclass
 class GetConsumerV1CustomersPlansResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     customer_plan_list_view_model: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

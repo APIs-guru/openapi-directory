@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class PlanningLevelInfoRequestErrorTypeEnum(str, Enum):
     MEAN_ABSOLUTE_PERCENTAGE_ERROR = "MeanAbsolutePercentageError"
@@ -13,10 +15,10 @@ class PlanningLevelInfoRequestErrorTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PlanningLevelInfoRequest:
-    discard_data: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'discardData' }})
-    error_type: Optional[PlanningLevelInfoRequestErrorTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorType' }})
-    hold_out_period: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'holdOutPeriod' }})
-    no_fcst: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'noFcst' }})
-    outlier_detection: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'outlierDetection' }})
-    periodicity: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'periodicity' }})
+    discard_data: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('discardData') }})
+    error_type: Optional[PlanningLevelInfoRequestErrorTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorType') }})
+    hold_out_period: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('holdOutPeriod') }})
+    no_fcst: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('noFcst') }})
+    outlier_detection: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('outlierDetection') }})
+    periodicity: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('periodicity') }})
     

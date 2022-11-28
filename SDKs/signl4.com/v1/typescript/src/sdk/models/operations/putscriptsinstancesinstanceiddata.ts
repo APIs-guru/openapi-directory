@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PutScriptsInstancesInstanceIdDataPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=instanceId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=instanceId" })
   instanceId: string;
 }
 
 
 export class PutScriptsInstancesInstanceIdDataRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
   scriptInstanceCustomUserData?: shared.ScriptInstanceCustomUserData;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   scriptInstanceCustomUserData1?: shared.ScriptInstanceCustomUserData;
 
-  @Metadata({ data: "request, media_type=application/json-patch+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json-patch+json" })
   scriptInstanceCustomUserData2?: shared.ScriptInstanceCustomUserData;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   scriptInstanceCustomUserData3?: shared.ScriptInstanceCustomUserData;
 }
 
 
 export class PutScriptsInstancesInstanceIdDataRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PutScriptsInstancesInstanceIdDataPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request?: PutScriptsInstancesInstanceIdDataRequests;
 }
 
 
 export class PutScriptsInstancesInstanceIdDataResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponseContent?: shared.ErrorResponseContent;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   scriptInstanceDetails?: shared.ScriptInstanceDetails;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

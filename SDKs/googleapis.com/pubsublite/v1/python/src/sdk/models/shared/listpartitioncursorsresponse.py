@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import partitioncursor
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListPartitionCursorsResponse:
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextPageToken' }})
-    partition_cursors: Optional[List[partitioncursor.PartitionCursor]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'partitionCursors' }})
+    r"""ListPartitionCursorsResponse
+    Response for ListPartitionCursors
+    """
+    
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextPageToken') }})
+    partition_cursors: Optional[List[PartitionCursor]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('partitionCursors') }})
     

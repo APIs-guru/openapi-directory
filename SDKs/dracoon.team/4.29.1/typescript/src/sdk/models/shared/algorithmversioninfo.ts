@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum AlgorithmVersionInfoStatusEnum {
-    Required = "REQUIRED"
-,    Discouraged = "DISCOURAGED"
+    Required = "REQUIRED",
+    Discouraged = "DISCOURAGED"
 }
 
 
@@ -11,12 +12,12 @@ export enum AlgorithmVersionInfoStatusEnum {
  * Algorithm information
 **/
 export class AlgorithmVersionInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: AlgorithmVersionInfoStatusEnum;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version: string;
 }

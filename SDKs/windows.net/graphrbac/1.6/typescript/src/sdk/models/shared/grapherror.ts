@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OdataError } from "./odataerror";
+
 
 
 // GraphError
@@ -7,6 +8,6 @@ import { OdataError } from "./odataerror";
  * Active Directory error information.
 **/
 export class GraphError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=odata.error" })
+  @SpeakeasyMetadata({ data: "json, name=odata.error" })
   odataError?: OdataError;
 }

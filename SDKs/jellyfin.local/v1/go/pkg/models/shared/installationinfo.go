@@ -1,5 +1,7 @@
 package shared
 
+// InstallationInfo
+// Class InstallationInfo.
 type InstallationInfo struct {
 	Changelog *string  `json:"Changelog,omitempty"`
 	Checksum  *string  `json:"Checksum,omitempty"`

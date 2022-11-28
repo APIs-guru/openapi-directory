@@ -6,6 +6,8 @@ const (
 	GetAllSettings200ApplicationJSONActionEnumGetAllSettings GetAllSettings200ApplicationJSONActionEnum = "getAllSettings"
 )
 
+// GetAllSettings200ApplicationJSONData
+// Information about the setting
 type GetAllSettings200ApplicationJSONData struct {
 	Settings interface{} `json:"settings"`
 }

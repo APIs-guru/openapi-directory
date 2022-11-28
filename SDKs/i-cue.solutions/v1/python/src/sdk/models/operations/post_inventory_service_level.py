@@ -9,11 +9,11 @@ class PostInventoryServiceLevelHeaders:
 
 @dataclass
 class PostInventoryServiceLevelRequest:
-    headers: PostInventoryServiceLevelHeaders = field(default=None)
+    headers: PostInventoryServiceLevelHeaders = field()
     
 
 @dataclass
 class PostInventoryServiceLevelResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

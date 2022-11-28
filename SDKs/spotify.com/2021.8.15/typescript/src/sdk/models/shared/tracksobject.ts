@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TrackObject } from "./trackobject";
 
 
+
 export class TracksObject extends SpeakeasyBase {
-  @Metadata({ data: "json, name=tracks", elemType: shared.TrackObject })
+  @SpeakeasyMetadata({ data: "json, name=tracks", elemType: TrackObject })
   tracks?: TrackObject[];
 }

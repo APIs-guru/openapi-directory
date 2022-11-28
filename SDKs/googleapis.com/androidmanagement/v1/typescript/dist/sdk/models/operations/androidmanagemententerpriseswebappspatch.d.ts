@@ -1,0 +1,34 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import * as shared from "../shared";
+export declare class AndroidmanagementEnterprisesWebAppsPatchPathParams extends SpeakeasyBase {
+    name: string;
+}
+export declare class AndroidmanagementEnterprisesWebAppsPatchQueryParams extends SpeakeasyBase {
+    dollarXgafv?: shared.XgafvEnum;
+    accessToken?: string;
+    alt?: shared.AltEnum;
+    callback?: string;
+    fields?: string;
+    key?: string;
+    oauthToken?: string;
+    prettyPrint?: boolean;
+    quotaUser?: string;
+    updateMask?: string;
+    uploadType?: string;
+    uploadProtocol?: string;
+}
+export declare class AndroidmanagementEnterprisesWebAppsPatchSecurity extends SpeakeasyBase {
+    oauth2: shared.SchemeOauth2;
+    oauth2c: shared.SchemeOauth2c;
+}
+export declare class AndroidmanagementEnterprisesWebAppsPatchRequest extends SpeakeasyBase {
+    pathParams: AndroidmanagementEnterprisesWebAppsPatchPathParams;
+    queryParams: AndroidmanagementEnterprisesWebAppsPatchQueryParams;
+    request?: shared.WebApp;
+    security: AndroidmanagementEnterprisesWebAppsPatchSecurity;
+}
+export declare class AndroidmanagementEnterprisesWebAppsPatchResponse extends SpeakeasyBase {
+    contentType: string;
+    statusCode: number;
+    webApp?: shared.WebApp;
+}

@@ -10,7 +10,7 @@ type UpdateSpotListPathParams struct {
 
 type UpdateSpotListRequest struct {
 	PathParams UpdateSpotListPathParams
-	Request    shared.SpotList `request:"mediaType=application/json"`
+	Request    shared.SpotListInput `request:"mediaType=application/json"`
 }
 
 type UpdateSpotListResponse struct {

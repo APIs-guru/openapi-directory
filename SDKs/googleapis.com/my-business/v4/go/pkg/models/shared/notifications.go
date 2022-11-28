@@ -15,6 +15,8 @@ const (
 	NotificationsNotificationTypesEnumUpdatedLocationState        NotificationsNotificationTypesEnum = "UPDATED_LOCATION_STATE"
 )
 
+// Notifications
+// A Google Cloud Pub/Sub topic where notifications can be published when a location is updated or has a new review. There will be only one notification settings resource per-account.
 type Notifications struct {
 	Name              *string                              `json:"name,omitempty"`
 	NotificationTypes []NotificationsNotificationTypesEnum `json:"notificationTypes,omitempty"`

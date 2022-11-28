@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Status } from "./status";
+
 
 
 // RemoveHeldAccountsResponse
@@ -8,6 +8,6 @@ import { Status } from "./status";
  * Response for batch delete held accounts.
 **/
 export class RemoveHeldAccountsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=statuses", elemType: shared.Status })
+  @SpeakeasyMetadata({ data: "json, name=statuses", elemType: Status })
   statuses?: Status[];
 }

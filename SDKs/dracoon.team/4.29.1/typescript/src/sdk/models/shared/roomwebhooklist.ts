@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RoomWebhook } from "./roomwebhook";
 import { Range } from "./range";
+
 
 
 // RoomWebhookList
@@ -9,9 +9,9 @@ import { Range } from "./range";
  * List of webhooks
 **/
 export class RoomWebhookList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.RoomWebhook })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: RoomWebhook })
   items: RoomWebhook[];
 
-  @Metadata({ data: "json, name=range" })
+  @SpeakeasyMetadata({ data: "json, name=range" })
   range: Range;
 }

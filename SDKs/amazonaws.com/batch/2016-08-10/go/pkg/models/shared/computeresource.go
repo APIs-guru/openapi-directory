@@ -1,5 +1,7 @@
 package shared
 
+// ComputeResource
+// An object representing an Batch compute resource. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html">Compute Environments</a> in the <i>Batch User Guide</i>.
 type ComputeResource struct {
 	AllocationStrategy *CrAllocationStrategyEnum    `json:"allocationStrategy,omitempty"`
 	BidPercentage      *int64                       `json:"bidPercentage,omitempty"`

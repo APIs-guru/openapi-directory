@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class GetAccountInfoHeaders:
-    training_key: str = field(default=None, metadata={'header': { 'field_name': 'Training-Key', 'style': 'simple', 'explode': False }})
+    training_key: str = field(metadata={'header': { 'field_name': 'Training-Key', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetAccountInfoRequest:
-    headers: GetAccountInfoHeaders = field(default=None)
+    headers: GetAccountInfoHeaders = field()
     
 
 @dataclass
 class GetAccountInfoResponse:
+    content_type: str = field()
+    status_code: int = field()
     account: Optional[shared.Account] = field(default=None)
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    body: Optional[bytes] = field(default=None)
     

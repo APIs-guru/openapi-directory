@@ -1,19 +1,24 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import search_result_text_matches
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class LabelSearchResultItem:
-    color: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'color' }})
-    default: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'default' }})
-    description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    node_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'node_id' }})
-    score: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'score' }})
-    text_matches: Optional[List[search_result_text_matches.SearchResultTextMatches]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'text_matches' }})
-    url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
+    r"""LabelSearchResultItem
+    Label Search Result Item
+    """
+    
+    color: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('color') }})
+    default: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('default') }})
+    description: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    id: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    node_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('node_id') }})
+    score: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('score') }})
+    url: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('url') }})
+    text_matches: Optional[List[SearchResultTextMatches]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('text_matches') }})
     

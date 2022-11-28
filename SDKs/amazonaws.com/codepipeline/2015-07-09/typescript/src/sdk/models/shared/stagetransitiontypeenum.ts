@@ -1,6 +1,7 @@
 
 
+
 export enum StageTransitionTypeEnum {
-    Inbound = "Inbound"
-,    Outbound = "Outbound"
+    Inbound = "Inbound",
+    Outbound = "Outbound"
 }

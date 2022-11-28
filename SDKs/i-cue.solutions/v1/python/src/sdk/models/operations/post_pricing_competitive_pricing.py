@@ -9,11 +9,11 @@ class PostPricingCompetitivePricingHeaders:
 
 @dataclass
 class PostPricingCompetitivePricingRequest:
-    headers: PostPricingCompetitivePricingHeaders = field(default=None)
+    headers: PostPricingCompetitivePricingHeaders = field()
     
 
 @dataclass
 class PostPricingCompetitivePricingResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

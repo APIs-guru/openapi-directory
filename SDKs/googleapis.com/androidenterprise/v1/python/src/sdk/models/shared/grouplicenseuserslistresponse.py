@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import user
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GroupLicenseUsersListResponse:
-    user: Optional[List[user.User]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'user' }})
+    user: Optional[List[User]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('user') }})
     

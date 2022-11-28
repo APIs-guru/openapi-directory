@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var UpdateSubnetGroupRequest = /** @class */ (function (_super) {
     __extends(UpdateSubnetGroupRequest, _super);
     function UpdateSubnetGroupRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], UpdateSubnetGroupRequest.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=SubnetGroupName" }),
+        SpeakeasyMetadata({ data: "json, name=SubnetGroupName" }),
         __metadata("design:type", String)
     ], UpdateSubnetGroupRequest.prototype, "subnetGroupName", void 0);
     __decorate([
-        Metadata({ data: "json, name=SubnetIds" }),
+        SpeakeasyMetadata({ data: "json, name=SubnetIds" }),
         __metadata("design:type", Array)
     ], UpdateSubnetGroupRequest.prototype, "subnetIds", void 0);
     return UpdateSubnetGroupRequest;

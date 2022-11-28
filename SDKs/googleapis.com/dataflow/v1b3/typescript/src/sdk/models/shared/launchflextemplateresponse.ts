@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Job } from "./job";
+
 
 
 // LaunchFlexTemplateResponse
@@ -7,6 +8,6 @@ import { Job } from "./job";
  * Response to the request to launch a job from Flex Template.
 **/
 export class LaunchFlexTemplateResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=job" })
+  @SpeakeasyMetadata({ data: "json, name=job" })
   job?: Job;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ComputeCapacityStatus
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes the capacity status for a fleet.
 **/
 export class ComputeCapacityStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Available" })
+  @SpeakeasyMetadata({ data: "json, name=Available" })
   available?: number;
 
-  @Metadata({ data: "json, name=Desired" })
+  @SpeakeasyMetadata({ data: "json, name=Desired" })
   desired: number;
 
-  @Metadata({ data: "json, name=InUse" })
+  @SpeakeasyMetadata({ data: "json, name=InUse" })
   inUse?: number;
 
-  @Metadata({ data: "json, name=Running" })
+  @SpeakeasyMetadata({ data: "json, name=Running" })
   running?: number;
 }

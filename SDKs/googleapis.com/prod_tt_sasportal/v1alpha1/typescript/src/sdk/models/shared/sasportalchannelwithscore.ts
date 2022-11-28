@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SasPortalFrequencyRange } from "./sasportalfrequencyrange";
+
 
 
 // SasPortalChannelWithScore
@@ -7,9 +8,9 @@ import { SasPortalFrequencyRange } from "./sasportalfrequencyrange";
  * The channel with score.
 **/
 export class SasPortalChannelWithScore extends SpeakeasyBase {
-  @Metadata({ data: "json, name=frequencyRange" })
+  @SpeakeasyMetadata({ data: "json, name=frequencyRange" })
   frequencyRange?: SasPortalFrequencyRange;
 
-  @Metadata({ data: "json, name=score" })
+  @SpeakeasyMetadata({ data: "json, name=score" })
   score?: number;
 }

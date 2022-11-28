@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MessageFormatValueEnum } from "./messageformatvalueenum";
 import { KafkaSecurityProtocolEnum } from "./kafkasecurityprotocolenum";
+
 
 
 // KafkaSettings
@@ -8,57 +9,57 @@ import { KafkaSecurityProtocolEnum } from "./kafkasecurityprotocolenum";
  * Provides information that describes an Apache Kafka endpoint. This information includes the output format of records applied to the endpoint and details of transaction and control table data information.
 **/
 export class KafkaSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Broker" })
+  @SpeakeasyMetadata({ data: "json, name=Broker" })
   broker?: string;
 
-  @Metadata({ data: "json, name=IncludeControlDetails" })
+  @SpeakeasyMetadata({ data: "json, name=IncludeControlDetails" })
   includeControlDetails?: boolean;
 
-  @Metadata({ data: "json, name=IncludeNullAndEmpty" })
+  @SpeakeasyMetadata({ data: "json, name=IncludeNullAndEmpty" })
   includeNullAndEmpty?: boolean;
 
-  @Metadata({ data: "json, name=IncludePartitionValue" })
+  @SpeakeasyMetadata({ data: "json, name=IncludePartitionValue" })
   includePartitionValue?: boolean;
 
-  @Metadata({ data: "json, name=IncludeTableAlterOperations" })
+  @SpeakeasyMetadata({ data: "json, name=IncludeTableAlterOperations" })
   includeTableAlterOperations?: boolean;
 
-  @Metadata({ data: "json, name=IncludeTransactionDetails" })
+  @SpeakeasyMetadata({ data: "json, name=IncludeTransactionDetails" })
   includeTransactionDetails?: boolean;
 
-  @Metadata({ data: "json, name=MessageFormat" })
+  @SpeakeasyMetadata({ data: "json, name=MessageFormat" })
   messageFormat?: MessageFormatValueEnum;
 
-  @Metadata({ data: "json, name=MessageMaxBytes" })
+  @SpeakeasyMetadata({ data: "json, name=MessageMaxBytes" })
   messageMaxBytes?: number;
 
-  @Metadata({ data: "json, name=NoHexPrefix" })
+  @SpeakeasyMetadata({ data: "json, name=NoHexPrefix" })
   noHexPrefix?: boolean;
 
-  @Metadata({ data: "json, name=PartitionIncludeSchemaTable" })
+  @SpeakeasyMetadata({ data: "json, name=PartitionIncludeSchemaTable" })
   partitionIncludeSchemaTable?: boolean;
 
-  @Metadata({ data: "json, name=SaslPassword" })
+  @SpeakeasyMetadata({ data: "json, name=SaslPassword" })
   saslPassword?: string;
 
-  @Metadata({ data: "json, name=SaslUsername" })
+  @SpeakeasyMetadata({ data: "json, name=SaslUsername" })
   saslUsername?: string;
 
-  @Metadata({ data: "json, name=SecurityProtocol" })
+  @SpeakeasyMetadata({ data: "json, name=SecurityProtocol" })
   securityProtocol?: KafkaSecurityProtocolEnum;
 
-  @Metadata({ data: "json, name=SslCaCertificateArn" })
+  @SpeakeasyMetadata({ data: "json, name=SslCaCertificateArn" })
   sslCaCertificateArn?: string;
 
-  @Metadata({ data: "json, name=SslClientCertificateArn" })
+  @SpeakeasyMetadata({ data: "json, name=SslClientCertificateArn" })
   sslClientCertificateArn?: string;
 
-  @Metadata({ data: "json, name=SslClientKeyArn" })
+  @SpeakeasyMetadata({ data: "json, name=SslClientKeyArn" })
   sslClientKeyArn?: string;
 
-  @Metadata({ data: "json, name=SslClientKeyPassword" })
+  @SpeakeasyMetadata({ data: "json, name=SslClientKeyPassword" })
   sslClientKeyPassword?: string;
 
-  @Metadata({ data: "json, name=Topic" })
+  @SpeakeasyMetadata({ data: "json, name=Topic" })
   topic?: string;
 }

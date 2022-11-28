@@ -31,7 +31,7 @@ type TpuProjectsLocationsNodesPatchSecurity struct {
 type TpuProjectsLocationsNodesPatchRequest struct {
 	PathParams  TpuProjectsLocationsNodesPatchPathParams
 	QueryParams TpuProjectsLocationsNodesPatchQueryParams
-	Request     *shared.Node `request:"mediaType=application/json"`
+	Request     *shared.NodeInput `request:"mediaType=application/json"`
 	Security    TpuProjectsLocationsNodesPatchSecurity
 }
 

@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BatchStrategyEnum } from "./batchstrategyenum";
 import { TransformInput } from "./transforminput";
 import { TransformOutput } from "./transformoutput";
 import { TransformResources } from "./transformresources";
+
 
 
 // TransformJobDefinition
@@ -10,24 +11,24 @@ import { TransformResources } from "./transformresources";
  * Defines the input needed to run a transform job using the inference specification specified in the algorithm.
 **/
 export class TransformJobDefinition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BatchStrategy" })
+  @SpeakeasyMetadata({ data: "json, name=BatchStrategy" })
   batchStrategy?: BatchStrategyEnum;
 
-  @Metadata({ data: "json, name=Environment" })
+  @SpeakeasyMetadata({ data: "json, name=Environment" })
   environment?: Map<string, string>;
 
-  @Metadata({ data: "json, name=MaxConcurrentTransforms" })
+  @SpeakeasyMetadata({ data: "json, name=MaxConcurrentTransforms" })
   maxConcurrentTransforms?: number;
 
-  @Metadata({ data: "json, name=MaxPayloadInMB" })
+  @SpeakeasyMetadata({ data: "json, name=MaxPayloadInMB" })
   maxPayloadInMb?: number;
 
-  @Metadata({ data: "json, name=TransformInput" })
+  @SpeakeasyMetadata({ data: "json, name=TransformInput" })
   transformInput: TransformInput;
 
-  @Metadata({ data: "json, name=TransformOutput" })
+  @SpeakeasyMetadata({ data: "json, name=TransformOutput" })
   transformOutput: TransformOutput;
 
-  @Metadata({ data: "json, name=TransformResources" })
+  @SpeakeasyMetadata({ data: "json, name=TransformResources" })
   transformResources: TransformResources;
 }

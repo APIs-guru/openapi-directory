@@ -1,99 +1,145 @@
 import { AxiosInstance, AxiosRequestConfig } from "axios";
 import * as operations from "./models/operations";
 import { Security } from "./models/shared";
-declare type OptsFunc = (sdk: SDK) => void;
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["http://api.sportsdata.io", "https://api.sportsdata.io", "http://azure-api.sportsdata.io", "https://azure-api.sportsdata.io"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare function WithSecurity(security: Security): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _security?: Security;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
     /**
+     * areasCountries - Areas (Countries)
+     *
      * Areas (Countries)
     **/
-    AreasCountries(req: operations.AreasCountriesRequest, config?: AxiosRequestConfig): Promise<operations.AreasCountriesResponse>;
+    areasCountries(req: operations.AreasCountriesRequest, config?: AxiosRequestConfig): Promise<operations.AreasCountriesResponse>;
     /**
+     * boxScore - Box Score
+     *
      * Games by Date
     **/
-    BoxScore(req: operations.BoxScoreRequest, config?: AxiosRequestConfig): Promise<operations.BoxScoreResponse>;
+    boxScore(req: operations.BoxScoreRequest, config?: AxiosRequestConfig): Promise<operations.BoxScoreResponse>;
     /**
+     * boxScoresByDate - Box Scores by Date
+     *
      * Games by Date
     **/
-    BoxScoresByDate(req: operations.BoxScoresByDateRequest, config?: AxiosRequestConfig): Promise<operations.BoxScoresByDateResponse>;
+    boxScoresByDate(req: operations.BoxScoresByDateRequest, config?: AxiosRequestConfig): Promise<operations.BoxScoresByDateResponse>;
     /**
+     * champions - Champions
+     *
      * Areas (Countries)
     **/
-    Champions(req: operations.ChampionsRequest, config?: AxiosRequestConfig): Promise<operations.ChampionsResponse>;
+    champions(req: operations.ChampionsRequest, config?: AxiosRequestConfig): Promise<operations.ChampionsResponse>;
     /**
+     * competitionFixturesLeagueDetails - Competition Fixtures (League Details)
+     *
      * Competition Fixtures (League Details)
     **/
-    CompetitionFixturesLeagueDetails(req: operations.CompetitionFixturesLeagueDetailsRequest, config?: AxiosRequestConfig): Promise<operations.CompetitionFixturesLeagueDetailsResponse>;
+    competitionFixturesLeagueDetails(req: operations.CompetitionFixturesLeagueDetailsRequest, config?: AxiosRequestConfig): Promise<operations.CompetitionFixturesLeagueDetailsResponse>;
     /**
+     * competitionsLeagues - Competitions (Leagues)
+     *
      * Competitions (Leagues)
     **/
-    CompetitionsLeagues(req: operations.CompetitionsLeaguesRequest, config?: AxiosRequestConfig): Promise<operations.CompetitionsLeaguesResponse>;
+    competitionsLeagues(req: operations.CompetitionsLeaguesRequest, config?: AxiosRequestConfig): Promise<operations.CompetitionsLeaguesResponse>;
     /**
+     * gamesByDate - Games by Date
+     *
      * Games by Date
     **/
-    GamesByDate(req: operations.GamesByDateRequest, config?: AxiosRequestConfig): Promise<operations.GamesByDateResponse>;
+    gamesByDate(req: operations.GamesByDateRequest, config?: AxiosRequestConfig): Promise<operations.GamesByDateResponse>;
     /**
+     * items - Items
+     *
      * Competitions (Leagues)
     **/
-    Items(req: operations.ItemsRequest, config?: AxiosRequestConfig): Promise<operations.ItemsResponse>;
+    items(req: operations.ItemsRequest, config?: AxiosRequestConfig): Promise<operations.ItemsResponse>;
     /**
+     * membershipsActive - Memberships (Active)
+     *
      * Memberships (Active)
     **/
-    MembershipsActive(req: operations.MembershipsActiveRequest, config?: AxiosRequestConfig): Promise<operations.MembershipsActiveResponse>;
+    membershipsActive(req: operations.MembershipsActiveRequest, config?: AxiosRequestConfig): Promise<operations.MembershipsActiveResponse>;
     /**
+     * membershipsByTeamActive - Memberships by Team (Active)
+     *
      * Memberships by Team (Active)
     **/
-    MembershipsByTeamActive(req: operations.MembershipsByTeamActiveRequest, config?: AxiosRequestConfig): Promise<operations.MembershipsByTeamActiveResponse>;
+    membershipsByTeamActive(req: operations.MembershipsByTeamActiveRequest, config?: AxiosRequestConfig): Promise<operations.MembershipsByTeamActiveResponse>;
     /**
+     * membershipsByTeamHistorical - Memberships by Team (Historical)
+     *
      * Memberships by Team (Historical)
     **/
-    MembershipsByTeamHistorical(req: operations.MembershipsByTeamHistoricalRequest, config?: AxiosRequestConfig): Promise<operations.MembershipsByTeamHistoricalResponse>;
+    membershipsByTeamHistorical(req: operations.MembershipsByTeamHistoricalRequest, config?: AxiosRequestConfig): Promise<operations.MembershipsByTeamHistoricalResponse>;
     /**
+     * membershipsHistorical - Memberships (Historical)
+     *
      * Memberships (Historical)
     **/
-    MembershipsHistorical(req: operations.MembershipsHistoricalRequest, config?: AxiosRequestConfig): Promise<operations.MembershipsHistoricalResponse>;
+    membershipsHistorical(req: operations.MembershipsHistoricalRequest, config?: AxiosRequestConfig): Promise<operations.MembershipsHistoricalResponse>;
     /**
+     * player - Player
+     *
      * Player
     **/
-    Player(req: operations.PlayerRequest, config?: AxiosRequestConfig): Promise<operations.PlayerResponse>;
+    player(req: operations.PlayerRequest, config?: AxiosRequestConfig): Promise<operations.PlayerResponse>;
     /**
+     * players - Players
+     *
      * Players
     **/
-    Players(req: operations.PlayersRequest, config?: AxiosRequestConfig): Promise<operations.PlayersResponse>;
+    players(req: operations.PlayersRequest, config?: AxiosRequestConfig): Promise<operations.PlayersResponse>;
     /**
+     * playersByTeam - Players by Team
+     *
      * Players by Team
     **/
-    PlayersByTeam(req: operations.PlayersByTeamRequest, config?: AxiosRequestConfig): Promise<operations.PlayersByTeamResponse>;
+    playersByTeam(req: operations.PlayersByTeamRequest, config?: AxiosRequestConfig): Promise<operations.PlayersByTeamResponse>;
     /**
+     * schedule - Schedule
+     *
      * Schedule
     **/
-    Schedule(req: operations.ScheduleRequest, config?: AxiosRequestConfig): Promise<operations.ScheduleResponse>;
+    schedule(req: operations.ScheduleRequest, config?: AxiosRequestConfig): Promise<operations.ScheduleResponse>;
     /**
+     * seasonTeams - Season Teams
+     *
      * Season Teams
     **/
-    SeasonTeams(req: operations.SeasonTeamsRequest, config?: AxiosRequestConfig): Promise<operations.SeasonTeamsResponse>;
+    seasonTeams(req: operations.SeasonTeamsRequest, config?: AxiosRequestConfig): Promise<operations.SeasonTeamsResponse>;
     /**
+     * spells - Spells
+     *
      * Areas (Countries)
     **/
-    Spells(req: operations.SpellsRequest, config?: AxiosRequestConfig): Promise<operations.SpellsResponse>;
+    spells(req: operations.SpellsRequest, config?: AxiosRequestConfig): Promise<operations.SpellsResponse>;
     /**
+     * standings - Standings
+     *
      * Standings
     **/
-    Standings(req: operations.StandingsRequest, config?: AxiosRequestConfig): Promise<operations.StandingsResponse>;
+    standings(req: operations.StandingsRequest, config?: AxiosRequestConfig): Promise<operations.StandingsResponse>;
     /**
+     * teams - Teams
+     *
      * Teams
     **/
-    Teams(req: operations.TeamsRequest, config?: AxiosRequestConfig): Promise<operations.TeamsResponse>;
+    teams(req: operations.TeamsRequest, config?: AxiosRequestConfig): Promise<operations.TeamsResponse>;
     /**
+     * venues - Venues
+     *
      * Venues
     **/
-    Venues(req: operations.VenuesRequest, config?: AxiosRequestConfig): Promise<operations.VenuesResponse>;
+    venues(req: operations.VenuesRequest, config?: AxiosRequestConfig): Promise<operations.VenuesResponse>;
 }
 export {};

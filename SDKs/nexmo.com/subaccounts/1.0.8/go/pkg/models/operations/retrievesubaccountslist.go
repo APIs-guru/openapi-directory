@@ -12,11 +12,6 @@ type RetrieveSubaccountsListSecurity struct {
 	BasicAuth shared.SchemeBasicAuth `security:"scheme,type=http,subtype=basic"`
 }
 
-type RetrieveSubaccountsListRequest struct {
-	PathParams RetrieveSubaccountsListPathParams
-	Security   RetrieveSubaccountsListSecurity
-}
-
 type RetrieveSubaccountsList401ApplicationJSON struct {
 	Detail   string `json:"detail"`
 	Instance string `json:"instance"`
@@ -24,11 +19,18 @@ type RetrieveSubaccountsList401ApplicationJSON struct {
 	Type     string `json:"type"`
 }
 
+// RetrieveSubaccountsList404ApplicationJSON
+// Invalid API Key
 type RetrieveSubaccountsList404ApplicationJSON struct {
 	Detail   string `json:"detail"`
 	Instance string `json:"instance"`
 	Title    string `json:"title"`
 	Type     string `json:"type"`
+}
+
+type RetrieveSubaccountsListRequest struct {
+	PathParams RetrieveSubaccountsListPathParams
+	Security   RetrieveSubaccountsListSecurity
 }
 
 type RetrieveSubaccountsListResponse struct {

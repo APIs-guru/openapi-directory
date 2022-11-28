@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // EventPeriodRange
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An event period time range.
 **/
 export class EventPeriodRange extends SpeakeasyBase {
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=periodEndMillis" })
+  @SpeakeasyMetadata({ data: "json, name=periodEndMillis" })
   periodEndMillis?: string;
 
-  @Metadata({ data: "json, name=periodStartMillis" })
+  @SpeakeasyMetadata({ data: "json, name=periodStartMillis" })
   periodStartMillis?: string;
 }

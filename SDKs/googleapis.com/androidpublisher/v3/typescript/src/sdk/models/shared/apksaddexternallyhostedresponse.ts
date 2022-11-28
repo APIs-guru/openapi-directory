@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ExternallyHostedApk } from "./externallyhostedapk";
+
 
 
 // ApksAddExternallyHostedResponse
@@ -7,6 +8,6 @@ import { ExternallyHostedApk } from "./externallyhostedapk";
  * Response for creating a new externally hosted APK.
 **/
 export class ApksAddExternallyHostedResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=externallyHostedApk" })
+  @SpeakeasyMetadata({ data: "json, name=externallyHostedApk" })
   externallyHostedApk?: ExternallyHostedApk;
 }

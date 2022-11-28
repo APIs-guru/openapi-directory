@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class PolyAssetsGetPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,13 +26,13 @@ class PolyAssetsGetQueryParams:
 
 @dataclass
 class PolyAssetsGetRequest:
-    path_params: PolyAssetsGetPathParams = field(default=None)
-    query_params: PolyAssetsGetQueryParams = field(default=None)
+    path_params: PolyAssetsGetPathParams = field()
+    query_params: PolyAssetsGetQueryParams = field()
     
 
 @dataclass
 class PolyAssetsGetResponse:
+    content_type: str = field()
+    status_code: int = field()
     asset: Optional[shared.Asset] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class CreateAPICachePathParams:
-    api_id: str = field(default=None, metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
+    api_id: str = field(metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -44,28 +49,28 @@ class CreateAPICacheRequestBodyTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CreateAPICacheRequestBody:
-    api_caching_behavior: CreateAPICacheRequestBodyAPICachingBehaviorEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'apiCachingBehavior' }})
-    at_rest_encryption_enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'atRestEncryptionEnabled' }})
-    transit_encryption_enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'transitEncryptionEnabled' }})
-    ttl: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ttl' }})
-    type: CreateAPICacheRequestBodyTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    api_caching_behavior: CreateAPICacheRequestBodyAPICachingBehaviorEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('apiCachingBehavior') }})
+    ttl: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ttl') }})
+    type: CreateAPICacheRequestBodyTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    at_rest_encryption_enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('atRestEncryptionEnabled') }})
+    transit_encryption_enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('transitEncryptionEnabled') }})
     
 
 @dataclass
 class CreateAPICacheRequest:
-    path_params: CreateAPICachePathParams = field(default=None)
-    headers: CreateAPICacheHeaders = field(default=None)
-    request: CreateAPICacheRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateAPICacheHeaders = field()
+    path_params: CreateAPICachePathParams = field()
+    request: CreateAPICacheRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateAPICacheResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
     concurrent_modification_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     create_api_cache_response: Optional[shared.CreateAPICacheResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

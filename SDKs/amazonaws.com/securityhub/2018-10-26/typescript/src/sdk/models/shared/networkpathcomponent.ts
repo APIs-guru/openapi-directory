@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NetworkHeader } from "./networkheader";
-import { NetworkHeader } from "./networkheader";
+
 
 
 // NetworkPathComponent
@@ -8,15 +8,15 @@ import { NetworkHeader } from "./networkheader";
  * Information about a network path component.
 **/
 export class NetworkPathComponent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ComponentId" })
+  @SpeakeasyMetadata({ data: "json, name=ComponentId" })
   componentId?: string;
 
-  @Metadata({ data: "json, name=ComponentType" })
+  @SpeakeasyMetadata({ data: "json, name=ComponentType" })
   componentType?: string;
 
-  @Metadata({ data: "json, name=Egress" })
+  @SpeakeasyMetadata({ data: "json, name=Egress" })
   egress?: NetworkHeader;
 
-  @Metadata({ data: "json, name=Ingress" })
+  @SpeakeasyMetadata({ data: "json, name=Ingress" })
   ingress?: NetworkHeader;
 }

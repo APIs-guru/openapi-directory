@@ -16,11 +16,6 @@ type GetWfsInventoryHeaders struct {
 	WmSvcName             string `header:"style=simple,explode=false,name=WM_SVC.NAME"`
 }
 
-type GetWfsInventoryRequest struct {
-	QueryParams GetWfsInventoryQueryParams
-	Headers     GetWfsInventoryHeaders
-}
-
 type GetWfsInventory200ApplicationJSONHeaders struct {
 	Limit      *int32 `json:"limit,omitempty"`
 	Offset     *int32 `json:"offset,omitempty"`
@@ -46,6 +41,11 @@ type GetWfsInventory200ApplicationJSONPayload struct {
 type GetWfsInventory200ApplicationJSON struct {
 	Headers *GetWfsInventory200ApplicationJSONHeaders `json:"headers,omitempty"`
 	Payload *GetWfsInventory200ApplicationJSONPayload `json:"payload,omitempty"`
+}
+
+type GetWfsInventoryRequest struct {
+	QueryParams GetWfsInventoryQueryParams
+	Headers     GetWfsInventoryHeaders
 }
 
 type GetWfsInventoryResponse struct {

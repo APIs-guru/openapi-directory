@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SigningAlgorithmSpecEnum } from "./signingalgorithmspecenum";
 
 
+
 export class SignResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=KeyId" })
+  @SpeakeasyMetadata({ data: "json, name=KeyId" })
   keyId?: string;
 
-  @Metadata({ data: "json, name=Signature" })
+  @SpeakeasyMetadata({ data: "json, name=Signature" })
   signature?: string;
 
-  @Metadata({ data: "json, name=SigningAlgorithm" })
+  @SpeakeasyMetadata({ data: "json, name=SigningAlgorithm" })
   signingAlgorithm?: SigningAlgorithmSpecEnum;
 }

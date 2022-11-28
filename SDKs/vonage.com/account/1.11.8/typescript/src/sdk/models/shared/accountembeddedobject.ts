@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Account } from "./account";
+
 
 
 // AccountEmbeddedObject
@@ -7,6 +8,6 @@ import { Account } from "./account";
  * Account object
 **/
 export class AccountEmbeddedObject extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Account;
 }

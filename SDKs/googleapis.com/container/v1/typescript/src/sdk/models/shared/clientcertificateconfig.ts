@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ClientCertificateConfig
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configuration for client certificates on the cluster.
 **/
 export class ClientCertificateConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=issueClientCertificate" })
+  @SpeakeasyMetadata({ data: "json, name=issueClientCertificate" })
   issueClientCertificate?: boolean;
 }

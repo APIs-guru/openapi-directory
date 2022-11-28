@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ThingGroupIndexingConfiguration } from "./thinggroupindexingconfiguration";
 import { ThingIndexingConfiguration } from "./thingindexingconfiguration";
 
 
+
 export class GetIndexingConfigurationResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=thingGroupIndexingConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=thingGroupIndexingConfiguration" })
   thingGroupIndexingConfiguration?: ThingGroupIndexingConfiguration;
 
-  @Metadata({ data: "json, name=thingIndexingConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=thingIndexingConfiguration" })
   thingIndexingConfiguration?: ThingIndexingConfiguration;
 }

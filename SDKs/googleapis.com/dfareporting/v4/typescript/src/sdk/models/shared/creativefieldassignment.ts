@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CreativeFieldAssignment
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Creative Field Assignment.
 **/
 export class CreativeFieldAssignment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=creativeFieldId" })
+  @SpeakeasyMetadata({ data: "json, name=creativeFieldId" })
   creativeFieldId?: string;
 
-  @Metadata({ data: "json, name=creativeFieldValueId" })
+  @SpeakeasyMetadata({ data: "json, name=creativeFieldValueId" })
   creativeFieldValueId?: string;
 }

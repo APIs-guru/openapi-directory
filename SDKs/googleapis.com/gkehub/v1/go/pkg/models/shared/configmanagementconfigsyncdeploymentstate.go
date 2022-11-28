@@ -63,6 +63,8 @@ const (
 	ConfigManagementConfigSyncDeploymentStateSyncerEnumError                      ConfigManagementConfigSyncDeploymentStateSyncerEnum = "ERROR"
 )
 
+// ConfigManagementConfigSyncDeploymentState
+// The state of ConfigSync's deployment on a cluster
 type ConfigManagementConfigSyncDeploymentState struct {
 	AdmissionWebhook  *ConfigManagementConfigSyncDeploymentStateAdmissionWebhookEnum  `json:"admissionWebhook,omitempty"`
 	GitSync           *ConfigManagementConfigSyncDeploymentStateGitSyncEnum           `json:"gitSync,omitempty"`

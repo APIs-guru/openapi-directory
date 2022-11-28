@@ -1,21 +1,21 @@
 from dataclasses import dataclass, field
-
+from typing import Optional
 
 
 @dataclass
 class ContentSearchHelpArticlesPathParams:
-    searchtext: str = field(default=None, metadata={'path_param': { 'field_name': 'searchtext', 'style': 'simple', 'explode': False }})
-    size: str = field(default=None, metadata={'path_param': { 'field_name': 'size', 'style': 'simple', 'explode': False }})
+    searchtext: str = field(metadata={'path_param': { 'field_name': 'searchtext', 'style': 'simple', 'explode': False }})
+    size: str = field(metadata={'path_param': { 'field_name': 'size', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ContentSearchHelpArticlesRequest:
-    path_params: ContentSearchHelpArticlesPathParams = field(default=None)
+    path_params: ContentSearchHelpArticlesPathParams = field()
     
 
 @dataclass
 class ContentSearchHelpArticlesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

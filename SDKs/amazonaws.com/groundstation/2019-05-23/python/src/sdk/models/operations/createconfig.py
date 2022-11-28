@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,36 +22,40 @@ class CreateConfigHeaders:
 @dataclass_json
 @dataclass
 class CreateConfigRequestBodyConfigData:
-    antenna_downlink_config: Optional[shared.AntennaDownlinkConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'antennaDownlinkConfig' }})
-    antenna_downlink_demod_decode_config: Optional[shared.AntennaDownlinkDemodDecodeConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'antennaDownlinkDemodDecodeConfig' }})
-    antenna_uplink_config: Optional[shared.AntennaUplinkConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'antennaUplinkConfig' }})
-    dataflow_endpoint_config: Optional[shared.DataflowEndpointConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dataflowEndpointConfig' }})
-    s3_recording_config: Optional[shared.S3RecordingConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 's3RecordingConfig' }})
-    tracking_config: Optional[shared.TrackingConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'trackingConfig' }})
-    uplink_echo_config: Optional[shared.UplinkEchoConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uplinkEchoConfig' }})
+    r"""CreateConfigRequestBodyConfigData
+    <p>Object containing the parameters of a <code>Config</code>.</p> <p>See the subtype definitions for what each type of <code>Config</code> contains.</p>
+    """
+    
+    antenna_downlink_config: Optional[shared.AntennaDownlinkConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('antennaDownlinkConfig') }})
+    antenna_downlink_demod_decode_config: Optional[shared.AntennaDownlinkDemodDecodeConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('antennaDownlinkDemodDecodeConfig') }})
+    antenna_uplink_config: Optional[shared.AntennaUplinkConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('antennaUplinkConfig') }})
+    dataflow_endpoint_config: Optional[shared.DataflowEndpointConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dataflowEndpointConfig') }})
+    s3_recording_config: Optional[shared.S3RecordingConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('s3RecordingConfig') }})
+    tracking_config: Optional[shared.TrackingConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('trackingConfig') }})
+    uplink_echo_config: Optional[shared.UplinkEchoConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('uplinkEchoConfig') }})
     
 
 @dataclass_json
 @dataclass
 class CreateConfigRequestBody:
-    config_data: CreateConfigRequestBodyConfigData = field(default=None, metadata={'dataclasses_json': { 'field_name': 'configData' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
+    config_data: CreateConfigRequestBodyConfigData = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('configData') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     
 
 @dataclass
 class CreateConfigRequest:
-    headers: CreateConfigHeaders = field(default=None)
-    request: CreateConfigRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateConfigHeaders = field()
+    request: CreateConfigRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateConfigResponse:
+    content_type: str = field()
+    status_code: int = field()
     config_id_response: Optional[shared.ConfigIDResponse] = field(default=None)
-    content_type: str = field(default=None)
     dependency_exception: Optional[Any] = field(default=None)
     invalid_parameter_exception: Optional[Any] = field(default=None)
     resource_limit_exceeded_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,7 +1,8 @@
 
 
+
 export enum SecurityStyleEnum {
-    Unix = "UNIX"
-,    Ntfs = "NTFS"
-,    Mixed = "MIXED"
+    Unix = "UNIX",
+    Ntfs = "NTFS",
+    Mixed = "MIXED"
 }

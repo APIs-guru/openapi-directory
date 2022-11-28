@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Change
+// A change to a file or shared drive.
 type Change struct {
 	ChangeType  *string    `json:"changeType,omitempty"`
 	Drive       *Drive     `json:"drive,omitempty"`

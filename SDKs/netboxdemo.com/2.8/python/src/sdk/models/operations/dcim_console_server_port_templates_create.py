@@ -5,12 +5,12 @@ from sdk.models import shared
 
 @dataclass
 class DcimConsoleServerPortTemplatesCreateRequest:
-    request: shared.WritableConsoleServerPortTemplate = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.WritableConsoleServerPortTemplateInput = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DcimConsoleServerPortTemplatesCreateResponse:
+    content_type: str = field()
+    status_code: int = field()
     console_server_port_template: Optional[shared.ConsoleServerPortTemplate] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

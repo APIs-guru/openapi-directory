@@ -12,12 +12,12 @@ class GetResourcesSourcesJSONQueryParams:
 
 @dataclass
 class GetResourcesSourcesJSONRequest:
-    query_params: GetResourcesSourcesJSONQueryParams = field(default=None)
+    query_params: GetResourcesSourcesJSONQueryParams = field()
     
 
 @dataclass
 class GetResourcesSourcesJSONResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     source_wrappeds: Optional[List[shared.SourceWrapped]] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ActionsListSelfHostedRunnersInGroupForOrgPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=org" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=org" })
   org: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=runner_group_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=runner_group_id" })
   runnerGroupId: number;
 }
 
 
 export class ActionsListSelfHostedRunnersInGroupForOrgQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 }
 
 
-export class ActionsListSelfHostedRunnersInGroupForOrgRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: ActionsListSelfHostedRunnersInGroupForOrgPathParams;
-
-  @Metadata()
-  queryParams: ActionsListSelfHostedRunnersInGroupForOrgQueryParams;
-}
-
-
 export class ActionsListSelfHostedRunnersInGroupForOrg200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=runners", elemType: shared.RunnerNoLabels })
+  @SpeakeasyMetadata({ data: "json, name=runners", elemType: shared.RunnerNoLabels })
   runners: shared.RunnerNoLabels[];
 
-  @Metadata({ data: "json, name=total_count" })
+  @SpeakeasyMetadata({ data: "json, name=total_count" })
   totalCount: number;
 }
 
 
+export class ActionsListSelfHostedRunnersInGroupForOrgRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: ActionsListSelfHostedRunnersInGroupForOrgPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: ActionsListSelfHostedRunnersInGroupForOrgQueryParams;
+}
+
+
 export class ActionsListSelfHostedRunnersInGroupForOrgResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   actionsListSelfHostedRunnersInGroupForOrg200ApplicationJsonObject?: ActionsListSelfHostedRunnersInGroupForOrg200ApplicationJson;
 }

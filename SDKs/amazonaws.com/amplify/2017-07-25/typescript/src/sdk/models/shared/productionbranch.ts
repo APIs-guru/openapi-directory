@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ProductionBranch
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  Describes the information about a production branch for an Amplify app. 
 **/
 export class ProductionBranch extends SpeakeasyBase {
-  @Metadata({ data: "json, name=branchName" })
+  @SpeakeasyMetadata({ data: "json, name=branchName" })
   branchName?: string;
 
-  @Metadata({ data: "json, name=lastDeployTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastDeployTime" })
   lastDeployTime?: Date;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 
-  @Metadata({ data: "json, name=thumbnailUrl" })
+  @SpeakeasyMetadata({ data: "json, name=thumbnailUrl" })
   thumbnailUrl?: string;
 }

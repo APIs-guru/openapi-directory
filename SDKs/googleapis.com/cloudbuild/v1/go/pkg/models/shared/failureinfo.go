@@ -12,6 +12,8 @@ const (
 	FailureInfoTypeEnumFetchSourceFailed      FailureInfoTypeEnum = "FETCH_SOURCE_FAILED"
 )
 
+// FailureInfo
+// A fatal problem encountered during the execution of the build.
 type FailureInfo struct {
 	Detail *string              `json:"detail,omitempty"`
 	Type   *FailureInfoTypeEnum `json:"type,omitempty"`

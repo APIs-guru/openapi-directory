@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum GetSpecificMessageAnnunciatorEnum {
-    CommonsMain = "CommonsMain"
-,    LordsMain = "LordsMain"
-,    Security = "Security"
+    CommonsMain = "CommonsMain",
+    LordsMain = "LordsMain",
+    Security = "Security"
 }
 
 
 export class GetSpecificMessagePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=annunciator" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=annunciator" })
   annunciator: GetSpecificMessageAnnunciatorEnum;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=date" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=date" })
   date: Date;
 }
 
 
 export class GetSpecificMessageRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetSpecificMessagePathParams;
 }
 
 
 export class GetSpecificMessageResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   messageViewModel?: shared.MessageViewModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

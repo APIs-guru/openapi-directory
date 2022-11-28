@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceValueTypeEnum } from "./resourcevaluetypeenum";
+
 
 
 // ResourceValue
@@ -7,6 +8,6 @@ import { ResourceValueTypeEnum } from "./resourcevaluetypeenum";
  * The dynamic value of the resource.
 **/
 export class ResourceValue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Value" })
+  @SpeakeasyMetadata({ data: "json, name=Value" })
   value: ResourceValueTypeEnum;
 }

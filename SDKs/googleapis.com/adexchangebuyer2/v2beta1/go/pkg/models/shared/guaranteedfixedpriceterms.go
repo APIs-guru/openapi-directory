@@ -8,6 +8,8 @@ const (
 	GuaranteedFixedPriceTermsReservationTypeEnumSponsorship                GuaranteedFixedPriceTermsReservationTypeEnum = "SPONSORSHIP"
 )
 
+// GuaranteedFixedPriceTerms
+// Terms for Programmatic Guaranteed Deals.
 type GuaranteedFixedPriceTerms struct {
 	FixedPrices           []PricePerBuyer                               `json:"fixedPrices,omitempty"`
 	GuaranteedImpressions *string                                       `json:"guaranteedImpressions,omitempty"`

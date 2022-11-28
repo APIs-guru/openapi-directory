@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InputStartingPositionConfiguration } from "./inputstartingpositionconfiguration";
+
 
 
 // SqlRunConfiguration
@@ -7,9 +8,9 @@ import { InputStartingPositionConfiguration } from "./inputstartingpositionconfi
  * Describes the starting parameters for a SQL-based Kinesis Data Analytics application.
 **/
 export class SqlRunConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=InputId" })
+  @SpeakeasyMetadata({ data: "json, name=InputId" })
   inputId: string;
 
-  @Metadata({ data: "json, name=InputStartingPositionConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=InputStartingPositionConfiguration" })
   inputStartingPositionConfiguration: InputStartingPositionConfiguration;
 }

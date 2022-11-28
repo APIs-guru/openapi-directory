@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDisableLoggingActionEnum(str, Enum):
     DISABLE_LOGGING = "DisableLogging"
@@ -10,8 +14,8 @@ class PostDisableLoggingVersionEnum(str, Enum):
 
 @dataclass
 class PostDisableLoggingQueryParams:
-    action: PostDisableLoggingActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDisableLoggingVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDisableLoggingActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDisableLoggingVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDisableLoggingHeaders:
 
 @dataclass
 class PostDisableLoggingRequest:
-    query_params: PostDisableLoggingQueryParams = field(default=None)
-    headers: PostDisableLoggingHeaders = field(default=None)
+    headers: PostDisableLoggingHeaders = field()
+    query_params: PostDisableLoggingQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDisableLoggingResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ServiceInsightHealth } from "./serviceinsighthealth";
 import { ServiceNameEnum } from "./servicenameenum";
 // ServiceHealth
@@ -35,11 +35,11 @@ var ServiceHealth = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Insight" }),
+        SpeakeasyMetadata({ data: "json, name=Insight" }),
         __metadata("design:type", ServiceInsightHealth)
     ], ServiceHealth.prototype, "insight", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServiceName" }),
+        SpeakeasyMetadata({ data: "json, name=ServiceName" }),
         __metadata("design:type", String)
     ], ServiceHealth.prototype, "serviceName", void 0);
     return ServiceHealth;

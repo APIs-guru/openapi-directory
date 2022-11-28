@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CheckKeyUsabilityPathParams = /** @class */ (function (_super) {
     __extends(CheckKeyUsabilityPathParams, _super);
@@ -30,7 +30,7 @@ var CheckKeyUsabilityPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=key" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=key" }),
         __metadata("design:type", String)
     ], CheckKeyUsabilityPathParams.prototype, "key", void 0);
     return CheckKeyUsabilityPathParams;
@@ -42,7 +42,7 @@ var CheckKeyUsabilityQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=user_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=user_token" }),
         __metadata("design:type", String)
     ], CheckKeyUsabilityQueryParams.prototype, "userToken", void 0);
     return CheckKeyUsabilityQueryParams;
@@ -54,11 +54,11 @@ var CheckKeyUsabilitySecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], CheckKeyUsabilitySecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
         __metadata("design:type", shared.SchemeUserToken)
     ], CheckKeyUsabilitySecurity.prototype, "userToken", void 0);
     return CheckKeyUsabilitySecurity;
@@ -70,15 +70,15 @@ var CheckKeyUsabilityRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CheckKeyUsabilityPathParams)
     ], CheckKeyUsabilityRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CheckKeyUsabilityQueryParams)
     ], CheckKeyUsabilityRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CheckKeyUsabilitySecurity)
     ], CheckKeyUsabilityRequest.prototype, "security", void 0);
     return CheckKeyUsabilityRequest;
@@ -90,19 +90,19 @@ var CheckKeyUsabilityResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.AddressLookupResponseSchema)
     ], CheckKeyUsabilityResponse.prototype, "addressLookupResponseSchema", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CheckKeyUsabilityResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.KeyUsabilityResponseSchema)
     ], CheckKeyUsabilityResponse.prototype, "keyUsabilityResponseSchema", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CheckKeyUsabilityResponse.prototype, "statusCode", void 0);
     return CheckKeyUsabilityResponse;

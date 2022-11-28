@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetModifyVpcEndpointServiceConfigurationActionEnum {
     ModifyVpcEndpointServiceConfiguration = "ModifyVpcEndpointServiceConfiguration"
@@ -10,81 +11,81 @@ export enum GetModifyVpcEndpointServiceConfigurationVersionEnum {
 
 
 export class GetModifyVpcEndpointServiceConfigurationQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=AcceptanceRequired" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=AcceptanceRequired" })
   acceptanceRequired?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Action" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" })
   action: GetModifyVpcEndpointServiceConfigurationActionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=AddGatewayLoadBalancerArn" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=AddGatewayLoadBalancerArn" })
   addGatewayLoadBalancerArn?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=AddNetworkLoadBalancerArn" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=AddNetworkLoadBalancerArn" })
   addNetworkLoadBalancerArn?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=DryRun" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DryRun" })
   dryRun?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=PrivateDnsName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=PrivateDnsName" })
   privateDnsName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=RemoveGatewayLoadBalancerArn" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=RemoveGatewayLoadBalancerArn" })
   removeGatewayLoadBalancerArn?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=RemoveNetworkLoadBalancerArn" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=RemoveNetworkLoadBalancerArn" })
   removeNetworkLoadBalancerArn?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=RemovePrivateDnsName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=RemovePrivateDnsName" })
   removePrivateDnsName?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ServiceId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ServiceId" })
   serviceId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" })
   version: GetModifyVpcEndpointServiceConfigurationVersionEnum;
 }
 
 
 export class GetModifyVpcEndpointServiceConfigurationHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class GetModifyVpcEndpointServiceConfigurationRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetModifyVpcEndpointServiceConfigurationQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetModifyVpcEndpointServiceConfigurationHeaders;
 }
 
 
 export class GetModifyVpcEndpointServiceConfigurationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

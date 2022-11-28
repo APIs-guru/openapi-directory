@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var BaggageTripAndContactPathParams = /** @class */ (function (_super) {
     __extends(BaggageTripAndContactPathParams, _super);
@@ -30,7 +30,7 @@ var BaggageTripAndContactPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=searchID" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=searchID" }),
         __metadata("design:type", String)
     ], BaggageTripAndContactPathParams.prototype, "searchId", void 0);
     return BaggageTripAndContactPathParams;
@@ -42,7 +42,7 @@ var BaggageTripAndContactHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Accept" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept" }),
         __metadata("design:type", String)
     ], BaggageTripAndContactHeaders.prototype, "accept", void 0);
     return BaggageTripAndContactHeaders;
@@ -54,7 +54,7 @@ var BaggageTripAndContactSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeAuth)
     ], BaggageTripAndContactSecurity.prototype, "auth", void 0);
     return BaggageTripAndContactSecurity;
@@ -66,15 +66,15 @@ var BaggageTripAndContactRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", BaggageTripAndContactPathParams)
     ], BaggageTripAndContactRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", BaggageTripAndContactHeaders)
     ], BaggageTripAndContactRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", BaggageTripAndContactSecurity)
     ], BaggageTripAndContactRequest.prototype, "security", void 0);
     return BaggageTripAndContactRequest;
@@ -86,15 +86,15 @@ var BaggageTripAndContactResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], BaggageTripAndContactResponse.prototype, "baggageTripAndContact200ApplicationJsonString", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], BaggageTripAndContactResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], BaggageTripAndContactResponse.prototype, "statusCode", void 0);
     return BaggageTripAndContactResponse;

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { BigQueryDatasetSource } from "./bigquerydatasetsource";
 import { DataProvider } from "./dataprovider";
 import { Publisher } from "./publisher";
@@ -27,6 +27,21 @@ export declare enum ListingCategoriesEnum {
 export declare enum ListingStateEnum {
     StateUnspecified = "STATE_UNSPECIFIED",
     Active = "ACTIVE"
+}
+/**
+ * A listing is what gets published into a data exchange that a subscriber can subscribe to. It contains a reference to the data source along with descriptive information that will help subscribers find and subscribe the data.
+**/
+export declare class ListingInput extends SpeakeasyBase {
+    bigqueryDataset?: BigQueryDatasetSource;
+    categories?: ListingCategoriesEnum[];
+    dataProvider?: DataProvider;
+    description?: string;
+    displayName?: string;
+    documentation?: string;
+    icon?: string;
+    primaryContact?: string;
+    publisher?: Publisher;
+    requestAccess?: string;
 }
 /**
  * A listing is what gets published into a data exchange that a subscriber can subscribe to. It contains a reference to the data source along with descriptive information that will help subscribers find and subscribe the data.

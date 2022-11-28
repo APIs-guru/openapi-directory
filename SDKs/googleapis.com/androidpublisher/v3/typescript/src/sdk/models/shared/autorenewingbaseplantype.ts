@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum AutoRenewingBasePlanTypeProrationModeEnum {
-    SubscriptionProrationModeUnspecified = "SUBSCRIPTION_PRORATION_MODE_UNSPECIFIED"
-,    SubscriptionProrationModeChargeOnNextBillingDate = "SUBSCRIPTION_PRORATION_MODE_CHARGE_ON_NEXT_BILLING_DATE"
-,    SubscriptionProrationModeChargeFullPriceImmediately = "SUBSCRIPTION_PRORATION_MODE_CHARGE_FULL_PRICE_IMMEDIATELY"
+    SubscriptionProrationModeUnspecified = "SUBSCRIPTION_PRORATION_MODE_UNSPECIFIED",
+    SubscriptionProrationModeChargeOnNextBillingDate = "SUBSCRIPTION_PRORATION_MODE_CHARGE_ON_NEXT_BILLING_DATE",
+    SubscriptionProrationModeChargeFullPriceImmediately = "SUBSCRIPTION_PRORATION_MODE_CHARGE_FULL_PRICE_IMMEDIATELY"
 }
 
 export enum AutoRenewingBasePlanTypeResubscribeStateEnum {
-    ResubscribeStateUnspecified = "RESUBSCRIBE_STATE_UNSPECIFIED"
-,    ResubscribeStateActive = "RESUBSCRIBE_STATE_ACTIVE"
-,    ResubscribeStateInactive = "RESUBSCRIBE_STATE_INACTIVE"
+    ResubscribeStateUnspecified = "RESUBSCRIBE_STATE_UNSPECIFIED",
+    ResubscribeStateActive = "RESUBSCRIBE_STATE_ACTIVE",
+    ResubscribeStateInactive = "RESUBSCRIBE_STATE_INACTIVE"
 }
 
 
@@ -18,21 +19,21 @@ export enum AutoRenewingBasePlanTypeResubscribeStateEnum {
  * Represents a base plan that automatically renews at the end of its subscription period.
 **/
 export class AutoRenewingBasePlanType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=billingPeriodDuration" })
+  @SpeakeasyMetadata({ data: "json, name=billingPeriodDuration" })
   billingPeriodDuration?: string;
 
-  @Metadata({ data: "json, name=gracePeriodDuration" })
+  @SpeakeasyMetadata({ data: "json, name=gracePeriodDuration" })
   gracePeriodDuration?: string;
 
-  @Metadata({ data: "json, name=legacyCompatible" })
+  @SpeakeasyMetadata({ data: "json, name=legacyCompatible" })
   legacyCompatible?: boolean;
 
-  @Metadata({ data: "json, name=legacyCompatibleSubscriptionOfferId" })
+  @SpeakeasyMetadata({ data: "json, name=legacyCompatibleSubscriptionOfferId" })
   legacyCompatibleSubscriptionOfferId?: string;
 
-  @Metadata({ data: "json, name=prorationMode" })
+  @SpeakeasyMetadata({ data: "json, name=prorationMode" })
   prorationMode?: AutoRenewingBasePlanTypeProrationModeEnum;
 
-  @Metadata({ data: "json, name=resubscribeState" })
+  @SpeakeasyMetadata({ data: "json, name=resubscribeState" })
   resubscribeState?: AutoRenewingBasePlanTypeResubscribeStateEnum;
 }

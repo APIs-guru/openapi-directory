@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Service } from "./service";
 
 
+
 export class DeleteServiceResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=OperationId" })
+  @SpeakeasyMetadata({ data: "json, name=OperationId" })
   operationId: string;
 
-  @Metadata({ data: "json, name=Service" })
+  @SpeakeasyMetadata({ data: "json, name=Service" })
   service: Service;
 }

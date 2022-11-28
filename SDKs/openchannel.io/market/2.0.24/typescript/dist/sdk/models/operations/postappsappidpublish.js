@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PostAppsAppIdPublishPathParams = /** @class */ (function (_super) {
     __extends(PostAppsAppIdPublishPathParams, _super);
     function PostAppsAppIdPublishPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=appId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=appId" }),
         __metadata("design:type", String)
     ], PostAppsAppIdPublishPathParams.prototype, "appId", void 0);
     return PostAppsAppIdPublishPathParams;
@@ -41,15 +41,15 @@ var PostAppsAppIdPublishQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=autoApprove" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=autoApprove" }),
         __metadata("design:type", Boolean)
     ], PostAppsAppIdPublishQueryParams.prototype, "autoApprove", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=developerId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=developerId" }),
         __metadata("design:type", String)
     ], PostAppsAppIdPublishQueryParams.prototype, "developerId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=version" }),
         __metadata("design:type", Number)
     ], PostAppsAppIdPublishQueryParams.prototype, "version", void 0);
     return PostAppsAppIdPublishQueryParams;
@@ -61,11 +61,11 @@ var PostAppsAppIdPublishRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostAppsAppIdPublishPathParams)
     ], PostAppsAppIdPublishRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostAppsAppIdPublishQueryParams)
     ], PostAppsAppIdPublishRequest.prototype, "queryParams", void 0);
     return PostAppsAppIdPublishRequest;
@@ -77,11 +77,11 @@ var PostAppsAppIdPublishResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostAppsAppIdPublishResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostAppsAppIdPublishResponse.prototype, "statusCode", void 0);
     return PostAppsAppIdPublishResponse;

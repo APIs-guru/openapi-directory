@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TlsRouteRouteDestination } from "./tlsrouteroutedestination";
+
 
 
 // TlsRouteRouteAction
@@ -8,6 +8,6 @@ import { TlsRouteRouteDestination } from "./tlsrouteroutedestination";
  * The specifications for routing traffic and applying associated policies.
 **/
 export class TlsRouteRouteAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=destinations", elemType: shared.TlsRouteRouteDestination })
+  @SpeakeasyMetadata({ data: "json, name=destinations", elemType: TlsRouteRouteDestination })
   destinations?: TlsRouteRouteDestination[];
 }

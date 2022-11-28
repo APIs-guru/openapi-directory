@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetMessagesSendQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=body" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=body" })
   body: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=deduplication-id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=deduplication-id" })
   deduplicationId?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=to" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=to" })
   to: string;
 }
 
 
 export class GetMessagesSendSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   basicAuth: shared.SchemeBasicAuth;
 }
 
 
 export class GetMessagesSendRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetMessagesSendQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetMessagesSendSecurity;
 }
 
 
 export class GetMessagesSendResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata({ elemType: shared.Message })
+  @SpeakeasyMetadata({ elemType: shared.Message })
   messages?: shared.Message[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

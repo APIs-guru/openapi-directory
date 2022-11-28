@@ -1,21 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Price } from "./price";
-import { Price } from "./price";
+
 
 
 export class OrderLegacyPromotionBenefit extends SpeakeasyBase {
-  @Metadata({ data: "json, name=discount" })
+  @SpeakeasyMetadata({ data: "json, name=discount" })
   discount?: Price;
 
-  @Metadata({ data: "json, name=offerIds" })
+  @SpeakeasyMetadata({ data: "json, name=offerIds" })
   offerIds?: string[];
 
-  @Metadata({ data: "json, name=subType" })
+  @SpeakeasyMetadata({ data: "json, name=subType" })
   subType?: string;
 
-  @Metadata({ data: "json, name=taxImpact" })
+  @SpeakeasyMetadata({ data: "json, name=taxImpact" })
   taxImpact?: Price;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }

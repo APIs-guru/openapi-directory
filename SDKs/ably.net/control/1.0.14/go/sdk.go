@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://control.ably.net/v1",
 }
 
@@ -19,9 +19,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -32,27 +36,46 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// DeleteAppsAppIDNamespacesNamespaceID - Deletes a namespace
+// Deletes the namespace with the specified ID, for the specified application ID.
 func (s *SDK) DeleteAppsAppIDNamespacesNamespaceID(ctx context.Context, request operations.DeleteAppsAppIDNamespacesNamespaceIDRequest) (*operations.DeleteAppsAppIDNamespacesNamespaceIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/apps/{app_id}/namespaces/{namespace_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -60,7 +83,7 @@ func (s *SDK) DeleteAppsAppIDNamespacesNamespaceID(ctx context.Context, request 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -121,8 +144,10 @@ func (s *SDK) DeleteAppsAppIDNamespacesNamespaceID(ctx context.Context, request 
 	return res, nil
 }
 
+// DeleteAppsAppIDQueuesQueueID - Deletes a queue
+// Delete the queue with the specified queue name, from the application with the specified application ID.
 func (s *SDK) DeleteAppsAppIDQueuesQueueID(ctx context.Context, request operations.DeleteAppsAppIDQueuesQueueIDRequest) (*operations.DeleteAppsAppIDQueuesQueueIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/apps/{app_id}/queues/{queue_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -130,7 +155,7 @@ func (s *SDK) DeleteAppsAppIDQueuesQueueID(ctx context.Context, request operatio
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -201,8 +226,9 @@ func (s *SDK) DeleteAppsAppIDQueuesQueueID(ctx context.Context, request operatio
 	return res, nil
 }
 
+// DeleteAppsAppIDRulesRuleID - Deletes a Reactor rule
 func (s *SDK) DeleteAppsAppIDRulesRuleID(ctx context.Context, request operations.DeleteAppsAppIDRulesRuleIDRequest) (*operations.DeleteAppsAppIDRulesRuleIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/apps/{app_id}/rules/{rule_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -210,7 +236,7 @@ func (s *SDK) DeleteAppsAppIDRulesRuleID(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -271,8 +297,10 @@ func (s *SDK) DeleteAppsAppIDRulesRuleID(ctx context.Context, request operations
 	return res, nil
 }
 
+// DeleteAppsID - Deletes an app
+// Deletes the application with the specified application ID.
 func (s *SDK) DeleteAppsID(ctx context.Context, request operations.DeleteAppsIDRequest) (*operations.DeleteAppsIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/apps/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -280,7 +308,7 @@ func (s *SDK) DeleteAppsID(ctx context.Context, request operations.DeleteAppsIDR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -341,8 +369,10 @@ func (s *SDK) DeleteAppsID(ctx context.Context, request operations.DeleteAppsIDR
 	return res, nil
 }
 
+// GetAccountsAccountIDApps - Lists apps
+// List all applications for the specified account ID.
 func (s *SDK) GetAccountsAccountIDApps(ctx context.Context, request operations.GetAccountsAccountIDAppsRequest) (*operations.GetAccountsAccountIDAppsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/accounts/{account_id}/apps", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -350,7 +380,7 @@ func (s *SDK) GetAccountsAccountIDApps(ctx context.Context, request operations.G
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -410,8 +440,10 @@ func (s *SDK) GetAccountsAccountIDApps(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetAppsAppIDKeys - Lists app keys
+// Lists the API keys associated with the application ID.
 func (s *SDK) GetAppsAppIDKeys(ctx context.Context, request operations.GetAppsAppIDKeysRequest) (*operations.GetAppsAppIDKeysResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/apps/{app_id}/keys", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -419,7 +451,7 @@ func (s *SDK) GetAppsAppIDKeys(ctx context.Context, request operations.GetAppsAp
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -489,8 +521,10 @@ func (s *SDK) GetAppsAppIDKeys(ctx context.Context, request operations.GetAppsAp
 	return res, nil
 }
 
+// GetAppsAppIDNamespaces - Lists namespaces
+// List the namespaces for the specified application ID.
 func (s *SDK) GetAppsAppIDNamespaces(ctx context.Context, request operations.GetAppsAppIDNamespacesRequest) (*operations.GetAppsAppIDNamespacesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/apps/{app_id}/namespaces", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -498,7 +532,7 @@ func (s *SDK) GetAppsAppIDNamespaces(ctx context.Context, request operations.Get
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -568,8 +602,10 @@ func (s *SDK) GetAppsAppIDNamespaces(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetAppsAppIDQueues - Lists queues
+// Lists the queues associated with the specified application ID.
 func (s *SDK) GetAppsAppIDQueues(ctx context.Context, request operations.GetAppsAppIDQueuesRequest) (*operations.GetAppsAppIDQueuesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/apps/{app_id}/queues", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -577,7 +613,7 @@ func (s *SDK) GetAppsAppIDQueues(ctx context.Context, request operations.GetApps
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -657,8 +693,10 @@ func (s *SDK) GetAppsAppIDQueues(ctx context.Context, request operations.GetApps
 	return res, nil
 }
 
+// GetAppsAppIDRules - Lists Reactor rules
+// Lists the rules for the application specified by the application ID.
 func (s *SDK) GetAppsAppIDRules(ctx context.Context, request operations.GetAppsAppIDRulesRequest) (*operations.GetAppsAppIDRulesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/apps/{app_id}/rules", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -666,7 +704,7 @@ func (s *SDK) GetAppsAppIDRules(ctx context.Context, request operations.GetAppsA
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -736,8 +774,10 @@ func (s *SDK) GetAppsAppIDRules(ctx context.Context, request operations.GetAppsA
 	return res, nil
 }
 
+// GetAppsAppIDRulesRuleID - Gets a reactor rule by rule ID
+// Returns the rule specified by the rule ID, for the application specified by application ID.
 func (s *SDK) GetAppsAppIDRulesRuleID(ctx context.Context, request operations.GetAppsAppIDRulesRuleIDRequest) (*operations.GetAppsAppIDRulesRuleIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/apps/{app_id}/rules/{rule_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -745,7 +785,7 @@ func (s *SDK) GetAppsAppIDRulesRuleID(ctx context.Context, request operations.Ge
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -815,8 +855,9 @@ func (s *SDK) GetAppsAppIDRulesRuleID(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetMe - Get token details
 func (s *SDK) GetMe(ctx context.Context, request operations.GetMeRequest) (*operations.GetMeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/me"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -824,7 +865,7 @@ func (s *SDK) GetMe(ctx context.Context, request operations.GetMeRequest) (*oper
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -874,8 +915,10 @@ func (s *SDK) GetMe(ctx context.Context, request operations.GetMeRequest) (*oper
 	return res, nil
 }
 
+// PatchAppsAppIDKeysKeyID - Updates a key
+// Update the API key with the specified key ID, for the application with the specified application ID.
 func (s *SDK) PatchAppsAppIDKeysKeyID(ctx context.Context, request operations.PatchAppsAppIDKeysKeyIDRequest) (*operations.PatchAppsAppIDKeysKeyIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/apps/{app_id}/keys/{key_id}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -890,7 +933,7 @@ func (s *SDK) PatchAppsAppIDKeysKeyID(ctx context.Context, request operations.Pa
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -980,8 +1023,10 @@ func (s *SDK) PatchAppsAppIDKeysKeyID(ctx context.Context, request operations.Pa
 	return res, nil
 }
 
+// PatchAppsAppIDNamespacesNamespaceID - Updates a namespace
+// Updates the namespace with the specified ID, for the application with the specified application ID.
 func (s *SDK) PatchAppsAppIDNamespacesNamespaceID(ctx context.Context, request operations.PatchAppsAppIDNamespacesNamespaceIDRequest) (*operations.PatchAppsAppIDNamespacesNamespaceIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/apps/{app_id}/namespaces/{namespace_id}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -996,7 +1041,7 @@ func (s *SDK) PatchAppsAppIDNamespacesNamespaceID(ctx context.Context, request o
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1076,8 +1121,9 @@ func (s *SDK) PatchAppsAppIDNamespacesNamespaceID(ctx context.Context, request o
 	return res, nil
 }
 
+// PatchAppsAppIDRulesRuleID - Updates a Reactor rule
 func (s *SDK) PatchAppsAppIDRulesRuleID(ctx context.Context, request operations.PatchAppsAppIDRulesRuleIDRequest) (*operations.PatchAppsAppIDRulesRuleIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/apps/{app_id}/rules/{rule_id}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1092,7 +1138,7 @@ func (s *SDK) PatchAppsAppIDRulesRuleID(ctx context.Context, request operations.
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1182,8 +1228,10 @@ func (s *SDK) PatchAppsAppIDRulesRuleID(ctx context.Context, request operations.
 	return res, nil
 }
 
+// PatchAppsID - Updates an app
+// Updates the application with the specified application ID.
 func (s *SDK) PatchAppsID(ctx context.Context, request operations.PatchAppsIDRequest) (*operations.PatchAppsIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/apps/{id}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1198,7 +1246,7 @@ func (s *SDK) PatchAppsID(ctx context.Context, request operations.PatchAppsIDReq
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1268,8 +1316,10 @@ func (s *SDK) PatchAppsID(ctx context.Context, request operations.PatchAppsIDReq
 	return res, nil
 }
 
+// PostAccountsAccountIDApps - Creates an app
+// Creates an application with the specified properties.
 func (s *SDK) PostAccountsAccountIDApps(ctx context.Context, request operations.PostAccountsAccountIDAppsRequest) (*operations.PostAccountsAccountIDAppsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/accounts/{account_id}/apps", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1284,7 +1334,7 @@ func (s *SDK) PostAccountsAccountIDApps(ctx context.Context, request operations.
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1364,8 +1414,10 @@ func (s *SDK) PostAccountsAccountIDApps(ctx context.Context, request operations.
 	return res, nil
 }
 
+// PostAppsAppIDKeys - Creates a key
+// Creates an API key for the application specified.
 func (s *SDK) PostAppsAppIDKeys(ctx context.Context, request operations.PostAppsAppIDKeysRequest) (*operations.PostAppsAppIDKeysResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/apps/{app_id}/keys", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1380,7 +1432,7 @@ func (s *SDK) PostAppsAppIDKeys(ctx context.Context, request operations.PostApps
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1460,8 +1512,10 @@ func (s *SDK) PostAppsAppIDKeys(ctx context.Context, request operations.PostApps
 	return res, nil
 }
 
+// PostAppsAppIDKeysKeyIDRevoke - Revokes a key
+// Revokes the API key with the specified ID, with the Application ID. This deletes the key.
 func (s *SDK) PostAppsAppIDKeysKeyIDRevoke(ctx context.Context, request operations.PostAppsAppIDKeysKeyIDRevokeRequest) (*operations.PostAppsAppIDKeysKeyIDRevokeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/apps/{app_id}/keys/{key_id}/revoke", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -1469,7 +1523,7 @@ func (s *SDK) PostAppsAppIDKeysKeyIDRevoke(ctx context.Context, request operatio
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1530,8 +1584,10 @@ func (s *SDK) PostAppsAppIDKeysKeyIDRevoke(ctx context.Context, request operatio
 	return res, nil
 }
 
+// PostAppsAppIDNamespaces - Creates a namespace
+// Creates a namespace for the specified application ID.
 func (s *SDK) PostAppsAppIDNamespaces(ctx context.Context, request operations.PostAppsAppIDNamespacesRequest) (*operations.PostAppsAppIDNamespacesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/apps/{app_id}/namespaces", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1546,7 +1602,7 @@ func (s *SDK) PostAppsAppIDNamespaces(ctx context.Context, request operations.Po
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1626,8 +1682,10 @@ func (s *SDK) PostAppsAppIDNamespaces(ctx context.Context, request operations.Po
 	return res, nil
 }
 
+// PostAppsAppIDQueues - Creates a queue
+// Creates a queue for the application specified by application ID. The properties for the queue to be created are specified in the request body.
 func (s *SDK) PostAppsAppIDQueues(ctx context.Context, request operations.PostAppsAppIDQueuesRequest) (*operations.PostAppsAppIDQueuesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/apps/{app_id}/queues", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1642,7 +1700,7 @@ func (s *SDK) PostAppsAppIDQueues(ctx context.Context, request operations.PostAp
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1722,8 +1780,10 @@ func (s *SDK) PostAppsAppIDQueues(ctx context.Context, request operations.PostAp
 	return res, nil
 }
 
+// PostAppsAppIDRules - Creates a Reactor rule
+// Creates a rule for the application with the specified application ID.
 func (s *SDK) PostAppsAppIDRules(ctx context.Context, request operations.PostAppsAppIDRulesRequest) (*operations.PostAppsAppIDRulesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/apps/{app_id}/rules", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1738,7 +1798,7 @@ func (s *SDK) PostAppsAppIDRules(ctx context.Context, request operations.PostApp
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1828,8 +1888,10 @@ func (s *SDK) PostAppsAppIDRules(ctx context.Context, request operations.PostApp
 	return res, nil
 }
 
+// PostAppsIDPkcs12 - Updates app's APNs info from a `.p12` file
+// Updates the application's Apple Push Notification service (APNs) information.
 func (s *SDK) PostAppsIDPkcs12(ctx context.Context, request operations.PostAppsIDPkcs12Request) (*operations.PostAppsIDPkcs12Response, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/apps/{id}/pkcs12", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1844,7 +1906,7 @@ func (s *SDK) PostAppsIDPkcs12(ctx context.Context, request operations.PostAppsI
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {

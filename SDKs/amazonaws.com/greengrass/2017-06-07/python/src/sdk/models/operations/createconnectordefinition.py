@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -19,27 +23,31 @@ class CreateConnectorDefinitionHeaders:
 @dataclass_json
 @dataclass
 class CreateConnectorDefinitionRequestBodyInitialVersion:
-    connectors: Optional[List[shared.Connector]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Connectors' }})
+    r"""CreateConnectorDefinitionRequestBodyInitialVersion
+    Information about the connector definition version, which is a container for connectors.
+    """
+    
+    connectors: Optional[List[shared.Connector]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Connectors') }})
     
 
 @dataclass_json
 @dataclass
 class CreateConnectorDefinitionRequestBody:
-    initial_version: Optional[CreateConnectorDefinitionRequestBodyInitialVersion] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'InitialVersion' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
-    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
+    initial_version: Optional[CreateConnectorDefinitionRequestBodyInitialVersion] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('InitialVersion') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
+    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     
 
 @dataclass
 class CreateConnectorDefinitionRequest:
-    headers: CreateConnectorDefinitionHeaders = field(default=None)
-    request: CreateConnectorDefinitionRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateConnectorDefinitionHeaders = field()
+    request: CreateConnectorDefinitionRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateConnectorDefinitionResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     create_connector_definition_response: Optional[shared.CreateConnectorDefinitionResponse] = field(default=None)
-    status_code: int = field(default=None)
     

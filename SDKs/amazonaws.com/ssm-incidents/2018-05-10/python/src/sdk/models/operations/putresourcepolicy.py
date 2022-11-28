@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,24 +22,24 @@ class PutResourcePolicyHeaders:
 @dataclass_json
 @dataclass
 class PutResourcePolicyRequestBody:
-    policy: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'policy' }})
-    resource_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceArn' }})
+    policy: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('policy') }})
+    resource_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceArn') }})
     
 
 @dataclass
 class PutResourcePolicyRequest:
-    headers: PutResourcePolicyHeaders = field(default=None)
-    request: PutResourcePolicyRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: PutResourcePolicyHeaders = field()
+    request: PutResourcePolicyRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PutResourcePolicyResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     put_resource_policy_output: Optional[shared.PutResourcePolicyOutput] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

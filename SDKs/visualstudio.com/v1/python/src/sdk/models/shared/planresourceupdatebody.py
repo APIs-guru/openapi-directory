@@ -1,13 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import planresourceidentity
-from . import planresourceproperties
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class PlanResourceUpdateBody:
-    identity: Optional[planresourceidentity.PlanResourceIdentity] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'identity' }})
-    properties: Optional[planresourceproperties.PlanResourceProperties] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'properties' }})
+    identity: Optional[PlanResourceIdentity] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('identity') }})
+    properties: Optional[PlanResourceProperties] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('properties') }})
     

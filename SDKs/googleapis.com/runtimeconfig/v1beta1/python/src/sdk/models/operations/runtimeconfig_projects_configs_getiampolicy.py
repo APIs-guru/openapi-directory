@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class RuntimeconfigProjectsConfigsGetIamPolicyPathParams:
-    resource: str = field(default=None, metadata={'path_param': { 'field_name': 'resource', 'style': 'simple', 'explode': False }})
+    resource: str = field(metadata={'path_param': { 'field_name': 'resource', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,14 +27,14 @@ class RuntimeconfigProjectsConfigsGetIamPolicyQueryParams:
 
 @dataclass
 class RuntimeconfigProjectsConfigsGetIamPolicySecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class RuntimeconfigProjectsConfigsGetIamPolicySecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -44,14 +45,14 @@ class RuntimeconfigProjectsConfigsGetIamPolicySecurity:
 
 @dataclass
 class RuntimeconfigProjectsConfigsGetIamPolicyRequest:
-    path_params: RuntimeconfigProjectsConfigsGetIamPolicyPathParams = field(default=None)
-    query_params: RuntimeconfigProjectsConfigsGetIamPolicyQueryParams = field(default=None)
-    security: RuntimeconfigProjectsConfigsGetIamPolicySecurity = field(default=None)
+    path_params: RuntimeconfigProjectsConfigsGetIamPolicyPathParams = field()
+    query_params: RuntimeconfigProjectsConfigsGetIamPolicyQueryParams = field()
+    security: RuntimeconfigProjectsConfigsGetIamPolicySecurity = field()
     
 
 @dataclass
 class RuntimeconfigProjectsConfigsGetIamPolicyResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     policy: Optional[shared.Policy] = field(default=None)
-    status_code: int = field(default=None)
     

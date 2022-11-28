@@ -1,11 +1,7 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .alt_enum import *
 from .anthosobservabilityfeaturespec import *
 from .anthosobservabilitymembershipspec import *
-from .anthosvmmembershipspec import *
-from .anthosvmmembershipstate import *
-from .anthosvmsubfeaturespec import *
-from .anthosvmsubfeaturestate import *
 from .appdevexperiencefeaturestate import *
 from .appliancecluster import *
 from .auditconfig import *
@@ -16,6 +12,7 @@ from .cloudauditloggingfeaturespec import *
 from .cloudbuildmembershipspec import *
 from .commonfeaturespec import *
 from .commonfeaturestate import *
+from .commonfeaturestate1 import *
 from .configmanagementbinauthzconfig import *
 from .configmanagementbinauthzstate import *
 from .configmanagementbinauthzversion import *
@@ -55,6 +52,7 @@ from .generateconnectmanifestresponse import *
 from .gkecluster import *
 from .googlerpcstatus import *
 from .identityserviceauthmethod import *
+from .identityserviceazureadconfig import *
 from .identityservicegoogleconfig import *
 from .identityservicemembershipspec import *
 from .identityservicemembershipstate import *
@@ -67,7 +65,6 @@ from .listfleetsresponse import *
 from .listlocationsresponse import *
 from .listmembershipsresponse import *
 from .listoperationsresponse import *
-from .localcontrollerstate import *
 from .location import *
 from .membership import *
 from .membershipendpoint import *
@@ -89,6 +86,7 @@ from .policycontrolleronclusterstate import *
 from .policycontrollertemplatelibraryconfig import *
 from .resourcemanifest import *
 from .resourceoptions import *
+from .scopefeaturestate import *
 from .security import *
 from .servicemeshanalysismessage import *
 from .servicemeshanalysismessagebase import *

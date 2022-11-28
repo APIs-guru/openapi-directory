@@ -1,22 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class MarkedEpisodeEmbedded extends SpeakeasyBase {
-  @Metadata({ data: "json, name=episode" })
+  @SpeakeasyMetadata({ data: "json, name=episode" })
   episode?: Map<string, any>;
 }
 
 
-export class MarkedEpisode extends SpeakeasyBase {
-  @Metadata({ data: "json, name=_embedded" })
+export class MarkedEpisodeInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=_embedded" })
   embedded?: MarkedEpisodeEmbedded;
 
-  @Metadata({ data: "json, name=episode_id" })
-  episodeId?: number;
-
-  @Metadata({ data: "json, name=marked_at" })
+  @SpeakeasyMetadata({ data: "json, name=marked_at" })
   markedAt?: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
+  type?: any;
+}
+
+
+export class MarkedEpisode extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=_embedded" })
+  embedded?: MarkedEpisodeEmbedded;
+
+  @SpeakeasyMetadata({ data: "json, name=episode_id" })
+  episodeId?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=marked_at" })
+  markedAt?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: any;
 }

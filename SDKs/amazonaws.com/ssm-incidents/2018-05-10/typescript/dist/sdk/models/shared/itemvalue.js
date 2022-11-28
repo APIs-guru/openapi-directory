@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ItemValue
 /**
  * Describes a related item.
@@ -33,15 +33,15 @@ var ItemValue = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=arn" }),
+        SpeakeasyMetadata({ data: "json, name=arn" }),
         __metadata("design:type", String)
     ], ItemValue.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=metricDefinition" }),
+        SpeakeasyMetadata({ data: "json, name=metricDefinition" }),
         __metadata("design:type", String)
     ], ItemValue.prototype, "metricDefinition", void 0);
     __decorate([
-        Metadata({ data: "json, name=url" }),
+        SpeakeasyMetadata({ data: "json, name=url" }),
         __metadata("design:type", String)
     ], ItemValue.prototype, "url", void 0);
     return ItemValue;

@@ -1,5 +1,7 @@
 package shared
 
+// ExtensionActionDefinitionPatch
+// Fields on custom workflow action to be updated.
 type ExtensionActionDefinitionPatch struct {
 	ActionURL              *string                 `json:"actionUrl,omitempty"`
 	InputFieldDependencies []interface{}           `json:"inputFieldDependencies,omitempty"`

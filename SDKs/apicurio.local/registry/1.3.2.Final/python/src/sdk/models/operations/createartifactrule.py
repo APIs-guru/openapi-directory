@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class CreateArtifactRulePathParams:
-    artifact_id: str = field(default=None, metadata={'path_param': { 'field_name': 'artifactId', 'style': 'simple', 'explode': False }})
+    artifact_id: str = field(metadata={'path_param': { 'field_name': 'artifactId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class CreateArtifactRuleRequest:
-    path_params: CreateArtifactRulePathParams = field(default=None)
-    request: shared.Rule = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    path_params: CreateArtifactRulePathParams = field()
+    request: shared.Rule = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateArtifactRuleResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[shared.Error] = field(default=None)
-    status_code: int = field(default=None)
     

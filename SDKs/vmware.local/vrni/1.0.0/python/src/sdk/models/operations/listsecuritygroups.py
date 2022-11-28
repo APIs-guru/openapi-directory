@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from sdk.models import shared
 
 
@@ -13,19 +13,19 @@ class ListSecurityGroupsQueryParams:
 
 @dataclass
 class ListSecurityGroupsSecurity:
-    api_key_auth: shared.SchemeAPIKeyAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    api_key_auth: shared.SchemeAPIKeyAuth = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class ListSecurityGroupsRequest:
-    query_params: ListSecurityGroupsQueryParams = field(default=None)
-    security: ListSecurityGroupsSecurity = field(default=None)
+    query_params: ListSecurityGroupsQueryParams = field()
+    security: ListSecurityGroupsSecurity = field()
     
 
 @dataclass
 class ListSecurityGroupsResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_error: Optional[shared.APIError] = field(default=None)
-    content_type: str = field(default=None)
     paged_list_response_with_time: Optional[shared.PagedListResponseWithTime] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,13 +1,21 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import deletebehavior_enum
-from . import updatebehavior_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SchemaChangePolicy:
-    delete_behavior: Optional[deletebehavior_enum.DeleteBehaviorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DeleteBehavior' }})
-    update_behavior: Optional[updatebehavior_enum.UpdateBehaviorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'UpdateBehavior' }})
+    r"""SchemaChangePolicy
+    A policy that specifies update and deletion behaviors for the crawler.
+    """
+    
+    delete_behavior: Optional[DeleteBehaviorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DeleteBehavior') }})
+    update_behavior: Optional[UpdateBehaviorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('UpdateBehavior') }})
     

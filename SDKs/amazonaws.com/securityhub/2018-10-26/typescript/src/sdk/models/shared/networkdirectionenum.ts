@@ -1,6 +1,7 @@
 
 
+
 export enum NetworkDirectionEnum {
-    In = "IN"
-,    Out = "OUT"
+    In = "IN",
+    Out = "OUT"
 }

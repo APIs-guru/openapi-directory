@@ -16,6 +16,8 @@ const (
 	ManagedShortLinkVisibilityEnumNeverShown            ManagedShortLinkVisibilityEnum = "NEVER_SHOWN"
 )
 
+// ManagedShortLink
+// Managed Short Link.
 type ManagedShortLink struct {
 	CreationTime     *string                                `json:"creationTime,omitempty"`
 	FlaggedAttribute []ManagedShortLinkFlaggedAttributeEnum `json:"flaggedAttribute,omitempty"`

@@ -1,16 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import nestedsite
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class TopologyMap:
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    device_patterns: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'device_patterns' }})
-    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    site: nestedsite.NestedSite = field(default=None, metadata={'dataclasses_json': { 'field_name': 'site' }})
-    slug: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'slug' }})
+    device_patterns: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('device_patterns') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    site: NestedSite = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('site') }})
+    slug: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('slug') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
     

@@ -5,24 +5,24 @@ from sdk.models import shared
 
 @dataclass
 class TemplatesFetchPathParams:
-    account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
-    template_id: str = field(default=None, metadata={'path_param': { 'field_name': 'templateId', 'style': 'simple', 'explode': False }})
+    account_id: str = field(metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
+    template_id: str = field(metadata={'path_param': { 'field_name': 'templateId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class TemplatesFetchSecurity:
-    sakari_auth: shared.SchemeSakariAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    sakari_auth: shared.SchemeSakariAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class TemplatesFetchRequest:
-    path_params: TemplatesFetchPathParams = field(default=None)
-    security: TemplatesFetchSecurity = field(default=None)
+    path_params: TemplatesFetchPathParams = field()
+    security: TemplatesFetchSecurity = field()
     
 
 @dataclass
 class TemplatesFetchResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     template_response: Optional[shared.TemplateResponse] = field(default=None)
     

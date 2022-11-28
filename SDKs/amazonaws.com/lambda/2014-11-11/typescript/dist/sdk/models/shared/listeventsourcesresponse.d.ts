@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { EventSourceConfiguration } from "./eventsourceconfiguration";
 /**
  * Contains a list of event sources (see <a>API_EventSourceConfiguration</a>)

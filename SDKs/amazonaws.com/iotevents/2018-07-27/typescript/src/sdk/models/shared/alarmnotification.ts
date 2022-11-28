@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NotificationAction } from "./notificationaction";
+
 
 
 // AlarmNotification
@@ -8,6 +8,6 @@ import { NotificationAction } from "./notificationaction";
  * Contains information about one or more notification actions.
 **/
 export class AlarmNotification extends SpeakeasyBase {
-  @Metadata({ data: "json, name=notificationActions", elemType: shared.NotificationAction })
+  @SpeakeasyMetadata({ data: "json, name=notificationActions", elemType: NotificationAction })
   notificationActions?: NotificationAction[];
 }

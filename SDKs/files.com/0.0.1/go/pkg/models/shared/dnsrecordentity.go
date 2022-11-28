@@ -1,5 +1,7 @@
 package shared
 
+// DNSRecordEntity
+// Show site DNS configuration.
 type DNSRecordEntity struct {
 	Domain *string `json:"domain,omitempty"`
 	ID     *string `json:"id,omitempty"`

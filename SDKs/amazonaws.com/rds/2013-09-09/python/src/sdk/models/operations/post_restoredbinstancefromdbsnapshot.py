@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostRestoreDbInstanceFromDbSnapshotActionEnum(str, Enum):
     RESTORE_DB_INSTANCE_FROM_DB_SNAPSHOT = "RestoreDBInstanceFromDBSnapshot"
@@ -10,8 +14,8 @@ class PostRestoreDbInstanceFromDbSnapshotVersionEnum(str, Enum):
 
 @dataclass
 class PostRestoreDbInstanceFromDbSnapshotQueryParams:
-    action: PostRestoreDbInstanceFromDbSnapshotActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostRestoreDbInstanceFromDbSnapshotVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostRestoreDbInstanceFromDbSnapshotActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostRestoreDbInstanceFromDbSnapshotVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostRestoreDbInstanceFromDbSnapshotHeaders:
 
 @dataclass
 class PostRestoreDbInstanceFromDbSnapshotRequest:
-    query_params: PostRestoreDbInstanceFromDbSnapshotQueryParams = field(default=None)
-    headers: PostRestoreDbInstanceFromDbSnapshotHeaders = field(default=None)
+    headers: PostRestoreDbInstanceFromDbSnapshotHeaders = field()
+    query_params: PostRestoreDbInstanceFromDbSnapshotQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostRestoreDbInstanceFromDbSnapshotResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

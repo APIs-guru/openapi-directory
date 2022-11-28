@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://license-manager.{region}.amazonaws.com",
 	"https://license-manager.{region}.amazonaws.com",
 	"http://license-manager.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/license-manager/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// AcceptGrant - Accepts the specified grant.
 func (s *SDK) AcceptGrant(ctx context.Context, request operations.AcceptGrantRequest) (*operations.AcceptGrantResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSLicenseManager.AcceptGrant"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -81,7 +108,7 @@ func (s *SDK) AcceptGrant(ctx context.Context, request operations.AcceptGrantReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -181,8 +208,9 @@ func (s *SDK) AcceptGrant(ctx context.Context, request operations.AcceptGrantReq
 	return res, nil
 }
 
+// CheckInLicense - Checks in the specified license. Check in a license when it is no longer in use.
 func (s *SDK) CheckInLicense(ctx context.Context, request operations.CheckInLicenseRequest) (*operations.CheckInLicenseResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSLicenseManager.CheckInLicense"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -202,7 +230,7 @@ func (s *SDK) CheckInLicense(ctx context.Context, request operations.CheckInLice
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -312,8 +340,9 @@ func (s *SDK) CheckInLicense(ctx context.Context, request operations.CheckInLice
 	return res, nil
 }
 
+// CheckoutBorrowLicense - Checks out the specified license for offline use.
 func (s *SDK) CheckoutBorrowLicense(ctx context.Context, request operations.CheckoutBorrowLicenseRequest) (*operations.CheckoutBorrowLicenseResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSLicenseManager.CheckoutBorrowLicense"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -333,7 +362,7 @@ func (s *SDK) CheckoutBorrowLicense(ctx context.Context, request operations.Chec
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -473,8 +502,9 @@ func (s *SDK) CheckoutBorrowLicense(ctx context.Context, request operations.Chec
 	return res, nil
 }
 
+// CheckoutLicense - Checks out the specified license.
 func (s *SDK) CheckoutLicense(ctx context.Context, request operations.CheckoutLicenseRequest) (*operations.CheckoutLicenseResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSLicenseManager.CheckoutLicense"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -494,7 +524,7 @@ func (s *SDK) CheckoutLicense(ctx context.Context, request operations.CheckoutLi
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -624,8 +654,9 @@ func (s *SDK) CheckoutLicense(ctx context.Context, request operations.CheckoutLi
 	return res, nil
 }
 
+// CreateGrant - Creates a grant for the specified license. A grant shares the use of license entitlements with specific AWS accounts.
 func (s *SDK) CreateGrant(ctx context.Context, request operations.CreateGrantRequest) (*operations.CreateGrantResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSLicenseManager.CreateGrant"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -645,7 +676,7 @@ func (s *SDK) CreateGrant(ctx context.Context, request operations.CreateGrantReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -745,8 +776,9 @@ func (s *SDK) CreateGrant(ctx context.Context, request operations.CreateGrantReq
 	return res, nil
 }
 
+// CreateGrantVersion - Creates a new version of the specified grant.
 func (s *SDK) CreateGrantVersion(ctx context.Context, request operations.CreateGrantVersionRequest) (*operations.CreateGrantVersionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSLicenseManager.CreateGrantVersion"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -766,7 +798,7 @@ func (s *SDK) CreateGrantVersion(ctx context.Context, request operations.CreateG
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -866,8 +898,9 @@ func (s *SDK) CreateGrantVersion(ctx context.Context, request operations.CreateG
 	return res, nil
 }
 
+// CreateLicense - Creates a license.
 func (s *SDK) CreateLicense(ctx context.Context, request operations.CreateLicenseRequest) (*operations.CreateLicenseResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSLicenseManager.CreateLicense"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -887,7 +920,7 @@ func (s *SDK) CreateLicense(ctx context.Context, request operations.CreateLicens
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -987,8 +1020,9 @@ func (s *SDK) CreateLicense(ctx context.Context, request operations.CreateLicens
 	return res, nil
 }
 
+// CreateLicenseConfiguration - <p>Creates a license configuration.</p> <p>A license configuration is an abstraction of a customer license agreement that can be consumed and enforced by License Manager. Components include specifications for the license type (licensing by instance, socket, CPU, or vCPU), allowed tenancy (shared tenancy, Dedicated Instance, Dedicated Host, or all of these), license affinity to host (how long a license must be associated with a host), and the number of licenses purchased and used.</p>
 func (s *SDK) CreateLicenseConfiguration(ctx context.Context, request operations.CreateLicenseConfigurationRequest) (*operations.CreateLicenseConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSLicenseManager.CreateLicenseConfiguration"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1008,7 +1042,7 @@ func (s *SDK) CreateLicenseConfiguration(ctx context.Context, request operations
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1098,8 +1132,9 @@ func (s *SDK) CreateLicenseConfiguration(ctx context.Context, request operations
 	return res, nil
 }
 
+// CreateLicenseManagerReportGenerator - Creates a new report generator.
 func (s *SDK) CreateLicenseManagerReportGenerator(ctx context.Context, request operations.CreateLicenseManagerReportGeneratorRequest) (*operations.CreateLicenseManagerReportGeneratorResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSLicenseManager.CreateLicenseManagerReportGenerator"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1119,7 +1154,7 @@ func (s *SDK) CreateLicenseManagerReportGenerator(ctx context.Context, request o
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1229,8 +1264,9 @@ func (s *SDK) CreateLicenseManagerReportGenerator(ctx context.Context, request o
 	return res, nil
 }
 
+// CreateLicenseVersion - Creates a new version of the specified license.
 func (s *SDK) CreateLicenseVersion(ctx context.Context, request operations.CreateLicenseVersionRequest) (*operations.CreateLicenseVersionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSLicenseManager.CreateLicenseVersion"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1250,7 +1286,7 @@ func (s *SDK) CreateLicenseVersion(ctx context.Context, request operations.Creat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1360,8 +1396,9 @@ func (s *SDK) CreateLicenseVersion(ctx context.Context, request operations.Creat
 	return res, nil
 }
 
+// CreateToken - <p>Creates a long-lived token.</p> <p>A refresh token is a JWT token used to get an access token. With an access token, you can call AssumeRoleWithWebIdentity to get role credentials that you can use to call License Manager to manage the specified license.</p>
 func (s *SDK) CreateToken(ctx context.Context, request operations.CreateTokenRequest) (*operations.CreateTokenResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSLicenseManager.CreateToken"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1381,7 +1418,7 @@ func (s *SDK) CreateToken(ctx context.Context, request operations.CreateTokenReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1491,8 +1528,9 @@ func (s *SDK) CreateToken(ctx context.Context, request operations.CreateTokenReq
 	return res, nil
 }
 
+// DeleteGrant - Deletes the specified grant.
 func (s *SDK) DeleteGrant(ctx context.Context, request operations.DeleteGrantRequest) (*operations.DeleteGrantResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSLicenseManager.DeleteGrant"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1512,7 +1550,7 @@ func (s *SDK) DeleteGrant(ctx context.Context, request operations.DeleteGrantReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1612,8 +1650,9 @@ func (s *SDK) DeleteGrant(ctx context.Context, request operations.DeleteGrantReq
 	return res, nil
 }
 
+// DeleteLicense - Deletes the specified license.
 func (s *SDK) DeleteLicense(ctx context.Context, request operations.DeleteLicenseRequest) (*operations.DeleteLicenseResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSLicenseManager.DeleteLicense"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1633,7 +1672,7 @@ func (s *SDK) DeleteLicense(ctx context.Context, request operations.DeleteLicens
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1743,8 +1782,9 @@ func (s *SDK) DeleteLicense(ctx context.Context, request operations.DeleteLicens
 	return res, nil
 }
 
+// DeleteLicenseConfiguration - <p>Deletes the specified license configuration.</p> <p>You cannot delete a license configuration that is in use.</p>
 func (s *SDK) DeleteLicenseConfiguration(ctx context.Context, request operations.DeleteLicenseConfigurationRequest) (*operations.DeleteLicenseConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSLicenseManager.DeleteLicenseConfiguration"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1764,7 +1804,7 @@ func (s *SDK) DeleteLicenseConfiguration(ctx context.Context, request operations
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1844,8 +1884,9 @@ func (s *SDK) DeleteLicenseConfiguration(ctx context.Context, request operations
 	return res, nil
 }
 
+// DeleteLicenseManagerReportGenerator - <p>Delete an existing report generator.</p> <p>This action deletes the report generator, which stops it from generating future reports and cannot be reversed. However, the previous reports from this generator will remain in your S3 bucket.</p>
 func (s *SDK) DeleteLicenseManagerReportGenerator(ctx context.Context, request operations.DeleteLicenseManagerReportGeneratorRequest) (*operations.DeleteLicenseManagerReportGeneratorResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSLicenseManager.DeleteLicenseManagerReportGenerator"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1865,7 +1906,7 @@ func (s *SDK) DeleteLicenseManagerReportGenerator(ctx context.Context, request o
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1975,8 +2016,9 @@ func (s *SDK) DeleteLicenseManagerReportGenerator(ctx context.Context, request o
 	return res, nil
 }
 
+// DeleteToken - Deletes the specified token. Must be called in the license home Region.
 func (s *SDK) DeleteToken(ctx context.Context, request operations.DeleteTokenRequest) (*operations.DeleteTokenResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSLicenseManager.DeleteToken"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1996,7 +2038,7 @@ func (s *SDK) DeleteToken(ctx context.Context, request operations.DeleteTokenReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2096,8 +2138,9 @@ func (s *SDK) DeleteToken(ctx context.Context, request operations.DeleteTokenReq
 	return res, nil
 }
 
+// ExtendLicenseConsumption - Extends the expiration date for license consumption.
 func (s *SDK) ExtendLicenseConsumption(ctx context.Context, request operations.ExtendLicenseConsumptionRequest) (*operations.ExtendLicenseConsumptionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSLicenseManager.ExtendLicenseConsumption"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2117,7 +2160,7 @@ func (s *SDK) ExtendLicenseConsumption(ctx context.Context, request operations.E
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2217,8 +2260,9 @@ func (s *SDK) ExtendLicenseConsumption(ctx context.Context, request operations.E
 	return res, nil
 }
 
+// GetAccessToken - Gets a temporary access token to use with AssumeRoleWithWebIdentity. Access tokens are valid for one hour.
 func (s *SDK) GetAccessToken(ctx context.Context, request operations.GetAccessTokenRequest) (*operations.GetAccessTokenResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSLicenseManager.GetAccessToken"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2238,7 +2282,7 @@ func (s *SDK) GetAccessToken(ctx context.Context, request operations.GetAccessTo
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2318,8 +2362,9 @@ func (s *SDK) GetAccessToken(ctx context.Context, request operations.GetAccessTo
 	return res, nil
 }
 
+// GetGrant - Gets detailed information about the specified grant.
 func (s *SDK) GetGrant(ctx context.Context, request operations.GetGrantRequest) (*operations.GetGrantResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSLicenseManager.GetGrant"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2339,7 +2384,7 @@ func (s *SDK) GetGrant(ctx context.Context, request operations.GetGrantRequest) 
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2439,8 +2484,9 @@ func (s *SDK) GetGrant(ctx context.Context, request operations.GetGrantRequest) 
 	return res, nil
 }
 
+// GetLicense - Gets detailed information about the specified license.
 func (s *SDK) GetLicense(ctx context.Context, request operations.GetLicenseRequest) (*operations.GetLicenseResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSLicenseManager.GetLicense"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2460,7 +2506,7 @@ func (s *SDK) GetLicense(ctx context.Context, request operations.GetLicenseReque
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2550,8 +2596,9 @@ func (s *SDK) GetLicense(ctx context.Context, request operations.GetLicenseReque
 	return res, nil
 }
 
+// GetLicenseConfiguration - Gets detailed information about the specified license configuration.
 func (s *SDK) GetLicenseConfiguration(ctx context.Context, request operations.GetLicenseConfigurationRequest) (*operations.GetLicenseConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSLicenseManager.GetLicenseConfiguration"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2571,7 +2618,7 @@ func (s *SDK) GetLicenseConfiguration(ctx context.Context, request operations.Ge
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2651,8 +2698,9 @@ func (s *SDK) GetLicenseConfiguration(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetLicenseManagerReportGenerator - Gets information on the specified report generator.
 func (s *SDK) GetLicenseManagerReportGenerator(ctx context.Context, request operations.GetLicenseManagerReportGeneratorRequest) (*operations.GetLicenseManagerReportGeneratorResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSLicenseManager.GetLicenseManagerReportGenerator"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2672,7 +2720,7 @@ func (s *SDK) GetLicenseManagerReportGenerator(ctx context.Context, request oper
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2782,8 +2830,9 @@ func (s *SDK) GetLicenseManagerReportGenerator(ctx context.Context, request oper
 	return res, nil
 }
 
+// GetLicenseUsage - Gets detailed information about the usage of the specified license.
 func (s *SDK) GetLicenseUsage(ctx context.Context, request operations.GetLicenseUsageRequest) (*operations.GetLicenseUsageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSLicenseManager.GetLicenseUsage"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2803,7 +2852,7 @@ func (s *SDK) GetLicenseUsage(ctx context.Context, request operations.GetLicense
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2893,8 +2942,9 @@ func (s *SDK) GetLicenseUsage(ctx context.Context, request operations.GetLicense
 	return res, nil
 }
 
+// GetServiceSettings - Gets the License Manager settings for the current Region.
 func (s *SDK) GetServiceSettings(ctx context.Context, request operations.GetServiceSettingsRequest) (*operations.GetServiceSettingsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSLicenseManager.GetServiceSettings"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2914,7 +2964,7 @@ func (s *SDK) GetServiceSettings(ctx context.Context, request operations.GetServ
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2984,8 +3034,9 @@ func (s *SDK) GetServiceSettings(ctx context.Context, request operations.GetServ
 	return res, nil
 }
 
+// ListAssociationsForLicenseConfiguration - <p>Lists the resource associations for the specified license configuration.</p> <p>Resource associations need not consume licenses from a license configuration. For example, an AMI or a stopped instance might not consume a license (depending on the license rules).</p>
 func (s *SDK) ListAssociationsForLicenseConfiguration(ctx context.Context, request operations.ListAssociationsForLicenseConfigurationRequest) (*operations.ListAssociationsForLicenseConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSLicenseManager.ListAssociationsForLicenseConfiguration"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3005,7 +3056,7 @@ func (s *SDK) ListAssociationsForLicenseConfiguration(ctx context.Context, reque
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3095,8 +3146,9 @@ func (s *SDK) ListAssociationsForLicenseConfiguration(ctx context.Context, reque
 	return res, nil
 }
 
+// ListDistributedGrants - Lists the grants distributed for the specified license.
 func (s *SDK) ListDistributedGrants(ctx context.Context, request operations.ListDistributedGrantsRequest) (*operations.ListDistributedGrantsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSLicenseManager.ListDistributedGrants"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3116,7 +3168,7 @@ func (s *SDK) ListDistributedGrants(ctx context.Context, request operations.List
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3216,8 +3268,9 @@ func (s *SDK) ListDistributedGrants(ctx context.Context, request operations.List
 	return res, nil
 }
 
+// ListFailuresForLicenseConfigurationOperations - Lists the license configuration operations that failed.
 func (s *SDK) ListFailuresForLicenseConfigurationOperations(ctx context.Context, request operations.ListFailuresForLicenseConfigurationOperationsRequest) (*operations.ListFailuresForLicenseConfigurationOperationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSLicenseManager.ListFailuresForLicenseConfigurationOperations"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3237,7 +3290,7 @@ func (s *SDK) ListFailuresForLicenseConfigurationOperations(ctx context.Context,
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3317,8 +3370,9 @@ func (s *SDK) ListFailuresForLicenseConfigurationOperations(ctx context.Context,
 	return res, nil
 }
 
+// ListLicenseConfigurations - Lists the license configurations for your account.
 func (s *SDK) ListLicenseConfigurations(ctx context.Context, request operations.ListLicenseConfigurationsRequest) (*operations.ListLicenseConfigurationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSLicenseManager.ListLicenseConfigurations"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3338,7 +3392,7 @@ func (s *SDK) ListLicenseConfigurations(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3428,8 +3482,9 @@ func (s *SDK) ListLicenseConfigurations(ctx context.Context, request operations.
 	return res, nil
 }
 
+// ListLicenseManagerReportGenerators - Lists the report generators for your account.
 func (s *SDK) ListLicenseManagerReportGenerators(ctx context.Context, request operations.ListLicenseManagerReportGeneratorsRequest) (*operations.ListLicenseManagerReportGeneratorsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSLicenseManager.ListLicenseManagerReportGenerators"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3449,7 +3504,7 @@ func (s *SDK) ListLicenseManagerReportGenerators(ctx context.Context, request op
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3559,8 +3614,9 @@ func (s *SDK) ListLicenseManagerReportGenerators(ctx context.Context, request op
 	return res, nil
 }
 
+// ListLicenseSpecificationsForResource - Describes the license configurations for the specified resource.
 func (s *SDK) ListLicenseSpecificationsForResource(ctx context.Context, request operations.ListLicenseSpecificationsForResourceRequest) (*operations.ListLicenseSpecificationsForResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSLicenseManager.ListLicenseSpecificationsForResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3580,7 +3636,7 @@ func (s *SDK) ListLicenseSpecificationsForResource(ctx context.Context, request 
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3660,8 +3716,9 @@ func (s *SDK) ListLicenseSpecificationsForResource(ctx context.Context, request 
 	return res, nil
 }
 
+// ListLicenseVersions - Lists all versions of the specified license.
 func (s *SDK) ListLicenseVersions(ctx context.Context, request operations.ListLicenseVersionsRequest) (*operations.ListLicenseVersionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSLicenseManager.ListLicenseVersions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3681,7 +3738,7 @@ func (s *SDK) ListLicenseVersions(ctx context.Context, request operations.ListLi
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3761,8 +3818,9 @@ func (s *SDK) ListLicenseVersions(ctx context.Context, request operations.ListLi
 	return res, nil
 }
 
+// ListLicenses - Lists the licenses for your account.
 func (s *SDK) ListLicenses(ctx context.Context, request operations.ListLicensesRequest) (*operations.ListLicensesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSLicenseManager.ListLicenses"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3782,7 +3840,7 @@ func (s *SDK) ListLicenses(ctx context.Context, request operations.ListLicensesR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3872,8 +3930,9 @@ func (s *SDK) ListLicenses(ctx context.Context, request operations.ListLicensesR
 	return res, nil
 }
 
+// ListReceivedGrants - Lists grants that are received but not accepted.
 func (s *SDK) ListReceivedGrants(ctx context.Context, request operations.ListReceivedGrantsRequest) (*operations.ListReceivedGrantsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSLicenseManager.ListReceivedGrants"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3893,7 +3952,7 @@ func (s *SDK) ListReceivedGrants(ctx context.Context, request operations.ListRec
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3993,8 +4052,9 @@ func (s *SDK) ListReceivedGrants(ctx context.Context, request operations.ListRec
 	return res, nil
 }
 
+// ListReceivedLicenses - Lists received licenses.
 func (s *SDK) ListReceivedLicenses(ctx context.Context, request operations.ListReceivedLicensesRequest) (*operations.ListReceivedLicensesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSLicenseManager.ListReceivedLicenses"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4014,7 +4074,7 @@ func (s *SDK) ListReceivedLicenses(ctx context.Context, request operations.ListR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4114,8 +4174,9 @@ func (s *SDK) ListReceivedLicenses(ctx context.Context, request operations.ListR
 	return res, nil
 }
 
+// ListResourceInventory - Lists resources managed using Systems Manager inventory.
 func (s *SDK) ListResourceInventory(ctx context.Context, request operations.ListResourceInventoryRequest) (*operations.ListResourceInventoryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSLicenseManager.ListResourceInventory"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4135,7 +4196,7 @@ func (s *SDK) ListResourceInventory(ctx context.Context, request operations.List
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4235,8 +4296,9 @@ func (s *SDK) ListResourceInventory(ctx context.Context, request operations.List
 	return res, nil
 }
 
+// ListTagsForResource - Lists the tags for the specified license configuration.
 func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTagsForResourceRequest) (*operations.ListTagsForResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSLicenseManager.ListTagsForResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4256,7 +4318,7 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4336,8 +4398,9 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 	return res, nil
 }
 
+// ListTokens - Lists your tokens.
 func (s *SDK) ListTokens(ctx context.Context, request operations.ListTokensRequest) (*operations.ListTokensResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSLicenseManager.ListTokens"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4357,7 +4420,7 @@ func (s *SDK) ListTokens(ctx context.Context, request operations.ListTokensReque
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4437,8 +4500,9 @@ func (s *SDK) ListTokens(ctx context.Context, request operations.ListTokensReque
 	return res, nil
 }
 
+// ListUsageForLicenseConfiguration - Lists all license usage records for a license configuration, displaying license consumption details by resource at a selected point in time. Use this action to audit the current license consumption for any license inventory and configuration.
 func (s *SDK) ListUsageForLicenseConfiguration(ctx context.Context, request operations.ListUsageForLicenseConfigurationRequest) (*operations.ListUsageForLicenseConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSLicenseManager.ListUsageForLicenseConfiguration"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4458,7 +4522,7 @@ func (s *SDK) ListUsageForLicenseConfiguration(ctx context.Context, request oper
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4548,8 +4612,9 @@ func (s *SDK) ListUsageForLicenseConfiguration(ctx context.Context, request oper
 	return res, nil
 }
 
+// RejectGrant - Rejects the specified grant.
 func (s *SDK) RejectGrant(ctx context.Context, request operations.RejectGrantRequest) (*operations.RejectGrantResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSLicenseManager.RejectGrant"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4569,7 +4634,7 @@ func (s *SDK) RejectGrant(ctx context.Context, request operations.RejectGrantReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4669,8 +4734,9 @@ func (s *SDK) RejectGrant(ctx context.Context, request operations.RejectGrantReq
 	return res, nil
 }
 
+// TagResource - Adds the specified tags to the specified license configuration.
 func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceRequest) (*operations.TagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSLicenseManager.TagResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4690,7 +4756,7 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4770,8 +4836,9 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 	return res, nil
 }
 
+// UntagResource - Removes the specified tags from the specified license configuration.
 func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourceRequest) (*operations.UntagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSLicenseManager.UntagResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4791,7 +4858,7 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4871,8 +4938,9 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 	return res, nil
 }
 
+// UpdateLicenseConfiguration - Modifies the attributes of an existing license configuration.
 func (s *SDK) UpdateLicenseConfiguration(ctx context.Context, request operations.UpdateLicenseConfigurationRequest) (*operations.UpdateLicenseConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSLicenseManager.UpdateLicenseConfiguration"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4892,7 +4960,7 @@ func (s *SDK) UpdateLicenseConfiguration(ctx context.Context, request operations
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4982,8 +5050,9 @@ func (s *SDK) UpdateLicenseConfiguration(ctx context.Context, request operations
 	return res, nil
 }
 
+// UpdateLicenseManagerReportGenerator - <p>Updates a report generator.</p> <p>After you make changes to a report generator, it will start generating new reports within 60 minutes of being updated.</p>
 func (s *SDK) UpdateLicenseManagerReportGenerator(ctx context.Context, request operations.UpdateLicenseManagerReportGeneratorRequest) (*operations.UpdateLicenseManagerReportGeneratorResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSLicenseManager.UpdateLicenseManagerReportGenerator"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5003,7 +5072,7 @@ func (s *SDK) UpdateLicenseManagerReportGenerator(ctx context.Context, request o
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5113,8 +5182,9 @@ func (s *SDK) UpdateLicenseManagerReportGenerator(ctx context.Context, request o
 	return res, nil
 }
 
+// UpdateLicenseSpecificationsForResource - <p>Adds or removes the specified license configurations for the specified AWS resource.</p> <p>You can update the license specifications of AMIs, instances, and hosts. You cannot update the license specifications for launch templates and AWS CloudFormation templates, as they send license configurations to the operation that creates the resource.</p>
 func (s *SDK) UpdateLicenseSpecificationsForResource(ctx context.Context, request operations.UpdateLicenseSpecificationsForResourceRequest) (*operations.UpdateLicenseSpecificationsForResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSLicenseManager.UpdateLicenseSpecificationsForResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5134,7 +5204,7 @@ func (s *SDK) UpdateLicenseSpecificationsForResource(ctx context.Context, reques
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5234,8 +5304,9 @@ func (s *SDK) UpdateLicenseSpecificationsForResource(ctx context.Context, reques
 	return res, nil
 }
 
+// UpdateServiceSettings - Updates License Manager settings for the current Region.
 func (s *SDK) UpdateServiceSettings(ctx context.Context, request operations.UpdateServiceSettingsRequest) (*operations.UpdateServiceSettingsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSLicenseManager.UpdateServiceSettings"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5255,7 +5326,7 @@ func (s *SDK) UpdateServiceSettings(ctx context.Context, request operations.Upda
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

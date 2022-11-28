@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetJournalReportOuputQueryParams = /** @class */ (function (_super) {
     __extends(GetJournalReportOuputQueryParams, _super);
@@ -30,23 +30,23 @@ var GetJournalReportOuputQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=EmployerKey" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=EmployerKey" }),
         __metadata("design:type", String)
     ], GetJournalReportOuputQueryParams.prototype, "employerKey", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=LedgerTarget" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=LedgerTarget" }),
         __metadata("design:type", String)
     ], GetJournalReportOuputQueryParams.prototype, "ledgerTarget", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=PayFrequency" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=PayFrequency" }),
         __metadata("design:type", String)
     ], GetJournalReportOuputQueryParams.prototype, "payFrequency", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=TaxPeriod" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=TaxPeriod" }),
         __metadata("design:type", String)
     ], GetJournalReportOuputQueryParams.prototype, "taxPeriod", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=TaxYear" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=TaxYear" }),
         __metadata("design:type", String)
     ], GetJournalReportOuputQueryParams.prototype, "taxYear", void 0);
     return GetJournalReportOuputQueryParams;
@@ -58,11 +58,11 @@ var GetJournalReportOuputHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
         __metadata("design:type", String)
     ], GetJournalReportOuputHeaders.prototype, "apiVersion", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Authorization" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" }),
         __metadata("design:type", String)
     ], GetJournalReportOuputHeaders.prototype, "authorization", void 0);
     return GetJournalReportOuputHeaders;
@@ -74,11 +74,11 @@ var GetJournalReportOuputRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetJournalReportOuputQueryParams)
     ], GetJournalReportOuputRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetJournalReportOuputHeaders)
     ], GetJournalReportOuputRequest.prototype, "headers", void 0);
     return GetJournalReportOuputRequest;
@@ -90,19 +90,19 @@ var GetJournalReportOuputResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetJournalReportOuputResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorModel)
     ], GetJournalReportOuputResponse.prototype, "errorModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetJournalReportOuputResponse.prototype, "getJournalReportOuput200ApplicationJsonBinaryString", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetJournalReportOuputResponse.prototype, "statusCode", void 0);
     return GetJournalReportOuputResponse;

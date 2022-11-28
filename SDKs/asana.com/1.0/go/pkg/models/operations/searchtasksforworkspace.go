@@ -86,13 +86,13 @@ type SearchTasksForWorkspaceQueryParams struct {
 	Text              *string                                     `queryParam:"style=form,explode=true,name=text"`
 }
 
+type SearchTasksForWorkspace200ApplicationJSON struct {
+	Data []shared.TaskCompact `json:"data,omitempty"`
+}
+
 type SearchTasksForWorkspaceRequest struct {
 	PathParams  SearchTasksForWorkspacePathParams
 	QueryParams SearchTasksForWorkspaceQueryParams
-}
-
-type SearchTasksForWorkspace200ApplicationJSON struct {
-	Data []shared.TaskCompact `json:"data,omitempty"`
 }
 
 type SearchTasksForWorkspaceResponse struct {

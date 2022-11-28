@@ -1,42 +1,43 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateGatewayRoutePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=meshName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=meshName" })
   meshName: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=virtualGatewayName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=virtualGatewayName" })
   virtualGatewayName: string;
 }
 
 
 export class CreateGatewayRouteQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=meshOwner" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=meshOwner" })
   meshOwner?: string;
 }
 
 
 export class CreateGatewayRouteHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -46,81 +47,81 @@ export class CreateGatewayRouteHeaders extends SpeakeasyBase {
  * An object that represents a gateway route specification. Specify one gateway route type.
 **/
 export class CreateGatewayRouteRequestBodySpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=grpcRoute" })
+  @SpeakeasyMetadata({ data: "json, name=grpcRoute" })
   grpcRoute?: shared.GrpcGatewayRoute;
 
-  @Metadata({ data: "json, name=http2Route" })
+  @SpeakeasyMetadata({ data: "json, name=http2Route" })
   http2Route?: shared.HttpGatewayRoute;
 
-  @Metadata({ data: "json, name=httpRoute" })
+  @SpeakeasyMetadata({ data: "json, name=httpRoute" })
   httpRoute?: shared.HttpGatewayRoute;
 
-  @Metadata({ data: "json, name=priority" })
+  @SpeakeasyMetadata({ data: "json, name=priority" })
   priority?: number;
 }
 
 
 export class CreateGatewayRouteRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clientToken" })
+  @SpeakeasyMetadata({ data: "json, name=clientToken" })
   clientToken?: string;
 
-  @Metadata({ data: "json, name=gatewayRouteName" })
+  @SpeakeasyMetadata({ data: "json, name=gatewayRouteName" })
   gatewayRouteName: string;
 
-  @Metadata({ data: "json, name=spec" })
+  @SpeakeasyMetadata({ data: "json, name=spec" })
   spec: CreateGatewayRouteRequestBodySpec;
 
-  @Metadata({ data: "json, name=tags", elemType: shared.TagRef })
+  @SpeakeasyMetadata({ data: "json, name=tags", elemType: shared.TagRef })
   tags?: shared.TagRef[];
 }
 
 
 export class CreateGatewayRouteRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CreateGatewayRoutePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: CreateGatewayRouteQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateGatewayRouteHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateGatewayRouteRequestBody;
 }
 
 
 export class CreateGatewayRouteResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   badRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   conflictException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createGatewayRouteOutput?: shared.CreateGatewayRouteOutput;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   forbiddenException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerErrorException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   limitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   notFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceUnavailableException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tooManyRequestsException?: any;
 }

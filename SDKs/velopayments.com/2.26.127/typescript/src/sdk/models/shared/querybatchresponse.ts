@@ -1,23 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FailedSubmission } from "./failedsubmission";
 
+
 export enum QueryBatchResponseStatusEnum {
-    Submitted = "SUBMITTED"
-,    Accepted = "ACCEPTED"
+    Submitted = "SUBMITTED",
+    Accepted = "ACCEPTED"
 }
 
 
 export class QueryBatchResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=failureCount" })
+  @SpeakeasyMetadata({ data: "json, name=failureCount" })
   failureCount?: number;
 
-  @Metadata({ data: "json, name=failures", elemType: shared.FailedSubmission })
+  @SpeakeasyMetadata({ data: "json, name=failures", elemType: FailedSubmission })
   failures?: FailedSubmission[];
 
-  @Metadata({ data: "json, name=pendingCount" })
+  @SpeakeasyMetadata({ data: "json, name=pendingCount" })
   pendingCount?: number;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: QueryBatchResponseStatusEnum;
 }

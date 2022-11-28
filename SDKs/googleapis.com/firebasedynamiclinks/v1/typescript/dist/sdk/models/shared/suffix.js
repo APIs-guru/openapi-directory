@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var SuffixOptionEnum;
 (function (SuffixOptionEnum) {
     SuffixOptionEnum["OptionUnspecified"] = "OPTION_UNSPECIFIED";
@@ -40,11 +40,11 @@ var Suffix = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=customSuffix" }),
+        SpeakeasyMetadata({ data: "json, name=customSuffix" }),
         __metadata("design:type", String)
     ], Suffix.prototype, "customSuffix", void 0);
     __decorate([
-        Metadata({ data: "json, name=option" }),
+        SpeakeasyMetadata({ data: "json, name=option" }),
         __metadata("design:type", String)
     ], Suffix.prototype, "option", void 0);
     return Suffix;

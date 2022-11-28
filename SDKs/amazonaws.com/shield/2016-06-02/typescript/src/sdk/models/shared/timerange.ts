@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TimeRange
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The time range. 
 **/
 export class TimeRange extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FromInclusive" })
+  @SpeakeasyMetadata({ data: "json, name=FromInclusive" })
   fromInclusive?: Date;
 
-  @Metadata({ data: "json, name=ToExclusive" })
+  @SpeakeasyMetadata({ data: "json, name=ToExclusive" })
   toExclusive?: Date;
 }

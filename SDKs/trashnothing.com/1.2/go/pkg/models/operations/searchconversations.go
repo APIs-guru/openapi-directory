@@ -11,15 +11,15 @@ type SearchConversationsQueryParams struct {
 	Search           string   `queryParam:"style=form,explode=true,name=search"`
 }
 
-type SearchConversationsRequest struct {
-	QueryParams SearchConversationsQueryParams
-}
-
 type SearchConversations200ApplicationJSON struct {
 	Conversations []shared.Conversation `json:"conversations,omitempty"`
 	Page          *int64                `json:"page,omitempty"`
 	PerPage       *int64                `json:"per_page,omitempty"`
 	Search        *string               `json:"search,omitempty"`
+}
+
+type SearchConversationsRequest struct {
+	QueryParams SearchConversationsQueryParams
 }
 
 type SearchConversationsResponse struct {

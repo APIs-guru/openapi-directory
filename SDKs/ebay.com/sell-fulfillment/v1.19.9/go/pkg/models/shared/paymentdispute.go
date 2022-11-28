@@ -1,5 +1,7 @@
 package shared
 
+// PaymentDispute
+// This type is used by the base response of the getPaymentDispute method. The getPaymentDispute method retrieves detailed information on a specific payment dispute.
 type PaymentDispute struct {
 	Amount               *SimpleAmount                `json:"amount,omitempty"`
 	AvailableChoices     []string                     `json:"availableChoices,omitempty"`

@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Anomaly } from "./anomaly";
 import { Recommendation } from "./recommendation";
+
 
 
 // GetRecommendationsResponse
@@ -9,18 +9,18 @@ import { Recommendation } from "./recommendation";
  * The structure representing the GetRecommendationsResponse.
 **/
 export class GetRecommendationsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=anomalies", elemType: shared.Anomaly })
+  @SpeakeasyMetadata({ data: "json, name=anomalies", elemType: Anomaly })
   anomalies: Anomaly[];
 
-  @Metadata({ data: "json, name=profileEndTime" })
+  @SpeakeasyMetadata({ data: "json, name=profileEndTime" })
   profileEndTime: Date;
 
-  @Metadata({ data: "json, name=profileStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=profileStartTime" })
   profileStartTime: Date;
 
-  @Metadata({ data: "json, name=profilingGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=profilingGroupName" })
   profilingGroupName: string;
 
-  @Metadata({ data: "json, name=recommendations", elemType: shared.Recommendation })
+  @SpeakeasyMetadata({ data: "json, name=recommendations", elemType: Recommendation })
   recommendations: Recommendation[];
 }

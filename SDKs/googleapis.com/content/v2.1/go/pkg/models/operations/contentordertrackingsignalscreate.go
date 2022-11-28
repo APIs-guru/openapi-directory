@@ -30,7 +30,7 @@ type ContentOrdertrackingsignalsCreateSecurity struct {
 type ContentOrdertrackingsignalsCreateRequest struct {
 	PathParams  ContentOrdertrackingsignalsCreatePathParams
 	QueryParams ContentOrdertrackingsignalsCreateQueryParams
-	Request     *shared.OrderTrackingSignal `request:"mediaType=application/json"`
+	Request     *shared.OrderTrackingSignalInput `request:"mediaType=application/json"`
 	Security    ContentOrdertrackingsignalsCreateSecurity
 }
 

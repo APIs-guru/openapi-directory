@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ServiceImageInputModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=imageFileData" })
+  @SpeakeasyMetadata({ data: "json, name=imageFileData" })
   imageFileData?: string;
 
-  @Metadata({ data: "json, name=imageFileName" })
+  @SpeakeasyMetadata({ data: "json, name=imageFileName" })
   imageFileName?: string;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // VirtualNodeTcpConnectionPool
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An object that represents a type of connection pool.
 **/
 export class VirtualNodeTcpConnectionPool extends SpeakeasyBase {
-  @Metadata({ data: "json, name=maxConnections" })
+  @SpeakeasyMetadata({ data: "json, name=maxConnections" })
   maxConnections: number;
 }

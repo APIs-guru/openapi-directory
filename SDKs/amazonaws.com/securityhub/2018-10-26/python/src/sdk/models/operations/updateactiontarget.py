@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
 class UpdateActionTargetPathParams:
-    action_target_arn: str = field(default=None, metadata={'path_param': { 'field_name': 'ActionTargetArn', 'style': 'simple', 'explode': False }})
+    action_target_arn: str = field(metadata={'path_param': { 'field_name': 'ActionTargetArn', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,24 +26,24 @@ class UpdateActionTargetHeaders:
 @dataclass_json
 @dataclass
 class UpdateActionTargetRequestBody:
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Description') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
     
 
 @dataclass
 class UpdateActionTargetRequest:
-    path_params: UpdateActionTargetPathParams = field(default=None)
-    headers: UpdateActionTargetHeaders = field(default=None)
-    request: UpdateActionTargetRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateActionTargetHeaders = field()
+    path_params: UpdateActionTargetPathParams = field()
+    request: UpdateActionTargetRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateActionTargetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_exception: Optional[Any] = field(default=None)
     invalid_access_exception: Optional[Any] = field(default=None)
     invalid_input_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     update_action_target_response: Optional[dict[str, Any]] = field(default=None)
     

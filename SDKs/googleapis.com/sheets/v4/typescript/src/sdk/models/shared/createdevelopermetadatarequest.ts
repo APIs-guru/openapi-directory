@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeveloperMetadata } from "./developermetadata";
+
 
 
 // CreateDeveloperMetadataRequest
@@ -7,6 +8,6 @@ import { DeveloperMetadata } from "./developermetadata";
  * A request to create developer metadata.
 **/
 export class CreateDeveloperMetadataRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=developerMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=developerMetadata" })
   developerMetadata?: DeveloperMetadata;
 }

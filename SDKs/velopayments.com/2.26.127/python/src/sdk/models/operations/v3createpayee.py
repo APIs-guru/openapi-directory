@@ -10,21 +10,21 @@ class V3CreatePayeeMultipartFormData:
     
 
 @dataclass
-class V3CreatePayeeRequests:
-    create_payees_request: Optional[shared.CreatePayeesRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+class V3CreatePayeeRequestsInput:
+    create_payees_request: Optional[shared.CreatePayeesRequestInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     object: Optional[V3CreatePayeeMultipartFormData] = field(default=None, metadata={'request': { 'media_type': 'multipart/form-data' }})
     
 
 @dataclass
 class V3CreatePayeeRequest:
-    request: Optional[V3CreatePayeeRequests] = field(default=None)
+    request: Optional[V3CreatePayeeRequestsInput] = field(default=None)
     
 
 @dataclass
 class V3CreatePayeeResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     create_payees_csv_response: Optional[shared.CreatePayeesCsvResponse] = field(default=None)
-    status_code: int = field(default=None)
     inline_response_400: Optional[Any] = field(default=None)
     inline_response_401: Optional[Any] = field(default=None)
     inline_response_403: Optional[Any] = field(default=None)

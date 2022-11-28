@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GoogleFirebaseAppcheckV1betaDeviceCheckConfig
 /**
  * An app's DeviceCheck configuration object. This configuration is used by ExchangeDeviceCheckToken to validate device tokens issued to apps by DeviceCheck. It also controls certain properties of the returned `AppCheckToken`, such as its ttl. Note that the Team ID registered with your app is used as part of the validation process. Please register it via the Firebase Console or programmatically via the [Firebase Management Service](https://firebase.google.com/docs/projects/api/reference/rest/v1beta1/projects.iosApps/patch).
@@ -33,23 +33,23 @@ var GoogleFirebaseAppcheckV1betaDeviceCheckConfig = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=keyId" }),
+        SpeakeasyMetadata({ data: "json, name=keyId" }),
         __metadata("design:type", String)
     ], GoogleFirebaseAppcheckV1betaDeviceCheckConfig.prototype, "keyId", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], GoogleFirebaseAppcheckV1betaDeviceCheckConfig.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=privateKey" }),
+        SpeakeasyMetadata({ data: "json, name=privateKey" }),
         __metadata("design:type", String)
     ], GoogleFirebaseAppcheckV1betaDeviceCheckConfig.prototype, "privateKey", void 0);
     __decorate([
-        Metadata({ data: "json, name=privateKeySet" }),
+        SpeakeasyMetadata({ data: "json, name=privateKeySet" }),
         __metadata("design:type", Boolean)
     ], GoogleFirebaseAppcheckV1betaDeviceCheckConfig.prototype, "privateKeySet", void 0);
     __decorate([
-        Metadata({ data: "json, name=tokenTtl" }),
+        SpeakeasyMetadata({ data: "json, name=tokenTtl" }),
         __metadata("design:type", String)
     ], GoogleFirebaseAppcheckV1betaDeviceCheckConfig.prototype, "tokenTtl", void 0);
     return GoogleFirebaseAppcheckV1betaDeviceCheckConfig;

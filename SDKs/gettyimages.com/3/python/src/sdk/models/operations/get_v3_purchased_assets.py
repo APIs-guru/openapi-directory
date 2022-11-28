@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Optional
@@ -22,13 +22,13 @@ class GetV3PurchasedAssetsHeaders:
 
 @dataclass
 class GetV3PurchasedAssetsRequest:
-    query_params: GetV3PurchasedAssetsQueryParams = field(default=None)
-    headers: GetV3PurchasedAssetsHeaders = field(default=None)
+    headers: GetV3PurchasedAssetsHeaders = field()
+    query_params: GetV3PurchasedAssetsQueryParams = field()
     
 
 @dataclass
 class GetV3PurchasedAssetsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     previous_asset_purchases: Optional[shared.PreviousAssetPurchases] = field(default=None)
-    status_code: int = field(default=None)
     

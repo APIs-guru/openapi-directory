@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { QueryRequestInput } from "./queryrequestinput";
 // QueryRequest
 /**
  * Request type for the [`Query`](#google.home.graph.v1.HomeGraphApiService.Query) call.
@@ -34,15 +34,15 @@ var QueryRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=agentUserId" }),
+        SpeakeasyMetadata({ data: "json, name=agentUserId" }),
         __metadata("design:type", String)
     ], QueryRequest.prototype, "agentUserId", void 0);
     __decorate([
-        Metadata({ data: "json, name=inputs", elemType: shared.QueryRequestInput }),
+        SpeakeasyMetadata({ data: "json, name=inputs", elemType: QueryRequestInput }),
         __metadata("design:type", Array)
     ], QueryRequest.prototype, "inputs", void 0);
     __decorate([
-        Metadata({ data: "json, name=requestId" }),
+        SpeakeasyMetadata({ data: "json, name=requestId" }),
         __metadata("design:type", String)
     ], QueryRequest.prototype, "requestId", void 0);
     return QueryRequest;

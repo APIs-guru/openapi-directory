@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum AdvertisedIdTypeEnum {
-    TypeUnspecified = "TYPE_UNSPECIFIED"
-,    Eddystone = "EDDYSTONE"
-,    Ibeacon = "IBEACON"
-,    Altbeacon = "ALTBEACON"
-,    EddystoneEid = "EDDYSTONE_EID"
+    TypeUnspecified = "TYPE_UNSPECIFIED",
+    Eddystone = "EDDYSTONE",
+    Ibeacon = "IBEACON",
+    Altbeacon = "ALTBEACON",
+    EddystoneEid = "EDDYSTONE_EID"
 }
 
 
@@ -14,9 +15,9 @@ export enum AdvertisedIdTypeEnum {
  * Defines a unique identifier of a beacon as broadcast by the device.
 **/
 export class AdvertisedId extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: AdvertisedIdTypeEnum;
 }

@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AllowsUnencryptedObjectUploadsEnum } from "./allowsunencryptedobjectuploadsenum";
 import { JobDetails } from "./jobdetails";
 import { ObjectCountByEncryptionType } from "./objectcountbyencryptiontype";
@@ -9,7 +8,7 @@ import { BucketServerSideEncryption } from "./bucketserversideencryption";
 import { SharedAccessEnum } from "./sharedaccessenum";
 import { KeyValuePair } from "./keyvaluepair";
 import { ObjectLevelStatistics } from "./objectlevelstatistics";
-import { ObjectLevelStatistics } from "./objectlevelstatistics";
+
 
 
 // BucketMetadata
@@ -17,69 +16,69 @@ import { ObjectLevelStatistics } from "./objectlevelstatistics";
  * Provides information about an S3 bucket that Amazon Macie monitors and analyzes.
 **/
 export class BucketMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=allowsUnencryptedObjectUploads" })
+  @SpeakeasyMetadata({ data: "json, name=allowsUnencryptedObjectUploads" })
   allowsUnencryptedObjectUploads?: AllowsUnencryptedObjectUploadsEnum;
 
-  @Metadata({ data: "json, name=bucketArn" })
+  @SpeakeasyMetadata({ data: "json, name=bucketArn" })
   bucketArn?: string;
 
-  @Metadata({ data: "json, name=bucketCreatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=bucketCreatedAt" })
   bucketCreatedAt?: Date;
 
-  @Metadata({ data: "json, name=bucketName" })
+  @SpeakeasyMetadata({ data: "json, name=bucketName" })
   bucketName?: string;
 
-  @Metadata({ data: "json, name=classifiableObjectCount" })
+  @SpeakeasyMetadata({ data: "json, name=classifiableObjectCount" })
   classifiableObjectCount?: number;
 
-  @Metadata({ data: "json, name=classifiableSizeInBytes" })
+  @SpeakeasyMetadata({ data: "json, name=classifiableSizeInBytes" })
   classifiableSizeInBytes?: number;
 
-  @Metadata({ data: "json, name=jobDetails" })
+  @SpeakeasyMetadata({ data: "json, name=jobDetails" })
   jobDetails?: JobDetails;
 
-  @Metadata({ data: "json, name=lastUpdated" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdated" })
   lastUpdated?: Date;
 
-  @Metadata({ data: "json, name=objectCount" })
+  @SpeakeasyMetadata({ data: "json, name=objectCount" })
   objectCount?: number;
 
-  @Metadata({ data: "json, name=objectCountByEncryptionType" })
+  @SpeakeasyMetadata({ data: "json, name=objectCountByEncryptionType" })
   objectCountByEncryptionType?: ObjectCountByEncryptionType;
 
-  @Metadata({ data: "json, name=publicAccess" })
+  @SpeakeasyMetadata({ data: "json, name=publicAccess" })
   publicAccess?: BucketPublicAccess;
 
-  @Metadata({ data: "json, name=region" })
+  @SpeakeasyMetadata({ data: "json, name=region" })
   region?: string;
 
-  @Metadata({ data: "json, name=replicationDetails" })
+  @SpeakeasyMetadata({ data: "json, name=replicationDetails" })
   replicationDetails?: ReplicationDetails;
 
-  @Metadata({ data: "json, name=serverSideEncryption" })
+  @SpeakeasyMetadata({ data: "json, name=serverSideEncryption" })
   serverSideEncryption?: BucketServerSideEncryption;
 
-  @Metadata({ data: "json, name=sharedAccess" })
+  @SpeakeasyMetadata({ data: "json, name=sharedAccess" })
   sharedAccess?: SharedAccessEnum;
 
-  @Metadata({ data: "json, name=sizeInBytes" })
+  @SpeakeasyMetadata({ data: "json, name=sizeInBytes" })
   sizeInBytes?: number;
 
-  @Metadata({ data: "json, name=sizeInBytesCompressed" })
+  @SpeakeasyMetadata({ data: "json, name=sizeInBytesCompressed" })
   sizeInBytesCompressed?: number;
 
-  @Metadata({ data: "json, name=tags", elemType: shared.KeyValuePair })
+  @SpeakeasyMetadata({ data: "json, name=tags", elemType: KeyValuePair })
   tags?: KeyValuePair[];
 
-  @Metadata({ data: "json, name=unclassifiableObjectCount" })
+  @SpeakeasyMetadata({ data: "json, name=unclassifiableObjectCount" })
   unclassifiableObjectCount?: ObjectLevelStatistics;
 
-  @Metadata({ data: "json, name=unclassifiableObjectSizeInBytes" })
+  @SpeakeasyMetadata({ data: "json, name=unclassifiableObjectSizeInBytes" })
   unclassifiableObjectSizeInBytes?: ObjectLevelStatistics;
 
-  @Metadata({ data: "json, name=versioning" })
+  @SpeakeasyMetadata({ data: "json, name=versioning" })
   versioning?: boolean;
 }

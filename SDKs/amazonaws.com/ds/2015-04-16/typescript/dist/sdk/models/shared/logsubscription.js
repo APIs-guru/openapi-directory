@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // LogSubscription
 /**
  * Represents a log subscription, which tracks real-time data from a chosen log group to a specified destination.
@@ -33,15 +33,15 @@ var LogSubscription = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DirectoryId" }),
+        SpeakeasyMetadata({ data: "json, name=DirectoryId" }),
         __metadata("design:type", String)
     ], LogSubscription.prototype, "directoryId", void 0);
     __decorate([
-        Metadata({ data: "json, name=LogGroupName" }),
+        SpeakeasyMetadata({ data: "json, name=LogGroupName" }),
         __metadata("design:type", String)
     ], LogSubscription.prototype, "logGroupName", void 0);
     __decorate([
-        Metadata({ data: "json, name=SubscriptionCreatedDateTime" }),
+        SpeakeasyMetadata({ data: "json, name=SubscriptionCreatedDateTime" }),
         __metadata("design:type", Date)
     ], LogSubscription.prototype, "subscriptionCreatedDateTime", void 0);
     return LogSubscription;

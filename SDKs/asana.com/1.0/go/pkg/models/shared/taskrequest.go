@@ -23,14 +23,12 @@ const (
 	TaskRequestAssigneeStatusEnumInbox    TaskRequestAssigneeStatusEnum = "inbox"
 )
 
+// TaskRequestExternal
+// *OAuth Required*. *Conditional*. This field is returned only if external values are set or included by using [Opt In] (/docs/input-output-options).
+// The external field allows you to store app-specific metadata on tasks, including a gid that can be used to retrieve tasks and a data blob that can store app-specific character strings. Note that you will need to authenticate with Oauth to access or modify this data. Once an external gid is set, you can use the notation `external:custom_gid` to reference your object anywhere in the API where you may use the original object gid. See the page on Custom External Data for more details.
 type TaskRequestExternal struct {
 	Data *string `json:"data,omitempty"`
 	Gid  *string `json:"gid,omitempty"`
-}
-
-type TaskRequestMemberships struct {
-	Project *ProjectCompact `json:"project,omitempty"`
-	Section *SectionCompact `json:"section,omitempty"`
 }
 
 type TaskRequestResourceSubtypeEnum string
@@ -42,41 +40,26 @@ const (
 	TaskRequestResourceSubtypeEnumApproval    TaskRequestResourceSubtypeEnum = "approval"
 )
 
-type TaskRequest struct {
-	ApprovalStatus        *TaskRequestApprovalStatusEnum  `json:"approval_status,omitempty"`
-	Assignee              *string                         `json:"assignee,omitempty"`
-	AssigneeSection       *string                         `json:"assignee_section,omitempty"`
-	AssigneeStatus        *TaskRequestAssigneeStatusEnum  `json:"assignee_status,omitempty"`
-	Completed             *bool                           `json:"completed,omitempty"`
-	CompletedAt           *time.Time                      `json:"completed_at,omitempty"`
-	CompletedBy           *UserCompact                    `json:"completed_by,omitempty"`
-	CreatedAt             *time.Time                      `json:"created_at,omitempty"`
-	CustomFields          map[string]string               `json:"custom_fields,omitempty"`
-	Dependencies          []AsanaResource                 `json:"dependencies,omitempty"`
-	Dependents            []AsanaResource                 `json:"dependents,omitempty"`
-	DueAt                 *time.Time                      `json:"due_at,omitempty"`
-	DueOn                 *time.Time                      `json:"due_on,omitempty"`
-	External              *TaskRequestExternal            `json:"external,omitempty"`
-	Followers             []string                        `json:"followers,omitempty"`
-	Gid                   *string                         `json:"gid,omitempty"`
-	Hearted               *bool                           `json:"hearted,omitempty"`
-	Hearts                []Like                          `json:"hearts,omitempty"`
-	HTMLNotes             *string                         `json:"html_notes,omitempty"`
-	IsRenderedAsSeparator *bool                           `json:"is_rendered_as_separator,omitempty"`
-	Liked                 *bool                           `json:"liked,omitempty"`
-	Likes                 []Like                          `json:"likes,omitempty"`
-	Memberships           []TaskRequestMemberships        `json:"memberships,omitempty"`
-	ModifiedAt            *time.Time                      `json:"modified_at,omitempty"`
-	Name                  *string                         `json:"name,omitempty"`
-	Notes                 *string                         `json:"notes,omitempty"`
-	NumHearts             *int64                          `json:"num_hearts,omitempty"`
-	NumLikes              *int64                          `json:"num_likes,omitempty"`
-	NumSubtasks           *int64                          `json:"num_subtasks,omitempty"`
-	Parent                *string                         `json:"parent,omitempty"`
-	Projects              []string                        `json:"projects,omitempty"`
-	ResourceSubtype       *TaskRequestResourceSubtypeEnum `json:"resource_subtype,omitempty"`
-	ResourceType          *string                         `json:"resource_type,omitempty"`
-	StartOn               *time.Time                      `json:"start_on,omitempty"`
-	Tags                  []string                        `json:"tags,omitempty"`
-	Workspace             *string                         `json:"workspace,omitempty"`
+type TaskRequestInput struct {
+	ApprovalStatus  *TaskRequestApprovalStatusEnum  `json:"approval_status,omitempty"`
+	Assignee        *string                         `json:"assignee,omitempty"`
+	AssigneeSection *string                         `json:"assignee_section,omitempty"`
+	AssigneeStatus  *TaskRequestAssigneeStatusEnum  `json:"assignee_status,omitempty"`
+	Completed       *bool                           `json:"completed,omitempty"`
+	CompletedBy     *UserCompactInput               `json:"completed_by,omitempty"`
+	CustomFields    map[string]string               `json:"custom_fields,omitempty"`
+	DueAt           *time.Time                      `json:"due_at,omitempty"`
+	DueOn           *time.Time                      `json:"due_on,omitempty"`
+	External        *TaskRequestExternal            `json:"external,omitempty"`
+	Followers       []string                        `json:"followers,omitempty"`
+	HTMLNotes       *string                         `json:"html_notes,omitempty"`
+	Liked           *bool                           `json:"liked,omitempty"`
+	Name            *string                         `json:"name,omitempty"`
+	Notes           *string                         `json:"notes,omitempty"`
+	Parent          *string                         `json:"parent,omitempty"`
+	Projects        []string                        `json:"projects,omitempty"`
+	ResourceSubtype *TaskRequestResourceSubtypeEnum `json:"resource_subtype,omitempty"`
+	StartOn         *time.Time                      `json:"start_on,omitempty"`
+	Tags            []string                        `json:"tags,omitempty"`
+	Workspace       *string                         `json:"workspace,omitempty"`
 }

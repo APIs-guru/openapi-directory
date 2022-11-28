@@ -1,5 +1,7 @@
 package shared
 
+// LogSettingsResponse
+// The settings for conversation logs.
 type LogSettingsResponse struct {
 	Destination    *DestinationEnum `json:"destination,omitempty"`
 	KmsKeyArn      *string          `json:"kmsKeyArn,omitempty"`

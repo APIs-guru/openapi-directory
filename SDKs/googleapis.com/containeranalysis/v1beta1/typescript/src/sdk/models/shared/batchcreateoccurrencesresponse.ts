@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Occurrence } from "./occurrence";
+
 
 
 // BatchCreateOccurrencesResponse
@@ -8,6 +8,6 @@ import { Occurrence } from "./occurrence";
  * Response for creating occurrences in batch.
 **/
 export class BatchCreateOccurrencesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=occurrences", elemType: shared.Occurrence })
+  @SpeakeasyMetadata({ data: "json, name=occurrences", elemType: Occurrence })
   occurrences?: Occurrence[];
 }

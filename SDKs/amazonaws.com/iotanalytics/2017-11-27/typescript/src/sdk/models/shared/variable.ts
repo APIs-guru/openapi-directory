@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DatasetContentVersionValue } from "./datasetcontentversionvalue";
 import { OutputFileUriValue } from "./outputfileurivalue";
+
 
 
 // Variable
@@ -8,18 +9,18 @@ import { OutputFileUriValue } from "./outputfileurivalue";
  * An instance of a variable to be passed to the <code>containerAction</code> execution. Each variable must have a name and a value given by one of <code>stringValue</code>, <code>datasetContentVersionValue</code>, or <code>outputFileUriValue</code>.
 **/
 export class Variable extends SpeakeasyBase {
-  @Metadata({ data: "json, name=datasetContentVersionValue" })
+  @SpeakeasyMetadata({ data: "json, name=datasetContentVersionValue" })
   datasetContentVersionValue?: DatasetContentVersionValue;
 
-  @Metadata({ data: "json, name=doubleValue" })
+  @SpeakeasyMetadata({ data: "json, name=doubleValue" })
   doubleValue?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=outputFileUriValue" })
+  @SpeakeasyMetadata({ data: "json, name=outputFileUriValue" })
   outputFileUriValue?: OutputFileUriValue;
 
-  @Metadata({ data: "json, name=stringValue" })
+  @SpeakeasyMetadata({ data: "json, name=stringValue" })
   stringValue?: string;
 }

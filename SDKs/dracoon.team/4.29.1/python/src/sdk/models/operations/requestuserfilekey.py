@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class RequestUserFileKeyPathParams:
-    file_id: int = field(default=None, metadata={'path_param': { 'field_name': 'file_id', 'style': 'simple', 'explode': False }})
+    file_id: int = field(metadata={'path_param': { 'field_name': 'file_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,15 +20,15 @@ class RequestUserFileKeyHeaders:
 
 @dataclass
 class RequestUserFileKeyRequest:
-    path_params: RequestUserFileKeyPathParams = field(default=None)
-    query_params: RequestUserFileKeyQueryParams = field(default=None)
-    headers: RequestUserFileKeyHeaders = field(default=None)
+    headers: RequestUserFileKeyHeaders = field()
+    path_params: RequestUserFileKeyPathParams = field()
+    query_params: RequestUserFileKeyQueryParams = field()
     
 
 @dataclass
 class RequestUserFileKeyResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     file_key: Optional[shared.FileKey] = field(default=None)
-    status_code: int = field(default=None)
     

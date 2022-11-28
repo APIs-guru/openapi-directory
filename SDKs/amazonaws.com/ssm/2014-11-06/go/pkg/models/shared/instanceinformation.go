@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// InstanceInformation
+// Describes a filter for a specific list of instances.
 type InstanceInformation struct {
 	ActivationID                           *string                                `json:"ActivationId,omitempty"`
 	AgentVersion                           *string                                `json:"AgentVersion,omitempty"`

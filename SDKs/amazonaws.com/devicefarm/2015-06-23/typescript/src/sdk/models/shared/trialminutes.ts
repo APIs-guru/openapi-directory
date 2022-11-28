@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TrialMinutes
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents information about free trial device minutes for an AWS account.
 **/
 export class TrialMinutes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=remaining" })
+  @SpeakeasyMetadata({ data: "json, name=remaining" })
   remaining?: number;
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total?: number;
 }

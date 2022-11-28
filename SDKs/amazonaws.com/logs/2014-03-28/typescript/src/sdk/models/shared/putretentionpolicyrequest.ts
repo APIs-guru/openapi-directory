@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PutRetentionPolicyRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=logGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=logGroupName" })
   logGroupName: string;
 
-  @Metadata({ data: "json, name=retentionInDays" })
+  @SpeakeasyMetadata({ data: "json, name=retentionInDays" })
   retentionInDays: number;
 }

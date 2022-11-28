@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class GetRealmGroupsIDMembersPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
-    realm: str = field(default=None, metadata={'path_param': { 'field_name': 'realm', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    realm: str = field(metadata={'path_param': { 'field_name': 'realm', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,13 +18,13 @@ class GetRealmGroupsIDMembersQueryParams:
 
 @dataclass
 class GetRealmGroupsIDMembersRequest:
-    path_params: GetRealmGroupsIDMembersPathParams = field(default=None)
-    query_params: GetRealmGroupsIDMembersQueryParams = field(default=None)
+    path_params: GetRealmGroupsIDMembersPathParams = field()
+    query_params: GetRealmGroupsIDMembersQueryParams = field()
     
 
 @dataclass
 class GetRealmGroupsIDMembersResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     user_representations: Optional[List[shared.UserRepresentation]] = field(default=None)
     

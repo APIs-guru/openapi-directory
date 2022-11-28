@@ -1,10 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
+from sdk.models import shared
 
 
 @dataclass
 class PostGroupGroupTitlePathParams:
-    group_title: str = field(default=None, metadata={'path_param': { 'field_name': 'group_title', 'style': 'simple', 'explode': False }})
+    group_title: str = field(metadata={'path_param': { 'field_name': 'group_title', 'style': 'simple', 'explode': False }})
     
 class PostGroupGroupTitleCmdEnum(str, Enum):
     ADD_USER = "add_user"
@@ -21,19 +23,19 @@ class PostGroupGroupTitleQueryParams:
 
 @dataclass
 class PostGroupGroupTitleSecurity:
-    basic_authentication: shared.SchemeBasicAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    basic_authentication: shared.SchemeBasicAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
     
 
 @dataclass
 class PostGroupGroupTitleRequest:
-    path_params: PostGroupGroupTitlePathParams = field(default=None)
-    query_params: PostGroupGroupTitleQueryParams = field(default=None)
-    security: PostGroupGroupTitleSecurity = field(default=None)
+    path_params: PostGroupGroupTitlePathParams = field()
+    query_params: PostGroupGroupTitleQueryParams = field()
+    security: PostGroupGroupTitleSecurity = field()
     
 
 @dataclass
 class PostGroupGroupTitleResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

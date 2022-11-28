@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TransformDefinitionTransformDefinition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Active" })
+  @SpeakeasyMetadata({ data: "json, name=Active" })
   active?: boolean;
 
-  @Metadata({ data: "json, name=ContentType" })
+  @SpeakeasyMetadata({ data: "json, name=ContentType" })
   contentType?: string;
 
-  @Metadata({ data: "json, name=Definition" })
+  @SpeakeasyMetadata({ data: "json, name=Definition" })
   definition?: string;
 
-  @Metadata({ data: "json, name=DefinitionType" })
+  @SpeakeasyMetadata({ data: "json, name=DefinitionType" })
   definitionType?: string;
 
-  @Metadata({ data: "json, name=Readonly" })
+  @SpeakeasyMetadata({ data: "json, name=Readonly" })
   readonly?: boolean;
 
-  @Metadata({ data: "json, name=SupportedReports" })
+  @SpeakeasyMetadata({ data: "json, name=SupportedReports" })
   supportedReports?: string;
 
-  @Metadata({ data: "json, name=TaxYear" })
+  @SpeakeasyMetadata({ data: "json, name=TaxYear" })
   taxYear?: number;
 
-  @Metadata({ data: "json, name=Title" })
+  @SpeakeasyMetadata({ data: "json, name=Title" })
   title?: string;
 
-  @Metadata({ data: "json, name=Version" })
+  @SpeakeasyMetadata({ data: "json, name=Version" })
   version?: string;
 }
 
 
 export class TransformDefinition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=TransformDefinition" })
+  @SpeakeasyMetadata({ data: "json, name=TransformDefinition" })
   transformDefinition?: TransformDefinitionTransformDefinition;
 }

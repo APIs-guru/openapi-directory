@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LensSummary
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A lens summary of a lens.
 **/
 export class LensSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=LensAlias" })
+  @SpeakeasyMetadata({ data: "json, name=LensAlias" })
   lensAlias?: string;
 
-  @Metadata({ data: "json, name=LensName" })
+  @SpeakeasyMetadata({ data: "json, name=LensName" })
   lensName?: string;
 
-  @Metadata({ data: "json, name=LensVersion" })
+  @SpeakeasyMetadata({ data: "json, name=LensVersion" })
   lensVersion?: string;
 }

@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteModelPathParams:
-    model_name: str = field(default=None, metadata={'path_param': { 'field_name': 'model_name', 'style': 'simple', 'explode': False }})
-    restapi_id: str = field(default=None, metadata={'path_param': { 'field_name': 'restapi_id', 'style': 'simple', 'explode': False }})
+    model_name: str = field(metadata={'path_param': { 'field_name': 'model_name', 'style': 'simple', 'explode': False }})
+    restapi_id: str = field(metadata={'path_param': { 'field_name': 'restapi_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,17 +24,17 @@ class DeleteModelHeaders:
 
 @dataclass
 class DeleteModelRequest:
-    path_params: DeleteModelPathParams = field(default=None)
-    headers: DeleteModelHeaders = field(default=None)
+    headers: DeleteModelHeaders = field()
+    path_params: DeleteModelPathParams = field()
     
 
 @dataclass
 class DeleteModelResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

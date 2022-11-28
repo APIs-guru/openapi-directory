@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeploymentConfig } from "./deploymentconfig";
 import { EntryPoint } from "./entrypoint";
+
 
 
 // Deployment
@@ -9,15 +9,15 @@ import { EntryPoint } from "./entrypoint";
  * Representation of a single script deployment.
 **/
 export class Deployment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deploymentConfig" })
+  @SpeakeasyMetadata({ data: "json, name=deploymentConfig" })
   deploymentConfig?: DeploymentConfig;
 
-  @Metadata({ data: "json, name=deploymentId" })
+  @SpeakeasyMetadata({ data: "json, name=deploymentId" })
   deploymentId?: string;
 
-  @Metadata({ data: "json, name=entryPoints", elemType: shared.EntryPoint })
+  @SpeakeasyMetadata({ data: "json, name=entryPoints", elemType: EntryPoint })
   entryPoints?: EntryPoint[];
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 }

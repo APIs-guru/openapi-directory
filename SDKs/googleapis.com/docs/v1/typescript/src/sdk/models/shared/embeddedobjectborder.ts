@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OptionalColor } from "./optionalcolor";
 import { Dimension } from "./dimension";
 
+
 export enum EmbeddedObjectBorderDashStyleEnum {
-    DashStyleUnspecified = "DASH_STYLE_UNSPECIFIED"
-,    Solid = "SOLID"
-,    Dot = "DOT"
-,    Dash = "DASH"
+    DashStyleUnspecified = "DASH_STYLE_UNSPECIFIED",
+    Solid = "SOLID",
+    Dot = "DOT",
+    Dash = "DASH"
 }
 
 export enum EmbeddedObjectBorderPropertyStateEnum {
-    Rendered = "RENDERED"
-,    NotRendered = "NOT_RENDERED"
+    Rendered = "RENDERED",
+    NotRendered = "NOT_RENDERED"
 }
 
 
@@ -20,15 +21,15 @@ export enum EmbeddedObjectBorderPropertyStateEnum {
  * A border around an EmbeddedObject.
 **/
 export class EmbeddedObjectBorder extends SpeakeasyBase {
-  @Metadata({ data: "json, name=color" })
+  @SpeakeasyMetadata({ data: "json, name=color" })
   color?: OptionalColor;
 
-  @Metadata({ data: "json, name=dashStyle" })
+  @SpeakeasyMetadata({ data: "json, name=dashStyle" })
   dashStyle?: EmbeddedObjectBorderDashStyleEnum;
 
-  @Metadata({ data: "json, name=propertyState" })
+  @SpeakeasyMetadata({ data: "json, name=propertyState" })
   propertyState?: EmbeddedObjectBorderPropertyStateEnum;
 
-  @Metadata({ data: "json, name=width" })
+  @SpeakeasyMetadata({ data: "json, name=width" })
   width?: Dimension;
 }

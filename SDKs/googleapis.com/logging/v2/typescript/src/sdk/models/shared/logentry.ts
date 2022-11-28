@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HttpRequest } from "./httprequest";
 import { MonitoredResourceMetadata } from "./monitoredresourcemetadata";
 import { LogEntryOperation } from "./logentryoperation";
@@ -6,16 +6,75 @@ import { MonitoredResource } from "./monitoredresource";
 import { LogEntrySourceLocation } from "./logentrysourcelocation";
 import { LogSplit } from "./logsplit";
 
+
 export enum LogEntrySeverityEnum {
-    Default = "DEFAULT"
-,    Debug = "DEBUG"
-,    Info = "INFO"
-,    Notice = "NOTICE"
-,    Warning = "WARNING"
-,    Error = "ERROR"
-,    Critical = "CRITICAL"
-,    Alert = "ALERT"
-,    Emergency = "EMERGENCY"
+    Default = "DEFAULT",
+    Debug = "DEBUG",
+    Info = "INFO",
+    Notice = "NOTICE",
+    Warning = "WARNING",
+    Error = "ERROR",
+    Critical = "CRITICAL",
+    Alert = "ALERT",
+    Emergency = "EMERGENCY"
+}
+
+
+// LogEntryInput
+/** 
+ * An individual entry in a log.
+**/
+export class LogEntryInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=httpRequest" })
+  httpRequest?: HttpRequest;
+
+  @SpeakeasyMetadata({ data: "json, name=insertId" })
+  insertId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=jsonPayload" })
+  jsonPayload?: Map<string, any>;
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=logName" })
+  logName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
+  metadata?: MonitoredResourceMetadata;
+
+  @SpeakeasyMetadata({ data: "json, name=operation" })
+  operation?: LogEntryOperation;
+
+  @SpeakeasyMetadata({ data: "json, name=protoPayload" })
+  protoPayload?: Map<string, any>;
+
+  @SpeakeasyMetadata({ data: "json, name=resource" })
+  resource?: MonitoredResource;
+
+  @SpeakeasyMetadata({ data: "json, name=severity" })
+  severity?: LogEntrySeverityEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=sourceLocation" })
+  sourceLocation?: LogEntrySourceLocation;
+
+  @SpeakeasyMetadata({ data: "json, name=spanId" })
+  spanId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=split" })
+  split?: LogSplit;
+
+  @SpeakeasyMetadata({ data: "json, name=textPayload" })
+  textPayload?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=timestamp" })
+  timestamp?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=trace" })
+  trace?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=traceSampled" })
+  traceSampled?: boolean;
 }
 
 
@@ -24,57 +83,57 @@ export enum LogEntrySeverityEnum {
  * An individual entry in a log.
 **/
 export class LogEntry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=httpRequest" })
+  @SpeakeasyMetadata({ data: "json, name=httpRequest" })
   httpRequest?: HttpRequest;
 
-  @Metadata({ data: "json, name=insertId" })
+  @SpeakeasyMetadata({ data: "json, name=insertId" })
   insertId?: string;
 
-  @Metadata({ data: "json, name=jsonPayload" })
+  @SpeakeasyMetadata({ data: "json, name=jsonPayload" })
   jsonPayload?: Map<string, any>;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=logName" })
+  @SpeakeasyMetadata({ data: "json, name=logName" })
   logName?: string;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: MonitoredResourceMetadata;
 
-  @Metadata({ data: "json, name=operation" })
+  @SpeakeasyMetadata({ data: "json, name=operation" })
   operation?: LogEntryOperation;
 
-  @Metadata({ data: "json, name=protoPayload" })
+  @SpeakeasyMetadata({ data: "json, name=protoPayload" })
   protoPayload?: Map<string, any>;
 
-  @Metadata({ data: "json, name=receiveTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=receiveTimestamp" })
   receiveTimestamp?: string;
 
-  @Metadata({ data: "json, name=resource" })
+  @SpeakeasyMetadata({ data: "json, name=resource" })
   resource?: MonitoredResource;
 
-  @Metadata({ data: "json, name=severity" })
+  @SpeakeasyMetadata({ data: "json, name=severity" })
   severity?: LogEntrySeverityEnum;
 
-  @Metadata({ data: "json, name=sourceLocation" })
+  @SpeakeasyMetadata({ data: "json, name=sourceLocation" })
   sourceLocation?: LogEntrySourceLocation;
 
-  @Metadata({ data: "json, name=spanId" })
+  @SpeakeasyMetadata({ data: "json, name=spanId" })
   spanId?: string;
 
-  @Metadata({ data: "json, name=split" })
+  @SpeakeasyMetadata({ data: "json, name=split" })
   split?: LogSplit;
 
-  @Metadata({ data: "json, name=textPayload" })
+  @SpeakeasyMetadata({ data: "json, name=textPayload" })
   textPayload?: string;
 
-  @Metadata({ data: "json, name=timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=timestamp" })
   timestamp?: string;
 
-  @Metadata({ data: "json, name=trace" })
+  @SpeakeasyMetadata({ data: "json, name=trace" })
   trace?: string;
 
-  @Metadata({ data: "json, name=traceSampled" })
+  @SpeakeasyMetadata({ data: "json, name=traceSampled" })
   traceSampled?: boolean;
 }

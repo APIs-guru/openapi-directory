@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UpdateSystemModelsPackage } from "./updatesystemmodelspackage";
 
 
+
 export class UpdateSystemModelsCheckinResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Packages", elemType: shared.UpdateSystemModelsPackage })
+  @SpeakeasyMetadata({ data: "json, name=Packages", elemType: UpdateSystemModelsPackage })
   packages?: UpdateSystemModelsPackage[];
 
-  @Metadata({ data: "json, name=RemovePackages" })
+  @SpeakeasyMetadata({ data: "json, name=RemovePackages" })
   removePackages?: string[];
 }

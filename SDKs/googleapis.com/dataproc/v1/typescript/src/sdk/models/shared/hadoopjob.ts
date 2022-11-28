@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LoggingConfig } from "./loggingconfig";
+
 
 
 // HadoopJob
@@ -7,27 +8,27 @@ import { LoggingConfig } from "./loggingconfig";
  * A Dataproc job for running Apache Hadoop MapReduce (https://hadoop.apache.org/docs/current/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html) jobs on Apache Hadoop YARN (https://hadoop.apache.org/docs/r2.7.1/hadoop-yarn/hadoop-yarn-site/YARN.html).
 **/
 export class HadoopJob extends SpeakeasyBase {
-  @Metadata({ data: "json, name=archiveUris" })
+  @SpeakeasyMetadata({ data: "json, name=archiveUris" })
   archiveUris?: string[];
 
-  @Metadata({ data: "json, name=args" })
+  @SpeakeasyMetadata({ data: "json, name=args" })
   args?: string[];
 
-  @Metadata({ data: "json, name=fileUris" })
+  @SpeakeasyMetadata({ data: "json, name=fileUris" })
   fileUris?: string[];
 
-  @Metadata({ data: "json, name=jarFileUris" })
+  @SpeakeasyMetadata({ data: "json, name=jarFileUris" })
   jarFileUris?: string[];
 
-  @Metadata({ data: "json, name=loggingConfig" })
+  @SpeakeasyMetadata({ data: "json, name=loggingConfig" })
   loggingConfig?: LoggingConfig;
 
-  @Metadata({ data: "json, name=mainClass" })
+  @SpeakeasyMetadata({ data: "json, name=mainClass" })
   mainClass?: string;
 
-  @Metadata({ data: "json, name=mainJarFileUri" })
+  @SpeakeasyMetadata({ data: "json, name=mainJarFileUri" })
   mainJarFileUri?: string;
 
-  @Metadata({ data: "json, name=properties" })
+  @SpeakeasyMetadata({ data: "json, name=properties" })
   properties?: Map<string, string>;
 }

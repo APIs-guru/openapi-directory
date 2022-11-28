@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AuthMechanismValueEnum } from "./authmechanismvalueenum";
 import { AuthTypeValueEnum } from "./authtypevalueenum";
 import { NestingLevelValueEnum } from "./nestinglevelvalueenum";

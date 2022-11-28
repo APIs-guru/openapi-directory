@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ServiceAvailabilityViewModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ignoreBusinessHours" })
+  @SpeakeasyMetadata({ data: "json, name=ignoreBusinessHours" })
   ignoreBusinessHours?: boolean;
 
-  @Metadata({ data: "json, name=serviceId" })
+  @SpeakeasyMetadata({ data: "json, name=serviceId" })
   serviceId?: number;
 
-  @Metadata({ data: "json, name=serviceName" })
+  @SpeakeasyMetadata({ data: "json, name=serviceName" })
   serviceName?: string;
 }

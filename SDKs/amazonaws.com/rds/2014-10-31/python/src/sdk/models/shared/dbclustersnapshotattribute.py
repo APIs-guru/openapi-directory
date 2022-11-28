@@ -1,0 +1,13 @@
+from dataclasses import dataclass, field
+from typing import List,Optional
+
+
+@dataclass
+class DbClusterSnapshotAttribute:
+    r"""DbClusterSnapshotAttribute
+    <p>Contains the name and values of a manual DB cluster snapshot attribute.</p> <p>Manual DB cluster snapshot attributes are used to authorize other Amazon Web Services accounts to restore a manual DB cluster snapshot. For more information, see the <code>ModifyDBClusterSnapshotAttribute</code> API action.</p>
+    """
+    
+    attribute_name: Optional[str] = field(default=None)
+    attribute_values: Optional[List[str]] = field(default=None)
+    

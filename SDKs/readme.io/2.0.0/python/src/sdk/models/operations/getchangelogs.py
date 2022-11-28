@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
+from sdk.models import shared
 
 
 @dataclass
@@ -10,18 +11,18 @@ class GetChangelogsQueryParams:
 
 @dataclass
 class GetChangelogsSecurity:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    api_key: shared.SchemeAPIKey = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
     
 
 @dataclass
 class GetChangelogsRequest:
-    query_params: GetChangelogsQueryParams = field(default=None)
-    security: GetChangelogsSecurity = field(default=None)
+    query_params: GetChangelogsQueryParams = field()
+    security: GetChangelogsSecurity = field()
     
 
 @dataclass
 class GetChangelogsResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     

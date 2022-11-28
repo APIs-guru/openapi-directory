@@ -1,33 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdatePortalPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=portalId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=portalId" })
   portalId: string;
 }
 
 
 export class UpdatePortalHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -37,10 +38,10 @@ export class UpdatePortalHeaders extends SpeakeasyBase {
  * Contains the configuration information of an alarm created in an IoT SiteWise Monitor portal. You can use the alarm to monitor an asset property and get notified when the asset property value is outside a specified range. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/appguide/monitor-alarms.html">Monitoring with alarms</a> in the <i>IoT SiteWise Application Guide</i>.
 **/
 export class UpdatePortalRequestBodyAlarms extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alarmRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=alarmRoleArn" })
   alarmRoleArn?: string;
 
-  @Metadata({ data: "json, name=notificationLambdaArn" })
+  @SpeakeasyMetadata({ data: "json, name=notificationLambdaArn" })
   notificationLambdaArn?: string;
 }
 
@@ -50,75 +51,75 @@ export class UpdatePortalRequestBodyAlarms extends SpeakeasyBase {
  * <p>Contains an image that is one of the following:</p> <ul> <li> <p>An image file. Choose this option to upload a new image.</p> </li> <li> <p>The ID of an existing image. Choose this option to keep an existing image.</p> </li> </ul>
 **/
 export class UpdatePortalRequestBodyPortalLogoImage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=file" })
+  @SpeakeasyMetadata({ data: "json, name=file" })
   file?: shared.ImageFile;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 }
 
 
 export class UpdatePortalRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alarms" })
+  @SpeakeasyMetadata({ data: "json, name=alarms" })
   alarms?: UpdatePortalRequestBodyAlarms;
 
-  @Metadata({ data: "json, name=clientToken" })
+  @SpeakeasyMetadata({ data: "json, name=clientToken" })
   clientToken?: string;
 
-  @Metadata({ data: "json, name=notificationSenderEmail" })
+  @SpeakeasyMetadata({ data: "json, name=notificationSenderEmail" })
   notificationSenderEmail?: string;
 
-  @Metadata({ data: "json, name=portalContactEmail" })
+  @SpeakeasyMetadata({ data: "json, name=portalContactEmail" })
   portalContactEmail: string;
 
-  @Metadata({ data: "json, name=portalDescription" })
+  @SpeakeasyMetadata({ data: "json, name=portalDescription" })
   portalDescription?: string;
 
-  @Metadata({ data: "json, name=portalLogoImage" })
+  @SpeakeasyMetadata({ data: "json, name=portalLogoImage" })
   portalLogoImage?: UpdatePortalRequestBodyPortalLogoImage;
 
-  @Metadata({ data: "json, name=portalName" })
+  @SpeakeasyMetadata({ data: "json, name=portalName" })
   portalName: string;
 
-  @Metadata({ data: "json, name=roleArn" })
+  @SpeakeasyMetadata({ data: "json, name=roleArn" })
   roleArn: string;
 }
 
 
 export class UpdatePortalRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdatePortalPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdatePortalHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdatePortalRequestBody;
 }
 
 
 export class UpdatePortalResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   conflictingOperationException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalFailureException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updatePortalResponse?: shared.UpdatePortalResponse;
 }

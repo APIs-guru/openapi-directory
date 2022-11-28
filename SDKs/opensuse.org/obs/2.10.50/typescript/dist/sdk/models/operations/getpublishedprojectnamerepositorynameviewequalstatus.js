@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetPublishedProjectNameRepositoryNameViewEqualStatusPathParams = /** @class */ (function (_super) {
     __extends(GetPublishedProjectNameRepositoryNameViewEqualStatusPathParams, _super);
@@ -30,11 +30,11 @@ var GetPublishedProjectNameRepositoryNameViewEqualStatusPathParams = /** @class 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=project_name" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=project_name" }),
         __metadata("design:type", String)
     ], GetPublishedProjectNameRepositoryNameViewEqualStatusPathParams.prototype, "projectName", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=repository_name" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repository_name" }),
         __metadata("design:type", String)
     ], GetPublishedProjectNameRepositoryNameViewEqualStatusPathParams.prototype, "repositoryName", void 0);
     return GetPublishedProjectNameRepositoryNameViewEqualStatusPathParams;
@@ -50,7 +50,7 @@ var GetPublishedProjectNameRepositoryNameViewEqualStatusQueryParams = /** @class
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=view" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=view" }),
         __metadata("design:type", String)
     ], GetPublishedProjectNameRepositoryNameViewEqualStatusQueryParams.prototype, "view", void 0);
     return GetPublishedProjectNameRepositoryNameViewEqualStatusQueryParams;
@@ -62,7 +62,7 @@ var GetPublishedProjectNameRepositoryNameViewEqualStatusSecurity = /** @class */
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
         __metadata("design:type", shared.SchemeBasicAuthentication)
     ], GetPublishedProjectNameRepositoryNameViewEqualStatusSecurity.prototype, "basicAuthentication", void 0);
     return GetPublishedProjectNameRepositoryNameViewEqualStatusSecurity;
@@ -74,15 +74,15 @@ var GetPublishedProjectNameRepositoryNameViewEqualStatusRequest = /** @class */ 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetPublishedProjectNameRepositoryNameViewEqualStatusPathParams)
     ], GetPublishedProjectNameRepositoryNameViewEqualStatusRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetPublishedProjectNameRepositoryNameViewEqualStatusQueryParams)
     ], GetPublishedProjectNameRepositoryNameViewEqualStatusRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetPublishedProjectNameRepositoryNameViewEqualStatusSecurity)
     ], GetPublishedProjectNameRepositoryNameViewEqualStatusRequest.prototype, "security", void 0);
     return GetPublishedProjectNameRepositoryNameViewEqualStatusRequest;
@@ -94,15 +94,15 @@ var GetPublishedProjectNameRepositoryNameViewEqualStatusResponse = /** @class */
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetPublishedProjectNameRepositoryNameViewEqualStatusResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetPublishedProjectNameRepositoryNameViewEqualStatusResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetPublishedProjectNameRepositoryNameViewEqualStatusResponse.prototype, "statusCode", void 0);
     return GetPublishedProjectNameRepositoryNameViewEqualStatusResponse;

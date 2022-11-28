@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import member
+from sdk import utils
+from . import *
 
 class PostActivityWithMemberActivityTypeEnum(str, Enum):
     CONTENT = "content"
@@ -10,8 +12,8 @@ class PostActivityWithMemberActivityTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PostActivityWithMember:
-    activity_type: PostActivityWithMemberActivityTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'activity_type' }})
-    member: Optional[member.Member] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'member' }})
-    occurred_at: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'occurred_at' }})
-    url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
+    activity_type: PostActivityWithMemberActivityTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('activity_type') }})
+    url: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('url') }})
+    member: Optional[Member] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('member') }})
+    occurred_at: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('occurred_at') }})
     

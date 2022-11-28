@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { MobileUsabilityIssue } from "./mobileusabilityissue";
 export declare enum MobileUsabilityInspectionResultVerdictEnum {
     VerdictUnspecified = "VERDICT_UNSPECIFIED",

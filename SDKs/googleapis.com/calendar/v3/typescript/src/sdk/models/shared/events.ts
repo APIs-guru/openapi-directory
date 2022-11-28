@@ -1,40 +1,40 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EventReminder } from "./eventreminder";
 import { Event } from "./event";
 
 
+
 export class Events extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessRole" })
+  @SpeakeasyMetadata({ data: "json, name=accessRole" })
   accessRole?: string;
 
-  @Metadata({ data: "json, name=defaultReminders", elemType: shared.EventReminder })
+  @SpeakeasyMetadata({ data: "json, name=defaultReminders", elemType: EventReminder })
   defaultReminders?: EventReminder[];
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=items", elemType: shared.Event })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: Event })
   items?: Event[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=nextSyncToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextSyncToken" })
   nextSyncToken?: string;
 
-  @Metadata({ data: "json, name=summary" })
+  @SpeakeasyMetadata({ data: "json, name=summary" })
   summary?: string;
 
-  @Metadata({ data: "json, name=timeZone" })
+  @SpeakeasyMetadata({ data: "json, name=timeZone" })
   timeZone?: string;
 
-  @Metadata({ data: "json, name=updated" })
+  @SpeakeasyMetadata({ data: "json, name=updated" })
   updated?: Date;
 }

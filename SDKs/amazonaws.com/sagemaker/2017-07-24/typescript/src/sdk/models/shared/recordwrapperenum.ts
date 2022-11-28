@@ -1,6 +1,7 @@
 
 
+
 export enum RecordWrapperEnum {
-    None = "None"
-,    RecordIo = "RecordIO"
+    None = "None",
+    RecordIo = "RecordIO"
 }

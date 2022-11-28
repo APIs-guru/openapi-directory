@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TestGridVpcConfig
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The VPC security groups and subnets that are attached to a project.
 **/
 export class TestGridVpcConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=securityGroupIds" })
+  @SpeakeasyMetadata({ data: "json, name=securityGroupIds" })
   securityGroupIds: string[];
 
-  @Metadata({ data: "json, name=subnetIds" })
+  @SpeakeasyMetadata({ data: "json, name=subnetIds" })
   subnetIds: string[];
 
-  @Metadata({ data: "json, name=vpcId" })
+  @SpeakeasyMetadata({ data: "json, name=vpcId" })
   vpcId: string;
 }

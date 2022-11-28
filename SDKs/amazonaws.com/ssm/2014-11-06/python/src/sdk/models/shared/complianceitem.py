@@ -1,21 +1,25 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import complianceexecutionsummary
-from . import complianceseverity_enum
-from . import compliancestatus_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ComplianceItem:
-    compliance_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ComplianceType' }})
-    details: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Details' }})
-    execution_summary: Optional[complianceexecutionsummary.ComplianceExecutionSummary] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ExecutionSummary' }})
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Id' }})
-    resource_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ResourceId' }})
-    resource_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ResourceType' }})
-    severity: Optional[complianceseverity_enum.ComplianceSeverityEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Severity' }})
-    status: Optional[compliancestatus_enum.ComplianceStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Status' }})
-    title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Title' }})
+    r"""ComplianceItem
+    Information about the compliance as defined by the resource type. For example, for a patch resource type, <code>Items</code> includes information about the PatchSeverity, Classification, and so on.
+    """
+    
+    compliance_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ComplianceType') }})
+    details: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Details') }})
+    execution_summary: Optional[ComplianceExecutionSummary] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ExecutionSummary') }})
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Id') }})
+    resource_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ResourceId') }})
+    resource_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ResourceType') }})
+    severity: Optional[ComplianceSeverityEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Severity') }})
+    status: Optional[ComplianceStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Status') }})
+    title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Title') }})
     

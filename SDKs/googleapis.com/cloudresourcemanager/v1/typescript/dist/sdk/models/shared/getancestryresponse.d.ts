@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Ancestor } from "./ancestor";
 /**
  * Response from the projects.getAncestry method.

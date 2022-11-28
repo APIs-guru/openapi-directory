@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import cloudhealthcaresource
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AnnotationSource:
-    cloud_healthcare_source: Optional[cloudhealthcaresource.CloudHealthcareSource] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cloudHealthcareSource' }})
+    r"""AnnotationSource
+    AnnotationSource holds the source information of the annotation.
+    """
+    
+    cloud_healthcare_source: Optional[CloudHealthcareSource] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cloudHealthcareSource') }})
     

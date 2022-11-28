@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class VaccineStatusRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=patientId" })
+  @SpeakeasyMetadata({ data: "json, name=patientId" })
   patientId: string;
 }

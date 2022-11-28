@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -13,6 +17,7 @@ class ListStudioSessionMappingsXAmzTargetEnum(str, Enum):
 
 @dataclass
 class ListStudioSessionMappingsHeaders:
+    x_amz_target: ListStudioSessionMappingsXAmzTargetEnum = field(metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm', 'style': 'simple', 'explode': False }})
     x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256', 'style': 'simple', 'explode': False }})
     x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential', 'style': 'simple', 'explode': False }})
@@ -20,21 +25,20 @@ class ListStudioSessionMappingsHeaders:
     x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token', 'style': 'simple', 'explode': False }})
     x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature', 'style': 'simple', 'explode': False }})
     x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders', 'style': 'simple', 'explode': False }})
-    x_amz_target: ListStudioSessionMappingsXAmzTargetEnum = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ListStudioSessionMappingsRequest:
-    query_params: ListStudioSessionMappingsQueryParams = field(default=None)
-    headers: ListStudioSessionMappingsHeaders = field(default=None)
-    request: shared.ListStudioSessionMappingsInput = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ListStudioSessionMappingsHeaders = field()
+    query_params: ListStudioSessionMappingsQueryParams = field()
+    request: shared.ListStudioSessionMappingsInput = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ListStudioSessionMappingsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_server_error: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     list_studio_session_mappings_output: Optional[shared.ListStudioSessionMappingsOutput] = field(default=None)
-    status_code: int = field(default=None)
     

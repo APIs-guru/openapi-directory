@@ -11,7 +11,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://openbanking.org.uk",
 	"https://openbanking.org.uk/open-banking/v3.1/aisp",
 }
@@ -21,9 +21,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -34,27 +38,45 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// CreateAccountAccessConsents - Create Account Access Consents
 func (s *SDK) CreateAccountAccessConsents(ctx context.Context, request operations.CreateAccountAccessConsentsRequest) (*operations.CreateAccountAccessConsentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account-access-consents"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -74,7 +96,7 @@ func (s *SDK) CreateAccountAccessConsents(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -213,8 +235,9 @@ func (s *SDK) CreateAccountAccessConsents(ctx context.Context, request operation
 	return res, nil
 }
 
+// DeleteAccountAccessConsentsConsentID - Delete Account Access Consents
 func (s *SDK) DeleteAccountAccessConsentsConsentID(ctx context.Context, request operations.DeleteAccountAccessConsentsConsentIDRequest) (*operations.DeleteAccountAccessConsentsConsentIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/account-access-consents/{ConsentId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -224,7 +247,7 @@ func (s *SDK) DeleteAccountAccessConsentsConsentID(ctx context.Context, request 
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -337,8 +360,9 @@ func (s *SDK) DeleteAccountAccessConsentsConsentID(ctx context.Context, request 
 	return res, nil
 }
 
+// GetAccountAccessConsentsConsentID - Get Account Access Consents
 func (s *SDK) GetAccountAccessConsentsConsentID(ctx context.Context, request operations.GetAccountAccessConsentsConsentIDRequest) (*operations.GetAccountAccessConsentsConsentIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/account-access-consents/{ConsentId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -348,7 +372,7 @@ func (s *SDK) GetAccountAccessConsentsConsentID(ctx context.Context, request ope
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -484,8 +508,9 @@ func (s *SDK) GetAccountAccessConsentsConsentID(ctx context.Context, request ope
 	return res, nil
 }
 
+// GetAccounts - Get Accounts
 func (s *SDK) GetAccounts(ctx context.Context, request operations.GetAccountsRequest) (*operations.GetAccountsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/accounts"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -495,7 +520,7 @@ func (s *SDK) GetAccounts(ctx context.Context, request operations.GetAccountsReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -631,8 +656,9 @@ func (s *SDK) GetAccounts(ctx context.Context, request operations.GetAccountsReq
 	return res, nil
 }
 
+// GetAccountsAccountID - Get Accounts
 func (s *SDK) GetAccountsAccountID(ctx context.Context, request operations.GetAccountsAccountIDRequest) (*operations.GetAccountsAccountIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/accounts/{AccountId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -642,7 +668,7 @@ func (s *SDK) GetAccountsAccountID(ctx context.Context, request operations.GetAc
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -778,8 +804,9 @@ func (s *SDK) GetAccountsAccountID(ctx context.Context, request operations.GetAc
 	return res, nil
 }
 
+// GetAccountsAccountIDBalances - Get Balances
 func (s *SDK) GetAccountsAccountIDBalances(ctx context.Context, request operations.GetAccountsAccountIDBalancesRequest) (*operations.GetAccountsAccountIDBalancesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/accounts/{AccountId}/balances", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -789,7 +816,7 @@ func (s *SDK) GetAccountsAccountIDBalances(ctx context.Context, request operatio
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -925,8 +952,9 @@ func (s *SDK) GetAccountsAccountIDBalances(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetAccountsAccountIDBeneficiaries - Get Beneficiaries
 func (s *SDK) GetAccountsAccountIDBeneficiaries(ctx context.Context, request operations.GetAccountsAccountIDBeneficiariesRequest) (*operations.GetAccountsAccountIDBeneficiariesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/accounts/{AccountId}/beneficiaries", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -936,7 +964,7 @@ func (s *SDK) GetAccountsAccountIDBeneficiaries(ctx context.Context, request ope
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1075,8 +1103,9 @@ func (s *SDK) GetAccountsAccountIDBeneficiaries(ctx context.Context, request ope
 	return res, nil
 }
 
+// GetAccountsAccountIDDirectDebits - Get Direct Debits
 func (s *SDK) GetAccountsAccountIDDirectDebits(ctx context.Context, request operations.GetAccountsAccountIDDirectDebitsRequest) (*operations.GetAccountsAccountIDDirectDebitsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/accounts/{AccountId}/direct-debits", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1086,7 +1115,7 @@ func (s *SDK) GetAccountsAccountIDDirectDebits(ctx context.Context, request oper
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1225,8 +1254,9 @@ func (s *SDK) GetAccountsAccountIDDirectDebits(ctx context.Context, request oper
 	return res, nil
 }
 
+// GetAccountsAccountIDOffers - Get Offers
 func (s *SDK) GetAccountsAccountIDOffers(ctx context.Context, request operations.GetAccountsAccountIDOffersRequest) (*operations.GetAccountsAccountIDOffersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/accounts/{AccountId}/offers", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1236,7 +1266,7 @@ func (s *SDK) GetAccountsAccountIDOffers(ctx context.Context, request operations
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1375,8 +1405,9 @@ func (s *SDK) GetAccountsAccountIDOffers(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetAccountsAccountIDParties - Get Parties
 func (s *SDK) GetAccountsAccountIDParties(ctx context.Context, request operations.GetAccountsAccountIDPartiesRequest) (*operations.GetAccountsAccountIDPartiesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/accounts/{AccountId}/parties", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1386,7 +1417,7 @@ func (s *SDK) GetAccountsAccountIDParties(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1525,8 +1556,9 @@ func (s *SDK) GetAccountsAccountIDParties(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetAccountsAccountIDParty - Get Parties
 func (s *SDK) GetAccountsAccountIDParty(ctx context.Context, request operations.GetAccountsAccountIDPartyRequest) (*operations.GetAccountsAccountIDPartyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/accounts/{AccountId}/party", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1536,7 +1568,7 @@ func (s *SDK) GetAccountsAccountIDParty(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1675,8 +1707,9 @@ func (s *SDK) GetAccountsAccountIDParty(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetAccountsAccountIDProduct - Get Products
 func (s *SDK) GetAccountsAccountIDProduct(ctx context.Context, request operations.GetAccountsAccountIDProductRequest) (*operations.GetAccountsAccountIDProductResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/accounts/{AccountId}/product", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1686,7 +1719,7 @@ func (s *SDK) GetAccountsAccountIDProduct(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1825,8 +1858,9 @@ func (s *SDK) GetAccountsAccountIDProduct(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetAccountsAccountIDScheduledPayments - Get Scheduled Payments
 func (s *SDK) GetAccountsAccountIDScheduledPayments(ctx context.Context, request operations.GetAccountsAccountIDScheduledPaymentsRequest) (*operations.GetAccountsAccountIDScheduledPaymentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/accounts/{AccountId}/scheduled-payments", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1836,7 +1870,7 @@ func (s *SDK) GetAccountsAccountIDScheduledPayments(ctx context.Context, request
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1975,8 +2009,9 @@ func (s *SDK) GetAccountsAccountIDScheduledPayments(ctx context.Context, request
 	return res, nil
 }
 
+// GetAccountsAccountIDStandingOrders - Get Standing Orders
 func (s *SDK) GetAccountsAccountIDStandingOrders(ctx context.Context, request operations.GetAccountsAccountIDStandingOrdersRequest) (*operations.GetAccountsAccountIDStandingOrdersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/accounts/{AccountId}/standing-orders", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1986,7 +2021,7 @@ func (s *SDK) GetAccountsAccountIDStandingOrders(ctx context.Context, request op
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2125,8 +2160,9 @@ func (s *SDK) GetAccountsAccountIDStandingOrders(ctx context.Context, request op
 	return res, nil
 }
 
+// GetAccountsAccountIDStatements - Get Statements
 func (s *SDK) GetAccountsAccountIDStatements(ctx context.Context, request operations.GetAccountsAccountIDStatementsRequest) (*operations.GetAccountsAccountIDStatementsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/accounts/{AccountId}/statements", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2138,7 +2174,7 @@ func (s *SDK) GetAccountsAccountIDStatements(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2277,8 +2313,9 @@ func (s *SDK) GetAccountsAccountIDStatements(ctx context.Context, request operat
 	return res, nil
 }
 
+// GetAccountsAccountIDStatementsStatementID - Get Statements
 func (s *SDK) GetAccountsAccountIDStatementsStatementID(ctx context.Context, request operations.GetAccountsAccountIDStatementsStatementIDRequest) (*operations.GetAccountsAccountIDStatementsStatementIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/accounts/{AccountId}/statements/{StatementId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2288,7 +2325,7 @@ func (s *SDK) GetAccountsAccountIDStatementsStatementID(ctx context.Context, req
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2427,8 +2464,9 @@ func (s *SDK) GetAccountsAccountIDStatementsStatementID(ctx context.Context, req
 	return res, nil
 }
 
+// GetAccountsAccountIDStatementsStatementIDFile - Get Statements
 func (s *SDK) GetAccountsAccountIDStatementsStatementIDFile(ctx context.Context, request operations.GetAccountsAccountIDStatementsStatementIDFileRequest) (*operations.GetAccountsAccountIDStatementsStatementIDFileResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/accounts/{AccountId}/statements/{StatementId}/file", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2438,7 +2476,7 @@ func (s *SDK) GetAccountsAccountIDStatementsStatementIDFile(ctx context.Context,
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2577,8 +2615,9 @@ func (s *SDK) GetAccountsAccountIDStatementsStatementIDFile(ctx context.Context,
 	return res, nil
 }
 
+// GetAccountsAccountIDStatementsStatementIDTransactions - Get Transactions
 func (s *SDK) GetAccountsAccountIDStatementsStatementIDTransactions(ctx context.Context, request operations.GetAccountsAccountIDStatementsStatementIDTransactionsRequest) (*operations.GetAccountsAccountIDStatementsStatementIDTransactionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/accounts/{AccountId}/statements/{StatementId}/transactions", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2588,7 +2627,7 @@ func (s *SDK) GetAccountsAccountIDStatementsStatementIDTransactions(ctx context.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2727,8 +2766,9 @@ func (s *SDK) GetAccountsAccountIDStatementsStatementIDTransactions(ctx context.
 	return res, nil
 }
 
+// GetAccountsAccountIDTransactions - Get Transactions
 func (s *SDK) GetAccountsAccountIDTransactions(ctx context.Context, request operations.GetAccountsAccountIDTransactionsRequest) (*operations.GetAccountsAccountIDTransactionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/accounts/{AccountId}/transactions", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2740,7 +2780,7 @@ func (s *SDK) GetAccountsAccountIDTransactions(ctx context.Context, request oper
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2876,8 +2916,9 @@ func (s *SDK) GetAccountsAccountIDTransactions(ctx context.Context, request oper
 	return res, nil
 }
 
+// GetBalances - Get Balances
 func (s *SDK) GetBalances(ctx context.Context, request operations.GetBalancesRequest) (*operations.GetBalancesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/balances"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2887,7 +2928,7 @@ func (s *SDK) GetBalances(ctx context.Context, request operations.GetBalancesReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3026,8 +3067,9 @@ func (s *SDK) GetBalances(ctx context.Context, request operations.GetBalancesReq
 	return res, nil
 }
 
+// GetBeneficiaries - Get Beneficiaries
 func (s *SDK) GetBeneficiaries(ctx context.Context, request operations.GetBeneficiariesRequest) (*operations.GetBeneficiariesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/beneficiaries"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3037,7 +3079,7 @@ func (s *SDK) GetBeneficiaries(ctx context.Context, request operations.GetBenefi
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3176,8 +3218,9 @@ func (s *SDK) GetBeneficiaries(ctx context.Context, request operations.GetBenefi
 	return res, nil
 }
 
+// GetDirectDebits - Get Direct Debits
 func (s *SDK) GetDirectDebits(ctx context.Context, request operations.GetDirectDebitsRequest) (*operations.GetDirectDebitsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/direct-debits"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3187,7 +3230,7 @@ func (s *SDK) GetDirectDebits(ctx context.Context, request operations.GetDirectD
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3326,8 +3369,9 @@ func (s *SDK) GetDirectDebits(ctx context.Context, request operations.GetDirectD
 	return res, nil
 }
 
+// GetOffers - Get Offers
 func (s *SDK) GetOffers(ctx context.Context, request operations.GetOffersRequest) (*operations.GetOffersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/offers"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3337,7 +3381,7 @@ func (s *SDK) GetOffers(ctx context.Context, request operations.GetOffersRequest
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3476,8 +3520,9 @@ func (s *SDK) GetOffers(ctx context.Context, request operations.GetOffersRequest
 	return res, nil
 }
 
+// GetParty - Get Parties
 func (s *SDK) GetParty(ctx context.Context, request operations.GetPartyRequest) (*operations.GetPartyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/party"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3487,7 +3532,7 @@ func (s *SDK) GetParty(ctx context.Context, request operations.GetPartyRequest) 
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3626,8 +3671,9 @@ func (s *SDK) GetParty(ctx context.Context, request operations.GetPartyRequest) 
 	return res, nil
 }
 
+// GetProducts - Get Products
 func (s *SDK) GetProducts(ctx context.Context, request operations.GetProductsRequest) (*operations.GetProductsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/products"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3637,7 +3683,7 @@ func (s *SDK) GetProducts(ctx context.Context, request operations.GetProductsReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3776,8 +3822,9 @@ func (s *SDK) GetProducts(ctx context.Context, request operations.GetProductsReq
 	return res, nil
 }
 
+// GetScheduledPayments - Get Scheduled Payments
 func (s *SDK) GetScheduledPayments(ctx context.Context, request operations.GetScheduledPaymentsRequest) (*operations.GetScheduledPaymentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/scheduled-payments"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3787,7 +3834,7 @@ func (s *SDK) GetScheduledPayments(ctx context.Context, request operations.GetSc
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3926,8 +3973,9 @@ func (s *SDK) GetScheduledPayments(ctx context.Context, request operations.GetSc
 	return res, nil
 }
 
+// GetStandingOrders - Get Standing Orders
 func (s *SDK) GetStandingOrders(ctx context.Context, request operations.GetStandingOrdersRequest) (*operations.GetStandingOrdersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/standing-orders"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3937,7 +3985,7 @@ func (s *SDK) GetStandingOrders(ctx context.Context, request operations.GetStand
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4076,8 +4124,9 @@ func (s *SDK) GetStandingOrders(ctx context.Context, request operations.GetStand
 	return res, nil
 }
 
+// GetStatements - Get Statements
 func (s *SDK) GetStatements(ctx context.Context, request operations.GetStatementsRequest) (*operations.GetStatementsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/statements"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4089,7 +4138,7 @@ func (s *SDK) GetStatements(ctx context.Context, request operations.GetStatement
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4228,8 +4277,9 @@ func (s *SDK) GetStatements(ctx context.Context, request operations.GetStatement
 	return res, nil
 }
 
+// GetTransactions - Get Transactions
 func (s *SDK) GetTransactions(ctx context.Context, request operations.GetTransactionsRequest) (*operations.GetTransactionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/transactions"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4241,7 +4291,7 @@ func (s *SDK) GetTransactions(ctx context.Context, request operations.GetTransac
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {

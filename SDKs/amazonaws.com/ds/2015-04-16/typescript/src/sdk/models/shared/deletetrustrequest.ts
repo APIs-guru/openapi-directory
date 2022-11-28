@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DeleteTrustRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Deletes the local side of an existing trust relationship between the Managed Microsoft AD directory and the external domain.
 **/
 export class DeleteTrustRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DeleteAssociatedConditionalForwarder" })
+  @SpeakeasyMetadata({ data: "json, name=DeleteAssociatedConditionalForwarder" })
   deleteAssociatedConditionalForwarder?: boolean;
 
-  @Metadata({ data: "json, name=TrustId" })
+  @SpeakeasyMetadata({ data: "json, name=TrustId" })
   trustId: string;
 }

@@ -1,17 +1,20 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetCandidateCandidateIDHistoryCyclePathParams:
-    candidate_id: str = field(default=None, metadata={'path_param': { 'field_name': 'candidate_id', 'style': 'simple', 'explode': False }})
-    cycle: int = field(default=None, metadata={'path_param': { 'field_name': 'cycle', 'style': 'simple', 'explode': False }})
+    candidate_id: str = field(metadata={'path_param': { 'field_name': 'candidate_id', 'style': 'simple', 'explode': False }})
+    cycle: int = field(metadata={'path_param': { 'field_name': 'cycle', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetCandidateCandidateIDHistoryCycleQueryParams:
-    api_key: str = field(default=None, metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
+    api_key: str = field(metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
     election_full: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'election_full', 'style': 'form', 'explode': True }})
     page: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'page', 'style': 'form', 'explode': True }})
     per_page: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'per_page', 'style': 'form', 'explode': True }})
@@ -23,13 +26,13 @@ class GetCandidateCandidateIDHistoryCycleQueryParams:
 
 @dataclass
 class GetCandidateCandidateIDHistoryCycleRequest:
-    path_params: GetCandidateCandidateIDHistoryCyclePathParams = field(default=None)
-    query_params: GetCandidateCandidateIDHistoryCycleQueryParams = field(default=None)
+    path_params: GetCandidateCandidateIDHistoryCyclePathParams = field()
+    query_params: GetCandidateCandidateIDHistoryCycleQueryParams = field()
     
 
 @dataclass
 class GetCandidateCandidateIDHistoryCycleResponse:
+    content_type: str = field()
+    status_code: int = field()
     candidate_history_page: Optional[shared.CandidateHistoryPage] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

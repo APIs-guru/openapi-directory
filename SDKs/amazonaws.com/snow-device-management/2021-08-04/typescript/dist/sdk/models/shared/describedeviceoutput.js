@@ -22,9 +22,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Capacity } from "./capacity";
 import { UnlockStateEnum } from "./unlockstateenum";
+import { PhysicalNetworkInterface } from "./physicalnetworkinterface";
 import { SoftwareInformation } from "./softwareinformation";
 var DescribeDeviceOutput = /** @class */ (function (_super) {
     __extends(DescribeDeviceOutput, _super);
@@ -32,47 +33,47 @@ var DescribeDeviceOutput = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=associatedWithJob" }),
+        SpeakeasyMetadata({ data: "json, name=associatedWithJob" }),
         __metadata("design:type", String)
     ], DescribeDeviceOutput.prototype, "associatedWithJob", void 0);
     __decorate([
-        Metadata({ data: "json, name=deviceCapacities", elemType: shared.Capacity }),
+        SpeakeasyMetadata({ data: "json, name=deviceCapacities", elemType: Capacity }),
         __metadata("design:type", Array)
     ], DescribeDeviceOutput.prototype, "deviceCapacities", void 0);
     __decorate([
-        Metadata({ data: "json, name=deviceState" }),
+        SpeakeasyMetadata({ data: "json, name=deviceState" }),
         __metadata("design:type", String)
     ], DescribeDeviceOutput.prototype, "deviceState", void 0);
     __decorate([
-        Metadata({ data: "json, name=deviceType" }),
+        SpeakeasyMetadata({ data: "json, name=deviceType" }),
         __metadata("design:type", String)
     ], DescribeDeviceOutput.prototype, "deviceType", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastReachedOutAt" }),
+        SpeakeasyMetadata({ data: "json, name=lastReachedOutAt" }),
         __metadata("design:type", Date)
     ], DescribeDeviceOutput.prototype, "lastReachedOutAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastUpdatedAt" }),
+        SpeakeasyMetadata({ data: "json, name=lastUpdatedAt" }),
         __metadata("design:type", Date)
     ], DescribeDeviceOutput.prototype, "lastUpdatedAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=managedDeviceArn" }),
+        SpeakeasyMetadata({ data: "json, name=managedDeviceArn" }),
         __metadata("design:type", String)
     ], DescribeDeviceOutput.prototype, "managedDeviceArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=managedDeviceId" }),
+        SpeakeasyMetadata({ data: "json, name=managedDeviceId" }),
         __metadata("design:type", String)
     ], DescribeDeviceOutput.prototype, "managedDeviceId", void 0);
     __decorate([
-        Metadata({ data: "json, name=physicalNetworkInterfaces", elemType: shared.PhysicalNetworkInterface }),
+        SpeakeasyMetadata({ data: "json, name=physicalNetworkInterfaces", elemType: PhysicalNetworkInterface }),
         __metadata("design:type", Array)
     ], DescribeDeviceOutput.prototype, "physicalNetworkInterfaces", void 0);
     __decorate([
-        Metadata({ data: "json, name=software" }),
+        SpeakeasyMetadata({ data: "json, name=software" }),
         __metadata("design:type", SoftwareInformation)
     ], DescribeDeviceOutput.prototype, "software", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags" }),
+        SpeakeasyMetadata({ data: "json, name=tags" }),
         __metadata("design:type", Map)
     ], DescribeDeviceOutput.prototype, "tags", void 0);
     return DescribeDeviceOutput;

@@ -1,6 +1,7 @@
 
 
+
 export enum SplunkS3BackupModeEnum {
-    FailedEventsOnly = "FailedEventsOnly"
-,    AllEvents = "AllEvents"
+    FailedEventsOnly = "FailedEventsOnly",
+    AllEvents = "AllEvents"
 }

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ObFundsConfirmationResponse1DataInstructedAmount
+// Amount of money to be confirmed as available funds in the debtor account. Contains an Amount and a Currency.
 type ObFundsConfirmationResponse1DataInstructedAmount struct {
 	Amount   string `json:"Amount"`
 	Currency string `json:"Currency"`

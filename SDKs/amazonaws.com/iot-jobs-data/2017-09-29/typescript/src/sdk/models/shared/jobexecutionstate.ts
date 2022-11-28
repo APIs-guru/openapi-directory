@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { JobExecutionStatusEnum } from "./jobexecutionstatusenum";
+
 
 
 // JobExecutionState
@@ -7,12 +8,12 @@ import { JobExecutionStatusEnum } from "./jobexecutionstatusenum";
  * Contains data about the state of a job execution.
 **/
 export class JobExecutionState extends SpeakeasyBase {
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: JobExecutionStatusEnum;
 
-  @Metadata({ data: "json, name=statusDetails" })
+  @SpeakeasyMetadata({ data: "json, name=statusDetails" })
   statusDetails?: Map<string, string>;
 
-  @Metadata({ data: "json, name=versionNumber" })
+  @SpeakeasyMetadata({ data: "json, name=versionNumber" })
   versionNumber?: number;
 }

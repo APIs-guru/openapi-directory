@@ -1,23 +1,23 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import googleidentityaccesscontextmanagerv1accesslevel
-from . import googleidentityaccesscontextmanagerv1accesspolicy
-from . import policy
-from . import googlecloudorgpolicyv1policy
-from . import resource
-from . import googleidentityaccesscontextmanagerv1serviceperimeter
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Asset:
-    access_level: Optional[googleidentityaccesscontextmanagerv1accesslevel.GoogleIdentityAccesscontextmanagerV1AccessLevel] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'accessLevel' }})
-    access_policy: Optional[googleidentityaccesscontextmanagerv1accesspolicy.GoogleIdentityAccesscontextmanagerV1AccessPolicy] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'accessPolicy' }})
-    asset_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'assetType' }})
-    iam_policy: Optional[policy.Policy] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'iamPolicy' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    org_policy: Optional[List[googlecloudorgpolicyv1policy.GoogleCloudOrgpolicyV1Policy]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'orgPolicy' }})
-    resource: Optional[resource.Resource] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resource' }})
-    service_perimeter: Optional[googleidentityaccesscontextmanagerv1serviceperimeter.GoogleIdentityAccesscontextmanagerV1ServicePerimeter] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'servicePerimeter' }})
+    r"""Asset
+    An asset in Google Cloud. An asset can be any resource in the Google Cloud [resource hierarchy](https://cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy), a resource outside the Google Cloud resource hierarchy (such as Google Kubernetes Engine clusters and objects), or a policy (e.g. Cloud IAM policy). See [Supported asset types](https://cloud.google.com/asset-inventory/docs/supported-asset-types) for more information.
+    """
+    
+    access_level: Optional[GoogleIdentityAccesscontextmanagerV1AccessLevel] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('accessLevel') }})
+    access_policy: Optional[GoogleIdentityAccesscontextmanagerV1AccessPolicy] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('accessPolicy') }})
+    asset_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('assetType') }})
+    iam_policy: Optional[Policy] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('iamPolicy') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    org_policy: Optional[List[GoogleCloudOrgpolicyV1Policy]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('orgPolicy') }})
+    resource: Optional[Resource] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resource') }})
+    service_perimeter: Optional[GoogleIdentityAccesscontextmanagerV1ServicePerimeter] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('servicePerimeter') }})
     

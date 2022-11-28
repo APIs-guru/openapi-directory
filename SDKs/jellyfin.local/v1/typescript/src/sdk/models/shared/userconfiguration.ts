@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SubtitlePlaybackModeEnum } from "./subtitleplaybackmodeenum";
+
 
 
 // UserConfiguration
@@ -7,48 +8,48 @@ import { SubtitlePlaybackModeEnum } from "./subtitleplaybackmodeenum";
  * Class UserConfiguration.
 **/
 export class UserConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AudioLanguagePreference" })
+  @SpeakeasyMetadata({ data: "json, name=AudioLanguagePreference" })
   audioLanguagePreference?: string;
 
-  @Metadata({ data: "json, name=DisplayCollectionsView" })
+  @SpeakeasyMetadata({ data: "json, name=DisplayCollectionsView" })
   displayCollectionsView?: boolean;
 
-  @Metadata({ data: "json, name=DisplayMissingEpisodes" })
+  @SpeakeasyMetadata({ data: "json, name=DisplayMissingEpisodes" })
   displayMissingEpisodes?: boolean;
 
-  @Metadata({ data: "json, name=EnableLocalPassword" })
+  @SpeakeasyMetadata({ data: "json, name=EnableLocalPassword" })
   enableLocalPassword?: boolean;
 
-  @Metadata({ data: "json, name=EnableNextEpisodeAutoPlay" })
+  @SpeakeasyMetadata({ data: "json, name=EnableNextEpisodeAutoPlay" })
   enableNextEpisodeAutoPlay?: boolean;
 
-  @Metadata({ data: "json, name=GroupedFolders" })
+  @SpeakeasyMetadata({ data: "json, name=GroupedFolders" })
   groupedFolders?: string[];
 
-  @Metadata({ data: "json, name=HidePlayedInLatest" })
+  @SpeakeasyMetadata({ data: "json, name=HidePlayedInLatest" })
   hidePlayedInLatest?: boolean;
 
-  @Metadata({ data: "json, name=LatestItemsExcludes" })
+  @SpeakeasyMetadata({ data: "json, name=LatestItemsExcludes" })
   latestItemsExcludes?: string[];
 
-  @Metadata({ data: "json, name=MyMediaExcludes" })
+  @SpeakeasyMetadata({ data: "json, name=MyMediaExcludes" })
   myMediaExcludes?: string[];
 
-  @Metadata({ data: "json, name=OrderedViews" })
+  @SpeakeasyMetadata({ data: "json, name=OrderedViews" })
   orderedViews?: string[];
 
-  @Metadata({ data: "json, name=PlayDefaultAudioTrack" })
+  @SpeakeasyMetadata({ data: "json, name=PlayDefaultAudioTrack" })
   playDefaultAudioTrack?: boolean;
 
-  @Metadata({ data: "json, name=RememberAudioSelections" })
+  @SpeakeasyMetadata({ data: "json, name=RememberAudioSelections" })
   rememberAudioSelections?: boolean;
 
-  @Metadata({ data: "json, name=RememberSubtitleSelections" })
+  @SpeakeasyMetadata({ data: "json, name=RememberSubtitleSelections" })
   rememberSubtitleSelections?: boolean;
 
-  @Metadata({ data: "json, name=SubtitleLanguagePreference" })
+  @SpeakeasyMetadata({ data: "json, name=SubtitleLanguagePreference" })
   subtitleLanguagePreference?: string;
 
-  @Metadata({ data: "json, name=SubtitleMode" })
+  @SpeakeasyMetadata({ data: "json, name=SubtitleMode" })
   subtitleMode?: SubtitlePlaybackModeEnum;
 }

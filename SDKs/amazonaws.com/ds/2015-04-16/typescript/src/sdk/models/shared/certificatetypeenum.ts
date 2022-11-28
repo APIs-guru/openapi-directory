@@ -1,6 +1,7 @@
 
 
+
 export enum CertificateTypeEnum {
-    ClientCertAuth = "ClientCertAuth"
-,    ClientLdaps = "ClientLDAPS"
+    ClientCertAuth = "ClientCertAuth",
+    ClientLdaps = "ClientLDAPS"
 }

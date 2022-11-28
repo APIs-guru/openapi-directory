@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // SnapshotLimits
 /**
  * Contains manual snapshot limit information for a directory.
@@ -33,15 +33,15 @@ var SnapshotLimits = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ManualSnapshotsCurrentCount" }),
+        SpeakeasyMetadata({ data: "json, name=ManualSnapshotsCurrentCount" }),
         __metadata("design:type", Number)
     ], SnapshotLimits.prototype, "manualSnapshotsCurrentCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=ManualSnapshotsLimit" }),
+        SpeakeasyMetadata({ data: "json, name=ManualSnapshotsLimit" }),
         __metadata("design:type", Number)
     ], SnapshotLimits.prototype, "manualSnapshotsLimit", void 0);
     __decorate([
-        Metadata({ data: "json, name=ManualSnapshotsLimitReached" }),
+        SpeakeasyMetadata({ data: "json, name=ManualSnapshotsLimitReached" }),
         __metadata("design:type", Boolean)
     ], SnapshotLimits.prototype, "manualSnapshotsLimitReached", void 0);
     return SnapshotLimits;

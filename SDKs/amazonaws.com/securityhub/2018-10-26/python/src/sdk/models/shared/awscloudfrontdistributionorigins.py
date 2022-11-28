@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import awscloudfrontdistributionoriginitem
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AwsCloudFrontDistributionOrigins:
-    items: Optional[List[awscloudfrontdistributionoriginitem.AwsCloudFrontDistributionOriginItem]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Items' }})
+    r"""AwsCloudFrontDistributionOrigins
+    A complex type that contains information about origins and origin groups for this distribution.
+    """
+    
+    items: Optional[List[AwsCloudFrontDistributionOriginItem]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Items') }})
     

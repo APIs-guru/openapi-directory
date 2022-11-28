@@ -4,10 +4,6 @@ type PadUsersUsingGetQueryParams struct {
 	PadID *string `queryParam:"style=form,explode=true,name=padID"`
 }
 
-type PadUsersUsingGetRequest struct {
-	QueryParams PadUsersUsingGetQueryParams
-}
-
 type PadUsersUsingGet200ApplicationJSONDataPadUsers struct {
 	ColorID   *string `json:"colorId,omitempty"`
 	ID        *string `json:"id,omitempty"`
@@ -41,6 +37,10 @@ type PadUsersUsingGet500ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
 	Message *string                `json:"message,omitempty"`
+}
+
+type PadUsersUsingGetRequest struct {
+	QueryParams PadUsersUsingGetQueryParams
 }
 
 type PadUsersUsingGetResponse struct {

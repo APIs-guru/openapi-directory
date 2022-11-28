@@ -16,6 +16,8 @@ const (
 	BulkCheckResponseBulkErrorCodeEnumErrorCodeFetchBudgetExhausted        BulkCheckResponseBulkErrorCodeEnum = "ERROR_CODE_FETCH_BUDGET_EXHAUSTED"
 )
 
+// BulkCheckResponse
+// Response for BulkCheck call. Results are sent in a list in the same order in which they were sent. Individual check errors are described in the appropriate check_results entry. If the entire call fails, the response will include a bulk_error_code field describing the error.
 type BulkCheckResponse struct {
 	BulkErrorCode *BulkCheckResponseBulkErrorCodeEnum `json:"bulkErrorCode,omitempty"`
 	CheckResults  []CheckResponse                     `json:"checkResults,omitempty"`

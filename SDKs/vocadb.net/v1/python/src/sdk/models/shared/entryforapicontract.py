@@ -1,14 +1,12 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import entrythumbforapicontract
-from . import localizedstringcontract
-from . import pvcontract
-from . import tagusageforapicontract
-from . import archivedweblinkcontract
+from sdk import utils
+from . import *
 
 class EntryForAPIContractArtistTypeEnum(str, Enum):
     UNKNOWN = "Unknown"
@@ -107,29 +105,29 @@ class EntryForAPIContractStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class EntryForAPIContract:
-    activity_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'activityDate', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    additional_names: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'additionalNames' }})
-    artist_string: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'artistString' }})
-    artist_type: Optional[EntryForAPIContractArtistTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'artistType' }})
-    create_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createDate', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    default_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'defaultName' }})
-    default_name_language: Optional[EntryForAPIContractDefaultNameLanguageEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'defaultNameLanguage' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    disc_type: Optional[EntryForAPIContractDiscTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'discType' }})
-    entry_type: Optional[EntryForAPIContractEntryTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'entryType' }})
-    event_category: Optional[EntryForAPIContractEventCategoryEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'eventCategory' }})
-    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    main_picture: Optional[entrythumbforapicontract.EntryThumbForAPIContract] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mainPicture' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    names: Optional[List[localizedstringcontract.LocalizedStringContract]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'names' }})
-    p_vs: Optional[List[pvcontract.PvContract]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pVs' }})
-    release_event_series_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'releaseEventSeriesName' }})
-    song_list_featured_category: Optional[EntryForAPIContractSongListFeaturedCategoryEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'songListFeaturedCategory' }})
-    song_type: Optional[EntryForAPIContractSongTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'songType' }})
-    status: Optional[EntryForAPIContractStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    tag_category_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tagCategoryName' }})
-    tags: Optional[List[tagusageforapicontract.TagUsageForAPIContract]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
-    url_slug: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'urlSlug' }})
-    version: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'version' }})
-    web_links: Optional[List[archivedweblinkcontract.ArchivedWebLinkContract]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'webLinks' }})
+    activity_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('activityDate'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    additional_names: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('additionalNames') }})
+    artist_string: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('artistString') }})
+    artist_type: Optional[EntryForAPIContractArtistTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('artistType') }})
+    create_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createDate'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    default_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('defaultName') }})
+    default_name_language: Optional[EntryForAPIContractDefaultNameLanguageEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('defaultNameLanguage') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    disc_type: Optional[EntryForAPIContractDiscTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('discType') }})
+    entry_type: Optional[EntryForAPIContractEntryTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('entryType') }})
+    event_category: Optional[EntryForAPIContractEventCategoryEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('eventCategory') }})
+    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    main_picture: Optional[EntryThumbForAPIContract] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mainPicture') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    names: Optional[List[LocalizedStringContract]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('names') }})
+    p_vs: Optional[List[PvContract]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pVs') }})
+    release_event_series_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('releaseEventSeriesName') }})
+    song_list_featured_category: Optional[EntryForAPIContractSongListFeaturedCategoryEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('songListFeaturedCategory') }})
+    song_type: Optional[EntryForAPIContractSongTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('songType') }})
+    status: Optional[EntryForAPIContractStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    tag_category_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tagCategoryName') }})
+    tags: Optional[List[TagUsageForAPIContract]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
+    url_slug: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('urlSlug') }})
+    version: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('version') }})
+    web_links: Optional[List[ArchivedWebLinkContract]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('webLinks') }})
     

@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import option
+from sdk import utils
+from . import *
 
 class FieldCardinalityEnum(str, Enum):
     CARDINALITY_UNKNOWN = "CARDINALITY_UNKNOWN"
@@ -34,14 +36,18 @@ class FieldKindEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Field:
-    cardinality: Optional[FieldCardinalityEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cardinality' }})
-    default_value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'defaultValue' }})
-    json_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'jsonName' }})
-    kind: Optional[FieldKindEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    number: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'number' }})
-    oneof_index: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'oneofIndex' }})
-    options: Optional[List[option.Option]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    packed: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'packed' }})
-    type_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'typeUrl' }})
+    r"""Field
+    A single field of a message type.
+    """
+    
+    cardinality: Optional[FieldCardinalityEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cardinality') }})
+    default_value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('defaultValue') }})
+    json_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('jsonName') }})
+    kind: Optional[FieldKindEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    number: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('number') }})
+    oneof_index: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('oneofIndex') }})
+    options: Optional[List[Option]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    packed: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('packed') }})
+    type_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('typeUrl') }})
     

@@ -4,7 +4,7 @@ from typing import Optional
 
 @dataclass
 class ContentSearchContentWithTextPathParams:
-    locale: str = field(default=None, metadata={'path_param': { 'field_name': 'locale', 'style': 'simple', 'explode': False }})
+    locale: str = field(metadata={'path_param': { 'field_name': 'locale', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -19,13 +19,13 @@ class ContentSearchContentWithTextQueryParams:
 
 @dataclass
 class ContentSearchContentWithTextRequest:
-    path_params: ContentSearchContentWithTextPathParams = field(default=None)
-    query_params: ContentSearchContentWithTextQueryParams = field(default=None)
+    path_params: ContentSearchContentWithTextPathParams = field()
+    query_params: ContentSearchContentWithTextQueryParams = field()
     
 
 @dataclass
 class ContentSearchContentWithTextResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

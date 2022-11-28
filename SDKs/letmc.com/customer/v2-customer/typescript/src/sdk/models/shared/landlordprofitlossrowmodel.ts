@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { KeyValuePairStringString } from "./keyvaluepairstringstring";
+
 
 
 // LandlordProfitLossRowModel
@@ -8,15 +8,15 @@ import { KeyValuePairStringString } from "./keyvaluepairstringstring";
  * Class for a group of entries.
 **/
 export class LandlordProfitLossRowModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MonthTotals", elemType: shared.KeyValuePairStringString })
+  @SpeakeasyMetadata({ data: "json, name=MonthTotals", elemType: KeyValuePairStringString })
   monthTotals?: KeyValuePairStringString[];
 
-  @Metadata({ data: "json, name=NominalCode" })
+  @SpeakeasyMetadata({ data: "json, name=NominalCode" })
   nominalCode?: string;
 
-  @Metadata({ data: "json, name=Title" })
+  @SpeakeasyMetadata({ data: "json, name=Title" })
   title?: string;
 
-  @Metadata({ data: "json, name=Total" })
+  @SpeakeasyMetadata({ data: "json, name=Total" })
   total?: string;
 }

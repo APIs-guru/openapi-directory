@@ -8,6 +8,21 @@ const (
 	CertificateSubjectModeEnumReflectedSpiffe               CertificateSubjectModeEnum = "REFLECTED_SPIFFE"
 )
 
+// CertificateInput
+// A Certificate corresponds to a signed X.509 certificate issued by a CertificateAuthority.
+type CertificateInput struct {
+	CertificateDescription *CertificateDescription     `json:"certificateDescription,omitempty"`
+	CertificateTemplate    *string                     `json:"certificateTemplate,omitempty"`
+	Config                 *CertificateConfig          `json:"config,omitempty"`
+	Labels                 map[string]string           `json:"labels,omitempty"`
+	Lifetime               *string                     `json:"lifetime,omitempty"`
+	PemCsr                 *string                     `json:"pemCsr,omitempty"`
+	RevocationDetails      *RevocationDetails          `json:"revocationDetails,omitempty"`
+	SubjectMode            *CertificateSubjectModeEnum `json:"subjectMode,omitempty"`
+}
+
+// Certificate
+// A Certificate corresponds to a signed X.509 certificate issued by a CertificateAuthority.
 type Certificate struct {
 	CertificateDescription     *CertificateDescription     `json:"certificateDescription,omitempty"`
 	CertificateTemplate        *string                     `json:"certificateTemplate,omitempty"`

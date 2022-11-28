@@ -4,7 +4,7 @@ from typing import Optional
 
 @dataclass
 class GetForecastResultJobIDPathParams:
-    job_id: int = field(default=None, metadata={'path_param': { 'field_name': 'jobId', 'style': 'simple', 'explode': False }})
+    job_id: int = field(metadata={'path_param': { 'field_name': 'jobId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -14,12 +14,12 @@ class GetForecastResultJobIDHeaders:
 
 @dataclass
 class GetForecastResultJobIDRequest:
-    path_params: GetForecastResultJobIDPathParams = field(default=None)
-    headers: GetForecastResultJobIDHeaders = field(default=None)
+    headers: GetForecastResultJobIDHeaders = field()
+    path_params: GetForecastResultJobIDPathParams = field()
     
 
 @dataclass
 class GetForecastResultJobIDResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import googleclouddataplexv1partition
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleCloudDataplexV1ListPartitionsResponse:
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextPageToken' }})
-    partitions: Optional[List[googleclouddataplexv1partition.GoogleCloudDataplexV1Partition]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'partitions' }})
+    r"""GoogleCloudDataplexV1ListPartitionsResponse
+    List metadata partitions response.
+    """
+    
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextPageToken') }})
+    partitions: Optional[List[GoogleCloudDataplexV1Partition]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('partitions') }})
     

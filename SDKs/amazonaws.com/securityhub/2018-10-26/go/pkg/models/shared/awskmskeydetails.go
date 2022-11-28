@@ -1,5 +1,7 @@
 package shared
 
+// AwsKmsKeyDetails
+// Contains metadata about an KMS key.
 type AwsKmsKeyDetails struct {
 	AwsAccountID      *string  `json:"AWSAccountId,omitempty"`
 	CreationDate      *float64 `json:"CreationDate,omitempty"`

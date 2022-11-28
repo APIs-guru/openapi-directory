@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import standarderror
-from . import marketingeventpublicdefaultresponse
+from sdk import utils
+from . import *
 
 class BatchResponseMarketingEventPublicDefaultResponseStatusEnum(str, Enum):
     PENDING = "PENDING"
@@ -17,12 +18,12 @@ class BatchResponseMarketingEventPublicDefaultResponseStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class BatchResponseMarketingEventPublicDefaultResponse:
-    completed_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'completedAt', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    errors: Optional[List[standarderror.StandardError]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errors' }})
-    links: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'links' }})
-    num_errors: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'numErrors' }})
-    requested_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'requestedAt', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    results: List[marketingeventpublicdefaultresponse.MarketingEventPublicDefaultResponse] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'results' }})
-    started_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'startedAt', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    status: BatchResponseMarketingEventPublicDefaultResponseStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    completed_at: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('completedAt'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    results: List[MarketingEventPublicDefaultResponse] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('results') }})
+    started_at: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('startedAt'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    status: BatchResponseMarketingEventPublicDefaultResponseStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    errors: Optional[List[StandardError]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errors') }})
+    links: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('links') }})
+    num_errors: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('numErrors') }})
+    requested_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('requestedAt'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     

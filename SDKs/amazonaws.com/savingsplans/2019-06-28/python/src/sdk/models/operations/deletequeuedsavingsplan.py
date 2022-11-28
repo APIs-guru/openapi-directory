@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
@@ -17,22 +21,22 @@ class DeleteQueuedSavingsPlanHeaders:
 @dataclass_json
 @dataclass
 class DeleteQueuedSavingsPlanRequestBody:
-    savings_plan_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'savingsPlanId' }})
+    savings_plan_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('savingsPlanId') }})
     
 
 @dataclass
 class DeleteQueuedSavingsPlanRequest:
-    headers: DeleteQueuedSavingsPlanHeaders = field(default=None)
-    request: DeleteQueuedSavingsPlanRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: DeleteQueuedSavingsPlanHeaders = field()
+    request: DeleteQueuedSavingsPlanRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DeleteQueuedSavingsPlanResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     delete_queued_savings_plan_response: Optional[dict[str, Any]] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_quota_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

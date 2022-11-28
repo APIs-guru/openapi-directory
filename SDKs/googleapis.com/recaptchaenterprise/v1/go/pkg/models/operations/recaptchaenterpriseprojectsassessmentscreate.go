@@ -30,7 +30,7 @@ type RecaptchaenterpriseProjectsAssessmentsCreateSecurity struct {
 type RecaptchaenterpriseProjectsAssessmentsCreateRequest struct {
 	PathParams  RecaptchaenterpriseProjectsAssessmentsCreatePathParams
 	QueryParams RecaptchaenterpriseProjectsAssessmentsCreateQueryParams
-	Request     *shared.GoogleCloudRecaptchaenterpriseV1Assessment `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudRecaptchaenterpriseV1AssessmentInput `request:"mediaType=application/json"`
 	Security    RecaptchaenterpriseProjectsAssessmentsCreateSecurity
 }
 

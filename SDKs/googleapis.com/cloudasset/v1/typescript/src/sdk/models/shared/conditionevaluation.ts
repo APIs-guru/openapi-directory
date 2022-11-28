@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ConditionEvaluationEvaluationValueEnum {
-    EvaluationValueUnspecified = "EVALUATION_VALUE_UNSPECIFIED"
-,    True = "TRUE"
-,    False = "FALSE"
-,    Conditional = "CONDITIONAL"
+    EvaluationValueUnspecified = "EVALUATION_VALUE_UNSPECIFIED",
+    True = "TRUE",
+    False = "FALSE",
+    Conditional = "CONDITIONAL"
 }
 
 
@@ -13,6 +14,6 @@ export enum ConditionEvaluationEvaluationValueEnum {
  * The Condition evaluation.
 **/
 export class ConditionEvaluation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=evaluationValue" })
+  @SpeakeasyMetadata({ data: "json, name=evaluationValue" })
   evaluationValue?: ConditionEvaluationEvaluationValueEnum;
 }

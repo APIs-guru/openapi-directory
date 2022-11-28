@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class StudioStateEnum(str, Enum):
     CREATE_IN_PROGRESS = "CREATE_IN_PROGRESS"

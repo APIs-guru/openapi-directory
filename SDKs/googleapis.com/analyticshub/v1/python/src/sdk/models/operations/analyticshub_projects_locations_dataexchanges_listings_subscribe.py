@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AnalyticshubProjectsLocationsDataExchangesListingsSubscribePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class AnalyticshubProjectsLocationsDataExchangesListingsSubscribeQueryParams:
 
 @dataclass
 class AnalyticshubProjectsLocationsDataExchangesListingsSubscribeSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AnalyticshubProjectsLocationsDataExchangesListingsSubscribeSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class AnalyticshubProjectsLocationsDataExchangesListingsSubscribeSecurity:
 
 @dataclass
 class AnalyticshubProjectsLocationsDataExchangesListingsSubscribeRequest:
-    path_params: AnalyticshubProjectsLocationsDataExchangesListingsSubscribePathParams = field(default=None)
-    query_params: AnalyticshubProjectsLocationsDataExchangesListingsSubscribeQueryParams = field(default=None)
+    path_params: AnalyticshubProjectsLocationsDataExchangesListingsSubscribePathParams = field()
+    query_params: AnalyticshubProjectsLocationsDataExchangesListingsSubscribeQueryParams = field()
+    security: AnalyticshubProjectsLocationsDataExchangesListingsSubscribeSecurity = field()
     request: Optional[shared.SubscribeListingRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AnalyticshubProjectsLocationsDataExchangesListingsSubscribeSecurity = field(default=None)
     
 
 @dataclass
 class AnalyticshubProjectsLocationsDataExchangesListingsSubscribeResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     subscribe_listing_response: Optional[dict[str, Any]] = field(default=None)
     

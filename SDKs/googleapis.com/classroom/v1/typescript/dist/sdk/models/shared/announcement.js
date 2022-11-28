@@ -22,9 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IndividualStudentsOptions } from "./individualstudentsoptions";
+import { Material } from "./material";
 export var AnnouncementAssigneeModeEnum;
 (function (AnnouncementAssigneeModeEnum) {
     AnnouncementAssigneeModeEnum["AssigneeModeUnspecified"] = "ASSIGNEE_MODE_UNSPECIFIED";
@@ -48,51 +48,51 @@ var Announcement = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=alternateLink" }),
+        SpeakeasyMetadata({ data: "json, name=alternateLink" }),
         __metadata("design:type", String)
     ], Announcement.prototype, "alternateLink", void 0);
     __decorate([
-        Metadata({ data: "json, name=assigneeMode" }),
+        SpeakeasyMetadata({ data: "json, name=assigneeMode" }),
         __metadata("design:type", String)
     ], Announcement.prototype, "assigneeMode", void 0);
     __decorate([
-        Metadata({ data: "json, name=courseId" }),
+        SpeakeasyMetadata({ data: "json, name=courseId" }),
         __metadata("design:type", String)
     ], Announcement.prototype, "courseId", void 0);
     __decorate([
-        Metadata({ data: "json, name=creationTime" }),
+        SpeakeasyMetadata({ data: "json, name=creationTime" }),
         __metadata("design:type", String)
     ], Announcement.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=creatorUserId" }),
+        SpeakeasyMetadata({ data: "json, name=creatorUserId" }),
         __metadata("design:type", String)
     ], Announcement.prototype, "creatorUserId", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], Announcement.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=individualStudentsOptions" }),
+        SpeakeasyMetadata({ data: "json, name=individualStudentsOptions" }),
         __metadata("design:type", IndividualStudentsOptions)
     ], Announcement.prototype, "individualStudentsOptions", void 0);
     __decorate([
-        Metadata({ data: "json, name=materials", elemType: shared.Material }),
+        SpeakeasyMetadata({ data: "json, name=materials", elemType: Material }),
         __metadata("design:type", Array)
     ], Announcement.prototype, "materials", void 0);
     __decorate([
-        Metadata({ data: "json, name=scheduledTime" }),
+        SpeakeasyMetadata({ data: "json, name=scheduledTime" }),
         __metadata("design:type", String)
     ], Announcement.prototype, "scheduledTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], Announcement.prototype, "state", void 0);
     __decorate([
-        Metadata({ data: "json, name=text" }),
+        SpeakeasyMetadata({ data: "json, name=text" }),
         __metadata("design:type", String)
     ], Announcement.prototype, "text", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateTime" }),
+        SpeakeasyMetadata({ data: "json, name=updateTime" }),
         __metadata("design:type", String)
     ], Announcement.prototype, "updateTime", void 0);
     return Announcement;

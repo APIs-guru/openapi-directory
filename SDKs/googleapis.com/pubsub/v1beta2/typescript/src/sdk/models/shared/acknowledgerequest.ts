@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AcknowledgeRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request for the Acknowledge method.
 **/
 export class AcknowledgeRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ackIds" })
+  @SpeakeasyMetadata({ data: "json, name=ackIds" })
   ackIds?: string[];
 }

@@ -20,6 +20,8 @@ const (
 	UpdateOrganizationApplianceVpnThirdPartyVpnPeersRequestBodyPeersIpsecPoliciesIkePrfAlgoEnumDefault   UpdateOrganizationApplianceVpnThirdPartyVpnPeersRequestBodyPeersIpsecPoliciesIkePrfAlgoEnum = "default"
 )
 
+// UpdateOrganizationApplianceVpnThirdPartyVpnPeersRequestBodyPeersIpsecPolicies
+// Custom IPSec policies for the VPN peer. If not included and a preset has not been chosen, the default preset for IPSec policies will be used.
 type UpdateOrganizationApplianceVpnThirdPartyVpnPeersRequestBodyPeersIpsecPolicies struct {
 	ChildAuthAlgo         []string                                                                                      `json:"childAuthAlgo,omitempty"`
 	ChildCipherAlgo       []string                                                                                      `json:"childCipherAlgo,omitempty"`

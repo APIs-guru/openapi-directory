@@ -1,5 +1,7 @@
 package shared
 
+// Ec2CreateRouteAction
+// Information about the CreateRoute action in Amazon EC2.
 type Ec2CreateRouteAction struct {
 	Description              *string       `json:"Description,omitempty"`
 	DestinationCidrBlock     *string       `json:"DestinationCidrBlock,omitempty"`

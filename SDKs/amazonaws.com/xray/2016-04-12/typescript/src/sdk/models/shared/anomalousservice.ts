@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ServiceId } from "./serviceid";
+
 
 
 // AnomalousService
@@ -7,6 +8,6 @@ import { ServiceId } from "./serviceid";
  * The service within the service graph that has anomalously high fault rates. 
 **/
 export class AnomalousService extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ServiceId" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceId" })
   serviceId?: ServiceId;
 }

@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetaddressmatchQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=address" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=address" })
   address: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=license" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=license" })
   license: string;
 }
 
 
-export class GetaddressmatchRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetaddressmatchQueryParams;
-}
-
-
 export class Getaddressmatch200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Code" })
+  @SpeakeasyMetadata({ data: "json, name=Code" })
   code?: string;
 
-  @Metadata({ data: "json, name=Credits" })
+  @SpeakeasyMetadata({ data: "json, name=Credits" })
   credits?: string;
 
-  @Metadata({ data: "json, name=Simkey" })
+  @SpeakeasyMetadata({ data: "json, name=Simkey" })
   simkey?: string;
 }
 
 
+export class GetaddressmatchRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetaddressmatchQueryParams;
+}
+
+
 export class GetaddressmatchResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getaddressmatch200ApplicationJsonObject?: Getaddressmatch200ApplicationJson;
 }

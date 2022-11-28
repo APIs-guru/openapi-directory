@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class SendMessageCommandPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=sessionId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=sessionId" })
   sessionId: string;
 }
 
 
 export class SendMessageCommandQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=header" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=header" })
   header?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=text" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=text" })
   text: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=timeoutMs" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timeoutMs" })
   timeoutMs?: number;
 }
 
 
 export class SendMessageCommandSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   customAuthentication: shared.SchemeCustomAuthentication;
 }
 
 
 export class SendMessageCommandRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: SendMessageCommandPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: SendMessageCommandQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: SendMessageCommandSecurity;
 }
 
 
 export class SendMessageCommandResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

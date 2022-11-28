@@ -8,6 +8,8 @@ const (
 	PolicyGlobalPolicyEvaluationModeEnumDisable                               PolicyGlobalPolicyEvaluationModeEnum = "DISABLE"
 )
 
+// Policy
+// A policy for container image binary authorization.
 type Policy struct {
 	AdmissionWhitelistPatterns             []AdmissionWhitelistPattern           `json:"admissionWhitelistPatterns,omitempty"`
 	ClusterAdmissionRules                  map[string]AdmissionRule              `json:"clusterAdmissionRules,omitempty"`

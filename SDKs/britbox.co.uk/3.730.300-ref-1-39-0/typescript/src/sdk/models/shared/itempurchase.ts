@@ -1,48 +1,49 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ItemPurchaseOwnershipEnum {
-    Subscription = "Subscription"
-,    Free = "Free"
-,    Rent = "Rent"
-,    Own = "Own"
-,    None = "None"
+    Subscription = "Subscription",
+    Free = "Free",
+    Rent = "Rent",
+    Own = "Own",
+    None = "None"
 }
 
 export enum ItemPurchaseResolutionEnum {
-    Sd = "SD"
-,    Hd720 = "HD-720"
-,    Hd1080 = "HD-1080"
-,    Hd4K = "HD-4K"
-,    External = "External"
-,    Unknown = "Unknown"
+    Sd = "SD",
+    Hd720 = "HD-720",
+    Hd1080 = "HD-1080",
+    Hd4K = "HD-4K",
+    External = "External",
+    Unknown = "Unknown"
 }
 
 export enum ItemPurchaseTypeEnum {
-    Movie = "movie"
-,    Show = "show"
-,    Season = "season"
-,    Episode = "episode"
-,    Program = "program"
-,    Link = "link"
-,    Trailer = "trailer"
-,    Channel = "channel"
-,    CustomAsset = "customAsset"
+    Movie = "movie",
+    Show = "show",
+    Season = "season",
+    Episode = "episode",
+    Program = "program",
+    Link = "link",
+    Trailer = "trailer",
+    Channel = "channel",
+    CustomAsset = "customAsset"
 }
 
 
 export class ItemPurchase extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=ownership" })
+  @SpeakeasyMetadata({ data: "json, name=ownership" })
   ownership: ItemPurchaseOwnershipEnum;
 
-  @Metadata({ data: "json, name=resolution" })
+  @SpeakeasyMetadata({ data: "json, name=resolution" })
   resolution: ItemPurchaseResolutionEnum;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: ItemPurchaseTypeEnum;
 }

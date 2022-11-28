@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import action_enum
-from . import permission_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UserSetting:
-    action: action_enum.ActionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Action' }})
-    permission: permission_enum.PermissionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Permission' }})
+    r"""UserSetting
+    Describes an action and whether the action is enabled or disabled for users during their streaming sessions.
+    """
+    
+    action: ActionEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Action') }})
+    permission: PermissionEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Permission') }})
     

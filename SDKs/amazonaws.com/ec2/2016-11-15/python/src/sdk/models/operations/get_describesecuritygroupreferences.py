@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetDescribeSecurityGroupReferencesActionEnum(str, Enum):
     DESCRIBE_SECURITY_GROUP_REFERENCES = "DescribeSecurityGroupReferences"
@@ -10,10 +14,10 @@ class GetDescribeSecurityGroupReferencesVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeSecurityGroupReferencesQueryParams:
-    action: GetDescribeSecurityGroupReferencesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribeSecurityGroupReferencesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    group_id: List[str] = field(metadata={'query_param': { 'field_name': 'GroupId', 'style': 'form', 'explode': True }})
+    version: GetDescribeSecurityGroupReferencesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    group_id: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'GroupId', 'style': 'form', 'explode': True }})
-    version: GetDescribeSecurityGroupReferencesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetDescribeSecurityGroupReferencesHeaders:
 
 @dataclass
 class GetDescribeSecurityGroupReferencesRequest:
-    query_params: GetDescribeSecurityGroupReferencesQueryParams = field(default=None)
-    headers: GetDescribeSecurityGroupReferencesHeaders = field(default=None)
+    headers: GetDescribeSecurityGroupReferencesHeaders = field()
+    query_params: GetDescribeSecurityGroupReferencesQueryParams = field()
     
 
 @dataclass
 class GetDescribeSecurityGroupReferencesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

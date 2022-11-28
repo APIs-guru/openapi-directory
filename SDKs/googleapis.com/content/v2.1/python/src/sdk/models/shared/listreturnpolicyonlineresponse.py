@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import returnpolicyonline
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListReturnPolicyOnlineResponse:
-    return_policies: Optional[List[returnpolicyonline.ReturnPolicyOnline]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'returnPolicies' }})
+    r"""ListReturnPolicyOnlineResponse
+    Response message for the `ListReturnPolicyOnline` method.
+    """
+    
+    return_policies: Optional[List[ReturnPolicyOnline]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('returnPolicies') }})
     

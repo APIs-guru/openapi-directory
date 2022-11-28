@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Meta
@@ -7,12 +8,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * 
 **/
 export class Meta extends SpeakeasyBase {
-  @Metadata({ data: "json, name=msg" })
+  @SpeakeasyMetadata({ data: "json, name=msg" })
   msg?: string;
 
-  @Metadata({ data: "json, name=response_id" })
+  @SpeakeasyMetadata({ data: "json, name=response_id" })
   responseId?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: number;
 }

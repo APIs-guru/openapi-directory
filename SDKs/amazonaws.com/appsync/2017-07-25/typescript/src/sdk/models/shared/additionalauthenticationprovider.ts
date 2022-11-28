@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AuthenticationTypeEnum } from "./authenticationtypeenum";
 import { LambdaAuthorizerConfig } from "./lambdaauthorizerconfig";
 import { OpenIdConnectConfig } from "./openidconnectconfig";
 import { CognitoUserPoolConfig } from "./cognitouserpoolconfig";
+
 
 
 // AdditionalAuthenticationProvider
@@ -10,15 +11,15 @@ import { CognitoUserPoolConfig } from "./cognitouserpoolconfig";
  * Describes an additional authentication provider.
 **/
 export class AdditionalAuthenticationProvider extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authenticationType" })
+  @SpeakeasyMetadata({ data: "json, name=authenticationType" })
   authenticationType?: AuthenticationTypeEnum;
 
-  @Metadata({ data: "json, name=lambdaAuthorizerConfig" })
+  @SpeakeasyMetadata({ data: "json, name=lambdaAuthorizerConfig" })
   lambdaAuthorizerConfig?: LambdaAuthorizerConfig;
 
-  @Metadata({ data: "json, name=openIDConnectConfig" })
+  @SpeakeasyMetadata({ data: "json, name=openIDConnectConfig" })
   openIdConnectConfig?: OpenIdConnectConfig;
 
-  @Metadata({ data: "json, name=userPoolConfig" })
+  @SpeakeasyMetadata({ data: "json, name=userPoolConfig" })
   userPoolConfig?: CognitoUserPoolConfig;
 }

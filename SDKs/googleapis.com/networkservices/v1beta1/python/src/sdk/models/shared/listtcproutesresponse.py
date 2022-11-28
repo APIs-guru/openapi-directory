@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import tcproute
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListTCPRoutesResponse:
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextPageToken' }})
-    tcp_routes: Optional[List[tcproute.TCPRoute]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tcpRoutes' }})
+    r"""ListTCPRoutesResponse
+    Response returned by the ListTcpRoutes method.
+    """
+    
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextPageToken') }})
+    tcp_routes: Optional[List[TCPRoute]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tcpRoutes') }})
     

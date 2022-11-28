@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class DsRecordAlgorithmEnum(str, Enum):
     ALGORITHM_UNSPECIFIED = "ALGORITHM_UNSPECIFIED"
@@ -33,8 +35,12 @@ class DsRecordDigestTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class DsRecord:
-    algorithm: Optional[DsRecordAlgorithmEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'algorithm' }})
-    digest: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'digest' }})
-    digest_type: Optional[DsRecordDigestTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'digestType' }})
-    key_tag: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'keyTag' }})
+    r"""DsRecord
+    Defines a Delegation Signer (DS) record, which is needed to enable DNSSEC for a domain. It contains a digest (hash) of a DNSKEY record that must be present in the domain's DNS zone.
+    """
+    
+    algorithm: Optional[DsRecordAlgorithmEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('algorithm') }})
+    digest: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('digest') }})
+    digest_type: Optional[DsRecordDigestTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('digestType') }})
+    key_tag: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('keyTag') }})
     

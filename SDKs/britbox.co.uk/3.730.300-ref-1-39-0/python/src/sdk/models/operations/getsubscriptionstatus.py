@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetSubscriptionStatusPathParams:
-    platform: str = field(default=None, metadata={'path_param': { 'field_name': 'platform', 'style': 'simple', 'explode': False }})
+    platform: str = field(metadata={'path_param': { 'field_name': 'platform', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,19 +15,19 @@ class GetSubscriptionStatusQueryParams:
 
 @dataclass
 class GetSubscriptionStatusSecurity:
-    account_auth: shared.SchemeAccountAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    account_auth: shared.SchemeAccountAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetSubscriptionStatusRequest:
-    path_params: GetSubscriptionStatusPathParams = field(default=None)
-    query_params: GetSubscriptionStatusQueryParams = field(default=None)
-    security: GetSubscriptionStatusSecurity = field(default=None)
+    path_params: GetSubscriptionStatusPathParams = field()
+    query_params: GetSubscriptionStatusQueryParams = field()
+    security: GetSubscriptionStatusSecurity = field()
     
 
 @dataclass
 class GetSubscriptionStatusResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     itv_subscription_status_response: Optional[shared.ItvSubscriptionStatusResponse] = field(default=None)
-    status_code: int = field(default=None)
     

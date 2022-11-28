@@ -22,8 +22,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { CloudWatchLoggingOption } from "./cloudwatchloggingoption";
+import { Input } from "./input";
+import { Output } from "./output";
+import { Tag } from "./tag";
 // CreateApplicationRequest
 /**
  * TBD
@@ -34,31 +37,31 @@ var CreateApplicationRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ApplicationCode" }),
+        SpeakeasyMetadata({ data: "json, name=ApplicationCode" }),
         __metadata("design:type", String)
     ], CreateApplicationRequest.prototype, "applicationCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=ApplicationDescription" }),
+        SpeakeasyMetadata({ data: "json, name=ApplicationDescription" }),
         __metadata("design:type", String)
     ], CreateApplicationRequest.prototype, "applicationDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=ApplicationName" }),
+        SpeakeasyMetadata({ data: "json, name=ApplicationName" }),
         __metadata("design:type", String)
     ], CreateApplicationRequest.prototype, "applicationName", void 0);
     __decorate([
-        Metadata({ data: "json, name=CloudWatchLoggingOptions", elemType: shared.CloudWatchLoggingOption }),
+        SpeakeasyMetadata({ data: "json, name=CloudWatchLoggingOptions", elemType: CloudWatchLoggingOption }),
         __metadata("design:type", Array)
     ], CreateApplicationRequest.prototype, "cloudWatchLoggingOptions", void 0);
     __decorate([
-        Metadata({ data: "json, name=Inputs", elemType: shared.Input }),
+        SpeakeasyMetadata({ data: "json, name=Inputs", elemType: Input }),
         __metadata("design:type", Array)
     ], CreateApplicationRequest.prototype, "inputs", void 0);
     __decorate([
-        Metadata({ data: "json, name=Outputs", elemType: shared.Output }),
+        SpeakeasyMetadata({ data: "json, name=Outputs", elemType: Output }),
         __metadata("design:type", Array)
     ], CreateApplicationRequest.prototype, "outputs", void 0);
     __decorate([
-        Metadata({ data: "json, name=Tags", elemType: shared.Tag }),
+        SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag }),
         __metadata("design:type", Array)
     ], CreateApplicationRequest.prototype, "tags", void 0);
     return CreateApplicationRequest;

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AssignedInventorySource } from "./assignedinventorysource";
+
 
 
 // BulkEditAssignedInventorySourcesResponse
@@ -8,6 +8,6 @@ import { AssignedInventorySource } from "./assignedinventorysource";
  * Response message for AssignedInventorySourceService.BulkEdit.
 **/
 export class BulkEditAssignedInventorySourcesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assignedInventorySources", elemType: shared.AssignedInventorySource })
+  @SpeakeasyMetadata({ data: "json, name=assignedInventorySources", elemType: AssignedInventorySource })
   assignedInventorySources?: AssignedInventorySource[];
 }

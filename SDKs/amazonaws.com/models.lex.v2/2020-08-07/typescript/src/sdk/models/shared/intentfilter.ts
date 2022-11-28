@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IntentFilterNameEnum } from "./intentfilternameenum";
 import { IntentFilterOperatorEnum } from "./intentfilteroperatorenum";
+
 
 
 // IntentFilter
@@ -8,12 +9,12 @@ import { IntentFilterOperatorEnum } from "./intentfilteroperatorenum";
  * Filters the response from the <code>ListIntents</code> operation.
 **/
 export class IntentFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: IntentFilterNameEnum;
 
-  @Metadata({ data: "json, name=operator" })
+  @SpeakeasyMetadata({ data: "json, name=operator" })
   operator: IntentFilterOperatorEnum;
 
-  @Metadata({ data: "json, name=values" })
+  @SpeakeasyMetadata({ data: "json, name=values" })
   values: string[];
 }

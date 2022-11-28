@@ -1,10 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Filter } from "./filter";
 
+
 export enum CompositeFilterOpEnum {
-    OperatorUnspecified = "OPERATOR_UNSPECIFIED"
-,    And = "AND"
+    OperatorUnspecified = "OPERATOR_UNSPECIFIED",
+    And = "AND"
 }
 
 
@@ -13,9 +13,9 @@ export enum CompositeFilterOpEnum {
  * A filter that merges multiple other filters using the given operator.
 **/
 export class CompositeFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=filters", elemType: shared.Filter })
+  @SpeakeasyMetadata({ data: "json, name=filters", elemType: Filter })
   filters?: Filter[];
 
-  @Metadata({ data: "json, name=op" })
+  @SpeakeasyMetadata({ data: "json, name=op" })
   op?: CompositeFilterOpEnum;
 }

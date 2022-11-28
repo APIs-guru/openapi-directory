@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import streamobject
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class StartBackfillJobResponse:
-    object: Optional[streamobject.StreamObject] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'object' }})
+    r"""StartBackfillJobResponse
+    Response for manually initiating a backfill job for a specific stream object.
+    """
+    
+    object: Optional[StreamObject] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('object') }})
     

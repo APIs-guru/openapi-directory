@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleSecuritySafebrowsingV4RiceDeltaEncoding
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The Rice-Golomb encoded data. Used for sending compressed 4-byte hashes or compressed removal indices.
 **/
 export class GoogleSecuritySafebrowsingV4RiceDeltaEncoding extends SpeakeasyBase {
-  @Metadata({ data: "json, name=encodedData" })
+  @SpeakeasyMetadata({ data: "json, name=encodedData" })
   encodedData?: string;
 
-  @Metadata({ data: "json, name=firstValue" })
+  @SpeakeasyMetadata({ data: "json, name=firstValue" })
   firstValue?: string;
 
-  @Metadata({ data: "json, name=numEntries" })
+  @SpeakeasyMetadata({ data: "json, name=numEntries" })
   numEntries?: number;
 
-  @Metadata({ data: "json, name=riceParameter" })
+  @SpeakeasyMetadata({ data: "json, name=riceParameter" })
   riceParameter?: number;
 }

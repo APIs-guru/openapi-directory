@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { EdgeMetric } from "./edgemetric";
 /**
  * Information about a model deployed on an edge device that is registered with SageMaker Edge Manager.

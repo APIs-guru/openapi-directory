@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PickupSlot
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * This complex type defines a time window for the pickup of a package.
 **/
 export class PickupSlot extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pickupSlotEndTime" })
+  @SpeakeasyMetadata({ data: "json, name=pickupSlotEndTime" })
   pickupSlotEndTime?: string;
 
-  @Metadata({ data: "json, name=pickupSlotId" })
+  @SpeakeasyMetadata({ data: "json, name=pickupSlotId" })
   pickupSlotId?: string;
 
-  @Metadata({ data: "json, name=pickupSlotStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=pickupSlotStartTime" })
   pickupSlotStartTime?: string;
 
-  @Metadata({ data: "json, name=pickupSlotTimeZone" })
+  @SpeakeasyMetadata({ data: "json, name=pickupSlotTimeZone" })
   pickupSlotTimeZone?: string;
 }

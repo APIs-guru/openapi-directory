@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetTrainedModelLearningCurvePathParams = /** @class */ (function (_super) {
     __extends(GetTrainedModelLearningCurvePathParams, _super);
@@ -30,7 +30,7 @@ var GetTrainedModelLearningCurvePathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=modelId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=modelId" }),
         __metadata("design:type", String)
     ], GetTrainedModelLearningCurvePathParams.prototype, "modelId", void 0);
     return GetTrainedModelLearningCurvePathParams;
@@ -42,11 +42,11 @@ var GetTrainedModelLearningCurveQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=count" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=count" }),
         __metadata("design:type", String)
     ], GetTrainedModelLearningCurveQueryParams.prototype, "count", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=offset" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" }),
         __metadata("design:type", String)
     ], GetTrainedModelLearningCurveQueryParams.prototype, "offset", void 0);
     return GetTrainedModelLearningCurveQueryParams;
@@ -58,7 +58,7 @@ var GetTrainedModelLearningCurveSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
         __metadata("design:type", shared.SchemeBearerToken)
     ], GetTrainedModelLearningCurveSecurity.prototype, "bearerToken", void 0);
     return GetTrainedModelLearningCurveSecurity;
@@ -70,15 +70,15 @@ var GetTrainedModelLearningCurveRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetTrainedModelLearningCurvePathParams)
     ], GetTrainedModelLearningCurveRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetTrainedModelLearningCurveQueryParams)
     ], GetTrainedModelLearningCurveRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetTrainedModelLearningCurveSecurity)
     ], GetTrainedModelLearningCurveRequest.prototype, "security", void 0);
     return GetTrainedModelLearningCurveRequest;
@@ -90,15 +90,15 @@ var GetTrainedModelLearningCurveResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetTrainedModelLearningCurveResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.LearningCurveList)
     ], GetTrainedModelLearningCurveResponse.prototype, "learningCurveList", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetTrainedModelLearningCurveResponse.prototype, "statusCode", void 0);
     return GetTrainedModelLearningCurveResponse;

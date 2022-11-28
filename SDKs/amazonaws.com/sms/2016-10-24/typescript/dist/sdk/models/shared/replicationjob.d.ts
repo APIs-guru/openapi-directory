@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { LicenseTypeEnum } from "./licensetypeenum";
 import { ReplicationRun } from "./replicationrun";
 import { ServerTypeEnum } from "./servertypeenum";

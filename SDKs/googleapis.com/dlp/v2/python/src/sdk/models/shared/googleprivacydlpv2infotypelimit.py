@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import googleprivacydlpv2infotype
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GooglePrivacyDlpV2InfoTypeLimit:
-    info_type: Optional[googleprivacydlpv2infotype.GooglePrivacyDlpV2InfoType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'infoType' }})
-    max_findings: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxFindings' }})
+    r"""GooglePrivacyDlpV2InfoTypeLimit
+    Max findings configuration per infoType, per content item or long running DlpJob.
+    """
+    
+    info_type: Optional[GooglePrivacyDlpV2InfoType] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('infoType') }})
+    max_findings: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxFindings') }})
     

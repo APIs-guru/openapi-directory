@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class BroadcastTxResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=txid" })
+  @SpeakeasyMetadata({ data: "json, name=txid" })
   txid?: string;
 }

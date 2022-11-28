@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // UriTargeting
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents a list of targeted and excluded URLs (for example, google.com). For Private Auction Deals, URLs are either included or excluded. For Programmatic Guaranteed and Preferred Deals, this doesn't apply.
 **/
 export class UriTargeting extends SpeakeasyBase {
-  @Metadata({ data: "json, name=excludedUris" })
+  @SpeakeasyMetadata({ data: "json, name=excludedUris" })
   excludedUris?: string[];
 
-  @Metadata({ data: "json, name=targetedUris" })
+  @SpeakeasyMetadata({ data: "json, name=targetedUris" })
   targetedUris?: string[];
 }

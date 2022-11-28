@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { TierEnum } from "./tierenum";
 export declare class DescribeComponentConfigurationResponse extends SpeakeasyBase {
     componentConfiguration?: string;

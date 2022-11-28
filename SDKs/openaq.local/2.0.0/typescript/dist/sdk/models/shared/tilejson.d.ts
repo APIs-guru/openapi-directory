@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * TileJSON model.
  * Based on https://github.com/mapbox/tilejson-spec/tree/master/2.2.0

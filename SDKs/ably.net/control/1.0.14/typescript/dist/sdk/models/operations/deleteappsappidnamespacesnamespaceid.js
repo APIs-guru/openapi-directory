@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var DeleteAppsAppIdNamespacesNamespaceIdPathParams = /** @class */ (function (_super) {
     __extends(DeleteAppsAppIdNamespacesNamespaceIdPathParams, _super);
@@ -30,11 +30,11 @@ var DeleteAppsAppIdNamespacesNamespaceIdPathParams = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=app_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=app_id" }),
         __metadata("design:type", String)
     ], DeleteAppsAppIdNamespacesNamespaceIdPathParams.prototype, "appId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=namespace_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=namespace_id" }),
         __metadata("design:type", String)
     ], DeleteAppsAppIdNamespacesNamespaceIdPathParams.prototype, "namespaceId", void 0);
     return DeleteAppsAppIdNamespacesNamespaceIdPathParams;
@@ -46,7 +46,7 @@ var DeleteAppsAppIdNamespacesNamespaceIdSecurity = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
         __metadata("design:type", shared.SchemeBearerAuth)
     ], DeleteAppsAppIdNamespacesNamespaceIdSecurity.prototype, "bearerAuth", void 0);
     return DeleteAppsAppIdNamespacesNamespaceIdSecurity;
@@ -58,11 +58,11 @@ var DeleteAppsAppIdNamespacesNamespaceIdRequest = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteAppsAppIdNamespacesNamespaceIdPathParams)
     ], DeleteAppsAppIdNamespacesNamespaceIdRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteAppsAppIdNamespacesNamespaceIdSecurity)
     ], DeleteAppsAppIdNamespacesNamespaceIdRequest.prototype, "security", void 0);
     return DeleteAppsAppIdNamespacesNamespaceIdRequest;
@@ -74,15 +74,15 @@ var DeleteAppsAppIdNamespacesNamespaceIdResponse = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DeleteAppsAppIdNamespacesNamespaceIdResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DeleteAppsAppIdNamespacesNamespaceIdResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Error)
     ], DeleteAppsAppIdNamespacesNamespaceIdResponse.prototype, "error", void 0);
     return DeleteAppsAppIdNamespacesNamespaceIdResponse;

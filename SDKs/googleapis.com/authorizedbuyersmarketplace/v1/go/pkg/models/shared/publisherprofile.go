@@ -1,5 +1,7 @@
 package shared
 
+// PublisherProfile
+// The values in the publisher profile are supplied by the publisher. All fields are not filterable unless stated otherwise.
 type PublisherProfile struct {
 	AudienceDescription      *string                             `json:"audienceDescription,omitempty"`
 	DirectDealsContact       *string                             `json:"directDealsContact,omitempty"`

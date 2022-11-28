@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class DataKeySpecEnum(str, Enum):
     AES_256 = "AES_256"

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ConnectorsProjectsLocationsProvidersConnectorsVersionsGetPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 class ConnectorsProjectsLocationsProvidersConnectorsVersionsGetViewEnum(str, Enum):
     CONNECTOR_VERSION_VIEW_UNSPECIFIED = "CONNECTOR_VERSION_VIEW_UNSPECIFIED"
@@ -31,20 +32,20 @@ class ConnectorsProjectsLocationsProvidersConnectorsVersionsGetQueryParams:
 
 @dataclass
 class ConnectorsProjectsLocationsProvidersConnectorsVersionsGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ConnectorsProjectsLocationsProvidersConnectorsVersionsGetRequest:
-    path_params: ConnectorsProjectsLocationsProvidersConnectorsVersionsGetPathParams = field(default=None)
-    query_params: ConnectorsProjectsLocationsProvidersConnectorsVersionsGetQueryParams = field(default=None)
-    security: ConnectorsProjectsLocationsProvidersConnectorsVersionsGetSecurity = field(default=None)
+    path_params: ConnectorsProjectsLocationsProvidersConnectorsVersionsGetPathParams = field()
+    query_params: ConnectorsProjectsLocationsProvidersConnectorsVersionsGetQueryParams = field()
+    security: ConnectorsProjectsLocationsProvidersConnectorsVersionsGetSecurity = field()
     
 
 @dataclass
 class ConnectorsProjectsLocationsProvidersConnectorsVersionsGetResponse:
+    content_type: str = field()
+    status_code: int = field()
     connector_version: Optional[shared.ConnectorVersion] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // InstitutionsSearchRequestOptions
 /**
  * An optional object to filter `/institutions/search` results.
@@ -33,19 +33,19 @@ var InstitutionsSearchRequestOptions = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=include_optional_metadata" }),
+        SpeakeasyMetadata({ data: "json, name=include_optional_metadata" }),
         __metadata("design:type", Boolean)
     ], InstitutionsSearchRequestOptions.prototype, "includeOptionalMetadata", void 0);
     __decorate([
-        Metadata({ data: "json, name=include_payment_initiation_metadata" }),
+        SpeakeasyMetadata({ data: "json, name=include_payment_initiation_metadata" }),
         __metadata("design:type", Boolean)
     ], InstitutionsSearchRequestOptions.prototype, "includePaymentInitiationMetadata", void 0);
     __decorate([
-        Metadata({ data: "json, name=oauth" }),
+        SpeakeasyMetadata({ data: "json, name=oauth" }),
         __metadata("design:type", Boolean)
     ], InstitutionsSearchRequestOptions.prototype, "oauth", void 0);
     __decorate([
-        Metadata({ data: "json, name=payment_initiation" }),
+        SpeakeasyMetadata({ data: "json, name=payment_initiation" }),
         __metadata("design:type", Map)
     ], InstitutionsSearchRequestOptions.prototype, "paymentInitiation", void 0);
     return InstitutionsSearchRequestOptions;

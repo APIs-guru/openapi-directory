@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // PullBatchRequest
 /**
  * Request for the PullBatch method.
@@ -33,15 +33,15 @@ var PullBatchRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=maxEvents" }),
+        SpeakeasyMetadata({ data: "json, name=maxEvents" }),
         __metadata("design:type", Number)
     ], PullBatchRequest.prototype, "maxEvents", void 0);
     __decorate([
-        Metadata({ data: "json, name=returnImmediately" }),
+        SpeakeasyMetadata({ data: "json, name=returnImmediately" }),
         __metadata("design:type", Boolean)
     ], PullBatchRequest.prototype, "returnImmediately", void 0);
     __decorate([
-        Metadata({ data: "json, name=subscription" }),
+        SpeakeasyMetadata({ data: "json, name=subscription" }),
         __metadata("design:type", String)
     ], PullBatchRequest.prototype, "subscription", void 0);
     return PullBatchRequest;

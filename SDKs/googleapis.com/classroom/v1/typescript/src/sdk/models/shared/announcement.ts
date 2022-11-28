@@ -1,19 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IndividualStudentsOptions } from "./individualstudentsoptions";
 import { Material } from "./material";
 
+
 export enum AnnouncementAssigneeModeEnum {
-    AssigneeModeUnspecified = "ASSIGNEE_MODE_UNSPECIFIED"
-,    AllStudents = "ALL_STUDENTS"
-,    IndividualStudents = "INDIVIDUAL_STUDENTS"
+    AssigneeModeUnspecified = "ASSIGNEE_MODE_UNSPECIFIED",
+    AllStudents = "ALL_STUDENTS",
+    IndividualStudents = "INDIVIDUAL_STUDENTS"
 }
 
 export enum AnnouncementStateEnum {
-    AnnouncementStateUnspecified = "ANNOUNCEMENT_STATE_UNSPECIFIED"
-,    Published = "PUBLISHED"
-,    Draft = "DRAFT"
-,    Deleted = "DELETED"
+    AnnouncementStateUnspecified = "ANNOUNCEMENT_STATE_UNSPECIFIED",
+    Published = "PUBLISHED",
+    Draft = "DRAFT",
+    Deleted = "DELETED"
 }
 
 
@@ -22,39 +22,39 @@ export enum AnnouncementStateEnum {
  * Announcement created by a teacher for students of the course
 **/
 export class Announcement extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alternateLink" })
+  @SpeakeasyMetadata({ data: "json, name=alternateLink" })
   alternateLink?: string;
 
-  @Metadata({ data: "json, name=assigneeMode" })
+  @SpeakeasyMetadata({ data: "json, name=assigneeMode" })
   assigneeMode?: AnnouncementAssigneeModeEnum;
 
-  @Metadata({ data: "json, name=courseId" })
+  @SpeakeasyMetadata({ data: "json, name=courseId" })
   courseId?: string;
 
-  @Metadata({ data: "json, name=creationTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationTime" })
   creationTime?: string;
 
-  @Metadata({ data: "json, name=creatorUserId" })
+  @SpeakeasyMetadata({ data: "json, name=creatorUserId" })
   creatorUserId?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=individualStudentsOptions" })
+  @SpeakeasyMetadata({ data: "json, name=individualStudentsOptions" })
   individualStudentsOptions?: IndividualStudentsOptions;
 
-  @Metadata({ data: "json, name=materials", elemType: shared.Material })
+  @SpeakeasyMetadata({ data: "json, name=materials", elemType: Material })
   materials?: Material[];
 
-  @Metadata({ data: "json, name=scheduledTime" })
+  @SpeakeasyMetadata({ data: "json, name=scheduledTime" })
   scheduledTime?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: AnnouncementStateEnum;
 
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: string;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 }

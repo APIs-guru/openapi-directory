@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import changetypeenum_enum
-from . import changetypeenum_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class MergeOperations:
-    destination: Optional[changetypeenum_enum.ChangeTypeEnumEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'destination' }})
-    source: Optional[changetypeenum_enum.ChangeTypeEnumEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'source' }})
+    r"""MergeOperations
+    Information about the file operation conflicts in a merge operation.
+    """
+    
+    destination: Optional[ChangeTypeEnumEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('destination') }})
+    source: Optional[ChangeTypeEnumEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('source') }})
     

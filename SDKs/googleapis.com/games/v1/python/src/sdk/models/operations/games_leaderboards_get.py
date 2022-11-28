@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GamesLeaderboardsGetPathParams:
-    leaderboard_id: str = field(default=None, metadata={'path_param': { 'field_name': 'leaderboardId', 'style': 'simple', 'explode': False }})
+    leaderboard_id: str = field(metadata={'path_param': { 'field_name': 'leaderboardId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +27,20 @@ class GamesLeaderboardsGetQueryParams:
 
 @dataclass
 class GamesLeaderboardsGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GamesLeaderboardsGetRequest:
-    path_params: GamesLeaderboardsGetPathParams = field(default=None)
-    query_params: GamesLeaderboardsGetQueryParams = field(default=None)
-    security: GamesLeaderboardsGetSecurity = field(default=None)
+    path_params: GamesLeaderboardsGetPathParams = field()
+    query_params: GamesLeaderboardsGetQueryParams = field()
+    security: GamesLeaderboardsGetSecurity = field()
     
 
 @dataclass
 class GamesLeaderboardsGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     leaderboard: Optional[shared.Leaderboard] = field(default=None)
-    status_code: int = field(default=None)
     

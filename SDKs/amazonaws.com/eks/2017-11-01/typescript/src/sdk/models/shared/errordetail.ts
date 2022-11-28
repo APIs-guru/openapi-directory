@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ErrorCodeEnum } from "./errorcodeenum";
+
 
 
 // ErrorDetail
@@ -7,12 +8,12 @@ import { ErrorCodeEnum } from "./errorcodeenum";
  * An object representing an error when an asynchronous operation fails.
 **/
 export class ErrorDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errorCode" })
+  @SpeakeasyMetadata({ data: "json, name=errorCode" })
   errorCode?: ErrorCodeEnum;
 
-  @Metadata({ data: "json, name=errorMessage" })
+  @SpeakeasyMetadata({ data: "json, name=errorMessage" })
   errorMessage?: string;
 
-  @Metadata({ data: "json, name=resourceIds" })
+  @SpeakeasyMetadata({ data: "json, name=resourceIds" })
   resourceIds?: string[];
 }

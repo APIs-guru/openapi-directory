@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsS3AccountPublicAccessBlockDetails
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * provides information about the Amazon S3 Public Access Block configuration for accounts.
 **/
 export class AwsS3AccountPublicAccessBlockDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BlockPublicAcls" })
+  @SpeakeasyMetadata({ data: "json, name=BlockPublicAcls" })
   blockPublicAcls?: boolean;
 
-  @Metadata({ data: "json, name=BlockPublicPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=BlockPublicPolicy" })
   blockPublicPolicy?: boolean;
 
-  @Metadata({ data: "json, name=IgnorePublicAcls" })
+  @SpeakeasyMetadata({ data: "json, name=IgnorePublicAcls" })
   ignorePublicAcls?: boolean;
 
-  @Metadata({ data: "json, name=RestrictPublicBuckets" })
+  @SpeakeasyMetadata({ data: "json, name=RestrictPublicBuckets" })
   restrictPublicBuckets?: boolean;
 }

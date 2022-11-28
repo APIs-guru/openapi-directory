@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WorkItem } from "./workitem";
+
 
 
 // LeaseWorkItemResponse
@@ -8,9 +8,9 @@ import { WorkItem } from "./workitem";
  * Response to a request to lease WorkItems.
 **/
 export class LeaseWorkItemResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=unifiedWorkerResponse" })
+  @SpeakeasyMetadata({ data: "json, name=unifiedWorkerResponse" })
   unifiedWorkerResponse?: Map<string, any>;
 
-  @Metadata({ data: "json, name=workItems", elemType: shared.WorkItem })
+  @SpeakeasyMetadata({ data: "json, name=workItems", elemType: WorkItem })
   workItems?: WorkItem[];
 }

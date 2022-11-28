@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class PrivatecaProjectsLocationsReusableConfigsGetPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class PrivatecaProjectsLocationsReusableConfigsGetQueryParams:
 
 @dataclass
 class PrivatecaProjectsLocationsReusableConfigsGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class PrivatecaProjectsLocationsReusableConfigsGetRequest:
-    path_params: PrivatecaProjectsLocationsReusableConfigsGetPathParams = field(default=None)
-    query_params: PrivatecaProjectsLocationsReusableConfigsGetQueryParams = field(default=None)
-    security: PrivatecaProjectsLocationsReusableConfigsGetSecurity = field(default=None)
+    path_params: PrivatecaProjectsLocationsReusableConfigsGetPathParams = field()
+    query_params: PrivatecaProjectsLocationsReusableConfigsGetQueryParams = field()
+    security: PrivatecaProjectsLocationsReusableConfigsGetSecurity = field()
     
 
 @dataclass
 class PrivatecaProjectsLocationsReusableConfigsGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     reusable_config: Optional[shared.ReusableConfig] = field(default=None)
-    status_code: int = field(default=None)
     

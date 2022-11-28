@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { NodegroupIssueCodeEnum } from "./nodegroupissuecodeenum";
 /**
  * An object representing an issue with an Amazon EKS resource.

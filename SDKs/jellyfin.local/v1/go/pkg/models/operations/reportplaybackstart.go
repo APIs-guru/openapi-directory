@@ -4,10 +4,10 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-type ReportPlaybackStartRequests struct {
-	PlaybackStartInfo  *shared.PlaybackStartInfo `request:"mediaType=application/*+json"`
-	PlaybackStartInfo1 *shared.PlaybackStartInfo `request:"mediaType=application/json"`
-	PlaybackStartInfo2 *shared.PlaybackStartInfo `request:"mediaType=text/json"`
+type ReportPlaybackStartRequestsInput struct {
+	PlaybackStartInfo  *shared.PlaybackStartInfoInput `request:"mediaType=application/*+json"`
+	PlaybackStartInfo1 *shared.PlaybackStartInfoInput `request:"mediaType=application/json"`
+	PlaybackStartInfo2 *shared.PlaybackStartInfoInput `request:"mediaType=text/json"`
 }
 
 type ReportPlaybackStartSecurity struct {
@@ -15,7 +15,7 @@ type ReportPlaybackStartSecurity struct {
 }
 
 type ReportPlaybackStartRequest struct {
-	Request  *ReportPlaybackStartRequests
+	Request  *ReportPlaybackStartRequestsInput
 	Security ReportPlaybackStartSecurity
 }
 

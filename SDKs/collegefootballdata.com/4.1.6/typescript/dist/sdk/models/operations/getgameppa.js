@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetGamePpaQueryParams = /** @class */ (function (_super) {
     __extends(GetGamePpaQueryParams, _super);
@@ -30,27 +30,27 @@ var GetGamePpaQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=conference" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=conference" }),
         __metadata("design:type", String)
     ], GetGamePpaQueryParams.prototype, "conference", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=excludeGarbageTime" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=excludeGarbageTime" }),
         __metadata("design:type", Boolean)
     ], GetGamePpaQueryParams.prototype, "excludeGarbageTime", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=seasonType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=seasonType" }),
         __metadata("design:type", String)
     ], GetGamePpaQueryParams.prototype, "seasonType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=team" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=team" }),
         __metadata("design:type", String)
     ], GetGamePpaQueryParams.prototype, "team", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=week" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=week" }),
         __metadata("design:type", Number)
     ], GetGamePpaQueryParams.prototype, "week", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=year" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=year" }),
         __metadata("design:type", Number)
     ], GetGamePpaQueryParams.prototype, "year", void 0);
     return GetGamePpaQueryParams;
@@ -62,7 +62,7 @@ var GetGamePpaRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetGamePpaQueryParams)
     ], GetGamePpaRequest.prototype, "queryParams", void 0);
     return GetGamePpaRequest;
@@ -74,15 +74,15 @@ var GetGamePpaResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetGamePpaResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata({ elemType: shared.GamePpa }),
+        SpeakeasyMetadata({ elemType: shared.GamePpa }),
         __metadata("design:type", Array)
     ], GetGamePpaResponse.prototype, "gamePpas", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetGamePpaResponse.prototype, "statusCode", void 0);
     return GetGamePpaResponse;

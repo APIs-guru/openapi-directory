@@ -1,16 +1,17 @@
-import { AxiosInstance, AxiosRequestConfig } from "axios";
-import * as operations from "./models/operations";
-declare type OptsFunc = (sdk: SDK) => void;
+import { AxiosInstance } from "axios";
+import { Domains } from "./domains";
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://gmailpostmastertools.googleapis.com/"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    domains: Domains;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
-    GmailpostmastertoolsDomainsList(req: operations.GmailpostmastertoolsDomainsListRequest, config?: AxiosRequestConfig): Promise<operations.GmailpostmastertoolsDomainsListResponse>;
-    GmailpostmastertoolsDomainsTrafficStatsGet(req: operations.GmailpostmastertoolsDomainsTrafficStatsGetRequest, config?: AxiosRequestConfig): Promise<operations.GmailpostmastertoolsDomainsTrafficStatsGetResponse>;
-    GmailpostmastertoolsDomainsTrafficStatsList(req: operations.GmailpostmastertoolsDomainsTrafficStatsListRequest, config?: AxiosRequestConfig): Promise<operations.GmailpostmastertoolsDomainsTrafficStatsListResponse>;
 }
 export {};

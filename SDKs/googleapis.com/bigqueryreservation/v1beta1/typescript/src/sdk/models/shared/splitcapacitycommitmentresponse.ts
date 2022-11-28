@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CapacityCommitment } from "./capacitycommitment";
-import { CapacityCommitment } from "./capacitycommitment";
+
 
 
 // SplitCapacityCommitmentResponse
@@ -8,9 +8,9 @@ import { CapacityCommitment } from "./capacitycommitment";
  * The response for ReservationService.SplitCapacityCommitment.
 **/
 export class SplitCapacityCommitmentResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=first" })
+  @SpeakeasyMetadata({ data: "json, name=first" })
   first?: CapacityCommitment;
 
-  @Metadata({ data: "json, name=second" })
+  @SpeakeasyMetadata({ data: "json, name=second" })
   second?: CapacityCommitment;
 }

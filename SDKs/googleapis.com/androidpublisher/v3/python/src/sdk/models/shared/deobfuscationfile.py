@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class DeobfuscationFileSymbolTypeEnum(str, Enum):
     DEOBFUSCATION_FILE_TYPE_UNSPECIFIED = "deobfuscationFileTypeUnspecified"
@@ -11,5 +13,9 @@ class DeobfuscationFileSymbolTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class DeobfuscationFile:
-    symbol_type: Optional[DeobfuscationFileSymbolTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'symbolType' }})
+    r"""DeobfuscationFile
+    Represents a deobfuscation file.
+    """
+    
+    symbol_type: Optional[DeobfuscationFileSymbolTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('symbolType') }})
     

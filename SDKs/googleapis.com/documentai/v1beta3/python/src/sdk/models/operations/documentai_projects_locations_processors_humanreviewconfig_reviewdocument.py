@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DocumentaiProjectsLocationsProcessorsHumanReviewConfigReviewDocumentPathParams:
-    human_review_config: str = field(default=None, metadata={'path_param': { 'field_name': 'humanReviewConfig', 'style': 'simple', 'explode': False }})
+    human_review_config: str = field(metadata={'path_param': { 'field_name': 'humanReviewConfig', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class DocumentaiProjectsLocationsProcessorsHumanReviewConfigReviewDocumentQueryP
 
 @dataclass
 class DocumentaiProjectsLocationsProcessorsHumanReviewConfigReviewDocumentSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DocumentaiProjectsLocationsProcessorsHumanReviewConfigReviewDocumentRequest:
-    path_params: DocumentaiProjectsLocationsProcessorsHumanReviewConfigReviewDocumentPathParams = field(default=None)
-    query_params: DocumentaiProjectsLocationsProcessorsHumanReviewConfigReviewDocumentQueryParams = field(default=None)
+    path_params: DocumentaiProjectsLocationsProcessorsHumanReviewConfigReviewDocumentPathParams = field()
+    query_params: DocumentaiProjectsLocationsProcessorsHumanReviewConfigReviewDocumentQueryParams = field()
+    security: DocumentaiProjectsLocationsProcessorsHumanReviewConfigReviewDocumentSecurity = field()
     request: Optional[shared.GoogleCloudDocumentaiV1beta3ReviewDocumentRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DocumentaiProjectsLocationsProcessorsHumanReviewConfigReviewDocumentSecurity = field(default=None)
     
 
 @dataclass
 class DocumentaiProjectsLocationsProcessorsHumanReviewConfigReviewDocumentResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_longrunning_operation: Optional[shared.GoogleLongrunningOperation] = field(default=None)
-    status_code: int = field(default=None)
     

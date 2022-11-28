@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DialogflowProjectsLocationsAgentsEnvironmentsContinuousTestResultsListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,14 +28,14 @@ class DialogflowProjectsLocationsAgentsEnvironmentsContinuousTestResultsListQuer
 
 @dataclass
 class DialogflowProjectsLocationsAgentsEnvironmentsContinuousTestResultsListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DialogflowProjectsLocationsAgentsEnvironmentsContinuousTestResultsListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -45,14 +46,14 @@ class DialogflowProjectsLocationsAgentsEnvironmentsContinuousTestResultsListSecu
 
 @dataclass
 class DialogflowProjectsLocationsAgentsEnvironmentsContinuousTestResultsListRequest:
-    path_params: DialogflowProjectsLocationsAgentsEnvironmentsContinuousTestResultsListPathParams = field(default=None)
-    query_params: DialogflowProjectsLocationsAgentsEnvironmentsContinuousTestResultsListQueryParams = field(default=None)
-    security: DialogflowProjectsLocationsAgentsEnvironmentsContinuousTestResultsListSecurity = field(default=None)
+    path_params: DialogflowProjectsLocationsAgentsEnvironmentsContinuousTestResultsListPathParams = field()
+    query_params: DialogflowProjectsLocationsAgentsEnvironmentsContinuousTestResultsListQueryParams = field()
+    security: DialogflowProjectsLocationsAgentsEnvironmentsContinuousTestResultsListSecurity = field()
     
 
 @dataclass
 class DialogflowProjectsLocationsAgentsEnvironmentsContinuousTestResultsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_dialogflow_cx_v3_list_continuous_test_results_response: Optional[shared.GoogleCloudDialogflowCxV3ListContinuousTestResultsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetJoinDetailsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=convId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=convId" })
   convId: string;
 }
 
 
 export class GetJoinDetailsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth: shared.SchemeOauth;
 }
 
 
 export class GetJoinDetailsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetJoinDetailsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetJoinDetailsSecurity;
 }
 
 
 export class GetJoinDetailsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   conversationDetails?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

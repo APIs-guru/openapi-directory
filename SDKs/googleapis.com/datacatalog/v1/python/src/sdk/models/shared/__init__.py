@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .alt_enum import *
 from .binding import *
 from .expr import *
@@ -11,7 +11,6 @@ from .googleclouddatacatalogv1bigquerytablespec import *
 from .googleclouddatacatalogv1businesscontext import *
 from .googleclouddatacatalogv1cloudsqlbigqueryconnectionspec import *
 from .googleclouddatacatalogv1columnschema import *
-from .googleclouddatacatalogv1columnschemalookercolumnspec import *
 from .googleclouddatacatalogv1contacts import *
 from .googleclouddatacatalogv1contactsperson import *
 from .googleclouddatacatalogv1crossregionalsource import *

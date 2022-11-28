@@ -1,9 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import inputconfigurationcontainer
-from . import outputconfigurationcontainer
-from . import switchconfigurationcontainer
+from sdk import utils
+from . import *
 
 class SmartMeDeviceConfigurationContainerDNSUpdateStateEnum(str, Enum):
     NO_UPDATE = "NoUpdate"
@@ -28,14 +31,18 @@ class SmartMeDeviceConfigurationContainerUploadIntervalEnum(str, Enum):
 @dataclass_json
 @dataclass
 class SmartMeDeviceConfigurationContainer:
-    device_encryption_key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DeviceEncryptionKey' }})
-    device_pin_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DevicePinCode' }})
-    dns_update_state: Optional[SmartMeDeviceConfigurationContainerDNSUpdateStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DnsUpdateState' }})
-    enable_modbus_tcp: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EnableModbusTcp' }})
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Id' }})
-    input_configuration: Optional[List[inputconfigurationcontainer.InputConfigurationContainer]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'InputConfiguration' }})
-    output_configuration: Optional[List[outputconfigurationcontainer.OutputConfigurationContainer]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OutputConfiguration' }})
-    show_reactive_energy: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ShowReactiveEnergy' }})
-    switch_configuration: Optional[List[switchconfigurationcontainer.SwitchConfigurationContainer]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SwitchConfiguration' }})
-    upload_interval: Optional[SmartMeDeviceConfigurationContainerUploadIntervalEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'UploadInterval' }})
+    r"""SmartMeDeviceConfigurationContainer
+    API Container class for the meter configuration
+    """
+    
+    device_encryption_key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DeviceEncryptionKey') }})
+    device_pin_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DevicePinCode') }})
+    dns_update_state: Optional[SmartMeDeviceConfigurationContainerDNSUpdateStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DnsUpdateState') }})
+    enable_modbus_tcp: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('EnableModbusTcp') }})
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Id') }})
+    input_configuration: Optional[List[InputConfigurationContainer]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('InputConfiguration') }})
+    output_configuration: Optional[List[OutputConfigurationContainer]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('OutputConfiguration') }})
+    show_reactive_energy: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ShowReactiveEnergy') }})
+    switch_configuration: Optional[List[SwitchConfigurationContainer]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SwitchConfiguration') }})
+    upload_interval: Optional[SmartMeDeviceConfigurationContainerUploadIntervalEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('UploadInterval') }})
     

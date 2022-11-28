@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import namedstylesuggestionstate
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class NamedStylesSuggestionState:
-    styles_suggestion_states: Optional[List[namedstylesuggestionstate.NamedStyleSuggestionState]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stylesSuggestionStates' }})
+    r"""NamedStylesSuggestionState
+    The suggestion state of a NamedStyles message.
+    """
+    
+    styles_suggestion_states: Optional[List[NamedStyleSuggestionState]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('stylesSuggestionStates') }})
     

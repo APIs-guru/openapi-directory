@@ -5,25 +5,25 @@ from sdk.models import shared
 
 @dataclass
 class GetThirdPartyJobInfoPathParams:
-    job_id: str = field(default=None, metadata={'path_param': { 'field_name': 'JobId', 'style': 'simple', 'explode': False }})
+    job_id: str = field(metadata={'path_param': { 'field_name': 'JobId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetThirdPartyJobInfoHeaders:
-    api_version: str = field(default=None, metadata={'header': { 'field_name': 'Api-Version', 'style': 'simple', 'explode': False }})
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
+    api_version: str = field(metadata={'header': { 'field_name': 'Api-Version', 'style': 'simple', 'explode': False }})
+    authorization: str = field(metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetThirdPartyJobInfoRequest:
-    path_params: GetThirdPartyJobInfoPathParams = field(default=None)
-    headers: GetThirdPartyJobInfoHeaders = field(default=None)
+    headers: GetThirdPartyJobInfoHeaders = field()
+    path_params: GetThirdPartyJobInfoPathParams = field()
     
 
 @dataclass
 class GetThirdPartyJobInfoResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_model: Optional[shared.ErrorModel] = field(default=None)
     job_info: Optional[shared.JobInfo] = field(default=None)
-    status_code: int = field(default=None)
     

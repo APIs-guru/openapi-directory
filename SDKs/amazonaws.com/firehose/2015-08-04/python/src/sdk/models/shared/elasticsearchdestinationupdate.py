@@ -1,26 +1,30 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import elasticsearchbufferinghints
-from . import cloudwatchloggingoptions
-from . import elasticsearchindexrotationperiod_enum
-from . import processingconfiguration
-from . import elasticsearchretryoptions
-from . import s3destinationupdate
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ElasticsearchDestinationUpdate:
-    buffering_hints: Optional[elasticsearchbufferinghints.ElasticsearchBufferingHints] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BufferingHints' }})
-    cloud_watch_logging_options: Optional[cloudwatchloggingoptions.CloudWatchLoggingOptions] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CloudWatchLoggingOptions' }})
-    cluster_endpoint: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ClusterEndpoint' }})
-    domain_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DomainARN' }})
-    index_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IndexName' }})
-    index_rotation_period: Optional[elasticsearchindexrotationperiod_enum.ElasticsearchIndexRotationPeriodEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IndexRotationPeriod' }})
-    processing_configuration: Optional[processingconfiguration.ProcessingConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProcessingConfiguration' }})
-    retry_options: Optional[elasticsearchretryoptions.ElasticsearchRetryOptions] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RetryOptions' }})
-    role_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RoleARN' }})
-    s3_update: Optional[s3destinationupdate.S3DestinationUpdate] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'S3Update' }})
-    type_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TypeName' }})
+    r"""ElasticsearchDestinationUpdate
+    Describes an update for a destination in Amazon ES.
+    """
+    
+    buffering_hints: Optional[ElasticsearchBufferingHints] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('BufferingHints') }})
+    cloud_watch_logging_options: Optional[CloudWatchLoggingOptions] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CloudWatchLoggingOptions') }})
+    cluster_endpoint: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ClusterEndpoint') }})
+    domain_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DomainARN') }})
+    index_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('IndexName') }})
+    index_rotation_period: Optional[ElasticsearchIndexRotationPeriodEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('IndexRotationPeriod') }})
+    processing_configuration: Optional[ProcessingConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ProcessingConfiguration') }})
+    retry_options: Optional[ElasticsearchRetryOptions] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('RetryOptions') }})
+    role_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('RoleARN') }})
+    s3_update: Optional[S3DestinationUpdate] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('S3Update') }})
+    type_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TypeName') }})
     

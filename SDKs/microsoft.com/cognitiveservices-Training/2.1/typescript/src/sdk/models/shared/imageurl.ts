@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ImageUrl extends SpeakeasyBase {
-  @Metadata({ data: "json, name=url, form, name=url;" })
+  @SpeakeasyMetadata({ data: "json, name=url, form, name=url;" })
   url?: string;
 }

@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class GamesRedditReadPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GamesRedditReadRequest:
-    path_params: GamesRedditReadPathParams = field(default=None)
+    path_params: GamesRedditReadPathParams = field()
     
 
 @dataclass
 class GamesRedditReadResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     reddit: Optional[shared.Reddit] = field(default=None)
-    status_code: int = field(default=None)
     

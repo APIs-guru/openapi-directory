@@ -1,14 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import containerinfo
-from . import containerprovidertype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ContainerProvider:
-    id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    info: Optional[containerinfo.ContainerInfo] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'info' }})
-    type: containerprovidertype_enum.ContainerProviderTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""ContainerProvider
+    The information about the container provider.
+    """
+    
+    id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    type: ContainerProviderTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    info: Optional[ContainerInfo] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('info') }})
     

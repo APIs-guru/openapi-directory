@@ -1,5 +1,7 @@
 package shared
 
+// ImageContext
+// Image context and/or feature-specific parameters.
 type ImageContext struct {
 	CropHintsParams     *CropHintsParams     `json:"cropHintsParams,omitempty"`
 	LanguageHints       []string             `json:"languageHints,omitempty"`

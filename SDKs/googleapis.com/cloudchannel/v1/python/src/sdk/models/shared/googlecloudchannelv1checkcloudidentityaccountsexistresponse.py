@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import googlecloudchannelv1cloudidentitycustomeraccount
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleCloudChannelV1CheckCloudIdentityAccountsExistResponse:
-    cloud_identity_accounts: Optional[List[googlecloudchannelv1cloudidentitycustomeraccount.GoogleCloudChannelV1CloudIdentityCustomerAccount]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cloudIdentityAccounts' }})
+    r"""GoogleCloudChannelV1CheckCloudIdentityAccountsExistResponse
+    Response message for CloudChannelService.CheckCloudIdentityAccountsExist.
+    """
+    
+    cloud_identity_accounts: Optional[List[GoogleCloudChannelV1CloudIdentityCustomerAccount]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cloudIdentityAccounts') }})
     

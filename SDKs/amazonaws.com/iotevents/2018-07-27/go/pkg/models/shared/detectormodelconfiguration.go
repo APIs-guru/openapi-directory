@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// DetectorModelConfiguration
+// Information about how the detector model is configured.
 type DetectorModelConfiguration struct {
 	CreationTime             *time.Time                      `json:"creationTime,omitempty"`
 	DetectorModelArn         *string                         `json:"detectorModelArn,omitempty"`

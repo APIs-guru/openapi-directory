@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class AwsEcsServicePlacementConstraintsDetails:
-    expression: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Expression' }})
-    type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
+    r"""AwsEcsServicePlacementConstraintsDetails
+    A placement constraint for the tasks in the service.
+    """
+    
+    expression: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Expression') }})
+    type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Type') }})
     

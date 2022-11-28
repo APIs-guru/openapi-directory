@@ -127,6 +127,8 @@ from .paymentresponsev4 import *
 from .paymentv3 import *
 from .payoraddress import *
 from .payoraddressv2 import *
+from .payoramltransaction import *
+from .payoramltransactionv3 import *
 from .payorbrandingresponse import *
 from .payorcreateapikeyrequest import *
 from .payorcreateapikeyresponse import *

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { FeedbackValueEnum } from "./feedbackvalueenum";
 import { SeverityLevelEnum } from "./severitylevelenum";
 import { StatusEnum } from "./statusenum";

@@ -1,5 +1,7 @@
 package shared
 
+// StreamObject
+// A specific stream object (e.g a specific DB table).
 type StreamObject struct {
 	BackfillJob  *BackfillJob            `json:"backfillJob,omitempty"`
 	CreateTime   *string                 `json:"createTime,omitempty"`

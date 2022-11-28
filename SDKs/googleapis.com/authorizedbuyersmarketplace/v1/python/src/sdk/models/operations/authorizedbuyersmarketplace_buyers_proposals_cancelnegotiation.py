@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AuthorizedbuyersmarketplaceBuyersProposalsCancelNegotiationPathParams:
-    proposal: str = field(default=None, metadata={'path_param': { 'field_name': 'proposal', 'style': 'simple', 'explode': False }})
+    proposal: str = field(metadata={'path_param': { 'field_name': 'proposal', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class AuthorizedbuyersmarketplaceBuyersProposalsCancelNegotiationQueryParams:
 
 @dataclass
 class AuthorizedbuyersmarketplaceBuyersProposalsCancelNegotiationSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AuthorizedbuyersmarketplaceBuyersProposalsCancelNegotiationRequest:
-    path_params: AuthorizedbuyersmarketplaceBuyersProposalsCancelNegotiationPathParams = field(default=None)
-    query_params: AuthorizedbuyersmarketplaceBuyersProposalsCancelNegotiationQueryParams = field(default=None)
+    path_params: AuthorizedbuyersmarketplaceBuyersProposalsCancelNegotiationPathParams = field()
+    query_params: AuthorizedbuyersmarketplaceBuyersProposalsCancelNegotiationQueryParams = field()
+    security: AuthorizedbuyersmarketplaceBuyersProposalsCancelNegotiationSecurity = field()
     request: Optional[dict[str, Any]] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AuthorizedbuyersmarketplaceBuyersProposalsCancelNegotiationSecurity = field(default=None)
     
 
 @dataclass
 class AuthorizedbuyersmarketplaceBuyersProposalsCancelNegotiationResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     proposal: Optional[shared.Proposal] = field(default=None)
-    status_code: int = field(default=None)
     

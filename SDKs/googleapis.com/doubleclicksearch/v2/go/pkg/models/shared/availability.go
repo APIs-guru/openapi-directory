@@ -1,5 +1,7 @@
 package shared
 
+// Availability
+// A message containing availability data relevant to DoubleClick Search.
 type Availability struct {
 	AdvertiserID          *string `json:"advertiserId,omitempty"`
 	AgencyID              *string `json:"agencyId,omitempty"`

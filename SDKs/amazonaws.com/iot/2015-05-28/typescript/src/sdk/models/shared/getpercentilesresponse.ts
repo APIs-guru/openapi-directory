@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PercentPair } from "./percentpair";
 
 
+
 export class GetPercentilesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=percentiles", elemType: shared.PercentPair })
+  @SpeakeasyMetadata({ data: "json, name=percentiles", elemType: PercentPair })
   percentiles?: PercentPair[];
 }

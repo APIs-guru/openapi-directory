@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteConnectionPathParams:
-    connection_id: str = field(default=None, metadata={'path_param': { 'field_name': 'connectionId', 'style': 'simple', 'explode': False }})
+    connection_id: str = field(metadata={'path_param': { 'field_name': 'connectionId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,15 +23,15 @@ class DeleteConnectionHeaders:
 
 @dataclass
 class DeleteConnectionRequest:
-    path_params: DeleteConnectionPathParams = field(default=None)
-    headers: DeleteConnectionHeaders = field(default=None)
+    headers: DeleteConnectionHeaders = field()
+    path_params: DeleteConnectionPathParams = field()
     
 
 @dataclass
 class DeleteConnectionResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     forbidden_exception: Optional[Any] = field(default=None)
     gone_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

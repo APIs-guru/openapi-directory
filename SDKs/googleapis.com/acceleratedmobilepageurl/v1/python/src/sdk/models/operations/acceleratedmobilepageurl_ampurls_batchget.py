@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -20,13 +21,13 @@ class AcceleratedmobilepageurlAmpUrlsBatchGetQueryParams:
 
 @dataclass
 class AcceleratedmobilepageurlAmpUrlsBatchGetRequest:
-    query_params: AcceleratedmobilepageurlAmpUrlsBatchGetQueryParams = field(default=None)
+    query_params: AcceleratedmobilepageurlAmpUrlsBatchGetQueryParams = field()
     request: Optional[shared.BatchGetAmpUrlsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class AcceleratedmobilepageurlAmpUrlsBatchGetResponse:
+    content_type: str = field()
+    status_code: int = field()
     batch_get_amp_urls_response: Optional[shared.BatchGetAmpUrlsResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

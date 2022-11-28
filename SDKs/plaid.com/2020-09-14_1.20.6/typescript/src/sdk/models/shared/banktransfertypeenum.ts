@@ -1,6 +1,7 @@
 
 
+
 export enum BankTransferTypeEnum {
-    Debit = "debit"
-,    Credit = "credit"
+    Debit = "debit",
+    Credit = "credit"
 }

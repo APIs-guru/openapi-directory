@@ -1,6 +1,7 @@
 package shared
 
+// ResponseDebugInfo
+// Debugging information about the response.
 type ResponseDebugInfo struct {
-	EnabledExperiments []int32 `json:"enabledExperiments,omitempty"`
 	FormattedDebugInfo *string `json:"formattedDebugInfo,omitempty"`
 }

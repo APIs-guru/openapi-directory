@@ -1,5 +1,7 @@
 package shared
 
+// StartChildWorkflowExecutionInitiatedEventAttributes
+// Provides the details of the <code>StartChildWorkflowExecutionInitiated</code> event.
 type StartChildWorkflowExecutionInitiatedEventAttributes struct {
 	ChildPolicy                  ChildPolicyEnum `json:"childPolicy"`
 	Control                      *string         `json:"control,omitempty"`

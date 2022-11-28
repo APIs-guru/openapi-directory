@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// SimulationJob
+// Information about a simulation job.
 type SimulationJob struct {
 	Arn                     *string                       `json:"arn,omitempty"`
 	ClientRequestToken      *string                       `json:"clientRequestToken,omitempty"`

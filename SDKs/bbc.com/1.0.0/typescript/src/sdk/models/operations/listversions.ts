@@ -1,75 +1,76 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
+
 
 export enum ListVersionsAvailabilityEnum {
     Available = "available"
 }
 
 export enum ListVersionsEmbargoedEnum {
-    Include = "include"
-,    Exclude = "exclude"
-,    Only = "only"
+    Include = "include",
+    Exclude = "exclude",
+    Only = "only"
 }
 
 export enum ListVersionsPaymentTypeEnum {
-    Free = "free"
-,    Bbcstore = "bbcstore"
-,    Uscansvod = "uscansvod"
+    Free = "free",
+    Bbcstore = "bbcstore",
+    Uscansvod = "uscansvod"
 }
 
 
 export class ListVersionsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=availability" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=availability" })
   availability?: ListVersionsAvailabilityEnum[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=descendants_of" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=descendants_of" })
   descendantsOf?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=embargoed" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=embargoed" })
   embargoed?: ListVersionsEmbargoedEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=media_set" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=media_set" })
   mediaSet?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page_size" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_size" })
   pageSize?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=partner_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=partner_id" })
   partnerId?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=partner_pid" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=partner_pid" })
   partnerPid?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=payment_type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=payment_type" })
   paymentType?: ListVersionsPaymentTypeEnum[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=pid" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pid" })
   pid?: string[];
 }
 
 
 export class ListVersionsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ListVersionsQueryParams;
 }
 
 
 export class ListVersionsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorModel?: shared.ErrorModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   nitro?: any;
 }

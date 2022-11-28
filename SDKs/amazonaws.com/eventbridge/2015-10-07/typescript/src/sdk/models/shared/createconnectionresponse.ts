@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConnectionStateEnum } from "./connectionstateenum";
 
 
+
 export class CreateConnectionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConnectionArn" })
+  @SpeakeasyMetadata({ data: "json, name=ConnectionArn" })
   connectionArn?: string;
 
-  @Metadata({ data: "json, name=ConnectionState" })
+  @SpeakeasyMetadata({ data: "json, name=ConnectionState" })
   connectionState?: ConnectionStateEnum;
 
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=LastModifiedTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedTime" })
   lastModifiedTime?: Date;
 }

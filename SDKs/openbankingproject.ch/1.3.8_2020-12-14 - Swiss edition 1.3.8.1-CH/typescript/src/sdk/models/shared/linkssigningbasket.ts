@@ -1,15 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HrefType } from "./hreftype";
-import { HrefType } from "./hreftype";
-import { HrefType } from "./hreftype";
-import { HrefType } from "./hreftype";
-import { HrefType } from "./hreftype";
-import { HrefType } from "./hreftype";
-import { HrefType } from "./hreftype";
-import { HrefType } from "./hreftype";
-import { HrefType } from "./hreftype";
-import { HrefType } from "./hreftype";
-import { HrefType } from "./hreftype";
+
 
 
 // LinksSigningBasket
@@ -60,36 +51,36 @@ import { HrefType } from "./hreftype";
  * 
 **/
 export class LinksSigningBasket extends SpeakeasyBase {
-  @Metadata({ data: "json, name=scaOAuth" })
+  @SpeakeasyMetadata({ data: "json, name=scaOAuth" })
   scaOAuth?: HrefType;
 
-  @Metadata({ data: "json, name=scaRedirect" })
+  @SpeakeasyMetadata({ data: "json, name=scaRedirect" })
   scaRedirect?: HrefType;
 
-  @Metadata({ data: "json, name=scaStatus" })
+  @SpeakeasyMetadata({ data: "json, name=scaStatus" })
   scaStatus?: HrefType;
 
-  @Metadata({ data: "json, name=self" })
+  @SpeakeasyMetadata({ data: "json, name=self" })
   self?: HrefType;
 
-  @Metadata({ data: "json, name=startAuthorisation" })
+  @SpeakeasyMetadata({ data: "json, name=startAuthorisation" })
   startAuthorisation?: HrefType;
 
-  @Metadata({ data: "json, name=startAuthorisationWithAuthenticationMethodSelection" })
+  @SpeakeasyMetadata({ data: "json, name=startAuthorisationWithAuthenticationMethodSelection" })
   startAuthorisationWithAuthenticationMethodSelection?: HrefType;
 
-  @Metadata({ data: "json, name=startAuthorisationWithEncryptedPsuAuthentication" })
+  @SpeakeasyMetadata({ data: "json, name=startAuthorisationWithEncryptedPsuAuthentication" })
   startAuthorisationWithEncryptedPsuAuthentication?: HrefType;
 
-  @Metadata({ data: "json, name=startAuthorisationWithPsuAuthentication" })
+  @SpeakeasyMetadata({ data: "json, name=startAuthorisationWithPsuAuthentication" })
   startAuthorisationWithPsuAuthentication?: HrefType;
 
-  @Metadata({ data: "json, name=startAuthorisationWithPsuIdentification" })
+  @SpeakeasyMetadata({ data: "json, name=startAuthorisationWithPsuIdentification" })
   startAuthorisationWithPsuIdentification?: HrefType;
 
-  @Metadata({ data: "json, name=startAuthorisationWithTransactionAuthorisation" })
+  @SpeakeasyMetadata({ data: "json, name=startAuthorisationWithTransactionAuthorisation" })
   startAuthorisationWithTransactionAuthorisation?: HrefType;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: HrefType;
 }

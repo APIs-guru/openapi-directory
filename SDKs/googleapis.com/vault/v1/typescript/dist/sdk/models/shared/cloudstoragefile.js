@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // CloudStorageFile
 /**
  * The export file in Cloud Storage
@@ -33,19 +33,19 @@ var CloudStorageFile = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=bucketName" }),
+        SpeakeasyMetadata({ data: "json, name=bucketName" }),
         __metadata("design:type", String)
     ], CloudStorageFile.prototype, "bucketName", void 0);
     __decorate([
-        Metadata({ data: "json, name=md5Hash" }),
+        SpeakeasyMetadata({ data: "json, name=md5Hash" }),
         __metadata("design:type", String)
     ], CloudStorageFile.prototype, "md5Hash", void 0);
     __decorate([
-        Metadata({ data: "json, name=objectName" }),
+        SpeakeasyMetadata({ data: "json, name=objectName" }),
         __metadata("design:type", String)
     ], CloudStorageFile.prototype, "objectName", void 0);
     __decorate([
-        Metadata({ data: "json, name=size" }),
+        SpeakeasyMetadata({ data: "json, name=size" }),
         __metadata("design:type", String)
     ], CloudStorageFile.prototype, "size", void 0);
     return CloudStorageFile;

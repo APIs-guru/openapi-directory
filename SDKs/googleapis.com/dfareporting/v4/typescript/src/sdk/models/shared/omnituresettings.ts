@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // OmnitureSettings
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Omniture Integration Settings.
 **/
 export class OmnitureSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=omnitureCostDataEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=omnitureCostDataEnabled" })
   omnitureCostDataEnabled?: boolean;
 
-  @Metadata({ data: "json, name=omnitureIntegrationEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=omnitureIntegrationEnabled" })
   omnitureIntegrationEnabled?: boolean;
 }

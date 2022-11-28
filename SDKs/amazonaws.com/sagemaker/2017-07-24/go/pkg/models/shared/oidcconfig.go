@@ -1,5 +1,7 @@
 package shared
 
+// OidcConfig
+// Use this parameter to configure your OIDC Identity Provider (IdP).
 type OidcConfig struct {
 	AuthorizationEndpoint string `json:"AuthorizationEndpoint"`
 	ClientID              string `json:"ClientId"`

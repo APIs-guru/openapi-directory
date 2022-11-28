@@ -9,22 +9,9 @@ type GetPaymentsQueryParams struct {
 	PageSize *int64 `queryParam:"style=form,explode=true,name=page_size"`
 }
 
-type GetPaymentsSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type GetPaymentsSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type GetPaymentsSecurity struct {
-	Option1 *GetPaymentsSecurityOption1 `security:"option"`
-	Option2 *GetPaymentsSecurityOption2 `security:"option"`
-}
-
-type GetPaymentsRequest struct {
-	QueryParams GetPaymentsQueryParams
-	Security    GetPaymentsSecurity
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
 }
 
 type GetPayments200ApplicationJSON struct {
@@ -36,6 +23,11 @@ type GetPayments200ApplicationJSON struct {
 
 type GetPaymentsDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type GetPaymentsRequest struct {
+	QueryParams GetPaymentsQueryParams
+	Security    GetPaymentsSecurity
 }
 
 type GetPaymentsResponse struct {

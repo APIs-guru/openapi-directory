@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import nesteddevicetype
-from . import nestedrearporttemplate
+from sdk import utils
+from . import *
 
 class FrontPortTemplateTypeLabelEnum(str, Enum):
     EIGHT_P8_C = "8P8C"
@@ -40,17 +41,17 @@ class FrontPortTemplateTypeValueEnum(str, Enum):
 @dataclass_json
 @dataclass
 class FrontPortTemplateType:
-    label: FrontPortTemplateTypeLabelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
-    value: FrontPortTemplateTypeValueEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    label: FrontPortTemplateTypeLabelEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('label') }})
+    value: FrontPortTemplateTypeValueEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     
 
 @dataclass_json
 @dataclass
 class FrontPortTemplate:
-    device_type: nesteddevicetype.NestedDeviceType = field(default=None, metadata={'dataclasses_json': { 'field_name': 'device_type' }})
-    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    rear_port: nestedrearporttemplate.NestedRearPortTemplate = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rear_port' }})
-    rear_port_position: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rear_port_position' }})
-    type: FrontPortTemplateType = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    device_type: NestedDeviceType = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('device_type') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    rear_port: NestedRearPortTemplate = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('rear_port') }})
+    type: FrontPortTemplateType = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    rear_port_position: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rear_port_position') }})
     

@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ContainerEnabledBuiltInVariableEnum(str, Enum):
     PAGE_URL = "pageUrl"
@@ -121,15 +123,19 @@ class ContainerUsageContextEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Container:
-    account_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'accountId' }})
-    container_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'containerId' }})
-    domain_name: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'domainName' }})
-    enabled_built_in_variable: Optional[List[ContainerEnabledBuiltInVariableEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enabledBuiltInVariable' }})
-    fingerprint: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fingerprint' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    notes: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'notes' }})
-    public_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'publicId' }})
-    time_zone_country_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timeZoneCountryId' }})
-    time_zone_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timeZoneId' }})
-    usage_context: Optional[List[ContainerUsageContextEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'usageContext' }})
+    r"""Container
+    Represents a Google Tag Manager Container.
+    """
+    
+    account_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('accountId') }})
+    container_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('containerId') }})
+    domain_name: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('domainName') }})
+    enabled_built_in_variable: Optional[List[ContainerEnabledBuiltInVariableEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('enabledBuiltInVariable') }})
+    fingerprint: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fingerprint') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    notes: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('notes') }})
+    public_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('publicId') }})
+    time_zone_country_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('timeZoneCountryId') }})
+    time_zone_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('timeZoneId') }})
+    usage_context: Optional[List[ContainerUsageContextEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('usageContext') }})
     

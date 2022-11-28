@@ -1,21 +1,20 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import apipassthrough
-from . import signingalgorithm_enum
-from . import validity
-from . import validity
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class IssueCertificateRequest:
-    api_passthrough: Optional[apipassthrough.APIPassthrough] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ApiPassthrough' }})
-    certificate_authority_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CertificateAuthorityArn' }})
-    csr: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Csr' }})
-    idempotency_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IdempotencyToken' }})
-    signing_algorithm: signingalgorithm_enum.SigningAlgorithmEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SigningAlgorithm' }})
-    template_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TemplateArn' }})
-    validity: validity.Validity = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Validity' }})
-    validity_not_before: Optional[validity.Validity] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ValidityNotBefore' }})
+    certificate_authority_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('CertificateAuthorityArn') }})
+    csr: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Csr') }})
+    signing_algorithm: SigningAlgorithmEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('SigningAlgorithm') }})
+    validity: Validity = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Validity') }})
+    api_passthrough: Optional[APIPassthrough] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ApiPassthrough') }})
+    idempotency_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('IdempotencyToken') }})
+    template_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TemplateArn') }})
+    validity_not_before: Optional[Validity] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ValidityNotBefore') }})
     

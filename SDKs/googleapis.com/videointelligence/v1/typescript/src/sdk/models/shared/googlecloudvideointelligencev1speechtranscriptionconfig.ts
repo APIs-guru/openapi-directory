@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudVideointelligenceV1SpeechContext } from "./googlecloudvideointelligencev1speechcontext";
+
 
 
 // GoogleCloudVideointelligenceV1SpeechTranscriptionConfig
@@ -8,30 +8,30 @@ import { GoogleCloudVideointelligenceV1SpeechContext } from "./googlecloudvideoi
  * Config for SPEECH_TRANSCRIPTION.
 **/
 export class GoogleCloudVideointelligenceV1SpeechTranscriptionConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=audioTracks" })
+  @SpeakeasyMetadata({ data: "json, name=audioTracks" })
   audioTracks?: number[];
 
-  @Metadata({ data: "json, name=diarizationSpeakerCount" })
+  @SpeakeasyMetadata({ data: "json, name=diarizationSpeakerCount" })
   diarizationSpeakerCount?: number;
 
-  @Metadata({ data: "json, name=enableAutomaticPunctuation" })
+  @SpeakeasyMetadata({ data: "json, name=enableAutomaticPunctuation" })
   enableAutomaticPunctuation?: boolean;
 
-  @Metadata({ data: "json, name=enableSpeakerDiarization" })
+  @SpeakeasyMetadata({ data: "json, name=enableSpeakerDiarization" })
   enableSpeakerDiarization?: boolean;
 
-  @Metadata({ data: "json, name=enableWordConfidence" })
+  @SpeakeasyMetadata({ data: "json, name=enableWordConfidence" })
   enableWordConfidence?: boolean;
 
-  @Metadata({ data: "json, name=filterProfanity" })
+  @SpeakeasyMetadata({ data: "json, name=filterProfanity" })
   filterProfanity?: boolean;
 
-  @Metadata({ data: "json, name=languageCode" })
+  @SpeakeasyMetadata({ data: "json, name=languageCode" })
   languageCode?: string;
 
-  @Metadata({ data: "json, name=maxAlternatives" })
+  @SpeakeasyMetadata({ data: "json, name=maxAlternatives" })
   maxAlternatives?: number;
 
-  @Metadata({ data: "json, name=speechContexts", elemType: shared.GoogleCloudVideointelligenceV1SpeechContext })
+  @SpeakeasyMetadata({ data: "json, name=speechContexts", elemType: GoogleCloudVideointelligenceV1SpeechContext })
   speechContexts?: GoogleCloudVideointelligenceV1SpeechContext[];
 }

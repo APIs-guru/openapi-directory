@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BatchUpdatePartitionFailureEntry } from "./batchupdatepartitionfailureentry";
 
 
+
 export class BatchUpdatePartitionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Errors", elemType: shared.BatchUpdatePartitionFailureEntry })
+  @SpeakeasyMetadata({ data: "json, name=Errors", elemType: BatchUpdatePartitionFailureEntry })
   errors?: BatchUpdatePartitionFailureEntry[];
 }

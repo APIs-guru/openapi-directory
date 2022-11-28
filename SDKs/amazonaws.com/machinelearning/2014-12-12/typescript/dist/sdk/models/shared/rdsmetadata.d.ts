@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { RdsDatabase } from "./rdsdatabase";
 /**
  * The datasource details that are specific to Amazon RDS.

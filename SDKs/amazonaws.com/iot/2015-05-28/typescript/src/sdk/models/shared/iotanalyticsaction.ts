@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // IotAnalyticsAction
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Sends message data to an IoT Analytics channel.
 **/
 export class IotAnalyticsAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=batchMode" })
+  @SpeakeasyMetadata({ data: "json, name=batchMode" })
   batchMode?: boolean;
 
-  @Metadata({ data: "json, name=channelArn" })
+  @SpeakeasyMetadata({ data: "json, name=channelArn" })
   channelArn?: string;
 
-  @Metadata({ data: "json, name=channelName" })
+  @SpeakeasyMetadata({ data: "json, name=channelName" })
   channelName?: string;
 
-  @Metadata({ data: "json, name=roleArn" })
+  @SpeakeasyMetadata({ data: "json, name=roleArn" })
   roleArn?: string;
 }

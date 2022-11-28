@@ -1,103 +1,104 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetSessionInfoUsingPostQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sessionID" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sessionID" })
   sessionId?: string;
 }
 
 
-export class GetSessionInfoUsingPostRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetSessionInfoUsingPostQueryParams;
-}
-
-
 export class GetSessionInfoUsingPost200ApplicationJsonDataInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authorID" })
+  @SpeakeasyMetadata({ data: "json, name=authorID" })
   authorId?: string;
 
-  @Metadata({ data: "json, name=groupID" })
+  @SpeakeasyMetadata({ data: "json, name=groupID" })
   groupId?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=validUntil" })
+  @SpeakeasyMetadata({ data: "json, name=validUntil" })
   validUntil?: number;
 }
 
 
 export class GetSessionInfoUsingPost200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=info" })
+  @SpeakeasyMetadata({ data: "json, name=info" })
   info?: GetSessionInfoUsingPost200ApplicationJsonDataInfo;
 }
 
 
 export class GetSessionInfoUsingPost200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: GetSessionInfoUsingPost200ApplicationJsonData;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetSessionInfoUsingPost400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetSessionInfoUsingPost401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetSessionInfoUsingPost500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class GetSessionInfoUsingPostRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetSessionInfoUsingPostQueryParams;
+}
+
+
 export class GetSessionInfoUsingPostResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getSessionInfoUsingPost200ApplicationJsonObject?: GetSessionInfoUsingPost200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getSessionInfoUsingPost400ApplicationJsonObject?: GetSessionInfoUsingPost400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getSessionInfoUsingPost401ApplicationJsonObject?: GetSessionInfoUsingPost401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getSessionInfoUsingPost500ApplicationJsonObject?: GetSessionInfoUsingPost500ApplicationJson;
 }

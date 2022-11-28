@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudchannelAccountsRegisterPathParams:
-    account: str = field(default=None, metadata={'path_param': { 'field_name': 'account', 'style': 'simple', 'explode': False }})
+    account: str = field(metadata={'path_param': { 'field_name': 'account', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class CloudchannelAccountsRegisterQueryParams:
 
 @dataclass
 class CloudchannelAccountsRegisterSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudchannelAccountsRegisterRequest:
-    path_params: CloudchannelAccountsRegisterPathParams = field(default=None)
-    query_params: CloudchannelAccountsRegisterQueryParams = field(default=None)
+    path_params: CloudchannelAccountsRegisterPathParams = field()
+    query_params: CloudchannelAccountsRegisterQueryParams = field()
+    security: CloudchannelAccountsRegisterSecurity = field()
     request: Optional[shared.GoogleCloudChannelV1RegisterSubscriberRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: CloudchannelAccountsRegisterSecurity = field(default=None)
     
 
 @dataclass
 class CloudchannelAccountsRegisterResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_channel_v1_register_subscriber_response: Optional[shared.GoogleCloudChannelV1RegisterSubscriberResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UsageByAccount } from "./usagebyaccount";
+
 
 
 // UsageRecord
@@ -8,12 +8,12 @@ import { UsageByAccount } from "./usagebyaccount";
  * Provides quota and aggregated usage data for an Amazon Macie account.
 **/
 export class UsageRecord extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=freeTrialStartDate" })
+  @SpeakeasyMetadata({ data: "json, name=freeTrialStartDate" })
   freeTrialStartDate?: Date;
 
-  @Metadata({ data: "json, name=usage", elemType: shared.UsageByAccount })
+  @SpeakeasyMetadata({ data: "json, name=usage", elemType: UsageByAccount })
   usage?: UsageByAccount[];
 }

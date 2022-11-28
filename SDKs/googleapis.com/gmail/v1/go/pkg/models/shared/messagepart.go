@@ -1,5 +1,7 @@
 package shared
 
+// MessagePart
+// A single MIME message part.
 type MessagePart struct {
 	Body     *MessagePartBody    `json:"body,omitempty"`
 	Filename *string             `json:"filename,omitempty"`

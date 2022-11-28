@@ -1,5 +1,7 @@
 package shared
 
+// UpdateTableColumnPropertiesRequest
+// Updates the TableColumnProperties of columns in a table.
 type UpdateTableColumnPropertiesRequest struct {
 	ColumnIndices         []int32                `json:"columnIndices,omitempty"`
 	Fields                *string                `json:"fields,omitempty"`

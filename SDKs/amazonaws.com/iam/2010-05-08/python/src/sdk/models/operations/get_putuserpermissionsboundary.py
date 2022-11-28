@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetPutUserPermissionsBoundaryActionEnum(str, Enum):
     PUT_USER_PERMISSIONS_BOUNDARY = "PutUserPermissionsBoundary"
@@ -10,10 +14,10 @@ class GetPutUserPermissionsBoundaryVersionEnum(str, Enum):
 
 @dataclass
 class GetPutUserPermissionsBoundaryQueryParams:
-    action: GetPutUserPermissionsBoundaryActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    permissions_boundary: str = field(default=None, metadata={'query_param': { 'field_name': 'PermissionsBoundary', 'style': 'form', 'explode': True }})
-    user_name: str = field(default=None, metadata={'query_param': { 'field_name': 'UserName', 'style': 'form', 'explode': True }})
-    version: GetPutUserPermissionsBoundaryVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetPutUserPermissionsBoundaryActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    permissions_boundary: str = field(metadata={'query_param': { 'field_name': 'PermissionsBoundary', 'style': 'form', 'explode': True }})
+    user_name: str = field(metadata={'query_param': { 'field_name': 'UserName', 'style': 'form', 'explode': True }})
+    version: GetPutUserPermissionsBoundaryVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetPutUserPermissionsBoundaryHeaders:
 
 @dataclass
 class GetPutUserPermissionsBoundaryRequest:
-    query_params: GetPutUserPermissionsBoundaryQueryParams = field(default=None)
-    headers: GetPutUserPermissionsBoundaryHeaders = field(default=None)
+    headers: GetPutUserPermissionsBoundaryHeaders = field()
+    query_params: GetPutUserPermissionsBoundaryQueryParams = field()
     
 
 @dataclass
 class GetPutUserPermissionsBoundaryResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

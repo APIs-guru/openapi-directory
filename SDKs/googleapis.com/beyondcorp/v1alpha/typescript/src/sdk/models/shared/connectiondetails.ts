@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Connection } from "./connection";
+
 
 
 // ConnectionDetails
@@ -7,9 +8,9 @@ import { Connection } from "./connection";
  * Details of the Connection.
 **/
 export class ConnectionDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=connection" })
+  @SpeakeasyMetadata({ data: "json, name=connection" })
   connection?: Connection;
 
-  @Metadata({ data: "json, name=recentMigVms" })
+  @SpeakeasyMetadata({ data: "json, name=recentMigVms" })
   recentMigVms?: string[];
 }

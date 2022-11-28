@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// CredentialAuthorization
+// Credential Authorization
 type CredentialAuthorization struct {
 	AuthorizedCredentialID    *int64     `json:"authorized_credential_id,omitempty"`
 	AuthorizedCredentialNote  *string    `json:"authorized_credential_note,omitempty"`

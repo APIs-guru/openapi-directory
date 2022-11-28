@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var ErrorProtoLocationTypeEnum;
 (function (ErrorProtoLocationTypeEnum) {
     ErrorProtoLocationTypeEnum["Path"] = "PATH";
@@ -39,31 +39,31 @@ var ErrorProto = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=argument" }),
+        SpeakeasyMetadata({ data: "json, name=argument" }),
         __metadata("design:type", Array)
     ], ErrorProto.prototype, "argument", void 0);
     __decorate([
-        Metadata({ data: "json, name=code" }),
+        SpeakeasyMetadata({ data: "json, name=code" }),
         __metadata("design:type", String)
     ], ErrorProto.prototype, "code", void 0);
     __decorate([
-        Metadata({ data: "json, name=debugInfo" }),
+        SpeakeasyMetadata({ data: "json, name=debugInfo" }),
         __metadata("design:type", String)
     ], ErrorProto.prototype, "debugInfo", void 0);
     __decorate([
-        Metadata({ data: "json, name=domain" }),
+        SpeakeasyMetadata({ data: "json, name=domain" }),
         __metadata("design:type", String)
     ], ErrorProto.prototype, "domain", void 0);
     __decorate([
-        Metadata({ data: "json, name=externalErrorMessage" }),
+        SpeakeasyMetadata({ data: "json, name=externalErrorMessage" }),
         __metadata("design:type", String)
     ], ErrorProto.prototype, "externalErrorMessage", void 0);
     __decorate([
-        Metadata({ data: "json, name=location" }),
+        SpeakeasyMetadata({ data: "json, name=location" }),
         __metadata("design:type", String)
     ], ErrorProto.prototype, "location", void 0);
     __decorate([
-        Metadata({ data: "json, name=locationType" }),
+        SpeakeasyMetadata({ data: "json, name=locationType" }),
         __metadata("design:type", String)
     ], ErrorProto.prototype, "locationType", void 0);
     return ErrorProto;

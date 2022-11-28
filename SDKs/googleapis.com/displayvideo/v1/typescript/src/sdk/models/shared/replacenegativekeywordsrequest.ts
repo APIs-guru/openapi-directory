@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { NegativeKeyword } from "./negativekeyword";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { NegativeKeywordInput } from "./negativekeyword";
 
 
-// ReplaceNegativeKeywordsRequest
+
+// ReplaceNegativeKeywordsRequestInput
 /** 
  * Request message for NegativeKeywordService.ReplaceNegativeKeywords.
 **/
-export class ReplaceNegativeKeywordsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=newNegativeKeywords", elemType: shared.NegativeKeyword })
-  newNegativeKeywords?: NegativeKeyword[];
+export class ReplaceNegativeKeywordsRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=newNegativeKeywords", elemType: NegativeKeywordInput })
+  newNegativeKeywords?: NegativeKeywordInput[];
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { IntegrationLinkTypeEnum } from "./integrationlinktypeenum";
 import { SettingTypeEnum } from "./settingtypeenum";
 import { RolloutPercentageItemModel } from "./rolloutpercentageitemmodel";

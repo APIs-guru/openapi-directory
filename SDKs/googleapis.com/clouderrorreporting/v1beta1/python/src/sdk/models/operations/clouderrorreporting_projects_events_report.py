@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ClouderrorreportingProjectsEventsReportPathParams:
-    project_name: str = field(default=None, metadata={'path_param': { 'field_name': 'projectName', 'style': 'simple', 'explode': False }})
+    project_name: str = field(metadata={'path_param': { 'field_name': 'projectName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class ClouderrorreportingProjectsEventsReportQueryParams:
 
 @dataclass
 class ClouderrorreportingProjectsEventsReportSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ClouderrorreportingProjectsEventsReportRequest:
-    path_params: ClouderrorreportingProjectsEventsReportPathParams = field(default=None)
-    query_params: ClouderrorreportingProjectsEventsReportQueryParams = field(default=None)
+    path_params: ClouderrorreportingProjectsEventsReportPathParams = field()
+    query_params: ClouderrorreportingProjectsEventsReportQueryParams = field()
+    security: ClouderrorreportingProjectsEventsReportSecurity = field()
     request: Optional[shared.ReportedErrorEvent] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ClouderrorreportingProjectsEventsReportSecurity = field(default=None)
     
 
 @dataclass
 class ClouderrorreportingProjectsEventsReportResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     report_error_event_response: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

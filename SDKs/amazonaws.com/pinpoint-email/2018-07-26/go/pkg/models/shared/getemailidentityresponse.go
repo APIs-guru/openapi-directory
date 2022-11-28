@@ -1,5 +1,7 @@
 package shared
 
+// GetEmailIdentityResponse
+// Details about an email identity.
 type GetEmailIdentityResponse struct {
 	DkimAttributes           *DkimAttributes     `json:"DkimAttributes,omitempty"`
 	FeedbackForwardingStatus *bool               `json:"FeedbackForwardingStatus,omitempty"`

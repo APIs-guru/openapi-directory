@@ -1,10 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EncryptionInfo } from "./encryptioninfo";
+import { EncryptionInfoInput } from "./encryptioninfo";
+
 
 export enum BackupStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Creating = "CREATING"
-,    Ready = "READY"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Creating = "CREATING",
+    Ready = "READY"
 }
 
 
@@ -13,27 +15,46 @@ export enum BackupStateEnum {
  * A backup of a Cloud Bigtable table.
 **/
 export class Backup extends SpeakeasyBase {
-  @Metadata({ data: "json, name=encryptionInfo" })
+  @SpeakeasyMetadata({ data: "json, name=encryptionInfo" })
   encryptionInfo?: EncryptionInfo;
 
-  @Metadata({ data: "json, name=endTime" })
+  @SpeakeasyMetadata({ data: "json, name=endTime" })
   endTime?: string;
 
-  @Metadata({ data: "json, name=expireTime" })
+  @SpeakeasyMetadata({ data: "json, name=expireTime" })
   expireTime?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=sizeBytes" })
+  @SpeakeasyMetadata({ data: "json, name=sizeBytes" })
   sizeBytes?: string;
 
-  @Metadata({ data: "json, name=sourceTable" })
+  @SpeakeasyMetadata({ data: "json, name=sourceTable" })
   sourceTable?: string;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: BackupStateEnum;
+}
+
+
+// BackupInput
+/** 
+ * A backup of a Cloud Bigtable table.
+**/
+export class BackupInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=encryptionInfo" })
+  encryptionInfo?: EncryptionInfoInput;
+
+  @SpeakeasyMetadata({ data: "json, name=expireTime" })
+  expireTime?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=sourceTable" })
+  sourceTable?: string;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { StatusValuesEnum } from "./statusvaluesenum";
 /**
  * Provides information about the permission set provisioning status.

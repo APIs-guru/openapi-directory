@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MountedDataDisk
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes mounted data disk.
 **/
 export class MountedDataDisk extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataDisk" })
+  @SpeakeasyMetadata({ data: "json, name=dataDisk" })
   dataDisk?: string;
 }

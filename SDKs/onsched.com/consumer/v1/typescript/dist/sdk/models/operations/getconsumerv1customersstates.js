@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetConsumerV1CustomersStatesQueryParams = /** @class */ (function (_super) {
     __extends(GetConsumerV1CustomersStatesQueryParams, _super);
@@ -30,7 +30,7 @@ var GetConsumerV1CustomersStatesQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=country" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=country" }),
         __metadata("design:type", String)
     ], GetConsumerV1CustomersStatesQueryParams.prototype, "country", void 0);
     return GetConsumerV1CustomersStatesQueryParams;
@@ -42,7 +42,7 @@ var GetConsumerV1CustomersStatesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetConsumerV1CustomersStatesQueryParams)
     ], GetConsumerV1CustomersStatesRequest.prototype, "queryParams", void 0);
     return GetConsumerV1CustomersStatesRequest;
@@ -54,15 +54,15 @@ var GetConsumerV1CustomersStatesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetConsumerV1CustomersStatesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata({ elemType: shared.StateViewModel }),
+        SpeakeasyMetadata({ elemType: shared.StateViewModel }),
         __metadata("design:type", Array)
     ], GetConsumerV1CustomersStatesResponse.prototype, "stateViewModels", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetConsumerV1CustomersStatesResponse.prototype, "statusCode", void 0);
     return GetConsumerV1CustomersStatesResponse;

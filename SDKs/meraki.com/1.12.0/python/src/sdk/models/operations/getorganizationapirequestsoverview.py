@@ -4,7 +4,7 @@ from typing import Any,Optional
 
 @dataclass
 class GetOrganizationAPIRequestsOverviewPathParams:
-    organization_id: str = field(default=None, metadata={'path_param': { 'field_name': 'organizationId', 'style': 'simple', 'explode': False }})
+    organization_id: str = field(metadata={'path_param': { 'field_name': 'organizationId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,13 +16,13 @@ class GetOrganizationAPIRequestsOverviewQueryParams:
 
 @dataclass
 class GetOrganizationAPIRequestsOverviewRequest:
-    path_params: GetOrganizationAPIRequestsOverviewPathParams = field(default=None)
-    query_params: GetOrganizationAPIRequestsOverviewQueryParams = field(default=None)
+    path_params: GetOrganizationAPIRequestsOverviewPathParams = field()
+    query_params: GetOrganizationAPIRequestsOverviewQueryParams = field()
     
 
 @dataclass
 class GetOrganizationAPIRequestsOverviewResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_organization_api_requests_overview_200_application_json_object: Optional[dict[str, Any]] = field(default=None)
     

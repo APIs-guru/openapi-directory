@@ -1,5 +1,7 @@
 package shared
 
-type BatchUpdateDealsRequest struct {
-	Requests []UpdateDealRequest `json:"requests,omitempty"`
+// BatchUpdateDealsRequestInput
+// Request message for batch updating deals.
+type BatchUpdateDealsRequestInput struct {
+	Requests []UpdateDealRequestInput `json:"requests,omitempty"`
 }

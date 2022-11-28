@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var RemovePermissionPathParams = /** @class */ (function (_super) {
     __extends(RemovePermissionPathParams, _super);
     function RemovePermissionPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=FunctionName" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=FunctionName" }),
         __metadata("design:type", String)
     ], RemovePermissionPathParams.prototype, "functionName", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=StatementId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=StatementId" }),
         __metadata("design:type", String)
     ], RemovePermissionPathParams.prototype, "statementId", void 0);
     return RemovePermissionPathParams;
@@ -45,11 +45,11 @@ var RemovePermissionQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Qualifier" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Qualifier" }),
         __metadata("design:type", String)
     ], RemovePermissionQueryParams.prototype, "qualifier", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=RevisionId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=RevisionId" }),
         __metadata("design:type", String)
     ], RemovePermissionQueryParams.prototype, "revisionId", void 0);
     return RemovePermissionQueryParams;
@@ -61,31 +61,31 @@ var RemovePermissionHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], RemovePermissionHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], RemovePermissionHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], RemovePermissionHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], RemovePermissionHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], RemovePermissionHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], RemovePermissionHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], RemovePermissionHeaders.prototype, "xAmzSignedHeaders", void 0);
     return RemovePermissionHeaders;
@@ -97,15 +97,15 @@ var RemovePermissionRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", RemovePermissionPathParams)
     ], RemovePermissionRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", RemovePermissionQueryParams)
     ], RemovePermissionRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", RemovePermissionHeaders)
     ], RemovePermissionRequest.prototype, "headers", void 0);
     return RemovePermissionRequest;
@@ -117,31 +117,31 @@ var RemovePermissionResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], RemovePermissionResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], RemovePermissionResponse.prototype, "invalidParameterValueException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], RemovePermissionResponse.prototype, "preconditionFailedException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], RemovePermissionResponse.prototype, "resourceNotFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], RemovePermissionResponse.prototype, "serviceException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], RemovePermissionResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], RemovePermissionResponse.prototype, "tooManyRequestsException", void 0);
     return RemovePermissionResponse;

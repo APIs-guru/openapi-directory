@@ -11,14 +11,14 @@ class TagAPIGetNamesQueryParams:
 
 @dataclass
 class TagAPIGetNamesRequest:
-    query_params: TagAPIGetNamesQueryParams = field(default=None)
+    query_params: TagAPIGetNamesQueryParams = field()
     
 
 @dataclass
 class TagAPIGetNamesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     tag_api_get_names_200_application_json_strings: Optional[List[str]] = field(default=None)
     tag_api_get_names_200_application_jsonp_strings: Optional[List[str]] = field(default=None)
     tag_api_get_names_200_text_json_strings: Optional[List[str]] = field(default=None)

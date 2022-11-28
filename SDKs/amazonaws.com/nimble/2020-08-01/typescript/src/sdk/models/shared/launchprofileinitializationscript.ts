@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class LaunchProfileInitializationScript extends SpeakeasyBase {
-  @Metadata({ data: "json, name=script" })
+  @SpeakeasyMetadata({ data: "json, name=script" })
   script?: string;
 
-  @Metadata({ data: "json, name=studioComponentId" })
+  @SpeakeasyMetadata({ data: "json, name=studioComponentId" })
   studioComponentId?: string;
 
-  @Metadata({ data: "json, name=studioComponentName" })
+  @SpeakeasyMetadata({ data: "json, name=studioComponentName" })
   studioComponentName?: string;
 }

@@ -8,6 +8,26 @@ const (
 	GoogleAppsDriveLabelsV2betaLabelLabelTypeEnumAdmin                GoogleAppsDriveLabelsV2betaLabelLabelTypeEnum = "ADMIN"
 )
 
+// GoogleAppsDriveLabelsV2betaLabelInput
+// A label defines a taxonomy that can be applied to Drive items in order to organize and search across items. Labels can be simple strings, or can contain fields that describe additional metadata that can be further used to organize and search Drive items.
+type GoogleAppsDriveLabelsV2betaLabelInput struct {
+	AppliedCapabilities *GoogleAppsDriveLabelsV2betaLabelAppliedCapabilities `json:"appliedCapabilities,omitempty"`
+	AppliedLabelPolicy  *GoogleAppsDriveLabelsV2betaLabelAppliedLabelPolicy  `json:"appliedLabelPolicy,omitempty"`
+	Creator             *GoogleAppsDriveLabelsV2betaUserInfo                 `json:"creator,omitempty"`
+	Disabler            *GoogleAppsDriveLabelsV2betaUserInfo                 `json:"disabler,omitempty"`
+	DisplayHints        *GoogleAppsDriveLabelsV2betaLabelDisplayHints        `json:"displayHints,omitempty"`
+	Fields              []GoogleAppsDriveLabelsV2betaFieldInput              `json:"fields,omitempty"`
+	LabelType           *GoogleAppsDriveLabelsV2betaLabelLabelTypeEnum       `json:"labelType,omitempty"`
+	LearnMoreURI        *string                                              `json:"learnMoreUri,omitempty"`
+	Lifecycle           *GoogleAppsDriveLabelsV2betaLifecycleInput           `json:"lifecycle,omitempty"`
+	Properties          *GoogleAppsDriveLabelsV2betaLabelProperties          `json:"properties,omitempty"`
+	Publisher           *GoogleAppsDriveLabelsV2betaUserInfo                 `json:"publisher,omitempty"`
+	RevisionCreator     *GoogleAppsDriveLabelsV2betaUserInfo                 `json:"revisionCreator,omitempty"`
+	SchemaCapabilities  *GoogleAppsDriveLabelsV2betaLabelSchemaCapabilities  `json:"schemaCapabilities,omitempty"`
+}
+
+// GoogleAppsDriveLabelsV2betaLabel
+// A label defines a taxonomy that can be applied to Drive items in order to organize and search across items. Labels can be simple strings, or can contain fields that describe additional metadata that can be further used to organize and search Drive items.
 type GoogleAppsDriveLabelsV2betaLabel struct {
 	AppliedCapabilities *GoogleAppsDriveLabelsV2betaLabelAppliedCapabilities `json:"appliedCapabilities,omitempty"`
 	AppliedLabelPolicy  *GoogleAppsDriveLabelsV2betaLabelAppliedLabelPolicy  `json:"appliedLabelPolicy,omitempty"`

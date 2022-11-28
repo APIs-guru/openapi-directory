@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PolicyQualifierIdEnum } from "./policyqualifieridenum";
 import { Qualifier } from "./qualifier";
+
 
 
 // PolicyQualifierInfo
@@ -8,9 +9,9 @@ import { Qualifier } from "./qualifier";
  * Modifies the <code>CertPolicyId</code> of a <code>PolicyInformation</code> object with a qualifier. ACM Private CA supports the certification practice statement (CPS) qualifier.
 **/
 export class PolicyQualifierInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PolicyQualifierId" })
+  @SpeakeasyMetadata({ data: "json, name=PolicyQualifierId" })
   policyQualifierId: PolicyQualifierIdEnum;
 
-  @Metadata({ data: "json, name=Qualifier" })
+  @SpeakeasyMetadata({ data: "json, name=Qualifier" })
   qualifier: Qualifier;
 }

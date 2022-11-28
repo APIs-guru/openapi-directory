@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PreprocessingBinarizeAdvancedRequestBodyImageFile extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, content=true" })
+  @SpeakeasyMetadata({ data: "multipart_form, content=true" })
   content: Uint8Array;
 
-  @Metadata({ data: "multipart_form, name=imageFile" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=imageFile" })
   imageFile: string;
 }
 
 
 export class PreprocessingBinarizeAdvancedRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, file=true" })
+  @SpeakeasyMetadata({ data: "multipart_form, file=true" })
   imageFile: PreprocessingBinarizeAdvancedRequestBodyImageFile;
 }
 
 
 export class PreprocessingBinarizeAdvancedSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   apikey: shared.SchemeApikey;
 }
 
 
 export class PreprocessingBinarizeAdvancedRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=multipart/form-data" })
+  @SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" })
   request: PreprocessingBinarizeAdvancedRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: PreprocessingBinarizeAdvancedSecurity;
 }
 
 
 export class PreprocessingBinarizeAdvancedResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   preprocessingBinarizeAdvanced200ApplicationJsonByteString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   preprocessingBinarizeAdvanced200ApplicationXmlByteString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   preprocessingBinarizeAdvanced200TextJsonByteString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   preprocessingBinarizeAdvanced200TextXmlByteString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

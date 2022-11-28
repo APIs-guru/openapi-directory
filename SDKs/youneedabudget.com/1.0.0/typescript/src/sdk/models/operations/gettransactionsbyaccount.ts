@@ -1,52 +1,53 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetTransactionsByAccountPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=account_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=account_id" })
   accountId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=budget_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=budget_id" })
   budgetId: string;
 }
 
 export enum GetTransactionsByAccountTypeEnum {
-    Uncategorized = "uncategorized"
-,    Unapproved = "unapproved"
+    Uncategorized = "uncategorized",
+    Unapproved = "unapproved"
 }
 
 
 export class GetTransactionsByAccountQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=last_knowledge_of_server" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=last_knowledge_of_server" })
   lastKnowledgeOfServer?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=since_date" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=since_date" })
   sinceDate?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=type" })
   type?: GetTransactionsByAccountTypeEnum;
 }
 
 
 export class GetTransactionsByAccountRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetTransactionsByAccountPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetTransactionsByAccountQueryParams;
 }
 
 
 export class GetTransactionsByAccountResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   transactionsResponse?: shared.TransactionsResponse;
 }

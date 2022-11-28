@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { XssMatchSetSummary } from "./xssmatchsetsummary";
+
 
 
 // ListXssMatchSetsResponse
@@ -8,9 +8,9 @@ import { XssMatchSetSummary } from "./xssmatchsetsummary";
  * The response to a <a>ListXssMatchSets</a> request.
 **/
 export class ListXssMatchSetsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NextMarker" })
+  @SpeakeasyMetadata({ data: "json, name=NextMarker" })
   nextMarker?: string;
 
-  @Metadata({ data: "json, name=XssMatchSets", elemType: shared.XssMatchSetSummary })
+  @SpeakeasyMetadata({ data: "json, name=XssMatchSets", elemType: XssMatchSetSummary })
   xssMatchSets?: XssMatchSetSummary[];
 }

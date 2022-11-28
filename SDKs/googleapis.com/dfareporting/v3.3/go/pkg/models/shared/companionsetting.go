@@ -1,5 +1,7 @@
 package shared
 
+// CompanionSetting
+// Companion Settings
 type CompanionSetting struct {
 	CompanionsDisabled *bool   `json:"companionsDisabled,omitempty"`
 	EnabledSizes       []Size  `json:"enabledSizes,omitempty"`

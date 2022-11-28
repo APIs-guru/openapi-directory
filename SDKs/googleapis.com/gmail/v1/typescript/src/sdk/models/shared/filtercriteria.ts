@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum FilterCriteriaSizeComparisonEnum {
-    Unspecified = "unspecified"
-,    Smaller = "smaller"
-,    Larger = "larger"
+    Unspecified = "unspecified",
+    Smaller = "smaller",
+    Larger = "larger"
 }
 
 
@@ -12,30 +13,30 @@ export enum FilterCriteriaSizeComparisonEnum {
  * Message matching criteria.
 **/
 export class FilterCriteria extends SpeakeasyBase {
-  @Metadata({ data: "json, name=excludeChats" })
+  @SpeakeasyMetadata({ data: "json, name=excludeChats" })
   excludeChats?: boolean;
 
-  @Metadata({ data: "json, name=from" })
+  @SpeakeasyMetadata({ data: "json, name=from" })
   from?: string;
 
-  @Metadata({ data: "json, name=hasAttachment" })
+  @SpeakeasyMetadata({ data: "json, name=hasAttachment" })
   hasAttachment?: boolean;
 
-  @Metadata({ data: "json, name=negatedQuery" })
+  @SpeakeasyMetadata({ data: "json, name=negatedQuery" })
   negatedQuery?: string;
 
-  @Metadata({ data: "json, name=query" })
+  @SpeakeasyMetadata({ data: "json, name=query" })
   query?: string;
 
-  @Metadata({ data: "json, name=size" })
+  @SpeakeasyMetadata({ data: "json, name=size" })
   size?: number;
 
-  @Metadata({ data: "json, name=sizeComparison" })
+  @SpeakeasyMetadata({ data: "json, name=sizeComparison" })
   sizeComparison?: FilterCriteriaSizeComparisonEnum;
 
-  @Metadata({ data: "json, name=subject" })
+  @SpeakeasyMetadata({ data: "json, name=subject" })
   subject?: string;
 
-  @Metadata({ data: "json, name=to" })
+  @SpeakeasyMetadata({ data: "json, name=to" })
   to?: string;
 }

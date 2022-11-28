@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import product
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeProductsResponse:
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
-    products: List[product.Product] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Products' }})
+    products: List[Product] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Products') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
     

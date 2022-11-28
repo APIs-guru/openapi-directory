@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Category } from "./category";
 import { GeoTaxonomy } from "./geotaxonomy";
 import { PricingInfo } from "./pricinginfo";
+
 
 
 // Sku
@@ -10,27 +10,27 @@ import { PricingInfo } from "./pricinginfo";
  * Encapsulates a single SKU in Google Cloud Platform
 **/
 export class Sku extends SpeakeasyBase {
-  @Metadata({ data: "json, name=category" })
+  @SpeakeasyMetadata({ data: "json, name=category" })
   category?: Category;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=geoTaxonomy" })
+  @SpeakeasyMetadata({ data: "json, name=geoTaxonomy" })
   geoTaxonomy?: GeoTaxonomy;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=pricingInfo", elemType: shared.PricingInfo })
+  @SpeakeasyMetadata({ data: "json, name=pricingInfo", elemType: PricingInfo })
   pricingInfo?: PricingInfo[];
 
-  @Metadata({ data: "json, name=serviceProviderName" })
+  @SpeakeasyMetadata({ data: "json, name=serviceProviderName" })
   serviceProviderName?: string;
 
-  @Metadata({ data: "json, name=serviceRegions" })
+  @SpeakeasyMetadata({ data: "json, name=serviceRegions" })
   serviceRegions?: string[];
 
-  @Metadata({ data: "json, name=skuId" })
+  @SpeakeasyMetadata({ data: "json, name=skuId" })
   skuId?: string;
 }

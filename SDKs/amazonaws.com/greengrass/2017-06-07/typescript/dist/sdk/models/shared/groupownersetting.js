@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GroupOwnerSetting
 /**
  * Group owner related settings for local resources.
@@ -33,11 +33,11 @@ var GroupOwnerSetting = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AutoAddGroupOwner" }),
+        SpeakeasyMetadata({ data: "json, name=AutoAddGroupOwner" }),
         __metadata("design:type", Boolean)
     ], GroupOwnerSetting.prototype, "autoAddGroupOwner", void 0);
     __decorate([
-        Metadata({ data: "json, name=GroupOwner" }),
+        SpeakeasyMetadata({ data: "json, name=GroupOwner" }),
         __metadata("design:type", String)
     ], GroupOwnerSetting.prototype, "groupOwner", void 0);
     return GroupOwnerSetting;

@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class AppPkgPutPathParams:
-    app_pkg_id: str = field(default=None, metadata={'path_param': { 'field_name': 'appPkgId', 'style': 'simple', 'explode': False }})
+    app_pkg_id: str = field(metadata={'path_param': { 'field_name': 'appPkgId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class AppPkgPutRequest:
-    path_params: AppPkgPutPathParams = field(default=None)
+    path_params: AppPkgPutPathParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'application/zip' }})
     
 
 @dataclass
 class AppPkgPutResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     problem_details: Optional[shared.ProblemDetails] = field(default=None)
-    status_code: int = field(default=None)
     

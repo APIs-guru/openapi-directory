@@ -5,35 +5,25 @@ from sdk.models import shared
 
 @dataclass
 class GetMessengerAccountPathParams:
-    external_id: str = field(default=None, metadata={'path_param': { 'field_name': 'external_id', 'style': 'simple', 'explode': False }})
-    
-
-@dataclass
-class GetMessengerAccountSecurityOption1:
-    bearer_auth: shared.SchemeBearerAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
-    
-
-@dataclass
-class GetMessengerAccountSecurityOption2:
-    basic_auth: shared.SchemeBasicAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    external_id: str = field(metadata={'path_param': { 'field_name': 'external_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetMessengerAccountSecurity:
-    option1: Optional[GetMessengerAccountSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[GetMessengerAccountSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
+    basic_auth: Optional[shared.SchemeBasicAuth] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    bearer_auth: Optional[shared.SchemeBearerAuth] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class GetMessengerAccountRequest:
-    path_params: GetMessengerAccountPathParams = field(default=None)
-    security: GetMessengerAccountSecurity = field(default=None)
+    path_params: GetMessengerAccountPathParams = field()
+    security: GetMessengerAccountSecurity = field()
     
 
 @dataclass
 class GetMessengerAccountResponse:
+    content_type: str = field()
+    status_code: int = field()
     four_hundred_and_one_response: Optional[shared.FourHundredAndOneResponse] = field(default=None)
-    content_type: str = field(default=None)
     messenger_account_response: Optional[shared.MessengerAccountResponse] = field(default=None)
-    status_code: int = field(default=None)
     

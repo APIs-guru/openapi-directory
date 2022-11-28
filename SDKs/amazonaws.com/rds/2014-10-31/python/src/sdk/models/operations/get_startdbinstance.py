@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetStartDbInstanceActionEnum(str, Enum):
     START_DB_INSTANCE = "StartDBInstance"
@@ -10,9 +14,9 @@ class GetStartDbInstanceVersionEnum(str, Enum):
 
 @dataclass
 class GetStartDbInstanceQueryParams:
-    action: GetStartDbInstanceActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    db_instance_identifier: str = field(default=None, metadata={'query_param': { 'field_name': 'DBInstanceIdentifier', 'style': 'form', 'explode': True }})
-    version: GetStartDbInstanceVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetStartDbInstanceActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    db_instance_identifier: str = field(metadata={'query_param': { 'field_name': 'DBInstanceIdentifier', 'style': 'form', 'explode': True }})
+    version: GetStartDbInstanceVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetStartDbInstanceHeaders:
 
 @dataclass
 class GetStartDbInstanceRequest:
-    query_params: GetStartDbInstanceQueryParams = field(default=None)
-    headers: GetStartDbInstanceHeaders = field(default=None)
+    headers: GetStartDbInstanceHeaders = field()
+    query_params: GetStartDbInstanceQueryParams = field()
     
 
 @dataclass
 class GetStartDbInstanceResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

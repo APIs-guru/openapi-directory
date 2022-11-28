@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetListingCarIdMediaPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class GetListingCarIdMediaQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=api_key" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_key" })
   apiKey?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=append_api_key" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=append_api_key" })
   appendApiKey?: boolean;
 }
 
 
 export class GetListingCarIdMediaRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetListingCarIdMediaPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetListingCarIdMediaQueryParams;
 }
 
 
 export class GetListingCarIdMediaResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   listingMedia?: shared.ListingMedia;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

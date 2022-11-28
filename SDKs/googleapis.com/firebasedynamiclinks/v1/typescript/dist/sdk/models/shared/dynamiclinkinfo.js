@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AnalyticsInfo } from "./analyticsinfo";
 import { AndroidInfo } from "./androidinfo";
 import { DesktopInfo } from "./desktopinfo";
@@ -39,39 +39,39 @@ var DynamicLinkInfo = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=analyticsInfo" }),
+        SpeakeasyMetadata({ data: "json, name=analyticsInfo" }),
         __metadata("design:type", AnalyticsInfo)
     ], DynamicLinkInfo.prototype, "analyticsInfo", void 0);
     __decorate([
-        Metadata({ data: "json, name=androidInfo" }),
+        SpeakeasyMetadata({ data: "json, name=androidInfo" }),
         __metadata("design:type", AndroidInfo)
     ], DynamicLinkInfo.prototype, "androidInfo", void 0);
     __decorate([
-        Metadata({ data: "json, name=desktopInfo" }),
+        SpeakeasyMetadata({ data: "json, name=desktopInfo" }),
         __metadata("design:type", DesktopInfo)
     ], DynamicLinkInfo.prototype, "desktopInfo", void 0);
     __decorate([
-        Metadata({ data: "json, name=domainUriPrefix" }),
+        SpeakeasyMetadata({ data: "json, name=domainUriPrefix" }),
         __metadata("design:type", String)
     ], DynamicLinkInfo.prototype, "domainUriPrefix", void 0);
     __decorate([
-        Metadata({ data: "json, name=dynamicLinkDomain" }),
+        SpeakeasyMetadata({ data: "json, name=dynamicLinkDomain" }),
         __metadata("design:type", String)
     ], DynamicLinkInfo.prototype, "dynamicLinkDomain", void 0);
     __decorate([
-        Metadata({ data: "json, name=iosInfo" }),
+        SpeakeasyMetadata({ data: "json, name=iosInfo" }),
         __metadata("design:type", IosInfo)
     ], DynamicLinkInfo.prototype, "iosInfo", void 0);
     __decorate([
-        Metadata({ data: "json, name=link" }),
+        SpeakeasyMetadata({ data: "json, name=link" }),
         __metadata("design:type", String)
     ], DynamicLinkInfo.prototype, "link", void 0);
     __decorate([
-        Metadata({ data: "json, name=navigationInfo" }),
+        SpeakeasyMetadata({ data: "json, name=navigationInfo" }),
         __metadata("design:type", NavigationInfo)
     ], DynamicLinkInfo.prototype, "navigationInfo", void 0);
     __decorate([
-        Metadata({ data: "json, name=socialMetaTagInfo" }),
+        SpeakeasyMetadata({ data: "json, name=socialMetaTagInfo" }),
         __metadata("design:type", SocialMetaTagInfo)
     ], DynamicLinkInfo.prototype, "socialMetaTagInfo", void 0);
     return DynamicLinkInfo;

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RuleStateEnum } from "./rulestateenum";
 var DescribeRuleResponse = /** @class */ (function (_super) {
     __extends(DescribeRuleResponse, _super);
@@ -30,43 +30,43 @@ var DescribeRuleResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Arn" }),
+        SpeakeasyMetadata({ data: "json, name=Arn" }),
         __metadata("design:type", String)
     ], DescribeRuleResponse.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=CreatedBy" }),
+        SpeakeasyMetadata({ data: "json, name=CreatedBy" }),
         __metadata("design:type", String)
     ], DescribeRuleResponse.prototype, "createdBy", void 0);
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], DescribeRuleResponse.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=EventBusName" }),
+        SpeakeasyMetadata({ data: "json, name=EventBusName" }),
         __metadata("design:type", String)
     ], DescribeRuleResponse.prototype, "eventBusName", void 0);
     __decorate([
-        Metadata({ data: "json, name=EventPattern" }),
+        SpeakeasyMetadata({ data: "json, name=EventPattern" }),
         __metadata("design:type", String)
     ], DescribeRuleResponse.prototype, "eventPattern", void 0);
     __decorate([
-        Metadata({ data: "json, name=ManagedBy" }),
+        SpeakeasyMetadata({ data: "json, name=ManagedBy" }),
         __metadata("design:type", String)
     ], DescribeRuleResponse.prototype, "managedBy", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], DescribeRuleResponse.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=RoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=RoleArn" }),
         __metadata("design:type", String)
     ], DescribeRuleResponse.prototype, "roleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=ScheduleExpression" }),
+        SpeakeasyMetadata({ data: "json, name=ScheduleExpression" }),
         __metadata("design:type", String)
     ], DescribeRuleResponse.prototype, "scheduleExpression", void 0);
     __decorate([
-        Metadata({ data: "json, name=State" }),
+        SpeakeasyMetadata({ data: "json, name=State" }),
         __metadata("design:type", String)
     ], DescribeRuleResponse.prototype, "state", void 0);
     return DescribeRuleResponse;

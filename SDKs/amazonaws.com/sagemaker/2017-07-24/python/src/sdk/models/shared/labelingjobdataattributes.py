@@ -1,11 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import contentclassifier_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class LabelingJobDataAttributes:
-    content_classifiers: Optional[List[contentclassifier_enum.ContentClassifierEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ContentClassifiers' }})
+    r"""LabelingJobDataAttributes
+    Attributes of the data specified by the customer. Use these to describe the data to be labeled.
+    """
+    
+    content_classifiers: Optional[List[ContentClassifierEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ContentClassifiers') }})
     

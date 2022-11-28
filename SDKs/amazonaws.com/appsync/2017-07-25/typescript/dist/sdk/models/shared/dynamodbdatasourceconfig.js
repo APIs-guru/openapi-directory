@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeltaSyncConfig } from "./deltasyncconfig";
 // DynamodbDataSourceConfig
 /**
@@ -34,23 +34,23 @@ var DynamodbDataSourceConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=awsRegion" }),
+        SpeakeasyMetadata({ data: "json, name=awsRegion" }),
         __metadata("design:type", String)
     ], DynamodbDataSourceConfig.prototype, "awsRegion", void 0);
     __decorate([
-        Metadata({ data: "json, name=deltaSyncConfig" }),
+        SpeakeasyMetadata({ data: "json, name=deltaSyncConfig" }),
         __metadata("design:type", DeltaSyncConfig)
     ], DynamodbDataSourceConfig.prototype, "deltaSyncConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=tableName" }),
+        SpeakeasyMetadata({ data: "json, name=tableName" }),
         __metadata("design:type", String)
     ], DynamodbDataSourceConfig.prototype, "tableName", void 0);
     __decorate([
-        Metadata({ data: "json, name=useCallerCredentials" }),
+        SpeakeasyMetadata({ data: "json, name=useCallerCredentials" }),
         __metadata("design:type", Boolean)
     ], DynamodbDataSourceConfig.prototype, "useCallerCredentials", void 0);
     __decorate([
-        Metadata({ data: "json, name=versioned" }),
+        SpeakeasyMetadata({ data: "json, name=versioned" }),
         __metadata("design:type", Boolean)
     ], DynamodbDataSourceConfig.prototype, "versioned", void 0);
     return DynamodbDataSourceConfig;

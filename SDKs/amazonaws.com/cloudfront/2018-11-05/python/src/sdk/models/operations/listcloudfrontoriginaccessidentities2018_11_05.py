@@ -1,5 +1,8 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
 
 
 @dataclass
@@ -21,13 +24,13 @@ class ListCloudFrontOriginAccessIdentities20181105Headers:
 
 @dataclass
 class ListCloudFrontOriginAccessIdentities20181105Request:
-    query_params: ListCloudFrontOriginAccessIdentities20181105QueryParams = field(default=None)
-    headers: ListCloudFrontOriginAccessIdentities20181105Headers = field(default=None)
+    headers: ListCloudFrontOriginAccessIdentities20181105Headers = field()
+    query_params: ListCloudFrontOriginAccessIdentities20181105QueryParams = field()
     
 
 @dataclass
 class ListCloudFrontOriginAccessIdentities20181105Response:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,30 +1,31 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IngestionInputConfiguration } from "./ingestioninputconfiguration";
 import { DatasetStatusEnum } from "./datasetstatusenum";
 
 
+
 export class DescribeDatasetResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=DatasetArn" })
+  @SpeakeasyMetadata({ data: "json, name=DatasetArn" })
   datasetArn?: string;
 
-  @Metadata({ data: "json, name=DatasetName" })
+  @SpeakeasyMetadata({ data: "json, name=DatasetName" })
   datasetName?: string;
 
-  @Metadata({ data: "json, name=IngestionInputConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=IngestionInputConfiguration" })
   ingestionInputConfiguration?: IngestionInputConfiguration;
 
-  @Metadata({ data: "json, name=LastUpdatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=LastUpdatedAt" })
   lastUpdatedAt?: Date;
 
-  @Metadata({ data: "json, name=Schema" })
+  @SpeakeasyMetadata({ data: "json, name=Schema" })
   schema?: string;
 
-  @Metadata({ data: "json, name=ServerSideKmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=ServerSideKmsKeyId" })
   serverSideKmsKeyId?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: DatasetStatusEnum;
 }

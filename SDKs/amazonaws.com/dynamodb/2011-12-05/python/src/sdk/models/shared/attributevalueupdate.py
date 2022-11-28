@@ -1,13 +1,21 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import attributeaction_enum
-from . import attributevalue
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AttributeValueUpdate:
-    action: Optional[attributeaction_enum.AttributeActionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Action' }})
-    value: Optional[attributevalue.AttributeValue] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Value' }})
+    r"""AttributeValueUpdate
+    Specifies the attribute to update and how to perform the update. Possible values: <code>PUT</code> (default), <code>ADD</code> or <code>DELETE</code>.
+    """
+    
+    action: Optional[AttributeActionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Action') }})
+    value: Optional[AttributeValue] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Value') }})
     

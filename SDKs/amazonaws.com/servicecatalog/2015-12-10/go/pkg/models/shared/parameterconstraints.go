@@ -1,5 +1,7 @@
 package shared
 
+// ParameterConstraints
+// The constraints that the administrator has put on the parameter.
 type ParameterConstraints struct {
 	AllowedPattern        *string  `json:"AllowedPattern,omitempty"`
 	AllowedValues         []string `json:"AllowedValues,omitempty"`

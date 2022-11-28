@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TenantResource } from "./tenantresource";
+
 
 
 // TenancyUnit
@@ -8,18 +8,18 @@ import { TenantResource } from "./tenantresource";
  * Representation of a tenancy unit.
 **/
 export class TenancyUnit extends SpeakeasyBase {
-  @Metadata({ data: "json, name=consumer" })
+  @SpeakeasyMetadata({ data: "json, name=consumer" })
   consumer?: string;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=service" })
+  @SpeakeasyMetadata({ data: "json, name=service" })
   service?: string;
 
-  @Metadata({ data: "json, name=tenantResources", elemType: shared.TenantResource })
+  @SpeakeasyMetadata({ data: "json, name=tenantResources", elemType: TenantResource })
   tenantResources?: TenantResource[];
 }

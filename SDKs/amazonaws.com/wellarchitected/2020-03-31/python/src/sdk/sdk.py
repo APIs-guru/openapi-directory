@@ -1,8 +1,11 @@
-import warnings
+
+__doc__ = """ SDK Documentation: https://docs.aws.amazon.com/wellarchitected/ - Amazon Web Services documentation"""
 import requests
-from typing import Any,List,Optional
-from sdk.models import operations, shared
+from typing import Any,Optional
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -14,37 +17,63 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    r"""SDK Documentation: https://docs.aws.amazon.com/wellarchitected/ - Amazon Web Services documentation"""
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
-    
-    def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
+            self._server_url = server_url
 
+        
+    
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        
+    
+
+    def config_security(self, security: shared.Security):
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        
+    
+    
     
     def associate_lenses(self, request: operations.AssociateLensesRequest) -> operations.AssociateLensesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Associate a lens to a workload.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/workloads/{WorkloadId}/associateLenses", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -81,22 +110,22 @@ class SDK:
 
     
     def create_milestone(self, request: operations.CreateMilestoneRequest) -> operations.CreateMilestoneResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a milestone for an existing workload.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/workloads/{WorkloadId}/milestones", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -139,22 +168,22 @@ class SDK:
 
     
     def create_workload(self, request: operations.CreateWorkloadRequest) -> operations.CreateWorkloadResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Create a new workload.</p> <p>The owner of a workload can share the workload with other AWS accounts and IAM users in the same AWS Region. Only the owner of a workload can delete it.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/wellarchitected/latest/userguide/define-workload.html\">Defining a Workload</a> in the <i>AWS Well-Architected Tool User Guide</i>.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/workloads"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -193,22 +222,22 @@ class SDK:
 
     
     def create_workload_share(self, request: operations.CreateWorkloadShareRequest) -> operations.CreateWorkloadShareResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Create a workload share.</p> <p>The owner of a workload can share it with other AWS accounts and IAM users in the same AWS Region. Shared access to a workload is not removed until the workload invitation is deleted.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/wellarchitected/latest/userguide/workloads-sharing.html\">Sharing a Workload</a> in the <i>AWS Well-Architected Tool User Guide</i>.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/workloads/{WorkloadId}/shares", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -251,17 +280,18 @@ class SDK:
 
     
     def delete_workload(self, request: operations.DeleteWorkloadRequest) -> operations.DeleteWorkloadResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete an existing workload.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/workloads/{WorkloadId}#ClientRequestToken", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -298,17 +328,18 @@ class SDK:
 
     
     def delete_workload_share(self, request: operations.DeleteWorkloadShareRequest) -> operations.DeleteWorkloadShareResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a workload share.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/workloads/{WorkloadId}/shares/{ShareId}#ClientRequestToken", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -345,22 +376,22 @@ class SDK:
 
     
     def disassociate_lenses(self, request: operations.DisassociateLensesRequest) -> operations.DisassociateLensesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Disassociate a lens from a workload.</p> <note> <p>The AWS Well-Architected Framework lens (<code>wellarchitected</code>) cannot be removed from a workload.</p> </note>
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/workloads/{WorkloadId}/disassociateLenses", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -397,17 +428,18 @@ class SDK:
 
     
     def get_answer(self, request: operations.GetAnswerRequest) -> operations.GetAnswerResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get the answer to a specific question in a workload review.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/workloads/{WorkloadId}/lensReviews/{LensAlias}/answers/{QuestionId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -442,17 +474,18 @@ class SDK:
 
     
     def get_lens_review(self, request: operations.GetLensReviewRequest) -> operations.GetLensReviewResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get lens review.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/workloads/{WorkloadId}/lensReviews/{LensAlias}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -487,17 +520,18 @@ class SDK:
 
     
     def get_lens_review_report(self, request: operations.GetLensReviewReportRequest) -> operations.GetLensReviewReportResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get lens review report.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/workloads/{WorkloadId}/lensReviews/{LensAlias}/report", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -532,17 +566,18 @@ class SDK:
 
     
     def get_lens_version_difference(self, request: operations.GetLensVersionDifferenceRequest) -> operations.GetLensVersionDifferenceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get lens version differences.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/lenses/{LensAlias}/versionDifference#BaseLensVersion", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -577,15 +612,17 @@ class SDK:
 
     
     def get_milestone(self, request: operations.GetMilestoneRequest) -> operations.GetMilestoneResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a milestone for an existing workload.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/workloads/{WorkloadId}/milestones/{MilestoneNumber}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -620,15 +657,17 @@ class SDK:
 
     
     def get_workload(self, request: operations.GetWorkloadRequest) -> operations.GetWorkloadResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get an existing workload.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/workloads/{WorkloadId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -663,17 +702,18 @@ class SDK:
 
     
     def list_answers(self, request: operations.ListAnswersRequest) -> operations.ListAnswersResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List of answers.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/workloads/{WorkloadId}/lensReviews/{LensAlias}/answers", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -708,17 +748,18 @@ class SDK:
 
     
     def list_lens_review_improvements(self, request: operations.ListLensReviewImprovementsRequest) -> operations.ListLensReviewImprovementsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List lens review improvements.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/workloads/{WorkloadId}/lensReviews/{LensAlias}/improvements", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -753,17 +794,18 @@ class SDK:
 
     
     def list_lens_reviews(self, request: operations.ListLensReviewsRequest) -> operations.ListLensReviewsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List lens reviews.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/workloads/{WorkloadId}/lensReviews", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -798,17 +840,18 @@ class SDK:
 
     
     def list_lenses(self, request: operations.ListLensesRequest) -> operations.ListLensesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List the available lenses.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/lenses"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -839,24 +882,23 @@ class SDK:
 
     
     def list_milestones(self, request: operations.ListMilestonesRequest) -> operations.ListMilestonesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List all milestones for an existing workload.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/workloads/{WorkloadId}/milestonesSummaries", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -891,24 +933,23 @@ class SDK:
 
     
     def list_notifications(self, request: operations.ListNotificationsRequest) -> operations.ListNotificationsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List lens notifications.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/notifications"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -939,17 +980,18 @@ class SDK:
 
     
     def list_share_invitations(self, request: operations.ListShareInvitationsRequest) -> operations.ListShareInvitationsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List the workload invitations.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/shareInvitations"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -980,15 +1022,17 @@ class SDK:
 
     
     def list_tags_for_resource(self, request: operations.ListTagsForResourceRequest) -> operations.ListTagsForResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List the tags for a resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/tags/{WorkloadArn}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1011,17 +1055,18 @@ class SDK:
 
     
     def list_workload_shares(self, request: operations.ListWorkloadSharesRequest) -> operations.ListWorkloadSharesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List the workload shares associated with the workload.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/workloads/{WorkloadId}/shares", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1056,24 +1101,23 @@ class SDK:
 
     
     def list_workloads(self, request: operations.ListWorkloadsRequest) -> operations.ListWorkloadsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List workloads. Paginated.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/workloadsSummaries"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1104,22 +1148,22 @@ class SDK:
 
     
     def tag_resource(self, request: operations.TagResourceRequest) -> operations.TagResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Adds one or more tags to the specified resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/tags/{WorkloadArn}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1142,17 +1186,18 @@ class SDK:
 
     
     def untag_resource(self, request: operations.UntagResourceRequest) -> operations.UntagResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Deletes specified tags from a resource.</p> <p>To specify multiple tags, use separate <b>tagKeys</b> parameters, for example:</p> <p> <code>DELETE /tags/WorkloadArn?tagKeys=key1&amp;tagKeys=key2</code> </p>
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/tags/{WorkloadArn}#tagKeys", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1175,22 +1220,22 @@ class SDK:
 
     
     def update_answer(self, request: operations.UpdateAnswerRequest) -> operations.UpdateAnswerResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update the answer to a specific question in a workload review.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/workloads/{WorkloadId}/lensReviews/{LensAlias}/answers/{QuestionId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1229,22 +1274,22 @@ class SDK:
 
     
     def update_lens_review(self, request: operations.UpdateLensReviewRequest) -> operations.UpdateLensReviewResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update lens review.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/workloads/{WorkloadId}/lensReviews/{LensAlias}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1283,22 +1328,22 @@ class SDK:
 
     
     def update_share_invitation(self, request: operations.UpdateShareInvitationRequest) -> operations.UpdateShareInvitationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a workload invitation.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/shareInvitations/{ShareInvitationId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1337,22 +1382,22 @@ class SDK:
 
     
     def update_workload(self, request: operations.UpdateWorkloadRequest) -> operations.UpdateWorkloadResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update an existing workload.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/workloads/{WorkloadId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1391,22 +1436,22 @@ class SDK:
 
     
     def update_workload_share(self, request: operations.UpdateWorkloadShareRequest) -> operations.UpdateWorkloadShareResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a workload share.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/workloads/{WorkloadId}/shares/{ShareId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1445,22 +1490,22 @@ class SDK:
 
     
     def upgrade_lens_review(self, request: operations.UpgradeLensReviewRequest) -> operations.UpgradeLensReviewResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Upgrade lens review.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/workloads/{WorkloadId}/lensReviews/{LensAlias}/upgrade", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

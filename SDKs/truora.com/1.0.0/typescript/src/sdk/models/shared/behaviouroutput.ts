@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Behavior } from "./behavior";
+
 
 
 // BehaviourOutput
@@ -8,9 +8,9 @@ import { Behavior } from "./behavior";
  * Represents behaviour search results
 **/
 export class BehaviourOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=behavior", elemType: shared.Behavior })
+  @SpeakeasyMetadata({ data: "json, name=behavior", elemType: Behavior })
   behavior: Behavior[];
 
-  @Metadata({ data: "json, name=self" })
+  @SpeakeasyMetadata({ data: "json, name=self" })
   self: string;
 }

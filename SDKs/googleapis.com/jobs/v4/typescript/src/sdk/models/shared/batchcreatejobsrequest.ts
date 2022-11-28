@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { Job } from "./job";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { JobInput } from "./job";
 
 
-// BatchCreateJobsRequest
+
+// BatchCreateJobsRequestInput
 /** 
  * Request to create a batch of jobs.
 **/
-export class BatchCreateJobsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=jobs", elemType: shared.Job })
-  jobs?: Job[];
+export class BatchCreateJobsRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=jobs", elemType: JobInput })
+  jobs?: JobInput[];
 }

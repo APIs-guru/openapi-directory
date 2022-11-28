@@ -90,6 +90,7 @@ from .halt import *
 from .list_daemon_timer_scripts import *
 from .list_ipaliases import *
 from .list_timer_scripts import *
+from .mget_info import *
 from .mset_value import *
 from .munset_value import *
 from .new import *

@@ -1,5 +1,7 @@
 package shared
 
+// GcmMessage
+// Specifies the settings for a one-time message that's sent directly to an endpoint through the GCM channel. The GCM channel enables Amazon Pinpoint to send messages to the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), service.
 type GcmMessage struct {
 	Action                *ActionEnum         `json:"Action,omitempty"`
 	Body                  *string             `json:"Body,omitempty"`

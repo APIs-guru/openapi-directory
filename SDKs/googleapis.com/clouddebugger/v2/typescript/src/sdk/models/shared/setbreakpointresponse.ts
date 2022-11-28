@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Breakpoint } from "./breakpoint";
+
 
 
 // SetBreakpointResponse
@@ -7,6 +8,6 @@ import { Breakpoint } from "./breakpoint";
  * Response for setting a breakpoint.
 **/
 export class SetBreakpointResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=breakpoint" })
+  @SpeakeasyMetadata({ data: "json, name=breakpoint" })
   breakpoint?: Breakpoint;
 }

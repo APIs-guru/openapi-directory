@@ -1,40 +1,46 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import stage_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Branch:
-    active_job_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'activeJobId' }})
-    associated_resources: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'associatedResources' }})
-    backend_environment_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'backendEnvironmentArn' }})
-    basic_auth_credentials: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'basicAuthCredentials' }})
-    branch_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'branchArn' }})
-    branch_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'branchName' }})
-    build_spec: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'buildSpec' }})
-    create_time: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    custom_domains: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'customDomains' }})
-    description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    destination_branch: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'destinationBranch' }})
-    display_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayName' }})
-    enable_auto_build: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enableAutoBuild' }})
-    enable_basic_auth: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enableBasicAuth' }})
-    enable_notification: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enableNotification' }})
-    enable_performance_mode: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enablePerformanceMode' }})
-    enable_pull_request_preview: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enablePullRequestPreview' }})
-    environment_variables: dict[str, str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'environmentVariables' }})
-    framework: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'framework' }})
-    pull_request_environment_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pullRequestEnvironmentName' }})
-    source_branch: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sourceBranch' }})
-    stage: stage_enum.StageEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stage' }})
-    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
-    thumbnail_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'thumbnailUrl' }})
-    total_number_of_jobs: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'totalNumberOfJobs' }})
-    ttl: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ttl' }})
-    update_time: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updateTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    r"""Branch
+     The branch for an Amplify app, which maps to a third-party repository branch. 
+    """
+    
+    active_job_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('activeJobId') }})
+    branch_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('branchArn') }})
+    branch_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('branchName') }})
+    create_time: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('createTime'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    custom_domains: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('customDomains') }})
+    description: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    display_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    enable_auto_build: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('enableAutoBuild') }})
+    enable_basic_auth: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('enableBasicAuth') }})
+    enable_notification: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('enableNotification') }})
+    enable_pull_request_preview: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('enablePullRequestPreview') }})
+    environment_variables: dict[str, str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('environmentVariables') }})
+    framework: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('framework') }})
+    stage: StageEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('stage') }})
+    total_number_of_jobs: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('totalNumberOfJobs') }})
+    ttl: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ttl') }})
+    update_time: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('updateTime'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    associated_resources: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('associatedResources') }})
+    backend_environment_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('backendEnvironmentArn') }})
+    basic_auth_credentials: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('basicAuthCredentials') }})
+    build_spec: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('buildSpec') }})
+    destination_branch: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('destinationBranch') }})
+    enable_performance_mode: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('enablePerformanceMode') }})
+    pull_request_environment_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pullRequestEnvironmentName') }})
+    source_branch: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sourceBranch') }})
+    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
+    thumbnail_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('thumbnailUrl') }})
     

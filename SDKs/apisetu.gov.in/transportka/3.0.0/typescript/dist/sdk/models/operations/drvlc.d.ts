@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class DrvlcRequestBodyCertificateParameters extends SpeakeasyBase {
     dob: string;
@@ -18,10 +18,6 @@ export declare class DrvlcRequestBody extends SpeakeasyBase {
 export declare class DrvlcSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class DrvlcRequest extends SpeakeasyBase {
-    request?: DrvlcRequestBody;
-    security: DrvlcSecurity;
 }
 export declare enum Drvlc400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -104,6 +100,10 @@ export declare enum Drvlc504ApplicationJsonErrorDescriptionEnum {
 export declare class Drvlc504ApplicationJson extends SpeakeasyBase {
     error?: Drvlc504ApplicationJsonErrorEnum;
     errorDescription?: Drvlc504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class DrvlcRequest extends SpeakeasyBase {
+    request?: DrvlcRequestBody;
+    security: DrvlcSecurity;
 }
 export declare class DrvlcResponse extends SpeakeasyBase {
     body?: Uint8Array;

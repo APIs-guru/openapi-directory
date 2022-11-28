@@ -22,56 +22,56 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConnectionTypeEnum } from "./connectiontypeenum";
+import { Tag } from "./tag";
 var CreateEnvironmentEc2Request = /** @class */ (function (_super) {
     __extends(CreateEnvironmentEc2Request, _super);
     function CreateEnvironmentEc2Request() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=automaticStopTimeMinutes" }),
+        SpeakeasyMetadata({ data: "json, name=automaticStopTimeMinutes" }),
         __metadata("design:type", Number)
     ], CreateEnvironmentEc2Request.prototype, "automaticStopTimeMinutes", void 0);
     __decorate([
-        Metadata({ data: "json, name=clientRequestToken" }),
+        SpeakeasyMetadata({ data: "json, name=clientRequestToken" }),
         __metadata("design:type", String)
     ], CreateEnvironmentEc2Request.prototype, "clientRequestToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=connectionType" }),
+        SpeakeasyMetadata({ data: "json, name=connectionType" }),
         __metadata("design:type", String)
     ], CreateEnvironmentEc2Request.prototype, "connectionType", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], CreateEnvironmentEc2Request.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=dryRun" }),
+        SpeakeasyMetadata({ data: "json, name=dryRun" }),
         __metadata("design:type", Boolean)
     ], CreateEnvironmentEc2Request.prototype, "dryRun", void 0);
     __decorate([
-        Metadata({ data: "json, name=imageId" }),
+        SpeakeasyMetadata({ data: "json, name=imageId" }),
         __metadata("design:type", String)
     ], CreateEnvironmentEc2Request.prototype, "imageId", void 0);
     __decorate([
-        Metadata({ data: "json, name=instanceType" }),
+        SpeakeasyMetadata({ data: "json, name=instanceType" }),
         __metadata("design:type", String)
     ], CreateEnvironmentEc2Request.prototype, "instanceType", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], CreateEnvironmentEc2Request.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=ownerArn" }),
+        SpeakeasyMetadata({ data: "json, name=ownerArn" }),
         __metadata("design:type", String)
     ], CreateEnvironmentEc2Request.prototype, "ownerArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=subnetId" }),
+        SpeakeasyMetadata({ data: "json, name=subnetId" }),
         __metadata("design:type", String)
     ], CreateEnvironmentEc2Request.prototype, "subnetId", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags", elemType: shared.Tag }),
+        SpeakeasyMetadata({ data: "json, name=tags", elemType: Tag }),
         __metadata("design:type", Array)
     ], CreateEnvironmentEc2Request.prototype, "tags", void 0);
     return CreateEnvironmentEc2Request;

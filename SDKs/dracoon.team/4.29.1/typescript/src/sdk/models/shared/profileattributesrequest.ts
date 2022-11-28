@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { KeyValueEntry } from "./keyvalueentry";
+
 
 
 // ProfileAttributesRequest
@@ -8,6 +8,6 @@ import { KeyValueEntry } from "./keyvalueentry";
  * Request model for setting user profile attributes
 **/
 export class ProfileAttributesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.KeyValueEntry })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: KeyValueEntry })
   items: KeyValueEntry[];
 }

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostRemovePermissionActionEnum(str, Enum):
     REMOVE_PERMISSION = "RemovePermission"
@@ -10,8 +14,8 @@ class PostRemovePermissionVersionEnum(str, Enum):
 
 @dataclass
 class PostRemovePermissionQueryParams:
-    action: PostRemovePermissionActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostRemovePermissionVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostRemovePermissionActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostRemovePermissionVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,13 +31,13 @@ class PostRemovePermissionHeaders:
 
 @dataclass
 class PostRemovePermissionRequest:
-    query_params: PostRemovePermissionQueryParams = field(default=None)
-    headers: PostRemovePermissionHeaders = field(default=None)
+    headers: PostRemovePermissionHeaders = field()
+    query_params: PostRemovePermissionQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostRemovePermissionResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

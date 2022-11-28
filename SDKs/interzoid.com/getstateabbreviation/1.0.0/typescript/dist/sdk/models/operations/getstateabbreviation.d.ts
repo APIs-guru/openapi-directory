@@ -1,16 +1,16 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class GetstateabbreviationQueryParams extends SpeakeasyBase {
     license: string;
     state: string;
-}
-export declare class GetstateabbreviationRequest extends SpeakeasyBase {
-    queryParams: GetstateabbreviationQueryParams;
 }
 export declare class Getstateabbreviation200ApplicationJson extends SpeakeasyBase {
     abbreviation?: string;
     code?: string;
     credits?: string;
     state?: string;
+}
+export declare class GetstateabbreviationRequest extends SpeakeasyBase {
+    queryParams: GetstateabbreviationQueryParams;
 }
 export declare class GetstateabbreviationResponse extends SpeakeasyBase {
     contentType: string;

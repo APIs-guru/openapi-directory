@@ -1,14 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import queryparametervalue
-from . import queryparametervalue
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class QueryParameterValue:
-    array_values: Optional[List[queryparametervalue.QueryParameterValue]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'arrayValues' }})
-    struct_values: Optional[dict[str, queryparametervalue.QueryParameterValue]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'structValues' }})
-    value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    array_values: Optional[List[QueryParameterValue]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('arrayValues') }})
+    struct_values: Optional[dict[str, QueryParameterValue]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('structValues') }})
+    value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     

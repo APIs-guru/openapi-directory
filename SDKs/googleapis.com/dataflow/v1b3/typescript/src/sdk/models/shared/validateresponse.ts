@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { QueryInfo } from "./queryinfo";
+
 
 
 // ValidateResponse
@@ -7,9 +8,9 @@ import { QueryInfo } from "./queryinfo";
  * Response to the validation request.
 **/
 export class ValidateResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errorMessage" })
+  @SpeakeasyMetadata({ data: "json, name=errorMessage" })
   errorMessage?: string;
 
-  @Metadata({ data: "json, name=queryInfo" })
+  @SpeakeasyMetadata({ data: "json, name=queryInfo" })
   queryInfo?: QueryInfo;
 }

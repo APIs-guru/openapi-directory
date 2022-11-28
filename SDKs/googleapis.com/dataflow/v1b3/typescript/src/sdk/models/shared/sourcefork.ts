@@ -1,8 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SourceSplitShard } from "./sourcesplitshard";
 import { DerivedSource } from "./derivedsource";
-import { SourceSplitShard } from "./sourcesplitshard";
-import { DerivedSource } from "./derivedsource";
+
 
 
 // SourceFork
@@ -10,15 +9,15 @@ import { DerivedSource } from "./derivedsource";
  * DEPRECATED in favor of DynamicSourceSplit.
 **/
 export class SourceFork extends SpeakeasyBase {
-  @Metadata({ data: "json, name=primary" })
+  @SpeakeasyMetadata({ data: "json, name=primary" })
   primary?: SourceSplitShard;
 
-  @Metadata({ data: "json, name=primarySource" })
+  @SpeakeasyMetadata({ data: "json, name=primarySource" })
   primarySource?: DerivedSource;
 
-  @Metadata({ data: "json, name=residual" })
+  @SpeakeasyMetadata({ data: "json, name=residual" })
   residual?: SourceSplitShard;
 
-  @Metadata({ data: "json, name=residualSource" })
+  @SpeakeasyMetadata({ data: "json, name=residualSource" })
   residualSource?: DerivedSource;
 }

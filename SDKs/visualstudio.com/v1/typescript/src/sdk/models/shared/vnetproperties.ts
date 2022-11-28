@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class VnetProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=subnetId" })
+  @SpeakeasyMetadata({ data: "json, name=subnetId" })
   subnetId?: string;
 }

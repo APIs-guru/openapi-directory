@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CreateBehaviorInput
@@ -6,33 +7,33 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents paramaters required to give behavior feedback
 **/
 export class CreateBehaviorInput extends SpeakeasyBase {
-  @Metadata({ data: "form, name=birth_date;" })
+  @SpeakeasyMetadata({ data: "form, name=birth_date;" })
   birthDate: Date;
 
-  @Metadata({ data: "form, name=country;" })
+  @SpeakeasyMetadata({ data: "form, name=country;" })
   country: any;
 
-  @Metadata({ data: "form, name=document_id;" })
+  @SpeakeasyMetadata({ data: "form, name=document_id;" })
   documentId: string;
 
-  @Metadata({ data: "form, name=document_type;" })
+  @SpeakeasyMetadata({ data: "form, name=document_type;" })
   documentType: any;
 
-  @Metadata({ data: "form, name=email;" })
+  @SpeakeasyMetadata({ data: "form, name=email;" })
   email: string;
 
-  @Metadata({ data: "form, name=feedback_date;" })
+  @SpeakeasyMetadata({ data: "form, name=feedback_date;" })
   feedbackDate: Date;
 
-  @Metadata({ data: "form, name=first_name;" })
+  @SpeakeasyMetadata({ data: "form, name=first_name;" })
   firstName: string;
 
-  @Metadata({ data: "form, name=last_name;" })
+  @SpeakeasyMetadata({ data: "form, name=last_name;" })
   lastName: string;
 
-  @Metadata({ data: "form, name=phone_number;" })
+  @SpeakeasyMetadata({ data: "form, name=phone_number;" })
   phoneNumber?: string;
 
-  @Metadata({ data: "form, name=reason;" })
+  @SpeakeasyMetadata({ data: "form, name=reason;" })
   reason: any;
 }

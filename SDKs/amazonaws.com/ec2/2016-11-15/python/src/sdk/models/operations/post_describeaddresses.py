@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDescribeAddressesActionEnum(str, Enum):
     DESCRIBE_ADDRESSES = "DescribeAddresses"
@@ -10,8 +14,8 @@ class PostDescribeAddressesVersionEnum(str, Enum):
 
 @dataclass
 class PostDescribeAddressesQueryParams:
-    action: PostDescribeAddressesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDescribeAddressesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDescribeAddressesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDescribeAddressesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDescribeAddressesHeaders:
 
 @dataclass
 class PostDescribeAddressesRequest:
-    query_params: PostDescribeAddressesQueryParams = field(default=None)
-    headers: PostDescribeAddressesHeaders = field(default=None)
+    headers: PostDescribeAddressesHeaders = field()
+    query_params: PostDescribeAddressesQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDescribeAddressesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

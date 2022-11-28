@@ -24,6 +24,8 @@ const (
 	ReposUpdateInformationAboutPagesSiteRequestBodySource2PathEnumRootDocs ReposUpdateInformationAboutPagesSiteRequestBodySource2PathEnum = "/docs"
 )
 
+// ReposUpdateInformationAboutPagesSiteRequestBodySource2
+// Update the source for the repository. Must include the branch name and path.
 type ReposUpdateInformationAboutPagesSiteRequestBodySource2 struct {
 	Branch string                                                         `json:"branch"`
 	Path   ReposUpdateInformationAboutPagesSiteRequestBodySource2PathEnum `json:"path"`

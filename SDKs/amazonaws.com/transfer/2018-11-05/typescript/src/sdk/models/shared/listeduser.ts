@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HomeDirectoryTypeEnum } from "./homedirectorytypeenum";
+
 
 
 // ListedUser
@@ -7,21 +8,21 @@ import { HomeDirectoryTypeEnum } from "./homedirectorytypeenum";
  * Returns properties of the user that you specify.
 **/
 export class ListedUser extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Arn" })
+  @SpeakeasyMetadata({ data: "json, name=Arn" })
   arn: string;
 
-  @Metadata({ data: "json, name=HomeDirectory" })
+  @SpeakeasyMetadata({ data: "json, name=HomeDirectory" })
   homeDirectory?: string;
 
-  @Metadata({ data: "json, name=HomeDirectoryType" })
+  @SpeakeasyMetadata({ data: "json, name=HomeDirectoryType" })
   homeDirectoryType?: HomeDirectoryTypeEnum;
 
-  @Metadata({ data: "json, name=Role" })
+  @SpeakeasyMetadata({ data: "json, name=Role" })
   role?: string;
 
-  @Metadata({ data: "json, name=SshPublicKeyCount" })
+  @SpeakeasyMetadata({ data: "json, name=SshPublicKeyCount" })
   sshPublicKeyCount?: number;
 
-  @Metadata({ data: "json, name=UserName" })
+  @SpeakeasyMetadata({ data: "json, name=UserName" })
   userName?: string;
 }

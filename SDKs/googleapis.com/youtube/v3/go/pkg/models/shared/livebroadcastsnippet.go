@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// LiveBroadcastSnippet
+// Basic broadcast information.
 type LiveBroadcastSnippet struct {
 	ActualEndTime      *time.Time        `json:"actualEndTime,omitempty"`
 	ActualStartTime    *time.Time        `json:"actualStartTime,omitempty"`

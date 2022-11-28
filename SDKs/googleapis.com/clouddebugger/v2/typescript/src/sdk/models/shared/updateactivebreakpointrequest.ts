@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Breakpoint } from "./breakpoint";
+
 
 
 // UpdateActiveBreakpointRequest
@@ -7,6 +8,6 @@ import { Breakpoint } from "./breakpoint";
  * Request to update an active breakpoint.
 **/
 export class UpdateActiveBreakpointRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=breakpoint" })
+  @SpeakeasyMetadata({ data: "json, name=breakpoint" })
   breakpoint?: Breakpoint;
 }

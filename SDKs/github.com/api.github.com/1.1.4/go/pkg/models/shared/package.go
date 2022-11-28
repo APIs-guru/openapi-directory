@@ -404,6 +404,8 @@ const (
 	PackageVisibilityEnumPublic  PackageVisibilityEnum = "public"
 )
 
+// Package
+// A software package
 type Package struct {
 	CreatedAt    time.Time                 `json:"created_at"`
 	HTMLURL      string                    `json:"html_url"`

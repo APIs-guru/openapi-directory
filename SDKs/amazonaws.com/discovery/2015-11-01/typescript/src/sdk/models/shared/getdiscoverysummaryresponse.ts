@@ -1,24 +1,25 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CustomerAgentInfo } from "./customeragentinfo";
 import { CustomerConnectorInfo } from "./customerconnectorinfo";
 
 
+
 export class GetDiscoverySummaryResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=agentSummary" })
+  @SpeakeasyMetadata({ data: "json, name=agentSummary" })
   agentSummary?: CustomerAgentInfo;
 
-  @Metadata({ data: "json, name=applications" })
+  @SpeakeasyMetadata({ data: "json, name=applications" })
   applications?: number;
 
-  @Metadata({ data: "json, name=connectorSummary" })
+  @SpeakeasyMetadata({ data: "json, name=connectorSummary" })
   connectorSummary?: CustomerConnectorInfo;
 
-  @Metadata({ data: "json, name=servers" })
+  @SpeakeasyMetadata({ data: "json, name=servers" })
   servers?: number;
 
-  @Metadata({ data: "json, name=serversMappedToApplications" })
+  @SpeakeasyMetadata({ data: "json, name=serversMappedToApplications" })
   serversMappedToApplications?: number;
 
-  @Metadata({ data: "json, name=serversMappedtoTags" })
+  @SpeakeasyMetadata({ data: "json, name=serversMappedtoTags" })
   serversMappedtoTags?: number;
 }

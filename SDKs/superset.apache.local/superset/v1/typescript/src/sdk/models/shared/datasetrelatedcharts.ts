@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DatasetRelatedChart } from "./datasetrelatedchart";
 
 
+
 export class DatasetRelatedCharts extends SpeakeasyBase {
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count?: number;
 
-  @Metadata({ data: "json, name=result", elemType: shared.DatasetRelatedChart })
+  @SpeakeasyMetadata({ data: "json, name=result", elemType: DatasetRelatedChart })
   result?: DatasetRelatedChart[];
 }

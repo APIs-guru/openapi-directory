@@ -30,7 +30,7 @@ type HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsCreateSecur
 type HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsCreateRequest struct {
 	PathParams  HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsCreatePathParams
 	QueryParams HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsCreateQueryParams
-	Request     *shared.UserDataMapping `request:"mediaType=application/json"`
+	Request     *shared.UserDataMappingInput `request:"mediaType=application/json"`
 	Security    HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsCreateSecurity
 }
 

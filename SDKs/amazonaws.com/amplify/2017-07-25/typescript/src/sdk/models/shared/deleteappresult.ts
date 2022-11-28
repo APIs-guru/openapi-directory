@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { App } from "./app";
+
 
 
 // DeleteAppResult
@@ -7,6 +8,6 @@ import { App } from "./app";
  *  The result structure for the delete app request. 
 **/
 export class DeleteAppResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=app" })
+  @SpeakeasyMetadata({ data: "json, name=app" })
   app: App;
 }

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 class CreateResolverQueryLogConfigXAmzTargetEnum(str, Enum):
@@ -8,6 +12,7 @@ class CreateResolverQueryLogConfigXAmzTargetEnum(str, Enum):
 
 @dataclass
 class CreateResolverQueryLogConfigHeaders:
+    x_amz_target: CreateResolverQueryLogConfigXAmzTargetEnum = field(metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm', 'style': 'simple', 'explode': False }})
     x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256', 'style': 'simple', 'explode': False }})
     x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential', 'style': 'simple', 'explode': False }})
@@ -15,19 +20,19 @@ class CreateResolverQueryLogConfigHeaders:
     x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token', 'style': 'simple', 'explode': False }})
     x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature', 'style': 'simple', 'explode': False }})
     x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders', 'style': 'simple', 'explode': False }})
-    x_amz_target: CreateResolverQueryLogConfigXAmzTargetEnum = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class CreateResolverQueryLogConfigRequest:
-    headers: CreateResolverQueryLogConfigHeaders = field(default=None)
-    request: shared.CreateResolverQueryLogConfigRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateResolverQueryLogConfigHeaders = field()
+    request: shared.CreateResolverQueryLogConfigRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateResolverQueryLogConfigResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     create_resolver_query_log_config_response: Optional[shared.CreateResolverQueryLogConfigResponse] = field(default=None)
     internal_service_error_exception: Optional[Any] = field(default=None)
     invalid_parameter_exception: Optional[Any] = field(default=None)
@@ -35,6 +40,5 @@ class CreateResolverQueryLogConfigResponse:
     limit_exceeded_exception: Optional[Any] = field(default=None)
     resource_exists_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

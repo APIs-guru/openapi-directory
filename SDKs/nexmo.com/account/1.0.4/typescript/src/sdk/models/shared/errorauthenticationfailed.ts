@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ErrorAuthenticationFailed
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Authentication Failed
 **/
 export class ErrorAuthenticationFailed extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error-code" })
+  @SpeakeasyMetadata({ data: "json, name=error-code" })
   errorCode?: any;
 
-  @Metadata({ data: "json, name=error-code-label" })
+  @SpeakeasyMetadata({ data: "json, name=error-code-label" })
   errorCodeLabel?: any;
 }

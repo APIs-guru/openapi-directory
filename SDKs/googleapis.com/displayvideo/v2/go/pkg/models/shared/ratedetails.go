@@ -10,6 +10,8 @@ const (
 	RateDetailsInventorySourceRateTypeEnumInventorySourceRateTypeFlat        RateDetailsInventorySourceRateTypeEnum = "INVENTORY_SOURCE_RATE_TYPE_FLAT"
 )
 
+// RateDetails
+// The rate related settings of the inventory source.
 type RateDetails struct {
 	InventorySourceRateType *RateDetailsInventorySourceRateTypeEnum `json:"inventorySourceRateType,omitempty"`
 	MinimumSpend            *Money                                  `json:"minimumSpend,omitempty"`

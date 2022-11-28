@@ -53,6 +53,7 @@ export * from "./contentfile";
 export * from "./contentreferenceattachment";
 export * from "./contentsubmodule";
 export * from "./contentsymlink";
+export * from "./contenttree";
 export * from "./contributor";
 export * from "./contributoractivity";
 export * from "./deploykey";

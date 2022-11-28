@@ -1,5 +1,7 @@
 package shared
 
+// BasePopular
+// Single popular car in array
 type BasePopular struct {
 	City          *string     `json:"city,omitempty"`
 	Counts        *string     `json:"counts,omitempty"`

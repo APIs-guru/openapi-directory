@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { DatasetEntry } from "./datasetentry";
 import { DatasetContentStatus } from "./datasetcontentstatus";
 var GetDatasetContentResponse = /** @class */ (function (_super) {
     __extends(GetDatasetContentResponse, _super);
@@ -31,15 +31,15 @@ var GetDatasetContentResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=entries", elemType: shared.DatasetEntry }),
+        SpeakeasyMetadata({ data: "json, name=entries", elemType: DatasetEntry }),
         __metadata("design:type", Array)
     ], GetDatasetContentResponse.prototype, "entries", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", DatasetContentStatus)
     ], GetDatasetContentResponse.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=timestamp" }),
+        SpeakeasyMetadata({ data: "json, name=timestamp" }),
         __metadata("design:type", Date)
     ], GetDatasetContentResponse.prototype, "timestamp", void 0);
     return GetDatasetContentResponse;

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ServiceContext } from "./servicecontext";
 import { ErrorGroup } from "./errorgroup";
 import { ErrorEvent } from "./errorevent";

@@ -1,7 +1,8 @@
 
 
+
 export enum TaskStateEnum {
-    InProgress = "IN_PROGRESS"
-,    Canceled = "CANCELED"
-,    Completed = "COMPLETED"
+    InProgress = "IN_PROGRESS",
+    Canceled = "CANCELED",
+    Completed = "COMPLETED"
 }

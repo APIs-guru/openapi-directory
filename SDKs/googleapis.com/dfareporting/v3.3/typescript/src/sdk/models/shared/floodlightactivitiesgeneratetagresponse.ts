@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // FloodlightActivitiesGenerateTagResponse
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Floodlight Activity GenerateTag Response
 **/
 export class FloodlightActivitiesGenerateTagResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=floodlightActivityTag" })
+  @SpeakeasyMetadata({ data: "json, name=floodlightActivityTag" })
   floodlightActivityTag?: string;
 
-  @Metadata({ data: "json, name=globalSiteTagGlobalSnippet" })
+  @SpeakeasyMetadata({ data: "json, name=globalSiteTagGlobalSnippet" })
   globalSiteTagGlobalSnippet?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 }

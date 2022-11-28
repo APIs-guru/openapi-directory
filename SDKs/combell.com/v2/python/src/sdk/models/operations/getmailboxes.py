@@ -10,12 +10,12 @@ class GetMailboxesQueryParams:
 
 @dataclass
 class GetMailboxesRequest:
-    query_params: GetMailboxesQueryParams = field(default=None)
+    query_params: GetMailboxesQueryParams = field()
     
 
 @dataclass
 class GetMailboxesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     mailboxes: Optional[List[shared.Mailbox]] = field(default=None)
-    status_code: int = field(default=None)
     

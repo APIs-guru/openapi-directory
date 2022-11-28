@@ -8,10 +8,6 @@ type GetUserContentRecentJSONSecurity struct {
 	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=query"`
 }
 
-type GetUserContentRecentJSONRequest struct {
-	Security GetUserContentRecentJSONSecurity
-}
-
 type GetUserContentRecentJSON200ApplicationJSONDebug struct {
 	Version *float64 `json:"version,omitempty"`
 }
@@ -95,6 +91,10 @@ type GetUserContentRecentJSON200ApplicationJSON struct {
 	Debug     *GetUserContentRecentJSON200ApplicationJSONDebug   `json:"debug,omitempty"`
 	Results   *GetUserContentRecentJSON200ApplicationJSONResults `json:"results,omitempty"`
 	Status    *string                                            `json:"status,omitempty"`
+}
+
+type GetUserContentRecentJSONRequest struct {
+	Security GetUserContentRecentJSONSecurity
 }
 
 type GetUserContentRecentJSONResponse struct {

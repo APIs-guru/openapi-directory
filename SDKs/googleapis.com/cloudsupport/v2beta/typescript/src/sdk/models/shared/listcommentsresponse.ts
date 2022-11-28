@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Comment } from "./comment";
+
 
 
 // ListCommentsResponse
@@ -8,9 +8,9 @@ import { Comment } from "./comment";
  * The response message for the ListComments endpoint.
 **/
 export class ListCommentsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=comments", elemType: shared.Comment })
+  @SpeakeasyMetadata({ data: "json, name=comments", elemType: Comment })
   comments?: Comment[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

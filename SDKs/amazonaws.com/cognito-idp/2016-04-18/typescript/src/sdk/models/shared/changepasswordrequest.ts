@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ChangePasswordRequest
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the request to change a user password.
 **/
 export class ChangePasswordRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccessToken" })
+  @SpeakeasyMetadata({ data: "json, name=AccessToken" })
   accessToken: string;
 
-  @Metadata({ data: "json, name=PreviousPassword" })
+  @SpeakeasyMetadata({ data: "json, name=PreviousPassword" })
   previousPassword: string;
 
-  @Metadata({ data: "json, name=ProposedPassword" })
+  @SpeakeasyMetadata({ data: "json, name=ProposedPassword" })
   proposedPassword: string;
 }

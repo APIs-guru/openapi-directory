@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ColumnMetadata
 /**
  * The properties (metadata) of a column.
@@ -33,55 +33,55 @@ var ColumnMetadata = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=columnDefault" }),
+        SpeakeasyMetadata({ data: "json, name=columnDefault" }),
         __metadata("design:type", String)
     ], ColumnMetadata.prototype, "columnDefault", void 0);
     __decorate([
-        Metadata({ data: "json, name=isCaseSensitive" }),
+        SpeakeasyMetadata({ data: "json, name=isCaseSensitive" }),
         __metadata("design:type", Boolean)
     ], ColumnMetadata.prototype, "isCaseSensitive", void 0);
     __decorate([
-        Metadata({ data: "json, name=isCurrency" }),
+        SpeakeasyMetadata({ data: "json, name=isCurrency" }),
         __metadata("design:type", Boolean)
     ], ColumnMetadata.prototype, "isCurrency", void 0);
     __decorate([
-        Metadata({ data: "json, name=isSigned" }),
+        SpeakeasyMetadata({ data: "json, name=isSigned" }),
         __metadata("design:type", Boolean)
     ], ColumnMetadata.prototype, "isSigned", void 0);
     __decorate([
-        Metadata({ data: "json, name=label" }),
+        SpeakeasyMetadata({ data: "json, name=label" }),
         __metadata("design:type", String)
     ], ColumnMetadata.prototype, "label", void 0);
     __decorate([
-        Metadata({ data: "json, name=length" }),
+        SpeakeasyMetadata({ data: "json, name=length" }),
         __metadata("design:type", Number)
     ], ColumnMetadata.prototype, "length", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], ColumnMetadata.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=nullable" }),
+        SpeakeasyMetadata({ data: "json, name=nullable" }),
         __metadata("design:type", Number)
     ], ColumnMetadata.prototype, "nullable", void 0);
     __decorate([
-        Metadata({ data: "json, name=precision" }),
+        SpeakeasyMetadata({ data: "json, name=precision" }),
         __metadata("design:type", Number)
     ], ColumnMetadata.prototype, "precision", void 0);
     __decorate([
-        Metadata({ data: "json, name=scale" }),
+        SpeakeasyMetadata({ data: "json, name=scale" }),
         __metadata("design:type", Number)
     ], ColumnMetadata.prototype, "scale", void 0);
     __decorate([
-        Metadata({ data: "json, name=schemaName" }),
+        SpeakeasyMetadata({ data: "json, name=schemaName" }),
         __metadata("design:type", String)
     ], ColumnMetadata.prototype, "schemaName", void 0);
     __decorate([
-        Metadata({ data: "json, name=tableName" }),
+        SpeakeasyMetadata({ data: "json, name=tableName" }),
         __metadata("design:type", String)
     ], ColumnMetadata.prototype, "tableName", void 0);
     __decorate([
-        Metadata({ data: "json, name=typeName" }),
+        SpeakeasyMetadata({ data: "json, name=typeName" }),
         __metadata("design:type", String)
     ], ColumnMetadata.prototype, "typeName", void 0);
     return ColumnMetadata;

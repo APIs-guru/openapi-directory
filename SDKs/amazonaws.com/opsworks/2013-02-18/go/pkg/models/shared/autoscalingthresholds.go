@@ -1,5 +1,7 @@
 package shared
 
+// AutoScalingThresholds
+// Describes a load-based auto scaling upscaling or downscaling threshold configuration, which specifies when AWS OpsWorks Stacks starts or stops load-based instances.
 type AutoScalingThresholds struct {
 	Alarms             []string `json:"Alarms,omitempty"`
 	CPUThreshold       *float64 `json:"CpuThreshold,omitempty"`

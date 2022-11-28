@@ -8,6 +8,8 @@ const (
 	GoogleCloudRetailV2alphaRejoinUserEventsRequestUserEventRejoinScopeEnumUnjoinedEvents                  GoogleCloudRetailV2alphaRejoinUserEventsRequestUserEventRejoinScopeEnum = "UNJOINED_EVENTS"
 )
 
+// GoogleCloudRetailV2alphaRejoinUserEventsRequest
+// Request message for RejoinUserEvents method.
 type GoogleCloudRetailV2alphaRejoinUserEventsRequest struct {
 	UserEventRejoinScope *GoogleCloudRetailV2alphaRejoinUserEventsRequestUserEventRejoinScopeEnum `json:"userEventRejoinScope,omitempty"`
 }

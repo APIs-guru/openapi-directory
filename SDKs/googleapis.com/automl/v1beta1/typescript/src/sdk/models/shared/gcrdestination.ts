@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GcrDestination
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The GCR location where the image must be pushed to.
 **/
 export class GcrDestination extends SpeakeasyBase {
-  @Metadata({ data: "json, name=outputUri" })
+  @SpeakeasyMetadata({ data: "json, name=outputUri" })
   outputUri?: string;
 }

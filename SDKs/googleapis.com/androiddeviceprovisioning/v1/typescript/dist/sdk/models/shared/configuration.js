@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Configuration
 /**
  * A configuration collects the provisioning options for Android devices. Each configuration combines the following: * The EMM device policy controller (DPC) installed on the devices. * EMM policies enforced on the devices. * Metadata displayed on the device to help users during setup. Customers can add as many configurations as they need. However, zero-touch enrollment works best when a customer sets a default configuration that's applied to any new devices the organization purchases.
@@ -33,45 +33,89 @@ var Configuration = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=companyName" }),
+        SpeakeasyMetadata({ data: "json, name=companyName" }),
         __metadata("design:type", String)
     ], Configuration.prototype, "companyName", void 0);
     __decorate([
-        Metadata({ data: "json, name=configurationId" }),
+        SpeakeasyMetadata({ data: "json, name=configurationId" }),
         __metadata("design:type", String)
     ], Configuration.prototype, "configurationId", void 0);
     __decorate([
-        Metadata({ data: "json, name=configurationName" }),
+        SpeakeasyMetadata({ data: "json, name=configurationName" }),
         __metadata("design:type", String)
     ], Configuration.prototype, "configurationName", void 0);
     __decorate([
-        Metadata({ data: "json, name=contactEmail" }),
+        SpeakeasyMetadata({ data: "json, name=contactEmail" }),
         __metadata("design:type", String)
     ], Configuration.prototype, "contactEmail", void 0);
     __decorate([
-        Metadata({ data: "json, name=contactPhone" }),
+        SpeakeasyMetadata({ data: "json, name=contactPhone" }),
         __metadata("design:type", String)
     ], Configuration.prototype, "contactPhone", void 0);
     __decorate([
-        Metadata({ data: "json, name=customMessage" }),
+        SpeakeasyMetadata({ data: "json, name=customMessage" }),
         __metadata("design:type", String)
     ], Configuration.prototype, "customMessage", void 0);
     __decorate([
-        Metadata({ data: "json, name=dpcExtras" }),
+        SpeakeasyMetadata({ data: "json, name=dpcExtras" }),
         __metadata("design:type", String)
     ], Configuration.prototype, "dpcExtras", void 0);
     __decorate([
-        Metadata({ data: "json, name=dpcResourcePath" }),
+        SpeakeasyMetadata({ data: "json, name=dpcResourcePath" }),
         __metadata("design:type", String)
     ], Configuration.prototype, "dpcResourcePath", void 0);
     __decorate([
-        Metadata({ data: "json, name=isDefault" }),
+        SpeakeasyMetadata({ data: "json, name=isDefault" }),
         __metadata("design:type", Boolean)
     ], Configuration.prototype, "isDefault", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Configuration.prototype, "name", void 0);
     return Configuration;
 }(SpeakeasyBase));
 export { Configuration };
+// ConfigurationInput
+/**
+ * A configuration collects the provisioning options for Android devices. Each configuration combines the following: * The EMM device policy controller (DPC) installed on the devices. * EMM policies enforced on the devices. * Metadata displayed on the device to help users during setup. Customers can add as many configurations as they need. However, zero-touch enrollment works best when a customer sets a default configuration that's applied to any new devices the organization purchases.
+**/
+var ConfigurationInput = /** @class */ (function (_super) {
+    __extends(ConfigurationInput, _super);
+    function ConfigurationInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=companyName" }),
+        __metadata("design:type", String)
+    ], ConfigurationInput.prototype, "companyName", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=configurationName" }),
+        __metadata("design:type", String)
+    ], ConfigurationInput.prototype, "configurationName", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=contactEmail" }),
+        __metadata("design:type", String)
+    ], ConfigurationInput.prototype, "contactEmail", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=contactPhone" }),
+        __metadata("design:type", String)
+    ], ConfigurationInput.prototype, "contactPhone", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=customMessage" }),
+        __metadata("design:type", String)
+    ], ConfigurationInput.prototype, "customMessage", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=dpcExtras" }),
+        __metadata("design:type", String)
+    ], ConfigurationInput.prototype, "dpcExtras", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=dpcResourcePath" }),
+        __metadata("design:type", String)
+    ], ConfigurationInput.prototype, "dpcResourcePath", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=isDefault" }),
+        __metadata("design:type", Boolean)
+    ], ConfigurationInput.prototype, "isDefault", void 0);
+    return ConfigurationInput;
+}(SpeakeasyBase));
+export { ConfigurationInput };

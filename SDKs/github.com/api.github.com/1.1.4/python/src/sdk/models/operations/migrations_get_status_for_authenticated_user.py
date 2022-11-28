@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class MigrationsGetStatusForAuthenticatedUserPathParams:
-    migration_id: int = field(default=None, metadata={'path_param': { 'field_name': 'migration_id', 'style': 'simple', 'explode': False }})
+    migration_id: int = field(metadata={'path_param': { 'field_name': 'migration_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,14 +15,14 @@ class MigrationsGetStatusForAuthenticatedUserQueryParams:
 
 @dataclass
 class MigrationsGetStatusForAuthenticatedUserRequest:
-    path_params: MigrationsGetStatusForAuthenticatedUserPathParams = field(default=None)
-    query_params: MigrationsGetStatusForAuthenticatedUserQueryParams = field(default=None)
+    path_params: MigrationsGetStatusForAuthenticatedUserPathParams = field()
+    query_params: MigrationsGetStatusForAuthenticatedUserQueryParams = field()
     
 
 @dataclass
 class MigrationsGetStatusForAuthenticatedUserResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     basic_error: Optional[shared.BasicError] = field(default=None)
     migration: Optional[shared.Migration] = field(default=None)
     

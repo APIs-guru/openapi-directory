@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EventSubscription } from "./eventsubscription";
+
 
 
 // Subscription
@@ -8,12 +8,12 @@ import { EventSubscription } from "./eventsubscription";
  * This data type is used as a response element in the <a>ListEventSubscriptions</a> action.
 **/
 export class Subscription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=eventSubscriptions", elemType: shared.EventSubscription })
+  @SpeakeasyMetadata({ data: "json, name=eventSubscriptions", elemType: EventSubscription })
   eventSubscriptions: EventSubscription[];
 
-  @Metadata({ data: "json, name=resourceArn" })
+  @SpeakeasyMetadata({ data: "json, name=resourceArn" })
   resourceArn: string;
 
-  @Metadata({ data: "json, name=topicArn" })
+  @SpeakeasyMetadata({ data: "json, name=topicArn" })
   topicArn: string;
 }

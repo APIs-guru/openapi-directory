@@ -10,7 +10,7 @@ type DcimInventoryItemsUpdatePathParams struct {
 
 type DcimInventoryItemsUpdateRequest struct {
 	PathParams DcimInventoryItemsUpdatePathParams
-	Request    shared.WritableInventoryItem `request:"mediaType=application/json"`
+	Request    shared.WritableInventoryItemInput `request:"mediaType=application/json"`
 }
 
 type DcimInventoryItemsUpdateResponse struct {

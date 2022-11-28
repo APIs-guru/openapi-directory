@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudApigeeV1Property } from "./googlecloudapigeev1property";
+
 
 
 // GoogleCloudApigeeV1Properties
@@ -8,6 +8,6 @@ import { GoogleCloudApigeeV1Property } from "./googlecloudapigeev1property";
  * Message for compatibility with legacy Edge specification for Java Properties object in JSON.
 **/
 export class GoogleCloudApigeeV1Properties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=property", elemType: shared.GoogleCloudApigeeV1Property })
+  @SpeakeasyMetadata({ data: "json, name=property", elemType: GoogleCloudApigeeV1Property })
   property?: GoogleCloudApigeeV1Property[];
 }

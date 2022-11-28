@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class PostV3AssetLicensingAssetIDPathParams:
-    asset_id: str = field(default=None, metadata={'path_param': { 'field_name': 'assetId', 'style': 'simple', 'explode': False }})
+    asset_id: str = field(metadata={'path_param': { 'field_name': 'assetId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,14 +23,14 @@ class PostV3AssetLicensingAssetIDRequests:
 
 @dataclass
 class PostV3AssetLicensingAssetIDRequest:
-    path_params: PostV3AssetLicensingAssetIDPathParams = field(default=None)
-    headers: PostV3AssetLicensingAssetIDHeaders = field(default=None)
+    headers: PostV3AssetLicensingAssetIDHeaders = field()
+    path_params: PostV3AssetLicensingAssetIDPathParams = field()
     request: Optional[PostV3AssetLicensingAssetIDRequests] = field(default=None)
     
 
 @dataclass
 class PostV3AssetLicensingAssetIDResponse:
+    content_type: str = field()
+    status_code: int = field()
     asset_licensing_response: Optional[shared.AssetLicensingResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

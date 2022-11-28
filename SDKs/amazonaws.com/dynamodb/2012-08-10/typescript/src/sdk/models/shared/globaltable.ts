@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Replica } from "./replica";
+
 
 
 // GlobalTable
@@ -8,9 +8,9 @@ import { Replica } from "./replica";
  * Represents the properties of a global table.
 **/
 export class GlobalTable extends SpeakeasyBase {
-  @Metadata({ data: "json, name=GlobalTableName" })
+  @SpeakeasyMetadata({ data: "json, name=GlobalTableName" })
   globalTableName?: string;
 
-  @Metadata({ data: "json, name=ReplicationGroup", elemType: shared.Replica })
+  @SpeakeasyMetadata({ data: "json, name=ReplicationGroup", elemType: Replica })
   replicationGroup?: Replica[];
 }

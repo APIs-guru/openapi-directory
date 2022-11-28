@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PricingPlanEnum } from "./pricingplanenum";
 // ListMapsResponseEntry
 /**
@@ -34,27 +34,27 @@ var ListMapsResponseEntry = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CreateTime" }),
+        SpeakeasyMetadata({ data: "json, name=CreateTime" }),
         __metadata("design:type", Date)
     ], ListMapsResponseEntry.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=DataSource" }),
+        SpeakeasyMetadata({ data: "json, name=DataSource" }),
         __metadata("design:type", String)
     ], ListMapsResponseEntry.prototype, "dataSource", void 0);
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], ListMapsResponseEntry.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=MapName" }),
+        SpeakeasyMetadata({ data: "json, name=MapName" }),
         __metadata("design:type", String)
     ], ListMapsResponseEntry.prototype, "mapName", void 0);
     __decorate([
-        Metadata({ data: "json, name=PricingPlan" }),
+        SpeakeasyMetadata({ data: "json, name=PricingPlan" }),
         __metadata("design:type", String)
     ], ListMapsResponseEntry.prototype, "pricingPlan", void 0);
     __decorate([
-        Metadata({ data: "json, name=UpdateTime" }),
+        SpeakeasyMetadata({ data: "json, name=UpdateTime" }),
         __metadata("design:type", Date)
     ], ListMapsResponseEntry.prototype, "updateTime", void 0);
     return ListMapsResponseEntry;

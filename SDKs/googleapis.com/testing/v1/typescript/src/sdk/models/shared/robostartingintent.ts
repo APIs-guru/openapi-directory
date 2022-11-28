@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StartActivityIntent } from "./startactivityintent";
+
 
 
 // RoboStartingIntent
@@ -7,12 +8,12 @@ import { StartActivityIntent } from "./startactivityintent";
  * Message for specifying the start activities to crawl.
 **/
 export class RoboStartingIntent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=launcherActivity" })
+  @SpeakeasyMetadata({ data: "json, name=launcherActivity" })
   launcherActivity?: Map<string, any>;
 
-  @Metadata({ data: "json, name=startActivity" })
+  @SpeakeasyMetadata({ data: "json, name=startActivity" })
   startActivity?: StartActivityIntent;
 
-  @Metadata({ data: "json, name=timeout" })
+  @SpeakeasyMetadata({ data: "json, name=timeout" })
   timeout?: string;
 }

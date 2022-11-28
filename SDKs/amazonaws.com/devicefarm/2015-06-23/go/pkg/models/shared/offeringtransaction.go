@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// OfferingTransaction
+// Represents the metadata of an offering transaction.
 type OfferingTransaction struct {
 	Cost                *MonetaryAmount `json:"cost,omitempty"`
 	CreatedOn           *time.Time      `json:"createdOn,omitempty"`

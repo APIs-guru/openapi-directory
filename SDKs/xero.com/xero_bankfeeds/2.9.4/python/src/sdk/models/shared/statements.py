@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import statement
-from . import pagination
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Statements:
-    items: Optional[List[statement.Statement]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'items' }})
-    pagination: Optional[pagination.Pagination] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pagination' }})
+    r"""Statements
+
+    https://developer.xero.com/documentation/bank-feeds-api/statements
+    """
+    
+    items: Optional[List[Statement]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('items') }})
+    pagination: Optional[Pagination] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pagination') }})
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ScalingMetricTypeEnum } from "./scalingmetrictypeenum";
 // PredefinedScalingMetricSpecification
 /**
@@ -34,11 +34,11 @@ var PredefinedScalingMetricSpecification = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=PredefinedScalingMetricType" }),
+        SpeakeasyMetadata({ data: "json, name=PredefinedScalingMetricType" }),
         __metadata("design:type", String)
     ], PredefinedScalingMetricSpecification.prototype, "predefinedScalingMetricType", void 0);
     __decorate([
-        Metadata({ data: "json, name=ResourceLabel" }),
+        SpeakeasyMetadata({ data: "json, name=ResourceLabel" }),
         __metadata("design:type", String)
     ], PredefinedScalingMetricSpecification.prototype, "resourceLabel", void 0);
     return PredefinedScalingMetricSpecification;

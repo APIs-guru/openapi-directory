@@ -8,6 +8,8 @@ const (
 	GoogleCloudApigeeV1APIProxyAPIProxyTypeEnumConfigurable            GoogleCloudApigeeV1APIProxyAPIProxyTypeEnum = "CONFIGURABLE"
 )
 
+// GoogleCloudApigeeV1APIProxy
+// Metadata describing the API proxy
 type GoogleCloudApigeeV1APIProxy struct {
 	APIProxyType     *GoogleCloudApigeeV1APIProxyAPIProxyTypeEnum `json:"apiProxyType,omitempty"`
 	Labels           map[string]string                            `json:"labels,omitempty"`

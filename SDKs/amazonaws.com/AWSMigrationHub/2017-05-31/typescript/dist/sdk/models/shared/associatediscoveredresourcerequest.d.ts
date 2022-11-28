@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DiscoveredResource } from "./discoveredresource";
 export declare class AssociateDiscoveredResourceRequest extends SpeakeasyBase {
     discoveredResource: DiscoveredResource;

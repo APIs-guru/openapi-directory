@@ -1,11 +1,27 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import error
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ErrorResponse:
-    errors: Optional[List[error.Error]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errors' }})
+    r"""ErrorResponse
+    Sadly, sometimes requests to the API are not successful. Failures can
+    occur for a wide range of reasons. In all cases, the API should return
+    an HTTP Status Code that indicates the nature of the failure,
+    with a response body in JSON format containing additional information.
+    
+    
+    In the event of a server error the response body will contain an error
+    phrase. These phrases are automatically generated using the
+    [node-asana-phrase
+    library](https://github.com/Asana/node-asana-phrase) and can be used by
+    Asana support to quickly look up the incident that caused the server
+    error.
+    """
+    
+    errors: Optional[List[Error]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errors') }})
     

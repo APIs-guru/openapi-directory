@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { PolicyControllerOnClusterState } from "./policycontrolleronclusterstate";
 export declare enum PolicyControllerMembershipStateStateEnum {
     LifecycleStateUnspecified = "LIFECYCLE_STATE_UNSPECIFIED",
@@ -15,7 +15,6 @@ export declare enum PolicyControllerMembershipStateStateEnum {
  * **Policy Controller**: State for a single cluster.
 **/
 export declare class PolicyControllerMembershipState extends SpeakeasyBase {
-    clusterName?: string;
     componentStates?: Map<string, PolicyControllerOnClusterState>;
     state?: PolicyControllerMembershipStateStateEnum;
 }

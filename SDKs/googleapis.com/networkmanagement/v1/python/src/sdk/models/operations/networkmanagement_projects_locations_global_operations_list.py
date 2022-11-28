@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class NetworkmanagementProjectsLocationsGlobalOperationsListPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,20 +29,20 @@ class NetworkmanagementProjectsLocationsGlobalOperationsListQueryParams:
 
 @dataclass
 class NetworkmanagementProjectsLocationsGlobalOperationsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class NetworkmanagementProjectsLocationsGlobalOperationsListRequest:
-    path_params: NetworkmanagementProjectsLocationsGlobalOperationsListPathParams = field(default=None)
-    query_params: NetworkmanagementProjectsLocationsGlobalOperationsListQueryParams = field(default=None)
-    security: NetworkmanagementProjectsLocationsGlobalOperationsListSecurity = field(default=None)
+    path_params: NetworkmanagementProjectsLocationsGlobalOperationsListPathParams = field()
+    query_params: NetworkmanagementProjectsLocationsGlobalOperationsListQueryParams = field()
+    security: NetworkmanagementProjectsLocationsGlobalOperationsListSecurity = field()
     
 
 @dataclass
 class NetworkmanagementProjectsLocationsGlobalOperationsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_operations_response: Optional[shared.ListOperationsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

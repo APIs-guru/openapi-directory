@@ -12,12 +12,12 @@ class AuthenticateWithQuickConnectRequests:
 
 @dataclass
 class AuthenticateWithQuickConnectRequest:
-    request: AuthenticateWithQuickConnectRequests = field(default=None)
+    request: AuthenticateWithQuickConnectRequests = field()
     
 
 @dataclass
 class AuthenticateWithQuickConnectResponse:
+    content_type: str = field()
+    status_code: int = field()
     authentication_result: Optional[shared.AuthenticationResult] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

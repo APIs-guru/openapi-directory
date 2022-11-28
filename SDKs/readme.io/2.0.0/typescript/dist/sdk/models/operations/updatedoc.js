@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var UpdateDocPathParams = /** @class */ (function (_super) {
     __extends(UpdateDocPathParams, _super);
@@ -30,7 +30,7 @@ var UpdateDocPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=slug" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=slug" }),
         __metadata("design:type", String)
     ], UpdateDocPathParams.prototype, "slug", void 0);
     return UpdateDocPathParams;
@@ -42,7 +42,7 @@ var UpdateDocHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=x-readme-version" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-readme-version" }),
         __metadata("design:type", String)
     ], UpdateDocHeaders.prototype, "xReadmeVersion", void 0);
     return UpdateDocHeaders;
@@ -54,7 +54,7 @@ var UpdateDocSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], UpdateDocSecurity.prototype, "apiKey", void 0);
     return UpdateDocSecurity;
@@ -66,19 +66,19 @@ var UpdateDocRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateDocPathParams)
     ], UpdateDocRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateDocHeaders)
     ], UpdateDocRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.Doc)
     ], UpdateDocRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateDocSecurity)
     ], UpdateDocRequest.prototype, "security", void 0);
     return UpdateDocRequest;
@@ -90,11 +90,11 @@ var UpdateDocResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UpdateDocResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UpdateDocResponse.prototype, "statusCode", void 0);
     return UpdateDocResponse;

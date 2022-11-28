@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudChannelV1ImportCustomerRequest
+// Request message for CloudChannelService.ImportCustomer
 type GoogleCloudChannelV1ImportCustomerRequest struct {
 	AuthToken         *string `json:"authToken,omitempty"`
 	ChannelPartnerID  *string `json:"channelPartnerId,omitempty"`

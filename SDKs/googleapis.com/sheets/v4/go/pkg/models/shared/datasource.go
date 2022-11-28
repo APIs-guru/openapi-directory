@@ -1,5 +1,7 @@
 package shared
 
+// DataSource
+// Information about an external data source in the spreadsheet.
 type DataSource struct {
 	CalculatedColumns []DataSourceColumn `json:"calculatedColumns,omitempty"`
 	DataSourceID      *string            `json:"dataSourceId,omitempty"`

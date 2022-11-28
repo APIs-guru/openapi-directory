@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Form
 /**
  * Google Forms item.
@@ -33,19 +33,19 @@ var Form = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=formUrl" }),
+        SpeakeasyMetadata({ data: "json, name=formUrl" }),
         __metadata("design:type", String)
     ], Form.prototype, "formUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=responseUrl" }),
+        SpeakeasyMetadata({ data: "json, name=responseUrl" }),
         __metadata("design:type", String)
     ], Form.prototype, "responseUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=thumbnailUrl" }),
+        SpeakeasyMetadata({ data: "json, name=thumbnailUrl" }),
         __metadata("design:type", String)
     ], Form.prototype, "thumbnailUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=title" }),
+        SpeakeasyMetadata({ data: "json, name=title" }),
         __metadata("design:type", String)
     ], Form.prototype, "title", void 0);
     return Form;

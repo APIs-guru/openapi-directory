@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudAssetV1p7beta1PartitionSpec } from "./googlecloudassetv1p7beta1partitionspec";
 /**
  * A BigQuery destination for exporting assets to.

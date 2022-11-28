@@ -16,6 +16,8 @@ const (
 	GoogleCloudDialogflowV2beta1IntentMessagePlatformEnumGoogleHangouts      GoogleCloudDialogflowV2beta1IntentMessagePlatformEnum = "GOOGLE_HANGOUTS"
 )
 
+// GoogleCloudDialogflowV2beta1IntentMessage
+// Corresponds to the `Response` field in the Dialogflow console.
 type GoogleCloudDialogflowV2beta1IntentMessage struct {
 	BasicCard                 *GoogleCloudDialogflowV2beta1IntentMessageBasicCard                 `json:"basicCard,omitempty"`
 	BrowseCarouselCard        *GoogleCloudDialogflowV2beta1IntentMessageBrowseCarouselCard        `json:"browseCarouselCard,omitempty"`

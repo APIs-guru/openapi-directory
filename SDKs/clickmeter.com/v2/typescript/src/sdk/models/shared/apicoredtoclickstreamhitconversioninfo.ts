@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ApiCoreDtoClickStreamHitConversionInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessTime" })
+  @SpeakeasyMetadata({ data: "json, name=accessTime" })
   accessTime?: string;
 
-  @Metadata({ data: "json, name=comcost" })
+  @SpeakeasyMetadata({ data: "json, name=comcost" })
   comcost?: number;
 
-  @Metadata({ data: "json, name=cost" })
+  @SpeakeasyMetadata({ data: "json, name=cost" })
   cost?: number;
 
-  @Metadata({ data: "json, name=date" })
+  @SpeakeasyMetadata({ data: "json, name=date" })
   date?: string;
 
-  @Metadata({ data: "json, name=deleted" })
+  @SpeakeasyMetadata({ data: "json, name=deleted" })
   deleted?: boolean;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=parameter" })
+  @SpeakeasyMetadata({ data: "json, name=parameter" })
   parameter?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: number;
 }

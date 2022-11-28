@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var NetworksecurityProjectsLocationsClientTlsPoliciesListPathParams = /** @class */ (function (_super) {
     __extends(NetworksecurityProjectsLocationsClientTlsPoliciesListPathParams, _super);
@@ -30,7 +30,7 @@ var NetworksecurityProjectsLocationsClientTlsPoliciesListPathParams = /** @class
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=parent" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=parent" }),
         __metadata("design:type", String)
     ], NetworksecurityProjectsLocationsClientTlsPoliciesListPathParams.prototype, "parent", void 0);
     return NetworksecurityProjectsLocationsClientTlsPoliciesListPathParams;
@@ -42,55 +42,55 @@ var NetworksecurityProjectsLocationsClientTlsPoliciesListQueryParams = /** @clas
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], NetworksecurityProjectsLocationsClientTlsPoliciesListQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], NetworksecurityProjectsLocationsClientTlsPoliciesListQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], NetworksecurityProjectsLocationsClientTlsPoliciesListQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], NetworksecurityProjectsLocationsClientTlsPoliciesListQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], NetworksecurityProjectsLocationsClientTlsPoliciesListQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], NetworksecurityProjectsLocationsClientTlsPoliciesListQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], NetworksecurityProjectsLocationsClientTlsPoliciesListQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=pageSize" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pageSize" }),
         __metadata("design:type", Number)
     ], NetworksecurityProjectsLocationsClientTlsPoliciesListQueryParams.prototype, "pageSize", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=pageToken" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pageToken" }),
         __metadata("design:type", String)
     ], NetworksecurityProjectsLocationsClientTlsPoliciesListQueryParams.prototype, "pageToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], NetworksecurityProjectsLocationsClientTlsPoliciesListQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], NetworksecurityProjectsLocationsClientTlsPoliciesListQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], NetworksecurityProjectsLocationsClientTlsPoliciesListQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], NetworksecurityProjectsLocationsClientTlsPoliciesListQueryParams.prototype, "uploadProtocol", void 0);
     return NetworksecurityProjectsLocationsClientTlsPoliciesListQueryParams;
@@ -102,11 +102,11 @@ var NetworksecurityProjectsLocationsClientTlsPoliciesListSecurity = /** @class *
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], NetworksecurityProjectsLocationsClientTlsPoliciesListSecurity.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], NetworksecurityProjectsLocationsClientTlsPoliciesListSecurity.prototype, "oauth2c", void 0);
     return NetworksecurityProjectsLocationsClientTlsPoliciesListSecurity;
@@ -118,15 +118,15 @@ var NetworksecurityProjectsLocationsClientTlsPoliciesListRequest = /** @class */
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", NetworksecurityProjectsLocationsClientTlsPoliciesListPathParams)
     ], NetworksecurityProjectsLocationsClientTlsPoliciesListRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", NetworksecurityProjectsLocationsClientTlsPoliciesListQueryParams)
     ], NetworksecurityProjectsLocationsClientTlsPoliciesListRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", NetworksecurityProjectsLocationsClientTlsPoliciesListSecurity)
     ], NetworksecurityProjectsLocationsClientTlsPoliciesListRequest.prototype, "security", void 0);
     return NetworksecurityProjectsLocationsClientTlsPoliciesListRequest;
@@ -138,15 +138,15 @@ var NetworksecurityProjectsLocationsClientTlsPoliciesListResponse = /** @class *
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], NetworksecurityProjectsLocationsClientTlsPoliciesListResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ListClientTlsPoliciesResponse)
     ], NetworksecurityProjectsLocationsClientTlsPoliciesListResponse.prototype, "listClientTlsPoliciesResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], NetworksecurityProjectsLocationsClientTlsPoliciesListResponse.prototype, "statusCode", void 0);
     return NetworksecurityProjectsLocationsClientTlsPoliciesListResponse;

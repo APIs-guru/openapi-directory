@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // V2IosKeyRestrictions
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The iOS apps that are allowed to use the key.
 **/
 export class V2IosKeyRestrictions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowedBundleIds" })
+  @SpeakeasyMetadata({ data: "json, name=allowedBundleIds" })
   allowedBundleIds?: string[];
 }

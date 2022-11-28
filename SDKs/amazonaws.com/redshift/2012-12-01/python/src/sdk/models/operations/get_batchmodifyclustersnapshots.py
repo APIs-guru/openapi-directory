@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetBatchModifyClusterSnapshotsActionEnum(str, Enum):
     BATCH_MODIFY_CLUSTER_SNAPSHOTS = "BatchModifyClusterSnapshots"
@@ -10,11 +14,11 @@ class GetBatchModifyClusterSnapshotsVersionEnum(str, Enum):
 
 @dataclass
 class GetBatchModifyClusterSnapshotsQueryParams:
-    action: GetBatchModifyClusterSnapshotsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetBatchModifyClusterSnapshotsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    snapshot_identifier_list: List[str] = field(metadata={'query_param': { 'field_name': 'SnapshotIdentifierList', 'style': 'form', 'explode': True }})
+    version: GetBatchModifyClusterSnapshotsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     force: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'Force', 'style': 'form', 'explode': True }})
     manual_snapshot_retention_period: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'ManualSnapshotRetentionPeriod', 'style': 'form', 'explode': True }})
-    snapshot_identifier_list: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'SnapshotIdentifierList', 'style': 'form', 'explode': True }})
-    version: GetBatchModifyClusterSnapshotsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetBatchModifyClusterSnapshotsHeaders:
 
 @dataclass
 class GetBatchModifyClusterSnapshotsRequest:
-    query_params: GetBatchModifyClusterSnapshotsQueryParams = field(default=None)
-    headers: GetBatchModifyClusterSnapshotsHeaders = field(default=None)
+    headers: GetBatchModifyClusterSnapshotsHeaders = field()
+    query_params: GetBatchModifyClusterSnapshotsQueryParams = field()
     
 
 @dataclass
 class GetBatchModifyClusterSnapshotsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

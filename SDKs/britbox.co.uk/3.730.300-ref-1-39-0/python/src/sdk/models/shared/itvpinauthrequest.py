@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ItvPinAuthRequestCookieTypeEnum(str, Enum):
     SESSION = "Session"
@@ -16,7 +18,7 @@ class ItvPinAuthRequestScopesEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ItvPinAuthRequest:
-    cookie_type: Optional[ItvPinAuthRequestCookieTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cookieType' }})
-    pin: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pin' }})
-    scopes: Optional[List[ItvPinAuthRequestScopesEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'scopes' }})
+    pin: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('pin') }})
+    cookie_type: Optional[ItvPinAuthRequestCookieTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cookieType') }})
+    scopes: Optional[List[ItvPinAuthRequestScopesEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('scopes') }})
     

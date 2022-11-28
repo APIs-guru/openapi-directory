@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AndroidpublisherMonetizationSubscriptionsBasePlansMigratePricesPathParams:
-    base_plan_id: str = field(default=None, metadata={'path_param': { 'field_name': 'basePlanId', 'style': 'simple', 'explode': False }})
-    package_name: str = field(default=None, metadata={'path_param': { 'field_name': 'packageName', 'style': 'simple', 'explode': False }})
-    product_id: str = field(default=None, metadata={'path_param': { 'field_name': 'productId', 'style': 'simple', 'explode': False }})
+    base_plan_id: str = field(metadata={'path_param': { 'field_name': 'basePlanId', 'style': 'simple', 'explode': False }})
+    package_name: str = field(metadata={'path_param': { 'field_name': 'packageName', 'style': 'simple', 'explode': False }})
+    product_id: str = field(metadata={'path_param': { 'field_name': 'productId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,21 +28,21 @@ class AndroidpublisherMonetizationSubscriptionsBasePlansMigratePricesQueryParams
 
 @dataclass
 class AndroidpublisherMonetizationSubscriptionsBasePlansMigratePricesSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AndroidpublisherMonetizationSubscriptionsBasePlansMigratePricesRequest:
-    path_params: AndroidpublisherMonetizationSubscriptionsBasePlansMigratePricesPathParams = field(default=None)
-    query_params: AndroidpublisherMonetizationSubscriptionsBasePlansMigratePricesQueryParams = field(default=None)
+    path_params: AndroidpublisherMonetizationSubscriptionsBasePlansMigratePricesPathParams = field()
+    query_params: AndroidpublisherMonetizationSubscriptionsBasePlansMigratePricesQueryParams = field()
+    security: AndroidpublisherMonetizationSubscriptionsBasePlansMigratePricesSecurity = field()
     request: Optional[shared.MigrateBasePlanPricesRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AndroidpublisherMonetizationSubscriptionsBasePlansMigratePricesSecurity = field(default=None)
     
 
 @dataclass
 class AndroidpublisherMonetizationSubscriptionsBasePlansMigratePricesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     migrate_base_plan_prices_response: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

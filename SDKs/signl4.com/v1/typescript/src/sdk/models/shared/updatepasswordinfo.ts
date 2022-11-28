@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdatePasswordInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=currentPassword" })
+  @SpeakeasyMetadata({ data: "json, name=currentPassword" })
   currentPassword?: string;
 
-  @Metadata({ data: "json, name=newPassword" })
+  @SpeakeasyMetadata({ data: "json, name=newPassword" })
   newPassword?: string;
 }

@@ -25,7 +25,7 @@ type CloudresourcemanagerProjectsCreateSecurity struct {
 
 type CloudresourcemanagerProjectsCreateRequest struct {
 	QueryParams CloudresourcemanagerProjectsCreateQueryParams
-	Request     *shared.Project `request:"mediaType=application/json"`
+	Request     *shared.ProjectInput `request:"mediaType=application/json"`
 	Security    CloudresourcemanagerProjectsCreateSecurity
 }
 

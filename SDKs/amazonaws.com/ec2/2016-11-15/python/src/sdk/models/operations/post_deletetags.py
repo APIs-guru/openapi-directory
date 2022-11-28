@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDeleteTagsActionEnum(str, Enum):
     DELETE_TAGS = "DeleteTags"
@@ -10,8 +14,8 @@ class PostDeleteTagsVersionEnum(str, Enum):
 
 @dataclass
 class PostDeleteTagsQueryParams:
-    action: PostDeleteTagsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDeleteTagsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDeleteTagsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDeleteTagsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,13 +31,13 @@ class PostDeleteTagsHeaders:
 
 @dataclass
 class PostDeleteTagsRequest:
-    query_params: PostDeleteTagsQueryParams = field(default=None)
-    headers: PostDeleteTagsHeaders = field(default=None)
+    headers: PostDeleteTagsHeaders = field()
+    query_params: PostDeleteTagsQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDeleteTagsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

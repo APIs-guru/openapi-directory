@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class AnalysisCategoriesGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   pageResultAnalysisCategoryDto?: shared.PageResultAnalysisCategoryDto;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

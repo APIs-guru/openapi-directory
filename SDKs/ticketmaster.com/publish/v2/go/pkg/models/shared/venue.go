@@ -8,6 +8,8 @@ const (
 	VenueTypeEnumAttraction VenueTypeEnum = "attraction"
 )
 
+// Venue
+// Venue
 type Venue struct {
 	AccessibleSeatingDetails map[string]string        `json:"accessibleSeatingDetails,omitempty"`
 	Active                   *bool                    `json:"active,omitempty"`

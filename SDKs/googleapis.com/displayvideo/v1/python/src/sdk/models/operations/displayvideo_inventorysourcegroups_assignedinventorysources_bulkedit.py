@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DisplayvideoInventorySourceGroupsAssignedInventorySourcesBulkEditPathParams:
-    inventory_source_group_id: str = field(default=None, metadata={'path_param': { 'field_name': 'inventorySourceGroupId', 'style': 'simple', 'explode': False }})
+    inventory_source_group_id: str = field(metadata={'path_param': { 'field_name': 'inventorySourceGroupId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class DisplayvideoInventorySourceGroupsAssignedInventorySourcesBulkEditQueryPara
 
 @dataclass
 class DisplayvideoInventorySourceGroupsAssignedInventorySourcesBulkEditSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DisplayvideoInventorySourceGroupsAssignedInventorySourcesBulkEditRequest:
-    path_params: DisplayvideoInventorySourceGroupsAssignedInventorySourcesBulkEditPathParams = field(default=None)
-    query_params: DisplayvideoInventorySourceGroupsAssignedInventorySourcesBulkEditQueryParams = field(default=None)
-    request: Optional[shared.BulkEditAssignedInventorySourcesRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DisplayvideoInventorySourceGroupsAssignedInventorySourcesBulkEditSecurity = field(default=None)
+    path_params: DisplayvideoInventorySourceGroupsAssignedInventorySourcesBulkEditPathParams = field()
+    query_params: DisplayvideoInventorySourceGroupsAssignedInventorySourcesBulkEditQueryParams = field()
+    security: DisplayvideoInventorySourceGroupsAssignedInventorySourcesBulkEditSecurity = field()
+    request: Optional[shared.BulkEditAssignedInventorySourcesRequestInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DisplayvideoInventorySourceGroupsAssignedInventorySourcesBulkEditResponse:
+    content_type: str = field()
+    status_code: int = field()
     bulk_edit_assigned_inventory_sources_response: Optional[shared.BulkEditAssignedInventorySourcesResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

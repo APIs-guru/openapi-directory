@@ -1,71 +1,60 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetV4LayersScoutingObservationsScoutingObservationIdAttachmentsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=scoutingObservationId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=scoutingObservationId" })
   scoutingObservationId: string;
 }
 
 
 export class GetV4LayersScoutingObservationsScoutingObservationIdAttachmentsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Limit" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Limit" })
   xLimit?: number;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Next-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Next-Token" })
   xNextToken?: string;
 }
 
 
-export class GetV4LayersScoutingObservationsScoutingObservationIdAttachmentsSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
-  apiKey: shared.SchemeApiKey;
-}
-
-
-export class GetV4LayersScoutingObservationsScoutingObservationIdAttachmentsSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth2AuthorizationCode: shared.SchemeOauth2AuthorizationCode;
-}
-
-
 export class GetV4LayersScoutingObservationsScoutingObservationIdAttachmentsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: GetV4LayersScoutingObservationsScoutingObservationIdAttachmentsSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  apiKey?: shared.SchemeApiKey;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: GetV4LayersScoutingObservationsScoutingObservationIdAttachmentsSecurityOption2;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth2AuthorizationCode?: shared.SchemeOauth2AuthorizationCode;
 }
 
 
 export class GetV4LayersScoutingObservationsScoutingObservationIdAttachmentsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetV4LayersScoutingObservationsScoutingObservationIdAttachmentsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetV4LayersScoutingObservationsScoutingObservationIdAttachmentsHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetV4LayersScoutingObservationsScoutingObservationIdAttachmentsSecurity;
 }
 
 
 export class GetV4LayersScoutingObservationsScoutingObservationIdAttachmentsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   empty?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   scoutingObservationAttachments?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,82 +1,83 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetDailyReportByCountryCodeDateFormatEnum {
-    YyyyMmDd = "YYYY-MM-DD"
-,    YyyyDdMm = "YYYY-DD-MM"
-,    DdMmYyyy = "DD-MM-YYYY"
-,    MmDdYyyy = "MM-DD-YYYY"
+    YyyyMmDd = "YYYY-MM-DD",
+    YyyyDdMm = "YYYY-DD-MM",
+    DdMmYyyy = "DD-MM-YYYY",
+    MmDdYyyy = "MM-DD-YYYY"
 }
 
 export enum GetDailyReportByCountryCodeFormatEnum {
-    Json = "json"
-,    Xml = "xml"
+    Json = "json",
+    Xml = "xml"
 }
 
 
 export class GetDailyReportByCountryCodeQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=code" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=code" })
   code: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=date" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=date" })
   date: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=date-format" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=date-format" })
   dateFormat?: GetDailyReportByCountryCodeDateFormatEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=format" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=format" })
   format?: GetDailyReportByCountryCodeFormatEnum;
 }
 
 
-export class GetDailyReportByCountryCodeRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetDailyReportByCountryCodeQueryParams;
-}
-
-
 export class GetDailyReportByCountryCode200ApplicationJsonProvince extends SpeakeasyBase {
-  @Metadata({ data: "json, name=active" })
+  @SpeakeasyMetadata({ data: "json, name=active" })
   active?: number;
 
-  @Metadata({ data: "json, name=confirmed" })
+  @SpeakeasyMetadata({ data: "json, name=confirmed" })
   confirmed?: number;
 
-  @Metadata({ data: "json, name=deaths" })
+  @SpeakeasyMetadata({ data: "json, name=deaths" })
   deaths?: number;
 
-  @Metadata({ data: "json, name=recovered" })
+  @SpeakeasyMetadata({ data: "json, name=recovered" })
   recovered?: number;
 }
 
 
 export class GetDailyReportByCountryCode200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=country" })
+  @SpeakeasyMetadata({ data: "json, name=country" })
   country?: string;
 
-  @Metadata({ data: "json, name=date" })
+  @SpeakeasyMetadata({ data: "json, name=date" })
   date?: string;
 
-  @Metadata({ data: "json, name=latitude" })
+  @SpeakeasyMetadata({ data: "json, name=latitude" })
   latitude?: number;
 
-  @Metadata({ data: "json, name=longitude" })
+  @SpeakeasyMetadata({ data: "json, name=longitude" })
   longitude?: number;
 
-  @Metadata({ data: "json, name=province", elemType: operations.GetDailyReportByCountryCode200ApplicationJsonProvince })
+  @SpeakeasyMetadata({ data: "json, name=province", elemType: GetDailyReportByCountryCode200ApplicationJsonProvince })
   province?: GetDailyReportByCountryCode200ApplicationJsonProvince[];
 }
 
 
+export class GetDailyReportByCountryCodeRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetDailyReportByCountryCodeQueryParams;
+}
+
+
 export class GetDailyReportByCountryCodeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: operations.GetDailyReportByCountryCode200ApplicationJson })
+  @SpeakeasyMetadata({ elemType: GetDailyReportByCountryCode200ApplicationJson })
   getDailyReportByCountryCode200ApplicationJsonObjects?: GetDailyReportByCountryCode200ApplicationJson[];
 }

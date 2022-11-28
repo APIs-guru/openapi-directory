@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Endpoint } from "./endpoint";
 import { Experiment } from "./experiment";
 import { FeatureGroup } from "./featuregroup";
@@ -12,41 +12,42 @@ import { Trial } from "./trial";
 import { TrialComponent } from "./trialcomponent";
 
 
+
 // SearchRecord
 /** 
  * A single resource returned as part of the <a>Search</a> API response.
 **/
 export class SearchRecord extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Endpoint" })
+  @SpeakeasyMetadata({ data: "json, name=Endpoint" })
   endpoint?: Endpoint;
 
-  @Metadata({ data: "json, name=Experiment" })
+  @SpeakeasyMetadata({ data: "json, name=Experiment" })
   experiment?: Experiment;
 
-  @Metadata({ data: "json, name=FeatureGroup" })
+  @SpeakeasyMetadata({ data: "json, name=FeatureGroup" })
   featureGroup?: FeatureGroup;
 
-  @Metadata({ data: "json, name=ModelPackage" })
+  @SpeakeasyMetadata({ data: "json, name=ModelPackage" })
   modelPackage?: ModelPackage;
 
-  @Metadata({ data: "json, name=ModelPackageGroup" })
+  @SpeakeasyMetadata({ data: "json, name=ModelPackageGroup" })
   modelPackageGroup?: ModelPackageGroup;
 
-  @Metadata({ data: "json, name=Pipeline" })
+  @SpeakeasyMetadata({ data: "json, name=Pipeline" })
   pipeline?: Pipeline;
 
-  @Metadata({ data: "json, name=PipelineExecution" })
+  @SpeakeasyMetadata({ data: "json, name=PipelineExecution" })
   pipelineExecution?: PipelineExecution;
 
-  @Metadata({ data: "json, name=Project" })
+  @SpeakeasyMetadata({ data: "json, name=Project" })
   project?: Project;
 
-  @Metadata({ data: "json, name=TrainingJob" })
+  @SpeakeasyMetadata({ data: "json, name=TrainingJob" })
   trainingJob?: TrainingJob;
 
-  @Metadata({ data: "json, name=Trial" })
+  @SpeakeasyMetadata({ data: "json, name=Trial" })
   trial?: Trial;
 
-  @Metadata({ data: "json, name=TrialComponent" })
+  @SpeakeasyMetadata({ data: "json, name=TrialComponent" })
   trialComponent?: TrialComponent;
 }

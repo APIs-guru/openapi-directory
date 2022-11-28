@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { KycCheck } from "./kyccheck";
+
 
 
 // KycResponse
@@ -8,6 +8,6 @@ import { KycCheck } from "./kyccheck";
  * This is the base response type of the getKYC method.
 **/
 export class KycResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=kycChecks", elemType: shared.KycCheck })
+  @SpeakeasyMetadata({ data: "json, name=kycChecks", elemType: KycCheck })
   kycChecks?: KycCheck[];
 }

@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetUsagePlanPathParams:
-    usageplan_id: str = field(default=None, metadata={'path_param': { 'field_name': 'usageplanId', 'style': 'simple', 'explode': False }})
+    usageplan_id: str = field(metadata={'path_param': { 'field_name': 'usageplanId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,16 +24,16 @@ class GetUsagePlanHeaders:
 
 @dataclass
 class GetUsagePlanRequest:
-    path_params: GetUsagePlanPathParams = field(default=None)
-    headers: GetUsagePlanHeaders = field(default=None)
+    headers: GetUsagePlanHeaders = field()
+    path_params: GetUsagePlanPathParams = field()
     
 
 @dataclass
 class GetUsagePlanResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     usage_plan: Optional[shared.UsagePlan] = field(default=None)

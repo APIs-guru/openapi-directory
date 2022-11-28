@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RefreshSchemasStatus } from "./refreshschemasstatus";
+
 
 
 // DescribeRefreshSchemasStatusResponse
@@ -7,6 +8,6 @@ import { RefreshSchemasStatus } from "./refreshschemasstatus";
  * <p/>
 **/
 export class DescribeRefreshSchemasStatusResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=RefreshSchemasStatus" })
+  @SpeakeasyMetadata({ data: "json, name=RefreshSchemasStatus" })
   refreshSchemasStatus?: RefreshSchemasStatus;
 }

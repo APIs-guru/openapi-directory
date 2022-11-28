@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ListAvailableContentBlocksQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=modified_after" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=modified_after" })
   modifiedAfter?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=modified_before" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=modified_before" })
   modifiedBefore?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: string;
 }
 
 
 export class ListAvailableContentBlocksRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ListAvailableContentBlocksQueryParams;
 }
 
 
 export class ListAvailableContentBlocksResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

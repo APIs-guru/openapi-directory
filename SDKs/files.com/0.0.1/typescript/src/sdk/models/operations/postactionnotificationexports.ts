@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostActionNotificationExportsRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, name=end_at" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=end_at" })
   endAt?: Date;
 
-  @Metadata({ data: "multipart_form, name=query_folder" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=query_folder" })
   queryFolder?: string;
 
-  @Metadata({ data: "multipart_form, name=query_message" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=query_message" })
   queryMessage?: string;
 
-  @Metadata({ data: "multipart_form, name=query_path" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=query_path" })
   queryPath?: string;
 
-  @Metadata({ data: "multipart_form, name=query_request_method" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=query_request_method" })
   queryRequestMethod?: string;
 
-  @Metadata({ data: "multipart_form, name=query_request_url" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=query_request_url" })
   queryRequestUrl?: string;
 
-  @Metadata({ data: "multipart_form, name=query_status" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=query_status" })
   queryStatus?: string;
 
-  @Metadata({ data: "multipart_form, name=query_success" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=query_success" })
   querySuccess?: boolean;
 
-  @Metadata({ data: "multipart_form, name=start_at" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=start_at" })
   startAt?: Date;
 
-  @Metadata({ data: "multipart_form, name=user_id" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=user_id" })
   userId?: number;
 }
 
 
 export class PostActionNotificationExportsRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=multipart/form-data" })
+  @SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" })
   request?: PostActionNotificationExportsRequestBody;
 }
 
 
 export class PostActionNotificationExportsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   actionNotificationExportEntity?: shared.ActionNotificationExportEntity;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

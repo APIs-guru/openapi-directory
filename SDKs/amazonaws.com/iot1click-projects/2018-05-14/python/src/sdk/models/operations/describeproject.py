@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class DescribeProjectPathParams:
-    project_name: str = field(default=None, metadata={'path_param': { 'field_name': 'projectName', 'style': 'simple', 'explode': False }})
+    project_name: str = field(metadata={'path_param': { 'field_name': 'projectName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,16 +24,16 @@ class DescribeProjectHeaders:
 
 @dataclass
 class DescribeProjectRequest:
-    path_params: DescribeProjectPathParams = field(default=None)
-    headers: DescribeProjectHeaders = field(default=None)
+    headers: DescribeProjectHeaders = field()
+    path_params: DescribeProjectPathParams = field()
     
 
 @dataclass
 class DescribeProjectResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     describe_project_response: Optional[shared.DescribeProjectResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

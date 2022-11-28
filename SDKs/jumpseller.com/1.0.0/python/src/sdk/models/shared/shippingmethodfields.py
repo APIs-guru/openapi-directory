@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import shippingservice
+from sdk import utils
+from . import *
 
 class ShippingMethodFieldsTypeEnum(str, Enum):
     FREE = "free"
@@ -17,13 +19,13 @@ class ShippingMethodFieldsTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ShippingMethodFields:
-    callback_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'callback_url' }})
-    city: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'city' }})
-    fetch_services_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fetch_services_url' }})
-    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    postal: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'postal' }})
-    services: Optional[List[shippingservice.ShippingService]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'services' }})
-    state: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
-    type: Optional[ShippingMethodFieldsTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    callback_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('callback_url') }})
+    city: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('city') }})
+    fetch_services_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fetch_services_url') }})
+    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    postal: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('postal') }})
+    services: Optional[List[ShippingService]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('services') }})
+    state: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
+    type: Optional[ShippingMethodFieldsTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

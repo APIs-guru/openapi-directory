@@ -12,18 +12,18 @@ class GetTrailerRemoteSearchResultsRequests:
 
 @dataclass
 class GetTrailerRemoteSearchResultsSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetTrailerRemoteSearchResultsRequest:
-    request: GetTrailerRemoteSearchResultsRequests = field(default=None)
-    security: GetTrailerRemoteSearchResultsSecurity = field(default=None)
+    request: GetTrailerRemoteSearchResultsRequests = field()
+    security: GetTrailerRemoteSearchResultsSecurity = field()
     
 
 @dataclass
 class GetTrailerRemoteSearchResultsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     remote_search_results: Optional[List[shared.RemoteSearchResult]] = field(default=None)
-    status_code: int = field(default=None)
     

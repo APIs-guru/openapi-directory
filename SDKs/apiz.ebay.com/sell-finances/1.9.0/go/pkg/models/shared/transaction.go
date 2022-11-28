@@ -1,5 +1,7 @@
 package shared
 
+// Transaction
+// This type is used to express the details of one of the following monetary transactions: a buyer's payment for an order, a refund to the buyer for a returned item or cancelled order, or a credit issued by eBay to the seller's account.
 type Transaction struct {
 	Amount               *Amount         `json:"amount,omitempty"`
 	BookingEntry         *string         `json:"bookingEntry,omitempty"`

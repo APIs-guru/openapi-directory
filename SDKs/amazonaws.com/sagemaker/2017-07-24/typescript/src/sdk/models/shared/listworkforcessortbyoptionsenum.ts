@@ -1,6 +1,7 @@
 
 
+
 export enum ListWorkforcesSortByOptionsEnum {
-    Name = "Name"
-,    CreateDate = "CreateDate"
+    Name = "Name",
+    CreateDate = "CreateDate"
 }

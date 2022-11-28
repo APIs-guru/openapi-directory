@@ -1,7 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Header } from "./header";
-import { Header } from "./header";
+
 
 
 // VulnerableHeaders
@@ -9,9 +8,9 @@ import { Header } from "./header";
  * Information about vulnerable or missing HTTP Headers.
 **/
 export class VulnerableHeaders extends SpeakeasyBase {
-  @Metadata({ data: "json, name=headers", elemType: shared.Header })
+  @SpeakeasyMetadata({ data: "json, name=headers", elemType: Header })
   headers?: Header[];
 
-  @Metadata({ data: "json, name=missingHeaders", elemType: shared.Header })
+  @SpeakeasyMetadata({ data: "json, name=missingHeaders", elemType: Header })
   missingHeaders?: Header[];
 }

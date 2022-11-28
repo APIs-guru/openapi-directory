@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OidcConfig } from "./oidcconfig";
 import { SourceIpConfig } from "./sourceipconfig";
 
 
+
 export class UpdateWorkforceRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=OidcConfig" })
+  @SpeakeasyMetadata({ data: "json, name=OidcConfig" })
   oidcConfig?: OidcConfig;
 
-  @Metadata({ data: "json, name=SourceIpConfig" })
+  @SpeakeasyMetadata({ data: "json, name=SourceIpConfig" })
   sourceIpConfig?: SourceIpConfig;
 
-  @Metadata({ data: "json, name=WorkforceName" })
+  @SpeakeasyMetadata({ data: "json, name=WorkforceName" })
   workforceName: string;
 }

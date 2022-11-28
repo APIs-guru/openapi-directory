@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Date } from "./date";
 /**
  * Represents a single datapoint in the timeseries, where each datapoint is a date-value pair.

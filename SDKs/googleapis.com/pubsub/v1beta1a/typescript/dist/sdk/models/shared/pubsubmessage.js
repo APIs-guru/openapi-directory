@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Label } from "./label";
 // PubsubMessage
 /**
  * A message data and its labels.
@@ -34,19 +34,19 @@ var PubsubMessage = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=data" }),
+        SpeakeasyMetadata({ data: "json, name=data" }),
         __metadata("design:type", String)
     ], PubsubMessage.prototype, "data", void 0);
     __decorate([
-        Metadata({ data: "json, name=label", elemType: shared.Label }),
+        SpeakeasyMetadata({ data: "json, name=label", elemType: Label }),
         __metadata("design:type", Array)
     ], PubsubMessage.prototype, "label", void 0);
     __decorate([
-        Metadata({ data: "json, name=messageId" }),
+        SpeakeasyMetadata({ data: "json, name=messageId" }),
         __metadata("design:type", String)
     ], PubsubMessage.prototype, "messageId", void 0);
     __decorate([
-        Metadata({ data: "json, name=publishTime" }),
+        SpeakeasyMetadata({ data: "json, name=publishTime" }),
         __metadata("design:type", String)
     ], PubsubMessage.prototype, "publishTime", void 0);
     return PubsubMessage;

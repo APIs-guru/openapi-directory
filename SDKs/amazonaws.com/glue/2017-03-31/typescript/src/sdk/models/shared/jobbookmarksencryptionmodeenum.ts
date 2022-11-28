@@ -1,6 +1,7 @@
 
 
+
 export enum JobBookmarksEncryptionModeEnum {
-    Disabled = "DISABLED"
-,    CseKms = "CSE-KMS"
+    Disabled = "DISABLED",
+    CseKms = "CSE-KMS"
 }

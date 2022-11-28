@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetP32NetReportOutputQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=EmployerKey" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=EmployerKey" })
   employerKey: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=TaxYear" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=TaxYear" })
   taxYear: string;
 }
 
 
 export class GetP32NetReportOutputHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Api-Version" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Version" })
   apiVersion: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=Authorization" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" })
   authorization: string;
 }
 
 
 export class GetP32NetReportOutputRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetP32NetReportOutputQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetP32NetReportOutputHeaders;
 }
 
 
 export class GetP32NetReportOutputResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorModel?: shared.ErrorModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getP32NetReportOutput200ApplicationJsonBinaryString?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

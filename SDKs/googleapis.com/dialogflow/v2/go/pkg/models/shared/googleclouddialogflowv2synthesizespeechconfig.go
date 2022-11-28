@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDialogflowV2SynthesizeSpeechConfig
+// Configuration of how speech should be synthesized.
 type GoogleCloudDialogflowV2SynthesizeSpeechConfig struct {
 	EffectsProfileID []string                                     `json:"effectsProfileId,omitempty"`
 	Pitch            *float64                                     `json:"pitch,omitempty"`

@@ -1,108 +1,94 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum CreateDomainRequestBodyStatusEnum {
-    Disabled = "disabled"
-,    Active = "active"
+    Disabled = "disabled",
+    Active = "active"
 }
 
 export enum CreateDomainRequestBodyTypeEnum {
-    Master = "master"
-,    Slave = "slave"
+    Master = "master",
+    Slave = "slave"
 }
 
 
-export class CreateDomainRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=axfr_ips" })
+export class CreateDomainRequestBodyInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=axfr_ips" })
   axfrIps?: string[];
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=domain" })
+  @SpeakeasyMetadata({ data: "json, name=domain" })
   domain: string;
 
-  @Metadata({ data: "json, name=expire_sec" })
+  @SpeakeasyMetadata({ data: "json, name=expire_sec" })
   expireSec?: number;
 
-  @Metadata({ data: "json, name=group" })
+  @SpeakeasyMetadata({ data: "json, name=group" })
   group?: string;
 
-  @Metadata({ data: "json, name=id" })
-  id?: number;
-
-  @Metadata({ data: "json, name=master_ips" })
+  @SpeakeasyMetadata({ data: "json, name=master_ips" })
   masterIps?: string[];
 
-  @Metadata({ data: "json, name=refresh_sec" })
+  @SpeakeasyMetadata({ data: "json, name=refresh_sec" })
   refreshSec?: number;
 
-  @Metadata({ data: "json, name=retry_sec" })
+  @SpeakeasyMetadata({ data: "json, name=retry_sec" })
   retrySec?: number;
 
-  @Metadata({ data: "json, name=soa_email" })
+  @SpeakeasyMetadata({ data: "json, name=soa_email" })
   soaEmail?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: CreateDomainRequestBodyStatusEnum;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: string[];
 
-  @Metadata({ data: "json, name=ttl_sec" })
+  @SpeakeasyMetadata({ data: "json, name=ttl_sec" })
   ttlSec?: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: CreateDomainRequestBodyTypeEnum;
 }
 
 
-export class CreateDomainSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class CreateDomainSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class CreateDomainSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: CreateDomainSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: CreateDomainSecurityOption2;
-}
-
-
-export class CreateDomainRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: CreateDomainRequestBody;
-
-  @Metadata()
-  security: CreateDomainSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class CreateDomainDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class CreateDomainRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: CreateDomainRequestBodyInput;
+
+  @SpeakeasyMetadata()
+  security: CreateDomainSecurity;
+}
+
+
 export class CreateDomainResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   domain?: shared.Domain;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createDomainDefaultApplicationJsonObject?: CreateDomainDefaultApplicationJson;
 }

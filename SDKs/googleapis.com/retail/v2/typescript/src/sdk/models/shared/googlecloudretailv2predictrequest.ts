@@ -1,30 +1,31 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { GoogleCloudRetailV2UserEvent } from "./googlecloudretailv2userevent";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GoogleCloudRetailV2UserEventInput } from "./googlecloudretailv2userevent";
 
 
-// GoogleCloudRetailV2PredictRequest
+
+// GoogleCloudRetailV2PredictRequestInput
 /** 
  * Request message for Predict method.
 **/
-export class GoogleCloudRetailV2PredictRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=filter" })
+export class GoogleCloudRetailV2PredictRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=filter" })
   filter?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=pageSize" })
+  @SpeakeasyMetadata({ data: "json, name=pageSize" })
   pageSize?: number;
 
-  @Metadata({ data: "json, name=pageToken" })
+  @SpeakeasyMetadata({ data: "json, name=pageToken" })
   pageToken?: string;
 
-  @Metadata({ data: "json, name=params" })
+  @SpeakeasyMetadata({ data: "json, name=params" })
   params?: Map<string, any>;
 
-  @Metadata({ data: "json, name=userEvent" })
-  userEvent?: GoogleCloudRetailV2UserEvent;
+  @SpeakeasyMetadata({ data: "json, name=userEvent" })
+  userEvent?: GoogleCloudRetailV2UserEventInput;
 
-  @Metadata({ data: "json, name=validateOnly" })
+  @SpeakeasyMetadata({ data: "json, name=validateOnly" })
   validateOnly?: boolean;
 }

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDescribeAuthenticationProfilesActionEnum(str, Enum):
     DESCRIBE_AUTHENTICATION_PROFILES = "DescribeAuthenticationProfiles"
@@ -10,9 +14,9 @@ class GetDescribeAuthenticationProfilesVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeAuthenticationProfilesQueryParams:
-    action: GetDescribeAuthenticationProfilesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribeAuthenticationProfilesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDescribeAuthenticationProfilesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     authentication_profile_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'AuthenticationProfileName', 'style': 'form', 'explode': True }})
-    version: GetDescribeAuthenticationProfilesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetDescribeAuthenticationProfilesHeaders:
 
 @dataclass
 class GetDescribeAuthenticationProfilesRequest:
-    query_params: GetDescribeAuthenticationProfilesQueryParams = field(default=None)
-    headers: GetDescribeAuthenticationProfilesHeaders = field(default=None)
+    headers: GetDescribeAuthenticationProfilesHeaders = field()
+    query_params: GetDescribeAuthenticationProfilesQueryParams = field()
     
 
 @dataclass
 class GetDescribeAuthenticationProfilesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

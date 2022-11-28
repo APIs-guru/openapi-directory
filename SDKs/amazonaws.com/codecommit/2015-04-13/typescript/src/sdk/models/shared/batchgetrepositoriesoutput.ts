@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RepositoryMetadata } from "./repositorymetadata";
+
 
 
 // BatchGetRepositoriesOutput
@@ -8,9 +8,9 @@ import { RepositoryMetadata } from "./repositorymetadata";
  * Represents the output of a batch get repositories operation.
 **/
 export class BatchGetRepositoriesOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=repositories", elemType: shared.RepositoryMetadata })
+  @SpeakeasyMetadata({ data: "json, name=repositories", elemType: RepositoryMetadata })
   repositories?: RepositoryMetadata[];
 
-  @Metadata({ data: "json, name=repositoriesNotFound" })
+  @SpeakeasyMetadata({ data: "json, name=repositoriesNotFound" })
   repositoriesNotFound?: string[];
 }

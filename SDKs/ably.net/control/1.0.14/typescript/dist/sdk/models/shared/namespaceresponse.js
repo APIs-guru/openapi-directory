@@ -22,42 +22,42 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var NamespaceResponse = /** @class */ (function (_super) {
     __extends(NamespaceResponse, _super);
     function NamespaceResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=authenticated" }),
+        SpeakeasyMetadata({ data: "json, name=authenticated" }),
         __metadata("design:type", Boolean)
     ], NamespaceResponse.prototype, "authenticated", void 0);
     __decorate([
-        Metadata({ data: "json, name=created" }),
+        SpeakeasyMetadata({ data: "json, name=created" }),
         __metadata("design:type", Number)
     ], NamespaceResponse.prototype, "created", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], NamespaceResponse.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=modified" }),
+        SpeakeasyMetadata({ data: "json, name=modified" }),
         __metadata("design:type", Number)
     ], NamespaceResponse.prototype, "modified", void 0);
     __decorate([
-        Metadata({ data: "json, name=persistLast" }),
+        SpeakeasyMetadata({ data: "json, name=persistLast" }),
         __metadata("design:type", Boolean)
     ], NamespaceResponse.prototype, "persistLast", void 0);
     __decorate([
-        Metadata({ data: "json, name=persisted" }),
+        SpeakeasyMetadata({ data: "json, name=persisted" }),
         __metadata("design:type", Boolean)
     ], NamespaceResponse.prototype, "persisted", void 0);
     __decorate([
-        Metadata({ data: "json, name=pushEnabled" }),
+        SpeakeasyMetadata({ data: "json, name=pushEnabled" }),
         __metadata("design:type", Boolean)
     ], NamespaceResponse.prototype, "pushEnabled", void 0);
     __decorate([
-        Metadata({ data: "json, name=tlsOnly" }),
+        SpeakeasyMetadata({ data: "json, name=tlsOnly" }),
         __metadata("design:type", Boolean)
     ], NamespaceResponse.prototype, "tlsOnly", void 0);
     return NamespaceResponse;

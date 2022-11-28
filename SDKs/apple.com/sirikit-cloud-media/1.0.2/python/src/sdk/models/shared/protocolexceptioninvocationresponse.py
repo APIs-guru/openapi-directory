@@ -1,16 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
-from . import protocolexception
-from . import executionmetrics
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ProtocolExceptionInvocationResponse:
-    debug: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'debug' }})
-    exception: protocolexception.ProtocolException = field(default=None, metadata={'dataclasses_json': { 'field_name': 'exception' }})
-    method: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'method' }})
-    metrics: Optional[executionmetrics.ExecutionMetrics] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metrics' }})
-    result: dict[str, Any] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'result' }})
+    exception: ProtocolException = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('exception') }})
+    method: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('method') }})
+    result: dict[str, Any] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('result') }})
+    debug: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('debug') }})
+    metrics: Optional[ExecutionMetrics] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('metrics') }})
     

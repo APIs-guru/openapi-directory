@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ParseChineseNamePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=chineseName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=chineseName" })
   chineseName: string;
 }
 
 
 export class ParseChineseNameSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   apiKey: shared.SchemeApiKey;
 }
 
 
 export class ParseChineseNameRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ParseChineseNamePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: ParseChineseNameSecurity;
 }
 
 
 export class ParseChineseNameResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   personalNameParsedOut?: shared.PersonalNameParsedOut;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

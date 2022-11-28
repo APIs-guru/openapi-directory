@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GeneratedAssetPackSlice
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Download metadata for an asset pack slice.
 **/
 export class GeneratedAssetPackSlice extends SpeakeasyBase {
-  @Metadata({ data: "json, name=downloadId" })
+  @SpeakeasyMetadata({ data: "json, name=downloadId" })
   downloadId?: string;
 
-  @Metadata({ data: "json, name=moduleName" })
+  @SpeakeasyMetadata({ data: "json, name=moduleName" })
   moduleName?: string;
 
-  @Metadata({ data: "json, name=sliceId" })
+  @SpeakeasyMetadata({ data: "json, name=sliceId" })
   sliceId?: string;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 }

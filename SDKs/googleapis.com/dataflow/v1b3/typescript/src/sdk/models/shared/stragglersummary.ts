@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // StragglerSummary
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Summarized straggler identification details.
 **/
 export class StragglerSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=stragglerCauseCount" })
+  @SpeakeasyMetadata({ data: "json, name=stragglerCauseCount" })
   stragglerCauseCount?: Map<string, string>;
 
-  @Metadata({ data: "json, name=totalStragglerCount" })
+  @SpeakeasyMetadata({ data: "json, name=totalStragglerCount" })
   totalStragglerCount?: string;
 }

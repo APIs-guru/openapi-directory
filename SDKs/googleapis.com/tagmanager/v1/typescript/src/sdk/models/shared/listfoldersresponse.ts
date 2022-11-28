@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Folder } from "./folder";
+
 
 
 // ListFoldersResponse
@@ -8,6 +8,6 @@ import { Folder } from "./folder";
  * List Folders Response.
 **/
 export class ListFoldersResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=folders", elemType: shared.Folder })
+  @SpeakeasyMetadata({ data: "json, name=folders", elemType: Folder })
   folders?: Folder[];
 }

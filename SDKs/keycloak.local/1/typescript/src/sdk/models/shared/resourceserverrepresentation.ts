@@ -1,47 +1,47 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PolicyRepresentation } from "./policyrepresentation";
 import { ResourceRepresentation } from "./resourcerepresentation";
 import { ScopeRepresentation } from "./scoperepresentation";
 
+
 export enum ResourceServerRepresentationDecisionStrategyEnum {
-    Affirmative = "AFFIRMATIVE"
-,    Unanimous = "UNANIMOUS"
-,    Consensus = "CONSENSUS"
+    Affirmative = "AFFIRMATIVE",
+    Unanimous = "UNANIMOUS",
+    Consensus = "CONSENSUS"
 }
 
 export enum ResourceServerRepresentationPolicyEnforcementModeEnum {
-    Enforcing = "ENFORCING"
-,    Permissive = "PERMISSIVE"
-,    Disabled = "DISABLED"
+    Enforcing = "ENFORCING",
+    Permissive = "PERMISSIVE",
+    Disabled = "DISABLED"
 }
 
 
 export class ResourceServerRepresentation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowRemoteResourceManagement" })
+  @SpeakeasyMetadata({ data: "json, name=allowRemoteResourceManagement" })
   allowRemoteResourceManagement?: boolean;
 
-  @Metadata({ data: "json, name=clientId" })
+  @SpeakeasyMetadata({ data: "json, name=clientId" })
   clientId?: string;
 
-  @Metadata({ data: "json, name=decisionStrategy" })
+  @SpeakeasyMetadata({ data: "json, name=decisionStrategy" })
   decisionStrategy?: ResourceServerRepresentationDecisionStrategyEnum;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=policies", elemType: shared.PolicyRepresentation })
+  @SpeakeasyMetadata({ data: "json, name=policies", elemType: PolicyRepresentation })
   policies?: PolicyRepresentation[];
 
-  @Metadata({ data: "json, name=policyEnforcementMode" })
+  @SpeakeasyMetadata({ data: "json, name=policyEnforcementMode" })
   policyEnforcementMode?: ResourceServerRepresentationPolicyEnforcementModeEnum;
 
-  @Metadata({ data: "json, name=resources", elemType: shared.ResourceRepresentation })
+  @SpeakeasyMetadata({ data: "json, name=resources", elemType: ResourceRepresentation })
   resources?: ResourceRepresentation[];
 
-  @Metadata({ data: "json, name=scopes", elemType: shared.ScopeRepresentation })
+  @SpeakeasyMetadata({ data: "json, name=scopes", elemType: ScopeRepresentation })
   scopes?: ScopeRepresentation[];
 }

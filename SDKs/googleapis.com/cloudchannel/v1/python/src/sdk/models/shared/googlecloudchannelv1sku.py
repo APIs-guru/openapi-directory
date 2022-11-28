@@ -1,14 +1,18 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import googlecloudchannelv1marketinginfo
-from . import googlecloudchannelv1product
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleCloudChannelV1Sku:
-    marketing_info: Optional[googlecloudchannelv1marketinginfo.GoogleCloudChannelV1MarketingInfo] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'marketingInfo' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    product: Optional[googlecloudchannelv1product.GoogleCloudChannelV1Product] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'product' }})
+    r"""GoogleCloudChannelV1Sku
+    Represents a product's purchasable Stock Keeping Unit (SKU). SKUs represent the different variations of the product. For example, Google Workspace Business Standard and Google Workspace Business Plus are Google Workspace product SKUs.
+    """
+    
+    marketing_info: Optional[GoogleCloudChannelV1MarketingInfo] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('marketingInfo') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    product: Optional[GoogleCloudChannelV1Product] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('product') }})
     

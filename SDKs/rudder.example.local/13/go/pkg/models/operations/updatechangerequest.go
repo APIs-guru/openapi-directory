@@ -13,11 +13,6 @@ type UpdateChangeRequestRequestBody struct {
 	Name        *string `json:"name,omitempty"`
 }
 
-type UpdateChangeRequestRequest struct {
-	PathParams UpdateChangeRequestPathParams
-	Request    UpdateChangeRequestRequestBody `request:"mediaType=application/json"`
-}
-
 type UpdateChangeRequest200ApplicationJSONActionEnum string
 
 const (
@@ -39,6 +34,11 @@ type UpdateChangeRequest200ApplicationJSON struct {
 	Action UpdateChangeRequest200ApplicationJSONActionEnum `json:"action"`
 	Data   UpdateChangeRequest200ApplicationJSONData       `json:"data"`
 	Result UpdateChangeRequest200ApplicationJSONResultEnum `json:"result"`
+}
+
+type UpdateChangeRequestRequest struct {
+	PathParams UpdateChangeRequestPathParams
+	Request    UpdateChangeRequestRequestBody `request:"mediaType=application/json"`
 }
 
 type UpdateChangeRequestResponse struct {

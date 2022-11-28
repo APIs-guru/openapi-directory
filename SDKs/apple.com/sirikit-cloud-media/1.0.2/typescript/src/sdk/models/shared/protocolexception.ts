@@ -1,23 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProtocolExceptionReasonEnum } from "./protocolexceptionreasonenum";
 
 
+
 export class ProtocolException extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=methodIndex" })
+  @SpeakeasyMetadata({ data: "json, name=methodIndex" })
   methodIndex?: number;
 
-  @Metadata({ data: "json, name=methodName" })
+  @SpeakeasyMetadata({ data: "json, name=methodName" })
   methodName?: string;
 
-  @Metadata({ data: "json, name=reason" })
+  @SpeakeasyMetadata({ data: "json, name=reason" })
   reason: ProtocolExceptionReasonEnum;
 
-  @Metadata({ data: "json, name=retryWithDelay" })
+  @SpeakeasyMetadata({ data: "json, name=retryWithDelay" })
   retryWithDelay?: number;
 
-  @Metadata({ data: "json, name=trace" })
+  @SpeakeasyMetadata({ data: "json, name=trace" })
   trace?: string[];
 }

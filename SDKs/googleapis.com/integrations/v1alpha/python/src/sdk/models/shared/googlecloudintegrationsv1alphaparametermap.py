@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googlecloudintegrationsv1alphaparametermapentry
+from sdk import utils
+from . import *
 
 class GoogleCloudIntegrationsV1alphaParameterMapKeyTypeEnum(str, Enum):
     INTEGRATION_PARAMETER_DATA_TYPE_UNSPECIFIED = "INTEGRATION_PARAMETER_DATA_TYPE_UNSPECIFIED"
@@ -35,7 +37,11 @@ class GoogleCloudIntegrationsV1alphaParameterMapValueTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleCloudIntegrationsV1alphaParameterMap:
-    entries: Optional[List[googlecloudintegrationsv1alphaparametermapentry.GoogleCloudIntegrationsV1alphaParameterMapEntry]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'entries' }})
-    key_type: Optional[GoogleCloudIntegrationsV1alphaParameterMapKeyTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'keyType' }})
-    value_type: Optional[GoogleCloudIntegrationsV1alphaParameterMapValueTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'valueType' }})
+    r"""GoogleCloudIntegrationsV1alphaParameterMap
+    A generic multi-map that holds key value pairs. They keys and values can be of any type, unless specified.
+    """
+    
+    entries: Optional[List[GoogleCloudIntegrationsV1alphaParameterMapEntry]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('entries') }})
+    key_type: Optional[GoogleCloudIntegrationsV1alphaParameterMapKeyTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('keyType') }})
+    value_type: Optional[GoogleCloudIntegrationsV1alphaParameterMapValueTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('valueType') }})
     

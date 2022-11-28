@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudresourcemanagerTagValuesTagHoldsListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,14 +29,14 @@ class CloudresourcemanagerTagValuesTagHoldsListQueryParams:
 
 @dataclass
 class CloudresourcemanagerTagValuesTagHoldsListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudresourcemanagerTagValuesTagHoldsListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -46,14 +47,14 @@ class CloudresourcemanagerTagValuesTagHoldsListSecurity:
 
 @dataclass
 class CloudresourcemanagerTagValuesTagHoldsListRequest:
-    path_params: CloudresourcemanagerTagValuesTagHoldsListPathParams = field(default=None)
-    query_params: CloudresourcemanagerTagValuesTagHoldsListQueryParams = field(default=None)
-    security: CloudresourcemanagerTagValuesTagHoldsListSecurity = field(default=None)
+    path_params: CloudresourcemanagerTagValuesTagHoldsListPathParams = field()
+    query_params: CloudresourcemanagerTagValuesTagHoldsListQueryParams = field()
+    security: CloudresourcemanagerTagValuesTagHoldsListSecurity = field()
     
 
 @dataclass
 class CloudresourcemanagerTagValuesTagHoldsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_tag_holds_response: Optional[shared.ListTagHoldsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

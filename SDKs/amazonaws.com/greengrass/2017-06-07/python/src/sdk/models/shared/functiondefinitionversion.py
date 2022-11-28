@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import functiondefaultconfig
-from . import function
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class FunctionDefinitionVersion:
-    default_config: Optional[functiondefaultconfig.FunctionDefaultConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DefaultConfig' }})
-    functions: Optional[List[function.Function]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Functions' }})
+    r"""FunctionDefinitionVersion
+    Information about a function definition version.
+    """
+    
+    default_config: Optional[FunctionDefaultConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DefaultConfig') }})
+    functions: Optional[List[Function]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Functions') }})
     

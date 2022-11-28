@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class IamPoliciesUpdatePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +29,21 @@ class IamPoliciesUpdateQueryParams:
 
 @dataclass
 class IamPoliciesUpdateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class IamPoliciesUpdateRequest:
-    path_params: IamPoliciesUpdatePathParams = field(default=None)
-    query_params: IamPoliciesUpdateQueryParams = field(default=None)
-    request: Optional[shared.GoogleIamV2betaPolicy] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: IamPoliciesUpdateSecurity = field(default=None)
+    path_params: IamPoliciesUpdatePathParams = field()
+    query_params: IamPoliciesUpdateQueryParams = field()
+    security: IamPoliciesUpdateSecurity = field()
+    request: Optional[shared.GoogleIamV2betaPolicyInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class IamPoliciesUpdateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_longrunning_operation: Optional[shared.GoogleLongrunningOperation] = field(default=None)
-    status_code: int = field(default=None)
     

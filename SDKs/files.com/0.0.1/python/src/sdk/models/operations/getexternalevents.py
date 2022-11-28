@@ -18,12 +18,12 @@ class GetExternalEventsQueryParams:
 
 @dataclass
 class GetExternalEventsRequest:
-    query_params: GetExternalEventsQueryParams = field(default=None)
+    query_params: GetExternalEventsQueryParams = field()
     
 
 @dataclass
 class GetExternalEventsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     external_event_entities: Optional[List[shared.ExternalEventEntity]] = field(default=None)
-    status_code: int = field(default=None)
     

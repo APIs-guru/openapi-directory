@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RequestOptions } from "./requestoptions";
 import { Statement } from "./statement";
 import { TransactionSelector } from "./transactionselector";
+
 
 
 // ExecuteBatchDmlRequest
@@ -10,15 +10,15 @@ import { TransactionSelector } from "./transactionselector";
  * The request for ExecuteBatchDml.
 **/
 export class ExecuteBatchDmlRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=requestOptions" })
+  @SpeakeasyMetadata({ data: "json, name=requestOptions" })
   requestOptions?: RequestOptions;
 
-  @Metadata({ data: "json, name=seqno" })
+  @SpeakeasyMetadata({ data: "json, name=seqno" })
   seqno?: string;
 
-  @Metadata({ data: "json, name=statements", elemType: shared.Statement })
+  @SpeakeasyMetadata({ data: "json, name=statements", elemType: Statement })
   statements?: Statement[];
 
-  @Metadata({ data: "json, name=transaction" })
+  @SpeakeasyMetadata({ data: "json, name=transaction" })
   transaction?: TransactionSelector;
 }

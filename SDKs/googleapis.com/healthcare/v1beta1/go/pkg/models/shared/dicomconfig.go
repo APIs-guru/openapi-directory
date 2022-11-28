@@ -10,6 +10,8 @@ const (
 	DicomConfigFilterProfileEnumDeidentifyTagContents                DicomConfigFilterProfileEnum = "DEIDENTIFY_TAG_CONTENTS"
 )
 
+// DicomConfig
+// Specifies the parameters needed for de-identification of DICOM stores.
 type DicomConfig struct {
 	FilterProfile   *DicomConfigFilterProfileEnum `json:"filterProfile,omitempty"`
 	KeepList        *TagFilterList                `json:"keepList,omitempty"`

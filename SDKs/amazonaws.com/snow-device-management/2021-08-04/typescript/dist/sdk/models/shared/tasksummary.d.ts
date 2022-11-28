@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { TaskStateEnum } from "./taskstateenum";
 /**
  * Information about the task assigned to one or many devices.

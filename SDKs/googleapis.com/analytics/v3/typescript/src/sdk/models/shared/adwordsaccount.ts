@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AdWordsAccount
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * JSON template for an Google Ads account.
 **/
 export class AdWordsAccount extends SpeakeasyBase {
-  @Metadata({ data: "json, name=autoTaggingEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=autoTaggingEnabled" })
   autoTaggingEnabled?: boolean;
 
-  @Metadata({ data: "json, name=customerId" })
+  @SpeakeasyMetadata({ data: "json, name=customerId" })
   customerId?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 }

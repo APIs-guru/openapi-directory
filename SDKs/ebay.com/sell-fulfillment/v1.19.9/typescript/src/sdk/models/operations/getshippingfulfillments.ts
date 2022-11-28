@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetShippingFulfillmentsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=orderId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=orderId" })
   orderId: string;
 }
 
 
 export class GetShippingFulfillmentsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   apiAuth: shared.SchemeApiAuth;
 }
 
 
 export class GetShippingFulfillmentsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetShippingFulfillmentsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetShippingFulfillmentsSecurity;
 }
 
 
 export class GetShippingFulfillmentsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   shippingFulfillmentPagedCollection?: shared.ShippingFulfillmentPagedCollection;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

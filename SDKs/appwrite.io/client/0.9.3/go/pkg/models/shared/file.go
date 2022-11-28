@@ -1,5 +1,7 @@
 package shared
 
+// File
+// File
 type File struct {
 	DollarID          string                 `json:"$id"`
 	DollarPermissions map[string]interface{} `json:"$permissions"`

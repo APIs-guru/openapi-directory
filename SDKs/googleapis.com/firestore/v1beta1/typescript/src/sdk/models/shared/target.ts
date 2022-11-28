@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DocumentsTarget } from "./documentstarget";
 import { QueryTarget } from "./querytarget";
+
 
 
 // Target
@@ -8,21 +9,21 @@ import { QueryTarget } from "./querytarget";
  * A specification of a set of documents to listen to.
 **/
 export class Target extends SpeakeasyBase {
-  @Metadata({ data: "json, name=documents" })
+  @SpeakeasyMetadata({ data: "json, name=documents" })
   documents?: DocumentsTarget;
 
-  @Metadata({ data: "json, name=once" })
+  @SpeakeasyMetadata({ data: "json, name=once" })
   once?: boolean;
 
-  @Metadata({ data: "json, name=query" })
+  @SpeakeasyMetadata({ data: "json, name=query" })
   query?: QueryTarget;
 
-  @Metadata({ data: "json, name=readTime" })
+  @SpeakeasyMetadata({ data: "json, name=readTime" })
   readTime?: string;
 
-  @Metadata({ data: "json, name=resumeToken" })
+  @SpeakeasyMetadata({ data: "json, name=resumeToken" })
   resumeToken?: string;
 
-  @Metadata({ data: "json, name=targetId" })
+  @SpeakeasyMetadata({ data: "json, name=targetId" })
   targetId?: number;
 }

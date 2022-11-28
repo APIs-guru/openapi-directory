@@ -9,3 +9,12 @@ type ExportTemplate struct {
 	Name          string  `json:"name"`
 	TemplateCode  string  `json:"template_code"`
 }
+
+type ExportTemplateInput struct {
+	ContentType   int64   `json:"content_type"`
+	Description   *string `json:"description,omitempty"`
+	FileExtension *string `json:"file_extension,omitempty"`
+	MimeType      *string `json:"mime_type,omitempty"`
+	Name          string  `json:"name"`
+	TemplateCode  string  `json:"template_code"`
+}

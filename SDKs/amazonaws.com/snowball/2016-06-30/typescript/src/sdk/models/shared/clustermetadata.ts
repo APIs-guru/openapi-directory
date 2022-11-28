@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ClusterStateEnum } from "./clusterstateenum";
 import { JobTypeEnum } from "./jobtypeenum";
 import { Notification } from "./notification";
@@ -9,53 +9,54 @@ import { SnowballTypeEnum } from "./snowballtypeenum";
 import { TaxDocuments } from "./taxdocuments";
 
 
+
 // ClusterMetadata
 /** 
  * Contains metadata about a specific cluster.
 **/
 export class ClusterMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AddressId" })
+  @SpeakeasyMetadata({ data: "json, name=AddressId" })
   addressId?: string;
 
-  @Metadata({ data: "json, name=ClusterId" })
+  @SpeakeasyMetadata({ data: "json, name=ClusterId" })
   clusterId?: string;
 
-  @Metadata({ data: "json, name=ClusterState" })
+  @SpeakeasyMetadata({ data: "json, name=ClusterState" })
   clusterState?: ClusterStateEnum;
 
-  @Metadata({ data: "json, name=CreationDate" })
+  @SpeakeasyMetadata({ data: "json, name=CreationDate" })
   creationDate?: Date;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=ForwardingAddressId" })
+  @SpeakeasyMetadata({ data: "json, name=ForwardingAddressId" })
   forwardingAddressId?: string;
 
-  @Metadata({ data: "json, name=JobType" })
+  @SpeakeasyMetadata({ data: "json, name=JobType" })
   jobType?: JobTypeEnum;
 
-  @Metadata({ data: "json, name=KmsKeyARN" })
+  @SpeakeasyMetadata({ data: "json, name=KmsKeyARN" })
   kmsKeyArn?: string;
 
-  @Metadata({ data: "json, name=Notification" })
+  @SpeakeasyMetadata({ data: "json, name=Notification" })
   notification?: Notification;
 
-  @Metadata({ data: "json, name=OnDeviceServiceConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=OnDeviceServiceConfiguration" })
   onDeviceServiceConfiguration?: OnDeviceServiceConfiguration;
 
-  @Metadata({ data: "json, name=Resources" })
+  @SpeakeasyMetadata({ data: "json, name=Resources" })
   resources?: JobResource;
 
-  @Metadata({ data: "json, name=RoleARN" })
+  @SpeakeasyMetadata({ data: "json, name=RoleARN" })
   roleArn?: string;
 
-  @Metadata({ data: "json, name=ShippingOption" })
+  @SpeakeasyMetadata({ data: "json, name=ShippingOption" })
   shippingOption?: ShippingOptionEnum;
 
-  @Metadata({ data: "json, name=SnowballType" })
+  @SpeakeasyMetadata({ data: "json, name=SnowballType" })
   snowballType?: SnowballTypeEnum;
 
-  @Metadata({ data: "json, name=TaxDocuments" })
+  @SpeakeasyMetadata({ data: "json, name=TaxDocuments" })
   taxDocuments?: TaxDocuments;
 }

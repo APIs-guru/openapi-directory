@@ -1,13 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetJourneyExecutionActivityMetricsPathParams:
-    application_id: str = field(default=None, metadata={'path_param': { 'field_name': 'application-id', 'style': 'simple', 'explode': False }})
-    journey_activity_id: str = field(default=None, metadata={'path_param': { 'field_name': 'journey-activity-id', 'style': 'simple', 'explode': False }})
-    journey_id: str = field(default=None, metadata={'path_param': { 'field_name': 'journey-id', 'style': 'simple', 'explode': False }})
+    application_id: str = field(metadata={'path_param': { 'field_name': 'application-id', 'style': 'simple', 'explode': False }})
+    journey_activity_id: str = field(metadata={'path_param': { 'field_name': 'journey-activity-id', 'style': 'simple', 'explode': False }})
+    journey_id: str = field(metadata={'path_param': { 'field_name': 'journey-id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -29,21 +32,21 @@ class GetJourneyExecutionActivityMetricsHeaders:
 
 @dataclass
 class GetJourneyExecutionActivityMetricsRequest:
-    path_params: GetJourneyExecutionActivityMetricsPathParams = field(default=None)
-    query_params: GetJourneyExecutionActivityMetricsQueryParams = field(default=None)
-    headers: GetJourneyExecutionActivityMetricsHeaders = field(default=None)
+    headers: GetJourneyExecutionActivityMetricsHeaders = field()
+    path_params: GetJourneyExecutionActivityMetricsPathParams = field()
+    query_params: GetJourneyExecutionActivityMetricsQueryParams = field()
     
 
 @dataclass
 class GetJourneyExecutionActivityMetricsResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     forbidden_exception: Optional[Any] = field(default=None)
     get_journey_execution_activity_metrics_response: Optional[shared.GetJourneyExecutionActivityMetricsResponse] = field(default=None)
     internal_server_error_exception: Optional[Any] = field(default=None)
     method_not_allowed_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
     payload_too_large_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDatacatalogV1CloudSqlBigQueryConnectionSpec } from "./googleclouddatacatalogv1cloudsqlbigqueryconnectionspec";
 
+
 export enum GoogleCloudDatacatalogV1BigQueryConnectionSpecConnectionTypeEnum {
-    ConnectionTypeUnspecified = "CONNECTION_TYPE_UNSPECIFIED"
-,    CloudSql = "CLOUD_SQL"
+    ConnectionTypeUnspecified = "CONNECTION_TYPE_UNSPECIFIED",
+    CloudSql = "CLOUD_SQL"
 }
 
 
@@ -12,12 +13,12 @@ export enum GoogleCloudDatacatalogV1BigQueryConnectionSpecConnectionTypeEnum {
  * Specification for the BigQuery connection.
 **/
 export class GoogleCloudDatacatalogV1BigQueryConnectionSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cloudSql" })
+  @SpeakeasyMetadata({ data: "json, name=cloudSql" })
   cloudSql?: GoogleCloudDatacatalogV1CloudSqlBigQueryConnectionSpec;
 
-  @Metadata({ data: "json, name=connectionType" })
+  @SpeakeasyMetadata({ data: "json, name=connectionType" })
   connectionType?: GoogleCloudDatacatalogV1BigQueryConnectionSpecConnectionTypeEnum;
 
-  @Metadata({ data: "json, name=hasCredential" })
+  @SpeakeasyMetadata({ data: "json, name=hasCredential" })
   hasCredential?: boolean;
 }

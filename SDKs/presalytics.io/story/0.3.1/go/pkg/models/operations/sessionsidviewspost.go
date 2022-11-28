@@ -9,6 +9,8 @@ type SessionsIDViewsPostPathParams struct {
 	SessionID string `pathParam:"style=simple,explode=false,name=session_id"`
 }
 
+// SessionsIDViewsPostRequiredParametersToCreateAView
+// A page view required a page number from the story outline to be created
 type SessionsIDViewsPostRequiredParametersToCreateAView struct {
 	ActiveMSecs *int64    `json:"activeMSecs,omitempty"`
 	Additional  *string   `json:"additional,omitempty"`

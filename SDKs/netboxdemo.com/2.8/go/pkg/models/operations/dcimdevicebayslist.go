@@ -50,15 +50,15 @@ type DcimDeviceBaysListQueryParams struct {
 	TagN            *string `queryParam:"style=form,explode=true,name=tag__n"`
 }
 
-type DcimDeviceBaysListRequest struct {
-	QueryParams DcimDeviceBaysListQueryParams
-}
-
 type DcimDeviceBaysList200ApplicationJSON struct {
 	Count    int64              `json:"count"`
 	Next     *string            `json:"next,omitempty"`
 	Previous *string            `json:"previous,omitempty"`
 	Results  []shared.DeviceBay `json:"results"`
+}
+
+type DcimDeviceBaysListRequest struct {
+	QueryParams DcimDeviceBaysListQueryParams
 }
 
 type DcimDeviceBaysListResponse struct {

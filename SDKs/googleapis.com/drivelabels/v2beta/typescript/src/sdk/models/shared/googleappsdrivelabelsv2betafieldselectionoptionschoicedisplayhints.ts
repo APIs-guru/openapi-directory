@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleAppsDriveLabelsV2betaBadgeColors } from "./googleappsdrivelabelsv2betabadgecolors";
-import { GoogleAppsDriveLabelsV2betaBadgeColors } from "./googleappsdrivelabelsv2betabadgecolors";
+
 
 
 // GoogleAppsDriveLabelsV2betaFieldSelectionOptionsChoiceDisplayHints
@@ -8,21 +8,21 @@ import { GoogleAppsDriveLabelsV2betaBadgeColors } from "./googleappsdrivelabelsv
  * UI display hints for rendering an option.
 **/
 export class GoogleAppsDriveLabelsV2betaFieldSelectionOptionsChoiceDisplayHints extends SpeakeasyBase {
-  @Metadata({ data: "json, name=badgeColors" })
+  @SpeakeasyMetadata({ data: "json, name=badgeColors" })
   badgeColors?: GoogleAppsDriveLabelsV2betaBadgeColors;
 
-  @Metadata({ data: "json, name=badgePriority" })
+  @SpeakeasyMetadata({ data: "json, name=badgePriority" })
   badgePriority?: string;
 
-  @Metadata({ data: "json, name=darkBadgeColors" })
+  @SpeakeasyMetadata({ data: "json, name=darkBadgeColors" })
   darkBadgeColors?: GoogleAppsDriveLabelsV2betaBadgeColors;
 
-  @Metadata({ data: "json, name=disabled" })
+  @SpeakeasyMetadata({ data: "json, name=disabled" })
   disabled?: boolean;
 
-  @Metadata({ data: "json, name=hiddenInSearch" })
+  @SpeakeasyMetadata({ data: "json, name=hiddenInSearch" })
   hiddenInSearch?: boolean;
 
-  @Metadata({ data: "json, name=shownInApply" })
+  @SpeakeasyMetadata({ data: "json, name=shownInApply" })
   shownInApply?: boolean;
 }

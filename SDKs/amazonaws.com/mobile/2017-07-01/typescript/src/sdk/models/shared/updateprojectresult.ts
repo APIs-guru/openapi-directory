@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProjectDetails } from "./projectdetails";
+
 
 
 // UpdateProjectResult
@@ -7,6 +8,6 @@ import { ProjectDetails } from "./projectdetails";
  *  Result structure used for requests to updated project configuration. 
 **/
 export class UpdateProjectResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=details" })
+  @SpeakeasyMetadata({ data: "json, name=details" })
   details?: ProjectDetails;
 }

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetV3EventsIDPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,13 +21,13 @@ class GetV3EventsIDHeaders:
 
 @dataclass
 class GetV3EventsIDRequest:
-    path_params: GetV3EventsIDPathParams = field(default=None)
-    query_params: GetV3EventsIDQueryParams = field(default=None)
-    headers: GetV3EventsIDHeaders = field(default=None)
+    headers: GetV3EventsIDHeaders = field()
+    path_params: GetV3EventsIDPathParams = field()
+    query_params: GetV3EventsIDQueryParams = field()
     
 
 @dataclass
 class GetV3EventsIDResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

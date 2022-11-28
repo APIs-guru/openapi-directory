@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Patch
+// Represents metadata about a patch.
 type Patch struct {
 	AdvisoryIds    []string   `json:"AdvisoryIds,omitempty"`
 	Arch           *string    `json:"Arch,omitempty"`

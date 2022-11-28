@@ -8,6 +8,8 @@ const (
 	AmpIssueSeverityEnumError               AmpIssueSeverityEnum = "ERROR"
 )
 
+// AmpIssue
+// AMP issue.
 type AmpIssue struct {
 	IssueMessage *string               `json:"issueMessage,omitempty"`
 	Severity     *AmpIssueSeverityEnum `json:"severity,omitempty"`

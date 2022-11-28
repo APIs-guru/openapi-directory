@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GooglePrivacyDlpV2Schedule } from "./googleprivacydlpv2schedule";
+
 
 
 // GooglePrivacyDlpV2Trigger
@@ -7,9 +8,9 @@ import { GooglePrivacyDlpV2Schedule } from "./googleprivacydlpv2schedule";
  * What event needs to occur for a new job to be started.
 **/
 export class GooglePrivacyDlpV2Trigger extends SpeakeasyBase {
-  @Metadata({ data: "json, name=manual" })
+  @SpeakeasyMetadata({ data: "json, name=manual" })
   manual?: Map<string, any>;
 
-  @Metadata({ data: "json, name=schedule" })
+  @SpeakeasyMetadata({ data: "json, name=schedule" })
   schedule?: GooglePrivacyDlpV2Schedule;
 }

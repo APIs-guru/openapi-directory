@@ -12,17 +12,17 @@ class SyncPlayPingRequests:
 
 @dataclass
 class SyncPlayPingSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class SyncPlayPingRequest:
-    request: SyncPlayPingRequests = field(default=None)
-    security: SyncPlayPingSecurity = field(default=None)
+    request: SyncPlayPingRequests = field()
+    security: SyncPlayPingSecurity = field()
     
 
 @dataclass
 class SyncPlayPingResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

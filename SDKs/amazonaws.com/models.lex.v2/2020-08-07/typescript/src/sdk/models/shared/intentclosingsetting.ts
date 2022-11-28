@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResponseSpecification } from "./responsespecification";
+
 
 
 // IntentClosingSetting
@@ -7,9 +8,9 @@ import { ResponseSpecification } from "./responsespecification";
  * Provides a statement the Amazon Lex conveys to the user when the intent is successfully fulfilled.
 **/
 export class IntentClosingSetting extends SpeakeasyBase {
-  @Metadata({ data: "json, name=active" })
+  @SpeakeasyMetadata({ data: "json, name=active" })
   active?: boolean;
 
-  @Metadata({ data: "json, name=closingResponse" })
+  @SpeakeasyMetadata({ data: "json, name=closingResponse" })
   closingResponse: ResponseSpecification;
 }

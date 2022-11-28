@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdatePaymentPolicyPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=payment_policy_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=payment_policy_id" })
   paymentPolicyId: string;
 }
 
 
 export class UpdatePaymentPolicySecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   apiAuth: shared.SchemeApiAuth;
 }
 
 
 export class UpdatePaymentPolicyRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdatePaymentPolicyPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.PaymentPolicyRequest;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: UpdatePaymentPolicySecurity;
 }
 
 
 export class UpdatePaymentPolicyResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   setPaymentPolicyResponse?: shared.SetPaymentPolicyResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

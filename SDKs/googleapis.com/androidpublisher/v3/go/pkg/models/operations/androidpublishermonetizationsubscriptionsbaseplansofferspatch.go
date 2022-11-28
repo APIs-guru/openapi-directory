@@ -35,7 +35,7 @@ type AndroidpublisherMonetizationSubscriptionsBasePlansOffersPatchSecurity struc
 type AndroidpublisherMonetizationSubscriptionsBasePlansOffersPatchRequest struct {
 	PathParams  AndroidpublisherMonetizationSubscriptionsBasePlansOffersPatchPathParams
 	QueryParams AndroidpublisherMonetizationSubscriptionsBasePlansOffersPatchQueryParams
-	Request     *shared.SubscriptionOffer `request:"mediaType=application/json"`
+	Request     *shared.SubscriptionOfferInput `request:"mediaType=application/json"`
 	Security    AndroidpublisherMonetizationSubscriptionsBasePlansOffersPatchSecurity
 }
 

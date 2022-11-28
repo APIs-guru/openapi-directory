@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RemoveHeldAccountsRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Remove a list of accounts from a hold.
 **/
 export class RemoveHeldAccountsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountIds" })
+  @SpeakeasyMetadata({ data: "json, name=accountIds" })
   accountIds?: string[];
 }

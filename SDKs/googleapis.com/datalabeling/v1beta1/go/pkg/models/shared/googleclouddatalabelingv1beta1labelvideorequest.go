@@ -10,6 +10,8 @@ const (
 	GoogleCloudDatalabelingV1beta1LabelVideoRequestFeatureEnumEvent              GoogleCloudDatalabelingV1beta1LabelVideoRequestFeatureEnum = "EVENT"
 )
 
+// GoogleCloudDatalabelingV1beta1LabelVideoRequest
+// Request message for LabelVideo.
 type GoogleCloudDatalabelingV1beta1LabelVideoRequest struct {
 	BasicConfig               *GoogleCloudDatalabelingV1beta1HumanAnnotationConfig        `json:"basicConfig,omitempty"`
 	EventConfig               *GoogleCloudDatalabelingV1beta1EventConfig                  `json:"eventConfig,omitempty"`

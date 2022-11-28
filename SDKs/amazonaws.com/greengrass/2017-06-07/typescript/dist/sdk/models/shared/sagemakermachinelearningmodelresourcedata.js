@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceDownloadOwnerSetting } from "./resourcedownloadownersetting";
 // SageMakerMachineLearningModelResourceData
 /**
@@ -34,15 +34,15 @@ var SageMakerMachineLearningModelResourceData = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DestinationPath" }),
+        SpeakeasyMetadata({ data: "json, name=DestinationPath" }),
         __metadata("design:type", String)
     ], SageMakerMachineLearningModelResourceData.prototype, "destinationPath", void 0);
     __decorate([
-        Metadata({ data: "json, name=OwnerSetting" }),
+        SpeakeasyMetadata({ data: "json, name=OwnerSetting" }),
         __metadata("design:type", ResourceDownloadOwnerSetting)
     ], SageMakerMachineLearningModelResourceData.prototype, "ownerSetting", void 0);
     __decorate([
-        Metadata({ data: "json, name=SageMakerJobArn" }),
+        SpeakeasyMetadata({ data: "json, name=SageMakerJobArn" }),
         __metadata("design:type", String)
     ], SageMakerMachineLearningModelResourceData.prototype, "sageMakerJobArn", void 0);
     return SageMakerMachineLearningModelResourceData;

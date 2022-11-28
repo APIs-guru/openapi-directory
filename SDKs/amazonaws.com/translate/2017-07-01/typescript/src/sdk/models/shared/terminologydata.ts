@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TerminologyDataFormatEnum } from "./terminologydataformatenum";
+
 
 
 // TerminologyData
@@ -7,9 +8,9 @@ import { TerminologyDataFormatEnum } from "./terminologydataformatenum";
  * The data associated with the custom terminology.
 **/
 export class TerminologyData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=File" })
+  @SpeakeasyMetadata({ data: "json, name=File" })
   file: string;
 
-  @Metadata({ data: "json, name=Format" })
+  @SpeakeasyMetadata({ data: "json, name=Format" })
   format: TerminologyDataFormatEnum;
 }

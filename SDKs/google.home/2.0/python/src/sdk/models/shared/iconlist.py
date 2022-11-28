@@ -1,14 +1,14 @@
 from dataclasses import dataclass, field
-from typing import List
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class IconList:
-    depth: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'depth' }})
-    height: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'height' }})
-    mimetype: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mimetype' }})
-    url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
-    width: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'width' }})
+    depth: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('depth') }})
+    height: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('height') }})
+    mimetype: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('mimetype') }})
+    url: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('url') }})
+    width: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('width') }})
     

@@ -12,14 +12,14 @@ type AppsGetInstallationHeaders struct {
 	Accept string `header:"style=simple,explode=false,name=accept"`
 }
 
-type AppsGetInstallationRequest struct {
-	PathParams AppsGetInstallationPathParams
-	Headers    AppsGetInstallationHeaders
-}
-
 type AppsGetInstallation415ApplicationJSON struct {
 	DocumentationURL string `json:"documentation_url"`
 	Message          string `json:"message"`
+}
+
+type AppsGetInstallationRequest struct {
+	PathParams AppsGetInstallationPathParams
+	Headers    AppsGetInstallationHeaders
 }
 
 type AppsGetInstallationResponse struct {

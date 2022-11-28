@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DialogflowProjectsLocationsConversationDatasetsListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,14 +28,14 @@ class DialogflowProjectsLocationsConversationDatasetsListQueryParams:
 
 @dataclass
 class DialogflowProjectsLocationsConversationDatasetsListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DialogflowProjectsLocationsConversationDatasetsListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -45,14 +46,14 @@ class DialogflowProjectsLocationsConversationDatasetsListSecurity:
 
 @dataclass
 class DialogflowProjectsLocationsConversationDatasetsListRequest:
-    path_params: DialogflowProjectsLocationsConversationDatasetsListPathParams = field(default=None)
-    query_params: DialogflowProjectsLocationsConversationDatasetsListQueryParams = field(default=None)
-    security: DialogflowProjectsLocationsConversationDatasetsListSecurity = field(default=None)
+    path_params: DialogflowProjectsLocationsConversationDatasetsListPathParams = field()
+    query_params: DialogflowProjectsLocationsConversationDatasetsListQueryParams = field()
+    security: DialogflowProjectsLocationsConversationDatasetsListSecurity = field()
     
 
 @dataclass
 class DialogflowProjectsLocationsConversationDatasetsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_dialogflow_v2_list_conversation_datasets_response: Optional[shared.GoogleCloudDialogflowV2ListConversationDatasetsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

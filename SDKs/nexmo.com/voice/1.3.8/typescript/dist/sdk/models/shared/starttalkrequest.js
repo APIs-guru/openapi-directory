@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LanguageEnum } from "./languageenum";
 import { VoiceNameEnum } from "./voicenameenum";
 var StartTalkRequest = /** @class */ (function (_super) {
@@ -31,27 +31,27 @@ var StartTalkRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=language" }),
+        SpeakeasyMetadata({ data: "json, name=language" }),
         __metadata("design:type", String)
     ], StartTalkRequest.prototype, "language", void 0);
     __decorate([
-        Metadata({ data: "json, name=level" }),
+        SpeakeasyMetadata({ data: "json, name=level" }),
         __metadata("design:type", String)
     ], StartTalkRequest.prototype, "level", void 0);
     __decorate([
-        Metadata({ data: "json, name=loop" }),
+        SpeakeasyMetadata({ data: "json, name=loop" }),
         __metadata("design:type", Number)
     ], StartTalkRequest.prototype, "loop", void 0);
     __decorate([
-        Metadata({ data: "json, name=style" }),
+        SpeakeasyMetadata({ data: "json, name=style" }),
         __metadata("design:type", Number)
     ], StartTalkRequest.prototype, "style", void 0);
     __decorate([
-        Metadata({ data: "json, name=text" }),
+        SpeakeasyMetadata({ data: "json, name=text" }),
         __metadata("design:type", String)
     ], StartTalkRequest.prototype, "text", void 0);
     __decorate([
-        Metadata({ data: "json, name=voice_name" }),
+        SpeakeasyMetadata({ data: "json, name=voice_name" }),
         __metadata("design:type", String)
     ], StartTalkRequest.prototype, "voiceName", void 0);
     return StartTalkRequest;

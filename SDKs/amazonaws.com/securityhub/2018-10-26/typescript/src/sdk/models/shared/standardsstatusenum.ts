@@ -1,9 +1,10 @@
 
 
+
 export enum StandardsStatusEnum {
-    Pending = "PENDING"
-,    Ready = "READY"
-,    Failed = "FAILED"
-,    Deleting = "DELETING"
-,    Incomplete = "INCOMPLETE"
+    Pending = "PENDING",
+    Ready = "READY",
+    Failed = "FAILED",
+    Deleting = "DELETING",
+    Incomplete = "INCOMPLETE"
 }

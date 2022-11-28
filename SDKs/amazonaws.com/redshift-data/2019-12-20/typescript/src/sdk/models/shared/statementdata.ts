@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SqlParameter } from "./sqlparameter";
 import { StatusStringEnum } from "./statusstringenum";
+
 
 
 // StatementData
@@ -9,33 +9,33 @@ import { StatusStringEnum } from "./statusstringenum";
  * The SQL statement to run.
 **/
 export class StatementData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id: string;
 
-  @Metadata({ data: "json, name=IsBatchStatement" })
+  @SpeakeasyMetadata({ data: "json, name=IsBatchStatement" })
   isBatchStatement?: boolean;
 
-  @Metadata({ data: "json, name=QueryParameters", elemType: shared.SqlParameter })
+  @SpeakeasyMetadata({ data: "json, name=QueryParameters", elemType: SqlParameter })
   queryParameters?: SqlParameter[];
 
-  @Metadata({ data: "json, name=QueryString" })
+  @SpeakeasyMetadata({ data: "json, name=QueryString" })
   queryString?: string;
 
-  @Metadata({ data: "json, name=QueryStrings" })
+  @SpeakeasyMetadata({ data: "json, name=QueryStrings" })
   queryStrings?: string[];
 
-  @Metadata({ data: "json, name=SecretArn" })
+  @SpeakeasyMetadata({ data: "json, name=SecretArn" })
   secretArn?: string;
 
-  @Metadata({ data: "json, name=StatementName" })
+  @SpeakeasyMetadata({ data: "json, name=StatementName" })
   statementName?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: StatusStringEnum;
 
-  @Metadata({ data: "json, name=UpdatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=UpdatedAt" })
   updatedAt?: Date;
 }

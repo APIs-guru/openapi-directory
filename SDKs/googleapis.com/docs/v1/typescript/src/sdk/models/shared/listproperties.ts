@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NestingLevel } from "./nestinglevel";
+
 
 
 // ListProperties
@@ -8,6 +8,6 @@ import { NestingLevel } from "./nestinglevel";
  * The properties of a list that describe the look and feel of bullets belonging to paragraphs associated with a list.
 **/
 export class ListProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nestingLevels", elemType: shared.NestingLevel })
+  @SpeakeasyMetadata({ data: "json, name=nestingLevels", elemType: NestingLevel })
   nestingLevels?: NestingLevel[];
 }

@@ -1,5 +1,7 @@
 package shared
 
+// DiscoverInputSchemaResponse
+// <p/>
 type DiscoverInputSchemaResponse struct {
 	InputSchema           *SourceSchema `json:"InputSchema,omitempty"`
 	ParsedInputRecords    [][]string    `json:"ParsedInputRecords,omitempty"`

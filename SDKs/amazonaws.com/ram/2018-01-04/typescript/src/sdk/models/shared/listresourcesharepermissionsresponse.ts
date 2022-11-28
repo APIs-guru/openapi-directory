@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceSharePermissionSummary } from "./resourcesharepermissionsummary";
 
 
+
 export class ListResourceSharePermissionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=permissions", elemType: shared.ResourceSharePermissionSummary })
+  @SpeakeasyMetadata({ data: "json, name=permissions", elemType: ResourceSharePermissionSummary })
   permissions?: ResourceSharePermissionSummary[];
 }

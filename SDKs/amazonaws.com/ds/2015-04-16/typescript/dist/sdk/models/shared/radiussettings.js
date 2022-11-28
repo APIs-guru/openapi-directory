@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RadiusAuthenticationProtocolEnum } from "./radiusauthenticationprotocolenum";
 // RadiusSettings
 /**
@@ -34,35 +34,35 @@ var RadiusSettings = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AuthenticationProtocol" }),
+        SpeakeasyMetadata({ data: "json, name=AuthenticationProtocol" }),
         __metadata("design:type", String)
     ], RadiusSettings.prototype, "authenticationProtocol", void 0);
     __decorate([
-        Metadata({ data: "json, name=DisplayLabel" }),
+        SpeakeasyMetadata({ data: "json, name=DisplayLabel" }),
         __metadata("design:type", String)
     ], RadiusSettings.prototype, "displayLabel", void 0);
     __decorate([
-        Metadata({ data: "json, name=RadiusPort" }),
+        SpeakeasyMetadata({ data: "json, name=RadiusPort" }),
         __metadata("design:type", Number)
     ], RadiusSettings.prototype, "radiusPort", void 0);
     __decorate([
-        Metadata({ data: "json, name=RadiusRetries" }),
+        SpeakeasyMetadata({ data: "json, name=RadiusRetries" }),
         __metadata("design:type", Number)
     ], RadiusSettings.prototype, "radiusRetries", void 0);
     __decorate([
-        Metadata({ data: "json, name=RadiusServers" }),
+        SpeakeasyMetadata({ data: "json, name=RadiusServers" }),
         __metadata("design:type", Array)
     ], RadiusSettings.prototype, "radiusServers", void 0);
     __decorate([
-        Metadata({ data: "json, name=RadiusTimeout" }),
+        SpeakeasyMetadata({ data: "json, name=RadiusTimeout" }),
         __metadata("design:type", Number)
     ], RadiusSettings.prototype, "radiusTimeout", void 0);
     __decorate([
-        Metadata({ data: "json, name=SharedSecret" }),
+        SpeakeasyMetadata({ data: "json, name=SharedSecret" }),
         __metadata("design:type", String)
     ], RadiusSettings.prototype, "sharedSecret", void 0);
     __decorate([
-        Metadata({ data: "json, name=UseSameUsername" }),
+        SpeakeasyMetadata({ data: "json, name=UseSameUsername" }),
         __metadata("design:type", Boolean)
     ], RadiusSettings.prototype, "useSameUsername", void 0);
     return RadiusSettings;

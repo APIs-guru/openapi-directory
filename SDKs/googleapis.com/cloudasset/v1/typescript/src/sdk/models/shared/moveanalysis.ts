@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MoveAnalysisResult } from "./moveanalysisresult";
 import { Status } from "./status";
+
 
 
 // MoveAnalysis
@@ -8,12 +9,12 @@ import { Status } from "./status";
  * A message to group the analysis information.
 **/
 export class MoveAnalysis extends SpeakeasyBase {
-  @Metadata({ data: "json, name=analysis" })
+  @SpeakeasyMetadata({ data: "json, name=analysis" })
   analysis?: MoveAnalysisResult;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: Status;
 }

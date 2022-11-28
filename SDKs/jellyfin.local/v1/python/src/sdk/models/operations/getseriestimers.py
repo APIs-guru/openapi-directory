@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -11,18 +12,18 @@ class GetSeriesTimersQueryParams:
 
 @dataclass
 class GetSeriesTimersSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetSeriesTimersRequest:
-    query_params: GetSeriesTimersQueryParams = field(default=None)
-    security: GetSeriesTimersSecurity = field(default=None)
+    query_params: GetSeriesTimersQueryParams = field()
+    security: GetSeriesTimersSecurity = field()
     
 
 @dataclass
 class GetSeriesTimersResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     series_timer_info_dto_query_result: Optional[shared.SeriesTimerInfoDtoQueryResult] = field(default=None)
-    status_code: int = field(default=None)
     

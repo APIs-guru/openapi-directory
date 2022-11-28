@@ -1,5 +1,7 @@
 package shared
 
+// Rule
+// Represents a Google Tag Manager Rule.
 type Rule struct {
 	AccountID   *string     `json:"accountId,omitempty"`
 	Condition   []Condition `json:"condition,omitempty"`

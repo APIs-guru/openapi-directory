@@ -1,41 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetDatacentersIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
-}
-
-
-export class GetDatacentersIdRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetDatacentersIdPathParams;
 }
 
 
 export class GetDatacentersId200ApplicationJsonDatacenterLocation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=city" })
+  @SpeakeasyMetadata({ data: "json, name=city" })
   city: string;
 
-  @Metadata({ data: "json, name=country" })
+  @SpeakeasyMetadata({ data: "json, name=country" })
   country: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=latitude" })
+  @SpeakeasyMetadata({ data: "json, name=latitude" })
   latitude: number;
 
-  @Metadata({ data: "json, name=longitude" })
+  @SpeakeasyMetadata({ data: "json, name=longitude" })
   longitude: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=network_zone" })
+  @SpeakeasyMetadata({ data: "json, name=network_zone" })
   networkZone: string;
 }
 
@@ -45,48 +40,54 @@ export class GetDatacentersId200ApplicationJsonDatacenterLocation extends Speake
  * The Server types the Datacenter can handle
 **/
 export class GetDatacentersId200ApplicationJsonDatacenterServerTypes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=available" })
+  @SpeakeasyMetadata({ data: "json, name=available" })
   available: number[];
 
-  @Metadata({ data: "json, name=available_for_migration" })
+  @SpeakeasyMetadata({ data: "json, name=available_for_migration" })
   availableForMigration: number[];
 
-  @Metadata({ data: "json, name=supported" })
+  @SpeakeasyMetadata({ data: "json, name=supported" })
   supported: number[];
 }
 
 
 export class GetDatacentersId200ApplicationJsonDatacenter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location: GetDatacentersId200ApplicationJsonDatacenterLocation;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=server_types" })
+  @SpeakeasyMetadata({ data: "json, name=server_types" })
   serverTypes: GetDatacentersId200ApplicationJsonDatacenterServerTypes;
 }
 
 
 export class GetDatacentersId200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=datacenter" })
+  @SpeakeasyMetadata({ data: "json, name=datacenter" })
   datacenter: GetDatacentersId200ApplicationJsonDatacenter;
 }
 
 
+export class GetDatacentersIdRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetDatacentersIdPathParams;
+}
+
+
 export class GetDatacentersIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getDatacentersId200ApplicationJsonObject?: GetDatacentersId200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

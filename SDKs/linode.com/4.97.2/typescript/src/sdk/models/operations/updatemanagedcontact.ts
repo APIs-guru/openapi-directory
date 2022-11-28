@@ -1,62 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateManagedContactPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=contactId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=contactId" })
   contactId: number;
 }
 
 
-export class UpdateManagedContactSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class UpdateManagedContactSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class UpdateManagedContactSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: UpdateManagedContactSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: UpdateManagedContactSecurityOption2;
-}
-
-
-export class UpdateManagedContactRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: UpdateManagedContactPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: shared.ManagedContact;
-
-  @Metadata()
-  security: UpdateManagedContactSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class UpdateManagedContactDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class UpdateManagedContactRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: UpdateManagedContactPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: shared.ManagedContactInput;
+
+  @SpeakeasyMetadata()
+  security: UpdateManagedContactSecurity;
+}
+
+
 export class UpdateManagedContactResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   managedContact?: shared.ManagedContact;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateManagedContactDefaultApplicationJsonObject?: UpdateManagedContactDefaultApplicationJson;
 }

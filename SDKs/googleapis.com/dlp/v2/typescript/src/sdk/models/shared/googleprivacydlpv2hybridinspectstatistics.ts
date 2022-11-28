@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GooglePrivacyDlpV2HybridInspectStatistics
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Statistics related to processing hybrid inspect requests.
 **/
 export class GooglePrivacyDlpV2HybridInspectStatistics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=abortedCount" })
+  @SpeakeasyMetadata({ data: "json, name=abortedCount" })
   abortedCount?: string;
 
-  @Metadata({ data: "json, name=pendingCount" })
+  @SpeakeasyMetadata({ data: "json, name=pendingCount" })
   pendingCount?: string;
 
-  @Metadata({ data: "json, name=processedCount" })
+  @SpeakeasyMetadata({ data: "json, name=processedCount" })
   processedCount?: string;
 }

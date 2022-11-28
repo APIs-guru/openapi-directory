@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StageRetryModeEnum } from "./stageretrymodeenum";
+
 
 
 // RetryStageExecutionInput
@@ -7,15 +8,15 @@ import { StageRetryModeEnum } from "./stageretrymodeenum";
  * Represents the input of a <code>RetryStageExecution</code> action.
 **/
 export class RetryStageExecutionInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pipelineExecutionId" })
+  @SpeakeasyMetadata({ data: "json, name=pipelineExecutionId" })
   pipelineExecutionId: string;
 
-  @Metadata({ data: "json, name=pipelineName" })
+  @SpeakeasyMetadata({ data: "json, name=pipelineName" })
   pipelineName: string;
 
-  @Metadata({ data: "json, name=retryMode" })
+  @SpeakeasyMetadata({ data: "json, name=retryMode" })
   retryMode: StageRetryModeEnum;
 
-  @Metadata({ data: "json, name=stageName" })
+  @SpeakeasyMetadata({ data: "json, name=stageName" })
   stageName: string;
 }

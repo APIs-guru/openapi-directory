@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Source } from "./source";
 import { TestSuite } from "./testsuite";
+
 
 
 // TestRulesetRequest
@@ -8,9 +9,9 @@ import { TestSuite } from "./testsuite";
  * The request for FirebaseRulesService.TestRuleset.
 **/
 export class TestRulesetRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: Source;
 
-  @Metadata({ data: "json, name=testSuite" })
+  @SpeakeasyMetadata({ data: "json, name=testSuite" })
   testSuite?: TestSuite;
 }

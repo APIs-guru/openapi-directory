@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowV2IntentMessageTableCardCell } from "./googleclouddialogflowv2intentmessagetablecardcell";
+
 
 
 // GoogleCloudDialogflowV2IntentMessageTableCardRow
@@ -8,9 +8,9 @@ import { GoogleCloudDialogflowV2IntentMessageTableCardCell } from "./googlecloud
  * Row of TableCard.
 **/
 export class GoogleCloudDialogflowV2IntentMessageTableCardRow extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cells", elemType: shared.GoogleCloudDialogflowV2IntentMessageTableCardCell })
+  @SpeakeasyMetadata({ data: "json, name=cells", elemType: GoogleCloudDialogflowV2IntentMessageTableCardCell })
   cells?: GoogleCloudDialogflowV2IntentMessageTableCardCell[];
 
-  @Metadata({ data: "json, name=dividerAfter" })
+  @SpeakeasyMetadata({ data: "json, name=dividerAfter" })
   dividerAfter?: boolean;
 }

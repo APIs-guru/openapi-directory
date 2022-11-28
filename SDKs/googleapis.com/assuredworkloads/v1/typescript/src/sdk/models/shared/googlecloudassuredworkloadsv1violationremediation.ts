@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudAssuredworkloadsV1ViolationRemediationInstructions } from "./googlecloudassuredworkloadsv1violationremediationinstructions";
 
+
 export enum GoogleCloudAssuredworkloadsV1ViolationRemediationRemediationTypeEnum {
-    RemediationTypeUnspecified = "REMEDIATION_TYPE_UNSPECIFIED"
-,    RemediationBooleanOrgPolicyViolation = "REMEDIATION_BOOLEAN_ORG_POLICY_VIOLATION"
-,    RemediationListAllowedValuesOrgPolicyViolation = "REMEDIATION_LIST_ALLOWED_VALUES_ORG_POLICY_VIOLATION"
-,    RemediationListDeniedValuesOrgPolicyViolation = "REMEDIATION_LIST_DENIED_VALUES_ORG_POLICY_VIOLATION"
-,    RemediationRestrictCmekCryptoKeyProjectsOrgPolicyViolation = "REMEDIATION_RESTRICT_CMEK_CRYPTO_KEY_PROJECTS_ORG_POLICY_VIOLATION"
+    RemediationTypeUnspecified = "REMEDIATION_TYPE_UNSPECIFIED",
+    RemediationBooleanOrgPolicyViolation = "REMEDIATION_BOOLEAN_ORG_POLICY_VIOLATION",
+    RemediationListAllowedValuesOrgPolicyViolation = "REMEDIATION_LIST_ALLOWED_VALUES_ORG_POLICY_VIOLATION",
+    RemediationListDeniedValuesOrgPolicyViolation = "REMEDIATION_LIST_DENIED_VALUES_ORG_POLICY_VIOLATION",
+    RemediationRestrictCmekCryptoKeyProjectsOrgPolicyViolation = "REMEDIATION_RESTRICT_CMEK_CRYPTO_KEY_PROJECTS_ORG_POLICY_VIOLATION"
 }
 
 
@@ -15,12 +16,12 @@ export enum GoogleCloudAssuredworkloadsV1ViolationRemediationRemediationTypeEnum
  * Represents remediation guidance to resolve compliance violation for AssuredWorkload
 **/
 export class GoogleCloudAssuredworkloadsV1ViolationRemediation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=compliantValues" })
+  @SpeakeasyMetadata({ data: "json, name=compliantValues" })
   compliantValues?: string[];
 
-  @Metadata({ data: "json, name=instructions" })
+  @SpeakeasyMetadata({ data: "json, name=instructions" })
   instructions?: GoogleCloudAssuredworkloadsV1ViolationRemediationInstructions;
 
-  @Metadata({ data: "json, name=remediationType" })
+  @SpeakeasyMetadata({ data: "json, name=remediationType" })
   remediationType?: GoogleCloudAssuredworkloadsV1ViolationRemediationRemediationTypeEnum;
 }

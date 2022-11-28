@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDatalabelingV1beta1AnnotatedDatasetMetadata
+// Metadata on AnnotatedDataset.
 type GoogleCloudDatalabelingV1beta1AnnotatedDatasetMetadata struct {
 	BoundingPolyConfig         *GoogleCloudDatalabelingV1beta1BoundingPolyConfig         `json:"boundingPolyConfig,omitempty"`
 	EventConfig                *GoogleCloudDatalabelingV1beta1EventConfig                `json:"eventConfig,omitempty"`

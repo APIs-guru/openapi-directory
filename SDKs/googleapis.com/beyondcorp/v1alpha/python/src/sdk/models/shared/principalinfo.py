@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import serviceaccount
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class PrincipalInfo:
-    service_account: Optional[serviceaccount.ServiceAccount] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'serviceAccount' }})
+    r"""PrincipalInfo
+    PrincipalInfo represents an Identity oneof.
+    """
+    
+    service_account: Optional[ServiceAccount] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('serviceAccount') }})
     

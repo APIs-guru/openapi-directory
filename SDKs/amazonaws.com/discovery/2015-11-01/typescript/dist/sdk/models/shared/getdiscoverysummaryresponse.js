@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CustomerAgentInfo } from "./customeragentinfo";
 import { CustomerConnectorInfo } from "./customerconnectorinfo";
 var GetDiscoverySummaryResponse = /** @class */ (function (_super) {
@@ -31,27 +31,27 @@ var GetDiscoverySummaryResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=agentSummary" }),
+        SpeakeasyMetadata({ data: "json, name=agentSummary" }),
         __metadata("design:type", CustomerAgentInfo)
     ], GetDiscoverySummaryResponse.prototype, "agentSummary", void 0);
     __decorate([
-        Metadata({ data: "json, name=applications" }),
+        SpeakeasyMetadata({ data: "json, name=applications" }),
         __metadata("design:type", Number)
     ], GetDiscoverySummaryResponse.prototype, "applications", void 0);
     __decorate([
-        Metadata({ data: "json, name=connectorSummary" }),
+        SpeakeasyMetadata({ data: "json, name=connectorSummary" }),
         __metadata("design:type", CustomerConnectorInfo)
     ], GetDiscoverySummaryResponse.prototype, "connectorSummary", void 0);
     __decorate([
-        Metadata({ data: "json, name=servers" }),
+        SpeakeasyMetadata({ data: "json, name=servers" }),
         __metadata("design:type", Number)
     ], GetDiscoverySummaryResponse.prototype, "servers", void 0);
     __decorate([
-        Metadata({ data: "json, name=serversMappedToApplications" }),
+        SpeakeasyMetadata({ data: "json, name=serversMappedToApplications" }),
         __metadata("design:type", Number)
     ], GetDiscoverySummaryResponse.prototype, "serversMappedToApplications", void 0);
     __decorate([
-        Metadata({ data: "json, name=serversMappedtoTags" }),
+        SpeakeasyMetadata({ data: "json, name=serversMappedtoTags" }),
         __metadata("design:type", Number)
     ], GetDiscoverySummaryResponse.prototype, "serversMappedtoTags", void 0);
     return GetDiscoverySummaryResponse;

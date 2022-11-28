@@ -22,43 +22,43 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { TagFilter } from "./tagfilter";
 var GetResourcesInput = /** @class */ (function (_super) {
     __extends(GetResourcesInput, _super);
     function GetResourcesInput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ExcludeCompliantResources" }),
+        SpeakeasyMetadata({ data: "json, name=ExcludeCompliantResources" }),
         __metadata("design:type", Boolean)
     ], GetResourcesInput.prototype, "excludeCompliantResources", void 0);
     __decorate([
-        Metadata({ data: "json, name=IncludeComplianceDetails" }),
+        SpeakeasyMetadata({ data: "json, name=IncludeComplianceDetails" }),
         __metadata("design:type", Boolean)
     ], GetResourcesInput.prototype, "includeComplianceDetails", void 0);
     __decorate([
-        Metadata({ data: "json, name=PaginationToken" }),
+        SpeakeasyMetadata({ data: "json, name=PaginationToken" }),
         __metadata("design:type", String)
     ], GetResourcesInput.prototype, "paginationToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=ResourceARNList" }),
+        SpeakeasyMetadata({ data: "json, name=ResourceARNList" }),
         __metadata("design:type", Array)
     ], GetResourcesInput.prototype, "resourceArnList", void 0);
     __decorate([
-        Metadata({ data: "json, name=ResourceTypeFilters" }),
+        SpeakeasyMetadata({ data: "json, name=ResourceTypeFilters" }),
         __metadata("design:type", Array)
     ], GetResourcesInput.prototype, "resourceTypeFilters", void 0);
     __decorate([
-        Metadata({ data: "json, name=ResourcesPerPage" }),
+        SpeakeasyMetadata({ data: "json, name=ResourcesPerPage" }),
         __metadata("design:type", Number)
     ], GetResourcesInput.prototype, "resourcesPerPage", void 0);
     __decorate([
-        Metadata({ data: "json, name=TagFilters", elemType: shared.TagFilter }),
+        SpeakeasyMetadata({ data: "json, name=TagFilters", elemType: TagFilter }),
         __metadata("design:type", Array)
     ], GetResourcesInput.prototype, "tagFilters", void 0);
     __decorate([
-        Metadata({ data: "json, name=TagsPerPage" }),
+        SpeakeasyMetadata({ data: "json, name=TagsPerPage" }),
         __metadata("design:type", Number)
     ], GetResourcesInput.prototype, "tagsPerPage", void 0);
     return GetResourcesInput;

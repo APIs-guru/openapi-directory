@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ServicePerimeter } from "./serviceperimeter";
+
 
 
 // ReplaceServicePerimetersRequest
@@ -8,9 +8,9 @@ import { ServicePerimeter } from "./serviceperimeter";
  * A request to replace all existing Service Perimeters in an Access Policy with the Service Perimeters provided. This is done atomically.
 **/
 export class ReplaceServicePerimetersRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=servicePerimeters", elemType: shared.ServicePerimeter })
+  @SpeakeasyMetadata({ data: "json, name=servicePerimeters", elemType: ServicePerimeter })
   servicePerimeters?: ServicePerimeter[];
 }

@@ -6,6 +6,8 @@ const (
 	SandboxItemFireWebhookRequestWebhookCodeEnumDefaultUpdate SandboxItemFireWebhookRequestWebhookCodeEnum = "DEFAULT_UPDATE"
 )
 
+// SandboxItemFireWebhookRequest
+// SandboxItemFireWebhookRequest defines the request schema for `/sandbox/item/fire_webhook`
 type SandboxItemFireWebhookRequest struct {
 	AccessToken string                                       `json:"access_token"`
 	ClientID    *string                                      `json:"client_id,omitempty"`

@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PhotoUrLs extends SpeakeasyBase {
-  @Metadata({ data: "json, name=h" })
+  @SpeakeasyMetadata({ data: "json, name=h" })
   h?: string;
 
-  @Metadata({ data: "json, name=l" })
+  @SpeakeasyMetadata({ data: "json, name=l" })
   l?: string;
 
-  @Metadata({ data: "json, name=s" })
+  @SpeakeasyMetadata({ data: "json, name=s" })
   s?: string;
 
-  @Metadata({ data: "json, name=t" })
+  @SpeakeasyMetadata({ data: "json, name=t" })
   t?: string;
 }

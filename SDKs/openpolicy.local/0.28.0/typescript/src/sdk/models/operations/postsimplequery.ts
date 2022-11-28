@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostSimpleQueryQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=pretty" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pretty" })
   pretty?: boolean;
 }
 
 
 export class PostSimpleQueryRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PostSimpleQueryQueryParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: Map<string, any>;
 }
 
 
 export class PostSimpleQueryResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   fourHundred?: shared.FourHundred;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   fourHundredAndFour?: shared.FourHundredAndFour;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

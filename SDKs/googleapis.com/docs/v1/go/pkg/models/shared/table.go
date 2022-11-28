@@ -1,5 +1,7 @@
 package shared
 
+// Table
+// A StructuralElement representing a table.
 type Table struct {
 	Columns               *int32      `json:"columns,omitempty"`
 	Rows                  *int32      `json:"rows,omitempty"`

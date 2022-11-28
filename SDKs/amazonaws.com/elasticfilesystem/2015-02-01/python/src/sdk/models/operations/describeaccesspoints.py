@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
@@ -24,17 +27,17 @@ class DescribeAccessPointsHeaders:
 
 @dataclass
 class DescribeAccessPointsRequest:
-    query_params: DescribeAccessPointsQueryParams = field(default=None)
-    headers: DescribeAccessPointsHeaders = field(default=None)
+    headers: DescribeAccessPointsHeaders = field()
+    query_params: DescribeAccessPointsQueryParams = field()
     
 
 @dataclass
 class DescribeAccessPointsResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_point_not_found: Optional[Any] = field(default=None)
     bad_request: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     describe_access_points_response: Optional[shared.DescribeAccessPointsResponse] = field(default=None)
     file_system_not_found: Optional[Any] = field(default=None)
     internal_server_error: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

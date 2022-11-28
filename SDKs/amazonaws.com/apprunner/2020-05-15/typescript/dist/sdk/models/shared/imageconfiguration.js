@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ImageConfiguration
 /**
  * Describes the configuration that AWS App Runner uses to run an App Runner service using an image pulled from a source image repository.
@@ -33,15 +33,15 @@ var ImageConfiguration = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Port" }),
+        SpeakeasyMetadata({ data: "json, name=Port" }),
         __metadata("design:type", String)
     ], ImageConfiguration.prototype, "port", void 0);
     __decorate([
-        Metadata({ data: "json, name=RuntimeEnvironmentVariables" }),
+        SpeakeasyMetadata({ data: "json, name=RuntimeEnvironmentVariables" }),
         __metadata("design:type", Map)
     ], ImageConfiguration.prototype, "runtimeEnvironmentVariables", void 0);
     __decorate([
-        Metadata({ data: "json, name=StartCommand" }),
+        SpeakeasyMetadata({ data: "json, name=StartCommand" }),
         __metadata("design:type", String)
     ], ImageConfiguration.prototype, "startCommand", void 0);
     return ImageConfiguration;

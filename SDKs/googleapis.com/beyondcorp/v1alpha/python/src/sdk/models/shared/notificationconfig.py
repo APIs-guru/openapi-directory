@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import cloudpubsubnotificationconfig
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class NotificationConfig:
-    pubsub_notification: Optional[cloudpubsubnotificationconfig.CloudPubSubNotificationConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pubsubNotification' }})
+    r"""NotificationConfig
+    NotificationConfig defines the mechanisms to notify instance agent.
+    """
+    
+    pubsub_notification: Optional[CloudPubSubNotificationConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pubsubNotification') }})
     

@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googleanalyticsadminv1alphaaudiencefilterexpression
+from sdk import utils
+from . import *
 
 class GoogleAnalyticsAdminV1alphaAudienceSequenceFilterAudienceSequenceStepScopeEnum(str, Enum):
     AUDIENCE_FILTER_SCOPE_UNSPECIFIED = "AUDIENCE_FILTER_SCOPE_UNSPECIFIED"
@@ -13,8 +15,12 @@ class GoogleAnalyticsAdminV1alphaAudienceSequenceFilterAudienceSequenceStepScope
 @dataclass_json
 @dataclass
 class GoogleAnalyticsAdminV1alphaAudienceSequenceFilterAudienceSequenceStep:
-    constraint_duration: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'constraintDuration' }})
-    filter_expression: Optional[googleanalyticsadminv1alphaaudiencefilterexpression.GoogleAnalyticsAdminV1alphaAudienceFilterExpression] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'filterExpression' }})
-    immediately_follows: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'immediatelyFollows' }})
-    scope: Optional[GoogleAnalyticsAdminV1alphaAudienceSequenceFilterAudienceSequenceStepScopeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'scope' }})
+    r"""GoogleAnalyticsAdminV1alphaAudienceSequenceFilterAudienceSequenceStep
+    A condition that must occur in the specified step order for this user to match the sequence.
+    """
+    
+    constraint_duration: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('constraintDuration') }})
+    filter_expression: Optional[GoogleAnalyticsAdminV1alphaAudienceFilterExpression] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('filterExpression') }})
+    immediately_follows: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('immediatelyFollows') }})
+    scope: Optional[GoogleAnalyticsAdminV1alphaAudienceSequenceFilterAudienceSequenceStepScopeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('scope') }})
     

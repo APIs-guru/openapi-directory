@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DomainControllerStatusEnum } from "./domaincontrollerstatusenum";
 /**
  * Contains information about the domain controllers for a specified directory.

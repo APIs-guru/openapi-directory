@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class CreateAlertRequestBody:
-    search: str = field(default=None, metadata={'multipart_form': { 'field_name': 'search' }})
-    types: str = field(default=None, metadata={'multipart_form': { 'field_name': 'types' }})
+    search: str = field(metadata={'multipart_form': { 'field_name': 'search' }})
+    types: str = field(metadata={'multipart_form': { 'field_name': 'types' }})
     
 
 @dataclass
 class CreateAlertRequest:
-    request: CreateAlertRequestBody = field(default=None, metadata={'request': { 'media_type': 'multipart/form-data' }})
+    request: CreateAlertRequestBody = field(metadata={'request': { 'media_type': 'multipart/form-data' }})
     
 
 @dataclass
 class CreateAlertResponse:
+    content_type: str = field()
+    status_code: int = field()
     alert: Optional[shared.Alert] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

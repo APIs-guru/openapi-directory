@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CreateAdRequest } from "./createadrequest";
+
 
 
 // BulkCreateAdRequest
@@ -8,6 +8,6 @@ import { CreateAdRequest } from "./createadrequest";
  * This type defines the fields for the create ads in bulk by listing IDs.
 **/
 export class BulkCreateAdRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=requests", elemType: shared.CreateAdRequest })
+  @SpeakeasyMetadata({ data: "json, name=requests", elemType: CreateAdRequest })
   requests?: CreateAdRequest[];
 }

@@ -1,5 +1,7 @@
 package shared
 
+// SchemaListItem
+// An object that contains minimal details for a schema.
 type SchemaListItem struct {
 	CreatedTime  *string           `json:"CreatedTime,omitempty"`
 	Description  *string           `json:"Description,omitempty"`

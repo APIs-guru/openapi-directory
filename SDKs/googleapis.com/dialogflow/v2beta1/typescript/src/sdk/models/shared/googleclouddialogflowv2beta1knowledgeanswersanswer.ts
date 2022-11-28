@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleCloudDialogflowV2beta1KnowledgeAnswersAnswerMatchConfidenceLevelEnum {
-    MatchConfidenceLevelUnspecified = "MATCH_CONFIDENCE_LEVEL_UNSPECIFIED"
-,    Low = "LOW"
-,    Medium = "MEDIUM"
-,    High = "HIGH"
+    MatchConfidenceLevelUnspecified = "MATCH_CONFIDENCE_LEVEL_UNSPECIFIED",
+    Low = "LOW",
+    Medium = "MEDIUM",
+    High = "HIGH"
 }
 
 
@@ -13,18 +14,18 @@ export enum GoogleCloudDialogflowV2beta1KnowledgeAnswersAnswerMatchConfidenceLev
  * An answer from Knowledge Connector.
 **/
 export class GoogleCloudDialogflowV2beta1KnowledgeAnswersAnswer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=answer" })
+  @SpeakeasyMetadata({ data: "json, name=answer" })
   answer?: string;
 
-  @Metadata({ data: "json, name=faqQuestion" })
+  @SpeakeasyMetadata({ data: "json, name=faqQuestion" })
   faqQuestion?: string;
 
-  @Metadata({ data: "json, name=matchConfidence" })
+  @SpeakeasyMetadata({ data: "json, name=matchConfidence" })
   matchConfidence?: number;
 
-  @Metadata({ data: "json, name=matchConfidenceLevel" })
+  @SpeakeasyMetadata({ data: "json, name=matchConfidenceLevel" })
   matchConfidenceLevel?: GoogleCloudDialogflowV2beta1KnowledgeAnswersAnswerMatchConfidenceLevelEnum;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: string;
 }

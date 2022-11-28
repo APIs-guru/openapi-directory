@@ -1,16 +1,17 @@
-import { AxiosInstance, AxiosRequestConfig } from "axios";
-import * as operations from "./models/operations";
-declare type OptsFunc = (sdk: SDK) => void;
+import { AxiosInstance } from "axios";
+import { Operations } from "./operations";
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://runtimeconfig.googleapis.com/"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    operations: Operations;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
-    RuntimeconfigOperationsCancel(req: operations.RuntimeconfigOperationsCancelRequest, config?: AxiosRequestConfig): Promise<operations.RuntimeconfigOperationsCancelResponse>;
-    RuntimeconfigOperationsDelete(req: operations.RuntimeconfigOperationsDeleteRequest, config?: AxiosRequestConfig): Promise<operations.RuntimeconfigOperationsDeleteResponse>;
-    RuntimeconfigOperationsList(req: operations.RuntimeconfigOperationsListRequest, config?: AxiosRequestConfig): Promise<operations.RuntimeconfigOperationsListResponse>;
 }
 export {};

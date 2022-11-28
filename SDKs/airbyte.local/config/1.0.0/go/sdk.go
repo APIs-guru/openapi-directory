@@ -11,7 +11,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://airbyte.local",
 	"http://localhost:8000/api",
 }
@@ -20,10 +20,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://airbyte.io - Find out more about Airbyte
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -34,33 +39,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// CancelJob - Cancels a job
 func (s *SDK) CancelJob(ctx context.Context, request operations.CancelJobRequest) (*operations.CancelJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/jobs/cancel"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -78,7 +105,7 @@ func (s *SDK) CancelJob(ctx context.Context, request operations.CancelJobRequest
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -128,8 +155,9 @@ func (s *SDK) CancelJob(ctx context.Context, request operations.CancelJobRequest
 	return res, nil
 }
 
+// CheckConnectionToDestination - Check connection to the destination
 func (s *SDK) CheckConnectionToDestination(ctx context.Context, request operations.CheckConnectionToDestinationRequest) (*operations.CheckConnectionToDestinationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/destinations/check_connection"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -147,7 +175,7 @@ func (s *SDK) CheckConnectionToDestination(ctx context.Context, request operatio
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -197,8 +225,9 @@ func (s *SDK) CheckConnectionToDestination(ctx context.Context, request operatio
 	return res, nil
 }
 
+// CheckConnectionToDestinationForUpdate - Check connection for a proposed update to a destination
 func (s *SDK) CheckConnectionToDestinationForUpdate(ctx context.Context, request operations.CheckConnectionToDestinationForUpdateRequest) (*operations.CheckConnectionToDestinationForUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/destinations/check_connection_for_update"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -216,7 +245,7 @@ func (s *SDK) CheckConnectionToDestinationForUpdate(ctx context.Context, request
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -266,8 +295,9 @@ func (s *SDK) CheckConnectionToDestinationForUpdate(ctx context.Context, request
 	return res, nil
 }
 
+// CheckConnectionToSource - Check connection to the source
 func (s *SDK) CheckConnectionToSource(ctx context.Context, request operations.CheckConnectionToSourceRequest) (*operations.CheckConnectionToSourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/sources/check_connection"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -285,7 +315,7 @@ func (s *SDK) CheckConnectionToSource(ctx context.Context, request operations.Ch
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -335,8 +365,9 @@ func (s *SDK) CheckConnectionToSource(ctx context.Context, request operations.Ch
 	return res, nil
 }
 
+// CheckConnectionToSourceForUpdate - Check connection for a proposed update to a source
 func (s *SDK) CheckConnectionToSourceForUpdate(ctx context.Context, request operations.CheckConnectionToSourceForUpdateRequest) (*operations.CheckConnectionToSourceForUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/sources/check_connection_for_update"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -354,7 +385,7 @@ func (s *SDK) CheckConnectionToSourceForUpdate(ctx context.Context, request oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -404,8 +435,9 @@ func (s *SDK) CheckConnectionToSourceForUpdate(ctx context.Context, request oper
 	return res, nil
 }
 
+// CheckOperation - Check if an operation to be created is valid
 func (s *SDK) CheckOperation(ctx context.Context, request operations.CheckOperationRequest) (*operations.CheckOperationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/operations/check"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -423,7 +455,7 @@ func (s *SDK) CheckOperation(ctx context.Context, request operations.CheckOperat
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -463,8 +495,9 @@ func (s *SDK) CheckOperation(ctx context.Context, request operations.CheckOperat
 	return res, nil
 }
 
+// CreateConnection - Create a connection between a source and a destination
 func (s *SDK) CreateConnection(ctx context.Context, request operations.CreateConnectionRequest) (*operations.CreateConnectionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/connections/create"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -482,7 +515,7 @@ func (s *SDK) CreateConnection(ctx context.Context, request operations.CreateCon
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -522,8 +555,9 @@ func (s *SDK) CreateConnection(ctx context.Context, request operations.CreateCon
 	return res, nil
 }
 
+// CreateDestination - Create a destination
 func (s *SDK) CreateDestination(ctx context.Context, request operations.CreateDestinationRequest) (*operations.CreateDestinationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/destinations/create"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -541,7 +575,7 @@ func (s *SDK) CreateDestination(ctx context.Context, request operations.CreateDe
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -581,8 +615,9 @@ func (s *SDK) CreateDestination(ctx context.Context, request operations.CreateDe
 	return res, nil
 }
 
+// CreateDestinationDefinition - Creates a destinationsDefinition
 func (s *SDK) CreateDestinationDefinition(ctx context.Context, request operations.CreateDestinationDefinitionRequest) (*operations.CreateDestinationDefinitionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/destination_definitions/create"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -597,7 +632,7 @@ func (s *SDK) CreateDestinationDefinition(ctx context.Context, request operation
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -637,8 +672,9 @@ func (s *SDK) CreateDestinationDefinition(ctx context.Context, request operation
 	return res, nil
 }
 
+// CreateOperation - Create an operation to be applied as part of a connection pipeline
 func (s *SDK) CreateOperation(ctx context.Context, request operations.CreateOperationRequest) (*operations.CreateOperationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/operations/create"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -656,7 +692,7 @@ func (s *SDK) CreateOperation(ctx context.Context, request operations.CreateOper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -696,8 +732,9 @@ func (s *SDK) CreateOperation(ctx context.Context, request operations.CreateOper
 	return res, nil
 }
 
+// CreateSource - Create a source
 func (s *SDK) CreateSource(ctx context.Context, request operations.CreateSourceRequest) (*operations.CreateSourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/sources/create"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -715,7 +752,7 @@ func (s *SDK) CreateSource(ctx context.Context, request operations.CreateSourceR
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -755,8 +792,9 @@ func (s *SDK) CreateSource(ctx context.Context, request operations.CreateSourceR
 	return res, nil
 }
 
+// CreateSourceDefinition - Creates a sourceDefinition
 func (s *SDK) CreateSourceDefinition(ctx context.Context, request operations.CreateSourceDefinitionRequest) (*operations.CreateSourceDefinitionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/source_definitions/create"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -771,7 +809,7 @@ func (s *SDK) CreateSourceDefinition(ctx context.Context, request operations.Cre
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -811,8 +849,9 @@ func (s *SDK) CreateSourceDefinition(ctx context.Context, request operations.Cre
 	return res, nil
 }
 
+// CreateWorkspace - Creates a workspace
 func (s *SDK) CreateWorkspace(ctx context.Context, request operations.CreateWorkspaceRequest) (*operations.CreateWorkspaceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/workspaces/create"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -830,7 +869,7 @@ func (s *SDK) CreateWorkspace(ctx context.Context, request operations.CreateWork
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -870,8 +909,9 @@ func (s *SDK) CreateWorkspace(ctx context.Context, request operations.CreateWork
 	return res, nil
 }
 
+// DeleteConnection - Delete a connection
 func (s *SDK) DeleteConnection(ctx context.Context, request operations.DeleteConnectionRequest) (*operations.DeleteConnectionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/connections/delete"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -889,7 +929,7 @@ func (s *SDK) DeleteConnection(ctx context.Context, request operations.DeleteCon
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -930,8 +970,9 @@ func (s *SDK) DeleteConnection(ctx context.Context, request operations.DeleteCon
 	return res, nil
 }
 
+// DeleteDestination - Delete the destination
 func (s *SDK) DeleteDestination(ctx context.Context, request operations.DeleteDestinationRequest) (*operations.DeleteDestinationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/destinations/delete"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -949,7 +990,7 @@ func (s *SDK) DeleteDestination(ctx context.Context, request operations.DeleteDe
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -990,8 +1031,9 @@ func (s *SDK) DeleteDestination(ctx context.Context, request operations.DeleteDe
 	return res, nil
 }
 
+// DeleteOperation - Delete an operation
 func (s *SDK) DeleteOperation(ctx context.Context, request operations.DeleteOperationRequest) (*operations.DeleteOperationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/operations/delete"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1009,7 +1051,7 @@ func (s *SDK) DeleteOperation(ctx context.Context, request operations.DeleteOper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1050,8 +1092,9 @@ func (s *SDK) DeleteOperation(ctx context.Context, request operations.DeleteOper
 	return res, nil
 }
 
+// DeleteSource - Delete a source
 func (s *SDK) DeleteSource(ctx context.Context, request operations.DeleteSourceRequest) (*operations.DeleteSourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/sources/delete"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1069,7 +1112,7 @@ func (s *SDK) DeleteSource(ctx context.Context, request operations.DeleteSourceR
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1110,8 +1153,9 @@ func (s *SDK) DeleteSource(ctx context.Context, request operations.DeleteSourceR
 	return res, nil
 }
 
+// DeleteWorkspace - Deletes a workspace
 func (s *SDK) DeleteWorkspace(ctx context.Context, request operations.DeleteWorkspaceRequest) (*operations.DeleteWorkspaceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/workspaces/delete"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1129,7 +1173,7 @@ func (s *SDK) DeleteWorkspace(ctx context.Context, request operations.DeleteWork
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1170,8 +1214,9 @@ func (s *SDK) DeleteWorkspace(ctx context.Context, request operations.DeleteWork
 	return res, nil
 }
 
+// DiscoverSchemaForSource - Discover the schema catalog of the source
 func (s *SDK) DiscoverSchemaForSource(ctx context.Context, request operations.DiscoverSchemaForSourceRequest) (*operations.DiscoverSchemaForSourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/sources/discover_schema"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1189,7 +1234,7 @@ func (s *SDK) DiscoverSchemaForSource(ctx context.Context, request operations.Di
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1239,8 +1284,9 @@ func (s *SDK) DiscoverSchemaForSource(ctx context.Context, request operations.Di
 	return res, nil
 }
 
+// ExecuteDestinationCheckConnection - Run check connection for a given destination configuration
 func (s *SDK) ExecuteDestinationCheckConnection(ctx context.Context, request operations.ExecuteDestinationCheckConnectionRequest) (*operations.ExecuteDestinationCheckConnectionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/scheduler/destinations/check_connection"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1258,7 +1304,7 @@ func (s *SDK) ExecuteDestinationCheckConnection(ctx context.Context, request ope
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1298,8 +1344,9 @@ func (s *SDK) ExecuteDestinationCheckConnection(ctx context.Context, request ope
 	return res, nil
 }
 
+// ExecuteSourceCheckConnection - Run check connection for a given source configuration
 func (s *SDK) ExecuteSourceCheckConnection(ctx context.Context, request operations.ExecuteSourceCheckConnectionRequest) (*operations.ExecuteSourceCheckConnectionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/scheduler/sources/check_connection"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1317,7 +1364,7 @@ func (s *SDK) ExecuteSourceCheckConnection(ctx context.Context, request operatio
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1357,8 +1404,9 @@ func (s *SDK) ExecuteSourceCheckConnection(ctx context.Context, request operatio
 	return res, nil
 }
 
+// ExecuteSourceDiscoverSchema - Run discover schema for a given source a source configuration
 func (s *SDK) ExecuteSourceDiscoverSchema(ctx context.Context, request operations.ExecuteSourceDiscoverSchemaRequest) (*operations.ExecuteSourceDiscoverSchemaResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/scheduler/sources/discover_schema"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1376,7 +1424,7 @@ func (s *SDK) ExecuteSourceDiscoverSchema(ctx context.Context, request operation
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1416,8 +1464,9 @@ func (s *SDK) ExecuteSourceDiscoverSchema(ctx context.Context, request operation
 	return res, nil
 }
 
+// ExportArchive - Export Airbyte Configuration and Data Archive
 func (s *SDK) ExportArchive(ctx context.Context) (*operations.ExportArchiveResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/deployment/export"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -1425,7 +1474,7 @@ func (s *SDK) ExportArchive(ctx context.Context) (*operations.ExportArchiveRespo
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1455,8 +1504,9 @@ func (s *SDK) ExportArchive(ctx context.Context) (*operations.ExportArchiveRespo
 	return res, nil
 }
 
+// GetConnection - Get a connection
 func (s *SDK) GetConnection(ctx context.Context, request operations.GetConnectionRequest) (*operations.GetConnectionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/connections/get"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1474,7 +1524,7 @@ func (s *SDK) GetConnection(ctx context.Context, request operations.GetConnectio
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1524,8 +1574,9 @@ func (s *SDK) GetConnection(ctx context.Context, request operations.GetConnectio
 	return res, nil
 }
 
+// GetDestination - Get configured destination
 func (s *SDK) GetDestination(ctx context.Context, request operations.GetDestinationRequest) (*operations.GetDestinationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/destinations/get"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1543,7 +1594,7 @@ func (s *SDK) GetDestination(ctx context.Context, request operations.GetDestinat
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1593,8 +1644,9 @@ func (s *SDK) GetDestination(ctx context.Context, request operations.GetDestinat
 	return res, nil
 }
 
+// GetDestinationDefinition - Get destinationDefinition
 func (s *SDK) GetDestinationDefinition(ctx context.Context, request operations.GetDestinationDefinitionRequest) (*operations.GetDestinationDefinitionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/destination_definitions/get"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1612,7 +1664,7 @@ func (s *SDK) GetDestinationDefinition(ctx context.Context, request operations.G
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1662,8 +1714,9 @@ func (s *SDK) GetDestinationDefinition(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetDestinationDefinitionSpecification - Get specification for a destinationDefinition
 func (s *SDK) GetDestinationDefinitionSpecification(ctx context.Context, request operations.GetDestinationDefinitionSpecificationRequest) (*operations.GetDestinationDefinitionSpecificationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/destination_definition_specifications/get"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1681,7 +1734,7 @@ func (s *SDK) GetDestinationDefinitionSpecification(ctx context.Context, request
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1731,8 +1784,9 @@ func (s *SDK) GetDestinationDefinitionSpecification(ctx context.Context, request
 	return res, nil
 }
 
+// GetHealthCheck - Health Check
 func (s *SDK) GetHealthCheck(ctx context.Context) (*operations.GetHealthCheckResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/health"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1740,7 +1794,7 @@ func (s *SDK) GetHealthCheck(ctx context.Context) (*operations.GetHealthCheckRes
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1770,8 +1824,9 @@ func (s *SDK) GetHealthCheck(ctx context.Context) (*operations.GetHealthCheckRes
 	return res, nil
 }
 
+// GetJobInfo - Get information about a job
 func (s *SDK) GetJobInfo(ctx context.Context, request operations.GetJobInfoRequest) (*operations.GetJobInfoResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/jobs/get"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1789,7 +1844,7 @@ func (s *SDK) GetJobInfo(ctx context.Context, request operations.GetJobInfoReque
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1839,8 +1894,9 @@ func (s *SDK) GetJobInfo(ctx context.Context, request operations.GetJobInfoReque
 	return res, nil
 }
 
+// GetLogs - Get logs
 func (s *SDK) GetLogs(ctx context.Context, request operations.GetLogsRequest) (*operations.GetLogsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/logs/get"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1858,7 +1914,7 @@ func (s *SDK) GetLogs(ctx context.Context, request operations.GetLogsRequest) (*
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1908,8 +1964,9 @@ func (s *SDK) GetLogs(ctx context.Context, request operations.GetLogsRequest) (*
 	return res, nil
 }
 
+// GetOpenAPISpec - Returns the openapi specification
 func (s *SDK) GetOpenAPISpec(ctx context.Context) (*operations.GetOpenAPISpecResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/openapi"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1917,7 +1974,7 @@ func (s *SDK) GetOpenAPISpec(ctx context.Context) (*operations.GetOpenAPISpecRes
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1947,8 +2004,9 @@ func (s *SDK) GetOpenAPISpec(ctx context.Context) (*operations.GetOpenAPISpecRes
 	return res, nil
 }
 
+// GetOperation - Returns an operation
 func (s *SDK) GetOperation(ctx context.Context, request operations.GetOperationRequest) (*operations.GetOperationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/operations/get"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1966,7 +2024,7 @@ func (s *SDK) GetOperation(ctx context.Context, request operations.GetOperationR
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2016,8 +2074,9 @@ func (s *SDK) GetOperation(ctx context.Context, request operations.GetOperationR
 	return res, nil
 }
 
+// GetSource - Get source
 func (s *SDK) GetSource(ctx context.Context, request operations.GetSourceRequest) (*operations.GetSourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/sources/get"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2035,7 +2094,7 @@ func (s *SDK) GetSource(ctx context.Context, request operations.GetSourceRequest
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2085,8 +2144,9 @@ func (s *SDK) GetSource(ctx context.Context, request operations.GetSourceRequest
 	return res, nil
 }
 
+// GetSourceDefinition - Get source
 func (s *SDK) GetSourceDefinition(ctx context.Context, request operations.GetSourceDefinitionRequest) (*operations.GetSourceDefinitionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/source_definitions/get"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2104,7 +2164,7 @@ func (s *SDK) GetSourceDefinition(ctx context.Context, request operations.GetSou
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2154,8 +2214,9 @@ func (s *SDK) GetSourceDefinition(ctx context.Context, request operations.GetSou
 	return res, nil
 }
 
+// GetSourceDefinitionSpecification - Get specification for a SourceDefinition.
 func (s *SDK) GetSourceDefinitionSpecification(ctx context.Context, request operations.GetSourceDefinitionSpecificationRequest) (*operations.GetSourceDefinitionSpecificationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/source_definition_specifications/get"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2173,7 +2234,7 @@ func (s *SDK) GetSourceDefinitionSpecification(ctx context.Context, request oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2223,8 +2284,9 @@ func (s *SDK) GetSourceDefinitionSpecification(ctx context.Context, request oper
 	return res, nil
 }
 
+// GetState - Fetch the current state for a connection.
 func (s *SDK) GetState(ctx context.Context, request operations.GetStateRequest) (*operations.GetStateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/state/get"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2242,7 +2304,7 @@ func (s *SDK) GetState(ctx context.Context, request operations.GetStateRequest) 
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2292,8 +2354,9 @@ func (s *SDK) GetState(ctx context.Context, request operations.GetStateRequest) 
 	return res, nil
 }
 
+// GetWorkspace - Find workspace by ID
 func (s *SDK) GetWorkspace(ctx context.Context, request operations.GetWorkspaceRequest) (*operations.GetWorkspaceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/workspaces/get"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2311,7 +2374,7 @@ func (s *SDK) GetWorkspace(ctx context.Context, request operations.GetWorkspaceR
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2361,8 +2424,9 @@ func (s *SDK) GetWorkspace(ctx context.Context, request operations.GetWorkspaceR
 	return res, nil
 }
 
+// GetWorkspaceBySlug - Find workspace by slug
 func (s *SDK) GetWorkspaceBySlug(ctx context.Context, request operations.GetWorkspaceBySlugRequest) (*operations.GetWorkspaceBySlugResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/workspaces/get_by_slug"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2380,7 +2444,7 @@ func (s *SDK) GetWorkspaceBySlug(ctx context.Context, request operations.GetWork
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2430,8 +2494,9 @@ func (s *SDK) GetWorkspaceBySlug(ctx context.Context, request operations.GetWork
 	return res, nil
 }
 
+// ImportArchive - Import Airbyte Configuration and Data Archive
 func (s *SDK) ImportArchive(ctx context.Context, request operations.ImportArchiveRequest) (*operations.ImportArchiveResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/deployment/import"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2449,7 +2514,7 @@ func (s *SDK) ImportArchive(ctx context.Context, request operations.ImportArchiv
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2479,8 +2544,10 @@ func (s *SDK) ImportArchive(ctx context.Context, request operations.ImportArchiv
 	return res, nil
 }
 
+// ListConnectionsForWorkspace - Returns all connections for a workspace.
+// List connections for workspace. Does not return deleted connections.
 func (s *SDK) ListConnectionsForWorkspace(ctx context.Context, request operations.ListConnectionsForWorkspaceRequest) (*operations.ListConnectionsForWorkspaceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/connections/list"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2498,7 +2565,7 @@ func (s *SDK) ListConnectionsForWorkspace(ctx context.Context, request operation
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2548,8 +2615,9 @@ func (s *SDK) ListConnectionsForWorkspace(ctx context.Context, request operation
 	return res, nil
 }
 
+// ListDestinationDefinitions - List all the destinationDefinitions the current Airbyte deployment is configured to use
 func (s *SDK) ListDestinationDefinitions(ctx context.Context) (*operations.ListDestinationDefinitionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/destination_definitions/list"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -2557,7 +2625,7 @@ func (s *SDK) ListDestinationDefinitions(ctx context.Context) (*operations.ListD
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2587,8 +2655,9 @@ func (s *SDK) ListDestinationDefinitions(ctx context.Context) (*operations.ListD
 	return res, nil
 }
 
+// ListDestinationsForWorkspace - List configured destinations for a workspace
 func (s *SDK) ListDestinationsForWorkspace(ctx context.Context, request operations.ListDestinationsForWorkspaceRequest) (*operations.ListDestinationsForWorkspaceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/destinations/list"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2606,7 +2675,7 @@ func (s *SDK) ListDestinationsForWorkspace(ctx context.Context, request operatio
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2656,8 +2725,9 @@ func (s *SDK) ListDestinationsForWorkspace(ctx context.Context, request operatio
 	return res, nil
 }
 
+// ListJobsFor - Returns recent jobs for a connection. Jobs are returned in descending order by createdAt.
 func (s *SDK) ListJobsFor(ctx context.Context, request operations.ListJobsForRequest) (*operations.ListJobsForResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/jobs/list"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2675,7 +2745,7 @@ func (s *SDK) ListJobsFor(ctx context.Context, request operations.ListJobsForReq
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2725,8 +2795,10 @@ func (s *SDK) ListJobsFor(ctx context.Context, request operations.ListJobsForReq
 	return res, nil
 }
 
+// ListLatestDestinationDefinitions - List the latest destinationDefinitions Airbyte supports
+// Guaranteed to retrieve the latest information on supported destinations.
 func (s *SDK) ListLatestDestinationDefinitions(ctx context.Context) (*operations.ListLatestDestinationDefinitionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/destination_definitions/list_latest"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -2734,7 +2806,7 @@ func (s *SDK) ListLatestDestinationDefinitions(ctx context.Context) (*operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2764,8 +2836,10 @@ func (s *SDK) ListLatestDestinationDefinitions(ctx context.Context) (*operations
 	return res, nil
 }
 
+// ListLatestSourceDefinitions - List the latest sourceDefinitions Airbyte supports
+// Guaranteed to retrieve the latest information on supported sources.
 func (s *SDK) ListLatestSourceDefinitions(ctx context.Context) (*operations.ListLatestSourceDefinitionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/source_definitions/list_latest"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -2773,7 +2847,7 @@ func (s *SDK) ListLatestSourceDefinitions(ctx context.Context) (*operations.List
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2803,8 +2877,10 @@ func (s *SDK) ListLatestSourceDefinitions(ctx context.Context) (*operations.List
 	return res, nil
 }
 
+// ListOperationsForConnection - Returns all operations for a connection.
+// List operations for connection.
 func (s *SDK) ListOperationsForConnection(ctx context.Context, request operations.ListOperationsForConnectionRequest) (*operations.ListOperationsForConnectionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/operations/list"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2822,7 +2898,7 @@ func (s *SDK) ListOperationsForConnection(ctx context.Context, request operation
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2872,8 +2948,9 @@ func (s *SDK) ListOperationsForConnection(ctx context.Context, request operation
 	return res, nil
 }
 
+// ListSourceDefinitions - List all the sourceDefinitions the current Airbyte deployment is configured to use
 func (s *SDK) ListSourceDefinitions(ctx context.Context) (*operations.ListSourceDefinitionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/source_definitions/list"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -2881,7 +2958,7 @@ func (s *SDK) ListSourceDefinitions(ctx context.Context) (*operations.ListSource
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2911,8 +2988,10 @@ func (s *SDK) ListSourceDefinitions(ctx context.Context) (*operations.ListSource
 	return res, nil
 }
 
+// ListSourcesForWorkspace - List sources for workspace
+// List sources for workspace. Does not return deleted sources.
 func (s *SDK) ListSourcesForWorkspace(ctx context.Context, request operations.ListSourcesForWorkspaceRequest) (*operations.ListSourcesForWorkspaceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/sources/list"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2930,7 +3009,7 @@ func (s *SDK) ListSourcesForWorkspace(ctx context.Context, request operations.Li
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2980,8 +3059,9 @@ func (s *SDK) ListSourcesForWorkspace(ctx context.Context, request operations.Li
 	return res, nil
 }
 
+// ListWorkspaces - List all workspaces registered in the current Airbyte deployment
 func (s *SDK) ListWorkspaces(ctx context.Context) (*operations.ListWorkspacesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/workspaces/list"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -2989,7 +3069,7 @@ func (s *SDK) ListWorkspaces(ctx context.Context) (*operations.ListWorkspacesRes
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3019,8 +3099,9 @@ func (s *SDK) ListWorkspaces(ctx context.Context) (*operations.ListWorkspacesRes
 	return res, nil
 }
 
+// ResetConnection - Reset the data for the connection. Deletes data generated by the connection in the destination. Resets any cursors back to initial state.
 func (s *SDK) ResetConnection(ctx context.Context, request operations.ResetConnectionRequest) (*operations.ResetConnectionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/connections/reset"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3038,7 +3119,7 @@ func (s *SDK) ResetConnection(ctx context.Context, request operations.ResetConne
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3088,8 +3169,9 @@ func (s *SDK) ResetConnection(ctx context.Context, request operations.ResetConne
 	return res, nil
 }
 
+// SyncConnection - Trigger a manual sync of the connection
 func (s *SDK) SyncConnection(ctx context.Context, request operations.SyncConnectionRequest) (*operations.SyncConnectionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/connections/sync"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3107,7 +3189,7 @@ func (s *SDK) SyncConnection(ctx context.Context, request operations.SyncConnect
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3157,8 +3239,9 @@ func (s *SDK) SyncConnection(ctx context.Context, request operations.SyncConnect
 	return res, nil
 }
 
+// TryNotificationConfig - Try sending a notifications
 func (s *SDK) TryNotificationConfig(ctx context.Context, request operations.TryNotificationConfigRequest) (*operations.TryNotificationConfigResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/notifications/try"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3176,7 +3259,7 @@ func (s *SDK) TryNotificationConfig(ctx context.Context, request operations.TryN
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3226,8 +3309,9 @@ func (s *SDK) TryNotificationConfig(ctx context.Context, request operations.TryN
 	return res, nil
 }
 
+// UpdateConnection - Update a connection
 func (s *SDK) UpdateConnection(ctx context.Context, request operations.UpdateConnectionRequest) (*operations.UpdateConnectionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/connections/update"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3245,7 +3329,7 @@ func (s *SDK) UpdateConnection(ctx context.Context, request operations.UpdateCon
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3285,8 +3369,9 @@ func (s *SDK) UpdateConnection(ctx context.Context, request operations.UpdateCon
 	return res, nil
 }
 
+// UpdateDestination - Update a destination
 func (s *SDK) UpdateDestination(ctx context.Context, request operations.UpdateDestinationRequest) (*operations.UpdateDestinationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/destinations/update"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3304,7 +3389,7 @@ func (s *SDK) UpdateDestination(ctx context.Context, request operations.UpdateDe
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3344,8 +3429,9 @@ func (s *SDK) UpdateDestination(ctx context.Context, request operations.UpdateDe
 	return res, nil
 }
 
+// UpdateDestinationDefinition - Update destinationDefinition
 func (s *SDK) UpdateDestinationDefinition(ctx context.Context, request operations.UpdateDestinationDefinitionRequest) (*operations.UpdateDestinationDefinitionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/destination_definitions/update"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3363,7 +3449,7 @@ func (s *SDK) UpdateDestinationDefinition(ctx context.Context, request operation
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3413,8 +3499,9 @@ func (s *SDK) UpdateDestinationDefinition(ctx context.Context, request operation
 	return res, nil
 }
 
+// UpdateOperation - Update an operation
 func (s *SDK) UpdateOperation(ctx context.Context, request operations.UpdateOperationRequest) (*operations.UpdateOperationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/operations/update"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3432,7 +3519,7 @@ func (s *SDK) UpdateOperation(ctx context.Context, request operations.UpdateOper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3472,8 +3559,9 @@ func (s *SDK) UpdateOperation(ctx context.Context, request operations.UpdateOper
 	return res, nil
 }
 
+// UpdateSource - Update a source
 func (s *SDK) UpdateSource(ctx context.Context, request operations.UpdateSourceRequest) (*operations.UpdateSourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/sources/update"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3491,7 +3579,7 @@ func (s *SDK) UpdateSource(ctx context.Context, request operations.UpdateSourceR
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3541,8 +3629,9 @@ func (s *SDK) UpdateSource(ctx context.Context, request operations.UpdateSourceR
 	return res, nil
 }
 
+// UpdateSourceDefinition - Update a sourceDefinition
 func (s *SDK) UpdateSourceDefinition(ctx context.Context, request operations.UpdateSourceDefinitionRequest) (*operations.UpdateSourceDefinitionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/source_definitions/update"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3557,7 +3646,7 @@ func (s *SDK) UpdateSourceDefinition(ctx context.Context, request operations.Upd
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3607,8 +3696,9 @@ func (s *SDK) UpdateSourceDefinition(ctx context.Context, request operations.Upd
 	return res, nil
 }
 
+// UpdateWorkspace - Update workspace state
 func (s *SDK) UpdateWorkspace(ctx context.Context, request operations.UpdateWorkspaceRequest) (*operations.UpdateWorkspaceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/workspaces/update"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3626,7 +3716,7 @@ func (s *SDK) UpdateWorkspace(ctx context.Context, request operations.UpdateWork
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3676,8 +3766,9 @@ func (s *SDK) UpdateWorkspace(ctx context.Context, request operations.UpdateWork
 	return res, nil
 }
 
+// WebBackendCreateConnection - Create a connection
 func (s *SDK) WebBackendCreateConnection(ctx context.Context, request operations.WebBackendCreateConnectionRequest) (*operations.WebBackendCreateConnectionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/web_backend/connections/create"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3695,7 +3786,7 @@ func (s *SDK) WebBackendCreateConnection(ctx context.Context, request operations
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3735,8 +3826,9 @@ func (s *SDK) WebBackendCreateConnection(ctx context.Context, request operations
 	return res, nil
 }
 
+// WebBackendGetConnection - Get a connection
 func (s *SDK) WebBackendGetConnection(ctx context.Context, request operations.WebBackendGetConnectionRequest) (*operations.WebBackendGetConnectionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/web_backend/connections/get"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3754,7 +3846,7 @@ func (s *SDK) WebBackendGetConnection(ctx context.Context, request operations.We
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3804,8 +3896,9 @@ func (s *SDK) WebBackendGetConnection(ctx context.Context, request operations.We
 	return res, nil
 }
 
+// WebBackendListConnectionsForWorkspace - Returns all connections for a workspace.
 func (s *SDK) WebBackendListConnectionsForWorkspace(ctx context.Context, request operations.WebBackendListConnectionsForWorkspaceRequest) (*operations.WebBackendListConnectionsForWorkspaceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/web_backend/connections/list"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3823,7 +3916,7 @@ func (s *SDK) WebBackendListConnectionsForWorkspace(ctx context.Context, request
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3873,8 +3966,9 @@ func (s *SDK) WebBackendListConnectionsForWorkspace(ctx context.Context, request
 	return res, nil
 }
 
+// WebBackendRecreateDestination - Recreate a destination
 func (s *SDK) WebBackendRecreateDestination(ctx context.Context, request operations.WebBackendRecreateDestinationRequest) (*operations.WebBackendRecreateDestinationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/web_backend/destinations/recreate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3892,7 +3986,7 @@ func (s *SDK) WebBackendRecreateDestination(ctx context.Context, request operati
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3932,8 +4026,9 @@ func (s *SDK) WebBackendRecreateDestination(ctx context.Context, request operati
 	return res, nil
 }
 
+// WebBackendRecreateSource - Recreate a source
 func (s *SDK) WebBackendRecreateSource(ctx context.Context, request operations.WebBackendRecreateSourceRequest) (*operations.WebBackendRecreateSourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/web_backend/sources/recreate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3951,7 +4046,7 @@ func (s *SDK) WebBackendRecreateSource(ctx context.Context, request operations.W
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3991,8 +4086,9 @@ func (s *SDK) WebBackendRecreateSource(ctx context.Context, request operations.W
 	return res, nil
 }
 
+// WebBackendUpdateConnection - Update a connection
 func (s *SDK) WebBackendUpdateConnection(ctx context.Context, request operations.WebBackendUpdateConnectionRequest) (*operations.WebBackendUpdateConnectionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/web_backend/connections/update"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4010,7 +4106,7 @@ func (s *SDK) WebBackendUpdateConnection(ctx context.Context, request operations
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

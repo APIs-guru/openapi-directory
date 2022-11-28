@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Preview
@@ -8,27 +9,27 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * This is read-only except for a small group of whitelisted apps.
 **/
 export class Preview extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fallback" })
+  @SpeakeasyMetadata({ data: "json, name=fallback" })
   fallback?: string;
 
-  @Metadata({ data: "json, name=footer" })
+  @SpeakeasyMetadata({ data: "json, name=footer" })
   footer?: string;
 
-  @Metadata({ data: "json, name=header" })
+  @SpeakeasyMetadata({ data: "json, name=header" })
   header?: string;
 
-  @Metadata({ data: "json, name=header_link" })
+  @SpeakeasyMetadata({ data: "json, name=header_link" })
   headerLink?: string;
 
-  @Metadata({ data: "json, name=html_text" })
+  @SpeakeasyMetadata({ data: "json, name=html_text" })
   htmlText?: string;
 
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=title_link" })
+  @SpeakeasyMetadata({ data: "json, name=title_link" })
   titleLink?: string;
 }

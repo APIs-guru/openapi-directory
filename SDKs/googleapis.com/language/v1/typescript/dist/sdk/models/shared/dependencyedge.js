@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var DependencyEdgeLabelEnum;
 (function (DependencyEdgeLabelEnum) {
     DependencyEdgeLabelEnum["Unknown"] = "UNKNOWN";
@@ -119,11 +119,11 @@ var DependencyEdge = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=headTokenIndex" }),
+        SpeakeasyMetadata({ data: "json, name=headTokenIndex" }),
         __metadata("design:type", Number)
     ], DependencyEdge.prototype, "headTokenIndex", void 0);
     __decorate([
-        Metadata({ data: "json, name=label" }),
+        SpeakeasyMetadata({ data: "json, name=label" }),
         __metadata("design:type", String)
     ], DependencyEdge.prototype, "label", void 0);
     return DependencyEdge;

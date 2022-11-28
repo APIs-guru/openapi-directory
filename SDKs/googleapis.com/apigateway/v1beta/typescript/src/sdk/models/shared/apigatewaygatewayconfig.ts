@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApigatewayBackendConfig } from "./apigatewaybackendconfig";
+
 
 
 // ApigatewayGatewayConfig
@@ -7,6 +8,6 @@ import { ApigatewayBackendConfig } from "./apigatewaybackendconfig";
  * Configuration settings for Gateways.
 **/
 export class ApigatewayGatewayConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=backendConfig" })
+  @SpeakeasyMetadata({ data: "json, name=backendConfig" })
   backendConfig?: ApigatewayBackendConfig;
 }

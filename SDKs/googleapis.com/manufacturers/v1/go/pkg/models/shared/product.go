@@ -1,5 +1,7 @@
 package shared
 
+// Product
+// Product data.
 type Product struct {
 	Attributes          *Attributes         `json:"attributes,omitempty"`
 	ContentLanguage     *string             `json:"contentLanguage,omitempty"`

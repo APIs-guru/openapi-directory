@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VirtualTariff } from "./virtualtariff";
+
 
 
 // VirtualTariffsOfFolder
@@ -8,15 +8,15 @@ import { VirtualTariff } from "./virtualtariff";
  * Container class for a Virtual Tariff
 **/
 export class VirtualTariffsOfFolder extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Date" })
+  @SpeakeasyMetadata({ data: "json, name=Date" })
   date?: Date;
 
-  @Metadata({ data: "json, name=FolderId" })
+  @SpeakeasyMetadata({ data: "json, name=FolderId" })
   folderId?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=VirtualTariffs", elemType: shared.VirtualTariff })
+  @SpeakeasyMetadata({ data: "json, name=VirtualTariffs", elemType: VirtualTariff })
   virtualTariffs?: VirtualTariff[];
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Log
@@ -6,54 +7,54 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Log
 **/
 export class Log extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clientCode" })
+  @SpeakeasyMetadata({ data: "json, name=clientCode" })
   clientCode: string;
 
-  @Metadata({ data: "json, name=clientEngine" })
+  @SpeakeasyMetadata({ data: "json, name=clientEngine" })
   clientEngine: string;
 
-  @Metadata({ data: "json, name=clientEngineVersion" })
+  @SpeakeasyMetadata({ data: "json, name=clientEngineVersion" })
   clientEngineVersion: string;
 
-  @Metadata({ data: "json, name=clientName" })
+  @SpeakeasyMetadata({ data: "json, name=clientName" })
   clientName: string;
 
-  @Metadata({ data: "json, name=clientType" })
+  @SpeakeasyMetadata({ data: "json, name=clientType" })
   clientType: string;
 
-  @Metadata({ data: "json, name=clientVersion" })
+  @SpeakeasyMetadata({ data: "json, name=clientVersion" })
   clientVersion: string;
 
-  @Metadata({ data: "json, name=countryCode" })
+  @SpeakeasyMetadata({ data: "json, name=countryCode" })
   countryCode: string;
 
-  @Metadata({ data: "json, name=countryName" })
+  @SpeakeasyMetadata({ data: "json, name=countryName" })
   countryName: string;
 
-  @Metadata({ data: "json, name=deviceBrand" })
+  @SpeakeasyMetadata({ data: "json, name=deviceBrand" })
   deviceBrand: string;
 
-  @Metadata({ data: "json, name=deviceModel" })
+  @SpeakeasyMetadata({ data: "json, name=deviceModel" })
   deviceModel: string;
 
-  @Metadata({ data: "json, name=deviceName" })
+  @SpeakeasyMetadata({ data: "json, name=deviceName" })
   deviceName: string;
 
-  @Metadata({ data: "json, name=event" })
+  @SpeakeasyMetadata({ data: "json, name=event" })
   event: string;
 
-  @Metadata({ data: "json, name=ip" })
+  @SpeakeasyMetadata({ data: "json, name=ip" })
   ip: string;
 
-  @Metadata({ data: "json, name=osCode" })
+  @SpeakeasyMetadata({ data: "json, name=osCode" })
   osCode: string;
 
-  @Metadata({ data: "json, name=osName" })
+  @SpeakeasyMetadata({ data: "json, name=osName" })
   osName: string;
 
-  @Metadata({ data: "json, name=osVersion" })
+  @SpeakeasyMetadata({ data: "json, name=osVersion" })
   osVersion: string;
 
-  @Metadata({ data: "json, name=time" })
+  @SpeakeasyMetadata({ data: "json, name=time" })
   time: number;
 }

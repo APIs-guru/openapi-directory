@@ -22,9 +22,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { DatasetActionSummary } from "./datasetactionsummary";
 import { DatasetStatusEnum } from "./datasetstatusenum";
+import { DatasetTrigger } from "./datasettrigger";
 // DatasetSummary
 /**
  * A summary of information about a dataset.
@@ -35,27 +36,27 @@ var DatasetSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=actions", elemType: shared.DatasetActionSummary }),
+        SpeakeasyMetadata({ data: "json, name=actions", elemType: DatasetActionSummary }),
         __metadata("design:type", Array)
     ], DatasetSummary.prototype, "actions", void 0);
     __decorate([
-        Metadata({ data: "json, name=creationTime" }),
+        SpeakeasyMetadata({ data: "json, name=creationTime" }),
         __metadata("design:type", Date)
     ], DatasetSummary.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=datasetName" }),
+        SpeakeasyMetadata({ data: "json, name=datasetName" }),
         __metadata("design:type", String)
     ], DatasetSummary.prototype, "datasetName", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastUpdateTime" }),
+        SpeakeasyMetadata({ data: "json, name=lastUpdateTime" }),
         __metadata("design:type", Date)
     ], DatasetSummary.prototype, "lastUpdateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], DatasetSummary.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=triggers", elemType: shared.DatasetTrigger }),
+        SpeakeasyMetadata({ data: "json, name=triggers", elemType: DatasetTrigger }),
         __metadata("design:type", Array)
     ], DatasetSummary.prototype, "triggers", void 0);
     return DatasetSummary;

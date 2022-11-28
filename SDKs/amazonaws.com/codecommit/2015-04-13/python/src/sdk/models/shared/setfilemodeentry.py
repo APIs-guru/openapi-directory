@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import filemodetypeenum_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SetFileModeEntry:
-    file_mode: filemodetypeenum_enum.FileModeTypeEnumEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fileMode' }})
-    file_path: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'filePath' }})
+    r"""SetFileModeEntry
+    Information about the file mode changes.
+    """
+    
+    file_mode: FileModeTypeEnumEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('fileMode') }})
+    file_path: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('filePath') }})
     

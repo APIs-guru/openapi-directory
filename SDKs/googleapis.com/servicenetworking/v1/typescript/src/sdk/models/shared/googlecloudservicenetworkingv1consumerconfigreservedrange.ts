@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudServicenetworkingV1ConsumerConfigReservedRange
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Allocated IP address ranges for this private service access connection.
 **/
 export class GoogleCloudServicenetworkingV1ConsumerConfigReservedRange extends SpeakeasyBase {
-  @Metadata({ data: "json, name=address" })
+  @SpeakeasyMetadata({ data: "json, name=address" })
   address?: string;
 
-  @Metadata({ data: "json, name=ipPrefixLength" })
+  @SpeakeasyMetadata({ data: "json, name=ipPrefixLength" })
   ipPrefixLength?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

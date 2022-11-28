@@ -1,14 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 
 
-// Config
+
+// ConfigInput
 /** 
  * Available configurations to provision an Instance.
 **/
-export class Config extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cmekKeyName" })
+export class ConfigInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=cmekKeyName" })
   cmekKeyName?: string;
-
-  @Metadata({ data: "json, name=location" })
-  location?: string;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RolloutRuleComparatorEnum } from "./rolloutrulecomparatorenum";
 var RolloutRuleModel = /** @class */ (function (_super) {
     __extends(RolloutRuleModel, _super);
@@ -30,19 +30,19 @@ var RolloutRuleModel = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=comparator" }),
+        SpeakeasyMetadata({ data: "json, name=comparator" }),
         __metadata("design:type", String)
     ], RolloutRuleModel.prototype, "comparator", void 0);
     __decorate([
-        Metadata({ data: "json, name=comparisonAttribute" }),
+        SpeakeasyMetadata({ data: "json, name=comparisonAttribute" }),
         __metadata("design:type", String)
     ], RolloutRuleModel.prototype, "comparisonAttribute", void 0);
     __decorate([
-        Metadata({ data: "json, name=comparisonValue" }),
+        SpeakeasyMetadata({ data: "json, name=comparisonValue" }),
         __metadata("design:type", String)
     ], RolloutRuleModel.prototype, "comparisonValue", void 0);
     __decorate([
-        Metadata({ data: "json, name=value" }),
+        SpeakeasyMetadata({ data: "json, name=value" }),
         __metadata("design:type", Map)
     ], RolloutRuleModel.prototype, "value", void 0);
     return RolloutRuleModel;

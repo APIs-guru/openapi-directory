@@ -1,13 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import compliancequeryoperatortype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ComplianceStringFilter:
-    key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Key' }})
-    type: Optional[compliancequeryoperatortype_enum.ComplianceQueryOperatorTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
-    values: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Values' }})
+    r"""ComplianceStringFilter
+    One or more filters. Use a filter to return a more specific list of results.
+    """
+    
+    key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Key') }})
+    type: Optional[ComplianceQueryOperatorTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Type') }})
+    values: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Values') }})
     

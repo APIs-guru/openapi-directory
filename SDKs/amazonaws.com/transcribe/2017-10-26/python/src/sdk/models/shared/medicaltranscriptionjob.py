@@ -1,38 +1,35 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import medicalcontentidentificationtype_enum
-from . import languagecode_enum
-from . import media
-from . import mediaformat_enum
-from . import medicaltranscriptionsetting
-from . import specialty_enum
-from . import tag
-from . import medicaltranscript
-from . import transcriptionjobstatus_enum
-from . import type_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class MedicalTranscriptionJob:
-    completion_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CompletionTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    content_identification_type: Optional[medicalcontentidentificationtype_enum.MedicalContentIdentificationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ContentIdentificationType' }})
-    creation_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CreationTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    failure_reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FailureReason' }})
-    language_code: Optional[languagecode_enum.LanguageCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LanguageCode' }})
-    media: Optional[media.Media] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Media' }})
-    media_format: Optional[mediaformat_enum.MediaFormatEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MediaFormat' }})
-    media_sample_rate_hertz: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MediaSampleRateHertz' }})
-    medical_transcription_job_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MedicalTranscriptionJobName' }})
-    settings: Optional[medicaltranscriptionsetting.MedicalTranscriptionSetting] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Settings' }})
-    specialty: Optional[specialty_enum.SpecialtyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Specialty' }})
-    start_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StartTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    tags: Optional[List[tag.Tag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Tags' }})
-    transcript: Optional[medicaltranscript.MedicalTranscript] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Transcript' }})
-    transcription_job_status: Optional[transcriptionjobstatus_enum.TranscriptionJobStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TranscriptionJobStatus' }})
-    type: Optional[type_enum.TypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
+    r"""MedicalTranscriptionJob
+    The data structure that contains the information for a medical transcription job.
+    """
+    
+    completion_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CompletionTime'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    content_identification_type: Optional[MedicalContentIdentificationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ContentIdentificationType') }})
+    creation_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CreationTime'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    failure_reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FailureReason') }})
+    language_code: Optional[LanguageCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('LanguageCode') }})
+    media: Optional[Media] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Media') }})
+    media_format: Optional[MediaFormatEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MediaFormat') }})
+    media_sample_rate_hertz: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MediaSampleRateHertz') }})
+    medical_transcription_job_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MedicalTranscriptionJobName') }})
+    settings: Optional[MedicalTranscriptionSetting] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Settings') }})
+    specialty: Optional[SpecialtyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Specialty') }})
+    start_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StartTime'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    tags: Optional[List[Tag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Tags') }})
+    transcript: Optional[MedicalTranscript] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Transcript') }})
+    transcription_job_status: Optional[TranscriptionJobStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TranscriptionJobStatus') }})
+    type: Optional[TypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Type') }})
     

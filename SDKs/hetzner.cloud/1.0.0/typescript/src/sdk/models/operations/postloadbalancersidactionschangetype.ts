@@ -1,24 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostLoadBalancersIdActionsChangeTypePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
 
 export class PostLoadBalancersIdActionsChangeTypeChangeTypeRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=load_balancer_type" })
+  @SpeakeasyMetadata({ data: "json, name=load_balancer_type" })
   loadBalancerType: string;
-}
-
-
-export class PostLoadBalancersIdActionsChangeTypeRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: PostLoadBalancersIdActionsChangeTypePathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: PostLoadBalancersIdActionsChangeTypeChangeTypeRequest;
 }
 
 
@@ -27,69 +19,78 @@ export class PostLoadBalancersIdActionsChangeTypeRequest extends SpeakeasyBase {
  * Error message for the Action if error occurred, otherwise null
 **/
 export class PostLoadBalancersIdActionsChangeTypeActionResponseActionError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 }
 
 
 export class PostLoadBalancersIdActionsChangeTypeActionResponseActionResources extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }
 
 export enum PostLoadBalancersIdActionsChangeTypeActionResponseActionStatusEnum {
-    Success = "success"
-,    Running = "running"
-,    Error = "error"
+    Success = "success",
+    Running = "running",
+    Error = "error"
 }
 
 
 export class PostLoadBalancersIdActionsChangeTypeActionResponseAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=command" })
+  @SpeakeasyMetadata({ data: "json, name=command" })
   command: string;
 
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error: PostLoadBalancersIdActionsChangeTypeActionResponseActionError;
 
-  @Metadata({ data: "json, name=finished" })
+  @SpeakeasyMetadata({ data: "json, name=finished" })
   finished: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=progress" })
+  @SpeakeasyMetadata({ data: "json, name=progress" })
   progress: number;
 
-  @Metadata({ data: "json, name=resources", elemType: operations.PostLoadBalancersIdActionsChangeTypeActionResponseActionResources })
+  @SpeakeasyMetadata({ data: "json, name=resources", elemType: PostLoadBalancersIdActionsChangeTypeActionResponseActionResources })
   resources: PostLoadBalancersIdActionsChangeTypeActionResponseActionResources[];
 
-  @Metadata({ data: "json, name=started" })
+  @SpeakeasyMetadata({ data: "json, name=started" })
   started: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: PostLoadBalancersIdActionsChangeTypeActionResponseActionStatusEnum;
 }
 
 
 export class PostLoadBalancersIdActionsChangeTypeActionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: PostLoadBalancersIdActionsChangeTypeActionResponseAction;
 }
 
 
+export class PostLoadBalancersIdActionsChangeTypeRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: PostLoadBalancersIdActionsChangeTypePathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: PostLoadBalancersIdActionsChangeTypeChangeTypeRequest;
+}
+
+
 export class PostLoadBalancersIdActionsChangeTypeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   actionResponse?: PostLoadBalancersIdActionsChangeTypeActionResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

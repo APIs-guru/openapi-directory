@@ -1,5 +1,7 @@
 package shared
 
+// CreateMicrosoftAdRequest
+// Creates an Managed Microsoft AD directory.
 type CreateMicrosoftAdRequest struct {
 	Description *string               `json:"Description,omitempty"`
 	Edition     *DirectoryEditionEnum `json:"Edition,omitempty"`

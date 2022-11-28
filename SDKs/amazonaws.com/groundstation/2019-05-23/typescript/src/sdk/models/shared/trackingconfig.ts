@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CriticalityEnum } from "./criticalityenum";
+
 
 
 // TrackingConfig
@@ -7,6 +8,6 @@ import { CriticalityEnum } from "./criticalityenum";
  * Object that determines whether tracking should be used during a contact executed with this <code>Config</code> in the mission profile.
 **/
 export class TrackingConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=autotrack" })
+  @SpeakeasyMetadata({ data: "json, name=autotrack" })
   autotrack: CriticalityEnum;
 }

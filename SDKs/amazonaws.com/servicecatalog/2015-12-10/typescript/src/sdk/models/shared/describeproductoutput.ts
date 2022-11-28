@@ -1,21 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BudgetDetail } from "./budgetdetail";
 import { LaunchPath } from "./launchpath";
 import { ProductViewSummary } from "./productviewsummary";
 import { ProvisioningArtifact } from "./provisioningartifact";
 
 
+
 export class DescribeProductOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Budgets", elemType: shared.BudgetDetail })
+  @SpeakeasyMetadata({ data: "json, name=Budgets", elemType: BudgetDetail })
   budgets?: BudgetDetail[];
 
-  @Metadata({ data: "json, name=LaunchPaths", elemType: shared.LaunchPath })
+  @SpeakeasyMetadata({ data: "json, name=LaunchPaths", elemType: LaunchPath })
   launchPaths?: LaunchPath[];
 
-  @Metadata({ data: "json, name=ProductViewSummary" })
+  @SpeakeasyMetadata({ data: "json, name=ProductViewSummary" })
   productViewSummary?: ProductViewSummary;
 
-  @Metadata({ data: "json, name=ProvisioningArtifacts", elemType: shared.ProvisioningArtifact })
+  @SpeakeasyMetadata({ data: "json, name=ProvisioningArtifacts", elemType: ProvisioningArtifact })
   provisioningArtifacts?: ProvisioningArtifact[];
 }

@@ -4,7 +4,7 @@ from typing import Optional
 
 @dataclass
 class GetStudiesIDArchivePathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -14,13 +14,13 @@ class GetStudiesIDArchiveQueryParams:
 
 @dataclass
 class GetStudiesIDArchiveRequest:
-    path_params: GetStudiesIDArchivePathParams = field(default=None)
-    query_params: GetStudiesIDArchiveQueryParams = field(default=None)
+    path_params: GetStudiesIDArchivePathParams = field()
+    query_params: GetStudiesIDArchiveQueryParams = field()
     
 
 @dataclass
 class GetStudiesIDArchiveResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// WorkspaceDescription
+// Represents the properties of a workspace.
 type WorkspaceDescription struct {
 	Alias              *string           `json:"alias,omitempty"`
 	Arn                string            `json:"arn"`

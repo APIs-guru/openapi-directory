@@ -1,5 +1,17 @@
 package shared
 
+type ItemInput struct {
+	CodeHex         *string                `json:"code_hex,omitempty"`
+	ConfigRequest   map[string]interface{} `json:"config_request,omitempty"`
+	Custom          *interface{}           `json:"custom,omitempty"`
+	Label           *string                `json:"label,omitempty"`
+	LocationRequest *string                `json:"location_request,omitempty"`
+	Metadata        map[string]interface{} `json:"metadata,omitempty"`
+	Protocol        *ItemProtocolEnum      `json:"protocol,omitempty"`
+	Technology      *TechnologyEnum        `json:"technology,omitempty"`
+	Type            *ItemTypeEnum          `json:"type,omitempty"`
+}
+
 type Item struct {
 	CodeHex         *string                `json:"code_hex,omitempty"`
 	ConfigRequest   map[string]interface{} `json:"config_request,omitempty"`

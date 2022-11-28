@@ -1,5 +1,7 @@
 package shared
 
+// IDFilter
+// A filtering option that filters entities by their entity IDs.
 type IDFilter struct {
 	AdGroupAdIds      []string `json:"adGroupAdIds,omitempty"`
 	AdGroupIds        []string `json:"adGroupIds,omitempty"`

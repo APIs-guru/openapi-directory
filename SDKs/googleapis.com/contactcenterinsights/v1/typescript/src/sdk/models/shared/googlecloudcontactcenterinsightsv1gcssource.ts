@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudContactcenterinsightsV1GcsSource
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A Cloud Storage source of conversation data.
 **/
 export class GoogleCloudContactcenterinsightsV1GcsSource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=audioUri" })
+  @SpeakeasyMetadata({ data: "json, name=audioUri" })
   audioUri?: string;
 
-  @Metadata({ data: "json, name=transcriptUri" })
+  @SpeakeasyMetadata({ data: "json, name=transcriptUri" })
   transcriptUri?: string;
 }

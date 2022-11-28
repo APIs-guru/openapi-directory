@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // V2IosKeyRestrictions
 /**
  * The iOS apps that are allowed to use the key.
@@ -33,7 +33,7 @@ var V2IosKeyRestrictions = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=allowedBundleIds" }),
+        SpeakeasyMetadata({ data: "json, name=allowedBundleIds" }),
         __metadata("design:type", Array)
     ], V2IosKeyRestrictions.prototype, "allowedBundleIds", void 0);
     return V2IosKeyRestrictions;

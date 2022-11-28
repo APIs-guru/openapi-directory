@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { BackendEnvironment } from "./backendenvironment";
 /**
  *  The result structure of the delete backend environment result.

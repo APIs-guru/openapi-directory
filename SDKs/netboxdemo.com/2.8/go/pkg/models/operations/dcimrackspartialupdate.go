@@ -10,7 +10,7 @@ type DcimRacksPartialUpdatePathParams struct {
 
 type DcimRacksPartialUpdateRequest struct {
 	PathParams DcimRacksPartialUpdatePathParams
-	Request    shared.WritableRack `request:"mediaType=application/json"`
+	Request    shared.WritableRackInput `request:"mediaType=application/json"`
 }
 
 type DcimRacksPartialUpdateResponse struct {

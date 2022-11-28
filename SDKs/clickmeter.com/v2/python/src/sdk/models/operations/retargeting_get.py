@@ -11,12 +11,12 @@ class RetargetingGetQueryParams:
 
 @dataclass
 class RetargetingGetRequest:
-    query_params: RetargetingGetQueryParams = field(default=None)
+    query_params: RetargetingGetQueryParams = field()
     
 
 @dataclass
 class RetargetingGetResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_core_responses_entities_response_api_core_responses_entity_uri_system_int64_: Optional[shared.APICoreResponsesEntitiesResponseAPICoreResponsesEntityURISystemInt64] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

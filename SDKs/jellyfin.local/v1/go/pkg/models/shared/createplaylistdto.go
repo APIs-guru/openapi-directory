@@ -1,5 +1,7 @@
 package shared
 
+// CreatePlaylistDto
+// Create new playlist dto.
 type CreatePlaylistDto struct {
 	Ids       []string `json:"Ids,omitempty"`
 	MediaType *string  `json:"MediaType,omitempty"`

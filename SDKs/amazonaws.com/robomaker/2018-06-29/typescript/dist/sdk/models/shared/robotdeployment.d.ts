@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DeploymentJobErrorCodeEnum } from "./deploymentjoberrorcodeenum";
 import { ProgressDetail } from "./progressdetail";
 import { RobotStatusEnum } from "./robotstatusenum";

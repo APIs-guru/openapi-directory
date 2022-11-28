@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Source } from "./source";
 
+
 export enum EntitlementRelatedEntityTypeEnum {
-    Event = "event"
-,    Venue = "venue"
-,    Attraction = "attraction"
+    Event = "event",
+    Venue = "venue",
+    Attraction = "attraction"
 }
 
 export enum EntitlementSourceEnum {
@@ -17,21 +18,21 @@ export enum EntitlementSourceEnum {
  * This class defines an entitlement data on the Publish API
 **/
 export class Entitlement extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: Map<string, any>;
 
-  @Metadata({ data: "json, name=relatedEntityId" })
+  @SpeakeasyMetadata({ data: "json, name=relatedEntityId" })
   relatedEntityId?: string;
 
-  @Metadata({ data: "json, name=relatedEntitySource" })
+  @SpeakeasyMetadata({ data: "json, name=relatedEntitySource" })
   relatedEntitySource?: Source;
 
-  @Metadata({ data: "json, name=relatedEntityType" })
+  @SpeakeasyMetadata({ data: "json, name=relatedEntityType" })
   relatedEntityType: EntitlementRelatedEntityTypeEnum;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source: EntitlementSourceEnum;
 
-  @Metadata({ data: "json, name=versionNumber" })
+  @SpeakeasyMetadata({ data: "json, name=versionNumber" })
   versionNumber?: number;
 }

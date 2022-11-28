@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 
 
 @dataclass
 class GetAccessTokensAccessTokensInvalidatePathParams:
-    access_tokens: str = field(default=None, metadata={'path_param': { 'field_name': 'accessTokens', 'style': 'simple', 'explode': False }})
+    access_tokens: str = field(metadata={'path_param': { 'field_name': 'accessTokens', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,13 +20,13 @@ class GetAccessTokensAccessTokensInvalidateQueryParams:
 
 @dataclass
 class GetAccessTokensAccessTokensInvalidateRequest:
-    path_params: GetAccessTokensAccessTokensInvalidatePathParams = field(default=None)
-    query_params: GetAccessTokensAccessTokensInvalidateQueryParams = field(default=None)
+    path_params: GetAccessTokensAccessTokensInvalidatePathParams = field()
+    query_params: GetAccessTokensAccessTokensInvalidateQueryParams = field()
     
 
 @dataclass
 class GetAccessTokensAccessTokensInvalidateResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

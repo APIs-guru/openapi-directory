@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SubstringMatchCriteria } from "./substringmatchcriteria";
 
+
 export enum ReplaceAllShapesWithSheetsChartRequestLinkingModeEnum {
-    NotLinkedImage = "NOT_LINKED_IMAGE"
-,    Linked = "LINKED"
+    NotLinkedImage = "NOT_LINKED_IMAGE",
+    Linked = "LINKED"
 }
 
 
@@ -12,18 +13,18 @@ export enum ReplaceAllShapesWithSheetsChartRequestLinkingModeEnum {
  * Replaces all shapes that match the given criteria with the provided Google Sheets chart. The chart will be scaled and centered to fit within the bounds of the original shape. NOTE: Replacing shapes with a chart requires at least one of the spreadsheets.readonly, spreadsheets, drive.readonly, or drive OAuth scopes.
 **/
 export class ReplaceAllShapesWithSheetsChartRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=chartId" })
+  @SpeakeasyMetadata({ data: "json, name=chartId" })
   chartId?: number;
 
-  @Metadata({ data: "json, name=containsText" })
+  @SpeakeasyMetadata({ data: "json, name=containsText" })
   containsText?: SubstringMatchCriteria;
 
-  @Metadata({ data: "json, name=linkingMode" })
+  @SpeakeasyMetadata({ data: "json, name=linkingMode" })
   linkingMode?: ReplaceAllShapesWithSheetsChartRequestLinkingModeEnum;
 
-  @Metadata({ data: "json, name=pageObjectIds" })
+  @SpeakeasyMetadata({ data: "json, name=pageObjectIds" })
   pageObjectIds?: string[];
 
-  @Metadata({ data: "json, name=spreadsheetId" })
+  @SpeakeasyMetadata({ data: "json, name=spreadsheetId" })
   spreadsheetId?: string;
 }

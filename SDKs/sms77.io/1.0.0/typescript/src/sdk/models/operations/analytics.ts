@@ -1,71 +1,72 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum AnalyticsGroupByEnum {
-    Date = "date"
-,    Label = "label"
-,    Subaccount = "subaccount"
-,    Country = "country"
+    Date = "date",
+    Label = "label",
+    Subaccount = "subaccount",
+    Country = "country"
 }
 
 
 export class AnalyticsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=end" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=end" })
   end?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=group_by" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=group_by" })
   groupBy?: AnalyticsGroupByEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=label" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=label" })
   label?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=start" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=start" })
   start?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=subaccounts" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=subaccounts" })
   subaccounts?: string;
 }
 
 
-export class AnalyticsRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: AnalyticsQueryParams;
-}
-
-
 export class Analytics200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=date" })
+  @SpeakeasyMetadata({ data: "json, name=date" })
   date?: string;
 
-  @Metadata({ data: "json, name=direct" })
+  @SpeakeasyMetadata({ data: "json, name=direct" })
   direct?: number;
 
-  @Metadata({ data: "json, name=economy" })
+  @SpeakeasyMetadata({ data: "json, name=economy" })
   economy?: number;
 
-  @Metadata({ data: "json, name=hlr" })
+  @SpeakeasyMetadata({ data: "json, name=hlr" })
   hlr?: number;
 
-  @Metadata({ data: "json, name=inbound" })
+  @SpeakeasyMetadata({ data: "json, name=inbound" })
   inbound?: number;
 
-  @Metadata({ data: "json, name=mnp" })
+  @SpeakeasyMetadata({ data: "json, name=mnp" })
   mnp?: number;
 
-  @Metadata({ data: "json, name=usage_eur" })
+  @SpeakeasyMetadata({ data: "json, name=usage_eur" })
   usageEur?: number;
 
-  @Metadata({ data: "json, name=voice" })
+  @SpeakeasyMetadata({ data: "json, name=voice" })
   voice?: number;
 }
 
 
+export class AnalyticsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: AnalyticsQueryParams;
+}
+
+
 export class AnalyticsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   analytics200ApplicationJsonObject?: Analytics200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

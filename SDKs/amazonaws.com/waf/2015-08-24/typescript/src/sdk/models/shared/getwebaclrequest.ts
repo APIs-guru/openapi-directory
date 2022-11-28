@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetWebAclRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=WebACLId" })
+  @SpeakeasyMetadata({ data: "json, name=WebACLId" })
   webAclId: string;
 }

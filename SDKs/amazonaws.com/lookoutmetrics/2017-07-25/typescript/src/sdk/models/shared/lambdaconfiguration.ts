@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LambdaConfiguration
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains information about a Lambda configuration.
 **/
 export class LambdaConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LambdaArn" })
+  @SpeakeasyMetadata({ data: "json, name=LambdaArn" })
   lambdaArn: string;
 
-  @Metadata({ data: "json, name=RoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=RoleArn" })
   roleArn: string;
 }

@@ -1,89 +1,90 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ExportAdvisorySystemsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=advisory_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=advisory_id" })
   advisoryId: string;
 }
 
 
 export class ExportAdvisorySystemsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[display_name]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[display_name]" })
   filterDisplayName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[id]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[id]" })
   filterId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[last_evaluation]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[last_evaluation]" })
   filterLastEvaluation?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[last_upload]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[last_upload]" })
   filterLastUpload?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[other_count]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[other_count]" })
   filterOtherCount?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[packages_installed]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[packages_installed]" })
   filterPackagesInstalled?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[packages_updatable]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[packages_updatable]" })
   filterPackagesUpdatable?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[rhba_count]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[rhba_count]" })
   filterRhbaCount?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[rhea_count]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[rhea_count]" })
   filterRheaCount?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[rhsa_count]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[rhsa_count]" })
   filterRhsaCount?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[stale]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[stale]" })
   filterStale?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[system_profile][sap_sids][in]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[system_profile][sap_sids][in]" })
   filterSystemProfileSapSidsIn?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter[system_profile][sap_system]" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[system_profile][sap_system]" })
   filterSystemProfileSapSystem?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search" })
   search?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=tags" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tags" })
   tags?: string[];
 }
 
 
 export class ExportAdvisorySystemsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   rhIdentity: shared.SchemeRhIdentity;
 }
 
 
 export class ExportAdvisorySystemsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ExportAdvisorySystemsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ExportAdvisorySystemsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: ExportAdvisorySystemsSecurity;
 }
 
 
 export class ExportAdvisorySystemsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.ControllersSystemInlineItem })
+  @SpeakeasyMetadata({ elemType: shared.ControllersSystemInlineItem })
   controllersSystemInlineItems?: shared.ControllersSystemInlineItem[];
 }

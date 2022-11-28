@@ -1,15 +1,15 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import _embedded
-from . import links
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Applications:
-    embedded: _embedded.Embedded = field(default=None, metadata={'dataclasses_json': { 'field_name': '_embedded' }})
-    links: links.Links = field(default=None, metadata={'dataclasses_json': { 'field_name': '_links' }})
-    count: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'count' }})
-    page_index: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'page_index' }})
-    page_size: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'page_size' }})
+    embedded: Embedded = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('_embedded') }})
+    links: Links = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('_links') }})
+    count: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('count') }})
+    page_index: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('page_index') }})
+    page_size: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('page_size') }})
     

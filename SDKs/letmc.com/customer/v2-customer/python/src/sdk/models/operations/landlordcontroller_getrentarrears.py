@@ -5,23 +5,23 @@ from sdk.models import shared
 
 @dataclass
 class LandlordControllerGetRentArrearsPathParams:
-    short_name: str = field(default=None, metadata={'path_param': { 'field_name': 'shortName', 'style': 'simple', 'explode': False }})
+    short_name: str = field(metadata={'path_param': { 'field_name': 'shortName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class LandlordControllerGetRentArrearsQueryParams:
-    token: str = field(default=None, metadata={'query_param': { 'field_name': 'token', 'style': 'form', 'explode': True }})
+    token: str = field(metadata={'query_param': { 'field_name': 'token', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class LandlordControllerGetRentArrearsRequest:
-    path_params: LandlordControllerGetRentArrearsPathParams = field(default=None)
-    query_params: LandlordControllerGetRentArrearsQueryParams = field(default=None)
+    path_params: LandlordControllerGetRentArrearsPathParams = field()
+    query_params: LandlordControllerGetRentArrearsQueryParams = field()
     
 
 @dataclass
 class LandlordControllerGetRentArrearsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     landlord_rent_arrears_model: Optional[shared.LandlordRentArrearsModel] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActionTypeId } from "./actiontypeid";
 import { InputArtifact } from "./inputartifact";
 import { OutputArtifact } from "./outputartifact";
+
 
 
 // ActionDeclaration
@@ -10,30 +10,30 @@ import { OutputArtifact } from "./outputartifact";
  * Represents information about an action declaration.
 **/
 export class ActionDeclaration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actionTypeId" })
+  @SpeakeasyMetadata({ data: "json, name=actionTypeId" })
   actionTypeId: ActionTypeId;
 
-  @Metadata({ data: "json, name=configuration" })
+  @SpeakeasyMetadata({ data: "json, name=configuration" })
   configuration?: Map<string, string>;
 
-  @Metadata({ data: "json, name=inputArtifacts", elemType: shared.InputArtifact })
+  @SpeakeasyMetadata({ data: "json, name=inputArtifacts", elemType: InputArtifact })
   inputArtifacts?: InputArtifact[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=namespace" })
+  @SpeakeasyMetadata({ data: "json, name=namespace" })
   namespace?: string;
 
-  @Metadata({ data: "json, name=outputArtifacts", elemType: shared.OutputArtifact })
+  @SpeakeasyMetadata({ data: "json, name=outputArtifacts", elemType: OutputArtifact })
   outputArtifacts?: OutputArtifact[];
 
-  @Metadata({ data: "json, name=region" })
+  @SpeakeasyMetadata({ data: "json, name=region" })
   region?: string;
 
-  @Metadata({ data: "json, name=roleArn" })
+  @SpeakeasyMetadata({ data: "json, name=roleArn" })
   roleArn?: string;
 
-  @Metadata({ data: "json, name=runOrder" })
+  @SpeakeasyMetadata({ data: "json, name=runOrder" })
   runOrder?: number;
 }

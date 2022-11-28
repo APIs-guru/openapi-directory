@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 
 class PostV1OrderScreenFormatEnum(str, Enum):
     JSON = "json"
@@ -8,6 +9,8 @@ class PostV1OrderScreenFormatEnum(str, Enum):
 
 @dataclass
 class PostV1OrderScreenQueryParams:
+    ip: str = field(metadata={'query_param': { 'field_name': 'ip', 'style': 'form', 'explode': True }})
+    key: str = field(metadata={'query_param': { 'field_name': 'key', 'style': 'form', 'explode': True }})
     amount: Optional[float] = field(default=None, metadata={'query_param': { 'field_name': 'amount', 'style': 'form', 'explode': True }})
     avs_result: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'avs_result', 'style': 'form', 'explode': True }})
     bill_addr: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'bill_addr', 'style': 'form', 'explode': True }})
@@ -26,8 +29,6 @@ class PostV1OrderScreenQueryParams:
     first_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'first_name', 'style': 'form', 'explode': True }})
     flp_checksum: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'flp_checksum', 'style': 'form', 'explode': True }})
     format: Optional[PostV1OrderScreenFormatEnum] = field(default=None, metadata={'query_param': { 'field_name': 'format', 'style': 'form', 'explode': True }})
-    ip: str = field(default=None, metadata={'query_param': { 'field_name': 'ip', 'style': 'form', 'explode': True }})
-    key: str = field(default=None, metadata={'query_param': { 'field_name': 'key', 'style': 'form', 'explode': True }})
     last_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'last_name', 'style': 'form', 'explode': True }})
     password_hash: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'password_hash', 'style': 'form', 'explode': True }})
     payment_mode: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'payment_mode', 'style': 'form', 'explode': True }})
@@ -45,12 +46,12 @@ class PostV1OrderScreenQueryParams:
 
 @dataclass
 class PostV1OrderScreenRequest:
-    query_params: PostV1OrderScreenQueryParams = field(default=None)
+    query_params: PostV1OrderScreenQueryParams = field()
     
 
 @dataclass
 class PostV1OrderScreenResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     post_v1_order_screen_200_application_json_string: Optional[str] = field(default=None)
-    status_code: int = field(default=None)
     

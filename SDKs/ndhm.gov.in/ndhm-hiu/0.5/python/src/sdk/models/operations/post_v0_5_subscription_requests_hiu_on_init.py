@@ -5,20 +5,20 @@ from sdk.models import shared
 
 @dataclass
 class PostV05SubscriptionRequestsHiuOnInitHeaders:
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
-    x_hiu_id: str = field(default=None, metadata={'header': { 'field_name': 'X-HIU-ID', 'style': 'simple', 'explode': False }})
+    authorization: str = field(metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
+    x_hiu_id: str = field(metadata={'header': { 'field_name': 'X-HIU-ID', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class PostV05SubscriptionRequestsHiuOnInitRequest:
-    headers: PostV05SubscriptionRequestsHiuOnInitHeaders = field(default=None)
-    request: shared.HiuSubscriptionRequestReceipt = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: PostV05SubscriptionRequestsHiuOnInitHeaders = field()
+    request: shared.HiuSubscriptionRequestReceipt = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PostV05SubscriptionRequestsHiuOnInitResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetItemRelatedListPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,14 +23,14 @@ class GetItemRelatedListQueryParams:
 
 @dataclass
 class GetItemRelatedListRequest:
-    path_params: GetItemRelatedListPathParams = field(default=None)
-    query_params: GetItemRelatedListQueryParams = field(default=None)
+    path_params: GetItemRelatedListPathParams = field()
+    query_params: GetItemRelatedListQueryParams = field()
     
 
 @dataclass
 class GetItemRelatedListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     item_list: Optional[shared.ItemList] = field(default=None)
     service_error: Optional[shared.ServiceError] = field(default=None)
-    status_code: int = field(default=None)
     

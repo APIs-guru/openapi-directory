@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Operator } from "./operator";
+
 
 
 // Selector
@@ -7,9 +8,9 @@ import { Operator } from "./operator";
  * A comparision that is used to determine whether a query should return this object.
 **/
 export class Selector extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fieldName" })
+  @SpeakeasyMetadata({ data: "json, name=fieldName" })
   fieldName?: string;
 
-  @Metadata({ data: "json, name=operator" })
+  @SpeakeasyMetadata({ data: "json, name=operator" })
   operator?: Operator;
 }

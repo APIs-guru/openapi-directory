@@ -1,10 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContentAdsSettings } from "./contentadssettings";
 
+
 export enum AdUnitStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Active = "ACTIVE"
-,    Archived = "ARCHIVED"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Active = "ACTIVE",
+    Archived = "ARCHIVED"
+}
+
+
+// AdUnitInput
+/** 
+ * Representation of an ad unit. An ad unit represents a saved ad unit with a specific set of ad settings that have been customized within an account.
+**/
+export class AdUnitInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=contentAdsSettings" })
+  contentAdsSettings?: ContentAdsSettings;
+
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
+  displayName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=state" })
+  state?: AdUnitStateEnum;
 }
 
 
@@ -13,18 +30,18 @@ export enum AdUnitStateEnum {
  * Representation of an ad unit. An ad unit represents a saved ad unit with a specific set of ad settings that have been customized within an account.
 **/
 export class AdUnit extends SpeakeasyBase {
-  @Metadata({ data: "json, name=contentAdsSettings" })
+  @SpeakeasyMetadata({ data: "json, name=contentAdsSettings" })
   contentAdsSettings?: ContentAdsSettings;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=reportingDimensionId" })
+  @SpeakeasyMetadata({ data: "json, name=reportingDimensionId" })
   reportingDimensionId?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: AdUnitStateEnum;
 }

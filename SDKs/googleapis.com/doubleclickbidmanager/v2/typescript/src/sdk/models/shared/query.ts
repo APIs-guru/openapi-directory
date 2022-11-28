@@ -1,7 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { QueryMetadata } from "./querymetadata";
 import { Parameters } from "./parameters";
 import { QuerySchedule } from "./queryschedule";
+
+
+
+// QueryInput
+/** 
+ * Represents a query.
+**/
+export class QueryInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
+  metadata?: QueryMetadata;
+
+  @SpeakeasyMetadata({ data: "json, name=params" })
+  params?: Parameters;
+
+  @SpeakeasyMetadata({ data: "json, name=schedule" })
+  schedule?: QuerySchedule;
+}
 
 
 // Query
@@ -9,15 +26,15 @@ import { QuerySchedule } from "./queryschedule";
  * Represents a query.
 **/
 export class Query extends SpeakeasyBase {
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: QueryMetadata;
 
-  @Metadata({ data: "json, name=params" })
+  @SpeakeasyMetadata({ data: "json, name=params" })
   params?: Parameters;
 
-  @Metadata({ data: "json, name=queryId" })
+  @SpeakeasyMetadata({ data: "json, name=queryId" })
   queryId?: string;
 
-  @Metadata({ data: "json, name=schedule" })
+  @SpeakeasyMetadata({ data: "json, name=schedule" })
   schedule?: QuerySchedule;
 }

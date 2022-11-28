@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OtherMetadataValueListItem } from "./othermetadatavaluelistitem";
+
 
 
 // MetadataInfo
@@ -8,12 +8,12 @@ import { OtherMetadataValueListItem } from "./othermetadatavaluelistitem";
  * A structure containing metadata information for a schema version.
 **/
 export class MetadataInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreatedTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedTime" })
   createdTime?: string;
 
-  @Metadata({ data: "json, name=MetadataValue" })
+  @SpeakeasyMetadata({ data: "json, name=MetadataValue" })
   metadataValue?: string;
 
-  @Metadata({ data: "json, name=OtherMetadataValueList", elemType: shared.OtherMetadataValueListItem })
+  @SpeakeasyMetadata({ data: "json, name=OtherMetadataValueList", elemType: OtherMetadataValueListItem })
   otherMetadataValueList?: OtherMetadataValueListItem[];
 }

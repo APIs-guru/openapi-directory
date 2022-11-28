@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Copy } from "./copy";
+
 
 
 // Create
@@ -7,12 +8,12 @@ import { Copy } from "./copy";
  * An object was created.
 **/
 export class Create extends SpeakeasyBase {
-  @Metadata({ data: "json, name=copy" })
+  @SpeakeasyMetadata({ data: "json, name=copy" })
   copy?: Copy;
 
-  @Metadata({ data: "json, name=new" })
+  @SpeakeasyMetadata({ data: "json, name=new" })
   new?: Map<string, any>;
 
-  @Metadata({ data: "json, name=upload" })
+  @SpeakeasyMetadata({ data: "json, name=upload" })
   upload?: Map<string, any>;
 }

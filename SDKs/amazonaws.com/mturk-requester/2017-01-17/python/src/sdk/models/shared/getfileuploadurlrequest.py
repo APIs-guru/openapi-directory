@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class GetFileUploadURLRequest:
-    assignment_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AssignmentId' }})
-    question_identifier: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'QuestionIdentifier' }})
+    assignment_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('AssignmentId') }})
+    question_identifier: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('QuestionIdentifier') }})
     

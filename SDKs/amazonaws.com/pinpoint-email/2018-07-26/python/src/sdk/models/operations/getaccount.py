@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
@@ -16,14 +19,14 @@ class GetAccountHeaders:
 
 @dataclass
 class GetAccountRequest:
-    headers: GetAccountHeaders = field(default=None)
+    headers: GetAccountHeaders = field()
     
 
 @dataclass
 class GetAccountResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_account_response: Optional[shared.GetAccountResponse] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteAppsAppIdVersionsVersionPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=appId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=appId" })
   appId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=version" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=version" })
   version: string;
 }
 
 
 export class DeleteAppsAppIdVersionsVersionQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=developerId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=developerId" })
   developerId: string;
 }
 
 
 export class DeleteAppsAppIdVersionsVersionRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DeleteAppsAppIdVersionsVersionPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: DeleteAppsAppIdVersionsVersionQueryParams;
 }
 
 
 export class DeleteAppsAppIdVersionsVersionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

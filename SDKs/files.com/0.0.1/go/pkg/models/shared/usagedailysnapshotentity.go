@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// UsageDailySnapshotEntity
+// List Usage Daily Snapshots
 type UsageDailySnapshotEntity struct {
 	CurrentStorage     *int32        `json:"current_storage,omitempty"`
 	Date               *time.Time    `json:"date,omitempty"`

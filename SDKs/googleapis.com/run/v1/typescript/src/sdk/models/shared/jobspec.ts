@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ExecutionTemplateSpec } from "./executiontemplatespec";
+
 
 
 // JobSpec
@@ -7,6 +8,6 @@ import { ExecutionTemplateSpec } from "./executiontemplatespec";
  * JobSpec describes how the job will look.
 **/
 export class JobSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=template" })
+  @SpeakeasyMetadata({ data: "json, name=template" })
   template?: ExecutionTemplateSpec;
 }

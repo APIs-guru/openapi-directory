@@ -1,5 +1,7 @@
 package shared
 
+// SessionState
+// The state of the user's session with Amazon Lex V2.
 type SessionState struct {
 	ActiveContexts       []ActiveContext   `json:"activeContexts,omitempty"`
 	DialogAction         *DialogAction     `json:"dialogAction,omitempty"`

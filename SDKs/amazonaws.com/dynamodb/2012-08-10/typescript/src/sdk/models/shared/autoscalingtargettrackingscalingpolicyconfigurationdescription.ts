@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AutoScalingTargetTrackingScalingPolicyConfigurationDescription
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the properties of a target tracking scaling policy.
 **/
 export class AutoScalingTargetTrackingScalingPolicyConfigurationDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DisableScaleIn" })
+  @SpeakeasyMetadata({ data: "json, name=DisableScaleIn" })
   disableScaleIn?: boolean;
 
-  @Metadata({ data: "json, name=ScaleInCooldown" })
+  @SpeakeasyMetadata({ data: "json, name=ScaleInCooldown" })
   scaleInCooldown?: number;
 
-  @Metadata({ data: "json, name=ScaleOutCooldown" })
+  @SpeakeasyMetadata({ data: "json, name=ScaleOutCooldown" })
   scaleOutCooldown?: number;
 
-  @Metadata({ data: "json, name=TargetValue" })
+  @SpeakeasyMetadata({ data: "json, name=TargetValue" })
   targetValue: number;
 }

@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class CreativeVideoSortOrderEnum(str, Enum):
     BEST_MATCH = "best_match"

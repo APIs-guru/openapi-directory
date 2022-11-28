@@ -1,5 +1,8 @@
 package shared
 
+// SourceConnectorProperties
+//
+//	Specifies the information that is required to query a particular connector.
 type SourceConnectorProperties struct {
 	Amplitude       *AmplitudeSourceProperties       `json:"Amplitude,omitempty"`
 	Datadog         *DatadogSourceProperties         `json:"Datadog,omitempty"`

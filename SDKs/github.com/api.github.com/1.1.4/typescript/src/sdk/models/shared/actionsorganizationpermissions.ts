@@ -1,18 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AllowedActionsEnum } from "./allowedactionsenum";
 import { EnabledRepositoriesEnum } from "./enabledrepositoriesenum";
 
 
+
 export class ActionsOrganizationPermissions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowed_actions" })
+  @SpeakeasyMetadata({ data: "json, name=allowed_actions" })
   allowedActions: AllowedActionsEnum;
 
-  @Metadata({ data: "json, name=enabled_repositories" })
+  @SpeakeasyMetadata({ data: "json, name=enabled_repositories" })
   enabledRepositories: EnabledRepositoriesEnum;
 
-  @Metadata({ data: "json, name=selected_actions_url" })
+  @SpeakeasyMetadata({ data: "json, name=selected_actions_url" })
   selectedActionsUrl?: string;
 
-  @Metadata({ data: "json, name=selected_repositories_url" })
+  @SpeakeasyMetadata({ data: "json, name=selected_repositories_url" })
   selectedRepositoriesUrl?: string;
 }

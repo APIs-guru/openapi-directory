@@ -1,5 +1,7 @@
 package shared
 
+// QueryRangeRequest
+// QueryRangeRequest holds all parameters of the Prometheus upstream range query API plus GCM specific parameters.
 type QueryRangeRequest struct {
 	End     *string `json:"end,omitempty"`
 	Query   *string `json:"query,omitempty"`

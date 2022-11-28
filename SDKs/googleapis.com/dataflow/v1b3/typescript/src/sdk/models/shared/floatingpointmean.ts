@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SplitInt64 } from "./splitint64";
+
 
 
 // FloatingPointMean
@@ -7,9 +8,9 @@ import { SplitInt64 } from "./splitint64";
  * A representation of a floating point mean metric contribution.
 **/
 export class FloatingPointMean extends SpeakeasyBase {
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count?: SplitInt64;
 
-  @Metadata({ data: "json, name=sum" })
+  @SpeakeasyMetadata({ data: "json, name=sum" })
   sum?: number;
 }

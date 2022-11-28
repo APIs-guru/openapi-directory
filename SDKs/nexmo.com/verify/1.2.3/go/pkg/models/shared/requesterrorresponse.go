@@ -19,6 +19,8 @@ const (
 	RequestErrorResponseStatusEnumTwentyNine RequestErrorResponseStatusEnum = "29"
 )
 
+// RequestErrorResponse
+// Error
 type RequestErrorResponse struct {
 	ErrorText *string                         `json:"error_text,omitempty"`
 	Network   *string                         `json:"network,omitempty"`

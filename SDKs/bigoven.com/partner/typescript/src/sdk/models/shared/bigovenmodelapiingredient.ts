@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BigOvenModelApiIngredientInfo } from "./bigovenmodelapiingredientinfo";
 
 
+
 export class BigOvenModelApiIngredient extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DisplayIndex" })
+  @SpeakeasyMetadata({ data: "json, name=DisplayIndex" })
   displayIndex?: number;
 
-  @Metadata({ data: "json, name=DisplayQuantity" })
+  @SpeakeasyMetadata({ data: "json, name=DisplayQuantity" })
   displayQuantity?: string;
 
-  @Metadata({ data: "json, name=HTMLName" })
+  @SpeakeasyMetadata({ data: "json, name=HTMLName" })
   htmlName?: string;
 
-  @Metadata({ data: "json, name=IngredientID" })
+  @SpeakeasyMetadata({ data: "json, name=IngredientID" })
   ingredientId?: number;
 
-  @Metadata({ data: "json, name=IngredientInfo" })
+  @SpeakeasyMetadata({ data: "json, name=IngredientInfo" })
   ingredientInfo?: BigOvenModelApiIngredientInfo;
 
-  @Metadata({ data: "json, name=IsHeading" })
+  @SpeakeasyMetadata({ data: "json, name=IsHeading" })
   isHeading?: boolean;
 
-  @Metadata({ data: "json, name=IsLinked" })
+  @SpeakeasyMetadata({ data: "json, name=IsLinked" })
   isLinked?: boolean;
 
-  @Metadata({ data: "json, name=MetricDisplayQuantity" })
+  @SpeakeasyMetadata({ data: "json, name=MetricDisplayQuantity" })
   metricDisplayQuantity?: string;
 
-  @Metadata({ data: "json, name=MetricQuantity" })
+  @SpeakeasyMetadata({ data: "json, name=MetricQuantity" })
   metricQuantity?: number;
 
-  @Metadata({ data: "json, name=MetricUnit" })
+  @SpeakeasyMetadata({ data: "json, name=MetricUnit" })
   metricUnit?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=PreparationNotes" })
+  @SpeakeasyMetadata({ data: "json, name=PreparationNotes" })
   preparationNotes?: string;
 
-  @Metadata({ data: "json, name=Quantity" })
+  @SpeakeasyMetadata({ data: "json, name=Quantity" })
   quantity?: number;
 
-  @Metadata({ data: "json, name=Unit" })
+  @SpeakeasyMetadata({ data: "json, name=Unit" })
   unit?: string;
 }

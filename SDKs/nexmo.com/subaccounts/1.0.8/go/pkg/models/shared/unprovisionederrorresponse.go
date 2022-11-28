@@ -1,5 +1,7 @@
 package shared
 
+// UnprovisionedErrorResponse
+// Unprovisioned
 type UnprovisionedErrorResponse struct {
 	Detail   string `json:"detail"`
 	Instance string `json:"instance"`

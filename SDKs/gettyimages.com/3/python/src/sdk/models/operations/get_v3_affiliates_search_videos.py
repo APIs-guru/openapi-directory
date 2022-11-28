@@ -15,13 +15,13 @@ class GetV3AffiliatesSearchVideosHeaders:
 
 @dataclass
 class GetV3AffiliatesSearchVideosRequest:
-    query_params: GetV3AffiliatesSearchVideosQueryParams = field(default=None)
-    headers: GetV3AffiliatesSearchVideosHeaders = field(default=None)
+    headers: GetV3AffiliatesSearchVideosHeaders = field()
+    query_params: GetV3AffiliatesSearchVideosQueryParams = field()
     
 
 @dataclass
 class GetV3AffiliatesSearchVideosResponse:
+    content_type: str = field()
+    status_code: int = field()
     affiliate_video_search_response: Optional[shared.AffiliateVideoSearchResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

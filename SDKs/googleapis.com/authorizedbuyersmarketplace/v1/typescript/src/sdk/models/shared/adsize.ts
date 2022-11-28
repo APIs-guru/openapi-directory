@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum AdSizeTypeEnum {
-    TypeUnspecified = "TYPE_UNSPECIFIED"
-,    Pixel = "PIXEL"
-,    Interstitial = "INTERSTITIAL"
-,    Native = "NATIVE"
-,    Fluid = "FLUID"
+    TypeUnspecified = "TYPE_UNSPECIFIED",
+    Pixel = "PIXEL",
+    Interstitial = "INTERSTITIAL",
+    Native = "NATIVE",
+    Fluid = "FLUID"
 }
 
 
@@ -14,12 +15,12 @@ export enum AdSizeTypeEnum {
  * Represents size of a single ad slot, or a creative.
 **/
 export class AdSize extends SpeakeasyBase {
-  @Metadata({ data: "json, name=height" })
+  @SpeakeasyMetadata({ data: "json, name=height" })
   height?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: AdSizeTypeEnum;
 
-  @Metadata({ data: "json, name=width" })
+  @SpeakeasyMetadata({ data: "json, name=width" })
   width?: string;
 }

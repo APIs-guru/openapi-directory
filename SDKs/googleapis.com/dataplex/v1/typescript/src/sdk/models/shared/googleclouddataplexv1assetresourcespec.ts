@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleCloudDataplexV1AssetResourceSpecTypeEnum {
-    TypeUnspecified = "TYPE_UNSPECIFIED"
-,    StorageBucket = "STORAGE_BUCKET"
-,    BigqueryDataset = "BIGQUERY_DATASET"
+    TypeUnspecified = "TYPE_UNSPECIFIED",
+    StorageBucket = "STORAGE_BUCKET",
+    BigqueryDataset = "BIGQUERY_DATASET"
 }
 
 
@@ -12,9 +13,9 @@ export enum GoogleCloudDataplexV1AssetResourceSpecTypeEnum {
  * Identifies the cloud resource that is referenced by this asset.
 **/
 export class GoogleCloudDataplexV1AssetResourceSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: GoogleCloudDataplexV1AssetResourceSpecTypeEnum;
 }

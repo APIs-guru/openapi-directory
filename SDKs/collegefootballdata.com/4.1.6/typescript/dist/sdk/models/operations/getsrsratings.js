@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetSrsRatingsQueryParams = /** @class */ (function (_super) {
     __extends(GetSrsRatingsQueryParams, _super);
@@ -30,15 +30,15 @@ var GetSrsRatingsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=conference" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=conference" }),
         __metadata("design:type", String)
     ], GetSrsRatingsQueryParams.prototype, "conference", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=team" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=team" }),
         __metadata("design:type", String)
     ], GetSrsRatingsQueryParams.prototype, "team", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=year" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=year" }),
         __metadata("design:type", Number)
     ], GetSrsRatingsQueryParams.prototype, "year", void 0);
     return GetSrsRatingsQueryParams;
@@ -50,7 +50,7 @@ var GetSrsRatingsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetSrsRatingsQueryParams)
     ], GetSrsRatingsRequest.prototype, "queryParams", void 0);
     return GetSrsRatingsRequest;
@@ -62,15 +62,15 @@ var GetSrsRatingsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetSrsRatingsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetSrsRatingsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata({ elemType: shared.TeamSrsRating }),
+        SpeakeasyMetadata({ elemType: shared.TeamSrsRating }),
         __metadata("design:type", Array)
     ], GetSrsRatingsResponse.prototype, "teamSrsRatings", void 0);
     return GetSrsRatingsResponse;

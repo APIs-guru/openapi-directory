@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DataMaskingStatistics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataMaskingApplied" })
+  @SpeakeasyMetadata({ data: "json, name=dataMaskingApplied" })
   dataMaskingApplied?: boolean;
 }

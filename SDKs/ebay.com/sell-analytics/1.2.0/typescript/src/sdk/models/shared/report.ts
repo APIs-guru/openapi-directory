@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Metadata } from "./metadata";
 import { Header } from "./header";
 import { Record } from "./record";
 import { Error } from "./error";
+
 
 
 // Report
@@ -11,24 +11,24 @@ import { Error } from "./error";
  * The complex type that defines that defines the report.
 **/
 export class Report extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dimensionMetadata", elemType: shared.Metadata })
+  @SpeakeasyMetadata({ data: "json, name=dimensionMetadata", elemType: Metadata })
   dimensionMetadata?: Metadata[];
 
-  @Metadata({ data: "json, name=endDate" })
+  @SpeakeasyMetadata({ data: "json, name=endDate" })
   endDate?: string;
 
-  @Metadata({ data: "json, name=header" })
+  @SpeakeasyMetadata({ data: "json, name=header" })
   header?: Header;
 
-  @Metadata({ data: "json, name=lastUpdatedDate" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdatedDate" })
   lastUpdatedDate?: string;
 
-  @Metadata({ data: "json, name=records", elemType: shared.Record })
+  @SpeakeasyMetadata({ data: "json, name=records", elemType: Record })
   records?: Record[];
 
-  @Metadata({ data: "json, name=startDate" })
+  @SpeakeasyMetadata({ data: "json, name=startDate" })
   startDate?: string;
 
-  @Metadata({ data: "json, name=warnings", elemType: shared.Error })
+  @SpeakeasyMetadata({ data: "json, name=warnings", elemType: Error })
   warnings?: Error[];
 }

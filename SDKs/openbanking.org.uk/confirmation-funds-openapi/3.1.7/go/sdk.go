@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://openbanking.org.uk",
 	"https://openbanking.org.uk/open-banking/v3.1/cbpii",
 }
@@ -20,9 +20,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -33,27 +37,45 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// CreateFundsConfirmationConsents - Create Funds Confirmation Consent
 func (s *SDK) CreateFundsConfirmationConsents(ctx context.Context, request operations.CreateFundsConfirmationConsentsRequest) (*operations.CreateFundsConfirmationConsentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/funds-confirmation-consents"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -73,7 +95,7 @@ func (s *SDK) CreateFundsConfirmationConsents(ctx context.Context, request opera
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -156,8 +178,9 @@ func (s *SDK) CreateFundsConfirmationConsents(ctx context.Context, request opera
 	return res, nil
 }
 
+// CreateFundsConfirmations - Create Funds Confirmation
 func (s *SDK) CreateFundsConfirmations(ctx context.Context, request operations.CreateFundsConfirmationsRequest) (*operations.CreateFundsConfirmationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/funds-confirmations"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -177,7 +200,7 @@ func (s *SDK) CreateFundsConfirmations(ctx context.Context, request operations.C
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -260,8 +283,9 @@ func (s *SDK) CreateFundsConfirmations(ctx context.Context, request operations.C
 	return res, nil
 }
 
+// DeleteFundsConfirmationConsentsConsentID - Delete Funds Confirmation Consent
 func (s *SDK) DeleteFundsConfirmationConsentsConsentID(ctx context.Context, request operations.DeleteFundsConfirmationConsentsConsentIDRequest) (*operations.DeleteFundsConfirmationConsentsConsentIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/funds-confirmation-consents/{ConsentId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -271,7 +295,7 @@ func (s *SDK) DeleteFundsConfirmationConsentsConsentID(ctx context.Context, requ
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -342,8 +366,9 @@ func (s *SDK) DeleteFundsConfirmationConsentsConsentID(ctx context.Context, requ
 	return res, nil
 }
 
+// GetFundsConfirmationConsentsConsentID - Get Funds Confirmation Consent
 func (s *SDK) GetFundsConfirmationConsentsConsentID(ctx context.Context, request operations.GetFundsConfirmationConsentsConsentIDRequest) (*operations.GetFundsConfirmationConsentsConsentIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/funds-confirmation-consents/{ConsentId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -353,7 +378,7 @@ func (s *SDK) GetFundsConfirmationConsentsConsentID(ctx context.Context, request
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {

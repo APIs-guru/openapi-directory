@@ -1,5 +1,7 @@
 package shared
 
+// DataStats
+// The data statistics of a series of values that share the same DataType.
 type DataStats struct {
 	ArrayStats         *ArrayStats     `json:"arrayStats,omitempty"`
 	CategoryStats      *CategoryStats  `json:"categoryStats,omitempty"`

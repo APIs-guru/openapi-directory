@@ -1,12 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import savingsplansfiltername_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SavingsPlanFilter:
-    name: Optional[savingsplansfiltername_enum.SavingsPlansFilterNameEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    values: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'values' }})
+    r"""SavingsPlanFilter
+    Information about a filter.
+    """
+    
+    name: Optional[SavingsPlansFilterNameEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    values: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('values') }})
     

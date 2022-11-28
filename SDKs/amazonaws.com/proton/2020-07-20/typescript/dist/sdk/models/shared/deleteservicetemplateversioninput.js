@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DeleteServiceTemplateVersionInput = /** @class */ (function (_super) {
     __extends(DeleteServiceTemplateVersionInput, _super);
     function DeleteServiceTemplateVersionInput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=majorVersion" }),
+        SpeakeasyMetadata({ data: "json, name=majorVersion" }),
         __metadata("design:type", String)
     ], DeleteServiceTemplateVersionInput.prototype, "majorVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=minorVersion" }),
+        SpeakeasyMetadata({ data: "json, name=minorVersion" }),
         __metadata("design:type", String)
     ], DeleteServiceTemplateVersionInput.prototype, "minorVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=templateName" }),
+        SpeakeasyMetadata({ data: "json, name=templateName" }),
         __metadata("design:type", String)
     ], DeleteServiceTemplateVersionInput.prototype, "templateName", void 0);
     return DeleteServiceTemplateVersionInput;

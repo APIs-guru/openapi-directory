@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class PaymentsresellersubscriptionPartnersSubscriptionsCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,14 +27,14 @@ class PaymentsresellersubscriptionPartnersSubscriptionsCreateQueryParams:
 
 @dataclass
 class PaymentsresellersubscriptionPartnersSubscriptionsCreateRequest:
-    path_params: PaymentsresellersubscriptionPartnersSubscriptionsCreatePathParams = field(default=None)
-    query_params: PaymentsresellersubscriptionPartnersSubscriptionsCreateQueryParams = field(default=None)
-    request: Optional[shared.GoogleCloudPaymentsResellerSubscriptionV1Subscription] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    path_params: PaymentsresellersubscriptionPartnersSubscriptionsCreatePathParams = field()
+    query_params: PaymentsresellersubscriptionPartnersSubscriptionsCreateQueryParams = field()
+    request: Optional[shared.GoogleCloudPaymentsResellerSubscriptionV1SubscriptionInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PaymentsresellersubscriptionPartnersSubscriptionsCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_payments_reseller_subscription_v1_subscription: Optional[shared.GoogleCloudPaymentsResellerSubscriptionV1Subscription] = field(default=None)
-    status_code: int = field(default=None)
     

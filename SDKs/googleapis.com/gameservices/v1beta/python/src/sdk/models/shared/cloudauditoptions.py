@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import authorizationloggingoptions
+from sdk import utils
+from . import *
 
 class CloudAuditOptionsLogNameEnum(str, Enum):
     UNSPECIFIED_LOG_NAME = "UNSPECIFIED_LOG_NAME"
@@ -12,6 +14,10 @@ class CloudAuditOptionsLogNameEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CloudAuditOptions:
-    authorization_logging_options: Optional[authorizationloggingoptions.AuthorizationLoggingOptions] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'authorizationLoggingOptions' }})
-    log_name: Optional[CloudAuditOptionsLogNameEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'logName' }})
+    r"""CloudAuditOptions
+    Write a Cloud Audit log
+    """
+    
+    authorization_logging_options: Optional[AuthorizationLoggingOptions] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('authorizationLoggingOptions') }})
+    log_name: Optional[CloudAuditOptionsLogNameEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('logName') }})
     

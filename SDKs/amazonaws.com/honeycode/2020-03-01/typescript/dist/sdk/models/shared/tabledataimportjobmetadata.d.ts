@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ImportDataSource } from "./importdatasource";
 import { ImportOptions } from "./importoptions";
 import { ImportJobSubmitter } from "./importjobsubmitter";

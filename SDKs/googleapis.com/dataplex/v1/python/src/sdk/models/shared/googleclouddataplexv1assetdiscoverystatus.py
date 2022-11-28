@@ -1,7 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googleclouddataplexv1assetdiscoverystatusstats
+from sdk import utils
+from . import *
 
 class GoogleCloudDataplexV1AssetDiscoveryStatusStateEnum(str, Enum):
     STATE_UNSPECIFIED = "STATE_UNSPECIFIED"
@@ -14,10 +19,14 @@ class GoogleCloudDataplexV1AssetDiscoveryStatusStateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleCloudDataplexV1AssetDiscoveryStatus:
-    last_run_duration: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lastRunDuration' }})
-    last_run_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lastRunTime' }})
-    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
-    state: Optional[GoogleCloudDataplexV1AssetDiscoveryStatusStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
-    stats: Optional[googleclouddataplexv1assetdiscoverystatusstats.GoogleCloudDataplexV1AssetDiscoveryStatusStats] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stats' }})
-    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updateTime' }})
+    r"""GoogleCloudDataplexV1AssetDiscoveryStatus
+    Status of discovery for an asset.
+    """
+    
+    last_run_duration: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lastRunDuration') }})
+    last_run_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lastRunTime') }})
+    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('message') }})
+    state: Optional[GoogleCloudDataplexV1AssetDiscoveryStatusStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
+    stats: Optional[GoogleCloudDataplexV1AssetDiscoveryStatusStats] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('stats') }})
+    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('updateTime') }})
     

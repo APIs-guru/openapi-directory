@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataCaptureConfigSummary } from "./datacaptureconfigsummary";
 import { EndpointStatusEnum } from "./endpointstatusenum";
 import { MonitoringSchedule } from "./monitoringschedule";
@@ -7,41 +6,42 @@ import { ProductionVariantSummary } from "./productionvariantsummary";
 import { Tag } from "./tag";
 
 
+
 // Endpoint
 /** 
  * A hosted endpoint for real-time inference.
 **/
 export class Endpoint extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime: Date;
 
-  @Metadata({ data: "json, name=DataCaptureConfig" })
+  @SpeakeasyMetadata({ data: "json, name=DataCaptureConfig" })
   dataCaptureConfig?: DataCaptureConfigSummary;
 
-  @Metadata({ data: "json, name=EndpointArn" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointArn" })
   endpointArn: string;
 
-  @Metadata({ data: "json, name=EndpointConfigName" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointConfigName" })
   endpointConfigName: string;
 
-  @Metadata({ data: "json, name=EndpointName" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointName" })
   endpointName: string;
 
-  @Metadata({ data: "json, name=EndpointStatus" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointStatus" })
   endpointStatus: EndpointStatusEnum;
 
-  @Metadata({ data: "json, name=FailureReason" })
+  @SpeakeasyMetadata({ data: "json, name=FailureReason" })
   failureReason?: string;
 
-  @Metadata({ data: "json, name=LastModifiedTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedTime" })
   lastModifiedTime: Date;
 
-  @Metadata({ data: "json, name=MonitoringSchedules", elemType: shared.MonitoringSchedule })
+  @SpeakeasyMetadata({ data: "json, name=MonitoringSchedules", elemType: MonitoringSchedule })
   monitoringSchedules?: MonitoringSchedule[];
 
-  @Metadata({ data: "json, name=ProductionVariants", elemType: shared.ProductionVariantSummary })
+  @SpeakeasyMetadata({ data: "json, name=ProductionVariants", elemType: ProductionVariantSummary })
   productionVariants?: ProductionVariantSummary[];
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 }

@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from sdk.models import shared
 
 
 @dataclass
 class UpdateProductPathParams:
-    product_id: str = field(default=None, metadata={'path_param': { 'field_name': 'productId', 'style': 'simple', 'explode': False }})
+    product_id: str = field(metadata={'path_param': { 'field_name': 'productId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,14 +20,14 @@ class UpdateProductRequests:
 
 @dataclass
 class UpdateProductRequest:
-    path_params: UpdateProductPathParams = field(default=None)
-    request: UpdateProductRequests = field(default=None)
+    path_params: UpdateProductPathParams = field()
+    request: UpdateProductRequests = field()
     
 
 @dataclass
 class UpdateProductResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     product_model: Optional[shared.ProductModel] = field(default=None)
     product_model_haljson: Optional[shared.ProductModelHaljson] = field(default=None)
-    status_code: int = field(default=None)
     

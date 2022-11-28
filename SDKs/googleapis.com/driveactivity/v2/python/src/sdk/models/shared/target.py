@@ -1,17 +1,19 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import drive
-from . import driveitem
-from . import filecomment
-from . import teamdrive
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Target:
-    drive: Optional[drive.Drive] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'drive' }})
-    drive_item: Optional[driveitem.DriveItem] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'driveItem' }})
-    file_comment: Optional[filecomment.FileComment] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fileComment' }})
-    team_drive: Optional[teamdrive.TeamDrive] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'teamDrive' }})
+    r"""Target
+    Information about the target of activity.
+    """
+    
+    drive: Optional[Drive] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('drive') }})
+    drive_item: Optional[DriveItem] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('driveItem') }})
+    file_comment: Optional[FileComment] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fileComment') }})
+    team_drive: Optional[TeamDrive] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('teamDrive') }})
     

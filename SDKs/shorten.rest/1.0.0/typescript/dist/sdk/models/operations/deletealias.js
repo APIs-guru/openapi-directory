@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var DeleteAliasQueryParams = /** @class */ (function (_super) {
     __extends(DeleteAliasQueryParams, _super);
@@ -30,11 +30,11 @@ var DeleteAliasQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=aliasName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=aliasName" }),
         __metadata("design:type", String)
     ], DeleteAliasQueryParams.prototype, "aliasName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=domainName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=domainName" }),
         __metadata("design:type", String)
     ], DeleteAliasQueryParams.prototype, "domainName", void 0);
     return DeleteAliasQueryParams;
@@ -46,7 +46,7 @@ var DeleteAliasSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKeyAuth)
     ], DeleteAliasSecurity.prototype, "apiKeyAuth", void 0);
     return DeleteAliasSecurity;
@@ -58,11 +58,11 @@ var DeleteAliasRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteAliasQueryParams)
     ], DeleteAliasRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteAliasSecurity)
     ], DeleteAliasRequest.prototype, "security", void 0);
     return DeleteAliasRequest;
@@ -74,11 +74,11 @@ var DeleteAliasResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DeleteAliasResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DeleteAliasResponse.prototype, "statusCode", void 0);
     return DeleteAliasResponse;

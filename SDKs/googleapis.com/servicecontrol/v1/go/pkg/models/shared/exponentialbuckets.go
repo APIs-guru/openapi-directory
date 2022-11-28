@@ -1,5 +1,7 @@
 package shared
 
+// ExponentialBuckets
+// Describing buckets with exponentially growing width.
 type ExponentialBuckets struct {
 	GrowthFactor     *float64 `json:"growthFactor,omitempty"`
 	NumFiniteBuckets *int32   `json:"numFiniteBuckets,omitempty"`

@@ -1,10 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import itemsummary
-from . import listdata
-from . import pagination
-from . import theme
+from sdk import utils
+from . import *
 
 class ItemListItemTypesEnum(str, Enum):
     MOVIE = "movie"
@@ -21,19 +20,23 @@ class ItemListItemTypesEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ItemList:
-    custom_fields: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'customFields' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    images: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'images' }})
-    item_types: Optional[List[ItemListItemTypesEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'itemTypes' }})
-    items: List[itemsummary.ItemSummary] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'items' }})
-    list_data: Optional[listdata.ListData] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'listData' }})
-    paging: pagination.Pagination = field(default=None, metadata={'dataclasses_json': { 'field_name': 'paging' }})
-    parameter: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'parameter' }})
-    path: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'path' }})
-    short_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'shortDescription' }})
-    size: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'size' }})
-    tagline: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tagline' }})
-    themes: Optional[List[theme.Theme]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'themes' }})
-    title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
+    r"""ItemList
+    A pageable list of items.
+    """
+    
+    id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    items: List[ItemSummary] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('items') }})
+    paging: Pagination = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('paging') }})
+    path: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('path') }})
+    size: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('size') }})
+    custom_fields: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('customFields') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    images: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('images') }})
+    item_types: Optional[List[ItemListItemTypesEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('itemTypes') }})
+    list_data: Optional[ListData] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('listData') }})
+    parameter: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('parameter') }})
+    short_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('shortDescription') }})
+    tagline: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tagline') }})
+    themes: Optional[List[Theme]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('themes') }})
+    title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('title') }})
     

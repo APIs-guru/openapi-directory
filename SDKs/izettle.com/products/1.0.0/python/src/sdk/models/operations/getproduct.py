@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class GetProductPathParams:
-    organization_uuid: str = field(default=None, metadata={'path_param': { 'field_name': 'organizationUuid', 'style': 'simple', 'explode': False }})
-    product_uuid: str = field(default=None, metadata={'path_param': { 'field_name': 'productUuid', 'style': 'simple', 'explode': False }})
+    organization_uuid: str = field(metadata={'path_param': { 'field_name': 'organizationUuid', 'style': 'simple', 'explode': False }})
+    product_uuid: str = field(metadata={'path_param': { 'field_name': 'productUuid', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,32 +15,22 @@ class GetProductHeaders:
     
 
 @dataclass
-class GetProductSecurityOption1:
-    zettle_api_key: shared.SchemeZettleAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
-    
-
-@dataclass
-class GetProductSecurityOption2:
-    zettle_oauth: shared.SchemeZettleOauth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    
-
-@dataclass
 class GetProductSecurity:
-    option1: Optional[GetProductSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[GetProductSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
+    zettle_api_key: Optional[shared.SchemeZettleAPIKey] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    zettle_oauth: Optional[shared.SchemeZettleOauth] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetProductRequest:
-    path_params: GetProductPathParams = field(default=None)
-    headers: GetProductHeaders = field(default=None)
-    security: GetProductSecurity = field(default=None)
+    headers: GetProductHeaders = field()
+    path_params: GetProductPathParams = field()
+    security: GetProductSecurity = field()
     
 
 @dataclass
 class GetProductResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     product_response: Optional[shared.ProductResponse] = field(default=None)
-    status_code: int = field(default=None)
     

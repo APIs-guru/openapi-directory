@@ -1,19 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateRuleCategoryPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=ruleCategoryId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ruleCategoryId" })
   ruleCategoryId: string;
-}
-
-
-export class UpdateRuleCategoryRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: UpdateRuleCategoryPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: shared.RuleCategoryUpdate;
 }
 
 export enum UpdateRuleCategory200ApplicationJsonActionEnum {
@@ -22,35 +14,44 @@ export enum UpdateRuleCategory200ApplicationJsonActionEnum {
 
 
 export class UpdateRuleCategory200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ruleCategories", elemType: shared.RuleCategory })
+  @SpeakeasyMetadata({ data: "json, name=ruleCategories", elemType: shared.RuleCategory })
   ruleCategories: shared.RuleCategory[];
 }
 
 export enum UpdateRuleCategory200ApplicationJsonResultEnum {
-    Success = "success"
-,    Error = "error"
+    Success = "success",
+    Error = "error"
 }
 
 
 export class UpdateRuleCategory200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: UpdateRuleCategory200ApplicationJsonActionEnum;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: UpdateRuleCategory200ApplicationJsonData;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result: UpdateRuleCategory200ApplicationJsonResultEnum;
 }
 
 
+export class UpdateRuleCategoryRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: UpdateRuleCategoryPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: shared.RuleCategoryUpdate;
+}
+
+
 export class UpdateRuleCategoryResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateRuleCategory200ApplicationJsonObject?: UpdateRuleCategory200ApplicationJson;
 }

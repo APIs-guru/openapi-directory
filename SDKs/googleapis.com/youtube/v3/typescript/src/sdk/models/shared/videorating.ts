@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum VideoRatingRatingEnum {
-    None = "none"
-,    Like = "like"
-,    Dislike = "dislike"
+    None = "none",
+    Like = "like",
+    Dislike = "dislike"
 }
 
 
@@ -12,9 +13,9 @@ export enum VideoRatingRatingEnum {
  * Basic details about rating of a video.
 **/
 export class VideoRating extends SpeakeasyBase {
-  @Metadata({ data: "json, name=rating" })
+  @SpeakeasyMetadata({ data: "json, name=rating" })
   rating?: VideoRatingRatingEnum;
 
-  @Metadata({ data: "json, name=videoId" })
+  @SpeakeasyMetadata({ data: "json, name=videoId" })
   videoId?: string;
 }

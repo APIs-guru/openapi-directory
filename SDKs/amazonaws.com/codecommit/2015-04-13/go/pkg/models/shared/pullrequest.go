@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// PullRequest
+// Returns information about a pull request.
 type PullRequest struct {
 	ApprovalRules      []ApprovalRule             `json:"approvalRules,omitempty"`
 	AuthorArn          *string                    `json:"authorArn,omitempty"`

@@ -1,5 +1,7 @@
 package shared
 
+// ContainerDefinition
+// Describes the container, as part of model definition.
 type ContainerDefinition struct {
 	ContainerHostname *string            `json:"ContainerHostname,omitempty"`
 	Environment       map[string]string  `json:"Environment,omitempty"`

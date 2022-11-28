@@ -8,6 +8,8 @@ const (
 	ImportAdminOverridesRequestForceOnlyEnumLimitDecreasePercentageTooHigh ImportAdminOverridesRequestForceOnlyEnum = "LIMIT_DECREASE_PERCENTAGE_TOO_HIGH"
 )
 
+// ImportAdminOverridesRequest
+// Request message for ImportAdminOverrides
 type ImportAdminOverridesRequest struct {
 	Force        *bool                                      `json:"force,omitempty"`
 	ForceOnly    []ImportAdminOverridesRequestForceOnlyEnum `json:"forceOnly,omitempty"`

@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class SongAPIGetByPvFieldsEnum(str, Enum):
@@ -37,21 +38,21 @@ class SongAPIGetByPvPvServiceEnum(str, Enum):
 
 @dataclass
 class SongAPIGetByPvQueryParams:
+    pv_id: str = field(metadata={'query_param': { 'field_name': 'pvId', 'style': 'form', 'explode': True }})
+    pv_service: SongAPIGetByPvPvServiceEnum = field(metadata={'query_param': { 'field_name': 'pvService', 'style': 'form', 'explode': True }})
     fields: Optional[SongAPIGetByPvFieldsEnum] = field(default=None, metadata={'query_param': { 'field_name': 'fields', 'style': 'form', 'explode': True }})
     lang: Optional[SongAPIGetByPvLangEnum] = field(default=None, metadata={'query_param': { 'field_name': 'lang', 'style': 'form', 'explode': True }})
-    pv_id: str = field(default=None, metadata={'query_param': { 'field_name': 'pvId', 'style': 'form', 'explode': True }})
-    pv_service: SongAPIGetByPvPvServiceEnum = field(default=None, metadata={'query_param': { 'field_name': 'pvService', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class SongAPIGetByPvRequest:
-    query_params: SongAPIGetByPvQueryParams = field(default=None)
+    query_params: SongAPIGetByPvQueryParams = field()
     
 
 @dataclass
 class SongAPIGetByPvResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     song_for_api_contract: Optional[shared.SongForAPIContract] = field(default=None)
-    status_code: int = field(default=None)
     

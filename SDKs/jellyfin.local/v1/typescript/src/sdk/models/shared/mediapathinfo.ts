@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class MediaPathInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NetworkPath" })
+  @SpeakeasyMetadata({ data: "json, name=NetworkPath" })
   networkPath?: string;
 
-  @Metadata({ data: "json, name=Path" })
+  @SpeakeasyMetadata({ data: "json, name=Path" })
   path?: string;
 }

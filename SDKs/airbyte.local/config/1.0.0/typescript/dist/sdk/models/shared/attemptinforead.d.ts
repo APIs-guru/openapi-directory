@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AttemptRead } from "./attemptread";
 import { LogRead } from "./logread";
 export declare class AttemptInfoRead extends SpeakeasyBase {

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CreateLayerResult
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains the response to a <code>CreateLayer</code> request.
 **/
 export class CreateLayerResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LayerId" })
+  @SpeakeasyMetadata({ data: "json, name=LayerId" })
   layerId?: string;
 }

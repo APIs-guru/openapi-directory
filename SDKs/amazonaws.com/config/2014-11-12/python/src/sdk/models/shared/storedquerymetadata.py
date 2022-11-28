@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class StoredQueryMetadata:
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
-    query_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'QueryArn' }})
-    query_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'QueryId' }})
-    query_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'QueryName' }})
+    r"""StoredQueryMetadata
+    Returns details of a specific query. 
+    """
+    
+    query_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('QueryArn') }})
+    query_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('QueryId') }})
+    query_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('QueryName') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Description') }})
     

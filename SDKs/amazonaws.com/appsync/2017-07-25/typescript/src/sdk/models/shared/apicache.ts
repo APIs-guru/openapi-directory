@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApiCachingBehaviorEnum } from "./apicachingbehaviorenum";
 import { ApiCacheStatusEnum } from "./apicachestatusenum";
 import { ApiCacheTypeEnum } from "./apicachetypeenum";
+
 
 
 // ApiCache
@@ -9,21 +10,21 @@ import { ApiCacheTypeEnum } from "./apicachetypeenum";
  * The <code>ApiCache</code> object.
 **/
 export class ApiCache extends SpeakeasyBase {
-  @Metadata({ data: "json, name=apiCachingBehavior" })
+  @SpeakeasyMetadata({ data: "json, name=apiCachingBehavior" })
   apiCachingBehavior?: ApiCachingBehaviorEnum;
 
-  @Metadata({ data: "json, name=atRestEncryptionEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=atRestEncryptionEnabled" })
   atRestEncryptionEnabled?: boolean;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: ApiCacheStatusEnum;
 
-  @Metadata({ data: "json, name=transitEncryptionEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=transitEncryptionEnabled" })
   transitEncryptionEnabled?: boolean;
 
-  @Metadata({ data: "json, name=ttl" })
+  @SpeakeasyMetadata({ data: "json, name=ttl" })
   ttl?: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: ApiCacheTypeEnum;
 }

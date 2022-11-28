@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class TagAPIPostNewTagQueryParams:
-    name: str = field(default=None, metadata={'query_param': { 'field_name': 'name', 'style': 'form', 'explode': True }})
+    name: str = field(metadata={'query_param': { 'field_name': 'name', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class TagAPIPostNewTagRequest:
-    query_params: TagAPIPostNewTagQueryParams = field(default=None)
+    query_params: TagAPIPostNewTagQueryParams = field()
     
 
 @dataclass
 class TagAPIPostNewTagResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     tag_base_contract: Optional[shared.TagBaseContract] = field(default=None)
     

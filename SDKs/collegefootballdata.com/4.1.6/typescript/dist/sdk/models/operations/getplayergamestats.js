@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetPlayerGameStatsQueryParams = /** @class */ (function (_super) {
     __extends(GetPlayerGameStatsQueryParams, _super);
@@ -30,31 +30,31 @@ var GetPlayerGameStatsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=category" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=category" }),
         __metadata("design:type", String)
     ], GetPlayerGameStatsQueryParams.prototype, "category", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=conference" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=conference" }),
         __metadata("design:type", String)
     ], GetPlayerGameStatsQueryParams.prototype, "conference", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=gameId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=gameId" }),
         __metadata("design:type", Number)
     ], GetPlayerGameStatsQueryParams.prototype, "gameId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=seasonType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=seasonType" }),
         __metadata("design:type", String)
     ], GetPlayerGameStatsQueryParams.prototype, "seasonType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=team" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=team" }),
         __metadata("design:type", String)
     ], GetPlayerGameStatsQueryParams.prototype, "team", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=week" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=week" }),
         __metadata("design:type", Number)
     ], GetPlayerGameStatsQueryParams.prototype, "week", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=year" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=year" }),
         __metadata("design:type", Number)
     ], GetPlayerGameStatsQueryParams.prototype, "year", void 0);
     return GetPlayerGameStatsQueryParams;
@@ -66,7 +66,7 @@ var GetPlayerGameStatsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetPlayerGameStatsQueryParams)
     ], GetPlayerGameStatsRequest.prototype, "queryParams", void 0);
     return GetPlayerGameStatsRequest;
@@ -78,15 +78,15 @@ var GetPlayerGameStatsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetPlayerGameStatsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata({ elemType: shared.PlayerGame }),
+        SpeakeasyMetadata({ elemType: shared.PlayerGame }),
         __metadata("design:type", Array)
     ], GetPlayerGameStatsResponse.prototype, "playerGames", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetPlayerGameStatsResponse.prototype, "statusCode", void 0);
     return GetPlayerGameStatsResponse;

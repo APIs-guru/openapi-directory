@@ -1,16 +1,19 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import resourcemetadata
-from . import virtualrouterspec
-from . import virtualrouterstatus
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class VirtualRouterData:
-    mesh_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meshName' }})
-    metadata: resourcemetadata.ResourceMetadata = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadata' }})
-    spec: virtualrouterspec.VirtualRouterSpec = field(default=None, metadata={'dataclasses_json': { 'field_name': 'spec' }})
-    status: virtualrouterstatus.VirtualRouterStatus = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    virtual_router_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'virtualRouterName' }})
+    r"""VirtualRouterData
+    An object that represents a virtual router returned by a describe operation.
+    """
+    
+    mesh_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('meshName') }})
+    metadata: ResourceMetadata = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('metadata') }})
+    spec: VirtualRouterSpec = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('spec') }})
+    status: VirtualRouterStatus = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    virtual_router_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('virtualRouterName') }})
     

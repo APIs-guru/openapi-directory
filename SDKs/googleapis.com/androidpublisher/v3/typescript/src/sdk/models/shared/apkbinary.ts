@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ApkBinary
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the binary payload of an APK.
 **/
 export class ApkBinary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=sha1" })
+  @SpeakeasyMetadata({ data: "json, name=sha1" })
   sha1?: string;
 
-  @Metadata({ data: "json, name=sha256" })
+  @SpeakeasyMetadata({ data: "json, name=sha256" })
   sha256?: string;
 }

@@ -11,6 +11,8 @@ const (
 	AccountAccessPermissionEnumEditWorkspace AccountAccessPermissionEnum = "editWorkspace"
 )
 
+// AccountAccess
+// Defines the Google Tag Manager Account access permissions.
 type AccountAccess struct {
 	Permission []AccountAccessPermissionEnum `json:"permission,omitempty"`
 }

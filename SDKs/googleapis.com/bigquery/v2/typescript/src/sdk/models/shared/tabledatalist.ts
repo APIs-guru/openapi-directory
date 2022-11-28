@@ -1,21 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TableRow } from "./tablerow";
 
 
+
 export class TableDataList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=pageToken" })
+  @SpeakeasyMetadata({ data: "json, name=pageToken" })
   pageToken?: string;
 
-  @Metadata({ data: "json, name=rows", elemType: shared.TableRow })
+  @SpeakeasyMetadata({ data: "json, name=rows", elemType: TableRow })
   rows?: TableRow[];
 
-  @Metadata({ data: "json, name=totalRows" })
+  @SpeakeasyMetadata({ data: "json, name=totalRows" })
   totalRows?: string;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// ListLensReviewImprovementsOutput
+// Output of a list lens review improvements call.
 type ListLensReviewImprovementsOutput struct {
 	ImprovementSummaries []ImprovementSummary `json:"ImprovementSummaries,omitempty"`
 	LensAlias            *string              `json:"LensAlias,omitempty"`

@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class DeliverInfoTargetEnum(str, Enum):
     TARGET_UNSPECIFIED = "TARGET_UNSPECIFIED"
@@ -17,6 +19,10 @@ class DeliverInfoTargetEnum(str, Enum):
 @dataclass_json
 @dataclass
 class DeliverInfo:
-    resource_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceUri' }})
-    target: Optional[DeliverInfoTargetEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'target' }})
+    r"""DeliverInfo
+    Details of the final state \"deliver\" and associated resource.
+    """
+    
+    resource_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceUri') }})
+    target: Optional[DeliverInfoTargetEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('target') }})
     

@@ -1,5 +1,7 @@
 package shared
 
+// SearchJobsResponse
+// Response for SearchJob method.
 type SearchJobsResponse struct {
 	BroadenedQueryJobsCount *int32                 `json:"broadenedQueryJobsCount,omitempty"`
 	HistogramQueryResults   []HistogramQueryResult `json:"histogramQueryResults,omitempty"`

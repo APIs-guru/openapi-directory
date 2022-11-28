@@ -1,16 +1,21 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import intervalunitvalues_enum
-from . import locationvalues_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateRule:
-    cron_expression: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CronExpression' }})
-    interval: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Interval' }})
-    interval_unit: Optional[intervalunitvalues_enum.IntervalUnitValuesEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IntervalUnit' }})
-    location: Optional[locationvalues_enum.LocationValuesEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Location' }})
-    times: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Times' }})
+    r"""CreateRule
+    <p>Specifies when to create snapshots of EBS volumes.</p> <p>You must specify either a Cron expression or an interval, interval unit, and start time. You cannot specify both.</p>
+    """
+    
+    cron_expression: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CronExpression') }})
+    interval: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Interval') }})
+    interval_unit: Optional[IntervalUnitValuesEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('IntervalUnit') }})
+    location: Optional[LocationValuesEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Location') }})
+    times: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Times') }})
     

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IntArray } from "./intarray";
+
 
 
 // IntArrayHparamSearchSpace
@@ -8,6 +8,6 @@ import { IntArray } from "./intarray";
  * Search space for int array.
 **/
 export class IntArrayHparamSearchSpace extends SpeakeasyBase {
-  @Metadata({ data: "json, name=candidates", elemType: shared.IntArray })
+  @SpeakeasyMetadata({ data: "json, name=candidates", elemType: IntArray })
   candidates?: IntArray[];
 }

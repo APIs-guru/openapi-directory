@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MergeOptionTypeEnumEnum } from "./mergeoptiontypeenumenum";
 
 
+
 export class GetMergeOptionsOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=baseCommitId" })
+  @SpeakeasyMetadata({ data: "json, name=baseCommitId" })
   baseCommitId: string;
 
-  @Metadata({ data: "json, name=destinationCommitId" })
+  @SpeakeasyMetadata({ data: "json, name=destinationCommitId" })
   destinationCommitId: string;
 
-  @Metadata({ data: "json, name=mergeOptions" })
+  @SpeakeasyMetadata({ data: "json, name=mergeOptions" })
   mergeOptions: MergeOptionTypeEnumEnum[];
 
-  @Metadata({ data: "json, name=sourceCommitId" })
+  @SpeakeasyMetadata({ data: "json, name=sourceCommitId" })
   sourceCommitId: string;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ServerTlsPolicy } from "./servertlspolicy";
 /**
  * Response returned by the ListServerTlsPolicies method.

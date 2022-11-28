@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DailyMaintenanceWindow } from "./dailymaintenancewindow";
 import { TimeWindow } from "./timewindow";
 import { RecurringTimeWindow } from "./recurringtimewindow";
+
 
 
 // MaintenanceWindow
@@ -10,12 +10,12 @@ import { RecurringTimeWindow } from "./recurringtimewindow";
  * MaintenanceWindow defines the maintenance window to be used for the cluster.
 **/
 export class MaintenanceWindow extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dailyMaintenanceWindow" })
+  @SpeakeasyMetadata({ data: "json, name=dailyMaintenanceWindow" })
   dailyMaintenanceWindow?: DailyMaintenanceWindow;
 
-  @Metadata({ data: "json, name=maintenanceExclusions", elemType: shared.TimeWindow })
+  @SpeakeasyMetadata({ data: "json, name=maintenanceExclusions", elemType: TimeWindow })
   maintenanceExclusions?: Map<string, TimeWindow>;
 
-  @Metadata({ data: "json, name=recurringWindow" })
+  @SpeakeasyMetadata({ data: "json, name=recurringWindow" })
   recurringWindow?: RecurringTimeWindow;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// CycleStep
+// CycleStep holds information about a step progress.
 type CycleStep struct {
 	EndTime                 *string                `json:"endTime,omitempty"`
 	InitializingReplication map[string]interface{} `json:"initializingReplication,omitempty"`

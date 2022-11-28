@@ -1,5 +1,7 @@
 package shared
 
+// OcrWordElement
+// A single word in an OCR document
 type OcrWordElement struct {
 	BlockNumber     *int32   `json:"BlockNumber,omitempty"`
 	ConfidenceLevel *float64 `json:"ConfidenceLevel,omitempty"`

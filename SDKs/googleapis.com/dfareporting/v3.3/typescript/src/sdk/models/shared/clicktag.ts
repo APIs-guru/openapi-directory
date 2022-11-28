@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CreativeClickThroughUrl } from "./creativeclickthroughurl";
+
 
 
 // ClickTag
@@ -7,12 +8,12 @@ import { CreativeClickThroughUrl } from "./creativeclickthroughurl";
  * Creative Click Tag.
 **/
 export class ClickTag extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clickThroughUrl" })
+  @SpeakeasyMetadata({ data: "json, name=clickThroughUrl" })
   clickThroughUrl?: CreativeClickThroughUrl;
 
-  @Metadata({ data: "json, name=eventName" })
+  @SpeakeasyMetadata({ data: "json, name=eventName" })
   eventName?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

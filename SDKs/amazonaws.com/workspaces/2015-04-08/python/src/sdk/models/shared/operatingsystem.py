@@ -1,11 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import operatingsystemtype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class OperatingSystem:
-    type: Optional[operatingsystemtype_enum.OperatingSystemTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
+    r"""OperatingSystem
+    The operating system that the image is running.
+    """
+    
+    type: Optional[OperatingSystemTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Type') }})
     

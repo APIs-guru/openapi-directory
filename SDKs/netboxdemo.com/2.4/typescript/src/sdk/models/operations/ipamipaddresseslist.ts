@@ -1,98 +1,99 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class IpamIpAddressesListQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=address" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=address" })
   address?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=device" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=device" })
   device?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=device_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=device_id" })
   deviceId?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=family" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=family" })
   family?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=id__in" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=id__in" })
   idIn?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=interface_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=interface_id" })
   interfaceId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=mask_length" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=mask_length" })
   maskLength?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=parent" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=parent" })
   parent?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=q" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=q" })
   q?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=role" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=role" })
   role?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=status" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=status" })
   status?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=tag" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tag" })
   tag?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=tenant" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tenant" })
   tenant?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=tenant_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tenant_id" })
   tenantId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=virtual_machine" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=virtual_machine" })
   virtualMachine?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=virtual_machine_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=virtual_machine_id" })
   virtualMachineId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=vrf" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=vrf" })
   vrf?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=vrf_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=vrf_id" })
   vrfId?: string;
 }
 
 
-export class IpamIpAddressesListRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: IpamIpAddressesListQueryParams;
-}
-
-
 export class IpamIpAddressesList200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count: number;
 
-  @Metadata({ data: "json, name=next" })
+  @SpeakeasyMetadata({ data: "json, name=next" })
   next?: string;
 
-  @Metadata({ data: "json, name=previous" })
+  @SpeakeasyMetadata({ data: "json, name=previous" })
   previous?: string;
 
-  @Metadata({ data: "json, name=results", elemType: shared.IpAddress })
+  @SpeakeasyMetadata({ data: "json, name=results", elemType: shared.IpAddress })
   results: shared.IpAddress[];
 }
 
 
+export class IpamIpAddressesListRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: IpamIpAddressesListQueryParams;
+}
+
+
 export class IpamIpAddressesListResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   ipamIpAddressesList200ApplicationJsonObject?: IpamIpAddressesList200ApplicationJson;
 }

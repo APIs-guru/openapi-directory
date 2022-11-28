@@ -23,22 +23,10 @@ type GetRepositoriesWorkspaceQueryParams struct {
 	Sort *string                           `queryParam:"style=form,explode=true,name=sort"`
 }
 
-type GetRepositoriesWorkspaceSecurityOption1 struct {
-	Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
-}
-
-type GetRepositoriesWorkspaceSecurityOption2 struct {
-	Basic shared.SchemeBasic `security:"scheme,type=http,subtype=basic"`
-}
-
-type GetRepositoriesWorkspaceSecurityOption3 struct {
-	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
-}
-
 type GetRepositoriesWorkspaceSecurity struct {
-	Option1 *GetRepositoriesWorkspaceSecurityOption1 `security:"option"`
-	Option2 *GetRepositoriesWorkspaceSecurityOption2 `security:"option"`
-	Option3 *GetRepositoriesWorkspaceSecurityOption3 `security:"option"`
+	Oauth2 *shared.SchemeOauth2 `security:"scheme,type=oauth2"`
+	Basic  *shared.SchemeBasic  `security:"scheme,type=http,subtype=basic"`
+	APIKey *shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type GetRepositoriesWorkspaceRequest struct {

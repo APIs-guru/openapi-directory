@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var SetRepositoryPolicyRequest = /** @class */ (function (_super) {
     __extends(SetRepositoryPolicyRequest, _super);
     function SetRepositoryPolicyRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=force" }),
+        SpeakeasyMetadata({ data: "json, name=force" }),
         __metadata("design:type", Boolean)
     ], SetRepositoryPolicyRequest.prototype, "force", void 0);
     __decorate([
-        Metadata({ data: "json, name=policyText" }),
+        SpeakeasyMetadata({ data: "json, name=policyText" }),
         __metadata("design:type", String)
     ], SetRepositoryPolicyRequest.prototype, "policyText", void 0);
     __decorate([
-        Metadata({ data: "json, name=registryId" }),
+        SpeakeasyMetadata({ data: "json, name=registryId" }),
         __metadata("design:type", String)
     ], SetRepositoryPolicyRequest.prototype, "registryId", void 0);
     __decorate([
-        Metadata({ data: "json, name=repositoryName" }),
+        SpeakeasyMetadata({ data: "json, name=repositoryName" }),
         __metadata("design:type", String)
     ], SetRepositoryPolicyRequest.prototype, "repositoryName", void 0);
     return SetRepositoryPolicyRequest;

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// SubStatementData
+// Information about an SQL statement.
 type SubStatementData struct {
 	CreatedAt       *time.Time                 `json:"CreatedAt,omitempty"`
 	Duration        *int64                     `json:"Duration,omitempty"`

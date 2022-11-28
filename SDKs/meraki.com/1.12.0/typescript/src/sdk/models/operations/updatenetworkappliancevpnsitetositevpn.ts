@@ -1,64 +1,65 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateNetworkApplianceVpnSiteToSiteVpnPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
 
 export class UpdateNetworkApplianceVpnSiteToSiteVpnRequestBodyHubs extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hubId" })
+  @SpeakeasyMetadata({ data: "json, name=hubId" })
   hubId: string;
 
-  @Metadata({ data: "json, name=useDefaultRoute" })
+  @SpeakeasyMetadata({ data: "json, name=useDefaultRoute" })
   useDefaultRoute?: boolean;
 }
 
 export enum UpdateNetworkApplianceVpnSiteToSiteVpnRequestBodyModeEnum {
-    None = "none"
-,    Spoke = "spoke"
-,    Hub = "hub"
+    None = "none",
+    Spoke = "spoke",
+    Hub = "hub"
 }
 
 
 export class UpdateNetworkApplianceVpnSiteToSiteVpnRequestBodySubnets extends SpeakeasyBase {
-  @Metadata({ data: "json, name=localSubnet" })
+  @SpeakeasyMetadata({ data: "json, name=localSubnet" })
   localSubnet: string;
 
-  @Metadata({ data: "json, name=useVpn" })
+  @SpeakeasyMetadata({ data: "json, name=useVpn" })
   useVpn?: boolean;
 }
 
 
 export class UpdateNetworkApplianceVpnSiteToSiteVpnRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hubs", elemType: operations.UpdateNetworkApplianceVpnSiteToSiteVpnRequestBodyHubs })
+  @SpeakeasyMetadata({ data: "json, name=hubs", elemType: UpdateNetworkApplianceVpnSiteToSiteVpnRequestBodyHubs })
   hubs?: UpdateNetworkApplianceVpnSiteToSiteVpnRequestBodyHubs[];
 
-  @Metadata({ data: "json, name=mode" })
+  @SpeakeasyMetadata({ data: "json, name=mode" })
   mode: UpdateNetworkApplianceVpnSiteToSiteVpnRequestBodyModeEnum;
 
-  @Metadata({ data: "json, name=subnets", elemType: operations.UpdateNetworkApplianceVpnSiteToSiteVpnRequestBodySubnets })
+  @SpeakeasyMetadata({ data: "json, name=subnets", elemType: UpdateNetworkApplianceVpnSiteToSiteVpnRequestBodySubnets })
   subnets?: UpdateNetworkApplianceVpnSiteToSiteVpnRequestBodySubnets[];
 }
 
 
 export class UpdateNetworkApplianceVpnSiteToSiteVpnRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateNetworkApplianceVpnSiteToSiteVpnPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdateNetworkApplianceVpnSiteToSiteVpnRequestBody;
 }
 
 
 export class UpdateNetworkApplianceVpnSiteToSiteVpnResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateNetworkApplianceVpnSiteToSiteVpn200ApplicationJsonObject?: Map<string, any>;
 }

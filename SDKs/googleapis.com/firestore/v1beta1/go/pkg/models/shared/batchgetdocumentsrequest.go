@@ -1,5 +1,7 @@
 package shared
 
+// BatchGetDocumentsRequest
+// The request for Firestore.BatchGetDocuments.
 type BatchGetDocumentsRequest struct {
 	Documents      []string            `json:"documents,omitempty"`
 	Mask           *DocumentMask       `json:"mask,omitempty"`

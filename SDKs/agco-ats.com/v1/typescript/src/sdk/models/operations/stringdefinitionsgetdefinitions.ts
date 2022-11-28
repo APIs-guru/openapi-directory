@@ -1,59 +1,60 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class StringDefinitionsGetDefinitionsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=descriptionText" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=descriptionText" })
   descriptionText?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=includeDeletedLanguages" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=includeDeletedLanguages" })
   includeDeletedLanguages?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=includeTranslations" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=includeTranslations" })
   includeTranslations?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=languageIds" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=languageIds" })
   languageIds?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=matchingTranslationsOnly" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=matchingTranslationsOnly" })
   matchingTranslationsOnly?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=modifiedAfterTimestamp" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=modifiedAfterTimestamp" })
   modifiedAfterTimestamp?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=stringIds" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=stringIds" })
   stringIds?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=stringText" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=stringText" })
   stringText?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=useFullText" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=useFullText" })
   useFullText?: boolean;
 }
 
 
 export class StringDefinitionsGetDefinitionsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: StringDefinitionsGetDefinitionsQueryParams;
 }
 
 
 export class StringDefinitionsGetDefinitionsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiIPagedResponseGlobalResourcesSharedModelsStringDefinition?: shared.ApiIPagedResponseGlobalResourcesSharedModelsStringDefinition;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   apiModelsApiError?: shared.ApiModelsApiError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

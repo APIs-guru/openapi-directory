@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TflApiPresentationEntitiesPassengerFlow extends SpeakeasyBase {
-  @Metadata({ data: "json, name=timeSlice" })
+  @SpeakeasyMetadata({ data: "json, name=timeSlice" })
   timeSlice?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: number;
 }

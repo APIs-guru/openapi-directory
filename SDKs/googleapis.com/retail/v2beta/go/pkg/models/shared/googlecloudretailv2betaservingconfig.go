@@ -16,6 +16,8 @@ const (
 	GoogleCloudRetailV2betaServingConfigSolutionTypesEnumSolutionTypeSearch         GoogleCloudRetailV2betaServingConfigSolutionTypesEnum = "SOLUTION_TYPE_SEARCH"
 )
 
+// GoogleCloudRetailV2betaServingConfig
+// Configures metadata that is used to generate serving time results (e.g. search results or recommendation predictions).
 type GoogleCloudRetailV2betaServingConfig struct {
 	BoostControlIds           []string                                                 `json:"boostControlIds,omitempty"`
 	DisplayName               *string                                                  `json:"displayName,omitempty"`

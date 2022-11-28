@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleIamV1AuditConfig } from "./googleiamv1auditconfig";
 import { GoogleIamV1Binding } from "./googleiamv1binding";
+
 
 
 // GoogleIamV1Policy
@@ -71,15 +71,15 @@ import { GoogleIamV1Binding } from "./googleiamv1binding";
  * [IAM documentation](https://cloud.google.com/iam/docs/).
 **/
 export class GoogleIamV1Policy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=auditConfigs", elemType: shared.GoogleIamV1AuditConfig })
+  @SpeakeasyMetadata({ data: "json, name=auditConfigs", elemType: GoogleIamV1AuditConfig })
   auditConfigs?: GoogleIamV1AuditConfig[];
 
-  @Metadata({ data: "json, name=bindings", elemType: shared.GoogleIamV1Binding })
+  @SpeakeasyMetadata({ data: "json, name=bindings", elemType: GoogleIamV1Binding })
   bindings?: GoogleIamV1Binding[];
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: number;
 }

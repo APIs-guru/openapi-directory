@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum QuotaPropertiesQuotaModeEnum {
-    Acquire = "ACQUIRE"
-,    AcquireBestEffort = "ACQUIRE_BEST_EFFORT"
-,    Check = "CHECK"
-,    Release = "RELEASE"
+    Acquire = "ACQUIRE",
+    AcquireBestEffort = "ACQUIRE_BEST_EFFORT",
+    Check = "CHECK",
+    Release = "RELEASE"
 }
 
 
@@ -13,6 +14,6 @@ export enum QuotaPropertiesQuotaModeEnum {
  * Represents the properties needed for quota operations.
 **/
 export class QuotaProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=quotaMode" })
+  @SpeakeasyMetadata({ data: "json, name=quotaMode" })
   quotaMode?: QuotaPropertiesQuotaModeEnum;
 }

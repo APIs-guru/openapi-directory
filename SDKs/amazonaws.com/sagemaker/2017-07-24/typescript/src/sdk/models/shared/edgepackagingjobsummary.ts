@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EdgePackagingJobStatusEnum } from "./edgepackagingjobstatusenum";
+
 
 
 // EdgePackagingJobSummary
@@ -7,27 +8,27 @@ import { EdgePackagingJobStatusEnum } from "./edgepackagingjobstatusenum";
  * Summary of edge packaging job.
 **/
 export class EdgePackagingJobSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CompilationJobName" })
+  @SpeakeasyMetadata({ data: "json, name=CompilationJobName" })
   compilationJobName?: string;
 
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=EdgePackagingJobArn" })
+  @SpeakeasyMetadata({ data: "json, name=EdgePackagingJobArn" })
   edgePackagingJobArn: string;
 
-  @Metadata({ data: "json, name=EdgePackagingJobName" })
+  @SpeakeasyMetadata({ data: "json, name=EdgePackagingJobName" })
   edgePackagingJobName: string;
 
-  @Metadata({ data: "json, name=EdgePackagingJobStatus" })
+  @SpeakeasyMetadata({ data: "json, name=EdgePackagingJobStatus" })
   edgePackagingJobStatus: EdgePackagingJobStatusEnum;
 
-  @Metadata({ data: "json, name=LastModifiedTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedTime" })
   lastModifiedTime?: Date;
 
-  @Metadata({ data: "json, name=ModelName" })
+  @SpeakeasyMetadata({ data: "json, name=ModelName" })
   modelName?: string;
 
-  @Metadata({ data: "json, name=ModelVersion" })
+  @SpeakeasyMetadata({ data: "json, name=ModelVersion" })
   modelVersion?: string;
 }

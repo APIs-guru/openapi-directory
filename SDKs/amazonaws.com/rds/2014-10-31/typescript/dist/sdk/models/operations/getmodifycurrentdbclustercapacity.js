@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetModifyCurrentDbClusterCapacityActionEnum;
 (function (GetModifyCurrentDbClusterCapacityActionEnum) {
     GetModifyCurrentDbClusterCapacityActionEnum["ModifyCurrentDbClusterCapacity"] = "ModifyCurrentDBClusterCapacity";
@@ -37,27 +37,27 @@ var GetModifyCurrentDbClusterCapacityQueryParams = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" }),
         __metadata("design:type", String)
     ], GetModifyCurrentDbClusterCapacityQueryParams.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Capacity" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Capacity" }),
         __metadata("design:type", Number)
     ], GetModifyCurrentDbClusterCapacityQueryParams.prototype, "capacity", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=DBClusterIdentifier" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DBClusterIdentifier" }),
         __metadata("design:type", String)
     ], GetModifyCurrentDbClusterCapacityQueryParams.prototype, "dbClusterIdentifier", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=SecondsBeforeTimeout" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=SecondsBeforeTimeout" }),
         __metadata("design:type", Number)
     ], GetModifyCurrentDbClusterCapacityQueryParams.prototype, "secondsBeforeTimeout", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=TimeoutAction" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=TimeoutAction" }),
         __metadata("design:type", String)
     ], GetModifyCurrentDbClusterCapacityQueryParams.prototype, "timeoutAction", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" }),
         __metadata("design:type", String)
     ], GetModifyCurrentDbClusterCapacityQueryParams.prototype, "version", void 0);
     return GetModifyCurrentDbClusterCapacityQueryParams;
@@ -69,31 +69,31 @@ var GetModifyCurrentDbClusterCapacityHeaders = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], GetModifyCurrentDbClusterCapacityHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], GetModifyCurrentDbClusterCapacityHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], GetModifyCurrentDbClusterCapacityHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], GetModifyCurrentDbClusterCapacityHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], GetModifyCurrentDbClusterCapacityHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], GetModifyCurrentDbClusterCapacityHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], GetModifyCurrentDbClusterCapacityHeaders.prototype, "xAmzSignedHeaders", void 0);
     return GetModifyCurrentDbClusterCapacityHeaders;
@@ -105,11 +105,11 @@ var GetModifyCurrentDbClusterCapacityRequest = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetModifyCurrentDbClusterCapacityQueryParams)
     ], GetModifyCurrentDbClusterCapacityRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetModifyCurrentDbClusterCapacityHeaders)
     ], GetModifyCurrentDbClusterCapacityRequest.prototype, "headers", void 0);
     return GetModifyCurrentDbClusterCapacityRequest;
@@ -121,15 +121,15 @@ var GetModifyCurrentDbClusterCapacityResponse = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetModifyCurrentDbClusterCapacityResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetModifyCurrentDbClusterCapacityResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetModifyCurrentDbClusterCapacityResponse.prototype, "statusCode", void 0);
     return GetModifyCurrentDbClusterCapacityResponse;

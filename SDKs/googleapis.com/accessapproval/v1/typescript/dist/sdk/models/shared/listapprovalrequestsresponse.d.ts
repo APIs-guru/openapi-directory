@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ApprovalRequest } from "./approvalrequest";
 /**
  * Response to listing of ApprovalRequest objects.

@@ -5,28 +5,28 @@ from sdk.models import shared
 
 @dataclass
 class AccountPostGuestPathParams:
-    guest_id: int = field(default=None, metadata={'path_param': { 'field_name': 'guestId', 'style': 'simple', 'explode': False }})
+    guest_id: int = field(metadata={'path_param': { 'field_name': 'guestId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class AccountPostGuestRequests:
+    application_xml: bytes = field(metadata={'request': { 'media_type': 'application/xml' }})
+    text_xml: bytes = field(metadata={'request': { 'media_type': 'text/xml' }})
     api_core_dto_accounting_guest: Optional[shared.APICoreDtoAccountingGuest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     api_core_dto_accounting_guest1: Optional[shared.APICoreDtoAccountingGuest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     api_core_dto_accounting_guest2: Optional[shared.APICoreDtoAccountingGuest] = field(default=None, metadata={'request': { 'media_type': 'text/json' }})
-    application_xml: bytes = field(default=None, metadata={'request': { 'media_type': 'application/xml' }})
-    text_xml: bytes = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class AccountPostGuestRequest:
-    path_params: AccountPostGuestPathParams = field(default=None)
-    request: AccountPostGuestRequests = field(default=None)
+    path_params: AccountPostGuestPathParams = field()
+    request: AccountPostGuestRequests = field()
     
 
 @dataclass
 class AccountPostGuestResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_core_dto_accounting_guest: Optional[shared.APICoreDtoAccountingGuest] = field(default=None)
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    body: Optional[bytes] = field(default=None)
     

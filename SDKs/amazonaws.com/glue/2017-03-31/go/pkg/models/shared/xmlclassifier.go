@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// XMLClassifier
+// A classifier for <code>XML</code> content.
 type XMLClassifier struct {
 	Classification string     `json:"Classification"`
 	CreationTime   *time.Time `json:"CreationTime,omitempty"`

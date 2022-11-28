@@ -30,7 +30,7 @@ type RealtimebiddingBuyersCreativesCreateSecurity struct {
 type RealtimebiddingBuyersCreativesCreateRequest struct {
 	PathParams  RealtimebiddingBuyersCreativesCreatePathParams
 	QueryParams RealtimebiddingBuyersCreativesCreateQueryParams
-	Request     *shared.Creative `request:"mediaType=application/json"`
+	Request     *shared.CreativeInput `request:"mediaType=application/json"`
 	Security    RealtimebiddingBuyersCreativesCreateSecurity
 }
 

@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetOutpostInstanceTypesPathParams:
-    outpost_id: str = field(default=None, metadata={'path_param': { 'field_name': 'OutpostId', 'style': 'simple', 'explode': False }})
+    outpost_id: str = field(metadata={'path_param': { 'field_name': 'OutpostId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,18 +30,18 @@ class GetOutpostInstanceTypesHeaders:
 
 @dataclass
 class GetOutpostInstanceTypesRequest:
-    path_params: GetOutpostInstanceTypesPathParams = field(default=None)
-    query_params: GetOutpostInstanceTypesQueryParams = field(default=None)
-    headers: GetOutpostInstanceTypesHeaders = field(default=None)
+    headers: GetOutpostInstanceTypesHeaders = field()
+    path_params: GetOutpostInstanceTypesPathParams = field()
+    query_params: GetOutpostInstanceTypesQueryParams = field()
     
 
 @dataclass
 class GetOutpostInstanceTypesResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_outpost_instance_types_output: Optional[shared.GetOutpostInstanceTypesOutput] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

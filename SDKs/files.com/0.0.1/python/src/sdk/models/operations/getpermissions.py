@@ -22,12 +22,12 @@ class GetPermissionsQueryParams:
 
 @dataclass
 class GetPermissionsRequest:
-    query_params: GetPermissionsQueryParams = field(default=None)
+    query_params: GetPermissionsQueryParams = field()
     
 
 @dataclass
 class GetPermissionsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     permission_entities: Optional[List[shared.PermissionEntity]] = field(default=None)
-    status_code: int = field(default=None)
     

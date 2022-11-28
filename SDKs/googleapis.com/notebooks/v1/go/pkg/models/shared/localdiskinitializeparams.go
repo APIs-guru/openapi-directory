@@ -10,6 +10,8 @@ const (
 	LocalDiskInitializeParamsDiskTypeEnumPdExtreme           LocalDiskInitializeParamsDiskTypeEnum = "PD_EXTREME"
 )
 
+// LocalDiskInitializeParams
+// Input only. Specifies the parameters for a new disk that will be created alongside the new instance. Use initialization parameters to create boot disks or local SSDs attached to the new runtime. This property is mutually exclusive with the source property; you can only define one or the other, but not both.
 type LocalDiskInitializeParams struct {
 	Description *string                                `json:"description,omitempty"`
 	DiskName    *string                                `json:"diskName,omitempty"`

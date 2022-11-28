@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CodeContent } from "./codecontent";
 import { CodeContentTypeEnum } from "./codecontenttypeenum";
+
 
 
 // ApplicationCodeConfiguration
@@ -8,9 +9,9 @@ import { CodeContentTypeEnum } from "./codecontenttypeenum";
  * Describes code configuration for an application.
 **/
 export class ApplicationCodeConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CodeContent" })
+  @SpeakeasyMetadata({ data: "json, name=CodeContent" })
   codeContent?: CodeContent;
 
-  @Metadata({ data: "json, name=CodeContentType" })
+  @SpeakeasyMetadata({ data: "json, name=CodeContentType" })
   codeContentType: CodeContentTypeEnum;
 }

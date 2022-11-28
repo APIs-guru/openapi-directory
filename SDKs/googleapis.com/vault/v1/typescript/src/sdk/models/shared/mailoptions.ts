@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MailOptions
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Additional options for Gmail search
 **/
 export class MailOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=excludeDrafts" })
+  @SpeakeasyMetadata({ data: "json, name=excludeDrafts" })
   excludeDrafts?: boolean;
 }

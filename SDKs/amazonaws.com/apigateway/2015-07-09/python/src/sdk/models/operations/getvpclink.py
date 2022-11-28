@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetVpcLinkPathParams:
-    vpclink_id: str = field(default=None, metadata={'path_param': { 'field_name': 'vpclink_id', 'style': 'simple', 'explode': False }})
+    vpclink_id: str = field(metadata={'path_param': { 'field_name': 'vpclink_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,16 +24,16 @@ class GetVpcLinkHeaders:
 
 @dataclass
 class GetVpcLinkRequest:
-    path_params: GetVpcLinkPathParams = field(default=None)
-    headers: GetVpcLinkHeaders = field(default=None)
+    headers: GetVpcLinkHeaders = field()
+    path_params: GetVpcLinkPathParams = field()
     
 
 @dataclass
 class GetVpcLinkResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     vpc_link: Optional[shared.VpcLink] = field(default=None)

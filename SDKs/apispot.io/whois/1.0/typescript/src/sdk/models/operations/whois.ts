@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class WhoisPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=domain" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=domain" })
   domain: string;
 }
 
 export enum WhoisFormatEnum {
-    Raw = "raw"
-,    Formatted = "formatted"
-,    Json = "json"
+    Raw = "raw",
+    Formatted = "formatted",
+    Json = "json"
 }
 
 
 export class WhoisQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=format" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=format" })
   format?: WhoisFormatEnum;
 }
 
 
 export class WhoisRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: WhoisPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: WhoisQueryParams;
 }
 
 
 export class WhoisResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

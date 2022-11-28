@@ -1,8 +1,11 @@
-import warnings
+
+__doc__ = """ SDK Documentation: https://docs.aws.amazon.com/pinpoint/ - Amazon Web Services documentation"""
 import requests
-from typing import Any,List,Optional
-from sdk.models import operations, shared
+from typing import Any,Optional
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -14,37 +17,63 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    r"""SDK Documentation: https://docs.aws.amazon.com/pinpoint/ - Amazon Web Services documentation"""
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
-    
-    def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
+            self._server_url = server_url
 
+        
+    
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        
+    
+
+    def config_security(self, security: shared.Security):
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        
+    
+    
     
     def create_app(self, request: operations.CreateAppRequest) -> operations.CreateAppResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" <p>Creates an application.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/apps"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -87,22 +116,22 @@ class SDK:
 
     
     def create_campaign(self, request: operations.CreateCampaignRequest) -> operations.CreateCampaignResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a new campaign for an application or updates the settings of an existing campaign for an application.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/campaigns", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -145,22 +174,22 @@ class SDK:
 
     
     def create_email_template(self, request: operations.CreateEmailTemplateRequest) -> operations.CreateEmailTemplateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a message template for messages that are sent through the email channel.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/templates/{template-name}/email", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -195,22 +224,22 @@ class SDK:
 
     
     def create_export_job(self, request: operations.CreateExportJobRequest) -> operations.CreateExportJobResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates an export job for an application.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/jobs/export", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -253,22 +282,22 @@ class SDK:
 
     
     def create_import_job(self, request: operations.CreateImportJobRequest) -> operations.CreateImportJobResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates an import job for an application.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/jobs/import", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -311,22 +340,22 @@ class SDK:
 
     
     def create_in_app_template(self, request: operations.CreateInAppTemplateRequest) -> operations.CreateInAppTemplateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a new message template for messages using the in-app message channel.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/templates/{template-name}/inapp", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -361,22 +390,22 @@ class SDK:
 
     
     def create_journey(self, request: operations.CreateJourneyRequest) -> operations.CreateJourneyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a journey for an application.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/journeys", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -419,22 +448,22 @@ class SDK:
 
     
     def create_push_template(self, request: operations.CreatePushTemplateRequest) -> operations.CreatePushTemplateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a message template for messages that are sent through a push notification channel.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/templates/{template-name}/push", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -469,22 +498,22 @@ class SDK:
 
     
     def create_recommender_configuration(self, request: operations.CreateRecommenderConfigurationRequest) -> operations.CreateRecommenderConfigurationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates an Amazon Pinpoint configuration for a recommender model.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/recommenders"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -527,22 +556,22 @@ class SDK:
 
     
     def create_segment(self, request: operations.CreateSegmentRequest) -> operations.CreateSegmentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a new segment for an application or updates the configuration, dimension, and other settings for an existing segment that's associated with an application.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/segments", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -585,22 +614,22 @@ class SDK:
 
     
     def create_sms_template(self, request: operations.CreateSmsTemplateRequest) -> operations.CreateSmsTemplateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a message template for messages that are sent through the SMS channel.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/templates/{template-name}/sms", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -635,22 +664,22 @@ class SDK:
 
     
     def create_voice_template(self, request: operations.CreateVoiceTemplateRequest) -> operations.CreateVoiceTemplateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a message template for messages that are sent through the voice channel.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/templates/{template-name}/voice", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -685,15 +714,17 @@ class SDK:
 
     
     def delete_adm_channel(self, request: operations.DeleteAdmChannelRequest) -> operations.DeleteAdmChannelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Disables the ADM channel for an application and deletes any existing settings for the channel.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/channels/adm", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -736,15 +767,17 @@ class SDK:
 
     
     def delete_apns_channel(self, request: operations.DeleteApnsChannelRequest) -> operations.DeleteApnsChannelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Disables the APNs channel for an application and deletes any existing settings for the channel.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/channels/apns", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -787,15 +820,17 @@ class SDK:
 
     
     def delete_apns_sandbox_channel(self, request: operations.DeleteApnsSandboxChannelRequest) -> operations.DeleteApnsSandboxChannelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Disables the APNs sandbox channel for an application and deletes any existing settings for the channel.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/channels/apns_sandbox", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -838,15 +873,17 @@ class SDK:
 
     
     def delete_apns_voip_channel(self, request: operations.DeleteApnsVoipChannelRequest) -> operations.DeleteApnsVoipChannelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Disables the APNs VoIP channel for an application and deletes any existing settings for the channel.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/channels/apns_voip", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -889,15 +926,17 @@ class SDK:
 
     
     def delete_apns_voip_sandbox_channel(self, request: operations.DeleteApnsVoipSandboxChannelRequest) -> operations.DeleteApnsVoipSandboxChannelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Disables the APNs VoIP sandbox channel for an application and deletes any existing settings for the channel.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/channels/apns_voip_sandbox", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -940,15 +979,17 @@ class SDK:
 
     
     def delete_app(self, request: operations.DeleteAppRequest) -> operations.DeleteAppResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes an application.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -991,15 +1032,17 @@ class SDK:
 
     
     def delete_baidu_channel(self, request: operations.DeleteBaiduChannelRequest) -> operations.DeleteBaiduChannelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Disables the Baidu channel for an application and deletes any existing settings for the channel.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/channels/baidu", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1042,15 +1085,17 @@ class SDK:
 
     
     def delete_campaign(self, request: operations.DeleteCampaignRequest) -> operations.DeleteCampaignResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a campaign from an application.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/campaigns/{campaign-id}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1093,15 +1138,17 @@ class SDK:
 
     
     def delete_email_channel(self, request: operations.DeleteEmailChannelRequest) -> operations.DeleteEmailChannelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Disables the email channel for an application and deletes any existing settings for the channel.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/channels/email", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1144,17 +1191,18 @@ class SDK:
 
     
     def delete_email_template(self, request: operations.DeleteEmailTemplateRequest) -> operations.DeleteEmailTemplateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a message template for messages that were sent through the email channel.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/templates/{template-name}/email", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1197,15 +1245,17 @@ class SDK:
 
     
     def delete_endpoint(self, request: operations.DeleteEndpointRequest) -> operations.DeleteEndpointResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes an endpoint from an application.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/endpoints/{endpoint-id}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1248,15 +1298,17 @@ class SDK:
 
     
     def delete_event_stream(self, request: operations.DeleteEventStreamRequest) -> operations.DeleteEventStreamResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes the event stream for an application.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/eventstream", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1299,15 +1351,17 @@ class SDK:
 
     
     def delete_gcm_channel(self, request: operations.DeleteGcmChannelRequest) -> operations.DeleteGcmChannelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Disables the GCM channel for an application and deletes any existing settings for the channel.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/channels/gcm", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1350,17 +1404,18 @@ class SDK:
 
     
     def delete_in_app_template(self, request: operations.DeleteInAppTemplateRequest) -> operations.DeleteInAppTemplateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a message template for messages sent using the in-app message channel.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/templates/{template-name}/inapp", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1403,15 +1458,17 @@ class SDK:
 
     
     def delete_journey(self, request: operations.DeleteJourneyRequest) -> operations.DeleteJourneyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a journey from an application.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/journeys/{journey-id}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1454,17 +1511,18 @@ class SDK:
 
     
     def delete_push_template(self, request: operations.DeletePushTemplateRequest) -> operations.DeletePushTemplateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a message template for messages that were sent through a push notification channel.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/templates/{template-name}/push", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1507,15 +1565,17 @@ class SDK:
 
     
     def delete_recommender_configuration(self, request: operations.DeleteRecommenderConfigurationRequest) -> operations.DeleteRecommenderConfigurationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes an Amazon Pinpoint configuration for a recommender model.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/recommenders/{recommender-id}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1558,15 +1618,17 @@ class SDK:
 
     
     def delete_segment(self, request: operations.DeleteSegmentRequest) -> operations.DeleteSegmentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a segment from an application.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/segments/{segment-id}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1609,15 +1671,17 @@ class SDK:
 
     
     def delete_sms_channel(self, request: operations.DeleteSmsChannelRequest) -> operations.DeleteSmsChannelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Disables the SMS channel for an application and deletes any existing settings for the channel.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/channels/sms", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1660,17 +1724,18 @@ class SDK:
 
     
     def delete_sms_template(self, request: operations.DeleteSmsTemplateRequest) -> operations.DeleteSmsTemplateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a message template for messages that were sent through the SMS channel.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/templates/{template-name}/sms", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1713,15 +1778,17 @@ class SDK:
 
     
     def delete_user_endpoints(self, request: operations.DeleteUserEndpointsRequest) -> operations.DeleteUserEndpointsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes all the endpoints that are associated with a specific user ID.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/users/{user-id}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1764,15 +1831,17 @@ class SDK:
 
     
     def delete_voice_channel(self, request: operations.DeleteVoiceChannelRequest) -> operations.DeleteVoiceChannelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Disables the voice channel for an application and deletes any existing settings for the channel.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/channels/voice", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1815,17 +1884,18 @@ class SDK:
 
     
     def delete_voice_template(self, request: operations.DeleteVoiceTemplateRequest) -> operations.DeleteVoiceTemplateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a message template for messages that were sent through the voice channel.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/templates/{template-name}/voice", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1868,15 +1938,17 @@ class SDK:
 
     
     def get_adm_channel(self, request: operations.GetAdmChannelRequest) -> operations.GetAdmChannelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about the status and settings of the ADM channel for an application.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/channels/adm", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1919,15 +1991,17 @@ class SDK:
 
     
     def get_apns_channel(self, request: operations.GetApnsChannelRequest) -> operations.GetApnsChannelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about the status and settings of the APNs channel for an application.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/channels/apns", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1970,15 +2044,17 @@ class SDK:
 
     
     def get_apns_sandbox_channel(self, request: operations.GetApnsSandboxChannelRequest) -> operations.GetApnsSandboxChannelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about the status and settings of the APNs sandbox channel for an application.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/channels/apns_sandbox", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2021,15 +2097,17 @@ class SDK:
 
     
     def get_apns_voip_channel(self, request: operations.GetApnsVoipChannelRequest) -> operations.GetApnsVoipChannelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about the status and settings of the APNs VoIP channel for an application.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/channels/apns_voip", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2072,15 +2150,17 @@ class SDK:
 
     
     def get_apns_voip_sandbox_channel(self, request: operations.GetApnsVoipSandboxChannelRequest) -> operations.GetApnsVoipSandboxChannelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about the status and settings of the APNs VoIP sandbox channel for an application.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/channels/apns_voip_sandbox", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2123,15 +2203,17 @@ class SDK:
 
     
     def get_app(self, request: operations.GetAppRequest) -> operations.GetAppResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about an application.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2174,17 +2256,18 @@ class SDK:
 
     
     def get_application_date_range_kpi(self, request: operations.GetApplicationDateRangeKpiRequest) -> operations.GetApplicationDateRangeKpiResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves (queries) pre-aggregated data for a standard metric that applies to an application.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/kpis/daterange/{kpi-name}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2227,15 +2310,17 @@ class SDK:
 
     
     def get_application_settings(self, request: operations.GetApplicationSettingsRequest) -> operations.GetApplicationSettingsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about the settings for an application.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/settings", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2278,17 +2363,18 @@ class SDK:
 
     
     def get_apps(self, request: operations.GetAppsRequest) -> operations.GetAppsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about all the applications that are associated with your Amazon Pinpoint account.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/apps"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2331,15 +2417,17 @@ class SDK:
 
     
     def get_baidu_channel(self, request: operations.GetBaiduChannelRequest) -> operations.GetBaiduChannelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about the status and settings of the Baidu channel for an application.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/channels/baidu", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2382,15 +2470,17 @@ class SDK:
 
     
     def get_campaign(self, request: operations.GetCampaignRequest) -> operations.GetCampaignResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about the status, configuration, and other settings for a campaign.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/campaigns/{campaign-id}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2433,17 +2523,18 @@ class SDK:
 
     
     def get_campaign_activities(self, request: operations.GetCampaignActivitiesRequest) -> operations.GetCampaignActivitiesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about all the activities for a campaign.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/campaigns/{campaign-id}/activities", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2486,17 +2577,18 @@ class SDK:
 
     
     def get_campaign_date_range_kpi(self, request: operations.GetCampaignDateRangeKpiRequest) -> operations.GetCampaignDateRangeKpiResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves (queries) pre-aggregated data for a standard metric that applies to a campaign.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/campaigns/{campaign-id}/kpis/daterange/{kpi-name}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2539,15 +2631,17 @@ class SDK:
 
     
     def get_campaign_version(self, request: operations.GetCampaignVersionRequest) -> operations.GetCampaignVersionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about the status, configuration, and other settings for a specific version of a campaign.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/campaigns/{campaign-id}/versions/{version}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2590,17 +2684,18 @@ class SDK:
 
     
     def get_campaign_versions(self, request: operations.GetCampaignVersionsRequest) -> operations.GetCampaignVersionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about the status, configuration, and other settings for all versions of a campaign.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/campaigns/{campaign-id}/versions", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2643,17 +2738,18 @@ class SDK:
 
     
     def get_campaigns(self, request: operations.GetCampaignsRequest) -> operations.GetCampaignsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about the status, configuration, and other settings for all the campaigns that are associated with an application.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/campaigns", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2696,15 +2792,17 @@ class SDK:
 
     
     def get_channels(self, request: operations.GetChannelsRequest) -> operations.GetChannelsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about the history and status of each channel for an application.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/channels", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2747,15 +2845,17 @@ class SDK:
 
     
     def get_email_channel(self, request: operations.GetEmailChannelRequest) -> operations.GetEmailChannelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about the status and settings of the email channel for an application.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/channels/email", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2798,17 +2898,18 @@ class SDK:
 
     
     def get_email_template(self, request: operations.GetEmailTemplateRequest) -> operations.GetEmailTemplateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves the content and settings of a message template for messages that are sent through the email channel.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/templates/{template-name}/email", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2851,15 +2952,17 @@ class SDK:
 
     
     def get_endpoint(self, request: operations.GetEndpointRequest) -> operations.GetEndpointResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about the settings and attributes of a specific endpoint for an application.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/endpoints/{endpoint-id}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2902,15 +3005,17 @@ class SDK:
 
     
     def get_event_stream(self, request: operations.GetEventStreamRequest) -> operations.GetEventStreamResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about the event stream settings for an application.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/eventstream", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2953,15 +3058,17 @@ class SDK:
 
     
     def get_export_job(self, request: operations.GetExportJobRequest) -> operations.GetExportJobResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about the status and settings of a specific export job for an application.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/jobs/export/{job-id}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3004,17 +3111,18 @@ class SDK:
 
     
     def get_export_jobs(self, request: operations.GetExportJobsRequest) -> operations.GetExportJobsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about the status and settings of all the export jobs for an application.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/jobs/export", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3057,15 +3165,17 @@ class SDK:
 
     
     def get_gcm_channel(self, request: operations.GetGcmChannelRequest) -> operations.GetGcmChannelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about the status and settings of the GCM channel for an application.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/channels/gcm", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3108,15 +3218,17 @@ class SDK:
 
     
     def get_import_job(self, request: operations.GetImportJobRequest) -> operations.GetImportJobResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about the status and settings of a specific import job for an application.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/jobs/import/{job-id}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3159,17 +3271,18 @@ class SDK:
 
     
     def get_import_jobs(self, request: operations.GetImportJobsRequest) -> operations.GetImportJobsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about the status and settings of all the import jobs for an application.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/jobs/import", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3212,15 +3325,17 @@ class SDK:
 
     
     def get_in_app_messages(self, request: operations.GetInAppMessagesRequest) -> operations.GetInAppMessagesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves the in-app messages targeted for the provided endpoint ID.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/endpoints/{endpoint-id}/inappmessages", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3263,17 +3378,18 @@ class SDK:
 
     
     def get_in_app_template(self, request: operations.GetInAppTemplateRequest) -> operations.GetInAppTemplateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves the content and settings of a message template for messages sent through the in-app channel.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/templates/{template-name}/inapp", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3316,15 +3432,17 @@ class SDK:
 
     
     def get_journey(self, request: operations.GetJourneyRequest) -> operations.GetJourneyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about the status, configuration, and other settings for a journey.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/journeys/{journey-id}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3367,17 +3485,18 @@ class SDK:
 
     
     def get_journey_date_range_kpi(self, request: operations.GetJourneyDateRangeKpiRequest) -> operations.GetJourneyDateRangeKpiResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves (queries) pre-aggregated data for a standard engagement metric that applies to a journey.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/journeys/{journey-id}/kpis/daterange/{kpi-name}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3420,17 +3539,18 @@ class SDK:
 
     
     def get_journey_execution_activity_metrics(self, request: operations.GetJourneyExecutionActivityMetricsRequest) -> operations.GetJourneyExecutionActivityMetricsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves (queries) pre-aggregated data for a standard execution metric that applies to a journey activity.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/journeys/{journey-id}/activities/{journey-activity-id}/execution-metrics", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3473,17 +3593,18 @@ class SDK:
 
     
     def get_journey_execution_metrics(self, request: operations.GetJourneyExecutionMetricsRequest) -> operations.GetJourneyExecutionMetricsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves (queries) pre-aggregated data for a standard execution metric that applies to a journey.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/journeys/{journey-id}/execution-metrics", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3526,17 +3647,18 @@ class SDK:
 
     
     def get_push_template(self, request: operations.GetPushTemplateRequest) -> operations.GetPushTemplateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves the content and settings of a message template for messages that are sent through a push notification channel.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/templates/{template-name}/push", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3579,15 +3701,17 @@ class SDK:
 
     
     def get_recommender_configuration(self, request: operations.GetRecommenderConfigurationRequest) -> operations.GetRecommenderConfigurationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about an Amazon Pinpoint configuration for a recommender model.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/recommenders/{recommender-id}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3630,17 +3754,18 @@ class SDK:
 
     
     def get_recommender_configurations(self, request: operations.GetRecommenderConfigurationsRequest) -> operations.GetRecommenderConfigurationsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about all the recommender model configurations that are associated with your Amazon Pinpoint account.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/recommenders"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3683,15 +3808,17 @@ class SDK:
 
     
     def get_segment(self, request: operations.GetSegmentRequest) -> operations.GetSegmentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about the configuration, dimension, and other settings for a specific segment that's associated with an application.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/segments/{segment-id}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3734,17 +3861,18 @@ class SDK:
 
     
     def get_segment_export_jobs(self, request: operations.GetSegmentExportJobsRequest) -> operations.GetSegmentExportJobsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about the status and settings of the export jobs for a segment.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/segments/{segment-id}/jobs/export", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3787,17 +3915,18 @@ class SDK:
 
     
     def get_segment_import_jobs(self, request: operations.GetSegmentImportJobsRequest) -> operations.GetSegmentImportJobsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about the status and settings of the import jobs for a segment.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/segments/{segment-id}/jobs/import", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3840,15 +3969,17 @@ class SDK:
 
     
     def get_segment_version(self, request: operations.GetSegmentVersionRequest) -> operations.GetSegmentVersionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about the configuration, dimension, and other settings for a specific version of a segment that's associated with an application.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/segments/{segment-id}/versions/{version}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3891,17 +4022,18 @@ class SDK:
 
     
     def get_segment_versions(self, request: operations.GetSegmentVersionsRequest) -> operations.GetSegmentVersionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about the configuration, dimension, and other settings for all the versions of a specific segment that's associated with an application.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/segments/{segment-id}/versions", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3944,17 +4076,18 @@ class SDK:
 
     
     def get_segments(self, request: operations.GetSegmentsRequest) -> operations.GetSegmentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about the configuration, dimension, and other settings for all the segments that are associated with an application.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/segments", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3997,15 +4130,17 @@ class SDK:
 
     
     def get_sms_channel(self, request: operations.GetSmsChannelRequest) -> operations.GetSmsChannelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about the status and settings of the SMS channel for an application.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/channels/sms", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4048,17 +4183,18 @@ class SDK:
 
     
     def get_sms_template(self, request: operations.GetSmsTemplateRequest) -> operations.GetSmsTemplateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves the content and settings of a message template for messages that are sent through the SMS channel.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/templates/{template-name}/sms", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4101,15 +4237,17 @@ class SDK:
 
     
     def get_user_endpoints(self, request: operations.GetUserEndpointsRequest) -> operations.GetUserEndpointsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about all the endpoints that are associated with a specific user ID.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/users/{user-id}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4152,15 +4290,17 @@ class SDK:
 
     
     def get_voice_channel(self, request: operations.GetVoiceChannelRequest) -> operations.GetVoiceChannelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about the status and settings of the voice channel for an application.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/channels/voice", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4203,17 +4343,18 @@ class SDK:
 
     
     def get_voice_template(self, request: operations.GetVoiceTemplateRequest) -> operations.GetVoiceTemplateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves the content and settings of a message template for messages that are sent through the voice channel.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/templates/{template-name}/voice", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4256,17 +4397,18 @@ class SDK:
 
     
     def list_journeys(self, request: operations.ListJourneysRequest) -> operations.ListJourneysResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about the status, configuration, and other settings for all the journeys that are associated with an application.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/journeys", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4309,15 +4451,17 @@ class SDK:
 
     
     def list_tags_for_resource(self, request: operations.ListTagsForResourceRequest) -> operations.ListTagsForResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves all the tags (keys and values) that are associated with an application, campaign, message template, or segment.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/tags/{resource-arn}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4332,17 +4476,18 @@ class SDK:
 
     
     def list_template_versions(self, request: operations.ListTemplateVersionsRequest) -> operations.ListTemplateVersionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about all the versions of a specific message template.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/templates/{template-name}/{template-type}/versions", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4385,17 +4530,18 @@ class SDK:
 
     
     def list_templates(self, request: operations.ListTemplatesRequest) -> operations.ListTemplatesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about all the message templates that are associated with your Amazon Pinpoint account.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/templates"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4430,22 +4576,22 @@ class SDK:
 
     
     def phone_number_validate(self, request: operations.PhoneNumberValidateRequest) -> operations.PhoneNumberValidateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about a phone number.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/phone/number/validate"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4488,22 +4634,22 @@ class SDK:
 
     
     def put_event_stream(self, request: operations.PutEventStreamRequest) -> operations.PutEventStreamResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a new event stream for an application or updates the settings of an existing event stream for an application.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/eventstream", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4546,22 +4692,22 @@ class SDK:
 
     
     def put_events(self, request: operations.PutEventsRequest) -> operations.PutEventsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a new event to record for endpoints, or creates or updates endpoint data that existing events are associated with.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/events", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4604,22 +4750,22 @@ class SDK:
 
     
     def remove_attributes(self, request: operations.RemoveAttributesRequest) -> operations.RemoveAttributesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Removes one or more attributes, of the same attribute type, from all the endpoints that are associated with an application.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/attributes/{attribute-type}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4662,22 +4808,22 @@ class SDK:
 
     
     def send_messages(self, request: operations.SendMessagesRequest) -> operations.SendMessagesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates and sends a direct message.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/messages", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4720,22 +4866,22 @@ class SDK:
 
     
     def send_users_messages(self, request: operations.SendUsersMessagesRequest) -> operations.SendUsersMessagesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates and sends a message to a list of users.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/users-messages", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4778,22 +4924,22 @@ class SDK:
 
     
     def tag_resource(self, request: operations.TagResourceRequest) -> operations.TagResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Adds one or more tags (keys and values) to an application, campaign, message template, or segment.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/tags/{resource-arn}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4806,17 +4952,18 @@ class SDK:
 
     
     def untag_resource(self, request: operations.UntagResourceRequest) -> operations.UntagResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Removes one or more tags (keys and values) from an application, campaign, message template, or segment.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/tags/{resource-arn}#tagKeys", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4829,22 +4976,22 @@ class SDK:
 
     
     def update_adm_channel(self, request: operations.UpdateAdmChannelRequest) -> operations.UpdateAdmChannelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Enables the ADM channel for an application or updates the status and settings of the ADM channel for an application.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/channels/adm", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4887,22 +5034,22 @@ class SDK:
 
     
     def update_apns_channel(self, request: operations.UpdateApnsChannelRequest) -> operations.UpdateApnsChannelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Enables the APNs channel for an application or updates the status and settings of the APNs channel for an application.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/channels/apns", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4945,22 +5092,22 @@ class SDK:
 
     
     def update_apns_sandbox_channel(self, request: operations.UpdateApnsSandboxChannelRequest) -> operations.UpdateApnsSandboxChannelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Enables the APNs sandbox channel for an application or updates the status and settings of the APNs sandbox channel for an application.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/channels/apns_sandbox", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5003,22 +5150,22 @@ class SDK:
 
     
     def update_apns_voip_channel(self, request: operations.UpdateApnsVoipChannelRequest) -> operations.UpdateApnsVoipChannelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Enables the APNs VoIP channel for an application or updates the status and settings of the APNs VoIP channel for an application.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/channels/apns_voip", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5061,22 +5208,22 @@ class SDK:
 
     
     def update_apns_voip_sandbox_channel(self, request: operations.UpdateApnsVoipSandboxChannelRequest) -> operations.UpdateApnsVoipSandboxChannelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Enables the APNs VoIP sandbox channel for an application or updates the status and settings of the APNs VoIP sandbox channel for an application.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/channels/apns_voip_sandbox", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5119,22 +5266,22 @@ class SDK:
 
     
     def update_application_settings(self, request: operations.UpdateApplicationSettingsRequest) -> operations.UpdateApplicationSettingsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates the settings for an application.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/settings", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5177,22 +5324,22 @@ class SDK:
 
     
     def update_baidu_channel(self, request: operations.UpdateBaiduChannelRequest) -> operations.UpdateBaiduChannelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Enables the Baidu channel for an application or updates the status and settings of the Baidu channel for an application.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/channels/baidu", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5235,22 +5382,22 @@ class SDK:
 
     
     def update_campaign(self, request: operations.UpdateCampaignRequest) -> operations.UpdateCampaignResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates the configuration and other settings for a campaign.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/campaigns/{campaign-id}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5293,22 +5440,22 @@ class SDK:
 
     
     def update_email_channel(self, request: operations.UpdateEmailChannelRequest) -> operations.UpdateEmailChannelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Enables the email channel for an application or updates the status and settings of the email channel for an application.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/channels/email", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5351,24 +5498,23 @@ class SDK:
 
     
     def update_email_template(self, request: operations.UpdateEmailTemplateRequest) -> operations.UpdateEmailTemplateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates an existing message template for messages that are sent through the email channel.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/templates/{template-name}/email", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5411,22 +5557,22 @@ class SDK:
 
     
     def update_endpoint(self, request: operations.UpdateEndpointRequest) -> operations.UpdateEndpointResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a new endpoint for an application or updates the settings and attributes of an existing endpoint for an application. You can also use this operation to define custom attributes for an endpoint. If an update includes one or more values for a custom attribute, Amazon Pinpoint replaces (overwrites) any existing values with the new values.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/endpoints/{endpoint-id}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5469,22 +5615,22 @@ class SDK:
 
     
     def update_endpoints_batch(self, request: operations.UpdateEndpointsBatchRequest) -> operations.UpdateEndpointsBatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a new batch of endpoints for an application or updates the settings and attributes of a batch of existing endpoints for an application. You can also use this operation to define custom attributes for a batch of endpoints. If an update includes one or more values for a custom attribute, Amazon Pinpoint replaces (overwrites) any existing values with the new values.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/endpoints", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5527,22 +5673,22 @@ class SDK:
 
     
     def update_gcm_channel(self, request: operations.UpdateGcmChannelRequest) -> operations.UpdateGcmChannelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Enables the GCM channel for an application or updates the status and settings of the GCM channel for an application.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/channels/gcm", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5585,24 +5731,23 @@ class SDK:
 
     
     def update_in_app_template(self, request: operations.UpdateInAppTemplateRequest) -> operations.UpdateInAppTemplateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates an existing message template for messages sent through the in-app message channel.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/templates/{template-name}/inapp", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5645,22 +5790,22 @@ class SDK:
 
     
     def update_journey(self, request: operations.UpdateJourneyRequest) -> operations.UpdateJourneyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates the configuration and other settings for a journey.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/journeys/{journey-id}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5707,22 +5852,22 @@ class SDK:
 
     
     def update_journey_state(self, request: operations.UpdateJourneyStateRequest) -> operations.UpdateJourneyStateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Cancels (stops) an active journey.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/journeys/{journey-id}/state", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5765,24 +5910,23 @@ class SDK:
 
     
     def update_push_template(self, request: operations.UpdatePushTemplateRequest) -> operations.UpdatePushTemplateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates an existing message template for messages that are sent through a push notification channel.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/templates/{template-name}/push", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5825,22 +5969,22 @@ class SDK:
 
     
     def update_recommender_configuration(self, request: operations.UpdateRecommenderConfigurationRequest) -> operations.UpdateRecommenderConfigurationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates an Amazon Pinpoint configuration for a recommender model.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/recommenders/{recommender-id}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5883,22 +6027,22 @@ class SDK:
 
     
     def update_segment(self, request: operations.UpdateSegmentRequest) -> operations.UpdateSegmentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a new segment for an application or updates the configuration, dimension, and other settings for an existing segment that's associated with an application.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/segments/{segment-id}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5941,22 +6085,22 @@ class SDK:
 
     
     def update_sms_channel(self, request: operations.UpdateSmsChannelRequest) -> operations.UpdateSmsChannelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Enables the SMS channel for an application or updates the status and settings of the SMS channel for an application.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/channels/sms", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5999,24 +6143,23 @@ class SDK:
 
     
     def update_sms_template(self, request: operations.UpdateSmsTemplateRequest) -> operations.UpdateSmsTemplateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates an existing message template for messages that are sent through the SMS channel.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/templates/{template-name}/sms", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -6059,22 +6202,22 @@ class SDK:
 
     
     def update_template_active_version(self, request: operations.UpdateTemplateActiveVersionRequest) -> operations.UpdateTemplateActiveVersionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Changes the status of a specific version of a message template to <i>active</i>.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/templates/{template-name}/{template-type}/active-version", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -6117,22 +6260,22 @@ class SDK:
 
     
     def update_voice_channel(self, request: operations.UpdateVoiceChannelRequest) -> operations.UpdateVoiceChannelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Enables the voice channel for an application or updates the status and settings of the voice channel for an application.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/apps/{application-id}/channels/voice", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -6175,24 +6318,23 @@ class SDK:
 
     
     def update_voice_template(self, request: operations.UpdateVoiceTemplateRequest) -> operations.UpdateVoiceTemplateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates an existing message template for messages that are sent through the voice channel.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/templates/{template-name}/voice", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

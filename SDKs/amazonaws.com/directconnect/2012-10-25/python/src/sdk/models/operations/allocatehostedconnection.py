@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 class AllocateHostedConnectionXAmzTargetEnum(str, Enum):
@@ -8,6 +12,7 @@ class AllocateHostedConnectionXAmzTargetEnum(str, Enum):
 
 @dataclass
 class AllocateHostedConnectionHeaders:
+    x_amz_target: AllocateHostedConnectionXAmzTargetEnum = field(metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm', 'style': 'simple', 'explode': False }})
     x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256', 'style': 'simple', 'explode': False }})
     x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential', 'style': 'simple', 'explode': False }})
@@ -15,22 +20,21 @@ class AllocateHostedConnectionHeaders:
     x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token', 'style': 'simple', 'explode': False }})
     x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature', 'style': 'simple', 'explode': False }})
     x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders', 'style': 'simple', 'explode': False }})
-    x_amz_target: AllocateHostedConnectionXAmzTargetEnum = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class AllocateHostedConnectionRequest:
-    headers: AllocateHostedConnectionHeaders = field(default=None)
-    request: shared.AllocateHostedConnectionRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: AllocateHostedConnectionHeaders = field()
+    request: shared.AllocateHostedConnectionRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class AllocateHostedConnectionResponse:
+    content_type: str = field()
+    status_code: int = field()
     connection: Optional[shared.Connection] = field(default=None)
-    content_type: str = field(default=None)
     direct_connect_client_exception: Optional[Any] = field(default=None)
     direct_connect_server_exception: Optional[Any] = field(default=None)
     duplicate_tag_keys_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_tags_exception: Optional[Any] = field(default=None)
     

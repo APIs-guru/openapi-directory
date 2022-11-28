@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetModelSaleBucketsSalePriceHistogramGetQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=brandName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=brandName" })
   brandName: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=jwt" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=jwt" })
   jwt: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=modelName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=modelName" })
   modelName: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=regionName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=regionName" })
   regionName?: string;
 }
 
 
 export class GetModelSaleBucketsSalePriceHistogramGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetModelSaleBucketsSalePriceHistogramGetQueryParams;
 }
 
 
 export class GetModelSaleBucketsSalePriceHistogramGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   bucketResp?: shared.BucketResp;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   httpValidationError?: shared.HttpValidationError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

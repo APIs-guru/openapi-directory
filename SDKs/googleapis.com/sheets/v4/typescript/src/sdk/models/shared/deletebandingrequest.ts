@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DeleteBandingRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Removes the banded range with the given ID from the spreadsheet.
 **/
 export class DeleteBandingRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bandedRangeId" })
+  @SpeakeasyMetadata({ data: "json, name=bandedRangeId" })
   bandedRangeId?: number;
 }

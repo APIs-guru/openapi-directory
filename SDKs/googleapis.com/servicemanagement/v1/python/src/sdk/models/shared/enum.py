@@ -1,9 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import enumvalue
-from . import option
-from . import sourcecontext
+from sdk import utils
+from . import *
 
 class EnumSyntaxEnum(str, Enum):
     SYNTAX_PROTO2 = "SYNTAX_PROTO2"
@@ -13,9 +13,13 @@ class EnumSyntaxEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Enum:
-    enumvalue: Optional[List[enumvalue.EnumValue]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enumvalue' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    options: Optional[List[option.Option]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    source_context: Optional[sourcecontext.SourceContext] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sourceContext' }})
-    syntax: Optional[EnumSyntaxEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'syntax' }})
+    r"""Enum
+    Enum type definition.
+    """
+    
+    enumvalue: Optional[List[EnumValue]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('enumvalue') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    options: Optional[List[Option]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    source_context: Optional[SourceContext] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sourceContext') }})
+    syntax: Optional[EnumSyntaxEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('syntax') }})
     

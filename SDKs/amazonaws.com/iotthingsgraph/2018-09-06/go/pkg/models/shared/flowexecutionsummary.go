@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// FlowExecutionSummary
+// An object that contains summary information about a flow execution.
 type FlowExecutionSummary struct {
 	CreatedAt        *time.Time               `json:"createdAt,omitempty"`
 	FlowExecutionID  *string                  `json:"flowExecutionId,omitempty"`

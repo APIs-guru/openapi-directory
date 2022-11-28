@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetReleaseAddressActionEnum(str, Enum):
     RELEASE_ADDRESS = "ReleaseAddress"
@@ -10,12 +14,12 @@ class GetReleaseAddressVersionEnum(str, Enum):
 
 @dataclass
 class GetReleaseAddressQueryParams:
-    action: GetReleaseAddressActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetReleaseAddressActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetReleaseAddressVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     allocation_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'AllocationId', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
     network_border_group: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NetworkBorderGroup', 'style': 'form', 'explode': True }})
     public_ip: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'PublicIp', 'style': 'form', 'explode': True }})
-    version: GetReleaseAddressVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -31,12 +35,12 @@ class GetReleaseAddressHeaders:
 
 @dataclass
 class GetReleaseAddressRequest:
-    query_params: GetReleaseAddressQueryParams = field(default=None)
-    headers: GetReleaseAddressHeaders = field(default=None)
+    headers: GetReleaseAddressHeaders = field()
+    query_params: GetReleaseAddressQueryParams = field()
     
 
 @dataclass
 class GetReleaseAddressResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

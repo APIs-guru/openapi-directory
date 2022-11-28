@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import repositoryerror
+from sdk import utils
+from . import *
 
 class PushItemTypeEnum(str, Enum):
     UNSPECIFIED = "UNSPECIFIED"
@@ -14,11 +16,15 @@ class PushItemTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PushItem:
-    content_hash: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'contentHash' }})
-    metadata_hash: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadataHash' }})
-    payload: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'payload' }})
-    queue: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'queue' }})
-    repository_error: Optional[repositoryerror.RepositoryError] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'repositoryError' }})
-    structured_data_hash: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'structuredDataHash' }})
-    type: Optional[PushItemTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""PushItem
+    Represents an item to be pushed to the indexing queue.
+    """
+    
+    content_hash: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('contentHash') }})
+    metadata_hash: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('metadataHash') }})
+    payload: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('payload') }})
+    queue: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('queue') }})
+    repository_error: Optional[RepositoryError] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('repositoryError') }})
+    structured_data_hash: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('structuredDataHash') }})
+    type: Optional[PushItemTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

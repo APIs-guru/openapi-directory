@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OtherRegionsSubscriptionOfferPhasePrices } from "./otherregionssubscriptionofferphaseprices";
-import { OtherRegionsSubscriptionOfferPhasePrices } from "./otherregionssubscriptionofferphaseprices";
+
 
 
 // OtherRegionsSubscriptionOfferPhaseConfig
@@ -8,12 +8,12 @@ import { OtherRegionsSubscriptionOfferPhasePrices } from "./otherregionssubscrip
  * Configuration for any new locations Play may launch in for a single offer phase.
 **/
 export class OtherRegionsSubscriptionOfferPhaseConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=absoluteDiscounts" })
+  @SpeakeasyMetadata({ data: "json, name=absoluteDiscounts" })
   absoluteDiscounts?: OtherRegionsSubscriptionOfferPhasePrices;
 
-  @Metadata({ data: "json, name=otherRegionsPrices" })
+  @SpeakeasyMetadata({ data: "json, name=otherRegionsPrices" })
   otherRegionsPrices?: OtherRegionsSubscriptionOfferPhasePrices;
 
-  @Metadata({ data: "json, name=relativeDiscount" })
+  @SpeakeasyMetadata({ data: "json, name=relativeDiscount" })
   relativeDiscount?: number;
 }

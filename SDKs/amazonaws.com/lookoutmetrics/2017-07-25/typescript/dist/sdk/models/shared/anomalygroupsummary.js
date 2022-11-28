@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // AnomalyGroupSummary
 /**
  * Details about a group of anomalous metrics.
@@ -33,23 +33,23 @@ var AnomalyGroupSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AnomalyGroupId" }),
+        SpeakeasyMetadata({ data: "json, name=AnomalyGroupId" }),
         __metadata("design:type", String)
     ], AnomalyGroupSummary.prototype, "anomalyGroupId", void 0);
     __decorate([
-        Metadata({ data: "json, name=AnomalyGroupScore" }),
+        SpeakeasyMetadata({ data: "json, name=AnomalyGroupScore" }),
         __metadata("design:type", Number)
     ], AnomalyGroupSummary.prototype, "anomalyGroupScore", void 0);
     __decorate([
-        Metadata({ data: "json, name=EndTime" }),
+        SpeakeasyMetadata({ data: "json, name=EndTime" }),
         __metadata("design:type", String)
     ], AnomalyGroupSummary.prototype, "endTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=PrimaryMetricName" }),
+        SpeakeasyMetadata({ data: "json, name=PrimaryMetricName" }),
         __metadata("design:type", String)
     ], AnomalyGroupSummary.prototype, "primaryMetricName", void 0);
     __decorate([
-        Metadata({ data: "json, name=StartTime" }),
+        SpeakeasyMetadata({ data: "json, name=StartTime" }),
         __metadata("design:type", String)
     ], AnomalyGroupSummary.prototype, "startTime", void 0);
     return AnomalyGroupSummary;

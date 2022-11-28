@@ -1,5 +1,7 @@
 package shared
 
+// Entitlement
+// Describes a resource entitled for use with a license.
 type Entitlement struct {
 	AllowCheckIn *bool               `json:"AllowCheckIn,omitempty"`
 	MaxCount     *int64              `json:"MaxCount,omitempty"`

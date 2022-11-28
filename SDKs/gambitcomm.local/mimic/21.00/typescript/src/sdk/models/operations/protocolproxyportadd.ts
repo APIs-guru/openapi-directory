@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ProtocolProxyPortAddPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" })
   agentNum: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=port" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=port" })
   port: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=target" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=target" })
   target: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=targetPort" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=targetPort" })
   targetPort: number;
 }
 
 
 export class ProtocolProxyPortAddRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ProtocolProxyPortAddPathParams;
 }
 
 
 export class ProtocolProxyPortAddResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   protocolProxyPortAdd200ApplicationJsonString?: string;
 }

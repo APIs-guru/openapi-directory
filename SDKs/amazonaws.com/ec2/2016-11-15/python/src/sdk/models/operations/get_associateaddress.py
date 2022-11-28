@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetAssociateAddressActionEnum(str, Enum):
     ASSOCIATE_ADDRESS = "AssociateAddress"
@@ -10,7 +14,8 @@ class GetAssociateAddressVersionEnum(str, Enum):
 
 @dataclass
 class GetAssociateAddressQueryParams:
-    action: GetAssociateAddressActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetAssociateAddressActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetAssociateAddressVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     allocation_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'AllocationId', 'style': 'form', 'explode': True }})
     allow_reassociation: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'AllowReassociation', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
@@ -18,7 +23,6 @@ class GetAssociateAddressQueryParams:
     network_interface_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NetworkInterfaceId', 'style': 'form', 'explode': True }})
     private_ip_address: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'PrivateIpAddress', 'style': 'form', 'explode': True }})
     public_ip: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'PublicIp', 'style': 'form', 'explode': True }})
-    version: GetAssociateAddressVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -34,13 +38,13 @@ class GetAssociateAddressHeaders:
 
 @dataclass
 class GetAssociateAddressRequest:
-    query_params: GetAssociateAddressQueryParams = field(default=None)
-    headers: GetAssociateAddressHeaders = field(default=None)
+    headers: GetAssociateAddressHeaders = field()
+    query_params: GetAssociateAddressQueryParams = field()
     
 
 @dataclass
 class GetAssociateAddressResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

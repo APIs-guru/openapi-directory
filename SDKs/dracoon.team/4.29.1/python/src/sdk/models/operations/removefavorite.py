@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class RemoveFavoritePathParams:
-    node_id: int = field(default=None, metadata={'path_param': { 'field_name': 'node_id', 'style': 'simple', 'explode': False }})
+    node_id: int = field(metadata={'path_param': { 'field_name': 'node_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,13 +15,13 @@ class RemoveFavoriteHeaders:
 
 @dataclass
 class RemoveFavoriteRequest:
-    path_params: RemoveFavoritePathParams = field(default=None)
-    headers: RemoveFavoriteHeaders = field(default=None)
+    headers: RemoveFavoriteHeaders = field()
+    path_params: RemoveFavoritePathParams = field()
     
 
 @dataclass
 class RemoveFavoriteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

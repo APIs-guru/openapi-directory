@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import insightselector
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class PutInsightSelectorsRequest:
-    insight_selectors: List[insightselector.InsightSelector] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'InsightSelectors' }})
-    trail_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TrailName' }})
+    insight_selectors: List[InsightSelector] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('InsightSelectors') }})
+    trail_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('TrailName') }})
     

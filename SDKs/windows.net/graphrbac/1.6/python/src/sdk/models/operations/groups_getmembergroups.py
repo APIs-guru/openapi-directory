@@ -5,13 +5,13 @@ from sdk.models import shared
 
 @dataclass
 class GroupsGetMemberGroupsPathParams:
-    object_id: str = field(default=None, metadata={'path_param': { 'field_name': 'objectId', 'style': 'simple', 'explode': False }})
-    tenant_id: str = field(default=None, metadata={'path_param': { 'field_name': 'tenantID', 'style': 'simple', 'explode': False }})
+    object_id: str = field(metadata={'path_param': { 'field_name': 'objectId', 'style': 'simple', 'explode': False }})
+    tenant_id: str = field(metadata={'path_param': { 'field_name': 'tenantID', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GroupsGetMemberGroupsQueryParams:
-    api_version: str = field(default=None, metadata={'query_param': { 'field_name': 'api-version', 'style': 'form', 'explode': True }})
+    api_version: str = field(metadata={'query_param': { 'field_name': 'api-version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -22,15 +22,15 @@ class GroupsGetMemberGroupsRequests:
 
 @dataclass
 class GroupsGetMemberGroupsRequest:
-    path_params: GroupsGetMemberGroupsPathParams = field(default=None)
-    query_params: GroupsGetMemberGroupsQueryParams = field(default=None)
-    request: GroupsGetMemberGroupsRequests = field(default=None)
+    path_params: GroupsGetMemberGroupsPathParams = field()
+    query_params: GroupsGetMemberGroupsQueryParams = field()
+    request: GroupsGetMemberGroupsRequests = field()
     
 
 @dataclass
 class GroupsGetMemberGroupsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     graph_error: Optional[shared.GraphError] = field(default=None)
     group_get_member_groups_result: Optional[shared.GroupGetMemberGroupsResult] = field(default=None)
-    status_code: int = field(default=None)
     

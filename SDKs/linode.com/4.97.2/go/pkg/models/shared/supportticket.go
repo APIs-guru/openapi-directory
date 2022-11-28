@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// SupportTicketEntity
+// The entity this Ticket was opened for.
 type SupportTicketEntity struct {
 	ID    *int64  `json:"id,omitempty"`
 	Label *string `json:"label,omitempty"`
@@ -19,6 +21,8 @@ const (
 	SupportTicketStatusEnumOpen   SupportTicketStatusEnum = "open"
 )
 
+// SupportTicket
+// A Support Ticket opened on your Account.
 type SupportTicket struct {
 	Attachments []string                 `json:"attachments,omitempty"`
 	Closable    *bool                    `json:"closable,omitempty"`

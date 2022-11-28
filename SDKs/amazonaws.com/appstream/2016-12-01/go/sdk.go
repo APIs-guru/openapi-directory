@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://appstream2.{region}.amazonaws.com",
 	"https://appstream2.{region}.amazonaws.com",
 	"http://appstream2.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/appstream2/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// AssociateFleet - Associates the specified fleet with the specified stack.
 func (s *SDK) AssociateFleet(ctx context.Context, request operations.AssociateFleetRequest) (*operations.AssociateFleetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=PhotonAdminProxyService.AssociateFleet"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -81,7 +108,7 @@ func (s *SDK) AssociateFleet(ctx context.Context, request operations.AssociateFl
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -171,8 +198,9 @@ func (s *SDK) AssociateFleet(ctx context.Context, request operations.AssociateFl
 	return res, nil
 }
 
+// BatchAssociateUserStack - Associates the specified users with the specified stacks. Users in a user pool cannot be assigned to stacks with fleets that are joined to an Active Directory domain.
 func (s *SDK) BatchAssociateUserStack(ctx context.Context, request operations.BatchAssociateUserStackRequest) (*operations.BatchAssociateUserStackResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=PhotonAdminProxyService.BatchAssociateUserStack"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -192,7 +220,7 @@ func (s *SDK) BatchAssociateUserStack(ctx context.Context, request operations.Ba
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -242,8 +270,9 @@ func (s *SDK) BatchAssociateUserStack(ctx context.Context, request operations.Ba
 	return res, nil
 }
 
+// BatchDisassociateUserStack - Disassociates the specified users from the specified stacks.
 func (s *SDK) BatchDisassociateUserStack(ctx context.Context, request operations.BatchDisassociateUserStackRequest) (*operations.BatchDisassociateUserStackResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=PhotonAdminProxyService.BatchDisassociateUserStack"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -263,7 +292,7 @@ func (s *SDK) BatchDisassociateUserStack(ctx context.Context, request operations
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -313,8 +342,9 @@ func (s *SDK) BatchDisassociateUserStack(ctx context.Context, request operations
 	return res, nil
 }
 
+// CopyImage - Copies the image within the same region or to a new region within the same AWS account. Note that any tags you added to the image will not be copied.
 func (s *SDK) CopyImage(ctx context.Context, request operations.CopyImageRequest) (*operations.CopyImageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=PhotonAdminProxyService.CopyImage"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -334,7 +364,7 @@ func (s *SDK) CopyImage(ctx context.Context, request operations.CopyImageRequest
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -424,8 +454,9 @@ func (s *SDK) CopyImage(ctx context.Context, request operations.CopyImageRequest
 	return res, nil
 }
 
+// CreateDirectoryConfig - Creates a Directory Config object in AppStream 2.0. This object includes the configuration information required to join fleets and image builders to Microsoft Active Directory domains.
 func (s *SDK) CreateDirectoryConfig(ctx context.Context, request operations.CreateDirectoryConfigRequest) (*operations.CreateDirectoryConfigResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=PhotonAdminProxyService.CreateDirectoryConfig"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -445,7 +476,7 @@ func (s *SDK) CreateDirectoryConfig(ctx context.Context, request operations.Crea
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -535,8 +566,9 @@ func (s *SDK) CreateDirectoryConfig(ctx context.Context, request operations.Crea
 	return res, nil
 }
 
+// CreateFleet - Creates a fleet. A fleet consists of streaming instances that run a specified image.
 func (s *SDK) CreateFleet(ctx context.Context, request operations.CreateFleetRequest) (*operations.CreateFleetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=PhotonAdminProxyService.CreateFleet"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -556,7 +588,7 @@ func (s *SDK) CreateFleet(ctx context.Context, request operations.CreateFleetReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -696,8 +728,9 @@ func (s *SDK) CreateFleet(ctx context.Context, request operations.CreateFleetReq
 	return res, nil
 }
 
+// CreateImageBuilder - <p>Creates an image builder. An image builder is a virtual machine that is used to create an image.</p> <p>The initial state of the builder is <code>PENDING</code>. When it is ready, the state is <code>RUNNING</code>.</p>
 func (s *SDK) CreateImageBuilder(ctx context.Context, request operations.CreateImageBuilderRequest) (*operations.CreateImageBuilderResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=PhotonAdminProxyService.CreateImageBuilder"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -717,7 +750,7 @@ func (s *SDK) CreateImageBuilder(ctx context.Context, request operations.CreateI
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -857,8 +890,9 @@ func (s *SDK) CreateImageBuilder(ctx context.Context, request operations.CreateI
 	return res, nil
 }
 
+// CreateImageBuilderStreamingURL - Creates a URL to start an image builder streaming session.
 func (s *SDK) CreateImageBuilderStreamingURL(ctx context.Context, request operations.CreateImageBuilderStreamingURLRequest) (*operations.CreateImageBuilderStreamingURLResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=PhotonAdminProxyService.CreateImageBuilderStreamingURL"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -878,7 +912,7 @@ func (s *SDK) CreateImageBuilderStreamingURL(ctx context.Context, request operat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -928,8 +962,9 @@ func (s *SDK) CreateImageBuilderStreamingURL(ctx context.Context, request operat
 	return res, nil
 }
 
+// CreateStack - Creates a stack to start streaming applications to users. A stack consists of an associated fleet, user access policies, and storage configurations.
 func (s *SDK) CreateStack(ctx context.Context, request operations.CreateStackRequest) (*operations.CreateStackResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=PhotonAdminProxyService.CreateStack"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -949,7 +984,7 @@ func (s *SDK) CreateStack(ctx context.Context, request operations.CreateStackReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1049,8 +1084,9 @@ func (s *SDK) CreateStack(ctx context.Context, request operations.CreateStackReq
 	return res, nil
 }
 
+// CreateStreamingURL - Creates a temporary URL to start an AppStream 2.0 streaming session for the specified user. A streaming URL enables application streaming to be tested without user setup.
 func (s *SDK) CreateStreamingURL(ctx context.Context, request operations.CreateStreamingURLRequest) (*operations.CreateStreamingURLResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=PhotonAdminProxyService.CreateStreamingURL"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1070,7 +1106,7 @@ func (s *SDK) CreateStreamingURL(ctx context.Context, request operations.CreateS
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1140,8 +1176,9 @@ func (s *SDK) CreateStreamingURL(ctx context.Context, request operations.CreateS
 	return res, nil
 }
 
+// CreateUpdatedImage - <p>Creates a new image with the latest Windows operating system updates, driver updates, and AppStream 2.0 agent software.</p> <p>For more information, see the "Update an Image by Using Managed AppStream 2.0 Image Updates" section in <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/administer-images.html">Administer Your AppStream 2.0 Images</a>, in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>
 func (s *SDK) CreateUpdatedImage(ctx context.Context, request operations.CreateUpdatedImageRequest) (*operations.CreateUpdatedImageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=PhotonAdminProxyService.CreateUpdatedImage"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1161,7 +1198,7 @@ func (s *SDK) CreateUpdatedImage(ctx context.Context, request operations.CreateU
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1261,8 +1298,9 @@ func (s *SDK) CreateUpdatedImage(ctx context.Context, request operations.CreateU
 	return res, nil
 }
 
+// CreateUsageReportSubscription - Creates a usage report subscription. Usage reports are generated daily.
 func (s *SDK) CreateUsageReportSubscription(ctx context.Context, request operations.CreateUsageReportSubscriptionRequest) (*operations.CreateUsageReportSubscriptionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=PhotonAdminProxyService.CreateUsageReportSubscription"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1282,7 +1320,7 @@ func (s *SDK) CreateUsageReportSubscription(ctx context.Context, request operati
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1342,8 +1380,9 @@ func (s *SDK) CreateUsageReportSubscription(ctx context.Context, request operati
 	return res, nil
 }
 
+// CreateUser - Creates a new user in the user pool.
 func (s *SDK) CreateUser(ctx context.Context, request operations.CreateUserRequest) (*operations.CreateUserResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=PhotonAdminProxyService.CreateUser"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1363,7 +1402,7 @@ func (s *SDK) CreateUser(ctx context.Context, request operations.CreateUserReque
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1443,8 +1482,9 @@ func (s *SDK) CreateUser(ctx context.Context, request operations.CreateUserReque
 	return res, nil
 }
 
+// DeleteDirectoryConfig - Deletes the specified Directory Config object from AppStream 2.0. This object includes the information required to join streaming instances to an Active Directory domain.
 func (s *SDK) DeleteDirectoryConfig(ctx context.Context, request operations.DeleteDirectoryConfigRequest) (*operations.DeleteDirectoryConfigResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=PhotonAdminProxyService.DeleteDirectoryConfig"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1464,7 +1504,7 @@ func (s *SDK) DeleteDirectoryConfig(ctx context.Context, request operations.Dele
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1514,8 +1554,9 @@ func (s *SDK) DeleteDirectoryConfig(ctx context.Context, request operations.Dele
 	return res, nil
 }
 
+// DeleteFleet - Deletes the specified fleet.
 func (s *SDK) DeleteFleet(ctx context.Context, request operations.DeleteFleetRequest) (*operations.DeleteFleetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=PhotonAdminProxyService.DeleteFleet"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1535,7 +1576,7 @@ func (s *SDK) DeleteFleet(ctx context.Context, request operations.DeleteFleetReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1595,8 +1636,9 @@ func (s *SDK) DeleteFleet(ctx context.Context, request operations.DeleteFleetReq
 	return res, nil
 }
 
+// DeleteImage - Deletes the specified image. You cannot delete an image when it is in use. After you delete an image, you cannot provision new capacity using the image.
 func (s *SDK) DeleteImage(ctx context.Context, request operations.DeleteImageRequest) (*operations.DeleteImageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=PhotonAdminProxyService.DeleteImage"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1616,7 +1658,7 @@ func (s *SDK) DeleteImage(ctx context.Context, request operations.DeleteImageReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1686,8 +1728,9 @@ func (s *SDK) DeleteImage(ctx context.Context, request operations.DeleteImageReq
 	return res, nil
 }
 
+// DeleteImageBuilder - Deletes the specified image builder and releases the capacity.
 func (s *SDK) DeleteImageBuilder(ctx context.Context, request operations.DeleteImageBuilderRequest) (*operations.DeleteImageBuilderResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=PhotonAdminProxyService.DeleteImageBuilder"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1707,7 +1750,7 @@ func (s *SDK) DeleteImageBuilder(ctx context.Context, request operations.DeleteI
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1767,8 +1810,9 @@ func (s *SDK) DeleteImageBuilder(ctx context.Context, request operations.DeleteI
 	return res, nil
 }
 
+// DeleteImagePermissions - Deletes permissions for the specified private image. After you delete permissions for an image, AWS accounts to which you previously granted these permissions can no longer use the image.
 func (s *SDK) DeleteImagePermissions(ctx context.Context, request operations.DeleteImagePermissionsRequest) (*operations.DeleteImagePermissionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=PhotonAdminProxyService.DeleteImagePermissions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1788,7 +1832,7 @@ func (s *SDK) DeleteImagePermissions(ctx context.Context, request operations.Del
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1838,8 +1882,9 @@ func (s *SDK) DeleteImagePermissions(ctx context.Context, request operations.Del
 	return res, nil
 }
 
+// DeleteStack - Deletes the specified stack. After the stack is deleted, the application streaming environment provided by the stack is no longer available to users. Also, any reservations made for application streaming sessions for the stack are released.
 func (s *SDK) DeleteStack(ctx context.Context, request operations.DeleteStackRequest) (*operations.DeleteStackResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=PhotonAdminProxyService.DeleteStack"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1859,7 +1904,7 @@ func (s *SDK) DeleteStack(ctx context.Context, request operations.DeleteStackReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1919,8 +1964,9 @@ func (s *SDK) DeleteStack(ctx context.Context, request operations.DeleteStackReq
 	return res, nil
 }
 
+// DeleteUsageReportSubscription - Disables usage report generation.
 func (s *SDK) DeleteUsageReportSubscription(ctx context.Context, request operations.DeleteUsageReportSubscriptionRequest) (*operations.DeleteUsageReportSubscriptionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=PhotonAdminProxyService.DeleteUsageReportSubscription"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1940,7 +1986,7 @@ func (s *SDK) DeleteUsageReportSubscription(ctx context.Context, request operati
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1990,8 +2036,9 @@ func (s *SDK) DeleteUsageReportSubscription(ctx context.Context, request operati
 	return res, nil
 }
 
+// DeleteUser - Deletes a user from the user pool.
 func (s *SDK) DeleteUser(ctx context.Context, request operations.DeleteUserRequest) (*operations.DeleteUserResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=PhotonAdminProxyService.DeleteUser"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2011,7 +2058,7 @@ func (s *SDK) DeleteUser(ctx context.Context, request operations.DeleteUserReque
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2051,8 +2098,9 @@ func (s *SDK) DeleteUser(ctx context.Context, request operations.DeleteUserReque
 	return res, nil
 }
 
+// DescribeDirectoryConfigs - <p>Retrieves a list that describes one or more specified Directory Config objects for AppStream 2.0, if the names for these objects are provided. Otherwise, all Directory Config objects in the account are described. These objects include the configuration information required to join fleets and image builders to Microsoft Active Directory domains. </p> <p>Although the response syntax in this topic includes the account password, this password is not returned in the actual response.</p>
 func (s *SDK) DescribeDirectoryConfigs(ctx context.Context, request operations.DescribeDirectoryConfigsRequest) (*operations.DescribeDirectoryConfigsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=PhotonAdminProxyService.DescribeDirectoryConfigs"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2072,7 +2120,7 @@ func (s *SDK) DescribeDirectoryConfigs(ctx context.Context, request operations.D
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2112,8 +2160,9 @@ func (s *SDK) DescribeDirectoryConfigs(ctx context.Context, request operations.D
 	return res, nil
 }
 
+// DescribeFleets - Retrieves a list that describes one or more specified fleets, if the fleet names are provided. Otherwise, all fleets in the account are described.
 func (s *SDK) DescribeFleets(ctx context.Context, request operations.DescribeFleetsRequest) (*operations.DescribeFleetsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=PhotonAdminProxyService.DescribeFleets"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2133,7 +2182,7 @@ func (s *SDK) DescribeFleets(ctx context.Context, request operations.DescribeFle
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2173,8 +2222,9 @@ func (s *SDK) DescribeFleets(ctx context.Context, request operations.DescribeFle
 	return res, nil
 }
 
+// DescribeImageBuilders - Retrieves a list that describes one or more specified image builders, if the image builder names are provided. Otherwise, all image builders in the account are described.
 func (s *SDK) DescribeImageBuilders(ctx context.Context, request operations.DescribeImageBuildersRequest) (*operations.DescribeImageBuildersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=PhotonAdminProxyService.DescribeImageBuilders"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2194,7 +2244,7 @@ func (s *SDK) DescribeImageBuilders(ctx context.Context, request operations.Desc
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2234,8 +2284,9 @@ func (s *SDK) DescribeImageBuilders(ctx context.Context, request operations.Desc
 	return res, nil
 }
 
+// DescribeImagePermissions - Retrieves a list that describes the permissions for shared AWS account IDs on a private image that you own.
 func (s *SDK) DescribeImagePermissions(ctx context.Context, request operations.DescribeImagePermissionsRequest) (*operations.DescribeImagePermissionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=PhotonAdminProxyService.DescribeImagePermissions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2257,7 +2308,7 @@ func (s *SDK) DescribeImagePermissions(ctx context.Context, request operations.D
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2297,8 +2348,9 @@ func (s *SDK) DescribeImagePermissions(ctx context.Context, request operations.D
 	return res, nil
 }
 
+// DescribeImages - Retrieves a list that describes one or more specified images, if the image names or image ARNs are provided. Otherwise, all images in the account are described.
 func (s *SDK) DescribeImages(ctx context.Context, request operations.DescribeImagesRequest) (*operations.DescribeImagesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=PhotonAdminProxyService.DescribeImages"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2320,7 +2372,7 @@ func (s *SDK) DescribeImages(ctx context.Context, request operations.DescribeIma
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2370,8 +2422,9 @@ func (s *SDK) DescribeImages(ctx context.Context, request operations.DescribeIma
 	return res, nil
 }
 
+// DescribeSessions - Retrieves a list that describes the streaming sessions for a specified stack and fleet. If a UserId is provided for the stack and fleet, only streaming sessions for that user are described. If an authentication type is not provided, the default is to authenticate users using a streaming URL.
 func (s *SDK) DescribeSessions(ctx context.Context, request operations.DescribeSessionsRequest) (*operations.DescribeSessionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=PhotonAdminProxyService.DescribeSessions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2391,7 +2444,7 @@ func (s *SDK) DescribeSessions(ctx context.Context, request operations.DescribeS
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2431,8 +2484,9 @@ func (s *SDK) DescribeSessions(ctx context.Context, request operations.DescribeS
 	return res, nil
 }
 
+// DescribeStacks - Retrieves a list that describes one or more specified stacks, if the stack names are provided. Otherwise, all stacks in the account are described.
 func (s *SDK) DescribeStacks(ctx context.Context, request operations.DescribeStacksRequest) (*operations.DescribeStacksResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=PhotonAdminProxyService.DescribeStacks"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2452,7 +2506,7 @@ func (s *SDK) DescribeStacks(ctx context.Context, request operations.DescribeSta
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2492,8 +2546,9 @@ func (s *SDK) DescribeStacks(ctx context.Context, request operations.DescribeSta
 	return res, nil
 }
 
+// DescribeUsageReportSubscriptions - Retrieves a list that describes one or more usage report subscriptions.
 func (s *SDK) DescribeUsageReportSubscriptions(ctx context.Context, request operations.DescribeUsageReportSubscriptionsRequest) (*operations.DescribeUsageReportSubscriptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=PhotonAdminProxyService.DescribeUsageReportSubscriptions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2513,7 +2568,7 @@ func (s *SDK) DescribeUsageReportSubscriptions(ctx context.Context, request oper
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2563,8 +2618,9 @@ func (s *SDK) DescribeUsageReportSubscriptions(ctx context.Context, request oper
 	return res, nil
 }
 
+// DescribeUserStackAssociations - <p>Retrieves a list that describes the UserStackAssociation objects. You must specify either or both of the following:</p> <ul> <li> <p>The stack name</p> </li> <li> <p>The user name (email address of the user associated with the stack) and the authentication type for the user</p> </li> </ul>
 func (s *SDK) DescribeUserStackAssociations(ctx context.Context, request operations.DescribeUserStackAssociationsRequest) (*operations.DescribeUserStackAssociationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=PhotonAdminProxyService.DescribeUserStackAssociations"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2584,7 +2640,7 @@ func (s *SDK) DescribeUserStackAssociations(ctx context.Context, request operati
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2634,8 +2690,9 @@ func (s *SDK) DescribeUserStackAssociations(ctx context.Context, request operati
 	return res, nil
 }
 
+// DescribeUsers - Retrieves a list that describes one or more specified users in the user pool.
 func (s *SDK) DescribeUsers(ctx context.Context, request operations.DescribeUsersRequest) (*operations.DescribeUsersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=PhotonAdminProxyService.DescribeUsers"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2655,7 +2712,7 @@ func (s *SDK) DescribeUsers(ctx context.Context, request operations.DescribeUser
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2705,8 +2762,9 @@ func (s *SDK) DescribeUsers(ctx context.Context, request operations.DescribeUser
 	return res, nil
 }
 
+// DisableUser - Disables the specified user in the user pool. Users can't sign in to AppStream 2.0 until they are re-enabled. This action does not delete the user.
 func (s *SDK) DisableUser(ctx context.Context, request operations.DisableUserRequest) (*operations.DisableUserResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=PhotonAdminProxyService.DisableUser"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2726,7 +2784,7 @@ func (s *SDK) DisableUser(ctx context.Context, request operations.DisableUserReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2766,8 +2824,9 @@ func (s *SDK) DisableUser(ctx context.Context, request operations.DisableUserReq
 	return res, nil
 }
 
+// DisassociateFleet - Disassociates the specified fleet from the specified stack.
 func (s *SDK) DisassociateFleet(ctx context.Context, request operations.DisassociateFleetRequest) (*operations.DisassociateFleetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=PhotonAdminProxyService.DisassociateFleet"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2787,7 +2846,7 @@ func (s *SDK) DisassociateFleet(ctx context.Context, request operations.Disassoc
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2857,8 +2916,9 @@ func (s *SDK) DisassociateFleet(ctx context.Context, request operations.Disassoc
 	return res, nil
 }
 
+// EnableUser - Enables a user in the user pool. After being enabled, users can sign in to AppStream 2.0 and open applications from the stacks to which they are assigned.
 func (s *SDK) EnableUser(ctx context.Context, request operations.EnableUserRequest) (*operations.EnableUserResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=PhotonAdminProxyService.EnableUser"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2878,7 +2938,7 @@ func (s *SDK) EnableUser(ctx context.Context, request operations.EnableUserReque
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2928,8 +2988,9 @@ func (s *SDK) EnableUser(ctx context.Context, request operations.EnableUserReque
 	return res, nil
 }
 
+// ExpireSession - Immediately stops the specified streaming session.
 func (s *SDK) ExpireSession(ctx context.Context, request operations.ExpireSessionRequest) (*operations.ExpireSessionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=PhotonAdminProxyService.ExpireSession"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2949,7 +3010,7 @@ func (s *SDK) ExpireSession(ctx context.Context, request operations.ExpireSessio
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2979,8 +3040,9 @@ func (s *SDK) ExpireSession(ctx context.Context, request operations.ExpireSessio
 	return res, nil
 }
 
+// ListAssociatedFleets - Retrieves the name of the fleet that is associated with the specified stack.
 func (s *SDK) ListAssociatedFleets(ctx context.Context, request operations.ListAssociatedFleetsRequest) (*operations.ListAssociatedFleetsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=PhotonAdminProxyService.ListAssociatedFleets"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3000,7 +3062,7 @@ func (s *SDK) ListAssociatedFleets(ctx context.Context, request operations.ListA
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3030,8 +3092,9 @@ func (s *SDK) ListAssociatedFleets(ctx context.Context, request operations.ListA
 	return res, nil
 }
 
+// ListAssociatedStacks - Retrieves the name of the stack with which the specified fleet is associated.
 func (s *SDK) ListAssociatedStacks(ctx context.Context, request operations.ListAssociatedStacksRequest) (*operations.ListAssociatedStacksResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=PhotonAdminProxyService.ListAssociatedStacks"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3051,7 +3114,7 @@ func (s *SDK) ListAssociatedStacks(ctx context.Context, request operations.ListA
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3081,8 +3144,9 @@ func (s *SDK) ListAssociatedStacks(ctx context.Context, request operations.ListA
 	return res, nil
 }
 
+// ListTagsForResource - <p>Retrieves a list of all tags for the specified AppStream 2.0 resource. You can tag AppStream 2.0 image builders, images, fleets, and stacks.</p> <p>For more information about tags, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>
 func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTagsForResourceRequest) (*operations.ListTagsForResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=PhotonAdminProxyService.ListTagsForResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3102,7 +3166,7 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3142,8 +3206,9 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 	return res, nil
 }
 
+// StartFleet - Starts the specified fleet.
 func (s *SDK) StartFleet(ctx context.Context, request operations.StartFleetRequest) (*operations.StartFleetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=PhotonAdminProxyService.StartFleet"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3163,7 +3228,7 @@ func (s *SDK) StartFleet(ctx context.Context, request operations.StartFleetReque
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3273,8 +3338,9 @@ func (s *SDK) StartFleet(ctx context.Context, request operations.StartFleetReque
 	return res, nil
 }
 
+// StartImageBuilder - Starts the specified image builder.
 func (s *SDK) StartImageBuilder(ctx context.Context, request operations.StartImageBuilderRequest) (*operations.StartImageBuilderResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=PhotonAdminProxyService.StartImageBuilder"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3294,7 +3360,7 @@ func (s *SDK) StartImageBuilder(ctx context.Context, request operations.StartIma
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3374,8 +3440,9 @@ func (s *SDK) StartImageBuilder(ctx context.Context, request operations.StartIma
 	return res, nil
 }
 
+// StopFleet - Stops the specified fleet.
 func (s *SDK) StopFleet(ctx context.Context, request operations.StopFleetRequest) (*operations.StopFleetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=PhotonAdminProxyService.StopFleet"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3395,7 +3462,7 @@ func (s *SDK) StopFleet(ctx context.Context, request operations.StopFleetRequest
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3445,8 +3512,9 @@ func (s *SDK) StopFleet(ctx context.Context, request operations.StopFleetRequest
 	return res, nil
 }
 
+// StopImageBuilder - Stops the specified image builder.
 func (s *SDK) StopImageBuilder(ctx context.Context, request operations.StopImageBuilderRequest) (*operations.StopImageBuilderResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=PhotonAdminProxyService.StopImageBuilder"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3466,7 +3534,7 @@ func (s *SDK) StopImageBuilder(ctx context.Context, request operations.StopImage
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3526,8 +3594,9 @@ func (s *SDK) StopImageBuilder(ctx context.Context, request operations.StopImage
 	return res, nil
 }
 
+// TagResource - <p>Adds or overwrites one or more tags for the specified AppStream 2.0 resource. You can tag AppStream 2.0 image builders, images, fleets, and stacks.</p> <p>Each tag consists of a key and an optional value. If a resource already has a tag with the same key, this operation updates its value.</p> <p>To list the current tags for your resources, use <a>ListTagsForResource</a>. To disassociate tags from your resources, use <a>UntagResource</a>.</p> <p>For more information about tags, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>
 func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceRequest) (*operations.TagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=PhotonAdminProxyService.TagResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3547,7 +3616,7 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3607,8 +3676,9 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 	return res, nil
 }
 
+// UntagResource - <p>Disassociates one or more specified tags from the specified AppStream 2.0 resource.</p> <p>To list the current tags for your resources, use <a>ListTagsForResource</a>.</p> <p>For more information about tags, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>
 func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourceRequest) (*operations.UntagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=PhotonAdminProxyService.UntagResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3628,7 +3698,7 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3668,8 +3738,9 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 	return res, nil
 }
 
+// UpdateDirectoryConfig - Updates the specified Directory Config object in AppStream 2.0. This object includes the configuration information required to join fleets and image builders to Microsoft Active Directory domains.
 func (s *SDK) UpdateDirectoryConfig(ctx context.Context, request operations.UpdateDirectoryConfigRequest) (*operations.UpdateDirectoryConfigResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=PhotonAdminProxyService.UpdateDirectoryConfig"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3689,7 +3760,7 @@ func (s *SDK) UpdateDirectoryConfig(ctx context.Context, request operations.Upda
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3769,8 +3840,9 @@ func (s *SDK) UpdateDirectoryConfig(ctx context.Context, request operations.Upda
 	return res, nil
 }
 
+// UpdateFleet - <p>Updates the specified fleet.</p> <p>If the fleet is in the <code>STOPPED</code> state, you can update any attribute except the fleet name. If the fleet is in the <code>RUNNING</code> state, you can update the <code>DisplayName</code>, <code>ComputeCapacity</code>, <code>ImageARN</code>, <code>ImageName</code>, <code>IdleDisconnectTimeoutInSeconds</code>, and <code>DisconnectTimeoutInSeconds</code> attributes. If the fleet is in the <code>STARTING</code> or <code>STOPPING</code> state, you can't update it.</p>
 func (s *SDK) UpdateFleet(ctx context.Context, request operations.UpdateFleetRequest) (*operations.UpdateFleetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=PhotonAdminProxyService.UpdateFleet"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3790,7 +3862,7 @@ func (s *SDK) UpdateFleet(ctx context.Context, request operations.UpdateFleetReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3930,8 +4002,9 @@ func (s *SDK) UpdateFleet(ctx context.Context, request operations.UpdateFleetReq
 	return res, nil
 }
 
+// UpdateImagePermissions - Adds or updates permissions for the specified private image.
 func (s *SDK) UpdateImagePermissions(ctx context.Context, request operations.UpdateImagePermissionsRequest) (*operations.UpdateImagePermissionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=PhotonAdminProxyService.UpdateImagePermissions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3951,7 +4024,7 @@ func (s *SDK) UpdateImagePermissions(ctx context.Context, request operations.Upd
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4011,8 +4084,9 @@ func (s *SDK) UpdateImagePermissions(ctx context.Context, request operations.Upd
 	return res, nil
 }
 
+// UpdateStack - Updates the specified fields for the specified stack.
 func (s *SDK) UpdateStack(ctx context.Context, request operations.UpdateStackRequest) (*operations.UpdateStackResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=PhotonAdminProxyService.UpdateStack"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4032,7 +4106,7 @@ func (s *SDK) UpdateStack(ctx context.Context, request operations.UpdateStackReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

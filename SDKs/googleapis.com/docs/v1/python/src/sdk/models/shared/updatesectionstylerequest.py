@@ -1,14 +1,21 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import range
-from . import sectionstyle
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateSectionStyleRequest:
-    fields: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fields' }})
-    range: Optional[range.Range] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'range' }})
-    section_style: Optional[sectionstyle.SectionStyle] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sectionStyle' }})
+    r"""UpdateSectionStyleRequest
+    Updates the SectionStyle.
+    """
+    
+    fields: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fields') }})
+    range: Optional[Range] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('range') }})
+    section_style: Optional[SectionStyle] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sectionStyle') }})
     

@@ -1,5 +1,7 @@
 package shared
 
+// Ad
+// This type defines the fields for an ad.
 type Ad struct {
 	AdID                   *string `json:"adId,omitempty"`
 	BidPercentage          *string `json:"bidPercentage,omitempty"`

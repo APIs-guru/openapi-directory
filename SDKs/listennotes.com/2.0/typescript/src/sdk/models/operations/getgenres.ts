@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetGenresQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=top_level_only" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=top_level_only" })
   topLevelOnly?: number;
 }
 
 
 export class GetGenresHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-ListenAPI-Key" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-ListenAPI-Key" })
   xListenApiKey: string;
 }
 
 
 export class GetGenresRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetGenresQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetGenresHeaders;
 }
 
 
 export class GetGenresResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getGenresResponse?: shared.GetGenresResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ContentOrdersCancellineitemPathParams:
-    merchant_id: str = field(default=None, metadata={'path_param': { 'field_name': 'merchantId', 'style': 'simple', 'explode': False }})
-    order_id: str = field(default=None, metadata={'path_param': { 'field_name': 'orderId', 'style': 'simple', 'explode': False }})
+    merchant_id: str = field(metadata={'path_param': { 'field_name': 'merchantId', 'style': 'simple', 'explode': False }})
+    order_id: str = field(metadata={'path_param': { 'field_name': 'orderId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +27,21 @@ class ContentOrdersCancellineitemQueryParams:
 
 @dataclass
 class ContentOrdersCancellineitemSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ContentOrdersCancellineitemRequest:
-    path_params: ContentOrdersCancellineitemPathParams = field(default=None)
-    query_params: ContentOrdersCancellineitemQueryParams = field(default=None)
+    path_params: ContentOrdersCancellineitemPathParams = field()
+    query_params: ContentOrdersCancellineitemQueryParams = field()
+    security: ContentOrdersCancellineitemSecurity = field()
     request: Optional[shared.OrdersCancelLineItemRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ContentOrdersCancellineitemSecurity = field(default=None)
     
 
 @dataclass
 class ContentOrdersCancellineitemResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     orders_cancel_line_item_response: Optional[shared.OrdersCancelLineItemResponse] = field(default=None)
-    status_code: int = field(default=None)
     

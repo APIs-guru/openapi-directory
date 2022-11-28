@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class ListProjectAssetsPathParams:
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,17 +30,17 @@ class ListProjectAssetsHeaders:
 
 @dataclass
 class ListProjectAssetsRequest:
-    path_params: ListProjectAssetsPathParams = field(default=None)
-    query_params: ListProjectAssetsQueryParams = field(default=None)
-    headers: ListProjectAssetsHeaders = field(default=None)
+    headers: ListProjectAssetsHeaders = field()
+    path_params: ListProjectAssetsPathParams = field()
+    query_params: ListProjectAssetsQueryParams = field()
     
 
 @dataclass
 class ListProjectAssetsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     list_project_assets_response: Optional[shared.ListProjectAssetsResponse] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

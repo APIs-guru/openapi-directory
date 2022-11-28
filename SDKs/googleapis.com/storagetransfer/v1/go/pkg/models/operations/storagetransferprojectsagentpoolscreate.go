@@ -31,7 +31,7 @@ type StoragetransferProjectsAgentPoolsCreateSecurity struct {
 type StoragetransferProjectsAgentPoolsCreateRequest struct {
 	PathParams  StoragetransferProjectsAgentPoolsCreatePathParams
 	QueryParams StoragetransferProjectsAgentPoolsCreateQueryParams
-	Request     *shared.AgentPool `request:"mediaType=application/json"`
+	Request     *shared.AgentPoolInput `request:"mediaType=application/json"`
 	Security    StoragetransferProjectsAgentPoolsCreateSecurity
 }
 

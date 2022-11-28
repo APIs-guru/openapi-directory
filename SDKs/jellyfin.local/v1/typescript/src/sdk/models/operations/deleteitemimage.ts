@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DeleteItemImagePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=imageType" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=imageType" })
   imageType: shared.ImageTypeEnum;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=itemId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=itemId" })
   itemId: string;
 }
 
 
 export class DeleteItemImageQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=imageIndex" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=imageIndex" })
   imageIndex?: number;
 }
 
 
 export class DeleteItemImageSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   customAuthentication: shared.SchemeCustomAuthentication;
 }
 
 
 export class DeleteItemImageRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DeleteItemImagePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: DeleteItemImageQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: DeleteItemImageSecurity;
 }
 
 
 export class DeleteItemImageResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

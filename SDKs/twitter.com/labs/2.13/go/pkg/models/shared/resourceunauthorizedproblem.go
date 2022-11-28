@@ -15,6 +15,8 @@ const (
 	ResourceUnauthorizedProblemSectionEnumIncludes ResourceUnauthorizedProblemSectionEnum = "includes"
 )
 
+// ResourceUnauthorizedProblem
+// A problem that indicates you are not allowed to see a particular Tweet, User, etc.
 type ResourceUnauthorizedProblem struct {
 	Detail       string                                      `json:"detail"`
 	ResourceID   string                                      `json:"resource_id"`

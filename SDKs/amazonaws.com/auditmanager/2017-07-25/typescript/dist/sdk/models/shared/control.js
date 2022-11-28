@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ControlMappingSource } from "./controlmappingsource";
 import { ControlTypeEnum } from "./controltypeenum";
 // Control
 /**
@@ -35,63 +35,63 @@ var Control = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=actionPlanInstructions" }),
+        SpeakeasyMetadata({ data: "json, name=actionPlanInstructions" }),
         __metadata("design:type", String)
     ], Control.prototype, "actionPlanInstructions", void 0);
     __decorate([
-        Metadata({ data: "json, name=actionPlanTitle" }),
+        SpeakeasyMetadata({ data: "json, name=actionPlanTitle" }),
         __metadata("design:type", String)
     ], Control.prototype, "actionPlanTitle", void 0);
     __decorate([
-        Metadata({ data: "json, name=arn" }),
+        SpeakeasyMetadata({ data: "json, name=arn" }),
         __metadata("design:type", String)
     ], Control.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=controlMappingSources", elemType: shared.ControlMappingSource }),
+        SpeakeasyMetadata({ data: "json, name=controlMappingSources", elemType: ControlMappingSource }),
         __metadata("design:type", Array)
     ], Control.prototype, "controlMappingSources", void 0);
     __decorate([
-        Metadata({ data: "json, name=controlSources" }),
+        SpeakeasyMetadata({ data: "json, name=controlSources" }),
         __metadata("design:type", String)
     ], Control.prototype, "controlSources", void 0);
     __decorate([
-        Metadata({ data: "json, name=createdAt" }),
+        SpeakeasyMetadata({ data: "json, name=createdAt" }),
         __metadata("design:type", Date)
     ], Control.prototype, "createdAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=createdBy" }),
+        SpeakeasyMetadata({ data: "json, name=createdBy" }),
         __metadata("design:type", String)
     ], Control.prototype, "createdBy", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], Control.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], Control.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastUpdatedAt" }),
+        SpeakeasyMetadata({ data: "json, name=lastUpdatedAt" }),
         __metadata("design:type", Date)
     ], Control.prototype, "lastUpdatedAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastUpdatedBy" }),
+        SpeakeasyMetadata({ data: "json, name=lastUpdatedBy" }),
         __metadata("design:type", String)
     ], Control.prototype, "lastUpdatedBy", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Control.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags" }),
+        SpeakeasyMetadata({ data: "json, name=tags" }),
         __metadata("design:type", Map)
     ], Control.prototype, "tags", void 0);
     __decorate([
-        Metadata({ data: "json, name=testingInformation" }),
+        SpeakeasyMetadata({ data: "json, name=testingInformation" }),
         __metadata("design:type", String)
     ], Control.prototype, "testingInformation", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], Control.prototype, "type", void 0);
     return Control;

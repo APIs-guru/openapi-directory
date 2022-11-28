@@ -22,19 +22,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SimulationJob } from "./simulationjob";
 var BatchDescribeSimulationJobResponse = /** @class */ (function (_super) {
     __extends(BatchDescribeSimulationJobResponse, _super);
     function BatchDescribeSimulationJobResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=jobs", elemType: shared.SimulationJob }),
+        SpeakeasyMetadata({ data: "json, name=jobs", elemType: SimulationJob }),
         __metadata("design:type", Array)
     ], BatchDescribeSimulationJobResponse.prototype, "jobs", void 0);
     __decorate([
-        Metadata({ data: "json, name=unprocessedJobs" }),
+        SpeakeasyMetadata({ data: "json, name=unprocessedJobs" }),
         __metadata("design:type", Array)
     ], BatchDescribeSimulationJobResponse.prototype, "unprocessedJobs", void 0);
     return BatchDescribeSimulationJobResponse;

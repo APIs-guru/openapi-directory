@@ -1,85 +1,86 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateSchemaPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=apiId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=apiId" })
   apiId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=apiVersionId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=apiVersionId" })
   apiVersionId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=schemaId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=schemaId" })
   schemaId: string;
 }
 
 
 export class UpdateSchemaRequestBodySchema extends SpeakeasyBase {
-  @Metadata({ data: "json, name=language" })
+  @SpeakeasyMetadata({ data: "json, name=language" })
   language?: string;
 
-  @Metadata({ data: "json, name=schema" })
+  @SpeakeasyMetadata({ data: "json, name=schema" })
   schema?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }
 
 
 export class UpdateSchemaRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=schema" })
+  @SpeakeasyMetadata({ data: "json, name=schema" })
   schema?: UpdateSchemaRequestBodySchema;
 }
 
 
-export class UpdateSchemaRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: UpdateSchemaPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: UpdateSchemaRequestBody;
-}
-
-
 export class UpdateSchema200ApplicationJsonSchema extends SpeakeasyBase {
-  @Metadata({ data: "json, name=apiVersion" })
+  @SpeakeasyMetadata({ data: "json, name=apiVersion" })
   apiVersion?: string;
 
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: string;
 
-  @Metadata({ data: "json, name=createdBy" })
+  @SpeakeasyMetadata({ data: "json, name=createdBy" })
   createdBy?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=language" })
+  @SpeakeasyMetadata({ data: "json, name=language" })
   language?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 
-  @Metadata({ data: "json, name=updateBy" })
+  @SpeakeasyMetadata({ data: "json, name=updateBy" })
   updateBy?: string;
 
-  @Metadata({ data: "json, name=updatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=updatedAt" })
   updatedAt?: string;
 }
 
 
 export class UpdateSchema200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=schema" })
+  @SpeakeasyMetadata({ data: "json, name=schema" })
   schema?: UpdateSchema200ApplicationJsonSchema;
 }
 
 
+export class UpdateSchemaRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: UpdateSchemaPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: UpdateSchemaRequestBody;
+}
+
+
 export class UpdateSchemaResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateSchema200ApplicationJsonObject?: UpdateSchema200ApplicationJson;
 }

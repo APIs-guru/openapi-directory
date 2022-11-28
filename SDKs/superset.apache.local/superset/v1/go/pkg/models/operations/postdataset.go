@@ -8,11 +8,6 @@ type PostDatasetSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type PostDatasetRequest struct {
-	Request  shared.DatasetRestAPIPost `request:"mediaType=application/json"`
-	Security PostDatasetSecurity
-}
-
 type PostDataset201ApplicationJSON struct {
 	ID     *float64                   `json:"id,omitempty"`
 	Result *shared.DatasetRestAPIPost `json:"result,omitempty"`
@@ -32,6 +27,11 @@ type PostDataset422ApplicationJSON struct {
 
 type PostDataset500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type PostDatasetRequest struct {
+	Request  shared.DatasetRestAPIPost `request:"mediaType=application/json"`
+	Security PostDatasetSecurity
 }
 
 type PostDatasetResponse struct {

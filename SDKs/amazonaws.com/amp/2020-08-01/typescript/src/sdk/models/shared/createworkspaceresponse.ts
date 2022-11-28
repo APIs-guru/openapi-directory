@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WorkspaceStatus } from "./workspacestatus";
+
 
 
 // CreateWorkspaceResponse
@@ -7,15 +8,15 @@ import { WorkspaceStatus } from "./workspacestatus";
  * Represents the output of a CreateWorkspace operation.
 **/
 export class CreateWorkspaceResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: WorkspaceStatus;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 
-  @Metadata({ data: "json, name=workspaceId" })
+  @SpeakeasyMetadata({ data: "json, name=workspaceId" })
   workspaceId: string;
 }

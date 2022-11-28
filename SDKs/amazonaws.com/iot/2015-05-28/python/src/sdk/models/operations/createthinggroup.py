@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class CreateThingGroupPathParams:
-    thing_group_name: str = field(default=None, metadata={'path_param': { 'field_name': 'thingGroupName', 'style': 'simple', 'explode': False }})
+    thing_group_name: str = field(metadata={'path_param': { 'field_name': 'thingGroupName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,32 +27,36 @@ class CreateThingGroupHeaders:
 @dataclass_json
 @dataclass
 class CreateThingGroupRequestBodyThingGroupProperties:
-    attribute_payload: Optional[shared.AttributePayload] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'attributePayload' }})
-    thing_group_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'thingGroupDescription' }})
+    r"""CreateThingGroupRequestBodyThingGroupProperties
+    Thing group properties.
+    """
+    
+    attribute_payload: Optional[shared.AttributePayload] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('attributePayload') }})
+    thing_group_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('thingGroupDescription') }})
     
 
 @dataclass_json
 @dataclass
 class CreateThingGroupRequestBody:
-    parent_group_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'parentGroupName' }})
-    tags: Optional[List[shared.Tag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
-    thing_group_properties: Optional[CreateThingGroupRequestBodyThingGroupProperties] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'thingGroupProperties' }})
+    parent_group_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('parentGroupName') }})
+    tags: Optional[List[shared.Tag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
+    thing_group_properties: Optional[CreateThingGroupRequestBodyThingGroupProperties] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('thingGroupProperties') }})
     
 
 @dataclass
 class CreateThingGroupRequest:
-    path_params: CreateThingGroupPathParams = field(default=None)
-    headers: CreateThingGroupHeaders = field(default=None)
-    request: CreateThingGroupRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateThingGroupHeaders = field()
+    path_params: CreateThingGroupPathParams = field()
+    request: CreateThingGroupRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateThingGroupResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     create_thing_group_response: Optional[shared.CreateThingGroupResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     resource_already_exists_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

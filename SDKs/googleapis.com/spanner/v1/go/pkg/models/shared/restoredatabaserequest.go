@@ -1,5 +1,7 @@
 package shared
 
+// RestoreDatabaseRequest
+// The request for RestoreDatabase.
 type RestoreDatabaseRequest struct {
 	Backup           *string                          `json:"backup,omitempty"`
 	DatabaseID       *string                          `json:"databaseId,omitempty"`

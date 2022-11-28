@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ServiceFeesInputModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cancellationFeeAmount" })
+  @SpeakeasyMetadata({ data: "json, name=cancellationFeeAmount" })
   cancellationFeeAmount?: number;
 
-  @Metadata({ data: "json, name=cancellationFeeTaxable" })
+  @SpeakeasyMetadata({ data: "json, name=cancellationFeeTaxable" })
   cancellationFeeTaxable?: boolean;
 
-  @Metadata({ data: "json, name=feeAmount" })
+  @SpeakeasyMetadata({ data: "json, name=feeAmount" })
   feeAmount?: number;
 
-  @Metadata({ data: "json, name=feeTaxable" })
+  @SpeakeasyMetadata({ data: "json, name=feeTaxable" })
   feeTaxable?: boolean;
 
-  @Metadata({ data: "json, name=nonRefundable" })
+  @SpeakeasyMetadata({ data: "json, name=nonRefundable" })
   nonRefundable?: boolean;
 }

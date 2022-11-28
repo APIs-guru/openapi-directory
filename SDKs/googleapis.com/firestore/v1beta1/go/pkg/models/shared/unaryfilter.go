@@ -10,6 +10,8 @@ const (
 	UnaryFilterOpEnumIsNotNull           UnaryFilterOpEnum = "IS_NOT_NULL"
 )
 
+// UnaryFilter
+// A filter with a single operand.
 type UnaryFilter struct {
 	Field *FieldReference    `json:"field,omitempty"`
 	Op    *UnaryFilterOpEnum `json:"op,omitempty"`

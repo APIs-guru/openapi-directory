@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ConnectionStateEnum } from "./connectionstateenum";
 export declare class ListConnectionsRequest extends SpeakeasyBase {
     connectionState?: ConnectionStateEnum;

@@ -4,17 +4,17 @@ from typing import Any,Optional
 
 @dataclass
 class GetWalletAccountIDPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetWalletAccountIDRequest:
-    path_params: GetWalletAccountIDPathParams = field(default=None)
+    path_params: GetWalletAccountIDPathParams = field()
     
 
 @dataclass
 class GetWalletAccountIDResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

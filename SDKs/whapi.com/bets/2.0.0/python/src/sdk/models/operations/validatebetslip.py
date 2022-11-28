@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from sdk.models import shared
 
@@ -10,20 +13,20 @@ class ValidateBetslipQueryParams:
 
 @dataclass
 class ValidateBetslipHeaders:
-    api_key: str = field(default=None, metadata={'header': { 'field_name': 'apiKey', 'style': 'simple', 'explode': False }})
-    api_secret: str = field(default=None, metadata={'header': { 'field_name': 'apiSecret', 'style': 'simple', 'explode': False }})
+    api_key: str = field(metadata={'header': { 'field_name': 'apiKey', 'style': 'simple', 'explode': False }})
+    api_secret: str = field(metadata={'header': { 'field_name': 'apiSecret', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ValidateBetslipRequest:
-    query_params: ValidateBetslipQueryParams = field(default=None)
-    headers: ValidateBetslipHeaders = field(default=None)
-    request: shared.BetSlipRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ValidateBetslipHeaders = field()
+    query_params: ValidateBetslipQueryParams = field()
+    request: shared.BetSlipRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ValidateBetslipResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     bet_slip_response: Optional[shared.BetSlipResponse] = field(default=None)
     

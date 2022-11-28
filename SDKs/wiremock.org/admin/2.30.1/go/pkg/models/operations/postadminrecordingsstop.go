@@ -1,5 +1,7 @@
 package operations
 
+// PostAdminRecordingsStop200ApplicationJSONMappingsRequestBasicAuthCredentials
+// Pre-emptive basic auth credentials to match against
 type PostAdminRecordingsStop200ApplicationJSONMappingsRequestBasicAuthCredentials struct {
 	Password string `json:"password"`
 	Username string `json:"username"`

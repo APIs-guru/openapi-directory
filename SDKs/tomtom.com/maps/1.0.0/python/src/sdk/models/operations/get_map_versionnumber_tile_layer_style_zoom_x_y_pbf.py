@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 
 class GetMapVersionNumberTileLayerStyleZoomXYPbfLayerEnum(str, Enum):
     BASIC = "basic"
@@ -12,12 +13,12 @@ class GetMapVersionNumberTileLayerStyleZoomXYPbfStyleEnum(str, Enum):
 
 @dataclass
 class GetMapVersionNumberTileLayerStyleZoomXYPbfPathParams:
-    x: int = field(default=None, metadata={'path_param': { 'field_name': 'X', 'style': 'simple', 'explode': False }})
-    y: int = field(default=None, metadata={'path_param': { 'field_name': 'Y', 'style': 'simple', 'explode': False }})
-    layer: GetMapVersionNumberTileLayerStyleZoomXYPbfLayerEnum = field(default=None, metadata={'path_param': { 'field_name': 'layer', 'style': 'simple', 'explode': False }})
-    style: GetMapVersionNumberTileLayerStyleZoomXYPbfStyleEnum = field(default=None, metadata={'path_param': { 'field_name': 'style', 'style': 'simple', 'explode': False }})
-    version_number: int = field(default=None, metadata={'path_param': { 'field_name': 'versionNumber', 'style': 'simple', 'explode': False }})
-    zoom: int = field(default=None, metadata={'path_param': { 'field_name': 'zoom', 'style': 'simple', 'explode': False }})
+    x: int = field(metadata={'path_param': { 'field_name': 'X', 'style': 'simple', 'explode': False }})
+    y: int = field(metadata={'path_param': { 'field_name': 'Y', 'style': 'simple', 'explode': False }})
+    layer: GetMapVersionNumberTileLayerStyleZoomXYPbfLayerEnum = field(metadata={'path_param': { 'field_name': 'layer', 'style': 'simple', 'explode': False }})
+    style: GetMapVersionNumberTileLayerStyleZoomXYPbfStyleEnum = field(metadata={'path_param': { 'field_name': 'style', 'style': 'simple', 'explode': False }})
+    version_number: int = field(metadata={'path_param': { 'field_name': 'versionNumber', 'style': 'simple', 'explode': False }})
+    zoom: int = field(metadata={'path_param': { 'field_name': 'zoom', 'style': 'simple', 'explode': False }})
     
 class GetMapVersionNumberTileLayerStyleZoomXYPbfViewEnum(str, Enum):
     UNIFIED = "Unified"
@@ -33,12 +34,12 @@ class GetMapVersionNumberTileLayerStyleZoomXYPbfQueryParams:
 
 @dataclass
 class GetMapVersionNumberTileLayerStyleZoomXYPbfRequest:
-    path_params: GetMapVersionNumberTileLayerStyleZoomXYPbfPathParams = field(default=None)
-    query_params: GetMapVersionNumberTileLayerStyleZoomXYPbfQueryParams = field(default=None)
+    path_params: GetMapVersionNumberTileLayerStyleZoomXYPbfPathParams = field()
+    query_params: GetMapVersionNumberTileLayerStyleZoomXYPbfQueryParams = field()
     
 
 @dataclass
 class GetMapVersionNumberTileLayerStyleZoomXYPbfResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

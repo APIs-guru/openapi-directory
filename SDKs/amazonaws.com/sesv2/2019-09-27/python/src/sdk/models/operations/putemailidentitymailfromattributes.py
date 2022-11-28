@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
 class PutEmailIdentityMailFromAttributesPathParams:
-    email_identity: str = field(default=None, metadata={'path_param': { 'field_name': 'EmailIdentity', 'style': 'simple', 'explode': False }})
+    email_identity: str = field(metadata={'path_param': { 'field_name': 'EmailIdentity', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,23 +31,23 @@ class PutEmailIdentityMailFromAttributesRequestBodyBehaviorOnMxFailureEnum(str, 
 @dataclass_json
 @dataclass
 class PutEmailIdentityMailFromAttributesRequestBody:
-    behavior_on_mx_failure: Optional[PutEmailIdentityMailFromAttributesRequestBodyBehaviorOnMxFailureEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BehaviorOnMxFailure' }})
-    mail_from_domain: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MailFromDomain' }})
+    behavior_on_mx_failure: Optional[PutEmailIdentityMailFromAttributesRequestBodyBehaviorOnMxFailureEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('BehaviorOnMxFailure') }})
+    mail_from_domain: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MailFromDomain') }})
     
 
 @dataclass
 class PutEmailIdentityMailFromAttributesRequest:
-    path_params: PutEmailIdentityMailFromAttributesPathParams = field(default=None)
-    headers: PutEmailIdentityMailFromAttributesHeaders = field(default=None)
-    request: PutEmailIdentityMailFromAttributesRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: PutEmailIdentityMailFromAttributesHeaders = field()
+    path_params: PutEmailIdentityMailFromAttributesPathParams = field()
+    request: PutEmailIdentityMailFromAttributesRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PutEmailIdentityMailFromAttributesResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
     put_email_identity_mail_from_attributes_response: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

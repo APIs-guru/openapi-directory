@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from sdk.models import shared
 
 
@@ -18,14 +18,14 @@ class ListNodeSubscriptionsHeaders:
 
 @dataclass
 class ListNodeSubscriptionsRequest:
-    query_params: ListNodeSubscriptionsQueryParams = field(default=None)
-    headers: ListNodeSubscriptionsHeaders = field(default=None)
+    headers: ListNodeSubscriptionsHeaders = field()
+    query_params: ListNodeSubscriptionsQueryParams = field()
     
 
 @dataclass
 class ListNodeSubscriptionsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     subscribed_node_list: Optional[shared.SubscribedNodeList] = field(default=None)
     

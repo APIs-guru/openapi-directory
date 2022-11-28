@@ -1,12 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import nodetype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class NodeID:
-    entity_type: Optional[nodetype_enum.NodeTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'entity_type' }})
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
+    entity_type: Optional[NodeTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('entity_type') }})
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
     

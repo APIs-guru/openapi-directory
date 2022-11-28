@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class SensitiveCategoryAssignedTargetingOptionDetailsSensitiveCategoryEnum(str, Enum):
     SENSITIVE_CATEGORY_UNSPECIFIED = "SENSITIVE_CATEGORY_UNSPECIFIED"
@@ -25,7 +27,21 @@ class SensitiveCategoryAssignedTargetingOptionDetailsSensitiveCategoryEnum(str, 
 
 @dataclass_json
 @dataclass
+class SensitiveCategoryAssignedTargetingOptionDetailsInput:
+    r"""SensitiveCategoryAssignedTargetingOptionDetailsInput
+    Targeting details for sensitive category. This will be populated in the details field of an AssignedTargetingOption when targeting_type is `TARGETING_TYPE_SENSITIVE_CATEGORY_EXCLUSION`.
+    """
+    
+    excluded_targeting_option_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('excludedTargetingOptionId') }})
+    
+
+@dataclass_json
+@dataclass
 class SensitiveCategoryAssignedTargetingOptionDetails:
-    excluded_targeting_option_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'excludedTargetingOptionId' }})
-    sensitive_category: Optional[SensitiveCategoryAssignedTargetingOptionDetailsSensitiveCategoryEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sensitiveCategory' }})
+    r"""SensitiveCategoryAssignedTargetingOptionDetails
+    Targeting details for sensitive category. This will be populated in the details field of an AssignedTargetingOption when targeting_type is `TARGETING_TYPE_SENSITIVE_CATEGORY_EXCLUSION`.
+    """
+    
+    excluded_targeting_option_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('excludedTargetingOptionId') }})
+    sensitive_category: Optional[SensitiveCategoryAssignedTargetingOptionDetailsSensitiveCategoryEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sensitiveCategory') }})
     

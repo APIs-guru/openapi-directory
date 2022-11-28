@@ -1,15 +1,20 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import configdetails
-from . import configcapabilitytype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Source:
-    config_details: Optional[configdetails.ConfigDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'configDetails' }})
-    config_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'configId' }})
-    config_type: Optional[configcapabilitytype_enum.ConfigCapabilityTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'configType' }})
-    dataflow_source_region: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dataflowSourceRegion' }})
+    r"""Source
+    Dataflow details for the source side.
+    """
+    
+    config_details: Optional[ConfigDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('configDetails') }})
+    config_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('configId') }})
+    config_type: Optional[ConfigCapabilityTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('configType') }})
+    dataflow_source_region: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dataflowSourceRegion') }})
     

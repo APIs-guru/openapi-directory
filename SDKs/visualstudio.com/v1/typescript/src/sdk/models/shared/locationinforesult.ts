@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SkuInfoResult } from "./skuinforesult";
 
 
+
 export class LocationInfoResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=defaultAutoSuspendDelayMinutes" })
+  @SpeakeasyMetadata({ data: "json, name=defaultAutoSuspendDelayMinutes" })
   defaultAutoSuspendDelayMinutes?: number[];
 
-  @Metadata({ data: "json, name=skus", elemType: shared.SkuInfoResult })
+  @SpeakeasyMetadata({ data: "json, name=skus", elemType: SkuInfoResult })
   skus?: SkuInfoResult[];
 }

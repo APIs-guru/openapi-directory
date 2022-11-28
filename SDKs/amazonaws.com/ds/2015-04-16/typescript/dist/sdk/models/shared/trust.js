@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SelectiveAuthEnum } from "./selectiveauthenum";
 import { TrustDirectionEnum } from "./trustdirectionenum";
 import { TrustStateEnum } from "./truststateenum";
@@ -37,47 +37,47 @@ var Trust = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CreatedDateTime" }),
+        SpeakeasyMetadata({ data: "json, name=CreatedDateTime" }),
         __metadata("design:type", Date)
     ], Trust.prototype, "createdDateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=DirectoryId" }),
+        SpeakeasyMetadata({ data: "json, name=DirectoryId" }),
         __metadata("design:type", String)
     ], Trust.prototype, "directoryId", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastUpdatedDateTime" }),
+        SpeakeasyMetadata({ data: "json, name=LastUpdatedDateTime" }),
         __metadata("design:type", Date)
     ], Trust.prototype, "lastUpdatedDateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=RemoteDomainName" }),
+        SpeakeasyMetadata({ data: "json, name=RemoteDomainName" }),
         __metadata("design:type", String)
     ], Trust.prototype, "remoteDomainName", void 0);
     __decorate([
-        Metadata({ data: "json, name=SelectiveAuth" }),
+        SpeakeasyMetadata({ data: "json, name=SelectiveAuth" }),
         __metadata("design:type", String)
     ], Trust.prototype, "selectiveAuth", void 0);
     __decorate([
-        Metadata({ data: "json, name=StateLastUpdatedDateTime" }),
+        SpeakeasyMetadata({ data: "json, name=StateLastUpdatedDateTime" }),
         __metadata("design:type", Date)
     ], Trust.prototype, "stateLastUpdatedDateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=TrustDirection" }),
+        SpeakeasyMetadata({ data: "json, name=TrustDirection" }),
         __metadata("design:type", String)
     ], Trust.prototype, "trustDirection", void 0);
     __decorate([
-        Metadata({ data: "json, name=TrustId" }),
+        SpeakeasyMetadata({ data: "json, name=TrustId" }),
         __metadata("design:type", String)
     ], Trust.prototype, "trustId", void 0);
     __decorate([
-        Metadata({ data: "json, name=TrustState" }),
+        SpeakeasyMetadata({ data: "json, name=TrustState" }),
         __metadata("design:type", String)
     ], Trust.prototype, "trustState", void 0);
     __decorate([
-        Metadata({ data: "json, name=TrustStateReason" }),
+        SpeakeasyMetadata({ data: "json, name=TrustStateReason" }),
         __metadata("design:type", String)
     ], Trust.prototype, "trustStateReason", void 0);
     __decorate([
-        Metadata({ data: "json, name=TrustType" }),
+        SpeakeasyMetadata({ data: "json, name=TrustType" }),
         __metadata("design:type", String)
     ], Trust.prototype, "trustType", void 0);
     return Trust;

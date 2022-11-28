@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RoomWebhookAssignment
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request model for handling webhook assignments
 **/
 export class RoomWebhookAssignment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=isAssigned" })
+  @SpeakeasyMetadata({ data: "json, name=isAssigned" })
   isAssigned: boolean;
 
-  @Metadata({ data: "json, name=webhookId" })
+  @SpeakeasyMetadata({ data: "json, name=webhookId" })
   webhookId: number;
 }

@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateEventBusResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EventBusArn" })
+  @SpeakeasyMetadata({ data: "json, name=EventBusArn" })
   eventBusArn?: string;
 }

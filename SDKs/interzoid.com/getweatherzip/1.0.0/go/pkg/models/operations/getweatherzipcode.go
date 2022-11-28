@@ -5,10 +5,6 @@ type GetweatherzipcodeQueryParams struct {
 	Zip     string `queryParam:"style=form,explode=true,name=zip"`
 }
 
-type GetweatherzipcodeRequest struct {
-	QueryParams GetweatherzipcodeQueryParams
-}
-
 type Getweatherzipcode200ApplicationJSON struct {
 	City             *string `json:"City,omitempty"`
 	Code             *string `json:"Code,omitempty"`
@@ -21,6 +17,10 @@ type Getweatherzipcode200ApplicationJSON struct {
 	Weather          *string `json:"Weather,omitempty"`
 	WindDir          *string `json:"WindDir,omitempty"`
 	WindMph          *string `json:"WindMPH,omitempty"`
+}
+
+type GetweatherzipcodeRequest struct {
+	QueryParams GetweatherzipcodeQueryParams
 }
 
 type GetweatherzipcodeResponse struct {

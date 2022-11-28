@@ -12,14 +12,14 @@ type SearchGifsQueryParams struct {
 	Rating *string `queryParam:"style=form,explode=true,name=rating"`
 }
 
-type SearchGifsRequest struct {
-	QueryParams SearchGifsQueryParams
-}
-
 type SearchGifs200ApplicationJSON struct {
 	Data       []shared.Gif       `json:"data,omitempty"`
 	Meta       *shared.Meta       `json:"meta,omitempty"`
 	Pagination *shared.Pagination `json:"pagination,omitempty"`
+}
+
+type SearchGifsRequest struct {
+	QueryParams SearchGifsQueryParams
 }
 
 type SearchGifsResponse struct {

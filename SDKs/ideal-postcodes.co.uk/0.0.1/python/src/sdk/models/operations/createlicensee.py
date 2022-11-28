@@ -5,26 +5,26 @@ from sdk.models import shared
 
 @dataclass
 class CreateLicenseePathParams:
-    key: str = field(default=None, metadata={'path_param': { 'field_name': 'key', 'style': 'simple', 'explode': False }})
+    key: str = field(metadata={'path_param': { 'field_name': 'key', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class CreateLicenseeSecurity:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'query' }})
-    user_token: shared.SchemeUserToken = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'query' }})
+    api_key: shared.SchemeAPIKey = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'query' }})
+    user_token: shared.SchemeUserToken = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'query' }})
     
 
 @dataclass
 class CreateLicenseeRequest:
-    path_params: CreateLicenseePathParams = field(default=None)
-    request: shared.CreateLicenseeSchema = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: CreateLicenseeSecurity = field(default=None)
+    path_params: CreateLicenseePathParams = field()
+    request: shared.CreateLicenseeSchema = field(metadata={'request': { 'media_type': 'application/json' }})
+    security: CreateLicenseeSecurity = field()
     
 
 @dataclass
 class CreateLicenseeResponse:
+    content_type: str = field()
+    status_code: int = field()
     address_lookup_response_schema: Optional[shared.AddressLookupResponseSchema] = field(default=None)
-    content_type: str = field(default=None)
     licensee_response_schema: Optional[shared.LicenseeResponseSchema] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,21 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Tag } from "./tag";
 
 
+
 export class CopySnapshotRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=KmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=KmsKeyId" })
   kmsKeyId?: string;
 
-  @Metadata({ data: "json, name=SourceSnapshotName" })
+  @SpeakeasyMetadata({ data: "json, name=SourceSnapshotName" })
   sourceSnapshotName: string;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 
-  @Metadata({ data: "json, name=TargetBucket" })
+  @SpeakeasyMetadata({ data: "json, name=TargetBucket" })
   targetBucket?: string;
 
-  @Metadata({ data: "json, name=TargetSnapshotName" })
+  @SpeakeasyMetadata({ data: "json, name=TargetSnapshotName" })
   targetSnapshotName: string;
 }

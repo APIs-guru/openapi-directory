@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleChromePolicyVersionsV1ModifyOrgUnitPolicyRequest } from "./googlechromepolicyversionsv1modifyorgunitpolicyrequest";
+
 
 
 // GoogleChromePolicyVersionsV1BatchModifyOrgUnitPoliciesRequest
@@ -8,6 +8,6 @@ import { GoogleChromePolicyVersionsV1ModifyOrgUnitPolicyRequest } from "./google
  * Request message for modifying multiple policy values for a specific target.
 **/
 export class GoogleChromePolicyVersionsV1BatchModifyOrgUnitPoliciesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=requests", elemType: shared.GoogleChromePolicyVersionsV1ModifyOrgUnitPolicyRequest })
+  @SpeakeasyMetadata({ data: "json, name=requests", elemType: GoogleChromePolicyVersionsV1ModifyOrgUnitPolicyRequest })
   requests?: GoogleChromePolicyVersionsV1ModifyOrgUnitPolicyRequest[];
 }

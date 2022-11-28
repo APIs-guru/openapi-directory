@@ -11,14 +11,14 @@ class GetAPIV1PublicationTypesQueryParams:
 
 @dataclass
 class GetAPIV1PublicationTypesRequest:
-    query_params: GetAPIV1PublicationTypesQueryParams = field(default=None)
+    query_params: GetAPIV1PublicationTypesQueryParams = field()
     
 
 @dataclass
 class GetAPIV1PublicationTypesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     problem_details: Optional[dict[str, Any]] = field(default=None)
     publication_type_search_result: Optional[shared.PublicationTypeSearchResult] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RefreshSchemasStatusTypeValueEnum } from "./refreshschemasstatustypevalueenum";
 // RefreshSchemasStatus
 /**
@@ -34,23 +34,23 @@ var RefreshSchemasStatus = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=EndpointArn" }),
+        SpeakeasyMetadata({ data: "json, name=EndpointArn" }),
         __metadata("design:type", String)
     ], RefreshSchemasStatus.prototype, "endpointArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastFailureMessage" }),
+        SpeakeasyMetadata({ data: "json, name=LastFailureMessage" }),
         __metadata("design:type", String)
     ], RefreshSchemasStatus.prototype, "lastFailureMessage", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastRefreshDate" }),
+        SpeakeasyMetadata({ data: "json, name=LastRefreshDate" }),
         __metadata("design:type", Date)
     ], RefreshSchemasStatus.prototype, "lastRefreshDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=ReplicationInstanceArn" }),
+        SpeakeasyMetadata({ data: "json, name=ReplicationInstanceArn" }),
         __metadata("design:type", String)
     ], RefreshSchemasStatus.prototype, "replicationInstanceArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=Status" }),
+        SpeakeasyMetadata({ data: "json, name=Status" }),
         __metadata("design:type", String)
     ], RefreshSchemasStatus.prototype, "status", void 0);
     return RefreshSchemasStatus;

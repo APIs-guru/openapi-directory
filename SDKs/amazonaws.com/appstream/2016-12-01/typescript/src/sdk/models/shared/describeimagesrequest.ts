@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VisibilityTypeEnum } from "./visibilitytypeenum";
 
 
+
 export class DescribeImagesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Arns" })
+  @SpeakeasyMetadata({ data: "json, name=Arns" })
   arns?: string[];
 
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=Names" })
+  @SpeakeasyMetadata({ data: "json, name=Names" })
   names?: string[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: VisibilityTypeEnum;
 }

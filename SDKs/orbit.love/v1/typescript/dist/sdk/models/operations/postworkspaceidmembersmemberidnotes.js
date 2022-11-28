@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PostWorkspaceIdMembersMemberIdNotesPathParams = /** @class */ (function (_super) {
     __extends(PostWorkspaceIdMembersMemberIdNotesPathParams, _super);
@@ -30,11 +30,11 @@ var PostWorkspaceIdMembersMemberIdNotesPathParams = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=member_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=member_id" }),
         __metadata("design:type", String)
     ], PostWorkspaceIdMembersMemberIdNotesPathParams.prototype, "memberId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=workspace_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=workspace_id" }),
         __metadata("design:type", String)
     ], PostWorkspaceIdMembersMemberIdNotesPathParams.prototype, "workspaceId", void 0);
     return PostWorkspaceIdMembersMemberIdNotesPathParams;
@@ -46,7 +46,7 @@ var PostWorkspaceIdMembersMemberIdNotesSecurity = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeBearer)
     ], PostWorkspaceIdMembersMemberIdNotesSecurity.prototype, "bearer", void 0);
     return PostWorkspaceIdMembersMemberIdNotesSecurity;
@@ -58,15 +58,15 @@ var PostWorkspaceIdMembersMemberIdNotesRequest = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostWorkspaceIdMembersMemberIdNotesPathParams)
     ], PostWorkspaceIdMembersMemberIdNotesRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.Note)
     ], PostWorkspaceIdMembersMemberIdNotesRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostWorkspaceIdMembersMemberIdNotesSecurity)
     ], PostWorkspaceIdMembersMemberIdNotesRequest.prototype, "security", void 0);
     return PostWorkspaceIdMembersMemberIdNotesRequest;
@@ -78,11 +78,11 @@ var PostWorkspaceIdMembersMemberIdNotesResponse = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostWorkspaceIdMembersMemberIdNotesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostWorkspaceIdMembersMemberIdNotesResponse.prototype, "statusCode", void 0);
     return PostWorkspaceIdMembersMemberIdNotesResponse;

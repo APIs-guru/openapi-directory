@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Capacity
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the amount of provisioned throughput capacity consumed on a table or an index.
 **/
 export class Capacity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CapacityUnits" })
+  @SpeakeasyMetadata({ data: "json, name=CapacityUnits" })
   capacityUnits?: number;
 
-  @Metadata({ data: "json, name=ReadCapacityUnits" })
+  @SpeakeasyMetadata({ data: "json, name=ReadCapacityUnits" })
   readCapacityUnits?: number;
 
-  @Metadata({ data: "json, name=WriteCapacityUnits" })
+  @SpeakeasyMetadata({ data: "json, name=WriteCapacityUnits" })
   writeCapacityUnits?: number;
 }

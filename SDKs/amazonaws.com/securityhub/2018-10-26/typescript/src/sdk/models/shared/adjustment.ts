@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Adjustment
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An adjustment to the CVSS metric.
 **/
 export class Adjustment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Metric" })
+  @SpeakeasyMetadata({ data: "json, name=Metric" })
   metric?: string;
 
-  @Metadata({ data: "json, name=Reason" })
+  @SpeakeasyMetadata({ data: "json, name=Reason" })
   reason?: string;
 }

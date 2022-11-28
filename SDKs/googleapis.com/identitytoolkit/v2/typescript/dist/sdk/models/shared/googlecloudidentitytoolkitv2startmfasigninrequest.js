@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudIdentitytoolkitV2StartMfaPhoneRequestInfo } from "./googlecloudidentitytoolkitv2startmfaphonerequestinfo";
 // GoogleCloudIdentitytoolkitV2StartMfaSignInRequest
 /**
@@ -34,19 +34,19 @@ var GoogleCloudIdentitytoolkitV2StartMfaSignInRequest = /** @class */ (function 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=mfaEnrollmentId" }),
+        SpeakeasyMetadata({ data: "json, name=mfaEnrollmentId" }),
         __metadata("design:type", String)
     ], GoogleCloudIdentitytoolkitV2StartMfaSignInRequest.prototype, "mfaEnrollmentId", void 0);
     __decorate([
-        Metadata({ data: "json, name=mfaPendingCredential" }),
+        SpeakeasyMetadata({ data: "json, name=mfaPendingCredential" }),
         __metadata("design:type", String)
     ], GoogleCloudIdentitytoolkitV2StartMfaSignInRequest.prototype, "mfaPendingCredential", void 0);
     __decorate([
-        Metadata({ data: "json, name=phoneSignInInfo" }),
+        SpeakeasyMetadata({ data: "json, name=phoneSignInInfo" }),
         __metadata("design:type", GoogleCloudIdentitytoolkitV2StartMfaPhoneRequestInfo)
     ], GoogleCloudIdentitytoolkitV2StartMfaSignInRequest.prototype, "phoneSignInInfo", void 0);
     __decorate([
-        Metadata({ data: "json, name=tenantId" }),
+        SpeakeasyMetadata({ data: "json, name=tenantId" }),
         __metadata("design:type", String)
     ], GoogleCloudIdentitytoolkitV2StartMfaSignInRequest.prototype, "tenantId", void 0);
     return GoogleCloudIdentitytoolkitV2StartMfaSignInRequest;

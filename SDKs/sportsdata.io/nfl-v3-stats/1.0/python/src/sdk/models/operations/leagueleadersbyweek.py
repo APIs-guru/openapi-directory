@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 
 class LeagueLeadersByWeekColumnEnum(str, Enum):
     FANTASY_POINTS = "FantasyPoints"
@@ -30,21 +31,21 @@ class LeagueLeadersByWeekPositionEnum(str, Enum):
 
 @dataclass
 class LeagueLeadersByWeekPathParams:
-    column: LeagueLeadersByWeekColumnEnum = field(default=None, metadata={'path_param': { 'field_name': 'column', 'style': 'simple', 'explode': False }})
-    format: LeagueLeadersByWeekFormatEnum = field(default=None, metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
-    position: LeagueLeadersByWeekPositionEnum = field(default=None, metadata={'path_param': { 'field_name': 'position', 'style': 'simple', 'explode': False }})
-    season: str = field(default=None, metadata={'path_param': { 'field_name': 'season', 'style': 'simple', 'explode': False }})
-    week: str = field(default=None, metadata={'path_param': { 'field_name': 'week', 'style': 'simple', 'explode': False }})
+    column: LeagueLeadersByWeekColumnEnum = field(metadata={'path_param': { 'field_name': 'column', 'style': 'simple', 'explode': False }})
+    format: LeagueLeadersByWeekFormatEnum = field(metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
+    position: LeagueLeadersByWeekPositionEnum = field(metadata={'path_param': { 'field_name': 'position', 'style': 'simple', 'explode': False }})
+    season: str = field(metadata={'path_param': { 'field_name': 'season', 'style': 'simple', 'explode': False }})
+    week: str = field(metadata={'path_param': { 'field_name': 'week', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class LeagueLeadersByWeekRequest:
-    path_params: LeagueLeadersByWeekPathParams = field(default=None)
+    path_params: LeagueLeadersByWeekPathParams = field()
     
 
 @dataclass
 class LeagueLeadersByWeekResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     player_games: Optional[List[Any]] = field(default=None)
-    status_code: int = field(default=None)
     

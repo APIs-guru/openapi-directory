@@ -1,68 +1,69 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateSpaceTopicPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=spaceId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=spaceId" })
   spaceId: string;
 }
 
 
 export class CreateSpaceTopicRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "form, name=attachments;" })
+  @SpeakeasyMetadata({ data: "form, name=attachments;" })
   attachments?: string[];
 
-  @Metadata({ data: "form, name=complex;" })
+  @SpeakeasyMetadata({ data: "form, name=complex;" })
   complex?: boolean;
 
-  @Metadata({ data: "form, name=content;" })
+  @SpeakeasyMetadata({ data: "form, name=content;" })
   content?: string;
 
-  @Metadata({ data: "form, name=contentTags;" })
+  @SpeakeasyMetadata({ data: "form, name=contentTags;" })
   contentTags?: string[];
 
-  @Metadata({ data: "form, name=formMetaData;" })
+  @SpeakeasyMetadata({ data: "form, name=formMetaData;" })
   formMetaData?: string;
 
-  @Metadata({ data: "form, name=mentionedUser;" })
+  @SpeakeasyMetadata({ data: "form, name=mentionedUser;" })
   mentionedUser?: string;
 
-  @Metadata({ data: "form, name=subject;" })
+  @SpeakeasyMetadata({ data: "form, name=subject;" })
   subject: string;
 
-  @Metadata({ data: "form, name=tags;" })
+  @SpeakeasyMetadata({ data: "form, name=tags;" })
   tags?: string[];
 }
 
 
 export class CreateSpaceTopicSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth: shared.SchemeOauth;
 }
 
 
 export class CreateSpaceTopicRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CreateSpaceTopicPathParams;
 
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
   request: CreateSpaceTopicRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: CreateSpaceTopicSecurity;
 }
 
 
 export class CreateSpaceTopicResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   spaceTopic?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

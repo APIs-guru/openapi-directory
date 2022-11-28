@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class DoubleVerifyDisplayViewabilityIabEnum(str, Enum):
     IAB_VIEWED_RATE_UNSPECIFIED = "IAB_VIEWED_RATE_UNSPECIFIED"
@@ -24,6 +26,10 @@ class DoubleVerifyDisplayViewabilityViewableDuringEnum(str, Enum):
 @dataclass_json
 @dataclass
 class DoubleVerifyDisplayViewability:
-    iab: Optional[DoubleVerifyDisplayViewabilityIabEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'iab' }})
-    viewable_during: Optional[DoubleVerifyDisplayViewabilityViewableDuringEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'viewableDuring' }})
+    r"""DoubleVerifyDisplayViewability
+    Details of DoubleVerify display viewability settings.
+    """
+    
+    iab: Optional[DoubleVerifyDisplayViewabilityIabEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('iab') }})
+    viewable_during: Optional[DoubleVerifyDisplayViewabilityViewableDuringEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('viewableDuring') }})
     

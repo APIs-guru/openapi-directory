@@ -13,18 +13,18 @@ class GetQueryFiltersLegacyQueryParams:
 
 @dataclass
 class GetQueryFiltersLegacySecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetQueryFiltersLegacyRequest:
-    query_params: GetQueryFiltersLegacyQueryParams = field(default=None)
-    security: GetQueryFiltersLegacySecurity = field(default=None)
+    query_params: GetQueryFiltersLegacyQueryParams = field()
+    security: GetQueryFiltersLegacySecurity = field()
     
 
 @dataclass
 class GetQueryFiltersLegacyResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     query_filters_legacy: Optional[shared.QueryFiltersLegacy] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Presale
+// Event's Presale Info
 type Presale struct {
 	Descriptions  map[string]string `json:"descriptions,omitempty"`
 	EndDateTime   *time.Time        `json:"endDateTime,omitempty"`

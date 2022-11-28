@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SqlAclEntry } from "./sqlaclentry";
+
 
 
 // SqlIpConfig
@@ -8,15 +8,15 @@ import { SqlAclEntry } from "./sqlaclentry";
  * IP Management configuration.
 **/
 export class SqlIpConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authorizedNetworks", elemType: shared.SqlAclEntry })
+  @SpeakeasyMetadata({ data: "json, name=authorizedNetworks", elemType: SqlAclEntry })
   authorizedNetworks?: SqlAclEntry[];
 
-  @Metadata({ data: "json, name=enableIpv4" })
+  @SpeakeasyMetadata({ data: "json, name=enableIpv4" })
   enableIpv4?: boolean;
 
-  @Metadata({ data: "json, name=privateNetwork" })
+  @SpeakeasyMetadata({ data: "json, name=privateNetwork" })
   privateNetwork?: string;
 
-  @Metadata({ data: "json, name=requireSsl" })
+  @SpeakeasyMetadata({ data: "json, name=requireSsl" })
   requireSsl?: boolean;
 }

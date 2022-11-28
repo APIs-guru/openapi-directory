@@ -1,5 +1,7 @@
 package shared
 
+// PaymentDisputeOutcomeDetail
+// This type is used by the resolution container that is returned for payment disputes that have been resolved.
 type PaymentDisputeOutcomeDetail struct {
 	Fees             *SimpleAmount `json:"fees,omitempty"`
 	ProtectedAmount  *SimpleAmount `json:"protectedAmount,omitempty"`

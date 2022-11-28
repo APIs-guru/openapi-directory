@@ -1,6 +1,7 @@
 
 
+
 export enum ObExternalScheduleType1CodeEnum {
-    Arrival = "Arrival"
-,    Execution = "Execution"
+    Arrival = "Arrival",
+    Execution = "Execution"
 }

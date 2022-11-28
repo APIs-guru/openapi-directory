@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleAnalyticsAdminV1alphaAccessStringFilterMatchTypeEnum {
-    MatchTypeUnspecified = "MATCH_TYPE_UNSPECIFIED"
-,    Exact = "EXACT"
-,    BeginsWith = "BEGINS_WITH"
-,    EndsWith = "ENDS_WITH"
-,    Contains = "CONTAINS"
-,    FullRegexp = "FULL_REGEXP"
-,    PartialRegexp = "PARTIAL_REGEXP"
+    MatchTypeUnspecified = "MATCH_TYPE_UNSPECIFIED",
+    Exact = "EXACT",
+    BeginsWith = "BEGINS_WITH",
+    EndsWith = "ENDS_WITH",
+    Contains = "CONTAINS",
+    FullRegexp = "FULL_REGEXP",
+    PartialRegexp = "PARTIAL_REGEXP"
 }
 
 
@@ -16,12 +17,12 @@ export enum GoogleAnalyticsAdminV1alphaAccessStringFilterMatchTypeEnum {
  * The filter for strings.
 **/
 export class GoogleAnalyticsAdminV1alphaAccessStringFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=caseSensitive" })
+  @SpeakeasyMetadata({ data: "json, name=caseSensitive" })
   caseSensitive?: boolean;
 
-  @Metadata({ data: "json, name=matchType" })
+  @SpeakeasyMetadata({ data: "json, name=matchType" })
   matchType?: GoogleAnalyticsAdminV1alphaAccessStringFilterMatchTypeEnum;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }

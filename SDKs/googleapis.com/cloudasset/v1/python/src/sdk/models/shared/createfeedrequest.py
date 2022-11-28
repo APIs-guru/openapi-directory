@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import feed
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateFeedRequest:
-    feed: Optional[feed.Feed] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'feed' }})
-    feed_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'feedId' }})
+    r"""CreateFeedRequest
+    Create asset feed request.
+    """
+    
+    feed: Optional[Feed] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('feed') }})
+    feed_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('feedId') }})
     

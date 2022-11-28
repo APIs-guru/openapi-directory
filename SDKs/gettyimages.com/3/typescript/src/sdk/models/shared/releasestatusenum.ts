@@ -1,6 +1,7 @@
 
 
+
 export enum ReleaseStatusEnum {
-    ReleaseNotImportant = "release_not_important"
-,    FullyReleased = "fully_released"
+    ReleaseNotImportant = "release_not_important",
+    FullyReleased = "fully_released"
 }

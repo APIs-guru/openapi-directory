@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export var UploadDatasetAsyncRequestBodyTypeEnum;
 (function (UploadDatasetAsyncRequestBodyTypeEnum) {
@@ -35,19 +35,19 @@ var UploadDatasetAsyncRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "multipart_form, name=data" }),
+        SpeakeasyMetadata({ data: "multipart_form, name=data" }),
         __metadata("design:type", String)
     ], UploadDatasetAsyncRequestBody.prototype, "data", void 0);
     __decorate([
-        Metadata({ data: "multipart_form, name=name" }),
+        SpeakeasyMetadata({ data: "multipart_form, name=name" }),
         __metadata("design:type", String)
     ], UploadDatasetAsyncRequestBody.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "multipart_form, name=path" }),
+        SpeakeasyMetadata({ data: "multipart_form, name=path" }),
         __metadata("design:type", String)
     ], UploadDatasetAsyncRequestBody.prototype, "path", void 0);
     __decorate([
-        Metadata({ data: "multipart_form, name=type" }),
+        SpeakeasyMetadata({ data: "multipart_form, name=type" }),
         __metadata("design:type", String)
     ], UploadDatasetAsyncRequestBody.prototype, "type", void 0);
     return UploadDatasetAsyncRequestBody;
@@ -59,7 +59,7 @@ var UploadDatasetAsyncSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
         __metadata("design:type", shared.SchemeBearerToken)
     ], UploadDatasetAsyncSecurity.prototype, "bearerToken", void 0);
     return UploadDatasetAsyncSecurity;
@@ -71,11 +71,11 @@ var UploadDatasetAsyncRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=multipart/form-data" }),
+        SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" }),
         __metadata("design:type", UploadDatasetAsyncRequestBody)
     ], UploadDatasetAsyncRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UploadDatasetAsyncSecurity)
     ], UploadDatasetAsyncRequest.prototype, "security", void 0);
     return UploadDatasetAsyncRequest;
@@ -87,15 +87,15 @@ var UploadDatasetAsyncResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UploadDatasetAsyncResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Dataset)
     ], UploadDatasetAsyncResponse.prototype, "dataset", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UploadDatasetAsyncResponse.prototype, "statusCode", void 0);
     return UploadDatasetAsyncResponse;

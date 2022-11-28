@@ -5,40 +5,25 @@ from sdk.models import shared
 
 @dataclass
 class GetPostPathParams:
-    post_id: str = field(default=None, metadata={'path_param': { 'field_name': 'post_id', 'style': 'simple', 'explode': False }})
-    
-
-@dataclass
-class GetPostSecurityOption1:
-    oauth2_implicit: shared.SchemeOauth2Implicit = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    
-
-@dataclass
-class GetPostSecurityOption2:
-    oauth2_code: shared.SchemeOauth2Code = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    
-
-@dataclass
-class GetPostSecurityOption3:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'query' }})
+    post_id: str = field(metadata={'path_param': { 'field_name': 'post_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetPostSecurity:
-    option1: Optional[GetPostSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[GetPostSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
-    option3: Optional[GetPostSecurityOption3] = field(default=None, metadata={'security': { 'option': True }})
+    api_key: Optional[shared.SchemeAPIKey] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'query' }})
+    oauth2_code: Optional[shared.SchemeOauth2Code] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2_implicit: Optional[shared.SchemeOauth2Implicit] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetPostRequest:
-    path_params: GetPostPathParams = field(default=None)
-    security: GetPostSecurity = field(default=None)
+    path_params: GetPostPathParams = field()
+    security: GetPostSecurity = field()
     
 
 @dataclass
 class GetPostResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     post: Optional[shared.Post] = field(default=None)
-    status_code: int = field(default=None)
     

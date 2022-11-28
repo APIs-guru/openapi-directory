@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SuperFundProduct extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ABN" })
+  @SpeakeasyMetadata({ data: "json, name=ABN" })
   abn?: string;
 
-  @Metadata({ data: "json, name=ProductName" })
+  @SpeakeasyMetadata({ data: "json, name=ProductName" })
   productName?: string;
 
-  @Metadata({ data: "json, name=SPIN" })
+  @SpeakeasyMetadata({ data: "json, name=SPIN" })
   spin?: string;
 
-  @Metadata({ data: "json, name=USI" })
+  @SpeakeasyMetadata({ data: "json, name=USI" })
   usi?: string;
 }

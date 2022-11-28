@@ -1,6 +1,7 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { FileShareConfig } from "./fileshareconfig";
 import { NetworkConfig } from "./networkconfig";
+import { NetworkConfigInput } from "./networkconfig";
 export declare enum InstanceStateEnum {
     StateUnspecified = "STATE_UNSPECIFIED",
     Creating = "CREATING",
@@ -10,7 +11,9 @@ export declare enum InstanceStateEnum {
     Error = "ERROR",
     Restoring = "RESTORING",
     Suspended = "SUSPENDED",
-    Reverting = "REVERTING"
+    Reverting = "REVERTING",
+    Suspending = "SUSPENDING",
+    Resuming = "RESUMING"
 }
 export declare enum InstanceSuspensionReasonsEnum {
     SuspensionReasonUnspecified = "SUSPENSION_REASON_UNSPECIFIED",
@@ -46,5 +49,19 @@ export declare class Instance extends SpeakeasyBase {
     state?: InstanceStateEnum;
     statusMessage?: string;
     suspensionReasons?: InstanceSuspensionReasonsEnum[];
+    tier?: InstanceTierEnum;
+}
+/**
+ * A Filestore instance.
+**/
+export declare class InstanceInput extends SpeakeasyBase {
+    capacityGb?: string;
+    description?: string;
+    etag?: string;
+    fileShares?: FileShareConfig[];
+    kmsKeyName?: string;
+    labels?: Map<string, string>;
+    multiShareEnabled?: boolean;
+    networks?: NetworkConfigInput[];
     tier?: InstanceTierEnum;
 }

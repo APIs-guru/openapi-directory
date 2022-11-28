@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ReferencesAircraftByAircraftCodeGetPathParams = /** @class */ (function (_super) {
     __extends(ReferencesAircraftByAircraftCodeGetPathParams, _super);
@@ -30,7 +30,7 @@ var ReferencesAircraftByAircraftCodeGetPathParams = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=aircraftCode" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=aircraftCode" }),
         __metadata("design:type", String)
     ], ReferencesAircraftByAircraftCodeGetPathParams.prototype, "aircraftCode", void 0);
     return ReferencesAircraftByAircraftCodeGetPathParams;
@@ -42,11 +42,11 @@ var ReferencesAircraftByAircraftCodeGetQueryParams = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", String)
     ], ReferencesAircraftByAircraftCodeGetQueryParams.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=offset" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" }),
         __metadata("design:type", String)
     ], ReferencesAircraftByAircraftCodeGetQueryParams.prototype, "offset", void 0);
     return ReferencesAircraftByAircraftCodeGetQueryParams;
@@ -58,7 +58,7 @@ var ReferencesAircraftByAircraftCodeGetHeaders = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Accept" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept" }),
         __metadata("design:type", String)
     ], ReferencesAircraftByAircraftCodeGetHeaders.prototype, "accept", void 0);
     return ReferencesAircraftByAircraftCodeGetHeaders;
@@ -70,7 +70,7 @@ var ReferencesAircraftByAircraftCodeGetSecurity = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeAuth)
     ], ReferencesAircraftByAircraftCodeGetSecurity.prototype, "auth", void 0);
     return ReferencesAircraftByAircraftCodeGetSecurity;
@@ -82,19 +82,19 @@ var ReferencesAircraftByAircraftCodeGetRequest = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ReferencesAircraftByAircraftCodeGetPathParams)
     ], ReferencesAircraftByAircraftCodeGetRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ReferencesAircraftByAircraftCodeGetQueryParams)
     ], ReferencesAircraftByAircraftCodeGetRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ReferencesAircraftByAircraftCodeGetHeaders)
     ], ReferencesAircraftByAircraftCodeGetRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ReferencesAircraftByAircraftCodeGetSecurity)
     ], ReferencesAircraftByAircraftCodeGetRequest.prototype, "security", void 0);
     return ReferencesAircraftByAircraftCodeGetRequest;
@@ -106,15 +106,15 @@ var ReferencesAircraftByAircraftCodeGetResponse = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ReferencesAircraftByAircraftCodeGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], ReferencesAircraftByAircraftCodeGetResponse.prototype, "referencesAircraftByAircraftCodeGet200ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ReferencesAircraftByAircraftCodeGetResponse.prototype, "statusCode", void 0);
     return ReferencesAircraftByAircraftCodeGetResponse;

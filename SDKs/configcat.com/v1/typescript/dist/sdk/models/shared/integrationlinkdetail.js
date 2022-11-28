@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConfigModel } from "./configmodel";
 import { EnvironmentModel } from "./environmentmodel";
 import { ProductModel } from "./productmodel";
@@ -33,27 +33,27 @@ var IntegrationLinkDetail = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=config" }),
+        SpeakeasyMetadata({ data: "json, name=config" }),
         __metadata("design:type", ConfigModel)
     ], IntegrationLinkDetail.prototype, "config", void 0);
     __decorate([
-        Metadata({ data: "json, name=environment" }),
+        SpeakeasyMetadata({ data: "json, name=environment" }),
         __metadata("design:type", EnvironmentModel)
     ], IntegrationLinkDetail.prototype, "environment", void 0);
     __decorate([
-        Metadata({ data: "json, name=product" }),
+        SpeakeasyMetadata({ data: "json, name=product" }),
         __metadata("design:type", ProductModel)
     ], IntegrationLinkDetail.prototype, "product", void 0);
     __decorate([
-        Metadata({ data: "json, name=readOnly" }),
+        SpeakeasyMetadata({ data: "json, name=readOnly" }),
         __metadata("design:type", Boolean)
     ], IntegrationLinkDetail.prototype, "readOnly", void 0);
     __decorate([
-        Metadata({ data: "json, name=setting" }),
+        SpeakeasyMetadata({ data: "json, name=setting" }),
         __metadata("design:type", SettingDataModel)
     ], IntegrationLinkDetail.prototype, "setting", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], IntegrationLinkDetail.prototype, "status", void 0);
     return IntegrationLinkDetail;

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LambdaFunctionMemoryProjectedMetric } from "./lambdafunctionmemoryprojectedmetric";
+
 
 
 // LambdaFunctionMemoryRecommendationOption
@@ -8,12 +8,12 @@ import { LambdaFunctionMemoryProjectedMetric } from "./lambdafunctionmemoryproje
  * Describes a recommendation option for an Lambda function.
 **/
 export class LambdaFunctionMemoryRecommendationOption extends SpeakeasyBase {
-  @Metadata({ data: "json, name=memorySize" })
+  @SpeakeasyMetadata({ data: "json, name=memorySize" })
   memorySize?: number;
 
-  @Metadata({ data: "json, name=projectedUtilizationMetrics", elemType: shared.LambdaFunctionMemoryProjectedMetric })
+  @SpeakeasyMetadata({ data: "json, name=projectedUtilizationMetrics", elemType: LambdaFunctionMemoryProjectedMetric })
   projectedUtilizationMetrics?: LambdaFunctionMemoryProjectedMetric[];
 
-  @Metadata({ data: "json, name=rank" })
+  @SpeakeasyMetadata({ data: "json, name=rank" })
   rank?: number;
 }

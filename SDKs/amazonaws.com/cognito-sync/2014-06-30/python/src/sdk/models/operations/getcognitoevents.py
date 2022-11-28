@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetCognitoEventsPathParams:
-    identity_pool_id: str = field(default=None, metadata={'path_param': { 'field_name': 'IdentityPoolId', 'style': 'simple', 'explode': False }})
+    identity_pool_id: str = field(metadata={'path_param': { 'field_name': 'IdentityPoolId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,18 +24,18 @@ class GetCognitoEventsHeaders:
 
 @dataclass
 class GetCognitoEventsRequest:
-    path_params: GetCognitoEventsPathParams = field(default=None)
-    headers: GetCognitoEventsHeaders = field(default=None)
+    headers: GetCognitoEventsHeaders = field()
+    path_params: GetCognitoEventsPathParams = field()
     
 
 @dataclass
 class GetCognitoEventsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_cognito_events_response: Optional[shared.GetCognitoEventsResponse] = field(default=None)
     internal_error_exception: Optional[Any] = field(default=None)
     invalid_parameter_exception: Optional[Any] = field(default=None)
     not_authorized_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

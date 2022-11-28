@@ -22,6 +22,8 @@ const (
 	PlaceholderTypeEnumSlideImage    PlaceholderTypeEnum = "SLIDE_IMAGE"
 )
 
+// Placeholder
+// The placeholder information that uniquely identifies a placeholder shape.
 type Placeholder struct {
 	Index          *int32               `json:"index,omitempty"`
 	ParentObjectID *string              `json:"parentObjectId,omitempty"`

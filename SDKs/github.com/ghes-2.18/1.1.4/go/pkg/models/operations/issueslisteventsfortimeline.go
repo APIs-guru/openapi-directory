@@ -15,14 +15,14 @@ type IssuesListEventsForTimelineQueryParams struct {
 	PerPage *int64 `queryParam:"style=form,explode=true,name=per_page"`
 }
 
-type IssuesListEventsForTimelineRequest struct {
-	PathParams  IssuesListEventsForTimelinePathParams
-	QueryParams IssuesListEventsForTimelineQueryParams
-}
-
 type IssuesListEventsForTimeline415ApplicationJSON struct {
 	DocumentationURL string `json:"documentation_url"`
 	Message          string `json:"message"`
+}
+
+type IssuesListEventsForTimelineRequest struct {
+	PathParams  IssuesListEventsForTimelinePathParams
+	QueryParams IssuesListEventsForTimelineQueryParams
 }
 
 type IssuesListEventsForTimelineResponse struct {

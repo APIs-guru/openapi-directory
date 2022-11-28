@@ -28,6 +28,8 @@ const (
 	AccountTypeEnumOrganization           AccountTypeEnum = "ORGANIZATION"
 )
 
+// Account
+// An account is a container for your business's locations. If you are the only user who manages locations for your business, you can use your personal Google Account. To share management of locations with multiple users, [create a business account] (https://support.google.com/business/answer/6085339?ref_topic=6085325).
 type Account struct {
 	AccountName      *string                     `json:"accountName,omitempty"`
 	AccountNumber    *string                     `json:"accountNumber,omitempty"`

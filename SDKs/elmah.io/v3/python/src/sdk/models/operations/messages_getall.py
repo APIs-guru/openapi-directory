@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Optional
@@ -8,7 +8,7 @@ from sdk.models import shared
 
 @dataclass
 class MessagesGetAllPathParams:
-    log_id: str = field(default=None, metadata={'path_param': { 'field_name': 'logId', 'style': 'simple', 'explode': False }})
+    log_id: str = field(metadata={'path_param': { 'field_name': 'logId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,14 +23,14 @@ class MessagesGetAllQueryParams:
 
 @dataclass
 class MessagesGetAllRequest:
-    path_params: MessagesGetAllPathParams = field(default=None)
-    query_params: MessagesGetAllQueryParams = field(default=None)
+    path_params: MessagesGetAllPathParams = field()
+    query_params: MessagesGetAllQueryParams = field()
     
 
 @dataclass
 class MessagesGetAllResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     messages_result: Optional[shared.MessagesResult] = field(default=None)
-    status_code: int = field(default=None)
     

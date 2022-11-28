@@ -1,14 +1,14 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Any,List,Optional
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetAccountsAccountIDTransactionsPathParams:
-    account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
+    account_id: str = field(metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,13 +23,13 @@ class GetAccountsAccountIDTransactionsQueryParams:
 
 @dataclass
 class GetAccountsAccountIDTransactionsRequest:
-    path_params: GetAccountsAccountIDTransactionsPathParams = field(default=None)
-    query_params: GetAccountsAccountIDTransactionsQueryParams = field(default=None)
+    path_params: GetAccountsAccountIDTransactionsPathParams = field()
+    query_params: GetAccountsAccountIDTransactionsQueryParams = field()
     
 
 @dataclass
 class GetAccountsAccountIDTransactionsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_transactions_response: Optional[shared.ListTransactionsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

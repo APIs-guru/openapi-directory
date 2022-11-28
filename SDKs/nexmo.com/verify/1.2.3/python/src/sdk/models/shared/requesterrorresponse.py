@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class RequestErrorResponseStatusEnum(str, Enum):
     ZERO = "0"
@@ -22,8 +24,12 @@ class RequestErrorResponseStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class RequestErrorResponse:
-    error_text: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error_text' }})
-    network: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'network' }})
-    request_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'request_id' }})
-    status: Optional[RequestErrorResponseStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    r"""RequestErrorResponse
+    Error
+    """
+    
+    error_text: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error_text') }})
+    network: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('network') }})
+    request_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('request_id') }})
+    status: Optional[RequestErrorResponseStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     

@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -19,20 +20,20 @@ class DriveFilesGenerateIdsQueryParams:
 
 @dataclass
 class DriveFilesGenerateIdsSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DriveFilesGenerateIdsSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DriveFilesGenerateIdsSecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -44,13 +45,13 @@ class DriveFilesGenerateIdsSecurity:
 
 @dataclass
 class DriveFilesGenerateIdsRequest:
-    query_params: DriveFilesGenerateIdsQueryParams = field(default=None)
-    security: DriveFilesGenerateIdsSecurity = field(default=None)
+    query_params: DriveFilesGenerateIdsQueryParams = field()
+    security: DriveFilesGenerateIdsSecurity = field()
     
 
 @dataclass
 class DriveFilesGenerateIdsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     generated_ids: Optional[shared.GeneratedIds] = field(default=None)
-    status_code: int = field(default=None)
     

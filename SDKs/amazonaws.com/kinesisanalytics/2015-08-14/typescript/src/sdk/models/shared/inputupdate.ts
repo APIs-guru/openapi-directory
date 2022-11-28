@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InputParallelismUpdate } from "./inputparallelismupdate";
 import { InputProcessingConfigurationUpdate } from "./inputprocessingconfigurationupdate";
 import { InputSchemaUpdate } from "./inputschemaupdate";
@@ -6,29 +6,30 @@ import { KinesisFirehoseInputUpdate } from "./kinesisfirehoseinputupdate";
 import { KinesisStreamsInputUpdate } from "./kinesisstreamsinputupdate";
 
 
+
 // InputUpdate
 /** 
  * Describes updates to a specific input configuration (identified by the <code>InputId</code> of an application). 
 **/
 export class InputUpdate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=InputId" })
+  @SpeakeasyMetadata({ data: "json, name=InputId" })
   inputId: string;
 
-  @Metadata({ data: "json, name=InputParallelismUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=InputParallelismUpdate" })
   inputParallelismUpdate?: InputParallelismUpdate;
 
-  @Metadata({ data: "json, name=InputProcessingConfigurationUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=InputProcessingConfigurationUpdate" })
   inputProcessingConfigurationUpdate?: InputProcessingConfigurationUpdate;
 
-  @Metadata({ data: "json, name=InputSchemaUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=InputSchemaUpdate" })
   inputSchemaUpdate?: InputSchemaUpdate;
 
-  @Metadata({ data: "json, name=KinesisFirehoseInputUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=KinesisFirehoseInputUpdate" })
   kinesisFirehoseInputUpdate?: KinesisFirehoseInputUpdate;
 
-  @Metadata({ data: "json, name=KinesisStreamsInputUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=KinesisStreamsInputUpdate" })
   kinesisStreamsInputUpdate?: KinesisStreamsInputUpdate;
 
-  @Metadata({ data: "json, name=NamePrefixUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=NamePrefixUpdate" })
   namePrefixUpdate?: string;
 }

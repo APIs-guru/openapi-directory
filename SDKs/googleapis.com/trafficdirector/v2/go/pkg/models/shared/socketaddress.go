@@ -7,6 +7,8 @@ const (
 	SocketAddressProtocolEnumUDP SocketAddressProtocolEnum = "UDP"
 )
 
+// SocketAddress
+// [#next-free-field: 7]
 type SocketAddress struct {
 	Address      *string                    `json:"address,omitempty"`
 	Ipv4Compat   *bool                      `json:"ipv4Compat,omitempty"`

@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EvaluationMetrics } from "./evaluationmetrics";
 import { GlueTable } from "./gluetable";
 import { TransformParameters } from "./transformparameters";
@@ -9,65 +8,66 @@ import { TransformEncryption } from "./transformencryption";
 import { WorkerTypeEnum } from "./workertypeenum";
 
 
+
 // MlTransform
 /** 
  * A structure for a machine learning transform.
 **/
 export class MlTransform extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreatedOn" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedOn" })
   createdOn?: Date;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=EvaluationMetrics" })
+  @SpeakeasyMetadata({ data: "json, name=EvaluationMetrics" })
   evaluationMetrics?: EvaluationMetrics;
 
-  @Metadata({ data: "json, name=GlueVersion" })
+  @SpeakeasyMetadata({ data: "json, name=GlueVersion" })
   glueVersion?: string;
 
-  @Metadata({ data: "json, name=InputRecordTables", elemType: shared.GlueTable })
+  @SpeakeasyMetadata({ data: "json, name=InputRecordTables", elemType: GlueTable })
   inputRecordTables?: GlueTable[];
 
-  @Metadata({ data: "json, name=LabelCount" })
+  @SpeakeasyMetadata({ data: "json, name=LabelCount" })
   labelCount?: number;
 
-  @Metadata({ data: "json, name=LastModifiedOn" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedOn" })
   lastModifiedOn?: Date;
 
-  @Metadata({ data: "json, name=MaxCapacity" })
+  @SpeakeasyMetadata({ data: "json, name=MaxCapacity" })
   maxCapacity?: number;
 
-  @Metadata({ data: "json, name=MaxRetries" })
+  @SpeakeasyMetadata({ data: "json, name=MaxRetries" })
   maxRetries?: number;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=NumberOfWorkers" })
+  @SpeakeasyMetadata({ data: "json, name=NumberOfWorkers" })
   numberOfWorkers?: number;
 
-  @Metadata({ data: "json, name=Parameters" })
+  @SpeakeasyMetadata({ data: "json, name=Parameters" })
   parameters?: TransformParameters;
 
-  @Metadata({ data: "json, name=Role" })
+  @SpeakeasyMetadata({ data: "json, name=Role" })
   role?: string;
 
-  @Metadata({ data: "json, name=Schema", elemType: shared.SchemaColumn })
+  @SpeakeasyMetadata({ data: "json, name=Schema", elemType: SchemaColumn })
   schema?: SchemaColumn[];
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: TransformStatusTypeEnum;
 
-  @Metadata({ data: "json, name=Timeout" })
+  @SpeakeasyMetadata({ data: "json, name=Timeout" })
   timeout?: number;
 
-  @Metadata({ data: "json, name=TransformEncryption" })
+  @SpeakeasyMetadata({ data: "json, name=TransformEncryption" })
   transformEncryption?: TransformEncryption;
 
-  @Metadata({ data: "json, name=TransformId" })
+  @SpeakeasyMetadata({ data: "json, name=TransformId" })
   transformId?: string;
 
-  @Metadata({ data: "json, name=WorkerType" })
+  @SpeakeasyMetadata({ data: "json, name=WorkerType" })
   workerType?: WorkerTypeEnum;
 }

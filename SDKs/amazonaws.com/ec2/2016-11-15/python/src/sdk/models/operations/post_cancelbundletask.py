@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostCancelBundleTaskActionEnum(str, Enum):
     CANCEL_BUNDLE_TASK = "CancelBundleTask"
@@ -10,8 +14,8 @@ class PostCancelBundleTaskVersionEnum(str, Enum):
 
 @dataclass
 class PostCancelBundleTaskQueryParams:
-    action: PostCancelBundleTaskActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostCancelBundleTaskVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostCancelBundleTaskActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostCancelBundleTaskVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostCancelBundleTaskHeaders:
 
 @dataclass
 class PostCancelBundleTaskRequest:
-    query_params: PostCancelBundleTaskQueryParams = field(default=None)
-    headers: PostCancelBundleTaskHeaders = field(default=None)
+    headers: PostCancelBundleTaskHeaders = field()
+    query_params: PostCancelBundleTaskQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostCancelBundleTaskResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

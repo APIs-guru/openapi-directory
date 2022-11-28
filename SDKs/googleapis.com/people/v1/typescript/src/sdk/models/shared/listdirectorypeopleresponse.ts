@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Person } from "./person";
+
 
 
 // ListDirectoryPeopleResponse
@@ -8,12 +8,12 @@ import { Person } from "./person";
  * The response to a request for the authenticated user's domain directory.
 **/
 export class ListDirectoryPeopleResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=nextSyncToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextSyncToken" })
   nextSyncToken?: string;
 
-  @Metadata({ data: "json, name=people", elemType: shared.Person })
+  @SpeakeasyMetadata({ data: "json, name=people", elemType: Person })
   people?: Person[];
 }

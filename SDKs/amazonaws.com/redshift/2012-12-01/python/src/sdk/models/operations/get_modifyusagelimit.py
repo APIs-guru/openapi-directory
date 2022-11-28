@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetModifyUsageLimitActionEnum(str, Enum):
     MODIFY_USAGE_LIMIT = "ModifyUsageLimit"
@@ -15,11 +19,11 @@ class GetModifyUsageLimitVersionEnum(str, Enum):
 
 @dataclass
 class GetModifyUsageLimitQueryParams:
-    action: GetModifyUsageLimitActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetModifyUsageLimitActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    usage_limit_id: str = field(metadata={'query_param': { 'field_name': 'UsageLimitId', 'style': 'form', 'explode': True }})
+    version: GetModifyUsageLimitVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     amount: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'Amount', 'style': 'form', 'explode': True }})
     breach_action: Optional[GetModifyUsageLimitBreachActionEnum] = field(default=None, metadata={'query_param': { 'field_name': 'BreachAction', 'style': 'form', 'explode': True }})
-    usage_limit_id: str = field(default=None, metadata={'query_param': { 'field_name': 'UsageLimitId', 'style': 'form', 'explode': True }})
-    version: GetModifyUsageLimitVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -35,13 +39,13 @@ class GetModifyUsageLimitHeaders:
 
 @dataclass
 class GetModifyUsageLimitRequest:
-    query_params: GetModifyUsageLimitQueryParams = field(default=None)
-    headers: GetModifyUsageLimitHeaders = field(default=None)
+    headers: GetModifyUsageLimitHeaders = field()
+    query_params: GetModifyUsageLimitQueryParams = field()
     
 
 @dataclass
 class GetModifyUsageLimitResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

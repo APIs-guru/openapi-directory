@@ -1,6 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { DimensionValue } from "./dimensionvalue";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DimensionValue } from "./dimensionvalue";
 import { ClickThroughUrl } from "./clickthroughurl";
 import { ClickThroughUrlSuffixProperties } from "./clickthroughurlsuffixproperties";
@@ -12,30 +10,29 @@ import { DefaultClickThroughEventTagProperties } from "./defaultclickthrougheven
 import { DeliverySchedule } from "./deliveryschedule";
 import { EventTagOverride } from "./eventtagoverride";
 import { GeoTargeting } from "./geotargeting";
-import { DimensionValue } from "./dimensionvalue";
 import { KeyValueTargetingExpression } from "./keyvaluetargetingexpression";
 import { LanguageTargeting } from "./languagetargeting";
-import { LastModifiedInfo } from "./lastmodifiedinfo";
 import { PlacementAssignment } from "./placementassignment";
 import { ListTargetingExpression } from "./listtargetingexpression";
 import { Size } from "./size";
 import { TechnologyTargeting } from "./technologytargeting";
 
+
 export enum AdCompatibilityEnum {
-    Display = "DISPLAY"
-,    DisplayInterstitial = "DISPLAY_INTERSTITIAL"
-,    App = "APP"
-,    AppInterstitial = "APP_INTERSTITIAL"
-,    InStreamVideo = "IN_STREAM_VIDEO"
-,    InStreamAudio = "IN_STREAM_AUDIO"
+    Display = "DISPLAY",
+    DisplayInterstitial = "DISPLAY_INTERSTITIAL",
+    App = "APP",
+    AppInterstitial = "APP_INTERSTITIAL",
+    InStreamVideo = "IN_STREAM_VIDEO",
+    InStreamAudio = "IN_STREAM_AUDIO"
 }
 
 export enum AdTypeEnum {
-    AdServingStandardAd = "AD_SERVING_STANDARD_AD"
-,    AdServingDefaultAd = "AD_SERVING_DEFAULT_AD"
-,    AdServingClickTracker = "AD_SERVING_CLICK_TRACKER"
-,    AdServingTracking = "AD_SERVING_TRACKING"
-,    AdServingBrandSafeAd = "AD_SERVING_BRAND_SAFE_AD"
+    AdServingStandardAd = "AD_SERVING_STANDARD_AD",
+    AdServingDefaultAd = "AD_SERVING_DEFAULT_AD",
+    AdServingClickTracker = "AD_SERVING_CLICK_TRACKER",
+    AdServingTracking = "AD_SERVING_TRACKING",
+    AdServingBrandSafeAd = "AD_SERVING_BRAND_SAFE_AD"
 }
 
 
@@ -44,120 +41,120 @@ export enum AdTypeEnum {
  * Contains properties of a Campaign Manager ad.
 **/
 export class Ad extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=active" })
+  @SpeakeasyMetadata({ data: "json, name=active" })
   active?: boolean;
 
-  @Metadata({ data: "json, name=advertiserId" })
+  @SpeakeasyMetadata({ data: "json, name=advertiserId" })
   advertiserId?: string;
 
-  @Metadata({ data: "json, name=advertiserIdDimensionValue" })
+  @SpeakeasyMetadata({ data: "json, name=advertiserIdDimensionValue" })
   advertiserIdDimensionValue?: DimensionValue;
 
-  @Metadata({ data: "json, name=archived" })
+  @SpeakeasyMetadata({ data: "json, name=archived" })
   archived?: boolean;
 
-  @Metadata({ data: "json, name=audienceSegmentId" })
+  @SpeakeasyMetadata({ data: "json, name=audienceSegmentId" })
   audienceSegmentId?: string;
 
-  @Metadata({ data: "json, name=campaignId" })
+  @SpeakeasyMetadata({ data: "json, name=campaignId" })
   campaignId?: string;
 
-  @Metadata({ data: "json, name=campaignIdDimensionValue" })
+  @SpeakeasyMetadata({ data: "json, name=campaignIdDimensionValue" })
   campaignIdDimensionValue?: DimensionValue;
 
-  @Metadata({ data: "json, name=clickThroughUrl" })
+  @SpeakeasyMetadata({ data: "json, name=clickThroughUrl" })
   clickThroughUrl?: ClickThroughUrl;
 
-  @Metadata({ data: "json, name=clickThroughUrlSuffixProperties" })
+  @SpeakeasyMetadata({ data: "json, name=clickThroughUrlSuffixProperties" })
   clickThroughUrlSuffixProperties?: ClickThroughUrlSuffixProperties;
 
-  @Metadata({ data: "json, name=comments" })
+  @SpeakeasyMetadata({ data: "json, name=comments" })
   comments?: string;
 
-  @Metadata({ data: "json, name=compatibility" })
+  @SpeakeasyMetadata({ data: "json, name=compatibility" })
   compatibility?: AdCompatibilityEnum;
 
-  @Metadata({ data: "json, name=createInfo" })
+  @SpeakeasyMetadata({ data: "json, name=createInfo" })
   createInfo?: LastModifiedInfo;
 
-  @Metadata({ data: "json, name=creativeGroupAssignments", elemType: shared.CreativeGroupAssignment })
+  @SpeakeasyMetadata({ data: "json, name=creativeGroupAssignments", elemType: CreativeGroupAssignment })
   creativeGroupAssignments?: CreativeGroupAssignment[];
 
-  @Metadata({ data: "json, name=creativeRotation" })
+  @SpeakeasyMetadata({ data: "json, name=creativeRotation" })
   creativeRotation?: CreativeRotation;
 
-  @Metadata({ data: "json, name=dayPartTargeting" })
+  @SpeakeasyMetadata({ data: "json, name=dayPartTargeting" })
   dayPartTargeting?: DayPartTargeting;
 
-  @Metadata({ data: "json, name=defaultClickThroughEventTagProperties" })
+  @SpeakeasyMetadata({ data: "json, name=defaultClickThroughEventTagProperties" })
   defaultClickThroughEventTagProperties?: DefaultClickThroughEventTagProperties;
 
-  @Metadata({ data: "json, name=deliverySchedule" })
+  @SpeakeasyMetadata({ data: "json, name=deliverySchedule" })
   deliverySchedule?: DeliverySchedule;
 
-  @Metadata({ data: "json, name=dynamicClickTracker" })
+  @SpeakeasyMetadata({ data: "json, name=dynamicClickTracker" })
   dynamicClickTracker?: boolean;
 
-  @Metadata({ data: "json, name=endTime" })
+  @SpeakeasyMetadata({ data: "json, name=endTime" })
   endTime?: Date;
 
-  @Metadata({ data: "json, name=eventTagOverrides", elemType: shared.EventTagOverride })
+  @SpeakeasyMetadata({ data: "json, name=eventTagOverrides", elemType: EventTagOverride })
   eventTagOverrides?: EventTagOverride[];
 
-  @Metadata({ data: "json, name=geoTargeting" })
+  @SpeakeasyMetadata({ data: "json, name=geoTargeting" })
   geoTargeting?: GeoTargeting;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=idDimensionValue" })
+  @SpeakeasyMetadata({ data: "json, name=idDimensionValue" })
   idDimensionValue?: DimensionValue;
 
-  @Metadata({ data: "json, name=keyValueTargetingExpression" })
+  @SpeakeasyMetadata({ data: "json, name=keyValueTargetingExpression" })
   keyValueTargetingExpression?: KeyValueTargetingExpression;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=languageTargeting" })
+  @SpeakeasyMetadata({ data: "json, name=languageTargeting" })
   languageTargeting?: LanguageTargeting;
 
-  @Metadata({ data: "json, name=lastModifiedInfo" })
+  @SpeakeasyMetadata({ data: "json, name=lastModifiedInfo" })
   lastModifiedInfo?: LastModifiedInfo;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=placementAssignments", elemType: shared.PlacementAssignment })
+  @SpeakeasyMetadata({ data: "json, name=placementAssignments", elemType: PlacementAssignment })
   placementAssignments?: PlacementAssignment[];
 
-  @Metadata({ data: "json, name=remarketingListExpression" })
+  @SpeakeasyMetadata({ data: "json, name=remarketingListExpression" })
   remarketingListExpression?: ListTargetingExpression;
 
-  @Metadata({ data: "json, name=size" })
+  @SpeakeasyMetadata({ data: "json, name=size" })
   size?: Size;
 
-  @Metadata({ data: "json, name=sslCompliant" })
+  @SpeakeasyMetadata({ data: "json, name=sslCompliant" })
   sslCompliant?: boolean;
 
-  @Metadata({ data: "json, name=sslRequired" })
+  @SpeakeasyMetadata({ data: "json, name=sslRequired" })
   sslRequired?: boolean;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: Date;
 
-  @Metadata({ data: "json, name=subaccountId" })
+  @SpeakeasyMetadata({ data: "json, name=subaccountId" })
   subaccountId?: string;
 
-  @Metadata({ data: "json, name=targetingTemplateId" })
+  @SpeakeasyMetadata({ data: "json, name=targetingTemplateId" })
   targetingTemplateId?: string;
 
-  @Metadata({ data: "json, name=technologyTargeting" })
+  @SpeakeasyMetadata({ data: "json, name=technologyTargeting" })
   technologyTargeting?: TechnologyTargeting;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: AdTypeEnum;
 }

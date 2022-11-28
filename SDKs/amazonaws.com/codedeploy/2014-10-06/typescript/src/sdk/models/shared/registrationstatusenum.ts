@@ -1,6 +1,7 @@
 
 
+
 export enum RegistrationStatusEnum {
-    Registered = "Registered"
-,    Deregistered = "Deregistered"
+    Registered = "Registered",
+    Deregistered = "Deregistered"
 }

@@ -1,19 +1,22 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
+from sdk.models import shared
 
 
 @dataclass_json
 @dataclass
 class PutShopRequestBodyAddress:
-    country_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'country_code' }})
-    extended_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'extended_address' }})
-    locality: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'locality' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    phone: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'phone' }})
-    postal_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'postal_code' }})
-    region: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'region' }})
-    street_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'street_address' }})
+    country_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('country_code') }})
+    extended_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('extended_address') }})
+    locality: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('locality') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    phone: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('phone') }})
+    postal_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('postal_code') }})
+    region: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('region') }})
+    street_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('street_address') }})
     
 class PutShopRequestBodyCurrencyEnum(str, Enum):
     USD = "USD"
@@ -277,32 +280,32 @@ class PutShopRequestBodyShopTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PutShopRequestBody:
-    address: Optional[PutShopRequestBodyAddress] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'address' }})
-    currency: Optional[PutShopRequestBodyCurrencyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'currency' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    legal_country_code: Optional[PutShopRequestBodyLegalCountryCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'legal_country_code' }})
-    legal_country_code_confirmed: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'legal_country_code_confirmed' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    payment_policy: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'payment_policy' }})
-    return_policy: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'return_policy' }})
-    shipping_policy: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'shipping_policy' }})
-    shop_type: Optional[PutShopRequestBodyShopTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'shop_type' }})
-    website: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'website' }})
+    address: Optional[PutShopRequestBodyAddress] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('address') }})
+    currency: Optional[PutShopRequestBodyCurrencyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('currency') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    legal_country_code: Optional[PutShopRequestBodyLegalCountryCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('legal_country_code') }})
+    legal_country_code_confirmed: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('legal_country_code_confirmed') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    payment_policy: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('payment_policy') }})
+    return_policy: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('return_policy') }})
+    shipping_policy: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('shipping_policy') }})
+    shop_type: Optional[PutShopRequestBodyShopTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('shop_type') }})
+    website: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('website') }})
     
 
 @dataclass
 class PutShopSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class PutShopRequest:
+    security: PutShopSecurity = field()
     request: Optional[PutShopRequestBody] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: PutShopSecurity = field(default=None)
     
 
 @dataclass
 class PutShopResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

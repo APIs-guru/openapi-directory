@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://mturk-requester.{region}.amazonaws.com",
 	"https://mturk-requester.{region}.amazonaws.com",
 	"http://mturk-requester.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/mturk-requester/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// AcceptQualificationRequest - <p> The <code>AcceptQualificationRequest</code> operation approves a Worker's request for a Qualification. </p> <p> Only the owner of the Qualification type can grant a Qualification request for that type. </p> <p> A successful request for the <code>AcceptQualificationRequest</code> operation returns with no errors and an empty body. </p>
 func (s *SDK) AcceptQualificationRequest(ctx context.Context, request operations.AcceptQualificationRequestRequest) (*operations.AcceptQualificationRequestResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=MTurkRequesterServiceV20170117.AcceptQualificationRequest"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -81,7 +108,7 @@ func (s *SDK) AcceptQualificationRequest(ctx context.Context, request operations
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -131,8 +158,9 @@ func (s *SDK) AcceptQualificationRequest(ctx context.Context, request operations
 	return res, nil
 }
 
+// ApproveAssignment - <p> The <code>ApproveAssignment</code> operation approves the results of a completed assignment. </p> <p> Approving an assignment initiates two payments from the Requester's Amazon.com account </p> <ul> <li> <p> The Worker who submitted the results is paid the reward specified in the HIT. </p> </li> <li> <p> Amazon Mechanical Turk fees are debited. </p> </li> </ul> <p> If the Requester's account does not have adequate funds for these payments, the call to ApproveAssignment returns an exception, and the approval is not processed. You can include an optional feedback message with the approval, which the Worker can see in the Status section of the web site. </p> <p> You can also call this operation for assignments that were previous rejected and approve them by explicitly overriding the previous rejection. This only works on rejected assignments that were submitted within the previous 30 days and only if the assignment's related HIT has not been deleted. </p>
 func (s *SDK) ApproveAssignment(ctx context.Context, request operations.ApproveAssignmentRequest) (*operations.ApproveAssignmentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=MTurkRequesterServiceV20170117.ApproveAssignment"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -152,7 +180,7 @@ func (s *SDK) ApproveAssignment(ctx context.Context, request operations.ApproveA
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -202,8 +230,9 @@ func (s *SDK) ApproveAssignment(ctx context.Context, request operations.ApproveA
 	return res, nil
 }
 
+// AssociateQualificationWithWorker - <p> The <code>AssociateQualificationWithWorker</code> operation gives a Worker a Qualification. <code>AssociateQualificationWithWorker</code> does not require that the Worker submit a Qualification request. It gives the Qualification directly to the Worker. </p> <p> You can only assign a Qualification of a Qualification type that you created (using the <code>CreateQualificationType</code> operation). </p> <note> <p> Note: <code>AssociateQualificationWithWorker</code> does not affect any pending Qualification requests for the Qualification by the Worker. If you assign a Qualification to a Worker, then later grant a Qualification request made by the Worker, the granting of the request may modify the Qualification score. To resolve a pending Qualification request without affecting the Qualification the Worker already has, reject the request with the <code>RejectQualificationRequest</code> operation. </p> </note>
 func (s *SDK) AssociateQualificationWithWorker(ctx context.Context, request operations.AssociateQualificationWithWorkerRequest) (*operations.AssociateQualificationWithWorkerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=MTurkRequesterServiceV20170117.AssociateQualificationWithWorker"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -223,7 +252,7 @@ func (s *SDK) AssociateQualificationWithWorker(ctx context.Context, request oper
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -273,8 +302,9 @@ func (s *SDK) AssociateQualificationWithWorker(ctx context.Context, request oper
 	return res, nil
 }
 
+// CreateAdditionalAssignmentsForHit - <p> The <code>CreateAdditionalAssignmentsForHIT</code> operation increases the maximum number of assignments of an existing HIT. </p> <p> To extend the maximum number of assignments, specify the number of additional assignments.</p> <note> <ul> <li> <p>HITs created with fewer than 10 assignments cannot be extended to have 10 or more assignments. Attempting to add assignments in a way that brings the total number of assignments for a HIT from fewer than 10 assignments to 10 or more assignments will result in an <code>AWS.MechanicalTurk.InvalidMaximumAssignmentsIncrease</code> exception.</p> </li> <li> <p>HITs that were created before July 22, 2015 cannot be extended. Attempting to extend HITs that were created before July 22, 2015 will result in an <code>AWS.MechanicalTurk.HITTooOldForExtension</code> exception. </p> </li> </ul> </note>
 func (s *SDK) CreateAdditionalAssignmentsForHit(ctx context.Context, request operations.CreateAdditionalAssignmentsForHitRequest) (*operations.CreateAdditionalAssignmentsForHitResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=MTurkRequesterServiceV20170117.CreateAdditionalAssignmentsForHIT"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -294,7 +324,7 @@ func (s *SDK) CreateAdditionalAssignmentsForHit(ctx context.Context, request ope
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -344,8 +374,9 @@ func (s *SDK) CreateAdditionalAssignmentsForHit(ctx context.Context, request ope
 	return res, nil
 }
 
+// CreateHit - <p>The <code>CreateHIT</code> operation creates a new Human Intelligence Task (HIT). The new HIT is made available for Workers to find and accept on the Amazon Mechanical Turk website. </p> <p> This operation allows you to specify a new HIT by passing in values for the properties of the HIT, such as its title, reward amount and number of assignments. When you pass these values to <code>CreateHIT</code>, a new HIT is created for you, with a new <code>HITTypeID</code>. The HITTypeID can be used to create additional HITs in the future without needing to specify common parameters such as the title, description and reward amount each time.</p> <p> An alternative way to create HITs is to first generate a HITTypeID using the <code>CreateHITType</code> operation and then call the <code>CreateHITWithHITType</code> operation. This is the recommended best practice for Requesters who are creating large numbers of HITs. </p> <p>CreateHIT also supports several ways to provide question data: by providing a value for the <code>Question</code> parameter that fully specifies the contents of the HIT, or by providing a <code>HitLayoutId</code> and associated <code>HitLayoutParameters</code>. </p> <note> <p> If a HIT is created with 10 or more maximum assignments, there is an additional fee. For more information, see <a href="https://requester.mturk.com/pricing">Amazon Mechanical Turk Pricing</a>.</p> </note>
 func (s *SDK) CreateHit(ctx context.Context, request operations.CreateHitRequest) (*operations.CreateHitResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=MTurkRequesterServiceV20170117.CreateHIT"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -365,7 +396,7 @@ func (s *SDK) CreateHit(ctx context.Context, request operations.CreateHitRequest
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -415,8 +446,9 @@ func (s *SDK) CreateHit(ctx context.Context, request operations.CreateHitRequest
 	return res, nil
 }
 
+// CreateHitType -  The <code>CreateHITType</code> operation creates a new HIT type. This operation allows you to define a standard set of HIT properties to use when creating HITs. If you register a HIT type with values that match an existing HIT type, the HIT type ID of the existing type will be returned.
 func (s *SDK) CreateHitType(ctx context.Context, request operations.CreateHitTypeRequest) (*operations.CreateHitTypeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=MTurkRequesterServiceV20170117.CreateHITType"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -436,7 +468,7 @@ func (s *SDK) CreateHitType(ctx context.Context, request operations.CreateHitTyp
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -486,8 +518,9 @@ func (s *SDK) CreateHitType(ctx context.Context, request operations.CreateHitTyp
 	return res, nil
 }
 
+// CreateHitWithHitType - <p> The <code>CreateHITWithHITType</code> operation creates a new Human Intelligence Task (HIT) using an existing HITTypeID generated by the <code>CreateHITType</code> operation. </p> <p> This is an alternative way to create HITs from the <code>CreateHIT</code> operation. This is the recommended best practice for Requesters who are creating large numbers of HITs. </p> <p>CreateHITWithHITType also supports several ways to provide question data: by providing a value for the <code>Question</code> parameter that fully specifies the contents of the HIT, or by providing a <code>HitLayoutId</code> and associated <code>HitLayoutParameters</code>. </p> <note> <p> If a HIT is created with 10 or more maximum assignments, there is an additional fee. For more information, see <a href="https://requester.mturk.com/pricing">Amazon Mechanical Turk Pricing</a>. </p> </note>
 func (s *SDK) CreateHitWithHitType(ctx context.Context, request operations.CreateHitWithHitTypeRequest) (*operations.CreateHitWithHitTypeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=MTurkRequesterServiceV20170117.CreateHITWithHITType"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -507,7 +540,7 @@ func (s *SDK) CreateHitWithHitType(ctx context.Context, request operations.Creat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -557,8 +590,9 @@ func (s *SDK) CreateHitWithHitType(ctx context.Context, request operations.Creat
 	return res, nil
 }
 
+// CreateQualificationType -  The <code>CreateQualificationType</code> operation creates a new Qualification type, which is represented by a <code>QualificationType</code> data structure.
 func (s *SDK) CreateQualificationType(ctx context.Context, request operations.CreateQualificationTypeRequest) (*operations.CreateQualificationTypeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=MTurkRequesterServiceV20170117.CreateQualificationType"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -578,7 +612,7 @@ func (s *SDK) CreateQualificationType(ctx context.Context, request operations.Cr
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -628,8 +662,9 @@ func (s *SDK) CreateQualificationType(ctx context.Context, request operations.Cr
 	return res, nil
 }
 
+// CreateWorkerBlock - The <code>CreateWorkerBlock</code> operation allows you to prevent a Worker from working on your HITs. For example, you can block a Worker who is producing poor quality work. You can block up to 100,000 Workers.
 func (s *SDK) CreateWorkerBlock(ctx context.Context, request operations.CreateWorkerBlockRequest) (*operations.CreateWorkerBlockResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=MTurkRequesterServiceV20170117.CreateWorkerBlock"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -649,7 +684,7 @@ func (s *SDK) CreateWorkerBlock(ctx context.Context, request operations.CreateWo
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -699,8 +734,9 @@ func (s *SDK) CreateWorkerBlock(ctx context.Context, request operations.CreateWo
 	return res, nil
 }
 
+// DeleteHit - <p> The <code>DeleteHIT</code> operation is used to delete HIT that is no longer needed. Only the Requester who created the HIT can delete it. </p> <p> You can only dispose of HITs that are in the <code>Reviewable</code> state, with all of their submitted assignments already either approved or rejected. If you call the DeleteHIT operation on a HIT that is not in the <code>Reviewable</code> state (for example, that has not expired, or still has active assignments), or on a HIT that is Reviewable but without all of its submitted assignments already approved or rejected, the service will return an error. </p> <note> <ul> <li> <p> HITs are automatically disposed of after 120 days. </p> </li> <li> <p> After you dispose of a HIT, you can no longer approve the HIT's rejected assignments. </p> </li> <li> <p> Disposed HITs are not returned in results for the ListHITs operation. </p> </li> <li> <p> Disposing HITs can improve the performance of operations such as ListReviewableHITs and ListHITs. </p> </li> </ul> </note>
 func (s *SDK) DeleteHit(ctx context.Context, request operations.DeleteHitRequest) (*operations.DeleteHitResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=MTurkRequesterServiceV20170117.DeleteHIT"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -720,7 +756,7 @@ func (s *SDK) DeleteHit(ctx context.Context, request operations.DeleteHitRequest
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -770,8 +806,9 @@ func (s *SDK) DeleteHit(ctx context.Context, request operations.DeleteHitRequest
 	return res, nil
 }
 
+// DeleteQualificationType - <p> The <code>DeleteQualificationType</code> deletes a Qualification type and deletes any HIT types that are associated with the Qualification type. </p> <p>This operation does not revoke Qualifications already assigned to Workers because the Qualifications might be needed for active HITs. If there are any pending requests for the Qualification type, Amazon Mechanical Turk rejects those requests. After you delete a Qualification type, you can no longer use it to create HITs or HIT types.</p> <note> <p>DeleteQualificationType must wait for all the HITs that use the deleted Qualification type to be deleted before completing. It may take up to 48 hours before DeleteQualificationType completes and the unique name of the Qualification type is available for reuse with CreateQualificationType.</p> </note>
 func (s *SDK) DeleteQualificationType(ctx context.Context, request operations.DeleteQualificationTypeRequest) (*operations.DeleteQualificationTypeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=MTurkRequesterServiceV20170117.DeleteQualificationType"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -791,7 +828,7 @@ func (s *SDK) DeleteQualificationType(ctx context.Context, request operations.De
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -841,8 +878,9 @@ func (s *SDK) DeleteQualificationType(ctx context.Context, request operations.De
 	return res, nil
 }
 
+// DeleteWorkerBlock - The <code>DeleteWorkerBlock</code> operation allows you to reinstate a blocked Worker to work on your HITs. This operation reverses the effects of the CreateWorkerBlock operation. You need the Worker ID to use this operation. If the Worker ID is missing or invalid, this operation fails and returns the message “WorkerId is invalid.” If the specified Worker is not blocked, this operation returns successfully.
 func (s *SDK) DeleteWorkerBlock(ctx context.Context, request operations.DeleteWorkerBlockRequest) (*operations.DeleteWorkerBlockResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=MTurkRequesterServiceV20170117.DeleteWorkerBlock"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -862,7 +900,7 @@ func (s *SDK) DeleteWorkerBlock(ctx context.Context, request operations.DeleteWo
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -912,8 +950,9 @@ func (s *SDK) DeleteWorkerBlock(ctx context.Context, request operations.DeleteWo
 	return res, nil
 }
 
+// DisassociateQualificationFromWorker - <p> The <code>DisassociateQualificationFromWorker</code> revokes a previously granted Qualification from a user. </p> <p> You can provide a text message explaining why the Qualification was revoked. The user who had the Qualification can see this message. </p>
 func (s *SDK) DisassociateQualificationFromWorker(ctx context.Context, request operations.DisassociateQualificationFromWorkerRequest) (*operations.DisassociateQualificationFromWorkerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=MTurkRequesterServiceV20170117.DisassociateQualificationFromWorker"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -933,7 +972,7 @@ func (s *SDK) DisassociateQualificationFromWorker(ctx context.Context, request o
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -983,8 +1022,9 @@ func (s *SDK) DisassociateQualificationFromWorker(ctx context.Context, request o
 	return res, nil
 }
 
+// GetAccountBalance - The <code>GetAccountBalance</code> operation retrieves the Prepaid HITs balance in your Amazon Mechanical Turk account if you are a Prepaid Requester. Alternatively, this operation will retrieve the remaining available AWS Billing usage if you have enabled AWS Billing. Note: If you have enabled AWS Billing and still have a remaining Prepaid HITs balance, this balance can be viewed on the My Account page in the Requester console.
 func (s *SDK) GetAccountBalance(ctx context.Context, request operations.GetAccountBalanceRequest) (*operations.GetAccountBalanceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=MTurkRequesterServiceV20170117.GetAccountBalance"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1004,7 +1044,7 @@ func (s *SDK) GetAccountBalance(ctx context.Context, request operations.GetAccou
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1054,8 +1094,9 @@ func (s *SDK) GetAccountBalance(ctx context.Context, request operations.GetAccou
 	return res, nil
 }
 
+// GetAssignment -  The <code>GetAssignment</code> operation retrieves the details of the specified Assignment.
 func (s *SDK) GetAssignment(ctx context.Context, request operations.GetAssignmentRequest) (*operations.GetAssignmentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=MTurkRequesterServiceV20170117.GetAssignment"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1075,7 +1116,7 @@ func (s *SDK) GetAssignment(ctx context.Context, request operations.GetAssignmen
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1125,8 +1166,9 @@ func (s *SDK) GetAssignment(ctx context.Context, request operations.GetAssignmen
 	return res, nil
 }
 
+// GetFileUploadURL -  The <code>GetFileUploadURL</code> operation generates and returns a temporary URL. You use the temporary URL to retrieve a file uploaded by a Worker as an answer to a FileUploadAnswer question for a HIT. The temporary URL is generated the instant the GetFileUploadURL operation is called, and is valid for 60 seconds. You can get a temporary file upload URL any time until the HIT is disposed. After the HIT is disposed, any uploaded files are deleted, and cannot be retrieved. Pending Deprecation on December 12, 2017. The Answer Specification structure will no longer support the <code>FileUploadAnswer</code> element to be used for the QuestionForm data structure. Instead, we recommend that Requesters who want to create HITs asking Workers to upload files to use Amazon S3.
 func (s *SDK) GetFileUploadURL(ctx context.Context, request operations.GetFileUploadURLRequest) (*operations.GetFileUploadURLResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=MTurkRequesterServiceV20170117.GetFileUploadURL"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1146,7 +1188,7 @@ func (s *SDK) GetFileUploadURL(ctx context.Context, request operations.GetFileUp
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1196,8 +1238,9 @@ func (s *SDK) GetFileUploadURL(ctx context.Context, request operations.GetFileUp
 	return res, nil
 }
 
+// GetHit -  The <code>GetHIT</code> operation retrieves the details of the specified HIT.
 func (s *SDK) GetHit(ctx context.Context, request operations.GetHitRequest) (*operations.GetHitResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=MTurkRequesterServiceV20170117.GetHIT"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1217,7 +1260,7 @@ func (s *SDK) GetHit(ctx context.Context, request operations.GetHitRequest) (*op
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1267,8 +1310,9 @@ func (s *SDK) GetHit(ctx context.Context, request operations.GetHitRequest) (*op
 	return res, nil
 }
 
+// GetQualificationScore - <p> The <code>GetQualificationScore</code> operation returns the value of a Worker's Qualification for a given Qualification type. </p> <p> To get a Worker's Qualification, you must know the Worker's ID. The Worker's ID is included in the assignment data returned by the <code>ListAssignmentsForHIT</code> operation. </p> <p>Only the owner of a Qualification type can query the value of a Worker's Qualification of that type.</p>
 func (s *SDK) GetQualificationScore(ctx context.Context, request operations.GetQualificationScoreRequest) (*operations.GetQualificationScoreResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=MTurkRequesterServiceV20170117.GetQualificationScore"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1288,7 +1332,7 @@ func (s *SDK) GetQualificationScore(ctx context.Context, request operations.GetQ
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1338,8 +1382,9 @@ func (s *SDK) GetQualificationScore(ctx context.Context, request operations.GetQ
 	return res, nil
 }
 
+// GetQualificationType -  The <code>GetQualificationType</code>operation retrieves information about a Qualification type using its ID.
 func (s *SDK) GetQualificationType(ctx context.Context, request operations.GetQualificationTypeRequest) (*operations.GetQualificationTypeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=MTurkRequesterServiceV20170117.GetQualificationType"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1359,7 +1404,7 @@ func (s *SDK) GetQualificationType(ctx context.Context, request operations.GetQu
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1409,8 +1454,9 @@ func (s *SDK) GetQualificationType(ctx context.Context, request operations.GetQu
 	return res, nil
 }
 
+// ListAssignmentsForHit - <p> The <code>ListAssignmentsForHIT</code> operation retrieves completed assignments for a HIT. You can use this operation to retrieve the results for a HIT. </p> <p> You can get assignments for a HIT at any time, even if the HIT is not yet Reviewable. If a HIT requested multiple assignments, and has received some results but has not yet become Reviewable, you can still retrieve the partial results with this operation. </p> <p> Use the AssignmentStatus parameter to control which set of assignments for a HIT are returned. The ListAssignmentsForHIT operation can return submitted assignments awaiting approval, or it can return assignments that have already been approved or rejected. You can set AssignmentStatus=Approved,Rejected to get assignments that have already been approved and rejected together in one result set. </p> <p> Only the Requester who created the HIT can retrieve the assignments for that HIT. </p> <p> Results are sorted and divided into numbered pages and the operation returns a single page of results. You can use the parameters of the operation to control sorting and pagination. </p>
 func (s *SDK) ListAssignmentsForHit(ctx context.Context, request operations.ListAssignmentsForHitRequest) (*operations.ListAssignmentsForHitResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=MTurkRequesterServiceV20170117.ListAssignmentsForHIT"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1432,7 +1478,7 @@ func (s *SDK) ListAssignmentsForHit(ctx context.Context, request operations.List
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1482,8 +1528,9 @@ func (s *SDK) ListAssignmentsForHit(ctx context.Context, request operations.List
 	return res, nil
 }
 
+// ListBonusPayments -  The <code>ListBonusPayments</code> operation retrieves the amounts of bonuses you have paid to Workers for a given HIT or assignment.
 func (s *SDK) ListBonusPayments(ctx context.Context, request operations.ListBonusPaymentsRequest) (*operations.ListBonusPaymentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=MTurkRequesterServiceV20170117.ListBonusPayments"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1505,7 +1552,7 @@ func (s *SDK) ListBonusPayments(ctx context.Context, request operations.ListBonu
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1555,8 +1602,9 @@ func (s *SDK) ListBonusPayments(ctx context.Context, request operations.ListBonu
 	return res, nil
 }
 
+// ListHiTs -  The <code>ListHITs</code> operation returns all of a Requester's HITs. The operation returns HITs of any status, except for HITs that have been deleted of with the DeleteHIT operation or that have been auto-deleted.
 func (s *SDK) ListHiTs(ctx context.Context, request operations.ListHiTsRequest) (*operations.ListHiTsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=MTurkRequesterServiceV20170117.ListHITs"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1578,7 +1626,7 @@ func (s *SDK) ListHiTs(ctx context.Context, request operations.ListHiTsRequest) 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1628,8 +1676,9 @@ func (s *SDK) ListHiTs(ctx context.Context, request operations.ListHiTsRequest) 
 	return res, nil
 }
 
+// ListHiTsForQualificationType -  The <code>ListHITsForQualificationType</code> operation returns the HITs that use the given Qualification type for a Qualification requirement. The operation returns HITs of any status, except for HITs that have been deleted with the <code>DeleteHIT</code> operation or that have been auto-deleted.
 func (s *SDK) ListHiTsForQualificationType(ctx context.Context, request operations.ListHiTsForQualificationTypeRequest) (*operations.ListHiTsForQualificationTypeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=MTurkRequesterServiceV20170117.ListHITsForQualificationType"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1651,7 +1700,7 @@ func (s *SDK) ListHiTsForQualificationType(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1701,8 +1750,9 @@ func (s *SDK) ListHiTsForQualificationType(ctx context.Context, request operatio
 	return res, nil
 }
 
+// ListQualificationRequests -  The <code>ListQualificationRequests</code> operation retrieves requests for Qualifications of a particular Qualification type. The owner of the Qualification type calls this operation to poll for pending requests, and accepts them using the AcceptQualification operation.
 func (s *SDK) ListQualificationRequests(ctx context.Context, request operations.ListQualificationRequestsRequest) (*operations.ListQualificationRequestsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=MTurkRequesterServiceV20170117.ListQualificationRequests"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1724,7 +1774,7 @@ func (s *SDK) ListQualificationRequests(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1774,8 +1824,9 @@ func (s *SDK) ListQualificationRequests(ctx context.Context, request operations.
 	return res, nil
 }
 
+// ListQualificationTypes -  The <code>ListQualificationTypes</code> operation returns a list of Qualification types, filtered by an optional search term.
 func (s *SDK) ListQualificationTypes(ctx context.Context, request operations.ListQualificationTypesRequest) (*operations.ListQualificationTypesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=MTurkRequesterServiceV20170117.ListQualificationTypes"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1797,7 +1848,7 @@ func (s *SDK) ListQualificationTypes(ctx context.Context, request operations.Lis
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1847,8 +1898,9 @@ func (s *SDK) ListQualificationTypes(ctx context.Context, request operations.Lis
 	return res, nil
 }
 
+// ListReviewPolicyResultsForHit -  The <code>ListReviewPolicyResultsForHIT</code> operation retrieves the computed results and the actions taken in the course of executing your Review Policies for a given HIT. For information about how to specify Review Policies when you call CreateHIT, see Review Policies. The ListReviewPolicyResultsForHIT operation can return results for both Assignment-level and HIT-level review results.
 func (s *SDK) ListReviewPolicyResultsForHit(ctx context.Context, request operations.ListReviewPolicyResultsForHitRequest) (*operations.ListReviewPolicyResultsForHitResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=MTurkRequesterServiceV20170117.ListReviewPolicyResultsForHIT"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1870,7 +1922,7 @@ func (s *SDK) ListReviewPolicyResultsForHit(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1920,8 +1972,9 @@ func (s *SDK) ListReviewPolicyResultsForHit(ctx context.Context, request operati
 	return res, nil
 }
 
+// ListReviewableHiTs -  The <code>ListReviewableHITs</code> operation retrieves the HITs with Status equal to Reviewable or Status equal to Reviewing that belong to the Requester calling the operation.
 func (s *SDK) ListReviewableHiTs(ctx context.Context, request operations.ListReviewableHiTsRequest) (*operations.ListReviewableHiTsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=MTurkRequesterServiceV20170117.ListReviewableHITs"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1943,7 +1996,7 @@ func (s *SDK) ListReviewableHiTs(ctx context.Context, request operations.ListRev
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1993,8 +2046,9 @@ func (s *SDK) ListReviewableHiTs(ctx context.Context, request operations.ListRev
 	return res, nil
 }
 
+// ListWorkerBlocks - The <code>ListWorkersBlocks</code> operation retrieves a list of Workers who are blocked from working on your HITs.
 func (s *SDK) ListWorkerBlocks(ctx context.Context, request operations.ListWorkerBlocksRequest) (*operations.ListWorkerBlocksResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=MTurkRequesterServiceV20170117.ListWorkerBlocks"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2016,7 +2070,7 @@ func (s *SDK) ListWorkerBlocks(ctx context.Context, request operations.ListWorke
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2066,8 +2120,9 @@ func (s *SDK) ListWorkerBlocks(ctx context.Context, request operations.ListWorke
 	return res, nil
 }
 
+// ListWorkersWithQualificationType -  The <code>ListWorkersWithQualificationType</code> operation returns all of the Workers that have been associated with a given Qualification type.
 func (s *SDK) ListWorkersWithQualificationType(ctx context.Context, request operations.ListWorkersWithQualificationTypeRequest) (*operations.ListWorkersWithQualificationTypeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=MTurkRequesterServiceV20170117.ListWorkersWithQualificationType"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2089,7 +2144,7 @@ func (s *SDK) ListWorkersWithQualificationType(ctx context.Context, request oper
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2139,8 +2194,9 @@ func (s *SDK) ListWorkersWithQualificationType(ctx context.Context, request oper
 	return res, nil
 }
 
+// NotifyWorkers -  The <code>NotifyWorkers</code> operation sends an email to one or more Workers that you specify with the Worker ID. You can specify up to 100 Worker IDs to send the same message with a single call to the NotifyWorkers operation. The NotifyWorkers operation will send a notification email to a Worker only if you have previously approved or rejected work from the Worker.
 func (s *SDK) NotifyWorkers(ctx context.Context, request operations.NotifyWorkersRequest) (*operations.NotifyWorkersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=MTurkRequesterServiceV20170117.NotifyWorkers"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2160,7 +2216,7 @@ func (s *SDK) NotifyWorkers(ctx context.Context, request operations.NotifyWorker
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2210,8 +2266,9 @@ func (s *SDK) NotifyWorkers(ctx context.Context, request operations.NotifyWorker
 	return res, nil
 }
 
+// RejectAssignment - <p> The <code>RejectAssignment</code> operation rejects the results of a completed assignment. </p> <p> You can include an optional feedback message with the rejection, which the Worker can see in the Status section of the web site. When you include a feedback message with the rejection, it helps the Worker understand why the assignment was rejected, and can improve the quality of the results the Worker submits in the future. </p> <p> Only the Requester who created the HIT can reject an assignment for the HIT. </p>
 func (s *SDK) RejectAssignment(ctx context.Context, request operations.RejectAssignmentRequest) (*operations.RejectAssignmentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=MTurkRequesterServiceV20170117.RejectAssignment"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2231,7 +2288,7 @@ func (s *SDK) RejectAssignment(ctx context.Context, request operations.RejectAss
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2281,8 +2338,9 @@ func (s *SDK) RejectAssignment(ctx context.Context, request operations.RejectAss
 	return res, nil
 }
 
+// RejectQualificationRequest - <p> The <code>RejectQualificationRequest</code> operation rejects a user's request for a Qualification. </p> <p> You can provide a text message explaining why the request was rejected. The Worker who made the request can see this message.</p>
 func (s *SDK) RejectQualificationRequest(ctx context.Context, request operations.RejectQualificationRequestRequest) (*operations.RejectQualificationRequestResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=MTurkRequesterServiceV20170117.RejectQualificationRequest"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2302,7 +2360,7 @@ func (s *SDK) RejectQualificationRequest(ctx context.Context, request operations
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2352,8 +2410,9 @@ func (s *SDK) RejectQualificationRequest(ctx context.Context, request operations
 	return res, nil
 }
 
+// SendBonus -  The <code>SendBonus</code> operation issues a payment of money from your account to a Worker. This payment happens separately from the reward you pay to the Worker when you approve the Worker's assignment. The SendBonus operation requires the Worker's ID and the assignment ID as parameters to initiate payment of the bonus. You must include a message that explains the reason for the bonus payment, as the Worker may not be expecting the payment. Amazon Mechanical Turk collects a fee for bonus payments, similar to the HIT listing fee. This operation fails if your account does not have enough funds to pay for both the bonus and the fees.
 func (s *SDK) SendBonus(ctx context.Context, request operations.SendBonusRequest) (*operations.SendBonusResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=MTurkRequesterServiceV20170117.SendBonus"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2373,7 +2432,7 @@ func (s *SDK) SendBonus(ctx context.Context, request operations.SendBonusRequest
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2423,8 +2482,9 @@ func (s *SDK) SendBonus(ctx context.Context, request operations.SendBonusRequest
 	return res, nil
 }
 
+// SendTestEventNotification -  The <code>SendTestEventNotification</code> operation causes Amazon Mechanical Turk to send a notification message as if a HIT event occurred, according to the provided notification specification. This allows you to test notifications without setting up notifications for a real HIT type and trying to trigger them using the website. When you call this operation, the service attempts to send the test notification immediately.
 func (s *SDK) SendTestEventNotification(ctx context.Context, request operations.SendTestEventNotificationRequest) (*operations.SendTestEventNotificationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=MTurkRequesterServiceV20170117.SendTestEventNotification"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2444,7 +2504,7 @@ func (s *SDK) SendTestEventNotification(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2494,8 +2554,9 @@ func (s *SDK) SendTestEventNotification(ctx context.Context, request operations.
 	return res, nil
 }
 
+// UpdateExpirationForHit -  The <code>UpdateExpirationForHIT</code> operation allows you update the expiration time of a HIT. If you update it to a time in the past, the HIT will be immediately expired.
 func (s *SDK) UpdateExpirationForHit(ctx context.Context, request operations.UpdateExpirationForHitRequest) (*operations.UpdateExpirationForHitResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=MTurkRequesterServiceV20170117.UpdateExpirationForHIT"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2515,7 +2576,7 @@ func (s *SDK) UpdateExpirationForHit(ctx context.Context, request operations.Upd
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2565,8 +2626,9 @@ func (s *SDK) UpdateExpirationForHit(ctx context.Context, request operations.Upd
 	return res, nil
 }
 
+// UpdateHitReviewStatus -  The <code>UpdateHITReviewStatus</code> operation updates the status of a HIT. If the status is Reviewable, this operation can update the status to Reviewing, or it can revert a Reviewing HIT back to the Reviewable status.
 func (s *SDK) UpdateHitReviewStatus(ctx context.Context, request operations.UpdateHitReviewStatusRequest) (*operations.UpdateHitReviewStatusResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=MTurkRequesterServiceV20170117.UpdateHITReviewStatus"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2586,7 +2648,7 @@ func (s *SDK) UpdateHitReviewStatus(ctx context.Context, request operations.Upda
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2636,8 +2698,9 @@ func (s *SDK) UpdateHitReviewStatus(ctx context.Context, request operations.Upda
 	return res, nil
 }
 
+// UpdateHitTypeOfHit -  The <code>UpdateHITTypeOfHIT</code> operation allows you to change the HITType properties of a HIT. This operation disassociates the HIT from its old HITType properties and associates it with the new HITType properties. The HIT takes on the properties of the new HITType in place of the old ones.
 func (s *SDK) UpdateHitTypeOfHit(ctx context.Context, request operations.UpdateHitTypeOfHitRequest) (*operations.UpdateHitTypeOfHitResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=MTurkRequesterServiceV20170117.UpdateHITTypeOfHIT"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2657,7 +2720,7 @@ func (s *SDK) UpdateHitTypeOfHit(ctx context.Context, request operations.UpdateH
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2707,8 +2770,9 @@ func (s *SDK) UpdateHitTypeOfHit(ctx context.Context, request operations.UpdateH
 	return res, nil
 }
 
+// UpdateNotificationSettings -  The <code>UpdateNotificationSettings</code> operation creates, updates, disables or re-enables notifications for a HIT type. If you call the UpdateNotificationSettings operation for a HIT type that already has a notification specification, the operation replaces the old specification with a new one. You can call the UpdateNotificationSettings operation to enable or disable notifications for the HIT type, without having to modify the notification specification itself by providing updates to the Active status without specifying a new notification specification. To change the Active status of a HIT type's notifications, the HIT type must already have a notification specification, or one must be provided in the same call to <code>UpdateNotificationSettings</code>.
 func (s *SDK) UpdateNotificationSettings(ctx context.Context, request operations.UpdateNotificationSettingsRequest) (*operations.UpdateNotificationSettingsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=MTurkRequesterServiceV20170117.UpdateNotificationSettings"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2728,7 +2792,7 @@ func (s *SDK) UpdateNotificationSettings(ctx context.Context, request operations
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2778,8 +2842,9 @@ func (s *SDK) UpdateNotificationSettings(ctx context.Context, request operations
 	return res, nil
 }
 
+// UpdateQualificationType - <p> The <code>UpdateQualificationType</code> operation modifies the attributes of an existing Qualification type, which is represented by a QualificationType data structure. Only the owner of a Qualification type can modify its attributes. </p> <p> Most attributes of a Qualification type can be changed after the type has been created. However, the Name and Keywords fields cannot be modified. The RetryDelayInSeconds parameter can be modified or added to change the delay or to enable retries, but RetryDelayInSeconds cannot be used to disable retries. </p> <p> You can use this operation to update the test for a Qualification type. The test is updated based on the values specified for the Test, TestDurationInSeconds and AnswerKey parameters. All three parameters specify the updated test. If you are updating the test for a type, you must specify the Test and TestDurationInSeconds parameters. The AnswerKey parameter is optional; omitting it specifies that the updated test does not have an answer key. </p> <p> If you omit the Test parameter, the test for the Qualification type is unchanged. There is no way to remove a test from a Qualification type that has one. If the type already has a test, you cannot update it to be AutoGranted. If the Qualification type does not have a test and one is provided by an update, the type will henceforth have a test. </p> <p> If you want to update the test duration or answer key for an existing test without changing the questions, you must specify a Test parameter with the original questions, along with the updated values. </p> <p> If you provide an updated Test but no AnswerKey, the new test will not have an answer key. Requests for such Qualifications must be granted manually. </p> <p> You can also update the AutoGranted and AutoGrantedValue attributes of the Qualification type.</p>
 func (s *SDK) UpdateQualificationType(ctx context.Context, request operations.UpdateQualificationTypeRequest) (*operations.UpdateQualificationTypeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=MTurkRequesterServiceV20170117.UpdateQualificationType"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2799,7 +2864,7 @@ func (s *SDK) UpdateQualificationType(ctx context.Context, request operations.Up
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

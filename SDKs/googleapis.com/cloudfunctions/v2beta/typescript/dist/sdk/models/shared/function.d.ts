@@ -1,13 +1,11 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { BuildConfig } from "./buildconfig";
 import { EventTrigger } from "./eventtrigger";
 import { ServiceConfig } from "./serviceconfig";
 import { GoogleCloudFunctionsV2betaStateMessage } from "./googlecloudfunctionsv2betastatemessage";
-export declare enum FunctionEnvironmentEnum {
-    EnvironmentUnspecified = "ENVIRONMENT_UNSPECIFIED",
-    Gen1 = "GEN_1",
-    Gen2 = "GEN_2"
-}
+import { BuildConfigInput } from "./buildconfig";
+import { EventTriggerInput } from "./eventtrigger";
+import { ServiceConfigInput } from "./serviceconfig";
 export declare enum FunctionStateEnum {
     StateUnspecified = "STATE_UNSPECIFIED",
     Active = "ACTIVE",
@@ -15,6 +13,11 @@ export declare enum FunctionStateEnum {
     Deploying = "DEPLOYING",
     Deleting = "DELETING",
     Unknown = "UNKNOWN"
+}
+export declare enum FunctionEnvironmentEnum {
+    EnvironmentUnspecified = "ENVIRONMENT_UNSPECIFIED",
+    Gen1 = "GEN_1",
+    Gen2 = "GEN_2"
 }
 /**
  * Describes a Cloud Function that contains user computation executed in response to an event. It encapsulates function and trigger configurations.
@@ -30,4 +33,16 @@ export declare class Function extends SpeakeasyBase {
     state?: FunctionStateEnum;
     stateMessages?: GoogleCloudFunctionsV2betaStateMessage[];
     updateTime?: string;
+}
+/**
+ * Describes a Cloud Function that contains user computation executed in response to an event. It encapsulates function and trigger configurations.
+**/
+export declare class FunctionInput extends SpeakeasyBase {
+    buildConfig?: BuildConfigInput;
+    description?: string;
+    environment?: FunctionEnvironmentEnum;
+    eventTrigger?: EventTriggerInput;
+    labels?: Map<string, string>;
+    name?: string;
+    serviceConfig?: ServiceConfigInput;
 }

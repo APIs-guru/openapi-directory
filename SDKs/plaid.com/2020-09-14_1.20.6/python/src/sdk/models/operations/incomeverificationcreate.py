@@ -5,12 +5,12 @@ from sdk.models import shared
 
 @dataclass
 class IncomeVerificationCreateRequest:
-    request: shared.IncomeVerificationCreateRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.IncomeVerificationCreateRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class IncomeVerificationCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     income_verification_create_response: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

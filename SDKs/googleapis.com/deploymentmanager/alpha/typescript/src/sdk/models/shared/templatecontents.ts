@@ -1,11 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ImportFile } from "./importfile";
 
+
 export enum TemplateContentsInterpreterEnum {
-    UnknownInterpreter = "UNKNOWN_INTERPRETER"
-,    Python = "PYTHON"
-,    Jinja = "JINJA"
+    UnknownInterpreter = "UNKNOWN_INTERPRETER",
+    Python = "PYTHON",
+    Jinja = "JINJA"
 }
 
 
@@ -14,18 +14,18 @@ export enum TemplateContentsInterpreterEnum {
  * Files that make up the template contents of a template type.
 **/
 export class TemplateContents extends SpeakeasyBase {
-  @Metadata({ data: "json, name=imports", elemType: shared.ImportFile })
+  @SpeakeasyMetadata({ data: "json, name=imports", elemType: ImportFile })
   imports?: ImportFile[];
 
-  @Metadata({ data: "json, name=interpreter" })
+  @SpeakeasyMetadata({ data: "json, name=interpreter" })
   interpreter?: TemplateContentsInterpreterEnum;
 
-  @Metadata({ data: "json, name=mainTemplate" })
+  @SpeakeasyMetadata({ data: "json, name=mainTemplate" })
   mainTemplate?: string;
 
-  @Metadata({ data: "json, name=schema" })
+  @SpeakeasyMetadata({ data: "json, name=schema" })
   schema?: string;
 
-  @Metadata({ data: "json, name=template" })
+  @SpeakeasyMetadata({ data: "json, name=template" })
   template?: string;
 }

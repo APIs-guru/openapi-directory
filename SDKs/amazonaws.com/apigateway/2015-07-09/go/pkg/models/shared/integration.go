@@ -1,5 +1,7 @@
 package shared
 
+// Integration
+// <p>Represents an HTTP, HTTP_PROXY, AWS, AWS_PROXY, or Mock integration.</p> <div class="remarks">In the API Gateway console, the built-in Lambda integration is an AWS integration.</div> <div class="seeAlso"> <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html">Creating an API</a> </div>
 type Integration struct {
 	CacheKeyParameters   []string                       `json:"cacheKeyParameters,omitempty"`
 	CacheNamespace       *string                        `json:"cacheNamespace,omitempty"`

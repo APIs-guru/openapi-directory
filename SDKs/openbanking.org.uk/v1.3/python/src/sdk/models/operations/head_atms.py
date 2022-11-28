@@ -10,12 +10,12 @@ class HeadAtmsHeaders:
 
 @dataclass
 class HeadAtmsRequest:
-    headers: HeadAtmsHeaders = field(default=None)
+    headers: HeadAtmsHeaders = field()
     
 
 @dataclass
 class HeadAtmsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     no_response: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

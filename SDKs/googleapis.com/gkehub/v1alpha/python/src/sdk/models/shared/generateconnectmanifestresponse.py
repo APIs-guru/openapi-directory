@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import connectagentresource
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GenerateConnectManifestResponse:
-    manifest: Optional[List[connectagentresource.ConnectAgentResource]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'manifest' }})
+    r"""GenerateConnectManifestResponse
+    GenerateConnectManifestResponse contains manifest information for installing/upgrading a Connect agent.
+    """
+    
+    manifest: Optional[List[ConnectAgentResource]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('manifest') }})
     

@@ -9,11 +9,6 @@ type GetTIDJSONHeaders struct {
 	APIUsername string `header:"style=simple,explode=false,name=Api-Username"`
 }
 
-type GetTIDJSONRequest struct {
-	PathParams GetTIDJSONPathParams
-	Headers    GetTIDJSONHeaders
-}
-
 type GetTIDJSON200ApplicationJSONActionsSummary struct {
 	CanAct *bool  `json:"can_act,omitempty"`
 	Count  *int64 `json:"count,omitempty"`
@@ -224,6 +219,11 @@ type GetTIDJSON200ApplicationJSON struct {
 	Views             *int64                                        `json:"views,omitempty"`
 	Visible           *bool                                         `json:"visible,omitempty"`
 	WordCount         *int64                                        `json:"word_count,omitempty"`
+}
+
+type GetTIDJSONRequest struct {
+	PathParams GetTIDJSONPathParams
+	Headers    GetTIDJSONHeaders
 }
 
 type GetTIDJSONResponse struct {

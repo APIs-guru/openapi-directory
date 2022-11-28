@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CustomFieldInputModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=field1" })
+  @SpeakeasyMetadata({ data: "json, name=field1" })
   field1?: string;
 
-  @Metadata({ data: "json, name=field10" })
+  @SpeakeasyMetadata({ data: "json, name=field10" })
   field10?: string;
 
-  @Metadata({ data: "json, name=field2" })
+  @SpeakeasyMetadata({ data: "json, name=field2" })
   field2?: string;
 
-  @Metadata({ data: "json, name=field3" })
+  @SpeakeasyMetadata({ data: "json, name=field3" })
   field3?: string;
 
-  @Metadata({ data: "json, name=field4" })
+  @SpeakeasyMetadata({ data: "json, name=field4" })
   field4?: string;
 
-  @Metadata({ data: "json, name=field5" })
+  @SpeakeasyMetadata({ data: "json, name=field5" })
   field5?: string;
 
-  @Metadata({ data: "json, name=field6" })
+  @SpeakeasyMetadata({ data: "json, name=field6" })
   field6?: string;
 
-  @Metadata({ data: "json, name=field7" })
+  @SpeakeasyMetadata({ data: "json, name=field7" })
   field7?: string;
 
-  @Metadata({ data: "json, name=field8" })
+  @SpeakeasyMetadata({ data: "json, name=field8" })
   field8?: string;
 
-  @Metadata({ data: "json, name=field9" })
+  @SpeakeasyMetadata({ data: "json, name=field9" })
   field9?: string;
 }

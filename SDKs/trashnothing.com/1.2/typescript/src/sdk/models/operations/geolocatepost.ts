@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GeolocatePostPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=post_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=post_id" })
   postId: string;
 }
 
 
 export class GeolocatePostRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, name=latitude" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=latitude" })
   latitude: number;
 
-  @Metadata({ data: "multipart_form, name=location" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=location" })
   location?: string;
 
-  @Metadata({ data: "multipart_form, name=longitude" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=longitude" })
   longitude: number;
 }
 
 
 export class GeolocatePostRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GeolocatePostPathParams;
 
-  @Metadata({ data: "request, media_type=multipart/form-data" })
+  @SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" })
   request: GeolocatePostRequestBody;
 }
 
 
 export class GeolocatePostResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   post?: shared.Post;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

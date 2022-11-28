@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Partition } from "./partition";
 
 
+
 export class GetPartitionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Partition" })
+  @SpeakeasyMetadata({ data: "json, name=Partition" })
   partition?: Partition;
 }

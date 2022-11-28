@@ -1,5 +1,7 @@
 package shared
 
+// Layer
+// Describes a layer.
 type Layer struct {
 	Arn                         *string                      `json:"Arn,omitempty"`
 	Attributes                  map[string]string            `json:"Attributes,omitempty"`

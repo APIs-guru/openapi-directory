@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ChunkUploadResponse
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Chunk upload response
 **/
 export class ChunkUploadResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hash" })
+  @SpeakeasyMetadata({ data: "json, name=hash" })
   hash: string;
 
-  @Metadata({ data: "json, name=size" })
+  @SpeakeasyMetadata({ data: "json, name=size" })
   size: number;
 }

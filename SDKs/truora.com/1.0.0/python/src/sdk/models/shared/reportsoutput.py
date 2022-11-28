@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import report
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ReportsOutput:
-    next: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next' }})
-    reports: List[report.Report] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reports' }})
-    self: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'self' }})
+    r"""ReportsOutput
+    Represents the result of report searches
+    """
+    
+    reports: List[Report] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('reports') }})
+    self: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('self') }})
+    next: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('next') }})
     

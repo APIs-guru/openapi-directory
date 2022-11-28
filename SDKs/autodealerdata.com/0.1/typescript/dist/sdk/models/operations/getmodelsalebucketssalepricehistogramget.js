@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetModelSaleBucketsSalePriceHistogramGetQueryParams = /** @class */ (function (_super) {
     __extends(GetModelSaleBucketsSalePriceHistogramGetQueryParams, _super);
@@ -30,19 +30,19 @@ var GetModelSaleBucketsSalePriceHistogramGetQueryParams = /** @class */ (functio
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=brandName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=brandName" }),
         __metadata("design:type", String)
     ], GetModelSaleBucketsSalePriceHistogramGetQueryParams.prototype, "brandName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=jwt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=jwt" }),
         __metadata("design:type", String)
     ], GetModelSaleBucketsSalePriceHistogramGetQueryParams.prototype, "jwt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=modelName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=modelName" }),
         __metadata("design:type", String)
     ], GetModelSaleBucketsSalePriceHistogramGetQueryParams.prototype, "modelName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=regionName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=regionName" }),
         __metadata("design:type", String)
     ], GetModelSaleBucketsSalePriceHistogramGetQueryParams.prototype, "regionName", void 0);
     return GetModelSaleBucketsSalePriceHistogramGetQueryParams;
@@ -54,7 +54,7 @@ var GetModelSaleBucketsSalePriceHistogramGetRequest = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetModelSaleBucketsSalePriceHistogramGetQueryParams)
     ], GetModelSaleBucketsSalePriceHistogramGetRequest.prototype, "queryParams", void 0);
     return GetModelSaleBucketsSalePriceHistogramGetRequest;
@@ -66,19 +66,19 @@ var GetModelSaleBucketsSalePriceHistogramGetResponse = /** @class */ (function (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.BucketResp)
     ], GetModelSaleBucketsSalePriceHistogramGetResponse.prototype, "bucketResp", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetModelSaleBucketsSalePriceHistogramGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.HttpValidationError)
     ], GetModelSaleBucketsSalePriceHistogramGetResponse.prototype, "httpValidationError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetModelSaleBucketsSalePriceHistogramGetResponse.prototype, "statusCode", void 0);
     return GetModelSaleBucketsSalePriceHistogramGetResponse;

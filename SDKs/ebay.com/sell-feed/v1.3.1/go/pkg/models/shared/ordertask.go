@@ -1,5 +1,7 @@
 package shared
 
+// OrderTask
+// The type that defines the fields for the getOrderTask response.
 type OrderTask struct {
 	CompletionDate *string              `json:"completionDate,omitempty"`
 	CreationDate   *string              `json:"creationDate,omitempty"`

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ExecutionListItem
+// Contains details about an execution.
 type ExecutionListItem struct {
 	ExecutionArn    string              `json:"executionArn"`
 	Name            string              `json:"name"`

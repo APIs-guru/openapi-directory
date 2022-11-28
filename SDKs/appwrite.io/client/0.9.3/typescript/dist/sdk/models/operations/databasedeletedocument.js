@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var DatabaseDeleteDocumentPathParams = /** @class */ (function (_super) {
     __extends(DatabaseDeleteDocumentPathParams, _super);
@@ -30,11 +30,11 @@ var DatabaseDeleteDocumentPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=collectionId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=collectionId" }),
         __metadata("design:type", String)
     ], DatabaseDeleteDocumentPathParams.prototype, "collectionId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=documentId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=documentId" }),
         __metadata("design:type", String)
     ], DatabaseDeleteDocumentPathParams.prototype, "documentId", void 0);
     return DatabaseDeleteDocumentPathParams;
@@ -46,11 +46,11 @@ var DatabaseDeleteDocumentSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeJwt)
     ], DatabaseDeleteDocumentSecurity.prototype, "jwt", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeProject)
     ], DatabaseDeleteDocumentSecurity.prototype, "project", void 0);
     return DatabaseDeleteDocumentSecurity;
@@ -62,11 +62,11 @@ var DatabaseDeleteDocumentRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DatabaseDeleteDocumentPathParams)
     ], DatabaseDeleteDocumentRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DatabaseDeleteDocumentSecurity)
     ], DatabaseDeleteDocumentRequest.prototype, "security", void 0);
     return DatabaseDeleteDocumentRequest;
@@ -78,11 +78,11 @@ var DatabaseDeleteDocumentResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DatabaseDeleteDocumentResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DatabaseDeleteDocumentResponse.prototype, "statusCode", void 0);
     return DatabaseDeleteDocumentResponse;

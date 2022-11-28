@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { IamPolicy } from "./iampolicy";
 /**
  * Represents the information of a namespace

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ParentTypeEnum } from "./parenttypeenum";
+
 
 
 // Parent
@@ -7,9 +8,9 @@ import { ParentTypeEnum } from "./parenttypeenum";
  * Contains information about either a root or an organizational unit (OU) that can contain OUs or accounts in an organization.
 **/
 export class Parent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: ParentTypeEnum;
 }

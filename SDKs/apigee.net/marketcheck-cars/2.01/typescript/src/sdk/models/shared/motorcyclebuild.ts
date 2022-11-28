@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MotorcycleBuild
@@ -6,42 +7,42 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes the Motorcycle specification
 **/
 export class MotorcycleBuild extends SpeakeasyBase {
-  @Metadata({ data: "json, name=body_type" })
+  @SpeakeasyMetadata({ data: "json, name=body_type" })
   bodyType?: string;
 
-  @Metadata({ data: "json, name=cylinders" })
+  @SpeakeasyMetadata({ data: "json, name=cylinders" })
   cylinders?: number;
 
-  @Metadata({ data: "json, name=drivetrain" })
+  @SpeakeasyMetadata({ data: "json, name=drivetrain" })
   drivetrain?: string;
 
-  @Metadata({ data: "json, name=dry_weight" })
+  @SpeakeasyMetadata({ data: "json, name=dry_weight" })
   dryWeight?: string;
 
-  @Metadata({ data: "json, name=engine" })
+  @SpeakeasyMetadata({ data: "json, name=engine" })
   engine?: string;
 
-  @Metadata({ data: "json, name=fuel_type" })
+  @SpeakeasyMetadata({ data: "json, name=fuel_type" })
   fuelType?: string;
 
-  @Metadata({ data: "json, name=made_in" })
+  @SpeakeasyMetadata({ data: "json, name=made_in" })
   madeIn?: string;
 
-  @Metadata({ data: "json, name=make" })
+  @SpeakeasyMetadata({ data: "json, name=make" })
   make?: string;
 
-  @Metadata({ data: "json, name=model" })
+  @SpeakeasyMetadata({ data: "json, name=model" })
   model?: string;
 
-  @Metadata({ data: "json, name=transmission" })
+  @SpeakeasyMetadata({ data: "json, name=transmission" })
   transmission?: string;
 
-  @Metadata({ data: "json, name=trim" })
+  @SpeakeasyMetadata({ data: "json, name=trim" })
   trim?: string;
 
-  @Metadata({ data: "json, name=vehicle_type" })
+  @SpeakeasyMetadata({ data: "json, name=vehicle_type" })
   vehicleType?: string;
 
-  @Metadata({ data: "json, name=year" })
+  @SpeakeasyMetadata({ data: "json, name=year" })
   year?: number;
 }

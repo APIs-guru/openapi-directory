@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleAnalyticsAdminV1alphaLinkProposalStatusDetailsLinkProposalInitiatingProductEnum {
-    LinkProposalInitiatingProductUnspecified = "LINK_PROPOSAL_INITIATING_PRODUCT_UNSPECIFIED"
-,    GoogleAnalytics = "GOOGLE_ANALYTICS"
-,    LinkedProduct = "LINKED_PRODUCT"
+    LinkProposalInitiatingProductUnspecified = "LINK_PROPOSAL_INITIATING_PRODUCT_UNSPECIFIED",
+    GoogleAnalytics = "GOOGLE_ANALYTICS",
+    LinkedProduct = "LINKED_PRODUCT"
 }
 
 export enum GoogleAnalyticsAdminV1alphaLinkProposalStatusDetailsLinkProposalStateEnum {
-    LinkProposalStateUnspecified = "LINK_PROPOSAL_STATE_UNSPECIFIED"
-,    AwaitingReviewFromGoogleAnalytics = "AWAITING_REVIEW_FROM_GOOGLE_ANALYTICS"
-,    AwaitingReviewFromLinkedProduct = "AWAITING_REVIEW_FROM_LINKED_PRODUCT"
-,    Withdrawn = "WITHDRAWN"
-,    Declined = "DECLINED"
-,    Expired = "EXPIRED"
-,    Obsolete = "OBSOLETE"
+    LinkProposalStateUnspecified = "LINK_PROPOSAL_STATE_UNSPECIFIED",
+    AwaitingReviewFromGoogleAnalytics = "AWAITING_REVIEW_FROM_GOOGLE_ANALYTICS",
+    AwaitingReviewFromLinkedProduct = "AWAITING_REVIEW_FROM_LINKED_PRODUCT",
+    Withdrawn = "WITHDRAWN",
+    Declined = "DECLINED",
+    Expired = "EXPIRED",
+    Obsolete = "OBSOLETE"
 }
 
 
@@ -22,12 +23,12 @@ export enum GoogleAnalyticsAdminV1alphaLinkProposalStatusDetailsLinkProposalStat
  * Status information for a link proposal.
 **/
 export class GoogleAnalyticsAdminV1alphaLinkProposalStatusDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=linkProposalInitiatingProduct" })
+  @SpeakeasyMetadata({ data: "json, name=linkProposalInitiatingProduct" })
   linkProposalInitiatingProduct?: GoogleAnalyticsAdminV1alphaLinkProposalStatusDetailsLinkProposalInitiatingProductEnum;
 
-  @Metadata({ data: "json, name=linkProposalState" })
+  @SpeakeasyMetadata({ data: "json, name=linkProposalState" })
   linkProposalState?: GoogleAnalyticsAdminV1alphaLinkProposalStatusDetailsLinkProposalStateEnum;
 
-  @Metadata({ data: "json, name=requestorEmail" })
+  @SpeakeasyMetadata({ data: "json, name=requestorEmail" })
   requestorEmail?: string;
 }

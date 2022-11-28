@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import trafficpercentstrategy
+from sdk import utils
+from . import *
 
 class RolloutStatusEnum(str, Enum):
     ROLLOUT_STATUS_UNSPECIFIED = "ROLLOUT_STATUS_UNSPECIFIED"
@@ -16,11 +18,15 @@ class RolloutStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Rollout:
-    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createTime' }})
-    created_by: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createdBy' }})
-    delete_service_strategy: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deleteServiceStrategy' }})
-    rollout_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rolloutId' }})
-    service_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'serviceName' }})
-    status: Optional[RolloutStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    traffic_percent_strategy: Optional[trafficpercentstrategy.TrafficPercentStrategy] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'trafficPercentStrategy' }})
+    r"""Rollout
+    A rollout resource that defines how service configuration versions are pushed to control plane systems. Typically, you create a new version of the service config, and then create a Rollout to push the service config.
+    """
+    
+    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createTime') }})
+    created_by: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createdBy') }})
+    delete_service_strategy: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('deleteServiceStrategy') }})
+    rollout_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rolloutId') }})
+    service_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('serviceName') }})
+    status: Optional[RolloutStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    traffic_percent_strategy: Optional[TrafficPercentStrategy] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('trafficPercentStrategy') }})
     

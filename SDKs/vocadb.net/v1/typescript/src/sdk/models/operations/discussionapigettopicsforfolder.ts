@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DiscussionApiGetTopicsForFolderPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=folderId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=folderId" })
   folderId: number;
 }
 
 export enum DiscussionApiGetTopicsForFolderFieldsEnum {
-    None = "None"
-,    Comments = "Comments"
-,    CommentCount = "CommentCount"
-,    Content = "Content"
-,    LastComment = "LastComment"
-,    All = "All"
+    None = "None",
+    Comments = "Comments",
+    CommentCount = "CommentCount",
+    Content = "Content",
+    LastComment = "LastComment",
+    All = "All"
 }
 
 
 export class DiscussionApiGetTopicsForFolderQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" })
   fields?: DiscussionApiGetTopicsForFolderFieldsEnum;
 }
 
 
 export class DiscussionApiGetTopicsForFolderRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DiscussionApiGetTopicsForFolderPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: DiscussionApiGetTopicsForFolderQueryParams;
 }
 
 
 export class DiscussionApiGetTopicsForFolderResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.DiscussionTopicContract })
+  @SpeakeasyMetadata({ elemType: shared.DiscussionTopicContract })
   discussionTopicContracts?: shared.DiscussionTopicContract[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

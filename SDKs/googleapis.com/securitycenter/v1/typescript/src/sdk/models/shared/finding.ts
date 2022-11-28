@@ -1,13 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Access } from "./access";
 import { Compliance } from "./compliance";
 import { Connection } from "./connection";
-import { ContactDetails } from "./contactdetails";
 import { Container } from "./container";
 import { Database } from "./database";
 import { Exfiltration } from "./exfiltration";
-import { GoogleCloudSecuritycenterV1ExternalSystem } from "./googlecloudsecuritycenterv1externalsystem";
+import { File } from "./file";
 import { IamBinding } from "./iambinding";
 import { Indicator } from "./indicator";
 import { Kubernetes } from "./kubernetes";
@@ -15,35 +13,135 @@ import { MitreAttack } from "./mitreattack";
 import { Process } from "./process";
 import { SecurityMarks } from "./securitymarks";
 import { Vulnerability } from "./vulnerability";
+import { ContactDetails } from "./contactdetails";
+import { GoogleCloudSecuritycenterV1ExternalSystem } from "./googlecloudsecuritycenterv1externalsystem";
+
 
 export enum FindingFindingClassEnum {
-    FindingClassUnspecified = "FINDING_CLASS_UNSPECIFIED"
-,    Threat = "THREAT"
-,    Vulnerability = "VULNERABILITY"
-,    Misconfiguration = "MISCONFIGURATION"
-,    Observation = "OBSERVATION"
-,    SccError = "SCC_ERROR"
+    FindingClassUnspecified = "FINDING_CLASS_UNSPECIFIED",
+    Threat = "THREAT",
+    Vulnerability = "VULNERABILITY",
+    Misconfiguration = "MISCONFIGURATION",
+    Observation = "OBSERVATION",
+    SccError = "SCC_ERROR"
 }
 
 export enum FindingMuteEnum {
-    MuteUnspecified = "MUTE_UNSPECIFIED"
-,    Muted = "MUTED"
-,    Unmuted = "UNMUTED"
-,    Undefined = "UNDEFINED"
+    MuteUnspecified = "MUTE_UNSPECIFIED",
+    Muted = "MUTED",
+    Unmuted = "UNMUTED",
+    Undefined = "UNDEFINED"
 }
 
 export enum FindingSeverityEnum {
-    SeverityUnspecified = "SEVERITY_UNSPECIFIED"
-,    Critical = "CRITICAL"
-,    High = "HIGH"
-,    Medium = "MEDIUM"
-,    Low = "LOW"
+    SeverityUnspecified = "SEVERITY_UNSPECIFIED",
+    Critical = "CRITICAL",
+    High = "HIGH",
+    Medium = "MEDIUM",
+    Low = "LOW"
 }
 
 export enum FindingStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Active = "ACTIVE"
-,    Inactive = "INACTIVE"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Active = "ACTIVE",
+    Inactive = "INACTIVE"
+}
+
+
+// FindingInput
+/** 
+ * Security Command Center finding. A finding is a record of assessment data like security, risk, health, or privacy, that is ingested into Security Command Center for presentation, notification, analysis, policy testing, and enforcement. For example, a cross-site scripting (XSS) vulnerability in an App Engine application is a finding.
+**/
+export class FindingInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=access" })
+  access?: Access;
+
+  @SpeakeasyMetadata({ data: "json, name=canonicalName" })
+  canonicalName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=category" })
+  category?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=compliances", elemType: Compliance })
+  compliances?: Compliance[];
+
+  @SpeakeasyMetadata({ data: "json, name=connections", elemType: Connection })
+  connections?: Connection[];
+
+  @SpeakeasyMetadata({ data: "json, name=containers", elemType: Container })
+  containers?: Container[];
+
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
+  createTime?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=database" })
+  database?: Database;
+
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=eventTime" })
+  eventTime?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=exfiltration" })
+  exfiltration?: Exfiltration;
+
+  @SpeakeasyMetadata({ data: "json, name=externalUri" })
+  externalUri?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=files", elemType: File })
+  files?: File[];
+
+  @SpeakeasyMetadata({ data: "json, name=findingClass" })
+  findingClass?: FindingFindingClassEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=iamBindings", elemType: IamBinding })
+  iamBindings?: IamBinding[];
+
+  @SpeakeasyMetadata({ data: "json, name=indicator" })
+  indicator?: Indicator;
+
+  @SpeakeasyMetadata({ data: "json, name=kubernetes" })
+  kubernetes?: Kubernetes;
+
+  @SpeakeasyMetadata({ data: "json, name=mitreAttack" })
+  mitreAttack?: MitreAttack;
+
+  @SpeakeasyMetadata({ data: "json, name=mute" })
+  mute?: FindingMuteEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=muteInitiator" })
+  muteInitiator?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=nextSteps" })
+  nextSteps?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=parent" })
+  parent?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=processes", elemType: Process })
+  processes?: Process[];
+
+  @SpeakeasyMetadata({ data: "json, name=resourceName" })
+  resourceName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=securityMarks" })
+  securityMarks?: SecurityMarks;
+
+  @SpeakeasyMetadata({ data: "json, name=severity" })
+  severity?: FindingSeverityEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=sourceProperties" })
+  sourceProperties?: Map<string, any>;
+
+  @SpeakeasyMetadata({ data: "json, name=state" })
+  state?: FindingStateEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=vulnerability" })
+  vulnerability?: Vulnerability;
 }
 
 
@@ -52,102 +150,105 @@ export enum FindingStateEnum {
  * Security Command Center finding. A finding is a record of assessment data like security, risk, health, or privacy, that is ingested into Security Command Center for presentation, notification, analysis, policy testing, and enforcement. For example, a cross-site scripting (XSS) vulnerability in an App Engine application is a finding.
 **/
 export class Finding extends SpeakeasyBase {
-  @Metadata({ data: "json, name=access" })
+  @SpeakeasyMetadata({ data: "json, name=access" })
   access?: Access;
 
-  @Metadata({ data: "json, name=canonicalName" })
+  @SpeakeasyMetadata({ data: "json, name=canonicalName" })
   canonicalName?: string;
 
-  @Metadata({ data: "json, name=category" })
+  @SpeakeasyMetadata({ data: "json, name=category" })
   category?: string;
 
-  @Metadata({ data: "json, name=compliances", elemType: shared.Compliance })
+  @SpeakeasyMetadata({ data: "json, name=compliances", elemType: Compliance })
   compliances?: Compliance[];
 
-  @Metadata({ data: "json, name=connections", elemType: shared.Connection })
+  @SpeakeasyMetadata({ data: "json, name=connections", elemType: Connection })
   connections?: Connection[];
 
-  @Metadata({ data: "json, name=contacts", elemType: shared.ContactDetails })
+  @SpeakeasyMetadata({ data: "json, name=contacts", elemType: ContactDetails })
   contacts?: Map<string, ContactDetails>;
 
-  @Metadata({ data: "json, name=containers", elemType: shared.Container })
+  @SpeakeasyMetadata({ data: "json, name=containers", elemType: Container })
   containers?: Container[];
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=database" })
+  @SpeakeasyMetadata({ data: "json, name=database" })
   database?: Database;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=eventTime" })
+  @SpeakeasyMetadata({ data: "json, name=eventTime" })
   eventTime?: string;
 
-  @Metadata({ data: "json, name=exfiltration" })
+  @SpeakeasyMetadata({ data: "json, name=exfiltration" })
   exfiltration?: Exfiltration;
 
-  @Metadata({ data: "json, name=externalSystems", elemType: shared.GoogleCloudSecuritycenterV1ExternalSystem })
+  @SpeakeasyMetadata({ data: "json, name=externalSystems", elemType: GoogleCloudSecuritycenterV1ExternalSystem })
   externalSystems?: Map<string, GoogleCloudSecuritycenterV1ExternalSystem>;
 
-  @Metadata({ data: "json, name=externalUri" })
+  @SpeakeasyMetadata({ data: "json, name=externalUri" })
   externalUri?: string;
 
-  @Metadata({ data: "json, name=findingClass" })
+  @SpeakeasyMetadata({ data: "json, name=files", elemType: File })
+  files?: File[];
+
+  @SpeakeasyMetadata({ data: "json, name=findingClass" })
   findingClass?: FindingFindingClassEnum;
 
-  @Metadata({ data: "json, name=iamBindings", elemType: shared.IamBinding })
+  @SpeakeasyMetadata({ data: "json, name=iamBindings", elemType: IamBinding })
   iamBindings?: IamBinding[];
 
-  @Metadata({ data: "json, name=indicator" })
+  @SpeakeasyMetadata({ data: "json, name=indicator" })
   indicator?: Indicator;
 
-  @Metadata({ data: "json, name=kubernetes" })
+  @SpeakeasyMetadata({ data: "json, name=kubernetes" })
   kubernetes?: Kubernetes;
 
-  @Metadata({ data: "json, name=mitreAttack" })
+  @SpeakeasyMetadata({ data: "json, name=mitreAttack" })
   mitreAttack?: MitreAttack;
 
-  @Metadata({ data: "json, name=mute" })
+  @SpeakeasyMetadata({ data: "json, name=mute" })
   mute?: FindingMuteEnum;
 
-  @Metadata({ data: "json, name=muteInitiator" })
+  @SpeakeasyMetadata({ data: "json, name=muteInitiator" })
   muteInitiator?: string;
 
-  @Metadata({ data: "json, name=muteUpdateTime" })
+  @SpeakeasyMetadata({ data: "json, name=muteUpdateTime" })
   muteUpdateTime?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=nextSteps" })
+  @SpeakeasyMetadata({ data: "json, name=nextSteps" })
   nextSteps?: string;
 
-  @Metadata({ data: "json, name=parent" })
+  @SpeakeasyMetadata({ data: "json, name=parent" })
   parent?: string;
 
-  @Metadata({ data: "json, name=parentDisplayName" })
+  @SpeakeasyMetadata({ data: "json, name=parentDisplayName" })
   parentDisplayName?: string;
 
-  @Metadata({ data: "json, name=processes", elemType: shared.Process })
+  @SpeakeasyMetadata({ data: "json, name=processes", elemType: Process })
   processes?: Process[];
 
-  @Metadata({ data: "json, name=resourceName" })
+  @SpeakeasyMetadata({ data: "json, name=resourceName" })
   resourceName?: string;
 
-  @Metadata({ data: "json, name=securityMarks" })
+  @SpeakeasyMetadata({ data: "json, name=securityMarks" })
   securityMarks?: SecurityMarks;
 
-  @Metadata({ data: "json, name=severity" })
+  @SpeakeasyMetadata({ data: "json, name=severity" })
   severity?: FindingSeverityEnum;
 
-  @Metadata({ data: "json, name=sourceProperties" })
+  @SpeakeasyMetadata({ data: "json, name=sourceProperties" })
   sourceProperties?: Map<string, any>;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: FindingStateEnum;
 
-  @Metadata({ data: "json, name=vulnerability" })
+  @SpeakeasyMetadata({ data: "json, name=vulnerability" })
   vulnerability?: Vulnerability;
 }

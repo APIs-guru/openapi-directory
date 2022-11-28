@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ArtifactSourceIdTypeEnum } from "./artifactsourceidtypeenum";
+
 
 
 // ArtifactSourceType
@@ -7,9 +8,9 @@ import { ArtifactSourceIdTypeEnum } from "./artifactsourceidtypeenum";
  * The ID and ID type of an artifact source.
 **/
 export class ArtifactSourceType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SourceIdType" })
+  @SpeakeasyMetadata({ data: "json, name=SourceIdType" })
   sourceIdType: ArtifactSourceIdTypeEnum;
 
-  @Metadata({ data: "json, name=Value" })
+  @SpeakeasyMetadata({ data: "json, name=Value" })
   value: string;
 }

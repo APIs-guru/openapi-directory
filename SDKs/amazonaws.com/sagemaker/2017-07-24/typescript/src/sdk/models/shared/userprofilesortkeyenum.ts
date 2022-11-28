@@ -1,6 +1,7 @@
 
 
+
 export enum UserProfileSortKeyEnum {
-    CreationTime = "CreationTime"
-,    LastModifiedTime = "LastModifiedTime"
+    CreationTime = "CreationTime",
+    LastModifiedTime = "LastModifiedTime"
 }

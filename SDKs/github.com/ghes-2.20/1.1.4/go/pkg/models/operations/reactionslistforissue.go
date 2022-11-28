@@ -29,14 +29,14 @@ type ReactionsListForIssueQueryParams struct {
 	PerPage *int64                            `queryParam:"style=form,explode=true,name=per_page"`
 }
 
-type ReactionsListForIssueRequest struct {
-	PathParams  ReactionsListForIssuePathParams
-	QueryParams ReactionsListForIssueQueryParams
-}
-
 type ReactionsListForIssue415ApplicationJSON struct {
 	DocumentationURL string `json:"documentation_url"`
 	Message          string `json:"message"`
+}
+
+type ReactionsListForIssueRequest struct {
+	PathParams  ReactionsListForIssuePathParams
+	QueryParams ReactionsListForIssueQueryParams
 }
 
 type ReactionsListForIssueResponse struct {

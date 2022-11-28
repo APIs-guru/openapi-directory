@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GroupContentDetails } from "./groupcontentdetails";
 import { Errors } from "./errors";
 import { GroupSnippet } from "./groupsnippet";
@@ -36,27 +36,27 @@ var Group = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=contentDetails" }),
+        SpeakeasyMetadata({ data: "json, name=contentDetails" }),
         __metadata("design:type", GroupContentDetails)
     ], Group.prototype, "contentDetails", void 0);
     __decorate([
-        Metadata({ data: "json, name=errors" }),
+        SpeakeasyMetadata({ data: "json, name=errors" }),
         __metadata("design:type", Errors)
     ], Group.prototype, "errors", void 0);
     __decorate([
-        Metadata({ data: "json, name=etag" }),
+        SpeakeasyMetadata({ data: "json, name=etag" }),
         __metadata("design:type", String)
     ], Group.prototype, "etag", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], Group.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=kind" }),
+        SpeakeasyMetadata({ data: "json, name=kind" }),
         __metadata("design:type", String)
     ], Group.prototype, "kind", void 0);
     __decorate([
-        Metadata({ data: "json, name=snippet" }),
+        SpeakeasyMetadata({ data: "json, name=snippet" }),
         __metadata("design:type", GroupSnippet)
     ], Group.prototype, "snippet", void 0);
     return Group;

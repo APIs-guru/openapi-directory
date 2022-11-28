@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ListEventSourcesRequest = /** @class */ (function (_super) {
     __extends(ListEventSourcesRequest, _super);
     function ListEventSourcesRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Limit" }),
+        SpeakeasyMetadata({ data: "json, name=Limit" }),
         __metadata("design:type", Number)
     ], ListEventSourcesRequest.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "json, name=NamePrefix" }),
+        SpeakeasyMetadata({ data: "json, name=NamePrefix" }),
         __metadata("design:type", String)
     ], ListEventSourcesRequest.prototype, "namePrefix", void 0);
     __decorate([
-        Metadata({ data: "json, name=NextToken" }),
+        SpeakeasyMetadata({ data: "json, name=NextToken" }),
         __metadata("design:type", String)
     ], ListEventSourcesRequest.prototype, "nextToken", void 0);
     return ListEventSourcesRequest;

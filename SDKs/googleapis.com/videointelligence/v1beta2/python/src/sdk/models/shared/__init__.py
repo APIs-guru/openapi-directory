@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .alt_enum import *
 from .googlecloudvideointelligencev1beta2_annotatevideorequest import *
 from .googlecloudvideointelligencev1beta2_explicitcontentdetectionconfig import *

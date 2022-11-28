@@ -1,5 +1,7 @@
 package shared
 
+// AutoScalingSettingsUpdate
+// Represents the auto scaling settings to be modified for a global table or global secondary index.
 type AutoScalingSettingsUpdate struct {
 	AutoScalingDisabled *bool                    `json:"AutoScalingDisabled,omitempty"`
 	AutoScalingRoleArn  *string                  `json:"AutoScalingRoleArn,omitempty"`

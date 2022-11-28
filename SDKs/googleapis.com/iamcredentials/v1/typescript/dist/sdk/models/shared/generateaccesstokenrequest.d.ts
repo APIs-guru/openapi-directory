@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class GenerateAccessTokenRequest extends SpeakeasyBase {
     delegates?: string[];
     lifetime?: string;

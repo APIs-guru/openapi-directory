@@ -50,6 +50,8 @@ const (
 	InputParameterDataTypeEnumDataTypeTimestampWithTimezone InputParameterDataTypeEnum = "DATA_TYPE_TIMESTAMP_WITH_TIMEZONE"
 )
 
+// InputParameter
+// Metadata of an input parameter.
 type InputParameter struct {
 	DataType     *InputParameterDataTypeEnum `json:"dataType,omitempty"`
 	DefaultValue *interface{}                `json:"defaultValue,omitempty"`

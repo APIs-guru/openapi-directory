@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetCandidatesSearchCandidateStatusEnum(str, Enum):
@@ -27,7 +28,7 @@ class GetCandidatesSearchOfficeEnum(str, Enum):
 
 @dataclass
 class GetCandidatesSearchQueryParams:
-    api_key: str = field(default=None, metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
+    api_key: str = field(metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
     candidate_id: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'candidate_id', 'style': 'form', 'explode': True }})
     candidate_status: Optional[List[GetCandidatesSearchCandidateStatusEnum]] = field(default=None, metadata={'query_param': { 'field_name': 'candidate_status', 'style': 'form', 'explode': True }})
     cycle: Optional[List[int]] = field(default=None, metadata={'query_param': { 'field_name': 'cycle', 'style': 'form', 'explode': True }})
@@ -37,8 +38,8 @@ class GetCandidatesSearchQueryParams:
     has_raised_funds: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'has_raised_funds', 'style': 'form', 'explode': True }})
     incumbent_challenge: Optional[List[GetCandidatesSearchIncumbentChallengeEnum]] = field(default=None, metadata={'query_param': { 'field_name': 'incumbent_challenge', 'style': 'form', 'explode': True }})
     is_active_candidate: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'is_active_candidate', 'style': 'form', 'explode': True }})
-    max_first_file_date: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'max_first_file_date', 'style': 'form', 'explode': True }})
-    min_first_file_date: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'min_first_file_date', 'style': 'form', 'explode': True }})
+    max_first_file_date: Optional[date] = field(default=None, metadata={'query_param': { 'field_name': 'max_first_file_date', 'style': 'form', 'explode': True }})
+    min_first_file_date: Optional[date] = field(default=None, metadata={'query_param': { 'field_name': 'min_first_file_date', 'style': 'form', 'explode': True }})
     name: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'name', 'style': 'form', 'explode': True }})
     office: Optional[List[GetCandidatesSearchOfficeEnum]] = field(default=None, metadata={'query_param': { 'field_name': 'office', 'style': 'form', 'explode': True }})
     page: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'page', 'style': 'form', 'explode': True }})
@@ -55,12 +56,12 @@ class GetCandidatesSearchQueryParams:
 
 @dataclass
 class GetCandidatesSearchRequest:
-    query_params: GetCandidatesSearchQueryParams = field(default=None)
+    query_params: GetCandidatesSearchQueryParams = field()
     
 
 @dataclass
 class GetCandidatesSearchResponse:
+    content_type: str = field()
+    status_code: int = field()
     candidate_page: Optional[shared.CandidatePage] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

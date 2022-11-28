@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActionParameter } from "./actionparameter";
+
 
 
 // FormAction
@@ -8,9 +8,9 @@ import { ActionParameter } from "./actionparameter";
  * A form action describes the behavior when the form is submitted. For example, an Apps Script can be invoked to handle the form.
 **/
 export class FormAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actionMethodName" })
+  @SpeakeasyMetadata({ data: "json, name=actionMethodName" })
   actionMethodName?: string;
 
-  @Metadata({ data: "json, name=parameters", elemType: shared.ActionParameter })
+  @SpeakeasyMetadata({ data: "json, name=parameters", elemType: ActionParameter })
   parameters?: ActionParameter[];
 }

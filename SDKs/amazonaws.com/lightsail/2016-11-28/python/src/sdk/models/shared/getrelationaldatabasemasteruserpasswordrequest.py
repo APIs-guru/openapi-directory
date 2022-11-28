@@ -1,12 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import relationaldatabasepasswordversion_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetRelationalDatabaseMasterUserPasswordRequest:
-    password_version: Optional[relationaldatabasepasswordversion_enum.RelationalDatabasePasswordVersionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'passwordVersion' }})
-    relational_database_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'relationalDatabaseName' }})
+    relational_database_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('relationalDatabaseName') }})
+    password_version: Optional[RelationalDatabasePasswordVersionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('passwordVersion') }})
     

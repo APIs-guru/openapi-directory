@@ -22,34 +22,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EncryptionConfiguration } from "./encryptionconfiguration";
 import { ImageScanningConfiguration } from "./imagescanningconfiguration";
 import { ImageTagMutabilityEnum } from "./imagetagmutabilityenum";
+import { Tag } from "./tag";
 var CreateRepositoryRequest = /** @class */ (function (_super) {
     __extends(CreateRepositoryRequest, _super);
     function CreateRepositoryRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=encryptionConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=encryptionConfiguration" }),
         __metadata("design:type", EncryptionConfiguration)
     ], CreateRepositoryRequest.prototype, "encryptionConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=imageScanningConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=imageScanningConfiguration" }),
         __metadata("design:type", ImageScanningConfiguration)
     ], CreateRepositoryRequest.prototype, "imageScanningConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=imageTagMutability" }),
+        SpeakeasyMetadata({ data: "json, name=imageTagMutability" }),
         __metadata("design:type", String)
     ], CreateRepositoryRequest.prototype, "imageTagMutability", void 0);
     __decorate([
-        Metadata({ data: "json, name=repositoryName" }),
+        SpeakeasyMetadata({ data: "json, name=repositoryName" }),
         __metadata("design:type", String)
     ], CreateRepositoryRequest.prototype, "repositoryName", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags", elemType: shared.Tag }),
+        SpeakeasyMetadata({ data: "json, name=tags", elemType: Tag }),
         __metadata("design:type", Array)
     ], CreateRepositoryRequest.prototype, "tags", void 0);
     return CreateRepositoryRequest;

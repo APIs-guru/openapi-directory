@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import nesteddevicetype
+from sdk import utils
+from . import *
 
 class ConsolePortTemplateTypeLabelEnum(str, Enum):
     DE_9 = "DE-9"
@@ -37,15 +39,15 @@ class ConsolePortTemplateTypeValueEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ConsolePortTemplateType:
-    label: ConsolePortTemplateTypeLabelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
-    value: ConsolePortTemplateTypeValueEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    label: ConsolePortTemplateTypeLabelEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('label') }})
+    value: ConsolePortTemplateTypeValueEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     
 
 @dataclass_json
 @dataclass
 class ConsolePortTemplate:
-    device_type: nesteddevicetype.NestedDeviceType = field(default=None, metadata={'dataclasses_json': { 'field_name': 'device_type' }})
-    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    type: Optional[ConsolePortTemplateType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    device_type: NestedDeviceType = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('device_type') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    type: Optional[ConsolePortTemplateType] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

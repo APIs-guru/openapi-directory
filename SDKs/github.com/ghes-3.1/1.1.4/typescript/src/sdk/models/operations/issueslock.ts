@@ -1,51 +1,52 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class IssuesLockPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=issue_number" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=issue_number" })
   issueNumber: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=owner" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=owner" })
   owner: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repo" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repo" })
   repo: string;
 }
 
 export enum IssuesLockRequestBodyLockReasonEnum {
-    OffTopic = "off-topic"
-,    TooHeated = "too heated"
-,    Resolved = "resolved"
-,    Spam = "spam"
+    OffTopic = "off-topic",
+    TooHeated = "too heated",
+    Resolved = "resolved",
+    Spam = "spam"
 }
 
 
 export class IssuesLockRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=lock_reason" })
+  @SpeakeasyMetadata({ data: "json, name=lock_reason" })
   lockReason?: IssuesLockRequestBodyLockReasonEnum;
 }
 
 
 export class IssuesLockRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: IssuesLockPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: IssuesLockRequestBody;
 }
 
 
 export class IssuesLockResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationError?: shared.ValidationError;
 }

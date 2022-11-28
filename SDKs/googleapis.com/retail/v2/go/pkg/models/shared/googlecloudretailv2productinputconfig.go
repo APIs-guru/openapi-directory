@@ -1,7 +1,9 @@
 package shared
 
-type GoogleCloudRetailV2ProductInputConfig struct {
-	BigQuerySource      *GoogleCloudRetailV2BigQuerySource      `json:"bigQuerySource,omitempty"`
-	GcsSource           *GoogleCloudRetailV2GcsSource           `json:"gcsSource,omitempty"`
-	ProductInlineSource *GoogleCloudRetailV2ProductInlineSource `json:"productInlineSource,omitempty"`
+// GoogleCloudRetailV2ProductInputConfigInput
+// The input config source for products.
+type GoogleCloudRetailV2ProductInputConfigInput struct {
+	BigQuerySource      *GoogleCloudRetailV2BigQuerySource           `json:"bigQuerySource,omitempty"`
+	GcsSource           *GoogleCloudRetailV2GcsSource                `json:"gcsSource,omitempty"`
+	ProductInlineSource *GoogleCloudRetailV2ProductInlineSourceInput `json:"productInlineSource,omitempty"`
 }

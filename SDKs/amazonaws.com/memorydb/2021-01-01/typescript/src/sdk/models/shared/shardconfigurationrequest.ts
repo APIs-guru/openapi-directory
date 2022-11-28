@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ShardConfigurationRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A request to configure the sharding properties of a cluster
 **/
 export class ShardConfigurationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ShardCount" })
+  @SpeakeasyMetadata({ data: "json, name=ShardCount" })
   shardCount?: number;
 }

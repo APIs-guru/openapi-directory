@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DeleteUsersUserIdPathParams = /** @class */ (function (_super) {
     __extends(DeleteUsersUserIdPathParams, _super);
     function DeleteUsersUserIdPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=userId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=userId" }),
         __metadata("design:type", String)
     ], DeleteUsersUserIdPathParams.prototype, "userId", void 0);
     return DeleteUsersUserIdPathParams;
@@ -41,7 +41,7 @@ var DeleteUsersUserIdRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteUsersUserIdPathParams)
     ], DeleteUsersUserIdRequest.prototype, "pathParams", void 0);
     return DeleteUsersUserIdRequest;
@@ -53,11 +53,11 @@ var DeleteUsersUserIdResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DeleteUsersUserIdResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DeleteUsersUserIdResponse.prototype, "statusCode", void 0);
     return DeleteUsersUserIdResponse;

@@ -1,17 +1,18 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import category
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SaveCategoryResponseData:
-    category: category.Category = field(default=None, metadata={'dataclasses_json': { 'field_name': 'category' }})
-    server_knowledge: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'server_knowledge' }})
+    category: Category = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('category') }})
+    server_knowledge: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('server_knowledge') }})
     
 
 @dataclass_json
 @dataclass
 class SaveCategoryResponse:
-    data: SaveCategoryResponseData = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
+    data: SaveCategoryResponseData = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
     

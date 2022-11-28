@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetScheduledTransactionsPathParams:
-    budget_id: str = field(default=None, metadata={'path_param': { 'field_name': 'budget_id', 'style': 'simple', 'explode': False }})
+    budget_id: str = field(metadata={'path_param': { 'field_name': 'budget_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,14 +15,14 @@ class GetScheduledTransactionsQueryParams:
 
 @dataclass
 class GetScheduledTransactionsRequest:
-    path_params: GetScheduledTransactionsPathParams = field(default=None)
-    query_params: GetScheduledTransactionsQueryParams = field(default=None)
+    path_params: GetScheduledTransactionsPathParams = field()
+    query_params: GetScheduledTransactionsQueryParams = field()
     
 
 @dataclass
 class GetScheduledTransactionsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     scheduled_transactions_response: Optional[shared.ScheduledTransactionsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

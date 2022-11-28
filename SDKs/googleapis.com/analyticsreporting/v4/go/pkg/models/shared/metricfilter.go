@@ -10,6 +10,8 @@ const (
 	MetricFilterOperatorEnumIsMissing           MetricFilterOperatorEnum = "IS_MISSING"
 )
 
+// MetricFilter
+// MetricFilter specifies the filter on a metric.
 type MetricFilter struct {
 	ComparisonValue *string                   `json:"comparisonValue,omitempty"`
 	MetricName      *string                   `json:"metricName,omitempty"`

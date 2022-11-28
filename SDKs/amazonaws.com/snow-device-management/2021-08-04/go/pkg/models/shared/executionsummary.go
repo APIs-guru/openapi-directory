@@ -1,5 +1,7 @@
 package shared
 
+// ExecutionSummary
+// The summary of a task execution on a specified device.
 type ExecutionSummary struct {
 	ExecutionID     *string             `json:"executionId,omitempty"`
 	ManagedDeviceID *string             `json:"managedDeviceId,omitempty"`

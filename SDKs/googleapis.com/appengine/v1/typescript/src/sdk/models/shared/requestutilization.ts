@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RequestUtilization
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Target scaling by request utilization. Only applicable in the App Engine flexible environment.
 **/
 export class RequestUtilization extends SpeakeasyBase {
-  @Metadata({ data: "json, name=targetConcurrentRequests" })
+  @SpeakeasyMetadata({ data: "json, name=targetConcurrentRequests" })
   targetConcurrentRequests?: number;
 
-  @Metadata({ data: "json, name=targetRequestCountPerSecond" })
+  @SpeakeasyMetadata({ data: "json, name=targetRequestCountPerSecond" })
   targetRequestCountPerSecond?: number;
 }

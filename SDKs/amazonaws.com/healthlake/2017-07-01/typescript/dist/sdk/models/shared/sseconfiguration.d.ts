@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { KmsEncryptionConfig } from "./kmsencryptionconfig";
 /**
  *  The server-side encryption key configuration for a customer provided encryption key.

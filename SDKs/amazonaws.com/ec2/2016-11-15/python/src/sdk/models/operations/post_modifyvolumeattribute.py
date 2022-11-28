@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostModifyVolumeAttributeActionEnum(str, Enum):
     MODIFY_VOLUME_ATTRIBUTE = "ModifyVolumeAttribute"
@@ -10,8 +14,8 @@ class PostModifyVolumeAttributeVersionEnum(str, Enum):
 
 @dataclass
 class PostModifyVolumeAttributeQueryParams:
-    action: PostModifyVolumeAttributeActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostModifyVolumeAttributeVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostModifyVolumeAttributeActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostModifyVolumeAttributeVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,13 +31,13 @@ class PostModifyVolumeAttributeHeaders:
 
 @dataclass
 class PostModifyVolumeAttributeRequest:
-    query_params: PostModifyVolumeAttributeQueryParams = field(default=None)
-    headers: PostModifyVolumeAttributeHeaders = field(default=None)
+    headers: PostModifyVolumeAttributeHeaders = field()
+    query_params: PostModifyVolumeAttributeQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostModifyVolumeAttributeResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

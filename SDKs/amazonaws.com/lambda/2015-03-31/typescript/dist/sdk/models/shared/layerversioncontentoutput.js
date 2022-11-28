@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // LayerVersionContentOutput
 /**
  * Details about a version of an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">Lambda layer</a>.
@@ -33,23 +33,23 @@ var LayerVersionContentOutput = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CodeSha256" }),
+        SpeakeasyMetadata({ data: "json, name=CodeSha256" }),
         __metadata("design:type", String)
     ], LayerVersionContentOutput.prototype, "codeSha256", void 0);
     __decorate([
-        Metadata({ data: "json, name=CodeSize" }),
+        SpeakeasyMetadata({ data: "json, name=CodeSize" }),
         __metadata("design:type", Number)
     ], LayerVersionContentOutput.prototype, "codeSize", void 0);
     __decorate([
-        Metadata({ data: "json, name=Location" }),
+        SpeakeasyMetadata({ data: "json, name=Location" }),
         __metadata("design:type", String)
     ], LayerVersionContentOutput.prototype, "location", void 0);
     __decorate([
-        Metadata({ data: "json, name=SigningJobArn" }),
+        SpeakeasyMetadata({ data: "json, name=SigningJobArn" }),
         __metadata("design:type", String)
     ], LayerVersionContentOutput.prototype, "signingJobArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=SigningProfileVersionArn" }),
+        SpeakeasyMetadata({ data: "json, name=SigningProfileVersionArn" }),
         __metadata("design:type", String)
     ], LayerVersionContentOutput.prototype, "signingProfileVersionArn", void 0);
     return LayerVersionContentOutput;

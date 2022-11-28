@@ -1,12 +1,44 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AnthosObservabilityMembershipSpec } from "./anthosobservabilitymembershipspec";
-import { AnthosVmMembershipSpec } from "./anthosvmmembershipspec";
 import { CloudBuildMembershipSpec } from "./cloudbuildmembershipspec";
 import { ConfigManagementMembershipSpec } from "./configmanagementmembershipspec";
-import { IdentityServiceMembershipSpec } from "./identityservicemembershipspec";
+import { IdentityServiceMembershipSpecInput } from "./identityservicemembershipspec";
 import { ServiceMeshMembershipSpec } from "./servicemeshmembershipspec";
 import { PolicyControllerMembershipSpec } from "./policycontrollermembershipspec";
 import { MembershipSpec } from "./membershipspec";
+import { IdentityServiceMembershipSpec } from "./identityservicemembershipspec";
+
+
+
+// MembershipFeatureSpecInput
+/** 
+ * MembershipFeatureSpec contains configuration information for a single Membership.
+**/
+export class MembershipFeatureSpecInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=anthosobservability" })
+  anthosobservability?: AnthosObservabilityMembershipSpec;
+
+  @SpeakeasyMetadata({ data: "json, name=cloudbuild" })
+  cloudbuild?: CloudBuildMembershipSpec;
+
+  @SpeakeasyMetadata({ data: "json, name=configmanagement" })
+  configmanagement?: ConfigManagementMembershipSpec;
+
+  @SpeakeasyMetadata({ data: "json, name=fleetobservability" })
+  fleetobservability?: Map<string, any>;
+
+  @SpeakeasyMetadata({ data: "json, name=identityservice" })
+  identityservice?: IdentityServiceMembershipSpecInput;
+
+  @SpeakeasyMetadata({ data: "json, name=mesh" })
+  mesh?: ServiceMeshMembershipSpec;
+
+  @SpeakeasyMetadata({ data: "json, name=policycontroller" })
+  policycontroller?: PolicyControllerMembershipSpec;
+
+  @SpeakeasyMetadata({ data: "json, name=workloadcertificate" })
+  workloadcertificate?: MembershipSpec;
+}
 
 
 // MembershipFeatureSpec
@@ -14,27 +46,27 @@ import { MembershipSpec } from "./membershipspec";
  * MembershipFeatureSpec contains configuration information for a single Membership.
 **/
 export class MembershipFeatureSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=anthosobservability" })
+  @SpeakeasyMetadata({ data: "json, name=anthosobservability" })
   anthosobservability?: AnthosObservabilityMembershipSpec;
 
-  @Metadata({ data: "json, name=anthosvm" })
-  anthosvm?: AnthosVmMembershipSpec;
-
-  @Metadata({ data: "json, name=cloudbuild" })
+  @SpeakeasyMetadata({ data: "json, name=cloudbuild" })
   cloudbuild?: CloudBuildMembershipSpec;
 
-  @Metadata({ data: "json, name=configmanagement" })
+  @SpeakeasyMetadata({ data: "json, name=configmanagement" })
   configmanagement?: ConfigManagementMembershipSpec;
 
-  @Metadata({ data: "json, name=identityservice" })
+  @SpeakeasyMetadata({ data: "json, name=fleetobservability" })
+  fleetobservability?: Map<string, any>;
+
+  @SpeakeasyMetadata({ data: "json, name=identityservice" })
   identityservice?: IdentityServiceMembershipSpec;
 
-  @Metadata({ data: "json, name=mesh" })
+  @SpeakeasyMetadata({ data: "json, name=mesh" })
   mesh?: ServiceMeshMembershipSpec;
 
-  @Metadata({ data: "json, name=policycontroller" })
+  @SpeakeasyMetadata({ data: "json, name=policycontroller" })
   policycontroller?: PolicyControllerMembershipSpec;
 
-  @Metadata({ data: "json, name=workloadcertificate" })
+  @SpeakeasyMetadata({ data: "json, name=workloadcertificate" })
   workloadcertificate?: MembershipSpec;
 }

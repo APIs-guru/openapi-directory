@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DomainsProjectsLocationsRegistrationsRetrieveAuthorizationCodePathParams:
-    registration: str = field(default=None, metadata={'path_param': { 'field_name': 'registration', 'style': 'simple', 'explode': False }})
+    registration: str = field(metadata={'path_param': { 'field_name': 'registration', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class DomainsProjectsLocationsRegistrationsRetrieveAuthorizationCodeQueryParams:
 
 @dataclass
 class DomainsProjectsLocationsRegistrationsRetrieveAuthorizationCodeSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DomainsProjectsLocationsRegistrationsRetrieveAuthorizationCodeRequest:
-    path_params: DomainsProjectsLocationsRegistrationsRetrieveAuthorizationCodePathParams = field(default=None)
-    query_params: DomainsProjectsLocationsRegistrationsRetrieveAuthorizationCodeQueryParams = field(default=None)
-    security: DomainsProjectsLocationsRegistrationsRetrieveAuthorizationCodeSecurity = field(default=None)
+    path_params: DomainsProjectsLocationsRegistrationsRetrieveAuthorizationCodePathParams = field()
+    query_params: DomainsProjectsLocationsRegistrationsRetrieveAuthorizationCodeQueryParams = field()
+    security: DomainsProjectsLocationsRegistrationsRetrieveAuthorizationCodeSecurity = field()
     
 
 @dataclass
 class DomainsProjectsLocationsRegistrationsRetrieveAuthorizationCodeResponse:
+    content_type: str = field()
+    status_code: int = field()
     authorization_code: Optional[shared.AuthorizationCode] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,7 @@
 package shared
 
+// BotImportSpecification
+// Provides the bot parameters required for importing a bot.
 type BotImportSpecification struct {
 	BotName                 string            `json:"botName"`
 	BotTags                 map[string]string `json:"botTags,omitempty"`

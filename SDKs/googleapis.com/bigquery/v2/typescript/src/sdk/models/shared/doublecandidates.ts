@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DoubleCandidates
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Discrete candidates of a double hyperparameter.
 **/
 export class DoubleCandidates extends SpeakeasyBase {
-  @Metadata({ data: "json, name=candidates" })
+  @SpeakeasyMetadata({ data: "json, name=candidates" })
   candidates?: number[];
 }

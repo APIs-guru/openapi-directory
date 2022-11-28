@@ -1,5 +1,7 @@
 package shared
 
+// PaginatedHookEvents
+// A paginated list of webhook types available to subscribe on.
 type PaginatedHookEvents struct {
 	Next     *string     `json:"next,omitempty"`
 	Page     *int64      `json:"page,omitempty"`

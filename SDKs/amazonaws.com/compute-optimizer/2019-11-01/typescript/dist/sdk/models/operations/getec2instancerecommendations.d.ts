@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum GetEc2InstanceRecommendationsXAmzTargetEnum {
     ComputeOptimizerServiceGetEc2InstanceRecommendations = "ComputeOptimizerService.GetEC2InstanceRecommendations"

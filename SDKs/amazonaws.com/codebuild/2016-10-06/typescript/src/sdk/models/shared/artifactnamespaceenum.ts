@@ -1,6 +1,7 @@
 
 
+
 export enum ArtifactNamespaceEnum {
-    None = "NONE"
-,    BuildId = "BUILD_ID"
+    None = "NONE",
+    BuildId = "BUILD_ID"
 }

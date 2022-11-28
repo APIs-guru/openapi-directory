@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import errordetail
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class PartitionError:
-    error_detail: Optional[errordetail.ErrorDetail] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ErrorDetail' }})
-    partition_values: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PartitionValues' }})
+    r"""PartitionError
+    Contains information about a partition error.
+    """
+    
+    error_detail: Optional[ErrorDetail] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ErrorDetail') }})
+    partition_values: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PartitionValues') }})
     

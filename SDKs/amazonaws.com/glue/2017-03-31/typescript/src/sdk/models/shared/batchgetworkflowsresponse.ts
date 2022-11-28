@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Workflow } from "./workflow";
 
 
+
 export class BatchGetWorkflowsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MissingWorkflows" })
+  @SpeakeasyMetadata({ data: "json, name=MissingWorkflows" })
   missingWorkflows?: string[];
 
-  @Metadata({ data: "json, name=Workflows", elemType: shared.Workflow })
+  @SpeakeasyMetadata({ data: "json, name=Workflows", elemType: Workflow })
   workflows?: Workflow[];
 }

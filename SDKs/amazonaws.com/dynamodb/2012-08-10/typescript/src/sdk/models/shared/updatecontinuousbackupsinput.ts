@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PointInTimeRecoverySpecification } from "./pointintimerecoveryspecification";
 
 
+
 export class UpdateContinuousBackupsInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PointInTimeRecoverySpecification" })
+  @SpeakeasyMetadata({ data: "json, name=PointInTimeRecoverySpecification" })
   pointInTimeRecoverySpecification: PointInTimeRecoverySpecification;
 
-  @Metadata({ data: "json, name=TableName" })
+  @SpeakeasyMetadata({ data: "json, name=TableName" })
   tableName: string;
 }

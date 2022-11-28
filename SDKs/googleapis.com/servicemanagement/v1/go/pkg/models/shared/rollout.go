@@ -12,6 +12,8 @@ const (
 	RolloutStatusEnumFailedRolledBack         RolloutStatusEnum = "FAILED_ROLLED_BACK"
 )
 
+// Rollout
+// A rollout resource that defines how service configuration versions are pushed to control plane systems. Typically, you create a new version of the service config, and then create a Rollout to push the service config.
 type Rollout struct {
 	CreateTime             *string                 `json:"createTime,omitempty"`
 	CreatedBy              *string                 `json:"createdBy,omitempty"`

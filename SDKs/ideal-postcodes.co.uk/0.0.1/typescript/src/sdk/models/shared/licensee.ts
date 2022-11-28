@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LicenseeDaily } from "./licenseedaily";
 
 
+
 export class Licensee extends SpeakeasyBase {
-  @Metadata({ data: "json, name=address" })
+  @SpeakeasyMetadata({ data: "json, name=address" })
   address?: string;
 
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: string;
 
-  @Metadata({ data: "json, name=daily" })
+  @SpeakeasyMetadata({ data: "json, name=daily" })
   daily?: LicenseeDaily;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=postcode" })
+  @SpeakeasyMetadata({ data: "json, name=postcode" })
   postcode?: string;
 
-  @Metadata({ data: "json, name=whitelist" })
+  @SpeakeasyMetadata({ data: "json, name=whitelist" })
   whitelist?: string[];
 }

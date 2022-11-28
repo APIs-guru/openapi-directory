@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ContactData
+// Data describing a contact.
 type ContactData struct {
 	ContactID         *string            `json:"contactId,omitempty"`
 	ContactStatus     *ContactStatusEnum `json:"contactStatus,omitempty"`

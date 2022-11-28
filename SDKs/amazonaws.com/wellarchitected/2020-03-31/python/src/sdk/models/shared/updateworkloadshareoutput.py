@@ -1,12 +1,20 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import workloadshare
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateWorkloadShareOutput:
-    workload_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'WorkloadId' }})
-    workload_share: Optional[workloadshare.WorkloadShare] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'WorkloadShare' }})
+    r"""UpdateWorkloadShareOutput
+    Input for Update Workload Share
+    """
+    
+    workload_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('WorkloadId') }})
+    workload_share: Optional[WorkloadShare] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('WorkloadShare') }})
     

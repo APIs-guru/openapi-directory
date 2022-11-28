@@ -1,14 +1,18 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import segmentcostestimate
-from . import sku
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CostEstimationResult:
-    currency_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'currencyCode' }})
-    segment_cost_estimates: Optional[List[segmentcostestimate.SegmentCostEstimate]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'segmentCostEstimates' }})
-    skus: Optional[List[sku.Sku]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'skus' }})
+    r"""CostEstimationResult
+    The result of a estimating the costs of a `CostScenario`.
+    """
+    
+    currency_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('currencyCode') }})
+    segment_cost_estimates: Optional[List[SegmentCostEstimate]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('segmentCostEstimates') }})
+    skus: Optional[List[Sku]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('skus') }})
     

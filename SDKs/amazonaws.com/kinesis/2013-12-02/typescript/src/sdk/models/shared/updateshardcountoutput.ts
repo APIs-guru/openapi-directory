@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateShardCountOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CurrentShardCount" })
+  @SpeakeasyMetadata({ data: "json, name=CurrentShardCount" })
   currentShardCount?: number;
 
-  @Metadata({ data: "json, name=StreamName" })
+  @SpeakeasyMetadata({ data: "json, name=StreamName" })
   streamName?: string;
 
-  @Metadata({ data: "json, name=TargetShardCount" })
+  @SpeakeasyMetadata({ data: "json, name=TargetShardCount" })
   targetShardCount?: number;
 }

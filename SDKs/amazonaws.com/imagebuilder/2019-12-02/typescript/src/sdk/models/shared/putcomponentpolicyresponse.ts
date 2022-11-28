@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PutComponentPolicyResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=componentArn" })
+  @SpeakeasyMetadata({ data: "json, name=componentArn" })
   componentArn?: string;
 
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId?: string;
 }

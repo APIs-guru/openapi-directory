@@ -1,86 +1,87 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetApiWrittenquestionsQuestionsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=answered" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=answered" })
   answered?: shared.AnsweredEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=answeredWhenFrom" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=answeredWhenFrom" })
   answeredWhenFrom?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=answeredWhenTo" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=answeredWhenTo" })
   answeredWhenTo?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=answeringBodies" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=answeringBodies" })
   answeringBodies?: number[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=answeringMemberId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=answeringMemberId" })
   answeringMemberId?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=askingMemberId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=askingMemberId" })
   askingMemberId?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=correctedWhenFrom" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=correctedWhenFrom" })
   correctedWhenFrom?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=correctedWhenTo" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=correctedWhenTo" })
   correctedWhenTo?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=expandMember" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=expandMember" })
   expandMember?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=house" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=house" })
   house?: shared.HouseEnumEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=includeWithdrawn" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=includeWithdrawn" })
   includeWithdrawn?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=members" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=members" })
   members?: number[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=questionStatus" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=questionStatus" })
   questionStatus?: shared.QuestionStatusEnumEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=searchTerm" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=searchTerm" })
   searchTerm?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=skip" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=skip" })
   skip?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=tabledWhenFrom" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tabledWhenFrom" })
   tabledWhenFrom?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=tabledWhenTo" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tabledWhenTo" })
   tabledWhenTo?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=take" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=take" })
   take?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=uIN" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uIN" })
   uIn?: string;
 }
 
 
 export class GetApiWrittenquestionsQuestionsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetApiWrittenquestionsQuestionsQueryParams;
 }
 
 
 export class GetApiWrittenquestionsQuestionsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: Map<string, Map<string, any>>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   questionsViewModelSearchResult?: shared.QuestionsViewModelSearchResult;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

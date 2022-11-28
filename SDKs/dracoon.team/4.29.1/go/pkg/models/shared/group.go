@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Group
+// Group information
 type Group struct {
 	CntUsers   int32      `json:"cntUsers"`
 	CreatedAt  time.Time  `json:"createdAt"`

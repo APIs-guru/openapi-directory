@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ServiceInstance } from "./serviceinstance";
 var CancelServiceInstanceDeploymentOutput = /** @class */ (function (_super) {
     __extends(CancelServiceInstanceDeploymentOutput, _super);
@@ -30,7 +30,7 @@ var CancelServiceInstanceDeploymentOutput = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=serviceInstance" }),
+        SpeakeasyMetadata({ data: "json, name=serviceInstance" }),
         __metadata("design:type", ServiceInstance)
     ], CancelServiceInstanceDeploymentOutput.prototype, "serviceInstance", void 0);
     return CancelServiceInstanceDeploymentOutput;

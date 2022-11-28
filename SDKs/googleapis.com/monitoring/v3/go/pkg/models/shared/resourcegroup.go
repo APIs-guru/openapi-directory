@@ -8,6 +8,8 @@ const (
 	ResourceGroupResourceTypeEnumAwsElbLoadBalancer      ResourceGroupResourceTypeEnum = "AWS_ELB_LOAD_BALANCER"
 )
 
+// ResourceGroup
+// The resource submessage for group checks. It can be used instead of a monitored resource, when multiple resources are being monitored.
 type ResourceGroup struct {
 	GroupID      *string                        `json:"groupId,omitempty"`
 	ResourceType *ResourceGroupResourceTypeEnum `json:"resourceType,omitempty"`

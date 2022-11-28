@@ -1,17 +1,19 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import houseenum_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DailyReportViewModel:
-    date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'date', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    file_size_bytes: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fileSizeBytes' }})
-    house: Optional[houseenum_enum.HouseEnumEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'house' }})
-    url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
+    date_: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('date'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    file_size_bytes: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fileSizeBytes') }})
+    house: Optional[HouseEnumEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('house') }})
+    url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('url') }})
     

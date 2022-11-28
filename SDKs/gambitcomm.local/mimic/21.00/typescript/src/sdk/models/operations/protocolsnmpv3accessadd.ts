@@ -1,49 +1,50 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ProtocolSnmpv3AccessAddPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" })
   agentNum: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=contextMatch" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=contextMatch" })
   contextMatch: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=groupName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=groupName" })
   groupName: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=notifyView" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=notifyView" })
   notifyView: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=prefix" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=prefix" })
   prefix: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=readView" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=readView" })
   readView: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=securityLevel" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=securityLevel" })
   securityLevel: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=securityModel" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=securityModel" })
   securityModel: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=writeView" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=writeView" })
   writeView: string;
 }
 
 
 export class ProtocolSnmpv3AccessAddRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ProtocolSnmpv3AccessAddPathParams;
 }
 
 
 export class ProtocolSnmpv3AccessAddResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   protocolSnmpv3AccessAdd200ApplicationJsonString?: string;
 }

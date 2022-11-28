@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
 from typing import Any,Optional
+from sdk.models import shared
 
 
 @dataclass
 class ReferencesAircraftByAircraftCodeGetPathParams:
-    aircraft_code: str = field(default=None, metadata={'path_param': { 'field_name': 'aircraftCode', 'style': 'simple', 'explode': False }})
+    aircraft_code: str = field(metadata={'path_param': { 'field_name': 'aircraftCode', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,25 +16,25 @@ class ReferencesAircraftByAircraftCodeGetQueryParams:
 
 @dataclass
 class ReferencesAircraftByAircraftCodeGetHeaders:
-    accept: str = field(default=None, metadata={'header': { 'field_name': 'Accept', 'style': 'simple', 'explode': False }})
+    accept: str = field(metadata={'header': { 'field_name': 'Accept', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ReferencesAircraftByAircraftCodeGetSecurity:
-    auth: shared.SchemeAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    auth: shared.SchemeAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ReferencesAircraftByAircraftCodeGetRequest:
-    path_params: ReferencesAircraftByAircraftCodeGetPathParams = field(default=None)
-    query_params: ReferencesAircraftByAircraftCodeGetQueryParams = field(default=None)
-    headers: ReferencesAircraftByAircraftCodeGetHeaders = field(default=None)
-    security: ReferencesAircraftByAircraftCodeGetSecurity = field(default=None)
+    headers: ReferencesAircraftByAircraftCodeGetHeaders = field()
+    path_params: ReferencesAircraftByAircraftCodeGetPathParams = field()
+    query_params: ReferencesAircraftByAircraftCodeGetQueryParams = field()
+    security: ReferencesAircraftByAircraftCodeGetSecurity = field()
     
 
 @dataclass
 class ReferencesAircraftByAircraftCodeGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     references_aircraft_by_aircraft_code_get_200_application_json_object: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

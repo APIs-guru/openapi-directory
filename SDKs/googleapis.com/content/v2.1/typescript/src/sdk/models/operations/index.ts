@@ -123,6 +123,7 @@ export * from "./contentpromotionscreate";
 export * from "./contentpromotionsget";
 export * from "./contentpubsubnotificationsettingsget";
 export * from "./contentpubsubnotificationsettingsupdate";
+export * from "./contentquotaslist";
 export * from "./contentregionalinventorycustombatch";
 export * from "./contentregionalinventoryinsert";
 export * from "./contentregionscreate";

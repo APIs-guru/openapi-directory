@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// TopicRule
+// Describes a rule.
 type TopicRule struct {
 	Actions          []Action   `json:"actions,omitempty"`
 	AwsIotSQLVersion *string    `json:"awsIotSqlVersion,omitempty"`

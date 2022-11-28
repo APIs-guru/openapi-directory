@@ -1,15 +1,21 @@
 from dataclasses import dataclass, field
-from typing import Enum,List
+from typing import List
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import distanceunit_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CalculateRouteSummary:
-    data_source: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DataSource' }})
-    distance: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Distance' }})
-    distance_unit: distanceunit_enum.DistanceUnitEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DistanceUnit' }})
-    duration_seconds: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DurationSeconds' }})
-    route_b_box: List[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RouteBBox' }})
+    r"""CalculateRouteSummary
+    A summary of the calculated route.
+    """
+    
+    data_source: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('DataSource') }})
+    distance: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Distance') }})
+    distance_unit: DistanceUnitEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('DistanceUnit') }})
+    duration_seconds: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('DurationSeconds') }})
+    route_b_box: List[float] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('RouteBBox') }})
     

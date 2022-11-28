@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeletePlaceIndexPathParams:
-    index_name: str = field(default=None, metadata={'path_param': { 'field_name': 'IndexName', 'style': 'simple', 'explode': False }})
+    index_name: str = field(metadata={'path_param': { 'field_name': 'IndexName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,18 +23,18 @@ class DeletePlaceIndexHeaders:
 
 @dataclass
 class DeletePlaceIndexRequest:
-    path_params: DeletePlaceIndexPathParams = field(default=None)
-    headers: DeletePlaceIndexHeaders = field(default=None)
+    headers: DeletePlaceIndexHeaders = field()
+    path_params: DeletePlaceIndexPathParams = field()
     
 
 @dataclass
 class DeletePlaceIndexResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     delete_place_index_response: Optional[dict[str, Any]] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

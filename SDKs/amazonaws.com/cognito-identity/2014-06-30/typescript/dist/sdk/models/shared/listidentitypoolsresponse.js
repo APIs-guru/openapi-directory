@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { IdentityPoolShortDescription } from "./identitypoolshortdescription";
 // ListIdentityPoolsResponse
 /**
  * The result of a successful ListIdentityPools action.
@@ -34,11 +34,11 @@ var ListIdentityPoolsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=IdentityPools", elemType: shared.IdentityPoolShortDescription }),
+        SpeakeasyMetadata({ data: "json, name=IdentityPools", elemType: IdentityPoolShortDescription }),
         __metadata("design:type", Array)
     ], ListIdentityPoolsResponse.prototype, "identityPools", void 0);
     __decorate([
-        Metadata({ data: "json, name=NextToken" }),
+        SpeakeasyMetadata({ data: "json, name=NextToken" }),
         __metadata("design:type", String)
     ], ListIdentityPoolsResponse.prototype, "nextToken", void 0);
     return ListIdentityPoolsResponse;

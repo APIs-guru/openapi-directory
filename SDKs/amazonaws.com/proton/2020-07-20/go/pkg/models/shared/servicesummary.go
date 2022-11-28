@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ServiceSummary
+// A summary of the service detail data.
 type ServiceSummary struct {
 	Arn            string            `json:"arn"`
 	CreatedAt      time.Time         `json:"createdAt"`

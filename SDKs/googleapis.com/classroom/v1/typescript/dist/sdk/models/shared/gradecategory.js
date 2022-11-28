@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GradeCategory
 /**
  * Details for a grade category in a course. Coursework may have zero or one grade category, and the category may be used in computing the overall grade. See the [help center article](https://support.google.com/edu/classroom/answer/9184995) for details.
@@ -33,19 +33,19 @@ var GradeCategory = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=defaultGradeDenominator" }),
+        SpeakeasyMetadata({ data: "json, name=defaultGradeDenominator" }),
         __metadata("design:type", Number)
     ], GradeCategory.prototype, "defaultGradeDenominator", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], GradeCategory.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], GradeCategory.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=weight" }),
+        SpeakeasyMetadata({ data: "json, name=weight" }),
         __metadata("design:type", Number)
     ], GradeCategory.prototype, "weight", void 0);
     return GradeCategory;

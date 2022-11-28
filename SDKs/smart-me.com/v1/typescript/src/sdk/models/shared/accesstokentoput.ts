@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AccessTokenToPut
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Container Class for the Put action of an Access Token
 **/
 export class AccessTokenToPut extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CardId, form, name=CardId;" })
+  @SpeakeasyMetadata({ data: "json, name=CardId, form, name=CardId;" })
   cardId?: number;
 
-  @Metadata({ data: "json, name=UserId, form, name=UserId;" })
+  @SpeakeasyMetadata({ data: "json, name=UserId, form, name=UserId;" })
   userId?: number;
 }

@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class AcceleratorAcceleratorTypeEnum(str, Enum):
     ACCELERATOR_TYPE_UNSPECIFIED = "ACCELERATOR_TYPE_UNSPECIFIED"
@@ -11,5 +13,9 @@ class AcceleratorAcceleratorTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Accelerator:
-    accelerator_type: Optional[AcceleratorAcceleratorTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'acceleratorType' }})
+    r"""Accelerator
+    Identifies Data Fusion accelerators for an instance.
+    """
+    
+    accelerator_type: Optional[AcceleratorAcceleratorTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('acceleratorType') }})
     

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Instance
+// <p>Represents an EC2 instance of virtual computing resources that hosts one or more game servers. In GameLift, a fleet can contain zero or more instances.</p> <p> <b>Related actions</b> </p> <p> <a>DescribeInstances</a> </p>
 type Instance struct {
 	CreationTime    *time.Time           `json:"CreationTime,omitempty"`
 	DNSName         *string              `json:"DnsName,omitempty"`

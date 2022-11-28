@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ObActiveOrHistoricCurrencyAndAmount9 } from "./obactiveorhistoriccurrencyandamount9";
 import { ObTransactionCashBalance } from "./obtransactioncashbalance";
 import { ObBankTransactionCodeStructure1 } from "./obbanktransactioncodestructure1";
@@ -16,80 +16,81 @@ import { ObEntryStatus1CodeEnum } from "./obentrystatus1codeenum";
 import { ObTransactionMutability1CodeEnum } from "./obtransactionmutability1codeenum";
 
 
+
 // ObTransaction6
 /** 
  * Provides further details on an entry in the report.
 **/
 export class ObTransaction6 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccountId" })
+  @SpeakeasyMetadata({ data: "json, name=AccountId" })
   accountId: string;
 
-  @Metadata({ data: "json, name=AddressLine" })
+  @SpeakeasyMetadata({ data: "json, name=AddressLine" })
   addressLine?: string;
 
-  @Metadata({ data: "json, name=Amount" })
+  @SpeakeasyMetadata({ data: "json, name=Amount" })
   amount: ObActiveOrHistoricCurrencyAndAmount9;
 
-  @Metadata({ data: "json, name=Balance" })
+  @SpeakeasyMetadata({ data: "json, name=Balance" })
   balance?: ObTransactionCashBalance;
 
-  @Metadata({ data: "json, name=BankTransactionCode" })
+  @SpeakeasyMetadata({ data: "json, name=BankTransactionCode" })
   bankTransactionCode?: ObBankTransactionCodeStructure1;
 
-  @Metadata({ data: "json, name=BookingDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=BookingDateTime" })
   bookingDateTime: Date;
 
-  @Metadata({ data: "json, name=CardInstrument" })
+  @SpeakeasyMetadata({ data: "json, name=CardInstrument" })
   cardInstrument?: ObTransactionCardInstrument1;
 
-  @Metadata({ data: "json, name=ChargeAmount" })
+  @SpeakeasyMetadata({ data: "json, name=ChargeAmount" })
   chargeAmount?: ObActiveOrHistoricCurrencyAndAmount10;
 
-  @Metadata({ data: "json, name=CreditDebitIndicator" })
+  @SpeakeasyMetadata({ data: "json, name=CreditDebitIndicator" })
   creditDebitIndicator: ObCreditDebitCode1Enum;
 
-  @Metadata({ data: "json, name=CreditorAccount" })
+  @SpeakeasyMetadata({ data: "json, name=CreditorAccount" })
   creditorAccount?: ObCashAccount60;
 
-  @Metadata({ data: "json, name=CreditorAgent" })
+  @SpeakeasyMetadata({ data: "json, name=CreditorAgent" })
   creditorAgent?: ObBranchAndFinancialInstitutionIdentification61;
 
-  @Metadata({ data: "json, name=CurrencyExchange" })
+  @SpeakeasyMetadata({ data: "json, name=CurrencyExchange" })
   currencyExchange?: ObCurrencyExchange5;
 
-  @Metadata({ data: "json, name=DebtorAccount" })
+  @SpeakeasyMetadata({ data: "json, name=DebtorAccount" })
   debtorAccount?: ObCashAccount61;
 
-  @Metadata({ data: "json, name=DebtorAgent" })
+  @SpeakeasyMetadata({ data: "json, name=DebtorAgent" })
   debtorAgent?: ObBranchAndFinancialInstitutionIdentification62;
 
-  @Metadata({ data: "json, name=MerchantDetails" })
+  @SpeakeasyMetadata({ data: "json, name=MerchantDetails" })
   merchantDetails?: ObMerchantDetails1;
 
-  @Metadata({ data: "json, name=ProprietaryBankTransactionCode" })
+  @SpeakeasyMetadata({ data: "json, name=ProprietaryBankTransactionCode" })
   proprietaryBankTransactionCode?: ProprietaryBankTransactionCodeStructure1;
 
-  @Metadata({ data: "json, name=StatementReference" })
+  @SpeakeasyMetadata({ data: "json, name=StatementReference" })
   statementReference?: string[];
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status: ObEntryStatus1CodeEnum;
 
-  @Metadata({ data: "json, name=SupplementaryData" })
+  @SpeakeasyMetadata({ data: "json, name=SupplementaryData" })
   supplementaryData?: Map<string, any>;
 
-  @Metadata({ data: "json, name=TransactionId" })
+  @SpeakeasyMetadata({ data: "json, name=TransactionId" })
   transactionId?: string;
 
-  @Metadata({ data: "json, name=TransactionInformation" })
+  @SpeakeasyMetadata({ data: "json, name=TransactionInformation" })
   transactionInformation?: string;
 
-  @Metadata({ data: "json, name=TransactionMutability" })
+  @SpeakeasyMetadata({ data: "json, name=TransactionMutability" })
   transactionMutability?: ObTransactionMutability1CodeEnum;
 
-  @Metadata({ data: "json, name=TransactionReference" })
+  @SpeakeasyMetadata({ data: "json, name=TransactionReference" })
   transactionReference?: string;
 
-  @Metadata({ data: "json, name=ValueDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=ValueDateTime" })
   valueDateTime?: Date;
 }

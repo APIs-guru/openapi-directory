@@ -1,23 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DimensionValue } from "./dimensionvalue";
 import { CustomViewabilityMetric } from "./customviewabilitymetric";
-import { DimensionValue } from "./dimensionvalue";
 import { LookbackConfiguration } from "./lookbackconfiguration";
 import { OmnitureSettings } from "./omnituresettings";
 import { TagSettings } from "./tagsettings";
 import { ThirdPartyAuthenticationToken } from "./thirdpartyauthenticationtoken";
 import { UserDefinedVariableConfiguration } from "./userdefinedvariableconfiguration";
 
+
 export enum FloodlightConfigurationFirstDayOfWeekEnum {
-    Monday = "MONDAY"
-,    Sunday = "SUNDAY"
+    Monday = "MONDAY",
+    Sunday = "SUNDAY"
 }
 
 export enum FloodlightConfigurationNaturalSearchConversionAttributionOptionEnum {
-    ExcludeNaturalSearchConversionAttribution = "EXCLUDE_NATURAL_SEARCH_CONVERSION_ATTRIBUTION"
-,    IncludeNaturalSearchConversionAttribution = "INCLUDE_NATURAL_SEARCH_CONVERSION_ATTRIBUTION"
-,    IncludeNaturalSearchTieredConversionAttribution = "INCLUDE_NATURAL_SEARCH_TIERED_CONVERSION_ATTRIBUTION"
+    ExcludeNaturalSearchConversionAttribution = "EXCLUDE_NATURAL_SEARCH_CONVERSION_ATTRIBUTION",
+    IncludeNaturalSearchConversionAttribution = "INCLUDE_NATURAL_SEARCH_CONVERSION_ATTRIBUTION",
+    IncludeNaturalSearchTieredConversionAttribution = "INCLUDE_NATURAL_SEARCH_TIERED_CONVERSION_ATTRIBUTION"
 }
 
 
@@ -26,57 +25,57 @@ export enum FloodlightConfigurationNaturalSearchConversionAttributionOptionEnum 
  * Contains properties of a Floodlight configuration.
 **/
 export class FloodlightConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=advertiserId" })
+  @SpeakeasyMetadata({ data: "json, name=advertiserId" })
   advertiserId?: string;
 
-  @Metadata({ data: "json, name=advertiserIdDimensionValue" })
+  @SpeakeasyMetadata({ data: "json, name=advertiserIdDimensionValue" })
   advertiserIdDimensionValue?: DimensionValue;
 
-  @Metadata({ data: "json, name=analyticsDataSharingEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=analyticsDataSharingEnabled" })
   analyticsDataSharingEnabled?: boolean;
 
-  @Metadata({ data: "json, name=customViewabilityMetric" })
+  @SpeakeasyMetadata({ data: "json, name=customViewabilityMetric" })
   customViewabilityMetric?: CustomViewabilityMetric;
 
-  @Metadata({ data: "json, name=exposureToConversionEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=exposureToConversionEnabled" })
   exposureToConversionEnabled?: boolean;
 
-  @Metadata({ data: "json, name=firstDayOfWeek" })
+  @SpeakeasyMetadata({ data: "json, name=firstDayOfWeek" })
   firstDayOfWeek?: FloodlightConfigurationFirstDayOfWeekEnum;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=idDimensionValue" })
+  @SpeakeasyMetadata({ data: "json, name=idDimensionValue" })
   idDimensionValue?: DimensionValue;
 
-  @Metadata({ data: "json, name=inAppAttributionTrackingEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=inAppAttributionTrackingEnabled" })
   inAppAttributionTrackingEnabled?: boolean;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=lookbackConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=lookbackConfiguration" })
   lookbackConfiguration?: LookbackConfiguration;
 
-  @Metadata({ data: "json, name=naturalSearchConversionAttributionOption" })
+  @SpeakeasyMetadata({ data: "json, name=naturalSearchConversionAttributionOption" })
   naturalSearchConversionAttributionOption?: FloodlightConfigurationNaturalSearchConversionAttributionOptionEnum;
 
-  @Metadata({ data: "json, name=omnitureSettings" })
+  @SpeakeasyMetadata({ data: "json, name=omnitureSettings" })
   omnitureSettings?: OmnitureSettings;
 
-  @Metadata({ data: "json, name=subaccountId" })
+  @SpeakeasyMetadata({ data: "json, name=subaccountId" })
   subaccountId?: string;
 
-  @Metadata({ data: "json, name=tagSettings" })
+  @SpeakeasyMetadata({ data: "json, name=tagSettings" })
   tagSettings?: TagSettings;
 
-  @Metadata({ data: "json, name=thirdPartyAuthenticationTokens", elemType: shared.ThirdPartyAuthenticationToken })
+  @SpeakeasyMetadata({ data: "json, name=thirdPartyAuthenticationTokens", elemType: ThirdPartyAuthenticationToken })
   thirdPartyAuthenticationTokens?: ThirdPartyAuthenticationToken[];
 
-  @Metadata({ data: "json, name=userDefinedVariableConfigurations", elemType: shared.UserDefinedVariableConfiguration })
+  @SpeakeasyMetadata({ data: "json, name=userDefinedVariableConfigurations", elemType: UserDefinedVariableConfiguration })
   userDefinedVariableConfigurations?: UserDefinedVariableConfiguration[];
 }

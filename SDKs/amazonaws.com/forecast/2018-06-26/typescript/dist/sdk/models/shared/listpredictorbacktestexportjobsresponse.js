@@ -22,19 +22,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { PredictorBacktestExportJobSummary } from "./predictorbacktestexportjobsummary";
 var ListPredictorBacktestExportJobsResponse = /** @class */ (function (_super) {
     __extends(ListPredictorBacktestExportJobsResponse, _super);
     function ListPredictorBacktestExportJobsResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=NextToken" }),
+        SpeakeasyMetadata({ data: "json, name=NextToken" }),
         __metadata("design:type", String)
     ], ListPredictorBacktestExportJobsResponse.prototype, "nextToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=PredictorBacktestExportJobs", elemType: shared.PredictorBacktestExportJobSummary }),
+        SpeakeasyMetadata({ data: "json, name=PredictorBacktestExportJobs", elemType: PredictorBacktestExportJobSummary }),
         __metadata("design:type", Array)
     ], ListPredictorBacktestExportJobsResponse.prototype, "predictorBacktestExportJobs", void 0);
     return ListPredictorBacktestExportJobsResponse;

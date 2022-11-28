@@ -4,6 +4,8 @@ type PutAdminMappingsStubMappingIDPathParams struct {
 	StubMappingID string `pathParam:"style=simple,explode=false,name=stubMappingId"`
 }
 
+// PutAdminMappingsStubMappingIDRequestBodyRequestBasicAuthCredentials
+// Pre-emptive basic auth credentials to match against
 type PutAdminMappingsStubMappingIDRequestBodyRequestBasicAuthCredentials struct {
 	Password string `json:"password"`
 	Username string `json:"username"`
@@ -63,11 +65,8 @@ type PutAdminMappingsStubMappingIDRequestBody struct {
 	UUID                  *string                                           `json:"uuid,omitempty"`
 }
 
-type PutAdminMappingsStubMappingIDRequest struct {
-	PathParams PutAdminMappingsStubMappingIDPathParams
-	Request    *PutAdminMappingsStubMappingIDRequestBody `request:"mediaType=application/json"`
-}
-
+// PutAdminMappingsStubMappingID200ApplicationJSONRequestBasicAuthCredentials
+// Pre-emptive basic auth credentials to match against
 type PutAdminMappingsStubMappingID200ApplicationJSONRequestBasicAuthCredentials struct {
 	Password string `json:"password"`
 	Username string `json:"username"`
@@ -125,6 +124,11 @@ type PutAdminMappingsStubMappingID200ApplicationJSON struct {
 	Response              *PutAdminMappingsStubMappingID200ApplicationJSONResponse `json:"response,omitempty"`
 	ScenarioName          *string                                                  `json:"scenarioName,omitempty"`
 	UUID                  *string                                                  `json:"uuid,omitempty"`
+}
+
+type PutAdminMappingsStubMappingIDRequest struct {
+	PathParams PutAdminMappingsStubMappingIDPathParams
+	Request    *PutAdminMappingsStubMappingIDRequestBody `request:"mediaType=application/json"`
 }
 
 type PutAdminMappingsStubMappingIDResponse struct {

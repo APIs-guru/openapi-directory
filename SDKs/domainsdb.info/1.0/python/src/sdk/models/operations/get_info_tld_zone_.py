@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetInfoTldZonePathParams:
-    zone: str = field(default=None, metadata={'path_param': { 'field_name': 'zone', 'style': 'simple', 'explode': False }})
+    zone: str = field(metadata={'path_param': { 'field_name': 'zone', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,13 +16,13 @@ class GetInfoTldZoneQueryParams:
 
 @dataclass
 class GetInfoTldZoneRequest:
-    path_params: GetInfoTldZonePathParams = field(default=None)
-    query_params: GetInfoTldZoneQueryParams = field(default=None)
+    path_params: GetInfoTldZonePathParams = field()
+    query_params: GetInfoTldZoneQueryParams = field()
     
 
 @dataclass
 class GetInfoTldZoneResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     zone_info: Optional[shared.ZoneInfo] = field(default=None)
     

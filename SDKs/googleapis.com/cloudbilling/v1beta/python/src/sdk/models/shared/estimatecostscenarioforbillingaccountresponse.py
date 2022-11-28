@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import costestimationresult
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class EstimateCostScenarioForBillingAccountResponse:
-    cost_estimation_result: Optional[costestimationresult.CostEstimationResult] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'costEstimationResult' }})
+    r"""EstimateCostScenarioForBillingAccountResponse
+    Response for EstimateCostScenarioForBillingAccount
+    """
+    
+    cost_estimation_result: Optional[CostEstimationResult] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('costEstimationResult') }})
     

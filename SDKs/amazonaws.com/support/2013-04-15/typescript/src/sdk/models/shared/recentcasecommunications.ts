@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Communication } from "./communication";
+
 
 
 // RecentCaseCommunications
@@ -8,9 +8,9 @@ import { Communication } from "./communication";
  * The five most recent communications associated with the case.
 **/
 export class RecentCaseCommunications extends SpeakeasyBase {
-  @Metadata({ data: "json, name=communications", elemType: shared.Communication })
+  @SpeakeasyMetadata({ data: "json, name=communications", elemType: Communication })
   communications?: Communication[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

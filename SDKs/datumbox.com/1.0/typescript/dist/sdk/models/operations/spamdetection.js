@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var SpamDetectionRequestBody = /** @class */ (function (_super) {
     __extends(SpamDetectionRequestBody, _super);
     function SpamDetectionRequestBody() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "form, name=api_key;" }),
+        SpeakeasyMetadata({ data: "form, name=api_key;" }),
         __metadata("design:type", String)
     ], SpamDetectionRequestBody.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "form, name=text;" }),
+        SpeakeasyMetadata({ data: "form, name=text;" }),
         __metadata("design:type", String)
     ], SpamDetectionRequestBody.prototype, "text", void 0);
     return SpamDetectionRequestBody;
@@ -45,7 +45,7 @@ var SpamDetectionRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
         __metadata("design:type", SpamDetectionRequestBody)
     ], SpamDetectionRequest.prototype, "request", void 0);
     return SpamDetectionRequest;
@@ -57,11 +57,11 @@ var SpamDetectionResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], SpamDetectionResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], SpamDetectionResponse.prototype, "statusCode", void 0);
     return SpamDetectionResponse;

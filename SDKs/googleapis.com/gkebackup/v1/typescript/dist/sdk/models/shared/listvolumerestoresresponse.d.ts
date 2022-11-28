@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { VolumeRestore } from "./volumerestore";
 /**
  * Response message for ListVolumeRestores.

@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteTaskSetRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cluster" })
+  @SpeakeasyMetadata({ data: "json, name=cluster" })
   cluster: string;
 
-  @Metadata({ data: "json, name=force" })
+  @SpeakeasyMetadata({ data: "json, name=force" })
   force?: boolean;
 
-  @Metadata({ data: "json, name=service" })
+  @SpeakeasyMetadata({ data: "json, name=service" })
   service: string;
 
-  @Metadata({ data: "json, name=taskSet" })
+  @SpeakeasyMetadata({ data: "json, name=taskSet" })
   taskSet: string;
 }

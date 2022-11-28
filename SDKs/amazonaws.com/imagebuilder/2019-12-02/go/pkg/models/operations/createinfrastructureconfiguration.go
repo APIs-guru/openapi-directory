@@ -14,6 +14,8 @@ type CreateInfrastructureConfigurationHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateInfrastructureConfigurationRequestBodyLogging
+// Logging configuration defines where Image Builder uploads your logs.
 type CreateInfrastructureConfigurationRequestBodyLogging struct {
 	S3Logs *shared.S3Logs `json:"s3Logs,omitempty"`
 }

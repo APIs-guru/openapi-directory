@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import volumebackup
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListVolumeBackupsResponse:
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextPageToken' }})
-    volume_backups: Optional[List[volumebackup.VolumeBackup]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'volumeBackups' }})
+    r"""ListVolumeBackupsResponse
+    Response message for ListVolumeBackups.
+    """
+    
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextPageToken') }})
+    volume_backups: Optional[List[VolumeBackup]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('volumeBackups') }})
     

@@ -22,23 +22,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SavingsPlanRate } from "./savingsplanrate";
 var DescribeSavingsPlanRatesResponse = /** @class */ (function (_super) {
     __extends(DescribeSavingsPlanRatesResponse, _super);
     function DescribeSavingsPlanRatesResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=nextToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextToken" }),
         __metadata("design:type", String)
     ], DescribeSavingsPlanRatesResponse.prototype, "nextToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=savingsPlanId" }),
+        SpeakeasyMetadata({ data: "json, name=savingsPlanId" }),
         __metadata("design:type", String)
     ], DescribeSavingsPlanRatesResponse.prototype, "savingsPlanId", void 0);
     __decorate([
-        Metadata({ data: "json, name=searchResults", elemType: shared.SavingsPlanRate }),
+        SpeakeasyMetadata({ data: "json, name=searchResults", elemType: SavingsPlanRate }),
         __metadata("design:type", Array)
     ], DescribeSavingsPlanRatesResponse.prototype, "searchResults", void 0);
     return DescribeSavingsPlanRatesResponse;

@@ -5,20 +5,20 @@ from sdk.models import shared
 
 @dataclass
 class StoryIDCollaboratorsUseridPutPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
-    story_collaborator_userid: str = field(default=None, metadata={'path_param': { 'field_name': 'story_collaborator_userid', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    story_collaborator_userid: str = field(metadata={'path_param': { 'field_name': 'story_collaborator_userid', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class StoryIDCollaboratorsUseridPutRequest:
-    path_params: StoryIDCollaboratorsUseridPutPathParams = field(default=None)
-    request: shared.StoryCollaborator = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    path_params: StoryIDCollaboratorsUseridPutPathParams = field()
+    request: shared.StoryCollaborator = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class StoryIDCollaboratorsUseridPutResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     problem_detail: Optional[Any] = field(default=None)
     story_collaborator: Optional[shared.StoryCollaborator] = field(default=None)
     

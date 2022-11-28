@@ -5,18 +5,19 @@ import (
 )
 
 type TagmanagerAccountsListQueryParams struct {
-	DollarXgafv    *shared.XgafvEnum `queryParam:"style=form,explode=true,name=$.xgafv"`
-	AccessToken    *string           `queryParam:"style=form,explode=true,name=access_token"`
-	Alt            *shared.AltEnum   `queryParam:"style=form,explode=true,name=alt"`
-	Callback       *string           `queryParam:"style=form,explode=true,name=callback"`
-	Fields         *string           `queryParam:"style=form,explode=true,name=fields"`
-	Key            *string           `queryParam:"style=form,explode=true,name=key"`
-	OauthToken     *string           `queryParam:"style=form,explode=true,name=oauth_token"`
-	PageToken      *string           `queryParam:"style=form,explode=true,name=pageToken"`
-	PrettyPrint    *bool             `queryParam:"style=form,explode=true,name=prettyPrint"`
-	QuotaUser      *string           `queryParam:"style=form,explode=true,name=quotaUser"`
-	UploadType     *string           `queryParam:"style=form,explode=true,name=uploadType"`
-	UploadProtocol *string           `queryParam:"style=form,explode=true,name=upload_protocol"`
+	DollarXgafv       *shared.XgafvEnum `queryParam:"style=form,explode=true,name=$.xgafv"`
+	AccessToken       *string           `queryParam:"style=form,explode=true,name=access_token"`
+	Alt               *shared.AltEnum   `queryParam:"style=form,explode=true,name=alt"`
+	Callback          *string           `queryParam:"style=form,explode=true,name=callback"`
+	Fields            *string           `queryParam:"style=form,explode=true,name=fields"`
+	IncludeGoogleTags *bool             `queryParam:"style=form,explode=true,name=includeGoogleTags"`
+	Key               *string           `queryParam:"style=form,explode=true,name=key"`
+	OauthToken        *string           `queryParam:"style=form,explode=true,name=oauth_token"`
+	PageToken         *string           `queryParam:"style=form,explode=true,name=pageToken"`
+	PrettyPrint       *bool             `queryParam:"style=form,explode=true,name=prettyPrint"`
+	QuotaUser         *string           `queryParam:"style=form,explode=true,name=quotaUser"`
+	UploadType        *string           `queryParam:"style=form,explode=true,name=uploadType"`
+	UploadProtocol    *string           `queryParam:"style=form,explode=true,name=upload_protocol"`
 }
 
 type TagmanagerAccountsListSecurityOption1 struct {

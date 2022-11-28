@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConnectedApplication } from "./connectedapplication";
+
 
 
 // ItemApplicationListResponse
@@ -8,9 +8,9 @@ import { ConnectedApplication } from "./connectedapplication";
  * Describes the connected application for a particular end user.
 **/
 export class ItemApplicationListResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=applications", elemType: shared.ConnectedApplication })
+  @SpeakeasyMetadata({ data: "json, name=applications", elemType: ConnectedApplication })
   applications: ConnectedApplication[];
 
-  @Metadata({ data: "json, name=request_id" })
+  @SpeakeasyMetadata({ data: "json, name=request_id" })
   requestId?: string;
 }

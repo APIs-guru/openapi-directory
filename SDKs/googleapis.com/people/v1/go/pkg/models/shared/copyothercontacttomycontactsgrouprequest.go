@@ -9,6 +9,8 @@ const (
 	CopyOtherContactToMyContactsGroupRequestSourcesEnumReadSourceTypeDomainContact CopyOtherContactToMyContactsGroupRequestSourcesEnum = "READ_SOURCE_TYPE_DOMAIN_CONTACT"
 )
 
+// CopyOtherContactToMyContactsGroupRequest
+// A request to copy an "Other contact" to my contacts group.
 type CopyOtherContactToMyContactsGroupRequest struct {
 	CopyMask *string                                               `json:"copyMask,omitempty"`
 	ReadMask *string                                               `json:"readMask,omitempty"`

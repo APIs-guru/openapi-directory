@@ -27,11 +27,6 @@ type RacerSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type RacerRequest struct {
-	Request  *RacerRequestBody `request:"mediaType=application/json"`
-	Security RacerSecurity
-}
-
 type Racer400ApplicationJSONErrorEnum string
 
 const (
@@ -161,6 +156,11 @@ const (
 type Racer504ApplicationJSON struct {
 	Error            *Racer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Racer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type RacerRequest struct {
+	Request  *RacerRequestBody `request:"mediaType=application/json"`
+	Security RacerSecurity
 }
 
 type RacerResponse struct {

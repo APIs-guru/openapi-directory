@@ -1,5 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GoogleCloudRetailV2ProductInput } from "./googlecloudretailv2product";
 import { GoogleCloudRetailV2Product } from "./googlecloudretailv2product";
+
+
+
+// GoogleCloudRetailV2ProductDetailInput
+/** 
+ * Detailed product information associated with a user event.
+**/
+export class GoogleCloudRetailV2ProductDetailInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=product" })
+  product?: GoogleCloudRetailV2ProductInput;
+
+  @SpeakeasyMetadata({ data: "json, name=quantity" })
+  quantity?: number;
+}
 
 
 // GoogleCloudRetailV2ProductDetail
@@ -7,9 +22,9 @@ import { GoogleCloudRetailV2Product } from "./googlecloudretailv2product";
  * Detailed product information associated with a user event.
 **/
 export class GoogleCloudRetailV2ProductDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=product" })
+  @SpeakeasyMetadata({ data: "json, name=product" })
   product?: GoogleCloudRetailV2Product;
 
-  @Metadata({ data: "json, name=quantity" })
+  @SpeakeasyMetadata({ data: "json, name=quantity" })
   quantity?: number;
 }

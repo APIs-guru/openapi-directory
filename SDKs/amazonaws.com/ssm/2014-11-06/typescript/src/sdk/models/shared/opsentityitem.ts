@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // OpsEntityItem
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The OpsData summary.
 **/
 export class OpsEntityItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CaptureTime" })
+  @SpeakeasyMetadata({ data: "json, name=CaptureTime" })
   captureTime?: string;
 
-  @Metadata({ data: "json, name=Content" })
+  @SpeakeasyMetadata({ data: "json, name=Content" })
   content?: Map<string, string>[];
 }

@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ReactionsListForTeamDiscussionInOrgPathParams:
-    discussion_number: int = field(default=None, metadata={'path_param': { 'field_name': 'discussion_number', 'style': 'simple', 'explode': False }})
-    org: str = field(default=None, metadata={'path_param': { 'field_name': 'org', 'style': 'simple', 'explode': False }})
-    team_slug: str = field(default=None, metadata={'path_param': { 'field_name': 'team_slug', 'style': 'simple', 'explode': False }})
+    discussion_number: int = field(metadata={'path_param': { 'field_name': 'discussion_number', 'style': 'simple', 'explode': False }})
+    org: str = field(metadata={'path_param': { 'field_name': 'org', 'style': 'simple', 'explode': False }})
+    team_slug: str = field(metadata={'path_param': { 'field_name': 'team_slug', 'style': 'simple', 'explode': False }})
     
 class ReactionsListForTeamDiscussionInOrgContentEnum(str, Enum):
     PLUS_1 = "+1"
@@ -29,14 +30,14 @@ class ReactionsListForTeamDiscussionInOrgQueryParams:
 
 @dataclass
 class ReactionsListForTeamDiscussionInOrgRequest:
-    path_params: ReactionsListForTeamDiscussionInOrgPathParams = field(default=None)
-    query_params: ReactionsListForTeamDiscussionInOrgQueryParams = field(default=None)
+    path_params: ReactionsListForTeamDiscussionInOrgPathParams = field()
+    query_params: ReactionsListForTeamDiscussionInOrgQueryParams = field()
     
 
 @dataclass
 class ReactionsListForTeamDiscussionInOrgResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     reactions: Optional[List[shared.Reaction]] = field(default=None)
     

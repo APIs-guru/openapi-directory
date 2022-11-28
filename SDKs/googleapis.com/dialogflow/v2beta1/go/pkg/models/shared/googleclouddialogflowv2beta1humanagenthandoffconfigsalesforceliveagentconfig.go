@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDialogflowV2beta1HumanAgentHandoffConfigSalesforceLiveAgentConfig
+// Configuration specific to Salesforce Live Agent.
 type GoogleCloudDialogflowV2beta1HumanAgentHandoffConfigSalesforceLiveAgentConfig struct {
 	ButtonID       *string `json:"buttonId,omitempty"`
 	DeploymentID   *string `json:"deploymentId,omitempty"`

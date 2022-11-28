@@ -1,68 +1,69 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetGenreVodsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=genre_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=genre_id" })
   genreId: string;
 }
 
 export enum GetGenreVodsDirectionEnum {
-    Asc = "asc"
-,    Desc = "desc"
+    Asc = "asc",
+    Desc = "desc"
 }
 
 export enum GetGenreVodsFilterEnum {
-    Country = "country"
-,    MyRegion = "my_region"
+    Country = "country",
+    MyRegion = "my_region"
 }
 
 export enum GetGenreVodsSortEnum {
-    Alphabetical = "alphabetical"
-,    Date = "date"
-,    Name = "name"
-,    PublishTime = "publish.time"
-,    Videos = "videos"
+    Alphabetical = "alphabetical",
+    Date = "date",
+    Name = "name",
+    PublishTime = "publish.time",
+    Videos = "videos"
 }
 
 
 export class GetGenreVodsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=direction" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=direction" })
   direction?: GetGenreVodsDirectionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter" })
   filter?: GetGenreVodsFilterEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=query" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=query" })
   query?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: GetGenreVodsSortEnum;
 }
 
 
 export class GetGenreVodsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetGenreVodsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetGenreVodsQueryParams;
 }
 
 
 export class GetGenreVodsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.OnDemandPage })
+  @SpeakeasyMetadata({ elemType: shared.OnDemandPage })
   onDemandPages?: shared.OnDemandPage[];
 }

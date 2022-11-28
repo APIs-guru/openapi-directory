@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ServiceAccount
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A subscription to receive Google PubSub notifications.
 **/
 export class ServiceAccount extends SpeakeasyBase {
-  @Metadata({ data: "json, name=email_address" })
+  @SpeakeasyMetadata({ data: "json, name=email_address" })
   emailAddress?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 }

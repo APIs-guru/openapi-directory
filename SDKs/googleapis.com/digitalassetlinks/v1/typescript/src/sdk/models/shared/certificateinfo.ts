@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CertificateInfo
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes an X509 certificate.
 **/
 export class CertificateInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=sha256Fingerprint" })
+  @SpeakeasyMetadata({ data: "json, name=sha256Fingerprint" })
   sha256Fingerprint?: string;
 }

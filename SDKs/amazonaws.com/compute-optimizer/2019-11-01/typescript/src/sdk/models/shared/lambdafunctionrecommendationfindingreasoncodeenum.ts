@@ -1,8 +1,9 @@
 
 
+
 export enum LambdaFunctionRecommendationFindingReasonCodeEnum {
-    MemoryOverprovisioned = "MemoryOverprovisioned"
-,    MemoryUnderprovisioned = "MemoryUnderprovisioned"
-,    InsufficientData = "InsufficientData"
-,    Inconclusive = "Inconclusive"
+    MemoryOverprovisioned = "MemoryOverprovisioned",
+    MemoryUnderprovisioned = "MemoryUnderprovisioned",
+    InsufficientData = "InsufficientData",
+    Inconclusive = "Inconclusive"
 }

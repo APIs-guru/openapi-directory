@@ -1,11 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import ssestatus_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SseDescription:
-    status: Optional[ssestatus_enum.SseStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Status' }})
+    r"""SseDescription
+    The description of the server-side encryption status on the specified DAX cluster.
+    """
+    
+    status: Optional[SseStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Status') }})
     

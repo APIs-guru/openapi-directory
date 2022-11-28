@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetSittingsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=DateFrom" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DateFrom" })
   dateFrom?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=DateTo" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DateTo" })
   dateTo?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=House" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=House" })
   house?: shared.HouseEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Skip" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Skip" })
   skip?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Take" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Take" })
   take?: number;
 }
 
 
 export class GetSittingsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetSittingsQueryParams;
 }
 
 
 export class GetSittingsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   billStageSittingSearchResult?: shared.BillStageSittingSearchResult;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

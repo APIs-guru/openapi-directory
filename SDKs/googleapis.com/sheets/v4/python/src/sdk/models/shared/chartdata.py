@@ -1,9 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import datasourcecolumnreference
-from . import chartgrouprule
-from . import chartsourcerange
+from sdk import utils
+from . import *
 
 class ChartDataAggregateTypeEnum(str, Enum):
     CHART_AGGREGATE_TYPE_UNSPECIFIED = "CHART_AGGREGATE_TYPE_UNSPECIFIED"
@@ -18,8 +18,12 @@ class ChartDataAggregateTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ChartData:
-    aggregate_type: Optional[ChartDataAggregateTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'aggregateType' }})
-    column_reference: Optional[datasourcecolumnreference.DataSourceColumnReference] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'columnReference' }})
-    group_rule: Optional[chartgrouprule.ChartGroupRule] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'groupRule' }})
-    source_range: Optional[chartsourcerange.ChartSourceRange] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sourceRange' }})
+    r"""ChartData
+    The data included in a domain or series.
+    """
+    
+    aggregate_type: Optional[ChartDataAggregateTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('aggregateType') }})
+    column_reference: Optional[DataSourceColumnReference] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('columnReference') }})
+    group_rule: Optional[ChartGroupRule] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('groupRule') }})
+    source_range: Optional[ChartSourceRange] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sourceRange') }})
     

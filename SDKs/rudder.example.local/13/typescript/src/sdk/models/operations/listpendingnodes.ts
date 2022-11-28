@@ -1,28 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ListPendingNodesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=composition" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=composition" })
   composition?: shared.NodeCompositionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=include" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=include" })
   include?: string;
 
-  @Metadata({ data: "queryParam, serialization=json;name=query" })
+  @SpeakeasyMetadata({ data: "queryParam, serialization=json;name=query" })
   query?: shared.NodeQuery;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=select" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=select" })
   select?: string;
 
-  @Metadata({ data: "queryParam, serialization=json;name=where", elemType: shared.NodeWhere })
+  @SpeakeasyMetadata({ data: "queryParam, serialization=json;name=where", elemType: shared.NodeWhere })
   where?: shared.NodeWhere[];
-}
-
-
-export class ListPendingNodesRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: ListPendingNodesQueryParams;
 }
 
 export enum ListPendingNodes200ApplicationJsonActionEnum {
@@ -35,35 +30,41 @@ export enum ListPendingNodes200ApplicationJsonActionEnum {
  * Information about the nodes
 **/
 export class ListPendingNodes200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nodes", elemType: shared.NodeFull })
+  @SpeakeasyMetadata({ data: "json, name=nodes", elemType: shared.NodeFull })
   nodes: shared.NodeFull[];
 }
 
 export enum ListPendingNodes200ApplicationJsonResultEnum {
-    Success = "success"
-,    Error = "error"
+    Success = "success",
+    Error = "error"
 }
 
 
 export class ListPendingNodes200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: ListPendingNodes200ApplicationJsonActionEnum;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: ListPendingNodes200ApplicationJsonData;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result: ListPendingNodes200ApplicationJsonResultEnum;
 }
 
 
+export class ListPendingNodesRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: ListPendingNodesQueryParams;
+}
+
+
 export class ListPendingNodesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   listPendingNodes200ApplicationJsonObject?: ListPendingNodes200ApplicationJson;
 }

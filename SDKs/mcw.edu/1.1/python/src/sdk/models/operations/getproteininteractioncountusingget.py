@@ -1,21 +1,24 @@
 from dataclasses import dataclass, field
-
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
 
 
 @dataclass
 class GetProteinInteractionCountUsingGetPathParams:
-    date_yyyymmdd: str = field(default=None, metadata={'path_param': { 'field_name': 'dateYYYYMMDD', 'style': 'simple', 'explode': False }})
-    species_type_key: int = field(default=None, metadata={'path_param': { 'field_name': 'speciesTypeKey', 'style': 'simple', 'explode': False }})
+    date_yyyymmdd: str = field(metadata={'path_param': { 'field_name': 'dateYYYYMMDD', 'style': 'simple', 'explode': False }})
+    species_type_key: int = field(metadata={'path_param': { 'field_name': 'speciesTypeKey', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetProteinInteractionCountUsingGetRequest:
-    path_params: GetProteinInteractionCountUsingGetPathParams = field(default=None)
+    path_params: GetProteinInteractionCountUsingGetPathParams = field()
     
 
 @dataclass
 class GetProteinInteractionCountUsingGetResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LightSettings } from "./lightsettings";
 
+
 export enum AndroidNotificationNotificationPriorityEnum {
-    PriorityUnspecified = "PRIORITY_UNSPECIFIED"
-,    PriorityMin = "PRIORITY_MIN"
-,    PriorityLow = "PRIORITY_LOW"
-,    PriorityDefault = "PRIORITY_DEFAULT"
-,    PriorityHigh = "PRIORITY_HIGH"
-,    PriorityMax = "PRIORITY_MAX"
+    PriorityUnspecified = "PRIORITY_UNSPECIFIED",
+    PriorityMin = "PRIORITY_MIN",
+    PriorityLow = "PRIORITY_LOW",
+    PriorityDefault = "PRIORITY_DEFAULT",
+    PriorityHigh = "PRIORITY_HIGH",
+    PriorityMax = "PRIORITY_MAX"
 }
 
 export enum AndroidNotificationVisibilityEnum {
-    VisibilityUnspecified = "VISIBILITY_UNSPECIFIED"
-,    Private = "PRIVATE"
-,    Public = "PUBLIC"
-,    Secret = "SECRET"
+    VisibilityUnspecified = "VISIBILITY_UNSPECIFIED",
+    Private = "PRIVATE",
+    Public = "PUBLIC",
+    Secret = "SECRET"
 }
 
 
@@ -23,81 +24,81 @@ export enum AndroidNotificationVisibilityEnum {
  * Notification to send to android devices.
 **/
 export class AndroidNotification extends SpeakeasyBase {
-  @Metadata({ data: "json, name=body" })
+  @SpeakeasyMetadata({ data: "json, name=body" })
   body?: string;
 
-  @Metadata({ data: "json, name=bodyLocArgs" })
+  @SpeakeasyMetadata({ data: "json, name=bodyLocArgs" })
   bodyLocArgs?: string[];
 
-  @Metadata({ data: "json, name=bodyLocKey" })
+  @SpeakeasyMetadata({ data: "json, name=bodyLocKey" })
   bodyLocKey?: string;
 
-  @Metadata({ data: "json, name=bypassProxyNotification" })
+  @SpeakeasyMetadata({ data: "json, name=bypassProxyNotification" })
   bypassProxyNotification?: boolean;
 
-  @Metadata({ data: "json, name=channelId" })
+  @SpeakeasyMetadata({ data: "json, name=channelId" })
   channelId?: string;
 
-  @Metadata({ data: "json, name=clickAction" })
+  @SpeakeasyMetadata({ data: "json, name=clickAction" })
   clickAction?: string;
 
-  @Metadata({ data: "json, name=color" })
+  @SpeakeasyMetadata({ data: "json, name=color" })
   color?: string;
 
-  @Metadata({ data: "json, name=defaultLightSettings" })
+  @SpeakeasyMetadata({ data: "json, name=defaultLightSettings" })
   defaultLightSettings?: boolean;
 
-  @Metadata({ data: "json, name=defaultSound" })
+  @SpeakeasyMetadata({ data: "json, name=defaultSound" })
   defaultSound?: boolean;
 
-  @Metadata({ data: "json, name=defaultVibrateTimings" })
+  @SpeakeasyMetadata({ data: "json, name=defaultVibrateTimings" })
   defaultVibrateTimings?: boolean;
 
-  @Metadata({ data: "json, name=eventTime" })
+  @SpeakeasyMetadata({ data: "json, name=eventTime" })
   eventTime?: string;
 
-  @Metadata({ data: "json, name=icon" })
+  @SpeakeasyMetadata({ data: "json, name=icon" })
   icon?: string;
 
-  @Metadata({ data: "json, name=image" })
+  @SpeakeasyMetadata({ data: "json, name=image" })
   image?: string;
 
-  @Metadata({ data: "json, name=lightSettings" })
+  @SpeakeasyMetadata({ data: "json, name=lightSettings" })
   lightSettings?: LightSettings;
 
-  @Metadata({ data: "json, name=localOnly" })
+  @SpeakeasyMetadata({ data: "json, name=localOnly" })
   localOnly?: boolean;
 
-  @Metadata({ data: "json, name=notificationCount" })
+  @SpeakeasyMetadata({ data: "json, name=notificationCount" })
   notificationCount?: number;
 
-  @Metadata({ data: "json, name=notificationPriority" })
+  @SpeakeasyMetadata({ data: "json, name=notificationPriority" })
   notificationPriority?: AndroidNotificationNotificationPriorityEnum;
 
-  @Metadata({ data: "json, name=sound" })
+  @SpeakeasyMetadata({ data: "json, name=sound" })
   sound?: string;
 
-  @Metadata({ data: "json, name=sticky" })
+  @SpeakeasyMetadata({ data: "json, name=sticky" })
   sticky?: boolean;
 
-  @Metadata({ data: "json, name=tag" })
+  @SpeakeasyMetadata({ data: "json, name=tag" })
   tag?: string;
 
-  @Metadata({ data: "json, name=ticker" })
+  @SpeakeasyMetadata({ data: "json, name=ticker" })
   ticker?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=titleLocArgs" })
+  @SpeakeasyMetadata({ data: "json, name=titleLocArgs" })
   titleLocArgs?: string[];
 
-  @Metadata({ data: "json, name=titleLocKey" })
+  @SpeakeasyMetadata({ data: "json, name=titleLocKey" })
   titleLocKey?: string;
 
-  @Metadata({ data: "json, name=vibrateTimings" })
+  @SpeakeasyMetadata({ data: "json, name=vibrateTimings" })
   vibrateTimings?: string[];
 
-  @Metadata({ data: "json, name=visibility" })
+  @SpeakeasyMetadata({ data: "json, name=visibility" })
   visibility?: AndroidNotificationVisibilityEnum;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { FlowExecutionEventTypeEnum } from "./flowexecutioneventtypeenum";
 /**
  * An object that contains information about a flow event.

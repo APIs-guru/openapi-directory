@@ -1,6 +1,7 @@
 
 
+
 export enum OrderEnumEnum {
-    Ascending = "ascending"
-,    Descending = "descending"
+    Ascending = "ascending",
+    Descending = "descending"
 }

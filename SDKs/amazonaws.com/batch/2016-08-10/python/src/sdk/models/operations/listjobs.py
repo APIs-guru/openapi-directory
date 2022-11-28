@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -33,27 +38,27 @@ class ListJobsRequestBodyJobStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ListJobsRequestBody:
-    array_job_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'arrayJobId' }})
-    filters: Optional[List[shared.KeyValuesPair]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'filters' }})
-    job_queue: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'jobQueue' }})
-    job_status: Optional[ListJobsRequestBodyJobStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'jobStatus' }})
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxResults' }})
-    multi_node_job_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'multiNodeJobId' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextToken' }})
+    array_job_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('arrayJobId') }})
+    filters: Optional[List[shared.KeyValuesPair]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('filters') }})
+    job_queue: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('jobQueue') }})
+    job_status: Optional[ListJobsRequestBodyJobStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('jobStatus') }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxResults') }})
+    multi_node_job_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('multiNodeJobId') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextToken') }})
     
 
 @dataclass
 class ListJobsRequest:
-    query_params: ListJobsQueryParams = field(default=None)
-    headers: ListJobsHeaders = field(default=None)
-    request: ListJobsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ListJobsHeaders = field()
+    query_params: ListJobsQueryParams = field()
+    request: ListJobsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ListJobsResponse:
+    content_type: str = field()
+    status_code: int = field()
     client_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     list_jobs_response: Optional[shared.ListJobsResponse] = field(default=None)
     server_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

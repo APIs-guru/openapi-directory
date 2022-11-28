@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RobotSoftwareSuiteTypeEnum } from "./robotsoftwaresuitetypeenum";
 import { RobotSoftwareSuiteVersionTypeEnum } from "./robotsoftwaresuiteversiontypeenum";
+
 
 
 // RobotSoftwareSuite
@@ -8,9 +9,9 @@ import { RobotSoftwareSuiteVersionTypeEnum } from "./robotsoftwaresuiteversionty
  * Information about a robot software suite (ROS distribution).
 **/
 export class RobotSoftwareSuite extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: RobotSoftwareSuiteTypeEnum;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: RobotSoftwareSuiteVersionTypeEnum;
 }

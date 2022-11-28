@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FederationModeEnum } from "./federationmodeenum";
 import { FederationParameters } from "./federationparameters";
 import { EnvironmentStatusEnum } from "./environmentstatusenum";
+
 
 
 // Environment
@@ -9,39 +10,39 @@ import { EnvironmentStatusEnum } from "./environmentstatusenum";
  * Represents an FinSpace environment.
 **/
 export class Environment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=awsAccountId" })
+  @SpeakeasyMetadata({ data: "json, name=awsAccountId" })
   awsAccountId?: string;
 
-  @Metadata({ data: "json, name=dedicatedServiceAccountId" })
+  @SpeakeasyMetadata({ data: "json, name=dedicatedServiceAccountId" })
   dedicatedServiceAccountId?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=environmentArn" })
+  @SpeakeasyMetadata({ data: "json, name=environmentArn" })
   environmentArn?: string;
 
-  @Metadata({ data: "json, name=environmentId" })
+  @SpeakeasyMetadata({ data: "json, name=environmentId" })
   environmentId?: string;
 
-  @Metadata({ data: "json, name=environmentUrl" })
+  @SpeakeasyMetadata({ data: "json, name=environmentUrl" })
   environmentUrl?: string;
 
-  @Metadata({ data: "json, name=federationMode" })
+  @SpeakeasyMetadata({ data: "json, name=federationMode" })
   federationMode?: FederationModeEnum;
 
-  @Metadata({ data: "json, name=federationParameters" })
+  @SpeakeasyMetadata({ data: "json, name=federationParameters" })
   federationParameters?: FederationParameters;
 
-  @Metadata({ data: "json, name=kmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=kmsKeyId" })
   kmsKeyId?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=sageMakerStudioDomainUrl" })
+  @SpeakeasyMetadata({ data: "json, name=sageMakerStudioDomainUrl" })
   sageMakerStudioDomainUrl?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: EnvironmentStatusEnum;
 }

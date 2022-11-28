@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetCharityOrgByLegacyIdQueryParams = /** @class */ (function (_super) {
     __extends(GetCharityOrgByLegacyIdQueryParams, _super);
@@ -30,7 +30,7 @@ var GetCharityOrgByLegacyIdQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=legacy_charity_org_id" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=legacy_charity_org_id" }),
         __metadata("design:type", String)
     ], GetCharityOrgByLegacyIdQueryParams.prototype, "legacyCharityOrgId", void 0);
     return GetCharityOrgByLegacyIdQueryParams;
@@ -42,7 +42,7 @@ var GetCharityOrgByLegacyIdHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-EBAY-C-MARKETPLACE-ID" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-EBAY-C-MARKETPLACE-ID" }),
         __metadata("design:type", String)
     ], GetCharityOrgByLegacyIdHeaders.prototype, "xEbayCMarketplaceId", void 0);
     return GetCharityOrgByLegacyIdHeaders;
@@ -54,7 +54,7 @@ var GetCharityOrgByLegacyIdSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeApiAuth)
     ], GetCharityOrgByLegacyIdSecurity.prototype, "apiAuth", void 0);
     return GetCharityOrgByLegacyIdSecurity;
@@ -66,15 +66,15 @@ var GetCharityOrgByLegacyIdRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetCharityOrgByLegacyIdQueryParams)
     ], GetCharityOrgByLegacyIdRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetCharityOrgByLegacyIdHeaders)
     ], GetCharityOrgByLegacyIdRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetCharityOrgByLegacyIdSecurity)
     ], GetCharityOrgByLegacyIdRequest.prototype, "security", void 0);
     return GetCharityOrgByLegacyIdRequest;
@@ -86,15 +86,15 @@ var GetCharityOrgByLegacyIdResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.CharityOrg)
     ], GetCharityOrgByLegacyIdResponse.prototype, "charityOrg", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetCharityOrgByLegacyIdResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetCharityOrgByLegacyIdResponse.prototype, "statusCode", void 0);
     return GetCharityOrgByLegacyIdResponse;

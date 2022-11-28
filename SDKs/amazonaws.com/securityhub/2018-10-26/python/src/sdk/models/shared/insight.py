@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import awssecurityfindingfilters
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Insight:
-    filters: awssecurityfindingfilters.AwsSecurityFindingFilters = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Filters' }})
-    group_by_attribute: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'GroupByAttribute' }})
-    insight_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'InsightArn' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
+    r"""Insight
+    Contains information about a Security Hub insight.
+    """
+    
+    filters: AwsSecurityFindingFilters = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Filters') }})
+    group_by_attribute: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('GroupByAttribute') }})
+    insight_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('InsightArn') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
     

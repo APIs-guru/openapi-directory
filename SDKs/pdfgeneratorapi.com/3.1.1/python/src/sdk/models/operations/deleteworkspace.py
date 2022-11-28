@@ -1,28 +1,25 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
 class DeleteWorkspaceQueryParams:
-    workspace_id: str = field(default=None, metadata={'query_param': { 'field_name': 'workspaceId', 'style': 'form', 'explode': True }})
-    
-
-@dataclass
-class DeleteWorkspaceRequest:
-    query_params: DeleteWorkspaceQueryParams = field(default=None)
+    workspace_id: str = field(metadata={'query_param': { 'field_name': 'workspaceId', 'style': 'form', 'explode': True }})
     
 
 @dataclass_json
 @dataclass
 class DeleteWorkspace200ApplicationJSONResponse:
-    success: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'success' }})
+    success: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('success') }})
     
 
 @dataclass_json
 @dataclass
 class DeleteWorkspace200ApplicationJSON:
-    response: Optional[DeleteWorkspace200ApplicationJSONResponse] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'response' }})
+    response: Optional[DeleteWorkspace200ApplicationJSONResponse] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('response') }})
     
 class DeleteWorkspace401ApplicationJSONErrorEnum(str, Enum):
     AUTHENTICATION_FAILED_REQUEST_EXPIRED = "Authentication failed: request expired"
@@ -40,8 +37,8 @@ class DeleteWorkspace401ApplicationJSONErrorEnum(str, Enum):
 @dataclass_json
 @dataclass
 class DeleteWorkspace401ApplicationJSON:
-    error: Optional[DeleteWorkspace401ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    error: Optional[DeleteWorkspace401ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     
 class DeleteWorkspace403ApplicationJSONErrorEnum(str, Enum):
     YOUR_ACCOUNT_HAS_EXCEEDED_THE_MONTHLY_DOCUMENT_GENERATION_LIMIT_ = "Your account has exceeded the monthly document generation limit."
@@ -50,8 +47,8 @@ class DeleteWorkspace403ApplicationJSONErrorEnum(str, Enum):
 @dataclass_json
 @dataclass
 class DeleteWorkspace403ApplicationJSON:
-    error: Optional[DeleteWorkspace403ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    error: Optional[DeleteWorkspace403ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     
 class DeleteWorkspace404ApplicationJSONErrorEnum(str, Enum):
     ENTITY_NOT_FOUND = "Entity not found"
@@ -62,8 +59,8 @@ class DeleteWorkspace404ApplicationJSONErrorEnum(str, Enum):
 @dataclass_json
 @dataclass
 class DeleteWorkspace404ApplicationJSON:
-    error: Optional[DeleteWorkspace404ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    error: Optional[DeleteWorkspace404ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     
 class DeleteWorkspace422ApplicationJSONErrorEnum(str, Enum):
     UNABLE_TO_PARSE_JSON_PLEASE_CHECK_FORMATTING = "Unable to parse JSON, please check formatting"
@@ -75,21 +72,26 @@ class DeleteWorkspace422ApplicationJSONErrorEnum(str, Enum):
 @dataclass_json
 @dataclass
 class DeleteWorkspace422ApplicationJSON:
-    error: Optional[DeleteWorkspace422ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    error: Optional[DeleteWorkspace422ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     
 
 @dataclass_json
 @dataclass
 class DeleteWorkspace500ApplicationJSON:
-    error: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    error: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    
+
+@dataclass
+class DeleteWorkspaceRequest:
+    query_params: DeleteWorkspaceQueryParams = field()
     
 
 @dataclass
 class DeleteWorkspaceResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     delete_workspace_200_application_json_object: Optional[DeleteWorkspace200ApplicationJSON] = field(default=None)
     delete_workspace_401_application_json_object: Optional[DeleteWorkspace401ApplicationJSON] = field(default=None)
     delete_workspace_403_application_json_object: Optional[DeleteWorkspace403ApplicationJSON] = field(default=None)

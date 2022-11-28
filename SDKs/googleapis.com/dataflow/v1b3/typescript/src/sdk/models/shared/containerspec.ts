@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FlexTemplateRuntimeEnvironment } from "./flextemplateruntimeenvironment";
 import { TemplateMetadata } from "./templatemetadata";
-import { SdkInfo } from "./sdkinfo";
+import { SDKInfo } from "./sdkinfo";
+
 
 
 // ContainerSpec
@@ -9,24 +10,24 @@ import { SdkInfo } from "./sdkinfo";
  * Container Spec.
 **/
 export class ContainerSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=defaultEnvironment" })
+  @SpeakeasyMetadata({ data: "json, name=defaultEnvironment" })
   defaultEnvironment?: FlexTemplateRuntimeEnvironment;
 
-  @Metadata({ data: "json, name=image" })
+  @SpeakeasyMetadata({ data: "json, name=image" })
   image?: string;
 
-  @Metadata({ data: "json, name=imageRepositoryCertPath" })
+  @SpeakeasyMetadata({ data: "json, name=imageRepositoryCertPath" })
   imageRepositoryCertPath?: string;
 
-  @Metadata({ data: "json, name=imageRepositoryPasswordSecretId" })
+  @SpeakeasyMetadata({ data: "json, name=imageRepositoryPasswordSecretId" })
   imageRepositoryPasswordSecretId?: string;
 
-  @Metadata({ data: "json, name=imageRepositoryUsernameSecretId" })
+  @SpeakeasyMetadata({ data: "json, name=imageRepositoryUsernameSecretId" })
   imageRepositoryUsernameSecretId?: string;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: TemplateMetadata;
 
-  @Metadata({ data: "json, name=sdkInfo" })
-  sdkInfo?: SdkInfo;
+  @SpeakeasyMetadata({ data: "json, name=sdkInfo" })
+  sdkInfo?: SDKInfo;
 }

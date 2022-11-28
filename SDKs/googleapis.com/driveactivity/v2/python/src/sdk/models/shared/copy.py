@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import targetreference
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Copy:
-    original_object: Optional[targetreference.TargetReference] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'originalObject' }})
+    r"""Copy
+    An object was created by copying an existing object.
+    """
+    
+    original_object: Optional[TargetReference] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('originalObject') }})
     

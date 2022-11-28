@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ChannelAuditDetails } from "./channelauditdetails";
 import { ChannelBrandingSettings } from "./channelbrandingsettings";
 import { ChannelContentDetails } from "./channelcontentdetails";
@@ -12,47 +11,48 @@ import { ChannelStatus } from "./channelstatus";
 import { ChannelTopicDetails } from "./channeltopicdetails";
 
 
+
 // Channel
 /** 
  * A *channel* resource contains information about a YouTube channel.
 **/
 export class Channel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=auditDetails" })
+  @SpeakeasyMetadata({ data: "json, name=auditDetails" })
   auditDetails?: ChannelAuditDetails;
 
-  @Metadata({ data: "json, name=brandingSettings" })
+  @SpeakeasyMetadata({ data: "json, name=brandingSettings" })
   brandingSettings?: ChannelBrandingSettings;
 
-  @Metadata({ data: "json, name=contentDetails" })
+  @SpeakeasyMetadata({ data: "json, name=contentDetails" })
   contentDetails?: ChannelContentDetails;
 
-  @Metadata({ data: "json, name=contentOwnerDetails" })
+  @SpeakeasyMetadata({ data: "json, name=contentOwnerDetails" })
   contentOwnerDetails?: ChannelContentOwnerDetails;
 
-  @Metadata({ data: "json, name=conversionPings" })
+  @SpeakeasyMetadata({ data: "json, name=conversionPings" })
   conversionPings?: ChannelConversionPings;
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=localizations", elemType: shared.ChannelLocalization })
+  @SpeakeasyMetadata({ data: "json, name=localizations", elemType: ChannelLocalization })
   localizations?: Map<string, ChannelLocalization>;
 
-  @Metadata({ data: "json, name=snippet" })
+  @SpeakeasyMetadata({ data: "json, name=snippet" })
   snippet?: ChannelSnippet;
 
-  @Metadata({ data: "json, name=statistics" })
+  @SpeakeasyMetadata({ data: "json, name=statistics" })
   statistics?: ChannelStatistics;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: ChannelStatus;
 
-  @Metadata({ data: "json, name=topicDetails" })
+  @SpeakeasyMetadata({ data: "json, name=topicDetails" })
   topicDetails?: ChannelTopicDetails;
 }

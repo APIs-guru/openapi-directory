@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // FormFieldDefinition
 /**
  * Definition of a form field for OCR data extraction from images
@@ -33,75 +33,75 @@ var FormFieldDefinition = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AllowNumericDigits" }),
+        SpeakeasyMetadata({ data: "json, name=AllowNumericDigits" }),
         __metadata("design:type", Boolean)
     ], FormFieldDefinition.prototype, "allowNumericDigits", void 0);
     __decorate([
-        Metadata({ data: "json, name=AlternateAnchor" }),
+        SpeakeasyMetadata({ data: "json, name=AlternateAnchor" }),
         __metadata("design:type", String)
     ], FormFieldDefinition.prototype, "alternateAnchor", void 0);
     __decorate([
-        Metadata({ data: "json, name=AnchorMode" }),
+        SpeakeasyMetadata({ data: "json, name=AnchorMode" }),
         __metadata("design:type", String)
     ], FormFieldDefinition.prototype, "anchorMode", void 0);
     __decorate([
-        Metadata({ data: "json, name=BottomAnchor" }),
+        SpeakeasyMetadata({ data: "json, name=BottomAnchor" }),
         __metadata("design:type", String)
     ], FormFieldDefinition.prototype, "bottomAnchor", void 0);
     __decorate([
-        Metadata({ data: "json, name=DataType" }),
+        SpeakeasyMetadata({ data: "json, name=DataType" }),
         __metadata("design:type", String)
     ], FormFieldDefinition.prototype, "dataType", void 0);
     __decorate([
-        Metadata({ data: "json, name=FieldID" }),
+        SpeakeasyMetadata({ data: "json, name=FieldID" }),
         __metadata("design:type", String)
     ], FormFieldDefinition.prototype, "fieldId", void 0);
     __decorate([
-        Metadata({ data: "json, name=HorizontalAlignmentType" }),
+        SpeakeasyMetadata({ data: "json, name=HorizontalAlignmentType" }),
         __metadata("design:type", String)
     ], FormFieldDefinition.prototype, "horizontalAlignmentType", void 0);
     __decorate([
-        Metadata({ data: "json, name=Ignore" }),
+        SpeakeasyMetadata({ data: "json, name=Ignore" }),
         __metadata("design:type", Array)
     ], FormFieldDefinition.prototype, "ignore", void 0);
     __decorate([
-        Metadata({ data: "json, name=LeftAnchor" }),
+        SpeakeasyMetadata({ data: "json, name=LeftAnchor" }),
         __metadata("design:type", String)
     ], FormFieldDefinition.prototype, "leftAnchor", void 0);
     __decorate([
-        Metadata({ data: "json, name=MinimumCharacterCount" }),
+        SpeakeasyMetadata({ data: "json, name=MinimumCharacterCount" }),
         __metadata("design:type", Number)
     ], FormFieldDefinition.prototype, "minimumCharacterCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=Options" }),
+        SpeakeasyMetadata({ data: "json, name=Options" }),
         __metadata("design:type", String)
     ], FormFieldDefinition.prototype, "options", void 0);
     __decorate([
-        Metadata({ data: "json, name=TargetDigitCount" }),
+        SpeakeasyMetadata({ data: "json, name=TargetDigitCount" }),
         __metadata("design:type", Number)
     ], FormFieldDefinition.prototype, "targetDigitCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=TargetFieldHeight_Relative" }),
+        SpeakeasyMetadata({ data: "json, name=TargetFieldHeight_Relative" }),
         __metadata("design:type", Number)
     ], FormFieldDefinition.prototype, "targetFieldHeightRelative", void 0);
     __decorate([
-        Metadata({ data: "json, name=TargetFieldHorizontalAdjustment" }),
+        SpeakeasyMetadata({ data: "json, name=TargetFieldHorizontalAdjustment" }),
         __metadata("design:type", Number)
     ], FormFieldDefinition.prototype, "targetFieldHorizontalAdjustment", void 0);
     __decorate([
-        Metadata({ data: "json, name=TargetFieldVerticalAdjustment" }),
+        SpeakeasyMetadata({ data: "json, name=TargetFieldVerticalAdjustment" }),
         __metadata("design:type", Number)
     ], FormFieldDefinition.prototype, "targetFieldVerticalAdjustment", void 0);
     __decorate([
-        Metadata({ data: "json, name=TargetFieldWidth_Relative" }),
+        SpeakeasyMetadata({ data: "json, name=TargetFieldWidth_Relative" }),
         __metadata("design:type", Number)
     ], FormFieldDefinition.prototype, "targetFieldWidthRelative", void 0);
     __decorate([
-        Metadata({ data: "json, name=TopAnchor" }),
+        SpeakeasyMetadata({ data: "json, name=TopAnchor" }),
         __metadata("design:type", String)
     ], FormFieldDefinition.prototype, "topAnchor", void 0);
     __decorate([
-        Metadata({ data: "json, name=VerticalAlignmentType" }),
+        SpeakeasyMetadata({ data: "json, name=VerticalAlignmentType" }),
         __metadata("design:type", String)
     ], FormFieldDefinition.prototype, "verticalAlignmentType", void 0);
     return FormFieldDefinition;

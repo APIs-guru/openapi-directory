@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LambdaFunctionTimeoutTypeEnum } from "./lambdafunctiontimeouttypeenum";
+
 
 
 // LambdaFunctionTimedOutEventAttributes
@@ -7,12 +8,12 @@ import { LambdaFunctionTimeoutTypeEnum } from "./lambdafunctiontimeouttypeenum";
  * Provides details of the <code>LambdaFunctionTimedOut</code> event.
 **/
 export class LambdaFunctionTimedOutEventAttributes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=scheduledEventId" })
+  @SpeakeasyMetadata({ data: "json, name=scheduledEventId" })
   scheduledEventId: number;
 
-  @Metadata({ data: "json, name=startedEventId" })
+  @SpeakeasyMetadata({ data: "json, name=startedEventId" })
   startedEventId: number;
 
-  @Metadata({ data: "json, name=timeoutType" })
+  @SpeakeasyMetadata({ data: "json, name=timeoutType" })
   timeoutType?: LambdaFunctionTimeoutTypeEnum;
 }

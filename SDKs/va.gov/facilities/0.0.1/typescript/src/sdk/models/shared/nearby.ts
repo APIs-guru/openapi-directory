@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NearbyAttributes } from "./nearbyattributes";
+
 
 export enum NearbyTypeEnum {
     NearbyFacility = "NearbyFacility"
@@ -11,12 +12,12 @@ export enum NearbyTypeEnum {
  * JSON API-compliant object describing a nearby VA facility
 **/
 export class Nearby extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attributes" })
+  @SpeakeasyMetadata({ data: "json, name=attributes" })
   attributes: NearbyAttributes;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: NearbyTypeEnum;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ItemApplicationScopesUpdateResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * ItemApplicationScopesUpdateResponse defines the response schema for `/item/application/scopes/update`
 **/
 export class ItemApplicationScopesUpdateResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=request_id" })
+  @SpeakeasyMetadata({ data: "json, name=request_id" })
   requestId: string;
 }

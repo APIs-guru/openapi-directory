@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetDescribeInstanceRefreshesActionEnum(str, Enum):
     DESCRIBE_INSTANCE_REFRESHES = "DescribeInstanceRefreshes"
@@ -10,12 +14,12 @@ class GetDescribeInstanceRefreshesVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeInstanceRefreshesQueryParams:
-    action: GetDescribeInstanceRefreshesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    auto_scaling_group_name: str = field(default=None, metadata={'query_param': { 'field_name': 'AutoScalingGroupName', 'style': 'form', 'explode': True }})
+    action: GetDescribeInstanceRefreshesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    auto_scaling_group_name: str = field(metadata={'query_param': { 'field_name': 'AutoScalingGroupName', 'style': 'form', 'explode': True }})
+    version: GetDescribeInstanceRefreshesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     instance_refresh_ids: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'InstanceRefreshIds', 'style': 'form', 'explode': True }})
     max_records: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxRecords', 'style': 'form', 'explode': True }})
     next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NextToken', 'style': 'form', 'explode': True }})
-    version: GetDescribeInstanceRefreshesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -31,13 +35,13 @@ class GetDescribeInstanceRefreshesHeaders:
 
 @dataclass
 class GetDescribeInstanceRefreshesRequest:
-    query_params: GetDescribeInstanceRefreshesQueryParams = field(default=None)
-    headers: GetDescribeInstanceRefreshesHeaders = field(default=None)
+    headers: GetDescribeInstanceRefreshesHeaders = field()
+    query_params: GetDescribeInstanceRefreshesQueryParams = field()
     
 
 @dataclass
 class GetDescribeInstanceRefreshesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -22,19 +22,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { LaunchPathSummary } from "./launchpathsummary";
 var ListLaunchPathsOutput = /** @class */ (function (_super) {
     __extends(ListLaunchPathsOutput, _super);
     function ListLaunchPathsOutput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=LaunchPathSummaries", elemType: shared.LaunchPathSummary }),
+        SpeakeasyMetadata({ data: "json, name=LaunchPathSummaries", elemType: LaunchPathSummary }),
         __metadata("design:type", Array)
     ], ListLaunchPathsOutput.prototype, "launchPathSummaries", void 0);
     __decorate([
-        Metadata({ data: "json, name=NextPageToken" }),
+        SpeakeasyMetadata({ data: "json, name=NextPageToken" }),
         __metadata("design:type", String)
     ], ListLaunchPathsOutput.prototype, "nextPageToken", void 0);
     return ListLaunchPathsOutput;

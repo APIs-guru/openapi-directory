@@ -1,5 +1,7 @@
 package shared
 
+// FieldValue
+// Contains a value of a Field.
 type FieldValue struct {
 	Date          *Date          `json:"date,omitempty"`
 	Integer       *Integer       `json:"integer,omitempty"`

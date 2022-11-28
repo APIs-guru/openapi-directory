@@ -19,6 +19,8 @@ const (
 	GoogleCloudDataplexV1JobStateEnumAborted          GoogleCloudDataplexV1JobStateEnum = "ABORTED"
 )
 
+// GoogleCloudDataplexV1Job
+// A job represents an instance of a task.
 type GoogleCloudDataplexV1Job struct {
 	EndTime    *string                              `json:"endTime,omitempty"`
 	Message    *string                              `json:"message,omitempty"`

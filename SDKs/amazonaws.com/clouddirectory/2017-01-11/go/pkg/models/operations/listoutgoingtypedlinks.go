@@ -22,11 +22,15 @@ const (
 	ListOutgoingTypedLinksRequestBodyConsistencyLevelEnumEventual     ListOutgoingTypedLinksRequestBodyConsistencyLevelEnum = "EVENTUAL"
 )
 
+// ListOutgoingTypedLinksRequestBodyFilterTypedLink
+// Identifies the schema Amazon Resource Name (ARN) and facet name for the typed link.
 type ListOutgoingTypedLinksRequestBodyFilterTypedLink struct {
 	SchemaArn     *string `json:"SchemaArn,omitempty"`
 	TypedLinkName *string `json:"TypedLinkName,omitempty"`
 }
 
+// ListOutgoingTypedLinksRequestBodyObjectReference
+// The reference that identifies an object.
 type ListOutgoingTypedLinksRequestBodyObjectReference struct {
 	Selector *string `json:"Selector,omitempty"`
 }

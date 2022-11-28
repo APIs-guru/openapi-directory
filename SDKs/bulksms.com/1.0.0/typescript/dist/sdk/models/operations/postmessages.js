@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PostMessagesQueryParams = /** @class */ (function (_super) {
     __extends(PostMessagesQueryParams, _super);
@@ -30,19 +30,19 @@ var PostMessagesQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=auto-unicode" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=auto-unicode" }),
         __metadata("design:type", Boolean)
     ], PostMessagesQueryParams.prototype, "autoUnicode", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=deduplication-id" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=deduplication-id" }),
         __metadata("design:type", Number)
     ], PostMessagesQueryParams.prototype, "deduplicationId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=schedule-date" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=schedule-date" }),
         __metadata("design:type", Date)
     ], PostMessagesQueryParams.prototype, "scheduleDate", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=schedule-description" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=schedule-description" }),
         __metadata("design:type", String)
     ], PostMessagesQueryParams.prototype, "scheduleDescription", void 0);
     return PostMessagesQueryParams;
@@ -54,7 +54,7 @@ var PostMessagesSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
         __metadata("design:type", shared.SchemeBasicAuth)
     ], PostMessagesSecurity.prototype, "basicAuth", void 0);
     return PostMessagesSecurity;
@@ -66,15 +66,15 @@ var PostMessagesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostMessagesQueryParams)
     ], PostMessagesRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json", elemType: shared.SubmissionEntry }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json", elemType: shared.SubmissionEntry }),
         __metadata("design:type", Array)
     ], PostMessagesRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostMessagesSecurity)
     ], PostMessagesRequest.prototype, "security", void 0);
     return PostMessagesRequest;
@@ -86,19 +86,19 @@ var PostMessagesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostMessagesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Error)
     ], PostMessagesResponse.prototype, "error", void 0);
     __decorate([
-        Metadata({ elemType: shared.Message }),
+        SpeakeasyMetadata({ elemType: shared.Message }),
         __metadata("design:type", Array)
     ], PostMessagesResponse.prototype, "messages", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostMessagesResponse.prototype, "statusCode", void 0);
     return PostMessagesResponse;

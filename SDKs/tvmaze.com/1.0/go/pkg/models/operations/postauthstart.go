@@ -5,13 +5,13 @@ type PostAuthStartRequestBody struct {
 	EmailConfirmation *bool   `json:"email_confirmation,omitempty"`
 }
 
-type PostAuthStartRequest struct {
-	Request PostAuthStartRequestBody `request:"mediaType=application/json"`
-}
-
 type PostAuthStart200ApplicationJSON struct {
 	ConfirmURL *string `json:"confirm_url,omitempty"`
 	Token      *string `json:"token,omitempty"`
+}
+
+type PostAuthStartRequest struct {
+	Request PostAuthStartRequestBody `request:"mediaType=application/json"`
 }
 
 type PostAuthStartResponse struct {

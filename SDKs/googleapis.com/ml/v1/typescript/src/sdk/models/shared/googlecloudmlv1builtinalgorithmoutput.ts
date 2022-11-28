@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudMlV1BuiltInAlgorithmOutput
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents output related to a built-in algorithm Job.
 **/
 export class GoogleCloudMlV1BuiltInAlgorithmOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=framework" })
+  @SpeakeasyMetadata({ data: "json, name=framework" })
   framework?: string;
 
-  @Metadata({ data: "json, name=modelPath" })
+  @SpeakeasyMetadata({ data: "json, name=modelPath" })
   modelPath?: string;
 
-  @Metadata({ data: "json, name=pythonVersion" })
+  @SpeakeasyMetadata({ data: "json, name=pythonVersion" })
   pythonVersion?: string;
 
-  @Metadata({ data: "json, name=runtimeVersion" })
+  @SpeakeasyMetadata({ data: "json, name=runtimeVersion" })
   runtimeVersion?: string;
 }

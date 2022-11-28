@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MethodSelector } from "./methodselector";
+
 
 
 // ApiOperation
@@ -8,9 +8,9 @@ import { MethodSelector } from "./methodselector";
  * Identification for an API Operation.
 **/
 export class ApiOperation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=methodSelectors", elemType: shared.MethodSelector })
+  @SpeakeasyMetadata({ data: "json, name=methodSelectors", elemType: MethodSelector })
   methodSelectors?: MethodSelector[];
 
-  @Metadata({ data: "json, name=serviceName" })
+  @SpeakeasyMetadata({ data: "json, name=serviceName" })
   serviceName?: string;
 }

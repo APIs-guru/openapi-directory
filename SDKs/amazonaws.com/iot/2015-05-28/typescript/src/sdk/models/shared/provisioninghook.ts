@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ProvisioningHook
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Structure that contains <code>payloadVersion</code> and <code>targetArn</code>.
 **/
 export class ProvisioningHook extends SpeakeasyBase {
-  @Metadata({ data: "json, name=payloadVersion" })
+  @SpeakeasyMetadata({ data: "json, name=payloadVersion" })
   payloadVersion?: string;
 
-  @Metadata({ data: "json, name=targetArn" })
+  @SpeakeasyMetadata({ data: "json, name=targetArn" })
   targetArn: string;
 }

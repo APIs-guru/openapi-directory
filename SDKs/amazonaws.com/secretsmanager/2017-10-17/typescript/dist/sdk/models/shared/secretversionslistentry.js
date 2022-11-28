@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // SecretVersionsListEntry
 /**
  * A structure that contains information about one version of a secret.
@@ -33,23 +33,23 @@ var SecretVersionsListEntry = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CreatedDate" }),
+        SpeakeasyMetadata({ data: "json, name=CreatedDate" }),
         __metadata("design:type", Date)
     ], SecretVersionsListEntry.prototype, "createdDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=KmsKeyIds" }),
+        SpeakeasyMetadata({ data: "json, name=KmsKeyIds" }),
         __metadata("design:type", Array)
     ], SecretVersionsListEntry.prototype, "kmsKeyIds", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastAccessedDate" }),
+        SpeakeasyMetadata({ data: "json, name=LastAccessedDate" }),
         __metadata("design:type", Date)
     ], SecretVersionsListEntry.prototype, "lastAccessedDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=VersionId" }),
+        SpeakeasyMetadata({ data: "json, name=VersionId" }),
         __metadata("design:type", String)
     ], SecretVersionsListEntry.prototype, "versionId", void 0);
     __decorate([
-        Metadata({ data: "json, name=VersionStages" }),
+        SpeakeasyMetadata({ data: "json, name=VersionStages" }),
         __metadata("design:type", Array)
     ], SecretVersionsListEntry.prototype, "versionStages", void 0);
     return SecretVersionsListEntry;

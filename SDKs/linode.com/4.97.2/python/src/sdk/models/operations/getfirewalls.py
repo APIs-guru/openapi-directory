@@ -1,7 +1,10 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
+
+
 GET_FIREWALLS_SERVERS = [
 	"https://api.linode.com/v4",
 ]
@@ -14,47 +17,37 @@ class GetFirewallsQueryParams:
     
 
 @dataclass
-class GetFirewallsSecurityOption1:
-    personal_access_token: shared.SchemePersonalAccessToken = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
-    
-
-@dataclass
-class GetFirewallsSecurityOption2:
-    oauth: shared.SchemeOauth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    
-
-@dataclass
 class GetFirewallsSecurity:
-    option1: Optional[GetFirewallsSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[GetFirewallsSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
-    
-
-@dataclass
-class GetFirewallsRequest:
-    server_url: Optional[str] = field(default=None)
-    query_params: GetFirewallsQueryParams = field(default=None)
-    security: GetFirewallsSecurity = field(default=None)
+    oauth: Optional[shared.SchemeOauth] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    personal_access_token: Optional[shared.SchemePersonalAccessToken] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass_json
 @dataclass
 class GetFirewalls200ApplicationJSON:
-    data: Optional[List[shared.Firewall]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
-    page: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'page' }})
-    pages: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pages' }})
-    results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'results' }})
+    data: Optional[List[shared.Firewall]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
+    page: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('page') }})
+    pages: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pages') }})
+    results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('results') }})
     
 
 @dataclass_json
 @dataclass
 class GetFirewallsDefaultApplicationJSON:
-    errors: Optional[List[shared.ErrorObject]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errors' }})
+    errors: Optional[List[shared.ErrorObject]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errors') }})
+    
+
+@dataclass
+class GetFirewallsRequest:
+    query_params: GetFirewallsQueryParams = field()
+    security: GetFirewallsSecurity = field()
+    server_url: Optional[str] = field(default=None)
     
 
 @dataclass
 class GetFirewallsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_firewalls_200_application_json_object: Optional[GetFirewalls200ApplicationJSON] = field(default=None)
     get_firewalls_default_application_json_object: Optional[GetFirewallsDefaultApplicationJSON] = field(default=None)
     

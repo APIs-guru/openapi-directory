@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Rule } from "./rule";
 import { RulesResponseMetadata } from "./rulesresponsemetadata";
 export declare class GetRulesResponse extends SpeakeasyBase {

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDescribeAutoScalingInstancesActionEnum(str, Enum):
     DESCRIBE_AUTO_SCALING_INSTANCES = "DescribeAutoScalingInstances"
@@ -10,10 +14,10 @@ class PostDescribeAutoScalingInstancesVersionEnum(str, Enum):
 
 @dataclass
 class PostDescribeAutoScalingInstancesQueryParams:
-    action: PostDescribeAutoScalingInstancesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: PostDescribeAutoScalingInstancesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDescribeAutoScalingInstancesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     max_records: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'MaxRecords', 'style': 'form', 'explode': True }})
     next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NextToken', 'style': 'form', 'explode': True }})
-    version: PostDescribeAutoScalingInstancesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,14 +33,14 @@ class PostDescribeAutoScalingInstancesHeaders:
 
 @dataclass
 class PostDescribeAutoScalingInstancesRequest:
-    query_params: PostDescribeAutoScalingInstancesQueryParams = field(default=None)
-    headers: PostDescribeAutoScalingInstancesHeaders = field(default=None)
+    headers: PostDescribeAutoScalingInstancesHeaders = field()
+    query_params: PostDescribeAutoScalingInstancesQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDescribeAutoScalingInstancesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

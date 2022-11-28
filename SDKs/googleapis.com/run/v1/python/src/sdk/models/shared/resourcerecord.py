@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ResourceRecordTypeEnum(str, Enum):
     RECORD_TYPE_UNSPECIFIED = "RECORD_TYPE_UNSPECIFIED"
@@ -12,7 +14,11 @@ class ResourceRecordTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ResourceRecord:
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    rrdata: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rrdata' }})
-    type: Optional[ResourceRecordTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""ResourceRecord
+    A DNS resource record.
+    """
+    
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    rrdata: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rrdata') }})
+    type: Optional[ResourceRecordTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

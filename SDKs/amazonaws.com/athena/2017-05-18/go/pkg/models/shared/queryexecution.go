@@ -1,5 +1,7 @@
 package shared
 
+// QueryExecution
+// Information about a single instance of a query execution.
 type QueryExecution struct {
 	EngineVersion         *EngineVersion            `json:"EngineVersion,omitempty"`
 	Query                 *string                   `json:"Query,omitempty"`

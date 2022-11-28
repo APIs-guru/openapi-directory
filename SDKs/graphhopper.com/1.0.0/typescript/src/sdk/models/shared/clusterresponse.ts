@@ -1,27 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Cluster } from "./cluster";
 
+
 export enum ClusterResponseStatusEnum {
-    WaitingInQueue = "waiting_in_queue"
-,    Processing = "processing"
-,    Finished = "finished"
+    WaitingInQueue = "waiting_in_queue",
+    Processing = "processing",
+    Finished = "finished"
 }
 
 
 export class ClusterResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clusters", elemType: shared.Cluster })
+  @SpeakeasyMetadata({ data: "json, name=clusters", elemType: Cluster })
   clusters?: Cluster[];
 
-  @Metadata({ data: "json, name=copyrights" })
+  @SpeakeasyMetadata({ data: "json, name=copyrights" })
   copyrights?: string[];
 
-  @Metadata({ data: "json, name=processing_time" })
+  @SpeakeasyMetadata({ data: "json, name=processing_time" })
   processingTime?: number;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: ClusterResponseStatusEnum;
 
-  @Metadata({ data: "json, name=waiting_time_in_queue" })
+  @SpeakeasyMetadata({ data: "json, name=waiting_time_in_queue" })
   waitingTimeInQueue?: number;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Query } from "./query";
 export declare enum CountArtifactsRequestViewEnum {
     CountResultViewUnspecified = "COUNT_RESULT_VIEW_UNSPECIFIED",

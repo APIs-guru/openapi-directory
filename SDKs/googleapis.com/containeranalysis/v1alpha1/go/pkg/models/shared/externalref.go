@@ -10,6 +10,8 @@ const (
 	ExternalRefCategoryEnumOther               ExternalRefCategoryEnum = "OTHER"
 )
 
+// ExternalRef
+// An External Reference allows a Package to reference an external source of additional information, metadata, enumerations, asset identifiers, or downloadable content believed to be relevant to the Package
 type ExternalRef struct {
 	Category *ExternalRefCategoryEnum `json:"category,omitempty"`
 	Comment  *string                  `json:"comment,omitempty"`

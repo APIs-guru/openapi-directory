@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ArtistForAlbumForApiContract } from "./artistforalbumforapicontract";
 import { AlbumDiscPropertiesContract } from "./albumdiscpropertiescontract";
 import { AlbumIdentifierContract } from "./albumidentifiercontract";
@@ -12,118 +11,119 @@ import { TagUsageForApiContract } from "./tagusageforapicontract";
 import { SongInAlbumForApiContract } from "./songinalbumforapicontract";
 import { WebLinkForApiContract } from "./weblinkforapicontract";
 
+
 export enum AlbumForApiContractDefaultNameLanguageEnum {
-    Unspecified = "Unspecified"
-,    Japanese = "Japanese"
-,    Romaji = "Romaji"
-,    English = "English"
+    Unspecified = "Unspecified",
+    Japanese = "Japanese",
+    Romaji = "Romaji",
+    English = "English"
 }
 
 export enum AlbumForApiContractDiscTypeEnum {
-    Unknown = "Unknown"
-,    Album = "Album"
-,    Single = "Single"
-,    Ep = "EP"
-,    SplitAlbum = "SplitAlbum"
-,    Compilation = "Compilation"
-,    Video = "Video"
-,    Artbook = "Artbook"
-,    Game = "Game"
-,    Fanmade = "Fanmade"
-,    Instrumental = "Instrumental"
-,    Other = "Other"
+    Unknown = "Unknown",
+    Album = "Album",
+    Single = "Single",
+    Ep = "EP",
+    SplitAlbum = "SplitAlbum",
+    Compilation = "Compilation",
+    Video = "Video",
+    Artbook = "Artbook",
+    Game = "Game",
+    Fanmade = "Fanmade",
+    Instrumental = "Instrumental",
+    Other = "Other"
 }
 
 export enum AlbumForApiContractStatusEnum {
-    Draft = "Draft"
-,    Finished = "Finished"
-,    Approved = "Approved"
-,    Locked = "Locked"
+    Draft = "Draft",
+    Finished = "Finished",
+    Approved = "Approved",
+    Locked = "Locked"
 }
 
 
 export class AlbumForApiContract extends SpeakeasyBase {
-  @Metadata({ data: "json, name=additionalNames" })
+  @SpeakeasyMetadata({ data: "json, name=additionalNames" })
   additionalNames?: string;
 
-  @Metadata({ data: "json, name=artistString" })
+  @SpeakeasyMetadata({ data: "json, name=artistString" })
   artistString?: string;
 
-  @Metadata({ data: "json, name=artists", elemType: shared.ArtistForAlbumForApiContract })
+  @SpeakeasyMetadata({ data: "json, name=artists", elemType: ArtistForAlbumForApiContract })
   artists?: ArtistForAlbumForApiContract[];
 
-  @Metadata({ data: "json, name=barcode" })
+  @SpeakeasyMetadata({ data: "json, name=barcode" })
   barcode?: string;
 
-  @Metadata({ data: "json, name=catalogNumber" })
+  @SpeakeasyMetadata({ data: "json, name=catalogNumber" })
   catalogNumber?: string;
 
-  @Metadata({ data: "json, name=createDate" })
+  @SpeakeasyMetadata({ data: "json, name=createDate" })
   createDate?: Date;
 
-  @Metadata({ data: "json, name=defaultName" })
+  @SpeakeasyMetadata({ data: "json, name=defaultName" })
   defaultName?: string;
 
-  @Metadata({ data: "json, name=defaultNameLanguage" })
+  @SpeakeasyMetadata({ data: "json, name=defaultNameLanguage" })
   defaultNameLanguage?: AlbumForApiContractDefaultNameLanguageEnum;
 
-  @Metadata({ data: "json, name=deleted" })
+  @SpeakeasyMetadata({ data: "json, name=deleted" })
   deleted?: boolean;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=discType" })
+  @SpeakeasyMetadata({ data: "json, name=discType" })
   discType?: AlbumForApiContractDiscTypeEnum;
 
-  @Metadata({ data: "json, name=discs", elemType: shared.AlbumDiscPropertiesContract })
+  @SpeakeasyMetadata({ data: "json, name=discs", elemType: AlbumDiscPropertiesContract })
   discs?: AlbumDiscPropertiesContract[];
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=identifiers", elemType: shared.AlbumIdentifierContract })
+  @SpeakeasyMetadata({ data: "json, name=identifiers", elemType: AlbumIdentifierContract })
   identifiers?: AlbumIdentifierContract[];
 
-  @Metadata({ data: "json, name=mainPicture" })
+  @SpeakeasyMetadata({ data: "json, name=mainPicture" })
   mainPicture?: EntryThumbForApiContract;
 
-  @Metadata({ data: "json, name=mergedTo" })
+  @SpeakeasyMetadata({ data: "json, name=mergedTo" })
   mergedTo?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=names", elemType: shared.LocalizedStringContract })
+  @SpeakeasyMetadata({ data: "json, name=names", elemType: LocalizedStringContract })
   names?: LocalizedStringContract[];
 
-  @Metadata({ data: "json, name=pvs", elemType: shared.PvContract })
+  @SpeakeasyMetadata({ data: "json, name=pvs", elemType: PvContract })
   pvs?: PvContract[];
 
-  @Metadata({ data: "json, name=ratingAverage" })
+  @SpeakeasyMetadata({ data: "json, name=ratingAverage" })
   ratingAverage?: number;
 
-  @Metadata({ data: "json, name=ratingCount" })
+  @SpeakeasyMetadata({ data: "json, name=ratingCount" })
   ratingCount?: number;
 
-  @Metadata({ data: "json, name=releaseDate" })
+  @SpeakeasyMetadata({ data: "json, name=releaseDate" })
   releaseDate?: OptionalDateTimeContract;
 
-  @Metadata({ data: "json, name=releaseEvent" })
+  @SpeakeasyMetadata({ data: "json, name=releaseEvent" })
   releaseEvent?: ReleaseEventForApiContract;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: AlbumForApiContractStatusEnum;
 
-  @Metadata({ data: "json, name=tags", elemType: shared.TagUsageForApiContract })
+  @SpeakeasyMetadata({ data: "json, name=tags", elemType: TagUsageForApiContract })
   tags?: TagUsageForApiContract[];
 
-  @Metadata({ data: "json, name=tracks", elemType: shared.SongInAlbumForApiContract })
+  @SpeakeasyMetadata({ data: "json, name=tracks", elemType: SongInAlbumForApiContract })
   tracks?: SongInAlbumForApiContract[];
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: number;
 
-  @Metadata({ data: "json, name=webLinks", elemType: shared.WebLinkForApiContract })
+  @SpeakeasyMetadata({ data: "json, name=webLinks", elemType: WebLinkForApiContract })
   webLinks?: WebLinkForApiContract[];
 }

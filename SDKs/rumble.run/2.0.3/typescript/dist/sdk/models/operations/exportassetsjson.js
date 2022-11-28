@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ExportAssetsJsonQueryParams = /** @class */ (function (_super) {
     __extends(ExportAssetsJsonQueryParams, _super);
@@ -30,11 +30,11 @@ var ExportAssetsJsonQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], ExportAssetsJsonQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search" }),
         __metadata("design:type", String)
     ], ExportAssetsJsonQueryParams.prototype, "search", void 0);
     return ExportAssetsJsonQueryParams;
@@ -46,7 +46,7 @@ var ExportAssetsJsonSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
         __metadata("design:type", shared.SchemeBearerAuth)
     ], ExportAssetsJsonSecurity.prototype, "bearerAuth", void 0);
     return ExportAssetsJsonSecurity;
@@ -58,11 +58,11 @@ var ExportAssetsJsonRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ExportAssetsJsonQueryParams)
     ], ExportAssetsJsonRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ExportAssetsJsonSecurity)
     ], ExportAssetsJsonRequest.prototype, "security", void 0);
     return ExportAssetsJsonRequest;
@@ -74,15 +74,15 @@ var ExportAssetsJsonResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ elemType: shared.Asset }),
+        SpeakeasyMetadata({ elemType: shared.Asset }),
         __metadata("design:type", Array)
     ], ExportAssetsJsonResponse.prototype, "assets", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ExportAssetsJsonResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ExportAssetsJsonResponse.prototype, "statusCode", void 0);
     return ExportAssetsJsonResponse;

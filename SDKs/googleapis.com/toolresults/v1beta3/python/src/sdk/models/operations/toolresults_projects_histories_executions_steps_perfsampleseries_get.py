@@ -1,15 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ToolresultsProjectsHistoriesExecutionsStepsPerfSampleSeriesGetPathParams:
-    execution_id: str = field(default=None, metadata={'path_param': { 'field_name': 'executionId', 'style': 'simple', 'explode': False }})
-    history_id: str = field(default=None, metadata={'path_param': { 'field_name': 'historyId', 'style': 'simple', 'explode': False }})
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
-    sample_series_id: str = field(default=None, metadata={'path_param': { 'field_name': 'sampleSeriesId', 'style': 'simple', 'explode': False }})
-    step_id: str = field(default=None, metadata={'path_param': { 'field_name': 'stepId', 'style': 'simple', 'explode': False }})
+    execution_id: str = field(metadata={'path_param': { 'field_name': 'executionId', 'style': 'simple', 'explode': False }})
+    history_id: str = field(metadata={'path_param': { 'field_name': 'historyId', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
+    sample_series_id: str = field(metadata={'path_param': { 'field_name': 'sampleSeriesId', 'style': 'simple', 'explode': False }})
+    step_id: str = field(metadata={'path_param': { 'field_name': 'stepId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -29,20 +30,20 @@ class ToolresultsProjectsHistoriesExecutionsStepsPerfSampleSeriesGetQueryParams:
 
 @dataclass
 class ToolresultsProjectsHistoriesExecutionsStepsPerfSampleSeriesGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ToolresultsProjectsHistoriesExecutionsStepsPerfSampleSeriesGetRequest:
-    path_params: ToolresultsProjectsHistoriesExecutionsStepsPerfSampleSeriesGetPathParams = field(default=None)
-    query_params: ToolresultsProjectsHistoriesExecutionsStepsPerfSampleSeriesGetQueryParams = field(default=None)
-    security: ToolresultsProjectsHistoriesExecutionsStepsPerfSampleSeriesGetSecurity = field(default=None)
+    path_params: ToolresultsProjectsHistoriesExecutionsStepsPerfSampleSeriesGetPathParams = field()
+    query_params: ToolresultsProjectsHistoriesExecutionsStepsPerfSampleSeriesGetQueryParams = field()
+    security: ToolresultsProjectsHistoriesExecutionsStepsPerfSampleSeriesGetSecurity = field()
     
 
 @dataclass
 class ToolresultsProjectsHistoriesExecutionsStepsPerfSampleSeriesGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     perf_sample_series: Optional[shared.PerfSampleSeries] = field(default=None)
-    status_code: int = field(default=None)
     

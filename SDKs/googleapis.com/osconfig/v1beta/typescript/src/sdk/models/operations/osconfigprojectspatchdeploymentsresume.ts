@@ -1,80 +1,81 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class OsconfigProjectsPatchDeploymentsResumePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=name" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=name" })
   name: string;
 }
 
 
 export class OsconfigProjectsPatchDeploymentsResumeQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" })
   dollarXgafv?: shared.XgafvEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=access_token" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" })
   accessToken?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=alt" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" })
   alt?: shared.AltEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=callback" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" })
   callback?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" })
   fields?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=key" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" })
   key?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" })
   oauthToken?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" })
   prettyPrint?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" })
   quotaUser?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" })
   uploadType?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" })
   uploadProtocol?: string;
 }
 
 
 export class OsconfigProjectsPatchDeploymentsResumeSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2: shared.SchemeOauth2;
 
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2c: shared.SchemeOauth2c;
 }
 
 
 export class OsconfigProjectsPatchDeploymentsResumeRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: OsconfigProjectsPatchDeploymentsResumePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: OsconfigProjectsPatchDeploymentsResumeQueryParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: OsconfigProjectsPatchDeploymentsResumeSecurity;
 }
 
 
 export class OsconfigProjectsPatchDeploymentsResumeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   patchDeployment?: shared.PatchDeployment;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

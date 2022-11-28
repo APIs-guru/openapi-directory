@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SourceDefinitionRead extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dockerImageTag" })
+  @SpeakeasyMetadata({ data: "json, name=dockerImageTag" })
   dockerImageTag: string;
 
-  @Metadata({ data: "json, name=dockerRepository" })
+  @SpeakeasyMetadata({ data: "json, name=dockerRepository" })
   dockerRepository: string;
 
-  @Metadata({ data: "json, name=documentationUrl" })
+  @SpeakeasyMetadata({ data: "json, name=documentationUrl" })
   documentationUrl?: string;
 
-  @Metadata({ data: "json, name=icon" })
+  @SpeakeasyMetadata({ data: "json, name=icon" })
   icon?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=sourceDefinitionId" })
+  @SpeakeasyMetadata({ data: "json, name=sourceDefinitionId" })
   sourceDefinitionId: string;
 }

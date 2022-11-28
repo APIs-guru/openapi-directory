@@ -1,12 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import matchfieldtype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class FieldToMatch:
-    data: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Data' }})
-    type: matchfieldtype_enum.MatchFieldTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
+    r"""FieldToMatch
+    <note> <p>This is <b>AWS WAF Classic</b> documentation. For more information, see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html\">AWS WAF Classic</a> in the developer guide.</p> <p> <b>For the latest version of AWS WAF</b>, use the AWS WAFV2 API and see the <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html\">AWS WAF Developer Guide</a>. With the latest version, AWS WAF has a single set of endpoints for regional and global use. </p> </note> <p>Specifies where in a web request to look for <code>TargetString</code>.</p>
+    """
+    
+    type: MatchFieldTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Type') }})
+    data: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Data') }})
     

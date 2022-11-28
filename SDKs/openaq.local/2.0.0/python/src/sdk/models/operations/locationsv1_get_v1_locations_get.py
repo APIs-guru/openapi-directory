@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -33,13 +34,13 @@ class Locationsv1GetV1LocationsGetQueryParams:
 
 @dataclass
 class Locationsv1GetV1LocationsGetRequest:
-    query_params: Locationsv1GetV1LocationsGetQueryParams = field(default=None)
+    query_params: Locationsv1GetV1LocationsGetQueryParams = field()
     
 
 @dataclass
 class Locationsv1GetV1LocationsGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     http_validation_error: Optional[shared.HTTPValidationError] = field(default=None)
     open_aq_result: Optional[shared.OpenAqResult] = field(default=None)
-    status_code: int = field(default=None)
     

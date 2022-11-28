@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TuningJobCompletionCriteria
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The job completion criteria.
 **/
 export class TuningJobCompletionCriteria extends SpeakeasyBase {
-  @Metadata({ data: "json, name=TargetObjectiveMetricValue" })
+  @SpeakeasyMetadata({ data: "json, name=TargetObjectiveMetricValue" })
   targetObjectiveMetricValue: number;
 }

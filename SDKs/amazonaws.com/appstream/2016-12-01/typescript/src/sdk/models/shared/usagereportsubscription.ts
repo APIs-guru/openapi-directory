@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UsageReportScheduleEnum } from "./usagereportscheduleenum";
 import { LastReportGenerationExecutionError } from "./lastreportgenerationexecutionerror";
+
 
 
 // UsageReportSubscription
@@ -9,15 +9,15 @@ import { LastReportGenerationExecutionError } from "./lastreportgenerationexecut
  * Describes information about the usage report subscription.
 **/
 export class UsageReportSubscription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LastGeneratedReportDate" })
+  @SpeakeasyMetadata({ data: "json, name=LastGeneratedReportDate" })
   lastGeneratedReportDate?: Date;
 
-  @Metadata({ data: "json, name=S3BucketName" })
+  @SpeakeasyMetadata({ data: "json, name=S3BucketName" })
   s3BucketName?: string;
 
-  @Metadata({ data: "json, name=Schedule" })
+  @SpeakeasyMetadata({ data: "json, name=Schedule" })
   schedule?: UsageReportScheduleEnum;
 
-  @Metadata({ data: "json, name=SubscriptionErrors", elemType: shared.LastReportGenerationExecutionError })
+  @SpeakeasyMetadata({ data: "json, name=SubscriptionErrors", elemType: LastReportGenerationExecutionError })
   subscriptionErrors?: LastReportGenerationExecutionError[];
 }

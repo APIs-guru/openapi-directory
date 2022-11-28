@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudRetailV2SearchResponseFacetFacetValue
+// A facet value which contains value names and their count.
 type GoogleCloudRetailV2SearchResponseFacetFacetValue struct {
 	Count    *string                      `json:"count,omitempty"`
 	Interval *GoogleCloudRetailV2Interval `json:"interval,omitempty"`

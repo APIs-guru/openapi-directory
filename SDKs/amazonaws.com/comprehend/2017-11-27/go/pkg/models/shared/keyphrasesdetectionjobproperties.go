@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// KeyPhrasesDetectionJobProperties
+// Provides information about a key phrases detection job.
 type KeyPhrasesDetectionJobProperties struct {
 	DataAccessRoleArn *string           `json:"DataAccessRoleArn,omitempty"`
 	EndTime           *time.Time        `json:"EndTime,omitempty"`

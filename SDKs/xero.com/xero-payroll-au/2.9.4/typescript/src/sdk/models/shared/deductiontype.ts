@@ -1,37 +1,65 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum DeductionTypeDeductionCategoryEnum {
-    None = "NONE"
-,    Unionfees = "UNIONFEES"
-,    Workplacegiving = "WORKPLACEGIVING"
+    None = "NONE",
+    Unionfees = "UNIONFEES",
+    Workplacegiving = "WORKPLACEGIVING"
+}
+
+
+export class DeductionTypeInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=AccountCode" })
+  accountCode?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=CurrentRecord" })
+  currentRecord?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=DeductionCategory" })
+  deductionCategory?: DeductionTypeDeductionCategoryEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=DeductionTypeID" })
+  deductionTypeId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=IsExemptFromW1" })
+  isExemptFromW1?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=Name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=ReducesSuper" })
+  reducesSuper?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=ReducesTax" })
+  reducesTax?: boolean;
 }
 
 
 export class DeductionType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccountCode" })
+  @SpeakeasyMetadata({ data: "json, name=AccountCode" })
   accountCode?: string;
 
-  @Metadata({ data: "json, name=CurrentRecord" })
+  @SpeakeasyMetadata({ data: "json, name=CurrentRecord" })
   currentRecord?: boolean;
 
-  @Metadata({ data: "json, name=DeductionCategory" })
+  @SpeakeasyMetadata({ data: "json, name=DeductionCategory" })
   deductionCategory?: DeductionTypeDeductionCategoryEnum;
 
-  @Metadata({ data: "json, name=DeductionTypeID" })
+  @SpeakeasyMetadata({ data: "json, name=DeductionTypeID" })
   deductionTypeId?: string;
 
-  @Metadata({ data: "json, name=IsExemptFromW1" })
+  @SpeakeasyMetadata({ data: "json, name=IsExemptFromW1" })
   isExemptFromW1?: boolean;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=ReducesSuper" })
+  @SpeakeasyMetadata({ data: "json, name=ReducesSuper" })
   reducesSuper?: boolean;
 
-  @Metadata({ data: "json, name=ReducesTax" })
+  @SpeakeasyMetadata({ data: "json, name=ReducesTax" })
   reducesTax?: boolean;
 
-  @Metadata({ data: "json, name=UpdatedDateUTC" })
+  @SpeakeasyMetadata({ data: "json, name=UpdatedDateUTC" })
   updatedDateUtc?: string;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InstitutionsGetByIdRequestOptions } from "./institutionsgetbyidrequestoptions";
 // InstitutionsGetByIdRequest
 /**
@@ -34,23 +34,23 @@ var InstitutionsGetByIdRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=client_id" }),
+        SpeakeasyMetadata({ data: "json, name=client_id" }),
         __metadata("design:type", String)
     ], InstitutionsGetByIdRequest.prototype, "clientId", void 0);
     __decorate([
-        Metadata({ data: "json, name=country_codes" }),
+        SpeakeasyMetadata({ data: "json, name=country_codes" }),
         __metadata("design:type", Array)
     ], InstitutionsGetByIdRequest.prototype, "countryCodes", void 0);
     __decorate([
-        Metadata({ data: "json, name=institution_id" }),
+        SpeakeasyMetadata({ data: "json, name=institution_id" }),
         __metadata("design:type", String)
     ], InstitutionsGetByIdRequest.prototype, "institutionId", void 0);
     __decorate([
-        Metadata({ data: "json, name=options" }),
+        SpeakeasyMetadata({ data: "json, name=options" }),
         __metadata("design:type", InstitutionsGetByIdRequestOptions)
     ], InstitutionsGetByIdRequest.prototype, "options", void 0);
     __decorate([
-        Metadata({ data: "json, name=secret" }),
+        SpeakeasyMetadata({ data: "json, name=secret" }),
         __metadata("design:type", String)
     ], InstitutionsGetByIdRequest.prototype, "secret", void 0);
     return InstitutionsGetByIdRequest;

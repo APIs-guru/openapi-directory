@@ -22,82 +22,82 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Summary = /** @class */ (function (_super) {
     __extends(Summary, _super);
     function Summary() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ask" }),
+        SpeakeasyMetadata({ data: "json, name=ask" }),
         __metadata("design:type", Number)
     ], Summary.prototype, "ask", void 0);
     __decorate([
-        Metadata({ data: "json, name=baseCurrency" }),
+        SpeakeasyMetadata({ data: "json, name=baseCurrency" }),
         __metadata("design:type", String)
     ], Summary.prototype, "baseCurrency", void 0);
     __decorate([
-        Metadata({ data: "json, name=bid" }),
+        SpeakeasyMetadata({ data: "json, name=bid" }),
         __metadata("design:type", Number)
     ], Summary.prototype, "bid", void 0);
     __decorate([
-        Metadata({ data: "json, name=fiftyTwoWeekHigh" }),
+        SpeakeasyMetadata({ data: "json, name=fiftyTwoWeekHigh" }),
         __metadata("design:type", Number)
     ], Summary.prototype, "fiftyTwoWeekHigh", void 0);
     __decorate([
-        Metadata({ data: "json, name=fiftyTwoWeekLow" }),
+        SpeakeasyMetadata({ data: "json, name=fiftyTwoWeekLow" }),
         __metadata("design:type", Number)
     ], Summary.prototype, "fiftyTwoWeekLow", void 0);
     __decorate([
-        Metadata({ data: "json, name=fiftyTwoWeekPercentChange" }),
+        SpeakeasyMetadata({ data: "json, name=fiftyTwoWeekPercentChange" }),
         __metadata("design:type", Number)
     ], Summary.prototype, "fiftyTwoWeekPercentChange", void 0);
     __decorate([
-        Metadata({ data: "json, name=fourWeekPercentChange" }),
+        SpeakeasyMetadata({ data: "json, name=fourWeekPercentChange" }),
         __metadata("design:type", Number)
     ], Summary.prototype, "fourWeekPercentChange", void 0);
     __decorate([
-        Metadata({ data: "json, name=high" }),
+        SpeakeasyMetadata({ data: "json, name=high" }),
         __metadata("design:type", Number)
     ], Summary.prototype, "high", void 0);
     __decorate([
-        Metadata({ data: "json, name=last" }),
+        SpeakeasyMetadata({ data: "json, name=last" }),
         __metadata("design:type", Number)
     ], Summary.prototype, "last", void 0);
     __decorate([
-        Metadata({ data: "json, name=low" }),
+        SpeakeasyMetadata({ data: "json, name=low" }),
         __metadata("design:type", Number)
     ], Summary.prototype, "low", void 0);
     __decorate([
-        Metadata({ data: "json, name=oneDayChange" }),
+        SpeakeasyMetadata({ data: "json, name=oneDayChange" }),
         __metadata("design:type", Number)
     ], Summary.prototype, "oneDayChange", void 0);
     __decorate([
-        Metadata({ data: "json, name=oneDayPercentChange" }),
+        SpeakeasyMetadata({ data: "json, name=oneDayPercentChange" }),
         __metadata("design:type", Number)
     ], Summary.prototype, "oneDayPercentChange", void 0);
     __decorate([
-        Metadata({ data: "json, name=oneDayValue" }),
+        SpeakeasyMetadata({ data: "json, name=oneDayValue" }),
         __metadata("design:type", Number)
     ], Summary.prototype, "oneDayValue", void 0);
     __decorate([
-        Metadata({ data: "json, name=open" }),
+        SpeakeasyMetadata({ data: "json, name=open" }),
         __metadata("design:type", Number)
     ], Summary.prototype, "open", void 0);
     __decorate([
-        Metadata({ data: "json, name=symbol" }),
+        SpeakeasyMetadata({ data: "json, name=symbol" }),
         __metadata("design:type", String)
     ], Summary.prototype, "symbol", void 0);
     __decorate([
-        Metadata({ data: "json, name=timeStamp" }),
+        SpeakeasyMetadata({ data: "json, name=timeStamp" }),
         __metadata("design:type", Date)
     ], Summary.prototype, "timeStamp", void 0);
     __decorate([
-        Metadata({ data: "json, name=twelveWeekPercentChange" }),
+        SpeakeasyMetadata({ data: "json, name=twelveWeekPercentChange" }),
         __metadata("design:type", Number)
     ], Summary.prototype, "twelveWeekPercentChange", void 0);
     __decorate([
-        Metadata({ data: "json, name=yearToDatePercentChange" }),
+        SpeakeasyMetadata({ data: "json, name=yearToDatePercentChange" }),
         __metadata("design:type", Number)
     ], Summary.prototype, "yearToDatePercentChange", void 0);
     return Summary;

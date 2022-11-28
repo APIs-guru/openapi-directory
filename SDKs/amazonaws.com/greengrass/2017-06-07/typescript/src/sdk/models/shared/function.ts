@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FunctionConfiguration } from "./functionconfiguration";
+
 
 
 // Function
@@ -7,12 +8,12 @@ import { FunctionConfiguration } from "./functionconfiguration";
  * Information about a Lambda function.
 **/
 export class Function extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FunctionArn" })
+  @SpeakeasyMetadata({ data: "json, name=FunctionArn" })
   functionArn?: string;
 
-  @Metadata({ data: "json, name=FunctionConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=FunctionConfiguration" })
   functionConfiguration?: FunctionConfiguration;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id: string;
 }

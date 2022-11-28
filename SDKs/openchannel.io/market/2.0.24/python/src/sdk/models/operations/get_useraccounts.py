@@ -12,12 +12,12 @@ class GetUserAccountsQueryParams:
 
 @dataclass
 class GetUserAccountsRequest:
-    query_params: GetUserAccountsQueryParams = field(default=None)
+    query_params: GetUserAccountsQueryParams = field()
     
 
 @dataclass
 class GetUserAccountsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

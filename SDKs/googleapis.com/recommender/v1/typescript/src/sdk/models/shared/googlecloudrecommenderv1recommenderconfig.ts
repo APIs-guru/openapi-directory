@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudRecommenderV1RecommenderGenerationConfig } from "./googlecloudrecommenderv1recommendergenerationconfig";
+
 
 
 // GoogleCloudRecommenderV1RecommenderConfig
@@ -7,24 +8,49 @@ import { GoogleCloudRecommenderV1RecommenderGenerationConfig } from "./googleclo
  * Configuration for a Recommender.
 **/
 export class GoogleCloudRecommenderV1RecommenderConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=annotations" })
+  @SpeakeasyMetadata({ data: "json, name=annotations" })
   annotations?: Map<string, string>;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=recommenderGenerationConfig" })
+  @SpeakeasyMetadata({ data: "json, name=recommenderGenerationConfig" })
   recommenderGenerationConfig?: GoogleCloudRecommenderV1RecommenderGenerationConfig;
 
-  @Metadata({ data: "json, name=revisionId" })
+  @SpeakeasyMetadata({ data: "json, name=revisionId" })
   revisionId?: string;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
+  updateTime?: string;
+}
+
+
+// GoogleCloudRecommenderV1RecommenderConfigInput
+/** 
+ * Configuration for a Recommender.
+**/
+export class GoogleCloudRecommenderV1RecommenderConfigInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=annotations" })
+  annotations?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
+  displayName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=etag" })
+  etag?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=recommenderGenerationConfig" })
+  recommenderGenerationConfig?: GoogleCloudRecommenderV1RecommenderGenerationConfig;
+
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 }

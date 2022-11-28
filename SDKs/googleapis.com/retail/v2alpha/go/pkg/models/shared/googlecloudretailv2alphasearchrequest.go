@@ -18,6 +18,8 @@ const (
 	GoogleCloudRetailV2alphaSearchRequestSearchModeEnumFacetedSearchOnly     GoogleCloudRetailV2alphaSearchRequestSearchModeEnum = "FACETED_SEARCH_ONLY"
 )
 
+// GoogleCloudRetailV2alphaSearchRequest
+// Request message for SearchService.Search method.
 type GoogleCloudRetailV2alphaSearchRequest struct {
 	BoostSpec           *GoogleCloudRetailV2alphaSearchRequestBoostSpec              `json:"boostSpec,omitempty"`
 	Branch              *string                                                      `json:"branch,omitempty"`

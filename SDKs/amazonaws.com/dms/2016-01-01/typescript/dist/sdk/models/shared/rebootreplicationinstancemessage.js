@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var RebootReplicationInstanceMessage = /** @class */ (function (_super) {
     __extends(RebootReplicationInstanceMessage, _super);
     function RebootReplicationInstanceMessage() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ForceFailover" }),
+        SpeakeasyMetadata({ data: "json, name=ForceFailover" }),
         __metadata("design:type", Boolean)
     ], RebootReplicationInstanceMessage.prototype, "forceFailover", void 0);
     __decorate([
-        Metadata({ data: "json, name=ForcePlannedFailover" }),
+        SpeakeasyMetadata({ data: "json, name=ForcePlannedFailover" }),
         __metadata("design:type", Boolean)
     ], RebootReplicationInstanceMessage.prototype, "forcePlannedFailover", void 0);
     __decorate([
-        Metadata({ data: "json, name=ReplicationInstanceArn" }),
+        SpeakeasyMetadata({ data: "json, name=ReplicationInstanceArn" }),
         __metadata("design:type", String)
     ], RebootReplicationInstanceMessage.prototype, "replicationInstanceArn", void 0);
     return RebootReplicationInstanceMessage;

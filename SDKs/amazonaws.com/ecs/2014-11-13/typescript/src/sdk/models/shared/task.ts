@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Attachment } from "./attachment";
 import { Attribute } from "./attribute";
 import { ConnectivityEnum } from "./connectivityenum";
@@ -13,113 +12,114 @@ import { TaskStopCodeEnum } from "./taskstopcodeenum";
 import { Tag } from "./tag";
 
 
+
 // Task
 /** 
  * Details on a task in a cluster.
 **/
 export class Task extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attachments", elemType: shared.Attachment })
+  @SpeakeasyMetadata({ data: "json, name=attachments", elemType: Attachment })
   attachments?: Attachment[];
 
-  @Metadata({ data: "json, name=attributes", elemType: shared.Attribute })
+  @SpeakeasyMetadata({ data: "json, name=attributes", elemType: Attribute })
   attributes?: Attribute[];
 
-  @Metadata({ data: "json, name=availabilityZone" })
+  @SpeakeasyMetadata({ data: "json, name=availabilityZone" })
   availabilityZone?: string;
 
-  @Metadata({ data: "json, name=capacityProviderName" })
+  @SpeakeasyMetadata({ data: "json, name=capacityProviderName" })
   capacityProviderName?: string;
 
-  @Metadata({ data: "json, name=clusterArn" })
+  @SpeakeasyMetadata({ data: "json, name=clusterArn" })
   clusterArn?: string;
 
-  @Metadata({ data: "json, name=connectivity" })
+  @SpeakeasyMetadata({ data: "json, name=connectivity" })
   connectivity?: ConnectivityEnum;
 
-  @Metadata({ data: "json, name=connectivityAt" })
+  @SpeakeasyMetadata({ data: "json, name=connectivityAt" })
   connectivityAt?: Date;
 
-  @Metadata({ data: "json, name=containerInstanceArn" })
+  @SpeakeasyMetadata({ data: "json, name=containerInstanceArn" })
   containerInstanceArn?: string;
 
-  @Metadata({ data: "json, name=containers", elemType: shared.Container })
+  @SpeakeasyMetadata({ data: "json, name=containers", elemType: Container })
   containers?: Container[];
 
-  @Metadata({ data: "json, name=cpu" })
+  @SpeakeasyMetadata({ data: "json, name=cpu" })
   cpu?: string;
 
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=desiredStatus" })
+  @SpeakeasyMetadata({ data: "json, name=desiredStatus" })
   desiredStatus?: string;
 
-  @Metadata({ data: "json, name=enableExecuteCommand" })
+  @SpeakeasyMetadata({ data: "json, name=enableExecuteCommand" })
   enableExecuteCommand?: boolean;
 
-  @Metadata({ data: "json, name=ephemeralStorage" })
+  @SpeakeasyMetadata({ data: "json, name=ephemeralStorage" })
   ephemeralStorage?: EphemeralStorage;
 
-  @Metadata({ data: "json, name=executionStoppedAt" })
+  @SpeakeasyMetadata({ data: "json, name=executionStoppedAt" })
   executionStoppedAt?: Date;
 
-  @Metadata({ data: "json, name=group" })
+  @SpeakeasyMetadata({ data: "json, name=group" })
   group?: string;
 
-  @Metadata({ data: "json, name=healthStatus" })
+  @SpeakeasyMetadata({ data: "json, name=healthStatus" })
   healthStatus?: HealthStatusEnum;
 
-  @Metadata({ data: "json, name=inferenceAccelerators", elemType: shared.InferenceAccelerator })
+  @SpeakeasyMetadata({ data: "json, name=inferenceAccelerators", elemType: InferenceAccelerator })
   inferenceAccelerators?: InferenceAccelerator[];
 
-  @Metadata({ data: "json, name=lastStatus" })
+  @SpeakeasyMetadata({ data: "json, name=lastStatus" })
   lastStatus?: string;
 
-  @Metadata({ data: "json, name=launchType" })
+  @SpeakeasyMetadata({ data: "json, name=launchType" })
   launchType?: LaunchTypeEnum;
 
-  @Metadata({ data: "json, name=memory" })
+  @SpeakeasyMetadata({ data: "json, name=memory" })
   memory?: string;
 
-  @Metadata({ data: "json, name=overrides" })
+  @SpeakeasyMetadata({ data: "json, name=overrides" })
   overrides?: TaskOverride;
 
-  @Metadata({ data: "json, name=platformVersion" })
+  @SpeakeasyMetadata({ data: "json, name=platformVersion" })
   platformVersion?: string;
 
-  @Metadata({ data: "json, name=pullStartedAt" })
+  @SpeakeasyMetadata({ data: "json, name=pullStartedAt" })
   pullStartedAt?: Date;
 
-  @Metadata({ data: "json, name=pullStoppedAt" })
+  @SpeakeasyMetadata({ data: "json, name=pullStoppedAt" })
   pullStoppedAt?: Date;
 
-  @Metadata({ data: "json, name=startedAt" })
+  @SpeakeasyMetadata({ data: "json, name=startedAt" })
   startedAt?: Date;
 
-  @Metadata({ data: "json, name=startedBy" })
+  @SpeakeasyMetadata({ data: "json, name=startedBy" })
   startedBy?: string;
 
-  @Metadata({ data: "json, name=stopCode" })
+  @SpeakeasyMetadata({ data: "json, name=stopCode" })
   stopCode?: TaskStopCodeEnum;
 
-  @Metadata({ data: "json, name=stoppedAt" })
+  @SpeakeasyMetadata({ data: "json, name=stoppedAt" })
   stoppedAt?: Date;
 
-  @Metadata({ data: "json, name=stoppedReason" })
+  @SpeakeasyMetadata({ data: "json, name=stoppedReason" })
   stoppedReason?: string;
 
-  @Metadata({ data: "json, name=stoppingAt" })
+  @SpeakeasyMetadata({ data: "json, name=stoppingAt" })
   stoppingAt?: Date;
 
-  @Metadata({ data: "json, name=tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=tags", elemType: Tag })
   tags?: Tag[];
 
-  @Metadata({ data: "json, name=taskArn" })
+  @SpeakeasyMetadata({ data: "json, name=taskArn" })
   taskArn?: string;
 
-  @Metadata({ data: "json, name=taskDefinitionArn" })
+  @SpeakeasyMetadata({ data: "json, name=taskDefinitionArn" })
   taskDefinitionArn?: string;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: number;
 }

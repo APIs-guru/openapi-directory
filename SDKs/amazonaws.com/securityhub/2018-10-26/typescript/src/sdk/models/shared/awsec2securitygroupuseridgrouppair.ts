@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsEc2SecurityGroupUserIdGroupPair
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A relationship between a security group and a user.
 **/
 export class AwsEc2SecurityGroupUserIdGroupPair extends SpeakeasyBase {
-  @Metadata({ data: "json, name=GroupId" })
+  @SpeakeasyMetadata({ data: "json, name=GroupId" })
   groupId?: string;
 
-  @Metadata({ data: "json, name=GroupName" })
+  @SpeakeasyMetadata({ data: "json, name=GroupName" })
   groupName?: string;
 
-  @Metadata({ data: "json, name=PeeringStatus" })
+  @SpeakeasyMetadata({ data: "json, name=PeeringStatus" })
   peeringStatus?: string;
 
-  @Metadata({ data: "json, name=UserId" })
+  @SpeakeasyMetadata({ data: "json, name=UserId" })
   userId?: string;
 
-  @Metadata({ data: "json, name=VpcId" })
+  @SpeakeasyMetadata({ data: "json, name=VpcId" })
   vpcId?: string;
 
-  @Metadata({ data: "json, name=VpcPeeringConnectionId" })
+  @SpeakeasyMetadata({ data: "json, name=VpcPeeringConnectionId" })
   vpcPeeringConnectionId?: string;
 }

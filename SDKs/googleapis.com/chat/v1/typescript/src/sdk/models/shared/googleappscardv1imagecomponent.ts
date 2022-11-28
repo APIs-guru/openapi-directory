@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleAppsCardV1BorderStyle } from "./googleappscardv1borderstyle";
 import { GoogleAppsCardV1ImageCropStyle } from "./googleappscardv1imagecropstyle";
+
 
 
 // GoogleAppsCardV1ImageComponent
@@ -8,15 +9,15 @@ import { GoogleAppsCardV1ImageCropStyle } from "./googleappscardv1imagecropstyle
  * Represents an image.
 **/
 export class GoogleAppsCardV1ImageComponent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=altText" })
+  @SpeakeasyMetadata({ data: "json, name=altText" })
   altText?: string;
 
-  @Metadata({ data: "json, name=borderStyle" })
+  @SpeakeasyMetadata({ data: "json, name=borderStyle" })
   borderStyle?: GoogleAppsCardV1BorderStyle;
 
-  @Metadata({ data: "json, name=cropStyle" })
+  @SpeakeasyMetadata({ data: "json, name=cropStyle" })
   cropStyle?: GoogleAppsCardV1ImageCropStyle;
 
-  @Metadata({ data: "json, name=imageUri" })
+  @SpeakeasyMetadata({ data: "json, name=imageUri" })
   imageUri?: string;
 }

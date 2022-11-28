@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetDescribeAlarmsActionEnum;
 (function (GetDescribeAlarmsActionEnum) {
     GetDescribeAlarmsActionEnum["DescribeAlarms"] = "DescribeAlarms";
@@ -43,47 +43,47 @@ var GetDescribeAlarmsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" }),
         __metadata("design:type", String)
     ], GetDescribeAlarmsQueryParams.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ActionPrefix" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ActionPrefix" }),
         __metadata("design:type", String)
     ], GetDescribeAlarmsQueryParams.prototype, "actionPrefix", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=AlarmNamePrefix" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=AlarmNamePrefix" }),
         __metadata("design:type", String)
     ], GetDescribeAlarmsQueryParams.prototype, "alarmNamePrefix", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=AlarmNames" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=AlarmNames" }),
         __metadata("design:type", Array)
     ], GetDescribeAlarmsQueryParams.prototype, "alarmNames", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=AlarmTypes" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=AlarmTypes" }),
         __metadata("design:type", Array)
     ], GetDescribeAlarmsQueryParams.prototype, "alarmTypes", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ChildrenOfAlarmName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ChildrenOfAlarmName" }),
         __metadata("design:type", String)
     ], GetDescribeAlarmsQueryParams.prototype, "childrenOfAlarmName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=MaxRecords" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MaxRecords" }),
         __metadata("design:type", Number)
     ], GetDescribeAlarmsQueryParams.prototype, "maxRecords", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=NextToken" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=NextToken" }),
         __metadata("design:type", String)
     ], GetDescribeAlarmsQueryParams.prototype, "nextToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ParentsOfAlarmName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ParentsOfAlarmName" }),
         __metadata("design:type", String)
     ], GetDescribeAlarmsQueryParams.prototype, "parentsOfAlarmName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=StateValue" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=StateValue" }),
         __metadata("design:type", String)
     ], GetDescribeAlarmsQueryParams.prototype, "stateValue", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" }),
         __metadata("design:type", String)
     ], GetDescribeAlarmsQueryParams.prototype, "version", void 0);
     return GetDescribeAlarmsQueryParams;
@@ -95,31 +95,31 @@ var GetDescribeAlarmsHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], GetDescribeAlarmsHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], GetDescribeAlarmsHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], GetDescribeAlarmsHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], GetDescribeAlarmsHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], GetDescribeAlarmsHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], GetDescribeAlarmsHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], GetDescribeAlarmsHeaders.prototype, "xAmzSignedHeaders", void 0);
     return GetDescribeAlarmsHeaders;
@@ -131,11 +131,11 @@ var GetDescribeAlarmsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetDescribeAlarmsQueryParams)
     ], GetDescribeAlarmsRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetDescribeAlarmsHeaders)
     ], GetDescribeAlarmsRequest.prototype, "headers", void 0);
     return GetDescribeAlarmsRequest;
@@ -147,15 +147,15 @@ var GetDescribeAlarmsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetDescribeAlarmsResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetDescribeAlarmsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetDescribeAlarmsResponse.prototype, "statusCode", void 0);
     return GetDescribeAlarmsResponse;

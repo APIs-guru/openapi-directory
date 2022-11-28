@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class CheckKeyUsabilityPathParams:
-    key: str = field(default=None, metadata={'path_param': { 'field_name': 'key', 'style': 'simple', 'explode': False }})
+    key: str = field(metadata={'path_param': { 'field_name': 'key', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,21 +15,21 @@ class CheckKeyUsabilityQueryParams:
 
 @dataclass
 class CheckKeyUsabilitySecurity:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'query' }})
-    user_token: shared.SchemeUserToken = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'query' }})
+    api_key: shared.SchemeAPIKey = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'query' }})
+    user_token: shared.SchemeUserToken = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'query' }})
     
 
 @dataclass
 class CheckKeyUsabilityRequest:
-    path_params: CheckKeyUsabilityPathParams = field(default=None)
-    query_params: CheckKeyUsabilityQueryParams = field(default=None)
-    security: CheckKeyUsabilitySecurity = field(default=None)
+    path_params: CheckKeyUsabilityPathParams = field()
+    query_params: CheckKeyUsabilityQueryParams = field()
+    security: CheckKeyUsabilitySecurity = field()
     
 
 @dataclass
 class CheckKeyUsabilityResponse:
+    content_type: str = field()
+    status_code: int = field()
     address_lookup_response_schema: Optional[shared.AddressLookupResponseSchema] = field(default=None)
-    content_type: str = field(default=None)
     key_usability_response_schema: Optional[shared.KeyUsabilityResponseSchema] = field(default=None)
-    status_code: int = field(default=None)
     

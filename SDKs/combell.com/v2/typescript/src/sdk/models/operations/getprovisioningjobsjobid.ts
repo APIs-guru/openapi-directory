@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetProvisioningjobsJobIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=jobId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=jobId" })
   jobId: string;
 }
 
 
 export class GetProvisioningjobsJobIdQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=job_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=job_id" })
   jobId: string;
 }
 
 
 export class GetProvisioningjobsJobIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetProvisioningjobsJobIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetProvisioningjobsJobIdQueryParams;
 }
 
 
 export class GetProvisioningjobsJobIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   provisioningJobCompletion?: shared.ProvisioningJobCompletion;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   provisioningJobInfo?: shared.ProvisioningJobInfo;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

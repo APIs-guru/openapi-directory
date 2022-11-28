@@ -10,11 +10,9 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 import axios from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
 import * as operations from "./models/operations";
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
-var Servers = [
+import * as utils from "../internal/utils";
+export var ServerList = [
     "http://api.nytimes.com/svc/mostpopular/v2",
     "https://api.nytimes.com/svc/mostpopular/v2",
 ];
@@ -23,15 +21,15 @@ export function WithServerURL(serverURL, params) {
         if (params != null) {
             serverURL = utils.ReplaceParameters(serverURL, params);
         }
-        sdk.serverURL = serverURL;
+        sdk._serverURL = serverURL;
     };
 }
 export function WithClient(client) {
     return function (sdk) {
-        sdk.defaultClient = client;
+        sdk._defaultClient = client;
     };
 }
-// SDK Documentation: http://developer.nytimes.com/
+/* SDK Documentation: http://developer.nytimes.com/*/
 var SDK = /** @class */ (function () {
     function SDK() {
         var opts = [];
@@ -39,44 +37,43 @@ var SDK = /** @class */ (function () {
             opts[_i] = arguments[_i];
         }
         var _this = this;
+        this._language = "typescript";
+        this._sdkVersion = "0.0.1";
+        this._genVersion = "internal";
         opts.forEach(function (o) { return o(_this); });
-        if (this.serverURL == "") {
-            this.serverURL = Servers[0];
+        if (this._serverURL == "") {
+            this._serverURL = ServerList[0];
         }
-        if (!this.defaultClient) {
-            this.defaultClient = axios.create({ baseURL: this.serverURL });
+        if (!this._defaultClient) {
+            this._defaultClient = axios.create({ baseURL: this._serverURL });
         }
-        if (!this.securityClient) {
-            if (this.security) {
-                this.securityClient = CreateSecurityClient(this.defaultClient, this.security);
-            }
-            else {
-                this.securityClient = this.defaultClient;
-            }
+        if (!this._securityClient) {
+            this._securityClient = this._defaultClient;
         }
     }
-    // GetMostemailedSectionTimePeriodJson - Most Emailed by Section & Time Period
-    SDK.prototype.GetMostemailedSectionTimePeriodJson = function (req, config) {
+    /**
+     * getMostemailedSectionTimePeriodJson - Most Emailed by Section & Time Period
+    **/
+    SDK.prototype.getMostemailedSectionTimePeriodJson = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetMostemailedSectionTimePeriodJsonRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/mostemailed/{section}/{time-period}.json", req.pathParams);
-        var client = CreateSecurityClient(this.defaultClient, req.security);
+        var client = utils.CreateSecurityClient(this._defaultClient, req.security);
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.getMostemailedSectionTimePeriodJson200ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
-                    if (MatchContentType(contentType, "application/xml")) {
+                    if (utils.MatchContentType(contentType, "application/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
@@ -84,27 +81,27 @@ var SDK = /** @class */ (function () {
                         res.body = out;
                     }
                     break;
-                case 400:
-                    if (MatchContentType(contentType, "application/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 400:
+                    if (utils.MatchContentType(contentType, "application/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
                             out[i] = resBody.charCodeAt(i);
                         res.body = out;
                     }
-                    if (MatchContentType(contentType, "application/json")) {
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.getMostemailedSectionTimePeriodJson400ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 403:
-                    if (MatchContentType(contentType, "application/xml")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 403:
+                    if (utils.MatchContentType(contentType, "application/xml")) {
                         var resBody = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data, null, 0);
                         var out = new Uint8Array(resBody.length);
                         for (var i = 0; i < resBody.length; i++)
                             out[i] = resBody.charCodeAt(i);
                         res.body = out;
                     }
-                    if (MatchContentType(contentType, "application/json")) {
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.getMostemailedSectionTimePeriodJson403ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
@@ -113,30 +110,31 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    // GetMostsharedSectionTimePeriodJson - Most Shared by Section & Time Period
-    SDK.prototype.GetMostsharedSectionTimePeriodJson = function (req, config) {
+    /**
+     * getMostsharedSectionTimePeriodJson - Most Shared by Section & Time Period
+    **/
+    SDK.prototype.getMostsharedSectionTimePeriodJson = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetMostsharedSectionTimePeriodJsonRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/mostshared/{section}/{time-period}.json", req.pathParams);
-        var client = CreateSecurityClient(this.defaultClient, req.security);
+        var client = utils.CreateSecurityClient(this._defaultClient, req.security);
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.getMostsharedSectionTimePeriodJson200ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 400:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 400:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.getMostsharedSectionTimePeriodJson400ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
@@ -145,25 +143,26 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    // GetMostviewedSectionTimePeriodJson - Most Viewed by Section & Time Period
-    SDK.prototype.GetMostviewedSectionTimePeriodJson = function (req, config) {
+    /**
+     * getMostviewedSectionTimePeriodJson - Most Viewed by Section & Time Period
+    **/
+    SDK.prototype.getMostviewedSectionTimePeriodJson = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetMostviewedSectionTimePeriodJsonRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/mostviewed/{section}/{time-period}.json", req.pathParams);
-        var client = CreateSecurityClient(this.defaultClient, req.security);
+        var client = utils.CreateSecurityClient(this._defaultClient, req.security);
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.getMostviewedSectionTimePeriodJson200ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;

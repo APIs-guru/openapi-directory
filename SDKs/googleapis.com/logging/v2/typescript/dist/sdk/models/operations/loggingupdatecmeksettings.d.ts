@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class LoggingUpdateCmekSettingsPathParams extends SpeakeasyBase {
     name: string;
@@ -32,7 +32,7 @@ export declare class LoggingUpdateCmekSettingsSecurity extends SpeakeasyBase {
 export declare class LoggingUpdateCmekSettingsRequest extends SpeakeasyBase {
     pathParams: LoggingUpdateCmekSettingsPathParams;
     queryParams: LoggingUpdateCmekSettingsQueryParams;
-    request?: shared.CmekSettings;
+    request?: shared.CmekSettingsInput;
     security: LoggingUpdateCmekSettingsSecurity;
 }
 export declare class LoggingUpdateCmekSettingsResponse extends SpeakeasyBase {

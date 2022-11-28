@@ -1,26 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResolverEndpointDirectionEnum } from "./resolverendpointdirectionenum";
 import { IpAddressRequest } from "./ipaddressrequest";
 import { Tag } from "./tag";
 
 
+
 export class CreateResolverEndpointRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreatorRequestId" })
+  @SpeakeasyMetadata({ data: "json, name=CreatorRequestId" })
   creatorRequestId: string;
 
-  @Metadata({ data: "json, name=Direction" })
+  @SpeakeasyMetadata({ data: "json, name=Direction" })
   direction: ResolverEndpointDirectionEnum;
 
-  @Metadata({ data: "json, name=IpAddresses", elemType: shared.IpAddressRequest })
+  @SpeakeasyMetadata({ data: "json, name=IpAddresses", elemType: IpAddressRequest })
   ipAddresses: IpAddressRequest[];
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=SecurityGroupIds" })
+  @SpeakeasyMetadata({ data: "json, name=SecurityGroupIds" })
   securityGroupIds: string[];
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 }

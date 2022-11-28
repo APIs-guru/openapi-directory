@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ReplaceAllShapesWithSheetsChartResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The result of replacing shapes with a Google Sheets chart.
 **/
 export class ReplaceAllShapesWithSheetsChartResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=occurrencesChanged" })
+  @SpeakeasyMetadata({ data: "json, name=occurrencesChanged" })
   occurrencesChanged?: number;
 }

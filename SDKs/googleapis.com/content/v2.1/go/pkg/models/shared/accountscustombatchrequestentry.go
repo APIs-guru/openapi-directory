@@ -1,7 +1,9 @@
 package shared
 
-type AccountsCustomBatchRequestEntry struct {
-	Account     *Account                                    `json:"account,omitempty"`
+// AccountsCustomBatchRequestEntryInput
+// A batch entry encoding a single non-batch accounts request.
+type AccountsCustomBatchRequestEntryInput struct {
+	Account     *AccountInput                               `json:"account,omitempty"`
 	AccountID   *string                                     `json:"accountId,omitempty"`
 	BatchID     *int64                                      `json:"batchId,omitempty"`
 	Force       *bool                                       `json:"force,omitempty"`

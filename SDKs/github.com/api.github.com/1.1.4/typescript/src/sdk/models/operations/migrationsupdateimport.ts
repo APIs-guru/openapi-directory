@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class MigrationsUpdateImportPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=owner" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=owner" })
   owner: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repo" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repo" })
   repo: string;
 }
 
 
 export class MigrationsUpdateImportRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=tfvc_project" })
+  @SpeakeasyMetadata({ data: "json, name=tfvc_project" })
   tfvcProject?: string;
 
-  @Metadata({ data: "json, name=vcs" })
+  @SpeakeasyMetadata({ data: "json, name=vcs" })
   vcs?: string;
 
-  @Metadata({ data: "json, name=vcs_password" })
+  @SpeakeasyMetadata({ data: "json, name=vcs_password" })
   vcsPassword?: string;
 
-  @Metadata({ data: "json, name=vcs_username" })
+  @SpeakeasyMetadata({ data: "json, name=vcs_username" })
   vcsUsername?: string;
 }
 
 
 export class MigrationsUpdateImportRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: MigrationsUpdateImportPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: MigrationsUpdateImportRequestBody;
 }
 
 
 export class MigrationsUpdateImportResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   import?: shared.Import;
 }

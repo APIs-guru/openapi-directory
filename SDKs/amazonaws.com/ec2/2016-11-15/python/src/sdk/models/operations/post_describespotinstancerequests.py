@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDescribeSpotInstanceRequestsActionEnum(str, Enum):
     DESCRIBE_SPOT_INSTANCE_REQUESTS = "DescribeSpotInstanceRequests"
@@ -10,10 +14,10 @@ class PostDescribeSpotInstanceRequestsVersionEnum(str, Enum):
 
 @dataclass
 class PostDescribeSpotInstanceRequestsQueryParams:
-    action: PostDescribeSpotInstanceRequestsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: PostDescribeSpotInstanceRequestsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDescribeSpotInstanceRequestsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     max_results: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'MaxResults', 'style': 'form', 'explode': True }})
     next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NextToken', 'style': 'form', 'explode': True }})
-    version: PostDescribeSpotInstanceRequestsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,14 +33,14 @@ class PostDescribeSpotInstanceRequestsHeaders:
 
 @dataclass
 class PostDescribeSpotInstanceRequestsRequest:
-    query_params: PostDescribeSpotInstanceRequestsQueryParams = field(default=None)
-    headers: PostDescribeSpotInstanceRequestsHeaders = field(default=None)
+    headers: PostDescribeSpotInstanceRequestsHeaders = field()
+    query_params: PostDescribeSpotInstanceRequestsQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDescribeSpotInstanceRequestsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -5,7 +5,7 @@ import (
 )
 
 type DcimCablesCreateRequest struct {
-	Request shared.WritableCable `request:"mediaType=application/json"`
+	Request shared.WritableCableInput `request:"mediaType=application/json"`
 }
 
 type DcimCablesCreateResponse struct {

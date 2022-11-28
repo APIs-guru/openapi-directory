@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AppDevExperienceFeatureState } from "./appdevexperiencefeaturestate";
 import { FeatureState } from "./featurestate";
 // CommonFeatureState
@@ -35,11 +35,15 @@ var CommonFeatureState = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=appdevexperience" }),
+        SpeakeasyMetadata({ data: "json, name=appdevexperience" }),
         __metadata("design:type", AppDevExperienceFeatureState)
     ], CommonFeatureState.prototype, "appdevexperience", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=fleetobservability" }),
+        __metadata("design:type", Map)
+    ], CommonFeatureState.prototype, "fleetobservability", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", FeatureState)
     ], CommonFeatureState.prototype, "state", void 0);
     return CommonFeatureState;

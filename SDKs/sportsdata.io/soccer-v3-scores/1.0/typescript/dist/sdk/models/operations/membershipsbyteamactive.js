@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var MembershipsByTeamActiveFormatEnum;
 (function (MembershipsByTeamActiveFormatEnum) {
     MembershipsByTeamActiveFormatEnum["Xml"] = "xml";
@@ -34,11 +34,11 @@ var MembershipsByTeamActivePathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=format" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" }),
         __metadata("design:type", String)
     ], MembershipsByTeamActivePathParams.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=teamid" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=teamid" }),
         __metadata("design:type", String)
     ], MembershipsByTeamActivePathParams.prototype, "teamid", void 0);
     return MembershipsByTeamActivePathParams;
@@ -50,7 +50,7 @@ var MembershipsByTeamActiveRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", MembershipsByTeamActivePathParams)
     ], MembershipsByTeamActiveRequest.prototype, "pathParams", void 0);
     return MembershipsByTeamActiveRequest;
@@ -62,15 +62,15 @@ var MembershipsByTeamActiveResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], MembershipsByTeamActiveResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Array)
     ], MembershipsByTeamActiveResponse.prototype, "memberships", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], MembershipsByTeamActiveResponse.prototype, "statusCode", void 0);
     return MembershipsByTeamActiveResponse;

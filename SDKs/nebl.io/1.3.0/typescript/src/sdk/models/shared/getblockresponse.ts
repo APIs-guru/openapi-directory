@@ -1,46 +1,47 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetBlockResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bits" })
+  @SpeakeasyMetadata({ data: "json, name=bits" })
   bits?: string;
 
-  @Metadata({ data: "json, name=confirmations" })
+  @SpeakeasyMetadata({ data: "json, name=confirmations" })
   confirmations?: number;
 
-  @Metadata({ data: "json, name=difficulty" })
+  @SpeakeasyMetadata({ data: "json, name=difficulty" })
   difficulty?: number;
 
-  @Metadata({ data: "json, name=hash" })
+  @SpeakeasyMetadata({ data: "json, name=hash" })
   hash?: string;
 
-  @Metadata({ data: "json, name=height" })
+  @SpeakeasyMetadata({ data: "json, name=height" })
   height?: number;
 
-  @Metadata({ data: "json, name=merkleroot" })
+  @SpeakeasyMetadata({ data: "json, name=merkleroot" })
   merkleroot?: string;
 
-  @Metadata({ data: "json, name=nextblockhash" })
+  @SpeakeasyMetadata({ data: "json, name=nextblockhash" })
   nextblockhash?: string;
 
-  @Metadata({ data: "json, name=nonce" })
+  @SpeakeasyMetadata({ data: "json, name=nonce" })
   nonce?: number;
 
-  @Metadata({ data: "json, name=previousblockhash" })
+  @SpeakeasyMetadata({ data: "json, name=previousblockhash" })
   previousblockhash?: string;
 
-  @Metadata({ data: "json, name=reward" })
+  @SpeakeasyMetadata({ data: "json, name=reward" })
   reward?: number;
 
-  @Metadata({ data: "json, name=size" })
+  @SpeakeasyMetadata({ data: "json, name=size" })
   size?: number;
 
-  @Metadata({ data: "json, name=time" })
+  @SpeakeasyMetadata({ data: "json, name=time" })
   time?: number;
 
-  @Metadata({ data: "json, name=tx" })
+  @SpeakeasyMetadata({ data: "json, name=tx" })
   tx?: string[];
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: number;
 }

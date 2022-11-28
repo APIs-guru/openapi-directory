@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import marketingeventsubscriber
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BatchInputMarketingEventSubscriber:
-    inputs: List[marketingeventsubscriber.MarketingEventSubscriber] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'inputs' }})
+    r"""BatchInputMarketingEventSubscriber
+    List of HubSpot contacts to subscribe to the marketing event
+    """
+    
+    inputs: List[MarketingEventSubscriber] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('inputs') }})
     

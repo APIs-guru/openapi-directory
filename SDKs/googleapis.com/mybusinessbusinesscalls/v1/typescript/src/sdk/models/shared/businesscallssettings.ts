@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum BusinessCallsSettingsCallsStateEnum {
-    CallsStateUnspecified = "CALLS_STATE_UNSPECIFIED"
-,    Enabled = "ENABLED"
-,    Disabled = "DISABLED"
+    CallsStateUnspecified = "CALLS_STATE_UNSPECIFIED",
+    Enabled = "ENABLED",
+    Disabled = "DISABLED"
 }
 
 
@@ -12,12 +13,12 @@ export enum BusinessCallsSettingsCallsStateEnum {
  * Business calls settings for a location.
 **/
 export class BusinessCallsSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=callsState" })
+  @SpeakeasyMetadata({ data: "json, name=callsState" })
   callsState?: BusinessCallsSettingsCallsStateEnum;
 
-  @Metadata({ data: "json, name=consentTime" })
+  @SpeakeasyMetadata({ data: "json, name=consentTime" })
   consentTime?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

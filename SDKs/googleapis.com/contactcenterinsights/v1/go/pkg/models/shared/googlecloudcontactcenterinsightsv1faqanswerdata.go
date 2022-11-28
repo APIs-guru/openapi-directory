@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudContactcenterinsightsV1FaqAnswerData
+// Agent Assist frequently-asked-question answer data.
 type GoogleCloudContactcenterinsightsV1FaqAnswerData struct {
 	Answer          *string           `json:"answer,omitempty"`
 	ConfidenceScore *float32          `json:"confidenceScore,omitempty"`

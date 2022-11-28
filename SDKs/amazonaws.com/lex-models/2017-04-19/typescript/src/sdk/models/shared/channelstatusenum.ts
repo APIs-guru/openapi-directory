@@ -1,7 +1,8 @@
 
 
+
 export enum ChannelStatusEnum {
-    InProgress = "IN_PROGRESS"
-,    Created = "CREATED"
-,    Failed = "FAILED"
+    InProgress = "IN_PROGRESS",
+    Created = "CREATED",
+    Failed = "FAILED"
 }

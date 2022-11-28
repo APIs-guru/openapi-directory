@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EgressFilter } from "./egressfilter";
+
 
 
 // MeshSpec
@@ -7,6 +8,6 @@ import { EgressFilter } from "./egressfilter";
  * An object that represents the specification of a service mesh.
 **/
 export class MeshSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=egressFilter" })
+  @SpeakeasyMetadata({ data: "json, name=egressFilter" })
   egressFilter?: EgressFilter;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class FitcerRequestBodyCertificateParameters extends SpeakeasyBase {
     fullName: string;
@@ -20,10 +20,6 @@ export declare class FitcerRequestBody extends SpeakeasyBase {
 export declare class FitcerSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class FitcerRequest extends SpeakeasyBase {
-    request?: FitcerRequestBody;
-    security: FitcerSecurity;
 }
 export declare enum Fitcer400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -106,6 +102,10 @@ export declare enum Fitcer504ApplicationJsonErrorDescriptionEnum {
 export declare class Fitcer504ApplicationJson extends SpeakeasyBase {
     error?: Fitcer504ApplicationJsonErrorEnum;
     errorDescription?: Fitcer504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class FitcerRequest extends SpeakeasyBase {
+    request?: FitcerRequestBody;
+    security: FitcerSecurity;
 }
 export declare class FitcerResponse extends SpeakeasyBase {
     body?: Uint8Array;

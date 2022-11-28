@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Filter
+// Contains information on a recommendation filter, including its ARN, status, and filter expression.
 type Filter struct {
 	CreationDateTime    *time.Time `json:"creationDateTime,omitempty"`
 	DatasetGroupArn     *string    `json:"datasetGroupArn,omitempty"`

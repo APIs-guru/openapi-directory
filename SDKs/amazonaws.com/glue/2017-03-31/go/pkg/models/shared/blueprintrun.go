@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// BlueprintRun
+// The details of a blueprint run.
 type BlueprintRun struct {
 	BlueprintName        *string                `json:"BlueprintName,omitempty"`
 	CompletedOn          *time.Time             `json:"CompletedOn,omitempty"`

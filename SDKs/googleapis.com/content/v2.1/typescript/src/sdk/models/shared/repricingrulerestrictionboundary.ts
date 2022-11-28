@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RepricingRuleRestrictionBoundary
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Definition of a boundary.
 **/
 export class RepricingRuleRestrictionBoundary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=percentageDelta" })
+  @SpeakeasyMetadata({ data: "json, name=percentageDelta" })
   percentageDelta?: number;
 
-  @Metadata({ data: "json, name=priceDelta" })
+  @SpeakeasyMetadata({ data: "json, name=priceDelta" })
   priceDelta?: string;
 }

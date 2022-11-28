@@ -1,23 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleCloudAssetV1p4beta1AnalysisStateCodeEnum {
-    Ok = "OK"
-,    Cancelled = "CANCELLED"
-,    Unknown = "UNKNOWN"
-,    InvalidArgument = "INVALID_ARGUMENT"
-,    DeadlineExceeded = "DEADLINE_EXCEEDED"
-,    NotFound = "NOT_FOUND"
-,    AlreadyExists = "ALREADY_EXISTS"
-,    PermissionDenied = "PERMISSION_DENIED"
-,    Unauthenticated = "UNAUTHENTICATED"
-,    ResourceExhausted = "RESOURCE_EXHAUSTED"
-,    FailedPrecondition = "FAILED_PRECONDITION"
-,    Aborted = "ABORTED"
-,    OutOfRange = "OUT_OF_RANGE"
-,    Unimplemented = "UNIMPLEMENTED"
-,    Internal = "INTERNAL"
-,    Unavailable = "UNAVAILABLE"
-,    DataLoss = "DATA_LOSS"
+    Ok = "OK",
+    Cancelled = "CANCELLED",
+    Unknown = "UNKNOWN",
+    InvalidArgument = "INVALID_ARGUMENT",
+    DeadlineExceeded = "DEADLINE_EXCEEDED",
+    NotFound = "NOT_FOUND",
+    AlreadyExists = "ALREADY_EXISTS",
+    PermissionDenied = "PERMISSION_DENIED",
+    Unauthenticated = "UNAUTHENTICATED",
+    ResourceExhausted = "RESOURCE_EXHAUSTED",
+    FailedPrecondition = "FAILED_PRECONDITION",
+    Aborted = "ABORTED",
+    OutOfRange = "OUT_OF_RANGE",
+    Unimplemented = "UNIMPLEMENTED",
+    Internal = "INTERNAL",
+    Unavailable = "UNAVAILABLE",
+    DataLoss = "DATA_LOSS"
 }
 
 
@@ -26,9 +27,9 @@ export enum GoogleCloudAssetV1p4beta1AnalysisStateCodeEnum {
  * Represents the detailed state of an entity under analysis, such as a resource, an identity or an access.
 **/
 export class GoogleCloudAssetV1p4beta1AnalysisState extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cause" })
+  @SpeakeasyMetadata({ data: "json, name=cause" })
   cause?: string;
 
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: GoogleCloudAssetV1p4beta1AnalysisStateCodeEnum;
 }

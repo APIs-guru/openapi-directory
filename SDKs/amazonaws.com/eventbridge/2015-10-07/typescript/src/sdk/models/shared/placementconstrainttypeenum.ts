@@ -1,6 +1,7 @@
 
 
+
 export enum PlacementConstraintTypeEnum {
-    DistinctInstance = "distinctInstance"
-,    MemberOf = "memberOf"
+    DistinctInstance = "distinctInstance",
+    MemberOf = "memberOf"
 }

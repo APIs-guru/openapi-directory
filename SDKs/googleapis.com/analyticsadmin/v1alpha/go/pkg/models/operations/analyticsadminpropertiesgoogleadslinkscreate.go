@@ -30,7 +30,7 @@ type AnalyticsadminPropertiesGoogleAdsLinksCreateSecurity struct {
 type AnalyticsadminPropertiesGoogleAdsLinksCreateRequest struct {
 	PathParams  AnalyticsadminPropertiesGoogleAdsLinksCreatePathParams
 	QueryParams AnalyticsadminPropertiesGoogleAdsLinksCreateQueryParams
-	Request     *shared.GoogleAnalyticsAdminV1alphaGoogleAdsLink `request:"mediaType=application/json"`
+	Request     *shared.GoogleAnalyticsAdminV1alphaGoogleAdsLinkInput `request:"mediaType=application/json"`
 	Security    AnalyticsadminPropertiesGoogleAdsLinksCreateSecurity
 }
 

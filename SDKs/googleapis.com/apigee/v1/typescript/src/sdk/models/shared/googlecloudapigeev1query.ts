@@ -1,39 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudApigeeV1QueryMetric } from "./googlecloudapigeev1querymetric";
 
 
+
 export class GoogleCloudApigeeV1Query extends SpeakeasyBase {
-  @Metadata({ data: "json, name=csvDelimiter" })
+  @SpeakeasyMetadata({ data: "json, name=csvDelimiter" })
   csvDelimiter?: string;
 
-  @Metadata({ data: "json, name=dimensions" })
+  @SpeakeasyMetadata({ data: "json, name=dimensions" })
   dimensions?: string[];
 
-  @Metadata({ data: "json, name=envgroupHostname" })
+  @SpeakeasyMetadata({ data: "json, name=envgroupHostname" })
   envgroupHostname?: string;
 
-  @Metadata({ data: "json, name=filter" })
+  @SpeakeasyMetadata({ data: "json, name=filter" })
   filter?: string;
 
-  @Metadata({ data: "json, name=groupByTimeUnit" })
+  @SpeakeasyMetadata({ data: "json, name=groupByTimeUnit" })
   groupByTimeUnit?: string;
 
-  @Metadata({ data: "json, name=limit" })
+  @SpeakeasyMetadata({ data: "json, name=limit" })
   limit?: number;
 
-  @Metadata({ data: "json, name=metrics", elemType: shared.GoogleCloudApigeeV1QueryMetric })
+  @SpeakeasyMetadata({ data: "json, name=metrics", elemType: GoogleCloudApigeeV1QueryMetric })
   metrics?: GoogleCloudApigeeV1QueryMetric[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=outputFormat" })
+  @SpeakeasyMetadata({ data: "json, name=outputFormat" })
   outputFormat?: string;
 
-  @Metadata({ data: "json, name=reportDefinitionId" })
+  @SpeakeasyMetadata({ data: "json, name=reportDefinitionId" })
   reportDefinitionId?: string;
 
-  @Metadata({ data: "json, name=timeRange" })
+  @SpeakeasyMetadata({ data: "json, name=timeRange" })
   timeRange?: any;
 }

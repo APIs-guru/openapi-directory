@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { GoogleCloudApigeeV1AddonsConfig } from "./googlecloudapigeev1addonsconfig";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GoogleCloudApigeeV1AddonsConfigInput } from "./googlecloudapigeev1addonsconfig";
 
 
-// GoogleCloudApigeeV1SetAddonsRequest
+
+// GoogleCloudApigeeV1SetAddonsRequestInput
 /** 
  * Request for SetAddons.
 **/
-export class GoogleCloudApigeeV1SetAddonsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=addonsConfig" })
-  addonsConfig?: GoogleCloudApigeeV1AddonsConfig;
+export class GoogleCloudApigeeV1SetAddonsRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=addonsConfig" })
+  addonsConfig?: GoogleCloudApigeeV1AddonsConfigInput;
 }

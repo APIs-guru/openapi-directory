@@ -1,5 +1,7 @@
 package shared
 
+// GoogleAppsScriptTypeUser
+// A simple user profile resource.
 type GoogleAppsScriptTypeUser struct {
 	Domain   *string `json:"domain,omitempty"`
 	Email    *string `json:"email,omitempty"`

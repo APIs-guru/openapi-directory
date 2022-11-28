@@ -1,5 +1,7 @@
 package shared
 
+// MonitoringJobDefinition
+// Defines the monitoring job.
 type MonitoringJobDefinition struct {
 	BaselineConfig             *MonitoringBaselineConfig    `json:"BaselineConfig,omitempty"`
 	Environment                map[string]string            `json:"Environment,omitempty"`

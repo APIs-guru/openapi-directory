@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserAuthData } from "./userauthdata";
 import { UserAuthMethod } from "./userauthmethod";
 import { ObjectExpiration } from "./objectexpiration";
+
 
 
 // CreateUserRequest
@@ -10,51 +10,51 @@ import { ObjectExpiration } from "./objectexpiration";
  * Request model for creating an user
 **/
 export class CreateUserRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authData" })
+  @SpeakeasyMetadata({ data: "json, name=authData" })
   authData?: UserAuthData;
 
-  @Metadata({ data: "json, name=authMethods", elemType: shared.UserAuthMethod })
+  @SpeakeasyMetadata({ data: "json, name=authMethods", elemType: UserAuthMethod })
   authMethods?: UserAuthMethod[];
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=expiration" })
+  @SpeakeasyMetadata({ data: "json, name=expiration" })
   expiration?: ObjectExpiration;
 
-  @Metadata({ data: "json, name=firstName" })
+  @SpeakeasyMetadata({ data: "json, name=firstName" })
   firstName: string;
 
-  @Metadata({ data: "json, name=gender" })
+  @SpeakeasyMetadata({ data: "json, name=gender" })
   gender?: string;
 
-  @Metadata({ data: "json, name=isNonmemberViewer" })
+  @SpeakeasyMetadata({ data: "json, name=isNonmemberViewer" })
   isNonmemberViewer?: boolean;
 
-  @Metadata({ data: "json, name=lastName" })
+  @SpeakeasyMetadata({ data: "json, name=lastName" })
   lastName: string;
 
-  @Metadata({ data: "json, name=login" })
+  @SpeakeasyMetadata({ data: "json, name=login" })
   login?: string;
 
-  @Metadata({ data: "json, name=needsToChangePassword" })
+  @SpeakeasyMetadata({ data: "json, name=needsToChangePassword" })
   needsToChangePassword?: boolean;
 
-  @Metadata({ data: "json, name=notifyUser" })
+  @SpeakeasyMetadata({ data: "json, name=notifyUser" })
   notifyUser?: boolean;
 
-  @Metadata({ data: "json, name=password" })
+  @SpeakeasyMetadata({ data: "json, name=password" })
   password?: string;
 
-  @Metadata({ data: "json, name=phone" })
+  @SpeakeasyMetadata({ data: "json, name=phone" })
   phone?: string;
 
-  @Metadata({ data: "json, name=receiverLanguage" })
+  @SpeakeasyMetadata({ data: "json, name=receiverLanguage" })
   receiverLanguage?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=userName" })
+  @SpeakeasyMetadata({ data: "json, name=userName" })
   userName?: string;
 }

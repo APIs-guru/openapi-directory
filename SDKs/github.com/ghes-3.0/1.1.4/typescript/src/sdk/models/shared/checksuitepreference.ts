@@ -1,19 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MinimalRepository } from "./minimalrepository";
 
 
+
 export class CheckSuitePreferencePreferencesAutoTriggerChecks extends SpeakeasyBase {
-  @Metadata({ data: "json, name=app_id" })
+  @SpeakeasyMetadata({ data: "json, name=app_id" })
   appId: number;
 
-  @Metadata({ data: "json, name=setting" })
+  @SpeakeasyMetadata({ data: "json, name=setting" })
   setting: boolean;
 }
 
 
 export class CheckSuitePreferencePreferences extends SpeakeasyBase {
-  @Metadata({ data: "json, name=auto_trigger_checks", elemType: shared.CheckSuitePreferencePreferencesAutoTriggerChecks })
+  @SpeakeasyMetadata({ data: "json, name=auto_trigger_checks", elemType: CheckSuitePreferencePreferencesAutoTriggerChecks })
   autoTriggerChecks?: CheckSuitePreferencePreferencesAutoTriggerChecks[];
 }
 
@@ -23,9 +23,9 @@ export class CheckSuitePreferencePreferences extends SpeakeasyBase {
  * Check suite configuration preferences for a repository.
 **/
 export class CheckSuitePreference extends SpeakeasyBase {
-  @Metadata({ data: "json, name=preferences" })
+  @SpeakeasyMetadata({ data: "json, name=preferences" })
   preferences: CheckSuitePreferencePreferences;
 
-  @Metadata({ data: "json, name=repository" })
+  @SpeakeasyMetadata({ data: "json, name=repository" })
   repository: MinimalRepository;
 }

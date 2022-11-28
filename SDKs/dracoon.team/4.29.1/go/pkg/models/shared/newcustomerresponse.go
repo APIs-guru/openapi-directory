@@ -12,6 +12,8 @@ const (
 	NewCustomerResponseCustomerContractTypeEnumPay  NewCustomerResponseCustomerContractTypeEnum = "pay"
 )
 
+// NewCustomerResponse
+// Customer information
 type NewCustomerResponse struct {
 	ActivationCode       *string                                     `json:"activationCode,omitempty"`
 	CompanyName          string                                      `json:"companyName"`

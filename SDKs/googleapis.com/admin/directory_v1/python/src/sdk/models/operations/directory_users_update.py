@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DirectoryUsersUpdatePathParams:
-    user_key: str = field(default=None, metadata={'path_param': { 'field_name': 'userKey', 'style': 'simple', 'explode': False }})
+    user_key: str = field(metadata={'path_param': { 'field_name': 'userKey', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +29,21 @@ class DirectoryUsersUpdateQueryParams:
 
 @dataclass
 class DirectoryUsersUpdateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DirectoryUsersUpdateRequest:
-    path_params: DirectoryUsersUpdatePathParams = field(default=None)
-    query_params: DirectoryUsersUpdateQueryParams = field(default=None)
-    request: Optional[shared.User] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DirectoryUsersUpdateSecurity = field(default=None)
+    path_params: DirectoryUsersUpdatePathParams = field()
+    query_params: DirectoryUsersUpdateQueryParams = field()
+    security: DirectoryUsersUpdateSecurity = field()
+    request: Optional[shared.UserInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DirectoryUsersUpdateResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     user: Optional[shared.User] = field(default=None)
     

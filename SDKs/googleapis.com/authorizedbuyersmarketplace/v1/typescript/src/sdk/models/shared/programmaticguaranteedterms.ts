@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Price } from "./price";
 
+
 export enum ProgrammaticGuaranteedTermsReservationTypeEnum {
-    ReservationTypeUnspecified = "RESERVATION_TYPE_UNSPECIFIED"
-,    Standard = "STANDARD"
-,    Sponsorship = "SPONSORSHIP"
+    ReservationTypeUnspecified = "RESERVATION_TYPE_UNSPECIFIED",
+    Standard = "STANDARD",
+    Sponsorship = "SPONSORSHIP"
 }
 
 
@@ -13,21 +14,21 @@ export enum ProgrammaticGuaranteedTermsReservationTypeEnum {
  * Pricing terms for Programmatic Guaranteed Deals.
 **/
 export class ProgrammaticGuaranteedTerms extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fixedPrice" })
+  @SpeakeasyMetadata({ data: "json, name=fixedPrice" })
   fixedPrice?: Price;
 
-  @Metadata({ data: "json, name=guaranteedLooks" })
+  @SpeakeasyMetadata({ data: "json, name=guaranteedLooks" })
   guaranteedLooks?: string;
 
-  @Metadata({ data: "json, name=impressionCap" })
+  @SpeakeasyMetadata({ data: "json, name=impressionCap" })
   impressionCap?: string;
 
-  @Metadata({ data: "json, name=minimumDailyLooks" })
+  @SpeakeasyMetadata({ data: "json, name=minimumDailyLooks" })
   minimumDailyLooks?: string;
 
-  @Metadata({ data: "json, name=percentShareOfVoice" })
+  @SpeakeasyMetadata({ data: "json, name=percentShareOfVoice" })
   percentShareOfVoice?: string;
 
-  @Metadata({ data: "json, name=reservationType" })
+  @SpeakeasyMetadata({ data: "json, name=reservationType" })
   reservationType?: ProgrammaticGuaranteedTermsReservationTypeEnum;
 }

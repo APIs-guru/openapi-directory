@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateArtifactRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ArtifactArn" })
+  @SpeakeasyMetadata({ data: "json, name=ArtifactArn" })
   artifactArn: string;
 
-  @Metadata({ data: "json, name=ArtifactName" })
+  @SpeakeasyMetadata({ data: "json, name=ArtifactName" })
   artifactName?: string;
 
-  @Metadata({ data: "json, name=Properties" })
+  @SpeakeasyMetadata({ data: "json, name=Properties" })
   properties?: Map<string, string>;
 
-  @Metadata({ data: "json, name=PropertiesToRemove" })
+  @SpeakeasyMetadata({ data: "json, name=PropertiesToRemove" })
   propertiesToRemove?: string[];
 }

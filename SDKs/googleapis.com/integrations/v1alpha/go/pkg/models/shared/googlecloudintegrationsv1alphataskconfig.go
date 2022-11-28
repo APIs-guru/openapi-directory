@@ -27,6 +27,8 @@ const (
 	GoogleCloudIntegrationsV1alphaTaskConfigTaskExecutionStrategyEnumWhenAllTasksAndConditionsSucceed GoogleCloudIntegrationsV1alphaTaskConfigTaskExecutionStrategyEnum = "WHEN_ALL_TASKS_AND_CONDITIONS_SUCCEED"
 )
 
+// GoogleCloudIntegrationsV1alphaTaskConfig
+// The task configuration details. This is not the implementation of Task. There might be multiple TaskConfigs for the same Task.
 type GoogleCloudIntegrationsV1alphaTaskConfig struct {
 	Description                  *string                                                               `json:"description,omitempty"`
 	DisplayName                  *string                                                               `json:"displayName,omitempty"`

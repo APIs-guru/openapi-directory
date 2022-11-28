@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ContainerAccessPermissionEnum {
-    ContainerPermissionUnspecified = "containerPermissionUnspecified"
-,    NoAccess = "noAccess"
-,    Read = "read"
-,    Edit = "edit"
-,    Approve = "approve"
-,    Publish = "publish"
+    ContainerPermissionUnspecified = "containerPermissionUnspecified",
+    NoAccess = "noAccess",
+    Read = "read",
+    Edit = "edit",
+    Approve = "approve",
+    Publish = "publish"
 }
 
 
@@ -15,9 +16,9 @@ export enum ContainerAccessPermissionEnum {
  * Defines the Google Tag Manager Container access permissions.
 **/
 export class ContainerAccess extends SpeakeasyBase {
-  @Metadata({ data: "json, name=containerId" })
+  @SpeakeasyMetadata({ data: "json, name=containerId" })
   containerId?: string;
 
-  @Metadata({ data: "json, name=permission" })
+  @SpeakeasyMetadata({ data: "json, name=permission" })
   permission?: ContainerAccessPermissionEnum;
 }

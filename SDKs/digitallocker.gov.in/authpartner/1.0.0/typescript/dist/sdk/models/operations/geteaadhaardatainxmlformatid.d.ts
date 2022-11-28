@@ -1,10 +1,7 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class GetEAadhaarDataInXmlFormatIdSecurity extends SpeakeasyBase {
     bearerAuth: shared.SchemeBearerAuth;
-}
-export declare class GetEAadhaarDataInXmlFormatIdRequest extends SpeakeasyBase {
-    security: GetEAadhaarDataInXmlFormatIdSecurity;
 }
 export declare class GetEAadhaarDataInXmlFormatId401ApplicationJson extends SpeakeasyBase {
     error?: string;
@@ -13,6 +10,9 @@ export declare class GetEAadhaarDataInXmlFormatId401ApplicationJson extends Spea
 export declare class GetEAadhaarDataInXmlFormatId404ApplicationJson extends SpeakeasyBase {
     error?: any;
     errorDescription?: any;
+}
+export declare class GetEAadhaarDataInXmlFormatIdRequest extends SpeakeasyBase {
+    security: GetEAadhaarDataInXmlFormatIdSecurity;
 }
 export declare class GetEAadhaarDataInXmlFormatIdResponse extends SpeakeasyBase {
     body?: Uint8Array;

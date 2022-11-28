@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetRoutingVersionNumberCalculateReachableRangeOriginContentTypePathParams = /** @class */ (function (_super) {
     __extends(GetRoutingVersionNumberCalculateReachableRangeOriginContentTypePathParams, _super);
@@ -30,15 +30,15 @@ var GetRoutingVersionNumberCalculateReachableRangeOriginContentTypePathParams = 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=contentType" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=contentType" }),
         __metadata("design:type", String)
     ], GetRoutingVersionNumberCalculateReachableRangeOriginContentTypePathParams.prototype, "contentType", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=origin" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=origin" }),
         __metadata("design:type", String)
     ], GetRoutingVersionNumberCalculateReachableRangeOriginContentTypePathParams.prototype, "origin", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=versionNumber" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=versionNumber" }),
         __metadata("design:type", Number)
     ], GetRoutingVersionNumberCalculateReachableRangeOriginContentTypePathParams.prototype, "versionNumber", void 0);
     return GetRoutingVersionNumberCalculateReachableRangeOriginContentTypePathParams;
@@ -55,127 +55,127 @@ var GetRoutingVersionNumberCalculateReachableRangeOriginContentTypeQueryParams =
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=accelerationEfficiency" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=accelerationEfficiency" }),
         __metadata("design:type", Number)
     ], GetRoutingVersionNumberCalculateReachableRangeOriginContentTypeQueryParams.prototype, "accelerationEfficiency", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=arriveAt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=arriveAt" }),
         __metadata("design:type", String)
     ], GetRoutingVersionNumberCalculateReachableRangeOriginContentTypeQueryParams.prototype, "arriveAt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=auxiliaryPowerInLitersPerHour" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=auxiliaryPowerInLitersPerHour" }),
         __metadata("design:type", Number)
     ], GetRoutingVersionNumberCalculateReachableRangeOriginContentTypeQueryParams.prototype, "auxiliaryPowerInLitersPerHour", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=avoid" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=avoid" }),
         __metadata("design:type", String)
     ], GetRoutingVersionNumberCalculateReachableRangeOriginContentTypeQueryParams.prototype, "avoid", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], GetRoutingVersionNumberCalculateReachableRangeOriginContentTypeQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=constantSpeedConsumptionInLitersPerHundredkm" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=constantSpeedConsumptionInLitersPerHundredkm" }),
         __metadata("design:type", String)
     ], GetRoutingVersionNumberCalculateReachableRangeOriginContentTypeQueryParams.prototype, "constantSpeedConsumptionInLitersPerHundredkm", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=constantSpeedConsumptionInkWhPerHundredkm" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=constantSpeedConsumptionInkWhPerHundredkm" }),
         __metadata("design:type", String)
     ], GetRoutingVersionNumberCalculateReachableRangeOriginContentTypeQueryParams.prototype, "constantSpeedConsumptionInkWhPerHundredkm", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=currentFuelInLiters" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=currentFuelInLiters" }),
         __metadata("design:type", Number)
     ], GetRoutingVersionNumberCalculateReachableRangeOriginContentTypeQueryParams.prototype, "currentFuelInLiters", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=decelerationEfficiency" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=decelerationEfficiency" }),
         __metadata("design:type", Number)
     ], GetRoutingVersionNumberCalculateReachableRangeOriginContentTypeQueryParams.prototype, "decelerationEfficiency", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=departAt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=departAt" }),
         __metadata("design:type", String)
     ], GetRoutingVersionNumberCalculateReachableRangeOriginContentTypeQueryParams.prototype, "departAt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=downhillEfficiency" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=downhillEfficiency" }),
         __metadata("design:type", Number)
     ], GetRoutingVersionNumberCalculateReachableRangeOriginContentTypeQueryParams.prototype, "downhillEfficiency", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=energyBudgetInkWh" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=energyBudgetInkWh" }),
         __metadata("design:type", Number)
     ], GetRoutingVersionNumberCalculateReachableRangeOriginContentTypeQueryParams.prototype, "energyBudgetInkWh", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fuelBudgetInLiters" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fuelBudgetInLiters" }),
         __metadata("design:type", Number)
     ], GetRoutingVersionNumberCalculateReachableRangeOriginContentTypeQueryParams.prototype, "fuelBudgetInLiters", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fuelEnergyDensityInMJoulesPerLiter" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fuelEnergyDensityInMJoulesPerLiter" }),
         __metadata("design:type", Number)
     ], GetRoutingVersionNumberCalculateReachableRangeOriginContentTypeQueryParams.prototype, "fuelEnergyDensityInMJoulesPerLiter", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=hilliness" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=hilliness" }),
         __metadata("design:type", String)
     ], GetRoutingVersionNumberCalculateReachableRangeOriginContentTypeQueryParams.prototype, "hilliness", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=report" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=report" }),
         __metadata("design:type", String)
     ], GetRoutingVersionNumberCalculateReachableRangeOriginContentTypeQueryParams.prototype, "report", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=routeType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=routeType" }),
         __metadata("design:type", String)
     ], GetRoutingVersionNumberCalculateReachableRangeOriginContentTypeQueryParams.prototype, "routeType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=timeBudgetInSec" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timeBudgetInSec" }),
         __metadata("design:type", Number)
     ], GetRoutingVersionNumberCalculateReachableRangeOriginContentTypeQueryParams.prototype, "timeBudgetInSec", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=traffic" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=traffic" }),
         __metadata("design:type", Boolean)
     ], GetRoutingVersionNumberCalculateReachableRangeOriginContentTypeQueryParams.prototype, "traffic", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=travelMode" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=travelMode" }),
         __metadata("design:type", String)
     ], GetRoutingVersionNumberCalculateReachableRangeOriginContentTypeQueryParams.prototype, "travelMode", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uphillEfficiency" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uphillEfficiency" }),
         __metadata("design:type", Number)
     ], GetRoutingVersionNumberCalculateReachableRangeOriginContentTypeQueryParams.prototype, "uphillEfficiency", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=vehicleAxleWeight" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=vehicleAxleWeight" }),
         __metadata("design:type", Number)
     ], GetRoutingVersionNumberCalculateReachableRangeOriginContentTypeQueryParams.prototype, "vehicleAxleWeight", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=vehicleCommercial" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=vehicleCommercial" }),
         __metadata("design:type", Boolean)
     ], GetRoutingVersionNumberCalculateReachableRangeOriginContentTypeQueryParams.prototype, "vehicleCommercial", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=vehicleEngineType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=vehicleEngineType" }),
         __metadata("design:type", String)
     ], GetRoutingVersionNumberCalculateReachableRangeOriginContentTypeQueryParams.prototype, "vehicleEngineType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=vehicleHeight" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=vehicleHeight" }),
         __metadata("design:type", Number)
     ], GetRoutingVersionNumberCalculateReachableRangeOriginContentTypeQueryParams.prototype, "vehicleHeight", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=vehicleLength" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=vehicleLength" }),
         __metadata("design:type", Number)
     ], GetRoutingVersionNumberCalculateReachableRangeOriginContentTypeQueryParams.prototype, "vehicleLength", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=vehicleLoadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=vehicleLoadType" }),
         __metadata("design:type", String)
     ], GetRoutingVersionNumberCalculateReachableRangeOriginContentTypeQueryParams.prototype, "vehicleLoadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=vehicleMaxSpeed" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=vehicleMaxSpeed" }),
         __metadata("design:type", Number)
     ], GetRoutingVersionNumberCalculateReachableRangeOriginContentTypeQueryParams.prototype, "vehicleMaxSpeed", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=vehicleWeight" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=vehicleWeight" }),
         __metadata("design:type", Number)
     ], GetRoutingVersionNumberCalculateReachableRangeOriginContentTypeQueryParams.prototype, "vehicleWeight", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=vehicleWidth" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=vehicleWidth" }),
         __metadata("design:type", Number)
     ], GetRoutingVersionNumberCalculateReachableRangeOriginContentTypeQueryParams.prototype, "vehicleWidth", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=windingness" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=windingness" }),
         __metadata("design:type", String)
     ], GetRoutingVersionNumberCalculateReachableRangeOriginContentTypeQueryParams.prototype, "windingness", void 0);
     return GetRoutingVersionNumberCalculateReachableRangeOriginContentTypeQueryParams;
@@ -187,11 +187,11 @@ var GetRoutingVersionNumberCalculateReachableRangeOriginContentTypeRequest = /**
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetRoutingVersionNumberCalculateReachableRangeOriginContentTypePathParams)
     ], GetRoutingVersionNumberCalculateReachableRangeOriginContentTypeRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetRoutingVersionNumberCalculateReachableRangeOriginContentTypeQueryParams)
     ], GetRoutingVersionNumberCalculateReachableRangeOriginContentTypeRequest.prototype, "queryParams", void 0);
     return GetRoutingVersionNumberCalculateReachableRangeOriginContentTypeRequest;
@@ -203,11 +203,11 @@ var GetRoutingVersionNumberCalculateReachableRangeOriginContentTypeResponse = /*
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetRoutingVersionNumberCalculateReachableRangeOriginContentTypeResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetRoutingVersionNumberCalculateReachableRangeOriginContentTypeResponse.prototype, "statusCode", void 0);
     return GetRoutingVersionNumberCalculateReachableRangeOriginContentTypeResponse;

@@ -9,12 +9,12 @@ class UserSearchUsersQueryParams:
 
 @dataclass
 class UserSearchUsersRequest:
-    query_params: UserSearchUsersQueryParams = field(default=None)
+    query_params: UserSearchUsersQueryParams = field()
     
 
 @dataclass
 class UserSearchUsersResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

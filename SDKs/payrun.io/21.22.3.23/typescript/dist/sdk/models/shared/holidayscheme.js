@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // HolidaySchemeHolidaySchemeAccrualPayCodes
 /**
  * The holiday schemes' accrual pay codes
@@ -33,7 +33,7 @@ var HolidaySchemeHolidaySchemeAccrualPayCodes = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=PayCode" }),
+        SpeakeasyMetadata({ data: "json, name=PayCode" }),
         __metadata("design:type", Array)
     ], HolidaySchemeHolidaySchemeAccrualPayCodes.prototype, "payCode", void 0);
     return HolidaySchemeHolidaySchemeAccrualPayCodes;
@@ -45,55 +45,55 @@ var HolidaySchemeHolidayScheme = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AccrualPayCodes" }),
+        SpeakeasyMetadata({ data: "json, name=AccrualPayCodes" }),
         __metadata("design:type", HolidaySchemeHolidaySchemeAccrualPayCodes)
     ], HolidaySchemeHolidayScheme.prototype, "accrualPayCodes", void 0);
     __decorate([
-        Metadata({ data: "json, name=AllowNegativeBalance" }),
+        SpeakeasyMetadata({ data: "json, name=AllowNegativeBalance" }),
         __metadata("design:type", Boolean)
     ], HolidaySchemeHolidayScheme.prototype, "allowNegativeBalance", void 0);
     __decorate([
-        Metadata({ data: "json, name=AnnualEntitlementWeeks" }),
+        SpeakeasyMetadata({ data: "json, name=AnnualEntitlementWeeks" }),
         __metadata("design:type", Number)
     ], HolidaySchemeHolidayScheme.prototype, "annualEntitlementWeeks", void 0);
     __decorate([
-        Metadata({ data: "json, name=BankHolidayInclusive" }),
+        SpeakeasyMetadata({ data: "json, name=BankHolidayInclusive" }),
         __metadata("design:type", Boolean)
     ], HolidaySchemeHolidayScheme.prototype, "bankHolidayInclusive", void 0);
     __decorate([
-        Metadata({ data: "json, name=Code" }),
+        SpeakeasyMetadata({ data: "json, name=Code" }),
         __metadata("design:type", String)
     ], HolidaySchemeHolidayScheme.prototype, "code", void 0);
     __decorate([
-        Metadata({ data: "json, name=EffectiveDate" }),
+        SpeakeasyMetadata({ data: "json, name=EffectiveDate" }),
         __metadata("design:type", Date)
     ], HolidaySchemeHolidayScheme.prototype, "effectiveDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=MaxCarryOverDays" }),
+        SpeakeasyMetadata({ data: "json, name=MaxCarryOverDays" }),
         __metadata("design:type", Number)
     ], HolidaySchemeHolidayScheme.prototype, "maxCarryOverDays", void 0);
     __decorate([
-        Metadata({ data: "json, name=Revision" }),
+        SpeakeasyMetadata({ data: "json, name=Revision" }),
         __metadata("design:type", Number)
     ], HolidaySchemeHolidayScheme.prototype, "revision", void 0);
     __decorate([
-        Metadata({ data: "json, name=SchemeCeasedDate" }),
+        SpeakeasyMetadata({ data: "json, name=SchemeCeasedDate" }),
         __metadata("design:type", Date)
     ], HolidaySchemeHolidayScheme.prototype, "schemeCeasedDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=SchemeKey" }),
+        SpeakeasyMetadata({ data: "json, name=SchemeKey" }),
         __metadata("design:type", String)
     ], HolidaySchemeHolidayScheme.prototype, "schemeKey", void 0);
     __decorate([
-        Metadata({ data: "json, name=SchemeName" }),
+        SpeakeasyMetadata({ data: "json, name=SchemeName" }),
         __metadata("design:type", String)
     ], HolidaySchemeHolidayScheme.prototype, "schemeName", void 0);
     __decorate([
-        Metadata({ data: "json, name=YearStartDay" }),
+        SpeakeasyMetadata({ data: "json, name=YearStartDay" }),
         __metadata("design:type", Number)
     ], HolidaySchemeHolidayScheme.prototype, "yearStartDay", void 0);
     __decorate([
-        Metadata({ data: "json, name=YearStartMonth" }),
+        SpeakeasyMetadata({ data: "json, name=YearStartMonth" }),
         __metadata("design:type", Number)
     ], HolidaySchemeHolidayScheme.prototype, "yearStartMonth", void 0);
     return HolidaySchemeHolidayScheme;
@@ -105,7 +105,7 @@ var HolidayScheme = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=HolidayScheme" }),
+        SpeakeasyMetadata({ data: "json, name=HolidayScheme" }),
         __metadata("design:type", HolidaySchemeHolidayScheme)
     ], HolidayScheme.prototype, "holidayScheme", void 0);
     return HolidayScheme;

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PostalAddress } from "./postaladdress";
+
 
 
 // OrganizationInfo
@@ -7,12 +8,12 @@ import { PostalAddress } from "./postaladdress";
  * Additional Info stored for an organization.
 **/
 export class OrganizationInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=phoneNumber" })
+  @SpeakeasyMetadata({ data: "json, name=phoneNumber" })
   phoneNumber?: string;
 
-  @Metadata({ data: "json, name=postalAddress" })
+  @SpeakeasyMetadata({ data: "json, name=postalAddress" })
   postalAddress?: PostalAddress;
 
-  @Metadata({ data: "json, name=registeredDomain" })
+  @SpeakeasyMetadata({ data: "json, name=registeredDomain" })
   registeredDomain?: string;
 }

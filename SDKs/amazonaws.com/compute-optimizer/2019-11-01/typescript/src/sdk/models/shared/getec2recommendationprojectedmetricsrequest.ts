@@ -1,24 +1,25 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RecommendationPreferences } from "./recommendationpreferences";
 import { MetricStatisticEnum } from "./metricstatisticenum";
 
 
+
 export class GetEc2RecommendationProjectedMetricsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=endTime" })
+  @SpeakeasyMetadata({ data: "json, name=endTime" })
   endTime: Date;
 
-  @Metadata({ data: "json, name=instanceArn" })
+  @SpeakeasyMetadata({ data: "json, name=instanceArn" })
   instanceArn: string;
 
-  @Metadata({ data: "json, name=period" })
+  @SpeakeasyMetadata({ data: "json, name=period" })
   period: number;
 
-  @Metadata({ data: "json, name=recommendationPreferences" })
+  @SpeakeasyMetadata({ data: "json, name=recommendationPreferences" })
   recommendationPreferences?: RecommendationPreferences;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime: Date;
 
-  @Metadata({ data: "json, name=stat" })
+  @SpeakeasyMetadata({ data: "json, name=stat" })
   stat: MetricStatisticEnum;
 }

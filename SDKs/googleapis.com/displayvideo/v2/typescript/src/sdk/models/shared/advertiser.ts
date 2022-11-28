@@ -1,18 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AdvertiserAdServerConfig } from "./advertiseradserverconfig";
+import { AdvertiserBillingConfig } from "./advertiserbillingconfig";
 import { AdvertiserCreativeConfig } from "./advertisercreativeconfig";
 import { AdvertiserDataAccessConfig } from "./advertiserdataaccessconfig";
 import { AdvertiserGeneralConfig } from "./advertisergeneralconfig";
 import { IntegrationDetails } from "./integrationdetails";
 import { AdvertiserTargetingConfig } from "./advertisertargetingconfig";
+import { AdvertiserGeneralConfigInput } from "./advertisergeneralconfig";
+
 
 export enum AdvertiserEntityStatusEnum {
-    EntityStatusUnspecified = "ENTITY_STATUS_UNSPECIFIED"
-,    EntityStatusActive = "ENTITY_STATUS_ACTIVE"
-,    EntityStatusArchived = "ENTITY_STATUS_ARCHIVED"
-,    EntityStatusDraft = "ENTITY_STATUS_DRAFT"
-,    EntityStatusPaused = "ENTITY_STATUS_PAUSED"
-,    EntityStatusScheduledForDeletion = "ENTITY_STATUS_SCHEDULED_FOR_DELETION"
+    EntityStatusUnspecified = "ENTITY_STATUS_UNSPECIFIED",
+    EntityStatusActive = "ENTITY_STATUS_ACTIVE",
+    EntityStatusArchived = "ENTITY_STATUS_ARCHIVED",
+    EntityStatusDraft = "ENTITY_STATUS_DRAFT",
+    EntityStatusPaused = "ENTITY_STATUS_PAUSED",
+    EntityStatusScheduledForDeletion = "ENTITY_STATUS_SCHEDULED_FOR_DELETION"
 }
 
 
@@ -21,42 +24,85 @@ export enum AdvertiserEntityStatusEnum {
  * A single advertiser in Display & Video 360 (DV360).
 **/
 export class Advertiser extends SpeakeasyBase {
-  @Metadata({ data: "json, name=adServerConfig" })
+  @SpeakeasyMetadata({ data: "json, name=adServerConfig" })
   adServerConfig?: AdvertiserAdServerConfig;
 
-  @Metadata({ data: "json, name=advertiserId" })
+  @SpeakeasyMetadata({ data: "json, name=advertiserId" })
   advertiserId?: string;
 
-  @Metadata({ data: "json, name=creativeConfig" })
+  @SpeakeasyMetadata({ data: "json, name=billingConfig" })
+  billingConfig?: AdvertiserBillingConfig;
+
+  @SpeakeasyMetadata({ data: "json, name=creativeConfig" })
   creativeConfig?: AdvertiserCreativeConfig;
 
-  @Metadata({ data: "json, name=dataAccessConfig" })
+  @SpeakeasyMetadata({ data: "json, name=dataAccessConfig" })
   dataAccessConfig?: AdvertiserDataAccessConfig;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=entityStatus" })
+  @SpeakeasyMetadata({ data: "json, name=entityStatus" })
   entityStatus?: AdvertiserEntityStatusEnum;
 
-  @Metadata({ data: "json, name=generalConfig" })
+  @SpeakeasyMetadata({ data: "json, name=generalConfig" })
   generalConfig?: AdvertiserGeneralConfig;
 
-  @Metadata({ data: "json, name=integrationDetails" })
+  @SpeakeasyMetadata({ data: "json, name=integrationDetails" })
   integrationDetails?: IntegrationDetails;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=partnerId" })
+  @SpeakeasyMetadata({ data: "json, name=partnerId" })
   partnerId?: string;
 
-  @Metadata({ data: "json, name=prismaEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=prismaEnabled" })
   prismaEnabled?: boolean;
 
-  @Metadata({ data: "json, name=servingConfig" })
+  @SpeakeasyMetadata({ data: "json, name=servingConfig" })
   servingConfig?: AdvertiserTargetingConfig;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
+}
+
+
+// AdvertiserInput
+/** 
+ * A single advertiser in Display & Video 360 (DV360).
+**/
+export class AdvertiserInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=adServerConfig" })
+  adServerConfig?: AdvertiserAdServerConfig;
+
+  @SpeakeasyMetadata({ data: "json, name=billingConfig" })
+  billingConfig?: AdvertiserBillingConfig;
+
+  @SpeakeasyMetadata({ data: "json, name=creativeConfig" })
+  creativeConfig?: AdvertiserCreativeConfig;
+
+  @SpeakeasyMetadata({ data: "json, name=dataAccessConfig" })
+  dataAccessConfig?: AdvertiserDataAccessConfig;
+
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
+  displayName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=entityStatus" })
+  entityStatus?: AdvertiserEntityStatusEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=generalConfig" })
+  generalConfig?: AdvertiserGeneralConfigInput;
+
+  @SpeakeasyMetadata({ data: "json, name=integrationDetails" })
+  integrationDetails?: IntegrationDetails;
+
+  @SpeakeasyMetadata({ data: "json, name=partnerId" })
+  partnerId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=prismaEnabled" })
+  prismaEnabled?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=servingConfig" })
+  servingConfig?: AdvertiserTargetingConfig;
 }

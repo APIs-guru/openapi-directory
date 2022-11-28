@@ -12,15 +12,15 @@ type AquifersListQueryParams struct {
 	Search    *string  `queryParam:"style=form,explode=true,name=search"`
 }
 
-type AquifersListRequest struct {
-	QueryParams AquifersListQueryParams
-}
-
 type AquifersList200ApplicationJSON struct {
 	Count    int64            `json:"count"`
 	Next     *string          `json:"next,omitempty"`
 	Previous *string          `json:"previous,omitempty"`
 	Results  []shared.Aquifer `json:"results"`
+}
+
+type AquifersListRequest struct {
+	QueryParams AquifersListQueryParams
 }
 
 type AquifersListResponse struct {

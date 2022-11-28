@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Service
+// Information about an application that processed requests, users that made requests, or downstream services, resources, and applications that an application used.
 type Service struct {
 	AccountID             *string            `json:"AccountId,omitempty"`
 	DurationHistogram     []HistogramEntry   `json:"DurationHistogram,omitempty"`

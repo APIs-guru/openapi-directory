@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// AnomalyDetectorSummary
+// Contains information about an an anomaly detector.
 type AnomalyDetectorSummary struct {
 	AnomalyDetectorArn         *string                    `json:"AnomalyDetectorArn,omitempty"`
 	AnomalyDetectorDescription *string                    `json:"AnomalyDetectorDescription,omitempty"`

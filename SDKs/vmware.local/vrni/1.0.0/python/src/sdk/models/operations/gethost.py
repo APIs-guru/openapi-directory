@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetHostPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,20 +15,20 @@ class GetHostQueryParams:
 
 @dataclass
 class GetHostSecurity:
-    api_key_auth: shared.SchemeAPIKeyAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    api_key_auth: shared.SchemeAPIKeyAuth = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetHostRequest:
-    path_params: GetHostPathParams = field(default=None)
-    query_params: GetHostQueryParams = field(default=None)
-    security: GetHostSecurity = field(default=None)
+    path_params: GetHostPathParams = field()
+    query_params: GetHostQueryParams = field()
+    security: GetHostSecurity = field()
     
 
 @dataclass
 class GetHostResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_error: Optional[shared.APIError] = field(default=None)
-    content_type: str = field(default=None)
     host: Optional[shared.Host] = field(default=None)
-    status_code: int = field(default=None)
     

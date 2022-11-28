@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum SslSettingsSslManagementTypeEnum {
-    Automatic = "AUTOMATIC"
-,    Manual = "MANUAL"
+    Automatic = "AUTOMATIC",
+    Manual = "MANUAL"
 }
 
 
@@ -11,12 +12,12 @@ export enum SslSettingsSslManagementTypeEnum {
  * SSL configuration for a DomainMapping resource.
 **/
 export class SslSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=certificateId" })
+  @SpeakeasyMetadata({ data: "json, name=certificateId" })
   certificateId?: string;
 
-  @Metadata({ data: "json, name=pendingManagedCertificateId" })
+  @SpeakeasyMetadata({ data: "json, name=pendingManagedCertificateId" })
   pendingManagedCertificateId?: string;
 
-  @Metadata({ data: "json, name=sslManagementType" })
+  @SpeakeasyMetadata({ data: "json, name=sslManagementType" })
   sslManagementType?: SslSettingsSslManagementTypeEnum;
 }

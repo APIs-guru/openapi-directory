@@ -14,12 +14,12 @@ class GetTeamSeasonStatsQueryParams:
 
 @dataclass
 class GetTeamSeasonStatsRequest:
-    query_params: GetTeamSeasonStatsQueryParams = field(default=None)
+    query_params: GetTeamSeasonStatsQueryParams = field()
     
 
 @dataclass
 class GetTeamSeasonStatsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     team_season_stats: Optional[List[shared.TeamSeasonStat]] = field(default=None)
     

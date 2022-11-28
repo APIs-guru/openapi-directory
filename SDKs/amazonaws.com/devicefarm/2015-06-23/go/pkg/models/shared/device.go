@@ -1,5 +1,7 @@
 package shared
 
+// Device
+// Represents a device type that an app is tested against.
 type Device struct {
 	Arn                 *string                 `json:"arn,omitempty"`
 	Availability        *DeviceAvailabilityEnum `json:"availability,omitempty"`

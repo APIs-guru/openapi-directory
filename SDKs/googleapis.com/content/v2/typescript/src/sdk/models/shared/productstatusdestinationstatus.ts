@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ProductStatusDestinationStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=approvalPending" })
+  @SpeakeasyMetadata({ data: "json, name=approvalPending" })
   approvalPending?: boolean;
 
-  @Metadata({ data: "json, name=approvalStatus" })
+  @SpeakeasyMetadata({ data: "json, name=approvalStatus" })
   approvalStatus?: string;
 
-  @Metadata({ data: "json, name=destination" })
+  @SpeakeasyMetadata({ data: "json, name=destination" })
   destination?: string;
 
-  @Metadata({ data: "json, name=intention" })
+  @SpeakeasyMetadata({ data: "json, name=intention" })
   intention?: string;
 }

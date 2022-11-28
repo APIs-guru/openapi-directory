@@ -19,6 +19,8 @@ const (
 	BackupTypeEnumSchemaExtension BackupTypeEnum = "SCHEMA_EXTENSION"
 )
 
+// Backup
+// Represents a Managed Microsoft Identities backup.
 type Backup struct {
 	CreateTime    *string           `json:"createTime,omitempty"`
 	Description   *string           `json:"description,omitempty"`
@@ -28,4 +30,11 @@ type Backup struct {
 	StatusMessage *string           `json:"statusMessage,omitempty"`
 	Type          *BackupTypeEnum   `json:"type,omitempty"`
 	UpdateTime    *string           `json:"updateTime,omitempty"`
+}
+
+// BackupInput
+// Represents a Managed Microsoft Identities backup.
+type BackupInput struct {
+	Description *string           `json:"description,omitempty"`
+	Labels      map[string]string `json:"labels,omitempty"`
 }

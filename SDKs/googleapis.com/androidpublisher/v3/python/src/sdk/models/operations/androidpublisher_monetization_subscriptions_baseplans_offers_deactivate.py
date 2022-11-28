@@ -1,14 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AndroidpublisherMonetizationSubscriptionsBasePlansOffersDeactivatePathParams:
-    base_plan_id: str = field(default=None, metadata={'path_param': { 'field_name': 'basePlanId', 'style': 'simple', 'explode': False }})
-    offer_id: str = field(default=None, metadata={'path_param': { 'field_name': 'offerId', 'style': 'simple', 'explode': False }})
-    package_name: str = field(default=None, metadata={'path_param': { 'field_name': 'packageName', 'style': 'simple', 'explode': False }})
-    product_id: str = field(default=None, metadata={'path_param': { 'field_name': 'productId', 'style': 'simple', 'explode': False }})
+    base_plan_id: str = field(metadata={'path_param': { 'field_name': 'basePlanId', 'style': 'simple', 'explode': False }})
+    offer_id: str = field(metadata={'path_param': { 'field_name': 'offerId', 'style': 'simple', 'explode': False }})
+    package_name: str = field(metadata={'path_param': { 'field_name': 'packageName', 'style': 'simple', 'explode': False }})
+    product_id: str = field(metadata={'path_param': { 'field_name': 'productId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,21 +29,21 @@ class AndroidpublisherMonetizationSubscriptionsBasePlansOffersDeactivateQueryPar
 
 @dataclass
 class AndroidpublisherMonetizationSubscriptionsBasePlansOffersDeactivateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AndroidpublisherMonetizationSubscriptionsBasePlansOffersDeactivateRequest:
-    path_params: AndroidpublisherMonetizationSubscriptionsBasePlansOffersDeactivatePathParams = field(default=None)
-    query_params: AndroidpublisherMonetizationSubscriptionsBasePlansOffersDeactivateQueryParams = field(default=None)
+    path_params: AndroidpublisherMonetizationSubscriptionsBasePlansOffersDeactivatePathParams = field()
+    query_params: AndroidpublisherMonetizationSubscriptionsBasePlansOffersDeactivateQueryParams = field()
+    security: AndroidpublisherMonetizationSubscriptionsBasePlansOffersDeactivateSecurity = field()
     request: Optional[dict[str, Any]] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AndroidpublisherMonetizationSubscriptionsBasePlansOffersDeactivateSecurity = field(default=None)
     
 
 @dataclass
 class AndroidpublisherMonetizationSubscriptionsBasePlansOffersDeactivateResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     subscription_offer: Optional[shared.SubscriptionOffer] = field(default=None)
     

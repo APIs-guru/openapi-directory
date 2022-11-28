@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProvisioningConfig } from "./provisioningconfig";
+
 
 
 // SubmitProvisioningConfigResponse
@@ -7,6 +8,6 @@ import { ProvisioningConfig } from "./provisioningconfig";
  * Response for SubmitProvisioningConfig.
 **/
 export class SubmitProvisioningConfigResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=provisioningConfig" })
+  @SpeakeasyMetadata({ data: "json, name=provisioningConfig" })
   provisioningConfig?: ProvisioningConfig;
 }

@@ -1,19 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DocumentFilter } from "./documentfilter";
 import { DocumentKeyValuesFilter } from "./documentkeyvaluesfilter";
 
 
+
 export class ListDocumentsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DocumentFilterList", elemType: shared.DocumentFilter })
+  @SpeakeasyMetadata({ data: "json, name=DocumentFilterList", elemType: DocumentFilter })
   documentFilterList?: DocumentFilter[];
 
-  @Metadata({ data: "json, name=Filters", elemType: shared.DocumentKeyValuesFilter })
+  @SpeakeasyMetadata({ data: "json, name=Filters", elemType: DocumentKeyValuesFilter })
   filters?: DocumentKeyValuesFilter[];
 
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

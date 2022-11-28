@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { User } from "./user";
+
 
 
 // ContentRestriction
@@ -7,18 +8,18 @@ import { User } from "./user";
  * A restriction for accessing the content of the file.
 **/
 export class ContentRestriction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=readOnly" })
+  @SpeakeasyMetadata({ data: "json, name=readOnly" })
   readOnly?: boolean;
 
-  @Metadata({ data: "json, name=reason" })
+  @SpeakeasyMetadata({ data: "json, name=reason" })
   reason?: string;
 
-  @Metadata({ data: "json, name=restrictingUser" })
+  @SpeakeasyMetadata({ data: "json, name=restrictingUser" })
   restrictingUser?: User;
 
-  @Metadata({ data: "json, name=restrictionDate" })
+  @SpeakeasyMetadata({ data: "json, name=restrictionDate" })
   restrictionDate?: Date;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }

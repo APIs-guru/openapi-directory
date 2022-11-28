@@ -33,7 +33,7 @@ type EventarcProjectsLocationsTriggersPatchSecurity struct {
 type EventarcProjectsLocationsTriggersPatchRequest struct {
 	PathParams  EventarcProjectsLocationsTriggersPatchPathParams
 	QueryParams EventarcProjectsLocationsTriggersPatchQueryParams
-	Request     *shared.Trigger `request:"mediaType=application/json"`
+	Request     *shared.TriggerInput `request:"mediaType=application/json"`
 	Security    EventarcProjectsLocationsTriggersPatchSecurity
 }
 

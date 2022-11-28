@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Destiny2GetLinkedProfilesPathParams = /** @class */ (function (_super) {
     __extends(Destiny2GetLinkedProfilesPathParams, _super);
     function Destiny2GetLinkedProfilesPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=membershipId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=membershipId" }),
         __metadata("design:type", Number)
     ], Destiny2GetLinkedProfilesPathParams.prototype, "membershipId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=membershipType" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=membershipType" }),
         __metadata("design:type", Number)
     ], Destiny2GetLinkedProfilesPathParams.prototype, "membershipType", void 0);
     return Destiny2GetLinkedProfilesPathParams;
@@ -45,7 +45,7 @@ var Destiny2GetLinkedProfilesQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=getAllMemberships" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=getAllMemberships" }),
         __metadata("design:type", Boolean)
     ], Destiny2GetLinkedProfilesQueryParams.prototype, "getAllMemberships", void 0);
     return Destiny2GetLinkedProfilesQueryParams;
@@ -57,11 +57,11 @@ var Destiny2GetLinkedProfilesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Destiny2GetLinkedProfilesPathParams)
     ], Destiny2GetLinkedProfilesRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Destiny2GetLinkedProfilesQueryParams)
     ], Destiny2GetLinkedProfilesRequest.prototype, "queryParams", void 0);
     return Destiny2GetLinkedProfilesRequest;
@@ -73,15 +73,15 @@ var Destiny2GetLinkedProfilesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], Destiny2GetLinkedProfilesResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], Destiny2GetLinkedProfilesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], Destiny2GetLinkedProfilesResponse.prototype, "statusCode", void 0);
     return Destiny2GetLinkedProfilesResponse;

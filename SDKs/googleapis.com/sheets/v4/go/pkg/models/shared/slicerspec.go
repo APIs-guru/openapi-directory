@@ -9,6 +9,8 @@ const (
 	SlicerSpecHorizontalAlignmentEnumRight                      SlicerSpecHorizontalAlignmentEnum = "RIGHT"
 )
 
+// SlicerSpec
+// The specifications of a slicer.
 type SlicerSpec struct {
 	ApplyToPivotTables   *bool                              `json:"applyToPivotTables,omitempty"`
 	BackgroundColor      *Color                             `json:"backgroundColor,omitempty"`

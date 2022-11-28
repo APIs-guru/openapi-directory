@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -13,12 +14,12 @@ class GetV3BoardsQueryParams:
 
 @dataclass
 class GetV3BoardsRequest:
-    query_params: GetV3BoardsQueryParams = field(default=None)
+    query_params: GetV3BoardsQueryParams = field()
     
 
 @dataclass
 class GetV3BoardsResponse:
+    content_type: str = field()
+    status_code: int = field()
     board_list: Optional[shared.BoardList] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

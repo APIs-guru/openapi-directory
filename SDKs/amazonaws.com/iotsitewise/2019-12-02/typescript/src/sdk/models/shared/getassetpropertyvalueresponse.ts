@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AssetPropertyValue } from "./assetpropertyvalue";
 
 
+
 export class GetAssetPropertyValueResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=propertyValue" })
+  @SpeakeasyMetadata({ data: "json, name=propertyValue" })
   propertyValue?: AssetPropertyValue;
 }

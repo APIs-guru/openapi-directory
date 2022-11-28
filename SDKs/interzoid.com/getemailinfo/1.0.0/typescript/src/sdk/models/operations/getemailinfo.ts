@@ -1,67 +1,68 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetemailinfoQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=email" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=email" })
   email: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=license" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=license" })
   license: string;
 }
 
 
-export class GetemailinfoRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetemailinfoQueryParams;
-}
-
-
 export class Getemailinfo200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Code" })
+  @SpeakeasyMetadata({ data: "json, name=Code" })
   code?: string;
 
-  @Metadata({ data: "json, name=Credits" })
+  @SpeakeasyMetadata({ data: "json, name=Credits" })
   credits?: string;
 
-  @Metadata({ data: "json, name=Email" })
+  @SpeakeasyMetadata({ data: "json, name=Email" })
   email?: string;
 
-  @Metadata({ data: "json, name=Geolocation" })
+  @SpeakeasyMetadata({ data: "json, name=Geolocation" })
   geolocation?: string;
 
-  @Metadata({ data: "json, name=Info" })
+  @SpeakeasyMetadata({ data: "json, name=Info" })
   info?: string;
 
-  @Metadata({ data: "json, name=IsDisposable" })
+  @SpeakeasyMetadata({ data: "json, name=IsDisposable" })
   isDisposable?: string;
 
-  @Metadata({ data: "json, name=IsEducational" })
+  @SpeakeasyMetadata({ data: "json, name=IsEducational" })
   isEducational?: string;
 
-  @Metadata({ data: "json, name=IsGeneric" })
+  @SpeakeasyMetadata({ data: "json, name=IsGeneric" })
   isGeneric?: string;
 
-  @Metadata({ data: "json, name=IsGovernment" })
+  @SpeakeasyMetadata({ data: "json, name=IsGovernment" })
   isGovernment?: string;
 
-  @Metadata({ data: "json, name=IsOrganizational" })
+  @SpeakeasyMetadata({ data: "json, name=IsOrganizational" })
   isOrganizational?: string;
 
-  @Metadata({ data: "json, name=IsVulgar" })
+  @SpeakeasyMetadata({ data: "json, name=IsVulgar" })
   isVulgar?: string;
 
-  @Metadata({ data: "json, name=Response" })
+  @SpeakeasyMetadata({ data: "json, name=Response" })
   response?: string;
 }
 
 
+export class GetemailinfoRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetemailinfoQueryParams;
+}
+
+
 export class GetemailinfoResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getemailinfo200ApplicationJsonObject?: Getemailinfo200ApplicationJson;
 }

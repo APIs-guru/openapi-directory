@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var AddOrDeleteRulesQueryParams = /** @class */ (function (_super) {
     __extends(AddOrDeleteRulesQueryParams, _super);
     function AddOrDeleteRulesQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=dry_run" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dry_run" }),
         __metadata("design:type", Boolean)
     ], AddOrDeleteRulesQueryParams.prototype, "dryRun", void 0);
     return AddOrDeleteRulesQueryParams;
@@ -41,11 +41,11 @@ var AddOrDeleteRulesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AddOrDeleteRulesQueryParams)
     ], AddOrDeleteRulesRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", Object)
     ], AddOrDeleteRulesRequest.prototype, "request", void 0);
     return AddOrDeleteRulesRequest;
@@ -57,23 +57,23 @@ var AddOrDeleteRulesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], AddOrDeleteRulesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], AddOrDeleteRulesResponse.prototype, "error", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], AddOrDeleteRulesResponse.prototype, "problem", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], AddOrDeleteRulesResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], AddOrDeleteRulesResponse.prototype, "addOrDeleteRules200ApplicationJsonOneOf", void 0);
     return AddOrDeleteRulesResponse;

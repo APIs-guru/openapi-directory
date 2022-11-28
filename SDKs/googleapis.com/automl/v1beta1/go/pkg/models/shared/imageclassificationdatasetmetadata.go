@@ -8,6 +8,8 @@ const (
 	ImageClassificationDatasetMetadataClassificationTypeEnumMultilabel                    ImageClassificationDatasetMetadataClassificationTypeEnum = "MULTILABEL"
 )
 
+// ImageClassificationDatasetMetadata
+// Dataset metadata that is specific to image classification.
 type ImageClassificationDatasetMetadata struct {
 	ClassificationType *ImageClassificationDatasetMetadataClassificationTypeEnum `json:"classificationType,omitempty"`
 }

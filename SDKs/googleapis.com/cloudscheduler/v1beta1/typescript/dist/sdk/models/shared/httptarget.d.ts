@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { OAuthToken } from "./oauthtoken";
 import { OidcToken } from "./oidctoken";
 export declare enum HttpTargetHttpMethodEnum {

@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AlarmModelVersionSummary } from "./alarmmodelversionsummary";
 
 
+
 export class ListAlarmModelVersionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alarmModelVersionSummaries", elemType: shared.AlarmModelVersionSummary })
+  @SpeakeasyMetadata({ data: "json, name=alarmModelVersionSummaries", elemType: AlarmModelVersionSummary })
   alarmModelVersionSummaries?: AlarmModelVersionSummary[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

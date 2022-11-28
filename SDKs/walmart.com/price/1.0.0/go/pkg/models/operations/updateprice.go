@@ -19,6 +19,8 @@ const (
 	UpdatePriceRequestBodyPricingComparisonPriceCurrencyEnumCad UpdatePriceRequestBodyPricingComparisonPriceCurrencyEnum = "CAD"
 )
 
+// UpdatePriceRequestBodyPricingComparisonPrice
+// This is applicable only for promotions
 type UpdatePriceRequestBodyPricingComparisonPrice struct {
 	Amount   *float64                                                  `json:"amount,omitempty"`
 	Currency *UpdatePriceRequestBodyPricingComparisonPriceCurrencyEnum `json:"currency,omitempty"`
@@ -91,11 +93,6 @@ type UpdatePriceRequestBody struct {
 	Sku         string                                `json:"sku"`
 }
 
-type UpdatePriceRequest struct {
-	Headers UpdatePriceHeaders
-	Request UpdatePriceRequestBody `request:"mediaType=application/json"`
-}
-
 type UpdatePrice200ApplicationJSONErrorsCategoryEnum string
 
 const (
@@ -149,6 +146,11 @@ type UpdatePrice200ApplicationJSON struct {
 	Message    *string                               `json:"message,omitempty"`
 	Sku        *string                               `json:"sku,omitempty"`
 	StatusCode *int32                                `json:"statusCode,omitempty"`
+}
+
+type UpdatePriceRequest struct {
+	Headers UpdatePriceHeaders
+	Request UpdatePriceRequestBody `request:"mediaType=application/json"`
 }
 
 type UpdatePriceResponse struct {

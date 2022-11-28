@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LensStatusEnum } from "./lensstatusenum";
+
 
 
 // LensReviewSummary
@@ -7,21 +8,21 @@ import { LensStatusEnum } from "./lensstatusenum";
  * A lens review summary of a workload.
 **/
 export class LensReviewSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LensAlias" })
+  @SpeakeasyMetadata({ data: "json, name=LensAlias" })
   lensAlias?: string;
 
-  @Metadata({ data: "json, name=LensName" })
+  @SpeakeasyMetadata({ data: "json, name=LensName" })
   lensName?: string;
 
-  @Metadata({ data: "json, name=LensStatus" })
+  @SpeakeasyMetadata({ data: "json, name=LensStatus" })
   lensStatus?: LensStatusEnum;
 
-  @Metadata({ data: "json, name=LensVersion" })
+  @SpeakeasyMetadata({ data: "json, name=LensVersion" })
   lensVersion?: string;
 
-  @Metadata({ data: "json, name=RiskCounts" })
+  @SpeakeasyMetadata({ data: "json, name=RiskCounts" })
   riskCounts?: Map<string, number>;
 
-  @Metadata({ data: "json, name=UpdatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=UpdatedAt" })
   updatedAt?: Date;
 }

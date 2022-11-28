@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LibraryOptions } from "./libraryoptions";
+
 
 
 // UpdateLibraryOptionsDto
@@ -7,9 +8,9 @@ import { LibraryOptions } from "./libraryoptions";
  * Update library options dto.
 **/
 export class UpdateLibraryOptionsDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=LibraryOptions" })
+  @SpeakeasyMetadata({ data: "json, name=LibraryOptions" })
   libraryOptions?: LibraryOptions;
 }

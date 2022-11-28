@@ -1,5 +1,7 @@
 package shared
 
+// CuratedListSearchResult
+// When **type** is *curated*.
 type CuratedListSearchResult struct {
 	DescriptionHighlighted *string          `json:"description_highlighted,omitempty"`
 	DescriptionOriginal    *string          `json:"description_original,omitempty"`

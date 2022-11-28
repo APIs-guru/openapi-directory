@@ -28,16 +28,16 @@ type PriceBulkUploadsRequestBody struct {
 	File *PriceBulkUploadsRequestBodyFile `multipartForm:"file"`
 }
 
-type PriceBulkUploadsRequest struct {
-	QueryParams PriceBulkUploadsQueryParams
-	Headers     PriceBulkUploadsHeaders
-	Request     PriceBulkUploadsRequestBody `request:"mediaType=multipart/form-data"`
-}
-
 type PriceBulkUploads200ApplicationJSON struct {
 	AdditionalAttributes map[string]interface{} `json:"additionalAttributes,omitempty"`
 	Errors               map[string]interface{} `json:"errors,omitempty"`
 	FeedID               *string                `json:"feedId,omitempty"`
+}
+
+type PriceBulkUploadsRequest struct {
+	QueryParams PriceBulkUploadsQueryParams
+	Headers     PriceBulkUploadsHeaders
+	Request     PriceBulkUploadsRequestBody `request:"mediaType=multipart/form-data"`
 }
 
 type PriceBulkUploadsResponse struct {

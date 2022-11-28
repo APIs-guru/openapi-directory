@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://ethereum.apidapp.com/1",
 }
 
@@ -18,9 +18,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -31,27 +35,44 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
 func (s *SDK) DeleteKeyKey(ctx context.Context, request operations.DeleteKeyKeyRequest) (*operations.DeleteKeyKeyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/key/{key}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -59,7 +80,7 @@ func (s *SDK) DeleteKeyKey(ctx context.Context, request operations.DeleteKeyKeyR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -89,8 +110,9 @@ func (s *SDK) DeleteKeyKey(ctx context.Context, request operations.DeleteKeyKeyR
 	return res, nil
 }
 
+// GetAccountID - Get account balance
 func (s *SDK) GetAccountID(ctx context.Context, request operations.GetAccountIDRequest) (*operations.GetAccountIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/account/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -98,7 +120,7 @@ func (s *SDK) GetAccountID(ctx context.Context, request operations.GetAccountIDR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -130,8 +152,9 @@ func (s *SDK) GetAccountID(ctx context.Context, request operations.GetAccountIDR
 	return res, nil
 }
 
+// GetBlock - Access detailed block information
 func (s *SDK) GetBlock(ctx context.Context, request operations.GetBlockRequest) (*operations.GetBlockResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/block"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -139,7 +162,7 @@ func (s *SDK) GetBlock(ctx context.Context, request operations.GetBlockRequest) 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -171,8 +194,9 @@ func (s *SDK) GetBlock(ctx context.Context, request operations.GetBlockRequest) 
 	return res, nil
 }
 
+// GetBlockID - Get information about particular block
 func (s *SDK) GetBlockID(ctx context.Context, request operations.GetBlockIDRequest) (*operations.GetBlockIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/block/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -180,7 +204,7 @@ func (s *SDK) GetBlockID(ctx context.Context, request operations.GetBlockIDReque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -212,8 +236,9 @@ func (s *SDK) GetBlockID(ctx context.Context, request operations.GetBlockIDReque
 	return res, nil
 }
 
+// GetBlockIDTransaction - Get transaction count within block
 func (s *SDK) GetBlockIDTransaction(ctx context.Context, request operations.GetBlockIDTransactionRequest) (*operations.GetBlockIDTransactionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/block/{id}/transaction", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -221,7 +246,7 @@ func (s *SDK) GetBlockIDTransaction(ctx context.Context, request operations.GetB
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -253,8 +278,9 @@ func (s *SDK) GetBlockIDTransaction(ctx context.Context, request operations.GetB
 	return res, nil
 }
 
+// GetBlockIDTransactionIndex - Get information about particular transaction within block
 func (s *SDK) GetBlockIDTransactionIndex(ctx context.Context, request operations.GetBlockIDTransactionIndexRequest) (*operations.GetBlockIDTransactionIndexResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/block/{id}/transaction/{index}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -262,7 +288,7 @@ func (s *SDK) GetBlockIDTransactionIndex(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -294,8 +320,9 @@ func (s *SDK) GetBlockIDTransactionIndex(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetBlockchain - Get a list of supported blockchains
 func (s *SDK) GetBlockchain(ctx context.Context, request operations.GetBlockchainRequest) (*operations.GetBlockchainResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/blockchain"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -303,7 +330,7 @@ func (s *SDK) GetBlockchain(ctx context.Context, request operations.GetBlockchai
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -335,8 +362,9 @@ func (s *SDK) GetBlockchain(ctx context.Context, request operations.GetBlockchai
 	return res, nil
 }
 
+// GetBlockchainID - Get information about blockchain woth given id
 func (s *SDK) GetBlockchainID(ctx context.Context, request operations.GetBlockchainIDRequest) (*operations.GetBlockchainIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/blockchain/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -344,7 +372,7 @@ func (s *SDK) GetBlockchainID(ctx context.Context, request operations.GetBlockch
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -376,8 +404,9 @@ func (s *SDK) GetBlockchainID(ctx context.Context, request operations.GetBlockch
 	return res, nil
 }
 
+// GetContractID - Get contract balance
 func (s *SDK) GetContractID(ctx context.Context, request operations.GetContractIDRequest) (*operations.GetContractIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/contract/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -385,7 +414,7 @@ func (s *SDK) GetContractID(ctx context.Context, request operations.GetContractI
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -417,8 +446,9 @@ func (s *SDK) GetContractID(ctx context.Context, request operations.GetContractI
 	return res, nil
 }
 
+// GetErc20 - Get token information such as name, total amount in circulation, etc
 func (s *SDK) GetErc20(ctx context.Context) (*operations.GetErc20Response, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/erc20"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -426,7 +456,7 @@ func (s *SDK) GetErc20(ctx context.Context) (*operations.GetErc20Response, error
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -456,8 +486,9 @@ func (s *SDK) GetErc20(ctx context.Context) (*operations.GetErc20Response, error
 	return res, nil
 }
 
+// GetErc20Address - Get information amout token balance in the account
 func (s *SDK) GetErc20Address(ctx context.Context, request operations.GetErc20AddressRequest) (*operations.GetErc20AddressResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/erc20/{address}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -465,7 +496,7 @@ func (s *SDK) GetErc20Address(ctx context.Context, request operations.GetErc20Ad
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -496,7 +527,7 @@ func (s *SDK) GetErc20Address(ctx context.Context, request operations.GetErc20Ad
 }
 
 func (s *SDK) GetKey(ctx context.Context, request operations.GetKeyRequest) (*operations.GetKeyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/key"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -506,7 +537,7 @@ func (s *SDK) GetKey(ctx context.Context, request operations.GetKeyRequest) (*op
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -536,8 +567,9 @@ func (s *SDK) GetKey(ctx context.Context, request operations.GetKeyRequest) (*op
 	return res, nil
 }
 
+// GetTransactionHash - Get information about transaction by the transaction hash value
 func (s *SDK) GetTransactionHash(ctx context.Context, request operations.GetTransactionHashRequest) (*operations.GetTransactionHashResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/transaction/{hash}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -545,7 +577,7 @@ func (s *SDK) GetTransactionHash(ctx context.Context, request operations.GetTran
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -577,8 +609,9 @@ func (s *SDK) GetTransactionHash(ctx context.Context, request operations.GetTran
 	return res, nil
 }
 
+// GetTransactionHashReceipt - Get receipt detail information
 func (s *SDK) GetTransactionHashReceipt(ctx context.Context, request operations.GetTransactionHashReceiptRequest) (*operations.GetTransactionHashReceiptResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/transaction/{hash}/receipt", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -586,7 +619,7 @@ func (s *SDK) GetTransactionHashReceipt(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -618,8 +651,9 @@ func (s *SDK) GetTransactionHashReceipt(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetVersion - Get API version info
 func (s *SDK) GetVersion(ctx context.Context) (*operations.GetVersionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/version"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -627,7 +661,7 @@ func (s *SDK) GetVersion(ctx context.Context) (*operations.GetVersionResponse, e
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -659,8 +693,9 @@ func (s *SDK) GetVersion(ctx context.Context) (*operations.GetVersionResponse, e
 	return res, nil
 }
 
+// GetWallet - Get current account balance
 func (s *SDK) GetWallet(ctx context.Context) (*operations.GetWalletResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/wallet"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -668,7 +703,7 @@ func (s *SDK) GetWallet(ctx context.Context) (*operations.GetWalletResponse, err
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -699,7 +734,7 @@ func (s *SDK) GetWallet(ctx context.Context) (*operations.GetWalletResponse, err
 }
 
 func (s *SDK) GetWalletAccount(ctx context.Context) (*operations.GetWalletAccountResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/wallet/account"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -707,7 +742,7 @@ func (s *SDK) GetWalletAccount(ctx context.Context) (*operations.GetWalletAccoun
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -737,8 +772,9 @@ func (s *SDK) GetWalletAccount(ctx context.Context) (*operations.GetWalletAccoun
 	return res, nil
 }
 
+// GetWalletAccountID - Get account balance
 func (s *SDK) GetWalletAccountID(ctx context.Context, request operations.GetWalletAccountIDRequest) (*operations.GetWalletAccountIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/wallet/account/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -746,7 +782,7 @@ func (s *SDK) GetWalletAccountID(ctx context.Context, request operations.GetWall
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -777,7 +813,7 @@ func (s *SDK) GetWalletAccountID(ctx context.Context, request operations.GetWall
 }
 
 func (s *SDK) Options(ctx context.Context) (*operations.OptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/"
 
 	req, err := http.NewRequestWithContext(ctx, "OPTIONS", url, nil)
@@ -785,7 +821,7 @@ func (s *SDK) Options(ctx context.Context) (*operations.OptionsResponse, error) 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -818,7 +854,7 @@ func (s *SDK) Options(ctx context.Context) (*operations.OptionsResponse, error) 
 }
 
 func (s *SDK) OptionsAccount(ctx context.Context) (*operations.OptionsAccountResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account"
 
 	req, err := http.NewRequestWithContext(ctx, "OPTIONS", url, nil)
@@ -826,7 +862,7 @@ func (s *SDK) OptionsAccount(ctx context.Context) (*operations.OptionsAccountRes
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -859,7 +895,7 @@ func (s *SDK) OptionsAccount(ctx context.Context) (*operations.OptionsAccountRes
 }
 
 func (s *SDK) OptionsAccountID(ctx context.Context, request operations.OptionsAccountIDRequest) (*operations.OptionsAccountIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/account/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "OPTIONS", url, nil)
@@ -867,7 +903,7 @@ func (s *SDK) OptionsAccountID(ctx context.Context, request operations.OptionsAc
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -900,7 +936,7 @@ func (s *SDK) OptionsAccountID(ctx context.Context, request operations.OptionsAc
 }
 
 func (s *SDK) OptionsBlock(ctx context.Context) (*operations.OptionsBlockResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/block"
 
 	req, err := http.NewRequestWithContext(ctx, "OPTIONS", url, nil)
@@ -908,7 +944,7 @@ func (s *SDK) OptionsBlock(ctx context.Context) (*operations.OptionsBlockRespons
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -941,7 +977,7 @@ func (s *SDK) OptionsBlock(ctx context.Context) (*operations.OptionsBlockRespons
 }
 
 func (s *SDK) OptionsBlockID(ctx context.Context, request operations.OptionsBlockIDRequest) (*operations.OptionsBlockIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/block/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "OPTIONS", url, nil)
@@ -949,7 +985,7 @@ func (s *SDK) OptionsBlockID(ctx context.Context, request operations.OptionsBloc
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -982,7 +1018,7 @@ func (s *SDK) OptionsBlockID(ctx context.Context, request operations.OptionsBloc
 }
 
 func (s *SDK) OptionsBlockIDTransaction(ctx context.Context, request operations.OptionsBlockIDTransactionRequest) (*operations.OptionsBlockIDTransactionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/block/{id}/transaction", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "OPTIONS", url, nil)
@@ -990,7 +1026,7 @@ func (s *SDK) OptionsBlockIDTransaction(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1023,7 +1059,7 @@ func (s *SDK) OptionsBlockIDTransaction(ctx context.Context, request operations.
 }
 
 func (s *SDK) OptionsBlockIDTransactionIndex(ctx context.Context, request operations.OptionsBlockIDTransactionIndexRequest) (*operations.OptionsBlockIDTransactionIndexResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/block/{id}/transaction/{index}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "OPTIONS", url, nil)
@@ -1031,7 +1067,7 @@ func (s *SDK) OptionsBlockIDTransactionIndex(ctx context.Context, request operat
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1064,7 +1100,7 @@ func (s *SDK) OptionsBlockIDTransactionIndex(ctx context.Context, request operat
 }
 
 func (s *SDK) OptionsBlockchain(ctx context.Context) (*operations.OptionsBlockchainResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/blockchain"
 
 	req, err := http.NewRequestWithContext(ctx, "OPTIONS", url, nil)
@@ -1072,7 +1108,7 @@ func (s *SDK) OptionsBlockchain(ctx context.Context) (*operations.OptionsBlockch
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1105,7 +1141,7 @@ func (s *SDK) OptionsBlockchain(ctx context.Context) (*operations.OptionsBlockch
 }
 
 func (s *SDK) OptionsBlockchainID(ctx context.Context, request operations.OptionsBlockchainIDRequest) (*operations.OptionsBlockchainIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/blockchain/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "OPTIONS", url, nil)
@@ -1113,7 +1149,7 @@ func (s *SDK) OptionsBlockchainID(ctx context.Context, request operations.Option
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1146,7 +1182,7 @@ func (s *SDK) OptionsBlockchainID(ctx context.Context, request operations.Option
 }
 
 func (s *SDK) OptionsContract(ctx context.Context) (*operations.OptionsContractResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/contract"
 
 	req, err := http.NewRequestWithContext(ctx, "OPTIONS", url, nil)
@@ -1154,7 +1190,7 @@ func (s *SDK) OptionsContract(ctx context.Context) (*operations.OptionsContractR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1187,7 +1223,7 @@ func (s *SDK) OptionsContract(ctx context.Context) (*operations.OptionsContractR
 }
 
 func (s *SDK) OptionsContractID(ctx context.Context, request operations.OptionsContractIDRequest) (*operations.OptionsContractIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/contract/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "OPTIONS", url, nil)
@@ -1195,7 +1231,7 @@ func (s *SDK) OptionsContractID(ctx context.Context, request operations.OptionsC
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1228,7 +1264,7 @@ func (s *SDK) OptionsContractID(ctx context.Context, request operations.OptionsC
 }
 
 func (s *SDK) OptionsEcho(ctx context.Context) (*operations.OptionsEchoResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/echo"
 
 	req, err := http.NewRequestWithContext(ctx, "OPTIONS", url, nil)
@@ -1236,7 +1272,7 @@ func (s *SDK) OptionsEcho(ctx context.Context) (*operations.OptionsEchoResponse,
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1269,7 +1305,7 @@ func (s *SDK) OptionsEcho(ctx context.Context) (*operations.OptionsEchoResponse,
 }
 
 func (s *SDK) OptionsErc20(ctx context.Context) (*operations.OptionsErc20Response, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/erc20"
 
 	req, err := http.NewRequestWithContext(ctx, "OPTIONS", url, nil)
@@ -1277,7 +1313,7 @@ func (s *SDK) OptionsErc20(ctx context.Context) (*operations.OptionsErc20Respons
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1310,7 +1346,7 @@ func (s *SDK) OptionsErc20(ctx context.Context) (*operations.OptionsErc20Respons
 }
 
 func (s *SDK) OptionsErc20Address(ctx context.Context, request operations.OptionsErc20AddressRequest) (*operations.OptionsErc20AddressResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/erc20/{address}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "OPTIONS", url, nil)
@@ -1318,7 +1354,7 @@ func (s *SDK) OptionsErc20Address(ctx context.Context, request operations.Option
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1351,7 +1387,7 @@ func (s *SDK) OptionsErc20Address(ctx context.Context, request operations.Option
 }
 
 func (s *SDK) OptionsKey(ctx context.Context) (*operations.OptionsKeyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/key"
 
 	req, err := http.NewRequestWithContext(ctx, "OPTIONS", url, nil)
@@ -1359,7 +1395,7 @@ func (s *SDK) OptionsKey(ctx context.Context) (*operations.OptionsKeyResponse, e
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1392,7 +1428,7 @@ func (s *SDK) OptionsKey(ctx context.Context) (*operations.OptionsKeyResponse, e
 }
 
 func (s *SDK) OptionsKeyKey(ctx context.Context, request operations.OptionsKeyKeyRequest) (*operations.OptionsKeyKeyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/key/{key}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "OPTIONS", url, nil)
@@ -1400,7 +1436,7 @@ func (s *SDK) OptionsKeyKey(ctx context.Context, request operations.OptionsKeyKe
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1433,7 +1469,7 @@ func (s *SDK) OptionsKeyKey(ctx context.Context, request operations.OptionsKeyKe
 }
 
 func (s *SDK) OptionsTransaction(ctx context.Context) (*operations.OptionsTransactionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/transaction"
 
 	req, err := http.NewRequestWithContext(ctx, "OPTIONS", url, nil)
@@ -1441,7 +1477,7 @@ func (s *SDK) OptionsTransaction(ctx context.Context) (*operations.OptionsTransa
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1474,7 +1510,7 @@ func (s *SDK) OptionsTransaction(ctx context.Context) (*operations.OptionsTransa
 }
 
 func (s *SDK) OptionsTransactionHash(ctx context.Context, request operations.OptionsTransactionHashRequest) (*operations.OptionsTransactionHashResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/transaction/{hash}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "OPTIONS", url, nil)
@@ -1482,7 +1518,7 @@ func (s *SDK) OptionsTransactionHash(ctx context.Context, request operations.Opt
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1515,7 +1551,7 @@ func (s *SDK) OptionsTransactionHash(ctx context.Context, request operations.Opt
 }
 
 func (s *SDK) OptionsTransactionHashReceipt(ctx context.Context, request operations.OptionsTransactionHashReceiptRequest) (*operations.OptionsTransactionHashReceiptResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/transaction/{hash}/receipt", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "OPTIONS", url, nil)
@@ -1523,7 +1559,7 @@ func (s *SDK) OptionsTransactionHashReceipt(ctx context.Context, request operati
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1556,7 +1592,7 @@ func (s *SDK) OptionsTransactionHashReceipt(ctx context.Context, request operati
 }
 
 func (s *SDK) OptionsVersion(ctx context.Context) (*operations.OptionsVersionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/version"
 
 	req, err := http.NewRequestWithContext(ctx, "OPTIONS", url, nil)
@@ -1564,7 +1600,7 @@ func (s *SDK) OptionsVersion(ctx context.Context) (*operations.OptionsVersionRes
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1597,7 +1633,7 @@ func (s *SDK) OptionsVersion(ctx context.Context) (*operations.OptionsVersionRes
 }
 
 func (s *SDK) OptionsWallet(ctx context.Context) (*operations.OptionsWalletResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/wallet"
 
 	req, err := http.NewRequestWithContext(ctx, "OPTIONS", url, nil)
@@ -1605,7 +1641,7 @@ func (s *SDK) OptionsWallet(ctx context.Context) (*operations.OptionsWalletRespo
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1638,7 +1674,7 @@ func (s *SDK) OptionsWallet(ctx context.Context) (*operations.OptionsWalletRespo
 }
 
 func (s *SDK) OptionsWalletAccount(ctx context.Context) (*operations.OptionsWalletAccountResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/wallet/account"
 
 	req, err := http.NewRequestWithContext(ctx, "OPTIONS", url, nil)
@@ -1646,7 +1682,7 @@ func (s *SDK) OptionsWalletAccount(ctx context.Context) (*operations.OptionsWall
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1679,7 +1715,7 @@ func (s *SDK) OptionsWalletAccount(ctx context.Context) (*operations.OptionsWall
 }
 
 func (s *SDK) OptionsWalletAccountID(ctx context.Context, request operations.OptionsWalletAccountIDRequest) (*operations.OptionsWalletAccountIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/wallet/account/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "OPTIONS", url, nil)
@@ -1687,7 +1723,7 @@ func (s *SDK) OptionsWalletAccountID(ctx context.Context, request operations.Opt
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1720,7 +1756,7 @@ func (s *SDK) OptionsWalletAccountID(ctx context.Context, request operations.Opt
 }
 
 func (s *SDK) OptionsWalletAccountIDPay(ctx context.Context, request operations.OptionsWalletAccountIDPayRequest) (*operations.OptionsWalletAccountIDPayResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/wallet/account/{id}/pay", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "OPTIONS", url, nil)
@@ -1728,7 +1764,7 @@ func (s *SDK) OptionsWalletAccountIDPay(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1760,8 +1796,9 @@ func (s *SDK) OptionsWalletAccountIDPay(ctx context.Context, request operations.
 	return res, nil
 }
 
+// PostAccount - Create new account
 func (s *SDK) PostAccount(ctx context.Context, request operations.PostAccountRequest) (*operations.PostAccountResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -1769,7 +1806,7 @@ func (s *SDK) PostAccount(ctx context.Context, request operations.PostAccountReq
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1801,8 +1838,9 @@ func (s *SDK) PostAccount(ctx context.Context, request operations.PostAccountReq
 	return res, nil
 }
 
+// PostContract - Create a new smart contract
 func (s *SDK) PostContract(ctx context.Context) (*operations.PostContractResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/contract"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -1810,7 +1848,7 @@ func (s *SDK) PostContract(ctx context.Context) (*operations.PostContractRespons
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1840,8 +1878,9 @@ func (s *SDK) PostContract(ctx context.Context) (*operations.PostContractRespons
 	return res, nil
 }
 
+// PostContractID - Call the contract
 func (s *SDK) PostContractID(ctx context.Context, request operations.PostContractIDRequest) (*operations.PostContractIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/contract/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -1849,7 +1888,7 @@ func (s *SDK) PostContractID(ctx context.Context, request operations.PostContrac
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1882,7 +1921,7 @@ func (s *SDK) PostContractID(ctx context.Context, request operations.PostContrac
 }
 
 func (s *SDK) PostErc20(ctx context.Context) (*operations.PostErc20Response, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/erc20"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -1890,7 +1929,7 @@ func (s *SDK) PostErc20(ctx context.Context) (*operations.PostErc20Response, err
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1920,8 +1959,9 @@ func (s *SDK) PostErc20(ctx context.Context) (*operations.PostErc20Response, err
 	return res, nil
 }
 
+// PostErc20Address - Transfer tokens to another account
 func (s *SDK) PostErc20Address(ctx context.Context, request operations.PostErc20AddressRequest) (*operations.PostErc20AddressResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/erc20/{address}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -1929,7 +1969,7 @@ func (s *SDK) PostErc20Address(ctx context.Context, request operations.PostErc20
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1960,7 +2000,7 @@ func (s *SDK) PostErc20Address(ctx context.Context, request operations.PostErc20
 }
 
 func (s *SDK) PostKey(ctx context.Context) (*operations.PostKeyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/key"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -1968,7 +2008,7 @@ func (s *SDK) PostKey(ctx context.Context) (*operations.PostKeyResponse, error) 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1998,8 +2038,9 @@ func (s *SDK) PostKey(ctx context.Context) (*operations.PostKeyResponse, error) 
 	return res, nil
 }
 
+// PostTransaction - Create a new transaction. Transfer Ether between accounts
 func (s *SDK) PostTransaction(ctx context.Context, request operations.PostTransactionRequest) (*operations.PostTransactionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/transaction"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -2007,7 +2048,7 @@ func (s *SDK) PostTransaction(ctx context.Context, request operations.PostTransa
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2039,8 +2080,9 @@ func (s *SDK) PostTransaction(ctx context.Context, request operations.PostTransa
 	return res, nil
 }
 
+// PostWallet - Create personal wallet
 func (s *SDK) PostWallet(ctx context.Context) (*operations.PostWalletResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/wallet"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -2048,7 +2090,7 @@ func (s *SDK) PostWallet(ctx context.Context) (*operations.PostWalletResponse, e
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2079,7 +2121,7 @@ func (s *SDK) PostWallet(ctx context.Context) (*operations.PostWalletResponse, e
 }
 
 func (s *SDK) PostWalletAccount(ctx context.Context) (*operations.PostWalletAccountResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/wallet/account"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -2087,7 +2129,7 @@ func (s *SDK) PostWalletAccount(ctx context.Context) (*operations.PostWalletAcco
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2118,7 +2160,7 @@ func (s *SDK) PostWalletAccount(ctx context.Context) (*operations.PostWalletAcco
 }
 
 func (s *SDK) PostWalletAccountIDContract(ctx context.Context, request operations.PostWalletAccountIDContractRequest) (*operations.PostWalletAccountIDContractResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/wallet/account/{id}/contract", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -2126,7 +2168,7 @@ func (s *SDK) PostWalletAccountIDContract(ctx context.Context, request operation
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2157,7 +2199,7 @@ func (s *SDK) PostWalletAccountIDContract(ctx context.Context, request operation
 }
 
 func (s *SDK) PostWalletAccountIDErc20(ctx context.Context, request operations.PostWalletAccountIDErc20Request) (*operations.PostWalletAccountIDErc20Response, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/wallet/account/{id}/erc20", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -2165,7 +2207,7 @@ func (s *SDK) PostWalletAccountIDErc20(ctx context.Context, request operations.P
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2195,8 +2237,9 @@ func (s *SDK) PostWalletAccountIDErc20(ctx context.Context, request operations.P
 	return res, nil
 }
 
+// PostWalletAccountIDPay - Send payment from the account held within the wallet
 func (s *SDK) PostWalletAccountIDPay(ctx context.Context, request operations.PostWalletAccountIDPayRequest) (*operations.PostWalletAccountIDPayResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/wallet/account/{id}/pay", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -2204,7 +2247,7 @@ func (s *SDK) PostWalletAccountIDPay(ctx context.Context, request operations.Pos
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

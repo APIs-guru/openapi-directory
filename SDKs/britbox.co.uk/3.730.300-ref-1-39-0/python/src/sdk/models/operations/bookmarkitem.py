@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class BookmarkItemPathParams:
-    item_id: str = field(default=None, metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
+    item_id: str = field(metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,20 +17,20 @@ class BookmarkItemQueryParams:
 
 @dataclass
 class BookmarkItemSecurity:
-    profile_auth: shared.SchemeProfileAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    profile_auth: shared.SchemeProfileAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BookmarkItemRequest:
-    path_params: BookmarkItemPathParams = field(default=None)
-    query_params: BookmarkItemQueryParams = field(default=None)
-    security: BookmarkItemSecurity = field(default=None)
+    path_params: BookmarkItemPathParams = field()
+    query_params: BookmarkItemQueryParams = field()
+    security: BookmarkItemSecurity = field()
     
 
 @dataclass
 class BookmarkItemResponse:
+    content_type: str = field()
+    status_code: int = field()
     bookmark: Optional[shared.Bookmark] = field(default=None)
-    content_type: str = field(default=None)
     service_error: Optional[shared.ServiceError] = field(default=None)
-    status_code: int = field(default=None)
     

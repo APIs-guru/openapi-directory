@@ -9,12 +9,12 @@ class GetKeyQueryParams:
 
 @dataclass
 class GetKeyRequest:
-    query_params: GetKeyQueryParams = field(default=None)
+    query_params: GetKeyQueryParams = field()
     
 
 @dataclass
 class GetKeyResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

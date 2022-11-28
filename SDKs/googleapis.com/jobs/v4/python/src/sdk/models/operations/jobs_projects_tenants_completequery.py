@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class JobsProjectsTenantsCompleteQueryPathParams:
-    tenant: str = field(default=None, metadata={'path_param': { 'field_name': 'tenant', 'style': 'simple', 'explode': False }})
+    tenant: str = field(metadata={'path_param': { 'field_name': 'tenant', 'style': 'simple', 'explode': False }})
     
 class JobsProjectsTenantsCompleteQueryScopeEnum(str, Enum):
     COMPLETION_SCOPE_UNSPECIFIED = "COMPLETION_SCOPE_UNSPECIFIED"
@@ -42,14 +43,14 @@ class JobsProjectsTenantsCompleteQueryQueryParams:
 
 @dataclass
 class JobsProjectsTenantsCompleteQuerySecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class JobsProjectsTenantsCompleteQuerySecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -60,14 +61,14 @@ class JobsProjectsTenantsCompleteQuerySecurity:
 
 @dataclass
 class JobsProjectsTenantsCompleteQueryRequest:
-    path_params: JobsProjectsTenantsCompleteQueryPathParams = field(default=None)
-    query_params: JobsProjectsTenantsCompleteQueryQueryParams = field(default=None)
-    security: JobsProjectsTenantsCompleteQuerySecurity = field(default=None)
+    path_params: JobsProjectsTenantsCompleteQueryPathParams = field()
+    query_params: JobsProjectsTenantsCompleteQueryQueryParams = field()
+    security: JobsProjectsTenantsCompleteQuerySecurity = field()
     
 
 @dataclass
 class JobsProjectsTenantsCompleteQueryResponse:
+    content_type: str = field()
+    status_code: int = field()
     complete_query_response: Optional[shared.CompleteQueryResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
@@ -24,18 +27,18 @@ class ListTemplatesHeaders:
 
 @dataclass
 class ListTemplatesRequest:
-    query_params: ListTemplatesQueryParams = field(default=None)
-    headers: ListTemplatesHeaders = field(default=None)
+    headers: ListTemplatesHeaders = field()
+    query_params: ListTemplatesQueryParams = field()
     
 
 @dataclass
 class ListTemplatesResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     forbidden_exception: Optional[Any] = field(default=None)
     internal_server_error_exception: Optional[Any] = field(default=None)
     list_templates_response: Optional[shared.ListTemplatesResponse] = field(default=None)
     method_not_allowed_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

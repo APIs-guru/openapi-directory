@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Version } from "./version";
 
+
 export enum DistributionArchitectureEnum {
-    ArchitectureUnspecified = "ARCHITECTURE_UNSPECIFIED"
-,    X86 = "X86"
-,    X64 = "X64"
+    ArchitectureUnspecified = "ARCHITECTURE_UNSPECIFIED",
+    X86 = "X86",
+    X64 = "X64"
 }
 
 
@@ -13,21 +14,21 @@ export enum DistributionArchitectureEnum {
  * This represents a particular channel of distribution for a given package. e.g. Debian's jessie-backports dpkg mirror
 **/
 export class Distribution extends SpeakeasyBase {
-  @Metadata({ data: "json, name=architecture" })
+  @SpeakeasyMetadata({ data: "json, name=architecture" })
   architecture?: DistributionArchitectureEnum;
 
-  @Metadata({ data: "json, name=cpeUri" })
+  @SpeakeasyMetadata({ data: "json, name=cpeUri" })
   cpeUri?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=latestVersion" })
+  @SpeakeasyMetadata({ data: "json, name=latestVersion" })
   latestVersion?: Version;
 
-  @Metadata({ data: "json, name=maintainer" })
+  @SpeakeasyMetadata({ data: "json, name=maintainer" })
   maintainer?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }

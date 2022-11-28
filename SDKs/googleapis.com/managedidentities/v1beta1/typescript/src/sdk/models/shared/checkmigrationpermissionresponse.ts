@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OnPremDomainSidDetails } from "./onpremdomainsiddetails";
 
+
 export enum CheckMigrationPermissionResponseStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Disabled = "DISABLED"
-,    Enabled = "ENABLED"
-,    NeedsMaintenance = "NEEDS_MAINTENANCE"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Disabled = "DISABLED",
+    Enabled = "ENABLED",
+    NeedsMaintenance = "NEEDS_MAINTENANCE"
 }
 
 
@@ -15,9 +15,9 @@ export enum CheckMigrationPermissionResponseStateEnum {
  * CheckMigrationPermissionResponse is the response message for CheckMigrationPermission method.
 **/
 export class CheckMigrationPermissionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=onpremDomains", elemType: shared.OnPremDomainSidDetails })
+  @SpeakeasyMetadata({ data: "json, name=onpremDomains", elemType: OnPremDomainSidDetails })
   onpremDomains?: OnPremDomainSidDetails[];
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: CheckMigrationPermissionResponseStateEnum;
 }

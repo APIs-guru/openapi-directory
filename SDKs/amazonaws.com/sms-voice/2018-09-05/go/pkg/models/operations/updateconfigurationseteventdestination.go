@@ -19,6 +19,8 @@ type UpdateConfigurationSetEventDestinationHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateConfigurationSetEventDestinationRequestBodyEventDestination
+// An object that defines a single event destination.
 type UpdateConfigurationSetEventDestinationRequestBodyEventDestination struct {
 	CloudWatchLogsDestination  *shared.CloudWatchLogsDestination  `json:"CloudWatchLogsDestination,omitempty"`
 	Enabled                    *bool                              `json:"Enabled,omitempty"`

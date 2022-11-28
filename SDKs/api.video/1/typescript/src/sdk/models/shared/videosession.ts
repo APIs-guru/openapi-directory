@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VideoSessionClient } from "./videosessionclient";
 import { VideoSessionDevice } from "./videosessiondevice";
 import { VideoSessionLocation } from "./videosessionlocation";
@@ -7,22 +7,23 @@ import { VideoSessionReferrer } from "./videosessionreferrer";
 import { VideoSessionSession } from "./videosessionsession";
 
 
+
 export class VideoSession extends SpeakeasyBase {
-  @Metadata({ data: "json, name=client" })
+  @SpeakeasyMetadata({ data: "json, name=client" })
   client?: VideoSessionClient;
 
-  @Metadata({ data: "json, name=device" })
+  @SpeakeasyMetadata({ data: "json, name=device" })
   device?: VideoSessionDevice;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: VideoSessionLocation;
 
-  @Metadata({ data: "json, name=os" })
+  @SpeakeasyMetadata({ data: "json, name=os" })
   os?: VideoSessionOs;
 
-  @Metadata({ data: "json, name=referrer" })
+  @SpeakeasyMetadata({ data: "json, name=referrer" })
   referrer?: VideoSessionReferrer;
 
-  @Metadata({ data: "json, name=session" })
+  @SpeakeasyMetadata({ data: "json, name=session" })
   session?: VideoSessionSession;
 }

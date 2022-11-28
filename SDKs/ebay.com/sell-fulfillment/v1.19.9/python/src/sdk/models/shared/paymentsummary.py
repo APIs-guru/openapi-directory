@@ -1,15 +1,18 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import payment
-from . import orderrefund
-from . import amount
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class PaymentSummary:
-    payments: Optional[List[payment.Payment]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'payments' }})
-    refunds: Optional[List[orderrefund.OrderRefund]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'refunds' }})
-    total_due_seller: Optional[amount.Amount] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'totalDueSeller' }})
+    r"""PaymentSummary
+    This type contains information about the various monetary exchanges that apply to the net balance due for the order.
+    """
+    
+    payments: Optional[List[Payment]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('payments') }})
+    refunds: Optional[List[OrderRefund]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('refunds') }})
+    total_due_seller: Optional[Amount] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('totalDueSeller') }})
     

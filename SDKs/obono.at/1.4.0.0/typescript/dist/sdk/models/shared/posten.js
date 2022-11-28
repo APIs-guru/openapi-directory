@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var PostenSatzEnum;
 (function (PostenSatzEnum) {
     PostenSatzEnum["Normal"] = "NORMAL";
@@ -37,35 +37,35 @@ var Posten = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Bezeichnung" }),
+        SpeakeasyMetadata({ data: "json, name=Bezeichnung" }),
         __metadata("design:type", String)
     ], Posten.prototype, "bezeichnung", void 0);
     __decorate([
-        Metadata({ data: "json, name=BruttoBetrag" }),
+        SpeakeasyMetadata({ data: "json, name=BruttoBetrag" }),
         __metadata("design:type", Number)
     ], Posten.prototype, "bruttoBetrag", void 0);
     __decorate([
-        Metadata({ data: "json, name=Externer-Beleg-Belegkreis" }),
+        SpeakeasyMetadata({ data: "json, name=Externer-Beleg-Belegkreis" }),
         __metadata("design:type", String)
     ], Posten.prototype, "externerBelegBelegkreis", void 0);
     __decorate([
-        Metadata({ data: "json, name=Externer-Beleg-Bezeichnung" }),
+        SpeakeasyMetadata({ data: "json, name=Externer-Beleg-Bezeichnung" }),
         __metadata("design:type", String)
     ], Posten.prototype, "externerBelegBezeichnung", void 0);
     __decorate([
-        Metadata({ data: "json, name=Externer-Beleg-Referenz" }),
+        SpeakeasyMetadata({ data: "json, name=Externer-Beleg-Referenz" }),
         __metadata("design:type", String)
     ], Posten.prototype, "externerBelegReferenz", void 0);
     __decorate([
-        Metadata({ data: "json, name=Menge" }),
+        SpeakeasyMetadata({ data: "json, name=Menge" }),
         __metadata("design:type", Number)
     ], Posten.prototype, "menge", void 0);
     __decorate([
-        Metadata({ data: "json, name=NettoBetrag" }),
+        SpeakeasyMetadata({ data: "json, name=NettoBetrag" }),
         __metadata("design:type", Number)
     ], Posten.prototype, "nettoBetrag", void 0);
     __decorate([
-        Metadata({ data: "json, name=Satz" }),
+        SpeakeasyMetadata({ data: "json, name=Satz" }),
         __metadata("design:type", String)
     ], Posten.prototype, "satz", void 0);
     return Posten;

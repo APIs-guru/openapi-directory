@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BenchmarkMetadata
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * This complex type defines the fields that comprise the benchmark against which the seller's performance is compared. The comparison determines the seller's rating for the metric.
 **/
 export class BenchmarkMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=average" })
+  @SpeakeasyMetadata({ data: "json, name=average" })
   average?: string;
 }

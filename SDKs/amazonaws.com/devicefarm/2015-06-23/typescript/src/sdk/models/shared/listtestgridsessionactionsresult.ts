@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TestGridSessionAction } from "./testgridsessionaction";
 
 
+
 export class ListTestGridSessionActionsResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actions", elemType: shared.TestGridSessionAction })
+  @SpeakeasyMetadata({ data: "json, name=actions", elemType: TestGridSessionAction })
   actions?: TestGridSessionAction[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

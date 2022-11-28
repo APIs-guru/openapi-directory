@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostModifyVpcEndpointServicePermissionsActionEnum(str, Enum):
     MODIFY_VPC_ENDPOINT_SERVICE_PERMISSIONS = "ModifyVpcEndpointServicePermissions"
@@ -10,8 +14,8 @@ class PostModifyVpcEndpointServicePermissionsVersionEnum(str, Enum):
 
 @dataclass
 class PostModifyVpcEndpointServicePermissionsQueryParams:
-    action: PostModifyVpcEndpointServicePermissionsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostModifyVpcEndpointServicePermissionsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostModifyVpcEndpointServicePermissionsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostModifyVpcEndpointServicePermissionsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostModifyVpcEndpointServicePermissionsHeaders:
 
 @dataclass
 class PostModifyVpcEndpointServicePermissionsRequest:
-    query_params: PostModifyVpcEndpointServicePermissionsQueryParams = field(default=None)
-    headers: PostModifyVpcEndpointServicePermissionsHeaders = field(default=None)
+    headers: PostModifyVpcEndpointServicePermissionsHeaders = field()
+    query_params: PostModifyVpcEndpointServicePermissionsQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostModifyVpcEndpointServicePermissionsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

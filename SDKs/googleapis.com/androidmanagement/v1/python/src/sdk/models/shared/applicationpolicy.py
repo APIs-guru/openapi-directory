@@ -1,9 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import extensionconfig
-from . import managedconfigurationtemplate
-from . import permissiongrant
+from sdk import utils
+from . import *
 
 class ApplicationPolicyAlwaysOnVpnLockdownExemptionEnum(str, Enum):
     ALWAYS_ON_VPN_LOCKDOWN_EXEMPTION_UNSPECIFIED = "ALWAYS_ON_VPN_LOCKDOWN_EXEMPTION_UNSPECIFIED"
@@ -51,19 +54,23 @@ class ApplicationPolicyInstallTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ApplicationPolicy:
-    accessible_track_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'accessibleTrackIds' }})
-    always_on_vpn_lockdown_exemption: Optional[ApplicationPolicyAlwaysOnVpnLockdownExemptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'alwaysOnVpnLockdownExemption' }})
-    auto_update_mode: Optional[ApplicationPolicyAutoUpdateModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'autoUpdateMode' }})
-    connected_work_and_personal_app: Optional[ApplicationPolicyConnectedWorkAndPersonalAppEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connectedWorkAndPersonalApp' }})
-    default_permission_policy: Optional[ApplicationPolicyDefaultPermissionPolicyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'defaultPermissionPolicy' }})
-    delegated_scopes: Optional[List[ApplicationPolicyDelegatedScopesEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'delegatedScopes' }})
-    disabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'disabled' }})
-    extension_config: Optional[extensionconfig.ExtensionConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'extensionConfig' }})
-    install_type: Optional[ApplicationPolicyInstallTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'installType' }})
-    lock_task_allowed: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lockTaskAllowed' }})
-    managed_configuration: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'managedConfiguration' }})
-    managed_configuration_template: Optional[managedconfigurationtemplate.ManagedConfigurationTemplate] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'managedConfigurationTemplate' }})
-    minimum_version_code: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'minimumVersionCode' }})
-    package_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'packageName' }})
-    permission_grants: Optional[List[permissiongrant.PermissionGrant]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'permissionGrants' }})
+    r"""ApplicationPolicy
+    Policy for an individual app.
+    """
+    
+    accessible_track_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('accessibleTrackIds') }})
+    always_on_vpn_lockdown_exemption: Optional[ApplicationPolicyAlwaysOnVpnLockdownExemptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('alwaysOnVpnLockdownExemption') }})
+    auto_update_mode: Optional[ApplicationPolicyAutoUpdateModeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('autoUpdateMode') }})
+    connected_work_and_personal_app: Optional[ApplicationPolicyConnectedWorkAndPersonalAppEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('connectedWorkAndPersonalApp') }})
+    default_permission_policy: Optional[ApplicationPolicyDefaultPermissionPolicyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('defaultPermissionPolicy') }})
+    delegated_scopes: Optional[List[ApplicationPolicyDelegatedScopesEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('delegatedScopes') }})
+    disabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('disabled') }})
+    extension_config: Optional[ExtensionConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('extensionConfig') }})
+    install_type: Optional[ApplicationPolicyInstallTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('installType') }})
+    lock_task_allowed: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lockTaskAllowed') }})
+    managed_configuration: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('managedConfiguration') }})
+    managed_configuration_template: Optional[ManagedConfigurationTemplate] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('managedConfigurationTemplate') }})
+    minimum_version_code: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('minimumVersionCode') }})
+    package_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('packageName') }})
+    permission_grants: Optional[List[PermissionGrant]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('permissionGrants') }})
     

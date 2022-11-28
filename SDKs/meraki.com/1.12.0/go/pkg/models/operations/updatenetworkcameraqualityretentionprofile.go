@@ -20,6 +20,8 @@ const (
 	UpdateNetworkCameraQualityRetentionProfileRequestBodyVideoSettingsMv12Mv22Mv72ResolutionEnumOneThousandNineHundredAndTwentyx1080 UpdateNetworkCameraQualityRetentionProfileRequestBodyVideoSettingsMv12Mv22Mv72ResolutionEnum = "1920x1080"
 )
 
+// UpdateNetworkCameraQualityRetentionProfileRequestBodyVideoSettingsMv12Mv22Mv72
+// Quality and resolution for MV12/MV22/MV72 camera models.
 type UpdateNetworkCameraQualityRetentionProfileRequestBodyVideoSettingsMv12Mv22Mv72 struct {
 	Quality    UpdateNetworkCameraQualityRetentionProfileRequestBodyVideoSettingsMv12Mv22Mv72QualityEnum    `json:"quality"`
 	Resolution UpdateNetworkCameraQualityRetentionProfileRequestBodyVideoSettingsMv12Mv22Mv72ResolutionEnum `json:"resolution"`
@@ -40,6 +42,8 @@ const (
 	UpdateNetworkCameraQualityRetentionProfileRequestBodyVideoSettingsMv12WeResolutionEnumOneThousandNineHundredAndTwentyx1080 UpdateNetworkCameraQualityRetentionProfileRequestBodyVideoSettingsMv12WeResolutionEnum = "1920x1080"
 )
 
+// UpdateNetworkCameraQualityRetentionProfileRequestBodyVideoSettingsMv12We
+// Quality and resolution for MV12WE camera models.
 type UpdateNetworkCameraQualityRetentionProfileRequestBodyVideoSettingsMv12We struct {
 	Quality    UpdateNetworkCameraQualityRetentionProfileRequestBodyVideoSettingsMv12WeQualityEnum    `json:"quality"`
 	Resolution UpdateNetworkCameraQualityRetentionProfileRequestBodyVideoSettingsMv12WeResolutionEnum `json:"resolution"`
@@ -59,6 +63,8 @@ const (
 	UpdateNetworkCameraQualityRetentionProfileRequestBodyVideoSettingsMv21Mv71ResolutionEnumOneThousandTwoHundredAndEightyx720 UpdateNetworkCameraQualityRetentionProfileRequestBodyVideoSettingsMv21Mv71ResolutionEnum = "1280x720"
 )
 
+// UpdateNetworkCameraQualityRetentionProfileRequestBodyVideoSettingsMv21Mv71
+// Quality and resolution for MV21/MV71 camera models.
 type UpdateNetworkCameraQualityRetentionProfileRequestBodyVideoSettingsMv21Mv71 struct {
 	Quality    UpdateNetworkCameraQualityRetentionProfileRequestBodyVideoSettingsMv21Mv71QualityEnum    `json:"quality"`
 	Resolution UpdateNetworkCameraQualityRetentionProfileRequestBodyVideoSettingsMv21Mv71ResolutionEnum `json:"resolution"`
@@ -80,6 +86,8 @@ const (
 	UpdateNetworkCameraQualityRetentionProfileRequestBodyVideoSettingsMv22XMv72XResolutionEnumTwoThousandSixHundredAndEightyEightx1512 UpdateNetworkCameraQualityRetentionProfileRequestBodyVideoSettingsMv22XMv72XResolutionEnum = "2688x1512"
 )
 
+// UpdateNetworkCameraQualityRetentionProfileRequestBodyVideoSettingsMv22XMv72X
+// Quality and resolution for MV22X/MV72X camera models.
 type UpdateNetworkCameraQualityRetentionProfileRequestBodyVideoSettingsMv22XMv72X struct {
 	Quality    UpdateNetworkCameraQualityRetentionProfileRequestBodyVideoSettingsMv22XMv72XQualityEnum    `json:"quality"`
 	Resolution UpdateNetworkCameraQualityRetentionProfileRequestBodyVideoSettingsMv22XMv72XResolutionEnum `json:"resolution"`
@@ -100,11 +108,15 @@ const (
 	UpdateNetworkCameraQualityRetentionProfileRequestBodyVideoSettingsMv32ResolutionEnumTwoThousandAndFiftyEightx2058 UpdateNetworkCameraQualityRetentionProfileRequestBodyVideoSettingsMv32ResolutionEnum = "2058x2058"
 )
 
+// UpdateNetworkCameraQualityRetentionProfileRequestBodyVideoSettingsMv32
+// Quality and resolution for MV32 camera models.
 type UpdateNetworkCameraQualityRetentionProfileRequestBodyVideoSettingsMv32 struct {
 	Quality    UpdateNetworkCameraQualityRetentionProfileRequestBodyVideoSettingsMv32QualityEnum    `json:"quality"`
 	Resolution UpdateNetworkCameraQualityRetentionProfileRequestBodyVideoSettingsMv32ResolutionEnum `json:"resolution"`
 }
 
+// UpdateNetworkCameraQualityRetentionProfileRequestBodyVideoSettings
+// Video quality and resolution settings for all the camera models.
 type UpdateNetworkCameraQualityRetentionProfileRequestBodyVideoSettings struct {
 	Mv12Mv22Mv72 *UpdateNetworkCameraQualityRetentionProfileRequestBodyVideoSettingsMv12Mv22Mv72 `json:"MV12/MV22/MV72,omitempty"`
 	Mv12We       *UpdateNetworkCameraQualityRetentionProfileRequestBodyVideoSettingsMv12We       `json:"MV12WE,omitempty"`

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PostCisInstructionIntoSubContractorPathParams = /** @class */ (function (_super) {
     __extends(PostCisInstructionIntoSubContractorPathParams, _super);
@@ -30,11 +30,11 @@ var PostCisInstructionIntoSubContractorPathParams = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=EmployerId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=EmployerId" }),
         __metadata("design:type", String)
     ], PostCisInstructionIntoSubContractorPathParams.prototype, "employerId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=SubContractorId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=SubContractorId" }),
         __metadata("design:type", String)
     ], PostCisInstructionIntoSubContractorPathParams.prototype, "subContractorId", void 0);
     return PostCisInstructionIntoSubContractorPathParams;
@@ -46,11 +46,11 @@ var PostCisInstructionIntoSubContractorHeaders = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
         __metadata("design:type", String)
     ], PostCisInstructionIntoSubContractorHeaders.prototype, "apiVersion", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Authorization" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" }),
         __metadata("design:type", String)
     ], PostCisInstructionIntoSubContractorHeaders.prototype, "authorization", void 0);
     return PostCisInstructionIntoSubContractorHeaders;
@@ -62,15 +62,15 @@ var PostCisInstructionIntoSubContractorRequest = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostCisInstructionIntoSubContractorPathParams)
     ], PostCisInstructionIntoSubContractorRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostCisInstructionIntoSubContractorHeaders)
     ], PostCisInstructionIntoSubContractorRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.CisInstruction)
     ], PostCisInstructionIntoSubContractorRequest.prototype, "request", void 0);
     return PostCisInstructionIntoSubContractorRequest;
@@ -82,19 +82,19 @@ var PostCisInstructionIntoSubContractorResponse = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostCisInstructionIntoSubContractorResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorModel)
     ], PostCisInstructionIntoSubContractorResponse.prototype, "errorModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Link)
     ], PostCisInstructionIntoSubContractorResponse.prototype, "link", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostCisInstructionIntoSubContractorResponse.prototype, "statusCode", void 0);
     return PostCisInstructionIntoSubContractorResponse;

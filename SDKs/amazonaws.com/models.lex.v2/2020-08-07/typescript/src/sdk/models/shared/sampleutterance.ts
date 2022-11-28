@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SampleUtterance
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A sample utterance that invokes an intent or respond to a slot elicitation prompt.
 **/
 export class SampleUtterance extends SpeakeasyBase {
-  @Metadata({ data: "json, name=utterance" })
+  @SpeakeasyMetadata({ data: "json, name=utterance" })
   utterance: string;
 }

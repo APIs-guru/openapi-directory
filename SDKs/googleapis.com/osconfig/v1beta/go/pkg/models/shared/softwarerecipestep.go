@@ -1,5 +1,7 @@
 package shared
 
+// SoftwareRecipeStep
+// An action that can be taken as part of installing or updating a recipe.
 type SoftwareRecipeStep struct {
 	ArchiveExtraction *SoftwareRecipeStepExtractArchive `json:"archiveExtraction,omitempty"`
 	DpkgInstallation  *SoftwareRecipeStepInstallDpkg    `json:"dpkgInstallation,omitempty"`

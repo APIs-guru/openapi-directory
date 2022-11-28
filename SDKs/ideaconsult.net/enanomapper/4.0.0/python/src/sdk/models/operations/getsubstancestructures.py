@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetSubstanceStructuresPathParams:
-    db: shared.AmbitDatabaseIDEnum = field(default=None, metadata={'path_param': { 'field_name': 'db', 'style': 'simple', 'explode': False }})
-    uuid: str = field(default=None, metadata={'path_param': { 'field_name': 'uuid', 'style': 'simple', 'explode': False }})
+    db: shared.AmbitDatabaseIDEnum = field(metadata={'path_param': { 'field_name': 'db', 'style': 'simple', 'explode': False }})
+    uuid: str = field(metadata={'path_param': { 'field_name': 'uuid', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,13 +18,13 @@ class GetSubstanceStructuresQueryParams:
 
 @dataclass
 class GetSubstanceStructuresRequest:
-    path_params: GetSubstanceStructuresPathParams = field(default=None)
-    query_params: GetSubstanceStructuresQueryParams = field(default=None)
+    path_params: GetSubstanceStructuresPathParams = field()
+    query_params: GetSubstanceStructuresQueryParams = field()
     
 
 @dataclass
 class GetSubstanceStructuresResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     dataset: Optional[shared.Dataset] = field(default=None)
-    status_code: int = field(default=None)
     

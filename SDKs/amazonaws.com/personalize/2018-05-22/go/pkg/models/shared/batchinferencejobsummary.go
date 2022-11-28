@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// BatchInferenceJobSummary
+// A truncated version of the <a>BatchInferenceJob</a> datatype. The <a>ListBatchInferenceJobs</a> operation returns a list of batch inference job summaries.
 type BatchInferenceJobSummary struct {
 	BatchInferenceJobArn *string    `json:"batchInferenceJobArn,omitempty"`
 	CreationDateTime     *time.Time `json:"creationDateTime,omitempty"`

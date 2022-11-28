@@ -1,154 +1,155 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetApiV2PerformanceStatsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-RapidApi-Key" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-RapidApi-Key" })
   xRapidApiKey?: string;
 }
 
 
-export class GetApiV2PerformanceStatsRequest extends SpeakeasyBase {
-  @Metadata()
-  headers: GetApiV2PerformanceStatsHeaders;
-}
-
-
 export class GetApiV2PerformanceStats200ApplicationJsonDataAccuracy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=last_14_days" })
+  @SpeakeasyMetadata({ data: "json, name=last_14_days" })
   last14Days?: number;
 
-  @Metadata({ data: "json, name=last_30_days" })
+  @SpeakeasyMetadata({ data: "json, name=last_30_days" })
   last30Days?: number;
 
-  @Metadata({ data: "json, name=last_7_days" })
+  @SpeakeasyMetadata({ data: "json, name=last_7_days" })
   last7Days?: number;
 
-  @Metadata({ data: "json, name=yesterday" })
+  @SpeakeasyMetadata({ data: "json, name=yesterday" })
   yesterday?: number;
 }
 
 
 export class GetApiV2PerformanceStats200ApplicationJsonDataDetailsLast14Days extends SpeakeasyBase {
-  @Metadata({ data: "json, name=lost" })
+  @SpeakeasyMetadata({ data: "json, name=lost" })
   lost?: number;
 
-  @Metadata({ data: "json, name=pending" })
+  @SpeakeasyMetadata({ data: "json, name=pending" })
   pending?: number;
 
-  @Metadata({ data: "json, name=postponed" })
+  @SpeakeasyMetadata({ data: "json, name=postponed" })
   postponed?: number;
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total?: number;
 
-  @Metadata({ data: "json, name=won" })
+  @SpeakeasyMetadata({ data: "json, name=won" })
   won?: number;
 }
 
 
 export class GetApiV2PerformanceStats200ApplicationJsonDataDetailsLast30Days extends SpeakeasyBase {
-  @Metadata({ data: "json, name=lost" })
+  @SpeakeasyMetadata({ data: "json, name=lost" })
   lost?: number;
 
-  @Metadata({ data: "json, name=pending" })
+  @SpeakeasyMetadata({ data: "json, name=pending" })
   pending?: number;
 
-  @Metadata({ data: "json, name=postponed" })
+  @SpeakeasyMetadata({ data: "json, name=postponed" })
   postponed?: number;
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total?: number;
 
-  @Metadata({ data: "json, name=won" })
+  @SpeakeasyMetadata({ data: "json, name=won" })
   won?: number;
 }
 
 
 export class GetApiV2PerformanceStats200ApplicationJsonDataDetailsLast7Days extends SpeakeasyBase {
-  @Metadata({ data: "json, name=lost" })
+  @SpeakeasyMetadata({ data: "json, name=lost" })
   lost?: number;
 
-  @Metadata({ data: "json, name=pending" })
+  @SpeakeasyMetadata({ data: "json, name=pending" })
   pending?: number;
 
-  @Metadata({ data: "json, name=postponed" })
+  @SpeakeasyMetadata({ data: "json, name=postponed" })
   postponed?: number;
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total?: number;
 
-  @Metadata({ data: "json, name=won" })
+  @SpeakeasyMetadata({ data: "json, name=won" })
   won?: number;
 }
 
 
 export class GetApiV2PerformanceStats200ApplicationJsonDataDetailsYesterday extends SpeakeasyBase {
-  @Metadata({ data: "json, name=lost" })
+  @SpeakeasyMetadata({ data: "json, name=lost" })
   lost?: number;
 
-  @Metadata({ data: "json, name=pending" })
+  @SpeakeasyMetadata({ data: "json, name=pending" })
   pending?: number;
 
-  @Metadata({ data: "json, name=postponed" })
+  @SpeakeasyMetadata({ data: "json, name=postponed" })
   postponed?: number;
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total?: number;
 
-  @Metadata({ data: "json, name=won" })
+  @SpeakeasyMetadata({ data: "json, name=won" })
   won?: number;
 }
 
 
 export class GetApiV2PerformanceStats200ApplicationJsonDataDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=last_14_days" })
+  @SpeakeasyMetadata({ data: "json, name=last_14_days" })
   last14Days?: GetApiV2PerformanceStats200ApplicationJsonDataDetailsLast14Days;
 
-  @Metadata({ data: "json, name=last_30_days" })
+  @SpeakeasyMetadata({ data: "json, name=last_30_days" })
   last30Days?: GetApiV2PerformanceStats200ApplicationJsonDataDetailsLast30Days;
 
-  @Metadata({ data: "json, name=last_7_days" })
+  @SpeakeasyMetadata({ data: "json, name=last_7_days" })
   last7Days?: GetApiV2PerformanceStats200ApplicationJsonDataDetailsLast7Days;
 
-  @Metadata({ data: "json, name=yesterday" })
+  @SpeakeasyMetadata({ data: "json, name=yesterday" })
   yesterday?: GetApiV2PerformanceStats200ApplicationJsonDataDetailsYesterday;
 }
 
 
 export class GetApiV2PerformanceStats200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accuracy" })
+  @SpeakeasyMetadata({ data: "json, name=accuracy" })
   accuracy?: GetApiV2PerformanceStats200ApplicationJsonDataAccuracy;
 
-  @Metadata({ data: "json, name=details" })
+  @SpeakeasyMetadata({ data: "json, name=details" })
   details?: GetApiV2PerformanceStats200ApplicationJsonDataDetails;
 
-  @Metadata({ data: "json, name=market" })
+  @SpeakeasyMetadata({ data: "json, name=market" })
   market?: string;
 }
 
 
 export class GetApiV2PerformanceStats200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: GetApiV2PerformanceStats200ApplicationJsonData;
 }
 
 
 export class GetApiV2PerformanceStats404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors" })
+  @SpeakeasyMetadata({ data: "json, name=errors" })
   errors?: Map<string, any>;
 }
 
 
+export class GetApiV2PerformanceStatsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  headers: GetApiV2PerformanceStatsHeaders;
+}
+
+
 export class GetApiV2PerformanceStatsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getApiV2PerformanceStats200ApplicationJsonObject?: GetApiV2PerformanceStats200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getApiV2PerformanceStats404ApplicationJsonObject?: GetApiV2PerformanceStats404ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

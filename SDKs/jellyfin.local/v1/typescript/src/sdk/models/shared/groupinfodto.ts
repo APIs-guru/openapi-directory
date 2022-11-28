@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GroupStateTypeEnum } from "./groupstatetypeenum";
+
 
 
 // GroupInfoDto
@@ -7,18 +8,18 @@ import { GroupStateTypeEnum } from "./groupstatetypeenum";
  * Class GroupInfoDto.
 **/
 export class GroupInfoDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=GroupId" })
+  @SpeakeasyMetadata({ data: "json, name=GroupId" })
   groupId?: string;
 
-  @Metadata({ data: "json, name=GroupName" })
+  @SpeakeasyMetadata({ data: "json, name=GroupName" })
   groupName?: string;
 
-  @Metadata({ data: "json, name=LastUpdatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=LastUpdatedAt" })
   lastUpdatedAt?: Date;
 
-  @Metadata({ data: "json, name=Participants" })
+  @SpeakeasyMetadata({ data: "json, name=Participants" })
   participants?: string[];
 
-  @Metadata({ data: "json, name=State" })
+  @SpeakeasyMetadata({ data: "json, name=State" })
   state?: GroupStateTypeEnum;
 }

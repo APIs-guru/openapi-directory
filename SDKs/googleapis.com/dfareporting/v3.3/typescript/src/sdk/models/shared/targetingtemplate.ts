@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DimensionValue } from "./dimensionvalue";
 import { DayPartTargeting } from "./dayparttargeting";
 import { GeoTargeting } from "./geotargeting";
@@ -8,47 +8,48 @@ import { ListTargetingExpression } from "./listtargetingexpression";
 import { TechnologyTargeting } from "./technologytargeting";
 
 
+
 // TargetingTemplate
 /** 
  * Contains properties of a targeting template. A targeting template encapsulates targeting information which can be reused across multiple ads.
 **/
 export class TargetingTemplate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=advertiserId" })
+  @SpeakeasyMetadata({ data: "json, name=advertiserId" })
   advertiserId?: string;
 
-  @Metadata({ data: "json, name=advertiserIdDimensionValue" })
+  @SpeakeasyMetadata({ data: "json, name=advertiserIdDimensionValue" })
   advertiserIdDimensionValue?: DimensionValue;
 
-  @Metadata({ data: "json, name=dayPartTargeting" })
+  @SpeakeasyMetadata({ data: "json, name=dayPartTargeting" })
   dayPartTargeting?: DayPartTargeting;
 
-  @Metadata({ data: "json, name=geoTargeting" })
+  @SpeakeasyMetadata({ data: "json, name=geoTargeting" })
   geoTargeting?: GeoTargeting;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=keyValueTargetingExpression" })
+  @SpeakeasyMetadata({ data: "json, name=keyValueTargetingExpression" })
   keyValueTargetingExpression?: KeyValueTargetingExpression;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=languageTargeting" })
+  @SpeakeasyMetadata({ data: "json, name=languageTargeting" })
   languageTargeting?: LanguageTargeting;
 
-  @Metadata({ data: "json, name=listTargetingExpression" })
+  @SpeakeasyMetadata({ data: "json, name=listTargetingExpression" })
   listTargetingExpression?: ListTargetingExpression;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=subaccountId" })
+  @SpeakeasyMetadata({ data: "json, name=subaccountId" })
   subaccountId?: string;
 
-  @Metadata({ data: "json, name=technologyTargeting" })
+  @SpeakeasyMetadata({ data: "json, name=technologyTargeting" })
   technologyTargeting?: TechnologyTargeting;
 }

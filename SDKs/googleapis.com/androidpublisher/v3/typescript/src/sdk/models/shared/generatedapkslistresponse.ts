@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GeneratedApksPerSigningKey } from "./generatedapkspersigningkey";
+
 
 
 // GeneratedApksListResponse
@@ -8,6 +8,6 @@ import { GeneratedApksPerSigningKey } from "./generatedapkspersigningkey";
  * Response to list generated APKs.
 **/
 export class GeneratedApksListResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=generatedApks", elemType: shared.GeneratedApksPerSigningKey })
+  @SpeakeasyMetadata({ data: "json, name=generatedApks", elemType: GeneratedApksPerSigningKey })
   generatedApks?: GeneratedApksPerSigningKey[];
 }

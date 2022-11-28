@@ -1,13 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,List
+from typing import List
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import clientversion_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetConfigRequest:
-    client_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ClientArn' }})
-    client_version: clientversion_enum.ClientVersionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ClientVersion' }})
-    hapg_list: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'HapgList' }})
+    client_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ClientArn') }})
+    client_version: ClientVersionEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ClientVersion') }})
+    hapg_list: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('HapgList') }})
     

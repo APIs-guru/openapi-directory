@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MeshRef } from "./meshref";
+
 
 
 // ListMeshesOutput
@@ -8,9 +8,9 @@ import { MeshRef } from "./meshref";
  * <zonbook></zonbook><xhtml></xhtml>
 **/
 export class ListMeshesOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=meshes", elemType: shared.MeshRef })
+  @SpeakeasyMetadata({ data: "json, name=meshes", elemType: MeshRef })
   meshes: MeshRef[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

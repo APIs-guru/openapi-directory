@@ -10,7 +10,7 @@ type PatchUserTagsTagIDPathParams struct {
 
 type PatchUserTagsTagIDRequest struct {
 	PathParams PatchUserTagsTagIDPathParams
-	Request    *shared.Tag `request:"mediaType=application/json"`
+	Request    *shared.TagInput `request:"mediaType=application/json"`
 }
 
 type PatchUserTagsTagIDResponse struct {

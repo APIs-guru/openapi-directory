@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { Person } from "./person";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { PersonInput } from "./person";
 
 
-// ContactToCreate
+
+// ContactToCreateInput
 /** 
  * A wrapper that contains the person data to populate a newly created source.
 **/
-export class ContactToCreate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=contactPerson" })
-  contactPerson?: Person;
+export class ContactToCreateInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=contactPerson" })
+  contactPerson?: PersonInput;
 }

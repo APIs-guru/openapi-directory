@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudVideointelligenceV1p1beta1VideoSegment
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Video segment.
 **/
 export class GoogleCloudVideointelligenceV1p1beta1VideoSegment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=endTimeOffset" })
+  @SpeakeasyMetadata({ data: "json, name=endTimeOffset" })
   endTimeOffset?: string;
 
-  @Metadata({ data: "json, name=startTimeOffset" })
+  @SpeakeasyMetadata({ data: "json, name=startTimeOffset" })
   startTimeOffset?: string;
 }

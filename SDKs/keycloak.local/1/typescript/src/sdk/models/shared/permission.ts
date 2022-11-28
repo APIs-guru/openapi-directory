@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Permission extends SpeakeasyBase {
-  @Metadata({ data: "json, name=claims" })
+  @SpeakeasyMetadata({ data: "json, name=claims" })
   claims?: Map<string, any>;
 
-  @Metadata({ data: "json, name=rsid" })
+  @SpeakeasyMetadata({ data: "json, name=rsid" })
   rsid?: string;
 
-  @Metadata({ data: "json, name=rsname" })
+  @SpeakeasyMetadata({ data: "json, name=rsname" })
   rsname?: string;
 
-  @Metadata({ data: "json, name=scopes" })
+  @SpeakeasyMetadata({ data: "json, name=scopes" })
   scopes?: string[];
 }

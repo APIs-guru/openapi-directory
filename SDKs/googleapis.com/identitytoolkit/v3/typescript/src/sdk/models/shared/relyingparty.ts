@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Relyingparty
@@ -6,48 +7,48 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request of getting a code for user confirmation (reset password, change email etc.)
 **/
 export class Relyingparty extends SpeakeasyBase {
-  @Metadata({ data: "json, name=androidInstallApp" })
+  @SpeakeasyMetadata({ data: "json, name=androidInstallApp" })
   androidInstallApp?: boolean;
 
-  @Metadata({ data: "json, name=androidMinimumVersion" })
+  @SpeakeasyMetadata({ data: "json, name=androidMinimumVersion" })
   androidMinimumVersion?: string;
 
-  @Metadata({ data: "json, name=androidPackageName" })
+  @SpeakeasyMetadata({ data: "json, name=androidPackageName" })
   androidPackageName?: string;
 
-  @Metadata({ data: "json, name=canHandleCodeInApp" })
+  @SpeakeasyMetadata({ data: "json, name=canHandleCodeInApp" })
   canHandleCodeInApp?: boolean;
 
-  @Metadata({ data: "json, name=captchaResp" })
+  @SpeakeasyMetadata({ data: "json, name=captchaResp" })
   captchaResp?: string;
 
-  @Metadata({ data: "json, name=challenge" })
+  @SpeakeasyMetadata({ data: "json, name=challenge" })
   challenge?: string;
 
-  @Metadata({ data: "json, name=continueUrl" })
+  @SpeakeasyMetadata({ data: "json, name=continueUrl" })
   continueUrl?: string;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=iOSAppStoreId" })
+  @SpeakeasyMetadata({ data: "json, name=iOSAppStoreId" })
   iOsAppStoreId?: string;
 
-  @Metadata({ data: "json, name=iOSBundleId" })
+  @SpeakeasyMetadata({ data: "json, name=iOSBundleId" })
   iOsBundleId?: string;
 
-  @Metadata({ data: "json, name=idToken" })
+  @SpeakeasyMetadata({ data: "json, name=idToken" })
   idToken?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=newEmail" })
+  @SpeakeasyMetadata({ data: "json, name=newEmail" })
   newEmail?: string;
 
-  @Metadata({ data: "json, name=requestType" })
+  @SpeakeasyMetadata({ data: "json, name=requestType" })
   requestType?: string;
 
-  @Metadata({ data: "json, name=userIp" })
+  @SpeakeasyMetadata({ data: "json, name=userIp" })
   userIp?: string;
 }

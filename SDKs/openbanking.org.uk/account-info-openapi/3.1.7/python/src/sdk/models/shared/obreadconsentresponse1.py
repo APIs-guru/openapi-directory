@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import links
-from . import meta
+from sdk import utils
+from . import *
 
 class ObReadConsentResponse1DataPermissionsEnum(str, Enum):
     READ_ACCOUNTS_BASIC = "ReadAccountsBasic"
@@ -40,21 +41,21 @@ class ObReadConsentResponse1DataStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ObReadConsentResponse1Data:
-    consent_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ConsentId' }})
-    creation_date_time: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CreationDateTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    expiration_date_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ExpirationDateTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    permissions: List[ObReadConsentResponse1DataPermissionsEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Permissions' }})
-    status: ObReadConsentResponse1DataStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Status' }})
-    status_update_date_time: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StatusUpdateDateTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    transaction_from_date_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TransactionFromDateTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    transaction_to_date_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TransactionToDateTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    consent_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ConsentId') }})
+    creation_date_time: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('CreationDateTime'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    permissions: List[ObReadConsentResponse1DataPermissionsEnum] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Permissions') }})
+    status: ObReadConsentResponse1DataStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Status') }})
+    status_update_date_time: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('StatusUpdateDateTime'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    expiration_date_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ExpirationDateTime'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    transaction_from_date_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TransactionFromDateTime'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    transaction_to_date_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TransactionToDateTime'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     
 
 @dataclass_json
 @dataclass
 class ObReadConsentResponse1:
-    data: ObReadConsentResponse1Data = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Data' }})
-    links: Optional[links.Links] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Links' }})
-    meta: Optional[meta.Meta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Meta' }})
-    risk: dict[str, Any] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Risk' }})
+    data: ObReadConsentResponse1Data = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Data') }})
+    risk: dict[str, Any] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Risk') }})
+    links: Optional[Links] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Links') }})
+    meta: Optional[Meta] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Meta') }})
     

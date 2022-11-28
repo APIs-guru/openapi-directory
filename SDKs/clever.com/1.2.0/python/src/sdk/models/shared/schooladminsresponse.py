@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import schooladminresponse
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SchoolAdminsResponse:
-    data: Optional[List[schooladminresponse.SchoolAdminResponse]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
+    data: Optional[List[SchoolAdminResponse]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
     

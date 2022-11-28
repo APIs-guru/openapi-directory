@@ -14,6 +14,8 @@ type CreatePortalHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreatePortalRequestBodyAlarms
+// Contains the configuration information of an alarm created in an IoT SiteWise Monitor portal. You can use the alarm to monitor an asset property and get notified when the asset property value is outside a specified range. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/appguide/monitor-alarms.html">Monitoring with alarms</a> in the <i>IoT SiteWise Application Guide</i>.
 type CreatePortalRequestBodyAlarms struct {
 	AlarmRoleArn          *string `json:"alarmRoleArn,omitempty"`
 	NotificationLambdaArn *string `json:"notificationLambdaArn,omitempty"`
@@ -26,6 +28,8 @@ const (
 	CreatePortalRequestBodyPortalAuthModeEnumSso CreatePortalRequestBodyPortalAuthModeEnum = "SSO"
 )
 
+// CreatePortalRequestBodyPortalLogoImageFile
+// Contains an image file.
 type CreatePortalRequestBodyPortalLogoImageFile struct {
 	Data *string                   `json:"data,omitempty"`
 	Type *shared.ImageFileTypeEnum `json:"type,omitempty"`

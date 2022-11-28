@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SalesTaxBase
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A container that describes the how the sales tax rate is calculated.
 **/
 export class SalesTaxBase extends SpeakeasyBase {
-  @Metadata({ data: "json, name=salesTaxPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=salesTaxPercentage" })
   salesTaxPercentage?: string;
 
-  @Metadata({ data: "json, name=shippingAndHandlingTaxed" })
+  @SpeakeasyMetadata({ data: "json, name=shippingAndHandlingTaxed" })
   shippingAndHandlingTaxed?: boolean;
 }

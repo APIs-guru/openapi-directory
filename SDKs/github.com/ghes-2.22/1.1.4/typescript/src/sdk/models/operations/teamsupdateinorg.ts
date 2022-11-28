@@ -1,61 +1,62 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class TeamsUpdateInOrgPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=org" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=org" })
   org: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=team_slug" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=team_slug" })
   teamSlug: string;
 }
 
 export enum TeamsUpdateInOrgRequestBodyPermissionEnum {
-    Pull = "pull"
-,    Push = "push"
-,    Admin = "admin"
+    Pull = "pull",
+    Push = "push",
+    Admin = "admin"
 }
 
 export enum TeamsUpdateInOrgRequestBodyPrivacyEnum {
-    Secret = "secret"
-,    Closed = "closed"
+    Secret = "secret",
+    Closed = "closed"
 }
 
 
 export class TeamsUpdateInOrgRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=parent_team_id" })
+  @SpeakeasyMetadata({ data: "json, name=parent_team_id" })
   parentTeamId?: number;
 
-  @Metadata({ data: "json, name=permission" })
+  @SpeakeasyMetadata({ data: "json, name=permission" })
   permission?: TeamsUpdateInOrgRequestBodyPermissionEnum;
 
-  @Metadata({ data: "json, name=privacy" })
+  @SpeakeasyMetadata({ data: "json, name=privacy" })
   privacy?: TeamsUpdateInOrgRequestBodyPrivacyEnum;
 }
 
 
 export class TeamsUpdateInOrgRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: TeamsUpdateInOrgPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: TeamsUpdateInOrgRequestBody;
 }
 
 
 export class TeamsUpdateInOrgResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   teamFull?: shared.TeamFull;
 }

@@ -1,18 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { ContactGroup } from "./contactgroup";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ContactGroupInput } from "./contactgroup";
 
 
-// UpdateContactGroupRequest
+
+// UpdateContactGroupRequestInput
 /** 
  * A request to update an existing user contact group. All updated fields will be replaced.
 **/
-export class UpdateContactGroupRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=contactGroup" })
-  contactGroup?: ContactGroup;
+export class UpdateContactGroupRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=contactGroup" })
+  contactGroup?: ContactGroupInput;
 
-  @Metadata({ data: "json, name=readGroupFields" })
+  @SpeakeasyMetadata({ data: "json, name=readGroupFields" })
   readGroupFields?: string;
 
-  @Metadata({ data: "json, name=updateGroupFields" })
+  @SpeakeasyMetadata({ data: "json, name=updateGroupFields" })
   updateGroupFields?: string;
 }

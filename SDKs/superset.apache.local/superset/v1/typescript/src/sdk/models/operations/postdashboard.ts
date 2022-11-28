@@ -1,74 +1,75 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostDashboardSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   jwt: shared.SchemeJwt;
 }
 
 
-export class PostDashboardRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: shared.DashboardRestApiPost;
-
-  @Metadata()
-  security: PostDashboardSecurity;
-}
-
-
 export class PostDashboard201ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result?: shared.DashboardRestApiPost;
 }
 
 
 export class PostDashboard400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PostDashboard401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PostDashboard404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PostDashboard500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class PostDashboardRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: shared.DashboardRestApiPost;
+
+  @SpeakeasyMetadata()
+  security: PostDashboardSecurity;
+}
+
+
 export class PostDashboardResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postDashboard201ApplicationJsonObject?: PostDashboard201ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postDashboard400ApplicationJsonObject?: PostDashboard400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postDashboard401ApplicationJsonObject?: PostDashboard401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postDashboard404ApplicationJsonObject?: PostDashboard404ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postDashboard500ApplicationJsonObject?: PostDashboard500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// TunnelSummary
+// Information about the tunnel.
 type TunnelSummary struct {
 	CreatedAt     *time.Time        `json:"createdAt,omitempty"`
 	Description   *string           `json:"description,omitempty"`

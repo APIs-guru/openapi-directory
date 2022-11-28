@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var VoiceConversionQueryParams = /** @class */ (function (_super) {
     __extends(VoiceConversionQueryParams, _super);
     function VoiceConversionQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=delivered" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=delivered" }),
         __metadata("design:type", Object)
     ], VoiceConversionQueryParams.prototype, "delivered", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=message-id" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=message-id" }),
         __metadata("design:type", String)
     ], VoiceConversionQueryParams.prototype, "messageId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=timestamp" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timestamp" }),
         __metadata("design:type", String)
     ], VoiceConversionQueryParams.prototype, "timestamp", void 0);
     return VoiceConversionQueryParams;
@@ -49,7 +49,7 @@ var VoiceConversionRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", VoiceConversionQueryParams)
     ], VoiceConversionRequest.prototype, "queryParams", void 0);
     return VoiceConversionRequest;
@@ -61,11 +61,11 @@ var VoiceConversionResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], VoiceConversionResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], VoiceConversionResponse.prototype, "statusCode", void 0);
     return VoiceConversionResponse;

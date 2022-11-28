@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class GetSentencesFromBookPathParams extends SpeakeasyBase {
     id: string;
@@ -6,12 +6,12 @@ export declare class GetSentencesFromBookPathParams extends SpeakeasyBase {
 export declare class GetSentencesFromBookQueryParams extends SpeakeasyBase {
     limit?: number;
 }
+export declare class GetSentencesFromBook200ApplicationJson extends SpeakeasyBase {
+    data?: shared.Sentence[];
+}
 export declare class GetSentencesFromBookRequest extends SpeakeasyBase {
     pathParams: GetSentencesFromBookPathParams;
     queryParams: GetSentencesFromBookQueryParams;
-}
-export declare class GetSentencesFromBook200ApplicationJson extends SpeakeasyBase {
-    data?: shared.Sentence[];
 }
 export declare class GetSentencesFromBookResponse extends SpeakeasyBase {
     contentType: string;

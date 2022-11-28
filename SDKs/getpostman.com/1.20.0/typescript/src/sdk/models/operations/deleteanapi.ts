@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteAnApiPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=apiId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=apiId" })
   apiId: string;
 }
 
 
-export class DeleteAnApiRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: DeleteAnApiPathParams;
-}
-
-
 export class DeleteAnApi200ApplicationJsonApi extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 }
 
 
 export class DeleteAnApi200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=api" })
+  @SpeakeasyMetadata({ data: "json, name=api" })
   api?: DeleteAnApi200ApplicationJsonApi;
 }
 
 
+export class DeleteAnApiRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: DeleteAnApiPathParams;
+}
+
+
 export class DeleteAnApiResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteAnApi200ApplicationJsonObject?: DeleteAnApi200ApplicationJson;
 }

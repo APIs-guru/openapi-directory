@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetResourcesMediaIdContentPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
 
 export class GetResourcesMediaIdContentQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=false;name=calledByBuild" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=calledByBuild" })
   calledByBuild?: boolean;
 }
 
 
 export class GetResourcesMediaIdContentRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetResourcesMediaIdContentPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetResourcesMediaIdContentQueryParams;
 }
 
 
 export class GetResourcesMediaIdContentResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getResourcesMediaIdContent200ApplicationJsonString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

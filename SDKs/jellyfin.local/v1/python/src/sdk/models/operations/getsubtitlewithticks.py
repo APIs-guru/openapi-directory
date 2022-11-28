@@ -4,11 +4,11 @@ from typing import Optional
 
 @dataclass
 class GetSubtitleWithTicksPathParams:
-    format: str = field(default=None, metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
-    index: int = field(default=None, metadata={'path_param': { 'field_name': 'index', 'style': 'simple', 'explode': False }})
-    item_id: str = field(default=None, metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
-    media_source_id: str = field(default=None, metadata={'path_param': { 'field_name': 'mediaSourceId', 'style': 'simple', 'explode': False }})
-    start_position_ticks: int = field(default=None, metadata={'path_param': { 'field_name': 'startPositionTicks', 'style': 'simple', 'explode': False }})
+    format: str = field(metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
+    index: int = field(metadata={'path_param': { 'field_name': 'index', 'style': 'simple', 'explode': False }})
+    item_id: str = field(metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
+    media_source_id: str = field(metadata={'path_param': { 'field_name': 'mediaSourceId', 'style': 'simple', 'explode': False }})
+    start_position_ticks: int = field(metadata={'path_param': { 'field_name': 'startPositionTicks', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,13 +20,13 @@ class GetSubtitleWithTicksQueryParams:
 
 @dataclass
 class GetSubtitleWithTicksRequest:
-    path_params: GetSubtitleWithTicksPathParams = field(default=None)
-    query_params: GetSubtitleWithTicksQueryParams = field(default=None)
+    path_params: GetSubtitleWithTicksPathParams = field()
+    query_params: GetSubtitleWithTicksQueryParams = field()
     
 
 @dataclass
 class GetSubtitleWithTicksResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_subtitle_with_ticks_200_text_wildcard_binary_string: Optional[bytes] = field(default=None)
-    status_code: int = field(default=None)
     

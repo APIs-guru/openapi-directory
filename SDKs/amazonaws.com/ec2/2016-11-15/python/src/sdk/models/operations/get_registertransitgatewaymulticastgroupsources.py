@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetRegisterTransitGatewayMulticastGroupSourcesActionEnum(str, Enum):
     REGISTER_TRANSIT_GATEWAY_MULTICAST_GROUP_SOURCES = "RegisterTransitGatewayMulticastGroupSources"
@@ -10,12 +14,12 @@ class GetRegisterTransitGatewayMulticastGroupSourcesVersionEnum(str, Enum):
 
 @dataclass
 class GetRegisterTransitGatewayMulticastGroupSourcesQueryParams:
-    action: GetRegisterTransitGatewayMulticastGroupSourcesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetRegisterTransitGatewayMulticastGroupSourcesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetRegisterTransitGatewayMulticastGroupSourcesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
     group_ip_address: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'GroupIpAddress', 'style': 'form', 'explode': True }})
     network_interface_ids: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'NetworkInterfaceIds', 'style': 'form', 'explode': True }})
     transit_gateway_multicast_domain_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'TransitGatewayMulticastDomainId', 'style': 'form', 'explode': True }})
-    version: GetRegisterTransitGatewayMulticastGroupSourcesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -31,13 +35,13 @@ class GetRegisterTransitGatewayMulticastGroupSourcesHeaders:
 
 @dataclass
 class GetRegisterTransitGatewayMulticastGroupSourcesRequest:
-    query_params: GetRegisterTransitGatewayMulticastGroupSourcesQueryParams = field(default=None)
-    headers: GetRegisterTransitGatewayMulticastGroupSourcesHeaders = field(default=None)
+    headers: GetRegisterTransitGatewayMulticastGroupSourcesHeaders = field()
+    query_params: GetRegisterTransitGatewayMulticastGroupSourcesQueryParams = field()
     
 
 @dataclass
 class GetRegisterTransitGatewayMulticastGroupSourcesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

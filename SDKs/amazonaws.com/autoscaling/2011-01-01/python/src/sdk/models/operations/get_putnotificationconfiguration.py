@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetPutNotificationConfigurationActionEnum(str, Enum):
     PUT_NOTIFICATION_CONFIGURATION = "PutNotificationConfiguration"
@@ -10,11 +14,11 @@ class GetPutNotificationConfigurationVersionEnum(str, Enum):
 
 @dataclass
 class GetPutNotificationConfigurationQueryParams:
-    action: GetPutNotificationConfigurationActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    auto_scaling_group_name: str = field(default=None, metadata={'query_param': { 'field_name': 'AutoScalingGroupName', 'style': 'form', 'explode': True }})
-    notification_types: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'NotificationTypes', 'style': 'form', 'explode': True }})
-    topic_arn: str = field(default=None, metadata={'query_param': { 'field_name': 'TopicARN', 'style': 'form', 'explode': True }})
-    version: GetPutNotificationConfigurationVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetPutNotificationConfigurationActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    auto_scaling_group_name: str = field(metadata={'query_param': { 'field_name': 'AutoScalingGroupName', 'style': 'form', 'explode': True }})
+    notification_types: List[str] = field(metadata={'query_param': { 'field_name': 'NotificationTypes', 'style': 'form', 'explode': True }})
+    topic_arn: str = field(metadata={'query_param': { 'field_name': 'TopicARN', 'style': 'form', 'explode': True }})
+    version: GetPutNotificationConfigurationVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetPutNotificationConfigurationHeaders:
 
 @dataclass
 class GetPutNotificationConfigurationRequest:
-    query_params: GetPutNotificationConfigurationQueryParams = field(default=None)
-    headers: GetPutNotificationConfigurationHeaders = field(default=None)
+    headers: GetPutNotificationConfigurationHeaders = field()
+    query_params: GetPutNotificationConfigurationQueryParams = field()
     
 
 @dataclass
 class GetPutNotificationConfigurationResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

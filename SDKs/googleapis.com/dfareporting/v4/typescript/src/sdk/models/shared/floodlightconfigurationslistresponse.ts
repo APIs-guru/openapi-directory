@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FloodlightConfiguration } from "./floodlightconfiguration";
+
 
 
 // FloodlightConfigurationsListResponse
@@ -8,9 +8,9 @@ import { FloodlightConfiguration } from "./floodlightconfiguration";
  * Floodlight Configuration List Response
 **/
 export class FloodlightConfigurationsListResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=floodlightConfigurations", elemType: shared.FloodlightConfiguration })
+  @SpeakeasyMetadata({ data: "json, name=floodlightConfigurations", elemType: FloodlightConfiguration })
   floodlightConfigurations?: FloodlightConfiguration[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 }

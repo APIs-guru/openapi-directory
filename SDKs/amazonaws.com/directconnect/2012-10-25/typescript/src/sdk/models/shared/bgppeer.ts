@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AddressFamilyEnum } from "./addressfamilyenum";
 import { BgpPeerStateEnum } from "./bgppeerstateenum";
 import { BgpStatusEnum } from "./bgpstatusenum";
+
 
 
 // BgpPeer
@@ -9,33 +10,33 @@ import { BgpStatusEnum } from "./bgpstatusenum";
  * Information about a BGP peer.
 **/
 export class BgpPeer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=addressFamily" })
+  @SpeakeasyMetadata({ data: "json, name=addressFamily" })
   addressFamily?: AddressFamilyEnum;
 
-  @Metadata({ data: "json, name=amazonAddress" })
+  @SpeakeasyMetadata({ data: "json, name=amazonAddress" })
   amazonAddress?: string;
 
-  @Metadata({ data: "json, name=asn" })
+  @SpeakeasyMetadata({ data: "json, name=asn" })
   asn?: number;
 
-  @Metadata({ data: "json, name=authKey" })
+  @SpeakeasyMetadata({ data: "json, name=authKey" })
   authKey?: string;
 
-  @Metadata({ data: "json, name=awsDeviceV2" })
+  @SpeakeasyMetadata({ data: "json, name=awsDeviceV2" })
   awsDeviceV2?: string;
 
-  @Metadata({ data: "json, name=awsLogicalDeviceId" })
+  @SpeakeasyMetadata({ data: "json, name=awsLogicalDeviceId" })
   awsLogicalDeviceId?: string;
 
-  @Metadata({ data: "json, name=bgpPeerId" })
+  @SpeakeasyMetadata({ data: "json, name=bgpPeerId" })
   bgpPeerId?: string;
 
-  @Metadata({ data: "json, name=bgpPeerState" })
+  @SpeakeasyMetadata({ data: "json, name=bgpPeerState" })
   bgpPeerState?: BgpPeerStateEnum;
 
-  @Metadata({ data: "json, name=bgpStatus" })
+  @SpeakeasyMetadata({ data: "json, name=bgpStatus" })
   bgpStatus?: BgpStatusEnum;
 
-  @Metadata({ data: "json, name=customerAddress" })
+  @SpeakeasyMetadata({ data: "json, name=customerAddress" })
   customerAddress?: string;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ListSourceServiceInventoriesPathParams = /** @class */ (function (_super) {
     __extends(ListSourceServiceInventoriesPathParams, _super);
@@ -30,7 +30,7 @@ var ListSourceServiceInventoriesPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], ListSourceServiceInventoriesPathParams.prototype, "id", void 0);
     return ListSourceServiceInventoriesPathParams;
@@ -42,19 +42,19 @@ var ListSourceServiceInventoriesQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=deepObject;explode=true;name=filter" }),
+        SpeakeasyMetadata({ data: "queryParam, style=deepObject;explode=true;name=filter" }),
         __metadata("design:type", Map)
     ], ListSourceServiceInventoriesQueryParams.prototype, "filter", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", Number)
     ], ListSourceServiceInventoriesQueryParams.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=offset" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" }),
         __metadata("design:type", Number)
     ], ListSourceServiceInventoriesQueryParams.prototype, "offset", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=deepObject;explode=true;name=sort_by" }),
+        SpeakeasyMetadata({ data: "queryParam, style=deepObject;explode=true;name=sort_by" }),
         __metadata("design:type", Map)
     ], ListSourceServiceInventoriesQueryParams.prototype, "sortBy", void 0);
     return ListSourceServiceInventoriesQueryParams;
@@ -66,11 +66,11 @@ var ListSourceServiceInventoriesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ListSourceServiceInventoriesPathParams)
     ], ListSourceServiceInventoriesRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ListSourceServiceInventoriesQueryParams)
     ], ListSourceServiceInventoriesRequest.prototype, "queryParams", void 0);
     return ListSourceServiceInventoriesRequest;
@@ -82,19 +82,19 @@ var ListSourceServiceInventoriesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ListSourceServiceInventoriesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorNotFound)
     ], ListSourceServiceInventoriesResponse.prototype, "errorNotFound", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ServiceInventoriesCollection)
     ], ListSourceServiceInventoriesResponse.prototype, "serviceInventoriesCollection", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ListSourceServiceInventoriesResponse.prototype, "statusCode", void 0);
     return ListSourceServiceInventoriesResponse;

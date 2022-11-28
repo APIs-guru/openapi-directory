@@ -1,5 +1,8 @@
 package shared
 
+// DestinationConnectorProperties
+//
+//	This stores the information that is required to query a particular connector.
 type DestinationConnectorProperties struct {
 	CustomerProfiles *CustomerProfilesDestinationProperties `json:"CustomerProfiles,omitempty"`
 	EventBridge      *EventBridgeDestinationProperties      `json:"EventBridge,omitempty"`

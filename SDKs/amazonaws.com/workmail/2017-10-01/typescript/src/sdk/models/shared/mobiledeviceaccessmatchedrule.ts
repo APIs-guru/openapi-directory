@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MobileDeviceAccessMatchedRule
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The rule that a simulated user matches.
 **/
 export class MobileDeviceAccessMatchedRule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MobileDeviceAccessRuleId" })
+  @SpeakeasyMetadata({ data: "json, name=MobileDeviceAccessRuleId" })
   mobileDeviceAccessRuleId?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 }

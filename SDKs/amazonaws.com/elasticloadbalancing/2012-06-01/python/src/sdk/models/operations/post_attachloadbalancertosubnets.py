@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostAttachLoadBalancerToSubnetsActionEnum(str, Enum):
     ATTACH_LOAD_BALANCER_TO_SUBNETS = "AttachLoadBalancerToSubnets"
@@ -10,8 +14,8 @@ class PostAttachLoadBalancerToSubnetsVersionEnum(str, Enum):
 
 @dataclass
 class PostAttachLoadBalancerToSubnetsQueryParams:
-    action: PostAttachLoadBalancerToSubnetsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostAttachLoadBalancerToSubnetsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostAttachLoadBalancerToSubnetsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostAttachLoadBalancerToSubnetsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostAttachLoadBalancerToSubnetsHeaders:
 
 @dataclass
 class PostAttachLoadBalancerToSubnetsRequest:
-    query_params: PostAttachLoadBalancerToSubnetsQueryParams = field(default=None)
-    headers: PostAttachLoadBalancerToSubnetsHeaders = field(default=None)
+    headers: PostAttachLoadBalancerToSubnetsHeaders = field()
+    query_params: PostAttachLoadBalancerToSubnetsQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostAttachLoadBalancerToSubnetsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

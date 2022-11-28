@@ -1,10 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import repricingrulereportbuyboxwinningrulestats
-from . import date
-from . import inapplicabilitydetails
-from . import priceamount
+from sdk import utils
+from . import *
 
 class RepricingRuleReportTypeEnum(str, Enum):
     REPRICING_RULE_TYPE_UNSPECIFIED = "REPRICING_RULE_TYPE_UNSPECIFIED"
@@ -17,13 +19,17 @@ class RepricingRuleReportTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class RepricingRuleReport:
-    buybox_winning_rule_stats: Optional[repricingrulereportbuyboxwinningrulestats.RepricingRuleReportBuyboxWinningRuleStats] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'buyboxWinningRuleStats' }})
-    date: Optional[date.Date] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'date' }})
-    impacted_products: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'impactedProducts' }})
-    inapplicability_details: Optional[List[inapplicabilitydetails.InapplicabilityDetails]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'inapplicabilityDetails' }})
-    inapplicable_products: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'inapplicableProducts' }})
-    order_item_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'orderItemCount' }})
-    rule_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ruleId' }})
-    total_gmv: Optional[priceamount.PriceAmount] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'totalGmv' }})
-    type: Optional[RepricingRuleReportTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""RepricingRuleReport
+    Resource that represents a daily Repricing rule report. Next ID: 11
+    """
+    
+    buybox_winning_rule_stats: Optional[RepricingRuleReportBuyboxWinningRuleStats] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('buyboxWinningRuleStats') }})
+    date_: Optional[Date] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('date') }})
+    impacted_products: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('impactedProducts') }})
+    inapplicability_details: Optional[List[InapplicabilityDetails]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('inapplicabilityDetails') }})
+    inapplicable_products: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('inapplicableProducts') }})
+    order_item_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('orderItemCount') }})
+    rule_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ruleId') }})
+    total_gmv: Optional[PriceAmount] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('totalGmv') }})
+    type: Optional[RepricingRuleReportTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

@@ -4,7 +4,7 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-var GetV05HeartbeatServers = []string{
+var GetV05HeartbeatServerList = []string{
 	"https://dev.ndhm.gov.in/hiu",
 }
 

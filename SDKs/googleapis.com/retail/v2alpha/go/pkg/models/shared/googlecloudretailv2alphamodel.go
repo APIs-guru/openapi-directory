@@ -42,6 +42,21 @@ const (
 	GoogleCloudRetailV2alphaModelTrainingStateEnumTraining                 GoogleCloudRetailV2alphaModelTrainingStateEnum = "TRAINING"
 )
 
+// GoogleCloudRetailV2alphaModelInput
+// Metadata that describes the training and serving parameters of a Model. A Model can be associated with a ServingConfig and then queried through the Predict API.
+type GoogleCloudRetailV2alphaModelInput struct {
+	DisplayName            *string                                               `json:"displayName,omitempty"`
+	FilteringOption        *GoogleCloudRetailV2alphaModelFilteringOptionEnum     `json:"filteringOption,omitempty"`
+	Name                   *string                                               `json:"name,omitempty"`
+	OptimizationObjective  *string                                               `json:"optimizationObjective,omitempty"`
+	PageOptimizationConfig *GoogleCloudRetailV2alphaModelPageOptimizationConfig  `json:"pageOptimizationConfig,omitempty"`
+	PeriodicTuningState    *GoogleCloudRetailV2alphaModelPeriodicTuningStateEnum `json:"periodicTuningState,omitempty"`
+	TrainingState          *GoogleCloudRetailV2alphaModelTrainingStateEnum       `json:"trainingState,omitempty"`
+	Type                   *string                                               `json:"type,omitempty"`
+}
+
+// GoogleCloudRetailV2alphaModel
+// Metadata that describes the training and serving parameters of a Model. A Model can be associated with a ServingConfig and then queried through the Predict API.
 type GoogleCloudRetailV2alphaModel struct {
 	CreateTime             *string                                               `json:"createTime,omitempty"`
 	DataState              *GoogleCloudRetailV2alphaModelDataStateEnum           `json:"dataState,omitempty"`

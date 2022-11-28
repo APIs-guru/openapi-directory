@@ -7,6 +7,8 @@ const (
 	DynamicGroupQueryResourceTypeEnumUser                    DynamicGroupQueryResourceTypeEnum = "USER"
 )
 
+// DynamicGroupQuery
+// Defines a query on a resource.
 type DynamicGroupQuery struct {
 	Query        *string                            `json:"query,omitempty"`
 	ResourceType *DynamicGroupQueryResourceTypeEnum `json:"resourceType,omitempty"`

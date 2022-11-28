@@ -8,6 +8,8 @@ const (
 	RuntimeEnvironmentIPConfigurationEnumWorkerIPPrivate     RuntimeEnvironmentIPConfigurationEnum = "WORKER_IP_PRIVATE"
 )
 
+// RuntimeEnvironment
+// The environment values to set at runtime.
 type RuntimeEnvironment struct {
 	AdditionalExperiments   []string                               `json:"additionalExperiments,omitempty"`
 	AdditionalUserLabels    map[string]string                      `json:"additionalUserLabels,omitempty"`

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // File
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * File
 **/
 export class File extends SpeakeasyBase {
-  @Metadata({ data: "json, name=$id" })
+  @SpeakeasyMetadata({ data: "json, name=$id" })
   dollarId: string;
 
-  @Metadata({ data: "json, name=$permissions" })
+  @SpeakeasyMetadata({ data: "json, name=$permissions" })
   dollarPermissions: Map<string, any>;
 
-  @Metadata({ data: "json, name=dateCreated" })
+  @SpeakeasyMetadata({ data: "json, name=dateCreated" })
   dateCreated: number;
 
-  @Metadata({ data: "json, name=mimeType" })
+  @SpeakeasyMetadata({ data: "json, name=mimeType" })
   mimeType: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=signature" })
+  @SpeakeasyMetadata({ data: "json, name=signature" })
   signature: string;
 
-  @Metadata({ data: "json, name=sizeOriginal" })
+  @SpeakeasyMetadata({ data: "json, name=sizeOriginal" })
   sizeOriginal: number;
 }

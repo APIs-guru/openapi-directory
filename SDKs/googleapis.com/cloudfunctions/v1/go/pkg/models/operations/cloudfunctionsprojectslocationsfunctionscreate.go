@@ -30,7 +30,7 @@ type CloudfunctionsProjectsLocationsFunctionsCreateSecurity struct {
 type CloudfunctionsProjectsLocationsFunctionsCreateRequest struct {
 	PathParams  CloudfunctionsProjectsLocationsFunctionsCreatePathParams
 	QueryParams CloudfunctionsProjectsLocationsFunctionsCreateQueryParams
-	Request     *shared.CloudFunction `request:"mediaType=application/json"`
+	Request     *shared.CloudFunctionInput `request:"mediaType=application/json"`
 	Security    CloudfunctionsProjectsLocationsFunctionsCreateSecurity
 }
 

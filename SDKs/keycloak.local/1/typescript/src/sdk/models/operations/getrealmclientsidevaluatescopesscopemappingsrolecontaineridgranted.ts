@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetRealmClientsIdEvaluateScopesScopeMappingsRoleContainerIdGrantedPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=realm" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=realm" })
   realm: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=roleContainerId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=roleContainerId" })
   roleContainerId: string;
 }
 
 
 export class GetRealmClientsIdEvaluateScopesScopeMappingsRoleContainerIdGrantedQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=scope" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=scope" })
   scope?: string;
 }
 
 
 export class GetRealmClientsIdEvaluateScopesScopeMappingsRoleContainerIdGrantedRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetRealmClientsIdEvaluateScopesScopeMappingsRoleContainerIdGrantedPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetRealmClientsIdEvaluateScopesScopeMappingsRoleContainerIdGrantedQueryParams;
 }
 
 
 export class GetRealmClientsIdEvaluateScopesScopeMappingsRoleContainerIdGrantedResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.RoleRepresentation })
+  @SpeakeasyMetadata({ elemType: shared.RoleRepresentation })
   roleRepresentations?: shared.RoleRepresentation[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

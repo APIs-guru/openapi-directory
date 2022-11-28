@@ -1,5 +1,7 @@
 package shared
 
+// Voice
+// Description of the voice.
 type Voice struct {
 	AdditionalLanguageCodes []LanguageCodeEnum `json:"AdditionalLanguageCodes,omitempty"`
 	Gender                  *GenderEnum        `json:"Gender,omitempty"`

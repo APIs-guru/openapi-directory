@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Principal } from "./principal";
 
+
 export enum InteractionTypeEnum {
-    Unspecified = "UNSPECIFIED"
-,    View = "VIEW"
-,    Edit = "EDIT"
+    Unspecified = "UNSPECIFIED",
+    View = "VIEW",
+    Edit = "EDIT"
 }
 
 
@@ -13,12 +14,12 @@ export enum InteractionTypeEnum {
  * Represents an interaction between a user and an item.
 **/
 export class Interaction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=interactionTime" })
+  @SpeakeasyMetadata({ data: "json, name=interactionTime" })
   interactionTime?: string;
 
-  @Metadata({ data: "json, name=principal" })
+  @SpeakeasyMetadata({ data: "json, name=principal" })
   principal?: Principal;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: InteractionTypeEnum;
 }

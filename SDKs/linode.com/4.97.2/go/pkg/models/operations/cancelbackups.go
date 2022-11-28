@@ -8,26 +8,18 @@ type CancelBackupsPathParams struct {
 	LinodeID int64 `pathParam:"style=simple,explode=false,name=linodeId"`
 }
 
-type CancelBackupsSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type CancelBackupsSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type CancelBackupsSecurity struct {
-	Option1 *CancelBackupsSecurityOption1 `security:"option"`
-	Option2 *CancelBackupsSecurityOption2 `security:"option"`
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
+}
+
+type CancelBackupsDefaultApplicationJSON struct {
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type CancelBackupsRequest struct {
 	PathParams CancelBackupsPathParams
 	Security   CancelBackupsSecurity
-}
-
-type CancelBackupsDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type CancelBackupsResponse struct {

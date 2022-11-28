@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
+from sdk.models import shared
 
 
 @dataclass
 class V2UpdateWelcomeBoxContentPathParams:
-    content: str = field(default=None, metadata={'path_param': { 'field_name': 'content', 'style': 'simple', 'explode': False }})
-    space_id: str = field(default=None, metadata={'path_param': { 'field_name': 'spaceId', 'style': 'simple', 'explode': False }})
+    content: str = field(metadata={'path_param': { 'field_name': 'content', 'style': 'simple', 'explode': False }})
+    space_id: str = field(metadata={'path_param': { 'field_name': 'spaceId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,18 +19,18 @@ class V2UpdateWelcomeBoxContentRequestBody:
 
 @dataclass
 class V2UpdateWelcomeBoxContentSecurity:
-    oauth: shared.SchemeOauth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth: shared.SchemeOauth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class V2UpdateWelcomeBoxContentRequest:
-    path_params: V2UpdateWelcomeBoxContentPathParams = field(default=None)
+    path_params: V2UpdateWelcomeBoxContentPathParams = field()
+    security: V2UpdateWelcomeBoxContentSecurity = field()
     request: Optional[V2UpdateWelcomeBoxContentRequestBody] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
-    security: V2UpdateWelcomeBoxContentSecurity = field(default=None)
     
 
 @dataclass
 class V2UpdateWelcomeBoxContentResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

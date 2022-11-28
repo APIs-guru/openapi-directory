@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Payload } from "./payload";
 // SqsAction
 /**
@@ -34,15 +34,15 @@ var SqsAction = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=payload" }),
+        SpeakeasyMetadata({ data: "json, name=payload" }),
         __metadata("design:type", Payload)
     ], SqsAction.prototype, "payload", void 0);
     __decorate([
-        Metadata({ data: "json, name=queueUrl" }),
+        SpeakeasyMetadata({ data: "json, name=queueUrl" }),
         __metadata("design:type", String)
     ], SqsAction.prototype, "queueUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=useBase64" }),
+        SpeakeasyMetadata({ data: "json, name=useBase64" }),
         __metadata("design:type", Boolean)
     ], SqsAction.prototype, "useBase64", void 0);
     return SqsAction;

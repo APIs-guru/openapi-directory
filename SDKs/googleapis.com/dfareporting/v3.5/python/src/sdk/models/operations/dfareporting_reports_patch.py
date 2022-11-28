@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DfareportingReportsPatchPathParams:
-    profile_id: str = field(default=None, metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
-    report_id: str = field(default=None, metadata={'path_param': { 'field_name': 'reportId', 'style': 'simple', 'explode': False }})
+    profile_id: str = field(metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
+    report_id: str = field(metadata={'path_param': { 'field_name': 'reportId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +27,21 @@ class DfareportingReportsPatchQueryParams:
 
 @dataclass
 class DfareportingReportsPatchSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DfareportingReportsPatchRequest:
-    path_params: DfareportingReportsPatchPathParams = field(default=None)
-    query_params: DfareportingReportsPatchQueryParams = field(default=None)
+    path_params: DfareportingReportsPatchPathParams = field()
+    query_params: DfareportingReportsPatchQueryParams = field()
+    security: DfareportingReportsPatchSecurity = field()
     request: Optional[shared.Report] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DfareportingReportsPatchSecurity = field(default=None)
     
 
 @dataclass
 class DfareportingReportsPatchResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     report: Optional[shared.Report] = field(default=None)
-    status_code: int = field(default=None)
     

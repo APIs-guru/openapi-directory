@@ -9,10 +9,6 @@ type GetLongviewSubscriptionsQueryParams struct {
 	PageSize *int64 `queryParam:"style=form,explode=true,name=page_size"`
 }
 
-type GetLongviewSubscriptionsRequest struct {
-	QueryParams GetLongviewSubscriptionsQueryParams
-}
-
 type GetLongviewSubscriptions200ApplicationJSON struct {
 	Data    []shared.LongviewSubscription `json:"data,omitempty"`
 	Page    *int64                        `json:"page,omitempty"`
@@ -22,6 +18,10 @@ type GetLongviewSubscriptions200ApplicationJSON struct {
 
 type GetLongviewSubscriptionsDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type GetLongviewSubscriptionsRequest struct {
+	QueryParams GetLongviewSubscriptionsQueryParams
 }
 
 type GetLongviewSubscriptionsResponse struct {

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PostV3DownloadsImagesIdPathParams = /** @class */ (function (_super) {
     __extends(PostV3DownloadsImagesIdPathParams, _super);
@@ -30,7 +30,7 @@ var PostV3DownloadsImagesIdPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], PostV3DownloadsImagesIdPathParams.prototype, "id", void 0);
     return PostV3DownloadsImagesIdPathParams;
@@ -42,27 +42,27 @@ var PostV3DownloadsImagesIdQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=auto_download" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=auto_download" }),
         __metadata("design:type", Boolean)
     ], PostV3DownloadsImagesIdQueryParams.prototype, "autoDownload", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=file_type" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=file_type" }),
         __metadata("design:type", String)
     ], PostV3DownloadsImagesIdQueryParams.prototype, "fileType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=height" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=height" }),
         __metadata("design:type", String)
     ], PostV3DownloadsImagesIdQueryParams.prototype, "height", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=product_id" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=product_id" }),
         __metadata("design:type", Number)
     ], PostV3DownloadsImagesIdQueryParams.prototype, "productId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=product_type" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=product_type" }),
         __metadata("design:type", String)
     ], PostV3DownloadsImagesIdQueryParams.prototype, "productType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=use_team_credits" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=use_team_credits" }),
         __metadata("design:type", Boolean)
     ], PostV3DownloadsImagesIdQueryParams.prototype, "useTeamCredits", void 0);
     return PostV3DownloadsImagesIdQueryParams;
@@ -74,7 +74,7 @@ var PostV3DownloadsImagesIdHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Accept-Language" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept-Language" }),
         __metadata("design:type", String)
     ], PostV3DownloadsImagesIdHeaders.prototype, "acceptLanguage", void 0);
     return PostV3DownloadsImagesIdHeaders;
@@ -86,19 +86,19 @@ var PostV3DownloadsImagesIdRequests = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/*+json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/*+json" }),
         __metadata("design:type", shared.PremiumAccessDownloadData)
     ], PostV3DownloadsImagesIdRequests.prototype, "premiumAccessDownloadData", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.PremiumAccessDownloadData)
     ], PostV3DownloadsImagesIdRequests.prototype, "premiumAccessDownloadData1", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json-patch+json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json-patch+json" }),
         __metadata("design:type", shared.PremiumAccessDownloadData)
     ], PostV3DownloadsImagesIdRequests.prototype, "premiumAccessDownloadData2", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=text/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=text/json" }),
         __metadata("design:type", shared.PremiumAccessDownloadData)
     ], PostV3DownloadsImagesIdRequests.prototype, "premiumAccessDownloadData3", void 0);
     return PostV3DownloadsImagesIdRequests;
@@ -110,19 +110,19 @@ var PostV3DownloadsImagesIdRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostV3DownloadsImagesIdPathParams)
     ], PostV3DownloadsImagesIdRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostV3DownloadsImagesIdQueryParams)
     ], PostV3DownloadsImagesIdRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostV3DownloadsImagesIdHeaders)
     ], PostV3DownloadsImagesIdRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostV3DownloadsImagesIdRequests)
     ], PostV3DownloadsImagesIdRequest.prototype, "request", void 0);
     return PostV3DownloadsImagesIdRequest;
@@ -134,11 +134,11 @@ var PostV3DownloadsImagesIdResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostV3DownloadsImagesIdResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostV3DownloadsImagesIdResponse.prototype, "statusCode", void 0);
     return PostV3DownloadsImagesIdResponse;

@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://macie.{region}.amazonaws.com",
 	"https://macie.{region}.amazonaws.com",
 	"http://macie.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/macie/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// AssociateMemberAccount - Associates a specified AWS account with Amazon Macie Classic as a member account.
 func (s *SDK) AssociateMemberAccount(ctx context.Context, request operations.AssociateMemberAccountRequest) (*operations.AssociateMemberAccountResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=MacieService.AssociateMemberAccount"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -81,7 +108,7 @@ func (s *SDK) AssociateMemberAccount(ctx context.Context, request operations.Ass
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -132,8 +159,9 @@ func (s *SDK) AssociateMemberAccount(ctx context.Context, request operations.Ass
 	return res, nil
 }
 
+// AssociateS3Resources - Associates specified S3 resources with Amazon Macie Classic for monitoring and data classification. If memberAccountId isn't specified, the action associates specified S3 resources with Macie Classic for the current Macie Classic administrator account. If memberAccountId is specified, the action associates specified S3 resources with Macie Classic for the specified member account.
 func (s *SDK) AssociateS3Resources(ctx context.Context, request operations.AssociateS3ResourcesRequest) (*operations.AssociateS3ResourcesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=MacieService.AssociateS3Resources"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -153,7 +181,7 @@ func (s *SDK) AssociateS3Resources(ctx context.Context, request operations.Assoc
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -223,8 +251,9 @@ func (s *SDK) AssociateS3Resources(ctx context.Context, request operations.Assoc
 	return res, nil
 }
 
+// DisassociateMemberAccount - Removes the specified member account from Amazon Macie Classic.
 func (s *SDK) DisassociateMemberAccount(ctx context.Context, request operations.DisassociateMemberAccountRequest) (*operations.DisassociateMemberAccountResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=MacieService.DisassociateMemberAccount"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -244,7 +273,7 @@ func (s *SDK) DisassociateMemberAccount(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -285,8 +314,9 @@ func (s *SDK) DisassociateMemberAccount(ctx context.Context, request operations.
 	return res, nil
 }
 
+// DisassociateS3Resources - Removes specified S3 resources from being monitored by Amazon Macie Classic. If memberAccountId isn't specified, the action removes specified S3 resources from Macie Classic for the current Macie Classic administrator account. If memberAccountId is specified, the action removes specified S3 resources from Macie Classic for the specified member account.
 func (s *SDK) DisassociateS3Resources(ctx context.Context, request operations.DisassociateS3ResourcesRequest) (*operations.DisassociateS3ResourcesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=MacieService.DisassociateS3Resources"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -306,7 +336,7 @@ func (s *SDK) DisassociateS3Resources(ctx context.Context, request operations.Di
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -366,8 +396,9 @@ func (s *SDK) DisassociateS3Resources(ctx context.Context, request operations.Di
 	return res, nil
 }
 
+// ListMemberAccounts - Lists all Amazon Macie Classic member accounts for the current Macie Classic administrator account.
 func (s *SDK) ListMemberAccounts(ctx context.Context, request operations.ListMemberAccountsRequest) (*operations.ListMemberAccountsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=MacieService.ListMemberAccounts"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -389,7 +420,7 @@ func (s *SDK) ListMemberAccounts(ctx context.Context, request operations.ListMem
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -439,8 +470,9 @@ func (s *SDK) ListMemberAccounts(ctx context.Context, request operations.ListMem
 	return res, nil
 }
 
+// ListS3Resources - Lists all the S3 resources associated with Amazon Macie Classic. If memberAccountId isn't specified, the action lists the S3 resources associated with Macie Classic for the current Macie Classic administrator account. If memberAccountId is specified, the action lists the S3 resources associated with Macie Classic for the specified member account.
 func (s *SDK) ListS3Resources(ctx context.Context, request operations.ListS3ResourcesRequest) (*operations.ListS3ResourcesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=MacieService.ListS3Resources"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -462,7 +494,7 @@ func (s *SDK) ListS3Resources(ctx context.Context, request operations.ListS3Reso
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -522,8 +554,9 @@ func (s *SDK) ListS3Resources(ctx context.Context, request operations.ListS3Reso
 	return res, nil
 }
 
+// UpdateS3Resources - Updates the classification types for the specified S3 resources. If memberAccountId isn't specified, the action updates the classification types of the S3 resources associated with Amazon Macie Classic for the current Macie Classic administrator account. If memberAccountId is specified, the action updates the classification types of the S3 resources associated with Macie Classic for the specified member account.
 func (s *SDK) UpdateS3Resources(ctx context.Context, request operations.UpdateS3ResourcesRequest) (*operations.UpdateS3ResourcesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=MacieService.UpdateS3Resources"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -543,7 +576,7 @@ func (s *SDK) UpdateS3Resources(ctx context.Context, request operations.UpdateS3
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SourceDefinitionUpdate
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Update the SourceDefinition. Currently, the only allowed attribute to update is the default docker image version.
 **/
 export class SourceDefinitionUpdate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dockerImageTag" })
+  @SpeakeasyMetadata({ data: "json, name=dockerImageTag" })
   dockerImageTag: string;
 
-  @Metadata({ data: "json, name=sourceDefinitionId" })
+  @SpeakeasyMetadata({ data: "json, name=sourceDefinitionId" })
   sourceDefinitionId: string;
 }

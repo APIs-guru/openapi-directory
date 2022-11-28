@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { TenantResource } from "./tenantresource";
 // TenancyUnit
 /**
  * Representation of a tenancy unit.
@@ -34,23 +34,23 @@ var TenancyUnit = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=consumer" }),
+        SpeakeasyMetadata({ data: "json, name=consumer" }),
         __metadata("design:type", String)
     ], TenancyUnit.prototype, "consumer", void 0);
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", String)
     ], TenancyUnit.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], TenancyUnit.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=service" }),
+        SpeakeasyMetadata({ data: "json, name=service" }),
         __metadata("design:type", String)
     ], TenancyUnit.prototype, "service", void 0);
     __decorate([
-        Metadata({ data: "json, name=tenantResources", elemType: shared.TenantResource }),
+        SpeakeasyMetadata({ data: "json, name=tenantResources", elemType: TenantResource }),
         __metadata("design:type", Array)
     ], TenancyUnit.prototype, "tenantResources", void 0);
     return TenancyUnit;

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DefinitionLanguageEnum } from "./definitionlanguageenum";
+
 
 
 // DefinitionDocument
@@ -7,9 +8,9 @@ import { DefinitionLanguageEnum } from "./definitionlanguageenum";
  * A document that defines an entity. 
 **/
 export class DefinitionDocument extends SpeakeasyBase {
-  @Metadata({ data: "json, name=language" })
+  @SpeakeasyMetadata({ data: "json, name=language" })
   language: DefinitionLanguageEnum;
 
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text: string;
 }

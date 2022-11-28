@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 class DescribeUserProfileXAmzTargetEnum(str, Enum):
@@ -8,6 +12,7 @@ class DescribeUserProfileXAmzTargetEnum(str, Enum):
 
 @dataclass
 class DescribeUserProfileHeaders:
+    x_amz_target: DescribeUserProfileXAmzTargetEnum = field(metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm', 'style': 'simple', 'explode': False }})
     x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256', 'style': 'simple', 'explode': False }})
     x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential', 'style': 'simple', 'explode': False }})
@@ -15,20 +20,19 @@ class DescribeUserProfileHeaders:
     x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token', 'style': 'simple', 'explode': False }})
     x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature', 'style': 'simple', 'explode': False }})
     x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders', 'style': 'simple', 'explode': False }})
-    x_amz_target: DescribeUserProfileXAmzTargetEnum = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DescribeUserProfileRequest:
-    headers: DescribeUserProfileHeaders = field(default=None)
-    request: shared.DescribeUserProfileRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: DescribeUserProfileHeaders = field()
+    request: shared.DescribeUserProfileRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DescribeUserProfileResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     describe_user_profile_result: Optional[shared.DescribeUserProfileResult] = field(default=None)
-    status_code: int = field(default=None)
     user_profile_not_found_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

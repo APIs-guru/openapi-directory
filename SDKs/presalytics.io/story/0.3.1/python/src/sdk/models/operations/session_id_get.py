@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class SessionIDGetPathParams:
-    session_id: str = field(default=None, metadata={'path_param': { 'field_name': 'session_id', 'style': 'simple', 'explode': False }})
+    session_id: str = field(metadata={'path_param': { 'field_name': 'session_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,14 +15,14 @@ class SessionIDGetQueryParams:
 
 @dataclass
 class SessionIDGetRequest:
-    path_params: SessionIDGetPathParams = field(default=None)
-    query_params: SessionIDGetQueryParams = field(default=None)
+    path_params: SessionIDGetPathParams = field()
+    query_params: SessionIDGetQueryParams = field()
     
 
 @dataclass
 class SessionIDGetResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     problem_detail: Optional[Any] = field(default=None)
     session: Optional[shared.Session] = field(default=None)
     

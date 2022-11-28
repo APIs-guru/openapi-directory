@@ -1,82 +1,70 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export const POSTIMAGESUPLOAD_SERVERS = [
+
+export const PostImagesUploadServerList = [
 	"https://api.linode.com/v4",
 	"https://api.linode.com/v4beta",
-];
-
+] as const;
 
 
 export class PostImagesUploadRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label: string;
 
-  @Metadata({ data: "json, name=region" })
+  @SpeakeasyMetadata({ data: "json, name=region" })
   region: string;
 }
 
 
-export class PostImagesUploadSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class PostImagesUploadSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class PostImagesUploadSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: PostImagesUploadSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: PostImagesUploadSecurityOption2;
-}
-
-
-export class PostImagesUploadRequest extends SpeakeasyBase {
-  @Metadata()
-  serverUrl?: string;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: PostImagesUploadRequestBody;
-
-  @Metadata()
-  security: PostImagesUploadSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class PostImagesUpload200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=image" })
+  @SpeakeasyMetadata({ data: "json, name=image" })
   image?: shared.ImagePrivate;
 
-  @Metadata({ data: "json, name=upload_to" })
+  @SpeakeasyMetadata({ data: "json, name=upload_to" })
   uploadTo?: string;
 }
 
 
 export class PostImagesUploadDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class PostImagesUploadRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  serverUrl?: string;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: PostImagesUploadRequestBody;
+
+  @SpeakeasyMetadata()
+  security: PostImagesUploadSecurity;
+}
+
+
 export class PostImagesUploadResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postImagesUpload200ApplicationJsonObject?: PostImagesUpload200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postImagesUploadDefaultApplicationJsonObject?: PostImagesUploadDefaultApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

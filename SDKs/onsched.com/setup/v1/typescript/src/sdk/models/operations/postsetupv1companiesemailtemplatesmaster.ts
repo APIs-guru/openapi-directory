@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostSetupV1CompaniesEmailTemplatesMasterRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
   masterTemplateSettingsInputModel?: shared.MasterTemplateSettingsInputModel;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   masterTemplateSettingsInputModel1?: shared.MasterTemplateSettingsInputModel;
 
-  @Metadata({ data: "request, media_type=application/json-patch+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json-patch+json" })
   masterTemplateSettingsInputModel2?: shared.MasterTemplateSettingsInputModel;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   masterTemplateSettingsInputModel3?: shared.MasterTemplateSettingsInputModel;
 }
 
 
 export class PostSetupV1CompaniesEmailTemplatesMasterRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   request?: PostSetupV1CompaniesEmailTemplatesMasterRequests;
 }
 
 
 export class PostSetupV1CompaniesEmailTemplatesMasterResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   masterEmailTemplateSettingsViewModel?: shared.MasterEmailTemplateSettingsViewModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AmpIssue } from "./ampissue";
 export declare enum AmpInspectionResultAmpIndexStatusVerdictEnum {
     VerdictUnspecified = "VERDICT_UNSPECIFIED",

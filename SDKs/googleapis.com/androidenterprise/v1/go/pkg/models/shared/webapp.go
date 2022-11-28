@@ -9,6 +9,8 @@ const (
 	WebAppDisplayModeEnumFullScreen             WebAppDisplayModeEnum = "fullScreen"
 )
 
+// WebApp
+// A WebApps resource represents a web app created for an enterprise. Web apps are published to managed Google Play and can be distributed like other Android apps. On a user's device, a web app opens its specified URL.
 type WebApp struct {
 	DisplayMode *WebAppDisplayModeEnum `json:"displayMode,omitempty"`
 	Icons       []WebAppIcon           `json:"icons,omitempty"`

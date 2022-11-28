@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CertificateConfiguration } from "./certificateconfiguration";
 import { FleetTypeEnum } from "./fleettypeenum";
 import { Ec2InstanceTypeEnum } from "./ec2instancetypeenum";
@@ -9,77 +9,78 @@ import { FleetStatusEnum } from "./fleetstatusenum";
 import { FleetActionEnum } from "./fleetactionenum";
 
 
+
 // FleetAttributes
 /** 
  * <p>Describes a GameLift fleet of game hosting resources.</p> <p> <b>Related actions</b> </p> <p> <a>CreateFleet</a> | <a>DescribeFleetAttributes</a> </p>
 **/
 export class FleetAttributes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BuildArn" })
+  @SpeakeasyMetadata({ data: "json, name=BuildArn" })
   buildArn?: string;
 
-  @Metadata({ data: "json, name=BuildId" })
+  @SpeakeasyMetadata({ data: "json, name=BuildId" })
   buildId?: string;
 
-  @Metadata({ data: "json, name=CertificateConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=CertificateConfiguration" })
   certificateConfiguration?: CertificateConfiguration;
 
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=FleetArn" })
+  @SpeakeasyMetadata({ data: "json, name=FleetArn" })
   fleetArn?: string;
 
-  @Metadata({ data: "json, name=FleetId" })
+  @SpeakeasyMetadata({ data: "json, name=FleetId" })
   fleetId?: string;
 
-  @Metadata({ data: "json, name=FleetType" })
+  @SpeakeasyMetadata({ data: "json, name=FleetType" })
   fleetType?: FleetTypeEnum;
 
-  @Metadata({ data: "json, name=InstanceRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceRoleArn" })
   instanceRoleArn?: string;
 
-  @Metadata({ data: "json, name=InstanceType" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceType" })
   instanceType?: Ec2InstanceTypeEnum;
 
-  @Metadata({ data: "json, name=LogPaths" })
+  @SpeakeasyMetadata({ data: "json, name=LogPaths" })
   logPaths?: string[];
 
-  @Metadata({ data: "json, name=MetricGroups" })
+  @SpeakeasyMetadata({ data: "json, name=MetricGroups" })
   metricGroups?: string[];
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=NewGameSessionProtectionPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=NewGameSessionProtectionPolicy" })
   newGameSessionProtectionPolicy?: ProtectionPolicyEnum;
 
-  @Metadata({ data: "json, name=OperatingSystem" })
+  @SpeakeasyMetadata({ data: "json, name=OperatingSystem" })
   operatingSystem?: OperatingSystemEnum;
 
-  @Metadata({ data: "json, name=ResourceCreationLimitPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceCreationLimitPolicy" })
   resourceCreationLimitPolicy?: ResourceCreationLimitPolicy;
 
-  @Metadata({ data: "json, name=ScriptArn" })
+  @SpeakeasyMetadata({ data: "json, name=ScriptArn" })
   scriptArn?: string;
 
-  @Metadata({ data: "json, name=ScriptId" })
+  @SpeakeasyMetadata({ data: "json, name=ScriptId" })
   scriptId?: string;
 
-  @Metadata({ data: "json, name=ServerLaunchParameters" })
+  @SpeakeasyMetadata({ data: "json, name=ServerLaunchParameters" })
   serverLaunchParameters?: string;
 
-  @Metadata({ data: "json, name=ServerLaunchPath" })
+  @SpeakeasyMetadata({ data: "json, name=ServerLaunchPath" })
   serverLaunchPath?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: FleetStatusEnum;
 
-  @Metadata({ data: "json, name=StoppedActions" })
+  @SpeakeasyMetadata({ data: "json, name=StoppedActions" })
   stoppedActions?: FleetActionEnum[];
 
-  @Metadata({ data: "json, name=TerminationTime" })
+  @SpeakeasyMetadata({ data: "json, name=TerminationTime" })
   terminationTime?: Date;
 }

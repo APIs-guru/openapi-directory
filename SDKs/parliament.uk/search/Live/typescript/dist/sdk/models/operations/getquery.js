@@ -22,30 +22,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetQueryQueryParams = /** @class */ (function (_super) {
     __extends(GetQueryQueryParams, _super);
     function GetQueryQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=count" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=count" }),
         __metadata("design:type", Number)
     ], GetQueryQueryParams.prototype, "count", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=inUrlPrefixes" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=inUrlPrefixes" }),
         __metadata("design:type", String)
     ], GetQueryQueryParams.prototype, "inUrlPrefixes", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=q" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=q" }),
         __metadata("design:type", String)
     ], GetQueryQueryParams.prototype, "q", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=start" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=start" }),
         __metadata("design:type", Number)
     ], GetQueryQueryParams.prototype, "start", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=subdomains" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=subdomains" }),
         __metadata("design:type", String)
     ], GetQueryQueryParams.prototype, "subdomains", void 0);
     return GetQueryQueryParams;
@@ -57,7 +57,7 @@ var GetQueryRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetQueryQueryParams)
     ], GetQueryRequest.prototype, "queryParams", void 0);
     return GetQueryRequest;
@@ -69,11 +69,11 @@ var GetQueryResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetQueryResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetQueryResponse.prototype, "statusCode", void 0);
     return GetQueryResponse;

@@ -1,8 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SvmEndpoint } from "./svmendpoint";
-import { SvmEndpoint } from "./svmendpoint";
-import { SvmEndpoint } from "./svmendpoint";
-import { SvmEndpoint } from "./svmendpoint";
+
 
 
 // SvmEndpoints
@@ -10,15 +8,15 @@ import { SvmEndpoint } from "./svmendpoint";
  * An Amazon FSx for NetApp ONTAP storage virtual machine (SVM) has the following endpoints that are used to access data or to manage the SVM using the NetApp ONTAP CLI, REST API, or NetApp CloudManager.
 **/
 export class SvmEndpoints extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Iscsi" })
+  @SpeakeasyMetadata({ data: "json, name=Iscsi" })
   iscsi?: SvmEndpoint;
 
-  @Metadata({ data: "json, name=Management" })
+  @SpeakeasyMetadata({ data: "json, name=Management" })
   management?: SvmEndpoint;
 
-  @Metadata({ data: "json, name=Nfs" })
+  @SpeakeasyMetadata({ data: "json, name=Nfs" })
   nfs?: SvmEndpoint;
 
-  @Metadata({ data: "json, name=Smb" })
+  @SpeakeasyMetadata({ data: "json, name=Smb" })
   smb?: SvmEndpoint;
 }

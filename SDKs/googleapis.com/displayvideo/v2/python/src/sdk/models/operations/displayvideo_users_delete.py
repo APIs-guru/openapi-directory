@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DisplayvideoUsersDeletePathParams:
-    user_id: str = field(default=None, metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
+    user_id: str = field(metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class DisplayvideoUsersDeleteQueryParams:
 
 @dataclass
 class DisplayvideoUsersDeleteSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DisplayvideoUsersDeleteRequest:
-    path_params: DisplayvideoUsersDeletePathParams = field(default=None)
-    query_params: DisplayvideoUsersDeleteQueryParams = field(default=None)
-    security: DisplayvideoUsersDeleteSecurity = field(default=None)
+    path_params: DisplayvideoUsersDeletePathParams = field()
+    query_params: DisplayvideoUsersDeleteQueryParams = field()
+    security: DisplayvideoUsersDeleteSecurity = field()
     
 
 @dataclass
 class DisplayvideoUsersDeleteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

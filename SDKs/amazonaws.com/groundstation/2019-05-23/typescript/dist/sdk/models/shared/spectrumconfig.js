@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FrequencyBandwidth } from "./frequencybandwidth";
 import { Frequency } from "./frequency";
 import { PolarizationEnum } from "./polarizationenum";
@@ -36,15 +36,15 @@ var SpectrumConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=bandwidth" }),
+        SpeakeasyMetadata({ data: "json, name=bandwidth" }),
         __metadata("design:type", FrequencyBandwidth)
     ], SpectrumConfig.prototype, "bandwidth", void 0);
     __decorate([
-        Metadata({ data: "json, name=centerFrequency" }),
+        SpeakeasyMetadata({ data: "json, name=centerFrequency" }),
         __metadata("design:type", Frequency)
     ], SpectrumConfig.prototype, "centerFrequency", void 0);
     __decorate([
-        Metadata({ data: "json, name=polarization" }),
+        SpeakeasyMetadata({ data: "json, name=polarization" }),
         __metadata("design:type", String)
     ], SpectrumConfig.prototype, "polarization", void 0);
     return SpectrumConfig;

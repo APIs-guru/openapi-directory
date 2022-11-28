@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetEmployeePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=EmployeeID" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=EmployeeID" })
   employeeId: string;
 }
 
 
 export class GetEmployeeHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Xero-Tenant-Id" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Xero-Tenant-Id" })
   xeroTenantId: string;
 }
 
 
 export class GetEmployeeSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oAuth2: shared.SchemeOAuth2;
 }
 
 
 export class GetEmployeeRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetEmployeePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetEmployeeHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetEmployeeSecurity;
 }
 
 
 export class GetEmployeeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   employees?: shared.Employees;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

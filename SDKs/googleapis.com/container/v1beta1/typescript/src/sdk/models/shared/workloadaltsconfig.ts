@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // WorkloadAltsConfig
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configuration for direct-path (via ALTS) with workload identity.
 **/
 export class WorkloadAltsConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enableAlts" })
+  @SpeakeasyMetadata({ data: "json, name=enableAlts" })
   enableAlts?: boolean;
 }

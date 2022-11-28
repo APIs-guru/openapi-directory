@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
+from sdk.models import shared
 
 
 @dataclass
 class RemoveFromPlaylistPathParams:
-    playlist_id: str = field(default=None, metadata={'path_param': { 'field_name': 'playlistId', 'style': 'simple', 'explode': False }})
+    playlist_id: str = field(metadata={'path_param': { 'field_name': 'playlistId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -14,18 +15,18 @@ class RemoveFromPlaylistQueryParams:
 
 @dataclass
 class RemoveFromPlaylistSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class RemoveFromPlaylistRequest:
-    path_params: RemoveFromPlaylistPathParams = field(default=None)
-    query_params: RemoveFromPlaylistQueryParams = field(default=None)
-    security: RemoveFromPlaylistSecurity = field(default=None)
+    path_params: RemoveFromPlaylistPathParams = field()
+    query_params: RemoveFromPlaylistQueryParams = field()
+    security: RemoveFromPlaylistSecurity = field()
     
 
 @dataclass
 class RemoveFromPlaylistResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GetSqlInjectionMatchSetRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A request to get a <a>SqlInjectionMatchSet</a>.
 **/
 export class GetSqlInjectionMatchSetRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SqlInjectionMatchSetId" })
+  @SpeakeasyMetadata({ data: "json, name=SqlInjectionMatchSetId" })
   sqlInjectionMatchSetId: string;
 }

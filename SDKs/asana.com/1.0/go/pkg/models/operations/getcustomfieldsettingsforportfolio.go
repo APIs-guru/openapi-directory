@@ -15,13 +15,13 @@ type GetCustomFieldSettingsForPortfolioQueryParams struct {
 	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
+type GetCustomFieldSettingsForPortfolio200ApplicationJSON struct {
+	Data []shared.CustomFieldSettingResponse `json:"data,omitempty"`
+}
+
 type GetCustomFieldSettingsForPortfolioRequest struct {
 	PathParams  GetCustomFieldSettingsForPortfolioPathParams
 	QueryParams GetCustomFieldSettingsForPortfolioQueryParams
-}
-
-type GetCustomFieldSettingsForPortfolio200ApplicationJSON struct {
-	Data []shared.CustomFieldSettingResponse `json:"data,omitempty"`
 }
 
 type GetCustomFieldSettingsForPortfolioResponse struct {

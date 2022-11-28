@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResolutionStrategyEnum } from "./resolutionstrategyenum";
+
 
 
 // BackendApiConflictResolution
@@ -7,6 +8,6 @@ import { ResolutionStrategyEnum } from "./resolutionstrategyenum";
  * Describes the conflict resolution configuration for your data model configured in your Amplify project.
 **/
 export class BackendApiConflictResolution extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ResolutionStrategy" })
+  @SpeakeasyMetadata({ data: "json, name=ResolutionStrategy" })
   resolutionStrategy?: ResolutionStrategyEnum;
 }

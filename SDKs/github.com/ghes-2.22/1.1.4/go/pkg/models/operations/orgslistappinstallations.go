@@ -13,14 +13,14 @@ type OrgsListAppInstallationsQueryParams struct {
 	PerPage *int64 `queryParam:"style=form,explode=true,name=per_page"`
 }
 
-type OrgsListAppInstallationsRequest struct {
-	PathParams  OrgsListAppInstallationsPathParams
-	QueryParams OrgsListAppInstallationsQueryParams
-}
-
 type OrgsListAppInstallations200ApplicationJSON struct {
 	Installations []shared.InstallationGhes2 `json:"installations"`
 	TotalCount    int64                      `json:"total_count"`
+}
+
+type OrgsListAppInstallationsRequest struct {
+	PathParams  OrgsListAppInstallationsPathParams
+	QueryParams OrgsListAppInstallationsQueryParams
 }
 
 type OrgsListAppInstallationsResponse struct {

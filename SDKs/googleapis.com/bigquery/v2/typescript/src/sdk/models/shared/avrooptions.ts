@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AvroOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=useAvroLogicalTypes" })
+  @SpeakeasyMetadata({ data: "json, name=useAvroLogicalTypes" })
   useAvroLogicalTypes?: boolean;
 }

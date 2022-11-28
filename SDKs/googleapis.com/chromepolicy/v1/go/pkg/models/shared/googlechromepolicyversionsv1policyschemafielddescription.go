@@ -1,5 +1,7 @@
 package shared
 
+// GoogleChromePolicyVersionsV1PolicySchemaFieldDescription
+// Provides detailed information for a particular field that is part of a PolicySchema.
 type GoogleChromePolicyVersionsV1PolicySchemaFieldDescription struct {
 	DefaultValue            *interface{}                                                         `json:"defaultValue,omitempty"`
 	Description             *string                                                              `json:"description,omitempty"`

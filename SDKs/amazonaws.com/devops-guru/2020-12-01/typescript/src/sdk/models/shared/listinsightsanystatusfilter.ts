@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StartTimeRange } from "./starttimerange";
 import { InsightTypeEnum } from "./insighttypeenum";
+
 
 
 // ListInsightsAnyStatusFilter
@@ -8,9 +9,9 @@ import { InsightTypeEnum } from "./insighttypeenum";
  *  Used to filter for insights that have any status. 
 **/
 export class ListInsightsAnyStatusFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=StartTimeRange" })
+  @SpeakeasyMetadata({ data: "json, name=StartTimeRange" })
   startTimeRange: StartTimeRange;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type: InsightTypeEnum;
 }

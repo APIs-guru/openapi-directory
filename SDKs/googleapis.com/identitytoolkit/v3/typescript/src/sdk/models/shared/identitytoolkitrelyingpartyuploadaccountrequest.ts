@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserInfo } from "./userinfo";
+
 
 
 // IdentitytoolkitRelyingpartyUploadAccountRequest
@@ -8,45 +8,45 @@ import { UserInfo } from "./userinfo";
  * Request to upload user account in batch.
 **/
 export class IdentitytoolkitRelyingpartyUploadAccountRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowOverwrite" })
+  @SpeakeasyMetadata({ data: "json, name=allowOverwrite" })
   allowOverwrite?: boolean;
 
-  @Metadata({ data: "json, name=blockSize" })
+  @SpeakeasyMetadata({ data: "json, name=blockSize" })
   blockSize?: number;
 
-  @Metadata({ data: "json, name=cpuMemCost" })
+  @SpeakeasyMetadata({ data: "json, name=cpuMemCost" })
   cpuMemCost?: number;
 
-  @Metadata({ data: "json, name=delegatedProjectNumber" })
+  @SpeakeasyMetadata({ data: "json, name=delegatedProjectNumber" })
   delegatedProjectNumber?: string;
 
-  @Metadata({ data: "json, name=dkLen" })
+  @SpeakeasyMetadata({ data: "json, name=dkLen" })
   dkLen?: number;
 
-  @Metadata({ data: "json, name=hashAlgorithm" })
+  @SpeakeasyMetadata({ data: "json, name=hashAlgorithm" })
   hashAlgorithm?: string;
 
-  @Metadata({ data: "json, name=memoryCost" })
+  @SpeakeasyMetadata({ data: "json, name=memoryCost" })
   memoryCost?: number;
 
-  @Metadata({ data: "json, name=parallelization" })
+  @SpeakeasyMetadata({ data: "json, name=parallelization" })
   parallelization?: number;
 
-  @Metadata({ data: "json, name=rounds" })
+  @SpeakeasyMetadata({ data: "json, name=rounds" })
   rounds?: number;
 
-  @Metadata({ data: "json, name=saltSeparator" })
+  @SpeakeasyMetadata({ data: "json, name=saltSeparator" })
   saltSeparator?: string;
 
-  @Metadata({ data: "json, name=sanityCheck" })
+  @SpeakeasyMetadata({ data: "json, name=sanityCheck" })
   sanityCheck?: boolean;
 
-  @Metadata({ data: "json, name=signerKey" })
+  @SpeakeasyMetadata({ data: "json, name=signerKey" })
   signerKey?: string;
 
-  @Metadata({ data: "json, name=targetProjectId" })
+  @SpeakeasyMetadata({ data: "json, name=targetProjectId" })
   targetProjectId?: string;
 
-  @Metadata({ data: "json, name=users", elemType: shared.UserInfo })
+  @SpeakeasyMetadata({ data: "json, name=users", elemType: UserInfo })
   users?: UserInfo[];
 }

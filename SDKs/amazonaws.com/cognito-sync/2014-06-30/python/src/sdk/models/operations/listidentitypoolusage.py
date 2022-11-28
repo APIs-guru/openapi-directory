@@ -1,5 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
@@ -22,17 +25,17 @@ class ListIdentityPoolUsageHeaders:
 
 @dataclass
 class ListIdentityPoolUsageRequest:
-    query_params: ListIdentityPoolUsageQueryParams = field(default=None)
-    headers: ListIdentityPoolUsageHeaders = field(default=None)
+    headers: ListIdentityPoolUsageHeaders = field()
+    query_params: ListIdentityPoolUsageQueryParams = field()
     
 
 @dataclass
 class ListIdentityPoolUsageResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_error_exception: Optional[Any] = field(default=None)
     invalid_parameter_exception: Optional[Any] = field(default=None)
     list_identity_pool_usage_response: Optional[shared.ListIdentityPoolUsageResponse] = field(default=None)
     not_authorized_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

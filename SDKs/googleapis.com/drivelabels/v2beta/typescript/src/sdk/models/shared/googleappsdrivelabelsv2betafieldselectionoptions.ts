@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleAppsDriveLabelsV2betaFieldSelectionOptionsChoice } from "./googleappsdrivelabelsv2betafieldselectionoptionschoice";
 import { GoogleAppsDriveLabelsV2betaFieldListOptions } from "./googleappsdrivelabelsv2betafieldlistoptions";
+import { GoogleAppsDriveLabelsV2betaFieldSelectionOptionsChoiceInput } from "./googleappsdrivelabelsv2betafieldselectionoptionschoice";
+
 
 
 // GoogleAppsDriveLabelsV2betaFieldSelectionOptions
@@ -9,9 +10,22 @@ import { GoogleAppsDriveLabelsV2betaFieldListOptions } from "./googleappsdrivela
  * Options for the selection field type.
 **/
 export class GoogleAppsDriveLabelsV2betaFieldSelectionOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=choices", elemType: shared.GoogleAppsDriveLabelsV2betaFieldSelectionOptionsChoice })
+  @SpeakeasyMetadata({ data: "json, name=choices", elemType: GoogleAppsDriveLabelsV2betaFieldSelectionOptionsChoice })
   choices?: GoogleAppsDriveLabelsV2betaFieldSelectionOptionsChoice[];
 
-  @Metadata({ data: "json, name=listOptions" })
+  @SpeakeasyMetadata({ data: "json, name=listOptions" })
+  listOptions?: GoogleAppsDriveLabelsV2betaFieldListOptions;
+}
+
+
+// GoogleAppsDriveLabelsV2betaFieldSelectionOptionsInput
+/** 
+ * Options for the selection field type.
+**/
+export class GoogleAppsDriveLabelsV2betaFieldSelectionOptionsInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=choices", elemType: GoogleAppsDriveLabelsV2betaFieldSelectionOptionsChoiceInput })
+  choices?: GoogleAppsDriveLabelsV2betaFieldSelectionOptionsChoiceInput[];
+
+  @SpeakeasyMetadata({ data: "json, name=listOptions" })
   listOptions?: GoogleAppsDriveLabelsV2betaFieldListOptions;
 }

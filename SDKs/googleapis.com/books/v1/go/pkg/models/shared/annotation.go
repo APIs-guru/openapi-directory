@@ -1,5 +1,7 @@
 package shared
 
+// AnnotationClientVersionRanges
+// Selection ranges sent from the client.
 type AnnotationClientVersionRanges struct {
 	CfiRange       *BooksAnnotationsRange `json:"cfiRange,omitempty"`
 	ContentVersion *string                `json:"contentVersion,omitempty"`
@@ -8,6 +10,8 @@ type AnnotationClientVersionRanges struct {
 	ImageCfiRange  *BooksAnnotationsRange `json:"imageCfiRange,omitempty"`
 }
 
+// AnnotationCurrentVersionRanges
+// Selection ranges for the most recent content version.
 type AnnotationCurrentVersionRanges struct {
 	CfiRange       *BooksAnnotationsRange `json:"cfiRange,omitempty"`
 	ContentVersion *string                `json:"contentVersion,omitempty"`

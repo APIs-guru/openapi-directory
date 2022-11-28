@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // QueryExecutionStatistics
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The amount of data scanned during the query execution and the amount of time that it took to execute, and the type of statement that was run.
 **/
 export class QueryExecutionStatistics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DataManifestLocation" })
+  @SpeakeasyMetadata({ data: "json, name=DataManifestLocation" })
   dataManifestLocation?: string;
 
-  @Metadata({ data: "json, name=DataScannedInBytes" })
+  @SpeakeasyMetadata({ data: "json, name=DataScannedInBytes" })
   dataScannedInBytes?: number;
 
-  @Metadata({ data: "json, name=EngineExecutionTimeInMillis" })
+  @SpeakeasyMetadata({ data: "json, name=EngineExecutionTimeInMillis" })
   engineExecutionTimeInMillis?: number;
 
-  @Metadata({ data: "json, name=QueryPlanningTimeInMillis" })
+  @SpeakeasyMetadata({ data: "json, name=QueryPlanningTimeInMillis" })
   queryPlanningTimeInMillis?: number;
 
-  @Metadata({ data: "json, name=QueryQueueTimeInMillis" })
+  @SpeakeasyMetadata({ data: "json, name=QueryQueueTimeInMillis" })
   queryQueueTimeInMillis?: number;
 
-  @Metadata({ data: "json, name=ServiceProcessingTimeInMillis" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceProcessingTimeInMillis" })
   serviceProcessingTimeInMillis?: number;
 
-  @Metadata({ data: "json, name=TotalExecutionTimeInMillis" })
+  @SpeakeasyMetadata({ data: "json, name=TotalExecutionTimeInMillis" })
   totalExecutionTimeInMillis?: number;
 }

@@ -1,46 +1,47 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateNetworkNetflowPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
 
 export class UpdateNetworkNetflowRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=collectorIp" })
+  @SpeakeasyMetadata({ data: "json, name=collectorIp" })
   collectorIp?: string;
 
-  @Metadata({ data: "json, name=collectorPort" })
+  @SpeakeasyMetadata({ data: "json, name=collectorPort" })
   collectorPort?: number;
 
-  @Metadata({ data: "json, name=etaDstPort" })
+  @SpeakeasyMetadata({ data: "json, name=etaDstPort" })
   etaDstPort?: number;
 
-  @Metadata({ data: "json, name=etaEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=etaEnabled" })
   etaEnabled?: boolean;
 
-  @Metadata({ data: "json, name=reportingEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=reportingEnabled" })
   reportingEnabled?: boolean;
 }
 
 
 export class UpdateNetworkNetflowRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateNetworkNetflowPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: UpdateNetworkNetflowRequestBody;
 }
 
 
 export class UpdateNetworkNetflowResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateNetworkNetflow200ApplicationJsonObject?: Map<string, any>;
 }

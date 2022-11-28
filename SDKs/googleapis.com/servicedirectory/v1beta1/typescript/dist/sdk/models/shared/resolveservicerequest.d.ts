@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * The request message for LookupService.ResolveService. Looks up a service by its name, returns the service and its endpoints.
 **/

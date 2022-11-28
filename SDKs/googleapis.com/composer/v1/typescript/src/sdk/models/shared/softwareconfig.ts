@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SoftwareConfig
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies the selection and configuration of software inside the environment.
 **/
 export class SoftwareConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=airflowConfigOverrides" })
+  @SpeakeasyMetadata({ data: "json, name=airflowConfigOverrides" })
   airflowConfigOverrides?: Map<string, string>;
 
-  @Metadata({ data: "json, name=envVariables" })
+  @SpeakeasyMetadata({ data: "json, name=envVariables" })
   envVariables?: Map<string, string>;
 
-  @Metadata({ data: "json, name=imageVersion" })
+  @SpeakeasyMetadata({ data: "json, name=imageVersion" })
   imageVersion?: string;
 
-  @Metadata({ data: "json, name=pypiPackages" })
+  @SpeakeasyMetadata({ data: "json, name=pypiPackages" })
   pypiPackages?: Map<string, string>;
 
-  @Metadata({ data: "json, name=pythonVersion" })
+  @SpeakeasyMetadata({ data: "json, name=pythonVersion" })
   pythonVersion?: string;
 
-  @Metadata({ data: "json, name=schedulerCount" })
+  @SpeakeasyMetadata({ data: "json, name=schedulerCount" })
   schedulerCount?: number;
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Cursor } from "./cursor";
+
 
 
 // CommitCursorRequest
@@ -7,9 +8,9 @@ import { Cursor } from "./cursor";
  * Request for CommitCursor.
 **/
 export class CommitCursorRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cursor" })
+  @SpeakeasyMetadata({ data: "json, name=cursor" })
   cursor?: Cursor;
 
-  @Metadata({ data: "json, name=partition" })
+  @SpeakeasyMetadata({ data: "json, name=partition" })
   partition?: string;
 }

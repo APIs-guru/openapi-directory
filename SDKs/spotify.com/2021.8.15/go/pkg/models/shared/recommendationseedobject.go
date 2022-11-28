@@ -1,5 +1,8 @@
 package shared
 
+// RecommendationSeedObject
+
+// https://developer.spotify.com/documentation/web-api/reference/#object-recommendationseedobject - Find more info on the official Spotify Web API Reference
 type RecommendationSeedObject struct {
 	AfterFilteringSize *int32  `json:"afterFilteringSize,omitempty"`
 	AfterRelinkingSize *int32  `json:"afterRelinkingSize,omitempty"`

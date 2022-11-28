@@ -31,6 +31,8 @@ const (
 	EnterpriseCrmLoggingGwsSanitizeOptionsSanitizeTypeEnumDoNotSanitize              EnterpriseCrmLoggingGwsSanitizeOptionsSanitizeTypeEnum = "DO_NOT_SANITIZE"
 )
 
+// EnterpriseCrmLoggingGwsSanitizeOptions
+// Identifies whether a field contains, or may contain, PII or sensitive data, and how to sanitize the field if it does. If a field's privacy type cannot be determined then it is sanitized (e.g., scrubbed). The specific sanitizer implementation is determined by run-time configuration and environment options (e.g., prod vs. qa). next_id: 5
 type EnterpriseCrmLoggingGwsSanitizeOptions struct {
 	IsAlreadySanitized *bool                                                   `json:"isAlreadySanitized,omitempty"`
 	LogType            []EnterpriseCrmLoggingGwsSanitizeOptionsLogTypeEnum     `json:"logType,omitempty"`

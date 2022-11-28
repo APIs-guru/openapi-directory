@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostRestoreDbInstanceFromS3ActionEnum(str, Enum):
     RESTORE_DB_INSTANCE_FROM_S3 = "RestoreDBInstanceFromS3"
@@ -10,8 +14,8 @@ class PostRestoreDbInstanceFromS3VersionEnum(str, Enum):
 
 @dataclass
 class PostRestoreDbInstanceFromS3QueryParams:
-    action: PostRestoreDbInstanceFromS3ActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostRestoreDbInstanceFromS3VersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostRestoreDbInstanceFromS3ActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostRestoreDbInstanceFromS3VersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostRestoreDbInstanceFromS3Headers:
 
 @dataclass
 class PostRestoreDbInstanceFromS3Request:
-    query_params: PostRestoreDbInstanceFromS3QueryParams = field(default=None)
-    headers: PostRestoreDbInstanceFromS3Headers = field(default=None)
+    headers: PostRestoreDbInstanceFromS3Headers = field()
+    query_params: PostRestoreDbInstanceFromS3QueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostRestoreDbInstanceFromS3Response:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

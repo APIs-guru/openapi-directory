@@ -1,6 +1,7 @@
 
 
+
 export enum HttpEndpointS3BackupModeEnum {
-    FailedDataOnly = "FailedDataOnly"
-,    AllData = "AllData"
+    FailedDataOnly = "FailedDataOnly",
+    AllData = "AllData"
 }

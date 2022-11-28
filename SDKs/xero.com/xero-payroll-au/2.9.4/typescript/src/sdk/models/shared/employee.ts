@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BankAccount } from "./bankaccount";
 import { HomeAddress } from "./homeaddress";
 import { LeaveBalance } from "./leavebalance";
@@ -8,108 +7,203 @@ import { OpeningBalances } from "./openingbalances";
 import { PayTemplate } from "./paytemplate";
 import { EmployeeStatusEnum } from "./employeestatusenum";
 import { SuperMembership } from "./supermembership";
-import { TaxDeclaration } from "./taxdeclaration";
+import { TaxDeclarationInput } from "./taxdeclaration";
 import { ValidationError } from "./validationerror";
+import { TaxDeclaration } from "./taxdeclaration";
+
 
 export enum EmployeeGenderEnum {
-    N = "N"
-,    M = "M"
-,    F = "F"
-,    I = "I"
+    N = "N",
+    M = "M",
+    F = "F",
+    I = "I"
+}
+
+
+export class EmployeeInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=BankAccounts", elemType: BankAccount })
+  bankAccounts?: BankAccount[];
+
+  @SpeakeasyMetadata({ data: "json, name=Classification" })
+  classification?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=DateOfBirth" })
+  dateOfBirth: string;
+
+  @SpeakeasyMetadata({ data: "json, name=Email" })
+  email?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=EmployeeGroupName" })
+  employeeGroupName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=EmployeeID" })
+  employeeId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=FirstName" })
+  firstName: string;
+
+  @SpeakeasyMetadata({ data: "json, name=Gender" })
+  gender?: EmployeeGenderEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=HomeAddress" })
+  homeAddress?: HomeAddress;
+
+  @SpeakeasyMetadata({ data: "json, name=IsAuthorisedToApproveLeave" })
+  isAuthorisedToApproveLeave?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=IsAuthorisedToApproveTimesheets" })
+  isAuthorisedToApproveTimesheets?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=JobTitle" })
+  jobTitle?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=LastName" })
+  lastName: string;
+
+  @SpeakeasyMetadata({ data: "json, name=LeaveBalances", elemType: LeaveBalance })
+  leaveBalances?: LeaveBalance[];
+
+  @SpeakeasyMetadata({ data: "json, name=LeaveLines", elemType: LeaveLine })
+  leaveLines?: LeaveLine[];
+
+  @SpeakeasyMetadata({ data: "json, name=MiddleNames" })
+  middleNames?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=Mobile" })
+  mobile?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=OpeningBalances" })
+  openingBalances?: OpeningBalances;
+
+  @SpeakeasyMetadata({ data: "json, name=OrdinaryEarningsRateID" })
+  ordinaryEarningsRateId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=PayTemplate" })
+  payTemplate?: PayTemplate;
+
+  @SpeakeasyMetadata({ data: "json, name=PayrollCalendarID" })
+  payrollCalendarId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=Phone" })
+  phone?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=StartDate" })
+  startDate?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=Status" })
+  status?: EmployeeStatusEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=SuperMemberships", elemType: SuperMembership })
+  superMemberships?: SuperMembership[];
+
+  @SpeakeasyMetadata({ data: "json, name=TaxDeclaration" })
+  taxDeclaration?: TaxDeclarationInput;
+
+  @SpeakeasyMetadata({ data: "json, name=TerminationDate" })
+  terminationDate?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=Title" })
+  title?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=TwitterUserName" })
+  twitterUserName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=ValidationErrors", elemType: ValidationError })
+  validationErrors?: ValidationError[];
 }
 
 
 export class Employee extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BankAccounts", elemType: shared.BankAccount })
+  @SpeakeasyMetadata({ data: "json, name=BankAccounts", elemType: BankAccount })
   bankAccounts?: BankAccount[];
 
-  @Metadata({ data: "json, name=Classification" })
+  @SpeakeasyMetadata({ data: "json, name=Classification" })
   classification?: string;
 
-  @Metadata({ data: "json, name=DateOfBirth" })
+  @SpeakeasyMetadata({ data: "json, name=DateOfBirth" })
   dateOfBirth: string;
 
-  @Metadata({ data: "json, name=Email" })
+  @SpeakeasyMetadata({ data: "json, name=Email" })
   email?: string;
 
-  @Metadata({ data: "json, name=EmployeeGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=EmployeeGroupName" })
   employeeGroupName?: string;
 
-  @Metadata({ data: "json, name=EmployeeID" })
+  @SpeakeasyMetadata({ data: "json, name=EmployeeID" })
   employeeId?: string;
 
-  @Metadata({ data: "json, name=FirstName" })
+  @SpeakeasyMetadata({ data: "json, name=FirstName" })
   firstName: string;
 
-  @Metadata({ data: "json, name=Gender" })
+  @SpeakeasyMetadata({ data: "json, name=Gender" })
   gender?: EmployeeGenderEnum;
 
-  @Metadata({ data: "json, name=HomeAddress" })
+  @SpeakeasyMetadata({ data: "json, name=HomeAddress" })
   homeAddress?: HomeAddress;
 
-  @Metadata({ data: "json, name=IsAuthorisedToApproveLeave" })
+  @SpeakeasyMetadata({ data: "json, name=IsAuthorisedToApproveLeave" })
   isAuthorisedToApproveLeave?: boolean;
 
-  @Metadata({ data: "json, name=IsAuthorisedToApproveTimesheets" })
+  @SpeakeasyMetadata({ data: "json, name=IsAuthorisedToApproveTimesheets" })
   isAuthorisedToApproveTimesheets?: boolean;
 
-  @Metadata({ data: "json, name=JobTitle" })
+  @SpeakeasyMetadata({ data: "json, name=JobTitle" })
   jobTitle?: string;
 
-  @Metadata({ data: "json, name=LastName" })
+  @SpeakeasyMetadata({ data: "json, name=LastName" })
   lastName: string;
 
-  @Metadata({ data: "json, name=LeaveBalances", elemType: shared.LeaveBalance })
+  @SpeakeasyMetadata({ data: "json, name=LeaveBalances", elemType: LeaveBalance })
   leaveBalances?: LeaveBalance[];
 
-  @Metadata({ data: "json, name=LeaveLines", elemType: shared.LeaveLine })
+  @SpeakeasyMetadata({ data: "json, name=LeaveLines", elemType: LeaveLine })
   leaveLines?: LeaveLine[];
 
-  @Metadata({ data: "json, name=MiddleNames" })
+  @SpeakeasyMetadata({ data: "json, name=MiddleNames" })
   middleNames?: string;
 
-  @Metadata({ data: "json, name=Mobile" })
+  @SpeakeasyMetadata({ data: "json, name=Mobile" })
   mobile?: string;
 
-  @Metadata({ data: "json, name=OpeningBalances" })
+  @SpeakeasyMetadata({ data: "json, name=OpeningBalances" })
   openingBalances?: OpeningBalances;
 
-  @Metadata({ data: "json, name=OrdinaryEarningsRateID" })
+  @SpeakeasyMetadata({ data: "json, name=OrdinaryEarningsRateID" })
   ordinaryEarningsRateId?: string;
 
-  @Metadata({ data: "json, name=PayTemplate" })
+  @SpeakeasyMetadata({ data: "json, name=PayTemplate" })
   payTemplate?: PayTemplate;
 
-  @Metadata({ data: "json, name=PayrollCalendarID" })
+  @SpeakeasyMetadata({ data: "json, name=PayrollCalendarID" })
   payrollCalendarId?: string;
 
-  @Metadata({ data: "json, name=Phone" })
+  @SpeakeasyMetadata({ data: "json, name=Phone" })
   phone?: string;
 
-  @Metadata({ data: "json, name=StartDate" })
+  @SpeakeasyMetadata({ data: "json, name=StartDate" })
   startDate?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: EmployeeStatusEnum;
 
-  @Metadata({ data: "json, name=SuperMemberships", elemType: shared.SuperMembership })
+  @SpeakeasyMetadata({ data: "json, name=SuperMemberships", elemType: SuperMembership })
   superMemberships?: SuperMembership[];
 
-  @Metadata({ data: "json, name=TaxDeclaration" })
+  @SpeakeasyMetadata({ data: "json, name=TaxDeclaration" })
   taxDeclaration?: TaxDeclaration;
 
-  @Metadata({ data: "json, name=TerminationDate" })
+  @SpeakeasyMetadata({ data: "json, name=TerminationDate" })
   terminationDate?: string;
 
-  @Metadata({ data: "json, name=Title" })
+  @SpeakeasyMetadata({ data: "json, name=Title" })
   title?: string;
 
-  @Metadata({ data: "json, name=TwitterUserName" })
+  @SpeakeasyMetadata({ data: "json, name=TwitterUserName" })
   twitterUserName?: string;
 
-  @Metadata({ data: "json, name=UpdatedDateUTC" })
+  @SpeakeasyMetadata({ data: "json, name=UpdatedDateUTC" })
   updatedDateUtc?: string;
 
-  @Metadata({ data: "json, name=ValidationErrors", elemType: shared.ValidationError })
+  @SpeakeasyMetadata({ data: "json, name=ValidationErrors", elemType: ValidationError })
   validationErrors?: ValidationError[];
 }

@@ -1,6 +1,7 @@
 
 
+
 export enum LambdaFunctionMetricStatisticEnum {
-    Maximum = "Maximum"
-,    Average = "Average"
+    Maximum = "Maximum",
+    Average = "Average"
 }

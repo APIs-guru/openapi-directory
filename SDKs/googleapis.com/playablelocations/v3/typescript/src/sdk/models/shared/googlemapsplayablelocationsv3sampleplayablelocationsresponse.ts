@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleMapsPlayablelocationsV3SamplePlayableLocationList } from "./googlemapsplayablelocationsv3sampleplayablelocationlist";
+
 
 
 // GoogleMapsPlayablelocationsV3SamplePlayableLocationsResponse
@@ -8,9 +8,9 @@ import { GoogleMapsPlayablelocationsV3SamplePlayableLocationList } from "./googl
  *  Response for the SamplePlayableLocations method.
 **/
 export class GoogleMapsPlayablelocationsV3SamplePlayableLocationsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=locationsPerGameObjectType", elemType: shared.GoogleMapsPlayablelocationsV3SamplePlayableLocationList })
+  @SpeakeasyMetadata({ data: "json, name=locationsPerGameObjectType", elemType: GoogleMapsPlayablelocationsV3SamplePlayableLocationList })
   locationsPerGameObjectType?: Map<string, GoogleMapsPlayablelocationsV3SamplePlayableLocationList>;
 
-  @Metadata({ data: "json, name=ttl" })
+  @SpeakeasyMetadata({ data: "json, name=ttl" })
   ttl?: string;
 }

@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { DomainValidation } from "./domainvalidation";
 import { RenewalStatusEnum } from "./renewalstatusenum";
 import { FailureReasonEnum } from "./failurereasonenum";
 // RenewalSummary
@@ -36,19 +36,19 @@ var RenewalSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DomainValidationOptions", elemType: shared.DomainValidation }),
+        SpeakeasyMetadata({ data: "json, name=DomainValidationOptions", elemType: DomainValidation }),
         __metadata("design:type", Array)
     ], RenewalSummary.prototype, "domainValidationOptions", void 0);
     __decorate([
-        Metadata({ data: "json, name=RenewalStatus" }),
+        SpeakeasyMetadata({ data: "json, name=RenewalStatus" }),
         __metadata("design:type", String)
     ], RenewalSummary.prototype, "renewalStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=RenewalStatusReason" }),
+        SpeakeasyMetadata({ data: "json, name=RenewalStatusReason" }),
         __metadata("design:type", String)
     ], RenewalSummary.prototype, "renewalStatusReason", void 0);
     __decorate([
-        Metadata({ data: "json, name=UpdatedAt" }),
+        SpeakeasyMetadata({ data: "json, name=UpdatedAt" }),
         __metadata("design:type", Date)
     ], RenewalSummary.prototype, "updatedAt", void 0);
     return RenewalSummary;

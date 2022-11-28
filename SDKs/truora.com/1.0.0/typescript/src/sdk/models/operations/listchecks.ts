@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ListChecksQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=report_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=report_id" })
   reportId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=start_key" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=start_key" })
   startKey?: string;
 }
 
 
 export class ListChecksSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   apiKey: shared.SchemeApiKey;
 }
 
 
 export class ListChecksRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ListChecksQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: ListChecksSecurity;
 }
 
 
 export class ListChecksResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   checksOutput?: shared.ChecksOutput;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

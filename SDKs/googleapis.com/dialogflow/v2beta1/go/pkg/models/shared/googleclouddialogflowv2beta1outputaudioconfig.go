@@ -11,6 +11,8 @@ const (
 	GoogleCloudDialogflowV2beta1OutputAudioConfigAudioEncodingEnumOutputAudioEncodingMulaw       GoogleCloudDialogflowV2beta1OutputAudioConfigAudioEncodingEnum = "OUTPUT_AUDIO_ENCODING_MULAW"
 )
 
+// GoogleCloudDialogflowV2beta1OutputAudioConfig
+// Instructs the speech synthesizer how to generate the output audio content. If this audio config is supplied in a request, it overrides all existing text-to-speech settings applied to the agent.
 type GoogleCloudDialogflowV2beta1OutputAudioConfig struct {
 	AudioEncoding          *GoogleCloudDialogflowV2beta1OutputAudioConfigAudioEncodingEnum `json:"audioEncoding,omitempty"`
 	SampleRateHertz        *int32                                                          `json:"sampleRateHertz,omitempty"`

@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class VaultMattersHoldsAccountsListPathParams:
-    hold_id: str = field(default=None, metadata={'path_param': { 'field_name': 'holdId', 'style': 'simple', 'explode': False }})
-    matter_id: str = field(default=None, metadata={'path_param': { 'field_name': 'matterId', 'style': 'simple', 'explode': False }})
+    hold_id: str = field(metadata={'path_param': { 'field_name': 'holdId', 'style': 'simple', 'explode': False }})
+    matter_id: str = field(metadata={'path_param': { 'field_name': 'matterId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,14 +27,14 @@ class VaultMattersHoldsAccountsListQueryParams:
 
 @dataclass
 class VaultMattersHoldsAccountsListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class VaultMattersHoldsAccountsListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -44,14 +45,14 @@ class VaultMattersHoldsAccountsListSecurity:
 
 @dataclass
 class VaultMattersHoldsAccountsListRequest:
-    path_params: VaultMattersHoldsAccountsListPathParams = field(default=None)
-    query_params: VaultMattersHoldsAccountsListQueryParams = field(default=None)
-    security: VaultMattersHoldsAccountsListSecurity = field(default=None)
+    path_params: VaultMattersHoldsAccountsListPathParams = field()
+    query_params: VaultMattersHoldsAccountsListQueryParams = field()
+    security: VaultMattersHoldsAccountsListSecurity = field()
     
 
 @dataclass
 class VaultMattersHoldsAccountsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_held_accounts_response: Optional[shared.ListHeldAccountsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

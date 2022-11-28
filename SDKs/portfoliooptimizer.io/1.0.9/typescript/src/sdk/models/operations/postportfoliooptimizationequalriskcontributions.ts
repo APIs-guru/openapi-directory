@@ -1,46 +1,47 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostPortfolioOptimizationEqualRiskContributionsRequestBodyConstraints extends SpeakeasyBase {
-  @Metadata({ data: "json, name=maximumAssetsWeights" })
+  @SpeakeasyMetadata({ data: "json, name=maximumAssetsWeights" })
   maximumAssetsWeights?: number[];
 
-  @Metadata({ data: "json, name=minimumAssetsWeights" })
+  @SpeakeasyMetadata({ data: "json, name=minimumAssetsWeights" })
   minimumAssetsWeights?: number[];
 }
 
 
 export class PostPortfolioOptimizationEqualRiskContributionsRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assets" })
+  @SpeakeasyMetadata({ data: "json, name=assets" })
   assets: number;
 
-  @Metadata({ data: "json, name=assetsCovarianceMatrix" })
+  @SpeakeasyMetadata({ data: "json, name=assetsCovarianceMatrix" })
   assetsCovarianceMatrix: number[][];
 
-  @Metadata({ data: "json, name=constraints" })
+  @SpeakeasyMetadata({ data: "json, name=constraints" })
   constraints?: PostPortfolioOptimizationEqualRiskContributionsRequestBodyConstraints;
 }
 
 
-export class PostPortfolioOptimizationEqualRiskContributionsRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: PostPortfolioOptimizationEqualRiskContributionsRequestBody;
-}
-
-
 export class PostPortfolioOptimizationEqualRiskContributions200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assetsWeights" })
+  @SpeakeasyMetadata({ data: "json, name=assetsWeights" })
   assetsWeights: number[];
 }
 
 
+export class PostPortfolioOptimizationEqualRiskContributionsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: PostPortfolioOptimizationEqualRiskContributionsRequestBody;
+}
+
+
 export class PostPortfolioOptimizationEqualRiskContributionsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postPortfolioOptimizationEqualRiskContributions200ApplicationJsonObject?: PostPortfolioOptimizationEqualRiskContributions200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

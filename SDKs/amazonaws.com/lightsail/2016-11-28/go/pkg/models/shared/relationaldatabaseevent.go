@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// RelationalDatabaseEvent
+// Describes an event for a database.
 type RelationalDatabaseEvent struct {
 	CreatedAt       *time.Time `json:"createdAt,omitempty"`
 	EventCategories []string   `json:"eventCategories,omitempty"`

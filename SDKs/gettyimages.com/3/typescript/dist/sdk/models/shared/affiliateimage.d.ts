@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AffiliateImageUrls } from "./affiliateimageurls";
 export declare class AffiliateImage extends SpeakeasyBase {
     caption?: string;

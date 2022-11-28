@@ -13,6 +13,18 @@ const (
 	ProfileProfileTypeEnumHeapAlloc              ProfileProfileTypeEnum = "HEAP_ALLOC"
 )
 
+// ProfileInput
+// Profile resource.
+type ProfileInput struct {
+	Deployment   *Deployment             `json:"deployment,omitempty"`
+	Duration     *string                 `json:"duration,omitempty"`
+	Labels       map[string]string       `json:"labels,omitempty"`
+	ProfileBytes *string                 `json:"profileBytes,omitempty"`
+	ProfileType  *ProfileProfileTypeEnum `json:"profileType,omitempty"`
+}
+
+// Profile
+// Profile resource.
 type Profile struct {
 	Deployment   *Deployment             `json:"deployment,omitempty"`
 	Duration     *string                 `json:"duration,omitempty"`

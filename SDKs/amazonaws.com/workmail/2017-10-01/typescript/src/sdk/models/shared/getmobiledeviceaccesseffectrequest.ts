@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetMobileDeviceAccessEffectRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DeviceModel" })
+  @SpeakeasyMetadata({ data: "json, name=DeviceModel" })
   deviceModel?: string;
 
-  @Metadata({ data: "json, name=DeviceOperatingSystem" })
+  @SpeakeasyMetadata({ data: "json, name=DeviceOperatingSystem" })
   deviceOperatingSystem?: string;
 
-  @Metadata({ data: "json, name=DeviceType" })
+  @SpeakeasyMetadata({ data: "json, name=DeviceType" })
   deviceType?: string;
 
-  @Metadata({ data: "json, name=DeviceUserAgent" })
+  @SpeakeasyMetadata({ data: "json, name=DeviceUserAgent" })
   deviceUserAgent?: string;
 
-  @Metadata({ data: "json, name=OrganizationId" })
+  @SpeakeasyMetadata({ data: "json, name=OrganizationId" })
   organizationId: string;
 }

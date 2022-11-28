@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDocumentaiV1beta3DocumentSchemaMetadata
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Metadata for global schema behavior.
 **/
 export class GoogleCloudDocumentaiV1beta3DocumentSchemaMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=documentAllowMultipleLabels" })
+  @SpeakeasyMetadata({ data: "json, name=documentAllowMultipleLabels" })
   documentAllowMultipleLabels?: boolean;
 
-  @Metadata({ data: "json, name=documentSplitter" })
+  @SpeakeasyMetadata({ data: "json, name=documentSplitter" })
   documentSplitter?: boolean;
 
-  @Metadata({ data: "json, name=prefixedNamingOnProperties" })
+  @SpeakeasyMetadata({ data: "json, name=prefixedNamingOnProperties" })
   prefixedNamingOnProperties?: boolean;
 
-  @Metadata({ data: "json, name=skipNamingValidation" })
+  @SpeakeasyMetadata({ data: "json, name=skipNamingValidation" })
   skipNamingValidation?: boolean;
 }

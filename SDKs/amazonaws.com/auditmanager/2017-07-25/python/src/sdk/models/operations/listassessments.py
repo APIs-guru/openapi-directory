@@ -1,5 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
@@ -22,16 +25,16 @@ class ListAssessmentsHeaders:
 
 @dataclass
 class ListAssessmentsRequest:
-    query_params: ListAssessmentsQueryParams = field(default=None)
-    headers: ListAssessmentsHeaders = field(default=None)
+    headers: ListAssessmentsHeaders = field()
+    query_params: ListAssessmentsQueryParams = field()
     
 
 @dataclass
 class ListAssessmentsResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     list_assessments_response: Optional[shared.ListAssessmentsResponse] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import systemtemplatesummary
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetSystemTemplateRevisionsResponse:
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextToken' }})
-    summaries: Optional[List[systemtemplatesummary.SystemTemplateSummary]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'summaries' }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextToken') }})
+    summaries: Optional[List[SystemTemplateSummary]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('summaries') }})
     

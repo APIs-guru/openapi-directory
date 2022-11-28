@@ -1,5 +1,7 @@
 package shared
 
+// Image
+// An object representing an Amazon ECR image.
 type Image struct {
 	ImageID                *ImageIdentifier `json:"imageId,omitempty"`
 	ImageManifest          *string          `json:"imageManifest,omitempty"`

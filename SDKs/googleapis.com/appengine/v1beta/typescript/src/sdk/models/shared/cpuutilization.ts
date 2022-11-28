@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CpuUtilization
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Target scaling by CPU usage.
 **/
 export class CpuUtilization extends SpeakeasyBase {
-  @Metadata({ data: "json, name=aggregationWindowLength" })
+  @SpeakeasyMetadata({ data: "json, name=aggregationWindowLength" })
   aggregationWindowLength?: string;
 
-  @Metadata({ data: "json, name=targetUtilization" })
+  @SpeakeasyMetadata({ data: "json, name=targetUtilization" })
   targetUtilization?: number;
 }

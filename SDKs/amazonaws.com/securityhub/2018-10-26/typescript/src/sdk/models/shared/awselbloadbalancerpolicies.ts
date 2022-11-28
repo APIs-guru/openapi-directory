@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsElbAppCookieStickinessPolicy } from "./awselbappcookiestickinesspolicy";
 import { AwsElbLbCookieStickinessPolicy } from "./awselblbcookiestickinesspolicy";
+
 
 
 // AwsElbLoadBalancerPolicies
@@ -9,12 +9,12 @@ import { AwsElbLbCookieStickinessPolicy } from "./awselblbcookiestickinesspolicy
  * Contains information about the policies for a load balancer.
 **/
 export class AwsElbLoadBalancerPolicies extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AppCookieStickinessPolicies", elemType: shared.AwsElbAppCookieStickinessPolicy })
+  @SpeakeasyMetadata({ data: "json, name=AppCookieStickinessPolicies", elemType: AwsElbAppCookieStickinessPolicy })
   appCookieStickinessPolicies?: AwsElbAppCookieStickinessPolicy[];
 
-  @Metadata({ data: "json, name=LbCookieStickinessPolicies", elemType: shared.AwsElbLbCookieStickinessPolicy })
+  @SpeakeasyMetadata({ data: "json, name=LbCookieStickinessPolicies", elemType: AwsElbLbCookieStickinessPolicy })
   lbCookieStickinessPolicies?: AwsElbLbCookieStickinessPolicy[];
 
-  @Metadata({ data: "json, name=OtherPolicies" })
+  @SpeakeasyMetadata({ data: "json, name=OtherPolicies" })
   otherPolicies?: string[];
 }

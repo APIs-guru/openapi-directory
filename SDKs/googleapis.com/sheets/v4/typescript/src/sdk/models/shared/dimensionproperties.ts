@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataSourceColumnReference } from "./datasourcecolumnreference";
 import { DeveloperMetadata } from "./developermetadata";
+
 
 
 // DimensionProperties
@@ -9,18 +9,18 @@ import { DeveloperMetadata } from "./developermetadata";
  * Properties about a dimension.
 **/
 export class DimensionProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataSourceColumnReference" })
+  @SpeakeasyMetadata({ data: "json, name=dataSourceColumnReference" })
   dataSourceColumnReference?: DataSourceColumnReference;
 
-  @Metadata({ data: "json, name=developerMetadata", elemType: shared.DeveloperMetadata })
+  @SpeakeasyMetadata({ data: "json, name=developerMetadata", elemType: DeveloperMetadata })
   developerMetadata?: DeveloperMetadata[];
 
-  @Metadata({ data: "json, name=hiddenByFilter" })
+  @SpeakeasyMetadata({ data: "json, name=hiddenByFilter" })
   hiddenByFilter?: boolean;
 
-  @Metadata({ data: "json, name=hiddenByUser" })
+  @SpeakeasyMetadata({ data: "json, name=hiddenByUser" })
   hiddenByUser?: boolean;
 
-  @Metadata({ data: "json, name=pixelSize" })
+  @SpeakeasyMetadata({ data: "json, name=pixelSize" })
   pixelSize?: number;
 }

@@ -1,7 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Action } from "./action";
-import { Action } from "./action";
+
 
 
 // TopicRule
@@ -9,27 +8,27 @@ import { Action } from "./action";
  * Describes a rule.
 **/
 export class TopicRule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actions", elemType: shared.Action })
+  @SpeakeasyMetadata({ data: "json, name=actions", elemType: Action })
   actions?: Action[];
 
-  @Metadata({ data: "json, name=awsIotSqlVersion" })
+  @SpeakeasyMetadata({ data: "json, name=awsIotSqlVersion" })
   awsIotSqlVersion?: string;
 
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=errorAction" })
+  @SpeakeasyMetadata({ data: "json, name=errorAction" })
   errorAction?: Action;
 
-  @Metadata({ data: "json, name=ruleDisabled" })
+  @SpeakeasyMetadata({ data: "json, name=ruleDisabled" })
   ruleDisabled?: boolean;
 
-  @Metadata({ data: "json, name=ruleName" })
+  @SpeakeasyMetadata({ data: "json, name=ruleName" })
   ruleName?: string;
 
-  @Metadata({ data: "json, name=sql" })
+  @SpeakeasyMetadata({ data: "json, name=sql" })
   sql?: string;
 }

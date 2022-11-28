@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PostAppsAppIdKeysKeyIdRevokePathParams = /** @class */ (function (_super) {
     __extends(PostAppsAppIdKeysKeyIdRevokePathParams, _super);
@@ -30,11 +30,11 @@ var PostAppsAppIdKeysKeyIdRevokePathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=app_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=app_id" }),
         __metadata("design:type", String)
     ], PostAppsAppIdKeysKeyIdRevokePathParams.prototype, "appId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=key_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=key_id" }),
         __metadata("design:type", String)
     ], PostAppsAppIdKeysKeyIdRevokePathParams.prototype, "keyId", void 0);
     return PostAppsAppIdKeysKeyIdRevokePathParams;
@@ -46,7 +46,7 @@ var PostAppsAppIdKeysKeyIdRevokeSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
         __metadata("design:type", shared.SchemeBearerAuth)
     ], PostAppsAppIdKeysKeyIdRevokeSecurity.prototype, "bearerAuth", void 0);
     return PostAppsAppIdKeysKeyIdRevokeSecurity;
@@ -58,11 +58,11 @@ var PostAppsAppIdKeysKeyIdRevokeRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostAppsAppIdKeysKeyIdRevokePathParams)
     ], PostAppsAppIdKeysKeyIdRevokeRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostAppsAppIdKeysKeyIdRevokeSecurity)
     ], PostAppsAppIdKeysKeyIdRevokeRequest.prototype, "security", void 0);
     return PostAppsAppIdKeysKeyIdRevokeRequest;
@@ -74,15 +74,15 @@ var PostAppsAppIdKeysKeyIdRevokeResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostAppsAppIdKeysKeyIdRevokeResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostAppsAppIdKeysKeyIdRevokeResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Error)
     ], PostAppsAppIdKeysKeyIdRevokeResponse.prototype, "error", void 0);
     return PostAppsAppIdKeysKeyIdRevokeResponse;

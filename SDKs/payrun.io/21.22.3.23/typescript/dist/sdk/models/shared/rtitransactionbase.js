@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // RtiTransactionBaseRtiTransactionBaseEmployerCore
 /**
  * The rti transaction bases' employer core
@@ -33,15 +33,15 @@ var RtiTransactionBaseRtiTransactionBaseEmployerCore = /** @class */ (function (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=@href" }),
+        SpeakeasyMetadata({ data: "json, name=@href" }),
         __metadata("design:type", String)
     ], RtiTransactionBaseRtiTransactionBaseEmployerCore.prototype, "atHref", void 0);
     __decorate([
-        Metadata({ data: "json, name=@rel" }),
+        SpeakeasyMetadata({ data: "json, name=@rel" }),
         __metadata("design:type", String)
     ], RtiTransactionBaseRtiTransactionBaseEmployerCore.prototype, "atRel", void 0);
     __decorate([
-        Metadata({ data: "json, name=@title" }),
+        SpeakeasyMetadata({ data: "json, name=@title" }),
         __metadata("design:type", String)
     ], RtiTransactionBaseRtiTransactionBaseEmployerCore.prototype, "atTitle", void 0);
     return RtiTransactionBaseRtiTransactionBaseEmployerCore;
@@ -61,35 +61,35 @@ var RtiTransactionBaseRtiTransactionBase = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=EmployerCore" }),
+        SpeakeasyMetadata({ data: "json, name=EmployerCore" }),
         __metadata("design:type", RtiTransactionBaseRtiTransactionBaseEmployerCore)
     ], RtiTransactionBaseRtiTransactionBase.prototype, "employerCore", void 0);
     __decorate([
-        Metadata({ data: "json, name=RequestData" }),
+        SpeakeasyMetadata({ data: "json, name=RequestData" }),
         __metadata("design:type", String)
     ], RtiTransactionBaseRtiTransactionBase.prototype, "requestData", void 0);
     __decorate([
-        Metadata({ data: "json, name=ResponseData" }),
+        SpeakeasyMetadata({ data: "json, name=ResponseData" }),
         __metadata("design:type", String)
     ], RtiTransactionBaseRtiTransactionBase.prototype, "responseData", void 0);
     __decorate([
-        Metadata({ data: "json, name=RtiType" }),
+        SpeakeasyMetadata({ data: "json, name=RtiType" }),
         __metadata("design:type", String)
     ], RtiTransactionBaseRtiTransactionBase.prototype, "rtiType", void 0);
     __decorate([
-        Metadata({ data: "json, name=TaxYear" }),
+        SpeakeasyMetadata({ data: "json, name=TaxYear" }),
         __metadata("design:type", Number)
     ], RtiTransactionBaseRtiTransactionBase.prototype, "taxYear", void 0);
     __decorate([
-        Metadata({ data: "json, name=Timestamp" }),
+        SpeakeasyMetadata({ data: "json, name=Timestamp" }),
         __metadata("design:type", Date)
     ], RtiTransactionBaseRtiTransactionBase.prototype, "timestamp", void 0);
     __decorate([
-        Metadata({ data: "json, name=TransactionStatus" }),
+        SpeakeasyMetadata({ data: "json, name=TransactionStatus" }),
         __metadata("design:type", String)
     ], RtiTransactionBaseRtiTransactionBase.prototype, "transactionStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=TransmissionDate" }),
+        SpeakeasyMetadata({ data: "json, name=TransmissionDate" }),
         __metadata("design:type", Date)
     ], RtiTransactionBaseRtiTransactionBase.prototype, "transmissionDate", void 0);
     return RtiTransactionBaseRtiTransactionBase;
@@ -101,7 +101,7 @@ var RtiTransactionBase = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=RtiTransactionBase" }),
+        SpeakeasyMetadata({ data: "json, name=RtiTransactionBase" }),
         __metadata("design:type", RtiTransactionBaseRtiTransactionBase)
     ], RtiTransactionBase.prototype, "rtiTransactionBase", void 0);
     return RtiTransactionBase;

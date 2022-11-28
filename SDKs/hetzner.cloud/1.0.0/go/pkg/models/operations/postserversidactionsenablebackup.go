@@ -4,10 +4,8 @@ type PostServersIDActionsEnableBackupPathParams struct {
 	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type PostServersIDActionsEnableBackupRequest struct {
-	PathParams PostServersIDActionsEnableBackupPathParams
-}
-
+// PostServersIDActionsEnableBackupActionResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type PostServersIDActionsEnableBackupActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -39,6 +37,10 @@ type PostServersIDActionsEnableBackupActionResponseAction struct {
 
 type PostServersIDActionsEnableBackupActionResponse struct {
 	Action PostServersIDActionsEnableBackupActionResponseAction `json:"action"`
+}
+
+type PostServersIDActionsEnableBackupRequest struct {
+	PathParams PostServersIDActionsEnableBackupPathParams
 }
 
 type PostServersIDActionsEnableBackupResponse struct {

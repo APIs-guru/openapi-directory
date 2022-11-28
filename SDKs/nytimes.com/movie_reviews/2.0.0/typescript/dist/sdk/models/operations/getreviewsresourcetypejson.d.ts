@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum GetReviewsResourceTypeJsonResourceTypeEnum {
     All = "all",
@@ -16,15 +16,15 @@ export declare class GetReviewsResourceTypeJsonQueryParams extends SpeakeasyBase
     offset?: number;
     order?: GetReviewsResourceTypeJsonOrderEnum;
 }
-export declare class GetReviewsResourceTypeJsonRequest extends SpeakeasyBase {
-    pathParams: GetReviewsResourceTypeJsonPathParams;
-    queryParams: GetReviewsResourceTypeJsonQueryParams;
-}
 export declare class GetReviewsResourceTypeJson200ApplicationJson extends SpeakeasyBase {
     copyright?: string;
     numResults?: number;
     results?: shared.Movie[];
     status?: string;
+}
+export declare class GetReviewsResourceTypeJsonRequest extends SpeakeasyBase {
+    pathParams: GetReviewsResourceTypeJsonPathParams;
+    queryParams: GetReviewsResourceTypeJsonQueryParams;
 }
 export declare class GetReviewsResourceTypeJsonResponse extends SpeakeasyBase {
     contentType: string;

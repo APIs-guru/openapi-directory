@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Amount } from "./amount";
 
 
+
 export class Promotion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=promotionAmount" })
+  @SpeakeasyMetadata({ data: "json, name=promotionAmount" })
   promotionAmount?: Amount;
 
-  @Metadata({ data: "json, name=promotionId" })
+  @SpeakeasyMetadata({ data: "json, name=promotionId" })
   promotionId?: string;
 }

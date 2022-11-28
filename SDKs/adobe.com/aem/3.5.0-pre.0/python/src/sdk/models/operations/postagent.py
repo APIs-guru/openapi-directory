@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List,Optional
 
 
 @dataclass
 class PostAgentPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
-    runmode: str = field(default=None, metadata={'path_param': { 'field_name': 'runmode', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    runmode: str = field(metadata={'path_param': { 'field_name': 'runmode', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -64,12 +67,12 @@ class PostAgentQueryParams:
 
 @dataclass
 class PostAgentRequest:
-    path_params: PostAgentPathParams = field(default=None)
-    query_params: PostAgentQueryParams = field(default=None)
+    path_params: PostAgentPathParams = field()
+    query_params: PostAgentQueryParams = field()
     
 
 @dataclass
 class PostAgentResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

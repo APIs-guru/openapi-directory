@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CriteriaForJob } from "./criteriaforjob";
+
 
 
 // CriteriaBlockForJob
@@ -8,6 +8,6 @@ import { CriteriaForJob } from "./criteriaforjob";
  * Specifies one or more property- and tag-based conditions that define criteria for including or excluding S3 buckets from a classification job.
 **/
 export class CriteriaBlockForJob extends SpeakeasyBase {
-  @Metadata({ data: "json, name=and", elemType: shared.CriteriaForJob })
+  @SpeakeasyMetadata({ data: "json, name=and", elemType: CriteriaForJob })
   and?: CriteriaForJob[];
 }

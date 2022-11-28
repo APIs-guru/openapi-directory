@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AndroidpublisherEditsListingsUpdatePathParams:
-    edit_id: str = field(default=None, metadata={'path_param': { 'field_name': 'editId', 'style': 'simple', 'explode': False }})
-    language: str = field(default=None, metadata={'path_param': { 'field_name': 'language', 'style': 'simple', 'explode': False }})
-    package_name: str = field(default=None, metadata={'path_param': { 'field_name': 'packageName', 'style': 'simple', 'explode': False }})
+    edit_id: str = field(metadata={'path_param': { 'field_name': 'editId', 'style': 'simple', 'explode': False }})
+    language: str = field(metadata={'path_param': { 'field_name': 'language', 'style': 'simple', 'explode': False }})
+    package_name: str = field(metadata={'path_param': { 'field_name': 'packageName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,21 +27,21 @@ class AndroidpublisherEditsListingsUpdateQueryParams:
 
 @dataclass
 class AndroidpublisherEditsListingsUpdateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AndroidpublisherEditsListingsUpdateRequest:
-    path_params: AndroidpublisherEditsListingsUpdatePathParams = field(default=None)
-    query_params: AndroidpublisherEditsListingsUpdateQueryParams = field(default=None)
+    path_params: AndroidpublisherEditsListingsUpdatePathParams = field()
+    query_params: AndroidpublisherEditsListingsUpdateQueryParams = field()
+    security: AndroidpublisherEditsListingsUpdateSecurity = field()
     request: Optional[shared.Listing] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AndroidpublisherEditsListingsUpdateSecurity = field(default=None)
     
 
 @dataclass
 class AndroidpublisherEditsListingsUpdateResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

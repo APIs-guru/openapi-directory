@@ -18,6 +18,14 @@ const (
 	BackupTypeEnumScheduled       BackupTypeEnum = "SCHEDULED"
 )
 
+// BackupInput
+// Represents a Managed Microsoft Identities backup.
+type BackupInput struct {
+	Labels map[string]string `json:"labels,omitempty"`
+}
+
+// Backup
+// Represents a Managed Microsoft Identities backup.
 type Backup struct {
 	CreateTime    *string           `json:"createTime,omitempty"`
 	Labels        map[string]string `json:"labels,omitempty"`

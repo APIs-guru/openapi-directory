@@ -1,6 +1,7 @@
 
 
+
 export enum CommentsSortEnum {
-    MinusCreatedAt = "-createdAt"
-,    MinusTotalReplies = "-totalReplies"
+    MinusCreatedAt = "-createdAt",
+    MinusTotalReplies = "-totalReplies"
 }

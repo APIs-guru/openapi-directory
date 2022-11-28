@@ -7,6 +7,8 @@ const (
 	PicoSettingsDtoAuthenticationTypeEnumBackend PicoSettingsDtoAuthenticationTypeEnum = "Backend"
 )
 
+// PicoSettingsDto
+// DTO for the pico charging station settings
 type PicoSettingsDto struct {
 	AuthenticationType    *PicoSettingsDtoAuthenticationTypeEnum `json:"AuthenticationType,omitempty"`
 	DisplayBrightness     *string                                `json:"DisplayBrightness,omitempty"`

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetDpsJobInfoPathParams = /** @class */ (function (_super) {
     __extends(GetDpsJobInfoPathParams, _super);
@@ -30,7 +30,7 @@ var GetDpsJobInfoPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=JobId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=JobId" }),
         __metadata("design:type", String)
     ], GetDpsJobInfoPathParams.prototype, "jobId", void 0);
     return GetDpsJobInfoPathParams;
@@ -42,11 +42,11 @@ var GetDpsJobInfoHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
         __metadata("design:type", String)
     ], GetDpsJobInfoHeaders.prototype, "apiVersion", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Authorization" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" }),
         __metadata("design:type", String)
     ], GetDpsJobInfoHeaders.prototype, "authorization", void 0);
     return GetDpsJobInfoHeaders;
@@ -58,11 +58,11 @@ var GetDpsJobInfoRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetDpsJobInfoPathParams)
     ], GetDpsJobInfoRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetDpsJobInfoHeaders)
     ], GetDpsJobInfoRequest.prototype, "headers", void 0);
     return GetDpsJobInfoRequest;
@@ -74,19 +74,19 @@ var GetDpsJobInfoResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetDpsJobInfoResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorModel)
     ], GetDpsJobInfoResponse.prototype, "errorModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.JobInfo)
     ], GetDpsJobInfoResponse.prototype, "jobInfo", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetDpsJobInfoResponse.prototype, "statusCode", void 0);
     return GetDpsJobInfoResponse;

@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BitbucketServerRepositoryId } from "./bitbucketserverrepositoryid";
 import { BitbucketServerSecrets } from "./bitbucketserversecrets";
+
 
 
 // BitbucketServerConfig
@@ -9,33 +9,64 @@ import { BitbucketServerSecrets } from "./bitbucketserversecrets";
  * BitbucketServerConfig represents the configuration for a Bitbucket Server.
 **/
 export class BitbucketServerConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=apiKey" })
+  @SpeakeasyMetadata({ data: "json, name=apiKey" })
   apiKey?: string;
 
-  @Metadata({ data: "json, name=connectedRepositories", elemType: shared.BitbucketServerRepositoryId })
+  @SpeakeasyMetadata({ data: "json, name=connectedRepositories", elemType: BitbucketServerRepositoryId })
   connectedRepositories?: BitbucketServerRepositoryId[];
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=hostUri" })
+  @SpeakeasyMetadata({ data: "json, name=hostUri" })
   hostUri?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=peeredNetwork" })
+  @SpeakeasyMetadata({ data: "json, name=peeredNetwork" })
   peeredNetwork?: string;
 
-  @Metadata({ data: "json, name=secrets" })
+  @SpeakeasyMetadata({ data: "json, name=secrets" })
   secrets?: BitbucketServerSecrets;
 
-  @Metadata({ data: "json, name=sslCa" })
+  @SpeakeasyMetadata({ data: "json, name=sslCa" })
   sslCa?: string;
 
-  @Metadata({ data: "json, name=username" })
+  @SpeakeasyMetadata({ data: "json, name=username" })
   username?: string;
 
-  @Metadata({ data: "json, name=webhookKey" })
+  @SpeakeasyMetadata({ data: "json, name=webhookKey" })
   webhookKey?: string;
+}
+
+
+// BitbucketServerConfigInput
+/** 
+ * BitbucketServerConfig represents the configuration for a Bitbucket Server.
+**/
+export class BitbucketServerConfigInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=apiKey" })
+  apiKey?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
+  createTime?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=hostUri" })
+  hostUri?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=peeredNetwork" })
+  peeredNetwork?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=secrets" })
+  secrets?: BitbucketServerSecrets;
+
+  @SpeakeasyMetadata({ data: "json, name=sslCa" })
+  sslCa?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=username" })
+  username?: string;
 }

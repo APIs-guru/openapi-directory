@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ClearTimerAction
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information needed to clear the timer.
 **/
 export class ClearTimerAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=timerName" })
+  @SpeakeasyMetadata({ data: "json, name=timerName" })
   timerName: string;
 }

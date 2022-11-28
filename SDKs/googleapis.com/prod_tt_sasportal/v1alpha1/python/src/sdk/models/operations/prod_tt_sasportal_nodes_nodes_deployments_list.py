@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ProdTtSasportalNodesNodesDeploymentsListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,20 +29,20 @@ class ProdTtSasportalNodesNodesDeploymentsListQueryParams:
 
 @dataclass
 class ProdTtSasportalNodesNodesDeploymentsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ProdTtSasportalNodesNodesDeploymentsListRequest:
-    path_params: ProdTtSasportalNodesNodesDeploymentsListPathParams = field(default=None)
-    query_params: ProdTtSasportalNodesNodesDeploymentsListQueryParams = field(default=None)
-    security: ProdTtSasportalNodesNodesDeploymentsListSecurity = field(default=None)
+    path_params: ProdTtSasportalNodesNodesDeploymentsListPathParams = field()
+    query_params: ProdTtSasportalNodesNodesDeploymentsListQueryParams = field()
+    security: ProdTtSasportalNodesNodesDeploymentsListSecurity = field()
     
 
 @dataclass
 class ProdTtSasportalNodesNodesDeploymentsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     sas_portal_list_deployments_response: Optional[shared.SasPortalListDeploymentsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

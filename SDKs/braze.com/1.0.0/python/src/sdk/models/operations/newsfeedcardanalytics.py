@@ -12,11 +12,11 @@ class NewsFeedCardAnalyticsQueryParams:
 
 @dataclass
 class NewsFeedCardAnalyticsRequest:
-    query_params: NewsFeedCardAnalyticsQueryParams = field(default=None)
+    query_params: NewsFeedCardAnalyticsQueryParams = field()
     
 
 @dataclass
 class NewsFeedCardAnalyticsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

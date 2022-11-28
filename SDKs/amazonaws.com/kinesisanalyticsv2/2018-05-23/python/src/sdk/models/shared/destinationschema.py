@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import recordformattype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DestinationSchema:
-    record_format_type: recordformattype_enum.RecordFormatTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RecordFormatType' }})
+    r"""DestinationSchema
+    Describes the data format when records are written to the destination in a SQL-based Kinesis Data Analytics application. 
+    """
+    
+    record_format_type: RecordFormatTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('RecordFormatType') }})
     

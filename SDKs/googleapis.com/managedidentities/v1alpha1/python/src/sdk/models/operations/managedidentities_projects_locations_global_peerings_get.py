@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ManagedidentitiesProjectsLocationsGlobalPeeringsGetPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class ManagedidentitiesProjectsLocationsGlobalPeeringsGetQueryParams:
 
 @dataclass
 class ManagedidentitiesProjectsLocationsGlobalPeeringsGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ManagedidentitiesProjectsLocationsGlobalPeeringsGetRequest:
-    path_params: ManagedidentitiesProjectsLocationsGlobalPeeringsGetPathParams = field(default=None)
-    query_params: ManagedidentitiesProjectsLocationsGlobalPeeringsGetQueryParams = field(default=None)
-    security: ManagedidentitiesProjectsLocationsGlobalPeeringsGetSecurity = field(default=None)
+    path_params: ManagedidentitiesProjectsLocationsGlobalPeeringsGetPathParams = field()
+    query_params: ManagedidentitiesProjectsLocationsGlobalPeeringsGetQueryParams = field()
+    security: ManagedidentitiesProjectsLocationsGlobalPeeringsGetSecurity = field()
     
 
 @dataclass
 class ManagedidentitiesProjectsLocationsGlobalPeeringsGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     peering: Optional[shared.Peering] = field(default=None)
-    status_code: int = field(default=None)
     

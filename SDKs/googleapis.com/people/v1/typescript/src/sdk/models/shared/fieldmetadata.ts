@@ -1,5 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SourceInput } from "./source";
 import { Source } from "./source";
+
+
+
+// FieldMetadataInput
+/** 
+ * Metadata about a field.
+**/
+export class FieldMetadataInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=source" })
+  source?: SourceInput;
+
+  @SpeakeasyMetadata({ data: "json, name=sourcePrimary" })
+  sourcePrimary?: boolean;
+}
 
 
 // FieldMetadata
@@ -7,15 +22,15 @@ import { Source } from "./source";
  * Metadata about a field.
 **/
 export class FieldMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=primary" })
+  @SpeakeasyMetadata({ data: "json, name=primary" })
   primary?: boolean;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: Source;
 
-  @Metadata({ data: "json, name=sourcePrimary" })
+  @SpeakeasyMetadata({ data: "json, name=sourcePrimary" })
   sourcePrimary?: boolean;
 
-  @Metadata({ data: "json, name=verified" })
+  @SpeakeasyMetadata({ data: "json, name=verified" })
   verified?: boolean;
 }

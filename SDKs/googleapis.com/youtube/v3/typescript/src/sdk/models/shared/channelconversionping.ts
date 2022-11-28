@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ChannelConversionPingContextEnum {
-    Subscribe = "subscribe"
-,    Unsubscribe = "unsubscribe"
-,    Cview = "cview"
+    Subscribe = "subscribe",
+    Unsubscribe = "unsubscribe",
+    Cview = "cview"
 }
 
 
@@ -12,9 +13,9 @@ export enum ChannelConversionPingContextEnum {
  * Pings that the app shall fire (authenticated by biscotti cookie). Each ping has a context, in which the app must fire the ping, and a url identifying the ping.
 **/
 export class ChannelConversionPing extends SpeakeasyBase {
-  @Metadata({ data: "json, name=context" })
+  @SpeakeasyMetadata({ data: "json, name=context" })
   context?: ChannelConversionPingContextEnum;
 
-  @Metadata({ data: "json, name=conversionUrl" })
+  @SpeakeasyMetadata({ data: "json, name=conversionUrl" })
   conversionUrl?: string;
 }

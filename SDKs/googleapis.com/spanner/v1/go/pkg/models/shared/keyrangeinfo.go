@@ -1,5 +1,7 @@
 package shared
 
+// KeyRangeInfo
+// A message representing information for a key range (possibly one key).
 type KeyRangeInfo struct {
 	ContextValues []ContextValue   `json:"contextValues,omitempty"`
 	EndKeyIndex   *int32           `json:"endKeyIndex,omitempty"`

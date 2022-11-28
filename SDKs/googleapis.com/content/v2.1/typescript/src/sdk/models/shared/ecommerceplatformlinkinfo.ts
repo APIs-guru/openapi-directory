@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ECommercePlatformLinkInfo
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Additional information required for E_COMMERCE_PLATFORM link type.
 **/
 export class ECommercePlatformLinkInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=externalAccountId" })
+  @SpeakeasyMetadata({ data: "json, name=externalAccountId" })
   externalAccountId?: string;
 }

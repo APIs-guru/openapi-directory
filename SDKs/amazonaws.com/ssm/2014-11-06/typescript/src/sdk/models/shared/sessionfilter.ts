@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SessionFilterKeyEnum } from "./sessionfilterkeyenum";
+
 
 
 // SessionFilter
@@ -7,9 +8,9 @@ import { SessionFilterKeyEnum } from "./sessionfilterkeyenum";
  * Describes a filter for Session Manager information.
 **/
 export class SessionFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key: SessionFilterKeyEnum;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value: string;
 }

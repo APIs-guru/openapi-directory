@@ -1,24 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Leg } from "./leg";
 
 
+
 export class Bet extends SpeakeasyBase {
-  @Metadata({ data: "json, name=delayedBetId" })
+  @SpeakeasyMetadata({ data: "json, name=delayedBetId" })
   delayedBetId?: string;
 
-  @Metadata({ data: "json, name=freeBetId" })
+  @SpeakeasyMetadata({ data: "json, name=freeBetId" })
   freeBetId?: string;
 
-  @Metadata({ data: "json, name=legs", elemType: shared.Leg })
+  @SpeakeasyMetadata({ data: "json, name=legs", elemType: Leg })
   legs: Leg[];
 
-  @Metadata({ data: "json, name=number" })
+  @SpeakeasyMetadata({ data: "json, name=number" })
   number: number;
 
-  @Metadata({ data: "json, name=stake" })
+  @SpeakeasyMetadata({ data: "json, name=stake" })
   stake: number;
 
-  @Metadata({ data: "json, name=typeCode" })
+  @SpeakeasyMetadata({ data: "json, name=typeCode" })
   typeCode: string;
 }

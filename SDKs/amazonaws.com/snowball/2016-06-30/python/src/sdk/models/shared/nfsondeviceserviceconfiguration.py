@@ -1,12 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import storageunit_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class NfsOnDeviceServiceConfiguration:
-    storage_limit: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StorageLimit' }})
-    storage_unit: Optional[storageunit_enum.StorageUnitEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StorageUnit' }})
+    r"""NfsOnDeviceServiceConfiguration
+    An object that represents metadata and configuration settings for NFS service on an AWS Snow Family device.
+    """
+    
+    storage_limit: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StorageLimit') }})
+    storage_unit: Optional[StorageUnitEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StorageUnit') }})
     

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetSetIdentityNotificationTopicActionEnum(str, Enum):
     SET_IDENTITY_NOTIFICATION_TOPIC = "SetIdentityNotificationTopic"
@@ -15,11 +19,11 @@ class GetSetIdentityNotificationTopicVersionEnum(str, Enum):
 
 @dataclass
 class GetSetIdentityNotificationTopicQueryParams:
-    action: GetSetIdentityNotificationTopicActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    identity: str = field(default=None, metadata={'query_param': { 'field_name': 'Identity', 'style': 'form', 'explode': True }})
-    notification_type: GetSetIdentityNotificationTopicNotificationTypeEnum = field(default=None, metadata={'query_param': { 'field_name': 'NotificationType', 'style': 'form', 'explode': True }})
+    action: GetSetIdentityNotificationTopicActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    identity: str = field(metadata={'query_param': { 'field_name': 'Identity', 'style': 'form', 'explode': True }})
+    notification_type: GetSetIdentityNotificationTopicNotificationTypeEnum = field(metadata={'query_param': { 'field_name': 'NotificationType', 'style': 'form', 'explode': True }})
+    version: GetSetIdentityNotificationTopicVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     sns_topic: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'SnsTopic', 'style': 'form', 'explode': True }})
-    version: GetSetIdentityNotificationTopicVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -35,13 +39,13 @@ class GetSetIdentityNotificationTopicHeaders:
 
 @dataclass
 class GetSetIdentityNotificationTopicRequest:
-    query_params: GetSetIdentityNotificationTopicQueryParams = field(default=None)
-    headers: GetSetIdentityNotificationTopicHeaders = field(default=None)
+    headers: GetSetIdentityNotificationTopicHeaders = field()
+    query_params: GetSetIdentityNotificationTopicQueryParams = field()
     
 
 @dataclass
 class GetSetIdentityNotificationTopicResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

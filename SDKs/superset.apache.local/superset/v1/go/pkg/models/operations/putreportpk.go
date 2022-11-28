@@ -12,12 +12,6 @@ type PutReportPkSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type PutReportPkRequest struct {
-	PathParams PutReportPkPathParams
-	Request    shared.ReportScheduleRestAPIPut `request:"mediaType=application/json"`
-	Security   PutReportPkSecurity
-}
-
 type PutReportPk200ApplicationJSON struct {
 	ID     *float64                         `json:"id,omitempty"`
 	Result *shared.ReportScheduleRestAPIPut `json:"result,omitempty"`
@@ -41,6 +35,12 @@ type PutReportPk404ApplicationJSON struct {
 
 type PutReportPk500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type PutReportPkRequest struct {
+	PathParams PutReportPkPathParams
+	Request    shared.ReportScheduleRestAPIPut `request:"mediaType=application/json"`
+	Security   PutReportPkSecurity
 }
 
 type PutReportPkResponse struct {

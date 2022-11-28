@@ -1,5 +1,7 @@
 package shared
 
+// TaskTriggerInfo
+// Class TaskTriggerInfo.
 type TaskTriggerInfo struct {
 	DayOfWeek       *DayOfWeekEnum `json:"DayOfWeek,omitempty"`
 	IntervalTicks   *int64         `json:"IntervalTicks,omitempty"`

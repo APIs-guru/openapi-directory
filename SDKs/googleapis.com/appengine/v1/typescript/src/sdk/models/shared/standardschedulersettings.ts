@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // StandardSchedulerSettings
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Scheduler settings for standard environment.
 **/
 export class StandardSchedulerSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=maxInstances" })
+  @SpeakeasyMetadata({ data: "json, name=maxInstances" })
   maxInstances?: number;
 
-  @Metadata({ data: "json, name=minInstances" })
+  @SpeakeasyMetadata({ data: "json, name=minInstances" })
   minInstances?: number;
 
-  @Metadata({ data: "json, name=targetCpuUtilization" })
+  @SpeakeasyMetadata({ data: "json, name=targetCpuUtilization" })
   targetCpuUtilization?: number;
 
-  @Metadata({ data: "json, name=targetThroughputUtilization" })
+  @SpeakeasyMetadata({ data: "json, name=targetThroughputUtilization" })
   targetThroughputUtilization?: number;
 }

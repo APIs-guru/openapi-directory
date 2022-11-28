@@ -1,5 +1,7 @@
 package shared
 
+// SplunkDestinationUpdate
+// Describes an update for a destination in Splunk.
 type SplunkDestinationUpdate struct {
 	CloudWatchLoggingOptions          *CloudWatchLoggingOptions `json:"CloudWatchLoggingOptions,omitempty"`
 	HecAcknowledgmentTimeoutInSeconds *int64                    `json:"HECAcknowledgmentTimeoutInSeconds,omitempty"`

@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PayorBrandingResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=collectiveAlias" })
+  @SpeakeasyMetadata({ data: "json, name=collectiveAlias" })
   collectiveAlias?: string;
 
-  @Metadata({ data: "json, name=dbaName" })
+  @SpeakeasyMetadata({ data: "json, name=dbaName" })
   dbaName?: string;
 
-  @Metadata({ data: "json, name=logoUrl" })
+  @SpeakeasyMetadata({ data: "json, name=logoUrl" })
   logoUrl: string;
 
-  @Metadata({ data: "json, name=payorName" })
+  @SpeakeasyMetadata({ data: "json, name=payorName" })
   payorName: string;
 
-  @Metadata({ data: "json, name=supportContact" })
+  @SpeakeasyMetadata({ data: "json, name=supportContact" })
   supportContact?: string;
 }

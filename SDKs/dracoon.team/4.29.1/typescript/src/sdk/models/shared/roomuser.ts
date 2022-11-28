@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NodePermissions } from "./nodepermissions";
-import { PublicKeyContainer } from "./publickeycontainer";
+import { PublicKeyContainerOutput } from "./publickeycontainer";
 import { UserInfo } from "./userinfo";
 
 
-// RoomUser
+
+// RoomUserOutput
 /** 
  * User information
 **/
-export class RoomUser extends SpeakeasyBase {
-  @Metadata({ data: "json, name=displayName" })
+export class RoomUserOutput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName: string;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=isGranted" })
+  @SpeakeasyMetadata({ data: "json, name=isGranted" })
   isGranted: boolean;
 
-  @Metadata({ data: "json, name=login" })
+  @SpeakeasyMetadata({ data: "json, name=login" })
   login: string;
 
-  @Metadata({ data: "json, name=permissions" })
+  @SpeakeasyMetadata({ data: "json, name=permissions" })
   permissions?: NodePermissions;
 
-  @Metadata({ data: "json, name=publicKeyContainer" })
-  publicKeyContainer?: PublicKeyContainer;
+  @SpeakeasyMetadata({ data: "json, name=publicKeyContainer" })
+  publicKeyContainer?: PublicKeyContainerOutput;
 
-  @Metadata({ data: "json, name=userInfo" })
+  @SpeakeasyMetadata({ data: "json, name=userInfo" })
   userInfo: UserInfo;
 }

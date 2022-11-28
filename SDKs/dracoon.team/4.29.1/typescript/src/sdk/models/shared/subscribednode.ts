@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum SubscribedNodeTypeEnum {
-    Room = "room"
-,    Folder = "folder"
-,    File = "file"
+    Room = "room",
+    Folder = "folder",
+    File = "file"
 }
 
 
@@ -12,12 +13,12 @@ export enum SubscribedNodeTypeEnum {
  * Subscribed node information
 **/
 export class SubscribedNode extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authParentId" })
+  @SpeakeasyMetadata({ data: "json, name=authParentId" })
   authParentId?: number;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: SubscribedNodeTypeEnum;
 }

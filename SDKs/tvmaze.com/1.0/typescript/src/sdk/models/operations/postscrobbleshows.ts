@@ -1,52 +1,53 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostScrobbleShowsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=imdb_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=imdb_id" })
   imdbId?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=thetvdb_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=thetvdb_id" })
   thetvdbId?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=tvmaze_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tvmaze_id" })
   tvmazeId?: number;
 }
 
 
 export class PostScrobbleShowsRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=airdate" })
+  @SpeakeasyMetadata({ data: "json, name=airdate" })
   airdate?: Date;
 
-  @Metadata({ data: "json, name=episode" })
+  @SpeakeasyMetadata({ data: "json, name=episode" })
   episode?: number;
 
-  @Metadata({ data: "json, name=marked_at" })
+  @SpeakeasyMetadata({ data: "json, name=marked_at" })
   markedAt?: number;
 
-  @Metadata({ data: "json, name=season" })
+  @SpeakeasyMetadata({ data: "json, name=season" })
   season?: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: any;
 }
 
 
 export class PostScrobbleShowsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PostScrobbleShowsQueryParams;
 
-  @Metadata({ data: "request, media_type=application/json", elemType: operations.PostScrobbleShowsRequestBody })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json", elemType: PostScrobbleShowsRequestBody })
   request?: PostScrobbleShowsRequestBody[];
 }
 
 
 export class PostScrobbleShowsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   bulkResponse?: any[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetApiPartResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.ErskineMayPart })
+  @SpeakeasyMetadata({ elemType: shared.ErskineMayPart })
   erskineMayParts?: shared.ErskineMayPart[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

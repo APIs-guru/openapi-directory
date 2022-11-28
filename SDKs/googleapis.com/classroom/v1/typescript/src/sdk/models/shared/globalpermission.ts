@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GlobalPermissionPermissionEnum {
-    PermissionUnspecified = "PERMISSION_UNSPECIFIED"
-,    CreateCourse = "CREATE_COURSE"
+    PermissionUnspecified = "PERMISSION_UNSPECIFIED",
+    CreateCourse = "CREATE_COURSE"
 }
 
 
@@ -11,6 +12,6 @@ export enum GlobalPermissionPermissionEnum {
  * Global user permission description.
 **/
 export class GlobalPermission extends SpeakeasyBase {
-  @Metadata({ data: "json, name=permission" })
+  @SpeakeasyMetadata({ data: "json, name=permission" })
   permission?: GlobalPermissionPermissionEnum;
 }

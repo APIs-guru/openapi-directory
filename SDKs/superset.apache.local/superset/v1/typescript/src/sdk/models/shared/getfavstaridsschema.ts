@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ChartFavStarResponseResult } from "./chartfavstarresponseresult";
 
 
+
 export class GetFavStarIdsSchema extends SpeakeasyBase {
-  @Metadata({ data: "json, name=result", elemType: shared.ChartFavStarResponseResult })
+  @SpeakeasyMetadata({ data: "json, name=result", elemType: ChartFavStarResponseResult })
   result?: ChartFavStarResponseResult[];
 }

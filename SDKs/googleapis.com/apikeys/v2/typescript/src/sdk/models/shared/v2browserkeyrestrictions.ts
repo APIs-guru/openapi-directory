@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // V2BrowserKeyRestrictions
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The HTTP referrers (websites) that are allowed to use the key.
 **/
 export class V2BrowserKeyRestrictions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowedReferrers" })
+  @SpeakeasyMetadata({ data: "json, name=allowedReferrers" })
   allowedReferrers?: string[];
 }

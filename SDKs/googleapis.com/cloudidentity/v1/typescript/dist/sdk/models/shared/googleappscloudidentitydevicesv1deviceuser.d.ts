@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum GoogleAppsCloudidentityDevicesV1DeviceUserCompromisedStateEnum {
     CompromisedStateUnspecified = "COMPROMISED_STATE_UNSPECIFIED",
     Compromised = "COMPROMISED",

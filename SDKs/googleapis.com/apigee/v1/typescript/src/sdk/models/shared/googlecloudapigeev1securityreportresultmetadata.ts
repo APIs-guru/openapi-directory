@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudApigeeV1SecurityReportResultMetadata
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains informations about the security report results.
 **/
 export class GoogleCloudApigeeV1SecurityReportResultMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=expires" })
+  @SpeakeasyMetadata({ data: "json, name=expires" })
   expires?: string;
 
-  @Metadata({ data: "json, name=self" })
+  @SpeakeasyMetadata({ data: "json, name=self" })
   self?: string;
 }

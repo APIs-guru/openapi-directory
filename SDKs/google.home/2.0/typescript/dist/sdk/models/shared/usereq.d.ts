@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { HighShelf } from "./highshelf";
 import { LowShelf } from "./lowshelf";
 export declare class UserEq extends SpeakeasyBase {

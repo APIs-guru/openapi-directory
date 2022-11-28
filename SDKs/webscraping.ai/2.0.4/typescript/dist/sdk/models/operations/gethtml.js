@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetHtmlQueryParams = /** @class */ (function (_super) {
     __extends(GetHtmlQueryParams, _super);
@@ -30,23 +30,23 @@ var GetHtmlQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=headers" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=headers" }),
         __metadata("design:type", Map)
     ], GetHtmlQueryParams.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=js" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=js" }),
         __metadata("design:type", Boolean)
     ], GetHtmlQueryParams.prototype, "js", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=proxy" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=proxy" }),
         __metadata("design:type", String)
     ], GetHtmlQueryParams.prototype, "proxy", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=timeout" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timeout" }),
         __metadata("design:type", Number)
     ], GetHtmlQueryParams.prototype, "timeout", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=url" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=url" }),
         __metadata("design:type", String)
     ], GetHtmlQueryParams.prototype, "url", void 0);
     return GetHtmlQueryParams;
@@ -58,7 +58,7 @@ var GetHtmlRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetHtmlQueryParams)
     ], GetHtmlRequest.prototype, "queryParams", void 0);
     return GetHtmlRequest;
@@ -70,23 +70,23 @@ var GetHtmlResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetHtmlResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Error)
     ], GetHtmlResponse.prototype, "error", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.PageError)
     ], GetHtmlResponse.prototype, "pageError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetHtmlResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetHtmlResponse.prototype, "getHtml200TextHtmlString", void 0);
     return GetHtmlResponse;

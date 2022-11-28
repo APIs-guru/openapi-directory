@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProductVisibility } from "./productvisibility";
 
+
 export enum ProductSetProductSetBehaviorEnum {
-    Unknown = "unknown"
-,    Whitelist = "whitelist"
-,    IncludeAll = "includeAll"
-,    AllApproved = "allApproved"
+    Unknown = "unknown",
+    Whitelist = "whitelist",
+    IncludeAll = "includeAll",
+    AllApproved = "allApproved"
 }
 
 
@@ -15,12 +15,12 @@ export enum ProductSetProductSetBehaviorEnum {
  * A set of products.
 **/
 export class ProductSet extends SpeakeasyBase {
-  @Metadata({ data: "json, name=productId" })
+  @SpeakeasyMetadata({ data: "json, name=productId" })
   productId?: string[];
 
-  @Metadata({ data: "json, name=productSetBehavior" })
+  @SpeakeasyMetadata({ data: "json, name=productSetBehavior" })
   productSetBehavior?: ProductSetProductSetBehaviorEnum;
 
-  @Metadata({ data: "json, name=productVisibility", elemType: shared.ProductVisibility })
+  @SpeakeasyMetadata({ data: "json, name=productVisibility", elemType: ProductVisibility })
   productVisibility?: ProductVisibility[];
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { SchemaDefinition } from "./schemadefinition";
 /**
  * Contains the configuration information of the Parquet format.

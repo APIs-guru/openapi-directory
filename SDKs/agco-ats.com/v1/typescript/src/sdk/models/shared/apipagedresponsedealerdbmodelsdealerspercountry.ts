@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DealerDbModelsDealersPerCountry } from "./dealerdbmodelsdealerspercountry";
 import { ApiPagedResponseMetadata } from "./apipagedresponsemetadata";
+
 
 
 // ApiPagedResponseDealerDbModelsDealersPerCountry
@@ -9,9 +9,9 @@ import { ApiPagedResponseMetadata } from "./apipagedresponsemetadata";
  * A response containing a page of results and metadata concerning the results
 **/
 export class ApiPagedResponseDealerDbModelsDealersPerCountry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Entities", elemType: shared.DealerDbModelsDealersPerCountry })
+  @SpeakeasyMetadata({ data: "json, name=Entities", elemType: DealerDbModelsDealersPerCountry })
   entities: DealerDbModelsDealersPerCountry[];
 
-  @Metadata({ data: "json, name=Metadata" })
+  @SpeakeasyMetadata({ data: "json, name=Metadata" })
   metadata: ApiPagedResponseMetadata;
 }

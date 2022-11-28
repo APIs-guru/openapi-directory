@@ -11,15 +11,15 @@ type DcimDeviceBayTemplatesListQueryParams struct {
 	Offset       *int64  `queryParam:"style=form,explode=true,name=offset"`
 }
 
-type DcimDeviceBayTemplatesListRequest struct {
-	QueryParams DcimDeviceBayTemplatesListQueryParams
-}
-
 type DcimDeviceBayTemplatesList200ApplicationJSON struct {
 	Count    int64                      `json:"count"`
 	Next     *string                    `json:"next,omitempty"`
 	Previous *string                    `json:"previous,omitempty"`
 	Results  []shared.DeviceBayTemplate `json:"results"`
+}
+
+type DcimDeviceBayTemplatesListRequest struct {
+	QueryParams DcimDeviceBayTemplatesListQueryParams
 }
 
 type DcimDeviceBayTemplatesListResponse struct {

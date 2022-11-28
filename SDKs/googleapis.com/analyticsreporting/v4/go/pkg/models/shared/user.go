@@ -8,6 +8,8 @@ const (
 	UserTypeEnumClientID              UserTypeEnum = "CLIENT_ID"
 )
 
+// User
+// Contains information to identify a particular user uniquely.
 type User struct {
 	Type   *UserTypeEnum `json:"type,omitempty"`
 	UserID *string       `json:"userId,omitempty"`

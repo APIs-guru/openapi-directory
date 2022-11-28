@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class CreateAndPreserveRoomRescueKeyPairPathParams:
-    room_id: int = field(default=None, metadata={'path_param': { 'field_name': 'room_id', 'style': 'simple', 'explode': False }})
+    room_id: int = field(metadata={'path_param': { 'field_name': 'room_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,14 +15,14 @@ class CreateAndPreserveRoomRescueKeyPairHeaders:
 
 @dataclass
 class CreateAndPreserveRoomRescueKeyPairRequest:
-    path_params: CreateAndPreserveRoomRescueKeyPairPathParams = field(default=None)
-    headers: CreateAndPreserveRoomRescueKeyPairHeaders = field(default=None)
-    request: shared.CreateKeyPairRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateAndPreserveRoomRescueKeyPairHeaders = field()
+    path_params: CreateAndPreserveRoomRescueKeyPairPathParams = field()
+    request: shared.CreateKeyPairRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateAndPreserveRoomRescueKeyPairResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

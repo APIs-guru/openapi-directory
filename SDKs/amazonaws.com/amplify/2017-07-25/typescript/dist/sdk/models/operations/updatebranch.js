@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var UpdateBranchPathParams = /** @class */ (function (_super) {
     __extends(UpdateBranchPathParams, _super);
@@ -30,11 +30,11 @@ var UpdateBranchPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=appId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=appId" }),
         __metadata("design:type", String)
     ], UpdateBranchPathParams.prototype, "appId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=branchName" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=branchName" }),
         __metadata("design:type", String)
     ], UpdateBranchPathParams.prototype, "branchName", void 0);
     return UpdateBranchPathParams;
@@ -46,31 +46,31 @@ var UpdateBranchHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], UpdateBranchHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], UpdateBranchHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], UpdateBranchHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], UpdateBranchHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], UpdateBranchHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], UpdateBranchHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], UpdateBranchHeaders.prototype, "xAmzSignedHeaders", void 0);
     return UpdateBranchHeaders;
@@ -90,63 +90,63 @@ var UpdateBranchRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=backendEnvironmentArn" }),
+        SpeakeasyMetadata({ data: "json, name=backendEnvironmentArn" }),
         __metadata("design:type", String)
     ], UpdateBranchRequestBody.prototype, "backendEnvironmentArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=basicAuthCredentials" }),
+        SpeakeasyMetadata({ data: "json, name=basicAuthCredentials" }),
         __metadata("design:type", String)
     ], UpdateBranchRequestBody.prototype, "basicAuthCredentials", void 0);
     __decorate([
-        Metadata({ data: "json, name=buildSpec" }),
+        SpeakeasyMetadata({ data: "json, name=buildSpec" }),
         __metadata("design:type", String)
     ], UpdateBranchRequestBody.prototype, "buildSpec", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], UpdateBranchRequestBody.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=displayName" }),
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
         __metadata("design:type", String)
     ], UpdateBranchRequestBody.prototype, "displayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=enableAutoBuild" }),
+        SpeakeasyMetadata({ data: "json, name=enableAutoBuild" }),
         __metadata("design:type", Boolean)
     ], UpdateBranchRequestBody.prototype, "enableAutoBuild", void 0);
     __decorate([
-        Metadata({ data: "json, name=enableBasicAuth" }),
+        SpeakeasyMetadata({ data: "json, name=enableBasicAuth" }),
         __metadata("design:type", Boolean)
     ], UpdateBranchRequestBody.prototype, "enableBasicAuth", void 0);
     __decorate([
-        Metadata({ data: "json, name=enableNotification" }),
+        SpeakeasyMetadata({ data: "json, name=enableNotification" }),
         __metadata("design:type", Boolean)
     ], UpdateBranchRequestBody.prototype, "enableNotification", void 0);
     __decorate([
-        Metadata({ data: "json, name=enablePerformanceMode" }),
+        SpeakeasyMetadata({ data: "json, name=enablePerformanceMode" }),
         __metadata("design:type", Boolean)
     ], UpdateBranchRequestBody.prototype, "enablePerformanceMode", void 0);
     __decorate([
-        Metadata({ data: "json, name=enablePullRequestPreview" }),
+        SpeakeasyMetadata({ data: "json, name=enablePullRequestPreview" }),
         __metadata("design:type", Boolean)
     ], UpdateBranchRequestBody.prototype, "enablePullRequestPreview", void 0);
     __decorate([
-        Metadata({ data: "json, name=environmentVariables" }),
+        SpeakeasyMetadata({ data: "json, name=environmentVariables" }),
         __metadata("design:type", Map)
     ], UpdateBranchRequestBody.prototype, "environmentVariables", void 0);
     __decorate([
-        Metadata({ data: "json, name=framework" }),
+        SpeakeasyMetadata({ data: "json, name=framework" }),
         __metadata("design:type", String)
     ], UpdateBranchRequestBody.prototype, "framework", void 0);
     __decorate([
-        Metadata({ data: "json, name=pullRequestEnvironmentName" }),
+        SpeakeasyMetadata({ data: "json, name=pullRequestEnvironmentName" }),
         __metadata("design:type", String)
     ], UpdateBranchRequestBody.prototype, "pullRequestEnvironmentName", void 0);
     __decorate([
-        Metadata({ data: "json, name=stage" }),
+        SpeakeasyMetadata({ data: "json, name=stage" }),
         __metadata("design:type", String)
     ], UpdateBranchRequestBody.prototype, "stage", void 0);
     __decorate([
-        Metadata({ data: "json, name=ttl" }),
+        SpeakeasyMetadata({ data: "json, name=ttl" }),
         __metadata("design:type", String)
     ], UpdateBranchRequestBody.prototype, "ttl", void 0);
     return UpdateBranchRequestBody;
@@ -158,15 +158,15 @@ var UpdateBranchRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateBranchPathParams)
     ], UpdateBranchRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateBranchHeaders)
     ], UpdateBranchRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", UpdateBranchRequestBody)
     ], UpdateBranchRequest.prototype, "request", void 0);
     return UpdateBranchRequest;
@@ -178,35 +178,35 @@ var UpdateBranchResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateBranchResponse.prototype, "badRequestException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UpdateBranchResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateBranchResponse.prototype, "dependentServiceFailureException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateBranchResponse.prototype, "internalFailureException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateBranchResponse.prototype, "notFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UpdateBranchResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateBranchResponse.prototype, "unauthorizedException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.UpdateBranchResult)
     ], UpdateBranchResponse.prototype, "updateBranchResult", void 0);
     return UpdateBranchResponse;

@@ -18,6 +18,8 @@ const (
 	AuthorizationAttemptInfoStateEnumFailed           AuthorizationAttemptInfoStateEnum = "FAILED"
 )
 
+// AuthorizationAttemptInfo
+// State of the latest attempt to authorize a domain for certificate issuance.
 type AuthorizationAttemptInfo struct {
 	Details       *string                                    `json:"details,omitempty"`
 	Domain        *string                                    `json:"domain,omitempty"`

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AutoMlConfig } from "./automlconfig";
 import { HpoConfig } from "./hpoconfig";
 import { OptimizationObjective } from "./optimizationobjective";
@@ -36,27 +36,27 @@ var SolutionConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=algorithmHyperParameters" }),
+        SpeakeasyMetadata({ data: "json, name=algorithmHyperParameters" }),
         __metadata("design:type", Map)
     ], SolutionConfig.prototype, "algorithmHyperParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=autoMLConfig" }),
+        SpeakeasyMetadata({ data: "json, name=autoMLConfig" }),
         __metadata("design:type", AutoMlConfig)
     ], SolutionConfig.prototype, "autoMlConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=eventValueThreshold" }),
+        SpeakeasyMetadata({ data: "json, name=eventValueThreshold" }),
         __metadata("design:type", String)
     ], SolutionConfig.prototype, "eventValueThreshold", void 0);
     __decorate([
-        Metadata({ data: "json, name=featureTransformationParameters" }),
+        SpeakeasyMetadata({ data: "json, name=featureTransformationParameters" }),
         __metadata("design:type", Map)
     ], SolutionConfig.prototype, "featureTransformationParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=hpoConfig" }),
+        SpeakeasyMetadata({ data: "json, name=hpoConfig" }),
         __metadata("design:type", HpoConfig)
     ], SolutionConfig.prototype, "hpoConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=optimizationObjective" }),
+        SpeakeasyMetadata({ data: "json, name=optimizationObjective" }),
         __metadata("design:type", OptimizationObjective)
     ], SolutionConfig.prototype, "optimizationObjective", void 0);
     return SolutionConfig;

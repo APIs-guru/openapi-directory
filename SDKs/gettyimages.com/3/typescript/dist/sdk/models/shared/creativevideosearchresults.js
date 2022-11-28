@@ -22,33 +22,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AutoCorrections } from "./autocorrections";
 import { SearchFacetsResponse } from "./searchfacetsresponse";
+import { RelatedSearch } from "./relatedsearch";
+import { CreativeVideoSearchItem } from "./creativevideosearchitem";
 var CreativeVideoSearchResults = /** @class */ (function (_super) {
     __extends(CreativeVideoSearchResults, _super);
     function CreativeVideoSearchResults() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=auto_corrections" }),
+        SpeakeasyMetadata({ data: "json, name=auto_corrections" }),
         __metadata("design:type", AutoCorrections)
     ], CreativeVideoSearchResults.prototype, "autoCorrections", void 0);
     __decorate([
-        Metadata({ data: "json, name=facets" }),
+        SpeakeasyMetadata({ data: "json, name=facets" }),
         __metadata("design:type", SearchFacetsResponse)
     ], CreativeVideoSearchResults.prototype, "facets", void 0);
     __decorate([
-        Metadata({ data: "json, name=related_searches", elemType: shared.RelatedSearch }),
+        SpeakeasyMetadata({ data: "json, name=related_searches", elemType: RelatedSearch }),
         __metadata("design:type", Array)
     ], CreativeVideoSearchResults.prototype, "relatedSearches", void 0);
     __decorate([
-        Metadata({ data: "json, name=result_count" }),
+        SpeakeasyMetadata({ data: "json, name=result_count" }),
         __metadata("design:type", Number)
     ], CreativeVideoSearchResults.prototype, "resultCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=videos", elemType: shared.CreativeVideoSearchItem }),
+        SpeakeasyMetadata({ data: "json, name=videos", elemType: CreativeVideoSearchItem }),
         __metadata("design:type", Array)
     ], CreativeVideoSearchResults.prototype, "videos", void 0);
     return CreativeVideoSearchResults;

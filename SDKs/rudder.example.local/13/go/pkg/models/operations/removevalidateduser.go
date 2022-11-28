@@ -4,10 +4,6 @@ type RemoveValidatedUserPathParams struct {
 	Username string `pathParam:"style=simple,explode=false,name=username"`
 }
 
-type RemoveValidatedUserRequest struct {
-	PathParams RemoveValidatedUserPathParams
-}
-
 type RemoveValidatedUser200ApplicationJSONActionEnum string
 
 const (
@@ -25,6 +21,10 @@ type RemoveValidatedUser200ApplicationJSON struct {
 	Action RemoveValidatedUser200ApplicationJSONActionEnum `json:"action"`
 	Data   string                                          `json:"data"`
 	Result RemoveValidatedUser200ApplicationJSONResultEnum `json:"result"`
+}
+
+type RemoveValidatedUserRequest struct {
+	PathParams RemoveValidatedUserPathParams
 }
 
 type RemoveValidatedUserResponse struct {

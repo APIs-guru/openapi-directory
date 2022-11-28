@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ActionExecutionResult
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Execution result information, such as the external execution ID.
 **/
 export class ActionExecutionResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=externalExecutionId" })
+  @SpeakeasyMetadata({ data: "json, name=externalExecutionId" })
   externalExecutionId?: string;
 
-  @Metadata({ data: "json, name=externalExecutionSummary" })
+  @SpeakeasyMetadata({ data: "json, name=externalExecutionSummary" })
   externalExecutionSummary?: string;
 
-  @Metadata({ data: "json, name=externalExecutionUrl" })
+  @SpeakeasyMetadata({ data: "json, name=externalExecutionUrl" })
   externalExecutionUrl?: string;
 }

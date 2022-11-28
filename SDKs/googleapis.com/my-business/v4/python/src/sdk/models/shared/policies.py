@@ -1,9 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import timeofday
-from . import timeofday
-from . import paymentoptions
+from sdk import utils
+from . import *
 
 class PoliciesAllInclusiveAvailableExceptionEnum(str, Enum):
     EXCEPTION_UNSPECIFIED = "EXCEPTION_UNSPECIFIED"
@@ -57,21 +57,25 @@ class PoliciesSmokeFreePropertyExceptionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Policies:
-    all_inclusive_available: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'allInclusiveAvailable' }})
-    all_inclusive_available_exception: Optional[PoliciesAllInclusiveAvailableExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'allInclusiveAvailableException' }})
-    all_inclusive_only: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'allInclusiveOnly' }})
-    all_inclusive_only_exception: Optional[PoliciesAllInclusiveOnlyExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'allInclusiveOnlyException' }})
-    checkin_time: Optional[timeofday.TimeOfDay] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'checkinTime' }})
-    checkin_time_exception: Optional[PoliciesCheckinTimeExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'checkinTimeException' }})
-    checkout_time: Optional[timeofday.TimeOfDay] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'checkoutTime' }})
-    checkout_time_exception: Optional[PoliciesCheckoutTimeExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'checkoutTimeException' }})
-    kids_stay_free: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kidsStayFree' }})
-    kids_stay_free_exception: Optional[PoliciesKidsStayFreeExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kidsStayFreeException' }})
-    max_child_age: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxChildAge' }})
-    max_child_age_exception: Optional[PoliciesMaxChildAgeExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxChildAgeException' }})
-    max_kids_stay_free_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxKidsStayFreeCount' }})
-    max_kids_stay_free_count_exception: Optional[PoliciesMaxKidsStayFreeCountExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxKidsStayFreeCountException' }})
-    payment_options: Optional[paymentoptions.PaymentOptions] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'paymentOptions' }})
-    smoke_free_property: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'smokeFreeProperty' }})
-    smoke_free_property_exception: Optional[PoliciesSmokeFreePropertyExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'smokeFreePropertyException' }})
+    r"""Policies
+    Property rules that impact guests.
+    """
+    
+    all_inclusive_available: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('allInclusiveAvailable') }})
+    all_inclusive_available_exception: Optional[PoliciesAllInclusiveAvailableExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('allInclusiveAvailableException') }})
+    all_inclusive_only: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('allInclusiveOnly') }})
+    all_inclusive_only_exception: Optional[PoliciesAllInclusiveOnlyExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('allInclusiveOnlyException') }})
+    checkin_time: Optional[TimeOfDay] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('checkinTime') }})
+    checkin_time_exception: Optional[PoliciesCheckinTimeExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('checkinTimeException') }})
+    checkout_time: Optional[TimeOfDay] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('checkoutTime') }})
+    checkout_time_exception: Optional[PoliciesCheckoutTimeExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('checkoutTimeException') }})
+    kids_stay_free: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kidsStayFree') }})
+    kids_stay_free_exception: Optional[PoliciesKidsStayFreeExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kidsStayFreeException') }})
+    max_child_age: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxChildAge') }})
+    max_child_age_exception: Optional[PoliciesMaxChildAgeExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxChildAgeException') }})
+    max_kids_stay_free_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxKidsStayFreeCount') }})
+    max_kids_stay_free_count_exception: Optional[PoliciesMaxKidsStayFreeCountExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxKidsStayFreeCountException') }})
+    payment_options: Optional[PaymentOptions] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('paymentOptions') }})
+    smoke_free_property: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('smokeFreeProperty') }})
+    smoke_free_property_exception: Optional[PoliciesSmokeFreePropertyExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('smokeFreePropertyException') }})
     

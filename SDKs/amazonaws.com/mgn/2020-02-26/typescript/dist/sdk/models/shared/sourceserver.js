@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataReplicationInfo } from "./datareplicationinfo";
 import { LaunchedInstance } from "./launchedinstance";
 import { LifeCycle } from "./lifecycle";
@@ -33,35 +33,35 @@ var SourceServer = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=arn" }),
+        SpeakeasyMetadata({ data: "json, name=arn" }),
         __metadata("design:type", String)
     ], SourceServer.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=dataReplicationInfo" }),
+        SpeakeasyMetadata({ data: "json, name=dataReplicationInfo" }),
         __metadata("design:type", DataReplicationInfo)
     ], SourceServer.prototype, "dataReplicationInfo", void 0);
     __decorate([
-        Metadata({ data: "json, name=isArchived" }),
+        SpeakeasyMetadata({ data: "json, name=isArchived" }),
         __metadata("design:type", Boolean)
     ], SourceServer.prototype, "isArchived", void 0);
     __decorate([
-        Metadata({ data: "json, name=launchedInstance" }),
+        SpeakeasyMetadata({ data: "json, name=launchedInstance" }),
         __metadata("design:type", LaunchedInstance)
     ], SourceServer.prototype, "launchedInstance", void 0);
     __decorate([
-        Metadata({ data: "json, name=lifeCycle" }),
+        SpeakeasyMetadata({ data: "json, name=lifeCycle" }),
         __metadata("design:type", LifeCycle)
     ], SourceServer.prototype, "lifeCycle", void 0);
     __decorate([
-        Metadata({ data: "json, name=sourceProperties" }),
+        SpeakeasyMetadata({ data: "json, name=sourceProperties" }),
         __metadata("design:type", SourceProperties)
     ], SourceServer.prototype, "sourceProperties", void 0);
     __decorate([
-        Metadata({ data: "json, name=sourceServerID" }),
+        SpeakeasyMetadata({ data: "json, name=sourceServerID" }),
         __metadata("design:type", String)
     ], SourceServer.prototype, "sourceServerId", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags" }),
+        SpeakeasyMetadata({ data: "json, name=tags" }),
         __metadata("design:type", Map)
     ], SourceServer.prototype, "tags", void 0);
     return SourceServer;

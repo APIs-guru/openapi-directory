@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import money
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ConvertRegionPricesRequest:
-    price: Optional[money.Money] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'price' }})
+    r"""ConvertRegionPricesRequest
+    Request message for ConvertRegionPrices.
+    """
+    
+    price: Optional[Money] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('price') }})
     

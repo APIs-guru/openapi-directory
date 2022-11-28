@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Keys
 /**
  * The Nexmo product that you access with this application.
@@ -33,7 +33,7 @@ var Keys = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=public_key" }),
+        SpeakeasyMetadata({ data: "json, name=public_key" }),
         __metadata("design:type", String)
     ], Keys.prototype, "publicKey", void 0);
     return Keys;

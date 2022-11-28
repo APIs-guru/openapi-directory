@@ -1,6 +1,7 @@
 
 
+
 export enum DeliveryMethodEnum {
-    Email = "EMAIL"
-,    Sms = "SMS"
+    Email = "EMAIL",
+    Sms = "SMS"
 }

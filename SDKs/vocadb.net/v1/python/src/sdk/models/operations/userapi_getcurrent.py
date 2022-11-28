@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class UserAPIGetCurrentFieldsEnum(str, Enum):
@@ -16,13 +17,13 @@ class UserAPIGetCurrentQueryParams:
 
 @dataclass
 class UserAPIGetCurrentRequest:
-    query_params: UserAPIGetCurrentQueryParams = field(default=None)
+    query_params: UserAPIGetCurrentQueryParams = field()
     
 
 @dataclass
 class UserAPIGetCurrentResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     user_for_api_contract: Optional[shared.UserForAPIContract] = field(default=None)
     

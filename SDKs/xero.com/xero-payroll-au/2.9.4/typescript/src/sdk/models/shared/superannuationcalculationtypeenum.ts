@@ -1,7 +1,8 @@
 
 
+
 export enum SuperannuationCalculationTypeEnum {
-    Fixedamount = "FIXEDAMOUNT"
-,    Percentageofearnings = "PERCENTAGEOFEARNINGS"
-,    Statutory = "STATUTORY"
+    Fixedamount = "FIXEDAMOUNT",
+    Percentageofearnings = "PERCENTAGEOFEARNINGS",
+    Statutory = "STATUTORY"
 }

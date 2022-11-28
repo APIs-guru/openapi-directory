@@ -1,5 +1,7 @@
 package shared
 
+// PickupSlot
+// This complex type defines a time window for the pickup of a package.
 type PickupSlot struct {
 	PickupSlotEndTime   *string `json:"pickupSlotEndTime,omitempty"`
 	PickupSlotID        *string `json:"pickupSlotId,omitempty"`

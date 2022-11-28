@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class Adexchangebuyer2AccountsClientsInvitationsCreatePathParams:
-    account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
-    client_account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'clientAccountId', 'style': 'simple', 'explode': False }})
+    account_id: str = field(metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
+    client_account_id: str = field(metadata={'path_param': { 'field_name': 'clientAccountId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +27,21 @@ class Adexchangebuyer2AccountsClientsInvitationsCreateQueryParams:
 
 @dataclass
 class Adexchangebuyer2AccountsClientsInvitationsCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class Adexchangebuyer2AccountsClientsInvitationsCreateRequest:
-    path_params: Adexchangebuyer2AccountsClientsInvitationsCreatePathParams = field(default=None)
-    query_params: Adexchangebuyer2AccountsClientsInvitationsCreateQueryParams = field(default=None)
+    path_params: Adexchangebuyer2AccountsClientsInvitationsCreatePathParams = field()
+    query_params: Adexchangebuyer2AccountsClientsInvitationsCreateQueryParams = field()
+    security: Adexchangebuyer2AccountsClientsInvitationsCreateSecurity = field()
     request: Optional[shared.ClientUserInvitation] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: Adexchangebuyer2AccountsClientsInvitationsCreateSecurity = field(default=None)
     
 
 @dataclass
 class Adexchangebuyer2AccountsClientsInvitationsCreateResponse:
+    content_type: str = field()
+    status_code: int = field()
     client_user_invitation: Optional[shared.ClientUserInvitation] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

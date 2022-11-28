@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NfsMountOptions } from "./nfsmountoptions";
 import { OnPremConfig } from "./onpremconfig";
+
 
 
 // DescribeLocationNfsResponse
@@ -8,18 +9,18 @@ import { OnPremConfig } from "./onpremconfig";
  * DescribeLocationNfsResponse
 **/
 export class DescribeLocationNfsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=LocationArn" })
+  @SpeakeasyMetadata({ data: "json, name=LocationArn" })
   locationArn?: string;
 
-  @Metadata({ data: "json, name=LocationUri" })
+  @SpeakeasyMetadata({ data: "json, name=LocationUri" })
   locationUri?: string;
 
-  @Metadata({ data: "json, name=MountOptions" })
+  @SpeakeasyMetadata({ data: "json, name=MountOptions" })
   mountOptions?: NfsMountOptions;
 
-  @Metadata({ data: "json, name=OnPremConfig" })
+  @SpeakeasyMetadata({ data: "json, name=OnPremConfig" })
   onPremConfig?: OnPremConfig;
 }

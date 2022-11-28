@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PatchComplianceDataStateEnum } from "./patchcompliancedatastateenum";
+
 
 
 // PatchComplianceData
@@ -7,24 +8,24 @@ import { PatchComplianceDataStateEnum } from "./patchcompliancedatastateenum";
  * Information about the state of a patch on a particular instance as it relates to the patch baseline used to patch the instance.
 **/
 export class PatchComplianceData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CVEIds" })
+  @SpeakeasyMetadata({ data: "json, name=CVEIds" })
   cveIds?: string;
 
-  @Metadata({ data: "json, name=Classification" })
+  @SpeakeasyMetadata({ data: "json, name=Classification" })
   classification: string;
 
-  @Metadata({ data: "json, name=InstalledTime" })
+  @SpeakeasyMetadata({ data: "json, name=InstalledTime" })
   installedTime: Date;
 
-  @Metadata({ data: "json, name=KBId" })
+  @SpeakeasyMetadata({ data: "json, name=KBId" })
   kbId: string;
 
-  @Metadata({ data: "json, name=Severity" })
+  @SpeakeasyMetadata({ data: "json, name=Severity" })
   severity: string;
 
-  @Metadata({ data: "json, name=State" })
+  @SpeakeasyMetadata({ data: "json, name=State" })
   state: PatchComplianceDataStateEnum;
 
-  @Metadata({ data: "json, name=Title" })
+  @SpeakeasyMetadata({ data: "json, name=Title" })
   title: string;
 }

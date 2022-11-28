@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // HistogramQuery
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The histogram request.
 **/
 export class HistogramQuery extends SpeakeasyBase {
-  @Metadata({ data: "json, name=histogramQuery" })
+  @SpeakeasyMetadata({ data: "json, name=histogramQuery" })
   histogramQuery?: string;
 }

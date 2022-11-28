@@ -15,6 +15,8 @@ const (
 	ItemTypeEnumAvailablePackage ItemTypeEnum = "AVAILABLE_PACKAGE"
 )
 
+// Item
+// A single piece of inventory on a VM.
 type Item struct {
 	AvailablePackage *SoftwarePackage    `json:"availablePackage,omitempty"`
 	CreateTime       *string             `json:"createTime,omitempty"`

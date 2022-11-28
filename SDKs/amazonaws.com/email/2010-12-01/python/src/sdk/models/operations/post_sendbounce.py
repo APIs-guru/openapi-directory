@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostSendBounceActionEnum(str, Enum):
     SEND_BOUNCE = "SendBounce"
@@ -10,8 +14,8 @@ class PostSendBounceVersionEnum(str, Enum):
 
 @dataclass
 class PostSendBounceQueryParams:
-    action: PostSendBounceActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostSendBounceVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostSendBounceActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostSendBounceVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostSendBounceHeaders:
 
 @dataclass
 class PostSendBounceRequest:
-    query_params: PostSendBounceQueryParams = field(default=None)
-    headers: PostSendBounceHeaders = field(default=None)
+    headers: PostSendBounceHeaders = field()
+    query_params: PostSendBounceQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostSendBounceResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

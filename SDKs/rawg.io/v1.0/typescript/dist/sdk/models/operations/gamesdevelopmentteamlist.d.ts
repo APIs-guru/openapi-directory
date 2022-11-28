@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class GamesDevelopmentTeamListPathParams extends SpeakeasyBase {
     gamePk: string;
@@ -8,15 +8,15 @@ export declare class GamesDevelopmentTeamListQueryParams extends SpeakeasyBase {
     page?: number;
     pageSize?: number;
 }
-export declare class GamesDevelopmentTeamListRequest extends SpeakeasyBase {
-    pathParams: GamesDevelopmentTeamListPathParams;
-    queryParams: GamesDevelopmentTeamListQueryParams;
-}
 export declare class GamesDevelopmentTeamList200ApplicationJson extends SpeakeasyBase {
     count: number;
     next?: string;
     previous?: string;
     results: shared.GamePersonList[];
+}
+export declare class GamesDevelopmentTeamListRequest extends SpeakeasyBase {
+    pathParams: GamesDevelopmentTeamListPathParams;
+    queryParams: GamesDevelopmentTeamListQueryParams;
 }
 export declare class GamesDevelopmentTeamListResponse extends SpeakeasyBase {
     contentType: string;

@@ -1,5 +1,7 @@
 package shared
 
+// LustreFileSystemConfiguration
+// The configuration for the Amazon FSx for Lustre file system.
 type LustreFileSystemConfiguration struct {
 	AutomaticBackupRetentionDays  *int64                       `json:"AutomaticBackupRetentionDays,omitempty"`
 	CopyTagsToBackups             *bool                        `json:"CopyTagsToBackups,omitempty"`

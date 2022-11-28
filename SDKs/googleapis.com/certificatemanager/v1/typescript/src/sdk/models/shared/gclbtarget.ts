@@ -1,19 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IpConfig } from "./ipconfig";
+
 
 
 // GclbTarget
 /** 
- * Describes a Target Proxy which uses this Certificate Map.
+ * Describes a Target Proxy that uses this Certificate Map.
 **/
 export class GclbTarget extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ipConfigs", elemType: shared.IpConfig })
+  @SpeakeasyMetadata({ data: "json, name=ipConfigs", elemType: IpConfig })
   ipConfigs?: IpConfig[];
 
-  @Metadata({ data: "json, name=targetHttpsProxy" })
+  @SpeakeasyMetadata({ data: "json, name=targetHttpsProxy" })
   targetHttpsProxy?: string;
 
-  @Metadata({ data: "json, name=targetSslProxy" })
+  @SpeakeasyMetadata({ data: "json, name=targetSslProxy" })
   targetSslProxy?: string;
 }

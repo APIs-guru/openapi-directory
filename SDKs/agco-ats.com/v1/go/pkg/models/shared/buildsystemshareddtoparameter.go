@@ -17,6 +17,8 @@ const (
 	BuildSystemSharedDtoParameterTypeEnumStringDictionary BuildSystemSharedDtoParameterTypeEnum = "StringDictionary"
 )
 
+// BuildSystemSharedDtoParameter
+// A DTO for an IParameter
 type BuildSystemSharedDtoParameter struct {
 	Direction *BuildSystemSharedDtoParameterDirectionEnum `json:"Direction,omitempty"`
 	Name      *string                                     `json:"Name,omitempty"`

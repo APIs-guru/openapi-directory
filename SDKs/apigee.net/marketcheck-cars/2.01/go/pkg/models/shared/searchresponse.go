@@ -1,5 +1,7 @@
 package shared
 
+// SearchResponse
+// Search query response
 type SearchResponse struct {
 	Facets      map[string]interface{} `json:"facets,omitempty"`
 	Listings    []BaseListing          `json:"listings,omitempty"`

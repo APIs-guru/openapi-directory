@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum RuleSourceTypeEnum {
     ChannelMessage = "channel.message",
     ChannelPresence = "channel.presence",

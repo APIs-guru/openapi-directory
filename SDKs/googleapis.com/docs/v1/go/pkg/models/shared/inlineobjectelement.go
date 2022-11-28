@@ -1,5 +1,7 @@
 package shared
 
+// InlineObjectElement
+// A ParagraphElement that contains an InlineObject.
 type InlineObjectElement struct {
 	InlineObjectID            *string                       `json:"inlineObjectId,omitempty"`
 	SuggestedDeletionIds      []string                      `json:"suggestedDeletionIds,omitempty"`

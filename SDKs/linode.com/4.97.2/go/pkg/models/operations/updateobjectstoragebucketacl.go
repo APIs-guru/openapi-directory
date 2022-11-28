@@ -4,7 +4,7 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-var UpdateObjectStorageBucketACLServers = []string{
+var UpdateObjectStorageBucketACLServerList = []string{
 	"https://api.linode.com/v4",
 }
 
@@ -13,24 +13,9 @@ type UpdateObjectStorageBucketACLPathParams struct {
 	ClusterID string `pathParam:"style=simple,explode=false,name=clusterId"`
 }
 
-type UpdateObjectStorageBucketACLSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type UpdateObjectStorageBucketACLSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type UpdateObjectStorageBucketACLSecurity struct {
-	Option1 *UpdateObjectStorageBucketACLSecurityOption1 `security:"option"`
-	Option2 *UpdateObjectStorageBucketACLSecurityOption2 `security:"option"`
-}
-
-type UpdateObjectStorageBucketACLRequest struct {
-	ServerURL  *string
-	PathParams UpdateObjectStorageBucketACLPathParams
-	Request    *interface{} `request:"mediaType=application/json"`
-	Security   UpdateObjectStorageBucketACLSecurity
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
 }
 
 type UpdateObjectStorageBucketACL200ApplicationJSONACLEnum string
@@ -50,6 +35,13 @@ type UpdateObjectStorageBucketACL200ApplicationJSON struct {
 
 type UpdateObjectStorageBucketACLDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type UpdateObjectStorageBucketACLRequest struct {
+	ServerURL  *string
+	PathParams UpdateObjectStorageBucketACLPathParams
+	Request    *interface{} `request:"mediaType=application/json"`
+	Security   UpdateObjectStorageBucketACLSecurity
 }
 
 type UpdateObjectStorageBucketACLResponse struct {

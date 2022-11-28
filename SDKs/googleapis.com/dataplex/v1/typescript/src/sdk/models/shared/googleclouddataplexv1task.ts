@@ -1,16 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDataplexV1TaskExecutionSpec } from "./googleclouddataplexv1taskexecutionspec";
-import { GoogleCloudDataplexV1TaskExecutionStatus } from "./googleclouddataplexv1taskexecutionstatus";
 import { GoogleCloudDataplexV1TaskNotebookTaskConfig } from "./googleclouddataplexv1tasknotebooktaskconfig";
 import { GoogleCloudDataplexV1TaskSparkTaskConfig } from "./googleclouddataplexv1tasksparktaskconfig";
 import { GoogleCloudDataplexV1TaskTriggerSpec } from "./googleclouddataplexv1tasktriggerspec";
+import { GoogleCloudDataplexV1TaskExecutionStatus } from "./googleclouddataplexv1taskexecutionstatus";
+
 
 export enum GoogleCloudDataplexV1TaskStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Active = "ACTIVE"
-,    Creating = "CREATING"
-,    Deleting = "DELETING"
-,    ActionRequired = "ACTION_REQUIRED"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Active = "ACTIVE",
+    Creating = "CREATING",
+    Deleting = "DELETING",
+    ActionRequired = "ACTION_REQUIRED"
+}
+
+
+// GoogleCloudDataplexV1TaskInput
+/** 
+ * A task represents a user-visible job.
+**/
+export class GoogleCloudDataplexV1TaskInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
+  displayName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=executionSpec" })
+  executionSpec?: GoogleCloudDataplexV1TaskExecutionSpec;
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=notebook" })
+  notebook?: GoogleCloudDataplexV1TaskNotebookTaskConfig;
+
+  @SpeakeasyMetadata({ data: "json, name=spark" })
+  spark?: GoogleCloudDataplexV1TaskSparkTaskConfig;
+
+  @SpeakeasyMetadata({ data: "json, name=triggerSpec" })
+  triggerSpec?: GoogleCloudDataplexV1TaskTriggerSpec;
 }
 
 
@@ -19,42 +48,42 @@ export enum GoogleCloudDataplexV1TaskStateEnum {
  * A task represents a user-visible job.
 **/
 export class GoogleCloudDataplexV1Task extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=executionSpec" })
+  @SpeakeasyMetadata({ data: "json, name=executionSpec" })
   executionSpec?: GoogleCloudDataplexV1TaskExecutionSpec;
 
-  @Metadata({ data: "json, name=executionStatus" })
+  @SpeakeasyMetadata({ data: "json, name=executionStatus" })
   executionStatus?: GoogleCloudDataplexV1TaskExecutionStatus;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=notebook" })
+  @SpeakeasyMetadata({ data: "json, name=notebook" })
   notebook?: GoogleCloudDataplexV1TaskNotebookTaskConfig;
 
-  @Metadata({ data: "json, name=spark" })
+  @SpeakeasyMetadata({ data: "json, name=spark" })
   spark?: GoogleCloudDataplexV1TaskSparkTaskConfig;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: GoogleCloudDataplexV1TaskStateEnum;
 
-  @Metadata({ data: "json, name=triggerSpec" })
+  @SpeakeasyMetadata({ data: "json, name=triggerSpec" })
   triggerSpec?: GoogleCloudDataplexV1TaskTriggerSpec;
 
-  @Metadata({ data: "json, name=uid" })
+  @SpeakeasyMetadata({ data: "json, name=uid" })
   uid?: string;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 }

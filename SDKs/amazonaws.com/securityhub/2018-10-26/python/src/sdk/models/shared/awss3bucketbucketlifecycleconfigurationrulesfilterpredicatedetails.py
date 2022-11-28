@@ -1,15 +1,19 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import awss3bucketbucketlifecycleconfigurationrulesfilterpredicateoperandsdetails
-from . import awss3bucketbucketlifecycleconfigurationrulesfilterpredicatetagdetails
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateDetails:
-    operands: Optional[List[awss3bucketbucketlifecycleconfigurationrulesfilterpredicateoperandsdetails.AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsDetails]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Operands' }})
-    prefix: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Prefix' }})
-    tag: Optional[awss3bucketbucketlifecycleconfigurationrulesfilterpredicatetagdetails.AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateTagDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Tag' }})
-    type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
+    r"""AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateDetails
+    The configuration for the filter.
+    """
+    
+    operands: Optional[List[AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsDetails]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Operands') }})
+    prefix: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Prefix') }})
+    tag: Optional[AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateTagDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Tag') }})
+    type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Type') }})
     

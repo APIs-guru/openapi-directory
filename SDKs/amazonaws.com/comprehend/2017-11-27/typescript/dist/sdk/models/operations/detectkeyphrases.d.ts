@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum DetectKeyPhrasesXAmzTargetEnum {
     Comprehend20171127DetectKeyPhrases = "Comprehend_20171127.DetectKeyPhrases"

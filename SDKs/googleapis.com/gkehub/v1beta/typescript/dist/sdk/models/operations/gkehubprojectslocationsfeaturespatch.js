@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GkehubProjectsLocationsFeaturesPatchPathParams = /** @class */ (function (_super) {
     __extends(GkehubProjectsLocationsFeaturesPatchPathParams, _super);
@@ -30,7 +30,7 @@ var GkehubProjectsLocationsFeaturesPatchPathParams = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=name" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=name" }),
         __metadata("design:type", String)
     ], GkehubProjectsLocationsFeaturesPatchPathParams.prototype, "name", void 0);
     return GkehubProjectsLocationsFeaturesPatchPathParams;
@@ -42,55 +42,55 @@ var GkehubProjectsLocationsFeaturesPatchQueryParams = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], GkehubProjectsLocationsFeaturesPatchQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], GkehubProjectsLocationsFeaturesPatchQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], GkehubProjectsLocationsFeaturesPatchQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], GkehubProjectsLocationsFeaturesPatchQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], GkehubProjectsLocationsFeaturesPatchQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], GkehubProjectsLocationsFeaturesPatchQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], GkehubProjectsLocationsFeaturesPatchQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], GkehubProjectsLocationsFeaturesPatchQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], GkehubProjectsLocationsFeaturesPatchQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=requestId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=requestId" }),
         __metadata("design:type", String)
     ], GkehubProjectsLocationsFeaturesPatchQueryParams.prototype, "requestId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=updateMask" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=updateMask" }),
         __metadata("design:type", String)
     ], GkehubProjectsLocationsFeaturesPatchQueryParams.prototype, "updateMask", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], GkehubProjectsLocationsFeaturesPatchQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], GkehubProjectsLocationsFeaturesPatchQueryParams.prototype, "uploadProtocol", void 0);
     return GkehubProjectsLocationsFeaturesPatchQueryParams;
@@ -102,11 +102,11 @@ var GkehubProjectsLocationsFeaturesPatchSecurity = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], GkehubProjectsLocationsFeaturesPatchSecurity.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], GkehubProjectsLocationsFeaturesPatchSecurity.prototype, "oauth2c", void 0);
     return GkehubProjectsLocationsFeaturesPatchSecurity;
@@ -118,19 +118,19 @@ var GkehubProjectsLocationsFeaturesPatchRequest = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GkehubProjectsLocationsFeaturesPatchPathParams)
     ], GkehubProjectsLocationsFeaturesPatchRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GkehubProjectsLocationsFeaturesPatchQueryParams)
     ], GkehubProjectsLocationsFeaturesPatchRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", shared.Feature)
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", shared.FeatureInput)
     ], GkehubProjectsLocationsFeaturesPatchRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GkehubProjectsLocationsFeaturesPatchSecurity)
     ], GkehubProjectsLocationsFeaturesPatchRequest.prototype, "security", void 0);
     return GkehubProjectsLocationsFeaturesPatchRequest;
@@ -142,15 +142,15 @@ var GkehubProjectsLocationsFeaturesPatchResponse = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GkehubProjectsLocationsFeaturesPatchResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Operation)
     ], GkehubProjectsLocationsFeaturesPatchResponse.prototype, "operation", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GkehubProjectsLocationsFeaturesPatchResponse.prototype, "statusCode", void 0);
     return GkehubProjectsLocationsFeaturesPatchResponse;

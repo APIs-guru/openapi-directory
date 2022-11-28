@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeliveryStreamEncryptionConfiguration } from "./deliverystreamencryptionconfiguration";
 import { DeliveryStreamStatusEnum } from "./deliverystreamstatusenum";
 import { DeliveryStreamTypeEnum } from "./deliverystreamtypeenum";
@@ -8,44 +7,45 @@ import { FailureDescription } from "./failuredescription";
 import { SourceDescription } from "./sourcedescription";
 
 
+
 // DeliveryStreamDescription
 /** 
  * Contains information about a delivery stream.
 **/
 export class DeliveryStreamDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreateTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=CreateTimestamp" })
   createTimestamp?: Date;
 
-  @Metadata({ data: "json, name=DeliveryStreamARN" })
+  @SpeakeasyMetadata({ data: "json, name=DeliveryStreamARN" })
   deliveryStreamArn: string;
 
-  @Metadata({ data: "json, name=DeliveryStreamEncryptionConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=DeliveryStreamEncryptionConfiguration" })
   deliveryStreamEncryptionConfiguration?: DeliveryStreamEncryptionConfiguration;
 
-  @Metadata({ data: "json, name=DeliveryStreamName" })
+  @SpeakeasyMetadata({ data: "json, name=DeliveryStreamName" })
   deliveryStreamName: string;
 
-  @Metadata({ data: "json, name=DeliveryStreamStatus" })
+  @SpeakeasyMetadata({ data: "json, name=DeliveryStreamStatus" })
   deliveryStreamStatus: DeliveryStreamStatusEnum;
 
-  @Metadata({ data: "json, name=DeliveryStreamType" })
+  @SpeakeasyMetadata({ data: "json, name=DeliveryStreamType" })
   deliveryStreamType: DeliveryStreamTypeEnum;
 
-  @Metadata({ data: "json, name=Destinations", elemType: shared.DestinationDescription })
+  @SpeakeasyMetadata({ data: "json, name=Destinations", elemType: DestinationDescription })
   destinations: DestinationDescription[];
 
-  @Metadata({ data: "json, name=FailureDescription" })
+  @SpeakeasyMetadata({ data: "json, name=FailureDescription" })
   failureDescription?: FailureDescription;
 
-  @Metadata({ data: "json, name=HasMoreDestinations" })
+  @SpeakeasyMetadata({ data: "json, name=HasMoreDestinations" })
   hasMoreDestinations: boolean;
 
-  @Metadata({ data: "json, name=LastUpdateTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=LastUpdateTimestamp" })
   lastUpdateTimestamp?: Date;
 
-  @Metadata({ data: "json, name=Source" })
+  @SpeakeasyMetadata({ data: "json, name=Source" })
   source?: SourceDescription;
 
-  @Metadata({ data: "json, name=VersionId" })
+  @SpeakeasyMetadata({ data: "json, name=VersionId" })
   versionId: string;
 }

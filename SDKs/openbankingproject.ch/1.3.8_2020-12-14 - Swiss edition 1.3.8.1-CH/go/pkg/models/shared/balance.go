@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Balance
+// A single balance element.
 type Balance struct {
 	BalanceAmount            Amount          `json:"balanceAmount"`
 	BalanceType              BalanceTypeEnum `json:"balanceType"`

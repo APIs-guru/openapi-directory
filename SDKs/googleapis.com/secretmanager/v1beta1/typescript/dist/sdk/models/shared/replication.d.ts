@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { UserManaged } from "./usermanaged";
 /**
  * A policy that defines the replication configuration of data.

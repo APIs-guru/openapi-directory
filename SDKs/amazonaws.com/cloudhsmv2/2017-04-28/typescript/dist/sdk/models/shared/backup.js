@@ -22,9 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BackupStateEnum } from "./backupstateenum";
+import { Tag } from "./tag";
 // Backup
 /**
  * Contains information about a backup of an AWS CloudHSM cluster. All backup objects contain the <code>BackupId</code>, <code>BackupState</code>, <code>ClusterId</code>, and <code>CreateTimestamp</code> parameters. Backups that were copied into a destination region additionally contain the <code>CopyTimestamp</code>, <code>SourceBackup</code>, <code>SourceCluster</code>, and <code>SourceRegion</code> parameters. A backup that is pending deletion will include the <code>DeleteTimestamp</code> parameter.
@@ -35,47 +35,47 @@ var Backup = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=BackupId" }),
+        SpeakeasyMetadata({ data: "json, name=BackupId" }),
         __metadata("design:type", String)
     ], Backup.prototype, "backupId", void 0);
     __decorate([
-        Metadata({ data: "json, name=BackupState" }),
+        SpeakeasyMetadata({ data: "json, name=BackupState" }),
         __metadata("design:type", String)
     ], Backup.prototype, "backupState", void 0);
     __decorate([
-        Metadata({ data: "json, name=ClusterId" }),
+        SpeakeasyMetadata({ data: "json, name=ClusterId" }),
         __metadata("design:type", String)
     ], Backup.prototype, "clusterId", void 0);
     __decorate([
-        Metadata({ data: "json, name=CopyTimestamp" }),
+        SpeakeasyMetadata({ data: "json, name=CopyTimestamp" }),
         __metadata("design:type", Date)
     ], Backup.prototype, "copyTimestamp", void 0);
     __decorate([
-        Metadata({ data: "json, name=CreateTimestamp" }),
+        SpeakeasyMetadata({ data: "json, name=CreateTimestamp" }),
         __metadata("design:type", Date)
     ], Backup.prototype, "createTimestamp", void 0);
     __decorate([
-        Metadata({ data: "json, name=DeleteTimestamp" }),
+        SpeakeasyMetadata({ data: "json, name=DeleteTimestamp" }),
         __metadata("design:type", Date)
     ], Backup.prototype, "deleteTimestamp", void 0);
     __decorate([
-        Metadata({ data: "json, name=NeverExpires" }),
+        SpeakeasyMetadata({ data: "json, name=NeverExpires" }),
         __metadata("design:type", Boolean)
     ], Backup.prototype, "neverExpires", void 0);
     __decorate([
-        Metadata({ data: "json, name=SourceBackup" }),
+        SpeakeasyMetadata({ data: "json, name=SourceBackup" }),
         __metadata("design:type", String)
     ], Backup.prototype, "sourceBackup", void 0);
     __decorate([
-        Metadata({ data: "json, name=SourceCluster" }),
+        SpeakeasyMetadata({ data: "json, name=SourceCluster" }),
         __metadata("design:type", String)
     ], Backup.prototype, "sourceCluster", void 0);
     __decorate([
-        Metadata({ data: "json, name=SourceRegion" }),
+        SpeakeasyMetadata({ data: "json, name=SourceRegion" }),
         __metadata("design:type", String)
     ], Backup.prototype, "sourceRegion", void 0);
     __decorate([
-        Metadata({ data: "json, name=TagList", elemType: shared.Tag }),
+        SpeakeasyMetadata({ data: "json, name=TagList", elemType: Tag }),
         __metadata("design:type", Array)
     ], Backup.prototype, "tagList", void 0);
     return Backup;

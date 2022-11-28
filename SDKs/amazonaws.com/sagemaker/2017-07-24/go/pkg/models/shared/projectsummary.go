@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ProjectSummary
+// Information about a project.
 type ProjectSummary struct {
 	CreationTime       time.Time         `json:"CreationTime"`
 	ProjectArn         string            `json:"ProjectArn"`

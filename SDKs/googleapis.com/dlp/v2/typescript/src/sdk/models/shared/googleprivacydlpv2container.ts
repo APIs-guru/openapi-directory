@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GooglePrivacyDlpV2Container
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents a container that may contain DLP findings. Examples of a container include a file, table, or database record.
 **/
 export class GooglePrivacyDlpV2Container extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fullPath" })
+  @SpeakeasyMetadata({ data: "json, name=fullPath" })
   fullPath?: string;
 
-  @Metadata({ data: "json, name=projectId" })
+  @SpeakeasyMetadata({ data: "json, name=projectId" })
   projectId?: string;
 
-  @Metadata({ data: "json, name=relativePath" })
+  @SpeakeasyMetadata({ data: "json, name=relativePath" })
   relativePath?: string;
 
-  @Metadata({ data: "json, name=rootPath" })
+  @SpeakeasyMetadata({ data: "json, name=rootPath" })
   rootPath?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 }

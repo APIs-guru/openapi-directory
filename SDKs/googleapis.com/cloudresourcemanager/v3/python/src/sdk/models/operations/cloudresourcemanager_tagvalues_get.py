@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudresourcemanagerTagValuesGetPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class CloudresourcemanagerTagValuesGetQueryParams:
 
 @dataclass
 class CloudresourcemanagerTagValuesGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudresourcemanagerTagValuesGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,14 +44,14 @@ class CloudresourcemanagerTagValuesGetSecurity:
 
 @dataclass
 class CloudresourcemanagerTagValuesGetRequest:
-    path_params: CloudresourcemanagerTagValuesGetPathParams = field(default=None)
-    query_params: CloudresourcemanagerTagValuesGetQueryParams = field(default=None)
-    security: CloudresourcemanagerTagValuesGetSecurity = field(default=None)
+    path_params: CloudresourcemanagerTagValuesGetPathParams = field()
+    query_params: CloudresourcemanagerTagValuesGetQueryParams = field()
+    security: CloudresourcemanagerTagValuesGetSecurity = field()
     
 
 @dataclass
 class CloudresourcemanagerTagValuesGetResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     tag_value: Optional[shared.TagValue] = field(default=None)
     

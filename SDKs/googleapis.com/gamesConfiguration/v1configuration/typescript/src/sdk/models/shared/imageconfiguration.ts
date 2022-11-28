@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ImageConfigurationImageTypeEnum {
-    ImageTypeUnspecified = "IMAGE_TYPE_UNSPECIFIED"
-,    AchievementIcon = "ACHIEVEMENT_ICON"
-,    LeaderboardIcon = "LEADERBOARD_ICON"
+    ImageTypeUnspecified = "IMAGE_TYPE_UNSPECIFIED",
+    AchievementIcon = "ACHIEVEMENT_ICON",
+    LeaderboardIcon = "LEADERBOARD_ICON"
 }
 
 
@@ -12,15 +13,15 @@ export enum ImageConfigurationImageTypeEnum {
  * An image configuration resource.
 **/
 export class ImageConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=imageType" })
+  @SpeakeasyMetadata({ data: "json, name=imageType" })
   imageType?: ImageConfigurationImageTypeEnum;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=resourceId" })
+  @SpeakeasyMetadata({ data: "json, name=resourceId" })
   resourceId?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }

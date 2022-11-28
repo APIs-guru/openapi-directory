@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -94,14 +95,14 @@ class SearchAndRankCarQueryParams:
 
 @dataclass
 class SearchAndRankCarRequest:
-    query_params: SearchAndRankCarQueryParams = field(default=None)
-    request: shared.CarRankRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    query_params: SearchAndRankCarQueryParams = field()
+    request: shared.CarRankRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class SearchAndRankCarResponse:
+    content_type: str = field()
+    status_code: int = field()
     car_rank_response: Optional[shared.CarRankResponse] = field(default=None)
-    content_type: str = field(default=None)
     error: Optional[shared.Error] = field(default=None)
-    status_code: int = field(default=None)
     

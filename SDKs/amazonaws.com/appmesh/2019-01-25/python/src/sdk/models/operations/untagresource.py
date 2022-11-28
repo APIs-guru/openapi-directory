@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
 class UntagResourceQueryParams:
-    resource_arn: str = field(default=None, metadata={'query_param': { 'field_name': 'resourceArn', 'style': 'form', 'explode': True }})
+    resource_arn: str = field(metadata={'query_param': { 'field_name': 'resourceArn', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -22,25 +26,25 @@ class UntagResourceHeaders:
 @dataclass_json
 @dataclass
 class UntagResourceRequestBody:
-    tag_keys: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tagKeys' }})
+    tag_keys: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('tagKeys') }})
     
 
 @dataclass
 class UntagResourceRequest:
-    query_params: UntagResourceQueryParams = field(default=None)
-    headers: UntagResourceHeaders = field(default=None)
-    request: UntagResourceRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UntagResourceHeaders = field()
+    query_params: UntagResourceQueryParams = field()
+    request: UntagResourceRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UntagResourceResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     forbidden_exception: Optional[Any] = field(default=None)
     internal_server_error_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     untag_resource_output: Optional[dict[str, Any]] = field(default=None)
     

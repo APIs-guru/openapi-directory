@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// CreativeAssignment
+// Creative Assignment.
 type CreativeAssignment struct {
 	Active                     *bool                           `json:"active,omitempty"`
 	ApplyEventTags             *bool                           `json:"applyEventTags,omitempty"`

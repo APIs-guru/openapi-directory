@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DirectoryResourcesFeaturesPatchPathParams:
-    customer: str = field(default=None, metadata={'path_param': { 'field_name': 'customer', 'style': 'simple', 'explode': False }})
-    feature_key: str = field(default=None, metadata={'path_param': { 'field_name': 'featureKey', 'style': 'simple', 'explode': False }})
+    customer: str = field(metadata={'path_param': { 'field_name': 'customer', 'style': 'simple', 'explode': False }})
+    feature_key: str = field(metadata={'path_param': { 'field_name': 'featureKey', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +27,21 @@ class DirectoryResourcesFeaturesPatchQueryParams:
 
 @dataclass
 class DirectoryResourcesFeaturesPatchSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DirectoryResourcesFeaturesPatchRequest:
-    path_params: DirectoryResourcesFeaturesPatchPathParams = field(default=None)
-    query_params: DirectoryResourcesFeaturesPatchQueryParams = field(default=None)
+    path_params: DirectoryResourcesFeaturesPatchPathParams = field()
+    query_params: DirectoryResourcesFeaturesPatchQueryParams = field()
+    security: DirectoryResourcesFeaturesPatchSecurity = field()
     request: Optional[shared.Feature] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DirectoryResourcesFeaturesPatchSecurity = field(default=None)
     
 
 @dataclass
 class DirectoryResourcesFeaturesPatchResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     feature: Optional[shared.Feature] = field(default=None)
-    status_code: int = field(default=None)
     

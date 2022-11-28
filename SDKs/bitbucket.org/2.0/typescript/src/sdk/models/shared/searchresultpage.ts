@@ -1,27 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SearchCodeSearchResult } from "./searchcodesearchresult";
 
 
+
 export class SearchResultPage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=next" })
+  @SpeakeasyMetadata({ data: "json, name=next" })
   next?: string;
 
-  @Metadata({ data: "json, name=page" })
+  @SpeakeasyMetadata({ data: "json, name=page" })
   page?: number;
 
-  @Metadata({ data: "json, name=pagelen" })
+  @SpeakeasyMetadata({ data: "json, name=pagelen" })
   pagelen?: number;
 
-  @Metadata({ data: "json, name=previous" })
+  @SpeakeasyMetadata({ data: "json, name=previous" })
   previous?: string;
 
-  @Metadata({ data: "json, name=query_substituted" })
+  @SpeakeasyMetadata({ data: "json, name=query_substituted" })
   querySubstituted?: boolean;
 
-  @Metadata({ data: "json, name=size" })
+  @SpeakeasyMetadata({ data: "json, name=size" })
   size?: number;
 
-  @Metadata({ data: "json, name=values", elemType: shared.SearchCodeSearchResult })
+  @SpeakeasyMetadata({ data: "json, name=values", elemType: SearchCodeSearchResult })
   values?: SearchCodeSearchResult[];
 }

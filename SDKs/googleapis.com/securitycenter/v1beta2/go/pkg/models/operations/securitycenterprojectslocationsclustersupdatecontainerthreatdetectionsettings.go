@@ -31,7 +31,7 @@ type SecuritycenterProjectsLocationsClustersUpdateContainerThreatDetectionSettin
 type SecuritycenterProjectsLocationsClustersUpdateContainerThreatDetectionSettingsRequest struct {
 	PathParams  SecuritycenterProjectsLocationsClustersUpdateContainerThreatDetectionSettingsPathParams
 	QueryParams SecuritycenterProjectsLocationsClustersUpdateContainerThreatDetectionSettingsQueryParams
-	Request     *shared.ContainerThreatDetectionSettings `request:"mediaType=application/json"`
+	Request     *shared.ContainerThreatDetectionSettingsInput `request:"mediaType=application/json"`
 	Security    SecuritycenterProjectsLocationsClustersUpdateContainerThreatDetectionSettingsSecurity
 }
 

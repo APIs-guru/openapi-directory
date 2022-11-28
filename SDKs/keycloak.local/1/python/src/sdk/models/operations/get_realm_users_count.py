@@ -4,7 +4,7 @@ from typing import Optional
 
 @dataclass
 class GetRealmUsersCountPathParams:
-    realm: str = field(default=None, metadata={'path_param': { 'field_name': 'realm', 'style': 'simple', 'explode': False }})
+    realm: str = field(metadata={'path_param': { 'field_name': 'realm', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,13 +18,13 @@ class GetRealmUsersCountQueryParams:
 
 @dataclass
 class GetRealmUsersCountRequest:
-    path_params: GetRealmUsersCountPathParams = field(default=None)
-    query_params: GetRealmUsersCountQueryParams = field(default=None)
+    path_params: GetRealmUsersCountPathParams = field()
+    query_params: GetRealmUsersCountQueryParams = field()
     
 
 @dataclass
 class GetRealmUsersCountResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_realm_users_count_2_xx_application_json_int32_integer: Optional[int] = field(default=None)
-    status_code: int = field(default=None)
     

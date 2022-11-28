@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ReplicationStatusType } from "./replicationstatustype";
 export declare class CreateSecretResponse extends SpeakeasyBase {
     arn?: string;

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PaymentsProgramOnboardingSteps } from "./paymentsprogramonboardingsteps";
+
 
 
 // PaymentsProgramOnboardingResponse
@@ -8,9 +8,9 @@ import { PaymentsProgramOnboardingSteps } from "./paymentsprogramonboardingsteps
  * Contains the payments program onboarding response
 **/
 export class PaymentsProgramOnboardingResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=onboardingStatus" })
+  @SpeakeasyMetadata({ data: "json, name=onboardingStatus" })
   onboardingStatus?: string;
 
-  @Metadata({ data: "json, name=steps", elemType: shared.PaymentsProgramOnboardingSteps })
+  @SpeakeasyMetadata({ data: "json, name=steps", elemType: PaymentsProgramOnboardingSteps })
   steps?: PaymentsProgramOnboardingSteps[];
 }

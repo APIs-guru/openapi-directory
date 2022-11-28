@@ -23,23 +23,27 @@ const (
 	ReposCreatePagesSiteRequestBodySourcePathEnumRootDocs ReposCreatePagesSiteRequestBodySourcePathEnum = "/docs"
 )
 
+// ReposCreatePagesSiteRequestBodySource
+// The source branch and directory used to publish your Pages site.
 type ReposCreatePagesSiteRequestBodySource struct {
 	Branch ReposCreatePagesSiteRequestBodySourceBranchEnum `json:"branch"`
 	Path   *ReposCreatePagesSiteRequestBodySourcePathEnum  `json:"path,omitempty"`
 }
 
+// ReposCreatePagesSiteRequestBody
+// The source branch and directory used to publish your Pages site.
 type ReposCreatePagesSiteRequestBody struct {
 	Source ReposCreatePagesSiteRequestBodySource `json:"source"`
-}
-
-type ReposCreatePagesSiteRequest struct {
-	PathParams ReposCreatePagesSitePathParams
-	Request    *ReposCreatePagesSiteRequestBody `request:"mediaType=application/json"`
 }
 
 type ReposCreatePagesSite415ApplicationJSON struct {
 	DocumentationURL string `json:"documentation_url"`
 	Message          string `json:"message"`
+}
+
+type ReposCreatePagesSiteRequest struct {
+	PathParams ReposCreatePagesSitePathParams
+	Request    *ReposCreatePagesSiteRequestBody `request:"mediaType=application/json"`
 }
 
 type ReposCreatePagesSiteResponse struct {

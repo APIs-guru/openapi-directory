@@ -11,6 +11,8 @@ const (
 	MemoryEventEventTypeEnumExternalStorageMeasured    MemoryEventEventTypeEnum = "EXTERNAL_STORAGE_MEASURED"
 )
 
+// MemoryEvent
+// An event related to memory and storage measurements.
 type MemoryEvent struct {
 	ByteCount  *string                   `json:"byteCount,omitempty"`
 	CreateTime *string                   `json:"createTime,omitempty"`

@@ -8,6 +8,16 @@ const (
 	SchemaTypeEnumAvro            SchemaTypeEnum = "AVRO"
 )
 
+// SchemaInput
+// A schema resource.
+type SchemaInput struct {
+	Definition *string         `json:"definition,omitempty"`
+	Name       *string         `json:"name,omitempty"`
+	Type       *SchemaTypeEnum `json:"type,omitempty"`
+}
+
+// Schema
+// A schema resource.
 type Schema struct {
 	Definition         *string         `json:"definition,omitempty"`
 	Name               *string         `json:"name,omitempty"`

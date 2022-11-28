@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DocumentSimilarityRequestBody = /** @class */ (function (_super) {
     __extends(DocumentSimilarityRequestBody, _super);
     function DocumentSimilarityRequestBody() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "form, name=api_key;" }),
+        SpeakeasyMetadata({ data: "form, name=api_key;" }),
         __metadata("design:type", String)
     ], DocumentSimilarityRequestBody.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "form, name=copy;" }),
+        SpeakeasyMetadata({ data: "form, name=copy;" }),
         __metadata("design:type", String)
     ], DocumentSimilarityRequestBody.prototype, "copy", void 0);
     __decorate([
-        Metadata({ data: "form, name=original;" }),
+        SpeakeasyMetadata({ data: "form, name=original;" }),
         __metadata("design:type", String)
     ], DocumentSimilarityRequestBody.prototype, "original", void 0);
     return DocumentSimilarityRequestBody;
@@ -49,7 +49,7 @@ var DocumentSimilarityRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
         __metadata("design:type", DocumentSimilarityRequestBody)
     ], DocumentSimilarityRequest.prototype, "request", void 0);
     return DocumentSimilarityRequest;
@@ -61,11 +61,11 @@ var DocumentSimilarityResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DocumentSimilarityResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DocumentSimilarityResponse.prototype, "statusCode", void 0);
     return DocumentSimilarityResponse;

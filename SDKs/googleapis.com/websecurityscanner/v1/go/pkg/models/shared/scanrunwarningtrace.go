@@ -11,6 +11,8 @@ const (
 	ScanRunWarningTraceCodeEnumNoStartingURLFoundForManagedScan ScanRunWarningTraceCodeEnum = "NO_STARTING_URL_FOUND_FOR_MANAGED_SCAN"
 )
 
+// ScanRunWarningTrace
+// Output only. Defines a warning trace message for ScanRun. Warning traces provide customers with useful information that helps make the scanning process more effective.
 type ScanRunWarningTrace struct {
 	Code *ScanRunWarningTraceCodeEnum `json:"code,omitempty"`
 }

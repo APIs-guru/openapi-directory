@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Money } from "./money";
 // TierRate
 /**
@@ -34,11 +34,11 @@ var TierRate = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=startUsageAmount" }),
+        SpeakeasyMetadata({ data: "json, name=startUsageAmount" }),
         __metadata("design:type", Number)
     ], TierRate.prototype, "startUsageAmount", void 0);
     __decorate([
-        Metadata({ data: "json, name=unitPrice" }),
+        SpeakeasyMetadata({ data: "json, name=unitPrice" }),
         __metadata("design:type", Money)
     ], TierRate.prototype, "unitPrice", void 0);
     return TierRate;

@@ -18,6 +18,8 @@ type MergeProfilesHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// MergeProfilesRequestBodyFieldSourceProfileIds
+// A duplicate customer profile that is to be merged into a main profile.
 type MergeProfilesRequestBodyFieldSourceProfileIds struct {
 	AccountNumber         *string           `json:"AccountNumber,omitempty"`
 	AdditionalInformation *string           `json:"AdditionalInformation,omitempty"`

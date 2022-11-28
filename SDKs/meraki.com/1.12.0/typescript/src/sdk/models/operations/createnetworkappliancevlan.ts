@@ -1,46 +1,47 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateNetworkApplianceVlanPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
 
 export class CreateNetworkApplianceVlanRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=applianceIp" })
+  @SpeakeasyMetadata({ data: "json, name=applianceIp" })
   applianceIp?: string;
 
-  @Metadata({ data: "json, name=groupPolicyId" })
+  @SpeakeasyMetadata({ data: "json, name=groupPolicyId" })
   groupPolicyId?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=subnet" })
+  @SpeakeasyMetadata({ data: "json, name=subnet" })
   subnet?: string;
 }
 
 
 export class CreateNetworkApplianceVlanRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CreateNetworkApplianceVlanPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateNetworkApplianceVlanRequestBody;
 }
 
 
 export class CreateNetworkApplianceVlanResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createNetworkApplianceVlan201ApplicationJsonObject?: Map<string, any>;
 }

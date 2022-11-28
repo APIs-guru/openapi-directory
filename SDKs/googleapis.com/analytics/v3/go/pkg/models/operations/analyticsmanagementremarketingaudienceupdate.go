@@ -28,7 +28,7 @@ type AnalyticsManagementRemarketingAudienceUpdateSecurity struct {
 type AnalyticsManagementRemarketingAudienceUpdateRequest struct {
 	PathParams  AnalyticsManagementRemarketingAudienceUpdatePathParams
 	QueryParams AnalyticsManagementRemarketingAudienceUpdateQueryParams
-	Request     *shared.RemarketingAudience `request:"mediaType=application/json"`
+	Request     *shared.RemarketingAudienceInput `request:"mediaType=application/json"`
 	Security    AnalyticsManagementRemarketingAudienceUpdateSecurity
 }
 

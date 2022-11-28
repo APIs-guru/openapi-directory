@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AssetIdFromOrder } from "./assetidfromorder";
 import { OrderNotes } from "./ordernotes";
 export declare class OrderDetail extends SpeakeasyBase {

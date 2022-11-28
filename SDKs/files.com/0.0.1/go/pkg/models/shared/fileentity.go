@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// FileEntity
+// List Folders by path
 type FileEntity struct {
 	Crc32            *string        `json:"crc32,omitempty"`
 	DisplayName      *string        `json:"display_name,omitempty"`

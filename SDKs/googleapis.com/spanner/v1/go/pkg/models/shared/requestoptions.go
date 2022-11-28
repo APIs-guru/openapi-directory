@@ -9,6 +9,8 @@ const (
 	RequestOptionsPriorityEnumPriorityHigh        RequestOptionsPriorityEnum = "PRIORITY_HIGH"
 )
 
+// RequestOptions
+// Common request options for various APIs.
 type RequestOptions struct {
 	Priority       *RequestOptionsPriorityEnum `json:"priority,omitempty"`
 	RequestTag     *string                     `json:"requestTag,omitempty"`

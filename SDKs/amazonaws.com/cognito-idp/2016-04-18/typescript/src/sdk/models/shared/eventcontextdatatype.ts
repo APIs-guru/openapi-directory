@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // EventContextDataType
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies the user context data captured at the time of an event request.
 **/
 export class EventContextDataType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=City" })
+  @SpeakeasyMetadata({ data: "json, name=City" })
   city?: string;
 
-  @Metadata({ data: "json, name=Country" })
+  @SpeakeasyMetadata({ data: "json, name=Country" })
   country?: string;
 
-  @Metadata({ data: "json, name=DeviceName" })
+  @SpeakeasyMetadata({ data: "json, name=DeviceName" })
   deviceName?: string;
 
-  @Metadata({ data: "json, name=IpAddress" })
+  @SpeakeasyMetadata({ data: "json, name=IpAddress" })
   ipAddress?: string;
 
-  @Metadata({ data: "json, name=Timezone" })
+  @SpeakeasyMetadata({ data: "json, name=Timezone" })
   timezone?: string;
 }

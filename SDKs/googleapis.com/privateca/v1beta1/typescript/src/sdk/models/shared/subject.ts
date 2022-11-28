@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Subject
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Subject describes parts of a distinguished name that, in turn, describes the subject of the certificate.
 **/
 export class Subject extends SpeakeasyBase {
-  @Metadata({ data: "json, name=countryCode" })
+  @SpeakeasyMetadata({ data: "json, name=countryCode" })
   countryCode?: string;
 
-  @Metadata({ data: "json, name=locality" })
+  @SpeakeasyMetadata({ data: "json, name=locality" })
   locality?: string;
 
-  @Metadata({ data: "json, name=organization" })
+  @SpeakeasyMetadata({ data: "json, name=organization" })
   organization?: string;
 
-  @Metadata({ data: "json, name=organizationalUnit" })
+  @SpeakeasyMetadata({ data: "json, name=organizationalUnit" })
   organizationalUnit?: string;
 
-  @Metadata({ data: "json, name=postalCode" })
+  @SpeakeasyMetadata({ data: "json, name=postalCode" })
   postalCode?: string;
 
-  @Metadata({ data: "json, name=province" })
+  @SpeakeasyMetadata({ data: "json, name=province" })
   province?: string;
 
-  @Metadata({ data: "json, name=streetAddress" })
+  @SpeakeasyMetadata({ data: "json, name=streetAddress" })
   streetAddress?: string;
 }

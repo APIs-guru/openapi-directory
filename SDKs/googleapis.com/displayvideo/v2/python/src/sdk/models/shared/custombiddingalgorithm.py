@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import custombiddingmodeldetails
+from sdk import utils
+from . import *
 
 class CustomBiddingAlgorithmCustomBiddingAlgorithmTypeEnum(str, Enum):
     CUSTOM_BIDDING_ALGORITHM_TYPE_UNSPECIFIED = "CUSTOM_BIDDING_ALGORITHM_TYPE_UNSPECIFIED"
@@ -20,14 +22,33 @@ class CustomBiddingAlgorithmEntityStatusEnum(str, Enum):
 
 @dataclass_json
 @dataclass
+class CustomBiddingAlgorithmInput:
+    r"""CustomBiddingAlgorithmInput
+    A single custom bidding algorithm.
+    """
+    
+    advertiser_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('advertiserId') }})
+    custom_bidding_algorithm_type: Optional[CustomBiddingAlgorithmCustomBiddingAlgorithmTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('customBiddingAlgorithmType') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    entity_status: Optional[CustomBiddingAlgorithmEntityStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('entityStatus') }})
+    partner_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('partnerId') }})
+    shared_advertiser_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sharedAdvertiserIds') }})
+    
+
+@dataclass_json
+@dataclass
 class CustomBiddingAlgorithm:
-    advertiser_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'advertiserId' }})
-    custom_bidding_algorithm_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'customBiddingAlgorithmId' }})
-    custom_bidding_algorithm_type: Optional[CustomBiddingAlgorithmCustomBiddingAlgorithmTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'customBiddingAlgorithmType' }})
-    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayName' }})
-    entity_status: Optional[CustomBiddingAlgorithmEntityStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'entityStatus' }})
-    model_details: Optional[List[custombiddingmodeldetails.CustomBiddingModelDetails]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'modelDetails' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    partner_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'partnerId' }})
-    shared_advertiser_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sharedAdvertiserIds' }})
+    r"""CustomBiddingAlgorithm
+    A single custom bidding algorithm.
+    """
+    
+    advertiser_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('advertiserId') }})
+    custom_bidding_algorithm_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('customBiddingAlgorithmId') }})
+    custom_bidding_algorithm_type: Optional[CustomBiddingAlgorithmCustomBiddingAlgorithmTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('customBiddingAlgorithmType') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    entity_status: Optional[CustomBiddingAlgorithmEntityStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('entityStatus') }})
+    model_details: Optional[List[CustomBiddingModelDetails]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('modelDetails') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    partner_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('partnerId') }})
+    shared_advertiser_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sharedAdvertiserIds') }})
     

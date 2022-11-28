@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ProjectSummary
 /**
  * An object providing summary information for a particular project for an associated AWS account and region.
@@ -33,23 +33,23 @@ var ProjectSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=arn" }),
+        SpeakeasyMetadata({ data: "json, name=arn" }),
         __metadata("design:type", String)
     ], ProjectSummary.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=createdDate" }),
+        SpeakeasyMetadata({ data: "json, name=createdDate" }),
         __metadata("design:type", Date)
     ], ProjectSummary.prototype, "createdDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=projectName" }),
+        SpeakeasyMetadata({ data: "json, name=projectName" }),
         __metadata("design:type", String)
     ], ProjectSummary.prototype, "projectName", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags" }),
+        SpeakeasyMetadata({ data: "json, name=tags" }),
         __metadata("design:type", Map)
     ], ProjectSummary.prototype, "tags", void 0);
     __decorate([
-        Metadata({ data: "json, name=updatedDate" }),
+        SpeakeasyMetadata({ data: "json, name=updatedDate" }),
         __metadata("design:type", Date)
     ], ProjectSummary.prototype, "updatedDate", void 0);
     return ProjectSummary;

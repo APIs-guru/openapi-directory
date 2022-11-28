@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
+from sdk.models import shared
 
 
 @dataclass
 class UpdateProductPathParams:
-    product_number: str = field(default=None, metadata={'path_param': { 'field_name': 'productNumber', 'style': 'simple', 'explode': False }})
+    product_number: str = field(metadata={'path_param': { 'field_name': 'productNumber', 'style': 'simple', 'explode': False }})
     
 class UpdateProductRequestBodyVatModeEnum(str, Enum):
     GROSS = "GROSS"
@@ -25,20 +30,20 @@ class UpdateProductRequestBody:
 
 @dataclass
 class UpdateProductSecurity:
-    basic_auth: shared.SchemeBasicAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    basic_auth: shared.SchemeBasicAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
     
 
 @dataclass
 class UpdateProductRequest:
-    path_params: UpdateProductPathParams = field(default=None)
+    path_params: UpdateProductPathParams = field()
+    security: UpdateProductSecurity = field()
     request: Optional[UpdateProductRequestBody] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
-    security: UpdateProductSecurity = field(default=None)
     
 
 @dataclass
 class UpdateProductResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     netlicensing: Optional[Any] = field(default=None)
     

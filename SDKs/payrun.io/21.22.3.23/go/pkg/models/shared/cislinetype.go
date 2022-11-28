@@ -1,5 +1,7 @@
 package shared
 
+// CisLineTypeCisLineTypeNominalCode
+// The cis line types' nominal code
 type CisLineTypeCisLineTypeNominalCode struct {
 	AtHref  *string `json:"@href,omitempty"`
 	AtRel   *string `json:"@rel,omitempty"`

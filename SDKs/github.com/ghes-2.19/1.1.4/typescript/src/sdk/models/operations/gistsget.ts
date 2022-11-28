@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GistsGetPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=gist_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=gist_id" })
   gistId: string;
 }
 
 
-export class GistsGetRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GistsGetPathParams;
-}
-
-
 export class GistsGet403ApplicationJsonBlock extends SpeakeasyBase {
-  @Metadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata({ data: "json, name=created_at" })
   createdAt?: string;
 
-  @Metadata({ data: "json, name=html_url" })
+  @SpeakeasyMetadata({ data: "json, name=html_url" })
   htmlUrl?: string;
 
-  @Metadata({ data: "json, name=reason" })
+  @SpeakeasyMetadata({ data: "json, name=reason" })
   reason?: string;
 }
 
 
 export class GistsGet403ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=block" })
+  @SpeakeasyMetadata({ data: "json, name=block" })
   block?: GistsGet403ApplicationJsonBlock;
 
-  @Metadata({ data: "json, name=documentation_url" })
+  @SpeakeasyMetadata({ data: "json, name=documentation_url" })
   documentationUrl?: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class GistsGetRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GistsGetPathParams;
+}
+
+
 export class GistsGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   gistSimple?: shared.GistSimple;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   gistsGet403ApplicationJsonObject?: GistsGet403ApplicationJson;
 }

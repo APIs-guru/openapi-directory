@@ -1,11 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContainerImage } from "./containerimage";
 
+
 export enum RuntimeSoftwareConfigPostStartupScriptBehaviorEnum {
-    PostStartupScriptBehaviorUnspecified = "POST_STARTUP_SCRIPT_BEHAVIOR_UNSPECIFIED"
-,    RunEveryStart = "RUN_EVERY_START"
-,    DownloadAndRunEveryStart = "DOWNLOAD_AND_RUN_EVERY_START"
+    PostStartupScriptBehaviorUnspecified = "POST_STARTUP_SCRIPT_BEHAVIOR_UNSPECIFIED",
+    RunEveryStart = "RUN_EVERY_START",
+    DownloadAndRunEveryStart = "DOWNLOAD_AND_RUN_EVERY_START"
 }
 
 
@@ -14,36 +14,73 @@ export enum RuntimeSoftwareConfigPostStartupScriptBehaviorEnum {
  * Specifies the selection and configuration of software inside the runtime. The properties to set on runtime. Properties keys are specified in `key:value` format, for example: * `idle_shutdown: true` * `idle_shutdown_timeout: 180` * `enable_health_monitoring: true`
 **/
 export class RuntimeSoftwareConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=customGpuDriverPath" })
+  @SpeakeasyMetadata({ data: "json, name=customGpuDriverPath" })
   customGpuDriverPath?: string;
 
-  @Metadata({ data: "json, name=disableTerminal" })
+  @SpeakeasyMetadata({ data: "json, name=disableTerminal" })
   disableTerminal?: boolean;
 
-  @Metadata({ data: "json, name=enableHealthMonitoring" })
+  @SpeakeasyMetadata({ data: "json, name=enableHealthMonitoring" })
   enableHealthMonitoring?: boolean;
 
-  @Metadata({ data: "json, name=idleShutdown" })
+  @SpeakeasyMetadata({ data: "json, name=idleShutdown" })
   idleShutdown?: boolean;
 
-  @Metadata({ data: "json, name=idleShutdownTimeout" })
+  @SpeakeasyMetadata({ data: "json, name=idleShutdownTimeout" })
   idleShutdownTimeout?: number;
 
-  @Metadata({ data: "json, name=installGpuDriver" })
+  @SpeakeasyMetadata({ data: "json, name=installGpuDriver" })
   installGpuDriver?: boolean;
 
-  @Metadata({ data: "json, name=kernels", elemType: shared.ContainerImage })
+  @SpeakeasyMetadata({ data: "json, name=kernels", elemType: ContainerImage })
   kernels?: ContainerImage[];
 
-  @Metadata({ data: "json, name=notebookUpgradeSchedule" })
+  @SpeakeasyMetadata({ data: "json, name=notebookUpgradeSchedule" })
   notebookUpgradeSchedule?: string;
 
-  @Metadata({ data: "json, name=postStartupScript" })
+  @SpeakeasyMetadata({ data: "json, name=postStartupScript" })
   postStartupScript?: string;
 
-  @Metadata({ data: "json, name=postStartupScriptBehavior" })
+  @SpeakeasyMetadata({ data: "json, name=postStartupScriptBehavior" })
   postStartupScriptBehavior?: RuntimeSoftwareConfigPostStartupScriptBehaviorEnum;
 
-  @Metadata({ data: "json, name=upgradeable" })
+  @SpeakeasyMetadata({ data: "json, name=upgradeable" })
   upgradeable?: boolean;
+}
+
+
+// RuntimeSoftwareConfigInput
+/** 
+ * Specifies the selection and configuration of software inside the runtime. The properties to set on runtime. Properties keys are specified in `key:value` format, for example: * `idle_shutdown: true` * `idle_shutdown_timeout: 180` * `enable_health_monitoring: true`
+**/
+export class RuntimeSoftwareConfigInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=customGpuDriverPath" })
+  customGpuDriverPath?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=disableTerminal" })
+  disableTerminal?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=enableHealthMonitoring" })
+  enableHealthMonitoring?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=idleShutdown" })
+  idleShutdown?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=idleShutdownTimeout" })
+  idleShutdownTimeout?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=installGpuDriver" })
+  installGpuDriver?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=kernels", elemType: ContainerImage })
+  kernels?: ContainerImage[];
+
+  @SpeakeasyMetadata({ data: "json, name=notebookUpgradeSchedule" })
+  notebookUpgradeSchedule?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=postStartupScript" })
+  postStartupScript?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=postStartupScriptBehavior" })
+  postStartupScriptBehavior?: RuntimeSoftwareConfigPostStartupScriptBehaviorEnum;
 }

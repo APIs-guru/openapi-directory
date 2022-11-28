@@ -1,5 +1,7 @@
 package shared
 
+// ContainerVersion
+// Represents a Google Tag Manager Container Version.
 type ContainerVersion struct {
 	AccountID          *string           `json:"accountId,omitempty"`
 	BuiltInVariable    []BuiltInVariable `json:"builtInVariable,omitempty"`
@@ -12,6 +14,7 @@ type ContainerVersion struct {
 	Description        *string           `json:"description,omitempty"`
 	Fingerprint        *string           `json:"fingerprint,omitempty"`
 	Folder             []Folder          `json:"folder,omitempty"`
+	GtagConfig         []GtagConfig      `json:"gtagConfig,omitempty"`
 	Name               *string           `json:"name,omitempty"`
 	Path               *string           `json:"path,omitempty"`
 	Tag                []Tag             `json:"tag,omitempty"`

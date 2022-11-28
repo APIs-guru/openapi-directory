@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // FailureInfo
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An object that contains the failure details about an import job.
 **/
 export class FailureInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ErrorMessage" })
+  @SpeakeasyMetadata({ data: "json, name=ErrorMessage" })
   errorMessage?: string;
 
-  @Metadata({ data: "json, name=FailedRecordsS3Url" })
+  @SpeakeasyMetadata({ data: "json, name=FailedRecordsS3Url" })
   failedRecordsS3Url?: string;
 }

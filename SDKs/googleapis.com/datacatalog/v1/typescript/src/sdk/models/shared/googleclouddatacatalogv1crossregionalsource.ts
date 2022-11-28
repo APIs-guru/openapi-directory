@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDatacatalogV1CrossRegionalSource
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Cross-regional source used to import an existing taxonomy into a different region.
 **/
 export class GoogleCloudDatacatalogV1CrossRegionalSource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=taxonomy" })
+  @SpeakeasyMetadata({ data: "json, name=taxonomy" })
   taxonomy?: string;
 }

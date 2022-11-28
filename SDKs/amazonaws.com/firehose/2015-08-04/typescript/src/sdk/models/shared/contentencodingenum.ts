@@ -1,6 +1,7 @@
 
 
+
 export enum ContentEncodingEnum {
-    None = "NONE"
-,    Gzip = "GZIP"
+    None = "NONE",
+    Gzip = "GZIP"
 }

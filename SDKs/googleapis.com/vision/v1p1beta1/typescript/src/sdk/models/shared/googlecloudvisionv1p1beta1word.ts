@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudVisionV1p1beta1BoundingPoly } from "./googlecloudvisionv1p1beta1boundingpoly";
 import { GoogleCloudVisionV1p1beta1TextAnnotationTextProperty } from "./googlecloudvisionv1p1beta1textannotationtextproperty";
 import { GoogleCloudVisionV1p1beta1Symbol } from "./googlecloudvisionv1p1beta1symbol";
+
 
 
 // GoogleCloudVisionV1p1beta1Word
@@ -10,15 +10,15 @@ import { GoogleCloudVisionV1p1beta1Symbol } from "./googlecloudvisionv1p1beta1sy
  * A word representation.
 **/
 export class GoogleCloudVisionV1p1beta1Word extends SpeakeasyBase {
-  @Metadata({ data: "json, name=boundingBox" })
+  @SpeakeasyMetadata({ data: "json, name=boundingBox" })
   boundingBox?: GoogleCloudVisionV1p1beta1BoundingPoly;
 
-  @Metadata({ data: "json, name=confidence" })
+  @SpeakeasyMetadata({ data: "json, name=confidence" })
   confidence?: number;
 
-  @Metadata({ data: "json, name=property" })
+  @SpeakeasyMetadata({ data: "json, name=property" })
   property?: GoogleCloudVisionV1p1beta1TextAnnotationTextProperty;
 
-  @Metadata({ data: "json, name=symbols", elemType: shared.GoogleCloudVisionV1p1beta1Symbol })
+  @SpeakeasyMetadata({ data: "json, name=symbols", elemType: GoogleCloudVisionV1p1beta1Symbol })
   symbols?: GoogleCloudVisionV1p1beta1Symbol[];
 }

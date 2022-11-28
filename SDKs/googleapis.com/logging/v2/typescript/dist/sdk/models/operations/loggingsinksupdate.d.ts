@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class LoggingSinksUpdatePathParams extends SpeakeasyBase {
     sinkName: string;
@@ -33,7 +33,7 @@ export declare class LoggingSinksUpdateSecurity extends SpeakeasyBase {
 export declare class LoggingSinksUpdateRequest extends SpeakeasyBase {
     pathParams: LoggingSinksUpdatePathParams;
     queryParams: LoggingSinksUpdateQueryParams;
-    request?: shared.LogSink;
+    request?: shared.LogSinkInput;
     security: LoggingSinksUpdateSecurity;
 }
 export declare class LoggingSinksUpdateResponse extends SpeakeasyBase {

@@ -18,6 +18,8 @@ const (
 	InvitationTargetTypeEnumLocationsOnly         InvitationTargetTypeEnum = "LOCATIONS_ONLY"
 )
 
+// Invitation
+// Represents a pending invitation.
 type Invitation struct {
 	Name           *string                   `json:"name,omitempty"`
 	Role           *InvitationRoleEnum       `json:"role,omitempty"`

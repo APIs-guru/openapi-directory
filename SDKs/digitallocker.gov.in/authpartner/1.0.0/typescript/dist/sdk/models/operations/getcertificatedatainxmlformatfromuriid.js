@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetCertificateDataInXmlFormatFromUriIdPathParams = /** @class */ (function (_super) {
     __extends(GetCertificateDataInXmlFormatFromUriIdPathParams, _super);
@@ -30,7 +30,7 @@ var GetCertificateDataInXmlFormatFromUriIdPathParams = /** @class */ (function (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=uri" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=uri" }),
         __metadata("design:type", String)
     ], GetCertificateDataInXmlFormatFromUriIdPathParams.prototype, "uri", void 0);
     return GetCertificateDataInXmlFormatFromUriIdPathParams;
@@ -42,39 +42,23 @@ var GetCertificateDataInXmlFormatFromUriIdSecurity = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
         __metadata("design:type", shared.SchemeBearerAuth)
     ], GetCertificateDataInXmlFormatFromUriIdSecurity.prototype, "bearerAuth", void 0);
     return GetCertificateDataInXmlFormatFromUriIdSecurity;
 }(SpeakeasyBase));
 export { GetCertificateDataInXmlFormatFromUriIdSecurity };
-var GetCertificateDataInXmlFormatFromUriIdRequest = /** @class */ (function (_super) {
-    __extends(GetCertificateDataInXmlFormatFromUriIdRequest, _super);
-    function GetCertificateDataInXmlFormatFromUriIdRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata(),
-        __metadata("design:type", GetCertificateDataInXmlFormatFromUriIdPathParams)
-    ], GetCertificateDataInXmlFormatFromUriIdRequest.prototype, "pathParams", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", GetCertificateDataInXmlFormatFromUriIdSecurity)
-    ], GetCertificateDataInXmlFormatFromUriIdRequest.prototype, "security", void 0);
-    return GetCertificateDataInXmlFormatFromUriIdRequest;
-}(SpeakeasyBase));
-export { GetCertificateDataInXmlFormatFromUriIdRequest };
 var GetCertificateDataInXmlFormatFromUriId400ApplicationJson = /** @class */ (function (_super) {
     __extends(GetCertificateDataInXmlFormatFromUriId400ApplicationJson, _super);
     function GetCertificateDataInXmlFormatFromUriId400ApplicationJson() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], GetCertificateDataInXmlFormatFromUriId400ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=error_description" }),
+        SpeakeasyMetadata({ data: "json, name=error_description" }),
         __metadata("design:type", String)
     ], GetCertificateDataInXmlFormatFromUriId400ApplicationJson.prototype, "errorDescription", void 0);
     return GetCertificateDataInXmlFormatFromUriId400ApplicationJson;
@@ -86,11 +70,11 @@ var GetCertificateDataInXmlFormatFromUriId401ApplicationJson = /** @class */ (fu
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], GetCertificateDataInXmlFormatFromUriId401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=error_description" }),
+        SpeakeasyMetadata({ data: "json, name=error_description" }),
         __metadata("design:type", String)
     ], GetCertificateDataInXmlFormatFromUriId401ApplicationJson.prototype, "errorDescription", void 0);
     return GetCertificateDataInXmlFormatFromUriId401ApplicationJson;
@@ -102,51 +86,67 @@ var GetCertificateDataInXmlFormatFromUriId404ApplicationJson = /** @class */ (fu
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], GetCertificateDataInXmlFormatFromUriId404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=error_description" }),
+        SpeakeasyMetadata({ data: "json, name=error_description" }),
         __metadata("design:type", String)
     ], GetCertificateDataInXmlFormatFromUriId404ApplicationJson.prototype, "errorDescription", void 0);
     return GetCertificateDataInXmlFormatFromUriId404ApplicationJson;
 }(SpeakeasyBase));
 export { GetCertificateDataInXmlFormatFromUriId404ApplicationJson };
+var GetCertificateDataInXmlFormatFromUriIdRequest = /** @class */ (function (_super) {
+    __extends(GetCertificateDataInXmlFormatFromUriIdRequest, _super);
+    function GetCertificateDataInXmlFormatFromUriIdRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", GetCertificateDataInXmlFormatFromUriIdPathParams)
+    ], GetCertificateDataInXmlFormatFromUriIdRequest.prototype, "pathParams", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", GetCertificateDataInXmlFormatFromUriIdSecurity)
+    ], GetCertificateDataInXmlFormatFromUriIdRequest.prototype, "security", void 0);
+    return GetCertificateDataInXmlFormatFromUriIdRequest;
+}(SpeakeasyBase));
+export { GetCertificateDataInXmlFormatFromUriIdRequest };
 var GetCertificateDataInXmlFormatFromUriIdResponse = /** @class */ (function (_super) {
     __extends(GetCertificateDataInXmlFormatFromUriIdResponse, _super);
     function GetCertificateDataInXmlFormatFromUriIdResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetCertificateDataInXmlFormatFromUriIdResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetCertificateDataInXmlFormatFromUriIdResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetCertificateDataInXmlFormatFromUriId400ApplicationJson)
     ], GetCertificateDataInXmlFormatFromUriIdResponse.prototype, "getCertificateDataInXmlFormatFromUriId400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetCertificateDataInXmlFormatFromUriId401ApplicationJson)
     ], GetCertificateDataInXmlFormatFromUriIdResponse.prototype, "getCertificateDataInXmlFormatFromUriId401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetCertificateDataInXmlFormatFromUriId404ApplicationJson)
     ], GetCertificateDataInXmlFormatFromUriIdResponse.prototype, "getCertificateDataInXmlFormatFromUriId404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], GetCertificateDataInXmlFormatFromUriIdResponse.prototype, "getCertificateDataInXmlFormatFromUriId500ApplicationJsonOneOf", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], GetCertificateDataInXmlFormatFromUriIdResponse.prototype, "getCertificateDataInXmlFormatFromUriId503ApplicationJsonOneOf", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetCertificateDataInXmlFormatFromUriIdResponse.prototype, "statusCode", void 0);
     return GetCertificateDataInXmlFormatFromUriIdResponse;

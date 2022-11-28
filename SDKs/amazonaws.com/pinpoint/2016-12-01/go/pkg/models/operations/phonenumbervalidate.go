@@ -14,6 +14,8 @@ type PhoneNumberValidateHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// PhoneNumberValidateRequestBodyNumberValidateRequest
+// Specifies a phone number to validate and retrieve information about.
 type PhoneNumberValidateRequestBodyNumberValidateRequest struct {
 	IsoCountryCode *string `json:"IsoCountryCode,omitempty"`
 	PhoneNumber    *string `json:"PhoneNumber,omitempty"`

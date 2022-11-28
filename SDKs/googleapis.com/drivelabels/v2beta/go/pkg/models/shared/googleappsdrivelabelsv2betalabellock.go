@@ -8,6 +8,8 @@ const (
 	GoogleAppsDriveLabelsV2betaLabelLockStateEnumDeleting         GoogleAppsDriveLabelsV2betaLabelLockStateEnum = "DELETING"
 )
 
+// GoogleAppsDriveLabelsV2betaLabelLock
+// A Lock that can be applied to a Label, Field, or Choice.
 type GoogleAppsDriveLabelsV2betaLabelLock struct {
 	Capabilities *GoogleAppsDriveLabelsV2betaLabelLockCapabilities `json:"capabilities,omitempty"`
 	ChoiceID     *string                                           `json:"choiceId,omitempty"`
@@ -16,6 +18,5 @@ type GoogleAppsDriveLabelsV2betaLabelLock struct {
 	DeleteTime   *string                                           `json:"deleteTime,omitempty"`
 	FieldID      *string                                           `json:"fieldId,omitempty"`
 	Name         *string                                           `json:"name,omitempty"`
-	PolicyURI    *string                                           `json:"policyUri,omitempty"`
 	State        *GoogleAppsDriveLabelsV2betaLabelLockStateEnum    `json:"state,omitempty"`
 }

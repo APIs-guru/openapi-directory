@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CodeScanningAlertLocation
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describe a region within a file for the alert.
 **/
 export class CodeScanningAlertLocation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=end_column" })
+  @SpeakeasyMetadata({ data: "json, name=end_column" })
   endColumn?: number;
 
-  @Metadata({ data: "json, name=end_line" })
+  @SpeakeasyMetadata({ data: "json, name=end_line" })
   endLine?: number;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path?: string;
 
-  @Metadata({ data: "json, name=start_column" })
+  @SpeakeasyMetadata({ data: "json, name=start_column" })
   startColumn?: number;
 
-  @Metadata({ data: "json, name=start_line" })
+  @SpeakeasyMetadata({ data: "json, name=start_line" })
   startLine?: number;
 }

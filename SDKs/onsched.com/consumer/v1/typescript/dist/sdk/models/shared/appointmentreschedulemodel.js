@@ -22,34 +22,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var AppointmentRescheduleModel = /** @class */ (function (_super) {
     __extends(AppointmentRescheduleModel, _super);
     function AppointmentRescheduleModel() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=endDateTime" }),
+        SpeakeasyMetadata({ data: "json, name=endDateTime" }),
         __metadata("design:type", Date)
     ], AppointmentRescheduleModel.prototype, "endDateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=resourceId" }),
+        SpeakeasyMetadata({ data: "json, name=resourceId" }),
         __metadata("design:type", String)
     ], AppointmentRescheduleModel.prototype, "resourceId", void 0);
     __decorate([
-        Metadata({ data: "json, name=serviceId" }),
+        SpeakeasyMetadata({ data: "json, name=serviceId" }),
         __metadata("design:type", String)
     ], AppointmentRescheduleModel.prototype, "serviceId", void 0);
     __decorate([
-        Metadata({ data: "json, name=startDateTime" }),
+        SpeakeasyMetadata({ data: "json, name=startDateTime" }),
         __metadata("design:type", Date)
     ], AppointmentRescheduleModel.prototype, "startDateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=travelAppointmentId" }),
+        SpeakeasyMetadata({ data: "json, name=travelAppointmentId" }),
         __metadata("design:type", String)
     ], AppointmentRescheduleModel.prototype, "travelAppointmentId", void 0);
     __decorate([
-        Metadata({ data: "json, name=travelTimeMins" }),
+        SpeakeasyMetadata({ data: "json, name=travelTimeMins" }),
         __metadata("design:type", Number)
     ], AppointmentRescheduleModel.prototype, "travelTimeMins", void 0);
     return AppointmentRescheduleModel;

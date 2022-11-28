@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import connectionread
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ConnectionReadList:
-    connections: List[connectionread.ConnectionRead] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connections' }})
+    connections: List[ConnectionRead] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('connections') }})
     

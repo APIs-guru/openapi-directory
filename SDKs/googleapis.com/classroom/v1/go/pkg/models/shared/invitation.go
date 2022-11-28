@@ -9,6 +9,8 @@ const (
 	InvitationRoleEnumOwner                 InvitationRoleEnum = "OWNER"
 )
 
+// Invitation
+// An invitation to join a course.
 type Invitation struct {
 	CourseID *string             `json:"courseId,omitempty"`
 	ID       *string             `json:"id,omitempty"`

@@ -25,7 +25,7 @@ type MybusinessqandaLocationsQuestionsCreateQueryParams struct {
 type MybusinessqandaLocationsQuestionsCreateRequest struct {
 	PathParams  MybusinessqandaLocationsQuestionsCreatePathParams
 	QueryParams MybusinessqandaLocationsQuestionsCreateQueryParams
-	Request     *shared.Question `request:"mediaType=application/json"`
+	Request     *shared.QuestionInput `request:"mediaType=application/json"`
 }
 
 type MybusinessqandaLocationsQuestionsCreateResponse struct {

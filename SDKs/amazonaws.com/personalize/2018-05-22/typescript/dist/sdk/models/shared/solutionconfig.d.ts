@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AutoMlConfig } from "./automlconfig";
 import { HpoConfig } from "./hpoconfig";
 import { OptimizationObjective } from "./optimizationobjective";

@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleCloudRetailV2alphaRejoinUserEventsRequestUserEventRejoinScopeEnum {
-    UserEventRejoinScopeUnspecified = "USER_EVENT_REJOIN_SCOPE_UNSPECIFIED"
-,    JoinedEvents = "JOINED_EVENTS"
-,    UnjoinedEvents = "UNJOINED_EVENTS"
+    UserEventRejoinScopeUnspecified = "USER_EVENT_REJOIN_SCOPE_UNSPECIFIED",
+    JoinedEvents = "JOINED_EVENTS",
+    UnjoinedEvents = "UNJOINED_EVENTS"
 }
 
 
@@ -12,6 +13,6 @@ export enum GoogleCloudRetailV2alphaRejoinUserEventsRequestUserEventRejoinScopeE
  * Request message for RejoinUserEvents method.
 **/
 export class GoogleCloudRetailV2alphaRejoinUserEventsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=userEventRejoinScope" })
+  @SpeakeasyMetadata({ data: "json, name=userEventRejoinScope" })
   userEventRejoinScope?: GoogleCloudRetailV2alphaRejoinUserEventsRequestUserEventRejoinScopeEnum;
 }

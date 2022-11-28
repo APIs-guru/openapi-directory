@@ -20,7 +20,7 @@ type MybusinessbusinessinformationGoogleLocationsSearchQueryParams struct {
 
 type MybusinessbusinessinformationGoogleLocationsSearchRequest struct {
 	QueryParams MybusinessbusinessinformationGoogleLocationsSearchQueryParams
-	Request     *shared.SearchGoogleLocationsRequest `request:"mediaType=application/json"`
+	Request     *shared.SearchGoogleLocationsRequestInput `request:"mediaType=application/json"`
 }
 
 type MybusinessbusinessinformationGoogleLocationsSearchResponse struct {

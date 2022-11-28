@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class GetResourcesLanguagesIDJSONPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetResourcesLanguagesIDJSONRequest:
-    path_params: GetResourcesLanguagesIDJSONPathParams = field(default=None)
+    path_params: GetResourcesLanguagesIDJSONPathParams = field()
     
 
 @dataclass
 class GetResourcesLanguagesIDJSONResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     language_wrappeds: Optional[List[shared.LanguageWrapped]] = field(default=None)
-    status_code: int = field(default=None)
     

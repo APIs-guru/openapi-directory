@@ -1,6 +1,7 @@
 
 
+
 export enum ChronologicalOrderEnum {
-    Reverse = "Reverse"
-,    Forward = "Forward"
+    Reverse = "Reverse",
+    Forward = "Forward"
 }

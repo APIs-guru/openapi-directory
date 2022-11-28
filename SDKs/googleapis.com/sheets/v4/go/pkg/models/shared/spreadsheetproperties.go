@@ -9,6 +9,8 @@ const (
 	SpreadsheetPropertiesAutoRecalcEnumHour                             SpreadsheetPropertiesAutoRecalcEnum = "HOUR"
 )
 
+// SpreadsheetProperties
+// Properties of a spreadsheet.
 type SpreadsheetProperties struct {
 	AutoRecalc                   *SpreadsheetPropertiesAutoRecalcEnum `json:"autoRecalc,omitempty"`
 	DefaultFormat                *CellFormat                          `json:"defaultFormat,omitempty"`

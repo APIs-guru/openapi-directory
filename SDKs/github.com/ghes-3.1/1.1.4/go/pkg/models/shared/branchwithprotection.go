@@ -5,6 +5,8 @@ type BranchWithProtectionLinks struct {
 	Self string `json:"self"`
 }
 
+// BranchWithProtection
+// Branch With Protection
 type BranchWithProtection struct {
 	Links                        BranchWithProtectionLinks `json:"_links"`
 	Commit                       Commit                    `json:"commit"`

@@ -1,14 +1,21 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import membershiprole
-from . import updatemembershiprolesparams
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ModifyMembershipRolesRequest:
-    add_roles: Optional[List[membershiprole.MembershipRole]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'addRoles' }})
-    remove_roles: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'removeRoles' }})
-    update_roles_params: Optional[List[updatemembershiprolesparams.UpdateMembershipRolesParams]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updateRolesParams' }})
+    r"""ModifyMembershipRolesRequest
+    The request message for MembershipsService.ModifyMembershipRoles.
+    """
+    
+    add_roles: Optional[List[MembershipRole1]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('addRoles') }})
+    remove_roles: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('removeRoles') }})
+    update_roles_params: Optional[List[UpdateMembershipRolesParams]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('updateRolesParams') }})
     

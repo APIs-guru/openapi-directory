@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum AwsAssumeRoleAuthenticationModeEnum {
     AssumeRole = "assumeRole"
@@ -6,9 +7,9 @@ export enum AwsAssumeRoleAuthenticationModeEnum {
 
 
 export class AwsAssumeRole extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assumeRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=assumeRoleArn" })
   assumeRoleArn: string;
 
-  @Metadata({ data: "json, name=authenticationMode" })
+  @SpeakeasyMetadata({ data: "json, name=authenticationMode" })
   authenticationMode?: AwsAssumeRoleAuthenticationModeEnum;
 }

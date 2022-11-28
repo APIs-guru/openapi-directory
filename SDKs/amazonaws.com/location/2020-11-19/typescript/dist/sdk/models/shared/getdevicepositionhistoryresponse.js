@@ -22,19 +22,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { DevicePosition } from "./deviceposition";
 var GetDevicePositionHistoryResponse = /** @class */ (function (_super) {
     __extends(GetDevicePositionHistoryResponse, _super);
     function GetDevicePositionHistoryResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DevicePositions", elemType: shared.DevicePosition }),
+        SpeakeasyMetadata({ data: "json, name=DevicePositions", elemType: DevicePosition }),
         __metadata("design:type", Array)
     ], GetDevicePositionHistoryResponse.prototype, "devicePositions", void 0);
     __decorate([
-        Metadata({ data: "json, name=NextToken" }),
+        SpeakeasyMetadata({ data: "json, name=NextToken" }),
         __metadata("design:type", String)
     ], GetDevicePositionHistoryResponse.prototype, "nextToken", void 0);
     return GetDevicePositionHistoryResponse;

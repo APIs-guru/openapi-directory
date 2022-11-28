@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CreateLicenseeRequestBody = /** @class */ (function (_super) {
     __extends(CreateLicenseeRequestBody, _super);
@@ -30,23 +30,23 @@ var CreateLicenseeRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "form, name=active;" }),
+        SpeakeasyMetadata({ data: "form, name=active;" }),
         __metadata("design:type", Boolean)
     ], CreateLicenseeRequestBody.prototype, "active", void 0);
     __decorate([
-        Metadata({ data: "form, name=markedForTransfer;" }),
+        SpeakeasyMetadata({ data: "form, name=markedForTransfer;" }),
         __metadata("design:type", Boolean)
     ], CreateLicenseeRequestBody.prototype, "markedForTransfer", void 0);
     __decorate([
-        Metadata({ data: "form, name=name;" }),
+        SpeakeasyMetadata({ data: "form, name=name;" }),
         __metadata("design:type", String)
     ], CreateLicenseeRequestBody.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "form, name=number;" }),
+        SpeakeasyMetadata({ data: "form, name=number;" }),
         __metadata("design:type", String)
     ], CreateLicenseeRequestBody.prototype, "number", void 0);
     __decorate([
-        Metadata({ data: "form, name=productNumber;" }),
+        SpeakeasyMetadata({ data: "form, name=productNumber;" }),
         __metadata("design:type", String)
     ], CreateLicenseeRequestBody.prototype, "productNumber", void 0);
     return CreateLicenseeRequestBody;
@@ -58,7 +58,7 @@ var CreateLicenseeSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
         __metadata("design:type", shared.SchemeBasicAuth)
     ], CreateLicenseeSecurity.prototype, "basicAuth", void 0);
     return CreateLicenseeSecurity;
@@ -70,11 +70,11 @@ var CreateLicenseeRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
         __metadata("design:type", CreateLicenseeRequestBody)
     ], CreateLicenseeRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateLicenseeSecurity)
     ], CreateLicenseeRequest.prototype, "security", void 0);
     return CreateLicenseeRequest;
@@ -86,19 +86,19 @@ var CreateLicenseeResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], CreateLicenseeResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CreateLicenseeResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CreateLicenseeResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateLicenseeResponse.prototype, "netlicensing", void 0);
     return CreateLicenseeResponse;

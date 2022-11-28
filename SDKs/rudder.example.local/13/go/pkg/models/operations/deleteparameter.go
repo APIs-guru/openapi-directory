@@ -8,16 +8,14 @@ type DeleteParameterPathParams struct {
 	ParameterID string `pathParam:"style=simple,explode=false,name=parameterId"`
 }
 
-type DeleteParameterRequest struct {
-	PathParams DeleteParameterPathParams
-}
-
 type DeleteParameter200ApplicationJSONActionEnum string
 
 const (
 	DeleteParameter200ApplicationJSONActionEnumDeleteParameter DeleteParameter200ApplicationJSONActionEnum = "deleteParameter"
 )
 
+// DeleteParameter200ApplicationJSONData
+// Parameters
 type DeleteParameter200ApplicationJSONData struct {
 	Parameters []shared.Parameter `json:"parameters"`
 }
@@ -53,6 +51,10 @@ type DeleteParameter500ApplicationJSON struct {
 	ErrorDetails *string                                     `json:"errorDetails,omitempty"`
 	ID           string                                      `json:"id"`
 	Result       DeleteParameter500ApplicationJSONResultEnum `json:"result"`
+}
+
+type DeleteParameterRequest struct {
+	PathParams DeleteParameterPathParams
 }
 
 type DeleteParameterResponse struct {

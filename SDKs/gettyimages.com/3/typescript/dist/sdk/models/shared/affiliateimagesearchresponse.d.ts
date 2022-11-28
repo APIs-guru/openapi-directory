@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AutoCorrections } from "./autocorrections";
 import { AffiliateImage } from "./affiliateimage";
 export declare class AffiliateImageSearchResponse extends SpeakeasyBase {

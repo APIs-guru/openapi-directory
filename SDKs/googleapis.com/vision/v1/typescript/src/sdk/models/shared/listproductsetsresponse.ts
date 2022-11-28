@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProductSet } from "./productset";
+
 
 
 // ListProductSetsResponse
@@ -8,9 +8,9 @@ import { ProductSet } from "./productset";
  * Response message for the `ListProductSets` method.
 **/
 export class ListProductSetsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=productSets", elemType: shared.ProductSet })
+  @SpeakeasyMetadata({ data: "json, name=productSets", elemType: ProductSet })
   productSets?: ProductSet[];
 }

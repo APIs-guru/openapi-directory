@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RouteRef } from "./routeref";
 
 
+
 export class ListRoutesOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=routes", elemType: shared.RouteRef })
+  @SpeakeasyMetadata({ data: "json, name=routes", elemType: RouteRef })
   routes: RouteRef[];
 }

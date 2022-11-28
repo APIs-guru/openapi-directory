@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import baiduchannelresponse
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetBaiduChannelResponse:
-    baidu_channel_response: baiduchannelresponse.BaiduChannelResponse = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BaiduChannelResponse' }})
+    baidu_channel_response: BaiduChannelResponse = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('BaiduChannelResponse') }})
     

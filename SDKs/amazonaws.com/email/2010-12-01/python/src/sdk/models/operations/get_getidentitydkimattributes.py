@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetGetIdentityDkimAttributesActionEnum(str, Enum):
     GET_IDENTITY_DKIM_ATTRIBUTES = "GetIdentityDkimAttributes"
@@ -10,9 +14,9 @@ class GetGetIdentityDkimAttributesVersionEnum(str, Enum):
 
 @dataclass
 class GetGetIdentityDkimAttributesQueryParams:
-    action: GetGetIdentityDkimAttributesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    identities: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'Identities', 'style': 'form', 'explode': True }})
-    version: GetGetIdentityDkimAttributesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetGetIdentityDkimAttributesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    identities: List[str] = field(metadata={'query_param': { 'field_name': 'Identities', 'style': 'form', 'explode': True }})
+    version: GetGetIdentityDkimAttributesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetGetIdentityDkimAttributesHeaders:
 
 @dataclass
 class GetGetIdentityDkimAttributesRequest:
-    query_params: GetGetIdentityDkimAttributesQueryParams = field(default=None)
-    headers: GetGetIdentityDkimAttributesHeaders = field(default=None)
+    headers: GetGetIdentityDkimAttributesHeaders = field()
+    query_params: GetGetIdentityDkimAttributesQueryParams = field()
     
 
 @dataclass
 class GetGetIdentityDkimAttributesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,10 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class BooksCloudloadingDeleteBookQueryParams:
+    volume_id: str = field(metadata={'query_param': { 'field_name': 'volumeId', 'style': 'form', 'explode': True }})
     dollar_xgafv: Optional[shared.XgafvEnum] = field(default=None, metadata={'query_param': { 'field_name': '$.xgafv', 'style': 'form', 'explode': True }})
     access_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'access_token', 'style': 'form', 'explode': True }})
     alt: Optional[shared.AltEnum] = field(default=None, metadata={'query_param': { 'field_name': 'alt', 'style': 'form', 'explode': True }})
@@ -16,24 +18,23 @@ class BooksCloudloadingDeleteBookQueryParams:
     quota_user: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'quotaUser', 'style': 'form', 'explode': True }})
     upload_type: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'uploadType', 'style': 'form', 'explode': True }})
     upload_protocol: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'upload_protocol', 'style': 'form', 'explode': True }})
-    volume_id: str = field(default=None, metadata={'query_param': { 'field_name': 'volumeId', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class BooksCloudloadingDeleteBookSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BooksCloudloadingDeleteBookRequest:
-    query_params: BooksCloudloadingDeleteBookQueryParams = field(default=None)
-    security: BooksCloudloadingDeleteBookSecurity = field(default=None)
+    query_params: BooksCloudloadingDeleteBookQueryParams = field()
+    security: BooksCloudloadingDeleteBookSecurity = field()
     
 
 @dataclass
 class BooksCloudloadingDeleteBookResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

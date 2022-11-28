@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostModifyCacheParameterGroupActionEnum(str, Enum):
     MODIFY_CACHE_PARAMETER_GROUP = "ModifyCacheParameterGroup"
@@ -10,8 +14,8 @@ class PostModifyCacheParameterGroupVersionEnum(str, Enum):
 
 @dataclass
 class PostModifyCacheParameterGroupQueryParams:
-    action: PostModifyCacheParameterGroupActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostModifyCacheParameterGroupVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostModifyCacheParameterGroupActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostModifyCacheParameterGroupVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostModifyCacheParameterGroupHeaders:
 
 @dataclass
 class PostModifyCacheParameterGroupRequest:
-    query_params: PostModifyCacheParameterGroupQueryParams = field(default=None)
-    headers: PostModifyCacheParameterGroupHeaders = field(default=None)
+    headers: PostModifyCacheParameterGroupHeaders = field()
+    query_params: PostModifyCacheParameterGroupQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostModifyCacheParameterGroupResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

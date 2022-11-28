@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ArtifactRule
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Defines an object to declare an in-toto artifact rule
 **/
 export class ArtifactRule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=artifactRule" })
+  @SpeakeasyMetadata({ data: "json, name=artifactRule" })
   artifactRule?: string[];
 }

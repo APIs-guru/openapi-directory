@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDescribeByoipCidrsActionEnum(str, Enum):
     DESCRIBE_BYOIP_CIDRS = "DescribeByoipCidrs"
@@ -10,11 +14,11 @@ class GetDescribeByoipCidrsVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeByoipCidrsQueryParams:
-    action: GetDescribeByoipCidrsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribeByoipCidrsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    max_results: int = field(metadata={'query_param': { 'field_name': 'MaxResults', 'style': 'form', 'explode': True }})
+    version: GetDescribeByoipCidrsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    max_results: int = field(default=None, metadata={'query_param': { 'field_name': 'MaxResults', 'style': 'form', 'explode': True }})
     next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NextToken', 'style': 'form', 'explode': True }})
-    version: GetDescribeByoipCidrsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetDescribeByoipCidrsHeaders:
 
 @dataclass
 class GetDescribeByoipCidrsRequest:
-    query_params: GetDescribeByoipCidrsQueryParams = field(default=None)
-    headers: GetDescribeByoipCidrsHeaders = field(default=None)
+    headers: GetDescribeByoipCidrsHeaders = field()
+    query_params: GetDescribeByoipCidrsQueryParams = field()
     
 
 @dataclass
 class GetDescribeByoipCidrsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

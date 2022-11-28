@@ -1,15 +1,22 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import deliverymethod_enum
-from . import emailsettings
-from . import smssettings
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateBackendAuthForgotPasswordConfig:
-    delivery_method: Optional[deliverymethod_enum.DeliveryMethodEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DeliveryMethod' }})
-    email_settings: Optional[emailsettings.EmailSettings] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EmailSettings' }})
-    sms_settings: Optional[smssettings.SmsSettings] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SmsSettings' }})
+    r"""UpdateBackendAuthForgotPasswordConfig
+    Describes the forgot password policy for authenticating into the Amplify app.
+    """
+    
+    delivery_method: Optional[DeliveryMethodEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DeliveryMethod') }})
+    email_settings: Optional[EmailSettings] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('EmailSettings') }})
+    sms_settings: Optional[SmsSettings] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SmsSettings') }})
     

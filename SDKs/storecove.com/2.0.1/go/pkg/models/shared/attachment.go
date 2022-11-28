@@ -6,6 +6,8 @@ const (
 	AttachmentMimeTypeEnumApplicationPdf AttachmentMimeTypeEnum = "application/pdf"
 )
 
+// Attachment
+// A document attachment to the invoice.
 type Attachment struct {
 	Document     string                 `json:"document"`
 	Filename     *string                `json:"filename,omitempty"`

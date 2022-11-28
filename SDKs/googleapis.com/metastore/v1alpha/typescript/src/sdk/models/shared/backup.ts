@@ -1,13 +1,31 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ServiceInput } from "./service";
 import { Service } from "./service";
 
+
 export enum BackupStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Creating = "CREATING"
-,    Deleting = "DELETING"
-,    Active = "ACTIVE"
-,    Failed = "FAILED"
-,    Restoring = "RESTORING"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Creating = "CREATING",
+    Deleting = "DELETING",
+    Active = "ACTIVE",
+    Failed = "FAILED",
+    Restoring = "RESTORING"
+}
+
+
+// BackupInput
+/** 
+ * The details of a backup resource.
+**/
+export class BackupInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=serviceRevision" })
+  serviceRevision?: ServiceInput;
 }
 
 
@@ -16,24 +34,24 @@ export enum BackupStateEnum {
  * The details of a backup resource.
 **/
 export class Backup extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=endTime" })
+  @SpeakeasyMetadata({ data: "json, name=endTime" })
   endTime?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=restoringServices" })
+  @SpeakeasyMetadata({ data: "json, name=restoringServices" })
   restoringServices?: string[];
 
-  @Metadata({ data: "json, name=serviceRevision" })
+  @SpeakeasyMetadata({ data: "json, name=serviceRevision" })
   serviceRevision?: Service;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: BackupStateEnum;
 }

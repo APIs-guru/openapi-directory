@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ListServiceInventoriesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=deepObject;explode=true;name=filter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=deepObject;explode=true;name=filter" })
   filter?: Map<string, any>;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: number;
 
-  @Metadata({ data: "queryParam, style=deepObject;explode=true;name=sort_by" })
+  @SpeakeasyMetadata({ data: "queryParam, style=deepObject;explode=true;name=sort_by" })
   sortBy?: Map<string, any>;
 }
 
 
 export class ListServiceInventoriesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ListServiceInventoriesQueryParams;
 }
 
 
 export class ListServiceInventoriesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceInventoriesCollection?: shared.ServiceInventoriesCollection;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

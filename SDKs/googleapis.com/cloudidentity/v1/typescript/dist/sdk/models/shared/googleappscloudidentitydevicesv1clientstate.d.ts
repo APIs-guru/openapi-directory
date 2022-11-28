@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GoogleAppsCloudidentityDevicesV1CustomAttributeValue } from "./googleappscloudidentitydevicesv1customattributevalue";
 export declare enum GoogleAppsCloudidentityDevicesV1ClientStateComplianceStateEnum {
     ComplianceStateUnspecified = "COMPLIANCE_STATE_UNSPECIFIED",

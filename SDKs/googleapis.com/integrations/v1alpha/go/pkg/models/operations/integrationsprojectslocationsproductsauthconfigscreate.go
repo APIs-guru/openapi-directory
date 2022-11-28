@@ -33,7 +33,7 @@ type IntegrationsProjectsLocationsProductsAuthConfigsCreateSecurity struct {
 type IntegrationsProjectsLocationsProductsAuthConfigsCreateRequest struct {
 	PathParams  IntegrationsProjectsLocationsProductsAuthConfigsCreatePathParams
 	QueryParams IntegrationsProjectsLocationsProductsAuthConfigsCreateQueryParams
-	Request     *shared.GoogleCloudIntegrationsV1alphaAuthConfig `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudIntegrationsV1alphaAuthConfigInput `request:"mediaType=application/json"`
 	Security    IntegrationsProjectsLocationsProductsAuthConfigsCreateSecurity
 }
 

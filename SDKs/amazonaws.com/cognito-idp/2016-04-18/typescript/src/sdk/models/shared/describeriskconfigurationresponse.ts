@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RiskConfigurationType } from "./riskconfigurationtype";
 
 
+
 export class DescribeRiskConfigurationResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=RiskConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=RiskConfiguration" })
   riskConfiguration: RiskConfigurationType;
 }

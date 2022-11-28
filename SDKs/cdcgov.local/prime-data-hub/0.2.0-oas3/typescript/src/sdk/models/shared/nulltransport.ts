@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // NullTransport
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A transport type that does not do anything
 **/
 export class NullTransport extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dummy" })
+  @SpeakeasyMetadata({ data: "json, name=dummy" })
   dummy?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }

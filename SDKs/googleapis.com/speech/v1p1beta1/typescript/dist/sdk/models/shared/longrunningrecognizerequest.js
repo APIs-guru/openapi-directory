@@ -22,31 +22,31 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RecognitionAudio } from "./recognitionaudio";
-import { RecognitionConfig } from "./recognitionconfig";
+import { RecognitionConfigInput } from "./recognitionconfig";
 import { TranscriptOutputConfig } from "./transcriptoutputconfig";
-// LongRunningRecognizeRequest
+// LongRunningRecognizeRequestInput
 /**
  * The top-level message sent by the client for the `LongRunningRecognize` method.
 **/
-var LongRunningRecognizeRequest = /** @class */ (function (_super) {
-    __extends(LongRunningRecognizeRequest, _super);
-    function LongRunningRecognizeRequest() {
+var LongRunningRecognizeRequestInput = /** @class */ (function (_super) {
+    __extends(LongRunningRecognizeRequestInput, _super);
+    function LongRunningRecognizeRequestInput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=audio" }),
+        SpeakeasyMetadata({ data: "json, name=audio" }),
         __metadata("design:type", RecognitionAudio)
-    ], LongRunningRecognizeRequest.prototype, "audio", void 0);
+    ], LongRunningRecognizeRequestInput.prototype, "audio", void 0);
     __decorate([
-        Metadata({ data: "json, name=config" }),
-        __metadata("design:type", RecognitionConfig)
-    ], LongRunningRecognizeRequest.prototype, "config", void 0);
+        SpeakeasyMetadata({ data: "json, name=config" }),
+        __metadata("design:type", RecognitionConfigInput)
+    ], LongRunningRecognizeRequestInput.prototype, "config", void 0);
     __decorate([
-        Metadata({ data: "json, name=outputConfig" }),
+        SpeakeasyMetadata({ data: "json, name=outputConfig" }),
         __metadata("design:type", TranscriptOutputConfig)
-    ], LongRunningRecognizeRequest.prototype, "outputConfig", void 0);
-    return LongRunningRecognizeRequest;
+    ], LongRunningRecognizeRequestInput.prototype, "outputConfig", void 0);
+    return LongRunningRecognizeRequestInput;
 }(SpeakeasyBase));
-export { LongRunningRecognizeRequest };
+export { LongRunningRecognizeRequestInput };

@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetTxsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=address" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=address" })
   address?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=block" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=block" })
   block?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=pageNum" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pageNum" })
   pageNum?: number;
 }
 
 
 export class GetTxsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetTxsQueryParams;
 }
 
 
 export class GetTxsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getTxsResponse?: shared.GetTxsResponse;
 }

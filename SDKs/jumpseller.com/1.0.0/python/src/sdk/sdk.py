@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import Any,List,Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,28 +14,49 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def delete_categories_id_json(self, request: operations.DeleteCategoriesIDJSONRequest) -> operations.DeleteCategoriesIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete an existing Category.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/categories/{id}.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -50,15 +74,17 @@ class SDK:
 
     
     def delete_checkout_custom_fields_id_json(self, request: operations.DeleteCheckoutCustomFieldsIDJSONRequest) -> operations.DeleteCheckoutCustomFieldsIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete an existing CheckoutCustomField.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/checkout_custom_fields/{id}.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -76,15 +102,17 @@ class SDK:
 
     
     def delete_custom_fields_id_json(self, request: operations.DeleteCustomFieldsIDJSONRequest) -> operations.DeleteCustomFieldsIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete an existing CustomField.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/custom_fields/{id}.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -102,15 +130,17 @@ class SDK:
 
     
     def delete_custom_fields_id_select_options_custom_field_select_option_id_json(self, request: operations.DeleteCustomFieldsIDSelectOptionsCustomFieldSelectOptionIDJSONRequest) -> operations.DeleteCustomFieldsIDSelectOptionsCustomFieldSelectOptionIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete an existing CustomFieldSelectOption.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/custom_fields/{id}/select_options/{custom_field_select_option_id}.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -128,24 +158,23 @@ class SDK:
 
     
     def delete_customer_categories_id_customers_json(self, request: operations.DeleteCustomerCategoriesIDCustomersJSONRequest) -> operations.DeleteCustomerCategoriesIDCustomersJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete Customers from an existing CustomerCategory.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/customer_categories/{id}/customers.json", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -163,15 +192,17 @@ class SDK:
 
     
     def delete_customer_categories_id_json(self, request: operations.DeleteCustomerCategoriesIDJSONRequest) -> operations.DeleteCustomerCategoriesIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete an existing CustomerCategory.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/customer_categories/{id}.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -189,15 +220,17 @@ class SDK:
 
     
     def delete_customers_id_fields_field_id_(self, request: operations.DeleteCustomersIDFieldsFieldIDRequest) -> operations.DeleteCustomersIDFieldsFieldIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a Customer Additional Field.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/customers/{id}/fields/{field_id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -215,15 +248,17 @@ class SDK:
 
     
     def delete_customers_id_json(self, request: operations.DeleteCustomersIDJSONRequest) -> operations.DeleteCustomersIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete an existing Customer.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/customers/{id}.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -241,15 +276,17 @@ class SDK:
 
     
     def delete_hooks_id_json(self, request: operations.DeleteHooksIDJSONRequest) -> operations.DeleteHooksIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete an existing Hook.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/hooks/{id}.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -267,15 +304,17 @@ class SDK:
 
     
     def delete_jsapps_code_json(self, request: operations.DeleteJsappsCodeJSONRequest) -> operations.DeleteJsappsCodeJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete an existing JSApp.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/jsapps/{code}.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -293,15 +332,17 @@ class SDK:
 
     
     def delete_pages_id_json(self, request: operations.DeletePagesIDJSONRequest) -> operations.DeletePagesIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete an existing Page.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/pages/{id}.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -319,15 +360,17 @@ class SDK:
 
     
     def delete_products_id_attachments_attachment_id_json(self, request: operations.DeleteProductsIDAttachmentsAttachmentIDJSONRequest) -> operations.DeleteProductsIDAttachmentsAttachmentIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a Product Attachment.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/products/{id}/attachments/{attachment_id}.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -345,15 +388,17 @@ class SDK:
 
     
     def delete_products_id_digital_products_digital_product_id_json(self, request: operations.DeleteProductsIDDigitalProductsDigitalProductIDJSONRequest) -> operations.DeleteProductsIDDigitalProductsDigitalProductIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a Product DigitalProduct.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/products/{id}/digital_products/{digital_product_id}.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -371,15 +416,17 @@ class SDK:
 
     
     def delete_products_id_images_image_id_json(self, request: operations.DeleteProductsIDImagesImageIDJSONRequest) -> operations.DeleteProductsIDImagesImageIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a Product Image.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/products/{id}/images/{image_id}.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -397,15 +444,17 @@ class SDK:
 
     
     def delete_products_id_json(self, request: operations.DeleteProductsIDJSONRequest) -> operations.DeleteProductsIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete an existing Product.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/products/{id}.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -423,15 +472,17 @@ class SDK:
 
     
     def delete_products_id_options_option_id_json(self, request: operations.DeleteProductsIDOptionsOptionIDJSONRequest) -> operations.DeleteProductsIDOptionsOptionIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a Product Option.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/products/{id}/options/{option_id}.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -449,15 +500,17 @@ class SDK:
 
     
     def delete_products_id_options_option_id_values_value_id_json(self, request: operations.DeleteProductsIDOptionsOptionIDValuesValueIDJSONRequest) -> operations.DeleteProductsIDOptionsOptionIDValuesValueIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a Product Option Value.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/products/{id}/options/{option_id}/values/{value_id}.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -475,15 +528,17 @@ class SDK:
 
     
     def delete_products_product_id_fields_field_id_json(self, request: operations.DeleteProductsProductIDFieldsFieldIDJSONRequest) -> operations.DeleteProductsProductIDFieldsFieldIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete value of Product Custom Field
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/products/{product_id}/fields/{field_id}.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -502,15 +557,17 @@ class SDK:
 
     
     def delete_promotions_id_json(self, request: operations.DeletePromotionsIDJSONRequest) -> operations.DeletePromotionsIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete an existing Promotion.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/promotions/{id}.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -528,15 +585,17 @@ class SDK:
 
     
     def delete_shipping_methods_id_json(self, request: operations.DeleteShippingMethodsIDJSONRequest) -> operations.DeleteShippingMethodsIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete an existing Shipping Method.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/shipping_methods/{id}.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -554,15 +613,17 @@ class SDK:
 
     
     def get_categories_count_json(self, request: operations.GetCategoriesCountJSONRequest) -> operations.GetCategoriesCountJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Count all Categories.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/categories/count.json"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -577,15 +638,17 @@ class SDK:
 
     
     def get_categories_id_json(self, request: operations.GetCategoriesIDJSONRequest) -> operations.GetCategoriesIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve a single Category.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/categories/{id}.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -604,15 +667,17 @@ class SDK:
 
     
     def get_categories_json(self, request: operations.GetCategoriesJSONRequest) -> operations.GetCategoriesJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve all Categories.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/categories.json"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -627,15 +692,17 @@ class SDK:
 
     
     def get_checkout_custom_fields_id_json(self, request: operations.GetCheckoutCustomFieldsIDJSONRequest) -> operations.GetCheckoutCustomFieldsIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve a single CheckoutCustomField.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/checkout_custom_fields/{id}.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -654,15 +721,17 @@ class SDK:
 
     
     def get_checkout_custom_fields_json(self, request: operations.GetCheckoutCustomFieldsJSONRequest) -> operations.GetCheckoutCustomFieldsJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve all Checkout Custom Fields.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/checkout_custom_fields.json"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -677,15 +746,17 @@ class SDK:
 
     
     def get_countries_country_code_json(self, request: operations.GetCountriesCountryCodeJSONRequest) -> operations.GetCountriesCountryCodeJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve a single Country information.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/countries/{country_code}.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -704,15 +775,17 @@ class SDK:
 
     
     def get_countries_country_code_regions_json(self, request: operations.GetCountriesCountryCodeRegionsJSONRequest) -> operations.GetCountriesCountryCodeRegionsJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve all Regions from a single Country.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/countries/{country_code}/regions.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -731,15 +804,17 @@ class SDK:
 
     
     def get_countries_country_code_regions_region_code_json(self, request: operations.GetCountriesCountryCodeRegionsRegionCodeJSONRequest) -> operations.GetCountriesCountryCodeRegionsRegionCodeJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve a single Region information object.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/countries/{country_code}/regions/{region_code}.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -758,15 +833,17 @@ class SDK:
 
     
     def get_countries_json(self, request: operations.GetCountriesJSONRequest) -> operations.GetCountriesJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve all Countries.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/countries.json"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -781,15 +858,17 @@ class SDK:
 
     
     def get_custom_fields_id_json(self, request: operations.GetCustomFieldsIDJSONRequest) -> operations.GetCustomFieldsIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve a single CustomField.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/custom_fields/{id}.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -808,15 +887,17 @@ class SDK:
 
     
     def get_custom_fields_id_select_options_custom_field_select_option_id_json(self, request: operations.GetCustomFieldsIDSelectOptionsCustomFieldSelectOptionIDJSONRequest) -> operations.GetCustomFieldsIDSelectOptionsCustomFieldSelectOptionIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve a single SelectOption from a CustomField.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/custom_fields/{id}/select_options/{custom_field_select_option_id}.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -835,15 +916,17 @@ class SDK:
 
     
     def get_custom_fields_id_select_options_json(self, request: operations.GetCustomFieldsIDSelectOptionsJSONRequest) -> operations.GetCustomFieldsIDSelectOptionsJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve all Store's Custom Fields.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/custom_fields/{id}/select_options.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -858,15 +941,17 @@ class SDK:
 
     
     def get_custom_fields_json(self, request: operations.GetCustomFieldsJSONRequest) -> operations.GetCustomFieldsJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve all Store's Custom Fields.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/custom_fields.json"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -881,15 +966,17 @@ class SDK:
 
     
     def get_customer_categories_id_customers_json(self, request: operations.GetCustomerCategoriesIDCustomersJSONRequest) -> operations.GetCustomerCategoriesIDCustomersJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves the customers in a CustomerCategory.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/customer_categories/{id}/customers.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -908,15 +995,17 @@ class SDK:
 
     
     def get_customer_categories_id_json(self, request: operations.GetCustomerCategoriesIDJSONRequest) -> operations.GetCustomerCategoriesIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve a single CustomerCategory.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/customer_categories/{id}.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -935,15 +1024,17 @@ class SDK:
 
     
     def get_customer_categories_json(self, request: operations.GetCustomerCategoriesJSONRequest) -> operations.GetCustomerCategoriesJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve all Customer Categories.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/customer_categories.json"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -958,15 +1049,17 @@ class SDK:
 
     
     def get_customers_count_json(self, request: operations.GetCustomersCountJSONRequest) -> operations.GetCustomersCountJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Count all Customers.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/customers/count.json"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -981,15 +1074,17 @@ class SDK:
 
     
     def get_customers_email_email_json(self, request: operations.GetCustomersEmailEmailJSONRequest) -> operations.GetCustomersEmailEmailJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve a single Customer by email.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/customers/email/{email}.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1008,15 +1103,17 @@ class SDK:
 
     
     def get_customers_id_fields(self, request: operations.GetCustomersIDFieldsRequest) -> operations.GetCustomersIDFieldsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves the Customer Additional Field of a Customer.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/customers/{id}/fields", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1035,15 +1132,17 @@ class SDK:
 
     
     def get_customers_id_fields_field_id_(self, request: operations.GetCustomersIDFieldsFieldIDRequest) -> operations.GetCustomersIDFieldsFieldIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve a single Customer Additional Field.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/customers/{id}/fields/{field_id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1062,15 +1161,17 @@ class SDK:
 
     
     def get_customers_id_json(self, request: operations.GetCustomersIDJSONRequest) -> operations.GetCustomersIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve a single Customer by id.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/customers/{id}.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1089,15 +1190,17 @@ class SDK:
 
     
     def get_customers_json(self, request: operations.GetCustomersJSONRequest) -> operations.GetCustomersJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve all Customers.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/customers.json"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1112,15 +1215,17 @@ class SDK:
 
     
     def get_fulfillments_count_json(self, request: operations.GetFulfillmentsCountJSONRequest) -> operations.GetFulfillmentsCountJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Count all Fulfillments.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/fulfillments/count.json"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1135,15 +1240,17 @@ class SDK:
 
     
     def get_fulfillments_id_json(self, request: operations.GetFulfillmentsIDJSONRequest) -> operations.GetFulfillmentsIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve a single Fulfillment.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/fulfillments/{id}.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1162,15 +1269,17 @@ class SDK:
 
     
     def get_fulfillments_json(self, request: operations.GetFulfillmentsJSONRequest) -> operations.GetFulfillmentsJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve all Fulfillments.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/fulfillments.json"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1185,15 +1294,17 @@ class SDK:
 
     
     def get_hooks_id_json(self, request: operations.GetHooksIDJSONRequest) -> operations.GetHooksIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve a single Hook.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/hooks/{id}.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1212,15 +1323,17 @@ class SDK:
 
     
     def get_hooks_json(self, request: operations.GetHooksJSONRequest) -> operations.GetHooksJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve all Hooks.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/hooks.json"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1235,15 +1348,17 @@ class SDK:
 
     
     def get_jsapps_code_json(self, request: operations.GetJsappsCodeJSONRequest) -> operations.GetJsappsCodeJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve a JSApp.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/jsapps/{code}.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1258,15 +1373,17 @@ class SDK:
 
     
     def get_jsapps_json(self, request: operations.GetJsappsJSONRequest) -> operations.GetJsappsJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve all the Store's JSApps.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/jsapps.json"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1281,15 +1398,17 @@ class SDK:
 
     
     def get_order_id_fulfillments_json(self, request: operations.GetOrderIDFulfillmentsJSONRequest) -> operations.GetOrderIDFulfillmentsJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve the Fulfillments associated with the Order.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/order/{id}/fulfillments.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1308,15 +1427,18 @@ class SDK:
 
     
     def get_orders_after_id_json(self, request: operations.GetOrdersAfterIDJSONRequest) -> operations.GetOrdersAfterIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve orders filtered by Order Id.
+        For example the GET /orders/after/5000 will return Order 5001, 5002, 5003, etc.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/orders/after/{id}.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1335,15 +1457,17 @@ class SDK:
 
     
     def get_orders_count_json(self, request: operations.GetOrdersCountJSONRequest) -> operations.GetOrdersCountJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Count all Orders.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/orders/count.json"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1358,15 +1482,17 @@ class SDK:
 
     
     def get_orders_id_history_json(self, request: operations.GetOrdersIDHistoryJSONRequest) -> operations.GetOrdersIDHistoryJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve all Order History.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/orders/{id}/history.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1381,15 +1507,17 @@ class SDK:
 
     
     def get_orders_id_json(self, request: operations.GetOrdersIDJSONRequest) -> operations.GetOrdersIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve a single Order.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/orders/{id}.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1408,15 +1536,17 @@ class SDK:
 
     
     def get_orders_json(self, request: operations.GetOrdersJSONRequest) -> operations.GetOrdersJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve all Orders.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/orders.json"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1431,15 +1561,17 @@ class SDK:
 
     
     def get_orders_status_status_json(self, request: operations.GetOrdersStatusStatusJSONRequest) -> operations.GetOrdersStatusStatusJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve orders filtered by status.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/orders/status/{status}.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1458,15 +1590,17 @@ class SDK:
 
     
     def get_pages_count_json(self, request: operations.GetPagesCountJSONRequest) -> operations.GetPagesCountJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Count all Pages.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/pages/count.json"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1481,15 +1615,17 @@ class SDK:
 
     
     def get_pages_id_json(self, request: operations.GetPagesIDJSONRequest) -> operations.GetPagesIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve a single Page by id.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/pages/{id}.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1508,15 +1644,17 @@ class SDK:
 
     
     def get_pages_json(self, request: operations.GetPagesJSONRequest) -> operations.GetPagesJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve all Pages.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/pages.json"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1531,15 +1669,17 @@ class SDK:
 
     
     def get_partners_stores_json(self, request: operations.GetPartnersStoresJSONRequest) -> operations.GetPartnersStoresJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve statistics.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/partners/stores.json"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1558,15 +1698,17 @@ class SDK:
 
     
     def get_payment_methods_id_json(self, request: operations.GetPaymentMethodsIDJSONRequest) -> operations.GetPaymentMethodsIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve a single Payment Method.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/payment_methods/{id}.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1585,15 +1727,17 @@ class SDK:
 
     
     def get_payment_methods_json(self, request: operations.GetPaymentMethodsJSONRequest) -> operations.GetPaymentMethodsJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve all Store's Payment Methods.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/payment_methods.json"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1608,15 +1752,17 @@ class SDK:
 
     
     def get_products_after_id_json(self, request: operations.GetProductsAfterIDJSONRequest) -> operations.GetProductsAfterIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves Products after the given id.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/products/after/{id}.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1635,15 +1781,17 @@ class SDK:
 
     
     def get_products_category_category_id_count_json(self, request: operations.GetProductsCategoryCategoryIDCountJSONRequest) -> operations.GetProductsCategoryCategoryIDCountJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Count Products filtered by category.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/products/category/{category_id}/count.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1662,15 +1810,17 @@ class SDK:
 
     
     def get_products_category_category_id_json(self, request: operations.GetProductsCategoryCategoryIDJSONRequest) -> operations.GetProductsCategoryCategoryIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve Products filtered by category.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/products/category/{category_id}.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1689,15 +1839,17 @@ class SDK:
 
     
     def get_products_count_json(self, request: operations.GetProductsCountJSONRequest) -> operations.GetProductsCountJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Count all Products.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/products/count.json"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1712,15 +1864,17 @@ class SDK:
 
     
     def get_products_id_attachments_attachment_id_json(self, request: operations.GetProductsIDAttachmentsAttachmentIDJSONRequest) -> operations.GetProductsIDAttachmentsAttachmentIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve a single Product Attachment.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/products/{id}/attachments/{attachment_id}.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1739,15 +1893,17 @@ class SDK:
 
     
     def get_products_id_attachments_count_json(self, request: operations.GetProductsIDAttachmentsCountJSONRequest) -> operations.GetProductsIDAttachmentsCountJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Count all Product Attachments.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/products/{id}/attachments/count.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1766,15 +1922,17 @@ class SDK:
 
     
     def get_products_id_attachments_json(self, request: operations.GetProductsIDAttachmentsJSONRequest) -> operations.GetProductsIDAttachmentsJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve all Product Attachments.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/products/{id}/attachments.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1793,15 +1951,17 @@ class SDK:
 
     
     def get_products_id_digital_products_count_json(self, request: operations.GetProductsIDDigitalProductsCountJSONRequest) -> operations.GetProductsIDDigitalProductsCountJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Count all Product DigitalProducts.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/products/{id}/digital_products/count.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1820,15 +1980,17 @@ class SDK:
 
     
     def get_products_id_digital_products_digital_product_id_json(self, request: operations.GetProductsIDDigitalProductsDigitalProductIDJSONRequest) -> operations.GetProductsIDDigitalProductsDigitalProductIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve a single Product DigitalProduct.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/products/{id}/digital_products/{digital_product_id}.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1847,15 +2009,17 @@ class SDK:
 
     
     def get_products_id_digital_products_json(self, request: operations.GetProductsIDDigitalProductsJSONRequest) -> operations.GetProductsIDDigitalProductsJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve all Product DigitalProducts.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/products/{id}/digital_products.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1874,15 +2038,17 @@ class SDK:
 
     
     def get_products_id_fields_count_json(self, request: operations.GetProductsIDFieldsCountJSONRequest) -> operations.GetProductsIDFieldsCountJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Count all Product Custom Fields.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/products/{id}/fields/count.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1901,15 +2067,17 @@ class SDK:
 
     
     def get_products_id_fields_json(self, request: operations.GetProductsIDFieldsJSONRequest) -> operations.GetProductsIDFieldsJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve all Product Custom Fields
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/products/{id}/fields.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1928,15 +2096,17 @@ class SDK:
 
     
     def get_products_id_images_count_json(self, request: operations.GetProductsIDImagesCountJSONRequest) -> operations.GetProductsIDImagesCountJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Count all Product Images.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/products/{id}/images/count.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1955,15 +2125,17 @@ class SDK:
 
     
     def get_products_id_images_image_id_json(self, request: operations.GetProductsIDImagesImageIDJSONRequest) -> operations.GetProductsIDImagesImageIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve a single Product Image.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/products/{id}/images/{image_id}.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1982,15 +2154,17 @@ class SDK:
 
     
     def get_products_id_images_json(self, request: operations.GetProductsIDImagesJSONRequest) -> operations.GetProductsIDImagesJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve all Product Images.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/products/{id}/images.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2009,15 +2183,17 @@ class SDK:
 
     
     def get_products_id_json(self, request: operations.GetProductsIDJSONRequest) -> operations.GetProductsIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve a single Product.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/products/{id}.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2036,15 +2212,17 @@ class SDK:
 
     
     def get_products_id_options_count_json(self, request: operations.GetProductsIDOptionsCountJSONRequest) -> operations.GetProductsIDOptionsCountJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Count all Product Options.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/products/{id}/options/count.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2063,15 +2241,17 @@ class SDK:
 
     
     def get_products_id_options_json(self, request: operations.GetProductsIDOptionsJSONRequest) -> operations.GetProductsIDOptionsJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve all Product Options.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/products/{id}/options.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2090,15 +2270,17 @@ class SDK:
 
     
     def get_products_id_options_option_id_json(self, request: operations.GetProductsIDOptionsOptionIDJSONRequest) -> operations.GetProductsIDOptionsOptionIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve a single Product Option.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/products/{id}/options/{option_id}.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2117,15 +2299,17 @@ class SDK:
 
     
     def get_products_id_options_option_id_values_count_json(self, request: operations.GetProductsIDOptionsOptionIDValuesCountJSONRequest) -> operations.GetProductsIDOptionsOptionIDValuesCountJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Count all Product Option Values.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/products/{id}/options/{option_id}/values/count.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2144,15 +2328,17 @@ class SDK:
 
     
     def get_products_id_options_option_id_values_json(self, request: operations.GetProductsIDOptionsOptionIDValuesJSONRequest) -> operations.GetProductsIDOptionsOptionIDValuesJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve all Product Option Values.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/products/{id}/options/{option_id}/values.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2171,15 +2357,17 @@ class SDK:
 
     
     def get_products_id_options_option_id_values_value_id_json(self, request: operations.GetProductsIDOptionsOptionIDValuesValueIDJSONRequest) -> operations.GetProductsIDOptionsOptionIDValuesValueIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve a single Product Option Value.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/products/{id}/options/{option_id}/values/{value_id}.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2198,15 +2386,17 @@ class SDK:
 
     
     def get_products_id_variants_count_json(self, request: operations.GetProductsIDVariantsCountJSONRequest) -> operations.GetProductsIDVariantsCountJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Count all Product Variants.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/products/{id}/variants/count.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2225,15 +2415,17 @@ class SDK:
 
     
     def get_products_id_variants_json(self, request: operations.GetProductsIDVariantsJSONRequest) -> operations.GetProductsIDVariantsJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve all Product Variants.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/products/{id}/variants.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2252,15 +2444,17 @@ class SDK:
 
     
     def get_products_id_variants_variant_id_json(self, request: operations.GetProductsIDVariantsVariantIDJSONRequest) -> operations.GetProductsIDVariantsVariantIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve a single Product Variant.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/products/{id}/variants/{variant_id}.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2279,15 +2473,17 @@ class SDK:
 
     
     def get_products_json(self, request: operations.GetProductsJSONRequest) -> operations.GetProductsJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve all Products.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/products.json"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2302,15 +2498,22 @@ class SDK:
 
     
     def get_products_search_json(self, request: operations.GetProductsSearchJSONRequest) -> operations.GetProductsSearchJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve a Product List from a query.
+        Endpoint example: 
+        
+        ```text
+        https://api.jumpseller.com/v1/products/search.json?login=XXXXXX&authtoken=XXXXX&query=test&fields=name,description 
+        ```
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/products/search.json"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2329,15 +2532,17 @@ class SDK:
 
     
     def get_products_status_status_count_json(self, request: operations.GetProductsStatusStatusCountJSONRequest) -> operations.GetProductsStatusStatusCountJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Count Products filtered by status.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/products/status/{status}/count.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2356,15 +2561,17 @@ class SDK:
 
     
     def get_products_status_status_json(self, request: operations.GetProductsStatusStatusJSONRequest) -> operations.GetProductsStatusStatusJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve Products filtered by status.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/products/status/{status}.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2383,15 +2590,17 @@ class SDK:
 
     
     def get_promotions_id_json(self, request: operations.GetPromotionsIDJSONRequest) -> operations.GetPromotionsIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve a single Promotion.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/promotions/{id}.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2410,15 +2619,17 @@ class SDK:
 
     
     def get_promotions_json(self, request: operations.GetPromotionsJSONRequest) -> operations.GetPromotionsJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve all Promotions.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/promotions.json"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2433,15 +2644,17 @@ class SDK:
 
     
     def get_shipping_methods_id_json(self, request: operations.GetShippingMethodsIDJSONRequest) -> operations.GetShippingMethodsIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve a single Shipping Method.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/shipping_methods/{id}.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2460,15 +2673,17 @@ class SDK:
 
     
     def get_shipping_methods_json(self, request: operations.GetShippingMethodsJSONRequest) -> operations.GetShippingMethodsJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve all Store's Shipping Methods.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/shipping_methods.json"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2483,15 +2698,17 @@ class SDK:
 
     
     def get_store_check_status_json(self, request: operations.GetStoreCheckStatusJSONRequest) -> operations.GetStoreCheckStatusJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrive store creation status.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/store/check_status.json"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2510,15 +2727,17 @@ class SDK:
 
     
     def get_store_info_json(self, request: operations.GetStoreInfoJSONRequest) -> operations.GetStoreInfoJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve Store Information.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/store/info.json"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2533,15 +2752,17 @@ class SDK:
 
     
     def get_store_languages_json(self, request: operations.GetStoreLanguagesJSONRequest) -> operations.GetStoreLanguagesJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve Store Languages.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/store/languages.json"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2556,15 +2777,17 @@ class SDK:
 
     
     def get_taxes_id_json(self, request: operations.GetTaxesIDJSONRequest) -> operations.GetTaxesIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve a single Tax information.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/taxes/{id}.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2583,15 +2806,17 @@ class SDK:
 
     
     def get_taxes_json(self, request: operations.GetTaxesJSONRequest) -> operations.GetTaxesJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve all Taxes.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/taxes.json"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2606,24 +2831,24 @@ class SDK:
 
     
     def post_categories_json(self, request: operations.PostCategoriesJSONRequest) -> operations.PostCategoriesJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new Category.
+        Category's permalink is automatically generated from the given category's name.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/categories.json"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2638,24 +2863,24 @@ class SDK:
 
     
     def post_checkout_custom_fields_json(self, request: operations.PostCheckoutCustomFieldsJSONRequest) -> operations.PostCheckoutCustomFieldsJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new CheckoutCustomField.
+        Type values can be: input, selection, checkbox, date or text. Area values can be: contact, billing_shipping or other.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/checkout_custom_fields.json"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2674,24 +2899,23 @@ class SDK:
 
     
     def post_custom_fields_id_select_options_json(self, request: operations.PostCustomFieldsIDSelectOptionsJSONRequest) -> operations.PostCustomFieldsIDSelectOptionsJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new Custom Field Select Option.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/custom_fields/{id}/select_options.json", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2706,24 +2930,23 @@ class SDK:
 
     
     def post_custom_fields_json(self, request: operations.PostCustomFieldsJSONRequest) -> operations.PostCustomFieldsJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new Custom Field.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/custom_fields.json"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2738,24 +2961,23 @@ class SDK:
 
     
     def post_customer_categories_id_customers_json(self, request: operations.PostCustomerCategoriesIDCustomersJSONRequest) -> operations.PostCustomerCategoriesIDCustomersJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Adds Customers to a CustomerCategory.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/customer_categories/{id}/customers.json", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2774,24 +2996,23 @@ class SDK:
 
     
     def post_customer_categories_json(self, request: operations.PostCustomerCategoriesJSONRequest) -> operations.PostCustomerCategoriesJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new CustomerCategory.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/customer_categories.json"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2810,24 +3031,23 @@ class SDK:
 
     
     def post_customers_id_fields(self, request: operations.PostCustomersIDFieldsRequest) -> operations.PostCustomersIDFieldsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Adds Customer Additional Fields to a Customer.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/customers/{id}/fields", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2846,24 +3066,23 @@ class SDK:
 
     
     def post_customers_json(self, request: operations.PostCustomersJSONRequest) -> operations.PostCustomersJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new Customer.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/customers.json"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2882,24 +3101,23 @@ class SDK:
 
     
     def post_hooks_json(self, request: operations.PostHooksJSONRequest) -> operations.PostHooksJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new Hook.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/hooks.json"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2918,24 +3136,23 @@ class SDK:
 
     
     def post_jsapps_json(self, request: operations.PostJsappsJSONRequest) -> operations.PostJsappsJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a Store JSApp.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/jsapps.json"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2950,24 +3167,23 @@ class SDK:
 
     
     def post_orders_id_history_json(self, request: operations.PostOrdersIDHistoryJSONRequest) -> operations.PostOrdersIDHistoryJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new Order History Entry.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/orders/{id}/history.json", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2982,24 +3198,24 @@ class SDK:
 
     
     def post_orders_json(self, request: operations.PostOrdersJSONRequest) -> operations.PostOrdersJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new Order.
+        Orders created externally keep the given order product's values (bypassing internal promotion or product amounts).
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/orders.json"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3014,24 +3230,23 @@ class SDK:
 
     
     def post_pages_json(self, request: operations.PostPagesJSONRequest) -> operations.PostPagesJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new Page.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/pages.json"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3046,24 +3261,23 @@ class SDK:
 
     
     def post_products_id_attachments_json(self, request: operations.PostProductsIDAttachmentsJSONRequest) -> operations.PostProductsIDAttachmentsJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new Product Attachment.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/products/{id}/attachments.json", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3078,24 +3292,23 @@ class SDK:
 
     
     def post_products_id_digital_products_json(self, request: operations.PostProductsIDDigitalProductsJSONRequest) -> operations.PostProductsIDDigitalProductsJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new Product DigitalProduct.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/products/{id}/digital_products.json", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3110,24 +3323,23 @@ class SDK:
 
     
     def post_products_id_fields_json(self, request: operations.PostProductsIDFieldsJSONRequest) -> operations.PostProductsIDFieldsJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add an existing Custom Field to a Product.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/products/{id}/fields.json", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3146,24 +3358,23 @@ class SDK:
 
     
     def post_products_id_images_json(self, request: operations.PostProductsIDImagesJSONRequest) -> operations.PostProductsIDImagesJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new Product Image.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/products/{id}/images.json", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3178,24 +3389,23 @@ class SDK:
 
     
     def post_products_id_options_json(self, request: operations.PostProductsIDOptionsJSONRequest) -> operations.PostProductsIDOptionsJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new Product Option.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/products/{id}/options.json", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3210,24 +3420,23 @@ class SDK:
 
     
     def post_products_id_options_option_id_values_json(self, request: operations.PostProductsIDOptionsOptionIDValuesJSONRequest) -> operations.PostProductsIDOptionsOptionIDValuesJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new Product Option Value.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/products/{id}/options/{option_id}/values.json", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3242,24 +3451,23 @@ class SDK:
 
     
     def post_products_id_variants_json(self, request: operations.PostProductsIDVariantsJSONRequest) -> operations.PostProductsIDVariantsJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new Product Variant.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/products/{id}/variants.json", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3278,24 +3486,23 @@ class SDK:
 
     
     def post_products_json(self, request: operations.PostProductsJSONRequest) -> operations.PostProductsJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new Product.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/products.json"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3310,24 +3517,23 @@ class SDK:
 
     
     def post_promotions_json(self, request: operations.PostPromotionsJSONRequest) -> operations.PostPromotionsJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new Promotion.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/promotions.json"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3346,24 +3552,23 @@ class SDK:
 
     
     def post_shipping_methods_json(self, request: operations.PostShippingMethodsJSONRequest) -> operations.PostShippingMethodsJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a Shipping Method.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/shipping_methods.json"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3382,24 +3587,23 @@ class SDK:
 
     
     def post_store_create_json(self, request: operations.PostStoreCreateJSONRequest) -> operations.PostStoreCreateJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a Partnered Store
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/store/create.json"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3418,24 +3622,23 @@ class SDK:
 
     
     def post_taxes_json(self, request: operations.PostTaxesJSONRequest) -> operations.PostTaxesJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new Tax.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/taxes.json"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3454,24 +3657,23 @@ class SDK:
 
     
     def put_categories_id_json(self, request: operations.PutCategoriesIDJSONRequest) -> operations.PutCategoriesIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Modify an existing Category.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/categories/{id}.json", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3490,24 +3692,23 @@ class SDK:
 
     
     def put_checkout_custom_fields_id_json(self, request: operations.PutCheckoutCustomFieldsIDJSONRequest) -> operations.PutCheckoutCustomFieldsIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a CheckoutCustomField.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/checkout_custom_fields/{id}.json", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3526,24 +3727,23 @@ class SDK:
 
     
     def put_custom_fields_id_json(self, request: operations.PutCustomFieldsIDJSONRequest) -> operations.PutCustomFieldsIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a CustomField.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/custom_fields/{id}.json", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3562,24 +3762,23 @@ class SDK:
 
     
     def put_custom_fields_id_select_options_custom_field_select_option_id_json(self, request: operations.PutCustomFieldsIDSelectOptionsCustomFieldSelectOptionIDJSONRequest) -> operations.PutCustomFieldsIDSelectOptionsCustomFieldSelectOptionIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a SelectOption from a CustomField.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/custom_fields/{id}/select_options/{custom_field_select_option_id}.json", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3598,24 +3797,23 @@ class SDK:
 
     
     def put_customer_categories_id_json(self, request: operations.PutCustomerCategoriesIDJSONRequest) -> operations.PutCustomerCategoriesIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a CustomerCategory.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/customer_categories/{id}.json", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3634,24 +3832,23 @@ class SDK:
 
     
     def put_customers_id_fields_field_id_(self, request: operations.PutCustomersIDFieldsFieldIDRequest) -> operations.PutCustomersIDFieldsFieldIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a Customer Additional Field.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/customers/{id}/fields/{field_id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3674,24 +3871,23 @@ class SDK:
 
     
     def put_customers_id_json(self, request: operations.PutCustomersIDJSONRequest) -> operations.PutCustomersIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a new Customer.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/customers/{id}.json", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3710,24 +3906,23 @@ class SDK:
 
     
     def put_hooks_id_json(self, request: operations.PutHooksIDJSONRequest) -> operations.PutHooksIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a Hook.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/hooks/{id}.json", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3746,24 +3941,24 @@ class SDK:
 
     
     def put_orders_id_json(self, request: operations.PutOrdersIDJSONRequest) -> operations.PutOrdersIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Modify an existing Order.
+        Only `status`, `shipment_status`, `tracking_number`, `tracking_company`, `tracking_url`, `additional_information` and `additional_fields` are available for update. An email is send if `shipment_status` changes.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/orders/{id}.json", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3782,24 +3977,23 @@ class SDK:
 
     
     def put_pages_id_json(self, request: operations.PutPagesIDJSONRequest) -> operations.PutPagesIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a Page.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/pages/{id}.json", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3818,24 +4012,23 @@ class SDK:
 
     
     def put_products_id_json(self, request: operations.PutProductsIDJSONRequest) -> operations.PutProductsIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Modify an existing Product.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/products/{id}.json", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3854,24 +4047,23 @@ class SDK:
 
     
     def put_products_id_options_option_id_json(self, request: operations.PutProductsIDOptionsOptionIDJSONRequest) -> operations.PutProductsIDOptionsOptionIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Modify an existing Product Option.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/products/{id}/options/{option_id}.json", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3890,24 +4082,23 @@ class SDK:
 
     
     def put_products_id_options_option_id_values_value_id_json(self, request: operations.PutProductsIDOptionsOptionIDValuesValueIDJSONRequest) -> operations.PutProductsIDOptionsOptionIDValuesValueIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Modify an existing Product Option Value.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/products/{id}/options/{option_id}/values/{value_id}.json", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3926,24 +4117,23 @@ class SDK:
 
     
     def put_products_id_variants_variant_id_json(self, request: operations.PutProductsIDVariantsVariantIDJSONRequest) -> operations.PutProductsIDVariantsVariantIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Modify an existing Product Variant.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/products/{id}/variants/{variant_id}.json", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3962,15 +4152,17 @@ class SDK:
 
     
     def put_products_product_id_fields_field_id_json(self, request: operations.PutProductsProductIDFieldsFieldIDJSONRequest) -> operations.PutProductsProductIDFieldsFieldIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update value of Product Custom Field
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/products/{product_id}/fields/{field_id}.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3989,24 +4181,23 @@ class SDK:
 
     
     def put_promotions_id_json(self, request: operations.PutPromotionsIDJSONRequest) -> operations.PutPromotionsIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a Promotion.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/promotions/{id}.json", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4025,24 +4216,23 @@ class SDK:
 
     
     def put_shipping_methods_id_json(self, request: operations.PutShippingMethodsIDJSONRequest) -> operations.PutShippingMethodsIDJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a Shipping Method.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/shipping_methods/{id}.json", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

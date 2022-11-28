@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ContentProductstatusesListPathParams:
-    merchant_id: str = field(default=None, metadata={'path_param': { 'field_name': 'merchantId', 'style': 'simple', 'explode': False }})
+    merchant_id: str = field(metadata={'path_param': { 'field_name': 'merchantId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -30,20 +31,20 @@ class ContentProductstatusesListQueryParams:
 
 @dataclass
 class ContentProductstatusesListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ContentProductstatusesListRequest:
-    path_params: ContentProductstatusesListPathParams = field(default=None)
-    query_params: ContentProductstatusesListQueryParams = field(default=None)
-    security: ContentProductstatusesListSecurity = field(default=None)
+    path_params: ContentProductstatusesListPathParams = field()
+    query_params: ContentProductstatusesListQueryParams = field()
+    security: ContentProductstatusesListSecurity = field()
     
 
 @dataclass
 class ContentProductstatusesListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     productstatuses_list_response: Optional[shared.ProductstatusesListResponse] = field(default=None)
-    status_code: int = field(default=None)
     

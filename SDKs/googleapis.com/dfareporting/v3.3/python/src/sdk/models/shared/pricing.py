@@ -1,10 +1,12 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import flight
+from sdk import utils
+from . import *
 
 class PricingCapCostTypeEnum(str, Enum):
     PLANNING_PLACEMENT_CAP_COST_TYPE_NONE = "PLANNING_PLACEMENT_CAP_COST_TYPE_NONE"
@@ -29,10 +31,14 @@ class PricingPricingTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Pricing:
-    cap_cost_type: Optional[PricingCapCostTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'capCostType' }})
-    end_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'endDate', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    flights: Optional[List[flight.Flight]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'flights' }})
-    group_type: Optional[PricingGroupTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'groupType' }})
-    pricing_type: Optional[PricingPricingTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pricingType' }})
-    start_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'startDate', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    r"""Pricing
+    Pricing Information
+    """
+    
+    cap_cost_type: Optional[PricingCapCostTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('capCostType') }})
+    end_date: Optional[date] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('endDate'), 'encoder': utils.dateisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    flights: Optional[List[Flight]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('flights') }})
+    group_type: Optional[PricingGroupTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('groupType') }})
+    pricing_type: Optional[PricingPricingTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pricingType') }})
+    start_date: Optional[date] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('startDate'), 'encoder': utils.dateisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     

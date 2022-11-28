@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetListTagsForResourceActionEnum(str, Enum):
     LIST_TAGS_FOR_RESOURCE = "ListTagsForResource"
@@ -10,9 +14,9 @@ class GetListTagsForResourceVersionEnum(str, Enum):
 
 @dataclass
 class GetListTagsForResourceQueryParams:
-    action: GetListTagsForResourceActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    resource_arn: str = field(default=None, metadata={'query_param': { 'field_name': 'ResourceARN', 'style': 'form', 'explode': True }})
-    version: GetListTagsForResourceVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetListTagsForResourceActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    resource_arn: str = field(metadata={'query_param': { 'field_name': 'ResourceARN', 'style': 'form', 'explode': True }})
+    version: GetListTagsForResourceVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetListTagsForResourceHeaders:
 
 @dataclass
 class GetListTagsForResourceRequest:
-    query_params: GetListTagsForResourceQueryParams = field(default=None)
-    headers: GetListTagsForResourceHeaders = field(default=None)
+    headers: GetListTagsForResourceHeaders = field()
+    query_params: GetListTagsForResourceQueryParams = field()
     
 
 @dataclass
 class GetListTagsForResourceResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

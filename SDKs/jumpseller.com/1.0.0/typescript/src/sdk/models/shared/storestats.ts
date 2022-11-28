@@ -1,8 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BestSold } from "./bestsold";
 import { DailyVisits } from "./dailyvisits";
-import { NewVsReturning } from "./newvsreturning";
 import { NewVsReturning } from "./newvsreturning";
 import { OrdersData } from "./ordersdata";
 import { PaymentMethodFreq } from "./paymentmethodfreq";
@@ -12,109 +10,110 @@ import { ShippingMethodFreq } from "./shippingmethodfreq";
 import { TrafficType } from "./traffictype";
 
 
+
 export class StoreStatsConversions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=added_to_cart" })
+  @SpeakeasyMetadata({ data: "json, name=added_to_cart" })
   addedToCart?: number;
 
-  @Metadata({ data: "json, name=checkout" })
+  @SpeakeasyMetadata({ data: "json, name=checkout" })
   checkout?: number;
 
-  @Metadata({ data: "json, name=paid" })
+  @SpeakeasyMetadata({ data: "json, name=paid" })
   paid?: number;
 }
 
 
 export class StoreStatsNewVsReturningCustomers extends SpeakeasyBase {
-  @Metadata({ data: "json, name=global" })
+  @SpeakeasyMetadata({ data: "json, name=global" })
   global?: number;
 
-  @Metadata({ data: "json, name=per_day", elemType: shared.NewVsReturning })
+  @SpeakeasyMetadata({ data: "json, name=per_day", elemType: NewVsReturning })
   perDay?: NewVsReturning[];
 }
 
 
 export class StoreStatsNewVsReturningOrders extends SpeakeasyBase {
-  @Metadata({ data: "json, name=global" })
+  @SpeakeasyMetadata({ data: "json, name=global" })
   global?: number;
 
-  @Metadata({ data: "json, name=per_day", elemType: shared.NewVsReturning })
+  @SpeakeasyMetadata({ data: "json, name=per_day", elemType: NewVsReturning })
   perDay?: NewVsReturning[];
 }
 
 
 export class StoreStatsOrders extends SpeakeasyBase {
-  @Metadata({ data: "json, name=average" })
+  @SpeakeasyMetadata({ data: "json, name=average" })
   average?: number;
 
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count?: number;
 
-  @Metadata({ data: "json, name=data", elemType: shared.OrdersData })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: OrdersData })
   data?: OrdersData[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total?: number;
 }
 
 
 export class StoreStatsRegionOrders extends SpeakeasyBase {
-  @Metadata({ data: "json, name=display_mode" })
+  @SpeakeasyMetadata({ data: "json, name=display_mode" })
   displayMode?: string;
 
-  @Metadata({ data: "json, name=regions_orders", elemType: shared.CountryOrders })
+  @SpeakeasyMetadata({ data: "json, name=regions_orders", elemType: CountryOrders })
   regionsOrders?: CountryOrders[];
 }
 
 
 export class StoreStats extends SpeakeasyBase {
-  @Metadata({ data: "json, name=best_sold", elemType: shared.BestSold })
+  @SpeakeasyMetadata({ data: "json, name=best_sold", elemType: BestSold })
   bestSold?: BestSold[];
 
-  @Metadata({ data: "json, name=conversions" })
+  @SpeakeasyMetadata({ data: "json, name=conversions" })
   conversions?: StoreStatsConversions;
 
-  @Metadata({ data: "json, name=currency" })
+  @SpeakeasyMetadata({ data: "json, name=currency" })
   currency?: string;
 
-  @Metadata({ data: "json, name=daily_visits", elemType: shared.DailyVisits })
+  @SpeakeasyMetadata({ data: "json, name=daily_visits", elemType: DailyVisits })
   dailyVisits?: DailyVisits[];
 
-  @Metadata({ data: "json, name=from" })
+  @SpeakeasyMetadata({ data: "json, name=from" })
   from?: string;
 
-  @Metadata({ data: "json, name=new_vs_returning_customers" })
+  @SpeakeasyMetadata({ data: "json, name=new_vs_returning_customers" })
   newVsReturningCustomers?: StoreStatsNewVsReturningCustomers;
 
-  @Metadata({ data: "json, name=new_vs_returning_orders" })
+  @SpeakeasyMetadata({ data: "json, name=new_vs_returning_orders" })
   newVsReturningOrders?: StoreStatsNewVsReturningOrders;
 
-  @Metadata({ data: "json, name=orders" })
+  @SpeakeasyMetadata({ data: "json, name=orders" })
   orders?: StoreStatsOrders;
 
-  @Metadata({ data: "json, name=payment_methods", elemType: shared.PaymentMethodFreq })
+  @SpeakeasyMetadata({ data: "json, name=payment_methods", elemType: PaymentMethodFreq })
   paymentMethods?: PaymentMethodFreq[];
 
-  @Metadata({ data: "json, name=referrers", elemType: shared.Referrer })
+  @SpeakeasyMetadata({ data: "json, name=referrers", elemType: Referrer })
   referrers?: Referrer[];
 
-  @Metadata({ data: "json, name=region_orders" })
+  @SpeakeasyMetadata({ data: "json, name=region_orders" })
   regionOrders?: StoreStatsRegionOrders;
 
-  @Metadata({ data: "json, name=search_frequencies_all" })
+  @SpeakeasyMetadata({ data: "json, name=search_frequencies_all" })
   searchFrequenciesAll?: any[];
 
-  @Metadata({ data: "json, name=search_frequencies_without_results" })
+  @SpeakeasyMetadata({ data: "json, name=search_frequencies_without_results" })
   searchFrequenciesWithoutResults?: any[];
 
-  @Metadata({ data: "json, name=shipping_methods", elemType: shared.ShippingMethodFreq })
+  @SpeakeasyMetadata({ data: "json, name=shipping_methods", elemType: ShippingMethodFreq })
   shippingMethods?: ShippingMethodFreq[];
 
-  @Metadata({ data: "json, name=to" })
+  @SpeakeasyMetadata({ data: "json, name=to" })
   to?: string;
 
-  @Metadata({ data: "json, name=traffic_type", elemType: shared.TrafficType })
+  @SpeakeasyMetadata({ data: "json, name=traffic_type", elemType: TrafficType })
   trafficType?: TrafficType[];
 
-  @Metadata({ data: "json, name=visits" })
+  @SpeakeasyMetadata({ data: "json, name=visits" })
   visits?: number;
 }

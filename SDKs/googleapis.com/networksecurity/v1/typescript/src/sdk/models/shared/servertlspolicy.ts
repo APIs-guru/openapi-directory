@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MtlsPolicy } from "./mtlspolicy";
 import { GoogleCloudNetworksecurityV1CertificateProvider } from "./googlecloudnetworksecurityv1certificateprovider";
+
 
 
 // ServerTlsPolicy
@@ -8,27 +9,52 @@ import { GoogleCloudNetworksecurityV1CertificateProvider } from "./googlecloudne
  * ServerTlsPolicy is a resource that specifies how a server should authenticate incoming requests. This resource itself does not affect configuration unless it is attached to a target HTTPS proxy or endpoint config selector resource.
 **/
 export class ServerTlsPolicy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowOpen" })
+  @SpeakeasyMetadata({ data: "json, name=allowOpen" })
   allowOpen?: boolean;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=mtlsPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=mtlsPolicy" })
   mtlsPolicy?: MtlsPolicy;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=serverCertificate" })
+  @SpeakeasyMetadata({ data: "json, name=serverCertificate" })
   serverCertificate?: GoogleCloudNetworksecurityV1CertificateProvider;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
+}
+
+
+// ServerTlsPolicyInput
+/** 
+ * ServerTlsPolicy is a resource that specifies how a server should authenticate incoming requests. This resource itself does not affect configuration unless it is attached to a target HTTPS proxy or endpoint config selector resource.
+**/
+export class ServerTlsPolicyInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=allowOpen" })
+  allowOpen?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=mtlsPolicy" })
+  mtlsPolicy?: MtlsPolicy;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=serverCertificate" })
+  serverCertificate?: GoogleCloudNetworksecurityV1CertificateProvider;
 }

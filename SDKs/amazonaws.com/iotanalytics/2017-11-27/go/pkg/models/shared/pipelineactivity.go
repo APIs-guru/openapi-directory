@@ -1,5 +1,7 @@
 package shared
 
+// PipelineActivity
+// An activity that performs a transformation on a message.
 type PipelineActivity struct {
 	AddAttributes        *AddAttributesActivity        `json:"addAttributes,omitempty"`
 	Channel              *ChannelActivity              `json:"channel,omitempty"`

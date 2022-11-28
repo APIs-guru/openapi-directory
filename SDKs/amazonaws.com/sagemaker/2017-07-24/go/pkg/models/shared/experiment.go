@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Experiment
+// The properties of an experiment as returned by the <a>Search</a> API.
 type Experiment struct {
 	CreatedBy        *UserContext      `json:"CreatedBy,omitempty"`
 	CreationTime     *time.Time        `json:"CreationTime,omitempty"`

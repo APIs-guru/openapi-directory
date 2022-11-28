@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum PostUnassignIpv6AddressesActionEnum {
     UnassignIpv6Addresses = "UnassignIpv6Addresses"
 }

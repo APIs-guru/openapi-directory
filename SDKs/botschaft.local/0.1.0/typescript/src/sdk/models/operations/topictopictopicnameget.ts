@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class TopicTopicTopicNameGetPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=topic_name" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=topic_name" })
   topicName: string;
 }
 
 
 export class TopicTopicTopicNameGetQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=base64_message" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=base64_message" })
   base64Message?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=message" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=message" })
   message?: string;
 }
 
 
 export class TopicTopicTopicNameGetHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=authorization" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=authorization" })
   authorization?: string;
 }
 
 
 export class TopicTopicTopicNameGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: TopicTopicTopicNameGetPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: TopicTopicTopicNameGetQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: TopicTopicTopicNameGetHeaders;
 }
 
 
 export class TopicTopicTopicNameGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   httpValidationError?: shared.HttpValidationError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   topicTopicTopicNameGet200ApplicationJsonAny?: any;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BatchDescribeMergeConflictsError
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Returns information about errors in a BatchDescribeMergeConflicts operation.
 **/
 export class BatchDescribeMergeConflictsError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=exceptionName" })
+  @SpeakeasyMetadata({ data: "json, name=exceptionName" })
   exceptionName: string;
 
-  @Metadata({ data: "json, name=filePath" })
+  @SpeakeasyMetadata({ data: "json, name=filePath" })
   filePath: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 }

@@ -10,6 +10,8 @@ const (
 	VideoPlayerSizeAssignedTargetingOptionDetailsVideoPlayerSizeEnumVideoPlayerSizeUnknown     VideoPlayerSizeAssignedTargetingOptionDetailsVideoPlayerSizeEnum = "VIDEO_PLAYER_SIZE_UNKNOWN"
 )
 
+// VideoPlayerSizeAssignedTargetingOptionDetails
+// Video player size targeting option details. This will be populated in the video_player_size_details field when targeting_type is `TARGETING_TYPE_VIDEO_PLAYER_SIZE`. Explicitly targeting all options is not supported. Remove all video player size targeting options to achieve this effect.
 type VideoPlayerSizeAssignedTargetingOptionDetails struct {
 	TargetingOptionID *string                                                           `json:"targetingOptionId,omitempty"`
 	VideoPlayerSize   *VideoPlayerSizeAssignedTargetingOptionDetailsVideoPlayerSizeEnum `json:"videoPlayerSize,omitempty"`

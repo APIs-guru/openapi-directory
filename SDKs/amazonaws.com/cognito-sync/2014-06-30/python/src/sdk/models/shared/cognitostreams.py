@@ -1,13 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import streamingstatus_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CognitoStreams:
-    role_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RoleArn' }})
-    stream_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StreamName' }})
-    streaming_status: Optional[streamingstatus_enum.StreamingStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StreamingStatus' }})
+    r"""CognitoStreams
+    Configuration options for configure Cognito streams.
+    """
+    
+    role_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('RoleArn') }})
+    stream_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StreamName') }})
+    streaming_status: Optional[StreamingStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StreamingStatus') }})
     

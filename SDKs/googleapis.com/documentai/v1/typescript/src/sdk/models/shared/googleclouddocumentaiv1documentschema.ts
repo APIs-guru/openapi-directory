@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDocumentaiV1DocumentSchemaEntityType } from "./googleclouddocumentaiv1documentschemaentitytype";
 import { GoogleCloudDocumentaiV1DocumentSchemaMetadata } from "./googleclouddocumentaiv1documentschemametadata";
+
 
 
 // GoogleCloudDocumentaiV1DocumentSchema
@@ -9,15 +9,15 @@ import { GoogleCloudDocumentaiV1DocumentSchemaMetadata } from "./googleclouddocu
  * The schema defines the output of the processed document by a processor.
 **/
 export class GoogleCloudDocumentaiV1DocumentSchema extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=entityTypes", elemType: shared.GoogleCloudDocumentaiV1DocumentSchemaEntityType })
+  @SpeakeasyMetadata({ data: "json, name=entityTypes", elemType: GoogleCloudDocumentaiV1DocumentSchemaEntityType })
   entityTypes?: GoogleCloudDocumentaiV1DocumentSchemaEntityType[];
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: GoogleCloudDocumentaiV1DocumentSchemaMetadata;
 }

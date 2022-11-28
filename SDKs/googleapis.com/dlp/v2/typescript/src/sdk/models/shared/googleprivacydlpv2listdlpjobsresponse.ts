@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GooglePrivacyDlpV2DlpJob } from "./googleprivacydlpv2dlpjob";
+
 
 
 // GooglePrivacyDlpV2ListDlpJobsResponse
@@ -8,9 +8,9 @@ import { GooglePrivacyDlpV2DlpJob } from "./googleprivacydlpv2dlpjob";
  * The response message for listing DLP jobs.
 **/
 export class GooglePrivacyDlpV2ListDlpJobsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=jobs", elemType: shared.GooglePrivacyDlpV2DlpJob })
+  @SpeakeasyMetadata({ data: "json, name=jobs", elemType: GooglePrivacyDlpV2DlpJob })
   jobs?: GooglePrivacyDlpV2DlpJob[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

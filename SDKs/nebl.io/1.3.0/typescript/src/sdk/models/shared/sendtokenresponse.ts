@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SendTokenResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=multisigOutputs" })
+  @SpeakeasyMetadata({ data: "json, name=multisigOutputs" })
   multisigOutputs?: number[];
 
-  @Metadata({ data: "json, name=ntp1OutputIndexes" })
+  @SpeakeasyMetadata({ data: "json, name=ntp1OutputIndexes" })
   ntp1OutputIndexes?: number[];
 
-  @Metadata({ data: "json, name=txHex" })
+  @SpeakeasyMetadata({ data: "json, name=txHex" })
   txHex?: string;
 }

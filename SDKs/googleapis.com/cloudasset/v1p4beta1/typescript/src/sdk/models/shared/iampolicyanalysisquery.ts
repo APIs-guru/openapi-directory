@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccessSelector } from "./accessselector";
 import { IdentitySelector } from "./identityselector";
 import { ResourceSelector } from "./resourceselector";
+
 
 
 // IamPolicyAnalysisQuery
@@ -9,15 +10,15 @@ import { ResourceSelector } from "./resourceselector";
  * IAM policy analysis query message.
 **/
 export class IamPolicyAnalysisQuery extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessSelector" })
+  @SpeakeasyMetadata({ data: "json, name=accessSelector" })
   accessSelector?: AccessSelector;
 
-  @Metadata({ data: "json, name=identitySelector" })
+  @SpeakeasyMetadata({ data: "json, name=identitySelector" })
   identitySelector?: IdentitySelector;
 
-  @Metadata({ data: "json, name=parent" })
+  @SpeakeasyMetadata({ data: "json, name=parent" })
   parent?: string;
 
-  @Metadata({ data: "json, name=resourceSelector" })
+  @SpeakeasyMetadata({ data: "json, name=resourceSelector" })
   resourceSelector?: ResourceSelector;
 }

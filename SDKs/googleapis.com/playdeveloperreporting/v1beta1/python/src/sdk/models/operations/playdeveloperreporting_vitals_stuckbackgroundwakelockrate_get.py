@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class PlaydeveloperreportingVitalsStuckbackgroundwakelockrateGetPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,13 +26,13 @@ class PlaydeveloperreportingVitalsStuckbackgroundwakelockrateGetQueryParams:
 
 @dataclass
 class PlaydeveloperreportingVitalsStuckbackgroundwakelockrateGetRequest:
-    path_params: PlaydeveloperreportingVitalsStuckbackgroundwakelockrateGetPathParams = field(default=None)
-    query_params: PlaydeveloperreportingVitalsStuckbackgroundwakelockrateGetQueryParams = field(default=None)
+    path_params: PlaydeveloperreportingVitalsStuckbackgroundwakelockrateGetPathParams = field()
+    query_params: PlaydeveloperreportingVitalsStuckbackgroundwakelockrateGetQueryParams = field()
     
 
 @dataclass
 class PlaydeveloperreportingVitalsStuckbackgroundwakelockrateGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_play_developer_reporting_v1beta1_stuck_background_wakelock_rate_metric_set: Optional[shared.GooglePlayDeveloperReportingV1beta1StuckBackgroundWakelockRateMetricSet] = field(default=None)
-    status_code: int = field(default=None)
     

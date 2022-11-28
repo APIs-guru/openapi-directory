@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Media
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes the input media file in a transcription request.
 **/
 export class Media extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MediaFileUri" })
+  @SpeakeasyMetadata({ data: "json, name=MediaFileUri" })
   mediaFileUri?: string;
 
-  @Metadata({ data: "json, name=RedactedMediaFileUri" })
+  @SpeakeasyMetadata({ data: "json, name=RedactedMediaFileUri" })
   redactedMediaFileUri?: string;
 }

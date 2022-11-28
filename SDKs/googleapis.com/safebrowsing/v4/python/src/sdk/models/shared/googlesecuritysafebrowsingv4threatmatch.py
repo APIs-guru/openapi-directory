@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googlesecuritysafebrowsingv4threatentry
-from . import googlesecuritysafebrowsingv4threatentrymetadata
+from sdk import utils
+from . import *
 
 class GoogleSecuritySafebrowsingV4ThreatMatchPlatformTypeEnum(str, Enum):
     PLATFORM_TYPE_UNSPECIFIED = "PLATFORM_TYPE_UNSPECIFIED"
@@ -49,10 +50,14 @@ class GoogleSecuritySafebrowsingV4ThreatMatchThreatTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleSecuritySafebrowsingV4ThreatMatch:
-    cache_duration: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cacheDuration' }})
-    platform_type: Optional[GoogleSecuritySafebrowsingV4ThreatMatchPlatformTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'platformType' }})
-    threat: Optional[googlesecuritysafebrowsingv4threatentry.GoogleSecuritySafebrowsingV4ThreatEntry] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'threat' }})
-    threat_entry_metadata: Optional[googlesecuritysafebrowsingv4threatentrymetadata.GoogleSecuritySafebrowsingV4ThreatEntryMetadata] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'threatEntryMetadata' }})
-    threat_entry_type: Optional[GoogleSecuritySafebrowsingV4ThreatMatchThreatEntryTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'threatEntryType' }})
-    threat_type: Optional[GoogleSecuritySafebrowsingV4ThreatMatchThreatTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'threatType' }})
+    r"""GoogleSecuritySafebrowsingV4ThreatMatch
+    A match when checking a threat entry in the Safe Browsing threat lists.
+    """
+    
+    cache_duration: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cacheDuration') }})
+    platform_type: Optional[GoogleSecuritySafebrowsingV4ThreatMatchPlatformTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('platformType') }})
+    threat: Optional[GoogleSecuritySafebrowsingV4ThreatEntry] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('threat') }})
+    threat_entry_metadata: Optional[GoogleSecuritySafebrowsingV4ThreatEntryMetadata] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('threatEntryMetadata') }})
+    threat_entry_type: Optional[GoogleSecuritySafebrowsingV4ThreatMatchThreatEntryTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('threatEntryType') }})
+    threat_type: Optional[GoogleSecuritySafebrowsingV4ThreatMatchThreatTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('threatType') }})
     

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FindingReasonCodeEnum } from "./findingreasoncodeenum";
+
 
 
 // ReasonCodeSummary
@@ -7,9 +8,9 @@ import { FindingReasonCodeEnum } from "./findingreasoncodeenum";
  * A summary of a finding reason code.
 **/
 export class ReasonCodeSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: FindingReasonCodeEnum;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: number;
 }

@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class UsersListGpgKeysForUserPathParams:
-    username: str = field(default=None, metadata={'path_param': { 'field_name': 'username', 'style': 'simple', 'explode': False }})
+    username: str = field(metadata={'path_param': { 'field_name': 'username', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,14 +16,14 @@ class UsersListGpgKeysForUserQueryParams:
 
 @dataclass
 class UsersListGpgKeysForUserRequest:
-    path_params: UsersListGpgKeysForUserPathParams = field(default=None)
-    query_params: UsersListGpgKeysForUserQueryParams = field(default=None)
+    path_params: UsersListGpgKeysForUserPathParams = field()
+    query_params: UsersListGpgKeysForUserQueryParams = field()
     
 
 @dataclass
 class UsersListGpgKeysForUserResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     gpg_keys: Optional[List[shared.GpgKey]] = field(default=None)
     

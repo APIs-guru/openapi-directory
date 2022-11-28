@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // VersioningConfiguration
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about the versioning of dataset contents.
 **/
 export class VersioningConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=maxVersions" })
+  @SpeakeasyMetadata({ data: "json, name=maxVersions" })
   maxVersions?: number;
 
-  @Metadata({ data: "json, name=unlimited" })
+  @SpeakeasyMetadata({ data: "json, name=unlimited" })
   unlimited?: boolean;
 }

@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Introspection extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Features" })
+  @SpeakeasyMetadata({ data: "json, name=Features" })
   features?: string[];
 
-  @Metadata({ data: "json, name=IssuedAt" })
+  @SpeakeasyMetadata({ data: "json, name=IssuedAt" })
   issuedAt?: Date;
 
-  @Metadata({ data: "json, name=UUID" })
+  @SpeakeasyMetadata({ data: "json, name=UUID" })
   uuid?: string;
 }

@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CursorObject } from "./cursorobject";
 import { ArtistObject } from "./artistobject";
+
 
 
 // FollowingArtistsObjectArtists
@@ -9,27 +9,27 @@ import { ArtistObject } from "./artistobject";
  * https://developer.spotify.com/documentation/web-api/reference/#object-cursorpagingobject - Find more info on the official Spotify Web API Reference
 **/
 export class FollowingArtistsObjectArtists extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cursors" })
+  @SpeakeasyMetadata({ data: "json, name=cursors" })
   cursors?: CursorObject;
 
-  @Metadata({ data: "json, name=href" })
+  @SpeakeasyMetadata({ data: "json, name=href" })
   href?: string;
 
-  @Metadata({ data: "json, name=items", elemType: shared.ArtistObject })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: ArtistObject })
   items?: ArtistObject[];
 
-  @Metadata({ data: "json, name=limit" })
+  @SpeakeasyMetadata({ data: "json, name=limit" })
   limit?: number;
 
-  @Metadata({ data: "json, name=next" })
+  @SpeakeasyMetadata({ data: "json, name=next" })
   next?: string;
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total?: number;
 }
 
 
 export class FollowingArtistsObject extends SpeakeasyBase {
-  @Metadata({ data: "json, name=artists" })
+  @SpeakeasyMetadata({ data: "json, name=artists" })
   artists?: FollowingArtistsObjectArtists;
 }

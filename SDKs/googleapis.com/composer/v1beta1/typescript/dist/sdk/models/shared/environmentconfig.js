@@ -22,17 +22,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DatabaseConfig } from "./databaseconfig";
 import { EncryptionConfig } from "./encryptionconfig";
 import { MaintenanceWindow } from "./maintenancewindow";
 import { MasterAuthorizedNetworksConfig } from "./masterauthorizednetworksconfig";
 import { NodeConfig } from "./nodeconfig";
-import { PrivateEnvironmentConfig } from "./privateenvironmentconfig";
+import { PrivateEnvironmentConfigInput } from "./privateenvironmentconfig";
+import { RecoveryConfig } from "./recoveryconfig";
 import { SoftwareConfig } from "./softwareconfig";
 import { WebServerConfig } from "./webserverconfig";
 import { WebServerNetworkAccessControl } from "./webservernetworkaccesscontrol";
 import { WorkloadsConfig } from "./workloadsconfig";
+import { PrivateEnvironmentConfig } from "./privateenvironmentconfig";
 export var EnvironmentConfigEnvironmentSizeEnum;
 (function (EnvironmentConfigEnvironmentSizeEnum) {
     EnvironmentConfigEnvironmentSizeEnum["EnvironmentSizeUnspecified"] = "ENVIRONMENT_SIZE_UNSPECIFIED";
@@ -40,6 +42,70 @@ export var EnvironmentConfigEnvironmentSizeEnum;
     EnvironmentConfigEnvironmentSizeEnum["EnvironmentSizeMedium"] = "ENVIRONMENT_SIZE_MEDIUM";
     EnvironmentConfigEnvironmentSizeEnum["EnvironmentSizeLarge"] = "ENVIRONMENT_SIZE_LARGE";
 })(EnvironmentConfigEnvironmentSizeEnum || (EnvironmentConfigEnvironmentSizeEnum = {}));
+// EnvironmentConfigInput
+/**
+ * Configuration information for an environment.
+**/
+var EnvironmentConfigInput = /** @class */ (function (_super) {
+    __extends(EnvironmentConfigInput, _super);
+    function EnvironmentConfigInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=databaseConfig" }),
+        __metadata("design:type", DatabaseConfig)
+    ], EnvironmentConfigInput.prototype, "databaseConfig", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=encryptionConfig" }),
+        __metadata("design:type", EncryptionConfig)
+    ], EnvironmentConfigInput.prototype, "encryptionConfig", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=environmentSize" }),
+        __metadata("design:type", String)
+    ], EnvironmentConfigInput.prototype, "environmentSize", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=maintenanceWindow" }),
+        __metadata("design:type", MaintenanceWindow)
+    ], EnvironmentConfigInput.prototype, "maintenanceWindow", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=masterAuthorizedNetworksConfig" }),
+        __metadata("design:type", MasterAuthorizedNetworksConfig)
+    ], EnvironmentConfigInput.prototype, "masterAuthorizedNetworksConfig", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=nodeConfig" }),
+        __metadata("design:type", NodeConfig)
+    ], EnvironmentConfigInput.prototype, "nodeConfig", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=nodeCount" }),
+        __metadata("design:type", Number)
+    ], EnvironmentConfigInput.prototype, "nodeCount", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=privateEnvironmentConfig" }),
+        __metadata("design:type", PrivateEnvironmentConfigInput)
+    ], EnvironmentConfigInput.prototype, "privateEnvironmentConfig", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=recoveryConfig" }),
+        __metadata("design:type", RecoveryConfig)
+    ], EnvironmentConfigInput.prototype, "recoveryConfig", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=softwareConfig" }),
+        __metadata("design:type", SoftwareConfig)
+    ], EnvironmentConfigInput.prototype, "softwareConfig", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=webServerConfig" }),
+        __metadata("design:type", WebServerConfig)
+    ], EnvironmentConfigInput.prototype, "webServerConfig", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=webServerNetworkAccessControl" }),
+        __metadata("design:type", WebServerNetworkAccessControl)
+    ], EnvironmentConfigInput.prototype, "webServerNetworkAccessControl", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=workloadsConfig" }),
+        __metadata("design:type", WorkloadsConfig)
+    ], EnvironmentConfigInput.prototype, "workloadsConfig", void 0);
+    return EnvironmentConfigInput;
+}(SpeakeasyBase));
+export { EnvironmentConfigInput };
 // EnvironmentConfig
 /**
  * Configuration information for an environment.
@@ -50,63 +116,67 @@ var EnvironmentConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=airflowUri" }),
+        SpeakeasyMetadata({ data: "json, name=airflowUri" }),
         __metadata("design:type", String)
     ], EnvironmentConfig.prototype, "airflowUri", void 0);
     __decorate([
-        Metadata({ data: "json, name=dagGcsPrefix" }),
+        SpeakeasyMetadata({ data: "json, name=dagGcsPrefix" }),
         __metadata("design:type", String)
     ], EnvironmentConfig.prototype, "dagGcsPrefix", void 0);
     __decorate([
-        Metadata({ data: "json, name=databaseConfig" }),
+        SpeakeasyMetadata({ data: "json, name=databaseConfig" }),
         __metadata("design:type", DatabaseConfig)
     ], EnvironmentConfig.prototype, "databaseConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=encryptionConfig" }),
+        SpeakeasyMetadata({ data: "json, name=encryptionConfig" }),
         __metadata("design:type", EncryptionConfig)
     ], EnvironmentConfig.prototype, "encryptionConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=environmentSize" }),
+        SpeakeasyMetadata({ data: "json, name=environmentSize" }),
         __metadata("design:type", String)
     ], EnvironmentConfig.prototype, "environmentSize", void 0);
     __decorate([
-        Metadata({ data: "json, name=gkeCluster" }),
+        SpeakeasyMetadata({ data: "json, name=gkeCluster" }),
         __metadata("design:type", String)
     ], EnvironmentConfig.prototype, "gkeCluster", void 0);
     __decorate([
-        Metadata({ data: "json, name=maintenanceWindow" }),
+        SpeakeasyMetadata({ data: "json, name=maintenanceWindow" }),
         __metadata("design:type", MaintenanceWindow)
     ], EnvironmentConfig.prototype, "maintenanceWindow", void 0);
     __decorate([
-        Metadata({ data: "json, name=masterAuthorizedNetworksConfig" }),
+        SpeakeasyMetadata({ data: "json, name=masterAuthorizedNetworksConfig" }),
         __metadata("design:type", MasterAuthorizedNetworksConfig)
     ], EnvironmentConfig.prototype, "masterAuthorizedNetworksConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=nodeConfig" }),
+        SpeakeasyMetadata({ data: "json, name=nodeConfig" }),
         __metadata("design:type", NodeConfig)
     ], EnvironmentConfig.prototype, "nodeConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=nodeCount" }),
+        SpeakeasyMetadata({ data: "json, name=nodeCount" }),
         __metadata("design:type", Number)
     ], EnvironmentConfig.prototype, "nodeCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=privateEnvironmentConfig" }),
+        SpeakeasyMetadata({ data: "json, name=privateEnvironmentConfig" }),
         __metadata("design:type", PrivateEnvironmentConfig)
     ], EnvironmentConfig.prototype, "privateEnvironmentConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=softwareConfig" }),
+        SpeakeasyMetadata({ data: "json, name=recoveryConfig" }),
+        __metadata("design:type", RecoveryConfig)
+    ], EnvironmentConfig.prototype, "recoveryConfig", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=softwareConfig" }),
         __metadata("design:type", SoftwareConfig)
     ], EnvironmentConfig.prototype, "softwareConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=webServerConfig" }),
+        SpeakeasyMetadata({ data: "json, name=webServerConfig" }),
         __metadata("design:type", WebServerConfig)
     ], EnvironmentConfig.prototype, "webServerConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=webServerNetworkAccessControl" }),
+        SpeakeasyMetadata({ data: "json, name=webServerNetworkAccessControl" }),
         __metadata("design:type", WebServerNetworkAccessControl)
     ], EnvironmentConfig.prototype, "webServerNetworkAccessControl", void 0);
     __decorate([
-        Metadata({ data: "json, name=workloadsConfig" }),
+        SpeakeasyMetadata({ data: "json, name=workloadsConfig" }),
         __metadata("design:type", WorkloadsConfig)
     ], EnvironmentConfig.prototype, "workloadsConfig", void 0);
     return EnvironmentConfig;

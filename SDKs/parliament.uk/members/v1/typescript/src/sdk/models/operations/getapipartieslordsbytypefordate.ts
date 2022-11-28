@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetApiPartiesLordsByTypeForDatePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=forDate" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=forDate" })
   forDate: Date;
 }
 
 
 export class GetApiPartiesLordsByTypeForDateRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetApiPartiesLordsByTypeForDatePathParams;
 }
 
 
 export class GetApiPartiesLordsByTypeForDateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   lordsByTypeMembersServiceSearchResult?: shared.LordsByTypeMembersServiceSearchResult;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

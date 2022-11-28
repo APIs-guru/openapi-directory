@@ -1,5 +1,7 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
+from sdk.models import shared
 
 class CompanyIDDatasetDatasetEnum(str, Enum):
     UNKNOWN = ""
@@ -11,8 +13,8 @@ class CompanyIDDatasetDatasetEnum(str, Enum):
 
 @dataclass
 class CompanyIDDatasetPathParams:
-    dataset: CompanyIDDatasetDatasetEnum = field(default=None, metadata={'path_param': { 'field_name': 'dataset', 'style': 'simple', 'explode': False }})
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    dataset: CompanyIDDatasetDatasetEnum = field(metadata={'path_param': { 'field_name': 'dataset', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 class CompanyIDDatasetLangEnum(str, Enum):
     UNKNOWN = ""
@@ -29,20 +31,20 @@ class CompanyIDDatasetQueryParams:
 
 @dataclass
 class CompanyIDDatasetSecurity:
-    user_key: shared.SchemeUserKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    user_key: shared.SchemeUserKey = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class CompanyIDDatasetRequest:
-    path_params: CompanyIDDatasetPathParams = field(default=None)
-    query_params: CompanyIDDatasetQueryParams = field(default=None)
-    security: CompanyIDDatasetSecurity = field(default=None)
+    path_params: CompanyIDDatasetPathParams = field()
+    query_params: CompanyIDDatasetQueryParams = field()
+    security: CompanyIDDatasetSecurity = field()
     
 
 @dataclass
 class CompanyIDDatasetResponse:
+    content_type: str = field()
+    status_code: int = field()
     company_id_dataset_default_application_json_any: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     oneapi_1v1_1company_1deepsearch_1lei_1_percent_7_bnumber_percent_7_d_get_responses_200_content_application_1json_schema_properties_company: Optional[Any] = field(default=None)
     

@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Option } from "./option";
 export var FieldTypeDefinitionFieldTypeEnum;
 (function (FieldTypeDefinitionFieldTypeEnum) {
     FieldTypeDefinitionFieldTypeEnum["Booleancheckbox"] = "booleancheckbox";
@@ -130,27 +130,27 @@ var FieldTypeDefinition = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=fieldType" }),
+        SpeakeasyMetadata({ data: "json, name=fieldType" }),
         __metadata("design:type", String)
     ], FieldTypeDefinition.prototype, "fieldType", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], FieldTypeDefinition.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=options", elemType: shared.Option }),
+        SpeakeasyMetadata({ data: "json, name=options", elemType: Option }),
         __metadata("design:type", Array)
     ], FieldTypeDefinition.prototype, "options", void 0);
     __decorate([
-        Metadata({ data: "json, name=optionsUrl" }),
+        SpeakeasyMetadata({ data: "json, name=optionsUrl" }),
         __metadata("design:type", String)
     ], FieldTypeDefinition.prototype, "optionsUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=referencedObjectType" }),
+        SpeakeasyMetadata({ data: "json, name=referencedObjectType" }),
         __metadata("design:type", String)
     ], FieldTypeDefinition.prototype, "referencedObjectType", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], FieldTypeDefinition.prototype, "type", void 0);
     return FieldTypeDefinition;

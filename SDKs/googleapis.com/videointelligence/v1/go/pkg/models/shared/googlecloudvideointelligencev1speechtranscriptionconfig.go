@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudVideointelligenceV1SpeechTranscriptionConfig
+// Config for SPEECH_TRANSCRIPTION.
 type GoogleCloudVideointelligenceV1SpeechTranscriptionConfig struct {
 	AudioTracks                []int32                                       `json:"audioTracks,omitempty"`
 	DiarizationSpeakerCount    *int32                                        `json:"diarizationSpeakerCount,omitempty"`

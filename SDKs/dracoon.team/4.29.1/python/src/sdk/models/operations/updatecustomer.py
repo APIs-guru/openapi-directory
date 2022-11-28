@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class UpdateCustomerPathParams:
-    customer_id: int = field(default=None, metadata={'path_param': { 'field_name': 'customer_id', 'style': 'simple', 'explode': False }})
+    customer_id: int = field(metadata={'path_param': { 'field_name': 'customer_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,15 +19,15 @@ class UpdateCustomerHeaders:
 
 @dataclass
 class UpdateCustomerRequest:
-    path_params: UpdateCustomerPathParams = field(default=None)
-    headers: UpdateCustomerHeaders = field(default=None)
-    request: shared.UpdateCustomerRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateCustomerHeaders = field()
+    path_params: UpdateCustomerPathParams = field()
+    request: shared.UpdateCustomerRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateCustomerResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     update_customer_response: Optional[shared.UpdateCustomerResponse] = field(default=None)
     

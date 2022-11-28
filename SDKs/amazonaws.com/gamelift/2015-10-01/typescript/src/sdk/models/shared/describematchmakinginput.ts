@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DescribeMatchmakingInput
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the input for a request operation.
 **/
 export class DescribeMatchmakingInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=TicketIds" })
+  @SpeakeasyMetadata({ data: "json, name=TicketIds" })
   ticketIds: string[];
 }

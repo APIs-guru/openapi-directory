@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class PubsubProjectsSchemasCreatePathParams extends SpeakeasyBase {
     parent: string;
@@ -32,7 +32,7 @@ export declare class PubsubProjectsSchemasCreateSecurity extends SpeakeasyBase {
 export declare class PubsubProjectsSchemasCreateRequest extends SpeakeasyBase {
     pathParams: PubsubProjectsSchemasCreatePathParams;
     queryParams: PubsubProjectsSchemasCreateQueryParams;
-    request?: shared.Schema;
+    request?: shared.SchemaInput;
     security: PubsubProjectsSchemasCreateSecurity;
 }
 export declare class PubsubProjectsSchemasCreateResponse extends SpeakeasyBase {

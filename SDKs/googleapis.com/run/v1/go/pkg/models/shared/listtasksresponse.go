@@ -1,5 +1,7 @@
 package shared
 
+// ListTasksResponse
+// ListTasksResponse is a list of Tasks resources.
 type ListTasksResponse struct {
 	APIVersion  *string   `json:"apiVersion,omitempty"`
 	Items       []Task    `json:"items,omitempty"`

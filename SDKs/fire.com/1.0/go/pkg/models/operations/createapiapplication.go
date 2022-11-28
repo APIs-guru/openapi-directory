@@ -14,10 +14,6 @@ type CreateAPIApplicationNewAPIApplication struct {
 	Permissions                      []string   `json:"permissions,omitempty"`
 }
 
-type CreateAPIApplicationRequest struct {
-	Request CreateAPIApplicationNewAPIApplication `request:"mediaType=application/json"`
-}
-
 type CreateAPIApplicationAPIApplication struct {
 	ApplicationID                    *int64     `json:"applicationId,omitempty"`
 	ClientID                         *string    `json:"clientId,omitempty"`
@@ -28,6 +24,10 @@ type CreateAPIApplicationAPIApplication struct {
 	NumberOfPayeeApprovalsRequired   *int64     `json:"numberOfPayeeApprovalsRequired,omitempty"`
 	NumberOfPaymentApprovalsRequired *int64     `json:"numberOfPaymentApprovalsRequired,omitempty"`
 	RefreshToken                     *string    `json:"refreshToken,omitempty"`
+}
+
+type CreateAPIApplicationRequest struct {
+	Request CreateAPIApplicationNewAPIApplication `request:"mediaType=application/json"`
 }
 
 type CreateAPIApplicationResponse struct {

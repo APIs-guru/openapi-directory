@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ArtifactStatusEnum } from "./artifactstatusenum";
+
 
 
 // AttachmentItem
@@ -7,15 +8,15 @@ import { ArtifactStatusEnum } from "./artifactstatusenum";
  * The case-insensitive input to indicate standard MIME type that describes the format of the file that will be uploaded.
 **/
 export class AttachmentItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AttachmentId" })
+  @SpeakeasyMetadata({ data: "json, name=AttachmentId" })
   attachmentId?: string;
 
-  @Metadata({ data: "json, name=AttachmentName" })
+  @SpeakeasyMetadata({ data: "json, name=AttachmentName" })
   attachmentName?: string;
 
-  @Metadata({ data: "json, name=ContentType" })
+  @SpeakeasyMetadata({ data: "json, name=ContentType" })
   contentType?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: ArtifactStatusEnum;
 }

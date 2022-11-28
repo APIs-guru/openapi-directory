@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InstanceHealthStateEnum } from "./instancehealthstateenum";
 import { InstanceHealthReasonEnum } from "./instancehealthreasonenum";
+
 
 
 // InstanceHealthSummary
@@ -8,12 +9,12 @@ import { InstanceHealthReasonEnum } from "./instancehealthreasonenum";
  * Describes information about the health of the instance.
 **/
 export class InstanceHealthSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=instanceHealth" })
+  @SpeakeasyMetadata({ data: "json, name=instanceHealth" })
   instanceHealth?: InstanceHealthStateEnum;
 
-  @Metadata({ data: "json, name=instanceHealthReason" })
+  @SpeakeasyMetadata({ data: "json, name=instanceHealthReason" })
   instanceHealthReason?: InstanceHealthReasonEnum;
 
-  @Metadata({ data: "json, name=instanceName" })
+  @SpeakeasyMetadata({ data: "json, name=instanceName" })
   instanceName?: string;
 }

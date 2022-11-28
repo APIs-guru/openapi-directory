@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import dialogaction
+from sdk import utils
+from . import *
 
 class ActionResponseTypeEnum(str, Enum):
     TYPE_UNSPECIFIED = "TYPE_UNSPECIFIED"
@@ -15,7 +17,11 @@ class ActionResponseTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ActionResponse:
-    dialog_action: Optional[dialogaction.DialogAction] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dialogAction' }})
-    type: Optional[ActionResponseTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
+    r"""ActionResponse
+    Parameters that a Chat app can use to configure how it's response is posted.
+    """
+    
+    dialog_action: Optional[DialogAction] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dialogAction') }})
+    type: Optional[ActionResponseTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('url') }})
     

@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import containerinstancestatus_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateContainerInstancesStateRequest:
-    cluster: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cluster' }})
-    container_instances: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'containerInstances' }})
-    status: containerinstancestatus_enum.ContainerInstanceStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    container_instances: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('containerInstances') }})
+    status: ContainerInstanceStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    cluster: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cluster') }})
     

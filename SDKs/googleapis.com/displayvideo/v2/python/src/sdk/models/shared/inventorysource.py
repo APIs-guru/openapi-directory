@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import creativeconfig
-from . import ratedetails
-from . import inventorysourceaccessors
-from . import inventorysourcestatus
-from . import timerange
+from sdk import utils
+from . import *
 
 class InventorySourceCommitmentEnum(str, Enum):
     INVENTORY_SOURCE_COMMITMENT_UNSPECIFIED = "INVENTORY_SOURCE_COMMITMENT_UNSPECIFIED"
@@ -109,24 +110,51 @@ class InventorySourceInventorySourceTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class InventorySource:
-    commitment: Optional[InventorySourceCommitmentEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'commitment' }})
-    creative_configs: Optional[List[creativeconfig.CreativeConfig]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'creativeConfigs' }})
-    deal_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dealId' }})
-    delivery_method: Optional[InventorySourceDeliveryMethodEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deliveryMethod' }})
-    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayName' }})
-    exchange: Optional[InventorySourceExchangeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'exchange' }})
-    guaranteed_order_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'guaranteedOrderId' }})
-    inventory_source_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'inventorySourceId' }})
-    inventory_source_product_type: Optional[InventorySourceInventorySourceProductTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'inventorySourceProductType' }})
-    inventory_source_type: Optional[InventorySourceInventorySourceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'inventorySourceType' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    publisher_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'publisherName' }})
-    rate_details: Optional[ratedetails.RateDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rateDetails' }})
-    read_advertiser_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'readAdvertiserIds' }})
-    read_partner_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'readPartnerIds' }})
-    read_write_accessors: Optional[inventorysourceaccessors.InventorySourceAccessors] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'readWriteAccessors' }})
-    status: Optional[inventorysourcestatus.InventorySourceStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    sub_site_property_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'subSitePropertyId' }})
-    time_range: Optional[timerange.TimeRange] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timeRange' }})
-    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updateTime' }})
+    r"""InventorySource
+    An inventory source.
+    """
+    
+    commitment: Optional[InventorySourceCommitmentEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('commitment') }})
+    creative_configs: Optional[List[CreativeConfig]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('creativeConfigs') }})
+    deal_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dealId') }})
+    delivery_method: Optional[InventorySourceDeliveryMethodEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('deliveryMethod') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    exchange: Optional[InventorySourceExchangeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('exchange') }})
+    guaranteed_order_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('guaranteedOrderId') }})
+    inventory_source_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('inventorySourceId') }})
+    inventory_source_product_type: Optional[InventorySourceInventorySourceProductTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('inventorySourceProductType') }})
+    inventory_source_type: Optional[InventorySourceInventorySourceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('inventorySourceType') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    publisher_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('publisherName') }})
+    rate_details: Optional[RateDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rateDetails') }})
+    read_advertiser_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('readAdvertiserIds') }})
+    read_partner_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('readPartnerIds') }})
+    read_write_accessors: Optional[InventorySourceAccessors] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('readWriteAccessors') }})
+    status: Optional[InventorySourceStatus] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    sub_site_property_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('subSitePropertyId') }})
+    time_range: Optional[TimeRange] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('timeRange') }})
+    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('updateTime') }})
+    
+
+@dataclass_json
+@dataclass
+class InventorySourceInput:
+    r"""InventorySourceInput
+    An inventory source.
+    """
+    
+    commitment: Optional[InventorySourceCommitmentEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('commitment') }})
+    creative_configs: Optional[List[CreativeConfig]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('creativeConfigs') }})
+    deal_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dealId') }})
+    delivery_method: Optional[InventorySourceDeliveryMethodEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('deliveryMethod') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    exchange: Optional[InventorySourceExchangeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('exchange') }})
+    guaranteed_order_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('guaranteedOrderId') }})
+    inventory_source_type: Optional[InventorySourceInventorySourceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('inventorySourceType') }})
+    publisher_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('publisherName') }})
+    rate_details: Optional[RateDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rateDetails') }})
+    read_write_accessors: Optional[InventorySourceAccessors] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('readWriteAccessors') }})
+    status: Optional[InventorySourceStatusInput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    sub_site_property_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('subSitePropertyId') }})
+    time_range: Optional[TimeRange] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('timeRange') }})
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DeleteTaskRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * DeleteTask
 **/
 export class DeleteTaskRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=TaskArn" })
+  @SpeakeasyMetadata({ data: "json, name=TaskArn" })
   taskArn: string;
 }

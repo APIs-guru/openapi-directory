@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class RecaptchaenterpriseProjectsRelatedaccountgroupmembershipsSearchPathParams:
-    project: str = field(default=None, metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
+    project: str = field(metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class RecaptchaenterpriseProjectsRelatedaccountgroupmembershipsSearchQueryParams
 
 @dataclass
 class RecaptchaenterpriseProjectsRelatedaccountgroupmembershipsSearchSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class RecaptchaenterpriseProjectsRelatedaccountgroupmembershipsSearchRequest:
-    path_params: RecaptchaenterpriseProjectsRelatedaccountgroupmembershipsSearchPathParams = field(default=None)
-    query_params: RecaptchaenterpriseProjectsRelatedaccountgroupmembershipsSearchQueryParams = field(default=None)
+    path_params: RecaptchaenterpriseProjectsRelatedaccountgroupmembershipsSearchPathParams = field()
+    query_params: RecaptchaenterpriseProjectsRelatedaccountgroupmembershipsSearchQueryParams = field()
+    security: RecaptchaenterpriseProjectsRelatedaccountgroupmembershipsSearchSecurity = field()
     request: Optional[shared.GoogleCloudRecaptchaenterpriseV1SearchRelatedAccountGroupMembershipsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: RecaptchaenterpriseProjectsRelatedaccountgroupmembershipsSearchSecurity = field(default=None)
     
 
 @dataclass
 class RecaptchaenterpriseProjectsRelatedaccountgroupmembershipsSearchResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_recaptchaenterprise_v1_search_related_account_group_memberships_response: Optional[shared.GoogleCloudRecaptchaenterpriseV1SearchRelatedAccountGroupMembershipsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

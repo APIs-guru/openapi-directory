@@ -18,6 +18,8 @@ const (
 	GoogleCloudPolicytroubleshooterV1ExplainedPolicyRelevanceEnumHigh                          GoogleCloudPolicytroubleshooterV1ExplainedPolicyRelevanceEnum = "HIGH"
 )
 
+// GoogleCloudPolicytroubleshooterV1ExplainedPolicy
+// Details about how a specific IAM Policy contributed to the access check.
 type GoogleCloudPolicytroubleshooterV1ExplainedPolicy struct {
 	Access              *GoogleCloudPolicytroubleshooterV1ExplainedPolicyAccessEnum    `json:"access,omitempty"`
 	BindingExplanations []GoogleCloudPolicytroubleshooterV1BindingExplanation          `json:"bindingExplanations,omitempty"`

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // IdentitytoolkitRelyingpartySendVerificationCodeResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Response for Identitytoolkit-SendVerificationCode
 **/
 export class IdentitytoolkitRelyingpartySendVerificationCodeResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=sessionInfo" })
+  @SpeakeasyMetadata({ data: "json, name=sessionInfo" })
   sessionInfo?: string;
 }

@@ -1,5 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BrandedFoodObjectItemsCountryDetails
@@ -7,10 +7,10 @@ import * as shared from "../shared";
  * An object containing additional information on the countries where this item is found
 **/
 export class BrandedFoodObjectItemsCountryDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=english_speaking" })
+  @SpeakeasyMetadata({ data: "json, name=english_speaking" })
   englishSpeaking?: number;
 
-  @Metadata({ data: "json, name=non_english_speaking" })
+  @SpeakeasyMetadata({ data: "json, name=non_english_speaking" })
   nonEnglishSpeaking?: number;
 }
 
@@ -20,25 +20,25 @@ export class BrandedFoodObjectItemsCountryDetails extends SpeakeasyBase {
  * An object containing information on an individual ingredient that was flagged as potentially not being compatible with a certain diet
 **/
 export class BrandedFoodObjectItemsDietFlags extends SpeakeasyBase {
-  @Metadata({ data: "json, name=compatibility_description" })
+  @SpeakeasyMetadata({ data: "json, name=compatibility_description" })
   compatibilityDescription?: string;
 
-  @Metadata({ data: "json, name=compatibility_level" })
+  @SpeakeasyMetadata({ data: "json, name=compatibility_level" })
   compatibilityLevel?: number;
 
-  @Metadata({ data: "json, name=diet_label" })
+  @SpeakeasyMetadata({ data: "json, name=diet_label" })
   dietLabel?: string;
 
-  @Metadata({ data: "json, name=ingredient" })
+  @SpeakeasyMetadata({ data: "json, name=ingredient" })
   ingredient?: string;
 
-  @Metadata({ data: "json, name=ingredient_description" })
+  @SpeakeasyMetadata({ data: "json, name=ingredient_description" })
   ingredientDescription?: string;
 
-  @Metadata({ data: "json, name=is_allergen" })
+  @SpeakeasyMetadata({ data: "json, name=is_allergen" })
   isAllergen?: boolean;
 
-  @Metadata({ data: "json, name=is_compatible" })
+  @SpeakeasyMetadata({ data: "json, name=is_compatible" })
   isCompatible?: string;
 }
 
@@ -48,19 +48,19 @@ export class BrandedFoodObjectItemsDietFlags extends SpeakeasyBase {
  * An object containing information on this item's compatibility with Gluten Free diets
 **/
 export class BrandedFoodObjectItemsDietLabelsGlutenFree extends SpeakeasyBase {
-  @Metadata({ data: "json, name=compatibility_level" })
+  @SpeakeasyMetadata({ data: "json, name=compatibility_level" })
   compatibilityLevel?: number;
 
-  @Metadata({ data: "json, name=confidence" })
+  @SpeakeasyMetadata({ data: "json, name=confidence" })
   confidence?: number;
 
-  @Metadata({ data: "json, name=confidence_description" })
+  @SpeakeasyMetadata({ data: "json, name=confidence_description" })
   confidenceDescription?: string;
 
-  @Metadata({ data: "json, name=is_compatible" })
+  @SpeakeasyMetadata({ data: "json, name=is_compatible" })
   isCompatible?: boolean;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
 
@@ -70,19 +70,19 @@ export class BrandedFoodObjectItemsDietLabelsGlutenFree extends SpeakeasyBase {
  * An object containing information on this item's compatibility with the Vegan diets
 **/
 export class BrandedFoodObjectItemsDietLabelsVegan extends SpeakeasyBase {
-  @Metadata({ data: "json, name=compatibility_level" })
+  @SpeakeasyMetadata({ data: "json, name=compatibility_level" })
   compatibilityLevel?: number;
 
-  @Metadata({ data: "json, name=confidence" })
+  @SpeakeasyMetadata({ data: "json, name=confidence" })
   confidence?: number;
 
-  @Metadata({ data: "json, name=confidence_description" })
+  @SpeakeasyMetadata({ data: "json, name=confidence_description" })
   confidenceDescription?: string;
 
-  @Metadata({ data: "json, name=is_compatible" })
+  @SpeakeasyMetadata({ data: "json, name=is_compatible" })
   isCompatible?: boolean;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
 
@@ -92,19 +92,19 @@ export class BrandedFoodObjectItemsDietLabelsVegan extends SpeakeasyBase {
  * An object containing information on this item's compatibility with Vegetarian diets
 **/
 export class BrandedFoodObjectItemsDietLabelsVegetarian extends SpeakeasyBase {
-  @Metadata({ data: "json, name=compatibility_level" })
+  @SpeakeasyMetadata({ data: "json, name=compatibility_level" })
   compatibilityLevel?: number;
 
-  @Metadata({ data: "json, name=confidence" })
+  @SpeakeasyMetadata({ data: "json, name=confidence" })
   confidence?: number;
 
-  @Metadata({ data: "json, name=confidence_description" })
+  @SpeakeasyMetadata({ data: "json, name=confidence_description" })
   confidenceDescription?: string;
 
-  @Metadata({ data: "json, name=is_compatible" })
+  @SpeakeasyMetadata({ data: "json, name=is_compatible" })
   isCompatible?: boolean;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
 
@@ -114,13 +114,13 @@ export class BrandedFoodObjectItemsDietLabelsVegetarian extends SpeakeasyBase {
  * An object containing this item's compatibility grades for each supported diet
 **/
 export class BrandedFoodObjectItemsDietLabels extends SpeakeasyBase {
-  @Metadata({ data: "json, name=gluten_free" })
+  @SpeakeasyMetadata({ data: "json, name=gluten_free" })
   glutenFree?: BrandedFoodObjectItemsDietLabelsGlutenFree;
 
-  @Metadata({ data: "json, name=vegan" })
+  @SpeakeasyMetadata({ data: "json, name=vegan" })
   vegan?: BrandedFoodObjectItemsDietLabelsVegan;
 
-  @Metadata({ data: "json, name=vegetarian" })
+  @SpeakeasyMetadata({ data: "json, name=vegetarian" })
   vegetarian?: BrandedFoodObjectItemsDietLabelsVegetarian;
 }
 
@@ -130,22 +130,22 @@ export class BrandedFoodObjectItemsDietLabels extends SpeakeasyBase {
  * An object containing information for a specific nutrient found in this food item
 **/
 export class BrandedFoodObjectItemsNutrients extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data_points" })
+  @SpeakeasyMetadata({ data: "json, name=data_points" })
   dataPoints?: number;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=measurement_unit" })
+  @SpeakeasyMetadata({ data: "json, name=measurement_unit" })
   measurementUnit?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=per_100g" })
+  @SpeakeasyMetadata({ data: "json, name=per_100g" })
   per100g?: number;
 
-  @Metadata({ data: "json, name=rank" })
+  @SpeakeasyMetadata({ data: "json, name=rank" })
   rank?: number;
 }
 
@@ -155,10 +155,10 @@ export class BrandedFoodObjectItemsNutrients extends SpeakeasyBase {
  * An object containing basic packaging information about this item
 **/
 export class BrandedFoodObjectItemsPackage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=quantity" })
+  @SpeakeasyMetadata({ data: "json, name=quantity" })
   quantity?: number;
 
-  @Metadata({ data: "json, name=size" })
+  @SpeakeasyMetadata({ data: "json, name=size" })
   size?: string;
 }
 
@@ -168,13 +168,13 @@ export class BrandedFoodObjectItemsPackage extends SpeakeasyBase {
  * An object containing photos of the front of this item's packaging
 **/
 export class BrandedFoodObjectItemsPackagingPhotosFront extends SpeakeasyBase {
-  @Metadata({ data: "json, name=display" })
+  @SpeakeasyMetadata({ data: "json, name=display" })
   display?: string;
 
-  @Metadata({ data: "json, name=small" })
+  @SpeakeasyMetadata({ data: "json, name=small" })
   small?: string;
 
-  @Metadata({ data: "json, name=thumb" })
+  @SpeakeasyMetadata({ data: "json, name=thumb" })
   thumb?: string;
 }
 
@@ -184,13 +184,13 @@ export class BrandedFoodObjectItemsPackagingPhotosFront extends SpeakeasyBase {
  * An object containing photos of the ingredients on this item's packaging
 **/
 export class BrandedFoodObjectItemsPackagingPhotosIngredients extends SpeakeasyBase {
-  @Metadata({ data: "json, name=display" })
+  @SpeakeasyMetadata({ data: "json, name=display" })
   display?: string;
 
-  @Metadata({ data: "json, name=small" })
+  @SpeakeasyMetadata({ data: "json, name=small" })
   small?: string;
 
-  @Metadata({ data: "json, name=thumb" })
+  @SpeakeasyMetadata({ data: "json, name=thumb" })
   thumb?: string;
 }
 
@@ -200,13 +200,13 @@ export class BrandedFoodObjectItemsPackagingPhotosIngredients extends SpeakeasyB
  * An object containing photos of this item's nutrition label
 **/
 export class BrandedFoodObjectItemsPackagingPhotosNutrition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=display" })
+  @SpeakeasyMetadata({ data: "json, name=display" })
   display?: string;
 
-  @Metadata({ data: "json, name=small" })
+  @SpeakeasyMetadata({ data: "json, name=small" })
   small?: string;
 
-  @Metadata({ data: "json, name=thumb" })
+  @SpeakeasyMetadata({ data: "json, name=thumb" })
   thumb?: string;
 }
 
@@ -216,13 +216,13 @@ export class BrandedFoodObjectItemsPackagingPhotosNutrition extends SpeakeasyBas
  * A object containing a collection of photos of this item's packaging
 **/
 export class BrandedFoodObjectItemsPackagingPhotos extends SpeakeasyBase {
-  @Metadata({ data: "json, name=front" })
+  @SpeakeasyMetadata({ data: "json, name=front" })
   front?: BrandedFoodObjectItemsPackagingPhotosFront;
 
-  @Metadata({ data: "json, name=ingredients" })
+  @SpeakeasyMetadata({ data: "json, name=ingredients" })
   ingredients?: BrandedFoodObjectItemsPackagingPhotosIngredients;
 
-  @Metadata({ data: "json, name=nutrition" })
+  @SpeakeasyMetadata({ data: "json, name=nutrition" })
   nutrition?: BrandedFoodObjectItemsPackagingPhotosNutrition;
 }
 
@@ -232,13 +232,13 @@ export class BrandedFoodObjectItemsPackagingPhotos extends SpeakeasyBase {
  * An object containing serving information for this item
 **/
 export class BrandedFoodObjectItemsServing extends SpeakeasyBase {
-  @Metadata({ data: "json, name=measurement_unit" })
+  @SpeakeasyMetadata({ data: "json, name=measurement_unit" })
   measurementUnit?: string;
 
-  @Metadata({ data: "json, name=size" })
+  @SpeakeasyMetadata({ data: "json, name=size" })
   size?: string;
 
-  @Metadata({ data: "json, name=size_fulltext" })
+  @SpeakeasyMetadata({ data: "json, name=size_fulltext" })
   sizeFulltext?: string;
 }
 
@@ -248,73 +248,73 @@ export class BrandedFoodObjectItemsServing extends SpeakeasyBase {
  * An object containing information for this specific item.
 **/
 export class BrandedFoodObjectItems extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allergens" })
+  @SpeakeasyMetadata({ data: "json, name=allergens" })
   allergens?: string[];
 
-  @Metadata({ data: "json, name=barcode" })
+  @SpeakeasyMetadata({ data: "json, name=barcode" })
   barcode?: string;
 
-  @Metadata({ data: "json, name=brand" })
+  @SpeakeasyMetadata({ data: "json, name=brand" })
   brand?: string;
 
-  @Metadata({ data: "json, name=brand_list" })
+  @SpeakeasyMetadata({ data: "json, name=brand_list" })
   brandList?: string[];
 
-  @Metadata({ data: "json, name=categories" })
+  @SpeakeasyMetadata({ data: "json, name=categories" })
   categories?: string[];
 
-  @Metadata({ data: "json, name=countries" })
+  @SpeakeasyMetadata({ data: "json, name=countries" })
   countries?: string[];
 
-  @Metadata({ data: "json, name=country_details" })
+  @SpeakeasyMetadata({ data: "json, name=country_details" })
   countryDetails?: BrandedFoodObjectItemsCountryDetails;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=diet_flags", elemType: shared.BrandedFoodObjectItemsDietFlags })
+  @SpeakeasyMetadata({ data: "json, name=diet_flags", elemType: BrandedFoodObjectItemsDietFlags })
   dietFlags?: BrandedFoodObjectItemsDietFlags[];
 
-  @Metadata({ data: "json, name=diet_labels" })
+  @SpeakeasyMetadata({ data: "json, name=diet_labels" })
   dietLabels?: BrandedFoodObjectItemsDietLabels;
 
-  @Metadata({ data: "json, name=has_english_ingredients" })
+  @SpeakeasyMetadata({ data: "json, name=has_english_ingredients" })
   hasEnglishIngredients?: boolean;
 
-  @Metadata({ data: "json, name=ingredient_list" })
+  @SpeakeasyMetadata({ data: "json, name=ingredient_list" })
   ingredientList?: string[];
 
-  @Metadata({ data: "json, name=ingredients" })
+  @SpeakeasyMetadata({ data: "json, name=ingredients" })
   ingredients?: string;
 
-  @Metadata({ data: "json, name=keywords" })
+  @SpeakeasyMetadata({ data: "json, name=keywords" })
   keywords?: string[];
 
-  @Metadata({ data: "json, name=minerals" })
+  @SpeakeasyMetadata({ data: "json, name=minerals" })
   minerals?: string[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=nutrients", elemType: shared.BrandedFoodObjectItemsNutrients })
+  @SpeakeasyMetadata({ data: "json, name=nutrients", elemType: BrandedFoodObjectItemsNutrients })
   nutrients?: BrandedFoodObjectItemsNutrients[];
 
-  @Metadata({ data: "json, name=package" })
+  @SpeakeasyMetadata({ data: "json, name=package" })
   package?: BrandedFoodObjectItemsPackage;
 
-  @Metadata({ data: "json, name=packaging_photos" })
+  @SpeakeasyMetadata({ data: "json, name=packaging_photos" })
   packagingPhotos?: BrandedFoodObjectItemsPackagingPhotos;
 
-  @Metadata({ data: "json, name=palm_oil_ingredients" })
+  @SpeakeasyMetadata({ data: "json, name=palm_oil_ingredients" })
   palmOilIngredients?: string[];
 
-  @Metadata({ data: "json, name=serving" })
+  @SpeakeasyMetadata({ data: "json, name=serving" })
   serving?: BrandedFoodObjectItemsServing;
 
-  @Metadata({ data: "json, name=traces" })
+  @SpeakeasyMetadata({ data: "json, name=traces" })
   traces?: string[];
 
-  @Metadata({ data: "json, name=vitamins" })
+  @SpeakeasyMetadata({ data: "json, name=vitamins" })
   vitamins?: string[];
 }
 
@@ -324,6 +324,6 @@ export class BrandedFoodObjectItems extends SpeakeasyBase {
  * Please read the description of each field in this API response object example. By default, the value of each field is **null**. This indicates an unknown state or that no data exists.
 **/
 export class BrandedFoodObject extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.BrandedFoodObjectItems })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: BrandedFoodObjectItems })
   items?: BrandedFoodObjectItems[];
 }

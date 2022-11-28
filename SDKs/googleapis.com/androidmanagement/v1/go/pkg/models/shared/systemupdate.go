@@ -9,6 +9,8 @@ const (
 	SystemUpdateTypeEnumPostpone                    SystemUpdateTypeEnum = "POSTPONE"
 )
 
+// SystemUpdate
+// Configuration for managing system updates
 type SystemUpdate struct {
 	EndMinutes    *int32                `json:"endMinutes,omitempty"`
 	FreezePeriods []FreezePeriod        `json:"freezePeriods,omitempty"`

@@ -26,6 +26,8 @@ const (
 	RegisterParametersSupportedPrivacyEnumRedactedContactData       RegisterParametersSupportedPrivacyEnum = "REDACTED_CONTACT_DATA"
 )
 
+// RegisterParameters
+// Parameters required to register a new domain.
 type RegisterParameters struct {
 	Availability     *RegisterParametersAvailabilityEnum      `json:"availability,omitempty"`
 	DomainName       *string                                  `json:"domainName,omitempty"`

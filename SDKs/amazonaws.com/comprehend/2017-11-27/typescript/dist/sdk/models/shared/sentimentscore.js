@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // SentimentScore
 /**
  * Describes the level of confidence that Amazon Comprehend has in the accuracy of its detection of sentiments.
@@ -33,19 +33,19 @@ var SentimentScore = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Mixed" }),
+        SpeakeasyMetadata({ data: "json, name=Mixed" }),
         __metadata("design:type", Number)
     ], SentimentScore.prototype, "mixed", void 0);
     __decorate([
-        Metadata({ data: "json, name=Negative" }),
+        SpeakeasyMetadata({ data: "json, name=Negative" }),
         __metadata("design:type", Number)
     ], SentimentScore.prototype, "negative", void 0);
     __decorate([
-        Metadata({ data: "json, name=Neutral" }),
+        SpeakeasyMetadata({ data: "json, name=Neutral" }),
         __metadata("design:type", Number)
     ], SentimentScore.prototype, "neutral", void 0);
     __decorate([
-        Metadata({ data: "json, name=Positive" }),
+        SpeakeasyMetadata({ data: "json, name=Positive" }),
         __metadata("design:type", Number)
     ], SentimentScore.prototype, "positive", void 0);
     return SentimentScore;

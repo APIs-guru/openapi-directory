@@ -1,6 +1,7 @@
 
 
+
 export enum PayRunStatusEnum {
-    Draft = "DRAFT"
-,    Posted = "POSTED"
+    Draft = "DRAFT",
+    Posted = "POSTED"
 }

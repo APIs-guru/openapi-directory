@@ -31,6 +31,8 @@ const (
 	OfficeRolesEnumOtherRole              OfficeRolesEnum = "otherRole"
 )
 
+// Office
+// Information about an Office held by one or more Officials.
 type Office struct {
 	DivisionID      *string            `json:"divisionId,omitempty"`
 	Levels          []OfficeLevelsEnum `json:"levels,omitempty"`

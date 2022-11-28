@@ -1,5 +1,7 @@
 package shared
 
+// Execution
+// Execution
 type Execution struct {
 	DollarID    string  `json:"$id"`
 	DateCreated int32   `json:"dateCreated"`

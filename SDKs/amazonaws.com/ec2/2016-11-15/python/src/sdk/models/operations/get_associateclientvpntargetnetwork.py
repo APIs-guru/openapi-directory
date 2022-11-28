@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetAssociateClientVpnTargetNetworkActionEnum(str, Enum):
     ASSOCIATE_CLIENT_VPN_TARGET_NETWORK = "AssociateClientVpnTargetNetwork"
@@ -10,12 +14,12 @@ class GetAssociateClientVpnTargetNetworkVersionEnum(str, Enum):
 
 @dataclass
 class GetAssociateClientVpnTargetNetworkQueryParams:
-    action: GetAssociateClientVpnTargetNetworkActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetAssociateClientVpnTargetNetworkActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    client_vpn_endpoint_id: str = field(metadata={'query_param': { 'field_name': 'ClientVpnEndpointId', 'style': 'form', 'explode': True }})
+    subnet_id: str = field(metadata={'query_param': { 'field_name': 'SubnetId', 'style': 'form', 'explode': True }})
+    version: GetAssociateClientVpnTargetNetworkVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     client_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'ClientToken', 'style': 'form', 'explode': True }})
-    client_vpn_endpoint_id: str = field(default=None, metadata={'query_param': { 'field_name': 'ClientVpnEndpointId', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    subnet_id: str = field(default=None, metadata={'query_param': { 'field_name': 'SubnetId', 'style': 'form', 'explode': True }})
-    version: GetAssociateClientVpnTargetNetworkVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -31,13 +35,13 @@ class GetAssociateClientVpnTargetNetworkHeaders:
 
 @dataclass
 class GetAssociateClientVpnTargetNetworkRequest:
-    query_params: GetAssociateClientVpnTargetNetworkQueryParams = field(default=None)
-    headers: GetAssociateClientVpnTargetNetworkHeaders = field(default=None)
+    headers: GetAssociateClientVpnTargetNetworkHeaders = field()
+    query_params: GetAssociateClientVpnTargetNetworkQueryParams = field()
     
 
 @dataclass
 class GetAssociateClientVpnTargetNetworkResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NewDeviceMetadataType } from "./newdevicemetadatatype";
+
 
 
 // AuthenticationResultType
@@ -7,21 +8,21 @@ import { NewDeviceMetadataType } from "./newdevicemetadatatype";
  * The authentication result.
 **/
 export class AuthenticationResultType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccessToken" })
+  @SpeakeasyMetadata({ data: "json, name=AccessToken" })
   accessToken?: string;
 
-  @Metadata({ data: "json, name=ExpiresIn" })
+  @SpeakeasyMetadata({ data: "json, name=ExpiresIn" })
   expiresIn?: number;
 
-  @Metadata({ data: "json, name=IdToken" })
+  @SpeakeasyMetadata({ data: "json, name=IdToken" })
   idToken?: string;
 
-  @Metadata({ data: "json, name=NewDeviceMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=NewDeviceMetadata" })
   newDeviceMetadata?: NewDeviceMetadataType;
 
-  @Metadata({ data: "json, name=RefreshToken" })
+  @SpeakeasyMetadata({ data: "json, name=RefreshToken" })
   refreshToken?: string;
 
-  @Metadata({ data: "json, name=TokenType" })
+  @SpeakeasyMetadata({ data: "json, name=TokenType" })
   tokenType?: string;
 }

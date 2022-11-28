@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetLikesPathParams:
-    user_id: float = field(default=None, metadata={'path_param': { 'field_name': 'user_id', 'style': 'simple', 'explode': False }})
+    user_id: float = field(metadata={'path_param': { 'field_name': 'user_id', 'style': 'simple', 'explode': False }})
     
 class GetLikesFilterEnum(str, Enum):
     EMBEDDABLE = "embeddable"
@@ -31,13 +35,13 @@ class GetLikesQueryParams:
 
 @dataclass
 class GetLikesRequest:
-    path_params: GetLikesPathParams = field(default=None)
-    query_params: GetLikesQueryParams = field(default=None)
+    path_params: GetLikesPathParams = field()
+    query_params: GetLikesQueryParams = field()
     
 
 @dataclass
 class GetLikesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     videos: Optional[List[shared.Video]] = field(default=None)
     

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 
 class DeleteGatewayResponseResponseTypeEnum(str, Enum):
     DEFAULT_4_XX = "DEFAULT_4XX"
@@ -27,8 +31,8 @@ class DeleteGatewayResponseResponseTypeEnum(str, Enum):
 
 @dataclass
 class DeleteGatewayResponsePathParams:
-    response_type: DeleteGatewayResponseResponseTypeEnum = field(default=None, metadata={'path_param': { 'field_name': 'response_type', 'style': 'simple', 'explode': False }})
-    restapi_id: str = field(default=None, metadata={'path_param': { 'field_name': 'restapi_id', 'style': 'simple', 'explode': False }})
+    response_type: DeleteGatewayResponseResponseTypeEnum = field(metadata={'path_param': { 'field_name': 'response_type', 'style': 'simple', 'explode': False }})
+    restapi_id: str = field(metadata={'path_param': { 'field_name': 'restapi_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -44,17 +48,17 @@ class DeleteGatewayResponseHeaders:
 
 @dataclass
 class DeleteGatewayResponseRequest:
-    path_params: DeleteGatewayResponsePathParams = field(default=None)
-    headers: DeleteGatewayResponseHeaders = field(default=None)
+    headers: DeleteGatewayResponseHeaders = field()
+    path_params: DeleteGatewayResponsePathParams = field()
     
 
 @dataclass
 class DeleteGatewayResponseResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

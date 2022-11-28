@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class MlProjectsLocationsStudiesTrialsAddMeasurementPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class MlProjectsLocationsStudiesTrialsAddMeasurementQueryParams:
 
 @dataclass
 class MlProjectsLocationsStudiesTrialsAddMeasurementSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class MlProjectsLocationsStudiesTrialsAddMeasurementRequest:
-    path_params: MlProjectsLocationsStudiesTrialsAddMeasurementPathParams = field(default=None)
-    query_params: MlProjectsLocationsStudiesTrialsAddMeasurementQueryParams = field(default=None)
+    path_params: MlProjectsLocationsStudiesTrialsAddMeasurementPathParams = field()
+    query_params: MlProjectsLocationsStudiesTrialsAddMeasurementQueryParams = field()
+    security: MlProjectsLocationsStudiesTrialsAddMeasurementSecurity = field()
     request: Optional[shared.GoogleCloudMlV1AddTrialMeasurementRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: MlProjectsLocationsStudiesTrialsAddMeasurementSecurity = field(default=None)
     
 
 @dataclass
 class MlProjectsLocationsStudiesTrialsAddMeasurementResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_ml_v1_trial: Optional[shared.GoogleCloudMlV1Trial] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TflApiPresentationEntitiesRoadCorridor extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bounds" })
+  @SpeakeasyMetadata({ data: "json, name=bounds" })
   bounds?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=envelope" })
+  @SpeakeasyMetadata({ data: "json, name=envelope" })
   envelope?: string;
 
-  @Metadata({ data: "json, name=group" })
+  @SpeakeasyMetadata({ data: "json, name=group" })
   group?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=statusAggregationEndDate" })
+  @SpeakeasyMetadata({ data: "json, name=statusAggregationEndDate" })
   statusAggregationEndDate?: Date;
 
-  @Metadata({ data: "json, name=statusAggregationStartDate" })
+  @SpeakeasyMetadata({ data: "json, name=statusAggregationStartDate" })
   statusAggregationStartDate?: Date;
 
-  @Metadata({ data: "json, name=statusSeverity" })
+  @SpeakeasyMetadata({ data: "json, name=statusSeverity" })
   statusSeverity?: string;
 
-  @Metadata({ data: "json, name=statusSeverityDescription" })
+  @SpeakeasyMetadata({ data: "json, name=statusSeverityDescription" })
   statusSeverityDescription?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }

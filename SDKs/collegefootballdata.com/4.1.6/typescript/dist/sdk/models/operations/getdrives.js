@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetDrivesQueryParams = /** @class */ (function (_super) {
     __extends(GetDrivesQueryParams, _super);
@@ -30,39 +30,39 @@ var GetDrivesQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=conference" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=conference" }),
         __metadata("design:type", String)
     ], GetDrivesQueryParams.prototype, "conference", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=defense" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=defense" }),
         __metadata("design:type", String)
     ], GetDrivesQueryParams.prototype, "defense", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=defenseConference" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=defenseConference" }),
         __metadata("design:type", String)
     ], GetDrivesQueryParams.prototype, "defenseConference", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=offense" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offense" }),
         __metadata("design:type", String)
     ], GetDrivesQueryParams.prototype, "offense", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=offenseConference" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offenseConference" }),
         __metadata("design:type", String)
     ], GetDrivesQueryParams.prototype, "offenseConference", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=seasonType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=seasonType" }),
         __metadata("design:type", String)
     ], GetDrivesQueryParams.prototype, "seasonType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=team" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=team" }),
         __metadata("design:type", String)
     ], GetDrivesQueryParams.prototype, "team", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=week" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=week" }),
         __metadata("design:type", Number)
     ], GetDrivesQueryParams.prototype, "week", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=year" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=year" }),
         __metadata("design:type", Number)
     ], GetDrivesQueryParams.prototype, "year", void 0);
     return GetDrivesQueryParams;
@@ -74,7 +74,7 @@ var GetDrivesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetDrivesQueryParams)
     ], GetDrivesRequest.prototype, "queryParams", void 0);
     return GetDrivesRequest;
@@ -86,15 +86,15 @@ var GetDrivesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetDrivesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata({ elemType: shared.Drive }),
+        SpeakeasyMetadata({ elemType: shared.Drive }),
         __metadata("design:type", Array)
     ], GetDrivesResponse.prototype, "drives", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetDrivesResponse.prototype, "statusCode", void 0);
     return GetDrivesResponse;

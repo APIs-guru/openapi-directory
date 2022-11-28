@@ -1,52 +1,53 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ApiCoreDtoTopsTopItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=entityData" })
+  @SpeakeasyMetadata({ data: "json, name=entityData" })
   entityData?: Map<string, any>;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=lastHitDate" })
+  @SpeakeasyMetadata({ data: "json, name=lastHitDate" })
   lastHitDate?: string;
 
-  @Metadata({ data: "json, name=spiderClicks" })
+  @SpeakeasyMetadata({ data: "json, name=spiderClicks" })
   spiderClicks?: number;
 
-  @Metadata({ data: "json, name=spiderHits" })
+  @SpeakeasyMetadata({ data: "json, name=spiderHits" })
   spiderHits?: number;
 
-  @Metadata({ data: "json, name=spiderViews" })
+  @SpeakeasyMetadata({ data: "json, name=spiderViews" })
   spiderViews?: number;
 
-  @Metadata({ data: "json, name=totalClicks" })
+  @SpeakeasyMetadata({ data: "json, name=totalClicks" })
   totalClicks?: number;
 
-  @Metadata({ data: "json, name=totalCommissionsCost" })
+  @SpeakeasyMetadata({ data: "json, name=totalCommissionsCost" })
   totalCommissionsCost?: number;
 
-  @Metadata({ data: "json, name=totalConversions" })
+  @SpeakeasyMetadata({ data: "json, name=totalConversions" })
   totalConversions?: number;
 
-  @Metadata({ data: "json, name=totalConversionsCost" })
+  @SpeakeasyMetadata({ data: "json, name=totalConversionsCost" })
   totalConversionsCost?: number;
 
-  @Metadata({ data: "json, name=totalConversionsValue" })
+  @SpeakeasyMetadata({ data: "json, name=totalConversionsValue" })
   totalConversionsValue?: number;
 
-  @Metadata({ data: "json, name=totalHits" })
+  @SpeakeasyMetadata({ data: "json, name=totalHits" })
   totalHits?: number;
 
-  @Metadata({ data: "json, name=totalViews" })
+  @SpeakeasyMetadata({ data: "json, name=totalViews" })
   totalViews?: number;
 
-  @Metadata({ data: "json, name=uniqueClicks" })
+  @SpeakeasyMetadata({ data: "json, name=uniqueClicks" })
   uniqueClicks?: number;
 
-  @Metadata({ data: "json, name=uniqueHits" })
+  @SpeakeasyMetadata({ data: "json, name=uniqueHits" })
   uniqueHits?: number;
 
-  @Metadata({ data: "json, name=uniqueViews" })
+  @SpeakeasyMetadata({ data: "json, name=uniqueViews" })
   uniqueViews?: number;
 }

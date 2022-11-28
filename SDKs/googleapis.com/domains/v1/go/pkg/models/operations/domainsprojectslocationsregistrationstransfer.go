@@ -30,7 +30,7 @@ type DomainsProjectsLocationsRegistrationsTransferSecurity struct {
 type DomainsProjectsLocationsRegistrationsTransferRequest struct {
 	PathParams  DomainsProjectsLocationsRegistrationsTransferPathParams
 	QueryParams DomainsProjectsLocationsRegistrationsTransferQueryParams
-	Request     *shared.TransferDomainRequest `request:"mediaType=application/json"`
+	Request     *shared.TransferDomainRequestInput `request:"mediaType=application/json"`
 	Security    DomainsProjectsLocationsRegistrationsTransferSecurity
 }
 

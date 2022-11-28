@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ComponentPlatform } from "./componentplatform";
 import { CloudComponentStatus } from "./cloudcomponentstatus";
 export declare class DescribeComponentResponse extends SpeakeasyBase {

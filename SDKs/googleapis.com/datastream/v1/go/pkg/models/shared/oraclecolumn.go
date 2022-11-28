@@ -1,5 +1,7 @@
 package shared
 
+// OracleColumn
+// Oracle Column.
 type OracleColumn struct {
 	Column          *string `json:"column,omitempty"`
 	DataType        *string `json:"dataType,omitempty"`

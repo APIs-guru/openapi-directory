@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LandlordProfitLossRowModel } from "./landlordprofitlossrowmodel";
+
 
 
 // LandlordProfitLossSectionModel
@@ -8,6 +8,6 @@ import { LandlordProfitLossRowModel } from "./landlordprofitlossrowmodel";
  * Class for a group of entries.
 **/
 export class LandlordProfitLossSectionModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Rows", elemType: shared.LandlordProfitLossRowModel })
+  @SpeakeasyMetadata({ data: "json, name=Rows", elemType: LandlordProfitLossRowModel })
   rows?: LandlordProfitLossRowModel[];
 }

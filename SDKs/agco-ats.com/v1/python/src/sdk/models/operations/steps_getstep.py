@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class StepsGetStepPathParams:
-    step_id: int = field(default=None, metadata={'path_param': { 'field_name': 'stepID', 'style': 'simple', 'explode': False }})
+    step_id: int = field(metadata={'path_param': { 'field_name': 'stepID', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,15 +15,15 @@ class StepsGetStepQueryParams:
 
 @dataclass
 class StepsGetStepRequest:
-    path_params: StepsGetStepPathParams = field(default=None)
-    query_params: StepsGetStepQueryParams = field(default=None)
+    path_params: StepsGetStepPathParams = field()
+    query_params: StepsGetStepQueryParams = field()
     
 
 @dataclass
 class StepsGetStepResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_models_api_error: Optional[shared.APIModelsAPIError] = field(default=None)
-    body: bytes = field(default=None)
+    body: Optional[bytes] = field(default=None)
     build_system_shared_dto_step: Optional[shared.BuildSystemSharedDtoStep] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

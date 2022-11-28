@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TaxEditFields extends SpeakeasyBase {
-  @Metadata({ data: "json, name=category_id" })
+  @SpeakeasyMetadata({ data: "json, name=category_id" })
   categoryId?: number;
 
-  @Metadata({ data: "json, name=country" })
+  @SpeakeasyMetadata({ data: "json, name=country" })
   country?: string;
 
-  @Metadata({ data: "json, name=fixed" })
+  @SpeakeasyMetadata({ data: "json, name=fixed" })
   fixed?: boolean;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=region" })
+  @SpeakeasyMetadata({ data: "json, name=region" })
   region?: string;
 
-  @Metadata({ data: "json, name=shipping" })
+  @SpeakeasyMetadata({ data: "json, name=shipping" })
   shipping?: boolean;
 
-  @Metadata({ data: "json, name=tax" })
+  @SpeakeasyMetadata({ data: "json, name=tax" })
   tax?: number;
 }

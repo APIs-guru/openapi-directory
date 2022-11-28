@@ -1,5 +1,7 @@
 package shared
 
+// Task
+// Task represents a single run of a container to completion.
 type Task struct {
 	APIVersion *string     `json:"apiVersion,omitempty"`
 	Kind       *string     `json:"kind,omitempty"`

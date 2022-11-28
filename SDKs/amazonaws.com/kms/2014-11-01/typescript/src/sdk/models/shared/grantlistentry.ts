@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GrantConstraints } from "./grantconstraints";
 import { GrantOperationEnum } from "./grantoperationenum";
+
 
 
 // GrantListEntry
@@ -8,30 +9,30 @@ import { GrantOperationEnum } from "./grantoperationenum";
  * Contains information about a grant.
 **/
 export class GrantListEntry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Constraints" })
+  @SpeakeasyMetadata({ data: "json, name=Constraints" })
   constraints?: GrantConstraints;
 
-  @Metadata({ data: "json, name=CreationDate" })
+  @SpeakeasyMetadata({ data: "json, name=CreationDate" })
   creationDate?: Date;
 
-  @Metadata({ data: "json, name=GrantId" })
+  @SpeakeasyMetadata({ data: "json, name=GrantId" })
   grantId?: string;
 
-  @Metadata({ data: "json, name=GranteePrincipal" })
+  @SpeakeasyMetadata({ data: "json, name=GranteePrincipal" })
   granteePrincipal?: string;
 
-  @Metadata({ data: "json, name=IssuingAccount" })
+  @SpeakeasyMetadata({ data: "json, name=IssuingAccount" })
   issuingAccount?: string;
 
-  @Metadata({ data: "json, name=KeyId" })
+  @SpeakeasyMetadata({ data: "json, name=KeyId" })
   keyId?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Operations" })
+  @SpeakeasyMetadata({ data: "json, name=Operations" })
   operations?: GrantOperationEnum[];
 
-  @Metadata({ data: "json, name=RetiringPrincipal" })
+  @SpeakeasyMetadata({ data: "json, name=RetiringPrincipal" })
   retiringPrincipal?: string;
 }

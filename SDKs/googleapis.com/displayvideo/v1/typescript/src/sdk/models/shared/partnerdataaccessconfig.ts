@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SdfConfig } from "./sdfconfig";
+
 
 
 // PartnerDataAccessConfig
@@ -7,6 +8,6 @@ import { SdfConfig } from "./sdfconfig";
  * Settings that control how partner related data may be accessed.
 **/
 export class PartnerDataAccessConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=sdfConfig" })
+  @SpeakeasyMetadata({ data: "json, name=sdfConfig" })
   sdfConfig?: SdfConfig;
 }

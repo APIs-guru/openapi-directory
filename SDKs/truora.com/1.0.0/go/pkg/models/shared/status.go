@@ -19,6 +19,8 @@ const (
 	StatusDataSetEnumTaxesAndFinances          StatusDataSetEnum = "taxes_and_finances"
 )
 
+// Status
+// Represents the status of databases used to generate background checks
 type Status struct {
 	DataSet       *StatusDataSetEnum `json:"data_set,omitempty"`
 	DatabaseID    *string            `json:"database_id,omitempty"`

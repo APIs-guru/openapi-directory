@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CostMatrixDataInfo
@@ -6,10 +7,10 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Additional information for your request
 **/
 export class CostMatrixDataInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=copyrights" })
+  @SpeakeasyMetadata({ data: "json, name=copyrights" })
   copyrights?: string[];
 
-  @Metadata({ data: "json, name=took" })
+  @SpeakeasyMetadata({ data: "json, name=took" })
   took?: number;
 }
 
@@ -19,32 +20,32 @@ export class CostMatrixDataInfo extends SpeakeasyBase {
  * JSON data of matrix response
 **/
 export class CostMatrixData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=distances" })
+  @SpeakeasyMetadata({ data: "json, name=distances" })
   distances?: number[][];
 
-  @Metadata({ data: "json, name=info" })
+  @SpeakeasyMetadata({ data: "json, name=info" })
   info?: CostMatrixDataInfo;
 
-  @Metadata({ data: "json, name=times" })
+  @SpeakeasyMetadata({ data: "json, name=times" })
   times?: number[][];
 }
 
 export enum CostMatrixTypeEnum {
-    Default = "default"
-,    Google = "google"
+    Default = "default",
+    Google = "google"
 }
 
 
 export class CostMatrix extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: CostMatrixData;
 
-  @Metadata({ data: "json, name=location_ids" })
+  @SpeakeasyMetadata({ data: "json, name=location_ids" })
   locationIds?: string[];
 
-  @Metadata({ data: "json, name=profile" })
+  @SpeakeasyMetadata({ data: "json, name=profile" })
   profile?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: CostMatrixTypeEnum;
 }

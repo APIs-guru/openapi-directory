@@ -72,15 +72,15 @@ type CircuitsCircuitsListQueryParams struct {
 	TypeIDN        *string `queryParam:"style=form,explode=true,name=type_id__n"`
 }
 
-type CircuitsCircuitsListRequest struct {
-	QueryParams CircuitsCircuitsListQueryParams
-}
-
 type CircuitsCircuitsList200ApplicationJSON struct {
 	Count    int64            `json:"count"`
 	Next     *string          `json:"next,omitempty"`
 	Previous *string          `json:"previous,omitempty"`
 	Results  []shared.Circuit `json:"results"`
+}
+
+type CircuitsCircuitsListRequest struct {
+	QueryParams CircuitsCircuitsListQueryParams
 }
 
 type CircuitsCircuitsListResponse struct {

@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import managedzoneservicedirectoryconfignamespace
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ManagedZoneServiceDirectoryConfig:
-    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
-    namespace: Optional[managedzoneservicedirectoryconfignamespace.ManagedZoneServiceDirectoryConfigNamespace] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'namespace' }})
+    r"""ManagedZoneServiceDirectoryConfig
+    Contains information about Service Directory-backed zones.
+    """
+    
+    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
+    namespace: Optional[ManagedZoneServiceDirectoryConfigNamespace] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('namespace') }})
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AggregationInfo } from "./aggregationinfo";
 import { PricingExpression } from "./pricingexpression";
 // PricingInfo
@@ -35,23 +35,23 @@ var PricingInfo = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=aggregationInfo" }),
+        SpeakeasyMetadata({ data: "json, name=aggregationInfo" }),
         __metadata("design:type", AggregationInfo)
     ], PricingInfo.prototype, "aggregationInfo", void 0);
     __decorate([
-        Metadata({ data: "json, name=currencyConversionRate" }),
+        SpeakeasyMetadata({ data: "json, name=currencyConversionRate" }),
         __metadata("design:type", Number)
     ], PricingInfo.prototype, "currencyConversionRate", void 0);
     __decorate([
-        Metadata({ data: "json, name=effectiveTime" }),
+        SpeakeasyMetadata({ data: "json, name=effectiveTime" }),
         __metadata("design:type", String)
     ], PricingInfo.prototype, "effectiveTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=pricingExpression" }),
+        SpeakeasyMetadata({ data: "json, name=pricingExpression" }),
         __metadata("design:type", PricingExpression)
     ], PricingInfo.prototype, "pricingExpression", void 0);
     __decorate([
-        Metadata({ data: "json, name=summary" }),
+        SpeakeasyMetadata({ data: "json, name=summary" }),
         __metadata("design:type", String)
     ], PricingInfo.prototype, "summary", void 0);
     return PricingInfo;

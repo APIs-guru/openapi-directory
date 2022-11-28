@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TrialMinutes } from "./trialminutes";
+
 
 
 // AccountSettings
@@ -7,27 +8,27 @@ import { TrialMinutes } from "./trialminutes";
  * A container for account-level settings in AWS Device Farm.
 **/
 export class AccountSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=awsAccountNumber" })
+  @SpeakeasyMetadata({ data: "json, name=awsAccountNumber" })
   awsAccountNumber?: string;
 
-  @Metadata({ data: "json, name=defaultJobTimeoutMinutes" })
+  @SpeakeasyMetadata({ data: "json, name=defaultJobTimeoutMinutes" })
   defaultJobTimeoutMinutes?: number;
 
-  @Metadata({ data: "json, name=maxJobTimeoutMinutes" })
+  @SpeakeasyMetadata({ data: "json, name=maxJobTimeoutMinutes" })
   maxJobTimeoutMinutes?: number;
 
-  @Metadata({ data: "json, name=maxSlots" })
+  @SpeakeasyMetadata({ data: "json, name=maxSlots" })
   maxSlots?: Map<string, number>;
 
-  @Metadata({ data: "json, name=skipAppResign" })
+  @SpeakeasyMetadata({ data: "json, name=skipAppResign" })
   skipAppResign?: boolean;
 
-  @Metadata({ data: "json, name=trialMinutes" })
+  @SpeakeasyMetadata({ data: "json, name=trialMinutes" })
   trialMinutes?: TrialMinutes;
 
-  @Metadata({ data: "json, name=unmeteredDevices" })
+  @SpeakeasyMetadata({ data: "json, name=unmeteredDevices" })
   unmeteredDevices?: Map<string, number>;
 
-  @Metadata({ data: "json, name=unmeteredRemoteAccessDevices" })
+  @SpeakeasyMetadata({ data: "json, name=unmeteredRemoteAccessDevices" })
   unmeteredRemoteAccessDevices?: Map<string, number>;
 }

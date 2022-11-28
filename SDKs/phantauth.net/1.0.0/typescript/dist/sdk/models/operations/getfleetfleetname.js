@@ -22,82 +22,82 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetFleetFleetnamePathParams = /** @class */ (function (_super) {
     __extends(GetFleetFleetnamePathParams, _super);
     function GetFleetFleetnamePathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=fleetname" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=fleetname" }),
         __metadata("design:type", String)
     ], GetFleetFleetnamePathParams.prototype, "fleetname", void 0);
     return GetFleetFleetnamePathParams;
 }(SpeakeasyBase));
 export { GetFleetFleetnamePathParams };
-var GetFleetFleetnameRequest = /** @class */ (function (_super) {
-    __extends(GetFleetFleetnameRequest, _super);
-    function GetFleetFleetnameRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata(),
-        __metadata("design:type", GetFleetFleetnamePathParams)
-    ], GetFleetFleetnameRequest.prototype, "pathParams", void 0);
-    return GetFleetFleetnameRequest;
-}(SpeakeasyBase));
-export { GetFleetFleetnameRequest };
 var GetFleetFleetname200ApplicationJson = /** @class */ (function (_super) {
     __extends(GetFleetFleetname200ApplicationJson, _super);
     function GetFleetFleetname200ApplicationJson() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=@id" }),
+        SpeakeasyMetadata({ data: "json, name=@id" }),
         __metadata("design:type", String)
     ], GetFleetFleetname200ApplicationJson.prototype, "atId", void 0);
     __decorate([
-        Metadata({ data: "json, name=logo" }),
+        SpeakeasyMetadata({ data: "json, name=logo" }),
         __metadata("design:type", String)
     ], GetFleetFleetname200ApplicationJson.prototype, "logo", void 0);
     __decorate([
-        Metadata({ data: "json, name=logo_email" }),
+        SpeakeasyMetadata({ data: "json, name=logo_email" }),
         __metadata("design:type", String)
     ], GetFleetFleetname200ApplicationJson.prototype, "logoEmail", void 0);
     __decorate([
-        Metadata({ data: "json, name=members" }),
+        SpeakeasyMetadata({ data: "json, name=members" }),
         __metadata("design:type", Array)
     ], GetFleetFleetname200ApplicationJson.prototype, "members", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], GetFleetFleetname200ApplicationJson.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=profile" }),
+        SpeakeasyMetadata({ data: "json, name=profile" }),
         __metadata("design:type", String)
     ], GetFleetFleetname200ApplicationJson.prototype, "profile", void 0);
     __decorate([
-        Metadata({ data: "json, name=sub" }),
+        SpeakeasyMetadata({ data: "json, name=sub" }),
         __metadata("design:type", String)
     ], GetFleetFleetname200ApplicationJson.prototype, "sub", void 0);
     return GetFleetFleetname200ApplicationJson;
 }(SpeakeasyBase));
 export { GetFleetFleetname200ApplicationJson };
+var GetFleetFleetnameRequest = /** @class */ (function (_super) {
+    __extends(GetFleetFleetnameRequest, _super);
+    function GetFleetFleetnameRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", GetFleetFleetnamePathParams)
+    ], GetFleetFleetnameRequest.prototype, "pathParams", void 0);
+    return GetFleetFleetnameRequest;
+}(SpeakeasyBase));
+export { GetFleetFleetnameRequest };
 var GetFleetFleetnameResponse = /** @class */ (function (_super) {
     __extends(GetFleetFleetnameResponse, _super);
     function GetFleetFleetnameResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetFleetFleetnameResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetFleetFleetname200ApplicationJson)
     ], GetFleetFleetnameResponse.prototype, "getFleetFleetname200ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetFleetFleetnameResponse.prototype, "statusCode", void 0);
     return GetFleetFleetnameResponse;

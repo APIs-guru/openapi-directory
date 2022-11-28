@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PatchComplianceLevelEnum } from "./patchcompliancelevelenum";
 import { PatchFilterGroup } from "./patchfiltergroup";
+
 
 
 // PatchRule
@@ -8,18 +9,18 @@ import { PatchFilterGroup } from "./patchfiltergroup";
  * Defines an approval rule for a patch baseline.
 **/
 export class PatchRule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApproveAfterDays" })
+  @SpeakeasyMetadata({ data: "json, name=ApproveAfterDays" })
   approveAfterDays?: number;
 
-  @Metadata({ data: "json, name=ApproveUntilDate" })
+  @SpeakeasyMetadata({ data: "json, name=ApproveUntilDate" })
   approveUntilDate?: string;
 
-  @Metadata({ data: "json, name=ComplianceLevel" })
+  @SpeakeasyMetadata({ data: "json, name=ComplianceLevel" })
   complianceLevel?: PatchComplianceLevelEnum;
 
-  @Metadata({ data: "json, name=EnableNonSecurity" })
+  @SpeakeasyMetadata({ data: "json, name=EnableNonSecurity" })
   enableNonSecurity?: boolean;
 
-  @Metadata({ data: "json, name=PatchFilterGroup" })
+  @SpeakeasyMetadata({ data: "json, name=PatchFilterGroup" })
   patchFilterGroup: PatchFilterGroup;
 }

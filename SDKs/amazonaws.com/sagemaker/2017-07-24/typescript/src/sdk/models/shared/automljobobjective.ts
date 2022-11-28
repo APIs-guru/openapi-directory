@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AutoMlMetricEnumEnum } from "./automlmetricenumenum";
+
 
 
 // AutoMlJobObjective
@@ -7,6 +8,6 @@ import { AutoMlMetricEnumEnum } from "./automlmetricenumenum";
  * Specifies a metric to minimize or maximize as the objective of a job.
 **/
 export class AutoMlJobObjective extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MetricName" })
+  @SpeakeasyMetadata({ data: "json, name=MetricName" })
   metricName: AutoMlMetricEnumEnum;
 }

@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { AsanaNamedResource } from "./asananamedresource";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AsanaNamedResource } from "./asananamedresource";
 import { UserCompact } from "./usercompact";
+
 
 
 // EventResponseChange
@@ -9,19 +9,19 @@ import { UserCompact } from "./usercompact";
  * Information about the type of change that has occurred. This field is only present when the value of the property `action`, describing the action taken on the **resource**, is `changed`.
 **/
 export class EventResponseChange extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action?: string;
 
-  @Metadata({ data: "json, name=added_value" })
+  @SpeakeasyMetadata({ data: "json, name=added_value" })
   addedValue?: any;
 
-  @Metadata({ data: "json, name=field" })
+  @SpeakeasyMetadata({ data: "json, name=field" })
   field?: string;
 
-  @Metadata({ data: "json, name=new_value" })
+  @SpeakeasyMetadata({ data: "json, name=new_value" })
   newValue?: any;
 
-  @Metadata({ data: "json, name=removed_value" })
+  @SpeakeasyMetadata({ data: "json, name=removed_value" })
   removedValue?: any;
 }
 
@@ -69,24 +69,24 @@ export class EventResponseChange extends SpeakeasyBase {
  * an object with the user's `id` and `type`.
 **/
 export class EventResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action?: string;
 
-  @Metadata({ data: "json, name=change" })
+  @SpeakeasyMetadata({ data: "json, name=change" })
   change?: EventResponseChange;
 
-  @Metadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata({ data: "json, name=created_at" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=parent" })
+  @SpeakeasyMetadata({ data: "json, name=parent" })
   parent?: AsanaNamedResource;
 
-  @Metadata({ data: "json, name=resource" })
+  @SpeakeasyMetadata({ data: "json, name=resource" })
   resource?: AsanaNamedResource;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 
-  @Metadata({ data: "json, name=user" })
+  @SpeakeasyMetadata({ data: "json, name=user" })
   user?: UserCompact;
 }

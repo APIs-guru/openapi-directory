@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleFactcheckingFactchecktoolsV1alpha1Publisher } from "./googlefactcheckingfactchecktoolsv1alpha1publisher";
+
 
 
 // GoogleFactcheckingFactchecktoolsV1alpha1ClaimReview
@@ -7,21 +8,21 @@ import { GoogleFactcheckingFactchecktoolsV1alpha1Publisher } from "./googlefactc
  * Information about a claim review.
 **/
 export class GoogleFactcheckingFactchecktoolsV1alpha1ClaimReview extends SpeakeasyBase {
-  @Metadata({ data: "json, name=languageCode" })
+  @SpeakeasyMetadata({ data: "json, name=languageCode" })
   languageCode?: string;
 
-  @Metadata({ data: "json, name=publisher" })
+  @SpeakeasyMetadata({ data: "json, name=publisher" })
   publisher?: GoogleFactcheckingFactchecktoolsV1alpha1Publisher;
 
-  @Metadata({ data: "json, name=reviewDate" })
+  @SpeakeasyMetadata({ data: "json, name=reviewDate" })
   reviewDate?: string;
 
-  @Metadata({ data: "json, name=textualRating" })
+  @SpeakeasyMetadata({ data: "json, name=textualRating" })
   textualRating?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }

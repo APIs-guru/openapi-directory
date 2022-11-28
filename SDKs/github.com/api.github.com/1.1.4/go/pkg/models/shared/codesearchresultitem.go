@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// CodeSearchResultItem
+// Code Search Result Item
 type CodeSearchResultItem struct {
 	FileSize       *int64                    `json:"file_size,omitempty"`
 	GitURL         string                    `json:"git_url"`

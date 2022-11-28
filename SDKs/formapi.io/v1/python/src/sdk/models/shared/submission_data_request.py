@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class SubmissionDataRequestAuthSecondFactorTypeEnum(str, Enum):
     NONE = "none"
@@ -27,24 +29,24 @@ class SubmissionDataRequestStateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class SubmissionDataRequest:
-    auth_phone_number_hash: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'auth_phone_number_hash' }})
-    auth_provider: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'auth_provider' }})
-    auth_second_factor_type: Optional[SubmissionDataRequestAuthSecondFactorTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'auth_second_factor_type' }})
-    auth_session_id_hash: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'auth_session_id_hash' }})
-    auth_session_started_at: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'auth_session_started_at' }})
-    auth_type: Optional[SubmissionDataRequestAuthTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'auth_type' }})
-    auth_user_id_hash: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'auth_user_id_hash' }})
-    auth_username_hash: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'auth_username_hash' }})
-    completed_at: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'completed_at' }})
-    email: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'email' }})
-    fields: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fields' }})
-    id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    ip_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ip_address' }})
-    metadata: dict[str, Any] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadata' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    order: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'order' }})
-    sort_order: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sort_order' }})
-    state: SubmissionDataRequestStateEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
-    user_agent: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'user_agent' }})
-    viewed_at: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'viewed_at' }})
+    email: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('email') }})
+    fields: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('fields') }})
+    id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    metadata: dict[str, Any] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('metadata') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    order: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('order') }})
+    sort_order: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('sort_order') }})
+    state: SubmissionDataRequestStateEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
+    auth_phone_number_hash: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('auth_phone_number_hash') }})
+    auth_provider: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('auth_provider') }})
+    auth_second_factor_type: Optional[SubmissionDataRequestAuthSecondFactorTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('auth_second_factor_type') }})
+    auth_session_id_hash: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('auth_session_id_hash') }})
+    auth_session_started_at: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('auth_session_started_at') }})
+    auth_type: Optional[SubmissionDataRequestAuthTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('auth_type') }})
+    auth_user_id_hash: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('auth_user_id_hash') }})
+    auth_username_hash: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('auth_username_hash') }})
+    completed_at: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('completed_at') }})
+    ip_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ip_address') }})
+    user_agent: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('user_agent') }})
+    viewed_at: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('viewed_at') }})
     

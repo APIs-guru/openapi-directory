@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Backup } from "./backup";
 
 
+
 export class DeleteBackupResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Backup" })
+  @SpeakeasyMetadata({ data: "json, name=Backup" })
   backup?: Backup;
 }

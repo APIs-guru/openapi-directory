@@ -1,20 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReturnConsumedCapacityEnum } from "./returnconsumedcapacityenum";
 import { ReturnItemCollectionMetricsEnum } from "./returnitemcollectionmetricsenum";
 import { TransactWriteItem } from "./transactwriteitem";
 
 
+
 export class TransactWriteItemsInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClientRequestToken" })
+  @SpeakeasyMetadata({ data: "json, name=ClientRequestToken" })
   clientRequestToken?: string;
 
-  @Metadata({ data: "json, name=ReturnConsumedCapacity" })
+  @SpeakeasyMetadata({ data: "json, name=ReturnConsumedCapacity" })
   returnConsumedCapacity?: ReturnConsumedCapacityEnum;
 
-  @Metadata({ data: "json, name=ReturnItemCollectionMetrics" })
+  @SpeakeasyMetadata({ data: "json, name=ReturnItemCollectionMetrics" })
   returnItemCollectionMetrics?: ReturnItemCollectionMetricsEnum;
 
-  @Metadata({ data: "json, name=TransactItems", elemType: shared.TransactWriteItem })
+  @SpeakeasyMetadata({ data: "json, name=TransactItems", elemType: TransactWriteItem })
   transactItems: TransactWriteItem[];
 }

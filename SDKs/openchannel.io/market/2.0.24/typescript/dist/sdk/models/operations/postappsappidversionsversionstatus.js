@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PostAppsAppIdVersionsVersionStatusPathParams = /** @class */ (function (_super) {
     __extends(PostAppsAppIdVersionsVersionStatusPathParams, _super);
     function PostAppsAppIdVersionsVersionStatusPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=appId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=appId" }),
         __metadata("design:type", String)
     ], PostAppsAppIdVersionsVersionStatusPathParams.prototype, "appId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=version" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=version" }),
         __metadata("design:type", Number)
     ], PostAppsAppIdVersionsVersionStatusPathParams.prototype, "version", void 0);
     return PostAppsAppIdVersionsVersionStatusPathParams;
@@ -57,19 +57,19 @@ var PostAppsAppIdVersionsVersionStatusQueryParams = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=developerId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=developerId" }),
         __metadata("design:type", String)
     ], PostAppsAppIdVersionsVersionStatusQueryParams.prototype, "developerId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=modifiedBy" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=modifiedBy" }),
         __metadata("design:type", String)
     ], PostAppsAppIdVersionsVersionStatusQueryParams.prototype, "modifiedBy", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=reason" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=reason" }),
         __metadata("design:type", String)
     ], PostAppsAppIdVersionsVersionStatusQueryParams.prototype, "reason", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=status" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=status" }),
         __metadata("design:type", String)
     ], PostAppsAppIdVersionsVersionStatusQueryParams.prototype, "status", void 0);
     return PostAppsAppIdVersionsVersionStatusQueryParams;
@@ -81,11 +81,11 @@ var PostAppsAppIdVersionsVersionStatusRequest = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostAppsAppIdVersionsVersionStatusPathParams)
     ], PostAppsAppIdVersionsVersionStatusRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostAppsAppIdVersionsVersionStatusQueryParams)
     ], PostAppsAppIdVersionsVersionStatusRequest.prototype, "queryParams", void 0);
     return PostAppsAppIdVersionsVersionStatusRequest;
@@ -97,11 +97,11 @@ var PostAppsAppIdVersionsVersionStatusResponse = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostAppsAppIdVersionsVersionStatusResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostAppsAppIdVersionsVersionStatusResponse.prototype, "statusCode", void 0);
     return PostAppsAppIdVersionsVersionStatusResponse;

@@ -1,5 +1,7 @@
 package shared
 
+// PaginatedWebhookSubscriptions
+// A paginated list of webhook subscriptions
 type PaginatedWebhookSubscriptions struct {
 	Next     *string                  `json:"next,omitempty"`
 	Page     *int64                   `json:"page,omitempty"`

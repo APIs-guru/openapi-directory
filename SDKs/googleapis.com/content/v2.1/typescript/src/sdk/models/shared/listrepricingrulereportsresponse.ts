@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RepricingRuleReport } from "./repricingrulereport";
+
 
 
 // ListRepricingRuleReportsResponse
@@ -8,9 +8,9 @@ import { RepricingRuleReport } from "./repricingrulereport";
  * Response message for the ListRepricingRuleReports method.
 **/
 export class ListRepricingRuleReportsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=repricingRuleReports", elemType: shared.RepricingRuleReport })
+  @SpeakeasyMetadata({ data: "json, name=repricingRuleReports", elemType: RepricingRuleReport })
   repricingRuleReports?: RepricingRuleReport[];
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var DeleteDatasetPathParams = /** @class */ (function (_super) {
     __extends(DeleteDatasetPathParams, _super);
@@ -30,7 +30,7 @@ var DeleteDatasetPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=datasetId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=datasetId" }),
         __metadata("design:type", String)
     ], DeleteDatasetPathParams.prototype, "datasetId", void 0);
     return DeleteDatasetPathParams;
@@ -42,7 +42,7 @@ var DeleteDatasetSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
         __metadata("design:type", shared.SchemeBearerToken)
     ], DeleteDatasetSecurity.prototype, "bearerToken", void 0);
     return DeleteDatasetSecurity;
@@ -54,11 +54,11 @@ var DeleteDatasetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteDatasetPathParams)
     ], DeleteDatasetRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteDatasetSecurity)
     ], DeleteDatasetRequest.prototype, "security", void 0);
     return DeleteDatasetRequest;
@@ -70,15 +70,15 @@ var DeleteDatasetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DeleteDatasetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.DeletionResponse)
     ], DeleteDatasetResponse.prototype, "deletionResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DeleteDatasetResponse.prototype, "statusCode", void 0);
     return DeleteDatasetResponse;

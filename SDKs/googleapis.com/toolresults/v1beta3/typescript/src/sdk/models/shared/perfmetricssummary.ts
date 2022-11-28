@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AppStartTime } from "./appstarttime";
 import { GraphicsStats } from "./graphicsstats";
 import { PerfEnvironment } from "./perfenvironment";
 
+
 export enum PerfMetricsSummaryPerfMetricsEnum {
-    PerfMetricTypeUnspecified = "perfMetricTypeUnspecified"
-,    Memory = "memory"
-,    Cpu = "cpu"
-,    Network = "network"
-,    Graphics = "graphics"
+    PerfMetricTypeUnspecified = "perfMetricTypeUnspecified",
+    Memory = "memory",
+    Cpu = "cpu",
+    Network = "network",
+    Graphics = "graphics"
 }
 
 
@@ -17,27 +18,27 @@ export enum PerfMetricsSummaryPerfMetricsEnum {
  * A summary of perf metrics collected and performance environment info
 **/
 export class PerfMetricsSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=appStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=appStartTime" })
   appStartTime?: AppStartTime;
 
-  @Metadata({ data: "json, name=executionId" })
+  @SpeakeasyMetadata({ data: "json, name=executionId" })
   executionId?: string;
 
-  @Metadata({ data: "json, name=graphicsStats" })
+  @SpeakeasyMetadata({ data: "json, name=graphicsStats" })
   graphicsStats?: GraphicsStats;
 
-  @Metadata({ data: "json, name=historyId" })
+  @SpeakeasyMetadata({ data: "json, name=historyId" })
   historyId?: string;
 
-  @Metadata({ data: "json, name=perfEnvironment" })
+  @SpeakeasyMetadata({ data: "json, name=perfEnvironment" })
   perfEnvironment?: PerfEnvironment;
 
-  @Metadata({ data: "json, name=perfMetrics" })
+  @SpeakeasyMetadata({ data: "json, name=perfMetrics" })
   perfMetrics?: PerfMetricsSummaryPerfMetricsEnum[];
 
-  @Metadata({ data: "json, name=projectId" })
+  @SpeakeasyMetadata({ data: "json, name=projectId" })
   projectId?: string;
 
-  @Metadata({ data: "json, name=stepId" })
+  @SpeakeasyMetadata({ data: "json, name=stepId" })
   stepId?: string;
 }

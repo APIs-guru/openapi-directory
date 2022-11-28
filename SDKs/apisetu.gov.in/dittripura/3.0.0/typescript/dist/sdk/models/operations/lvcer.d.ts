@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class LvcerRequestBodyCertificateParameters extends SpeakeasyBase {
     refNo: string;
@@ -16,10 +16,6 @@ export declare class LvcerRequestBody extends SpeakeasyBase {
 export declare class LvcerSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class LvcerRequest extends SpeakeasyBase {
-    request?: LvcerRequestBody;
-    security: LvcerSecurity;
 }
 export declare enum Lvcer400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -102,6 +98,10 @@ export declare enum Lvcer504ApplicationJsonErrorDescriptionEnum {
 export declare class Lvcer504ApplicationJson extends SpeakeasyBase {
     error?: Lvcer504ApplicationJsonErrorEnum;
     errorDescription?: Lvcer504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class LvcerRequest extends SpeakeasyBase {
+    request?: LvcerRequestBody;
+    security: LvcerSecurity;
 }
 export declare class LvcerResponse extends SpeakeasyBase {
     contentType: string;

@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetSettingValueBySdkkeyPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=settingKeyOrId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=settingKeyOrId" })
   settingKeyOrId: string;
 }
 
 
 export class GetSettingValueBySdkkeyHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-CONFIGCAT-SDKKEY" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-CONFIGCAT-SDKKEY" })
   xConfigcatSdkkey: string;
 }
 
 
 export class GetSettingValueBySdkkeyRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetSettingValueBySdkkeyPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetSettingValueBySdkkeyHeaders;
 }
 
 
 export class GetSettingValueBySdkkeyResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   settingValueModel?: shared.SettingValueModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   settingValueModelHaljson?: shared.SettingValueModelHaljson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

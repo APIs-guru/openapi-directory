@@ -1,5 +1,8 @@
 package shared
 
+// PlaylistObjectTracks
+// Information about the tracks of the playlist. Note, a track object may be `null`. This can happen if a track is no longer available.
+// https://developer.spotify.com/documentation/web-api/reference/#object-pagingobject - Find more info on the official Spotify Web API Reference
 type PlaylistObjectTracks struct {
 	Href     *string               `json:"href,omitempty"`
 	Items    []PlaylistTrackObject `json:"items,omitempty"`
@@ -10,6 +13,9 @@ type PlaylistObjectTracks struct {
 	Total    *int32                `json:"total,omitempty"`
 }
 
+// PlaylistObject
+
+// https://developer.spotify.com/documentation/web-api/reference/#object-playlistobject - Find more info on the official Spotify Web API Reference
 type PlaylistObject struct {
 	Collaborative *bool                 `json:"collaborative,omitempty"`
 	Description   *string               `json:"description,omitempty"`

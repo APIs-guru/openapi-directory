@@ -13,13 +13,13 @@ type GetParentGoalsForGoalQueryParams struct {
 	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
+type GetParentGoalsForGoal200ApplicationJSON struct {
+	Data []shared.GoalCompact `json:"data,omitempty"`
+}
+
 type GetParentGoalsForGoalRequest struct {
 	PathParams  GetParentGoalsForGoalPathParams
 	QueryParams GetParentGoalsForGoalQueryParams
-}
-
-type GetParentGoalsForGoal200ApplicationJSON struct {
-	Data []shared.GoalCompact `json:"data,omitempty"`
 }
 
 type GetParentGoalsForGoalResponse struct {

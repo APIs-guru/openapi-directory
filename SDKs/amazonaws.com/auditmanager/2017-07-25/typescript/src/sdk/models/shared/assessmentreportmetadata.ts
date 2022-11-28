@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AssessmentReportStatusEnum } from "./assessmentreportstatusenum";
+
 
 
 // AssessmentReportMetadata
@@ -7,27 +8,27 @@ import { AssessmentReportStatusEnum } from "./assessmentreportstatusenum";
  *  The metadata objects associated with the specified assessment report. 
 **/
 export class AssessmentReportMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assessmentId" })
+  @SpeakeasyMetadata({ data: "json, name=assessmentId" })
   assessmentId?: string;
 
-  @Metadata({ data: "json, name=assessmentName" })
+  @SpeakeasyMetadata({ data: "json, name=assessmentName" })
   assessmentName?: string;
 
-  @Metadata({ data: "json, name=author" })
+  @SpeakeasyMetadata({ data: "json, name=author" })
   author?: string;
 
-  @Metadata({ data: "json, name=creationTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: AssessmentReportStatusEnum;
 }

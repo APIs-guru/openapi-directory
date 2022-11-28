@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ItemDraftResponse
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The type that defines the field for the createItemDraft response.
 **/
 export class ItemDraftResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=itemDraftId" })
+  @SpeakeasyMetadata({ data: "json, name=itemDraftId" })
   itemDraftId?: string;
 
-  @Metadata({ data: "json, name=sellFlowNativeUri" })
+  @SpeakeasyMetadata({ data: "json, name=sellFlowNativeUri" })
   sellFlowNativeUri?: string;
 
-  @Metadata({ data: "json, name=sellFlowUrl" })
+  @SpeakeasyMetadata({ data: "json, name=sellFlowUrl" })
   sellFlowUrl?: string;
 }

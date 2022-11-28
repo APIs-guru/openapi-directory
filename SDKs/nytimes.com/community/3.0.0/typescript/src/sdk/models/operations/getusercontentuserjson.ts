@@ -1,254 +1,255 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetUserContentUserJsonQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=userID" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userID" })
   userId?: number;
 }
 
 
 export class GetUserContentUserJsonSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
   apiKey: shared.SchemeApiKey;
 }
 
 
-export class GetUserContentUserJsonRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetUserContentUserJsonQueryParams;
-
-  @Metadata()
-  security: GetUserContentUserJsonSecurity;
-}
-
-
 export class GetUserContentUserJson200ApplicationJsonDebug extends SpeakeasyBase {
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: number;
 }
 
 
 export class GetUserContentUserJson200ApplicationJsonResultsCommentsAssetAllProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=properties" })
+  @SpeakeasyMetadata({ data: "json, name=properties" })
   properties?: Map<string, any>[];
 }
 
 
 export class GetUserContentUserJson200ApplicationJsonResultsCommentsAssetLabels extends SpeakeasyBase {
-  @Metadata({ data: "json, name=labelID" })
+  @SpeakeasyMetadata({ data: "json, name=labelID" })
   labelId?: number;
 
-  @Metadata({ data: "json, name=labelName" })
+  @SpeakeasyMetadata({ data: "json, name=labelName" })
   labelName?: string;
 }
 
 
 export class GetUserContentUserJson200ApplicationJsonResultsCommentsAssetPropertiesAutomoderationOff extends SpeakeasyBase {
-  @Metadata({ data: "json, name=groupID" })
+  @SpeakeasyMetadata({ data: "json, name=groupID" })
   groupId?: number;
 
-  @Metadata({ data: "json, name=taxonomyID" })
+  @SpeakeasyMetadata({ data: "json, name=taxonomyID" })
   taxonomyId?: number;
 }
 
 
 export class GetUserContentUserJson200ApplicationJsonResultsCommentsAssetPropertiesCommentListSortApprovedateDesc extends SpeakeasyBase {
-  @Metadata({ data: "json, name=groupID" })
+  @SpeakeasyMetadata({ data: "json, name=groupID" })
   groupId?: number;
 
-  @Metadata({ data: "json, name=taxonomyID" })
+  @SpeakeasyMetadata({ data: "json, name=taxonomyID" })
   taxonomyId?: number;
 }
 
 
 export class GetUserContentUserJson200ApplicationJsonResultsCommentsAssetPropertiesReachedMaxComOn extends SpeakeasyBase {
-  @Metadata({ data: "json, name=groupID" })
+  @SpeakeasyMetadata({ data: "json, name=groupID" })
   groupId?: number;
 
-  @Metadata({ data: "json, name=taxonomyID" })
+  @SpeakeasyMetadata({ data: "json, name=taxonomyID" })
   taxonomyId?: number;
 }
 
 
 export class GetUserContentUserJson200ApplicationJsonResultsCommentsAssetProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=automoderation-off" })
+  @SpeakeasyMetadata({ data: "json, name=automoderation-off" })
   automoderationOff?: GetUserContentUserJson200ApplicationJsonResultsCommentsAssetPropertiesAutomoderationOff;
 
-  @Metadata({ data: "json, name=comment-list-sort-approvedate-desc" })
+  @SpeakeasyMetadata({ data: "json, name=comment-list-sort-approvedate-desc" })
   commentListSortApprovedateDesc?: GetUserContentUserJson200ApplicationJsonResultsCommentsAssetPropertiesCommentListSortApprovedateDesc;
 
-  @Metadata({ data: "json, name=reached-max-com-on" })
+  @SpeakeasyMetadata({ data: "json, name=reached-max-com-on" })
   reachedMaxComOn?: GetUserContentUserJson200ApplicationJsonResultsCommentsAssetPropertiesReachedMaxComOn;
 }
 
 
 export class GetUserContentUserJson200ApplicationJsonResultsCommentsAsset extends SpeakeasyBase {
-  @Metadata({ data: "json, name=all-properties", elemType: operations.GetUserContentUserJson200ApplicationJsonResultsCommentsAssetAllProperties })
+  @SpeakeasyMetadata({ data: "json, name=all-properties", elemType: GetUserContentUserJson200ApplicationJsonResultsCommentsAssetAllProperties })
   allProperties?: GetUserContentUserJson200ApplicationJsonResultsCommentsAssetAllProperties[];
 
-  @Metadata({ data: "json, name=assetID" })
+  @SpeakeasyMetadata({ data: "json, name=assetID" })
   assetId?: number;
 
-  @Metadata({ data: "json, name=assetTitle" })
+  @SpeakeasyMetadata({ data: "json, name=assetTitle" })
   assetTitle?: string;
 
-  @Metadata({ data: "json, name=assetURL" })
+  @SpeakeasyMetadata({ data: "json, name=assetURL" })
   assetUrl?: string;
 
-  @Metadata({ data: "json, name=createDate" })
+  @SpeakeasyMetadata({ data: "json, name=createDate" })
   createDate?: string;
 
-  @Metadata({ data: "json, name=labels", elemType: operations.GetUserContentUserJson200ApplicationJsonResultsCommentsAssetLabels })
+  @SpeakeasyMetadata({ data: "json, name=labels", elemType: GetUserContentUserJson200ApplicationJsonResultsCommentsAssetLabels })
   labels?: GetUserContentUserJson200ApplicationJsonResultsCommentsAssetLabels[];
 
-  @Metadata({ data: "json, name=properties" })
+  @SpeakeasyMetadata({ data: "json, name=properties" })
   properties?: GetUserContentUserJson200ApplicationJsonResultsCommentsAssetProperties;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: string;
 
-  @Metadata({ data: "json, name=taxonomy" })
+  @SpeakeasyMetadata({ data: "json, name=taxonomy" })
   taxonomy?: string;
 
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: Map<string, any>[];
 
-  @Metadata({ data: "json, name=updateDate" })
+  @SpeakeasyMetadata({ data: "json, name=updateDate" })
   updateDate?: string;
 
-  @Metadata({ data: "json, name=vendorID" })
+  @SpeakeasyMetadata({ data: "json, name=vendorID" })
   vendorId?: string;
 }
 
 
 export class GetUserContentUserJson200ApplicationJsonResultsComments extends SpeakeasyBase {
-  @Metadata({ data: "json, name=approveDate" })
+  @SpeakeasyMetadata({ data: "json, name=approveDate" })
   approveDate?: string;
 
-  @Metadata({ data: "json, name=asset" })
+  @SpeakeasyMetadata({ data: "json, name=asset" })
   asset?: GetUserContentUserJson200ApplicationJsonResultsCommentsAsset;
 
-  @Metadata({ data: "json, name=commentBody" })
+  @SpeakeasyMetadata({ data: "json, name=commentBody" })
   commentBody?: string;
 
-  @Metadata({ data: "json, name=commentID" })
+  @SpeakeasyMetadata({ data: "json, name=commentID" })
   commentId?: number;
 
-  @Metadata({ data: "json, name=commentSequence" })
+  @SpeakeasyMetadata({ data: "json, name=commentSequence" })
   commentSequence?: number;
 
-  @Metadata({ data: "json, name=commentTitle" })
+  @SpeakeasyMetadata({ data: "json, name=commentTitle" })
   commentTitle?: string;
 
-  @Metadata({ data: "json, name=commentType" })
+  @SpeakeasyMetadata({ data: "json, name=commentType" })
   commentType?: string;
 
-  @Metadata({ data: "json, name=createDate" })
+  @SpeakeasyMetadata({ data: "json, name=createDate" })
   createDate?: string;
 
-  @Metadata({ data: "json, name=editorsSelection" })
+  @SpeakeasyMetadata({ data: "json, name=editorsSelection" })
   editorsSelection?: boolean;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, any>[];
 
-  @Metadata({ data: "json, name=parentID" })
+  @SpeakeasyMetadata({ data: "json, name=parentID" })
   parentId?: any;
 
-  @Metadata({ data: "json, name=permid" })
+  @SpeakeasyMetadata({ data: "json, name=permid" })
   permid?: number;
 
-  @Metadata({ data: "json, name=picURL" })
+  @SpeakeasyMetadata({ data: "json, name=picURL" })
   picUrl?: string;
 
-  @Metadata({ data: "json, name=recommendations" })
+  @SpeakeasyMetadata({ data: "json, name=recommendations" })
   recommendations?: number;
 
-  @Metadata({ data: "json, name=replies" })
+  @SpeakeasyMetadata({ data: "json, name=replies" })
   replies?: Map<string, any>[];
 
-  @Metadata({ data: "json, name=replyCount" })
+  @SpeakeasyMetadata({ data: "json, name=replyCount" })
   replyCount?: number;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 
-  @Metadata({ data: "json, name=updateDate" })
+  @SpeakeasyMetadata({ data: "json, name=updateDate" })
   updateDate?: string;
 
-  @Metadata({ data: "json, name=userDisplayName" })
+  @SpeakeasyMetadata({ data: "json, name=userDisplayName" })
   userDisplayName?: any;
 
-  @Metadata({ data: "json, name=userID" })
+  @SpeakeasyMetadata({ data: "json, name=userID" })
   userId?: number;
 
-  @Metadata({ data: "json, name=userLocation" })
+  @SpeakeasyMetadata({ data: "json, name=userLocation" })
   userLocation?: any;
 
-  @Metadata({ data: "json, name=userSubmittedDisplayName" })
+  @SpeakeasyMetadata({ data: "json, name=userSubmittedDisplayName" })
   userSubmittedDisplayName?: string;
 
-  @Metadata({ data: "json, name=userSubmittedLocation" })
+  @SpeakeasyMetadata({ data: "json, name=userSubmittedLocation" })
   userSubmittedLocation?: string;
 
-  @Metadata({ data: "json, name=userSubmittedTitle" })
+  @SpeakeasyMetadata({ data: "json, name=userSubmittedTitle" })
   userSubmittedTitle?: any;
 
-  @Metadata({ data: "json, name=userSubmittedURL" })
+  @SpeakeasyMetadata({ data: "json, name=userSubmittedURL" })
   userSubmittedUrl?: any;
 
-  @Metadata({ data: "json, name=userTitle" })
+  @SpeakeasyMetadata({ data: "json, name=userTitle" })
   userTitle?: any;
 
-  @Metadata({ data: "json, name=userURL" })
+  @SpeakeasyMetadata({ data: "json, name=userURL" })
   userUrl?: any;
 }
 
 
 export class GetUserContentUserJson200ApplicationJsonResults extends SpeakeasyBase {
-  @Metadata({ data: "json, name=api_timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=api_timestamp" })
   apiTimestamp?: string;
 
-  @Metadata({ data: "json, name=comments", elemType: operations.GetUserContentUserJson200ApplicationJsonResultsComments })
+  @SpeakeasyMetadata({ data: "json, name=comments", elemType: GetUserContentUserJson200ApplicationJsonResultsComments })
   comments?: GetUserContentUserJson200ApplicationJsonResultsComments[];
 
-  @Metadata({ data: "json, name=totalCommentsFound" })
+  @SpeakeasyMetadata({ data: "json, name=totalCommentsFound" })
   totalCommentsFound?: number;
 
-  @Metadata({ data: "json, name=totalCommentsReturned" })
+  @SpeakeasyMetadata({ data: "json, name=totalCommentsReturned" })
   totalCommentsReturned?: number;
 }
 
 
 export class GetUserContentUserJson200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=copyright" })
+  @SpeakeasyMetadata({ data: "json, name=copyright" })
   copyright?: string;
 
-  @Metadata({ data: "json, name=debug" })
+  @SpeakeasyMetadata({ data: "json, name=debug" })
   debug?: GetUserContentUserJson200ApplicationJsonDebug;
 
-  @Metadata({ data: "json, name=results" })
+  @SpeakeasyMetadata({ data: "json, name=results" })
   results?: GetUserContentUserJson200ApplicationJsonResults;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 }
 
 
+export class GetUserContentUserJsonRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetUserContentUserJsonQueryParams;
+
+  @SpeakeasyMetadata()
+  security: GetUserContentUserJsonSecurity;
+}
+
+
 export class GetUserContentUserJsonResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getUserContentUserJson200ApplicationJsonObject?: GetUserContentUserJson200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class InvokeEndpointAsyncOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=InferenceId" })
+  @SpeakeasyMetadata({ data: "json, name=InferenceId" })
   inferenceId?: string;
 }

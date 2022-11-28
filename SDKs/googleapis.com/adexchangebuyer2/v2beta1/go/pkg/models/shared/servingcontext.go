@@ -6,6 +6,8 @@ const (
 	ServingContextAllEnumSimpleContext ServingContextAllEnum = "SIMPLE_CONTEXT"
 )
 
+// ServingContext
+// The serving context for this restriction.
 type ServingContext struct {
 	All          *ServingContextAllEnum `json:"all,omitempty"`
 	AppType      *AppContext            `json:"appType,omitempty"`

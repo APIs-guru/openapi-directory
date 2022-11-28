@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var NumberDetailsUpdateMessagesCallbackTypeEnum;
 (function (NumberDetailsUpdateMessagesCallbackTypeEnum) {
     NumberDetailsUpdateMessagesCallbackTypeEnum["App"] = "app";
@@ -39,43 +39,43 @@ var NumberDetailsUpdate = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "form, name=app_id;" }),
+        SpeakeasyMetadata({ data: "form, name=app_id;" }),
         __metadata("design:type", String)
     ], NumberDetailsUpdate.prototype, "appId", void 0);
     __decorate([
-        Metadata({ data: "form, name=country;" }),
+        SpeakeasyMetadata({ data: "form, name=country;" }),
         __metadata("design:type", String)
     ], NumberDetailsUpdate.prototype, "country", void 0);
     __decorate([
-        Metadata({ data: "form, name=messagesCallbackType;" }),
+        SpeakeasyMetadata({ data: "form, name=messagesCallbackType;" }),
         __metadata("design:type", String)
     ], NumberDetailsUpdate.prototype, "messagesCallbackType", void 0);
     __decorate([
-        Metadata({ data: "form, name=messagesCallbackValue;" }),
+        SpeakeasyMetadata({ data: "form, name=messagesCallbackValue;" }),
         __metadata("design:type", String)
     ], NumberDetailsUpdate.prototype, "messagesCallbackValue", void 0);
     __decorate([
-        Metadata({ data: "form, name=moHttpUrl;" }),
+        SpeakeasyMetadata({ data: "form, name=moHttpUrl;" }),
         __metadata("design:type", String)
     ], NumberDetailsUpdate.prototype, "moHttpUrl", void 0);
     __decorate([
-        Metadata({ data: "form, name=moSmppSysType;" }),
+        SpeakeasyMetadata({ data: "form, name=moSmppSysType;" }),
         __metadata("design:type", String)
     ], NumberDetailsUpdate.prototype, "moSmppSysType", void 0);
     __decorate([
-        Metadata({ data: "form, name=msisdn;" }),
+        SpeakeasyMetadata({ data: "form, name=msisdn;" }),
         __metadata("design:type", String)
     ], NumberDetailsUpdate.prototype, "msisdn", void 0);
     __decorate([
-        Metadata({ data: "form, name=voiceCallbackType;" }),
+        SpeakeasyMetadata({ data: "form, name=voiceCallbackType;" }),
         __metadata("design:type", String)
     ], NumberDetailsUpdate.prototype, "voiceCallbackType", void 0);
     __decorate([
-        Metadata({ data: "form, name=voiceCallbackValue;" }),
+        SpeakeasyMetadata({ data: "form, name=voiceCallbackValue;" }),
         __metadata("design:type", String)
     ], NumberDetailsUpdate.prototype, "voiceCallbackValue", void 0);
     __decorate([
-        Metadata({ data: "form, name=voiceStatusCallback;" }),
+        SpeakeasyMetadata({ data: "form, name=voiceStatusCallback;" }),
         __metadata("design:type", String)
     ], NumberDetailsUpdate.prototype, "voiceStatusCallback", void 0);
     return NumberDetailsUpdate;

@@ -1,21 +1,11 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class ImporterExporterCodeVerificationApiPathParams extends SpeakeasyBase {
     iec: string;
 }
-export declare class ImporterExporterCodeVerificationApiSecurityOption1 extends SpeakeasyBase {
-    apiKey: shared.SchemeApiKey;
-}
-export declare class ImporterExporterCodeVerificationApiSecurityOption2 extends SpeakeasyBase {
-    clientId: shared.SchemeClientId;
-}
 export declare class ImporterExporterCodeVerificationApiSecurity extends SpeakeasyBase {
-    option1?: ImporterExporterCodeVerificationApiSecurityOption1;
-    option2?: ImporterExporterCodeVerificationApiSecurityOption2;
-}
-export declare class ImporterExporterCodeVerificationApiRequest extends SpeakeasyBase {
-    pathParams: ImporterExporterCodeVerificationApiPathParams;
-    security: ImporterExporterCodeVerificationApiSecurity;
+    apiKey?: shared.SchemeApiKey;
+    clientId?: shared.SchemeClientId;
 }
 export declare class ImporterExporterCodeVerificationApi200ApplicationJson extends SpeakeasyBase {
     addressLine1: string;
@@ -110,6 +100,10 @@ export declare enum ImporterExporterCodeVerificationApi504ApplicationJsonErrorDe
 export declare class ImporterExporterCodeVerificationApi504ApplicationJson extends SpeakeasyBase {
     error?: ImporterExporterCodeVerificationApi504ApplicationJsonErrorEnum;
     errorDescription?: ImporterExporterCodeVerificationApi504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class ImporterExporterCodeVerificationApiRequest extends SpeakeasyBase {
+    pathParams: ImporterExporterCodeVerificationApiPathParams;
+    security: ImporterExporterCodeVerificationApiSecurity;
 }
 export declare class ImporterExporterCodeVerificationApiResponse extends SpeakeasyBase {
     contentType: string;

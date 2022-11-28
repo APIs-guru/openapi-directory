@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum ResultMetadataDataTypeEnum {
     DataTypeUnspecified = "DATA_TYPE_UNSPECIFIED",
     Int = "INT",

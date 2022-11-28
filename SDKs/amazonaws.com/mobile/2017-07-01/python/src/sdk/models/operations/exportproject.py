@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from sdk.models import shared
 
 
 @dataclass
 class ExportProjectPathParams:
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,19 +24,19 @@ class ExportProjectHeaders:
 
 @dataclass
 class ExportProjectRequest:
-    path_params: ExportProjectPathParams = field(default=None)
-    headers: ExportProjectHeaders = field(default=None)
+    headers: ExportProjectHeaders = field()
+    path_params: ExportProjectPathParams = field()
     
 
 @dataclass
 class ExportProjectResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[shared.BadRequestException] = field(default=None)
-    content_type: str = field(default=None)
     export_project_result: Optional[shared.ExportProjectResult] = field(default=None)
     internal_failure_exception: Optional[shared.InternalFailureException] = field(default=None)
     not_found_exception: Optional[shared.NotFoundException] = field(default=None)
     service_unavailable_exception: Optional[shared.ServiceUnavailableException] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[shared.TooManyRequestsException] = field(default=None)
     unauthorized_exception: Optional[shared.UnauthorizedException] = field(default=None)
     

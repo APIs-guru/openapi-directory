@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ReasonEnum(str, Enum):
     EXCEEDS_MAX_FACES = "EXCEEDS_MAX_FACES"

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleFirestoreAdminV1beta1Index } from "./googlefirestoreadminv1beta1index";
+
 
 
 // GoogleFirestoreAdminV1beta1ListIndexesResponse
@@ -8,9 +8,9 @@ import { GoogleFirestoreAdminV1beta1Index } from "./googlefirestoreadminv1beta1i
  * The response for FirestoreAdmin.ListIndexes.
 **/
 export class GoogleFirestoreAdminV1beta1ListIndexesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=indexes", elemType: shared.GoogleFirestoreAdminV1beta1Index })
+  @SpeakeasyMetadata({ data: "json, name=indexes", elemType: GoogleFirestoreAdminV1beta1Index })
   indexes?: GoogleFirestoreAdminV1beta1Index[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

@@ -5,9 +5,9 @@ from sdk.models import shared
 
 @dataclass
 class GetDetailsOfFileByIDPathParams:
-    file_uuid: str = field(default=None, metadata={'path_param': { 'field_name': 'fileUuid', 'style': 'simple', 'explode': False }})
-    item_uuid: str = field(default=None, metadata={'path_param': { 'field_name': 'itemUuid', 'style': 'simple', 'explode': False }})
-    vault_uuid: str = field(default=None, metadata={'path_param': { 'field_name': 'vaultUuid', 'style': 'simple', 'explode': False }})
+    file_uuid: str = field(metadata={'path_param': { 'field_name': 'fileUuid', 'style': 'simple', 'explode': False }})
+    item_uuid: str = field(metadata={'path_param': { 'field_name': 'itemUuid', 'style': 'simple', 'explode': False }})
+    vault_uuid: str = field(metadata={'path_param': { 'field_name': 'vaultUuid', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,20 +17,20 @@ class GetDetailsOfFileByIDQueryParams:
 
 @dataclass
 class GetDetailsOfFileByIDSecurity:
-    connect_token: shared.SchemeConnectToken = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    connect_token: shared.SchemeConnectToken = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class GetDetailsOfFileByIDRequest:
-    path_params: GetDetailsOfFileByIDPathParams = field(default=None)
-    query_params: GetDetailsOfFileByIDQueryParams = field(default=None)
-    security: GetDetailsOfFileByIDSecurity = field(default=None)
+    path_params: GetDetailsOfFileByIDPathParams = field()
+    query_params: GetDetailsOfFileByIDQueryParams = field()
+    security: GetDetailsOfFileByIDSecurity = field()
     
 
 @dataclass
 class GetDetailsOfFileByIDResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     file: Optional[shared.File] = field(default=None)
-    status_code: int = field(default=None)
     

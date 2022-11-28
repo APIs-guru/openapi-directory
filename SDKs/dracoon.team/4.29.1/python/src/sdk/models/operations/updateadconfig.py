@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from sdk.models import shared
 
 
 @dataclass
 class UpdateAdConfigPathParams:
-    ad_id: int = field(default=None, metadata={'path_param': { 'field_name': 'ad_id', 'style': 'simple', 'explode': False }})
+    ad_id: int = field(metadata={'path_param': { 'field_name': 'ad_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,15 +18,15 @@ class UpdateAdConfigHeaders:
 
 @dataclass
 class UpdateAdConfigRequest:
-    path_params: UpdateAdConfigPathParams = field(default=None)
-    headers: UpdateAdConfigHeaders = field(default=None)
-    request: shared.UpdateActiveDirectoryConfigRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateAdConfigHeaders = field()
+    path_params: UpdateAdConfigPathParams = field()
+    request: shared.UpdateActiveDirectoryConfigRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateAdConfigResponse:
+    content_type: str = field()
+    status_code: int = field()
     active_directory_config: Optional[shared.ActiveDirectoryConfig] = field(default=None)
-    content_type: str = field(default=None)
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

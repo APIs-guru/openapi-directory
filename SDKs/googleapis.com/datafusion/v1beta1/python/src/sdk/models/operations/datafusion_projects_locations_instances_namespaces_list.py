@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DatafusionProjectsLocationsInstancesNamespacesListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 class DatafusionProjectsLocationsInstancesNamespacesListViewEnum(str, Enum):
     NAMESPACE_VIEW_UNSPECIFIED = "NAMESPACE_VIEW_UNSPECIFIED"
@@ -33,20 +34,20 @@ class DatafusionProjectsLocationsInstancesNamespacesListQueryParams:
 
 @dataclass
 class DatafusionProjectsLocationsInstancesNamespacesListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DatafusionProjectsLocationsInstancesNamespacesListRequest:
-    path_params: DatafusionProjectsLocationsInstancesNamespacesListPathParams = field(default=None)
-    query_params: DatafusionProjectsLocationsInstancesNamespacesListQueryParams = field(default=None)
-    security: DatafusionProjectsLocationsInstancesNamespacesListSecurity = field(default=None)
+    path_params: DatafusionProjectsLocationsInstancesNamespacesListPathParams = field()
+    query_params: DatafusionProjectsLocationsInstancesNamespacesListQueryParams = field()
+    security: DatafusionProjectsLocationsInstancesNamespacesListSecurity = field()
     
 
 @dataclass
 class DatafusionProjectsLocationsInstancesNamespacesListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_namespaces_response: Optional[shared.ListNamespacesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,7 @@
 package shared
 
+// CalendarListEntryNotificationSettings
+// The notifications that the authenticated user is receiving for this calendar.
 type CalendarListEntryNotificationSettings struct {
 	Notifications []CalendarNotification `json:"notifications,omitempty"`
 }

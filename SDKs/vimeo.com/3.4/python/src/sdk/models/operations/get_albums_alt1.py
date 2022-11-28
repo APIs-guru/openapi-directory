@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetAlbumsAlt1DirectionEnum(str, Enum):
@@ -24,13 +28,13 @@ class GetAlbumsAlt1QueryParams:
 
 @dataclass
 class GetAlbumsAlt1Request:
-    query_params: GetAlbumsAlt1QueryParams = field(default=None)
+    query_params: GetAlbumsAlt1QueryParams = field()
     
 
 @dataclass
 class GetAlbumsAlt1Response:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     albums: Optional[List[shared.Album]] = field(default=None)
     legacy_error: Optional[shared.LegacyError] = field(default=None)
     

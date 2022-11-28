@@ -1,13 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import eventpublisher_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Channel:
-    event_publishers: List[eventpublisher_enum.EventPublisherEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'eventPublishers' }})
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""Channel
+    Notification medium for users to get alerted for events that occur in application profile. We support SNS topic as a notification channel.
+    """
+    
+    event_publishers: List[EventPublisherEnum] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('eventPublishers') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
     

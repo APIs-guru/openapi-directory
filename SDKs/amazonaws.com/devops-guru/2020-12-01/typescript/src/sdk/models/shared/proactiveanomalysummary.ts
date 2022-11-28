@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AnomalyReportedTimeRange } from "./anomalyreportedtimerange";
 import { AnomalyTimeRange } from "./anomalytimerange";
 import { PredictionTimeRange } from "./predictiontimerange";
@@ -8,41 +8,42 @@ import { AnomalySourceDetails } from "./anomalysourcedetails";
 import { AnomalyStatusEnum } from "./anomalystatusenum";
 
 
+
 // ProactiveAnomalySummary
 /** 
  * Details about a proactive anomaly. This object is returned by <code>DescribeAnomaly.</code> 
 **/
 export class ProactiveAnomalySummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AnomalyReportedTimeRange" })
+  @SpeakeasyMetadata({ data: "json, name=AnomalyReportedTimeRange" })
   anomalyReportedTimeRange?: AnomalyReportedTimeRange;
 
-  @Metadata({ data: "json, name=AnomalyTimeRange" })
+  @SpeakeasyMetadata({ data: "json, name=AnomalyTimeRange" })
   anomalyTimeRange?: AnomalyTimeRange;
 
-  @Metadata({ data: "json, name=AssociatedInsightId" })
+  @SpeakeasyMetadata({ data: "json, name=AssociatedInsightId" })
   associatedInsightId?: string;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=Limit" })
+  @SpeakeasyMetadata({ data: "json, name=Limit" })
   limit?: number;
 
-  @Metadata({ data: "json, name=PredictionTimeRange" })
+  @SpeakeasyMetadata({ data: "json, name=PredictionTimeRange" })
   predictionTimeRange?: PredictionTimeRange;
 
-  @Metadata({ data: "json, name=ResourceCollection" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceCollection" })
   resourceCollection?: ResourceCollection;
 
-  @Metadata({ data: "json, name=Severity" })
+  @SpeakeasyMetadata({ data: "json, name=Severity" })
   severity?: AnomalySeverityEnum;
 
-  @Metadata({ data: "json, name=SourceDetails" })
+  @SpeakeasyMetadata({ data: "json, name=SourceDetails" })
   sourceDetails?: AnomalySourceDetails;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: AnomalyStatusEnum;
 
-  @Metadata({ data: "json, name=UpdateTime" })
+  @SpeakeasyMetadata({ data: "json, name=UpdateTime" })
   updateTime?: Date;
 }

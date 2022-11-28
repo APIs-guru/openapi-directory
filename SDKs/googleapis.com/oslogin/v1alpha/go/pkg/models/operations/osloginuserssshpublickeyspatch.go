@@ -41,7 +41,7 @@ type OsloginUsersSSHPublicKeysPatchSecurity struct {
 type OsloginUsersSSHPublicKeysPatchRequest struct {
 	PathParams  OsloginUsersSSHPublicKeysPatchPathParams
 	QueryParams OsloginUsersSSHPublicKeysPatchQueryParams
-	Request     *shared.SSHPublicKey `request:"mediaType=application/json"`
+	Request     *shared.SSHPublicKeyInput `request:"mediaType=application/json"`
 	Security    OsloginUsersSSHPublicKeysPatchSecurity
 }
 

@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class MaximizeSpendBidStrategyPerformanceGoalTypeEnum(str, Enum):
     BIDDING_STRATEGY_PERFORMANCE_GOAL_TYPE_UNSPECIFIED = "BIDDING_STRATEGY_PERFORMANCE_GOAL_TYPE_UNSPECIFIED"
@@ -16,8 +18,12 @@ class MaximizeSpendBidStrategyPerformanceGoalTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class MaximizeSpendBidStrategy:
-    custom_bidding_algorithm_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'customBiddingAlgorithmId' }})
-    max_average_cpm_bid_amount_micros: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxAverageCpmBidAmountMicros' }})
-    performance_goal_type: Optional[MaximizeSpendBidStrategyPerformanceGoalTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'performanceGoalType' }})
-    raise_bid_for_deals: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'raiseBidForDeals' }})
+    r"""MaximizeSpendBidStrategy
+    A strategy that automatically adjusts the bid to optimize a specified performance goal while spending the full budget.
+    """
+    
+    custom_bidding_algorithm_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('customBiddingAlgorithmId') }})
+    max_average_cpm_bid_amount_micros: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxAverageCpmBidAmountMicros') }})
+    performance_goal_type: Optional[MaximizeSpendBidStrategyPerformanceGoalTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('performanceGoalType') }})
+    raise_bid_for_deals: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('raiseBidForDeals') }})
     

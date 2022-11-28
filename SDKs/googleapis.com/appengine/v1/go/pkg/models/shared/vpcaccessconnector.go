@@ -8,6 +8,8 @@ const (
 	VpcAccessConnectorEgressSettingEnumPrivateIPRanges          VpcAccessConnectorEgressSettingEnum = "PRIVATE_IP_RANGES"
 )
 
+// VpcAccessConnector
+// VPC access connector specification.
 type VpcAccessConnector struct {
 	EgressSetting *VpcAccessConnectorEgressSettingEnum `json:"egressSetting,omitempty"`
 	Name          *string                              `json:"name,omitempty"`

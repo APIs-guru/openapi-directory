@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Reviewer
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the author of the review.
 **/
 export class Reviewer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=isAnonymous" })
+  @SpeakeasyMetadata({ data: "json, name=isAnonymous" })
   isAnonymous?: boolean;
 
-  @Metadata({ data: "json, name=profilePhotoUrl" })
+  @SpeakeasyMetadata({ data: "json, name=profilePhotoUrl" })
   profilePhotoUrl?: string;
 }

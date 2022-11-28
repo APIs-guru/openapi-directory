@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum UpdateContinuousCheckInputStatusEnum {
-    Enabled = "enabled"
-,    Disabled = "disabled"
+    Enabled = "enabled",
+    Disabled = "disabled"
 }
 
 
@@ -11,9 +12,9 @@ export enum UpdateContinuousCheckInputStatusEnum {
  *  Represents to UpdateContinuousCheckInput
 **/
 export class UpdateContinuousCheckInput extends SpeakeasyBase {
-  @Metadata({ data: "form, name=frequency;" })
+  @SpeakeasyMetadata({ data: "form, name=frequency;" })
   frequency: string;
 
-  @Metadata({ data: "form, name=status;" })
+  @SpeakeasyMetadata({ data: "form, name=status;" })
   status: UpdateContinuousCheckInputStatusEnum;
 }

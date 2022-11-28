@@ -10,14 +10,14 @@ class ChangeUserPasswordHeaders:
 
 @dataclass
 class ChangeUserPasswordRequest:
-    headers: ChangeUserPasswordHeaders = field(default=None)
-    request: shared.ChangeUserPasswordRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ChangeUserPasswordHeaders = field()
+    request: shared.ChangeUserPasswordRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ChangeUserPasswordResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     change_user_password_400_application_json_one_of: Optional[Any] = field(default=None)
     

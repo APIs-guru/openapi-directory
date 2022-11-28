@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudAssuredworkloadsV1ViolationRemediationInstructionsConsole } from "./googlecloudassuredworkloadsv1violationremediationinstructionsconsole";
 import { GoogleCloudAssuredworkloadsV1ViolationRemediationInstructionsGcloud } from "./googlecloudassuredworkloadsv1violationremediationinstructionsgcloud";
+
 
 
 // GoogleCloudAssuredworkloadsV1ViolationRemediationInstructions
@@ -8,9 +9,9 @@ import { GoogleCloudAssuredworkloadsV1ViolationRemediationInstructionsGcloud } f
  * Instructions to remediate violation
 **/
 export class GoogleCloudAssuredworkloadsV1ViolationRemediationInstructions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=consoleInstructions" })
+  @SpeakeasyMetadata({ data: "json, name=consoleInstructions" })
   consoleInstructions?: GoogleCloudAssuredworkloadsV1ViolationRemediationInstructionsConsole;
 
-  @Metadata({ data: "json, name=gcloudInstructions" })
+  @SpeakeasyMetadata({ data: "json, name=gcloudInstructions" })
   gcloudInstructions?: GoogleCloudAssuredworkloadsV1ViolationRemediationInstructionsGcloud;
 }

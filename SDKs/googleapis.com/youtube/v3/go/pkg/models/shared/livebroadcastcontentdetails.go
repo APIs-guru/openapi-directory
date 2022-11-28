@@ -40,6 +40,8 @@ const (
 	LiveBroadcastContentDetailsStereoLayoutEnumTopBottom               LiveBroadcastContentDetailsStereoLayoutEnum = "topBottom"
 )
 
+// LiveBroadcastContentDetails
+// Detailed settings of a broadcast.
 type LiveBroadcastContentDetails struct {
 	BoundStreamID               *string                                            `json:"boundStreamId,omitempty"`
 	BoundStreamLastUpdateTimeMs *time.Time                                         `json:"boundStreamLastUpdateTimeMs,omitempty"`

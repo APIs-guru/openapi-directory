@@ -1,86 +1,87 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostSearchVersionNumberGeometryFilterExtPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=ext" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ext" })
   ext: shared.ExtEnum;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=versionNumber" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=versionNumber" })
   versionNumber: number;
 }
 
 
 export class PostSearchVersionNumberGeometryFilterExtRequestBodyGeometryList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=position" })
+  @SpeakeasyMetadata({ data: "json, name=position" })
   position?: string;
 
-  @Metadata({ data: "json, name=radius" })
+  @SpeakeasyMetadata({ data: "json, name=radius" })
   radius?: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 
-  @Metadata({ data: "json, name=vertices" })
+  @SpeakeasyMetadata({ data: "json, name=vertices" })
   vertices?: string[];
 }
 
 
 export class PostSearchVersionNumberGeometryFilterExtRequestBodyPoiListAddress extends SpeakeasyBase {
-  @Metadata({ data: "json, name=freeformAddress" })
+  @SpeakeasyMetadata({ data: "json, name=freeformAddress" })
   freeformAddress?: string;
 }
 
 
 export class PostSearchVersionNumberGeometryFilterExtRequestBodyPoiListPoi extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
 
 
 export class PostSearchVersionNumberGeometryFilterExtRequestBodyPoiListPosition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=lat" })
+  @SpeakeasyMetadata({ data: "json, name=lat" })
   lat?: number;
 
-  @Metadata({ data: "json, name=lon" })
+  @SpeakeasyMetadata({ data: "json, name=lon" })
   lon?: number;
 }
 
 
 export class PostSearchVersionNumberGeometryFilterExtRequestBodyPoiList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=address" })
+  @SpeakeasyMetadata({ data: "json, name=address" })
   address?: PostSearchVersionNumberGeometryFilterExtRequestBodyPoiListAddress;
 
-  @Metadata({ data: "json, name=poi" })
+  @SpeakeasyMetadata({ data: "json, name=poi" })
   poi?: PostSearchVersionNumberGeometryFilterExtRequestBodyPoiListPoi;
 
-  @Metadata({ data: "json, name=position" })
+  @SpeakeasyMetadata({ data: "json, name=position" })
   position?: PostSearchVersionNumberGeometryFilterExtRequestBodyPoiListPosition;
 }
 
 
 export class PostSearchVersionNumberGeometryFilterExtRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=geometryList", elemType: operations.PostSearchVersionNumberGeometryFilterExtRequestBodyGeometryList })
+  @SpeakeasyMetadata({ data: "json, name=geometryList", elemType: PostSearchVersionNumberGeometryFilterExtRequestBodyGeometryList })
   geometryList?: PostSearchVersionNumberGeometryFilterExtRequestBodyGeometryList[];
 
-  @Metadata({ data: "json, name=poiList", elemType: operations.PostSearchVersionNumberGeometryFilterExtRequestBodyPoiList })
+  @SpeakeasyMetadata({ data: "json, name=poiList", elemType: PostSearchVersionNumberGeometryFilterExtRequestBodyPoiList })
   poiList?: PostSearchVersionNumberGeometryFilterExtRequestBodyPoiList[];
 }
 
 
 export class PostSearchVersionNumberGeometryFilterExtRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PostSearchVersionNumberGeometryFilterExtPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: PostSearchVersionNumberGeometryFilterExtRequestBody;
 }
 
 
 export class PostSearchVersionNumberGeometryFilterExtResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

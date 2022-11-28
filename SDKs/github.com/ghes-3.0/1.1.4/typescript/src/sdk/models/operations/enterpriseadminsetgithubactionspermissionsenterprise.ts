@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class EnterpriseAdminSetGithubActionsPermissionsEnterprisePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=enterprise" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=enterprise" })
   enterprise: string;
 }
 
 
 export class EnterpriseAdminSetGithubActionsPermissionsEnterpriseRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowed_actions" })
+  @SpeakeasyMetadata({ data: "json, name=allowed_actions" })
   allowedActions?: shared.AllowedActionsEnum;
 
-  @Metadata({ data: "json, name=enabled_organizations" })
+  @SpeakeasyMetadata({ data: "json, name=enabled_organizations" })
   enabledOrganizations: shared.EnabledOrganizationsEnum;
 }
 
 
 export class EnterpriseAdminSetGithubActionsPermissionsEnterpriseRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: EnterpriseAdminSetGithubActionsPermissionsEnterprisePathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: EnterpriseAdminSetGithubActionsPermissionsEnterpriseRequestBody;
 }
 
 
 export class EnterpriseAdminSetGithubActionsPermissionsEnterpriseResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

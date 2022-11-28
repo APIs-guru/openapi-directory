@@ -22,50 +22,50 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ProjectParameterDetails = /** @class */ (function (_super) {
     __extends(ProjectParameterDetails, _super);
     function ProjectParameterDetails() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=average" }),
+        SpeakeasyMetadata({ data: "json, name=average" }),
         __metadata("design:type", Number)
     ], ProjectParameterDetails.prototype, "average", void 0);
     __decorate([
-        Metadata({ data: "json, name=count" }),
+        SpeakeasyMetadata({ data: "json, name=count" }),
         __metadata("design:type", Number)
     ], ProjectParameterDetails.prototype, "count", void 0);
     __decorate([
-        Metadata({ data: "json, name=displayName" }),
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
         __metadata("design:type", String)
     ], ProjectParameterDetails.prototype, "displayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=firstUpdated" }),
+        SpeakeasyMetadata({ data: "json, name=firstUpdated" }),
         __metadata("design:type", Date)
     ], ProjectParameterDetails.prototype, "firstUpdated", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastUpdated" }),
+        SpeakeasyMetadata({ data: "json, name=lastUpdated" }),
         __metadata("design:type", Date)
     ], ProjectParameterDetails.prototype, "lastUpdated", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastValue" }),
+        SpeakeasyMetadata({ data: "json, name=lastValue" }),
         __metadata("design:type", Number)
     ], ProjectParameterDetails.prototype, "lastValue", void 0);
     __decorate([
-        Metadata({ data: "json, name=locations" }),
+        SpeakeasyMetadata({ data: "json, name=locations" }),
         __metadata("design:type", Number)
     ], ProjectParameterDetails.prototype, "locations", void 0);
     __decorate([
-        Metadata({ data: "json, name=parameter" }),
+        SpeakeasyMetadata({ data: "json, name=parameter" }),
         __metadata("design:type", String)
     ], ProjectParameterDetails.prototype, "parameter", void 0);
     __decorate([
-        Metadata({ data: "json, name=parameterId" }),
+        SpeakeasyMetadata({ data: "json, name=parameterId" }),
         __metadata("design:type", Number)
     ], ProjectParameterDetails.prototype, "parameterId", void 0);
     __decorate([
-        Metadata({ data: "json, name=unit" }),
+        SpeakeasyMetadata({ data: "json, name=unit" }),
         __metadata("design:type", String)
     ], ProjectParameterDetails.prototype, "unit", void 0);
     return ProjectParameterDetails;

@@ -8,5 +8,8 @@ export * from "./niresponsejsonadvancedroamingunknown";
 export * from "./niresponsejsonadvancedsync";
 export * from "./niresponsejsonbasic";
 export * from "./niresponsejsonstandard";
+export * from "./niresponsexmladvanced";
+export * from "./niresponsexmlbasic";
+export * from "./niresponsexmlstandard";
 export * from "./niroaming";
 export * from "./security";

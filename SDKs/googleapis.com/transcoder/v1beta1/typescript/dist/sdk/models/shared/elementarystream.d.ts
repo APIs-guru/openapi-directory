@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AudioStream } from "./audiostream";
 import { TextStream } from "./textstream";
 import { VideoStream } from "./videostream";

@@ -1,5 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { MysqlSslConfigInput } from "./mysqlsslconfig";
 import { MysqlSslConfig } from "./mysqlsslconfig";
+
+
+
+// MysqlProfileInput
+/** 
+ * MySQL database profile.
+**/
+export class MysqlProfileInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=hostname" })
+  hostname?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=password" })
+  password?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=port" })
+  port?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=sslConfig" })
+  sslConfig?: MysqlSslConfigInput;
+
+  @SpeakeasyMetadata({ data: "json, name=username" })
+  username?: string;
+}
 
 
 // MysqlProfile
@@ -7,18 +31,18 @@ import { MysqlSslConfig } from "./mysqlsslconfig";
  * MySQL database profile.
 **/
 export class MysqlProfile extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hostname" })
+  @SpeakeasyMetadata({ data: "json, name=hostname" })
   hostname?: string;
 
-  @Metadata({ data: "json, name=password" })
+  @SpeakeasyMetadata({ data: "json, name=password" })
   password?: string;
 
-  @Metadata({ data: "json, name=port" })
+  @SpeakeasyMetadata({ data: "json, name=port" })
   port?: number;
 
-  @Metadata({ data: "json, name=sslConfig" })
+  @SpeakeasyMetadata({ data: "json, name=sslConfig" })
   sslConfig?: MysqlSslConfig;
 
-  @Metadata({ data: "json, name=username" })
+  @SpeakeasyMetadata({ data: "json, name=username" })
   username?: string;
 }

@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import bootstrapactionconfig
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BootstrapActionDetail:
-    bootstrap_action_config: Optional[bootstrapactionconfig.BootstrapActionConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BootstrapActionConfig' }})
+    r"""BootstrapActionDetail
+    Reports the configuration of a bootstrap action in a cluster (job flow).
+    """
+    
+    bootstrap_action_config: Optional[BootstrapActionConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('BootstrapActionConfig') }})
     

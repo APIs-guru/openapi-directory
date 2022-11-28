@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetSubstanceStudyPathParams:
-    db: shared.AmbitDatabaseIDEnum = field(default=None, metadata={'path_param': { 'field_name': 'db', 'style': 'simple', 'explode': False }})
-    uuid: str = field(default=None, metadata={'path_param': { 'field_name': 'uuid', 'style': 'simple', 'explode': False }})
+    db: shared.AmbitDatabaseIDEnum = field(metadata={'path_param': { 'field_name': 'db', 'style': 'simple', 'explode': False }})
+    uuid: str = field(metadata={'path_param': { 'field_name': 'uuid', 'style': 'simple', 'explode': False }})
     
 class GetSubstanceStudyTopEnum(str, Enum):
     P_CHEM = "P-CHEM"
@@ -29,13 +30,13 @@ class GetSubstanceStudyQueryParams:
 
 @dataclass
 class GetSubstanceStudyRequest:
-    path_params: GetSubstanceStudyPathParams = field(default=None)
-    query_params: GetSubstanceStudyQueryParams = field(default=None)
+    path_params: GetSubstanceStudyPathParams = field()
+    query_params: GetSubstanceStudyQueryParams = field()
     
 
 @dataclass
 class GetSubstanceStudyResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     substance_study: Optional[shared.SubstanceStudy] = field(default=None)
     

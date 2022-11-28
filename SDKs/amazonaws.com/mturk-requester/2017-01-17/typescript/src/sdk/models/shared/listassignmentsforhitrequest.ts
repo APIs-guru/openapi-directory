@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AssignmentStatusEnum } from "./assignmentstatusenum";
 
 
+
 export class ListAssignmentsForHitRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AssignmentStatuses" })
+  @SpeakeasyMetadata({ data: "json, name=AssignmentStatuses" })
   assignmentStatuses?: AssignmentStatusEnum[];
 
-  @Metadata({ data: "json, name=HITId" })
+  @SpeakeasyMetadata({ data: "json, name=HITId" })
   hitId: string;
 
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

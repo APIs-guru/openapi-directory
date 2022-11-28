@@ -1,5 +1,8 @@
 package shared
 
+// RunJobFlowInput
+//
+//	Input to the <a>RunJobFlow</a> operation.
 type RunJobFlowInput struct {
 	AdditionalInfo        *string                  `json:"AdditionalInfo,omitempty"`
 	AmiVersion            *string                  `json:"AmiVersion,omitempty"`

@@ -1,12 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ApigatewayApiStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Creating = "CREATING"
-,    Active = "ACTIVE"
-,    Failed = "FAILED"
-,    Deleting = "DELETING"
-,    Updating = "UPDATING"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Creating = "CREATING",
+    Active = "ACTIVE",
+    Failed = "FAILED",
+    Deleting = "DELETING",
+    Updating = "UPDATING"
+}
+
+
+// ApigatewayApiInput
+/** 
+ * An API that can be served by one or more Gateways.
+**/
+export class ApigatewayApiInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
+  displayName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=managedService" })
+  managedService?: string;
 }
 
 
@@ -15,24 +32,24 @@ export enum ApigatewayApiStateEnum {
  * An API that can be served by one or more Gateways.
 **/
 export class ApigatewayApi extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=managedService" })
+  @SpeakeasyMetadata({ data: "json, name=managedService" })
   managedService?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: ApigatewayApiStateEnum;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 }

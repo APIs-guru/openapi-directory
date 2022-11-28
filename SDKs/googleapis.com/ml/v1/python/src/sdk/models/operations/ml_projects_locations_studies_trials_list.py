@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class MlProjectsLocationsStudiesTrialsListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class MlProjectsLocationsStudiesTrialsListQueryParams:
 
 @dataclass
 class MlProjectsLocationsStudiesTrialsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class MlProjectsLocationsStudiesTrialsListRequest:
-    path_params: MlProjectsLocationsStudiesTrialsListPathParams = field(default=None)
-    query_params: MlProjectsLocationsStudiesTrialsListQueryParams = field(default=None)
-    security: MlProjectsLocationsStudiesTrialsListSecurity = field(default=None)
+    path_params: MlProjectsLocationsStudiesTrialsListPathParams = field()
+    query_params: MlProjectsLocationsStudiesTrialsListQueryParams = field()
+    security: MlProjectsLocationsStudiesTrialsListSecurity = field()
     
 
 @dataclass
 class MlProjectsLocationsStudiesTrialsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_ml_v1_list_trials_response: Optional[shared.GoogleCloudMlV1ListTrialsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

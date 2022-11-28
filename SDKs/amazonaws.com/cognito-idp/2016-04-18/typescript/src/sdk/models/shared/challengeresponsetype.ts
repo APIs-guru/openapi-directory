@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ChallengeNameEnum } from "./challengenameenum";
 import { ChallengeResponseEnum } from "./challengeresponseenum";
+
 
 
 // ChallengeResponseType
@@ -8,9 +9,9 @@ import { ChallengeResponseEnum } from "./challengeresponseenum";
  * The challenge response type.
 **/
 export class ChallengeResponseType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ChallengeName" })
+  @SpeakeasyMetadata({ data: "json, name=ChallengeName" })
   challengeName?: ChallengeNameEnum;
 
-  @Metadata({ data: "json, name=ChallengeResponse" })
+  @SpeakeasyMetadata({ data: "json, name=ChallengeResponse" })
   challengeResponse?: ChallengeResponseEnum;
 }

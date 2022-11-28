@@ -1,5 +1,7 @@
 package shared
 
+// SegmentResponse
+// Provides information about the configuration, dimension, and other settings for a segment.
 type SegmentResponse struct {
 	ApplicationID    string                 `json:"ApplicationId"`
 	Arn              string                 `json:"Arn"`

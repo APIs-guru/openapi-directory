@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
 class UpdateCustomVerificationEmailTemplatePathParams:
-    template_name: str = field(default=None, metadata={'path_param': { 'field_name': 'TemplateName', 'style': 'simple', 'explode': False }})
+    template_name: str = field(metadata={'path_param': { 'field_name': 'TemplateName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,26 +26,26 @@ class UpdateCustomVerificationEmailTemplateHeaders:
 @dataclass_json
 @dataclass
 class UpdateCustomVerificationEmailTemplateRequestBody:
-    failure_redirection_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FailureRedirectionURL' }})
-    from_email_address: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FromEmailAddress' }})
-    success_redirection_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SuccessRedirectionURL' }})
-    template_content: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TemplateContent' }})
-    template_subject: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TemplateSubject' }})
+    failure_redirection_url: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('FailureRedirectionURL') }})
+    from_email_address: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('FromEmailAddress') }})
+    success_redirection_url: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('SuccessRedirectionURL') }})
+    template_content: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('TemplateContent') }})
+    template_subject: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('TemplateSubject') }})
     
 
 @dataclass
 class UpdateCustomVerificationEmailTemplateRequest:
-    path_params: UpdateCustomVerificationEmailTemplatePathParams = field(default=None)
-    headers: UpdateCustomVerificationEmailTemplateHeaders = field(default=None)
-    request: UpdateCustomVerificationEmailTemplateRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateCustomVerificationEmailTemplateHeaders = field()
+    path_params: UpdateCustomVerificationEmailTemplatePathParams = field()
+    request: UpdateCustomVerificationEmailTemplateRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateCustomVerificationEmailTemplateResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     update_custom_verification_email_template_response: Optional[dict[str, Any]] = field(default=None)
     

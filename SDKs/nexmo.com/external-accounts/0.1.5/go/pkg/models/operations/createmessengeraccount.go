@@ -11,22 +11,9 @@ type CreateMessengerAccountRequestBody struct {
 	Name         *string  `json:"name,omitempty"`
 }
 
-type CreateMessengerAccountSecurityOption1 struct {
-	BearerAuth shared.SchemeBearerAuth `security:"scheme,type=http,subtype=bearer"`
-}
-
-type CreateMessengerAccountSecurityOption2 struct {
-	BasicAuth shared.SchemeBasicAuth `security:"scheme,type=http,subtype=basic"`
-}
-
 type CreateMessengerAccountSecurity struct {
-	Option1 *CreateMessengerAccountSecurityOption1 `security:"option"`
-	Option2 *CreateMessengerAccountSecurityOption2 `security:"option"`
-}
-
-type CreateMessengerAccountRequest struct {
-	Request  CreateMessengerAccountRequestBody `request:"mediaType=application/json"`
-	Security CreateMessengerAccountSecurity
+	BearerAuth *shared.SchemeBearerAuth `security:"scheme,type=http,subtype=bearer"`
+	BasicAuth  *shared.SchemeBasicAuth  `security:"scheme,type=http,subtype=basic"`
 }
 
 type CreateMessengerAccount400ApplicationJSONInvalidParams struct {
@@ -40,6 +27,11 @@ type CreateMessengerAccount400ApplicationJSON struct {
 	InvalidParams []CreateMessengerAccount400ApplicationJSONInvalidParams `json:"invalid_params,omitempty"`
 	Title         *string                                                 `json:"title,omitempty"`
 	Type          *string                                                 `json:"type,omitempty"`
+}
+
+type CreateMessengerAccountRequest struct {
+	Request  CreateMessengerAccountRequestBody `request:"mediaType=application/json"`
+	Security CreateMessengerAccountSecurity
 }
 
 type CreateMessengerAccountResponse struct {

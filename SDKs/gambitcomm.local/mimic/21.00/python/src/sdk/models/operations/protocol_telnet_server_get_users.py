@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class ProtocolTelnetServerGetUsersPathParams:
-    agent_num: int = field(default=None, metadata={'path_param': { 'field_name': 'agentNum', 'style': 'simple', 'explode': False }})
+    agent_num: int = field(metadata={'path_param': { 'field_name': 'agentNum', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ProtocolTelnetServerGetUsersRequest:
-    path_params: ProtocolTelnetServerGetUsersPathParams = field(default=None)
+    path_params: ProtocolTelnetServerGetUsersPathParams = field()
     
 
 @dataclass
 class ProtocolTelnetServerGetUsersResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     telnet_users: Optional[List[shared.TelnetUser]] = field(default=None)
     

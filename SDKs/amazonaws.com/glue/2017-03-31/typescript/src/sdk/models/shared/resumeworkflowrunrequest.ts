@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ResumeWorkflowRunRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 
-  @Metadata({ data: "json, name=NodeIds" })
+  @SpeakeasyMetadata({ data: "json, name=NodeIds" })
   nodeIds: string[];
 
-  @Metadata({ data: "json, name=RunId" })
+  @SpeakeasyMetadata({ data: "json, name=RunId" })
   runId: string;
 }

@@ -10,19 +10,19 @@ class GetCurrentEntitlementQueryParams:
 
 @dataclass
 class GetCurrentEntitlementSecurity:
-    account_auth: shared.SchemeAccountAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    account_auth: shared.SchemeAccountAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetCurrentEntitlementRequest:
-    query_params: GetCurrentEntitlementQueryParams = field(default=None)
-    security: GetCurrentEntitlementSecurity = field(default=None)
+    query_params: GetCurrentEntitlementQueryParams = field()
+    security: GetCurrentEntitlementSecurity = field()
     
 
 @dataclass
 class GetCurrentEntitlementResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     itv_entitlement_current: Optional[shared.ItvEntitlementCurrent] = field(default=None)
     service_error: Optional[shared.ServiceError] = field(default=None)
-    status_code: int = field(default=None)
     

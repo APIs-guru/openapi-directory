@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GroupResult } from "./groupresult";
 // TestResult
 /**
  * Show each group result.
@@ -34,7 +34,7 @@ var TestResult = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=groups", elemType: shared.GroupResult }),
+        SpeakeasyMetadata({ data: "json, name=groups", elemType: GroupResult }),
         __metadata("design:type", Array)
     ], TestResult.prototype, "groups", void 0);
     return TestResult;

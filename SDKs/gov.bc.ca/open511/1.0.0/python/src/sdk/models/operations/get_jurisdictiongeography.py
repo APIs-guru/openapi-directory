@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 
 class GetJurisdictiongeographyFormatEnum(str, Enum):
     JSON = "json"
@@ -13,11 +14,11 @@ class GetJurisdictiongeographyQueryParams:
 
 @dataclass
 class GetJurisdictiongeographyRequest:
-    query_params: GetJurisdictiongeographyQueryParams = field(default=None)
+    query_params: GetJurisdictiongeographyQueryParams = field()
     
 
 @dataclass
 class GetJurisdictiongeographyResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

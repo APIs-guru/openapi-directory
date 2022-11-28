@@ -12,11 +12,6 @@ type CreateDataRequestTokenSecurity struct {
 	APITokenBasic shared.SchemeAPITokenBasic `security:"scheme,type=http,subtype=basic"`
 }
 
-type CreateDataRequestTokenRequest struct {
-	PathParams CreateDataRequestTokenPathParams
-	Security   CreateDataRequestTokenSecurity
-}
-
 type CreateDataRequestTokenCreateSubmissionDataRequestTokenResponseStatusEnum string
 
 const (
@@ -35,6 +30,11 @@ type CreateDataRequestTokenCreateSubmissionDataRequestTokenResponse struct {
 	Errors []string                                                                 `json:"errors,omitempty"`
 	Status CreateDataRequestTokenCreateSubmissionDataRequestTokenResponseStatusEnum `json:"status"`
 	Token  CreateDataRequestTokenCreateSubmissionDataRequestTokenResponseToken      `json:"token"`
+}
+
+type CreateDataRequestTokenRequest struct {
+	PathParams CreateDataRequestTokenPathParams
+	Security   CreateDataRequestTokenSecurity
 }
 
 type CreateDataRequestTokenResponse struct {

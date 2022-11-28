@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApplicationMaintenanceConfigurationUpdate } from "./applicationmaintenanceconfigurationupdate";
 
 
+
 export class UpdateApplicationMaintenanceConfigurationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApplicationMaintenanceConfigurationUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationMaintenanceConfigurationUpdate" })
   applicationMaintenanceConfigurationUpdate: ApplicationMaintenanceConfigurationUpdate;
 
-  @Metadata({ data: "json, name=ApplicationName" })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationName" })
   applicationName: string;
 }

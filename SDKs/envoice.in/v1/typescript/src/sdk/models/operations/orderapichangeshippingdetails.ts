@@ -1,59 +1,60 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class OrderApiChangeShippingDetailsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=orderId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=orderId" })
   orderId: number;
 }
 
 
 export class OrderApiChangeShippingDetailsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=x-auth-key" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-auth-key" })
   xAuthKey: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=x-auth-secret" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-auth-secret" })
   xAuthSecret: string;
 }
 
 
 export class OrderApiChangeShippingDetailsRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/xml" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/xml" })
   applicationXml: Uint8Array;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   orderShippingDetailsApiModel?: shared.OrderShippingDetailsApiModel;
 
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
   orderShippingDetailsApiModel1?: shared.OrderShippingDetailsApiModel;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   orderShippingDetailsApiModel2?: shared.OrderShippingDetailsApiModel;
 
-  @Metadata({ data: "request, media_type=text/html" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/html" })
   textHtml: Uint8Array;
 
-  @Metadata({ data: "request, media_type=text/xml" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/xml" })
   textXml: Uint8Array;
 }
 
 
 export class OrderApiChangeShippingDetailsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: OrderApiChangeShippingDetailsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: OrderApiChangeShippingDetailsHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request: OrderApiChangeShippingDetailsRequests;
 }
 
 
 export class OrderApiChangeShippingDetailsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Aspect
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * This type contains the name and values of a category aspect.
 **/
 export class Aspect extends SpeakeasyBase {
-  @Metadata({ data: "json, name=localizedName" })
+  @SpeakeasyMetadata({ data: "json, name=localizedName" })
   localizedName?: string;
 
-  @Metadata({ data: "json, name=localizedValues" })
+  @SpeakeasyMetadata({ data: "json, name=localizedValues" })
   localizedValues?: string[];
 }

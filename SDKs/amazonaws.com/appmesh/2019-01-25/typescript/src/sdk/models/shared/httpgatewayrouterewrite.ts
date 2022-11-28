@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GatewayRouteHostnameRewrite } from "./gatewayroutehostnamerewrite";
 import { HttpGatewayRoutePathRewrite } from "./httpgatewayroutepathrewrite";
 import { HttpGatewayRoutePrefixRewrite } from "./httpgatewayrouteprefixrewrite";
+
 
 
 // HttpGatewayRouteRewrite
@@ -9,12 +10,12 @@ import { HttpGatewayRoutePrefixRewrite } from "./httpgatewayrouteprefixrewrite";
  * An object representing the gateway route to rewrite.
 **/
 export class HttpGatewayRouteRewrite extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hostname" })
+  @SpeakeasyMetadata({ data: "json, name=hostname" })
   hostname?: GatewayRouteHostnameRewrite;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path?: HttpGatewayRoutePathRewrite;
 
-  @Metadata({ data: "json, name=prefix" })
+  @SpeakeasyMetadata({ data: "json, name=prefix" })
   prefix?: HttpGatewayRoutePrefixRewrite;
 }

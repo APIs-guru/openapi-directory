@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Date } from "./date";
+
 
 
 // ImageVersion
@@ -7,21 +8,21 @@ import { Date } from "./date";
  * Image Version information
 **/
 export class ImageVersion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=creationDisabled" })
+  @SpeakeasyMetadata({ data: "json, name=creationDisabled" })
   creationDisabled?: boolean;
 
-  @Metadata({ data: "json, name=imageVersionId" })
+  @SpeakeasyMetadata({ data: "json, name=imageVersionId" })
   imageVersionId?: string;
 
-  @Metadata({ data: "json, name=isDefault" })
+  @SpeakeasyMetadata({ data: "json, name=isDefault" })
   isDefault?: boolean;
 
-  @Metadata({ data: "json, name=releaseDate" })
+  @SpeakeasyMetadata({ data: "json, name=releaseDate" })
   releaseDate?: Date;
 
-  @Metadata({ data: "json, name=supportedPythonVersions" })
+  @SpeakeasyMetadata({ data: "json, name=supportedPythonVersions" })
   supportedPythonVersions?: string[];
 
-  @Metadata({ data: "json, name=upgradeDisabled" })
+  @SpeakeasyMetadata({ data: "json, name=upgradeDisabled" })
   upgradeDisabled?: boolean;
 }

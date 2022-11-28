@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { AccountAccess } from "./accountaccess";
 // Scopes
 /**
  * The scopes object
@@ -34,15 +34,15 @@ var Scopes = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=accounts", elemType: shared.AccountAccess }),
+        SpeakeasyMetadata({ data: "json, name=accounts", elemType: AccountAccess }),
         __metadata("design:type", Array)
     ], Scopes.prototype, "accounts", void 0);
     __decorate([
-        Metadata({ data: "json, name=new_accounts" }),
+        SpeakeasyMetadata({ data: "json, name=new_accounts" }),
         __metadata("design:type", Boolean)
     ], Scopes.prototype, "newAccounts", void 0);
     __decorate([
-        Metadata({ data: "json, name=product_access" }),
+        SpeakeasyMetadata({ data: "json, name=product_access" }),
         __metadata("design:type", Map)
     ], Scopes.prototype, "productAccess", void 0);
     return Scopes;

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { LensReviewSummary } from "./lensreviewsummary";
 /**
  * Output of a list lens reviews call.

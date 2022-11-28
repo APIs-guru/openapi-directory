@@ -1,6 +1,7 @@
 
 
+
 export enum MessageFormatEnum {
-    Raw = "RAW"
-,    Json = "JSON"
+    Raw = "RAW",
+    Json = "JSON"
 }

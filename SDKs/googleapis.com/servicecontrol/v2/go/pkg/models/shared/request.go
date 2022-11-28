@@ -1,5 +1,7 @@
 package shared
 
+// Request
+// This message defines attributes for an HTTP request. If the actual request is not an HTTP request, the runtime system should try to map the actual request to an equivalent HTTP request.
 type Request struct {
 	Auth     *Auth             `json:"auth,omitempty"`
 	Headers  map[string]string `json:"headers,omitempty"`

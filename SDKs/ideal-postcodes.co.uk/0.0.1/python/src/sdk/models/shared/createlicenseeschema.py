@@ -1,15 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import createlicenseedaily
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateLicenseeSchema:
-    address: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'address' }})
-    daily: Optional[createlicenseedaily.CreateLicenseeDaily] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'daily' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    postcode: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'postcode' }})
-    whitelist: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'whitelist' }})
+    address: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('address') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    postcode: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('postcode') }})
+    daily: Optional[CreateLicenseeDaily] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('daily') }})
+    whitelist: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('whitelist') }})
     

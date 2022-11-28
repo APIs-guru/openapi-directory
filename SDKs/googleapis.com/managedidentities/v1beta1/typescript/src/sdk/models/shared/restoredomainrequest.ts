@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RestoreDomainRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * RestoreDomainRequest is the request received by RestoreDomain rpc
 **/
 export class RestoreDomainRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=backupId" })
+  @SpeakeasyMetadata({ data: "json, name=backupId" })
   backupId?: string;
 }

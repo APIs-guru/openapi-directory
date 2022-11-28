@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class MybusinessAccountsLocationsQuestionsCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class MybusinessAccountsLocationsQuestionsCreateQueryParams:
 
 @dataclass
 class MybusinessAccountsLocationsQuestionsCreateRequest:
-    path_params: MybusinessAccountsLocationsQuestionsCreatePathParams = field(default=None)
-    query_params: MybusinessAccountsLocationsQuestionsCreateQueryParams = field(default=None)
+    path_params: MybusinessAccountsLocationsQuestionsCreatePathParams = field()
+    query_params: MybusinessAccountsLocationsQuestionsCreateQueryParams = field()
     request: Optional[shared.Question] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class MybusinessAccountsLocationsQuestionsCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     question: Optional[shared.Question] = field(default=None)
-    status_code: int = field(default=None)
     

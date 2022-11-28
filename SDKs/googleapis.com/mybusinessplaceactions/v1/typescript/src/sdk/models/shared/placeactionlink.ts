@@ -1,20 +1,40 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum PlaceActionLinkPlaceActionTypeEnum {
-    PlaceActionTypeUnspecified = "PLACE_ACTION_TYPE_UNSPECIFIED"
-,    Appointment = "APPOINTMENT"
-,    OnlineAppointment = "ONLINE_APPOINTMENT"
-,    DiningReservation = "DINING_RESERVATION"
-,    FoodOrdering = "FOOD_ORDERING"
-,    FoodDelivery = "FOOD_DELIVERY"
-,    FoodTakeout = "FOOD_TAKEOUT"
-,    ShopOnline = "SHOP_ONLINE"
+    PlaceActionTypeUnspecified = "PLACE_ACTION_TYPE_UNSPECIFIED",
+    Appointment = "APPOINTMENT",
+    OnlineAppointment = "ONLINE_APPOINTMENT",
+    DiningReservation = "DINING_RESERVATION",
+    FoodOrdering = "FOOD_ORDERING",
+    FoodDelivery = "FOOD_DELIVERY",
+    FoodTakeout = "FOOD_TAKEOUT",
+    ShopOnline = "SHOP_ONLINE"
 }
 
 export enum PlaceActionLinkProviderTypeEnum {
-    ProviderTypeUnspecified = "PROVIDER_TYPE_UNSPECIFIED"
-,    Merchant = "MERCHANT"
-,    Aggregator3P = "AGGREGATOR_3P"
+    ProviderTypeUnspecified = "PROVIDER_TYPE_UNSPECIFIED",
+    Merchant = "MERCHANT",
+    Aggregator3P = "AGGREGATOR_3P"
+}
+
+
+// PlaceActionLinkInput
+/** 
+ * Represents a place action link and its attributes.
+**/
+export class PlaceActionLinkInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=isPreferred" })
+  isPreferred?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=placeActionType" })
+  placeActionType?: PlaceActionLinkPlaceActionTypeEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=uri" })
+  uri?: string;
 }
 
 
@@ -23,27 +43,27 @@ export enum PlaceActionLinkProviderTypeEnum {
  * Represents a place action link and its attributes.
 **/
 export class PlaceActionLink extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=isEditable" })
+  @SpeakeasyMetadata({ data: "json, name=isEditable" })
   isEditable?: boolean;
 
-  @Metadata({ data: "json, name=isPreferred" })
+  @SpeakeasyMetadata({ data: "json, name=isPreferred" })
   isPreferred?: boolean;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=placeActionType" })
+  @SpeakeasyMetadata({ data: "json, name=placeActionType" })
   placeActionType?: PlaceActionLinkPlaceActionTypeEnum;
 
-  @Metadata({ data: "json, name=providerType" })
+  @SpeakeasyMetadata({ data: "json, name=providerType" })
   providerType?: PlaceActionLinkProviderTypeEnum;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri?: string;
 }

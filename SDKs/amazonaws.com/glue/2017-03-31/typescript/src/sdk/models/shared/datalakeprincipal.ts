@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DataLakePrincipal
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The Lake Formation principal.
 **/
 export class DataLakePrincipal extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DataLakePrincipalIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=DataLakePrincipalIdentifier" })
   dataLakePrincipalIdentifier?: string;
 }

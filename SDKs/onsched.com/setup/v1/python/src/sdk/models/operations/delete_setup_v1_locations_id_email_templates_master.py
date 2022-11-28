@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class DeleteSetupV1LocationsIDEmailTemplatesMasterPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DeleteSetupV1LocationsIDEmailTemplatesMasterRequest:
-    path_params: DeleteSetupV1LocationsIDEmailTemplatesMasterPathParams = field(default=None)
+    path_params: DeleteSetupV1LocationsIDEmailTemplatesMasterPathParams = field()
     
 
 @dataclass
 class DeleteSetupV1LocationsIDEmailTemplatesMasterResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     master_email_template_settings_view_model: Optional[shared.MasterEmailTemplateSettingsViewModel] = field(default=None)
-    status_code: int = field(default=None)
     

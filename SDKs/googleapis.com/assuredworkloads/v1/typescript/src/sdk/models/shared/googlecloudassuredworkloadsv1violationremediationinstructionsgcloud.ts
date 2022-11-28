@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudAssuredworkloadsV1ViolationRemediationInstructionsGcloud
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Remediation instructions to resolve violation via gcloud cli
 **/
 export class GoogleCloudAssuredworkloadsV1ViolationRemediationInstructionsGcloud extends SpeakeasyBase {
-  @Metadata({ data: "json, name=additionalLinks" })
+  @SpeakeasyMetadata({ data: "json, name=additionalLinks" })
   additionalLinks?: string[];
 
-  @Metadata({ data: "json, name=gcloudCommands" })
+  @SpeakeasyMetadata({ data: "json, name=gcloudCommands" })
   gcloudCommands?: string[];
 
-  @Metadata({ data: "json, name=steps" })
+  @SpeakeasyMetadata({ data: "json, name=steps" })
   steps?: string[];
 }

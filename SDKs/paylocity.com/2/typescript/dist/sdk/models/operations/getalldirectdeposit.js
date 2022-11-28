@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetAllDirectDepositPathParams = /** @class */ (function (_super) {
     __extends(GetAllDirectDepositPathParams, _super);
@@ -30,11 +30,11 @@ var GetAllDirectDepositPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=companyId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=companyId" }),
         __metadata("design:type", String)
     ], GetAllDirectDepositPathParams.prototype, "companyId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=employeeId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=employeeId" }),
         __metadata("design:type", String)
     ], GetAllDirectDepositPathParams.prototype, "employeeId", void 0);
     return GetAllDirectDepositPathParams;
@@ -46,7 +46,7 @@ var GetAllDirectDepositSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemePaylocityAuth)
     ], GetAllDirectDepositSecurity.prototype, "paylocityAuth", void 0);
     return GetAllDirectDepositSecurity;
@@ -58,11 +58,11 @@ var GetAllDirectDepositRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAllDirectDepositPathParams)
     ], GetAllDirectDepositRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAllDirectDepositSecurity)
     ], GetAllDirectDepositRequest.prototype, "security", void 0);
     return GetAllDirectDepositRequest;
@@ -74,19 +74,19 @@ var GetAllDirectDepositResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetAllDirectDepositResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetAllDirectDepositResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata({ elemType: shared.DirectDeposit }),
+        SpeakeasyMetadata({ elemType: shared.DirectDeposit }),
         __metadata("design:type", Array)
     ], GetAllDirectDepositResponse.prototype, "directDeposits", void 0);
     __decorate([
-        Metadata({ elemType: shared.Error }),
+        SpeakeasyMetadata({ elemType: shared.Error }),
         __metadata("design:type", Array)
     ], GetAllDirectDepositResponse.prototype, "errors", void 0);
     return GetAllDirectDepositResponse;

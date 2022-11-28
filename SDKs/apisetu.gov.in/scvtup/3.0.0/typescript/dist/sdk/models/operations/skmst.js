@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var SkmstRequestBodyCertificateParameters = /** @class */ (function (_super) {
     __extends(SkmstRequestBodyCertificateParameters, _super);
@@ -30,23 +30,23 @@ var SkmstRequestBodyCertificateParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DOB" }),
+        SpeakeasyMetadata({ data: "json, name=DOB" }),
         __metadata("design:type", String)
     ], SkmstRequestBodyCertificateParameters.prototype, "dob", void 0);
     __decorate([
-        Metadata({ data: "json, name=FullName" }),
+        SpeakeasyMetadata({ data: "json, name=FullName" }),
         __metadata("design:type", String)
     ], SkmstRequestBodyCertificateParameters.prototype, "fullName", void 0);
     __decorate([
-        Metadata({ data: "json, name=RollNumber" }),
+        SpeakeasyMetadata({ data: "json, name=RollNumber" }),
         __metadata("design:type", String)
     ], SkmstRequestBodyCertificateParameters.prototype, "rollNumber", void 0);
     __decorate([
-        Metadata({ data: "json, name=Sem" }),
+        SpeakeasyMetadata({ data: "json, name=Sem" }),
         __metadata("design:type", String)
     ], SkmstRequestBodyCertificateParameters.prototype, "sem", void 0);
     __decorate([
-        Metadata({ data: "json, name=Session" }),
+        SpeakeasyMetadata({ data: "json, name=Session" }),
         __metadata("design:type", String)
     ], SkmstRequestBodyCertificateParameters.prototype, "session", void 0);
     return SkmstRequestBodyCertificateParameters;
@@ -62,19 +62,19 @@ var SkmstRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=certificateParameters" }),
+        SpeakeasyMetadata({ data: "json, name=certificateParameters" }),
         __metadata("design:type", SkmstRequestBodyCertificateParameters)
     ], SkmstRequestBody.prototype, "certificateParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=consentArtifact" }),
+        SpeakeasyMetadata({ data: "json, name=consentArtifact" }),
         __metadata("design:type", Object)
     ], SkmstRequestBody.prototype, "consentArtifact", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], SkmstRequestBody.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=txnId" }),
+        SpeakeasyMetadata({ data: "json, name=txnId" }),
         __metadata("design:type", String)
     ], SkmstRequestBody.prototype, "txnId", void 0);
     return SkmstRequestBody;
@@ -86,32 +86,16 @@ var SkmstSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], SkmstSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeClientId)
     ], SkmstSecurity.prototype, "clientId", void 0);
     return SkmstSecurity;
 }(SpeakeasyBase));
 export { SkmstSecurity };
-var SkmstRequest = /** @class */ (function (_super) {
-    __extends(SkmstRequest, _super);
-    function SkmstRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", SkmstRequestBody)
-    ], SkmstRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", SkmstSecurity)
-    ], SkmstRequest.prototype, "security", void 0);
-    return SkmstRequest;
-}(SpeakeasyBase));
-export { SkmstRequest };
 export var Skmst400ApplicationJsonErrorEnum;
 (function (Skmst400ApplicationJsonErrorEnum) {
     Skmst400ApplicationJsonErrorEnum["MissingParameter"] = "missing_parameter";
@@ -134,11 +118,11 @@ var Skmst400ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Skmst400ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Skmst400ApplicationJson.prototype, "errorDescription", void 0);
     return Skmst400ApplicationJson;
@@ -160,11 +144,11 @@ var Skmst401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Skmst401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Skmst401ApplicationJson.prototype, "errorDescription", void 0);
     return Skmst401ApplicationJson;
@@ -186,11 +170,11 @@ var Skmst404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Skmst404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Skmst404ApplicationJson.prototype, "errorDescription", void 0);
     return Skmst404ApplicationJson;
@@ -210,11 +194,11 @@ var Skmst500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Skmst500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Skmst500ApplicationJson.prototype, "errorDescription", void 0);
     return Skmst500ApplicationJson;
@@ -234,11 +218,11 @@ var Skmst502ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Skmst502ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Skmst502ApplicationJson.prototype, "errorDescription", void 0);
     return Skmst502ApplicationJson;
@@ -258,11 +242,11 @@ var Skmst503ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Skmst503ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Skmst503ApplicationJson.prototype, "errorDescription", void 0);
     return Skmst503ApplicationJson;
@@ -282,55 +266,71 @@ var Skmst504ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Skmst504ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Skmst504ApplicationJson.prototype, "errorDescription", void 0);
     return Skmst504ApplicationJson;
 }(SpeakeasyBase));
 export { Skmst504ApplicationJson };
+var SkmstRequest = /** @class */ (function (_super) {
+    __extends(SkmstRequest, _super);
+    function SkmstRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", SkmstRequestBody)
+    ], SkmstRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", SkmstSecurity)
+    ], SkmstRequest.prototype, "security", void 0);
+    return SkmstRequest;
+}(SpeakeasyBase));
+export { SkmstRequest };
 var SkmstResponse = /** @class */ (function (_super) {
     __extends(SkmstResponse, _super);
     function SkmstResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], SkmstResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], SkmstResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Skmst400ApplicationJson)
     ], SkmstResponse.prototype, "skmst400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Skmst401ApplicationJson)
     ], SkmstResponse.prototype, "skmst401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Skmst404ApplicationJson)
     ], SkmstResponse.prototype, "skmst404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Skmst500ApplicationJson)
     ], SkmstResponse.prototype, "skmst500ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Skmst502ApplicationJson)
     ], SkmstResponse.prototype, "skmst502ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Skmst503ApplicationJson)
     ], SkmstResponse.prototype, "skmst503ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Skmst504ApplicationJson)
     ], SkmstResponse.prototype, "skmst504ApplicationJsonObject", void 0);
     return SkmstResponse;

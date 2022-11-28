@@ -18,6 +18,8 @@ type UpdateBillingGroupHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateBillingGroupRequestBodyBillingGroupProperties
+// The properties of a billing group.
 type UpdateBillingGroupRequestBodyBillingGroupProperties struct {
 	BillingGroupDescription *string `json:"billingGroupDescription,omitempty"`
 }

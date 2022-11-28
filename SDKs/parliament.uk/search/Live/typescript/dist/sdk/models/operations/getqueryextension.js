@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetQueryExtensionExtensionEnum;
 (function (GetQueryExtensionExtensionEnum) {
     GetQueryExtensionExtensionEnum["Atom"] = "atom";
@@ -36,7 +36,7 @@ var GetQueryExtensionPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=extension" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=extension" }),
         __metadata("design:type", String)
     ], GetQueryExtensionPathParams.prototype, "extension", void 0);
     return GetQueryExtensionPathParams;
@@ -48,23 +48,23 @@ var GetQueryExtensionQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=count" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=count" }),
         __metadata("design:type", Number)
     ], GetQueryExtensionQueryParams.prototype, "count", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=inUrlPrefixes" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=inUrlPrefixes" }),
         __metadata("design:type", String)
     ], GetQueryExtensionQueryParams.prototype, "inUrlPrefixes", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=q" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=q" }),
         __metadata("design:type", String)
     ], GetQueryExtensionQueryParams.prototype, "q", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=start" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=start" }),
         __metadata("design:type", Number)
     ], GetQueryExtensionQueryParams.prototype, "start", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=subdomains" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=subdomains" }),
         __metadata("design:type", String)
     ], GetQueryExtensionQueryParams.prototype, "subdomains", void 0);
     return GetQueryExtensionQueryParams;
@@ -76,11 +76,11 @@ var GetQueryExtensionRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetQueryExtensionPathParams)
     ], GetQueryExtensionRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetQueryExtensionQueryParams)
     ], GetQueryExtensionRequest.prototype, "queryParams", void 0);
     return GetQueryExtensionRequest;
@@ -92,11 +92,11 @@ var GetQueryExtensionResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetQueryExtensionResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetQueryExtensionResponse.prototype, "statusCode", void 0);
     return GetQueryExtensionResponse;

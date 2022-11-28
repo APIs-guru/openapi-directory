@@ -8,6 +8,8 @@ const (
 	ValueRangeMajorDimensionEnumColumns              ValueRangeMajorDimensionEnum = "COLUMNS"
 )
 
+// ValueRange
+// Data within a range of the spreadsheet.
 type ValueRange struct {
 	MajorDimension *ValueRangeMajorDimensionEnum `json:"majorDimension,omitempty"`
 	Range          *string                       `json:"range,omitempty"`

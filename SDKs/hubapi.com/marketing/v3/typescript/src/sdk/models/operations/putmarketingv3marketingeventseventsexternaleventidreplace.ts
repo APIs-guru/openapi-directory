@@ -1,56 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PutMarketingV3MarketingEventsEventsExternalEventIdReplacePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=externalEventId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=externalEventId" })
   externalEventId: string;
 }
 
 
-export class PutMarketingV3MarketingEventsEventsExternalEventIdReplaceSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
-  hapikey: shared.SchemeHapikey;
-}
-
-
-export class PutMarketingV3MarketingEventsEventsExternalEventIdReplaceSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth2Legacy: shared.SchemeOauth2Legacy;
-}
-
-
 export class PutMarketingV3MarketingEventsEventsExternalEventIdReplaceSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: PutMarketingV3MarketingEventsEventsExternalEventIdReplaceSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
+  hapikey?: shared.SchemeHapikey;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: PutMarketingV3MarketingEventsEventsExternalEventIdReplaceSecurityOption2;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  privateAppsLegacy?: shared.SchemePrivateAppsLegacy;
+
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth2Legacy?: shared.SchemeOauth2Legacy;
 }
 
 
 export class PutMarketingV3MarketingEventsEventsExternalEventIdReplaceRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PutMarketingV3MarketingEventsEventsExternalEventIdReplacePathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.MarketingEventCreateRequestParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: PutMarketingV3MarketingEventsEventsExternalEventIdReplaceSecurity;
 }
 
 
 export class PutMarketingV3MarketingEventsEventsExternalEventIdReplaceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   marketingEventPublicDefaultResponse?: shared.MarketingEventPublicDefaultResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

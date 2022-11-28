@@ -12,11 +12,6 @@ type GetDashboardInfoSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type GetDashboardInfoRequest struct {
-	QueryParams GetDashboardInfoQueryParams
-	Security    GetDashboardInfoSecurity
-}
-
 type GetDashboardInfo200ApplicationJSONFiltersColumnName struct {
 	Name     *string `json:"name,omitempty"`
 	Operator *string `json:"operator,omitempty"`
@@ -47,6 +42,11 @@ type GetDashboardInfo422ApplicationJSON struct {
 
 type GetDashboardInfo500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type GetDashboardInfoRequest struct {
+	QueryParams GetDashboardInfoQueryParams
+	Security    GetDashboardInfoSecurity
 }
 
 type GetDashboardInfoResponse struct {

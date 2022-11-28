@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ExportFilter } from "./exportfilter";
 export declare class DescribeExportTasksRequest extends SpeakeasyBase {
     exportIds?: string[];

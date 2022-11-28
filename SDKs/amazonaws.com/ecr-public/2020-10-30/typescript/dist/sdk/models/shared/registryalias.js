@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RegistryAliasStatusEnum } from "./registryaliasstatusenum";
 // RegistryAlias
 /**
@@ -34,19 +34,19 @@ var RegistryAlias = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=defaultRegistryAlias" }),
+        SpeakeasyMetadata({ data: "json, name=defaultRegistryAlias" }),
         __metadata("design:type", Boolean)
     ], RegistryAlias.prototype, "defaultRegistryAlias", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], RegistryAlias.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=primaryRegistryAlias" }),
+        SpeakeasyMetadata({ data: "json, name=primaryRegistryAlias" }),
         __metadata("design:type", Boolean)
     ], RegistryAlias.prototype, "primaryRegistryAlias", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], RegistryAlias.prototype, "status", void 0);
     return RegistryAlias;

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleAnalyticsAdminV1alphaFirebaseLink } from "./googleanalyticsadminv1alphafirebaselink";
+
 
 
 // GoogleAnalyticsAdminV1alphaListFirebaseLinksResponse
@@ -8,9 +8,9 @@ import { GoogleAnalyticsAdminV1alphaFirebaseLink } from "./googleanalyticsadminv
  * Response message for ListFirebaseLinks RPC
 **/
 export class GoogleAnalyticsAdminV1alphaListFirebaseLinksResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=firebaseLinks", elemType: shared.GoogleAnalyticsAdminV1alphaFirebaseLink })
+  @SpeakeasyMetadata({ data: "json, name=firebaseLinks", elemType: GoogleAnalyticsAdminV1alphaFirebaseLink })
   firebaseLinks?: GoogleAnalyticsAdminV1alphaFirebaseLink[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

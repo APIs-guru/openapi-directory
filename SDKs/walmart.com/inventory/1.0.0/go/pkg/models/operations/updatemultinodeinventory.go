@@ -36,12 +36,6 @@ type UpdateMultiNodeInventoryRequestBody struct {
 	Inventories UpdateMultiNodeInventoryRequestBodyInventories `json:"inventories"`
 }
 
-type UpdateMultiNodeInventoryRequest struct {
-	PathParams UpdateMultiNodeInventoryPathParams
-	Headers    UpdateMultiNodeInventoryHeaders
-	Request    UpdateMultiNodeInventoryRequestBody `request:"mediaType=application/json"`
-}
-
 type UpdateMultiNodeInventory200ApplicationJSONNodesErrorsCategoryEnum string
 
 const (
@@ -66,6 +60,8 @@ const (
 	UpdateMultiNodeInventory200ApplicationJSONNodesErrorsSeverityEnumError UpdateMultiNodeInventory200ApplicationJSONNodesErrorsSeverityEnum = "ERROR"
 )
 
+// UpdateMultiNodeInventory200ApplicationJSONNodesErrors
+// Node Update Error description.
 type UpdateMultiNodeInventory200ApplicationJSONNodesErrors struct {
 	Category         *UpdateMultiNodeInventory200ApplicationJSONNodesErrorsCategoryEnum `json:"category,omitempty"`
 	Causes           []UpdateMultiNodeInventory200ApplicationJSONNodesErrorsCauses      `json:"causes,omitempty"`
@@ -86,6 +82,12 @@ type UpdateMultiNodeInventory200ApplicationJSONNodes struct {
 type UpdateMultiNodeInventory200ApplicationJSON struct {
 	Nodes []UpdateMultiNodeInventory200ApplicationJSONNodes `json:"nodes,omitempty"`
 	Sku   *string                                           `json:"sku,omitempty"`
+}
+
+type UpdateMultiNodeInventoryRequest struct {
+	PathParams UpdateMultiNodeInventoryPathParams
+	Headers    UpdateMultiNodeInventoryHeaders
+	Request    UpdateMultiNodeInventoryRequestBody `request:"mediaType=application/json"`
 }
 
 type UpdateMultiNodeInventoryResponse struct {

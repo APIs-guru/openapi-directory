@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CheckpointConfigurationUpdate } from "./checkpointconfigurationupdate";
 import { MonitoringConfigurationUpdate } from "./monitoringconfigurationupdate";
 import { ParallelismConfigurationUpdate } from "./parallelismconfigurationupdate";
@@ -36,15 +36,15 @@ var FlinkApplicationConfigurationUpdate = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CheckpointConfigurationUpdate" }),
+        SpeakeasyMetadata({ data: "json, name=CheckpointConfigurationUpdate" }),
         __metadata("design:type", CheckpointConfigurationUpdate)
     ], FlinkApplicationConfigurationUpdate.prototype, "checkpointConfigurationUpdate", void 0);
     __decorate([
-        Metadata({ data: "json, name=MonitoringConfigurationUpdate" }),
+        SpeakeasyMetadata({ data: "json, name=MonitoringConfigurationUpdate" }),
         __metadata("design:type", MonitoringConfigurationUpdate)
     ], FlinkApplicationConfigurationUpdate.prototype, "monitoringConfigurationUpdate", void 0);
     __decorate([
-        Metadata({ data: "json, name=ParallelismConfigurationUpdate" }),
+        SpeakeasyMetadata({ data: "json, name=ParallelismConfigurationUpdate" }),
         __metadata("design:type", ParallelismConfigurationUpdate)
     ], FlinkApplicationConfigurationUpdate.prototype, "parallelismConfigurationUpdate", void 0);
     return FlinkApplicationConfigurationUpdate;

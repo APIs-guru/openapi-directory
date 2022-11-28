@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DomainsrdapDomainGetPathParams:
-    domain_name: str = field(default=None, metadata={'path_param': { 'field_name': 'domainName', 'style': 'simple', 'explode': False }})
+    domain_name: str = field(metadata={'path_param': { 'field_name': 'domainName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,13 +26,13 @@ class DomainsrdapDomainGetQueryParams:
 
 @dataclass
 class DomainsrdapDomainGetRequest:
-    path_params: DomainsrdapDomainGetPathParams = field(default=None)
-    query_params: DomainsrdapDomainGetQueryParams = field(default=None)
+    path_params: DomainsrdapDomainGetPathParams = field()
+    query_params: DomainsrdapDomainGetQueryParams = field()
     
 
 @dataclass
 class DomainsrdapDomainGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     http_body: Optional[shared.HTTPBody] = field(default=None)
-    status_code: int = field(default=None)
     

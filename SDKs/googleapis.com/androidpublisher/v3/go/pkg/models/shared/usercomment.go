@@ -1,5 +1,7 @@
 package shared
 
+// UserComment
+// User entry from conversation between user and developer.
 type UserComment struct {
 	AndroidOsVersion *int32          `json:"androidOsVersion,omitempty"`
 	AppVersionCode   *int32          `json:"appVersionCode,omitempty"`

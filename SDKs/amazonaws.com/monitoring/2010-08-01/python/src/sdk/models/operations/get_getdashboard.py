@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetGetDashboardActionEnum(str, Enum):
     GET_DASHBOARD = "GetDashboard"
@@ -10,9 +14,9 @@ class GetGetDashboardVersionEnum(str, Enum):
 
 @dataclass
 class GetGetDashboardQueryParams:
-    action: GetGetDashboardActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    dashboard_name: str = field(default=None, metadata={'query_param': { 'field_name': 'DashboardName', 'style': 'form', 'explode': True }})
-    version: GetGetDashboardVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetGetDashboardActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    dashboard_name: str = field(metadata={'query_param': { 'field_name': 'DashboardName', 'style': 'form', 'explode': True }})
+    version: GetGetDashboardVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetGetDashboardHeaders:
 
 @dataclass
 class GetGetDashboardRequest:
-    query_params: GetGetDashboardQueryParams = field(default=None)
-    headers: GetGetDashboardHeaders = field(default=None)
+    headers: GetGetDashboardHeaders = field()
+    query_params: GetGetDashboardQueryParams = field()
     
 
 @dataclass
 class GetGetDashboardResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

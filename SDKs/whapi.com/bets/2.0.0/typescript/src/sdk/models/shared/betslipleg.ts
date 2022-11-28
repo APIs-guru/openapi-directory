@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Betslippart } from "./betslippart";
 
 
+
 export class Betslipleg extends SpeakeasyBase {
-  @Metadata({ data: "json, name=parts", elemType: shared.Betslippart })
+  @SpeakeasyMetadata({ data: "json, name=parts", elemType: Betslippart })
   parts: Betslippart[];
 
-  @Metadata({ data: "json, name=sort" })
+  @SpeakeasyMetadata({ data: "json, name=sort" })
   sort?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }

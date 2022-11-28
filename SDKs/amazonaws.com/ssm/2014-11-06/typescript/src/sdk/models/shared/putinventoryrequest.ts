@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InventoryItem } from "./inventoryitem";
 
 
+
 export class PutInventoryRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=InstanceId" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceId" })
   instanceId: string;
 
-  @Metadata({ data: "json, name=Items", elemType: shared.InventoryItem })
+  @SpeakeasyMetadata({ data: "json, name=Items", elemType: InventoryItem })
   items: InventoryItem[];
 }

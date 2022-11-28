@@ -41,7 +41,7 @@ type DocsDocumentsCreateSecurity struct {
 
 type DocsDocumentsCreateRequest struct {
 	QueryParams DocsDocumentsCreateQueryParams
-	Request     *shared.Document `request:"mediaType=application/json"`
+	Request     *shared.DocumentInput `request:"mediaType=application/json"`
 	Security    DocsDocumentsCreateSecurity
 }
 

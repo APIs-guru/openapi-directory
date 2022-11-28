@@ -1,5 +1,7 @@
 package shared
 
+// WorkItemStatus
+// Conveys a worker's progress through the work described by a WorkItem.
 type WorkItemStatus struct {
 	Completed                     *bool                        `json:"completed,omitempty"`
 	CounterUpdates                []CounterUpdate              `json:"counterUpdates,omitempty"`

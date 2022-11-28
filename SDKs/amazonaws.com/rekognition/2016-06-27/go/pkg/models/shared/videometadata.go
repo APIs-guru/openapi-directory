@@ -1,5 +1,7 @@
 package shared
 
+// VideoMetadata
+// Information about a video that Amazon Rekognition analyzed. <code>Videometadata</code> is returned in every page of paginated responses from a Amazon Rekognition video operation.
 type VideoMetadata struct {
 	Codec          *string              `json:"Codec,omitempty"`
 	ColorRange     *VideoColorRangeEnum `json:"ColorRange,omitempty"`

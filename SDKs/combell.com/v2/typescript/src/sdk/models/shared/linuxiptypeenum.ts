@@ -1,6 +1,7 @@
 
 
+
 export enum LinuxIpTypeEnum {
-    Dedicated = "dedicated"
-,    Shared = "shared"
+    Dedicated = "dedicated",
+    Shared = "shared"
 }

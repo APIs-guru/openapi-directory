@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GkeWorkload
@@ -6,21 +7,43 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A GKE Workload (Deployment, StatefulSet, etc). The field names correspond to the metadata labels on monitored resources that fall under a workload (for example, k8s_container or k8s_pod).
 **/
 export class GkeWorkload extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clusterName" })
+  @SpeakeasyMetadata({ data: "json, name=clusterName" })
   clusterName?: string;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: string;
 
-  @Metadata({ data: "json, name=namespaceName" })
+  @SpeakeasyMetadata({ data: "json, name=namespaceName" })
   namespaceName?: string;
 
-  @Metadata({ data: "json, name=projectId" })
+  @SpeakeasyMetadata({ data: "json, name=projectId" })
   projectId?: string;
 
-  @Metadata({ data: "json, name=topLevelControllerName" })
+  @SpeakeasyMetadata({ data: "json, name=topLevelControllerName" })
   topLevelControllerName?: string;
 
-  @Metadata({ data: "json, name=topLevelControllerType" })
+  @SpeakeasyMetadata({ data: "json, name=topLevelControllerType" })
+  topLevelControllerType?: string;
+}
+
+
+// GkeWorkloadInput
+/** 
+ * A GKE Workload (Deployment, StatefulSet, etc). The field names correspond to the metadata labels on monitored resources that fall under a workload (for example, k8s_container or k8s_pod).
+**/
+export class GkeWorkloadInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=clusterName" })
+  clusterName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=location" })
+  location?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=namespaceName" })
+  namespaceName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=topLevelControllerName" })
+  topLevelControllerName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=topLevelControllerType" })
   topLevelControllerType?: string;
 }

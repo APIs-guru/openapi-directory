@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateExportTaskRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=destination" })
+  @SpeakeasyMetadata({ data: "json, name=destination" })
   destination: string;
 
-  @Metadata({ data: "json, name=destinationPrefix" })
+  @SpeakeasyMetadata({ data: "json, name=destinationPrefix" })
   destinationPrefix?: string;
 
-  @Metadata({ data: "json, name=from" })
+  @SpeakeasyMetadata({ data: "json, name=from" })
   from: number;
 
-  @Metadata({ data: "json, name=logGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=logGroupName" })
   logGroupName: string;
 
-  @Metadata({ data: "json, name=logStreamNamePrefix" })
+  @SpeakeasyMetadata({ data: "json, name=logStreamNamePrefix" })
   logStreamNamePrefix?: string;
 
-  @Metadata({ data: "json, name=taskName" })
+  @SpeakeasyMetadata({ data: "json, name=taskName" })
   taskName?: string;
 
-  @Metadata({ data: "json, name=to" })
+  @SpeakeasyMetadata({ data: "json, name=to" })
   to: number;
 }

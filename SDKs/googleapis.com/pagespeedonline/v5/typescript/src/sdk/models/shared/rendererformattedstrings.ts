@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RendererFormattedStrings
@@ -6,147 +7,147 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Message holding the formatted strings used in the renderer.
 **/
 export class RendererFormattedStrings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=auditGroupExpandTooltip" })
+  @SpeakeasyMetadata({ data: "json, name=auditGroupExpandTooltip" })
   auditGroupExpandTooltip?: string;
 
-  @Metadata({ data: "json, name=calculatorLink" })
+  @SpeakeasyMetadata({ data: "json, name=calculatorLink" })
   calculatorLink?: string;
 
-  @Metadata({ data: "json, name=crcInitialNavigation" })
+  @SpeakeasyMetadata({ data: "json, name=crcInitialNavigation" })
   crcInitialNavigation?: string;
 
-  @Metadata({ data: "json, name=crcLongestDurationLabel" })
+  @SpeakeasyMetadata({ data: "json, name=crcLongestDurationLabel" })
   crcLongestDurationLabel?: string;
 
-  @Metadata({ data: "json, name=dropdownCopyJSON" })
+  @SpeakeasyMetadata({ data: "json, name=dropdownCopyJSON" })
   dropdownCopyJson?: string;
 
-  @Metadata({ data: "json, name=dropdownDarkTheme" })
+  @SpeakeasyMetadata({ data: "json, name=dropdownDarkTheme" })
   dropdownDarkTheme?: string;
 
-  @Metadata({ data: "json, name=dropdownPrintExpanded" })
+  @SpeakeasyMetadata({ data: "json, name=dropdownPrintExpanded" })
   dropdownPrintExpanded?: string;
 
-  @Metadata({ data: "json, name=dropdownPrintSummary" })
+  @SpeakeasyMetadata({ data: "json, name=dropdownPrintSummary" })
   dropdownPrintSummary?: string;
 
-  @Metadata({ data: "json, name=dropdownSaveGist" })
+  @SpeakeasyMetadata({ data: "json, name=dropdownSaveGist" })
   dropdownSaveGist?: string;
 
-  @Metadata({ data: "json, name=dropdownSaveHTML" })
+  @SpeakeasyMetadata({ data: "json, name=dropdownSaveHTML" })
   dropdownSaveHtml?: string;
 
-  @Metadata({ data: "json, name=dropdownSaveJSON" })
+  @SpeakeasyMetadata({ data: "json, name=dropdownSaveJSON" })
   dropdownSaveJson?: string;
 
-  @Metadata({ data: "json, name=dropdownViewer" })
+  @SpeakeasyMetadata({ data: "json, name=dropdownViewer" })
   dropdownViewer?: string;
 
-  @Metadata({ data: "json, name=errorLabel" })
+  @SpeakeasyMetadata({ data: "json, name=errorLabel" })
   errorLabel?: string;
 
-  @Metadata({ data: "json, name=errorMissingAuditInfo" })
+  @SpeakeasyMetadata({ data: "json, name=errorMissingAuditInfo" })
   errorMissingAuditInfo?: string;
 
-  @Metadata({ data: "json, name=footerIssue" })
+  @SpeakeasyMetadata({ data: "json, name=footerIssue" })
   footerIssue?: string;
 
-  @Metadata({ data: "json, name=labDataTitle" })
+  @SpeakeasyMetadata({ data: "json, name=labDataTitle" })
   labDataTitle?: string;
 
-  @Metadata({ data: "json, name=lsPerformanceCategoryDescription" })
+  @SpeakeasyMetadata({ data: "json, name=lsPerformanceCategoryDescription" })
   lsPerformanceCategoryDescription?: string;
 
-  @Metadata({ data: "json, name=manualAuditsGroupTitle" })
+  @SpeakeasyMetadata({ data: "json, name=manualAuditsGroupTitle" })
   manualAuditsGroupTitle?: string;
 
-  @Metadata({ data: "json, name=notApplicableAuditsGroupTitle" })
+  @SpeakeasyMetadata({ data: "json, name=notApplicableAuditsGroupTitle" })
   notApplicableAuditsGroupTitle?: string;
 
-  @Metadata({ data: "json, name=opportunityResourceColumnLabel" })
+  @SpeakeasyMetadata({ data: "json, name=opportunityResourceColumnLabel" })
   opportunityResourceColumnLabel?: string;
 
-  @Metadata({ data: "json, name=opportunitySavingsColumnLabel" })
+  @SpeakeasyMetadata({ data: "json, name=opportunitySavingsColumnLabel" })
   opportunitySavingsColumnLabel?: string;
 
-  @Metadata({ data: "json, name=passedAuditsGroupTitle" })
+  @SpeakeasyMetadata({ data: "json, name=passedAuditsGroupTitle" })
   passedAuditsGroupTitle?: string;
 
-  @Metadata({ data: "json, name=runtimeDesktopEmulation" })
+  @SpeakeasyMetadata({ data: "json, name=runtimeDesktopEmulation" })
   runtimeDesktopEmulation?: string;
 
-  @Metadata({ data: "json, name=runtimeMobileEmulation" })
+  @SpeakeasyMetadata({ data: "json, name=runtimeMobileEmulation" })
   runtimeMobileEmulation?: string;
 
-  @Metadata({ data: "json, name=runtimeNoEmulation" })
+  @SpeakeasyMetadata({ data: "json, name=runtimeNoEmulation" })
   runtimeNoEmulation?: string;
 
-  @Metadata({ data: "json, name=runtimeSettingsAxeVersion" })
+  @SpeakeasyMetadata({ data: "json, name=runtimeSettingsAxeVersion" })
   runtimeSettingsAxeVersion?: string;
 
-  @Metadata({ data: "json, name=runtimeSettingsBenchmark" })
+  @SpeakeasyMetadata({ data: "json, name=runtimeSettingsBenchmark" })
   runtimeSettingsBenchmark?: string;
 
-  @Metadata({ data: "json, name=runtimeSettingsCPUThrottling" })
+  @SpeakeasyMetadata({ data: "json, name=runtimeSettingsCPUThrottling" })
   runtimeSettingsCpuThrottling?: string;
 
-  @Metadata({ data: "json, name=runtimeSettingsChannel" })
+  @SpeakeasyMetadata({ data: "json, name=runtimeSettingsChannel" })
   runtimeSettingsChannel?: string;
 
-  @Metadata({ data: "json, name=runtimeSettingsDevice" })
+  @SpeakeasyMetadata({ data: "json, name=runtimeSettingsDevice" })
   runtimeSettingsDevice?: string;
 
-  @Metadata({ data: "json, name=runtimeSettingsFetchTime" })
+  @SpeakeasyMetadata({ data: "json, name=runtimeSettingsFetchTime" })
   runtimeSettingsFetchTime?: string;
 
-  @Metadata({ data: "json, name=runtimeSettingsNetworkThrottling" })
+  @SpeakeasyMetadata({ data: "json, name=runtimeSettingsNetworkThrottling" })
   runtimeSettingsNetworkThrottling?: string;
 
-  @Metadata({ data: "json, name=runtimeSettingsTitle" })
+  @SpeakeasyMetadata({ data: "json, name=runtimeSettingsTitle" })
   runtimeSettingsTitle?: string;
 
-  @Metadata({ data: "json, name=runtimeSettingsUA" })
+  @SpeakeasyMetadata({ data: "json, name=runtimeSettingsUA" })
   runtimeSettingsUa?: string;
 
-  @Metadata({ data: "json, name=runtimeSettingsUANetwork" })
+  @SpeakeasyMetadata({ data: "json, name=runtimeSettingsUANetwork" })
   runtimeSettingsUaNetwork?: string;
 
-  @Metadata({ data: "json, name=runtimeSettingsUrl" })
+  @SpeakeasyMetadata({ data: "json, name=runtimeSettingsUrl" })
   runtimeSettingsUrl?: string;
 
-  @Metadata({ data: "json, name=runtimeUnknown" })
+  @SpeakeasyMetadata({ data: "json, name=runtimeUnknown" })
   runtimeUnknown?: string;
 
-  @Metadata({ data: "json, name=scorescaleLabel" })
+  @SpeakeasyMetadata({ data: "json, name=scorescaleLabel" })
   scorescaleLabel?: string;
 
-  @Metadata({ data: "json, name=showRelevantAudits" })
+  @SpeakeasyMetadata({ data: "json, name=showRelevantAudits" })
   showRelevantAudits?: string;
 
-  @Metadata({ data: "json, name=snippetCollapseButtonLabel" })
+  @SpeakeasyMetadata({ data: "json, name=snippetCollapseButtonLabel" })
   snippetCollapseButtonLabel?: string;
 
-  @Metadata({ data: "json, name=snippetExpandButtonLabel" })
+  @SpeakeasyMetadata({ data: "json, name=snippetExpandButtonLabel" })
   snippetExpandButtonLabel?: string;
 
-  @Metadata({ data: "json, name=thirdPartyResourcesLabel" })
+  @SpeakeasyMetadata({ data: "json, name=thirdPartyResourcesLabel" })
   thirdPartyResourcesLabel?: string;
 
-  @Metadata({ data: "json, name=throttlingProvided" })
+  @SpeakeasyMetadata({ data: "json, name=throttlingProvided" })
   throttlingProvided?: string;
 
-  @Metadata({ data: "json, name=toplevelWarningsMessage" })
+  @SpeakeasyMetadata({ data: "json, name=toplevelWarningsMessage" })
   toplevelWarningsMessage?: string;
 
-  @Metadata({ data: "json, name=varianceDisclaimer" })
+  @SpeakeasyMetadata({ data: "json, name=varianceDisclaimer" })
   varianceDisclaimer?: string;
 
-  @Metadata({ data: "json, name=viewTreemapLabel" })
+  @SpeakeasyMetadata({ data: "json, name=viewTreemapLabel" })
   viewTreemapLabel?: string;
 
-  @Metadata({ data: "json, name=warningAuditsGroupTitle" })
+  @SpeakeasyMetadata({ data: "json, name=warningAuditsGroupTitle" })
   warningAuditsGroupTitle?: string;
 
-  @Metadata({ data: "json, name=warningHeader" })
+  @SpeakeasyMetadata({ data: "json, name=warningHeader" })
   warningHeader?: string;
 }

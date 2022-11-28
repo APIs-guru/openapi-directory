@@ -1,5 +1,7 @@
 package shared
 
+// Location
+// An occurrence of a particular package installation found within a system's filesystem. E.g., glibc was found in `/var/lib/dpkg/status`.
 type Location struct {
 	CpeURI  *string  `json:"cpeUri,omitempty"`
 	Path    *string  `json:"path,omitempty"`

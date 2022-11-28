@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PublishFindingToSnsParams
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Parameters to define a mitigation action that publishes findings to Amazon SNS. You can implement your own custom actions in response to the Amazon SNS messages.
 **/
 export class PublishFindingToSnsParams extends SpeakeasyBase {
-  @Metadata({ data: "json, name=topicArn" })
+  @SpeakeasyMetadata({ data: "json, name=topicArn" })
   topicArn: string;
 }

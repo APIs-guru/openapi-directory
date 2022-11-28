@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import zone
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class RevertZoneResponse:
-    zone: Optional[zone.Zone] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'zone' }})
+    r"""RevertZoneResponse
+    The result of reverting a zone in a workspace.
+    """
+    
+    zone: Optional[Zone] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('zone') }})
     

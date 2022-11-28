@@ -11,7 +11,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://www.envoice.in",
 }
 
@@ -20,9 +20,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -33,27 +37,45 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// ClientAPIAll - Return all clients for the account
 func (s *SDK) ClientAPIAll(ctx context.Context, request operations.ClientAPIAllRequest) (*operations.ClientAPIAllResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/client/all"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -63,7 +85,7 @@ func (s *SDK) ClientAPIAll(ctx context.Context, request operations.ClientAPIAllR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -121,8 +143,9 @@ func (s *SDK) ClientAPIAll(ctx context.Context, request operations.ClientAPIAllR
 	return res, nil
 }
 
+// ClientAPICanDelete - Check if the provided client can be deleted
 func (s *SDK) ClientAPICanDelete(ctx context.Context, request operations.ClientAPICanDeleteRequest) (*operations.ClientAPICanDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/client/candelete"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -134,7 +157,7 @@ func (s *SDK) ClientAPICanDelete(ctx context.Context, request operations.ClientA
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -192,8 +215,9 @@ func (s *SDK) ClientAPICanDelete(ctx context.Context, request operations.ClientA
 	return res, nil
 }
 
+// ClientAPIDelete - Delete an existing client
 func (s *SDK) ClientAPIDelete(ctx context.Context, request operations.ClientAPIDeleteRequest) (*operations.ClientAPIDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/client/delete"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -213,7 +237,7 @@ func (s *SDK) ClientAPIDelete(ctx context.Context, request operations.ClientAPID
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -271,8 +295,9 @@ func (s *SDK) ClientAPIDelete(ctx context.Context, request operations.ClientAPID
 	return res, nil
 }
 
+// ClientAPIDetails - Return client details. Activities and invoices included.
 func (s *SDK) ClientAPIDetails(ctx context.Context, request operations.ClientAPIDetailsRequest) (*operations.ClientAPIDetailsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/client/details"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -284,7 +309,7 @@ func (s *SDK) ClientAPIDetails(ctx context.Context, request operations.ClientAPI
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -342,8 +367,9 @@ func (s *SDK) ClientAPIDetails(ctx context.Context, request operations.ClientAPI
 	return res, nil
 }
 
+// EstimationAPIAll - Return all estimation for the account
 func (s *SDK) EstimationAPIAll(ctx context.Context, request operations.EstimationAPIAllRequest) (*operations.EstimationAPIAllResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/estimation/all"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -355,7 +381,7 @@ func (s *SDK) EstimationAPIAll(ctx context.Context, request operations.Estimatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -413,8 +439,9 @@ func (s *SDK) EstimationAPIAll(ctx context.Context, request operations.Estimatio
 	return res, nil
 }
 
+// EstimationAPIChangeStatus - Change estimation status
 func (s *SDK) EstimationAPIChangeStatus(ctx context.Context, request operations.EstimationAPIChangeStatusRequest) (*operations.EstimationAPIChangeStatusResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/estimation/changestatus"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -434,7 +461,7 @@ func (s *SDK) EstimationAPIChangeStatus(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -492,8 +519,9 @@ func (s *SDK) EstimationAPIChangeStatus(ctx context.Context, request operations.
 	return res, nil
 }
 
+// EstimationAPIDelete - Delete an existing estimation
 func (s *SDK) EstimationAPIDelete(ctx context.Context, request operations.EstimationAPIDeleteRequest) (*operations.EstimationAPIDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/estimation/delete"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -513,7 +541,7 @@ func (s *SDK) EstimationAPIDelete(ctx context.Context, request operations.Estima
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -571,8 +599,9 @@ func (s *SDK) EstimationAPIDelete(ctx context.Context, request operations.Estima
 	return res, nil
 }
 
+// EstimationAPIDetails - Return estimation data
 func (s *SDK) EstimationAPIDetails(ctx context.Context, request operations.EstimationAPIDetailsRequest) (*operations.EstimationAPIDetailsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/estimation/details"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -584,7 +613,7 @@ func (s *SDK) EstimationAPIDetails(ctx context.Context, request operations.Estim
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -642,8 +671,9 @@ func (s *SDK) EstimationAPIDetails(ctx context.Context, request operations.Estim
 	return res, nil
 }
 
+// EstimationAPISendToClient - Send the provided estimation to the client
 func (s *SDK) EstimationAPISendToClient(ctx context.Context, request operations.EstimationAPISendToClientRequest) (*operations.EstimationAPISendToClientResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/estimation/sendtoclient"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -663,7 +693,7 @@ func (s *SDK) EstimationAPISendToClient(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -721,8 +751,9 @@ func (s *SDK) EstimationAPISendToClient(ctx context.Context, request operations.
 	return res, nil
 }
 
+// EstimationAPIStatus - Retrieve the status of the estimation
 func (s *SDK) EstimationAPIStatus(ctx context.Context, request operations.EstimationAPIStatusRequest) (*operations.EstimationAPIStatusResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/estimation/status"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -734,7 +765,7 @@ func (s *SDK) EstimationAPIStatus(ctx context.Context, request operations.Estima
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -792,8 +823,9 @@ func (s *SDK) EstimationAPIStatus(ctx context.Context, request operations.Estima
 	return res, nil
 }
 
+// EstimationAPIURI - Return the unique url to the client's invoice
 func (s *SDK) EstimationAPIURI(ctx context.Context, request operations.EstimationAPIURIRequest) (*operations.EstimationAPIURIResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/estimation/uri"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -805,7 +837,7 @@ func (s *SDK) EstimationAPIURI(ctx context.Context, request operations.Estimatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -863,8 +895,9 @@ func (s *SDK) EstimationAPIURI(ctx context.Context, request operations.Estimatio
 	return res, nil
 }
 
+// GetAPIInvoiceAllcategories - Return all invoice categories for the account
 func (s *SDK) GetAPIInvoiceAllcategories(ctx context.Context, request operations.GetAPIInvoiceAllcategoriesRequest) (*operations.GetAPIInvoiceAllcategoriesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/invoice/allcategories"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -876,7 +909,7 @@ func (s *SDK) GetAPIInvoiceAllcategories(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -934,8 +967,9 @@ func (s *SDK) GetAPIInvoiceAllcategories(ctx context.Context, request operations
 	return res, nil
 }
 
+// GeneralAPICountries - Return all of the platform supported countries
 func (s *SDK) GeneralAPICountries(ctx context.Context, request operations.GeneralAPICountriesRequest) (*operations.GeneralAPICountriesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/general/countries"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -945,7 +979,7 @@ func (s *SDK) GeneralAPICountries(ctx context.Context, request operations.Genera
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1003,8 +1037,9 @@ func (s *SDK) GeneralAPICountries(ctx context.Context, request operations.Genera
 	return res, nil
 }
 
+// GeneralAPICurrencies - Return all of the platform supported currencies
 func (s *SDK) GeneralAPICurrencies(ctx context.Context, request operations.GeneralAPICurrenciesRequest) (*operations.GeneralAPICurrenciesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/general/currencies"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1014,7 +1049,7 @@ func (s *SDK) GeneralAPICurrencies(ctx context.Context, request operations.Gener
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1072,8 +1107,9 @@ func (s *SDK) GeneralAPICurrencies(ctx context.Context, request operations.Gener
 	return res, nil
 }
 
+// GeneralAPIDateFormats - Return all of the platform supported Date Formats
 func (s *SDK) GeneralAPIDateFormats(ctx context.Context, request operations.GeneralAPIDateFormatsRequest) (*operations.GeneralAPIDateFormatsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/general/dateformats"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1083,7 +1119,7 @@ func (s *SDK) GeneralAPIDateFormats(ctx context.Context, request operations.Gene
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1141,8 +1177,9 @@ func (s *SDK) GeneralAPIDateFormats(ctx context.Context, request operations.Gene
 	return res, nil
 }
 
+// GeneralAPIUILanguages - Return all of the platform supported UI languages
 func (s *SDK) GeneralAPIUILanguages(ctx context.Context, request operations.GeneralAPIUILanguagesRequest) (*operations.GeneralAPIUILanguagesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/general/uilanguages"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1152,7 +1189,7 @@ func (s *SDK) GeneralAPIUILanguages(ctx context.Context, request operations.Gene
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1210,8 +1247,9 @@ func (s *SDK) GeneralAPIUILanguages(ctx context.Context, request operations.Gene
 	return res, nil
 }
 
+// InvoiceAPIAll - Return all invoices for the account
 func (s *SDK) InvoiceAPIAll(ctx context.Context, request operations.InvoiceAPIAllRequest) (*operations.InvoiceAPIAllResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/invoice/all"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1223,7 +1261,7 @@ func (s *SDK) InvoiceAPIAll(ctx context.Context, request operations.InvoiceAPIAl
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1281,8 +1319,9 @@ func (s *SDK) InvoiceAPIAll(ctx context.Context, request operations.InvoiceAPIAl
 	return res, nil
 }
 
+// InvoiceAPIChangeStatus - Change invoice status
 func (s *SDK) InvoiceAPIChangeStatus(ctx context.Context, request operations.InvoiceAPIChangeStatusRequest) (*operations.InvoiceAPIChangeStatusResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/invoice/changestatus"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1302,7 +1341,7 @@ func (s *SDK) InvoiceAPIChangeStatus(ctx context.Context, request operations.Inv
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1360,8 +1399,9 @@ func (s *SDK) InvoiceAPIChangeStatus(ctx context.Context, request operations.Inv
 	return res, nil
 }
 
+// InvoiceAPIDelete - Delete an existing invoice
 func (s *SDK) InvoiceAPIDelete(ctx context.Context, request operations.InvoiceAPIDeleteRequest) (*operations.InvoiceAPIDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/invoice/delete"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1381,7 +1421,7 @@ func (s *SDK) InvoiceAPIDelete(ctx context.Context, request operations.InvoiceAP
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1439,8 +1479,9 @@ func (s *SDK) InvoiceAPIDelete(ctx context.Context, request operations.InvoiceAP
 	return res, nil
 }
 
+// InvoiceAPIDetails - Return invoice data
 func (s *SDK) InvoiceAPIDetails(ctx context.Context, request operations.InvoiceAPIDetailsRequest) (*operations.InvoiceAPIDetailsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/invoice/details"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1452,7 +1493,7 @@ func (s *SDK) InvoiceAPIDetails(ctx context.Context, request operations.InvoiceA
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1510,8 +1551,9 @@ func (s *SDK) InvoiceAPIDetails(ctx context.Context, request operations.InvoiceA
 	return res, nil
 }
 
+// InvoiceAPISendToAccountant - Send the provided invoice to the accountant
 func (s *SDK) InvoiceAPISendToAccountant(ctx context.Context, request operations.InvoiceAPISendToAccountantRequest) (*operations.InvoiceAPISendToAccountantResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/invoice/sendtoaccountant"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1531,7 +1573,7 @@ func (s *SDK) InvoiceAPISendToAccountant(ctx context.Context, request operations
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1589,8 +1631,9 @@ func (s *SDK) InvoiceAPISendToAccountant(ctx context.Context, request operations
 	return res, nil
 }
 
+// InvoiceAPISendToClient - Send the provided invoice to the client
 func (s *SDK) InvoiceAPISendToClient(ctx context.Context, request operations.InvoiceAPISendToClientRequest) (*operations.InvoiceAPISendToClientResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/invoice/sendtoclient"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1610,7 +1653,7 @@ func (s *SDK) InvoiceAPISendToClient(ctx context.Context, request operations.Inv
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1668,8 +1711,9 @@ func (s *SDK) InvoiceAPISendToClient(ctx context.Context, request operations.Inv
 	return res, nil
 }
 
+// InvoiceAPIStatus - Retrieve the status of the invoice
 func (s *SDK) InvoiceAPIStatus(ctx context.Context, request operations.InvoiceAPIStatusRequest) (*operations.InvoiceAPIStatusResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/invoice/status"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1681,7 +1725,7 @@ func (s *SDK) InvoiceAPIStatus(ctx context.Context, request operations.InvoiceAP
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1739,8 +1783,9 @@ func (s *SDK) InvoiceAPIStatus(ctx context.Context, request operations.InvoiceAP
 	return res, nil
 }
 
+// InvoiceAPIURI - Return the unique url to the client's invoice
 func (s *SDK) InvoiceAPIURI(ctx context.Context, request operations.InvoiceAPIURIRequest) (*operations.InvoiceAPIURIResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/invoice/uri"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1752,7 +1797,7 @@ func (s *SDK) InvoiceAPIURI(ctx context.Context, request operations.InvoiceAPIUR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1810,8 +1855,9 @@ func (s *SDK) InvoiceAPIURI(ctx context.Context, request operations.InvoiceAPIUR
 	return res, nil
 }
 
+// OrderAPIAll - Return all orders for the account
 func (s *SDK) OrderAPIAll(ctx context.Context, request operations.OrderAPIAllRequest) (*operations.OrderAPIAllResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/order/all"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1823,7 +1869,7 @@ func (s *SDK) OrderAPIAll(ctx context.Context, request operations.OrderAPIAllReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1881,8 +1927,9 @@ func (s *SDK) OrderAPIAll(ctx context.Context, request operations.OrderAPIAllReq
 	return res, nil
 }
 
+// OrderAPIChangeShippingDetails - Change order shipping details
 func (s *SDK) OrderAPIChangeShippingDetails(ctx context.Context, request operations.OrderAPIChangeShippingDetailsRequest) (*operations.OrderAPIChangeShippingDetailsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/order/changeshippingdetails"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1904,7 +1951,7 @@ func (s *SDK) OrderAPIChangeShippingDetails(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1925,8 +1972,9 @@ func (s *SDK) OrderAPIChangeShippingDetails(ctx context.Context, request operati
 	return res, nil
 }
 
+// OrderAPIChangeStatus - Change order status
 func (s *SDK) OrderAPIChangeStatus(ctx context.Context, request operations.OrderAPIChangeStatusRequest) (*operations.OrderAPIChangeStatusResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/order/changestatus"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1946,7 +1994,7 @@ func (s *SDK) OrderAPIChangeStatus(ctx context.Context, request operations.Order
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1967,8 +2015,9 @@ func (s *SDK) OrderAPIChangeStatus(ctx context.Context, request operations.Order
 	return res, nil
 }
 
+// OrderAPIDelete - Delete an existing order
 func (s *SDK) OrderAPIDelete(ctx context.Context, request operations.OrderAPIDeleteRequest) (*operations.OrderAPIDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/order/delete"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1988,7 +2037,7 @@ func (s *SDK) OrderAPIDelete(ctx context.Context, request operations.OrderAPIDel
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2046,8 +2095,9 @@ func (s *SDK) OrderAPIDelete(ctx context.Context, request operations.OrderAPIDel
 	return res, nil
 }
 
+// OrderAPIDetails - Return order details
 func (s *SDK) OrderAPIDetails(ctx context.Context, request operations.OrderAPIDetailsRequest) (*operations.OrderAPIDetailsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/order/details"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2059,7 +2109,7 @@ func (s *SDK) OrderAPIDetails(ctx context.Context, request operations.OrderAPIDe
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2117,8 +2167,9 @@ func (s *SDK) OrderAPIDetails(ctx context.Context, request operations.OrderAPIDe
 	return res, nil
 }
 
+// PostAPIInvoiceDeletecategory - Delete an existing invoice category
 func (s *SDK) PostAPIInvoiceDeletecategory(ctx context.Context, request operations.PostAPIInvoiceDeletecategoryRequest) (*operations.PostAPIInvoiceDeletecategoryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/invoice/deletecategory"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2138,7 +2189,7 @@ func (s *SDK) PostAPIInvoiceDeletecategory(ctx context.Context, request operatio
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2196,8 +2247,9 @@ func (s *SDK) PostAPIInvoiceDeletecategory(ctx context.Context, request operatio
 	return res, nil
 }
 
+// PostAPIInvoiceNewcategory - Create an invoice category
 func (s *SDK) PostAPIInvoiceNewcategory(ctx context.Context, request operations.PostAPIInvoiceNewcategoryRequest) (*operations.PostAPIInvoiceNewcategoryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/invoice/newcategory"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2217,7 +2269,7 @@ func (s *SDK) PostAPIInvoiceNewcategory(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2275,8 +2327,9 @@ func (s *SDK) PostAPIInvoiceNewcategory(ctx context.Context, request operations.
 	return res, nil
 }
 
+// PostAPIInvoiceUpdatecategory - Update an existing invoice category
 func (s *SDK) PostAPIInvoiceUpdatecategory(ctx context.Context, request operations.PostAPIInvoiceUpdatecategoryRequest) (*operations.PostAPIInvoiceUpdatecategoryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/invoice/updatecategory"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2296,7 +2349,7 @@ func (s *SDK) PostAPIInvoiceUpdatecategory(ctx context.Context, request operatio
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2354,8 +2407,9 @@ func (s *SDK) PostAPIInvoiceUpdatecategory(ctx context.Context, request operatio
 	return res, nil
 }
 
+// PaymentAPISupported - Return all supported payment gateways (no currencies means all are supported)
 func (s *SDK) PaymentAPISupported(ctx context.Context, request operations.PaymentAPISupportedRequest) (*operations.PaymentAPISupportedResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/payment/supported"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2365,7 +2419,7 @@ func (s *SDK) PaymentAPISupported(ctx context.Context, request operations.Paymen
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2423,8 +2477,9 @@ func (s *SDK) PaymentAPISupported(ctx context.Context, request operations.Paymen
 	return res, nil
 }
 
+// PaymentLinkAPIAll - Create a payment link
 func (s *SDK) PaymentLinkAPIAll(ctx context.Context, request operations.PaymentLinkAPIAllRequest) (*operations.PaymentLinkAPIAllResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/paymentlink/all"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2436,7 +2491,7 @@ func (s *SDK) PaymentLinkAPIAll(ctx context.Context, request operations.PaymentL
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2494,8 +2549,9 @@ func (s *SDK) PaymentLinkAPIAll(ctx context.Context, request operations.PaymentL
 	return res, nil
 }
 
+// PaymentLinkAPIURI - Return the unique url to the client's payment link
 func (s *SDK) PaymentLinkAPIURI(ctx context.Context, request operations.PaymentLinkAPIURIRequest) (*operations.PaymentLinkAPIURIResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/paymentlink/uri"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2507,7 +2563,7 @@ func (s *SDK) PaymentLinkAPIURI(ctx context.Context, request operations.PaymentL
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2565,8 +2621,9 @@ func (s *SDK) PaymentLinkAPIURI(ctx context.Context, request operations.PaymentL
 	return res, nil
 }
 
+// ProductAPIAll - Return all products for the account
 func (s *SDK) ProductAPIAll(ctx context.Context, request operations.ProductAPIAllRequest) (*operations.ProductAPIAllResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/product/all"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2578,7 +2635,7 @@ func (s *SDK) ProductAPIAll(ctx context.Context, request operations.ProductAPIAl
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2636,8 +2693,9 @@ func (s *SDK) ProductAPIAll(ctx context.Context, request operations.ProductAPIAl
 	return res, nil
 }
 
+// ProductAPIDelete - Delete an existing product
 func (s *SDK) ProductAPIDelete(ctx context.Context, request operations.ProductAPIDeleteRequest) (*operations.ProductAPIDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/product/delete"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2657,7 +2715,7 @@ func (s *SDK) ProductAPIDelete(ctx context.Context, request operations.ProductAP
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2715,8 +2773,9 @@ func (s *SDK) ProductAPIDelete(ctx context.Context, request operations.ProductAP
 	return res, nil
 }
 
+// ProductAPIDetails - Return product details
 func (s *SDK) ProductAPIDetails(ctx context.Context, request operations.ProductAPIDetailsRequest) (*operations.ProductAPIDetailsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/product/details"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2728,7 +2787,7 @@ func (s *SDK) ProductAPIDetails(ctx context.Context, request operations.ProductA
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2786,8 +2845,9 @@ func (s *SDK) ProductAPIDetails(ctx context.Context, request operations.ProductA
 	return res, nil
 }
 
+// TaxAPIAll - Return all taxes for the account
 func (s *SDK) TaxAPIAll(ctx context.Context, request operations.TaxAPIAllRequest) (*operations.TaxAPIAllResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/tax/all"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2797,7 +2857,7 @@ func (s *SDK) TaxAPIAll(ctx context.Context, request operations.TaxAPIAllRequest
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2855,8 +2915,9 @@ func (s *SDK) TaxAPIAll(ctx context.Context, request operations.TaxAPIAllRequest
 	return res, nil
 }
 
+// TaxAPIDelete - Delete an existing tax
 func (s *SDK) TaxAPIDelete(ctx context.Context, request operations.TaxAPIDeleteRequest) (*operations.TaxAPIDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/tax/delete"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2876,7 +2937,7 @@ func (s *SDK) TaxAPIDelete(ctx context.Context, request operations.TaxAPIDeleteR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2934,8 +2995,9 @@ func (s *SDK) TaxAPIDelete(ctx context.Context, request operations.TaxAPIDeleteR
 	return res, nil
 }
 
+// TaxAPINew - Create a tax
 func (s *SDK) TaxAPINew(ctx context.Context, request operations.TaxAPINewRequest) (*operations.TaxAPINewResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/tax/new"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2955,7 +3017,7 @@ func (s *SDK) TaxAPINew(ctx context.Context, request operations.TaxAPINewRequest
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3013,8 +3075,9 @@ func (s *SDK) TaxAPINew(ctx context.Context, request operations.TaxAPINewRequest
 	return res, nil
 }
 
+// TaxAPIUpdate - Update an existing tax
 func (s *SDK) TaxAPIUpdate(ctx context.Context, request operations.TaxAPIUpdateRequest) (*operations.TaxAPIUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/tax/update"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3034,7 +3097,7 @@ func (s *SDK) TaxAPIUpdate(ctx context.Context, request operations.TaxAPIUpdateR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3055,8 +3118,9 @@ func (s *SDK) TaxAPIUpdate(ctx context.Context, request operations.TaxAPIUpdateR
 	return res, nil
 }
 
+// WorkTypeAPIAll - Return all work types for the account
 func (s *SDK) WorkTypeAPIAll(ctx context.Context, request operations.WorkTypeAPIAllRequest) (*operations.WorkTypeAPIAllResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/worktype/all"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3066,7 +3130,7 @@ func (s *SDK) WorkTypeAPIAll(ctx context.Context, request operations.WorkTypeAPI
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3124,8 +3188,9 @@ func (s *SDK) WorkTypeAPIAll(ctx context.Context, request operations.WorkTypeAPI
 	return res, nil
 }
 
+// WorkTypeAPIDelete - Delete an existing work type
 func (s *SDK) WorkTypeAPIDelete(ctx context.Context, request operations.WorkTypeAPIDeleteRequest) (*operations.WorkTypeAPIDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/worktype/delete"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3145,7 +3210,7 @@ func (s *SDK) WorkTypeAPIDelete(ctx context.Context, request operations.WorkType
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3203,8 +3268,9 @@ func (s *SDK) WorkTypeAPIDelete(ctx context.Context, request operations.WorkType
 	return res, nil
 }
 
+// WorkTypeAPIDetails - Return work type details
 func (s *SDK) WorkTypeAPIDetails(ctx context.Context, request operations.WorkTypeAPIDetailsRequest) (*operations.WorkTypeAPIDetailsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/worktype/details"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3216,7 +3282,7 @@ func (s *SDK) WorkTypeAPIDetails(ctx context.Context, request operations.WorkTyp
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3274,8 +3340,9 @@ func (s *SDK) WorkTypeAPIDetails(ctx context.Context, request operations.WorkTyp
 	return res, nil
 }
 
+// WorkTypeAPINew - Create a work type
 func (s *SDK) WorkTypeAPINew(ctx context.Context, request operations.WorkTypeAPINewRequest) (*operations.WorkTypeAPINewResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/worktype/new"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3295,7 +3362,7 @@ func (s *SDK) WorkTypeAPINew(ctx context.Context, request operations.WorkTypeAPI
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3353,8 +3420,9 @@ func (s *SDK) WorkTypeAPINew(ctx context.Context, request operations.WorkTypeAPI
 	return res, nil
 }
 
+// WorkTypeAPISearch - Return all work types for the account that match the query param
 func (s *SDK) WorkTypeAPISearch(ctx context.Context, request operations.WorkTypeAPISearchRequest) (*operations.WorkTypeAPISearchResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/worktype/search"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3366,7 +3434,7 @@ func (s *SDK) WorkTypeAPISearch(ctx context.Context, request operations.WorkType
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3424,8 +3492,9 @@ func (s *SDK) WorkTypeAPISearch(ctx context.Context, request operations.WorkType
 	return res, nil
 }
 
+// WorkTypeAPIUpdate - Update an existing work type
 func (s *SDK) WorkTypeAPIUpdate(ctx context.Context, request operations.WorkTypeAPIUpdateRequest) (*operations.WorkTypeAPIUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/worktype/update"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3445,7 +3514,7 @@ func (s *SDK) WorkTypeAPIUpdate(ctx context.Context, request operations.WorkType
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

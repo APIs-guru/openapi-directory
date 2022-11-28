@@ -13,7 +13,11 @@ from .newdisk import *
 from .newdiskinitializeparams import *
 from .pool import *
 from .poolsdeleterequest import *
+from .poolslistresponse import *
+from .replica import *
 from .replicasdeleterequest import *
+from .replicaslistresponse import *
+from .replicastatus import *
 from .security import *
 from .serviceaccount import *
 from .tag import *

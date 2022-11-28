@@ -9,12 +9,12 @@ class FindUserQueryParams:
 
 @dataclass
 class FindUserRequest:
-    query_params: FindUserQueryParams = field(default=None)
+    query_params: FindUserQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'application/octet-stream' }})
     
 
 @dataclass
 class FindUserResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

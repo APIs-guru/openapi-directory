@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class MessagesDeleteAllPathParams:
-    log_id: str = field(default=None, metadata={'path_param': { 'field_name': 'logId', 'style': 'simple', 'explode': False }})
+    log_id: str = field(metadata={'path_param': { 'field_name': 'logId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,12 +18,12 @@ class MessagesDeleteAllRequests:
 
 @dataclass
 class MessagesDeleteAllRequest:
-    path_params: MessagesDeleteAllPathParams = field(default=None)
+    path_params: MessagesDeleteAllPathParams = field()
     request: Optional[MessagesDeleteAllRequests] = field(default=None)
     
 
 @dataclass
 class MessagesDeleteAllResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

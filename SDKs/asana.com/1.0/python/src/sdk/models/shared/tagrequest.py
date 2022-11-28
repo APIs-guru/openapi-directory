@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class TagRequestColorEnum(str, Enum):
     DARK_PINK = "dark-pink"
@@ -25,11 +27,9 @@ class TagRequestColorEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class TagRequest:
-    color: Optional[TagRequestColorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'color' }})
-    followers: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'followers' }})
-    gid: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gid' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    resource_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resource_type' }})
-    workspace: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'workspace' }})
+class TagRequestInput:
+    color: Optional[TagRequestColorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('color') }})
+    followers: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('followers') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    workspace: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('workspace') }})
     

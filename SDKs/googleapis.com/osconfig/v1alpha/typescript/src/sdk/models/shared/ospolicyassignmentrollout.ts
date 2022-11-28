@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FixedOrPercent } from "./fixedorpercent";
+
 
 
 // OsPolicyAssignmentRollout
@@ -7,9 +8,9 @@ import { FixedOrPercent } from "./fixedorpercent";
  * Message to configure the rollout at the zonal level for the OS policy assignment.
 **/
 export class OsPolicyAssignmentRollout extends SpeakeasyBase {
-  @Metadata({ data: "json, name=disruptionBudget" })
+  @SpeakeasyMetadata({ data: "json, name=disruptionBudget" })
   disruptionBudget?: FixedOrPercent;
 
-  @Metadata({ data: "json, name=minWaitDuration" })
+  @SpeakeasyMetadata({ data: "json, name=minWaitDuration" })
   minWaitDuration?: string;
 }

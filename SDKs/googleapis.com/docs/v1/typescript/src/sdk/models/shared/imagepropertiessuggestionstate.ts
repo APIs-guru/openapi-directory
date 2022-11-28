@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CropPropertiesSuggestionState } from "./croppropertiessuggestionstate";
+
 
 
 // ImagePropertiesSuggestionState
@@ -7,24 +8,24 @@ import { CropPropertiesSuggestionState } from "./croppropertiessuggestionstate";
  * A mask that indicates which of the fields on the base ImageProperties have been changed in this suggestion. For any field set to true, there's a new suggested value.
 **/
 export class ImagePropertiesSuggestionState extends SpeakeasyBase {
-  @Metadata({ data: "json, name=angleSuggested" })
+  @SpeakeasyMetadata({ data: "json, name=angleSuggested" })
   angleSuggested?: boolean;
 
-  @Metadata({ data: "json, name=brightnessSuggested" })
+  @SpeakeasyMetadata({ data: "json, name=brightnessSuggested" })
   brightnessSuggested?: boolean;
 
-  @Metadata({ data: "json, name=contentUriSuggested" })
+  @SpeakeasyMetadata({ data: "json, name=contentUriSuggested" })
   contentUriSuggested?: boolean;
 
-  @Metadata({ data: "json, name=contrastSuggested" })
+  @SpeakeasyMetadata({ data: "json, name=contrastSuggested" })
   contrastSuggested?: boolean;
 
-  @Metadata({ data: "json, name=cropPropertiesSuggestionState" })
+  @SpeakeasyMetadata({ data: "json, name=cropPropertiesSuggestionState" })
   cropPropertiesSuggestionState?: CropPropertiesSuggestionState;
 
-  @Metadata({ data: "json, name=sourceUriSuggested" })
+  @SpeakeasyMetadata({ data: "json, name=sourceUriSuggested" })
   sourceUriSuggested?: boolean;
 
-  @Metadata({ data: "json, name=transparencySuggested" })
+  @SpeakeasyMetadata({ data: "json, name=transparencySuggested" })
   transparencySuggested?: boolean;
 }

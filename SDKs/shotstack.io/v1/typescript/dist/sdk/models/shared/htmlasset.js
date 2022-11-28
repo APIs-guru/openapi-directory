@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var HtmlAssetPositionEnum;
 (function (HtmlAssetPositionEnum) {
     HtmlAssetPositionEnum["Top"] = "top";
@@ -45,31 +45,31 @@ var HtmlAsset = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=background" }),
+        SpeakeasyMetadata({ data: "json, name=background" }),
         __metadata("design:type", String)
     ], HtmlAsset.prototype, "background", void 0);
     __decorate([
-        Metadata({ data: "json, name=css" }),
+        SpeakeasyMetadata({ data: "json, name=css" }),
         __metadata("design:type", String)
     ], HtmlAsset.prototype, "css", void 0);
     __decorate([
-        Metadata({ data: "json, name=height" }),
+        SpeakeasyMetadata({ data: "json, name=height" }),
         __metadata("design:type", Number)
     ], HtmlAsset.prototype, "height", void 0);
     __decorate([
-        Metadata({ data: "json, name=html" }),
+        SpeakeasyMetadata({ data: "json, name=html" }),
         __metadata("design:type", String)
     ], HtmlAsset.prototype, "html", void 0);
     __decorate([
-        Metadata({ data: "json, name=position" }),
+        SpeakeasyMetadata({ data: "json, name=position" }),
         __metadata("design:type", String)
     ], HtmlAsset.prototype, "position", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], HtmlAsset.prototype, "type", void 0);
     __decorate([
-        Metadata({ data: "json, name=width" }),
+        SpeakeasyMetadata({ data: "json, name=width" }),
         __metadata("design:type", Number)
     ], HtmlAsset.prototype, "width", void 0);
     return HtmlAsset;

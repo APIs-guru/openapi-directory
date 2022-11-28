@@ -1,5 +1,7 @@
 package shared
 
+// AlertMetadata
+// An alert metadata.
 type AlertMetadata struct {
 	AlertID    *string `json:"alertId,omitempty"`
 	Assignee   *string `json:"assignee,omitempty"`

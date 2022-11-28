@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum IosModelFormFactorEnum {
-    DeviceFormFactorUnspecified = "DEVICE_FORM_FACTOR_UNSPECIFIED"
-,    Phone = "PHONE"
-,    Tablet = "TABLET"
-,    Wearable = "WEARABLE"
+    DeviceFormFactorUnspecified = "DEVICE_FORM_FACTOR_UNSPECIFIED",
+    Phone = "PHONE",
+    Tablet = "TABLET",
+    Wearable = "WEARABLE"
 }
 
 
@@ -13,30 +14,30 @@ export enum IosModelFormFactorEnum {
  * A description of an iOS device tests may be run on.
 **/
 export class IosModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deviceCapabilities" })
+  @SpeakeasyMetadata({ data: "json, name=deviceCapabilities" })
   deviceCapabilities?: string[];
 
-  @Metadata({ data: "json, name=formFactor" })
+  @SpeakeasyMetadata({ data: "json, name=formFactor" })
   formFactor?: IosModelFormFactorEnum;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=screenDensity" })
+  @SpeakeasyMetadata({ data: "json, name=screenDensity" })
   screenDensity?: number;
 
-  @Metadata({ data: "json, name=screenX" })
+  @SpeakeasyMetadata({ data: "json, name=screenX" })
   screenX?: number;
 
-  @Metadata({ data: "json, name=screenY" })
+  @SpeakeasyMetadata({ data: "json, name=screenY" })
   screenY?: number;
 
-  @Metadata({ data: "json, name=supportedVersionIds" })
+  @SpeakeasyMetadata({ data: "json, name=supportedVersionIds" })
   supportedVersionIds?: string[];
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: string[];
 }

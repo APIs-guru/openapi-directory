@@ -9,6 +9,8 @@ const (
 	TagTagFiringOptionEnumOncePerLoad                TagTagFiringOptionEnum = "oncePerLoad"
 )
 
+// Tag
+// Represents a Google Tag Manager Tag.
 type Tag struct {
 	AccountID                    *string                 `json:"accountId,omitempty"`
 	BlockingRuleID               []string                `json:"blockingRuleId,omitempty"`

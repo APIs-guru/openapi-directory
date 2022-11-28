@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeviceStatusEnum } from "./devicestatusenum";
 var DescribeDeviceResponse = /** @class */ (function (_super) {
     __extends(DescribeDeviceResponse, _super);
@@ -30,39 +30,39 @@ var DescribeDeviceResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=FirstAccessedTime" }),
+        SpeakeasyMetadata({ data: "json, name=FirstAccessedTime" }),
         __metadata("design:type", Date)
     ], DescribeDeviceResponse.prototype, "firstAccessedTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastAccessedTime" }),
+        SpeakeasyMetadata({ data: "json, name=LastAccessedTime" }),
         __metadata("design:type", Date)
     ], DescribeDeviceResponse.prototype, "lastAccessedTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=Manufacturer" }),
+        SpeakeasyMetadata({ data: "json, name=Manufacturer" }),
         __metadata("design:type", String)
     ], DescribeDeviceResponse.prototype, "manufacturer", void 0);
     __decorate([
-        Metadata({ data: "json, name=Model" }),
+        SpeakeasyMetadata({ data: "json, name=Model" }),
         __metadata("design:type", String)
     ], DescribeDeviceResponse.prototype, "model", void 0);
     __decorate([
-        Metadata({ data: "json, name=OperatingSystem" }),
+        SpeakeasyMetadata({ data: "json, name=OperatingSystem" }),
         __metadata("design:type", String)
     ], DescribeDeviceResponse.prototype, "operatingSystem", void 0);
     __decorate([
-        Metadata({ data: "json, name=OperatingSystemVersion" }),
+        SpeakeasyMetadata({ data: "json, name=OperatingSystemVersion" }),
         __metadata("design:type", String)
     ], DescribeDeviceResponse.prototype, "operatingSystemVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=PatchLevel" }),
+        SpeakeasyMetadata({ data: "json, name=PatchLevel" }),
         __metadata("design:type", String)
     ], DescribeDeviceResponse.prototype, "patchLevel", void 0);
     __decorate([
-        Metadata({ data: "json, name=Status" }),
+        SpeakeasyMetadata({ data: "json, name=Status" }),
         __metadata("design:type", String)
     ], DescribeDeviceResponse.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=Username" }),
+        SpeakeasyMetadata({ data: "json, name=Username" }),
         __metadata("design:type", String)
     ], DescribeDeviceResponse.prototype, "username", void 0);
     return DescribeDeviceResponse;

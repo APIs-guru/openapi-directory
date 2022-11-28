@@ -43,12 +43,6 @@ type UpdateTemplateSecurity struct {
 	APITokenBasic shared.SchemeAPITokenBasic `security:"scheme,type=http,subtype=basic"`
 }
 
-type UpdateTemplateRequest struct {
-	PathParams UpdateTemplatePathParams
-	Request    UpdateTemplateUpdateTemplateData `request:"mediaType=application/json"`
-	Security   UpdateTemplateSecurity
-}
-
 type UpdateTemplateUpdateTemplateResponseStatusEnum string
 
 const (
@@ -59,6 +53,12 @@ const (
 type UpdateTemplateUpdateTemplateResponse struct {
 	Errors []string                                       `json:"errors,omitempty"`
 	Status UpdateTemplateUpdateTemplateResponseStatusEnum `json:"status"`
+}
+
+type UpdateTemplateRequest struct {
+	PathParams UpdateTemplatePathParams
+	Request    UpdateTemplateUpdateTemplateData `request:"mediaType=application/json"`
+	Security   UpdateTemplateSecurity
 }
 
 type UpdateTemplateResponse struct {

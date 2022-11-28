@@ -10,6 +10,8 @@ const (
 	AudioContentTypeTargetingOptionDetailsAudioContentTypeEnumAudioContentTypePodcast     AudioContentTypeTargetingOptionDetailsAudioContentTypeEnum = "AUDIO_CONTENT_TYPE_PODCAST"
 )
 
+// AudioContentTypeTargetingOptionDetails
+// Represents a targetable audio content type. This will be populated in the audio_content_type_details field when targeting_type is `TARGETING_TYPE_AUDIO_CONTENT_TYPE`.
 type AudioContentTypeTargetingOptionDetails struct {
 	AudioContentType *AudioContentTypeTargetingOptionDetailsAudioContentTypeEnum `json:"audioContentType,omitempty"`
 }

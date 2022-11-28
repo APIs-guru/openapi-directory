@@ -1,5 +1,7 @@
 package shared
 
+// VerifyPasswordResponse
+// Request of verifying the password.
 type VerifyPasswordResponse struct {
 	DisplayName            *string `json:"displayName,omitempty"`
 	Email                  *string `json:"email,omitempty"`

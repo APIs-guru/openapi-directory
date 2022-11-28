@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { S3ContentLocation } from "./s3contentlocation";
 // CodeContent
 /**
@@ -34,15 +34,15 @@ var CodeContent = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=S3ContentLocation" }),
+        SpeakeasyMetadata({ data: "json, name=S3ContentLocation" }),
         __metadata("design:type", S3ContentLocation)
     ], CodeContent.prototype, "s3ContentLocation", void 0);
     __decorate([
-        Metadata({ data: "json, name=TextContent" }),
+        SpeakeasyMetadata({ data: "json, name=TextContent" }),
         __metadata("design:type", String)
     ], CodeContent.prototype, "textContent", void 0);
     __decorate([
-        Metadata({ data: "json, name=ZipFileContent" }),
+        SpeakeasyMetadata({ data: "json, name=ZipFileContent" }),
         __metadata("design:type", String)
     ], CodeContent.prototype, "zipFileContent", void 0);
     return CodeContent;

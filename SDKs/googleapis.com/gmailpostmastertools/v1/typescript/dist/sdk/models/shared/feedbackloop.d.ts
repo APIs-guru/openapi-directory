@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * [Feedback loop](https://support.google.com/mail/answer/6254652) identifier information.
 **/

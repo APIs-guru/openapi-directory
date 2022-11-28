@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum MembershipSpecSecurityPolicyEnum {
     SecurityPolicyUnspecified = "SECURITY_POLICY_UNSPECIFIED",
     NonPrivileged = "NON_PRIVILEGED",

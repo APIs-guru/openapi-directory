@@ -1,6 +1,7 @@
 
 
+
 export enum ChildTypeEnum {
-    Account = "ACCOUNT"
-,    OrganizationalUnit = "ORGANIZATIONAL_UNIT"
+    Account = "ACCOUNT",
+    OrganizationalUnit = "ORGANIZATIONAL_UNIT"
 }

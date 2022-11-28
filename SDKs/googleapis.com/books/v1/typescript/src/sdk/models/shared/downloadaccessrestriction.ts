@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DownloadAccessRestriction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deviceAllowed" })
+  @SpeakeasyMetadata({ data: "json, name=deviceAllowed" })
   deviceAllowed?: boolean;
 
-  @Metadata({ data: "json, name=downloadsAcquired" })
+  @SpeakeasyMetadata({ data: "json, name=downloadsAcquired" })
   downloadsAcquired?: number;
 
-  @Metadata({ data: "json, name=justAcquired" })
+  @SpeakeasyMetadata({ data: "json, name=justAcquired" })
   justAcquired?: boolean;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=maxDownloadDevices" })
+  @SpeakeasyMetadata({ data: "json, name=maxDownloadDevices" })
   maxDownloadDevices?: number;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=nonce" })
+  @SpeakeasyMetadata({ data: "json, name=nonce" })
   nonce?: string;
 
-  @Metadata({ data: "json, name=reasonCode" })
+  @SpeakeasyMetadata({ data: "json, name=reasonCode" })
   reasonCode?: string;
 
-  @Metadata({ data: "json, name=restricted" })
+  @SpeakeasyMetadata({ data: "json, name=restricted" })
   restricted?: boolean;
 
-  @Metadata({ data: "json, name=signature" })
+  @SpeakeasyMetadata({ data: "json, name=signature" })
   signature?: string;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: string;
 
-  @Metadata({ data: "json, name=volumeId" })
+  @SpeakeasyMetadata({ data: "json, name=volumeId" })
   volumeId?: string;
 }

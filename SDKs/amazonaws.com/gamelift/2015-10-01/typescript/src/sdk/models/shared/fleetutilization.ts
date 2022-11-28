@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // FleetUtilization
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * <p>Current resource utilization statistics in a specified fleet or location. The location value might refer to a fleet's remote location or its home Region.</p> <p> <b>Related actions</b> </p> <p> <a>DescribeFleetUtilization</a> | <a>DescribeFleetLocationUtilization</a> </p>
 **/
 export class FleetUtilization extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ActiveGameSessionCount" })
+  @SpeakeasyMetadata({ data: "json, name=ActiveGameSessionCount" })
   activeGameSessionCount?: number;
 
-  @Metadata({ data: "json, name=ActiveServerProcessCount" })
+  @SpeakeasyMetadata({ data: "json, name=ActiveServerProcessCount" })
   activeServerProcessCount?: number;
 
-  @Metadata({ data: "json, name=CurrentPlayerSessionCount" })
+  @SpeakeasyMetadata({ data: "json, name=CurrentPlayerSessionCount" })
   currentPlayerSessionCount?: number;
 
-  @Metadata({ data: "json, name=FleetArn" })
+  @SpeakeasyMetadata({ data: "json, name=FleetArn" })
   fleetArn?: string;
 
-  @Metadata({ data: "json, name=FleetId" })
+  @SpeakeasyMetadata({ data: "json, name=FleetId" })
   fleetId?: string;
 
-  @Metadata({ data: "json, name=Location" })
+  @SpeakeasyMetadata({ data: "json, name=Location" })
   location?: string;
 
-  @Metadata({ data: "json, name=MaximumPlayerSessionCount" })
+  @SpeakeasyMetadata({ data: "json, name=MaximumPlayerSessionCount" })
   maximumPlayerSessionCount?: number;
 }

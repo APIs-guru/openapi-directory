@@ -1,6 +1,7 @@
 
 
+
 export enum DataCompressionTypeEnum {
-    None = "NONE"
-,    Lz4 = "LZ4"
+    None = "NONE",
+    Lz4 = "LZ4"
 }

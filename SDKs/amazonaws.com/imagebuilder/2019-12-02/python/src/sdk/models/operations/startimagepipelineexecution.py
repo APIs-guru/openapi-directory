@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,21 +22,22 @@ class StartImagePipelineExecutionHeaders:
 @dataclass_json
 @dataclass
 class StartImagePipelineExecutionRequestBody:
-    client_token: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clientToken' }})
-    image_pipeline_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'imagePipelineArn' }})
+    client_token: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('clientToken') }})
+    image_pipeline_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('imagePipelineArn') }})
     
 
 @dataclass
 class StartImagePipelineExecutionRequest:
-    headers: StartImagePipelineExecutionHeaders = field(default=None)
-    request: StartImagePipelineExecutionRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: StartImagePipelineExecutionHeaders = field()
+    request: StartImagePipelineExecutionRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class StartImagePipelineExecutionResponse:
+    content_type: str = field()
+    status_code: int = field()
     call_rate_limit_exceeded_exception: Optional[Any] = field(default=None)
     client_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     forbidden_exception: Optional[Any] = field(default=None)
     idempotent_parameter_mismatch_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
@@ -41,5 +46,4 @@ class StartImagePipelineExecutionResponse:
     service_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
     start_image_pipeline_execution_response: Optional[shared.StartImagePipelineExecutionResponse] = field(default=None)
-    status_code: int = field(default=None)
     

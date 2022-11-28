@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetTaggedImagesPathParams:
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
     
 class GetTaggedImagesOrderByEnum(str, Enum):
     NEWEST = "Newest"
@@ -23,20 +24,20 @@ class GetTaggedImagesQueryParams:
 
 @dataclass
 class GetTaggedImagesHeaders:
-    training_key: str = field(default=None, metadata={'header': { 'field_name': 'Training-Key', 'style': 'simple', 'explode': False }})
+    training_key: str = field(metadata={'header': { 'field_name': 'Training-Key', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetTaggedImagesRequest:
-    path_params: GetTaggedImagesPathParams = field(default=None)
-    query_params: GetTaggedImagesQueryParams = field(default=None)
-    headers: GetTaggedImagesHeaders = field(default=None)
+    headers: GetTaggedImagesHeaders = field()
+    path_params: GetTaggedImagesPathParams = field()
+    query_params: GetTaggedImagesQueryParams = field()
     
 
 @dataclass
 class GetTaggedImagesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     images: Optional[List[shared.Image]] = field(default=None)
-    status_code: int = field(default=None)
     

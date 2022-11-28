@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // EstimatedResourceSize
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The estimated size of the resource.
 **/
 export class EstimatedResourceSize extends SpeakeasyBase {
-  @Metadata({ data: "json, name=estimatedOn" })
+  @SpeakeasyMetadata({ data: "json, name=estimatedOn" })
   estimatedOn?: Date;
 
-  @Metadata({ data: "json, name=estimatedSizeInBytes" })
+  @SpeakeasyMetadata({ data: "json, name=estimatedSizeInBytes" })
   estimatedSizeInBytes?: number;
 }

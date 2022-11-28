@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetLoggerDefinitionVersionPathParams:
-    logger_definition_id: str = field(default=None, metadata={'path_param': { 'field_name': 'LoggerDefinitionId', 'style': 'simple', 'explode': False }})
-    logger_definition_version_id: str = field(default=None, metadata={'path_param': { 'field_name': 'LoggerDefinitionVersionId', 'style': 'simple', 'explode': False }})
+    logger_definition_id: str = field(metadata={'path_param': { 'field_name': 'LoggerDefinitionId', 'style': 'simple', 'explode': False }})
+    logger_definition_version_id: str = field(metadata={'path_param': { 'field_name': 'LoggerDefinitionVersionId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,15 +30,15 @@ class GetLoggerDefinitionVersionHeaders:
 
 @dataclass
 class GetLoggerDefinitionVersionRequest:
-    path_params: GetLoggerDefinitionVersionPathParams = field(default=None)
-    query_params: GetLoggerDefinitionVersionQueryParams = field(default=None)
-    headers: GetLoggerDefinitionVersionHeaders = field(default=None)
+    headers: GetLoggerDefinitionVersionHeaders = field()
+    path_params: GetLoggerDefinitionVersionPathParams = field()
+    query_params: GetLoggerDefinitionVersionQueryParams = field()
     
 
 @dataclass
 class GetLoggerDefinitionVersionResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_logger_definition_version_response: Optional[shared.GetLoggerDefinitionVersionResponse] = field(default=None)
-    status_code: int = field(default=None)
     

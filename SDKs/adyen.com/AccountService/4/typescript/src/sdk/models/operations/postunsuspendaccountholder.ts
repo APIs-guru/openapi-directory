@@ -1,47 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
-export class PostUnSuspendAccountHolderSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
-  basicAuth: shared.SchemeBasicAuth;
-}
-
-
-export class PostUnSuspendAccountHolderSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
-  apiKeyAuth: shared.SchemeApiKeyAuth;
-}
-
 
 export class PostUnSuspendAccountHolderSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: PostUnSuspendAccountHolderSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  basicAuth?: shared.SchemeBasicAuth;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: PostUnSuspendAccountHolderSecurityOption2;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  apiKeyAuth?: shared.SchemeApiKeyAuth;
 }
 
 
 export class PostUnSuspendAccountHolderRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: PostUnSuspendAccountHolderSecurity;
 }
 
 
 export class PostUnSuspendAccountHolderResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceError?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   unSuspendAccountHolderResponse?: any;
 }

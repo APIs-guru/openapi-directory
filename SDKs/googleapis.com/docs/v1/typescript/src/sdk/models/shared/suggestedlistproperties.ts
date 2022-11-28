@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ListProperties } from "./listproperties";
 import { ListPropertiesSuggestionState } from "./listpropertiessuggestionstate";
+
 
 
 // SuggestedListProperties
@@ -8,9 +9,9 @@ import { ListPropertiesSuggestionState } from "./listpropertiessuggestionstate";
  * A suggested change to ListProperties.
 **/
 export class SuggestedListProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=listProperties" })
+  @SpeakeasyMetadata({ data: "json, name=listProperties" })
   listProperties?: ListProperties;
 
-  @Metadata({ data: "json, name=listPropertiesSuggestionState" })
+  @SpeakeasyMetadata({ data: "json, name=listPropertiesSuggestionState" })
   listPropertiesSuggestionState?: ListPropertiesSuggestionState;
 }

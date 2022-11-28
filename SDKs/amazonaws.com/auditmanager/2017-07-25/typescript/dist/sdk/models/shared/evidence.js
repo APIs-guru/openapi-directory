@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Resource } from "./resource";
 // Evidence
 /**
  *  A record that contains the information needed to demonstrate compliance with the requirements specified by a control. Examples of evidence include change activity triggered by a user, or a system configuration snapshot.
@@ -34,63 +34,63 @@ var Evidence = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=assessmentReportSelection" }),
+        SpeakeasyMetadata({ data: "json, name=assessmentReportSelection" }),
         __metadata("design:type", String)
     ], Evidence.prototype, "assessmentReportSelection", void 0);
     __decorate([
-        Metadata({ data: "json, name=attributes" }),
+        SpeakeasyMetadata({ data: "json, name=attributes" }),
         __metadata("design:type", Map)
     ], Evidence.prototype, "attributes", void 0);
     __decorate([
-        Metadata({ data: "json, name=awsAccountId" }),
+        SpeakeasyMetadata({ data: "json, name=awsAccountId" }),
         __metadata("design:type", String)
     ], Evidence.prototype, "awsAccountId", void 0);
     __decorate([
-        Metadata({ data: "json, name=awsOrganization" }),
+        SpeakeasyMetadata({ data: "json, name=awsOrganization" }),
         __metadata("design:type", String)
     ], Evidence.prototype, "awsOrganization", void 0);
     __decorate([
-        Metadata({ data: "json, name=complianceCheck" }),
+        SpeakeasyMetadata({ data: "json, name=complianceCheck" }),
         __metadata("design:type", String)
     ], Evidence.prototype, "complianceCheck", void 0);
     __decorate([
-        Metadata({ data: "json, name=dataSource" }),
+        SpeakeasyMetadata({ data: "json, name=dataSource" }),
         __metadata("design:type", String)
     ], Evidence.prototype, "dataSource", void 0);
     __decorate([
-        Metadata({ data: "json, name=eventName" }),
+        SpeakeasyMetadata({ data: "json, name=eventName" }),
         __metadata("design:type", String)
     ], Evidence.prototype, "eventName", void 0);
     __decorate([
-        Metadata({ data: "json, name=eventSource" }),
+        SpeakeasyMetadata({ data: "json, name=eventSource" }),
         __metadata("design:type", String)
     ], Evidence.prototype, "eventSource", void 0);
     __decorate([
-        Metadata({ data: "json, name=evidenceAwsAccountId" }),
+        SpeakeasyMetadata({ data: "json, name=evidenceAwsAccountId" }),
         __metadata("design:type", String)
     ], Evidence.prototype, "evidenceAwsAccountId", void 0);
     __decorate([
-        Metadata({ data: "json, name=evidenceByType" }),
+        SpeakeasyMetadata({ data: "json, name=evidenceByType" }),
         __metadata("design:type", String)
     ], Evidence.prototype, "evidenceByType", void 0);
     __decorate([
-        Metadata({ data: "json, name=evidenceFolderId" }),
+        SpeakeasyMetadata({ data: "json, name=evidenceFolderId" }),
         __metadata("design:type", String)
     ], Evidence.prototype, "evidenceFolderId", void 0);
     __decorate([
-        Metadata({ data: "json, name=iamId" }),
+        SpeakeasyMetadata({ data: "json, name=iamId" }),
         __metadata("design:type", String)
     ], Evidence.prototype, "iamId", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], Evidence.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=resourcesIncluded", elemType: shared.Resource }),
+        SpeakeasyMetadata({ data: "json, name=resourcesIncluded", elemType: Resource }),
         __metadata("design:type", Array)
     ], Evidence.prototype, "resourcesIncluded", void 0);
     __decorate([
-        Metadata({ data: "json, name=time" }),
+        SpeakeasyMetadata({ data: "json, name=time" }),
         __metadata("design:type", Date)
     ], Evidence.prototype, "time", void 0);
     return Evidence;

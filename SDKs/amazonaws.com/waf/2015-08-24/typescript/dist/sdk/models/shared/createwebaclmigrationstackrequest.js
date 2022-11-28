@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var CreateWebAclMigrationStackRequest = /** @class */ (function (_super) {
     __extends(CreateWebAclMigrationStackRequest, _super);
     function CreateWebAclMigrationStackRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=IgnoreUnsupportedType" }),
+        SpeakeasyMetadata({ data: "json, name=IgnoreUnsupportedType" }),
         __metadata("design:type", Boolean)
     ], CreateWebAclMigrationStackRequest.prototype, "ignoreUnsupportedType", void 0);
     __decorate([
-        Metadata({ data: "json, name=S3BucketName" }),
+        SpeakeasyMetadata({ data: "json, name=S3BucketName" }),
         __metadata("design:type", String)
     ], CreateWebAclMigrationStackRequest.prototype, "s3BucketName", void 0);
     __decorate([
-        Metadata({ data: "json, name=WebACLId" }),
+        SpeakeasyMetadata({ data: "json, name=WebACLId" }),
         __metadata("design:type", String)
     ], CreateWebAclMigrationStackRequest.prototype, "webAclId", void 0);
     return CreateWebAclMigrationStackRequest;

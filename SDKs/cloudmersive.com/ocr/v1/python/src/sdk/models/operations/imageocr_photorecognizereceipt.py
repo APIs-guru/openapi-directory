@@ -12,31 +12,31 @@ class ImageOcrPhotoRecognizeReceiptHeaders:
 
 @dataclass
 class ImageOcrPhotoRecognizeReceiptRequestBodyImageFile:
-    content: bytes = field(default=None, metadata={'multipart_form': { 'content': True }})
-    image_file: str = field(default=None, metadata={'multipart_form': { 'field_name': 'imageFile' }})
+    content: bytes = field(metadata={'multipart_form': { 'content': True }})
+    image_file: str = field(metadata={'multipart_form': { 'field_name': 'imageFile' }})
     
 
 @dataclass
 class ImageOcrPhotoRecognizeReceiptRequestBody:
-    image_file: ImageOcrPhotoRecognizeReceiptRequestBodyImageFile = field(default=None, metadata={'multipart_form': { 'file': True }})
+    image_file: ImageOcrPhotoRecognizeReceiptRequestBodyImageFile = field(metadata={'multipart_form': { 'file': True }})
     
 
 @dataclass
 class ImageOcrPhotoRecognizeReceiptSecurity:
-    apikey: shared.SchemeApikey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    apikey: shared.SchemeApikey = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class ImageOcrPhotoRecognizeReceiptRequest:
-    headers: ImageOcrPhotoRecognizeReceiptHeaders = field(default=None)
-    request: ImageOcrPhotoRecognizeReceiptRequestBody = field(default=None, metadata={'request': { 'media_type': 'multipart/form-data' }})
-    security: ImageOcrPhotoRecognizeReceiptSecurity = field(default=None)
+    headers: ImageOcrPhotoRecognizeReceiptHeaders = field()
+    request: ImageOcrPhotoRecognizeReceiptRequestBody = field(metadata={'request': { 'media_type': 'multipart/form-data' }})
+    security: ImageOcrPhotoRecognizeReceiptSecurity = field()
     
 
 @dataclass
 class ImageOcrPhotoRecognizeReceiptResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     receipt_recognition_result: Optional[shared.ReceiptRecognitionResult] = field(default=None)
-    status_code: int = field(default=None)
     

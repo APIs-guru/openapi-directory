@@ -41,6 +41,8 @@ type RepoSearchResultItemPermissions struct {
 	Push  bool `json:"push"`
 }
 
+// RepoSearchResultItem
+// Repo Search Result Item
 type RepoSearchResultItem struct {
 	AllowMergeCommit    *bool                             `json:"allow_merge_commit,omitempty"`
 	AllowRebaseMerge    *bool                             `json:"allow_rebase_merge,omitempty"`

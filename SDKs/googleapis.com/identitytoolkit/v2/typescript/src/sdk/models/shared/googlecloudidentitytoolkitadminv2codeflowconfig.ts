@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudIdentitytoolkitAdminV2CodeFlowConfig
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Additional config for Apple for code flow.
 **/
 export class GoogleCloudIdentitytoolkitAdminV2CodeFlowConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=keyId" })
+  @SpeakeasyMetadata({ data: "json, name=keyId" })
   keyId?: string;
 
-  @Metadata({ data: "json, name=privateKey" })
+  @SpeakeasyMetadata({ data: "json, name=privateKey" })
   privateKey?: string;
 
-  @Metadata({ data: "json, name=teamId" })
+  @SpeakeasyMetadata({ data: "json, name=teamId" })
   teamId?: string;
 }

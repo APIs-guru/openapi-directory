@@ -8,6 +8,8 @@ const (
 	GrpcRouteMethodMatchTypeEnumRegularExpression GrpcRouteMethodMatchTypeEnum = "REGULAR_EXPRESSION"
 )
 
+// GrpcRouteMethodMatch
+// Specifies a match against a method.
 type GrpcRouteMethodMatch struct {
 	CaseSensitive *bool                         `json:"caseSensitive,omitempty"`
 	GrpcMethod    *string                       `json:"grpcMethod,omitempty"`

@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CompanyCreditsSearchReadPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=movie_title" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=movie_title" })
   movieTitle: string;
 }
 
 
 export class CompanyCreditsSearchReadRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CompanyCreditsSearchReadPathParams;
 }
 
 
 export class CompanyCreditsSearchReadResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

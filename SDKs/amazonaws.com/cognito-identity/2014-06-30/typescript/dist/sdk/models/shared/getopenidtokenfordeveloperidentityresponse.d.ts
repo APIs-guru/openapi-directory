@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * Returned in response to a successful <code>GetOpenIdTokenForDeveloperIdentity</code> request.
 **/

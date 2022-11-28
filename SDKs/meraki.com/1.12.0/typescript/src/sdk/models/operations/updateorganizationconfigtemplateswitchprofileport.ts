@@ -1,127 +1,128 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateOrganizationConfigTemplateSwitchProfilePortPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=configTemplateId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=configTemplateId" })
   configTemplateId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=organizationId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=organizationId" })
   organizationId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=portId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=portId" })
   portId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=profileId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=profileId" })
   profileId: string;
 }
 
 export enum UpdateOrganizationConfigTemplateSwitchProfilePortRequestBodyAccessPolicyTypeEnum {
-    Open = "Open"
-,    CustomAccessPolicy = "Custom access policy"
-,    MacAllowList = "MAC allow list"
-,    StickyMacAllowList = "Sticky MAC allow list"
+    Open = "Open",
+    CustomAccessPolicy = "Custom access policy",
+    MacAllowList = "MAC allow list",
+    StickyMacAllowList = "Sticky MAC allow list"
 }
 
 export enum UpdateOrganizationConfigTemplateSwitchProfilePortRequestBodyStpGuardEnum {
-    Disabled = "disabled"
-,    RootGuard = "root guard"
-,    BpduGuard = "bpdu guard"
-,    LoopGuard = "loop guard"
+    Disabled = "disabled",
+    RootGuard = "root guard",
+    BpduGuard = "bpdu guard",
+    LoopGuard = "loop guard"
 }
 
 export enum UpdateOrganizationConfigTemplateSwitchProfilePortRequestBodyTypeEnum {
-    Trunk = "trunk"
-,    Access = "access"
+    Trunk = "trunk",
+    Access = "access"
 }
 
 export enum UpdateOrganizationConfigTemplateSwitchProfilePortRequestBodyUdldEnum {
-    AlertOnly = "Alert only"
-,    Enforce = "Enforce"
+    AlertOnly = "Alert only",
+    Enforce = "Enforce"
 }
 
 
 export class UpdateOrganizationConfigTemplateSwitchProfilePortRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessPolicyNumber" })
+  @SpeakeasyMetadata({ data: "json, name=accessPolicyNumber" })
   accessPolicyNumber?: number;
 
-  @Metadata({ data: "json, name=accessPolicyType" })
+  @SpeakeasyMetadata({ data: "json, name=accessPolicyType" })
   accessPolicyType?: UpdateOrganizationConfigTemplateSwitchProfilePortRequestBodyAccessPolicyTypeEnum;
 
-  @Metadata({ data: "json, name=allowedVlans" })
+  @SpeakeasyMetadata({ data: "json, name=allowedVlans" })
   allowedVlans?: string;
 
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=flexibleStackingEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=flexibleStackingEnabled" })
   flexibleStackingEnabled?: boolean;
 
-  @Metadata({ data: "json, name=isolationEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=isolationEnabled" })
   isolationEnabled?: boolean;
 
-  @Metadata({ data: "json, name=linkNegotiation" })
+  @SpeakeasyMetadata({ data: "json, name=linkNegotiation" })
   linkNegotiation?: string;
 
-  @Metadata({ data: "json, name=macAllowList" })
+  @SpeakeasyMetadata({ data: "json, name=macAllowList" })
   macAllowList?: string[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=poeEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=poeEnabled" })
   poeEnabled?: boolean;
 
-  @Metadata({ data: "json, name=portScheduleId" })
+  @SpeakeasyMetadata({ data: "json, name=portScheduleId" })
   portScheduleId?: string;
 
-  @Metadata({ data: "json, name=rstpEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=rstpEnabled" })
   rstpEnabled?: boolean;
 
-  @Metadata({ data: "json, name=stickyMacAllowList" })
+  @SpeakeasyMetadata({ data: "json, name=stickyMacAllowList" })
   stickyMacAllowList?: string[];
 
-  @Metadata({ data: "json, name=stickyMacAllowListLimit" })
+  @SpeakeasyMetadata({ data: "json, name=stickyMacAllowListLimit" })
   stickyMacAllowListLimit?: number;
 
-  @Metadata({ data: "json, name=stormControlEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=stormControlEnabled" })
   stormControlEnabled?: boolean;
 
-  @Metadata({ data: "json, name=stpGuard" })
+  @SpeakeasyMetadata({ data: "json, name=stpGuard" })
   stpGuard?: UpdateOrganizationConfigTemplateSwitchProfilePortRequestBodyStpGuardEnum;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: string[];
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: UpdateOrganizationConfigTemplateSwitchProfilePortRequestBodyTypeEnum;
 
-  @Metadata({ data: "json, name=udld" })
+  @SpeakeasyMetadata({ data: "json, name=udld" })
   udld?: UpdateOrganizationConfigTemplateSwitchProfilePortRequestBodyUdldEnum;
 
-  @Metadata({ data: "json, name=vlan" })
+  @SpeakeasyMetadata({ data: "json, name=vlan" })
   vlan?: number;
 
-  @Metadata({ data: "json, name=voiceVlan" })
+  @SpeakeasyMetadata({ data: "json, name=voiceVlan" })
   voiceVlan?: number;
 }
 
 
 export class UpdateOrganizationConfigTemplateSwitchProfilePortRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateOrganizationConfigTemplateSwitchProfilePortPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: UpdateOrganizationConfigTemplateSwitchProfilePortRequestBody;
 }
 
 
 export class UpdateOrganizationConfigTemplateSwitchProfilePortResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateOrganizationConfigTemplateSwitchProfilePort200ApplicationJsonObject?: Map<string, any>;
 }

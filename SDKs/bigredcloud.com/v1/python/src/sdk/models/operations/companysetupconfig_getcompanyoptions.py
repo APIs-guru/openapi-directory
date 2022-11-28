@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class CompanySetupConfigGetCompanyOptionsResponse:
+    content_type: str = field()
+    status_code: int = field()
     company_option_dto: Optional[shared.CompanyOptionDto] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

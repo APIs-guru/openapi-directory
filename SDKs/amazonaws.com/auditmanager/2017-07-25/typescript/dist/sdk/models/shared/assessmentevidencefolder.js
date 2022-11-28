@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // AssessmentEvidenceFolder
 /**
  *  The folder in which Audit Manager stores evidence for an assessment.
@@ -33,75 +33,75 @@ var AssessmentEvidenceFolder = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=assessmentId" }),
+        SpeakeasyMetadata({ data: "json, name=assessmentId" }),
         __metadata("design:type", String)
     ], AssessmentEvidenceFolder.prototype, "assessmentId", void 0);
     __decorate([
-        Metadata({ data: "json, name=assessmentReportSelectionCount" }),
+        SpeakeasyMetadata({ data: "json, name=assessmentReportSelectionCount" }),
         __metadata("design:type", Number)
     ], AssessmentEvidenceFolder.prototype, "assessmentReportSelectionCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=author" }),
+        SpeakeasyMetadata({ data: "json, name=author" }),
         __metadata("design:type", String)
     ], AssessmentEvidenceFolder.prototype, "author", void 0);
     __decorate([
-        Metadata({ data: "json, name=controlId" }),
+        SpeakeasyMetadata({ data: "json, name=controlId" }),
         __metadata("design:type", String)
     ], AssessmentEvidenceFolder.prototype, "controlId", void 0);
     __decorate([
-        Metadata({ data: "json, name=controlName" }),
+        SpeakeasyMetadata({ data: "json, name=controlName" }),
         __metadata("design:type", String)
     ], AssessmentEvidenceFolder.prototype, "controlName", void 0);
     __decorate([
-        Metadata({ data: "json, name=controlSetId" }),
+        SpeakeasyMetadata({ data: "json, name=controlSetId" }),
         __metadata("design:type", String)
     ], AssessmentEvidenceFolder.prototype, "controlSetId", void 0);
     __decorate([
-        Metadata({ data: "json, name=dataSource" }),
+        SpeakeasyMetadata({ data: "json, name=dataSource" }),
         __metadata("design:type", String)
     ], AssessmentEvidenceFolder.prototype, "dataSource", void 0);
     __decorate([
-        Metadata({ data: "json, name=date" }),
+        SpeakeasyMetadata({ data: "json, name=date" }),
         __metadata("design:type", Date)
     ], AssessmentEvidenceFolder.prototype, "date", void 0);
     __decorate([
-        Metadata({ data: "json, name=evidenceAwsServiceSourceCount" }),
+        SpeakeasyMetadata({ data: "json, name=evidenceAwsServiceSourceCount" }),
         __metadata("design:type", Number)
     ], AssessmentEvidenceFolder.prototype, "evidenceAwsServiceSourceCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=evidenceByTypeComplianceCheckCount" }),
+        SpeakeasyMetadata({ data: "json, name=evidenceByTypeComplianceCheckCount" }),
         __metadata("design:type", Number)
     ], AssessmentEvidenceFolder.prototype, "evidenceByTypeComplianceCheckCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=evidenceByTypeComplianceCheckIssuesCount" }),
+        SpeakeasyMetadata({ data: "json, name=evidenceByTypeComplianceCheckIssuesCount" }),
         __metadata("design:type", Number)
     ], AssessmentEvidenceFolder.prototype, "evidenceByTypeComplianceCheckIssuesCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=evidenceByTypeConfigurationDataCount" }),
+        SpeakeasyMetadata({ data: "json, name=evidenceByTypeConfigurationDataCount" }),
         __metadata("design:type", Number)
     ], AssessmentEvidenceFolder.prototype, "evidenceByTypeConfigurationDataCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=evidenceByTypeManualCount" }),
+        SpeakeasyMetadata({ data: "json, name=evidenceByTypeManualCount" }),
         __metadata("design:type", Number)
     ], AssessmentEvidenceFolder.prototype, "evidenceByTypeManualCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=evidenceByTypeUserActivityCount" }),
+        SpeakeasyMetadata({ data: "json, name=evidenceByTypeUserActivityCount" }),
         __metadata("design:type", Number)
     ], AssessmentEvidenceFolder.prototype, "evidenceByTypeUserActivityCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=evidenceResourcesIncludedCount" }),
+        SpeakeasyMetadata({ data: "json, name=evidenceResourcesIncludedCount" }),
         __metadata("design:type", Number)
     ], AssessmentEvidenceFolder.prototype, "evidenceResourcesIncludedCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], AssessmentEvidenceFolder.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], AssessmentEvidenceFolder.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=totalEvidence" }),
+        SpeakeasyMetadata({ data: "json, name=totalEvidence" }),
         __metadata("design:type", Number)
     ], AssessmentEvidenceFolder.prototype, "totalEvidence", void 0);
     return AssessmentEvidenceFolder;

@@ -8,6 +8,8 @@ const (
 	MaintenanceExclusionOptionsScopeEnumNoMinorOrNodeUpgrades MaintenanceExclusionOptionsScopeEnum = "NO_MINOR_OR_NODE_UPGRADES"
 )
 
+// MaintenanceExclusionOptions
+// Represents the Maintenance exclusion option.
 type MaintenanceExclusionOptions struct {
 	Scope *MaintenanceExclusionOptionsScopeEnum `json:"scope,omitempty"`
 }

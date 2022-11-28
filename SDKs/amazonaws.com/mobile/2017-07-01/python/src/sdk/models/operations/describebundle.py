@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from sdk.models import shared
 
 
 @dataclass
 class DescribeBundlePathParams:
-    bundle_id: str = field(default=None, metadata={'path_param': { 'field_name': 'bundleId', 'style': 'simple', 'explode': False }})
+    bundle_id: str = field(metadata={'path_param': { 'field_name': 'bundleId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,19 +24,19 @@ class DescribeBundleHeaders:
 
 @dataclass
 class DescribeBundleRequest:
-    path_params: DescribeBundlePathParams = field(default=None)
-    headers: DescribeBundleHeaders = field(default=None)
+    headers: DescribeBundleHeaders = field()
+    path_params: DescribeBundlePathParams = field()
     
 
 @dataclass
 class DescribeBundleResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[shared.BadRequestException] = field(default=None)
-    content_type: str = field(default=None)
     describe_bundle_result: Optional[shared.DescribeBundleResult] = field(default=None)
     internal_failure_exception: Optional[shared.InternalFailureException] = field(default=None)
     not_found_exception: Optional[shared.NotFoundException] = field(default=None)
     service_unavailable_exception: Optional[shared.ServiceUnavailableException] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[shared.TooManyRequestsException] = field(default=None)
     unauthorized_exception: Optional[shared.UnauthorizedException] = field(default=None)
     

@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { SasPortalDevice } from "./sasportaldevice";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SasPortalDeviceInput } from "./sasportaldevice";
 
 
-// SasPortalSignDeviceRequest
+
+// SasPortalSignDeviceRequestInput
 /** 
  * Request for SignDevice.
 **/
-export class SasPortalSignDeviceRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=device" })
-  device?: SasPortalDevice;
+export class SasPortalSignDeviceRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=device" })
+  device?: SasPortalDeviceInput;
 }

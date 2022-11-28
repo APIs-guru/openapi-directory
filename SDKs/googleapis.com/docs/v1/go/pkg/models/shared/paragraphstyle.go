@@ -41,6 +41,8 @@ const (
 	ParagraphStyleSpacingModeEnumCollapseLists          ParagraphStyleSpacingModeEnum = "COLLAPSE_LISTS"
 )
 
+// ParagraphStyle
+// Styles that apply to a whole paragraph. Inherited paragraph styles are represented as unset fields in this message. A paragraph style's parent depends on where the paragraph style is defined: * The ParagraphStyle on a Paragraph inherits from the paragraph's corresponding named style type. * The ParagraphStyle on a named style inherits from the normal text named style. * The ParagraphStyle of the normal text named style inherits from the default paragraph style in the Docs editor. * The ParagraphStyle on a Paragraph element that's contained in a table may inherit its paragraph style from the table style. If the paragraph style does not inherit from a parent, unsetting fields will revert the style to a value matching the defaults in the Docs editor.
 type ParagraphStyle struct {
 	Alignment           *ParagraphStyleAlignmentEnum      `json:"alignment,omitempty"`
 	AvoidWidowAndOrphan *bool                             `json:"avoidWidowAndOrphan,omitempty"`

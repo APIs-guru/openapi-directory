@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OcrPhotoTextElement } from "./ocrphototextelement";
 import { FormFieldDefinition } from "./formfielddefinition";
+
 
 
 // FieldResult
@@ -9,9 +9,9 @@ import { FormFieldDefinition } from "./formfielddefinition";
  * A pairing target field and actual value read from form
 **/
 export class FieldResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FieldValues", elemType: shared.OcrPhotoTextElement })
+  @SpeakeasyMetadata({ data: "json, name=FieldValues", elemType: OcrPhotoTextElement })
   fieldValues?: OcrPhotoTextElement[];
 
-  @Metadata({ data: "json, name=TargetField" })
+  @SpeakeasyMetadata({ data: "json, name=TargetField" })
   targetField?: FormFieldDefinition;
 }

@@ -1,39 +1,40 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetTopExamplePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=word" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=word" })
   word: string;
 }
 
 export enum GetTopExampleUseCanonicalEnum {
-    False = "false"
-,    True = "true"
+    False = "false",
+    True = "true"
 }
 
 
 export class GetTopExampleQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=useCanonical" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=useCanonical" })
   useCanonical?: GetTopExampleUseCanonicalEnum;
 }
 
 
 export class GetTopExampleRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetTopExamplePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetTopExampleQueryParams;
 }
 
 
 export class GetTopExampleResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

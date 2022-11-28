@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// SimulationApplicationSummary
+// Summary information for a simulation application.
 type SimulationApplicationSummary struct {
 	Arn                     *string                  `json:"arn,omitempty"`
 	LastUpdatedAt           *time.Time               `json:"lastUpdatedAt,omitempty"`

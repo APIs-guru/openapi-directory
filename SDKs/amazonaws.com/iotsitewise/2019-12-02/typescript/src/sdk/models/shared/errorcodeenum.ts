@@ -1,6 +1,7 @@
 
 
+
 export enum ErrorCodeEnum {
-    ValidationError = "VALIDATION_ERROR"
-,    InternalFailure = "INTERNAL_FAILURE"
+    ValidationError = "VALIDATION_ERROR",
+    InternalFailure = "INTERNAL_FAILURE"
 }

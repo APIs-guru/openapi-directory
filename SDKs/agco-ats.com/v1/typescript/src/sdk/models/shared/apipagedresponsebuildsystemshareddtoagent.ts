@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BuildSystemSharedDtoAgent } from "./buildsystemshareddtoagent";
 import { ApiPagedResponseMetadata } from "./apipagedresponsemetadata";
+
 
 
 // ApiPagedResponseBuildSystemSharedDtoAgent
@@ -9,9 +9,9 @@ import { ApiPagedResponseMetadata } from "./apipagedresponsemetadata";
  * A response containing a page of results and metadata concerning the results
 **/
 export class ApiPagedResponseBuildSystemSharedDtoAgent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Entities", elemType: shared.BuildSystemSharedDtoAgent })
+  @SpeakeasyMetadata({ data: "json, name=Entities", elemType: BuildSystemSharedDtoAgent })
   entities: BuildSystemSharedDtoAgent[];
 
-  @Metadata({ data: "json, name=Metadata" })
+  @SpeakeasyMetadata({ data: "json, name=Metadata" })
   metadata: ApiPagedResponseMetadata;
 }

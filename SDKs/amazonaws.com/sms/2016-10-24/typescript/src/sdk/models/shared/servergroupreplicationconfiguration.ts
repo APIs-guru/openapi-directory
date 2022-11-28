@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ServerReplicationConfiguration } from "./serverreplicationconfiguration";
+
 
 
 // ServerGroupReplicationConfiguration
@@ -8,9 +8,9 @@ import { ServerReplicationConfiguration } from "./serverreplicationconfiguration
  * Replication configuration for a server group.
 **/
 export class ServerGroupReplicationConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=serverGroupId" })
+  @SpeakeasyMetadata({ data: "json, name=serverGroupId" })
   serverGroupId?: string;
 
-  @Metadata({ data: "json, name=serverReplicationConfigurations", elemType: shared.ServerReplicationConfiguration })
+  @SpeakeasyMetadata({ data: "json, name=serverReplicationConfigurations", elemType: ServerReplicationConfiguration })
   serverReplicationConfigurations?: ServerReplicationConfiguration[];
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var EventarcProjectsLocationsTriggersSetIamPolicyPathParams = /** @class */ (function (_super) {
     __extends(EventarcProjectsLocationsTriggersSetIamPolicyPathParams, _super);
@@ -30,7 +30,7 @@ var EventarcProjectsLocationsTriggersSetIamPolicyPathParams = /** @class */ (fun
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=resource" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=resource" }),
         __metadata("design:type", String)
     ], EventarcProjectsLocationsTriggersSetIamPolicyPathParams.prototype, "resource", void 0);
     return EventarcProjectsLocationsTriggersSetIamPolicyPathParams;
@@ -42,47 +42,47 @@ var EventarcProjectsLocationsTriggersSetIamPolicyQueryParams = /** @class */ (fu
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], EventarcProjectsLocationsTriggersSetIamPolicyQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], EventarcProjectsLocationsTriggersSetIamPolicyQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], EventarcProjectsLocationsTriggersSetIamPolicyQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], EventarcProjectsLocationsTriggersSetIamPolicyQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], EventarcProjectsLocationsTriggersSetIamPolicyQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], EventarcProjectsLocationsTriggersSetIamPolicyQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], EventarcProjectsLocationsTriggersSetIamPolicyQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], EventarcProjectsLocationsTriggersSetIamPolicyQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], EventarcProjectsLocationsTriggersSetIamPolicyQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], EventarcProjectsLocationsTriggersSetIamPolicyQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], EventarcProjectsLocationsTriggersSetIamPolicyQueryParams.prototype, "uploadProtocol", void 0);
     return EventarcProjectsLocationsTriggersSetIamPolicyQueryParams;
@@ -94,11 +94,11 @@ var EventarcProjectsLocationsTriggersSetIamPolicySecurity = /** @class */ (funct
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], EventarcProjectsLocationsTriggersSetIamPolicySecurity.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], EventarcProjectsLocationsTriggersSetIamPolicySecurity.prototype, "oauth2c", void 0);
     return EventarcProjectsLocationsTriggersSetIamPolicySecurity;
@@ -110,19 +110,19 @@ var EventarcProjectsLocationsTriggersSetIamPolicyRequest = /** @class */ (functi
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", EventarcProjectsLocationsTriggersSetIamPolicyPathParams)
     ], EventarcProjectsLocationsTriggersSetIamPolicyRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", EventarcProjectsLocationsTriggersSetIamPolicyQueryParams)
     ], EventarcProjectsLocationsTriggersSetIamPolicyRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.SetIamPolicyRequest)
     ], EventarcProjectsLocationsTriggersSetIamPolicyRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", EventarcProjectsLocationsTriggersSetIamPolicySecurity)
     ], EventarcProjectsLocationsTriggersSetIamPolicyRequest.prototype, "security", void 0);
     return EventarcProjectsLocationsTriggersSetIamPolicyRequest;
@@ -134,15 +134,15 @@ var EventarcProjectsLocationsTriggersSetIamPolicyResponse = /** @class */ (funct
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], EventarcProjectsLocationsTriggersSetIamPolicyResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Policy)
     ], EventarcProjectsLocationsTriggersSetIamPolicyResponse.prototype, "policy", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], EventarcProjectsLocationsTriggersSetIamPolicyResponse.prototype, "statusCode", void 0);
     return EventarcProjectsLocationsTriggersSetIamPolicyResponse;

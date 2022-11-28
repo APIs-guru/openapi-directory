@@ -1,7 +1,8 @@
 
 
+
 export enum SslCertificateTypeEnum {
-    Standard = "standard"
-,    MultiDomain = "multi_domain"
-,    Wildcard = "wildcard"
+    Standard = "standard",
+    MultiDomain = "multi_domain",
+    Wildcard = "wildcard"
 }

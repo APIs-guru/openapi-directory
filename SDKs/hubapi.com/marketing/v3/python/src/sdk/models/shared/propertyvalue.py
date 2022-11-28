@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class PropertyValueSourceEnum(str, Enum):
     IMPORT = "IMPORT"
@@ -87,16 +92,16 @@ class PropertyValueSourceEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PropertyValue:
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    request_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'requestId' }})
-    selected_by_user: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'selectedByUser' }})
-    selected_by_user_timestamp: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'selectedByUserTimestamp' }})
-    source: PropertyValueSourceEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'source' }})
-    source_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sourceId' }})
-    source_label: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sourceLabel' }})
-    source_metadata: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sourceMetadata' }})
-    source_vid: List[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sourceVid' }})
-    timestamp: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timestamp' }})
-    updated_by_user_id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updatedByUserId' }})
-    value: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    request_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('requestId') }})
+    selected_by_user: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('selectedByUser') }})
+    selected_by_user_timestamp: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('selectedByUserTimestamp') }})
+    source: PropertyValueSourceEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('source') }})
+    source_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('sourceId') }})
+    source_label: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('sourceLabel') }})
+    source_metadata: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('sourceMetadata') }})
+    source_vid: List[int] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('sourceVid') }})
+    timestamp: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('timestamp') }})
+    value: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
+    updated_by_user_id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('updatedByUserId') }})
     

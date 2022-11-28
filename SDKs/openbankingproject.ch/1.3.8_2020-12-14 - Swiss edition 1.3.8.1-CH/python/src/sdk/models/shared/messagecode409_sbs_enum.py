@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class MessageCode409SbsEnum(str, Enum):
     REFERENCE_STATUS_INVALID = "REFERENCE_STATUS_INVALID"

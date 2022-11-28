@@ -1,19 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Hl7SchemaConfig } from "./hl7schemaconfig";
 import { Hl7TypesConfig } from "./hl7typesconfig";
 
+
 export enum SchemaPackageSchematizedParsingTypeEnum {
-    SchematizedParsingTypeUnspecified = "SCHEMATIZED_PARSING_TYPE_UNSPECIFIED"
-,    SoftFail = "SOFT_FAIL"
-,    HardFail = "HARD_FAIL"
+    SchematizedParsingTypeUnspecified = "SCHEMATIZED_PARSING_TYPE_UNSPECIFIED",
+    SoftFail = "SOFT_FAIL",
+    HardFail = "HARD_FAIL"
 }
 
 export enum SchemaPackageUnexpectedSegmentHandlingEnum {
-    UnexpectedSegmentHandlingModeUnspecified = "UNEXPECTED_SEGMENT_HANDLING_MODE_UNSPECIFIED"
-,    Fail = "FAIL"
-,    Skip = "SKIP"
-,    Parse = "PARSE"
+    UnexpectedSegmentHandlingModeUnspecified = "UNEXPECTED_SEGMENT_HANDLING_MODE_UNSPECIFIED",
+    Fail = "FAIL",
+    Skip = "SKIP",
+    Parse = "PARSE"
 }
 
 
@@ -22,18 +22,18 @@ export enum SchemaPackageUnexpectedSegmentHandlingEnum {
  * A schema package contains a set of schemas and type definitions.
 **/
 export class SchemaPackage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ignoreMinOccurs" })
+  @SpeakeasyMetadata({ data: "json, name=ignoreMinOccurs" })
   ignoreMinOccurs?: boolean;
 
-  @Metadata({ data: "json, name=schemas", elemType: shared.Hl7SchemaConfig })
+  @SpeakeasyMetadata({ data: "json, name=schemas", elemType: Hl7SchemaConfig })
   schemas?: Hl7SchemaConfig[];
 
-  @Metadata({ data: "json, name=schematizedParsingType" })
+  @SpeakeasyMetadata({ data: "json, name=schematizedParsingType" })
   schematizedParsingType?: SchemaPackageSchematizedParsingTypeEnum;
 
-  @Metadata({ data: "json, name=types", elemType: shared.Hl7TypesConfig })
+  @SpeakeasyMetadata({ data: "json, name=types", elemType: Hl7TypesConfig })
   types?: Hl7TypesConfig[];
 
-  @Metadata({ data: "json, name=unexpectedSegmentHandling" })
+  @SpeakeasyMetadata({ data: "json, name=unexpectedSegmentHandling" })
   unexpectedSegmentHandling?: SchemaPackageUnexpectedSegmentHandlingEnum;
 }

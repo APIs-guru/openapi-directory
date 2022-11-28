@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // JobWorkerExecutorConfiguration
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Details about the polling configuration for the <code>JobWorker</code> action engine, or executor.
 **/
 export class JobWorkerExecutorConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pollingAccounts" })
+  @SpeakeasyMetadata({ data: "json, name=pollingAccounts" })
   pollingAccounts?: string[];
 
-  @Metadata({ data: "json, name=pollingServicePrincipals" })
+  @SpeakeasyMetadata({ data: "json, name=pollingServicePrincipals" })
   pollingServicePrincipals?: string[];
 }

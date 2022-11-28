@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ApiDimensionFilterGroup } from "./apidimensionfiltergroup";
 export var SearchAnalyticsQueryRequestAggregationTypeEnum;
 (function (SearchAnalyticsQueryRequestAggregationTypeEnum) {
     SearchAnalyticsQueryRequestAggregationTypeEnum["Auto"] = "AUTO";
@@ -69,43 +69,43 @@ var SearchAnalyticsQueryRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=aggregationType" }),
+        SpeakeasyMetadata({ data: "json, name=aggregationType" }),
         __metadata("design:type", String)
     ], SearchAnalyticsQueryRequest.prototype, "aggregationType", void 0);
     __decorate([
-        Metadata({ data: "json, name=dataState" }),
+        SpeakeasyMetadata({ data: "json, name=dataState" }),
         __metadata("design:type", String)
     ], SearchAnalyticsQueryRequest.prototype, "dataState", void 0);
     __decorate([
-        Metadata({ data: "json, name=dimensionFilterGroups", elemType: shared.ApiDimensionFilterGroup }),
+        SpeakeasyMetadata({ data: "json, name=dimensionFilterGroups", elemType: ApiDimensionFilterGroup }),
         __metadata("design:type", Array)
     ], SearchAnalyticsQueryRequest.prototype, "dimensionFilterGroups", void 0);
     __decorate([
-        Metadata({ data: "json, name=dimensions" }),
+        SpeakeasyMetadata({ data: "json, name=dimensions" }),
         __metadata("design:type", Array)
     ], SearchAnalyticsQueryRequest.prototype, "dimensions", void 0);
     __decorate([
-        Metadata({ data: "json, name=endDate" }),
+        SpeakeasyMetadata({ data: "json, name=endDate" }),
         __metadata("design:type", String)
     ], SearchAnalyticsQueryRequest.prototype, "endDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=rowLimit" }),
+        SpeakeasyMetadata({ data: "json, name=rowLimit" }),
         __metadata("design:type", Number)
     ], SearchAnalyticsQueryRequest.prototype, "rowLimit", void 0);
     __decorate([
-        Metadata({ data: "json, name=searchType" }),
+        SpeakeasyMetadata({ data: "json, name=searchType" }),
         __metadata("design:type", String)
     ], SearchAnalyticsQueryRequest.prototype, "searchType", void 0);
     __decorate([
-        Metadata({ data: "json, name=startDate" }),
+        SpeakeasyMetadata({ data: "json, name=startDate" }),
         __metadata("design:type", String)
     ], SearchAnalyticsQueryRequest.prototype, "startDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=startRow" }),
+        SpeakeasyMetadata({ data: "json, name=startRow" }),
         __metadata("design:type", Number)
     ], SearchAnalyticsQueryRequest.prototype, "startRow", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], SearchAnalyticsQueryRequest.prototype, "type", void 0);
     return SearchAnalyticsQueryRequest;

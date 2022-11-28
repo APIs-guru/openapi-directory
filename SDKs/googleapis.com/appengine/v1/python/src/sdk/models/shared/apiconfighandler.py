@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class APIConfigHandlerAuthFailActionEnum(str, Enum):
     AUTH_FAIL_ACTION_UNSPECIFIED = "AUTH_FAIL_ACTION_UNSPECIFIED"
@@ -24,9 +26,13 @@ class APIConfigHandlerSecurityLevelEnum(str, Enum):
 @dataclass_json
 @dataclass
 class APIConfigHandler:
-    auth_fail_action: Optional[APIConfigHandlerAuthFailActionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'authFailAction' }})
-    login: Optional[APIConfigHandlerLoginEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'login' }})
-    script: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'script' }})
-    security_level: Optional[APIConfigHandlerSecurityLevelEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'securityLevel' }})
-    url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
+    r"""APIConfigHandler
+    Google Cloud Endpoints (https://cloud.google.com/endpoints) configuration for API handlers.
+    """
+    
+    auth_fail_action: Optional[APIConfigHandlerAuthFailActionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('authFailAction') }})
+    login: Optional[APIConfigHandlerLoginEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('login') }})
+    script: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('script') }})
+    security_level: Optional[APIConfigHandlerSecurityLevelEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('securityLevel') }})
+    url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('url') }})
     

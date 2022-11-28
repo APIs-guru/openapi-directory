@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class V2GetTopicWithRepliesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=spaceId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=spaceId" })
   spaceId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=topicId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=topicId" })
   topicId: string;
 }
 
 
 export class V2GetTopicWithRepliesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=numberOfReplies" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=numberOfReplies" })
   numberOfReplies?: number;
 }
 
 
 export class V2GetTopicWithRepliesSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth: shared.SchemeOauth;
 }
 
 
 export class V2GetTopicWithRepliesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: V2GetTopicWithRepliesPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: V2GetTopicWithRepliesQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: V2GetTopicWithRepliesSecurity;
 }
 
 
 export class V2GetTopicWithRepliesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   spaceTopicWithReplies?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

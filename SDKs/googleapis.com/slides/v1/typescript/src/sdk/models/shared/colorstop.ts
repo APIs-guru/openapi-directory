@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OpaqueColor } from "./opaquecolor";
+
 
 
 // ColorStop
@@ -7,12 +8,12 @@ import { OpaqueColor } from "./opaquecolor";
  * A color and position in a gradient band.
 **/
 export class ColorStop extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alpha" })
+  @SpeakeasyMetadata({ data: "json, name=alpha" })
   alpha?: number;
 
-  @Metadata({ data: "json, name=color" })
+  @SpeakeasyMetadata({ data: "json, name=color" })
   color?: OpaqueColor;
 
-  @Metadata({ data: "json, name=position" })
+  @SpeakeasyMetadata({ data: "json, name=position" })
   position?: number;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // MavenReference
 /**
  * The information required to specify a Maven reference. You can use Maven references to specify dependency JAR files.
@@ -33,15 +33,15 @@ var MavenReference = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ArtifactId" }),
+        SpeakeasyMetadata({ data: "json, name=ArtifactId" }),
         __metadata("design:type", String)
     ], MavenReference.prototype, "artifactId", void 0);
     __decorate([
-        Metadata({ data: "json, name=GroupId" }),
+        SpeakeasyMetadata({ data: "json, name=GroupId" }),
         __metadata("design:type", String)
     ], MavenReference.prototype, "groupId", void 0);
     __decorate([
-        Metadata({ data: "json, name=Version" }),
+        SpeakeasyMetadata({ data: "json, name=Version" }),
         __metadata("design:type", String)
     ], MavenReference.prototype, "version", void 0);
     return MavenReference;

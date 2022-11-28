@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CustomMetric
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Allows autoscaling based on Stackdriver metrics.
 **/
 export class CustomMetric extends SpeakeasyBase {
-  @Metadata({ data: "json, name=filter" })
+  @SpeakeasyMetadata({ data: "json, name=filter" })
   filter?: string;
 
-  @Metadata({ data: "json, name=metricName" })
+  @SpeakeasyMetadata({ data: "json, name=metricName" })
   metricName?: string;
 
-  @Metadata({ data: "json, name=singleInstanceAssignment" })
+  @SpeakeasyMetadata({ data: "json, name=singleInstanceAssignment" })
   singleInstanceAssignment?: number;
 
-  @Metadata({ data: "json, name=targetType" })
+  @SpeakeasyMetadata({ data: "json, name=targetType" })
   targetType?: string;
 
-  @Metadata({ data: "json, name=targetUtilization" })
+  @SpeakeasyMetadata({ data: "json, name=targetUtilization" })
   targetUtilization?: number;
 }

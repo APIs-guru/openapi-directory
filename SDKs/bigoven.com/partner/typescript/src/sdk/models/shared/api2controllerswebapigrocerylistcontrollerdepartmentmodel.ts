@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Api2ControllersWebApiGroceryListControllerDepartmentModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items, form, name=items;" })
+  @SpeakeasyMetadata({ data: "json, name=items, form, name=items;" })
   items?: string;
 }

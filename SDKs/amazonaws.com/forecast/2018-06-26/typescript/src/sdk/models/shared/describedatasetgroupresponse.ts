@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DomainEnum } from "./domainenum";
 
 
+
 export class DescribeDatasetGroupResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=DatasetArns" })
+  @SpeakeasyMetadata({ data: "json, name=DatasetArns" })
   datasetArns?: string[];
 
-  @Metadata({ data: "json, name=DatasetGroupArn" })
+  @SpeakeasyMetadata({ data: "json, name=DatasetGroupArn" })
   datasetGroupArn?: string;
 
-  @Metadata({ data: "json, name=DatasetGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=DatasetGroupName" })
   datasetGroupName?: string;
 
-  @Metadata({ data: "json, name=Domain" })
+  @SpeakeasyMetadata({ data: "json, name=Domain" })
   domain?: DomainEnum;
 
-  @Metadata({ data: "json, name=LastModificationTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastModificationTime" })
   lastModificationTime?: Date;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: string;
 }

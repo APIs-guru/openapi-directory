@@ -1,13 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class ListProjectsQueryParams:
+    portal_id: str = field(metadata={'query_param': { 'field_name': 'portalId', 'style': 'form', 'explode': True }})
     max_results: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'maxResults', 'style': 'form', 'explode': True }})
     next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'nextToken', 'style': 'form', 'explode': True }})
-    portal_id: str = field(default=None, metadata={'query_param': { 'field_name': 'portalId', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -23,16 +26,16 @@ class ListProjectsHeaders:
 
 @dataclass
 class ListProjectsRequest:
-    query_params: ListProjectsQueryParams = field(default=None)
-    headers: ListProjectsHeaders = field(default=None)
+    headers: ListProjectsHeaders = field()
+    query_params: ListProjectsQueryParams = field()
     
 
 @dataclass
 class ListProjectsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     list_projects_response: Optional[shared.ListProjectsResponse] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

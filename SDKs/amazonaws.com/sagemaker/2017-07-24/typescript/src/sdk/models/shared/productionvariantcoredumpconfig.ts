@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ProductionVariantCoreDumpConfig
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies configuration for a core dump from the model container when the process crashes.
 **/
 export class ProductionVariantCoreDumpConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DestinationS3Uri" })
+  @SpeakeasyMetadata({ data: "json, name=DestinationS3Uri" })
   destinationS3Uri: string;
 
-  @Metadata({ data: "json, name=KmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=KmsKeyId" })
   kmsKeyId?: string;
 }

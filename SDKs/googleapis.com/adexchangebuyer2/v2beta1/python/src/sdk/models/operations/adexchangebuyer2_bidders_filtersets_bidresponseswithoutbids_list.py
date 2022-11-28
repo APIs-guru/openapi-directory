@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class Adexchangebuyer2BiddersFilterSetsBidResponsesWithoutBidsListPathParams:
-    filter_set_name: str = field(default=None, metadata={'path_param': { 'field_name': 'filterSetName', 'style': 'simple', 'explode': False }})
+    filter_set_name: str = field(metadata={'path_param': { 'field_name': 'filterSetName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class Adexchangebuyer2BiddersFilterSetsBidResponsesWithoutBidsListQueryParams:
 
 @dataclass
 class Adexchangebuyer2BiddersFilterSetsBidResponsesWithoutBidsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class Adexchangebuyer2BiddersFilterSetsBidResponsesWithoutBidsListRequest:
-    path_params: Adexchangebuyer2BiddersFilterSetsBidResponsesWithoutBidsListPathParams = field(default=None)
-    query_params: Adexchangebuyer2BiddersFilterSetsBidResponsesWithoutBidsListQueryParams = field(default=None)
-    security: Adexchangebuyer2BiddersFilterSetsBidResponsesWithoutBidsListSecurity = field(default=None)
+    path_params: Adexchangebuyer2BiddersFilterSetsBidResponsesWithoutBidsListPathParams = field()
+    query_params: Adexchangebuyer2BiddersFilterSetsBidResponsesWithoutBidsListQueryParams = field()
+    security: Adexchangebuyer2BiddersFilterSetsBidResponsesWithoutBidsListSecurity = field()
     
 
 @dataclass
 class Adexchangebuyer2BiddersFilterSetsBidResponsesWithoutBidsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_bid_responses_without_bids_response: Optional[shared.ListBidResponsesWithoutBidsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

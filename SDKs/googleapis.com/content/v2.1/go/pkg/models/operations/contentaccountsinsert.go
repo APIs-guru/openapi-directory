@@ -30,7 +30,7 @@ type ContentAccountsInsertSecurity struct {
 type ContentAccountsInsertRequest struct {
 	PathParams  ContentAccountsInsertPathParams
 	QueryParams ContentAccountsInsertQueryParams
-	Request     *shared.Account `request:"mediaType=application/json"`
+	Request     *shared.AccountInput `request:"mediaType=application/json"`
 	Security    ContentAccountsInsertSecurity
 }
 

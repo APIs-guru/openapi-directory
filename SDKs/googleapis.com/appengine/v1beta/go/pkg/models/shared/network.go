@@ -8,6 +8,8 @@ const (
 	NetworkInstanceIPModeEnumInternal                  NetworkInstanceIPModeEnum = "INTERNAL"
 )
 
+// Network
+// Extra network settings. Only applicable in the App Engine flexible environment.
 type Network struct {
 	ForwardedPorts  []string                   `json:"forwardedPorts,omitempty"`
 	InstanceIPMode  *NetworkInstanceIPModeEnum `json:"instanceIpMode,omitempty"`

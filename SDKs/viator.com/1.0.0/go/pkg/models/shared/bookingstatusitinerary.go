@@ -19,6 +19,8 @@ const (
 	BookingStatusItineraryTypeEnumPendingAmend BookingStatusItineraryTypeEnum = "PENDING_AMEND"
 )
 
+// BookingStatusItinerary
+// **object** containing itinerary booking status information
 type BookingStatusItinerary struct {
 	Amended   *bool                            `json:"amended,omitempty"`
 	Cancelled *bool                            `json:"cancelled,omitempty"`

@@ -5,31 +5,31 @@ from sdk.models import shared
 
 @dataclass
 class CreateTagPathParams:
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class CreateTagQueryParams:
+    name: str = field(metadata={'query_param': { 'field_name': 'name', 'style': 'form', 'explode': True }})
     description: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'description', 'style': 'form', 'explode': True }})
-    name: str = field(default=None, metadata={'query_param': { 'field_name': 'name', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class CreateTagHeaders:
-    training_key: str = field(default=None, metadata={'header': { 'field_name': 'Training-Key', 'style': 'simple', 'explode': False }})
+    training_key: str = field(metadata={'header': { 'field_name': 'Training-Key', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class CreateTagRequest:
-    path_params: CreateTagPathParams = field(default=None)
-    query_params: CreateTagQueryParams = field(default=None)
-    headers: CreateTagHeaders = field(default=None)
+    headers: CreateTagHeaders = field()
+    path_params: CreateTagPathParams = field()
+    query_params: CreateTagQueryParams = field()
     
 
 @dataclass
 class CreateTagResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     tag: Optional[shared.Tag] = field(default=None)
     

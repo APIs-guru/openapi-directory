@@ -1,6 +1,8 @@
 package shared
 
+// RuntimeMetadata
+// RuntimeMetadata describing a runtime environment.
 type RuntimeMetadata struct {
 	Parameters []ParameterMetadata `json:"parameters,omitempty"`
-	SdkInfo    *SdkInfo            `json:"sdkInfo,omitempty"`
+	SdkInfo    *SDKInfo            `json:"sdkInfo,omitempty"`
 }

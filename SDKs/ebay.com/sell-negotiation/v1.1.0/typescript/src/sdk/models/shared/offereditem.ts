@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Amount } from "./amount";
+
 
 
 // OfferedItem
@@ -7,15 +8,15 @@ import { Amount } from "./amount";
  * A complex type that defines the offer being made to an &quot;interested&quot; buyer.
 **/
 export class OfferedItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=discountPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=discountPercentage" })
   discountPercentage?: string;
 
-  @Metadata({ data: "json, name=listingId" })
+  @SpeakeasyMetadata({ data: "json, name=listingId" })
   listingId?: string;
 
-  @Metadata({ data: "json, name=price" })
+  @SpeakeasyMetadata({ data: "json, name=price" })
   price?: Amount;
 
-  @Metadata({ data: "json, name=quantity" })
+  @SpeakeasyMetadata({ data: "json, name=quantity" })
   quantity?: number;
 }

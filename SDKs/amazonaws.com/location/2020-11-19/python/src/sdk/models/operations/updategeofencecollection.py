@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdateGeofenceCollectionPathParams:
-    collection_name: str = field(default=None, metadata={'path_param': { 'field_name': 'CollectionName', 'style': 'simple', 'explode': False }})
+    collection_name: str = field(metadata={'path_param': { 'field_name': 'CollectionName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,25 +33,25 @@ class UpdateGeofenceCollectionRequestBodyPricingPlanEnum(str, Enum):
 @dataclass_json
 @dataclass
 class UpdateGeofenceCollectionRequestBody:
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
-    pricing_plan: Optional[UpdateGeofenceCollectionRequestBodyPricingPlanEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PricingPlan' }})
-    pricing_plan_data_source: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PricingPlanDataSource' }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Description') }})
+    pricing_plan: Optional[UpdateGeofenceCollectionRequestBodyPricingPlanEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PricingPlan') }})
+    pricing_plan_data_source: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PricingPlanDataSource') }})
     
 
 @dataclass
 class UpdateGeofenceCollectionRequest:
-    path_params: UpdateGeofenceCollectionPathParams = field(default=None)
-    headers: UpdateGeofenceCollectionHeaders = field(default=None)
-    request: UpdateGeofenceCollectionRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateGeofenceCollectionHeaders = field()
+    path_params: UpdateGeofenceCollectionPathParams = field()
+    request: UpdateGeofenceCollectionRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateGeofenceCollectionResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     update_geofence_collection_response: Optional[shared.UpdateGeofenceCollectionResponse] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)

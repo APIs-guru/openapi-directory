@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleCloudWebriskV1SearchUrisResponseThreatUriThreatTypesEnum {
-    ThreatTypeUnspecified = "THREAT_TYPE_UNSPECIFIED"
-,    Malware = "MALWARE"
-,    SocialEngineering = "SOCIAL_ENGINEERING"
-,    UnwantedSoftware = "UNWANTED_SOFTWARE"
-,    SocialEngineeringExtendedCoverage = "SOCIAL_ENGINEERING_EXTENDED_COVERAGE"
+    ThreatTypeUnspecified = "THREAT_TYPE_UNSPECIFIED",
+    Malware = "MALWARE",
+    SocialEngineering = "SOCIAL_ENGINEERING",
+    UnwantedSoftware = "UNWANTED_SOFTWARE",
+    SocialEngineeringExtendedCoverage = "SOCIAL_ENGINEERING_EXTENDED_COVERAGE"
 }
 
 
@@ -14,9 +15,9 @@ export enum GoogleCloudWebriskV1SearchUrisResponseThreatUriThreatTypesEnum {
  * Contains threat information on a matching uri.
 **/
 export class GoogleCloudWebriskV1SearchUrisResponseThreatUri extends SpeakeasyBase {
-  @Metadata({ data: "json, name=expireTime" })
+  @SpeakeasyMetadata({ data: "json, name=expireTime" })
   expireTime?: string;
 
-  @Metadata({ data: "json, name=threatTypes" })
+  @SpeakeasyMetadata({ data: "json, name=threatTypes" })
   threatTypes?: GoogleCloudWebriskV1SearchUrisResponseThreatUriThreatTypesEnum[];
 }

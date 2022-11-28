@@ -1,5 +1,7 @@
 package shared
 
+// VolumeannotationContentRanges
+// The content ranges to identify the selected text.
 type VolumeannotationContentRanges struct {
 	CfiRange       *BooksAnnotationsRange `json:"cfiRange,omitempty"`
 	ContentVersion *string                `json:"contentVersion,omitempty"`

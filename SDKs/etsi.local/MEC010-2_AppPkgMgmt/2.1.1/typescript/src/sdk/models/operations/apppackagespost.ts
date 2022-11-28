@@ -1,23 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class AppPackagesPostRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.CreateAppPkg;
 }
 
 
 export class AppPackagesPostResponse extends SpeakeasyBase {
-  @Metadata({ elemType: shared.AppPkgInfo })
+  @SpeakeasyMetadata({ elemType: shared.AppPkgInfo })
   appPkgInfos?: shared.AppPkgInfo[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: shared.ProblemDetails;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

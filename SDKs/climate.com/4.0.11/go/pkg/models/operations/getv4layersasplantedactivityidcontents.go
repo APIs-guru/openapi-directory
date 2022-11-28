@@ -13,17 +13,9 @@ type GetV4LayersAsPlantedActivityIDContentsHeaders struct {
 	Range  string `header:"style=simple,explode=false,name=Range"`
 }
 
-type GetV4LayersAsPlantedActivityIDContentsSecurityOption1 struct {
-	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
-}
-
-type GetV4LayersAsPlantedActivityIDContentsSecurityOption2 struct {
-	Oauth2AuthorizationCode shared.SchemeOauth2AuthorizationCode `security:"scheme,type=oauth2"`
-}
-
 type GetV4LayersAsPlantedActivityIDContentsSecurity struct {
-	Option1 *GetV4LayersAsPlantedActivityIDContentsSecurityOption1 `security:"option"`
-	Option2 *GetV4LayersAsPlantedActivityIDContentsSecurityOption2 `security:"option"`
+	APIKey                  *shared.SchemeAPIKey                  `security:"scheme,type=apiKey,subtype=header"`
+	Oauth2AuthorizationCode *shared.SchemeOauth2AuthorizationCode `security:"scheme,type=oauth2"`
 }
 
 type GetV4LayersAsPlantedActivityIDContentsRequest struct {

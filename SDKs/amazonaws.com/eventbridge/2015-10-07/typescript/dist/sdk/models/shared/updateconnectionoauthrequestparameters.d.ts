@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { UpdateConnectionOAuthClientRequestParameters } from "./updateconnectionoauthclientrequestparameters";
 import { ConnectionOAuthHttpMethodEnum } from "./connectionoauthhttpmethodenum";
 import { ConnectionHttpParameters } from "./connectionhttpparameters";

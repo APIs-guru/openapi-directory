@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Notification } from "./notification";
+
 
 
 // Subscription
@@ -7,30 +8,30 @@ import { Notification } from "./notification";
  * A subscription to events on a collection.
 **/
 export class Subscription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=callbackUrl" })
+  @SpeakeasyMetadata({ data: "json, name=callbackUrl" })
   callbackUrl?: string;
 
-  @Metadata({ data: "json, name=collection" })
+  @SpeakeasyMetadata({ data: "json, name=collection" })
   collection?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=notification" })
+  @SpeakeasyMetadata({ data: "json, name=notification" })
   notification?: Notification;
 
-  @Metadata({ data: "json, name=operation" })
+  @SpeakeasyMetadata({ data: "json, name=operation" })
   operation?: string[];
 
-  @Metadata({ data: "json, name=updated" })
+  @SpeakeasyMetadata({ data: "json, name=updated" })
   updated?: Date;
 
-  @Metadata({ data: "json, name=userToken" })
+  @SpeakeasyMetadata({ data: "json, name=userToken" })
   userToken?: string;
 
-  @Metadata({ data: "json, name=verifyToken" })
+  @SpeakeasyMetadata({ data: "json, name=verifyToken" })
   verifyToken?: string;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// DescribeFileSystemAliasesRequest
+// The request object for <code>DescribeFileSystemAliases</code> operation.
 type DescribeFileSystemAliasesRequest struct {
 	ClientRequestToken *string `json:"ClientRequestToken,omitempty"`
 	FileSystemID       string  `json:"FileSystemId"`

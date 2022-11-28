@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum SslConfigTypeEnum {
-    SslTypeUnspecified = "SSL_TYPE_UNSPECIFIED"
-,    ServerOnly = "SERVER_ONLY"
-,    ServerClient = "SERVER_CLIENT"
+    SslTypeUnspecified = "SSL_TYPE_UNSPECIFIED",
+    ServerOnly = "SERVER_ONLY",
+    ServerClient = "SERVER_CLIENT"
 }
 
 
@@ -12,15 +13,31 @@ export enum SslConfigTypeEnum {
  * SSL configuration information.
 **/
 export class SslConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=caCertificate" })
+  @SpeakeasyMetadata({ data: "json, name=caCertificate" })
   caCertificate?: string;
 
-  @Metadata({ data: "json, name=clientCertificate" })
+  @SpeakeasyMetadata({ data: "json, name=clientCertificate" })
   clientCertificate?: string;
 
-  @Metadata({ data: "json, name=clientKey" })
+  @SpeakeasyMetadata({ data: "json, name=clientKey" })
   clientKey?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: SslConfigTypeEnum;
+}
+
+
+// SslConfigInput
+/** 
+ * SSL configuration information.
+**/
+export class SslConfigInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=caCertificate" })
+  caCertificate?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=clientCertificate" })
+  clientCertificate?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=clientKey" })
+  clientKey?: string;
 }

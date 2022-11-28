@@ -1,5 +1,7 @@
 package shared
 
+// AwsEc2VolumeDetails
+// Details about an EC2 volume.
 type AwsEc2VolumeDetails struct {
 	Attachments []AwsEc2VolumeAttachment `json:"Attachments,omitempty"`
 	CreateTime  *string                  `json:"CreateTime,omitempty"`

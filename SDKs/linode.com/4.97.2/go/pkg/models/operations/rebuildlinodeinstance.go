@@ -18,27 +18,19 @@ type RebuildLinodeInstanceRequestBody struct {
 	StackscriptID   *int64                 `json:"stackscript_id,omitempty"`
 }
 
-type RebuildLinodeInstanceSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type RebuildLinodeInstanceSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type RebuildLinodeInstanceSecurity struct {
-	Option1 *RebuildLinodeInstanceSecurityOption1 `security:"option"`
-	Option2 *RebuildLinodeInstanceSecurityOption2 `security:"option"`
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
+}
+
+type RebuildLinodeInstanceDefaultApplicationJSON struct {
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type RebuildLinodeInstanceRequest struct {
 	PathParams RebuildLinodeInstancePathParams
 	Request    RebuildLinodeInstanceRequestBody `request:"mediaType=application/json"`
 	Security   RebuildLinodeInstanceSecurity
-}
-
-type RebuildLinodeInstanceDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type RebuildLinodeInstanceResponse struct {

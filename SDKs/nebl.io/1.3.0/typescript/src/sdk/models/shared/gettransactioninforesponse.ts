@@ -1,182 +1,182 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetTransactionInfoResponseVinPreviousOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=addresses" })
+  @SpeakeasyMetadata({ data: "json, name=addresses" })
   addresses?: string[];
 
-  @Metadata({ data: "json, name=asm" })
+  @SpeakeasyMetadata({ data: "json, name=asm" })
   asm?: string;
 
-  @Metadata({ data: "json, name=hex" })
+  @SpeakeasyMetadata({ data: "json, name=hex" })
   hex?: string;
 
-  @Metadata({ data: "json, name=reqSigs" })
+  @SpeakeasyMetadata({ data: "json, name=reqSigs" })
   reqSigs?: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }
 
 
 export class GetTransactionInfoResponseVinScriptSig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=asm" })
+  @SpeakeasyMetadata({ data: "json, name=asm" })
   asm?: string;
 
-  @Metadata({ data: "json, name=hex" })
+  @SpeakeasyMetadata({ data: "json, name=hex" })
   hex?: string;
 }
 
 
 export class GetTransactionInfoResponseVinTokens extends SpeakeasyBase {
-  @Metadata({ data: "json, name=aggregationPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=aggregationPolicy" })
   aggregationPolicy?: string;
 
-  @Metadata({ data: "json, name=amount" })
+  @SpeakeasyMetadata({ data: "json, name=amount" })
   amount?: number;
 
-  @Metadata({ data: "json, name=divisibility" })
+  @SpeakeasyMetadata({ data: "json, name=divisibility" })
   divisibility?: number;
 
-  @Metadata({ data: "json, name=issueTxid" })
+  @SpeakeasyMetadata({ data: "json, name=issueTxid" })
   issueTxid?: string;
 
-  @Metadata({ data: "json, name=lockStatus" })
+  @SpeakeasyMetadata({ data: "json, name=lockStatus" })
   lockStatus?: boolean;
 
-  @Metadata({ data: "json, name=tokenId" })
+  @SpeakeasyMetadata({ data: "json, name=tokenId" })
   tokenId?: string;
 }
 
 
 export class GetTransactionInfoResponseVin extends SpeakeasyBase {
-  @Metadata({ data: "json, name=previousOutput" })
+  @SpeakeasyMetadata({ data: "json, name=previousOutput" })
   previousOutput?: GetTransactionInfoResponseVinPreviousOutput;
 
-  @Metadata({ data: "json, name=scriptSig" })
+  @SpeakeasyMetadata({ data: "json, name=scriptSig" })
   scriptSig?: GetTransactionInfoResponseVinScriptSig;
 
-  @Metadata({ data: "json, name=sequence" })
+  @SpeakeasyMetadata({ data: "json, name=sequence" })
   sequence?: number;
 
-  @Metadata({ data: "json, name=tokens", elemType: shared.GetTransactionInfoResponseVinTokens })
+  @SpeakeasyMetadata({ data: "json, name=tokens", elemType: GetTransactionInfoResponseVinTokens })
   tokens?: GetTransactionInfoResponseVinTokens[];
 
-  @Metadata({ data: "json, name=txid" })
+  @SpeakeasyMetadata({ data: "json, name=txid" })
   txid?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: number;
 
-  @Metadata({ data: "json, name=vout" })
+  @SpeakeasyMetadata({ data: "json, name=vout" })
   vout?: number;
 }
 
 
 export class GetTransactionInfoResponseVoutScriptPubKey extends SpeakeasyBase {
-  @Metadata({ data: "json, name=addresses" })
+  @SpeakeasyMetadata({ data: "json, name=addresses" })
   addresses?: string[];
 
-  @Metadata({ data: "json, name=asm" })
+  @SpeakeasyMetadata({ data: "json, name=asm" })
   asm?: string;
 
-  @Metadata({ data: "json, name=hex" })
+  @SpeakeasyMetadata({ data: "json, name=hex" })
   hex?: string;
 
-  @Metadata({ data: "json, name=reqSigs" })
+  @SpeakeasyMetadata({ data: "json, name=reqSigs" })
   reqSigs?: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }
 
 
 export class GetTransactionInfoResponseVoutTokens extends SpeakeasyBase {
-  @Metadata({ data: "json, name=aggregationPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=aggregationPolicy" })
   aggregationPolicy?: string;
 
-  @Metadata({ data: "json, name=amount" })
+  @SpeakeasyMetadata({ data: "json, name=amount" })
   amount?: number;
 
-  @Metadata({ data: "json, name=divisibility" })
+  @SpeakeasyMetadata({ data: "json, name=divisibility" })
   divisibility?: number;
 
-  @Metadata({ data: "json, name=issueTxid" })
+  @SpeakeasyMetadata({ data: "json, name=issueTxid" })
   issueTxid?: string;
 
-  @Metadata({ data: "json, name=lockStatus" })
+  @SpeakeasyMetadata({ data: "json, name=lockStatus" })
   lockStatus?: boolean;
 
-  @Metadata({ data: "json, name=tokenId" })
+  @SpeakeasyMetadata({ data: "json, name=tokenId" })
   tokenId?: string;
 }
 
 
 export class GetTransactionInfoResponseVout extends SpeakeasyBase {
-  @Metadata({ data: "json, name=blockheight" })
+  @SpeakeasyMetadata({ data: "json, name=blockheight" })
   blockheight?: number;
 
-  @Metadata({ data: "json, name=n" })
+  @SpeakeasyMetadata({ data: "json, name=n" })
   n?: number;
 
-  @Metadata({ data: "json, name=scriptPubKey" })
+  @SpeakeasyMetadata({ data: "json, name=scriptPubKey" })
   scriptPubKey?: GetTransactionInfoResponseVoutScriptPubKey;
 
-  @Metadata({ data: "json, name=tokens", elemType: shared.GetTransactionInfoResponseVoutTokens })
+  @SpeakeasyMetadata({ data: "json, name=tokens", elemType: GetTransactionInfoResponseVoutTokens })
   tokens?: GetTransactionInfoResponseVoutTokens[];
 
-  @Metadata({ data: "json, name=used" })
+  @SpeakeasyMetadata({ data: "json, name=used" })
   used?: boolean;
 
-  @Metadata({ data: "json, name=usedBlockheight" })
+  @SpeakeasyMetadata({ data: "json, name=usedBlockheight" })
   usedBlockheight?: number;
 
-  @Metadata({ data: "json, name=usedTxid" })
+  @SpeakeasyMetadata({ data: "json, name=usedTxid" })
   usedTxid?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: number;
 }
 
 
 export class GetTransactionInfoResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=blockhash" })
+  @SpeakeasyMetadata({ data: "json, name=blockhash" })
   blockhash?: string;
 
-  @Metadata({ data: "json, name=blockheight" })
+  @SpeakeasyMetadata({ data: "json, name=blockheight" })
   blockheight?: number;
 
-  @Metadata({ data: "json, name=blocktime" })
+  @SpeakeasyMetadata({ data: "json, name=blocktime" })
   blocktime?: number;
 
-  @Metadata({ data: "json, name=confirmations" })
+  @SpeakeasyMetadata({ data: "json, name=confirmations" })
   confirmations?: number;
 
-  @Metadata({ data: "json, name=fee" })
+  @SpeakeasyMetadata({ data: "json, name=fee" })
   fee?: number;
 
-  @Metadata({ data: "json, name=hex" })
+  @SpeakeasyMetadata({ data: "json, name=hex" })
   hex?: string;
 
-  @Metadata({ data: "json, name=locktime" })
+  @SpeakeasyMetadata({ data: "json, name=locktime" })
   locktime?: number;
 
-  @Metadata({ data: "json, name=time" })
+  @SpeakeasyMetadata({ data: "json, name=time" })
   time?: number;
 
-  @Metadata({ data: "json, name=totalsent" })
+  @SpeakeasyMetadata({ data: "json, name=totalsent" })
   totalsent?: number;
 
-  @Metadata({ data: "json, name=txid" })
+  @SpeakeasyMetadata({ data: "json, name=txid" })
   txid?: string;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: number;
 
-  @Metadata({ data: "json, name=vin", elemType: shared.GetTransactionInfoResponseVin })
+  @SpeakeasyMetadata({ data: "json, name=vin", elemType: GetTransactionInfoResponseVin })
   vin?: GetTransactionInfoResponseVin[];
 
-  @Metadata({ data: "json, name=vout", elemType: shared.GetTransactionInfoResponseVout })
+  @SpeakeasyMetadata({ data: "json, name=vout", elemType: GetTransactionInfoResponseVout })
   vout?: GetTransactionInfoResponseVout[];
 }

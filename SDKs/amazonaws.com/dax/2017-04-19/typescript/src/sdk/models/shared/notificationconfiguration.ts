@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // NotificationConfiguration
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes a notification topic and its status. Notification topics are used for publishing DAX events to subscribers using Amazon Simple Notification Service (SNS).
 **/
 export class NotificationConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=TopicArn" })
+  @SpeakeasyMetadata({ data: "json, name=TopicArn" })
   topicArn?: string;
 
-  @Metadata({ data: "json, name=TopicStatus" })
+  @SpeakeasyMetadata({ data: "json, name=TopicStatus" })
   topicStatus?: string;
 }

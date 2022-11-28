@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SlashCommand
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A [slash command](https://developers.google.com/chat/how-tos/slash-commands) in Google Chat.
 **/
 export class SlashCommand extends SpeakeasyBase {
-  @Metadata({ data: "json, name=commandId" })
+  @SpeakeasyMetadata({ data: "json, name=commandId" })
   commandId?: string;
 }

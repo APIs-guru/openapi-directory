@@ -27,6 +27,8 @@ const (
 	HousekeepingTurndownServiceExceptionEnumDependentOnDayOfWeek HousekeepingTurndownServiceExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
 
+// Housekeeping
+// Conveniences provided in guest units to facilitate an easier, more comfortable stay.
 type Housekeeping struct {
 	DailyHousekeeping              *bool                                           `json:"dailyHousekeeping,omitempty"`
 	DailyHousekeepingException     *HousekeepingDailyHousekeepingExceptionEnum     `json:"dailyHousekeepingException,omitempty"`

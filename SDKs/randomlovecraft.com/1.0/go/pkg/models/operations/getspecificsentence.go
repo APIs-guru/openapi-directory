@@ -8,12 +8,12 @@ type GetSpecificSentencePathParams struct {
 	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type GetSpecificSentenceRequest struct {
-	PathParams GetSpecificSentencePathParams
-}
-
 type GetSpecificSentence200ApplicationJSON struct {
 	Data *shared.Sentence `json:"data,omitempty"`
+}
+
+type GetSpecificSentenceRequest struct {
+	PathParams GetSpecificSentencePathParams
 }
 
 type GetSpecificSentenceResponse struct {

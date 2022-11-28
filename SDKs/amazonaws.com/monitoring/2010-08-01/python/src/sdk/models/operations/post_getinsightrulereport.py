@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostGetInsightRuleReportActionEnum(str, Enum):
     GET_INSIGHT_RULE_REPORT = "GetInsightRuleReport"
@@ -10,8 +14,8 @@ class PostGetInsightRuleReportVersionEnum(str, Enum):
 
 @dataclass
 class PostGetInsightRuleReportQueryParams:
-    action: PostGetInsightRuleReportActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostGetInsightRuleReportVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostGetInsightRuleReportActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostGetInsightRuleReportVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostGetInsightRuleReportHeaders:
 
 @dataclass
 class PostGetInsightRuleReportRequest:
-    query_params: PostGetInsightRuleReportQueryParams = field(default=None)
-    headers: PostGetInsightRuleReportHeaders = field(default=None)
+    headers: PostGetInsightRuleReportHeaders = field()
+    query_params: PostGetInsightRuleReportQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostGetInsightRuleReportResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

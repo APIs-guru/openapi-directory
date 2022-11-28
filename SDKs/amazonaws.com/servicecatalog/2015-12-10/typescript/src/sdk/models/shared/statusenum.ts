@@ -1,7 +1,8 @@
 
 
+
 export enum StatusEnum {
-    Available = "AVAILABLE"
-,    Creating = "CREATING"
-,    Failed = "FAILED"
+    Available = "AVAILABLE",
+    Creating = "CREATING",
+    Failed = "FAILED"
 }

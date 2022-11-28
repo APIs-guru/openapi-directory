@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Failure } from "./failure";
 import { TaskSet } from "./taskset";
 
 
+
 export class DescribeTaskSetsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=failures", elemType: shared.Failure })
+  @SpeakeasyMetadata({ data: "json, name=failures", elemType: Failure })
   failures?: Failure[];
 
-  @Metadata({ data: "json, name=taskSets", elemType: shared.TaskSet })
+  @SpeakeasyMetadata({ data: "json, name=taskSets", elemType: TaskSet })
   taskSets?: TaskSet[];
 }

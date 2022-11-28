@@ -4,10 +4,8 @@ type PostLoadBalancersIDActionsEnablePublicInterfacePathParams struct {
 	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type PostLoadBalancersIDActionsEnablePublicInterfaceRequest struct {
-	PathParams PostLoadBalancersIDActionsEnablePublicInterfacePathParams
-}
-
+// PostLoadBalancersIDActionsEnablePublicInterfaceActionResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type PostLoadBalancersIDActionsEnablePublicInterfaceActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -39,6 +37,10 @@ type PostLoadBalancersIDActionsEnablePublicInterfaceActionResponseAction struct 
 
 type PostLoadBalancersIDActionsEnablePublicInterfaceActionResponse struct {
 	Action PostLoadBalancersIDActionsEnablePublicInterfaceActionResponseAction `json:"action"`
+}
+
+type PostLoadBalancersIDActionsEnablePublicInterfaceRequest struct {
+	PathParams PostLoadBalancersIDActionsEnablePublicInterfacePathParams
 }
 
 type PostLoadBalancersIDActionsEnablePublicInterfaceResponse struct {

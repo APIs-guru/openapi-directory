@@ -1,50 +1,50 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AlertDeliveryStatusInfo } from "./alertdeliverystatusinfo";
 import { AlertAnnotationInfo } from "./alertannotationinfo";
 import { AlertHistoryInfoDetailed } from "./alerthistoryinfodetailed";
 
 
+
 export class OverviewAlert extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alertDeliveryStatus" })
+  @SpeakeasyMetadata({ data: "json, name=alertDeliveryStatus" })
   alertDeliveryStatus?: AlertDeliveryStatusInfo;
 
-  @Metadata({ data: "json, name=annotations", elemType: shared.AlertAnnotationInfo })
+  @SpeakeasyMetadata({ data: "json, name=annotations", elemType: AlertAnnotationInfo })
   annotations?: AlertAnnotationInfo[];
 
-  @Metadata({ data: "json, name=categoryId" })
+  @SpeakeasyMetadata({ data: "json, name=categoryId" })
   categoryId?: string;
 
-  @Metadata({ data: "json, name=eventId" })
+  @SpeakeasyMetadata({ data: "json, name=eventId" })
   eventId?: string;
 
-  @Metadata({ data: "json, name=flags" })
+  @SpeakeasyMetadata({ data: "json, name=flags" })
   flags?: number;
 
-  @Metadata({ data: "json, name=historyDetailed" })
+  @SpeakeasyMetadata({ data: "json, name=historyDetailed" })
   historyDetailed?: AlertHistoryInfoDetailed;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=lastModified" })
+  @SpeakeasyMetadata({ data: "json, name=lastModified" })
   lastModified?: Date;
 
-  @Metadata({ data: "json, name=requiredAcknowledgements" })
+  @SpeakeasyMetadata({ data: "json, name=requiredAcknowledgements" })
   requiredAcknowledgements?: number;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: number;
 
-  @Metadata({ data: "json, name=subscriptionId" })
+  @SpeakeasyMetadata({ data: "json, name=subscriptionId" })
   subscriptionId?: string;
 
-  @Metadata({ data: "json, name=teamId" })
+  @SpeakeasyMetadata({ data: "json, name=teamId" })
   teamId?: string;
 
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

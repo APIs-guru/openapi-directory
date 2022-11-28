@@ -8,6 +8,8 @@ const (
 	GoogleChromePolicyVersionsV1PolicySchemaValidTargetResourcesEnumGroup                     GoogleChromePolicyVersionsV1PolicySchemaValidTargetResourcesEnum = "GROUP"
 )
 
+// GoogleChromePolicyVersionsV1PolicySchema
+// Resource representing a policy schema.
 type GoogleChromePolicyVersionsV1PolicySchema struct {
 	AccessRestrictions       []string                                                           `json:"accessRestrictions,omitempty"`
 	AdditionalTargetKeyNames []GoogleChromePolicyVersionsV1AdditionalTargetKeyName              `json:"additionalTargetKeyNames,omitempty"`

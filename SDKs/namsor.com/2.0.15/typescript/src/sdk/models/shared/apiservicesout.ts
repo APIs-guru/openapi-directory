@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApiServiceOut } from "./apiserviceout";
 
 
+
 export class ApiServicesOut extends SpeakeasyBase {
-  @Metadata({ data: "json, name=apiServices", elemType: shared.ApiServiceOut })
+  @SpeakeasyMetadata({ data: "json, name=apiServices", elemType: ApiServiceOut })
   apiServices?: ApiServiceOut[];
 }

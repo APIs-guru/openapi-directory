@@ -5,7 +5,7 @@ import (
 )
 
 type SecretsSecretsCreateRequest struct {
-	Request shared.WritableSecret `request:"mediaType=application/json"`
+	Request shared.WritableSecretInput `request:"mediaType=application/json"`
 }
 
 type SecretsSecretsCreateResponse struct {

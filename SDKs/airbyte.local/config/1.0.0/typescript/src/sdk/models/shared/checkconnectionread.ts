@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SynchronousJobRead } from "./synchronousjobread";
 
+
 export enum CheckConnectionReadStatusEnum {
-    Succeeded = "succeeded"
-,    Failed = "failed"
+    Succeeded = "succeeded",
+    Failed = "failed"
 }
 
 
 export class CheckConnectionRead extends SpeakeasyBase {
-  @Metadata({ data: "json, name=jobInfo" })
+  @SpeakeasyMetadata({ data: "json, name=jobInfo" })
   jobInfo: SynchronousJobRead;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: CheckConnectionReadStatusEnum;
 }

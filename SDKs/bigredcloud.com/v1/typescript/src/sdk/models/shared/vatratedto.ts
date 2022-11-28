@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class VatRateDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=isActive" })
+  @SpeakeasyMetadata({ data: "json, name=isActive" })
   isActive?: boolean;
 
-  @Metadata({ data: "json, name=isDefault" })
+  @SpeakeasyMetadata({ data: "json, name=isDefault" })
   isDefault?: boolean;
 
-  @Metadata({ data: "json, name=orderIndex" })
+  @SpeakeasyMetadata({ data: "json, name=orderIndex" })
   orderIndex?: number;
 
-  @Metadata({ data: "json, name=percentage" })
+  @SpeakeasyMetadata({ data: "json, name=percentage" })
   percentage?: number;
 
-  @Metadata({ data: "json, name=timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=timestamp" })
   timestamp?: string;
 
-  @Metadata({ data: "json, name=vatCategoryId" })
+  @SpeakeasyMetadata({ data: "json, name=vatCategoryId" })
   vatCategoryId?: number;
 }

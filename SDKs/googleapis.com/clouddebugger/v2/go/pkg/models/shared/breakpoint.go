@@ -25,6 +25,8 @@ const (
 	BreakpointStateEnumStateIsFinal             BreakpointStateEnum = "STATE_IS_FINAL"
 )
 
+// Breakpoint
+// ------------------------------------------------------------------------------ ## Breakpoint (the resource) Represents the breakpoint specification, status and results.
 type Breakpoint struct {
 	Action               *BreakpointActionEnum   `json:"action,omitempty"`
 	CanaryExpireTime     *string                 `json:"canaryExpireTime,omitempty"`

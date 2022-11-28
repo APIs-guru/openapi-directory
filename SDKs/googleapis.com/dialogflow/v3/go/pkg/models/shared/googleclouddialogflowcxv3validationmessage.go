@@ -28,6 +28,8 @@ const (
 	GoogleCloudDialogflowCxV3ValidationMessageSeverityEnumError               GoogleCloudDialogflowCxV3ValidationMessageSeverityEnum = "ERROR"
 )
 
+// GoogleCloudDialogflowCxV3ValidationMessage
+// Agent/flow validation message.
 type GoogleCloudDialogflowCxV3ValidationMessage struct {
 	Detail        *string                                                     `json:"detail,omitempty"`
 	ResourceNames []GoogleCloudDialogflowCxV3ResourceName                     `json:"resourceNames,omitempty"`

@@ -30,7 +30,7 @@ type PeopleContactGroupsUpdateSecurity struct {
 type PeopleContactGroupsUpdateRequest struct {
 	PathParams  PeopleContactGroupsUpdatePathParams
 	QueryParams PeopleContactGroupsUpdateQueryParams
-	Request     *shared.UpdateContactGroupRequest `request:"mediaType=application/json"`
+	Request     *shared.UpdateContactGroupRequestInput `request:"mediaType=application/json"`
 	Security    PeopleContactGroupsUpdateSecurity
 }
 

@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ComponentPlatform } from "./componentplatform";
 // ComponentLatestVersion
 /**
  * Contains information about the latest version of a component.
@@ -34,27 +34,27 @@ var ComponentLatestVersion = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=arn" }),
+        SpeakeasyMetadata({ data: "json, name=arn" }),
         __metadata("design:type", String)
     ], ComponentLatestVersion.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=componentVersion" }),
+        SpeakeasyMetadata({ data: "json, name=componentVersion" }),
         __metadata("design:type", String)
     ], ComponentLatestVersion.prototype, "componentVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=creationTimestamp" }),
+        SpeakeasyMetadata({ data: "json, name=creationTimestamp" }),
         __metadata("design:type", Date)
     ], ComponentLatestVersion.prototype, "creationTimestamp", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], ComponentLatestVersion.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=platforms", elemType: shared.ComponentPlatform }),
+        SpeakeasyMetadata({ data: "json, name=platforms", elemType: ComponentPlatform }),
         __metadata("design:type", Array)
     ], ComponentLatestVersion.prototype, "platforms", void 0);
     __decorate([
-        Metadata({ data: "json, name=publisher" }),
+        SpeakeasyMetadata({ data: "json, name=publisher" }),
         __metadata("design:type", String)
     ], ComponentLatestVersion.prototype, "publisher", void 0);
     return ComponentLatestVersion;

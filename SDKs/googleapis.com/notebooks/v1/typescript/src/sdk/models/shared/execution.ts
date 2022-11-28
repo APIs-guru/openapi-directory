@@ -1,17 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ExecutionTemplate } from "./executiontemplate";
 
+
 export enum ExecutionStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Queued = "QUEUED"
-,    Preparing = "PREPARING"
-,    Running = "RUNNING"
-,    Succeeded = "SUCCEEDED"
-,    Failed = "FAILED"
-,    Cancelling = "CANCELLING"
-,    Cancelled = "CANCELLED"
-,    Expired = "EXPIRED"
-,    Initializing = "INITIALIZING"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Queued = "QUEUED",
+    Preparing = "PREPARING",
+    Running = "RUNNING",
+    Succeeded = "SUCCEEDED",
+    Failed = "FAILED",
+    Cancelling = "CANCELLING",
+    Cancelled = "CANCELLED",
+    Expired = "EXPIRED",
+    Initializing = "INITIALIZING"
+}
+
+
+// ExecutionInput
+/** 
+ * The definition of a single executed notebook.
+**/
+export class ExecutionInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=executionTemplate" })
+  executionTemplate?: ExecutionTemplate;
+
+  @SpeakeasyMetadata({ data: "json, name=outputNotebookFile" })
+  outputNotebookFile?: string;
 }
 
 
@@ -20,30 +37,30 @@ export enum ExecutionStateEnum {
  * The definition of a single executed notebook.
 **/
 export class Execution extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=executionTemplate" })
+  @SpeakeasyMetadata({ data: "json, name=executionTemplate" })
   executionTemplate?: ExecutionTemplate;
 
-  @Metadata({ data: "json, name=jobUri" })
+  @SpeakeasyMetadata({ data: "json, name=jobUri" })
   jobUri?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=outputNotebookFile" })
+  @SpeakeasyMetadata({ data: "json, name=outputNotebookFile" })
   outputNotebookFile?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: ExecutionStateEnum;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 }

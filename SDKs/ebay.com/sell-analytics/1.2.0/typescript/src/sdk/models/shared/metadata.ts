@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MetadataHeader } from "./metadataheader";
 import { MetadataRecord } from "./metadatarecord";
+
 
 
 // Metadata
@@ -9,9 +9,9 @@ import { MetadataRecord } from "./metadatarecord";
  * Type the defines the metadata information of the report. This includes the headers and the individual metadata records.
 **/
 export class Metadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=metadataHeader" })
+  @SpeakeasyMetadata({ data: "json, name=metadataHeader" })
   metadataHeader?: MetadataHeader;
 
-  @Metadata({ data: "json, name=metadataRecords", elemType: shared.MetadataRecord })
+  @SpeakeasyMetadata({ data: "json, name=metadataRecords", elemType: MetadataRecord })
   metadataRecords?: MetadataRecord[];
 }

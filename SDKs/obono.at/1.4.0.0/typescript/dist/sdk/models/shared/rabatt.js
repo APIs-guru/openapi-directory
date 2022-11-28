@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var RabattSatzEnum;
 (function (RabattSatzEnum) {
     RabattSatzEnum["Normal"] = "NORMAL";
@@ -37,19 +37,19 @@ var Rabatt = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Betrag-Brutto" }),
+        SpeakeasyMetadata({ data: "json, name=Betrag-Brutto" }),
         __metadata("design:type", Number)
     ], Rabatt.prototype, "betragBrutto", void 0);
     __decorate([
-        Metadata({ data: "json, name=Betrag-Netto" }),
+        SpeakeasyMetadata({ data: "json, name=Betrag-Netto" }),
         __metadata("design:type", Number)
     ], Rabatt.prototype, "betragNetto", void 0);
     __decorate([
-        Metadata({ data: "json, name=Bezeichnung" }),
+        SpeakeasyMetadata({ data: "json, name=Bezeichnung" }),
         __metadata("design:type", String)
     ], Rabatt.prototype, "bezeichnung", void 0);
     __decorate([
-        Metadata({ data: "json, name=Satz" }),
+        SpeakeasyMetadata({ data: "json, name=Satz" }),
         __metadata("design:type", String)
     ], Rabatt.prototype, "satz", void 0);
     return Rabatt;

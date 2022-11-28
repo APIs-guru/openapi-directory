@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Window2 } from "./window2";
 export declare class Example17 extends SpeakeasyBase {
     doNotDisturb: boolean;

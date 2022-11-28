@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum ChannelStateEnum {
     StateUnspecified = "STATE_UNSPECIFIED",
     Pending = "PENDING",
@@ -18,4 +18,12 @@ export declare class Channel extends SpeakeasyBase {
     state?: ChannelStateEnum;
     uid?: string;
     updateTime?: string;
+}
+/**
+ * A representation of the Channel resource. A Channel is a resource on which event providers publish their events. The published events are delivered through the transport associated with the channel. Note that a channel is associated with exactly one event provider.
+**/
+export declare class ChannelInput extends SpeakeasyBase {
+    cryptoKeyName?: string;
+    name?: string;
+    provider?: string;
 }

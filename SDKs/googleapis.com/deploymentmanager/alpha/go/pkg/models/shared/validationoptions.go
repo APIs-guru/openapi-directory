@@ -20,6 +20,8 @@ const (
 	ValidationOptionsUndeclaredPropertiesEnumFail                ValidationOptionsUndeclaredPropertiesEnum = "FAIL"
 )
 
+// ValidationOptions
+// Options for how to validate and process properties on a resource.
 type ValidationOptions struct {
 	SchemaValidation     *ValidationOptionsSchemaValidationEnum     `json:"schemaValidation,omitempty"`
 	UndeclaredProperties *ValidationOptionsUndeclaredPropertiesEnum `json:"undeclaredProperties,omitempty"`

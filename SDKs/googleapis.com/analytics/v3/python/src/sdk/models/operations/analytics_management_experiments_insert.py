@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AnalyticsManagementExperimentsInsertPathParams:
-    account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
-    profile_id: str = field(default=None, metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
-    web_property_id: str = field(default=None, metadata={'path_param': { 'field_name': 'webPropertyId', 'style': 'simple', 'explode': False }})
+    account_id: str = field(metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
+    profile_id: str = field(metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
+    web_property_id: str = field(metadata={'path_param': { 'field_name': 'webPropertyId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,14 +24,14 @@ class AnalyticsManagementExperimentsInsertQueryParams:
 
 @dataclass
 class AnalyticsManagementExperimentsInsertSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AnalyticsManagementExperimentsInsertSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -41,15 +42,15 @@ class AnalyticsManagementExperimentsInsertSecurity:
 
 @dataclass
 class AnalyticsManagementExperimentsInsertRequest:
-    path_params: AnalyticsManagementExperimentsInsertPathParams = field(default=None)
-    query_params: AnalyticsManagementExperimentsInsertQueryParams = field(default=None)
+    path_params: AnalyticsManagementExperimentsInsertPathParams = field()
+    query_params: AnalyticsManagementExperimentsInsertQueryParams = field()
+    security: AnalyticsManagementExperimentsInsertSecurity = field()
     request: Optional[shared.Experiment] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AnalyticsManagementExperimentsInsertSecurity = field(default=None)
     
 
 @dataclass
 class AnalyticsManagementExperimentsInsertResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     experiment: Optional[shared.Experiment] = field(default=None)
-    status_code: int = field(default=None)
     

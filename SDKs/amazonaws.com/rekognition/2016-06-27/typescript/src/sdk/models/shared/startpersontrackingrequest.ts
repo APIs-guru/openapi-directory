@@ -1,18 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NotificationChannel } from "./notificationchannel";
 import { Video } from "./video";
 
 
+
 export class StartPersonTrackingRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClientRequestToken" })
+  @SpeakeasyMetadata({ data: "json, name=ClientRequestToken" })
   clientRequestToken?: string;
 
-  @Metadata({ data: "json, name=JobTag" })
+  @SpeakeasyMetadata({ data: "json, name=JobTag" })
   jobTag?: string;
 
-  @Metadata({ data: "json, name=NotificationChannel" })
+  @SpeakeasyMetadata({ data: "json, name=NotificationChannel" })
   notificationChannel?: NotificationChannel;
 
-  @Metadata({ data: "json, name=Video" })
+  @SpeakeasyMetadata({ data: "json, name=Video" })
   video: Video;
 }

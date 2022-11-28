@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DayOfExecutionEnum } from "./dayofexecutionenum";
 import { ExecutionRuleEnum } from "./executionruleenum";
 import { FrequencyCodeEnum } from "./frequencycodeenum";
 import { Amount } from "./amount";
 import { MonthsOfExecutionEnum } from "./monthsofexecutionenum";
+
 
 
 // StandingOrderDetails
@@ -12,30 +13,30 @@ import { MonthsOfExecutionEnum } from "./monthsofexecutionenum";
  * 
 **/
 export class StandingOrderDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dayOfExecution" })
+  @SpeakeasyMetadata({ data: "json, name=dayOfExecution" })
   dayOfExecution?: DayOfExecutionEnum;
 
-  @Metadata({ data: "json, name=endDate" })
+  @SpeakeasyMetadata({ data: "json, name=endDate" })
   endDate?: Date;
 
-  @Metadata({ data: "json, name=executionRule" })
+  @SpeakeasyMetadata({ data: "json, name=executionRule" })
   executionRule?: ExecutionRuleEnum;
 
-  @Metadata({ data: "json, name=frequency" })
+  @SpeakeasyMetadata({ data: "json, name=frequency" })
   frequency: FrequencyCodeEnum;
 
-  @Metadata({ data: "json, name=limitAmount" })
+  @SpeakeasyMetadata({ data: "json, name=limitAmount" })
   limitAmount?: Amount;
 
-  @Metadata({ data: "json, name=monthsOfExecution" })
+  @SpeakeasyMetadata({ data: "json, name=monthsOfExecution" })
   monthsOfExecution?: MonthsOfExecutionEnum[];
 
-  @Metadata({ data: "json, name=multiplicator" })
+  @SpeakeasyMetadata({ data: "json, name=multiplicator" })
   multiplicator?: number;
 
-  @Metadata({ data: "json, name=startDate" })
+  @SpeakeasyMetadata({ data: "json, name=startDate" })
   startDate: Date;
 
-  @Metadata({ data: "json, name=withinAMonthFlag" })
+  @SpeakeasyMetadata({ data: "json, name=withinAMonthFlag" })
   withinAMonthFlag?: boolean;
 }

@@ -13,6 +13,8 @@ const (
 	BlueGreenInfoPhaseEnumRollbackStarted   BlueGreenInfoPhaseEnum = "ROLLBACK_STARTED"
 )
 
+// BlueGreenInfo
+// Information relevant to blue-green upgrade.
 type BlueGreenInfo struct {
 	BlueInstanceGroupUrls     []string                `json:"blueInstanceGroupUrls,omitempty"`
 	BluePoolDeletionStartTime *string                 `json:"bluePoolDeletionStartTime,omitempty"`

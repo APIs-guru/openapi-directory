@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MonitorStreamInfo
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Settings and Info of the monitor stream
 **/
 export class MonitorStreamInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=broadcastStreamDelayMs" })
+  @SpeakeasyMetadata({ data: "json, name=broadcastStreamDelayMs" })
   broadcastStreamDelayMs?: number;
 
-  @Metadata({ data: "json, name=embedHtml" })
+  @SpeakeasyMetadata({ data: "json, name=embedHtml" })
   embedHtml?: string;
 
-  @Metadata({ data: "json, name=enableMonitorStream" })
+  @SpeakeasyMetadata({ data: "json, name=enableMonitorStream" })
   enableMonitorStream?: boolean;
 }

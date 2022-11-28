@@ -8,13 +8,13 @@ type SchemeAPISecret struct {
 	APIKey string `security:"name=api_secret"`
 }
 
-type SchemeAPISig struct {
-	APIKey string `security:"name=sig"`
-}
-
 type SecurityOption1 struct {
 	APIKey    SchemeAPIKey    `security:"scheme,type=apiKey,subtype=query"`
 	APISecret SchemeAPISecret `security:"scheme,type=apiKey,subtype=query"`
+}
+
+type SchemeAPISig struct {
+	APIKey string `security:"name=sig"`
 }
 
 type SecurityOption2 struct {

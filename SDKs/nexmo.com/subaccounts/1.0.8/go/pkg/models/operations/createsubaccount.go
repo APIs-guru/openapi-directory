@@ -12,12 +12,6 @@ type CreateSubAccountSecurity struct {
 	BasicAuth shared.SchemeBasicAuth `security:"scheme,type=http,subtype=basic"`
 }
 
-type CreateSubAccountRequest struct {
-	PathParams CreateSubAccountPathParams
-	Request    shared.NewSubaccountRequest `request:"mediaType=application/json"`
-	Security   CreateSubAccountSecurity
-}
-
 type CreateSubAccount401ApplicationJSON struct {
 	Detail   string `json:"detail"`
 	Instance string `json:"instance"`
@@ -25,6 +19,8 @@ type CreateSubAccount401ApplicationJSON struct {
 	Type     string `json:"type"`
 }
 
+// CreateSubAccount404ApplicationJSON
+// Invalid API Key
 type CreateSubAccount404ApplicationJSON struct {
 	Detail   string `json:"detail"`
 	Instance string `json:"instance"`
@@ -43,6 +39,12 @@ type CreateSubAccount422ApplicationJSON struct {
 	InvalidParameters []CreateSubAccount422ApplicationJSONInvalidParameters `json:"invalid_parameters"`
 	Title             string                                                `json:"title"`
 	Type              string                                                `json:"type"`
+}
+
+type CreateSubAccountRequest struct {
+	PathParams CreateSubAccountPathParams
+	Request    shared.NewSubaccountRequest `request:"mediaType=application/json"`
+	Security   CreateSubAccountSecurity
 }
 
 type CreateSubAccountResponse struct {

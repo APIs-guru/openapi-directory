@@ -1,147 +1,127 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ImporterExporterCodeVerificationApiPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=iec" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=iec" })
   iec: string;
-}
-
-
-export class ImporterExporterCodeVerificationApiSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
-  apiKey: shared.SchemeApiKey;
-}
-
-
-export class ImporterExporterCodeVerificationApiSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
-  clientId: shared.SchemeClientId;
 }
 
 
 export class ImporterExporterCodeVerificationApiSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: ImporterExporterCodeVerificationApiSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  apiKey?: shared.SchemeApiKey;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: ImporterExporterCodeVerificationApiSecurityOption2;
-}
-
-
-export class ImporterExporterCodeVerificationApiRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: ImporterExporterCodeVerificationApiPathParams;
-
-  @Metadata()
-  security: ImporterExporterCodeVerificationApiSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  clientId?: shared.SchemeClientId;
 }
 
 
 export class ImporterExporterCodeVerificationApi200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=addressLine1" })
+  @SpeakeasyMetadata({ data: "json, name=addressLine1" })
   addressLine1: string;
 
-  @Metadata({ data: "json, name=addressLine2" })
+  @SpeakeasyMetadata({ data: "json, name=addressLine2" })
   addressLine2: string;
 
-  @Metadata({ data: "json, name=branch" })
+  @SpeakeasyMetadata({ data: "json, name=branch" })
   branch: any[];
 
-  @Metadata({ data: "json, name=city" })
+  @SpeakeasyMetadata({ data: "json, name=city" })
   city: string;
 
-  @Metadata({ data: "json, name=dataAsOn" })
+  @SpeakeasyMetadata({ data: "json, name=dataAsOn" })
   dataAsOn: Date;
 
-  @Metadata({ data: "json, name=directors" })
+  @SpeakeasyMetadata({ data: "json, name=directors" })
   directors: any[];
 
-  @Metadata({ data: "json, name=entityName" })
+  @SpeakeasyMetadata({ data: "json, name=entityName" })
   entityName: string;
 
-  @Metadata({ data: "json, name=exporterType" })
+  @SpeakeasyMetadata({ data: "json, name=exporterType" })
   exporterType: string;
 
-  @Metadata({ data: "json, name=iec" })
+  @SpeakeasyMetadata({ data: "json, name=iec" })
   iec: string;
 
-  @Metadata({ data: "json, name=iecIssueDate" })
+  @SpeakeasyMetadata({ data: "json, name=iecIssueDate" })
   iecIssueDate: string;
 
-  @Metadata({ data: "json, name=iecModificationDate" })
+  @SpeakeasyMetadata({ data: "json, name=iecModificationDate" })
   iecModificationDate: string;
 
-  @Metadata({ data: "json, name=iecStatus" })
+  @SpeakeasyMetadata({ data: "json, name=iecStatus" })
   iecStatus: string;
 
-  @Metadata({ data: "json, name=natureOfConcern" })
+  @SpeakeasyMetadata({ data: "json, name=natureOfConcern" })
   natureOfConcern: string;
 
-  @Metadata({ data: "json, name=pan" })
+  @SpeakeasyMetadata({ data: "json, name=pan" })
   pan: string;
 
-  @Metadata({ data: "json, name=pin" })
+  @SpeakeasyMetadata({ data: "json, name=pin" })
   pin: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state: string;
 }
 
 export enum ImporterExporterCodeVerificationApi400ApplicationJsonErrorEnum {
-    InvalidParameter = "invalid parameter"
-,    MissingParameter = "missing parameter"
+    InvalidParameter = "invalid parameter",
+    MissingParameter = "missing parameter"
 }
 
 export enum ImporterExporterCodeVerificationApi400ApplicationJsonErrorDescriptionEnum {
-    BadRequest = "Bad request"
-,    PleaseProvideAllMandatoryParameters = "Please provide all mandatory parameters."
+    BadRequest = "Bad request",
+    PleaseProvideAllMandatoryParameters = "Please provide all mandatory parameters."
 }
 
 
 export class ImporterExporterCodeVerificationApi400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: ImporterExporterCodeVerificationApi400ApplicationJsonErrorEnum;
 
-  @Metadata({ data: "json, name=errorDescription" })
+  @SpeakeasyMetadata({ data: "json, name=errorDescription" })
   errorDescription?: ImporterExporterCodeVerificationApi400ApplicationJsonErrorDescriptionEnum;
 }
 
 export enum ImporterExporterCodeVerificationApi401ApplicationJsonErrorEnum {
-    InvalidAuthentication = "invalid_authentication"
-,    InvalidAuthorization = "invalid_authorization"
+    InvalidAuthentication = "invalid_authentication",
+    InvalidAuthorization = "invalid_authorization"
 }
 
 export enum ImporterExporterCodeVerificationApi401ApplicationJsonErrorDescriptionEnum {
-    AuthenticationFailed = "Authentication failed"
-,    YouAreNotAuthorizedToUseThisApi = "You are not authorized to use this API"
+    AuthenticationFailed = "Authentication failed",
+    YouAreNotAuthorizedToUseThisApi = "You are not authorized to use this API"
 }
 
 
 export class ImporterExporterCodeVerificationApi401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: ImporterExporterCodeVerificationApi401ApplicationJsonErrorEnum;
 
-  @Metadata({ data: "json, name=errorDescription" })
+  @SpeakeasyMetadata({ data: "json, name=errorDescription" })
   errorDescription?: ImporterExporterCodeVerificationApi401ApplicationJsonErrorDescriptionEnum;
 }
 
 export enum ImporterExporterCodeVerificationApi404ApplicationJsonErrorEnum {
-    RecordNotFound = "record_not_found"
-,    UrlNotFound = "Url not found"
+    RecordNotFound = "record_not_found",
+    UrlNotFound = "Url not found"
 }
 
 export enum ImporterExporterCodeVerificationApi404ApplicationJsonErrorDescriptionEnum {
-    NoRecordFound = "No record found"
-,    YourApiUrlOrPathIsIncorrect = "Your API url or path is incorrect."
+    NoRecordFound = "No record found",
+    YourApiUrlOrPathIsIncorrect = "Your API url or path is incorrect."
 }
 
 
 export class ImporterExporterCodeVerificationApi404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: ImporterExporterCodeVerificationApi404ApplicationJsonErrorEnum;
 
-  @Metadata({ data: "json, name=errorDescription" })
+  @SpeakeasyMetadata({ data: "json, name=errorDescription" })
   errorDescription?: ImporterExporterCodeVerificationApi404ApplicationJsonErrorDescriptionEnum;
 }
 
@@ -155,10 +135,10 @@ export enum ImporterExporterCodeVerificationApi500ApplicationJsonErrorDescriptio
 
 
 export class ImporterExporterCodeVerificationApi500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: ImporterExporterCodeVerificationApi500ApplicationJsonErrorEnum;
 
-  @Metadata({ data: "json, name=errorDescription" })
+  @SpeakeasyMetadata({ data: "json, name=errorDescription" })
   errorDescription?: ImporterExporterCodeVerificationApi500ApplicationJsonErrorDescriptionEnum;
 }
 
@@ -172,10 +152,10 @@ export enum ImporterExporterCodeVerificationApi502ApplicationJsonErrorDescriptio
 
 
 export class ImporterExporterCodeVerificationApi502ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: ImporterExporterCodeVerificationApi502ApplicationJsonErrorEnum;
 
-  @Metadata({ data: "json, name=errorDescription" })
+  @SpeakeasyMetadata({ data: "json, name=errorDescription" })
   errorDescription?: ImporterExporterCodeVerificationApi502ApplicationJsonErrorDescriptionEnum;
 }
 
@@ -189,10 +169,10 @@ export enum ImporterExporterCodeVerificationApi503ApplicationJsonErrorDescriptio
 
 
 export class ImporterExporterCodeVerificationApi503ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: ImporterExporterCodeVerificationApi503ApplicationJsonErrorEnum;
 
-  @Metadata({ data: "json, name=errorDescription" })
+  @SpeakeasyMetadata({ data: "json, name=errorDescription" })
   errorDescription?: ImporterExporterCodeVerificationApi503ApplicationJsonErrorDescriptionEnum;
 }
 
@@ -206,42 +186,51 @@ export enum ImporterExporterCodeVerificationApi504ApplicationJsonErrorDescriptio
 
 
 export class ImporterExporterCodeVerificationApi504ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: ImporterExporterCodeVerificationApi504ApplicationJsonErrorEnum;
 
-  @Metadata({ data: "json, name=errorDescription" })
+  @SpeakeasyMetadata({ data: "json, name=errorDescription" })
   errorDescription?: ImporterExporterCodeVerificationApi504ApplicationJsonErrorDescriptionEnum;
 }
 
 
+export class ImporterExporterCodeVerificationApiRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: ImporterExporterCodeVerificationApiPathParams;
+
+  @SpeakeasyMetadata()
+  security: ImporterExporterCodeVerificationApiSecurity;
+}
+
+
 export class ImporterExporterCodeVerificationApiResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   importerExporterCodeVerificationApi200ApplicationJsonObject?: ImporterExporterCodeVerificationApi200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   importerExporterCodeVerificationApi400ApplicationJsonObject?: ImporterExporterCodeVerificationApi400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   importerExporterCodeVerificationApi401ApplicationJsonObject?: ImporterExporterCodeVerificationApi401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   importerExporterCodeVerificationApi404ApplicationJsonObject?: ImporterExporterCodeVerificationApi404ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   importerExporterCodeVerificationApi500ApplicationJsonObject?: ImporterExporterCodeVerificationApi500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   importerExporterCodeVerificationApi502ApplicationJsonObject?: ImporterExporterCodeVerificationApi502ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   importerExporterCodeVerificationApi503ApplicationJsonObject?: ImporterExporterCodeVerificationApi503ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   importerExporterCodeVerificationApi504ApplicationJsonObject?: ImporterExporterCodeVerificationApi504ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

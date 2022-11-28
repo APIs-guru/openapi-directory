@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LinkType } from "./linktype";
+
 
 
 // AppPkgNotificationLinks
@@ -7,6 +8,6 @@ import { LinkType } from "./linktype";
  * Links to resources related to this resource.
 **/
 export class AppPkgNotificationLinks extends SpeakeasyBase {
-  @Metadata({ data: "json, name=subscription" })
+  @SpeakeasyMetadata({ data: "json, name=subscription" })
   subscription: LinkType;
 }

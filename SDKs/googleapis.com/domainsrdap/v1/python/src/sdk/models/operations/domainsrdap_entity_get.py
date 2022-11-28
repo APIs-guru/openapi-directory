@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DomainsrdapEntityGetPathParams:
-    entity_id: str = field(default=None, metadata={'path_param': { 'field_name': 'entityId', 'style': 'simple', 'explode': False }})
+    entity_id: str = field(metadata={'path_param': { 'field_name': 'entityId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,13 +26,13 @@ class DomainsrdapEntityGetQueryParams:
 
 @dataclass
 class DomainsrdapEntityGetRequest:
-    path_params: DomainsrdapEntityGetPathParams = field(default=None)
-    query_params: DomainsrdapEntityGetQueryParams = field(default=None)
+    path_params: DomainsrdapEntityGetPathParams = field()
+    query_params: DomainsrdapEntityGetQueryParams = field()
     
 
 @dataclass
 class DomainsrdapEntityGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     rdap_response: Optional[shared.RdapResponse] = field(default=None)
-    status_code: int = field(default=None)
     

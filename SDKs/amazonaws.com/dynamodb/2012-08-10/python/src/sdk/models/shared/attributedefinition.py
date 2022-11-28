@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import scalarattributetype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AttributeDefinition:
-    attribute_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AttributeName' }})
-    attribute_type: scalarattributetype_enum.ScalarAttributeTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AttributeType' }})
+    r"""AttributeDefinition
+    Represents an attribute for describing the key schema for the table and indexes.
+    """
+    
+    attribute_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('AttributeName') }})
+    attribute_type: ScalarAttributeTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('AttributeType') }})
     

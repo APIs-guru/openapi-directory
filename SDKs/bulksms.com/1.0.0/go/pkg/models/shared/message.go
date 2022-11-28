@@ -32,12 +32,16 @@ const (
 	MessageStatusTypeEnumFailed    MessageStatusTypeEnum = "FAILED"
 )
 
+// MessageStatus
+// The status of the message
 type MessageStatus struct {
 	ID      string                    `json:"id"`
 	Subtype *MessageStatusSubtypeEnum `json:"subtype,omitempty"`
 	Type    MessageStatusTypeEnum     `json:"type"`
 }
 
+// MessageSubmission
+// Identifies the submission.
 type MessageSubmission struct {
 	Date time.Time `json:"date"`
 	ID   string    `json:"id"`

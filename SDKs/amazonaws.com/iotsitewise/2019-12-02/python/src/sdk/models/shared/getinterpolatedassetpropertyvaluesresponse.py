@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import interpolatedassetpropertyvalue
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetInterpolatedAssetPropertyValuesResponse:
-    interpolated_asset_property_values: List[interpolatedassetpropertyvalue.InterpolatedAssetPropertyValue] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'interpolatedAssetPropertyValues' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextToken' }})
+    interpolated_asset_property_values: List[InterpolatedAssetPropertyValue] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('interpolatedAssetPropertyValues') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextToken') }})
     

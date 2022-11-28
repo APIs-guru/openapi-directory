@@ -1,22 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OrdersCustomBatchRequestEntryRefundItemItem } from "./orderscustombatchrequestentryrefunditemitem";
 import { OrdersCustomBatchRequestEntryRefundItemShipping } from "./orderscustombatchrequestentryrefunditemshipping";
 
 
+
 export class OrdersRefundItemRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.OrdersCustomBatchRequestEntryRefundItemItem })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: OrdersCustomBatchRequestEntryRefundItemItem })
   items?: OrdersCustomBatchRequestEntryRefundItemItem[];
 
-  @Metadata({ data: "json, name=operationId" })
+  @SpeakeasyMetadata({ data: "json, name=operationId" })
   operationId?: string;
 
-  @Metadata({ data: "json, name=reason" })
+  @SpeakeasyMetadata({ data: "json, name=reason" })
   reason?: string;
 
-  @Metadata({ data: "json, name=reasonText" })
+  @SpeakeasyMetadata({ data: "json, name=reasonText" })
   reasonText?: string;
 
-  @Metadata({ data: "json, name=shipping" })
+  @SpeakeasyMetadata({ data: "json, name=shipping" })
   shipping?: OrdersCustomBatchRequestEntryRefundItemShipping;
 }

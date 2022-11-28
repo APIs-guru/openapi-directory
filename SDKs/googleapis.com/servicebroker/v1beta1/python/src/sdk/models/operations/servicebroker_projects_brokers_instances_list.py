@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ServicebrokerProjectsBrokersInstancesListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class ServicebrokerProjectsBrokersInstancesListQueryParams:
 
 @dataclass
 class ServicebrokerProjectsBrokersInstancesListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ServicebrokerProjectsBrokersInstancesListRequest:
-    path_params: ServicebrokerProjectsBrokersInstancesListPathParams = field(default=None)
-    query_params: ServicebrokerProjectsBrokersInstancesListQueryParams = field(default=None)
-    security: ServicebrokerProjectsBrokersInstancesListSecurity = field(default=None)
+    path_params: ServicebrokerProjectsBrokersInstancesListPathParams = field()
+    query_params: ServicebrokerProjectsBrokersInstancesListQueryParams = field()
+    security: ServicebrokerProjectsBrokersInstancesListSecurity = field()
     
 
 @dataclass
 class ServicebrokerProjectsBrokersInstancesListResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

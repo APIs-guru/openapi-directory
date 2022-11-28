@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { SubscriptionDefinitionVersion } from "./subscriptiondefinitionversion";
 export declare class GetSubscriptionDefinitionVersionResponse extends SpeakeasyBase {
     arn?: string;

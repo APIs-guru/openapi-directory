@@ -13,6 +13,8 @@ const (
 	SearchResultSnippetLiveBroadcastContentEnumCompleted SearchResultSnippetLiveBroadcastContentEnum = "completed"
 )
 
+// SearchResultSnippet
+// Basic details about a search result, including title, description and thumbnails of the item referenced by the search result.
 type SearchResultSnippet struct {
 	ChannelID            *string                                      `json:"channelId,omitempty"`
 	ChannelTitle         *string                                      `json:"channelTitle,omitempty"`

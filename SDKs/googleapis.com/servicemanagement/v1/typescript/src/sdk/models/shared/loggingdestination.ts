@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LoggingDestination
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configuration of a specific logging destination (the producer project or the consumer project).
 **/
 export class LoggingDestination extends SpeakeasyBase {
-  @Metadata({ data: "json, name=logs" })
+  @SpeakeasyMetadata({ data: "json, name=logs" })
   logs?: string[];
 
-  @Metadata({ data: "json, name=monitoredResource" })
+  @SpeakeasyMetadata({ data: "json, name=monitoredResource" })
   monitoredResource?: string;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// ReplicaSettingsUpdate
+// Represents the settings for a global table in a Region that will be modified.
 type ReplicaSettingsUpdate struct {
 	RegionName                                              string                                      `json:"RegionName"`
 	ReplicaGlobalSecondaryIndexSettingsUpdate               []ReplicaGlobalSecondaryIndexSettingsUpdate `json:"ReplicaGlobalSecondaryIndexSettingsUpdate,omitempty"`

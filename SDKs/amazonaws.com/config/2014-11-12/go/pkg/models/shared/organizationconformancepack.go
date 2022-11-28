@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// OrganizationConformancePack
+// An organization conformance pack that has information about conformance packs that Config creates in member accounts.
 type OrganizationConformancePack struct {
 	ConformancePackInputParameters  []ConformancePackInputParameter `json:"ConformancePackInputParameters,omitempty"`
 	DeliveryS3Bucket                *string                         `json:"DeliveryS3Bucket,omitempty"`

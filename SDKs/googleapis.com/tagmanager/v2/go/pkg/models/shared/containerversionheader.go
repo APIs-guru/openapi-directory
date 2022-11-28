@@ -1,5 +1,7 @@
 package shared
 
+// ContainerVersionHeader
+// Represents a Google Tag Manager Container Version Header.
 type ContainerVersionHeader struct {
 	AccountID          *string `json:"accountId,omitempty"`
 	ContainerID        *string `json:"containerId,omitempty"`
@@ -8,6 +10,7 @@ type ContainerVersionHeader struct {
 	Name               *string `json:"name,omitempty"`
 	NumClients         *string `json:"numClients,omitempty"`
 	NumCustomTemplates *string `json:"numCustomTemplates,omitempty"`
+	NumGtagConfigs     *string `json:"numGtagConfigs,omitempty"`
 	NumMacros          *string `json:"numMacros,omitempty"`
 	NumRules           *string `json:"numRules,omitempty"`
 	NumTags            *string `json:"numTags,omitempty"`

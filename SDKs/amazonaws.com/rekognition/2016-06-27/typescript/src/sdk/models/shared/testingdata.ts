@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Asset } from "./asset";
+
 
 
 // TestingData
@@ -8,9 +8,9 @@ import { Asset } from "./asset";
  * The dataset used for testing. Optionally, if <code>AutoCreate</code> is set, Amazon Rekognition Custom Labels creates a testing dataset using an 80/20 split of the training dataset.
 **/
 export class TestingData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Assets", elemType: shared.Asset })
+  @SpeakeasyMetadata({ data: "json, name=Assets", elemType: Asset })
   assets?: Asset[];
 
-  @Metadata({ data: "json, name=AutoCreate" })
+  @SpeakeasyMetadata({ data: "json, name=AutoCreate" })
   autoCreate?: boolean;
 }

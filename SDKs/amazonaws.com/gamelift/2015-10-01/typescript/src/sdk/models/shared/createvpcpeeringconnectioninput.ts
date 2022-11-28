@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CreateVpcPeeringConnectionInput
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the input for a request operation.
 **/
 export class CreateVpcPeeringConnectionInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FleetId" })
+  @SpeakeasyMetadata({ data: "json, name=FleetId" })
   fleetId: string;
 
-  @Metadata({ data: "json, name=PeerVpcAwsAccountId" })
+  @SpeakeasyMetadata({ data: "json, name=PeerVpcAwsAccountId" })
   peerVpcAwsAccountId: string;
 
-  @Metadata({ data: "json, name=PeerVpcId" })
+  @SpeakeasyMetadata({ data: "json, name=PeerVpcId" })
   peerVpcId: string;
 }

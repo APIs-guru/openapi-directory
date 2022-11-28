@@ -11,19 +11,19 @@ class AppsListInstallationsQueryParams:
 
 @dataclass
 class AppsListInstallationsHeaders:
-    accept: str = field(default=None, metadata={'header': { 'field_name': 'accept', 'style': 'simple', 'explode': False }})
+    accept: str = field(metadata={'header': { 'field_name': 'accept', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class AppsListInstallationsRequest:
-    query_params: AppsListInstallationsQueryParams = field(default=None)
-    headers: AppsListInstallationsHeaders = field(default=None)
+    headers: AppsListInstallationsHeaders = field()
+    query_params: AppsListInstallationsQueryParams = field()
     
 
 @dataclass
 class AppsListInstallationsResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     installation_ghes_2s: Optional[List[shared.InstallationGhes2]] = field(default=None)
     

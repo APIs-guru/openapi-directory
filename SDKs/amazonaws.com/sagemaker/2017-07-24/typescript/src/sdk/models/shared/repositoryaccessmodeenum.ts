@@ -1,6 +1,7 @@
 
 
+
 export enum RepositoryAccessModeEnum {
-    Platform = "Platform"
-,    Vpc = "Vpc"
+    Platform = "Platform",
+    Vpc = "Vpc"
 }

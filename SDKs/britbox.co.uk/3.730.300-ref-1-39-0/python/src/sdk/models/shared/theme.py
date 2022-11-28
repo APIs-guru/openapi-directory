@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List
+from typing import List
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import themecolor
+from sdk import utils
+from . import *
 
 class ThemeTypeEnum(str, Enum):
     BACKGROUND = "Background"
@@ -12,6 +14,6 @@ class ThemeTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Theme:
-    colors: List[themecolor.ThemeColor] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'colors' }})
-    type: ThemeTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    colors: List[ThemeColor] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('colors') }})
+    type: ThemeTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

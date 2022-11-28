@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ExecuteCommandRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cluster" })
+  @SpeakeasyMetadata({ data: "json, name=cluster" })
   cluster?: string;
 
-  @Metadata({ data: "json, name=command" })
+  @SpeakeasyMetadata({ data: "json, name=command" })
   command: string;
 
-  @Metadata({ data: "json, name=container" })
+  @SpeakeasyMetadata({ data: "json, name=container" })
   container?: string;
 
-  @Metadata({ data: "json, name=interactive" })
+  @SpeakeasyMetadata({ data: "json, name=interactive" })
   interactive: boolean;
 
-  @Metadata({ data: "json, name=task" })
+  @SpeakeasyMetadata({ data: "json, name=task" })
   task: string;
 }

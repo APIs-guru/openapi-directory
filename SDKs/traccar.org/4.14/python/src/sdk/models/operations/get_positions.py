@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import List,Optional
@@ -16,13 +16,13 @@ class GetPositionsQueryParams:
 
 @dataclass
 class GetPositionsRequest:
-    query_params: GetPositionsQueryParams = field(default=None)
+    query_params: GetPositionsQueryParams = field()
     
 
 @dataclass
 class GetPositionsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     positions: Optional[List[shared.Position]] = field(default=None)
-    status_code: int = field(default=None)
     

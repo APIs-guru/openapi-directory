@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetDescribeIndexFieldsActionEnum(str, Enum):
     DESCRIBE_INDEX_FIELDS = "DescribeIndexFields"
@@ -10,11 +14,11 @@ class GetDescribeIndexFieldsVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeIndexFieldsQueryParams:
-    action: GetDescribeIndexFieldsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribeIndexFieldsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    domain_name: str = field(metadata={'query_param': { 'field_name': 'DomainName', 'style': 'form', 'explode': True }})
+    version: GetDescribeIndexFieldsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     deployed: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'Deployed', 'style': 'form', 'explode': True }})
-    domain_name: str = field(default=None, metadata={'query_param': { 'field_name': 'DomainName', 'style': 'form', 'explode': True }})
     field_names: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'FieldNames', 'style': 'form', 'explode': True }})
-    version: GetDescribeIndexFieldsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetDescribeIndexFieldsHeaders:
 
 @dataclass
 class GetDescribeIndexFieldsRequest:
-    query_params: GetDescribeIndexFieldsQueryParams = field(default=None)
-    headers: GetDescribeIndexFieldsHeaders = field(default=None)
+    headers: GetDescribeIndexFieldsHeaders = field()
+    query_params: GetDescribeIndexFieldsQueryParams = field()
     
 
 @dataclass
 class GetDescribeIndexFieldsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

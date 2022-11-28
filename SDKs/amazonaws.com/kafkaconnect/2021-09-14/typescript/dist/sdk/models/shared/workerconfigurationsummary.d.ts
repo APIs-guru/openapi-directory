@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { WorkerConfigurationRevisionSummary } from "./workerconfigurationrevisionsummary";
 /**
  * The summary of a worker configuration.

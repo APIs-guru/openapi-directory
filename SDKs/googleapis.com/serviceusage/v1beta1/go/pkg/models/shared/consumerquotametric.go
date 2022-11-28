@@ -1,5 +1,7 @@
 package shared
 
+// ConsumerQuotaMetric
+// Consumer quota settings for a quota metric.
 type ConsumerQuotaMetric struct {
 	ConsumerQuotaLimits           []ConsumerQuotaLimit `json:"consumerQuotaLimits,omitempty"`
 	DescendantConsumerQuotaLimits []ConsumerQuotaLimit `json:"descendantConsumerQuotaLimits,omitempty"`

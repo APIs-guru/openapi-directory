@@ -9,22 +9,10 @@ type PutWorkspacesWorkspaceProjectsProjectKeyPathParams struct {
 	Workspace  string `pathParam:"style=simple,explode=false,name=workspace"`
 }
 
-type PutWorkspacesWorkspaceProjectsProjectKeySecurityOption1 struct {
-	Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
-}
-
-type PutWorkspacesWorkspaceProjectsProjectKeySecurityOption2 struct {
-	Basic shared.SchemeBasic `security:"scheme,type=http,subtype=basic"`
-}
-
-type PutWorkspacesWorkspaceProjectsProjectKeySecurityOption3 struct {
-	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
-}
-
 type PutWorkspacesWorkspaceProjectsProjectKeySecurity struct {
-	Option1 *PutWorkspacesWorkspaceProjectsProjectKeySecurityOption1 `security:"option"`
-	Option2 *PutWorkspacesWorkspaceProjectsProjectKeySecurityOption2 `security:"option"`
-	Option3 *PutWorkspacesWorkspaceProjectsProjectKeySecurityOption3 `security:"option"`
+	Oauth2 *shared.SchemeOauth2 `security:"scheme,type=oauth2"`
+	Basic  *shared.SchemeBasic  `security:"scheme,type=http,subtype=basic"`
+	APIKey *shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type PutWorkspacesWorkspaceProjectsProjectKeyRequest struct {

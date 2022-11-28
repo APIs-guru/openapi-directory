@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConnectionCredentials } from "./connectioncredentials";
 import { Websocket } from "./websocket";
 var CreateParticipantConnectionResponse = /** @class */ (function (_super) {
@@ -31,11 +31,11 @@ var CreateParticipantConnectionResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ConnectionCredentials" }),
+        SpeakeasyMetadata({ data: "json, name=ConnectionCredentials" }),
         __metadata("design:type", ConnectionCredentials)
     ], CreateParticipantConnectionResponse.prototype, "connectionCredentials", void 0);
     __decorate([
-        Metadata({ data: "json, name=Websocket" }),
+        SpeakeasyMetadata({ data: "json, name=Websocket" }),
         __metadata("design:type", Websocket)
     ], CreateParticipantConnectionResponse.prototype, "websocket", void 0);
     return CreateParticipantConnectionResponse;

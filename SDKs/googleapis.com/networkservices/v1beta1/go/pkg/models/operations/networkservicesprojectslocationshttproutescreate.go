@@ -31,7 +31,7 @@ type NetworkservicesProjectsLocationsHTTPRoutesCreateSecurity struct {
 type NetworkservicesProjectsLocationsHTTPRoutesCreateRequest struct {
 	PathParams  NetworkservicesProjectsLocationsHTTPRoutesCreatePathParams
 	QueryParams NetworkservicesProjectsLocationsHTTPRoutesCreateQueryParams
-	Request     *shared.HTTPRoute `request:"mediaType=application/json"`
+	Request     *shared.HTTPRouteInput `request:"mediaType=application/json"`
 	Security    NetworkservicesProjectsLocationsHTTPRoutesCreateSecurity
 }
 

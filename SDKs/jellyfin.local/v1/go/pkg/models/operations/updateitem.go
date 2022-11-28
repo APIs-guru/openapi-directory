@@ -8,10 +8,10 @@ type UpdateItemPathParams struct {
 	ItemID string `pathParam:"style=simple,explode=false,name=itemId"`
 }
 
-type UpdateItemRequests struct {
-	BaseItemDto  *shared.BaseItemDto `request:"mediaType=application/*+json"`
-	BaseItemDto1 *shared.BaseItemDto `request:"mediaType=application/json"`
-	BaseItemDto2 *shared.BaseItemDto `request:"mediaType=text/json"`
+type UpdateItemRequestsInput struct {
+	BaseItemDto  *shared.BaseItemDtoInput `request:"mediaType=application/*+json"`
+	BaseItemDto1 *shared.BaseItemDtoInput `request:"mediaType=application/json"`
+	BaseItemDto2 *shared.BaseItemDtoInput `request:"mediaType=text/json"`
 }
 
 type UpdateItemSecurity struct {
@@ -20,7 +20,7 @@ type UpdateItemSecurity struct {
 
 type UpdateItemRequest struct {
 	PathParams UpdateItemPathParams
-	Request    UpdateItemRequests
+	Request    UpdateItemRequestsInput
 	Security   UpdateItemSecurity
 }
 

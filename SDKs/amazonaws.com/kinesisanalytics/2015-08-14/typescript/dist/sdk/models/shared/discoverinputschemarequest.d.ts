@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { InputProcessingConfiguration } from "./inputprocessingconfiguration";
 import { InputStartingPositionConfiguration } from "./inputstartingpositionconfiguration";
 import { S3Configuration } from "./s3configuration";

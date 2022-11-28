@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetGroupingOptionsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=userId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=userId" })
   userId: string;
 }
 
 
 export class GetGroupingOptionsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetGroupingOptionsPathParams;
 }
 
 
 export class GetGroupingOptionsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: Map<string, any>;
 
-  @Metadata({ elemType: shared.SpecialViewOptionDto })
+  @SpeakeasyMetadata({ elemType: shared.SpecialViewOptionDto })
   specialViewOptionDtos?: shared.SpecialViewOptionDto[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

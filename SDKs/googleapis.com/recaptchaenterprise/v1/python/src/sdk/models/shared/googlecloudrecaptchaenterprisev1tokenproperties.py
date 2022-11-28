@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GoogleCloudRecaptchaenterpriseV1TokenPropertiesInvalidReasonEnum(str, Enum):
     INVALID_REASON_UNSPECIFIED = "INVALID_REASON_UNSPECIFIED"
@@ -15,9 +17,11 @@ class GoogleCloudRecaptchaenterpriseV1TokenPropertiesInvalidReasonEnum(str, Enum
 @dataclass_json
 @dataclass
 class GoogleCloudRecaptchaenterpriseV1TokenProperties:
-    action: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
-    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createTime' }})
-    hostname: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'hostname' }})
-    invalid_reason: Optional[GoogleCloudRecaptchaenterpriseV1TokenPropertiesInvalidReasonEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'invalidReason' }})
-    valid: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'valid' }})
+    action: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('action') }})
+    android_package_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('androidPackageName') }})
+    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createTime') }})
+    hostname: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('hostname') }})
+    invalid_reason: Optional[GoogleCloudRecaptchaenterpriseV1TokenPropertiesInvalidReasonEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('invalidReason') }})
+    ios_bundle_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('iosBundleId') }})
+    valid: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('valid') }})
     

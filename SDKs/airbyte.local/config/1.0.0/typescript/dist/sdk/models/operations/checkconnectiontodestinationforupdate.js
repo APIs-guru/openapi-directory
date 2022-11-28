@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CheckConnectionToDestinationForUpdateRequest = /** @class */ (function (_super) {
     __extends(CheckConnectionToDestinationForUpdateRequest, _super);
@@ -30,7 +30,7 @@ var CheckConnectionToDestinationForUpdateRequest = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.DestinationUpdate)
     ], CheckConnectionToDestinationForUpdateRequest.prototype, "request", void 0);
     return CheckConnectionToDestinationForUpdateRequest;
@@ -42,23 +42,23 @@ var CheckConnectionToDestinationForUpdateResponse = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.CheckConnectionRead)
     ], CheckConnectionToDestinationForUpdateResponse.prototype, "checkConnectionRead", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CheckConnectionToDestinationForUpdateResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.InvalidInputExceptionInfo)
     ], CheckConnectionToDestinationForUpdateResponse.prototype, "invalidInputExceptionInfo", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.NotFoundKnownExceptionInfo)
     ], CheckConnectionToDestinationForUpdateResponse.prototype, "notFoundKnownExceptionInfo", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CheckConnectionToDestinationForUpdateResponse.prototype, "statusCode", void 0);
     return CheckConnectionToDestinationForUpdateResponse;

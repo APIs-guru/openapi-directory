@@ -22,9 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ErrorCodeEnum } from "./errorcodeenum";
+import { DetailedError } from "./detailederror";
 // ErrorDetails
 /**
  * Contains the details of an IoT SiteWise error.
@@ -35,15 +35,15 @@ var ErrorDetails = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=code" }),
+        SpeakeasyMetadata({ data: "json, name=code" }),
         __metadata("design:type", String)
     ], ErrorDetails.prototype, "code", void 0);
     __decorate([
-        Metadata({ data: "json, name=details", elemType: shared.DetailedError }),
+        SpeakeasyMetadata({ data: "json, name=details", elemType: DetailedError }),
         __metadata("design:type", Array)
     ], ErrorDetails.prototype, "details", void 0);
     __decorate([
-        Metadata({ data: "json, name=message" }),
+        SpeakeasyMetadata({ data: "json, name=message" }),
         __metadata("design:type", String)
     ], ErrorDetails.prototype, "message", void 0);
     return ErrorDetails;

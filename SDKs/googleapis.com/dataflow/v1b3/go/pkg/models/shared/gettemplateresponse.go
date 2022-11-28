@@ -8,6 +8,8 @@ const (
 	GetTemplateResponseTemplateTypeEnumFlex    GetTemplateResponseTemplateTypeEnum = "FLEX"
 )
 
+// GetTemplateResponse
+// The response to a GetTemplate request.
 type GetTemplateResponse struct {
 	Metadata        *TemplateMetadata                    `json:"metadata,omitempty"`
 	RuntimeMetadata *RuntimeMetadata                     `json:"runtimeMetadata,omitempty"`

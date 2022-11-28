@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CaPool } from "./capool";
+
 
 
 // ListCaPoolsResponse
@@ -8,12 +8,12 @@ import { CaPool } from "./capool";
  * Response message for CertificateAuthorityService.ListCaPools.
 **/
 export class ListCaPoolsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=caPools", elemType: shared.CaPool })
+  @SpeakeasyMetadata({ data: "json, name=caPools", elemType: CaPool })
   caPools?: CaPool[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=unreachable" })
+  @SpeakeasyMetadata({ data: "json, name=unreachable" })
   unreachable?: string[];
 }

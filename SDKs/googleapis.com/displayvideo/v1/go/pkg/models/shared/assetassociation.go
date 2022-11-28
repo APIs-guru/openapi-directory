@@ -22,6 +22,8 @@ const (
 	AssetAssociationRoleEnumAssetRoleCoverImage     AssetAssociationRoleEnum = "ASSET_ROLE_COVER_IMAGE"
 )
 
+// AssetAssociation
+// Asset association for the creative.
 type AssetAssociation struct {
 	Asset *Asset                    `json:"asset,omitempty"`
 	Role  *AssetAssociationRoleEnum `json:"role,omitempty"`

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// IdentityUsage
+// Usage information for the identity.
 type IdentityUsage struct {
 	DataStorage      *int64     `json:"DataStorage,omitempty"`
 	DatasetCount     *int64     `json:"DatasetCount,omitempty"`

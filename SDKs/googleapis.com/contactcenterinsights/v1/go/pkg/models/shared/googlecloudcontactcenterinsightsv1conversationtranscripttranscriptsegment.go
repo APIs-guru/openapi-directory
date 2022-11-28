@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudContactcenterinsightsV1ConversationTranscriptTranscriptSegment
+// A segment of a full transcript.
 type GoogleCloudContactcenterinsightsV1ConversationTranscriptTranscriptSegment struct {
 	ChannelTag                *int32                                                                                              `json:"channelTag,omitempty"`
 	Confidence                *float32                                                                                            `json:"confidence,omitempty"`

@@ -1,5 +1,7 @@
 package shared
 
+// RouteSpec
+// An object that represents a route specification. Specify one route type.
 type RouteSpec struct {
 	GrpcRoute  *GrpcRoute `json:"grpcRoute,omitempty"`
 	Http2Route *HTTPRoute `json:"http2Route,omitempty"`

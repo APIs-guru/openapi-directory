@@ -5,20 +5,20 @@ from sdk.models import shared
 
 @dataclass
 class GetCategoriesTeamIDCategoryIDPathParams:
-    category_id: str = field(default=None, metadata={'path_param': { 'field_name': 'categoryId', 'style': 'simple', 'explode': False }})
-    team_id: str = field(default=None, metadata={'path_param': { 'field_name': 'teamId', 'style': 'simple', 'explode': False }})
+    category_id: str = field(metadata={'path_param': { 'field_name': 'categoryId', 'style': 'simple', 'explode': False }})
+    team_id: str = field(metadata={'path_param': { 'field_name': 'teamId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetCategoriesTeamIDCategoryIDRequest:
-    path_params: GetCategoriesTeamIDCategoryIDPathParams = field(default=None)
+    path_params: GetCategoriesTeamIDCategoryIDPathParams = field()
     
 
 @dataclass
 class GetCategoriesTeamIDCategoryIDResponse:
-    body: bytes = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     category_info: Optional[shared.CategoryInfo] = field(default=None)
-    content_type: str = field(default=None)
     error_response_content: Optional[shared.ErrorResponseContent] = field(default=None)
-    status_code: int = field(default=None)
     

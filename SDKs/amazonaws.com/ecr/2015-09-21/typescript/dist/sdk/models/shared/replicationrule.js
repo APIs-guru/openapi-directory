@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ReplicationDestination } from "./replicationdestination";
 // ReplicationRule
 /**
  * An array of objects representing the replication destinations for a replication configuration. A replication configuration may contain only one replication rule but the rule may contain one or more replication destinations.
@@ -34,7 +34,7 @@ var ReplicationRule = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=destinations", elemType: shared.ReplicationDestination }),
+        SpeakeasyMetadata({ data: "json, name=destinations", elemType: ReplicationDestination }),
         __metadata("design:type", Array)
     ], ReplicationRule.prototype, "destinations", void 0);
     return ReplicationRule;

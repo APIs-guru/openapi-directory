@@ -1,5 +1,7 @@
 package shared
 
+// BatchUpdateValuesByDataFilterResponse
+// The response when updating a range of values in a spreadsheet.
 type BatchUpdateValuesByDataFilterResponse struct {
 	Responses           []UpdateValuesByDataFilterResponse `json:"responses,omitempty"`
 	SpreadsheetID       *string                            `json:"spreadsheetId,omitempty"`

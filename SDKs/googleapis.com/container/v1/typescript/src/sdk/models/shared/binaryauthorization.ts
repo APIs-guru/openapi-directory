@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum BinaryAuthorizationEvaluationModeEnum {
-    EvaluationModeUnspecified = "EVALUATION_MODE_UNSPECIFIED"
-,    Disabled = "DISABLED"
-,    ProjectSingletonPolicyEnforce = "PROJECT_SINGLETON_POLICY_ENFORCE"
+    EvaluationModeUnspecified = "EVALUATION_MODE_UNSPECIFIED",
+    Disabled = "DISABLED",
+    ProjectSingletonPolicyEnforce = "PROJECT_SINGLETON_POLICY_ENFORCE"
 }
 
 
@@ -12,9 +13,9 @@ export enum BinaryAuthorizationEvaluationModeEnum {
  * Configuration for Binary Authorization.
 **/
 export class BinaryAuthorization extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=evaluationMode" })
+  @SpeakeasyMetadata({ data: "json, name=evaluationMode" })
   evaluationMode?: BinaryAuthorizationEvaluationModeEnum;
 }

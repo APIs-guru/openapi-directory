@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum GoogleCloudEssentialcontactsV1SendTestMessageRequestNotificationCategoryEnum {
     NotificationCategoryUnspecified = "NOTIFICATION_CATEGORY_UNSPECIFIED",
     All = "ALL",

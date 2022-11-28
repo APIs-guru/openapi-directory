@@ -12,15 +12,15 @@ type ExtrasTagsListQueryParams struct {
 	Slug   *string `queryParam:"style=form,explode=true,name=slug"`
 }
 
-type ExtrasTagsListRequest struct {
-	QueryParams ExtrasTagsListQueryParams
-}
-
 type ExtrasTagsList200ApplicationJSON struct {
 	Count    int64        `json:"count"`
 	Next     *string      `json:"next,omitempty"`
 	Previous *string      `json:"previous,omitempty"`
 	Results  []shared.Tag `json:"results"`
+}
+
+type ExtrasTagsListRequest struct {
+	QueryParams ExtrasTagsListQueryParams
 }
 
 type ExtrasTagsListResponse struct {

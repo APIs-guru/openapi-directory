@@ -24,6 +24,8 @@ type ListBotLocalesHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// ListBotLocalesRequestBodySortBy
+// Specifies attributes for sorting a list of bot locales.
 type ListBotLocalesRequestBodySortBy struct {
 	Attribute *shared.BotLocaleSortAttributeEnum `json:"attribute,omitempty"`
 	Order     *shared.SortOrderEnum              `json:"order,omitempty"`

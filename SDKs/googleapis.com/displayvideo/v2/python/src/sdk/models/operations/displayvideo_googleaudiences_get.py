@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DisplayvideoGoogleAudiencesGetPathParams:
-    google_audience_id: str = field(default=None, metadata={'path_param': { 'field_name': 'googleAudienceId', 'style': 'simple', 'explode': False }})
+    google_audience_id: str = field(metadata={'path_param': { 'field_name': 'googleAudienceId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class DisplayvideoGoogleAudiencesGetQueryParams:
 
 @dataclass
 class DisplayvideoGoogleAudiencesGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DisplayvideoGoogleAudiencesGetRequest:
-    path_params: DisplayvideoGoogleAudiencesGetPathParams = field(default=None)
-    query_params: DisplayvideoGoogleAudiencesGetQueryParams = field(default=None)
-    security: DisplayvideoGoogleAudiencesGetSecurity = field(default=None)
+    path_params: DisplayvideoGoogleAudiencesGetPathParams = field()
+    query_params: DisplayvideoGoogleAudiencesGetQueryParams = field()
+    security: DisplayvideoGoogleAudiencesGetSecurity = field()
     
 
 @dataclass
 class DisplayvideoGoogleAudiencesGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_audience: Optional[shared.GoogleAudience] = field(default=None)
-    status_code: int = field(default=None)
     

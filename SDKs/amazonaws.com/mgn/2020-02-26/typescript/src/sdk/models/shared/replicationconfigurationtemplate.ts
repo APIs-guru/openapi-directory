@@ -1,52 +1,53 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReplicationConfigurationDataPlaneRoutingEnum } from "./replicationconfigurationdataplaneroutingenum";
 import { ReplicationConfigurationDefaultLargeStagingDiskTypeEnum } from "./replicationconfigurationdefaultlargestagingdisktypeenum";
 import { ReplicationConfigurationEbsEncryptionEnum } from "./replicationconfigurationebsencryptionenum";
 
 
+
 export class ReplicationConfigurationTemplate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=associateDefaultSecurityGroup" })
+  @SpeakeasyMetadata({ data: "json, name=associateDefaultSecurityGroup" })
   associateDefaultSecurityGroup?: boolean;
 
-  @Metadata({ data: "json, name=bandwidthThrottling" })
+  @SpeakeasyMetadata({ data: "json, name=bandwidthThrottling" })
   bandwidthThrottling?: number;
 
-  @Metadata({ data: "json, name=createPublicIP" })
+  @SpeakeasyMetadata({ data: "json, name=createPublicIP" })
   createPublicIp?: boolean;
 
-  @Metadata({ data: "json, name=dataPlaneRouting" })
+  @SpeakeasyMetadata({ data: "json, name=dataPlaneRouting" })
   dataPlaneRouting?: ReplicationConfigurationDataPlaneRoutingEnum;
 
-  @Metadata({ data: "json, name=defaultLargeStagingDiskType" })
+  @SpeakeasyMetadata({ data: "json, name=defaultLargeStagingDiskType" })
   defaultLargeStagingDiskType?: ReplicationConfigurationDefaultLargeStagingDiskTypeEnum;
 
-  @Metadata({ data: "json, name=ebsEncryption" })
+  @SpeakeasyMetadata({ data: "json, name=ebsEncryption" })
   ebsEncryption?: ReplicationConfigurationEbsEncryptionEnum;
 
-  @Metadata({ data: "json, name=ebsEncryptionKeyArn" })
+  @SpeakeasyMetadata({ data: "json, name=ebsEncryptionKeyArn" })
   ebsEncryptionKeyArn?: string;
 
-  @Metadata({ data: "json, name=replicationConfigurationTemplateID" })
+  @SpeakeasyMetadata({ data: "json, name=replicationConfigurationTemplateID" })
   replicationConfigurationTemplateId: string;
 
-  @Metadata({ data: "json, name=replicationServerInstanceType" })
+  @SpeakeasyMetadata({ data: "json, name=replicationServerInstanceType" })
   replicationServerInstanceType?: string;
 
-  @Metadata({ data: "json, name=replicationServersSecurityGroupsIDs" })
+  @SpeakeasyMetadata({ data: "json, name=replicationServersSecurityGroupsIDs" })
   replicationServersSecurityGroupsIDs?: string[];
 
-  @Metadata({ data: "json, name=stagingAreaSubnetId" })
+  @SpeakeasyMetadata({ data: "json, name=stagingAreaSubnetId" })
   stagingAreaSubnetId?: string;
 
-  @Metadata({ data: "json, name=stagingAreaTags" })
+  @SpeakeasyMetadata({ data: "json, name=stagingAreaTags" })
   stagingAreaTags?: Map<string, string>;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 
-  @Metadata({ data: "json, name=useDedicatedReplicationServer" })
+  @SpeakeasyMetadata({ data: "json, name=useDedicatedReplicationServer" })
   useDedicatedReplicationServer?: boolean;
 }

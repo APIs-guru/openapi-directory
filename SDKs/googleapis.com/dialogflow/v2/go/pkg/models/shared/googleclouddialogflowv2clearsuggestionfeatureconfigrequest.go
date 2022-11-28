@@ -18,6 +18,8 @@ const (
 	GoogleCloudDialogflowV2ClearSuggestionFeatureConfigRequestSuggestionFeatureTypeEnumSmartReply        GoogleCloudDialogflowV2ClearSuggestionFeatureConfigRequestSuggestionFeatureTypeEnum = "SMART_REPLY"
 )
 
+// GoogleCloudDialogflowV2ClearSuggestionFeatureConfigRequest
+// The request message for ConversationProfiles.ClearFeature.
 type GoogleCloudDialogflowV2ClearSuggestionFeatureConfigRequest struct {
 	ParticipantRole       *GoogleCloudDialogflowV2ClearSuggestionFeatureConfigRequestParticipantRoleEnum       `json:"participantRole,omitempty"`
 	SuggestionFeatureType *GoogleCloudDialogflowV2ClearSuggestionFeatureConfigRequestSuggestionFeatureTypeEnum `json:"suggestionFeatureType,omitempty"`

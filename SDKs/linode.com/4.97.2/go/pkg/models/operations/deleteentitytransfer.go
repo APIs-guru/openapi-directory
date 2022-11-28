@@ -8,26 +8,18 @@ type DeleteEntityTransferPathParams struct {
 	Token string `pathParam:"style=simple,explode=false,name=token"`
 }
 
-type DeleteEntityTransferSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type DeleteEntityTransferSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type DeleteEntityTransferSecurity struct {
-	Option1 *DeleteEntityTransferSecurityOption1 `security:"option"`
-	Option2 *DeleteEntityTransferSecurityOption2 `security:"option"`
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
+}
+
+type DeleteEntityTransferDefaultApplicationJSON struct {
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type DeleteEntityTransferRequest struct {
 	PathParams DeleteEntityTransferPathParams
 	Security   DeleteEntityTransferSecurity
-}
-
-type DeleteEntityTransferDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type DeleteEntityTransferResponse struct {

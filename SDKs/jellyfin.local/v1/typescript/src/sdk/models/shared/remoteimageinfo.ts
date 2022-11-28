@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RatingTypeEnum } from "./ratingtypeenum";
 import { ImageTypeEnum } from "./imagetypeenum";
+
 
 
 // RemoteImageInfo
@@ -8,33 +9,33 @@ import { ImageTypeEnum } from "./imagetypeenum";
  * Class RemoteImageInfo.
 **/
 export class RemoteImageInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CommunityRating" })
+  @SpeakeasyMetadata({ data: "json, name=CommunityRating" })
   communityRating?: number;
 
-  @Metadata({ data: "json, name=Height" })
+  @SpeakeasyMetadata({ data: "json, name=Height" })
   height?: number;
 
-  @Metadata({ data: "json, name=Language" })
+  @SpeakeasyMetadata({ data: "json, name=Language" })
   language?: string;
 
-  @Metadata({ data: "json, name=ProviderName" })
+  @SpeakeasyMetadata({ data: "json, name=ProviderName" })
   providerName?: string;
 
-  @Metadata({ data: "json, name=RatingType" })
+  @SpeakeasyMetadata({ data: "json, name=RatingType" })
   ratingType?: RatingTypeEnum;
 
-  @Metadata({ data: "json, name=ThumbnailUrl" })
+  @SpeakeasyMetadata({ data: "json, name=ThumbnailUrl" })
   thumbnailUrl?: string;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: ImageTypeEnum;
 
-  @Metadata({ data: "json, name=Url" })
+  @SpeakeasyMetadata({ data: "json, name=Url" })
   url?: string;
 
-  @Metadata({ data: "json, name=VoteCount" })
+  @SpeakeasyMetadata({ data: "json, name=VoteCount" })
   voteCount?: number;
 
-  @Metadata({ data: "json, name=Width" })
+  @SpeakeasyMetadata({ data: "json, name=Width" })
   width?: number;
 }

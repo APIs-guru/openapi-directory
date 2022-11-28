@@ -1,5 +1,7 @@
 package shared
 
+// DeepLink
+// Contains information about a landing page deep link.
 type DeepLink struct {
 	AppURL             *string    `json:"appUrl,omitempty"`
 	FallbackURL        *string    `json:"fallbackUrl,omitempty"`

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { NamespaceDeletionStatusErrorCodesEnum } from "./namespacedeletionstatuserrorcodesenum";
 import { NamespaceDeletionStatusEnum } from "./namespacedeletionstatusenum";
 export declare class GetNamespaceDeletionStatusResponse extends SpeakeasyBase {

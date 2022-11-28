@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Capabilities } from "./capabilities";
 
 
+
 export class DeviceInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=4k_blocked" })
+  @SpeakeasyMetadata({ data: "json, name=4k_blocked" })
   fourkBlocked: number;
 
-  @Metadata({ data: "json, name=capabilities" })
+  @SpeakeasyMetadata({ data: "json, name=capabilities" })
   capabilities: Capabilities;
 
-  @Metadata({ data: "json, name=cloud_device_id" })
+  @SpeakeasyMetadata({ data: "json, name=cloud_device_id" })
   cloudDeviceId: string;
 
-  @Metadata({ data: "json, name=factory_country_code" })
+  @SpeakeasyMetadata({ data: "json, name=factory_country_code" })
   factoryCountryCode: string;
 
-  @Metadata({ data: "json, name=hotspot_bssid" })
+  @SpeakeasyMetadata({ data: "json, name=hotspot_bssid" })
   hotspotBssid: string;
 
-  @Metadata({ data: "json, name=local_authorization_token_hash" })
+  @SpeakeasyMetadata({ data: "json, name=local_authorization_token_hash" })
   localAuthorizationTokenHash: string;
 
-  @Metadata({ data: "json, name=mac_address" })
+  @SpeakeasyMetadata({ data: "json, name=mac_address" })
   macAddress: string;
 
-  @Metadata({ data: "json, name=manufacturer" })
+  @SpeakeasyMetadata({ data: "json, name=manufacturer" })
   manufacturer: string;
 
-  @Metadata({ data: "json, name=model_name" })
+  @SpeakeasyMetadata({ data: "json, name=model_name" })
   modelName: string;
 
-  @Metadata({ data: "json, name=product_name" })
+  @SpeakeasyMetadata({ data: "json, name=product_name" })
   productName: string;
 
-  @Metadata({ data: "json, name=public_key" })
+  @SpeakeasyMetadata({ data: "json, name=public_key" })
   publicKey: string;
 
-  @Metadata({ data: "json, name=ssdp_udn" })
+  @SpeakeasyMetadata({ data: "json, name=ssdp_udn" })
   ssdpUdn: string;
 
-  @Metadata({ data: "json, name=uma_client_id" })
+  @SpeakeasyMetadata({ data: "json, name=uma_client_id" })
   umaClientId: string;
 
-  @Metadata({ data: "json, name=uptime" })
+  @SpeakeasyMetadata({ data: "json, name=uptime" })
   uptime: number;
 
-  @Metadata({ data: "json, name=weave_device_id" })
+  @SpeakeasyMetadata({ data: "json, name=weave_device_id" })
   weaveDeviceId: string;
 }

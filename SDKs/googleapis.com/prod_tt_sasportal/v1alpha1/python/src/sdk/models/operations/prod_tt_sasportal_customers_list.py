@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -22,19 +23,19 @@ class ProdTtSasportalCustomersListQueryParams:
 
 @dataclass
 class ProdTtSasportalCustomersListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ProdTtSasportalCustomersListRequest:
-    query_params: ProdTtSasportalCustomersListQueryParams = field(default=None)
-    security: ProdTtSasportalCustomersListSecurity = field(default=None)
+    query_params: ProdTtSasportalCustomersListQueryParams = field()
+    security: ProdTtSasportalCustomersListSecurity = field()
     
 
 @dataclass
 class ProdTtSasportalCustomersListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     sas_portal_list_customers_response: Optional[shared.SasPortalListCustomersResponse] = field(default=None)
-    status_code: int = field(default=None)
     

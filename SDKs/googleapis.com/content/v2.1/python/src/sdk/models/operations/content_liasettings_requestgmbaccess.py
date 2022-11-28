@@ -1,22 +1,23 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ContentLiasettingsRequestgmbaccessPathParams:
-    account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
-    merchant_id: str = field(default=None, metadata={'path_param': { 'field_name': 'merchantId', 'style': 'simple', 'explode': False }})
+    account_id: str = field(metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
+    merchant_id: str = field(metadata={'path_param': { 'field_name': 'merchantId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ContentLiasettingsRequestgmbaccessQueryParams:
+    gmb_email: str = field(metadata={'query_param': { 'field_name': 'gmbEmail', 'style': 'form', 'explode': True }})
     dollar_xgafv: Optional[shared.XgafvEnum] = field(default=None, metadata={'query_param': { 'field_name': '$.xgafv', 'style': 'form', 'explode': True }})
     access_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'access_token', 'style': 'form', 'explode': True }})
     alt: Optional[shared.AltEnum] = field(default=None, metadata={'query_param': { 'field_name': 'alt', 'style': 'form', 'explode': True }})
     callback: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'callback', 'style': 'form', 'explode': True }})
     fields: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'fields', 'style': 'form', 'explode': True }})
-    gmb_email: str = field(default=None, metadata={'query_param': { 'field_name': 'gmbEmail', 'style': 'form', 'explode': True }})
     key: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'key', 'style': 'form', 'explode': True }})
     oauth_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'oauth_token', 'style': 'form', 'explode': True }})
     pretty_print: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'prettyPrint', 'style': 'form', 'explode': True }})
@@ -27,20 +28,20 @@ class ContentLiasettingsRequestgmbaccessQueryParams:
 
 @dataclass
 class ContentLiasettingsRequestgmbaccessSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ContentLiasettingsRequestgmbaccessRequest:
-    path_params: ContentLiasettingsRequestgmbaccessPathParams = field(default=None)
-    query_params: ContentLiasettingsRequestgmbaccessQueryParams = field(default=None)
-    security: ContentLiasettingsRequestgmbaccessSecurity = field(default=None)
+    path_params: ContentLiasettingsRequestgmbaccessPathParams = field()
+    query_params: ContentLiasettingsRequestgmbaccessQueryParams = field()
+    security: ContentLiasettingsRequestgmbaccessSecurity = field()
     
 
 @dataclass
 class ContentLiasettingsRequestgmbaccessResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     liasettings_request_gmb_access_response: Optional[shared.LiasettingsRequestGmbAccessResponse] = field(default=None)
-    status_code: int = field(default=None)
     

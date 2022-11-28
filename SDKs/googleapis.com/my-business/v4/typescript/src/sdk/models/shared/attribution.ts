@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Attribution
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Attribution information for customer media items, such as the contributor's name and profile picture.
 **/
 export class Attribution extends SpeakeasyBase {
-  @Metadata({ data: "json, name=profileName" })
+  @SpeakeasyMetadata({ data: "json, name=profileName" })
   profileName?: string;
 
-  @Metadata({ data: "json, name=profilePhotoUrl" })
+  @SpeakeasyMetadata({ data: "json, name=profilePhotoUrl" })
   profilePhotoUrl?: string;
 
-  @Metadata({ data: "json, name=profileUrl" })
+  @SpeakeasyMetadata({ data: "json, name=profileUrl" })
   profileUrl?: string;
 
-  @Metadata({ data: "json, name=takedownUrl" })
+  @SpeakeasyMetadata({ data: "json, name=takedownUrl" })
   takedownUrl?: string;
 }

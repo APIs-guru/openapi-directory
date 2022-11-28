@@ -1,78 +1,79 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ClientDetailsApiModel } from "./clientdetailsapimodel";
 import { CurrencyDetailsApiModel } from "./currencydetailsapimodel";
 import { InvoiceRecurringApiModel } from "./invoicerecurringapimodel";
 
+
 export enum InvoiceDetailsApiModelStatusEnum {
-    Draft = "Draft"
-,    Paid = "Paid"
-,    Unpaid = "Unpaid"
-,    Overdue = "Overdue"
-,    Void = "Void"
+    Draft = "Draft",
+    Paid = "Paid",
+    Unpaid = "Unpaid",
+    Overdue = "Overdue",
+    Void = "Void"
 }
 
 
 export class InvoiceDetailsApiModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccessToken" })
+  @SpeakeasyMetadata({ data: "json, name=AccessToken" })
   accessToken?: string;
 
-  @Metadata({ data: "json, name=Client" })
+  @SpeakeasyMetadata({ data: "json, name=Client" })
   client?: ClientDetailsApiModel;
 
-  @Metadata({ data: "json, name=ClonedFromId" })
+  @SpeakeasyMetadata({ data: "json, name=ClonedFromId" })
   clonedFromId?: number;
 
-  @Metadata({ data: "json, name=Currency" })
+  @SpeakeasyMetadata({ data: "json, name=Currency" })
   currency?: CurrencyDetailsApiModel;
 
-  @Metadata({ data: "json, name=DiscountAmount" })
+  @SpeakeasyMetadata({ data: "json, name=DiscountAmount" })
   discountAmount?: number;
 
-  @Metadata({ data: "json, name=Duedate" })
+  @SpeakeasyMetadata({ data: "json, name=Duedate" })
   duedate?: Date;
 
-  @Metadata({ data: "json, name=EnablePartialPayments" })
+  @SpeakeasyMetadata({ data: "json, name=EnablePartialPayments" })
   enablePartialPayments?: boolean;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: number;
 
-  @Metadata({ data: "json, name=InvoiceCategoryId" })
+  @SpeakeasyMetadata({ data: "json, name=InvoiceCategoryId" })
   invoiceCategoryId?: number;
 
-  @Metadata({ data: "json, name=IssuedOn" })
+  @SpeakeasyMetadata({ data: "json, name=IssuedOn" })
   issuedOn?: Date;
 
-  @Metadata({ data: "json, name=Notes" })
+  @SpeakeasyMetadata({ data: "json, name=Notes" })
   notes?: string;
 
-  @Metadata({ data: "json, name=Number" })
+  @SpeakeasyMetadata({ data: "json, name=Number" })
   number?: string;
 
-  @Metadata({ data: "json, name=PoNumber" })
+  @SpeakeasyMetadata({ data: "json, name=PoNumber" })
   poNumber?: string;
 
-  @Metadata({ data: "json, name=RecurringProfile" })
+  @SpeakeasyMetadata({ data: "json, name=RecurringProfile" })
   recurringProfile?: InvoiceRecurringApiModel;
 
-  @Metadata({ data: "json, name=RecurringProfileId" })
+  @SpeakeasyMetadata({ data: "json, name=RecurringProfileId" })
   recurringProfileId?: number;
 
-  @Metadata({ data: "json, name=ShouldSendReminders" })
+  @SpeakeasyMetadata({ data: "json, name=ShouldSendReminders" })
   shouldSendReminders?: boolean;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: InvoiceDetailsApiModelStatusEnum;
 
-  @Metadata({ data: "json, name=SubTotalAmount" })
+  @SpeakeasyMetadata({ data: "json, name=SubTotalAmount" })
   subTotalAmount?: number;
 
-  @Metadata({ data: "json, name=TaxAmount" })
+  @SpeakeasyMetadata({ data: "json, name=TaxAmount" })
   taxAmount?: number;
 
-  @Metadata({ data: "json, name=Terms" })
+  @SpeakeasyMetadata({ data: "json, name=Terms" })
   terms?: string;
 
-  @Metadata({ data: "json, name=TotalAmount" })
+  @SpeakeasyMetadata({ data: "json, name=TotalAmount" })
   totalAmount?: number;
 }

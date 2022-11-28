@@ -31,7 +31,7 @@ type CertificatemanagerProjectsLocationsCertificateMapsCreateSecurity struct {
 type CertificatemanagerProjectsLocationsCertificateMapsCreateRequest struct {
 	PathParams  CertificatemanagerProjectsLocationsCertificateMapsCreatePathParams
 	QueryParams CertificatemanagerProjectsLocationsCertificateMapsCreateQueryParams
-	Request     *shared.CertificateMap `request:"mediaType=application/json"`
+	Request     *shared.CertificateMapInput `request:"mediaType=application/json"`
 	Security    CertificatemanagerProjectsLocationsCertificateMapsCreateSecurity
 }
 

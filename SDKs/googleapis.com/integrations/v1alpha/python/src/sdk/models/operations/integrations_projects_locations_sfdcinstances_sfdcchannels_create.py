@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class IntegrationsProjectsLocationsSfdcInstancesSfdcChannelsCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class IntegrationsProjectsLocationsSfdcInstancesSfdcChannelsCreateQueryParams:
 
 @dataclass
 class IntegrationsProjectsLocationsSfdcInstancesSfdcChannelsCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class IntegrationsProjectsLocationsSfdcInstancesSfdcChannelsCreateRequest:
-    path_params: IntegrationsProjectsLocationsSfdcInstancesSfdcChannelsCreatePathParams = field(default=None)
-    query_params: IntegrationsProjectsLocationsSfdcInstancesSfdcChannelsCreateQueryParams = field(default=None)
-    request: Optional[shared.GoogleCloudIntegrationsV1alphaSfdcChannel] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: IntegrationsProjectsLocationsSfdcInstancesSfdcChannelsCreateSecurity = field(default=None)
+    path_params: IntegrationsProjectsLocationsSfdcInstancesSfdcChannelsCreatePathParams = field()
+    query_params: IntegrationsProjectsLocationsSfdcInstancesSfdcChannelsCreateQueryParams = field()
+    security: IntegrationsProjectsLocationsSfdcInstancesSfdcChannelsCreateSecurity = field()
+    request: Optional[shared.GoogleCloudIntegrationsV1alphaSfdcChannelInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class IntegrationsProjectsLocationsSfdcInstancesSfdcChannelsCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_integrations_v1alpha_sfdc_channel: Optional[shared.GoogleCloudIntegrationsV1alphaSfdcChannel] = field(default=None)
-    status_code: int = field(default=None)
     

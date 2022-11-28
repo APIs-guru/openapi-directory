@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import xssmatchsetsummary
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListXSSMatchSetsResponse:
-    next_marker: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextMarker' }})
-    xss_match_sets: Optional[List[xssmatchsetsummary.XSSMatchSetSummary]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'XssMatchSets' }})
+    r"""ListXSSMatchSetsResponse
+    The response to a <a>ListXssMatchSets</a> request.
+    """
+    
+    next_marker: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextMarker') }})
+    xss_match_sets: Optional[List[XSSMatchSetSummary]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('XssMatchSets') }})
     

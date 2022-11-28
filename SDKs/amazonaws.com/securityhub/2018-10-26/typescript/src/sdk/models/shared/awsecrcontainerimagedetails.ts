@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsEcrContainerImageDetails
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about an Amazon ECR image.
 **/
 export class AwsEcrContainerImageDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Architecture" })
+  @SpeakeasyMetadata({ data: "json, name=Architecture" })
   architecture?: string;
 
-  @Metadata({ data: "json, name=ImageDigest" })
+  @SpeakeasyMetadata({ data: "json, name=ImageDigest" })
   imageDigest?: string;
 
-  @Metadata({ data: "json, name=ImagePublishedAt" })
+  @SpeakeasyMetadata({ data: "json, name=ImagePublishedAt" })
   imagePublishedAt?: string;
 
-  @Metadata({ data: "json, name=ImageTags" })
+  @SpeakeasyMetadata({ data: "json, name=ImageTags" })
   imageTags?: string[];
 
-  @Metadata({ data: "json, name=RegistryId" })
+  @SpeakeasyMetadata({ data: "json, name=RegistryId" })
   registryId?: string;
 
-  @Metadata({ data: "json, name=RepositoryName" })
+  @SpeakeasyMetadata({ data: "json, name=RepositoryName" })
   repositoryName?: string;
 }

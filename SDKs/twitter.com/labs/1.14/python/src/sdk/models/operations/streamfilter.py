@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -10,14 +11,14 @@ class StreamFilterQueryParams:
 
 @dataclass
 class StreamFilterRequest:
-    query_params: StreamFilterQueryParams = field(default=None)
+    query_params: StreamFilterQueryParams = field()
     
 
 @dataclass
 class StreamFilterResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[Any] = field(default=None)
     problem: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     stream_filter_200_application_json_object: Optional[dict[str, Any]] = field(default=None)
     

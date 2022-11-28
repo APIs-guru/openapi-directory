@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var IndexStatusInspectionResultCrawledAsEnum;
 (function (IndexStatusInspectionResultCrawledAsEnum) {
     IndexStatusInspectionResultCrawledAsEnum["CrawlingUserAgentUnspecified"] = "CRAWLING_USER_AGENT_UNSPECIFIED";
@@ -76,47 +76,47 @@ var IndexStatusInspectionResult = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=coverageState" }),
+        SpeakeasyMetadata({ data: "json, name=coverageState" }),
         __metadata("design:type", String)
     ], IndexStatusInspectionResult.prototype, "coverageState", void 0);
     __decorate([
-        Metadata({ data: "json, name=crawledAs" }),
+        SpeakeasyMetadata({ data: "json, name=crawledAs" }),
         __metadata("design:type", String)
     ], IndexStatusInspectionResult.prototype, "crawledAs", void 0);
     __decorate([
-        Metadata({ data: "json, name=googleCanonical" }),
+        SpeakeasyMetadata({ data: "json, name=googleCanonical" }),
         __metadata("design:type", String)
     ], IndexStatusInspectionResult.prototype, "googleCanonical", void 0);
     __decorate([
-        Metadata({ data: "json, name=indexingState" }),
+        SpeakeasyMetadata({ data: "json, name=indexingState" }),
         __metadata("design:type", String)
     ], IndexStatusInspectionResult.prototype, "indexingState", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastCrawlTime" }),
+        SpeakeasyMetadata({ data: "json, name=lastCrawlTime" }),
         __metadata("design:type", String)
     ], IndexStatusInspectionResult.prototype, "lastCrawlTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=pageFetchState" }),
+        SpeakeasyMetadata({ data: "json, name=pageFetchState" }),
         __metadata("design:type", String)
     ], IndexStatusInspectionResult.prototype, "pageFetchState", void 0);
     __decorate([
-        Metadata({ data: "json, name=referringUrls" }),
+        SpeakeasyMetadata({ data: "json, name=referringUrls" }),
         __metadata("design:type", Array)
     ], IndexStatusInspectionResult.prototype, "referringUrls", void 0);
     __decorate([
-        Metadata({ data: "json, name=robotsTxtState" }),
+        SpeakeasyMetadata({ data: "json, name=robotsTxtState" }),
         __metadata("design:type", String)
     ], IndexStatusInspectionResult.prototype, "robotsTxtState", void 0);
     __decorate([
-        Metadata({ data: "json, name=sitemap" }),
+        SpeakeasyMetadata({ data: "json, name=sitemap" }),
         __metadata("design:type", Array)
     ], IndexStatusInspectionResult.prototype, "sitemap", void 0);
     __decorate([
-        Metadata({ data: "json, name=userCanonical" }),
+        SpeakeasyMetadata({ data: "json, name=userCanonical" }),
         __metadata("design:type", String)
     ], IndexStatusInspectionResult.prototype, "userCanonical", void 0);
     __decorate([
-        Metadata({ data: "json, name=verdict" }),
+        SpeakeasyMetadata({ data: "json, name=verdict" }),
         __metadata("design:type", String)
     ], IndexStatusInspectionResult.prototype, "verdict", void 0);
     return IndexStatusInspectionResult;

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NotificationTargetItem } from "./notificationtargetitem";
+
 
 
 // IncidentTemplate
@@ -8,18 +8,18 @@ import { NotificationTargetItem } from "./notificationtargetitem";
  * Basic details used in creating a response plan. The response plan is then used to create an incident record.
 **/
 export class IncidentTemplate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dedupeString" })
+  @SpeakeasyMetadata({ data: "json, name=dedupeString" })
   dedupeString?: string;
 
-  @Metadata({ data: "json, name=impact" })
+  @SpeakeasyMetadata({ data: "json, name=impact" })
   impact: number;
 
-  @Metadata({ data: "json, name=notificationTargets", elemType: shared.NotificationTargetItem })
+  @SpeakeasyMetadata({ data: "json, name=notificationTargets", elemType: NotificationTargetItem })
   notificationTargets?: NotificationTargetItem[];
 
-  @Metadata({ data: "json, name=summary" })
+  @SpeakeasyMetadata({ data: "json, name=summary" })
   summary?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title: string;
 }

@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDocumentaiV1beta2Barcode } from "./googleclouddocumentaiv1beta2barcode";
 import { GoogleCloudDocumentaiV1beta2DocumentPageLayout } from "./googleclouddocumentaiv1beta2documentpagelayout";
+
 
 
 // GoogleCloudDocumentaiV1beta2DocumentPageDetectedBarcode
@@ -8,9 +9,9 @@ import { GoogleCloudDocumentaiV1beta2DocumentPageLayout } from "./googleclouddoc
  * A detected barcode.
 **/
 export class GoogleCloudDocumentaiV1beta2DocumentPageDetectedBarcode extends SpeakeasyBase {
-  @Metadata({ data: "json, name=barcode" })
+  @SpeakeasyMetadata({ data: "json, name=barcode" })
   barcode?: GoogleCloudDocumentaiV1beta2Barcode;
 
-  @Metadata({ data: "json, name=layout" })
+  @SpeakeasyMetadata({ data: "json, name=layout" })
   layout?: GoogleCloudDocumentaiV1beta2DocumentPageLayout;
 }

@@ -1,10 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import digest
-from . import distribution
-from . import license
-from . import version
+from sdk import utils
+from . import *
 
 class PackageArchitectureEnum(str, Enum):
     ARCHITECTURE_UNSPECIFIED = "ARCHITECTURE_UNSPECIFIED"
@@ -15,15 +14,19 @@ class PackageArchitectureEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Package:
-    architecture: Optional[PackageArchitectureEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'architecture' }})
-    cpe_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cpeUri' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    digest: Optional[List[digest.Digest]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'digest' }})
-    distribution: Optional[List[distribution.Distribution]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'distribution' }})
-    license: Optional[license.License] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'license' }})
-    maintainer: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maintainer' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    package_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'packageType' }})
-    url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
-    version: Optional[version.Version] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'version' }})
+    r"""Package
+    This represents a particular package that is distributed over various channels. e.g. glibc (aka libc6) is distributed by many, at various versions.
+    """
+    
+    architecture: Optional[PackageArchitectureEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('architecture') }})
+    cpe_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cpeUri') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    digest: Optional[List[Digest]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('digest') }})
+    distribution: Optional[List[Distribution]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('distribution') }})
+    license: Optional[License] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('license') }})
+    maintainer: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maintainer') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    package_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('packageType') }})
+    url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('url') }})
+    version: Optional[Version] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('version') }})
     

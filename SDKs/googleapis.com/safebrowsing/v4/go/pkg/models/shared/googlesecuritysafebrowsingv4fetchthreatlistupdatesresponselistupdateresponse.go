@@ -58,6 +58,8 @@ const (
 	GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponseThreatTypeEnumSocialEngineeringLowerPrecision GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponseThreatTypeEnum = "SOCIAL_ENGINEERING_LOWER_PRECISION"
 )
 
+// GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse
+// An update to an individual list.
 type GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponseListUpdateResponse struct {
 	Additions       []GoogleSecuritySafebrowsingV4ThreatEntrySet                                                     `json:"additions,omitempty"`
 	Checksum        *GoogleSecuritySafebrowsingV4Checksum                                                            `json:"checksum,omitempty"`

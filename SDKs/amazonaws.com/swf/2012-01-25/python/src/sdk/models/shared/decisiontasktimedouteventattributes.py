@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import decisiontasktimeouttype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DecisionTaskTimedOutEventAttributes:
-    scheduled_event_id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'scheduledEventId' }})
-    started_event_id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'startedEventId' }})
-    timeout_type: decisiontasktimeouttype_enum.DecisionTaskTimeoutTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timeoutType' }})
+    r"""DecisionTaskTimedOutEventAttributes
+    Provides the details of the <code>DecisionTaskTimedOut</code> event.
+    """
+    
+    scheduled_event_id: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('scheduledEventId') }})
+    started_event_id: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('startedEventId') }})
+    timeout_type: DecisionTaskTimeoutTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('timeoutType') }})
     

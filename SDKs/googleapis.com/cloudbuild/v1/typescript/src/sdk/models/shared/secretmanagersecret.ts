@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SecretManagerSecret
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Pairs a secret environment variable with a SecretVersion in Secret Manager.
 **/
 export class SecretManagerSecret extends SpeakeasyBase {
-  @Metadata({ data: "json, name=env" })
+  @SpeakeasyMetadata({ data: "json, name=env" })
   env?: string;
 
-  @Metadata({ data: "json, name=versionName" })
+  @SpeakeasyMetadata({ data: "json, name=versionName" })
   versionName?: string;
 }

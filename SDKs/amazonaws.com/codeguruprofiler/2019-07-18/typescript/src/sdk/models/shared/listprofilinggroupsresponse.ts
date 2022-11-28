@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProfilingGroupDescription } from "./profilinggroupdescription";
+
 
 
 // ListProfilingGroupsResponse
@@ -8,12 +8,12 @@ import { ProfilingGroupDescription } from "./profilinggroupdescription";
  * The structure representing the listProfilingGroupsResponse.
 **/
 export class ListProfilingGroupsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=profilingGroupNames" })
+  @SpeakeasyMetadata({ data: "json, name=profilingGroupNames" })
   profilingGroupNames: string[];
 
-  @Metadata({ data: "json, name=profilingGroups", elemType: shared.ProfilingGroupDescription })
+  @SpeakeasyMetadata({ data: "json, name=profilingGroups", elemType: ProfilingGroupDescription })
   profilingGroups?: ProfilingGroupDescription[];
 }

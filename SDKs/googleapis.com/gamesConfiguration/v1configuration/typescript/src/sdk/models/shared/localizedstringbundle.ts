@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LocalizedString } from "./localizedstring";
+
 
 
 // LocalizedStringBundle
@@ -8,9 +8,9 @@ import { LocalizedString } from "./localizedstring";
  * A localized string bundle resource.
 **/
 export class LocalizedStringBundle extends SpeakeasyBase {
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=translations", elemType: shared.LocalizedString })
+  @SpeakeasyMetadata({ data: "json, name=translations", elemType: LocalizedString })
   translations?: LocalizedString[];
 }

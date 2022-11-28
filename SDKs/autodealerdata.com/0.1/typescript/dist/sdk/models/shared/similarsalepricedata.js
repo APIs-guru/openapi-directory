@@ -22,50 +22,50 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var SimilarSalePriceData = /** @class */ (function (_super) {
     __extends(SimilarSalePriceData, _super);
     function SimilarSalePriceData() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=daysBack" }),
+        SpeakeasyMetadata({ data: "json, name=daysBack" }),
         __metadata("design:type", Number)
     ], SimilarSalePriceData.prototype, "daysBack", void 0);
     __decorate([
-        Metadata({ data: "json, name=mileCount" }),
+        SpeakeasyMetadata({ data: "json, name=mileCount" }),
         __metadata("design:type", Number)
     ], SimilarSalePriceData.prototype, "mileCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=milesAvg" }),
+        SpeakeasyMetadata({ data: "json, name=milesAvg" }),
         __metadata("design:type", Number)
     ], SimilarSalePriceData.prototype, "milesAvg", void 0);
     __decorate([
-        Metadata({ data: "json, name=milesStdDev" }),
+        SpeakeasyMetadata({ data: "json, name=milesStdDev" }),
         __metadata("design:type", Number)
     ], SimilarSalePriceData.prototype, "milesStdDev", void 0);
     __decorate([
-        Metadata({ data: "json, name=newCount" }),
+        SpeakeasyMetadata({ data: "json, name=newCount" }),
         __metadata("design:type", Number)
     ], SimilarSalePriceData.prototype, "newCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=newSaleAvg" }),
+        SpeakeasyMetadata({ data: "json, name=newSaleAvg" }),
         __metadata("design:type", Number)
     ], SimilarSalePriceData.prototype, "newSaleAvg", void 0);
     __decorate([
-        Metadata({ data: "json, name=newSaleStdDev" }),
+        SpeakeasyMetadata({ data: "json, name=newSaleStdDev" }),
         __metadata("design:type", Number)
     ], SimilarSalePriceData.prototype, "newSaleStdDev", void 0);
     __decorate([
-        Metadata({ data: "json, name=usedCount" }),
+        SpeakeasyMetadata({ data: "json, name=usedCount" }),
         __metadata("design:type", Number)
     ], SimilarSalePriceData.prototype, "usedCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=usedSaleAvg" }),
+        SpeakeasyMetadata({ data: "json, name=usedSaleAvg" }),
         __metadata("design:type", Number)
     ], SimilarSalePriceData.prototype, "usedSaleAvg", void 0);
     __decorate([
-        Metadata({ data: "json, name=usedSaleStdDev" }),
+        SpeakeasyMetadata({ data: "json, name=usedSaleStdDev" }),
         __metadata("design:type", Number)
     ], SimilarSalePriceData.prototype, "usedSaleStdDev", void 0);
     return SimilarSalePriceData;

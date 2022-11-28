@@ -151,6 +151,8 @@ const (
 	EventEntityTypeEnumVolume         EventEntityTypeEnum = "volume"
 )
 
+// EventEntity
+// Detailed information about the Event's entity, including ID, type, label, and URL used to access it.
 type EventEntity struct {
 	ID    *int64               `json:"id,omitempty"`
 	Label *string              `json:"label,omitempty"`
@@ -158,6 +160,9 @@ type EventEntity struct {
 	URL   *string              `json:"url,omitempty"`
 }
 
+// EventSecondaryEntity
+// Detailed information about the Event's secondary entity, which provides additional information
+// for events such as, but not limited to, `linode_boot`, `linode_reboot`, `linode_create`, and `linode_clone` Event actions.
 type EventSecondaryEntity struct {
 	ID    *string `json:"id,omitempty"`
 	Label *string `json:"label,omitempty"`
@@ -175,6 +180,9 @@ const (
 	EventStatusEnumStarted      EventStatusEnum = "started"
 )
 
+// Event
+// A collection of Event objects. An Event is an action taken against an entity related to your Account. For example, booting a Linode would create an Event.
+// The Events returned depends on your grants.
 type Event struct {
 	Action          *EventActionEnum      `json:"action,omitempty"`
 	Created         *time.Time            `json:"created,omitempty"`

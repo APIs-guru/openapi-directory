@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // CloudWatchLoggingOptionUpdate
 /**
  * Describes CloudWatch logging option updates.
@@ -33,15 +33,15 @@ var CloudWatchLoggingOptionUpdate = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CloudWatchLoggingOptionId" }),
+        SpeakeasyMetadata({ data: "json, name=CloudWatchLoggingOptionId" }),
         __metadata("design:type", String)
     ], CloudWatchLoggingOptionUpdate.prototype, "cloudWatchLoggingOptionId", void 0);
     __decorate([
-        Metadata({ data: "json, name=LogStreamARNUpdate" }),
+        SpeakeasyMetadata({ data: "json, name=LogStreamARNUpdate" }),
         __metadata("design:type", String)
     ], CloudWatchLoggingOptionUpdate.prototype, "logStreamArnUpdate", void 0);
     __decorate([
-        Metadata({ data: "json, name=RoleARNUpdate" }),
+        SpeakeasyMetadata({ data: "json, name=RoleARNUpdate" }),
         __metadata("design:type", String)
     ], CloudWatchLoggingOptionUpdate.prototype, "roleArnUpdate", void 0);
     return CloudWatchLoggingOptionUpdate;

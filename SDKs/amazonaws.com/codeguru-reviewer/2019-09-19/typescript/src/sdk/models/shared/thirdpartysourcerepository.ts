@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ThirdPartySourceRepository
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  Information about a third-party source repository connected to CodeGuru Reviewer. 
 **/
 export class ThirdPartySourceRepository extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConnectionArn" })
+  @SpeakeasyMetadata({ data: "json, name=ConnectionArn" })
   connectionArn: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 
-  @Metadata({ data: "json, name=Owner" })
+  @SpeakeasyMetadata({ data: "json, name=Owner" })
   owner: string;
 }

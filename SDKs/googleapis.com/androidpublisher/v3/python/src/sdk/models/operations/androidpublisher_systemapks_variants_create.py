@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AndroidpublisherSystemapksVariantsCreatePathParams:
-    package_name: str = field(default=None, metadata={'path_param': { 'field_name': 'packageName', 'style': 'simple', 'explode': False }})
-    version_code: str = field(default=None, metadata={'path_param': { 'field_name': 'versionCode', 'style': 'simple', 'explode': False }})
+    package_name: str = field(metadata={'path_param': { 'field_name': 'packageName', 'style': 'simple', 'explode': False }})
+    version_code: str = field(metadata={'path_param': { 'field_name': 'versionCode', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +27,21 @@ class AndroidpublisherSystemapksVariantsCreateQueryParams:
 
 @dataclass
 class AndroidpublisherSystemapksVariantsCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AndroidpublisherSystemapksVariantsCreateRequest:
-    path_params: AndroidpublisherSystemapksVariantsCreatePathParams = field(default=None)
-    query_params: AndroidpublisherSystemapksVariantsCreateQueryParams = field(default=None)
-    request: Optional[shared.Variant] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AndroidpublisherSystemapksVariantsCreateSecurity = field(default=None)
+    path_params: AndroidpublisherSystemapksVariantsCreatePathParams = field()
+    query_params: AndroidpublisherSystemapksVariantsCreateQueryParams = field()
+    security: AndroidpublisherSystemapksVariantsCreateSecurity = field()
+    request: Optional[shared.VariantInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class AndroidpublisherSystemapksVariantsCreateResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     variant: Optional[shared.Variant] = field(default=None)
     

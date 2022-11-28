@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EndpointPhoneFrom } from "./endpointphonefrom";
 export var CreateCallRequestAnswerUrlAnswerMethodEnum;
 (function (CreateCallRequestAnswerUrlAnswerMethodEnum) {
@@ -45,43 +45,43 @@ var CreateCallRequestAnswerUrl = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=answer_method" }),
+        SpeakeasyMetadata({ data: "json, name=answer_method" }),
         __metadata("design:type", String)
     ], CreateCallRequestAnswerUrl.prototype, "answerMethod", void 0);
     __decorate([
-        Metadata({ data: "json, name=answer_url" }),
+        SpeakeasyMetadata({ data: "json, name=answer_url" }),
         __metadata("design:type", Array)
     ], CreateCallRequestAnswerUrl.prototype, "answerUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=event_method" }),
+        SpeakeasyMetadata({ data: "json, name=event_method" }),
         __metadata("design:type", String)
     ], CreateCallRequestAnswerUrl.prototype, "eventMethod", void 0);
     __decorate([
-        Metadata({ data: "json, name=event_url" }),
+        SpeakeasyMetadata({ data: "json, name=event_url" }),
         __metadata("design:type", Array)
     ], CreateCallRequestAnswerUrl.prototype, "eventUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=from" }),
+        SpeakeasyMetadata({ data: "json, name=from" }),
         __metadata("design:type", EndpointPhoneFrom)
     ], CreateCallRequestAnswerUrl.prototype, "from", void 0);
     __decorate([
-        Metadata({ data: "json, name=length_timer" }),
+        SpeakeasyMetadata({ data: "json, name=length_timer" }),
         __metadata("design:type", Number)
     ], CreateCallRequestAnswerUrl.prototype, "lengthTimer", void 0);
     __decorate([
-        Metadata({ data: "json, name=machine_detection" }),
+        SpeakeasyMetadata({ data: "json, name=machine_detection" }),
         __metadata("design:type", String)
     ], CreateCallRequestAnswerUrl.prototype, "machineDetection", void 0);
     __decorate([
-        Metadata({ data: "json, name=random_from_number" }),
+        SpeakeasyMetadata({ data: "json, name=random_from_number" }),
         __metadata("design:type", Boolean)
     ], CreateCallRequestAnswerUrl.prototype, "randomFromNumber", void 0);
     __decorate([
-        Metadata({ data: "json, name=ringing_timer" }),
+        SpeakeasyMetadata({ data: "json, name=ringing_timer" }),
         __metadata("design:type", Number)
     ], CreateCallRequestAnswerUrl.prototype, "ringingTimer", void 0);
     __decorate([
-        Metadata({ data: "json, name=to" }),
+        SpeakeasyMetadata({ data: "json, name=to" }),
         __metadata("design:type", Array)
     ], CreateCallRequestAnswerUrl.prototype, "to", void 0);
     return CreateCallRequestAnswerUrl;

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CardResponse } from "./cardresponse";
+
 
 
 // CardListResponse
@@ -8,6 +8,6 @@ import { CardResponse } from "./cardresponse";
  * List of card definitions
 **/
 export class CardListResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=results", elemType: shared.CardResponse })
+  @SpeakeasyMetadata({ data: "json, name=results", elemType: CardResponse })
   results: CardResponse[];
 }

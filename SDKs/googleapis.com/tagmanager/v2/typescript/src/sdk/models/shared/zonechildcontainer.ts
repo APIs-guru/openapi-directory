@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ZoneChildContainer
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents a child container of a Zone.
 **/
 export class ZoneChildContainer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nickname" })
+  @SpeakeasyMetadata({ data: "json, name=nickname" })
   nickname?: string;
 
-  @Metadata({ data: "json, name=publicId" })
+  @SpeakeasyMetadata({ data: "json, name=publicId" })
   publicId?: string;
 }

@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataSourceTypeEnum } from "./datasourcetypeenum";
 
 
+
 export class DataSourceEntityId extends SpeakeasyBase {
-  @Metadata({ data: "json, name=entity_id" })
+  @SpeakeasyMetadata({ data: "json, name=entity_id" })
   entityId?: string;
 
-  @Metadata({ data: "json, name=entity_type" })
+  @SpeakeasyMetadata({ data: "json, name=entity_type" })
   entityType?: DataSourceTypeEnum;
 }

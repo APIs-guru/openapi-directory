@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var MetastoreProjectsLocationsServicesBackupsDeletePathParams = /** @class */ (function (_super) {
     __extends(MetastoreProjectsLocationsServicesBackupsDeletePathParams, _super);
@@ -30,7 +30,7 @@ var MetastoreProjectsLocationsServicesBackupsDeletePathParams = /** @class */ (f
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=name" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=name" }),
         __metadata("design:type", String)
     ], MetastoreProjectsLocationsServicesBackupsDeletePathParams.prototype, "name", void 0);
     return MetastoreProjectsLocationsServicesBackupsDeletePathParams;
@@ -42,51 +42,51 @@ var MetastoreProjectsLocationsServicesBackupsDeleteQueryParams = /** @class */ (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], MetastoreProjectsLocationsServicesBackupsDeleteQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], MetastoreProjectsLocationsServicesBackupsDeleteQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], MetastoreProjectsLocationsServicesBackupsDeleteQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], MetastoreProjectsLocationsServicesBackupsDeleteQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], MetastoreProjectsLocationsServicesBackupsDeleteQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], MetastoreProjectsLocationsServicesBackupsDeleteQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], MetastoreProjectsLocationsServicesBackupsDeleteQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], MetastoreProjectsLocationsServicesBackupsDeleteQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], MetastoreProjectsLocationsServicesBackupsDeleteQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=requestId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=requestId" }),
         __metadata("design:type", String)
     ], MetastoreProjectsLocationsServicesBackupsDeleteQueryParams.prototype, "requestId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], MetastoreProjectsLocationsServicesBackupsDeleteQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], MetastoreProjectsLocationsServicesBackupsDeleteQueryParams.prototype, "uploadProtocol", void 0);
     return MetastoreProjectsLocationsServicesBackupsDeleteQueryParams;
@@ -98,11 +98,11 @@ var MetastoreProjectsLocationsServicesBackupsDeleteSecurity = /** @class */ (fun
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], MetastoreProjectsLocationsServicesBackupsDeleteSecurity.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], MetastoreProjectsLocationsServicesBackupsDeleteSecurity.prototype, "oauth2c", void 0);
     return MetastoreProjectsLocationsServicesBackupsDeleteSecurity;
@@ -114,15 +114,15 @@ var MetastoreProjectsLocationsServicesBackupsDeleteRequest = /** @class */ (func
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", MetastoreProjectsLocationsServicesBackupsDeletePathParams)
     ], MetastoreProjectsLocationsServicesBackupsDeleteRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", MetastoreProjectsLocationsServicesBackupsDeleteQueryParams)
     ], MetastoreProjectsLocationsServicesBackupsDeleteRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", MetastoreProjectsLocationsServicesBackupsDeleteSecurity)
     ], MetastoreProjectsLocationsServicesBackupsDeleteRequest.prototype, "security", void 0);
     return MetastoreProjectsLocationsServicesBackupsDeleteRequest;
@@ -134,15 +134,15 @@ var MetastoreProjectsLocationsServicesBackupsDeleteResponse = /** @class */ (fun
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], MetastoreProjectsLocationsServicesBackupsDeleteResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Operation)
     ], MetastoreProjectsLocationsServicesBackupsDeleteResponse.prototype, "operation", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], MetastoreProjectsLocationsServicesBackupsDeleteResponse.prototype, "statusCode", void 0);
     return MetastoreProjectsLocationsServicesBackupsDeleteResponse;

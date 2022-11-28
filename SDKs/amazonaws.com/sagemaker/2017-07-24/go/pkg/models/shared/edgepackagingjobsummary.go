@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// EdgePackagingJobSummary
+// Summary of edge packaging job.
 type EdgePackagingJobSummary struct {
 	CompilationJobName     *string                    `json:"CompilationJobName,omitempty"`
 	CreationTime           *time.Time                 `json:"CreationTime,omitempty"`

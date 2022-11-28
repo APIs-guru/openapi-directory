@@ -1,11 +1,11 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from sdk.models import shared
 
 
 @dataclass
 class ListingsAllPathParams:
-    ecosystem_id: str = field(default=None, metadata={'path_param': { 'field_name': 'ecosystem_id', 'style': 'simple', 'explode': False }})
+    ecosystem_id: str = field(metadata={'path_param': { 'field_name': 'ecosystem_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,13 +17,13 @@ class ListingsAllQueryParams:
 
 @dataclass
 class ListingsAllRequest:
-    path_params: ListingsAllPathParams = field(default=None)
-    query_params: ListingsAllQueryParams = field(default=None)
+    path_params: ListingsAllPathParams = field()
+    query_params: ListingsAllQueryParams = field()
     
 
 @dataclass
 class ListingsAllResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_listings_response: Optional[shared.GetListingsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

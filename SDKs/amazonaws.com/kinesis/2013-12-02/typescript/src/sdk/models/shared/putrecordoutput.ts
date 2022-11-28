@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EncryptionTypeEnum } from "./encryptiontypeenum";
+
 
 
 // PutRecordOutput
@@ -7,12 +8,12 @@ import { EncryptionTypeEnum } from "./encryptiontypeenum";
  * Represents the output for <code>PutRecord</code>.
 **/
 export class PutRecordOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EncryptionType" })
+  @SpeakeasyMetadata({ data: "json, name=EncryptionType" })
   encryptionType?: EncryptionTypeEnum;
 
-  @Metadata({ data: "json, name=SequenceNumber" })
+  @SpeakeasyMetadata({ data: "json, name=SequenceNumber" })
   sequenceNumber: string;
 
-  @Metadata({ data: "json, name=ShardId" })
+  @SpeakeasyMetadata({ data: "json, name=ShardId" })
   shardId: string;
 }

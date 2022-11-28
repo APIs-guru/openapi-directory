@@ -4,6 +4,9 @@ import (
 	"time"
 )
 
+// JobSummary
+//
+//	Describes the summary for an execution job for an Amplify app.
 type JobSummary struct {
 	CommitID      string        `json:"commitId"`
 	CommitMessage string        `json:"commitMessage"`

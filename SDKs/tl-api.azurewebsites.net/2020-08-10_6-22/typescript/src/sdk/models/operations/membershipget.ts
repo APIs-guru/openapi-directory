@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class MembershipGetSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   bearer: shared.SchemeBearer;
 }
 
 
 export class MembershipGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   security: MembershipGetSecurity;
 }
 
 
 export class MembershipGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.MemberDto })
+  @SpeakeasyMetadata({ elemType: shared.MemberDto })
   memberDtos?: shared.MemberDto[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: shared.ProblemDetails;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

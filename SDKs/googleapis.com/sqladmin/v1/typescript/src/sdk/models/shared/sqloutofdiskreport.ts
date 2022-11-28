@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum SqlOutOfDiskReportSqlOutOfDiskStateEnum {
-    SqlOutOfDiskStateUnspecified = "SQL_OUT_OF_DISK_STATE_UNSPECIFIED"
-,    Normal = "NORMAL"
-,    SoftShutdown = "SOFT_SHUTDOWN"
+    SqlOutOfDiskStateUnspecified = "SQL_OUT_OF_DISK_STATE_UNSPECIFIED",
+    Normal = "NORMAL",
+    SoftShutdown = "SOFT_SHUTDOWN"
 }
 
 
@@ -12,9 +13,9 @@ export enum SqlOutOfDiskReportSqlOutOfDiskStateEnum {
  * This message wraps up the information written by out-of-disk detection job.
 **/
 export class SqlOutOfDiskReport extends SpeakeasyBase {
-  @Metadata({ data: "json, name=sqlMinRecommendedIncreaseSizeGb" })
+  @SpeakeasyMetadata({ data: "json, name=sqlMinRecommendedIncreaseSizeGb" })
   sqlMinRecommendedIncreaseSizeGb?: number;
 
-  @Metadata({ data: "json, name=sqlOutOfDiskState" })
+  @SpeakeasyMetadata({ data: "json, name=sqlOutOfDiskState" })
   sqlOutOfDiskState?: SqlOutOfDiskReportSqlOutOfDiskStateEnum;
 }

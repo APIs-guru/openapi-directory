@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { NestingLevelValueEnum } from "./nestinglevelvalueenum";
 /**
  * Provides information that defines a DocumentDB endpoint.

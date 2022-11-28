@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RegexPatternSetUpdate } from "./regexpatternsetupdate";
 
 
+
 export class UpdateRegexPatternSetRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ChangeToken" })
+  @SpeakeasyMetadata({ data: "json, name=ChangeToken" })
   changeToken: string;
 
-  @Metadata({ data: "json, name=RegexPatternSetId" })
+  @SpeakeasyMetadata({ data: "json, name=RegexPatternSetId" })
   regexPatternSetId: string;
 
-  @Metadata({ data: "json, name=Updates", elemType: shared.RegexPatternSetUpdate })
+  @SpeakeasyMetadata({ data: "json, name=Updates", elemType: RegexPatternSetUpdate })
   updates: RegexPatternSetUpdate[];
 }

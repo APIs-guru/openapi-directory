@@ -1,5 +1,7 @@
 package shared
 
+// PaginatedTeamPermissions
+// A paginated list of team permissions.
 type PaginatedTeamPermissions struct {
 	Next     *string                  `json:"next,omitempty"`
 	Page     *int64                   `json:"page,omitempty"`

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActiveDirectory } from "./activedirectory";
+
 
 
 // ActiveDirectoryAuthInfo
@@ -8,6 +8,6 @@ import { ActiveDirectory } from "./activedirectory";
  * List of Active Directories
 **/
 export class ActiveDirectoryAuthInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.ActiveDirectory })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: ActiveDirectory })
   items: ActiveDirectory[];
 }

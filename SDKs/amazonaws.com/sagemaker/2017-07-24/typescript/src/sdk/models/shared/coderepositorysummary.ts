@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GitConfig } from "./gitconfig";
+
 
 
 // CodeRepositorySummary
@@ -7,18 +8,18 @@ import { GitConfig } from "./gitconfig";
  * Specifies summary information about a Git repository.
 **/
 export class CodeRepositorySummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CodeRepositoryArn" })
+  @SpeakeasyMetadata({ data: "json, name=CodeRepositoryArn" })
   codeRepositoryArn: string;
 
-  @Metadata({ data: "json, name=CodeRepositoryName" })
+  @SpeakeasyMetadata({ data: "json, name=CodeRepositoryName" })
   codeRepositoryName: string;
 
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime: Date;
 
-  @Metadata({ data: "json, name=GitConfig" })
+  @SpeakeasyMetadata({ data: "json, name=GitConfig" })
   gitConfig?: GitConfig;
 
-  @Metadata({ data: "json, name=LastModifiedTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedTime" })
   lastModifiedTime: Date;
 }

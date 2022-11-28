@@ -46,13 +46,13 @@ class RecipeRecipeSearchRandomQueryParams:
 
 @dataclass
 class RecipeRecipeSearchRandomRequest:
-    query_params: RecipeRecipeSearchRandomQueryParams = field(default=None)
+    query_params: RecipeRecipeSearchRandomQueryParams = field()
     
 
 @dataclass
 class RecipeRecipeSearchRandomResponse:
+    content_type: str = field()
+    status_code: int = field()
     big_oven_model_api2_recipe_search_result: Optional[shared.BigOvenModelApi2RecipeSearchResult] = field(default=None)
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    body: Optional[bytes] = field(default=None)
     

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class PubsubProjectsSubscriptionsModifyPushConfigPathParams:
-    subscription: str = field(default=None, metadata={'path_param': { 'field_name': 'subscription', 'style': 'simple', 'explode': False }})
+    subscription: str = field(metadata={'path_param': { 'field_name': 'subscription', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class PubsubProjectsSubscriptionsModifyPushConfigQueryParams:
 
 @dataclass
 class PubsubProjectsSubscriptionsModifyPushConfigSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class PubsubProjectsSubscriptionsModifyPushConfigSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class PubsubProjectsSubscriptionsModifyPushConfigSecurity:
 
 @dataclass
 class PubsubProjectsSubscriptionsModifyPushConfigRequest:
-    path_params: PubsubProjectsSubscriptionsModifyPushConfigPathParams = field(default=None)
-    query_params: PubsubProjectsSubscriptionsModifyPushConfigQueryParams = field(default=None)
+    path_params: PubsubProjectsSubscriptionsModifyPushConfigPathParams = field()
+    query_params: PubsubProjectsSubscriptionsModifyPushConfigQueryParams = field()
+    security: PubsubProjectsSubscriptionsModifyPushConfigSecurity = field()
     request: Optional[shared.ModifyPushConfigRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: PubsubProjectsSubscriptionsModifyPushConfigSecurity = field(default=None)
     
 
 @dataclass
 class PubsubProjectsSubscriptionsModifyPushConfigResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

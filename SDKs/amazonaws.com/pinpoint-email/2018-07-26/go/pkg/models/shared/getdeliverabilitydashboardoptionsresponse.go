@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// GetDeliverabilityDashboardOptionsResponse
+// An object that shows the status of the Deliverability dashboard for your Amazon Pinpoint account.
 type GetDeliverabilityDashboardOptionsResponse struct {
 	AccountStatus                      *DeliverabilityDashboardAccountStatusEnum `json:"AccountStatus,omitempty"`
 	ActiveSubscribedDomains            []DomainDeliverabilityTrackingOption      `json:"ActiveSubscribedDomains,omitempty"`

@@ -1,9 +1,14 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class AmplitudeSourceProperties:
-    object: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'object' }})
+    r"""AmplitudeSourceProperties
+     The properties that are applied when Amplitude is being used as a source. 
+    """
+    
+    object: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('object') }})
     

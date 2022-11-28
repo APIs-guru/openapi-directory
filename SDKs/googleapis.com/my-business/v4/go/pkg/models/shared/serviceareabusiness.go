@@ -8,6 +8,8 @@ const (
 	ServiceAreaBusinessBusinessTypeEnumCustomerAndBusinessLocation ServiceAreaBusinessBusinessTypeEnum = "CUSTOMER_AND_BUSINESS_LOCATION"
 )
 
+// ServiceAreaBusiness
+// Service area businesses provide their service at the customer's location (for example, a locksmith or plumber).
 type ServiceAreaBusiness struct {
 	BusinessType *ServiceAreaBusinessBusinessTypeEnum `json:"businessType,omitempty"`
 	Places       *Places                              `json:"places,omitempty"`

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // FieldReference
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A reference to a field in a document, ex: `stats.operations`.
 **/
 export class FieldReference extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fieldPath" })
+  @SpeakeasyMetadata({ data: "json, name=fieldPath" })
   fieldPath?: string;
 }

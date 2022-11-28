@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import fieldreference
-from . import value
+from sdk import utils
+from . import *
 
 class FieldFilterOpEnum(str, Enum):
     OPERATOR_UNSPECIFIED = "OPERATOR_UNSPECIFIED"
@@ -21,7 +22,11 @@ class FieldFilterOpEnum(str, Enum):
 @dataclass_json
 @dataclass
 class FieldFilter:
-    field: Optional[fieldreference.FieldReference] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'field' }})
-    op: Optional[FieldFilterOpEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'op' }})
-    value: Optional[value.Value] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    r"""FieldFilter
+    A filter on a specific field.
+    """
+    
+    field: Optional[FieldReference] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('field') }})
+    op: Optional[FieldFilterOpEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('op') }})
+    value: Optional[Value] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     

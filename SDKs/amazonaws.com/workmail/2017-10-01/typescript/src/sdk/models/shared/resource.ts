@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EntityStateEnum } from "./entitystateenum";
 import { ResourceTypeEnum } from "./resourcetypeenum";
+
 
 
 // Resource
@@ -8,24 +9,24 @@ import { ResourceTypeEnum } from "./resourcetypeenum";
  * The representation of a resource.
 **/
 export class Resource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DisabledDate" })
+  @SpeakeasyMetadata({ data: "json, name=DisabledDate" })
   disabledDate?: Date;
 
-  @Metadata({ data: "json, name=Email" })
+  @SpeakeasyMetadata({ data: "json, name=Email" })
   email?: string;
 
-  @Metadata({ data: "json, name=EnabledDate" })
+  @SpeakeasyMetadata({ data: "json, name=EnabledDate" })
   enabledDate?: Date;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=State" })
+  @SpeakeasyMetadata({ data: "json, name=State" })
   state?: EntityStateEnum;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: ResourceTypeEnum;
 }

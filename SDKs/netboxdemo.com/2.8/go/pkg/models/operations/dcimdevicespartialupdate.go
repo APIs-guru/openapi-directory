@@ -10,7 +10,7 @@ type DcimDevicesPartialUpdatePathParams struct {
 
 type DcimDevicesPartialUpdateRequest struct {
 	PathParams DcimDevicesPartialUpdatePathParams
-	Request    shared.WritableDeviceWithConfigContext `request:"mediaType=application/json"`
+	Request    shared.WritableDeviceWithConfigContextInput `request:"mediaType=application/json"`
 }
 
 type DcimDevicesPartialUpdateResponse struct {

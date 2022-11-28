@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import attributekey
-from . import typedattributevalue
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AttributeKeyAndValue:
-    key: attributekey.AttributeKey = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Key' }})
-    value: typedattributevalue.TypedAttributeValue = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Value' }})
+    r"""AttributeKeyAndValue
+    The combination of an attribute key and an attribute value.
+    """
+    
+    key: AttributeKey = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Key') }})
+    value: TypedAttributeValue = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Value') }})
     

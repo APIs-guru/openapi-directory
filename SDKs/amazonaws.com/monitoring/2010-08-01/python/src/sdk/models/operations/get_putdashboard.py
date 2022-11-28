@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetPutDashboardActionEnum(str, Enum):
     PUT_DASHBOARD = "PutDashboard"
@@ -10,10 +14,10 @@ class GetPutDashboardVersionEnum(str, Enum):
 
 @dataclass
 class GetPutDashboardQueryParams:
-    action: GetPutDashboardActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    dashboard_body: str = field(default=None, metadata={'query_param': { 'field_name': 'DashboardBody', 'style': 'form', 'explode': True }})
-    dashboard_name: str = field(default=None, metadata={'query_param': { 'field_name': 'DashboardName', 'style': 'form', 'explode': True }})
-    version: GetPutDashboardVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetPutDashboardActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    dashboard_body: str = field(metadata={'query_param': { 'field_name': 'DashboardBody', 'style': 'form', 'explode': True }})
+    dashboard_name: str = field(metadata={'query_param': { 'field_name': 'DashboardName', 'style': 'form', 'explode': True }})
+    version: GetPutDashboardVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetPutDashboardHeaders:
 
 @dataclass
 class GetPutDashboardRequest:
-    query_params: GetPutDashboardQueryParams = field(default=None)
-    headers: GetPutDashboardHeaders = field(default=None)
+    headers: GetPutDashboardHeaders = field()
+    query_params: GetPutDashboardQueryParams = field()
     
 
 @dataclass
 class GetPutDashboardResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

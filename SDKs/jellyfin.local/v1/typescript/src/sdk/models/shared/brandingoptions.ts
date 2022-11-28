@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class BrandingOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CustomCss" })
+  @SpeakeasyMetadata({ data: "json, name=CustomCss" })
   customCss?: string;
 
-  @Metadata({ data: "json, name=LoginDisclaimer" })
+  @SpeakeasyMetadata({ data: "json, name=LoginDisclaimer" })
   loginDisclaimer?: string;
 }

@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class RegistryUpdateAPIPathParams:
-    api: str = field(default=None, metadata={'path_param': { 'field_name': 'api', 'style': 'simple', 'explode': False }})
-    project: str = field(default=None, metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
+    api: str = field(metadata={'path_param': { 'field_name': 'api', 'style': 'simple', 'explode': False }})
+    project: str = field(metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,14 +18,14 @@ class RegistryUpdateAPIQueryParams:
 
 @dataclass
 class RegistryUpdateAPIRequest:
-    path_params: RegistryUpdateAPIPathParams = field(default=None)
-    query_params: RegistryUpdateAPIQueryParams = field(default=None)
-    request: Any = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    path_params: RegistryUpdateAPIPathParams = field()
+    query_params: RegistryUpdateAPIQueryParams = field()
+    request: Any = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class RegistryUpdateAPIResponse:
+    content_type: str = field()
+    status_code: int = field()
     api: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,35 +14,55 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def create_feed_connections(self, request: operations.CreateFeedConnectionsRequest) -> operations.CreateFeedConnectionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create one or more new feed connection
+        By passing in the FeedConnections array object in the body, you can create one or more new feed connections
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/FeedConnections"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -60,19 +83,20 @@ class SDK:
 
     
     def create_statements(self, request: operations.CreateStatementsRequest) -> operations.CreateStatementsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates one or more new statements
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/Statements"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -111,22 +135,23 @@ class SDK:
 
     
     def delete_feed_connections(self, request: operations.DeleteFeedConnectionsRequest) -> operations.DeleteFeedConnectionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete an existing feed connection
+        By passing in FeedConnections array object in the body, you can delete a feed connection.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/FeedConnections/DeleteRequests"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -143,15 +168,18 @@ class SDK:
 
     
     def get_feed_connection(self, request: operations.GetFeedConnectionRequest) -> operations.GetFeedConnectionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve single feed connection based on a unique id provided
+        By passing in a FeedConnection Id options, you can search for matching feed connections
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/FeedConnections/{id}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -168,17 +196,19 @@ class SDK:
 
     
     def get_feed_connections(self, request: operations.GetFeedConnectionsRequest) -> operations.GetFeedConnectionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Searches for feed connections
+        By passing in the appropriate options, you can search for available feed connections in the system.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/FeedConnections"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -195,17 +225,19 @@ class SDK:
 
     
     def get_statement(self, request: operations.GetStatementRequest) -> operations.GetStatementResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve single statement based on unique id provided
+        By passing in a statement id, you can search for matching statements
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/Statements/{statementID}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -222,17 +254,19 @@ class SDK:
 
     
     def get_statements(self, request: operations.GetStatementsRequest) -> operations.GetStatementsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve all statements
+        By passing in parameters, you can search for matching statements
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/Statements"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 

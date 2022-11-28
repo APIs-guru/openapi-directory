@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AuthMechanismValueEnum } from "./authmechanismvalueenum";
 import { AuthTypeValueEnum } from "./authtypevalueenum";
 import { NestingLevelValueEnum } from "./nestinglevelvalueenum";
@@ -36,59 +36,59 @@ var MongoDbSettings = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AuthMechanism" }),
+        SpeakeasyMetadata({ data: "json, name=AuthMechanism" }),
         __metadata("design:type", String)
     ], MongoDbSettings.prototype, "authMechanism", void 0);
     __decorate([
-        Metadata({ data: "json, name=AuthSource" }),
+        SpeakeasyMetadata({ data: "json, name=AuthSource" }),
         __metadata("design:type", String)
     ], MongoDbSettings.prototype, "authSource", void 0);
     __decorate([
-        Metadata({ data: "json, name=AuthType" }),
+        SpeakeasyMetadata({ data: "json, name=AuthType" }),
         __metadata("design:type", String)
     ], MongoDbSettings.prototype, "authType", void 0);
     __decorate([
-        Metadata({ data: "json, name=DatabaseName" }),
+        SpeakeasyMetadata({ data: "json, name=DatabaseName" }),
         __metadata("design:type", String)
     ], MongoDbSettings.prototype, "databaseName", void 0);
     __decorate([
-        Metadata({ data: "json, name=DocsToInvestigate" }),
+        SpeakeasyMetadata({ data: "json, name=DocsToInvestigate" }),
         __metadata("design:type", String)
     ], MongoDbSettings.prototype, "docsToInvestigate", void 0);
     __decorate([
-        Metadata({ data: "json, name=ExtractDocId" }),
+        SpeakeasyMetadata({ data: "json, name=ExtractDocId" }),
         __metadata("design:type", String)
     ], MongoDbSettings.prototype, "extractDocId", void 0);
     __decorate([
-        Metadata({ data: "json, name=KmsKeyId" }),
+        SpeakeasyMetadata({ data: "json, name=KmsKeyId" }),
         __metadata("design:type", String)
     ], MongoDbSettings.prototype, "kmsKeyId", void 0);
     __decorate([
-        Metadata({ data: "json, name=NestingLevel" }),
+        SpeakeasyMetadata({ data: "json, name=NestingLevel" }),
         __metadata("design:type", String)
     ], MongoDbSettings.prototype, "nestingLevel", void 0);
     __decorate([
-        Metadata({ data: "json, name=Password" }),
+        SpeakeasyMetadata({ data: "json, name=Password" }),
         __metadata("design:type", String)
     ], MongoDbSettings.prototype, "password", void 0);
     __decorate([
-        Metadata({ data: "json, name=Port" }),
+        SpeakeasyMetadata({ data: "json, name=Port" }),
         __metadata("design:type", Number)
     ], MongoDbSettings.prototype, "port", void 0);
     __decorate([
-        Metadata({ data: "json, name=SecretsManagerAccessRoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=SecretsManagerAccessRoleArn" }),
         __metadata("design:type", String)
     ], MongoDbSettings.prototype, "secretsManagerAccessRoleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=SecretsManagerSecretId" }),
+        SpeakeasyMetadata({ data: "json, name=SecretsManagerSecretId" }),
         __metadata("design:type", String)
     ], MongoDbSettings.prototype, "secretsManagerSecretId", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServerName" }),
+        SpeakeasyMetadata({ data: "json, name=ServerName" }),
         __metadata("design:type", String)
     ], MongoDbSettings.prototype, "serverName", void 0);
     __decorate([
-        Metadata({ data: "json, name=Username" }),
+        SpeakeasyMetadata({ data: "json, name=Username" }),
         __metadata("design:type", String)
     ], MongoDbSettings.prototype, "username", void 0);
     return MongoDbSettings;

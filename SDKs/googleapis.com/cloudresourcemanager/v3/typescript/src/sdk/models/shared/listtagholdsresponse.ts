@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TagHold } from "./taghold";
+
 
 
 // ListTagHoldsResponse
@@ -8,9 +8,9 @@ import { TagHold } from "./taghold";
  * The ListTagHolds response.
 **/
 export class ListTagHoldsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=tagHolds", elemType: shared.TagHold })
+  @SpeakeasyMetadata({ data: "json, name=tagHolds", elemType: TagHold })
   tagHolds?: TagHold[];
 }

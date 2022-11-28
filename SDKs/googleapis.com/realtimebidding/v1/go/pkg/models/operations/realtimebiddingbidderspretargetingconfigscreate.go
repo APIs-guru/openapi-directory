@@ -30,7 +30,7 @@ type RealtimebiddingBiddersPretargetingConfigsCreateSecurity struct {
 type RealtimebiddingBiddersPretargetingConfigsCreateRequest struct {
 	PathParams  RealtimebiddingBiddersPretargetingConfigsCreatePathParams
 	QueryParams RealtimebiddingBiddersPretargetingConfigsCreateQueryParams
-	Request     *shared.PretargetingConfig `request:"mediaType=application/json"`
+	Request     *shared.PretargetingConfigInput `request:"mediaType=application/json"`
 	Security    RealtimebiddingBiddersPretargetingConfigsCreateSecurity
 }
 

@@ -1,5 +1,7 @@
 package shared
 
+// RsAlgoSettings
+// Settings for an HMAC + SHA signing algorithm
 type RsAlgoSettings struct {
 	PrivateKey *string `json:"privateKey,omitempty"`
 	PublicKey  string  `json:"publicKey"`

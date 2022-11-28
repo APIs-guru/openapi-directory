@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { UsageAllocation } from "./usageallocation";
 export declare class MeterUsageRequest extends SpeakeasyBase {
     dryRun?: boolean;

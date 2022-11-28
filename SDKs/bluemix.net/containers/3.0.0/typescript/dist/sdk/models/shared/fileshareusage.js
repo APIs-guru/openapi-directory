@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var FileshareUsage = /** @class */ (function (_super) {
     __extends(FileshareUsage, _super);
     function FileshareUsage() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=available_space" }),
+        SpeakeasyMetadata({ data: "json, name=available_space" }),
         __metadata("design:type", String)
     ], FileshareUsage.prototype, "availableSpace", void 0);
     __decorate([
-        Metadata({ data: "json, name=total_space" }),
+        SpeakeasyMetadata({ data: "json, name=total_space" }),
         __metadata("design:type", String)
     ], FileshareUsage.prototype, "totalSpace", void 0);
     __decorate([
-        Metadata({ data: "json, name=used_space" }),
+        SpeakeasyMetadata({ data: "json, name=used_space" }),
         __metadata("design:type", String)
     ], FileshareUsage.prototype, "usedSpace", void 0);
     __decorate([
-        Metadata({ data: "json, name=used_space_percentage" }),
+        SpeakeasyMetadata({ data: "json, name=used_space_percentage" }),
         __metadata("design:type", String)
     ], FileshareUsage.prototype, "usedSpacePercentage", void 0);
     return FileshareUsage;

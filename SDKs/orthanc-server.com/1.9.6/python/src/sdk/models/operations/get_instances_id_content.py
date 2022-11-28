@@ -1,26 +1,26 @@
 from dataclasses import dataclass, field
-
+from typing import Optional
 
 
 @dataclass
 class GetInstancesIDContentPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetInstancesIDContentQueryParams:
-    dot_: str = field(default=None, metadata={'query_param': { 'field_name': '...', 'style': 'form', 'explode': True }})
+    dot_: str = field(metadata={'query_param': { 'field_name': '...', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class GetInstancesIDContentRequest:
-    path_params: GetInstancesIDContentPathParams = field(default=None)
-    query_params: GetInstancesIDContentQueryParams = field(default=None)
+    path_params: GetInstancesIDContentPathParams = field()
+    query_params: GetInstancesIDContentQueryParams = field()
     
 
 @dataclass
 class GetInstancesIDContentResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

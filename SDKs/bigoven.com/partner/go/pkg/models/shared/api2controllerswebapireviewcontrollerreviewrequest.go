@@ -1,5 +1,7 @@
 package shared
 
+// Api2ControllersWebAPIReviewControllerReviewRequest
+// Payload for reviews
 type Api2ControllersWebAPIReviewControllerReviewRequest struct {
 	ActiveMinutes *int32  `json:"ActiveMinutes,omitempty" form:"name=ActiveMinutes"`
 	Comment       *string `json:"Comment,omitempty" form:"name=Comment"`

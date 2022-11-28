@@ -1,6 +1,7 @@
 
 
+
 export enum DistributionEnum {
-    Random = "Random"
-,    ByLogStream = "ByLogStream"
+    Random = "Random",
+    ByLogStream = "ByLogStream"
 }

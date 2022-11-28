@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // EvaluateExpressionOutput
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains the output of EvaluateExpression.
 **/
 export class EvaluateExpressionOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=evaluatedExpression" })
+  @SpeakeasyMetadata({ data: "json, name=evaluatedExpression" })
   evaluatedExpression: string;
 }

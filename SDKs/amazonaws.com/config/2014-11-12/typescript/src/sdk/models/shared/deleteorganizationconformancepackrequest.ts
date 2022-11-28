@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteOrganizationConformancePackRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=OrganizationConformancePackName" })
+  @SpeakeasyMetadata({ data: "json, name=OrganizationConformancePackName" })
   organizationConformancePackName: string;
 }

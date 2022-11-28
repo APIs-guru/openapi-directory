@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BooleanOperatorOptions } from "./booleanoperatoroptions";
+
 
 
 // BooleanPropertyOptions
@@ -7,6 +8,6 @@ import { BooleanOperatorOptions } from "./booleanoperatoroptions";
  * The options for boolean properties.
 **/
 export class BooleanPropertyOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=operatorOptions" })
+  @SpeakeasyMetadata({ data: "json, name=operatorOptions" })
   operatorOptions?: BooleanOperatorOptions;
 }

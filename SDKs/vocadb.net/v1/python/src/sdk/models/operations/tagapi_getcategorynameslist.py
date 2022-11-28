@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 
 class TagAPIGetCategoryNamesListNameMatchModeEnum(str, Enum):
     AUTO = "Auto"
@@ -17,14 +18,14 @@ class TagAPIGetCategoryNamesListQueryParams:
 
 @dataclass
 class TagAPIGetCategoryNamesListRequest:
-    query_params: TagAPIGetCategoryNamesListQueryParams = field(default=None)
+    query_params: TagAPIGetCategoryNamesListQueryParams = field()
     
 
 @dataclass
 class TagAPIGetCategoryNamesListResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     tag_api_get_category_names_list_200_application_json_strings: Optional[List[str]] = field(default=None)
     tag_api_get_category_names_list_200_application_jsonp_strings: Optional[List[str]] = field(default=None)
     tag_api_get_category_names_list_200_text_json_strings: Optional[List[str]] = field(default=None)

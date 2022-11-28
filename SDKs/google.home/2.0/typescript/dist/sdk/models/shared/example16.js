@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Example16 = /** @class */ (function (_super) {
     __extends(Example16, _super);
     function Example16() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=bytes_received" }),
+        SpeakeasyMetadata({ data: "json, name=bytes_received" }),
         __metadata("design:type", Number)
     ], Example16.prototype, "bytesReceived", void 0);
     __decorate([
-        Metadata({ data: "json, name=response_code" }),
+        SpeakeasyMetadata({ data: "json, name=response_code" }),
         __metadata("design:type", Number)
     ], Example16.prototype, "responseCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=time_for_data_fetch" }),
+        SpeakeasyMetadata({ data: "json, name=time_for_data_fetch" }),
         __metadata("design:type", Number)
     ], Example16.prototype, "timeForDataFetch", void 0);
     __decorate([
-        Metadata({ data: "json, name=time_for_http_response" }),
+        SpeakeasyMetadata({ data: "json, name=time_for_http_response" }),
         __metadata("design:type", Number)
     ], Example16.prototype, "timeForHttpResponse", void 0);
     return Example16;

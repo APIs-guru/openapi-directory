@@ -82,7 +82,7 @@ type DisplayvideoPartnersTargetingTypesAssignedTargetingOptionsCreateSecurity st
 type DisplayvideoPartnersTargetingTypesAssignedTargetingOptionsCreateRequest struct {
 	PathParams  DisplayvideoPartnersTargetingTypesAssignedTargetingOptionsCreatePathParams
 	QueryParams DisplayvideoPartnersTargetingTypesAssignedTargetingOptionsCreateQueryParams
-	Request     *shared.AssignedTargetingOption `request:"mediaType=application/json"`
+	Request     *shared.AssignedTargetingOptionInput `request:"mediaType=application/json"`
 	Security    DisplayvideoPartnersTargetingTypesAssignedTargetingOptionsCreateSecurity
 }
 

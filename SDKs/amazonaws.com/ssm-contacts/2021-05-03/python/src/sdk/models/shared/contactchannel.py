@@ -1,18 +1,22 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import activationstatus_enum
-from . import contactchanneladdress
-from . import channeltype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ContactChannel:
-    activation_status: activationstatus_enum.ActivationStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ActivationStatus' }})
-    contact_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ContactArn' }})
-    contact_channel_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ContactChannelArn' }})
-    delivery_address: contactchanneladdress.ContactChannelAddress = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DeliveryAddress' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
-    type: Optional[channeltype_enum.ChannelTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
+    r"""ContactChannel
+    The method that Incident Manager uses to engage a contact.
+    """
+    
+    activation_status: ActivationStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ActivationStatus') }})
+    contact_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ContactArn') }})
+    contact_channel_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ContactChannelArn') }})
+    delivery_address: ContactChannelAddress = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('DeliveryAddress') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
+    type: Optional[ChannelTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Type') }})
     

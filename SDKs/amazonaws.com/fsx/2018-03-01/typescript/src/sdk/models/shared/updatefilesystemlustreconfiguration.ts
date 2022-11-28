@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AutoImportPolicyTypeEnum } from "./autoimportpolicytypeenum";
 import { DataCompressionTypeEnum } from "./datacompressiontypeenum";
+
 
 
 // UpdateFileSystemLustreConfiguration
@@ -8,18 +9,18 @@ import { DataCompressionTypeEnum } from "./datacompressiontypeenum";
  * The configuration object for Amazon FSx for Lustre file systems used in the <code>UpdateFileSystem</code> operation.
 **/
 export class UpdateFileSystemLustreConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AutoImportPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=AutoImportPolicy" })
   autoImportPolicy?: AutoImportPolicyTypeEnum;
 
-  @Metadata({ data: "json, name=AutomaticBackupRetentionDays" })
+  @SpeakeasyMetadata({ data: "json, name=AutomaticBackupRetentionDays" })
   automaticBackupRetentionDays?: number;
 
-  @Metadata({ data: "json, name=DailyAutomaticBackupStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=DailyAutomaticBackupStartTime" })
   dailyAutomaticBackupStartTime?: string;
 
-  @Metadata({ data: "json, name=DataCompressionType" })
+  @SpeakeasyMetadata({ data: "json, name=DataCompressionType" })
   dataCompressionType?: DataCompressionTypeEnum;
 
-  @Metadata({ data: "json, name=WeeklyMaintenanceStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=WeeklyMaintenanceStartTime" })
   weeklyMaintenanceStartTime?: string;
 }

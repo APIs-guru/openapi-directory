@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import csvoutput
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class OutputSerialization:
-    csv: Optional[csvoutput.CsvOutput] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'csv' }})
+    r"""OutputSerialization
+    Describes how the select output is serialized.
+    """
+    
+    csv: Optional[CsvOutput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('csv') }})
     

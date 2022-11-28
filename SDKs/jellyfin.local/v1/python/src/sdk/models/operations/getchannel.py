@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetChannelPathParams:
-    channel_id: str = field(default=None, metadata={'path_param': { 'field_name': 'channelId', 'style': 'simple', 'explode': False }})
+    channel_id: str = field(metadata={'path_param': { 'field_name': 'channelId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,19 +15,19 @@ class GetChannelQueryParams:
 
 @dataclass
 class GetChannelSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetChannelRequest:
-    path_params: GetChannelPathParams = field(default=None)
-    query_params: GetChannelQueryParams = field(default=None)
-    security: GetChannelSecurity = field(default=None)
+    path_params: GetChannelPathParams = field()
+    query_params: GetChannelQueryParams = field()
+    security: GetChannelSecurity = field()
     
 
 @dataclass
 class GetChannelResponse:
+    content_type: str = field()
+    status_code: int = field()
     base_item_dto: Optional[shared.BaseItemDto] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { AssessmentControlSet } from "./assessmentcontrolset";
 import { FrameworkMetadata } from "./frameworkmetadata";
 // AssessmentFramework
 /**
@@ -35,19 +35,19 @@ var AssessmentFramework = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=arn" }),
+        SpeakeasyMetadata({ data: "json, name=arn" }),
         __metadata("design:type", String)
     ], AssessmentFramework.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=controlSets", elemType: shared.AssessmentControlSet }),
+        SpeakeasyMetadata({ data: "json, name=controlSets", elemType: AssessmentControlSet }),
         __metadata("design:type", Array)
     ], AssessmentFramework.prototype, "controlSets", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], AssessmentFramework.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=metadata" }),
+        SpeakeasyMetadata({ data: "json, name=metadata" }),
         __metadata("design:type", FrameworkMetadata)
     ], AssessmentFramework.prototype, "metadata", void 0);
     return AssessmentFramework;

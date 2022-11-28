@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ModifyLunaClientRequest = /** @class */ (function (_super) {
     __extends(ModifyLunaClientRequest, _super);
     function ModifyLunaClientRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Certificate" }),
+        SpeakeasyMetadata({ data: "json, name=Certificate" }),
         __metadata("design:type", String)
     ], ModifyLunaClientRequest.prototype, "certificate", void 0);
     __decorate([
-        Metadata({ data: "json, name=ClientArn" }),
+        SpeakeasyMetadata({ data: "json, name=ClientArn" }),
         __metadata("design:type", String)
     ], ModifyLunaClientRequest.prototype, "clientArn", void 0);
     return ModifyLunaClientRequest;

@@ -5,23 +5,23 @@ from sdk.models import shared
 
 @dataclass
 class GetUserByIDPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetUserByIDSecurity:
-    cookie_sid: shared.SchemeCookieSid = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'cookie' }})
+    cookie_sid: shared.SchemeCookieSid = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'cookie' }})
     
 
 @dataclass
 class GetUserByIDRequest:
-    path_params: GetUserByIDPathParams = field(default=None)
-    security: GetUserByIDSecurity = field(default=None)
+    path_params: GetUserByIDPathParams = field()
+    security: GetUserByIDSecurity = field()
     
 
 @dataclass
-class GetUserByIDResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
-    user: Optional[shared.User] = field(default=None)
+class GetUserByIDResponseOutput:
+    content_type: str = field()
+    status_code: int = field()
+    user: Optional[shared.UserOutput] = field(default=None)
     

@@ -32,6 +32,8 @@ type ApplicationGrantSimpleUser struct {
 	URL               string  `json:"url"`
 }
 
+// ApplicationGrant
+// The authorization associated with an OAuth Access.
 type ApplicationGrant struct {
 	App       ApplicationGrantApp         `json:"app"`
 	CreatedAt time.Time                   `json:"created_at"`

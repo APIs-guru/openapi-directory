@@ -42,11 +42,11 @@ class GetListingsAllQueryParams:
 
 @dataclass
 class GetListingsAllRequest:
-    query_params: GetListingsAllQueryParams = field(default=None)
+    query_params: GetListingsAllQueryParams = field()
     
 
 @dataclass
 class GetListingsAllResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

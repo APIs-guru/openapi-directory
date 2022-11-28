@@ -41,7 +41,7 @@ type JobsProjectsTenantsJobsPatchSecurity struct {
 type JobsProjectsTenantsJobsPatchRequest struct {
 	PathParams  JobsProjectsTenantsJobsPatchPathParams
 	QueryParams JobsProjectsTenantsJobsPatchQueryParams
-	Request     *shared.Job `request:"mediaType=application/json"`
+	Request     *shared.JobInput `request:"mediaType=application/json"`
 	Security    JobsProjectsTenantsJobsPatchSecurity
 }
 

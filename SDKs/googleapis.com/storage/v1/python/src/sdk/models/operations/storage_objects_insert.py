@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class StorageObjectsInsertPathParams:
-    bucket: str = field(default=None, metadata={'path_param': { 'field_name': 'bucket', 'style': 'simple', 'explode': False }})
+    bucket: str = field(metadata={'path_param': { 'field_name': 'bucket', 'style': 'simple', 'explode': False }})
     
 class StorageObjectsInsertPredefinedACLEnum(str, Enum):
     AUTHENTICATED_READ = "authenticatedRead"
@@ -44,20 +45,20 @@ class StorageObjectsInsertQueryParams:
 
 @dataclass
 class StorageObjectsInsertSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class StorageObjectsInsertSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class StorageObjectsInsertSecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -69,15 +70,15 @@ class StorageObjectsInsertSecurity:
 
 @dataclass
 class StorageObjectsInsertRequest:
-    path_params: StorageObjectsInsertPathParams = field(default=None)
-    query_params: StorageObjectsInsertQueryParams = field(default=None)
+    path_params: StorageObjectsInsertPathParams = field()
+    query_params: StorageObjectsInsertQueryParams = field()
+    security: StorageObjectsInsertSecurity = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'application/octet-stream' }})
-    security: StorageObjectsInsertSecurity = field(default=None)
     
 
 @dataclass
 class StorageObjectsInsertResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     object: Optional[shared.Object] = field(default=None)
-    status_code: int = field(default=None)
     

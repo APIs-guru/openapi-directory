@@ -12,6 +12,8 @@ type ExternalDataConfiguration struct {
 	HivePartitioningOptions *HivePartitioningOptions `json:"hivePartitioningOptions,omitempty"`
 	IgnoreUnknownValues     *bool                    `json:"ignoreUnknownValues,omitempty"`
 	MaxBadRecords           *int32                   `json:"maxBadRecords,omitempty"`
+	MetadataCacheMode       *string                  `json:"metadataCacheMode,omitempty"`
+	ObjectMetadata          *string                  `json:"objectMetadata,omitempty"`
 	ParquetOptions          *ParquetOptions          `json:"parquetOptions,omitempty"`
 	ReferenceFileSchemaURI  *string                  `json:"referenceFileSchemaUri,omitempty"`
 	Schema                  *TableSchema             `json:"schema,omitempty"`

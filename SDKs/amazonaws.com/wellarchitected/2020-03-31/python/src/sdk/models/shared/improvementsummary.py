@@ -1,15 +1,21 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import risk_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ImprovementSummary:
-    improvement_plan_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ImprovementPlanUrl' }})
-    pillar_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PillarId' }})
-    question_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'QuestionId' }})
-    question_title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'QuestionTitle' }})
-    risk: Optional[risk_enum.RiskEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Risk' }})
+    r"""ImprovementSummary
+    An improvement summary of a lens review in a workload.
+    """
+    
+    improvement_plan_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ImprovementPlanUrl') }})
+    pillar_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PillarId') }})
+    question_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('QuestionId') }})
+    question_title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('QuestionTitle') }})
+    risk: Optional[RiskEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Risk') }})
     

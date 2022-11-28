@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class ListStudioMembersPathParams:
-    studio_id: str = field(default=None, metadata={'path_param': { 'field_name': 'studioId', 'style': 'simple', 'explode': False }})
+    studio_id: str = field(metadata={'path_param': { 'field_name': 'studioId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,21 +30,21 @@ class ListStudioMembersHeaders:
 
 @dataclass
 class ListStudioMembersRequest:
-    path_params: ListStudioMembersPathParams = field(default=None)
-    query_params: ListStudioMembersQueryParams = field(default=None)
-    headers: ListStudioMembersHeaders = field(default=None)
+    headers: ListStudioMembersHeaders = field()
+    path_params: ListStudioMembersPathParams = field()
+    query_params: ListStudioMembersQueryParams = field()
     
 
 @dataclass
 class ListStudioMembersResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_error_exception: Optional[Any] = field(default=None)
     list_studio_members_response: Optional[shared.ListStudioMembersResponse] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_quota_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

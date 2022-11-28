@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetCreateDbSecurityGroupActionEnum(str, Enum):
     CREATE_DB_SECURITY_GROUP = "CreateDBSecurityGroup"
@@ -10,10 +14,10 @@ class GetCreateDbSecurityGroupVersionEnum(str, Enum):
 
 @dataclass
 class GetCreateDbSecurityGroupQueryParams:
-    action: GetCreateDbSecurityGroupActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    db_security_group_description: str = field(default=None, metadata={'query_param': { 'field_name': 'DBSecurityGroupDescription', 'style': 'form', 'explode': True }})
-    db_security_group_name: str = field(default=None, metadata={'query_param': { 'field_name': 'DBSecurityGroupName', 'style': 'form', 'explode': True }})
-    version: GetCreateDbSecurityGroupVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetCreateDbSecurityGroupActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    db_security_group_description: str = field(metadata={'query_param': { 'field_name': 'DBSecurityGroupDescription', 'style': 'form', 'explode': True }})
+    db_security_group_name: str = field(metadata={'query_param': { 'field_name': 'DBSecurityGroupName', 'style': 'form', 'explode': True }})
+    version: GetCreateDbSecurityGroupVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetCreateDbSecurityGroupHeaders:
 
 @dataclass
 class GetCreateDbSecurityGroupRequest:
-    query_params: GetCreateDbSecurityGroupQueryParams = field(default=None)
-    headers: GetCreateDbSecurityGroupHeaders = field(default=None)
+    headers: GetCreateDbSecurityGroupHeaders = field()
+    query_params: GetCreateDbSecurityGroupQueryParams = field()
     
 
 @dataclass
 class GetCreateDbSecurityGroupResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

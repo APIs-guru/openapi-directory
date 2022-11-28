@@ -1,20 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { ObjectFilter } from "./objectfilter";
-import { ObjectFilter } from "./objectfilter";
-import { ObjectFilter } from "./objectfilter";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ObjectFilter } from "./objectfilter";
 
+
 export enum AccountUserProfileTraffickerTypeEnum {
-    InternalNonTrafficker = "INTERNAL_NON_TRAFFICKER"
-,    InternalTrafficker = "INTERNAL_TRAFFICKER"
-,    ExternalTrafficker = "EXTERNAL_TRAFFICKER"
+    InternalNonTrafficker = "INTERNAL_NON_TRAFFICKER",
+    InternalTrafficker = "INTERNAL_TRAFFICKER",
+    ExternalTrafficker = "EXTERNAL_TRAFFICKER"
 }
 
 export enum AccountUserProfileUserAccessTypeEnum {
-    NormalUser = "NORMAL_USER"
-,    SuperUser = "SUPER_USER"
-,    InternalAdministrator = "INTERNAL_ADMINISTRATOR"
-,    ReadOnlySuperUser = "READ_ONLY_SUPER_USER"
+    NormalUser = "NORMAL_USER",
+    SuperUser = "SUPER_USER",
+    InternalAdministrator = "INTERNAL_ADMINISTRATOR",
+    ReadOnlySuperUser = "READ_ONLY_SUPER_USER"
 }
 
 
@@ -23,51 +21,51 @@ export enum AccountUserProfileUserAccessTypeEnum {
  * AccountUserProfiles contains properties of a Campaign Manager user profile. This resource is specifically for managing user profiles, whereas UserProfiles is for accessing the API.
 **/
 export class AccountUserProfile extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=active" })
+  @SpeakeasyMetadata({ data: "json, name=active" })
   active?: boolean;
 
-  @Metadata({ data: "json, name=advertiserFilter" })
+  @SpeakeasyMetadata({ data: "json, name=advertiserFilter" })
   advertiserFilter?: ObjectFilter;
 
-  @Metadata({ data: "json, name=campaignFilter" })
+  @SpeakeasyMetadata({ data: "json, name=campaignFilter" })
   campaignFilter?: ObjectFilter;
 
-  @Metadata({ data: "json, name=comments" })
+  @SpeakeasyMetadata({ data: "json, name=comments" })
   comments?: string;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=locale" })
+  @SpeakeasyMetadata({ data: "json, name=locale" })
   locale?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=siteFilter" })
+  @SpeakeasyMetadata({ data: "json, name=siteFilter" })
   siteFilter?: ObjectFilter;
 
-  @Metadata({ data: "json, name=subaccountId" })
+  @SpeakeasyMetadata({ data: "json, name=subaccountId" })
   subaccountId?: string;
 
-  @Metadata({ data: "json, name=traffickerType" })
+  @SpeakeasyMetadata({ data: "json, name=traffickerType" })
   traffickerType?: AccountUserProfileTraffickerTypeEnum;
 
-  @Metadata({ data: "json, name=userAccessType" })
+  @SpeakeasyMetadata({ data: "json, name=userAccessType" })
   userAccessType?: AccountUserProfileUserAccessTypeEnum;
 
-  @Metadata({ data: "json, name=userRoleFilter" })
+  @SpeakeasyMetadata({ data: "json, name=userRoleFilter" })
   userRoleFilter?: ObjectFilter;
 
-  @Metadata({ data: "json, name=userRoleId" })
+  @SpeakeasyMetadata({ data: "json, name=userRoleId" })
   userRoleId?: string;
 }

@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetTimezoneAreaLocationRegionTxtPathParams = /** @class */ (function (_super) {
     __extends(GetTimezoneAreaLocationRegionTxtPathParams, _super);
     function GetTimezoneAreaLocationRegionTxtPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=area" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=area" }),
         __metadata("design:type", String)
     ], GetTimezoneAreaLocationRegionTxtPathParams.prototype, "area", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=location" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=location" }),
         __metadata("design:type", String)
     ], GetTimezoneAreaLocationRegionTxtPathParams.prototype, "location", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=region" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=region" }),
         __metadata("design:type", String)
     ], GetTimezoneAreaLocationRegionTxtPathParams.prototype, "region", void 0);
     return GetTimezoneAreaLocationRegionTxtPathParams;
@@ -49,7 +49,7 @@ var GetTimezoneAreaLocationRegionTxtRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetTimezoneAreaLocationRegionTxtPathParams)
     ], GetTimezoneAreaLocationRegionTxtRequest.prototype, "pathParams", void 0);
     return GetTimezoneAreaLocationRegionTxtRequest;
@@ -61,19 +61,19 @@ var GetTimezoneAreaLocationRegionTxtResponse = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetTimezoneAreaLocationRegionTxtResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetTimezoneAreaLocationRegionTxtResponse.prototype, "dateTimeTextResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetTimezoneAreaLocationRegionTxtResponse.prototype, "errorTextResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetTimezoneAreaLocationRegionTxtResponse.prototype, "statusCode", void 0);
     return GetTimezoneAreaLocationRegionTxtResponse;

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // UserLockout
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * User lockout information
 **/
 export class UserLockout extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled: boolean;
 
-  @Metadata({ data: "json, name=lockoutPeriod" })
+  @SpeakeasyMetadata({ data: "json, name=lockoutPeriod" })
   lockoutPeriod?: number;
 
-  @Metadata({ data: "json, name=maxNumberOfLoginFailures" })
+  @SpeakeasyMetadata({ data: "json, name=maxNumberOfLoginFailures" })
   maxNumberOfLoginFailures?: number;
 }

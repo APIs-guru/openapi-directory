@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Layer
 /**
  * An <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">Lambda layer</a>.
@@ -33,19 +33,19 @@ var Layer = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Arn" }),
+        SpeakeasyMetadata({ data: "json, name=Arn" }),
         __metadata("design:type", String)
     ], Layer.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=CodeSize" }),
+        SpeakeasyMetadata({ data: "json, name=CodeSize" }),
         __metadata("design:type", Number)
     ], Layer.prototype, "codeSize", void 0);
     __decorate([
-        Metadata({ data: "json, name=SigningJobArn" }),
+        SpeakeasyMetadata({ data: "json, name=SigningJobArn" }),
         __metadata("design:type", String)
     ], Layer.prototype, "signingJobArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=SigningProfileVersionArn" }),
+        SpeakeasyMetadata({ data: "json, name=SigningProfileVersionArn" }),
         __metadata("design:type", String)
     ], Layer.prototype, "signingProfileVersionArn", void 0);
     return Layer;

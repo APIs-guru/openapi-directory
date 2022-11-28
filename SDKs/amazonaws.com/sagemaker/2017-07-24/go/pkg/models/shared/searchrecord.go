@@ -1,5 +1,7 @@
 package shared
 
+// SearchRecord
+// A single resource returned as part of the <a>Search</a> API response.
 type SearchRecord struct {
 	Endpoint          *Endpoint          `json:"Endpoint,omitempty"`
 	Experiment        *Experiment        `json:"Experiment,omitempty"`

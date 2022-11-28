@@ -1,5 +1,7 @@
 package shared
 
+// Sku
+// Encapsulates a single SKU in Google Cloud Platform
 type Sku struct {
 	Category            *Category     `json:"category,omitempty"`
 	Description         *string       `json:"description,omitempty"`

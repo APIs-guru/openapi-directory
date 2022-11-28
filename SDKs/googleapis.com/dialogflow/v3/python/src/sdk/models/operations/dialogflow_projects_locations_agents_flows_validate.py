@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DialogflowProjectsLocationsAgentsFlowsValidatePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +29,14 @@ class DialogflowProjectsLocationsAgentsFlowsValidateQueryParams:
 
 @dataclass
 class DialogflowProjectsLocationsAgentsFlowsValidateSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DialogflowProjectsLocationsAgentsFlowsValidateSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +47,15 @@ class DialogflowProjectsLocationsAgentsFlowsValidateSecurity:
 
 @dataclass
 class DialogflowProjectsLocationsAgentsFlowsValidateRequest:
-    path_params: DialogflowProjectsLocationsAgentsFlowsValidatePathParams = field(default=None)
-    query_params: DialogflowProjectsLocationsAgentsFlowsValidateQueryParams = field(default=None)
+    path_params: DialogflowProjectsLocationsAgentsFlowsValidatePathParams = field()
+    query_params: DialogflowProjectsLocationsAgentsFlowsValidateQueryParams = field()
+    security: DialogflowProjectsLocationsAgentsFlowsValidateSecurity = field()
     request: Optional[shared.GoogleCloudDialogflowCxV3ValidateFlowRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DialogflowProjectsLocationsAgentsFlowsValidateSecurity = field(default=None)
     
 
 @dataclass
 class DialogflowProjectsLocationsAgentsFlowsValidateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_dialogflow_cx_v3_flow_validation_result: Optional[shared.GoogleCloudDialogflowCxV3FlowValidationResult] = field(default=None)
-    status_code: int = field(default=None)
     

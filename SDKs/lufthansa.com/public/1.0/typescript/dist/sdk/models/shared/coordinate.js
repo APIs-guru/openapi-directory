@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Coordinate
 /**
  * Container for coordinates.
@@ -33,11 +33,11 @@ var Coordinate = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Latitude" }),
+        SpeakeasyMetadata({ data: "json, name=Latitude" }),
         __metadata("design:type", Number)
     ], Coordinate.prototype, "latitude", void 0);
     __decorate([
-        Metadata({ data: "json, name=Longitude" }),
+        SpeakeasyMetadata({ data: "json, name=Longitude" }),
         __metadata("design:type", Number)
     ], Coordinate.prototype, "longitude", void 0);
     return Coordinate;

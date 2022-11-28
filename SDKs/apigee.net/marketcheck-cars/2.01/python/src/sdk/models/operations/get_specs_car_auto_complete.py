@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetSpecsCarAutoCompleteFieldEnum(str, Enum):
@@ -19,6 +20,8 @@ class GetSpecsCarAutoCompleteFieldEnum(str, Enum):
 
 @dataclass
 class GetSpecsCarAutoCompleteQueryParams:
+    field: GetSpecsCarAutoCompleteFieldEnum = field(metadata={'query_param': { 'field_name': 'field', 'style': 'form', 'explode': True }})
+    input: str = field(metadata={'query_param': { 'field_name': 'input', 'style': 'form', 'explode': True }})
     api_key: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
     body_subtype: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'body_subtype', 'style': 'form', 'explode': True }})
     body_type: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'body_type', 'style': 'form', 'explode': True }})
@@ -26,10 +29,8 @@ class GetSpecsCarAutoCompleteQueryParams:
     engine: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'engine', 'style': 'form', 'explode': True }})
     engine_block: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'engine_block', 'style': 'form', 'explode': True }})
     engine_size: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'engine_size', 'style': 'form', 'explode': True }})
-    field: GetSpecsCarAutoCompleteFieldEnum = field(default=None, metadata={'query_param': { 'field_name': 'field', 'style': 'form', 'explode': True }})
     fuel_type: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'fuel_type', 'style': 'form', 'explode': True }})
     ignore_case: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'ignore_case', 'style': 'form', 'explode': True }})
-    input: str = field(default=None, metadata={'query_param': { 'field_name': 'input', 'style': 'form', 'explode': True }})
     make: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'make', 'style': 'form', 'explode': True }})
     model: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'model', 'style': 'form', 'explode': True }})
     transmission: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'transmission', 'style': 'form', 'explode': True }})
@@ -40,13 +41,13 @@ class GetSpecsCarAutoCompleteQueryParams:
 
 @dataclass
 class GetSpecsCarAutoCompleteRequest:
-    query_params: GetSpecsCarAutoCompleteQueryParams = field(default=None)
+    query_params: GetSpecsCarAutoCompleteQueryParams = field()
     
 
 @dataclass
 class GetSpecsCarAutoCompleteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[shared.Error] = field(default=None)
     specs_auto_complete_response: Optional[shared.SpecsAutoCompleteResponse] = field(default=None)
-    status_code: int = field(default=None)
     

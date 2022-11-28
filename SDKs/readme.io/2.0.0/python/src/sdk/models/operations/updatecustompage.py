@@ -1,26 +1,29 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from sdk.models import shared
 
 
 @dataclass
 class UpdateCustomPagePathParams:
-    slug: str = field(default=None, metadata={'path_param': { 'field_name': 'slug', 'style': 'simple', 'explode': False }})
+    slug: str = field(metadata={'path_param': { 'field_name': 'slug', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class UpdateCustomPageSecurity:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    api_key: shared.SchemeAPIKey = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
     
 
 @dataclass
 class UpdateCustomPageRequest:
-    path_params: UpdateCustomPagePathParams = field(default=None)
-    request: shared.CustomPage = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: UpdateCustomPageSecurity = field(default=None)
+    path_params: UpdateCustomPagePathParams = field()
+    request: shared.CustomPage = field(metadata={'request': { 'media_type': 'application/json' }})
+    security: UpdateCustomPageSecurity = field()
     
 
 @dataclass
 class UpdateCustomPageResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

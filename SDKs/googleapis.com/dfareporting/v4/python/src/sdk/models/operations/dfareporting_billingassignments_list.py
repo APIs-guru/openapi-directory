@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DfareportingBillingAssignmentsListPathParams:
-    billing_profile_id: str = field(default=None, metadata={'path_param': { 'field_name': 'billingProfileId', 'style': 'simple', 'explode': False }})
-    profile_id: str = field(default=None, metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
+    billing_profile_id: str = field(metadata={'path_param': { 'field_name': 'billingProfileId', 'style': 'simple', 'explode': False }})
+    profile_id: str = field(metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +27,20 @@ class DfareportingBillingAssignmentsListQueryParams:
 
 @dataclass
 class DfareportingBillingAssignmentsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DfareportingBillingAssignmentsListRequest:
-    path_params: DfareportingBillingAssignmentsListPathParams = field(default=None)
-    query_params: DfareportingBillingAssignmentsListQueryParams = field(default=None)
-    security: DfareportingBillingAssignmentsListSecurity = field(default=None)
+    path_params: DfareportingBillingAssignmentsListPathParams = field()
+    query_params: DfareportingBillingAssignmentsListQueryParams = field()
+    security: DfareportingBillingAssignmentsListSecurity = field()
     
 
 @dataclass
 class DfareportingBillingAssignmentsListResponse:
+    content_type: str = field()
+    status_code: int = field()
     billing_assignments_list_response: Optional[shared.BillingAssignmentsListResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Operator } from "./operator";
 // Selector
 /**
@@ -34,11 +34,11 @@ var Selector = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=fieldName" }),
+        SpeakeasyMetadata({ data: "json, name=fieldName" }),
         __metadata("design:type", String)
     ], Selector.prototype, "fieldName", void 0);
     __decorate([
-        Metadata({ data: "json, name=operator" }),
+        SpeakeasyMetadata({ data: "json, name=operator" }),
         __metadata("design:type", Operator)
     ], Selector.prototype, "operator", void 0);
     return Selector;

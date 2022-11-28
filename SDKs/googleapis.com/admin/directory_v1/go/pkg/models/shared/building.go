@@ -1,5 +1,7 @@
 package shared
 
+// Building
+// Public API: Resources.buildings
 type Building struct {
 	Address      *BuildingAddress     `json:"address,omitempty"`
 	BuildingID   *string              `json:"buildingId,omitempty"`

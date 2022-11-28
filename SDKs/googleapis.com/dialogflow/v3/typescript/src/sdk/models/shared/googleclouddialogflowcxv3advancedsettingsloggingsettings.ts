@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDialogflowCxV3AdvancedSettingsLoggingSettings
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Define behaviors on logging.
 **/
 export class GoogleCloudDialogflowCxV3AdvancedSettingsLoggingSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enableInteractionLogging" })
+  @SpeakeasyMetadata({ data: "json, name=enableInteractionLogging" })
   enableInteractionLogging?: boolean;
 
-  @Metadata({ data: "json, name=enableStackdriverLogging" })
+  @SpeakeasyMetadata({ data: "json, name=enableStackdriverLogging" })
   enableStackdriverLogging?: boolean;
 }

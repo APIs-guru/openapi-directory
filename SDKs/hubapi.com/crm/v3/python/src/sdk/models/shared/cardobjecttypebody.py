@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List
+from typing import List
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class CardObjectTypeBodyNameEnum(str, Enum):
     CONTACTS = "contacts"
@@ -12,6 +14,6 @@ class CardObjectTypeBodyNameEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CardObjectTypeBody:
-    name: CardObjectTypeBodyNameEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    properties_to_send: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'propertiesToSend' }})
+    name: CardObjectTypeBodyNameEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    properties_to_send: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('propertiesToSend') }})
     

@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class GetParcelsPidsSiteIDOutputFormatOutputFormatEnum(str, Enum):
     JSON = "json"
@@ -13,17 +13,17 @@ class GetParcelsPidsSiteIDOutputFormatOutputFormatEnum(str, Enum):
 
 @dataclass
 class GetParcelsPidsSiteIDOutputFormatPathParams:
-    output_format: GetParcelsPidsSiteIDOutputFormatOutputFormatEnum = field(default=None, metadata={'path_param': { 'field_name': 'outputFormat', 'style': 'simple', 'explode': False }})
-    site_id: str = field(default=None, metadata={'path_param': { 'field_name': 'siteID', 'style': 'simple', 'explode': False }})
+    output_format: GetParcelsPidsSiteIDOutputFormatOutputFormatEnum = field(metadata={'path_param': { 'field_name': 'outputFormat', 'style': 'simple', 'explode': False }})
+    site_id: str = field(metadata={'path_param': { 'field_name': 'siteID', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetParcelsPidsSiteIDOutputFormatRequest:
-    path_params: GetParcelsPidsSiteIDOutputFormatPathParams = field(default=None)
+    path_params: GetParcelsPidsSiteIDOutputFormatPathParams = field()
     
 
 @dataclass
 class GetParcelsPidsSiteIDOutputFormatResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

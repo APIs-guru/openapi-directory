@@ -1,25 +1,25 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DiscountResponse } from "./discountresponse";
 import { ProductResponse } from "./productresponse";
 
 
+
 export class LibraryResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deletedDiscounts" })
+  @SpeakeasyMetadata({ data: "json, name=deletedDiscounts" })
   deletedDiscounts?: string[];
 
-  @Metadata({ data: "json, name=deletedProducts" })
+  @SpeakeasyMetadata({ data: "json, name=deletedProducts" })
   deletedProducts?: string[];
 
-  @Metadata({ data: "json, name=discounts", elemType: shared.DiscountResponse })
+  @SpeakeasyMetadata({ data: "json, name=discounts", elemType: DiscountResponse })
   discounts?: DiscountResponse[];
 
-  @Metadata({ data: "json, name=fromEventLogUuid" })
+  @SpeakeasyMetadata({ data: "json, name=fromEventLogUuid" })
   fromEventLogUuid?: string;
 
-  @Metadata({ data: "json, name=products", elemType: shared.ProductResponse })
+  @SpeakeasyMetadata({ data: "json, name=products", elemType: ProductResponse })
   products?: ProductResponse[];
 
-  @Metadata({ data: "json, name=untilEventLogUuid" })
+  @SpeakeasyMetadata({ data: "json, name=untilEventLogUuid" })
   untilEventLogUuid?: string;
 }

@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class TeamsListProjectsLegacyPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=team_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=team_id" })
   teamId: number;
 }
 
 
 export class TeamsListProjectsLegacyQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 }
 
 
-export class TeamsListProjectsLegacyRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: TeamsListProjectsLegacyPathParams;
-
-  @Metadata()
-  queryParams: TeamsListProjectsLegacyQueryParams;
-}
-
-
 export class TeamsListProjectsLegacy415ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=documentation_url" })
+  @SpeakeasyMetadata({ data: "json, name=documentation_url" })
   documentationUrl: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 }
 
 
+export class TeamsListProjectsLegacyRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: TeamsListProjectsLegacyPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: TeamsListProjectsLegacyQueryParams;
+}
+
+
 export class TeamsListProjectsLegacyResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 
-  @Metadata({ elemType: shared.TeamProject })
+  @SpeakeasyMetadata({ elemType: shared.TeamProject })
   teamProjects?: shared.TeamProject[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   teamsListProjectsLegacy415ApplicationJsonObject?: TeamsListProjectsLegacy415ApplicationJson;
 }

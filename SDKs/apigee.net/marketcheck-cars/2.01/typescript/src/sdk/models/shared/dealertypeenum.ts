@@ -1,6 +1,7 @@
 
 
+
 export enum DealerTypeEnum {
-    Franchise = "franchise"
-,    Independent = "independent"
+    Franchise = "franchise",
+    Independent = "independent"
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // EngineVersionInfo
 /**
  * Provides details of the Redis engine version
@@ -33,15 +33,15 @@ var EngineVersionInfo = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=EnginePatchVersion" }),
+        SpeakeasyMetadata({ data: "json, name=EnginePatchVersion" }),
         __metadata("design:type", String)
     ], EngineVersionInfo.prototype, "enginePatchVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=EngineVersion" }),
+        SpeakeasyMetadata({ data: "json, name=EngineVersion" }),
         __metadata("design:type", String)
     ], EngineVersionInfo.prototype, "engineVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=ParameterGroupFamily" }),
+        SpeakeasyMetadata({ data: "json, name=ParameterGroupFamily" }),
         __metadata("design:type", String)
     ], EngineVersionInfo.prototype, "parameterGroupFamily", void 0);
     return EngineVersionInfo;

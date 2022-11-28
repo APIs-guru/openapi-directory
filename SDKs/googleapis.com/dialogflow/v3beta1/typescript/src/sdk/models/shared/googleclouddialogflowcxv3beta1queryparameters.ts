@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleTypeLatLng } from "./googletypelatlng";
 import { GoogleCloudDialogflowCxV3beta1SessionEntityType } from "./googleclouddialogflowcxv3beta1sessionentitytype";
+
 
 
 // GoogleCloudDialogflowCxV3beta1QueryParameters
@@ -9,33 +9,33 @@ import { GoogleCloudDialogflowCxV3beta1SessionEntityType } from "./googleclouddi
  * Represents the parameters of a conversational query.
 **/
 export class GoogleCloudDialogflowCxV3beta1QueryParameters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=analyzeQueryTextSentiment" })
+  @SpeakeasyMetadata({ data: "json, name=analyzeQueryTextSentiment" })
   analyzeQueryTextSentiment?: boolean;
 
-  @Metadata({ data: "json, name=currentPage" })
+  @SpeakeasyMetadata({ data: "json, name=currentPage" })
   currentPage?: string;
 
-  @Metadata({ data: "json, name=disableWebhook" })
+  @SpeakeasyMetadata({ data: "json, name=disableWebhook" })
   disableWebhook?: boolean;
 
-  @Metadata({ data: "json, name=flowVersions" })
+  @SpeakeasyMetadata({ data: "json, name=flowVersions" })
   flowVersions?: string[];
 
-  @Metadata({ data: "json, name=geoLocation" })
+  @SpeakeasyMetadata({ data: "json, name=geoLocation" })
   geoLocation?: GoogleTypeLatLng;
 
-  @Metadata({ data: "json, name=parameters" })
+  @SpeakeasyMetadata({ data: "json, name=parameters" })
   parameters?: Map<string, any>;
 
-  @Metadata({ data: "json, name=payload" })
+  @SpeakeasyMetadata({ data: "json, name=payload" })
   payload?: Map<string, any>;
 
-  @Metadata({ data: "json, name=sessionEntityTypes", elemType: shared.GoogleCloudDialogflowCxV3beta1SessionEntityType })
+  @SpeakeasyMetadata({ data: "json, name=sessionEntityTypes", elemType: GoogleCloudDialogflowCxV3beta1SessionEntityType })
   sessionEntityTypes?: GoogleCloudDialogflowCxV3beta1SessionEntityType[];
 
-  @Metadata({ data: "json, name=timeZone" })
+  @SpeakeasyMetadata({ data: "json, name=timeZone" })
   timeZone?: string;
 
-  @Metadata({ data: "json, name=webhookHeaders" })
+  @SpeakeasyMetadata({ data: "json, name=webhookHeaders" })
   webhookHeaders?: Map<string, string>;
 }

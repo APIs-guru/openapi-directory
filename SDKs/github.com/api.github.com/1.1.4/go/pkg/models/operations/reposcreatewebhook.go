@@ -9,6 +9,8 @@ type ReposCreateWebhookPathParams struct {
 	Repo  string `pathParam:"style=simple,explode=false,name=repo"`
 }
 
+// ReposCreateWebhookRequestBodyConfig
+// Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/repos#create-hook-config-params).
 type ReposCreateWebhookRequestBodyConfig struct {
 	ContentType *string `json:"content_type,omitempty"`
 	Digest      *string `json:"digest,omitempty"`

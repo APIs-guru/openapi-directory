@@ -1,5 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
@@ -22,15 +25,15 @@ class ListEmailTemplatesHeaders:
 
 @dataclass
 class ListEmailTemplatesRequest:
-    query_params: ListEmailTemplatesQueryParams = field(default=None)
-    headers: ListEmailTemplatesHeaders = field(default=None)
+    headers: ListEmailTemplatesHeaders = field()
+    query_params: ListEmailTemplatesQueryParams = field()
     
 
 @dataclass
 class ListEmailTemplatesResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     list_email_templates_response: Optional[shared.ListEmailTemplatesResponse] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

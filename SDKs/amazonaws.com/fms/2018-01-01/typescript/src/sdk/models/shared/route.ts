@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DestinationTypeEnum } from "./destinationtypeenum";
 import { TargetTypeEnum } from "./targettypeenum";
+
 
 
 // Route
@@ -8,15 +9,15 @@ import { TargetTypeEnum } from "./targettypeenum";
  * Describes a route in a route table.
 **/
 export class Route extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Destination" })
+  @SpeakeasyMetadata({ data: "json, name=Destination" })
   destination?: string;
 
-  @Metadata({ data: "json, name=DestinationType" })
+  @SpeakeasyMetadata({ data: "json, name=DestinationType" })
   destinationType?: DestinationTypeEnum;
 
-  @Metadata({ data: "json, name=Target" })
+  @SpeakeasyMetadata({ data: "json, name=Target" })
   target?: string;
 
-  @Metadata({ data: "json, name=TargetType" })
+  @SpeakeasyMetadata({ data: "json, name=TargetType" })
   targetType?: TargetTypeEnum;
 }

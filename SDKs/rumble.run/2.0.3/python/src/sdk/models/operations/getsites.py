@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class GetSitesSecurity:
-    bearer_auth: shared.SchemeBearerAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_auth: shared.SchemeBearerAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class GetSitesRequest:
-    security: GetSitesSecurity = field(default=None)
+    security: GetSitesSecurity = field()
     
 
 @dataclass
 class GetSitesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     sites: Optional[List[shared.Site]] = field(default=None)
-    status_code: int = field(default=None)
     

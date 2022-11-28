@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DiscussionApiGetTopicPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=topicId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=topicId" })
   topicId: number;
 }
 
 export enum DiscussionApiGetTopicFieldsEnum {
-    None = "None"
-,    Comments = "Comments"
-,    CommentCount = "CommentCount"
-,    Content = "Content"
-,    LastComment = "LastComment"
-,    All = "All"
+    None = "None",
+    Comments = "Comments",
+    CommentCount = "CommentCount",
+    Content = "Content",
+    LastComment = "LastComment",
+    All = "All"
 }
 
 
 export class DiscussionApiGetTopicQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" })
   fields?: DiscussionApiGetTopicFieldsEnum;
 }
 
 
 export class DiscussionApiGetTopicRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DiscussionApiGetTopicPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: DiscussionApiGetTopicQueryParams;
 }
 
 
 export class DiscussionApiGetTopicResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   discussionTopicContract?: shared.DiscussionTopicContract;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

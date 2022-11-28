@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import fieldreference
+from sdk import utils
+from . import *
 
 class OrderDirectionEnum(str, Enum):
     DIRECTION_UNSPECIFIED = "DIRECTION_UNSPECIFIED"
@@ -12,6 +14,10 @@ class OrderDirectionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Order:
-    direction: Optional[OrderDirectionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'direction' }})
-    field: Optional[fieldreference.FieldReference] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'field' }})
+    r"""Order
+    An order on a field.
+    """
+    
+    direction: Optional[OrderDirectionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('direction') }})
+    field: Optional[FieldReference] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('field') }})
     

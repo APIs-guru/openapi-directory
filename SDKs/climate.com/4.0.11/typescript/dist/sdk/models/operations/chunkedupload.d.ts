@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class ChunkedUploadPathParams extends SpeakeasyBase {
     uploadId: string;
@@ -7,15 +7,9 @@ export declare class ChunkedUploadHeaders extends SpeakeasyBase {
     contentRange: string;
     contentType: string;
 }
-export declare class ChunkedUploadSecurityOption1 extends SpeakeasyBase {
-    apiKey: shared.SchemeApiKey;
-}
-export declare class ChunkedUploadSecurityOption2 extends SpeakeasyBase {
-    oauth2AuthorizationCode: shared.SchemeOauth2AuthorizationCode;
-}
 export declare class ChunkedUploadSecurity extends SpeakeasyBase {
-    option1?: ChunkedUploadSecurityOption1;
-    option2?: ChunkedUploadSecurityOption2;
+    apiKey?: shared.SchemeApiKey;
+    oauth2AuthorizationCode?: shared.SchemeOauth2AuthorizationCode;
 }
 export declare class ChunkedUploadRequest extends SpeakeasyBase {
     pathParams: ChunkedUploadPathParams;

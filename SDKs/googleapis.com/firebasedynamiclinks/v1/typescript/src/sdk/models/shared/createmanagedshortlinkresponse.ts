@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ManagedShortLink } from "./managedshortlink";
 import { DynamicLinkWarning } from "./dynamiclinkwarning";
+
 
 
 // CreateManagedShortLinkResponse
@@ -9,12 +9,12 @@ import { DynamicLinkWarning } from "./dynamiclinkwarning";
  * Response to create a short Dynamic Link.
 **/
 export class CreateManagedShortLinkResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=managedShortLink" })
+  @SpeakeasyMetadata({ data: "json, name=managedShortLink" })
   managedShortLink?: ManagedShortLink;
 
-  @Metadata({ data: "json, name=previewLink" })
+  @SpeakeasyMetadata({ data: "json, name=previewLink" })
   previewLink?: string;
 
-  @Metadata({ data: "json, name=warning", elemType: shared.DynamicLinkWarning })
+  @SpeakeasyMetadata({ data: "json, name=warning", elemType: DynamicLinkWarning })
   warning?: DynamicLinkWarning[];
 }

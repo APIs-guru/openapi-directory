@@ -1,5 +1,7 @@
 package shared
 
+// Subject
+// Subject describes parts of a distinguished name that, in turn, describes the subject of the certificate.
 type Subject struct {
 	CommonName         *string `json:"commonName,omitempty"`
 	CountryCode        *string `json:"countryCode,omitempty"`

@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://mgn.{region}.amazonaws.com",
 	"https://mgn.{region}.amazonaws.com",
 	"http://mgn.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/mgn/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// ChangeServerLifeCycleState - Allows the user to set the SourceServer.LifeCycle.state property for specific Source Server IDs to one of the following: READY_FOR_TEST or READY_FOR_CUTOVER. This command only works if the Source Server is already launchable (dataReplicationInfo.lagDuration is not null.)
 func (s *SDK) ChangeServerLifeCycleState(ctx context.Context, request operations.ChangeServerLifeCycleStateRequest) (*operations.ChangeServerLifeCycleStateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ChangeServerLifeCycleState"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -81,7 +108,7 @@ func (s *SDK) ChangeServerLifeCycleState(ctx context.Context, request operations
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -151,8 +178,9 @@ func (s *SDK) ChangeServerLifeCycleState(ctx context.Context, request operations
 	return res, nil
 }
 
+// CreateReplicationConfigurationTemplate - Creates a new ReplicationConfigurationTemplate.
 func (s *SDK) CreateReplicationConfigurationTemplate(ctx context.Context, request operations.CreateReplicationConfigurationTemplateRequest) (*operations.CreateReplicationConfigurationTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/CreateReplicationConfigurationTemplate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -172,7 +200,7 @@ func (s *SDK) CreateReplicationConfigurationTemplate(ctx context.Context, reques
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -232,8 +260,9 @@ func (s *SDK) CreateReplicationConfigurationTemplate(ctx context.Context, reques
 	return res, nil
 }
 
+// DeleteJob - Deletes a single Job by ID.
 func (s *SDK) DeleteJob(ctx context.Context, request operations.DeleteJobRequest) (*operations.DeleteJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/DeleteJob"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -253,7 +282,7 @@ func (s *SDK) DeleteJob(ctx context.Context, request operations.DeleteJobRequest
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -313,8 +342,9 @@ func (s *SDK) DeleteJob(ctx context.Context, request operations.DeleteJobRequest
 	return res, nil
 }
 
+// DeleteReplicationConfigurationTemplate - Deletes a single Replication Configuration Template by ID
 func (s *SDK) DeleteReplicationConfigurationTemplate(ctx context.Context, request operations.DeleteReplicationConfigurationTemplateRequest) (*operations.DeleteReplicationConfigurationTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/DeleteReplicationConfigurationTemplate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -334,7 +364,7 @@ func (s *SDK) DeleteReplicationConfigurationTemplate(ctx context.Context, reques
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -394,8 +424,9 @@ func (s *SDK) DeleteReplicationConfigurationTemplate(ctx context.Context, reques
 	return res, nil
 }
 
+// DeleteSourceServer - Deletes a single source server by ID.
 func (s *SDK) DeleteSourceServer(ctx context.Context, request operations.DeleteSourceServerRequest) (*operations.DeleteSourceServerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/DeleteSourceServer"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -415,7 +446,7 @@ func (s *SDK) DeleteSourceServer(ctx context.Context, request operations.DeleteS
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -475,8 +506,9 @@ func (s *SDK) DeleteSourceServer(ctx context.Context, request operations.DeleteS
 	return res, nil
 }
 
+// DescribeJobLogItems - Retrieves detailed Job log with paging.
 func (s *SDK) DescribeJobLogItems(ctx context.Context, request operations.DescribeJobLogItemsRequest) (*operations.DescribeJobLogItemsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/DescribeJobLogItems"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -498,7 +530,7 @@ func (s *SDK) DescribeJobLogItems(ctx context.Context, request operations.Descri
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -548,8 +580,9 @@ func (s *SDK) DescribeJobLogItems(ctx context.Context, request operations.Descri
 	return res, nil
 }
 
+// DescribeJobs - Returns a list of Jobs. Use the JobsID and fromDate and toData filters to limit which jobs are returned. The response is sorted by creationDataTime - latest date first. Jobs are normaly created by the StartTest, StartCutover, and TerminateTargetInstances APIs. Jobs are also created by DiagnosticLaunch and TerminateDiagnosticInstances, which are APIs available only to *Support* and only used in response to relevant support tickets.
 func (s *SDK) DescribeJobs(ctx context.Context, request operations.DescribeJobsRequest) (*operations.DescribeJobsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/DescribeJobs"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -571,7 +604,7 @@ func (s *SDK) DescribeJobs(ctx context.Context, request operations.DescribeJobsR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -621,8 +654,9 @@ func (s *SDK) DescribeJobs(ctx context.Context, request operations.DescribeJobsR
 	return res, nil
 }
 
+// DescribeReplicationConfigurationTemplates - Lists all ReplicationConfigurationTemplates, filtered by Source Server IDs.
 func (s *SDK) DescribeReplicationConfigurationTemplates(ctx context.Context, request operations.DescribeReplicationConfigurationTemplatesRequest) (*operations.DescribeReplicationConfigurationTemplatesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/DescribeReplicationConfigurationTemplates"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -644,7 +678,7 @@ func (s *SDK) DescribeReplicationConfigurationTemplates(ctx context.Context, req
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -704,8 +738,9 @@ func (s *SDK) DescribeReplicationConfigurationTemplates(ctx context.Context, req
 	return res, nil
 }
 
+// DescribeSourceServers - Retrieves all SourceServers or multiple SourceServers by ID.
 func (s *SDK) DescribeSourceServers(ctx context.Context, request operations.DescribeSourceServersRequest) (*operations.DescribeSourceServersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/DescribeSourceServers"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -727,7 +762,7 @@ func (s *SDK) DescribeSourceServers(ctx context.Context, request operations.Desc
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -777,8 +812,9 @@ func (s *SDK) DescribeSourceServers(ctx context.Context, request operations.Desc
 	return res, nil
 }
 
+// DisconnectFromService - Disconnects specific Source Servers from Application Migration Service. Data replication is stopped immediately. All AWS resources created by Application Migration Service for enabling the replication of these source servers will be terminated / deleted within 90 minutes. Launched Test or Cutover instances will NOT be terminated. If the agent on the source server has not been prevented from communciating with the Application Migration Service service, then it will receive a command to uninstall itself (within approximately 10 minutes). The following properties of the SourceServer will be changed immediately: dataReplicationInfo.dataReplicationState will be set to DISCONNECTED; The totalStorageBytes property for each of dataReplicationInfo.replicatedDisks will be set to zero; dataReplicationInfo.lagDuration and dataReplicationInfo.lagDurationwill be nullified.
 func (s *SDK) DisconnectFromService(ctx context.Context, request operations.DisconnectFromServiceRequest) (*operations.DisconnectFromServiceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/DisconnectFromService"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -798,7 +834,7 @@ func (s *SDK) DisconnectFromService(ctx context.Context, request operations.Disc
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -858,8 +894,9 @@ func (s *SDK) DisconnectFromService(ctx context.Context, request operations.Disc
 	return res, nil
 }
 
+// FinalizeCutover - Finalizes the cutover immediately for specific Source Servers. All AWS resources created by Application Migration Service for enabling the replication of these source servers will be terminated / deleted within 90 minutes. Launched Test or Cutover instances will NOT be terminated. The AWS Replication Agent will receive a command to uninstall itself (within 10 minutes). The following properties of the SourceServer will be changed immediately: dataReplicationInfo.dataReplicationState will be to DISCONNECTED; The SourceServer.lifeCycle.state will be changed to CUTOVER; The totalStorageBytes property fo each of dataReplicationInfo.replicatedDisks will be set to zero; dataReplicationInfo.lagDuration and dataReplicationInfo.lagDurationwill be nullified.
 func (s *SDK) FinalizeCutover(ctx context.Context, request operations.FinalizeCutoverRequest) (*operations.FinalizeCutoverResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/FinalizeCutover"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -879,7 +916,7 @@ func (s *SDK) FinalizeCutover(ctx context.Context, request operations.FinalizeCu
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -949,8 +986,9 @@ func (s *SDK) FinalizeCutover(ctx context.Context, request operations.FinalizeCu
 	return res, nil
 }
 
+// GetLaunchConfiguration - Lists all LaunchConfigurations available, filtered by Source Server IDs.
 func (s *SDK) GetLaunchConfiguration(ctx context.Context, request operations.GetLaunchConfigurationRequest) (*operations.GetLaunchConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/GetLaunchConfiguration"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -970,7 +1008,7 @@ func (s *SDK) GetLaunchConfiguration(ctx context.Context, request operations.Get
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1020,8 +1058,9 @@ func (s *SDK) GetLaunchConfiguration(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetReplicationConfiguration - Lists all ReplicationConfigurations, filtered by Source Server ID.
 func (s *SDK) GetReplicationConfiguration(ctx context.Context, request operations.GetReplicationConfigurationRequest) (*operations.GetReplicationConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/GetReplicationConfiguration"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1041,7 +1080,7 @@ func (s *SDK) GetReplicationConfiguration(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1091,8 +1130,9 @@ func (s *SDK) GetReplicationConfiguration(ctx context.Context, request operation
 	return res, nil
 }
 
+// InitializeService - Initialize Application Migration Service.
 func (s *SDK) InitializeService(ctx context.Context, request operations.InitializeServiceRequest) (*operations.InitializeServiceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/InitializeService"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -1102,7 +1142,7 @@ func (s *SDK) InitializeService(ctx context.Context, request operations.Initiali
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1152,8 +1192,9 @@ func (s *SDK) InitializeService(ctx context.Context, request operations.Initiali
 	return res, nil
 }
 
+// ListTagsForResource - List all tags for your Application Migration Service resources.
 func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTagsForResourceRequest) (*operations.ListTagsForResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{resourceArn}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1163,7 +1204,7 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1243,8 +1284,9 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 	return res, nil
 }
 
+// MarkAsArchived - Archives specific Source Servers by setting the SourceServer.isArchived property to true for specified SourceServers by ID. This command only works for SourceServers with a lifecycle.state which equals DISCONNECTED or CUTOVER.
 func (s *SDK) MarkAsArchived(ctx context.Context, request operations.MarkAsArchivedRequest) (*operations.MarkAsArchivedResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/MarkAsArchived"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1264,7 +1306,7 @@ func (s *SDK) MarkAsArchived(ctx context.Context, request operations.MarkAsArchi
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1324,8 +1366,9 @@ func (s *SDK) MarkAsArchived(ctx context.Context, request operations.MarkAsArchi
 	return res, nil
 }
 
+// RetryDataReplication - Causes the data replication initiation sequence to begin immediately upon next Handshake for specified SourceServer IDs, regardless of when the previous initiation started. This command will not work if the SourceServer is not stalled or is in a DISCONNECTED or STOPPED state.
 func (s *SDK) RetryDataReplication(ctx context.Context, request operations.RetryDataReplicationRequest) (*operations.RetryDataReplicationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/RetryDataReplication"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1345,7 +1388,7 @@ func (s *SDK) RetryDataReplication(ctx context.Context, request operations.Retry
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1405,8 +1448,9 @@ func (s *SDK) RetryDataReplication(ctx context.Context, request operations.Retry
 	return res, nil
 }
 
+// StartCutover - Launches a Cutover Instance for specific Source Servers. This command starts a LAUNCH job whose initiatedBy property is StartCutover and changes the SourceServer.lifeCycle.state property to CUTTING_OVER.
 func (s *SDK) StartCutover(ctx context.Context, request operations.StartCutoverRequest) (*operations.StartCutoverResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/StartCutover"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1426,7 +1470,7 @@ func (s *SDK) StartCutover(ctx context.Context, request operations.StartCutoverR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1486,8 +1530,9 @@ func (s *SDK) StartCutover(ctx context.Context, request operations.StartCutoverR
 	return res, nil
 }
 
+// StartTest - Lauches a Test Instance for specific Source Servers. This command starts a LAUNCH job whose initiatedBy property is StartTest and changes the SourceServer.lifeCycle.state property to TESTING.
 func (s *SDK) StartTest(ctx context.Context, request operations.StartTestRequest) (*operations.StartTestResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/StartTest"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1507,7 +1552,7 @@ func (s *SDK) StartTest(ctx context.Context, request operations.StartTestRequest
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1567,8 +1612,9 @@ func (s *SDK) StartTest(ctx context.Context, request operations.StartTestRequest
 	return res, nil
 }
 
+// TagResource - Adds or overwrites only the specified tags for the specified Application Migration Service resource or resources. When you specify an existing tag key, the value is overwritten with the new value. Each resource can have a maximum of 50 tags. Each tag consists of a key and optional value.
 func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceRequest) (*operations.TagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{resourceArn}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1588,7 +1634,7 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1659,8 +1705,9 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 	return res, nil
 }
 
+// TerminateTargetInstances - Starts a job that terminates specific launched EC2 Test and Cutover instances. This command will not work for any Source Server with a lifecycle.state of TESTING, CUTTING_OVER, or CUTOVER.
 func (s *SDK) TerminateTargetInstances(ctx context.Context, request operations.TerminateTargetInstancesRequest) (*operations.TerminateTargetInstancesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/TerminateTargetInstances"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1680,7 +1727,7 @@ func (s *SDK) TerminateTargetInstances(ctx context.Context, request operations.T
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1740,8 +1787,9 @@ func (s *SDK) TerminateTargetInstances(ctx context.Context, request operations.T
 	return res, nil
 }
 
+// UntagResource - Deletes the specified set of tags from the specified set of Application Migration Service resources.
 func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourceRequest) (*operations.UntagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{resourceArn}#tagKeys", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1753,7 +1801,7 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1824,8 +1872,9 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 	return res, nil
 }
 
+// UpdateLaunchConfiguration - Updates multiple LaunchConfigurations by Source Server ID.
 func (s *SDK) UpdateLaunchConfiguration(ctx context.Context, request operations.UpdateLaunchConfigurationRequest) (*operations.UpdateLaunchConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/UpdateLaunchConfiguration"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1845,7 +1894,7 @@ func (s *SDK) UpdateLaunchConfiguration(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1915,8 +1964,9 @@ func (s *SDK) UpdateLaunchConfiguration(ctx context.Context, request operations.
 	return res, nil
 }
 
+// UpdateReplicationConfiguration - Allows you to update multiple ReplicationConfigurations by Source Server ID.
 func (s *SDK) UpdateReplicationConfiguration(ctx context.Context, request operations.UpdateReplicationConfigurationRequest) (*operations.UpdateReplicationConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/UpdateReplicationConfiguration"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1936,7 +1986,7 @@ func (s *SDK) UpdateReplicationConfiguration(ctx context.Context, request operat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2016,8 +2066,9 @@ func (s *SDK) UpdateReplicationConfiguration(ctx context.Context, request operat
 	return res, nil
 }
 
+// UpdateReplicationConfigurationTemplate - Updates multiple ReplicationConfigurationTemplates by ID.
 func (s *SDK) UpdateReplicationConfigurationTemplate(ctx context.Context, request operations.UpdateReplicationConfigurationTemplateRequest) (*operations.UpdateReplicationConfigurationTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/UpdateReplicationConfigurationTemplate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2037,7 +2088,7 @@ func (s *SDK) UpdateReplicationConfigurationTemplate(ctx context.Context, reques
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

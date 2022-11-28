@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateUpdatedImageRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dryRun" })
+  @SpeakeasyMetadata({ data: "json, name=dryRun" })
   dryRun?: boolean;
 
-  @Metadata({ data: "json, name=existingImageName" })
+  @SpeakeasyMetadata({ data: "json, name=existingImageName" })
   existingImageName: string;
 
-  @Metadata({ data: "json, name=newImageDescription" })
+  @SpeakeasyMetadata({ data: "json, name=newImageDescription" })
   newImageDescription?: string;
 
-  @Metadata({ data: "json, name=newImageDisplayName" })
+  @SpeakeasyMetadata({ data: "json, name=newImageDisplayName" })
   newImageDisplayName?: string;
 
-  @Metadata({ data: "json, name=newImageName" })
+  @SpeakeasyMetadata({ data: "json, name=newImageName" })
   newImageName: string;
 
-  @Metadata({ data: "json, name=newImageTags" })
+  @SpeakeasyMetadata({ data: "json, name=newImageTags" })
   newImageTags?: Map<string, string>;
 }

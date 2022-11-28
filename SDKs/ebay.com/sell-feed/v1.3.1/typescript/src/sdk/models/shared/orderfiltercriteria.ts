@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DateRange } from "./daterange";
-import { DateRange } from "./daterange";
+
 
 
 // OrderFilterCriteria
@@ -8,12 +8,12 @@ import { DateRange } from "./daterange";
  * The type that defines the fields for the order filters.
 **/
 export class OrderFilterCriteria extends SpeakeasyBase {
-  @Metadata({ data: "json, name=creationDateRange" })
+  @SpeakeasyMetadata({ data: "json, name=creationDateRange" })
   creationDateRange?: DateRange;
 
-  @Metadata({ data: "json, name=modifiedDateRange" })
+  @SpeakeasyMetadata({ data: "json, name=modifiedDateRange" })
   modifiedDateRange?: DateRange;
 
-  @Metadata({ data: "json, name=orderStatus" })
+  @SpeakeasyMetadata({ data: "json, name=orderStatus" })
   orderStatus?: string;
 }

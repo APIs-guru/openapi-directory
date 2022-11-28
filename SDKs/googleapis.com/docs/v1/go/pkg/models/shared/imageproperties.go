@@ -1,5 +1,7 @@
 package shared
 
+// ImageProperties
+// The properties of an image.
 type ImageProperties struct {
 	Angle          *float32        `json:"angle,omitempty"`
 	Brightness     *float32        `json:"brightness,omitempty"`

@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DrivelabelsLabelsDeltaPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +29,14 @@ class DrivelabelsLabelsDeltaQueryParams:
 
 @dataclass
 class DrivelabelsLabelsDeltaRequest:
-    path_params: DrivelabelsLabelsDeltaPathParams = field(default=None)
-    query_params: DrivelabelsLabelsDeltaQueryParams = field(default=None)
-    request: Optional[shared.GoogleAppsDriveLabelsV2betaDeltaUpdateLabelRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    path_params: DrivelabelsLabelsDeltaPathParams = field()
+    query_params: DrivelabelsLabelsDeltaQueryParams = field()
+    request: Optional[shared.GoogleAppsDriveLabelsV2betaDeltaUpdateLabelRequestInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DrivelabelsLabelsDeltaResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_apps_drive_labels_v2beta_delta_update_label_response: Optional[shared.GoogleAppsDriveLabelsV2betaDeltaUpdateLabelResponse] = field(default=None)
-    status_code: int = field(default=None)
     

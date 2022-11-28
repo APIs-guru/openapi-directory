@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class PostRenderSecurity:
-    developer_key: shared.SchemeDeveloperKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    developer_key: shared.SchemeDeveloperKey = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class PostRenderRequest:
-    request: shared.Edit = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: PostRenderSecurity = field(default=None)
+    request: shared.Edit = field(metadata={'request': { 'media_type': 'application/json' }})
+    security: PostRenderSecurity = field()
     
 
 @dataclass
 class PostRenderResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     queued_response: Optional[shared.QueuedResponse] = field(default=None)
-    status_code: int = field(default=None)
     

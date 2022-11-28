@@ -1,20 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GlobalSecondaryIndexAutoScalingUpdate } from "./globalsecondaryindexautoscalingupdate";
 import { AutoScalingSettingsUpdate } from "./autoscalingsettingsupdate";
 import { ReplicaAutoScalingUpdate } from "./replicaautoscalingupdate";
 
 
+
 export class UpdateTableReplicaAutoScalingInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=GlobalSecondaryIndexUpdates", elemType: shared.GlobalSecondaryIndexAutoScalingUpdate })
+  @SpeakeasyMetadata({ data: "json, name=GlobalSecondaryIndexUpdates", elemType: GlobalSecondaryIndexAutoScalingUpdate })
   globalSecondaryIndexUpdates?: GlobalSecondaryIndexAutoScalingUpdate[];
 
-  @Metadata({ data: "json, name=ProvisionedWriteCapacityAutoScalingUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=ProvisionedWriteCapacityAutoScalingUpdate" })
   provisionedWriteCapacityAutoScalingUpdate?: AutoScalingSettingsUpdate;
 
-  @Metadata({ data: "json, name=ReplicaUpdates", elemType: shared.ReplicaAutoScalingUpdate })
+  @SpeakeasyMetadata({ data: "json, name=ReplicaUpdates", elemType: ReplicaAutoScalingUpdate })
   replicaUpdates?: ReplicaAutoScalingUpdate[];
 
-  @Metadata({ data: "json, name=TableName" })
+  @SpeakeasyMetadata({ data: "json, name=TableName" })
   tableName: string;
 }

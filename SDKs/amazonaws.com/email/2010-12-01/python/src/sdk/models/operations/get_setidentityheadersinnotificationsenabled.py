@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetSetIdentityHeadersInNotificationsEnabledActionEnum(str, Enum):
     SET_IDENTITY_HEADERS_IN_NOTIFICATIONS_ENABLED = "SetIdentityHeadersInNotificationsEnabled"
@@ -15,11 +19,11 @@ class GetSetIdentityHeadersInNotificationsEnabledVersionEnum(str, Enum):
 
 @dataclass
 class GetSetIdentityHeadersInNotificationsEnabledQueryParams:
-    action: GetSetIdentityHeadersInNotificationsEnabledActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    enabled: bool = field(default=None, metadata={'query_param': { 'field_name': 'Enabled', 'style': 'form', 'explode': True }})
-    identity: str = field(default=None, metadata={'query_param': { 'field_name': 'Identity', 'style': 'form', 'explode': True }})
-    notification_type: GetSetIdentityHeadersInNotificationsEnabledNotificationTypeEnum = field(default=None, metadata={'query_param': { 'field_name': 'NotificationType', 'style': 'form', 'explode': True }})
-    version: GetSetIdentityHeadersInNotificationsEnabledVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetSetIdentityHeadersInNotificationsEnabledActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    enabled: bool = field(metadata={'query_param': { 'field_name': 'Enabled', 'style': 'form', 'explode': True }})
+    identity: str = field(metadata={'query_param': { 'field_name': 'Identity', 'style': 'form', 'explode': True }})
+    notification_type: GetSetIdentityHeadersInNotificationsEnabledNotificationTypeEnum = field(metadata={'query_param': { 'field_name': 'NotificationType', 'style': 'form', 'explode': True }})
+    version: GetSetIdentityHeadersInNotificationsEnabledVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -35,13 +39,13 @@ class GetSetIdentityHeadersInNotificationsEnabledHeaders:
 
 @dataclass
 class GetSetIdentityHeadersInNotificationsEnabledRequest:
-    query_params: GetSetIdentityHeadersInNotificationsEnabledQueryParams = field(default=None)
-    headers: GetSetIdentityHeadersInNotificationsEnabledHeaders = field(default=None)
+    headers: GetSetIdentityHeadersInNotificationsEnabledHeaders = field()
+    query_params: GetSetIdentityHeadersInNotificationsEnabledQueryParams = field()
     
 
 @dataclass
 class GetSetIdentityHeadersInNotificationsEnabledResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

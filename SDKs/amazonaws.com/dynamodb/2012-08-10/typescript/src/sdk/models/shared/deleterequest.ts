@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AttributeValue } from "./attributevalue";
+
 
 
 // DeleteRequest
@@ -8,6 +8,6 @@ import { AttributeValue } from "./attributevalue";
  * Represents a request to perform a <code>DeleteItem</code> operation on an item.
 **/
 export class DeleteRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Key", elemType: shared.AttributeValue })
+  @SpeakeasyMetadata({ data: "json, name=Key", elemType: AttributeValue })
   key: Map<string, AttributeValue>;
 }

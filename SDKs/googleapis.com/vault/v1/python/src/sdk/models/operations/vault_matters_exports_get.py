@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class VaultMattersExportsGetPathParams:
-    export_id: str = field(default=None, metadata={'path_param': { 'field_name': 'exportId', 'style': 'simple', 'explode': False }})
-    matter_id: str = field(default=None, metadata={'path_param': { 'field_name': 'matterId', 'style': 'simple', 'explode': False }})
+    export_id: str = field(metadata={'path_param': { 'field_name': 'exportId', 'style': 'simple', 'explode': False }})
+    matter_id: str = field(metadata={'path_param': { 'field_name': 'matterId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,14 +27,14 @@ class VaultMattersExportsGetQueryParams:
 
 @dataclass
 class VaultMattersExportsGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class VaultMattersExportsGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -44,14 +45,14 @@ class VaultMattersExportsGetSecurity:
 
 @dataclass
 class VaultMattersExportsGetRequest:
-    path_params: VaultMattersExportsGetPathParams = field(default=None)
-    query_params: VaultMattersExportsGetQueryParams = field(default=None)
-    security: VaultMattersExportsGetSecurity = field(default=None)
+    path_params: VaultMattersExportsGetPathParams = field()
+    query_params: VaultMattersExportsGetQueryParams = field()
+    security: VaultMattersExportsGetSecurity = field()
     
 
 @dataclass
 class VaultMattersExportsGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     export: Optional[shared.Export] = field(default=None)
-    status_code: int = field(default=None)
     

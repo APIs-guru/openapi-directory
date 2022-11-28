@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DatatransferTransfersGetPathParams:
-    data_transfer_id: str = field(default=None, metadata={'path_param': { 'field_name': 'dataTransferId', 'style': 'simple', 'explode': False }})
+    data_transfer_id: str = field(metadata={'path_param': { 'field_name': 'dataTransferId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class DatatransferTransfersGetQueryParams:
 
 @dataclass
 class DatatransferTransfersGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DatatransferTransfersGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,14 +44,14 @@ class DatatransferTransfersGetSecurity:
 
 @dataclass
 class DatatransferTransfersGetRequest:
-    path_params: DatatransferTransfersGetPathParams = field(default=None)
-    query_params: DatatransferTransfersGetQueryParams = field(default=None)
-    security: DatatransferTransfersGetSecurity = field(default=None)
+    path_params: DatatransferTransfersGetPathParams = field()
+    query_params: DatatransferTransfersGetQueryParams = field()
+    security: DatatransferTransfersGetSecurity = field()
     
 
 @dataclass
 class DatatransferTransfersGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     data_transfer: Optional[shared.DataTransfer] = field(default=None)
-    status_code: int = field(default=None)
     

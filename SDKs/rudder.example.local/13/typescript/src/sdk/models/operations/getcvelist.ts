@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
+
 
 
 // GetCveListRequestBody
@@ -7,14 +8,8 @@ import * as shared from "../shared";
  * cveList
 **/
 export class GetCveListRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cveIds" })
+  @SpeakeasyMetadata({ data: "json, name=cveIds" })
   cveIds?: string[];
-}
-
-
-export class GetCveListRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: GetCveListRequestBody;
 }
 
 export enum GetCveList200ApplicationJsonActionEnum {
@@ -23,35 +18,41 @@ export enum GetCveList200ApplicationJsonActionEnum {
 
 
 export class GetCveList200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CVEs", elemType: shared.CveDetails })
+  @SpeakeasyMetadata({ data: "json, name=CVEs", elemType: shared.CveDetails })
   cvEs: shared.CveDetails[];
 }
 
 export enum GetCveList200ApplicationJsonResultEnum {
-    Success = "success"
-,    Error = "error"
+    Success = "success",
+    Error = "error"
 }
 
 
 export class GetCveList200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: GetCveList200ApplicationJsonActionEnum;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: GetCveList200ApplicationJsonData;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result: GetCveList200ApplicationJsonResultEnum;
 }
 
 
+export class GetCveListRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: GetCveListRequestBody;
+}
+
+
 export class GetCveListResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getCveList200ApplicationJsonObject?: GetCveList200ApplicationJson;
 }

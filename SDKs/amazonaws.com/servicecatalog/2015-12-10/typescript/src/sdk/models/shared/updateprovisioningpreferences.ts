@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StackSetOperationTypeEnum } from "./stacksetoperationtypeenum";
+
 
 
 // UpdateProvisioningPreferences
@@ -7,24 +8,24 @@ import { StackSetOperationTypeEnum } from "./stacksetoperationtypeenum";
  * The user-defined preferences that will be applied when updating a provisioned product. Not all preferences are applicable to all provisioned product types.
 **/
 export class UpdateProvisioningPreferences extends SpeakeasyBase {
-  @Metadata({ data: "json, name=StackSetAccounts" })
+  @SpeakeasyMetadata({ data: "json, name=StackSetAccounts" })
   stackSetAccounts?: string[];
 
-  @Metadata({ data: "json, name=StackSetFailureToleranceCount" })
+  @SpeakeasyMetadata({ data: "json, name=StackSetFailureToleranceCount" })
   stackSetFailureToleranceCount?: number;
 
-  @Metadata({ data: "json, name=StackSetFailureTolerancePercentage" })
+  @SpeakeasyMetadata({ data: "json, name=StackSetFailureTolerancePercentage" })
   stackSetFailureTolerancePercentage?: number;
 
-  @Metadata({ data: "json, name=StackSetMaxConcurrencyCount" })
+  @SpeakeasyMetadata({ data: "json, name=StackSetMaxConcurrencyCount" })
   stackSetMaxConcurrencyCount?: number;
 
-  @Metadata({ data: "json, name=StackSetMaxConcurrencyPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=StackSetMaxConcurrencyPercentage" })
   stackSetMaxConcurrencyPercentage?: number;
 
-  @Metadata({ data: "json, name=StackSetOperationType" })
+  @SpeakeasyMetadata({ data: "json, name=StackSetOperationType" })
   stackSetOperationType?: StackSetOperationTypeEnum;
 
-  @Metadata({ data: "json, name=StackSetRegions" })
+  @SpeakeasyMetadata({ data: "json, name=StackSetRegions" })
   stackSetRegions?: string[];
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConversionStatus } from "./conversionstatus";
+
 
 
 // ConversionsBatchUpdateResponse
@@ -8,12 +8,12 @@ import { ConversionStatus } from "./conversionstatus";
  * Update Conversions Response.
 **/
 export class ConversionsBatchUpdateResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hasFailures" })
+  @SpeakeasyMetadata({ data: "json, name=hasFailures" })
   hasFailures?: boolean;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=status", elemType: shared.ConversionStatus })
+  @SpeakeasyMetadata({ data: "json, name=status", elemType: ConversionStatus })
   status?: ConversionStatus[];
 }

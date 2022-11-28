@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EpisodeSearchResultPodcast } from "./episodesearchresultpodcast";
+
 
 
 // EpisodeSearchResult
@@ -7,54 +8,54 @@ import { EpisodeSearchResultPodcast } from "./episodesearchresultpodcast";
  * When **type** is *episode*.
 **/
 export class EpisodeSearchResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=audio" })
+  @SpeakeasyMetadata({ data: "json, name=audio" })
   audio?: string;
 
-  @Metadata({ data: "json, name=audio_length_sec" })
+  @SpeakeasyMetadata({ data: "json, name=audio_length_sec" })
   audioLengthSec?: number;
 
-  @Metadata({ data: "json, name=description_highlighted" })
+  @SpeakeasyMetadata({ data: "json, name=description_highlighted" })
   descriptionHighlighted?: string;
 
-  @Metadata({ data: "json, name=description_original" })
+  @SpeakeasyMetadata({ data: "json, name=description_original" })
   descriptionOriginal?: string;
 
-  @Metadata({ data: "json, name=explicit_content" })
+  @SpeakeasyMetadata({ data: "json, name=explicit_content" })
   explicitContent?: boolean;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=image" })
+  @SpeakeasyMetadata({ data: "json, name=image" })
   image?: string;
 
-  @Metadata({ data: "json, name=itunes_id" })
+  @SpeakeasyMetadata({ data: "json, name=itunes_id" })
   itunesId?: number;
 
-  @Metadata({ data: "json, name=link" })
+  @SpeakeasyMetadata({ data: "json, name=link" })
   link?: string;
 
-  @Metadata({ data: "json, name=listennotes_url" })
+  @SpeakeasyMetadata({ data: "json, name=listennotes_url" })
   listennotesUrl?: string;
 
-  @Metadata({ data: "json, name=podcast" })
+  @SpeakeasyMetadata({ data: "json, name=podcast" })
   podcast?: EpisodeSearchResultPodcast;
 
-  @Metadata({ data: "json, name=pub_date_ms" })
+  @SpeakeasyMetadata({ data: "json, name=pub_date_ms" })
   pubDateMs?: number;
 
-  @Metadata({ data: "json, name=rss" })
+  @SpeakeasyMetadata({ data: "json, name=rss" })
   rss?: string;
 
-  @Metadata({ data: "json, name=thumbnail" })
+  @SpeakeasyMetadata({ data: "json, name=thumbnail" })
   thumbnail?: string;
 
-  @Metadata({ data: "json, name=title_highlighted" })
+  @SpeakeasyMetadata({ data: "json, name=title_highlighted" })
   titleHighlighted?: string;
 
-  @Metadata({ data: "json, name=title_original" })
+  @SpeakeasyMetadata({ data: "json, name=title_original" })
   titleOriginal?: string;
 
-  @Metadata({ data: "json, name=transcripts_highlighted" })
+  @SpeakeasyMetadata({ data: "json, name=transcripts_highlighted" })
   transcriptsHighlighted?: string[];
 }

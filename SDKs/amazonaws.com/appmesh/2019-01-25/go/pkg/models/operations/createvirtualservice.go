@@ -22,6 +22,8 @@ type CreateVirtualServiceHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateVirtualServiceRequestBodySpec
+// An object that represents the specification of a virtual service.
 type CreateVirtualServiceRequestBodySpec struct {
 	Provider *shared.VirtualServiceProvider `json:"provider,omitempty"`
 }

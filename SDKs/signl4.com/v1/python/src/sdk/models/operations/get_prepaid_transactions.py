@@ -5,9 +5,9 @@ from sdk.models import shared
 
 @dataclass
 class GetPrepaidTransactionsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     error_response_content: Optional[shared.ErrorResponseContent] = field(default=None)
     prepaid_transaction_infos: Optional[List[shared.PrepaidTransactionInfo]] = field(default=None)
-    status_code: int = field(default=None)
     

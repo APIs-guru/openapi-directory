@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DiskInfo } from "./diskinfo";
+
 
 
 // InstanceSnapshotInfo
@@ -8,12 +8,12 @@ import { DiskInfo } from "./diskinfo";
  * Describes an instance snapshot.
 **/
 export class InstanceSnapshotInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fromBlueprintId" })
+  @SpeakeasyMetadata({ data: "json, name=fromBlueprintId" })
   fromBlueprintId?: string;
 
-  @Metadata({ data: "json, name=fromBundleId" })
+  @SpeakeasyMetadata({ data: "json, name=fromBundleId" })
   fromBundleId?: string;
 
-  @Metadata({ data: "json, name=fromDiskInfo", elemType: shared.DiskInfo })
+  @SpeakeasyMetadata({ data: "json, name=fromDiskInfo", elemType: DiskInfo })
   fromDiskInfo?: DiskInfo[];
 }

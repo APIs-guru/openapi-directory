@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var IndexConfigTypeEnum;
 (function (IndexConfigTypeEnum) {
     IndexConfigTypeEnum["IndexTypeUnspecified"] = "INDEX_TYPE_UNSPECIFIED";
@@ -39,17 +39,37 @@ var IndexConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", String)
     ], IndexConfig.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=fieldPath" }),
+        SpeakeasyMetadata({ data: "json, name=fieldPath" }),
         __metadata("design:type", String)
     ], IndexConfig.prototype, "fieldPath", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], IndexConfig.prototype, "type", void 0);
     return IndexConfig;
 }(SpeakeasyBase));
 export { IndexConfig };
+// IndexConfigInput
+/**
+ * Configuration for an indexed field.
+**/
+var IndexConfigInput = /** @class */ (function (_super) {
+    __extends(IndexConfigInput, _super);
+    function IndexConfigInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=fieldPath" }),
+        __metadata("design:type", String)
+    ], IndexConfigInput.prototype, "fieldPath", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=type" }),
+        __metadata("design:type", String)
+    ], IndexConfigInput.prototype, "type", void 0);
+    return IndexConfigInput;
+}(SpeakeasyBase));
+export { IndexConfigInput };

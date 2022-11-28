@@ -7,6 +7,8 @@ const (
 	DepositSwitchCreateRequestCountryCodeEnumCa DepositSwitchCreateRequestCountryCodeEnum = "CA"
 )
 
+// DepositSwitchCreateRequest
+// DepositSwitchCreateRequest defines the request schema for `/deposit_switch/create`
 type DepositSwitchCreateRequest struct {
 	ClientID          *string                                    `json:"client_id,omitempty"`
 	CountryCode       *DepositSwitchCreateRequestCountryCodeEnum `json:"country_code,omitempty"`

@@ -1,6 +1,7 @@
 
 
+
 export enum ObInterestFixedVariableType1CodeEnum {
-    Infi = "INFI"
-,    Inva = "INVA"
+    Infi = "INFI",
+    Inva = "INVA"
 }

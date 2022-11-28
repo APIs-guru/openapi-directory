@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Casing extends SpeakeasyBase {
-  @Metadata({ data: "json, name=casing_code" })
+  @SpeakeasyMetadata({ data: "json, name=casing_code" })
   casingCode?: string;
 
-  @Metadata({ data: "json, name=casing_material" })
+  @SpeakeasyMetadata({ data: "json, name=casing_material" })
   casingMaterial?: string;
 
-  @Metadata({ data: "json, name=diameter" })
+  @SpeakeasyMetadata({ data: "json, name=diameter" })
   diameter: string;
 
-  @Metadata({ data: "json, name=drive_shoe" })
+  @SpeakeasyMetadata({ data: "json, name=drive_shoe" })
   driveShoe?: boolean;
 
-  @Metadata({ data: "json, name=end" })
+  @SpeakeasyMetadata({ data: "json, name=end" })
   end: string;
 
-  @Metadata({ data: "json, name=start" })
+  @SpeakeasyMetadata({ data: "json, name=start" })
   start: string;
 
-  @Metadata({ data: "json, name=wall_thickness" })
+  @SpeakeasyMetadata({ data: "json, name=wall_thickness" })
   wallThickness?: string;
 }

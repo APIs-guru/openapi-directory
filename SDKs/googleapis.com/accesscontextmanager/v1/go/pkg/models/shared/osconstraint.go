@@ -12,6 +12,8 @@ const (
 	OsConstraintOsTypeEnumIos             OsConstraintOsTypeEnum = "IOS"
 )
 
+// OsConstraint
+// A restriction on the OS type and version of devices making requests.
 type OsConstraint struct {
 	MinimumVersion          *string                 `json:"minimumVersion,omitempty"`
 	OsType                  *OsConstraintOsTypeEnum `json:"osType,omitempty"`

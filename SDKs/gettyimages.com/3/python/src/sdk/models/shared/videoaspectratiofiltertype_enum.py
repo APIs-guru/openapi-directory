@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class VideoAspectRatioFilterTypeEnum(str, Enum):
     SIXTEEN_9 = "16:9"

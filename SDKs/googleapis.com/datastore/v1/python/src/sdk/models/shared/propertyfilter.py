@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import propertyreference
-from . import value
+from sdk import utils
+from . import *
 
 class PropertyFilterOpEnum(str, Enum):
     OPERATOR_UNSPECIFIED = "OPERATOR_UNSPECIFIED"
@@ -20,7 +21,11 @@ class PropertyFilterOpEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PropertyFilter:
-    op: Optional[PropertyFilterOpEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'op' }})
-    property: Optional[propertyreference.PropertyReference] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'property' }})
-    value: Optional[value.Value] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    r"""PropertyFilter
+    A filter on a specific property.
+    """
+    
+    op: Optional[PropertyFilterOpEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('op') }})
+    property: Optional[PropertyReference] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('property') }})
+    value: Optional[Value] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     

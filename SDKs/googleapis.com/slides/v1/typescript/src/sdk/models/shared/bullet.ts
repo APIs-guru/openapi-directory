@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TextStyle } from "./textstyle";
+
 
 
 // Bullet
@@ -7,15 +8,15 @@ import { TextStyle } from "./textstyle";
  * Describes the bullet of a paragraph.
 **/
 export class Bullet extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bulletStyle" })
+  @SpeakeasyMetadata({ data: "json, name=bulletStyle" })
   bulletStyle?: TextStyle;
 
-  @Metadata({ data: "json, name=glyph" })
+  @SpeakeasyMetadata({ data: "json, name=glyph" })
   glyph?: string;
 
-  @Metadata({ data: "json, name=listId" })
+  @SpeakeasyMetadata({ data: "json, name=listId" })
   listId?: string;
 
-  @Metadata({ data: "json, name=nestingLevel" })
+  @SpeakeasyMetadata({ data: "json, name=nestingLevel" })
   nestingLevel?: number;
 }

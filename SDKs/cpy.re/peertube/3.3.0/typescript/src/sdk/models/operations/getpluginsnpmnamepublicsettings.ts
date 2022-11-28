@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetPluginsNpmNamePublicSettingsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=npmName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=npmName" })
   npmName: string;
 }
 
 
 export class GetPluginsNpmNamePublicSettingsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetPluginsNpmNamePublicSettingsPathParams;
 }
 
 
 export class GetPluginsNpmNamePublicSettingsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getPluginsNpmNamePublicSettings200ApplicationJsonObject?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

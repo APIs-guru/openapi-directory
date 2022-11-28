@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -20,13 +24,13 @@ class SafebrowsingThreatListUpdatesFetchQueryParams:
 
 @dataclass
 class SafebrowsingThreatListUpdatesFetchRequest:
-    query_params: SafebrowsingThreatListUpdatesFetchQueryParams = field(default=None)
+    query_params: SafebrowsingThreatListUpdatesFetchQueryParams = field()
     request: Optional[shared.GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class SafebrowsingThreatListUpdatesFetchResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_security_safebrowsing_v4_fetch_threat_list_updates_response: Optional[shared.GoogleSecuritySafebrowsingV4FetchThreatListUpdatesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

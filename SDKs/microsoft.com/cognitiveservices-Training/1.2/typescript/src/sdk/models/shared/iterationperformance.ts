@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TagPerformance } from "./tagperformance";
+
 
 
 // IterationPerformance
@@ -8,18 +8,18 @@ import { TagPerformance } from "./tagperformance";
  * Represents the detailed performance data for a trained iteration
 **/
 export class IterationPerformance extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PerTagPerformance", elemType: shared.TagPerformance })
+  @SpeakeasyMetadata({ data: "json, name=PerTagPerformance", elemType: TagPerformance })
   perTagPerformance?: TagPerformance[];
 
-  @Metadata({ data: "json, name=Precision" })
+  @SpeakeasyMetadata({ data: "json, name=Precision" })
   precision?: number;
 
-  @Metadata({ data: "json, name=PrecisionStdDeviation" })
+  @SpeakeasyMetadata({ data: "json, name=PrecisionStdDeviation" })
   precisionStdDeviation?: number;
 
-  @Metadata({ data: "json, name=Recall" })
+  @SpeakeasyMetadata({ data: "json, name=Recall" })
   recall?: number;
 
-  @Metadata({ data: "json, name=RecallStdDeviation" })
+  @SpeakeasyMetadata({ data: "json, name=RecallStdDeviation" })
   recallStdDeviation?: number;
 }

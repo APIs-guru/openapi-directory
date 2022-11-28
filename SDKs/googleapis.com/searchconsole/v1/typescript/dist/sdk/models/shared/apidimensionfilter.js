@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var ApiDimensionFilterDimensionEnum;
 (function (ApiDimensionFilterDimensionEnum) {
     ApiDimensionFilterDimensionEnum["Query"] = "QUERY";
@@ -50,15 +50,15 @@ var ApiDimensionFilter = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=dimension" }),
+        SpeakeasyMetadata({ data: "json, name=dimension" }),
         __metadata("design:type", String)
     ], ApiDimensionFilter.prototype, "dimension", void 0);
     __decorate([
-        Metadata({ data: "json, name=expression" }),
+        SpeakeasyMetadata({ data: "json, name=expression" }),
         __metadata("design:type", String)
     ], ApiDimensionFilter.prototype, "expression", void 0);
     __decorate([
-        Metadata({ data: "json, name=operator" }),
+        SpeakeasyMetadata({ data: "json, name=operator" }),
         __metadata("design:type", String)
     ], ApiDimensionFilter.prototype, "operator", void 0);
     return ApiDimensionFilter;

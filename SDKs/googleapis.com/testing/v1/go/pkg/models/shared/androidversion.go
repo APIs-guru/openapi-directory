@@ -1,5 +1,7 @@
 package shared
 
+// AndroidVersion
+// A version of the Android OS.
 type AndroidVersion struct {
 	APILevel      *int32        `json:"apiLevel,omitempty"`
 	CodeName      *string       `json:"codeName,omitempty"`

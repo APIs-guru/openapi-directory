@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceTypeEnum } from "./resourcetypeenum";
+
 
 
 // AnalyzedResourceSummary
@@ -7,12 +8,12 @@ import { ResourceTypeEnum } from "./resourcetypeenum";
  * Contains the ARN of the analyzed resource.
 **/
 export class AnalyzedResourceSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=resourceArn" })
+  @SpeakeasyMetadata({ data: "json, name=resourceArn" })
   resourceArn: string;
 
-  @Metadata({ data: "json, name=resourceOwnerAccount" })
+  @SpeakeasyMetadata({ data: "json, name=resourceOwnerAccount" })
   resourceOwnerAccount: string;
 
-  @Metadata({ data: "json, name=resourceType" })
+  @SpeakeasyMetadata({ data: "json, name=resourceType" })
   resourceType: ResourceTypeEnum;
 }

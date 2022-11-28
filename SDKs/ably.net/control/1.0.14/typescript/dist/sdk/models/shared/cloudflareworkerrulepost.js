@@ -22,8 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RuleSource } from "./rulesource";
 export var CloudflareWorkerRulePostRequestModeEnum;
 (function (CloudflareWorkerRulePostRequestModeEnum) {
@@ -45,11 +44,11 @@ var CloudflareWorkerRulePostTargetHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], CloudflareWorkerRulePostTargetHeaders.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=value" }),
+        SpeakeasyMetadata({ data: "json, name=value" }),
         __metadata("design:type", String)
     ], CloudflareWorkerRulePostTargetHeaders.prototype, "value", void 0);
     return CloudflareWorkerRulePostTargetHeaders;
@@ -61,15 +60,15 @@ var CloudflareWorkerRulePostTarget = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=headers", elemType: shared.CloudflareWorkerRulePostTargetHeaders }),
+        SpeakeasyMetadata({ data: "json, name=headers", elemType: CloudflareWorkerRulePostTargetHeaders }),
         __metadata("design:type", Array)
     ], CloudflareWorkerRulePostTarget.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "json, name=signingKeyId" }),
+        SpeakeasyMetadata({ data: "json, name=signingKeyId" }),
         __metadata("design:type", String)
     ], CloudflareWorkerRulePostTarget.prototype, "signingKeyId", void 0);
     __decorate([
-        Metadata({ data: "json, name=url" }),
+        SpeakeasyMetadata({ data: "json, name=url" }),
         __metadata("design:type", String)
     ], CloudflareWorkerRulePostTarget.prototype, "url", void 0);
     return CloudflareWorkerRulePostTarget;
@@ -81,23 +80,23 @@ var CloudflareWorkerRulePost = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=requestMode" }),
+        SpeakeasyMetadata({ data: "json, name=requestMode" }),
         __metadata("design:type", String)
     ], CloudflareWorkerRulePost.prototype, "requestMode", void 0);
     __decorate([
-        Metadata({ data: "json, name=ruleType" }),
+        SpeakeasyMetadata({ data: "json, name=ruleType" }),
         __metadata("design:type", String)
     ], CloudflareWorkerRulePost.prototype, "ruleType", void 0);
     __decorate([
-        Metadata({ data: "json, name=source" }),
+        SpeakeasyMetadata({ data: "json, name=source" }),
         __metadata("design:type", RuleSource)
     ], CloudflareWorkerRulePost.prototype, "source", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], CloudflareWorkerRulePost.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=target" }),
+        SpeakeasyMetadata({ data: "json, name=target" }),
         __metadata("design:type", CloudflareWorkerRulePostTarget)
     ], CloudflareWorkerRulePost.prototype, "target", void 0);
     return CloudflareWorkerRulePost;

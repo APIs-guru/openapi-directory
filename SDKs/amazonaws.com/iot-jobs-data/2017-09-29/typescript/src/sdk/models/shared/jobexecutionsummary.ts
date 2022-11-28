@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // JobExecutionSummary
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains a subset of information about a job execution.
 **/
 export class JobExecutionSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=executionNumber" })
+  @SpeakeasyMetadata({ data: "json, name=executionNumber" })
   executionNumber?: number;
 
-  @Metadata({ data: "json, name=jobId" })
+  @SpeakeasyMetadata({ data: "json, name=jobId" })
   jobId?: string;
 
-  @Metadata({ data: "json, name=lastUpdatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdatedAt" })
   lastUpdatedAt?: number;
 
-  @Metadata({ data: "json, name=queuedAt" })
+  @SpeakeasyMetadata({ data: "json, name=queuedAt" })
   queuedAt?: number;
 
-  @Metadata({ data: "json, name=startedAt" })
+  @SpeakeasyMetadata({ data: "json, name=startedAt" })
   startedAt?: number;
 
-  @Metadata({ data: "json, name=versionNumber" })
+  @SpeakeasyMetadata({ data: "json, name=versionNumber" })
   versionNumber?: number;
 }

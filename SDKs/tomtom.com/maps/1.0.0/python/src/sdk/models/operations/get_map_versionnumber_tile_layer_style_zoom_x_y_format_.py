@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 
 class GetMapVersionNumberTileLayerStyleZoomXYFormatFormatEnum(str, Enum):
     JPG = "jpg"
@@ -17,13 +18,13 @@ class GetMapVersionNumberTileLayerStyleZoomXYFormatStyleEnum(str, Enum):
 
 @dataclass
 class GetMapVersionNumberTileLayerStyleZoomXYFormatPathParams:
-    x: int = field(default=None, metadata={'path_param': { 'field_name': 'X', 'style': 'simple', 'explode': False }})
-    y: int = field(default=None, metadata={'path_param': { 'field_name': 'Y', 'style': 'simple', 'explode': False }})
-    format: GetMapVersionNumberTileLayerStyleZoomXYFormatFormatEnum = field(default=None, metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
-    layer: GetMapVersionNumberTileLayerStyleZoomXYFormatLayerEnum = field(default=None, metadata={'path_param': { 'field_name': 'layer', 'style': 'simple', 'explode': False }})
-    style: GetMapVersionNumberTileLayerStyleZoomXYFormatStyleEnum = field(default=None, metadata={'path_param': { 'field_name': 'style', 'style': 'simple', 'explode': False }})
-    version_number: int = field(default=None, metadata={'path_param': { 'field_name': 'versionNumber', 'style': 'simple', 'explode': False }})
-    zoom: int = field(default=None, metadata={'path_param': { 'field_name': 'zoom', 'style': 'simple', 'explode': False }})
+    x: int = field(metadata={'path_param': { 'field_name': 'X', 'style': 'simple', 'explode': False }})
+    y: int = field(metadata={'path_param': { 'field_name': 'Y', 'style': 'simple', 'explode': False }})
+    format: GetMapVersionNumberTileLayerStyleZoomXYFormatFormatEnum = field(metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
+    layer: GetMapVersionNumberTileLayerStyleZoomXYFormatLayerEnum = field(metadata={'path_param': { 'field_name': 'layer', 'style': 'simple', 'explode': False }})
+    style: GetMapVersionNumberTileLayerStyleZoomXYFormatStyleEnum = field(metadata={'path_param': { 'field_name': 'style', 'style': 'simple', 'explode': False }})
+    version_number: int = field(metadata={'path_param': { 'field_name': 'versionNumber', 'style': 'simple', 'explode': False }})
+    zoom: int = field(metadata={'path_param': { 'field_name': 'zoom', 'style': 'simple', 'explode': False }})
     
 class GetMapVersionNumberTileLayerStyleZoomXYFormatViewEnum(str, Enum):
     UNIFIED = "Unified"
@@ -38,12 +39,12 @@ class GetMapVersionNumberTileLayerStyleZoomXYFormatQueryParams:
 
 @dataclass
 class GetMapVersionNumberTileLayerStyleZoomXYFormatRequest:
-    path_params: GetMapVersionNumberTileLayerStyleZoomXYFormatPathParams = field(default=None)
-    query_params: GetMapVersionNumberTileLayerStyleZoomXYFormatQueryParams = field(default=None)
+    path_params: GetMapVersionNumberTileLayerStyleZoomXYFormatPathParams = field()
+    query_params: GetMapVersionNumberTileLayerStyleZoomXYFormatQueryParams = field()
     
 
 @dataclass
 class GetMapVersionNumberTileLayerStyleZoomXYFormatResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

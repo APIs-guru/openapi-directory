@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Tag
@@ -6,15 +7,28 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents a Tag
 **/
 export class Tag extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Description, form, name=Description;" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=Id, form, name=Id;" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=ImageCount, form, name=ImageCount;" })
+  @SpeakeasyMetadata({ data: "json, name=ImageCount" })
   imageCount?: number;
 
-  @Metadata({ data: "json, name=Name, form, name=Name;" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
+  name?: string;
+}
+
+
+// TagInput
+/** 
+ * Represents a Tag
+**/
+export class TagInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=Description, form, name=Description;" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=Name, form, name=Name;" })
   name?: string;
 }

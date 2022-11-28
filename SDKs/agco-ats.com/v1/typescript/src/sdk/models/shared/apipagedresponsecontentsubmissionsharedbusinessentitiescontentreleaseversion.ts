@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContentSubmissionSharedBusinessEntitiesContentReleaseVersion } from "./contentsubmissionsharedbusinessentitiescontentreleaseversion";
 import { ApiPagedResponseMetadata } from "./apipagedresponsemetadata";
+
 
 
 // ApiPagedResponseContentSubmissionSharedBusinessEntitiesContentReleaseVersion
@@ -9,9 +9,9 @@ import { ApiPagedResponseMetadata } from "./apipagedresponsemetadata";
  * A response containing a page of results and metadata concerning the results
 **/
 export class ApiPagedResponseContentSubmissionSharedBusinessEntitiesContentReleaseVersion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Entities", elemType: shared.ContentSubmissionSharedBusinessEntitiesContentReleaseVersion })
+  @SpeakeasyMetadata({ data: "json, name=Entities", elemType: ContentSubmissionSharedBusinessEntitiesContentReleaseVersion })
   entities: ContentSubmissionSharedBusinessEntitiesContentReleaseVersion[];
 
-  @Metadata({ data: "json, name=Metadata" })
+  @SpeakeasyMetadata({ data: "json, name=Metadata" })
   metadata: ApiPagedResponseMetadata;
 }

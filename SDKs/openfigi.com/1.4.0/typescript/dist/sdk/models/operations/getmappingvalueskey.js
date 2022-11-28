@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetMappingValuesKeyKeyEnum;
 (function (GetMappingValuesKeyKeyEnum) {
     GetMappingValuesKeyKeyEnum["IdType"] = "idType";
@@ -39,59 +39,59 @@ var GetMappingValuesKeyPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=key" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=key" }),
         __metadata("design:type", String)
     ], GetMappingValuesKeyPathParams.prototype, "key", void 0);
     return GetMappingValuesKeyPathParams;
 }(SpeakeasyBase));
 export { GetMappingValuesKeyPathParams };
-var GetMappingValuesKeyRequest = /** @class */ (function (_super) {
-    __extends(GetMappingValuesKeyRequest, _super);
-    function GetMappingValuesKeyRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata(),
-        __metadata("design:type", GetMappingValuesKeyPathParams)
-    ], GetMappingValuesKeyRequest.prototype, "pathParams", void 0);
-    return GetMappingValuesKeyRequest;
-}(SpeakeasyBase));
-export { GetMappingValuesKeyRequest };
 var GetMappingValuesKey200ApplicationJson = /** @class */ (function (_super) {
     __extends(GetMappingValuesKey200ApplicationJson, _super);
     function GetMappingValuesKey200ApplicationJson() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=values" }),
+        SpeakeasyMetadata({ data: "json, name=values" }),
         __metadata("design:type", Array)
     ], GetMappingValuesKey200ApplicationJson.prototype, "values", void 0);
     return GetMappingValuesKey200ApplicationJson;
 }(SpeakeasyBase));
 export { GetMappingValuesKey200ApplicationJson };
+var GetMappingValuesKeyRequest = /** @class */ (function (_super) {
+    __extends(GetMappingValuesKeyRequest, _super);
+    function GetMappingValuesKeyRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", GetMappingValuesKeyPathParams)
+    ], GetMappingValuesKeyRequest.prototype, "pathParams", void 0);
+    return GetMappingValuesKeyRequest;
+}(SpeakeasyBase));
+export { GetMappingValuesKeyRequest };
 var GetMappingValuesKeyResponse = /** @class */ (function (_super) {
     __extends(GetMappingValuesKeyResponse, _super);
     function GetMappingValuesKeyResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetMappingValuesKeyResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetMappingValuesKey200ApplicationJson)
     ], GetMappingValuesKeyResponse.prototype, "getMappingValuesKey200ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetMappingValuesKeyResponse.prototype, "getMappingValuesKey400WildcardString", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetMappingValuesKeyResponse.prototype, "getMappingValuesKey500WildcardString", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetMappingValuesKeyResponse.prototype, "statusCode", void 0);
     return GetMappingValuesKeyResponse;

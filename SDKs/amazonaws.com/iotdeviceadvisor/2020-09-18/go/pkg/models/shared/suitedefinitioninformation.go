@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// SuiteDefinitionInformation
+// Information about the suite definition.
 type SuiteDefinitionInformation struct {
 	CreatedAt                *time.Time        `json:"createdAt,omitempty"`
 	DefaultDevices           []DeviceUnderTest `json:"defaultDevices,omitempty"`

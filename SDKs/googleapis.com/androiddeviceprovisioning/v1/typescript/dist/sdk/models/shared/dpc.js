@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Dpc
 /**
  * An EMM's DPC ([device policy controller](http://developer.android.com/work/dpc/build-dpc.html)). Zero-touch enrollment installs a DPC (listed in the `Configuration`) on a device to maintain the customer's mobile policies. All the DPCs listed by the API support zero-touch enrollment and are available in Google Play.
@@ -33,15 +33,15 @@ var Dpc = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=dpcName" }),
+        SpeakeasyMetadata({ data: "json, name=dpcName" }),
         __metadata("design:type", String)
     ], Dpc.prototype, "dpcName", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Dpc.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=packageName" }),
+        SpeakeasyMetadata({ data: "json, name=packageName" }),
         __metadata("design:type", String)
     ], Dpc.prototype, "packageName", void 0);
     return Dpc;

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VolumeConfiguration } from "./volumeconfiguration";
 // VolumeRecommendationOption
 /**
@@ -34,15 +34,15 @@ var VolumeRecommendationOption = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=configuration" }),
+        SpeakeasyMetadata({ data: "json, name=configuration" }),
         __metadata("design:type", VolumeConfiguration)
     ], VolumeRecommendationOption.prototype, "configuration", void 0);
     __decorate([
-        Metadata({ data: "json, name=performanceRisk" }),
+        SpeakeasyMetadata({ data: "json, name=performanceRisk" }),
         __metadata("design:type", Number)
     ], VolumeRecommendationOption.prototype, "performanceRisk", void 0);
     __decorate([
-        Metadata({ data: "json, name=rank" }),
+        SpeakeasyMetadata({ data: "json, name=rank" }),
         __metadata("design:type", Number)
     ], VolumeRecommendationOption.prototype, "rank", void 0);
     return VolumeRecommendationOption;

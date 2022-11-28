@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccessControlRuleEffectEnum } from "./accesscontrolruleeffectenum";
 
 
+
 export class GetAccessControlEffectResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Effect" })
+  @SpeakeasyMetadata({ data: "json, name=Effect" })
   effect?: AccessControlRuleEffectEnum;
 
-  @Metadata({ data: "json, name=MatchedRules" })
+  @SpeakeasyMetadata({ data: "json, name=MatchedRules" })
   matchedRules?: string[];
 }

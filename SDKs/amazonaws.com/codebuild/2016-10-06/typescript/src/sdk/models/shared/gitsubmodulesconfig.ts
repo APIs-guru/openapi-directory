@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GitSubmodulesConfig
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  Information about the Git submodules configuration for an CodeBuild build project. 
 **/
 export class GitSubmodulesConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fetchSubmodules" })
+  @SpeakeasyMetadata({ data: "json, name=fetchSubmodules" })
   fetchSubmodules: boolean;
 }

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// SecretVersionsListEntry
+// A structure that contains information about one version of a secret.
 type SecretVersionsListEntry struct {
 	CreatedDate      *time.Time `json:"CreatedDate,omitempty"`
 	KmsKeyIds        []string   `json:"KmsKeyIds,omitempty"`

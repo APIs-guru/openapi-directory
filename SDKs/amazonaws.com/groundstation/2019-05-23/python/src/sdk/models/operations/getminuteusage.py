@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,22 +22,22 @@ class GetMinuteUsageHeaders:
 @dataclass_json
 @dataclass
 class GetMinuteUsageRequestBody:
-    month: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'month' }})
-    year: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'year' }})
+    month: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('month') }})
+    year: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('year') }})
     
 
 @dataclass
 class GetMinuteUsageRequest:
-    headers: GetMinuteUsageHeaders = field(default=None)
-    request: GetMinuteUsageRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: GetMinuteUsageHeaders = field()
+    request: GetMinuteUsageRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class GetMinuteUsageResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     dependency_exception: Optional[Any] = field(default=None)
     get_minute_usage_response: Optional[shared.GetMinuteUsageResponse] = field(default=None)
     invalid_parameter_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

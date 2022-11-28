@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ScalingPolicy } from "./scalingpolicy";
+
 
 
 // DescribeScalingPoliciesOutput
@@ -8,9 +8,9 @@ import { ScalingPolicy } from "./scalingpolicy";
  * Represents the returned data in response to a request operation.
 **/
 export class DescribeScalingPoliciesOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=ScalingPolicies", elemType: shared.ScalingPolicy })
+  @SpeakeasyMetadata({ data: "json, name=ScalingPolicies", elemType: ScalingPolicy })
   scalingPolicies?: ScalingPolicy[];
 }

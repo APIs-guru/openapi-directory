@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConstraintViolation } from "./constraintviolation";
 
 
+
 export class ErrorResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=developerMessage" })
+  @SpeakeasyMetadata({ data: "json, name=developerMessage" })
   developerMessage?: string;
 
-  @Metadata({ data: "json, name=errorType" })
+  @SpeakeasyMetadata({ data: "json, name=errorType" })
   errorType?: string;
 
-  @Metadata({ data: "json, name=violations", elemType: shared.ConstraintViolation })
+  @SpeakeasyMetadata({ data: "json, name=violations", elemType: ConstraintViolation })
   violations?: ConstraintViolation[];
 }

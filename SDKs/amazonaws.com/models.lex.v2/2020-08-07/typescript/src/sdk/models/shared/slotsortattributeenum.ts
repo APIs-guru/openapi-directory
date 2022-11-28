@@ -1,6 +1,7 @@
 
 
+
 export enum SlotSortAttributeEnum {
-    SlotName = "SlotName"
-,    LastUpdatedDateTime = "LastUpdatedDateTime"
+    SlotName = "SlotName",
+    LastUpdatedDateTime = "LastUpdatedDateTime"
 }

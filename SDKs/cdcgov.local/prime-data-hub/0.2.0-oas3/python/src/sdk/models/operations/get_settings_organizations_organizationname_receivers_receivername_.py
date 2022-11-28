@@ -5,24 +5,24 @@ from sdk.models import shared
 
 @dataclass
 class GetSettingsOrganizationsOrganizationNameReceiversReceiverNamePathParams:
-    organization_name: str = field(default=None, metadata={'path_param': { 'field_name': 'organizationName', 'style': 'simple', 'explode': False }})
-    receiver_name: str = field(default=None, metadata={'path_param': { 'field_name': 'receiverName', 'style': 'simple', 'explode': False }})
+    organization_name: str = field(metadata={'path_param': { 'field_name': 'organizationName', 'style': 'simple', 'explode': False }})
+    receiver_name: str = field(metadata={'path_param': { 'field_name': 'receiverName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetSettingsOrganizationsOrganizationNameReceiversReceiverNameSecurity:
-    o_auth2: shared.SchemeOAuth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    o_auth2: shared.SchemeOAuth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetSettingsOrganizationsOrganizationNameReceiversReceiverNameRequest:
-    path_params: GetSettingsOrganizationsOrganizationNameReceiversReceiverNamePathParams = field(default=None)
-    security: GetSettingsOrganizationsOrganizationNameReceiversReceiverNameSecurity = field(default=None)
+    path_params: GetSettingsOrganizationsOrganizationNameReceiversReceiverNamePathParams = field()
+    security: GetSettingsOrganizationsOrganizationNameReceiversReceiverNameSecurity = field()
     
 
 @dataclass
 class GetSettingsOrganizationsOrganizationNameReceiversReceiverNameResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     receiver: Optional[shared.Receiver] = field(default=None)
-    status_code: int = field(default=None)
     

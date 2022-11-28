@@ -1,5 +1,7 @@
 package shared
 
+// EmbeddedObject
+// An embedded object in the document.
 type EmbeddedObject struct {
 	Description               *string                 `json:"description,omitempty"`
 	EmbeddedDrawingProperties map[string]interface{}  `json:"embeddedDrawingProperties,omitempty"`

@@ -1,5 +1,7 @@
 package shared
 
+// BackupConfiguration
+// Database instance backup configuration.
 type BackupConfiguration struct {
 	BackupRetentionSettings        *BackupRetentionSettings `json:"backupRetentionSettings,omitempty"`
 	BinaryLogEnabled               *bool                    `json:"binaryLogEnabled,omitempty"`

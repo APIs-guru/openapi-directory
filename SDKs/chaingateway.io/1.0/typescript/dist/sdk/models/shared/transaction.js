@@ -22,62 +22,62 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Transaction = /** @class */ (function (_super) {
     __extends(Transaction, _super);
     function Transaction() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=amount" }),
+        SpeakeasyMetadata({ data: "json, name=amount" }),
         __metadata("design:type", String)
     ], Transaction.prototype, "amount", void 0);
     __decorate([
-        Metadata({ data: "json, name=block_number" }),
+        SpeakeasyMetadata({ data: "json, name=block_number" }),
         __metadata("design:type", String)
     ], Transaction.prototype, "blockNumber", void 0);
     __decorate([
-        Metadata({ data: "json, name=contract_address" }),
+        SpeakeasyMetadata({ data: "json, name=contract_address" }),
         __metadata("design:type", String)
     ], Transaction.prototype, "contractAddress", void 0);
     __decorate([
-        Metadata({ data: "json, name=from" }),
+        SpeakeasyMetadata({ data: "json, name=from" }),
         __metadata("design:type", String)
     ], Transaction.prototype, "from", void 0);
     __decorate([
-        Metadata({ data: "json, name=gas" }),
+        SpeakeasyMetadata({ data: "json, name=gas" }),
         __metadata("design:type", String)
     ], Transaction.prototype, "gas", void 0);
     __decorate([
-        Metadata({ data: "json, name=gas_price" }),
+        SpeakeasyMetadata({ data: "json, name=gas_price" }),
         __metadata("design:type", String)
     ], Transaction.prototype, "gasPrice", void 0);
     __decorate([
-        Metadata({ data: "json, name=to" }),
+        SpeakeasyMetadata({ data: "json, name=to" }),
         __metadata("design:type", String)
     ], Transaction.prototype, "to", void 0);
     __decorate([
-        Metadata({ data: "json, name=token_decimals" }),
+        SpeakeasyMetadata({ data: "json, name=token_decimals" }),
         __metadata("design:type", String)
     ], Transaction.prototype, "tokenDecimals", void 0);
     __decorate([
-        Metadata({ data: "json, name=token_name" }),
+        SpeakeasyMetadata({ data: "json, name=token_name" }),
         __metadata("design:type", String)
     ], Transaction.prototype, "tokenName", void 0);
     __decorate([
-        Metadata({ data: "json, name=token_supply" }),
+        SpeakeasyMetadata({ data: "json, name=token_supply" }),
         __metadata("design:type", String)
     ], Transaction.prototype, "tokenSupply", void 0);
     __decorate([
-        Metadata({ data: "json, name=token_symbol" }),
+        SpeakeasyMetadata({ data: "json, name=token_symbol" }),
         __metadata("design:type", String)
     ], Transaction.prototype, "tokenSymbol", void 0);
     __decorate([
-        Metadata({ data: "json, name=txid" }),
+        SpeakeasyMetadata({ data: "json, name=txid" }),
         __metadata("design:type", String)
     ], Transaction.prototype, "txid", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], Transaction.prototype, "type", void 0);
     return Transaction;

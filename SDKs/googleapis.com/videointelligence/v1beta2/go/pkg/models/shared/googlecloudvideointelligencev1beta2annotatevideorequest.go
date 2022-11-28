@@ -15,6 +15,8 @@ const (
 	GoogleCloudVideointelligenceV1beta2AnnotateVideoRequestFeaturesEnumPersonDetection          GoogleCloudVideointelligenceV1beta2AnnotateVideoRequestFeaturesEnum = "PERSON_DETECTION"
 )
 
+// GoogleCloudVideointelligenceV1beta2AnnotateVideoRequest
+// Video annotation request.
 type GoogleCloudVideointelligenceV1beta2AnnotateVideoRequest struct {
 	Features     []GoogleCloudVideointelligenceV1beta2AnnotateVideoRequestFeaturesEnum `json:"features,omitempty"`
 	InputContent *string                                                               `json:"inputContent,omitempty"`

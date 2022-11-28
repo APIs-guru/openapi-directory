@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // DirectoryLimits
 /**
  * Contains directory limit information for a Region.
@@ -33,39 +33,39 @@ var DirectoryLimits = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CloudOnlyDirectoriesCurrentCount" }),
+        SpeakeasyMetadata({ data: "json, name=CloudOnlyDirectoriesCurrentCount" }),
         __metadata("design:type", Number)
     ], DirectoryLimits.prototype, "cloudOnlyDirectoriesCurrentCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=CloudOnlyDirectoriesLimit" }),
+        SpeakeasyMetadata({ data: "json, name=CloudOnlyDirectoriesLimit" }),
         __metadata("design:type", Number)
     ], DirectoryLimits.prototype, "cloudOnlyDirectoriesLimit", void 0);
     __decorate([
-        Metadata({ data: "json, name=CloudOnlyDirectoriesLimitReached" }),
+        SpeakeasyMetadata({ data: "json, name=CloudOnlyDirectoriesLimitReached" }),
         __metadata("design:type", Boolean)
     ], DirectoryLimits.prototype, "cloudOnlyDirectoriesLimitReached", void 0);
     __decorate([
-        Metadata({ data: "json, name=CloudOnlyMicrosoftADCurrentCount" }),
+        SpeakeasyMetadata({ data: "json, name=CloudOnlyMicrosoftADCurrentCount" }),
         __metadata("design:type", Number)
     ], DirectoryLimits.prototype, "cloudOnlyMicrosoftAdCurrentCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=CloudOnlyMicrosoftADLimit" }),
+        SpeakeasyMetadata({ data: "json, name=CloudOnlyMicrosoftADLimit" }),
         __metadata("design:type", Number)
     ], DirectoryLimits.prototype, "cloudOnlyMicrosoftAdLimit", void 0);
     __decorate([
-        Metadata({ data: "json, name=CloudOnlyMicrosoftADLimitReached" }),
+        SpeakeasyMetadata({ data: "json, name=CloudOnlyMicrosoftADLimitReached" }),
         __metadata("design:type", Boolean)
     ], DirectoryLimits.prototype, "cloudOnlyMicrosoftAdLimitReached", void 0);
     __decorate([
-        Metadata({ data: "json, name=ConnectedDirectoriesCurrentCount" }),
+        SpeakeasyMetadata({ data: "json, name=ConnectedDirectoriesCurrentCount" }),
         __metadata("design:type", Number)
     ], DirectoryLimits.prototype, "connectedDirectoriesCurrentCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=ConnectedDirectoriesLimit" }),
+        SpeakeasyMetadata({ data: "json, name=ConnectedDirectoriesLimit" }),
         __metadata("design:type", Number)
     ], DirectoryLimits.prototype, "connectedDirectoriesLimit", void 0);
     __decorate([
-        Metadata({ data: "json, name=ConnectedDirectoriesLimitReached" }),
+        SpeakeasyMetadata({ data: "json, name=ConnectedDirectoriesLimitReached" }),
         __metadata("design:type", Boolean)
     ], DirectoryLimits.prototype, "connectedDirectoriesLimitReached", void 0);
     return DirectoryLimits;

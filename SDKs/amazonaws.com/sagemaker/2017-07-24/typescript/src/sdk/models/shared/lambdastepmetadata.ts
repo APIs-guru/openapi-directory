@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OutputParameter } from "./outputparameter";
+
 
 
 // LambdaStepMetadata
@@ -8,9 +8,9 @@ import { OutputParameter } from "./outputparameter";
  * Metadata for a Lambda step.
 **/
 export class LambdaStepMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Arn" })
+  @SpeakeasyMetadata({ data: "json, name=Arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=OutputParameters", elemType: shared.OutputParameter })
+  @SpeakeasyMetadata({ data: "json, name=OutputParameters", elemType: OutputParameter })
   outputParameters?: OutputParameter[];
 }

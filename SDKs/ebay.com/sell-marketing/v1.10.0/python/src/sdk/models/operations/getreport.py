@@ -1,26 +1,27 @@
 from dataclasses import dataclass, field
-
+from typing import Optional
+from sdk.models import shared
 
 
 @dataclass
 class GetReportPathParams:
-    report_id: str = field(default=None, metadata={'path_param': { 'field_name': 'report_id', 'style': 'simple', 'explode': False }})
+    report_id: str = field(metadata={'path_param': { 'field_name': 'report_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetReportSecurity:
-    api_auth: shared.SchemeAPIAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    api_auth: shared.SchemeAPIAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetReportRequest:
-    path_params: GetReportPathParams = field(default=None)
-    security: GetReportSecurity = field(default=None)
+    path_params: GetReportPathParams = field()
+    security: GetReportSecurity = field()
     
 
 @dataclass
 class GetReportResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

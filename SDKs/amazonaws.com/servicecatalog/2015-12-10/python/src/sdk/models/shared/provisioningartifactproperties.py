@@ -1,15 +1,21 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import provisioningartifacttype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ProvisioningArtifactProperties:
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
-    disable_template_validation: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DisableTemplateValidation' }})
-    info: dict[str, str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Info' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
-    type: Optional[provisioningartifacttype_enum.ProvisioningArtifactTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
+    r"""ProvisioningArtifactProperties
+    Information about a provisioning artifact (also known as a version) for a product.
+    """
+    
+    info: dict[str, str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Info') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Description') }})
+    disable_template_validation: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DisableTemplateValidation') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
+    type: Optional[ProvisioningArtifactTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Type') }})
     

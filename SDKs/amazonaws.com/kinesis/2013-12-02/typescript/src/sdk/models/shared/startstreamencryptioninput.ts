@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EncryptionTypeEnum } from "./encryptiontypeenum";
 
 
+
 export class StartStreamEncryptionInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EncryptionType" })
+  @SpeakeasyMetadata({ data: "json, name=EncryptionType" })
   encryptionType: EncryptionTypeEnum;
 
-  @Metadata({ data: "json, name=KeyId" })
+  @SpeakeasyMetadata({ data: "json, name=KeyId" })
   keyId: string;
 
-  @Metadata({ data: "json, name=StreamName" })
+  @SpeakeasyMetadata({ data: "json, name=StreamName" })
   streamName: string;
 }

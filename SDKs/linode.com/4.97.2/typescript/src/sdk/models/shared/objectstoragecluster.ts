@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ObjectStorageClusterStatusEnum {
-    Available = "available"
-,    Unavailable = "unavailable"
+    Available = "available",
+    Unavailable = "unavailable"
 }
 
 
@@ -11,18 +12,18 @@ export enum ObjectStorageClusterStatusEnum {
  * An Object Storage Cluster
 **/
 export class ObjectStorageCluster extends SpeakeasyBase {
-  @Metadata({ data: "json, name=domain" })
+  @SpeakeasyMetadata({ data: "json, name=domain" })
   domain?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=region" })
+  @SpeakeasyMetadata({ data: "json, name=region" })
   region?: string;
 
-  @Metadata({ data: "json, name=static_site_domain" })
+  @SpeakeasyMetadata({ data: "json, name=static_site_domain" })
   staticSiteDomain?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: ObjectStorageClusterStatusEnum;
 }

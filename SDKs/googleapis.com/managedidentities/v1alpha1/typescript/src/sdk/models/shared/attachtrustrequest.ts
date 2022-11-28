@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Trust } from "./trust";
 
 
+
 export class AttachTrustRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=trust" })
+  @SpeakeasyMetadata({ data: "json, name=trust" })
   trust?: Trust;
 }

@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,35 +14,54 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def create_messenger_account(self, request: operations.CreateMessengerAccountRequest) -> operations.CreateMessengerAccountResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a Messenger account
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/messenger"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -66,13 +88,16 @@ class SDK:
 
     
     def delete_messenger_account(self, request: operations.DeleteMessengerAccountRequest) -> operations.DeleteMessengerAccountResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a Messenger account
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/messenger/{external_id}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -95,15 +120,17 @@ class SDK:
 
     
     def get_all_accounts(self, request: operations.GetAllAccountsRequest) -> operations.GetAllAccountsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve all accounts you own
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -122,13 +149,16 @@ class SDK:
 
     
     def get_messenger_account(self, request: operations.GetMessengerAccountRequest) -> operations.GetMessengerAccountResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve a Messenger account
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/messenger/{external_id}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -149,13 +179,16 @@ class SDK:
 
     
     def get_vsm_account(self, request: operations.GetVsmAccountRequest) -> operations.GetVsmAccountResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve a Viber Service Message account
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/viber_service_msg/{external_id}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -176,13 +209,16 @@ class SDK:
 
     
     def get_wa_account(self, request: operations.GetWaAccountRequest) -> operations.GetWaAccountResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve a Whatsapp account
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/whatsapp/{external_id}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -203,22 +239,22 @@ class SDK:
 
     
     def link_application(self, request: operations.LinkApplicationRequest) -> operations.LinkApplicationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Link application to an account
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{provider}/{external_id}/applications", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -245,13 +281,16 @@ class SDK:
 
     
     def unli_without_applicationnk_application(self, request: operations.UnliWithoutApplicationnkApplicationRequest) -> operations.UnliWithoutApplicationnkApplicationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Unlink application from an account
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{provider}/{external_id}/applications/{application_id}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -276,22 +315,22 @@ class SDK:
 
     
     def update_messenger_account(self, request: operations.UpdateMessengerAccountRequest) -> operations.UpdateMessengerAccountResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a Messenger account
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/messenger/{external_id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

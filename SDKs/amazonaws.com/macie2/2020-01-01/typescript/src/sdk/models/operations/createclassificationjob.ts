@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateClassificationJobHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 export enum CreateClassificationJobRequestBodyJobTypeEnum {
-    OneTime = "ONE_TIME"
-,    Scheduled = "SCHEDULED"
+    OneTime = "ONE_TIME",
+    Scheduled = "SCHEDULED"
 }
 
 export enum CreateClassificationJobRequestBodyManagedDataIdentifierSelectorEnum {
-    All = "ALL"
-,    Exclude = "EXCLUDE"
-,    Include = "INCLUDE"
-,    None = "NONE"
+    All = "ALL",
+    Exclude = "EXCLUDE",
+    Include = "INCLUDE",
+    None = "NONE"
 }
 
 
@@ -43,13 +44,13 @@ export enum CreateClassificationJobRequestBodyManagedDataIdentifierSelectorEnum 
  * Specifies which S3 buckets contain the objects that a classification job analyzes, and the scope of that analysis. The bucket specification can be static (bucketDefinitions) or dynamic (bucketCriteria). If it's static, the job analyzes objects in the same predefined set of buckets each time the job runs. If it's dynamic, the job analyzes objects in any buckets that match the specified criteria each time the job starts to run.
 **/
 export class CreateClassificationJobRequestBodyS3JobDefinition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bucketCriteria" })
+  @SpeakeasyMetadata({ data: "json, name=bucketCriteria" })
   bucketCriteria?: shared.S3BucketCriteriaForJob;
 
-  @Metadata({ data: "json, name=bucketDefinitions", elemType: shared.S3BucketDefinitionForJob })
+  @SpeakeasyMetadata({ data: "json, name=bucketDefinitions", elemType: shared.S3BucketDefinitionForJob })
   bucketDefinitions?: shared.S3BucketDefinitionForJob[];
 
-  @Metadata({ data: "json, name=scoping" })
+  @SpeakeasyMetadata({ data: "json, name=scoping" })
   scoping?: shared.Scoping;
 }
 
@@ -59,93 +60,93 @@ export class CreateClassificationJobRequestBodyS3JobDefinition extends Speakeasy
  * Specifies the recurrence pattern for running a classification job.
 **/
 export class CreateClassificationJobRequestBodyScheduleFrequency extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dailySchedule" })
+  @SpeakeasyMetadata({ data: "json, name=dailySchedule" })
   dailySchedule?: Map<string, any>;
 
-  @Metadata({ data: "json, name=monthlySchedule" })
+  @SpeakeasyMetadata({ data: "json, name=monthlySchedule" })
   monthlySchedule?: shared.MonthlySchedule;
 
-  @Metadata({ data: "json, name=weeklySchedule" })
+  @SpeakeasyMetadata({ data: "json, name=weeklySchedule" })
   weeklySchedule?: shared.WeeklySchedule;
 }
 
 
 export class CreateClassificationJobRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clientToken" })
+  @SpeakeasyMetadata({ data: "json, name=clientToken" })
   clientToken: string;
 
-  @Metadata({ data: "json, name=customDataIdentifierIds" })
+  @SpeakeasyMetadata({ data: "json, name=customDataIdentifierIds" })
   customDataIdentifierIds?: string[];
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=initialRun" })
+  @SpeakeasyMetadata({ data: "json, name=initialRun" })
   initialRun?: boolean;
 
-  @Metadata({ data: "json, name=jobType" })
+  @SpeakeasyMetadata({ data: "json, name=jobType" })
   jobType: CreateClassificationJobRequestBodyJobTypeEnum;
 
-  @Metadata({ data: "json, name=managedDataIdentifierIds" })
+  @SpeakeasyMetadata({ data: "json, name=managedDataIdentifierIds" })
   managedDataIdentifierIds?: string[];
 
-  @Metadata({ data: "json, name=managedDataIdentifierSelector" })
+  @SpeakeasyMetadata({ data: "json, name=managedDataIdentifierSelector" })
   managedDataIdentifierSelector?: CreateClassificationJobRequestBodyManagedDataIdentifierSelectorEnum;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=s3JobDefinition" })
+  @SpeakeasyMetadata({ data: "json, name=s3JobDefinition" })
   s3JobDefinition: CreateClassificationJobRequestBodyS3JobDefinition;
 
-  @Metadata({ data: "json, name=samplingPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=samplingPercentage" })
   samplingPercentage?: number;
 
-  @Metadata({ data: "json, name=scheduleFrequency" })
+  @SpeakeasyMetadata({ data: "json, name=scheduleFrequency" })
   scheduleFrequency?: CreateClassificationJobRequestBodyScheduleFrequency;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 }
 
 
 export class CreateClassificationJobRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateClassificationJobHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateClassificationJobRequestBody;
 }
 
 
 export class CreateClassificationJobResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   accessDeniedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   conflictException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createClassificationJobResponse?: shared.CreateClassificationJobResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceQuotaExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationException?: any;
 }

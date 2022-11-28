@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ManagedZoneServiceDirectoryConfigNamespace extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deletionTime" })
+  @SpeakeasyMetadata({ data: "json, name=deletionTime" })
   deletionTime?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=namespaceUrl" })
+  @SpeakeasyMetadata({ data: "json, name=namespaceUrl" })
   namespaceUrl?: string;
 }

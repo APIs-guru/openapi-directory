@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class JobRunsGetJobRunPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=jobRunID" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=jobRunID" })
   jobRunId: number;
 }
 
 
 export class JobRunsGetJobRunQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=includeActivityRunDetails" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=includeActivityRunDetails" })
   includeActivityRunDetails?: boolean;
 }
 
 
 export class JobRunsGetJobRunRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: JobRunsGetJobRunPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: JobRunsGetJobRunQueryParams;
 }
 
 
 export class JobRunsGetJobRunResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiModelsApiError?: shared.ApiModelsApiError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   buildSystemSharedDtoJobRun?: shared.BuildSystemSharedDtoJobRun;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

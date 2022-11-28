@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SettingMetadata } from "./settingmetadata";
+
 
 export enum SenderFormatEnum {
     Csv = "CSV"
@@ -11,24 +12,46 @@ export enum SenderFormatEnum {
  * An sender of reports to the data hub
 **/
 export class Sender extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description: string;
 
-  @Metadata({ data: "json, name=format" })
+  @SpeakeasyMetadata({ data: "json, name=format" })
   format: SenderFormatEnum;
 
-  @Metadata({ data: "json, name=meta" })
+  @SpeakeasyMetadata({ data: "json, name=meta" })
   meta?: SettingMetadata;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=organizationName" })
+  @SpeakeasyMetadata({ data: "json, name=organizationName" })
   organizationName?: string;
 
-  @Metadata({ data: "json, name=schema" })
+  @SpeakeasyMetadata({ data: "json, name=schema" })
   schema: string;
 
-  @Metadata({ data: "json, name=topic" })
+  @SpeakeasyMetadata({ data: "json, name=topic" })
+  topic: string;
+}
+
+
+// SenderInput
+/** 
+ * An sender of reports to the data hub
+**/
+export class SenderInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description: string;
+
+  @SpeakeasyMetadata({ data: "json, name=format" })
+  format: SenderFormatEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name: string;
+
+  @SpeakeasyMetadata({ data: "json, name=schema" })
+  schema: string;
+
+  @SpeakeasyMetadata({ data: "json, name=topic" })
   topic: string;
 }

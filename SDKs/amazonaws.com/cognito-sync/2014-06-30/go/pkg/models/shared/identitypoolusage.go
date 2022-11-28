@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// IdentityPoolUsage
+// Usage information for the identity pool.
 type IdentityPoolUsage struct {
 	DataStorage       *int64     `json:"DataStorage,omitempty"`
 	IdentityPoolID    *string    `json:"IdentityPoolId,omitempty"`

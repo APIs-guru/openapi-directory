@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Aggregation } from "./aggregation";
 import { StructuredQuery } from "./structuredquery";
+
 
 
 // StructuredAggregationQuery
@@ -9,9 +9,9 @@ import { StructuredQuery } from "./structuredquery";
  * Firestore query for running an aggregation over a StructuredQuery.
 **/
 export class StructuredAggregationQuery extends SpeakeasyBase {
-  @Metadata({ data: "json, name=aggregations", elemType: shared.Aggregation })
+  @SpeakeasyMetadata({ data: "json, name=aggregations", elemType: Aggregation })
   aggregations?: Aggregation[];
 
-  @Metadata({ data: "json, name=structuredQuery" })
+  @SpeakeasyMetadata({ data: "json, name=structuredQuery" })
   structuredQuery?: StructuredQuery;
 }

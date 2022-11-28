@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RequestActiveDirectoryAuthInfoQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=is_global_available" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=is_global_available" })
   isGlobalAvailable?: boolean;
 }
 
 
 export class RequestActiveDirectoryAuthInfoRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: RequestActiveDirectoryAuthInfoQueryParams;
 }
 
 
 export class RequestActiveDirectoryAuthInfoResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   activeDirectoryAuthInfo?: shared.ActiveDirectoryAuthInfo;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

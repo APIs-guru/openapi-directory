@@ -8,6 +8,8 @@ const (
 	MetadataLabelMatcherMetadataLabelMatchCriteriaEnumMatchAll                              MetadataLabelMatcherMetadataLabelMatchCriteriaEnum = "MATCH_ALL"
 )
 
+// MetadataLabelMatcher
+// The matcher that is based on node metadata presented by xDS clients.
 type MetadataLabelMatcher struct {
 	MetadataLabelMatchCriteria *MetadataLabelMatcherMetadataLabelMatchCriteriaEnum `json:"metadataLabelMatchCriteria,omitempty"`
 	MetadataLabels             []MetadataLabels                                    `json:"metadataLabels,omitempty"`

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DetectorStateSummary
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about the detector state.
 **/
 export class DetectorStateSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=stateName" })
+  @SpeakeasyMetadata({ data: "json, name=stateName" })
   stateName?: string;
 }

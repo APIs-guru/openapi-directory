@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateGroupCertificateAuthorityResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=GroupCertificateAuthorityArn" })
+  @SpeakeasyMetadata({ data: "json, name=GroupCertificateAuthorityArn" })
   groupCertificateAuthorityArn?: string;
 }

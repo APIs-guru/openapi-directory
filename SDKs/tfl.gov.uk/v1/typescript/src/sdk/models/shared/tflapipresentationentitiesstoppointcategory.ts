@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TflApiPresentationEntitiesStopPointCategory extends SpeakeasyBase {
-  @Metadata({ data: "json, name=availableKeys" })
+  @SpeakeasyMetadata({ data: "json, name=availableKeys" })
   availableKeys?: string[];
 
-  @Metadata({ data: "json, name=category" })
+  @SpeakeasyMetadata({ data: "json, name=category" })
   category?: string;
 }

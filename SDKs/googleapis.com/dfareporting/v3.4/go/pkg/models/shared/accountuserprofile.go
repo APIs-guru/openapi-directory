@@ -17,6 +17,8 @@ const (
 	AccountUserProfileUserAccessTypeEnumReadOnlySuperUser     AccountUserProfileUserAccessTypeEnum = "READ_ONLY_SUPER_USER"
 )
 
+// AccountUserProfile
+// AccountUserProfiles contains properties of a Campaign Manager user profile. This resource is specifically for managing user profiles, whereas UserProfiles is for accessing the API.
 type AccountUserProfile struct {
 	AccountID        *string                               `json:"accountId,omitempty"`
 	Active           *bool                                 `json:"active,omitempty"`

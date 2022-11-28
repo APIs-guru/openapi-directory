@@ -25,7 +25,7 @@ type DisplayvideoCustomBiddingAlgorithmsCreateSecurity struct {
 
 type DisplayvideoCustomBiddingAlgorithmsCreateRequest struct {
 	QueryParams DisplayvideoCustomBiddingAlgorithmsCreateQueryParams
-	Request     *shared.CustomBiddingAlgorithm `request:"mediaType=application/json"`
+	Request     *shared.CustomBiddingAlgorithmInput `request:"mediaType=application/json"`
 	Security    DisplayvideoCustomBiddingAlgorithmsCreateSecurity
 }
 

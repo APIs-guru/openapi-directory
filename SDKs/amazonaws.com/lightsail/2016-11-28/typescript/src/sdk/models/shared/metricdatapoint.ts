@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MetricUnitEnum } from "./metricunitenum";
+
 
 
 // MetricDatapoint
@@ -7,24 +8,24 @@ import { MetricUnitEnum } from "./metricunitenum";
  * Describes the metric data point.
 **/
 export class MetricDatapoint extends SpeakeasyBase {
-  @Metadata({ data: "json, name=average" })
+  @SpeakeasyMetadata({ data: "json, name=average" })
   average?: number;
 
-  @Metadata({ data: "json, name=maximum" })
+  @SpeakeasyMetadata({ data: "json, name=maximum" })
   maximum?: number;
 
-  @Metadata({ data: "json, name=minimum" })
+  @SpeakeasyMetadata({ data: "json, name=minimum" })
   minimum?: number;
 
-  @Metadata({ data: "json, name=sampleCount" })
+  @SpeakeasyMetadata({ data: "json, name=sampleCount" })
   sampleCount?: number;
 
-  @Metadata({ data: "json, name=sum" })
+  @SpeakeasyMetadata({ data: "json, name=sum" })
   sum?: number;
 
-  @Metadata({ data: "json, name=timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=timestamp" })
   timestamp?: Date;
 
-  @Metadata({ data: "json, name=unit" })
+  @SpeakeasyMetadata({ data: "json, name=unit" })
   unit?: MetricUnitEnum;
 }

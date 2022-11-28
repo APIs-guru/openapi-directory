@@ -1,13 +1,21 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import googlecloudbeyondcorpappconnectorsv1alpharesourceinfo
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleCloudBeyondcorpAppconnectorsV1alphaReportStatusRequest:
-    request_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'requestId' }})
-    resource_info: Optional[googlecloudbeyondcorpappconnectorsv1alpharesourceinfo.GoogleCloudBeyondcorpAppconnectorsV1alphaResourceInfo] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceInfo' }})
-    validate_only: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'validateOnly' }})
+    r"""GoogleCloudBeyondcorpAppconnectorsV1alphaReportStatusRequest
+    Request report the connector status.
+    """
+    
+    request_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('requestId') }})
+    resource_info: Optional[GoogleCloudBeyondcorpAppconnectorsV1alphaResourceInfo] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceInfo') }})
+    validate_only: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('validateOnly') }})
     

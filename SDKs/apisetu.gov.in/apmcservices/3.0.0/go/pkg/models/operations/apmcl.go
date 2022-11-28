@@ -26,11 +26,6 @@ type ApmclSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type ApmclRequest struct {
-	Request  *ApmclRequestBody `request:"mediaType=application/json"`
-	Security ApmclSecurity
-}
-
 type Apmcl400ApplicationJSONErrorEnum string
 
 const (
@@ -160,6 +155,11 @@ const (
 type Apmcl504ApplicationJSON struct {
 	Error            *Apmcl504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Apmcl504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type ApmclRequest struct {
+	Request  *ApmclRequestBody `request:"mediaType=application/json"`
+	Security ApmclSecurity
 }
 
 type ApmclResponse struct {

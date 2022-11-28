@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class BucketEntry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bucket" })
+  @SpeakeasyMetadata({ data: "json, name=bucket" })
   bucket: number;
 
-  @Metadata({ data: "json, name=modelName" })
+  @SpeakeasyMetadata({ data: "json, name=modelName" })
   modelName: string;
 
-  @Metadata({ data: "json, name=percentOfMarket" })
+  @SpeakeasyMetadata({ data: "json, name=percentOfMarket" })
   percentOfMarket: number;
 }

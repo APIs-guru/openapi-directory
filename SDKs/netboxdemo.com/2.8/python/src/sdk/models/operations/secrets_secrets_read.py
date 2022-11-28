@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class SecretsSecretsReadPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class SecretsSecretsReadRequest:
-    path_params: SecretsSecretsReadPathParams = field(default=None)
+    path_params: SecretsSecretsReadPathParams = field()
     
 
 @dataclass
 class SecretsSecretsReadResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     secret: Optional[shared.Secret] = field(default=None)
-    status_code: int = field(default=None)
     

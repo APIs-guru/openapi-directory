@@ -1,5 +1,8 @@
 package shared
 
+// TileJSON
+// TileJSON model.
+// Based on https://github.com/mapbox/tilejson-spec/tree/master/2.2.0
 type TileJSON struct {
 	Attribution *string   `json:"attribution,omitempty"`
 	Bounds      []float64 `json:"bounds,omitempty"`

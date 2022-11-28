@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AuditCaseSubCategory } from "./auditcasesubcategory";
 
 
+
 export class AuditCaseCategoryRelation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=primary_category_id" })
+  @SpeakeasyMetadata({ data: "json, name=primary_category_id" })
   primaryCategoryId?: string;
 
-  @Metadata({ data: "json, name=primary_category_name" })
+  @SpeakeasyMetadata({ data: "json, name=primary_category_name" })
   primaryCategoryName?: string;
 
-  @Metadata({ data: "json, name=sub_category_list", elemType: shared.AuditCaseSubCategory })
+  @SpeakeasyMetadata({ data: "json, name=sub_category_list", elemType: AuditCaseSubCategory })
   subCategoryList?: AuditCaseSubCategory[];
 }

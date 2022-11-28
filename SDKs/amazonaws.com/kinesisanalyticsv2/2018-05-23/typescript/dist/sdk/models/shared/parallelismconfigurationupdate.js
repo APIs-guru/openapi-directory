@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConfigurationTypeEnum } from "./configurationtypeenum";
 // ParallelismConfigurationUpdate
 /**
@@ -34,19 +34,19 @@ var ParallelismConfigurationUpdate = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AutoScalingEnabledUpdate" }),
+        SpeakeasyMetadata({ data: "json, name=AutoScalingEnabledUpdate" }),
         __metadata("design:type", Boolean)
     ], ParallelismConfigurationUpdate.prototype, "autoScalingEnabledUpdate", void 0);
     __decorate([
-        Metadata({ data: "json, name=ConfigurationTypeUpdate" }),
+        SpeakeasyMetadata({ data: "json, name=ConfigurationTypeUpdate" }),
         __metadata("design:type", String)
     ], ParallelismConfigurationUpdate.prototype, "configurationTypeUpdate", void 0);
     __decorate([
-        Metadata({ data: "json, name=ParallelismPerKPUUpdate" }),
+        SpeakeasyMetadata({ data: "json, name=ParallelismPerKPUUpdate" }),
         __metadata("design:type", Number)
     ], ParallelismConfigurationUpdate.prototype, "parallelismPerKpuUpdate", void 0);
     __decorate([
-        Metadata({ data: "json, name=ParallelismUpdate" }),
+        SpeakeasyMetadata({ data: "json, name=ParallelismUpdate" }),
         __metadata("design:type", Number)
     ], ParallelismConfigurationUpdate.prototype, "parallelismUpdate", void 0);
     return ParallelismConfigurationUpdate;

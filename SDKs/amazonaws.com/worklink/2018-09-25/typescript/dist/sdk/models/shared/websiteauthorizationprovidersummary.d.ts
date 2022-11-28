@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AuthorizationProviderTypeEnum } from "./authorizationprovidertypeenum";
 /**
  * The summary of the website authorization provider.

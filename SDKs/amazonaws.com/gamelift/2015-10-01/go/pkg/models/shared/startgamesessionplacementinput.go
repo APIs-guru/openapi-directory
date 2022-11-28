@@ -1,5 +1,7 @@
 package shared
 
+// StartGameSessionPlacementInput
+// Represents the input for a request operation.
 type StartGameSessionPlacementInput struct {
 	DesiredPlayerSessions     []DesiredPlayerSession `json:"DesiredPlayerSessions,omitempty"`
 	GameProperties            []GameProperty         `json:"GameProperties,omitempty"`

@@ -9,22 +9,9 @@ type GetStackScriptsQueryParams struct {
 	PageSize *int64 `queryParam:"style=form,explode=true,name=page_size"`
 }
 
-type GetStackScriptsSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type GetStackScriptsSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type GetStackScriptsSecurity struct {
-	Option1 *GetStackScriptsSecurityOption1 `security:"option"`
-	Option2 *GetStackScriptsSecurityOption2 `security:"option"`
-}
-
-type GetStackScriptsRequest struct {
-	QueryParams GetStackScriptsQueryParams
-	Security    GetStackScriptsSecurity
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
 }
 
 type GetStackScripts200ApplicationJSON struct {
@@ -36,6 +23,11 @@ type GetStackScripts200ApplicationJSON struct {
 
 type GetStackScriptsDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type GetStackScriptsRequest struct {
+	QueryParams GetStackScriptsQueryParams
+	Security    GetStackScriptsSecurity
 }
 
 type GetStackScriptsResponse struct {

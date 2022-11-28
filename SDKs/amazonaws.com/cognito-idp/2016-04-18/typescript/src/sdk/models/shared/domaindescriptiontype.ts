@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CustomDomainConfigType } from "./customdomainconfigtype";
 import { DomainStatusTypeEnum } from "./domainstatustypeenum";
+
 
 
 // DomainDescriptionType
@@ -8,27 +9,27 @@ import { DomainStatusTypeEnum } from "./domainstatustypeenum";
  * A container for information about a domain.
 **/
 export class DomainDescriptionType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AWSAccountId" })
+  @SpeakeasyMetadata({ data: "json, name=AWSAccountId" })
   awsAccountId?: string;
 
-  @Metadata({ data: "json, name=CloudFrontDistribution" })
+  @SpeakeasyMetadata({ data: "json, name=CloudFrontDistribution" })
   cloudFrontDistribution?: string;
 
-  @Metadata({ data: "json, name=CustomDomainConfig" })
+  @SpeakeasyMetadata({ data: "json, name=CustomDomainConfig" })
   customDomainConfig?: CustomDomainConfigType;
 
-  @Metadata({ data: "json, name=Domain" })
+  @SpeakeasyMetadata({ data: "json, name=Domain" })
   domain?: string;
 
-  @Metadata({ data: "json, name=S3Bucket" })
+  @SpeakeasyMetadata({ data: "json, name=S3Bucket" })
   s3Bucket?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: DomainStatusTypeEnum;
 
-  @Metadata({ data: "json, name=UserPoolId" })
+  @SpeakeasyMetadata({ data: "json, name=UserPoolId" })
   userPoolId?: string;
 
-  @Metadata({ data: "json, name=Version" })
+  @SpeakeasyMetadata({ data: "json, name=Version" })
   version?: string;
 }

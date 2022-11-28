@@ -11,6 +11,8 @@ const (
 	FirewallInfoFirewallRuleTypeEnumNetworkFirewallPolicyRule              FirewallInfoFirewallRuleTypeEnum = "NETWORK_FIREWALL_POLICY_RULE"
 )
 
+// FirewallInfo
+// For display only. Metadata associated with a VPC firewall rule, an implied VPC firewall rule, or a hierarchical firewall policy rule.
 type FirewallInfo struct {
 	Action                *string                           `json:"action,omitempty"`
 	Direction             *string                           `json:"direction,omitempty"`

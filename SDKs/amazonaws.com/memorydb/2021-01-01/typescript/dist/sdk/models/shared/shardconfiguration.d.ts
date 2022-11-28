@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * Shard configuration options. Each shard configuration has the following: Slots and ReplicaCount.
 **/

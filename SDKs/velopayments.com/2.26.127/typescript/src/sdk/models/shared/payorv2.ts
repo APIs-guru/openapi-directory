@@ -1,82 +1,83 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PayorAddressV2 } from "./payoraddressv2";
 import { KycStateEnum } from "./kycstateenum";
 import { PaymentRailsEnum } from "./paymentrailsenum";
 import { TransmissionTypes2 } from "./transmissiontypes2";
 
+
 export enum PayorV2LanguageEnum {
-    En = "EN"
-,    Fr = "FR"
+    En = "EN",
+    Fr = "FR"
 }
 
 
 export class PayorV2 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=address" })
+  @SpeakeasyMetadata({ data: "json, name=address" })
   address?: PayorAddressV2;
 
-  @Metadata({ data: "json, name=allowsLanguageChoice" })
+  @SpeakeasyMetadata({ data: "json, name=allowsLanguageChoice" })
   allowsLanguageChoice?: boolean;
 
-  @Metadata({ data: "json, name=collectiveAlias" })
+  @SpeakeasyMetadata({ data: "json, name=collectiveAlias" })
   collectiveAlias?: string;
 
-  @Metadata({ data: "json, name=dbaName" })
+  @SpeakeasyMetadata({ data: "json, name=dbaName" })
   dbaName?: string;
 
-  @Metadata({ data: "json, name=includesReports" })
+  @SpeakeasyMetadata({ data: "json, name=includesReports" })
   includesReports?: boolean;
 
-  @Metadata({ data: "json, name=kycState" })
+  @SpeakeasyMetadata({ data: "json, name=kycState" })
   kycState?: KycStateEnum;
 
-  @Metadata({ data: "json, name=language" })
+  @SpeakeasyMetadata({ data: "json, name=language" })
   language?: PayorV2LanguageEnum;
 
-  @Metadata({ data: "json, name=manualLockout" })
+  @SpeakeasyMetadata({ data: "json, name=manualLockout" })
   manualLockout?: boolean;
 
-  @Metadata({ data: "json, name=maxMasterPayorAdmins" })
+  @SpeakeasyMetadata({ data: "json, name=maxMasterPayorAdmins" })
   maxMasterPayorAdmins?: number;
 
-  @Metadata({ data: "json, name=payeeGracePeriodDays" })
+  @SpeakeasyMetadata({ data: "json, name=payeeGracePeriodDays" })
   payeeGracePeriodDays?: number;
 
-  @Metadata({ data: "json, name=payeeGracePeriodProcessingEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=payeeGracePeriodProcessingEnabled" })
   payeeGracePeriodProcessingEnabled?: boolean;
 
-  @Metadata({ data: "json, name=paymentRails" })
+  @SpeakeasyMetadata({ data: "json, name=paymentRails" })
   paymentRails?: PaymentRailsEnum;
 
-  @Metadata({ data: "json, name=payorId" })
+  @SpeakeasyMetadata({ data: "json, name=payorId" })
   payorId: string;
 
-  @Metadata({ data: "json, name=payorName" })
+  @SpeakeasyMetadata({ data: "json, name=payorName" })
   payorName: string;
 
-  @Metadata({ data: "json, name=payorXid" })
+  @SpeakeasyMetadata({ data: "json, name=payorXid" })
   payorXid?: string;
 
-  @Metadata({ data: "json, name=primaryContactEmail" })
+  @SpeakeasyMetadata({ data: "json, name=primaryContactEmail" })
   primaryContactEmail?: string;
 
-  @Metadata({ data: "json, name=primaryContactName" })
+  @SpeakeasyMetadata({ data: "json, name=primaryContactName" })
   primaryContactName?: string;
 
-  @Metadata({ data: "json, name=primaryContactPhone" })
+  @SpeakeasyMetadata({ data: "json, name=primaryContactPhone" })
   primaryContactPhone?: string;
 
-  @Metadata({ data: "json, name=reminderEmailsOptOut" })
+  @SpeakeasyMetadata({ data: "json, name=reminderEmailsOptOut" })
   reminderEmailsOptOut?: boolean;
 
-  @Metadata({ data: "json, name=remoteSystemIds" })
+  @SpeakeasyMetadata({ data: "json, name=remoteSystemIds" })
   remoteSystemIds?: string[];
 
-  @Metadata({ data: "json, name=supportContact" })
+  @SpeakeasyMetadata({ data: "json, name=supportContact" })
   supportContact?: string;
 
-  @Metadata({ data: "json, name=transmissionTypes" })
+  @SpeakeasyMetadata({ data: "json, name=transmissionTypes" })
   transmissionTypes?: TransmissionTypes2;
 
-  @Metadata({ data: "json, name=wuCustomerId" })
+  @SpeakeasyMetadata({ data: "json, name=wuCustomerId" })
   wuCustomerId?: string;
 }

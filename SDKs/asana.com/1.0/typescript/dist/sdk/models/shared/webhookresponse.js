@@ -1,0 +1,98 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { AsanaNamedResource } from "./asananamedresource";
+var WebhookResponseFilters = /** @class */ (function (_super) {
+    __extends(WebhookResponseFilters, _super);
+    function WebhookResponseFilters() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=action" }),
+        __metadata("design:type", String)
+    ], WebhookResponseFilters.prototype, "action", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=fields" }),
+        __metadata("design:type", Array)
+    ], WebhookResponseFilters.prototype, "fields", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=resource_subtype" }),
+        __metadata("design:type", String)
+    ], WebhookResponseFilters.prototype, "resourceSubtype", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=resource_type" }),
+        __metadata("design:type", String)
+    ], WebhookResponseFilters.prototype, "resourceType", void 0);
+    return WebhookResponseFilters;
+}(SpeakeasyBase));
+export { WebhookResponseFilters };
+var WebhookResponse = /** @class */ (function (_super) {
+    __extends(WebhookResponse, _super);
+    function WebhookResponse() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=active" }),
+        __metadata("design:type", Boolean)
+    ], WebhookResponse.prototype, "active", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=created_at" }),
+        __metadata("design:type", Date)
+    ], WebhookResponse.prototype, "createdAt", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=filters", elemType: WebhookResponseFilters }),
+        __metadata("design:type", Array)
+    ], WebhookResponse.prototype, "filters", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=gid" }),
+        __metadata("design:type", String)
+    ], WebhookResponse.prototype, "gid", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=last_failure_at" }),
+        __metadata("design:type", Date)
+    ], WebhookResponse.prototype, "lastFailureAt", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=last_failure_content" }),
+        __metadata("design:type", String)
+    ], WebhookResponse.prototype, "lastFailureContent", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=last_success_at" }),
+        __metadata("design:type", Date)
+    ], WebhookResponse.prototype, "lastSuccessAt", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=resource" }),
+        __metadata("design:type", AsanaNamedResource)
+    ], WebhookResponse.prototype, "resource", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=resource_type" }),
+        __metadata("design:type", String)
+    ], WebhookResponse.prototype, "resourceType", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=target" }),
+        __metadata("design:type", String)
+    ], WebhookResponse.prototype, "target", void 0);
+    return WebhookResponse;
+}(SpeakeasyBase));
+export { WebhookResponse };

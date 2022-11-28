@@ -46,7 +46,7 @@ type CloudprofilerProjectsProfilesCreateOfflineSecurity struct {
 type CloudprofilerProjectsProfilesCreateOfflineRequest struct {
 	PathParams  CloudprofilerProjectsProfilesCreateOfflinePathParams
 	QueryParams CloudprofilerProjectsProfilesCreateOfflineQueryParams
-	Request     *shared.Profile `request:"mediaType=application/json"`
+	Request     *shared.ProfileInput `request:"mediaType=application/json"`
 	Security    CloudprofilerProjectsProfilesCreateOfflineSecurity
 }
 

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetConfigsPathParams = /** @class */ (function (_super) {
     __extends(GetConfigsPathParams, _super);
@@ -30,7 +30,7 @@ var GetConfigsPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=productId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=productId" }),
         __metadata("design:type", String)
     ], GetConfigsPathParams.prototype, "productId", void 0);
     return GetConfigsPathParams;
@@ -42,7 +42,7 @@ var GetConfigsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetConfigsPathParams)
     ], GetConfigsRequest.prototype, "pathParams", void 0);
     return GetConfigsRequest;
@@ -54,19 +54,19 @@ var GetConfigsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ elemType: shared.ConfigModelHaljson }),
+        SpeakeasyMetadata({ elemType: shared.ConfigModelHaljson }),
         __metadata("design:type", Array)
     ], GetConfigsResponse.prototype, "configModelHaljsons", void 0);
     __decorate([
-        Metadata({ elemType: shared.ConfigModel }),
+        SpeakeasyMetadata({ elemType: shared.ConfigModel }),
         __metadata("design:type", Array)
     ], GetConfigsResponse.prototype, "configModels", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetConfigsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetConfigsResponse.prototype, "statusCode", void 0);
     return GetConfigsResponse;

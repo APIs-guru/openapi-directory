@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UploadAccountResponseError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=index" })
+  @SpeakeasyMetadata({ data: "json, name=index" })
   index?: number;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
@@ -16,9 +16,9 @@ export class UploadAccountResponseError extends SpeakeasyBase {
  * Respone of uploading accounts in batch.
 **/
 export class UploadAccountResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error", elemType: shared.UploadAccountResponseError })
+  @SpeakeasyMetadata({ data: "json, name=error", elemType: UploadAccountResponseError })
   error?: UploadAccountResponseError[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PlacementStatistics
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An object that contains inbox placement data for an email provider.
 **/
 export class PlacementStatistics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DkimPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=DkimPercentage" })
   dkimPercentage?: number;
 
-  @Metadata({ data: "json, name=InboxPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=InboxPercentage" })
   inboxPercentage?: number;
 
-  @Metadata({ data: "json, name=MissingPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=MissingPercentage" })
   missingPercentage?: number;
 
-  @Metadata({ data: "json, name=SpamPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=SpamPercentage" })
   spamPercentage?: number;
 
-  @Metadata({ data: "json, name=SpfPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=SpfPercentage" })
   spfPercentage?: number;
 }

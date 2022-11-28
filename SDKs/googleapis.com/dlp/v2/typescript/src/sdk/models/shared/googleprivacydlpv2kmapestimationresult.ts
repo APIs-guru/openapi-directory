@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GooglePrivacyDlpV2KMapEstimationHistogramBucket } from "./googleprivacydlpv2kmapestimationhistogrambucket";
+
 
 
 // GooglePrivacyDlpV2KMapEstimationResult
@@ -8,6 +8,6 @@ import { GooglePrivacyDlpV2KMapEstimationHistogramBucket } from "./googleprivacy
  * Result of the reidentifiability analysis. Note that these results are an estimation, not exact values.
 **/
 export class GooglePrivacyDlpV2KMapEstimationResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=kMapEstimationHistogram", elemType: shared.GooglePrivacyDlpV2KMapEstimationHistogramBucket })
+  @SpeakeasyMetadata({ data: "json, name=kMapEstimationHistogram", elemType: GooglePrivacyDlpV2KMapEstimationHistogramBucket })
   kMapEstimationHistogram?: GooglePrivacyDlpV2KMapEstimationHistogramBucket[];
 }

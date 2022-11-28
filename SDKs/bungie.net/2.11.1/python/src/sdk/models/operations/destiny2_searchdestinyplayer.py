@@ -4,8 +4,8 @@ from typing import Optional
 
 @dataclass
 class Destiny2SearchDestinyPlayerPathParams:
-    display_name: str = field(default=None, metadata={'path_param': { 'field_name': 'displayName', 'style': 'simple', 'explode': False }})
-    membership_type: int = field(default=None, metadata={'path_param': { 'field_name': 'membershipType', 'style': 'simple', 'explode': False }})
+    display_name: str = field(metadata={'path_param': { 'field_name': 'displayName', 'style': 'simple', 'explode': False }})
+    membership_type: int = field(metadata={'path_param': { 'field_name': 'membershipType', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,13 +15,13 @@ class Destiny2SearchDestinyPlayerQueryParams:
 
 @dataclass
 class Destiny2SearchDestinyPlayerRequest:
-    path_params: Destiny2SearchDestinyPlayerPathParams = field(default=None)
-    query_params: Destiny2SearchDestinyPlayerQueryParams = field(default=None)
+    path_params: Destiny2SearchDestinyPlayerPathParams = field()
+    query_params: Destiny2SearchDestinyPlayerQueryParams = field()
     
 
 @dataclass
 class Destiny2SearchDestinyPlayerResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

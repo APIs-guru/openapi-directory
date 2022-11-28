@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class SearchPlaceIndexForPositionPathParams:
-    index_name: str = field(default=None, metadata={'path_param': { 'field_name': 'IndexName', 'style': 'simple', 'explode': False }})
+    index_name: str = field(metadata={'path_param': { 'field_name': 'IndexName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,25 +27,25 @@ class SearchPlaceIndexForPositionHeaders:
 @dataclass_json
 @dataclass
 class SearchPlaceIndexForPositionRequestBody:
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MaxResults' }})
-    position: List[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Position' }})
+    position: List[float] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Position') }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MaxResults') }})
     
 
 @dataclass
 class SearchPlaceIndexForPositionRequest:
-    path_params: SearchPlaceIndexForPositionPathParams = field(default=None)
-    headers: SearchPlaceIndexForPositionHeaders = field(default=None)
-    request: SearchPlaceIndexForPositionRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: SearchPlaceIndexForPositionHeaders = field()
+    path_params: SearchPlaceIndexForPositionPathParams = field()
+    request: SearchPlaceIndexForPositionRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class SearchPlaceIndexForPositionResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     search_place_index_for_position_response: Optional[shared.SearchPlaceIndexForPositionResponse] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

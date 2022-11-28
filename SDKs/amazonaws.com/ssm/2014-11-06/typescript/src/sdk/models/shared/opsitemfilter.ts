@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OpsItemFilterKeyEnum } from "./opsitemfilterkeyenum";
 import { OpsItemFilterOperatorEnum } from "./opsitemfilteroperatorenum";
+
 
 
 // OpsItemFilter
@@ -8,12 +9,12 @@ import { OpsItemFilterOperatorEnum } from "./opsitemfilteroperatorenum";
  * Describes an OpsItem filter.
 **/
 export class OpsItemFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Key" })
+  @SpeakeasyMetadata({ data: "json, name=Key" })
   key: OpsItemFilterKeyEnum;
 
-  @Metadata({ data: "json, name=Operator" })
+  @SpeakeasyMetadata({ data: "json, name=Operator" })
   operator: OpsItemFilterOperatorEnum;
 
-  @Metadata({ data: "json, name=Values" })
+  @SpeakeasyMetadata({ data: "json, name=Values" })
   values: string[];
 }

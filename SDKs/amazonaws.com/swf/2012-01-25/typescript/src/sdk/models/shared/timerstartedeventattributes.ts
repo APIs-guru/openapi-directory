@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TimerStartedEventAttributes
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides the details of the <code>TimerStarted</code> event.
 **/
 export class TimerStartedEventAttributes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=control" })
+  @SpeakeasyMetadata({ data: "json, name=control" })
   control?: string;
 
-  @Metadata({ data: "json, name=decisionTaskCompletedEventId" })
+  @SpeakeasyMetadata({ data: "json, name=decisionTaskCompletedEventId" })
   decisionTaskCompletedEventId: number;
 
-  @Metadata({ data: "json, name=startToFireTimeout" })
+  @SpeakeasyMetadata({ data: "json, name=startToFireTimeout" })
   startToFireTimeout: string;
 
-  @Metadata({ data: "json, name=timerId" })
+  @SpeakeasyMetadata({ data: "json, name=timerId" })
   timerId: string;
 }

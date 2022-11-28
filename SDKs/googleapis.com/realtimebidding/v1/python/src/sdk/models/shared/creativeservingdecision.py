@@ -1,13 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import adtechnologyproviders
-from . import policycompliance
-from . import policycompliance
-from . import advertiserandbrand
-from . import policycompliance
-from . import policycompliance
-from . import policycompliance
+from sdk import utils
+from . import *
 
 class CreativeServingDecisionDetectedAttributesEnum(str, Enum):
     ATTRIBUTE_UNSPECIFIED = "ATTRIBUTE_UNSPECIFIED"
@@ -53,19 +52,23 @@ class CreativeServingDecisionDetectedAttributesEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CreativeServingDecision:
-    ad_technology_providers: Optional[adtechnologyproviders.AdTechnologyProviders] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'adTechnologyProviders' }})
-    china_policy_compliance: Optional[policycompliance.PolicyCompliance] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'chinaPolicyCompliance' }})
-    deals_policy_compliance: Optional[policycompliance.PolicyCompliance] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dealsPolicyCompliance' }})
-    detected_advertisers: Optional[List[advertiserandbrand.AdvertiserAndBrand]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'detectedAdvertisers' }})
-    detected_attributes: Optional[List[CreativeServingDecisionDetectedAttributesEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'detectedAttributes' }})
-    detected_click_through_urls: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'detectedClickThroughUrls' }})
-    detected_domains: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'detectedDomains' }})
-    detected_languages: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'detectedLanguages' }})
-    detected_product_categories: Optional[List[int]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'detectedProductCategories' }})
-    detected_sensitive_categories: Optional[List[int]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'detectedSensitiveCategories' }})
-    detected_vendor_ids: Optional[List[int]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'detectedVendorIds' }})
-    last_status_update: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lastStatusUpdate' }})
-    network_policy_compliance: Optional[policycompliance.PolicyCompliance] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'networkPolicyCompliance' }})
-    platform_policy_compliance: Optional[policycompliance.PolicyCompliance] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'platformPolicyCompliance' }})
-    russia_policy_compliance: Optional[policycompliance.PolicyCompliance] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'russiaPolicyCompliance' }})
+    r"""CreativeServingDecision
+    Top level status and detected attributes of a creative.
+    """
+    
+    ad_technology_providers: Optional[AdTechnologyProviders] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('adTechnologyProviders') }})
+    china_policy_compliance: Optional[PolicyCompliance] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('chinaPolicyCompliance') }})
+    deals_policy_compliance: Optional[PolicyCompliance] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dealsPolicyCompliance') }})
+    detected_advertisers: Optional[List[AdvertiserAndBrand]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('detectedAdvertisers') }})
+    detected_attributes: Optional[List[CreativeServingDecisionDetectedAttributesEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('detectedAttributes') }})
+    detected_click_through_urls: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('detectedClickThroughUrls') }})
+    detected_domains: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('detectedDomains') }})
+    detected_languages: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('detectedLanguages') }})
+    detected_product_categories: Optional[List[int]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('detectedProductCategories') }})
+    detected_sensitive_categories: Optional[List[int]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('detectedSensitiveCategories') }})
+    detected_vendor_ids: Optional[List[int]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('detectedVendorIds') }})
+    last_status_update: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lastStatusUpdate') }})
+    network_policy_compliance: Optional[PolicyCompliance] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('networkPolicyCompliance') }})
+    platform_policy_compliance: Optional[PolicyCompliance] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('platformPolicyCompliance') }})
+    russia_policy_compliance: Optional[PolicyCompliance] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('russiaPolicyCompliance') }})
     

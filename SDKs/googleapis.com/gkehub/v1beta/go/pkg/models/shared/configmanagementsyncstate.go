@@ -13,6 +13,8 @@ const (
 	ConfigManagementSyncStateCodeEnumUnreachable         ConfigManagementSyncStateCodeEnum = "UNREACHABLE"
 )
 
+// ConfigManagementSyncState
+// State indicating an ACM's progress syncing configurations to a cluster
 type ConfigManagementSyncState struct {
 	Code         *ConfigManagementSyncStateCodeEnum `json:"code,omitempty"`
 	Errors       []ConfigManagementSyncError        `json:"errors,omitempty"`

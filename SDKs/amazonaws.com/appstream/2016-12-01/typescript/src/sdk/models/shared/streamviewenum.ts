@@ -1,6 +1,7 @@
 
 
+
 export enum StreamViewEnum {
-    App = "APP"
-,    Desktop = "DESKTOP"
+    App = "APP",
+    Desktop = "DESKTOP"
 }

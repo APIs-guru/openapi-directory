@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SplitInt64 } from "./splitint64";
+
 
 
 // IntegerList
@@ -8,6 +8,6 @@ import { SplitInt64 } from "./splitint64";
  * A metric value representing a list of integers.
 **/
 export class IntegerList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=elements", elemType: shared.SplitInt64 })
+  @SpeakeasyMetadata({ data: "json, name=elements", elemType: SplitInt64 })
   elements?: SplitInt64[];
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BatchUpdateObjectAttributesResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the output of a <code>BatchUpdate</code> response operation.
 **/
 export class BatchUpdateObjectAttributesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ObjectIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=ObjectIdentifier" })
   objectIdentifier?: string;
 }

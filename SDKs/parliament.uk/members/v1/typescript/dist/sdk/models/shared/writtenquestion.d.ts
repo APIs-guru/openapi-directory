@@ -1,0 +1,30 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import { AnsweringBody } from "./answeringbody";
+import { Member } from "./member";
+import { GroupedQuestion } from "./groupedquestion";
+export declare class WrittenQuestion extends SpeakeasyBase {
+    answerIsCorrection?: boolean;
+    answerIsHolding?: boolean;
+    answerText?: string;
+    answeringBody?: AnsweringBody;
+    answeringBodyId?: number;
+    answeringMember?: Member;
+    answeringMemberId?: number;
+    askingMemberId?: number;
+    attachmentCount?: number;
+    correctingMember?: Member;
+    correctingMemberId?: number;
+    dateAnswered?: Date;
+    dateForAnswer?: Date;
+    dateTabled?: Date;
+    groupedQuestions?: string[];
+    groupedQuestionsDates?: GroupedQuestion[];
+    heading?: string;
+    house?: number;
+    id?: number;
+    isNamedDay?: boolean;
+    isWithdrawn?: boolean;
+    memberHasInterest?: boolean;
+    questionText?: string;
+    uin?: string;
+}

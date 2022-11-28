@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ValueHolder } from "./valueholder";
 // Page
 /**
  * Contains details of the fetched page.
@@ -34,11 +34,11 @@ var Page = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=NextPageToken" }),
+        SpeakeasyMetadata({ data: "json, name=NextPageToken" }),
         __metadata("design:type", String)
     ], Page.prototype, "nextPageToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=Values", elemType: shared.ValueHolder }),
+        SpeakeasyMetadata({ data: "json, name=Values", elemType: ValueHolder }),
         __metadata("design:type", Array)
     ], Page.prototype, "values", void 0);
     return Page;

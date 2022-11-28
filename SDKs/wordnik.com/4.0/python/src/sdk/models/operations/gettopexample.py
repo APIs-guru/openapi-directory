@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 
 
 @dataclass
 class GetTopExamplePathParams:
-    word: str = field(default=None, metadata={'path_param': { 'field_name': 'word', 'style': 'simple', 'explode': False }})
+    word: str = field(metadata={'path_param': { 'field_name': 'word', 'style': 'simple', 'explode': False }})
     
 class GetTopExampleUseCanonicalEnum(str, Enum):
     FALSE = "false"
@@ -18,13 +19,13 @@ class GetTopExampleQueryParams:
 
 @dataclass
 class GetTopExampleRequest:
-    path_params: GetTopExamplePathParams = field(default=None)
-    query_params: GetTopExampleQueryParams = field(default=None)
+    path_params: GetTopExamplePathParams = field()
+    query_params: GetTopExampleQueryParams = field()
     
 
 @dataclass
 class GetTopExampleResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

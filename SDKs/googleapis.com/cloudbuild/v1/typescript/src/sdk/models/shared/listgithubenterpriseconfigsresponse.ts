@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GitHubEnterpriseConfig } from "./githubenterpriseconfig";
+
 
 
 // ListGithubEnterpriseConfigsResponse
@@ -8,6 +8,6 @@ import { GitHubEnterpriseConfig } from "./githubenterpriseconfig";
  * RPC response object returned by ListGithubEnterpriseConfigs RPC method.
 **/
 export class ListGithubEnterpriseConfigsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=configs", elemType: shared.GitHubEnterpriseConfig })
+  @SpeakeasyMetadata({ data: "json, name=configs", elemType: GitHubEnterpriseConfig })
   configs?: GitHubEnterpriseConfig[];
 }

@@ -11,12 +11,12 @@ class GetUserRequestsQueryParams:
 
 @dataclass
 class GetUserRequestsRequest:
-    query_params: GetUserRequestsQueryParams = field(default=None)
+    query_params: GetUserRequestsQueryParams = field()
     
 
 @dataclass
 class GetUserRequestsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     user_request_entities: Optional[List[shared.UserRequestEntity]] = field(default=None)
     

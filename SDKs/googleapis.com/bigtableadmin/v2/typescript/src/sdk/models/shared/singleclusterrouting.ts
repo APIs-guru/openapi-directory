@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SingleClusterRouting
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Unconditionally routes all read/write requests to a specific cluster. This option preserves read-your-writes consistency but does not improve availability.
 **/
 export class SingleClusterRouting extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowTransactionalWrites" })
+  @SpeakeasyMetadata({ data: "json, name=allowTransactionalWrites" })
   allowTransactionalWrites?: boolean;
 
-  @Metadata({ data: "json, name=clusterId" })
+  @SpeakeasyMetadata({ data: "json, name=clusterId" })
   clusterId?: string;
 }

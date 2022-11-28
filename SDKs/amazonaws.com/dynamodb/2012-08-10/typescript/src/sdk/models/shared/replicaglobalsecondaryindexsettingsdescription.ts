@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IndexStatusEnum } from "./indexstatusenum";
 import { AutoScalingSettingsDescription } from "./autoscalingsettingsdescription";
-import { AutoScalingSettingsDescription } from "./autoscalingsettingsdescription";
+
 
 
 // ReplicaGlobalSecondaryIndexSettingsDescription
@@ -9,21 +9,21 @@ import { AutoScalingSettingsDescription } from "./autoscalingsettingsdescription
  * Represents the properties of a global secondary index.
 **/
 export class ReplicaGlobalSecondaryIndexSettingsDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=IndexName" })
+  @SpeakeasyMetadata({ data: "json, name=IndexName" })
   indexName: string;
 
-  @Metadata({ data: "json, name=IndexStatus" })
+  @SpeakeasyMetadata({ data: "json, name=IndexStatus" })
   indexStatus?: IndexStatusEnum;
 
-  @Metadata({ data: "json, name=ProvisionedReadCapacityAutoScalingSettings" })
+  @SpeakeasyMetadata({ data: "json, name=ProvisionedReadCapacityAutoScalingSettings" })
   provisionedReadCapacityAutoScalingSettings?: AutoScalingSettingsDescription;
 
-  @Metadata({ data: "json, name=ProvisionedReadCapacityUnits" })
+  @SpeakeasyMetadata({ data: "json, name=ProvisionedReadCapacityUnits" })
   provisionedReadCapacityUnits?: number;
 
-  @Metadata({ data: "json, name=ProvisionedWriteCapacityAutoScalingSettings" })
+  @SpeakeasyMetadata({ data: "json, name=ProvisionedWriteCapacityAutoScalingSettings" })
   provisionedWriteCapacityAutoScalingSettings?: AutoScalingSettingsDescription;
 
-  @Metadata({ data: "json, name=ProvisionedWriteCapacityUnits" })
+  @SpeakeasyMetadata({ data: "json, name=ProvisionedWriteCapacityUnits" })
   provisionedWriteCapacityUnits?: number;
 }

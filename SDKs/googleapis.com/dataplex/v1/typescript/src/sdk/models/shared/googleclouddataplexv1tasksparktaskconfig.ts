@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDataplexV1TaskInfrastructureSpec } from "./googleclouddataplexv1taskinfrastructurespec";
+
 
 
 // GoogleCloudDataplexV1TaskSparkTaskConfig
@@ -7,27 +8,27 @@ import { GoogleCloudDataplexV1TaskInfrastructureSpec } from "./googleclouddatapl
  * User-specified config for running a Spark task.
 **/
 export class GoogleCloudDataplexV1TaskSparkTaskConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=archiveUris" })
+  @SpeakeasyMetadata({ data: "json, name=archiveUris" })
   archiveUris?: string[];
 
-  @Metadata({ data: "json, name=fileUris" })
+  @SpeakeasyMetadata({ data: "json, name=fileUris" })
   fileUris?: string[];
 
-  @Metadata({ data: "json, name=infrastructureSpec" })
+  @SpeakeasyMetadata({ data: "json, name=infrastructureSpec" })
   infrastructureSpec?: GoogleCloudDataplexV1TaskInfrastructureSpec;
 
-  @Metadata({ data: "json, name=mainClass" })
+  @SpeakeasyMetadata({ data: "json, name=mainClass" })
   mainClass?: string;
 
-  @Metadata({ data: "json, name=mainJarFileUri" })
+  @SpeakeasyMetadata({ data: "json, name=mainJarFileUri" })
   mainJarFileUri?: string;
 
-  @Metadata({ data: "json, name=pythonScriptFile" })
+  @SpeakeasyMetadata({ data: "json, name=pythonScriptFile" })
   pythonScriptFile?: string;
 
-  @Metadata({ data: "json, name=sqlScript" })
+  @SpeakeasyMetadata({ data: "json, name=sqlScript" })
   sqlScript?: string;
 
-  @Metadata({ data: "json, name=sqlScriptFile" })
+  @SpeakeasyMetadata({ data: "json, name=sqlScriptFile" })
   sqlScriptFile?: string;
 }

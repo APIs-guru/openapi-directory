@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WorkloadShareSummary } from "./workloadsharesummary";
+
 
 
 // ListWorkloadSharesOutput
@@ -8,12 +8,12 @@ import { WorkloadShareSummary } from "./workloadsharesummary";
  * Input for List Workload Share
 **/
 export class ListWorkloadSharesOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=WorkloadId" })
+  @SpeakeasyMetadata({ data: "json, name=WorkloadId" })
   workloadId?: string;
 
-  @Metadata({ data: "json, name=WorkloadShareSummaries", elemType: shared.WorkloadShareSummary })
+  @SpeakeasyMetadata({ data: "json, name=WorkloadShareSummaries", elemType: WorkloadShareSummary })
   workloadShareSummaries?: WorkloadShareSummary[];
 }

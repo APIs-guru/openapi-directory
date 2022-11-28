@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VirtualMachine } from "./virtualmachine";
+
 
 
 // Resources
@@ -7,12 +8,12 @@ import { VirtualMachine } from "./virtualmachine";
  * The system resources for the pipeline run. At least one zone or region must be specified or the pipeline run will fail.
 **/
 export class Resources extends SpeakeasyBase {
-  @Metadata({ data: "json, name=regions" })
+  @SpeakeasyMetadata({ data: "json, name=regions" })
   regions?: string[];
 
-  @Metadata({ data: "json, name=virtualMachine" })
+  @SpeakeasyMetadata({ data: "json, name=virtualMachine" })
   virtualMachine?: VirtualMachine;
 
-  @Metadata({ data: "json, name=zones" })
+  @SpeakeasyMetadata({ data: "json, name=zones" })
   zones?: string[];
 }

@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AlgorithmSpecEnum } from "./algorithmspecenum";
 import { WrappingKeySpecEnum } from "./wrappingkeyspecenum";
 
 
+
 export class GetParametersForImportRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=KeyId" })
+  @SpeakeasyMetadata({ data: "json, name=KeyId" })
   keyId: string;
 
-  @Metadata({ data: "json, name=WrappingAlgorithm" })
+  @SpeakeasyMetadata({ data: "json, name=WrappingAlgorithm" })
   wrappingAlgorithm: AlgorithmSpecEnum;
 
-  @Metadata({ data: "json, name=WrappingKeySpec" })
+  @SpeakeasyMetadata({ data: "json, name=WrappingKeySpec" })
   wrappingKeySpec: WrappingKeySpecEnum;
 }

@@ -22,46 +22,46 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Extension = /** @class */ (function (_super) {
     __extends(Extension, _super);
     function Extension() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=avg_rating" }),
+        SpeakeasyMetadata({ data: "json, name=avg_rating" }),
         __metadata("design:type", Number)
     ], Extension.prototype, "avgRating", void 0);
     __decorate([
-        Metadata({ data: "json, name=extension_id" }),
+        SpeakeasyMetadata({ data: "json, name=extension_id" }),
         __metadata("design:type", Number)
     ], Extension.prototype, "extensionId", void 0);
     __decorate([
-        Metadata({ data: "json, name=install_count" }),
+        SpeakeasyMetadata({ data: "json, name=install_count" }),
         __metadata("design:type", Number)
     ], Extension.prototype, "installCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=prev_avg_rating" }),
+        SpeakeasyMetadata({ data: "json, name=prev_avg_rating" }),
         __metadata("design:type", Number)
     ], Extension.prototype, "prevAvgRating", void 0);
     __decorate([
-        Metadata({ data: "json, name=prev_install_count" }),
+        SpeakeasyMetadata({ data: "json, name=prev_install_count" }),
         __metadata("design:type", Number)
     ], Extension.prototype, "prevInstallCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=prev_rating_count" }),
+        SpeakeasyMetadata({ data: "json, name=prev_rating_count" }),
         __metadata("design:type", Number)
     ], Extension.prototype, "prevRatingCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=rating_count" }),
+        SpeakeasyMetadata({ data: "json, name=rating_count" }),
         __metadata("design:type", Number)
     ], Extension.prototype, "ratingCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=update_ts" }),
+        SpeakeasyMetadata({ data: "json, name=update_ts" }),
         __metadata("design:type", Date)
     ], Extension.prototype, "updateTs", void 0);
     __decorate([
-        Metadata({ data: "json, name=url" }),
+        SpeakeasyMetadata({ data: "json, name=url" }),
         __metadata("design:type", String)
     ], Extension.prototype, "url", void 0);
     return Extension;

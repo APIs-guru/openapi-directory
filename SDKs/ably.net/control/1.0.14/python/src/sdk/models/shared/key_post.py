@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List
+from typing import List
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class KeyPostCapabilitiesEnum(str, Enum):
     PUBLISH = "publish"
@@ -16,7 +18,7 @@ class KeyPostCapabilitiesEnum(str, Enum):
 @dataclass_json
 @dataclass
 class KeyPost:
-    capabilities: List[KeyPostCapabilitiesEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'capabilities' }})
-    channels: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'channels' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
+    capabilities: List[KeyPostCapabilitiesEnum] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('capabilities') }})
+    channels: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('channels') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
     

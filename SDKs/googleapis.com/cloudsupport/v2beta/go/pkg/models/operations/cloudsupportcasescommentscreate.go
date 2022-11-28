@@ -30,7 +30,7 @@ type CloudsupportCasesCommentsCreateSecurity struct {
 type CloudsupportCasesCommentsCreateRequest struct {
 	PathParams  CloudsupportCasesCommentsCreatePathParams
 	QueryParams CloudsupportCasesCommentsCreateQueryParams
-	Request     *shared.Comment `request:"mediaType=application/json"`
+	Request     *shared.CommentInput `request:"mediaType=application/json"`
 	Security    CloudsupportCasesCommentsCreateSecurity
 }
 

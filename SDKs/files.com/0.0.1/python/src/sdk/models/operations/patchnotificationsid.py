@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class PatchNotificationsIDPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,13 +18,13 @@ class PatchNotificationsIDRequestBody:
 
 @dataclass
 class PatchNotificationsIDRequest:
-    path_params: PatchNotificationsIDPathParams = field(default=None)
+    path_params: PatchNotificationsIDPathParams = field()
     request: Optional[PatchNotificationsIDRequestBody] = field(default=None, metadata={'request': { 'media_type': 'multipart/form-data' }})
     
 
 @dataclass
 class PatchNotificationsIDResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     notification_entity: Optional[shared.NotificationEntity] = field(default=None)
-    status_code: int = field(default=None)
     

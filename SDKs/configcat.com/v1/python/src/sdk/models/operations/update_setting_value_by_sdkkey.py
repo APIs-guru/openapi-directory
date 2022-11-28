@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List,Optional
 from sdk.models import shared
 
 
 @dataclass
 class UpdateSettingValueBySdkkeyPathParams:
-    setting_key_or_id: str = field(default=None, metadata={'path_param': { 'field_name': 'settingKeyOrId', 'style': 'simple', 'explode': False }})
+    setting_key_or_id: str = field(metadata={'path_param': { 'field_name': 'settingKeyOrId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,7 +18,7 @@ class UpdateSettingValueBySdkkeyQueryParams:
 
 @dataclass
 class UpdateSettingValueBySdkkeyHeaders:
-    x_configcat_sdkkey: str = field(default=None, metadata={'header': { 'field_name': 'X-CONFIGCAT-SDKKEY', 'style': 'simple', 'explode': False }})
+    x_configcat_sdkkey: str = field(metadata={'header': { 'field_name': 'X-CONFIGCAT-SDKKEY', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,16 +31,16 @@ class UpdateSettingValueBySdkkeyRequests:
 
 @dataclass
 class UpdateSettingValueBySdkkeyRequest:
-    path_params: UpdateSettingValueBySdkkeyPathParams = field(default=None)
-    query_params: UpdateSettingValueBySdkkeyQueryParams = field(default=None)
-    headers: UpdateSettingValueBySdkkeyHeaders = field(default=None)
-    request: UpdateSettingValueBySdkkeyRequests = field(default=None)
+    headers: UpdateSettingValueBySdkkeyHeaders = field()
+    path_params: UpdateSettingValueBySdkkeyPathParams = field()
+    query_params: UpdateSettingValueBySdkkeyQueryParams = field()
+    request: UpdateSettingValueBySdkkeyRequests = field()
     
 
 @dataclass
 class UpdateSettingValueBySdkkeyResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     setting_value_model: Optional[shared.SettingValueModel] = field(default=None)
     setting_value_model_haljson: Optional[shared.SettingValueModelHaljson] = field(default=None)
-    status_code: int = field(default=None)
     

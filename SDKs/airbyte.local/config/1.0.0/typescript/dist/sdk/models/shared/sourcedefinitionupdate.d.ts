@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * Update the SourceDefinition. Currently, the only allowed attribute to update is the default docker image version.
 **/

@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class ListSchedulesMixinEnum(str, Enum):
@@ -39,9 +40,9 @@ class ListSchedulesQueryParams:
     pid: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'pid', 'style': 'form', 'explode': True }})
     q: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'q', 'style': 'form', 'explode': True }})
     repeat: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'repeat', 'style': 'form', 'explode': True }})
-    schedule_day: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'schedule_day', 'style': 'form', 'explode': True }})
-    schedule_day_from: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'schedule_day_from', 'style': 'form', 'explode': True }})
-    schedule_day_to: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'schedule_day_to', 'style': 'form', 'explode': True }})
+    schedule_day: Optional[date] = field(default=None, metadata={'query_param': { 'field_name': 'schedule_day', 'style': 'form', 'explode': True }})
+    schedule_day_from: Optional[date] = field(default=None, metadata={'query_param': { 'field_name': 'schedule_day_from', 'style': 'form', 'explode': True }})
+    schedule_day_to: Optional[date] = field(default=None, metadata={'query_param': { 'field_name': 'schedule_day_to', 'style': 'form', 'explode': True }})
     service_master_brand: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'service_master_brand', 'style': 'form', 'explode': True }})
     sid: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'sid', 'style': 'form', 'explode': True }})
     sort: Optional[ListSchedulesSortEnum] = field(default=None, metadata={'query_param': { 'field_name': 'sort', 'style': 'form', 'explode': True }})
@@ -53,14 +54,14 @@ class ListSchedulesQueryParams:
 
 @dataclass
 class ListSchedulesRequest:
-    query_params: ListSchedulesQueryParams = field(default=None)
+    query_params: ListSchedulesQueryParams = field()
     
 
 @dataclass
 class ListSchedulesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     error_model: Optional[shared.ErrorModel] = field(default=None)
-    status_code: int = field(default=None)
     nitro: Optional[Any] = field(default=None)
     

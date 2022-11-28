@@ -1,5 +1,7 @@
 package shared
 
+// SpriteSheet
+// Sprite sheet configuration.
 type SpriteSheet struct {
 	ColumnCount        *int32  `json:"columnCount,omitempty"`
 	EndTimeOffset      *string `json:"endTimeOffset,omitempty"`

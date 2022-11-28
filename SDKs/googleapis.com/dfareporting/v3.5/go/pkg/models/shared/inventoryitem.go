@@ -7,6 +7,8 @@ const (
 	InventoryItemTypeEnumPlanningPlacementTypeCredit  InventoryItemTypeEnum = "PLANNING_PLACEMENT_TYPE_CREDIT"
 )
 
+// InventoryItem
+// Represents a buy from the Planning inventory store.
 type InventoryItem struct {
 	AccountID                 *string                `json:"accountId,omitempty"`
 	AdSlots                   []AdSlot               `json:"adSlots,omitempty"`

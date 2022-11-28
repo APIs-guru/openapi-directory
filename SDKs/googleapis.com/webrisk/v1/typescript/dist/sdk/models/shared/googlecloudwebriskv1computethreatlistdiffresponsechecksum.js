@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GoogleCloudWebriskV1ComputeThreatListDiffResponseChecksum
 /**
  * The expected state of a client's local database.
@@ -33,7 +33,7 @@ var GoogleCloudWebriskV1ComputeThreatListDiffResponseChecksum = /** @class */ (f
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=sha256" }),
+        SpeakeasyMetadata({ data: "json, name=sha256" }),
         __metadata("design:type", String)
     ], GoogleCloudWebriskV1ComputeThreatListDiffResponseChecksum.prototype, "sha256", void 0);
     return GoogleCloudWebriskV1ComputeThreatListDiffResponseChecksum;

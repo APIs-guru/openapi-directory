@@ -1,30 +1,31 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MigrationStrategyEnum } from "./migrationstrategyenum";
 import { LocaleEnum } from "./localeenum";
 
 
+
 export class StartMigrationResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=migrationId" })
+  @SpeakeasyMetadata({ data: "json, name=migrationId" })
   migrationId?: string;
 
-  @Metadata({ data: "json, name=migrationStrategy" })
+  @SpeakeasyMetadata({ data: "json, name=migrationStrategy" })
   migrationStrategy?: MigrationStrategyEnum;
 
-  @Metadata({ data: "json, name=migrationTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=migrationTimestamp" })
   migrationTimestamp?: Date;
 
-  @Metadata({ data: "json, name=v1BotLocale" })
+  @SpeakeasyMetadata({ data: "json, name=v1BotLocale" })
   v1BotLocale?: LocaleEnum;
 
-  @Metadata({ data: "json, name=v1BotName" })
+  @SpeakeasyMetadata({ data: "json, name=v1BotName" })
   v1BotName?: string;
 
-  @Metadata({ data: "json, name=v1BotVersion" })
+  @SpeakeasyMetadata({ data: "json, name=v1BotVersion" })
   v1BotVersion?: string;
 
-  @Metadata({ data: "json, name=v2BotId" })
+  @SpeakeasyMetadata({ data: "json, name=v2BotId" })
   v2BotId?: string;
 
-  @Metadata({ data: "json, name=v2BotRole" })
+  @SpeakeasyMetadata({ data: "json, name=v2BotRole" })
   v2BotRole?: string;
 }

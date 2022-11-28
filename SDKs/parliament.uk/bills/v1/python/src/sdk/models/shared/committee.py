@@ -1,15 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import committeehouse_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Committee:
-    category: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'category' }})
-    house: Optional[committeehouse_enum.CommitteeHouseEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'house' }})
-    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
+    category: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('category') }})
+    house: Optional[CommitteeHouseEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('house') }})
+    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('url') }})
     

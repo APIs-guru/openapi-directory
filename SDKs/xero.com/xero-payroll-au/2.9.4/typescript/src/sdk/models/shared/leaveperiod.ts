@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LeavePeriodStatusEnum } from "./leaveperiodstatusenum";
 
 
+
 export class LeavePeriod extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LeavePeriodStatus" })
+  @SpeakeasyMetadata({ data: "json, name=LeavePeriodStatus" })
   leavePeriodStatus?: LeavePeriodStatusEnum;
 
-  @Metadata({ data: "json, name=NumberOfUnits" })
+  @SpeakeasyMetadata({ data: "json, name=NumberOfUnits" })
   numberOfUnits?: number;
 
-  @Metadata({ data: "json, name=PayPeriodEndDate" })
+  @SpeakeasyMetadata({ data: "json, name=PayPeriodEndDate" })
   payPeriodEndDate?: string;
 
-  @Metadata({ data: "json, name=PayPeriodStartDate" })
+  @SpeakeasyMetadata({ data: "json, name=PayPeriodStartDate" })
   payPeriodStartDate?: string;
 }

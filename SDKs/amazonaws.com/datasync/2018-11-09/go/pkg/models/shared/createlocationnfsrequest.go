@@ -1,5 +1,7 @@
 package shared
 
+// CreateLocationNfsRequest
+// CreateLocationNfsRequest
 type CreateLocationNfsRequest struct {
 	MountOptions   *NfsMountOptions `json:"MountOptions,omitempty"`
 	OnPremConfig   OnPremConfig     `json:"OnPremConfig"`

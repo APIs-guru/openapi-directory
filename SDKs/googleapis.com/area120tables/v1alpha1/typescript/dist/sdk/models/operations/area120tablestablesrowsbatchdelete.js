@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var Area120tablesTablesRowsBatchDeletePathParams = /** @class */ (function (_super) {
     __extends(Area120tablesTablesRowsBatchDeletePathParams, _super);
@@ -30,7 +30,7 @@ var Area120tablesTablesRowsBatchDeletePathParams = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=parent" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=parent" }),
         __metadata("design:type", String)
     ], Area120tablesTablesRowsBatchDeletePathParams.prototype, "parent", void 0);
     return Area120tablesTablesRowsBatchDeletePathParams;
@@ -42,47 +42,47 @@ var Area120tablesTablesRowsBatchDeleteQueryParams = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], Area120tablesTablesRowsBatchDeleteQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], Area120tablesTablesRowsBatchDeleteQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], Area120tablesTablesRowsBatchDeleteQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], Area120tablesTablesRowsBatchDeleteQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], Area120tablesTablesRowsBatchDeleteQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], Area120tablesTablesRowsBatchDeleteQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], Area120tablesTablesRowsBatchDeleteQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], Area120tablesTablesRowsBatchDeleteQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], Area120tablesTablesRowsBatchDeleteQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], Area120tablesTablesRowsBatchDeleteQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], Area120tablesTablesRowsBatchDeleteQueryParams.prototype, "uploadProtocol", void 0);
     return Area120tablesTablesRowsBatchDeleteQueryParams;
@@ -94,11 +94,11 @@ var Area120tablesTablesRowsBatchDeleteSecurityOption1 = /** @class */ (function 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], Area120tablesTablesRowsBatchDeleteSecurityOption1.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], Area120tablesTablesRowsBatchDeleteSecurityOption1.prototype, "oauth2c", void 0);
     return Area120tablesTablesRowsBatchDeleteSecurityOption1;
@@ -110,11 +110,11 @@ var Area120tablesTablesRowsBatchDeleteSecurityOption2 = /** @class */ (function 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], Area120tablesTablesRowsBatchDeleteSecurityOption2.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], Area120tablesTablesRowsBatchDeleteSecurityOption2.prototype, "oauth2c", void 0);
     return Area120tablesTablesRowsBatchDeleteSecurityOption2;
@@ -126,11 +126,11 @@ var Area120tablesTablesRowsBatchDeleteSecurityOption3 = /** @class */ (function 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], Area120tablesTablesRowsBatchDeleteSecurityOption3.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], Area120tablesTablesRowsBatchDeleteSecurityOption3.prototype, "oauth2c", void 0);
     return Area120tablesTablesRowsBatchDeleteSecurityOption3;
@@ -142,11 +142,11 @@ var Area120tablesTablesRowsBatchDeleteSecurityOption4 = /** @class */ (function 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], Area120tablesTablesRowsBatchDeleteSecurityOption4.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], Area120tablesTablesRowsBatchDeleteSecurityOption4.prototype, "oauth2c", void 0);
     return Area120tablesTablesRowsBatchDeleteSecurityOption4;
@@ -158,19 +158,19 @@ var Area120tablesTablesRowsBatchDeleteSecurity = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", Area120tablesTablesRowsBatchDeleteSecurityOption1)
     ], Area120tablesTablesRowsBatchDeleteSecurity.prototype, "option1", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", Area120tablesTablesRowsBatchDeleteSecurityOption2)
     ], Area120tablesTablesRowsBatchDeleteSecurity.prototype, "option2", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", Area120tablesTablesRowsBatchDeleteSecurityOption3)
     ], Area120tablesTablesRowsBatchDeleteSecurity.prototype, "option3", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", Area120tablesTablesRowsBatchDeleteSecurityOption4)
     ], Area120tablesTablesRowsBatchDeleteSecurity.prototype, "option4", void 0);
     return Area120tablesTablesRowsBatchDeleteSecurity;
@@ -182,19 +182,19 @@ var Area120tablesTablesRowsBatchDeleteRequest = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Area120tablesTablesRowsBatchDeletePathParams)
     ], Area120tablesTablesRowsBatchDeleteRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Area120tablesTablesRowsBatchDeleteQueryParams)
     ], Area120tablesTablesRowsBatchDeleteRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.BatchDeleteRowsRequest)
     ], Area120tablesTablesRowsBatchDeleteRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Area120tablesTablesRowsBatchDeleteSecurity)
     ], Area120tablesTablesRowsBatchDeleteRequest.prototype, "security", void 0);
     return Area120tablesTablesRowsBatchDeleteRequest;
@@ -206,15 +206,15 @@ var Area120tablesTablesRowsBatchDeleteResponse = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], Area120tablesTablesRowsBatchDeleteResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], Area120tablesTablesRowsBatchDeleteResponse.prototype, "empty", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], Area120tablesTablesRowsBatchDeleteResponse.prototype, "statusCode", void 0);
     return Area120tablesTablesRowsBatchDeleteResponse;

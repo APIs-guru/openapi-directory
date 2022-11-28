@@ -8,11 +8,6 @@ type PostChartDataSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type PostChartDataRequest struct {
-	Request  shared.ChartDataQueryContextSchema `request:"mediaType=application/json"`
-	Security PostChartDataSecurity
-}
-
 type PostChartData400ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
 }
@@ -23,6 +18,11 @@ type PostChartData401ApplicationJSON struct {
 
 type PostChartData500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type PostChartDataRequest struct {
+	Request  shared.ChartDataQueryContextSchema `request:"mediaType=application/json"`
+	Security PostChartDataSecurity
 }
 
 type PostChartDataResponse struct {

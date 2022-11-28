@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AdsensehostUrlchannelsInsertPathParams:
-    ad_client_id: str = field(default=None, metadata={'path_param': { 'field_name': 'adClientId', 'style': 'simple', 'explode': False }})
+    ad_client_id: str = field(metadata={'path_param': { 'field_name': 'adClientId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,21 +22,21 @@ class AdsensehostUrlchannelsInsertQueryParams:
 
 @dataclass
 class AdsensehostUrlchannelsInsertSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AdsensehostUrlchannelsInsertRequest:
-    path_params: AdsensehostUrlchannelsInsertPathParams = field(default=None)
-    query_params: AdsensehostUrlchannelsInsertQueryParams = field(default=None)
+    path_params: AdsensehostUrlchannelsInsertPathParams = field()
+    query_params: AdsensehostUrlchannelsInsertQueryParams = field()
+    security: AdsensehostUrlchannelsInsertSecurity = field()
     request: Optional[shared.URLChannel] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AdsensehostUrlchannelsInsertSecurity = field(default=None)
     
 
 @dataclass
 class AdsensehostUrlchannelsInsertResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     url_channel: Optional[shared.URLChannel] = field(default=None)
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var QueryGrantableRolesRequestViewEnum;
 (function (QueryGrantableRolesRequestViewEnum) {
     QueryGrantableRolesRequestViewEnum["Basic"] = "BASIC";
@@ -38,19 +38,19 @@ var QueryGrantableRolesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=fullResourceName" }),
+        SpeakeasyMetadata({ data: "json, name=fullResourceName" }),
         __metadata("design:type", String)
     ], QueryGrantableRolesRequest.prototype, "fullResourceName", void 0);
     __decorate([
-        Metadata({ data: "json, name=pageSize" }),
+        SpeakeasyMetadata({ data: "json, name=pageSize" }),
         __metadata("design:type", Number)
     ], QueryGrantableRolesRequest.prototype, "pageSize", void 0);
     __decorate([
-        Metadata({ data: "json, name=pageToken" }),
+        SpeakeasyMetadata({ data: "json, name=pageToken" }),
         __metadata("design:type", String)
     ], QueryGrantableRolesRequest.prototype, "pageToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=view" }),
+        SpeakeasyMetadata({ data: "json, name=view" }),
         __metadata("design:type", String)
     ], QueryGrantableRolesRequest.prototype, "view", void 0);
     return QueryGrantableRolesRequest;

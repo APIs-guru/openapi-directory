@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class ReportStateAndNotificationDevice:
-    notifications: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'notifications' }})
-    states: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'states' }})
+    r"""ReportStateAndNotificationDevice
+    The states and notifications specific to a device.
+    """
+    
+    notifications: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('notifications') }})
+    states: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('states') }})
     

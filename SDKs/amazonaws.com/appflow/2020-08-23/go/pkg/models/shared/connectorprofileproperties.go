@@ -1,5 +1,8 @@
 package shared
 
+// ConnectorProfileProperties
+//
+//	The connector-specific profile properties required by each connector.
 type ConnectorProfileProperties struct {
 	Amplitude       map[string]interface{}                `json:"Amplitude,omitempty"`
 	Datadog         *DatadogConnectorProfileProperties    `json:"Datadog,omitempty"`

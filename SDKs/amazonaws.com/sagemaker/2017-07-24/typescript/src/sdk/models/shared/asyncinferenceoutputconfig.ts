@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AsyncInferenceNotificationConfig } from "./asyncinferencenotificationconfig";
+
 
 
 // AsyncInferenceOutputConfig
@@ -7,12 +8,12 @@ import { AsyncInferenceNotificationConfig } from "./asyncinferencenotificationco
  * Specifies the configuration for asynchronous inference invocation outputs.
 **/
 export class AsyncInferenceOutputConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=KmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=KmsKeyId" })
   kmsKeyId?: string;
 
-  @Metadata({ data: "json, name=NotificationConfig" })
+  @SpeakeasyMetadata({ data: "json, name=NotificationConfig" })
   notificationConfig?: AsyncInferenceNotificationConfig;
 
-  @Metadata({ data: "json, name=S3OutputPath" })
+  @SpeakeasyMetadata({ data: "json, name=S3OutputPath" })
   s3OutputPath: string;
 }

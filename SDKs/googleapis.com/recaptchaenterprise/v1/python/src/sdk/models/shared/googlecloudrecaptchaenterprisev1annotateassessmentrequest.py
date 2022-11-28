@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GoogleCloudRecaptchaenterpriseV1AnnotateAssessmentRequestAnnotationEnum(str, Enum):
     ANNOTATION_UNSPECIFIED = "ANNOTATION_UNSPECIFIED"
@@ -30,7 +32,11 @@ class GoogleCloudRecaptchaenterpriseV1AnnotateAssessmentRequestReasonsEnum(str, 
 @dataclass_json
 @dataclass
 class GoogleCloudRecaptchaenterpriseV1AnnotateAssessmentRequest:
-    annotation: Optional[GoogleCloudRecaptchaenterpriseV1AnnotateAssessmentRequestAnnotationEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'annotation' }})
-    hashed_account_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'hashedAccountId' }})
-    reasons: Optional[List[GoogleCloudRecaptchaenterpriseV1AnnotateAssessmentRequestReasonsEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reasons' }})
+    r"""GoogleCloudRecaptchaenterpriseV1AnnotateAssessmentRequest
+    The request message to annotate an Assessment.
+    """
+    
+    annotation: Optional[GoogleCloudRecaptchaenterpriseV1AnnotateAssessmentRequestAnnotationEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('annotation') }})
+    hashed_account_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('hashedAccountId') }})
+    reasons: Optional[List[GoogleCloudRecaptchaenterpriseV1AnnotateAssessmentRequestReasonsEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('reasons') }})
     

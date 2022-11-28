@@ -15,16 +15,15 @@ type GetInventorySecurity struct {
 	FdcAuth shared.SchemeFdcAuth `security:"scheme,type=oauth2"`
 }
 
-type GetInventoryRequest struct {
-	QueryParams GetInventoryQueryParams
-	Security    GetInventorySecurity
-}
-
+// GetInventoryItemInventoryArrayV2ItemInventoryV2Item
+// Item this inventory data is based on
 type GetInventoryItemInventoryArrayV2ItemInventoryV2Item struct {
 	ID           *int64  `json:"id,omitempty"`
 	SkuReference *string `json:"skuReference,omitempty"`
 }
 
+// GetInventoryItemInventoryArrayV2ItemInventoryV2Merchant
+// Merchant that owns this item
 type GetInventoryItemInventoryArrayV2ItemInventoryV2Merchant struct {
 	Name *string `json:"name,omitempty"`
 }
@@ -57,6 +56,11 @@ type GetInventoryItemInventoryArrayV2Meta struct {
 type GetInventoryItemInventoryArrayV2 struct {
 	Data []GetInventoryItemInventoryArrayV2ItemInventoryV2 `json:"data,omitempty"`
 	Meta *GetInventoryItemInventoryArrayV2Meta             `json:"meta,omitempty"`
+}
+
+type GetInventoryRequest struct {
+	QueryParams GetInventoryQueryParams
+	Security    GetInventorySecurity
 }
 
 type GetInventoryResponse struct {

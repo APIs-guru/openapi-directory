@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SetPermissionRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AllowSsh" })
+  @SpeakeasyMetadata({ data: "json, name=AllowSsh" })
   allowSsh?: boolean;
 
-  @Metadata({ data: "json, name=AllowSudo" })
+  @SpeakeasyMetadata({ data: "json, name=AllowSudo" })
   allowSudo?: boolean;
 
-  @Metadata({ data: "json, name=IamUserArn" })
+  @SpeakeasyMetadata({ data: "json, name=IamUserArn" })
   iamUserArn: string;
 
-  @Metadata({ data: "json, name=Level" })
+  @SpeakeasyMetadata({ data: "json, name=Level" })
   level?: string;
 
-  @Metadata({ data: "json, name=StackId" })
+  @SpeakeasyMetadata({ data: "json, name=StackId" })
   stackId: string;
 }

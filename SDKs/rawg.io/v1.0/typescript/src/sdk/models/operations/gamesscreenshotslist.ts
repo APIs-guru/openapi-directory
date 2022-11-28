@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GamesScreenshotsListPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=game_pk" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=game_pk" })
   gamePk: string;
 }
 
 
 export class GamesScreenshotsListQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ordering" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ordering" })
   ordering?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page_size" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_size" })
   pageSize?: number;
 }
 
 
-export class GamesScreenshotsListRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GamesScreenshotsListPathParams;
-
-  @Metadata()
-  queryParams: GamesScreenshotsListQueryParams;
-}
-
-
 export class GamesScreenshotsList200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count: number;
 
-  @Metadata({ data: "json, name=next" })
+  @SpeakeasyMetadata({ data: "json, name=next" })
   next?: string;
 
-  @Metadata({ data: "json, name=previous" })
+  @SpeakeasyMetadata({ data: "json, name=previous" })
   previous?: string;
 
-  @Metadata({ data: "json, name=results", elemType: shared.ScreenShot })
+  @SpeakeasyMetadata({ data: "json, name=results", elemType: shared.ScreenShot })
   results: shared.ScreenShot[];
 }
 
 
+export class GamesScreenshotsListRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GamesScreenshotsListPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: GamesScreenshotsListQueryParams;
+}
+
+
 export class GamesScreenshotsListResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   gamesScreenshotsList200ApplicationJsonObject?: GamesScreenshotsList200ApplicationJson;
 }

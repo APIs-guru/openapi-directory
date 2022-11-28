@@ -12,6 +12,8 @@ const (
 	GoogleCloudResourcesettingsV1SettingMetadataDataTypeEnumStringMap           GoogleCloudResourcesettingsV1SettingMetadataDataTypeEnum = "STRING_MAP"
 )
 
+// GoogleCloudResourcesettingsV1SettingMetadata
+// Metadata about a setting which is not editable by the end user.
 type GoogleCloudResourcesettingsV1SettingMetadata struct {
 	DataType     *GoogleCloudResourcesettingsV1SettingMetadataDataTypeEnum `json:"dataType,omitempty"`
 	DefaultValue *GoogleCloudResourcesettingsV1Value                       `json:"defaultValue,omitempty"`

@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import errorrootcauseservice
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ErrorRootCause:
-    client_impacting: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ClientImpacting' }})
-    services: Optional[List[errorrootcauseservice.ErrorRootCauseService]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Services' }})
+    r"""ErrorRootCause
+    The root cause of a trace summary error.
+    """
+    
+    client_impacting: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ClientImpacting') }})
+    services: Optional[List[ErrorRootCauseService]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Services') }})
     

@@ -1,10 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RuleSource } from "./rulesource";
 
+
 export enum HttpRulePatchRequestModeEnum {
-    Single = "single"
-,    Batch = "batch"
+    Single = "single",
+    Batch = "batch"
 }
 
 export enum HttpRulePatchRuleTypeEnum {
@@ -12,56 +12,56 @@ export enum HttpRulePatchRuleTypeEnum {
 }
 
 export enum HttpRulePatchStatusEnum {
-    Enabled = "enabled"
-,    Disabled = "disabled"
+    Enabled = "enabled",
+    Disabled = "disabled"
 }
 
 export enum HttpRulePatchTargetFormatEnum {
-    Json = "json"
-,    Msgpack = "msgpack"
+    Json = "json",
+    Msgpack = "msgpack"
 }
 
 
 export class HttpRulePatchTargetHeaders extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }
 
 
 export class HttpRulePatchTarget extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enveloped" })
+  @SpeakeasyMetadata({ data: "json, name=enveloped" })
   enveloped?: boolean;
 
-  @Metadata({ data: "json, name=format" })
+  @SpeakeasyMetadata({ data: "json, name=format" })
   format?: HttpRulePatchTargetFormatEnum;
 
-  @Metadata({ data: "json, name=headers", elemType: shared.HttpRulePatchTargetHeaders })
+  @SpeakeasyMetadata({ data: "json, name=headers", elemType: HttpRulePatchTargetHeaders })
   headers?: HttpRulePatchTargetHeaders[];
 
-  @Metadata({ data: "json, name=signingKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=signingKeyId" })
   signingKeyId?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }
 
 
 export class HttpRulePatch extends SpeakeasyBase {
-  @Metadata({ data: "json, name=requestMode" })
+  @SpeakeasyMetadata({ data: "json, name=requestMode" })
   requestMode?: HttpRulePatchRequestModeEnum;
 
-  @Metadata({ data: "json, name=ruleType" })
+  @SpeakeasyMetadata({ data: "json, name=ruleType" })
   ruleType?: HttpRulePatchRuleTypeEnum;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: RuleSource;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: HttpRulePatchStatusEnum;
 
-  @Metadata({ data: "json, name=target" })
+  @SpeakeasyMetadata({ data: "json, name=target" })
   target?: HttpRulePatchTarget;
 }

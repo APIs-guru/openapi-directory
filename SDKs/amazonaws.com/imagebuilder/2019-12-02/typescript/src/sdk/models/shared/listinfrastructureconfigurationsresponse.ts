@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InfrastructureConfigurationSummary } from "./infrastructureconfigurationsummary";
 
 
+
 export class ListInfrastructureConfigurationsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=infrastructureConfigurationSummaryList", elemType: shared.InfrastructureConfigurationSummary })
+  @SpeakeasyMetadata({ data: "json, name=infrastructureConfigurationSummaryList", elemType: InfrastructureConfigurationSummary })
   infrastructureConfigurationSummaryList?: InfrastructureConfigurationSummary[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId?: string;
 }

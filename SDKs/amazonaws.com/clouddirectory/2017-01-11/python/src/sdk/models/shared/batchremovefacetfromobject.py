@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import objectreference
-from . import schemafacet
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BatchRemoveFacetFromObject:
-    object_reference: objectreference.ObjectReference = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ObjectReference' }})
-    schema_facet: schemafacet.SchemaFacet = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SchemaFacet' }})
+    r"""BatchRemoveFacetFromObject
+    A batch operation to remove a facet from an object.
+    """
+    
+    object_reference: ObjectReference = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ObjectReference') }})
+    schema_facet: SchemaFacet = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('SchemaFacet') }})
     

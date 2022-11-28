@@ -1,23 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { Cluster } from "./cluster";
-import { Instance } from "./instance";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ClusterInput } from "./cluster";
+import { InstanceInput } from "./instance";
 
 
-// CreateInstanceRequest
+
+// CreateInstanceRequestInput
 /** 
  * Request message for BigtableInstanceAdmin.CreateInstance.
 **/
-export class CreateInstanceRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clusters", elemType: shared.Cluster })
-  clusters?: Map<string, Cluster>;
+export class CreateInstanceRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=clusters", elemType: ClusterInput })
+  clusters?: Map<string, ClusterInput>;
 
-  @Metadata({ data: "json, name=instance" })
-  instance?: Instance;
+  @SpeakeasyMetadata({ data: "json, name=instance" })
+  instance?: InstanceInput;
 
-  @Metadata({ data: "json, name=instanceId" })
+  @SpeakeasyMetadata({ data: "json, name=instanceId" })
   instanceId?: string;
 
-  @Metadata({ data: "json, name=parent" })
+  @SpeakeasyMetadata({ data: "json, name=parent" })
   parent?: string;
 }

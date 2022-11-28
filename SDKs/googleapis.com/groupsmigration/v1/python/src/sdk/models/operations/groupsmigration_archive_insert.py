@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GroupsmigrationArchiveInsertPathParams:
-    group_id: str = field(default=None, metadata={'path_param': { 'field_name': 'groupId', 'style': 'simple', 'explode': False }})
+    group_id: str = field(metadata={'path_param': { 'field_name': 'groupId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class GroupsmigrationArchiveInsertQueryParams:
 
 @dataclass
 class GroupsmigrationArchiveInsertSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GroupsmigrationArchiveInsertRequest:
-    path_params: GroupsmigrationArchiveInsertPathParams = field(default=None)
-    query_params: GroupsmigrationArchiveInsertQueryParams = field(default=None)
-    security: GroupsmigrationArchiveInsertSecurity = field(default=None)
+    path_params: GroupsmigrationArchiveInsertPathParams = field()
+    query_params: GroupsmigrationArchiveInsertQueryParams = field()
+    security: GroupsmigrationArchiveInsertSecurity = field()
     
 
 @dataclass
 class GroupsmigrationArchiveInsertResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     groups: Optional[shared.Groups] = field(default=None)
-    status_code: int = field(default=None)
     

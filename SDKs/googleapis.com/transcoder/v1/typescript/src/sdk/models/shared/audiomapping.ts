@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AudioMapping
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The mapping for the `Job.edit_list` atoms with audio `EditAtom.inputs`.
 **/
 export class AudioMapping extends SpeakeasyBase {
-  @Metadata({ data: "json, name=atomKey" })
+  @SpeakeasyMetadata({ data: "json, name=atomKey" })
   atomKey?: string;
 
-  @Metadata({ data: "json, name=gainDb" })
+  @SpeakeasyMetadata({ data: "json, name=gainDb" })
   gainDb?: number;
 
-  @Metadata({ data: "json, name=inputChannel" })
+  @SpeakeasyMetadata({ data: "json, name=inputChannel" })
   inputChannel?: number;
 
-  @Metadata({ data: "json, name=inputKey" })
+  @SpeakeasyMetadata({ data: "json, name=inputKey" })
   inputKey?: string;
 
-  @Metadata({ data: "json, name=inputTrack" })
+  @SpeakeasyMetadata({ data: "json, name=inputTrack" })
   inputTrack?: number;
 
-  @Metadata({ data: "json, name=outputChannel" })
+  @SpeakeasyMetadata({ data: "json, name=outputChannel" })
   outputChannel?: number;
 }

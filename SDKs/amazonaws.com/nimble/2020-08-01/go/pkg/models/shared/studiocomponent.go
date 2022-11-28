@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// StudioComponent
+// A network that is used by a studio’s users and workflows, including render farm, Active Directory, licensing, and file system.
 type StudioComponent struct {
 	Arn                   *string                               `json:"arn,omitempty"`
 	Configuration         *StudioComponentConfiguration         `json:"configuration,omitempty"`

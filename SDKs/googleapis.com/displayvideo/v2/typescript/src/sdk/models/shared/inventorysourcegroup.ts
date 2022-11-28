@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // InventorySourceGroup
@@ -6,12 +7,22 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A collection of targetable inventory sources.
 **/
 export class InventorySourceGroup extends SpeakeasyBase {
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=inventorySourceGroupId" })
+  @SpeakeasyMetadata({ data: "json, name=inventorySourceGroupId" })
   inventorySourceGroupId?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
+}
+
+
+// InventorySourceGroupInput
+/** 
+ * A collection of targetable inventory sources.
+**/
+export class InventorySourceGroupInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
+  displayName?: string;
 }

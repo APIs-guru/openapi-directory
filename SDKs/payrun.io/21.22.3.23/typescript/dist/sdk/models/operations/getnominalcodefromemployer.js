@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetNominalCodeFromEmployerPathParams = /** @class */ (function (_super) {
     __extends(GetNominalCodeFromEmployerPathParams, _super);
@@ -30,11 +30,11 @@ var GetNominalCodeFromEmployerPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=EmployerId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=EmployerId" }),
         __metadata("design:type", String)
     ], GetNominalCodeFromEmployerPathParams.prototype, "employerId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=NominalCodeId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=NominalCodeId" }),
         __metadata("design:type", String)
     ], GetNominalCodeFromEmployerPathParams.prototype, "nominalCodeId", void 0);
     return GetNominalCodeFromEmployerPathParams;
@@ -46,11 +46,11 @@ var GetNominalCodeFromEmployerHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
         __metadata("design:type", String)
     ], GetNominalCodeFromEmployerHeaders.prototype, "apiVersion", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Authorization" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" }),
         __metadata("design:type", String)
     ], GetNominalCodeFromEmployerHeaders.prototype, "authorization", void 0);
     return GetNominalCodeFromEmployerHeaders;
@@ -62,11 +62,11 @@ var GetNominalCodeFromEmployerRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetNominalCodeFromEmployerPathParams)
     ], GetNominalCodeFromEmployerRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetNominalCodeFromEmployerHeaders)
     ], GetNominalCodeFromEmployerRequest.prototype, "headers", void 0);
     return GetNominalCodeFromEmployerRequest;
@@ -78,19 +78,19 @@ var GetNominalCodeFromEmployerResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetNominalCodeFromEmployerResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorModel)
     ], GetNominalCodeFromEmployerResponse.prototype, "errorModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.NominalCode)
     ], GetNominalCodeFromEmployerResponse.prototype, "nominalCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetNominalCodeFromEmployerResponse.prototype, "statusCode", void 0);
     return GetNominalCodeFromEmployerResponse;

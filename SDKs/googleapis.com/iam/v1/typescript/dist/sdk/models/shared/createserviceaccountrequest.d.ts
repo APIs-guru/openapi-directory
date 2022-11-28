@@ -1,9 +1,9 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
-import { ServiceAccount } from "./serviceaccount";
+import { SpeakeasyBase } from "../../../internal/utils";
+import { ServiceAccountInput } from "./serviceaccount";
 /**
  * The service account create request.
 **/
-export declare class CreateServiceAccountRequest extends SpeakeasyBase {
+export declare class CreateServiceAccountRequestInput extends SpeakeasyBase {
     accountId?: string;
-    serviceAccount?: ServiceAccount;
+    serviceAccount?: ServiceAccountInput;
 }

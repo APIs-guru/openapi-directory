@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RemoveFromPlaylistPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=playlistId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=playlistId" })
   playlistId: string;
 }
 
 
 export class RemoveFromPlaylistQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=entryIds" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=entryIds" })
   entryIds?: string[];
 }
 
 
 export class RemoveFromPlaylistSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   customAuthentication: shared.SchemeCustomAuthentication;
 }
 
 
 export class RemoveFromPlaylistRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: RemoveFromPlaylistPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: RemoveFromPlaylistQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: RemoveFromPlaylistSecurity;
 }
 
 
 export class RemoveFromPlaylistResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

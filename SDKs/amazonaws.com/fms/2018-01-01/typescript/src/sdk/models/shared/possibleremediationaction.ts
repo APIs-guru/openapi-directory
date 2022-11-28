@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RemediationActionWithOrder } from "./remediationactionwithorder";
+
 
 
 // PossibleRemediationAction
@@ -8,12 +8,12 @@ import { RemediationActionWithOrder } from "./remediationactionwithorder";
  * A list of remediation actions.
 **/
 export class PossibleRemediationAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=IsDefaultAction" })
+  @SpeakeasyMetadata({ data: "json, name=IsDefaultAction" })
   isDefaultAction?: boolean;
 
-  @Metadata({ data: "json, name=OrderedRemediationActions", elemType: shared.RemediationActionWithOrder })
+  @SpeakeasyMetadata({ data: "json, name=OrderedRemediationActions", elemType: RemediationActionWithOrder })
   orderedRemediationActions: RemediationActionWithOrder[];
 }

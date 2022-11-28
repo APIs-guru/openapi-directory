@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ServiceAccountKey } from "./serviceaccountkey";
+
 
 
 // ListServiceAccountKeysResponse
@@ -8,6 +8,6 @@ import { ServiceAccountKey } from "./serviceaccountkey";
  * The service account keys list response.
 **/
 export class ListServiceAccountKeysResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=keys", elemType: shared.ServiceAccountKey })
+  @SpeakeasyMetadata({ data: "json, name=keys", elemType: ServiceAccountKey })
   keys?: ServiceAccountKey[];
 }

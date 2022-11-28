@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CloneDefinition } from "./clonedefinition";
 import { Clustering } from "./clustering";
 import { EncryptionConfiguration } from "./encryptionconfiguration";
@@ -14,124 +14,125 @@ import { TimePartitioning } from "./timepartitioning";
 import { ViewDefinition } from "./viewdefinition";
 
 
+
 export class Table extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cloneDefinition" })
+  @SpeakeasyMetadata({ data: "json, name=cloneDefinition" })
   cloneDefinition?: CloneDefinition;
 
-  @Metadata({ data: "json, name=clustering" })
+  @SpeakeasyMetadata({ data: "json, name=clustering" })
   clustering?: Clustering;
 
-  @Metadata({ data: "json, name=creationTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationTime" })
   creationTime?: string;
 
-  @Metadata({ data: "json, name=defaultCollation" })
+  @SpeakeasyMetadata({ data: "json, name=defaultCollation" })
   defaultCollation?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=encryptionConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=encryptionConfiguration" })
   encryptionConfiguration?: EncryptionConfiguration;
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=expirationTime" })
+  @SpeakeasyMetadata({ data: "json, name=expirationTime" })
   expirationTime?: string;
 
-  @Metadata({ data: "json, name=externalDataConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=externalDataConfiguration" })
   externalDataConfiguration?: ExternalDataConfiguration;
 
-  @Metadata({ data: "json, name=friendlyName" })
+  @SpeakeasyMetadata({ data: "json, name=friendlyName" })
   friendlyName?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=lastModifiedTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastModifiedTime" })
   lastModifiedTime?: string;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: string;
 
-  @Metadata({ data: "json, name=materializedView" })
+  @SpeakeasyMetadata({ data: "json, name=materializedView" })
   materializedView?: MaterializedViewDefinition;
 
-  @Metadata({ data: "json, name=maxStaleness" })
+  @SpeakeasyMetadata({ data: "json, name=maxStaleness" })
   maxStaleness?: string;
 
-  @Metadata({ data: "json, name=model" })
+  @SpeakeasyMetadata({ data: "json, name=model" })
   model?: ModelDefinition;
 
-  @Metadata({ data: "json, name=numBytes" })
+  @SpeakeasyMetadata({ data: "json, name=numBytes" })
   numBytes?: string;
 
-  @Metadata({ data: "json, name=numLongTermBytes" })
+  @SpeakeasyMetadata({ data: "json, name=numLongTermBytes" })
   numLongTermBytes?: string;
 
-  @Metadata({ data: "json, name=numPhysicalBytes" })
+  @SpeakeasyMetadata({ data: "json, name=numPhysicalBytes" })
   numPhysicalBytes?: string;
 
-  @Metadata({ data: "json, name=numRows" })
+  @SpeakeasyMetadata({ data: "json, name=numRows" })
   numRows?: string;
 
-  @Metadata({ data: "json, name=num_active_logical_bytes" })
+  @SpeakeasyMetadata({ data: "json, name=num_active_logical_bytes" })
   numActiveLogicalBytes?: string;
 
-  @Metadata({ data: "json, name=num_active_physical_bytes" })
+  @SpeakeasyMetadata({ data: "json, name=num_active_physical_bytes" })
   numActivePhysicalBytes?: string;
 
-  @Metadata({ data: "json, name=num_long_term_logical_bytes" })
+  @SpeakeasyMetadata({ data: "json, name=num_long_term_logical_bytes" })
   numLongTermLogicalBytes?: string;
 
-  @Metadata({ data: "json, name=num_long_term_physical_bytes" })
+  @SpeakeasyMetadata({ data: "json, name=num_long_term_physical_bytes" })
   numLongTermPhysicalBytes?: string;
 
-  @Metadata({ data: "json, name=num_partitions" })
+  @SpeakeasyMetadata({ data: "json, name=num_partitions" })
   numPartitions?: string;
 
-  @Metadata({ data: "json, name=num_time_travel_physical_bytes" })
+  @SpeakeasyMetadata({ data: "json, name=num_time_travel_physical_bytes" })
   numTimeTravelPhysicalBytes?: string;
 
-  @Metadata({ data: "json, name=num_total_logical_bytes" })
+  @SpeakeasyMetadata({ data: "json, name=num_total_logical_bytes" })
   numTotalLogicalBytes?: string;
 
-  @Metadata({ data: "json, name=num_total_physical_bytes" })
+  @SpeakeasyMetadata({ data: "json, name=num_total_physical_bytes" })
   numTotalPhysicalBytes?: string;
 
-  @Metadata({ data: "json, name=rangePartitioning" })
+  @SpeakeasyMetadata({ data: "json, name=rangePartitioning" })
   rangePartitioning?: RangePartitioning;
 
-  @Metadata({ data: "json, name=requirePartitionFilter" })
+  @SpeakeasyMetadata({ data: "json, name=requirePartitionFilter" })
   requirePartitionFilter?: boolean;
 
-  @Metadata({ data: "json, name=schema" })
+  @SpeakeasyMetadata({ data: "json, name=schema" })
   schema?: TableSchema;
 
-  @Metadata({ data: "json, name=selfLink" })
+  @SpeakeasyMetadata({ data: "json, name=selfLink" })
   selfLink?: string;
 
-  @Metadata({ data: "json, name=snapshotDefinition" })
+  @SpeakeasyMetadata({ data: "json, name=snapshotDefinition" })
   snapshotDefinition?: SnapshotDefinition;
 
-  @Metadata({ data: "json, name=streamingBuffer" })
+  @SpeakeasyMetadata({ data: "json, name=streamingBuffer" })
   streamingBuffer?: Streamingbuffer;
 
-  @Metadata({ data: "json, name=tableReference" })
+  @SpeakeasyMetadata({ data: "json, name=tableReference" })
   tableReference?: TableReference;
 
-  @Metadata({ data: "json, name=timePartitioning" })
+  @SpeakeasyMetadata({ data: "json, name=timePartitioning" })
   timePartitioning?: TimePartitioning;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 
-  @Metadata({ data: "json, name=view" })
+  @SpeakeasyMetadata({ data: "json, name=view" })
   view?: ViewDefinition;
 }

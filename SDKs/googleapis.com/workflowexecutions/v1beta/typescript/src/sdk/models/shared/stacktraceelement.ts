@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Position } from "./position";
+
 
 
 // StackTraceElement
@@ -7,12 +8,12 @@ import { Position } from "./position";
  * A single stack element (frame) where an error occurred.
 **/
 export class StackTraceElement extends SpeakeasyBase {
-  @Metadata({ data: "json, name=position" })
+  @SpeakeasyMetadata({ data: "json, name=position" })
   position?: Position;
 
-  @Metadata({ data: "json, name=routine" })
+  @SpeakeasyMetadata({ data: "json, name=routine" })
   routine?: string;
 
-  @Metadata({ data: "json, name=step" })
+  @SpeakeasyMetadata({ data: "json, name=step" })
   step?: string;
 }

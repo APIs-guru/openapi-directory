@@ -1,11 +1,11 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from sdk.models import shared
 
 
 @dataclass
 class ListLicenseesPathParams:
-    key: str = field(default=None, metadata={'path_param': { 'field_name': 'key', 'style': 'simple', 'explode': False }})
+    key: str = field(metadata={'path_param': { 'field_name': 'key', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,21 +17,21 @@ class ListLicenseesQueryParams:
 
 @dataclass
 class ListLicenseesSecurity:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'query' }})
-    user_token: shared.SchemeUserToken = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'query' }})
+    api_key: shared.SchemeAPIKey = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'query' }})
+    user_token: shared.SchemeUserToken = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'query' }})
     
 
 @dataclass
 class ListLicenseesRequest:
-    path_params: ListLicenseesPathParams = field(default=None)
-    query_params: ListLicenseesQueryParams = field(default=None)
-    security: ListLicenseesSecurity = field(default=None)
+    path_params: ListLicenseesPathParams = field()
+    query_params: ListLicenseesQueryParams = field()
+    security: ListLicenseesSecurity = field()
     
 
 @dataclass
 class ListLicenseesResponse:
+    content_type: str = field()
+    status_code: int = field()
     address_lookup_response_schema: Optional[shared.AddressLookupResponseSchema] = field(default=None)
-    content_type: str = field(default=None)
     licensee_list_response_schema: Optional[shared.LicenseeListResponseSchema] = field(default=None)
-    status_code: int = field(default=None)
     

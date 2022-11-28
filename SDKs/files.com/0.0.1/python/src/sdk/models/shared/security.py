@@ -4,5 +4,5 @@ from dataclasses import dataclass, field
 
 @dataclass
 class SchemeAPIKey:
-    api_key: str = field(default=None, metadata={'security': { 'field_name': 'X-FilesAPI-Key' }})
+    api_key: str = field(metadata={'security': { 'field_name': 'X-FilesAPI-Key' }})
     

@@ -1,78 +1,79 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetUsersIdTagsTagsTopAnswersPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=tags" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=tags" })
   tags: string;
 }
 
 export enum GetUsersIdTagsTagsTopAnswersOrderEnum {
-    Desc = "desc"
-,    Asc = "asc"
+    Desc = "desc",
+    Asc = "asc"
 }
 
 export enum GetUsersIdTagsTagsTopAnswersSortEnum {
-    Activity = "activity"
-,    Creation = "creation"
-,    Votes = "votes"
+    Activity = "activity",
+    Creation = "creation",
+    Votes = "votes"
 }
 
 
 export class GetUsersIdTagsTagsTopAnswersQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=callback" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" })
   callback?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter" })
   filter?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fromdate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fromdate" })
   fromdate?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=max" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=max" })
   max?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=min" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=min" })
   min?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=order" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=order" })
   order?: GetUsersIdTagsTagsTopAnswersOrderEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=pagesize" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pagesize" })
   pagesize?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=site" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=site" })
   site: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: GetUsersIdTagsTagsTopAnswersSortEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=todate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=todate" })
   todate?: number;
 }
 
 
 export class GetUsersIdTagsTagsTopAnswersRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetUsersIdTagsTagsTopAnswersPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetUsersIdTagsTagsTopAnswersQueryParams;
 }
 
 
 export class GetUsersIdTagsTagsTopAnswersResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

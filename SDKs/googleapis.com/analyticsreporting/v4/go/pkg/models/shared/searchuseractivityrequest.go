@@ -11,6 +11,8 @@ const (
 	SearchUserActivityRequestActivityTypesEnumEvent                   SearchUserActivityRequestActivityTypesEnum = "EVENT"
 )
 
+// SearchUserActivityRequest
+// The request to fetch User Report from Reporting API `userActivity:get` call.
 type SearchUserActivityRequest struct {
 	ActivityTypes []SearchUserActivityRequestActivityTypesEnum `json:"activityTypes,omitempty"`
 	DateRange     *DateRange                                   `json:"dateRange,omitempty"`

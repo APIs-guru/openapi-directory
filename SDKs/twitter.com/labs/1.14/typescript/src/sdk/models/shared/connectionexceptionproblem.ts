@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ConnectionExceptionProblemConnectionIssueEnum {
-    TooManyConnections = "TooManyConnections"
-,    ProvisioningSubscription = "ProvisioningSubscription"
+    TooManyConnections = "TooManyConnections",
+    ProvisioningSubscription = "ProvisioningSubscription"
 }
 
 
@@ -11,15 +12,15 @@ export enum ConnectionExceptionProblemConnectionIssueEnum {
  * A problem that indicates something is wrong with the connection
 **/
 export class ConnectionExceptionProblem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=connection_issue" })
+  @SpeakeasyMetadata({ data: "json, name=connection_issue" })
   connectionIssue?: ConnectionExceptionProblemConnectionIssueEnum;
 
-  @Metadata({ data: "json, name=detail" })
+  @SpeakeasyMetadata({ data: "json, name=detail" })
   detail: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }

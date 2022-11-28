@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleTypeExpr } from "./googletypeexpr";
+
 
 
 // GoogleIamV2betaDenyRule
@@ -7,18 +8,18 @@ import { GoogleTypeExpr } from "./googletypeexpr";
  * A deny rule in an IAM deny policy.
 **/
 export class GoogleIamV2betaDenyRule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=denialCondition" })
+  @SpeakeasyMetadata({ data: "json, name=denialCondition" })
   denialCondition?: GoogleTypeExpr;
 
-  @Metadata({ data: "json, name=deniedPermissions" })
+  @SpeakeasyMetadata({ data: "json, name=deniedPermissions" })
   deniedPermissions?: string[];
 
-  @Metadata({ data: "json, name=deniedPrincipals" })
+  @SpeakeasyMetadata({ data: "json, name=deniedPrincipals" })
   deniedPrincipals?: string[];
 
-  @Metadata({ data: "json, name=exceptionPermissions" })
+  @SpeakeasyMetadata({ data: "json, name=exceptionPermissions" })
   exceptionPermissions?: string[];
 
-  @Metadata({ data: "json, name=exceptionPrincipals" })
+  @SpeakeasyMetadata({ data: "json, name=exceptionPrincipals" })
   exceptionPrincipals?: string[];
 }

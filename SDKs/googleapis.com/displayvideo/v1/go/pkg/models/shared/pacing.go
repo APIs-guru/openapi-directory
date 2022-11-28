@@ -17,6 +17,8 @@ const (
 	PacingPacingTypeEnumPacingTypeEven        PacingPacingTypeEnum = "PACING_TYPE_EVEN"
 )
 
+// Pacing
+// Settings that control the rate at which a budget is spent.
 type Pacing struct {
 	DailyMaxImpressions *string                 `json:"dailyMaxImpressions,omitempty"`
 	DailyMaxMicros      *string                 `json:"dailyMaxMicros,omitempty"`

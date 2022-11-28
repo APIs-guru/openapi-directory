@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import percentpair
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetPercentilesResponse:
-    percentiles: Optional[List[percentpair.PercentPair]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'percentiles' }})
+    percentiles: Optional[List[PercentPair]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('percentiles') }})
     

@@ -22,10 +22,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ServiceContext } from "./servicecontext";
 import { ErrorGroup } from "./errorgroup";
 import { ErrorEvent } from "./errorevent";
+import { TimedCount } from "./timedcount";
 // ErrorGroupStats
 /**
  * Data extracted for a specific group based on certain filter criteria, such as a given time period and/or service filter.
@@ -36,39 +37,39 @@ var ErrorGroupStats = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=affectedServices", elemType: shared.ServiceContext }),
+        SpeakeasyMetadata({ data: "json, name=affectedServices", elemType: ServiceContext }),
         __metadata("design:type", Array)
     ], ErrorGroupStats.prototype, "affectedServices", void 0);
     __decorate([
-        Metadata({ data: "json, name=affectedUsersCount" }),
+        SpeakeasyMetadata({ data: "json, name=affectedUsersCount" }),
         __metadata("design:type", String)
     ], ErrorGroupStats.prototype, "affectedUsersCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=count" }),
+        SpeakeasyMetadata({ data: "json, name=count" }),
         __metadata("design:type", String)
     ], ErrorGroupStats.prototype, "count", void 0);
     __decorate([
-        Metadata({ data: "json, name=firstSeenTime" }),
+        SpeakeasyMetadata({ data: "json, name=firstSeenTime" }),
         __metadata("design:type", String)
     ], ErrorGroupStats.prototype, "firstSeenTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=group" }),
+        SpeakeasyMetadata({ data: "json, name=group" }),
         __metadata("design:type", ErrorGroup)
     ], ErrorGroupStats.prototype, "group", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastSeenTime" }),
+        SpeakeasyMetadata({ data: "json, name=lastSeenTime" }),
         __metadata("design:type", String)
     ], ErrorGroupStats.prototype, "lastSeenTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=numAffectedServices" }),
+        SpeakeasyMetadata({ data: "json, name=numAffectedServices" }),
         __metadata("design:type", Number)
     ], ErrorGroupStats.prototype, "numAffectedServices", void 0);
     __decorate([
-        Metadata({ data: "json, name=representative" }),
+        SpeakeasyMetadata({ data: "json, name=representative" }),
         __metadata("design:type", ErrorEvent)
     ], ErrorGroupStats.prototype, "representative", void 0);
     __decorate([
-        Metadata({ data: "json, name=timedCounts", elemType: shared.TimedCount }),
+        SpeakeasyMetadata({ data: "json, name=timedCounts", elemType: TimedCount }),
         __metadata("design:type", Array)
     ], ErrorGroupStats.prototype, "timedCounts", void 0);
     return ErrorGroupStats;

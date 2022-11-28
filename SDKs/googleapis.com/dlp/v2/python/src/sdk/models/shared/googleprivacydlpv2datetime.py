@@ -1,9 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googletypedate
-from . import googletypetimeofday
-from . import googleprivacydlpv2timezone
+from sdk import utils
+from . import *
 
 class GooglePrivacyDlpV2DateTimeDayOfWeekEnum(str, Enum):
     DAY_OF_WEEK_UNSPECIFIED = "DAY_OF_WEEK_UNSPECIFIED"
@@ -19,8 +22,12 @@ class GooglePrivacyDlpV2DateTimeDayOfWeekEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GooglePrivacyDlpV2DateTime:
-    date: Optional[googletypedate.GoogleTypeDate] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'date' }})
-    day_of_week: Optional[GooglePrivacyDlpV2DateTimeDayOfWeekEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dayOfWeek' }})
-    time: Optional[googletypetimeofday.GoogleTypeTimeOfDay] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'time' }})
-    time_zone: Optional[googleprivacydlpv2timezone.GooglePrivacyDlpV2TimeZone] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timeZone' }})
+    r"""GooglePrivacyDlpV2DateTime
+    Message for a date time object. e.g. 2018-01-01, 5th August.
+    """
+    
+    date_: Optional[GoogleTypeDate] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('date') }})
+    day_of_week: Optional[GooglePrivacyDlpV2DateTimeDayOfWeekEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dayOfWeek') }})
+    time: Optional[GoogleTypeTimeOfDay] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('time') }})
+    time_zone: Optional[GooglePrivacyDlpV2TimeZone] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('timeZone') }})
     

@@ -1,5 +1,7 @@
 package shared
 
+// Channel
+// A notification channel used to watch for resource changes.
 type Channel struct {
 	Address     *string           `json:"address,omitempty"`
 	Expiration  *string           `json:"expiration,omitempty"`

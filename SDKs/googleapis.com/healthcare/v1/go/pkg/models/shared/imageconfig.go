@@ -9,6 +9,8 @@ const (
 	ImageConfigTextRedactionModeEnumRedactNoText                 ImageConfigTextRedactionModeEnum = "REDACT_NO_TEXT"
 )
 
+// ImageConfig
+// Specifies how to handle de-identification of image pixels.
 type ImageConfig struct {
 	TextRedactionMode *ImageConfigTextRedactionModeEnum `json:"textRedactionMode,omitempty"`
 }

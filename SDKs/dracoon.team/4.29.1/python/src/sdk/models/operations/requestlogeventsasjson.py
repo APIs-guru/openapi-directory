@@ -1,5 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
@@ -24,14 +27,14 @@ class RequestLogEventsAsJSONHeaders:
 
 @dataclass
 class RequestLogEventsAsJSONRequest:
-    query_params: RequestLogEventsAsJSONQueryParams = field(default=None)
-    headers: RequestLogEventsAsJSONHeaders = field(default=None)
+    headers: RequestLogEventsAsJSONHeaders = field()
+    query_params: RequestLogEventsAsJSONQueryParams = field()
     
 
 @dataclass
 class RequestLogEventsAsJSONResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     log_event_list: Optional[shared.LogEventList] = field(default=None)
-    status_code: int = field(default=None)
     

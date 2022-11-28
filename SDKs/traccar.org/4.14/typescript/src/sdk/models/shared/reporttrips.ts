@@ -1,55 +1,56 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ReportTrips extends SpeakeasyBase {
-  @Metadata({ data: "json, name=averageSpeed" })
+  @SpeakeasyMetadata({ data: "json, name=averageSpeed" })
   averageSpeed?: number;
 
-  @Metadata({ data: "json, name=deviceId" })
+  @SpeakeasyMetadata({ data: "json, name=deviceId" })
   deviceId?: number;
 
-  @Metadata({ data: "json, name=deviceName" })
+  @SpeakeasyMetadata({ data: "json, name=deviceName" })
   deviceName?: string;
 
-  @Metadata({ data: "json, name=distance" })
+  @SpeakeasyMetadata({ data: "json, name=distance" })
   distance?: number;
 
-  @Metadata({ data: "json, name=driverName" })
+  @SpeakeasyMetadata({ data: "json, name=driverName" })
   driverName?: string;
 
-  @Metadata({ data: "json, name=driverUniqueId" })
+  @SpeakeasyMetadata({ data: "json, name=driverUniqueId" })
   driverUniqueId?: number;
 
-  @Metadata({ data: "json, name=duration" })
+  @SpeakeasyMetadata({ data: "json, name=duration" })
   duration?: number;
 
-  @Metadata({ data: "json, name=endAddress" })
+  @SpeakeasyMetadata({ data: "json, name=endAddress" })
   endAddress?: string;
 
-  @Metadata({ data: "json, name=endLat" })
+  @SpeakeasyMetadata({ data: "json, name=endLat" })
   endLat?: number;
 
-  @Metadata({ data: "json, name=endLon" })
+  @SpeakeasyMetadata({ data: "json, name=endLon" })
   endLon?: number;
 
-  @Metadata({ data: "json, name=endTime" })
+  @SpeakeasyMetadata({ data: "json, name=endTime" })
   endTime?: Date;
 
-  @Metadata({ data: "json, name=maxSpeed" })
+  @SpeakeasyMetadata({ data: "json, name=maxSpeed" })
   maxSpeed?: number;
 
-  @Metadata({ data: "json, name=spentFuel" })
+  @SpeakeasyMetadata({ data: "json, name=spentFuel" })
   spentFuel?: number;
 
-  @Metadata({ data: "json, name=startAddress" })
+  @SpeakeasyMetadata({ data: "json, name=startAddress" })
   startAddress?: string;
 
-  @Metadata({ data: "json, name=startLat" })
+  @SpeakeasyMetadata({ data: "json, name=startLat" })
   startLat?: number;
 
-  @Metadata({ data: "json, name=startLon" })
+  @SpeakeasyMetadata({ data: "json, name=startLon" })
   startLon?: number;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: Date;
 }

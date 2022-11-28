@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class OrgsListOutsideCollaboratorsPathParams:
-    org: str = field(default=None, metadata={'path_param': { 'field_name': 'org', 'style': 'simple', 'explode': False }})
+    org: str = field(metadata={'path_param': { 'field_name': 'org', 'style': 'simple', 'explode': False }})
     
 class OrgsListOutsideCollaboratorsFilterEnum(str, Enum):
     TWOFA_DISABLED = "2fa_disabled"
@@ -21,14 +22,14 @@ class OrgsListOutsideCollaboratorsQueryParams:
 
 @dataclass
 class OrgsListOutsideCollaboratorsRequest:
-    path_params: OrgsListOutsideCollaboratorsPathParams = field(default=None)
-    query_params: OrgsListOutsideCollaboratorsQueryParams = field(default=None)
+    path_params: OrgsListOutsideCollaboratorsPathParams = field()
+    query_params: OrgsListOutsideCollaboratorsQueryParams = field()
     
 
 @dataclass
 class OrgsListOutsideCollaboratorsResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     simple_users: Optional[List[shared.SimpleUser]] = field(default=None)
     

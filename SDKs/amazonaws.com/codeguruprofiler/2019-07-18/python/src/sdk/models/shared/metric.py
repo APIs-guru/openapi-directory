@@ -1,13 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,List
+from typing import List
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import metrictype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Metric:
-    frame_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'frameName' }})
-    thread_states: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'threadStates' }})
-    type: metrictype_enum.MetricTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""Metric
+     Details about the metric that the analysis used when it detected the anomaly. The metric what is analyzed to create recommendations. It includes the name of the frame that was analyzed and the type and thread states used to derive the metric value for that frame. 
+    """
+    
+    frame_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('frameName') }})
+    thread_states: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('threadStates') }})
+    type: MetricTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

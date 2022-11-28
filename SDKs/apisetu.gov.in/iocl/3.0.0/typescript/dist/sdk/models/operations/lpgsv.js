@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var LpgsvRequestBodyCertificateParameters = /** @class */ (function (_super) {
     __extends(LpgsvRequestBodyCertificateParameters, _super);
@@ -30,7 +30,7 @@ var LpgsvRequestBodyCertificateParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=UID" }),
+        SpeakeasyMetadata({ data: "json, name=UID" }),
         __metadata("design:type", String)
     ], LpgsvRequestBodyCertificateParameters.prototype, "uid", void 0);
     return LpgsvRequestBodyCertificateParameters;
@@ -46,19 +46,19 @@ var LpgsvRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=certificateParameters" }),
+        SpeakeasyMetadata({ data: "json, name=certificateParameters" }),
         __metadata("design:type", LpgsvRequestBodyCertificateParameters)
     ], LpgsvRequestBody.prototype, "certificateParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=consentArtifact" }),
+        SpeakeasyMetadata({ data: "json, name=consentArtifact" }),
         __metadata("design:type", Object)
     ], LpgsvRequestBody.prototype, "consentArtifact", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], LpgsvRequestBody.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=txnId" }),
+        SpeakeasyMetadata({ data: "json, name=txnId" }),
         __metadata("design:type", String)
     ], LpgsvRequestBody.prototype, "txnId", void 0);
     return LpgsvRequestBody;
@@ -70,32 +70,16 @@ var LpgsvSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], LpgsvSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeClientId)
     ], LpgsvSecurity.prototype, "clientId", void 0);
     return LpgsvSecurity;
 }(SpeakeasyBase));
 export { LpgsvSecurity };
-var LpgsvRequest = /** @class */ (function (_super) {
-    __extends(LpgsvRequest, _super);
-    function LpgsvRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", LpgsvRequestBody)
-    ], LpgsvRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", LpgsvSecurity)
-    ], LpgsvRequest.prototype, "security", void 0);
-    return LpgsvRequest;
-}(SpeakeasyBase));
-export { LpgsvRequest };
 export var Lpgsv400ApplicationJsonErrorEnum;
 (function (Lpgsv400ApplicationJsonErrorEnum) {
     Lpgsv400ApplicationJsonErrorEnum["MissingParameter"] = "missing_parameter";
@@ -118,11 +102,11 @@ var Lpgsv400ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Lpgsv400ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Lpgsv400ApplicationJson.prototype, "errorDescription", void 0);
     return Lpgsv400ApplicationJson;
@@ -144,11 +128,11 @@ var Lpgsv401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Lpgsv401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Lpgsv401ApplicationJson.prototype, "errorDescription", void 0);
     return Lpgsv401ApplicationJson;
@@ -170,11 +154,11 @@ var Lpgsv404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Lpgsv404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Lpgsv404ApplicationJson.prototype, "errorDescription", void 0);
     return Lpgsv404ApplicationJson;
@@ -194,11 +178,11 @@ var Lpgsv500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Lpgsv500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Lpgsv500ApplicationJson.prototype, "errorDescription", void 0);
     return Lpgsv500ApplicationJson;
@@ -218,11 +202,11 @@ var Lpgsv502ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Lpgsv502ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Lpgsv502ApplicationJson.prototype, "errorDescription", void 0);
     return Lpgsv502ApplicationJson;
@@ -242,11 +226,11 @@ var Lpgsv503ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Lpgsv503ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Lpgsv503ApplicationJson.prototype, "errorDescription", void 0);
     return Lpgsv503ApplicationJson;
@@ -266,55 +250,71 @@ var Lpgsv504ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Lpgsv504ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Lpgsv504ApplicationJson.prototype, "errorDescription", void 0);
     return Lpgsv504ApplicationJson;
 }(SpeakeasyBase));
 export { Lpgsv504ApplicationJson };
+var LpgsvRequest = /** @class */ (function (_super) {
+    __extends(LpgsvRequest, _super);
+    function LpgsvRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", LpgsvRequestBody)
+    ], LpgsvRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", LpgsvSecurity)
+    ], LpgsvRequest.prototype, "security", void 0);
+    return LpgsvRequest;
+}(SpeakeasyBase));
+export { LpgsvRequest };
 var LpgsvResponse = /** @class */ (function (_super) {
     __extends(LpgsvResponse, _super);
     function LpgsvResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], LpgsvResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], LpgsvResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Lpgsv400ApplicationJson)
     ], LpgsvResponse.prototype, "lpgsv400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Lpgsv401ApplicationJson)
     ], LpgsvResponse.prototype, "lpgsv401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Lpgsv404ApplicationJson)
     ], LpgsvResponse.prototype, "lpgsv404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Lpgsv500ApplicationJson)
     ], LpgsvResponse.prototype, "lpgsv500ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Lpgsv502ApplicationJson)
     ], LpgsvResponse.prototype, "lpgsv502ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Lpgsv503ApplicationJson)
     ], LpgsvResponse.prototype, "lpgsv503ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Lpgsv504ApplicationJson)
     ], LpgsvResponse.prototype, "lpgsv504ApplicationJsonObject", void 0);
     return LpgsvResponse;

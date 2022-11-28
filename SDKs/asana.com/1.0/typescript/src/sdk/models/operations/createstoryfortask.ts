@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateStoryForTaskPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=task_gid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=task_gid" })
   taskGid: string;
 }
 
 
 export class CreateStoryForTaskQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
   optFields?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
   optPretty?: boolean;
 }
 
 
-export class CreateStoryForTaskRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
-  data?: shared.StoryRequest;
-}
-
-
-export class CreateStoryForTaskRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: CreateStoryForTaskPathParams;
-
-  @Metadata()
-  queryParams: CreateStoryForTaskQueryParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: CreateStoryForTaskRequestBody;
+export class CreateStoryForTaskRequestBodyInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=data" })
+  data?: shared.StoryRequestInput;
 }
 
 
 export class CreateStoryForTask201ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: shared.StoryResponse;
 }
 
 
+export class CreateStoryForTaskRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: CreateStoryForTaskPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: CreateStoryForTaskQueryParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: CreateStoryForTaskRequestBodyInput;
+}
+
+
 export class CreateStoryForTaskResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createStoryForTask201ApplicationJsonObject?: CreateStoryForTask201ApplicationJson;
 }

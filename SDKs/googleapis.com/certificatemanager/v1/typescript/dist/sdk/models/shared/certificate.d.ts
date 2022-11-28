@@ -1,9 +1,21 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
-import { ManagedCertificate } from "./managedcertificate";
+import { SpeakeasyBase } from "../../../internal/utils";
+import { ManagedCertificateInput } from "./managedcertificate";
 import { SelfManagedCertificate } from "./selfmanagedcertificate";
+import { ManagedCertificate } from "./managedcertificate";
 export declare enum CertificateScopeEnum {
     Default = "DEFAULT",
     EdgeCache = "EDGE_CACHE"
+}
+/**
+ * Defines TLS certificate.
+**/
+export declare class CertificateInput extends SpeakeasyBase {
+    description?: string;
+    labels?: Map<string, string>;
+    managed?: ManagedCertificateInput;
+    name?: string;
+    scope?: CertificateScopeEnum;
+    selfManaged?: SelfManagedCertificate;
 }
 /**
  * Defines TLS certificate.

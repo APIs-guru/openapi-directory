@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum CopyOtherContactToMyContactsGroupRequestSourcesEnum {
-    ReadSourceTypeUnspecified = "READ_SOURCE_TYPE_UNSPECIFIED"
-,    ReadSourceTypeProfile = "READ_SOURCE_TYPE_PROFILE"
-,    ReadSourceTypeContact = "READ_SOURCE_TYPE_CONTACT"
-,    ReadSourceTypeDomainContact = "READ_SOURCE_TYPE_DOMAIN_CONTACT"
+    ReadSourceTypeUnspecified = "READ_SOURCE_TYPE_UNSPECIFIED",
+    ReadSourceTypeProfile = "READ_SOURCE_TYPE_PROFILE",
+    ReadSourceTypeContact = "READ_SOURCE_TYPE_CONTACT",
+    ReadSourceTypeDomainContact = "READ_SOURCE_TYPE_DOMAIN_CONTACT"
 }
 
 
@@ -13,12 +14,12 @@ export enum CopyOtherContactToMyContactsGroupRequestSourcesEnum {
  * A request to copy an "Other contact" to my contacts group.
 **/
 export class CopyOtherContactToMyContactsGroupRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=copyMask" })
+  @SpeakeasyMetadata({ data: "json, name=copyMask" })
   copyMask?: string;
 
-  @Metadata({ data: "json, name=readMask" })
+  @SpeakeasyMetadata({ data: "json, name=readMask" })
   readMask?: string;
 
-  @Metadata({ data: "json, name=sources" })
+  @SpeakeasyMetadata({ data: "json, name=sources" })
   sources?: CopyOtherContactToMyContactsGroupRequestSourcesEnum[];
 }

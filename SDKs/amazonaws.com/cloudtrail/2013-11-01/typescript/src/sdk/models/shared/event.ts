@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Resource } from "./resource";
+
 
 
 // Event
@@ -8,30 +8,30 @@ import { Resource } from "./resource";
  * Contains information about an event that was returned by a lookup request. The result includes a representation of a CloudTrail event.
 **/
 export class Event extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccessKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=AccessKeyId" })
   accessKeyId?: string;
 
-  @Metadata({ data: "json, name=CloudTrailEvent" })
+  @SpeakeasyMetadata({ data: "json, name=CloudTrailEvent" })
   cloudTrailEvent?: string;
 
-  @Metadata({ data: "json, name=EventId" })
+  @SpeakeasyMetadata({ data: "json, name=EventId" })
   eventId?: string;
 
-  @Metadata({ data: "json, name=EventName" })
+  @SpeakeasyMetadata({ data: "json, name=EventName" })
   eventName?: string;
 
-  @Metadata({ data: "json, name=EventSource" })
+  @SpeakeasyMetadata({ data: "json, name=EventSource" })
   eventSource?: string;
 
-  @Metadata({ data: "json, name=EventTime" })
+  @SpeakeasyMetadata({ data: "json, name=EventTime" })
   eventTime?: Date;
 
-  @Metadata({ data: "json, name=ReadOnly" })
+  @SpeakeasyMetadata({ data: "json, name=ReadOnly" })
   readOnly?: string;
 
-  @Metadata({ data: "json, name=Resources", elemType: shared.Resource })
+  @SpeakeasyMetadata({ data: "json, name=Resources", elemType: Resource })
   resources?: Resource[];
 
-  @Metadata({ data: "json, name=Username" })
+  @SpeakeasyMetadata({ data: "json, name=Username" })
   username?: string;
 }

@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FailedWorkspaceChangeRequest } from "./failedworkspacechangerequest";
 
 
+
 export class StopWorkspacesResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FailedRequests", elemType: shared.FailedWorkspaceChangeRequest })
+  @SpeakeasyMetadata({ data: "json, name=FailedRequests", elemType: FailedWorkspaceChangeRequest })
   failedRequests?: FailedWorkspaceChangeRequest[];
 }

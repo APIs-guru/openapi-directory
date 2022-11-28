@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ConfigNetflow extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bundleflowsets" })
+  @SpeakeasyMetadata({ data: "json, name=bundleflowsets" })
   bundleflowsets?: number;
 
-  @Metadata({ data: "json, name=collector" })
+  @SpeakeasyMetadata({ data: "json, name=collector" })
   collector?: string;
 
-  @Metadata({ data: "json, name=collectorport" })
+  @SpeakeasyMetadata({ data: "json, name=collectorport" })
   collectorport?: number;
 
-  @Metadata({ data: "json, name=filename" })
+  @SpeakeasyMetadata({ data: "json, name=filename" })
   filename?: string;
 }

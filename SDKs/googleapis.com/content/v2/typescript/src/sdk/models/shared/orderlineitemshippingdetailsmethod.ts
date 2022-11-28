@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class OrderLineItemShippingDetailsMethod extends SpeakeasyBase {
-  @Metadata({ data: "json, name=carrier" })
+  @SpeakeasyMetadata({ data: "json, name=carrier" })
   carrier?: string;
 
-  @Metadata({ data: "json, name=maxDaysInTransit" })
+  @SpeakeasyMetadata({ data: "json, name=maxDaysInTransit" })
   maxDaysInTransit?: number;
 
-  @Metadata({ data: "json, name=methodName" })
+  @SpeakeasyMetadata({ data: "json, name=methodName" })
   methodName?: string;
 
-  @Metadata({ data: "json, name=minDaysInTransit" })
+  @SpeakeasyMetadata({ data: "json, name=minDaysInTransit" })
   minDaysInTransit?: number;
 }

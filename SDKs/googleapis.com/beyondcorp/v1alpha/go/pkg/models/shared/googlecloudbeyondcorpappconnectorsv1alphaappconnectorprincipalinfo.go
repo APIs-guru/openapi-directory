@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudBeyondcorpAppconnectorsV1alphaAppConnectorPrincipalInfo
+// PrincipalInfo represents an Identity oneof.
 type GoogleCloudBeyondcorpAppconnectorsV1alphaAppConnectorPrincipalInfo struct {
 	ServiceAccount *GoogleCloudBeyondcorpAppconnectorsV1alphaAppConnectorPrincipalInfoServiceAccount `json:"serviceAccount,omitempty"`
 }

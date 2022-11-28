@@ -1,17 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
-from . import actionhookactionbody
-from . import iframeactionbody
-from . import objecttoken
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class IntegratorObjectResult:
-    actions: List[Any] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'actions' }})
-    id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    link_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'linkUrl' }})
-    title: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
-    tokens: List[objecttoken.ObjectToken] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tokens' }})
+    actions: List[Any] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('actions') }})
+    id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    title: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('title') }})
+    tokens: List[ObjectToken] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('tokens') }})
+    link_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('linkUrl') }})
     

@@ -1,6 +1,7 @@
 
 
+
 export enum VideoColorRangeEnum {
-    Full = "FULL"
-,    Limited = "LIMITED"
+    Full = "FULL",
+    Limited = "LIMITED"
 }

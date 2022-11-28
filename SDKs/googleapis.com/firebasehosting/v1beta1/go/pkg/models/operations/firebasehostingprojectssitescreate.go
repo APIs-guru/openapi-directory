@@ -41,7 +41,7 @@ type FirebasehostingProjectsSitesCreateSecurity struct {
 type FirebasehostingProjectsSitesCreateRequest struct {
 	PathParams  FirebasehostingProjectsSitesCreatePathParams
 	QueryParams FirebasehostingProjectsSitesCreateQueryParams
-	Request     *shared.Site `request:"mediaType=application/json"`
+	Request     *shared.SiteInput `request:"mediaType=application/json"`
 	Security    FirebasehostingProjectsSitesCreateSecurity
 }
 

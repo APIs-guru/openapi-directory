@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataSource } from "./datasource";
 
 
+
 export class ListDataSourcesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataSource", elemType: shared.DataSource })
+  @SpeakeasyMetadata({ data: "json, name=dataSource", elemType: DataSource })
   dataSource?: DataSource[];
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Operation } from "./operation";
+
 
 
 // ReportRequest
@@ -8,9 +8,9 @@ import { Operation } from "./operation";
  * Request message for the Report method.
 **/
 export class ReportRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=operations", elemType: shared.Operation })
+  @SpeakeasyMetadata({ data: "json, name=operations", elemType: Operation })
   operations?: Operation[];
 
-  @Metadata({ data: "json, name=serviceConfigId" })
+  @SpeakeasyMetadata({ data: "json, name=serviceConfigId" })
   serviceConfigId?: string;
 }

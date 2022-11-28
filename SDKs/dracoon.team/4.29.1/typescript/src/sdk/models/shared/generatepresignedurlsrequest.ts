@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GeneratePresignedUrlsRequest
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request model for generating presigned URLs
 **/
 export class GeneratePresignedUrlsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=firstPartNumber" })
+  @SpeakeasyMetadata({ data: "json, name=firstPartNumber" })
   firstPartNumber: number;
 
-  @Metadata({ data: "json, name=lastPartNumber" })
+  @SpeakeasyMetadata({ data: "json, name=lastPartNumber" })
   lastPartNumber: number;
 
-  @Metadata({ data: "json, name=size" })
+  @SpeakeasyMetadata({ data: "json, name=size" })
   size: number;
 }

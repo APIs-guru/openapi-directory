@@ -11,7 +11,15 @@ const (
 	DigitalContentLabelAssignedTargetingOptionDetailsContentRatingTierEnumContentRatingTierMature           DigitalContentLabelAssignedTargetingOptionDetailsContentRatingTierEnum = "CONTENT_RATING_TIER_MATURE"
 )
 
+// DigitalContentLabelAssignedTargetingOptionDetails
+// Targeting details for digital content label. This will be populated in the details field of an AssignedTargetingOption when targeting_type is `TARGETING_TYPE_DIGITAL_CONTENT_LABEL_EXCLUSION`.
 type DigitalContentLabelAssignedTargetingOptionDetails struct {
 	ContentRatingTier         *DigitalContentLabelAssignedTargetingOptionDetailsContentRatingTierEnum `json:"contentRatingTier,omitempty"`
 	ExcludedTargetingOptionID *string                                                                 `json:"excludedTargetingOptionId,omitempty"`
+}
+
+// DigitalContentLabelAssignedTargetingOptionDetailsInput
+// Targeting details for digital content label. This will be populated in the details field of an AssignedTargetingOption when targeting_type is `TARGETING_TYPE_DIGITAL_CONTENT_LABEL_EXCLUSION`.
+type DigitalContentLabelAssignedTargetingOptionDetailsInput struct {
+	ExcludedTargetingOptionID *string `json:"excludedTargetingOptionId,omitempty"`
 }

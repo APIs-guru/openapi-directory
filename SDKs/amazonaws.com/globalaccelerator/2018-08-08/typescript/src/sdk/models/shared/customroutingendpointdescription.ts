@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CustomRoutingEndpointDescription
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A complex type for an endpoint for a custom routing accelerator. Each endpoint group can include one or more endpoints, which are virtual private cloud (VPC) subnets.
 **/
 export class CustomRoutingEndpointDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EndpointId" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointId" })
   endpointId?: string;
 }

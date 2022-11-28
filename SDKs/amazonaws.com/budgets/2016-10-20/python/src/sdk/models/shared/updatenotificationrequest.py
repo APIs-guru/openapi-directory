@@ -1,14 +1,21 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from dataclasses_json import dataclass_json
-from . import notification
-from . import notification
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateNotificationRequest:
-    account_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AccountId' }})
-    budget_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BudgetName' }})
-    new_notification: notification.Notification = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NewNotification' }})
-    old_notification: notification.Notification = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OldNotification' }})
+    r"""UpdateNotificationRequest
+     Request of UpdateNotification 
+    """
+    
+    account_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('AccountId') }})
+    budget_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('BudgetName') }})
+    new_notification: Notification = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('NewNotification') }})
+    old_notification: Notification = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('OldNotification') }})
     

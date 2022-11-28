@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// DescribeTaskResponse
+// DescribeTaskResponse
 type DescribeTaskResponse struct {
 	CloudWatchLogGroupArn           *string         `json:"CloudWatchLogGroupArn,omitempty"`
 	CreationTime                    *time.Time      `json:"CreationTime,omitempty"`

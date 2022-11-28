@@ -14,6 +14,10 @@ const (
 	RulesOutboundPolicyEnumDrop   RulesOutboundPolicyEnum = "DROP"
 )
 
+// Rules
+// The inbound and outbound access rules to apply to the Firewall.
+//
+// A Firewall may have up to 25 rules across its inbound and outbound rulesets.
 type Rules struct {
 	Inbound        []FirewallRuleConfig     `json:"inbound,omitempty"`
 	InboundPolicy  *RulesInboundPolicyEnum  `json:"inbound_policy,omitempty"`

@@ -1,5 +1,7 @@
 package shared
 
+// DescribePlayerSessionsInput
+// Represents the input for a request operation.
 type DescribePlayerSessionsInput struct {
 	GameSessionID             *string `json:"GameSessionId,omitempty"`
 	Limit                     *int64  `json:"Limit,omitempty"`

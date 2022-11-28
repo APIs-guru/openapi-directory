@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Tag } from "./tag";
+
 
 
 // UsageAllocation
@@ -8,9 +8,9 @@ import { Tag } from "./tag";
  * <p>Usage allocations allow you to split usage into buckets by tags.</p> <p>Each UsageAllocation indicates the usage quantity for a specific set of tags.</p>
 **/
 export class UsageAllocation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AllocatedUsageQuantity" })
+  @SpeakeasyMetadata({ data: "json, name=AllocatedUsageQuantity" })
   allocatedUsageQuantity: number;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 }

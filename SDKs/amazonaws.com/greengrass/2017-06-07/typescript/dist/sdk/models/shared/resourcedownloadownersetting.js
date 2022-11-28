@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PermissionEnum } from "./permissionenum";
 // ResourceDownloadOwnerSetting
 /**
@@ -34,11 +34,11 @@ var ResourceDownloadOwnerSetting = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=GroupOwner" }),
+        SpeakeasyMetadata({ data: "json, name=GroupOwner" }),
         __metadata("design:type", String)
     ], ResourceDownloadOwnerSetting.prototype, "groupOwner", void 0);
     __decorate([
-        Metadata({ data: "json, name=GroupPermission" }),
+        SpeakeasyMetadata({ data: "json, name=GroupPermission" }),
         __metadata("design:type", String)
     ], ResourceDownloadOwnerSetting.prototype, "groupPermission", void 0);
     return ResourceDownloadOwnerSetting;

@@ -31,7 +31,7 @@ type CloudfunctionsProjectsLocationsFunctionsPatchSecurity struct {
 type CloudfunctionsProjectsLocationsFunctionsPatchRequest struct {
 	PathParams  CloudfunctionsProjectsLocationsFunctionsPatchPathParams
 	QueryParams CloudfunctionsProjectsLocationsFunctionsPatchQueryParams
-	Request     *shared.CloudFunction `request:"mediaType=application/json"`
+	Request     *shared.CloudFunctionInput `request:"mediaType=application/json"`
 	Security    CloudfunctionsProjectsLocationsFunctionsPatchSecurity
 }
 

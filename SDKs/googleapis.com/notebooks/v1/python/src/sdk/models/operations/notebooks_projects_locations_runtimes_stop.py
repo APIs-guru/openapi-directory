@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class NotebooksProjectsLocationsRuntimesStopPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class NotebooksProjectsLocationsRuntimesStopQueryParams:
 
 @dataclass
 class NotebooksProjectsLocationsRuntimesStopSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class NotebooksProjectsLocationsRuntimesStopRequest:
-    path_params: NotebooksProjectsLocationsRuntimesStopPathParams = field(default=None)
-    query_params: NotebooksProjectsLocationsRuntimesStopQueryParams = field(default=None)
+    path_params: NotebooksProjectsLocationsRuntimesStopPathParams = field()
+    query_params: NotebooksProjectsLocationsRuntimesStopQueryParams = field()
+    security: NotebooksProjectsLocationsRuntimesStopSecurity = field()
     request: Optional[shared.StopRuntimeRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: NotebooksProjectsLocationsRuntimesStopSecurity = field(default=None)
     
 
 @dataclass
 class NotebooksProjectsLocationsRuntimesStopResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

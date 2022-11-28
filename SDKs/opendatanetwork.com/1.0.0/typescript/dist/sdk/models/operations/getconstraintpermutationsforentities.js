@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetConstraintPermutationsForEntitiesPathParams = /** @class */ (function (_super) {
     __extends(GetConstraintPermutationsForEntitiesPathParams, _super);
     function GetConstraintPermutationsForEntitiesPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=variable" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=variable" }),
         __metadata("design:type", String)
     ], GetConstraintPermutationsForEntitiesPathParams.prototype, "variable", void 0);
     return GetConstraintPermutationsForEntitiesPathParams;
@@ -41,15 +41,15 @@ var GetConstraintPermutationsForEntitiesQueryParams = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=app_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=app_token" }),
         __metadata("design:type", String)
     ], GetConstraintPermutationsForEntitiesQueryParams.prototype, "appToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=constraint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=constraint" }),
         __metadata("design:type", String)
     ], GetConstraintPermutationsForEntitiesQueryParams.prototype, "constraint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=entity_id" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=entity_id" }),
         __metadata("design:type", String)
     ], GetConstraintPermutationsForEntitiesQueryParams.prototype, "entityId", void 0);
     return GetConstraintPermutationsForEntitiesQueryParams;
@@ -61,7 +61,7 @@ var GetConstraintPermutationsForEntitiesHeaders = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-App-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-App-Token" }),
         __metadata("design:type", String)
     ], GetConstraintPermutationsForEntitiesHeaders.prototype, "xAppToken", void 0);
     return GetConstraintPermutationsForEntitiesHeaders;
@@ -73,15 +73,15 @@ var GetConstraintPermutationsForEntitiesRequest = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetConstraintPermutationsForEntitiesPathParams)
     ], GetConstraintPermutationsForEntitiesRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetConstraintPermutationsForEntitiesQueryParams)
     ], GetConstraintPermutationsForEntitiesRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetConstraintPermutationsForEntitiesHeaders)
     ], GetConstraintPermutationsForEntitiesRequest.prototype, "headers", void 0);
     return GetConstraintPermutationsForEntitiesRequest;
@@ -93,11 +93,11 @@ var GetConstraintPermutationsForEntitiesResponse = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetConstraintPermutationsForEntitiesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetConstraintPermutationsForEntitiesResponse.prototype, "statusCode", void 0);
     return GetConstraintPermutationsForEntitiesResponse;

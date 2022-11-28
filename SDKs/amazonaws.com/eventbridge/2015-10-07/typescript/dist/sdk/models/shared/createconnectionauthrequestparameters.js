@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CreateConnectionApiKeyAuthRequestParameters } from "./createconnectionapikeyauthrequestparameters";
 import { CreateConnectionBasicAuthRequestParameters } from "./createconnectionbasicauthrequestparameters";
 import { ConnectionHttpParameters } from "./connectionhttpparameters";
@@ -37,19 +37,19 @@ var CreateConnectionAuthRequestParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ApiKeyAuthParameters" }),
+        SpeakeasyMetadata({ data: "json, name=ApiKeyAuthParameters" }),
         __metadata("design:type", CreateConnectionApiKeyAuthRequestParameters)
     ], CreateConnectionAuthRequestParameters.prototype, "apiKeyAuthParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=BasicAuthParameters" }),
+        SpeakeasyMetadata({ data: "json, name=BasicAuthParameters" }),
         __metadata("design:type", CreateConnectionBasicAuthRequestParameters)
     ], CreateConnectionAuthRequestParameters.prototype, "basicAuthParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=InvocationHttpParameters" }),
+        SpeakeasyMetadata({ data: "json, name=InvocationHttpParameters" }),
         __metadata("design:type", ConnectionHttpParameters)
     ], CreateConnectionAuthRequestParameters.prototype, "invocationHttpParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=OAuthParameters" }),
+        SpeakeasyMetadata({ data: "json, name=OAuthParameters" }),
         __metadata("design:type", CreateConnectionOAuthRequestParameters)
     ], CreateConnectionAuthRequestParameters.prototype, "oAuthParameters", void 0);
     return CreateConnectionAuthRequestParameters;

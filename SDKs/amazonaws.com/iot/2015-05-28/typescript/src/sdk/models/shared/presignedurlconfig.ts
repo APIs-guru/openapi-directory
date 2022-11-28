@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PresignedUrlConfig
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configuration for pre-signed S3 URLs.
 **/
 export class PresignedUrlConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=expiresInSec" })
+  @SpeakeasyMetadata({ data: "json, name=expiresInSec" })
   expiresInSec?: number;
 
-  @Metadata({ data: "json, name=roleArn" })
+  @SpeakeasyMetadata({ data: "json, name=roleArn" })
   roleArn?: string;
 }

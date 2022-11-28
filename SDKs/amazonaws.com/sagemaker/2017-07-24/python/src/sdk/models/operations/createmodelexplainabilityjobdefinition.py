@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 class CreateModelExplainabilityJobDefinitionXAmzTargetEnum(str, Enum):
@@ -8,6 +12,7 @@ class CreateModelExplainabilityJobDefinitionXAmzTargetEnum(str, Enum):
 
 @dataclass
 class CreateModelExplainabilityJobDefinitionHeaders:
+    x_amz_target: CreateModelExplainabilityJobDefinitionXAmzTargetEnum = field(metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm', 'style': 'simple', 'explode': False }})
     x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256', 'style': 'simple', 'explode': False }})
     x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential', 'style': 'simple', 'explode': False }})
@@ -15,20 +20,19 @@ class CreateModelExplainabilityJobDefinitionHeaders:
     x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token', 'style': 'simple', 'explode': False }})
     x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature', 'style': 'simple', 'explode': False }})
     x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders', 'style': 'simple', 'explode': False }})
-    x_amz_target: CreateModelExplainabilityJobDefinitionXAmzTargetEnum = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class CreateModelExplainabilityJobDefinitionRequest:
-    headers: CreateModelExplainabilityJobDefinitionHeaders = field(default=None)
-    request: shared.CreateModelExplainabilityJobDefinitionRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateModelExplainabilityJobDefinitionHeaders = field()
+    request: shared.CreateModelExplainabilityJobDefinitionRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateModelExplainabilityJobDefinitionResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     create_model_explainability_job_definition_response: Optional[shared.CreateModelExplainabilityJobDefinitionResponse] = field(default=None)
     resource_in_use: Optional[Any] = field(default=None)
     resource_limit_exceeded: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

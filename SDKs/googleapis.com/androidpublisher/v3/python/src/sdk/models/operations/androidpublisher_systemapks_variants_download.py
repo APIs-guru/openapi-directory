@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AndroidpublisherSystemapksVariantsDownloadPathParams:
-    package_name: str = field(default=None, metadata={'path_param': { 'field_name': 'packageName', 'style': 'simple', 'explode': False }})
-    variant_id: int = field(default=None, metadata={'path_param': { 'field_name': 'variantId', 'style': 'simple', 'explode': False }})
-    version_code: str = field(default=None, metadata={'path_param': { 'field_name': 'versionCode', 'style': 'simple', 'explode': False }})
+    package_name: str = field(metadata={'path_param': { 'field_name': 'packageName', 'style': 'simple', 'explode': False }})
+    variant_id: int = field(metadata={'path_param': { 'field_name': 'variantId', 'style': 'simple', 'explode': False }})
+    version_code: str = field(metadata={'path_param': { 'field_name': 'versionCode', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,19 +28,19 @@ class AndroidpublisherSystemapksVariantsDownloadQueryParams:
 
 @dataclass
 class AndroidpublisherSystemapksVariantsDownloadSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AndroidpublisherSystemapksVariantsDownloadRequest:
-    path_params: AndroidpublisherSystemapksVariantsDownloadPathParams = field(default=None)
-    query_params: AndroidpublisherSystemapksVariantsDownloadQueryParams = field(default=None)
-    security: AndroidpublisherSystemapksVariantsDownloadSecurity = field(default=None)
+    path_params: AndroidpublisherSystemapksVariantsDownloadPathParams = field()
+    query_params: AndroidpublisherSystemapksVariantsDownloadQueryParams = field()
+    security: AndroidpublisherSystemapksVariantsDownloadSecurity = field()
     
 
 @dataclass
 class AndroidpublisherSystemapksVariantsDownloadResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

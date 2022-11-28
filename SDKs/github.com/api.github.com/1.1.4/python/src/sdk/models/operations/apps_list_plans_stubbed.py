@@ -11,14 +11,14 @@ class AppsListPlansStubbedQueryParams:
 
 @dataclass
 class AppsListPlansStubbedRequest:
-    query_params: AppsListPlansStubbedQueryParams = field(default=None)
+    query_params: AppsListPlansStubbedQueryParams = field()
     
 
 @dataclass
 class AppsListPlansStubbedResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     basic_error: Optional[shared.BasicError] = field(default=None)
     marketplace_listing_plans: Optional[List[shared.MarketplaceListingPlan]] = field(default=None)
     

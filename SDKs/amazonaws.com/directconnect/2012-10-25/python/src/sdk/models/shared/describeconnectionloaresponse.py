@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import loa
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeConnectionLoaResponse:
-    loa: Optional[loa.Loa] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'loa' }})
+    loa: Optional[Loa] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('loa') }})
     

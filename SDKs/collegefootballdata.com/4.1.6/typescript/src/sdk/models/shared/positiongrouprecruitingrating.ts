@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PositionGroupRecruitingRating extends SpeakeasyBase {
-  @Metadata({ data: "json, name=averageRating" })
+  @SpeakeasyMetadata({ data: "json, name=averageRating" })
   averageRating?: number;
 
-  @Metadata({ data: "json, name=averageStars" })
+  @SpeakeasyMetadata({ data: "json, name=averageStars" })
   averageStars?: number;
 
-  @Metadata({ data: "json, name=commits" })
+  @SpeakeasyMetadata({ data: "json, name=commits" })
   commits?: number;
 
-  @Metadata({ data: "json, name=conference" })
+  @SpeakeasyMetadata({ data: "json, name=conference" })
   conference?: string;
 
-  @Metadata({ data: "json, name=positionGroup" })
+  @SpeakeasyMetadata({ data: "json, name=positionGroup" })
   positionGroup?: string;
 
-  @Metadata({ data: "json, name=team" })
+  @SpeakeasyMetadata({ data: "json, name=team" })
   team?: string;
 
-  @Metadata({ data: "json, name=totalRating" })
+  @SpeakeasyMetadata({ data: "json, name=totalRating" })
   totalRating?: number;
 }

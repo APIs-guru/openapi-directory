@@ -17,6 +17,8 @@ const (
 	SetInstanceAcceleratorRequestTypeEnumTpuV3                      SetInstanceAcceleratorRequestTypeEnum = "TPU_V3"
 )
 
+// SetInstanceAcceleratorRequest
+// Request for setting instance accelerator.
 type SetInstanceAcceleratorRequest struct {
 	CoreCount *string                                `json:"coreCount,omitempty"`
 	Type      *SetInstanceAcceleratorRequestTypeEnum `json:"type,omitempty"`

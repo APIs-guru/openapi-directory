@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum ConfigManagementPolicyControllerMonitoringBackendsEnum {
     MonitoringBackendUnspecified = "MONITORING_BACKEND_UNSPECIFIED",
     Prometheus = "PROMETHEUS",

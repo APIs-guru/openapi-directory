@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import combinedaudiencetargetingsetting
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CombinedAudienceGroup:
-    settings: Optional[List[combinedaudiencetargetingsetting.CombinedAudienceTargetingSetting]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'settings' }})
+    r"""CombinedAudienceGroup
+    Details of combined audience group. All combined audience targeting settings are logically ‘OR’ of each other.
+    """
+    
+    settings: Optional[List[CombinedAudienceTargetingSetting]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('settings') }})
     

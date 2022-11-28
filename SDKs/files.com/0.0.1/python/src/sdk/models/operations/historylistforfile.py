@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Any,List,Optional
@@ -8,7 +8,7 @@ from sdk.models import shared
 
 @dataclass
 class HistoryListForFilePathParams:
-    path: str = field(default=None, metadata={'path_param': { 'field_name': 'path', 'style': 'simple', 'explode': False }})
+    path: str = field(metadata={'path_param': { 'field_name': 'path', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,13 +23,13 @@ class HistoryListForFileQueryParams:
 
 @dataclass
 class HistoryListForFileRequest:
-    path_params: HistoryListForFilePathParams = field(default=None)
-    query_params: HistoryListForFileQueryParams = field(default=None)
+    path_params: HistoryListForFilePathParams = field()
+    query_params: HistoryListForFileQueryParams = field()
     
 
 @dataclass
 class HistoryListForFileResponse:
+    content_type: str = field()
+    status_code: int = field()
     action_entities: Optional[List[shared.ActionEntity]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

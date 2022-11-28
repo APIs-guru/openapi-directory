@@ -10,14 +10,14 @@ class StoryPostFileQueryParams:
 
 @dataclass
 class StoryPostFileRequest:
-    query_params: StoryPostFileQueryParams = field(default=None)
-    request: Any = field(default=None, metadata={'request': { 'media_type': 'multipart/form-data' }})
+    query_params: StoryPostFileQueryParams = field()
+    request: Any = field(metadata={'request': { 'media_type': 'multipart/form-data' }})
     
 
 @dataclass
 class StoryPostFileResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     problem_detail: Optional[Any] = field(default=None)
     story: Optional[shared.Story] = field(default=None)
     

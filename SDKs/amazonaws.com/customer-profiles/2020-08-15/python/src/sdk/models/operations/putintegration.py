@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class PutIntegrationPathParams:
-    domain_name: str = field(default=None, metadata={'path_param': { 'field_name': 'DomainName', 'style': 'simple', 'explode': False }})
+    domain_name: str = field(metadata={'path_param': { 'field_name': 'DomainName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,38 +27,42 @@ class PutIntegrationHeaders:
 @dataclass_json
 @dataclass
 class PutIntegrationRequestBodyFlowDefinition:
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
-    flow_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FlowName' }})
-    kms_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'KmsArn' }})
-    source_flow_config: Optional[shared.SourceFlowConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SourceFlowConfig' }})
-    tasks: Optional[List[shared.Task]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Tasks' }})
-    trigger_config: Optional[shared.TriggerConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TriggerConfig' }})
+    r"""PutIntegrationRequestBodyFlowDefinition
+    The configurations that control how Customer Profiles retrieves data from the source, Amazon AppFlow. Customer Profiles uses this information to create an AppFlow flow on behalf of customers.
+    """
+    
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Description') }})
+    flow_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FlowName') }})
+    kms_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('KmsArn') }})
+    source_flow_config: Optional[shared.SourceFlowConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SourceFlowConfig') }})
+    tasks: Optional[List[shared.Task]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Tasks') }})
+    trigger_config: Optional[shared.TriggerConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TriggerConfig') }})
     
 
 @dataclass_json
 @dataclass
 class PutIntegrationRequestBody:
-    flow_definition: Optional[PutIntegrationRequestBodyFlowDefinition] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FlowDefinition' }})
-    object_type_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ObjectTypeName' }})
-    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Tags' }})
-    uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Uri' }})
+    object_type_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ObjectTypeName') }})
+    flow_definition: Optional[PutIntegrationRequestBodyFlowDefinition] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FlowDefinition') }})
+    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Tags') }})
+    uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Uri') }})
     
 
 @dataclass
 class PutIntegrationRequest:
-    path_params: PutIntegrationPathParams = field(default=None)
-    headers: PutIntegrationHeaders = field(default=None)
-    request: PutIntegrationRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: PutIntegrationHeaders = field()
+    path_params: PutIntegrationPathParams = field()
+    request: PutIntegrationRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PutIntegrationResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     put_integration_response: Optional[shared.PutIntegrationResponse] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

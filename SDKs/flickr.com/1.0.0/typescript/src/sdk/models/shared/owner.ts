@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Owner extends SpeakeasyBase {
-  @Metadata({ data: "json, name=iconfarm" })
+  @SpeakeasyMetadata({ data: "json, name=iconfarm" })
   iconfarm?: string;
 
-  @Metadata({ data: "json, name=iconserver" })
+  @SpeakeasyMetadata({ data: "json, name=iconserver" })
   iconserver?: string;
 
-  @Metadata({ data: "json, name=is_ad_free" })
+  @SpeakeasyMetadata({ data: "json, name=is_ad_free" })
   isAdFree?: boolean;
 
-  @Metadata({ data: "json, name=ispro" })
+  @SpeakeasyMetadata({ data: "json, name=ispro" })
   ispro?: boolean;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: string;
 
-  @Metadata({ data: "json, name=noindexfollow" })
+  @SpeakeasyMetadata({ data: "json, name=noindexfollow" })
   noindexfollow?: boolean;
 
-  @Metadata({ data: "json, name=nsid" })
+  @SpeakeasyMetadata({ data: "json, name=nsid" })
   nsid?: string;
 
-  @Metadata({ data: "json, name=path_alias" })
+  @SpeakeasyMetadata({ data: "json, name=path_alias" })
   pathAlias?: string;
 
-  @Metadata({ data: "json, name=realname" })
+  @SpeakeasyMetadata({ data: "json, name=realname" })
   realname?: string;
 
-  @Metadata({ data: "json, name=username" })
+  @SpeakeasyMetadata({ data: "json, name=username" })
   username?: string;
 }

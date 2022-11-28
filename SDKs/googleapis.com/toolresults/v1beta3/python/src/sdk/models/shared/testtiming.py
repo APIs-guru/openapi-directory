@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import duration
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class TestTiming:
-    test_process_duration: Optional[duration.Duration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'testProcessDuration' }})
+    r"""TestTiming
+    Testing timing break down to know phases.
+    """
+    
+    test_process_duration: Optional[Duration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('testProcessDuration') }})
     

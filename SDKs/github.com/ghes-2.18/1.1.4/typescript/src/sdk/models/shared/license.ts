@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // License
@@ -6,42 +7,42 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * License
 **/
 export class License extends SpeakeasyBase {
-  @Metadata({ data: "json, name=body" })
+  @SpeakeasyMetadata({ data: "json, name=body" })
   body: string;
 
-  @Metadata({ data: "json, name=conditions" })
+  @SpeakeasyMetadata({ data: "json, name=conditions" })
   conditions: string[];
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description: string;
 
-  @Metadata({ data: "json, name=featured" })
+  @SpeakeasyMetadata({ data: "json, name=featured" })
   featured: boolean;
 
-  @Metadata({ data: "json, name=html_url" })
+  @SpeakeasyMetadata({ data: "json, name=html_url" })
   htmlUrl: string;
 
-  @Metadata({ data: "json, name=implementation" })
+  @SpeakeasyMetadata({ data: "json, name=implementation" })
   implementation: string;
 
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key: string;
 
-  @Metadata({ data: "json, name=limitations" })
+  @SpeakeasyMetadata({ data: "json, name=limitations" })
   limitations: string[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=node_id" })
+  @SpeakeasyMetadata({ data: "json, name=node_id" })
   nodeId: string;
 
-  @Metadata({ data: "json, name=permissions" })
+  @SpeakeasyMetadata({ data: "json, name=permissions" })
   permissions: string[];
 
-  @Metadata({ data: "json, name=spdx_id" })
+  @SpeakeasyMetadata({ data: "json, name=spdx_id" })
   spdxId: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url: string;
 }

@@ -8,6 +8,8 @@ const (
 	ErrorProtoLocationTypeEnumParameter ErrorProtoLocationTypeEnum = "PARAMETER"
 )
 
+// ErrorProto
+// Describes one specific error.
 type ErrorProto struct {
 	Argument             []string                    `json:"argument,omitempty"`
 	Code                 *string                     `json:"code,omitempty"`

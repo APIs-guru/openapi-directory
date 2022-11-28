@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * A filter name and value pair that's used to return a more specific list of results from a <code>ListJobs</code> API operation.
 **/

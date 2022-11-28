@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // V2LanguageTrainParams
 /**
  * JSON that contains parameters that specify how the model is created
@@ -33,15 +33,15 @@ var V2LanguageTrainParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=trainSplitRatio" }),
+        SpeakeasyMetadata({ data: "json, name=trainSplitRatio" }),
         __metadata("design:type", Number)
     ], V2LanguageTrainParams.prototype, "trainSplitRatio", void 0);
     __decorate([
-        Metadata({ data: "json, name=withFeedback" }),
+        SpeakeasyMetadata({ data: "json, name=withFeedback" }),
         __metadata("design:type", Boolean)
     ], V2LanguageTrainParams.prototype, "withFeedback", void 0);
     __decorate([
-        Metadata({ data: "json, name=withGlobalDatasetId" }),
+        SpeakeasyMetadata({ data: "json, name=withGlobalDatasetId" }),
         __metadata("design:type", Number)
     ], V2LanguageTrainParams.prototype, "withGlobalDatasetId", void 0);
     return V2LanguageTrainParams;

@@ -1,33 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DomainValidationOption } from "./domainvalidationoption";
 import { CertificateOptions } from "./certificateoptions";
 import { Tag } from "./tag";
 import { ValidationMethodEnum } from "./validationmethodenum";
 
 
+
 export class RequestCertificateRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CertificateAuthorityArn" })
+  @SpeakeasyMetadata({ data: "json, name=CertificateAuthorityArn" })
   certificateAuthorityArn?: string;
 
-  @Metadata({ data: "json, name=DomainName" })
+  @SpeakeasyMetadata({ data: "json, name=DomainName" })
   domainName: string;
 
-  @Metadata({ data: "json, name=DomainValidationOptions", elemType: shared.DomainValidationOption })
+  @SpeakeasyMetadata({ data: "json, name=DomainValidationOptions", elemType: DomainValidationOption })
   domainValidationOptions?: DomainValidationOption[];
 
-  @Metadata({ data: "json, name=IdempotencyToken" })
+  @SpeakeasyMetadata({ data: "json, name=IdempotencyToken" })
   idempotencyToken?: string;
 
-  @Metadata({ data: "json, name=Options" })
+  @SpeakeasyMetadata({ data: "json, name=Options" })
   options?: CertificateOptions;
 
-  @Metadata({ data: "json, name=SubjectAlternativeNames" })
+  @SpeakeasyMetadata({ data: "json, name=SubjectAlternativeNames" })
   subjectAlternativeNames?: string[];
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 
-  @Metadata({ data: "json, name=ValidationMethod" })
+  @SpeakeasyMetadata({ data: "json, name=ValidationMethod" })
   validationMethod?: ValidationMethodEnum;
 }

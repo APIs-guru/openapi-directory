@@ -1,14 +1,18 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import actiontarget
-from . import actiontarget
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Ec2ReplaceRouteTableAssociationAction:
-    association_id: actiontarget.ActionTarget = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AssociationId' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
-    route_table_id: actiontarget.ActionTarget = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RouteTableId' }})
+    r"""Ec2ReplaceRouteTableAssociationAction
+    Information about the ReplaceRouteTableAssociation action in Amazon EC2.
+    """
+    
+    association_id: ActionTarget = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('AssociationId') }})
+    route_table_id: ActionTarget = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('RouteTableId') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Description') }})
     

@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from sdk.models import shared
 
 
@@ -13,19 +13,19 @@ class ListDistributedVirtualPortgroupsQueryParams:
 
 @dataclass
 class ListDistributedVirtualPortgroupsSecurity:
-    api_key_auth: shared.SchemeAPIKeyAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    api_key_auth: shared.SchemeAPIKeyAuth = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class ListDistributedVirtualPortgroupsRequest:
-    query_params: ListDistributedVirtualPortgroupsQueryParams = field(default=None)
-    security: ListDistributedVirtualPortgroupsSecurity = field(default=None)
+    query_params: ListDistributedVirtualPortgroupsQueryParams = field()
+    security: ListDistributedVirtualPortgroupsSecurity = field()
     
 
 @dataclass
 class ListDistributedVirtualPortgroupsResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_error: Optional[shared.APIError] = field(default=None)
-    content_type: str = field(default=None)
     paged_list_response_with_time: Optional[shared.PagedListResponseWithTime] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DatastoreStatusEnum } from "./datastorestatusenum";
 // DatastoreFilter
 /**
@@ -34,19 +34,19 @@ var DatastoreFilter = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CreatedAfter" }),
+        SpeakeasyMetadata({ data: "json, name=CreatedAfter" }),
         __metadata("design:type", Date)
     ], DatastoreFilter.prototype, "createdAfter", void 0);
     __decorate([
-        Metadata({ data: "json, name=CreatedBefore" }),
+        SpeakeasyMetadata({ data: "json, name=CreatedBefore" }),
         __metadata("design:type", Date)
     ], DatastoreFilter.prototype, "createdBefore", void 0);
     __decorate([
-        Metadata({ data: "json, name=DatastoreName" }),
+        SpeakeasyMetadata({ data: "json, name=DatastoreName" }),
         __metadata("design:type", String)
     ], DatastoreFilter.prototype, "datastoreName", void 0);
     __decorate([
-        Metadata({ data: "json, name=DatastoreStatus" }),
+        SpeakeasyMetadata({ data: "json, name=DatastoreStatus" }),
         __metadata("design:type", String)
     ], DatastoreFilter.prototype, "datastoreStatus", void 0);
     return DatastoreFilter;

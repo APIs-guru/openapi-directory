@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActionEnum } from "./actionenum";
+
 
 
 // AndroidPushNotificationTemplate
@@ -7,30 +8,30 @@ import { ActionEnum } from "./actionenum";
  * Specifies channel-specific content and settings for a message template that can be used in push notifications that are sent through the ADM (Amazon Device Messaging), Baidu (Baidu Cloud Push), or GCM (Firebase Cloud Messaging, formerly Google Cloud Messaging) channel.
 **/
 export class AndroidPushNotificationTemplate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Action" })
+  @SpeakeasyMetadata({ data: "json, name=Action" })
   action?: ActionEnum;
 
-  @Metadata({ data: "json, name=Body" })
+  @SpeakeasyMetadata({ data: "json, name=Body" })
   body?: string;
 
-  @Metadata({ data: "json, name=ImageIconUrl" })
+  @SpeakeasyMetadata({ data: "json, name=ImageIconUrl" })
   imageIconUrl?: string;
 
-  @Metadata({ data: "json, name=ImageUrl" })
+  @SpeakeasyMetadata({ data: "json, name=ImageUrl" })
   imageUrl?: string;
 
-  @Metadata({ data: "json, name=RawContent" })
+  @SpeakeasyMetadata({ data: "json, name=RawContent" })
   rawContent?: string;
 
-  @Metadata({ data: "json, name=SmallImageIconUrl" })
+  @SpeakeasyMetadata({ data: "json, name=SmallImageIconUrl" })
   smallImageIconUrl?: string;
 
-  @Metadata({ data: "json, name=Sound" })
+  @SpeakeasyMetadata({ data: "json, name=Sound" })
   sound?: string;
 
-  @Metadata({ data: "json, name=Title" })
+  @SpeakeasyMetadata({ data: "json, name=Title" })
   title?: string;
 
-  @Metadata({ data: "json, name=Url" })
+  @SpeakeasyMetadata({ data: "json, name=Url" })
   url?: string;
 }

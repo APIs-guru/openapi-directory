@@ -18,8 +18,8 @@ class PostAPIV1HeartBeatRequest:
 
 @dataclass
 class PostAPIV1HeartBeatResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     problem_details: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

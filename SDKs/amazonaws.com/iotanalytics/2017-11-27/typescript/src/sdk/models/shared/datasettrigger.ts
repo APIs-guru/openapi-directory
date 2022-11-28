@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TriggeringDataset } from "./triggeringdataset";
 import { Schedule } from "./schedule";
+
 
 
 // DatasetTrigger
@@ -8,9 +9,9 @@ import { Schedule } from "./schedule";
  * The <code>DatasetTrigger</code> that specifies when the dataset is automatically updated.
 **/
 export class DatasetTrigger extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataset" })
+  @SpeakeasyMetadata({ data: "json, name=dataset" })
   dataset?: TriggeringDataset;
 
-  @Metadata({ data: "json, name=schedule" })
+  @SpeakeasyMetadata({ data: "json, name=schedule" })
   schedule?: Schedule;
 }

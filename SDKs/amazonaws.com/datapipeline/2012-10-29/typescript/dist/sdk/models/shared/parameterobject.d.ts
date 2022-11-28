@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ParameterAttribute } from "./parameterattribute";
 /**
  * Contains information about a parameter object.

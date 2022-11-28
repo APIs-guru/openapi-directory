@@ -21,23 +21,9 @@ type LinkApplicationRequestBody struct {
 	Application string `json:"application"`
 }
 
-type LinkApplicationSecurityOption1 struct {
-	BearerAuth shared.SchemeBearerAuth `security:"scheme,type=http,subtype=bearer"`
-}
-
-type LinkApplicationSecurityOption2 struct {
-	BasicAuth shared.SchemeBasicAuth `security:"scheme,type=http,subtype=basic"`
-}
-
 type LinkApplicationSecurity struct {
-	Option1 *LinkApplicationSecurityOption1 `security:"option"`
-	Option2 *LinkApplicationSecurityOption2 `security:"option"`
-}
-
-type LinkApplicationRequest struct {
-	PathParams LinkApplicationPathParams
-	Request    LinkApplicationRequestBody `request:"mediaType=application/json"`
-	Security   LinkApplicationSecurity
+	BearerAuth *shared.SchemeBearerAuth `security:"scheme,type=http,subtype=bearer"`
+	BasicAuth  *shared.SchemeBasicAuth  `security:"scheme,type=http,subtype=basic"`
 }
 
 type LinkApplication403ApplicationJSON struct {
@@ -50,6 +36,12 @@ type LinkApplication409ApplicationJSON struct {
 	Detail *string `json:"detail,omitempty"`
 	Title  *string `json:"title,omitempty"`
 	Type   *string `json:"type,omitempty"`
+}
+
+type LinkApplicationRequest struct {
+	PathParams LinkApplicationPathParams
+	Request    LinkApplicationRequestBody `request:"mediaType=application/json"`
+	Security   LinkApplicationSecurity
 }
 
 type LinkApplicationResponse struct {

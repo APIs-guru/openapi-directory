@@ -1,5 +1,7 @@
 package shared
 
+// TablesDatasetMetadata
+// Metadata for a dataset used for AutoML Tables.
 type TablesDatasetMetadata struct {
 	MlUseColumnSpecID        *string                     `json:"mlUseColumnSpecId,omitempty"`
 	PrimaryTableSpecID       *string                     `json:"primaryTableSpecId,omitempty"`

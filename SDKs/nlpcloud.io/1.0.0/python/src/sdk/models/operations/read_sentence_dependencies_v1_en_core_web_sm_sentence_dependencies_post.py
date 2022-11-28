@@ -5,13 +5,13 @@ from sdk.models import shared
 
 @dataclass
 class ReadSentenceDependenciesV1EnCoreWebSmSentenceDependenciesPostRequest:
-    request: shared.UserRequestIn = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.UserRequestIn = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ReadSentenceDependenciesV1EnCoreWebSmSentenceDependenciesPostResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     http_validation_error: Optional[shared.HTTPValidationError] = field(default=None)
     sentence_dependencies_out: Optional[shared.SentenceDependenciesOut] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -22,38 +22,38 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Area = /** @class */ (function (_super) {
     __extends(Area, _super);
     function Area() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], Area.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=Id" }),
+        SpeakeasyMetadata({ data: "json, name=Id" }),
         __metadata("design:type", String)
     ], Area.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], Area.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=XLatitude" }),
+        SpeakeasyMetadata({ data: "json, name=XLatitude" }),
         __metadata("design:type", String)
     ], Area.prototype, "xLatitude", void 0);
     __decorate([
-        Metadata({ data: "json, name=XLongitude" }),
+        SpeakeasyMetadata({ data: "json, name=XLongitude" }),
         __metadata("design:type", String)
     ], Area.prototype, "xLongitude", void 0);
     __decorate([
-        Metadata({ data: "json, name=YLatitude" }),
+        SpeakeasyMetadata({ data: "json, name=YLatitude" }),
         __metadata("design:type", String)
     ], Area.prototype, "yLatitude", void 0);
     __decorate([
-        Metadata({ data: "json, name=YLongitude" }),
+        SpeakeasyMetadata({ data: "json, name=YLongitude" }),
         __metadata("design:type", String)
     ], Area.prototype, "yLongitude", void 0);
     return Area;

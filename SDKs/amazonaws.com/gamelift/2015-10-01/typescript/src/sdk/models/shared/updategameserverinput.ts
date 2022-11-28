@@ -1,21 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GameServerHealthCheckEnum } from "./gameserverhealthcheckenum";
 import { GameServerUtilizationStatusEnum } from "./gameserverutilizationstatusenum";
 
 
+
 export class UpdateGameServerInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=GameServerData" })
+  @SpeakeasyMetadata({ data: "json, name=GameServerData" })
   gameServerData?: string;
 
-  @Metadata({ data: "json, name=GameServerGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=GameServerGroupName" })
   gameServerGroupName: string;
 
-  @Metadata({ data: "json, name=GameServerId" })
+  @SpeakeasyMetadata({ data: "json, name=GameServerId" })
   gameServerId: string;
 
-  @Metadata({ data: "json, name=HealthCheck" })
+  @SpeakeasyMetadata({ data: "json, name=HealthCheck" })
   healthCheck?: GameServerHealthCheckEnum;
 
-  @Metadata({ data: "json, name=UtilizationStatus" })
+  @SpeakeasyMetadata({ data: "json, name=UtilizationStatus" })
   utilizationStatus?: GameServerUtilizationStatusEnum;
 }

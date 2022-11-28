@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ChangeTypeEnum } from "./changetypeenum";
 import { ErrorInfo } from "./errorinfo";
 import { FormatTypeEnum } from "./formattypeenum";
@@ -38,59 +38,59 @@ var ChangesetInfo = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=changeType" }),
+        SpeakeasyMetadata({ data: "json, name=changeType" }),
         __metadata("design:type", String)
     ], ChangesetInfo.prototype, "changeType", void 0);
     __decorate([
-        Metadata({ data: "json, name=changesetArn" }),
+        SpeakeasyMetadata({ data: "json, name=changesetArn" }),
         __metadata("design:type", String)
     ], ChangesetInfo.prototype, "changesetArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=changesetLabels" }),
+        SpeakeasyMetadata({ data: "json, name=changesetLabels" }),
         __metadata("design:type", Map)
     ], ChangesetInfo.prototype, "changesetLabels", void 0);
     __decorate([
-        Metadata({ data: "json, name=createTimestamp" }),
+        SpeakeasyMetadata({ data: "json, name=createTimestamp" }),
         __metadata("design:type", Date)
     ], ChangesetInfo.prototype, "createTimestamp", void 0);
     __decorate([
-        Metadata({ data: "json, name=datasetId" }),
+        SpeakeasyMetadata({ data: "json, name=datasetId" }),
         __metadata("design:type", String)
     ], ChangesetInfo.prototype, "datasetId", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorInfo" }),
+        SpeakeasyMetadata({ data: "json, name=errorInfo" }),
         __metadata("design:type", ErrorInfo)
     ], ChangesetInfo.prototype, "errorInfo", void 0);
     __decorate([
-        Metadata({ data: "json, name=formatParams" }),
+        SpeakeasyMetadata({ data: "json, name=formatParams" }),
         __metadata("design:type", Map)
     ], ChangesetInfo.prototype, "formatParams", void 0);
     __decorate([
-        Metadata({ data: "json, name=formatType" }),
+        SpeakeasyMetadata({ data: "json, name=formatType" }),
         __metadata("design:type", String)
     ], ChangesetInfo.prototype, "formatType", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], ChangesetInfo.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=sourceParams" }),
+        SpeakeasyMetadata({ data: "json, name=sourceParams" }),
         __metadata("design:type", Map)
     ], ChangesetInfo.prototype, "sourceParams", void 0);
     __decorate([
-        Metadata({ data: "json, name=sourceType" }),
+        SpeakeasyMetadata({ data: "json, name=sourceType" }),
         __metadata("design:type", String)
     ], ChangesetInfo.prototype, "sourceType", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], ChangesetInfo.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=updatedByChangesetId" }),
+        SpeakeasyMetadata({ data: "json, name=updatedByChangesetId" }),
         __metadata("design:type", String)
     ], ChangesetInfo.prototype, "updatedByChangesetId", void 0);
     __decorate([
-        Metadata({ data: "json, name=updatesChangesetId" }),
+        SpeakeasyMetadata({ data: "json, name=updatesChangesetId" }),
         __metadata("design:type", String)
     ], ChangesetInfo.prototype, "updatesChangesetId", void 0);
     return ChangesetInfo;

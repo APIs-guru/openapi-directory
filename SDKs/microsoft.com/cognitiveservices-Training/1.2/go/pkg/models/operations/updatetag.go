@@ -13,18 +13,18 @@ type UpdateTagHeaders struct {
 	TrainingKey string `header:"style=simple,explode=false,name=Training-Key"`
 }
 
-type UpdateTagRequests struct {
-	ApplicationXML []byte      `request:"mediaType=application/xml"`
-	Tag            *shared.Tag `request:"mediaType=application/json"`
-	Tag1           *shared.Tag `request:"mediaType=application/x-www-form-urlencoded"`
-	Tag2           *shared.Tag `request:"mediaType=text/json"`
-	TextXML        []byte      `request:"mediaType=text/xml"`
+type UpdateTagRequestsInput struct {
+	ApplicationXML []byte           `request:"mediaType=application/xml"`
+	Tag            *shared.TagInput `request:"mediaType=application/json"`
+	Tag1           *shared.TagInput `request:"mediaType=application/x-www-form-urlencoded"`
+	Tag2           *shared.TagInput `request:"mediaType=text/json"`
+	TextXML        []byte           `request:"mediaType=text/xml"`
 }
 
 type UpdateTagRequest struct {
 	PathParams UpdateTagPathParams
 	Headers    UpdateTagHeaders
-	Request    UpdateTagRequests
+	Request    UpdateTagRequestsInput
 }
 
 type UpdateTagResponse struct {

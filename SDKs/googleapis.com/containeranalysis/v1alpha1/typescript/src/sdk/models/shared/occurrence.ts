@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Attestation } from "./attestation";
 import { BuildDetails } from "./builddetails";
 import { ComplianceOccurrence } from "./complianceoccurrence";
@@ -15,23 +15,28 @@ import { PackageInfoOccurrence } from "./packageinfooccurrence";
 import { RelationshipOccurrence } from "./relationshipoccurrence";
 import { UpgradeOccurrence } from "./upgradeoccurrence";
 import { VulnerabilityDetails } from "./vulnerabilitydetails";
+import { InstallationInput } from "./installation";
+import { PackageInfoOccurrenceInput } from "./packageinfooccurrence";
+import { RelationshipOccurrenceInput } from "./relationshipoccurrence";
+import { VulnerabilityDetailsInput } from "./vulnerabilitydetails";
+
 
 export enum OccurrenceKindEnum {
-    KindUnspecified = "KIND_UNSPECIFIED"
-,    PackageVulnerability = "PACKAGE_VULNERABILITY"
-,    BuildDetails = "BUILD_DETAILS"
-,    ImageBasis = "IMAGE_BASIS"
-,    PackageManager = "PACKAGE_MANAGER"
-,    Deployable = "DEPLOYABLE"
-,    Discovery = "DISCOVERY"
-,    AttestationAuthority = "ATTESTATION_AUTHORITY"
-,    Upgrade = "UPGRADE"
-,    Compliance = "COMPLIANCE"
-,    Sbom = "SBOM"
-,    SpdxPackage = "SPDX_PACKAGE"
-,    SpdxFile = "SPDX_FILE"
-,    SpdxRelationship = "SPDX_RELATIONSHIP"
-,    DsseAttestation = "DSSE_ATTESTATION"
+    KindUnspecified = "KIND_UNSPECIFIED",
+    PackageVulnerability = "PACKAGE_VULNERABILITY",
+    BuildDetails = "BUILD_DETAILS",
+    ImageBasis = "IMAGE_BASIS",
+    PackageManager = "PACKAGE_MANAGER",
+    Deployable = "DEPLOYABLE",
+    Discovery = "DISCOVERY",
+    AttestationAuthority = "ATTESTATION_AUTHORITY",
+    Upgrade = "UPGRADE",
+    Compliance = "COMPLIANCE",
+    Sbom = "SBOM",
+    SpdxPackage = "SPDX_PACKAGE",
+    SpdxFile = "SPDX_FILE",
+    SpdxRelationship = "SPDX_RELATIONSHIP",
+    DsseAttestation = "DSSE_ATTESTATION"
 }
 
 
@@ -40,72 +45,148 @@ export enum OccurrenceKindEnum {
  * `Occurrence` includes information about analysis occurrences for an image.
 **/
 export class Occurrence extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attestation" })
+  @SpeakeasyMetadata({ data: "json, name=attestation" })
   attestation?: Attestation;
 
-  @Metadata({ data: "json, name=buildDetails" })
+  @SpeakeasyMetadata({ data: "json, name=buildDetails" })
   buildDetails?: BuildDetails;
 
-  @Metadata({ data: "json, name=compliance" })
+  @SpeakeasyMetadata({ data: "json, name=compliance" })
   compliance?: ComplianceOccurrence;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=deployment" })
+  @SpeakeasyMetadata({ data: "json, name=deployment" })
   deployment?: Deployment;
 
-  @Metadata({ data: "json, name=derivedImage" })
+  @SpeakeasyMetadata({ data: "json, name=derivedImage" })
   derivedImage?: Derived;
 
-  @Metadata({ data: "json, name=discovered" })
+  @SpeakeasyMetadata({ data: "json, name=discovered" })
   discovered?: Discovered;
 
-  @Metadata({ data: "json, name=dsseAttestation" })
+  @SpeakeasyMetadata({ data: "json, name=dsseAttestation" })
   dsseAttestation?: DsseAttestationOccurrence;
 
-  @Metadata({ data: "json, name=envelope" })
+  @SpeakeasyMetadata({ data: "json, name=envelope" })
   envelope?: Envelope;
 
-  @Metadata({ data: "json, name=installation" })
+  @SpeakeasyMetadata({ data: "json, name=installation" })
   installation?: Installation;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: OccurrenceKindEnum;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=noteName" })
+  @SpeakeasyMetadata({ data: "json, name=noteName" })
   noteName?: string;
 
-  @Metadata({ data: "json, name=remediation" })
+  @SpeakeasyMetadata({ data: "json, name=remediation" })
   remediation?: string;
 
-  @Metadata({ data: "json, name=resource" })
+  @SpeakeasyMetadata({ data: "json, name=resource" })
   resource?: Resource;
 
-  @Metadata({ data: "json, name=resourceUrl" })
+  @SpeakeasyMetadata({ data: "json, name=resourceUrl" })
   resourceUrl?: string;
 
-  @Metadata({ data: "json, name=sbom" })
+  @SpeakeasyMetadata({ data: "json, name=sbom" })
   sbom?: DocumentOccurrence;
 
-  @Metadata({ data: "json, name=spdxFile" })
+  @SpeakeasyMetadata({ data: "json, name=spdxFile" })
   spdxFile?: FileOccurrence;
 
-  @Metadata({ data: "json, name=spdxPackage" })
+  @SpeakeasyMetadata({ data: "json, name=spdxPackage" })
   spdxPackage?: PackageInfoOccurrence;
 
-  @Metadata({ data: "json, name=spdxRelationship" })
+  @SpeakeasyMetadata({ data: "json, name=spdxRelationship" })
   spdxRelationship?: RelationshipOccurrence;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 
-  @Metadata({ data: "json, name=upgrade" })
+  @SpeakeasyMetadata({ data: "json, name=upgrade" })
   upgrade?: UpgradeOccurrence;
 
-  @Metadata({ data: "json, name=vulnerabilityDetails" })
+  @SpeakeasyMetadata({ data: "json, name=vulnerabilityDetails" })
   vulnerabilityDetails?: VulnerabilityDetails;
+}
+
+
+// OccurrenceInput
+/** 
+ * `Occurrence` includes information about analysis occurrences for an image.
+**/
+export class OccurrenceInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=attestation" })
+  attestation?: Attestation;
+
+  @SpeakeasyMetadata({ data: "json, name=buildDetails" })
+  buildDetails?: BuildDetails;
+
+  @SpeakeasyMetadata({ data: "json, name=compliance" })
+  compliance?: ComplianceOccurrence;
+
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
+  createTime?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=deployment" })
+  deployment?: Deployment;
+
+  @SpeakeasyMetadata({ data: "json, name=derivedImage" })
+  derivedImage?: Derived;
+
+  @SpeakeasyMetadata({ data: "json, name=discovered" })
+  discovered?: Discovered;
+
+  @SpeakeasyMetadata({ data: "json, name=dsseAttestation" })
+  dsseAttestation?: DsseAttestationOccurrence;
+
+  @SpeakeasyMetadata({ data: "json, name=envelope" })
+  envelope?: Envelope;
+
+  @SpeakeasyMetadata({ data: "json, name=installation" })
+  installation?: InstallationInput;
+
+  @SpeakeasyMetadata({ data: "json, name=kind" })
+  kind?: OccurrenceKindEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=noteName" })
+  noteName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=remediation" })
+  remediation?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=resource" })
+  resource?: Resource;
+
+  @SpeakeasyMetadata({ data: "json, name=resourceUrl" })
+  resourceUrl?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=sbom" })
+  sbom?: DocumentOccurrence;
+
+  @SpeakeasyMetadata({ data: "json, name=spdxFile" })
+  spdxFile?: FileOccurrence;
+
+  @SpeakeasyMetadata({ data: "json, name=spdxPackage" })
+  spdxPackage?: PackageInfoOccurrenceInput;
+
+  @SpeakeasyMetadata({ data: "json, name=spdxRelationship" })
+  spdxRelationship?: RelationshipOccurrenceInput;
+
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
+  updateTime?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=upgrade" })
+  upgrade?: UpgradeOccurrence;
+
+  @SpeakeasyMetadata({ data: "json, name=vulnerabilityDetails" })
+  vulnerabilityDetails?: VulnerabilityDetailsInput;
 }

@@ -11,6 +11,8 @@ const (
 	WorkItemDetailsStateEnumExecutionStateCancelled  WorkItemDetailsStateEnum = "EXECUTION_STATE_CANCELLED"
 )
 
+// WorkItemDetails
+// Information about an individual work item execution.
 type WorkItemDetails struct {
 	AttemptID     *string                   `json:"attemptId,omitempty"`
 	EndTime       *string                   `json:"endTime,omitempty"`

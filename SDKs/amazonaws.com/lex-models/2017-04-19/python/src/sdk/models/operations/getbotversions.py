@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetBotVersionsPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,18 +30,18 @@ class GetBotVersionsHeaders:
 
 @dataclass
 class GetBotVersionsRequest:
-    path_params: GetBotVersionsPathParams = field(default=None)
-    query_params: GetBotVersionsQueryParams = field(default=None)
-    headers: GetBotVersionsHeaders = field(default=None)
+    headers: GetBotVersionsHeaders = field()
+    path_params: GetBotVersionsPathParams = field()
+    query_params: GetBotVersionsQueryParams = field()
     
 
 @dataclass
 class GetBotVersionsResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_bot_versions_response: Optional[shared.GetBotVersionsResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ComparisonOperatorEnum(str, Enum):
     GREATER_THAN_OR_EQUAL = "GREATER_THAN_OR_EQUAL"

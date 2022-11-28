@@ -13,17 +13,9 @@ type GetProductHeaders struct {
 	IfNoneMatch *string `header:"style=simple,explode=false,name=If-None-Match"`
 }
 
-type GetProductSecurityOption1 struct {
-	ZettleAPIKey shared.SchemeZettleAPIKey `security:"scheme,type=apiKey,subtype=header"`
-}
-
-type GetProductSecurityOption2 struct {
-	ZettleOauth shared.SchemeZettleOauth `security:"scheme,type=oauth2"`
-}
-
 type GetProductSecurity struct {
-	Option1 *GetProductSecurityOption1 `security:"option"`
-	Option2 *GetProductSecurityOption2 `security:"option"`
+	ZettleAPIKey *shared.SchemeZettleAPIKey `security:"scheme,type=apiKey,subtype=header"`
+	ZettleOauth  *shared.SchemeZettleOauth  `security:"scheme,type=oauth2"`
 }
 
 type GetProductRequest struct {

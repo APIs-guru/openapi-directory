@@ -1,6 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { User } from "./user";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // User
@@ -8,24 +7,24 @@ import { User } from "./user";
  * Container Class for the Web API
 **/
 export class User extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ChildUsers", elemType: shared.User })
+  @SpeakeasyMetadata({ data: "json, name=ChildUsers", elemType: User })
   childUsers?: User[];
 
-  @Metadata({ data: "json, name=Email" })
+  @SpeakeasyMetadata({ data: "json, name=Email" })
   email?: string;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: number;
 
-  @Metadata({ data: "json, name=IdAsString" })
+  @SpeakeasyMetadata({ data: "json, name=IdAsString" })
   idAsString?: string;
 
-  @Metadata({ data: "json, name=IsAdmin" })
+  @SpeakeasyMetadata({ data: "json, name=IsAdmin" })
   isAdmin?: boolean;
 
-  @Metadata({ data: "json, name=Permissions" })
+  @SpeakeasyMetadata({ data: "json, name=Permissions" })
   permissions?: string[];
 
-  @Metadata({ data: "json, name=Username" })
+  @SpeakeasyMetadata({ data: "json, name=Username" })
   username?: string;
 }

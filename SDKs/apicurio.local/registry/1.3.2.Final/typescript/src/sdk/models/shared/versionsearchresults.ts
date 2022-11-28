@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SearchedVersion } from "./searchedversion";
+
 
 
 // VersionSearchResults
@@ -8,9 +8,9 @@ import { SearchedVersion } from "./searchedversion";
  * Describes the response received when searching for artifacts.
 **/
 export class VersionSearchResults extends SpeakeasyBase {
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count: number;
 
-  @Metadata({ data: "json, name=versions", elemType: shared.SearchedVersion })
+  @SpeakeasyMetadata({ data: "json, name=versions", elemType: SearchedVersion })
   versions: SearchedVersion[];
 }

@@ -1,6 +1,7 @@
 
 
+
 export enum ProductStatusEnum {
-    Active = "active"
-,    Inactive = "inactive"
+    Active = "active",
+    Inactive = "inactive"
 }

@@ -9,6 +9,8 @@ const (
 	PolicyControllerHubConfigInstallSpecEnumInstallSpecSuspended    PolicyControllerHubConfigInstallSpecEnum = "INSTALL_SPEC_SUSPENDED"
 )
 
+// PolicyControllerHubConfig
+// Configuration for Policy Controller
 type PolicyControllerHubConfig struct {
 	AuditIntervalSeconds    *string                                   `json:"auditIntervalSeconds,omitempty"`
 	ExemptableNamespaces    []string                                  `json:"exemptableNamespaces,omitempty"`

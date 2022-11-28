@@ -1,0 +1,12 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import { OrderShipmentLineItemShipment } from "./ordershipmentlineitemshipment";
+import { OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo } from "./orderscustombatchrequestentryshiplineitemsshipmentinfo";
+export declare class OrdersShipLineItemsRequest extends SpeakeasyBase {
+    carrier?: string;
+    lineItems?: OrderShipmentLineItemShipment[];
+    operationId?: string;
+    shipmentGroupId?: string;
+    shipmentId?: string;
+    shipmentInfos?: OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo[];
+    trackingId?: string;
+}

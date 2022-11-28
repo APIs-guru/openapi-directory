@@ -1,39 +1,40 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PlanningLevelHyperparameterResponse } from "./planninglevelhyperparameterresponse";
 
+
 export enum PlanningLevelInfoResponseStatusEnum {
-    Unproccessed = "Unproccessed"
-,    Running = "Running"
-,    Complete = "Complete"
-,    Failed = "Failed"
+    Unproccessed = "Unproccessed",
+    Running = "Running",
+    Complete = "Complete",
+    Failed = "Failed"
 }
 
 
 export class PlanningLevelInfoResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action?: string;
 
-  @Metadata({ data: "json, name=dateCreated" })
+  @SpeakeasyMetadata({ data: "json, name=dateCreated" })
   dateCreated?: Date;
 
-  @Metadata({ data: "json, name=externalId" })
+  @SpeakeasyMetadata({ data: "json, name=externalId" })
   externalId?: string;
 
-  @Metadata({ data: "json, name=filename" })
+  @SpeakeasyMetadata({ data: "json, name=filename" })
   filename?: string;
 
-  @Metadata({ data: "json, name=hyperparameters" })
+  @SpeakeasyMetadata({ data: "json, name=hyperparameters" })
   hyperparameters?: PlanningLevelHyperparameterResponse;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=method" })
+  @SpeakeasyMetadata({ data: "json, name=method" })
   method?: string;
 
-  @Metadata({ data: "json, name=noTimeseries" })
+  @SpeakeasyMetadata({ data: "json, name=noTimeseries" })
   noTimeseries?: number;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: PlanningLevelInfoResponseStatusEnum;
 }

@@ -9,16 +9,6 @@ const (
 	NodeAPIVersionEnumV2Alpha1              NodeAPIVersionEnum = "V2_ALPHA1"
 )
 
-type NodeHealthEnum string
-
-const (
-	NodeHealthEnumHealthUnspecified    NodeHealthEnum = "HEALTH_UNSPECIFIED"
-	NodeHealthEnumHealthy              NodeHealthEnum = "HEALTHY"
-	NodeHealthEnumTimeout              NodeHealthEnum = "TIMEOUT"
-	NodeHealthEnumUnhealthyTensorflow  NodeHealthEnum = "UNHEALTHY_TENSORFLOW"
-	NodeHealthEnumUnhealthyMaintenance NodeHealthEnum = "UNHEALTHY_MAINTENANCE"
-)
-
 type NodeStateEnum string
 
 const (
@@ -39,6 +29,18 @@ const (
 	NodeStateEnumUnhiding         NodeStateEnum = "UNHIDING"
 )
 
+type NodeHealthEnum string
+
+const (
+	NodeHealthEnumHealthUnspecified    NodeHealthEnum = "HEALTH_UNSPECIFIED"
+	NodeHealthEnumHealthy              NodeHealthEnum = "HEALTHY"
+	NodeHealthEnumTimeout              NodeHealthEnum = "TIMEOUT"
+	NodeHealthEnumUnhealthyTensorflow  NodeHealthEnum = "UNHEALTHY_TENSORFLOW"
+	NodeHealthEnumUnhealthyMaintenance NodeHealthEnum = "UNHEALTHY_MAINTENANCE"
+)
+
+// Node
+// A TPU instance.
 type Node struct {
 	AcceleratorType        *string                 `json:"acceleratorType,omitempty"`
 	APIVersion             *NodeAPIVersionEnum     `json:"apiVersion,omitempty"`
@@ -54,11 +56,30 @@ type Node struct {
 	Name                   *string                 `json:"name,omitempty"`
 	NetworkConfig          *NetworkConfig          `json:"networkConfig,omitempty"`
 	NetworkEndpoints       []NetworkEndpoint       `json:"networkEndpoints,omitempty"`
+	QueuedResource         *string                 `json:"queuedResource,omitempty"`
 	RuntimeVersion         *string                 `json:"runtimeVersion,omitempty"`
 	SchedulingConfig       *SchedulingConfig       `json:"schedulingConfig,omitempty"`
 	ServiceAccount         *ServiceAccount         `json:"serviceAccount,omitempty"`
 	ShieldedInstanceConfig *ShieldedInstanceConfig `json:"shieldedInstanceConfig,omitempty"`
 	State                  *NodeStateEnum          `json:"state,omitempty"`
 	Symptoms               []Symptom               `json:"symptoms,omitempty"`
+	Tags                   []string                `json:"tags,omitempty"`
+}
+
+// NodeInput
+// A TPU instance.
+type NodeInput struct {
+	AcceleratorType        *string                 `json:"acceleratorType,omitempty"`
+	CidrBlock              *string                 `json:"cidrBlock,omitempty"`
+	DataDisks              []AttachedDisk          `json:"dataDisks,omitempty"`
+	Description            *string                 `json:"description,omitempty"`
+	Health                 *NodeHealthEnum         `json:"health,omitempty"`
+	Labels                 map[string]string       `json:"labels,omitempty"`
+	Metadata               map[string]string       `json:"metadata,omitempty"`
+	NetworkConfig          *NetworkConfig          `json:"networkConfig,omitempty"`
+	RuntimeVersion         *string                 `json:"runtimeVersion,omitempty"`
+	SchedulingConfig       *SchedulingConfig       `json:"schedulingConfig,omitempty"`
+	ServiceAccount         *ServiceAccount         `json:"serviceAccount,omitempty"`
+	ShieldedInstanceConfig *ShieldedInstanceConfig `json:"shieldedInstanceConfig,omitempty"`
 	Tags                   []string                `json:"tags,omitempty"`
 }

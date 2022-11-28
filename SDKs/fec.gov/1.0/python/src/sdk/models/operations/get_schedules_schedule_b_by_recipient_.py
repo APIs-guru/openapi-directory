@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetSchedulesScheduleBByRecipientQueryParams:
-    api_key: str = field(default=None, metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
+    api_key: str = field(metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
     committee_id: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'committee_id', 'style': 'form', 'explode': True }})
     cycle: Optional[List[int]] = field(default=None, metadata={'query_param': { 'field_name': 'cycle', 'style': 'form', 'explode': True }})
     page: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'page', 'style': 'form', 'explode': True }})
@@ -19,12 +19,12 @@ class GetSchedulesScheduleBByRecipientQueryParams:
 
 @dataclass
 class GetSchedulesScheduleBByRecipientRequest:
-    query_params: GetSchedulesScheduleBByRecipientQueryParams = field(default=None)
+    query_params: GetSchedulesScheduleBByRecipientQueryParams = field()
     
 
 @dataclass
 class GetSchedulesScheduleBByRecipientResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     schedule_b_by_recipient_page: Optional[shared.ScheduleBByRecipientPage] = field(default=None)
-    status_code: int = field(default=None)
     

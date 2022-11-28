@@ -1,5 +1,7 @@
 package shared
 
+// Cluster
+// The detailed description of the cluster.
 type Cluster struct {
 	Applications            []Application               `json:"Applications,omitempty"`
 	AutoScalingRole         *string                     `json:"AutoScalingRole,omitempty"`

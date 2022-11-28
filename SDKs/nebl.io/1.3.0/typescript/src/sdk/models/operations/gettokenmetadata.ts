@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetTokenMetadataPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=tokenid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=tokenid" })
   tokenid: string;
 }
 
 
 export class GetTokenMetadataQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=verbosity" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=verbosity" })
   verbosity?: number;
 }
 
 
 export class GetTokenMetadataRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetTokenMetadataPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetTokenMetadataQueryParams;
 }
 
 
 export class GetTokenMetadataResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getTokenMetadataResponse?: shared.GetTokenMetadataResponse;
 }

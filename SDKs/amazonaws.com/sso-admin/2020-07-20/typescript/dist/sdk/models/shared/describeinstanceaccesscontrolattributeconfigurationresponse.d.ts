@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { InstanceAccessControlAttributeConfiguration } from "./instanceaccesscontrolattributeconfiguration";
 import { InstanceAccessControlAttributeConfigurationStatusEnum } from "./instanceaccesscontrolattributeconfigurationstatusenum";
 export declare class DescribeInstanceAccessControlAttributeConfigurationResponse extends SpeakeasyBase {

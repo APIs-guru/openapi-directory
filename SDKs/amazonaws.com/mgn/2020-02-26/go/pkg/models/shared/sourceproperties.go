@@ -1,5 +1,7 @@
 package shared
 
+// SourceProperties
+// Source server properties.
 type SourceProperties struct {
 	Cpus                    []CPU                `json:"cpus,omitempty"`
 	Disks                   []Disk               `json:"disks,omitempty"`

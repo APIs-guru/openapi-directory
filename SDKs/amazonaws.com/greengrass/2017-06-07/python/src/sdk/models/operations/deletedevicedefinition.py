@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteDeviceDefinitionPathParams:
-    device_definition_id: str = field(default=None, metadata={'path_param': { 'field_name': 'DeviceDefinitionId', 'style': 'simple', 'explode': False }})
+    device_definition_id: str = field(metadata={'path_param': { 'field_name': 'DeviceDefinitionId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,14 +23,14 @@ class DeleteDeviceDefinitionHeaders:
 
 @dataclass
 class DeleteDeviceDefinitionRequest:
-    path_params: DeleteDeviceDefinitionPathParams = field(default=None)
-    headers: DeleteDeviceDefinitionHeaders = field(default=None)
+    headers: DeleteDeviceDefinitionHeaders = field()
+    path_params: DeleteDeviceDefinitionPathParams = field()
     
 
 @dataclass
 class DeleteDeviceDefinitionResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     delete_device_definition_response: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

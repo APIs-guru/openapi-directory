@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class RedactTransactionProductEnum(str, Enum):
     SMS = "sms"
@@ -18,7 +19,7 @@ class RedactTransactionTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class RedactTransaction:
-    id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    product: RedactTransactionProductEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'product' }})
-    type: RedactTransactionTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    product: RedactTransactionProductEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('product') }})
+    type: RedactTransactionTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

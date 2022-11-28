@@ -53,6 +53,8 @@ const (
 	IndexStatusInspectionResultVerdictEnumNeutral            IndexStatusInspectionResultVerdictEnum = "NEUTRAL"
 )
 
+// IndexStatusInspectionResult
+// Results of index status inspection for either the live page or the version in Google's index, depending on whether you requested a live inspection or not. For more information, see the [Index coverage report documentation](https://support.google.com/webmasters/answer/7440203).
 type IndexStatusInspectionResult struct {
 	CoverageState   *string                                        `json:"coverageState,omitempty"`
 	CrawledAs       *IndexStatusInspectionResultCrawledAsEnum      `json:"crawledAs,omitempty"`

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NetworkAddress } from "./networkaddress";
-import { NetworkAddress } from "./networkaddress";
+
 
 
 // InstanceConfig
@@ -8,27 +8,27 @@ import { NetworkAddress } from "./networkaddress";
  * Configuration parameters for a new instance.
 **/
 export class InstanceConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clientNetwork" })
+  @SpeakeasyMetadata({ data: "json, name=clientNetwork" })
   clientNetwork?: NetworkAddress;
 
-  @Metadata({ data: "json, name=hyperthreading" })
+  @SpeakeasyMetadata({ data: "json, name=hyperthreading" })
   hyperthreading?: boolean;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=instanceType" })
+  @SpeakeasyMetadata({ data: "json, name=instanceType" })
   instanceType?: string;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: string;
 
-  @Metadata({ data: "json, name=osImage" })
+  @SpeakeasyMetadata({ data: "json, name=osImage" })
   osImage?: string;
 
-  @Metadata({ data: "json, name=privateNetwork" })
+  @SpeakeasyMetadata({ data: "json, name=privateNetwork" })
   privateNetwork?: NetworkAddress;
 
-  @Metadata({ data: "json, name=userNote" })
+  @SpeakeasyMetadata({ data: "json, name=userNote" })
   userNote?: string;
 }

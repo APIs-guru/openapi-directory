@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DestinationDefinitionIdRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=destinationDefinitionId" })
+  @SpeakeasyMetadata({ data: "json, name=destinationDefinitionId" })
   destinationDefinitionId: string;
 }

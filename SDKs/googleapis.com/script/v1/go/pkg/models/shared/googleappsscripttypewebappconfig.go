@@ -18,6 +18,8 @@ const (
 	GoogleAppsScriptTypeWebAppConfigExecuteAsEnumUserDeploying    GoogleAppsScriptTypeWebAppConfigExecuteAsEnum = "USER_DEPLOYING"
 )
 
+// GoogleAppsScriptTypeWebAppConfig
+// Web app entry point configuration.
 type GoogleAppsScriptTypeWebAppConfig struct {
 	Access    *GoogleAppsScriptTypeWebAppConfigAccessEnum    `json:"access,omitempty"`
 	ExecuteAs *GoogleAppsScriptTypeWebAppConfigExecuteAsEnum `json:"executeAs,omitempty"`

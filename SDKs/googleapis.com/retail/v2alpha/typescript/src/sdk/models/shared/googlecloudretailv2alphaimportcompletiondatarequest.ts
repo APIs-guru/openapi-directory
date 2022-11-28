@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudRetailV2alphaCompletionDataInputConfig } from "./googlecloudretailv2alphacompletiondatainputconfig";
+
 
 
 // GoogleCloudRetailV2alphaImportCompletionDataRequest
@@ -7,9 +8,9 @@ import { GoogleCloudRetailV2alphaCompletionDataInputConfig } from "./googlecloud
  * Request message for ImportCompletionData methods.
 **/
 export class GoogleCloudRetailV2alphaImportCompletionDataRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=inputConfig" })
+  @SpeakeasyMetadata({ data: "json, name=inputConfig" })
   inputConfig?: GoogleCloudRetailV2alphaCompletionDataInputConfig;
 
-  @Metadata({ data: "json, name=notificationPubsubTopic" })
+  @SpeakeasyMetadata({ data: "json, name=notificationPubsubTopic" })
   notificationPubsubTopic?: string;
 }

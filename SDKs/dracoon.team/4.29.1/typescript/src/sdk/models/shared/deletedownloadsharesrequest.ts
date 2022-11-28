@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DeleteDownloadSharesRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request model for deleting Download Shares
 **/
 export class DeleteDownloadSharesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=shareIds" })
+  @SpeakeasyMetadata({ data: "json, name=shareIds" })
   shareIds: number[];
 }

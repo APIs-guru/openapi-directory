@@ -1,64 +1,65 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CertificateGetPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=thumbprint" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=thumbprint" })
   thumbprint: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=thumbprintAlgorithm" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=thumbprintAlgorithm" })
   thumbprintAlgorithm: string;
 }
 
 
 export class CertificateGetQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=$select" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$select" })
   dollarSelect?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=api-version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api-version" })
   apiVersion: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=timeout" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timeout" })
   timeout?: number;
 }
 
 
 export class CertificateGetHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=client-request-id" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=client-request-id" })
   clientRequestId?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=ocp-date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=ocp-date" })
   ocpDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=return-client-request-id" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=return-client-request-id" })
   returnClientRequestId?: boolean;
 }
 
 
 export class CertificateGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CertificateGetPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: CertificateGetQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CertificateGetHeaders;
 }
 
 
 export class CertificateGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   batchError?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   certificate?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

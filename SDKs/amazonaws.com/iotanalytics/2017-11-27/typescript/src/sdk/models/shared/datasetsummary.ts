@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DatasetActionSummary } from "./datasetactionsummary";
 import { DatasetStatusEnum } from "./datasetstatusenum";
 import { DatasetTrigger } from "./datasettrigger";
+
 
 
 // DatasetSummary
@@ -10,21 +10,21 @@ import { DatasetTrigger } from "./datasettrigger";
  * A summary of information about a dataset.
 **/
 export class DatasetSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actions", elemType: shared.DatasetActionSummary })
+  @SpeakeasyMetadata({ data: "json, name=actions", elemType: DatasetActionSummary })
   actions?: DatasetActionSummary[];
 
-  @Metadata({ data: "json, name=creationTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=datasetName" })
+  @SpeakeasyMetadata({ data: "json, name=datasetName" })
   datasetName?: string;
 
-  @Metadata({ data: "json, name=lastUpdateTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdateTime" })
   lastUpdateTime?: Date;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: DatasetStatusEnum;
 
-  @Metadata({ data: "json, name=triggers", elemType: shared.DatasetTrigger })
+  @SpeakeasyMetadata({ data: "json, name=triggers", elemType: DatasetTrigger })
   triggers?: DatasetTrigger[];
 }

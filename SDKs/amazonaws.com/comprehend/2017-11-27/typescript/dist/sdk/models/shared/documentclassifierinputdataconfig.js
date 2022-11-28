@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { AugmentedManifestsListItem } from "./augmentedmanifestslistitem";
 import { DocumentClassifierDataFormatEnum } from "./documentclassifierdataformatenum";
 // DocumentClassifierInputDataConfig
 /**
@@ -35,19 +35,19 @@ var DocumentClassifierInputDataConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AugmentedManifests", elemType: shared.AugmentedManifestsListItem }),
+        SpeakeasyMetadata({ data: "json, name=AugmentedManifests", elemType: AugmentedManifestsListItem }),
         __metadata("design:type", Array)
     ], DocumentClassifierInputDataConfig.prototype, "augmentedManifests", void 0);
     __decorate([
-        Metadata({ data: "json, name=DataFormat" }),
+        SpeakeasyMetadata({ data: "json, name=DataFormat" }),
         __metadata("design:type", String)
     ], DocumentClassifierInputDataConfig.prototype, "dataFormat", void 0);
     __decorate([
-        Metadata({ data: "json, name=LabelDelimiter" }),
+        SpeakeasyMetadata({ data: "json, name=LabelDelimiter" }),
         __metadata("design:type", String)
     ], DocumentClassifierInputDataConfig.prototype, "labelDelimiter", void 0);
     __decorate([
-        Metadata({ data: "json, name=S3Uri" }),
+        SpeakeasyMetadata({ data: "json, name=S3Uri" }),
         __metadata("design:type", String)
     ], DocumentClassifierInputDataConfig.prototype, "s3Uri", void 0);
     return DocumentClassifierInputDataConfig;

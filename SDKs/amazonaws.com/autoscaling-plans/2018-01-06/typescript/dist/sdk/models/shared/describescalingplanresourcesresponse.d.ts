@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ScalingPlanResource } from "./scalingplanresource";
 export declare class DescribeScalingPlanResourcesResponse extends SpeakeasyBase {
     nextToken?: string;

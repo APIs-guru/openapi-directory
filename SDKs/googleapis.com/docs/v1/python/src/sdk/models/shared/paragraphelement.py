@@ -1,31 +1,48 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import autotext
-from . import columnbreak
-from . import equation
-from . import footnotereference
-from . import horizontalrule
-from . import inlineobjectelement
-from . import pagebreak
-from . import person
-from . import richlink
-from . import textrun
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
+class ParagraphElementInput:
+    r"""ParagraphElementInput
+    A ParagraphElement describes content within a Paragraph.
+    """
+    
+    auto_text: Optional[AutoText] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('autoText') }})
+    column_break: Optional[ColumnBreak] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('columnBreak') }})
+    end_index: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('endIndex') }})
+    equation: Optional[Equation] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('equation') }})
+    footnote_reference: Optional[FootnoteReference] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('footnoteReference') }})
+    horizontal_rule: Optional[HorizontalRule] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('horizontalRule') }})
+    inline_object_element: Optional[InlineObjectElement] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('inlineObjectElement') }})
+    page_break: Optional[PageBreak] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pageBreak') }})
+    person: Optional[PersonInput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('person') }})
+    rich_link: Optional[RichLinkInput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('richLink') }})
+    start_index: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('startIndex') }})
+    text_run: Optional[TextRun] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('textRun') }})
+    
+
+@dataclass_json
+@dataclass
 class ParagraphElement:
-    auto_text: Optional[autotext.AutoText] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'autoText' }})
-    column_break: Optional[columnbreak.ColumnBreak] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'columnBreak' }})
-    end_index: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'endIndex' }})
-    equation: Optional[equation.Equation] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'equation' }})
-    footnote_reference: Optional[footnotereference.FootnoteReference] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'footnoteReference' }})
-    horizontal_rule: Optional[horizontalrule.HorizontalRule] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'horizontalRule' }})
-    inline_object_element: Optional[inlineobjectelement.InlineObjectElement] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'inlineObjectElement' }})
-    page_break: Optional[pagebreak.PageBreak] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pageBreak' }})
-    person: Optional[person.Person] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'person' }})
-    rich_link: Optional[richlink.RichLink] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'richLink' }})
-    start_index: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'startIndex' }})
-    text_run: Optional[textrun.TextRun] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'textRun' }})
+    r"""ParagraphElement
+    A ParagraphElement describes content within a Paragraph.
+    """
+    
+    auto_text: Optional[AutoText] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('autoText') }})
+    column_break: Optional[ColumnBreak] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('columnBreak') }})
+    end_index: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('endIndex') }})
+    equation: Optional[Equation] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('equation') }})
+    footnote_reference: Optional[FootnoteReference] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('footnoteReference') }})
+    horizontal_rule: Optional[HorizontalRule] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('horizontalRule') }})
+    inline_object_element: Optional[InlineObjectElement] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('inlineObjectElement') }})
+    page_break: Optional[PageBreak] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pageBreak') }})
+    person: Optional[Person] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('person') }})
+    rich_link: Optional[RichLink] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('richLink') }})
+    start_index: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('startIndex') }})
+    text_run: Optional[TextRun] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('textRun') }})
     

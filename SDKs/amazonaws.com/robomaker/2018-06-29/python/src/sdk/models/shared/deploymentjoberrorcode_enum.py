@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class DeploymentJobErrorCodeEnum(str, Enum):
     RESOURCE_NOT_FOUND = "ResourceNotFound"

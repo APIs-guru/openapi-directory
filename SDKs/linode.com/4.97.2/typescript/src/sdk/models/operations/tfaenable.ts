@@ -1,50 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
-export class TfaEnableSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class TfaEnableSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
 
 export class TfaEnableSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: TfaEnableSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: TfaEnableSecurityOption2;
-}
-
-
-export class TfaEnableRequest extends SpeakeasyBase {
-  @Metadata()
-  security: TfaEnableSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class TfaEnableDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class TfaEnableRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  security: TfaEnableSecurity;
+}
+
+
 export class TfaEnableResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tfaEnable200ApplicationJsonAny?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tfaEnableDefaultApplicationJsonObject?: TfaEnableDefaultApplicationJson;
 }

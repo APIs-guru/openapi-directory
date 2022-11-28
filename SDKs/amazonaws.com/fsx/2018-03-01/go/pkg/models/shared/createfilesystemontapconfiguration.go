@@ -1,5 +1,7 @@
 package shared
 
+// CreateFileSystemOntapConfiguration
+// The ONTAP configuration properties of the FSx for NetApp ONTAP file system that you are creating.
 type CreateFileSystemOntapConfiguration struct {
 	AutomaticBackupRetentionDays  *int64                  `json:"AutomaticBackupRetentionDays,omitempty"`
 	DailyAutomaticBackupStartTime *string                 `json:"DailyAutomaticBackupStartTime,omitempty"`

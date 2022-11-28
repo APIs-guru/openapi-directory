@@ -14,6 +14,8 @@ const (
 	HookStatusEnumDisabled HookStatusEnum = "disabled"
 )
 
+// Hook
+// Represents a hook configuration
 type Hook struct {
 	Actions        []string           `json:"actions,omitempty"`
 	EventType      *HookEventTypeEnum `json:"event_type,omitempty"`

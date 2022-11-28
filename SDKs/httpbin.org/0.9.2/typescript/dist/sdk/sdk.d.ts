@@ -1,0 +1,37 @@
+import { AxiosInstance } from "axios";
+import { Anything } from "./anything";
+import { Auth } from "./auth";
+import { Cookies } from "./cookies";
+import { DynamicData } from "./dynamicdata";
+import { HttpMethods } from "./httpmethods";
+import { Images } from "./images";
+import { Redirects } from "./redirects";
+import { RequestInspection } from "./requestinspection";
+import { ResponseFormats } from "./responseformats";
+import { ResponseInspection } from "./responseinspection";
+import { StatusCodes } from "./statuscodes";
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://httpbin.org"];
+export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
+export declare function WithClient(client: AxiosInstance): OptsFunc;
+export declare class SDK {
+    anything: Anything;
+    auth: Auth;
+    cookies: Cookies;
+    dynamicData: DynamicData;
+    httpMethods: HttpMethods;
+    images: Images;
+    redirects: Redirects;
+    requestInspection: RequestInspection;
+    responseFormats: ResponseFormats;
+    responseInspection: ResponseInspection;
+    statusCodes: StatusCodes;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
+    constructor(...opts: OptsFunc[]);
+}
+export {};

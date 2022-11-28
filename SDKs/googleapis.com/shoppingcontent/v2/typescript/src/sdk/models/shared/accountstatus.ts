@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccountStatusAccountLevelIssue } from "./accountstatusaccountlevelissue";
 import { AccountStatusDataQualityIssue } from "./accountstatusdataqualityissue";
 import { AccountStatusProducts } from "./accountstatusproducts";
+
 
 
 // AccountStatus
@@ -10,21 +10,21 @@ import { AccountStatusProducts } from "./accountstatusproducts";
  * The status of an account, i.e., information about its products, which is computed offline and not returned immediately at insertion time.
 **/
 export class AccountStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=accountLevelIssues", elemType: shared.AccountStatusAccountLevelIssue })
+  @SpeakeasyMetadata({ data: "json, name=accountLevelIssues", elemType: AccountStatusAccountLevelIssue })
   accountLevelIssues?: AccountStatusAccountLevelIssue[];
 
-  @Metadata({ data: "json, name=dataQualityIssues", elemType: shared.AccountStatusDataQualityIssue })
+  @SpeakeasyMetadata({ data: "json, name=dataQualityIssues", elemType: AccountStatusDataQualityIssue })
   dataQualityIssues?: AccountStatusDataQualityIssue[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=products", elemType: shared.AccountStatusProducts })
+  @SpeakeasyMetadata({ data: "json, name=products", elemType: AccountStatusProducts })
   products?: AccountStatusProducts[];
 
-  @Metadata({ data: "json, name=websiteClaimed" })
+  @SpeakeasyMetadata({ data: "json, name=websiteClaimed" })
   websiteClaimed?: boolean;
 }

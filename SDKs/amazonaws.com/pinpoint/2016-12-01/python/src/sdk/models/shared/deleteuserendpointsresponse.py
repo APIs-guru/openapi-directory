@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import endpointsresponse
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DeleteUserEndpointsResponse:
-    endpoints_response: endpointsresponse.EndpointsResponse = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EndpointsResponse' }})
+    endpoints_response: EndpointsResponse = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('EndpointsResponse') }})
     

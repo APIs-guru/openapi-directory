@@ -1,6 +1,7 @@
 
 
+
 export enum DistanceUnitEnum {
-    Kilometers = "Kilometers"
-,    Miles = "Miles"
+    Kilometers = "Kilometers",
+    Miles = "Miles"
 }

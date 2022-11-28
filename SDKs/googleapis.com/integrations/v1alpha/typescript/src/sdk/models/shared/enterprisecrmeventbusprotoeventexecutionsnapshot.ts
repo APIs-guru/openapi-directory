@@ -1,10 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EnterpriseCrmEventbusProtoConditionResult } from "./enterprisecrmeventbusprotoconditionresult";
 import { EnterpriseCrmEventbusProtoEventParameters } from "./enterprisecrmeventbusprotoeventparameters";
 import { EnterpriseCrmEventbusProtoEventExecutionSnapshotEventExecutionSnapshotMetadata } from "./enterprisecrmeventbusprotoeventexecutionsnapshoteventexecutionsnapshotmetadata";
-import { EnterpriseCrmEventbusProtoEventParameters } from "./enterprisecrmeventbusprotoeventparameters";
 import { EnterpriseCrmEventbusProtoTaskExecutionDetails } from "./enterprisecrmeventbusprototaskexecutiondetails";
+
 
 
 // EnterpriseCrmEventbusProtoEventExecutionSnapshot
@@ -12,36 +11,36 @@ import { EnterpriseCrmEventbusProtoTaskExecutionDetails } from "./enterprisecrme
  * Contains the snapshot of the event execution for a given checkpoint. Next available id: 13
 **/
 export class EnterpriseCrmEventbusProtoEventExecutionSnapshot extends SpeakeasyBase {
-  @Metadata({ data: "json, name=checkpointTaskNumber" })
+  @SpeakeasyMetadata({ data: "json, name=checkpointTaskNumber" })
   checkpointTaskNumber?: string;
 
-  @Metadata({ data: "json, name=conditionResults", elemType: shared.EnterpriseCrmEventbusProtoConditionResult })
+  @SpeakeasyMetadata({ data: "json, name=conditionResults", elemType: EnterpriseCrmEventbusProtoConditionResult })
   conditionResults?: EnterpriseCrmEventbusProtoConditionResult[];
 
-  @Metadata({ data: "json, name=diffParams" })
+  @SpeakeasyMetadata({ data: "json, name=diffParams" })
   diffParams?: EnterpriseCrmEventbusProtoEventParameters;
 
-  @Metadata({ data: "json, name=eventExecutionInfoId" })
+  @SpeakeasyMetadata({ data: "json, name=eventExecutionInfoId" })
   eventExecutionInfoId?: string;
 
-  @Metadata({ data: "json, name=eventExecutionSnapshotId" })
+  @SpeakeasyMetadata({ data: "json, name=eventExecutionSnapshotId" })
   eventExecutionSnapshotId?: string;
 
-  @Metadata({ data: "json, name=eventExecutionSnapshotMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=eventExecutionSnapshotMetadata" })
   eventExecutionSnapshotMetadata?: EnterpriseCrmEventbusProtoEventExecutionSnapshotEventExecutionSnapshotMetadata;
 
-  @Metadata({ data: "json, name=eventParams" })
+  @SpeakeasyMetadata({ data: "json, name=eventParams" })
   eventParams?: EnterpriseCrmEventbusProtoEventParameters;
 
-  @Metadata({ data: "json, name=exceedMaxSize" })
+  @SpeakeasyMetadata({ data: "json, name=exceedMaxSize" })
   exceedMaxSize?: boolean;
 
-  @Metadata({ data: "json, name=snapshotTime" })
+  @SpeakeasyMetadata({ data: "json, name=snapshotTime" })
   snapshotTime?: string;
 
-  @Metadata({ data: "json, name=taskExecutionDetails", elemType: shared.EnterpriseCrmEventbusProtoTaskExecutionDetails })
+  @SpeakeasyMetadata({ data: "json, name=taskExecutionDetails", elemType: EnterpriseCrmEventbusProtoTaskExecutionDetails })
   taskExecutionDetails?: EnterpriseCrmEventbusProtoTaskExecutionDetails[];
 
-  @Metadata({ data: "json, name=taskName" })
+  @SpeakeasyMetadata({ data: "json, name=taskName" })
   taskName?: string;
 }

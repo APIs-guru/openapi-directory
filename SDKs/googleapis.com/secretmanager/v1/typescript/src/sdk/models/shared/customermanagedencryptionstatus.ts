@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CustomerManagedEncryptionStatus
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes the status of customer-managed encryption.
 **/
 export class CustomerManagedEncryptionStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=kmsKeyVersionName" })
+  @SpeakeasyMetadata({ data: "json, name=kmsKeyVersionName" })
   kmsKeyVersionName?: string;
 }

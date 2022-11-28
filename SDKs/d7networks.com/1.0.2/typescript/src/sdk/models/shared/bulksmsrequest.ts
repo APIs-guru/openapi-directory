@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Message } from "./message";
+
 
 
 // BulkSmsRequest
@@ -8,6 +8,6 @@ import { Message } from "./message";
  * Bulk SMS Request
 **/
 export class BulkSmsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=messages", elemType: shared.Message })
+  @SpeakeasyMetadata({ data: "json, name=messages", elemType: Message })
   messages: Message[];
 }

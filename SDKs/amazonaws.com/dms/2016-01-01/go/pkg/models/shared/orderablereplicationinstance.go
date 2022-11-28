@@ -1,5 +1,7 @@
 package shared
 
+// OrderableReplicationInstance
+// In response to the <code>DescribeOrderableReplicationInstances</code> operation, this object describes an available replication instance. This description includes the replication instance's type, engine version, and allocated storage.
 type OrderableReplicationInstance struct {
 	AvailabilityZones        []string                 `json:"AvailabilityZones,omitempty"`
 	DefaultAllocatedStorage  *int64                   `json:"DefaultAllocatedStorage,omitempty"`

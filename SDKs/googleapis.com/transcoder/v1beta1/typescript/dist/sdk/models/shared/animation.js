@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AnimationEnd } from "./animationend";
 import { AnimationFade } from "./animationfade";
 import { AnimationStatic } from "./animationstatic";
@@ -36,15 +36,15 @@ var Animation = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=animationEnd" }),
+        SpeakeasyMetadata({ data: "json, name=animationEnd" }),
         __metadata("design:type", AnimationEnd)
     ], Animation.prototype, "animationEnd", void 0);
     __decorate([
-        Metadata({ data: "json, name=animationFade" }),
+        SpeakeasyMetadata({ data: "json, name=animationFade" }),
         __metadata("design:type", AnimationFade)
     ], Animation.prototype, "animationFade", void 0);
     __decorate([
-        Metadata({ data: "json, name=animationStatic" }),
+        SpeakeasyMetadata({ data: "json, name=animationStatic" }),
         __metadata("design:type", AnimationStatic)
     ], Animation.prototype, "animationStatic", void 0);
     return Animation;

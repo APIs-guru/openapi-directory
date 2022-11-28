@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Change } from "./change";
+
 
 
 // ChangeList
@@ -8,27 +8,27 @@ import { Change } from "./change";
  * A list of changes for a user.
 **/
 export class ChangeList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=items", elemType: shared.Change })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: Change })
   items?: Change[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=largestChangeId" })
+  @SpeakeasyMetadata({ data: "json, name=largestChangeId" })
   largestChangeId?: string;
 
-  @Metadata({ data: "json, name=newStartPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=newStartPageToken" })
   newStartPageToken?: string;
 
-  @Metadata({ data: "json, name=nextLink" })
+  @SpeakeasyMetadata({ data: "json, name=nextLink" })
   nextLink?: string;
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=selfLink" })
+  @SpeakeasyMetadata({ data: "json, name=selfLink" })
   selfLink?: string;
 }

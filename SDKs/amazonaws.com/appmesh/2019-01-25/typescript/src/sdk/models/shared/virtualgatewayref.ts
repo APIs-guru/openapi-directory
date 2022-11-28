@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // VirtualGatewayRef
@@ -6,27 +7,27 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An object that represents a virtual gateway returned by a list operation.
 **/
 export class VirtualGatewayRef extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn: string;
 
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt: Date;
 
-  @Metadata({ data: "json, name=lastUpdatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdatedAt" })
   lastUpdatedAt: Date;
 
-  @Metadata({ data: "json, name=meshName" })
+  @SpeakeasyMetadata({ data: "json, name=meshName" })
   meshName: string;
 
-  @Metadata({ data: "json, name=meshOwner" })
+  @SpeakeasyMetadata({ data: "json, name=meshOwner" })
   meshOwner: string;
 
-  @Metadata({ data: "json, name=resourceOwner" })
+  @SpeakeasyMetadata({ data: "json, name=resourceOwner" })
   resourceOwner: string;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version: number;
 
-  @Metadata({ data: "json, name=virtualGatewayName" })
+  @SpeakeasyMetadata({ data: "json, name=virtualGatewayName" })
   virtualGatewayName: string;
 }

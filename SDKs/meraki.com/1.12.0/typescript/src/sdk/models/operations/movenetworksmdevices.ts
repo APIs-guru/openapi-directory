@@ -1,46 +1,47 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class MoveNetworkSmDevicesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
 
 export class MoveNetworkSmDevicesRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ids" })
+  @SpeakeasyMetadata({ data: "json, name=ids" })
   ids?: string[];
 
-  @Metadata({ data: "json, name=newNetwork" })
+  @SpeakeasyMetadata({ data: "json, name=newNetwork" })
   newNetwork: string;
 
-  @Metadata({ data: "json, name=scope" })
+  @SpeakeasyMetadata({ data: "json, name=scope" })
   scope?: string[];
 
-  @Metadata({ data: "json, name=serials" })
+  @SpeakeasyMetadata({ data: "json, name=serials" })
   serials?: string[];
 
-  @Metadata({ data: "json, name=wifiMacs" })
+  @SpeakeasyMetadata({ data: "json, name=wifiMacs" })
   wifiMacs?: string[];
 }
 
 
 export class MoveNetworkSmDevicesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: MoveNetworkSmDevicesPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: MoveNetworkSmDevicesRequestBody;
 }
 
 
 export class MoveNetworkSmDevicesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   moveNetworkSmDevices200ApplicationJsonObject?: Map<string, any>;
 }

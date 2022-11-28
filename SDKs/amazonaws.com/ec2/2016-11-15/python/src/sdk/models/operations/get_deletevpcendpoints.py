@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetDeleteVpcEndpointsActionEnum(str, Enum):
     DELETE_VPC_ENDPOINTS = "DeleteVpcEndpoints"
@@ -10,10 +14,10 @@ class GetDeleteVpcEndpointsVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteVpcEndpointsQueryParams:
-    action: GetDeleteVpcEndpointsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDeleteVpcEndpointsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDeleteVpcEndpointsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    vpc_endpoint_id: List[str] = field(metadata={'query_param': { 'field_name': 'VpcEndpointId', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    version: GetDeleteVpcEndpointsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
-    vpc_endpoint_id: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'VpcEndpointId', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetDeleteVpcEndpointsHeaders:
 
 @dataclass
 class GetDeleteVpcEndpointsRequest:
-    query_params: GetDeleteVpcEndpointsQueryParams = field(default=None)
-    headers: GetDeleteVpcEndpointsHeaders = field(default=None)
+    headers: GetDeleteVpcEndpointsHeaders = field()
+    query_params: GetDeleteVpcEndpointsQueryParams = field()
     
 
 @dataclass
 class GetDeleteVpcEndpointsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

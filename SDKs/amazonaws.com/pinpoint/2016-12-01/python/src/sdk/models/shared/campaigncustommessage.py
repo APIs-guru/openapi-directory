@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class CampaignCustomMessage:
-    data: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Data' }})
+    r"""CampaignCustomMessage
+    Specifies the contents of a message that's sent through a custom channel to recipients of a campaign.
+    """
+    
+    data: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Data') }})
     

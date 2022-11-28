@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StreamingImageEncryptionConfigurationKeyTypeEnum } from "./streamingimageencryptionconfigurationkeytypeenum";
 
 
+
 export class StreamingImageEncryptionConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=keyArn" })
+  @SpeakeasyMetadata({ data: "json, name=keyArn" })
   keyArn?: string;
 
-  @Metadata({ data: "json, name=keyType" })
+  @SpeakeasyMetadata({ data: "json, name=keyType" })
   keyType: StreamingImageEncryptionConfigurationKeyTypeEnum;
 }

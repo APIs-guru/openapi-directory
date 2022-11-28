@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetProgrammesAtoZSearchPathParams = /** @class */ (function (_super) {
     __extends(GetProgrammesAtoZSearchPathParams, _super);
@@ -30,7 +30,7 @@ var GetProgrammesAtoZSearchPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=letter" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=letter" }),
         __metadata("design:type", String)
     ], GetProgrammesAtoZSearchPathParams.prototype, "letter", void 0);
     return GetProgrammesAtoZSearchPathParams;
@@ -46,31 +46,31 @@ var GetProgrammesAtoZSearchQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=availability" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=availability" }),
         __metadata("design:type", String)
     ], GetProgrammesAtoZSearchQueryParams.prototype, "availability", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=initial_child_count" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=initial_child_count" }),
         __metadata("design:type", Number)
     ], GetProgrammesAtoZSearchQueryParams.prototype, "initialChildCount", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" }),
         __metadata("design:type", Number)
     ], GetProgrammesAtoZSearchQueryParams.prototype, "page", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=per_page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" }),
         __metadata("design:type", Number)
     ], GetProgrammesAtoZSearchQueryParams.prototype, "perPage", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=rights" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=rights" }),
         __metadata("design:type", String)
     ], GetProgrammesAtoZSearchQueryParams.prototype, "rights", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sort" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" }),
         __metadata("design:type", String)
     ], GetProgrammesAtoZSearchQueryParams.prototype, "sort", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sort_direction" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort_direction" }),
         __metadata("design:type", String)
     ], GetProgrammesAtoZSearchQueryParams.prototype, "sortDirection", void 0);
     return GetProgrammesAtoZSearchQueryParams;
@@ -82,11 +82,11 @@ var GetProgrammesAtoZSearchRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetProgrammesAtoZSearchPathParams)
     ], GetProgrammesAtoZSearchRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetProgrammesAtoZSearchQueryParams)
     ], GetProgrammesAtoZSearchRequest.prototype, "queryParams", void 0);
     return GetProgrammesAtoZSearchRequest;
@@ -98,15 +98,15 @@ var GetProgrammesAtoZSearchResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetProgrammesAtoZSearchResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetProgrammesAtoZSearchResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], GetProgrammesAtoZSearchResponse.prototype, "ibl", void 0);
     return GetProgrammesAtoZSearchResponse;

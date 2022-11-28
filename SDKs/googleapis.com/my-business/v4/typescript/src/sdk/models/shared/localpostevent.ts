@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TimeInterval } from "./timeinterval";
+
 
 
 // LocalPostEvent
@@ -7,9 +8,9 @@ import { TimeInterval } from "./timeinterval";
  * All the information pertaining to an event featured in a local post.
 **/
 export class LocalPostEvent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=schedule" })
+  @SpeakeasyMetadata({ data: "json, name=schedule" })
   schedule?: TimeInterval;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

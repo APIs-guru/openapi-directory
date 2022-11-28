@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetHlsStreamingSessionUrlOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=HLSStreamingSessionURL" })
+  @SpeakeasyMetadata({ data: "json, name=HLSStreamingSessionURL" })
   hlsStreamingSessionUrl?: string;
 }

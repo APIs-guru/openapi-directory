@@ -1,73 +1,74 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TopicMessage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=_content" })
+  @SpeakeasyMetadata({ data: "json, name=_content" })
   content?: string;
 }
 
 
 export class Topic extends SpeakeasyBase {
-  @Metadata({ data: "json, name=author" })
+  @SpeakeasyMetadata({ data: "json, name=author" })
   author?: string;
 
-  @Metadata({ data: "json, name=author_is_deleted" })
+  @SpeakeasyMetadata({ data: "json, name=author_is_deleted" })
   authorIsDeleted?: boolean;
 
-  @Metadata({ data: "json, name=author_path_alias" })
+  @SpeakeasyMetadata({ data: "json, name=author_path_alias" })
   authorPathAlias?: string;
 
-  @Metadata({ data: "json, name=authorname" })
+  @SpeakeasyMetadata({ data: "json, name=authorname" })
   authorname?: string;
 
-  @Metadata({ data: "json, name=can_delete" })
+  @SpeakeasyMetadata({ data: "json, name=can_delete" })
   canDelete?: boolean;
 
-  @Metadata({ data: "json, name=can_edit" })
+  @SpeakeasyMetadata({ data: "json, name=can_edit" })
   canEdit?: boolean;
 
-  @Metadata({ data: "json, name=can_reply" })
+  @SpeakeasyMetadata({ data: "json, name=can_reply" })
   canReply?: boolean;
 
-  @Metadata({ data: "json, name=count_replies" })
+  @SpeakeasyMetadata({ data: "json, name=count_replies" })
   countReplies?: number;
 
-  @Metadata({ data: "json, name=datecreate" })
+  @SpeakeasyMetadata({ data: "json, name=datecreate" })
   datecreate?: string;
 
-  @Metadata({ data: "json, name=datelastpost" })
+  @SpeakeasyMetadata({ data: "json, name=datelastpost" })
   datelastpost?: string;
 
-  @Metadata({ data: "json, name=iconfarm" })
+  @SpeakeasyMetadata({ data: "json, name=iconfarm" })
   iconfarm?: string;
 
-  @Metadata({ data: "json, name=iconserver" })
+  @SpeakeasyMetadata({ data: "json, name=iconserver" })
   iconserver?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=is_locked" })
+  @SpeakeasyMetadata({ data: "json, name=is_locked" })
   isLocked?: boolean;
 
-  @Metadata({ data: "json, name=is_pro" })
+  @SpeakeasyMetadata({ data: "json, name=is_pro" })
   isPro?: boolean;
 
-  @Metadata({ data: "json, name=is_sticky" })
+  @SpeakeasyMetadata({ data: "json, name=is_sticky" })
   isSticky?: boolean;
 
-  @Metadata({ data: "json, name=last_reply" })
+  @SpeakeasyMetadata({ data: "json, name=last_reply" })
   lastReply?: string;
 
-  @Metadata({ data: "json, name=lastedit" })
+  @SpeakeasyMetadata({ data: "json, name=lastedit" })
   lastedit?: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: TopicMessage;
 
-  @Metadata({ data: "json, name=role" })
+  @SpeakeasyMetadata({ data: "json, name=role" })
   role?: string;
 
-  @Metadata({ data: "json, name=subject" })
+  @SpeakeasyMetadata({ data: "json, name=subject" })
   subject?: string;
 }

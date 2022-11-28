@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ExportSummary
+// Provides summary information about an export in an export list.
 type ExportSummary struct {
 	CreationDateTime      *time.Time                   `json:"creationDateTime,omitempty"`
 	ExportID              *string                      `json:"exportId,omitempty"`

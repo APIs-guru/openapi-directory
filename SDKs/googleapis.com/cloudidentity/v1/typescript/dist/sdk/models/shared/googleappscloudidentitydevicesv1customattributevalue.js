@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GoogleAppsCloudidentityDevicesV1CustomAttributeValue
 /**
  * Additional custom attribute values may be one of these types
@@ -33,15 +33,15 @@ var GoogleAppsCloudidentityDevicesV1CustomAttributeValue = /** @class */ (functi
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=boolValue" }),
+        SpeakeasyMetadata({ data: "json, name=boolValue" }),
         __metadata("design:type", Boolean)
     ], GoogleAppsCloudidentityDevicesV1CustomAttributeValue.prototype, "boolValue", void 0);
     __decorate([
-        Metadata({ data: "json, name=numberValue" }),
+        SpeakeasyMetadata({ data: "json, name=numberValue" }),
         __metadata("design:type", Number)
     ], GoogleAppsCloudidentityDevicesV1CustomAttributeValue.prototype, "numberValue", void 0);
     __decorate([
-        Metadata({ data: "json, name=stringValue" }),
+        SpeakeasyMetadata({ data: "json, name=stringValue" }),
         __metadata("design:type", String)
     ], GoogleAppsCloudidentityDevicesV1CustomAttributeValue.prototype, "stringValue", void 0);
     return GoogleAppsCloudidentityDevicesV1CustomAttributeValue;

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// DomainDeliverabilityCampaign
+// An object that contains the deliverability data for a specific campaign. This data is available for a campaign only if the campaign sent email by using a domain that the Deliverability dashboard is enabled for (<code>PutDeliverabilityDashboardOption</code> operation).
 type DomainDeliverabilityCampaign struct {
 	CampaignID        *string    `json:"CampaignId,omitempty"`
 	DeleteRate        *float64   `json:"DeleteRate,omitempty"`

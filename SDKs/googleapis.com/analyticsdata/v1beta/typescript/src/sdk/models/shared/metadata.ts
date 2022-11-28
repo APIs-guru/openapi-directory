@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DimensionMetadata } from "./dimensionmetadata";
 import { MetricMetadata } from "./metricmetadata";
+
 
 
 // Metadata
@@ -9,12 +9,12 @@ import { MetricMetadata } from "./metricmetadata";
  * The dimensions and metrics currently accepted in reporting methods.
 **/
 export class Metadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dimensions", elemType: shared.DimensionMetadata })
+  @SpeakeasyMetadata({ data: "json, name=dimensions", elemType: DimensionMetadata })
   dimensions?: DimensionMetadata[];
 
-  @Metadata({ data: "json, name=metrics", elemType: shared.MetricMetadata })
+  @SpeakeasyMetadata({ data: "json, name=metrics", elemType: MetricMetadata })
   metrics?: MetricMetadata[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

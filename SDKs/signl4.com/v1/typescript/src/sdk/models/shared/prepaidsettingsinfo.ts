@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PrepaidSettingsInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=topUpAmount" })
+  @SpeakeasyMetadata({ data: "json, name=topUpAmount" })
   topUpAmount?: number;
 
-  @Metadata({ data: "json, name=topUpEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=topUpEnabled" })
   topUpEnabled?: boolean;
 
-  @Metadata({ data: "json, name=topUpLimit" })
+  @SpeakeasyMetadata({ data: "json, name=topUpLimit" })
   topUpLimit?: number;
 }

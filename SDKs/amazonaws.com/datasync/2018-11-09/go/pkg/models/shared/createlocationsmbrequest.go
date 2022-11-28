@@ -1,5 +1,7 @@
 package shared
 
+// CreateLocationSmbRequest
+// CreateLocationSmbRequest
 type CreateLocationSmbRequest struct {
 	AgentArns      []string         `json:"AgentArns"`
 	Domain         *string          `json:"Domain,omitempty"`

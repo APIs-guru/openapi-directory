@@ -1,16 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import compatibility_enum
-from . import schemaid
-from . import schemaversionnumber
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateSchemaInput:
-    compatibility: Optional[compatibility_enum.CompatibilityEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Compatibility' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
-    schema_id: schemaid.SchemaID = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SchemaId' }})
-    schema_version_number: Optional[schemaversionnumber.SchemaVersionNumber] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SchemaVersionNumber' }})
+    schema_id: SchemaID = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('SchemaId') }})
+    compatibility: Optional[CompatibilityEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Compatibility') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Description') }})
+    schema_version_number: Optional[SchemaVersionNumber] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SchemaVersionNumber') }})
     

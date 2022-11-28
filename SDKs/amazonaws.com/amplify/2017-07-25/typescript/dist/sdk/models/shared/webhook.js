@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Webhook
 /**
  *  Describes a webhook that connects repository events to an Amplify app.
@@ -33,31 +33,31 @@ var Webhook = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=branchName" }),
+        SpeakeasyMetadata({ data: "json, name=branchName" }),
         __metadata("design:type", String)
     ], Webhook.prototype, "branchName", void 0);
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", Date)
     ], Webhook.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], Webhook.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateTime" }),
+        SpeakeasyMetadata({ data: "json, name=updateTime" }),
         __metadata("design:type", Date)
     ], Webhook.prototype, "updateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=webhookArn" }),
+        SpeakeasyMetadata({ data: "json, name=webhookArn" }),
         __metadata("design:type", String)
     ], Webhook.prototype, "webhookArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=webhookId" }),
+        SpeakeasyMetadata({ data: "json, name=webhookId" }),
         __metadata("design:type", String)
     ], Webhook.prototype, "webhookId", void 0);
     __decorate([
-        Metadata({ data: "json, name=webhookUrl" }),
+        SpeakeasyMetadata({ data: "json, name=webhookUrl" }),
         __metadata("design:type", String)
     ], Webhook.prototype, "webhookUrl", void 0);
     return Webhook;

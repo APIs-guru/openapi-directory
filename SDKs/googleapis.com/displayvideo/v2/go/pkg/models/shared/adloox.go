@@ -14,6 +14,8 @@ const (
 	AdlooxExcludedAdlooxCategoriesEnumFraud                 AdlooxExcludedAdlooxCategoriesEnum = "FRAUD"
 )
 
+// Adloox
+// Details of Adloox settings.
 type Adloox struct {
 	ExcludedAdlooxCategories []AdlooxExcludedAdlooxCategoriesEnum `json:"excludedAdlooxCategories,omitempty"`
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // AmpUrl
 /**
  * AMP URL response for a requested URL.
@@ -33,15 +33,15 @@ var AmpUrl = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ampUrl" }),
+        SpeakeasyMetadata({ data: "json, name=ampUrl" }),
         __metadata("design:type", String)
     ], AmpUrl.prototype, "ampUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=cdnAmpUrl" }),
+        SpeakeasyMetadata({ data: "json, name=cdnAmpUrl" }),
         __metadata("design:type", String)
     ], AmpUrl.prototype, "cdnAmpUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=originalUrl" }),
+        SpeakeasyMetadata({ data: "json, name=originalUrl" }),
         __metadata("design:type", String)
     ], AmpUrl.prototype, "originalUrl", void 0);
     return AmpUrl;

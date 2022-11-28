@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DumpFlag } from "./dumpflag";
+
 
 
 // DumpFlags
@@ -8,6 +8,6 @@ import { DumpFlag } from "./dumpflag";
  * Dump flags definition.
 **/
 export class DumpFlags extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dumpFlags", elemType: shared.DumpFlag })
+  @SpeakeasyMetadata({ data: "json, name=dumpFlags", elemType: DumpFlag })
   dumpFlags?: DumpFlag[];
 }

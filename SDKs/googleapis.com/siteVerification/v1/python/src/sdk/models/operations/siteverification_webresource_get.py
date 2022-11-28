@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class SiteVerificationWebResourceGetPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,20 +22,20 @@ class SiteVerificationWebResourceGetQueryParams:
 
 @dataclass
 class SiteVerificationWebResourceGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class SiteVerificationWebResourceGetRequest:
-    path_params: SiteVerificationWebResourceGetPathParams = field(default=None)
-    query_params: SiteVerificationWebResourceGetQueryParams = field(default=None)
-    security: SiteVerificationWebResourceGetSecurity = field(default=None)
+    path_params: SiteVerificationWebResourceGetPathParams = field()
+    query_params: SiteVerificationWebResourceGetQueryParams = field()
+    security: SiteVerificationWebResourceGetSecurity = field()
     
 
 @dataclass
 class SiteVerificationWebResourceGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     site_verification_web_resource_resource: Optional[shared.SiteVerificationWebResourceResource] = field(default=None)
-    status_code: int = field(default=None)
     

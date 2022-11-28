@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ProfilerRuleEvaluationStatus
+// Information about the status of the rule evaluation.
 type ProfilerRuleEvaluationStatus struct {
 	LastModifiedTime      *time.Time                `json:"LastModifiedTime,omitempty"`
 	RuleConfigurationName *string                   `json:"RuleConfigurationName,omitempty"`

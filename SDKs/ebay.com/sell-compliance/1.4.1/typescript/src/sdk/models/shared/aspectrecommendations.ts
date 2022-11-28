@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AspectRecommendations
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * This type is used by the aspectsRecommendation container, which is returned if eBay has found a listing with missing or invalid item aspects (ASPECTS_ADOPTION compliance type).
 **/
 export class AspectRecommendations extends SpeakeasyBase {
-  @Metadata({ data: "json, name=localizedAspectName" })
+  @SpeakeasyMetadata({ data: "json, name=localizedAspectName" })
   localizedAspectName?: string;
 
-  @Metadata({ data: "json, name=suggestedValues" })
+  @SpeakeasyMetadata({ data: "json, name=suggestedValues" })
   suggestedValues?: string[];
 }

@@ -22,9 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DirectorySizeEnum } from "./directorysizeenum";
+import { Tag } from "./tag";
 import { DirectoryVpcSettings } from "./directoryvpcsettings";
 // CreateDirectoryRequest
 /**
@@ -36,31 +36,31 @@ var CreateDirectoryRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], CreateDirectoryRequest.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], CreateDirectoryRequest.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=Password" }),
+        SpeakeasyMetadata({ data: "json, name=Password" }),
         __metadata("design:type", String)
     ], CreateDirectoryRequest.prototype, "password", void 0);
     __decorate([
-        Metadata({ data: "json, name=ShortName" }),
+        SpeakeasyMetadata({ data: "json, name=ShortName" }),
         __metadata("design:type", String)
     ], CreateDirectoryRequest.prototype, "shortName", void 0);
     __decorate([
-        Metadata({ data: "json, name=Size" }),
+        SpeakeasyMetadata({ data: "json, name=Size" }),
         __metadata("design:type", String)
     ], CreateDirectoryRequest.prototype, "size", void 0);
     __decorate([
-        Metadata({ data: "json, name=Tags", elemType: shared.Tag }),
+        SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag }),
         __metadata("design:type", Array)
     ], CreateDirectoryRequest.prototype, "tags", void 0);
     __decorate([
-        Metadata({ data: "json, name=VpcSettings" }),
+        SpeakeasyMetadata({ data: "json, name=VpcSettings" }),
         __metadata("design:type", DirectoryVpcSettings)
     ], CreateDirectoryRequest.prototype, "vpcSettings", void 0);
     return CreateDirectoryRequest;

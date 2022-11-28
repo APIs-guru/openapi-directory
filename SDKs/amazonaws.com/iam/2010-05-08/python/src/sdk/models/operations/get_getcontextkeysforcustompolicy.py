@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetGetContextKeysForCustomPolicyActionEnum(str, Enum):
     GET_CONTEXT_KEYS_FOR_CUSTOM_POLICY = "GetContextKeysForCustomPolicy"
@@ -10,9 +14,9 @@ class GetGetContextKeysForCustomPolicyVersionEnum(str, Enum):
 
 @dataclass
 class GetGetContextKeysForCustomPolicyQueryParams:
-    action: GetGetContextKeysForCustomPolicyActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    policy_input_list: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'PolicyInputList', 'style': 'form', 'explode': True }})
-    version: GetGetContextKeysForCustomPolicyVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetGetContextKeysForCustomPolicyActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    policy_input_list: List[str] = field(metadata={'query_param': { 'field_name': 'PolicyInputList', 'style': 'form', 'explode': True }})
+    version: GetGetContextKeysForCustomPolicyVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetGetContextKeysForCustomPolicyHeaders:
 
 @dataclass
 class GetGetContextKeysForCustomPolicyRequest:
-    query_params: GetGetContextKeysForCustomPolicyQueryParams = field(default=None)
-    headers: GetGetContextKeysForCustomPolicyHeaders = field(default=None)
+    headers: GetGetContextKeysForCustomPolicyHeaders = field()
+    query_params: GetGetContextKeysForCustomPolicyQueryParams = field()
     
 
 @dataclass
 class GetGetContextKeysForCustomPolicyResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

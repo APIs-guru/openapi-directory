@@ -1,11 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EventFilter } from "./eventfilter";
 
+
 export enum EventTriggerRetryPolicyEnum {
-    RetryPolicyUnspecified = "RETRY_POLICY_UNSPECIFIED"
-,    RetryPolicyDoNotRetry = "RETRY_POLICY_DO_NOT_RETRY"
-,    RetryPolicyRetry = "RETRY_POLICY_RETRY"
+    RetryPolicyUnspecified = "RETRY_POLICY_UNSPECIFIED",
+    RetryPolicyDoNotRetry = "RETRY_POLICY_DO_NOT_RETRY",
+    RetryPolicyRetry = "RETRY_POLICY_RETRY"
 }
 
 
@@ -14,27 +14,55 @@ export enum EventTriggerRetryPolicyEnum {
  * Describes EventTrigger, used to request events to be sent from another service.
 **/
 export class EventTrigger extends SpeakeasyBase {
-  @Metadata({ data: "json, name=channel" })
+  @SpeakeasyMetadata({ data: "json, name=channel" })
   channel?: string;
 
-  @Metadata({ data: "json, name=eventFilters", elemType: shared.EventFilter })
+  @SpeakeasyMetadata({ data: "json, name=eventFilters", elemType: EventFilter })
   eventFilters?: EventFilter[];
 
-  @Metadata({ data: "json, name=eventType" })
+  @SpeakeasyMetadata({ data: "json, name=eventType" })
   eventType?: string;
 
-  @Metadata({ data: "json, name=pubsubTopic" })
+  @SpeakeasyMetadata({ data: "json, name=pubsubTopic" })
   pubsubTopic?: string;
 
-  @Metadata({ data: "json, name=retryPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=retryPolicy" })
   retryPolicy?: EventTriggerRetryPolicyEnum;
 
-  @Metadata({ data: "json, name=serviceAccountEmail" })
+  @SpeakeasyMetadata({ data: "json, name=serviceAccountEmail" })
   serviceAccountEmail?: string;
 
-  @Metadata({ data: "json, name=trigger" })
+  @SpeakeasyMetadata({ data: "json, name=trigger" })
   trigger?: string;
 
-  @Metadata({ data: "json, name=triggerRegion" })
+  @SpeakeasyMetadata({ data: "json, name=triggerRegion" })
+  triggerRegion?: string;
+}
+
+
+// EventTriggerInput
+/** 
+ * Describes EventTrigger, used to request events to be sent from another service.
+**/
+export class EventTriggerInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=channel" })
+  channel?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=eventFilters", elemType: EventFilter })
+  eventFilters?: EventFilter[];
+
+  @SpeakeasyMetadata({ data: "json, name=eventType" })
+  eventType?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=pubsubTopic" })
+  pubsubTopic?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=retryPolicy" })
+  retryPolicy?: EventTriggerRetryPolicyEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=serviceAccountEmail" })
+  serviceAccountEmail?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=triggerRegion" })
   triggerRegion?: string;
 }

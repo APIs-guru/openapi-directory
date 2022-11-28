@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LandlordChaseNoteModel } from "./landlordchasenotemodel";
 import { LandlordRentOustandingItem } from "./landlordrentoustandingitem";
+
 
 
 // LandlordRentArrearsModel
@@ -9,15 +9,15 @@ import { LandlordRentOustandingItem } from "./landlordrentoustandingitem";
  * Landlord Rent Arrears.
 **/
 export class LandlordRentArrearsModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ChaseNotes", elemType: shared.LandlordChaseNoteModel })
+  @SpeakeasyMetadata({ data: "json, name=ChaseNotes", elemType: LandlordChaseNoteModel })
   chaseNotes?: LandlordChaseNoteModel[];
 
-  @Metadata({ data: "json, name=RentCollected" })
+  @SpeakeasyMetadata({ data: "json, name=RentCollected" })
   rentCollected?: number;
 
-  @Metadata({ data: "json, name=RentOutstanding", elemType: shared.LandlordRentOustandingItem })
+  @SpeakeasyMetadata({ data: "json, name=RentOutstanding", elemType: LandlordRentOustandingItem })
   rentOutstanding?: LandlordRentOustandingItem[];
 
-  @Metadata({ data: "json, name=TotalRentArrears" })
+  @SpeakeasyMetadata({ data: "json, name=TotalRentArrears" })
   totalRentArrears?: number;
 }

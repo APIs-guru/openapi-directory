@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TimeSeriesServiceStatistics } from "./timeseriesservicestatistics";
 
 
+
 export class GetTimeSeriesServiceStatisticsResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ContainsOldGroupVersions" })
+  @SpeakeasyMetadata({ data: "json, name=ContainsOldGroupVersions" })
   containsOldGroupVersions?: boolean;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=TimeSeriesServiceStatistics", elemType: shared.TimeSeriesServiceStatistics })
+  @SpeakeasyMetadata({ data: "json, name=TimeSeriesServiceStatistics", elemType: TimeSeriesServiceStatistics })
   timeSeriesServiceStatistics?: TimeSeriesServiceStatistics[];
 }

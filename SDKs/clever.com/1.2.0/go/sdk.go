@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://api.clever.com/v1.2",
 }
 
@@ -19,9 +19,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -32,33 +36,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// GetAdminsForDistrict - Returns the admins for a district
 func (s *SDK) GetAdminsForDistrict(ctx context.Context, request operations.GetAdminsForDistrictRequest) (*operations.GetAdminsForDistrictResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/districts/{id}/admins", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -66,7 +92,7 @@ func (s *SDK) GetAdminsForDistrict(ctx context.Context, request operations.GetAd
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -106,8 +132,9 @@ func (s *SDK) GetAdminsForDistrict(ctx context.Context, request operations.GetAd
 	return res, nil
 }
 
+// GetContact - Returns a specific student contact
 func (s *SDK) GetContact(ctx context.Context, request operations.GetContactRequest) (*operations.GetContactResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/contacts/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -115,7 +142,7 @@ func (s *SDK) GetContact(ctx context.Context, request operations.GetContactReque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -155,8 +182,9 @@ func (s *SDK) GetContact(ctx context.Context, request operations.GetContactReque
 	return res, nil
 }
 
+// GetContacts - Returns a list of student contacts
 func (s *SDK) GetContacts(ctx context.Context, request operations.GetContactsRequest) (*operations.GetContactsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/contacts"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -166,7 +194,7 @@ func (s *SDK) GetContacts(ctx context.Context, request operations.GetContactsReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -196,8 +224,9 @@ func (s *SDK) GetContacts(ctx context.Context, request operations.GetContactsReq
 	return res, nil
 }
 
+// GetContactsForStudent - Returns the contacts for a student
 func (s *SDK) GetContactsForStudent(ctx context.Context, request operations.GetContactsForStudentRequest) (*operations.GetContactsForStudentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/students/{id}/contacts", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -207,7 +236,7 @@ func (s *SDK) GetContactsForStudent(ctx context.Context, request operations.GetC
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -247,8 +276,9 @@ func (s *SDK) GetContactsForStudent(ctx context.Context, request operations.GetC
 	return res, nil
 }
 
+// GetDistrict - Returns a specific district
 func (s *SDK) GetDistrict(ctx context.Context, request operations.GetDistrictRequest) (*operations.GetDistrictResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/districts/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -258,7 +288,7 @@ func (s *SDK) GetDistrict(ctx context.Context, request operations.GetDistrictReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -298,8 +328,9 @@ func (s *SDK) GetDistrict(ctx context.Context, request operations.GetDistrictReq
 	return res, nil
 }
 
+// GetDistrictAdmin - Returns a specific district admin
 func (s *SDK) GetDistrictAdmin(ctx context.Context, request operations.GetDistrictAdminRequest) (*operations.GetDistrictAdminResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/district_admins/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -307,7 +338,7 @@ func (s *SDK) GetDistrictAdmin(ctx context.Context, request operations.GetDistri
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -347,8 +378,9 @@ func (s *SDK) GetDistrictAdmin(ctx context.Context, request operations.GetDistri
 	return res, nil
 }
 
+// GetDistrictAdmins - Returns a list of district admins
 func (s *SDK) GetDistrictAdmins(ctx context.Context, request operations.GetDistrictAdminsRequest) (*operations.GetDistrictAdminsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/district_admins"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -358,7 +390,7 @@ func (s *SDK) GetDistrictAdmins(ctx context.Context, request operations.GetDistr
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -388,8 +420,9 @@ func (s *SDK) GetDistrictAdmins(ctx context.Context, request operations.GetDistr
 	return res, nil
 }
 
+// GetDistrictForSchool - Returns the district for a school
 func (s *SDK) GetDistrictForSchool(ctx context.Context, request operations.GetDistrictForSchoolRequest) (*operations.GetDistrictForSchoolResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/schools/{id}/district", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -397,7 +430,7 @@ func (s *SDK) GetDistrictForSchool(ctx context.Context, request operations.GetDi
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -437,8 +470,9 @@ func (s *SDK) GetDistrictForSchool(ctx context.Context, request operations.GetDi
 	return res, nil
 }
 
+// GetDistrictForSection - Returns the district for a section
 func (s *SDK) GetDistrictForSection(ctx context.Context, request operations.GetDistrictForSectionRequest) (*operations.GetDistrictForSectionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/sections/{id}/district", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -446,7 +480,7 @@ func (s *SDK) GetDistrictForSection(ctx context.Context, request operations.GetD
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -486,8 +520,9 @@ func (s *SDK) GetDistrictForSection(ctx context.Context, request operations.GetD
 	return res, nil
 }
 
+// GetDistrictForStudent - Returns the district for a student
 func (s *SDK) GetDistrictForStudent(ctx context.Context, request operations.GetDistrictForStudentRequest) (*operations.GetDistrictForStudentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/students/{id}/district", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -495,7 +530,7 @@ func (s *SDK) GetDistrictForStudent(ctx context.Context, request operations.GetD
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -535,8 +570,9 @@ func (s *SDK) GetDistrictForStudent(ctx context.Context, request operations.GetD
 	return res, nil
 }
 
+// GetDistrictForStudentContact - Returns the district for a student contact
 func (s *SDK) GetDistrictForStudentContact(ctx context.Context, request operations.GetDistrictForStudentContactRequest) (*operations.GetDistrictForStudentContactResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/contacts/{id}/district", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -544,7 +580,7 @@ func (s *SDK) GetDistrictForStudentContact(ctx context.Context, request operatio
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -584,8 +620,9 @@ func (s *SDK) GetDistrictForStudentContact(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetDistrictForTeacher - Returns the district for a teacher
 func (s *SDK) GetDistrictForTeacher(ctx context.Context, request operations.GetDistrictForTeacherRequest) (*operations.GetDistrictForTeacherResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/teachers/{id}/district", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -593,7 +630,7 @@ func (s *SDK) GetDistrictForTeacher(ctx context.Context, request operations.GetD
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -633,8 +670,9 @@ func (s *SDK) GetDistrictForTeacher(ctx context.Context, request operations.GetD
 	return res, nil
 }
 
+// GetDistrictStatus - Returns the status of the district
 func (s *SDK) GetDistrictStatus(ctx context.Context, request operations.GetDistrictStatusRequest) (*operations.GetDistrictStatusResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/districts/{id}/status", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -642,7 +680,7 @@ func (s *SDK) GetDistrictStatus(ctx context.Context, request operations.GetDistr
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -682,8 +720,9 @@ func (s *SDK) GetDistrictStatus(ctx context.Context, request operations.GetDistr
 	return res, nil
 }
 
+// GetDistricts - Returns a list of districts
 func (s *SDK) GetDistricts(ctx context.Context) (*operations.GetDistrictsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/districts"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -691,7 +730,7 @@ func (s *SDK) GetDistricts(ctx context.Context) (*operations.GetDistrictsRespons
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -721,8 +760,9 @@ func (s *SDK) GetDistricts(ctx context.Context) (*operations.GetDistrictsRespons
 	return res, nil
 }
 
+// GetGradeLevelsForTeacher - Returns the grade levels for sections a teacher teaches
 func (s *SDK) GetGradeLevelsForTeacher(ctx context.Context, request operations.GetGradeLevelsForTeacherRequest) (*operations.GetGradeLevelsForTeacherResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/teachers/{id}/grade_levels", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -730,7 +770,7 @@ func (s *SDK) GetGradeLevelsForTeacher(ctx context.Context, request operations.G
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -770,8 +810,9 @@ func (s *SDK) GetGradeLevelsForTeacher(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetSchool - Returns a specific school
 func (s *SDK) GetSchool(ctx context.Context, request operations.GetSchoolRequest) (*operations.GetSchoolResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/schools/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -779,7 +820,7 @@ func (s *SDK) GetSchool(ctx context.Context, request operations.GetSchoolRequest
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -819,8 +860,9 @@ func (s *SDK) GetSchool(ctx context.Context, request operations.GetSchoolRequest
 	return res, nil
 }
 
+// GetSchoolAdmin - Returns a specific school admin
 func (s *SDK) GetSchoolAdmin(ctx context.Context, request operations.GetSchoolAdminRequest) (*operations.GetSchoolAdminResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/school_admins/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -830,7 +872,7 @@ func (s *SDK) GetSchoolAdmin(ctx context.Context, request operations.GetSchoolAd
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -870,8 +912,9 @@ func (s *SDK) GetSchoolAdmin(ctx context.Context, request operations.GetSchoolAd
 	return res, nil
 }
 
+// GetSchoolAdmins - Returns a list of school admins
 func (s *SDK) GetSchoolAdmins(ctx context.Context, request operations.GetSchoolAdminsRequest) (*operations.GetSchoolAdminsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/school_admins"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -881,7 +924,7 @@ func (s *SDK) GetSchoolAdmins(ctx context.Context, request operations.GetSchoolA
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -911,8 +954,9 @@ func (s *SDK) GetSchoolAdmins(ctx context.Context, request operations.GetSchoolA
 	return res, nil
 }
 
+// GetSchoolForSection - Returns the school for a section
 func (s *SDK) GetSchoolForSection(ctx context.Context, request operations.GetSchoolForSectionRequest) (*operations.GetSchoolForSectionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/sections/{id}/school", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -920,7 +964,7 @@ func (s *SDK) GetSchoolForSection(ctx context.Context, request operations.GetSch
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -960,8 +1004,9 @@ func (s *SDK) GetSchoolForSection(ctx context.Context, request operations.GetSch
 	return res, nil
 }
 
+// GetSchoolForStudent - Returns the primary school for a student
 func (s *SDK) GetSchoolForStudent(ctx context.Context, request operations.GetSchoolForStudentRequest) (*operations.GetSchoolForStudentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/students/{id}/school", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -969,7 +1014,7 @@ func (s *SDK) GetSchoolForStudent(ctx context.Context, request operations.GetSch
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1009,8 +1054,9 @@ func (s *SDK) GetSchoolForStudent(ctx context.Context, request operations.GetSch
 	return res, nil
 }
 
+// GetSchoolForTeacher - Retrieves school info for a teacher.
 func (s *SDK) GetSchoolForTeacher(ctx context.Context, request operations.GetSchoolForTeacherRequest) (*operations.GetSchoolForTeacherResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/teachers/{id}/school", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1018,7 +1064,7 @@ func (s *SDK) GetSchoolForTeacher(ctx context.Context, request operations.GetSch
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1058,8 +1104,9 @@ func (s *SDK) GetSchoolForTeacher(ctx context.Context, request operations.GetSch
 	return res, nil
 }
 
+// GetSchools - Returns a list of schools
 func (s *SDK) GetSchools(ctx context.Context, request operations.GetSchoolsRequest) (*operations.GetSchoolsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/schools"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1069,7 +1116,7 @@ func (s *SDK) GetSchools(ctx context.Context, request operations.GetSchoolsReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1099,8 +1146,9 @@ func (s *SDK) GetSchools(ctx context.Context, request operations.GetSchoolsReque
 	return res, nil
 }
 
+// GetSchoolsForDistrict - Returns the schools for a district
 func (s *SDK) GetSchoolsForDistrict(ctx context.Context, request operations.GetSchoolsForDistrictRequest) (*operations.GetSchoolsForDistrictResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/districts/{id}/schools", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1110,7 +1158,7 @@ func (s *SDK) GetSchoolsForDistrict(ctx context.Context, request operations.GetS
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1150,8 +1198,9 @@ func (s *SDK) GetSchoolsForDistrict(ctx context.Context, request operations.GetS
 	return res, nil
 }
 
+// GetSchoolsForSchoolAdmin - Returns the schools for a school admin
 func (s *SDK) GetSchoolsForSchoolAdmin(ctx context.Context, request operations.GetSchoolsForSchoolAdminRequest) (*operations.GetSchoolsForSchoolAdminResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/school_admins/{id}/schools", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1161,7 +1210,7 @@ func (s *SDK) GetSchoolsForSchoolAdmin(ctx context.Context, request operations.G
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1201,8 +1250,9 @@ func (s *SDK) GetSchoolsForSchoolAdmin(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetSection - Returns a specific section
 func (s *SDK) GetSection(ctx context.Context, request operations.GetSectionRequest) (*operations.GetSectionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/sections/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1210,7 +1260,7 @@ func (s *SDK) GetSection(ctx context.Context, request operations.GetSectionReque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1250,8 +1300,9 @@ func (s *SDK) GetSection(ctx context.Context, request operations.GetSectionReque
 	return res, nil
 }
 
+// GetSections - Returns a list of sections
 func (s *SDK) GetSections(ctx context.Context, request operations.GetSectionsRequest) (*operations.GetSectionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/sections"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1261,7 +1312,7 @@ func (s *SDK) GetSections(ctx context.Context, request operations.GetSectionsReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1291,8 +1342,9 @@ func (s *SDK) GetSections(ctx context.Context, request operations.GetSectionsReq
 	return res, nil
 }
 
+// GetSectionsForDistrict - Returns the sections for a district
 func (s *SDK) GetSectionsForDistrict(ctx context.Context, request operations.GetSectionsForDistrictRequest) (*operations.GetSectionsForDistrictResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/districts/{id}/sections", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1302,7 +1354,7 @@ func (s *SDK) GetSectionsForDistrict(ctx context.Context, request operations.Get
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1342,8 +1394,9 @@ func (s *SDK) GetSectionsForDistrict(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetSectionsForSchool - Returns the sections for a school
 func (s *SDK) GetSectionsForSchool(ctx context.Context, request operations.GetSectionsForSchoolRequest) (*operations.GetSectionsForSchoolResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/schools/{id}/sections", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1353,7 +1406,7 @@ func (s *SDK) GetSectionsForSchool(ctx context.Context, request operations.GetSe
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1393,8 +1446,9 @@ func (s *SDK) GetSectionsForSchool(ctx context.Context, request operations.GetSe
 	return res, nil
 }
 
+// GetSectionsForStudent - Returns the sections for a student
 func (s *SDK) GetSectionsForStudent(ctx context.Context, request operations.GetSectionsForStudentRequest) (*operations.GetSectionsForStudentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/students/{id}/sections", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1404,7 +1458,7 @@ func (s *SDK) GetSectionsForStudent(ctx context.Context, request operations.GetS
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1444,8 +1498,9 @@ func (s *SDK) GetSectionsForStudent(ctx context.Context, request operations.GetS
 	return res, nil
 }
 
+// GetSectionsForTeacher - Returns the sections for a teacher
 func (s *SDK) GetSectionsForTeacher(ctx context.Context, request operations.GetSectionsForTeacherRequest) (*operations.GetSectionsForTeacherResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/teachers/{id}/sections", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1455,7 +1510,7 @@ func (s *SDK) GetSectionsForTeacher(ctx context.Context, request operations.GetS
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1495,8 +1550,9 @@ func (s *SDK) GetSectionsForTeacher(ctx context.Context, request operations.GetS
 	return res, nil
 }
 
+// GetStudent - Returns a specific student
 func (s *SDK) GetStudent(ctx context.Context, request operations.GetStudentRequest) (*operations.GetStudentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/students/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1506,7 +1562,7 @@ func (s *SDK) GetStudent(ctx context.Context, request operations.GetStudentReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1546,8 +1602,9 @@ func (s *SDK) GetStudent(ctx context.Context, request operations.GetStudentReque
 	return res, nil
 }
 
+// GetStudentForContact - Returns the student for a student contact
 func (s *SDK) GetStudentForContact(ctx context.Context, request operations.GetStudentForContactRequest) (*operations.GetStudentForContactResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/contacts/{id}/student", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1555,7 +1612,7 @@ func (s *SDK) GetStudentForContact(ctx context.Context, request operations.GetSt
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1595,8 +1652,9 @@ func (s *SDK) GetStudentForContact(ctx context.Context, request operations.GetSt
 	return res, nil
 }
 
+// GetStudents - Returns a list of students
 func (s *SDK) GetStudents(ctx context.Context, request operations.GetStudentsRequest) (*operations.GetStudentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/students"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1606,7 +1664,7 @@ func (s *SDK) GetStudents(ctx context.Context, request operations.GetStudentsReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1636,8 +1694,9 @@ func (s *SDK) GetStudents(ctx context.Context, request operations.GetStudentsReq
 	return res, nil
 }
 
+// GetStudentsForDistrict - Returns the students for a district
 func (s *SDK) GetStudentsForDistrict(ctx context.Context, request operations.GetStudentsForDistrictRequest) (*operations.GetStudentsForDistrictResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/districts/{id}/students", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1647,7 +1706,7 @@ func (s *SDK) GetStudentsForDistrict(ctx context.Context, request operations.Get
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1687,8 +1746,9 @@ func (s *SDK) GetStudentsForDistrict(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetStudentsForSchool - Returns the students for a school
 func (s *SDK) GetStudentsForSchool(ctx context.Context, request operations.GetStudentsForSchoolRequest) (*operations.GetStudentsForSchoolResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/schools/{id}/students", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1698,7 +1758,7 @@ func (s *SDK) GetStudentsForSchool(ctx context.Context, request operations.GetSt
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1738,8 +1798,9 @@ func (s *SDK) GetStudentsForSchool(ctx context.Context, request operations.GetSt
 	return res, nil
 }
 
+// GetStudentsForSection - Returns the students for a section
 func (s *SDK) GetStudentsForSection(ctx context.Context, request operations.GetStudentsForSectionRequest) (*operations.GetStudentsForSectionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/sections/{id}/students", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1749,7 +1810,7 @@ func (s *SDK) GetStudentsForSection(ctx context.Context, request operations.GetS
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1789,8 +1850,9 @@ func (s *SDK) GetStudentsForSection(ctx context.Context, request operations.GetS
 	return res, nil
 }
 
+// GetStudentsForTeacher - Returns the students for a teacher
 func (s *SDK) GetStudentsForTeacher(ctx context.Context, request operations.GetStudentsForTeacherRequest) (*operations.GetStudentsForTeacherResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/teachers/{id}/students", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1800,7 +1862,7 @@ func (s *SDK) GetStudentsForTeacher(ctx context.Context, request operations.GetS
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1840,8 +1902,9 @@ func (s *SDK) GetStudentsForTeacher(ctx context.Context, request operations.GetS
 	return res, nil
 }
 
+// GetTeacher - Returns a specific teacher
 func (s *SDK) GetTeacher(ctx context.Context, request operations.GetTeacherRequest) (*operations.GetTeacherResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/teachers/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1851,7 +1914,7 @@ func (s *SDK) GetTeacher(ctx context.Context, request operations.GetTeacherReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1891,8 +1954,9 @@ func (s *SDK) GetTeacher(ctx context.Context, request operations.GetTeacherReque
 	return res, nil
 }
 
+// GetTeacherForSection - Returns the primary teacher for a section
 func (s *SDK) GetTeacherForSection(ctx context.Context, request operations.GetTeacherForSectionRequest) (*operations.GetTeacherForSectionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/sections/{id}/teacher", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1900,7 +1964,7 @@ func (s *SDK) GetTeacherForSection(ctx context.Context, request operations.GetTe
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1940,8 +2004,9 @@ func (s *SDK) GetTeacherForSection(ctx context.Context, request operations.GetTe
 	return res, nil
 }
 
+// GetTeachers - Returns a list of teachers
 func (s *SDK) GetTeachers(ctx context.Context, request operations.GetTeachersRequest) (*operations.GetTeachersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/teachers"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1951,7 +2016,7 @@ func (s *SDK) GetTeachers(ctx context.Context, request operations.GetTeachersReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1981,8 +2046,9 @@ func (s *SDK) GetTeachers(ctx context.Context, request operations.GetTeachersReq
 	return res, nil
 }
 
+// GetTeachersForDistrict - Returns the teachers for a district
 func (s *SDK) GetTeachersForDistrict(ctx context.Context, request operations.GetTeachersForDistrictRequest) (*operations.GetTeachersForDistrictResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/districts/{id}/teachers", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1992,7 +2058,7 @@ func (s *SDK) GetTeachersForDistrict(ctx context.Context, request operations.Get
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2032,8 +2098,9 @@ func (s *SDK) GetTeachersForDistrict(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetTeachersForSchool - Returns the teachers for a school
 func (s *SDK) GetTeachersForSchool(ctx context.Context, request operations.GetTeachersForSchoolRequest) (*operations.GetTeachersForSchoolResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/schools/{id}/teachers", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2043,7 +2110,7 @@ func (s *SDK) GetTeachersForSchool(ctx context.Context, request operations.GetTe
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2083,8 +2150,9 @@ func (s *SDK) GetTeachersForSchool(ctx context.Context, request operations.GetTe
 	return res, nil
 }
 
+// GetTeachersForSection - Returns the teachers for a section
 func (s *SDK) GetTeachersForSection(ctx context.Context, request operations.GetTeachersForSectionRequest) (*operations.GetTeachersForSectionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/sections/{id}/teachers", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2094,7 +2162,7 @@ func (s *SDK) GetTeachersForSection(ctx context.Context, request operations.GetT
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2134,8 +2202,9 @@ func (s *SDK) GetTeachersForSection(ctx context.Context, request operations.GetT
 	return res, nil
 }
 
+// GetTeachersForStudent - Returns the teachers for a student
 func (s *SDK) GetTeachersForStudent(ctx context.Context, request operations.GetTeachersForStudentRequest) (*operations.GetTeachersForStudentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/students/{id}/teachers", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2145,7 +2214,7 @@ func (s *SDK) GetTeachersForStudent(ctx context.Context, request operations.GetT
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

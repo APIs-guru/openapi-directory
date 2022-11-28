@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CertificateAttributes } from "./certificateattributes";
+
 
 
 // EndpointVerificationSpecificAttributes
@@ -8,6 +8,6 @@ import { CertificateAttributes } from "./certificateattributes";
  * Resource representing the Endpoint Verification-specific attributes of a Device. https://cloud.google.com/endpoint-verification/docs/overview
 **/
 export class EndpointVerificationSpecificAttributes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=certificateAttributes", elemType: shared.CertificateAttributes })
+  @SpeakeasyMetadata({ data: "json, name=certificateAttributes", elemType: CertificateAttributes })
   certificateAttributes?: CertificateAttributes[];
 }

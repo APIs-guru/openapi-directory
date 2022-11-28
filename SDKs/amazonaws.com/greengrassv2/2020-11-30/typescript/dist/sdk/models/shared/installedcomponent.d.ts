@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { InstalledComponentLifecycleStateEnum } from "./installedcomponentlifecyclestateenum";
 /**
  * Contains information about a component on a Greengrass core device.

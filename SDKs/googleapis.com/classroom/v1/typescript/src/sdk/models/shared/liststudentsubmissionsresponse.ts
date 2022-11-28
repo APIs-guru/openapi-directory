@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StudentSubmission } from "./studentsubmission";
+
 
 
 // ListStudentSubmissionsResponse
@@ -8,9 +8,9 @@ import { StudentSubmission } from "./studentsubmission";
  * Response when listing student submissions.
 **/
 export class ListStudentSubmissionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=studentSubmissions", elemType: shared.StudentSubmission })
+  @SpeakeasyMetadata({ data: "json, name=studentSubmissions", elemType: StudentSubmission })
   studentSubmissions?: StudentSubmission[];
 }

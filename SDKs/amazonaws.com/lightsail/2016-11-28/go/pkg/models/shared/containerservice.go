@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ContainerService
+// Describes an Amazon Lightsail container service.
 type ContainerService struct {
 	Arn                  *string                        `json:"arn,omitempty"`
 	ContainerServiceName *string                        `json:"containerServiceName,omitempty"`

@@ -1,77 +1,78 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetFlightOffersTravelClassEnum {
-    Economy = "ECONOMY"
-,    PremiumEconomy = "PREMIUM_ECONOMY"
-,    Business = "BUSINESS"
-,    First = "FIRST"
+    Economy = "ECONOMY",
+    PremiumEconomy = "PREMIUM_ECONOMY",
+    Business = "BUSINESS",
+    First = "FIRST"
 }
 
 
 export class GetFlightOffersQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=adults" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=adults" })
   adults: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=children" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=children" })
   children?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=currencyCode" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=currencyCode" })
   currencyCode?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=departureDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=departureDate" })
   departureDate: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=destinationLocationCode" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=destinationLocationCode" })
   destinationLocationCode: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=excludedAirlineCodes" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=excludedAirlineCodes" })
   excludedAirlineCodes?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=includedAirlineCodes" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=includedAirlineCodes" })
   includedAirlineCodes?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=infants" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=infants" })
   infants?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=max" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=max" })
   max?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxPrice" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxPrice" })
   maxPrice?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=nonStop" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=nonStop" })
   nonStop?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=originLocationCode" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=originLocationCode" })
   originLocationCode: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=returnDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=returnDate" })
   returnDate?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=travelClass" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=travelClass" })
   travelClass?: GetFlightOffersTravelClassEnum;
 }
 
 
 export class GetFlightOffersRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetFlightOffersQueryParams;
 }
 
 
 export class GetFlightOffersResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error400?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error500?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   success?: any;
 }

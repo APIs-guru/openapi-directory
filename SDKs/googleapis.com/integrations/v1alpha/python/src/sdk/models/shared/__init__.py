@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .alt_enum import *
 from .crmlogerrorcode import *
 from .enterprisecrmcardscellvalue import *
@@ -14,6 +14,7 @@ from .enterprisecrmeventbusprotobasealertconfigerrorenumlist import *
 from .enterprisecrmeventbusprotobasealertconfigthresholdvalue import *
 from .enterprisecrmeventbusprotobooleanparameterarray import *
 from .enterprisecrmeventbusprotobuganizernotification import *
+from .enterprisecrmeventbusprotocloudschedulerconfig import *
 from .enterprisecrmeventbusprotocombinedcondition import *
 from .enterprisecrmeventbusprotocondition import *
 from .enterprisecrmeventbusprotoconditionresult import *
@@ -114,6 +115,7 @@ from .googlecloudintegrationsv1alphabooleanparameterarray import *
 from .googlecloudintegrationsv1alphacancelexecutionresponse import *
 from .googlecloudintegrationsv1alphacertificate import *
 from .googlecloudintegrationsv1alphaclientcertificate import *
+from .googlecloudintegrationsv1alphacloudschedulerconfig import *
 from .googlecloudintegrationsv1alphacreateappsscriptprojectrequest import *
 from .googlecloudintegrationsv1alphacreateappsscriptprojectresponse import *
 from .googlecloudintegrationsv1alphacreatebundlerequest import *

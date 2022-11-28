@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Environment
+// The environment detail data. An AWS Proton environment is a set resources shared across an AWS Proton service.
 type Environment struct {
 	Arn                            string               `json:"arn"`
 	CreatedAt                      time.Time            `json:"createdAt"`

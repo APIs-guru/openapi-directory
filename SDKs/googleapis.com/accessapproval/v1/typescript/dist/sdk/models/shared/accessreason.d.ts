@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum AccessReasonTypeEnum {
     TypeUnspecified = "TYPE_UNSPECIFIED",
     CustomerInitiatedSupport = "CUSTOMER_INITIATED_SUPPORT",

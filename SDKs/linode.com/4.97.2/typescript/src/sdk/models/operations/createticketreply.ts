@@ -1,62 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateTicketReplyPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=ticketId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ticketId" })
   ticketId: number;
 }
 
 
-export class CreateTicketReplySecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class CreateTicketReplySecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class CreateTicketReplySecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: CreateTicketReplySecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: CreateTicketReplySecurityOption2;
-}
-
-
-export class CreateTicketReplyRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: CreateTicketReplyPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: any;
-
-  @Metadata()
-  security: CreateTicketReplySecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class CreateTicketReplyDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class CreateTicketReplyRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: CreateTicketReplyPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: any;
+
+  @SpeakeasyMetadata()
+  security: CreateTicketReplySecurity;
+}
+
+
 export class CreateTicketReplyResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   supportTicketReply?: shared.SupportTicketReply;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createTicketReplyDefaultApplicationJsonObject?: CreateTicketReplyDefaultApplicationJson;
 }

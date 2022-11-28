@@ -1,5 +1,7 @@
 package shared
 
+// ListTasksRequest
+// ListTasksRequest
 type ListTasksRequest struct {
 	Filters    []TaskFilter `json:"Filters,omitempty"`
 	MaxResults *int64       `json:"MaxResults,omitempty"`

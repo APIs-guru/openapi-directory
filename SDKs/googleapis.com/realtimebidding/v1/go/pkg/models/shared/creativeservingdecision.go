@@ -43,6 +43,8 @@ const (
 	CreativeServingDecisionDetectedAttributesEnumOmsdk10                             CreativeServingDecisionDetectedAttributesEnum = "OMSDK_1_0"
 )
 
+// CreativeServingDecision
+// Top level status and detected attributes of a creative.
 type CreativeServingDecision struct {
 	AdTechnologyProviders       *AdTechnologyProviders                          `json:"adTechnologyProviders,omitempty"`
 	ChinaPolicyCompliance       *PolicyCompliance                               `json:"chinaPolicyCompliance,omitempty"`

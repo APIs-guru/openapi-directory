@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GuestAccelerator } from "./guestaccelerator";
 import { Usage } from "./usage";
 import { MachineType } from "./machinetype";
 import { PersistentDisk } from "./persistentdisk";
+
 
 
 // ComputeVmWorkload
@@ -11,27 +11,27 @@ import { PersistentDisk } from "./persistentdisk";
  * Specificies usage of a set of identical compute VM instances.
 **/
 export class ComputeVmWorkload extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enableConfidentialCompute" })
+  @SpeakeasyMetadata({ data: "json, name=enableConfidentialCompute" })
   enableConfidentialCompute?: boolean;
 
-  @Metadata({ data: "json, name=guestAccelerator" })
+  @SpeakeasyMetadata({ data: "json, name=guestAccelerator" })
   guestAccelerator?: GuestAccelerator;
 
-  @Metadata({ data: "json, name=instancesRunning" })
+  @SpeakeasyMetadata({ data: "json, name=instancesRunning" })
   instancesRunning?: Usage;
 
-  @Metadata({ data: "json, name=licenses" })
+  @SpeakeasyMetadata({ data: "json, name=licenses" })
   licenses?: string[];
 
-  @Metadata({ data: "json, name=machineType" })
+  @SpeakeasyMetadata({ data: "json, name=machineType" })
   machineType?: MachineType;
 
-  @Metadata({ data: "json, name=persistentDisks", elemType: shared.PersistentDisk })
+  @SpeakeasyMetadata({ data: "json, name=persistentDisks", elemType: PersistentDisk })
   persistentDisks?: PersistentDisk[];
 
-  @Metadata({ data: "json, name=preemptible" })
+  @SpeakeasyMetadata({ data: "json, name=preemptible" })
   preemptible?: boolean;
 
-  @Metadata({ data: "json, name=region" })
+  @SpeakeasyMetadata({ data: "json, name=region" })
   region?: string;
 }

@@ -22,45 +22,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-var PostGetTaxFormSecurityOption1 = /** @class */ (function (_super) {
-    __extends(PostGetTaxFormSecurityOption1, _super);
-    function PostGetTaxFormSecurityOption1() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
-        __metadata("design:type", shared.SchemeBasicAuth)
-    ], PostGetTaxFormSecurityOption1.prototype, "basicAuth", void 0);
-    return PostGetTaxFormSecurityOption1;
-}(SpeakeasyBase));
-export { PostGetTaxFormSecurityOption1 };
-var PostGetTaxFormSecurityOption2 = /** @class */ (function (_super) {
-    __extends(PostGetTaxFormSecurityOption2, _super);
-    function PostGetTaxFormSecurityOption2() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
-        __metadata("design:type", shared.SchemeApiKeyAuth)
-    ], PostGetTaxFormSecurityOption2.prototype, "apiKeyAuth", void 0);
-    return PostGetTaxFormSecurityOption2;
-}(SpeakeasyBase));
-export { PostGetTaxFormSecurityOption2 };
 var PostGetTaxFormSecurity = /** @class */ (function (_super) {
     __extends(PostGetTaxFormSecurity, _super);
     function PostGetTaxFormSecurity() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", PostGetTaxFormSecurityOption1)
-    ], PostGetTaxFormSecurity.prototype, "option1", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        __metadata("design:type", shared.SchemeBasicAuth)
+    ], PostGetTaxFormSecurity.prototype, "basicAuth", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", PostGetTaxFormSecurityOption2)
-    ], PostGetTaxFormSecurity.prototype, "option2", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        __metadata("design:type", shared.SchemeApiKeyAuth)
+    ], PostGetTaxFormSecurity.prototype, "apiKeyAuth", void 0);
     return PostGetTaxFormSecurity;
 }(SpeakeasyBase));
 export { PostGetTaxFormSecurity };
@@ -70,11 +46,11 @@ var PostGetTaxFormRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", Object)
     ], PostGetTaxFormRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostGetTaxFormSecurity)
     ], PostGetTaxFormRequest.prototype, "security", void 0);
     return PostGetTaxFormRequest;
@@ -86,19 +62,19 @@ var PostGetTaxFormResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostGetTaxFormResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PostGetTaxFormResponse.prototype, "getTaxFormResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PostGetTaxFormResponse.prototype, "serviceError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostGetTaxFormResponse.prototype, "statusCode", void 0);
     return PostGetTaxFormResponse;

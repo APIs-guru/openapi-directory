@@ -1,6 +1,7 @@
 
 
+
 export enum LaunchProfilePlatformEnum {
-    Linux = "LINUX"
-,    Windows = "WINDOWS"
+    Linux = "LINUX",
+    Windows = "WINDOWS"
 }

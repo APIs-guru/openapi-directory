@@ -1,5 +1,7 @@
 package shared
 
+// InputUpdate
+// For a SQL-based Kinesis Data Analytics application, describes updates to a specific input configuration (identified by the <code>InputId</code> of an application).
 type InputUpdate struct {
 	InputID                            string                              `json:"InputId"`
 	InputParallelismUpdate             *InputParallelismUpdate             `json:"InputParallelismUpdate,omitempty"`

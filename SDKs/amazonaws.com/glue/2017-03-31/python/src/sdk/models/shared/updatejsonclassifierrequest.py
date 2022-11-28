@@ -1,11 +1,19 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class UpdateJSONClassifierRequest:
-    json_path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'JsonPath' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
+    r"""UpdateJSONClassifierRequest
+    Specifies a JSON classifier to be updated.
+    """
+    
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
+    json_path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('JsonPath') }})
     

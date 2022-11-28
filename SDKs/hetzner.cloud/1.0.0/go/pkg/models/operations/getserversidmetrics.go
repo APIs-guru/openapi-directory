@@ -19,11 +19,6 @@ type GetServersIDMetricsQueryParams struct {
 	Type  GetServersIDMetricsTypeEnum `queryParam:"style=form,explode=true,name=type"`
 }
 
-type GetServersIDMetricsRequest struct {
-	PathParams  GetServersIDMetricsPathParams
-	QueryParams GetServersIDMetricsQueryParams
-}
-
 type GetServersIDMetrics200ApplicationJSONMetricsTimeSeries struct {
 	Values [][]interface{} `json:"values"`
 }
@@ -37,6 +32,11 @@ type GetServersIDMetrics200ApplicationJSONMetrics struct {
 
 type GetServersIDMetrics200ApplicationJSON struct {
 	Metrics GetServersIDMetrics200ApplicationJSONMetrics `json:"metrics"`
+}
+
+type GetServersIDMetricsRequest struct {
+	PathParams  GetServersIDMetricsPathParams
+	QueryParams GetServersIDMetricsQueryParams
 }
 
 type GetServersIDMetricsResponse struct {

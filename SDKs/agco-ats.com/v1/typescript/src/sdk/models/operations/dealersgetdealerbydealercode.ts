@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DealersGetDealerbyDealerCodePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=DealerCode" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=DealerCode" })
   dealerCode: string;
 }
 
 
 export class DealersGetDealerbyDealerCodeRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DealersGetDealerbyDealerCodePathParams;
 }
 
 
 export class DealersGetDealerbyDealerCodeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiModelsApiError?: shared.ApiModelsApiError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   dealerDbModelsDealer?: shared.DealerDbModelsDealer;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

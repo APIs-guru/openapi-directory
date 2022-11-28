@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudbuildProjectsLocationsGithubEnterpriseConfigsListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +27,20 @@ class CloudbuildProjectsLocationsGithubEnterpriseConfigsListQueryParams:
 
 @dataclass
 class CloudbuildProjectsLocationsGithubEnterpriseConfigsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudbuildProjectsLocationsGithubEnterpriseConfigsListRequest:
-    path_params: CloudbuildProjectsLocationsGithubEnterpriseConfigsListPathParams = field(default=None)
-    query_params: CloudbuildProjectsLocationsGithubEnterpriseConfigsListQueryParams = field(default=None)
-    security: CloudbuildProjectsLocationsGithubEnterpriseConfigsListSecurity = field(default=None)
+    path_params: CloudbuildProjectsLocationsGithubEnterpriseConfigsListPathParams = field()
+    query_params: CloudbuildProjectsLocationsGithubEnterpriseConfigsListQueryParams = field()
+    security: CloudbuildProjectsLocationsGithubEnterpriseConfigsListSecurity = field()
     
 
 @dataclass
 class CloudbuildProjectsLocationsGithubEnterpriseConfigsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_github_enterprise_configs_response: Optional[shared.ListGithubEnterpriseConfigsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

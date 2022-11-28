@@ -13,15 +13,15 @@ type ExtrasTopologyMapsListQueryParams struct {
 	Slug   *string `queryParam:"style=form,explode=true,name=slug"`
 }
 
-type ExtrasTopologyMapsListRequest struct {
-	QueryParams ExtrasTopologyMapsListQueryParams
-}
-
 type ExtrasTopologyMapsList200ApplicationJSON struct {
 	Count    int64                `json:"count"`
 	Next     *string              `json:"next,omitempty"`
 	Previous *string              `json:"previous,omitempty"`
 	Results  []shared.TopologyMap `json:"results"`
+}
+
+type ExtrasTopologyMapsListRequest struct {
+	QueryParams ExtrasTopologyMapsListQueryParams
 }
 
 type ExtrasTopologyMapsListResponse struct {

@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccountAssignmentOperationStatusMetadata } from "./accountassignmentoperationstatusmetadata";
 
 
+
 export class ListAccountAssignmentCreationStatusResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccountAssignmentsCreationStatus", elemType: shared.AccountAssignmentOperationStatusMetadata })
+  @SpeakeasyMetadata({ data: "json, name=AccountAssignmentsCreationStatus", elemType: AccountAssignmentOperationStatusMetadata })
   accountAssignmentsCreationStatus?: AccountAssignmentOperationStatusMetadata[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

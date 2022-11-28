@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DatastorePartition } from "./datastorepartition";
+
 
 
 // DatastorePartitions
@@ -8,6 +8,6 @@ import { DatastorePartition } from "./datastorepartition";
  *  Contains information about the partition dimensions in a data store. 
 **/
 export class DatastorePartitions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=partitions", elemType: shared.DatastorePartition })
+  @SpeakeasyMetadata({ data: "json, name=partitions", elemType: DatastorePartition })
   partitions?: DatastorePartition[];
 }

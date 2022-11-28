@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { JourneyDateRangeKpiResponse } from "./journeydaterangekpiresponse";
 
 
+
 export class GetJourneyDateRangeKpiResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=JourneyDateRangeKpiResponse" })
+  @SpeakeasyMetadata({ data: "json, name=JourneyDateRangeKpiResponse" })
   journeyDateRangeKpiResponse: JourneyDateRangeKpiResponse;
 }

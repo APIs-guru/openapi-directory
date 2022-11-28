@@ -99,6 +99,8 @@ const (
 	WellnessWeightMachineExceptionEnumDependentOnDayOfWeek WellnessWeightMachineExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
 
+// Wellness
+// Guest facilities at the property to promote or maintain health, beauty, and fitness.
 type Wellness struct {
 	DoctorOnCall               *bool                                   `json:"doctorOnCall,omitempty"`
 	DoctorOnCallException      *WellnessDoctorOnCallExceptionEnum      `json:"doctorOnCallException,omitempty"`

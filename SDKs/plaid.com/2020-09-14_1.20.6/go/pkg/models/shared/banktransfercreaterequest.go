@@ -1,5 +1,7 @@
 package shared
 
+// BankTransferCreateRequest
+// BankTransferCreateRequest defines the request schema for `/bank_transfer/create`
 type BankTransferCreateRequest struct {
 	AccessToken          string                  `json:"access_token"`
 	AccountID            string                  `json:"account_id"`

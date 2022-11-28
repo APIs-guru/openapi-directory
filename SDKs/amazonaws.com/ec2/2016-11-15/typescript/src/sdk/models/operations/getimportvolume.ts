@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
+
 
 export enum GetImportVolumeActionEnum {
     ImportVolume = "ImportVolume"
@@ -11,13 +12,13 @@ export enum GetImportVolumeActionEnum {
  * Describes a disk image.
 **/
 export class GetImportVolumeImage extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, name=Bytes" })
+  @SpeakeasyMetadata({ data: "queryParam, name=Bytes" })
   bytes: number;
 
-  @Metadata({ data: "queryParam, name=Format" })
+  @SpeakeasyMetadata({ data: "queryParam, name=Format" })
   format: shared.DiskImageFormatEnum;
 
-  @Metadata({ data: "queryParam, name=ImportManifestUrl" })
+  @SpeakeasyMetadata({ data: "queryParam, name=ImportManifestUrl" })
   importManifestUrl: string;
 }
 
@@ -31,75 +32,75 @@ export enum GetImportVolumeVersionEnum {
  * Describes an EBS volume.
 **/
 export class GetImportVolumeVolume extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, name=Size" })
+  @SpeakeasyMetadata({ data: "queryParam, name=Size" })
   size: number;
 }
 
 
 export class GetImportVolumeQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Action" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" })
   action: GetImportVolumeActionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=AvailabilityZone" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=AvailabilityZone" })
   availabilityZone: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Description" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Description" })
   description?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=DryRun" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DryRun" })
   dryRun?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Image" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Image" })
   image: GetImportVolumeImage;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" })
   version: GetImportVolumeVersionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Volume" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Volume" })
   volume: GetImportVolumeVolume;
 }
 
 
 export class GetImportVolumeHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class GetImportVolumeRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetImportVolumeQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetImportVolumeHeaders;
 }
 
 
 export class GetImportVolumeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

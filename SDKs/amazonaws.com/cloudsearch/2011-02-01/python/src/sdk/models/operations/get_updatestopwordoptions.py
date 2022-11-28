@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetUpdateStopwordOptionsActionEnum(str, Enum):
     UPDATE_STOPWORD_OPTIONS = "UpdateStopwordOptions"
@@ -10,10 +14,10 @@ class GetUpdateStopwordOptionsVersionEnum(str, Enum):
 
 @dataclass
 class GetUpdateStopwordOptionsQueryParams:
-    action: GetUpdateStopwordOptionsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    domain_name: str = field(default=None, metadata={'query_param': { 'field_name': 'DomainName', 'style': 'form', 'explode': True }})
-    stopwords: str = field(default=None, metadata={'query_param': { 'field_name': 'Stopwords', 'style': 'form', 'explode': True }})
-    version: GetUpdateStopwordOptionsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetUpdateStopwordOptionsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    domain_name: str = field(metadata={'query_param': { 'field_name': 'DomainName', 'style': 'form', 'explode': True }})
+    stopwords: str = field(metadata={'query_param': { 'field_name': 'Stopwords', 'style': 'form', 'explode': True }})
+    version: GetUpdateStopwordOptionsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetUpdateStopwordOptionsHeaders:
 
 @dataclass
 class GetUpdateStopwordOptionsRequest:
-    query_params: GetUpdateStopwordOptionsQueryParams = field(default=None)
-    headers: GetUpdateStopwordOptionsHeaders = field(default=None)
+    headers: GetUpdateStopwordOptionsHeaders = field()
+    query_params: GetUpdateStopwordOptionsQueryParams = field()
     
 
 @dataclass
 class GetUpdateStopwordOptionsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

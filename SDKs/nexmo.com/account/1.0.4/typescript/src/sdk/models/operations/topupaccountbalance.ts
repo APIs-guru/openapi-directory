@@ -1,45 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export const TOPUPACCOUNTBALANCE_SERVERS = [
-	"https://rest.nexmo.com",
-];
 
+export const TopUpAccountBalanceServerList = [
+	"https://rest.nexmo.com",
+] as const;
 
 
 export class TopUpAccountBalanceQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=api_key" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_key" })
   apiKey: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=api_secret" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_secret" })
   apiSecret: string;
 }
 
 
 export class TopUpAccountBalanceRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   serverUrl?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: TopUpAccountBalanceQueryParams;
 
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
   request: shared.TopupRequest;
 }
 
 
 export class TopUpAccountBalanceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   success?: shared.Success;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   topUpAccountBalance401ApplicationJsonOneOf?: any;
 }

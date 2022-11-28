@@ -1,5 +1,7 @@
 package shared
 
+// FormTableDefinition
+// Definition of a form table for OCR data extraction from images
 type FormTableDefinition struct {
 	ColumnDefinitions         []FormTableColumnDefinition `json:"ColumnDefinitions,omitempty"`
 	TableID                   *string                     `json:"TableID,omitempty"`

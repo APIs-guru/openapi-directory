@@ -30,7 +30,7 @@ type ContentReturnpolicyonlineCreateSecurity struct {
 type ContentReturnpolicyonlineCreateRequest struct {
 	PathParams  ContentReturnpolicyonlineCreatePathParams
 	QueryParams ContentReturnpolicyonlineCreateQueryParams
-	Request     *shared.ReturnPolicyOnline `request:"mediaType=application/json"`
+	Request     *shared.ReturnPolicyOnlineInput `request:"mediaType=application/json"`
 	Security    ContentReturnpolicyonlineCreateSecurity
 }
 

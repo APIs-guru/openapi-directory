@@ -1,5 +1,7 @@
 package shared
 
+// Counters
+// Represents entity counters.
 type Counters struct {
 	Errored *int64 `json:"errored,omitempty"`
 	Failed  *int64 `json:"failed,omitempty"`

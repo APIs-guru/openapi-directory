@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OutgoingCertificate } from "./outgoingcertificate";
+
 
 
 // ListOutgoingCertificatesResponse
@@ -8,9 +8,9 @@ import { OutgoingCertificate } from "./outgoingcertificate";
  * The output from the ListOutgoingCertificates operation.
 **/
 export class ListOutgoingCertificatesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextMarker" })
+  @SpeakeasyMetadata({ data: "json, name=nextMarker" })
   nextMarker?: string;
 
-  @Metadata({ data: "json, name=outgoingCertificates", elemType: shared.OutgoingCertificate })
+  @SpeakeasyMetadata({ data: "json, name=outgoingCertificates", elemType: OutgoingCertificate })
   outgoingCertificates?: OutgoingCertificate[];
 }

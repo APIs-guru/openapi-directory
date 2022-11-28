@@ -1,5 +1,7 @@
 package shared
 
+// NewTransitVirtualInterfaceAllocation
+// Information about a transit virtual interface to be provisioned on a connection.
 type NewTransitVirtualInterfaceAllocation struct {
 	AddressFamily        *AddressFamilyEnum `json:"addressFamily,omitempty"`
 	AmazonAddress        *string            `json:"amazonAddress,omitempty"`

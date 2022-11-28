@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum AssociateServiceQuotaTemplateXAmzTargetEnum {
     ServiceQuotasV20190624AssociateServiceQuotaTemplate = "ServiceQuotasV20190624.AssociateServiceQuotaTemplate"
 }

@@ -20,12 +20,12 @@ type PostPortfolioConstructionMimickingRequestBody struct {
 	Constraints      *PostPortfolioConstructionMimickingRequestBodyConstraints `json:"constraints,omitempty"`
 }
 
-type PostPortfolioConstructionMimickingRequest struct {
-	Request PostPortfolioConstructionMimickingRequestBody `request:"mediaType=application/json"`
-}
-
 type PostPortfolioConstructionMimicking200ApplicationJSON struct {
 	AssetsWeights []float64 `json:"assetsWeights"`
+}
+
+type PostPortfolioConstructionMimickingRequest struct {
+	Request PostPortfolioConstructionMimickingRequestBody `request:"mediaType=application/json"`
 }
 
 type PostPortfolioConstructionMimickingResponse struct {

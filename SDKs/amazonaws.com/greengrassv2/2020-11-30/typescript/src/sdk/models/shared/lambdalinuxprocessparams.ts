@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LambdaContainerParams } from "./lambdacontainerparams";
 import { LambdaIsolationModeEnum } from "./lambdaisolationmodeenum";
+
 
 
 // LambdaLinuxProcessParams
@@ -8,9 +9,9 @@ import { LambdaIsolationModeEnum } from "./lambdaisolationmodeenum";
  * Contains parameters for a Linux process that contains an Lambda function.
 **/
 export class LambdaLinuxProcessParams extends SpeakeasyBase {
-  @Metadata({ data: "json, name=containerParams" })
+  @SpeakeasyMetadata({ data: "json, name=containerParams" })
   containerParams?: LambdaContainerParams;
 
-  @Metadata({ data: "json, name=isolationMode" })
+  @SpeakeasyMetadata({ data: "json, name=isolationMode" })
   isolationMode?: LambdaIsolationModeEnum;
 }

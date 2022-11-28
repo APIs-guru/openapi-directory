@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class PostWebhooksRegistrationsRequestBodyTopicEnum(str, Enum):
     LISTINGS_UPDATE = "listings/update"
@@ -16,8 +21,8 @@ class PostWebhooksRegistrationsRequestBodyTopicEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PostWebhooksRegistrationsRequestBody:
-    topic: PostWebhooksRegistrationsRequestBodyTopicEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'topic' }})
-    url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
+    topic: PostWebhooksRegistrationsRequestBodyTopicEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('topic') }})
+    url: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('url') }})
     
 
 @dataclass
@@ -27,6 +32,6 @@ class PostWebhooksRegistrationsRequest:
 
 @dataclass
 class PostWebhooksRegistrationsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

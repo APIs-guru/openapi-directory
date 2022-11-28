@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Embedded } from "./embedded";
 import { Links } from "./links";
 var Applications = /** @class */ (function (_super) {
@@ -31,23 +31,23 @@ var Applications = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=_embedded" }),
+        SpeakeasyMetadata({ data: "json, name=_embedded" }),
         __metadata("design:type", Embedded)
     ], Applications.prototype, "embedded", void 0);
     __decorate([
-        Metadata({ data: "json, name=_links" }),
+        SpeakeasyMetadata({ data: "json, name=_links" }),
         __metadata("design:type", Links)
     ], Applications.prototype, "links", void 0);
     __decorate([
-        Metadata({ data: "json, name=count" }),
+        SpeakeasyMetadata({ data: "json, name=count" }),
         __metadata("design:type", Number)
     ], Applications.prototype, "count", void 0);
     __decorate([
-        Metadata({ data: "json, name=page_index" }),
+        SpeakeasyMetadata({ data: "json, name=page_index" }),
         __metadata("design:type", Number)
     ], Applications.prototype, "pageIndex", void 0);
     __decorate([
-        Metadata({ data: "json, name=page_size" }),
+        SpeakeasyMetadata({ data: "json, name=page_size" }),
         __metadata("design:type", Number)
     ], Applications.prototype, "pageSize", void 0);
     return Applications;

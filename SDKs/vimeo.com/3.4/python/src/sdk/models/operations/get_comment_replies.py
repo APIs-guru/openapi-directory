@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class GetCommentRepliesPathParams:
-    comment_id: float = field(default=None, metadata={'path_param': { 'field_name': 'comment_id', 'style': 'simple', 'explode': False }})
-    video_id: float = field(default=None, metadata={'path_param': { 'field_name': 'video_id', 'style': 'simple', 'explode': False }})
+    comment_id: float = field(metadata={'path_param': { 'field_name': 'comment_id', 'style': 'simple', 'explode': False }})
+    video_id: float = field(metadata={'path_param': { 'field_name': 'video_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,14 +17,14 @@ class GetCommentRepliesQueryParams:
 
 @dataclass
 class GetCommentRepliesRequest:
-    path_params: GetCommentRepliesPathParams = field(default=None)
-    query_params: GetCommentRepliesQueryParams = field(default=None)
+    path_params: GetCommentRepliesPathParams = field()
+    query_params: GetCommentRepliesQueryParams = field()
     
 
 @dataclass
 class GetCommentRepliesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     comments: Optional[List[shared.Comment]] = field(default=None)
     legacy_error: Optional[shared.LegacyError] = field(default=None)
     

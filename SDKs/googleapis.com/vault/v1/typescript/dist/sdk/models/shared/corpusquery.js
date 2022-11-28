@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HeldDriveQuery } from "./helddrivequery";
 import { HeldGroupsQuery } from "./heldgroupsquery";
 import { HeldHangoutsChatQuery } from "./heldhangoutschatquery";
@@ -38,23 +38,23 @@ var CorpusQuery = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=driveQuery" }),
+        SpeakeasyMetadata({ data: "json, name=driveQuery" }),
         __metadata("design:type", HeldDriveQuery)
     ], CorpusQuery.prototype, "driveQuery", void 0);
     __decorate([
-        Metadata({ data: "json, name=groupsQuery" }),
+        SpeakeasyMetadata({ data: "json, name=groupsQuery" }),
         __metadata("design:type", HeldGroupsQuery)
     ], CorpusQuery.prototype, "groupsQuery", void 0);
     __decorate([
-        Metadata({ data: "json, name=hangoutsChatQuery" }),
+        SpeakeasyMetadata({ data: "json, name=hangoutsChatQuery" }),
         __metadata("design:type", HeldHangoutsChatQuery)
     ], CorpusQuery.prototype, "hangoutsChatQuery", void 0);
     __decorate([
-        Metadata({ data: "json, name=mailQuery" }),
+        SpeakeasyMetadata({ data: "json, name=mailQuery" }),
         __metadata("design:type", HeldMailQuery)
     ], CorpusQuery.prototype, "mailQuery", void 0);
     __decorate([
-        Metadata({ data: "json, name=voiceQuery" }),
+        SpeakeasyMetadata({ data: "json, name=voiceQuery" }),
         __metadata("design:type", HeldVoiceQuery)
     ], CorpusQuery.prototype, "voiceQuery", void 0);
     return CorpusQuery;

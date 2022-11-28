@@ -1,7 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleTypeColor } from "./googletypecolor";
-import { GoogleTypeColor } from "./googletypecolor";
-import { GoogleTypeColor } from "./googletypecolor";
+
 
 
 // GoogleAppsDriveLabelsV2BadgeColors
@@ -9,12 +8,12 @@ import { GoogleTypeColor } from "./googletypecolor";
  * The color derived from BadgeConfig and changed to the closest recommended supported color.
 **/
 export class GoogleAppsDriveLabelsV2BadgeColors extends SpeakeasyBase {
-  @Metadata({ data: "json, name=backgroundColor" })
+  @SpeakeasyMetadata({ data: "json, name=backgroundColor" })
   backgroundColor?: GoogleTypeColor;
 
-  @Metadata({ data: "json, name=foregroundColor" })
+  @SpeakeasyMetadata({ data: "json, name=foregroundColor" })
   foregroundColor?: GoogleTypeColor;
 
-  @Metadata({ data: "json, name=soloColor" })
+  @SpeakeasyMetadata({ data: "json, name=soloColor" })
   soloColor?: GoogleTypeColor;
 }

@@ -1,12 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import keywordinputtype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SourceKeyword:
-    keyword_input_type: Optional[keywordinputtype_enum.KeywordInputTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'keywordInputType' }})
-    keyword_value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'keywordValue' }})
+    r"""SourceKeyword
+     The keyword to search for in CloudTrail logs, Config rules, Security Hub checks, and Amazon Web Services API names. 
+    """
+    
+    keyword_input_type: Optional[KeywordInputTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('keywordInputType') }})
+    keyword_value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('keywordValue') }})
     

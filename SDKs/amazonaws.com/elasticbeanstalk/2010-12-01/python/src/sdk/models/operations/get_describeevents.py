@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 
 class GetDescribeEventsActionEnum(str, Enum):
     DESCRIBE_EVENTS = "DescribeEvents"
@@ -21,7 +22,8 @@ class GetDescribeEventsVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeEventsQueryParams:
-    action: GetDescribeEventsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribeEventsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDescribeEventsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     application_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'ApplicationName', 'style': 'form', 'explode': True }})
     end_time: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'EndTime', 'style': 'form', 'explode': True }})
     environment_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'EnvironmentId', 'style': 'form', 'explode': True }})
@@ -33,7 +35,6 @@ class GetDescribeEventsQueryParams:
     severity: Optional[GetDescribeEventsSeverityEnum] = field(default=None, metadata={'query_param': { 'field_name': 'Severity', 'style': 'form', 'explode': True }})
     start_time: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'StartTime', 'style': 'form', 'explode': True }})
     template_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'TemplateName', 'style': 'form', 'explode': True }})
-    version: GetDescribeEventsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     version_label: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'VersionLabel', 'style': 'form', 'explode': True }})
     
 
@@ -50,13 +51,13 @@ class GetDescribeEventsHeaders:
 
 @dataclass
 class GetDescribeEventsRequest:
-    query_params: GetDescribeEventsQueryParams = field(default=None)
-    headers: GetDescribeEventsHeaders = field(default=None)
+    headers: GetDescribeEventsHeaders = field()
+    query_params: GetDescribeEventsQueryParams = field()
     
 
 @dataclass
 class GetDescribeEventsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

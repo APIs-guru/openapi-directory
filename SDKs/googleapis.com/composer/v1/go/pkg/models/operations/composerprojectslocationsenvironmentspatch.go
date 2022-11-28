@@ -31,7 +31,7 @@ type ComposerProjectsLocationsEnvironmentsPatchSecurity struct {
 type ComposerProjectsLocationsEnvironmentsPatchRequest struct {
 	PathParams  ComposerProjectsLocationsEnvironmentsPatchPathParams
 	QueryParams ComposerProjectsLocationsEnvironmentsPatchQueryParams
-	Request     *shared.Environment `request:"mediaType=application/json"`
+	Request     *shared.EnvironmentInput `request:"mediaType=application/json"`
 	Security    ComposerProjectsLocationsEnvironmentsPatchSecurity
 }
 

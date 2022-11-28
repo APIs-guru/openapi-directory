@@ -1,9 +1,10 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -21,23 +22,23 @@ class DescribeAccountOverviewHeaders:
 @dataclass_json
 @dataclass
 class DescribeAccountOverviewRequestBody:
-    from_time: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FromTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    to_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ToTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    from_time: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('FromTime'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    to_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ToTime'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     
 
 @dataclass
 class DescribeAccountOverviewRequest:
-    headers: DescribeAccountOverviewHeaders = field(default=None)
-    request: DescribeAccountOverviewRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: DescribeAccountOverviewHeaders = field()
+    request: DescribeAccountOverviewRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DescribeAccountOverviewResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     describe_account_overview_response: Optional[shared.DescribeAccountOverviewResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

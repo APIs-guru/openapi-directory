@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Comment } from "./comment";
 import { Location } from "./location";
+
 
 
 // CommentsForPullRequest
@@ -9,27 +9,27 @@ import { Location } from "./location";
  * Returns information about comments on a pull request.
 **/
 export class CommentsForPullRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=afterBlobId" })
+  @SpeakeasyMetadata({ data: "json, name=afterBlobId" })
   afterBlobId?: string;
 
-  @Metadata({ data: "json, name=afterCommitId" })
+  @SpeakeasyMetadata({ data: "json, name=afterCommitId" })
   afterCommitId?: string;
 
-  @Metadata({ data: "json, name=beforeBlobId" })
+  @SpeakeasyMetadata({ data: "json, name=beforeBlobId" })
   beforeBlobId?: string;
 
-  @Metadata({ data: "json, name=beforeCommitId" })
+  @SpeakeasyMetadata({ data: "json, name=beforeCommitId" })
   beforeCommitId?: string;
 
-  @Metadata({ data: "json, name=comments", elemType: shared.Comment })
+  @SpeakeasyMetadata({ data: "json, name=comments", elemType: Comment })
   comments?: Comment[];
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: Location;
 
-  @Metadata({ data: "json, name=pullRequestId" })
+  @SpeakeasyMetadata({ data: "json, name=pullRequestId" })
   pullRequestId?: string;
 
-  @Metadata({ data: "json, name=repositoryName" })
+  @SpeakeasyMetadata({ data: "json, name=repositoryName" })
   repositoryName?: string;
 }

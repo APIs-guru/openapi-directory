@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Datum } from "./datum";
+
 
 
 // Row
@@ -8,6 +8,6 @@ import { Datum } from "./datum";
  * The rows that comprise a query result table.
 **/
 export class Row extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Data", elemType: shared.Datum })
+  @SpeakeasyMetadata({ data: "json, name=Data", elemType: Datum })
   data?: Datum[];
 }

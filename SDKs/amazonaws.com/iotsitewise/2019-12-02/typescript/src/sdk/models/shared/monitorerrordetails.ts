@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MonitorErrorCodeEnum } from "./monitorerrorcodeenum";
+
 
 
 // MonitorErrorDetails
@@ -7,9 +8,9 @@ import { MonitorErrorCodeEnum } from "./monitorerrorcodeenum";
  * Contains IoT SiteWise Monitor error details.
 **/
 export class MonitorErrorDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: MonitorErrorCodeEnum;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }

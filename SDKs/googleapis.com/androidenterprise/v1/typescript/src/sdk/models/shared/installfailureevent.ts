@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum InstallFailureEventFailureReasonEnum {
-    Unknown = "unknown"
-,    Timeout = "timeout"
+    Unknown = "unknown",
+    Timeout = "timeout"
 }
 
 
@@ -11,18 +12,18 @@ export enum InstallFailureEventFailureReasonEnum {
  * An event generated when an app installation failed on a device
 **/
 export class InstallFailureEvent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deviceId" })
+  @SpeakeasyMetadata({ data: "json, name=deviceId" })
   deviceId?: string;
 
-  @Metadata({ data: "json, name=failureDetails" })
+  @SpeakeasyMetadata({ data: "json, name=failureDetails" })
   failureDetails?: string;
 
-  @Metadata({ data: "json, name=failureReason" })
+  @SpeakeasyMetadata({ data: "json, name=failureReason" })
   failureReason?: InstallFailureEventFailureReasonEnum;
 
-  @Metadata({ data: "json, name=productId" })
+  @SpeakeasyMetadata({ data: "json, name=productId" })
   productId?: string;
 
-  @Metadata({ data: "json, name=userId" })
+  @SpeakeasyMetadata({ data: "json, name=userId" })
   userId?: string;
 }

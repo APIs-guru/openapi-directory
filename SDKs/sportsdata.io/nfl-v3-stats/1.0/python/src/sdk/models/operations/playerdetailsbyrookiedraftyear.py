@@ -4,18 +4,18 @@ from typing import Any,List,Optional
 
 @dataclass
 class PlayerDetailsByRookieDraftYearPathParams:
-    format: str = field(default=None, metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
-    season: str = field(default=None, metadata={'path_param': { 'field_name': 'season', 'style': 'simple', 'explode': False }})
+    format: str = field(metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
+    season: str = field(metadata={'path_param': { 'field_name': 'season', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class PlayerDetailsByRookieDraftYearRequest:
-    path_params: PlayerDetailsByRookieDraftYearPathParams = field(default=None)
+    path_params: PlayerDetailsByRookieDraftYearPathParams = field()
     
 
 @dataclass
 class PlayerDetailsByRookieDraftYearResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     players: Optional[List[Any]] = field(default=None)
-    status_code: int = field(default=None)
     

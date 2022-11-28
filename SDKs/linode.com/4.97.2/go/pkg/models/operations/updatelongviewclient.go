@@ -8,27 +8,19 @@ type UpdateLongviewClientPathParams struct {
 	ClientID int64 `pathParam:"style=simple,explode=false,name=clientId"`
 }
 
-type UpdateLongviewClientSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type UpdateLongviewClientSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type UpdateLongviewClientSecurity struct {
-	Option1 *UpdateLongviewClientSecurityOption1 `security:"option"`
-	Option2 *UpdateLongviewClientSecurityOption2 `security:"option"`
-}
-
-type UpdateLongviewClientRequest struct {
-	PathParams UpdateLongviewClientPathParams
-	Request    shared.LongviewClient `request:"mediaType=application/json"`
-	Security   UpdateLongviewClientSecurity
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
 }
 
 type UpdateLongviewClientDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type UpdateLongviewClientRequest struct {
+	PathParams UpdateLongviewClientPathParams
+	Request    shared.LongviewClientInput `request:"mediaType=application/json"`
+	Security   UpdateLongviewClientSecurity
 }
 
 type UpdateLongviewClientResponse struct {

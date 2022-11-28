@@ -1,21 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Attribute } from "./attribute";
 
 
+
 export class CreateAssessmentTemplateRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assessmentTargetArn" })
+  @SpeakeasyMetadata({ data: "json, name=assessmentTargetArn" })
   assessmentTargetArn: string;
 
-  @Metadata({ data: "json, name=assessmentTemplateName" })
+  @SpeakeasyMetadata({ data: "json, name=assessmentTemplateName" })
   assessmentTemplateName: string;
 
-  @Metadata({ data: "json, name=durationInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=durationInSeconds" })
   durationInSeconds: number;
 
-  @Metadata({ data: "json, name=rulesPackageArns" })
+  @SpeakeasyMetadata({ data: "json, name=rulesPackageArns" })
   rulesPackageArns: string[];
 
-  @Metadata({ data: "json, name=userAttributesForFindings", elemType: shared.Attribute })
+  @SpeakeasyMetadata({ data: "json, name=userAttributesForFindings", elemType: Attribute })
   userAttributesForFindings?: Attribute[];
 }

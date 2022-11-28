@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class MailerGenericExporterConfigTypeEnum(str, Enum):
     GENERIC = "generic"
@@ -9,8 +11,8 @@ class MailerGenericExporterConfigTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class MailerGenericExporterConfig:
-    headers: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'headers' }})
-    to: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'to' }})
-    type: MailerGenericExporterConfigTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
+    type: MailerGenericExporterConfigTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    headers: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('headers') }})
+    to: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('to') }})
+    url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('url') }})
     

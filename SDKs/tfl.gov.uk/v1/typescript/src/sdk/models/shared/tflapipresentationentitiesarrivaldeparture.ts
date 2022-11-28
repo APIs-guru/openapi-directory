@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TflApiPresentationEntitiesPredictionTiming } from "./tflapipresentationentitiespredictiontiming";
 
+
 export enum TflApiPresentationEntitiesArrivalDepartureDepartureStatusEnum {
-    OnTime = "OnTime"
-,    Delayed = "Delayed"
-,    Cancelled = "Cancelled"
-,    NotStoppingAtStation = "NotStoppingAtStation"
+    OnTime = "OnTime",
+    Delayed = "Delayed",
+    Cancelled = "Cancelled",
+    NotStoppingAtStation = "NotStoppingAtStation"
 }
 
 
@@ -14,45 +15,45 @@ export enum TflApiPresentationEntitiesArrivalDepartureDepartureStatusEnum {
  * DTO to capture the prediction details
 **/
 export class TflApiPresentationEntitiesArrivalDeparture extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cause" })
+  @SpeakeasyMetadata({ data: "json, name=cause" })
   cause?: string;
 
-  @Metadata({ data: "json, name=departureStatus" })
+  @SpeakeasyMetadata({ data: "json, name=departureStatus" })
   departureStatus?: TflApiPresentationEntitiesArrivalDepartureDepartureStatusEnum;
 
-  @Metadata({ data: "json, name=destinationName" })
+  @SpeakeasyMetadata({ data: "json, name=destinationName" })
   destinationName?: string;
 
-  @Metadata({ data: "json, name=destinationNaptanId" })
+  @SpeakeasyMetadata({ data: "json, name=destinationNaptanId" })
   destinationNaptanId?: string;
 
-  @Metadata({ data: "json, name=estimatedTimeOfArrival" })
+  @SpeakeasyMetadata({ data: "json, name=estimatedTimeOfArrival" })
   estimatedTimeOfArrival?: Date;
 
-  @Metadata({ data: "json, name=estimatedTimeOfDeparture" })
+  @SpeakeasyMetadata({ data: "json, name=estimatedTimeOfDeparture" })
   estimatedTimeOfDeparture?: Date;
 
-  @Metadata({ data: "json, name=minutesAndSecondsToArrival" })
+  @SpeakeasyMetadata({ data: "json, name=minutesAndSecondsToArrival" })
   minutesAndSecondsToArrival?: string;
 
-  @Metadata({ data: "json, name=minutesAndSecondsToDeparture" })
+  @SpeakeasyMetadata({ data: "json, name=minutesAndSecondsToDeparture" })
   minutesAndSecondsToDeparture?: string;
 
-  @Metadata({ data: "json, name=naptanId" })
+  @SpeakeasyMetadata({ data: "json, name=naptanId" })
   naptanId?: string;
 
-  @Metadata({ data: "json, name=platformName" })
+  @SpeakeasyMetadata({ data: "json, name=platformName" })
   platformName?: string;
 
-  @Metadata({ data: "json, name=scheduledTimeOfArrival" })
+  @SpeakeasyMetadata({ data: "json, name=scheduledTimeOfArrival" })
   scheduledTimeOfArrival?: Date;
 
-  @Metadata({ data: "json, name=scheduledTimeOfDeparture" })
+  @SpeakeasyMetadata({ data: "json, name=scheduledTimeOfDeparture" })
   scheduledTimeOfDeparture?: Date;
 
-  @Metadata({ data: "json, name=stationName" })
+  @SpeakeasyMetadata({ data: "json, name=stationName" })
   stationName?: string;
 
-  @Metadata({ data: "json, name=timing" })
+  @SpeakeasyMetadata({ data: "json, name=timing" })
   timing?: TflApiPresentationEntitiesPredictionTiming;
 }

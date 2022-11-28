@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// LoadBalancer
+// Describes a load balancer.
 type LoadBalancer struct {
 	Arn                     *string                             `json:"arn,omitempty"`
 	ConfigurationOptions    map[string]string                   `json:"configurationOptions,omitempty"`

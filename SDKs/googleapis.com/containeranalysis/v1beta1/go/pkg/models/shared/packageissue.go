@@ -11,6 +11,17 @@ const (
 	PackageIssueEffectiveSeverityEnumCritical            PackageIssueEffectiveSeverityEnum = "CRITICAL"
 )
 
+// PackageIssueInput
+// This message wraps a location affected by a vulnerability and its associated fix (if one is available).
+type PackageIssueInput struct {
+	AffectedLocation *VulnerabilityLocation `json:"affectedLocation,omitempty"`
+	FixedLocation    *VulnerabilityLocation `json:"fixedLocation,omitempty"`
+	PackageType      *string                `json:"packageType,omitempty"`
+	SeverityName     *string                `json:"severityName,omitempty"`
+}
+
+// PackageIssue
+// This message wraps a location affected by a vulnerability and its associated fix (if one is available).
 type PackageIssue struct {
 	AffectedLocation  *VulnerabilityLocation             `json:"affectedLocation,omitempty"`
 	EffectiveSeverity *PackageIssueEffectiveSeverityEnum `json:"effectiveSeverity,omitempty"`

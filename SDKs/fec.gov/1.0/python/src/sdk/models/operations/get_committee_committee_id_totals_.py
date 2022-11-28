@@ -5,12 +5,12 @@ from sdk.models import shared
 
 @dataclass
 class GetCommitteeCommitteeIDTotalsPathParams:
-    committee_id: str = field(default=None, metadata={'path_param': { 'field_name': 'committee_id', 'style': 'simple', 'explode': False }})
+    committee_id: str = field(metadata={'path_param': { 'field_name': 'committee_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetCommitteeCommitteeIDTotalsQueryParams:
-    api_key: str = field(default=None, metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
+    api_key: str = field(metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
     cycle: Optional[List[int]] = field(default=None, metadata={'query_param': { 'field_name': 'cycle', 'style': 'form', 'explode': True }})
     page: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'page', 'style': 'form', 'explode': True }})
     per_page: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'per_page', 'style': 'form', 'explode': True }})
@@ -22,13 +22,13 @@ class GetCommitteeCommitteeIDTotalsQueryParams:
 
 @dataclass
 class GetCommitteeCommitteeIDTotalsRequest:
-    path_params: GetCommitteeCommitteeIDTotalsPathParams = field(default=None)
-    query_params: GetCommitteeCommitteeIDTotalsQueryParams = field(default=None)
+    path_params: GetCommitteeCommitteeIDTotalsPathParams = field()
+    query_params: GetCommitteeCommitteeIDTotalsQueryParams = field()
     
 
 @dataclass
 class GetCommitteeCommitteeIDTotalsResponse:
+    content_type: str = field()
+    status_code: int = field()
     committee_totals_page: Optional[shared.CommitteeTotalsPage] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

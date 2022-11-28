@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class V3VehicleDescriptor extends SpeakeasyBase {
-  @Metadata({ data: "json, name=air_conditioned" })
+  @SpeakeasyMetadata({ data: "json, name=air_conditioned" })
   airConditioned?: boolean;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=length" })
+  @SpeakeasyMetadata({ data: "json, name=length" })
   length?: string;
 
-  @Metadata({ data: "json, name=low_floor" })
+  @SpeakeasyMetadata({ data: "json, name=low_floor" })
   lowFloor?: boolean;
 
-  @Metadata({ data: "json, name=operator" })
+  @SpeakeasyMetadata({ data: "json, name=operator" })
   operator?: string;
 
-  @Metadata({ data: "json, name=supplier" })
+  @SpeakeasyMetadata({ data: "json, name=supplier" })
   supplier?: string;
 }

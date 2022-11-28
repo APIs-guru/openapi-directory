@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var Psd2RequestLgEnum;
 (function (Psd2RequestLgEnum) {
     Psd2RequestLgEnum["EnGb"] = "en-gb";
@@ -53,47 +53,47 @@ var Psd2Request = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "form, name=amount;" }),
+        SpeakeasyMetadata({ data: "form, name=amount;" }),
         __metadata("design:type", Number)
     ], Psd2Request.prototype, "amount", void 0);
     __decorate([
-        Metadata({ data: "form, name=api_key;" }),
+        SpeakeasyMetadata({ data: "form, name=api_key;" }),
         __metadata("design:type", String)
     ], Psd2Request.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "form, name=api_secret;" }),
+        SpeakeasyMetadata({ data: "form, name=api_secret;" }),
         __metadata("design:type", String)
     ], Psd2Request.prototype, "apiSecret", void 0);
     __decorate([
-        Metadata({ data: "form, name=code_length;" }),
+        SpeakeasyMetadata({ data: "form, name=code_length;" }),
         __metadata("design:type", Number)
     ], Psd2Request.prototype, "codeLength", void 0);
     __decorate([
-        Metadata({ data: "form, name=country;" }),
+        SpeakeasyMetadata({ data: "form, name=country;" }),
         __metadata("design:type", String)
     ], Psd2Request.prototype, "country", void 0);
     __decorate([
-        Metadata({ data: "form, name=lg;" }),
+        SpeakeasyMetadata({ data: "form, name=lg;" }),
         __metadata("design:type", String)
     ], Psd2Request.prototype, "lg", void 0);
     __decorate([
-        Metadata({ data: "form, name=next_event_wait;" }),
+        SpeakeasyMetadata({ data: "form, name=next_event_wait;" }),
         __metadata("design:type", Number)
     ], Psd2Request.prototype, "nextEventWait", void 0);
     __decorate([
-        Metadata({ data: "form, name=number;" }),
+        SpeakeasyMetadata({ data: "form, name=number;" }),
         __metadata("design:type", String)
     ], Psd2Request.prototype, "number", void 0);
     __decorate([
-        Metadata({ data: "form, name=payee;" }),
+        SpeakeasyMetadata({ data: "form, name=payee;" }),
         __metadata("design:type", String)
     ], Psd2Request.prototype, "payee", void 0);
     __decorate([
-        Metadata({ data: "form, name=pin_expiry;" }),
+        SpeakeasyMetadata({ data: "form, name=pin_expiry;" }),
         __metadata("design:type", Number)
     ], Psd2Request.prototype, "pinExpiry", void 0);
     __decorate([
-        Metadata({ data: "form, name=workflow_id;" }),
+        SpeakeasyMetadata({ data: "form, name=workflow_id;" }),
         __metadata("design:type", Number)
     ], Psd2Request.prototype, "workflowId", void 0);
     return Psd2Request;

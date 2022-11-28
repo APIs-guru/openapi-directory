@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ScalableDimensionEnum(str, Enum):
     ECS_SERVICE_DESIRED_COUNT = "ecs:service:DesiredCount"

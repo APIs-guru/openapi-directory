@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ObWriteDomesticStandingOrder3DataInitiationCreditorAccount
+// Identification assigned by an institution to identify an account. This identification is known by the account owner.
 type ObWriteDomesticStandingOrder3DataInitiationCreditorAccount struct {
 	Identification          string  `json:"Identification"`
 	Name                    string  `json:"Name"`
@@ -11,6 +13,8 @@ type ObWriteDomesticStandingOrder3DataInitiationCreditorAccount struct {
 	SecondaryIdentification *string `json:"SecondaryIdentification,omitempty"`
 }
 
+// ObWriteDomesticStandingOrder3DataInitiationDebtorAccount
+// Provides the details to identify the debtor account.
 type ObWriteDomesticStandingOrder3DataInitiationDebtorAccount struct {
 	Identification          string  `json:"Identification"`
 	Name                    *string `json:"Name,omitempty"`
@@ -18,21 +22,29 @@ type ObWriteDomesticStandingOrder3DataInitiationDebtorAccount struct {
 	SecondaryIdentification *string `json:"SecondaryIdentification,omitempty"`
 }
 
+// ObWriteDomesticStandingOrder3DataInitiationFinalPaymentAmount
+// The amount of the final Standing Order
 type ObWriteDomesticStandingOrder3DataInitiationFinalPaymentAmount struct {
 	Amount   string `json:"Amount"`
 	Currency string `json:"Currency"`
 }
 
+// ObWriteDomesticStandingOrder3DataInitiationFirstPaymentAmount
+// The amount of the first Standing Order
 type ObWriteDomesticStandingOrder3DataInitiationFirstPaymentAmount struct {
 	Amount   string `json:"Amount"`
 	Currency string `json:"Currency"`
 }
 
+// ObWriteDomesticStandingOrder3DataInitiationRecurringPaymentAmount
+// The amount of the recurring Standing Order
 type ObWriteDomesticStandingOrder3DataInitiationRecurringPaymentAmount struct {
 	Amount   string `json:"Amount"`
 	Currency string `json:"Currency"`
 }
 
+// ObWriteDomesticStandingOrder3DataInitiation
+// The Initiation payload is sent by the initiating party to the ASPSP. It is used to request movement of funds from the debtor account to a creditor for a domestic standing order.
 type ObWriteDomesticStandingOrder3DataInitiation struct {
 	CreditorAccount          ObWriteDomesticStandingOrder3DataInitiationCreditorAccount         `json:"CreditorAccount"`
 	DebtorAccount            *ObWriteDomesticStandingOrder3DataInitiationDebtorAccount          `json:"DebtorAccount,omitempty"`

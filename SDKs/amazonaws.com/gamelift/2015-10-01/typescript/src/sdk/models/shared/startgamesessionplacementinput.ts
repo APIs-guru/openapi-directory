@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DesiredPlayerSession } from "./desiredplayersession";
 import { GameProperty } from "./gameproperty";
 import { PlayerLatency } from "./playerlatency";
+
 
 
 // StartGameSessionPlacementInput
@@ -10,27 +10,27 @@ import { PlayerLatency } from "./playerlatency";
  * Represents the input for a request operation.
 **/
 export class StartGameSessionPlacementInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DesiredPlayerSessions", elemType: shared.DesiredPlayerSession })
+  @SpeakeasyMetadata({ data: "json, name=DesiredPlayerSessions", elemType: DesiredPlayerSession })
   desiredPlayerSessions?: DesiredPlayerSession[];
 
-  @Metadata({ data: "json, name=GameProperties", elemType: shared.GameProperty })
+  @SpeakeasyMetadata({ data: "json, name=GameProperties", elemType: GameProperty })
   gameProperties?: GameProperty[];
 
-  @Metadata({ data: "json, name=GameSessionData" })
+  @SpeakeasyMetadata({ data: "json, name=GameSessionData" })
   gameSessionData?: string;
 
-  @Metadata({ data: "json, name=GameSessionName" })
+  @SpeakeasyMetadata({ data: "json, name=GameSessionName" })
   gameSessionName?: string;
 
-  @Metadata({ data: "json, name=GameSessionQueueName" })
+  @SpeakeasyMetadata({ data: "json, name=GameSessionQueueName" })
   gameSessionQueueName: string;
 
-  @Metadata({ data: "json, name=MaximumPlayerSessionCount" })
+  @SpeakeasyMetadata({ data: "json, name=MaximumPlayerSessionCount" })
   maximumPlayerSessionCount: number;
 
-  @Metadata({ data: "json, name=PlacementId" })
+  @SpeakeasyMetadata({ data: "json, name=PlacementId" })
   placementId: string;
 
-  @Metadata({ data: "json, name=PlayerLatencies", elemType: shared.PlayerLatency })
+  @SpeakeasyMetadata({ data: "json, name=PlayerLatencies", elemType: PlayerLatency })
   playerLatencies?: PlayerLatency[];
 }

@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class CancelAuditTaskPathParams:
-    task_id: str = field(default=None, metadata={'path_param': { 'field_name': 'taskId', 'style': 'simple', 'explode': False }})
+    task_id: str = field(metadata={'path_param': { 'field_name': 'taskId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,17 +23,17 @@ class CancelAuditTaskHeaders:
 
 @dataclass
 class CancelAuditTaskRequest:
-    path_params: CancelAuditTaskPathParams = field(default=None)
-    headers: CancelAuditTaskHeaders = field(default=None)
+    headers: CancelAuditTaskHeaders = field()
+    path_params: CancelAuditTaskPathParams = field()
     
 
 @dataclass
 class CancelAuditTaskResponse:
+    content_type: str = field()
+    status_code: int = field()
     cancel_audit_task_response: Optional[dict[str, Any]] = field(default=None)
-    content_type: str = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

@@ -1,5 +1,7 @@
 package shared
 
+// DynamicLinkInfo
+// Information about a Dynamic Link.
 type DynamicLinkInfo struct {
 	AnalyticsInfo     *AnalyticsInfo     `json:"analyticsInfo,omitempty"`
 	AndroidInfo       *AndroidInfo       `json:"androidInfo,omitempty"`

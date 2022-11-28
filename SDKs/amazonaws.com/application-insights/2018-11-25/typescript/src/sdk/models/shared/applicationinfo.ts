@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ApplicationInfo
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes the status of the application.
 **/
 export class ApplicationInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CWEMonitorEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=CWEMonitorEnabled" })
   cweMonitorEnabled?: boolean;
 
-  @Metadata({ data: "json, name=LifeCycle" })
+  @SpeakeasyMetadata({ data: "json, name=LifeCycle" })
   lifeCycle?: string;
 
-  @Metadata({ data: "json, name=OpsCenterEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=OpsCenterEnabled" })
   opsCenterEnabled?: boolean;
 
-  @Metadata({ data: "json, name=OpsItemSNSTopicArn" })
+  @SpeakeasyMetadata({ data: "json, name=OpsItemSNSTopicArn" })
   opsItemSnsTopicArn?: string;
 
-  @Metadata({ data: "json, name=Remarks" })
+  @SpeakeasyMetadata({ data: "json, name=Remarks" })
   remarks?: string;
 
-  @Metadata({ data: "json, name=ResourceGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceGroupName" })
   resourceGroupName?: string;
 }

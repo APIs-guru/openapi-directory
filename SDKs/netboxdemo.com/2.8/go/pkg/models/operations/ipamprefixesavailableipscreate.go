@@ -10,7 +10,6 @@ type IpamPrefixesAvailableIpsCreatePathParams struct {
 
 type IpamPrefixesAvailableIpsCreateRequest struct {
 	PathParams IpamPrefixesAvailableIpsCreatePathParams
-	Request    shared.WritableAvailableIP `request:"mediaType=application/json"`
 }
 
 type IpamPrefixesAvailableIpsCreateResponse struct {

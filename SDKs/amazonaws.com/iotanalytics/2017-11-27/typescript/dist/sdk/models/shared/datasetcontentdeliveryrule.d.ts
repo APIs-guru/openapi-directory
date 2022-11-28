@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DatasetContentDeliveryDestination } from "./datasetcontentdeliverydestination";
 /**
  * When dataset contents are created, they are delivered to destination specified here.

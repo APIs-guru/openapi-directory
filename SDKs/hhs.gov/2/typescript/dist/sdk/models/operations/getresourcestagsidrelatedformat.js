@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetResourcesTagsIdRelatedFormatPathParams = /** @class */ (function (_super) {
     __extends(GetResourcesTagsIdRelatedFormatPathParams, _super);
@@ -30,11 +30,11 @@ var GetResourcesTagsIdRelatedFormatPathParams = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=format" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" }),
         __metadata("design:type", String)
     ], GetResourcesTagsIdRelatedFormatPathParams.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", Number)
     ], GetResourcesTagsIdRelatedFormatPathParams.prototype, "id", void 0);
     return GetResourcesTagsIdRelatedFormatPathParams;
@@ -46,15 +46,15 @@ var GetResourcesTagsIdRelatedFormatQueryParams = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=max" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=max" }),
         __metadata("design:type", Number)
     ], GetResourcesTagsIdRelatedFormatQueryParams.prototype, "max", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=offset" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=offset" }),
         __metadata("design:type", Number)
     ], GetResourcesTagsIdRelatedFormatQueryParams.prototype, "offset", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=sort" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=sort" }),
         __metadata("design:type", String)
     ], GetResourcesTagsIdRelatedFormatQueryParams.prototype, "sort", void 0);
     return GetResourcesTagsIdRelatedFormatQueryParams;
@@ -66,11 +66,11 @@ var GetResourcesTagsIdRelatedFormatRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetResourcesTagsIdRelatedFormatPathParams)
     ], GetResourcesTagsIdRelatedFormatRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetResourcesTagsIdRelatedFormatQueryParams)
     ], GetResourcesTagsIdRelatedFormatRequest.prototype, "queryParams", void 0);
     return GetResourcesTagsIdRelatedFormatRequest;
@@ -82,15 +82,15 @@ var GetResourcesTagsIdRelatedFormatResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetResourcesTagsIdRelatedFormatResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetResourcesTagsIdRelatedFormatResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata({ elemType: shared.TagMarshallerWrapped }),
+        SpeakeasyMetadata({ elemType: shared.TagMarshallerWrapped }),
         __metadata("design:type", Array)
     ], GetResourcesTagsIdRelatedFormatResponse.prototype, "tagMarshallerWrappeds", void 0);
     return GetResourcesTagsIdRelatedFormatResponse;

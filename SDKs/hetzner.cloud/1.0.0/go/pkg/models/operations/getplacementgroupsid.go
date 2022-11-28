@@ -4,10 +4,6 @@ type GetPlacementGroupsIDPathParams struct {
 	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type GetPlacementGroupsIDRequest struct {
-	PathParams GetPlacementGroupsIDPathParams
-}
-
 type GetPlacementGroupsIDPlacementGroupResponsePlacementGroupTypeEnum string
 
 const (
@@ -25,6 +21,10 @@ type GetPlacementGroupsIDPlacementGroupResponsePlacementGroup struct {
 
 type GetPlacementGroupsIDPlacementGroupResponse struct {
 	PlacementGroup GetPlacementGroupsIDPlacementGroupResponsePlacementGroup `json:"placement_group"`
+}
+
+type GetPlacementGroupsIDRequest struct {
+	PathParams GetPlacementGroupsIDPathParams
 }
 
 type GetPlacementGroupsIDResponse struct {

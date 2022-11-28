@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
 class DeleteTagsPathParams:
-    file_system_id: str = field(default=None, metadata={'path_param': { 'field_name': 'FileSystemId', 'style': 'simple', 'explode': False }})
+    file_system_id: str = field(metadata={'path_param': { 'field_name': 'FileSystemId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,21 +26,21 @@ class DeleteTagsHeaders:
 @dataclass_json
 @dataclass
 class DeleteTagsRequestBody:
-    tag_keys: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TagKeys' }})
+    tag_keys: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('TagKeys') }})
     
 
 @dataclass
 class DeleteTagsRequest:
-    path_params: DeleteTagsPathParams = field(default=None)
-    headers: DeleteTagsHeaders = field(default=None)
-    request: DeleteTagsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: DeleteTagsHeaders = field()
+    path_params: DeleteTagsPathParams = field()
+    request: DeleteTagsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DeleteTagsResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     file_system_not_found: Optional[Any] = field(default=None)
     internal_server_error: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

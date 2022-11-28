@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DestinationSchema } from "./destinationschema";
 import { KinesisFirehoseOutputUpdate } from "./kinesisfirehoseoutputupdate";
 import { KinesisStreamsOutputUpdate } from "./kinesisstreamsoutputupdate";
 import { LambdaOutputUpdate } from "./lambdaoutputupdate";
+
 
 
 // OutputUpdate
@@ -10,21 +11,21 @@ import { LambdaOutputUpdate } from "./lambdaoutputupdate";
  *  Describes updates to the output configuration identified by the <code>OutputId</code>. 
 **/
 export class OutputUpdate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DestinationSchemaUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=DestinationSchemaUpdate" })
   destinationSchemaUpdate?: DestinationSchema;
 
-  @Metadata({ data: "json, name=KinesisFirehoseOutputUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=KinesisFirehoseOutputUpdate" })
   kinesisFirehoseOutputUpdate?: KinesisFirehoseOutputUpdate;
 
-  @Metadata({ data: "json, name=KinesisStreamsOutputUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=KinesisStreamsOutputUpdate" })
   kinesisStreamsOutputUpdate?: KinesisStreamsOutputUpdate;
 
-  @Metadata({ data: "json, name=LambdaOutputUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=LambdaOutputUpdate" })
   lambdaOutputUpdate?: LambdaOutputUpdate;
 
-  @Metadata({ data: "json, name=NameUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=NameUpdate" })
   nameUpdate?: string;
 
-  @Metadata({ data: "json, name=OutputId" })
+  @SpeakeasyMetadata({ data: "json, name=OutputId" })
   outputId: string;
 }

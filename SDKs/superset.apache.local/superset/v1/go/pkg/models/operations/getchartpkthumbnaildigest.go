@@ -13,11 +13,6 @@ type GetChartPkThumbnailDigestSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type GetChartPkThumbnailDigestRequest struct {
-	PathParams GetChartPkThumbnailDigestPathParams
-	Security   GetChartPkThumbnailDigestSecurity
-}
-
 type GetChartPkThumbnailDigest400ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
 }
@@ -32,6 +27,11 @@ type GetChartPkThumbnailDigest404ApplicationJSON struct {
 
 type GetChartPkThumbnailDigest500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type GetChartPkThumbnailDigestRequest struct {
+	PathParams GetChartPkThumbnailDigestPathParams
+	Security   GetChartPkThumbnailDigestSecurity
 }
 
 type GetChartPkThumbnailDigestResponse struct {

@@ -1,16 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateNodesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, serialization=json;name=Node parameters", elemType: shared.NodeAdd })
+  @SpeakeasyMetadata({ data: "queryParam, serialization=json;name=Node parameters", elemType: shared.NodeAdd })
   nodeParameters?: shared.NodeAdd[];
-}
-
-
-export class CreateNodesRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: CreateNodesQueryParams;
 }
 
 export enum CreateNodes200ApplicationJsonActionEnum {
@@ -19,38 +14,44 @@ export enum CreateNodes200ApplicationJsonActionEnum {
 
 
 export class CreateNodes200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created: string[];
 
-  @Metadata({ data: "json, name=failed" })
+  @SpeakeasyMetadata({ data: "json, name=failed" })
   failed: string[];
 }
 
 export enum CreateNodes200ApplicationJsonResultEnum {
-    Success = "success"
-,    Error = "error"
+    Success = "success",
+    Error = "error"
 }
 
 
 export class CreateNodes200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: CreateNodes200ApplicationJsonActionEnum;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: CreateNodes200ApplicationJsonData;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result: CreateNodes200ApplicationJsonResultEnum;
 }
 
 
+export class CreateNodesRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: CreateNodesQueryParams;
+}
+
+
 export class CreateNodesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createNodes200ApplicationJsonObject?: CreateNodes200ApplicationJson;
 }

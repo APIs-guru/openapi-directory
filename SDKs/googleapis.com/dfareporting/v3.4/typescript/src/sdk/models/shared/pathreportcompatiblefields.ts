@@ -1,9 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { Dimension } from "./dimension";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Dimension } from "./dimension";
 import { Metric } from "./metric";
-import { Dimension } from "./dimension";
+
 
 
 // PathReportCompatibleFields
@@ -11,18 +9,18 @@ import { Dimension } from "./dimension";
  * Represents fields that are compatible to be selected for a report of type "PATH".
 **/
 export class PathReportCompatibleFields extends SpeakeasyBase {
-  @Metadata({ data: "json, name=channelGroupings", elemType: shared.Dimension })
+  @SpeakeasyMetadata({ data: "json, name=channelGroupings", elemType: Dimension })
   channelGroupings?: Dimension[];
 
-  @Metadata({ data: "json, name=dimensions", elemType: shared.Dimension })
+  @SpeakeasyMetadata({ data: "json, name=dimensions", elemType: Dimension })
   dimensions?: Dimension[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=metrics", elemType: shared.Metric })
+  @SpeakeasyMetadata({ data: "json, name=metrics", elemType: Metric })
   metrics?: Metric[];
 
-  @Metadata({ data: "json, name=pathFilters", elemType: shared.Dimension })
+  @SpeakeasyMetadata({ data: "json, name=pathFilters", elemType: Dimension })
   pathFilters?: Dimension[];
 }

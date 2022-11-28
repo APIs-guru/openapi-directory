@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetTeamSeasonStatsQueryParams = /** @class */ (function (_super) {
     __extends(GetTeamSeasonStatsQueryParams, _super);
@@ -30,23 +30,23 @@ var GetTeamSeasonStatsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=conference" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=conference" }),
         __metadata("design:type", String)
     ], GetTeamSeasonStatsQueryParams.prototype, "conference", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=endWeek" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=endWeek" }),
         __metadata("design:type", Number)
     ], GetTeamSeasonStatsQueryParams.prototype, "endWeek", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=startWeek" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=startWeek" }),
         __metadata("design:type", Number)
     ], GetTeamSeasonStatsQueryParams.prototype, "startWeek", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=team" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=team" }),
         __metadata("design:type", String)
     ], GetTeamSeasonStatsQueryParams.prototype, "team", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=year" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=year" }),
         __metadata("design:type", Number)
     ], GetTeamSeasonStatsQueryParams.prototype, "year", void 0);
     return GetTeamSeasonStatsQueryParams;
@@ -58,7 +58,7 @@ var GetTeamSeasonStatsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetTeamSeasonStatsQueryParams)
     ], GetTeamSeasonStatsRequest.prototype, "queryParams", void 0);
     return GetTeamSeasonStatsRequest;
@@ -70,15 +70,15 @@ var GetTeamSeasonStatsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetTeamSeasonStatsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetTeamSeasonStatsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata({ elemType: shared.TeamSeasonStat }),
+        SpeakeasyMetadata({ elemType: shared.TeamSeasonStat }),
         __metadata("design:type", Array)
     ], GetTeamSeasonStatsResponse.prototype, "teamSeasonStats", void 0);
     return GetTeamSeasonStatsResponse;

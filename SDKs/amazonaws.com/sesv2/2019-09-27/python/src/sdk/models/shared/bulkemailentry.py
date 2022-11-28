@@ -1,15 +1,14 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import destination
-from . import replacementemailcontent
-from . import messagetag
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BulkEmailEntry:
-    destination: destination.Destination = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Destination' }})
-    replacement_email_content: Optional[replacementemailcontent.ReplacementEmailContent] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ReplacementEmailContent' }})
-    replacement_tags: Optional[List[messagetag.MessageTag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ReplacementTags' }})
+    destination: Destination = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Destination') }})
+    replacement_email_content: Optional[ReplacementEmailContent] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ReplacementEmailContent') }})
+    replacement_tags: Optional[List[MessageTag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ReplacementTags') }})
     

@@ -25,9 +25,9 @@ type RequestRoomUsersRequest struct {
 	Headers     RequestRoomUsersHeaders
 }
 
-type RequestRoomUsersResponse struct {
+type RequestRoomUsersResponseOutput struct {
 	ContentType   string
 	ErrorResponse *shared.ErrorResponse
-	RoomUserList  *shared.RoomUserList
+	RoomUserList  *shared.RoomUserListOutput
 	StatusCode    int64
 }

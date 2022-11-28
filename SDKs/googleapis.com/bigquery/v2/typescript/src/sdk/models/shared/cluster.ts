@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FeatureValue } from "./featurevalue";
+
 
 
 // Cluster
@@ -8,12 +8,12 @@ import { FeatureValue } from "./featurevalue";
  * Message containing the information about one cluster.
 **/
 export class Cluster extends SpeakeasyBase {
-  @Metadata({ data: "json, name=centroidId" })
+  @SpeakeasyMetadata({ data: "json, name=centroidId" })
   centroidId?: string;
 
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count?: string;
 
-  @Metadata({ data: "json, name=featureValues", elemType: shared.FeatureValue })
+  @SpeakeasyMetadata({ data: "json, name=featureValues", elemType: FeatureValue })
   featureValues?: FeatureValue[];
 }

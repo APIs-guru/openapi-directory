@@ -10,6 +10,8 @@ const (
 	GoogleCloudAssuredworkloadsV1beta1WorkloadResourceSettingsResourceTypeEnumKeyring                 GoogleCloudAssuredworkloadsV1beta1WorkloadResourceSettingsResourceTypeEnum = "KEYRING"
 )
 
+// GoogleCloudAssuredworkloadsV1beta1WorkloadResourceSettings
+// Represent the custom settings for the resources to be created.
 type GoogleCloudAssuredworkloadsV1beta1WorkloadResourceSettings struct {
 	DisplayName  *string                                                                     `json:"displayName,omitempty"`
 	ResourceID   *string                                                                     `json:"resourceId,omitempty"`

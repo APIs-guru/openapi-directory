@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class PublishMetricsPathParams:
-    environment_name: str = field(default=None, metadata={'path_param': { 'field_name': 'EnvironmentName', 'style': 'simple', 'explode': False }})
+    environment_name: str = field(metadata={'path_param': { 'field_name': 'EnvironmentName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,21 +27,21 @@ class PublishMetricsHeaders:
 @dataclass_json
 @dataclass
 class PublishMetricsRequestBody:
-    metric_data: List[shared.MetricDatum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MetricData' }})
+    metric_data: List[shared.MetricDatum] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('MetricData') }})
     
 
 @dataclass
 class PublishMetricsRequest:
-    path_params: PublishMetricsPathParams = field(default=None)
-    headers: PublishMetricsHeaders = field(default=None)
-    request: PublishMetricsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: PublishMetricsHeaders = field()
+    path_params: PublishMetricsPathParams = field()
+    request: PublishMetricsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PublishMetricsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_server_exception: Optional[Any] = field(default=None)
     publish_metrics_output: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

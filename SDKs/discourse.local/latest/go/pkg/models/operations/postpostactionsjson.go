@@ -11,11 +11,6 @@ type PostPostActionsJSONRequestBody struct {
 	PostActionTypeID int64 `json:"post_action_type_id"`
 }
 
-type PostPostActionsJSONRequest struct {
-	Headers PostPostActionsJSONHeaders
-	Request *PostPostActionsJSONRequestBody `request:"mediaType=application/json"`
-}
-
 type PostPostActionsJSON200ApplicationJSONActionsSummary struct {
 	Acted   *bool  `json:"acted,omitempty"`
 	CanUndo *bool  `json:"can_undo,omitempty"`
@@ -71,6 +66,11 @@ type PostPostActionsJSON200ApplicationJSON struct {
 	Version                     *int64                                                `json:"version,omitempty"`
 	Wiki                        *bool                                                 `json:"wiki,omitempty"`
 	Yours                       *bool                                                 `json:"yours,omitempty"`
+}
+
+type PostPostActionsJSONRequest struct {
+	Headers PostPostActionsJSONHeaders
+	Request *PostPostActionsJSONRequestBody `request:"mediaType=application/json"`
 }
 
 type PostPostActionsJSONResponse struct {

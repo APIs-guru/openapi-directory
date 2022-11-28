@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export var WebriskThreatListsComputeDiffConstraintsSupportedCompressionsEnum;
 (function (WebriskThreatListsComputeDiffConstraintsSupportedCompressionsEnum) {
@@ -44,67 +44,67 @@ var WebriskThreatListsComputeDiffQueryParams = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], WebriskThreatListsComputeDiffQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], WebriskThreatListsComputeDiffQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], WebriskThreatListsComputeDiffQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], WebriskThreatListsComputeDiffQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=constraints.maxDatabaseEntries" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=constraints.maxDatabaseEntries" }),
         __metadata("design:type", Number)
     ], WebriskThreatListsComputeDiffQueryParams.prototype, "constraintsMaxDatabaseEntries", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=constraints.maxDiffEntries" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=constraints.maxDiffEntries" }),
         __metadata("design:type", Number)
     ], WebriskThreatListsComputeDiffQueryParams.prototype, "constraintsMaxDiffEntries", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=constraints.supportedCompressions" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=constraints.supportedCompressions" }),
         __metadata("design:type", Array)
     ], WebriskThreatListsComputeDiffQueryParams.prototype, "constraintsSupportedCompressions", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], WebriskThreatListsComputeDiffQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], WebriskThreatListsComputeDiffQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], WebriskThreatListsComputeDiffQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], WebriskThreatListsComputeDiffQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], WebriskThreatListsComputeDiffQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=threatType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=threatType" }),
         __metadata("design:type", String)
     ], WebriskThreatListsComputeDiffQueryParams.prototype, "threatType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], WebriskThreatListsComputeDiffQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], WebriskThreatListsComputeDiffQueryParams.prototype, "uploadProtocol", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=versionToken" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=versionToken" }),
         __metadata("design:type", String)
     ], WebriskThreatListsComputeDiffQueryParams.prototype, "versionToken", void 0);
     return WebriskThreatListsComputeDiffQueryParams;
@@ -116,11 +116,11 @@ var WebriskThreatListsComputeDiffSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], WebriskThreatListsComputeDiffSecurity.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], WebriskThreatListsComputeDiffSecurity.prototype, "oauth2c", void 0);
     return WebriskThreatListsComputeDiffSecurity;
@@ -132,11 +132,11 @@ var WebriskThreatListsComputeDiffRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", WebriskThreatListsComputeDiffQueryParams)
     ], WebriskThreatListsComputeDiffRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", WebriskThreatListsComputeDiffSecurity)
     ], WebriskThreatListsComputeDiffRequest.prototype, "security", void 0);
     return WebriskThreatListsComputeDiffRequest;
@@ -148,15 +148,15 @@ var WebriskThreatListsComputeDiffResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], WebriskThreatListsComputeDiffResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.GoogleCloudWebriskV1ComputeThreatListDiffResponse)
     ], WebriskThreatListsComputeDiffResponse.prototype, "googleCloudWebriskV1ComputeThreatListDiffResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], WebriskThreatListsComputeDiffResponse.prototype, "statusCode", void 0);
     return WebriskThreatListsComputeDiffResponse;

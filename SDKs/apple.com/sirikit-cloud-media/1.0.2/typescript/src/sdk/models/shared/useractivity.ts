@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UserActivity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=activityType" })
+  @SpeakeasyMetadata({ data: "json, name=activityType" })
   activityType: string;
 
-  @Metadata({ data: "json, name=persistentIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=persistentIdentifier" })
   persistentIdentifier?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=userInfo" })
+  @SpeakeasyMetadata({ data: "json, name=userInfo" })
   userInfo?: Map<string, any>;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version: string;
 }

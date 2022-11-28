@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // YaraRuleSignature
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A signature corresponding to a YARA rule.
 **/
 export class YaraRuleSignature extends SpeakeasyBase {
-  @Metadata({ data: "json, name=yaraRule" })
+  @SpeakeasyMetadata({ data: "json, name=yaraRule" })
   yaraRule?: string;
 }

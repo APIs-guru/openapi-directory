@@ -1,13 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import containerinstance
-from . import failure
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateContainerInstancesStateResponse:
-    container_instances: Optional[List[containerinstance.ContainerInstance]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'containerInstances' }})
-    failures: Optional[List[failure.Failure]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'failures' }})
+    container_instances: Optional[List[ContainerInstance]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('containerInstances') }})
+    failures: Optional[List[Failure]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('failures') }})
     

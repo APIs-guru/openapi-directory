@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDialogflowCxV3QueryParameters
+// Represents the parameters of a conversational query.
 type GoogleCloudDialogflowCxV3QueryParameters struct {
 	AnalyzeQueryTextSentiment *bool                                        `json:"analyzeQueryTextSentiment,omitempty"`
 	CurrentPage               *string                                      `json:"currentPage,omitempty"`

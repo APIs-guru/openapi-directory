@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Browsers extends SpeakeasyBase {
-  @Metadata({ data: "json, name=chrome" })
+  @SpeakeasyMetadata({ data: "json, name=chrome" })
   chrome?: string[];
 
-  @Metadata({ data: "json, name=firefox" })
+  @SpeakeasyMetadata({ data: "json, name=firefox" })
   firefox?: string[];
 
-  @Metadata({ data: "json, name=opera" })
+  @SpeakeasyMetadata({ data: "json, name=opera" })
   opera?: string[];
 }

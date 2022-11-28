@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://globalaccelerator.{region}.amazonaws.com",
 	"https://globalaccelerator.{region}.amazonaws.com",
 	"http://globalaccelerator.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/globalaccelerator/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// AddCustomRoutingEndpoints - <p>Associate a virtual private cloud (VPC) subnet endpoint with your custom routing accelerator.</p> <p>The listener port range must be large enough to support the number of IP addresses that can be specified in your subnet. The number of ports required is: subnet size times the number of ports per destination EC2 instances. For example, a subnet defined as /24 requires a listener port range of at least 255 ports. </p> <p>Note: You must have enough remaining listener ports available to map to the subnet ports, or the call will fail with a LimitExceededException.</p> <p>By default, all destinations in a subnet in a custom routing accelerator cannot receive traffic. To enable all destinations to receive traffic, or to specify individual port mappings that can receive traffic, see the <a href="https://docs.aws.amazon.com/global-accelerator/latest/api/API_AllowCustomRoutingTraffic.html"> AllowCustomRoutingTraffic</a> operation.</p>
 func (s *SDK) AddCustomRoutingEndpoints(ctx context.Context, request operations.AddCustomRoutingEndpointsRequest) (*operations.AddCustomRoutingEndpointsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.AddCustomRoutingEndpoints"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -81,7 +108,7 @@ func (s *SDK) AddCustomRoutingEndpoints(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -181,8 +208,9 @@ func (s *SDK) AddCustomRoutingEndpoints(ctx context.Context, request operations.
 	return res, nil
 }
 
+// AdvertiseByoipCidr - <p>Advertises an IPv4 address range that is provisioned for use with your AWS resources through bring your own IP addresses (BYOIP). It can take a few minutes before traffic to the specified addresses starts routing to AWS because of propagation delays. </p> <p>To stop advertising the BYOIP address range, use <a href="https://docs.aws.amazon.com/global-accelerator/latest/api/WithdrawByoipCidr.html"> WithdrawByoipCidr</a>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html">Bring Your Own IP Addresses (BYOIP)</a> in the <i>AWS Global Accelerator Developer Guide</i>.</p>
 func (s *SDK) AdvertiseByoipCidr(ctx context.Context, request operations.AdvertiseByoipCidrRequest) (*operations.AdvertiseByoipCidrResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.AdvertiseByoipCidr"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -202,7 +230,7 @@ func (s *SDK) AdvertiseByoipCidr(ctx context.Context, request operations.Adverti
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -282,8 +310,9 @@ func (s *SDK) AdvertiseByoipCidr(ctx context.Context, request operations.Adverti
 	return res, nil
 }
 
+// AllowCustomRoutingTraffic - <p>Specify the Amazon EC2 instance (destination) IP addresses and ports for a VPC subnet endpoint that can receive traffic for a custom routing accelerator. You can allow traffic to all destinations in the subnet endpoint, or allow traffic to a specified list of destination IP addresses and ports in the subnet. Note that you cannot specify IP addresses or ports outside of the range that you configured for the endpoint group.</p> <p>After you make changes, you can verify that the updates are complete by checking the status of your accelerator: the status changes from IN_PROGRESS to DEPLOYED.</p>
 func (s *SDK) AllowCustomRoutingTraffic(ctx context.Context, request operations.AllowCustomRoutingTrafficRequest) (*operations.AllowCustomRoutingTrafficResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.AllowCustomRoutingTraffic"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -303,7 +332,7 @@ func (s *SDK) AllowCustomRoutingTraffic(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -344,8 +373,9 @@ func (s *SDK) AllowCustomRoutingTraffic(ctx context.Context, request operations.
 	return res, nil
 }
 
+// CreateAccelerator - <p>Create an accelerator. An accelerator includes one or more listeners that process inbound connections and direct traffic to one or more endpoint groups, each of which includes endpoints, such as Network Load Balancers. </p> <important> <p>Global Accelerator is a global service that supports endpoints in multiple AWS Regions but you must specify the US West (Oregon) Region to create or update accelerators.</p> </important>
 func (s *SDK) CreateAccelerator(ctx context.Context, request operations.CreateAcceleratorRequest) (*operations.CreateAcceleratorResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.CreateAccelerator"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -365,7 +395,7 @@ func (s *SDK) CreateAccelerator(ctx context.Context, request operations.CreateAc
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -425,8 +455,9 @@ func (s *SDK) CreateAccelerator(ctx context.Context, request operations.CreateAc
 	return res, nil
 }
 
+// CreateCustomRoutingAccelerator - <p>Create a custom routing accelerator. A custom routing accelerator directs traffic to one of possibly thousands of Amazon EC2 instance destinations running in a single or multiple virtual private clouds (VPC) subnet endpoints.</p> <p>Be aware that, by default, all destination EC2 instances in a VPC subnet endpoint cannot receive traffic. To enable all destinations to receive traffic, or to specify individual port mappings that can receive traffic, see the <a href="https://docs.aws.amazon.com/global-accelerator/latest/api/API_AllowCustomRoutingTraffic.html"> AllowCustomRoutingTraffic</a> operation.</p> <important> <p>Global Accelerator is a global service that supports endpoints in multiple AWS Regions but you must specify the US West (Oregon) Region to create or update accelerators.</p> </important>
 func (s *SDK) CreateCustomRoutingAccelerator(ctx context.Context, request operations.CreateCustomRoutingAcceleratorRequest) (*operations.CreateCustomRoutingAcceleratorResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.CreateCustomRoutingAccelerator"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -446,7 +477,7 @@ func (s *SDK) CreateCustomRoutingAccelerator(ctx context.Context, request operat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -516,8 +547,9 @@ func (s *SDK) CreateCustomRoutingAccelerator(ctx context.Context, request operat
 	return res, nil
 }
 
+// CreateCustomRoutingEndpointGroup - Create an endpoint group for the specified listener for a custom routing accelerator. An endpoint group is a collection of endpoints in one AWS Region.
 func (s *SDK) CreateCustomRoutingEndpointGroup(ctx context.Context, request operations.CreateCustomRoutingEndpointGroupRequest) (*operations.CreateCustomRoutingEndpointGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.CreateCustomRoutingEndpointGroup"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -537,7 +569,7 @@ func (s *SDK) CreateCustomRoutingEndpointGroup(ctx context.Context, request oper
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -647,8 +679,9 @@ func (s *SDK) CreateCustomRoutingEndpointGroup(ctx context.Context, request oper
 	return res, nil
 }
 
+// CreateCustomRoutingListener - Create a listener to process inbound connections from clients to a custom routing accelerator. Connections arrive to assigned static IP addresses on the port range that you specify.
 func (s *SDK) CreateCustomRoutingListener(ctx context.Context, request operations.CreateCustomRoutingListenerRequest) (*operations.CreateCustomRoutingListenerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.CreateCustomRoutingListener"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -668,7 +701,7 @@ func (s *SDK) CreateCustomRoutingListener(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -748,8 +781,9 @@ func (s *SDK) CreateCustomRoutingListener(ctx context.Context, request operation
 	return res, nil
 }
 
+// CreateEndpointGroup - Create an endpoint group for the specified listener. An endpoint group is a collection of endpoints in one AWS Region. A resource must be valid and active when you add it as an endpoint.
 func (s *SDK) CreateEndpointGroup(ctx context.Context, request operations.CreateEndpointGroupRequest) (*operations.CreateEndpointGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.CreateEndpointGroup"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -769,7 +803,7 @@ func (s *SDK) CreateEndpointGroup(ctx context.Context, request operations.Create
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -869,8 +903,9 @@ func (s *SDK) CreateEndpointGroup(ctx context.Context, request operations.Create
 	return res, nil
 }
 
+// CreateListener - Create a listener to process inbound connections from clients to an accelerator. Connections arrive to assigned static IP addresses on a port, port range, or list of port ranges that you specify.
 func (s *SDK) CreateListener(ctx context.Context, request operations.CreateListenerRequest) (*operations.CreateListenerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.CreateListener"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -890,7 +925,7 @@ func (s *SDK) CreateListener(ctx context.Context, request operations.CreateListe
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -970,8 +1005,9 @@ func (s *SDK) CreateListener(ctx context.Context, request operations.CreateListe
 	return res, nil
 }
 
+// DeleteAccelerator - <p>Delete an accelerator. Before you can delete an accelerator, you must disable it and remove all dependent resources (listeners and endpoint groups). To disable the accelerator, update the accelerator to set <code>Enabled</code> to false.</p> <important> <p>When you create an accelerator, by default, Global Accelerator provides you with a set of two static IP addresses. Alternatively, you can bring your own IP address ranges to Global Accelerator and assign IP addresses from those ranges. </p> <p>The IP addresses are assigned to your accelerator for as long as it exists, even if you disable the accelerator and it no longer accepts or routes traffic. However, when you <i>delete</i> an accelerator, you lose the static IP addresses that are assigned to the accelerator, so you can no longer route traffic by using them. As a best practice, ensure that you have permissions in place to avoid inadvertently deleting accelerators. You can use IAM policies with Global Accelerator to limit the users who have permissions to delete an accelerator. For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/auth-and-access-control.html">Authentication and Access Control</a> in the <i>AWS Global Accelerator Developer Guide</i>.</p> </important>
 func (s *SDK) DeleteAccelerator(ctx context.Context, request operations.DeleteAcceleratorRequest) (*operations.DeleteAcceleratorResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.DeleteAccelerator"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -991,7 +1027,7 @@ func (s *SDK) DeleteAccelerator(ctx context.Context, request operations.DeleteAc
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1062,8 +1098,9 @@ func (s *SDK) DeleteAccelerator(ctx context.Context, request operations.DeleteAc
 	return res, nil
 }
 
+// DeleteCustomRoutingAccelerator - <p>Delete a custom routing accelerator. Before you can delete an accelerator, you must disable it and remove all dependent resources (listeners and endpoint groups). To disable the accelerator, update the accelerator to set <code>Enabled</code> to false.</p> <important> <p>When you create a custom routing accelerator, by default, Global Accelerator provides you with a set of two static IP addresses. </p> <p>The IP addresses are assigned to your accelerator for as long as it exists, even if you disable the accelerator and it no longer accepts or routes traffic. However, when you <i>delete</i> an accelerator, you lose the static IP addresses that are assigned to the accelerator, so you can no longer route traffic by using them. As a best practice, ensure that you have permissions in place to avoid inadvertently deleting accelerators. You can use IAM policies with Global Accelerator to limit the users who have permissions to delete an accelerator. For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/auth-and-access-control.html">Authentication and Access Control</a> in the <i>AWS Global Accelerator Developer Guide</i>.</p> </important>
 func (s *SDK) DeleteCustomRoutingAccelerator(ctx context.Context, request operations.DeleteCustomRoutingAcceleratorRequest) (*operations.DeleteCustomRoutingAcceleratorResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.DeleteCustomRoutingAccelerator"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1083,7 +1120,7 @@ func (s *SDK) DeleteCustomRoutingAccelerator(ctx context.Context, request operat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1154,8 +1191,9 @@ func (s *SDK) DeleteCustomRoutingAccelerator(ctx context.Context, request operat
 	return res, nil
 }
 
+// DeleteCustomRoutingEndpointGroup - Delete an endpoint group from a listener for a custom routing accelerator.
 func (s *SDK) DeleteCustomRoutingEndpointGroup(ctx context.Context, request operations.DeleteCustomRoutingEndpointGroupRequest) (*operations.DeleteCustomRoutingEndpointGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.DeleteCustomRoutingEndpointGroup"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1175,7 +1213,7 @@ func (s *SDK) DeleteCustomRoutingEndpointGroup(ctx context.Context, request oper
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1226,8 +1264,9 @@ func (s *SDK) DeleteCustomRoutingEndpointGroup(ctx context.Context, request oper
 	return res, nil
 }
 
+// DeleteCustomRoutingListener - Delete a listener for a custom routing accelerator.
 func (s *SDK) DeleteCustomRoutingListener(ctx context.Context, request operations.DeleteCustomRoutingListenerRequest) (*operations.DeleteCustomRoutingListenerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.DeleteCustomRoutingListener"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1247,7 +1286,7 @@ func (s *SDK) DeleteCustomRoutingListener(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1308,8 +1347,9 @@ func (s *SDK) DeleteCustomRoutingListener(ctx context.Context, request operation
 	return res, nil
 }
 
+// DeleteEndpointGroup - Delete an endpoint group from a listener.
 func (s *SDK) DeleteEndpointGroup(ctx context.Context, request operations.DeleteEndpointGroupRequest) (*operations.DeleteEndpointGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.DeleteEndpointGroup"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1329,7 +1369,7 @@ func (s *SDK) DeleteEndpointGroup(ctx context.Context, request operations.Delete
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1380,8 +1420,9 @@ func (s *SDK) DeleteEndpointGroup(ctx context.Context, request operations.Delete
 	return res, nil
 }
 
+// DeleteListener - Delete a listener from an accelerator.
 func (s *SDK) DeleteListener(ctx context.Context, request operations.DeleteListenerRequest) (*operations.DeleteListenerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.DeleteListener"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1401,7 +1442,7 @@ func (s *SDK) DeleteListener(ctx context.Context, request operations.DeleteListe
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1462,8 +1503,9 @@ func (s *SDK) DeleteListener(ctx context.Context, request operations.DeleteListe
 	return res, nil
 }
 
+// DenyCustomRoutingTraffic - <p>Specify the Amazon EC2 instance (destination) IP addresses and ports for a VPC subnet endpoint that cannot receive traffic for a custom routing accelerator. You can deny traffic to all destinations in the VPC endpoint, or deny traffic to a specified list of destination IP addresses and ports. Note that you cannot specify IP addresses or ports outside of the range that you configured for the endpoint group.</p> <p>After you make changes, you can verify that the updates are complete by checking the status of your accelerator: the status changes from IN_PROGRESS to DEPLOYED.</p>
 func (s *SDK) DenyCustomRoutingTraffic(ctx context.Context, request operations.DenyCustomRoutingTrafficRequest) (*operations.DenyCustomRoutingTrafficResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.DenyCustomRoutingTraffic"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1483,7 +1525,7 @@ func (s *SDK) DenyCustomRoutingTraffic(ctx context.Context, request operations.D
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1524,8 +1566,9 @@ func (s *SDK) DenyCustomRoutingTraffic(ctx context.Context, request operations.D
 	return res, nil
 }
 
+// DeprovisionByoipCidr - <p>Releases the specified address range that you provisioned to use with your AWS resources through bring your own IP addresses (BYOIP) and deletes the corresponding address pool. </p> <p>Before you can release an address range, you must stop advertising it by using <a href="https://docs.aws.amazon.com/global-accelerator/latest/api/WithdrawByoipCidr.html">WithdrawByoipCidr</a> and you must not have any accelerators that are using static IP addresses allocated from its address range. </p> <p>For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html">Bring Your Own IP Addresses (BYOIP)</a> in the <i>AWS Global Accelerator Developer Guide</i>.</p>
 func (s *SDK) DeprovisionByoipCidr(ctx context.Context, request operations.DeprovisionByoipCidrRequest) (*operations.DeprovisionByoipCidrResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.DeprovisionByoipCidr"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1545,7 +1588,7 @@ func (s *SDK) DeprovisionByoipCidr(ctx context.Context, request operations.Depro
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1625,8 +1668,9 @@ func (s *SDK) DeprovisionByoipCidr(ctx context.Context, request operations.Depro
 	return res, nil
 }
 
+// DescribeAccelerator - Describe an accelerator.
 func (s *SDK) DescribeAccelerator(ctx context.Context, request operations.DescribeAcceleratorRequest) (*operations.DescribeAcceleratorResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.DescribeAccelerator"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1646,7 +1690,7 @@ func (s *SDK) DescribeAccelerator(ctx context.Context, request operations.Descri
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1706,8 +1750,9 @@ func (s *SDK) DescribeAccelerator(ctx context.Context, request operations.Descri
 	return res, nil
 }
 
+// DescribeAcceleratorAttributes - Describe the attributes of an accelerator.
 func (s *SDK) DescribeAcceleratorAttributes(ctx context.Context, request operations.DescribeAcceleratorAttributesRequest) (*operations.DescribeAcceleratorAttributesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.DescribeAcceleratorAttributes"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1727,7 +1772,7 @@ func (s *SDK) DescribeAcceleratorAttributes(ctx context.Context, request operati
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1787,8 +1832,9 @@ func (s *SDK) DescribeAcceleratorAttributes(ctx context.Context, request operati
 	return res, nil
 }
 
+// DescribeCustomRoutingAccelerator - Describe a custom routing accelerator.
 func (s *SDK) DescribeCustomRoutingAccelerator(ctx context.Context, request operations.DescribeCustomRoutingAcceleratorRequest) (*operations.DescribeCustomRoutingAcceleratorResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.DescribeCustomRoutingAccelerator"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1808,7 +1854,7 @@ func (s *SDK) DescribeCustomRoutingAccelerator(ctx context.Context, request oper
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1868,8 +1914,9 @@ func (s *SDK) DescribeCustomRoutingAccelerator(ctx context.Context, request oper
 	return res, nil
 }
 
+// DescribeCustomRoutingAcceleratorAttributes - Describe the attributes of a custom routing accelerator.
 func (s *SDK) DescribeCustomRoutingAcceleratorAttributes(ctx context.Context, request operations.DescribeCustomRoutingAcceleratorAttributesRequest) (*operations.DescribeCustomRoutingAcceleratorAttributesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.DescribeCustomRoutingAcceleratorAttributes"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1889,7 +1936,7 @@ func (s *SDK) DescribeCustomRoutingAcceleratorAttributes(ctx context.Context, re
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1949,8 +1996,9 @@ func (s *SDK) DescribeCustomRoutingAcceleratorAttributes(ctx context.Context, re
 	return res, nil
 }
 
+// DescribeCustomRoutingEndpointGroup - Describe an endpoint group for a custom routing accelerator.
 func (s *SDK) DescribeCustomRoutingEndpointGroup(ctx context.Context, request operations.DescribeCustomRoutingEndpointGroupRequest) (*operations.DescribeCustomRoutingEndpointGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.DescribeCustomRoutingEndpointGroup"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1970,7 +2018,7 @@ func (s *SDK) DescribeCustomRoutingEndpointGroup(ctx context.Context, request op
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2030,8 +2078,9 @@ func (s *SDK) DescribeCustomRoutingEndpointGroup(ctx context.Context, request op
 	return res, nil
 }
 
+// DescribeCustomRoutingListener - The description of a listener for a custom routing accelerator.
 func (s *SDK) DescribeCustomRoutingListener(ctx context.Context, request operations.DescribeCustomRoutingListenerRequest) (*operations.DescribeCustomRoutingListenerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.DescribeCustomRoutingListener"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2051,7 +2100,7 @@ func (s *SDK) DescribeCustomRoutingListener(ctx context.Context, request operati
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2111,8 +2160,9 @@ func (s *SDK) DescribeCustomRoutingListener(ctx context.Context, request operati
 	return res, nil
 }
 
+// DescribeEndpointGroup - Describe an endpoint group.
 func (s *SDK) DescribeEndpointGroup(ctx context.Context, request operations.DescribeEndpointGroupRequest) (*operations.DescribeEndpointGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.DescribeEndpointGroup"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2132,7 +2182,7 @@ func (s *SDK) DescribeEndpointGroup(ctx context.Context, request operations.Desc
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2192,8 +2242,9 @@ func (s *SDK) DescribeEndpointGroup(ctx context.Context, request operations.Desc
 	return res, nil
 }
 
+// DescribeListener - Describe a listener.
 func (s *SDK) DescribeListener(ctx context.Context, request operations.DescribeListenerRequest) (*operations.DescribeListenerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.DescribeListener"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2213,7 +2264,7 @@ func (s *SDK) DescribeListener(ctx context.Context, request operations.DescribeL
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2273,8 +2324,9 @@ func (s *SDK) DescribeListener(ctx context.Context, request operations.DescribeL
 	return res, nil
 }
 
+// ListAccelerators - List the accelerators for an AWS account.
 func (s *SDK) ListAccelerators(ctx context.Context, request operations.ListAcceleratorsRequest) (*operations.ListAcceleratorsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.ListAccelerators"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2296,7 +2348,7 @@ func (s *SDK) ListAccelerators(ctx context.Context, request operations.ListAccel
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2356,8 +2408,9 @@ func (s *SDK) ListAccelerators(ctx context.Context, request operations.ListAccel
 	return res, nil
 }
 
+// ListByoipCidrs - Lists the IP address ranges that were specified in calls to <a href="https://docs.aws.amazon.com/global-accelerator/latest/api/ProvisionByoipCidr.html">ProvisionByoipCidr</a>, including the current state and a history of state changes.
 func (s *SDK) ListByoipCidrs(ctx context.Context, request operations.ListByoipCidrsRequest) (*operations.ListByoipCidrsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.ListByoipCidrs"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2379,7 +2432,7 @@ func (s *SDK) ListByoipCidrs(ctx context.Context, request operations.ListByoipCi
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2449,8 +2502,9 @@ func (s *SDK) ListByoipCidrs(ctx context.Context, request operations.ListByoipCi
 	return res, nil
 }
 
+// ListCustomRoutingAccelerators - List the custom routing accelerators for an AWS account.
 func (s *SDK) ListCustomRoutingAccelerators(ctx context.Context, request operations.ListCustomRoutingAcceleratorsRequest) (*operations.ListCustomRoutingAcceleratorsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.ListCustomRoutingAccelerators"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2472,7 +2526,7 @@ func (s *SDK) ListCustomRoutingAccelerators(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2532,8 +2586,9 @@ func (s *SDK) ListCustomRoutingAccelerators(ctx context.Context, request operati
 	return res, nil
 }
 
+// ListCustomRoutingEndpointGroups - List the endpoint groups that are associated with a listener for a custom routing accelerator.
 func (s *SDK) ListCustomRoutingEndpointGroups(ctx context.Context, request operations.ListCustomRoutingEndpointGroupsRequest) (*operations.ListCustomRoutingEndpointGroupsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.ListCustomRoutingEndpointGroups"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2555,7 +2610,7 @@ func (s *SDK) ListCustomRoutingEndpointGroups(ctx context.Context, request opera
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2625,8 +2680,9 @@ func (s *SDK) ListCustomRoutingEndpointGroups(ctx context.Context, request opera
 	return res, nil
 }
 
+// ListCustomRoutingListeners - List the listeners for a custom routing accelerator.
 func (s *SDK) ListCustomRoutingListeners(ctx context.Context, request operations.ListCustomRoutingListenersRequest) (*operations.ListCustomRoutingListenersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.ListCustomRoutingListeners"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2648,7 +2704,7 @@ func (s *SDK) ListCustomRoutingListeners(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2718,8 +2774,9 @@ func (s *SDK) ListCustomRoutingListeners(ctx context.Context, request operations
 	return res, nil
 }
 
+// ListCustomRoutingPortMappings - <p>Provides a complete mapping from the public accelerator IP address and port to destination EC2 instance IP addresses and ports in the virtual public cloud (VPC) subnet endpoint for a custom routing accelerator. For each subnet endpoint that you add, Global Accelerator creates a new static port mapping for the accelerator. The port mappings don't change after Global Accelerator generates them, so you can retrieve and cache the full mapping on your servers. </p> <p>If you remove a subnet from your accelerator, Global Accelerator removes (reclaims) the port mappings. If you add a subnet to your accelerator, Global Accelerator creates new port mappings (the existing ones don't change). If you add or remove EC2 instances in your subnet, the port mappings don't change, because the mappings are created when you add the subnet to Global Accelerator.</p> <p>The mappings also include a flag for each destination denoting which destination IP addresses and ports are allowed or denied traffic.</p>
 func (s *SDK) ListCustomRoutingPortMappings(ctx context.Context, request operations.ListCustomRoutingPortMappingsRequest) (*operations.ListCustomRoutingPortMappingsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.ListCustomRoutingPortMappings"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2741,7 +2798,7 @@ func (s *SDK) ListCustomRoutingPortMappings(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2821,8 +2878,9 @@ func (s *SDK) ListCustomRoutingPortMappings(ctx context.Context, request operati
 	return res, nil
 }
 
+// ListCustomRoutingPortMappingsByDestination - List the port mappings for a specific EC2 instance (destination) in a VPC subnet endpoint. The response is the mappings for one destination IP address. This is useful when your subnet endpoint has mappings that span multiple custom routing accelerators in your account, or for scenarios where you only want to list the port mappings for a specific destination instance.
 func (s *SDK) ListCustomRoutingPortMappingsByDestination(ctx context.Context, request operations.ListCustomRoutingPortMappingsByDestinationRequest) (*operations.ListCustomRoutingPortMappingsByDestinationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.ListCustomRoutingPortMappingsByDestination"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2844,7 +2902,7 @@ func (s *SDK) ListCustomRoutingPortMappingsByDestination(ctx context.Context, re
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2914,8 +2972,9 @@ func (s *SDK) ListCustomRoutingPortMappingsByDestination(ctx context.Context, re
 	return res, nil
 }
 
+// ListEndpointGroups - List the endpoint groups that are associated with a listener.
 func (s *SDK) ListEndpointGroups(ctx context.Context, request operations.ListEndpointGroupsRequest) (*operations.ListEndpointGroupsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.ListEndpointGroups"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2937,7 +2996,7 @@ func (s *SDK) ListEndpointGroups(ctx context.Context, request operations.ListEnd
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3007,8 +3066,9 @@ func (s *SDK) ListEndpointGroups(ctx context.Context, request operations.ListEnd
 	return res, nil
 }
 
+// ListListeners - List the listeners for an accelerator.
 func (s *SDK) ListListeners(ctx context.Context, request operations.ListListenersRequest) (*operations.ListListenersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.ListListeners"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3030,7 +3090,7 @@ func (s *SDK) ListListeners(ctx context.Context, request operations.ListListener
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3100,8 +3160,9 @@ func (s *SDK) ListListeners(ctx context.Context, request operations.ListListener
 	return res, nil
 }
 
+// ListTagsForResource - <p>List all tags for an accelerator. </p> <p>For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/tagging-in-global-accelerator.html">Tagging in AWS Global Accelerator</a> in the <i>AWS Global Accelerator Developer Guide</i>. </p>
 func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTagsForResourceRequest) (*operations.ListTagsForResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.ListTagsForResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3121,7 +3182,7 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3181,8 +3242,9 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 	return res, nil
 }
 
+// ProvisionByoipCidr - <p>Provisions an IP address range to use with your AWS resources through bring your own IP addresses (BYOIP) and creates a corresponding address pool. After the address range is provisioned, it is ready to be advertised using <a href="https://docs.aws.amazon.com/global-accelerator/latest/api/AdvertiseByoipCidr.html"> AdvertiseByoipCidr</a>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html">Bring Your Own IP Addresses (BYOIP)</a> in the <i>AWS Global Accelerator Developer Guide</i>.</p>
 func (s *SDK) ProvisionByoipCidr(ctx context.Context, request operations.ProvisionByoipCidrRequest) (*operations.ProvisionByoipCidrResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.ProvisionByoipCidr"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3202,7 +3264,7 @@ func (s *SDK) ProvisionByoipCidr(ctx context.Context, request operations.Provisi
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3282,8 +3344,9 @@ func (s *SDK) ProvisionByoipCidr(ctx context.Context, request operations.Provisi
 	return res, nil
 }
 
+// RemoveCustomRoutingEndpoints - Remove endpoints from a custom routing accelerator.
 func (s *SDK) RemoveCustomRoutingEndpoints(ctx context.Context, request operations.RemoveCustomRoutingEndpointsRequest) (*operations.RemoveCustomRoutingEndpointsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.RemoveCustomRoutingEndpoints"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3303,7 +3366,7 @@ func (s *SDK) RemoveCustomRoutingEndpoints(ctx context.Context, request operatio
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3384,8 +3447,9 @@ func (s *SDK) RemoveCustomRoutingEndpoints(ctx context.Context, request operatio
 	return res, nil
 }
 
+// TagResource - <p>Add tags to an accelerator resource. </p> <p>For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/tagging-in-global-accelerator.html">Tagging in AWS Global Accelerator</a> in the <i>AWS Global Accelerator Developer Guide</i>. </p>
 func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceRequest) (*operations.TagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.TagResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3405,7 +3469,7 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3465,8 +3529,9 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 	return res, nil
 }
 
+// UntagResource - <p>Remove tags from a Global Accelerator resource. When you specify a tag key, the action removes both that key and its associated value. The operation succeeds even if you attempt to remove tags from an accelerator that was already removed.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/tagging-in-global-accelerator.html">Tagging in AWS Global Accelerator</a> in the <i>AWS Global Accelerator Developer Guide</i>.</p>
 func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourceRequest) (*operations.UntagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.UntagResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3486,7 +3551,7 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3546,8 +3611,9 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 	return res, nil
 }
 
+// UpdateAccelerator - <p>Update an accelerator. </p> <important> <p>Global Accelerator is a global service that supports endpoints in multiple AWS Regions but you must specify the US West (Oregon) Region to create or update accelerators.</p> </important>
 func (s *SDK) UpdateAccelerator(ctx context.Context, request operations.UpdateAcceleratorRequest) (*operations.UpdateAcceleratorResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.UpdateAccelerator"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3567,7 +3633,7 @@ func (s *SDK) UpdateAccelerator(ctx context.Context, request operations.UpdateAc
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3627,8 +3693,9 @@ func (s *SDK) UpdateAccelerator(ctx context.Context, request operations.UpdateAc
 	return res, nil
 }
 
+// UpdateAcceleratorAttributes - Update the attributes for an accelerator.
 func (s *SDK) UpdateAcceleratorAttributes(ctx context.Context, request operations.UpdateAcceleratorAttributesRequest) (*operations.UpdateAcceleratorAttributesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.UpdateAcceleratorAttributes"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3648,7 +3715,7 @@ func (s *SDK) UpdateAcceleratorAttributes(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3718,8 +3785,9 @@ func (s *SDK) UpdateAcceleratorAttributes(ctx context.Context, request operation
 	return res, nil
 }
 
+// UpdateCustomRoutingAccelerator - Update a custom routing accelerator.
 func (s *SDK) UpdateCustomRoutingAccelerator(ctx context.Context, request operations.UpdateCustomRoutingAcceleratorRequest) (*operations.UpdateCustomRoutingAcceleratorResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.UpdateCustomRoutingAccelerator"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3739,7 +3807,7 @@ func (s *SDK) UpdateCustomRoutingAccelerator(ctx context.Context, request operat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3799,8 +3867,9 @@ func (s *SDK) UpdateCustomRoutingAccelerator(ctx context.Context, request operat
 	return res, nil
 }
 
+// UpdateCustomRoutingAcceleratorAttributes - Update the attributes for a custom routing accelerator.
 func (s *SDK) UpdateCustomRoutingAcceleratorAttributes(ctx context.Context, request operations.UpdateCustomRoutingAcceleratorAttributesRequest) (*operations.UpdateCustomRoutingAcceleratorAttributesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.UpdateCustomRoutingAcceleratorAttributes"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3820,7 +3889,7 @@ func (s *SDK) UpdateCustomRoutingAcceleratorAttributes(ctx context.Context, requ
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3890,8 +3959,9 @@ func (s *SDK) UpdateCustomRoutingAcceleratorAttributes(ctx context.Context, requ
 	return res, nil
 }
 
+// UpdateCustomRoutingListener - Update a listener for a custom routing accelerator.
 func (s *SDK) UpdateCustomRoutingListener(ctx context.Context, request operations.UpdateCustomRoutingListenerRequest) (*operations.UpdateCustomRoutingListenerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.UpdateCustomRoutingListener"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3911,7 +3981,7 @@ func (s *SDK) UpdateCustomRoutingListener(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3991,8 +4061,9 @@ func (s *SDK) UpdateCustomRoutingListener(ctx context.Context, request operation
 	return res, nil
 }
 
+// UpdateEndpointGroup - Update an endpoint group. A resource must be valid and active when you add it as an endpoint.
 func (s *SDK) UpdateEndpointGroup(ctx context.Context, request operations.UpdateEndpointGroupRequest) (*operations.UpdateEndpointGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.UpdateEndpointGroup"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4012,7 +4083,7 @@ func (s *SDK) UpdateEndpointGroup(ctx context.Context, request operations.Update
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4092,8 +4163,9 @@ func (s *SDK) UpdateEndpointGroup(ctx context.Context, request operations.Update
 	return res, nil
 }
 
+// UpdateListener - Update a listener.
 func (s *SDK) UpdateListener(ctx context.Context, request operations.UpdateListenerRequest) (*operations.UpdateListenerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.UpdateListener"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4113,7 +4185,7 @@ func (s *SDK) UpdateListener(ctx context.Context, request operations.UpdateListe
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4193,8 +4265,9 @@ func (s *SDK) UpdateListener(ctx context.Context, request operations.UpdateListe
 	return res, nil
 }
 
+// WithdrawByoipCidr - <p>Stops advertising an address range that is provisioned as an address pool. You can perform this operation at most once every 10 seconds, even if you specify different address ranges each time.</p> <p>It can take a few minutes before traffic to the specified addresses stops routing to AWS because of propagation delays.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html">Bring Your Own IP Addresses (BYOIP)</a> in the <i>AWS Global Accelerator Developer Guide</i>.</p>
 func (s *SDK) WithdrawByoipCidr(ctx context.Context, request operations.WithdrawByoipCidrRequest) (*operations.WithdrawByoipCidrResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.WithdrawByoipCidr"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4214,7 +4287,7 @@ func (s *SDK) WithdrawByoipCidr(ctx context.Context, request operations.Withdraw
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

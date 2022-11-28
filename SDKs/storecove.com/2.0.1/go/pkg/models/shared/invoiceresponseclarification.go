@@ -29,6 +29,8 @@ const (
 	InvoiceResponseClarificationClarificationCodeTypeEnumOpStatusAction InvoiceResponseClarificationClarificationCodeTypeEnum = "OPStatusAction"
 )
 
+// InvoiceResponseClarification
+// A clarification for why a received invoice was rejected (RE) or under query (UQ) and what action to take.
 type InvoiceResponseClarification struct {
 	Clarification         *string                                               `json:"clarification,omitempty"`
 	ClarificationCode     InvoiceResponseClarificationClarificationCodeEnum     `json:"clarificationCode"`

@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { DataItem } from "./dataitem";
 // ResultRow
 /**
  * A single row in the ResultSet.
@@ -34,11 +34,11 @@ var ResultRow = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=dataItems", elemType: shared.DataItem }),
+        SpeakeasyMetadata({ data: "json, name=dataItems", elemType: DataItem }),
         __metadata("design:type", Array)
     ], ResultRow.prototype, "dataItems", void 0);
     __decorate([
-        Metadata({ data: "json, name=rowId" }),
+        SpeakeasyMetadata({ data: "json, name=rowId" }),
         __metadata("design:type", String)
     ], ResultRow.prototype, "rowId", void 0);
     return ResultRow;

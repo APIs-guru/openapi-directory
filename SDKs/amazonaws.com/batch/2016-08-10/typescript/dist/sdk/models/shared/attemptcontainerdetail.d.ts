@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { NetworkInterface } from "./networkinterface";
 /**
  * An object representing the details of a container that's part of a job attempt.

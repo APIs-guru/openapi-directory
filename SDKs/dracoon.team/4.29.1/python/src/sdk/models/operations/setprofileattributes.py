@@ -10,14 +10,14 @@ class SetProfileAttributesHeaders:
 
 @dataclass
 class SetProfileAttributesRequest:
-    headers: SetProfileAttributesHeaders = field(default=None)
-    request: shared.ProfileAttributesRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: SetProfileAttributesHeaders = field()
+    request: shared.ProfileAttributesRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class SetProfileAttributesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     profile_attributes: Optional[shared.ProfileAttributes] = field(default=None)
-    status_code: int = field(default=None)
     

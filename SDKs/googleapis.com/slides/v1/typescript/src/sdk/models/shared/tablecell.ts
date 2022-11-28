@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TableCellLocation } from "./tablecelllocation";
 import { TableCellProperties } from "./tablecellproperties";
 import { TextContent } from "./textcontent";
+
 
 
 // TableCell
@@ -9,18 +10,18 @@ import { TextContent } from "./textcontent";
  * Properties and contents of each table cell.
 **/
 export class TableCell extends SpeakeasyBase {
-  @Metadata({ data: "json, name=columnSpan" })
+  @SpeakeasyMetadata({ data: "json, name=columnSpan" })
   columnSpan?: number;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: TableCellLocation;
 
-  @Metadata({ data: "json, name=rowSpan" })
+  @SpeakeasyMetadata({ data: "json, name=rowSpan" })
   rowSpan?: number;
 
-  @Metadata({ data: "json, name=tableCellProperties" })
+  @SpeakeasyMetadata({ data: "json, name=tableCellProperties" })
   tableCellProperties?: TableCellProperties;
 
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: TextContent;
 }

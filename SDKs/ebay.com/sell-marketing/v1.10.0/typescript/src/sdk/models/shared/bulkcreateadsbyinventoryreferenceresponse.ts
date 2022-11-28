@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CreateAdsByInventoryReferenceResponse } from "./createadsbyinventoryreferenceresponse";
+
 
 
 // BulkCreateAdsByInventoryReferenceResponse
@@ -8,6 +8,6 @@ import { CreateAdsByInventoryReferenceResponse } from "./createadsbyinventoryref
  * This type defines the response fields used by the bulkCreateAdsByInventoryReference method.
 **/
 export class BulkCreateAdsByInventoryReferenceResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=responses", elemType: shared.CreateAdsByInventoryReferenceResponse })
+  @SpeakeasyMetadata({ data: "json, name=responses", elemType: CreateAdsByInventoryReferenceResponse })
   responses?: CreateAdsByInventoryReferenceResponse[];
 }

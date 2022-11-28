@@ -1,52 +1,53 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetVersionLocationsMarkersFormatIncidentTypeEnum {
-    Crash = "crash"
-,    Hazard = "hazard"
-,    Theft = "theft"
-,    Unconfirmed = "unconfirmed"
-,    InfrastructureIssue = "infrastructure_issue"
-,    ChopShop = "chop_shop"
+    Crash = "crash",
+    Hazard = "hazard",
+    Theft = "theft",
+    Unconfirmed = "unconfirmed",
+    InfrastructureIssue = "infrastructure_issue",
+    ChopShop = "chop_shop"
 }
 
 
 export class GetVersionLocationsMarkersFormatQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=all" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=all" })
   all?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=incident_type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=incident_type" })
   incidentType?: GetVersionLocationsMarkersFormatIncidentTypeEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=occurred_after" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=occurred_after" })
   occurredAfter?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=occurred_before" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=occurred_before" })
   occurredBefore?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=proximity" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=proximity" })
   proximity?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=proximity_square" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=proximity_square" })
   proximitySquare?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=query" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=query" })
   query?: string;
 }
 
 
 export class GetVersionLocationsMarkersFormatRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetVersionLocationsMarkersFormatQueryParams;
 }
 
 
 export class GetVersionLocationsMarkersFormatResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

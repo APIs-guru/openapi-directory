@@ -40,7 +40,7 @@ type CloudkmsProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsCreateSecurity 
 type CloudkmsProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsCreateRequest struct {
 	PathParams  CloudkmsProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsCreatePathParams
 	QueryParams CloudkmsProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsCreateQueryParams
-	Request     *shared.CryptoKeyVersion `request:"mediaType=application/json"`
+	Request     *shared.CryptoKeyVersionInput `request:"mediaType=application/json"`
 	Security    CloudkmsProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsCreateSecurity
 }
 

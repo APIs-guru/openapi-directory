@@ -22,7 +22,59 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+// ApiDeploymentInput
+/**
+ * Describes a service running at particular address that provides a particular version of an API. ApiDeployments have revisions which correspond to different configurations of a single deployment in time. Revision identifiers should be updated whenever the served API spec or endpoint address changes.
+**/
+var ApiDeploymentInput = /** @class */ (function (_super) {
+    __extends(ApiDeploymentInput, _super);
+    function ApiDeploymentInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=accessGuidance" }),
+        __metadata("design:type", String)
+    ], ApiDeploymentInput.prototype, "accessGuidance", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=annotations" }),
+        __metadata("design:type", Map)
+    ], ApiDeploymentInput.prototype, "annotations", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=apiSpecRevision" }),
+        __metadata("design:type", String)
+    ], ApiDeploymentInput.prototype, "apiSpecRevision", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=description" }),
+        __metadata("design:type", String)
+    ], ApiDeploymentInput.prototype, "description", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
+        __metadata("design:type", String)
+    ], ApiDeploymentInput.prototype, "displayName", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=endpointUri" }),
+        __metadata("design:type", String)
+    ], ApiDeploymentInput.prototype, "endpointUri", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=externalChannelUri" }),
+        __metadata("design:type", String)
+    ], ApiDeploymentInput.prototype, "externalChannelUri", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=intendedAudience" }),
+        __metadata("design:type", String)
+    ], ApiDeploymentInput.prototype, "intendedAudience", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=labels" }),
+        __metadata("design:type", Map)
+    ], ApiDeploymentInput.prototype, "labels", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=name" }),
+        __metadata("design:type", String)
+    ], ApiDeploymentInput.prototype, "name", void 0);
+    return ApiDeploymentInput;
+}(SpeakeasyBase));
+export { ApiDeploymentInput };
 // ApiDeployment
 /**
  * Describes a service running at particular address that provides a particular version of an API. ApiDeployments have revisions which correspond to different configurations of a single deployment in time. Revision identifiers should be updated whenever the served API spec or endpoint address changes.
@@ -33,59 +85,59 @@ var ApiDeployment = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=accessGuidance" }),
+        SpeakeasyMetadata({ data: "json, name=accessGuidance" }),
         __metadata("design:type", String)
     ], ApiDeployment.prototype, "accessGuidance", void 0);
     __decorate([
-        Metadata({ data: "json, name=annotations" }),
+        SpeakeasyMetadata({ data: "json, name=annotations" }),
         __metadata("design:type", Map)
     ], ApiDeployment.prototype, "annotations", void 0);
     __decorate([
-        Metadata({ data: "json, name=apiSpecRevision" }),
+        SpeakeasyMetadata({ data: "json, name=apiSpecRevision" }),
         __metadata("design:type", String)
     ], ApiDeployment.prototype, "apiSpecRevision", void 0);
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", String)
     ], ApiDeployment.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], ApiDeployment.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=displayName" }),
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
         __metadata("design:type", String)
     ], ApiDeployment.prototype, "displayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=endpointUri" }),
+        SpeakeasyMetadata({ data: "json, name=endpointUri" }),
         __metadata("design:type", String)
     ], ApiDeployment.prototype, "endpointUri", void 0);
     __decorate([
-        Metadata({ data: "json, name=externalChannelUri" }),
+        SpeakeasyMetadata({ data: "json, name=externalChannelUri" }),
         __metadata("design:type", String)
     ], ApiDeployment.prototype, "externalChannelUri", void 0);
     __decorate([
-        Metadata({ data: "json, name=intendedAudience" }),
+        SpeakeasyMetadata({ data: "json, name=intendedAudience" }),
         __metadata("design:type", String)
     ], ApiDeployment.prototype, "intendedAudience", void 0);
     __decorate([
-        Metadata({ data: "json, name=labels" }),
+        SpeakeasyMetadata({ data: "json, name=labels" }),
         __metadata("design:type", Map)
     ], ApiDeployment.prototype, "labels", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], ApiDeployment.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=revisionCreateTime" }),
+        SpeakeasyMetadata({ data: "json, name=revisionCreateTime" }),
         __metadata("design:type", String)
     ], ApiDeployment.prototype, "revisionCreateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=revisionId" }),
+        SpeakeasyMetadata({ data: "json, name=revisionId" }),
         __metadata("design:type", String)
     ], ApiDeployment.prototype, "revisionId", void 0);
     __decorate([
-        Metadata({ data: "json, name=revisionUpdateTime" }),
+        SpeakeasyMetadata({ data: "json, name=revisionUpdateTime" }),
         __metadata("design:type", String)
     ], ApiDeployment.prototype, "revisionUpdateTime", void 0);
     return ApiDeployment;

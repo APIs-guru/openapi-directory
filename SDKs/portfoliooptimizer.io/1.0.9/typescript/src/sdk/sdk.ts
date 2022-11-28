@@ -1,17 +1,16 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
+import FormData from "form-data";
 import * as operations from "./models/operations";
-import { SerializeRequestBody } from "../internal/utils/requestbody";
-import FormData from 'form-data';
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import * as utils from "../internal/utils";
 import { Security } from "./models/shared";
+
+
 
 type OptsFunc = (sdk: SDK) => void;
 
-const Servers = [
-  "https://api.portfoliooptimizer.io/v1",
-  "https://eu-west-1.api.portfoliooptimizer.io/v1",
+export const ServerList = [
+	"https://api.portfoliooptimizer.io/v1",
+	"https://eu-west-1.api.portfoliooptimizer.io/v1",
 ] as const;
 
 export function WithServerURL(
@@ -22,13 +21,13 @@ export function WithServerURL(
     if (params != null) {
       serverURL = utils.ReplaceParameters(serverURL, params);
     }
-    sdk.serverURL = serverURL;
+    sdk._serverURL = serverURL;
   };
 }
 
 export function WithClient(client: AxiosInstance): OptsFunc {
   return (sdk: SDK) => {
-    sdk.defaultClient = client;
+    sdk._defaultClient = client;
   };
 }
 
@@ -37,41 +36,47 @@ export function WithSecurity(security: Security): OptsFunc {
     security = new Security(security);
   }
   return (sdk: SDK) => {
-    sdk.security = security;
+    sdk._security = security;
   };
 }
 
-// SDK Documentation: https://docs.portfoliooptimizer.io/ - External documentation
+/* SDK Documentation: https://docs.portfoliooptimizer.io/ - External documentation*/
 export class SDK {
-  defaultClient?: AxiosInstance;
-  securityClient?: AxiosInstance;
-  security?: any;
-  serverURL: string;
+
+  public _defaultClient: AxiosInstance;
+  public _securityClient: AxiosInstance;
+  public _security?: Security;
+  public _serverURL: string;
+  private _language = "typescript";
+  private _sdkVersion = "0.0.1";
+  private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
-    if (this.serverURL == "") {
-      this.serverURL = Servers[0];
+    if (this._serverURL == "") {
+      this._serverURL = ServerList[0];
     }
 
-    if (!this.defaultClient) {
-      this.defaultClient = axios.create({ baseURL: this.serverURL });
+    if (!this._defaultClient) {
+      this._defaultClient = axios.create({ baseURL: this._serverURL });
     }
 
-    if (!this.securityClient) {
-      if (this.security) {
-        this.securityClient = CreateSecurityClient(
-          this.defaultClient,
-          this.security
+    if (!this._securityClient) {
+      if (this._security) {
+        this._securityClient = utils.CreateSecurityClient(
+          this._defaultClient,
+          this._security
         );
       } else {
-        this.securityClient = this.defaultClient;
+        this._securityClient = this._defaultClient;
       }
     }
+    
   }
   
-  // PostAssetsCorrelationMatrix - Correlation Matrix
-  /** 
+  /**
+   * postAssetsCorrelationMatrix - Correlation Matrix
+   *
    * Compute the Pearson correlation matrix of assets from either:  
    * * The assets returns
    * * The assets covariance matrix
@@ -80,7 +85,7 @@ export class SDK {
    * * [Wikipedia, Correlation and Dependence](https://en.wikipedia.org/wiki/Correlation_and_dependence#Correlation_matrices)
    * 
   **/
-  PostAssetsCorrelationMatrix(
+  postAssetsCorrelationMatrix(
     req: operations.PostAssetsCorrelationMatrixRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostAssetsCorrelationMatrixResponse> {
@@ -88,40 +93,40 @@ export class SDK {
       req = new operations.PostAssetsCorrelationMatrixRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/assets/correlation/matrix";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostAssetsCorrelationMatrixResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostAssetsCorrelationMatrixResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postAssetsCorrelationMatrix200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -133,15 +138,16 @@ export class SDK {
   }
 
   
-  // PostAssetsCorrelationMatrixNearest - Nearest Correlation Matrix
-  /** 
+  /**
+   * postAssetsCorrelationMatrixNearest - Nearest Correlation Matrix
+   *
    * Compute the _closest_ correlation matrix to an approximate assets correlation matrix, optionally keeping a selected number of correlations fixed, _closest_ being defined in terms of [the Frobenius norm](https://en.wikipedia.org/wiki/Matrix_norm#Frobenius_norm).
    * 
    * References
    * * [Nicholas J. Higham, Computing the Nearest Correlation Matrix—A Problem from Finance, IMA J. Numer. Anal. 22, 329–343, 2002.](http://www.maths.manchester.ac.uk/~higham/narep/narep369.pdf)
    * 
   **/
-  PostAssetsCorrelationMatrixNearest(
+  postAssetsCorrelationMatrixNearest(
     req: operations.PostAssetsCorrelationMatrixNearestRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostAssetsCorrelationMatrixNearestResponse> {
@@ -149,40 +155,40 @@ export class SDK {
       req = new operations.PostAssetsCorrelationMatrixNearestRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/assets/correlation/matrix/nearest";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostAssetsCorrelationMatrixNearestResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostAssetsCorrelationMatrixNearestResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postAssetsCorrelationMatrixNearest200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -194,8 +200,9 @@ export class SDK {
   }
 
   
-  // PostAssetsCorrelationMatrixShrinkage - Correlation Matrix Shrinkage
-  /** 
+  /**
+   * postAssetsCorrelationMatrixShrinkage - Correlation Matrix Shrinkage
+   *
    * Compute a correlation matrix as a weighted average of an assets correlation matrix and a target correlation matrix, the target correlation matrix being either:  
    * * An equicorrelation matrix made of 1
    * * An equicorrelation matrix made of 0
@@ -206,7 +213,7 @@ export class SDK {
    * * [Steiner, Andreas, Manipulating Valid Correlation Matrices](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1878165)
    * 
   **/
-  PostAssetsCorrelationMatrixShrinkage(
+  postAssetsCorrelationMatrixShrinkage(
     req: operations.PostAssetsCorrelationMatrixShrinkageRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostAssetsCorrelationMatrixShrinkageResponse> {
@@ -214,40 +221,40 @@ export class SDK {
       req = new operations.PostAssetsCorrelationMatrixShrinkageRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/assets/correlation/matrix/shrinkage";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostAssetsCorrelationMatrixShrinkageResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostAssetsCorrelationMatrixShrinkageResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postAssetsCorrelationMatrixShrinkage200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -259,15 +266,16 @@ export class SDK {
   }
 
   
-  // PostAssetsCorrelationMatrixValidation - Correlation Matrix Validation
-  /** 
+  /**
+   * postAssetsCorrelationMatrixValidation - Correlation Matrix Validation
+   *
    * Validate whether a matrix is a correlation matrix.
    * 
    * References
    * * [Wikipedia, Correlation and Dependence](https://en.wikipedia.org/wiki/Correlation_and_dependence#Correlation_matrices)
    * 
   **/
-  PostAssetsCorrelationMatrixValidation(
+  postAssetsCorrelationMatrixValidation(
     req: operations.PostAssetsCorrelationMatrixValidationRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostAssetsCorrelationMatrixValidationResponse> {
@@ -275,40 +283,40 @@ export class SDK {
       req = new operations.PostAssetsCorrelationMatrixValidationRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/assets/correlation/matrix/validation";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostAssetsCorrelationMatrixValidationResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostAssetsCorrelationMatrixValidationResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postAssetsCorrelationMatrixValidation200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -320,8 +328,9 @@ export class SDK {
   }
 
   
-  // PostAssetsCovarianceMatrix - Covariance Matrix
-  /** 
+  /**
+   * postAssetsCovarianceMatrix - Covariance Matrix
+   *
    * Compute the covariance matrix of assets from either:  
    * * The assets correlation matrix and their volatilities (i.e., standard deviations)
    * * The assets correlation matrix and their variances
@@ -331,7 +340,7 @@ export class SDK {
    * * [Wikipedia, Covariance Matrix](https://en.wikipedia.org/wiki/Covariance_matrix)
    * 
   **/
-  PostAssetsCovarianceMatrix(
+  postAssetsCovarianceMatrix(
     req: operations.PostAssetsCovarianceMatrixRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostAssetsCovarianceMatrixResponse> {
@@ -339,40 +348,40 @@ export class SDK {
       req = new operations.PostAssetsCovarianceMatrixRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/assets/covariance/matrix";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostAssetsCovarianceMatrixResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostAssetsCovarianceMatrixResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postAssetsCovarianceMatrix200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -384,8 +393,9 @@ export class SDK {
   }
 
   
-  // PostAssetsCovarianceMatrixSample - Sample Covariance Matrix
-  /** 
+  /**
+   * postAssetsCovarianceMatrixSample - Sample Covariance Matrix
+   *
    * Compute the sample covariance matrix of assets returns.
    * 
    * > This endpoint is similar to the endpoint [`/assets/covariance/matrix`](#post-/assets/covariance/matrix), but uses [Bessel's correction](https://en.wikipedia.org/wiki/Bessel%27s_correction) to compute the covariance matrix.
@@ -394,7 +404,7 @@ export class SDK {
    * * [Wikipedia, Sample Mean and Covariance](https://en.wikipedia.org/wiki/Sample_mean_and_covariance)
    * 
   **/
-  PostAssetsCovarianceMatrixSample(
+  postAssetsCovarianceMatrixSample(
     req: operations.PostAssetsCovarianceMatrixSampleRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostAssetsCovarianceMatrixSampleResponse> {
@@ -402,40 +412,40 @@ export class SDK {
       req = new operations.PostAssetsCovarianceMatrixSampleRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/assets/covariance/matrix/sample";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostAssetsCovarianceMatrixSampleResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostAssetsCovarianceMatrixSampleResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postAssetsCovarianceMatrixSample200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -447,15 +457,16 @@ export class SDK {
   }
 
   
-  // PostAssetsCovarianceMatrixValidation - Covariance Matrix Validation
-  /** 
+  /**
+   * postAssetsCovarianceMatrixValidation - Covariance Matrix Validation
+   *
    * Validate whether a matrix is a covariance matrix.
    * 
    * References
    * * [Wikipedia, Covariance Matrix](https://en.wikipedia.org/wiki/Covariance_matrix)
    * 
   **/
-  PostAssetsCovarianceMatrixValidation(
+  postAssetsCovarianceMatrixValidation(
     req: operations.PostAssetsCovarianceMatrixValidationRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostAssetsCovarianceMatrixValidationResponse> {
@@ -463,40 +474,40 @@ export class SDK {
       req = new operations.PostAssetsCovarianceMatrixValidationRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/assets/covariance/matrix/validation";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostAssetsCovarianceMatrixValidationResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostAssetsCovarianceMatrixValidationResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postAssetsCovarianceMatrixValidation200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -508,15 +519,16 @@ export class SDK {
   }
 
   
-  // PostAssetsReturns - Arithmetic Returns
-  /** 
+  /**
+   * postAssetsReturns - Arithmetic Returns
+   *
    * Compute the arithmetic return(s) of one or several asset(s) for one or several time period(s).
    * 
    * References
    * * [Wikipedia, Rate of Return](https://en.wikipedia.org/wiki/Rate_of_return#Return)
    * 
   **/
-  PostAssetsReturns(
+  postAssetsReturns(
     req: operations.PostAssetsReturnsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostAssetsReturnsResponse> {
@@ -524,40 +536,40 @@ export class SDK {
       req = new operations.PostAssetsReturnsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/assets/returns";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostAssetsReturnsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostAssetsReturnsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postAssetsReturns200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -569,15 +581,16 @@ export class SDK {
   }
 
   
-  // PostAssetsReturnsAverage - Arithmetic Average Return
-  /** 
+  /**
+   * postAssetsReturnsAverage - Arithmetic Average Return
+   *
    * Compute the arithmetic average of the return(s) of one or several asset(s).
    * 
    * References
    * * [Wikipedia, Arithmetic Average Rate of Return](https://en.wikipedia.org/wiki/Rate_of_return#Arithmetic_average_rate_of_return)
    * 
   **/
-  PostAssetsReturnsAverage(
+  postAssetsReturnsAverage(
     req: operations.PostAssetsReturnsAverageRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostAssetsReturnsAverageResponse> {
@@ -585,40 +598,40 @@ export class SDK {
       req = new operations.PostAssetsReturnsAverageRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/assets/returns/average";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostAssetsReturnsAverageResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostAssetsReturnsAverageResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postAssetsReturnsAverage200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -630,8 +643,9 @@ export class SDK {
   }
 
   
-  // PostAssetsVariance - Variance
-  /** 
+  /**
+   * postAssetsVariance - Variance
+   *
    * Compute the variance of one or several asset(s) from either:  
    * * The asset(s) returns
    * * The assets covariance matrix
@@ -641,7 +655,7 @@ export class SDK {
    * * [Wikipedia, Variance](https://en.wikipedia.org/wiki/Variance)        
    * 
   **/
-  PostAssetsVariance(
+  postAssetsVariance(
     req: operations.PostAssetsVarianceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostAssetsVarianceResponse> {
@@ -649,40 +663,40 @@ export class SDK {
       req = new operations.PostAssetsVarianceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/assets/variance";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostAssetsVarianceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostAssetsVarianceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postAssetsVariance200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -694,8 +708,9 @@ export class SDK {
   }
 
   
-  // PostAssetsVarianceSample - Sample variance
-  /** 
+  /**
+   * postAssetsVarianceSample - Sample variance
+   *
    * Compute the sample variance of one or several asset(s) from the asset(s) returns.
    *         
    * > This endpoint is similar to the endpoint [`/assets/variance`](#post-/assets/variance), but uses [Bessel's correction](https://en.wikipedia.org/wiki/Bessel%27s_correction) to compute the variance.
@@ -704,7 +719,7 @@ export class SDK {
    * * [Wikipedia, Variance](https://en.wikipedia.org/wiki/Variance)        
    * 
   **/
-  PostAssetsVarianceSample(
+  postAssetsVarianceSample(
     req: operations.PostAssetsVarianceSampleRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostAssetsVarianceSampleResponse> {
@@ -712,40 +727,40 @@ export class SDK {
       req = new operations.PostAssetsVarianceSampleRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/assets/variance/sample";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostAssetsVarianceSampleResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostAssetsVarianceSampleResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postAssetsVarianceSample200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -757,8 +772,9 @@ export class SDK {
   }
 
   
-  // PostAssetsVolatility - Volatility
-  /** 
+  /**
+   * postAssetsVolatility - Volatility
+   *
    * Compute the volatility (i.e., standard deviation) of one or several asset(s) from either:  
    * * The asset(s) returns
    * * The assets covariance matrix
@@ -768,7 +784,7 @@ export class SDK {
    * * [Wikipedia, Standard Deviation](https://en.wikipedia.org/wiki/Standard_deviation)
    * 
   **/
-  PostAssetsVolatility(
+  postAssetsVolatility(
     req: operations.PostAssetsVolatilityRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostAssetsVolatilityResponse> {
@@ -776,40 +792,40 @@ export class SDK {
       req = new operations.PostAssetsVolatilityRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/assets/volatility";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostAssetsVolatilityResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostAssetsVolatilityResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postAssetsVolatility200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -821,8 +837,9 @@ export class SDK {
   }
 
   
-  // PostAssetsVolatilitySample - Sample volatility
-  /** 
+  /**
+   * postAssetsVolatilitySample - Sample volatility
+   *
    * Compute the sample volatility (i.e., sample standard deviation) of one or several asset(s) from the asset(s) returns.
    * 
    * > This endpoint is similar to the endpoint [`/assets/volatility`](#post-/assets/volatility), but uses [Bessel's correction](https://en.wikipedia.org/wiki/Bessel%27s_correction) to compute the volatility.
@@ -831,7 +848,7 @@ export class SDK {
    * * [Wikipedia, Standard Deviation](https://en.wikipedia.org/wiki/Standard_deviation)
    * 
   **/
-  PostAssetsVolatilitySample(
+  postAssetsVolatilitySample(
     req: operations.PostAssetsVolatilitySampleRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostAssetsVolatilitySampleResponse> {
@@ -839,40 +856,40 @@ export class SDK {
       req = new operations.PostAssetsVolatilitySampleRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/assets/volatility/sample";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostAssetsVolatilitySampleResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostAssetsVolatilitySampleResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postAssetsVolatilitySample200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -884,8 +901,9 @@ export class SDK {
   }
 
   
-  // PostFactorsResidualization - Residualization
-  /** 
+  /**
+   * postFactorsResidualization - Residualization
+   *
    * Compute the residuals of a factor against a set of factors, using a returns-based linear regression analysis.
    * 
    * References
@@ -893,7 +911,7 @@ export class SDK {
    * * [Catalina B. Garcia, Román Salmeron, Claudia Garcia & Jose Garcia (2019): Residualization: justification, properties and application, Journal of Applied Statistics](https://doi.org/10.1080/02664763.2019.1701638)
    * 
   **/
-  PostFactorsResidualization(
+  postFactorsResidualization(
     req: operations.PostFactorsResidualizationRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostFactorsResidualizationResponse> {
@@ -901,40 +919,40 @@ export class SDK {
       req = new operations.PostFactorsResidualizationRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/factors/residualization";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostFactorsResidualizationResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostFactorsResidualizationResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postFactorsResidualization200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -946,15 +964,16 @@ export class SDK {
   }
 
   
-  // PostPortfolioAnalysisAlpha - Alpha
-  /** 
+  /**
+   * postPortfolioAnalysisAlpha - Alpha
+   *
    * Compute the Jensen’s alpha of one or several portfolio(s) in the Capital Asset Pricing Model (CAPM).
    * 
    * References
    * * Carl R. Bacon, Practical Portfolio Performance Measurement and Attribution  
    * 
   **/
-  PostPortfolioAnalysisAlpha(
+  postPortfolioAnalysisAlpha(
     req: operations.PostPortfolioAnalysisAlphaRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostPortfolioAnalysisAlphaResponse> {
@@ -962,40 +981,40 @@ export class SDK {
       req = new operations.PostPortfolioAnalysisAlphaRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/portfolio/analysis/alpha";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostPortfolioAnalysisAlphaResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostPortfolioAnalysisAlphaResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postPortfolioAnalysisAlpha200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1007,15 +1026,16 @@ export class SDK {
   }
 
   
-  // PostPortfolioAnalysisBeta - Beta
-  /** 
+  /**
+   * postPortfolioAnalysisBeta - Beta
+   *
    * Compute the beta of one or several portfolio(s) in the Capital Asset Pricing Model (CAPM)..
    * 
    * References
    * * Carl R. Bacon, Practical Portfolio Performance Measurement and Attribution  
    * 
   **/
-  PostPortfolioAnalysisBeta(
+  postPortfolioAnalysisBeta(
     req: operations.PostPortfolioAnalysisBetaRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostPortfolioAnalysisBetaResponse> {
@@ -1023,40 +1043,40 @@ export class SDK {
       req = new operations.PostPortfolioAnalysisBetaRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/portfolio/analysis/beta";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostPortfolioAnalysisBetaResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostPortfolioAnalysisBetaResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postPortfolioAnalysisBeta200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1068,15 +1088,16 @@ export class SDK {
   }
 
   
-  // PostPortfolioAnalysisContributionsReturn - Return Contributions
-  /** 
+  /**
+   * postPortfolioAnalysisContributionsReturn - Return Contributions
+   *
    * Perform a return contribution analysis of one or several portfolio(s), optionally using groups of assets.
    * 
    * References
    * * Carl R. Bacon, Practical Portfolio Performance Measurement and Attribution
    * 
   **/
-  PostPortfolioAnalysisContributionsReturn(
+  postPortfolioAnalysisContributionsReturn(
     req: operations.PostPortfolioAnalysisContributionsReturnRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostPortfolioAnalysisContributionsReturnResponse> {
@@ -1084,40 +1105,40 @@ export class SDK {
       req = new operations.PostPortfolioAnalysisContributionsReturnRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/portfolio/analysis/contributions/return";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostPortfolioAnalysisContributionsReturnResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostPortfolioAnalysisContributionsReturnResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postPortfolioAnalysisContributionsReturn200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1129,15 +1150,16 @@ export class SDK {
   }
 
   
-  // PostPortfolioAnalysisContributionsRisk - Risk Contributions
-  /** 
+  /**
+   * postPortfolioAnalysisContributionsRisk - Risk Contributions
+   *
    * Perform a risk contribution analysis of one or several portfolio(s), optionally using groups of assets.
    * 
    * References
    * * Carl R. Bacon, Practical Portfolio Performance Measurement and Attribution
    * 
   **/
-  PostPortfolioAnalysisContributionsRisk(
+  postPortfolioAnalysisContributionsRisk(
     req: operations.PostPortfolioAnalysisContributionsRiskRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostPortfolioAnalysisContributionsRiskResponse> {
@@ -1145,40 +1167,40 @@ export class SDK {
       req = new operations.PostPortfolioAnalysisContributionsRiskRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/portfolio/analysis/contributions/risk";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostPortfolioAnalysisContributionsRiskResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostPortfolioAnalysisContributionsRiskResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postPortfolioAnalysisContributionsRisk200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1190,15 +1212,16 @@ export class SDK {
   }
 
   
-  // PostPortfolioAnalysisDiversificationRatio - Diversification Ratio
-  /** 
+  /**
+   * postPortfolioAnalysisDiversificationRatio - Diversification Ratio
+   *
    * Compute the diversification ratio of one or several portfolio(s).
    * 
    * References
    * * [Yves Choueifaty and Yves Coignard, Toward Maximum Diversification, The Journal of Portfolio Management Fall 2008, 35 (1) 40-51](https://doi.org/10.3905/JPM.2008.35.1.40)
    * 
   **/
-  PostPortfolioAnalysisDiversificationRatio(
+  postPortfolioAnalysisDiversificationRatio(
     req: operations.PostPortfolioAnalysisDiversificationRatioRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostPortfolioAnalysisDiversificationRatioResponse> {
@@ -1206,40 +1229,40 @@ export class SDK {
       req = new operations.PostPortfolioAnalysisDiversificationRatioRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/portfolio/analysis/diversification-ratio";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostPortfolioAnalysisDiversificationRatioResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostPortfolioAnalysisDiversificationRatioResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postPortfolioAnalysisDiversificationRatio200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1251,15 +1274,16 @@ export class SDK {
   }
 
   
-  // PostPortfolioAnalysisDrawdowns - Drawdowns
-  /** 
+  /**
+   * postPortfolioAnalysisDrawdowns - Drawdowns
+   *
    * Compute the drawdown function - also called the underwater equity curve -, as well as the worst 10 drawdowns of one or several portfolio(s).
    * 
    * References
    * * [Wikipedia, Drawdown](https://en.wikipedia.org/wiki/Drawdown_(economics))        
    * 
   **/
-  PostPortfolioAnalysisDrawdowns(
+  postPortfolioAnalysisDrawdowns(
     req: operations.PostPortfolioAnalysisDrawdownsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostPortfolioAnalysisDrawdownsResponse> {
@@ -1267,40 +1291,40 @@ export class SDK {
       req = new operations.PostPortfolioAnalysisDrawdownsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/portfolio/analysis/drawdowns";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostPortfolioAnalysisDrawdownsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostPortfolioAnalysisDrawdownsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postPortfolioAnalysisDrawdowns200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1312,15 +1336,16 @@ export class SDK {
   }
 
   
-  // PostPortfolioAnalysisFactorExposures - Factor Exposures
-  /** 
+  /**
+   * postPortfolioAnalysisFactorExposures - Factor Exposures
+   *
    * Compute the exposures of one or several portfolio(s) to a set of factors, using a returns-based linear regression analysis.
    * 
    * References
    * * [Measuring Factor Exposures: Uses and Abuses, Ronen Israel and Adrienne Ross, The Journal of Alternative Investments Summer 2017, 20 (1) 10-25](https://jai.pm-research.com/content/20/1/10.short) 
    * 
   **/
-  PostPortfolioAnalysisFactorExposures(
+  postPortfolioAnalysisFactorExposures(
     req: operations.PostPortfolioAnalysisFactorExposuresRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostPortfolioAnalysisFactorExposuresResponse> {
@@ -1328,40 +1353,40 @@ export class SDK {
       req = new operations.PostPortfolioAnalysisFactorExposuresRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/portfolio/analysis/factor/exposures";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostPortfolioAnalysisFactorExposuresResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostPortfolioAnalysisFactorExposuresResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postPortfolioAnalysisFactorExposures200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1373,8 +1398,9 @@ export class SDK {
   }
 
   
-  // PostPortfolioAnalysisMeanVarianceEfficientFrontier - Mean-Variance Efficient Frontier
-  /** 
+  /**
+   * postPortfolioAnalysisMeanVarianceEfficientFrontier - Mean-Variance Efficient Frontier
+   *
    * Compute the discretized mean-variance efficient frontier associated to a list of assets, optionally subject to:
    * * Minimum and maximum weights constraints
    * * Maximum group weights constraints
@@ -1384,7 +1410,7 @@ export class SDK {
    *  * Harry M. Markowitz, Portfolio Selection, Efficient Diversification of Investments, Second edition, Blackwell Publishers Inc.
    * 
   **/
-  PostPortfolioAnalysisMeanVarianceEfficientFrontier(
+  postPortfolioAnalysisMeanVarianceEfficientFrontier(
     req: operations.PostPortfolioAnalysisMeanVarianceEfficientFrontierRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostPortfolioAnalysisMeanVarianceEfficientFrontierResponse> {
@@ -1392,40 +1418,40 @@ export class SDK {
       req = new operations.PostPortfolioAnalysisMeanVarianceEfficientFrontierRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/portfolio/analysis/mean-variance/efficient-frontier";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostPortfolioAnalysisMeanVarianceEfficientFrontierResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostPortfolioAnalysisMeanVarianceEfficientFrontierResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postPortfolioAnalysisMeanVarianceEfficientFrontier200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1437,8 +1463,9 @@ export class SDK {
   }
 
   
-  // PostPortfolioAnalysisMeanVarianceMinimumVarianceFrontier - Mean-Variance Minimum Variance Frontier
-  /** 
+  /**
+   * postPortfolioAnalysisMeanVarianceMinimumVarianceFrontier - Mean-Variance Minimum Variance Frontier
+   *
    * Compute the discretized mean-variance minimum variance frontier associated to a list of assets, optionally subject to:
    * * Minimum and maximum weights constraints
    * * Maximum group weights constraints
@@ -1450,7 +1477,7 @@ export class SDK {
    *  * Harry M. Markowitz, Portfolio Selection, Efficient Diversification of Investments, Second edition, Blackwell Publishers Inc.
    * 
   **/
-  PostPortfolioAnalysisMeanVarianceMinimumVarianceFrontier(
+  postPortfolioAnalysisMeanVarianceMinimumVarianceFrontier(
     req: operations.PostPortfolioAnalysisMeanVarianceMinimumVarianceFrontierRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostPortfolioAnalysisMeanVarianceMinimumVarianceFrontierResponse> {
@@ -1458,40 +1485,40 @@ export class SDK {
       req = new operations.PostPortfolioAnalysisMeanVarianceMinimumVarianceFrontierRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/portfolio/analysis/mean-variance/minimum-variance-frontier";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostPortfolioAnalysisMeanVarianceMinimumVarianceFrontierResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostPortfolioAnalysisMeanVarianceMinimumVarianceFrontierResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postPortfolioAnalysisMeanVarianceMinimumVarianceFrontier200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1503,8 +1530,9 @@ export class SDK {
   }
 
   
-  // PostPortfolioAnalysisReturn - Arithmetic Return
-  /** 
+  /**
+   * postPortfolioAnalysisReturn - Arithmetic Return
+   *
    * Compute the arithmetic return of one or several portfolio(s) from either:  
    * * Portfolio assets arithmetic returns
    * * Portfolio values
@@ -1514,7 +1542,7 @@ export class SDK {
    * * Harry M. Markowitz, Portfolio Selection, Efficient Diversification of Investments, Second edition, Blackwell Publishers Inc.
    * 
   **/
-  PostPortfolioAnalysisReturn(
+  postPortfolioAnalysisReturn(
     req: operations.PostPortfolioAnalysisReturnRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostPortfolioAnalysisReturnResponse> {
@@ -1522,40 +1550,40 @@ export class SDK {
       req = new operations.PostPortfolioAnalysisReturnRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/portfolio/analysis/return";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostPortfolioAnalysisReturnResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostPortfolioAnalysisReturnResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postPortfolioAnalysisReturn200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1567,15 +1595,16 @@ export class SDK {
   }
 
   
-  // PostPortfolioAnalysisReturnsAverage - Arithmetic Average Return
-  /** 
+  /**
+   * postPortfolioAnalysisReturnsAverage - Arithmetic Average Return
+   *
    * Compute the arithmetic average of the arithmetic return(s) of one or several portfolio(s).
    * 
    * References
    * * [Wikipedia, Arithmetic Average Rate of Return](https://en.wikipedia.org/wiki/Rate_of_return#Arithmetic_average_rate_of_return)
    * 
   **/
-  PostPortfolioAnalysisReturnsAverage(
+  postPortfolioAnalysisReturnsAverage(
     req: operations.PostPortfolioAnalysisReturnsAverageRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostPortfolioAnalysisReturnsAverageResponse> {
@@ -1583,40 +1612,40 @@ export class SDK {
       req = new operations.PostPortfolioAnalysisReturnsAverageRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/portfolio/analysis/returns/average";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostPortfolioAnalysisReturnsAverageResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostPortfolioAnalysisReturnsAverageResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postPortfolioAnalysisReturnsAverage200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1628,8 +1657,9 @@ export class SDK {
   }
 
   
-  // PostPortfolioAnalysisSharpeRatio - Sharpe Ratio
-  /** 
+  /**
+   * postPortfolioAnalysisSharpeRatio - Sharpe Ratio
+   *
    * Compute the Sharpe ratio of one or several portfolio(s) from either:
    * * Portfolio assets arithmetic returns and assets covariance matrix
    * * Portfolio values
@@ -1639,7 +1669,7 @@ export class SDK {
    * * Harry M. Markowitz, Portfolio Selection, Efficient Diversification of Investments, Second edition, Blackwell Publishers Inc.
    * 
   **/
-  PostPortfolioAnalysisSharpeRatio(
+  postPortfolioAnalysisSharpeRatio(
     req: operations.PostPortfolioAnalysisSharpeRatioRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostPortfolioAnalysisSharpeRatioResponse> {
@@ -1647,40 +1677,40 @@ export class SDK {
       req = new operations.PostPortfolioAnalysisSharpeRatioRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/portfolio/analysis/sharpe-ratio";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostPortfolioAnalysisSharpeRatioResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostPortfolioAnalysisSharpeRatioResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postPortfolioAnalysisSharpeRatio200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1692,8 +1722,9 @@ export class SDK {
   }
 
   
-  // PostPortfolioAnalysisTrackingError - Tracking Error
-  /** 
+  /**
+   * postPortfolioAnalysisTrackingError - Tracking Error
+   *
    * Compute the tracking error between a benchmark and one or several portfolio(s).
    * 
    * References
@@ -1701,7 +1732,7 @@ export class SDK {
    * * Carl R. Bacon, Practical Portfolio Performance Measurement and Attribution 
    * 
   **/
-  PostPortfolioAnalysisTrackingError(
+  postPortfolioAnalysisTrackingError(
     req: operations.PostPortfolioAnalysisTrackingErrorRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostPortfolioAnalysisTrackingErrorResponse> {
@@ -1709,40 +1740,40 @@ export class SDK {
       req = new operations.PostPortfolioAnalysisTrackingErrorRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/portfolio/analysis/tracking-error";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostPortfolioAnalysisTrackingErrorResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostPortfolioAnalysisTrackingErrorResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postPortfolioAnalysisTrackingError200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1754,8 +1785,9 @@ export class SDK {
   }
 
   
-  // PostPortfolioAnalysisVolatility - Volatility
-  /** 
+  /**
+   * postPortfolioAnalysisVolatility - Volatility
+   *
    * Compute the volatility (i.e., standard deviation) of one or several portfolio(s) from either:  
    * * Portfolio assets covariance matrix
    * * Portfolio values
@@ -1766,7 +1798,7 @@ export class SDK {
    * * Harry M. Markowitz, Portfolio Selection, Efficient Diversification of Investments, Second edition, Blackwell Publishers Inc.
    * 
   **/
-  PostPortfolioAnalysisVolatility(
+  postPortfolioAnalysisVolatility(
     req: operations.PostPortfolioAnalysisVolatilityRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostPortfolioAnalysisVolatilityResponse> {
@@ -1774,40 +1806,40 @@ export class SDK {
       req = new operations.PostPortfolioAnalysisVolatilityRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/portfolio/analysis/volatility";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostPortfolioAnalysisVolatilityResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostPortfolioAnalysisVolatilityResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postPortfolioAnalysisVolatility200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1819,8 +1851,9 @@ export class SDK {
   }
 
   
-  // PostPortfolioConstructionInvestable - Investable Portfolio
-  /** 
+  /**
+   * postPortfolioConstructionInvestable - Investable Portfolio
+   *
    * Compute an investable portfolio as close as possible, in terms of assets weights, to a desired portfolio, taking into account:
    * * The desired assets weights
    * * The desired assets groups weights
@@ -1835,7 +1868,7 @@ export class SDK {
    * * [Steiner, Andreas, Accuracy and Rounding in Portfolio Construction](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2261131)
    * 
   **/
-  PostPortfolioConstructionInvestable(
+  postPortfolioConstructionInvestable(
     req: operations.PostPortfolioConstructionInvestableRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostPortfolioConstructionInvestableResponse> {
@@ -1843,40 +1876,40 @@ export class SDK {
       req = new operations.PostPortfolioConstructionInvestableRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/portfolio/construction/investable";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostPortfolioConstructionInvestableResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostPortfolioConstructionInvestableResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postPortfolioConstructionInvestable200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1888,8 +1921,9 @@ export class SDK {
   }
 
   
-  // PostPortfolioConstructionMimicking - Mimicking Portfolio
-  /** 
+  /**
+   * postPortfolioConstructionMimicking - Mimicking Portfolio
+   *
    * Construct a portfolio as close as possible, in terms of returns, to a benchmark, optionally subject to:
    * * Minimum and maximum weights constraints
    * * Maximum group weights constraints
@@ -1899,7 +1933,7 @@ export class SDK {
    * * Konstantinos Benidis, Yiyong Feng, Daniel P. Palomar, Optimization Methods for Financial Index Tracking: From Theory to Practice, now publishers Inc (7 juin 2018)
    * 
   **/
-  PostPortfolioConstructionMimicking(
+  postPortfolioConstructionMimicking(
     req: operations.PostPortfolioConstructionMimickingRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostPortfolioConstructionMimickingResponse> {
@@ -1907,40 +1941,40 @@ export class SDK {
       req = new operations.PostPortfolioConstructionMimickingRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/portfolio/construction/mimicking";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostPortfolioConstructionMimickingResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostPortfolioConstructionMimickingResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postPortfolioConstructionMimicking200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1952,8 +1986,9 @@ export class SDK {
   }
 
   
-  // PostPortfolioConstructionRandom - Random Portfolio
-  /** 
+  /**
+   * postPortfolioConstructionRandom - Random Portfolio
+   *
    * Construct one or several random portfolio(s), optionally subject to:       
    * * Minimum and maximum weights constraints
    * * Minimum and maximum portfolio exposure constraints
@@ -1964,7 +1999,7 @@ export class SDK {
    * * [William Thornton Shaw, Monte Carlo Portfolio Optimization for General Investor Risk-Return Objectives and Arbitrary Return Distributions: A Solution for Long-Only Portfolios](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1680224)
    * 
   **/
-  PostPortfolioConstructionRandom(
+  postPortfolioConstructionRandom(
     req: operations.PostPortfolioConstructionRandomRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostPortfolioConstructionRandomResponse> {
@@ -1972,40 +2007,40 @@ export class SDK {
       req = new operations.PostPortfolioConstructionRandomRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/portfolio/construction/random";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostPortfolioConstructionRandomResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostPortfolioConstructionRandomResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postPortfolioConstructionRandom200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2017,8 +2052,9 @@ export class SDK {
   }
 
   
-  // PostPortfolioOptimizationEqualRiskContributions - Equal Risk Contributions Portfolio
-  /** 
+  /**
+   * postPortfolioOptimizationEqualRiskContributions - Equal Risk Contributions Portfolio
+   *
    * Compute the assets weights of the equal risk contributions portfolio, optionally subject to:  
    * * Minimum and maximum weights constraints  
    * 
@@ -2026,7 +2062,7 @@ export class SDK {
    *  * [Richard, Jean-Charles and Roncalli, Thierry, Constrained Risk Budgeting Portfolios: Theory, Algorithms, Applications & Puzzles](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3331184)
    * 
   **/
-  PostPortfolioOptimizationEqualRiskContributions(
+  postPortfolioOptimizationEqualRiskContributions(
     req: operations.PostPortfolioOptimizationEqualRiskContributionsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostPortfolioOptimizationEqualRiskContributionsResponse> {
@@ -2034,40 +2070,40 @@ export class SDK {
       req = new operations.PostPortfolioOptimizationEqualRiskContributionsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/portfolio/optimization/equal-risk-contributions";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostPortfolioOptimizationEqualRiskContributionsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostPortfolioOptimizationEqualRiskContributionsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postPortfolioOptimizationEqualRiskContributions200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2079,15 +2115,16 @@ export class SDK {
   }
 
   
-  // PostPortfolioOptimizationEqualSharpeRatioContributions - Equal Sharpe Ratio Contributions Portfolio
-  /** 
+  /**
+   * postPortfolioOptimizationEqualSharpeRatioContributions - Equal Sharpe Ratio Contributions Portfolio
+   *
    * Compute the assets weights of the equal Sharpe Ratio contributions portfolio.
    * 
    * References
    *  * [Andreas Steiner, Sharpe Ratio Contribution and Attribution Analysis](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1839166")
    * 
   **/
-  PostPortfolioOptimizationEqualSharpeRatioContributions(
+  postPortfolioOptimizationEqualSharpeRatioContributions(
     req: operations.PostPortfolioOptimizationEqualSharpeRatioContributionsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostPortfolioOptimizationEqualSharpeRatioContributionsResponse> {
@@ -2095,40 +2132,40 @@ export class SDK {
       req = new operations.PostPortfolioOptimizationEqualSharpeRatioContributionsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/portfolio/optimization/equal-sharpe-ratio-contributions";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostPortfolioOptimizationEqualSharpeRatioContributionsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostPortfolioOptimizationEqualSharpeRatioContributionsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postPortfolioOptimizationEqualSharpeRatioContributions200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2140,15 +2177,16 @@ export class SDK {
   }
 
   
-  // PostPortfolioOptimizationEqualWeighted - Equal Weighted Portfolio
-  /** 
+  /**
+   * postPortfolioOptimizationEqualWeighted - Equal Weighted Portfolio
+   *
    * Compute the assets weights of the equal-weighted portfolio.
    * 
    * References
    *  * [Victor DeMiguel and al., Optimal Versus Naive Diversification: How Inefficient is the 1/N Portfolio Strategy?](https://academic.oup.com/rfs/article-abstract/22/5/1915/1592901?redirectedFrom=fulltext)
    * 
   **/
-  PostPortfolioOptimizationEqualWeighted(
+  postPortfolioOptimizationEqualWeighted(
     req: operations.PostPortfolioOptimizationEqualWeightedRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostPortfolioOptimizationEqualWeightedResponse> {
@@ -2156,40 +2194,40 @@ export class SDK {
       req = new operations.PostPortfolioOptimizationEqualWeightedRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/portfolio/optimization/equal-weighted";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostPortfolioOptimizationEqualWeightedResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostPortfolioOptimizationEqualWeightedResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postPortfolioOptimizationEqualWeighted200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2201,15 +2239,16 @@ export class SDK {
   }
 
   
-  // PostPortfolioOptimizationInverseVarianceWeighted - Inverse Variance Weighted Portfolio
-  /** 
+  /**
+   * postPortfolioOptimizationInverseVarianceWeighted - Inverse Variance Weighted Portfolio
+   *
    * Compute the assets weights of the inverse variance-weighted portfolio.
    * 
    * References
    *  * [Raul Leote de Carvalho and al., Demystifying Equity Risk-Based Strategies: A Simple Alpha Plus Beta Description](https://doi.org/10.3905/jpm.2012.38.3.056)
    * 
   **/
-  PostPortfolioOptimizationInverseVarianceWeighted(
+  postPortfolioOptimizationInverseVarianceWeighted(
     req: operations.PostPortfolioOptimizationInverseVarianceWeightedRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostPortfolioOptimizationInverseVarianceWeightedResponse> {
@@ -2217,40 +2256,40 @@ export class SDK {
       req = new operations.PostPortfolioOptimizationInverseVarianceWeightedRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/portfolio/optimization/inverse-variance-weighted";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostPortfolioOptimizationInverseVarianceWeightedResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostPortfolioOptimizationInverseVarianceWeightedResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postPortfolioOptimizationInverseVarianceWeighted200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2262,15 +2301,16 @@ export class SDK {
   }
 
   
-  // PostPortfolioOptimizationInverseVolatilityWeighted - Inverse Volatility Weighted Portfolio
-  /** 
+  /**
+   * postPortfolioOptimizationInverseVolatilityWeighted - Inverse Volatility Weighted Portfolio
+   *
    * Compute the assets weights of the inverse volatility-weighted portfolio, also known as the naive-risk parity portfolio.
    * 
    * References
    *  * [Raul Leote de Carvalho and al., Demystifying Equity Risk-Based Strategies: A Simple Alpha Plus Beta Description](https://doi.org/10.3905/jpm.2012.38.3.056)
    * 
   **/
-  PostPortfolioOptimizationInverseVolatilityWeighted(
+  postPortfolioOptimizationInverseVolatilityWeighted(
     req: operations.PostPortfolioOptimizationInverseVolatilityWeightedRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostPortfolioOptimizationInverseVolatilityWeightedResponse> {
@@ -2278,40 +2318,40 @@ export class SDK {
       req = new operations.PostPortfolioOptimizationInverseVolatilityWeightedRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/portfolio/optimization/inverse-volatility-weighted";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostPortfolioOptimizationInverseVolatilityWeightedResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostPortfolioOptimizationInverseVolatilityWeightedResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postPortfolioOptimizationInverseVolatilityWeighted200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2323,15 +2363,16 @@ export class SDK {
   }
 
   
-  // PostPortfolioOptimizationMarketCapitalizationWeighted - Market Capitalization Weighted Portfolio
-  /** 
+  /**
+   * postPortfolioOptimizationMarketCapitalizationWeighted - Market Capitalization Weighted Portfolio
+   *
    * Compute the assets weights of the market capitalization-weighted portfolio.
    * 
    * References
    *  * [Wikipedia, Capitalization-weighted Index](https://en.wikipedia.org/wiki/Capitalization-weighted_index)
    * 
   **/
-  PostPortfolioOptimizationMarketCapitalizationWeighted(
+  postPortfolioOptimizationMarketCapitalizationWeighted(
     req: operations.PostPortfolioOptimizationMarketCapitalizationWeightedRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostPortfolioOptimizationMarketCapitalizationWeightedResponse> {
@@ -2339,40 +2380,40 @@ export class SDK {
       req = new operations.PostPortfolioOptimizationMarketCapitalizationWeightedRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/portfolio/optimization/market-capitalization-weighted";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostPortfolioOptimizationMarketCapitalizationWeightedResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostPortfolioOptimizationMarketCapitalizationWeightedResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postPortfolioOptimizationMarketCapitalizationWeighted200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2384,8 +2425,9 @@ export class SDK {
   }
 
   
-  // PostPortfolioOptimizationMaximumDecorrelation - Maximum Decorrelation Portfolio
-  /** 
+  /**
+   * postPortfolioOptimizationMaximumDecorrelation - Maximum Decorrelation Portfolio
+   *
    * Compute the assets weights of the maximum decorrelation portfolio, optionally subject to:  
    * * Minimum and maximum weights constraints
    * * Maximum group weights constraints
@@ -2394,9 +2436,10 @@ export class SDK {
    * References
    *  * [F. Goltz, S. Sivasubramanian, Scientific Beta Maximum Decorrelation Indices](http://www.scientificbeta.com/download/file/scientific-beta-max-decorrelation-indices)
    * 
+   *
    * https://docs.portfoliooptimizer.io/#maximum-decorrelation-portfolio
   **/
-  PostPortfolioOptimizationMaximumDecorrelation(
+  postPortfolioOptimizationMaximumDecorrelation(
     req: operations.PostPortfolioOptimizationMaximumDecorrelationRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostPortfolioOptimizationMaximumDecorrelationResponse> {
@@ -2404,40 +2447,40 @@ export class SDK {
       req = new operations.PostPortfolioOptimizationMaximumDecorrelationRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/portfolio/optimization/maximum-decorrelation";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostPortfolioOptimizationMaximumDecorrelationResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostPortfolioOptimizationMaximumDecorrelationResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postPortfolioOptimizationMaximumDecorrelation200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2449,8 +2492,9 @@ export class SDK {
   }
 
   
-  // PostPortfolioOptimizationMaximumReturn - Maximum Return Portfolio
-  /** 
+  /**
+   * postPortfolioOptimizationMaximumReturn - Maximum Return Portfolio
+   *
    * Compute the assets weights of the maximum return portfolio, optionally subject to:  
    * * Minimum and maximum weights constraints
    * * Maximum group weights constraints
@@ -2460,7 +2504,7 @@ export class SDK {
    *  * Harry M. Markowitz, Portfolio Selection, Efficient Diversification of Investments, Second edition, Blackwell Publishers Inc.
    * 
   **/
-  PostPortfolioOptimizationMaximumReturn(
+  postPortfolioOptimizationMaximumReturn(
     req: operations.PostPortfolioOptimizationMaximumReturnRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostPortfolioOptimizationMaximumReturnResponse> {
@@ -2468,40 +2512,40 @@ export class SDK {
       req = new operations.PostPortfolioOptimizationMaximumReturnRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/portfolio/optimization/maximum-return";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostPortfolioOptimizationMaximumReturnResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostPortfolioOptimizationMaximumReturnResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postPortfolioOptimizationMaximumReturn200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2513,8 +2557,9 @@ export class SDK {
   }
 
   
-  // PostPortfolioOptimizationMaximumSharpeRatio - Maximum Sharpe Ratio Portfolio
-  /** 
+  /**
+   * postPortfolioOptimizationMaximumSharpeRatio - Maximum Sharpe Ratio Portfolio
+   *
    * Compute the assets weights of the maximum Sharpe ratio portfolio, optionally subject to:  
    * * Minimum and maximum weights constraints
    * * Maximum group weights constraints
@@ -2524,7 +2569,7 @@ export class SDK {
    *  * Harry M. Markowitz, Portfolio Selection, Efficient Diversification of Investments, Second edition, Blackwell Publishers Inc.
    * 
   **/
-  PostPortfolioOptimizationMaximumSharpeRatio(
+  postPortfolioOptimizationMaximumSharpeRatio(
     req: operations.PostPortfolioOptimizationMaximumSharpeRatioRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostPortfolioOptimizationMaximumSharpeRatioResponse> {
@@ -2532,40 +2577,40 @@ export class SDK {
       req = new operations.PostPortfolioOptimizationMaximumSharpeRatioRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/portfolio/optimization/maximum-sharpe-ratio";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostPortfolioOptimizationMaximumSharpeRatioResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostPortfolioOptimizationMaximumSharpeRatioResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postPortfolioOptimizationMaximumSharpeRatio200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2577,8 +2622,9 @@ export class SDK {
   }
 
   
-  // PostPortfolioOptimizationMeanVarianceEfficient - Mean-Variance Efficient Portfolio
-  /** 
+  /**
+   * postPortfolioOptimizationMeanVarianceEfficient - Mean-Variance Efficient Portfolio
+   *
    * Compute the assets weights of a mean-variance efficient portfolio, optionally subject to:  
    * * Minimum and maximum weights constraints
    * * Maximum group weights constraints
@@ -2590,7 +2636,7 @@ export class SDK {
    *  * Harry M. Markowitz, Portfolio Selection, Efficient Diversification of Investments, Second edition, Blackwell Publishers Inc.
    * 
   **/
-  PostPortfolioOptimizationMeanVarianceEfficient(
+  postPortfolioOptimizationMeanVarianceEfficient(
     req: operations.PostPortfolioOptimizationMeanVarianceEfficientRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostPortfolioOptimizationMeanVarianceEfficientResponse> {
@@ -2598,40 +2644,40 @@ export class SDK {
       req = new operations.PostPortfolioOptimizationMeanVarianceEfficientRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/portfolio/optimization/mean-variance-efficient";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostPortfolioOptimizationMeanVarianceEfficientResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostPortfolioOptimizationMeanVarianceEfficientResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postPortfolioOptimizationMeanVarianceEfficient200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2643,15 +2689,16 @@ export class SDK {
   }
 
   
-  // PostPortfolioOptimizationMinimumCorrelation - Minimum Correlation Portfolio
-  /** 
+  /**
+   * postPortfolioOptimizationMinimumCorrelation - Minimum Correlation Portfolio
+   *
    * Compute the assets weights of the (heuristic) minimum correlation portfolio, which is a portfolio built using the Minimum Correlation Algorithm discovered by [David Varadi](https://cssanalytics.wordpress.com/).
    * 
    * References
    *  * [CSSA, Minimum Correlation Algorithm Paper Release](https://cssanalytics.wordpress.com/2012/09/21/minimum-correlation-algorithm-paper-release/)
    * 
   **/
-  PostPortfolioOptimizationMinimumCorrelation(
+  postPortfolioOptimizationMinimumCorrelation(
     req: operations.PostPortfolioOptimizationMinimumCorrelationRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostPortfolioOptimizationMinimumCorrelationResponse> {
@@ -2659,40 +2706,40 @@ export class SDK {
       req = new operations.PostPortfolioOptimizationMinimumCorrelationRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/portfolio/optimization/minimum-correlation";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostPortfolioOptimizationMinimumCorrelationResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostPortfolioOptimizationMinimumCorrelationResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postPortfolioOptimizationMinimumCorrelation200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2704,8 +2751,9 @@ export class SDK {
   }
 
   
-  // PostPortfolioOptimizationMinimumVariance - Minimum Variance Portfolio
-  /** 
+  /**
+   * postPortfolioOptimizationMinimumVariance - Minimum Variance Portfolio
+   *
    * Compute the assets weights of the minimum variance portfolio, optionally subject to:  
    * * Minimum and maximum weights constraints
    * * Maximum group weights constraints
@@ -2715,7 +2763,7 @@ export class SDK {
    *  * Harry M. Markowitz, Portfolio Selection, Efficient Diversification of Investments, Second edition, Blackwell Publishers Inc.
    * 
   **/
-  PostPortfolioOptimizationMinimumVariance(
+  postPortfolioOptimizationMinimumVariance(
     req: operations.PostPortfolioOptimizationMinimumVarianceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostPortfolioOptimizationMinimumVarianceResponse> {
@@ -2723,40 +2771,40 @@ export class SDK {
       req = new operations.PostPortfolioOptimizationMinimumVarianceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/portfolio/optimization/minimum-variance";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostPortfolioOptimizationMinimumVarianceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostPortfolioOptimizationMinimumVarianceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postPortfolioOptimizationMinimumVariance200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2768,8 +2816,9 @@ export class SDK {
   }
 
   
-  // PostPortfolioOptimizationMostDiversified - Most Diversified Portfolio
-  /** 
+  /**
+   * postPortfolioOptimizationMostDiversified - Most Diversified Portfolio
+   *
    * Compute the assets weights of the most diversified portfolio, optionally subject to:  
    * * Minimum and maximum weights constraints
    * * Maximum group weights constraints
@@ -2779,7 +2828,7 @@ export class SDK {
    *  * [Yves Choueifaty and Yves Coignard, Toward Maximum Diversification, The Journal of Portfolio Management Fall 2008, 35 (1) 40-51](https://doi.org/10.3905/JPM.2008.35.1.40)
    * 
   **/
-  PostPortfolioOptimizationMostDiversified(
+  postPortfolioOptimizationMostDiversified(
     req: operations.PostPortfolioOptimizationMostDiversifiedRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostPortfolioOptimizationMostDiversifiedResponse> {
@@ -2787,40 +2836,40 @@ export class SDK {
       req = new operations.PostPortfolioOptimizationMostDiversifiedRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/portfolio/optimization/most-diversified";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostPortfolioOptimizationMostDiversifiedResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostPortfolioOptimizationMostDiversifiedResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postPortfolioOptimizationMostDiversified200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2832,15 +2881,16 @@ export class SDK {
   }
 
   
-  // PostPortfolioSimulationRebalancingDriftWeight - Drift-weight Portfolio Rebalancing
-  /** 
+  /**
+   * postPortfolioSimulationRebalancingDriftWeight - Drift-weight Portfolio Rebalancing
+   *
    * Simulate the evolution of one or several portfolio(s) over one or several time period(s), the portfolio(s) being never rebalanced (a.k.a. buy and hold).
    * 
    * References
    * * [Hillion, Pierre, The Ex-Ante Rebalancing Premium (March 11, 2016). INSEAD Working Paper No. 2016/15/FIN](https://ssrn.com/abstract=2746471)
    * 
   **/
-  PostPortfolioSimulationRebalancingDriftWeight(
+  postPortfolioSimulationRebalancingDriftWeight(
     req: operations.PostPortfolioSimulationRebalancingDriftWeightRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostPortfolioSimulationRebalancingDriftWeightResponse> {
@@ -2848,40 +2898,40 @@ export class SDK {
       req = new operations.PostPortfolioSimulationRebalancingDriftWeightRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/portfolio/simulation/rebalancing/drift-weight";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostPortfolioSimulationRebalancingDriftWeightResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostPortfolioSimulationRebalancingDriftWeightResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postPortfolioSimulationRebalancingDriftWeight200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2893,15 +2943,16 @@ export class SDK {
   }
 
   
-  // PostPortfolioSimulationRebalancingFixedWeight - Fixed-weight Portfolio Rebalancing
-  /** 
+  /**
+   * postPortfolioSimulationRebalancingFixedWeight - Fixed-weight Portfolio Rebalancing
+   *
    * Simulate the evolution of one or several portfolio(s) over one or several time period(s), the portfolio(s) being rebalanced toward fixed weights at the beginning of each time period.
    * 
    * References
    * * [Hillion, Pierre, The Ex-Ante Rebalancing Premium (March 11, 2016). INSEAD Working Paper No. 2016/15/FIN](https://ssrn.com/abstract=2746471)        
    * 
   **/
-  PostPortfolioSimulationRebalancingFixedWeight(
+  postPortfolioSimulationRebalancingFixedWeight(
     req: operations.PostPortfolioSimulationRebalancingFixedWeightRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostPortfolioSimulationRebalancingFixedWeightResponse> {
@@ -2909,40 +2960,40 @@ export class SDK {
       req = new operations.PostPortfolioSimulationRebalancingFixedWeightRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/portfolio/simulation/rebalancing/fixed-weight";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostPortfolioSimulationRebalancingFixedWeightResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostPortfolioSimulationRebalancingFixedWeightResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postPortfolioSimulationRebalancingFixedWeight200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2954,15 +3005,16 @@ export class SDK {
   }
 
   
-  // PostPortfolioSimulationRebalancingRandomWeight - Random-weight Portfolio Rebalancing
-  /** 
+  /**
+   * postPortfolioSimulationRebalancingRandomWeight - Random-weight Portfolio Rebalancing
+   *
    * Simulate the evolution of one or several portfolio(s) over one or several time period(s), the portfolio(s) being rebalanced toward random weights at the beginning of each time period.
    * 
    * References
    * * [R Stein, Not fooled by randomness: Using random portfolios to analyse investment funds, Investment Analysts Journal, 43:79, 1-15, DOI: 10.1080/10293523.2014.11082564](https://www.tandfonline.com/doi/abs/10.1080/10293523.2014.11082564)
    * 
   **/
-  PostPortfolioSimulationRebalancingRandomWeight(
+  postPortfolioSimulationRebalancingRandomWeight(
     req: operations.PostPortfolioSimulationRebalancingRandomWeightRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostPortfolioSimulationRebalancingRandomWeightResponse> {
@@ -2970,40 +3022,40 @@ export class SDK {
       req = new operations.PostPortfolioSimulationRebalancingRandomWeightRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/portfolio/simulation/rebalancing/random-weight";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostPortfolioSimulationRebalancingRandomWeightResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostPortfolioSimulationRebalancingRandomWeightResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postPortfolioSimulationRebalancingRandomWeight200ApplicationJsonObject = httpRes?.data;
             }
             break;

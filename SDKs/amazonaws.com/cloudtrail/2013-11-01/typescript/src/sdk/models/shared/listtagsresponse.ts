@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceTag } from "./resourcetag";
+
 
 
 // ListTagsResponse
@@ -8,9 +8,9 @@ import { ResourceTag } from "./resourcetag";
  * Returns the objects or data listed below if successful. Otherwise, returns an error.
 **/
 export class ListTagsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=ResourceTagList", elemType: shared.ResourceTag })
+  @SpeakeasyMetadata({ data: "json, name=ResourceTagList", elemType: ResourceTag })
   resourceTagList?: ResourceTag[];
 }

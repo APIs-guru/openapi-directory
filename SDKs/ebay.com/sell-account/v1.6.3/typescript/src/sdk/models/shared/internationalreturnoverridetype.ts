@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TimeDuration } from "./timeduration";
+
 
 
 // InternationalReturnOverrideType
@@ -7,15 +8,15 @@ import { TimeDuration } from "./timeduration";
  * This type defines the fields for a seller's international return policy. If a seller does not populate the fields in this complex type, the international return policy defaults to the return policy set for domestic returns.
 **/
 export class InternationalReturnOverrideType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=returnMethod" })
+  @SpeakeasyMetadata({ data: "json, name=returnMethod" })
   returnMethod?: string;
 
-  @Metadata({ data: "json, name=returnPeriod" })
+  @SpeakeasyMetadata({ data: "json, name=returnPeriod" })
   returnPeriod?: TimeDuration;
 
-  @Metadata({ data: "json, name=returnShippingCostPayer" })
+  @SpeakeasyMetadata({ data: "json, name=returnShippingCostPayer" })
   returnShippingCostPayer?: string;
 
-  @Metadata({ data: "json, name=returnsAccepted" })
+  @SpeakeasyMetadata({ data: "json, name=returnsAccepted" })
   returnsAccepted?: boolean;
 }

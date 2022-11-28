@@ -1,6 +1,7 @@
 
 
+
 export enum OrderByEnum {
-    LogStreamName = "LogStreamName"
-,    LastEventTime = "LastEventTime"
+    LogStreamName = "LogStreamName",
+    LastEventTime = "LastEventTime"
 }

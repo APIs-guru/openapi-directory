@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class CreateFunctionDefinitionVersionPathParams:
-    function_definition_id: str = field(default=None, metadata={'path_param': { 'field_name': 'FunctionDefinitionId', 'style': 'simple', 'explode': False }})
+    function_definition_id: str = field(metadata={'path_param': { 'field_name': 'FunctionDefinitionId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -24,27 +28,31 @@ class CreateFunctionDefinitionVersionHeaders:
 @dataclass_json
 @dataclass
 class CreateFunctionDefinitionVersionRequestBodyDefaultConfig:
-    execution: Optional[shared.FunctionDefaultExecutionConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Execution' }})
+    r"""CreateFunctionDefinitionVersionRequestBodyDefaultConfig
+    The default configuration that applies to all Lambda functions in the group. Individual Lambda functions can override these settings.
+    """
+    
+    execution: Optional[shared.FunctionDefaultExecutionConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Execution') }})
     
 
 @dataclass_json
 @dataclass
 class CreateFunctionDefinitionVersionRequestBody:
-    default_config: Optional[CreateFunctionDefinitionVersionRequestBodyDefaultConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DefaultConfig' }})
-    functions: Optional[List[shared.Function]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Functions' }})
+    default_config: Optional[CreateFunctionDefinitionVersionRequestBodyDefaultConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DefaultConfig') }})
+    functions: Optional[List[shared.Function]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Functions') }})
     
 
 @dataclass
 class CreateFunctionDefinitionVersionRequest:
-    path_params: CreateFunctionDefinitionVersionPathParams = field(default=None)
-    headers: CreateFunctionDefinitionVersionHeaders = field(default=None)
-    request: CreateFunctionDefinitionVersionRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateFunctionDefinitionVersionHeaders = field()
+    path_params: CreateFunctionDefinitionVersionPathParams = field()
+    request: CreateFunctionDefinitionVersionRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateFunctionDefinitionVersionResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     create_function_definition_version_response: Optional[shared.CreateFunctionDefinitionVersionResponse] = field(default=None)
-    status_code: int = field(default=None)
     

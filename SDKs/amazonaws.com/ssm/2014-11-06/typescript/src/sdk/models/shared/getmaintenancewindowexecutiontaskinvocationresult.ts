@@ -1,42 +1,43 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MaintenanceWindowExecutionStatusEnum } from "./maintenancewindowexecutionstatusenum";
 import { MaintenanceWindowTaskTypeEnum } from "./maintenancewindowtasktypeenum";
 
 
+
 export class GetMaintenanceWindowExecutionTaskInvocationResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EndTime" })
+  @SpeakeasyMetadata({ data: "json, name=EndTime" })
   endTime?: Date;
 
-  @Metadata({ data: "json, name=ExecutionId" })
+  @SpeakeasyMetadata({ data: "json, name=ExecutionId" })
   executionId?: string;
 
-  @Metadata({ data: "json, name=InvocationId" })
+  @SpeakeasyMetadata({ data: "json, name=InvocationId" })
   invocationId?: string;
 
-  @Metadata({ data: "json, name=OwnerInformation" })
+  @SpeakeasyMetadata({ data: "json, name=OwnerInformation" })
   ownerInformation?: string;
 
-  @Metadata({ data: "json, name=Parameters" })
+  @SpeakeasyMetadata({ data: "json, name=Parameters" })
   parameters?: string;
 
-  @Metadata({ data: "json, name=StartTime" })
+  @SpeakeasyMetadata({ data: "json, name=StartTime" })
   startTime?: Date;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: MaintenanceWindowExecutionStatusEnum;
 
-  @Metadata({ data: "json, name=StatusDetails" })
+  @SpeakeasyMetadata({ data: "json, name=StatusDetails" })
   statusDetails?: string;
 
-  @Metadata({ data: "json, name=TaskExecutionId" })
+  @SpeakeasyMetadata({ data: "json, name=TaskExecutionId" })
   taskExecutionId?: string;
 
-  @Metadata({ data: "json, name=TaskType" })
+  @SpeakeasyMetadata({ data: "json, name=TaskType" })
   taskType?: MaintenanceWindowTaskTypeEnum;
 
-  @Metadata({ data: "json, name=WindowExecutionId" })
+  @SpeakeasyMetadata({ data: "json, name=WindowExecutionId" })
   windowExecutionId?: string;
 
-  @Metadata({ data: "json, name=WindowTargetId" })
+  @SpeakeasyMetadata({ data: "json, name=WindowTargetId" })
   windowTargetId?: string;
 }

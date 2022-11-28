@@ -1,13 +1,20 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import intcandidates
-from . import intrange
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class IntHparamSearchSpace:
-    candidates: Optional[intcandidates.IntCandidates] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'candidates' }})
-    range: Optional[intrange.IntRange] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'range' }})
+    r"""IntHparamSearchSpace
+    Search space for an int hyperparameter.
+    """
+    
+    candidates: Optional[IntCandidates] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('candidates') }})
+    range: Optional[IntRange] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('range') }})
     

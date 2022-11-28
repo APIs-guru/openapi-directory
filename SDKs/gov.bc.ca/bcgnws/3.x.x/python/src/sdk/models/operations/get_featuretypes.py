@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class GetFeatureTypesOutputFormatEnum(str, Enum):
     JSON = "json"
@@ -8,16 +8,16 @@ class GetFeatureTypesOutputFormatEnum(str, Enum):
 
 @dataclass
 class GetFeatureTypesQueryParams:
-    output_format: GetFeatureTypesOutputFormatEnum = field(default=None, metadata={'query_param': { 'field_name': 'outputFormat', 'style': 'form', 'explode': True }})
+    output_format: GetFeatureTypesOutputFormatEnum = field(metadata={'query_param': { 'field_name': 'outputFormat', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class GetFeatureTypesRequest:
-    query_params: GetFeatureTypesQueryParams = field(default=None)
+    query_params: GetFeatureTypesQueryParams = field()
     
 
 @dataclass
 class GetFeatureTypesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

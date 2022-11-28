@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PolicyTypeEnum } from "./policytypeenum";
 
 
+
 export class EnablePolicyTypeRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PolicyType" })
+  @SpeakeasyMetadata({ data: "json, name=PolicyType" })
   policyType: PolicyTypeEnum;
 
-  @Metadata({ data: "json, name=RootId" })
+  @SpeakeasyMetadata({ data: "json, name=RootId" })
   rootId: string;
 }

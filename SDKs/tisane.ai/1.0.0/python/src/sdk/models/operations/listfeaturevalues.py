@@ -11,12 +11,12 @@ class ListFeatureValuesQueryParams:
 
 @dataclass
 class ListFeatureValuesRequest:
-    query_params: ListFeatureValuesQueryParams = field(default=None)
+    query_params: ListFeatureValuesQueryParams = field()
     
 
 @dataclass
 class ListFeatureValuesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_feature_values_200_application_json_strings: Optional[List[str]] = field(default=None)
     

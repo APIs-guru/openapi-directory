@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Notification } from "./notification";
+
 
 
 // DescribeNotificationsForBudgetResponse
@@ -8,9 +8,9 @@ import { Notification } from "./notification";
  *  Response of GetNotificationsForBudget 
 **/
 export class DescribeNotificationsForBudgetResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=Notifications", elemType: shared.Notification })
+  @SpeakeasyMetadata({ data: "json, name=Notifications", elemType: Notification })
   notifications?: Notification[];
 }

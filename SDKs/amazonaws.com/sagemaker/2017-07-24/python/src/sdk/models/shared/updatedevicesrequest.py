@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List
 from dataclasses_json import dataclass_json
-from . import device
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateDevicesRequest:
-    device_fleet_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DeviceFleetName' }})
-    devices: List[device.Device] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Devices' }})
+    device_fleet_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('DeviceFleetName') }})
+    devices: List[Device] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Devices') }})
     

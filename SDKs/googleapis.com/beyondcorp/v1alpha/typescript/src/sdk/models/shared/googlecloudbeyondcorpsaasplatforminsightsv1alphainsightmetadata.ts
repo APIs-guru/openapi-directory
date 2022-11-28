@@ -1,14 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudBeyondcorpSaasplatformInsightsV1alphaInsightMetadataField } from "./googlecloudbeyondcorpsaasplatforminsightsv1alphainsightmetadatafield";
 
+
 export enum GoogleCloudBeyondcorpSaasplatformInsightsV1alphaInsightMetadataAggregationsEnum {
-    AggregationUnspecified = "AGGREGATION_UNSPECIFIED"
-,    Hourly = "HOURLY"
-,    Daily = "DAILY"
-,    Weekly = "WEEKLY"
-,    Monthly = "MONTHLY"
-,    CustomDateRange = "CUSTOM_DATE_RANGE"
+    AggregationUnspecified = "AGGREGATION_UNSPECIFIED",
+    Hourly = "HOURLY",
+    Daily = "DAILY",
+    Weekly = "WEEKLY",
+    Monthly = "MONTHLY",
+    CustomDateRange = "CUSTOM_DATE_RANGE"
 }
 
 
@@ -17,24 +17,24 @@ export enum GoogleCloudBeyondcorpSaasplatformInsightsV1alphaInsightMetadataAggre
  * Insight filters, groupings and aggregations that can be applied for the insight. Examples: aggregations, groups, field filters.
 **/
 export class GoogleCloudBeyondcorpSaasplatformInsightsV1alphaInsightMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=aggregations" })
+  @SpeakeasyMetadata({ data: "json, name=aggregations" })
   aggregations?: GoogleCloudBeyondcorpSaasplatformInsightsV1alphaInsightMetadataAggregationsEnum[];
 
-  @Metadata({ data: "json, name=category" })
+  @SpeakeasyMetadata({ data: "json, name=category" })
   category?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=fields", elemType: shared.GoogleCloudBeyondcorpSaasplatformInsightsV1alphaInsightMetadataField })
+  @SpeakeasyMetadata({ data: "json, name=fields", elemType: GoogleCloudBeyondcorpSaasplatformInsightsV1alphaInsightMetadataField })
   fields?: GoogleCloudBeyondcorpSaasplatformInsightsV1alphaInsightMetadataField[];
 
-  @Metadata({ data: "json, name=groups" })
+  @SpeakeasyMetadata({ data: "json, name=groups" })
   groups?: string[];
 
-  @Metadata({ data: "json, name=subCategory" })
+  @SpeakeasyMetadata({ data: "json, name=subCategory" })
   subCategory?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }

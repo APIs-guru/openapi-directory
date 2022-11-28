@@ -1,5 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
@@ -23,17 +26,17 @@ class ListWorkspacesHeaders:
 
 @dataclass
 class ListWorkspacesRequest:
-    query_params: ListWorkspacesQueryParams = field(default=None)
-    headers: ListWorkspacesHeaders = field(default=None)
+    headers: ListWorkspacesHeaders = field()
+    query_params: ListWorkspacesQueryParams = field()
     
 
 @dataclass
 class ListWorkspacesResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     list_workspaces_response: Optional[shared.ListWorkspacesResponse] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

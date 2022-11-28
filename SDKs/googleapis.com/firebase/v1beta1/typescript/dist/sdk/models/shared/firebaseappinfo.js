@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var FirebaseAppInfoPlatformEnum;
 (function (FirebaseAppInfoPlatformEnum) {
     FirebaseAppInfoPlatformEnum["PlatformUnspecified"] = "PLATFORM_UNSPECIFIED";
@@ -46,31 +46,31 @@ var FirebaseAppInfo = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=apiKeyId" }),
+        SpeakeasyMetadata({ data: "json, name=apiKeyId" }),
         __metadata("design:type", String)
     ], FirebaseAppInfo.prototype, "apiKeyId", void 0);
     __decorate([
-        Metadata({ data: "json, name=appId" }),
+        SpeakeasyMetadata({ data: "json, name=appId" }),
         __metadata("design:type", String)
     ], FirebaseAppInfo.prototype, "appId", void 0);
     __decorate([
-        Metadata({ data: "json, name=displayName" }),
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
         __metadata("design:type", String)
     ], FirebaseAppInfo.prototype, "displayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], FirebaseAppInfo.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=namespace" }),
+        SpeakeasyMetadata({ data: "json, name=namespace" }),
         __metadata("design:type", String)
     ], FirebaseAppInfo.prototype, "namespace", void 0);
     __decorate([
-        Metadata({ data: "json, name=platform" }),
+        SpeakeasyMetadata({ data: "json, name=platform" }),
         __metadata("design:type", String)
     ], FirebaseAppInfo.prototype, "platform", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], FirebaseAppInfo.prototype, "state", void 0);
     return FirebaseAppInfo;

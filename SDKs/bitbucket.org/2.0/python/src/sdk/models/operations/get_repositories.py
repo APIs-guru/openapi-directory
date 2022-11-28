@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetRepositoriesRoleEnum(str, Enum):
@@ -18,36 +19,21 @@ class GetRepositoriesQueryParams:
     
 
 @dataclass
-class GetRepositoriesSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    
-
-@dataclass
-class GetRepositoriesSecurityOption2:
-    basic: shared.SchemeBasic = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
-    
-
-@dataclass
-class GetRepositoriesSecurityOption3:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
-    
-
-@dataclass
 class GetRepositoriesSecurity:
-    option1: Optional[GetRepositoriesSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[GetRepositoriesSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
-    option3: Optional[GetRepositoriesSecurityOption3] = field(default=None, metadata={'security': { 'option': True }})
+    api_key: Optional[shared.SchemeAPIKey] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    basic: Optional[shared.SchemeBasic] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    oauth2: Optional[shared.SchemeOauth2] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetRepositoriesRequest:
-    query_params: GetRepositoriesQueryParams = field(default=None)
-    security: GetRepositoriesSecurity = field(default=None)
+    query_params: GetRepositoriesQueryParams = field()
+    security: GetRepositoriesSecurity = field()
     
 
 @dataclass
 class GetRepositoriesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     paginated_repositories: Optional[shared.PaginatedRepositories] = field(default=None)
     

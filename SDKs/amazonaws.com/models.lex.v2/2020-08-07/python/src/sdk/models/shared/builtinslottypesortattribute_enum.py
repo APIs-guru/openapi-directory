@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class BuiltInSlotTypeSortAttributeEnum(str, Enum):
     SLOT_TYPE_SIGNATURE = "SlotTypeSignature"

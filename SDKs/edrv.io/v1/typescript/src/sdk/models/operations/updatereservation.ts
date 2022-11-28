@@ -1,55 +1,56 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdatereservationPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class UpdatereservationRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=connector" })
+  @SpeakeasyMetadata({ data: "json, name=connector" })
   connector?: number;
 
-  @Metadata({ data: "json, name=driver" })
+  @SpeakeasyMetadata({ data: "json, name=driver" })
   driver?: string;
 
-  @Metadata({ data: "json, name=endDate" })
+  @SpeakeasyMetadata({ data: "json, name=endDate" })
   endDate?: string;
 
-  @Metadata({ data: "json, name=evse" })
+  @SpeakeasyMetadata({ data: "json, name=evse" })
   evse?: number;
 }
 
 
-export class UpdatereservationRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: UpdatereservationPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: UpdatereservationRequestBody;
-}
-
-
 export class Updatereservation201ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=ok" })
+  @SpeakeasyMetadata({ data: "json, name=ok" })
   ok?: boolean;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result?: Map<string, any>;
 }
 
 
+export class UpdatereservationRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: UpdatereservationPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: UpdatereservationRequestBody;
+}
+
+
 export class UpdatereservationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updatereservation201ApplicationJsonObject?: Updatereservation201ApplicationJson;
 }

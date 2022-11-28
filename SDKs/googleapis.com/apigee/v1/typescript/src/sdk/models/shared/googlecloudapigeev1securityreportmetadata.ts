@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudApigeeV1SecurityReportMetadata
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Metadata for the security report.
 **/
 export class GoogleCloudApigeeV1SecurityReportMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dimensions" })
+  @SpeakeasyMetadata({ data: "json, name=dimensions" })
   dimensions?: string[];
 
-  @Metadata({ data: "json, name=endTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=endTimestamp" })
   endTimestamp?: string;
 
-  @Metadata({ data: "json, name=metrics" })
+  @SpeakeasyMetadata({ data: "json, name=metrics" })
   metrics?: string[];
 
-  @Metadata({ data: "json, name=mimeType" })
+  @SpeakeasyMetadata({ data: "json, name=mimeType" })
   mimeType?: string;
 
-  @Metadata({ data: "json, name=startTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=startTimestamp" })
   startTimestamp?: string;
 
-  @Metadata({ data: "json, name=timeUnit" })
+  @SpeakeasyMetadata({ data: "json, name=timeUnit" })
   timeUnit?: string;
 }

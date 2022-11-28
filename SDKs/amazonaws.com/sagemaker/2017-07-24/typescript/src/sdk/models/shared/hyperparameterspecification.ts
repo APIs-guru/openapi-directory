@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ParameterRange } from "./parameterrange";
 import { ParameterTypeEnum } from "./parametertypeenum";
+
 
 
 // HyperParameterSpecification
@@ -8,24 +9,24 @@ import { ParameterTypeEnum } from "./parametertypeenum";
  * Defines a hyperparameter to be used by an algorithm.
 **/
 export class HyperParameterSpecification extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DefaultValue" })
+  @SpeakeasyMetadata({ data: "json, name=DefaultValue" })
   defaultValue?: string;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=IsRequired" })
+  @SpeakeasyMetadata({ data: "json, name=IsRequired" })
   isRequired?: boolean;
 
-  @Metadata({ data: "json, name=IsTunable" })
+  @SpeakeasyMetadata({ data: "json, name=IsTunable" })
   isTunable?: boolean;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 
-  @Metadata({ data: "json, name=Range" })
+  @SpeakeasyMetadata({ data: "json, name=Range" })
   range?: ParameterRange;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type: ParameterTypeEnum;
 }

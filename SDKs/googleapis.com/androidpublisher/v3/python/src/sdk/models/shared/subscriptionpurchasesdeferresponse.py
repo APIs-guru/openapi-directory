@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class SubscriptionPurchasesDeferResponse:
-    new_expiry_time_millis: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'newExpiryTimeMillis' }})
+    r"""SubscriptionPurchasesDeferResponse
+    Response for the purchases.subscriptions.defer API.
+    """
+    
+    new_expiry_time_millis: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('newExpiryTimeMillis') }})
     

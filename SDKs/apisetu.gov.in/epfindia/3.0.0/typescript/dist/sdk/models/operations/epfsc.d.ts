@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class EpfscRequestBodyCertificateParameters extends SpeakeasyBase {
     dob: string;
@@ -17,10 +17,6 @@ export declare class EpfscRequestBody extends SpeakeasyBase {
 export declare class EpfscSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class EpfscRequest extends SpeakeasyBase {
-    request?: EpfscRequestBody;
-    security: EpfscSecurity;
 }
 export declare enum Epfsc400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -103,6 +99,10 @@ export declare enum Epfsc504ApplicationJsonErrorDescriptionEnum {
 export declare class Epfsc504ApplicationJson extends SpeakeasyBase {
     error?: Epfsc504ApplicationJsonErrorEnum;
     errorDescription?: Epfsc504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class EpfscRequest extends SpeakeasyBase {
+    request?: EpfscRequestBody;
+    security: EpfscSecurity;
 }
 export declare class EpfscResponse extends SpeakeasyBase {
     contentType: string;

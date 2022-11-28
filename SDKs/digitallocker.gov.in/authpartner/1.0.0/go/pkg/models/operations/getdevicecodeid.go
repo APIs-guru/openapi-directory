@@ -8,14 +8,14 @@ type GetDeviceCodeIDSecurity struct {
 	Oauthsecurity shared.SchemeOauthsecurity `security:"scheme,type=oauth2"`
 }
 
-type GetDeviceCodeIDRequest struct {
-	Request  *interface{} `request:"mediaType=application/json"`
-	Security GetDeviceCodeIDSecurity
-}
-
 type GetDeviceCodeID401ApplicationJSON struct {
 	Error            *string `json:"error,omitempty"`
 	ErrorDescription *string `json:"error_description,omitempty"`
+}
+
+type GetDeviceCodeIDRequest struct {
+	Request  *interface{} `request:"mediaType=application/json"`
+	Security GetDeviceCodeIDSecurity
 }
 
 type GetDeviceCodeIDResponse struct {

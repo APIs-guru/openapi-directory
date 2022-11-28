@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Any,Optional
@@ -8,14 +8,14 @@ from sdk.models import shared
 
 @dataclass
 class GetRecommendationsPathParams:
-    profiling_group_name: str = field(default=None, metadata={'path_param': { 'field_name': 'profilingGroupName', 'style': 'simple', 'explode': False }})
+    profiling_group_name: str = field(metadata={'path_param': { 'field_name': 'profilingGroupName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetRecommendationsQueryParams:
-    end_time: datetime = field(default=None, metadata={'query_param': { 'field_name': 'endTime', 'style': 'form', 'explode': True }})
+    end_time: datetime = field(metadata={'query_param': { 'field_name': 'endTime', 'style': 'form', 'explode': True }})
+    start_time: datetime = field(metadata={'query_param': { 'field_name': 'startTime', 'style': 'form', 'explode': True }})
     locale: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'locale', 'style': 'form', 'explode': True }})
-    start_time: datetime = field(default=None, metadata={'query_param': { 'field_name': 'startTime', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -31,18 +31,18 @@ class GetRecommendationsHeaders:
 
 @dataclass
 class GetRecommendationsRequest:
-    path_params: GetRecommendationsPathParams = field(default=None)
-    query_params: GetRecommendationsQueryParams = field(default=None)
-    headers: GetRecommendationsHeaders = field(default=None)
+    headers: GetRecommendationsHeaders = field()
+    path_params: GetRecommendationsPathParams = field()
+    query_params: GetRecommendationsQueryParams = field()
     
 
 @dataclass
 class GetRecommendationsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_recommendations_response: Optional[shared.GetRecommendationsResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

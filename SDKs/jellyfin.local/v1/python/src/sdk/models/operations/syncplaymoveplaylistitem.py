@@ -12,17 +12,17 @@ class SyncPlayMovePlaylistItemRequests:
 
 @dataclass
 class SyncPlayMovePlaylistItemSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class SyncPlayMovePlaylistItemRequest:
-    request: SyncPlayMovePlaylistItemRequests = field(default=None)
-    security: SyncPlayMovePlaylistItemSecurity = field(default=None)
+    request: SyncPlayMovePlaylistItemRequests = field()
+    security: SyncPlayMovePlaylistItemSecurity = field()
     
 
 @dataclass
 class SyncPlayMovePlaylistItemResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

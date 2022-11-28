@@ -10,6 +10,8 @@ const (
 	ErrorHandlerErrorCodeEnumErrorCodeTimeout      ErrorHandlerErrorCodeEnum = "ERROR_CODE_TIMEOUT"
 )
 
+// ErrorHandler
+// Custom static error page to be served when an error occurs.
 type ErrorHandler struct {
 	ErrorCode  *ErrorHandlerErrorCodeEnum `json:"errorCode,omitempty"`
 	MimeType   *string                    `json:"mimeType,omitempty"`

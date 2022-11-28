@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetApiV1EnvironmentsEnvironmentIdLogsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=environmentId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=environmentId" })
   environmentId: string;
 }
 
 
 export class GetApiV1EnvironmentsEnvironmentIdLogsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetApiV1EnvironmentsEnvironmentIdLogsPathParams;
 }
 
 
 export class GetApiV1EnvironmentsEnvironmentIdLogsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getApiV1EnvironmentsEnvironmentIdLogs200ApplicationJsonString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getApiV1EnvironmentsEnvironmentIdLogs200TextJsonString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getApiV1EnvironmentsEnvironmentIdLogs200TextPlainString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

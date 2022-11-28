@@ -13,6 +13,8 @@ const (
 	CreateNetworkSwitchStackRoutingInterfaceRequestBodyMulticastRoutingEnumIgmpSnoopingQuerier CreateNetworkSwitchStackRoutingInterfaceRequestBodyMulticastRoutingEnum = "IGMP snooping querier"
 )
 
+// CreateNetworkSwitchStackRoutingInterfaceRequestBodyOspfSettings
+// The OSPF routing settings of the interface.
 type CreateNetworkSwitchStackRoutingInterfaceRequestBodyOspfSettings struct {
 	Area             *string `json:"area,omitempty"`
 	Cost             *int64  `json:"cost,omitempty"`

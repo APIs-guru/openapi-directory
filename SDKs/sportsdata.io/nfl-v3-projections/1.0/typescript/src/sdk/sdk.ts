@@ -1,17 +1,17 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
 import * as operations from "./models/operations";
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import * as utils from "../internal/utils";
 import { Security } from "./models/shared";
+
+
 
 type OptsFunc = (sdk: SDK) => void;
 
-const Servers = [
-  "http://api.sportsdata.io",
-  "https://api.sportsdata.io",
-  "http://azure-api.sportsdata.io",
-  "https://azure-api.sportsdata.io",
+export const ServerList = [
+	"http://api.sportsdata.io",
+	"https://api.sportsdata.io",
+	"http://azure-api.sportsdata.io",
+	"https://azure-api.sportsdata.io",
 ] as const;
 
 export function WithServerURL(
@@ -22,13 +22,13 @@ export function WithServerURL(
     if (params != null) {
       serverURL = utils.ReplaceParameters(serverURL, params);
     }
-    sdk.serverURL = serverURL;
+    sdk._serverURL = serverURL;
   };
 }
 
 export function WithClient(client: AxiosInstance): OptsFunc {
   return (sdk: SDK) => {
-    sdk.defaultClient = client;
+    sdk._defaultClient = client;
   };
 }
 
@@ -37,41 +37,48 @@ export function WithSecurity(security: Security): OptsFunc {
     security = new Security(security);
   }
   return (sdk: SDK) => {
-    sdk.security = security;
+    sdk._security = security;
   };
 }
 
 
 export class SDK {
-  defaultClient?: AxiosInstance;
-  securityClient?: AxiosInstance;
-  security?: any;
-  serverURL: string;
+
+  public _defaultClient: AxiosInstance;
+  public _securityClient: AxiosInstance;
+  public _security?: Security;
+  public _serverURL: string;
+  private _language = "typescript";
+  private _sdkVersion = "0.0.1";
+  private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
-    if (this.serverURL == "") {
-      this.serverURL = Servers[0];
+    if (this._serverURL == "") {
+      this._serverURL = ServerList[0];
     }
 
-    if (!this.defaultClient) {
-      this.defaultClient = axios.create({ baseURL: this.serverURL });
+    if (!this._defaultClient) {
+      this._defaultClient = axios.create({ baseURL: this._serverURL });
     }
 
-    if (!this.securityClient) {
-      if (this.security) {
-        this.securityClient = CreateSecurityClient(
-          this.defaultClient,
-          this.security
+    if (!this._securityClient) {
+      if (this._security) {
+        this._securityClient = utils.CreateSecurityClient(
+          this._defaultClient,
+          this._security
         );
       } else {
-        this.securityClient = this.defaultClient;
+        this._securityClient = this._defaultClient;
       }
     }
+    
   }
   
-  // DfsSlatesByDate - DFS Slates by Date
-  DfsSlatesByDate(
+  /**
+   * dfsSlatesByDate - DFS Slates by Date
+  **/
+  dfsSlatesByDate(
     req: operations.DfsSlatesByDateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DfsSlatesByDateResponse> {
@@ -79,22 +86,24 @@ export class SDK {
       req = new operations.DfsSlatesByDateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/{format}/DfsSlatesByDate/{date}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DfsSlatesByDateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DfsSlatesByDateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.dfsSlates = httpRes?.data;
             }
             break;
@@ -106,8 +115,10 @@ export class SDK {
   }
 
   
-  // DfsSlatesByWeek - DFS Slates by Week
-  DfsSlatesByWeek(
+  /**
+   * dfsSlatesByWeek - DFS Slates by Week
+  **/
+  dfsSlatesByWeek(
     req: operations.DfsSlatesByWeekRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DfsSlatesByWeekResponse> {
@@ -115,22 +126,24 @@ export class SDK {
       req = new operations.DfsSlatesByWeekRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/{format}/DfsSlatesByWeek/{season}/{week}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DfsSlatesByWeekResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DfsSlatesByWeekResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.dfsSlates = httpRes?.data;
             }
             break;
@@ -142,8 +155,10 @@ export class SDK {
   }
 
   
-  // IdpProjectedPlayerGameStatsByPlayerWInjuriesLineupsDfsSalaries - IDP Projected Player Game Stats by Player (w/ Injuries, Lineups, DFS Salaries)
-  IdpProjectedPlayerGameStatsByPlayerWInjuriesLineupsDfsSalaries(
+  /**
+   * idpProjectedPlayerGameStatsByPlayerWInjuriesLineupsDfsSalaries - IDP Projected Player Game Stats by Player (w/ Injuries, Lineups, DFS Salaries)
+  **/
+  idpProjectedPlayerGameStatsByPlayerWInjuriesLineupsDfsSalaries(
     req: operations.IdpProjectedPlayerGameStatsByPlayerWInjuriesLineupsDfsSalariesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IdpProjectedPlayerGameStatsByPlayerWInjuriesLineupsDfsSalariesResponse> {
@@ -151,22 +166,24 @@ export class SDK {
       req = new operations.IdpProjectedPlayerGameStatsByPlayerWInjuriesLineupsDfsSalariesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/{format}/IdpPlayerGameProjectionStatsByPlayerID/{season}/{week}/{playerid}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IdpProjectedPlayerGameStatsByPlayerWInjuriesLineupsDfsSalariesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.IdpProjectedPlayerGameStatsByPlayerWInjuriesLineupsDfsSalariesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.playerGameProjection = httpRes?.data;
             }
             break;
@@ -178,8 +195,10 @@ export class SDK {
   }
 
   
-  // IdpProjectedPlayerGameStatsByTeamWInjuriesLineupsDfsSalaries - IDP Projected Player Game Stats by Team (w/ Injuries, Lineups, DFS Salaries)
-  IdpProjectedPlayerGameStatsByTeamWInjuriesLineupsDfsSalaries(
+  /**
+   * idpProjectedPlayerGameStatsByTeamWInjuriesLineupsDfsSalaries - IDP Projected Player Game Stats by Team (w/ Injuries, Lineups, DFS Salaries)
+  **/
+  idpProjectedPlayerGameStatsByTeamWInjuriesLineupsDfsSalaries(
     req: operations.IdpProjectedPlayerGameStatsByTeamWInjuriesLineupsDfsSalariesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IdpProjectedPlayerGameStatsByTeamWInjuriesLineupsDfsSalariesResponse> {
@@ -187,22 +206,24 @@ export class SDK {
       req = new operations.IdpProjectedPlayerGameStatsByTeamWInjuriesLineupsDfsSalariesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/{format}/IdpPlayerGameProjectionStatsByTeam/{season}/{week}/{team}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IdpProjectedPlayerGameStatsByTeamWInjuriesLineupsDfsSalariesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.IdpProjectedPlayerGameStatsByTeamWInjuriesLineupsDfsSalariesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.playerGameProjections = httpRes?.data;
             }
             break;
@@ -214,8 +235,10 @@ export class SDK {
   }
 
   
-  // IdpProjectedPlayerGameStatsByWeekWInjuriesLineupsDfsSalaries - IDP Projected Player Game Stats by Week (w/ Injuries, Lineups, DFS Salaries)
-  IdpProjectedPlayerGameStatsByWeekWInjuriesLineupsDfsSalaries(
+  /**
+   * idpProjectedPlayerGameStatsByWeekWInjuriesLineupsDfsSalaries - IDP Projected Player Game Stats by Week (w/ Injuries, Lineups, DFS Salaries)
+  **/
+  idpProjectedPlayerGameStatsByWeekWInjuriesLineupsDfsSalaries(
     req: operations.IdpProjectedPlayerGameStatsByWeekWInjuriesLineupsDfsSalariesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IdpProjectedPlayerGameStatsByWeekWInjuriesLineupsDfsSalariesResponse> {
@@ -223,22 +246,24 @@ export class SDK {
       req = new operations.IdpProjectedPlayerGameStatsByWeekWInjuriesLineupsDfsSalariesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/{format}/IdpPlayerGameProjectionStatsByWeek/{season}/{week}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IdpProjectedPlayerGameStatsByWeekWInjuriesLineupsDfsSalariesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.IdpProjectedPlayerGameStatsByWeekWInjuriesLineupsDfsSalariesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.playerGameProjections = httpRes?.data;
             }
             break;
@@ -250,8 +275,10 @@ export class SDK {
   }
 
   
-  // ProjectedFantasyDefenseGameStatsWDfsSalaries - Projected Fantasy Defense Game Stats (w/ DFS Salaries)
-  ProjectedFantasyDefenseGameStatsWDfsSalaries(
+  /**
+   * projectedFantasyDefenseGameStatsWDfsSalaries - Projected Fantasy Defense Game Stats (w/ DFS Salaries)
+  **/
+  projectedFantasyDefenseGameStatsWDfsSalaries(
     req: operations.ProjectedFantasyDefenseGameStatsWDfsSalariesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ProjectedFantasyDefenseGameStatsWDfsSalariesResponse> {
@@ -259,22 +286,24 @@ export class SDK {
       req = new operations.ProjectedFantasyDefenseGameStatsWDfsSalariesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/{format}/FantasyDefenseProjectionsByGame/{season}/{week}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ProjectedFantasyDefenseGameStatsWDfsSalariesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ProjectedFantasyDefenseGameStatsWDfsSalariesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.fantasyDefenseGameProjections = httpRes?.data;
             }
             break;
@@ -286,8 +315,10 @@ export class SDK {
   }
 
   
-  // ProjectedFantasyDefenseSeasonStatsWByeWeekAdp - Projected Fantasy Defense Season Stats (w/ Bye Week, ADP)
-  ProjectedFantasyDefenseSeasonStatsWByeWeekAdp(
+  /**
+   * projectedFantasyDefenseSeasonStatsWByeWeekAdp - Projected Fantasy Defense Season Stats (w/ Bye Week, ADP)
+  **/
+  projectedFantasyDefenseSeasonStatsWByeWeekAdp(
     req: operations.ProjectedFantasyDefenseSeasonStatsWByeWeekAdpRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ProjectedFantasyDefenseSeasonStatsWByeWeekAdpResponse> {
@@ -295,22 +326,24 @@ export class SDK {
       req = new operations.ProjectedFantasyDefenseSeasonStatsWByeWeekAdpRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/{format}/FantasyDefenseProjectionsBySeason/{season}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ProjectedFantasyDefenseSeasonStatsWByeWeekAdpResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ProjectedFantasyDefenseSeasonStatsWByeWeekAdpResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.fantasyDefenseSeasonProjections = httpRes?.data;
             }
             break;
@@ -322,8 +355,10 @@ export class SDK {
   }
 
   
-  // ProjectedPlayerGameStatsByPlayerWInjuriesLineupsDfsSalaries - Projected Player Game Stats by Player (w/ Injuries, Lineups, DFS Salaries)
-  ProjectedPlayerGameStatsByPlayerWInjuriesLineupsDfsSalaries(
+  /**
+   * projectedPlayerGameStatsByPlayerWInjuriesLineupsDfsSalaries - Projected Player Game Stats by Player (w/ Injuries, Lineups, DFS Salaries)
+  **/
+  projectedPlayerGameStatsByPlayerWInjuriesLineupsDfsSalaries(
     req: operations.ProjectedPlayerGameStatsByPlayerWInjuriesLineupsDfsSalariesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ProjectedPlayerGameStatsByPlayerWInjuriesLineupsDfsSalariesResponse> {
@@ -331,22 +366,24 @@ export class SDK {
       req = new operations.ProjectedPlayerGameStatsByPlayerWInjuriesLineupsDfsSalariesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/{format}/PlayerGameProjectionStatsByPlayerID/{season}/{week}/{playerid}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ProjectedPlayerGameStatsByPlayerWInjuriesLineupsDfsSalariesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ProjectedPlayerGameStatsByPlayerWInjuriesLineupsDfsSalariesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.playerGameProjection = httpRes?.data;
             }
             break;
@@ -358,8 +395,10 @@ export class SDK {
   }
 
   
-  // ProjectedPlayerGameStatsByTeamWInjuriesLineupsDfsSalaries - Projected Player Game Stats by Team (w/ Injuries, Lineups, DFS Salaries)
-  ProjectedPlayerGameStatsByTeamWInjuriesLineupsDfsSalaries(
+  /**
+   * projectedPlayerGameStatsByTeamWInjuriesLineupsDfsSalaries - Projected Player Game Stats by Team (w/ Injuries, Lineups, DFS Salaries)
+  **/
+  projectedPlayerGameStatsByTeamWInjuriesLineupsDfsSalaries(
     req: operations.ProjectedPlayerGameStatsByTeamWInjuriesLineupsDfsSalariesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ProjectedPlayerGameStatsByTeamWInjuriesLineupsDfsSalariesResponse> {
@@ -367,22 +406,24 @@ export class SDK {
       req = new operations.ProjectedPlayerGameStatsByTeamWInjuriesLineupsDfsSalariesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/{format}/PlayerGameProjectionStatsByTeam/{season}/{week}/{team}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ProjectedPlayerGameStatsByTeamWInjuriesLineupsDfsSalariesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ProjectedPlayerGameStatsByTeamWInjuriesLineupsDfsSalariesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.playerGameProjections = httpRes?.data;
             }
             break;
@@ -394,8 +435,10 @@ export class SDK {
   }
 
   
-  // ProjectedPlayerGameStatsByWeekWInjuriesLineupsDfsSalaries - Projected Player Game Stats by Week (w/ Injuries, Lineups, DFS Salaries)
-  ProjectedPlayerGameStatsByWeekWInjuriesLineupsDfsSalaries(
+  /**
+   * projectedPlayerGameStatsByWeekWInjuriesLineupsDfsSalaries - Projected Player Game Stats by Week (w/ Injuries, Lineups, DFS Salaries)
+  **/
+  projectedPlayerGameStatsByWeekWInjuriesLineupsDfsSalaries(
     req: operations.ProjectedPlayerGameStatsByWeekWInjuriesLineupsDfsSalariesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ProjectedPlayerGameStatsByWeekWInjuriesLineupsDfsSalariesResponse> {
@@ -403,22 +446,24 @@ export class SDK {
       req = new operations.ProjectedPlayerGameStatsByWeekWInjuriesLineupsDfsSalariesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/{format}/PlayerGameProjectionStatsByWeek/{season}/{week}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ProjectedPlayerGameStatsByWeekWInjuriesLineupsDfsSalariesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ProjectedPlayerGameStatsByWeekWInjuriesLineupsDfsSalariesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.playerGameProjections = httpRes?.data;
             }
             break;
@@ -430,8 +475,10 @@ export class SDK {
   }
 
   
-  // ProjectedPlayerSeasonStatsByPlayerWByeWeekAdp - Projected Player Season Stats by Player (w/ Bye Week, ADP)
-  ProjectedPlayerSeasonStatsByPlayerWByeWeekAdp(
+  /**
+   * projectedPlayerSeasonStatsByPlayerWByeWeekAdp - Projected Player Season Stats by Player (w/ Bye Week, ADP)
+  **/
+  projectedPlayerSeasonStatsByPlayerWByeWeekAdp(
     req: operations.ProjectedPlayerSeasonStatsByPlayerWByeWeekAdpRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ProjectedPlayerSeasonStatsByPlayerWByeWeekAdpResponse> {
@@ -439,22 +486,24 @@ export class SDK {
       req = new operations.ProjectedPlayerSeasonStatsByPlayerWByeWeekAdpRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/{format}/PlayerSeasonProjectionStatsByPlayerID/{season}/{playerid}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ProjectedPlayerSeasonStatsByPlayerWByeWeekAdpResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ProjectedPlayerSeasonStatsByPlayerWByeWeekAdpResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.playerSeasonProjection = httpRes?.data;
             }
             break;
@@ -466,8 +515,10 @@ export class SDK {
   }
 
   
-  // ProjectedPlayerSeasonStatsByTeamWByeWeekAdp - Projected Player Season Stats by Team (w/ Bye Week, ADP)
-  ProjectedPlayerSeasonStatsByTeamWByeWeekAdp(
+  /**
+   * projectedPlayerSeasonStatsByTeamWByeWeekAdp - Projected Player Season Stats by Team (w/ Bye Week, ADP)
+  **/
+  projectedPlayerSeasonStatsByTeamWByeWeekAdp(
     req: operations.ProjectedPlayerSeasonStatsByTeamWByeWeekAdpRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ProjectedPlayerSeasonStatsByTeamWByeWeekAdpResponse> {
@@ -475,22 +526,24 @@ export class SDK {
       req = new operations.ProjectedPlayerSeasonStatsByTeamWByeWeekAdpRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/{format}/PlayerSeasonProjectionStatsByTeam/{season}/{team}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ProjectedPlayerSeasonStatsByTeamWByeWeekAdpResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ProjectedPlayerSeasonStatsByTeamWByeWeekAdpResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.playerSeasonProjections = httpRes?.data;
             }
             break;
@@ -502,8 +555,10 @@ export class SDK {
   }
 
   
-  // ProjectedPlayerSeasonStatsWByeWeekAdp - Projected Player Season Stats (w/ Bye Week, ADP)
-  ProjectedPlayerSeasonStatsWByeWeekAdp(
+  /**
+   * projectedPlayerSeasonStatsWByeWeekAdp - Projected Player Season Stats (w/ Bye Week, ADP)
+  **/
+  projectedPlayerSeasonStatsWByeWeekAdp(
     req: operations.ProjectedPlayerSeasonStatsWByeWeekAdpRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ProjectedPlayerSeasonStatsWByeWeekAdpResponse> {
@@ -511,22 +566,24 @@ export class SDK {
       req = new operations.ProjectedPlayerSeasonStatsWByeWeekAdpRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/{format}/PlayerSeasonProjectionStats/{season}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ProjectedPlayerSeasonStatsWByeWeekAdpResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ProjectedPlayerSeasonStatsWByeWeekAdpResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.playerSeasonProjections = httpRes?.data;
             }
             break;

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { InvalidInputProperty } from "./invalidinputproperty";
 export declare class InvalidInputExceptionInfo extends SpeakeasyBase {
     exceptionClassName?: string;

@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GamesNumberAffixConfiguration } from "./gamesnumberaffixconfiguration";
 
+
 export enum GamesNumberFormatConfigurationNumberFormatTypeEnum {
-    NumberFormatTypeUnspecified = "NUMBER_FORMAT_TYPE_UNSPECIFIED"
-,    Numeric = "NUMERIC"
-,    TimeDuration = "TIME_DURATION"
-,    Currency = "CURRENCY"
+    NumberFormatTypeUnspecified = "NUMBER_FORMAT_TYPE_UNSPECIFIED",
+    Numeric = "NUMERIC",
+    TimeDuration = "TIME_DURATION",
+    Currency = "CURRENCY"
 }
 
 
@@ -14,15 +15,15 @@ export enum GamesNumberFormatConfigurationNumberFormatTypeEnum {
  * A number format resource.
 **/
 export class GamesNumberFormatConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=currencyCode" })
+  @SpeakeasyMetadata({ data: "json, name=currencyCode" })
   currencyCode?: string;
 
-  @Metadata({ data: "json, name=numDecimalPlaces" })
+  @SpeakeasyMetadata({ data: "json, name=numDecimalPlaces" })
   numDecimalPlaces?: number;
 
-  @Metadata({ data: "json, name=numberFormatType" })
+  @SpeakeasyMetadata({ data: "json, name=numberFormatType" })
   numberFormatType?: GamesNumberFormatConfigurationNumberFormatTypeEnum;
 
-  @Metadata({ data: "json, name=suffix" })
+  @SpeakeasyMetadata({ data: "json, name=suffix" })
   suffix?: GamesNumberAffixConfiguration;
 }

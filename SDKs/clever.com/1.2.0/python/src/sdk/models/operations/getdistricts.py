@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetDistrictsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     districts_response: Optional[shared.DistrictsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

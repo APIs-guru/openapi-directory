@@ -8,6 +8,8 @@ type GroupMappingGroups struct {
 	SyncedAt         *string `json:"synced_at,omitempty"`
 }
 
+// GroupMapping
+// External Groups to be mapped to a team for membership
 type GroupMapping struct {
 	Groups []GroupMappingGroups `json:"groups,omitempty"`
 }

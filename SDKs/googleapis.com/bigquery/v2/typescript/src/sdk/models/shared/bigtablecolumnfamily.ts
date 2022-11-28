@@ -1,21 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BigtableColumn } from "./bigtablecolumn";
 
 
+
 export class BigtableColumnFamily extends SpeakeasyBase {
-  @Metadata({ data: "json, name=columns", elemType: shared.BigtableColumn })
+  @SpeakeasyMetadata({ data: "json, name=columns", elemType: BigtableColumn })
   columns?: BigtableColumn[];
 
-  @Metadata({ data: "json, name=encoding" })
+  @SpeakeasyMetadata({ data: "json, name=encoding" })
   encoding?: string;
 
-  @Metadata({ data: "json, name=familyId" })
+  @SpeakeasyMetadata({ data: "json, name=familyId" })
   familyId?: string;
 
-  @Metadata({ data: "json, name=onlyReadLatest" })
+  @SpeakeasyMetadata({ data: "json, name=onlyReadLatest" })
   onlyReadLatest?: boolean;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }

@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ForgetpaireddeviceRequest = /** @class */ (function (_super) {
     __extends(ForgetpaireddeviceRequest, _super);
     function ForgetpaireddeviceRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=bond" }),
+        SpeakeasyMetadata({ data: "json, name=bond" }),
         __metadata("design:type", Boolean)
     ], ForgetpaireddeviceRequest.prototype, "bond", void 0);
     __decorate([
-        Metadata({ data: "json, name=mac_address" }),
+        SpeakeasyMetadata({ data: "json, name=mac_address" }),
         __metadata("design:type", String)
     ], ForgetpaireddeviceRequest.prototype, "macAddress", void 0);
     return ForgetpaireddeviceRequest;

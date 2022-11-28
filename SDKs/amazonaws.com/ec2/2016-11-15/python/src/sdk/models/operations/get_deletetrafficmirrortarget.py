@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteTrafficMirrorTargetActionEnum(str, Enum):
     DELETE_TRAFFIC_MIRROR_TARGET = "DeleteTrafficMirrorTarget"
@@ -10,10 +14,10 @@ class GetDeleteTrafficMirrorTargetVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteTrafficMirrorTargetQueryParams:
-    action: GetDeleteTrafficMirrorTargetActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDeleteTrafficMirrorTargetActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    traffic_mirror_target_id: str = field(metadata={'query_param': { 'field_name': 'TrafficMirrorTargetId', 'style': 'form', 'explode': True }})
+    version: GetDeleteTrafficMirrorTargetVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    traffic_mirror_target_id: str = field(default=None, metadata={'query_param': { 'field_name': 'TrafficMirrorTargetId', 'style': 'form', 'explode': True }})
-    version: GetDeleteTrafficMirrorTargetVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetDeleteTrafficMirrorTargetHeaders:
 
 @dataclass
 class GetDeleteTrafficMirrorTargetRequest:
-    query_params: GetDeleteTrafficMirrorTargetQueryParams = field(default=None)
-    headers: GetDeleteTrafficMirrorTargetHeaders = field(default=None)
+    headers: GetDeleteTrafficMirrorTargetHeaders = field()
+    query_params: GetDeleteTrafficMirrorTargetQueryParams = field()
     
 
 @dataclass
 class GetDeleteTrafficMirrorTargetResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

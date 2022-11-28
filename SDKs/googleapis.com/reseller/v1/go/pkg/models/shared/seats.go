@@ -1,5 +1,7 @@
 package shared
 
+// Seats
+// JSON template for subscription seats.
 type Seats struct {
 	Kind                  *string `json:"kind,omitempty"`
 	LicensedNumberOfSeats *int32  `json:"licensedNumberOfSeats,omitempty"`

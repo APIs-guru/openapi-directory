@@ -1,5 +1,7 @@
 package shared
 
+// UpdateLoginPasswordPolicies
+// Request model for updating login password policies
 type UpdateLoginPasswordPolicies struct {
 	CharacterRules             *CharacterRules     `json:"characterRules,omitempty"`
 	EnforceLoginPasswordChange *bool               `json:"enforceLoginPasswordChange,omitempty"`

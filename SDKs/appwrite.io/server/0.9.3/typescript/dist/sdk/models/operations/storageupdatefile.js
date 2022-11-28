@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var StorageUpdateFilePathParams = /** @class */ (function (_super) {
     __extends(StorageUpdateFilePathParams, _super);
@@ -30,7 +30,7 @@ var StorageUpdateFilePathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=fileId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=fileId" }),
         __metadata("design:type", String)
     ], StorageUpdateFilePathParams.prototype, "fileId", void 0);
     return StorageUpdateFilePathParams;
@@ -42,11 +42,11 @@ var StorageUpdateFileRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=read" }),
+        SpeakeasyMetadata({ data: "json, name=read" }),
         __metadata("design:type", Array)
     ], StorageUpdateFileRequestBody.prototype, "read", void 0);
     __decorate([
-        Metadata({ data: "json, name=write" }),
+        SpeakeasyMetadata({ data: "json, name=write" }),
         __metadata("design:type", Array)
     ], StorageUpdateFileRequestBody.prototype, "write", void 0);
     return StorageUpdateFileRequestBody;
@@ -58,15 +58,15 @@ var StorageUpdateFileSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeJwt)
     ], StorageUpdateFileSecurity.prototype, "jwt", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeKey)
     ], StorageUpdateFileSecurity.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeProject)
     ], StorageUpdateFileSecurity.prototype, "project", void 0);
     return StorageUpdateFileSecurity;
@@ -78,15 +78,15 @@ var StorageUpdateFileRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", StorageUpdateFilePathParams)
     ], StorageUpdateFileRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", StorageUpdateFileRequestBody)
     ], StorageUpdateFileRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", StorageUpdateFileSecurity)
     ], StorageUpdateFileRequest.prototype, "security", void 0);
     return StorageUpdateFileRequest;
@@ -98,15 +98,15 @@ var StorageUpdateFileResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], StorageUpdateFileResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], StorageUpdateFileResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.File)
     ], StorageUpdateFileResponse.prototype, "file", void 0);
     return StorageUpdateFileResponse;

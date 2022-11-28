@@ -1,5 +1,7 @@
 package shared
 
+// GraphqlAPI
+// Describes a GraphQL API.
 type GraphqlAPI struct {
 	AdditionalAuthenticationProviders []AdditionalAuthenticationProvider `json:"additionalAuthenticationProviders,omitempty"`
 	APIID                             *string                            `json:"apiId,omitempty"`

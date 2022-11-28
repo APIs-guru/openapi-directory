@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var AveragesV2GetV2AveragesGetQueryParams = /** @class */ (function (_super) {
     __extends(AveragesV2GetV2AveragesGetQueryParams, _super);
@@ -30,71 +30,71 @@ var AveragesV2GetV2AveragesGetQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=country" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=country" }),
         __metadata("design:type", Array)
     ], AveragesV2GetV2AveragesGetQueryParams.prototype, "country", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=country_id" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=country_id" }),
         __metadata("design:type", String)
     ], AveragesV2GetV2AveragesGetQueryParams.prototype, "countryId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=date_from" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=date_from" }),
         __metadata("design:type", Object)
     ], AveragesV2GetV2AveragesGetQueryParams.prototype, "dateFrom", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=date_to" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=date_to" }),
         __metadata("design:type", Object)
     ], AveragesV2GetV2AveragesGetQueryParams.prototype, "dateTo", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=group" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=group" }),
         __metadata("design:type", Boolean)
     ], AveragesV2GetV2AveragesGetQueryParams.prototype, "group", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", Number)
     ], AveragesV2GetV2AveragesGetQueryParams.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=location" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=location" }),
         __metadata("design:type", Array)
     ], AveragesV2GetV2AveragesGetQueryParams.prototype, "location", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=offset" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" }),
         __metadata("design:type", Number)
     ], AveragesV2GetV2AveragesGetQueryParams.prototype, "offset", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" }),
         __metadata("design:type", Number)
     ], AveragesV2GetV2AveragesGetQueryParams.prototype, "page", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=parameter" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=parameter" }),
         __metadata("design:type", Array)
     ], AveragesV2GetV2AveragesGetQueryParams.prototype, "parameter", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=parameter_id" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=parameter_id" }),
         __metadata("design:type", Number)
     ], AveragesV2GetV2AveragesGetQueryParams.prototype, "parameterId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=project" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=project" }),
         __metadata("design:type", Array)
     ], AveragesV2GetV2AveragesGetQueryParams.prototype, "project", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=project_id" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=project_id" }),
         __metadata("design:type", Number)
     ], AveragesV2GetV2AveragesGetQueryParams.prototype, "projectId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sort" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" }),
         __metadata("design:type", String)
     ], AveragesV2GetV2AveragesGetQueryParams.prototype, "sort", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=spatial" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=spatial" }),
         __metadata("design:type", String)
     ], AveragesV2GetV2AveragesGetQueryParams.prototype, "spatial", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=temporal" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=temporal" }),
         __metadata("design:type", String)
     ], AveragesV2GetV2AveragesGetQueryParams.prototype, "temporal", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=unit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=unit" }),
         __metadata("design:type", Array)
     ], AveragesV2GetV2AveragesGetQueryParams.prototype, "unit", void 0);
     return AveragesV2GetV2AveragesGetQueryParams;
@@ -106,7 +106,7 @@ var AveragesV2GetV2AveragesGetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AveragesV2GetV2AveragesGetQueryParams)
     ], AveragesV2GetV2AveragesGetRequest.prototype, "queryParams", void 0);
     return AveragesV2GetV2AveragesGetRequest;
@@ -118,19 +118,19 @@ var AveragesV2GetV2AveragesGetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], AveragesV2GetV2AveragesGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.HttpValidationError)
     ], AveragesV2GetV2AveragesGetResponse.prototype, "httpValidationError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.OpenAqResult)
     ], AveragesV2GetV2AveragesGetResponse.prototype, "openAqResult", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], AveragesV2GetV2AveragesGetResponse.prototype, "statusCode", void 0);
     return AveragesV2GetV2AveragesGetResponse;

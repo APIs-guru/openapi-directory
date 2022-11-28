@@ -4,10 +4,6 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-type CreateTemplateRequest struct {
-	Request shared.TemplateDefinitionNew `request:"mediaType=application/json"`
-}
-
 type CreateTemplate200ApplicationJSON struct {
 	Response *shared.TemplateDefinition `json:"response,omitempty"`
 }
@@ -73,6 +69,10 @@ type CreateTemplate422ApplicationJSON struct {
 type CreateTemplate500ApplicationJSON struct {
 	Error  *string `json:"error,omitempty"`
 	Status *int64  `json:"status,omitempty"`
+}
+
+type CreateTemplateRequest struct {
+	Request shared.TemplateDefinitionNew `request:"mediaType=application/json"`
 }
 
 type CreateTemplateResponse struct {

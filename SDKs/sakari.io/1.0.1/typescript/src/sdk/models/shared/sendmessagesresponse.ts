@@ -1,24 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Message } from "./message";
 
 
+
 export class SendMessagesResponseData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=estimatedPrice" })
+  @SpeakeasyMetadata({ data: "json, name=estimatedPrice" })
   estimatedPrice?: number;
 
-  @Metadata({ data: "json, name=jobId" })
+  @SpeakeasyMetadata({ data: "json, name=jobId" })
   jobId?: string;
 
-  @Metadata({ data: "json, name=messages", elemType: shared.Message })
+  @SpeakeasyMetadata({ data: "json, name=messages", elemType: Message })
   messages?: Message[];
 
-  @Metadata({ data: "json, name=queued" })
+  @SpeakeasyMetadata({ data: "json, name=queued" })
   queued?: number;
 }
 
 
 export class SendMessagesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: SendMessagesResponseData;
 }

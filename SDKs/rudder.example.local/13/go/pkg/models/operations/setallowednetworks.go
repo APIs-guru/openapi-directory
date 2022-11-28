@@ -8,17 +8,14 @@ type SetAllowedNetworksRequestBody struct {
 	Value map[string]interface{} `json:"value,omitempty"`
 }
 
-type SetAllowedNetworksRequest struct {
-	PathParams SetAllowedNetworksPathParams
-	Request    SetAllowedNetworksRequestBody `request:"mediaType=application/json"`
-}
-
 type SetAllowedNetworks200ApplicationJSONActionEnum string
 
 const (
 	SetAllowedNetworks200ApplicationJSONActionEnumModifyAllowedNetworks SetAllowedNetworks200ApplicationJSONActionEnum = "modifyAllowedNetworks"
 )
 
+// SetAllowedNetworks200ApplicationJSONData
+// Information about the allowed_networks settings
 type SetAllowedNetworks200ApplicationJSONData struct {
 	AllowedNetworks []interface{} `json:"allowed_networks,omitempty"`
 }
@@ -35,6 +32,11 @@ type SetAllowedNetworks200ApplicationJSON struct {
 	Data   SetAllowedNetworks200ApplicationJSONData       `json:"data"`
 	ID     *string                                        `json:"id,omitempty"`
 	Result SetAllowedNetworks200ApplicationJSONResultEnum `json:"result"`
+}
+
+type SetAllowedNetworksRequest struct {
+	PathParams SetAllowedNetworksPathParams
+	Request    SetAllowedNetworksRequestBody `request:"mediaType=application/json"`
 }
 
 type SetAllowedNetworksResponse struct {

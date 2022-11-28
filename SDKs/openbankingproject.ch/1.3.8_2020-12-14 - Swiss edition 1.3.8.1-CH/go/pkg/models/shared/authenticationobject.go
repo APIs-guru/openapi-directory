@@ -1,5 +1,7 @@
 package shared
 
+// AuthenticationObject
+// Authentication object.
 type AuthenticationObject struct {
 	AuthenticationMethodID string                 `json:"authenticationMethodId"`
 	AuthenticationType     AuthenticationTypeEnum `json:"authenticationType"`

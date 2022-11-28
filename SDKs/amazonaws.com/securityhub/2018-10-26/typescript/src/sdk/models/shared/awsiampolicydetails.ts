@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsIamPolicyVersion } from "./awsiampolicyversion";
+
 
 
 // AwsIamPolicyDetails
@@ -8,36 +8,36 @@ import { AwsIamPolicyVersion } from "./awsiampolicyversion";
  * Represents an IAM permissions policy.
 **/
 export class AwsIamPolicyDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AttachmentCount" })
+  @SpeakeasyMetadata({ data: "json, name=AttachmentCount" })
   attachmentCount?: number;
 
-  @Metadata({ data: "json, name=CreateDate" })
+  @SpeakeasyMetadata({ data: "json, name=CreateDate" })
   createDate?: string;
 
-  @Metadata({ data: "json, name=DefaultVersionId" })
+  @SpeakeasyMetadata({ data: "json, name=DefaultVersionId" })
   defaultVersionId?: string;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=IsAttachable" })
+  @SpeakeasyMetadata({ data: "json, name=IsAttachable" })
   isAttachable?: boolean;
 
-  @Metadata({ data: "json, name=Path" })
+  @SpeakeasyMetadata({ data: "json, name=Path" })
   path?: string;
 
-  @Metadata({ data: "json, name=PermissionsBoundaryUsageCount" })
+  @SpeakeasyMetadata({ data: "json, name=PermissionsBoundaryUsageCount" })
   permissionsBoundaryUsageCount?: number;
 
-  @Metadata({ data: "json, name=PolicyId" })
+  @SpeakeasyMetadata({ data: "json, name=PolicyId" })
   policyId?: string;
 
-  @Metadata({ data: "json, name=PolicyName" })
+  @SpeakeasyMetadata({ data: "json, name=PolicyName" })
   policyName?: string;
 
-  @Metadata({ data: "json, name=PolicyVersionList", elemType: shared.AwsIamPolicyVersion })
+  @SpeakeasyMetadata({ data: "json, name=PolicyVersionList", elemType: AwsIamPolicyVersion })
   policyVersionList?: AwsIamPolicyVersion[];
 
-  @Metadata({ data: "json, name=UpdateDate" })
+  @SpeakeasyMetadata({ data: "json, name=UpdateDate" })
   updateDate?: string;
 }

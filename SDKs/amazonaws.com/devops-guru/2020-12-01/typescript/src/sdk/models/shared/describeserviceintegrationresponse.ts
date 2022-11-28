@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ServiceIntegrationConfig } from "./serviceintegrationconfig";
 
 
+
 export class DescribeServiceIntegrationResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ServiceIntegration" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceIntegration" })
   serviceIntegration?: ServiceIntegrationConfig;
 }

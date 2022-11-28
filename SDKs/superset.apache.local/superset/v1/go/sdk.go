@@ -11,7 +11,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://superset.apache.local",
 	"https://superset.apache.local/api/v1",
 }
@@ -21,9 +21,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -34,27 +38,45 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// DeleteAnnotationLayer - Deletes multiple annotation layers in a bulk operation.
 func (s *SDK) DeleteAnnotationLayer(ctx context.Context, request operations.DeleteAnnotationLayerRequest) (*operations.DeleteAnnotationLayerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/annotation_layer/"
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -64,7 +86,7 @@ func (s *SDK) DeleteAnnotationLayer(ctx context.Context, request operations.Dele
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -134,8 +156,9 @@ func (s *SDK) DeleteAnnotationLayer(ctx context.Context, request operations.Dele
 	return res, nil
 }
 
+// DeleteAnnotationLayerPk - Delete Annotation layer
 func (s *SDK) DeleteAnnotationLayerPk(ctx context.Context, request operations.DeleteAnnotationLayerPkRequest) (*operations.DeleteAnnotationLayerPkResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/annotation_layer/{pk}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -143,7 +166,7 @@ func (s *SDK) DeleteAnnotationLayerPk(ctx context.Context, request operations.De
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -203,8 +226,9 @@ func (s *SDK) DeleteAnnotationLayerPk(ctx context.Context, request operations.De
 	return res, nil
 }
 
+// DeleteAnnotationLayerPkAnnotation - Deletes multiple annotation in a bulk operation.
 func (s *SDK) DeleteAnnotationLayerPkAnnotation(ctx context.Context, request operations.DeleteAnnotationLayerPkAnnotationRequest) (*operations.DeleteAnnotationLayerPkAnnotationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/annotation_layer/{pk}/annotation/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -214,7 +238,7 @@ func (s *SDK) DeleteAnnotationLayerPkAnnotation(ctx context.Context, request ope
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -284,8 +308,9 @@ func (s *SDK) DeleteAnnotationLayerPkAnnotation(ctx context.Context, request ope
 	return res, nil
 }
 
+// DeleteAnnotationLayerPkAnnotationAnnotationID - Delete Annotation layer
 func (s *SDK) DeleteAnnotationLayerPkAnnotationAnnotationID(ctx context.Context, request operations.DeleteAnnotationLayerPkAnnotationAnnotationIDRequest) (*operations.DeleteAnnotationLayerPkAnnotationAnnotationIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/annotation_layer/{pk}/annotation/{annotation_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -293,7 +318,7 @@ func (s *SDK) DeleteAnnotationLayerPkAnnotationAnnotationID(ctx context.Context,
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -353,8 +378,9 @@ func (s *SDK) DeleteAnnotationLayerPkAnnotationAnnotationID(ctx context.Context,
 	return res, nil
 }
 
+// DeleteChart - Deletes multiple Charts in a bulk operation.
 func (s *SDK) DeleteChart(ctx context.Context, request operations.DeleteChartRequest) (*operations.DeleteChartResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/chart/"
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -364,7 +390,7 @@ func (s *SDK) DeleteChart(ctx context.Context, request operations.DeleteChartReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -444,8 +470,9 @@ func (s *SDK) DeleteChart(ctx context.Context, request operations.DeleteChartReq
 	return res, nil
 }
 
+// DeleteChartPk - Deletes a Chart.
 func (s *SDK) DeleteChartPk(ctx context.Context, request operations.DeleteChartPkRequest) (*operations.DeleteChartPkResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/chart/{pk}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -453,7 +480,7 @@ func (s *SDK) DeleteChartPk(ctx context.Context, request operations.DeleteChartP
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -533,8 +560,9 @@ func (s *SDK) DeleteChartPk(ctx context.Context, request operations.DeleteChartP
 	return res, nil
 }
 
+// DeleteCSSTemplate - Deletes multiple css templates in a bulk operation.
 func (s *SDK) DeleteCSSTemplate(ctx context.Context, request operations.DeleteCSSTemplateRequest) (*operations.DeleteCSSTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/css_template/"
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -544,7 +572,7 @@ func (s *SDK) DeleteCSSTemplate(ctx context.Context, request operations.DeleteCS
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -614,8 +642,9 @@ func (s *SDK) DeleteCSSTemplate(ctx context.Context, request operations.DeleteCS
 	return res, nil
 }
 
+// DeleteCSSTemplatePk - Delete CSS template
 func (s *SDK) DeleteCSSTemplatePk(ctx context.Context, request operations.DeleteCSSTemplatePkRequest) (*operations.DeleteCSSTemplatePkResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/css_template/{pk}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -623,7 +652,7 @@ func (s *SDK) DeleteCSSTemplatePk(ctx context.Context, request operations.Delete
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -683,8 +712,9 @@ func (s *SDK) DeleteCSSTemplatePk(ctx context.Context, request operations.Delete
 	return res, nil
 }
 
+// DeleteDashboard - Deletes multiple Dashboards in a bulk operation.
 func (s *SDK) DeleteDashboard(ctx context.Context, request operations.DeleteDashboardRequest) (*operations.DeleteDashboardResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dashboard/"
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -694,7 +724,7 @@ func (s *SDK) DeleteDashboard(ctx context.Context, request operations.DeleteDash
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -774,8 +804,9 @@ func (s *SDK) DeleteDashboard(ctx context.Context, request operations.DeleteDash
 	return res, nil
 }
 
+// DeleteDashboardPk - Deletes a Dashboard.
 func (s *SDK) DeleteDashboardPk(ctx context.Context, request operations.DeleteDashboardPkRequest) (*operations.DeleteDashboardPkResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dashboard/{pk}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -783,7 +814,7 @@ func (s *SDK) DeleteDashboardPk(ctx context.Context, request operations.DeleteDa
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -863,8 +894,9 @@ func (s *SDK) DeleteDashboardPk(ctx context.Context, request operations.DeleteDa
 	return res, nil
 }
 
+// DeleteDatabasePk - Deletes a Database.
 func (s *SDK) DeleteDatabasePk(ctx context.Context, request operations.DeleteDatabasePkRequest) (*operations.DeleteDatabasePkResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/database/{pk}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -872,7 +904,7 @@ func (s *SDK) DeleteDatabasePk(ctx context.Context, request operations.DeleteDat
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -952,8 +984,9 @@ func (s *SDK) DeleteDatabasePk(ctx context.Context, request operations.DeleteDat
 	return res, nil
 }
 
+// DeleteDataset - Deletes multiple Datasets in a bulk operation.
 func (s *SDK) DeleteDataset(ctx context.Context, request operations.DeleteDatasetRequest) (*operations.DeleteDatasetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dataset/"
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -963,7 +996,7 @@ func (s *SDK) DeleteDataset(ctx context.Context, request operations.DeleteDatase
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1053,8 +1086,9 @@ func (s *SDK) DeleteDataset(ctx context.Context, request operations.DeleteDatase
 	return res, nil
 }
 
+// DeleteDatasetPk - Deletes a Dataset
 func (s *SDK) DeleteDatasetPk(ctx context.Context, request operations.DeleteDatasetPkRequest) (*operations.DeleteDatasetPkResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dataset/{pk}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1062,7 +1096,7 @@ func (s *SDK) DeleteDatasetPk(ctx context.Context, request operations.DeleteData
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1142,8 +1176,9 @@ func (s *SDK) DeleteDatasetPk(ctx context.Context, request operations.DeleteData
 	return res, nil
 }
 
+// DeleteDatasetPkColumnColumnID - Delete a Dataset column
 func (s *SDK) DeleteDatasetPkColumnColumnID(ctx context.Context, request operations.DeleteDatasetPkColumnColumnIDRequest) (*operations.DeleteDatasetPkColumnColumnIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dataset/{pk}/column/{column_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1151,7 +1186,7 @@ func (s *SDK) DeleteDatasetPkColumnColumnID(ctx context.Context, request operati
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1231,8 +1266,9 @@ func (s *SDK) DeleteDatasetPkColumnColumnID(ctx context.Context, request operati
 	return res, nil
 }
 
+// DeleteDatasetPkMetricMetricID - Delete a Dataset metric
 func (s *SDK) DeleteDatasetPkMetricMetricID(ctx context.Context, request operations.DeleteDatasetPkMetricMetricIDRequest) (*operations.DeleteDatasetPkMetricMetricIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dataset/{pk}/metric/{metric_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1240,7 +1276,7 @@ func (s *SDK) DeleteDatasetPkMetricMetricID(ctx context.Context, request operati
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1320,8 +1356,9 @@ func (s *SDK) DeleteDatasetPkMetricMetricID(ctx context.Context, request operati
 	return res, nil
 }
 
+// DeleteReport - Deletes multiple report schedules in a bulk operation.
 func (s *SDK) DeleteReport(ctx context.Context, request operations.DeleteReportRequest) (*operations.DeleteReportResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/report/"
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1331,7 +1368,7 @@ func (s *SDK) DeleteReport(ctx context.Context, request operations.DeleteReportR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1411,8 +1448,9 @@ func (s *SDK) DeleteReport(ctx context.Context, request operations.DeleteReportR
 	return res, nil
 }
 
+// DeleteReportPk - Delete a report schedule
 func (s *SDK) DeleteReportPk(ctx context.Context, request operations.DeleteReportPkRequest) (*operations.DeleteReportPkResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/report/{pk}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1420,7 +1458,7 @@ func (s *SDK) DeleteReportPk(ctx context.Context, request operations.DeleteRepor
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1490,8 +1528,9 @@ func (s *SDK) DeleteReportPk(ctx context.Context, request operations.DeleteRepor
 	return res, nil
 }
 
+// DeleteSavedQuery - Deletes multiple saved queries in a bulk operation.
 func (s *SDK) DeleteSavedQuery(ctx context.Context, request operations.DeleteSavedQueryRequest) (*operations.DeleteSavedQueryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/saved_query/"
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1501,7 +1540,7 @@ func (s *SDK) DeleteSavedQuery(ctx context.Context, request operations.DeleteSav
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1571,8 +1610,9 @@ func (s *SDK) DeleteSavedQuery(ctx context.Context, request operations.DeleteSav
 	return res, nil
 }
 
+// DeleteSavedQueryPk - Delete saved query
 func (s *SDK) DeleteSavedQueryPk(ctx context.Context, request operations.DeleteSavedQueryPkRequest) (*operations.DeleteSavedQueryPkResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/saved_query/{pk}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1580,7 +1620,7 @@ func (s *SDK) DeleteSavedQueryPk(ctx context.Context, request operations.DeleteS
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1640,8 +1680,9 @@ func (s *SDK) DeleteSavedQueryPk(ctx context.Context, request operations.DeleteS
 	return res, nil
 }
 
+// GetAnnotationLayer - Get a list of Annotation layers, use Rison or JSON query parameters for filtering, sorting, pagination and for selecting specific columns and metadata.
 func (s *SDK) GetAnnotationLayer(ctx context.Context, request operations.GetAnnotationLayerRequest) (*operations.GetAnnotationLayerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/annotation_layer/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1651,7 +1692,7 @@ func (s *SDK) GetAnnotationLayer(ctx context.Context, request operations.GetAnno
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1721,8 +1762,9 @@ func (s *SDK) GetAnnotationLayer(ctx context.Context, request operations.GetAnno
 	return res, nil
 }
 
+// GetAnnotationLayerInfo - Get metadata information about this API resource
 func (s *SDK) GetAnnotationLayerInfo(ctx context.Context, request operations.GetAnnotationLayerInfoRequest) (*operations.GetAnnotationLayerInfoResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/annotation_layer/_info"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1732,7 +1774,7 @@ func (s *SDK) GetAnnotationLayerInfo(ctx context.Context, request operations.Get
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1802,8 +1844,9 @@ func (s *SDK) GetAnnotationLayerInfo(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetAnnotationLayerPk - Get an Annotation layer
 func (s *SDK) GetAnnotationLayerPk(ctx context.Context, request operations.GetAnnotationLayerPkRequest) (*operations.GetAnnotationLayerPkResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/annotation_layer/{pk}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1813,7 +1856,7 @@ func (s *SDK) GetAnnotationLayerPk(ctx context.Context, request operations.GetAn
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1893,8 +1936,9 @@ func (s *SDK) GetAnnotationLayerPk(ctx context.Context, request operations.GetAn
 	return res, nil
 }
 
+// GetAnnotationLayerPkAnnotation - Get a list of Annotation layers, use Rison or JSON query parameters for filtering, sorting, pagination and for selecting specific columns and metadata.
 func (s *SDK) GetAnnotationLayerPkAnnotation(ctx context.Context, request operations.GetAnnotationLayerPkAnnotationRequest) (*operations.GetAnnotationLayerPkAnnotationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/annotation_layer/{pk}/annotation/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1904,7 +1948,7 @@ func (s *SDK) GetAnnotationLayerPkAnnotation(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1974,8 +2018,9 @@ func (s *SDK) GetAnnotationLayerPkAnnotation(ctx context.Context, request operat
 	return res, nil
 }
 
+// GetAnnotationLayerPkAnnotationAnnotationID - Get an Annotation layer
 func (s *SDK) GetAnnotationLayerPkAnnotationAnnotationID(ctx context.Context, request operations.GetAnnotationLayerPkAnnotationAnnotationIDRequest) (*operations.GetAnnotationLayerPkAnnotationAnnotationIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/annotation_layer/{pk}/annotation/{annotation_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1985,7 +2030,7 @@ func (s *SDK) GetAnnotationLayerPkAnnotationAnnotationID(ctx context.Context, re
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2066,7 +2111,7 @@ func (s *SDK) GetAnnotationLayerPkAnnotationAnnotationID(ctx context.Context, re
 }
 
 func (s *SDK) GetAnnotationLayerRelatedColumnName(ctx context.Context, request operations.GetAnnotationLayerRelatedColumnNameRequest) (*operations.GetAnnotationLayerRelatedColumnNameResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/annotation_layer/related/{column_name}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2076,7 +2121,7 @@ func (s *SDK) GetAnnotationLayerRelatedColumnName(ctx context.Context, request o
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2146,8 +2191,9 @@ func (s *SDK) GetAnnotationLayerRelatedColumnName(ctx context.Context, request o
 	return res, nil
 }
 
+// GetAsyncEvent - Reads off of the Redis events stream, using the user's JWT token and optional query params for last event received.
 func (s *SDK) GetAsyncEvent(ctx context.Context, request operations.GetAsyncEventRequest) (*operations.GetAsyncEventResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/async_event/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2157,7 +2203,7 @@ func (s *SDK) GetAsyncEvent(ctx context.Context, request operations.GetAsyncEven
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2207,8 +2253,9 @@ func (s *SDK) GetAsyncEvent(ctx context.Context, request operations.GetAsyncEven
 	return res, nil
 }
 
+// GetChart - Get a list of charts, use Rison or JSON query parameters for filtering, sorting, pagination and  for selecting specific columns and metadata.
 func (s *SDK) GetChart(ctx context.Context, request operations.GetChartRequest) (*operations.GetChartResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/chart/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2218,7 +2265,7 @@ func (s *SDK) GetChart(ctx context.Context, request operations.GetChartRequest) 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2288,8 +2335,9 @@ func (s *SDK) GetChart(ctx context.Context, request operations.GetChartRequest) 
 	return res, nil
 }
 
+// GetChartDataCacheKey - Takes a query context cache key and returns payload data response for the given query.
 func (s *SDK) GetChartDataCacheKey(ctx context.Context, request operations.GetChartDataCacheKeyRequest) (*operations.GetChartDataCacheKeyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/chart/data/{cache_key}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2297,7 +2345,7 @@ func (s *SDK) GetChartDataCacheKey(ctx context.Context, request operations.GetCh
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2377,8 +2425,9 @@ func (s *SDK) GetChartDataCacheKey(ctx context.Context, request operations.GetCh
 	return res, nil
 }
 
+// GetChartExport - Exports multiple charts and downloads them as YAML files
 func (s *SDK) GetChartExport(ctx context.Context, request operations.GetChartExportRequest) (*operations.GetChartExportResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/chart/export/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2388,7 +2437,7 @@ func (s *SDK) GetChartExport(ctx context.Context, request operations.GetChartExp
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2458,8 +2507,9 @@ func (s *SDK) GetChartExport(ctx context.Context, request operations.GetChartExp
 	return res, nil
 }
 
+// GetChartFavoriteStatus - Check favorited dashboards for current user
 func (s *SDK) GetChartFavoriteStatus(ctx context.Context, request operations.GetChartFavoriteStatusRequest) (*operations.GetChartFavoriteStatusResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/chart/favorite_status/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2469,7 +2519,7 @@ func (s *SDK) GetChartFavoriteStatus(ctx context.Context, request operations.Get
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2539,8 +2589,9 @@ func (s *SDK) GetChartFavoriteStatus(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetChartInfo - Several metadata information about chart API endpoints.
 func (s *SDK) GetChartInfo(ctx context.Context, request operations.GetChartInfoRequest) (*operations.GetChartInfoResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/chart/_info"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2550,7 +2601,7 @@ func (s *SDK) GetChartInfo(ctx context.Context, request operations.GetChartInfoR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2620,8 +2671,9 @@ func (s *SDK) GetChartInfo(ctx context.Context, request operations.GetChartInfoR
 	return res, nil
 }
 
+// GetChartPk - Get a chart detail information.
 func (s *SDK) GetChartPk(ctx context.Context, request operations.GetChartPkRequest) (*operations.GetChartPkResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/chart/{pk}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2631,7 +2683,7 @@ func (s *SDK) GetChartPk(ctx context.Context, request operations.GetChartPkReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2711,8 +2763,9 @@ func (s *SDK) GetChartPk(ctx context.Context, request operations.GetChartPkReque
 	return res, nil
 }
 
+// GetChartPkCacheScreenshot - Compute and cache a screenshot.
 func (s *SDK) GetChartPkCacheScreenshot(ctx context.Context, request operations.GetChartPkCacheScreenshotRequest) (*operations.GetChartPkCacheScreenshotResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/chart/{pk}/cache_screenshot/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2722,7 +2775,7 @@ func (s *SDK) GetChartPkCacheScreenshot(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2793,8 +2846,9 @@ func (s *SDK) GetChartPkCacheScreenshot(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetChartPkData - Takes a chart ID and uses the query context stored when the chart was saved to return payload data response.
 func (s *SDK) GetChartPkData(ctx context.Context, request operations.GetChartPkDataRequest) (*operations.GetChartPkDataResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/chart/{pk}/data/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2804,7 +2858,7 @@ func (s *SDK) GetChartPkData(ctx context.Context, request operations.GetChartPkD
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2874,8 +2928,9 @@ func (s *SDK) GetChartPkData(ctx context.Context, request operations.GetChartPkD
 	return res, nil
 }
 
+// GetChartPkScreenshotDigest - Get a computed screenshot from cache.
 func (s *SDK) GetChartPkScreenshotDigest(ctx context.Context, request operations.GetChartPkScreenshotDigestRequest) (*operations.GetChartPkScreenshotDigestResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/chart/{pk}/screenshot/{digest}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2883,7 +2938,7 @@ func (s *SDK) GetChartPkScreenshotDigest(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2954,8 +3009,9 @@ func (s *SDK) GetChartPkScreenshotDigest(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetChartPkThumbnailDigest - Compute or get already computed chart thumbnail from cache.
 func (s *SDK) GetChartPkThumbnailDigest(ctx context.Context, request operations.GetChartPkThumbnailDigestRequest) (*operations.GetChartPkThumbnailDigestResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/chart/{pk}/thumbnail/{digest}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2963,7 +3019,7 @@ func (s *SDK) GetChartPkThumbnailDigest(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3034,8 +3090,9 @@ func (s *SDK) GetChartPkThumbnailDigest(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetChartRelatedColumnName - Get a list of all possible owners for a chart. Use `owners` has the `column_name` parameter
 func (s *SDK) GetChartRelatedColumnName(ctx context.Context, request operations.GetChartRelatedColumnNameRequest) (*operations.GetChartRelatedColumnNameResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/chart/related/{column_name}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3045,7 +3102,7 @@ func (s *SDK) GetChartRelatedColumnName(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3115,8 +3172,9 @@ func (s *SDK) GetChartRelatedColumnName(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetCSSTemplate - Get a list of CSS templates, use Rison or JSON query parameters for filtering, sorting, pagination and for selecting specific columns and metadata.
 func (s *SDK) GetCSSTemplate(ctx context.Context, request operations.GetCSSTemplateRequest) (*operations.GetCSSTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/css_template/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3126,7 +3184,7 @@ func (s *SDK) GetCSSTemplate(ctx context.Context, request operations.GetCSSTempl
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3196,8 +3254,9 @@ func (s *SDK) GetCSSTemplate(ctx context.Context, request operations.GetCSSTempl
 	return res, nil
 }
 
+// GetCSSTemplateInfo - Get metadata information about this API resource
 func (s *SDK) GetCSSTemplateInfo(ctx context.Context, request operations.GetCSSTemplateInfoRequest) (*operations.GetCSSTemplateInfoResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/css_template/_info"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3207,7 +3266,7 @@ func (s *SDK) GetCSSTemplateInfo(ctx context.Context, request operations.GetCSST
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3277,8 +3336,9 @@ func (s *SDK) GetCSSTemplateInfo(ctx context.Context, request operations.GetCSST
 	return res, nil
 }
 
+// GetCSSTemplatePk - Get a CSS template
 func (s *SDK) GetCSSTemplatePk(ctx context.Context, request operations.GetCSSTemplatePkRequest) (*operations.GetCSSTemplatePkResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/css_template/{pk}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3288,7 +3348,7 @@ func (s *SDK) GetCSSTemplatePk(ctx context.Context, request operations.GetCSSTem
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3369,7 +3429,7 @@ func (s *SDK) GetCSSTemplatePk(ctx context.Context, request operations.GetCSSTem
 }
 
 func (s *SDK) GetCSSTemplateRelatedColumnName(ctx context.Context, request operations.GetCSSTemplateRelatedColumnNameRequest) (*operations.GetCSSTemplateRelatedColumnNameResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/css_template/related/{column_name}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3379,7 +3439,7 @@ func (s *SDK) GetCSSTemplateRelatedColumnName(ctx context.Context, request opera
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3449,8 +3509,9 @@ func (s *SDK) GetCSSTemplateRelatedColumnName(ctx context.Context, request opera
 	return res, nil
 }
 
+// GetDashboard - Get a list of dashboards, use Rison or JSON query parameters for filtering, sorting, pagination and  for selecting specific columns and metadata.
 func (s *SDK) GetDashboard(ctx context.Context, request operations.GetDashboardRequest) (*operations.GetDashboardResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dashboard/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3460,7 +3521,7 @@ func (s *SDK) GetDashboard(ctx context.Context, request operations.GetDashboardR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3530,8 +3591,9 @@ func (s *SDK) GetDashboard(ctx context.Context, request operations.GetDashboardR
 	return res, nil
 }
 
+// GetDashboardExport - Exports multiple Dashboards and downloads them as YAML files.
 func (s *SDK) GetDashboardExport(ctx context.Context, request operations.GetDashboardExportRequest) (*operations.GetDashboardExportResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dashboard/export/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3541,7 +3603,7 @@ func (s *SDK) GetDashboardExport(ctx context.Context, request operations.GetDash
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3622,8 +3684,9 @@ func (s *SDK) GetDashboardExport(ctx context.Context, request operations.GetDash
 	return res, nil
 }
 
+// GetDashboardFavoriteStatus - Check favorited dashboards for current user
 func (s *SDK) GetDashboardFavoriteStatus(ctx context.Context, request operations.GetDashboardFavoriteStatusRequest) (*operations.GetDashboardFavoriteStatusResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dashboard/favorite_status/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3633,7 +3696,7 @@ func (s *SDK) GetDashboardFavoriteStatus(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3703,8 +3766,9 @@ func (s *SDK) GetDashboardFavoriteStatus(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetDashboardIDOrSlug - Get a dashboard detail information.
 func (s *SDK) GetDashboardIDOrSlug(ctx context.Context, request operations.GetDashboardIDOrSlugRequest) (*operations.GetDashboardIDOrSlugResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dashboard/{id_or_slug}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3712,7 +3776,7 @@ func (s *SDK) GetDashboardIDOrSlug(ctx context.Context, request operations.GetDa
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3773,8 +3837,9 @@ func (s *SDK) GetDashboardIDOrSlug(ctx context.Context, request operations.GetDa
 	return res, nil
 }
 
+// GetDashboardIDOrSlugCharts - Get the chart definitions for a given dashboard
 func (s *SDK) GetDashboardIDOrSlugCharts(ctx context.Context, request operations.GetDashboardIDOrSlugChartsRequest) (*operations.GetDashboardIDOrSlugChartsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dashboard/{id_or_slug}/charts", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3782,7 +3847,7 @@ func (s *SDK) GetDashboardIDOrSlugCharts(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3843,8 +3908,9 @@ func (s *SDK) GetDashboardIDOrSlugCharts(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetDashboardIDOrSlugDatasets - Returns a list of a dashboard's datasets. Each dataset includes only the information necessary to render the dashboard's charts.
 func (s *SDK) GetDashboardIDOrSlugDatasets(ctx context.Context, request operations.GetDashboardIDOrSlugDatasetsRequest) (*operations.GetDashboardIDOrSlugDatasetsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dashboard/{id_or_slug}/datasets", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3852,7 +3918,7 @@ func (s *SDK) GetDashboardIDOrSlugDatasets(ctx context.Context, request operatio
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3913,8 +3979,9 @@ func (s *SDK) GetDashboardIDOrSlugDatasets(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetDashboardInfo - Several metadata information about dashboard API endpoints.
 func (s *SDK) GetDashboardInfo(ctx context.Context, request operations.GetDashboardInfoRequest) (*operations.GetDashboardInfoResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dashboard/_info"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3924,7 +3991,7 @@ func (s *SDK) GetDashboardInfo(ctx context.Context, request operations.GetDashbo
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3994,8 +4061,9 @@ func (s *SDK) GetDashboardInfo(ctx context.Context, request operations.GetDashbo
 	return res, nil
 }
 
+// GetDashboardPkThumbnailDigest - Compute async or get already computed dashboard thumbnail from cache.
 func (s *SDK) GetDashboardPkThumbnailDigest(ctx context.Context, request operations.GetDashboardPkThumbnailDigestRequest) (*operations.GetDashboardPkThumbnailDigestResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dashboard/{pk}/thumbnail/{digest}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4005,7 +4073,7 @@ func (s *SDK) GetDashboardPkThumbnailDigest(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4085,8 +4153,9 @@ func (s *SDK) GetDashboardPkThumbnailDigest(ctx context.Context, request operati
 	return res, nil
 }
 
+// GetDashboardRelatedColumnName - Get a list of all possible owners for a dashboard.
 func (s *SDK) GetDashboardRelatedColumnName(ctx context.Context, request operations.GetDashboardRelatedColumnNameRequest) (*operations.GetDashboardRelatedColumnNameResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dashboard/related/{column_name}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4096,7 +4165,7 @@ func (s *SDK) GetDashboardRelatedColumnName(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4166,8 +4235,9 @@ func (s *SDK) GetDashboardRelatedColumnName(ctx context.Context, request operati
 	return res, nil
 }
 
+// GetDatabase - Get a list of models
 func (s *SDK) GetDatabase(ctx context.Context, request operations.GetDatabaseRequest) (*operations.GetDatabaseResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/database/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4177,7 +4247,7 @@ func (s *SDK) GetDatabase(ctx context.Context, request operations.GetDatabaseReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4247,8 +4317,9 @@ func (s *SDK) GetDatabase(ctx context.Context, request operations.GetDatabaseReq
 	return res, nil
 }
 
+// GetDatabaseAvailable - Get names of databases currently available
 func (s *SDK) GetDatabaseAvailable(ctx context.Context, request operations.GetDatabaseAvailableRequest) (*operations.GetDatabaseAvailableResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/database/available/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4256,7 +4327,7 @@ func (s *SDK) GetDatabaseAvailable(ctx context.Context, request operations.GetDa
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4306,8 +4377,9 @@ func (s *SDK) GetDatabaseAvailable(ctx context.Context, request operations.GetDa
 	return res, nil
 }
 
+// GetDatabaseExport - Download database(s) and associated dataset(s) as a zip file
 func (s *SDK) GetDatabaseExport(ctx context.Context, request operations.GetDatabaseExportRequest) (*operations.GetDatabaseExportResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/database/export/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4317,7 +4389,7 @@ func (s *SDK) GetDatabaseExport(ctx context.Context, request operations.GetDatab
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4377,8 +4449,9 @@ func (s *SDK) GetDatabaseExport(ctx context.Context, request operations.GetDatab
 	return res, nil
 }
 
+// GetDatabaseInfo - Get metadata information about this API resource
 func (s *SDK) GetDatabaseInfo(ctx context.Context, request operations.GetDatabaseInfoRequest) (*operations.GetDatabaseInfoResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/database/_info"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4388,7 +4461,7 @@ func (s *SDK) GetDatabaseInfo(ctx context.Context, request operations.GetDatabas
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4458,8 +4531,9 @@ func (s *SDK) GetDatabaseInfo(ctx context.Context, request operations.GetDatabas
 	return res, nil
 }
 
+// GetDatabasePk - Get an item model
 func (s *SDK) GetDatabasePk(ctx context.Context, request operations.GetDatabasePkRequest) (*operations.GetDatabasePkResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/database/{pk}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4469,7 +4543,7 @@ func (s *SDK) GetDatabasePk(ctx context.Context, request operations.GetDatabaseP
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4549,8 +4623,9 @@ func (s *SDK) GetDatabasePk(ctx context.Context, request operations.GetDatabaseP
 	return res, nil
 }
 
+// GetDatabasePkFunctionNames - Get function names supported by a database
 func (s *SDK) GetDatabasePkFunctionNames(ctx context.Context, request operations.GetDatabasePkFunctionNamesRequest) (*operations.GetDatabasePkFunctionNamesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/database/{pk}/function_names/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4558,7 +4633,7 @@ func (s *SDK) GetDatabasePkFunctionNames(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4618,8 +4693,9 @@ func (s *SDK) GetDatabasePkFunctionNames(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetDatabasePkRelatedObjects - Get charts and dashboards count associated to a database
 func (s *SDK) GetDatabasePkRelatedObjects(ctx context.Context, request operations.GetDatabasePkRelatedObjectsRequest) (*operations.GetDatabasePkRelatedObjectsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/database/{pk}/related_objects/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4627,7 +4703,7 @@ func (s *SDK) GetDatabasePkRelatedObjects(ctx context.Context, request operation
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4687,8 +4763,9 @@ func (s *SDK) GetDatabasePkRelatedObjects(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetDatabasePkSchemas - Get all schemas from a database
 func (s *SDK) GetDatabasePkSchemas(ctx context.Context, request operations.GetDatabasePkSchemasRequest) (*operations.GetDatabasePkSchemasResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/database/{pk}/schemas/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4698,7 +4775,7 @@ func (s *SDK) GetDatabasePkSchemas(ctx context.Context, request operations.GetDa
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4768,8 +4845,9 @@ func (s *SDK) GetDatabasePkSchemas(ctx context.Context, request operations.GetDa
 	return res, nil
 }
 
+// GetDatabasePkSelectStarTableName - Get database select star for table
 func (s *SDK) GetDatabasePkSelectStarTableName(ctx context.Context, request operations.GetDatabasePkSelectStarTableNameRequest) (*operations.GetDatabasePkSelectStarTableNameResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/database/{pk}/select_star/{table_name}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4779,7 +4857,7 @@ func (s *SDK) GetDatabasePkSelectStarTableName(ctx context.Context, request oper
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4859,8 +4937,9 @@ func (s *SDK) GetDatabasePkSelectStarTableName(ctx context.Context, request oper
 	return res, nil
 }
 
+// GetDatabasePkSelectStarTableNameSchemaName - Get database select star for table
 func (s *SDK) GetDatabasePkSelectStarTableNameSchemaName(ctx context.Context, request operations.GetDatabasePkSelectStarTableNameSchemaNameRequest) (*operations.GetDatabasePkSelectStarTableNameSchemaNameResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/database/{pk}/select_star/{table_name}/{schema_name}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4868,7 +4947,7 @@ func (s *SDK) GetDatabasePkSelectStarTableNameSchemaName(ctx context.Context, re
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4948,8 +5027,9 @@ func (s *SDK) GetDatabasePkSelectStarTableNameSchemaName(ctx context.Context, re
 	return res, nil
 }
 
+// GetDatabasePkTableTableNameSchemaName - Get database table metadata
 func (s *SDK) GetDatabasePkTableTableNameSchemaName(ctx context.Context, request operations.GetDatabasePkTableTableNameSchemaNameRequest) (*operations.GetDatabasePkTableTableNameSchemaNameResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/database/{pk}/table/{table_name}/{schema_name}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4957,7 +5037,7 @@ func (s *SDK) GetDatabasePkTableTableNameSchemaName(ctx context.Context, request
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5037,8 +5117,9 @@ func (s *SDK) GetDatabasePkTableTableNameSchemaName(ctx context.Context, request
 	return res, nil
 }
 
+// GetDataset - Get a list of models
 func (s *SDK) GetDataset(ctx context.Context, request operations.GetDatasetRequest) (*operations.GetDatasetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dataset/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5048,7 +5129,7 @@ func (s *SDK) GetDataset(ctx context.Context, request operations.GetDatasetReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5119,7 +5200,7 @@ func (s *SDK) GetDataset(ctx context.Context, request operations.GetDatasetReque
 }
 
 func (s *SDK) GetDatasetDistinctColumnName(ctx context.Context, request operations.GetDatasetDistinctColumnNameRequest) (*operations.GetDatasetDistinctColumnNameResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dataset/distinct/{column_name}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5129,7 +5210,7 @@ func (s *SDK) GetDatasetDistinctColumnName(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5199,8 +5280,9 @@ func (s *SDK) GetDatasetDistinctColumnName(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetDatasetExport - Exports multiple datasets and downloads them as YAML files
 func (s *SDK) GetDatasetExport(ctx context.Context, request operations.GetDatasetExportRequest) (*operations.GetDatasetExportResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dataset/export/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5210,7 +5292,7 @@ func (s *SDK) GetDatasetExport(ctx context.Context, request operations.GetDatase
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5281,8 +5363,9 @@ func (s *SDK) GetDatasetExport(ctx context.Context, request operations.GetDatase
 	return res, nil
 }
 
+// GetDatasetInfo - Get metadata information about this API resource
 func (s *SDK) GetDatasetInfo(ctx context.Context, request operations.GetDatasetInfoRequest) (*operations.GetDatasetInfoResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dataset/_info"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5292,7 +5375,7 @@ func (s *SDK) GetDatasetInfo(ctx context.Context, request operations.GetDatasetI
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5362,8 +5445,9 @@ func (s *SDK) GetDatasetInfo(ctx context.Context, request operations.GetDatasetI
 	return res, nil
 }
 
+// GetDatasetPk - Get an item model
 func (s *SDK) GetDatasetPk(ctx context.Context, request operations.GetDatasetPkRequest) (*operations.GetDatasetPkResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dataset/{pk}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5373,7 +5457,7 @@ func (s *SDK) GetDatasetPk(ctx context.Context, request operations.GetDatasetPkR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5453,8 +5537,9 @@ func (s *SDK) GetDatasetPk(ctx context.Context, request operations.GetDatasetPkR
 	return res, nil
 }
 
+// GetDatasetPkRelatedObjects - Get charts and dashboards count associated to a dataset
 func (s *SDK) GetDatasetPkRelatedObjects(ctx context.Context, request operations.GetDatasetPkRelatedObjectsRequest) (*operations.GetDatasetPkRelatedObjectsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dataset/{pk}/related_objects", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5462,7 +5547,7 @@ func (s *SDK) GetDatasetPkRelatedObjects(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5523,7 +5608,7 @@ func (s *SDK) GetDatasetPkRelatedObjects(ctx context.Context, request operations
 }
 
 func (s *SDK) GetDatasetRelatedColumnName(ctx context.Context, request operations.GetDatasetRelatedColumnNameRequest) (*operations.GetDatasetRelatedColumnNameResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dataset/related/{column_name}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5533,7 +5618,7 @@ func (s *SDK) GetDatasetRelatedColumnName(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5603,8 +5688,9 @@ func (s *SDK) GetDatasetRelatedColumnName(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetLog - Get a list of models
 func (s *SDK) GetLog(ctx context.Context, request operations.GetLogRequest) (*operations.GetLogResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/log/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5614,7 +5700,7 @@ func (s *SDK) GetLog(ctx context.Context, request operations.GetLogRequest) (*op
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5684,8 +5770,9 @@ func (s *SDK) GetLog(ctx context.Context, request operations.GetLogRequest) (*op
 	return res, nil
 }
 
+// GetLogPk - Get an item model
 func (s *SDK) GetLogPk(ctx context.Context, request operations.GetLogPkRequest) (*operations.GetLogPkResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/log/{pk}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5695,7 +5782,7 @@ func (s *SDK) GetLogPk(ctx context.Context, request operations.GetLogPkRequest) 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5775,8 +5862,9 @@ func (s *SDK) GetLogPk(ctx context.Context, request operations.GetLogPkRequest) 
 	return res, nil
 }
 
+// GetMenu - Get the menu data structure. Returns a forest like structure with the menu the user has access to
 func (s *SDK) GetMenu(ctx context.Context, request operations.GetMenuRequest) (*operations.GetMenuResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/menu/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5784,7 +5872,7 @@ func (s *SDK) GetMenu(ctx context.Context, request operations.GetMenuRequest) (*
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5824,8 +5912,9 @@ func (s *SDK) GetMenu(ctx context.Context, request operations.GetMenuRequest) (*
 	return res, nil
 }
 
+// GetOpenapiVersionOpenapi - Get the OpenAPI spec for a specific API version
 func (s *SDK) GetOpenapiVersionOpenapi(ctx context.Context, request operations.GetOpenapiVersionOpenapiRequest) (*operations.GetOpenapiVersionOpenapiResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/openapi/{version}/_openapi", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5833,7 +5922,7 @@ func (s *SDK) GetOpenapiVersionOpenapi(ctx context.Context, request operations.G
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5883,8 +5972,9 @@ func (s *SDK) GetOpenapiVersionOpenapi(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetQuery - Get a list of queries, use Rison or JSON query parameters for filtering, sorting, pagination and  for selecting specific columns and metadata.
 func (s *SDK) GetQuery(ctx context.Context, request operations.GetQueryRequest) (*operations.GetQueryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/query/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5894,7 +5984,7 @@ func (s *SDK) GetQuery(ctx context.Context, request operations.GetQueryRequest) 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5965,7 +6055,7 @@ func (s *SDK) GetQuery(ctx context.Context, request operations.GetQueryRequest) 
 }
 
 func (s *SDK) GetQueryDistinctColumnName(ctx context.Context, request operations.GetQueryDistinctColumnNameRequest) (*operations.GetQueryDistinctColumnNameResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/query/distinct/{column_name}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5975,7 +6065,7 @@ func (s *SDK) GetQueryDistinctColumnName(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6045,8 +6135,9 @@ func (s *SDK) GetQueryDistinctColumnName(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetQueryPk - Get query detail information.
 func (s *SDK) GetQueryPk(ctx context.Context, request operations.GetQueryPkRequest) (*operations.GetQueryPkResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/query/{pk}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6056,7 +6147,7 @@ func (s *SDK) GetQueryPk(ctx context.Context, request operations.GetQueryPkReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6137,7 +6228,7 @@ func (s *SDK) GetQueryPk(ctx context.Context, request operations.GetQueryPkReque
 }
 
 func (s *SDK) GetQueryRelatedColumnName(ctx context.Context, request operations.GetQueryRelatedColumnNameRequest) (*operations.GetQueryRelatedColumnNameResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/query/related/{column_name}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6147,7 +6238,7 @@ func (s *SDK) GetQueryRelatedColumnName(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6217,8 +6308,9 @@ func (s *SDK) GetQueryRelatedColumnName(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetReport - Get a list of report schedules, use Rison or JSON query parameters for filtering, sorting, pagination and for selecting specific columns and metadata.
 func (s *SDK) GetReport(ctx context.Context, request operations.GetReportRequest) (*operations.GetReportResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/report/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6228,7 +6320,7 @@ func (s *SDK) GetReport(ctx context.Context, request operations.GetReportRequest
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6298,8 +6390,9 @@ func (s *SDK) GetReport(ctx context.Context, request operations.GetReportRequest
 	return res, nil
 }
 
+// GetReportInfo - Get metadata information about this API resource
 func (s *SDK) GetReportInfo(ctx context.Context, request operations.GetReportInfoRequest) (*operations.GetReportInfoResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/report/_info"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6309,7 +6402,7 @@ func (s *SDK) GetReportInfo(ctx context.Context, request operations.GetReportInf
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6379,8 +6472,9 @@ func (s *SDK) GetReportInfo(ctx context.Context, request operations.GetReportInf
 	return res, nil
 }
 
+// GetReportPk - Get a report schedule
 func (s *SDK) GetReportPk(ctx context.Context, request operations.GetReportPkRequest) (*operations.GetReportPkResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/report/{pk}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6390,7 +6484,7 @@ func (s *SDK) GetReportPk(ctx context.Context, request operations.GetReportPkReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6470,8 +6564,9 @@ func (s *SDK) GetReportPk(ctx context.Context, request operations.GetReportPkReq
 	return res, nil
 }
 
+// GetReportPkLog - Get a list of report schedule logs, use Rison or JSON query parameters for filtering, sorting, pagination and for selecting specific columns and metadata.
 func (s *SDK) GetReportPkLog(ctx context.Context, request operations.GetReportPkLogRequest) (*operations.GetReportPkLogResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/report/{pk}/log/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6481,7 +6576,7 @@ func (s *SDK) GetReportPkLog(ctx context.Context, request operations.GetReportPk
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6551,8 +6646,9 @@ func (s *SDK) GetReportPkLog(ctx context.Context, request operations.GetReportPk
 	return res, nil
 }
 
+// GetReportPkLogLogID - Get a report schedule log
 func (s *SDK) GetReportPkLogLogID(ctx context.Context, request operations.GetReportPkLogLogIDRequest) (*operations.GetReportPkLogLogIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/report/{pk}/log/{log_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6562,7 +6658,7 @@ func (s *SDK) GetReportPkLogLogID(ctx context.Context, request operations.GetRep
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6643,7 +6739,7 @@ func (s *SDK) GetReportPkLogLogID(ctx context.Context, request operations.GetRep
 }
 
 func (s *SDK) GetReportRelatedColumnName(ctx context.Context, request operations.GetReportRelatedColumnNameRequest) (*operations.GetReportRelatedColumnNameResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/report/related/{column_name}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6653,7 +6749,7 @@ func (s *SDK) GetReportRelatedColumnName(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6723,8 +6819,9 @@ func (s *SDK) GetReportRelatedColumnName(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetSavedQuery - Get a list of saved queries, use Rison or JSON query parameters for filtering, sorting, pagination and for selecting specific columns and metadata.
 func (s *SDK) GetSavedQuery(ctx context.Context, request operations.GetSavedQueryRequest) (*operations.GetSavedQueryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/saved_query/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6734,7 +6831,7 @@ func (s *SDK) GetSavedQuery(ctx context.Context, request operations.GetSavedQuer
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6805,7 +6902,7 @@ func (s *SDK) GetSavedQuery(ctx context.Context, request operations.GetSavedQuer
 }
 
 func (s *SDK) GetSavedQueryDistinctColumnName(ctx context.Context, request operations.GetSavedQueryDistinctColumnNameRequest) (*operations.GetSavedQueryDistinctColumnNameResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/saved_query/distinct/{column_name}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6815,7 +6912,7 @@ func (s *SDK) GetSavedQueryDistinctColumnName(ctx context.Context, request opera
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6885,8 +6982,9 @@ func (s *SDK) GetSavedQueryDistinctColumnName(ctx context.Context, request opera
 	return res, nil
 }
 
+// GetSavedQueryExport - Exports multiple saved queries and downloads them as YAML files
 func (s *SDK) GetSavedQueryExport(ctx context.Context, request operations.GetSavedQueryExportRequest) (*operations.GetSavedQueryExportResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/saved_query/export/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6896,7 +6994,7 @@ func (s *SDK) GetSavedQueryExport(ctx context.Context, request operations.GetSav
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6966,8 +7064,9 @@ func (s *SDK) GetSavedQueryExport(ctx context.Context, request operations.GetSav
 	return res, nil
 }
 
+// GetSavedQueryInfo - Get metadata information about this API resource
 func (s *SDK) GetSavedQueryInfo(ctx context.Context, request operations.GetSavedQueryInfoRequest) (*operations.GetSavedQueryInfoResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/saved_query/_info"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6977,7 +7076,7 @@ func (s *SDK) GetSavedQueryInfo(ctx context.Context, request operations.GetSaved
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7047,8 +7146,9 @@ func (s *SDK) GetSavedQueryInfo(ctx context.Context, request operations.GetSaved
 	return res, nil
 }
 
+// GetSavedQueryPk - Get a saved query
 func (s *SDK) GetSavedQueryPk(ctx context.Context, request operations.GetSavedQueryPkRequest) (*operations.GetSavedQueryPkResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/saved_query/{pk}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7058,7 +7158,7 @@ func (s *SDK) GetSavedQueryPk(ctx context.Context, request operations.GetSavedQu
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7139,7 +7239,7 @@ func (s *SDK) GetSavedQueryPk(ctx context.Context, request operations.GetSavedQu
 }
 
 func (s *SDK) GetSavedQueryRelatedColumnName(ctx context.Context, request operations.GetSavedQueryRelatedColumnNameRequest) (*operations.GetSavedQueryRelatedColumnNameResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/saved_query/related/{column_name}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7149,7 +7249,7 @@ func (s *SDK) GetSavedQueryRelatedColumnName(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7219,8 +7319,9 @@ func (s *SDK) GetSavedQueryRelatedColumnName(ctx context.Context, request operat
 	return res, nil
 }
 
+// GetSecurityCsrfToken - Fetch the CSRF token
 func (s *SDK) GetSecurityCsrfToken(ctx context.Context, request operations.GetSecurityCsrfTokenRequest) (*operations.GetSecurityCsrfTokenResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/security/csrf_token/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7228,7 +7329,7 @@ func (s *SDK) GetSecurityCsrfToken(ctx context.Context, request operations.GetSe
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7278,8 +7379,9 @@ func (s *SDK) GetSecurityCsrfToken(ctx context.Context, request operations.GetSe
 	return res, nil
 }
 
+// PostAnnotationLayer - Create an Annotation layer
 func (s *SDK) PostAnnotationLayer(ctx context.Context, request operations.PostAnnotationLayerRequest) (*operations.PostAnnotationLayerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/annotation_layer/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7297,7 +7399,7 @@ func (s *SDK) PostAnnotationLayer(ctx context.Context, request operations.PostAn
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7367,8 +7469,9 @@ func (s *SDK) PostAnnotationLayer(ctx context.Context, request operations.PostAn
 	return res, nil
 }
 
+// PostAnnotationLayerPkAnnotation - Create an Annotation layer
 func (s *SDK) PostAnnotationLayerPkAnnotation(ctx context.Context, request operations.PostAnnotationLayerPkAnnotationRequest) (*operations.PostAnnotationLayerPkAnnotationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/annotation_layer/{pk}/annotation/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7386,7 +7489,7 @@ func (s *SDK) PostAnnotationLayerPkAnnotation(ctx context.Context, request opera
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7456,8 +7559,9 @@ func (s *SDK) PostAnnotationLayerPkAnnotation(ctx context.Context, request opera
 	return res, nil
 }
 
+// PostCachekeyInvalidate - Takes a list of datasources, finds the associated cache records and invalidates them and removes the database records
 func (s *SDK) PostCachekeyInvalidate(ctx context.Context, request operations.PostCachekeyInvalidateRequest) (*operations.PostCachekeyInvalidateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/cachekey/invalidate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7475,7 +7579,7 @@ func (s *SDK) PostCachekeyInvalidate(ctx context.Context, request operations.Pos
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7516,8 +7620,9 @@ func (s *SDK) PostCachekeyInvalidate(ctx context.Context, request operations.Pos
 	return res, nil
 }
 
+// PostChart - Create a new Chart.
 func (s *SDK) PostChart(ctx context.Context, request operations.PostChartRequest) (*operations.PostChartResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/chart/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7535,7 +7640,7 @@ func (s *SDK) PostChart(ctx context.Context, request operations.PostChartRequest
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7605,8 +7710,9 @@ func (s *SDK) PostChart(ctx context.Context, request operations.PostChartRequest
 	return res, nil
 }
 
+// PostChartData - Takes a query context constructed in the client and returns payload data response for the given query.
 func (s *SDK) PostChartData(ctx context.Context, request operations.PostChartDataRequest) (*operations.PostChartDataResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/chart/data"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7624,7 +7730,7 @@ func (s *SDK) PostChartData(ctx context.Context, request operations.PostChartDat
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7695,7 +7801,7 @@ func (s *SDK) PostChartData(ctx context.Context, request operations.PostChartDat
 }
 
 func (s *SDK) PostChartImport(ctx context.Context, request operations.PostChartImportRequest) (*operations.PostChartImportResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/chart/import/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7713,7 +7819,7 @@ func (s *SDK) PostChartImport(ctx context.Context, request operations.PostChartI
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7783,8 +7889,9 @@ func (s *SDK) PostChartImport(ctx context.Context, request operations.PostChartI
 	return res, nil
 }
 
+// PostCSSTemplate - Create a CSS template
 func (s *SDK) PostCSSTemplate(ctx context.Context, request operations.PostCSSTemplateRequest) (*operations.PostCSSTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/css_template/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7802,7 +7909,7 @@ func (s *SDK) PostCSSTemplate(ctx context.Context, request operations.PostCSSTem
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7872,8 +7979,9 @@ func (s *SDK) PostCSSTemplate(ctx context.Context, request operations.PostCSSTem
 	return res, nil
 }
 
+// PostDashboard - Create a new Dashboard.
 func (s *SDK) PostDashboard(ctx context.Context, request operations.PostDashboardRequest) (*operations.PostDashboardResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dashboard/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7891,7 +7999,7 @@ func (s *SDK) PostDashboard(ctx context.Context, request operations.PostDashboar
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7963,7 +8071,7 @@ func (s *SDK) PostDashboard(ctx context.Context, request operations.PostDashboar
 }
 
 func (s *SDK) PostDashboardImport(ctx context.Context, request operations.PostDashboardImportRequest) (*operations.PostDashboardImportResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dashboard/import/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7981,7 +8089,7 @@ func (s *SDK) PostDashboardImport(ctx context.Context, request operations.PostDa
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8051,8 +8159,9 @@ func (s *SDK) PostDashboardImport(ctx context.Context, request operations.PostDa
 	return res, nil
 }
 
+// PostDatabase - Create a new Database.
 func (s *SDK) PostDatabase(ctx context.Context, request operations.PostDatabaseRequest) (*operations.PostDatabaseResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/database/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -8070,7 +8179,7 @@ func (s *SDK) PostDatabase(ctx context.Context, request operations.PostDatabaseR
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8142,7 +8251,7 @@ func (s *SDK) PostDatabase(ctx context.Context, request operations.PostDatabaseR
 }
 
 func (s *SDK) PostDatabaseImport(ctx context.Context, request operations.PostDatabaseImportRequest) (*operations.PostDatabaseImportResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/database/import/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -8160,7 +8269,7 @@ func (s *SDK) PostDatabaseImport(ctx context.Context, request operations.PostDat
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8230,8 +8339,9 @@ func (s *SDK) PostDatabaseImport(ctx context.Context, request operations.PostDat
 	return res, nil
 }
 
+// PostDatabaseTestConnection - Tests a database connection
 func (s *SDK) PostDatabaseTestConnection(ctx context.Context, request operations.PostDatabaseTestConnectionRequest) (*operations.PostDatabaseTestConnectionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/database/test_connection"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -8249,7 +8359,7 @@ func (s *SDK) PostDatabaseTestConnection(ctx context.Context, request operations
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8309,8 +8419,9 @@ func (s *SDK) PostDatabaseTestConnection(ctx context.Context, request operations
 	return res, nil
 }
 
+// PostDatabaseValidateParameters - Validates parameters used to connect to a database
 func (s *SDK) PostDatabaseValidateParameters(ctx context.Context, request operations.PostDatabaseValidateParametersRequest) (*operations.PostDatabaseValidateParametersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/database/validate_parameters"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -8328,7 +8439,7 @@ func (s *SDK) PostDatabaseValidateParameters(ctx context.Context, request operat
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8388,8 +8499,9 @@ func (s *SDK) PostDatabaseValidateParameters(ctx context.Context, request operat
 	return res, nil
 }
 
+// PostDataset - Create a new Dataset
 func (s *SDK) PostDataset(ctx context.Context, request operations.PostDatasetRequest) (*operations.PostDatasetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dataset/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -8407,7 +8519,7 @@ func (s *SDK) PostDataset(ctx context.Context, request operations.PostDatasetReq
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8478,7 +8590,7 @@ func (s *SDK) PostDataset(ctx context.Context, request operations.PostDatasetReq
 }
 
 func (s *SDK) PostDatasetImport(ctx context.Context, request operations.PostDatasetImportRequest) (*operations.PostDatasetImportResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/dataset/import/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -8496,7 +8608,7 @@ func (s *SDK) PostDatasetImport(ctx context.Context, request operations.PostData
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8567,7 +8679,7 @@ func (s *SDK) PostDatasetImport(ctx context.Context, request operations.PostData
 }
 
 func (s *SDK) PostLog(ctx context.Context, request operations.PostLogRequest) (*operations.PostLogResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/log/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -8585,7 +8697,7 @@ func (s *SDK) PostLog(ctx context.Context, request operations.PostLogRequest) (*
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8655,8 +8767,9 @@ func (s *SDK) PostLog(ctx context.Context, request operations.PostLogRequest) (*
 	return res, nil
 }
 
+// PostReport - Create a report schedule
 func (s *SDK) PostReport(ctx context.Context, request operations.PostReportRequest) (*operations.PostReportResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/report/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -8674,7 +8787,7 @@ func (s *SDK) PostReport(ctx context.Context, request operations.PostReportReque
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8744,8 +8857,9 @@ func (s *SDK) PostReport(ctx context.Context, request operations.PostReportReque
 	return res, nil
 }
 
+// PostSavedQuery - Create a saved query
 func (s *SDK) PostSavedQuery(ctx context.Context, request operations.PostSavedQueryRequest) (*operations.PostSavedQueryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/saved_query/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -8763,7 +8877,7 @@ func (s *SDK) PostSavedQuery(ctx context.Context, request operations.PostSavedQu
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8834,7 +8948,7 @@ func (s *SDK) PostSavedQuery(ctx context.Context, request operations.PostSavedQu
 }
 
 func (s *SDK) PostSavedQueryImport(ctx context.Context, request operations.PostSavedQueryImportRequest) (*operations.PostSavedQueryImportResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/saved_query/import/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -8852,7 +8966,7 @@ func (s *SDK) PostSavedQueryImport(ctx context.Context, request operations.PostS
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8922,8 +9036,9 @@ func (s *SDK) PostSavedQueryImport(ctx context.Context, request operations.PostS
 	return res, nil
 }
 
+// PostSecurityLogin - Authenticate and get a JWT access and refresh token
 func (s *SDK) PostSecurityLogin(ctx context.Context, request operations.PostSecurityLoginRequest) (*operations.PostSecurityLoginResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/security/login"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -8941,7 +9056,7 @@ func (s *SDK) PostSecurityLogin(ctx context.Context, request operations.PostSecu
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9001,8 +9116,9 @@ func (s *SDK) PostSecurityLogin(ctx context.Context, request operations.PostSecu
 	return res, nil
 }
 
+// PostSecurityRefresh - Use the refresh token to get a new JWT access token
 func (s *SDK) PostSecurityRefresh(ctx context.Context, request operations.PostSecurityRefreshRequest) (*operations.PostSecurityRefreshResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/security/refresh"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -9010,7 +9126,7 @@ func (s *SDK) PostSecurityRefresh(ctx context.Context, request operations.PostSe
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9060,8 +9176,9 @@ func (s *SDK) PostSecurityRefresh(ctx context.Context, request operations.PostSe
 	return res, nil
 }
 
+// PutAnnotationLayerPk - Update an Annotation layer
 func (s *SDK) PutAnnotationLayerPk(ctx context.Context, request operations.PutAnnotationLayerPkRequest) (*operations.PutAnnotationLayerPkResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/annotation_layer/{pk}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -9079,7 +9196,7 @@ func (s *SDK) PutAnnotationLayerPk(ctx context.Context, request operations.PutAn
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9149,8 +9266,9 @@ func (s *SDK) PutAnnotationLayerPk(ctx context.Context, request operations.PutAn
 	return res, nil
 }
 
+// PutAnnotationLayerPkAnnotationAnnotationID - Update an Annotation layer
 func (s *SDK) PutAnnotationLayerPkAnnotationAnnotationID(ctx context.Context, request operations.PutAnnotationLayerPkAnnotationAnnotationIDRequest) (*operations.PutAnnotationLayerPkAnnotationAnnotationIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/annotation_layer/{pk}/annotation/{annotation_id}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -9168,7 +9286,7 @@ func (s *SDK) PutAnnotationLayerPkAnnotationAnnotationID(ctx context.Context, re
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9238,8 +9356,9 @@ func (s *SDK) PutAnnotationLayerPkAnnotationAnnotationID(ctx context.Context, re
 	return res, nil
 }
 
+// PutChartPk - Changes a Chart.
 func (s *SDK) PutChartPk(ctx context.Context, request operations.PutChartPkRequest) (*operations.PutChartPkResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/chart/{pk}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -9257,7 +9376,7 @@ func (s *SDK) PutChartPk(ctx context.Context, request operations.PutChartPkReque
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9347,8 +9466,9 @@ func (s *SDK) PutChartPk(ctx context.Context, request operations.PutChartPkReque
 	return res, nil
 }
 
+// PutCSSTemplatePk - Update a CSS template
 func (s *SDK) PutCSSTemplatePk(ctx context.Context, request operations.PutCSSTemplatePkRequest) (*operations.PutCSSTemplatePkResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/css_template/{pk}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -9366,7 +9486,7 @@ func (s *SDK) PutCSSTemplatePk(ctx context.Context, request operations.PutCSSTem
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9446,8 +9566,9 @@ func (s *SDK) PutCSSTemplatePk(ctx context.Context, request operations.PutCSSTem
 	return res, nil
 }
 
+// PutDashboardPk - Changes a Dashboard.
 func (s *SDK) PutDashboardPk(ctx context.Context, request operations.PutDashboardPkRequest) (*operations.PutDashboardPkResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dashboard/{pk}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -9465,7 +9586,7 @@ func (s *SDK) PutDashboardPk(ctx context.Context, request operations.PutDashboar
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9555,8 +9676,9 @@ func (s *SDK) PutDashboardPk(ctx context.Context, request operations.PutDashboar
 	return res, nil
 }
 
+// PutDatabasePk - Changes a Database.
 func (s *SDK) PutDatabasePk(ctx context.Context, request operations.PutDatabasePkRequest) (*operations.PutDatabasePkResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/database/{pk}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -9574,7 +9696,7 @@ func (s *SDK) PutDatabasePk(ctx context.Context, request operations.PutDatabaseP
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9664,8 +9786,9 @@ func (s *SDK) PutDatabasePk(ctx context.Context, request operations.PutDatabaseP
 	return res, nil
 }
 
+// PutDatasetPk - Changes a Dataset
 func (s *SDK) PutDatasetPk(ctx context.Context, request operations.PutDatasetPkRequest) (*operations.PutDatasetPkResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dataset/{pk}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -9685,7 +9808,7 @@ func (s *SDK) PutDatasetPk(ctx context.Context, request operations.PutDatasetPkR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9775,8 +9898,9 @@ func (s *SDK) PutDatasetPk(ctx context.Context, request operations.PutDatasetPkR
 	return res, nil
 }
 
+// PutDatasetPkRefresh - Refreshes and updates columns of a dataset
 func (s *SDK) PutDatasetPkRefresh(ctx context.Context, request operations.PutDatasetPkRefreshRequest) (*operations.PutDatasetPkRefreshResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/dataset/{pk}/refresh", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PUT", url, nil)
@@ -9784,7 +9908,7 @@ func (s *SDK) PutDatasetPkRefresh(ctx context.Context, request operations.PutDat
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9864,8 +9988,9 @@ func (s *SDK) PutDatasetPkRefresh(ctx context.Context, request operations.PutDat
 	return res, nil
 }
 
+// PutReportPk - Update a report schedule
 func (s *SDK) PutReportPk(ctx context.Context, request operations.PutReportPkRequest) (*operations.PutReportPkResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/report/{pk}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -9883,7 +10008,7 @@ func (s *SDK) PutReportPk(ctx context.Context, request operations.PutReportPkReq
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9963,8 +10088,9 @@ func (s *SDK) PutReportPk(ctx context.Context, request operations.PutReportPkReq
 	return res, nil
 }
 
+// PutSavedQueryPk - Update a saved query
 func (s *SDK) PutSavedQueryPk(ctx context.Context, request operations.PutSavedQueryPkRequest) (*operations.PutSavedQueryPkResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/saved_query/{pk}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -9982,7 +10108,7 @@ func (s *SDK) PutSavedQueryPk(ctx context.Context, request operations.PutSavedQu
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {

@@ -1,13 +1,13 @@
 from dataclasses import dataclass, field
-from typing import List
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class DistrictList:
-    abbreviation: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'abbreviation' }})
-    display_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'display_name' }})
-    key: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
-    year: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'year' }})
+    abbreviation: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('abbreviation') }})
+    display_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('display_name') }})
+    key: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('key') }})
+    year: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('year') }})
     

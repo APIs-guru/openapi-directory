@@ -1,5 +1,7 @@
 package shared
 
+// CollectionStatusItemLevelIssue
+// Issue associated with the collection.
 type CollectionStatusItemLevelIssue struct {
 	ApplicableCountries []string `json:"applicableCountries,omitempty"`
 	AttributeName       *string  `json:"attributeName,omitempty"`

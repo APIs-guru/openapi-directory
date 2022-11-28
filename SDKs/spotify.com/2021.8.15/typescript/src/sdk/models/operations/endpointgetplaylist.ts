@@ -1,62 +1,63 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class EndpointGetPlaylistPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=playlist_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=playlist_id" })
   playlistId: string;
 }
 
 
 export class EndpointGetPlaylistQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=additional_types" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=additional_types" })
   additionalTypes?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" })
   fields?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=market" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=market" })
   market?: string;
 }
 
 
 export class EndpointGetPlaylistHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Authorization" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" })
   authorization: string;
 }
 
 
 export class EndpointGetPlaylistSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   spotifyAuth: shared.SchemeSpotifyAuth;
 }
 
 
 export class EndpointGetPlaylistRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: EndpointGetPlaylistPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: EndpointGetPlaylistQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: EndpointGetPlaylistHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: EndpointGetPlaylistSecurity;
 }
 
 
 export class EndpointGetPlaylistResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponseObject?: shared.ErrorResponseObject;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   playlistObject?: shared.PlaylistObject;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

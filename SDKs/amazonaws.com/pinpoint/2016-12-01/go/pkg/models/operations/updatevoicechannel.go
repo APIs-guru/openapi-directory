@@ -18,6 +18,8 @@ type UpdateVoiceChannelHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateVoiceChannelRequestBodyVoiceChannelRequest
+// Specifies the status and settings of the voice channel for an application.
 type UpdateVoiceChannelRequestBodyVoiceChannelRequest struct {
 	Enabled *bool `json:"Enabled,omitempty"`
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetSelectedQueryParams = /** @class */ (function (_super) {
     __extends(GetSelectedQueryParams, _super);
@@ -30,27 +30,27 @@ var GetSelectedQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=headers" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=headers" }),
         __metadata("design:type", Map)
     ], GetSelectedQueryParams.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=js" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=js" }),
         __metadata("design:type", Boolean)
     ], GetSelectedQueryParams.prototype, "js", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=proxy" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=proxy" }),
         __metadata("design:type", String)
     ], GetSelectedQueryParams.prototype, "proxy", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=selector" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=selector" }),
         __metadata("design:type", String)
     ], GetSelectedQueryParams.prototype, "selector", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=timeout" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timeout" }),
         __metadata("design:type", Number)
     ], GetSelectedQueryParams.prototype, "timeout", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=url" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=url" }),
         __metadata("design:type", String)
     ], GetSelectedQueryParams.prototype, "url", void 0);
     return GetSelectedQueryParams;
@@ -62,7 +62,7 @@ var GetSelectedRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetSelectedQueryParams)
     ], GetSelectedRequest.prototype, "queryParams", void 0);
     return GetSelectedRequest;
@@ -74,23 +74,23 @@ var GetSelectedResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetSelectedResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Error)
     ], GetSelectedResponse.prototype, "error", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.PageError)
     ], GetSelectedResponse.prototype, "pageError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetSelectedResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetSelectedResponse.prototype, "getSelected200TextHtmlString", void 0);
     return GetSelectedResponse;

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetModifyClusterActionEnum;
 (function (GetModifyClusterActionEnum) {
     GetModifyClusterActionEnum["ModifyCluster"] = "ModifyCluster";
@@ -37,111 +37,111 @@ var GetModifyClusterQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" }),
         __metadata("design:type", String)
     ], GetModifyClusterQueryParams.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=AllowVersionUpgrade" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=AllowVersionUpgrade" }),
         __metadata("design:type", Boolean)
     ], GetModifyClusterQueryParams.prototype, "allowVersionUpgrade", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=AutomatedSnapshotRetentionPeriod" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=AutomatedSnapshotRetentionPeriod" }),
         __metadata("design:type", Number)
     ], GetModifyClusterQueryParams.prototype, "automatedSnapshotRetentionPeriod", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=AvailabilityZone" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=AvailabilityZone" }),
         __metadata("design:type", String)
     ], GetModifyClusterQueryParams.prototype, "availabilityZone", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=AvailabilityZoneRelocation" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=AvailabilityZoneRelocation" }),
         __metadata("design:type", Boolean)
     ], GetModifyClusterQueryParams.prototype, "availabilityZoneRelocation", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ClusterIdentifier" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ClusterIdentifier" }),
         __metadata("design:type", String)
     ], GetModifyClusterQueryParams.prototype, "clusterIdentifier", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ClusterParameterGroupName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ClusterParameterGroupName" }),
         __metadata("design:type", String)
     ], GetModifyClusterQueryParams.prototype, "clusterParameterGroupName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ClusterSecurityGroups" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ClusterSecurityGroups" }),
         __metadata("design:type", Array)
     ], GetModifyClusterQueryParams.prototype, "clusterSecurityGroups", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ClusterType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ClusterType" }),
         __metadata("design:type", String)
     ], GetModifyClusterQueryParams.prototype, "clusterType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ClusterVersion" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ClusterVersion" }),
         __metadata("design:type", String)
     ], GetModifyClusterQueryParams.prototype, "clusterVersion", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ElasticIp" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ElasticIp" }),
         __metadata("design:type", String)
     ], GetModifyClusterQueryParams.prototype, "elasticIp", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Encrypted" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Encrypted" }),
         __metadata("design:type", Boolean)
     ], GetModifyClusterQueryParams.prototype, "encrypted", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=EnhancedVpcRouting" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=EnhancedVpcRouting" }),
         __metadata("design:type", Boolean)
     ], GetModifyClusterQueryParams.prototype, "enhancedVpcRouting", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=HsmClientCertificateIdentifier" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=HsmClientCertificateIdentifier" }),
         __metadata("design:type", String)
     ], GetModifyClusterQueryParams.prototype, "hsmClientCertificateIdentifier", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=HsmConfigurationIdentifier" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=HsmConfigurationIdentifier" }),
         __metadata("design:type", String)
     ], GetModifyClusterQueryParams.prototype, "hsmConfigurationIdentifier", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=KmsKeyId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=KmsKeyId" }),
         __metadata("design:type", String)
     ], GetModifyClusterQueryParams.prototype, "kmsKeyId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=MaintenanceTrackName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MaintenanceTrackName" }),
         __metadata("design:type", String)
     ], GetModifyClusterQueryParams.prototype, "maintenanceTrackName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ManualSnapshotRetentionPeriod" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ManualSnapshotRetentionPeriod" }),
         __metadata("design:type", Number)
     ], GetModifyClusterQueryParams.prototype, "manualSnapshotRetentionPeriod", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=MasterUserPassword" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MasterUserPassword" }),
         __metadata("design:type", String)
     ], GetModifyClusterQueryParams.prototype, "masterUserPassword", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=NewClusterIdentifier" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=NewClusterIdentifier" }),
         __metadata("design:type", String)
     ], GetModifyClusterQueryParams.prototype, "newClusterIdentifier", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=NodeType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=NodeType" }),
         __metadata("design:type", String)
     ], GetModifyClusterQueryParams.prototype, "nodeType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=NumberOfNodes" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=NumberOfNodes" }),
         __metadata("design:type", Number)
     ], GetModifyClusterQueryParams.prototype, "numberOfNodes", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Port" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Port" }),
         __metadata("design:type", Number)
     ], GetModifyClusterQueryParams.prototype, "port", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=PreferredMaintenanceWindow" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=PreferredMaintenanceWindow" }),
         __metadata("design:type", String)
     ], GetModifyClusterQueryParams.prototype, "preferredMaintenanceWindow", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=PubliclyAccessible" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=PubliclyAccessible" }),
         __metadata("design:type", Boolean)
     ], GetModifyClusterQueryParams.prototype, "publiclyAccessible", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" }),
         __metadata("design:type", String)
     ], GetModifyClusterQueryParams.prototype, "version", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=VpcSecurityGroupIds" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=VpcSecurityGroupIds" }),
         __metadata("design:type", Array)
     ], GetModifyClusterQueryParams.prototype, "vpcSecurityGroupIds", void 0);
     return GetModifyClusterQueryParams;
@@ -153,31 +153,31 @@ var GetModifyClusterHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], GetModifyClusterHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], GetModifyClusterHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], GetModifyClusterHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], GetModifyClusterHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], GetModifyClusterHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], GetModifyClusterHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], GetModifyClusterHeaders.prototype, "xAmzSignedHeaders", void 0);
     return GetModifyClusterHeaders;
@@ -189,11 +189,11 @@ var GetModifyClusterRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetModifyClusterQueryParams)
     ], GetModifyClusterRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetModifyClusterHeaders)
     ], GetModifyClusterRequest.prototype, "headers", void 0);
     return GetModifyClusterRequest;
@@ -205,15 +205,15 @@ var GetModifyClusterResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetModifyClusterResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetModifyClusterResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetModifyClusterResponse.prototype, "statusCode", void 0);
     return GetModifyClusterResponse;

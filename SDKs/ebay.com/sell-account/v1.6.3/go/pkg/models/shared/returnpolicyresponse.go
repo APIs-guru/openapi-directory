@@ -1,5 +1,7 @@
 package shared
 
+// ReturnPolicyResponse
+// The response payload for return policy requests.
 type ReturnPolicyResponse struct {
 	Href           *string        `json:"href,omitempty"`
 	Limit          *int32         `json:"limit,omitempty"`

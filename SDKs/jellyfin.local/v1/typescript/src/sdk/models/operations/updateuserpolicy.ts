@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateUserPolicyPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=userId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=userId" })
   userId: string;
 }
 
 
-export class UpdateUserPolicyRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
-  userPolicy?: shared.UserPolicy;
+export class UpdateUserPolicyRequestsInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
+  userPolicy?: shared.UserPolicyInput;
 
-  @Metadata({ data: "request, media_type=application/json" })
-  userPolicy1?: shared.UserPolicy;
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  userPolicy1?: shared.UserPolicyInput;
 
-  @Metadata({ data: "request, media_type=text/json" })
-  userPolicy2?: shared.UserPolicy;
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
+  userPolicy2?: shared.UserPolicyInput;
 }
 
 
 export class UpdateUserPolicySecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   customAuthentication: shared.SchemeCustomAuthentication;
 }
 
 
 export class UpdateUserPolicyRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateUserPolicyPathParams;
 
-  @Metadata()
-  request: UpdateUserPolicyRequests;
+  @SpeakeasyMetadata()
+  request: UpdateUserPolicyRequestsInput;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: UpdateUserPolicySecurity;
 }
 
 
 export class UpdateUserPolicyResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

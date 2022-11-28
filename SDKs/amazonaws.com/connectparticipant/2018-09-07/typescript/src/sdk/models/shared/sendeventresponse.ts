@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SendEventResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AbsoluteTime" })
+  @SpeakeasyMetadata({ data: "json, name=AbsoluteTime" })
   absoluteTime?: string;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 }

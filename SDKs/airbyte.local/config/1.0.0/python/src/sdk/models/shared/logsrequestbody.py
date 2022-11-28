@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import logtype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class LogsRequestBody:
-    log_type: logtype_enum.LogTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'logType' }})
+    log_type: LogTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('logType') }})
     

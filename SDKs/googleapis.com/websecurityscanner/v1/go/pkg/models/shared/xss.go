@@ -21,6 +21,8 @@ const (
 	XSSAttackVectorEnumUserControllableURL     XSSAttackVectorEnum = "USER_CONTROLLABLE_URL"
 )
 
+// XSS
+// Information reported for an XSS.
 type XSS struct {
 	AttackVector        *XSSAttackVectorEnum `json:"attackVector,omitempty"`
 	ErrorMessage        *string              `json:"errorMessage,omitempty"`

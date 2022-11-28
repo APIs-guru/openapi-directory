@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GoogleCloudIdentitytoolkitAdminV2AllowByDefault
 /**
  * Defines a policy of allowing every region by default and adding disallowed regions to a disallow list.
@@ -33,7 +33,7 @@ var GoogleCloudIdentitytoolkitAdminV2AllowByDefault = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=disallowedRegions" }),
+        SpeakeasyMetadata({ data: "json, name=disallowedRegions" }),
         __metadata("design:type", Array)
     ], GoogleCloudIdentitytoolkitAdminV2AllowByDefault.prototype, "disallowedRegions", void 0);
     return GoogleCloudIdentitytoolkitAdminV2AllowByDefault;

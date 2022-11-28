@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // IngestionInfo
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes information necessary for ingesting an RTMP, HTTP, or SRT stream.
 **/
 export class IngestionInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=backupIngestionAddress" })
+  @SpeakeasyMetadata({ data: "json, name=backupIngestionAddress" })
   backupIngestionAddress?: string;
 
-  @Metadata({ data: "json, name=ingestionAddress" })
+  @SpeakeasyMetadata({ data: "json, name=ingestionAddress" })
   ingestionAddress?: string;
 
-  @Metadata({ data: "json, name=rtmpsBackupIngestionAddress" })
+  @SpeakeasyMetadata({ data: "json, name=rtmpsBackupIngestionAddress" })
   rtmpsBackupIngestionAddress?: string;
 
-  @Metadata({ data: "json, name=rtmpsIngestionAddress" })
+  @SpeakeasyMetadata({ data: "json, name=rtmpsIngestionAddress" })
   rtmpsIngestionAddress?: string;
 
-  @Metadata({ data: "json, name=streamName" })
+  @SpeakeasyMetadata({ data: "json, name=streamName" })
   streamName?: string;
 }

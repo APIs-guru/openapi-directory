@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VpceConfiguration } from "./vpceconfiguration";
 
 
+
 export class GetVpceConfigurationResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=vpceConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=vpceConfiguration" })
   vpceConfiguration?: VpceConfiguration;
 }

@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import flowstatus_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateFlowResponse:
-    flow_status: Optional[flowstatus_enum.FlowStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'flowStatus' }})
+    flow_status: Optional[FlowStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('flowStatus') }})
     

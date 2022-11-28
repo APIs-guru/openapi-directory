@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CustomVoiceParams } from "./customvoiceparams";
 export declare enum VoiceSelectionParamsSsmlGenderEnum {
     SsmlVoiceGenderUnspecified = "SSML_VOICE_GENDER_UNSPECIFIED",

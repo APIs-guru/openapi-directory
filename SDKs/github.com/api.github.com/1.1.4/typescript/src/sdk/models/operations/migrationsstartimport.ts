@@ -1,66 +1,67 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class MigrationsStartImportPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=owner" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=owner" })
   owner: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repo" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repo" })
   repo: string;
 }
 
 export enum MigrationsStartImportRequestBodyVcsEnum {
-    Subversion = "subversion"
-,    Git = "git"
-,    Mercurial = "mercurial"
-,    Tfvc = "tfvc"
+    Subversion = "subversion",
+    Git = "git",
+    Mercurial = "mercurial",
+    Tfvc = "tfvc"
 }
 
 
 export class MigrationsStartImportRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=tfvc_project" })
+  @SpeakeasyMetadata({ data: "json, name=tfvc_project" })
   tfvcProject?: string;
 
-  @Metadata({ data: "json, name=vcs" })
+  @SpeakeasyMetadata({ data: "json, name=vcs" })
   vcs?: MigrationsStartImportRequestBodyVcsEnum;
 
-  @Metadata({ data: "json, name=vcs_password" })
+  @SpeakeasyMetadata({ data: "json, name=vcs_password" })
   vcsPassword?: string;
 
-  @Metadata({ data: "json, name=vcs_url" })
+  @SpeakeasyMetadata({ data: "json, name=vcs_url" })
   vcsUrl: string;
 
-  @Metadata({ data: "json, name=vcs_username" })
+  @SpeakeasyMetadata({ data: "json, name=vcs_username" })
   vcsUsername?: string;
 }
 
 
 export class MigrationsStartImportRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: MigrationsStartImportPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: MigrationsStartImportRequestBody;
 }
 
 
 export class MigrationsStartImportResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   import?: shared.Import;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationError?: shared.ValidationError;
 }

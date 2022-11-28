@@ -1,27 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OrderLegacyPromotionBenefit } from "./orderlegacypromotionbenefit";
 
 
+
 export class OrderLegacyPromotion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=benefits", elemType: shared.OrderLegacyPromotionBenefit })
+  @SpeakeasyMetadata({ data: "json, name=benefits", elemType: OrderLegacyPromotionBenefit })
   benefits?: OrderLegacyPromotionBenefit[];
 
-  @Metadata({ data: "json, name=effectiveDates" })
+  @SpeakeasyMetadata({ data: "json, name=effectiveDates" })
   effectiveDates?: string;
 
-  @Metadata({ data: "json, name=genericRedemptionCode" })
+  @SpeakeasyMetadata({ data: "json, name=genericRedemptionCode" })
   genericRedemptionCode?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=longTitle" })
+  @SpeakeasyMetadata({ data: "json, name=longTitle" })
   longTitle?: string;
 
-  @Metadata({ data: "json, name=productApplicability" })
+  @SpeakeasyMetadata({ data: "json, name=productApplicability" })
   productApplicability?: string;
 
-  @Metadata({ data: "json, name=redemptionChannel" })
+  @SpeakeasyMetadata({ data: "json, name=redemptionChannel" })
   redemptionChannel?: string;
 }

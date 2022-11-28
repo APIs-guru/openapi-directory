@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BackendEnvironment } from "./backendenvironment";
+
 
 
 // CreateBackendEnvironmentResult
@@ -7,6 +8,6 @@ import { BackendEnvironment } from "./backendenvironment";
  *  The result structure for the create backend environment request. 
 **/
 export class CreateBackendEnvironmentResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=backendEnvironment" })
+  @SpeakeasyMetadata({ data: "json, name=backendEnvironment" })
   backendEnvironment: BackendEnvironment;
 }

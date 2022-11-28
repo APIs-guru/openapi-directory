@@ -9,11 +9,11 @@ class GetAPICardTypesHeaders:
 
 @dataclass
 class GetAPICardTypesRequest:
-    headers: GetAPICardTypesHeaders = field(default=None)
+    headers: GetAPICardTypesHeaders = field()
     
 
 @dataclass
 class GetAPICardTypesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

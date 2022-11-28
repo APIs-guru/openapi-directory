@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Payload } from "./payload";
 // DynamoDbAction
 /**
@@ -34,43 +34,43 @@ var DynamoDbAction = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=hashKeyField" }),
+        SpeakeasyMetadata({ data: "json, name=hashKeyField" }),
         __metadata("design:type", String)
     ], DynamoDbAction.prototype, "hashKeyField", void 0);
     __decorate([
-        Metadata({ data: "json, name=hashKeyType" }),
+        SpeakeasyMetadata({ data: "json, name=hashKeyType" }),
         __metadata("design:type", String)
     ], DynamoDbAction.prototype, "hashKeyType", void 0);
     __decorate([
-        Metadata({ data: "json, name=hashKeyValue" }),
+        SpeakeasyMetadata({ data: "json, name=hashKeyValue" }),
         __metadata("design:type", String)
     ], DynamoDbAction.prototype, "hashKeyValue", void 0);
     __decorate([
-        Metadata({ data: "json, name=operation" }),
+        SpeakeasyMetadata({ data: "json, name=operation" }),
         __metadata("design:type", String)
     ], DynamoDbAction.prototype, "operation", void 0);
     __decorate([
-        Metadata({ data: "json, name=payload" }),
+        SpeakeasyMetadata({ data: "json, name=payload" }),
         __metadata("design:type", Payload)
     ], DynamoDbAction.prototype, "payload", void 0);
     __decorate([
-        Metadata({ data: "json, name=payloadField" }),
+        SpeakeasyMetadata({ data: "json, name=payloadField" }),
         __metadata("design:type", String)
     ], DynamoDbAction.prototype, "payloadField", void 0);
     __decorate([
-        Metadata({ data: "json, name=rangeKeyField" }),
+        SpeakeasyMetadata({ data: "json, name=rangeKeyField" }),
         __metadata("design:type", String)
     ], DynamoDbAction.prototype, "rangeKeyField", void 0);
     __decorate([
-        Metadata({ data: "json, name=rangeKeyType" }),
+        SpeakeasyMetadata({ data: "json, name=rangeKeyType" }),
         __metadata("design:type", String)
     ], DynamoDbAction.prototype, "rangeKeyType", void 0);
     __decorate([
-        Metadata({ data: "json, name=rangeKeyValue" }),
+        SpeakeasyMetadata({ data: "json, name=rangeKeyValue" }),
         __metadata("design:type", String)
     ], DynamoDbAction.prototype, "rangeKeyValue", void 0);
     __decorate([
-        Metadata({ data: "json, name=tableName" }),
+        SpeakeasyMetadata({ data: "json, name=tableName" }),
         __metadata("design:type", String)
     ], DynamoDbAction.prototype, "tableName", void 0);
     return DynamoDbAction;

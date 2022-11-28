@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class ReportsEntityUsageReportsGetEntityTypeEnum(str, Enum):
@@ -8,9 +12,9 @@ class ReportsEntityUsageReportsGetEntityTypeEnum(str, Enum):
 
 @dataclass
 class ReportsEntityUsageReportsGetPathParams:
-    date: str = field(default=None, metadata={'path_param': { 'field_name': 'date', 'style': 'simple', 'explode': False }})
-    entity_key: str = field(default=None, metadata={'path_param': { 'field_name': 'entityKey', 'style': 'simple', 'explode': False }})
-    entity_type: ReportsEntityUsageReportsGetEntityTypeEnum = field(default=None, metadata={'path_param': { 'field_name': 'entityType', 'style': 'simple', 'explode': False }})
+    date_: str = field(metadata={'path_param': { 'field_name': 'date', 'style': 'simple', 'explode': False }})
+    entity_key: str = field(metadata={'path_param': { 'field_name': 'entityKey', 'style': 'simple', 'explode': False }})
+    entity_type: ReportsEntityUsageReportsGetEntityTypeEnum = field(metadata={'path_param': { 'field_name': 'entityType', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -35,20 +39,20 @@ class ReportsEntityUsageReportsGetQueryParams:
 
 @dataclass
 class ReportsEntityUsageReportsGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ReportsEntityUsageReportsGetRequest:
-    path_params: ReportsEntityUsageReportsGetPathParams = field(default=None)
-    query_params: ReportsEntityUsageReportsGetQueryParams = field(default=None)
-    security: ReportsEntityUsageReportsGetSecurity = field(default=None)
+    path_params: ReportsEntityUsageReportsGetPathParams = field()
+    query_params: ReportsEntityUsageReportsGetQueryParams = field()
+    security: ReportsEntityUsageReportsGetSecurity = field()
     
 
 @dataclass
 class ReportsEntityUsageReportsGetResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     usage_reports: Optional[shared.UsageReports] = field(default=None)
     

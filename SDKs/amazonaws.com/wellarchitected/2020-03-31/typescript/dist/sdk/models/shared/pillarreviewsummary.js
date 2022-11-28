@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // PillarReviewSummary
 /**
  * A pillar review summary of a lens review.
@@ -33,19 +33,19 @@ var PillarReviewSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Notes" }),
+        SpeakeasyMetadata({ data: "json, name=Notes" }),
         __metadata("design:type", String)
     ], PillarReviewSummary.prototype, "notes", void 0);
     __decorate([
-        Metadata({ data: "json, name=PillarId" }),
+        SpeakeasyMetadata({ data: "json, name=PillarId" }),
         __metadata("design:type", String)
     ], PillarReviewSummary.prototype, "pillarId", void 0);
     __decorate([
-        Metadata({ data: "json, name=PillarName" }),
+        SpeakeasyMetadata({ data: "json, name=PillarName" }),
         __metadata("design:type", String)
     ], PillarReviewSummary.prototype, "pillarName", void 0);
     __decorate([
-        Metadata({ data: "json, name=RiskCounts" }),
+        SpeakeasyMetadata({ data: "json, name=RiskCounts" }),
         __metadata("design:type", Map)
     ], PillarReviewSummary.prototype, "riskCounts", void 0);
     return PillarReviewSummary;

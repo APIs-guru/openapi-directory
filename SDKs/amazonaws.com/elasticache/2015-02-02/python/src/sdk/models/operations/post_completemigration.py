@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostCompleteMigrationActionEnum(str, Enum):
     COMPLETE_MIGRATION = "CompleteMigration"
@@ -10,8 +14,8 @@ class PostCompleteMigrationVersionEnum(str, Enum):
 
 @dataclass
 class PostCompleteMigrationQueryParams:
-    action: PostCompleteMigrationActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostCompleteMigrationVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostCompleteMigrationActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostCompleteMigrationVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostCompleteMigrationHeaders:
 
 @dataclass
 class PostCompleteMigrationRequest:
-    query_params: PostCompleteMigrationQueryParams = field(default=None)
-    headers: PostCompleteMigrationHeaders = field(default=None)
+    headers: PostCompleteMigrationHeaders = field()
+    query_params: PostCompleteMigrationQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostCompleteMigrationResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

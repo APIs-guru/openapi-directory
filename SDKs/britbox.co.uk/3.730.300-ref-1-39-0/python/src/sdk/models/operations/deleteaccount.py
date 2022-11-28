@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -11,19 +12,19 @@ class DeleteAccountQueryParams:
 
 @dataclass
 class DeleteAccountSecurity:
-    account_auth: shared.SchemeAccountAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    account_auth: shared.SchemeAccountAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DeleteAccountRequest:
-    query_params: DeleteAccountQueryParams = field(default=None)
-    request: shared.ItvDeleteAccountRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DeleteAccountSecurity = field(default=None)
+    query_params: DeleteAccountQueryParams = field()
+    request: shared.ItvDeleteAccountRequest = field(metadata={'request': { 'media_type': 'application/json' }})
+    security: DeleteAccountSecurity = field()
     
 
 @dataclass
 class DeleteAccountResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     service_error: Optional[shared.ServiceError] = field(default=None)
-    status_code: int = field(default=None)
     

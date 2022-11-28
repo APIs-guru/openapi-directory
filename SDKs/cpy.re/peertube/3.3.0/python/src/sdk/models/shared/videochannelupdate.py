@@ -1,27 +1,17 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Any,Optional
+from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
-class VideoChannelUpdateOwnerAccount:
-    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    uuid: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uuid' }})
-    
-
-@dataclass_json
-@dataclass
-class VideoChannelUpdate:
-    bulk_videos_support_update: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bulkVideosSupportUpdate' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayName' }})
-    id: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    is_local: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'isLocal' }})
-    owner_account: Optional[VideoChannelUpdateOwnerAccount] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ownerAccount' }})
-    support: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'support' }})
-    updated_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updatedAt', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+class VideoChannelUpdateInput:
+    bulk_videos_support_update: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('bulkVideosSupportUpdate') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    support: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('support') }})
     

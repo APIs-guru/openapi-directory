@@ -4,7 +4,7 @@ from typing import Any,Optional
 
 @dataclass
 class AppsGetAuthenticatedResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     integration: Optional[dict[str, Any]] = field(default=None)
     

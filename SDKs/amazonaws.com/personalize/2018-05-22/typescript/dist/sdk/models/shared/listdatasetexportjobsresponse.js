@@ -22,19 +22,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { DatasetExportJobSummary } from "./datasetexportjobsummary";
 var ListDatasetExportJobsResponse = /** @class */ (function (_super) {
     __extends(ListDatasetExportJobsResponse, _super);
     function ListDatasetExportJobsResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=datasetExportJobs", elemType: shared.DatasetExportJobSummary }),
+        SpeakeasyMetadata({ data: "json, name=datasetExportJobs", elemType: DatasetExportJobSummary }),
         __metadata("design:type", Array)
     ], ListDatasetExportJobsResponse.prototype, "datasetExportJobs", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextToken" }),
         __metadata("design:type", String)
     ], ListDatasetExportJobsResponse.prototype, "nextToken", void 0);
     return ListDatasetExportJobsResponse;

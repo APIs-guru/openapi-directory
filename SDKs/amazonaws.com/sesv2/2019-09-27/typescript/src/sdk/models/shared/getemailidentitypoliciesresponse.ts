@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GetEmailIdentityPoliciesResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Identity policies associated with email identity.
 **/
 export class GetEmailIdentityPoliciesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Policies" })
+  @SpeakeasyMetadata({ data: "json, name=Policies" })
   policies?: Map<string, string>;
 }

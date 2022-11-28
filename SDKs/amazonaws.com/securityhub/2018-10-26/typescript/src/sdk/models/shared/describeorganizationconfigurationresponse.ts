@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DescribeOrganizationConfigurationResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AutoEnable" })
+  @SpeakeasyMetadata({ data: "json, name=AutoEnable" })
   autoEnable?: boolean;
 
-  @Metadata({ data: "json, name=MemberAccountLimitReached" })
+  @SpeakeasyMetadata({ data: "json, name=MemberAccountLimitReached" })
   memberAccountLimitReached?: boolean;
 }

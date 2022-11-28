@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -27,13 +28,13 @@ class GetDealersMotorcycleQueryParams:
 
 @dataclass
 class GetDealersMotorcycleRequest:
-    query_params: GetDealersMotorcycleQueryParams = field(default=None)
+    query_params: GetDealersMotorcycleQueryParams = field()
     
 
 @dataclass
 class GetDealersMotorcycleResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     dealers_response: Optional[shared.DealersResponse] = field(default=None)
     error: Optional[shared.Error] = field(default=None)
-    status_code: int = field(default=None)
     

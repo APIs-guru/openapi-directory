@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ZoneInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string[];
 
-  @Metadata({ data: "json, name=in_bundles" })
+  @SpeakeasyMetadata({ data: "json, name=in_bundles" })
   inBundles?: string[];
 
-  @Metadata({ data: "json, name=includes" })
+  @SpeakeasyMetadata({ data: "json, name=includes" })
   includes?: string[];
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 
-  @Metadata({ data: "json, name=zone" })
+  @SpeakeasyMetadata({ data: "json, name=zone" })
   zone: string;
 }

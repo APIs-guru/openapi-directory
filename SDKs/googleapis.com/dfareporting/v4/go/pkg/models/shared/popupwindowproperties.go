@@ -7,6 +7,8 @@ const (
 	PopupWindowPropertiesPositionTypeEnumCoordinates PopupWindowPropertiesPositionTypeEnum = "COORDINATES"
 )
 
+// PopupWindowProperties
+// Popup Window Properties.
 type PopupWindowProperties struct {
 	Dimension      *Size                                  `json:"dimension,omitempty"`
 	Offset         *OffsetPosition                        `json:"offset,omitempty"`

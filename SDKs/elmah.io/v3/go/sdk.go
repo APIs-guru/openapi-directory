@@ -11,7 +11,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://elmah.io",
 }
 
@@ -20,9 +20,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -33,33 +37,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// DeploymentsCreate - Create a new deployment.
 func (s *SDK) DeploymentsCreate(ctx context.Context, request operations.DeploymentsCreateRequest) (*operations.DeploymentsCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v3/deployments"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -74,7 +100,7 @@ func (s *SDK) DeploymentsCreate(ctx context.Context, request operations.Deployme
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -123,8 +149,10 @@ func (s *SDK) DeploymentsCreate(ctx context.Context, request operations.Deployme
 	return res, nil
 }
 
+// DeploymentsDelete - Delete a deployment by its ID.
+// This endpoint doesn't clear the version number of messages already annotated with this deployment version.
 func (s *SDK) DeploymentsDelete(ctx context.Context, request operations.DeploymentsDeleteRequest) (*operations.DeploymentsDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v3/deployments/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -132,7 +160,7 @@ func (s *SDK) DeploymentsDelete(ctx context.Context, request operations.Deployme
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -158,8 +186,9 @@ func (s *SDK) DeploymentsDelete(ctx context.Context, request operations.Deployme
 	return res, nil
 }
 
+// DeploymentsGet - Fetch a deployment by its ID.
 func (s *SDK) DeploymentsGet(ctx context.Context, request operations.DeploymentsGetRequest) (*operations.DeploymentsGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v3/deployments/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -167,7 +196,7 @@ func (s *SDK) DeploymentsGet(ctx context.Context, request operations.Deployments
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -215,8 +244,9 @@ func (s *SDK) DeploymentsGet(ctx context.Context, request operations.Deployments
 	return res, nil
 }
 
+// DeploymentsGetAll - Fetch a list of deployments.
 func (s *SDK) DeploymentsGetAll(ctx context.Context) (*operations.DeploymentsGetAllResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v3/deployments"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -224,7 +254,7 @@ func (s *SDK) DeploymentsGetAll(ctx context.Context) (*operations.DeploymentsGet
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -271,8 +301,9 @@ func (s *SDK) DeploymentsGetAll(ctx context.Context) (*operations.DeploymentsGet
 	return res, nil
 }
 
+// HeartbeatsCreate - Create a new heartbeat.
 func (s *SDK) HeartbeatsCreate(ctx context.Context, request operations.HeartbeatsCreateRequest) (*operations.HeartbeatsCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v3/heartbeats/{logId}/{id}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -287,7 +318,7 @@ func (s *SDK) HeartbeatsCreate(ctx context.Context, request operations.Heartbeat
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -313,8 +344,9 @@ func (s *SDK) HeartbeatsCreate(ctx context.Context, request operations.Heartbeat
 	return res, nil
 }
 
+// LogsCreate - Create a new log.
 func (s *SDK) LogsCreate(ctx context.Context, request operations.LogsCreateRequest) (*operations.LogsCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v3/logs"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -329,7 +361,7 @@ func (s *SDK) LogsCreate(ctx context.Context, request operations.LogsCreateReque
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -377,8 +409,9 @@ func (s *SDK) LogsCreate(ctx context.Context, request operations.LogsCreateReque
 	return res, nil
 }
 
+// LogsDisable - Disable a log by its ID.
 func (s *SDK) LogsDisable(ctx context.Context, request operations.LogsDisableRequest) (*operations.LogsDisableResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v3/logs/{id}/_disable", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -386,7 +419,7 @@ func (s *SDK) LogsDisable(ctx context.Context, request operations.LogsDisableReq
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -411,8 +444,9 @@ func (s *SDK) LogsDisable(ctx context.Context, request operations.LogsDisableReq
 	return res, nil
 }
 
+// LogsEnable - Enable a log by its ID.
 func (s *SDK) LogsEnable(ctx context.Context, request operations.LogsEnableRequest) (*operations.LogsEnableResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v3/logs/{id}/_enable", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -420,7 +454,7 @@ func (s *SDK) LogsEnable(ctx context.Context, request operations.LogsEnableReque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -445,8 +479,9 @@ func (s *SDK) LogsEnable(ctx context.Context, request operations.LogsEnableReque
 	return res, nil
 }
 
+// LogsGet - Fetch a log by its ID.
 func (s *SDK) LogsGet(ctx context.Context, request operations.LogsGetRequest) (*operations.LogsGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v3/logs/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -454,7 +489,7 @@ func (s *SDK) LogsGet(ctx context.Context, request operations.LogsGetRequest) (*
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -502,8 +537,9 @@ func (s *SDK) LogsGet(ctx context.Context, request operations.LogsGetRequest) (*
 	return res, nil
 }
 
+// LogsGetAll - Fetch a list of logs.
 func (s *SDK) LogsGetAll(ctx context.Context) (*operations.LogsGetAllResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v3/logs"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -511,7 +547,7 @@ func (s *SDK) LogsGetAll(ctx context.Context) (*operations.LogsGetAllResponse, e
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -558,8 +594,9 @@ func (s *SDK) LogsGetAll(ctx context.Context) (*operations.LogsGetAllResponse, e
 	return res, nil
 }
 
+// MessagesCreate - Create a new message.
 func (s *SDK) MessagesCreate(ctx context.Context, request operations.MessagesCreateRequest) (*operations.MessagesCreateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v3/messages/{logId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -574,7 +611,7 @@ func (s *SDK) MessagesCreate(ctx context.Context, request operations.MessagesCre
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -648,8 +685,9 @@ func (s *SDK) MessagesCreate(ctx context.Context, request operations.MessagesCre
 	return res, nil
 }
 
+// MessagesCreateBulk - Create one or more new messages.
 func (s *SDK) MessagesCreateBulk(ctx context.Context, request operations.MessagesCreateBulkRequest) (*operations.MessagesCreateBulkResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v3/messages/{logId}/_bulk", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -664,7 +702,7 @@ func (s *SDK) MessagesCreateBulk(ctx context.Context, request operations.Message
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -713,8 +751,9 @@ func (s *SDK) MessagesCreateBulk(ctx context.Context, request operations.Message
 	return res, nil
 }
 
+// MessagesDelete - Delete a message by its ID.
 func (s *SDK) MessagesDelete(ctx context.Context, request operations.MessagesDeleteRequest) (*operations.MessagesDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v3/messages/{logId}/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -722,7 +761,7 @@ func (s *SDK) MessagesDelete(ctx context.Context, request operations.MessagesDel
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -748,8 +787,9 @@ func (s *SDK) MessagesDelete(ctx context.Context, request operations.MessagesDel
 	return res, nil
 }
 
+// MessagesDeleteAll - Deletes a list of messages by logid and query.
 func (s *SDK) MessagesDeleteAll(ctx context.Context, request operations.MessagesDeleteAllRequest) (*operations.MessagesDeleteAllResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v3/messages/{logId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -764,7 +804,7 @@ func (s *SDK) MessagesDeleteAll(ctx context.Context, request operations.Messages
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -790,8 +830,9 @@ func (s *SDK) MessagesDeleteAll(ctx context.Context, request operations.Messages
 	return res, nil
 }
 
+// MessagesFix - Fix a message by its ID.
 func (s *SDK) MessagesFix(ctx context.Context, request operations.MessagesFixRequest) (*operations.MessagesFixResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v3/messages/{logId}/{id}/_fix", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -801,7 +842,7 @@ func (s *SDK) MessagesFix(ctx context.Context, request operations.MessagesFixReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -827,8 +868,9 @@ func (s *SDK) MessagesFix(ctx context.Context, request operations.MessagesFixReq
 	return res, nil
 }
 
+// MessagesGet - Fetch a message by its ID.
 func (s *SDK) MessagesGet(ctx context.Context, request operations.MessagesGetRequest) (*operations.MessagesGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v3/messages/{logId}/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -836,7 +878,7 @@ func (s *SDK) MessagesGet(ctx context.Context, request operations.MessagesGetReq
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -885,8 +927,9 @@ func (s *SDK) MessagesGet(ctx context.Context, request operations.MessagesGetReq
 	return res, nil
 }
 
+// MessagesGetAll - Fetch messages from a log.
 func (s *SDK) MessagesGetAll(ctx context.Context, request operations.MessagesGetAllRequest) (*operations.MessagesGetAllResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v3/messages/{logId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -896,7 +939,7 @@ func (s *SDK) MessagesGetAll(ctx context.Context, request operations.MessagesGet
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -944,8 +987,9 @@ func (s *SDK) MessagesGetAll(ctx context.Context, request operations.MessagesGet
 	return res, nil
 }
 
+// MessagesHide - Hide a message by its ID.
 func (s *SDK) MessagesHide(ctx context.Context, request operations.MessagesHideRequest) (*operations.MessagesHideResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v3/messages/{logId}/{id}/_hide", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -953,7 +997,7 @@ func (s *SDK) MessagesHide(ctx context.Context, request operations.MessagesHideR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -979,8 +1023,9 @@ func (s *SDK) MessagesHide(ctx context.Context, request operations.MessagesHideR
 	return res, nil
 }
 
+// SourceMapsCreateOrUpdate - Create or update a translation between a minified JavaScript path to the minified JavaScript and source map files.
 func (s *SDK) SourceMapsCreateOrUpdate(ctx context.Context, request operations.SourceMapsCreateOrUpdateRequest) (*operations.SourceMapsCreateOrUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v3/sourcemaps/{logId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -998,7 +1043,7 @@ func (s *SDK) SourceMapsCreateOrUpdate(ctx context.Context, request operations.S
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1024,8 +1069,9 @@ func (s *SDK) SourceMapsCreateOrUpdate(ctx context.Context, request operations.S
 	return res, nil
 }
 
+// UptimeChecksGetAll - Fetch a list of uptime checks. Currently in closed beta. Get in contact to get access to this endpoint.
 func (s *SDK) UptimeChecksGetAll(ctx context.Context) (*operations.UptimeChecksGetAllResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v3/uptimechecks"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1033,7 +1079,7 @@ func (s *SDK) UptimeChecksGetAll(ctx context.Context) (*operations.UptimeChecksG
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

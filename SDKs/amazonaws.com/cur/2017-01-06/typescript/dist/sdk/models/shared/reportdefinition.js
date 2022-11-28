@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CompressionFormatEnum } from "./compressionformatenum";
 import { ReportFormatEnum } from "./reportformatenum";
 import { ReportVersioningEnum } from "./reportversioningenum";
@@ -38,51 +38,51 @@ var ReportDefinition = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AdditionalArtifacts" }),
+        SpeakeasyMetadata({ data: "json, name=AdditionalArtifacts" }),
         __metadata("design:type", Array)
     ], ReportDefinition.prototype, "additionalArtifacts", void 0);
     __decorate([
-        Metadata({ data: "json, name=AdditionalSchemaElements" }),
+        SpeakeasyMetadata({ data: "json, name=AdditionalSchemaElements" }),
         __metadata("design:type", Array)
     ], ReportDefinition.prototype, "additionalSchemaElements", void 0);
     __decorate([
-        Metadata({ data: "json, name=BillingViewArn" }),
+        SpeakeasyMetadata({ data: "json, name=BillingViewArn" }),
         __metadata("design:type", String)
     ], ReportDefinition.prototype, "billingViewArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=Compression" }),
+        SpeakeasyMetadata({ data: "json, name=Compression" }),
         __metadata("design:type", String)
     ], ReportDefinition.prototype, "compression", void 0);
     __decorate([
-        Metadata({ data: "json, name=Format" }),
+        SpeakeasyMetadata({ data: "json, name=Format" }),
         __metadata("design:type", String)
     ], ReportDefinition.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=RefreshClosedReports" }),
+        SpeakeasyMetadata({ data: "json, name=RefreshClosedReports" }),
         __metadata("design:type", Boolean)
     ], ReportDefinition.prototype, "refreshClosedReports", void 0);
     __decorate([
-        Metadata({ data: "json, name=ReportName" }),
+        SpeakeasyMetadata({ data: "json, name=ReportName" }),
         __metadata("design:type", String)
     ], ReportDefinition.prototype, "reportName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ReportVersioning" }),
+        SpeakeasyMetadata({ data: "json, name=ReportVersioning" }),
         __metadata("design:type", String)
     ], ReportDefinition.prototype, "reportVersioning", void 0);
     __decorate([
-        Metadata({ data: "json, name=S3Bucket" }),
+        SpeakeasyMetadata({ data: "json, name=S3Bucket" }),
         __metadata("design:type", String)
     ], ReportDefinition.prototype, "s3Bucket", void 0);
     __decorate([
-        Metadata({ data: "json, name=S3Prefix" }),
+        SpeakeasyMetadata({ data: "json, name=S3Prefix" }),
         __metadata("design:type", String)
     ], ReportDefinition.prototype, "s3Prefix", void 0);
     __decorate([
-        Metadata({ data: "json, name=S3Region" }),
+        SpeakeasyMetadata({ data: "json, name=S3Region" }),
         __metadata("design:type", String)
     ], ReportDefinition.prototype, "s3Region", void 0);
     __decorate([
-        Metadata({ data: "json, name=TimeUnit" }),
+        SpeakeasyMetadata({ data: "json, name=TimeUnit" }),
         __metadata("design:type", String)
     ], ReportDefinition.prototype, "timeUnit", void 0);
     return ReportDefinition;

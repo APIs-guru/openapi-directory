@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceRecord } from "./resourcerecord";
 import { ValidationMethodEnum } from "./validationmethodenum";
 import { DomainStatusEnum } from "./domainstatusenum";
+
 
 
 // DomainValidation
@@ -9,21 +10,21 @@ import { DomainStatusEnum } from "./domainstatusenum";
  * Contains information about the validation of each domain name in the certificate.
 **/
 export class DomainValidation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DomainName" })
+  @SpeakeasyMetadata({ data: "json, name=DomainName" })
   domainName: string;
 
-  @Metadata({ data: "json, name=ResourceRecord" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceRecord" })
   resourceRecord?: ResourceRecord;
 
-  @Metadata({ data: "json, name=ValidationDomain" })
+  @SpeakeasyMetadata({ data: "json, name=ValidationDomain" })
   validationDomain?: string;
 
-  @Metadata({ data: "json, name=ValidationEmails" })
+  @SpeakeasyMetadata({ data: "json, name=ValidationEmails" })
   validationEmails?: string[];
 
-  @Metadata({ data: "json, name=ValidationMethod" })
+  @SpeakeasyMetadata({ data: "json, name=ValidationMethod" })
   validationMethod?: ValidationMethodEnum;
 
-  @Metadata({ data: "json, name=ValidationStatus" })
+  @SpeakeasyMetadata({ data: "json, name=ValidationStatus" })
   validationStatus?: DomainStatusEnum;
 }

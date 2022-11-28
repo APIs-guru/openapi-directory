@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// WorkerConfigurationSummary
+// The summary of a worker configuration.
 type WorkerConfigurationSummary struct {
 	CreationTime           *time.Time                          `json:"creationTime,omitempty"`
 	Description            *string                             `json:"description,omitempty"`

@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InputUpdate } from "./inputupdate";
 import { OutputUpdate } from "./outputupdate";
 import { ReferenceDataSourceUpdate } from "./referencedatasourceupdate";
+
 
 
 // SqlApplicationConfigurationUpdate
@@ -10,12 +10,12 @@ import { ReferenceDataSourceUpdate } from "./referencedatasourceupdate";
  * Describes updates to the input streams, destination streams, and reference data sources for a SQL-based Kinesis Data Analytics application.
 **/
 export class SqlApplicationConfigurationUpdate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=InputUpdates", elemType: shared.InputUpdate })
+  @SpeakeasyMetadata({ data: "json, name=InputUpdates", elemType: InputUpdate })
   inputUpdates?: InputUpdate[];
 
-  @Metadata({ data: "json, name=OutputUpdates", elemType: shared.OutputUpdate })
+  @SpeakeasyMetadata({ data: "json, name=OutputUpdates", elemType: OutputUpdate })
   outputUpdates?: OutputUpdate[];
 
-  @Metadata({ data: "json, name=ReferenceDataSourceUpdates", elemType: shared.ReferenceDataSourceUpdate })
+  @SpeakeasyMetadata({ data: "json, name=ReferenceDataSourceUpdates", elemType: ReferenceDataSourceUpdate })
   referenceDataSourceUpdates?: ReferenceDataSourceUpdate[];
 }

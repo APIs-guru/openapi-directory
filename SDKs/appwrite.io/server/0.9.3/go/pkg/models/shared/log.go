@@ -1,5 +1,7 @@
 package shared
 
+// Log
+// Log
 type Log struct {
 	ClientCode          string `json:"clientCode"`
 	ClientEngine        string `json:"clientEngine"`

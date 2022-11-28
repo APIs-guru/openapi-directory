@@ -1,23 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Category } from "./category";
 import { Links } from "./links";
 import { Meta } from "./meta";
 
 
+
 export class GetCategoriesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data", elemType: shared.Category })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: Category })
   data: Category[];
 
-  @Metadata({ data: "json, name=links" })
+  @SpeakeasyMetadata({ data: "json, name=links" })
   links?: Links;
 
-  @Metadata({ data: "json, name=meta" })
+  @SpeakeasyMetadata({ data: "json, name=meta" })
   meta?: Meta;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: string;
 
-  @Metadata({ data: "json, name=status_code" })
+  @SpeakeasyMetadata({ data: "json, name=status_code" })
   statusCode: number;
 }

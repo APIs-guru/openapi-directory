@@ -1,12 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConditionalOperatorEnum } from "./conditionaloperatorenum";
 import { ExpectedAttributeValue } from "./expectedattributevalue";
-import { AttributeValue } from "./attributevalue";
 import { AttributeValue } from "./attributevalue";
 import { ReturnConsumedCapacityEnum } from "./returnconsumedcapacityenum";
 import { ReturnItemCollectionMetricsEnum } from "./returnitemcollectionmetricsenum";
 import { ReturnValueEnum } from "./returnvalueenum";
+
 
 
 // PutItemInput
@@ -14,33 +13,33 @@ import { ReturnValueEnum } from "./returnvalueenum";
  * Represents the input of a <code>PutItem</code> operation.
 **/
 export class PutItemInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConditionExpression" })
+  @SpeakeasyMetadata({ data: "json, name=ConditionExpression" })
   conditionExpression?: string;
 
-  @Metadata({ data: "json, name=ConditionalOperator" })
+  @SpeakeasyMetadata({ data: "json, name=ConditionalOperator" })
   conditionalOperator?: ConditionalOperatorEnum;
 
-  @Metadata({ data: "json, name=Expected", elemType: shared.ExpectedAttributeValue })
+  @SpeakeasyMetadata({ data: "json, name=Expected", elemType: ExpectedAttributeValue })
   expected?: Map<string, ExpectedAttributeValue>;
 
-  @Metadata({ data: "json, name=ExpressionAttributeNames" })
+  @SpeakeasyMetadata({ data: "json, name=ExpressionAttributeNames" })
   expressionAttributeNames?: Map<string, string>;
 
-  @Metadata({ data: "json, name=ExpressionAttributeValues", elemType: shared.AttributeValue })
+  @SpeakeasyMetadata({ data: "json, name=ExpressionAttributeValues", elemType: AttributeValue })
   expressionAttributeValues?: Map<string, AttributeValue>;
 
-  @Metadata({ data: "json, name=Item", elemType: shared.AttributeValue })
+  @SpeakeasyMetadata({ data: "json, name=Item", elemType: AttributeValue })
   item: Map<string, AttributeValue>;
 
-  @Metadata({ data: "json, name=ReturnConsumedCapacity" })
+  @SpeakeasyMetadata({ data: "json, name=ReturnConsumedCapacity" })
   returnConsumedCapacity?: ReturnConsumedCapacityEnum;
 
-  @Metadata({ data: "json, name=ReturnItemCollectionMetrics" })
+  @SpeakeasyMetadata({ data: "json, name=ReturnItemCollectionMetrics" })
   returnItemCollectionMetrics?: ReturnItemCollectionMetricsEnum;
 
-  @Metadata({ data: "json, name=ReturnValues" })
+  @SpeakeasyMetadata({ data: "json, name=ReturnValues" })
   returnValues?: ReturnValueEnum;
 
-  @Metadata({ data: "json, name=TableName" })
+  @SpeakeasyMetadata({ data: "json, name=TableName" })
   tableName: string;
 }

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudIntegrationsV1alphaMonitorExecutionStatsRequestMashQueryOperationModeUnionConfig } from "./googlecloudintegrationsv1alphamonitorexecutionstatsrequestmashqueryoperationmodeunionconfig";
 
+
 export enum GoogleCloudIntegrationsV1alphaMonitorExecutionStatsRequestMashQueryOperationModeOperationTypeEnum {
-    OperationTypeUnspecified = "OPERATION_TYPE_UNSPECIFIED"
-,    Union = "UNION"
-,    Join = "JOIN"
+    OperationTypeUnspecified = "OPERATION_TYPE_UNSPECIFIED",
+    Union = "UNION",
+    Join = "JOIN"
 }
 
 
@@ -13,12 +14,12 @@ export enum GoogleCloudIntegrationsV1alphaMonitorExecutionStatsRequestMashQueryO
  * Operation between 2 query
 **/
 export class GoogleCloudIntegrationsV1alphaMonitorExecutionStatsRequestMashQueryOperationMode extends SpeakeasyBase {
-  @Metadata({ data: "json, name=joinConfig" })
+  @SpeakeasyMetadata({ data: "json, name=joinConfig" })
   joinConfig?: Map<string, any>;
 
-  @Metadata({ data: "json, name=operationType" })
+  @SpeakeasyMetadata({ data: "json, name=operationType" })
   operationType?: GoogleCloudIntegrationsV1alphaMonitorExecutionStatsRequestMashQueryOperationModeOperationTypeEnum;
 
-  @Metadata({ data: "json, name=unionConfig" })
+  @SpeakeasyMetadata({ data: "json, name=unionConfig" })
   unionConfig?: GoogleCloudIntegrationsV1alphaMonitorExecutionStatsRequestMashQueryOperationModeUnionConfig;
 }

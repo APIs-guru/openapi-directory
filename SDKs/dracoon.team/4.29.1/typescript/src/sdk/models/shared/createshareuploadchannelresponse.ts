@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CreateShareUploadChannelResponse
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Upload channel information
 **/
 export class CreateShareUploadChannelResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=token" })
+  @SpeakeasyMetadata({ data: "json, name=token" })
   token?: string;
 
-  @Metadata({ data: "json, name=uploadId" })
+  @SpeakeasyMetadata({ data: "json, name=uploadId" })
   uploadId: string;
 
-  @Metadata({ data: "json, name=uploadUrl" })
+  @SpeakeasyMetadata({ data: "json, name=uploadUrl" })
   uploadUrl: string;
 }

@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum PasswordValidationPolicyComplexityEnum {
-    ComplexityUnspecified = "COMPLEXITY_UNSPECIFIED"
-,    ComplexityDefault = "COMPLEXITY_DEFAULT"
+    ComplexityUnspecified = "COMPLEXITY_UNSPECIFIED",
+    ComplexityDefault = "COMPLEXITY_DEFAULT"
 }
 
 
@@ -11,21 +12,21 @@ export enum PasswordValidationPolicyComplexityEnum {
  * Database instance local user password validation policy
 **/
 export class PasswordValidationPolicy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=complexity" })
+  @SpeakeasyMetadata({ data: "json, name=complexity" })
   complexity?: PasswordValidationPolicyComplexityEnum;
 
-  @Metadata({ data: "json, name=disallowUsernameSubstring" })
+  @SpeakeasyMetadata({ data: "json, name=disallowUsernameSubstring" })
   disallowUsernameSubstring?: boolean;
 
-  @Metadata({ data: "json, name=enablePasswordPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=enablePasswordPolicy" })
   enablePasswordPolicy?: boolean;
 
-  @Metadata({ data: "json, name=minLength" })
+  @SpeakeasyMetadata({ data: "json, name=minLength" })
   minLength?: number;
 
-  @Metadata({ data: "json, name=passwordChangeInterval" })
+  @SpeakeasyMetadata({ data: "json, name=passwordChangeInterval" })
   passwordChangeInterval?: string;
 
-  @Metadata({ data: "json, name=reuseInterval" })
+  @SpeakeasyMetadata({ data: "json, name=reuseInterval" })
   reuseInterval?: number;
 }

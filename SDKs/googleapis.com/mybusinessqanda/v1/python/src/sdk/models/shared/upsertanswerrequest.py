@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import answer
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
-class UpsertAnswerRequest:
-    answer: Optional[answer.Answer] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'answer' }})
+class UpsertAnswerRequestInput:
+    r"""UpsertAnswerRequestInput
+    Request message for QuestionsAndAnswers.UpsertAnswer
+    """
+    
+    answer: Optional[AnswerInput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('answer') }})
     

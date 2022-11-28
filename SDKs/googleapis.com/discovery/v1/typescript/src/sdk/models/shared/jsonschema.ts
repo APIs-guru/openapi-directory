@@ -1,8 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { JsonSchema } from "./jsonschema";
-import { JsonSchema } from "./jsonschema";
-import { JsonSchema } from "./jsonschema";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // JsonSchemaAnnotations
@@ -10,16 +7,16 @@ import { JsonSchema } from "./jsonschema";
  * Additional information about this property.
 **/
 export class JsonSchemaAnnotations extends SpeakeasyBase {
-  @Metadata({ data: "json, name=required" })
+  @SpeakeasyMetadata({ data: "json, name=required" })
   required?: string[];
 }
 
 
 export class JsonSchemaVariantMap extends SpeakeasyBase {
-  @Metadata({ data: "json, name=$ref" })
+  @SpeakeasyMetadata({ data: "json, name=$ref" })
   dollarRef?: string;
 
-  @Metadata({ data: "json, name=type_value" })
+  @SpeakeasyMetadata({ data: "json, name=type_value" })
   typeValue?: string;
 }
 
@@ -29,69 +26,69 @@ export class JsonSchemaVariantMap extends SpeakeasyBase {
  * In a variant data type, the value of one property is used to determine how to interpret the entire entity. Its value must exist in a map of descriminant values to schema names.
 **/
 export class JsonSchemaVariant extends SpeakeasyBase {
-  @Metadata({ data: "json, name=discriminant" })
+  @SpeakeasyMetadata({ data: "json, name=discriminant" })
   discriminant?: string;
 
-  @Metadata({ data: "json, name=map", elemType: shared.JsonSchemaVariantMap })
+  @SpeakeasyMetadata({ data: "json, name=map", elemType: JsonSchemaVariantMap })
   map?: JsonSchemaVariantMap[];
 }
 
 
 export class JsonSchema extends SpeakeasyBase {
-  @Metadata({ data: "json, name=$ref" })
+  @SpeakeasyMetadata({ data: "json, name=$ref" })
   dollarRef?: string;
 
-  @Metadata({ data: "json, name=additionalProperties" })
+  @SpeakeasyMetadata({ data: "json, name=additionalProperties" })
   additionalProperties?: JsonSchema;
 
-  @Metadata({ data: "json, name=annotations" })
+  @SpeakeasyMetadata({ data: "json, name=annotations" })
   annotations?: JsonSchemaAnnotations;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=enum" })
+  @SpeakeasyMetadata({ data: "json, name=enum" })
   enum?: string[];
 
-  @Metadata({ data: "json, name=enumDescriptions" })
+  @SpeakeasyMetadata({ data: "json, name=enumDescriptions" })
   enumDescriptions?: string[];
 
-  @Metadata({ data: "json, name=format" })
+  @SpeakeasyMetadata({ data: "json, name=format" })
   format?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=items" })
+  @SpeakeasyMetadata({ data: "json, name=items" })
   items?: JsonSchema;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: string;
 
-  @Metadata({ data: "json, name=maximum" })
+  @SpeakeasyMetadata({ data: "json, name=maximum" })
   maximum?: string;
 
-  @Metadata({ data: "json, name=minimum" })
+  @SpeakeasyMetadata({ data: "json, name=minimum" })
   minimum?: string;
 
-  @Metadata({ data: "json, name=pattern" })
+  @SpeakeasyMetadata({ data: "json, name=pattern" })
   pattern?: string;
 
-  @Metadata({ data: "json, name=properties", elemType: shared.JsonSchema })
+  @SpeakeasyMetadata({ data: "json, name=properties", elemType: JsonSchema })
   properties?: Map<string, JsonSchema>;
 
-  @Metadata({ data: "json, name=readOnly" })
+  @SpeakeasyMetadata({ data: "json, name=readOnly" })
   readOnly?: boolean;
 
-  @Metadata({ data: "json, name=repeated" })
+  @SpeakeasyMetadata({ data: "json, name=repeated" })
   repeated?: boolean;
 
-  @Metadata({ data: "json, name=required" })
+  @SpeakeasyMetadata({ data: "json, name=required" })
   required?: boolean;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 
-  @Metadata({ data: "json, name=variant" })
+  @SpeakeasyMetadata({ data: "json, name=variant" })
   variant?: JsonSchemaVariant;
 }

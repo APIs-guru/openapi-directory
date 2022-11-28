@@ -5,12 +5,12 @@ from sdk.models import shared
 
 @dataclass
 class AuthLoginRequest:
-    request: shared.LoginDto = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.LoginDto = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class AuthLoginResponse:
+    content_type: str = field()
+    status_code: int = field()
     auth_login_200_application_octet_stream_binary_string: Optional[bytes] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class GetTokenMetadataOfUtxoPathParams:
-    tokenid: str = field(default=None, metadata={'path_param': { 'field_name': 'tokenid', 'style': 'simple', 'explode': False }})
-    utxo: str = field(default=None, metadata={'path_param': { 'field_name': 'utxo', 'style': 'simple', 'explode': False }})
+    tokenid: str = field(metadata={'path_param': { 'field_name': 'tokenid', 'style': 'simple', 'explode': False }})
+    utxo: str = field(metadata={'path_param': { 'field_name': 'utxo', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,14 +16,14 @@ class GetTokenMetadataOfUtxoQueryParams:
 
 @dataclass
 class GetTokenMetadataOfUtxoRequest:
-    path_params: GetTokenMetadataOfUtxoPathParams = field(default=None)
-    query_params: GetTokenMetadataOfUtxoQueryParams = field(default=None)
+    path_params: GetTokenMetadataOfUtxoPathParams = field()
+    query_params: GetTokenMetadataOfUtxoQueryParams = field()
     
 
 @dataclass
 class GetTokenMetadataOfUtxoResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[shared.Error] = field(default=None)
-    status_code: int = field(default=None)
     get_token_metadata_response: Optional[shared.GetTokenMetadataResponse] = field(default=None)
     

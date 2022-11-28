@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class RegionNameEnum(str, Enum):
     US_EAST_1 = "us-east-1"

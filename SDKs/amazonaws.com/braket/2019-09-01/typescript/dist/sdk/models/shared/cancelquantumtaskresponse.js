@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CancellationStatusEnum } from "./cancellationstatusenum";
 var CancelQuantumTaskResponse = /** @class */ (function (_super) {
     __extends(CancelQuantumTaskResponse, _super);
@@ -30,11 +30,11 @@ var CancelQuantumTaskResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=cancellationStatus" }),
+        SpeakeasyMetadata({ data: "json, name=cancellationStatus" }),
         __metadata("design:type", String)
     ], CancelQuantumTaskResponse.prototype, "cancellationStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=quantumTaskArn" }),
+        SpeakeasyMetadata({ data: "json, name=quantumTaskArn" }),
         __metadata("design:type", String)
     ], CancelQuantumTaskResponse.prototype, "quantumTaskArn", void 0);
     return CancelQuantumTaskResponse;

@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class EnableSharingWithAwsOrganizationResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=returnValue" })
+  @SpeakeasyMetadata({ data: "json, name=returnValue" })
   returnValue?: boolean;
 }

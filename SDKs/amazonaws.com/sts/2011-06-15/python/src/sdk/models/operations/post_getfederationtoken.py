@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostGetFederationTokenActionEnum(str, Enum):
     GET_FEDERATION_TOKEN = "GetFederationToken"
@@ -10,8 +14,8 @@ class PostGetFederationTokenVersionEnum(str, Enum):
 
 @dataclass
 class PostGetFederationTokenQueryParams:
-    action: PostGetFederationTokenActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostGetFederationTokenVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostGetFederationTokenActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostGetFederationTokenVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostGetFederationTokenHeaders:
 
 @dataclass
 class PostGetFederationTokenRequest:
-    query_params: PostGetFederationTokenQueryParams = field(default=None)
-    headers: PostGetFederationTokenHeaders = field(default=None)
+    headers: PostGetFederationTokenHeaders = field()
+    query_params: PostGetFederationTokenQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostGetFederationTokenResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

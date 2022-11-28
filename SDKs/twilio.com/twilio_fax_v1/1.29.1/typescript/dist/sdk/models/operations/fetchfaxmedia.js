@@ -22,9 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export var FETCHFAXMEDIA_SERVERS = [
+export var FetchFaxMediaServerList = [
     "https://fax.twilio.com",
 ];
 var FetchFaxMediaPathParams = /** @class */ (function (_super) {
@@ -33,11 +33,11 @@ var FetchFaxMediaPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=FaxSid" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=FaxSid" }),
         __metadata("design:type", String)
     ], FetchFaxMediaPathParams.prototype, "faxSid", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=Sid" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=Sid" }),
         __metadata("design:type", String)
     ], FetchFaxMediaPathParams.prototype, "sid", void 0);
     return FetchFaxMediaPathParams;
@@ -49,7 +49,7 @@ var FetchFaxMediaSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
         __metadata("design:type", shared.SchemeAccountSidAuthToken)
     ], FetchFaxMediaSecurity.prototype, "accountSidAuthToken", void 0);
     return FetchFaxMediaSecurity;
@@ -61,15 +61,15 @@ var FetchFaxMediaRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], FetchFaxMediaRequest.prototype, "serverUrl", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FetchFaxMediaPathParams)
     ], FetchFaxMediaRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FetchFaxMediaSecurity)
     ], FetchFaxMediaRequest.prototype, "security", void 0);
     return FetchFaxMediaRequest;
@@ -81,15 +81,15 @@ var FetchFaxMediaResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], FetchFaxMediaResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], FetchFaxMediaResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.FaxV1FaxFaxMedia)
     ], FetchFaxMediaResponse.prototype, "faxV1FaxFaxMedia", void 0);
     return FetchFaxMediaResponse;

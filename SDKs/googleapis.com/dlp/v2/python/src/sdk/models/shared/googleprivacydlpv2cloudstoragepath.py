@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class GooglePrivacyDlpV2CloudStoragePath:
-    path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'path' }})
+    r"""GooglePrivacyDlpV2CloudStoragePath
+    Message representing a single file or path in Cloud Storage.
+    """
+    
+    path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('path') }})
     

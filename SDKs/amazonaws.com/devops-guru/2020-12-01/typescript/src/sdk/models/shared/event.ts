@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EventDataSourceEnum } from "./eventdatasourceenum";
 import { EventClassEnum } from "./eventclassenum";
 import { ResourceCollection } from "./resourcecollection";
 import { EventResource } from "./eventresource";
+
 
 
 // Event
@@ -11,27 +11,27 @@ import { EventResource } from "./eventresource";
  *  An AWS resource event. AWS resource events and metrics are analyzed by DevOps Guru to find anomalous behavior and provide recommendations to improve your operational solutions. 
 **/
 export class Event extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DataSource" })
+  @SpeakeasyMetadata({ data: "json, name=DataSource" })
   dataSource?: EventDataSourceEnum;
 
-  @Metadata({ data: "json, name=EventClass" })
+  @SpeakeasyMetadata({ data: "json, name=EventClass" })
   eventClass?: EventClassEnum;
 
-  @Metadata({ data: "json, name=EventSource" })
+  @SpeakeasyMetadata({ data: "json, name=EventSource" })
   eventSource?: string;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=ResourceCollection" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceCollection" })
   resourceCollection?: ResourceCollection;
 
-  @Metadata({ data: "json, name=Resources", elemType: shared.EventResource })
+  @SpeakeasyMetadata({ data: "json, name=Resources", elemType: EventResource })
   resources?: EventResource[];
 
-  @Metadata({ data: "json, name=Time" })
+  @SpeakeasyMetadata({ data: "json, name=Time" })
   time?: Date;
 }

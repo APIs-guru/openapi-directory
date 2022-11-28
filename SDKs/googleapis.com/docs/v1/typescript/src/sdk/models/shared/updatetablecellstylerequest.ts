@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TableCellStyle } from "./tablecellstyle";
 import { TableRange } from "./tablerange";
 import { Location } from "./location";
+
 
 
 // UpdateTableCellStyleRequest
@@ -9,15 +10,15 @@ import { Location } from "./location";
  * Updates the style of a range of table cells.
 **/
 export class UpdateTableCellStyleRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fields" })
+  @SpeakeasyMetadata({ data: "json, name=fields" })
   fields?: string;
 
-  @Metadata({ data: "json, name=tableCellStyle" })
+  @SpeakeasyMetadata({ data: "json, name=tableCellStyle" })
   tableCellStyle?: TableCellStyle;
 
-  @Metadata({ data: "json, name=tableRange" })
+  @SpeakeasyMetadata({ data: "json, name=tableRange" })
   tableRange?: TableRange;
 
-  @Metadata({ data: "json, name=tableStartLocation" })
+  @SpeakeasyMetadata({ data: "json, name=tableStartLocation" })
   tableStartLocation?: Location;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// SuggestResult
+// One suggestion result.
 type SuggestResult struct {
 	PeopleSuggestion *PeopleSuggestion      `json:"peopleSuggestion,omitempty"`
 	QuerySuggestion  map[string]interface{} `json:"querySuggestion,omitempty"`

@@ -9,6 +9,8 @@ const (
 	LeaderboardEntryTimeSpanEnumDaily                    LeaderboardEntryTimeSpanEnum = "DAILY"
 )
 
+// LeaderboardEntry
+// The Leaderboard Entry resource.
 type LeaderboardEntry struct {
 	FormattedScore       *string                       `json:"formattedScore,omitempty"`
 	FormattedScoreRank   *string                       `json:"formattedScoreRank,omitempty"`

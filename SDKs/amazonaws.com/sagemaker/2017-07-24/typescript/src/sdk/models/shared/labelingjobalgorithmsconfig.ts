@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LabelingJobResourceConfig } from "./labelingjobresourceconfig";
+
 
 
 // LabelingJobAlgorithmsConfig
@@ -7,12 +8,12 @@ import { LabelingJobResourceConfig } from "./labelingjobresourceconfig";
  * Provides configuration information for auto-labeling of your data objects. A <code>LabelingJobAlgorithmsConfig</code> object must be supplied in order to use auto-labeling.
 **/
 export class LabelingJobAlgorithmsConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=InitialActiveLearningModelArn" })
+  @SpeakeasyMetadata({ data: "json, name=InitialActiveLearningModelArn" })
   initialActiveLearningModelArn?: string;
 
-  @Metadata({ data: "json, name=LabelingJobAlgorithmSpecificationArn" })
+  @SpeakeasyMetadata({ data: "json, name=LabelingJobAlgorithmSpecificationArn" })
   labelingJobAlgorithmSpecificationArn: string;
 
-  @Metadata({ data: "json, name=LabelingJobResourceConfig" })
+  @SpeakeasyMetadata({ data: "json, name=LabelingJobResourceConfig" })
   labelingJobResourceConfig?: LabelingJobResourceConfig;
 }

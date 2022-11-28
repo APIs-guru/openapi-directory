@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DeploymentmanagerCompositeTypesDeletePathParams:
-    composite_type: str = field(default=None, metadata={'path_param': { 'field_name': 'compositeType', 'style': 'simple', 'explode': False }})
-    project: str = field(default=None, metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
+    composite_type: str = field(metadata={'path_param': { 'field_name': 'compositeType', 'style': 'simple', 'explode': False }})
+    project: str = field(metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,14 +27,14 @@ class DeploymentmanagerCompositeTypesDeleteQueryParams:
 
 @dataclass
 class DeploymentmanagerCompositeTypesDeleteSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DeploymentmanagerCompositeTypesDeleteSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -44,14 +45,14 @@ class DeploymentmanagerCompositeTypesDeleteSecurity:
 
 @dataclass
 class DeploymentmanagerCompositeTypesDeleteRequest:
-    path_params: DeploymentmanagerCompositeTypesDeletePathParams = field(default=None)
-    query_params: DeploymentmanagerCompositeTypesDeleteQueryParams = field(default=None)
-    security: DeploymentmanagerCompositeTypesDeleteSecurity = field(default=None)
+    path_params: DeploymentmanagerCompositeTypesDeletePathParams = field()
+    query_params: DeploymentmanagerCompositeTypesDeleteQueryParams = field()
+    security: DeploymentmanagerCompositeTypesDeleteSecurity = field()
     
 
 @dataclass
 class DeploymentmanagerCompositeTypesDeleteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

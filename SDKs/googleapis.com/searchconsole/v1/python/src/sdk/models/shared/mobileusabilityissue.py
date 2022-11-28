@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class MobileUsabilityIssueIssueTypeEnum(str, Enum):
     MOBILE_USABILITY_ISSUE_TYPE_UNSPECIFIED = "MOBILE_USABILITY_ISSUE_TYPE_UNSPECIFIED"
@@ -20,7 +22,11 @@ class MobileUsabilityIssueSeverityEnum(str, Enum):
 @dataclass_json
 @dataclass
 class MobileUsabilityIssue:
-    issue_type: Optional[MobileUsabilityIssueIssueTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'issueType' }})
-    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
-    severity: Optional[MobileUsabilityIssueSeverityEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'severity' }})
+    r"""MobileUsabilityIssue
+    Mobile-usability issue.
+    """
+    
+    issue_type: Optional[MobileUsabilityIssueIssueTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('issueType') }})
+    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('message') }})
+    severity: Optional[MobileUsabilityIssueSeverityEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('severity') }})
     

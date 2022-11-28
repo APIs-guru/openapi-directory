@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DirectoryVpcSettingsDescription
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains information about the directory.
 **/
 export class DirectoryVpcSettingsDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AvailabilityZones" })
+  @SpeakeasyMetadata({ data: "json, name=AvailabilityZones" })
   availabilityZones?: string[];
 
-  @Metadata({ data: "json, name=SecurityGroupId" })
+  @SpeakeasyMetadata({ data: "json, name=SecurityGroupId" })
   securityGroupId?: string;
 
-  @Metadata({ data: "json, name=SubnetIds" })
+  @SpeakeasyMetadata({ data: "json, name=SubnetIds" })
   subnetIds?: string[];
 
-  @Metadata({ data: "json, name=VpcId" })
+  @SpeakeasyMetadata({ data: "json, name=VpcId" })
   vpcId?: string;
 }

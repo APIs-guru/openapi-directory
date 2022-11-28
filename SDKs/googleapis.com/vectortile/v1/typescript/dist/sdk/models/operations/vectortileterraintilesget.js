@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var VectortileTerraintilesGetPathParams = /** @class */ (function (_super) {
     __extends(VectortileTerraintilesGetPathParams, _super);
@@ -30,7 +30,7 @@ var VectortileTerraintilesGetPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=name" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=name" }),
         __metadata("design:type", String)
     ], VectortileTerraintilesGetPathParams.prototype, "name", void 0);
     return VectortileTerraintilesGetPathParams;
@@ -59,115 +59,115 @@ var VectortileTerraintilesGetQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], VectortileTerraintilesGetQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], VectortileTerraintilesGetQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], VectortileTerraintilesGetQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=altitudePrecisionCentimeters" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=altitudePrecisionCentimeters" }),
         __metadata("design:type", Number)
     ], VectortileTerraintilesGetQueryParams.prototype, "altitudePrecisionCentimeters", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], VectortileTerraintilesGetQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=clientInfo.apiClient" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=clientInfo.apiClient" }),
         __metadata("design:type", String)
     ], VectortileTerraintilesGetQueryParams.prototype, "clientInfoApiClient", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=clientInfo.applicationId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=clientInfo.applicationId" }),
         __metadata("design:type", String)
     ], VectortileTerraintilesGetQueryParams.prototype, "clientInfoApplicationId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=clientInfo.applicationVersion" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=clientInfo.applicationVersion" }),
         __metadata("design:type", String)
     ], VectortileTerraintilesGetQueryParams.prototype, "clientInfoApplicationVersion", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=clientInfo.deviceModel" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=clientInfo.deviceModel" }),
         __metadata("design:type", String)
     ], VectortileTerraintilesGetQueryParams.prototype, "clientInfoDeviceModel", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=clientInfo.operatingSystem" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=clientInfo.operatingSystem" }),
         __metadata("design:type", String)
     ], VectortileTerraintilesGetQueryParams.prototype, "clientInfoOperatingSystem", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=clientInfo.platform" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=clientInfo.platform" }),
         __metadata("design:type", String)
     ], VectortileTerraintilesGetQueryParams.prototype, "clientInfoPlatform", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=clientInfo.userId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=clientInfo.userId" }),
         __metadata("design:type", String)
     ], VectortileTerraintilesGetQueryParams.prototype, "clientInfoUserId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=enableModeledVolumes" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=enableModeledVolumes" }),
         __metadata("design:type", Boolean)
     ], VectortileTerraintilesGetQueryParams.prototype, "enableModeledVolumes", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=enablePoliticalFeatures" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=enablePoliticalFeatures" }),
         __metadata("design:type", Boolean)
     ], VectortileTerraintilesGetQueryParams.prototype, "enablePoliticalFeatures", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=enablePrivateRoads" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=enablePrivateRoads" }),
         __metadata("design:type", Boolean)
     ], VectortileTerraintilesGetQueryParams.prototype, "enablePrivateRoads", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=enableUnclippedBuildings" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=enableUnclippedBuildings" }),
         __metadata("design:type", Boolean)
     ], VectortileTerraintilesGetQueryParams.prototype, "enableUnclippedBuildings", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], VectortileTerraintilesGetQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], VectortileTerraintilesGetQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=languageCode" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=languageCode" }),
         __metadata("design:type", String)
     ], VectortileTerraintilesGetQueryParams.prototype, "languageCode", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=maxElevationResolutionCells" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxElevationResolutionCells" }),
         __metadata("design:type", Number)
     ], VectortileTerraintilesGetQueryParams.prototype, "maxElevationResolutionCells", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=minElevationResolutionCells" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=minElevationResolutionCells" }),
         __metadata("design:type", Number)
     ], VectortileTerraintilesGetQueryParams.prototype, "minElevationResolutionCells", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], VectortileTerraintilesGetQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], VectortileTerraintilesGetQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], VectortileTerraintilesGetQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=regionCode" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=regionCode" }),
         __metadata("design:type", String)
     ], VectortileTerraintilesGetQueryParams.prototype, "regionCode", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=terrainFormats" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=terrainFormats" }),
         __metadata("design:type", Array)
     ], VectortileTerraintilesGetQueryParams.prototype, "terrainFormats", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], VectortileTerraintilesGetQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], VectortileTerraintilesGetQueryParams.prototype, "uploadProtocol", void 0);
     return VectortileTerraintilesGetQueryParams;
@@ -179,11 +179,11 @@ var VectortileTerraintilesGetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", VectortileTerraintilesGetPathParams)
     ], VectortileTerraintilesGetRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", VectortileTerraintilesGetQueryParams)
     ], VectortileTerraintilesGetRequest.prototype, "queryParams", void 0);
     return VectortileTerraintilesGetRequest;
@@ -195,15 +195,15 @@ var VectortileTerraintilesGetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], VectortileTerraintilesGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], VectortileTerraintilesGetResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.TerrainTile)
     ], VectortileTerraintilesGetResponse.prototype, "terrainTile", void 0);
     return VectortileTerraintilesGetResponse;

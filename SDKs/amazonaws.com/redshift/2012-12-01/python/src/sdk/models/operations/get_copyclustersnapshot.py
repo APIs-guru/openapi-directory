@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetCopyClusterSnapshotActionEnum(str, Enum):
     COPY_CLUSTER_SNAPSHOT = "CopyClusterSnapshot"
@@ -10,12 +14,12 @@ class GetCopyClusterSnapshotVersionEnum(str, Enum):
 
 @dataclass
 class GetCopyClusterSnapshotQueryParams:
-    action: GetCopyClusterSnapshotActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetCopyClusterSnapshotActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    source_snapshot_identifier: str = field(metadata={'query_param': { 'field_name': 'SourceSnapshotIdentifier', 'style': 'form', 'explode': True }})
+    target_snapshot_identifier: str = field(metadata={'query_param': { 'field_name': 'TargetSnapshotIdentifier', 'style': 'form', 'explode': True }})
+    version: GetCopyClusterSnapshotVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     manual_snapshot_retention_period: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'ManualSnapshotRetentionPeriod', 'style': 'form', 'explode': True }})
     source_snapshot_cluster_identifier: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'SourceSnapshotClusterIdentifier', 'style': 'form', 'explode': True }})
-    source_snapshot_identifier: str = field(default=None, metadata={'query_param': { 'field_name': 'SourceSnapshotIdentifier', 'style': 'form', 'explode': True }})
-    target_snapshot_identifier: str = field(default=None, metadata={'query_param': { 'field_name': 'TargetSnapshotIdentifier', 'style': 'form', 'explode': True }})
-    version: GetCopyClusterSnapshotVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -31,13 +35,13 @@ class GetCopyClusterSnapshotHeaders:
 
 @dataclass
 class GetCopyClusterSnapshotRequest:
-    query_params: GetCopyClusterSnapshotQueryParams = field(default=None)
-    headers: GetCopyClusterSnapshotHeaders = field(default=None)
+    headers: GetCopyClusterSnapshotHeaders = field()
+    query_params: GetCopyClusterSnapshotQueryParams = field()
     
 
 @dataclass
 class GetCopyClusterSnapshotResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

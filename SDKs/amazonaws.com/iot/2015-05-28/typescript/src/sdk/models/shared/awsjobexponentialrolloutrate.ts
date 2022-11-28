@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsJobRateIncreaseCriteria } from "./awsjobrateincreasecriteria";
+
 
 
 // AwsJobExponentialRolloutRate
@@ -7,12 +8,12 @@ import { AwsJobRateIncreaseCriteria } from "./awsjobrateincreasecriteria";
  * The rate of increase for a job rollout. This parameter allows you to define an exponential rate increase for a job rollout.
 **/
 export class AwsJobExponentialRolloutRate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=baseRatePerMinute" })
+  @SpeakeasyMetadata({ data: "json, name=baseRatePerMinute" })
   baseRatePerMinute: number;
 
-  @Metadata({ data: "json, name=incrementFactor" })
+  @SpeakeasyMetadata({ data: "json, name=incrementFactor" })
   incrementFactor: number;
 
-  @Metadata({ data: "json, name=rateIncreaseCriteria" })
+  @SpeakeasyMetadata({ data: "json, name=rateIncreaseCriteria" })
   rateIncreaseCriteria: AwsJobRateIncreaseCriteria;
 }

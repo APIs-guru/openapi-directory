@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceShareAssociationTypeEnum } from "./resourceshareassociationtypeenum";
 import { ResourceShareAssociationStatusEnum } from "./resourceshareassociationstatusenum";
+
 
 
 // ResourceShareAssociation
@@ -8,30 +9,30 @@ import { ResourceShareAssociationStatusEnum } from "./resourceshareassociationst
  * Describes an association with a resource share.
 **/
 export class ResourceShareAssociation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=associatedEntity" })
+  @SpeakeasyMetadata({ data: "json, name=associatedEntity" })
   associatedEntity?: string;
 
-  @Metadata({ data: "json, name=associationType" })
+  @SpeakeasyMetadata({ data: "json, name=associationType" })
   associationType?: ResourceShareAssociationTypeEnum;
 
-  @Metadata({ data: "json, name=creationTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=external" })
+  @SpeakeasyMetadata({ data: "json, name=external" })
   external?: boolean;
 
-  @Metadata({ data: "json, name=lastUpdatedTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdatedTime" })
   lastUpdatedTime?: Date;
 
-  @Metadata({ data: "json, name=resourceShareArn" })
+  @SpeakeasyMetadata({ data: "json, name=resourceShareArn" })
   resourceShareArn?: string;
 
-  @Metadata({ data: "json, name=resourceShareName" })
+  @SpeakeasyMetadata({ data: "json, name=resourceShareName" })
   resourceShareName?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: ResourceShareAssociationStatusEnum;
 
-  @Metadata({ data: "json, name=statusMessage" })
+  @SpeakeasyMetadata({ data: "json, name=statusMessage" })
   statusMessage?: string;
 }

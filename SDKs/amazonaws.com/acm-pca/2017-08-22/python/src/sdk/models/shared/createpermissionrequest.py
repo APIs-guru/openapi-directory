@@ -1,14 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import actiontype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreatePermissionRequest:
-    actions: List[actiontype_enum.ActionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Actions' }})
-    certificate_authority_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CertificateAuthorityArn' }})
-    principal: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Principal' }})
-    source_account: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SourceAccount' }})
+    actions: List[ActionTypeEnum] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Actions') }})
+    certificate_authority_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('CertificateAuthorityArn') }})
+    principal: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Principal') }})
+    source_account: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SourceAccount') }})
     

@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateMediaEncoderPathRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
   mediaEncoderPathDto?: shared.MediaEncoderPathDto;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   mediaEncoderPathDto1?: shared.MediaEncoderPathDto;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   mediaEncoderPathDto2?: shared.MediaEncoderPathDto;
 }
 
 
 export class UpdateMediaEncoderPathSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   customAuthentication: shared.SchemeCustomAuthentication;
 }
 
 
 export class UpdateMediaEncoderPathRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   request: UpdateMediaEncoderPathRequests;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: UpdateMediaEncoderPathSecurity;
 }
 
 
 export class UpdateMediaEncoderPathResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

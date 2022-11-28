@@ -17,14 +17,14 @@ class PostPortfolioAbcRequests:
 
 @dataclass
 class PostPortfolioAbcRequest:
-    headers: PostPortfolioAbcHeaders = field(default=None)
+    headers: PostPortfolioAbcHeaders = field()
     request: Optional[PostPortfolioAbcRequests] = field(default=None)
     
 
 @dataclass
 class PostPortfolioAbcResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     portfolio_abc_models: Optional[List[shared.PortfolioAbcModel]] = field(default=None)
-    status_code: int = field(default=None)
     

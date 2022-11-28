@@ -1,14 +1,20 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import compliancetype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetComplianceDetailsByConfigRuleRequest:
-    compliance_types: Optional[List[compliancetype_enum.ComplianceTypeEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ComplianceTypes' }})
-    config_rule_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ConfigRuleName' }})
-    limit: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Limit' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
+    r"""GetComplianceDetailsByConfigRuleRequest
+    <p/>
+    """
+    
+    config_rule_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ConfigRuleName') }})
+    compliance_types: Optional[List[ComplianceTypeEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ComplianceTypes') }})
+    limit: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Limit') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
     

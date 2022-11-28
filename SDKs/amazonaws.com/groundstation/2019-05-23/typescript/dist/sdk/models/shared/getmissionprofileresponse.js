@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GetMissionProfileResponse
 /**
  * <p/>
@@ -33,43 +33,43 @@ var GetMissionProfileResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=contactPostPassDurationSeconds" }),
+        SpeakeasyMetadata({ data: "json, name=contactPostPassDurationSeconds" }),
         __metadata("design:type", Number)
     ], GetMissionProfileResponse.prototype, "contactPostPassDurationSeconds", void 0);
     __decorate([
-        Metadata({ data: "json, name=contactPrePassDurationSeconds" }),
+        SpeakeasyMetadata({ data: "json, name=contactPrePassDurationSeconds" }),
         __metadata("design:type", Number)
     ], GetMissionProfileResponse.prototype, "contactPrePassDurationSeconds", void 0);
     __decorate([
-        Metadata({ data: "json, name=dataflowEdges" }),
+        SpeakeasyMetadata({ data: "json, name=dataflowEdges" }),
         __metadata("design:type", Array)
     ], GetMissionProfileResponse.prototype, "dataflowEdges", void 0);
     __decorate([
-        Metadata({ data: "json, name=minimumViableContactDurationSeconds" }),
+        SpeakeasyMetadata({ data: "json, name=minimumViableContactDurationSeconds" }),
         __metadata("design:type", Number)
     ], GetMissionProfileResponse.prototype, "minimumViableContactDurationSeconds", void 0);
     __decorate([
-        Metadata({ data: "json, name=missionProfileArn" }),
+        SpeakeasyMetadata({ data: "json, name=missionProfileArn" }),
         __metadata("design:type", String)
     ], GetMissionProfileResponse.prototype, "missionProfileArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=missionProfileId" }),
+        SpeakeasyMetadata({ data: "json, name=missionProfileId" }),
         __metadata("design:type", String)
     ], GetMissionProfileResponse.prototype, "missionProfileId", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], GetMissionProfileResponse.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=region" }),
+        SpeakeasyMetadata({ data: "json, name=region" }),
         __metadata("design:type", String)
     ], GetMissionProfileResponse.prototype, "region", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags" }),
+        SpeakeasyMetadata({ data: "json, name=tags" }),
         __metadata("design:type", Map)
     ], GetMissionProfileResponse.prototype, "tags", void 0);
     __decorate([
-        Metadata({ data: "json, name=trackingConfigArn" }),
+        SpeakeasyMetadata({ data: "json, name=trackingConfigArn" }),
         __metadata("design:type", String)
     ], GetMissionProfileResponse.prototype, "trackingConfigArn", void 0);
     return GetMissionProfileResponse;

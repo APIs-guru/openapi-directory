@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Attributes } from "./attributes";
 import { DestinationStatus } from "./destinationstatus";
 import { Issue } from "./issue";
+
 
 
 // Product
@@ -10,27 +10,27 @@ import { Issue } from "./issue";
  * Product data.
 **/
 export class Product extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attributes" })
+  @SpeakeasyMetadata({ data: "json, name=attributes" })
   attributes?: Attributes;
 
-  @Metadata({ data: "json, name=contentLanguage" })
+  @SpeakeasyMetadata({ data: "json, name=contentLanguage" })
   contentLanguage?: string;
 
-  @Metadata({ data: "json, name=destinationStatuses", elemType: shared.DestinationStatus })
+  @SpeakeasyMetadata({ data: "json, name=destinationStatuses", elemType: DestinationStatus })
   destinationStatuses?: DestinationStatus[];
 
-  @Metadata({ data: "json, name=issues", elemType: shared.Issue })
+  @SpeakeasyMetadata({ data: "json, name=issues", elemType: Issue })
   issues?: Issue[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=parent" })
+  @SpeakeasyMetadata({ data: "json, name=parent" })
   parent?: string;
 
-  @Metadata({ data: "json, name=productId" })
+  @SpeakeasyMetadata({ data: "json, name=productId" })
   productId?: string;
 
-  @Metadata({ data: "json, name=targetCountry" })
+  @SpeakeasyMetadata({ data: "json, name=targetCountry" })
   targetCountry?: string;
 }

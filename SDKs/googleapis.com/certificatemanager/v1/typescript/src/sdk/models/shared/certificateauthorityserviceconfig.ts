@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CertificateAuthorityServiceConfig
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains information required to contact CA service.
 **/
 export class CertificateAuthorityServiceConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=caPool" })
+  @SpeakeasyMetadata({ data: "json, name=caPool" })
   caPool?: string;
 }

@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { QualificationType } from "./qualificationtype";
 
 
+
 export class ListQualificationTypesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=NumResults" })
+  @SpeakeasyMetadata({ data: "json, name=NumResults" })
   numResults?: number;
 
-  @Metadata({ data: "json, name=QualificationTypes", elemType: shared.QualificationType })
+  @SpeakeasyMetadata({ data: "json, name=QualificationTypes", elemType: QualificationType })
   qualificationTypes?: QualificationType[];
 }

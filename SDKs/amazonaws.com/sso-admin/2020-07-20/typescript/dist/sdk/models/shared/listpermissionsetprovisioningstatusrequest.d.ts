@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { OperationStatusFilter } from "./operationstatusfilter";
 export declare class ListPermissionSetProvisioningStatusRequest extends SpeakeasyBase {
     filter?: OperationStatusFilter;

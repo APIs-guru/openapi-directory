@@ -1,16 +1,20 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import boundingbox
-from . import coversbodypart
-from . import protectiveequipmenttype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class EquipmentDetection:
-    bounding_box: Optional[boundingbox.BoundingBox] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BoundingBox' }})
-    confidence: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Confidence' }})
-    covers_body_part: Optional[coversbodypart.CoversBodyPart] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CoversBodyPart' }})
-    type: Optional[protectiveequipmenttype_enum.ProtectiveEquipmentTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
+    r"""EquipmentDetection
+    Information about an item of Personal Protective Equipment (PPE) detected by <a>DetectProtectiveEquipment</a>. For more information, see <a>DetectProtectiveEquipment</a>.
+    """
+    
+    bounding_box: Optional[BoundingBox] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('BoundingBox') }})
+    confidence: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Confidence') }})
+    covers_body_part: Optional[CoversBodyPart] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CoversBodyPart') }})
+    type: Optional[ProtectiveEquipmentTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Type') }})
     

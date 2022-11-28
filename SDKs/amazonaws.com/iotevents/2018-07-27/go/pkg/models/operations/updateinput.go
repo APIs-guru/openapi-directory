@@ -18,6 +18,8 @@ type UpdateInputHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateInputRequestBodyInputDefinition
+// The definition of the input.
 type UpdateInputRequestBodyInputDefinition struct {
 	Attributes []shared.Attribute `json:"attributes,omitempty"`
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WorkloadSummary } from "./workloadsummary";
+
 
 
 // MilestoneSummary
@@ -7,15 +8,15 @@ import { WorkloadSummary } from "./workloadsummary";
  * A milestone summary return object.
 **/
 export class MilestoneSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MilestoneName" })
+  @SpeakeasyMetadata({ data: "json, name=MilestoneName" })
   milestoneName?: string;
 
-  @Metadata({ data: "json, name=MilestoneNumber" })
+  @SpeakeasyMetadata({ data: "json, name=MilestoneNumber" })
   milestoneNumber?: number;
 
-  @Metadata({ data: "json, name=RecordedAt" })
+  @SpeakeasyMetadata({ data: "json, name=RecordedAt" })
   recordedAt?: Date;
 
-  @Metadata({ data: "json, name=WorkloadSummary" })
+  @SpeakeasyMetadata({ data: "json, name=WorkloadSummary" })
   workloadSummary?: WorkloadSummary;
 }

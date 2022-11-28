@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsEcsTaskDefinitionContainerDefinitionsDependsOnDetails } from "./awsecstaskdefinitioncontainerdefinitionsdependsondetails";
 import { AwsEcsTaskDefinitionContainerDefinitionsEnvironmentDetails } from "./awsecstaskdefinitioncontainerdefinitionsenvironmentdetails";
 import { AwsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesDetails } from "./awsecstaskdefinitioncontainerdefinitionsenvironmentfilesdetails";
@@ -18,125 +17,126 @@ import { AwsEcsTaskDefinitionContainerDefinitionsUlimitsDetails } from "./awsecs
 import { AwsEcsTaskDefinitionContainerDefinitionsVolumesFromDetails } from "./awsecstaskdefinitioncontainerdefinitionsvolumesfromdetails";
 
 
+
 // AwsEcsTaskDefinitionContainerDefinitionsDetails
 /** 
  * A container definition that describes a container in the task.
 **/
 export class AwsEcsTaskDefinitionContainerDefinitionsDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Command" })
+  @SpeakeasyMetadata({ data: "json, name=Command" })
   command?: string[];
 
-  @Metadata({ data: "json, name=Cpu" })
+  @SpeakeasyMetadata({ data: "json, name=Cpu" })
   cpu?: number;
 
-  @Metadata({ data: "json, name=DependsOn", elemType: shared.AwsEcsTaskDefinitionContainerDefinitionsDependsOnDetails })
+  @SpeakeasyMetadata({ data: "json, name=DependsOn", elemType: AwsEcsTaskDefinitionContainerDefinitionsDependsOnDetails })
   dependsOn?: AwsEcsTaskDefinitionContainerDefinitionsDependsOnDetails[];
 
-  @Metadata({ data: "json, name=DisableNetworking" })
+  @SpeakeasyMetadata({ data: "json, name=DisableNetworking" })
   disableNetworking?: boolean;
 
-  @Metadata({ data: "json, name=DnsSearchDomains" })
+  @SpeakeasyMetadata({ data: "json, name=DnsSearchDomains" })
   dnsSearchDomains?: string[];
 
-  @Metadata({ data: "json, name=DnsServers" })
+  @SpeakeasyMetadata({ data: "json, name=DnsServers" })
   dnsServers?: string[];
 
-  @Metadata({ data: "json, name=DockerLabels" })
+  @SpeakeasyMetadata({ data: "json, name=DockerLabels" })
   dockerLabels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=DockerSecurityOptions" })
+  @SpeakeasyMetadata({ data: "json, name=DockerSecurityOptions" })
   dockerSecurityOptions?: string[];
 
-  @Metadata({ data: "json, name=EntryPoint" })
+  @SpeakeasyMetadata({ data: "json, name=EntryPoint" })
   entryPoint?: string[];
 
-  @Metadata({ data: "json, name=Environment", elemType: shared.AwsEcsTaskDefinitionContainerDefinitionsEnvironmentDetails })
+  @SpeakeasyMetadata({ data: "json, name=Environment", elemType: AwsEcsTaskDefinitionContainerDefinitionsEnvironmentDetails })
   environment?: AwsEcsTaskDefinitionContainerDefinitionsEnvironmentDetails[];
 
-  @Metadata({ data: "json, name=EnvironmentFiles", elemType: shared.AwsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesDetails })
+  @SpeakeasyMetadata({ data: "json, name=EnvironmentFiles", elemType: AwsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesDetails })
   environmentFiles?: AwsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesDetails[];
 
-  @Metadata({ data: "json, name=Essential" })
+  @SpeakeasyMetadata({ data: "json, name=Essential" })
   essential?: boolean;
 
-  @Metadata({ data: "json, name=ExtraHosts", elemType: shared.AwsEcsTaskDefinitionContainerDefinitionsExtraHostsDetails })
+  @SpeakeasyMetadata({ data: "json, name=ExtraHosts", elemType: AwsEcsTaskDefinitionContainerDefinitionsExtraHostsDetails })
   extraHosts?: AwsEcsTaskDefinitionContainerDefinitionsExtraHostsDetails[];
 
-  @Metadata({ data: "json, name=FirelensConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=FirelensConfiguration" })
   firelensConfiguration?: AwsEcsTaskDefinitionContainerDefinitionsFirelensConfigurationDetails;
 
-  @Metadata({ data: "json, name=HealthCheck" })
+  @SpeakeasyMetadata({ data: "json, name=HealthCheck" })
   healthCheck?: AwsEcsTaskDefinitionContainerDefinitionsHealthCheckDetails;
 
-  @Metadata({ data: "json, name=Hostname" })
+  @SpeakeasyMetadata({ data: "json, name=Hostname" })
   hostname?: string;
 
-  @Metadata({ data: "json, name=Image" })
+  @SpeakeasyMetadata({ data: "json, name=Image" })
   image?: string;
 
-  @Metadata({ data: "json, name=Interactive" })
+  @SpeakeasyMetadata({ data: "json, name=Interactive" })
   interactive?: boolean;
 
-  @Metadata({ data: "json, name=Links" })
+  @SpeakeasyMetadata({ data: "json, name=Links" })
   links?: string[];
 
-  @Metadata({ data: "json, name=LinuxParameters" })
+  @SpeakeasyMetadata({ data: "json, name=LinuxParameters" })
   linuxParameters?: AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDetails;
 
-  @Metadata({ data: "json, name=LogConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=LogConfiguration" })
   logConfiguration?: AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationDetails;
 
-  @Metadata({ data: "json, name=Memory" })
+  @SpeakeasyMetadata({ data: "json, name=Memory" })
   memory?: number;
 
-  @Metadata({ data: "json, name=MemoryReservation" })
+  @SpeakeasyMetadata({ data: "json, name=MemoryReservation" })
   memoryReservation?: number;
 
-  @Metadata({ data: "json, name=MountPoints", elemType: shared.AwsEcsTaskDefinitionContainerDefinitionsMountPointsDetails })
+  @SpeakeasyMetadata({ data: "json, name=MountPoints", elemType: AwsEcsTaskDefinitionContainerDefinitionsMountPointsDetails })
   mountPoints?: AwsEcsTaskDefinitionContainerDefinitionsMountPointsDetails[];
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=PortMappings", elemType: shared.AwsEcsTaskDefinitionContainerDefinitionsPortMappingsDetails })
+  @SpeakeasyMetadata({ data: "json, name=PortMappings", elemType: AwsEcsTaskDefinitionContainerDefinitionsPortMappingsDetails })
   portMappings?: AwsEcsTaskDefinitionContainerDefinitionsPortMappingsDetails[];
 
-  @Metadata({ data: "json, name=Privileged" })
+  @SpeakeasyMetadata({ data: "json, name=Privileged" })
   privileged?: boolean;
 
-  @Metadata({ data: "json, name=PseudoTerminal" })
+  @SpeakeasyMetadata({ data: "json, name=PseudoTerminal" })
   pseudoTerminal?: boolean;
 
-  @Metadata({ data: "json, name=ReadonlyRootFilesystem" })
+  @SpeakeasyMetadata({ data: "json, name=ReadonlyRootFilesystem" })
   readonlyRootFilesystem?: boolean;
 
-  @Metadata({ data: "json, name=RepositoryCredentials" })
+  @SpeakeasyMetadata({ data: "json, name=RepositoryCredentials" })
   repositoryCredentials?: AwsEcsTaskDefinitionContainerDefinitionsRepositoryCredentialsDetails;
 
-  @Metadata({ data: "json, name=ResourceRequirements", elemType: shared.AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsDetails })
+  @SpeakeasyMetadata({ data: "json, name=ResourceRequirements", elemType: AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsDetails })
   resourceRequirements?: AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsDetails[];
 
-  @Metadata({ data: "json, name=Secrets", elemType: shared.AwsEcsTaskDefinitionContainerDefinitionsSecretsDetails })
+  @SpeakeasyMetadata({ data: "json, name=Secrets", elemType: AwsEcsTaskDefinitionContainerDefinitionsSecretsDetails })
   secrets?: AwsEcsTaskDefinitionContainerDefinitionsSecretsDetails[];
 
-  @Metadata({ data: "json, name=StartTimeout" })
+  @SpeakeasyMetadata({ data: "json, name=StartTimeout" })
   startTimeout?: number;
 
-  @Metadata({ data: "json, name=StopTimeout" })
+  @SpeakeasyMetadata({ data: "json, name=StopTimeout" })
   stopTimeout?: number;
 
-  @Metadata({ data: "json, name=SystemControls", elemType: shared.AwsEcsTaskDefinitionContainerDefinitionsSystemControlsDetails })
+  @SpeakeasyMetadata({ data: "json, name=SystemControls", elemType: AwsEcsTaskDefinitionContainerDefinitionsSystemControlsDetails })
   systemControls?: AwsEcsTaskDefinitionContainerDefinitionsSystemControlsDetails[];
 
-  @Metadata({ data: "json, name=Ulimits", elemType: shared.AwsEcsTaskDefinitionContainerDefinitionsUlimitsDetails })
+  @SpeakeasyMetadata({ data: "json, name=Ulimits", elemType: AwsEcsTaskDefinitionContainerDefinitionsUlimitsDetails })
   ulimits?: AwsEcsTaskDefinitionContainerDefinitionsUlimitsDetails[];
 
-  @Metadata({ data: "json, name=User" })
+  @SpeakeasyMetadata({ data: "json, name=User" })
   user?: string;
 
-  @Metadata({ data: "json, name=VolumesFrom", elemType: shared.AwsEcsTaskDefinitionContainerDefinitionsVolumesFromDetails })
+  @SpeakeasyMetadata({ data: "json, name=VolumesFrom", elemType: AwsEcsTaskDefinitionContainerDefinitionsVolumesFromDetails })
   volumesFrom?: AwsEcsTaskDefinitionContainerDefinitionsVolumesFromDetails[];
 
-  @Metadata({ data: "json, name=WorkingDirectory" })
+  @SpeakeasyMetadata({ data: "json, name=WorkingDirectory" })
   workingDirectory?: string;
 }

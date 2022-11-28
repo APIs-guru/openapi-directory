@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class DeleteDistributionConfigurationQueryParams:
-    distribution_configuration_arn: str = field(default=None, metadata={'query_param': { 'field_name': 'distributionConfigurationArn', 'style': 'form', 'explode': True }})
+    distribution_configuration_arn: str = field(metadata={'query_param': { 'field_name': 'distributionConfigurationArn', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -21,20 +24,20 @@ class DeleteDistributionConfigurationHeaders:
 
 @dataclass
 class DeleteDistributionConfigurationRequest:
-    query_params: DeleteDistributionConfigurationQueryParams = field(default=None)
-    headers: DeleteDistributionConfigurationHeaders = field(default=None)
+    headers: DeleteDistributionConfigurationHeaders = field()
+    query_params: DeleteDistributionConfigurationQueryParams = field()
     
 
 @dataclass
 class DeleteDistributionConfigurationResponse:
+    content_type: str = field()
+    status_code: int = field()
     call_rate_limit_exceeded_exception: Optional[Any] = field(default=None)
     client_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     delete_distribution_configuration_response: Optional[shared.DeleteDistributionConfigurationResponse] = field(default=None)
     forbidden_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     resource_dependency_exception: Optional[Any] = field(default=None)
     service_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

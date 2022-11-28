@@ -1,23 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HouseMembership } from "./housemembership";
 import { MemberName } from "./membername";
 import { MemberParty } from "./memberparty";
 
 
+
 export class MemberHistory extends SpeakeasyBase {
-  @Metadata({ data: "json, name=houseMembershipHistory", elemType: shared.HouseMembership })
+  @SpeakeasyMetadata({ data: "json, name=houseMembershipHistory", elemType: HouseMembership })
   houseMembershipHistory?: HouseMembership[];
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=nameHistory", elemType: shared.MemberName })
+  @SpeakeasyMetadata({ data: "json, name=nameHistory", elemType: MemberName })
   nameHistory?: MemberName[];
 
-  @Metadata({ data: "json, name=partyHistory", elemType: shared.MemberParty })
+  @SpeakeasyMetadata({ data: "json, name=partyHistory", elemType: MemberParty })
   partyHistory?: MemberParty[];
 
-  @Metadata({ data: "json, name=thumbnailUrl" })
+  @SpeakeasyMetadata({ data: "json, name=thumbnailUrl" })
   thumbnailUrl?: string;
 }

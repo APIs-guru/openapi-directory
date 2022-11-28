@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BooleanPolicy } from "./booleanpolicy";
 import { ListPolicy } from "./listpolicy";
 // OrgPolicy
@@ -35,31 +35,31 @@ var OrgPolicy = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=booleanPolicy" }),
+        SpeakeasyMetadata({ data: "json, name=booleanPolicy" }),
         __metadata("design:type", BooleanPolicy)
     ], OrgPolicy.prototype, "booleanPolicy", void 0);
     __decorate([
-        Metadata({ data: "json, name=constraint" }),
+        SpeakeasyMetadata({ data: "json, name=constraint" }),
         __metadata("design:type", String)
     ], OrgPolicy.prototype, "constraint", void 0);
     __decorate([
-        Metadata({ data: "json, name=etag" }),
+        SpeakeasyMetadata({ data: "json, name=etag" }),
         __metadata("design:type", String)
     ], OrgPolicy.prototype, "etag", void 0);
     __decorate([
-        Metadata({ data: "json, name=listPolicy" }),
+        SpeakeasyMetadata({ data: "json, name=listPolicy" }),
         __metadata("design:type", ListPolicy)
     ], OrgPolicy.prototype, "listPolicy", void 0);
     __decorate([
-        Metadata({ data: "json, name=restoreDefault" }),
+        SpeakeasyMetadata({ data: "json, name=restoreDefault" }),
         __metadata("design:type", Map)
     ], OrgPolicy.prototype, "restoreDefault", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateTime" }),
+        SpeakeasyMetadata({ data: "json, name=updateTime" }),
         __metadata("design:type", String)
     ], OrgPolicy.prototype, "updateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=version" }),
+        SpeakeasyMetadata({ data: "json, name=version" }),
         __metadata("design:type", Number)
     ], OrgPolicy.prototype, "version", void 0);
     return OrgPolicy;

@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ChineseNameGenderCandidatesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=chineseGivenNameLatin" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=chineseGivenNameLatin" })
   chineseGivenNameLatin: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=chineseSurnameLatin" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=chineseSurnameLatin" })
   chineseSurnameLatin: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=knownGender" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=knownGender" })
   knownGender: string;
 }
 
 
 export class ChineseNameGenderCandidatesSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   apiKey: shared.SchemeApiKey;
 }
 
 
 export class ChineseNameGenderCandidatesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ChineseNameGenderCandidatesPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: ChineseNameGenderCandidatesSecurity;
 }
 
 
 export class ChineseNameGenderCandidatesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   nameMatchCandidatesOut?: shared.NameMatchCandidatesOut;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

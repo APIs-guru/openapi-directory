@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InstanceFleet } from "./instancefleet";
 
 
+
 export class ListInstanceFleetsOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=InstanceFleets", elemType: shared.InstanceFleet })
+  @SpeakeasyMetadata({ data: "json, name=InstanceFleets", elemType: InstanceFleet })
   instanceFleets?: InstanceFleet[];
 
-  @Metadata({ data: "json, name=Marker" })
+  @SpeakeasyMetadata({ data: "json, name=Marker" })
   marker?: string;
 }

@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -14,23 +15,23 @@ class GetConversationsQueryParams:
     per_page: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'per_page', 'style': 'form', 'explode': True }})
     
 
-@dataclass
-class GetConversationsRequest:
-    query_params: GetConversationsQueryParams = field(default=None)
-    
-
 @dataclass_json
 @dataclass
 class GetConversations200ApplicationJSON:
-    conversations: Optional[List[shared.Conversation]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'conversations' }})
-    num_unread: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'num_unread' }})
-    page: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'page' }})
-    per_page: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'per_page' }})
+    conversations: Optional[List[shared.Conversation]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('conversations') }})
+    num_unread: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('num_unread') }})
+    page: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('page') }})
+    per_page: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('per_page') }})
+    
+
+@dataclass
+class GetConversationsRequest:
+    query_params: GetConversationsQueryParams = field()
     
 
 @dataclass
 class GetConversationsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_conversations_200_application_json_object: Optional[GetConversations200ApplicationJSON] = field(default=None)
     

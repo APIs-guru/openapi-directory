@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { JsonSchema } from "./jsonschema";
+
 
 
 // RestMethodMediaUploadProtocolsResumable
@@ -8,10 +8,10 @@ import { JsonSchema } from "./jsonschema";
  * Supports the Resumable Media Upload protocol.
 **/
 export class RestMethodMediaUploadProtocolsResumable extends SpeakeasyBase {
-  @Metadata({ data: "json, name=multipart" })
+  @SpeakeasyMetadata({ data: "json, name=multipart" })
   multipart?: boolean;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path?: string;
 }
 
@@ -21,10 +21,10 @@ export class RestMethodMediaUploadProtocolsResumable extends SpeakeasyBase {
  * Supports uploading as a single HTTP request.
 **/
 export class RestMethodMediaUploadProtocolsSimple extends SpeakeasyBase {
-  @Metadata({ data: "json, name=multipart" })
+  @SpeakeasyMetadata({ data: "json, name=multipart" })
   multipart?: boolean;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path?: string;
 }
 
@@ -34,10 +34,10 @@ export class RestMethodMediaUploadProtocolsSimple extends SpeakeasyBase {
  * Supported upload protocols.
 **/
 export class RestMethodMediaUploadProtocols extends SpeakeasyBase {
-  @Metadata({ data: "json, name=resumable" })
+  @SpeakeasyMetadata({ data: "json, name=resumable" })
   resumable?: RestMethodMediaUploadProtocolsResumable;
 
-  @Metadata({ data: "json, name=simple" })
+  @SpeakeasyMetadata({ data: "json, name=simple" })
   simple?: RestMethodMediaUploadProtocolsSimple;
 }
 
@@ -47,13 +47,13 @@ export class RestMethodMediaUploadProtocols extends SpeakeasyBase {
  * Media upload parameters.
 **/
 export class RestMethodMediaUpload extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accept" })
+  @SpeakeasyMetadata({ data: "json, name=accept" })
   accept?: string[];
 
-  @Metadata({ data: "json, name=maxSize" })
+  @SpeakeasyMetadata({ data: "json, name=maxSize" })
   maxSize?: string;
 
-  @Metadata({ data: "json, name=protocols" })
+  @SpeakeasyMetadata({ data: "json, name=protocols" })
   protocols?: RestMethodMediaUploadProtocols;
 }
 
@@ -63,10 +63,10 @@ export class RestMethodMediaUpload extends SpeakeasyBase {
  * The schema for the request.
 **/
 export class RestMethodRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=$ref" })
+  @SpeakeasyMetadata({ data: "json, name=$ref" })
   dollarRef?: string;
 
-  @Metadata({ data: "json, name=parameterName" })
+  @SpeakeasyMetadata({ data: "json, name=parameterName" })
   parameterName?: string;
 }
 
@@ -76,57 +76,57 @@ export class RestMethodRequest extends SpeakeasyBase {
  * The schema for the response.
 **/
 export class RestMethodResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=$ref" })
+  @SpeakeasyMetadata({ data: "json, name=$ref" })
   dollarRef?: string;
 }
 
 
 export class RestMethod extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=etagRequired" })
+  @SpeakeasyMetadata({ data: "json, name=etagRequired" })
   etagRequired?: boolean;
 
-  @Metadata({ data: "json, name=flatPath" })
+  @SpeakeasyMetadata({ data: "json, name=flatPath" })
   flatPath?: string;
 
-  @Metadata({ data: "json, name=httpMethod" })
+  @SpeakeasyMetadata({ data: "json, name=httpMethod" })
   httpMethod?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=mediaUpload" })
+  @SpeakeasyMetadata({ data: "json, name=mediaUpload" })
   mediaUpload?: RestMethodMediaUpload;
 
-  @Metadata({ data: "json, name=parameterOrder" })
+  @SpeakeasyMetadata({ data: "json, name=parameterOrder" })
   parameterOrder?: string[];
 
-  @Metadata({ data: "json, name=parameters", elemType: shared.JsonSchema })
+  @SpeakeasyMetadata({ data: "json, name=parameters", elemType: JsonSchema })
   parameters?: Map<string, JsonSchema>;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path?: string;
 
-  @Metadata({ data: "json, name=request" })
+  @SpeakeasyMetadata({ data: "json, name=request" })
   request?: RestMethodRequest;
 
-  @Metadata({ data: "json, name=response" })
+  @SpeakeasyMetadata({ data: "json, name=response" })
   response?: RestMethodResponse;
 
-  @Metadata({ data: "json, name=scopes" })
+  @SpeakeasyMetadata({ data: "json, name=scopes" })
   scopes?: string[];
 
-  @Metadata({ data: "json, name=supportsMediaDownload" })
+  @SpeakeasyMetadata({ data: "json, name=supportsMediaDownload" })
   supportsMediaDownload?: boolean;
 
-  @Metadata({ data: "json, name=supportsMediaUpload" })
+  @SpeakeasyMetadata({ data: "json, name=supportsMediaUpload" })
   supportsMediaUpload?: boolean;
 
-  @Metadata({ data: "json, name=supportsSubscription" })
+  @SpeakeasyMetadata({ data: "json, name=supportsSubscription" })
   supportsSubscription?: boolean;
 
-  @Metadata({ data: "json, name=useMediaDownloadService" })
+  @SpeakeasyMetadata({ data: "json, name=useMediaDownloadService" })
   useMediaDownloadService?: boolean;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// SystemInfo
+// Class SystemInfo.
 type SystemInfo struct {
 	CachePath                  *string             `json:"CachePath,omitempty"`
 	CanLaunchWebBrowser        *bool               `json:"CanLaunchWebBrowser,omitempty"`

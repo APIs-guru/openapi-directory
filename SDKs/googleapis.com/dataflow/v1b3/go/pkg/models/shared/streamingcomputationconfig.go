@@ -1,5 +1,7 @@
 package shared
 
+// StreamingComputationConfig
+// Configuration information for a single streaming computation.
 type StreamingComputationConfig struct {
 	ComputationID                  *string               `json:"computationId,omitempty"`
 	Instructions                   []ParallelInstruction `json:"instructions,omitempty"`

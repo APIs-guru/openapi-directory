@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Device } from "./device";
+
 
 
 // DeviceDefinitionVersion
@@ -8,6 +8,6 @@ import { Device } from "./device";
  * Information about a device definition version.
 **/
 export class DeviceDefinitionVersion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Devices", elemType: shared.Device })
+  @SpeakeasyMetadata({ data: "json, name=Devices", elemType: Device })
   devices?: Device[];
 }

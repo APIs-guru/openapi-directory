@@ -22,38 +22,38 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ControllersSystemAdvisoriesDbLookup = /** @class */ (function (_super) {
     __extends(ControllersSystemAdvisoriesDbLookup, _super);
     function ControllersSystemAdvisoriesDbLookup() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=advisory_type" }),
+        SpeakeasyMetadata({ data: "json, name=advisory_type" }),
         __metadata("design:type", Number)
     ], ControllersSystemAdvisoriesDbLookup.prototype, "advisoryType", void 0);
     __decorate([
-        Metadata({ data: "json, name=cve_count" }),
+        SpeakeasyMetadata({ data: "json, name=cve_count" }),
         __metadata("design:type", Number)
     ], ControllersSystemAdvisoriesDbLookup.prototype, "cveCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], ControllersSystemAdvisoriesDbLookup.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], ControllersSystemAdvisoriesDbLookup.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=public_date" }),
+        SpeakeasyMetadata({ data: "json, name=public_date" }),
         __metadata("design:type", String)
     ], ControllersSystemAdvisoriesDbLookup.prototype, "publicDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=severity" }),
+        SpeakeasyMetadata({ data: "json, name=severity" }),
         __metadata("design:type", Number)
     ], ControllersSystemAdvisoriesDbLookup.prototype, "severity", void 0);
     __decorate([
-        Metadata({ data: "json, name=synopsis" }),
+        SpeakeasyMetadata({ data: "json, name=synopsis" }),
         __metadata("design:type", String)
     ], ControllersSystemAdvisoriesDbLookup.prototype, "synopsis", void 0);
     return ControllersSystemAdvisoriesDbLookup;

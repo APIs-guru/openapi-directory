@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostGpxQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=gps_accuracy" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=gps_accuracy" })
   gpsAccuracy?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=vehicle" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=vehicle" })
   vehicle?: string;
 }
 
 
 export class PostGpxRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PostGpxQueryParams;
 }
 
 
 export class PostGpxResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   ghError?: shared.GhError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   routeResponse?: shared.RouteResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

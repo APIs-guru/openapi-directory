@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProviderTypeEnum } from "./providertypeenum";
 import { ConnectionStatusEnum } from "./connectionstatusenum";
+
 
 
 // Connection
@@ -8,18 +9,18 @@ import { ConnectionStatusEnum } from "./connectionstatusenum";
  * Describes an AWS App Runner connection resource.
 **/
 export class Connection extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConnectionArn" })
+  @SpeakeasyMetadata({ data: "json, name=ConnectionArn" })
   connectionArn?: string;
 
-  @Metadata({ data: "json, name=ConnectionName" })
+  @SpeakeasyMetadata({ data: "json, name=ConnectionName" })
   connectionName?: string;
 
-  @Metadata({ data: "json, name=CreatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=ProviderType" })
+  @SpeakeasyMetadata({ data: "json, name=ProviderType" })
   providerType?: ProviderTypeEnum;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: ConnectionStatusEnum;
 }

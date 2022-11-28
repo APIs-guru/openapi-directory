@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDescribeImageAttributeActionEnum(str, Enum):
     DESCRIBE_IMAGE_ATTRIBUTE = "DescribeImageAttribute"
@@ -20,11 +24,11 @@ class GetDescribeImageAttributeVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeImageAttributeQueryParams:
-    action: GetDescribeImageAttributeActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    attribute: GetDescribeImageAttributeAttributeEnum = field(default=None, metadata={'query_param': { 'field_name': 'Attribute', 'style': 'form', 'explode': True }})
+    action: GetDescribeImageAttributeActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    attribute: GetDescribeImageAttributeAttributeEnum = field(metadata={'query_param': { 'field_name': 'Attribute', 'style': 'form', 'explode': True }})
+    image_id: str = field(metadata={'query_param': { 'field_name': 'ImageId', 'style': 'form', 'explode': True }})
+    version: GetDescribeImageAttributeVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    image_id: str = field(default=None, metadata={'query_param': { 'field_name': 'ImageId', 'style': 'form', 'explode': True }})
-    version: GetDescribeImageAttributeVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -40,13 +44,13 @@ class GetDescribeImageAttributeHeaders:
 
 @dataclass
 class GetDescribeImageAttributeRequest:
-    query_params: GetDescribeImageAttributeQueryParams = field(default=None)
-    headers: GetDescribeImageAttributeHeaders = field(default=None)
+    headers: GetDescribeImageAttributeHeaders = field()
+    query_params: GetDescribeImageAttributeQueryParams = field()
     
 
 @dataclass
 class GetDescribeImageAttributeResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

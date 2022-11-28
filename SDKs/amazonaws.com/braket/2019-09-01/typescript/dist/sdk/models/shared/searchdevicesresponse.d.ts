@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DeviceSummary } from "./devicesummary";
 export declare class SearchDevicesResponse extends SpeakeasyBase {
     devices: DeviceSummary[];

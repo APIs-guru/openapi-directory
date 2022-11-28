@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDocumentaiV1beta3DocumentEntityRelation
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Relationship between Entities.
 **/
 export class GoogleCloudDocumentaiV1beta3DocumentEntityRelation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=objectId" })
+  @SpeakeasyMetadata({ data: "json, name=objectId" })
   objectId?: string;
 
-  @Metadata({ data: "json, name=relation" })
+  @SpeakeasyMetadata({ data: "json, name=relation" })
   relation?: string;
 
-  @Metadata({ data: "json, name=subjectId" })
+  @SpeakeasyMetadata({ data: "json, name=subjectId" })
   subjectId?: string;
 }

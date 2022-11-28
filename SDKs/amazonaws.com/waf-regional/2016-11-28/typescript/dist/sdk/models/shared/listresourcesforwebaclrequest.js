@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceTypeEnum } from "./resourcetypeenum";
 var ListResourcesForWebAclRequest = /** @class */ (function (_super) {
     __extends(ListResourcesForWebAclRequest, _super);
@@ -30,11 +30,11 @@ var ListResourcesForWebAclRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ResourceType" }),
+        SpeakeasyMetadata({ data: "json, name=ResourceType" }),
         __metadata("design:type", String)
     ], ListResourcesForWebAclRequest.prototype, "resourceType", void 0);
     __decorate([
-        Metadata({ data: "json, name=WebACLId" }),
+        SpeakeasyMetadata({ data: "json, name=WebACLId" }),
         __metadata("design:type", String)
     ], ListResourcesForWebAclRequest.prototype, "webAclId", void 0);
     return ListResourcesForWebAclRequest;

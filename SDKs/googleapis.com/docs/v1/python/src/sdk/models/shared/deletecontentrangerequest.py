@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import range
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DeleteContentRangeRequest:
-    range: Optional[range.Range] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'range' }})
+    r"""DeleteContentRangeRequest
+    Deletes content from the document.
+    """
+    
+    range: Optional[Range] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('range') }})
     

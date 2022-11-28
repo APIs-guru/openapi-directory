@@ -30,7 +30,7 @@ type RealtimebiddingBuyersUserListsCreateSecurity struct {
 type RealtimebiddingBuyersUserListsCreateRequest struct {
 	PathParams  RealtimebiddingBuyersUserListsCreatePathParams
 	QueryParams RealtimebiddingBuyersUserListsCreateQueryParams
-	Request     *shared.UserList `request:"mediaType=application/json"`
+	Request     *shared.UserListInput `request:"mediaType=application/json"`
 	Security    RealtimebiddingBuyersUserListsCreateSecurity
 }
 

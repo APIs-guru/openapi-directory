@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List
+from typing import List
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class AccountTokenByCodeRequestScopesEnum(str, Enum):
     CATALOG = "Catalog"
@@ -12,7 +14,7 @@ class AccountTokenByCodeRequestScopesEnum(str, Enum):
 @dataclass_json
 @dataclass
 class AccountTokenByCodeRequest:
-    code: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
-    id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    scopes: List[AccountTokenByCodeRequestScopesEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'scopes' }})
+    code: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('code') }})
+    id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    scopes: List[AccountTokenByCodeRequestScopesEnum] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('scopes') }})
     

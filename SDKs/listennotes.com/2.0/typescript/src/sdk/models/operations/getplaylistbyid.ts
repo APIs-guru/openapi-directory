@@ -1,65 +1,66 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetPlaylistByIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 export enum GetPlaylistByIdSortEnum {
-    RecentAddedFirst = "recent_added_first"
-,    OldestAddedFirst = "oldest_added_first"
-,    RecentPublishedFirst = "recent_published_first"
-,    OldestPublishedFirst = "oldest_published_first"
+    RecentAddedFirst = "recent_added_first",
+    OldestAddedFirst = "oldest_added_first",
+    RecentPublishedFirst = "recent_published_first",
+    OldestPublishedFirst = "oldest_published_first"
 }
 
 export enum GetPlaylistByIdTypeEnum {
-    EpisodeList = "episode_list"
-,    PodcastList = "podcast_list"
+    EpisodeList = "episode_list",
+    PodcastList = "podcast_list"
 }
 
 
 export class GetPlaylistByIdQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=last_timestamp_ms" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=last_timestamp_ms" })
   lastTimestampMs?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: GetPlaylistByIdSortEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=type" })
   type?: GetPlaylistByIdTypeEnum;
 }
 
 
 export class GetPlaylistByIdHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-ListenAPI-Key" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-ListenAPI-Key" })
   xListenApiKey: string;
 }
 
 
 export class GetPlaylistByIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetPlaylistByIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetPlaylistByIdQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetPlaylistByIdHeaders;
 }
 
 
 export class GetPlaylistByIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   playlistResponse?: shared.PlaylistResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

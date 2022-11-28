@@ -18,6 +18,8 @@ const (
 	GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnumSuspended                     GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnum = "SUSPENDED"
 )
 
+// GoogleCloudIntegrationsV1alphaTaskExecutionDetails
+// Contains the details of the execution of this task.
 type GoogleCloudIntegrationsV1alphaTaskExecutionDetails struct {
 	TaskAttemptStats   []GoogleCloudIntegrationsV1alphaAttemptStats                              `json:"taskAttemptStats,omitempty"`
 	TaskExecutionState *GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnum `json:"taskExecutionState,omitempty"`

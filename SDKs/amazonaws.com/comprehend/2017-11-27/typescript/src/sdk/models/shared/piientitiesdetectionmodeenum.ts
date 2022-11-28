@@ -1,6 +1,7 @@
 
 
+
 export enum PiiEntitiesDetectionModeEnum {
-    OnlyRedaction = "ONLY_REDACTION"
-,    OnlyOffsets = "ONLY_OFFSETS"
+    OnlyRedaction = "ONLY_REDACTION",
+    OnlyOffsets = "ONLY_OFFSETS"
 }

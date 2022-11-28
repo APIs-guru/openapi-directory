@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostAttachRolePolicyActionEnum(str, Enum):
     ATTACH_ROLE_POLICY = "AttachRolePolicy"
@@ -10,8 +14,8 @@ class PostAttachRolePolicyVersionEnum(str, Enum):
 
 @dataclass
 class PostAttachRolePolicyQueryParams:
-    action: PostAttachRolePolicyActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostAttachRolePolicyVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostAttachRolePolicyActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostAttachRolePolicyVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostAttachRolePolicyHeaders:
 
 @dataclass
 class PostAttachRolePolicyRequest:
-    query_params: PostAttachRolePolicyQueryParams = field(default=None)
-    headers: PostAttachRolePolicyHeaders = field(default=None)
+    headers: PostAttachRolePolicyHeaders = field()
+    query_params: PostAttachRolePolicyQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostAttachRolePolicyResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

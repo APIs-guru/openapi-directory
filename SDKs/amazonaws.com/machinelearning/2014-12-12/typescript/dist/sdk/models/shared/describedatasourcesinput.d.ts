@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DataSourceFilterVariableEnum } from "./datasourcefiltervariableenum";
 import { SortOrderEnum } from "./sortorderenum";
 export declare class DescribeDataSourcesInput extends SpeakeasyBase {

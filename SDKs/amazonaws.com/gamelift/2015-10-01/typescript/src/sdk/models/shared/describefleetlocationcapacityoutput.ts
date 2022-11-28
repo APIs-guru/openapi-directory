@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FleetCapacity } from "./fleetcapacity";
+
 
 
 // DescribeFleetLocationCapacityOutput
@@ -7,6 +8,6 @@ import { FleetCapacity } from "./fleetcapacity";
  * Represents the returned data in response to a request operation.
 **/
 export class DescribeFleetLocationCapacityOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FleetCapacity" })
+  @SpeakeasyMetadata({ data: "json, name=FleetCapacity" })
   fleetCapacity?: FleetCapacity;
 }

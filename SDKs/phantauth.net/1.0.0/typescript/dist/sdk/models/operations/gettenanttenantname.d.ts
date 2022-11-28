@@ -1,9 +1,6 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class GetTenantTenantnamePathParams extends SpeakeasyBase {
     tenantname: string;
-}
-export declare class GetTenantTenantnameRequest extends SpeakeasyBase {
-    pathParams: GetTenantTenantnamePathParams;
 }
 export declare class GetTenantTenantname200ApplicationJson extends SpeakeasyBase {
     atId?: string;
@@ -27,6 +24,9 @@ export declare class GetTenantTenantname200ApplicationJson extends SpeakeasyBase
     theme?: string;
     userinfo?: string;
     website?: string;
+}
+export declare class GetTenantTenantnameRequest extends SpeakeasyBase {
+    pathParams: GetTenantTenantnamePathParams;
 }
 export declare class GetTenantTenantnameResponse extends SpeakeasyBase {
     contentType: string;

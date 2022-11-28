@@ -1,5 +1,7 @@
 package shared
 
+// ThirdPartyDependenciesData
+// Third-party dependency information
 type ThirdPartyDependenciesData struct {
 	ArtifactID  string   `json:"artifactId"`
 	Description string   `json:"description"`

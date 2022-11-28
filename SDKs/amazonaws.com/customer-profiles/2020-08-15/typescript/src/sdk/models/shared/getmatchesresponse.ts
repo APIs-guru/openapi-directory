@@ -1,18 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MatchItem } from "./matchitem";
 
 
+
 export class GetMatchesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MatchGenerationDate" })
+  @SpeakeasyMetadata({ data: "json, name=MatchGenerationDate" })
   matchGenerationDate?: Date;
 
-  @Metadata({ data: "json, name=Matches", elemType: shared.MatchItem })
+  @SpeakeasyMetadata({ data: "json, name=Matches", elemType: MatchItem })
   matches?: MatchItem[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=PotentialMatches" })
+  @SpeakeasyMetadata({ data: "json, name=PotentialMatches" })
   potentialMatches?: number;
 }

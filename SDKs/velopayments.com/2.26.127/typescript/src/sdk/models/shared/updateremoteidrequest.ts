@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateRemoteIdRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=payorId" })
+  @SpeakeasyMetadata({ data: "json, name=payorId" })
   payorId: string;
 
-  @Metadata({ data: "json, name=remoteId" })
+  @SpeakeasyMetadata({ data: "json, name=remoteId" })
   remoteId: string;
 }

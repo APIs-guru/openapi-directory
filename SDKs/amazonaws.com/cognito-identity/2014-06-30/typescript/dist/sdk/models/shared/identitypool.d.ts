@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CognitoIdentityProvider } from "./cognitoidentityprovider";
 /**
  * An object representing an Amazon Cognito identity pool.

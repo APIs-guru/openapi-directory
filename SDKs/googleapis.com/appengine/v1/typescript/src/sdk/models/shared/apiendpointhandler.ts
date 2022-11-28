@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ApiEndpointHandler
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Uses Google Cloud Endpoints to handle requests.
 **/
 export class ApiEndpointHandler extends SpeakeasyBase {
-  @Metadata({ data: "json, name=scriptPath" })
+  @SpeakeasyMetadata({ data: "json, name=scriptPath" })
   scriptPath?: string;
 }

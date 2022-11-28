@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // SeekRequest
 /**
  * Request for the `Seek` method.
@@ -33,11 +33,11 @@ var SeekRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=snapshot" }),
+        SpeakeasyMetadata({ data: "json, name=snapshot" }),
         __metadata("design:type", String)
     ], SeekRequest.prototype, "snapshot", void 0);
     __decorate([
-        Metadata({ data: "json, name=time" }),
+        SpeakeasyMetadata({ data: "json, name=time" }),
         __metadata("design:type", String)
     ], SeekRequest.prototype, "time", void 0);
     return SeekRequest;

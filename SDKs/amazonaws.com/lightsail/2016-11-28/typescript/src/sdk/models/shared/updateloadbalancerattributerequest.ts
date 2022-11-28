@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LoadBalancerAttributeNameEnum } from "./loadbalancerattributenameenum";
 
 
+
 export class UpdateLoadBalancerAttributeRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attributeName" })
+  @SpeakeasyMetadata({ data: "json, name=attributeName" })
   attributeName: LoadBalancerAttributeNameEnum;
 
-  @Metadata({ data: "json, name=attributeValue" })
+  @SpeakeasyMetadata({ data: "json, name=attributeValue" })
   attributeValue: string;
 
-  @Metadata({ data: "json, name=loadBalancerName" })
+  @SpeakeasyMetadata({ data: "json, name=loadBalancerName" })
   loadBalancerName: string;
 }

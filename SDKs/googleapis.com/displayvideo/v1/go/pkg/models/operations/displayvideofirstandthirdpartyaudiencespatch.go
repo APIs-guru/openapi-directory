@@ -32,7 +32,7 @@ type DisplayvideoFirstAndThirdPartyAudiencesPatchSecurity struct {
 type DisplayvideoFirstAndThirdPartyAudiencesPatchRequest struct {
 	PathParams  DisplayvideoFirstAndThirdPartyAudiencesPatchPathParams
 	QueryParams DisplayvideoFirstAndThirdPartyAudiencesPatchQueryParams
-	Request     *shared.FirstAndThirdPartyAudience `request:"mediaType=application/json"`
+	Request     *shared.FirstAndThirdPartyAudienceInput `request:"mediaType=application/json"`
 	Security    DisplayvideoFirstAndThirdPartyAudiencesPatchSecurity
 }
 

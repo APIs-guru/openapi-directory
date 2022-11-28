@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import progressupdatestreamsummary
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListProgressUpdateStreamsResult:
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
-    progress_update_stream_summary_list: Optional[List[progressupdatestreamsummary.ProgressUpdateStreamSummary]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProgressUpdateStreamSummaryList' }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
+    progress_update_stream_summary_list: Optional[List[ProgressUpdateStreamSummary]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ProgressUpdateStreamSummaryList') }})
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PalcsRequestBodyCertificateParameters = /** @class */ (function (_super) {
     __extends(PalcsRequestBodyCertificateParameters, _super);
@@ -30,11 +30,11 @@ var PalcsRequestBodyCertificateParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=applicationNo" }),
+        SpeakeasyMetadata({ data: "json, name=applicationNo" }),
         __metadata("design:type", String)
     ], PalcsRequestBodyCertificateParameters.prototype, "applicationNo", void 0);
     __decorate([
-        Metadata({ data: "json, name=licenseNo" }),
+        SpeakeasyMetadata({ data: "json, name=licenseNo" }),
         __metadata("design:type", String)
     ], PalcsRequestBodyCertificateParameters.prototype, "licenseNo", void 0);
     return PalcsRequestBodyCertificateParameters;
@@ -50,19 +50,19 @@ var PalcsRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=certificateParameters" }),
+        SpeakeasyMetadata({ data: "json, name=certificateParameters" }),
         __metadata("design:type", PalcsRequestBodyCertificateParameters)
     ], PalcsRequestBody.prototype, "certificateParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=consentArtifact" }),
+        SpeakeasyMetadata({ data: "json, name=consentArtifact" }),
         __metadata("design:type", Object)
     ], PalcsRequestBody.prototype, "consentArtifact", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], PalcsRequestBody.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=txnId" }),
+        SpeakeasyMetadata({ data: "json, name=txnId" }),
         __metadata("design:type", String)
     ], PalcsRequestBody.prototype, "txnId", void 0);
     return PalcsRequestBody;
@@ -74,32 +74,16 @@ var PalcsSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], PalcsSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeClientId)
     ], PalcsSecurity.prototype, "clientId", void 0);
     return PalcsSecurity;
 }(SpeakeasyBase));
 export { PalcsSecurity };
-var PalcsRequest = /** @class */ (function (_super) {
-    __extends(PalcsRequest, _super);
-    function PalcsRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", PalcsRequestBody)
-    ], PalcsRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", PalcsSecurity)
-    ], PalcsRequest.prototype, "security", void 0);
-    return PalcsRequest;
-}(SpeakeasyBase));
-export { PalcsRequest };
 export var Palcs400ApplicationJsonErrorEnum;
 (function (Palcs400ApplicationJsonErrorEnum) {
     Palcs400ApplicationJsonErrorEnum["MissingParameter"] = "missing_parameter";
@@ -122,11 +106,11 @@ var Palcs400ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Palcs400ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Palcs400ApplicationJson.prototype, "errorDescription", void 0);
     return Palcs400ApplicationJson;
@@ -148,11 +132,11 @@ var Palcs401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Palcs401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Palcs401ApplicationJson.prototype, "errorDescription", void 0);
     return Palcs401ApplicationJson;
@@ -174,11 +158,11 @@ var Palcs404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Palcs404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Palcs404ApplicationJson.prototype, "errorDescription", void 0);
     return Palcs404ApplicationJson;
@@ -198,11 +182,11 @@ var Palcs500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Palcs500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Palcs500ApplicationJson.prototype, "errorDescription", void 0);
     return Palcs500ApplicationJson;
@@ -222,11 +206,11 @@ var Palcs502ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Palcs502ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Palcs502ApplicationJson.prototype, "errorDescription", void 0);
     return Palcs502ApplicationJson;
@@ -246,11 +230,11 @@ var Palcs503ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Palcs503ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Palcs503ApplicationJson.prototype, "errorDescription", void 0);
     return Palcs503ApplicationJson;
@@ -270,55 +254,71 @@ var Palcs504ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Palcs504ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Palcs504ApplicationJson.prototype, "errorDescription", void 0);
     return Palcs504ApplicationJson;
 }(SpeakeasyBase));
 export { Palcs504ApplicationJson };
+var PalcsRequest = /** @class */ (function (_super) {
+    __extends(PalcsRequest, _super);
+    function PalcsRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", PalcsRequestBody)
+    ], PalcsRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", PalcsSecurity)
+    ], PalcsRequest.prototype, "security", void 0);
+    return PalcsRequest;
+}(SpeakeasyBase));
+export { PalcsRequest };
 var PalcsResponse = /** @class */ (function (_super) {
     __extends(PalcsResponse, _super);
     function PalcsResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PalcsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PalcsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Palcs400ApplicationJson)
     ], PalcsResponse.prototype, "palcs400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Palcs401ApplicationJson)
     ], PalcsResponse.prototype, "palcs401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Palcs404ApplicationJson)
     ], PalcsResponse.prototype, "palcs404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Palcs500ApplicationJson)
     ], PalcsResponse.prototype, "palcs500ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Palcs502ApplicationJson)
     ], PalcsResponse.prototype, "palcs502ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Palcs503ApplicationJson)
     ], PalcsResponse.prototype, "palcs503ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Palcs504ApplicationJson)
     ], PalcsResponse.prototype, "palcs504ApplicationJsonObject", void 0);
     return PalcsResponse;

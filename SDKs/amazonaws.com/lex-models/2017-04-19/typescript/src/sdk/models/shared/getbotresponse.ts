@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Statement } from "./statement";
 import { Prompt } from "./prompt";
 import { Intent } from "./intent";
@@ -7,58 +6,59 @@ import { LocaleEnum } from "./localeenum";
 import { StatusEnum } from "./statusenum";
 
 
+
 export class GetBotResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=abortStatement" })
+  @SpeakeasyMetadata({ data: "json, name=abortStatement" })
   abortStatement?: Statement;
 
-  @Metadata({ data: "json, name=checksum" })
+  @SpeakeasyMetadata({ data: "json, name=checksum" })
   checksum?: string;
 
-  @Metadata({ data: "json, name=childDirected" })
+  @SpeakeasyMetadata({ data: "json, name=childDirected" })
   childDirected?: boolean;
 
-  @Metadata({ data: "json, name=clarificationPrompt" })
+  @SpeakeasyMetadata({ data: "json, name=clarificationPrompt" })
   clarificationPrompt?: Prompt;
 
-  @Metadata({ data: "json, name=createdDate" })
+  @SpeakeasyMetadata({ data: "json, name=createdDate" })
   createdDate?: Date;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=detectSentiment" })
+  @SpeakeasyMetadata({ data: "json, name=detectSentiment" })
   detectSentiment?: boolean;
 
-  @Metadata({ data: "json, name=enableModelImprovements" })
+  @SpeakeasyMetadata({ data: "json, name=enableModelImprovements" })
   enableModelImprovements?: boolean;
 
-  @Metadata({ data: "json, name=failureReason" })
+  @SpeakeasyMetadata({ data: "json, name=failureReason" })
   failureReason?: string;
 
-  @Metadata({ data: "json, name=idleSessionTTLInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=idleSessionTTLInSeconds" })
   idleSessionTtlInSeconds?: number;
 
-  @Metadata({ data: "json, name=intents", elemType: shared.Intent })
+  @SpeakeasyMetadata({ data: "json, name=intents", elemType: Intent })
   intents?: Intent[];
 
-  @Metadata({ data: "json, name=lastUpdatedDate" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdatedDate" })
   lastUpdatedDate?: Date;
 
-  @Metadata({ data: "json, name=locale" })
+  @SpeakeasyMetadata({ data: "json, name=locale" })
   locale?: LocaleEnum;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=nluIntentConfidenceThreshold" })
+  @SpeakeasyMetadata({ data: "json, name=nluIntentConfidenceThreshold" })
   nluIntentConfidenceThreshold?: number;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: StatusEnum;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 
-  @Metadata({ data: "json, name=voiceId" })
+  @SpeakeasyMetadata({ data: "json, name=voiceId" })
   voiceId?: string;
 }

@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConvertedOtherRegionsPrice } from "./convertedotherregionsprice";
 import { ConvertedRegionPrice } from "./convertedregionprice";
+
 
 
 // ConvertRegionPricesResponse
@@ -9,9 +9,9 @@ import { ConvertedRegionPrice } from "./convertedregionprice";
  * Response message for ConvertRegionPrices.
 **/
 export class ConvertRegionPricesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=convertedOtherRegionsPrice" })
+  @SpeakeasyMetadata({ data: "json, name=convertedOtherRegionsPrice" })
   convertedOtherRegionsPrice?: ConvertedOtherRegionsPrice;
 
-  @Metadata({ data: "json, name=convertedRegionPrices", elemType: shared.ConvertedRegionPrice })
+  @SpeakeasyMetadata({ data: "json, name=convertedRegionPrices", elemType: ConvertedRegionPrice })
   convertedRegionPrices?: Map<string, ConvertedRegionPrice>;
 }

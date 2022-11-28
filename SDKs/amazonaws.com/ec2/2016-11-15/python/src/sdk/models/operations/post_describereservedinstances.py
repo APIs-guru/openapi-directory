@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDescribeReservedInstancesActionEnum(str, Enum):
     DESCRIBE_RESERVED_INSTANCES = "DescribeReservedInstances"
@@ -10,8 +14,8 @@ class PostDescribeReservedInstancesVersionEnum(str, Enum):
 
 @dataclass
 class PostDescribeReservedInstancesQueryParams:
-    action: PostDescribeReservedInstancesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDescribeReservedInstancesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDescribeReservedInstancesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDescribeReservedInstancesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDescribeReservedInstancesHeaders:
 
 @dataclass
 class PostDescribeReservedInstancesRequest:
-    query_params: PostDescribeReservedInstancesQueryParams = field(default=None)
-    headers: PostDescribeReservedInstancesHeaders = field(default=None)
+    headers: PostDescribeReservedInstancesHeaders = field()
+    query_params: PostDescribeReservedInstancesQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDescribeReservedInstancesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

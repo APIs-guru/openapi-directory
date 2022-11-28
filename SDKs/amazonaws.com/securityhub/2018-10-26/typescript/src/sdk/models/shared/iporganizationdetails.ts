@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // IpOrganizationDetails
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides information about an internet provider.
 **/
 export class IpOrganizationDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Asn" })
+  @SpeakeasyMetadata({ data: "json, name=Asn" })
   asn?: number;
 
-  @Metadata({ data: "json, name=AsnOrg" })
+  @SpeakeasyMetadata({ data: "json, name=AsnOrg" })
   asnOrg?: string;
 
-  @Metadata({ data: "json, name=Isp" })
+  @SpeakeasyMetadata({ data: "json, name=Isp" })
   isp?: string;
 
-  @Metadata({ data: "json, name=Org" })
+  @SpeakeasyMetadata({ data: "json, name=Org" })
   org?: string;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var VehicleMotStatusEnum;
 (function (VehicleMotStatusEnum) {
     VehicleMotStatusEnum["NoDetailsHeldByDvla"] = "No details held by DVLA";
@@ -43,87 +43,87 @@ var Vehicle = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=artEndDate" }),
+        SpeakeasyMetadata({ data: "json, name=artEndDate" }),
         __metadata("design:type", Date)
     ], Vehicle.prototype, "artEndDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=co2Emissions" }),
+        SpeakeasyMetadata({ data: "json, name=co2Emissions" }),
         __metadata("design:type", Number)
     ], Vehicle.prototype, "co2Emissions", void 0);
     __decorate([
-        Metadata({ data: "json, name=colour" }),
+        SpeakeasyMetadata({ data: "json, name=colour" }),
         __metadata("design:type", String)
     ], Vehicle.prototype, "colour", void 0);
     __decorate([
-        Metadata({ data: "json, name=dateOfLastV5CIssued" }),
+        SpeakeasyMetadata({ data: "json, name=dateOfLastV5CIssued" }),
         __metadata("design:type", Date)
     ], Vehicle.prototype, "dateOfLastV5CIssued", void 0);
     __decorate([
-        Metadata({ data: "json, name=engineCapacity" }),
+        SpeakeasyMetadata({ data: "json, name=engineCapacity" }),
         __metadata("design:type", Number)
     ], Vehicle.prototype, "engineCapacity", void 0);
     __decorate([
-        Metadata({ data: "json, name=euroStatus" }),
+        SpeakeasyMetadata({ data: "json, name=euroStatus" }),
         __metadata("design:type", String)
     ], Vehicle.prototype, "euroStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=fuelType" }),
+        SpeakeasyMetadata({ data: "json, name=fuelType" }),
         __metadata("design:type", String)
     ], Vehicle.prototype, "fuelType", void 0);
     __decorate([
-        Metadata({ data: "json, name=make" }),
+        SpeakeasyMetadata({ data: "json, name=make" }),
         __metadata("design:type", String)
     ], Vehicle.prototype, "make", void 0);
     __decorate([
-        Metadata({ data: "json, name=markedForExport" }),
+        SpeakeasyMetadata({ data: "json, name=markedForExport" }),
         __metadata("design:type", Boolean)
     ], Vehicle.prototype, "markedForExport", void 0);
     __decorate([
-        Metadata({ data: "json, name=monthOfFirstDvlaRegistration" }),
+        SpeakeasyMetadata({ data: "json, name=monthOfFirstDvlaRegistration" }),
         __metadata("design:type", Date)
     ], Vehicle.prototype, "monthOfFirstDvlaRegistration", void 0);
     __decorate([
-        Metadata({ data: "json, name=monthOfFirstRegistration" }),
+        SpeakeasyMetadata({ data: "json, name=monthOfFirstRegistration" }),
         __metadata("design:type", Date)
     ], Vehicle.prototype, "monthOfFirstRegistration", void 0);
     __decorate([
-        Metadata({ data: "json, name=motExpiryDate" }),
+        SpeakeasyMetadata({ data: "json, name=motExpiryDate" }),
         __metadata("design:type", Date)
     ], Vehicle.prototype, "motExpiryDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=motStatus" }),
+        SpeakeasyMetadata({ data: "json, name=motStatus" }),
         __metadata("design:type", String)
     ], Vehicle.prototype, "motStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=realDrivingEmissions" }),
+        SpeakeasyMetadata({ data: "json, name=realDrivingEmissions" }),
         __metadata("design:type", String)
     ], Vehicle.prototype, "realDrivingEmissions", void 0);
     __decorate([
-        Metadata({ data: "json, name=registrationNumber" }),
+        SpeakeasyMetadata({ data: "json, name=registrationNumber" }),
         __metadata("design:type", String)
     ], Vehicle.prototype, "registrationNumber", void 0);
     __decorate([
-        Metadata({ data: "json, name=revenueWeight" }),
+        SpeakeasyMetadata({ data: "json, name=revenueWeight" }),
         __metadata("design:type", Number)
     ], Vehicle.prototype, "revenueWeight", void 0);
     __decorate([
-        Metadata({ data: "json, name=taxDueDate" }),
+        SpeakeasyMetadata({ data: "json, name=taxDueDate" }),
         __metadata("design:type", Date)
     ], Vehicle.prototype, "taxDueDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=taxStatus" }),
+        SpeakeasyMetadata({ data: "json, name=taxStatus" }),
         __metadata("design:type", String)
     ], Vehicle.prototype, "taxStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=typeApproval" }),
+        SpeakeasyMetadata({ data: "json, name=typeApproval" }),
         __metadata("design:type", String)
     ], Vehicle.prototype, "typeApproval", void 0);
     __decorate([
-        Metadata({ data: "json, name=wheelplan" }),
+        SpeakeasyMetadata({ data: "json, name=wheelplan" }),
         __metadata("design:type", String)
     ], Vehicle.prototype, "wheelplan", void 0);
     __decorate([
-        Metadata({ data: "json, name=yearOfManufacture" }),
+        SpeakeasyMetadata({ data: "json, name=yearOfManufacture" }),
         __metadata("design:type", Number)
     ], Vehicle.prototype, "yearOfManufacture", void 0);
     return Vehicle;

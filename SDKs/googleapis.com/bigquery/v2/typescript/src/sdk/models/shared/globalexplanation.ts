@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Explanation } from "./explanation";
+
 
 
 // GlobalExplanation
@@ -8,9 +8,9 @@ import { Explanation } from "./explanation";
  * Global explanations containing the top most important features after training.
 **/
 export class GlobalExplanation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=classLabel" })
+  @SpeakeasyMetadata({ data: "json, name=classLabel" })
   classLabel?: string;
 
-  @Metadata({ data: "json, name=explanations", elemType: shared.Explanation })
+  @SpeakeasyMetadata({ data: "json, name=explanations", elemType: Explanation })
   explanations?: Explanation[];
 }

@@ -1,42 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Destination } from "./destination";
 import { Detail } from "./detail";
 import { ItemRouting } from "./itemrouting";
-import { Detail } from "./detail";
+
 
 
 export class Report extends SpeakeasyBase {
-  @Metadata({ data: "json, name=destinationCount" })
+  @SpeakeasyMetadata({ data: "json, name=destinationCount" })
   destinationCount?: number;
 
-  @Metadata({ data: "json, name=destinations", elemType: shared.Destination })
+  @SpeakeasyMetadata({ data: "json, name=destinations", elemType: Destination })
   destinations?: Destination[];
 
-  @Metadata({ data: "json, name=errorCount" })
+  @SpeakeasyMetadata({ data: "json, name=errorCount" })
   errorCount?: number;
 
-  @Metadata({ data: "json, name=errors", elemType: shared.Detail })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: Detail })
   errors?: Detail[];
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=reportItemCount" })
+  @SpeakeasyMetadata({ data: "json, name=reportItemCount" })
   reportItemCount?: number;
 
-  @Metadata({ data: "json, name=routing", elemType: shared.ItemRouting })
+  @SpeakeasyMetadata({ data: "json, name=routing", elemType: ItemRouting })
   routing?: ItemRouting[];
 
-  @Metadata({ data: "json, name=timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=timestamp" })
   timestamp?: string;
 
-  @Metadata({ data: "json, name=topic" })
+  @SpeakeasyMetadata({ data: "json, name=topic" })
   topic?: string;
 
-  @Metadata({ data: "json, name=warningCount" })
+  @SpeakeasyMetadata({ data: "json, name=warningCount" })
   warningCount?: number;
 
-  @Metadata({ data: "json, name=warnings", elemType: shared.Detail })
+  @SpeakeasyMetadata({ data: "json, name=warnings", elemType: Detail })
   warnings?: Detail[];
 }

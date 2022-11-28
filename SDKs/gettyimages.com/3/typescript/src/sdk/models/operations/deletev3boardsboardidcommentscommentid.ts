@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteV3BoardsBoardIdCommentsCommentIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=board_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=board_id" })
   boardId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=comment_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=comment_id" })
   commentId: string;
 }
 
 
 export class DeleteV3BoardsBoardIdCommentsCommentIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DeleteV3BoardsBoardIdCommentsCommentIdPathParams;
 }
 
 
 export class DeleteV3BoardsBoardIdCommentsCommentIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ApiCoreDtoDomainsDomainTypeEnum {
-    System = "System"
-,    Go = "Go"
-,    Dedicated = "Dedicated"
-,    Personal = "Personal"
+    System = "System",
+    Go = "Go",
+    Dedicated = "Dedicated",
+    Personal = "Personal"
 }
 
 
 export class ApiCoreDtoDomainsDomain extends SpeakeasyBase {
-  @Metadata({ data: "json, name=custom404, form, name=custom404;" })
+  @SpeakeasyMetadata({ data: "json, name=custom404, form, name=custom404;" })
   custom404?: string;
 
-  @Metadata({ data: "json, name=customHomepage, form, name=customHomepage;" })
+  @SpeakeasyMetadata({ data: "json, name=customHomepage, form, name=customHomepage;" })
   customHomepage?: string;
 
-  @Metadata({ data: "json, name=id, form, name=id;" })
+  @SpeakeasyMetadata({ data: "json, name=id, form, name=id;" })
   id?: number;
 
-  @Metadata({ data: "json, name=name, form, name=name;" })
+  @SpeakeasyMetadata({ data: "json, name=name, form, name=name;" })
   name?: string;
 
-  @Metadata({ data: "json, name=type, form, name=type;" })
+  @SpeakeasyMetadata({ data: "json, name=type, form, name=type;" })
   type?: ApiCoreDtoDomainsDomainTypeEnum;
 }

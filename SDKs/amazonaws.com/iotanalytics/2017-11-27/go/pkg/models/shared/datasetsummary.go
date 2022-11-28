@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// DatasetSummary
+// A summary of information about a dataset.
 type DatasetSummary struct {
 	Actions        []DatasetActionSummary `json:"actions,omitempty"`
 	CreationTime   *time.Time             `json:"creationTime,omitempty"`

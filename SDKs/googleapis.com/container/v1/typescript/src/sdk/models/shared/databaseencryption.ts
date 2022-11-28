@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum DatabaseEncryptionStateEnum {
-    Unknown = "UNKNOWN"
-,    Encrypted = "ENCRYPTED"
-,    Decrypted = "DECRYPTED"
+    Unknown = "UNKNOWN",
+    Encrypted = "ENCRYPTED",
+    Decrypted = "DECRYPTED"
 }
 
 
@@ -12,9 +13,9 @@ export enum DatabaseEncryptionStateEnum {
  * Configuration of etcd encryption.
 **/
 export class DatabaseEncryption extends SpeakeasyBase {
-  @Metadata({ data: "json, name=keyName" })
+  @SpeakeasyMetadata({ data: "json, name=keyName" })
   keyName?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: DatabaseEncryptionStateEnum;
 }

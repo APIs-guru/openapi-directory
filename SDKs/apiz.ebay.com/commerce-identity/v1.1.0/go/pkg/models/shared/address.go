@@ -1,5 +1,7 @@
 package shared
 
+// Address
+// The type that defines the fields for an address.
 type Address struct {
 	AddressLine1    *string `json:"addressLine1,omitempty"`
 	AddressLine2    *string `json:"addressLine2,omitempty"`

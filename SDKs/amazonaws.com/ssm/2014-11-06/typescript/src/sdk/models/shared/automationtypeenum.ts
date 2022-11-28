@@ -1,6 +1,7 @@
 
 
+
 export enum AutomationTypeEnum {
-    CrossAccount = "CrossAccount"
-,    Local = "Local"
+    CrossAccount = "CrossAccount",
+    Local = "Local"
 }

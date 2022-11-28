@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StackErrorCodeEnum } from "./stackerrorcodeenum";
+
 
 
 // StackError
@@ -7,9 +8,9 @@ import { StackErrorCodeEnum } from "./stackerrorcodeenum";
  * Describes a stack error.
 **/
 export class StackError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ErrorCode" })
+  @SpeakeasyMetadata({ data: "json, name=ErrorCode" })
   errorCode?: StackErrorCodeEnum;
 
-  @Metadata({ data: "json, name=ErrorMessage" })
+  @SpeakeasyMetadata({ data: "json, name=ErrorMessage" })
   errorMessage?: string;
 }

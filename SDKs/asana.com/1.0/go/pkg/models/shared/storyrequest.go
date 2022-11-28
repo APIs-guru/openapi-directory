@@ -1,9 +1,5 @@
 package shared
 
-import (
-	"time"
-)
-
 type StoryRequestStickerNameEnum string
 
 const (
@@ -21,13 +17,9 @@ const (
 	StoryRequestStickerNameEnumPhoenixSpreadingLove StoryRequestStickerNameEnum = "phoenix_spreading_love"
 )
 
-type StoryRequest struct {
-	CreatedAt       *time.Time                   `json:"created_at,omitempty"`
-	Gid             *string                      `json:"gid,omitempty"`
-	HTMLText        *string                      `json:"html_text,omitempty"`
-	IsPinned        *bool                        `json:"is_pinned,omitempty"`
-	ResourceSubtype *string                      `json:"resource_subtype,omitempty"`
-	ResourceType    *string                      `json:"resource_type,omitempty"`
-	StickerName     *StoryRequestStickerNameEnum `json:"sticker_name,omitempty"`
-	Text            *string                      `json:"text,omitempty"`
+type StoryRequestInput struct {
+	HTMLText    *string                      `json:"html_text,omitempty"`
+	IsPinned    *bool                        `json:"is_pinned,omitempty"`
+	StickerName *StoryRequestStickerNameEnum `json:"sticker_name,omitempty"`
+	Text        *string                      `json:"text,omitempty"`
 }

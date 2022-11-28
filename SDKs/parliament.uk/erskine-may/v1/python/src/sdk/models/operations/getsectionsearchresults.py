@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetSectionSearchResultsPathParams:
-    search_term: str = field(default=None, metadata={'path_param': { 'field_name': 'searchTerm', 'style': 'simple', 'explode': False }})
+    search_term: str = field(metadata={'path_param': { 'field_name': 'searchTerm', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,14 +16,14 @@ class GetSectionSearchResultsQueryParams:
 
 @dataclass
 class GetSectionSearchResultsRequest:
-    path_params: GetSectionSearchResultsPathParams = field(default=None)
-    query_params: GetSectionSearchResultsQueryParams = field(default=None)
+    path_params: GetSectionSearchResultsPathParams = field()
+    query_params: GetSectionSearchResultsQueryParams = field()
     
 
 @dataclass
 class GetSectionSearchResultsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     erskine_may_search_erskine_may_section_search_result_: Optional[shared.ErskineMaySearchErskineMaySectionSearchResult] = field(default=None)
-    status_code: int = field(default=None)
     

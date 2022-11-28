@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class AssociateTargetsWithJobPathParams:
-    job_id: str = field(default=None, metadata={'path_param': { 'field_name': 'jobId', 'style': 'simple', 'explode': False }})
+    job_id: str = field(metadata={'path_param': { 'field_name': 'jobId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,26 +32,26 @@ class AssociateTargetsWithJobHeaders:
 @dataclass_json
 @dataclass
 class AssociateTargetsWithJobRequestBody:
-    comment: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'comment' }})
-    targets: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'targets' }})
+    targets: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('targets') }})
+    comment: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('comment') }})
     
 
 @dataclass
 class AssociateTargetsWithJobRequest:
-    path_params: AssociateTargetsWithJobPathParams = field(default=None)
-    query_params: AssociateTargetsWithJobQueryParams = field(default=None)
-    headers: AssociateTargetsWithJobHeaders = field(default=None)
-    request: AssociateTargetsWithJobRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: AssociateTargetsWithJobHeaders = field()
+    path_params: AssociateTargetsWithJobPathParams = field()
+    query_params: AssociateTargetsWithJobQueryParams = field()
+    request: AssociateTargetsWithJobRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class AssociateTargetsWithJobResponse:
+    content_type: str = field()
+    status_code: int = field()
     associate_targets_with_job_response: Optional[shared.AssociateTargetsWithJobResponse] = field(default=None)
-    content_type: str = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PublicationType } from "./publicationtype";
 
 
+
 export class PublicationTypeSearchResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.PublicationType })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: PublicationType })
   items?: PublicationType[];
 
-  @Metadata({ data: "json, name=itemsPerPage" })
+  @SpeakeasyMetadata({ data: "json, name=itemsPerPage" })
   itemsPerPage?: number;
 
-  @Metadata({ data: "json, name=totalResults" })
+  @SpeakeasyMetadata({ data: "json, name=totalResults" })
   totalResults?: number;
 }

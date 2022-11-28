@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AndroidenterpriseEntitlementsGetPathParams:
-    enterprise_id: str = field(default=None, metadata={'path_param': { 'field_name': 'enterpriseId', 'style': 'simple', 'explode': False }})
-    entitlement_id: str = field(default=None, metadata={'path_param': { 'field_name': 'entitlementId', 'style': 'simple', 'explode': False }})
-    user_id: str = field(default=None, metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
+    enterprise_id: str = field(metadata={'path_param': { 'field_name': 'enterpriseId', 'style': 'simple', 'explode': False }})
+    entitlement_id: str = field(metadata={'path_param': { 'field_name': 'entitlementId', 'style': 'simple', 'explode': False }})
+    user_id: str = field(metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class AndroidenterpriseEntitlementsGetQueryParams:
 
 @dataclass
 class AndroidenterpriseEntitlementsGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AndroidenterpriseEntitlementsGetRequest:
-    path_params: AndroidenterpriseEntitlementsGetPathParams = field(default=None)
-    query_params: AndroidenterpriseEntitlementsGetQueryParams = field(default=None)
-    security: AndroidenterpriseEntitlementsGetSecurity = field(default=None)
+    path_params: AndroidenterpriseEntitlementsGetPathParams = field()
+    query_params: AndroidenterpriseEntitlementsGetQueryParams = field()
+    security: AndroidenterpriseEntitlementsGetSecurity = field()
     
 
 @dataclass
 class AndroidenterpriseEntitlementsGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     entitlement: Optional[shared.Entitlement] = field(default=None)
-    status_code: int = field(default=None)
     

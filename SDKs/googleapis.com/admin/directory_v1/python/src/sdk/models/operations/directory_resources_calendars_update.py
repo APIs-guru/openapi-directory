@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DirectoryResourcesCalendarsUpdatePathParams:
-    calendar_resource_id: str = field(default=None, metadata={'path_param': { 'field_name': 'calendarResourceId', 'style': 'simple', 'explode': False }})
-    customer: str = field(default=None, metadata={'path_param': { 'field_name': 'customer', 'style': 'simple', 'explode': False }})
+    calendar_resource_id: str = field(metadata={'path_param': { 'field_name': 'calendarResourceId', 'style': 'simple', 'explode': False }})
+    customer: str = field(metadata={'path_param': { 'field_name': 'customer', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +30,21 @@ class DirectoryResourcesCalendarsUpdateQueryParams:
 
 @dataclass
 class DirectoryResourcesCalendarsUpdateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DirectoryResourcesCalendarsUpdateRequest:
-    path_params: DirectoryResourcesCalendarsUpdatePathParams = field(default=None)
-    query_params: DirectoryResourcesCalendarsUpdateQueryParams = field(default=None)
+    path_params: DirectoryResourcesCalendarsUpdatePathParams = field()
+    query_params: DirectoryResourcesCalendarsUpdateQueryParams = field()
+    security: DirectoryResourcesCalendarsUpdateSecurity = field()
     request: Optional[shared.CalendarResource] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DirectoryResourcesCalendarsUpdateSecurity = field(default=None)
     
 
 @dataclass
 class DirectoryResourcesCalendarsUpdateResponse:
+    content_type: str = field()
+    status_code: int = field()
     calendar_resource: Optional[shared.CalendarResource] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

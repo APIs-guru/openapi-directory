@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class IssueEventDismissedReview extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dismissal_commit_id" })
+  @SpeakeasyMetadata({ data: "json, name=dismissal_commit_id" })
   dismissalCommitId?: string;
 
-  @Metadata({ data: "json, name=dismissal_message" })
+  @SpeakeasyMetadata({ data: "json, name=dismissal_message" })
   dismissalMessage: string;
 
-  @Metadata({ data: "json, name=review_id" })
+  @SpeakeasyMetadata({ data: "json, name=review_id" })
   reviewId: number;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state: string;
 }

@@ -14,6 +14,8 @@ type CreateMemberHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateMemberRequestBodyAccount
+// Specifies the details of an account to associate with an Amazon Macie administrator account.
 type CreateMemberRequestBodyAccount struct {
 	AccountID *string `json:"accountId,omitempty"`
 	Email     *string `json:"email,omitempty"`

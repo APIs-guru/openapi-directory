@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GoogleDevtoolsArtifactregistryV1beta2File } from "./googledevtoolsartifactregistryv1beta2file";
 /**
  * The response from listing files.

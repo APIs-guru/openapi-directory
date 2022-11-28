@@ -22,9 +22,25 @@ type YoutubeLiveBroadcastsInsertCuepointQueryParams struct {
 	UploadProtocol                *string           `queryParam:"style=form,explode=true,name=upload_protocol"`
 }
 
-type YoutubeLiveBroadcastsInsertCuepointSecurity struct {
+type YoutubeLiveBroadcastsInsertCuepointSecurityOption1 struct {
 	Oauth2  shared.SchemeOauth2  `security:"scheme,type=oauth2"`
 	Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+}
+
+type YoutubeLiveBroadcastsInsertCuepointSecurityOption2 struct {
+	Oauth2  shared.SchemeOauth2  `security:"scheme,type=oauth2"`
+	Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+}
+
+type YoutubeLiveBroadcastsInsertCuepointSecurityOption3 struct {
+	Oauth2  shared.SchemeOauth2  `security:"scheme,type=oauth2"`
+	Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+}
+
+type YoutubeLiveBroadcastsInsertCuepointSecurity struct {
+	Option1 *YoutubeLiveBroadcastsInsertCuepointSecurityOption1 `security:"option"`
+	Option2 *YoutubeLiveBroadcastsInsertCuepointSecurityOption2 `security:"option"`
+	Option3 *YoutubeLiveBroadcastsInsertCuepointSecurityOption3 `security:"option"`
 }
 
 type YoutubeLiveBroadcastsInsertCuepointRequest struct {

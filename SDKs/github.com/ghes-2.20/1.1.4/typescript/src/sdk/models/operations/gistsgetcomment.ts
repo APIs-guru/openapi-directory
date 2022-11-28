@@ -1,59 +1,60 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GistsGetCommentPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=comment_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=comment_id" })
   commentId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=gist_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=gist_id" })
   gistId: string;
 }
 
 
-export class GistsGetCommentRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GistsGetCommentPathParams;
-}
-
-
 export class GistsGetComment403ApplicationJsonBlock extends SpeakeasyBase {
-  @Metadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata({ data: "json, name=created_at" })
   createdAt?: string;
 
-  @Metadata({ data: "json, name=html_url" })
+  @SpeakeasyMetadata({ data: "json, name=html_url" })
   htmlUrl?: string;
 
-  @Metadata({ data: "json, name=reason" })
+  @SpeakeasyMetadata({ data: "json, name=reason" })
   reason?: string;
 }
 
 
 export class GistsGetComment403ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=block" })
+  @SpeakeasyMetadata({ data: "json, name=block" })
   block?: GistsGetComment403ApplicationJsonBlock;
 
-  @Metadata({ data: "json, name=documentation_url" })
+  @SpeakeasyMetadata({ data: "json, name=documentation_url" })
   documentationUrl?: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class GistsGetCommentRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GistsGetCommentPathParams;
+}
+
+
 export class GistsGetCommentResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   gistComment?: shared.GistComment;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   gistsGetComment403ApplicationJsonObject?: GistsGetComment403ApplicationJson;
 }

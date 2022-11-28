@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SimpleCondition } from "./simplecondition";
 import { OperatorEnum } from "./operatorenum";
+
 
 
 // Condition
@@ -9,9 +9,9 @@ import { OperatorEnum } from "./operatorenum";
  * Specifies the conditions to evaluate for an activity in a journey, and how to evaluate those conditions.
 **/
 export class Condition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Conditions", elemType: shared.SimpleCondition })
+  @SpeakeasyMetadata({ data: "json, name=Conditions", elemType: SimpleCondition })
   conditions?: SimpleCondition[];
 
-  @Metadata({ data: "json, name=Operator" })
+  @SpeakeasyMetadata({ data: "json, name=Operator" })
   operator?: OperatorEnum;
 }

@@ -1,15 +1,14 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
+import FormData from "form-data";
 import * as operations from "./models/operations";
-import { SerializeRequestBody } from "../internal/utils/requestbody";
-import FormData from 'form-data';
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import * as utils from "../internal/utils";
+
+
 
 type OptsFunc = (sdk: SDK) => void;
 
-const Servers = [
-  "https://mcw.edu//rest.rgd.mcw.edu/rgdws",
+export const ServerList = [
+	"https://mcw.edu//rest.rgd.mcw.edu/rgdws",
 ] as const;
 
 export function WithServerURL(
@@ -20,47 +19,47 @@ export function WithServerURL(
     if (params != null) {
       serverURL = utils.ReplaceParameters(serverURL, params);
     }
-    sdk.serverURL = serverURL;
+    sdk._serverURL = serverURL;
   };
 }
 
 export function WithClient(client: AxiosInstance): OptsFunc {
   return (sdk: SDK) => {
-    sdk.defaultClient = client;
+    sdk._defaultClient = client;
   };
 }
 
 
 export class SDK {
-  defaultClient?: AxiosInstance;
-  securityClient?: AxiosInstance;
-  security?: any;
-  serverURL: string;
+
+  public _defaultClient: AxiosInstance;
+  public _securityClient: AxiosInstance;
+  
+  public _serverURL: string;
+  private _language = "typescript";
+  private _sdkVersion = "0.0.1";
+  private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
-    if (this.serverURL == "") {
-      this.serverURL = Servers[0];
+    if (this._serverURL == "") {
+      this._serverURL = ServerList[0];
     }
 
-    if (!this.defaultClient) {
-      this.defaultClient = axios.create({ baseURL: this.serverURL });
+    if (!this._defaultClient) {
+      this._defaultClient = axios.create({ baseURL: this._serverURL });
     }
 
-    if (!this.securityClient) {
-      if (this.security) {
-        this.securityClient = CreateSecurityClient(
-          this.defaultClient,
-          this.security
-        );
-      } else {
-        this.securityClient = this.defaultClient;
-      }
+    if (!this._securityClient) {
+      this._securityClient = this._defaultClient;
     }
+    
   }
   
-  // GetActiveObjectCountUsingGet - Count of active objects by type, for specified species and date
-  GetActiveObjectCountUsingGet(
+  /**
+   * getActiveObjectCountUsingGet - Count of active objects by type, for specified species and date
+  **/
+  getActiveObjectCountUsingGet(
     req: operations.GetActiveObjectCountUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetActiveObjectCountUsingGetResponse> {
@@ -68,34 +67,34 @@ export class SDK {
       req = new operations.GetActiveObjectCountUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/stats/count/activeObject/{speciesTypeKey}/{dateYYYYMMDD}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetActiveObjectCountUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetActiveObjectCountUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -105,8 +104,10 @@ export class SDK {
   }
 
   
-  // GetActiveObjectDiffUsingGet - Count difference of active objects, by type, for specified species and date range
-  GetActiveObjectDiffUsingGet(
+  /**
+   * getActiveObjectDiffUsingGet - Count difference of active objects, by type, for specified species and date range
+  **/
+  getActiveObjectDiffUsingGet(
     req: operations.GetActiveObjectDiffUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetActiveObjectDiffUsingGetResponse> {
@@ -114,34 +115,34 @@ export class SDK {
       req = new operations.GetActiveObjectDiffUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/stats/diff/activeObject/{speciesTypeKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetActiveObjectDiffUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetActiveObjectDiffUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -151,8 +152,10 @@ export class SDK {
   }
 
   
-  // GetAffectedGenomicModelsUsingGet - Get affected genomic models (rat strains with gene alleles) submitted by RGD to AGR by taxonId
-  GetAffectedGenomicModelsUsingGet(
+  /**
+   * getAffectedGenomicModelsUsingGet - Get affected genomic models (rat strains with gene alleles) submitted by RGD to AGR by taxonId
+  **/
+  getAffectedGenomicModelsUsingGet(
     req: operations.GetAffectedGenomicModelsUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAffectedGenomicModelsUsingGetResponse> {
@@ -160,34 +163,34 @@ export class SDK {
       req = new operations.GetAffectedGenomicModelsUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/agr/affectedGenomicModels/{taxonId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAffectedGenomicModelsUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetAffectedGenomicModelsUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -197,8 +200,10 @@ export class SDK {
   }
 
   
-  // GetAllAnnotatedGenesUsingGet - Return a list of genes annotated to an ontology term
-  GetAllAnnotatedGenesUsingGet(
+  /**
+   * getAllAnnotatedGenesUsingGet - Return a list of genes annotated to an ontology term
+  **/
+  getAllAnnotatedGenesUsingGet(
     req: operations.GetAllAnnotatedGenesUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAllAnnotatedGenesUsingGetResponse> {
@@ -206,34 +211,34 @@ export class SDK {
       req = new operations.GetAllAnnotatedGenesUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/genes/annotation/{accId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAllAnnotatedGenesUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetAllAnnotatedGenesUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -243,39 +248,40 @@ export class SDK {
   }
 
   
-  // GetAllStrainsUsingGet - Return all active strains in RGD
-  GetAllStrainsUsingGet(
-    
+  /**
+   * getAllStrainsUsingGet - Return all active strains in RGD
+  **/
+  getAllStrainsUsingGet(
     config?: AxiosRequestConfig
   ): Promise<operations.GetAllStrainsUsingGetResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/strains/all";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAllStrainsUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetAllStrainsUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -285,8 +291,10 @@ export class SDK {
   }
 
   
-  // GetAllelesForTaxonUsingGet - Get gene allele records submitted by RGD to AGR by taxonId
-  GetAllelesForTaxonUsingGet(
+  /**
+   * getAllelesForTaxonUsingGet - Get gene allele records submitted by RGD to AGR by taxonId
+  **/
+  getAllelesForTaxonUsingGet(
     req: operations.GetAllelesForTaxonUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAllelesForTaxonUsingGetResponse> {
@@ -294,34 +302,34 @@ export class SDK {
       req = new operations.GetAllelesForTaxonUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/agr/alleles/{taxonId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAllelesForTaxonUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetAllelesForTaxonUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -331,8 +339,10 @@ export class SDK {
   }
 
   
-  // GetAnnotatedGenesUsingPost - Return a list of genes annotated to an ontology term
-  GetAnnotatedGenesUsingPost(
+  /**
+   * getAnnotatedGenesUsingPost - Return a list of genes annotated to an ontology term
+  **/
+  getAnnotatedGenesUsingPost(
     req: operations.GetAnnotatedGenesUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAnnotatedGenesUsingPostResponse> {
@@ -340,52 +350,51 @@ export class SDK {
       req = new operations.GetAnnotatedGenesUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/genes/annotation";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAnnotatedGenesUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetAnnotatedGenesUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 201:
+          case httpRes?.status == 201:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -395,8 +404,10 @@ export class SDK {
   }
 
   
-  // GetAnnotationCountByAccIdAndObjectTypeUsingGet - Returns annotation count for ontology accession ID and object type
-  GetAnnotationCountByAccIdAndObjectTypeUsingGet(
+  /**
+   * getAnnotationCountByAccIdAndObjectTypeUsingGet - Returns annotation count for ontology accession ID and object type
+  **/
+  getAnnotationCountByAccIdAndObjectTypeUsingGet(
     req: operations.GetAnnotationCountByAccIdAndObjectTypeUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAnnotationCountByAccIdAndObjectTypeUsingGetResponse> {
@@ -404,34 +415,34 @@ export class SDK {
       req = new operations.GetAnnotationCountByAccIdAndObjectTypeUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/annotations/count/{accId}/{speciesTypeKey}/{includeChildren}/{objectType}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAnnotationCountByAccIdAndObjectTypeUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetAnnotationCountByAccIdAndObjectTypeUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -441,8 +452,10 @@ export class SDK {
   }
 
   
-  // GetAnnotationCountByAccIdAndSpeciesUsingGet - Returns annotation count for ontology accession ID and speicies
-  GetAnnotationCountByAccIdAndSpeciesUsingGet(
+  /**
+   * getAnnotationCountByAccIdAndSpeciesUsingGet - Returns annotation count for ontology accession ID and speicies
+  **/
+  getAnnotationCountByAccIdAndSpeciesUsingGet(
     req: operations.GetAnnotationCountByAccIdAndSpeciesUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAnnotationCountByAccIdAndSpeciesUsingGetResponse> {
@@ -450,34 +463,34 @@ export class SDK {
       req = new operations.GetAnnotationCountByAccIdAndSpeciesUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/annotations/count/{accId}/{speciesTypeKey}/{includeChildren}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAnnotationCountByAccIdAndSpeciesUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetAnnotationCountByAccIdAndSpeciesUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -487,8 +500,10 @@ export class SDK {
   }
 
   
-  // GetAnnotationCountByAccIdUsingGet - Returns annotation count for ontology accession ID
-  GetAnnotationCountByAccIdUsingGet(
+  /**
+   * getAnnotationCountByAccIdUsingGet - Returns annotation count for ontology accession ID
+  **/
+  getAnnotationCountByAccIdUsingGet(
     req: operations.GetAnnotationCountByAccIdUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAnnotationCountByAccIdUsingGetResponse> {
@@ -496,34 +511,34 @@ export class SDK {
       req = new operations.GetAnnotationCountByAccIdUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/annotations/count/{accId}/{includeChildren}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAnnotationCountByAccIdUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetAnnotationCountByAccIdUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -533,8 +548,10 @@ export class SDK {
   }
 
   
-  // GetAnnotationsByAccIdAndRgdIdUsingGet - Returns a list of annotations by RGD ID and ontology term accession ID
-  GetAnnotationsByAccIdAndRgdIdUsingGet(
+  /**
+   * getAnnotationsByAccIdAndRgdIdUsingGet - Returns a list of annotations by RGD ID and ontology term accession ID
+  **/
+  getAnnotationsByAccIdAndRgdIdUsingGet(
     req: operations.GetAnnotationsByAccIdAndRgdIdUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAnnotationsByAccIdAndRgdIdUsingGetResponse> {
@@ -542,34 +559,34 @@ export class SDK {
       req = new operations.GetAnnotationsByAccIdAndRgdIdUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/annotations/{accId}/{rgdId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAnnotationsByAccIdAndRgdIdUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetAnnotationsByAccIdAndRgdIdUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -579,8 +596,10 @@ export class SDK {
   }
 
   
-  // GetAnnotationsByRgdIdAndOntologyUsingGet - Returns a list of annotations by RGD ID and ontology prefix
-  GetAnnotationsByRgdIdAndOntologyUsingGet(
+  /**
+   * getAnnotationsByRgdIdAndOntologyUsingGet - Returns a list of annotations by RGD ID and ontology prefix
+  **/
+  getAnnotationsByRgdIdAndOntologyUsingGet(
     req: operations.GetAnnotationsByRgdIdAndOntologyUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAnnotationsByRgdIdAndOntologyUsingGetResponse> {
@@ -588,34 +607,34 @@ export class SDK {
       req = new operations.GetAnnotationsByRgdIdAndOntologyUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/annotations/rgdId/{rgdId}/{ontologyPrefix}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAnnotationsByRgdIdAndOntologyUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetAnnotationsByRgdIdAndOntologyUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -625,8 +644,10 @@ export class SDK {
   }
 
   
-  // GetAnnotationsByRgdIdUsingGet - Returns a list of annotations by RGD ID
-  GetAnnotationsByRgdIdUsingGet(
+  /**
+   * getAnnotationsByRgdIdUsingGet - Returns a list of annotations by RGD ID
+  **/
+  getAnnotationsByRgdIdUsingGet(
     req: operations.GetAnnotationsByRgdIdUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAnnotationsByRgdIdUsingGetResponse> {
@@ -634,34 +655,34 @@ export class SDK {
       req = new operations.GetAnnotationsByRgdIdUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/annotations/rgdId/{rgdId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAnnotationsByRgdIdUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetAnnotationsByRgdIdUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -671,8 +692,10 @@ export class SDK {
   }
 
   
-  // GetAnnotationsUsingGet - Returns a list annotations for an ontology term or a term and it's children
-  GetAnnotationsUsingGet(
+  /**
+   * getAnnotationsUsingGet - Returns a list annotations for an ontology term or a term and it's children
+  **/
+  getAnnotationsUsingGet(
     req: operations.GetAnnotationsUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAnnotationsUsingGetResponse> {
@@ -680,34 +703,34 @@ export class SDK {
       req = new operations.GetAnnotationsUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/annotations/{accId}/{speciesTypeKey}/{includeChildren}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAnnotationsUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetAnnotationsUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -717,8 +740,10 @@ export class SDK {
   }
 
   
-  // GetAnnotationsUsingPost - Return a list of genes annotated to an ontology term
-  GetAnnotationsUsingPost(
+  /**
+   * getAnnotationsUsingPost - Return a list of genes annotated to an ontology term
+  **/
+  getAnnotationsUsingPost(
     req: operations.GetAnnotationsUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAnnotationsUsingPostResponse> {
@@ -726,52 +751,51 @@ export class SDK {
       req = new operations.GetAnnotationsUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/annotations/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAnnotationsUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetAnnotationsUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 201:
+          case httpRes?.status == 201:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -781,8 +805,10 @@ export class SDK {
   }
 
   
-  // GetAnnotsByRefrerenceUsingGet - Returns a list of annotations for a reference
-  GetAnnotsByRefrerenceUsingGet(
+  /**
+   * getAnnotsByRefrerenceUsingGet - Returns a list of annotations for a reference
+  **/
+  getAnnotsByRefrerenceUsingGet(
     req: operations.GetAnnotsByRefrerenceUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAnnotsByRefrerenceUsingGetResponse> {
@@ -790,34 +816,34 @@ export class SDK {
       req = new operations.GetAnnotsByRefrerenceUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/annotations/reference/{refRgdId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAnnotsByRefrerenceUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetAnnotsByRefrerenceUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -827,8 +853,10 @@ export class SDK {
   }
 
   
-  // GetChartInfoUsingGet - Return a list of quantitative phenotypes values based on a combination of Clinical Measurement, Experimental Condition, Rat Strain, and/or Measurement Method ontology terms.  Results will be all records that match all terms submitted.  Ontology ids should be submitted as a comma delimited list (ex. RS:0000029,CMO:0000155,CMO:0000139).  Species type is an integer value (3=rat, 4=chinchilla).  Reference RGD ID for a study works like a filter.
-  GetChartInfoUsingGet(
+  /**
+   * getChartInfoUsingGet - Return a list of quantitative phenotypes values based on a combination of Clinical Measurement, Experimental Condition, Rat Strain, and/or Measurement Method ontology terms.  Results will be all records that match all terms submitted.  Ontology ids should be submitted as a comma delimited list (ex. RS:0000029,CMO:0000155,CMO:0000139).  Species type is an integer value (3=rat, 4=chinchilla).  Reference RGD ID for a study works like a filter.
+  **/
+  getChartInfoUsingGet(
     req: operations.GetChartInfoUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetChartInfoUsingGetResponse> {
@@ -836,34 +864,34 @@ export class SDK {
       req = new operations.GetChartInfoUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/phenotype/phenominer/chart/{speciesTypeKey}/{refRgdId}/{termString}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetChartInfoUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetChartInfoUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -873,8 +901,10 @@ export class SDK {
   }
 
   
-  // GetChartInfoUsingGet1 - Return a list of quantitative phenotypes values based on a combination of Clinical Measurement, Experimental Condition, Rat Strain, and/or Measurement Method ontology terms.  Results will be all records that match all terms submitted.  Ontology ids should be submitted as a comma delimited list (ex. RS:0000029,CMO:0000155,CMO:0000139).  Species type is an integer value (3=rat, 4=chinchilla)
-  GetChartInfoUsingGet1(
+  /**
+   * getChartInfoUsingGet1 - Return a list of quantitative phenotypes values based on a combination of Clinical Measurement, Experimental Condition, Rat Strain, and/or Measurement Method ontology terms.  Results will be all records that match all terms submitted.  Ontology ids should be submitted as a comma delimited list (ex. RS:0000029,CMO:0000155,CMO:0000139).  Species type is an integer value (3=rat, 4=chinchilla)
+  **/
+  getChartInfoUsingGet1(
     req: operations.GetChartInfoUsingGet1Request,
     config?: AxiosRequestConfig
   ): Promise<operations.GetChartInfoUsingGet1Response> {
@@ -882,34 +912,34 @@ export class SDK {
       req = new operations.GetChartInfoUsingGet1Request(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/phenotype/phenominer/chart/{speciesTypeKey}/{termString}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetChartInfoUsingGet1Response = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetChartInfoUsingGet1Response = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -919,8 +949,10 @@ export class SDK {
   }
 
   
-  // GetChromosomeByAssemblyUsingGet - Return a list of chromosomes
-  GetChromosomeByAssemblyUsingGet(
+  /**
+   * getChromosomeByAssemblyUsingGet - Return a list of chromosomes
+  **/
+  getChromosomeByAssemblyUsingGet(
     req: operations.GetChromosomeByAssemblyUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetChromosomeByAssemblyUsingGetResponse> {
@@ -928,34 +960,34 @@ export class SDK {
       req = new operations.GetChromosomeByAssemblyUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/maps/chr/{chromosome}/{mapKey}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetChromosomeByAssemblyUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetChromosomeByAssemblyUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -965,8 +997,10 @@ export class SDK {
   }
 
   
-  // GetChromosomesByAssemblyUsingGet - Return a list of chromosomes
-  GetChromosomesByAssemblyUsingGet(
+  /**
+   * getChromosomesByAssemblyUsingGet - Return a list of chromosomes
+  **/
+  getChromosomesByAssemblyUsingGet(
     req: operations.GetChromosomesByAssemblyUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetChromosomesByAssemblyUsingGetResponse> {
@@ -974,34 +1008,34 @@ export class SDK {
       req = new operations.GetChromosomesByAssemblyUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/maps/chr/{mapKey}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetChromosomesByAssemblyUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetChromosomesByAssemblyUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -1011,8 +1045,10 @@ export class SDK {
   }
 
   
-  // GetEnrichmentDataUsingPost - Return a list of genes annotated to the term.Genes are rgdids separated by comma.Species type is an integer value.term is the ontology
-  GetEnrichmentDataUsingPost(
+  /**
+   * getEnrichmentDataUsingPost - Return a list of genes annotated to the term.Genes are rgdids separated by comma.Species type is an integer value.term is the ontology
+  **/
+  getEnrichmentDataUsingPost(
     req: operations.GetEnrichmentDataUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetEnrichmentDataUsingPostResponse> {
@@ -1020,54 +1056,52 @@ export class SDK {
       req = new operations.GetEnrichmentDataUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/enrichment/annotatedGenes";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetEnrichmentDataUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetEnrichmentDataUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 201:
+          case httpRes?.status == 201:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -1077,8 +1111,10 @@ export class SDK {
   }
 
   
-  // GetEnrichmentDataUsingPost1 - Return a chart of ontology terms annotated to the genes.Genes are rgdids separated by comma.Species type is an integer value.Aspect is the Ontology group
-  GetEnrichmentDataUsingPost1(
+  /**
+   * getEnrichmentDataUsingPost1 - Return a chart of ontology terms annotated to the genes.Genes are rgdids separated by comma.Species type is an integer value.Aspect is the Ontology group
+  **/
+  getEnrichmentDataUsingPost1(
     req: operations.GetEnrichmentDataUsingPost1Request,
     config?: AxiosRequestConfig
   ): Promise<operations.GetEnrichmentDataUsingPost1Response> {
@@ -1086,54 +1122,52 @@ export class SDK {
       req = new operations.GetEnrichmentDataUsingPost1Request(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/enrichment/data";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetEnrichmentDataUsingPost1Response = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetEnrichmentDataUsingPost1Response = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 201:
+          case httpRes?.status == 201:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -1143,8 +1177,10 @@ export class SDK {
   }
 
   
-  // GetEnsemblGeneMappingUsingGet - Translate an RGD ID to an Ensembl Gene  ID
-  GetEnsemblGeneMappingUsingGet(
+  /**
+   * getEnsemblGeneMappingUsingGet - Translate an RGD ID to an Ensembl Gene  ID
+  **/
+  getEnsemblGeneMappingUsingGet(
     req: operations.GetEnsemblGeneMappingUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetEnsemblGeneMappingUsingGetResponse> {
@@ -1152,34 +1188,34 @@ export class SDK {
       req = new operations.GetEnsemblGeneMappingUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/lookup/id/map/EnsemblGene/{rgdId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetEnsemblGeneMappingUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetEnsemblGeneMappingUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -1189,8 +1225,10 @@ export class SDK {
   }
 
   
-  // GetEnsemblGeneMappingUsingPost - Translate RGD IDs to Ensembl Gene IDs
-  GetEnsemblGeneMappingUsingPost(
+  /**
+   * getEnsemblGeneMappingUsingPost - Translate RGD IDs to Ensembl Gene IDs
+  **/
+  getEnsemblGeneMappingUsingPost(
     req: operations.GetEnsemblGeneMappingUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetEnsemblGeneMappingUsingPostResponse> {
@@ -1198,52 +1236,51 @@ export class SDK {
       req = new operations.GetEnsemblGeneMappingUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/lookup/id/map/EnsemblGene";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetEnsemblGeneMappingUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetEnsemblGeneMappingUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 201:
+          case httpRes?.status == 201:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -1253,8 +1290,10 @@ export class SDK {
   }
 
   
-  // GetEnsemblProteinMappingUsingGet - Translate an RGD ID to an Ensembl Protein ID
-  GetEnsemblProteinMappingUsingGet(
+  /**
+   * getEnsemblProteinMappingUsingGet - Translate an RGD ID to an Ensembl Protein ID
+  **/
+  getEnsemblProteinMappingUsingGet(
     req: operations.GetEnsemblProteinMappingUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetEnsemblProteinMappingUsingGetResponse> {
@@ -1262,34 +1301,34 @@ export class SDK {
       req = new operations.GetEnsemblProteinMappingUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/lookup/id/map/EnsemblProtein/{rgdId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetEnsemblProteinMappingUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetEnsemblProteinMappingUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -1299,8 +1338,10 @@ export class SDK {
   }
 
   
-  // GetEnsemblProteinMappingUsingPost - Translate RGD IDs to Ensembl Protein IDs
-  GetEnsemblProteinMappingUsingPost(
+  /**
+   * getEnsemblProteinMappingUsingPost - Translate RGD IDs to Ensembl Protein IDs
+  **/
+  getEnsemblProteinMappingUsingPost(
     req: operations.GetEnsemblProteinMappingUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetEnsemblProteinMappingUsingPostResponse> {
@@ -1308,52 +1349,51 @@ export class SDK {
       req = new operations.GetEnsemblProteinMappingUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/lookup/id/map/EnsemblProtein";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetEnsemblProteinMappingUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetEnsemblProteinMappingUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 201:
+          case httpRes?.status == 201:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -1363,8 +1403,10 @@ export class SDK {
   }
 
   
-  // GetEnsemblTranscriptMappingUsingGet - Translate an RGD ID to an Ensembl Transcript ID
-  GetEnsemblTranscriptMappingUsingGet(
+  /**
+   * getEnsemblTranscriptMappingUsingGet - Translate an RGD ID to an Ensembl Transcript ID
+  **/
+  getEnsemblTranscriptMappingUsingGet(
     req: operations.GetEnsemblTranscriptMappingUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetEnsemblTranscriptMappingUsingGetResponse> {
@@ -1372,34 +1414,34 @@ export class SDK {
       req = new operations.GetEnsemblTranscriptMappingUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/lookup/id/map/EnsemblTranscript/{rgdId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetEnsemblTranscriptMappingUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetEnsemblTranscriptMappingUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -1409,8 +1451,10 @@ export class SDK {
   }
 
   
-  // GetEnsemblTranscriptMappingUsingPost - Translate RGD IDs to Ensembl Transcript IDs
-  GetEnsemblTranscriptMappingUsingPost(
+  /**
+   * getEnsemblTranscriptMappingUsingPost - Translate RGD IDs to Ensembl Transcript IDs
+  **/
+  getEnsemblTranscriptMappingUsingPost(
     req: operations.GetEnsemblTranscriptMappingUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetEnsemblTranscriptMappingUsingPostResponse> {
@@ -1418,52 +1462,51 @@ export class SDK {
       req = new operations.GetEnsemblTranscriptMappingUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/lookup/id/map/EnsemblTranscript";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetEnsemblTranscriptMappingUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetEnsemblTranscriptMappingUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 201:
+          case httpRes?.status == 201:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -1473,8 +1516,10 @@ export class SDK {
   }
 
   
-  // GetExpressionForTaxonUsingGet - Get expression annotations submitted by RGD to AGR by taxonId
-  GetExpressionForTaxonUsingGet(
+  /**
+   * getExpressionForTaxonUsingGet - Get expression annotations submitted by RGD to AGR by taxonId
+  **/
+  getExpressionForTaxonUsingGet(
     req: operations.GetExpressionForTaxonUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetExpressionForTaxonUsingGetResponse> {
@@ -1482,34 +1527,34 @@ export class SDK {
       req = new operations.GetExpressionForTaxonUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/agr/expression/{taxonId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetExpressionForTaxonUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetExpressionForTaxonUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -1519,8 +1564,10 @@ export class SDK {
   }
 
   
-  // GetGtexMappingUsingGet - Translate an RGD ID to an GTEx ID
-  GetGtexMappingUsingGet(
+  /**
+   * getGtexMappingUsingGet - Translate an RGD ID to an GTEx ID
+  **/
+  getGtexMappingUsingGet(
     req: operations.GetGtexMappingUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetGtexMappingUsingGetResponse> {
@@ -1528,34 +1575,34 @@ export class SDK {
       req = new operations.GetGtexMappingUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/lookup/id/map/GTEx/{rgdId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetGtexMappingUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetGtexMappingUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -1565,8 +1612,10 @@ export class SDK {
   }
 
   
-  // GetGtexMappingUsingPost - Translate RGD IDs to GTEx IDs
-  GetGtexMappingUsingPost(
+  /**
+   * getGtexMappingUsingPost - Translate RGD IDs to GTEx IDs
+  **/
+  getGtexMappingUsingPost(
     req: operations.GetGtexMappingUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetGtexMappingUsingPostResponse> {
@@ -1574,52 +1623,51 @@ export class SDK {
       req = new operations.GetGtexMappingUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/lookup/id/map/GTEx";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetGtexMappingUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetGtexMappingUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 201:
+          case httpRes?.status == 201:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -1629,8 +1677,10 @@ export class SDK {
   }
 
   
-  // GetGenBankNucleotideMappingUsingGet - Translate an RGD ID to a GenBank Nucleotide ID
-  GetGenBankNucleotideMappingUsingGet(
+  /**
+   * getGenBankNucleotideMappingUsingGet - Translate an RGD ID to a GenBank Nucleotide ID
+  **/
+  getGenBankNucleotideMappingUsingGet(
     req: operations.GetGenBankNucleotideMappingUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetGenBankNucleotideMappingUsingGetResponse> {
@@ -1638,34 +1688,34 @@ export class SDK {
       req = new operations.GetGenBankNucleotideMappingUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/lookup/id/map/GenBankNucleotide/{rgdId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetGenBankNucleotideMappingUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetGenBankNucleotideMappingUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -1675,8 +1725,10 @@ export class SDK {
   }
 
   
-  // GetGenBankNucleotideMappingUsingPost - Translate RGD IDs to GenBank Nucleotide IDs
-  GetGenBankNucleotideMappingUsingPost(
+  /**
+   * getGenBankNucleotideMappingUsingPost - Translate RGD IDs to GenBank Nucleotide IDs
+  **/
+  getGenBankNucleotideMappingUsingPost(
     req: operations.GetGenBankNucleotideMappingUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetGenBankNucleotideMappingUsingPostResponse> {
@@ -1684,52 +1736,51 @@ export class SDK {
       req = new operations.GetGenBankNucleotideMappingUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/lookup/id/map/GenBankNucleotide";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetGenBankNucleotideMappingUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetGenBankNucleotideMappingUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 201:
+          case httpRes?.status == 201:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -1739,8 +1790,10 @@ export class SDK {
   }
 
   
-  // GetGenBankProteinMappingUsingGet - Translate an RGD ID to a GenBank Protein ID
-  GetGenBankProteinMappingUsingGet(
+  /**
+   * getGenBankProteinMappingUsingGet - Translate an RGD ID to a GenBank Protein ID
+  **/
+  getGenBankProteinMappingUsingGet(
     req: operations.GetGenBankProteinMappingUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetGenBankProteinMappingUsingGetResponse> {
@@ -1748,34 +1801,34 @@ export class SDK {
       req = new operations.GetGenBankProteinMappingUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/lookup/id/map/GenBankProtein/{rgdId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetGenBankProteinMappingUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetGenBankProteinMappingUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -1785,8 +1838,10 @@ export class SDK {
   }
 
   
-  // GetGenBankProteinMappingUsingPost - Translate RGD IDs to GenBank Protein IDs
-  GetGenBankProteinMappingUsingPost(
+  /**
+   * getGenBankProteinMappingUsingPost - Translate RGD IDs to GenBank Protein IDs
+  **/
+  getGenBankProteinMappingUsingPost(
     req: operations.GetGenBankProteinMappingUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetGenBankProteinMappingUsingPostResponse> {
@@ -1794,52 +1849,51 @@ export class SDK {
       req = new operations.GetGenBankProteinMappingUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/lookup/id/map/GenBankProtein";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetGenBankProteinMappingUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetGenBankProteinMappingUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 201:
+          case httpRes?.status == 201:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -1849,8 +1903,10 @@ export class SDK {
   }
 
   
-  // GetGeneAllelesUsingGet - Return a list of gene alleles
-  GetGeneAllelesUsingGet(
+  /**
+   * getGeneAllelesUsingGet - Return a list of gene alleles
+  **/
+  getGeneAllelesUsingGet(
     req: operations.GetGeneAllelesUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetGeneAllelesUsingGetResponse> {
@@ -1858,34 +1914,34 @@ export class SDK {
       req = new operations.GetGeneAllelesUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/genes/allele/{rgdId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetGeneAllelesUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetGeneAllelesUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -1895,8 +1951,10 @@ export class SDK {
   }
 
   
-  // GetGeneByMapKeyUsingGet - Return a list of all genes with position information for an assembly
-  GetGeneByMapKeyUsingGet(
+  /**
+   * getGeneByMapKeyUsingGet - Return a list of all genes with position information for an assembly
+  **/
+  getGeneByMapKeyUsingGet(
     req: operations.GetGeneByMapKeyUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetGeneByMapKeyUsingGetResponse> {
@@ -1904,34 +1962,34 @@ export class SDK {
       req = new operations.GetGeneByMapKeyUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/genes/map/{mapKey}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetGeneByMapKeyUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetGeneByMapKeyUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -1941,8 +1999,10 @@ export class SDK {
   }
 
   
-  // GetGeneByRgdIdUsingGet - Get a gene record by RGD ID
-  GetGeneByRgdIdUsingGet(
+  /**
+   * getGeneByRgdIdUsingGet - Get a gene record by RGD ID
+  **/
+  getGeneByRgdIdUsingGet(
     req: operations.GetGeneByRgdIdUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetGeneByRgdIdUsingGetResponse> {
@@ -1950,34 +2010,34 @@ export class SDK {
       req = new operations.GetGeneByRgdIdUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/genes/{rgdId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetGeneByRgdIdUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetGeneByRgdIdUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -1987,8 +2047,10 @@ export class SDK {
   }
 
   
-  // GetGeneBySymbolUsingGet - Get a gene record by symbol and species type key
-  GetGeneBySymbolUsingGet(
+  /**
+   * getGeneBySymbolUsingGet - Get a gene record by symbol and species type key
+  **/
+  getGeneBySymbolUsingGet(
     req: operations.GetGeneBySymbolUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetGeneBySymbolUsingGetResponse> {
@@ -1996,34 +2058,34 @@ export class SDK {
       req = new operations.GetGeneBySymbolUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/genes/{symbol}/{speciesTypeKey}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetGeneBySymbolUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetGeneBySymbolUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -2033,8 +2095,10 @@ export class SDK {
   }
 
   
-  // GetGeneOrthologsUsingGet - Return a list of gene orthologs
-  GetGeneOrthologsUsingGet(
+  /**
+   * getGeneOrthologsUsingGet - Return a list of gene orthologs
+  **/
+  getGeneOrthologsUsingGet(
     req: operations.GetGeneOrthologsUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetGeneOrthologsUsingGetResponse> {
@@ -2042,34 +2106,34 @@ export class SDK {
       req = new operations.GetGeneOrthologsUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/genes/orthologs/{rgdId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetGeneOrthologsUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetGeneOrthologsUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -2079,8 +2143,10 @@ export class SDK {
   }
 
   
-  // GetGeneTypeCountUsingGet - Count of gene types, for specified species and date
-  GetGeneTypeCountUsingGet(
+  /**
+   * getGeneTypeCountUsingGet - Count of gene types, for specified species and date
+  **/
+  getGeneTypeCountUsingGet(
     req: operations.GetGeneTypeCountUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetGeneTypeCountUsingGetResponse> {
@@ -2088,34 +2154,34 @@ export class SDK {
       req = new operations.GetGeneTypeCountUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/stats/count/geneType/{speciesTypeKey}/{dateYYYYMMDD}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetGeneTypeCountUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetGeneTypeCountUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -2125,8 +2191,10 @@ export class SDK {
   }
 
   
-  // GetGeneTypeDiffUsingGet - Count difference of gene types, for specified species and date range
-  GetGeneTypeDiffUsingGet(
+  /**
+   * getGeneTypeDiffUsingGet - Count difference of gene types, for specified species and date range
+  **/
+  getGeneTypeDiffUsingGet(
     req: operations.GetGeneTypeDiffUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetGeneTypeDiffUsingGetResponse> {
@@ -2134,34 +2202,34 @@ export class SDK {
       req = new operations.GetGeneTypeDiffUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/stats/diff/geneType/{speciesTypeKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetGeneTypeDiffUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetGeneTypeDiffUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -2171,39 +2239,40 @@ export class SDK {
   }
 
   
-  // GetGeneTypesUsingGet - Returns a list of gene types avialable in RGD
-  GetGeneTypesUsingGet(
-    
+  /**
+   * getGeneTypesUsingGet - Returns a list of gene types avialable in RGD
+  **/
+  getGeneTypesUsingGet(
     config?: AxiosRequestConfig
   ): Promise<operations.GetGeneTypesUsingGetResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/lookup/geneTypes";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetGeneTypesUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetGeneTypesUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -2213,8 +2282,10 @@ export class SDK {
   }
 
   
-  // GetGenesAnnotatedUsingGet - Return a list of genes annotated to an ontology term
-  GetGenesAnnotatedUsingGet(
+  /**
+   * getGenesAnnotatedUsingGet - Return a list of genes annotated to an ontology term
+  **/
+  getGenesAnnotatedUsingGet(
     req: operations.GetGenesAnnotatedUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetGenesAnnotatedUsingGetResponse> {
@@ -2222,34 +2293,34 @@ export class SDK {
       req = new operations.GetGenesAnnotatedUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/genes/annotation/{accId}/{speciesTypeKey}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetGenesAnnotatedUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetGenesAnnotatedUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -2259,8 +2330,10 @@ export class SDK {
   }
 
   
-  // GetGenesByAffyIdUsingGet - Return a list of genes for an affymetrix ID
-  GetGenesByAffyIdUsingGet(
+  /**
+   * getGenesByAffyIdUsingGet - Return a list of genes for an affymetrix ID
+  **/
+  getGenesByAffyIdUsingGet(
     req: operations.GetGenesByAffyIdUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetGenesByAffyIdUsingGetResponse> {
@@ -2268,34 +2341,34 @@ export class SDK {
       req = new operations.GetGenesByAffyIdUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/genes/affyId/{affyId}/{speciesTypeKey}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetGenesByAffyIdUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetGenesByAffyIdUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -2305,8 +2378,10 @@ export class SDK {
   }
 
   
-  // GetGenesByAliasSymbolUsingGet - Return a list of genes for an alias and species
-  GetGenesByAliasSymbolUsingGet(
+  /**
+   * getGenesByAliasSymbolUsingGet - Return a list of genes for an alias and species
+  **/
+  getGenesByAliasSymbolUsingGet(
     req: operations.GetGenesByAliasSymbolUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetGenesByAliasSymbolUsingGetResponse> {
@@ -2314,34 +2389,34 @@ export class SDK {
       req = new operations.GetGenesByAliasSymbolUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/genes/alias/{aliasSymbol}/{speciesTypeKey}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetGenesByAliasSymbolUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetGenesByAliasSymbolUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -2351,8 +2426,10 @@ export class SDK {
   }
 
   
-  // GetGenesByKeywordUsingGet - Return a list of genes by keyword and species type key
-  GetGenesByKeywordUsingGet(
+  /**
+   * getGenesByKeywordUsingGet - Return a list of genes by keyword and species type key
+  **/
+  getGenesByKeywordUsingGet(
     req: operations.GetGenesByKeywordUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetGenesByKeywordUsingGetResponse> {
@@ -2360,34 +2437,34 @@ export class SDK {
       req = new operations.GetGenesByKeywordUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/genes/keyword/{keyword}/{speciesTypeKey}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetGenesByKeywordUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetGenesByKeywordUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -2397,8 +2474,10 @@ export class SDK {
   }
 
   
-  // GetGenesByPositionUsingGet - Return a list of genes position and map key
-  GetGenesByPositionUsingGet(
+  /**
+   * getGenesByPositionUsingGet - Return a list of genes position and map key
+  **/
+  getGenesByPositionUsingGet(
     req: operations.GetGenesByPositionUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetGenesByPositionUsingGetResponse> {
@@ -2406,34 +2485,34 @@ export class SDK {
       req = new operations.GetGenesByPositionUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/genes/{chr}/{start}/{stop}/{mapKey}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetGenesByPositionUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetGenesByPositionUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -2443,8 +2522,10 @@ export class SDK {
   }
 
   
-  // GetGenesBySpeciesUsingGet - Return a list of all genes for a species in RGD
-  GetGenesBySpeciesUsingGet(
+  /**
+   * getGenesBySpeciesUsingGet - Return a list of all genes for a species in RGD
+  **/
+  getGenesBySpeciesUsingGet(
     req: operations.GetGenesBySpeciesUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetGenesBySpeciesUsingGetResponse> {
@@ -2452,34 +2533,34 @@ export class SDK {
       req = new operations.GetGenesBySpeciesUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/genes/species/{speciesTypeKey}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetGenesBySpeciesUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetGenesBySpeciesUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -2489,8 +2570,10 @@ export class SDK {
   }
 
   
-  // GetGenesForLatestAssemblyUsingGet - Get gene records submitted by RGD to AGR by taxonId
-  GetGenesForLatestAssemblyUsingGet(
+  /**
+   * getGenesForLatestAssemblyUsingGet - Get gene records submitted by RGD to AGR by taxonId
+  **/
+  getGenesForLatestAssemblyUsingGet(
     req: operations.GetGenesForLatestAssemblyUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetGenesForLatestAssemblyUsingGetResponse> {
@@ -2498,34 +2581,34 @@ export class SDK {
       req = new operations.GetGenesForLatestAssemblyUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/agr/{taxonId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetGenesForLatestAssemblyUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetGenesForLatestAssemblyUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -2535,8 +2618,10 @@ export class SDK {
   }
 
   
-  // GetGenesInRegionUsingGet - Return a list of genes in region
-  GetGenesInRegionUsingGet(
+  /**
+   * getGenesInRegionUsingGet - Return a list of genes in region
+  **/
+  getGenesInRegionUsingGet(
     req: operations.GetGenesInRegionUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetGenesInRegionUsingGetResponse> {
@@ -2544,34 +2629,34 @@ export class SDK {
       req = new operations.GetGenesInRegionUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/genes/region/{chr}/{start}/{stop}/{mapKey}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetGenesInRegionUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetGenesInRegionUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -2581,8 +2666,10 @@ export class SDK {
   }
 
   
-  // GetHgncMappingUsingGet - Translate an RGD ID to an HGNC ID
-  GetHgncMappingUsingGet(
+  /**
+   * getHgncMappingUsingGet - Translate an RGD ID to an HGNC ID
+  **/
+  getHgncMappingUsingGet(
     req: operations.GetHgncMappingUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetHgncMappingUsingGetResponse> {
@@ -2590,34 +2677,34 @@ export class SDK {
       req = new operations.GetHgncMappingUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/lookup/id/map/HGNC/{rgdId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetHgncMappingUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetHgncMappingUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -2627,8 +2714,10 @@ export class SDK {
   }
 
   
-  // GetHgncMappingUsingPost - Translate RGD IDs to HGNC IDs
-  GetHgncMappingUsingPost(
+  /**
+   * getHgncMappingUsingPost - Translate RGD IDs to HGNC IDs
+  **/
+  getHgncMappingUsingPost(
     req: operations.GetHgncMappingUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetHgncMappingUsingPostResponse> {
@@ -2636,52 +2725,51 @@ export class SDK {
       req = new operations.GetHgncMappingUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/lookup/id/map/HGNC";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetHgncMappingUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetHgncMappingUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 201:
+          case httpRes?.status == 201:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -2691,8 +2779,10 @@ export class SDK {
   }
 
   
-  // GetMgiMappingUsingGet - Translate an RGD ID to an MGI ID
-  GetMgiMappingUsingGet(
+  /**
+   * getMgiMappingUsingGet - Translate an RGD ID to an MGI ID
+  **/
+  getMgiMappingUsingGet(
     req: operations.GetMgiMappingUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetMgiMappingUsingGetResponse> {
@@ -2700,34 +2790,34 @@ export class SDK {
       req = new operations.GetMgiMappingUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/lookup/id/map/MGI/{rgdId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetMgiMappingUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetMgiMappingUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -2737,8 +2827,10 @@ export class SDK {
   }
 
   
-  // GetMgiMappingUsingPost - Translate RGD IDs to MGI IDs
-  GetMgiMappingUsingPost(
+  /**
+   * getMgiMappingUsingPost - Translate RGD IDs to MGI IDs
+  **/
+  getMgiMappingUsingPost(
     req: operations.GetMgiMappingUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetMgiMappingUsingPostResponse> {
@@ -2746,52 +2838,51 @@ export class SDK {
       req = new operations.GetMgiMappingUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/lookup/id/map/MGI";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetMgiMappingUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetMgiMappingUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 201:
+          case httpRes?.status == 201:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -2801,8 +2892,10 @@ export class SDK {
   }
 
   
-  // GetMappedGenesByPositionUsingGet - Return a list of genes position and map key
-  GetMappedGenesByPositionUsingGet(
+  /**
+   * getMappedGenesByPositionUsingGet - Return a list of genes position and map key
+  **/
+  getMappedGenesByPositionUsingGet(
     req: operations.GetMappedGenesByPositionUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetMappedGenesByPositionUsingGetResponse> {
@@ -2810,34 +2903,34 @@ export class SDK {
       req = new operations.GetMappedGenesByPositionUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/genes/mapped/{chr}/{start}/{stop}/{mapKey}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetMappedGenesByPositionUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetMappedGenesByPositionUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -2847,8 +2940,10 @@ export class SDK {
   }
 
   
-  // GetMappedQtlByPositionUsingGet - Returns a list QTL for given position and assembly map
-  GetMappedQtlByPositionUsingGet(
+  /**
+   * getMappedQtlByPositionUsingGet - Returns a list QTL for given position and assembly map
+  **/
+  getMappedQtlByPositionUsingGet(
     req: operations.GetMappedQtlByPositionUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetMappedQtlByPositionUsingGetResponse> {
@@ -2856,34 +2951,34 @@ export class SDK {
       req = new operations.GetMappedQtlByPositionUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/qtls/mapped/{chr}/{start}/{stop}/{mapKey}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetMappedQtlByPositionUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetMappedQtlByPositionUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -2893,8 +2988,10 @@ export class SDK {
   }
 
   
-  // GetMappedSslpByPositionUsingGet - Returns a list SSLP for given position and assembly map
-  GetMappedSslpByPositionUsingGet(
+  /**
+   * getMappedSslpByPositionUsingGet - Returns a list SSLP for given position and assembly map
+  **/
+  getMappedSslpByPositionUsingGet(
     req: operations.GetMappedSslpByPositionUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetMappedSslpByPositionUsingGetResponse> {
@@ -2902,34 +2999,34 @@ export class SDK {
       req = new operations.GetMappedSslpByPositionUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/sslps/mapped/{chr}/{start}/{stop}/{mapKey}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetMappedSslpByPositionUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetMappedSslpByPositionUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -2939,8 +3036,10 @@ export class SDK {
   }
 
   
-  // GetMapsBySpeciesUsingGet - Return a list of assemblies
-  GetMapsBySpeciesUsingGet(
+  /**
+   * getMapsBySpeciesUsingGet - Return a list of assemblies
+  **/
+  getMapsBySpeciesUsingGet(
     req: operations.GetMapsBySpeciesUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetMapsBySpeciesUsingGetResponse> {
@@ -2948,34 +3047,34 @@ export class SDK {
       req = new operations.GetMapsBySpeciesUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/maps/{speciesTypeKey}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetMapsBySpeciesUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetMapsBySpeciesUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -2985,8 +3084,10 @@ export class SDK {
   }
 
   
-  // GetMapsUsingGet - Return a list assembly maps for a species
-  GetMapsUsingGet(
+  /**
+   * getMapsUsingGet - Return a list assembly maps for a species
+  **/
+  getMapsUsingGet(
     req: operations.GetMapsUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetMapsUsingGetResponse> {
@@ -2994,34 +3095,34 @@ export class SDK {
       req = new operations.GetMapsUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/lookup/maps/{speciesTypeKey}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetMapsUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetMapsUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -3031,8 +3132,10 @@ export class SDK {
   }
 
   
-  // GetMapsUsingGet1 - Return a standardUnit for an ontology if it exists
-  GetMapsUsingGet1(
+  /**
+   * getMapsUsingGet1 - Return a standardUnit for an ontology if it exists
+  **/
+  getMapsUsingGet1(
     req: operations.GetMapsUsingGet1Request,
     config?: AxiosRequestConfig
   ): Promise<operations.GetMapsUsingGet1Response> {
@@ -3040,31 +3143,31 @@ export class SDK {
       req = new operations.GetMapsUsingGet1Request(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/lookup/standardUnit/{accId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetMapsUsingGet1Response = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetMapsUsingGet1Response = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 res.getMapsUsingGet1200WildcardString = JSON.stringify(httpRes?.data);
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -3074,8 +3177,10 @@ export class SDK {
   }
 
   
-  // GetNcbiGeneMappingUsingGet - Translate an RGD ID to an NCBI Gene ID
-  GetNcbiGeneMappingUsingGet(
+  /**
+   * getNcbiGeneMappingUsingGet - Translate an RGD ID to an NCBI Gene ID
+  **/
+  getNcbiGeneMappingUsingGet(
     req: operations.GetNcbiGeneMappingUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetNcbiGeneMappingUsingGetResponse> {
@@ -3083,34 +3188,34 @@ export class SDK {
       req = new operations.GetNcbiGeneMappingUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/lookup/id/map/NCBIGene/{rgdId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetNcbiGeneMappingUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetNcbiGeneMappingUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -3120,8 +3225,10 @@ export class SDK {
   }
 
   
-  // GetNcbiGeneMappingUsingPost - Translate RGD IDs to NCBI Gene IDs
-  GetNcbiGeneMappingUsingPost(
+  /**
+   * getNcbiGeneMappingUsingPost - Translate RGD IDs to NCBI Gene IDs
+  **/
+  getNcbiGeneMappingUsingPost(
     req: operations.GetNcbiGeneMappingUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetNcbiGeneMappingUsingPostResponse> {
@@ -3129,52 +3236,51 @@ export class SDK {
       req = new operations.GetNcbiGeneMappingUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/lookup/id/map/NCBIGene";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetNcbiGeneMappingUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetNcbiGeneMappingUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 201:
+          case httpRes?.status == 201:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -3184,8 +3290,10 @@ export class SDK {
   }
 
   
-  // GetObjectStatusCountUsingGet - Count of objects with given status, for specified species and date
-  GetObjectStatusCountUsingGet(
+  /**
+   * getObjectStatusCountUsingGet - Count of objects with given status, for specified species and date
+  **/
+  getObjectStatusCountUsingGet(
     req: operations.GetObjectStatusCountUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetObjectStatusCountUsingGetResponse> {
@@ -3193,34 +3301,34 @@ export class SDK {
       req = new operations.GetObjectStatusCountUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/stats/count/objectStatus/{speciesTypeKey}/{dateYYYYMMDD}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetObjectStatusCountUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetObjectStatusCountUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -3230,8 +3338,10 @@ export class SDK {
   }
 
   
-  // GetObjectStatusDiffUsingGet - Count difference of objects with given status, for specified species and date range
-  GetObjectStatusDiffUsingGet(
+  /**
+   * getObjectStatusDiffUsingGet - Count difference of objects with given status, for specified species and date range
+  **/
+  getObjectStatusDiffUsingGet(
     req: operations.GetObjectStatusDiffUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetObjectStatusDiffUsingGetResponse> {
@@ -3239,34 +3349,34 @@ export class SDK {
       req = new operations.GetObjectStatusDiffUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/stats/diff/objectStatus/{speciesTypeKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetObjectStatusDiffUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetObjectStatusDiffUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -3276,8 +3386,10 @@ export class SDK {
   }
 
   
-  // GetObjectsWithRefSeqCountUsingGet - Count of objects with reference sequence(s), by object type, for specified species and date
-  GetObjectsWithRefSeqCountUsingGet(
+  /**
+   * getObjectsWithRefSeqCountUsingGet - Count of objects with reference sequence(s), by object type, for specified species and date
+  **/
+  getObjectsWithRefSeqCountUsingGet(
     req: operations.GetObjectsWithRefSeqCountUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetObjectsWithRefSeqCountUsingGetResponse> {
@@ -3285,34 +3397,34 @@ export class SDK {
       req = new operations.GetObjectsWithRefSeqCountUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/stats/count/objectWithRefSeq/{speciesTypeKey}/{dateYYYYMMDD}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetObjectsWithRefSeqCountUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetObjectsWithRefSeqCountUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -3322,8 +3434,10 @@ export class SDK {
   }
 
   
-  // GetObjectsWithRefSeqDiffUsingGet - Count difference of objects with reference sequence(s), by object type, for specified species and date range
-  GetObjectsWithRefSeqDiffUsingGet(
+  /**
+   * getObjectsWithRefSeqDiffUsingGet - Count difference of objects with reference sequence(s), by object type, for specified species and date range
+  **/
+  getObjectsWithRefSeqDiffUsingGet(
     req: operations.GetObjectsWithRefSeqDiffUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetObjectsWithRefSeqDiffUsingGetResponse> {
@@ -3331,34 +3445,34 @@ export class SDK {
       req = new operations.GetObjectsWithRefSeqDiffUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/stats/diff/objectWithRefSeq/{speciesTypeKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetObjectsWithRefSeqDiffUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetObjectsWithRefSeqDiffUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -3368,8 +3482,10 @@ export class SDK {
   }
 
   
-  // GetObjectsWithReferenceCountUsingGet - Count of objects with reference, by object type, for specified species and date
-  GetObjectsWithReferenceCountUsingGet(
+  /**
+   * getObjectsWithReferenceCountUsingGet - Count of objects with reference, by object type, for specified species and date
+  **/
+  getObjectsWithReferenceCountUsingGet(
     req: operations.GetObjectsWithReferenceCountUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetObjectsWithReferenceCountUsingGetResponse> {
@@ -3377,34 +3493,34 @@ export class SDK {
       req = new operations.GetObjectsWithReferenceCountUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/stats/count/objectWithReference/{speciesTypeKey}/{dateYYYYMMDD}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetObjectsWithReferenceCountUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetObjectsWithReferenceCountUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -3414,8 +3530,10 @@ export class SDK {
   }
 
   
-  // GetObjectsWithReferenceDiffUsingGet - Count difference of objects with reference, by object type, for specified species and date range
-  GetObjectsWithReferenceDiffUsingGet(
+  /**
+   * getObjectsWithReferenceDiffUsingGet - Count difference of objects with reference, by object type, for specified species and date range
+  **/
+  getObjectsWithReferenceDiffUsingGet(
     req: operations.GetObjectsWithReferenceDiffUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetObjectsWithReferenceDiffUsingGetResponse> {
@@ -3423,34 +3541,34 @@ export class SDK {
       req = new operations.GetObjectsWithReferenceDiffUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/stats/diff/objectWithReference/{speciesTypeKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetObjectsWithReferenceDiffUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetObjectsWithReferenceDiffUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -3460,8 +3578,10 @@ export class SDK {
   }
 
   
-  // GetObjectsWithXdBsCountUsingGet - Count of objects with external database ids, by database id, for specified species, object type and date
-  GetObjectsWithXdBsCountUsingGet(
+  /**
+   * getObjectsWithXdBsCountUsingGet - Count of objects with external database ids, by database id, for specified species, object type and date
+  **/
+  getObjectsWithXdBsCountUsingGet(
     req: operations.GetObjectsWithXdBsCountUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetObjectsWithXdBsCountUsingGetResponse> {
@@ -3469,34 +3589,34 @@ export class SDK {
       req = new operations.GetObjectsWithXdBsCountUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/stats/count/objectWithXdb/{speciesTypeKey}/{objectKey}/{dateYYYYMMDD}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetObjectsWithXdBsCountUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetObjectsWithXdBsCountUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -3506,8 +3626,10 @@ export class SDK {
   }
 
   
-  // GetObjectsWithXdBsDiffUsingGet - Count difference of objects with external database ids, by database id, for specified species, object type and date range
-  GetObjectsWithXdBsDiffUsingGet(
+  /**
+   * getObjectsWithXdBsDiffUsingGet - Count difference of objects with external database ids, by database id, for specified species, object type and date range
+  **/
+  getObjectsWithXdBsDiffUsingGet(
     req: operations.GetObjectsWithXdBsDiffUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetObjectsWithXdBsDiffUsingGetResponse> {
@@ -3515,34 +3637,34 @@ export class SDK {
       req = new operations.GetObjectsWithXdBsDiffUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/stats/diff/objectWithXdb/{speciesTypeKey}/{objectKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetObjectsWithXdBsDiffUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetObjectsWithXdBsDiffUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -3552,8 +3674,10 @@ export class SDK {
   }
 
   
-  // GetOntDagsUsingGet - Returns child and parent terms for Accession ID
-  GetOntDagsUsingGet(
+  /**
+   * getOntDagsUsingGet - Returns child and parent terms for Accession ID
+  **/
+  getOntDagsUsingGet(
     req: operations.GetOntDagsUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetOntDagsUsingGetResponse> {
@@ -3561,34 +3685,34 @@ export class SDK {
       req = new operations.GetOntDagsUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/ontology/ont/{accId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetOntDagsUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetOntDagsUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -3598,8 +3722,10 @@ export class SDK {
   }
 
   
-  // GetOrthologsByListUsingPost - Return a list of gene orthologs
-  GetOrthologsByListUsingPost(
+  /**
+   * getOrthologsByListUsingPost - Return a list of gene orthologs
+  **/
+  getOrthologsByListUsingPost(
     req: operations.GetOrthologsByListUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetOrthologsByListUsingPostResponse> {
@@ -3607,54 +3733,52 @@ export class SDK {
       req = new operations.GetOrthologsByListUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/genes/orthologs";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetOrthologsByListUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetOrthologsByListUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 201:
+          case httpRes?.status == 201:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -3664,8 +3788,10 @@ export class SDK {
   }
 
   
-  // GetPathwaysWithDiagramsForCategoryUsingGet - Return a list of pathways based on category provided
-  GetPathwaysWithDiagramsForCategoryUsingGet(
+  /**
+   * getPathwaysWithDiagramsForCategoryUsingGet - Return a list of pathways based on category provided
+  **/
+  getPathwaysWithDiagramsForCategoryUsingGet(
     req: operations.GetPathwaysWithDiagramsForCategoryUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetPathwaysWithDiagramsForCategoryUsingGetResponse> {
@@ -3673,34 +3799,34 @@ export class SDK {
       req = new operations.GetPathwaysWithDiagramsForCategoryUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/pathways/diagramsForCategory/{category}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetPathwaysWithDiagramsForCategoryUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetPathwaysWithDiagramsForCategoryUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -3710,8 +3836,10 @@ export class SDK {
   }
 
   
-  // GetPhenotypesForTaxonUsingGet - Get phenotype annotations submitted by RGD to AGR by taxonId
-  GetPhenotypesForTaxonUsingGet(
+  /**
+   * getPhenotypesForTaxonUsingGet - Get phenotype annotations submitted by RGD to AGR by taxonId
+  **/
+  getPhenotypesForTaxonUsingGet(
     req: operations.GetPhenotypesForTaxonUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetPhenotypesForTaxonUsingGetResponse> {
@@ -3719,34 +3847,34 @@ export class SDK {
       req = new operations.GetPhenotypesForTaxonUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/agr/phenotypes/{taxonId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetPhenotypesForTaxonUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetPhenotypesForTaxonUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -3756,8 +3884,10 @@ export class SDK {
   }
 
   
-  // GetProteinInteractionCountUsingGet - Count of protein interactions, for specified species and date
-  GetProteinInteractionCountUsingGet(
+  /**
+   * getProteinInteractionCountUsingGet - Count of protein interactions, for specified species and date
+  **/
+  getProteinInteractionCountUsingGet(
     req: operations.GetProteinInteractionCountUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetProteinInteractionCountUsingGetResponse> {
@@ -3765,34 +3895,34 @@ export class SDK {
       req = new operations.GetProteinInteractionCountUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/stats/count/proteinInteraction/{speciesTypeKey}/{dateYYYYMMDD}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetProteinInteractionCountUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetProteinInteractionCountUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -3802,8 +3932,10 @@ export class SDK {
   }
 
   
-  // GetProteinInteractionDiffUsingGet - Count difference of protein interactions, for specified species and date range
-  GetProteinInteractionDiffUsingGet(
+  /**
+   * getProteinInteractionDiffUsingGet - Count difference of protein interactions, for specified species and date range
+  **/
+  getProteinInteractionDiffUsingGet(
     req: operations.GetProteinInteractionDiffUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetProteinInteractionDiffUsingGetResponse> {
@@ -3811,34 +3943,34 @@ export class SDK {
       req = new operations.GetProteinInteractionDiffUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/stats/diff/proteinInteraction/{speciesTypeKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetProteinInteractionDiffUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetProteinInteractionDiffUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -3848,8 +3980,10 @@ export class SDK {
   }
 
   
-  // GetQtlByRgdIdUsingGet - Return a QTL for provided RGD ID
-  GetQtlByRgdIdUsingGet(
+  /**
+   * getQtlByRgdIdUsingGet - Return a QTL for provided RGD ID
+  **/
+  getQtlByRgdIdUsingGet(
     req: operations.GetQtlByRgdIdUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetQtlByRgdIdUsingGetResponse> {
@@ -3857,34 +3991,34 @@ export class SDK {
       req = new operations.GetQtlByRgdIdUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/qtls/{rgdId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetQtlByRgdIdUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetQtlByRgdIdUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -3894,8 +4028,10 @@ export class SDK {
   }
 
   
-  // GetQtlInheritanceTypeCountUsingGet - Count of strains, by qtl inheritance type, for specified species and date
-  GetQtlInheritanceTypeCountUsingGet(
+  /**
+   * getQtlInheritanceTypeCountUsingGet - Count of strains, by qtl inheritance type, for specified species and date
+  **/
+  getQtlInheritanceTypeCountUsingGet(
     req: operations.GetQtlInheritanceTypeCountUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetQtlInheritanceTypeCountUsingGetResponse> {
@@ -3903,34 +4039,34 @@ export class SDK {
       req = new operations.GetQtlInheritanceTypeCountUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/stats/count/qtlInheritanceType/{speciesTypeKey}/{dateYYYYMMDD}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetQtlInheritanceTypeCountUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetQtlInheritanceTypeCountUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -3940,8 +4076,10 @@ export class SDK {
   }
 
   
-  // GetQtlInheritanceTypeDiffUsingGet - Count difference of strains, by qtl inheritance type, for specified species and date range
-  GetQtlInheritanceTypeDiffUsingGet(
+  /**
+   * getQtlInheritanceTypeDiffUsingGet - Count difference of strains, by qtl inheritance type, for specified species and date range
+  **/
+  getQtlInheritanceTypeDiffUsingGet(
     req: operations.GetQtlInheritanceTypeDiffUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetQtlInheritanceTypeDiffUsingGetResponse> {
@@ -3949,34 +4087,34 @@ export class SDK {
       req = new operations.GetQtlInheritanceTypeDiffUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/stats/diff/qtlInheritanceType/{speciesTypeKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetQtlInheritanceTypeDiffUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetQtlInheritanceTypeDiffUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -3986,8 +4124,10 @@ export class SDK {
   }
 
   
-  // GetQtlListByPositionUsingGet - Returns a list QTL for given position and assembly map
-  GetQtlListByPositionUsingGet(
+  /**
+   * getQtlListByPositionUsingGet - Returns a list QTL for given position and assembly map
+  **/
+  getQtlListByPositionUsingGet(
     req: operations.GetQtlListByPositionUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetQtlListByPositionUsingGetResponse> {
@@ -3995,34 +4135,34 @@ export class SDK {
       req = new operations.GetQtlListByPositionUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/qtls/{chr}/{start}/{stop}/{mapKey}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetQtlListByPositionUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetQtlListByPositionUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -4032,8 +4172,10 @@ export class SDK {
   }
 
   
-  // GetRetiredObjectCountUsingGet - Count of retired objects by type, for specified species and date
-  GetRetiredObjectCountUsingGet(
+  /**
+   * getRetiredObjectCountUsingGet - Count of retired objects by type, for specified species and date
+  **/
+  getRetiredObjectCountUsingGet(
     req: operations.GetRetiredObjectCountUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetRetiredObjectCountUsingGetResponse> {
@@ -4041,34 +4183,34 @@ export class SDK {
       req = new operations.GetRetiredObjectCountUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/stats/count/retiredObject/{speciesTypeKey}/{dateYYYYMMDD}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetRetiredObjectCountUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetRetiredObjectCountUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -4078,8 +4220,10 @@ export class SDK {
   }
 
   
-  // GetRetiredObjectDiffUsingGet - Count difference of retired objects, by type, for specified species and date range
-  GetRetiredObjectDiffUsingGet(
+  /**
+   * getRetiredObjectDiffUsingGet - Count difference of retired objects, by type, for specified species and date range
+  **/
+  getRetiredObjectDiffUsingGet(
     req: operations.GetRetiredObjectDiffUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetRetiredObjectDiffUsingGetResponse> {
@@ -4087,34 +4231,34 @@ export class SDK {
       req = new operations.GetRetiredObjectDiffUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/stats/diff/retiredObject/{speciesTypeKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetRetiredObjectDiffUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetRetiredObjectDiffUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -4124,39 +4268,40 @@ export class SDK {
   }
 
   
-  // GetSpeciesTypesUsingGet - Return a Map of species type keys available in RGD
-  GetSpeciesTypesUsingGet(
-    
+  /**
+   * getSpeciesTypesUsingGet - Return a Map of species type keys available in RGD
+  **/
+  getSpeciesTypesUsingGet(
     config?: AxiosRequestConfig
   ): Promise<operations.GetSpeciesTypesUsingGetResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/lookup/speciesTypeKeys";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetSpeciesTypesUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetSpeciesTypesUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -4166,8 +4311,10 @@ export class SDK {
   }
 
   
-  // GetStrainByRgdIdUsingGet - Return a strain by RGD ID
-  GetStrainByRgdIdUsingGet(
+  /**
+   * getStrainByRgdIdUsingGet - Return a strain by RGD ID
+  **/
+  getStrainByRgdIdUsingGet(
     req: operations.GetStrainByRgdIdUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetStrainByRgdIdUsingGetResponse> {
@@ -4175,34 +4322,34 @@ export class SDK {
       req = new operations.GetStrainByRgdIdUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/strains/{rgdId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetStrainByRgdIdUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetStrainByRgdIdUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -4212,8 +4359,10 @@ export class SDK {
   }
 
   
-  // GetStrainTypeCountUsingGet - Count of strain types, for specified species and date
-  GetStrainTypeCountUsingGet(
+  /**
+   * getStrainTypeCountUsingGet - Count of strain types, for specified species and date
+  **/
+  getStrainTypeCountUsingGet(
     req: operations.GetStrainTypeCountUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetStrainTypeCountUsingGetResponse> {
@@ -4221,34 +4370,34 @@ export class SDK {
       req = new operations.GetStrainTypeCountUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/stats/count/strainType/{speciesTypeKey}/{dateYYYYMMDD}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetStrainTypeCountUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetStrainTypeCountUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -4258,8 +4407,10 @@ export class SDK {
   }
 
   
-  // GetStrainTypeDiffUsingGet - Count difference of strain types, for specified species and date range
-  GetStrainTypeDiffUsingGet(
+  /**
+   * getStrainTypeDiffUsingGet - Count difference of strain types, for specified species and date range
+  **/
+  getStrainTypeDiffUsingGet(
     req: operations.GetStrainTypeDiffUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetStrainTypeDiffUsingGetResponse> {
@@ -4267,34 +4418,34 @@ export class SDK {
       req = new operations.GetStrainTypeDiffUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/stats/diff/strainType/{speciesTypeKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetStrainTypeDiffUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetStrainTypeDiffUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -4304,8 +4455,10 @@ export class SDK {
   }
 
   
-  // GetStrainsByPositionUsingGet - Return all active strains by position
-  GetStrainsByPositionUsingGet(
+  /**
+   * getStrainsByPositionUsingGet - Return all active strains by position
+  **/
+  getStrainsByPositionUsingGet(
     req: operations.GetStrainsByPositionUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetStrainsByPositionUsingGetResponse> {
@@ -4313,34 +4466,34 @@ export class SDK {
       req = new operations.GetStrainsByPositionUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/strains/{chr}/{start}/{stop}/{mapKey}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetStrainsByPositionUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetStrainsByPositionUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -4350,8 +4503,10 @@ export class SDK {
   }
 
   
-  // GetTermAccIdsUsingGet - Returns a list ontology term accession IDs annotated to an rgd object
-  GetTermAccIdsUsingGet(
+  /**
+   * getTermAccIdsUsingGet - Returns a list ontology term accession IDs annotated to an rgd object
+  **/
+  getTermAccIdsUsingGet(
     req: operations.GetTermAccIdsUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetTermAccIdsUsingGetResponse> {
@@ -4359,34 +4514,34 @@ export class SDK {
       req = new operations.GetTermAccIdsUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/annotations/accId/{rgdId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetTermAccIdsUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetTermAccIdsUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -4396,8 +4551,10 @@ export class SDK {
   }
 
   
-  // GetTermStatsUsingGet - getTermStats
-  GetTermStatsUsingGet(
+  /**
+   * getTermStatsUsingGet - getTermStats
+  **/
+  getTermStatsUsingGet(
     req: operations.GetTermStatsUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetTermStatsUsingGetResponse> {
@@ -4405,34 +4562,34 @@ export class SDK {
       req = new operations.GetTermStatsUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/stats/term/{accId}/{filterAccId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetTermStatsUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetTermStatsUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -4442,8 +4599,10 @@ export class SDK {
   }
 
   
-  // GetTermUsingGet - Returns term for Accession ID
-  GetTermUsingGet(
+  /**
+   * getTermUsingGet - Returns term for Accession ID
+  **/
+  getTermUsingGet(
     req: operations.GetTermUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetTermUsingGetResponse> {
@@ -4451,34 +4610,34 @@ export class SDK {
       req = new operations.GetTermUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/ontology/term/{accId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetTermUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetTermUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -4488,8 +4647,10 @@ export class SDK {
   }
 
   
-  // GetUniProtMappingUsingGet - Translate an RGD ID to a UniProt ID
-  GetUniProtMappingUsingGet(
+  /**
+   * getUniProtMappingUsingGet - Translate an RGD ID to a UniProt ID
+  **/
+  getUniProtMappingUsingGet(
     req: operations.GetUniProtMappingUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetUniProtMappingUsingGetResponse> {
@@ -4497,34 +4658,34 @@ export class SDK {
       req = new operations.GetUniProtMappingUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/lookup/id/map/UniProt/{rgdId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetUniProtMappingUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetUniProtMappingUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -4534,8 +4695,10 @@ export class SDK {
   }
 
   
-  // GetUniProtMappingUsingPost - Translate RGD IDs to UniProt IDs
-  GetUniProtMappingUsingPost(
+  /**
+   * getUniProtMappingUsingPost - Translate RGD IDs to UniProt IDs
+  **/
+  getUniProtMappingUsingPost(
     req: operations.GetUniProtMappingUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetUniProtMappingUsingPostResponse> {
@@ -4543,52 +4706,51 @@ export class SDK {
       req = new operations.GetUniProtMappingUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/lookup/id/map/UniProt";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetUniProtMappingUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetUniProtMappingUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 201:
+          case httpRes?.status == 201:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -4598,8 +4760,10 @@ export class SDK {
   }
 
   
-  // GetVariantsForTaxonUsingGet - Get basic variant records submitted by RGD to AGR by taxonId
-  GetVariantsForTaxonUsingGet(
+  /**
+   * getVariantsForTaxonUsingGet - Get basic variant records submitted by RGD to AGR by taxonId
+  **/
+  getVariantsForTaxonUsingGet(
     req: operations.GetVariantsForTaxonUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetVariantsForTaxonUsingGetResponse> {
@@ -4607,34 +4771,34 @@ export class SDK {
       req = new operations.GetVariantsForTaxonUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/agr/variants/{taxonId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetVariantsForTaxonUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetVariantsForTaxonUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -4644,8 +4808,10 @@ export class SDK {
   }
 
   
-  // GetWithdrawnObjectCountUsingGet - Count of withdrawn objects by type, for specified species and date
-  GetWithdrawnObjectCountUsingGet(
+  /**
+   * getWithdrawnObjectCountUsingGet - Count of withdrawn objects by type, for specified species and date
+  **/
+  getWithdrawnObjectCountUsingGet(
     req: operations.GetWithdrawnObjectCountUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetWithdrawnObjectCountUsingGetResponse> {
@@ -4653,34 +4819,34 @@ export class SDK {
       req = new operations.GetWithdrawnObjectCountUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/stats/count/withdrawnObject/{speciesTypeKey}/{dateYYYYMMDD}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetWithdrawnObjectCountUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetWithdrawnObjectCountUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -4690,8 +4856,10 @@ export class SDK {
   }
 
   
-  // GetWithdrawnObjectDiffUsingGet - Count difference of withdrawn objects, by type, for specified species and date range
-  GetWithdrawnObjectDiffUsingGet(
+  /**
+   * getWithdrawnObjectDiffUsingGet - Count difference of withdrawn objects, by type, for specified species and date range
+  **/
+  getWithdrawnObjectDiffUsingGet(
     req: operations.GetWithdrawnObjectDiffUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetWithdrawnObjectDiffUsingGetResponse> {
@@ -4699,34 +4867,34 @@ export class SDK {
       req = new operations.GetWithdrawnObjectDiffUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/stats/diff/withdrawnObject/{speciesTypeKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetWithdrawnObjectDiffUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetWithdrawnObjectDiffUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -4736,8 +4904,10 @@ export class SDK {
   }
 
   
-  // GetXdbsCountUsingGet - Count of external database ids, for specied species and date
-  GetXdbsCountUsingGet(
+  /**
+   * getXdbsCountUsingGet - Count of external database ids, for specied species and date
+  **/
+  getXdbsCountUsingGet(
     req: operations.GetXdbsCountUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetXdbsCountUsingGetResponse> {
@@ -4745,34 +4915,34 @@ export class SDK {
       req = new operations.GetXdbsCountUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/stats/count/xdb/{speciesTypeKey}/{dateYYYYMMDD}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetXdbsCountUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetXdbsCountUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -4782,8 +4952,10 @@ export class SDK {
   }
 
   
-  // GetXdbsDiffUsingGet - Count difference of external database ids, for specified species and date range
-  GetXdbsDiffUsingGet(
+  /**
+   * getXdbsDiffUsingGet - Count difference of external database ids, for specified species and date range
+  **/
+  getXdbsDiffUsingGet(
     req: operations.GetXdbsDiffUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetXdbsDiffUsingGetResponse> {
@@ -4791,34 +4963,34 @@ export class SDK {
       req = new operations.GetXdbsDiffUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/stats/diff/xdb/{speciesTypeKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetXdbsDiffUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.GetXdbsDiffUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -4828,8 +5000,10 @@ export class SDK {
   }
 
   
-  // IsDescendantOfUsingGet - Returns true or false for terms
-  IsDescendantOfUsingGet(
+  /**
+   * isDescendantOfUsingGet - Returns true or false for terms
+  **/
+  isDescendantOfUsingGet(
     req: operations.IsDescendantOfUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.IsDescendantOfUsingGetResponse> {
@@ -4837,34 +5011,34 @@ export class SDK {
       req = new operations.IsDescendantOfUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/ontology/term/{accId1}/{accId2}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IsDescendantOfUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.IsDescendantOfUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -4874,8 +5048,10 @@ export class SDK {
   }
 
   
-  // SearchPathwaysUsingGet - Return a list of pathways based on search term
-  SearchPathwaysUsingGet(
+  /**
+   * searchPathwaysUsingGet - Return a list of pathways based on search term
+  **/
+  searchPathwaysUsingGet(
     req: operations.SearchPathwaysUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SearchPathwaysUsingGetResponse> {
@@ -4883,34 +5059,34 @@ export class SDK {
       req = new operations.SearchPathwaysUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/pathways/diagrams/search/{searchString}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SearchPathwaysUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.SearchPathwaysUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var AeAssessmentAeAssessmentAssessmentCodeEnum;
 (function (AeAssessmentAeAssessmentAssessmentCodeEnum) {
     AeAssessmentAeAssessmentAssessmentCodeEnum["Excluded"] = "Excluded";
@@ -62,59 +62,59 @@ var AeAssessmentAeAssessment = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Age" }),
+        SpeakeasyMetadata({ data: "json, name=Age" }),
         __metadata("design:type", Number)
     ], AeAssessmentAeAssessment.prototype, "age", void 0);
     __decorate([
-        Metadata({ data: "json, name=AssessmentCode" }),
+        SpeakeasyMetadata({ data: "json, name=AssessmentCode" }),
         __metadata("design:type", String)
     ], AeAssessmentAeAssessment.prototype, "assessmentCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=AssessmentDate" }),
+        SpeakeasyMetadata({ data: "json, name=AssessmentDate" }),
         __metadata("design:type", Date)
     ], AeAssessmentAeAssessment.prototype, "assessmentDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=AssessmentEvent" }),
+        SpeakeasyMetadata({ data: "json, name=AssessmentEvent" }),
         __metadata("design:type", String)
     ], AeAssessmentAeAssessment.prototype, "assessmentEvent", void 0);
     __decorate([
-        Metadata({ data: "json, name=AssessmentOverride" }),
+        SpeakeasyMetadata({ data: "json, name=AssessmentOverride" }),
         __metadata("design:type", String)
     ], AeAssessmentAeAssessment.prototype, "assessmentOverride", void 0);
     __decorate([
-        Metadata({ data: "json, name=AssessmentResult" }),
+        SpeakeasyMetadata({ data: "json, name=AssessmentResult" }),
         __metadata("design:type", String)
     ], AeAssessmentAeAssessment.prototype, "assessmentResult", void 0);
     __decorate([
-        Metadata({ data: "json, name=IsMemberOfAlternativePensionScheme" }),
+        SpeakeasyMetadata({ data: "json, name=IsMemberOfAlternativePensionScheme" }),
         __metadata("design:type", Boolean)
     ], AeAssessmentAeAssessment.prototype, "isMemberOfAlternativePensionScheme", void 0);
     __decorate([
-        Metadata({ data: "json, name=OptOutWindowEndDate" }),
+        SpeakeasyMetadata({ data: "json, name=OptOutWindowEndDate" }),
         __metadata("design:type", Date)
     ], AeAssessmentAeAssessment.prototype, "optOutWindowEndDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=QualifyingEarnings" }),
+        SpeakeasyMetadata({ data: "json, name=QualifyingEarnings" }),
         __metadata("design:type", Number)
     ], AeAssessmentAeAssessment.prototype, "qualifyingEarnings", void 0);
     __decorate([
-        Metadata({ data: "json, name=ReenrolmentDate" }),
+        SpeakeasyMetadata({ data: "json, name=ReenrolmentDate" }),
         __metadata("design:type", Date)
     ], AeAssessmentAeAssessment.prototype, "reenrolmentDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=StatePensionAge" }),
+        SpeakeasyMetadata({ data: "json, name=StatePensionAge" }),
         __metadata("design:type", Number)
     ], AeAssessmentAeAssessment.prototype, "statePensionAge", void 0);
     __decorate([
-        Metadata({ data: "json, name=StatePensionDate" }),
+        SpeakeasyMetadata({ data: "json, name=StatePensionDate" }),
         __metadata("design:type", Date)
     ], AeAssessmentAeAssessment.prototype, "statePensionDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=TaxPeriod" }),
+        SpeakeasyMetadata({ data: "json, name=TaxPeriod" }),
         __metadata("design:type", Number)
     ], AeAssessmentAeAssessment.prototype, "taxPeriod", void 0);
     __decorate([
-        Metadata({ data: "json, name=TaxYear" }),
+        SpeakeasyMetadata({ data: "json, name=TaxYear" }),
         __metadata("design:type", Number)
     ], AeAssessmentAeAssessment.prototype, "taxYear", void 0);
     return AeAssessmentAeAssessment;
@@ -126,7 +126,7 @@ var AeAssessment = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AEAssessment" }),
+        SpeakeasyMetadata({ data: "json, name=AEAssessment" }),
         __metadata("design:type", AeAssessmentAeAssessment)
     ], AeAssessment.prototype, "aeAssessment", void 0);
     return AeAssessment;

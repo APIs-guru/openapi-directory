@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteCustomMetricPathParams:
-    metric_name: str = field(default=None, metadata={'path_param': { 'field_name': 'metricName', 'style': 'simple', 'explode': False }})
+    metric_name: str = field(metadata={'path_param': { 'field_name': 'metricName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,16 +23,16 @@ class DeleteCustomMetricHeaders:
 
 @dataclass
 class DeleteCustomMetricRequest:
-    path_params: DeleteCustomMetricPathParams = field(default=None)
-    headers: DeleteCustomMetricHeaders = field(default=None)
+    headers: DeleteCustomMetricHeaders = field()
+    path_params: DeleteCustomMetricPathParams = field()
     
 
 @dataclass
 class DeleteCustomMetricResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     delete_custom_metric_response: Optional[dict[str, Any]] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

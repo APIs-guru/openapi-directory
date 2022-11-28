@@ -1,10 +1,18 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class AwsSecurityFindingIdentifier:
-    id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Id' }})
-    product_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProductArn' }})
+    r"""AwsSecurityFindingIdentifier
+    Identifies a finding to update using <code>BatchUpdateFindings</code>.
+    """
+    
+    id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Id') }})
+    product_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ProductArn') }})
     

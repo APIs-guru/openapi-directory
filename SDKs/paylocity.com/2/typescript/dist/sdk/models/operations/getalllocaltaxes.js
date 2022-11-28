@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetAllLocalTaxesPathParams = /** @class */ (function (_super) {
     __extends(GetAllLocalTaxesPathParams, _super);
@@ -30,11 +30,11 @@ var GetAllLocalTaxesPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=companyId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=companyId" }),
         __metadata("design:type", String)
     ], GetAllLocalTaxesPathParams.prototype, "companyId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=employeeId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=employeeId" }),
         __metadata("design:type", String)
     ], GetAllLocalTaxesPathParams.prototype, "employeeId", void 0);
     return GetAllLocalTaxesPathParams;
@@ -46,7 +46,7 @@ var GetAllLocalTaxesSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemePaylocityAuth)
     ], GetAllLocalTaxesSecurity.prototype, "paylocityAuth", void 0);
     return GetAllLocalTaxesSecurity;
@@ -58,11 +58,11 @@ var GetAllLocalTaxesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAllLocalTaxesPathParams)
     ], GetAllLocalTaxesRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAllLocalTaxesSecurity)
     ], GetAllLocalTaxesRequest.prototype, "security", void 0);
     return GetAllLocalTaxesRequest;
@@ -74,19 +74,19 @@ var GetAllLocalTaxesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetAllLocalTaxesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetAllLocalTaxesResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata({ elemType: shared.Error }),
+        SpeakeasyMetadata({ elemType: shared.Error }),
         __metadata("design:type", Array)
     ], GetAllLocalTaxesResponse.prototype, "errors", void 0);
     __decorate([
-        Metadata({ elemType: shared.LocalTax }),
+        SpeakeasyMetadata({ elemType: shared.LocalTax }),
         __metadata("design:type", Array)
     ], GetAllLocalTaxesResponse.prototype, "localTaxes", void 0);
     return GetAllLocalTaxesResponse;

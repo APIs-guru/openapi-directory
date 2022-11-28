@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetFollowersAlt1DirectionEnum(str, Enum):
@@ -22,12 +26,12 @@ class GetFollowersAlt1QueryParams:
 
 @dataclass
 class GetFollowersAlt1Request:
-    query_params: GetFollowersAlt1QueryParams = field(default=None)
+    query_params: GetFollowersAlt1QueryParams = field()
     
 
 @dataclass
 class GetFollowersAlt1Response:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     users: Optional[List[shared.User]] = field(default=None)
     

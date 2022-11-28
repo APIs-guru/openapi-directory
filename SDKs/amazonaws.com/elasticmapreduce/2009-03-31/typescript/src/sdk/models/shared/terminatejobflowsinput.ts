@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TerminateJobFlowsInput
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  Input to the <a>TerminateJobFlows</a> operation. 
 **/
 export class TerminateJobFlowsInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=JobFlowIds" })
+  @SpeakeasyMetadata({ data: "json, name=JobFlowIds" })
   jobFlowIds: string[];
 }

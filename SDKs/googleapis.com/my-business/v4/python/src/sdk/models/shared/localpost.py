@@ -1,10 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import calltoaction
-from . import localpostevent
-from . import mediaitem
-from . import localpostoffer
+from sdk import utils
+from . import *
 
 class LocalPostAlertTypeEnum(str, Enum):
     ALERT_TYPE_UNSPECIFIED = "ALERT_TYPE_UNSPECIFIED"
@@ -27,17 +29,21 @@ class LocalPostTopicTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class LocalPost:
-    alert_type: Optional[LocalPostAlertTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'alertType' }})
-    call_to_action: Optional[calltoaction.CallToAction] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'callToAction' }})
-    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createTime' }})
-    event: Optional[localpostevent.LocalPostEvent] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'event' }})
-    language_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'languageCode' }})
-    media: Optional[List[mediaitem.MediaItem]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'media' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    offer: Optional[localpostoffer.LocalPostOffer] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'offer' }})
-    search_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'searchUrl' }})
-    state: Optional[LocalPostStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
-    summary: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'summary' }})
-    topic_type: Optional[LocalPostTopicTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'topicType' }})
-    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updateTime' }})
+    r"""LocalPost
+    Represents a [local post](https://support.google.com/business/answer/7662907) for a location.
+    """
+    
+    alert_type: Optional[LocalPostAlertTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('alertType') }})
+    call_to_action: Optional[CallToAction] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('callToAction') }})
+    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createTime') }})
+    event: Optional[LocalPostEvent] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('event') }})
+    language_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('languageCode') }})
+    media: Optional[List[MediaItem]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('media') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    offer: Optional[LocalPostOffer] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('offer') }})
+    search_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('searchUrl') }})
+    state: Optional[LocalPostStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
+    summary: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('summary') }})
+    topic_type: Optional[LocalPostTopicTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('topicType') }})
+    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('updateTime') }})
     

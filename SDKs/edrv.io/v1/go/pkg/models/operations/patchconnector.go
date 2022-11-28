@@ -13,15 +13,15 @@ type PatchConnectorRequestBody struct {
 	Type          *string `json:"type,omitempty"`
 }
 
-type PatchConnectorRequest struct {
-	PathParams PatchConnectorPathParams
-	Request    PatchConnectorRequestBody `request:"mediaType=application/json"`
-}
-
 type PatchConnector201ApplicationJSON struct {
 	Message *string                `json:"message,omitempty"`
 	Ok      *bool                  `json:"ok,omitempty"`
 	Result  map[string]interface{} `json:"result,omitempty"`
+}
+
+type PatchConnectorRequest struct {
+	PathParams PatchConnectorPathParams
+	Request    PatchConnectorRequestBody `request:"mediaType=application/json"`
 }
 
 type PatchConnectorResponse struct {

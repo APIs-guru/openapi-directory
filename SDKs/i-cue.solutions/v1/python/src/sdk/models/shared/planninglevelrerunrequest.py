@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import planninglevelinforequest
+from sdk import utils
+from . import *
 
 class PlanningLevelReRunRequestMethodEnum(str, Enum):
     AUTO_BEST_PICK = "AutoBestPick"
@@ -26,7 +28,7 @@ class PlanningLevelReRunRequestMethodEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PlanningLevelReRunRequest:
-    method: PlanningLevelReRunRequestMethodEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'method' }})
-    params: Optional[planninglevelinforequest.PlanningLevelInfoRequest] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'params' }})
-    planning_level_id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'planningLevelId' }})
+    method: PlanningLevelReRunRequestMethodEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('method') }})
+    planning_level_id: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('planningLevelId') }})
+    params: Optional[PlanningLevelInfoRequest] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('params') }})
     

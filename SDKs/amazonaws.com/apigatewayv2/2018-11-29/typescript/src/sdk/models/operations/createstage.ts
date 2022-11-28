@@ -1,33 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateStagePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=apiId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=apiId" })
   apiId: string;
 }
 
 
 export class CreateStageHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -37,10 +38,10 @@ export class CreateStageHeaders extends SpeakeasyBase {
  * Settings for logging access in a stage.
 **/
 export class CreateStageRequestBodyAccessLogSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DestinationArn" })
+  @SpeakeasyMetadata({ data: "json, name=DestinationArn" })
   destinationArn?: string;
 
-  @Metadata({ data: "json, name=Format" })
+  @SpeakeasyMetadata({ data: "json, name=Format" })
   format?: string;
 }
 
@@ -50,87 +51,87 @@ export class CreateStageRequestBodyAccessLogSettings extends SpeakeasyBase {
  * Represents a collection of route settings.
 **/
 export class CreateStageRequestBodyDefaultRouteSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DataTraceEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=DataTraceEnabled" })
   dataTraceEnabled?: boolean;
 
-  @Metadata({ data: "json, name=DetailedMetricsEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=DetailedMetricsEnabled" })
   detailedMetricsEnabled?: boolean;
 
-  @Metadata({ data: "json, name=LoggingLevel" })
+  @SpeakeasyMetadata({ data: "json, name=LoggingLevel" })
   loggingLevel?: shared.LoggingLevelEnum;
 
-  @Metadata({ data: "json, name=ThrottlingBurstLimit" })
+  @SpeakeasyMetadata({ data: "json, name=ThrottlingBurstLimit" })
   throttlingBurstLimit?: number;
 
-  @Metadata({ data: "json, name=ThrottlingRateLimit" })
+  @SpeakeasyMetadata({ data: "json, name=ThrottlingRateLimit" })
   throttlingRateLimit?: number;
 }
 
 
 export class CreateStageRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessLogSettings" })
+  @SpeakeasyMetadata({ data: "json, name=accessLogSettings" })
   accessLogSettings?: CreateStageRequestBodyAccessLogSettings;
 
-  @Metadata({ data: "json, name=autoDeploy" })
+  @SpeakeasyMetadata({ data: "json, name=autoDeploy" })
   autoDeploy?: boolean;
 
-  @Metadata({ data: "json, name=clientCertificateId" })
+  @SpeakeasyMetadata({ data: "json, name=clientCertificateId" })
   clientCertificateId?: string;
 
-  @Metadata({ data: "json, name=defaultRouteSettings" })
+  @SpeakeasyMetadata({ data: "json, name=defaultRouteSettings" })
   defaultRouteSettings?: CreateStageRequestBodyDefaultRouteSettings;
 
-  @Metadata({ data: "json, name=deploymentId" })
+  @SpeakeasyMetadata({ data: "json, name=deploymentId" })
   deploymentId?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=routeSettings", elemType: shared.RouteSettings })
+  @SpeakeasyMetadata({ data: "json, name=routeSettings", elemType: shared.RouteSettings })
   routeSettings?: Map<string, shared.RouteSettings>;
 
-  @Metadata({ data: "json, name=stageName" })
+  @SpeakeasyMetadata({ data: "json, name=stageName" })
   stageName: string;
 
-  @Metadata({ data: "json, name=stageVariables" })
+  @SpeakeasyMetadata({ data: "json, name=stageVariables" })
   stageVariables?: Map<string, string>;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 }
 
 
 export class CreateStageRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CreateStagePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateStageHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateStageRequestBody;
 }
 
 
 export class CreateStageResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   badRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   conflictException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createStageResponse?: shared.CreateStageResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   notFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tooManyRequestsException?: any;
 }

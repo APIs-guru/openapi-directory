@@ -5,20 +5,20 @@ from sdk.models import shared
 
 @dataclass
 class PostNewRtiJobHeaders:
-    api_version: str = field(default=None, metadata={'header': { 'field_name': 'Api-Version', 'style': 'simple', 'explode': False }})
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
+    api_version: str = field(metadata={'header': { 'field_name': 'Api-Version', 'style': 'simple', 'explode': False }})
+    authorization: str = field(metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class PostNewRtiJobRequest:
-    headers: PostNewRtiJobHeaders = field(default=None)
-    request: shared.RtiJobInstruction = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: PostNewRtiJobHeaders = field()
+    request: shared.RtiJobInstruction = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PostNewRtiJobResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_model: Optional[shared.ErrorModel] = field(default=None)
     link: Optional[shared.Link] = field(default=None)
-    status_code: int = field(default=None)
     

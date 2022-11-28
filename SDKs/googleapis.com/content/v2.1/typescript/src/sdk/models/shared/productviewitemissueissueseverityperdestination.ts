@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ProductViewItemIssueIssueSeverityPerDestination
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Issue severity for all affected regions in a destination.
 **/
 export class ProductViewItemIssueIssueSeverityPerDestination extends SpeakeasyBase {
-  @Metadata({ data: "json, name=demotedCountries" })
+  @SpeakeasyMetadata({ data: "json, name=demotedCountries" })
   demotedCountries?: string[];
 
-  @Metadata({ data: "json, name=destination" })
+  @SpeakeasyMetadata({ data: "json, name=destination" })
   destination?: string;
 
-  @Metadata({ data: "json, name=disapprovedCountries" })
+  @SpeakeasyMetadata({ data: "json, name=disapprovedCountries" })
   disapprovedCountries?: string[];
 }

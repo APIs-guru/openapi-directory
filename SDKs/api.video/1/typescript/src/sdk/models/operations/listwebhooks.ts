@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ListWebhooksQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=currentPage" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=currentPage" })
   currentPage?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=events" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=events" })
   events?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=pageSize" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pageSize" })
   pageSize?: number;
 }
 
 
 export class ListWebhooksSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   bearerAuth: shared.SchemeBearerAuth;
 }
 
 
 export class ListWebhooksRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ListWebhooksQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: ListWebhooksSecurity;
 }
 
 
 export class ListWebhooksResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   webhooksListResponse?: shared.WebhooksListResponse;
 }

@@ -12,17 +12,9 @@ type DeleteProductsQueryParams struct {
 	UUID []string `queryParam:"style=form,explode=true,name=uuid"`
 }
 
-type DeleteProductsSecurityOption1 struct {
-	ZettleAPIKey shared.SchemeZettleAPIKey `security:"scheme,type=apiKey,subtype=header"`
-}
-
-type DeleteProductsSecurityOption2 struct {
-	ZettleOauth shared.SchemeZettleOauth `security:"scheme,type=oauth2"`
-}
-
 type DeleteProductsSecurity struct {
-	Option1 *DeleteProductsSecurityOption1 `security:"option"`
-	Option2 *DeleteProductsSecurityOption2 `security:"option"`
+	ZettleAPIKey *shared.SchemeZettleAPIKey `security:"scheme,type=apiKey,subtype=header"`
+	ZettleOauth  *shared.SchemeZettleOauth  `security:"scheme,type=oauth2"`
 }
 
 type DeleteProductsRequest struct {

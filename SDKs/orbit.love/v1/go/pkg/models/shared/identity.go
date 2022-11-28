@@ -1,5 +1,7 @@
 package shared
 
+// Identity
+// Represents an email address, a profile on networks like github and twitter, or a record in another system.
 type Identity struct {
 	Email      *string `json:"email,omitempty"`
 	Name       *string `json:"name,omitempty"`

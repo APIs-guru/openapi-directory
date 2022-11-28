@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 
 
 @dataclass
 class GetNetworkApplianceClientSecurityEventsPathParams:
-    client_id: str = field(default=None, metadata={'path_param': { 'field_name': 'clientId', 'style': 'simple', 'explode': False }})
-    network_id: str = field(default=None, metadata={'path_param': { 'field_name': 'networkId', 'style': 'simple', 'explode': False }})
+    client_id: str = field(metadata={'path_param': { 'field_name': 'clientId', 'style': 'simple', 'explode': False }})
+    network_id: str = field(metadata={'path_param': { 'field_name': 'networkId', 'style': 'simple', 'explode': False }})
     
 class GetNetworkApplianceClientSecurityEventsSortOrderEnum(str, Enum):
     ASCENDING = "ascending"
@@ -25,14 +26,14 @@ class GetNetworkApplianceClientSecurityEventsQueryParams:
 
 @dataclass
 class GetNetworkApplianceClientSecurityEventsRequest:
-    path_params: GetNetworkApplianceClientSecurityEventsPathParams = field(default=None)
-    query_params: GetNetworkApplianceClientSecurityEventsQueryParams = field(default=None)
+    path_params: GetNetworkApplianceClientSecurityEventsPathParams = field()
+    query_params: GetNetworkApplianceClientSecurityEventsQueryParams = field()
     
 
 @dataclass
 class GetNetworkApplianceClientSecurityEventsResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     get_network_appliance_client_security_events_200_application_json_object: Optional[dict[str, Any]] = field(default=None)
     

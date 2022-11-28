@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CloudStorageFile } from "./cloudstoragefile";
+
 
 
 // CloudStorageSink
@@ -8,6 +8,6 @@ import { CloudStorageFile } from "./cloudstoragefile";
  * Export sink for Cloud Storage files.
 **/
 export class CloudStorageSink extends SpeakeasyBase {
-  @Metadata({ data: "json, name=files", elemType: shared.CloudStorageFile })
+  @SpeakeasyMetadata({ data: "json, name=files", elemType: CloudStorageFile })
   files?: CloudStorageFile[];
 }

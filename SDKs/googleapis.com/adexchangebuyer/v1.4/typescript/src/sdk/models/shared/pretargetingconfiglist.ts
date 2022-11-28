@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PretargetingConfig } from "./pretargetingconfig";
 
 
+
 export class PretargetingConfigList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.PretargetingConfig })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: PretargetingConfig })
   items?: PretargetingConfig[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 }

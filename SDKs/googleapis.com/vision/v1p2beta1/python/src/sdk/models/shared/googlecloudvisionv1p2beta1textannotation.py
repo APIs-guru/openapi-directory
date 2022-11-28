@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import googlecloudvisionv1p2beta1page
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleCloudVisionV1p2beta1TextAnnotation:
-    pages: Optional[List[googlecloudvisionv1p2beta1page.GoogleCloudVisionV1p2beta1Page]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pages' }})
-    text: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'text' }})
+    r"""GoogleCloudVisionV1p2beta1TextAnnotation
+    TextAnnotation contains a structured representation of OCR extracted text. The hierarchy of an OCR extracted text structure is like this: TextAnnotation -> Page -> Block -> Paragraph -> Word -> Symbol Each structural component, starting from Page, may further have their own properties. Properties describe detected languages, breaks etc.. Please refer to the TextAnnotation.TextProperty message definition below for more detail.
+    """
+    
+    pages: Optional[List[GoogleCloudVisionV1p2beta1Page]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pages') }})
+    text: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('text') }})
     

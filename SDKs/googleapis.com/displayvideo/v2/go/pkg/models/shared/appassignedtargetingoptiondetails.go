@@ -16,6 +16,16 @@ const (
 	AppAssignedTargetingOptionDetailsAppPlatformEnumAppPlatformGenericCtv   AppAssignedTargetingOptionDetailsAppPlatformEnum = "APP_PLATFORM_GENERIC_CTV"
 )
 
+// AppAssignedTargetingOptionDetailsInput
+// Details for assigned app targeting option. This will be populated in the details field of an AssignedTargetingOption when targeting_type is `TARGETING_TYPE_APP`.
+type AppAssignedTargetingOptionDetailsInput struct {
+	AppID       *string                                           `json:"appId,omitempty"`
+	AppPlatform *AppAssignedTargetingOptionDetailsAppPlatformEnum `json:"appPlatform,omitempty"`
+	Negative    *bool                                             `json:"negative,omitempty"`
+}
+
+// AppAssignedTargetingOptionDetails
+// Details for assigned app targeting option. This will be populated in the details field of an AssignedTargetingOption when targeting_type is `TARGETING_TYPE_APP`.
 type AppAssignedTargetingOptionDetails struct {
 	AppID       *string                                           `json:"appId,omitempty"`
 	AppPlatform *AppAssignedTargetingOptionDetailsAppPlatformEnum `json:"appPlatform,omitempty"`

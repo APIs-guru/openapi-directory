@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LocalTime } from "./localtime";
+
 
 
 // EndDates
@@ -7,12 +8,12 @@ import { LocalTime } from "./localtime";
  * Event's End Dates
 **/
 export class EndDates extends SpeakeasyBase {
-  @Metadata({ data: "json, name=approximate" })
+  @SpeakeasyMetadata({ data: "json, name=approximate" })
   approximate?: boolean;
 
-  @Metadata({ data: "json, name=dateTime" })
+  @SpeakeasyMetadata({ data: "json, name=dateTime" })
   dateTime?: Date;
 
-  @Metadata({ data: "json, name=localTime" })
+  @SpeakeasyMetadata({ data: "json, name=localTime" })
   localTime?: LocalTime;
 }

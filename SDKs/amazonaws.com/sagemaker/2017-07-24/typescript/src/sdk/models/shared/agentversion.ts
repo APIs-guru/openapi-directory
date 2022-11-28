@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AgentVersion
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Edge Manager agent version.
 **/
 export class AgentVersion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AgentCount" })
+  @SpeakeasyMetadata({ data: "json, name=AgentCount" })
   agentCount: number;
 
-  @Metadata({ data: "json, name=Version" })
+  @SpeakeasyMetadata({ data: "json, name=Version" })
   version: string;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // QuickConnectDto
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The quick connect request body.
 **/
 export class QuickConnectDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Token" })
+  @SpeakeasyMetadata({ data: "json, name=Token" })
   token: string;
 }

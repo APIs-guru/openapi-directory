@@ -1,5 +1,7 @@
 package shared
 
+// ResourceDetails
+// <p>Additional details about a resource related to a finding.</p> <p>To provide the details, use the object that corresponds to the resource type. For example, if the resource type is <code>AwsEc2Instance</code>, then you use the <code>AwsEc2Instance</code> object to provide the details.</p> <p>If the type-specific object does not contain all of the fields you want to populate, then you use the <code>Other</code> object to populate those additional fields.</p> <p>You also use the <code>Other</code> object to populate the details when the selected type does not have a corresponding object.</p>
 type ResourceDetails struct {
 	AwsAPIGatewayRestAPI              *AwsAPIGatewayRestAPIDetails              `json:"AwsApiGatewayRestApi,omitempty"`
 	AwsAPIGatewayStage                *AwsAPIGatewayStageDetails                `json:"AwsApiGatewayStage,omitempty"`

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Organization } from "./organization";
 /**
  * The response returned from the `ListOrganizations` method.

@@ -1,42 +1,43 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PatientIdentificationRequestQueryPatient extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 }
 
 export enum PatientIdentificationRequestQueryRequesterTypeEnum {
-    Hiu = "HIU"
-,    Hip = "HIP"
+    Hiu = "HIU",
+    Hip = "HIP"
 }
 
 
 export class PatientIdentificationRequestQueryRequester extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: PatientIdentificationRequestQueryRequesterTypeEnum;
 }
 
 
 export class PatientIdentificationRequestQuery extends SpeakeasyBase {
-  @Metadata({ data: "json, name=patient" })
+  @SpeakeasyMetadata({ data: "json, name=patient" })
   patient: PatientIdentificationRequestQueryPatient;
 
-  @Metadata({ data: "json, name=requester" })
+  @SpeakeasyMetadata({ data: "json, name=requester" })
   requester: PatientIdentificationRequestQueryRequester;
 }
 
 
 export class PatientIdentificationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=query" })
+  @SpeakeasyMetadata({ data: "json, name=query" })
   query: PatientIdentificationRequestQuery;
 
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId: string;
 
-  @Metadata({ data: "json, name=timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=timestamp" })
   timestamp: Date;
 }

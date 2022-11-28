@@ -8,11 +8,6 @@ type RetrieveBlockChildrenQueryParams struct {
 	PageSize *string `queryParam:"style=form,explode=true,name=page_size"`
 }
 
-type RetrieveBlockChildrenRequest struct {
-	PathParams  RetrieveBlockChildrenPathParams
-	QueryParams RetrieveBlockChildrenQueryParams
-}
-
 type RetrieveBlockChildren200ApplicationJSONResults struct {
 	CreatedTime    *string                `json:"created_time,omitempty"`
 	HasChildren    *bool                  `json:"has_children,omitempty"`
@@ -28,6 +23,11 @@ type RetrieveBlockChildren200ApplicationJSON struct {
 	NextCursor *interface{}                                     `json:"next_cursor,omitempty"`
 	Object     *string                                          `json:"object,omitempty"`
 	Results    []RetrieveBlockChildren200ApplicationJSONResults `json:"results,omitempty"`
+}
+
+type RetrieveBlockChildrenRequest struct {
+	PathParams  RetrieveBlockChildrenPathParams
+	QueryParams RetrieveBlockChildrenQueryParams
 }
 
 type RetrieveBlockChildrenResponse struct {

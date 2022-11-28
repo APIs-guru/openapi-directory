@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import tablerow
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Table:
-    rows: List[tablerow.TableRow] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rows' }})
-    title: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
+    r"""Table
+    Represents a table to lay out search results
+    """
+    
+    rows: List[TableRow] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('rows') }})
+    title: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('title') }})
     

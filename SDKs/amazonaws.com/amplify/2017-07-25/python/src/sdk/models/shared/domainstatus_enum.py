@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class DomainStatusEnum(str, Enum):
     PENDING_VERIFICATION = "PENDING_VERIFICATION"

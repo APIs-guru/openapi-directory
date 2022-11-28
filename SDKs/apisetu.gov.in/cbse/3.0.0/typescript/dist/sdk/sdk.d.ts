@@ -1,77 +1,112 @@
 import { AxiosInstance, AxiosRequestConfig } from "axios";
 import * as operations from "./models/operations";
-declare type OptsFunc = (sdk: SDK) => void;
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://apisetu.gov.in/cbse/v3"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
     /**
+     * hpcer - Class XII Passing Certificate
+     *
      * API to verify Class XII Passing Certificate.
     **/
-    Hpcer(req: operations.HpcerRequest, config?: AxiosRequestConfig): Promise<operations.HpcerResponse>;
+    hpcer(req: operations.HpcerRequest, config?: AxiosRequestConfig): Promise<operations.HpcerResponse>;
     /**
+     * hscer - Class XII Marksheet
+     *
      * API to verify Class XII Marksheet.
     **/
-    Hscer(req: operations.HscerRequest, config?: AxiosRequestConfig): Promise<operations.HscerResponse>;
+    hscer(req: operations.HscerRequest, config?: AxiosRequestConfig): Promise<operations.HscerResponse>;
     /**
+     * hsmgr - Class XII Migration Certificate
+     *
      * API to verify Class XII Migration Certificate.
     **/
-    Hsmgr(req: operations.HsmgrRequest, config?: AxiosRequestConfig): Promise<operations.HsmgrResponse>;
+    hsmgr(req: operations.HsmgrRequest, config?: AxiosRequestConfig): Promise<operations.HsmgrResponse>;
     /**
+     * nchsc - NCHMCT Skill Certificate (X)
+     *
      * API to verify NCHMCT Skill Certificate (X).
     **/
-    Nchsc(req: operations.NchscRequest, config?: AxiosRequestConfig): Promise<operations.NchscResponse>;
+    nchsc(req: operations.NchscRequest, config?: AxiosRequestConfig): Promise<operations.NchscResponse>;
     /**
+     * nctsc - NCHMCT Skill Certificate (XII)
+     *
      * API to verify NCHMCT Skill Certificate (XII).
     **/
-    Nctsc(req: operations.NctscRequest, config?: AxiosRequestConfig): Promise<operations.NctscResponse>;
+    nctsc(req: operations.NctscRequest, config?: AxiosRequestConfig): Promise<operations.NctscResponse>;
     /**
+     * nsesc - NSE Skill Certificate (X)
+     *
      * API to verify NSE Skill Certificate (X).
     **/
-    Nsesc(req: operations.NsescRequest, config?: AxiosRequestConfig): Promise<operations.NsescResponse>;
+    nsesc(req: operations.NsescRequest, config?: AxiosRequestConfig): Promise<operations.NsescResponse>;
     /**
+     * nstsc - NSE Skill Certificate (XII)
+     *
      * API to verify NSE Skill Certificate (XII).
     **/
-    Nstsc(req: operations.NstscRequest, config?: AxiosRequestConfig): Promise<operations.NstscResponse>;
+    nstsc(req: operations.NstscRequest, config?: AxiosRequestConfig): Promise<operations.NstscResponse>;
     /**
+     * ntltr - NEET Rank Letter
+     *
      * API to verify NEET Rank Letter.
     **/
-    Ntltr(req: operations.NtltrRequest, config?: AxiosRequestConfig): Promise<operations.NtltrResponse>;
+    ntltr(req: operations.NtltrRequest, config?: AxiosRequestConfig): Promise<operations.NtltrResponse>;
     /**
+     * ntmks - NEET Marksheet
+     *
      * API to verify NEET Marksheet.
     **/
-    Ntmks(req: operations.NtmksRequest, config?: AxiosRequestConfig): Promise<operations.NtmksResponse>;
+    ntmks(req: operations.NtmksRequest, config?: AxiosRequestConfig): Promise<operations.NtmksResponse>;
     /**
+     * skhsc - Skill Certificate (X)
+     *
      * API to verify Skill Certificate (X).
     **/
-    Skhsc(req: operations.SkhscRequest, config?: AxiosRequestConfig): Promise<operations.SkhscResponse>;
+    skhsc(req: operations.SkhscRequest, config?: AxiosRequestConfig): Promise<operations.SkhscResponse>;
     /**
+     * sktsc - Skill Certificate (XII)
+     *
      * API to verify Skill Certificate (XII).
     **/
-    Sktsc(req: operations.SktscRequest, config?: AxiosRequestConfig): Promise<operations.SktscResponse>;
+    sktsc(req: operations.SktscRequest, config?: AxiosRequestConfig): Promise<operations.SktscResponse>;
     /**
+     * spcer - Class X Passing Certificate
+     *
      * API to verify Class X Passing Certificate.
     **/
-    Spcer(req: operations.SpcerRequest, config?: AxiosRequestConfig): Promise<operations.SpcerResponse>;
+    spcer(req: operations.SpcerRequest, config?: AxiosRequestConfig): Promise<operations.SpcerResponse>;
     /**
+     * sscer - Class X Marksheet
+     *
      * API to verify Class X Marksheet.
     **/
-    Sscer(req: operations.SscerRequest, config?: AxiosRequestConfig): Promise<operations.SscerResponse>;
+    sscer(req: operations.SscerRequest, config?: AxiosRequestConfig): Promise<operations.SscerResponse>;
     /**
+     * ssmgr - Class X Migration Certificate
+     *
      * API to verify Class X Migration Certificate.
     **/
-    Ssmgr(req: operations.SsmgrRequest, config?: AxiosRequestConfig): Promise<operations.SsmgrResponse>;
+    ssmgr(req: operations.SsmgrRequest, config?: AxiosRequestConfig): Promise<operations.SsmgrResponse>;
     /**
+     * tetcr - Teachers Eligibility Test Certificate
+     *
      * API to verify Teachers Eligibility Test Certificate.
     **/
-    Tetcr(req: operations.TetcrRequest, config?: AxiosRequestConfig): Promise<operations.TetcrResponse>;
+    tetcr(req: operations.TetcrRequest, config?: AxiosRequestConfig): Promise<operations.TetcrResponse>;
     /**
+     * tetms - Teachers Eligibility Test Mark Sheet
+     *
      * API to verify Teachers Eligibility Test Mark Sheet.
     **/
-    Tetms(req: operations.TetmsRequest, config?: AxiosRequestConfig): Promise<operations.TetmsResponse>;
+    tetms(req: operations.TetmsRequest, config?: AxiosRequestConfig): Promise<operations.TetmsResponse>;
 }
 export {};

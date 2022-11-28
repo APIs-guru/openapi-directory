@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Conversation
+// A conversation between the current user and another user.
 type Conversation struct {
 	Archived          *bool      `json:"archived,omitempty"`
 	Blocked           *bool      `json:"blocked,omitempty"`

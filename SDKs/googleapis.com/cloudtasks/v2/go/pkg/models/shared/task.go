@@ -8,6 +8,8 @@ const (
 	TaskViewEnumFull            TaskViewEnum = "FULL"
 )
 
+// Task
+// A unit of scheduled work.
 type Task struct {
 	AppEngineHTTPRequest *AppEngineHTTPRequest `json:"appEngineHttpRequest,omitempty"`
 	CreateTime           *string               `json:"createTime,omitempty"`

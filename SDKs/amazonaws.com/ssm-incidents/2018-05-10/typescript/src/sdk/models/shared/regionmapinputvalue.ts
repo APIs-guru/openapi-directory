@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RegionMapInputValue
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The mapping between a Region and the key that's used to encrypt the data.
 **/
 export class RegionMapInputValue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=sseKmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=sseKmsKeyId" })
   sseKmsKeyId?: string;
 }

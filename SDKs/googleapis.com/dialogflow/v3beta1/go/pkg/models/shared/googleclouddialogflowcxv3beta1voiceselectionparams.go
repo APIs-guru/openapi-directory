@@ -9,6 +9,8 @@ const (
 	GoogleCloudDialogflowCxV3beta1VoiceSelectionParamsSsmlGenderEnumSsmlVoiceGenderNeutral     GoogleCloudDialogflowCxV3beta1VoiceSelectionParamsSsmlGenderEnum = "SSML_VOICE_GENDER_NEUTRAL"
 )
 
+// GoogleCloudDialogflowCxV3beta1VoiceSelectionParams
+// Description of which voice to use for speech synthesis.
 type GoogleCloudDialogflowCxV3beta1VoiceSelectionParams struct {
 	Name       *string                                                           `json:"name,omitempty"`
 	SsmlGender *GoogleCloudDialogflowCxV3beta1VoiceSelectionParamsSsmlGenderEnum `json:"ssmlGender,omitempty"`

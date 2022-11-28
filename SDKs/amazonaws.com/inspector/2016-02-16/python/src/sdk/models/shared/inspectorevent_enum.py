@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class InspectorEventEnum(str, Enum):
     ASSESSMENT_RUN_STARTED = "ASSESSMENT_RUN_STARTED"

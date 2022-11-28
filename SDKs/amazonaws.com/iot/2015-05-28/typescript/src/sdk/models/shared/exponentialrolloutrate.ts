@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RateIncreaseCriteria } from "./rateincreasecriteria";
+
 
 
 // ExponentialRolloutRate
@@ -7,12 +8,12 @@ import { RateIncreaseCriteria } from "./rateincreasecriteria";
  * Allows you to create an exponential rate of rollout for a job.
 **/
 export class ExponentialRolloutRate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=baseRatePerMinute" })
+  @SpeakeasyMetadata({ data: "json, name=baseRatePerMinute" })
   baseRatePerMinute: number;
 
-  @Metadata({ data: "json, name=incrementFactor" })
+  @SpeakeasyMetadata({ data: "json, name=incrementFactor" })
   incrementFactor: number;
 
-  @Metadata({ data: "json, name=rateIncreaseCriteria" })
+  @SpeakeasyMetadata({ data: "json, name=rateIncreaseCriteria" })
   rateIncreaseCriteria: RateIncreaseCriteria;
 }

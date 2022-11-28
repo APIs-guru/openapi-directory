@@ -4,10 +4,6 @@ type TripsTripDetailsQueryParams struct {
 	TrackToken *string `queryParam:"style=form,explode=true,name=trackToken"`
 }
 
-type TripsTripDetailsRequest struct {
-	QueryParams TripsTripDetailsQueryParams
-}
-
 type TripsTripDetails200ApplicationJSONResultTrackAddressFinishParts struct {
 	City        *string `json:"City,omitempty"`
 	CountryCode *string `json:"CountryCode,omitempty"`
@@ -97,6 +93,10 @@ type TripsTripDetails200ApplicationJSONResult struct {
 
 type TripsTripDetails200ApplicationJSON struct {
 	Result *TripsTripDetails200ApplicationJSONResult `json:"Result,omitempty"`
+}
+
+type TripsTripDetailsRequest struct {
+	QueryParams TripsTripDetailsQueryParams
 }
 
 type TripsTripDetailsResponse struct {

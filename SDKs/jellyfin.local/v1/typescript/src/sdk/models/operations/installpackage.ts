@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class InstallPackagePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=name" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=name" })
   name: string;
 }
 
 
 export class InstallPackageQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=assemblyGuid" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=assemblyGuid" })
   assemblyGuid?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=repositoryUrl" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=repositoryUrl" })
   repositoryUrl?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=version" })
   version?: string;
 }
 
 
 export class InstallPackageSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   customAuthentication: shared.SchemeCustomAuthentication;
 }
 
 
 export class InstallPackageRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: InstallPackagePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: InstallPackageQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: InstallPackageSecurity;
 }
 
 
 export class InstallPackageResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Group } from "./group";
+
 
 
 // ListGroupsResponse
@@ -8,9 +8,9 @@ import { Group } from "./group";
  * The response message for GroupsService.ListGroups.
 **/
 export class ListGroupsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=groups", elemType: shared.Group })
+  @SpeakeasyMetadata({ data: "json, name=groups", elemType: Group })
   groups?: Group[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum GetElectionsSummaryOfficeEnum {
-    House = "house"
-,    Senate = "senate"
-,    President = "president"
+    House = "house",
+    Senate = "senate",
+    President = "president"
 }
 
 
 export class GetElectionsSummaryQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=api_key" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_key" })
   apiKey: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=cycle" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=cycle" })
   cycle: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=district" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=district" })
   district?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=election_full" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=election_full" })
   electionFull?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=office" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=office" })
   office: GetElectionsSummaryOfficeEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=state" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=state" })
   state?: string;
 }
 
 
 export class GetElectionsSummaryRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetElectionsSummaryQueryParams;
 }
 
 
 export class GetElectionsSummaryResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   electionSummary?: shared.ElectionSummary;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

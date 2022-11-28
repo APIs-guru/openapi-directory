@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { RequestedServiceQuotaChange } from "./requestedservicequotachange";
 export declare class ListRequestedServiceQuotaChangeHistoryResponse extends SpeakeasyBase {
     nextToken?: string;

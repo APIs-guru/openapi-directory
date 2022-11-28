@@ -4,6 +4,9 @@ import (
 	"time"
 )
 
+// Resource
+//
+//	The information about the resource.
 type Resource struct {
 	Arn             *string               `json:"arn,omitempty"`
 	AssociationTime *time.Time            `json:"associationTime,omitempty"`

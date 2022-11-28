@@ -13,6 +13,8 @@ const (
 	GlobalResourcesSharedModelsStringTranslationStateEnumCreatePending  GlobalResourcesSharedModelsStringTranslationStateEnum = "CreatePending"
 )
 
+// GlobalResourcesSharedModelsStringTranslation
+// A translation of a string in a specific language
 type GlobalResourcesSharedModelsStringTranslation struct {
 	AuthorID    *int32                                                 `json:"AuthorId,omitempty" form:"name=AuthorId"`
 	LanguageID  *int32                                                 `json:"LanguageId,omitempty" form:"name=LanguageId"`

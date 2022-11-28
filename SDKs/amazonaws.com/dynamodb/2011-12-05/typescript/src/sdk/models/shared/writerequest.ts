@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeleteRequest } from "./deleterequest";
 import { PutRequest } from "./putrequest";
+
 
 
 // WriteRequest
@@ -8,9 +9,9 @@ import { PutRequest } from "./putrequest";
  * This structure is a Union of PutRequest and DeleteRequest. It can contain exactly one of <code>PutRequest</code> or <code>DeleteRequest</code>. Never Both. This is enforced in the code.
 **/
 export class WriteRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DeleteRequest" })
+  @SpeakeasyMetadata({ data: "json, name=DeleteRequest" })
   deleteRequest?: DeleteRequest;
 
-  @Metadata({ data: "json, name=PutRequest" })
+  @SpeakeasyMetadata({ data: "json, name=PutRequest" })
   putRequest?: PutRequest;
 }

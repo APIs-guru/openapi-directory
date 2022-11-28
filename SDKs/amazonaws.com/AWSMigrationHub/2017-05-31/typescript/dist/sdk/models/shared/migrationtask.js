@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ResourceAttribute } from "./resourceattribute";
 import { Task } from "./task";
 // MigrationTask
 /**
@@ -35,23 +35,23 @@ var MigrationTask = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=MigrationTaskName" }),
+        SpeakeasyMetadata({ data: "json, name=MigrationTaskName" }),
         __metadata("design:type", String)
     ], MigrationTask.prototype, "migrationTaskName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProgressUpdateStream" }),
+        SpeakeasyMetadata({ data: "json, name=ProgressUpdateStream" }),
         __metadata("design:type", String)
     ], MigrationTask.prototype, "progressUpdateStream", void 0);
     __decorate([
-        Metadata({ data: "json, name=ResourceAttributeList", elemType: shared.ResourceAttribute }),
+        SpeakeasyMetadata({ data: "json, name=ResourceAttributeList", elemType: ResourceAttribute }),
         __metadata("design:type", Array)
     ], MigrationTask.prototype, "resourceAttributeList", void 0);
     __decorate([
-        Metadata({ data: "json, name=Task" }),
+        SpeakeasyMetadata({ data: "json, name=Task" }),
         __metadata("design:type", Task)
     ], MigrationTask.prototype, "task", void 0);
     __decorate([
-        Metadata({ data: "json, name=UpdateDateTime" }),
+        SpeakeasyMetadata({ data: "json, name=UpdateDateTime" }),
         __metadata("design:type", Date)
     ], MigrationTask.prototype, "updateDateTime", void 0);
     return MigrationTask;

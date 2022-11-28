@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudOrgpolicyV2PolicySpecPolicyRule
+// A rule used to express this policy.
 type GoogleCloudOrgpolicyV2PolicySpecPolicyRule struct {
 	AllowAll  *bool                                                   `json:"allowAll,omitempty"`
 	Condition *GoogleTypeExpr                                         `json:"condition,omitempty"`

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SuiteRunStatusEnum } from "./suiterunstatusenum";
+
 
 
 // SuiteRunInformation
@@ -7,33 +8,33 @@ import { SuiteRunStatusEnum } from "./suiterunstatusenum";
  * Information about the suite run.
 **/
 export class SuiteRunInformation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=endAt" })
+  @SpeakeasyMetadata({ data: "json, name=endAt" })
   endAt?: Date;
 
-  @Metadata({ data: "json, name=failed" })
+  @SpeakeasyMetadata({ data: "json, name=failed" })
   failed?: number;
 
-  @Metadata({ data: "json, name=passed" })
+  @SpeakeasyMetadata({ data: "json, name=passed" })
   passed?: number;
 
-  @Metadata({ data: "json, name=startedAt" })
+  @SpeakeasyMetadata({ data: "json, name=startedAt" })
   startedAt?: Date;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: SuiteRunStatusEnum;
 
-  @Metadata({ data: "json, name=suiteDefinitionId" })
+  @SpeakeasyMetadata({ data: "json, name=suiteDefinitionId" })
   suiteDefinitionId?: string;
 
-  @Metadata({ data: "json, name=suiteDefinitionName" })
+  @SpeakeasyMetadata({ data: "json, name=suiteDefinitionName" })
   suiteDefinitionName?: string;
 
-  @Metadata({ data: "json, name=suiteDefinitionVersion" })
+  @SpeakeasyMetadata({ data: "json, name=suiteDefinitionVersion" })
   suiteDefinitionVersion?: string;
 
-  @Metadata({ data: "json, name=suiteRunId" })
+  @SpeakeasyMetadata({ data: "json, name=suiteRunId" })
   suiteRunId?: string;
 }

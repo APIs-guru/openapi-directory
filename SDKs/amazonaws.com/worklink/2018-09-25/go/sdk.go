@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://worklink.{region}.amazonaws.com",
 	"https://worklink.{region}.amazonaws.com",
 	"http://worklink.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/worklink/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// AssociateDomain - Specifies a domain to be associated to Amazon WorkLink.
 func (s *SDK) AssociateDomain(ctx context.Context, request operations.AssociateDomainRequest) (*operations.AssociateDomainResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/associateDomain"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -81,7 +108,7 @@ func (s *SDK) AssociateDomain(ctx context.Context, request operations.AssociateD
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -171,8 +198,9 @@ func (s *SDK) AssociateDomain(ctx context.Context, request operations.AssociateD
 	return res, nil
 }
 
+// AssociateWebsiteAuthorizationProvider - Associates a website authorization provider with a specified fleet. This is used to authorize users against associated websites in the company network.
 func (s *SDK) AssociateWebsiteAuthorizationProvider(ctx context.Context, request operations.AssociateWebsiteAuthorizationProviderRequest) (*operations.AssociateWebsiteAuthorizationProviderResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/associateWebsiteAuthorizationProvider"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -192,7 +220,7 @@ func (s *SDK) AssociateWebsiteAuthorizationProvider(ctx context.Context, request
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -282,8 +310,9 @@ func (s *SDK) AssociateWebsiteAuthorizationProvider(ctx context.Context, request
 	return res, nil
 }
 
+// AssociateWebsiteCertificateAuthority - Imports the root certificate of a certificate authority (CA) used to obtain TLS certificates used by associated websites within the company network.
 func (s *SDK) AssociateWebsiteCertificateAuthority(ctx context.Context, request operations.AssociateWebsiteCertificateAuthorityRequest) (*operations.AssociateWebsiteCertificateAuthorityResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/associateWebsiteCertificateAuthority"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -303,7 +332,7 @@ func (s *SDK) AssociateWebsiteCertificateAuthority(ctx context.Context, request 
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -393,8 +422,9 @@ func (s *SDK) AssociateWebsiteCertificateAuthority(ctx context.Context, request 
 	return res, nil
 }
 
+// CreateFleet - Creates a fleet. A fleet consists of resources and the configuration that delivers associated websites to authorized users who download and set up the Amazon WorkLink app.
 func (s *SDK) CreateFleet(ctx context.Context, request operations.CreateFleetRequest) (*operations.CreateFleetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/createFleet"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -414,7 +444,7 @@ func (s *SDK) CreateFleet(ctx context.Context, request operations.CreateFleetReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -504,8 +534,9 @@ func (s *SDK) CreateFleet(ctx context.Context, request operations.CreateFleetReq
 	return res, nil
 }
 
+// DeleteFleet - Deletes a fleet. Prevents users from accessing previously associated websites.
 func (s *SDK) DeleteFleet(ctx context.Context, request operations.DeleteFleetRequest) (*operations.DeleteFleetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/deleteFleet"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -525,7 +556,7 @@ func (s *SDK) DeleteFleet(ctx context.Context, request operations.DeleteFleetReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -605,8 +636,9 @@ func (s *SDK) DeleteFleet(ctx context.Context, request operations.DeleteFleetReq
 	return res, nil
 }
 
+// DescribeAuditStreamConfiguration - Describes the configuration for delivering audit streams to the customer account.
 func (s *SDK) DescribeAuditStreamConfiguration(ctx context.Context, request operations.DescribeAuditStreamConfigurationRequest) (*operations.DescribeAuditStreamConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/describeAuditStreamConfiguration"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -626,7 +658,7 @@ func (s *SDK) DescribeAuditStreamConfiguration(ctx context.Context, request oper
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -706,8 +738,9 @@ func (s *SDK) DescribeAuditStreamConfiguration(ctx context.Context, request oper
 	return res, nil
 }
 
+// DescribeCompanyNetworkConfiguration - Describes the networking configuration to access the internal websites associated with the specified fleet.
 func (s *SDK) DescribeCompanyNetworkConfiguration(ctx context.Context, request operations.DescribeCompanyNetworkConfigurationRequest) (*operations.DescribeCompanyNetworkConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/describeCompanyNetworkConfiguration"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -727,7 +760,7 @@ func (s *SDK) DescribeCompanyNetworkConfiguration(ctx context.Context, request o
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -807,8 +840,9 @@ func (s *SDK) DescribeCompanyNetworkConfiguration(ctx context.Context, request o
 	return res, nil
 }
 
+// DescribeDevice - Provides information about a user's device.
 func (s *SDK) DescribeDevice(ctx context.Context, request operations.DescribeDeviceRequest) (*operations.DescribeDeviceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/describeDevice"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -828,7 +862,7 @@ func (s *SDK) DescribeDevice(ctx context.Context, request operations.DescribeDev
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -908,8 +942,9 @@ func (s *SDK) DescribeDevice(ctx context.Context, request operations.DescribeDev
 	return res, nil
 }
 
+// DescribeDevicePolicyConfiguration - Describes the device policy configuration for the specified fleet.
 func (s *SDK) DescribeDevicePolicyConfiguration(ctx context.Context, request operations.DescribeDevicePolicyConfigurationRequest) (*operations.DescribeDevicePolicyConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/describeDevicePolicyConfiguration"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -929,7 +964,7 @@ func (s *SDK) DescribeDevicePolicyConfiguration(ctx context.Context, request ope
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1009,8 +1044,9 @@ func (s *SDK) DescribeDevicePolicyConfiguration(ctx context.Context, request ope
 	return res, nil
 }
 
+// DescribeDomain - Provides information about the domain.
 func (s *SDK) DescribeDomain(ctx context.Context, request operations.DescribeDomainRequest) (*operations.DescribeDomainResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/describeDomain"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1030,7 +1066,7 @@ func (s *SDK) DescribeDomain(ctx context.Context, request operations.DescribeDom
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1110,8 +1146,9 @@ func (s *SDK) DescribeDomain(ctx context.Context, request operations.DescribeDom
 	return res, nil
 }
 
+// DescribeFleetMetadata - Provides basic information for the specified fleet, excluding identity provider, networking, and device configuration details.
 func (s *SDK) DescribeFleetMetadata(ctx context.Context, request operations.DescribeFleetMetadataRequest) (*operations.DescribeFleetMetadataResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/describeFleetMetadata"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1131,7 +1168,7 @@ func (s *SDK) DescribeFleetMetadata(ctx context.Context, request operations.Desc
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1211,8 +1248,9 @@ func (s *SDK) DescribeFleetMetadata(ctx context.Context, request operations.Desc
 	return res, nil
 }
 
+// DescribeIdentityProviderConfiguration - Describes the identity provider configuration of the specified fleet.
 func (s *SDK) DescribeIdentityProviderConfiguration(ctx context.Context, request operations.DescribeIdentityProviderConfigurationRequest) (*operations.DescribeIdentityProviderConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/describeIdentityProviderConfiguration"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1232,7 +1270,7 @@ func (s *SDK) DescribeIdentityProviderConfiguration(ctx context.Context, request
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1312,8 +1350,9 @@ func (s *SDK) DescribeIdentityProviderConfiguration(ctx context.Context, request
 	return res, nil
 }
 
+// DescribeWebsiteCertificateAuthority - Provides information about the certificate authority.
 func (s *SDK) DescribeWebsiteCertificateAuthority(ctx context.Context, request operations.DescribeWebsiteCertificateAuthorityRequest) (*operations.DescribeWebsiteCertificateAuthorityResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/describeWebsiteCertificateAuthority"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1333,7 +1372,7 @@ func (s *SDK) DescribeWebsiteCertificateAuthority(ctx context.Context, request o
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1413,8 +1452,9 @@ func (s *SDK) DescribeWebsiteCertificateAuthority(ctx context.Context, request o
 	return res, nil
 }
 
+// DisassociateDomain - Disassociates a domain from Amazon WorkLink. End users lose the ability to access the domain with Amazon WorkLink.
 func (s *SDK) DisassociateDomain(ctx context.Context, request operations.DisassociateDomainRequest) (*operations.DisassociateDomainResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/disassociateDomain"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1434,7 +1474,7 @@ func (s *SDK) DisassociateDomain(ctx context.Context, request operations.Disasso
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1514,8 +1554,9 @@ func (s *SDK) DisassociateDomain(ctx context.Context, request operations.Disasso
 	return res, nil
 }
 
+// DisassociateWebsiteAuthorizationProvider - Disassociates a website authorization provider from a specified fleet. After the disassociation, users can't load any associated websites that require this authorization provider.
 func (s *SDK) DisassociateWebsiteAuthorizationProvider(ctx context.Context, request operations.DisassociateWebsiteAuthorizationProviderRequest) (*operations.DisassociateWebsiteAuthorizationProviderResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/disassociateWebsiteAuthorizationProvider"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1535,7 +1576,7 @@ func (s *SDK) DisassociateWebsiteAuthorizationProvider(ctx context.Context, requ
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1625,8 +1666,9 @@ func (s *SDK) DisassociateWebsiteAuthorizationProvider(ctx context.Context, requ
 	return res, nil
 }
 
+// DisassociateWebsiteCertificateAuthority - Removes a certificate authority (CA).
 func (s *SDK) DisassociateWebsiteCertificateAuthority(ctx context.Context, request operations.DisassociateWebsiteCertificateAuthorityRequest) (*operations.DisassociateWebsiteCertificateAuthorityResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/disassociateWebsiteCertificateAuthority"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1646,7 +1688,7 @@ func (s *SDK) DisassociateWebsiteCertificateAuthority(ctx context.Context, reque
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1726,8 +1768,9 @@ func (s *SDK) DisassociateWebsiteCertificateAuthority(ctx context.Context, reque
 	return res, nil
 }
 
+// ListDevices - Retrieves a list of devices registered with the specified fleet.
 func (s *SDK) ListDevices(ctx context.Context, request operations.ListDevicesRequest) (*operations.ListDevicesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/listDevices"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1749,7 +1792,7 @@ func (s *SDK) ListDevices(ctx context.Context, request operations.ListDevicesReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1829,8 +1872,9 @@ func (s *SDK) ListDevices(ctx context.Context, request operations.ListDevicesReq
 	return res, nil
 }
 
+// ListDomains - Retrieves a list of domains associated to a specified fleet.
 func (s *SDK) ListDomains(ctx context.Context, request operations.ListDomainsRequest) (*operations.ListDomainsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/listDomains"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1852,7 +1896,7 @@ func (s *SDK) ListDomains(ctx context.Context, request operations.ListDomainsReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1932,8 +1976,9 @@ func (s *SDK) ListDomains(ctx context.Context, request operations.ListDomainsReq
 	return res, nil
 }
 
+// ListFleets - Retrieves a list of fleets for the current account and Region.
 func (s *SDK) ListFleets(ctx context.Context, request operations.ListFleetsRequest) (*operations.ListFleetsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/listFleets"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1955,7 +2000,7 @@ func (s *SDK) ListFleets(ctx context.Context, request operations.ListFleetsReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2025,8 +2070,9 @@ func (s *SDK) ListFleets(ctx context.Context, request operations.ListFleetsReque
 	return res, nil
 }
 
+// ListTagsForResource - Retrieves a list of tags for the specified resource.
 func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTagsForResourceRequest) (*operations.ListTagsForResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{ResourceArn}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2036,7 +2082,7 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2076,8 +2122,9 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 	return res, nil
 }
 
+// ListWebsiteAuthorizationProviders - Retrieves a list of website authorization providers associated with a specified fleet.
 func (s *SDK) ListWebsiteAuthorizationProviders(ctx context.Context, request operations.ListWebsiteAuthorizationProvidersRequest) (*operations.ListWebsiteAuthorizationProvidersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/listWebsiteAuthorizationProviders"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2099,7 +2146,7 @@ func (s *SDK) ListWebsiteAuthorizationProviders(ctx context.Context, request ope
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2179,8 +2226,9 @@ func (s *SDK) ListWebsiteAuthorizationProviders(ctx context.Context, request ope
 	return res, nil
 }
 
+// ListWebsiteCertificateAuthorities - Retrieves a list of certificate authorities added for the current account and Region.
 func (s *SDK) ListWebsiteCertificateAuthorities(ctx context.Context, request operations.ListWebsiteCertificateAuthoritiesRequest) (*operations.ListWebsiteCertificateAuthoritiesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/listWebsiteCertificateAuthorities"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2202,7 +2250,7 @@ func (s *SDK) ListWebsiteCertificateAuthorities(ctx context.Context, request ope
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2272,8 +2320,9 @@ func (s *SDK) ListWebsiteCertificateAuthorities(ctx context.Context, request ope
 	return res, nil
 }
 
+// RestoreDomainAccess - Moves a domain to ACTIVE status if it was in the INACTIVE status.
 func (s *SDK) RestoreDomainAccess(ctx context.Context, request operations.RestoreDomainAccessRequest) (*operations.RestoreDomainAccessResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/restoreDomainAccess"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2293,7 +2342,7 @@ func (s *SDK) RestoreDomainAccess(ctx context.Context, request operations.Restor
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2373,8 +2422,9 @@ func (s *SDK) RestoreDomainAccess(ctx context.Context, request operations.Restor
 	return res, nil
 }
 
+// RevokeDomainAccess - Moves a domain to INACTIVE status if it was in the ACTIVE status.
 func (s *SDK) RevokeDomainAccess(ctx context.Context, request operations.RevokeDomainAccessRequest) (*operations.RevokeDomainAccessResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/revokeDomainAccess"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2394,7 +2444,7 @@ func (s *SDK) RevokeDomainAccess(ctx context.Context, request operations.RevokeD
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2474,8 +2524,9 @@ func (s *SDK) RevokeDomainAccess(ctx context.Context, request operations.RevokeD
 	return res, nil
 }
 
+// SignOutUser - Signs the user out from all of their devices. The user can sign in again if they have valid credentials.
 func (s *SDK) SignOutUser(ctx context.Context, request operations.SignOutUserRequest) (*operations.SignOutUserResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/signOutUser"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2495,7 +2546,7 @@ func (s *SDK) SignOutUser(ctx context.Context, request operations.SignOutUserReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2575,8 +2626,9 @@ func (s *SDK) SignOutUser(ctx context.Context, request operations.SignOutUserReq
 	return res, nil
 }
 
+// TagResource - Adds or overwrites one or more tags for the specified resource, such as a fleet. Each tag consists of a key and an optional value. If a resource already has a tag with the same key, this operation updates its value.
 func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceRequest) (*operations.TagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{ResourceArn}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2596,7 +2648,7 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2636,8 +2688,9 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 	return res, nil
 }
 
+// UntagResource - Removes one or more tags from the specified resource.
 func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourceRequest) (*operations.UntagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{ResourceArn}#tagKeys", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -2649,7 +2702,7 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2689,8 +2742,9 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 	return res, nil
 }
 
+// UpdateAuditStreamConfiguration - Updates the audit stream configuration for the fleet.
 func (s *SDK) UpdateAuditStreamConfiguration(ctx context.Context, request operations.UpdateAuditStreamConfigurationRequest) (*operations.UpdateAuditStreamConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/updateAuditStreamConfiguration"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2710,7 +2764,7 @@ func (s *SDK) UpdateAuditStreamConfiguration(ctx context.Context, request operat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2790,8 +2844,9 @@ func (s *SDK) UpdateAuditStreamConfiguration(ctx context.Context, request operat
 	return res, nil
 }
 
+// UpdateCompanyNetworkConfiguration - Updates the company network configuration for the fleet.
 func (s *SDK) UpdateCompanyNetworkConfiguration(ctx context.Context, request operations.UpdateCompanyNetworkConfigurationRequest) (*operations.UpdateCompanyNetworkConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/updateCompanyNetworkConfiguration"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2811,7 +2866,7 @@ func (s *SDK) UpdateCompanyNetworkConfiguration(ctx context.Context, request ope
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2891,8 +2946,9 @@ func (s *SDK) UpdateCompanyNetworkConfiguration(ctx context.Context, request ope
 	return res, nil
 }
 
+// UpdateDevicePolicyConfiguration - Updates the device policy configuration for the fleet.
 func (s *SDK) UpdateDevicePolicyConfiguration(ctx context.Context, request operations.UpdateDevicePolicyConfigurationRequest) (*operations.UpdateDevicePolicyConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/updateDevicePolicyConfiguration"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2912,7 +2968,7 @@ func (s *SDK) UpdateDevicePolicyConfiguration(ctx context.Context, request opera
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2992,8 +3048,9 @@ func (s *SDK) UpdateDevicePolicyConfiguration(ctx context.Context, request opera
 	return res, nil
 }
 
+// UpdateDomainMetadata - Updates domain metadata, such as DisplayName.
 func (s *SDK) UpdateDomainMetadata(ctx context.Context, request operations.UpdateDomainMetadataRequest) (*operations.UpdateDomainMetadataResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/updateDomainMetadata"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3013,7 +3070,7 @@ func (s *SDK) UpdateDomainMetadata(ctx context.Context, request operations.Updat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3093,8 +3150,9 @@ func (s *SDK) UpdateDomainMetadata(ctx context.Context, request operations.Updat
 	return res, nil
 }
 
+// UpdateFleetMetadata - Updates fleet metadata, such as DisplayName.
 func (s *SDK) UpdateFleetMetadata(ctx context.Context, request operations.UpdateFleetMetadataRequest) (*operations.UpdateFleetMetadataResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/UpdateFleetMetadata"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3114,7 +3172,7 @@ func (s *SDK) UpdateFleetMetadata(ctx context.Context, request operations.Update
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3194,8 +3252,9 @@ func (s *SDK) UpdateFleetMetadata(ctx context.Context, request operations.Update
 	return res, nil
 }
 
+// UpdateIdentityProviderConfiguration - Updates the identity provider configuration for the fleet.
 func (s *SDK) UpdateIdentityProviderConfiguration(ctx context.Context, request operations.UpdateIdentityProviderConfigurationRequest) (*operations.UpdateIdentityProviderConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/updateIdentityProviderConfiguration"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3215,7 +3274,7 @@ func (s *SDK) UpdateIdentityProviderConfiguration(ctx context.Context, request o
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

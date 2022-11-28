@@ -13,6 +13,8 @@ const (
 	PlaceActionTypeMetadataPlaceActionTypeEnumShopOnline                 PlaceActionTypeMetadataPlaceActionTypeEnum = "SHOP_ONLINE"
 )
 
+// PlaceActionTypeMetadata
+// Metadata for supported place action types.
 type PlaceActionTypeMetadata struct {
 	DisplayName     *string                                     `json:"displayName,omitempty"`
 	PlaceActionType *PlaceActionTypeMetadataPlaceActionTypeEnum `json:"placeActionType,omitempty"`

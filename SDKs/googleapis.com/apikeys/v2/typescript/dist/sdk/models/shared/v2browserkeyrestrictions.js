@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // V2BrowserKeyRestrictions
 /**
  * The HTTP referrers (websites) that are allowed to use the key.
@@ -33,7 +33,7 @@ var V2BrowserKeyRestrictions = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=allowedReferrers" }),
+        SpeakeasyMetadata({ data: "json, name=allowedReferrers" }),
         __metadata("design:type", Array)
     ], V2BrowserKeyRestrictions.prototype, "allowedReferrers", void 0);
     return V2BrowserKeyRestrictions;

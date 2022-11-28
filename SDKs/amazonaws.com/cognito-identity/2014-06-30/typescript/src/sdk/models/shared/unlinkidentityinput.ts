@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // UnlinkIdentityInput
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Input to the UnlinkIdentity action.
 **/
 export class UnlinkIdentityInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=IdentityId" })
+  @SpeakeasyMetadata({ data: "json, name=IdentityId" })
   identityId: string;
 
-  @Metadata({ data: "json, name=Logins" })
+  @SpeakeasyMetadata({ data: "json, name=Logins" })
   logins: Map<string, string>;
 
-  @Metadata({ data: "json, name=LoginsToRemove" })
+  @SpeakeasyMetadata({ data: "json, name=LoginsToRemove" })
   loginsToRemove: string[];
 }

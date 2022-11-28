@@ -1,11 +1,11 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from sdk.models import shared
 
 
 @dataclass
 class RequestGroupMembersPathParams:
-    group_id: int = field(default=None, metadata={'path_param': { 'field_name': 'group_id', 'style': 'simple', 'explode': False }})
+    group_id: int = field(metadata={'path_param': { 'field_name': 'group_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,15 +22,15 @@ class RequestGroupMembersHeaders:
 
 @dataclass
 class RequestGroupMembersRequest:
-    path_params: RequestGroupMembersPathParams = field(default=None)
-    query_params: RequestGroupMembersQueryParams = field(default=None)
-    headers: RequestGroupMembersHeaders = field(default=None)
+    headers: RequestGroupMembersHeaders = field()
+    path_params: RequestGroupMembersPathParams = field()
+    query_params: RequestGroupMembersQueryParams = field()
     
 
 @dataclass
 class RequestGroupMembersResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     group_user_list: Optional[shared.GroupUserList] = field(default=None)
-    status_code: int = field(default=None)
     

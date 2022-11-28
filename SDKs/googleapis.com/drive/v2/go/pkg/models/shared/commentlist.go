@@ -1,5 +1,7 @@
 package shared
 
+// CommentList
+// A list of comments on a file in Google Drive.
 type CommentList struct {
 	Items         []Comment `json:"items,omitempty"`
 	Kind          *string   `json:"kind,omitempty"`

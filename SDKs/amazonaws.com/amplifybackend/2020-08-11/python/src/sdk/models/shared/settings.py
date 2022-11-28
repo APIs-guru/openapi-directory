@@ -1,12 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import mfatypeselement_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Settings:
-    mfa_types: Optional[List[mfatypeselement_enum.MfaTypesElementEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MfaTypes' }})
-    sms_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SmsMessage' }})
+    r"""Settings
+    The settings of your MFA configuration for the backend of your Amplify project.
+    """
+    
+    mfa_types: Optional[List[MfaTypesElementEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MfaTypes') }})
+    sms_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SmsMessage') }})
     

@@ -1,33 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateClusterConfigPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=name" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=name" })
   name: string;
 }
 
 
 export class UpdateClusterConfigHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -37,7 +38,7 @@ export class UpdateClusterConfigHeaders extends SpeakeasyBase {
  * An object representing the logging configuration for resources in your cluster.
 **/
 export class UpdateClusterConfigRequestBodyLogging extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clusterLogging", elemType: shared.LogSetup })
+  @SpeakeasyMetadata({ data: "json, name=clusterLogging", elemType: shared.LogSetup })
   clusterLogging?: shared.LogSetup[];
 }
 
@@ -47,72 +48,72 @@ export class UpdateClusterConfigRequestBodyLogging extends SpeakeasyBase {
  * An object representing the VPC configuration to use for an Amazon EKS cluster.
 **/
 export class UpdateClusterConfigRequestBodyResourcesVpcConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=endpointPrivateAccess" })
+  @SpeakeasyMetadata({ data: "json, name=endpointPrivateAccess" })
   endpointPrivateAccess?: boolean;
 
-  @Metadata({ data: "json, name=endpointPublicAccess" })
+  @SpeakeasyMetadata({ data: "json, name=endpointPublicAccess" })
   endpointPublicAccess?: boolean;
 
-  @Metadata({ data: "json, name=publicAccessCidrs" })
+  @SpeakeasyMetadata({ data: "json, name=publicAccessCidrs" })
   publicAccessCidrs?: string[];
 
-  @Metadata({ data: "json, name=securityGroupIds" })
+  @SpeakeasyMetadata({ data: "json, name=securityGroupIds" })
   securityGroupIds?: string[];
 
-  @Metadata({ data: "json, name=subnetIds" })
+  @SpeakeasyMetadata({ data: "json, name=subnetIds" })
   subnetIds?: string[];
 }
 
 
 export class UpdateClusterConfigRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clientRequestToken" })
+  @SpeakeasyMetadata({ data: "json, name=clientRequestToken" })
   clientRequestToken?: string;
 
-  @Metadata({ data: "json, name=logging" })
+  @SpeakeasyMetadata({ data: "json, name=logging" })
   logging?: UpdateClusterConfigRequestBodyLogging;
 
-  @Metadata({ data: "json, name=resourcesVpcConfig" })
+  @SpeakeasyMetadata({ data: "json, name=resourcesVpcConfig" })
   resourcesVpcConfig?: UpdateClusterConfigRequestBodyResourcesVpcConfig;
 }
 
 
 export class UpdateClusterConfigRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateClusterConfigPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdateClusterConfigHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdateClusterConfigRequestBody;
 }
 
 
 export class UpdateClusterConfigResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   clientException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidParameterException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceInUseException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serverException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateClusterConfigResponse?: shared.UpdateClusterConfigResponse;
 }

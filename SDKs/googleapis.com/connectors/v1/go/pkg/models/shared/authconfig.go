@@ -11,6 +11,8 @@ const (
 	AuthConfigAuthTypeEnumOauth2AuthCodeFlow      AuthConfigAuthTypeEnum = "OAUTH2_AUTH_CODE_FLOW"
 )
 
+// AuthConfig
+// AuthConfig defines details of a authentication type.
 type AuthConfig struct {
 	AdditionalVariables     []ConfigVariable         `json:"additionalVariables,omitempty"`
 	AuthType                *AuthConfigAuthTypeEnum  `json:"authType,omitempty"`

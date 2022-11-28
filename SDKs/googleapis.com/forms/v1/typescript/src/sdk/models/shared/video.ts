@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MediaProperties } from "./mediaproperties";
+
 
 
 // Video
@@ -7,9 +8,9 @@ import { MediaProperties } from "./mediaproperties";
  * Data representing a video.
 **/
 export class Video extends SpeakeasyBase {
-  @Metadata({ data: "json, name=properties" })
+  @SpeakeasyMetadata({ data: "json, name=properties" })
   properties?: MediaProperties;
 
-  @Metadata({ data: "json, name=youtubeUri" })
+  @SpeakeasyMetadata({ data: "json, name=youtubeUri" })
   youtubeUri?: string;
 }

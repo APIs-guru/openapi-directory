@@ -1,5 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // IngredientObjectItemsCalorieConversionFactor
@@ -7,13 +7,13 @@ import * as shared from "../shared";
  * An object containing the multiplication factors to be used when calculating energy from macronutrients for a specific food.
 **/
 export class IngredientObjectItemsCalorieConversionFactor extends SpeakeasyBase {
-  @Metadata({ data: "json, name=carbohydrate_value" })
+  @SpeakeasyMetadata({ data: "json, name=carbohydrate_value" })
   carbohydrateValue?: number;
 
-  @Metadata({ data: "json, name=fat_value" })
+  @SpeakeasyMetadata({ data: "json, name=fat_value" })
   fatValue?: number;
 
-  @Metadata({ data: "json, name=protein_value" })
+  @SpeakeasyMetadata({ data: "json, name=protein_value" })
   proteinValue?: number;
 }
 
@@ -23,19 +23,19 @@ export class IngredientObjectItemsCalorieConversionFactor extends SpeakeasyBase 
  * An object containing information on a specific component of this food item
 **/
 export class IngredientObjectItemsComponents extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data_points" })
+  @SpeakeasyMetadata({ data: "json, name=data_points" })
   dataPoints?: number;
 
-  @Metadata({ data: "json, name=gram_weight" })
+  @SpeakeasyMetadata({ data: "json, name=gram_weight" })
   gramWeight?: number;
 
-  @Metadata({ data: "json, name=is_refuse" })
+  @SpeakeasyMetadata({ data: "json, name=is_refuse" })
   isRefuse?: boolean;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=pct_weight" })
+  @SpeakeasyMetadata({ data: "json, name=pct_weight" })
   pctWeight?: number;
 }
 
@@ -45,34 +45,34 @@ export class IngredientObjectItemsComponents extends SpeakeasyBase {
  * An object containing information for a specific nutrient found in this food item
 **/
 export class IngredientObjectItemsNutrients extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data_points" })
+  @SpeakeasyMetadata({ data: "json, name=data_points" })
   dataPoints?: number;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=footnote" })
+  @SpeakeasyMetadata({ data: "json, name=footnote" })
   footnote?: string;
 
-  @Metadata({ data: "json, name=max" })
+  @SpeakeasyMetadata({ data: "json, name=max" })
   max?: number;
 
-  @Metadata({ data: "json, name=measurement_unit" })
+  @SpeakeasyMetadata({ data: "json, name=measurement_unit" })
   measurementUnit?: string;
 
-  @Metadata({ data: "json, name=median" })
+  @SpeakeasyMetadata({ data: "json, name=median" })
   median?: number;
 
-  @Metadata({ data: "json, name=min" })
+  @SpeakeasyMetadata({ data: "json, name=min" })
   min?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=per_100g" })
+  @SpeakeasyMetadata({ data: "json, name=per_100g" })
   per100g?: number;
 
-  @Metadata({ data: "json, name=rank" })
+  @SpeakeasyMetadata({ data: "json, name=rank" })
   rank?: number;
 }
 
@@ -82,22 +82,22 @@ export class IngredientObjectItemsNutrients extends SpeakeasyBase {
  * An object containing information on a specific food portion found in this item
 **/
 export class IngredientObjectItemsPortions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data_points" })
+  @SpeakeasyMetadata({ data: "json, name=data_points" })
   dataPoints?: number;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=footnote" })
+  @SpeakeasyMetadata({ data: "json, name=footnote" })
   footnote?: string;
 
-  @Metadata({ data: "json, name=gram_weight" })
+  @SpeakeasyMetadata({ data: "json, name=gram_weight" })
   gramWeight?: number;
 
-  @Metadata({ data: "json, name=measurement_unit" })
+  @SpeakeasyMetadata({ data: "json, name=measurement_unit" })
   measurementUnit?: string;
 
-  @Metadata({ data: "json, name=modifier" })
+  @SpeakeasyMetadata({ data: "json, name=modifier" })
   modifier?: string;
 }
 
@@ -107,37 +107,37 @@ export class IngredientObjectItemsPortions extends SpeakeasyBase {
  * An object containing information for this specific item.
 **/
 export class IngredientObjectItems extends SpeakeasyBase {
-  @Metadata({ data: "json, name=calorie_conversion_factor" })
+  @SpeakeasyMetadata({ data: "json, name=calorie_conversion_factor" })
   calorieConversionFactor?: IngredientObjectItemsCalorieConversionFactor;
 
-  @Metadata({ data: "json, name=categories" })
+  @SpeakeasyMetadata({ data: "json, name=categories" })
   categories?: string[];
 
-  @Metadata({ data: "json, name=common_name" })
+  @SpeakeasyMetadata({ data: "json, name=common_name" })
   commonName?: string;
 
-  @Metadata({ data: "json, name=components", elemType: shared.IngredientObjectItemsComponents })
+  @SpeakeasyMetadata({ data: "json, name=components", elemType: IngredientObjectItemsComponents })
   components?: IngredientObjectItemsComponents[];
 
-  @Metadata({ data: "json, name=footnote" })
+  @SpeakeasyMetadata({ data: "json, name=footnote" })
   footnote?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=nutrients", elemType: shared.IngredientObjectItemsNutrients })
+  @SpeakeasyMetadata({ data: "json, name=nutrients", elemType: IngredientObjectItemsNutrients })
   nutrients?: IngredientObjectItemsNutrients[];
 
-  @Metadata({ data: "json, name=portions", elemType: shared.IngredientObjectItemsPortions })
+  @SpeakeasyMetadata({ data: "json, name=portions", elemType: IngredientObjectItemsPortions })
   portions?: IngredientObjectItemsPortions[];
 
-  @Metadata({ data: "json, name=protein_conversion_factor" })
+  @SpeakeasyMetadata({ data: "json, name=protein_conversion_factor" })
   proteinConversionFactor?: number;
 
-  @Metadata({ data: "json, name=score" })
+  @SpeakeasyMetadata({ data: "json, name=score" })
   score?: string;
 
-  @Metadata({ data: "json, name=search_term" })
+  @SpeakeasyMetadata({ data: "json, name=search_term" })
   searchTerm?: string;
 }
 
@@ -147,6 +147,6 @@ export class IngredientObjectItems extends SpeakeasyBase {
  * Please read the description of each field in this API response object example. By default, the value of each field is **null**. This indicates an unknown state or that no data exists.
 **/
 export class IngredientObject extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.IngredientObjectItems })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: IngredientObjectItems })
   items?: IngredientObjectItems[];
 }

@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostContainersNameOrIdFloatingIpsIpBindPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=ip" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ip" })
   ip: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=name_or_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=name_or_id" })
   nameOrId: string;
 }
 
 
 export class PostContainersNameOrIdFloatingIpsIpBindHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Auth-Project-Id" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Auth-Project-Id" })
   xAuthProjectId: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Auth-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Auth-Token" })
   xAuthToken: string;
 }
 
 
 export class PostContainersNameOrIdFloatingIpsIpBindRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PostContainersNameOrIdFloatingIpsIpBindPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: PostContainersNameOrIdFloatingIpsIpBindHeaders;
 }
 
 
 export class PostContainersNameOrIdFloatingIpsIpBindResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

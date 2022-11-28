@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetIDXAmzTargetEnum(str, Enum):
@@ -8,6 +12,7 @@ class GetIDXAmzTargetEnum(str, Enum):
 
 @dataclass
 class GetIDHeaders:
+    x_amz_target: GetIDXAmzTargetEnum = field(metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm', 'style': 'simple', 'explode': False }})
     x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256', 'style': 'simple', 'explode': False }})
     x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential', 'style': 'simple', 'explode': False }})
@@ -15,18 +20,18 @@ class GetIDHeaders:
     x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token', 'style': 'simple', 'explode': False }})
     x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature', 'style': 'simple', 'explode': False }})
     x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders', 'style': 'simple', 'explode': False }})
-    x_amz_target: GetIDXAmzTargetEnum = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetIDRequest:
-    headers: GetIDHeaders = field(default=None)
-    request: shared.GetIDInput = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: GetIDHeaders = field()
+    request: shared.GetIDInput = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class GetIDResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     external_service_exception: Optional[Any] = field(default=None)
     get_id_response: Optional[shared.GetIDResponse] = field(default=None)
     internal_error_exception: Optional[Any] = field(default=None)
@@ -35,6 +40,5 @@ class GetIDResponse:
     not_authorized_exception: Optional[Any] = field(default=None)
     resource_conflict_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

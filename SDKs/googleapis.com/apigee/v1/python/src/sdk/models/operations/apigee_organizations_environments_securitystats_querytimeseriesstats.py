@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ApigeeOrganizationsEnvironmentsSecurityStatsQueryTimeSeriesStatsPathParams:
-    orgenv: str = field(default=None, metadata={'path_param': { 'field_name': 'orgenv', 'style': 'simple', 'explode': False }})
+    orgenv: str = field(metadata={'path_param': { 'field_name': 'orgenv', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class ApigeeOrganizationsEnvironmentsSecurityStatsQueryTimeSeriesStatsQueryParam
 
 @dataclass
 class ApigeeOrganizationsEnvironmentsSecurityStatsQueryTimeSeriesStatsSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ApigeeOrganizationsEnvironmentsSecurityStatsQueryTimeSeriesStatsRequest:
-    path_params: ApigeeOrganizationsEnvironmentsSecurityStatsQueryTimeSeriesStatsPathParams = field(default=None)
-    query_params: ApigeeOrganizationsEnvironmentsSecurityStatsQueryTimeSeriesStatsQueryParams = field(default=None)
+    path_params: ApigeeOrganizationsEnvironmentsSecurityStatsQueryTimeSeriesStatsPathParams = field()
+    query_params: ApigeeOrganizationsEnvironmentsSecurityStatsQueryTimeSeriesStatsQueryParams = field()
+    security: ApigeeOrganizationsEnvironmentsSecurityStatsQueryTimeSeriesStatsSecurity = field()
     request: Optional[shared.GoogleCloudApigeeV1QueryTimeSeriesStatsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ApigeeOrganizationsEnvironmentsSecurityStatsQueryTimeSeriesStatsSecurity = field(default=None)
     
 
 @dataclass
 class ApigeeOrganizationsEnvironmentsSecurityStatsQueryTimeSeriesStatsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_apigee_v1_query_time_series_stats_response: Optional[shared.GoogleCloudApigeeV1QueryTimeSeriesStatsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

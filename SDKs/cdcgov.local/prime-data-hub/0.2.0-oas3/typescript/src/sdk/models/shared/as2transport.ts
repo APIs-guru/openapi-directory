@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // As2Transport
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes a single AS2 connection in all of it variations
 **/
 export class As2Transport extends SpeakeasyBase {
-  @Metadata({ data: "json, name=contentDescription" })
+  @SpeakeasyMetadata({ data: "json, name=contentDescription" })
   contentDescription?: string;
 
-  @Metadata({ data: "json, name=mimeType" })
+  @SpeakeasyMetadata({ data: "json, name=mimeType" })
   mimeType?: string;
 
-  @Metadata({ data: "json, name=receiverId" })
+  @SpeakeasyMetadata({ data: "json, name=receiverId" })
   receiverId: string;
 
-  @Metadata({ data: "json, name=receiverUrl" })
+  @SpeakeasyMetadata({ data: "json, name=receiverUrl" })
   receiverUrl: string;
 
-  @Metadata({ data: "json, name=senderEmail" })
+  @SpeakeasyMetadata({ data: "json, name=senderEmail" })
   senderEmail?: string;
 
-  @Metadata({ data: "json, name=senderId" })
+  @SpeakeasyMetadata({ data: "json, name=senderId" })
   senderId: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }

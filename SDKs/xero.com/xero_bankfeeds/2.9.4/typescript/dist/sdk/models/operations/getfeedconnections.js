@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetFeedConnectionsQueryParams = /** @class */ (function (_super) {
     __extends(GetFeedConnectionsQueryParams, _super);
@@ -30,11 +30,11 @@ var GetFeedConnectionsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" }),
         __metadata("design:type", Number)
     ], GetFeedConnectionsQueryParams.prototype, "page", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=pageSize" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pageSize" }),
         __metadata("design:type", Number)
     ], GetFeedConnectionsQueryParams.prototype, "pageSize", void 0);
     return GetFeedConnectionsQueryParams;
@@ -46,7 +46,7 @@ var GetFeedConnectionsHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Xero-Tenant-Id" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Xero-Tenant-Id" }),
         __metadata("design:type", String)
     ], GetFeedConnectionsHeaders.prototype, "xeroTenantId", void 0);
     return GetFeedConnectionsHeaders;
@@ -58,7 +58,7 @@ var GetFeedConnectionsSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOAuth2)
     ], GetFeedConnectionsSecurity.prototype, "oAuth2", void 0);
     return GetFeedConnectionsSecurity;
@@ -70,15 +70,15 @@ var GetFeedConnectionsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetFeedConnectionsQueryParams)
     ], GetFeedConnectionsRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetFeedConnectionsHeaders)
     ], GetFeedConnectionsRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetFeedConnectionsSecurity)
     ], GetFeedConnectionsRequest.prototype, "security", void 0);
     return GetFeedConnectionsRequest;
@@ -90,15 +90,15 @@ var GetFeedConnectionsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetFeedConnectionsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.FeedConnections)
     ], GetFeedConnectionsResponse.prototype, "feedConnections", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetFeedConnectionsResponse.prototype, "statusCode", void 0);
     return GetFeedConnectionsResponse;

@@ -7,6 +7,8 @@ const (
 	GoogleCloudDialogflowV2FulfillmentFeatureTypeEnumSmalltalk       GoogleCloudDialogflowV2FulfillmentFeatureTypeEnum = "SMALLTALK"
 )
 
+// GoogleCloudDialogflowV2FulfillmentFeature
+// Whether fulfillment is enabled for the specific feature.
 type GoogleCloudDialogflowV2FulfillmentFeature struct {
 	Type *GoogleCloudDialogflowV2FulfillmentFeatureTypeEnum `json:"type,omitempty"`
 }

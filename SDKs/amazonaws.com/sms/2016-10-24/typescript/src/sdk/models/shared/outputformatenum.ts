@@ -1,6 +1,7 @@
 
 
+
 export enum OutputFormatEnum {
-    Json = "JSON"
-,    Yaml = "YAML"
+    Json = "JSON",
+    Yaml = "YAML"
 }

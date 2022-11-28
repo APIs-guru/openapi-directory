@@ -1,5 +1,7 @@
 package shared
 
+// TreemapChartColorScale
+// A color scale for a treemap chart.
 type TreemapChartColorScale struct {
 	MaxValueColor      *Color      `json:"maxValueColor,omitempty"`
 	MaxValueColorStyle *ColorStyle `json:"maxValueColorStyle,omitempty"`

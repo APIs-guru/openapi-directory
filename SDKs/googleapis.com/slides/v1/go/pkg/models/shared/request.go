@@ -1,5 +1,7 @@
 package shared
 
+// Request
+// A single kind of update to apply to a presentation.
 type Request struct {
 	CreateImage                     *CreateImageRequest                     `json:"createImage,omitempty"`
 	CreateLine                      *CreateLineRequest                      `json:"createLine,omitempty"`

@@ -1,5 +1,7 @@
 package shared
 
+// CreateTrailResponse
+// Returns the objects or data listed below if successful. Otherwise, returns an error.
 type CreateTrailResponse struct {
 	CloudWatchLogsLogGroupArn  *string `json:"CloudWatchLogsLogGroupArn,omitempty"`
 	CloudWatchLogsRoleArn      *string `json:"CloudWatchLogsRoleArn,omitempty"`

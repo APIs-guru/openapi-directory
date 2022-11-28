@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PayStatementSummary
@@ -6,60 +7,60 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The pay statement summary model
 **/
 export class PayStatementSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=autoPay" })
+  @SpeakeasyMetadata({ data: "json, name=autoPay" })
   autoPay?: boolean;
 
-  @Metadata({ data: "json, name=beginDate" })
+  @SpeakeasyMetadata({ data: "json, name=beginDate" })
   beginDate?: string;
 
-  @Metadata({ data: "json, name=checkDate" })
+  @SpeakeasyMetadata({ data: "json, name=checkDate" })
   checkDate?: string;
 
-  @Metadata({ data: "json, name=checkNumber" })
+  @SpeakeasyMetadata({ data: "json, name=checkNumber" })
   checkNumber?: number;
 
-  @Metadata({ data: "json, name=directDepositAmount" })
+  @SpeakeasyMetadata({ data: "json, name=directDepositAmount" })
   directDepositAmount?: number;
 
-  @Metadata({ data: "json, name=endDate" })
+  @SpeakeasyMetadata({ data: "json, name=endDate" })
   endDate?: string;
 
-  @Metadata({ data: "json, name=grossPay" })
+  @SpeakeasyMetadata({ data: "json, name=grossPay" })
   grossPay?: number;
 
-  @Metadata({ data: "json, name=hours" })
+  @SpeakeasyMetadata({ data: "json, name=hours" })
   hours?: number;
 
-  @Metadata({ data: "json, name=netCheck" })
+  @SpeakeasyMetadata({ data: "json, name=netCheck" })
   netCheck?: number;
 
-  @Metadata({ data: "json, name=netPay" })
+  @SpeakeasyMetadata({ data: "json, name=netPay" })
   netPay?: number;
 
-  @Metadata({ data: "json, name=overtimeDollars" })
+  @SpeakeasyMetadata({ data: "json, name=overtimeDollars" })
   overtimeDollars?: number;
 
-  @Metadata({ data: "json, name=overtimeHours" })
+  @SpeakeasyMetadata({ data: "json, name=overtimeHours" })
   overtimeHours?: number;
 
-  @Metadata({ data: "json, name=process" })
+  @SpeakeasyMetadata({ data: "json, name=process" })
   process?: number;
 
-  @Metadata({ data: "json, name=regularDollars" })
+  @SpeakeasyMetadata({ data: "json, name=regularDollars" })
   regularDollars?: number;
 
-  @Metadata({ data: "json, name=regularHours" })
+  @SpeakeasyMetadata({ data: "json, name=regularHours" })
   regularHours?: number;
 
-  @Metadata({ data: "json, name=transactionNumber" })
+  @SpeakeasyMetadata({ data: "json, name=transactionNumber" })
   transactionNumber?: number;
 
-  @Metadata({ data: "json, name=voucherNumber" })
+  @SpeakeasyMetadata({ data: "json, name=voucherNumber" })
   voucherNumber?: number;
 
-  @Metadata({ data: "json, name=workersCompCode" })
+  @SpeakeasyMetadata({ data: "json, name=workersCompCode" })
   workersCompCode?: string;
 
-  @Metadata({ data: "json, name=year" })
+  @SpeakeasyMetadata({ data: "json, name=year" })
   year?: number;
 }

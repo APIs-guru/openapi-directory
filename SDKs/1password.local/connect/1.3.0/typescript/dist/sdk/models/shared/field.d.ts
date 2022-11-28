@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GeneratorRecipe } from "./generatorrecipe";
 export declare enum FieldPurposeEnum {
     Unknown = "",
@@ -21,6 +21,16 @@ export declare enum FieldTypeEnum {
 }
 export declare class Field extends SpeakeasyBase {
     entropy?: number;
+    generate?: boolean;
+    id: string;
+    label?: string;
+    purpose?: FieldPurposeEnum;
+    recipe?: GeneratorRecipe;
+    section?: FieldSection;
+    type: FieldTypeEnum;
+    value?: string;
+}
+export declare class FieldInput extends SpeakeasyBase {
     generate?: boolean;
     id: string;
     label?: string;

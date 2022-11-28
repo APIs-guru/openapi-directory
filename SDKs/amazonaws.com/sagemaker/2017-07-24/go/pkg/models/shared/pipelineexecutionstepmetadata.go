@@ -1,5 +1,7 @@
 package shared
 
+// PipelineExecutionStepMetadata
+// Metadata for a step execution.
 type PipelineExecutionStepMetadata struct {
 	Callback      *CallbackStepMetadata      `json:"Callback,omitempty"`
 	Condition     *ConditionStepMetadata     `json:"Condition,omitempty"`

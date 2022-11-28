@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AnnotationPayload } from "./annotationpayload";
 import { ExamplePayload } from "./examplepayload";
+
 
 
 // PredictResponse
@@ -9,12 +9,12 @@ import { ExamplePayload } from "./examplepayload";
  * Response message for PredictionService.Predict.
 **/
 export class PredictResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: Map<string, string>;
 
-  @Metadata({ data: "json, name=payload", elemType: shared.AnnotationPayload })
+  @SpeakeasyMetadata({ data: "json, name=payload", elemType: AnnotationPayload })
   payload?: AnnotationPayload[];
 
-  @Metadata({ data: "json, name=preprocessedInput" })
+  @SpeakeasyMetadata({ data: "json, name=preprocessedInput" })
   preprocessedInput?: ExamplePayload;
 }

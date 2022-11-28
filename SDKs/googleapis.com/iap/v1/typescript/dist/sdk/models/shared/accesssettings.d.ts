@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AllowedDomainsSettings } from "./alloweddomainssettings";
 import { CorsSettings } from "./corssettings";
 import { GcipSettings } from "./gcipsettings";

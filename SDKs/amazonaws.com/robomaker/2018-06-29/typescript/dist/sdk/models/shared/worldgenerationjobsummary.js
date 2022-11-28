@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WorldGenerationJobStatusEnum } from "./worldgenerationjobstatusenum";
 import { WorldCount } from "./worldcount";
 // WorldGenerationJobSummary
@@ -35,31 +35,31 @@ var WorldGenerationJobSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=arn" }),
+        SpeakeasyMetadata({ data: "json, name=arn" }),
         __metadata("design:type", String)
     ], WorldGenerationJobSummary.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=createdAt" }),
+        SpeakeasyMetadata({ data: "json, name=createdAt" }),
         __metadata("design:type", Date)
     ], WorldGenerationJobSummary.prototype, "createdAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=failedWorldCount" }),
+        SpeakeasyMetadata({ data: "json, name=failedWorldCount" }),
         __metadata("design:type", Number)
     ], WorldGenerationJobSummary.prototype, "failedWorldCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], WorldGenerationJobSummary.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=succeededWorldCount" }),
+        SpeakeasyMetadata({ data: "json, name=succeededWorldCount" }),
         __metadata("design:type", Number)
     ], WorldGenerationJobSummary.prototype, "succeededWorldCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=template" }),
+        SpeakeasyMetadata({ data: "json, name=template" }),
         __metadata("design:type", String)
     ], WorldGenerationJobSummary.prototype, "template", void 0);
     __decorate([
-        Metadata({ data: "json, name=worldCount" }),
+        SpeakeasyMetadata({ data: "json, name=worldCount" }),
         __metadata("design:type", WorldCount)
     ], WorldGenerationJobSummary.prototype, "worldCount", void 0);
     return WorldGenerationJobSummary;

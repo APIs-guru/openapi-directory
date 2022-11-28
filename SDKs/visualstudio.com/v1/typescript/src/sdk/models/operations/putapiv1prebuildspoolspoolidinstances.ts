@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PutApiV1PrebuildsPoolsPoolIdInstancesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=poolId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=poolId" })
   poolId: string;
 }
 
 
 export class PutApiV1PrebuildsPoolsPoolIdInstancesRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
   createEnvironmentPoolResourceBody?: shared.CreateEnvironmentPoolResourceBody;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   createEnvironmentPoolResourceBody1?: shared.CreateEnvironmentPoolResourceBody;
 
-  @Metadata({ data: "request, media_type=application/json-patch+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json-patch+json" })
   createEnvironmentPoolResourceBody2?: shared.CreateEnvironmentPoolResourceBody;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   createEnvironmentPoolResourceBody3?: shared.CreateEnvironmentPoolResourceBody;
 }
 
 
 export class PutApiV1PrebuildsPoolsPoolIdInstancesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PutApiV1PrebuildsPoolsPoolIdInstancesPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request?: PutApiV1PrebuildsPoolsPoolIdInstancesRequests;
 }
 
 
 export class PutApiV1PrebuildsPoolsPoolIdInstancesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

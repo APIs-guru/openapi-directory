@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class PostRealmPartialExportPathParams:
-    realm: str = field(default=None, metadata={'path_param': { 'field_name': 'realm', 'style': 'simple', 'explode': False }})
+    realm: str = field(metadata={'path_param': { 'field_name': 'realm', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,13 +16,13 @@ class PostRealmPartialExportQueryParams:
 
 @dataclass
 class PostRealmPartialExportRequest:
-    path_params: PostRealmPartialExportPathParams = field(default=None)
-    query_params: PostRealmPartialExportQueryParams = field(default=None)
+    path_params: PostRealmPartialExportPathParams = field()
+    query_params: PostRealmPartialExportQueryParams = field()
     
 
 @dataclass
 class PostRealmPartialExportResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     realm_representation: Optional[shared.RealmRepresentation] = field(default=None)
-    status_code: int = field(default=None)
     

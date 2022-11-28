@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class CloudresourcemanagerFoldersPatchPathParams extends SpeakeasyBase {
     name: string;
@@ -24,7 +24,7 @@ export declare class CloudresourcemanagerFoldersPatchSecurity extends SpeakeasyB
 export declare class CloudresourcemanagerFoldersPatchRequest extends SpeakeasyBase {
     pathParams: CloudresourcemanagerFoldersPatchPathParams;
     queryParams: CloudresourcemanagerFoldersPatchQueryParams;
-    request?: shared.Folder;
+    request?: shared.FolderInput;
     security: CloudresourcemanagerFoldersPatchSecurity;
 }
 export declare class CloudresourcemanagerFoldersPatchResponse extends SpeakeasyBase {

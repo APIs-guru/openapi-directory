@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AmpInspectionResult } from "./ampinspectionresult";
 import { IndexStatusInspectionResult } from "./indexstatusinspectionresult";
 import { MobileUsabilityInspectionResult } from "./mobileusabilityinspectionresult";
 import { RichResultsInspectionResult } from "./richresultsinspectionresult";
+
 
 
 // UrlInspectionResult
@@ -10,18 +11,18 @@ import { RichResultsInspectionResult } from "./richresultsinspectionresult";
  * URL inspection result, including all inspection results.
 **/
 export class UrlInspectionResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ampResult" })
+  @SpeakeasyMetadata({ data: "json, name=ampResult" })
   ampResult?: AmpInspectionResult;
 
-  @Metadata({ data: "json, name=indexStatusResult" })
+  @SpeakeasyMetadata({ data: "json, name=indexStatusResult" })
   indexStatusResult?: IndexStatusInspectionResult;
 
-  @Metadata({ data: "json, name=inspectionResultLink" })
+  @SpeakeasyMetadata({ data: "json, name=inspectionResultLink" })
   inspectionResultLink?: string;
 
-  @Metadata({ data: "json, name=mobileUsabilityResult" })
+  @SpeakeasyMetadata({ data: "json, name=mobileUsabilityResult" })
   mobileUsabilityResult?: MobileUsabilityInspectionResult;
 
-  @Metadata({ data: "json, name=richResultsResult" })
+  @SpeakeasyMetadata({ data: "json, name=richResultsResult" })
   richResultsResult?: RichResultsInspectionResult;
 }

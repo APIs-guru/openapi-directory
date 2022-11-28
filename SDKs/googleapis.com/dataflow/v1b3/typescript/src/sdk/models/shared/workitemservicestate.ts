@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Status } from "./status";
 import { HotKeyDetection } from "./hotkeydetection";
 import { MetricShortId } from "./metricshortid";
@@ -8,38 +7,39 @@ import { ApproximateProgress } from "./approximateprogress";
 import { Position } from "./position";
 
 
+
 // WorkItemServiceState
 /** 
  * The Dataflow service's idea of the current state of a WorkItem being processed by a worker.
 **/
 export class WorkItemServiceState extends SpeakeasyBase {
-  @Metadata({ data: "json, name=completeWorkStatus" })
+  @SpeakeasyMetadata({ data: "json, name=completeWorkStatus" })
   completeWorkStatus?: Status;
 
-  @Metadata({ data: "json, name=harnessData" })
+  @SpeakeasyMetadata({ data: "json, name=harnessData" })
   harnessData?: Map<string, any>;
 
-  @Metadata({ data: "json, name=hotKeyDetection" })
+  @SpeakeasyMetadata({ data: "json, name=hotKeyDetection" })
   hotKeyDetection?: HotKeyDetection;
 
-  @Metadata({ data: "json, name=leaseExpireTime" })
+  @SpeakeasyMetadata({ data: "json, name=leaseExpireTime" })
   leaseExpireTime?: string;
 
-  @Metadata({ data: "json, name=metricShortId", elemType: shared.MetricShortId })
+  @SpeakeasyMetadata({ data: "json, name=metricShortId", elemType: MetricShortId })
   metricShortId?: MetricShortId[];
 
-  @Metadata({ data: "json, name=nextReportIndex" })
+  @SpeakeasyMetadata({ data: "json, name=nextReportIndex" })
   nextReportIndex?: string;
 
-  @Metadata({ data: "json, name=reportStatusInterval" })
+  @SpeakeasyMetadata({ data: "json, name=reportStatusInterval" })
   reportStatusInterval?: string;
 
-  @Metadata({ data: "json, name=splitRequest" })
+  @SpeakeasyMetadata({ data: "json, name=splitRequest" })
   splitRequest?: ApproximateSplitRequest;
 
-  @Metadata({ data: "json, name=suggestedStopPoint" })
+  @SpeakeasyMetadata({ data: "json, name=suggestedStopPoint" })
   suggestedStopPoint?: ApproximateProgress;
 
-  @Metadata({ data: "json, name=suggestedStopPosition" })
+  @SpeakeasyMetadata({ data: "json, name=suggestedStopPosition" })
   suggestedStopPosition?: Position;
 }

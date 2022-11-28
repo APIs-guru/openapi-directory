@@ -4,7 +4,7 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-var ListFaxMediaServers = []string{
+var ListFaxMediaServerList = []string{
 	"https://fax.twilio.com",
 }
 
@@ -20,13 +20,6 @@ type ListFaxMediaSecurity struct {
 	AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
 }
 
-type ListFaxMediaRequest struct {
-	ServerURL   *string
-	PathParams  ListFaxMediaPathParams
-	QueryParams ListFaxMediaQueryParams
-	Security    ListFaxMediaSecurity
-}
-
 type ListFaxMediaListFaxMediaResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
@@ -40,6 +33,13 @@ type ListFaxMediaListFaxMediaResponseMeta struct {
 type ListFaxMediaListFaxMediaResponse struct {
 	Media []shared.FaxV1FaxFaxMedia             `json:"media,omitempty"`
 	Meta  *ListFaxMediaListFaxMediaResponseMeta `json:"meta,omitempty"`
+}
+
+type ListFaxMediaRequest struct {
+	ServerURL   *string
+	PathParams  ListFaxMediaPathParams
+	QueryParams ListFaxMediaQueryParams
+	Security    ListFaxMediaSecurity
 }
 
 type ListFaxMediaResponse struct {

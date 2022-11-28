@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// BotMetadata
+// Provides information about a bot. .
 type BotMetadata struct {
 	CreatedDate     *time.Time  `json:"createdDate,omitempty"`
 	Description     *string     `json:"description,omitempty"`

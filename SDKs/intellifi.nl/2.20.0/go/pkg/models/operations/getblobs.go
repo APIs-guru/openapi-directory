@@ -31,10 +31,6 @@ type GetBlobsQueryParams struct {
 	UntilID          *string    `queryParam:"style=form,explode=true,name=until_id"`
 }
 
-type GetBlobsRequest struct {
-	QueryParams GetBlobsQueryParams
-}
-
 type GetBlobs200ApplicationJSON struct {
 	Count           *int64        `json:"count,omitempty"`
 	CountCurrent    *int64        `json:"count_current,omitempty"`
@@ -43,6 +39,10 @@ type GetBlobs200ApplicationJSON struct {
 	QueryDurationMs *int64        `json:"query_duration_ms,omitempty"`
 	Results         []shared.Blob `json:"results,omitempty"`
 	URL             *string       `json:"url,omitempty"`
+}
+
+type GetBlobsRequest struct {
+	QueryParams GetBlobsQueryParams
 }
 
 type GetBlobsResponse struct {

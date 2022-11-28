@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeauthorizeDataShareActionEnum(str, Enum):
     DEAUTHORIZE_DATA_SHARE = "DeauthorizeDataShare"
@@ -10,10 +14,10 @@ class GetDeauthorizeDataShareVersionEnum(str, Enum):
 
 @dataclass
 class GetDeauthorizeDataShareQueryParams:
-    action: GetDeauthorizeDataShareActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    consumer_identifier: str = field(default=None, metadata={'query_param': { 'field_name': 'ConsumerIdentifier', 'style': 'form', 'explode': True }})
-    data_share_arn: str = field(default=None, metadata={'query_param': { 'field_name': 'DataShareArn', 'style': 'form', 'explode': True }})
-    version: GetDeauthorizeDataShareVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetDeauthorizeDataShareActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    consumer_identifier: str = field(metadata={'query_param': { 'field_name': 'ConsumerIdentifier', 'style': 'form', 'explode': True }})
+    data_share_arn: str = field(metadata={'query_param': { 'field_name': 'DataShareArn', 'style': 'form', 'explode': True }})
+    version: GetDeauthorizeDataShareVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetDeauthorizeDataShareHeaders:
 
 @dataclass
 class GetDeauthorizeDataShareRequest:
-    query_params: GetDeauthorizeDataShareQueryParams = field(default=None)
-    headers: GetDeauthorizeDataShareHeaders = field(default=None)
+    headers: GetDeauthorizeDataShareHeaders = field()
+    query_params: GetDeauthorizeDataShareQueryParams = field()
     
 
 @dataclass
 class GetDeauthorizeDataShareResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

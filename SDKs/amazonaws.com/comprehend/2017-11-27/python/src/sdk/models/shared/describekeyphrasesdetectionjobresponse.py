@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import keyphrasesdetectionjobproperties
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeKeyPhrasesDetectionJobResponse:
-    key_phrases_detection_job_properties: Optional[keyphrasesdetectionjobproperties.KeyPhrasesDetectionJobProperties] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'KeyPhrasesDetectionJobProperties' }})
+    key_phrases_detection_job_properties: Optional[KeyPhrasesDetectionJobProperties] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('KeyPhrasesDetectionJobProperties') }})
     

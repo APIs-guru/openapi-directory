@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SubscriptionTypeEnum } from "./subscriptiontypeenum";
+
 
 
 // CreateHsmRequest
@@ -7,27 +8,27 @@ import { SubscriptionTypeEnum } from "./subscriptiontypeenum";
  * Contains the inputs for the <code>CreateHsm</code> operation.
 **/
 export class CreateHsmRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClientToken" })
+  @SpeakeasyMetadata({ data: "json, name=ClientToken" })
   clientToken?: string;
 
-  @Metadata({ data: "json, name=EniIp" })
+  @SpeakeasyMetadata({ data: "json, name=EniIp" })
   eniIp?: string;
 
-  @Metadata({ data: "json, name=ExternalId" })
+  @SpeakeasyMetadata({ data: "json, name=ExternalId" })
   externalId?: string;
 
-  @Metadata({ data: "json, name=IamRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=IamRoleArn" })
   iamRoleArn: string;
 
-  @Metadata({ data: "json, name=SshKey" })
+  @SpeakeasyMetadata({ data: "json, name=SshKey" })
   sshKey: string;
 
-  @Metadata({ data: "json, name=SubnetId" })
+  @SpeakeasyMetadata({ data: "json, name=SubnetId" })
   subnetId: string;
 
-  @Metadata({ data: "json, name=SubscriptionType" })
+  @SpeakeasyMetadata({ data: "json, name=SubscriptionType" })
   subscriptionType: SubscriptionTypeEnum;
 
-  @Metadata({ data: "json, name=SyslogIp" })
+  @SpeakeasyMetadata({ data: "json, name=SyslogIp" })
   syslogIp?: string;
 }

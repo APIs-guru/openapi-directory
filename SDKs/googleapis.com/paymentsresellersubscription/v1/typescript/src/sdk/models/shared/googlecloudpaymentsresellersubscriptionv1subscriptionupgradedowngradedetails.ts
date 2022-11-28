@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleCloudPaymentsResellerSubscriptionV1SubscriptionUpgradeDowngradeDetailsBillingCycleSpecEnum {
-    BillingCycleSpecUnspecified = "BILLING_CYCLE_SPEC_UNSPECIFIED"
-,    BillingCycleSpecAlignWithPreviousSubscription = "BILLING_CYCLE_SPEC_ALIGN_WITH_PREVIOUS_SUBSCRIPTION"
-,    BillingCycleSpecStartImmediately = "BILLING_CYCLE_SPEC_START_IMMEDIATELY"
+    BillingCycleSpecUnspecified = "BILLING_CYCLE_SPEC_UNSPECIFIED",
+    BillingCycleSpecAlignWithPreviousSubscription = "BILLING_CYCLE_SPEC_ALIGN_WITH_PREVIOUS_SUBSCRIPTION",
+    BillingCycleSpecStartImmediately = "BILLING_CYCLE_SPEC_START_IMMEDIATELY"
 }
 
 
@@ -12,9 +13,9 @@ export enum GoogleCloudPaymentsResellerSubscriptionV1SubscriptionUpgradeDowngrad
  * Details about the previous subscription that this new subscription upgrades/downgrades from.
 **/
 export class GoogleCloudPaymentsResellerSubscriptionV1SubscriptionUpgradeDowngradeDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=billingCycleSpec" })
+  @SpeakeasyMetadata({ data: "json, name=billingCycleSpec" })
   billingCycleSpec?: GoogleCloudPaymentsResellerSubscriptionV1SubscriptionUpgradeDowngradeDetailsBillingCycleSpecEnum;
 
-  @Metadata({ data: "json, name=previousSubscriptionId" })
+  @SpeakeasyMetadata({ data: "json, name=previousSubscriptionId" })
   previousSubscriptionId?: string;
 }

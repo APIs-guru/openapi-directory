@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { VisibilityTypeEnum } from "./visibilitytypeenum";
 export declare class DescribeImagesRequest extends SpeakeasyBase {
     arns?: string[];

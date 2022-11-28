@@ -9,6 +9,8 @@ const (
 	VoiceSsmlGenderEnumNeutral                    VoiceSsmlGenderEnum = "NEUTRAL"
 )
 
+// Voice
+// Description of a voice supported by the TTS service.
 type Voice struct {
 	LanguageCodes          []string             `json:"languageCodes,omitempty"`
 	Name                   *string              `json:"name,omitempty"`

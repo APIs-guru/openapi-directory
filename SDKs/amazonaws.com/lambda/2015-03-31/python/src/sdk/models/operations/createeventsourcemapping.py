@@ -1,9 +1,11 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -21,14 +23,22 @@ class CreateEventSourceMappingHeaders:
 @dataclass_json
 @dataclass
 class CreateEventSourceMappingRequestBodyDestinationConfig:
-    on_failure: Optional[shared.OnFailure] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OnFailure' }})
-    on_success: Optional[shared.OnSuccess] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OnSuccess' }})
+    r"""CreateEventSourceMappingRequestBodyDestinationConfig
+    A configuration object that specifies the destination of an event after Lambda processes it.
+    """
+    
+    on_failure: Optional[shared.OnFailure] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('OnFailure') }})
+    on_success: Optional[shared.OnSuccess] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('OnSuccess') }})
     
 
 @dataclass_json
 @dataclass
 class CreateEventSourceMappingRequestBodySelfManagedEventSource:
-    endpoints: Optional[dict[str, List[str]]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Endpoints' }})
+    r"""CreateEventSourceMappingRequestBodySelfManagedEventSource
+    The self-managed Apache Kafka cluster for your event source.
+    """
+    
+    endpoints: Optional[dict[str, List[str]]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Endpoints') }})
     
 class CreateEventSourceMappingRequestBodyStartingPositionEnum(str, Enum):
     TRIM_HORIZON = "TRIM_HORIZON"
@@ -39,40 +49,40 @@ class CreateEventSourceMappingRequestBodyStartingPositionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CreateEventSourceMappingRequestBody:
-    batch_size: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BatchSize' }})
-    bisect_batch_on_function_error: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BisectBatchOnFunctionError' }})
-    destination_config: Optional[CreateEventSourceMappingRequestBodyDestinationConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DestinationConfig' }})
-    enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Enabled' }})
-    event_source_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EventSourceArn' }})
-    function_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FunctionName' }})
-    function_response_types: Optional[List[shared.FunctionResponseTypeEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FunctionResponseTypes' }})
-    maximum_batching_window_in_seconds: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MaximumBatchingWindowInSeconds' }})
-    maximum_record_age_in_seconds: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MaximumRecordAgeInSeconds' }})
-    maximum_retry_attempts: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MaximumRetryAttempts' }})
-    parallelization_factor: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ParallelizationFactor' }})
-    queues: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Queues' }})
-    self_managed_event_source: Optional[CreateEventSourceMappingRequestBodySelfManagedEventSource] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SelfManagedEventSource' }})
-    source_access_configurations: Optional[List[shared.SourceAccessConfiguration]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SourceAccessConfigurations' }})
-    starting_position: Optional[CreateEventSourceMappingRequestBodyStartingPositionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StartingPosition' }})
-    starting_position_timestamp: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StartingPositionTimestamp', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    topics: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Topics' }})
-    tumbling_window_in_seconds: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TumblingWindowInSeconds' }})
+    function_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('FunctionName') }})
+    batch_size: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('BatchSize') }})
+    bisect_batch_on_function_error: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('BisectBatchOnFunctionError') }})
+    destination_config: Optional[CreateEventSourceMappingRequestBodyDestinationConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DestinationConfig') }})
+    enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Enabled') }})
+    event_source_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('EventSourceArn') }})
+    function_response_types: Optional[List[shared.FunctionResponseTypeEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FunctionResponseTypes') }})
+    maximum_batching_window_in_seconds: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MaximumBatchingWindowInSeconds') }})
+    maximum_record_age_in_seconds: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MaximumRecordAgeInSeconds') }})
+    maximum_retry_attempts: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MaximumRetryAttempts') }})
+    parallelization_factor: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ParallelizationFactor') }})
+    queues: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Queues') }})
+    self_managed_event_source: Optional[CreateEventSourceMappingRequestBodySelfManagedEventSource] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SelfManagedEventSource') }})
+    source_access_configurations: Optional[List[shared.SourceAccessConfiguration]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SourceAccessConfigurations') }})
+    starting_position: Optional[CreateEventSourceMappingRequestBodyStartingPositionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StartingPosition') }})
+    starting_position_timestamp: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StartingPositionTimestamp'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    topics: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Topics') }})
+    tumbling_window_in_seconds: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TumblingWindowInSeconds') }})
     
 
 @dataclass
 class CreateEventSourceMappingRequest:
-    headers: CreateEventSourceMappingHeaders = field(default=None)
-    request: CreateEventSourceMappingRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateEventSourceMappingHeaders = field()
+    request: CreateEventSourceMappingRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateEventSourceMappingResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     event_source_mapping_configuration: Optional[shared.EventSourceMappingConfiguration] = field(default=None)
     invalid_parameter_value_exception: Optional[Any] = field(default=None)
     resource_conflict_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

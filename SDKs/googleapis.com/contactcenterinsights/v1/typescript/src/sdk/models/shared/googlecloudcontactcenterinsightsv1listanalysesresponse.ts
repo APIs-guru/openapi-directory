@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudContactcenterinsightsV1Analysis } from "./googlecloudcontactcenterinsightsv1analysis";
+
 
 
 // GoogleCloudContactcenterinsightsV1ListAnalysesResponse
@@ -8,9 +8,9 @@ import { GoogleCloudContactcenterinsightsV1Analysis } from "./googlecloudcontact
  * The response to list analyses.
 **/
 export class GoogleCloudContactcenterinsightsV1ListAnalysesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=analyses", elemType: shared.GoogleCloudContactcenterinsightsV1Analysis })
+  @SpeakeasyMetadata({ data: "json, name=analyses", elemType: GoogleCloudContactcenterinsightsV1Analysis })
   analyses?: GoogleCloudContactcenterinsightsV1Analysis[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

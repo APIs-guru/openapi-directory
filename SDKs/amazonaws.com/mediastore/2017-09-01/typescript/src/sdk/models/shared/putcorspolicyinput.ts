@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CorsRule } from "./corsrule";
 
 
+
 export class PutCorsPolicyInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ContainerName" })
+  @SpeakeasyMetadata({ data: "json, name=ContainerName" })
   containerName: string;
 
-  @Metadata({ data: "json, name=CorsPolicy", elemType: shared.CorsRule })
+  @SpeakeasyMetadata({ data: "json, name=CorsPolicy", elemType: CorsRule })
   corsPolicy: CorsRule[];
 }

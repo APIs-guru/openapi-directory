@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // DistributionConfigurationSummary
 /**
  * A high-level overview of a distribution configuration.
@@ -33,31 +33,31 @@ var DistributionConfigurationSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=arn" }),
+        SpeakeasyMetadata({ data: "json, name=arn" }),
         __metadata("design:type", String)
     ], DistributionConfigurationSummary.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=dateCreated" }),
+        SpeakeasyMetadata({ data: "json, name=dateCreated" }),
         __metadata("design:type", String)
     ], DistributionConfigurationSummary.prototype, "dateCreated", void 0);
     __decorate([
-        Metadata({ data: "json, name=dateUpdated" }),
+        SpeakeasyMetadata({ data: "json, name=dateUpdated" }),
         __metadata("design:type", String)
     ], DistributionConfigurationSummary.prototype, "dateUpdated", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], DistributionConfigurationSummary.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], DistributionConfigurationSummary.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=regions" }),
+        SpeakeasyMetadata({ data: "json, name=regions" }),
         __metadata("design:type", Array)
     ], DistributionConfigurationSummary.prototype, "regions", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags" }),
+        SpeakeasyMetadata({ data: "json, name=tags" }),
         __metadata("design:type", Map)
     ], DistributionConfigurationSummary.prototype, "tags", void 0);
     return DistributionConfigurationSummary;

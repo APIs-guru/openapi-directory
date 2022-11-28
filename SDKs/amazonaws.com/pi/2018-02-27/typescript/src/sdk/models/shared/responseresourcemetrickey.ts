@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ResponseResourceMetricKey
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An object describing a Performance Insights metric and one or more dimensions for that metric.
 **/
 export class ResponseResourceMetricKey extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Dimensions" })
+  @SpeakeasyMetadata({ data: "json, name=Dimensions" })
   dimensions?: Map<string, string>;
 
-  @Metadata({ data: "json, name=Metric" })
+  @SpeakeasyMetadata({ data: "json, name=Metric" })
   metric: string;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// QueryDriveActivityRequest
+// The request message for querying Drive activity.
 type QueryDriveActivityRequest struct {
 	AncestorName          *string                `json:"ancestorName,omitempty"`
 	ConsolidationStrategy *ConsolidationStrategy `json:"consolidationStrategy,omitempty"`

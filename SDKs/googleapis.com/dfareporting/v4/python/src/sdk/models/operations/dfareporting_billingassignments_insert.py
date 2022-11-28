@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DfareportingBillingAssignmentsInsertPathParams:
-    billing_profile_id: str = field(default=None, metadata={'path_param': { 'field_name': 'billingProfileId', 'style': 'simple', 'explode': False }})
-    profile_id: str = field(default=None, metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
+    billing_profile_id: str = field(metadata={'path_param': { 'field_name': 'billingProfileId', 'style': 'simple', 'explode': False }})
+    profile_id: str = field(metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +27,21 @@ class DfareportingBillingAssignmentsInsertQueryParams:
 
 @dataclass
 class DfareportingBillingAssignmentsInsertSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DfareportingBillingAssignmentsInsertRequest:
-    path_params: DfareportingBillingAssignmentsInsertPathParams = field(default=None)
-    query_params: DfareportingBillingAssignmentsInsertQueryParams = field(default=None)
+    path_params: DfareportingBillingAssignmentsInsertPathParams = field()
+    query_params: DfareportingBillingAssignmentsInsertQueryParams = field()
+    security: DfareportingBillingAssignmentsInsertSecurity = field()
     request: Optional[shared.BillingAssignment] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DfareportingBillingAssignmentsInsertSecurity = field(default=None)
     
 
 @dataclass
 class DfareportingBillingAssignmentsInsertResponse:
+    content_type: str = field()
+    status_code: int = field()
     billing_assignment: Optional[shared.BillingAssignment] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

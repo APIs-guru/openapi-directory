@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// QuantumTaskSummary
+// Includes information about a quantum task.
 type QuantumTaskSummary struct {
 	CreatedAt         time.Time             `json:"createdAt"`
 	DeviceArn         string                `json:"deviceArn"`

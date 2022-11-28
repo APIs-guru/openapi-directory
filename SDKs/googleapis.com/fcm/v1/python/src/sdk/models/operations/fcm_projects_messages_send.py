@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class FcmProjectsMessagesSendPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class FcmProjectsMessagesSendQueryParams:
 
 @dataclass
 class FcmProjectsMessagesSendSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FcmProjectsMessagesSendSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class FcmProjectsMessagesSendSecurity:
 
 @dataclass
 class FcmProjectsMessagesSendRequest:
-    path_params: FcmProjectsMessagesSendPathParams = field(default=None)
-    query_params: FcmProjectsMessagesSendQueryParams = field(default=None)
+    path_params: FcmProjectsMessagesSendPathParams = field()
+    query_params: FcmProjectsMessagesSendQueryParams = field()
+    security: FcmProjectsMessagesSendSecurity = field()
     request: Optional[shared.SendMessageRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: FcmProjectsMessagesSendSecurity = field(default=None)
     
 
 @dataclass
 class FcmProjectsMessagesSendResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     message: Optional[shared.Message] = field(default=None)
-    status_code: int = field(default=None)
     

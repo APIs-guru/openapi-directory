@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import lookuptype
+from sdk import utils
+from . import *
 
 class ContactPointTypeValueEnum(str, Enum):
     UNIT_WEB_ADDRESS = "UNIT_WEB_ADDRESS"
@@ -19,8 +21,8 @@ class ContactPointTypeValueEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ContactPointType:
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    lookup_type: Optional[lookuptype.LookupType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lookupType' }})
-    value: Optional[ContactPointTypeValueEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    lookup_type: Optional[LookupType] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lookupType') }})
+    value: Optional[ContactPointTypeValueEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     

@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import continuousbackupsstatus_enum
-from . import pointintimerecoverydescription
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ContinuousBackupsDescription:
-    continuous_backups_status: continuousbackupsstatus_enum.ContinuousBackupsStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ContinuousBackupsStatus' }})
-    point_in_time_recovery_description: Optional[pointintimerecoverydescription.PointInTimeRecoveryDescription] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PointInTimeRecoveryDescription' }})
+    r"""ContinuousBackupsDescription
+    Represents the continuous backups and point in time recovery settings on the table.
+    """
+    
+    continuous_backups_status: ContinuousBackupsStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ContinuousBackupsStatus') }})
+    point_in_time_recovery_description: Optional[PointInTimeRecoveryDescription] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PointInTimeRecoveryDescription') }})
     

@@ -1,57 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AttachmentViewModel } from "./attachmentviewmodel";
 import { HouseEnumEnum } from "./houseenumenum";
 import { LinkedStatements } from "./linkedstatements";
 import { MemberViewModel } from "./memberviewmodel";
 
 
+
 export class StatementsViewModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=answeringBodyId" })
+  @SpeakeasyMetadata({ data: "json, name=answeringBodyId" })
   answeringBodyId?: number;
 
-  @Metadata({ data: "json, name=answeringBodyName" })
+  @SpeakeasyMetadata({ data: "json, name=answeringBodyName" })
   answeringBodyName?: string;
 
-  @Metadata({ data: "json, name=attachments", elemType: shared.AttachmentViewModel })
+  @SpeakeasyMetadata({ data: "json, name=attachments", elemType: AttachmentViewModel })
   attachments?: AttachmentViewModel[];
 
-  @Metadata({ data: "json, name=dateMade" })
+  @SpeakeasyMetadata({ data: "json, name=dateMade" })
   dateMade?: Date;
 
-  @Metadata({ data: "json, name=hasAttachments" })
+  @SpeakeasyMetadata({ data: "json, name=hasAttachments" })
   hasAttachments?: boolean;
 
-  @Metadata({ data: "json, name=hasLinkedStatements" })
+  @SpeakeasyMetadata({ data: "json, name=hasLinkedStatements" })
   hasLinkedStatements?: boolean;
 
-  @Metadata({ data: "json, name=house" })
+  @SpeakeasyMetadata({ data: "json, name=house" })
   house?: HouseEnumEnum;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=linkedStatements", elemType: shared.LinkedStatements })
+  @SpeakeasyMetadata({ data: "json, name=linkedStatements", elemType: LinkedStatements })
   linkedStatements?: LinkedStatements[];
 
-  @Metadata({ data: "json, name=member" })
+  @SpeakeasyMetadata({ data: "json, name=member" })
   member?: MemberViewModel;
 
-  @Metadata({ data: "json, name=memberId" })
+  @SpeakeasyMetadata({ data: "json, name=memberId" })
   memberId?: number;
 
-  @Metadata({ data: "json, name=memberRole" })
+  @SpeakeasyMetadata({ data: "json, name=memberRole" })
   memberRole?: string;
 
-  @Metadata({ data: "json, name=noticeNumber" })
+  @SpeakeasyMetadata({ data: "json, name=noticeNumber" })
   noticeNumber?: number;
 
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=uin" })
+  @SpeakeasyMetadata({ data: "json, name=uin" })
   uin?: string;
 }

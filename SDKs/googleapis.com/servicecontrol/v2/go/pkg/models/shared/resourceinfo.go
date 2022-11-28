@@ -1,5 +1,7 @@
 package shared
 
+// ResourceInfo
+// Describes a resource referenced in the request.
 type ResourceInfo struct {
 	Container  *string `json:"container,omitempty"`
 	Location   *string `json:"location,omitempty"`

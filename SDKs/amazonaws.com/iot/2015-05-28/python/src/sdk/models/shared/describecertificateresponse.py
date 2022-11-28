@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import certificatedescription
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeCertificateResponse:
-    certificate_description: Optional[certificatedescription.CertificateDescription] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'certificateDescription' }})
+    r"""DescribeCertificateResponse
+    The output of the DescribeCertificate operation.
+    """
+    
+    certificate_description: Optional[CertificateDescription] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('certificateDescription') }})
     

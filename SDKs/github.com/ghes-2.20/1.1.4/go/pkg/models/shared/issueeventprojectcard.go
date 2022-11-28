@@ -1,5 +1,7 @@
 package shared
 
+// IssueEventProjectCard
+// Issue Event Project Card
 type IssueEventProjectCard struct {
 	ColumnName         string  `json:"column_name"`
 	ID                 int64   `json:"id"`

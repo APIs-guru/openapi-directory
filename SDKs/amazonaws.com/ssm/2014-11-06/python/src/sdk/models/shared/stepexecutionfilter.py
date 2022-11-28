@@ -1,12 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,List
+from typing import List
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import stepexecutionfilterkey_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class StepExecutionFilter:
-    key: stepexecutionfilterkey_enum.StepExecutionFilterKeyEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Key' }})
-    values: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Values' }})
+    r"""StepExecutionFilter
+    A filter to limit the amount of step execution information returned by the call.
+    """
+    
+    key: StepExecutionFilterKeyEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Key') }})
+    values: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Values') }})
     

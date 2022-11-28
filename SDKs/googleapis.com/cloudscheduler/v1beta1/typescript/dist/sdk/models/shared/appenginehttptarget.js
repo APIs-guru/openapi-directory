@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AppEngineRouting } from "./appenginerouting";
 export var AppEngineHttpTargetHttpMethodEnum;
 (function (AppEngineHttpTargetHttpMethodEnum) {
@@ -45,23 +45,23 @@ var AppEngineHttpTarget = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=appEngineRouting" }),
+        SpeakeasyMetadata({ data: "json, name=appEngineRouting" }),
         __metadata("design:type", AppEngineRouting)
     ], AppEngineHttpTarget.prototype, "appEngineRouting", void 0);
     __decorate([
-        Metadata({ data: "json, name=body" }),
+        SpeakeasyMetadata({ data: "json, name=body" }),
         __metadata("design:type", String)
     ], AppEngineHttpTarget.prototype, "body", void 0);
     __decorate([
-        Metadata({ data: "json, name=headers" }),
+        SpeakeasyMetadata({ data: "json, name=headers" }),
         __metadata("design:type", Map)
     ], AppEngineHttpTarget.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "json, name=httpMethod" }),
+        SpeakeasyMetadata({ data: "json, name=httpMethod" }),
         __metadata("design:type", String)
     ], AppEngineHttpTarget.prototype, "httpMethod", void 0);
     __decorate([
-        Metadata({ data: "json, name=relativeUri" }),
+        SpeakeasyMetadata({ data: "json, name=relativeUri" }),
         __metadata("design:type", String)
     ], AppEngineHttpTarget.prototype, "relativeUri", void 0);
     return AppEngineHttpTarget;

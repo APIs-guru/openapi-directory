@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CommitTransactionRequest } from "./committransactionrequest";
 import { ExecuteStatementRequest } from "./executestatementrequest";
 import { FetchPageRequest } from "./fetchpagerequest";
@@ -33,35 +33,35 @@ var SendCommandRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AbortTransaction" }),
+        SpeakeasyMetadata({ data: "json, name=AbortTransaction" }),
         __metadata("design:type", Map)
     ], SendCommandRequest.prototype, "abortTransaction", void 0);
     __decorate([
-        Metadata({ data: "json, name=CommitTransaction" }),
+        SpeakeasyMetadata({ data: "json, name=CommitTransaction" }),
         __metadata("design:type", CommitTransactionRequest)
     ], SendCommandRequest.prototype, "commitTransaction", void 0);
     __decorate([
-        Metadata({ data: "json, name=EndSession" }),
+        SpeakeasyMetadata({ data: "json, name=EndSession" }),
         __metadata("design:type", Map)
     ], SendCommandRequest.prototype, "endSession", void 0);
     __decorate([
-        Metadata({ data: "json, name=ExecuteStatement" }),
+        SpeakeasyMetadata({ data: "json, name=ExecuteStatement" }),
         __metadata("design:type", ExecuteStatementRequest)
     ], SendCommandRequest.prototype, "executeStatement", void 0);
     __decorate([
-        Metadata({ data: "json, name=FetchPage" }),
+        SpeakeasyMetadata({ data: "json, name=FetchPage" }),
         __metadata("design:type", FetchPageRequest)
     ], SendCommandRequest.prototype, "fetchPage", void 0);
     __decorate([
-        Metadata({ data: "json, name=SessionToken" }),
+        SpeakeasyMetadata({ data: "json, name=SessionToken" }),
         __metadata("design:type", String)
     ], SendCommandRequest.prototype, "sessionToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=StartSession" }),
+        SpeakeasyMetadata({ data: "json, name=StartSession" }),
         __metadata("design:type", StartSessionRequest)
     ], SendCommandRequest.prototype, "startSession", void 0);
     __decorate([
-        Metadata({ data: "json, name=StartTransaction" }),
+        SpeakeasyMetadata({ data: "json, name=StartTransaction" }),
         __metadata("design:type", Map)
     ], SendCommandRequest.prototype, "startTransaction", void 0);
     return SendCommandRequest;

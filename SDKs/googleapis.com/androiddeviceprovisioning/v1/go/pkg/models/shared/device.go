@@ -1,5 +1,7 @@
 package shared
 
+// Device
+// An Android or Chrome OS device registered for zero-touch enrollment.
 type Device struct {
 	Claims           []DeviceClaim     `json:"claims,omitempty"`
 	Configuration    *string           `json:"configuration,omitempty"`

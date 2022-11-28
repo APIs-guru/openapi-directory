@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HrefType } from "./hreftype";
 import { ScaStatusAuthorisationConfirmationEnum } from "./scastatusauthorisationconfirmationenum";
+
 
 
 // AuthorisationConfirmationResponse
@@ -9,12 +9,12 @@ import { ScaStatusAuthorisationConfirmationEnum } from "./scastatusauthorisation
  * Body of the JSON response for an authorisation confirmation request.
 **/
 export class AuthorisationConfirmationResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=_links", elemType: shared.HrefType })
+  @SpeakeasyMetadata({ data: "json, name=_links", elemType: HrefType })
   links: Map<string, HrefType>;
 
-  @Metadata({ data: "json, name=psuMessage" })
+  @SpeakeasyMetadata({ data: "json, name=psuMessage" })
   psuMessage?: string;
 
-  @Metadata({ data: "json, name=scaStatus" })
+  @SpeakeasyMetadata({ data: "json, name=scaStatus" })
   scaStatus: ScaStatusAuthorisationConfirmationEnum;
 }

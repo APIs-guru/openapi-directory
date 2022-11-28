@@ -1,6 +1,7 @@
 
 
+
 export enum WindowsIpTypeEnum {
-    Dedicated = "dedicated"
-,    Shared = "shared"
+    Dedicated = "dedicated",
+    Shared = "shared"
 }

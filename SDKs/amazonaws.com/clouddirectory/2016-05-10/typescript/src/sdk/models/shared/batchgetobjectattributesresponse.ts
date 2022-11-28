@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AttributeKeyAndValue } from "./attributekeyandvalue";
+
 
 
 // BatchGetObjectAttributesResponse
@@ -8,6 +8,6 @@ import { AttributeKeyAndValue } from "./attributekeyandvalue";
  * Represents the output of a <a>GetObjectAttributes</a> response operation.
 **/
 export class BatchGetObjectAttributesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Attributes", elemType: shared.AttributeKeyAndValue })
+  @SpeakeasyMetadata({ data: "json, name=Attributes", elemType: AttributeKeyAndValue })
   attributes?: AttributeKeyAndValue[];
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ShareMethodEnum } from "./sharemethodenum";
 import { ShareTarget } from "./sharetarget";
 var ShareDirectoryRequest = /** @class */ (function (_super) {
@@ -31,19 +31,19 @@ var ShareDirectoryRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DirectoryId" }),
+        SpeakeasyMetadata({ data: "json, name=DirectoryId" }),
         __metadata("design:type", String)
     ], ShareDirectoryRequest.prototype, "directoryId", void 0);
     __decorate([
-        Metadata({ data: "json, name=ShareMethod" }),
+        SpeakeasyMetadata({ data: "json, name=ShareMethod" }),
         __metadata("design:type", String)
     ], ShareDirectoryRequest.prototype, "shareMethod", void 0);
     __decorate([
-        Metadata({ data: "json, name=ShareNotes" }),
+        SpeakeasyMetadata({ data: "json, name=ShareNotes" }),
         __metadata("design:type", String)
     ], ShareDirectoryRequest.prototype, "shareNotes", void 0);
     __decorate([
-        Metadata({ data: "json, name=ShareTarget" }),
+        SpeakeasyMetadata({ data: "json, name=ShareTarget" }),
         __metadata("design:type", ShareTarget)
     ], ShareDirectoryRequest.prototype, "shareTarget", void 0);
     return ShareDirectoryRequest;

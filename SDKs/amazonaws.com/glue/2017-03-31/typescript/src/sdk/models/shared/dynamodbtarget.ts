@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DynamoDbTarget
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies an Amazon DynamoDB table to crawl.
 **/
 export class DynamoDbTarget extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Path" })
+  @SpeakeasyMetadata({ data: "json, name=Path" })
   path?: string;
 
-  @Metadata({ data: "json, name=scanAll" })
+  @SpeakeasyMetadata({ data: "json, name=scanAll" })
   scanAll?: boolean;
 
-  @Metadata({ data: "json, name=scanRate" })
+  @SpeakeasyMetadata({ data: "json, name=scanRate" })
   scanRate?: number;
 }

@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeliveryStreamTypeEnum } from "./deliverystreamtypeenum";
 
 
+
 export class ListDeliveryStreamsInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DeliveryStreamType" })
+  @SpeakeasyMetadata({ data: "json, name=DeliveryStreamType" })
   deliveryStreamType?: DeliveryStreamTypeEnum;
 
-  @Metadata({ data: "json, name=ExclusiveStartDeliveryStreamName" })
+  @SpeakeasyMetadata({ data: "json, name=ExclusiveStartDeliveryStreamName" })
   exclusiveStartDeliveryStreamName?: string;
 
-  @Metadata({ data: "json, name=Limit" })
+  @SpeakeasyMetadata({ data: "json, name=Limit" })
   limit?: number;
 }

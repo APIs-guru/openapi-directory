@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GoogleHomeEnterpriseSdmV1ParentRelation } from "./googlehomeenterprisesdmv1parentrelation";
 // GoogleHomeEnterpriseSdmV1Device
 /**
  * Device resource represents an instance of enterprise managed device in the property.
@@ -34,19 +34,19 @@ var GoogleHomeEnterpriseSdmV1Device = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], GoogleHomeEnterpriseSdmV1Device.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=parentRelations", elemType: shared.GoogleHomeEnterpriseSdmV1ParentRelation }),
+        SpeakeasyMetadata({ data: "json, name=parentRelations", elemType: GoogleHomeEnterpriseSdmV1ParentRelation }),
         __metadata("design:type", Array)
     ], GoogleHomeEnterpriseSdmV1Device.prototype, "parentRelations", void 0);
     __decorate([
-        Metadata({ data: "json, name=traits" }),
+        SpeakeasyMetadata({ data: "json, name=traits" }),
         __metadata("design:type", Map)
     ], GoogleHomeEnterpriseSdmV1Device.prototype, "traits", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], GoogleHomeEnterpriseSdmV1Device.prototype, "type", void 0);
     return GoogleHomeEnterpriseSdmV1Device;

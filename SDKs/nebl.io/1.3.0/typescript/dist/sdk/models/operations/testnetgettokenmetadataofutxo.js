@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var TestnetGetTokenMetadataOfUtxoPathParams = /** @class */ (function (_super) {
     __extends(TestnetGetTokenMetadataOfUtxoPathParams, _super);
@@ -30,11 +30,11 @@ var TestnetGetTokenMetadataOfUtxoPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=tokenid" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=tokenid" }),
         __metadata("design:type", String)
     ], TestnetGetTokenMetadataOfUtxoPathParams.prototype, "tokenid", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=utxo" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=utxo" }),
         __metadata("design:type", String)
     ], TestnetGetTokenMetadataOfUtxoPathParams.prototype, "utxo", void 0);
     return TestnetGetTokenMetadataOfUtxoPathParams;
@@ -46,7 +46,7 @@ var TestnetGetTokenMetadataOfUtxoQueryParams = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=verbosity" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=verbosity" }),
         __metadata("design:type", Number)
     ], TestnetGetTokenMetadataOfUtxoQueryParams.prototype, "verbosity", void 0);
     return TestnetGetTokenMetadataOfUtxoQueryParams;
@@ -58,11 +58,11 @@ var TestnetGetTokenMetadataOfUtxoRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", TestnetGetTokenMetadataOfUtxoPathParams)
     ], TestnetGetTokenMetadataOfUtxoRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", TestnetGetTokenMetadataOfUtxoQueryParams)
     ], TestnetGetTokenMetadataOfUtxoRequest.prototype, "queryParams", void 0);
     return TestnetGetTokenMetadataOfUtxoRequest;
@@ -74,19 +74,19 @@ var TestnetGetTokenMetadataOfUtxoResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], TestnetGetTokenMetadataOfUtxoResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Error)
     ], TestnetGetTokenMetadataOfUtxoResponse.prototype, "error", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], TestnetGetTokenMetadataOfUtxoResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.GetTokenMetadataResponse)
     ], TestnetGetTokenMetadataOfUtxoResponse.prototype, "getTokenMetadataResponse", void 0);
     return TestnetGetTokenMetadataOfUtxoResponse;

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetStopDbInstanceActionEnum(str, Enum):
     STOP_DB_INSTANCE = "StopDBInstance"
@@ -10,10 +14,10 @@ class GetStopDbInstanceVersionEnum(str, Enum):
 
 @dataclass
 class GetStopDbInstanceQueryParams:
-    action: GetStopDbInstanceActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    db_instance_identifier: str = field(default=None, metadata={'query_param': { 'field_name': 'DBInstanceIdentifier', 'style': 'form', 'explode': True }})
+    action: GetStopDbInstanceActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    db_instance_identifier: str = field(metadata={'query_param': { 'field_name': 'DBInstanceIdentifier', 'style': 'form', 'explode': True }})
+    version: GetStopDbInstanceVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     db_snapshot_identifier: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'DBSnapshotIdentifier', 'style': 'form', 'explode': True }})
-    version: GetStopDbInstanceVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetStopDbInstanceHeaders:
 
 @dataclass
 class GetStopDbInstanceRequest:
-    query_params: GetStopDbInstanceQueryParams = field(default=None)
-    headers: GetStopDbInstanceHeaders = field(default=None)
+    headers: GetStopDbInstanceHeaders = field()
+    query_params: GetStopDbInstanceQueryParams = field()
     
 
 @dataclass
 class GetStopDbInstanceResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

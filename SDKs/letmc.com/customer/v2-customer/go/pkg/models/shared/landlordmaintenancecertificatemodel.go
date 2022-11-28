@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// LandlordMaintenanceCertificateModel
+// Maintenance Certificate
 type LandlordMaintenanceCertificateModel struct {
 	Due    *time.Time                 `json:"Due,omitempty"`
 	Files  []LettingsLandlordDocument `json:"Files,omitempty"`

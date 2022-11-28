@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetUsersUserEmailOfferingsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=userEmail" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=userEmail" })
   userEmail: string;
 }
 
 
 export class GetUsersUserEmailOfferingsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetUsersUserEmailOfferingsPathParams;
 }
 
 
 export class GetUsersUserEmailOfferingsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata({ elemType: shared.OfferingMetadataResponse })
+  @SpeakeasyMetadata({ elemType: shared.OfferingMetadataResponse })
   offeringMetadataResponses?: shared.OfferingMetadataResponse[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

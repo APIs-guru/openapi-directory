@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { FailedBatchItem } from "./failedbatchitem";
 import { UpsertRowsResult } from "./upsertrowsresult";
 export declare class BatchUpsertTableRowsResult extends SpeakeasyBase {

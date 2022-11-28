@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GeneratorRecipeCharacterSetsEnum;
 (function (GeneratorRecipeCharacterSetsEnum) {
     GeneratorRecipeCharacterSetsEnum["Letters"] = "LETTERS";
@@ -39,11 +39,11 @@ var GeneratorRecipe = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=characterSets" }),
+        SpeakeasyMetadata({ data: "json, name=characterSets" }),
         __metadata("design:type", Array)
     ], GeneratorRecipe.prototype, "characterSets", void 0);
     __decorate([
-        Metadata({ data: "json, name=length" }),
+        SpeakeasyMetadata({ data: "json, name=length" }),
         __metadata("design:type", Number)
     ], GeneratorRecipe.prototype, "length", void 0);
     return GeneratorRecipe;

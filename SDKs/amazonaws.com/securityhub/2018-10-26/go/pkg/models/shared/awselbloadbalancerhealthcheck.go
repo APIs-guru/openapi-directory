@@ -1,5 +1,7 @@
 package shared
 
+// AwsElbLoadBalancerHealthCheck
+// Contains information about the health checks that are conducted on the load balancer.
 type AwsElbLoadBalancerHealthCheck struct {
 	HealthyThreshold   *int64  `json:"HealthyThreshold,omitempty"`
 	Interval           *int64  `json:"Interval,omitempty"`

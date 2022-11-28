@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ConferenceSpRatingDefenseHavoc = /** @class */ (function (_super) {
     __extends(ConferenceSpRatingDefenseHavoc, _super);
     function ConferenceSpRatingDefenseHavoc() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=db" }),
+        SpeakeasyMetadata({ data: "json, name=db" }),
         __metadata("design:type", Number)
     ], ConferenceSpRatingDefenseHavoc.prototype, "db", void 0);
     __decorate([
-        Metadata({ data: "json, name=frontSeven" }),
+        SpeakeasyMetadata({ data: "json, name=frontSeven" }),
         __metadata("design:type", Number)
     ], ConferenceSpRatingDefenseHavoc.prototype, "frontSeven", void 0);
     __decorate([
-        Metadata({ data: "json, name=total" }),
+        SpeakeasyMetadata({ data: "json, name=total" }),
         __metadata("design:type", Number)
     ], ConferenceSpRatingDefenseHavoc.prototype, "total", void 0);
     return ConferenceSpRatingDefenseHavoc;
@@ -49,35 +49,35 @@ var ConferenceSpRatingDefense = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=explosiveness" }),
+        SpeakeasyMetadata({ data: "json, name=explosiveness" }),
         __metadata("design:type", Number)
     ], ConferenceSpRatingDefense.prototype, "explosiveness", void 0);
     __decorate([
-        Metadata({ data: "json, name=havoc" }),
+        SpeakeasyMetadata({ data: "json, name=havoc" }),
         __metadata("design:type", ConferenceSpRatingDefenseHavoc)
     ], ConferenceSpRatingDefense.prototype, "havoc", void 0);
     __decorate([
-        Metadata({ data: "json, name=pasing" }),
+        SpeakeasyMetadata({ data: "json, name=pasing" }),
         __metadata("design:type", Number)
     ], ConferenceSpRatingDefense.prototype, "pasing", void 0);
     __decorate([
-        Metadata({ data: "json, name=passingDowns" }),
+        SpeakeasyMetadata({ data: "json, name=passingDowns" }),
         __metadata("design:type", Number)
     ], ConferenceSpRatingDefense.prototype, "passingDowns", void 0);
     __decorate([
-        Metadata({ data: "json, name=rating" }),
+        SpeakeasyMetadata({ data: "json, name=rating" }),
         __metadata("design:type", Number)
     ], ConferenceSpRatingDefense.prototype, "rating", void 0);
     __decorate([
-        Metadata({ data: "json, name=rushing" }),
+        SpeakeasyMetadata({ data: "json, name=rushing" }),
         __metadata("design:type", Number)
     ], ConferenceSpRatingDefense.prototype, "rushing", void 0);
     __decorate([
-        Metadata({ data: "json, name=standardDowns" }),
+        SpeakeasyMetadata({ data: "json, name=standardDowns" }),
         __metadata("design:type", Number)
     ], ConferenceSpRatingDefense.prototype, "standardDowns", void 0);
     __decorate([
-        Metadata({ data: "json, name=success" }),
+        SpeakeasyMetadata({ data: "json, name=success" }),
         __metadata("design:type", Number)
     ], ConferenceSpRatingDefense.prototype, "success", void 0);
     return ConferenceSpRatingDefense;
@@ -89,39 +89,39 @@ var ConferenceSpRatingOffense = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=explosiveness" }),
+        SpeakeasyMetadata({ data: "json, name=explosiveness" }),
         __metadata("design:type", Number)
     ], ConferenceSpRatingOffense.prototype, "explosiveness", void 0);
     __decorate([
-        Metadata({ data: "json, name=pace" }),
+        SpeakeasyMetadata({ data: "json, name=pace" }),
         __metadata("design:type", Number)
     ], ConferenceSpRatingOffense.prototype, "pace", void 0);
     __decorate([
-        Metadata({ data: "json, name=passing" }),
+        SpeakeasyMetadata({ data: "json, name=passing" }),
         __metadata("design:type", Number)
     ], ConferenceSpRatingOffense.prototype, "passing", void 0);
     __decorate([
-        Metadata({ data: "json, name=passingDowns" }),
+        SpeakeasyMetadata({ data: "json, name=passingDowns" }),
         __metadata("design:type", Number)
     ], ConferenceSpRatingOffense.prototype, "passingDowns", void 0);
     __decorate([
-        Metadata({ data: "json, name=rating" }),
+        SpeakeasyMetadata({ data: "json, name=rating" }),
         __metadata("design:type", Number)
     ], ConferenceSpRatingOffense.prototype, "rating", void 0);
     __decorate([
-        Metadata({ data: "json, name=runRate" }),
+        SpeakeasyMetadata({ data: "json, name=runRate" }),
         __metadata("design:type", Number)
     ], ConferenceSpRatingOffense.prototype, "runRate", void 0);
     __decorate([
-        Metadata({ data: "json, name=rushing" }),
+        SpeakeasyMetadata({ data: "json, name=rushing" }),
         __metadata("design:type", Number)
     ], ConferenceSpRatingOffense.prototype, "rushing", void 0);
     __decorate([
-        Metadata({ data: "json, name=standardDowns" }),
+        SpeakeasyMetadata({ data: "json, name=standardDowns" }),
         __metadata("design:type", Number)
     ], ConferenceSpRatingOffense.prototype, "standardDowns", void 0);
     __decorate([
-        Metadata({ data: "json, name=success" }),
+        SpeakeasyMetadata({ data: "json, name=success" }),
         __metadata("design:type", Number)
     ], ConferenceSpRatingOffense.prototype, "success", void 0);
     return ConferenceSpRatingOffense;
@@ -133,7 +133,7 @@ var ConferenceSpRatingSpecialTeams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=rating" }),
+        SpeakeasyMetadata({ data: "json, name=rating" }),
         __metadata("design:type", Number)
     ], ConferenceSpRatingSpecialTeams.prototype, "rating", void 0);
     return ConferenceSpRatingSpecialTeams;
@@ -145,35 +145,35 @@ var ConferenceSpRating = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=conference" }),
+        SpeakeasyMetadata({ data: "json, name=conference" }),
         __metadata("design:type", String)
     ], ConferenceSpRating.prototype, "conference", void 0);
     __decorate([
-        Metadata({ data: "json, name=defense" }),
+        SpeakeasyMetadata({ data: "json, name=defense" }),
         __metadata("design:type", ConferenceSpRatingDefense)
     ], ConferenceSpRating.prototype, "defense", void 0);
     __decorate([
-        Metadata({ data: "json, name=offense" }),
+        SpeakeasyMetadata({ data: "json, name=offense" }),
         __metadata("design:type", ConferenceSpRatingOffense)
     ], ConferenceSpRating.prototype, "offense", void 0);
     __decorate([
-        Metadata({ data: "json, name=rating" }),
+        SpeakeasyMetadata({ data: "json, name=rating" }),
         __metadata("design:type", Number)
     ], ConferenceSpRating.prototype, "rating", void 0);
     __decorate([
-        Metadata({ data: "json, name=secondOrderWins" }),
+        SpeakeasyMetadata({ data: "json, name=secondOrderWins" }),
         __metadata("design:type", Number)
     ], ConferenceSpRating.prototype, "secondOrderWins", void 0);
     __decorate([
-        Metadata({ data: "json, name=sos" }),
+        SpeakeasyMetadata({ data: "json, name=sos" }),
         __metadata("design:type", Number)
     ], ConferenceSpRating.prototype, "sos", void 0);
     __decorate([
-        Metadata({ data: "json, name=specialTeams" }),
+        SpeakeasyMetadata({ data: "json, name=specialTeams" }),
         __metadata("design:type", ConferenceSpRatingSpecialTeams)
     ], ConferenceSpRating.prototype, "specialTeams", void 0);
     __decorate([
-        Metadata({ data: "json, name=year" }),
+        SpeakeasyMetadata({ data: "json, name=year" }),
         __metadata("design:type", Number)
     ], ConferenceSpRating.prototype, "year", void 0);
     return ConferenceSpRating;

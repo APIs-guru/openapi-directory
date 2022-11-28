@@ -8,10 +8,6 @@ type DirectiveDetailsPathParams struct {
 	DirectiveID string `pathParam:"style=simple,explode=false,name=directiveId"`
 }
 
-type DirectiveDetailsRequest struct {
-	PathParams DirectiveDetailsPathParams
-}
-
 type DirectiveDetails200ApplicationJSONActionEnum string
 
 const (
@@ -33,6 +29,10 @@ type DirectiveDetails200ApplicationJSON struct {
 	Action DirectiveDetails200ApplicationJSONActionEnum `json:"action"`
 	Data   DirectiveDetails200ApplicationJSONData       `json:"data"`
 	Result DirectiveDetails200ApplicationJSONResultEnum `json:"result"`
+}
+
+type DirectiveDetailsRequest struct {
+	PathParams DirectiveDetailsPathParams
 }
 
 type DirectiveDetailsResponse struct {

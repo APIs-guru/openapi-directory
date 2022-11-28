@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteAssociationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DestinationArn" })
+  @SpeakeasyMetadata({ data: "json, name=DestinationArn" })
   destinationArn: string;
 
-  @Metadata({ data: "json, name=SourceArn" })
+  @SpeakeasyMetadata({ data: "json, name=SourceArn" })
   sourceArn: string;
 }

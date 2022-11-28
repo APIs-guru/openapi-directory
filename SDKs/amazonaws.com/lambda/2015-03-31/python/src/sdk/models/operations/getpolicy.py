@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetPolicyPathParams:
-    function_name: str = field(default=None, metadata={'path_param': { 'field_name': 'FunctionName', 'style': 'simple', 'explode': False }})
+    function_name: str = field(metadata={'path_param': { 'field_name': 'FunctionName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,18 +29,18 @@ class GetPolicyHeaders:
 
 @dataclass
 class GetPolicyRequest:
-    path_params: GetPolicyPathParams = field(default=None)
-    query_params: GetPolicyQueryParams = field(default=None)
-    headers: GetPolicyHeaders = field(default=None)
+    headers: GetPolicyHeaders = field()
+    path_params: GetPolicyPathParams = field()
+    query_params: GetPolicyQueryParams = field()
     
 
 @dataclass
 class GetPolicyResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_policy_response: Optional[shared.GetPolicyResponse] = field(default=None)
     invalid_parameter_value_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

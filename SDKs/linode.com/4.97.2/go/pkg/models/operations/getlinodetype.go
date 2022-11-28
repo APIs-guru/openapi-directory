@@ -8,12 +8,12 @@ type GetLinodeTypePathParams struct {
 	TypeID string `pathParam:"style=simple,explode=false,name=typeId"`
 }
 
-type GetLinodeTypeRequest struct {
-	PathParams GetLinodeTypePathParams
-}
-
 type GetLinodeTypeDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type GetLinodeTypeRequest struct {
+	PathParams GetLinodeTypePathParams
 }
 
 type GetLinodeTypeResponse struct {

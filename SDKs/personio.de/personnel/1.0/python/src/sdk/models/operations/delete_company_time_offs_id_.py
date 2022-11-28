@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class DeleteCompanyTimeOffsIDPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DeleteCompanyTimeOffsIDRequest:
-    path_params: DeleteCompanyTimeOffsIDPathParams = field(default=None)
+    path_params: DeleteCompanyTimeOffsIDPathParams = field()
     
 
 @dataclass
 class DeleteCompanyTimeOffsIDResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     response: Optional[shared.Response] = field(default=None)
-    status_code: int = field(default=None)
     

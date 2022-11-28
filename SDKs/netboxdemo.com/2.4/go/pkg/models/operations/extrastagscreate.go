@@ -5,7 +5,7 @@ import (
 )
 
 type ExtrasTagsCreateRequest struct {
-	Request shared.Tag `request:"mediaType=application/json"`
+	Request shared.TagInput `request:"mediaType=application/json"`
 }
 
 type ExtrasTagsCreateResponse struct {

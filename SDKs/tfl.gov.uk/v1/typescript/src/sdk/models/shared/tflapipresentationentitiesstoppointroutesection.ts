@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TflApiPresentationEntitiesStopPointRouteSection extends SpeakeasyBase {
-  @Metadata({ data: "json, name=destinationName" })
+  @SpeakeasyMetadata({ data: "json, name=destinationName" })
   destinationName?: string;
 
-  @Metadata({ data: "json, name=direction" })
+  @SpeakeasyMetadata({ data: "json, name=direction" })
   direction?: string;
 
-  @Metadata({ data: "json, name=isActive" })
+  @SpeakeasyMetadata({ data: "json, name=isActive" })
   isActive?: boolean;
 
-  @Metadata({ data: "json, name=lineId" })
+  @SpeakeasyMetadata({ data: "json, name=lineId" })
   lineId?: string;
 
-  @Metadata({ data: "json, name=lineString" })
+  @SpeakeasyMetadata({ data: "json, name=lineString" })
   lineString?: string;
 
-  @Metadata({ data: "json, name=mode" })
+  @SpeakeasyMetadata({ data: "json, name=mode" })
   mode?: string;
 
-  @Metadata({ data: "json, name=naptanId" })
+  @SpeakeasyMetadata({ data: "json, name=naptanId" })
   naptanId?: string;
 
-  @Metadata({ data: "json, name=routeSectionName" })
+  @SpeakeasyMetadata({ data: "json, name=routeSectionName" })
   routeSectionName?: string;
 
-  @Metadata({ data: "json, name=serviceType" })
+  @SpeakeasyMetadata({ data: "json, name=serviceType" })
   serviceType?: string;
 
-  @Metadata({ data: "json, name=validFrom" })
+  @SpeakeasyMetadata({ data: "json, name=validFrom" })
   validFrom?: Date;
 
-  @Metadata({ data: "json, name=validTo" })
+  @SpeakeasyMetadata({ data: "json, name=validTo" })
   validTo?: Date;
 
-  @Metadata({ data: "json, name=vehicleDestinationText" })
+  @SpeakeasyMetadata({ data: "json, name=vehicleDestinationText" })
   vehicleDestinationText?: string;
 }

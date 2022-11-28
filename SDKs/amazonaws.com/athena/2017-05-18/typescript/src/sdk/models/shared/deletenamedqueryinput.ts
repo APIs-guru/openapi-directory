@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteNamedQueryInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NamedQueryId" })
+  @SpeakeasyMetadata({ data: "json, name=NamedQueryId" })
   namedQueryId: string;
 }

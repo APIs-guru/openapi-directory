@@ -1,7 +1,9 @@
 package shared
 
-type ReplaceSitesRequest struct {
-	AdvertiserID *string `json:"advertiserId,omitempty"`
-	NewSites     []Site  `json:"newSites,omitempty"`
-	PartnerID    *string `json:"partnerId,omitempty"`
+// ReplaceSitesRequestInput
+// Request message for SiteService.ReplaceSites.
+type ReplaceSitesRequestInput struct {
+	AdvertiserID *string     `json:"advertiserId,omitempty"`
+	NewSites     []SiteInput `json:"newSites,omitempty"`
+	PartnerID    *string     `json:"partnerId,omitempty"`
 }

@@ -1,6 +1,7 @@
 
 
+
 export enum OrderStringEnum {
-    Asc = "ASC"
-,    Desc = "DESC"
+    Asc = "ASC",
+    Desc = "DESC"
 }

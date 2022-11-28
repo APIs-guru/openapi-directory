@@ -1,15 +1,16 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class PatternsGetPatternByRunPathParams:
-    route_type: int = field(default=None, metadata={'path_param': { 'field_name': 'route_type', 'style': 'simple', 'explode': False }})
-    run_ref: str = field(default=None, metadata={'path_param': { 'field_name': 'run_ref', 'style': 'simple', 'explode': False }})
+    route_type: int = field(metadata={'path_param': { 'field_name': 'route_type', 'style': 'simple', 'explode': False }})
+    run_ref: str = field(metadata={'path_param': { 'field_name': 'run_ref', 'style': 'simple', 'explode': False }})
     
 class PatternsGetPatternByRunExpandEnum(str, Enum):
     ALL = "All"
@@ -25,9 +26,9 @@ class PatternsGetPatternByRunExpandEnum(str, Enum):
 
 @dataclass
 class PatternsGetPatternByRunQueryParams:
+    expand: List[PatternsGetPatternByRunExpandEnum] = field(metadata={'query_param': { 'field_name': 'expand', 'style': 'form', 'explode': True }})
     date_utc: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'date_utc', 'style': 'form', 'explode': True }})
     devid: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'devid', 'style': 'form', 'explode': True }})
-    expand: List[PatternsGetPatternByRunExpandEnum] = field(default=None, metadata={'query_param': { 'field_name': 'expand', 'style': 'form', 'explode': True }})
     include_geopath: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'include_geopath', 'style': 'form', 'explode': True }})
     include_skipped_stops: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'include_skipped_stops', 'style': 'form', 'explode': True }})
     signature: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'signature', 'style': 'form', 'explode': True }})
@@ -37,15 +38,15 @@ class PatternsGetPatternByRunQueryParams:
 
 @dataclass
 class PatternsGetPatternByRunRequest:
-    path_params: PatternsGetPatternByRunPathParams = field(default=None)
-    query_params: PatternsGetPatternByRunQueryParams = field(default=None)
+    path_params: PatternsGetPatternByRunPathParams = field()
+    query_params: PatternsGetPatternByRunQueryParams = field()
     
 
 @dataclass
 class PatternsGetPatternByRunResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     v3_error_response: Optional[shared.V3ErrorResponse] = field(default=None)
     v3_stopping_pattern: Optional[shared.V3StoppingPattern] = field(default=None)
     

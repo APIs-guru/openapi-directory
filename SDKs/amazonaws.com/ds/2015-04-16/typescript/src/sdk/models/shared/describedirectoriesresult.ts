@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DirectoryDescription } from "./directorydescription";
+
 
 
 // DescribeDirectoriesResult
@@ -8,9 +8,9 @@ import { DirectoryDescription } from "./directorydescription";
  * Contains the results of the <a>DescribeDirectories</a> operation.
 **/
 export class DescribeDirectoriesResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DirectoryDescriptions", elemType: shared.DirectoryDescription })
+  @SpeakeasyMetadata({ data: "json, name=DirectoryDescriptions", elemType: DirectoryDescription })
   directoryDescriptions?: DirectoryDescription[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

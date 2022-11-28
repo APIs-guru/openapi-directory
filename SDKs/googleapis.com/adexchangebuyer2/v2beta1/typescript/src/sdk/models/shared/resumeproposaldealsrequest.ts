@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ResumeProposalDealsRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request message to resume (unpause) serving for already-finalized deals.
 **/
 export class ResumeProposalDealsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=externalDealIds" })
+  @SpeakeasyMetadata({ data: "json, name=externalDealIds" })
   externalDealIds?: string[];
 }

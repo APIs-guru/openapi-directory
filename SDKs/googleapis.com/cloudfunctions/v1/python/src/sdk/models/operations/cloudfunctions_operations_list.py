@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -24,19 +25,19 @@ class CloudfunctionsOperationsListQueryParams:
 
 @dataclass
 class CloudfunctionsOperationsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudfunctionsOperationsListRequest:
-    query_params: CloudfunctionsOperationsListQueryParams = field(default=None)
-    security: CloudfunctionsOperationsListSecurity = field(default=None)
+    query_params: CloudfunctionsOperationsListQueryParams = field()
+    security: CloudfunctionsOperationsListSecurity = field()
     
 
 @dataclass
 class CloudfunctionsOperationsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_operations_response: Optional[shared.ListOperationsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

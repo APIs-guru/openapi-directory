@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,21 +19,21 @@ class GetGoalsQueryParams:
     workspace: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'workspace', 'style': 'form', 'explode': True }})
     
 
-@dataclass
-class GetGoalsRequest:
-    query_params: GetGoalsQueryParams = field(default=None)
-    
-
 @dataclass_json
 @dataclass
 class GetGoals200ApplicationJSON:
-    data: Optional[List[shared.GoalCompact]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
+    data: Optional[List[shared.GoalCompact]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
+    
+
+@dataclass
+class GetGoalsRequest:
+    query_params: GetGoalsQueryParams = field()
     
 
 @dataclass
 class GetGoalsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     get_goals_200_application_json_object: Optional[GetGoals200ApplicationJSON] = field(default=None)
     

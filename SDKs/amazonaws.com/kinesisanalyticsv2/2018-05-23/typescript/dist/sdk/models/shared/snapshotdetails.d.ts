@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { SnapshotStatusEnum } from "./snapshotstatusenum";
 /**
  * Provides details about a snapshot of application state.

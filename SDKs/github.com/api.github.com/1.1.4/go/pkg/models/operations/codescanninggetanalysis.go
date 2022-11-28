@@ -10,14 +10,14 @@ type CodeScanningGetAnalysisPathParams struct {
 	Repo       string `pathParam:"style=simple,explode=false,name=repo"`
 }
 
-type CodeScanningGetAnalysisRequest struct {
-	PathParams CodeScanningGetAnalysisPathParams
-}
-
 type CodeScanningGetAnalysis503ApplicationJSON struct {
 	Code             *string `json:"code,omitempty"`
 	DocumentationURL *string `json:"documentation_url,omitempty"`
 	Message          *string `json:"message,omitempty"`
+}
+
+type CodeScanningGetAnalysisRequest struct {
+	PathParams CodeScanningGetAnalysisPathParams
 }
 
 type CodeScanningGetAnalysisResponse struct {

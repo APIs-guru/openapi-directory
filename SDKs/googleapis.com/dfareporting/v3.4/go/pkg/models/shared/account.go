@@ -20,6 +20,8 @@ const (
 	AccountActiveAdsLimitTierEnumActiveAdsTier1M   AccountActiveAdsLimitTierEnum = "ACTIVE_ADS_TIER_1M"
 )
 
+// Account
+// Contains properties of a Campaign Manager account.
 type Account struct {
 	AccountPermissionIds    []string                       `json:"accountPermissionIds,omitempty"`
 	AccountProfile          *AccountAccountProfileEnum     `json:"accountProfile,omitempty"`

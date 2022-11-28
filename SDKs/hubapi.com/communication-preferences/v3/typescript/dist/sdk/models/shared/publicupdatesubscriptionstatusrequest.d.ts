@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum PublicUpdateSubscriptionStatusRequestLegalBasisEnum {
     LegitimateInterestPql = "LEGITIMATE_INTEREST_PQL",
     LegitimateInterestClient = "LEGITIMATE_INTEREST_CLIENT",

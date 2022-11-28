@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ProfileTokenRequestCookieTypeEnum {
-    Session = "Session"
-,    Persistent = "Persistent"
+    Session = "Session",
+    Persistent = "Persistent"
 }
 
 export enum ProfileTokenRequestScopesEnum {
-    Catalog = "Catalog"
-,    Commerce = "Commerce"
-,    Settings = "Settings"
+    Catalog = "Catalog",
+    Commerce = "Commerce",
+    Settings = "Settings"
 }
 
 
 export class ProfileTokenRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cookieType" })
+  @SpeakeasyMetadata({ data: "json, name=cookieType" })
   cookieType?: ProfileTokenRequestCookieTypeEnum;
 
-  @Metadata({ data: "json, name=pin" })
+  @SpeakeasyMetadata({ data: "json, name=pin" })
   pin?: string;
 
-  @Metadata({ data: "json, name=profileId" })
+  @SpeakeasyMetadata({ data: "json, name=profileId" })
   profileId: string;
 
-  @Metadata({ data: "json, name=scopes" })
+  @SpeakeasyMetadata({ data: "json, name=scopes" })
   scopes: ProfileTokenRequestScopesEnum[];
 }

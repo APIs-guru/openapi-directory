@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ConfigSnmPv3 = /** @class */ (function (_super) {
     __extends(ConfigSnmPv3, _super);
     function ConfigSnmPv3() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=context_engine_id" }),
+        SpeakeasyMetadata({ data: "json, name=context_engine_id" }),
         __metadata("design:type", String)
     ], ConfigSnmPv3.prototype, "contextEngineId", void 0);
     __decorate([
-        Metadata({ data: "json, name=engine_id" }),
+        SpeakeasyMetadata({ data: "json, name=engine_id" }),
         __metadata("design:type", String)
     ], ConfigSnmPv3.prototype, "engineId", void 0);
     __decorate([
-        Metadata({ data: "json, name=usm_db" }),
+        SpeakeasyMetadata({ data: "json, name=usm_db" }),
         __metadata("design:type", String)
     ], ConfigSnmPv3.prototype, "usmDb", void 0);
     __decorate([
-        Metadata({ data: "json, name=vacm_db" }),
+        SpeakeasyMetadata({ data: "json, name=vacm_db" }),
         __metadata("design:type", String)
     ], ConfigSnmPv3.prototype, "vacmDb", void 0);
     return ConfigSnmPv3;

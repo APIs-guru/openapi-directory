@@ -1,19 +1,12 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { MaintenancePolicy } from "./maintenancepolicy";
 import { MaintenanceSchedule } from "./maintenanceschedule";
 import { NodeInfo } from "./nodeinfo";
 import { PersistenceConfig } from "./persistenceconfig";
 import { TlsCertificate } from "./tlscertificate";
-export declare enum InstanceConnectModeEnum {
-    ConnectModeUnspecified = "CONNECT_MODE_UNSPECIFIED",
-    DirectPeering = "DIRECT_PEERING",
-    PrivateServiceAccess = "PRIVATE_SERVICE_ACCESS"
-}
-export declare enum InstanceReadReplicasModeEnum {
-    ReadReplicasModeUnspecified = "READ_REPLICAS_MODE_UNSPECIFIED",
-    ReadReplicasDisabled = "READ_REPLICAS_DISABLED",
-    ReadReplicasEnabled = "READ_REPLICAS_ENABLED"
-}
+import { MaintenancePolicyInput } from "./maintenancepolicy";
+import { MaintenanceScheduleInput } from "./maintenanceschedule";
+import { PersistenceConfigInput } from "./persistenceconfig";
 export declare enum InstanceStateEnum {
     StateUnspecified = "STATE_UNSPECIFIED",
     Creating = "CREATING",
@@ -24,6 +17,16 @@ export declare enum InstanceStateEnum {
     Maintenance = "MAINTENANCE",
     Importing = "IMPORTING",
     FailingOver = "FAILING_OVER"
+}
+export declare enum InstanceConnectModeEnum {
+    ConnectModeUnspecified = "CONNECT_MODE_UNSPECIFIED",
+    DirectPeering = "DIRECT_PEERING",
+    PrivateServiceAccess = "PRIVATE_SERVICE_ACCESS"
+}
+export declare enum InstanceReadReplicasModeEnum {
+    ReadReplicasModeUnspecified = "READ_REPLICAS_MODE_UNSPECIFIED",
+    ReadReplicasDisabled = "READ_REPLICAS_DISABLED",
+    ReadReplicasEnabled = "READ_REPLICAS_ENABLED"
 }
 export declare enum InstanceSuspensionReasonsEnum {
     SuspensionReasonUnspecified = "SUSPENSION_REASON_UNSPECIFIED",
@@ -73,6 +76,33 @@ export declare class Instance extends SpeakeasyBase {
     serverCaCerts?: TlsCertificate[];
     state?: InstanceStateEnum;
     statusMessage?: string;
+    suspensionReasons?: InstanceSuspensionReasonsEnum[];
+    tier?: InstanceTierEnum;
+    transitEncryptionMode?: InstanceTransitEncryptionModeEnum;
+}
+/**
+ * A Memorystore for Redis instance.
+**/
+export declare class InstanceInput extends SpeakeasyBase {
+    alternativeLocationId?: string;
+    authEnabled?: boolean;
+    authorizedNetwork?: string;
+    connectMode?: InstanceConnectModeEnum;
+    customerManagedKey?: string;
+    displayName?: string;
+    labels?: Map<string, string>;
+    locationId?: string;
+    maintenancePolicy?: MaintenancePolicyInput;
+    maintenanceSchedule?: MaintenanceScheduleInput;
+    memorySizeGb?: number;
+    name?: string;
+    persistenceConfig?: PersistenceConfigInput;
+    readReplicasMode?: InstanceReadReplicasModeEnum;
+    redisConfigs?: Map<string, string>;
+    redisVersion?: string;
+    replicaCount?: number;
+    reservedIpRange?: string;
+    secondaryIpRange?: string;
     suspensionReasons?: InstanceSuspensionReasonsEnum[];
     tier?: InstanceTierEnum;
     transitEncryptionMode?: InstanceTransitEncryptionModeEnum;

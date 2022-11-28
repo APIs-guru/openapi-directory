@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var FantasyDefenseGameStatsByTeamFormatEnum;
 (function (FantasyDefenseGameStatsByTeamFormatEnum) {
     FantasyDefenseGameStatsByTeamFormatEnum["Xml"] = "XML";
@@ -34,19 +34,19 @@ var FantasyDefenseGameStatsByTeamPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=format" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" }),
         __metadata("design:type", String)
     ], FantasyDefenseGameStatsByTeamPathParams.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=season" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=season" }),
         __metadata("design:type", String)
     ], FantasyDefenseGameStatsByTeamPathParams.prototype, "season", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=team" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=team" }),
         __metadata("design:type", String)
     ], FantasyDefenseGameStatsByTeamPathParams.prototype, "team", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=week" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=week" }),
         __metadata("design:type", String)
     ], FantasyDefenseGameStatsByTeamPathParams.prototype, "week", void 0);
     return FantasyDefenseGameStatsByTeamPathParams;
@@ -58,7 +58,7 @@ var FantasyDefenseGameStatsByTeamRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FantasyDefenseGameStatsByTeamPathParams)
     ], FantasyDefenseGameStatsByTeamRequest.prototype, "pathParams", void 0);
     return FantasyDefenseGameStatsByTeamRequest;
@@ -70,15 +70,15 @@ var FantasyDefenseGameStatsByTeamResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], FantasyDefenseGameStatsByTeamResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], FantasyDefenseGameStatsByTeamResponse.prototype, "fantasyDefenseGame", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], FantasyDefenseGameStatsByTeamResponse.prototype, "statusCode", void 0);
     return FantasyDefenseGameStatsByTeamResponse;

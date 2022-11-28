@@ -1,5 +1,7 @@
 package shared
 
+// StartChildWorkflowExecutionFailedEventAttributes
+// Provides the details of the <code>StartChildWorkflowExecutionFailed</code> event.
 type StartChildWorkflowExecutionFailedEventAttributes struct {
 	Cause                        StartChildWorkflowExecutionFailedCauseEnum `json:"cause"`
 	Control                      *string                                    `json:"control,omitempty"`

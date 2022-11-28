@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudschedulerProjectsLocationsListPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,20 +29,20 @@ class CloudschedulerProjectsLocationsListQueryParams:
 
 @dataclass
 class CloudschedulerProjectsLocationsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudschedulerProjectsLocationsListRequest:
-    path_params: CloudschedulerProjectsLocationsListPathParams = field(default=None)
-    query_params: CloudschedulerProjectsLocationsListQueryParams = field(default=None)
-    security: CloudschedulerProjectsLocationsListSecurity = field(default=None)
+    path_params: CloudschedulerProjectsLocationsListPathParams = field()
+    query_params: CloudschedulerProjectsLocationsListQueryParams = field()
+    security: CloudschedulerProjectsLocationsListSecurity = field()
     
 
 @dataclass
 class CloudschedulerProjectsLocationsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_locations_response: Optional[shared.ListLocationsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

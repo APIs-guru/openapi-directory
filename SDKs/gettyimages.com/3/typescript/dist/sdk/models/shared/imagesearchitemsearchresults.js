@@ -22,23 +22,24 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ImageSearchItem } from "./imagesearchitem";
+import { RelatedSearch } from "./relatedsearch";
 var ImageSearchItemSearchResults = /** @class */ (function (_super) {
     __extends(ImageSearchItemSearchResults, _super);
     function ImageSearchItemSearchResults() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=images", elemType: shared.ImageSearchItem }),
+        SpeakeasyMetadata({ data: "json, name=images", elemType: ImageSearchItem }),
         __metadata("design:type", Array)
     ], ImageSearchItemSearchResults.prototype, "images", void 0);
     __decorate([
-        Metadata({ data: "json, name=related_searches", elemType: shared.RelatedSearch }),
+        SpeakeasyMetadata({ data: "json, name=related_searches", elemType: RelatedSearch }),
         __metadata("design:type", Array)
     ], ImageSearchItemSearchResults.prototype, "relatedSearches", void 0);
     __decorate([
-        Metadata({ data: "json, name=result_count" }),
+        SpeakeasyMetadata({ data: "json, name=result_count" }),
         __metadata("design:type", Number)
     ], ImageSearchItemSearchResults.prototype, "resultCount", void 0);
     return ImageSearchItemSearchResults;

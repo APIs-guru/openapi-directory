@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ApiDestinationHttpMethodEnum } from "./apidestinationhttpmethodenum";
 export declare class CreateApiDestinationRequest extends SpeakeasyBase {
     connectionArn: string;

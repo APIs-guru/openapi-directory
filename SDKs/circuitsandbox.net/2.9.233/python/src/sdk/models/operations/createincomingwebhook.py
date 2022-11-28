@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
 from typing import Any,Optional
+from sdk.models import shared
 
 
 @dataclass
 class CreateIncomingWebhookPathParams:
-    conversation_id: str = field(default=None, metadata={'path_param': { 'field_name': 'conversationId', 'style': 'simple', 'explode': False }})
+    conversation_id: str = field(metadata={'path_param': { 'field_name': 'conversationId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,20 +17,20 @@ class CreateIncomingWebhookQueryParams:
 
 @dataclass
 class CreateIncomingWebhookSecurity:
-    oauth: shared.SchemeOauth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth: shared.SchemeOauth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CreateIncomingWebhookRequest:
-    path_params: CreateIncomingWebhookPathParams = field(default=None)
-    query_params: CreateIncomingWebhookQueryParams = field(default=None)
-    security: CreateIncomingWebhookSecurity = field(default=None)
+    path_params: CreateIncomingWebhookPathParams = field()
+    query_params: CreateIncomingWebhookQueryParams = field()
+    security: CreateIncomingWebhookSecurity = field()
     
 
 @dataclass
 class CreateIncomingWebhookResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     incoming_webhook: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

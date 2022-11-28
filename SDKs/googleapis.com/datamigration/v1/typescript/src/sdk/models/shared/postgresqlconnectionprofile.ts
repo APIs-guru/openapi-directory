@@ -1,10 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SslConfig } from "./sslconfig";
+import { SslConfigInput } from "./sslconfig";
+
 
 export enum PostgreSqlConnectionProfileNetworkArchitectureEnum {
-    NetworkArchitectureUnspecified = "NETWORK_ARCHITECTURE_UNSPECIFIED"
-,    NetworkArchitectureOldCsqlProducer = "NETWORK_ARCHITECTURE_OLD_CSQL_PRODUCER"
-,    NetworkArchitectureNewCsqlProducer = "NETWORK_ARCHITECTURE_NEW_CSQL_PRODUCER"
+    NetworkArchitectureUnspecified = "NETWORK_ARCHITECTURE_UNSPECIFIED",
+    NetworkArchitectureOldCsqlProducer = "NETWORK_ARCHITECTURE_OLD_CSQL_PRODUCER",
+    NetworkArchitectureNewCsqlProducer = "NETWORK_ARCHITECTURE_NEW_CSQL_PRODUCER"
 }
 
 
@@ -13,27 +15,52 @@ export enum PostgreSqlConnectionProfileNetworkArchitectureEnum {
  * Specifies connection parameters required specifically for PostgreSQL databases.
 **/
 export class PostgreSqlConnectionProfile extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cloudSqlId" })
+  @SpeakeasyMetadata({ data: "json, name=cloudSqlId" })
   cloudSqlId?: string;
 
-  @Metadata({ data: "json, name=host" })
+  @SpeakeasyMetadata({ data: "json, name=host" })
   host?: string;
 
-  @Metadata({ data: "json, name=networkArchitecture" })
+  @SpeakeasyMetadata({ data: "json, name=networkArchitecture" })
   networkArchitecture?: PostgreSqlConnectionProfileNetworkArchitectureEnum;
 
-  @Metadata({ data: "json, name=password" })
+  @SpeakeasyMetadata({ data: "json, name=password" })
   password?: string;
 
-  @Metadata({ data: "json, name=passwordSet" })
+  @SpeakeasyMetadata({ data: "json, name=passwordSet" })
   passwordSet?: boolean;
 
-  @Metadata({ data: "json, name=port" })
+  @SpeakeasyMetadata({ data: "json, name=port" })
   port?: number;
 
-  @Metadata({ data: "json, name=ssl" })
+  @SpeakeasyMetadata({ data: "json, name=ssl" })
   ssl?: SslConfig;
 
-  @Metadata({ data: "json, name=username" })
+  @SpeakeasyMetadata({ data: "json, name=username" })
+  username?: string;
+}
+
+
+// PostgreSqlConnectionProfileInput
+/** 
+ * Specifies connection parameters required specifically for PostgreSQL databases.
+**/
+export class PostgreSqlConnectionProfileInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=cloudSqlId" })
+  cloudSqlId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=host" })
+  host?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=password" })
+  password?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=port" })
+  port?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=ssl" })
+  ssl?: SslConfigInput;
+
+  @SpeakeasyMetadata({ data: "json, name=username" })
   username?: string;
 }

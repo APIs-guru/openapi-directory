@@ -10,6 +10,8 @@ const (
 	PushItemTypeEnumRequeue         PushItemTypeEnum = "REQUEUE"
 )
 
+// PushItem
+// Represents an item to be pushed to the indexing queue.
 type PushItem struct {
 	ContentHash        *string           `json:"contentHash,omitempty"`
 	MetadataHash       *string           `json:"metadataHash,omitempty"`

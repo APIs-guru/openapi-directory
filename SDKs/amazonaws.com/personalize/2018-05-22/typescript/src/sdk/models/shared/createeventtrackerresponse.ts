@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateEventTrackerResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=eventTrackerArn" })
+  @SpeakeasyMetadata({ data: "json, name=eventTrackerArn" })
   eventTrackerArn?: string;
 
-  @Metadata({ data: "json, name=trackingId" })
+  @SpeakeasyMetadata({ data: "json, name=trackingId" })
   trackingId?: string;
 }

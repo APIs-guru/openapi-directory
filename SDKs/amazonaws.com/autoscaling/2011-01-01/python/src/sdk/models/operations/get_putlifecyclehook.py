@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetPutLifecycleHookActionEnum(str, Enum):
     PUT_LIFECYCLE_HOOK = "PutLifecycleHook"
@@ -10,16 +14,16 @@ class GetPutLifecycleHookVersionEnum(str, Enum):
 
 @dataclass
 class GetPutLifecycleHookQueryParams:
-    action: GetPutLifecycleHookActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    auto_scaling_group_name: str = field(default=None, metadata={'query_param': { 'field_name': 'AutoScalingGroupName', 'style': 'form', 'explode': True }})
+    action: GetPutLifecycleHookActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    auto_scaling_group_name: str = field(metadata={'query_param': { 'field_name': 'AutoScalingGroupName', 'style': 'form', 'explode': True }})
+    lifecycle_hook_name: str = field(metadata={'query_param': { 'field_name': 'LifecycleHookName', 'style': 'form', 'explode': True }})
+    version: GetPutLifecycleHookVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     default_result: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'DefaultResult', 'style': 'form', 'explode': True }})
     heartbeat_timeout: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'HeartbeatTimeout', 'style': 'form', 'explode': True }})
-    lifecycle_hook_name: str = field(default=None, metadata={'query_param': { 'field_name': 'LifecycleHookName', 'style': 'form', 'explode': True }})
     lifecycle_transition: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'LifecycleTransition', 'style': 'form', 'explode': True }})
     notification_metadata: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NotificationMetadata', 'style': 'form', 'explode': True }})
     notification_target_arn: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NotificationTargetARN', 'style': 'form', 'explode': True }})
     role_arn: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'RoleARN', 'style': 'form', 'explode': True }})
-    version: GetPutLifecycleHookVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -35,13 +39,13 @@ class GetPutLifecycleHookHeaders:
 
 @dataclass
 class GetPutLifecycleHookRequest:
-    query_params: GetPutLifecycleHookQueryParams = field(default=None)
-    headers: GetPutLifecycleHookHeaders = field(default=None)
+    headers: GetPutLifecycleHookHeaders = field()
+    query_params: GetPutLifecycleHookQueryParams = field()
     
 
 @dataclass
 class GetPutLifecycleHookResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

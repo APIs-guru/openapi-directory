@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Table
+// Represents a collection of related data organized in columns and rows.
 type Table struct {
 	CatalogID                     *string            `json:"CatalogId,omitempty"`
 	CreateTime                    *time.Time         `json:"CreateTime,omitempty"`

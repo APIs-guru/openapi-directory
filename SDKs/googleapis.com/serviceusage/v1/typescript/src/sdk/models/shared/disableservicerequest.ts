@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum DisableServiceRequestCheckIfServiceHasUsageEnum {
-    CheckIfServiceHasUsageUnspecified = "CHECK_IF_SERVICE_HAS_USAGE_UNSPECIFIED"
-,    Skip = "SKIP"
-,    Check = "CHECK"
+    CheckIfServiceHasUsageUnspecified = "CHECK_IF_SERVICE_HAS_USAGE_UNSPECIFIED",
+    Skip = "SKIP",
+    Check = "CHECK"
 }
 
 
@@ -12,9 +13,9 @@ export enum DisableServiceRequestCheckIfServiceHasUsageEnum {
  * Request message for the `DisableService` method.
 **/
 export class DisableServiceRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=checkIfServiceHasUsage" })
+  @SpeakeasyMetadata({ data: "json, name=checkIfServiceHasUsage" })
   checkIfServiceHasUsage?: DisableServiceRequestCheckIfServiceHasUsageEnum;
 
-  @Metadata({ data: "json, name=disableDependentServices" })
+  @SpeakeasyMetadata({ data: "json, name=disableDependentServices" })
   disableDependentServices?: boolean;
 }

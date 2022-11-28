@@ -9,26 +9,18 @@ type DeleteLkeClusterNodePathParams struct {
 	NodeID    string `pathParam:"style=simple,explode=false,name=nodeId"`
 }
 
-type DeleteLkeClusterNodeSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type DeleteLkeClusterNodeSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type DeleteLkeClusterNodeSecurity struct {
-	Option1 *DeleteLkeClusterNodeSecurityOption1 `security:"option"`
-	Option2 *DeleteLkeClusterNodeSecurityOption2 `security:"option"`
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
+}
+
+type DeleteLkeClusterNodeDefaultApplicationJSON struct {
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type DeleteLkeClusterNodeRequest struct {
 	PathParams DeleteLkeClusterNodePathParams
 	Security   DeleteLkeClusterNodeSecurity
-}
-
-type DeleteLkeClusterNodeDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type DeleteLkeClusterNodeResponse struct {

@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { WeeklyMaintenanceWindow } from "./weeklymaintenancewindow";
 // GoogleCloudMemcacheV1beta2MaintenancePolicy
 /**
  * Maintenance policy per instance.
@@ -34,21 +34,41 @@ var GoogleCloudMemcacheV1beta2MaintenancePolicy = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", String)
     ], GoogleCloudMemcacheV1beta2MaintenancePolicy.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], GoogleCloudMemcacheV1beta2MaintenancePolicy.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateTime" }),
+        SpeakeasyMetadata({ data: "json, name=updateTime" }),
         __metadata("design:type", String)
     ], GoogleCloudMemcacheV1beta2MaintenancePolicy.prototype, "updateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=weeklyMaintenanceWindow", elemType: shared.WeeklyMaintenanceWindow }),
+        SpeakeasyMetadata({ data: "json, name=weeklyMaintenanceWindow", elemType: WeeklyMaintenanceWindow }),
         __metadata("design:type", Array)
     ], GoogleCloudMemcacheV1beta2MaintenancePolicy.prototype, "weeklyMaintenanceWindow", void 0);
     return GoogleCloudMemcacheV1beta2MaintenancePolicy;
 }(SpeakeasyBase));
 export { GoogleCloudMemcacheV1beta2MaintenancePolicy };
+// GoogleCloudMemcacheV1beta2MaintenancePolicyInput
+/**
+ * Maintenance policy per instance.
+**/
+var GoogleCloudMemcacheV1beta2MaintenancePolicyInput = /** @class */ (function (_super) {
+    __extends(GoogleCloudMemcacheV1beta2MaintenancePolicyInput, _super);
+    function GoogleCloudMemcacheV1beta2MaintenancePolicyInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=description" }),
+        __metadata("design:type", String)
+    ], GoogleCloudMemcacheV1beta2MaintenancePolicyInput.prototype, "description", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=weeklyMaintenanceWindow", elemType: WeeklyMaintenanceWindow }),
+        __metadata("design:type", Array)
+    ], GoogleCloudMemcacheV1beta2MaintenancePolicyInput.prototype, "weeklyMaintenanceWindow", void 0);
+    return GoogleCloudMemcacheV1beta2MaintenancePolicyInput;
+}(SpeakeasyBase));
+export { GoogleCloudMemcacheV1beta2MaintenancePolicyInput };

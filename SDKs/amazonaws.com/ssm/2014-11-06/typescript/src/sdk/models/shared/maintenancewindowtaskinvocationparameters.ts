@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MaintenanceWindowAutomationParameters } from "./maintenancewindowautomationparameters";
 import { MaintenanceWindowLambdaParameters } from "./maintenancewindowlambdaparameters";
 import { MaintenanceWindowRunCommandParameters } from "./maintenancewindowruncommandparameters";
 import { MaintenanceWindowStepFunctionsParameters } from "./maintenancewindowstepfunctionsparameters";
+
 
 
 // MaintenanceWindowTaskInvocationParameters
@@ -10,15 +11,15 @@ import { MaintenanceWindowStepFunctionsParameters } from "./maintenancewindowste
  * The parameters for task execution.
 **/
 export class MaintenanceWindowTaskInvocationParameters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Automation" })
+  @SpeakeasyMetadata({ data: "json, name=Automation" })
   automation?: MaintenanceWindowAutomationParameters;
 
-  @Metadata({ data: "json, name=Lambda" })
+  @SpeakeasyMetadata({ data: "json, name=Lambda" })
   lambda?: MaintenanceWindowLambdaParameters;
 
-  @Metadata({ data: "json, name=RunCommand" })
+  @SpeakeasyMetadata({ data: "json, name=RunCommand" })
   runCommand?: MaintenanceWindowRunCommandParameters;
 
-  @Metadata({ data: "json, name=StepFunctions" })
+  @SpeakeasyMetadata({ data: "json, name=StepFunctions" })
   stepFunctions?: MaintenanceWindowStepFunctionsParameters;
 }

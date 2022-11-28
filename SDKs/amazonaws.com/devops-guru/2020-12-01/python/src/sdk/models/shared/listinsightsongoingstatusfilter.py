@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum,List
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import insighttype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListInsightsOngoingStatusFilter:
-    type: insighttype_enum.InsightTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
+    r"""ListInsightsOngoingStatusFilter
+     Used to filter for insights that have the status <code>ONGOING</code>. 
+    """
+    
+    type: InsightTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Type') }})
     

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// CompilationJobSummary
+// A summary of a model compilation job.
 type CompilationJobSummary struct {
 	CompilationEndTime                   *time.Time                     `json:"CompilationEndTime,omitempty"`
 	CompilationJobArn                    string                         `json:"CompilationJobArn"`

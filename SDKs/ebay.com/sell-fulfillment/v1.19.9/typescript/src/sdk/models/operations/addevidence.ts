@@ -1,45 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export const ADDEVIDENCE_SERVERS = [
-	"https://apiz.ebay.com{basePath}",
-];
 
+export const AddEvidenceServerList = [
+	"https://apiz.ebay.com{basePath}",
+] as const;
 
 
 export class AddEvidencePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=payment_dispute_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=payment_dispute_id" })
   paymentDisputeId: string;
 }
 
 
 export class AddEvidenceSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   apiAuth: shared.SchemeApiAuth;
 }
 
 
 export class AddEvidenceRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   serverUrl?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: AddEvidencePathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: shared.AddEvidencePaymentDisputeRequest;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: AddEvidenceSecurity;
 }
 
 
 export class AddEvidenceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   addEvidencePaymentDisputeResponse?: shared.AddEvidencePaymentDisputeResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

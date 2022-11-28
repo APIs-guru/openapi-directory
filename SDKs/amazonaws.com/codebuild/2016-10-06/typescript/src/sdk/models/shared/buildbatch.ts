@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BuildArtifacts } from "./buildartifacts";
 import { ProjectBuildBatchConfig } from "./projectbuildbatchconfig";
 import { StatusTypeEnum } from "./statustypeenum";
@@ -9,11 +8,10 @@ import { ProjectEnvironment } from "./projectenvironment";
 import { ProjectFileSystemLocation } from "./projectfilesystemlocation";
 import { LogsConfig } from "./logsconfig";
 import { BuildBatchPhase } from "./buildbatchphase";
-import { BuildArtifacts } from "./buildartifacts";
 import { ProjectSourceVersion } from "./projectsourceversion";
 import { ProjectSource } from "./projectsource";
-import { ProjectSource } from "./projectsource";
 import { VpcConfig } from "./vpcconfig";
+
 
 
 // BuildBatch
@@ -21,93 +19,93 @@ import { VpcConfig } from "./vpcconfig";
  * Contains information about a batch build.
 **/
 export class BuildBatch extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=artifacts" })
+  @SpeakeasyMetadata({ data: "json, name=artifacts" })
   artifacts?: BuildArtifacts;
 
-  @Metadata({ data: "json, name=buildBatchConfig" })
+  @SpeakeasyMetadata({ data: "json, name=buildBatchConfig" })
   buildBatchConfig?: ProjectBuildBatchConfig;
 
-  @Metadata({ data: "json, name=buildBatchNumber" })
+  @SpeakeasyMetadata({ data: "json, name=buildBatchNumber" })
   buildBatchNumber?: number;
 
-  @Metadata({ data: "json, name=buildBatchStatus" })
+  @SpeakeasyMetadata({ data: "json, name=buildBatchStatus" })
   buildBatchStatus?: StatusTypeEnum;
 
-  @Metadata({ data: "json, name=buildGroups", elemType: shared.BuildGroup })
+  @SpeakeasyMetadata({ data: "json, name=buildGroups", elemType: BuildGroup })
   buildGroups?: BuildGroup[];
 
-  @Metadata({ data: "json, name=buildTimeoutInMinutes" })
+  @SpeakeasyMetadata({ data: "json, name=buildTimeoutInMinutes" })
   buildTimeoutInMinutes?: number;
 
-  @Metadata({ data: "json, name=cache" })
+  @SpeakeasyMetadata({ data: "json, name=cache" })
   cache?: ProjectCache;
 
-  @Metadata({ data: "json, name=complete" })
+  @SpeakeasyMetadata({ data: "json, name=complete" })
   complete?: boolean;
 
-  @Metadata({ data: "json, name=currentPhase" })
+  @SpeakeasyMetadata({ data: "json, name=currentPhase" })
   currentPhase?: string;
 
-  @Metadata({ data: "json, name=debugSessionEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=debugSessionEnabled" })
   debugSessionEnabled?: boolean;
 
-  @Metadata({ data: "json, name=encryptionKey" })
+  @SpeakeasyMetadata({ data: "json, name=encryptionKey" })
   encryptionKey?: string;
 
-  @Metadata({ data: "json, name=endTime" })
+  @SpeakeasyMetadata({ data: "json, name=endTime" })
   endTime?: Date;
 
-  @Metadata({ data: "json, name=environment" })
+  @SpeakeasyMetadata({ data: "json, name=environment" })
   environment?: ProjectEnvironment;
 
-  @Metadata({ data: "json, name=fileSystemLocations", elemType: shared.ProjectFileSystemLocation })
+  @SpeakeasyMetadata({ data: "json, name=fileSystemLocations", elemType: ProjectFileSystemLocation })
   fileSystemLocations?: ProjectFileSystemLocation[];
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=initiator" })
+  @SpeakeasyMetadata({ data: "json, name=initiator" })
   initiator?: string;
 
-  @Metadata({ data: "json, name=logConfig" })
+  @SpeakeasyMetadata({ data: "json, name=logConfig" })
   logConfig?: LogsConfig;
 
-  @Metadata({ data: "json, name=phases", elemType: shared.BuildBatchPhase })
+  @SpeakeasyMetadata({ data: "json, name=phases", elemType: BuildBatchPhase })
   phases?: BuildBatchPhase[];
 
-  @Metadata({ data: "json, name=projectName" })
+  @SpeakeasyMetadata({ data: "json, name=projectName" })
   projectName?: string;
 
-  @Metadata({ data: "json, name=queuedTimeoutInMinutes" })
+  @SpeakeasyMetadata({ data: "json, name=queuedTimeoutInMinutes" })
   queuedTimeoutInMinutes?: number;
 
-  @Metadata({ data: "json, name=resolvedSourceVersion" })
+  @SpeakeasyMetadata({ data: "json, name=resolvedSourceVersion" })
   resolvedSourceVersion?: string;
 
-  @Metadata({ data: "json, name=secondaryArtifacts", elemType: shared.BuildArtifacts })
+  @SpeakeasyMetadata({ data: "json, name=secondaryArtifacts", elemType: BuildArtifacts })
   secondaryArtifacts?: BuildArtifacts[];
 
-  @Metadata({ data: "json, name=secondarySourceVersions", elemType: shared.ProjectSourceVersion })
+  @SpeakeasyMetadata({ data: "json, name=secondarySourceVersions", elemType: ProjectSourceVersion })
   secondarySourceVersions?: ProjectSourceVersion[];
 
-  @Metadata({ data: "json, name=secondarySources", elemType: shared.ProjectSource })
+  @SpeakeasyMetadata({ data: "json, name=secondarySources", elemType: ProjectSource })
   secondarySources?: ProjectSource[];
 
-  @Metadata({ data: "json, name=serviceRole" })
+  @SpeakeasyMetadata({ data: "json, name=serviceRole" })
   serviceRole?: string;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: ProjectSource;
 
-  @Metadata({ data: "json, name=sourceVersion" })
+  @SpeakeasyMetadata({ data: "json, name=sourceVersion" })
   sourceVersion?: string;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: Date;
 
-  @Metadata({ data: "json, name=vpcConfig" })
+  @SpeakeasyMetadata({ data: "json, name=vpcConfig" })
   vpcConfig?: VpcConfig;
 }

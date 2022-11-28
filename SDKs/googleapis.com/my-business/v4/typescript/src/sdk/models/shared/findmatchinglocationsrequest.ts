@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // FindMatchingLocationsRequest
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request message for Locations.FindMatchingLocations.
 **/
 export class FindMatchingLocationsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=languageCode" })
+  @SpeakeasyMetadata({ data: "json, name=languageCode" })
   languageCode?: string;
 
-  @Metadata({ data: "json, name=maxCacheDuration" })
+  @SpeakeasyMetadata({ data: "json, name=maxCacheDuration" })
   maxCacheDuration?: string;
 
-  @Metadata({ data: "json, name=numResults" })
+  @SpeakeasyMetadata({ data: "json, name=numResults" })
   numResults?: number;
 }

@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import ocrlineelement
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ImageToLinesWithLocationResult:
-    lines: Optional[List[ocrlineelement.OcrLineElement]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Lines' }})
-    successful: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Successful' }})
+    r"""ImageToLinesWithLocationResult
+    Result of an image to lines-with-location OCR operation
+    """
+    
+    lines: Optional[List[OcrLineElement]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Lines') }})
+    successful: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Successful') }})
     

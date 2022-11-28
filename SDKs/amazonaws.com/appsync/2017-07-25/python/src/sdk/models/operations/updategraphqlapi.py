@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdateGraphqlAPIPathParams:
-    api_id: str = field(default=None, metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
+    api_id: str = field(metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -30,66 +35,82 @@ class UpdateGraphqlAPIRequestBodyAuthenticationTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class UpdateGraphqlAPIRequestBodyLambdaAuthorizerConfig:
-    authorizer_result_ttl_in_seconds: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'authorizerResultTtlInSeconds' }})
-    authorizer_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'authorizerUri' }})
-    identity_validation_expression: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'identityValidationExpression' }})
+    r"""UpdateGraphqlAPIRequestBodyLambdaAuthorizerConfig
+    A <code>LambdaAuthorizerConfig</code> holds configuration on how to authorize AppSync API access when using the <code>AWS_LAMBDA</code> authorizer mode. Be aware that an AppSync API may have only one Lambda authorizer configured at a time.
+    """
+    
+    authorizer_result_ttl_in_seconds: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('authorizerResultTtlInSeconds') }})
+    authorizer_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('authorizerUri') }})
+    identity_validation_expression: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('identityValidationExpression') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateGraphqlAPIRequestBodyLogConfig:
-    cloud_watch_logs_role_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cloudWatchLogsRoleArn' }})
-    exclude_verbose_content: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'excludeVerboseContent' }})
-    field_log_level: Optional[shared.FieldLogLevelEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fieldLogLevel' }})
+    r"""UpdateGraphqlAPIRequestBodyLogConfig
+    The CloudWatch Logs configuration.
+    """
+    
+    cloud_watch_logs_role_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cloudWatchLogsRoleArn') }})
+    exclude_verbose_content: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('excludeVerboseContent') }})
+    field_log_level: Optional[shared.FieldLogLevelEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fieldLogLevel') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateGraphqlAPIRequestBodyOpenIDConnectConfig:
-    auth_ttl: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'authTTL' }})
-    client_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clientId' }})
-    iat_ttl: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'iatTTL' }})
-    issuer: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'issuer' }})
+    r"""UpdateGraphqlAPIRequestBodyOpenIDConnectConfig
+    Describes an OpenID Connect configuration.
+    """
+    
+    auth_ttl: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('authTTL') }})
+    client_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clientId') }})
+    iat_ttl: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('iatTTL') }})
+    issuer: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('issuer') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateGraphqlAPIRequestBodyUserPoolConfig:
-    app_id_client_regex: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'appIdClientRegex' }})
-    aws_region: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'awsRegion' }})
-    default_action: Optional[shared.DefaultActionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'defaultAction' }})
-    user_pool_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'userPoolId' }})
+    r"""UpdateGraphqlAPIRequestBodyUserPoolConfig
+    Describes an Amazon Cognito user pool configuration.
+    """
+    
+    app_id_client_regex: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('appIdClientRegex') }})
+    aws_region: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('awsRegion') }})
+    default_action: Optional[shared.DefaultActionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('defaultAction') }})
+    user_pool_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('userPoolId') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateGraphqlAPIRequestBody:
-    additional_authentication_providers: Optional[List[shared.AdditionalAuthenticationProvider]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'additionalAuthenticationProviders' }})
-    authentication_type: Optional[UpdateGraphqlAPIRequestBodyAuthenticationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'authenticationType' }})
-    lambda_authorizer_config: Optional[UpdateGraphqlAPIRequestBodyLambdaAuthorizerConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lambdaAuthorizerConfig' }})
-    log_config: Optional[UpdateGraphqlAPIRequestBodyLogConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'logConfig' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    open_id_connect_config: Optional[UpdateGraphqlAPIRequestBodyOpenIDConnectConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'openIDConnectConfig' }})
-    user_pool_config: Optional[UpdateGraphqlAPIRequestBodyUserPoolConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'userPoolConfig' }})
-    xray_enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'xrayEnabled' }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    additional_authentication_providers: Optional[List[shared.AdditionalAuthenticationProvider]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('additionalAuthenticationProviders') }})
+    authentication_type: Optional[UpdateGraphqlAPIRequestBodyAuthenticationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('authenticationType') }})
+    lambda_authorizer_config: Optional[UpdateGraphqlAPIRequestBodyLambdaAuthorizerConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lambdaAuthorizerConfig') }})
+    log_config: Optional[UpdateGraphqlAPIRequestBodyLogConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('logConfig') }})
+    open_id_connect_config: Optional[UpdateGraphqlAPIRequestBodyOpenIDConnectConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('openIDConnectConfig') }})
+    user_pool_config: Optional[UpdateGraphqlAPIRequestBodyUserPoolConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('userPoolConfig') }})
+    xray_enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('xrayEnabled') }})
     
 
 @dataclass
 class UpdateGraphqlAPIRequest:
-    path_params: UpdateGraphqlAPIPathParams = field(default=None)
-    headers: UpdateGraphqlAPIHeaders = field(default=None)
-    request: UpdateGraphqlAPIRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateGraphqlAPIHeaders = field()
+    path_params: UpdateGraphqlAPIPathParams = field()
+    request: UpdateGraphqlAPIRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateGraphqlAPIResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
     bad_request_exception: Optional[Any] = field(default=None)
     concurrent_modification_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     update_graphql_api_response: Optional[shared.UpdateGraphqlAPIResponse] = field(default=None)
     

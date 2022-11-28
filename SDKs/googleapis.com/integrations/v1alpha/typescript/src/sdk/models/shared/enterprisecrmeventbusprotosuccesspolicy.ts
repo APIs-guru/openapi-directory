@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum EnterpriseCrmEventbusProtoSuccessPolicyFinalStateEnum {
-    Unspecified = "UNSPECIFIED"
-,    Succeeded = "SUCCEEDED"
-,    Suspended = "SUSPENDED"
+    Unspecified = "UNSPECIFIED",
+    Succeeded = "SUCCEEDED",
+    Suspended = "SUSPENDED"
 }
 
 
@@ -12,6 +13,6 @@ export enum EnterpriseCrmEventbusProtoSuccessPolicyFinalStateEnum {
  * Policy that dictates the behavior for the task after it completes successfully.
 **/
 export class EnterpriseCrmEventbusProtoSuccessPolicy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=finalState" })
+  @SpeakeasyMetadata({ data: "json, name=finalState" })
   finalState?: EnterpriseCrmEventbusProtoSuccessPolicyFinalStateEnum;
 }

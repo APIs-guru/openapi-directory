@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateAlertHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -31,72 +32,72 @@ export class CreateAlertHeaders extends SpeakeasyBase {
  * A configuration that specifies the action to perform when anomalies are detected.
 **/
 export class CreateAlertRequestBodyAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LambdaConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=LambdaConfiguration" })
   lambdaConfiguration?: shared.LambdaConfiguration;
 
-  @Metadata({ data: "json, name=SNSConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=SNSConfiguration" })
   snsConfiguration?: shared.SnsConfiguration;
 }
 
 
 export class CreateAlertRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Action" })
+  @SpeakeasyMetadata({ data: "json, name=Action" })
   action: CreateAlertRequestBodyAction;
 
-  @Metadata({ data: "json, name=AlertDescription" })
+  @SpeakeasyMetadata({ data: "json, name=AlertDescription" })
   alertDescription?: string;
 
-  @Metadata({ data: "json, name=AlertName" })
+  @SpeakeasyMetadata({ data: "json, name=AlertName" })
   alertName: string;
 
-  @Metadata({ data: "json, name=AlertSensitivityThreshold" })
+  @SpeakeasyMetadata({ data: "json, name=AlertSensitivityThreshold" })
   alertSensitivityThreshold: number;
 
-  @Metadata({ data: "json, name=AnomalyDetectorArn" })
+  @SpeakeasyMetadata({ data: "json, name=AnomalyDetectorArn" })
   anomalyDetectorArn: string;
 
-  @Metadata({ data: "json, name=Tags" })
+  @SpeakeasyMetadata({ data: "json, name=Tags" })
   tags?: Map<string, string>;
 }
 
 
 export class CreateAlertRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateAlertHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateAlertRequestBody;
 }
 
 
 export class CreateAlertResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   accessDeniedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   conflictException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createAlertResponse?: shared.CreateAlertResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceQuotaExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tooManyRequestsException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationException?: any;
 }

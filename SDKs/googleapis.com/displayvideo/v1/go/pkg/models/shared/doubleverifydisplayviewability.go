@@ -24,6 +24,8 @@ const (
 	DoubleVerifyDisplayViewabilityViewableDuringEnumAverageViewDuration15Sec       DoubleVerifyDisplayViewabilityViewableDuringEnum = "AVERAGE_VIEW_DURATION_15_SEC"
 )
 
+// DoubleVerifyDisplayViewability
+// Details of DoubleVerify display viewability settings.
 type DoubleVerifyDisplayViewability struct {
 	Iab            *DoubleVerifyDisplayViewabilityIabEnum            `json:"iab,omitempty"`
 	ViewableDuring *DoubleVerifyDisplayViewabilityViewableDuringEnum `json:"viewableDuring,omitempty"`

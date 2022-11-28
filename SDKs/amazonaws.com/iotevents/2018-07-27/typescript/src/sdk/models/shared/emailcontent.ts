@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // EmailContent
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains the subject and message of an email.
 **/
 export class EmailContent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=additionalMessage" })
+  @SpeakeasyMetadata({ data: "json, name=additionalMessage" })
   additionalMessage?: string;
 
-  @Metadata({ data: "json, name=subject" })
+  @SpeakeasyMetadata({ data: "json, name=subject" })
   subject?: string;
 }

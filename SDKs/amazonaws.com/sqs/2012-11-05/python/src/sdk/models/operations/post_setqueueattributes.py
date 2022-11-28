@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostSetQueueAttributesActionEnum(str, Enum):
     SET_QUEUE_ATTRIBUTES = "SetQueueAttributes"
@@ -10,8 +14,8 @@ class PostSetQueueAttributesVersionEnum(str, Enum):
 
 @dataclass
 class PostSetQueueAttributesQueryParams:
-    action: PostSetQueueAttributesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostSetQueueAttributesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostSetQueueAttributesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostSetQueueAttributesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostSetQueueAttributesHeaders:
 
 @dataclass
 class PostSetQueueAttributesRequest:
-    query_params: PostSetQueueAttributesQueryParams = field(default=None)
-    headers: PostSetQueueAttributesHeaders = field(default=None)
+    headers: PostSetQueueAttributesHeaders = field()
+    query_params: PostSetQueueAttributesQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostSetQueueAttributesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

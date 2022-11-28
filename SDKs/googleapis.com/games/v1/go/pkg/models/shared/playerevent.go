@@ -1,5 +1,7 @@
 package shared
 
+// PlayerEvent
+// An event status resource.
 type PlayerEvent struct {
 	DefinitionID       *string `json:"definitionId,omitempty"`
 	FormattedNumEvents *string `json:"formattedNumEvents,omitempty"`

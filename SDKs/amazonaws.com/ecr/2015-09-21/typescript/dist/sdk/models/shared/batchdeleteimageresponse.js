@@ -22,19 +22,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ImageFailure } from "./imagefailure";
+import { ImageIdentifier } from "./imageidentifier";
 var BatchDeleteImageResponse = /** @class */ (function (_super) {
     __extends(BatchDeleteImageResponse, _super);
     function BatchDeleteImageResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=failures", elemType: shared.ImageFailure }),
+        SpeakeasyMetadata({ data: "json, name=failures", elemType: ImageFailure }),
         __metadata("design:type", Array)
     ], BatchDeleteImageResponse.prototype, "failures", void 0);
     __decorate([
-        Metadata({ data: "json, name=imageIds", elemType: shared.ImageIdentifier }),
+        SpeakeasyMetadata({ data: "json, name=imageIds", elemType: ImageIdentifier }),
         __metadata("design:type", Array)
     ], BatchDeleteImageResponse.prototype, "imageIds", void 0);
     return BatchDeleteImageResponse;

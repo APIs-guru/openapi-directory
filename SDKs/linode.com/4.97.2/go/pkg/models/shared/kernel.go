@@ -7,6 +7,8 @@ const (
 	KernelArchitectureEnumI386  KernelArchitectureEnum = "i386"
 )
 
+// Kernel
+// Linux kernel object
 type Kernel struct {
 	Architecture *KernelArchitectureEnum `json:"architecture,omitempty"`
 	Deprecated   *bool                   `json:"deprecated,omitempty"`

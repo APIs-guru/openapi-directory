@@ -1,7 +1,8 @@
 
 
+
 export enum ResourceTypeEnum {
-    Jar = "JAR"
-,    File = "FILE"
-,    Archive = "ARCHIVE"
+    Jar = "JAR",
+    File = "FILE",
+    Archive = "ARCHIVE"
 }

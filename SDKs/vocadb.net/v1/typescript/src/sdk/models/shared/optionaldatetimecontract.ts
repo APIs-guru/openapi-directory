@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class OptionalDateTimeContract extends SpeakeasyBase {
-  @Metadata({ data: "json, name=day" })
+  @SpeakeasyMetadata({ data: "json, name=day" })
   day?: number;
 
-  @Metadata({ data: "json, name=formatted" })
+  @SpeakeasyMetadata({ data: "json, name=formatted" })
   formatted?: string;
 
-  @Metadata({ data: "json, name=isEmpty" })
+  @SpeakeasyMetadata({ data: "json, name=isEmpty" })
   isEmpty?: boolean;
 
-  @Metadata({ data: "json, name=month" })
+  @SpeakeasyMetadata({ data: "json, name=month" })
   month?: number;
 
-  @Metadata({ data: "json, name=year" })
+  @SpeakeasyMetadata({ data: "json, name=year" })
   year?: number;
 }

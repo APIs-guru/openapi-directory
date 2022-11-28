@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FreezePeriod } from "./freezeperiod";
 
+
 export enum SystemUpdateTypeEnum {
-    SystemUpdateTypeUnspecified = "SYSTEM_UPDATE_TYPE_UNSPECIFIED"
-,    Automatic = "AUTOMATIC"
-,    Windowed = "WINDOWED"
-,    Postpone = "POSTPONE"
+    SystemUpdateTypeUnspecified = "SYSTEM_UPDATE_TYPE_UNSPECIFIED",
+    Automatic = "AUTOMATIC",
+    Windowed = "WINDOWED",
+    Postpone = "POSTPONE"
 }
 
 
@@ -15,15 +15,15 @@ export enum SystemUpdateTypeEnum {
  * Configuration for managing system updates
 **/
 export class SystemUpdate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=endMinutes" })
+  @SpeakeasyMetadata({ data: "json, name=endMinutes" })
   endMinutes?: number;
 
-  @Metadata({ data: "json, name=freezePeriods", elemType: shared.FreezePeriod })
+  @SpeakeasyMetadata({ data: "json, name=freezePeriods", elemType: FreezePeriod })
   freezePeriods?: FreezePeriod[];
 
-  @Metadata({ data: "json, name=startMinutes" })
+  @SpeakeasyMetadata({ data: "json, name=startMinutes" })
   startMinutes?: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: SystemUpdateTypeEnum;
 }

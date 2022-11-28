@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudRecommenderV1beta1SustainabilityProjection
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains metadata about how much sustainability a recommendation can save or incur.
 **/
 export class GoogleCloudRecommenderV1beta1SustainabilityProjection extends SpeakeasyBase {
-  @Metadata({ data: "json, name=duration" })
+  @SpeakeasyMetadata({ data: "json, name=duration" })
   duration?: string;
 
-  @Metadata({ data: "json, name=kgCO2e" })
+  @SpeakeasyMetadata({ data: "json, name=kgCO2e" })
   kgCo2e?: number;
 }

@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://cdcgov.local",
 }
 
@@ -19,9 +19,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -32,27 +36,45 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// DeleteSettingsOrganizationsOrganizationName - Delete an organization (and the associated receivers and senders)
 func (s *SDK) DeleteSettingsOrganizationsOrganizationName(ctx context.Context, request operations.DeleteSettingsOrganizationsOrganizationNameRequest) (*operations.DeleteSettingsOrganizationsOrganizationNameResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/settings/organizations/{organizationName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -60,7 +82,7 @@ func (s *SDK) DeleteSettingsOrganizationsOrganizationName(ctx context.Context, r
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -92,8 +114,9 @@ func (s *SDK) DeleteSettingsOrganizationsOrganizationName(ctx context.Context, r
 	return res, nil
 }
 
+// DeleteSettingsOrganizationsOrganizationNameReceiversReceiverName - Delete a receiver
 func (s *SDK) DeleteSettingsOrganizationsOrganizationNameReceiversReceiverName(ctx context.Context, request operations.DeleteSettingsOrganizationsOrganizationNameReceiversReceiverNameRequest) (*operations.DeleteSettingsOrganizationsOrganizationNameReceiversReceiverNameResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/settings/organizations/{organizationName}/receivers/{receiverName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -101,7 +124,7 @@ func (s *SDK) DeleteSettingsOrganizationsOrganizationNameReceiversReceiverName(c
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -133,8 +156,9 @@ func (s *SDK) DeleteSettingsOrganizationsOrganizationNameReceiversReceiverName(c
 	return res, nil
 }
 
+// DeleteSettingsOrganizationsOrganizationNameSendersSenderName - Delete a sender
 func (s *SDK) DeleteSettingsOrganizationsOrganizationNameSendersSenderName(ctx context.Context, request operations.DeleteSettingsOrganizationsOrganizationNameSendersSenderNameRequest) (*operations.DeleteSettingsOrganizationsOrganizationNameSendersSenderNameResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/settings/organizations/{organizationName}/senders/{senderName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -142,7 +166,7 @@ func (s *SDK) DeleteSettingsOrganizationsOrganizationNameSendersSenderName(ctx c
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -174,8 +198,9 @@ func (s *SDK) DeleteSettingsOrganizationsOrganizationNameSendersSenderName(ctx c
 	return res, nil
 }
 
+// GetSettingsOrganizations - The settings for all organizations of the system. Must have admin access.
 func (s *SDK) GetSettingsOrganizations(ctx context.Context, request operations.GetSettingsOrganizationsRequest) (*operations.GetSettingsOrganizationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/settings/organizations"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -183,7 +208,7 @@ func (s *SDK) GetSettingsOrganizations(ctx context.Context, request operations.G
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -215,8 +240,9 @@ func (s *SDK) GetSettingsOrganizations(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetSettingsOrganizationsOrganizationName - A single organization settings
 func (s *SDK) GetSettingsOrganizationsOrganizationName(ctx context.Context, request operations.GetSettingsOrganizationsOrganizationNameRequest) (*operations.GetSettingsOrganizationsOrganizationNameResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/settings/organizations/{organizationName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -224,7 +250,7 @@ func (s *SDK) GetSettingsOrganizationsOrganizationName(ctx context.Context, requ
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -254,8 +280,9 @@ func (s *SDK) GetSettingsOrganizationsOrganizationName(ctx context.Context, requ
 	return res, nil
 }
 
+// GetSettingsOrganizationsOrganizationNameReceivers - A list of receivers and their current settings
 func (s *SDK) GetSettingsOrganizationsOrganizationNameReceivers(ctx context.Context, request operations.GetSettingsOrganizationsOrganizationNameReceiversRequest) (*operations.GetSettingsOrganizationsOrganizationNameReceiversResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/settings/organizations/{organizationName}/receivers", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -263,7 +290,7 @@ func (s *SDK) GetSettingsOrganizationsOrganizationNameReceivers(ctx context.Cont
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -295,8 +322,9 @@ func (s *SDK) GetSettingsOrganizationsOrganizationNameReceivers(ctx context.Cont
 	return res, nil
 }
 
+// GetSettingsOrganizationsOrganizationNameReceiversReceiverName - The settings of a single of receiver
 func (s *SDK) GetSettingsOrganizationsOrganizationNameReceiversReceiverName(ctx context.Context, request operations.GetSettingsOrganizationsOrganizationNameReceiversReceiverNameRequest) (*operations.GetSettingsOrganizationsOrganizationNameReceiversReceiverNameResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/settings/organizations/{organizationName}/receivers/{receiverName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -304,7 +332,7 @@ func (s *SDK) GetSettingsOrganizationsOrganizationNameReceiversReceiverName(ctx 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -336,8 +364,9 @@ func (s *SDK) GetSettingsOrganizationsOrganizationNameReceiversReceiverName(ctx 
 	return res, nil
 }
 
+// GetSettingsOrganizationsOrganizationNameSenders - A list of senders
 func (s *SDK) GetSettingsOrganizationsOrganizationNameSenders(ctx context.Context, request operations.GetSettingsOrganizationsOrganizationNameSendersRequest) (*operations.GetSettingsOrganizationsOrganizationNameSendersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/settings/organizations/{organizationName}/senders", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -345,7 +374,7 @@ func (s *SDK) GetSettingsOrganizationsOrganizationNameSenders(ctx context.Contex
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -377,8 +406,9 @@ func (s *SDK) GetSettingsOrganizationsOrganizationNameSenders(ctx context.Contex
 	return res, nil
 }
 
+// GetSettingsOrganizationsOrganizationNameSendersSenderName - The settings of a single of sender
 func (s *SDK) GetSettingsOrganizationsOrganizationNameSendersSenderName(ctx context.Context, request operations.GetSettingsOrganizationsOrganizationNameSendersSenderNameRequest) (*operations.GetSettingsOrganizationsOrganizationNameSendersSenderNameResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/settings/organizations/{organizationName}/senders/{senderName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -386,7 +416,7 @@ func (s *SDK) GetSettingsOrganizationsOrganizationNameSendersSenderName(ctx cont
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -418,8 +448,9 @@ func (s *SDK) GetSettingsOrganizationsOrganizationNameSendersSenderName(ctx cont
 	return res, nil
 }
 
+// HeadSettingsOrganizations - Retrived the last modified for all settings of the system. Must have admin access.
 func (s *SDK) HeadSettingsOrganizations(ctx context.Context, request operations.HeadSettingsOrganizationsRequest) (*operations.HeadSettingsOrganizationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/settings/organizations"
 
 	req, err := http.NewRequestWithContext(ctx, "HEAD", url, nil)
@@ -427,7 +458,7 @@ func (s *SDK) HeadSettingsOrganizations(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -449,8 +480,9 @@ func (s *SDK) HeadSettingsOrganizations(ctx context.Context, request operations.
 	return res, nil
 }
 
+// PostReports - Post a report to the data hub
 func (s *SDK) PostReports(ctx context.Context, request operations.PostReportsRequest) (*operations.PostReportsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/reports"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -470,7 +502,7 @@ func (s *SDK) PostReports(ctx context.Context, request operations.PostReportsReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -521,8 +553,9 @@ func (s *SDK) PostReports(ctx context.Context, request operations.PostReportsReq
 	return res, nil
 }
 
+// PutSettingsOrganizationsOrganizationName - Create or update the direct settings associated with an organization
 func (s *SDK) PutSettingsOrganizationsOrganizationName(ctx context.Context, request operations.PutSettingsOrganizationsOrganizationNameRequest) (*operations.PutSettingsOrganizationsOrganizationNameResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/settings/organizations/{organizationName}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -537,7 +570,7 @@ func (s *SDK) PutSettingsOrganizationsOrganizationName(ctx context.Context, requ
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -579,8 +612,9 @@ func (s *SDK) PutSettingsOrganizationsOrganizationName(ctx context.Context, requ
 	return res, nil
 }
 
+// PutSettingsOrganizationsOrganizationNameReceiversReceiverName - Update a single reciever
 func (s *SDK) PutSettingsOrganizationsOrganizationNameReceiversReceiverName(ctx context.Context, request operations.PutSettingsOrganizationsOrganizationNameReceiversReceiverNameRequest) (*operations.PutSettingsOrganizationsOrganizationNameReceiversReceiverNameResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/settings/organizations/{organizationName}/receivers/{receiverName}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -595,7 +629,7 @@ func (s *SDK) PutSettingsOrganizationsOrganizationNameReceiversReceiverName(ctx 
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -637,8 +671,9 @@ func (s *SDK) PutSettingsOrganizationsOrganizationNameReceiversReceiverName(ctx 
 	return res, nil
 }
 
+// PutSettingsOrganizationsOrganizationNameSendersSenderName - Update a single sender
 func (s *SDK) PutSettingsOrganizationsOrganizationNameSendersSenderName(ctx context.Context, request operations.PutSettingsOrganizationsOrganizationNameSendersSenderNameRequest) (*operations.PutSettingsOrganizationsOrganizationNameSendersSenderNameResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/settings/organizations/{organizationName}/senders/{senderName}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -653,7 +688,7 @@ func (s *SDK) PutSettingsOrganizationsOrganizationNameSendersSenderName(ctx cont
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {

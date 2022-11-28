@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class CreateBackendEnvironmentPathParams:
-    app_id: str = field(default=None, metadata={'path_param': { 'field_name': 'appId', 'style': 'simple', 'explode': False }})
+    app_id: str = field(metadata={'path_param': { 'field_name': 'appId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,26 +27,26 @@ class CreateBackendEnvironmentHeaders:
 @dataclass_json
 @dataclass
 class CreateBackendEnvironmentRequestBody:
-    deployment_artifacts: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deploymentArtifacts' }})
-    environment_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'environmentName' }})
-    stack_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stackName' }})
+    environment_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('environmentName') }})
+    deployment_artifacts: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('deploymentArtifacts') }})
+    stack_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('stackName') }})
     
 
 @dataclass
 class CreateBackendEnvironmentRequest:
-    path_params: CreateBackendEnvironmentPathParams = field(default=None)
-    headers: CreateBackendEnvironmentHeaders = field(default=None)
-    request: CreateBackendEnvironmentRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateBackendEnvironmentHeaders = field()
+    path_params: CreateBackendEnvironmentPathParams = field()
+    request: CreateBackendEnvironmentRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateBackendEnvironmentResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     create_backend_environment_result: Optional[shared.CreateBackendEnvironmentResult] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

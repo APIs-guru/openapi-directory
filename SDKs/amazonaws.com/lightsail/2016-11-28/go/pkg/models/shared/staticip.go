@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// StaticIP
+// Describes a static IP.
 type StaticIP struct {
 	Arn          *string           `json:"arn,omitempty"`
 	AttachedTo   *string           `json:"attachedTo,omitempty"`

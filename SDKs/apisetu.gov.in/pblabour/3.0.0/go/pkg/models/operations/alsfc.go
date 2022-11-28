@@ -27,11 +27,6 @@ type AlsfcSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type AlsfcRequest struct {
-	Request  *AlsfcRequestBody `request:"mediaType=application/json"`
-	Security AlsfcSecurity
-}
-
 type Alsfc400ApplicationJSONErrorEnum string
 
 const (
@@ -161,6 +156,11 @@ const (
 type Alsfc504ApplicationJSON struct {
 	Error            *Alsfc504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Alsfc504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type AlsfcRequest struct {
+	Request  *AlsfcRequestBody `request:"mediaType=application/json"`
+	Security AlsfcSecurity
 }
 
 type AlsfcResponse struct {

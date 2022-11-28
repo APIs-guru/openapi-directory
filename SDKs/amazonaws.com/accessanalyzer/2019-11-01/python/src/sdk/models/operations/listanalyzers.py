@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 class ListAnalyzersTypeEnum(str, Enum):
@@ -27,17 +31,17 @@ class ListAnalyzersHeaders:
 
 @dataclass
 class ListAnalyzersRequest:
-    query_params: ListAnalyzersQueryParams = field(default=None)
-    headers: ListAnalyzersHeaders = field(default=None)
+    headers: ListAnalyzersHeaders = field()
+    query_params: ListAnalyzersQueryParams = field()
     
 
 @dataclass
 class ListAnalyzersResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     list_analyzers_response: Optional[shared.ListAnalyzersResponse] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

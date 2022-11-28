@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BorrowConfiguration } from "./borrowconfiguration";
 import { ProvisionalConfiguration } from "./provisionalconfiguration";
 import { RenewTypeEnum } from "./renewtypeenum";
+
 
 
 // ConsumptionConfiguration
@@ -9,12 +10,12 @@ import { RenewTypeEnum } from "./renewtypeenum";
  * Details about a consumption configuration.
 **/
 export class ConsumptionConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BorrowConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=BorrowConfiguration" })
   borrowConfiguration?: BorrowConfiguration;
 
-  @Metadata({ data: "json, name=ProvisionalConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=ProvisionalConfiguration" })
   provisionalConfiguration?: ProvisionalConfiguration;
 
-  @Metadata({ data: "json, name=RenewType" })
+  @SpeakeasyMetadata({ data: "json, name=RenewType" })
   renewType?: RenewTypeEnum;
 }

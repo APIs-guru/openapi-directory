@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ModelExportOutputConfig } from "./modelexportoutputconfig";
+
 
 
 // ExportModelRequest
@@ -7,6 +8,6 @@ import { ModelExportOutputConfig } from "./modelexportoutputconfig";
  * Request message for AutoMl.ExportModel. Models need to be enabled for exporting, otherwise an error code will be returned.
 **/
 export class ExportModelRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=outputConfig" })
+  @SpeakeasyMetadata({ data: "json, name=outputConfig" })
   outputConfig?: ModelExportOutputConfig;
 }

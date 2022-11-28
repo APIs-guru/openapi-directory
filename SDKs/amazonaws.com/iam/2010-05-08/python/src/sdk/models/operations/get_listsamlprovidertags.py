@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetListSamlProviderTagsActionEnum(str, Enum):
     LIST_SAML_PROVIDER_TAGS = "ListSAMLProviderTags"
@@ -10,11 +14,11 @@ class GetListSamlProviderTagsVersionEnum(str, Enum):
 
 @dataclass
 class GetListSamlProviderTagsQueryParams:
-    action: GetListSamlProviderTagsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetListSamlProviderTagsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    saml_provider_arn: str = field(metadata={'query_param': { 'field_name': 'SAMLProviderArn', 'style': 'form', 'explode': True }})
+    version: GetListSamlProviderTagsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
     max_items: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxItems', 'style': 'form', 'explode': True }})
-    saml_provider_arn: str = field(default=None, metadata={'query_param': { 'field_name': 'SAMLProviderArn', 'style': 'form', 'explode': True }})
-    version: GetListSamlProviderTagsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetListSamlProviderTagsHeaders:
 
 @dataclass
 class GetListSamlProviderTagsRequest:
-    query_params: GetListSamlProviderTagsQueryParams = field(default=None)
-    headers: GetListSamlProviderTagsHeaders = field(default=None)
+    headers: GetListSamlProviderTagsHeaders = field()
+    query_params: GetListSamlProviderTagsQueryParams = field()
     
 
 @dataclass
 class GetListSamlProviderTagsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

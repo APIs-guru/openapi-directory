@@ -1,65 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetLkeClusterKubeconfigPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=clusterId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=clusterId" })
   clusterId: number;
 }
 
 
-export class GetLkeClusterKubeconfigSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class GetLkeClusterKubeconfigSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class GetLkeClusterKubeconfigSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: GetLkeClusterKubeconfigSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: GetLkeClusterKubeconfigSecurityOption2;
-}
-
-
-export class GetLkeClusterKubeconfigRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetLkeClusterKubeconfigPathParams;
-
-  @Metadata()
-  security: GetLkeClusterKubeconfigSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class GetLkeClusterKubeconfig200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=kubeconfig" })
+  @SpeakeasyMetadata({ data: "json, name=kubeconfig" })
   kubeconfig?: string;
 }
 
 
 export class GetLkeClusterKubeconfigDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class GetLkeClusterKubeconfigRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetLkeClusterKubeconfigPathParams;
+
+  @SpeakeasyMetadata()
+  security: GetLkeClusterKubeconfigSecurity;
+}
+
+
 export class GetLkeClusterKubeconfigResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getLkeClusterKubeconfig200ApplicationJsonObject?: GetLkeClusterKubeconfig200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getLkeClusterKubeconfigDefaultApplicationJsonObject?: GetLkeClusterKubeconfigDefaultApplicationJson;
 }

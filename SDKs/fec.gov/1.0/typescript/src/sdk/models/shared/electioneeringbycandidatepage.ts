@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OffsetInfo } from "./offsetinfo";
 import { ElectioneeringByCandidate } from "./electioneeringbycandidate";
 
 
+
 export class ElectioneeringByCandidatePage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pagination" })
+  @SpeakeasyMetadata({ data: "json, name=pagination" })
   pagination?: OffsetInfo;
 
-  @Metadata({ data: "json, name=results", elemType: shared.ElectioneeringByCandidate })
+  @SpeakeasyMetadata({ data: "json, name=results", elemType: ElectioneeringByCandidate })
   results?: ElectioneeringByCandidate[];
 }

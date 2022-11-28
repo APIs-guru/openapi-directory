@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class SicerRequestBodyCertificateParameters extends SpeakeasyBase {
     name: string;
@@ -16,10 +16,6 @@ export declare class SicerRequestBody extends SpeakeasyBase {
 export declare class SicerSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class SicerRequest extends SpeakeasyBase {
-    request?: SicerRequestBody;
-    security: SicerSecurity;
 }
 export declare enum Sicer400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -102,6 +98,10 @@ export declare enum Sicer504ApplicationJsonErrorDescriptionEnum {
 export declare class Sicer504ApplicationJson extends SpeakeasyBase {
     error?: Sicer504ApplicationJsonErrorEnum;
     errorDescription?: Sicer504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class SicerRequest extends SpeakeasyBase {
+    request?: SicerRequestBody;
+    security: SicerSecurity;
 }
 export declare class SicerResponse extends SpeakeasyBase {
     contentType: string;

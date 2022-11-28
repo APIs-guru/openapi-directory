@@ -1,6 +1,7 @@
 
 
+
 export enum PolicyTypeEnum {
-    StepScaling = "StepScaling"
-,    TargetTrackingScaling = "TargetTrackingScaling"
+    StepScaling = "StepScaling",
+    TargetTrackingScaling = "TargetTrackingScaling"
 }

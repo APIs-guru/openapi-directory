@@ -1,5 +1,7 @@
 package shared
 
+// EvaluateAnnotationStoreRequest
+// Request to evaluate an Annotation store against a ground truth [Annotation store].
 type EvaluateAnnotationStoreRequest struct {
 	BigqueryDestination   *GoogleCloudHealthcareV1beta1AnnotationBigQueryDestination `json:"bigqueryDestination,omitempty"`
 	EvalInfoTypeMapping   map[string]string                                          `json:"evalInfoTypeMapping,omitempty"`

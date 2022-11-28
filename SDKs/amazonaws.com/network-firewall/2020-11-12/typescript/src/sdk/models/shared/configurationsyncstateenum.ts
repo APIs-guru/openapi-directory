@@ -1,6 +1,7 @@
 
 
+
 export enum ConfigurationSyncStateEnum {
-    Pending = "PENDING"
-,    InSync = "IN_SYNC"
+    Pending = "PENDING",
+    InSync = "IN_SYNC"
 }

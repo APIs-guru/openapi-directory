@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ContactcenterinsightsProjectsLocationsInsightsdataExportPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class ContactcenterinsightsProjectsLocationsInsightsdataExportQueryParams:
 
 @dataclass
 class ContactcenterinsightsProjectsLocationsInsightsdataExportSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ContactcenterinsightsProjectsLocationsInsightsdataExportRequest:
-    path_params: ContactcenterinsightsProjectsLocationsInsightsdataExportPathParams = field(default=None)
-    query_params: ContactcenterinsightsProjectsLocationsInsightsdataExportQueryParams = field(default=None)
+    path_params: ContactcenterinsightsProjectsLocationsInsightsdataExportPathParams = field()
+    query_params: ContactcenterinsightsProjectsLocationsInsightsdataExportQueryParams = field()
+    security: ContactcenterinsightsProjectsLocationsInsightsdataExportSecurity = field()
     request: Optional[shared.GoogleCloudContactcenterinsightsV1ExportInsightsDataRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ContactcenterinsightsProjectsLocationsInsightsdataExportSecurity = field(default=None)
     
 
 @dataclass
 class ContactcenterinsightsProjectsLocationsInsightsdataExportResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_longrunning_operation: Optional[shared.GoogleLongrunningOperation] = field(default=None)
-    status_code: int = field(default=None)
     

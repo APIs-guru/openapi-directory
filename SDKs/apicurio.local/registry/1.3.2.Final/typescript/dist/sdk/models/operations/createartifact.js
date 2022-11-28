@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export var CreateArtifactIfExistsEnum;
 (function (CreateArtifactIfExistsEnum) {
@@ -37,7 +37,7 @@ var CreateArtifactQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ifExists" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ifExists" }),
         __metadata("design:type", String)
     ], CreateArtifactQueryParams.prototype, "ifExists", void 0);
     return CreateArtifactQueryParams;
@@ -63,11 +63,11 @@ var CreateArtifactHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Registry-ArtifactId" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Registry-ArtifactId" }),
         __metadata("design:type", String)
     ], CreateArtifactHeaders.prototype, "xRegistryArtifactId", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Registry-ArtifactType" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Registry-ArtifactType" }),
         __metadata("design:type", String)
     ], CreateArtifactHeaders.prototype, "xRegistryArtifactType", void 0);
     return CreateArtifactHeaders;
@@ -79,15 +79,15 @@ var CreateArtifactRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateArtifactQueryParams)
     ], CreateArtifactRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateArtifactHeaders)
     ], CreateArtifactRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=*/*" }),
+        SpeakeasyMetadata({ data: "request, media_type=*/*" }),
         __metadata("design:type", Uint8Array)
     ], CreateArtifactRequest.prototype, "request", void 0);
     return CreateArtifactRequest;
@@ -99,19 +99,19 @@ var CreateArtifactResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ArtifactMetaData)
     ], CreateArtifactResponse.prototype, "artifactMetaData", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CreateArtifactResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Error)
     ], CreateArtifactResponse.prototype, "error", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CreateArtifactResponse.prototype, "statusCode", void 0);
     return CreateArtifactResponse;

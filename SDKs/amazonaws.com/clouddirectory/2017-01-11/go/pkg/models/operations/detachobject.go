@@ -15,6 +15,8 @@ type DetachObjectHeaders struct {
 	XAmzDataPartition string  `header:"style=simple,explode=false,name=x-amz-data-partition"`
 }
 
+// DetachObjectRequestBodyParentReference
+// The reference that identifies an object.
 type DetachObjectRequestBodyParentReference struct {
 	Selector *string `json:"Selector,omitempty"`
 }

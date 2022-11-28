@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PortRange extends SpeakeasyBase {
-  @Metadata({ data: "json, name=display" })
+  @SpeakeasyMetadata({ data: "json, name=display" })
   display?: string;
 
-  @Metadata({ data: "json, name=end" })
+  @SpeakeasyMetadata({ data: "json, name=end" })
   end?: number;
 
-  @Metadata({ data: "json, name=iana_name" })
+  @SpeakeasyMetadata({ data: "json, name=iana_name" })
   ianaName?: string;
 
-  @Metadata({ data: "json, name=iana_port_display" })
+  @SpeakeasyMetadata({ data: "json, name=iana_port_display" })
   ianaPortDisplay?: string;
 
-  @Metadata({ data: "json, name=start" })
+  @SpeakeasyMetadata({ data: "json, name=start" })
   start?: number;
 }

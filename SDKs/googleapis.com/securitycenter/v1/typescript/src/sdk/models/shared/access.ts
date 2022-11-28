@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Geolocation } from "./geolocation";
 import { ServiceAccountDelegationInfo } from "./serviceaccountdelegationinfo";
+
 
 
 // Access
@@ -9,33 +9,33 @@ import { ServiceAccountDelegationInfo } from "./serviceaccountdelegationinfo";
  * Represents an access event.
 **/
 export class Access extends SpeakeasyBase {
-  @Metadata({ data: "json, name=callerIp" })
+  @SpeakeasyMetadata({ data: "json, name=callerIp" })
   callerIp?: string;
 
-  @Metadata({ data: "json, name=callerIpGeo" })
+  @SpeakeasyMetadata({ data: "json, name=callerIpGeo" })
   callerIpGeo?: Geolocation;
 
-  @Metadata({ data: "json, name=methodName" })
+  @SpeakeasyMetadata({ data: "json, name=methodName" })
   methodName?: string;
 
-  @Metadata({ data: "json, name=principalEmail" })
+  @SpeakeasyMetadata({ data: "json, name=principalEmail" })
   principalEmail?: string;
 
-  @Metadata({ data: "json, name=principalSubject" })
+  @SpeakeasyMetadata({ data: "json, name=principalSubject" })
   principalSubject?: string;
 
-  @Metadata({ data: "json, name=serviceAccountDelegationInfo", elemType: shared.ServiceAccountDelegationInfo })
+  @SpeakeasyMetadata({ data: "json, name=serviceAccountDelegationInfo", elemType: ServiceAccountDelegationInfo })
   serviceAccountDelegationInfo?: ServiceAccountDelegationInfo[];
 
-  @Metadata({ data: "json, name=serviceAccountKeyName" })
+  @SpeakeasyMetadata({ data: "json, name=serviceAccountKeyName" })
   serviceAccountKeyName?: string;
 
-  @Metadata({ data: "json, name=serviceName" })
+  @SpeakeasyMetadata({ data: "json, name=serviceName" })
   serviceName?: string;
 
-  @Metadata({ data: "json, name=userAgentFamily" })
+  @SpeakeasyMetadata({ data: "json, name=userAgentFamily" })
   userAgentFamily?: string;
 
-  @Metadata({ data: "json, name=userName" })
+  @SpeakeasyMetadata({ data: "json, name=userName" })
   userName?: string;
 }

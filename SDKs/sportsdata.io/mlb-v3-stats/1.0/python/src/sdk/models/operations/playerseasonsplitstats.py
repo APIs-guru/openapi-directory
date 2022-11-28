@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 
 class PlayerSeasonSplitStatsFormatEnum(str, Enum):
     XML = "XML"
@@ -13,19 +14,19 @@ class PlayerSeasonSplitStatsSplitEnum(str, Enum):
 
 @dataclass
 class PlayerSeasonSplitStatsPathParams:
-    format: PlayerSeasonSplitStatsFormatEnum = field(default=None, metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
-    season: str = field(default=None, metadata={'path_param': { 'field_name': 'season', 'style': 'simple', 'explode': False }})
-    split: PlayerSeasonSplitStatsSplitEnum = field(default=None, metadata={'path_param': { 'field_name': 'split', 'style': 'simple', 'explode': False }})
+    format: PlayerSeasonSplitStatsFormatEnum = field(metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
+    season: str = field(metadata={'path_param': { 'field_name': 'season', 'style': 'simple', 'explode': False }})
+    split: PlayerSeasonSplitStatsSplitEnum = field(metadata={'path_param': { 'field_name': 'split', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class PlayerSeasonSplitStatsRequest:
-    path_params: PlayerSeasonSplitStatsPathParams = field(default=None)
+    path_params: PlayerSeasonSplitStatsPathParams = field()
     
 
 @dataclass
 class PlayerSeasonSplitStatsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     player_seasons: Optional[List[Any]] = field(default=None)
-    status_code: int = field(default=None)
     

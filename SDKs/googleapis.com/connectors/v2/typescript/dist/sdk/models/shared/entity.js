@@ -22,7 +22,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+// EntityInput
+/**
+ * 'Entity row'/ 'Entity' refers to a single row of an entity type.
+**/
+var EntityInput = /** @class */ (function (_super) {
+    __extends(EntityInput, _super);
+    function EntityInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=fields" }),
+        __metadata("design:type", Map)
+    ], EntityInput.prototype, "fields", void 0);
+    return EntityInput;
+}(SpeakeasyBase));
+export { EntityInput };
 // Entity
 /**
  * 'Entity row'/ 'Entity' refers to a single row of an entity type.
@@ -33,11 +49,11 @@ var Entity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=fields" }),
+        SpeakeasyMetadata({ data: "json, name=fields" }),
         __metadata("design:type", Map)
     ], Entity.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Entity.prototype, "name", void 0);
     return Entity;

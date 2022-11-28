@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsApiGatewayEndpointConfiguration } from "./awsapigatewayendpointconfiguration";
+
 
 
 // AwsApiGatewayRestApiDetails
@@ -7,30 +8,30 @@ import { AwsApiGatewayEndpointConfiguration } from "./awsapigatewayendpointconfi
  * Contains information about a REST API in version 1 of Amazon API Gateway.
 **/
 export class AwsApiGatewayRestApiDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApiKeySource" })
+  @SpeakeasyMetadata({ data: "json, name=ApiKeySource" })
   apiKeySource?: string;
 
-  @Metadata({ data: "json, name=BinaryMediaTypes" })
+  @SpeakeasyMetadata({ data: "json, name=BinaryMediaTypes" })
   binaryMediaTypes?: string[];
 
-  @Metadata({ data: "json, name=CreatedDate" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedDate" })
   createdDate?: string;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=EndpointConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointConfiguration" })
   endpointConfiguration?: AwsApiGatewayEndpointConfiguration;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=MinimumCompressionSize" })
+  @SpeakeasyMetadata({ data: "json, name=MinimumCompressionSize" })
   minimumCompressionSize?: number;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Version" })
+  @SpeakeasyMetadata({ data: "json, name=Version" })
   version?: string;
 }

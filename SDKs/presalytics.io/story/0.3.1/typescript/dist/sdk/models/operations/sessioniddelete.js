@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var SessionIdDeletePathParams = /** @class */ (function (_super) {
     __extends(SessionIdDeletePathParams, _super);
     function SessionIdDeletePathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=session_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=session_id" }),
         __metadata("design:type", String)
     ], SessionIdDeletePathParams.prototype, "sessionId", void 0);
     return SessionIdDeletePathParams;
@@ -41,7 +41,7 @@ var SessionIdDeleteRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SessionIdDeletePathParams)
     ], SessionIdDeleteRequest.prototype, "pathParams", void 0);
     return SessionIdDeleteRequest;
@@ -53,15 +53,15 @@ var SessionIdDeleteResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], SessionIdDeleteResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], SessionIdDeleteResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], SessionIdDeleteResponse.prototype, "problemDetail", void 0);
     return SessionIdDeleteResponse;

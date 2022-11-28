@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetBuiltinSlotTypesLocaleEnum(str, Enum):
@@ -39,16 +43,16 @@ class GetBuiltinSlotTypesHeaders:
 
 @dataclass
 class GetBuiltinSlotTypesRequest:
-    query_params: GetBuiltinSlotTypesQueryParams = field(default=None)
-    headers: GetBuiltinSlotTypesHeaders = field(default=None)
+    headers: GetBuiltinSlotTypesHeaders = field()
+    query_params: GetBuiltinSlotTypesQueryParams = field()
     
 
 @dataclass
 class GetBuiltinSlotTypesResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_builtin_slot_types_response: Optional[shared.GetBuiltinSlotTypesResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

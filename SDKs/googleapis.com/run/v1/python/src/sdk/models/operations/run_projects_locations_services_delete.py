@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class RunProjectsLocationsServicesDeletePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -29,20 +30,20 @@ class RunProjectsLocationsServicesDeleteQueryParams:
 
 @dataclass
 class RunProjectsLocationsServicesDeleteSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class RunProjectsLocationsServicesDeleteRequest:
-    path_params: RunProjectsLocationsServicesDeletePathParams = field(default=None)
-    query_params: RunProjectsLocationsServicesDeleteQueryParams = field(default=None)
-    security: RunProjectsLocationsServicesDeleteSecurity = field(default=None)
+    path_params: RunProjectsLocationsServicesDeletePathParams = field()
+    query_params: RunProjectsLocationsServicesDeleteQueryParams = field()
+    security: RunProjectsLocationsServicesDeleteSecurity = field()
     
 
 @dataclass
 class RunProjectsLocationsServicesDeleteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     status: Optional[shared.Status] = field(default=None)
-    status_code: int = field(default=None)
     

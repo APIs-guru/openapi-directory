@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class MalcsRequestBodyCertificateParameters extends SpeakeasyBase {
     applicationNo: string;
@@ -16,10 +16,6 @@ export declare class MalcsRequestBody extends SpeakeasyBase {
 export declare class MalcsSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class MalcsRequest extends SpeakeasyBase {
-    request?: MalcsRequestBody;
-    security: MalcsSecurity;
 }
 export declare enum Malcs400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -102,6 +98,10 @@ export declare enum Malcs504ApplicationJsonErrorDescriptionEnum {
 export declare class Malcs504ApplicationJson extends SpeakeasyBase {
     error?: Malcs504ApplicationJsonErrorEnum;
     errorDescription?: Malcs504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class MalcsRequest extends SpeakeasyBase {
+    request?: MalcsRequestBody;
+    security: MalcsSecurity;
 }
 export declare class MalcsResponse extends SpeakeasyBase {
     contentType: string;

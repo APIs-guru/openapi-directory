@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Invitation
+// Provides information about an Amazon Macie membership invitation that was received by an account.
 type Invitation struct {
 	AccountID          *string                 `json:"accountId,omitempty"`
 	InvitationID       *string                 `json:"invitationId,omitempty"`

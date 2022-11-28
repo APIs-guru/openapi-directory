@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DocumentationPartTypeEnum } from "./documentationparttypeenum";
 /**
  * Specifies the target API entity to which the documentation applies.

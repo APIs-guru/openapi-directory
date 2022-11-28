@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateLicenseePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=licenseeNumber" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=licenseeNumber" })
   licenseeNumber: string;
 }
 
 
 export class UpdateLicenseeRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "form, name=active;" })
+  @SpeakeasyMetadata({ data: "form, name=active;" })
   active?: boolean;
 
-  @Metadata({ data: "form, name=markedForTransfer;" })
+  @SpeakeasyMetadata({ data: "form, name=markedForTransfer;" })
   markedForTransfer?: boolean;
 
-  @Metadata({ data: "form, name=name;" })
+  @SpeakeasyMetadata({ data: "form, name=name;" })
   name?: string;
 
-  @Metadata({ data: "form, name=number;" })
+  @SpeakeasyMetadata({ data: "form, name=number;" })
   number?: string;
 }
 
 
 export class UpdateLicenseeSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   basicAuth: shared.SchemeBasicAuth;
 }
 
 
 export class UpdateLicenseeRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateLicenseePathParams;
 
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
   request?: UpdateLicenseeRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: UpdateLicenseeSecurity;
 }
 
 
 export class UpdateLicenseeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   netlicensing?: any;
 }

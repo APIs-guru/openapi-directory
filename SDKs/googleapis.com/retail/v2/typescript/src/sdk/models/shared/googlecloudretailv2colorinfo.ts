@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudRetailV2ColorInfo
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The color information of a Product.
 **/
 export class GoogleCloudRetailV2ColorInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=colorFamilies" })
+  @SpeakeasyMetadata({ data: "json, name=colorFamilies" })
   colorFamilies?: string[];
 
-  @Metadata({ data: "json, name=colors" })
+  @SpeakeasyMetadata({ data: "json, name=colors" })
   colors?: string[];
 }

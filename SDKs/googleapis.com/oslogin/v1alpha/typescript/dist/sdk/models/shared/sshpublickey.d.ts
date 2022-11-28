@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * The SSH public key information associated with a Google account.
 **/
@@ -7,4 +7,11 @@ export declare class SshPublicKey extends SpeakeasyBase {
     fingerprint?: string;
     key?: string;
     name?: string;
+}
+/**
+ * The SSH public key information associated with a Google account.
+**/
+export declare class SshPublicKeyInput extends SpeakeasyBase {
+    expirationTimeUsec?: string;
+    key?: string;
 }

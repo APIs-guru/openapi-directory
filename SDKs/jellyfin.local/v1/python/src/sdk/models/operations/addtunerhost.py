@@ -12,18 +12,18 @@ class AddTunerHostRequests:
 
 @dataclass
 class AddTunerHostSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class AddTunerHostRequest:
+    security: AddTunerHostSecurity = field()
     request: Optional[AddTunerHostRequests] = field(default=None)
-    security: AddTunerHostSecurity = field(default=None)
     
 
 @dataclass
 class AddTunerHostResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     tuner_host_info: Optional[shared.TunerHostInfo] = field(default=None)
     

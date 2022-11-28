@@ -6,6 +6,8 @@ type AccountBidderLocation struct {
 	URL        *string `json:"url,omitempty"`
 }
 
+// Account
+// Configuration data for an Ad Exchange buyer account.
 type Account struct {
 	BidderLocation         []AccountBidderLocation `json:"bidderLocation,omitempty"`
 	CookieMatchingNid      *string                 `json:"cookieMatchingNid,omitempty"`

@@ -22,59 +22,59 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { PropertyValue } from "./propertyvalue";
 var MarketingEventPublicDefaultResponse = /** @class */ (function (_super) {
     __extends(MarketingEventPublicDefaultResponse, _super);
     function MarketingEventPublicDefaultResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=createdAt" }),
+        SpeakeasyMetadata({ data: "json, name=createdAt" }),
         __metadata("design:type", Date)
     ], MarketingEventPublicDefaultResponse.prototype, "createdAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=customProperties", elemType: shared.PropertyValue }),
+        SpeakeasyMetadata({ data: "json, name=customProperties", elemType: PropertyValue }),
         __metadata("design:type", Array)
     ], MarketingEventPublicDefaultResponse.prototype, "customProperties", void 0);
     __decorate([
-        Metadata({ data: "json, name=endDateTime" }),
+        SpeakeasyMetadata({ data: "json, name=endDateTime" }),
         __metadata("design:type", Date)
     ], MarketingEventPublicDefaultResponse.prototype, "endDateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=eventCancelled" }),
+        SpeakeasyMetadata({ data: "json, name=eventCancelled" }),
         __metadata("design:type", Boolean)
     ], MarketingEventPublicDefaultResponse.prototype, "eventCancelled", void 0);
     __decorate([
-        Metadata({ data: "json, name=eventDescription" }),
+        SpeakeasyMetadata({ data: "json, name=eventDescription" }),
         __metadata("design:type", String)
     ], MarketingEventPublicDefaultResponse.prototype, "eventDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=eventName" }),
+        SpeakeasyMetadata({ data: "json, name=eventName" }),
         __metadata("design:type", String)
     ], MarketingEventPublicDefaultResponse.prototype, "eventName", void 0);
     __decorate([
-        Metadata({ data: "json, name=eventOrganizer" }),
+        SpeakeasyMetadata({ data: "json, name=eventOrganizer" }),
         __metadata("design:type", String)
     ], MarketingEventPublicDefaultResponse.prototype, "eventOrganizer", void 0);
     __decorate([
-        Metadata({ data: "json, name=eventType" }),
+        SpeakeasyMetadata({ data: "json, name=eventType" }),
         __metadata("design:type", String)
     ], MarketingEventPublicDefaultResponse.prototype, "eventType", void 0);
     __decorate([
-        Metadata({ data: "json, name=eventUrl" }),
+        SpeakeasyMetadata({ data: "json, name=eventUrl" }),
         __metadata("design:type", String)
     ], MarketingEventPublicDefaultResponse.prototype, "eventUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], MarketingEventPublicDefaultResponse.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=startDateTime" }),
+        SpeakeasyMetadata({ data: "json, name=startDateTime" }),
         __metadata("design:type", Date)
     ], MarketingEventPublicDefaultResponse.prototype, "startDateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=updatedAt" }),
+        SpeakeasyMetadata({ data: "json, name=updatedAt" }),
         __metadata("design:type", Date)
     ], MarketingEventPublicDefaultResponse.prototype, "updatedAt", void 0);
     return MarketingEventPublicDefaultResponse;

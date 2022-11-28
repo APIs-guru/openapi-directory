@@ -10,7 +10,7 @@ type DcimRegionsPartialUpdatePathParams struct {
 
 type DcimRegionsPartialUpdateRequest struct {
 	PathParams DcimRegionsPartialUpdatePathParams
-	Request    shared.WritableRegion `request:"mediaType=application/json"`
+	Request    shared.WritableRegionInput `request:"mediaType=application/json"`
 }
 
 type DcimRegionsPartialUpdateResponse struct {

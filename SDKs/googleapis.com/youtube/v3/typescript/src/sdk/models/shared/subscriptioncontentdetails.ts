@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum SubscriptionContentDetailsActivityTypeEnum {
-    SubscriptionActivityTypeUnspecified = "subscriptionActivityTypeUnspecified"
-,    All = "all"
-,    Uploads = "uploads"
+    SubscriptionActivityTypeUnspecified = "subscriptionActivityTypeUnspecified",
+    All = "all",
+    Uploads = "uploads"
 }
 
 
@@ -12,12 +13,12 @@ export enum SubscriptionContentDetailsActivityTypeEnum {
  * Details about the content to witch a subscription refers.
 **/
 export class SubscriptionContentDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=activityType" })
+  @SpeakeasyMetadata({ data: "json, name=activityType" })
   activityType?: SubscriptionContentDetailsActivityTypeEnum;
 
-  @Metadata({ data: "json, name=newItemCount" })
+  @SpeakeasyMetadata({ data: "json, name=newItemCount" })
   newItemCount?: number;
 
-  @Metadata({ data: "json, name=totalItemCount" })
+  @SpeakeasyMetadata({ data: "json, name=totalItemCount" })
   totalItemCount?: number;
 }

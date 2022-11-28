@@ -11,13 +11,13 @@ class RecipeRavesQueryParams:
 
 @dataclass
 class RecipeRavesRequest:
-    query_params: RecipeRavesQueryParams = field(default=None)
+    query_params: RecipeRavesQueryParams = field()
     
 
 @dataclass
 class RecipeRavesResponse:
+    content_type: str = field()
+    status_code: int = field()
     big_oven_model_recipe_info_review_tuple2s: Optional[List[shared.BigOvenModelRecipeInfoReviewTuple2]] = field(default=None)
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    body: Optional[bytes] = field(default=None)
     

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostCreateCustomVerificationEmailTemplateActionEnum(str, Enum):
     CREATE_CUSTOM_VERIFICATION_EMAIL_TEMPLATE = "CreateCustomVerificationEmailTemplate"
@@ -10,8 +14,8 @@ class PostCreateCustomVerificationEmailTemplateVersionEnum(str, Enum):
 
 @dataclass
 class PostCreateCustomVerificationEmailTemplateQueryParams:
-    action: PostCreateCustomVerificationEmailTemplateActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostCreateCustomVerificationEmailTemplateVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostCreateCustomVerificationEmailTemplateActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostCreateCustomVerificationEmailTemplateVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostCreateCustomVerificationEmailTemplateHeaders:
 
 @dataclass
 class PostCreateCustomVerificationEmailTemplateRequest:
-    query_params: PostCreateCustomVerificationEmailTemplateQueryParams = field(default=None)
-    headers: PostCreateCustomVerificationEmailTemplateHeaders = field(default=None)
+    headers: PostCreateCustomVerificationEmailTemplateHeaders = field()
+    query_params: PostCreateCustomVerificationEmailTemplateQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostCreateCustomVerificationEmailTemplateResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -39,6 +39,8 @@ const (
 	NiResponseJSONAdvancedRoamingUnknownValidNumberEnumInferredNotValid NiResponseJSONAdvancedRoamingUnknownValidNumberEnum = "inferred_not_valid"
 )
 
+// NiResponseJSONAdvancedRoamingUnknown
+// Unknown Roaming
 type NiResponseJSONAdvancedRoamingUnknown struct {
 	CallerIdentity            *NiCallerIdentity                                    `json:"caller_identity,omitempty"`
 	CountryCode               string                                               `json:"country_code"`

@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class MergeOptionTypeEnumEnum(str, Enum):
     FAST_FORWARD_MERGE = "FAST_FORWARD_MERGE"

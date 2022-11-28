@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * A reference to an Ooxml Automation Document from the Presalytics Ooxml Automation API
 **/

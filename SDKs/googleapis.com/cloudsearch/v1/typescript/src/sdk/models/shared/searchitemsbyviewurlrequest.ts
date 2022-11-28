@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DebugOptions } from "./debugoptions";
 
 
+
 export class SearchItemsByViewUrlRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=debugOptions" })
+  @SpeakeasyMetadata({ data: "json, name=debugOptions" })
   debugOptions?: DebugOptions;
 
-  @Metadata({ data: "json, name=pageToken" })
+  @SpeakeasyMetadata({ data: "json, name=pageToken" })
   pageToken?: string;
 
-  @Metadata({ data: "json, name=viewUrl" })
+  @SpeakeasyMetadata({ data: "json, name=viewUrl" })
   viewUrl?: string;
 }

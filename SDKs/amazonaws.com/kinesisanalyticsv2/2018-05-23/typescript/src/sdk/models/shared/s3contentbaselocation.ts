@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // S3ContentBaseLocation
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The S3 bucket that holds the application information.
 **/
 export class S3ContentBaseLocation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BasePath" })
+  @SpeakeasyMetadata({ data: "json, name=BasePath" })
   basePath?: string;
 
-  @Metadata({ data: "json, name=BucketARN" })
+  @SpeakeasyMetadata({ data: "json, name=BucketARN" })
   bucketArn: string;
 }

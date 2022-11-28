@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Timestamp } from "./timestamp";
+
 
 
 // PerfSample
@@ -7,9 +8,9 @@ import { Timestamp } from "./timestamp";
  * Resource representing a single performance measure or data point
 **/
 export class PerfSample extends SpeakeasyBase {
-  @Metadata({ data: "json, name=sampleTime" })
+  @SpeakeasyMetadata({ data: "json, name=sampleTime" })
   sampleTime?: Timestamp;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: number;
 }

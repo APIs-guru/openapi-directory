@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import team
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class TeamList:
-    sum: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sum' }})
-    teams: List[team.Team] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'teams' }})
+    r"""TeamList
+    Teams List
+    """
+    
+    sum: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('sum') }})
+    teams: List[Team] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('teams') }})
     

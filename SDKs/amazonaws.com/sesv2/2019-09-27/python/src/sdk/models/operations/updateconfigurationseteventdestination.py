@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdateConfigurationSetEventDestinationPathParams:
-    configuration_set_name: str = field(default=None, metadata={'path_param': { 'field_name': 'ConfigurationSetName', 'style': 'simple', 'explode': False }})
-    event_destination_name: str = field(default=None, metadata={'path_param': { 'field_name': 'EventDestinationName', 'style': 'simple', 'explode': False }})
+    configuration_set_name: str = field(metadata={'path_param': { 'field_name': 'ConfigurationSetName', 'style': 'simple', 'explode': False }})
+    event_destination_name: str = field(metadata={'path_param': { 'field_name': 'EventDestinationName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -24,33 +29,37 @@ class UpdateConfigurationSetEventDestinationHeaders:
 @dataclass_json
 @dataclass
 class UpdateConfigurationSetEventDestinationRequestBodyEventDestination:
-    cloud_watch_destination: Optional[shared.CloudWatchDestination] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CloudWatchDestination' }})
-    enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Enabled' }})
-    kinesis_firehose_destination: Optional[shared.KinesisFirehoseDestination] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'KinesisFirehoseDestination' }})
-    matching_event_types: Optional[List[shared.EventTypeEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MatchingEventTypes' }})
-    pinpoint_destination: Optional[shared.PinpointDestination] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PinpointDestination' }})
-    sns_destination: Optional[shared.SnsDestination] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SnsDestination' }})
+    r"""UpdateConfigurationSetEventDestinationRequestBodyEventDestination
+    An object that defines the event destination. Specifically, it defines which services receive events from emails sent using the configuration set that the event destination is associated with. Also defines the types of events that are sent to the event destination.
+    """
+    
+    cloud_watch_destination: Optional[shared.CloudWatchDestination] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CloudWatchDestination') }})
+    enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Enabled') }})
+    kinesis_firehose_destination: Optional[shared.KinesisFirehoseDestination] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('KinesisFirehoseDestination') }})
+    matching_event_types: Optional[List[shared.EventTypeEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MatchingEventTypes') }})
+    pinpoint_destination: Optional[shared.PinpointDestination] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PinpointDestination') }})
+    sns_destination: Optional[shared.SnsDestination] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SnsDestination') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateConfigurationSetEventDestinationRequestBody:
-    event_destination: UpdateConfigurationSetEventDestinationRequestBodyEventDestination = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EventDestination' }})
+    event_destination: UpdateConfigurationSetEventDestinationRequestBodyEventDestination = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('EventDestination') }})
     
 
 @dataclass
 class UpdateConfigurationSetEventDestinationRequest:
-    path_params: UpdateConfigurationSetEventDestinationPathParams = field(default=None)
-    headers: UpdateConfigurationSetEventDestinationHeaders = field(default=None)
-    request: UpdateConfigurationSetEventDestinationRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateConfigurationSetEventDestinationHeaders = field()
+    path_params: UpdateConfigurationSetEventDestinationPathParams = field()
+    request: UpdateConfigurationSetEventDestinationRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateConfigurationSetEventDestinationResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     update_configuration_set_event_destination_response: Optional[dict[str, Any]] = field(default=None)
     

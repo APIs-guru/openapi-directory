@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ViolationReasonEnum(str, Enum):
     WEB_ACL_MISSING_RULE_GROUP = "WEB_ACL_MISSING_RULE_GROUP"

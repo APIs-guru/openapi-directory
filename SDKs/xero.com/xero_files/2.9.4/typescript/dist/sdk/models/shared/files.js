@@ -22,27 +22,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { FileObject } from "./fileobject";
 var Files = /** @class */ (function (_super) {
     __extends(Files, _super);
     function Files() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Items", elemType: shared.FileObject }),
+        SpeakeasyMetadata({ data: "json, name=Items", elemType: FileObject }),
         __metadata("design:type", Array)
     ], Files.prototype, "items", void 0);
     __decorate([
-        Metadata({ data: "json, name=Page" }),
+        SpeakeasyMetadata({ data: "json, name=Page" }),
         __metadata("design:type", Number)
     ], Files.prototype, "page", void 0);
     __decorate([
-        Metadata({ data: "json, name=PerPage" }),
+        SpeakeasyMetadata({ data: "json, name=PerPage" }),
         __metadata("design:type", Number)
     ], Files.prototype, "perPage", void 0);
     __decorate([
-        Metadata({ data: "json, name=TotalCount" }),
+        SpeakeasyMetadata({ data: "json, name=TotalCount" }),
         __metadata("design:type", Number)
     ], Files.prototype, "totalCount", void 0);
     return Files;

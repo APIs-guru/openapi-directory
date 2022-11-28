@@ -1,5 +1,7 @@
 package shared
 
+// EndpointMessageResult
+// Provides information about the delivery status and results of sending a message directly to an endpoint.
 type EndpointMessageResult struct {
 	Address        *string            `json:"Address,omitempty"`
 	DeliveryStatus DeliveryStatusEnum `json:"DeliveryStatus"`

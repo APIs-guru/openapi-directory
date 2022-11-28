@@ -78,6 +78,8 @@ const (
 	DeviceMeterSubTypeEnumMeterSubTypeVirtualBattery  DeviceMeterSubTypeEnum = "MeterSubTypeVirtualBattery"
 )
 
+// Device
+// Container Class for the Web API
 type Device struct {
 	ActivePower                 *float64                        `json:"ActivePower,omitempty"`
 	ActivePowerL1               *float64                        `json:"ActivePowerL1,omitempty"`

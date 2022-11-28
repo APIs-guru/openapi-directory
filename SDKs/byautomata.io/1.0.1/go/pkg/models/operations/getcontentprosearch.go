@@ -8,10 +8,6 @@ type GetContentproSearchQueryParams struct {
 	Terms string `queryParam:"style=form,explode=true,name=terms"`
 }
 
-type GetContentproSearchRequest struct {
-	QueryParams GetContentproSearchQueryParams
-}
-
 type GetContentproSearch200ApplicationJSONData struct {
 	Article  *shared.Article            `json:"article,omitempty"`
 	Company  *shared.ContentProCompany  `json:"company,omitempty"`
@@ -23,6 +19,10 @@ type GetContentproSearch200ApplicationJSON struct {
 	CountRemaining *string                                     `json:"count_remaining,omitempty"`
 	Data           []GetContentproSearch200ApplicationJSONData `json:"data,omitempty"`
 	RenewalDate    *string                                     `json:"renewal_date,omitempty"`
+}
+
+type GetContentproSearchRequest struct {
+	QueryParams GetContentproSearchQueryParams
 }
 
 type GetContentproSearchResponse struct {

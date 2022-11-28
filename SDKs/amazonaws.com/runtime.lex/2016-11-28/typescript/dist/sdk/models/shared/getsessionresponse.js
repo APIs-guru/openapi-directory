@@ -22,32 +22,33 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ActiveContext } from "./activecontext";
 import { DialogAction } from "./dialogaction";
+import { IntentSummary } from "./intentsummary";
 var GetSessionResponse = /** @class */ (function (_super) {
     __extends(GetSessionResponse, _super);
     function GetSessionResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=activeContexts", elemType: shared.ActiveContext }),
+        SpeakeasyMetadata({ data: "json, name=activeContexts", elemType: ActiveContext }),
         __metadata("design:type", Array)
     ], GetSessionResponse.prototype, "activeContexts", void 0);
     __decorate([
-        Metadata({ data: "json, name=dialogAction" }),
+        SpeakeasyMetadata({ data: "json, name=dialogAction" }),
         __metadata("design:type", DialogAction)
     ], GetSessionResponse.prototype, "dialogAction", void 0);
     __decorate([
-        Metadata({ data: "json, name=recentIntentSummaryView", elemType: shared.IntentSummary }),
+        SpeakeasyMetadata({ data: "json, name=recentIntentSummaryView", elemType: IntentSummary }),
         __metadata("design:type", Array)
     ], GetSessionResponse.prototype, "recentIntentSummaryView", void 0);
     __decorate([
-        Metadata({ data: "json, name=sessionAttributes" }),
+        SpeakeasyMetadata({ data: "json, name=sessionAttributes" }),
         __metadata("design:type", Map)
     ], GetSessionResponse.prototype, "sessionAttributes", void 0);
     __decorate([
-        Metadata({ data: "json, name=sessionId" }),
+        SpeakeasyMetadata({ data: "json, name=sessionId" }),
         __metadata("design:type", String)
     ], GetSessionResponse.prototype, "sessionId", void 0);
     return GetSessionResponse;

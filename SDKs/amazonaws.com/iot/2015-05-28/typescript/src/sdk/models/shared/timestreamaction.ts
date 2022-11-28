@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TimestreamDimension } from "./timestreamdimension";
 import { TimestreamTimestamp } from "./timestreamtimestamp";
+
 
 
 // TimestreamAction
@@ -9,18 +9,18 @@ import { TimestreamTimestamp } from "./timestreamtimestamp";
  * The Timestream rule action writes attributes (measures) from an MQTT message into an Amazon Timestream table. For more information, see the <a href="https://docs.aws.amazon.com/iot/latest/developerguide/timestream-rule-action.html">Timestream</a> topic rule action documentation.
 **/
 export class TimestreamAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=databaseName" })
+  @SpeakeasyMetadata({ data: "json, name=databaseName" })
   databaseName: string;
 
-  @Metadata({ data: "json, name=dimensions", elemType: shared.TimestreamDimension })
+  @SpeakeasyMetadata({ data: "json, name=dimensions", elemType: TimestreamDimension })
   dimensions: TimestreamDimension[];
 
-  @Metadata({ data: "json, name=roleArn" })
+  @SpeakeasyMetadata({ data: "json, name=roleArn" })
   roleArn: string;
 
-  @Metadata({ data: "json, name=tableName" })
+  @SpeakeasyMetadata({ data: "json, name=tableName" })
   tableName: string;
 
-  @Metadata({ data: "json, name=timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=timestamp" })
   timestamp?: TimestreamTimestamp;
 }

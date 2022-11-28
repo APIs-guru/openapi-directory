@@ -17,14 +17,14 @@ type DuplicateTaskRequestBody struct {
 	Data *shared.TaskDuplicateRequest `json:"data,omitempty"`
 }
 
+type DuplicateTask201ApplicationJSON struct {
+	Data *shared.JobResponse `json:"data,omitempty"`
+}
+
 type DuplicateTaskRequest struct {
 	PathParams  DuplicateTaskPathParams
 	QueryParams DuplicateTaskQueryParams
 	Request     DuplicateTaskRequestBody `request:"mediaType=application/json"`
-}
-
-type DuplicateTask201ApplicationJSON struct {
-	Data *shared.JobResponse `json:"data,omitempty"`
 }
 
 type DuplicateTaskResponse struct {

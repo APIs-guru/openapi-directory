@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TypedLinkSpecifier } from "./typedlinkspecifier";
+
 
 
 // BatchListIncomingTypedLinksResponse
@@ -8,9 +8,9 @@ import { TypedLinkSpecifier } from "./typedlinkspecifier";
  * Represents the output of a <a>ListIncomingTypedLinks</a> response operation.
 **/
 export class BatchListIncomingTypedLinksResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LinkSpecifiers", elemType: shared.TypedLinkSpecifier })
+  @SpeakeasyMetadata({ data: "json, name=LinkSpecifiers", elemType: TypedLinkSpecifier })
   linkSpecifiers?: TypedLinkSpecifier[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

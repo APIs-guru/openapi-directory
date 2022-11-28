@@ -1,8 +1,12 @@
-import warnings
+
+
 import requests
-from typing import Enum,List,Optional
-from sdk.models import operations, shared
+from typing import List,Optional
+from enum import Enum
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,28 +15,51 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def activity_entry_api_get_list(self, request: operations.ActivityEntryAPIGetListRequest) -> operations.ActivityEntryAPIGetListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a list of recent activity entries.
+        Entries are always returned sorted from newest to oldest.
+                    Activity for deleted entries is not returned.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/activityEntries"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -61,15 +88,17 @@ class SDK:
 
     
     def album_api_delete(self, request: operations.AlbumAPIDeleteRequest) -> operations.AlbumAPIDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes an album.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/albums/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -82,13 +111,18 @@ class SDK:
 
     
     def album_api_delete_comment(self, request: operations.AlbumAPIDeleteCommentRequest) -> operations.AlbumAPIDeleteCommentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a comment.
+        Normal users can delete their own comments, moderators can delete all comments.
+                    Requires login.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/albums/comments/{commentId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -101,13 +135,13 @@ class SDK:
 
     
     def album_api_delete_review(self, request: operations.AlbumAPIDeleteReviewRequest) -> operations.AlbumAPIDeleteReviewResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/albums/{id}/reviews/{reviewId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -120,13 +154,17 @@ class SDK:
 
     
     def album_api_get_comments(self, request: operations.AlbumAPIGetCommentsRequest) -> operations.AlbumAPIGetCommentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a list of comments for an album.
+        Pagination and sorting might be added later.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/albums/{id}/comments", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -155,15 +193,17 @@ class SDK:
 
     
     def album_api_get_list(self, request: operations.AlbumAPIGetListRequest) -> operations.AlbumAPIGetListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a page of albums.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/albums"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -192,15 +232,17 @@ class SDK:
 
     
     def album_api_get_names(self, request: operations.AlbumAPIGetNamesRequest) -> operations.AlbumAPIGetNamesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a list of album names. Ideal for autocomplete boxes.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/albums/names"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -229,15 +271,18 @@ class SDK:
 
     
     def album_api_get_new_albums(self, request: operations.AlbumAPIGetNewAlbumsRequest) -> operations.AlbumAPIGetNewAlbumsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets list of upcoming or recent albums, same as front page.
+        Output is cached for 1 hour.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/albums/new"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -266,15 +311,17 @@ class SDK:
 
     
     def album_api_get_one(self, request: operations.AlbumAPIGetOneRequest) -> operations.AlbumAPIGetOneResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets an album by Id.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/albums/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -303,15 +350,14 @@ class SDK:
 
     
     def album_api_get_reviews(self, request: operations.AlbumAPIGetReviewsRequest) -> operations.AlbumAPIGetReviewsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/albums/{id}/reviews", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -340,15 +386,18 @@ class SDK:
 
     
     def album_api_get_top_albums(self, request: operations.AlbumAPIGetTopAlbumsRequest) -> operations.AlbumAPIGetTopAlbumsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets list of top rated albums, same as front page.
+        Output is cached for 1 hour.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/albums/top"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -377,15 +426,17 @@ class SDK:
 
     
     def album_api_get_tracks(self, request: operations.AlbumAPIGetTracksRequest) -> operations.AlbumAPIGetTracksResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets tracks for an album.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/albums/{id}/tracks", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -414,15 +465,14 @@ class SDK:
 
     
     def album_api_get_tracks_fields(self, request: operations.AlbumAPIGetTracksFieldsRequest) -> operations.AlbumAPIGetTracksFieldsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/albums/{id}/tracks/fields", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -453,15 +503,14 @@ class SDK:
 
     
     def album_api_get_user_collections(self, request: operations.AlbumAPIGetUserCollectionsRequest) -> operations.AlbumAPIGetUserCollectionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/albums/{id}/user-collections", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -490,15 +539,17 @@ class SDK:
 
     
     def artist_api_delete(self, request: operations.ArtistAPIDeleteRequest) -> operations.ArtistAPIDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes an artist.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/artists/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -511,13 +562,18 @@ class SDK:
 
     
     def artist_api_delete_comment(self, request: operations.ArtistAPIDeleteCommentRequest) -> operations.ArtistAPIDeleteCommentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a comment.
+        Normal users can delete their own comments, moderators can delete all comments.
+                    Requires login.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/artists/comments/{commentId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -530,13 +586,17 @@ class SDK:
 
     
     def artist_api_get_comments(self, request: operations.ArtistAPIGetCommentsRequest) -> operations.ArtistAPIGetCommentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a list of comments for an artist.
+        Pagination and sorting might be added later.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/artists/{id}/comments", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -565,15 +625,17 @@ class SDK:
 
     
     def artist_api_get_list(self, request: operations.ArtistAPIGetListRequest) -> operations.ArtistAPIGetListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Find artists.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/artists"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -602,15 +664,17 @@ class SDK:
 
     
     def artist_api_get_names(self, request: operations.ArtistAPIGetNamesRequest) -> operations.ArtistAPIGetNamesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a list of artist names. Ideal for autocomplete boxes.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/artists/names"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -639,15 +703,17 @@ class SDK:
 
     
     def artist_api_get_one(self, request: operations.ArtistAPIGetOneRequest) -> operations.ArtistAPIGetOneResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets an artist by Id.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/artists/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -676,13 +742,18 @@ class SDK:
 
     
     def comment_api_delete_comment(self, request: operations.CommentAPIDeleteCommentRequest) -> operations.CommentAPIDeleteCommentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a comment.
+        Normal users can delete their own comments, moderators can delete all comments.
+                    Requires login.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/comments/{entryType}-comments/{commentId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -695,15 +766,17 @@ class SDK:
 
     
     def comment_api_get_comments(self, request: operations.CommentAPIGetCommentsRequest) -> operations.CommentAPIGetCommentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a list of comments for an entry.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/comments/{entryType}-comments", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -732,13 +805,13 @@ class SDK:
 
     
     def discussion_api_delete_comment(self, request: operations.DiscussionAPIDeleteCommentRequest) -> operations.DiscussionAPIDeleteCommentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/discussions/comments/{commentId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -751,13 +824,13 @@ class SDK:
 
     
     def discussion_api_delete_topic(self, request: operations.DiscussionAPIDeleteTopicRequest) -> operations.DiscussionAPIDeleteTopicResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/discussions/topics/{topicId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -770,15 +843,14 @@ class SDK:
 
     
     def discussion_api_get_folders(self, request: operations.DiscussionAPIGetFoldersRequest) -> operations.DiscussionAPIGetFoldersResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/discussions/folders"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -807,15 +879,14 @@ class SDK:
 
     
     def discussion_api_get_topic(self, request: operations.DiscussionAPIGetTopicRequest) -> operations.DiscussionAPIGetTopicResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/discussions/topics/{topicId}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -844,15 +915,14 @@ class SDK:
 
     
     def discussion_api_get_topics(self, request: operations.DiscussionAPIGetTopicsRequest) -> operations.DiscussionAPIGetTopicsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/discussions/topics"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -881,15 +951,14 @@ class SDK:
 
     
     def discussion_api_get_topics_for_folder(self, request: operations.DiscussionAPIGetTopicsForFolderRequest) -> operations.DiscussionAPIGetTopicsForFolderResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/discussions/folders/{folderId}/topics", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -918,15 +987,17 @@ class SDK:
 
     
     def entry_api_get_list(self, request: operations.EntryAPIGetListRequest) -> operations.EntryAPIGetListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Find entries.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/entries"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -955,15 +1026,17 @@ class SDK:
 
     
     def entry_api_get_names(self, request: operations.EntryAPIGetNamesRequest) -> operations.EntryAPIGetNamesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a list of entry names. Ideal for autocomplete boxes.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/entries/names"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -992,15 +1065,14 @@ class SDK:
 
     
     def entry_types_api_get_mapped_tag(self, request: operations.EntryTypesAPIGetMappedTagRequest) -> operations.EntryTypesAPIGetMappedTagResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/entry-types/{entryType}/{subType}/tag", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1029,13 +1101,13 @@ class SDK:
 
     
     def get_api_users_current_album_collection_statuses_album_id_(self, request: operations.GetAPIUsersCurrentAlbumCollectionStatusesAlbumIDRequest) -> operations.GetAPIUsersCurrentAlbumCollectionStatusesAlbumIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/users/current/album-collection-statuses/{albumId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1064,13 +1136,13 @@ class SDK:
 
     
     def get_api_users_current_followed_artists_artist_id_(self, request: operations.GetAPIUsersCurrentFollowedArtistsArtistIDRequest) -> operations.GetAPIUsersCurrentFollowedArtistsArtistIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/users/current/followedArtists/{artistId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1099,15 +1171,17 @@ class SDK:
 
     
     def pv_api_get_list(self, request: operations.PvAPIGetListRequest) -> operations.PvAPIGetListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a list of PVs for songs.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/pvs/for-songs"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1136,15 +1210,17 @@ class SDK:
 
     
     def release_event_api_delete(self, request: operations.ReleaseEventAPIDeleteRequest) -> operations.ReleaseEventAPIDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes an event.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/releaseEvents/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1157,15 +1233,17 @@ class SDK:
 
     
     def release_event_api_get_albums(self, request: operations.ReleaseEventAPIGetAlbumsRequest) -> operations.ReleaseEventAPIGetAlbumsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a list of albums for a specific event.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/releaseEvents/{eventId}/albums", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1194,15 +1272,17 @@ class SDK:
 
     
     def release_event_api_get_list(self, request: operations.ReleaseEventAPIGetListRequest) -> operations.ReleaseEventAPIGetListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a page of events.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/releaseEvents"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1231,15 +1311,19 @@ class SDK:
 
     
     def release_event_api_get_names(self, request: operations.ReleaseEventAPIGetNamesRequest) -> operations.ReleaseEventAPIGetNamesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Find event names by a part of name.
+                    
+                    Matching is done anywhere from the name.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/releaseEvents/names"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1268,15 +1352,14 @@ class SDK:
 
     
     def release_event_api_get_one(self, request: operations.ReleaseEventAPIGetOneRequest) -> operations.ReleaseEventAPIGetOneResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/releaseEvents/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1305,15 +1388,17 @@ class SDK:
 
     
     def release_event_api_get_published_songs(self, request: operations.ReleaseEventAPIGetPublishedSongsRequest) -> operations.ReleaseEventAPIGetPublishedSongsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a list of songs for a specific event.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/releaseEvents/{eventId}/published-songs", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1342,15 +1427,17 @@ class SDK:
 
     
     def release_event_api_post_report(self, request: operations.ReleaseEventAPIPostReportRequest) -> operations.ReleaseEventAPIPostReportResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a new report.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/releaseEvents/{eventId}/reports", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1363,15 +1450,17 @@ class SDK:
 
     
     def release_event_series_api_delete(self, request: operations.ReleaseEventSeriesAPIDeleteRequest) -> operations.ReleaseEventSeriesAPIDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes an event series.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/releaseEventSeries/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1384,15 +1473,17 @@ class SDK:
 
     
     def release_event_series_api_get_list(self, request: operations.ReleaseEventSeriesAPIGetListRequest) -> operations.ReleaseEventSeriesAPIGetListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a page of event series.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/releaseEventSeries"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1421,15 +1512,17 @@ class SDK:
 
     
     def release_event_series_api_get_one(self, request: operations.ReleaseEventSeriesAPIGetOneRequest) -> operations.ReleaseEventSeriesAPIGetOneResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets single event series by ID.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/releaseEventSeries/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1458,15 +1551,17 @@ class SDK:
 
     
     def resources_api_get_list(self, request: operations.ResourcesAPIGetListRequest) -> operations.ResourcesAPIGetListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a number of resource sets for a specific culture.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/resources/{cultureCode}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1484,15 +1579,17 @@ class SDK:
 
     
     def song_api_delete(self, request: operations.SongAPIDeleteRequest) -> operations.SongAPIDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a song.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/songs/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1505,13 +1602,18 @@ class SDK:
 
     
     def song_api_delete_comment(self, request: operations.SongAPIDeleteCommentRequest) -> operations.SongAPIDeleteCommentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a comment.
+        Normal users can delete their own comments, moderators can delete all comments.
+                    Requires login.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/songs/comments/{commentId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1524,15 +1626,17 @@ class SDK:
 
     
     def song_api_get_by_id(self, request: operations.SongAPIGetByIDRequest) -> operations.SongAPIGetByIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a song by Id.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/songs/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1561,15 +1665,17 @@ class SDK:
 
     
     def song_api_get_by_pv(self, request: operations.SongAPIGetByPvRequest) -> operations.SongAPIGetByPvResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a song by PV.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/songs/byPv"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1598,13 +1704,17 @@ class SDK:
 
     
     def song_api_get_comments(self, request: operations.SongAPIGetCommentsRequest) -> operations.SongAPIGetCommentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a list of comments for a song.
+        Pagination and sorting might be added later.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/songs/{id}/comments", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1633,15 +1743,18 @@ class SDK:
 
     
     def song_api_get_derived(self, request: operations.SongAPIGetDerivedRequest) -> operations.SongAPIGetDerivedResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets derived (alternate versions) of a song.
+        Pagination and sorting might be added later.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/songs/{id}/derived", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1670,15 +1783,18 @@ class SDK:
 
     
     def song_api_get_highlighted_songs(self, request: operations.SongAPIGetHighlightedSongsRequest) -> operations.SongAPIGetHighlightedSongsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets list of highlighted songs, same as front page.
+        Output is cached for 1 hour.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/songs/highlighted"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1707,15 +1823,17 @@ class SDK:
 
     
     def song_api_get_list(self, request: operations.SongAPIGetListRequest) -> operations.SongAPIGetListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Find songs.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/songs"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1744,13 +1862,17 @@ class SDK:
 
     
     def song_api_get_lyrics(self, request: operations.SongAPIGetLyricsRequest) -> operations.SongAPIGetLyricsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets lyrics by ID.
+        Output is cached. Specify song version as parameter to refresh.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/songs/lyrics/{lyricsId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1779,15 +1901,17 @@ class SDK:
 
     
     def song_api_get_names(self, request: operations.SongAPIGetNamesRequest) -> operations.SongAPIGetNamesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a list of song names. Ideal for autocomplete boxes.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/songs/names"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1816,15 +1940,19 @@ class SDK:
 
     
     def song_api_get_ratings(self, request: operations.SongAPIGetRatingsRequest) -> operations.SongAPIGetRatingsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get ratings for a song.
+        The result includes ratings and user information.
+                    For users who have requested not to make their ratings public, the user will be empty.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/songs/{id}/ratings", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1853,15 +1981,17 @@ class SDK:
 
     
     def song_api_get_related(self, request: operations.SongAPIGetRelatedRequest) -> operations.SongAPIGetRelatedResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets related songs.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/songs/{id}/related", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1890,15 +2020,17 @@ class SDK:
 
     
     def song_api_get_top_songs(self, request: operations.SongAPIGetTopSongsRequest) -> operations.SongAPIGetTopSongsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets top rated songs.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/songs/top-rated"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1927,22 +2059,25 @@ class SDK:
 
     
     def song_api_post_rating(self, request: operations.SongAPIPostRatingRequest) -> operations.SongAPIPostRatingResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add or update rating for a specific song, for the currently logged in user.
+        If the user has already rated the song, any previous rating is replaced.
+                    Authorization cookie must be included.
+                    This API supports CORS.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/songs/{id}/ratings", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1955,15 +2090,17 @@ class SDK:
 
     
     def song_list_api_delete(self, request: operations.SongListAPIDeleteRequest) -> operations.SongListAPIDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a song list.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/songLists/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1976,13 +2113,18 @@ class SDK:
 
     
     def song_list_api_delete_comment(self, request: operations.SongListAPIDeleteCommentRequest) -> operations.SongListAPIDeleteCommentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a comment.
+        Normal users can delete their own comments, moderators can delete all comments.
+                    Requires login.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/songLists/comments/{commentId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1995,13 +2137,16 @@ class SDK:
 
     
     def song_list_api_get_comments(self, request: operations.SongListAPIGetCommentsRequest) -> operations.SongListAPIGetCommentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a list of comments for a song list.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/songLists/{listId}/comments", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2030,15 +2175,17 @@ class SDK:
 
     
     def song_list_api_get_featured_list_names(self, request: operations.SongListAPIGetFeaturedListNamesRequest) -> operations.SongListAPIGetFeaturedListNamesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a list of featuedd list names. Ideal for autocomplete boxes.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/songLists/featured/names"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2067,15 +2214,17 @@ class SDK:
 
     
     def song_list_api_get_featured_lists(self, request: operations.SongListAPIGetFeaturedListsRequest) -> operations.SongListAPIGetFeaturedListsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a list of featured song lists.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/songLists/featured"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2104,15 +2253,17 @@ class SDK:
 
     
     def song_list_api_get_songs(self, request: operations.SongListAPIGetSongsRequest) -> operations.SongListAPIGetSongsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a list of songs in a song list.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/songLists/{listId}/songs", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2141,15 +2292,17 @@ class SDK:
 
     
     def tag_api_delete(self, request: operations.TagAPIDeleteRequest) -> operations.TagAPIDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a tag.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/tags/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2162,13 +2315,18 @@ class SDK:
 
     
     def tag_api_delete_comment(self, request: operations.TagAPIDeleteCommentRequest) -> operations.TagAPIDeleteCommentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a comment.
+                    Normal users can delete their own comments, moderators can delete all comments.
+                    Requires login.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/tags/comments/{commentId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2181,15 +2339,17 @@ class SDK:
 
     
     def tag_api_get_by_id(self, request: operations.TagAPIGetByIDRequest) -> operations.TagAPIGetByIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a tag by ID.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/tags/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2218,15 +2378,17 @@ class SDK:
 
     
     def tag_api_get_by_name(self, request: operations.TagAPIGetByNameRequest) -> operations.TagAPIGetByNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""DEPRECATED. Gets a tag by name.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/tags/byName/{name}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2255,15 +2417,17 @@ class SDK:
 
     
     def tag_api_get_category_names_list(self, request: operations.TagAPIGetCategoryNamesListRequest) -> operations.TagAPIGetCategoryNamesListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a list of tag category names.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/tags/categoryNames"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2292,15 +2456,18 @@ class SDK:
 
     
     def tag_api_get_child_tags(self, request: operations.TagAPIGetChildTagsRequest) -> operations.TagAPIGetChildTagsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a list of child tags for a tag.
+                    Only direct children will be included.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/tags/{tagId}/children", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2329,13 +2496,17 @@ class SDK:
 
     
     def tag_api_get_comments(self, request: operations.TagAPIGetCommentsRequest) -> operations.TagAPIGetCommentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a list of comments for a tag.
+                    Note: pagination and sorting might be added later.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/tags/{tagId}/comments", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2364,15 +2535,17 @@ class SDK:
 
     
     def tag_api_get_list(self, request: operations.TagAPIGetListRequest) -> operations.TagAPIGetListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Find tags.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/tags"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2401,15 +2574,19 @@ class SDK:
 
     
     def tag_api_get_names(self, request: operations.TagAPIGetNamesRequest) -> operations.TagAPIGetNamesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Find tag names by a part of name.
+                    
+                    Matching is done anywhere from the name.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/tags/names"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2438,15 +2615,17 @@ class SDK:
 
     
     def tag_api_get_top_tags(self, request: operations.TagAPIGetTopTagsRequest) -> operations.TagAPIGetTopTagsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets the most common tags in a category.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/tags/top"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2475,15 +2654,17 @@ class SDK:
 
     
     def tag_api_post_new_tag(self, request: operations.TagAPIPostNewTagRequest) -> operations.TagAPIPostNewTagResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a new tag.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/tags"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2514,15 +2695,17 @@ class SDK:
 
     
     def tag_api_post_report(self, request: operations.TagAPIPostReportRequest) -> operations.TagAPIPostReportResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a new report.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/tags/{tagId}/reports", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2535,13 +2718,13 @@ class SDK:
 
     
     def user_api_delete_followed_tag(self, request: operations.UserAPIDeleteFollowedTagRequest) -> operations.UserAPIDeleteFollowedTagResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/users/current/followedTags/{tagId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2554,15 +2737,17 @@ class SDK:
 
     
     def user_api_delete_messages(self, request: operations.UserAPIDeleteMessagesRequest) -> operations.UserAPIDeleteMessagesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a list of user messages.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/users/{id}/messages", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2575,13 +2760,18 @@ class SDK:
 
     
     def user_api_delete_profile_comment(self, request: operations.UserAPIDeleteProfileCommentRequest) -> operations.UserAPIDeleteProfileCommentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a comment.
+        Normal users can delete their own comments, moderators can delete all comments.
+                    Requires login.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/users/profileComments/{commentId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2594,15 +2784,19 @@ class SDK:
 
     
     def user_api_get_album_collection(self, request: operations.UserAPIGetAlbumCollectionRequest) -> operations.UserAPIGetAlbumCollectionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a list of albums in a user's collection.
+        This includes albums that have been rated by the user as well as albums that the user has bought or wishlisted.
+                    Note that the user might have set his album ownership status and media type as private, in which case those properties are not included.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/users/{id}/albums", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2631,13 +2825,13 @@ class SDK:
 
     
     def user_api_get_album_for_user(self, request: operations.UserAPIGetAlbumForUserRequest) -> operations.UserAPIGetAlbumForUserResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/users/{id}/album-collection-statuses/{albumId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2666,13 +2860,13 @@ class SDK:
 
     
     def user_api_get_artist_for_user(self, request: operations.UserAPIGetArtistForUserRequest) -> operations.UserAPIGetArtistForUserResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/users/{id}/followedArtists/{artistId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2701,15 +2895,19 @@ class SDK:
 
     
     def user_api_get_current(self, request: operations.UserAPIGetCurrentRequest) -> operations.UserAPIGetCurrentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets information about the currently logged in user.
+        Requires login information.
+                    This API supports CORS, and is restricted to specific origins.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/users/current"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2738,15 +2936,17 @@ class SDK:
 
     
     def user_api_get_events(self, request: operations.UserAPIGetEventsRequest) -> operations.UserAPIGetEventsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a list of events a user has subscribed to.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/users/{id}/events", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2775,15 +2975,17 @@ class SDK:
 
     
     def user_api_get_followed_artists(self, request: operations.UserAPIGetFollowedArtistsRequest) -> operations.UserAPIGetFollowedArtistsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a list of artists followed by a user.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/users/{id}/followedArtists", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2812,15 +3014,17 @@ class SDK:
 
     
     def user_api_get_list(self, request: operations.UserAPIGetListRequest) -> operations.UserAPIGetListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a list of users.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/users"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2849,13 +3053,18 @@ class SDK:
 
     
     def user_api_get_message(self, request: operations.UserAPIGetMessageRequest) -> operations.UserAPIGetMessageResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a user message.
+        The message will be marked as read.
+                    User can only load messages from their own inbox.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/users/messages/{messageId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2884,15 +3093,17 @@ class SDK:
 
     
     def user_api_get_messages(self, request: operations.UserAPIGetMessagesRequest) -> operations.UserAPIGetMessagesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a list of messages.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/users/{id}/messages", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2921,15 +3132,17 @@ class SDK:
 
     
     def user_api_get_names(self, request: operations.UserAPIGetNamesRequest) -> operations.UserAPIGetNamesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a list of user names. Ideal for autocomplete boxes.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/users/names"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2958,15 +3171,17 @@ class SDK:
 
     
     def user_api_get_one(self, request: operations.UserAPIGetOneRequest) -> operations.UserAPIGetOneResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets user by ID.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/users/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2995,15 +3210,17 @@ class SDK:
 
     
     def user_api_get_profile_comments(self, request: operations.UserAPIGetProfileCommentsRequest) -> operations.UserAPIGetProfileCommentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a list of comments posted on user's profile.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/users/{id}/profileComments", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3032,15 +3249,17 @@ class SDK:
 
     
     def user_api_get_rated_songs(self, request: operations.UserAPIGetRatedSongsRequest) -> operations.UserAPIGetRatedSongsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a list of songs rated by a user.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/users/{id}/ratedSongs", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3069,15 +3288,14 @@ class SDK:
 
     
     def user_api_get_song_lists(self, request: operations.UserAPIGetSongListsRequest) -> operations.UserAPIGetSongListsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/users/{id}/songLists", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3106,13 +3324,16 @@ class SDK:
 
     
     def user_api_get_song_rating(self, request: operations.UserAPIGetSongRatingRequest) -> operations.UserAPIGetSongRatingResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a specific user's rating for a song.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/users/{id}/ratedSongs/{songId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3141,13 +3362,17 @@ class SDK:
 
     
     def user_api_get_song_rating_for_current(self, request: operations.UserAPIGetSongRatingForCurrentRequest) -> operations.UserAPIGetSongRatingForCurrentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets currently logged in user's rating for a song.
+        Requires authentication.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/users/current/ratedSongs/{songId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3176,15 +3401,19 @@ class SDK:
 
     
     def user_api_post_album_status(self, request: operations.UserAPIPostAlbumStatusRequest) -> operations.UserAPIPostAlbumStatusResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add or update collection status, media type and rating for a specific album, for the currently logged in user.
+        If the user has already rated the album, any previous rating is replaced.
+                    Authorization cookie must be included.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/users/current/albums/{albumId}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3210,13 +3439,13 @@ class SDK:
 
     
     def user_api_post_followed_tag(self, request: operations.UserAPIPostFollowedTagRequest) -> operations.UserAPIPostFollowedTagResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/users/current/followedTags/{tagId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3229,15 +3458,17 @@ class SDK:
 
     
     def user_api_post_refresh_entry_edit(self, request: operations.UserAPIPostRefreshEntryEditRequest) -> operations.UserAPIPostRefreshEntryEditResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Refresh entry edit status, indicating that the current user is still editing that entry.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/users/current/refreshEntryEdit"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3250,22 +3481,19 @@ class SDK:
 
     
     def user_api_post_report(self, request: operations.UserAPIPostReportRequest) -> operations.UserAPIPostReportResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/users/{id}/reports", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3294,22 +3522,22 @@ class SDK:
 
     
     def user_api_post_setting(self, request: operations.UserAPIPostSettingRequest) -> operations.UserAPIPostSettingResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates user setting.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/users/{id}/settings/{settingName}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3322,15 +3550,17 @@ class SDK:
 
     
     def venue_api_delete(self, request: operations.VenueAPIDeleteRequest) -> operations.VenueAPIDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a venue.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/venues/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3343,15 +3573,17 @@ class SDK:
 
     
     def venue_api_get_list(self, request: operations.VenueAPIGetListRequest) -> operations.VenueAPIGetListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a page of event venue.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/venues"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3380,15 +3612,17 @@ class SDK:
 
     
     def venue_api_post_report(self, request: operations.VenueAPIPostReportRequest) -> operations.VenueAPIPostReportResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a new report.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/venues/{id}/reports", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 

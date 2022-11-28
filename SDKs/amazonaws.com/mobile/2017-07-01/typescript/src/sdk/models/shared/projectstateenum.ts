@@ -1,7 +1,8 @@
 
 
+
 export enum ProjectStateEnum {
-    Normal = "NORMAL"
-,    Syncing = "SYNCING"
-,    Importing = "IMPORTING"
+    Normal = "NORMAL",
+    Syncing = "SYNCING",
+    Importing = "IMPORTING"
 }

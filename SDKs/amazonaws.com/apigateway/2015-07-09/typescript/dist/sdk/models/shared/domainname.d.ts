@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DomainNameStatusEnum } from "./domainnamestatusenum";
 import { EndpointConfiguration } from "./endpointconfiguration";
 import { MutualTlsAuthentication } from "./mutualtlsauthentication";

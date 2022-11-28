@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class OutputConfigurationContainerDigitalOutputNoConnectionActionEnum(str, Enum):
     NOTHING = "Nothing"
@@ -25,9 +27,13 @@ class OutputConfigurationContainerTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class OutputConfigurationContainer:
-    digital_output_no_connection_action: Optional[OutputConfigurationContainerDigitalOutputNoConnectionActionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DigitalOutputNoConnectionAction' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
-    number: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Number' }})
-    s0_pulse_value: Optional[OutputConfigurationContainerS0PulseValueEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'S0PulseValue' }})
-    type: Optional[OutputConfigurationContainerTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
+    r"""OutputConfigurationContainer
+    Configuration for the outputs of a meter (analog/digital outputs)
+    """
+    
+    digital_output_no_connection_action: Optional[OutputConfigurationContainerDigitalOutputNoConnectionActionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DigitalOutputNoConnectionAction') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
+    number: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Number') }})
+    s0_pulse_value: Optional[OutputConfigurationContainerS0PulseValueEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('S0PulseValue') }})
+    type: Optional[OutputConfigurationContainerTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Type') }})
     

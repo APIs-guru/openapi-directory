@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Credential } from "./credential";
 import { DeploymentUpdateLabelEntry } from "./deploymentupdatelabelentry";
 export declare class DeploymentUpdate extends SpeakeasyBase {

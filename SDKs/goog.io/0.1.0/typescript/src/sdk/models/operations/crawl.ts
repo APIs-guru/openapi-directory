@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CrawlPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=query" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=query" })
   query: string;
 }
 
 
-export class CrawlRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: CrawlPathParams;
-}
-
-
 export class Crawl200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=answer" })
+  @SpeakeasyMetadata({ data: "json, name=answer" })
   answer?: string;
 
-  @Metadata({ data: "json, name=results" })
+  @SpeakeasyMetadata({ data: "json, name=results" })
   results?: string[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total?: string;
 }
 
 
+export class CrawlRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: CrawlPathParams;
+}
+
+
 export class CrawlResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   crawl200ApplicationJsonObject?: Crawl200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   httpValidationError?: shared.HttpValidationError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

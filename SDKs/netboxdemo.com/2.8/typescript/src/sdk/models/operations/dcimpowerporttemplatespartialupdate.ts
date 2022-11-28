@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DcimPowerPortTemplatesPartialUpdatePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
 
 export class DcimPowerPortTemplatesPartialUpdateRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DcimPowerPortTemplatesPartialUpdatePathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
-  request: shared.WritablePowerPortTemplate;
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: shared.WritablePowerPortTemplateInput;
 }
 
 
 export class DcimPowerPortTemplatesPartialUpdateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   powerPortTemplate?: shared.PowerPortTemplate;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

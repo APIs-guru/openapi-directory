@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RealtimeDataColumnHeaders extends SpeakeasyBase {
-  @Metadata({ data: "json, name=columnType" })
+  @SpeakeasyMetadata({ data: "json, name=columnType" })
   columnType?: string;
 
-  @Metadata({ data: "json, name=dataType" })
+  @SpeakeasyMetadata({ data: "json, name=dataType" })
   dataType?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
 
@@ -19,22 +19,22 @@ export class RealtimeDataColumnHeaders extends SpeakeasyBase {
  * Information for the view (profile), for which the real time data was requested.
 **/
 export class RealtimeDataProfileInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=internalWebPropertyId" })
+  @SpeakeasyMetadata({ data: "json, name=internalWebPropertyId" })
   internalWebPropertyId?: string;
 
-  @Metadata({ data: "json, name=profileId" })
+  @SpeakeasyMetadata({ data: "json, name=profileId" })
   profileId?: string;
 
-  @Metadata({ data: "json, name=profileName" })
+  @SpeakeasyMetadata({ data: "json, name=profileName" })
   profileName?: string;
 
-  @Metadata({ data: "json, name=tableId" })
+  @SpeakeasyMetadata({ data: "json, name=tableId" })
   tableId?: string;
 
-  @Metadata({ data: "json, name=webPropertyId" })
+  @SpeakeasyMetadata({ data: "json, name=webPropertyId" })
   webPropertyId?: string;
 }
 
@@ -44,22 +44,22 @@ export class RealtimeDataProfileInfo extends SpeakeasyBase {
  * Real time data request query parameters.
 **/
 export class RealtimeDataQuery extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dimensions" })
+  @SpeakeasyMetadata({ data: "json, name=dimensions" })
   dimensions?: string;
 
-  @Metadata({ data: "json, name=filters" })
+  @SpeakeasyMetadata({ data: "json, name=filters" })
   filters?: string;
 
-  @Metadata({ data: "json, name=ids" })
+  @SpeakeasyMetadata({ data: "json, name=ids" })
   ids?: string;
 
-  @Metadata({ data: "json, name=max-results" })
+  @SpeakeasyMetadata({ data: "json, name=max-results" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=metrics" })
+  @SpeakeasyMetadata({ data: "json, name=metrics" })
   metrics?: string[];
 
-  @Metadata({ data: "json, name=sort" })
+  @SpeakeasyMetadata({ data: "json, name=sort" })
   sort?: string[];
 }
 
@@ -69,30 +69,30 @@ export class RealtimeDataQuery extends SpeakeasyBase {
  * Real time data for a given view (profile).
 **/
 export class RealtimeData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=columnHeaders", elemType: shared.RealtimeDataColumnHeaders })
+  @SpeakeasyMetadata({ data: "json, name=columnHeaders", elemType: RealtimeDataColumnHeaders })
   columnHeaders?: RealtimeDataColumnHeaders[];
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=profileInfo" })
+  @SpeakeasyMetadata({ data: "json, name=profileInfo" })
   profileInfo?: RealtimeDataProfileInfo;
 
-  @Metadata({ data: "json, name=query" })
+  @SpeakeasyMetadata({ data: "json, name=query" })
   query?: RealtimeDataQuery;
 
-  @Metadata({ data: "json, name=rows" })
+  @SpeakeasyMetadata({ data: "json, name=rows" })
   rows?: string[][];
 
-  @Metadata({ data: "json, name=selfLink" })
+  @SpeakeasyMetadata({ data: "json, name=selfLink" })
   selfLink?: string;
 
-  @Metadata({ data: "json, name=totalResults" })
+  @SpeakeasyMetadata({ data: "json, name=totalResults" })
   totalResults?: number;
 
-  @Metadata({ data: "json, name=totalsForAllResults" })
+  @SpeakeasyMetadata({ data: "json, name=totalsForAllResults" })
   totalsForAllResults?: Map<string, string>;
 }

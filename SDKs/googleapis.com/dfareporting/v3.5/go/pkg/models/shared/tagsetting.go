@@ -8,6 +8,8 @@ const (
 	TagSettingKeywordOptionEnumGenerateSeparateTagForEachKeyword TagSettingKeywordOptionEnum = "GENERATE_SEPARATE_TAG_FOR_EACH_KEYWORD"
 )
 
+// TagSetting
+// Tag Settings
 type TagSetting struct {
 	AdditionalKeyValues     *string                      `json:"additionalKeyValues,omitempty"`
 	IncludeClickThroughUrls *bool                        `json:"includeClickThroughUrls,omitempty"`

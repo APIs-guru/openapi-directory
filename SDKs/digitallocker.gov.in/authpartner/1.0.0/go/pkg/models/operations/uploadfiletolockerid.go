@@ -21,12 +21,6 @@ type UploadFileToLockerIDSecurity struct {
 	BearerAuth shared.SchemeBearerAuth `security:"scheme,type=http,subtype=bearer"`
 }
 
-type UploadFileToLockerIDRequest struct {
-	Headers  UploadFileToLockerIDHeaders
-	Request  *UploadFileToLockerIDRequests
-	Security UploadFileToLockerIDSecurity
-}
-
 type UploadFileToLockerID400ApplicationJSON struct {
 	Error            *interface{} `json:"error,omitempty"`
 	ErrorDescription *interface{} `json:"error_description,omitempty"`
@@ -40,6 +34,12 @@ type UploadFileToLockerID401ApplicationJSON struct {
 type UploadFileToLockerID500ApplicationJSON struct {
 	Error            *string `json:"error,omitempty"`
 	ErrorDescription *string `json:"error_description,omitempty"`
+}
+
+type UploadFileToLockerIDRequest struct {
+	Headers  UploadFileToLockerIDHeaders
+	Request  *UploadFileToLockerIDRequests
+	Security UploadFileToLockerIDSecurity
 }
 
 type UploadFileToLockerIDResponse struct {

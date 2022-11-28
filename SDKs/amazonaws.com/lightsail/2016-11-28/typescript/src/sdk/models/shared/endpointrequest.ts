@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContainerServiceHealthCheckConfig } from "./containerservicehealthcheckconfig";
+
 
 
 // EndpointRequest
@@ -7,12 +8,12 @@ import { ContainerServiceHealthCheckConfig } from "./containerservicehealthcheck
  * Describes the settings of a public endpoint for an Amazon Lightsail container service.
 **/
 export class EndpointRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=containerName" })
+  @SpeakeasyMetadata({ data: "json, name=containerName" })
   containerName: string;
 
-  @Metadata({ data: "json, name=containerPort" })
+  @SpeakeasyMetadata({ data: "json, name=containerPort" })
   containerPort: number;
 
-  @Metadata({ data: "json, name=healthCheck" })
+  @SpeakeasyMetadata({ data: "json, name=healthCheck" })
   healthCheck?: ContainerServiceHealthCheckConfig;
 }

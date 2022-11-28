@@ -41,7 +41,7 @@ type IdentitytoolkitProjectsTenantsInboundSamlConfigsCreateSecurity struct {
 type IdentitytoolkitProjectsTenantsInboundSamlConfigsCreateRequest struct {
 	PathParams  IdentitytoolkitProjectsTenantsInboundSamlConfigsCreatePathParams
 	QueryParams IdentitytoolkitProjectsTenantsInboundSamlConfigsCreateQueryParams
-	Request     *shared.GoogleCloudIdentitytoolkitAdminV2InboundSamlConfig `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudIdentitytoolkitAdminV2InboundSamlConfigInput `request:"mediaType=application/json"`
 	Security    IdentitytoolkitProjectsTenantsInboundSamlConfigsCreateSecurity
 }
 

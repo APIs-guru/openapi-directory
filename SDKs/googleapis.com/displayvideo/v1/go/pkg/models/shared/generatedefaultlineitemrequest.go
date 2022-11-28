@@ -14,9 +14,11 @@ const (
 	GenerateDefaultLineItemRequestLineItemTypeEnumLineItemTypeVideoOverTheTop           GenerateDefaultLineItemRequestLineItemTypeEnum = "LINE_ITEM_TYPE_VIDEO_OVER_THE_TOP"
 )
 
-type GenerateDefaultLineItemRequest struct {
+// GenerateDefaultLineItemRequestInput
+// Request message for LineItemService.GenerateDefaultLineItem.
+type GenerateDefaultLineItemRequestInput struct {
 	DisplayName      *string                                         `json:"displayName,omitempty"`
 	InsertionOrderID *string                                         `json:"insertionOrderId,omitempty"`
 	LineItemType     *GenerateDefaultLineItemRequestLineItemTypeEnum `json:"lineItemType,omitempty"`
-	MobileApp        *MobileApp                                      `json:"mobileApp,omitempty"`
+	MobileApp        *MobileAppInput                                 `json:"mobileApp,omitempty"`
 }

@@ -1,5 +1,7 @@
 package shared
 
+// UpdateTextStyleRequest
+// Update the styling of text in a Shape or Table.
 type UpdateTextStyleRequest struct {
 	CellLocation *TableCellLocation `json:"cellLocation,omitempty"`
 	Fields       *string            `json:"fields,omitempty"`

@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostCoursesRootContentIdPermissionsUserEmailPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=rootContentId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=rootContentId" })
   rootContentId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=userEmail" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=userEmail" })
   userEmail: string;
 }
 
 
 export class PostCoursesRootContentIdPermissionsUserEmailPermissionToBeGrantedToTheUser extends SpeakeasyBase {
-  @Metadata({ data: "json, name=isBuilder" })
+  @SpeakeasyMetadata({ data: "json, name=isBuilder" })
   isBuilder?: boolean;
 
-  @Metadata({ data: "json, name=isReviewer" })
+  @SpeakeasyMetadata({ data: "json, name=isReviewer" })
   isReviewer?: boolean;
 }
 
 
-export class PostCoursesRootContentIdPermissionsUserEmailRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: PostCoursesRootContentIdPermissionsUserEmailPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: PostCoursesRootContentIdPermissionsUserEmailPermissionToBeGrantedToTheUser;
-}
-
-
 export class PostCoursesRootContentIdPermissionsUserEmail201ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=contentId" })
+  @SpeakeasyMetadata({ data: "json, name=contentId" })
   contentId?: string;
 }
 
 
+export class PostCoursesRootContentIdPermissionsUserEmailRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: PostCoursesRootContentIdPermissionsUserEmailPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: PostCoursesRootContentIdPermissionsUserEmailPermissionToBeGrantedToTheUser;
+}
+
+
 export class PostCoursesRootContentIdPermissionsUserEmailResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postCoursesRootContentIdPermissionsUserEmail201ApplicationJsonObject?: PostCoursesRootContentIdPermissionsUserEmail201ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

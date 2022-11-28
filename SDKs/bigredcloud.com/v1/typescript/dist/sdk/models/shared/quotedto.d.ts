@@ -1,0 +1,31 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import { AcudfValueDto } from "./acudfvaluedto";
+import { QuoteProductTransDto } from "./quoteproducttransdto";
+export declare class QuoteDto extends SpeakeasyBase {
+    acCode?: string;
+    closedDate?: Date;
+    comments?: string;
+    companyId?: number;
+    customFields?: AcudfValueDto[];
+    customerOwnerId?: number;
+    customerOwnerName?: string;
+    ddNumber?: string;
+    deliveryList?: string;
+    deliveryTo?: string[];
+    entryDate?: Date;
+    id?: number;
+    layoutType?: number;
+    note?: string;
+    poNumber?: string;
+    procDate?: Date;
+    productTrans?: QuoteProductTransDto[];
+    reference?: string;
+    saleInvoiceId?: number;
+    saleRepCode?: string;
+    saleRepId?: number;
+    timeStamp?: string;
+    total?: number;
+    totalNet?: number;
+    totalVat?: number;
+    vatTypeId?: number;
+}

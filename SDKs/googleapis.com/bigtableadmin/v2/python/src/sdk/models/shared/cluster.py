@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import clusterconfig
-from . import encryptionconfig
+from sdk import utils
+from . import *
 
 class ClusterDefaultStorageTypeEnum(str, Enum):
     STORAGE_TYPE_UNSPECIFIED = "STORAGE_TYPE_UNSPECIFIED"
@@ -19,12 +20,31 @@ class ClusterStateEnum(str, Enum):
 
 @dataclass_json
 @dataclass
+class ClusterInput:
+    r"""ClusterInput
+    A resizable group of nodes in a particular cloud location, capable of serving all Tables in the parent Instance.
+    """
+    
+    cluster_config: Optional[ClusterConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clusterConfig') }})
+    default_storage_type: Optional[ClusterDefaultStorageTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('defaultStorageType') }})
+    encryption_config: Optional[EncryptionConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('encryptionConfig') }})
+    location: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('location') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    serve_nodes: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('serveNodes') }})
+    
+
+@dataclass_json
+@dataclass
 class Cluster:
-    cluster_config: Optional[clusterconfig.ClusterConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clusterConfig' }})
-    default_storage_type: Optional[ClusterDefaultStorageTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'defaultStorageType' }})
-    encryption_config: Optional[encryptionconfig.EncryptionConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'encryptionConfig' }})
-    location: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'location' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    serve_nodes: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'serveNodes' }})
-    state: Optional[ClusterStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
+    r"""Cluster
+    A resizable group of nodes in a particular cloud location, capable of serving all Tables in the parent Instance.
+    """
+    
+    cluster_config: Optional[ClusterConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clusterConfig') }})
+    default_storage_type: Optional[ClusterDefaultStorageTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('defaultStorageType') }})
+    encryption_config: Optional[EncryptionConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('encryptionConfig') }})
+    location: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('location') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    serve_nodes: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('serveNodes') }})
+    state: Optional[ClusterStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
     

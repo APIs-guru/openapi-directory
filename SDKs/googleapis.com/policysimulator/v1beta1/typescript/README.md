@@ -1,0 +1,175 @@
+# openapi
+
+<!-- Start SDK Installation -->
+## SDK Installation
+
+### NPM
+
+```bash
+npm add openapi
+```
+
+### Yarn
+
+```bash
+yarn add openapi
+```
+<!-- End SDK Installation -->
+
+<!-- Start SDK Example Usage -->
+## SDK Example Usage
+
+```typescript
+import { SDK, WithSecurity} from "openapi";
+import { PolicysimulatorProjectsLocationsReplaysCreateRequest, PolicysimulatorProjectsLocationsReplaysCreateResponse } from "openapi/src/sdk/models/operations";
+import { AxiosError } from "axios";
+
+
+const sdk = new SDK();
+    
+const req: PolicysimulatorProjectsLocationsReplaysCreateRequest = {
+  security: {
+    oauth2: {
+      authorization: "Bearer YOUR_ACCESS_TOKEN_HERE",
+    }
+    oauth2c: {
+      authorization: "Bearer YOUR_ACCESS_TOKEN_HERE",
+    },
+  },
+  pathParams: {
+    parent: "dignissimos",
+  },
+  queryParams: {
+    dollarXgafv: "2",
+    accessToken: "officiis",
+    alt: "json",
+    callback: "officiis",
+    fields: "nihil",
+    key: "omnis",
+    oauthToken: "maxime",
+    prettyPrint: false,
+    quotaUser: "quos",
+    uploadType: "et",
+    uploadProtocol: "omnis",
+  },
+  request: {
+    config: {
+      logSource: "RECENT_ACCESSES",
+      policyOverlay: {
+        "repudiandae": {
+          auditConfigs: [
+            {
+              auditLogConfigs: [
+                {
+                  exemptedMembers: [
+                    "aut",
+                    "velit",
+                    "est",
+                  ],
+                  logType: "DATA_WRITE",
+                },
+                {
+                  exemptedMembers: [
+                    "quae",
+                    "et",
+                  ],
+                  logType: "ADMIN_READ",
+                },
+              ],
+              service: "enim",
+            },
+            {
+              auditLogConfigs: [
+                {
+                  exemptedMembers: [
+                    "accusantium",
+                    "ut",
+                  ],
+                  logType: "DATA_READ",
+                },
+                {
+                  exemptedMembers: [
+                    "iure",
+                    "odit",
+                  ],
+                  logType: "ADMIN_READ",
+                },
+                {
+                  exemptedMembers: [
+                    "amet",
+                    "pariatur",
+                  ],
+                  logType: "ADMIN_READ",
+                },
+              ],
+              service: "tempore",
+            },
+            {
+              auditLogConfigs: [
+                {
+                  exemptedMembers: [
+                    "quia",
+                  ],
+                  logType: "ADMIN_READ",
+                },
+              ],
+              service: "quo",
+            },
+          ],
+          bindings: [
+            {
+              condition: {
+                description: "aut",
+                expression: "molestiae",
+                location: "blanditiis",
+                title: "et",
+              },
+              members: [
+                "dicta",
+                "enim",
+              ],
+              role: "ratione",
+            },
+          ],
+          etag: "commodi",
+          version: 8785782413205295304,
+        },
+      },
+    },
+    resultsSummary: {
+      differenceCount: 7841242247132918320,
+      errorCount: 2156911971396190993,
+      logCount: 5590233000876705772,
+      newestDate: {
+        day: 4031732429361760447,
+        month: 5797452881319356845,
+        year: 2197377284877921821,
+      },
+      oldestDate: {
+        day: 4588745654855075331,
+        month: 2360021394080816363,
+        year: 587545568868920246,
+      },
+      unchangedCount: 6171314581856648447,
+    },
+  },
+};
+
+sdk.projects.policysimulatorProjectsLocationsReplaysCreate(req).then((res: PolicysimulatorProjectsLocationsReplaysCreateResponse | AxiosError) => {
+   // handle response
+});
+```
+<!-- End SDK Example Usage -->
+
+<!-- Start SDK Available Operations -->
+## SDK Available Operations
+
+### projects
+
+* `policysimulatorProjectsLocationsReplaysCreate` - Creates and starts a Replay using the given ReplayConfig.
+* `policysimulatorProjectsLocationsReplaysOperationsList` - Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`. NOTE: the `name` binding allows API services to override the binding to use different resource name schemes, such as `users/*/operations`. To override the binding, API services can add a binding such as `"/v1/{name=users/*}/operations"` to their service configuration. For backwards compatibility, the default name includes the operations collection id, however overriding users must ensure the name binding is the parent resource, without the operations collection id.
+* `policysimulatorProjectsLocationsReplaysResultsList` - Lists the results of running a Replay.
+
+<!-- End SDK Available Operations -->
+
+### SDK Generated by [Speakeasy](https://docs.speakeasyapi.dev/docs/using-speakeasy/client-sdks)

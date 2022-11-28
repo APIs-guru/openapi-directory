@@ -12,11 +12,6 @@ type GetShopScriptTagSecurity struct {
 	OAuth2 shared.SchemeOAuth2 `security:"scheme,type=oauth2"`
 }
 
-type GetShopScriptTagRequest struct {
-	PathParams GetShopScriptTagPathParams
-	Security   GetShopScriptTagSecurity
-}
-
 type GetShopScriptTag200ApplicationJSONScriptTagDisplayScopeEnum string
 
 const (
@@ -37,6 +32,11 @@ type GetShopScriptTag200ApplicationJSONScriptTag struct {
 
 type GetShopScriptTag200ApplicationJSON struct {
 	ScriptTag *GetShopScriptTag200ApplicationJSONScriptTag `json:"script_tag,omitempty"`
+}
+
+type GetShopScriptTagRequest struct {
+	PathParams GetShopScriptTagPathParams
+	Security   GetShopScriptTagSecurity
 }
 
 type GetShopScriptTagResponse struct {

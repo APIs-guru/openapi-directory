@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ServicecontrolServicesCheckPathParams:
-    service_name: str = field(default=None, metadata={'path_param': { 'field_name': 'serviceName', 'style': 'simple', 'explode': False }})
+    service_name: str = field(metadata={'path_param': { 'field_name': 'serviceName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class ServicecontrolServicesCheckQueryParams:
 
 @dataclass
 class ServicecontrolServicesCheckSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ServicecontrolServicesCheckSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class ServicecontrolServicesCheckSecurity:
 
 @dataclass
 class ServicecontrolServicesCheckRequest:
-    path_params: ServicecontrolServicesCheckPathParams = field(default=None)
-    query_params: ServicecontrolServicesCheckQueryParams = field(default=None)
+    path_params: ServicecontrolServicesCheckPathParams = field()
+    query_params: ServicecontrolServicesCheckQueryParams = field()
+    security: ServicecontrolServicesCheckSecurity = field()
     request: Optional[shared.CheckRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ServicecontrolServicesCheckSecurity = field(default=None)
     
 
 @dataclass
 class ServicecontrolServicesCheckResponse:
+    content_type: str = field()
+    status_code: int = field()
     check_response: Optional[shared.CheckResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

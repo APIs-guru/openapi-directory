@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ActionStatusStatusCodeEnum(str, Enum):
     OK = "OK"
@@ -25,6 +27,10 @@ class ActionStatusStatusCodeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ActionStatus:
-    status_code: Optional[ActionStatusStatusCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'statusCode' }})
-    user_facing_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'userFacingMessage' }})
+    r"""ActionStatus
+    Represents the status for a request to either invoke or submit a [dialog](https://developers.google.com/chat/how-tos/dialogs).
+    """
+    
+    status_code: Optional[ActionStatusStatusCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('statusCode') }})
+    user_facing_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('userFacingMessage') }})
     

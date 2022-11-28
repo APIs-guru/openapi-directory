@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ApiDestinationStateEnum } from "./apidestinationstateenum";
 import { ApiDestinationHttpMethodEnum } from "./apidestinationhttpmethodenum";
 /**

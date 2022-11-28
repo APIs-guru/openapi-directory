@@ -1,19 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CareContextRepresentation } from "./carecontextrepresentation";
 import { IdentifierTypeEnum } from "./identifiertypeenum";
 
 
+
 export class PatientRepresentation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=careContexts", elemType: shared.CareContextRepresentation })
+  @SpeakeasyMetadata({ data: "json, name=careContexts", elemType: CareContextRepresentation })
   careContexts?: CareContextRepresentation[];
 
-  @Metadata({ data: "json, name=display" })
+  @SpeakeasyMetadata({ data: "json, name=display" })
   display: string;
 
-  @Metadata({ data: "json, name=matchedBy" })
+  @SpeakeasyMetadata({ data: "json, name=matchedBy" })
   matchedBy?: IdentifierTypeEnum[];
 
-  @Metadata({ data: "json, name=referenceNumber" })
+  @SpeakeasyMetadata({ data: "json, name=referenceNumber" })
   referenceNumber: string;
 }

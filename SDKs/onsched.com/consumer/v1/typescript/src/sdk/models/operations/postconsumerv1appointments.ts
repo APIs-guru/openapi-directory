@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostConsumerV1AppointmentsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=completeBooking" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=completeBooking" })
   completeBooking?: string;
 }
 
 
 export class PostConsumerV1AppointmentsRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
   appointmentInitialModel?: shared.AppointmentInitialModel;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   appointmentInitialModel1?: shared.AppointmentInitialModel;
 
-  @Metadata({ data: "request, media_type=application/json-patch+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json-patch+json" })
   appointmentInitialModel2?: shared.AppointmentInitialModel;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   appointmentInitialModel3?: shared.AppointmentInitialModel;
 }
 
 
 export class PostConsumerV1AppointmentsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PostConsumerV1AppointmentsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request?: PostConsumerV1AppointmentsRequests;
 }
 
 
 export class PostConsumerV1AppointmentsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   appointmentInitialViewModel?: shared.AppointmentInitialViewModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

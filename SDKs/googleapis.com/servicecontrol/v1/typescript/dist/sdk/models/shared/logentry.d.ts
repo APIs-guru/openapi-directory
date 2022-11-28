@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { HttpRequest } from "./httprequest";
 import { LogEntryOperation } from "./logentryoperation";
 import { LogEntrySourceLocation } from "./logentrysourcelocation";

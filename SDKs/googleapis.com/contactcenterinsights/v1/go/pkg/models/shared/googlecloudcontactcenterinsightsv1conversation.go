@@ -8,6 +8,8 @@ const (
 	GoogleCloudContactcenterinsightsV1ConversationMediumEnumChat              GoogleCloudContactcenterinsightsV1ConversationMediumEnum = "CHAT"
 )
 
+// GoogleCloudContactcenterinsightsV1Conversation
+// The conversation resource.
 type GoogleCloudContactcenterinsightsV1Conversation struct {
 	AgentID            *string                                                       `json:"agentId,omitempty"`
 	CallMetadata       *GoogleCloudContactcenterinsightsV1ConversationCallMetadata   `json:"callMetadata,omitempty"`
@@ -28,4 +30,22 @@ type GoogleCloudContactcenterinsightsV1Conversation struct {
 	TTL                *string                                                       `json:"ttl,omitempty"`
 	TurnCount          *int32                                                        `json:"turnCount,omitempty"`
 	UpdateTime         *string                                                       `json:"updateTime,omitempty"`
+}
+
+// GoogleCloudContactcenterinsightsV1ConversationInput
+// The conversation resource.
+type GoogleCloudContactcenterinsightsV1ConversationInput struct {
+	AgentID          *string                                                        `json:"agentId,omitempty"`
+	CallMetadata     *GoogleCloudContactcenterinsightsV1ConversationCallMetadata    `json:"callMetadata,omitempty"`
+	DataSource       *GoogleCloudContactcenterinsightsV1ConversationDataSourceInput `json:"dataSource,omitempty"`
+	ExpireTime       *string                                                        `json:"expireTime,omitempty"`
+	Labels           map[string]string                                              `json:"labels,omitempty"`
+	LanguageCode     *string                                                        `json:"languageCode,omitempty"`
+	LatestAnalysis   *GoogleCloudContactcenterinsightsV1AnalysisInput               `json:"latestAnalysis,omitempty"`
+	Medium           *GoogleCloudContactcenterinsightsV1ConversationMediumEnum      `json:"medium,omitempty"`
+	Name             *string                                                        `json:"name,omitempty"`
+	ObfuscatedUserID *string                                                        `json:"obfuscatedUserId,omitempty"`
+	StartTime        *string                                                        `json:"startTime,omitempty"`
+	Transcript       *GoogleCloudContactcenterinsightsV1ConversationTranscript      `json:"transcript,omitempty"`
+	TTL              *string                                                        `json:"ttl,omitempty"`
 }

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetUnassignIpv6AddressesActionEnum(str, Enum):
     UNASSIGN_IPV6_ADDRESSES = "UnassignIpv6Addresses"
@@ -10,11 +14,11 @@ class GetUnassignIpv6AddressesVersionEnum(str, Enum):
 
 @dataclass
 class GetUnassignIpv6AddressesQueryParams:
-    action: GetUnassignIpv6AddressesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetUnassignIpv6AddressesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    network_interface_id: str = field(metadata={'query_param': { 'field_name': 'NetworkInterfaceId', 'style': 'form', 'explode': True }})
+    version: GetUnassignIpv6AddressesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     ipv6_addresses: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'Ipv6Addresses', 'style': 'form', 'explode': True }})
     ipv6_prefix: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'Ipv6Prefix', 'style': 'form', 'explode': True }})
-    network_interface_id: str = field(default=None, metadata={'query_param': { 'field_name': 'NetworkInterfaceId', 'style': 'form', 'explode': True }})
-    version: GetUnassignIpv6AddressesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetUnassignIpv6AddressesHeaders:
 
 @dataclass
 class GetUnassignIpv6AddressesRequest:
-    query_params: GetUnassignIpv6AddressesQueryParams = field(default=None)
-    headers: GetUnassignIpv6AddressesHeaders = field(default=None)
+    headers: GetUnassignIpv6AddressesHeaders = field()
+    query_params: GetUnassignIpv6AddressesQueryParams = field()
     
 
 @dataclass
 class GetUnassignIpv6AddressesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

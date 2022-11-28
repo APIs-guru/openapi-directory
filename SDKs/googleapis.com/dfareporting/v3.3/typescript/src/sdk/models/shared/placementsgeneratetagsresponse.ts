@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PlacementTag } from "./placementtag";
+
 
 
 // PlacementsGenerateTagsResponse
@@ -8,9 +8,9 @@ import { PlacementTag } from "./placementtag";
  * Placement GenerateTags Response
 **/
 export class PlacementsGenerateTagsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=placementTags", elemType: shared.PlacementTag })
+  @SpeakeasyMetadata({ data: "json, name=placementTags", elemType: PlacementTag })
   placementTags?: PlacementTag[];
 }

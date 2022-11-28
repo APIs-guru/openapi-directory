@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Canary } from "./canary";
 
 
+
 export class CreateCanaryResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Canary" })
+  @SpeakeasyMetadata({ data: "json, name=Canary" })
   canary?: Canary;
 }

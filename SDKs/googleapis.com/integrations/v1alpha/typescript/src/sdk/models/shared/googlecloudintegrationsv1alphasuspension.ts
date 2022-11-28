@@ -1,13 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudIntegrationsV1alphaSuspensionApprovalConfig } from "./googlecloudintegrationsv1alphasuspensionapprovalconfig";
 import { GoogleCloudIntegrationsV1alphaSuspensionAudit } from "./googlecloudintegrationsv1alphasuspensionaudit";
 import { EnterpriseCrmEventbusProtoSuspensionConfig } from "./enterprisecrmeventbusprotosuspensionconfig";
+import { GoogleCloudIntegrationsV1alphaSuspensionApprovalConfigInput } from "./googlecloudintegrationsv1alphasuspensionapprovalconfig";
+
 
 export enum GoogleCloudIntegrationsV1alphaSuspensionStateEnum {
-    ResolutionStateUnspecified = "RESOLUTION_STATE_UNSPECIFIED"
-,    Pending = "PENDING"
-,    Rejected = "REJECTED"
-,    Lifted = "LIFTED"
+    ResolutionStateUnspecified = "RESOLUTION_STATE_UNSPECIFIED",
+    Pending = "PENDING",
+    Rejected = "REJECTED",
+    Lifted = "LIFTED"
 }
 
 
@@ -16,33 +18,64 @@ export enum GoogleCloudIntegrationsV1alphaSuspensionStateEnum {
  * A record representing a suspension.
 **/
 export class GoogleCloudIntegrationsV1alphaSuspension extends SpeakeasyBase {
-  @Metadata({ data: "json, name=approvalConfig" })
+  @SpeakeasyMetadata({ data: "json, name=approvalConfig" })
   approvalConfig?: GoogleCloudIntegrationsV1alphaSuspensionApprovalConfig;
 
-  @Metadata({ data: "json, name=audit" })
+  @SpeakeasyMetadata({ data: "json, name=audit" })
   audit?: GoogleCloudIntegrationsV1alphaSuspensionAudit;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=eventExecutionInfoId" })
+  @SpeakeasyMetadata({ data: "json, name=eventExecutionInfoId" })
   eventExecutionInfoId?: string;
 
-  @Metadata({ data: "json, name=integration" })
+  @SpeakeasyMetadata({ data: "json, name=integration" })
   integration?: string;
 
-  @Metadata({ data: "json, name=lastModifyTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastModifyTime" })
   lastModifyTime?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: GoogleCloudIntegrationsV1alphaSuspensionStateEnum;
 
-  @Metadata({ data: "json, name=suspensionConfig" })
+  @SpeakeasyMetadata({ data: "json, name=suspensionConfig" })
   suspensionConfig?: EnterpriseCrmEventbusProtoSuspensionConfig;
 
-  @Metadata({ data: "json, name=taskId" })
+  @SpeakeasyMetadata({ data: "json, name=taskId" })
+  taskId?: string;
+}
+
+
+// GoogleCloudIntegrationsV1alphaSuspensionInput
+/** 
+ * A record representing a suspension.
+**/
+export class GoogleCloudIntegrationsV1alphaSuspensionInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=approvalConfig" })
+  approvalConfig?: GoogleCloudIntegrationsV1alphaSuspensionApprovalConfigInput;
+
+  @SpeakeasyMetadata({ data: "json, name=audit" })
+  audit?: GoogleCloudIntegrationsV1alphaSuspensionAudit;
+
+  @SpeakeasyMetadata({ data: "json, name=eventExecutionInfoId" })
+  eventExecutionInfoId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=integration" })
+  integration?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=state" })
+  state?: GoogleCloudIntegrationsV1alphaSuspensionStateEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=suspensionConfig" })
+  suspensionConfig?: EnterpriseCrmEventbusProtoSuspensionConfig;
+
+  @SpeakeasyMetadata({ data: "json, name=taskId" })
   taskId?: string;
 }

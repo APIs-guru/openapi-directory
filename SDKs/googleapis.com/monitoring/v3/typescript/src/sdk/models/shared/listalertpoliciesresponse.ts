@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AlertPolicy } from "./alertpolicy";
+
 
 
 // ListAlertPoliciesResponse
@@ -8,12 +8,12 @@ import { AlertPolicy } from "./alertpolicy";
  * The protocol for the ListAlertPolicies response.
 **/
 export class ListAlertPoliciesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alertPolicies", elemType: shared.AlertPolicy })
+  @SpeakeasyMetadata({ data: "json, name=alertPolicies", elemType: AlertPolicy })
   alertPolicies?: AlertPolicy[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=totalSize" })
+  @SpeakeasyMetadata({ data: "json, name=totalSize" })
   totalSize?: number;
 }

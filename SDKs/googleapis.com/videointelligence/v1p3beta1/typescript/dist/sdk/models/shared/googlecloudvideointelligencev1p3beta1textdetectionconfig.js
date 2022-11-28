@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GoogleCloudVideointelligenceV1p3beta1TextDetectionConfig
 /**
  * Config for TEXT_DETECTION.
@@ -33,11 +33,11 @@ var GoogleCloudVideointelligenceV1p3beta1TextDetectionConfig = /** @class */ (fu
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=languageHints" }),
+        SpeakeasyMetadata({ data: "json, name=languageHints" }),
         __metadata("design:type", Array)
     ], GoogleCloudVideointelligenceV1p3beta1TextDetectionConfig.prototype, "languageHints", void 0);
     __decorate([
-        Metadata({ data: "json, name=model" }),
+        SpeakeasyMetadata({ data: "json, name=model" }),
         __metadata("design:type", String)
     ], GoogleCloudVideointelligenceV1p3beta1TextDetectionConfig.prototype, "model", void 0);
     return GoogleCloudVideointelligenceV1p3beta1TextDetectionConfig;

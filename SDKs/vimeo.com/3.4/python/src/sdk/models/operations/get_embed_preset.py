@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class GetEmbedPresetPathParams:
-    preset_id: float = field(default=None, metadata={'path_param': { 'field_name': 'preset_id', 'style': 'simple', 'explode': False }})
-    user_id: float = field(default=None, metadata={'path_param': { 'field_name': 'user_id', 'style': 'simple', 'explode': False }})
+    preset_id: float = field(metadata={'path_param': { 'field_name': 'preset_id', 'style': 'simple', 'explode': False }})
+    user_id: float = field(metadata={'path_param': { 'field_name': 'user_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetEmbedPresetRequest:
-    path_params: GetEmbedPresetPathParams = field(default=None)
+    path_params: GetEmbedPresetPathParams = field()
     
 
 @dataclass
 class GetEmbedPresetResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     presets: Optional[shared.Presets] = field(default=None)
     

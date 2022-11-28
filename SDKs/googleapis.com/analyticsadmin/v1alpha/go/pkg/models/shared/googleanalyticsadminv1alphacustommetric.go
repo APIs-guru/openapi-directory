@@ -31,6 +31,19 @@ const (
 	GoogleAnalyticsAdminV1alphaCustomMetricScopeEnumEvent                  GoogleAnalyticsAdminV1alphaCustomMetricScopeEnum = "EVENT"
 )
 
+// GoogleAnalyticsAdminV1alphaCustomMetricInput
+// A definition for a custom metric.
+type GoogleAnalyticsAdminV1alphaCustomMetricInput struct {
+	Description          *string                                                           `json:"description,omitempty"`
+	DisplayName          *string                                                           `json:"displayName,omitempty"`
+	MeasurementUnit      *GoogleAnalyticsAdminV1alphaCustomMetricMeasurementUnitEnum       `json:"measurementUnit,omitempty"`
+	ParameterName        *string                                                           `json:"parameterName,omitempty"`
+	RestrictedMetricType []GoogleAnalyticsAdminV1alphaCustomMetricRestrictedMetricTypeEnum `json:"restrictedMetricType,omitempty"`
+	Scope                *GoogleAnalyticsAdminV1alphaCustomMetricScopeEnum                 `json:"scope,omitempty"`
+}
+
+// GoogleAnalyticsAdminV1alphaCustomMetric
+// A definition for a custom metric.
 type GoogleAnalyticsAdminV1alphaCustomMetric struct {
 	Description          *string                                                           `json:"description,omitempty"`
 	DisplayName          *string                                                           `json:"displayName,omitempty"`

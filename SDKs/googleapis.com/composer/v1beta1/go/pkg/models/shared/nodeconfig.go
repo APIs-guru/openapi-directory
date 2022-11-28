@@ -1,5 +1,7 @@
 package shared
 
+// NodeConfig
+// The configuration information for the Kubernetes Engine nodes running the Apache Airflow software.
 type NodeConfig struct {
 	DiskSizeGb         *int32              `json:"diskSizeGb,omitempty"`
 	EnableIPMasqAgent  *bool               `json:"enableIpMasqAgent,omitempty"`

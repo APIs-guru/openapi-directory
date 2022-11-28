@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { OcrPhotoTextElement } from "./ocrphototextelement";
 // PhotoToWordsWithLocationResult
 /**
  * Result of an photo to words-with-location OCR operation
@@ -34,15 +34,15 @@ var PhotoToWordsWithLocationResult = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DiagnosticImage" }),
+        SpeakeasyMetadata({ data: "json, name=DiagnosticImage" }),
         __metadata("design:type", String)
     ], PhotoToWordsWithLocationResult.prototype, "diagnosticImage", void 0);
     __decorate([
-        Metadata({ data: "json, name=Successful" }),
+        SpeakeasyMetadata({ data: "json, name=Successful" }),
         __metadata("design:type", Boolean)
     ], PhotoToWordsWithLocationResult.prototype, "successful", void 0);
     __decorate([
-        Metadata({ data: "json, name=TextElements", elemType: shared.OcrPhotoTextElement }),
+        SpeakeasyMetadata({ data: "json, name=TextElements", elemType: OcrPhotoTextElement }),
         __metadata("design:type", Array)
     ], PhotoToWordsWithLocationResult.prototype, "textElements", void 0);
     return PhotoToWordsWithLocationResult;

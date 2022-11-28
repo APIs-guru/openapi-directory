@@ -12,12 +12,6 @@ type PutDatabasePkSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type PutDatabasePkRequest struct {
-	PathParams PutDatabasePkPathParams
-	Request    shared.DatabaseRestAPIPut `request:"mediaType=application/json"`
-	Security   PutDatabasePkSecurity
-}
-
 type PutDatabasePk200ApplicationJSON struct {
 	ID     *float64                   `json:"id,omitempty"`
 	Result *shared.DatabaseRestAPIPut `json:"result,omitempty"`
@@ -45,6 +39,12 @@ type PutDatabasePk422ApplicationJSON struct {
 
 type PutDatabasePk500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type PutDatabasePkRequest struct {
+	PathParams PutDatabasePkPathParams
+	Request    shared.DatabaseRestAPIPut `request:"mediaType=application/json"`
+	Security   PutDatabasePkSecurity
 }
 
 type PutDatabasePkResponse struct {

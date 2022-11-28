@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ScriptStackFrame } from "./scriptstackframe";
 
 
+
 export class ScriptStatistics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=evaluationKind" })
+  @SpeakeasyMetadata({ data: "json, name=evaluationKind" })
   evaluationKind?: string;
 
-  @Metadata({ data: "json, name=stackFrames", elemType: shared.ScriptStackFrame })
+  @SpeakeasyMetadata({ data: "json, name=stackFrames", elemType: ScriptStackFrame })
   stackFrames?: ScriptStackFrame[];
 }

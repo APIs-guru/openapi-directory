@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CustomEvent } from "./customevent";
+
 
 
 // CustomEventsBatchInsertRequest
@@ -8,9 +8,9 @@ import { CustomEvent } from "./customevent";
  * Insert Custom Events Request.
 **/
 export class CustomEventsBatchInsertRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=customEvents", elemType: shared.CustomEvent })
+  @SpeakeasyMetadata({ data: "json, name=customEvents", elemType: CustomEvent })
   customEvents?: CustomEvent[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ClassificationEvaluationMetricsConfusionMatrixRow } from "./classificationevaluationmetricsconfusionmatrixrow";
+
 
 
 // ConfusionMatrix
@@ -8,12 +8,12 @@ import { ClassificationEvaluationMetricsConfusionMatrixRow } from "./classificat
  * Confusion matrix of the model running the classification.
 **/
 export class ConfusionMatrix extends SpeakeasyBase {
-  @Metadata({ data: "json, name=annotationSpecId" })
+  @SpeakeasyMetadata({ data: "json, name=annotationSpecId" })
   annotationSpecId?: string[];
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string[];
 
-  @Metadata({ data: "json, name=row", elemType: shared.ClassificationEvaluationMetricsConfusionMatrixRow })
+  @SpeakeasyMetadata({ data: "json, name=row", elemType: ClassificationEvaluationMetricsConfusionMatrixRow })
   row?: ClassificationEvaluationMetricsConfusionMatrixRow[];
 }

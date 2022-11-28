@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeregisterRdsDbInstanceRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=RdsDbInstanceArn" })
+  @SpeakeasyMetadata({ data: "json, name=RdsDbInstanceArn" })
   rdsDbInstanceArn: string;
 }

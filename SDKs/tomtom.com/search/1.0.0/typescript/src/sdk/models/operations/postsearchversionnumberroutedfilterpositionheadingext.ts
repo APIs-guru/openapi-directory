@@ -1,83 +1,84 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostSearchVersionNumberRoutedFilterPositionHeadingExtPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=ext" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ext" })
   ext: shared.ExtEnum;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=heading" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=heading" })
   heading: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=position" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=position" })
   position: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=versionNumber" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=versionNumber" })
   versionNumber: number;
 }
 
 
 export class PostSearchVersionNumberRoutedFilterPositionHeadingExtQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=routingTimeout" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=routingTimeout" })
   routingTimeout?: number;
 }
 
 
 export class PostSearchVersionNumberRoutedFilterPositionHeadingExtRequestBodyPoiListAddress extends SpeakeasyBase {
-  @Metadata({ data: "json, name=freeformAddress" })
+  @SpeakeasyMetadata({ data: "json, name=freeformAddress" })
   freeformAddress?: string;
 }
 
 
 export class PostSearchVersionNumberRoutedFilterPositionHeadingExtRequestBodyPoiListPoi extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
 
 
 export class PostSearchVersionNumberRoutedFilterPositionHeadingExtRequestBodyPoiListPosition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=lat" })
+  @SpeakeasyMetadata({ data: "json, name=lat" })
   lat?: number;
 
-  @Metadata({ data: "json, name=lon" })
+  @SpeakeasyMetadata({ data: "json, name=lon" })
   lon?: number;
 }
 
 
 export class PostSearchVersionNumberRoutedFilterPositionHeadingExtRequestBodyPoiList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=address" })
+  @SpeakeasyMetadata({ data: "json, name=address" })
   address?: PostSearchVersionNumberRoutedFilterPositionHeadingExtRequestBodyPoiListAddress;
 
-  @Metadata({ data: "json, name=poi" })
+  @SpeakeasyMetadata({ data: "json, name=poi" })
   poi?: PostSearchVersionNumberRoutedFilterPositionHeadingExtRequestBodyPoiListPoi;
 
-  @Metadata({ data: "json, name=position" })
+  @SpeakeasyMetadata({ data: "json, name=position" })
   position?: PostSearchVersionNumberRoutedFilterPositionHeadingExtRequestBodyPoiListPosition;
 }
 
 
 export class PostSearchVersionNumberRoutedFilterPositionHeadingExtRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=poiList", elemType: operations.PostSearchVersionNumberRoutedFilterPositionHeadingExtRequestBodyPoiList })
+  @SpeakeasyMetadata({ data: "json, name=poiList", elemType: PostSearchVersionNumberRoutedFilterPositionHeadingExtRequestBodyPoiList })
   poiList?: PostSearchVersionNumberRoutedFilterPositionHeadingExtRequestBodyPoiList[];
 }
 
 
 export class PostSearchVersionNumberRoutedFilterPositionHeadingExtRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PostSearchVersionNumberRoutedFilterPositionHeadingExtPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PostSearchVersionNumberRoutedFilterPositionHeadingExtQueryParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: PostSearchVersionNumberRoutedFilterPositionHeadingExtRequestBody;
 }
 
 
 export class PostSearchVersionNumberRoutedFilterPositionHeadingExtResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

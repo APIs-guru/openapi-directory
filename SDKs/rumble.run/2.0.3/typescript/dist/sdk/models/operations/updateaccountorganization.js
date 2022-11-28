@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var UpdateAccountOrganizationPathParams = /** @class */ (function (_super) {
     __extends(UpdateAccountOrganizationPathParams, _super);
@@ -30,7 +30,7 @@ var UpdateAccountOrganizationPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=org_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=org_id" }),
         __metadata("design:type", String)
     ], UpdateAccountOrganizationPathParams.prototype, "orgId", void 0);
     return UpdateAccountOrganizationPathParams;
@@ -42,7 +42,7 @@ var UpdateAccountOrganizationSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
         __metadata("design:type", shared.SchemeBearerAuth)
     ], UpdateAccountOrganizationSecurity.prototype, "bearerAuth", void 0);
     return UpdateAccountOrganizationSecurity;
@@ -54,15 +54,15 @@ var UpdateAccountOrganizationRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateAccountOrganizationPathParams)
     ], UpdateAccountOrganizationRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.OrgOptions)
     ], UpdateAccountOrganizationRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateAccountOrganizationSecurity)
     ], UpdateAccountOrganizationRequest.prototype, "security", void 0);
     return UpdateAccountOrganizationRequest;
@@ -74,15 +74,15 @@ var UpdateAccountOrganizationResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UpdateAccountOrganizationResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Organization)
     ], UpdateAccountOrganizationResponse.prototype, "organization", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UpdateAccountOrganizationResponse.prototype, "statusCode", void 0);
     return UpdateAccountOrganizationResponse;

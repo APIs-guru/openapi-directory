@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EventFilter } from "./eventfilter";
+
 
 
 // EventStartCondition
@@ -7,9 +8,9 @@ import { EventFilter } from "./eventfilter";
  * Specifies the settings for an event that causes a journey activity to start.
 **/
 export class EventStartCondition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EventFilter" })
+  @SpeakeasyMetadata({ data: "json, name=EventFilter" })
   eventFilter?: EventFilter;
 
-  @Metadata({ data: "json, name=SegmentId" })
+  @SpeakeasyMetadata({ data: "json, name=SegmentId" })
   segmentId?: string;
 }

@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import backup
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateBackupResponse:
-    backup: Optional[backup.Backup] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Backup' }})
+    r"""CreateBackupResponse
+    The response object for the <code>CreateBackup</code> operation.
+    """
+    
+    backup: Optional[Backup] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Backup') }})
     

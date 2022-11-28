@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GoogleCloudDataplexV1ActionIncompatibleDataSchemaSchemaChangeEnum(str, Enum):
     SCHEMA_CHANGE_UNSPECIFIED = "SCHEMA_CHANGE_UNSPECIFIED"
@@ -11,9 +13,13 @@ class GoogleCloudDataplexV1ActionIncompatibleDataSchemaSchemaChangeEnum(str, Enu
 @dataclass_json
 @dataclass
 class GoogleCloudDataplexV1ActionIncompatibleDataSchema:
-    existing_schema: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'existingSchema' }})
-    new_schema: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'newSchema' }})
-    sampled_data_locations: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sampledDataLocations' }})
-    schema_change: Optional[GoogleCloudDataplexV1ActionIncompatibleDataSchemaSchemaChangeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'schemaChange' }})
-    table: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'table' }})
+    r"""GoogleCloudDataplexV1ActionIncompatibleDataSchema
+    Action details for incompatible schemas detected by discovery.
+    """
+    
+    existing_schema: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('existingSchema') }})
+    new_schema: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('newSchema') }})
+    sampled_data_locations: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sampledDataLocations') }})
+    schema_change: Optional[GoogleCloudDataplexV1ActionIncompatibleDataSchemaSchemaChangeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('schemaChange') }})
+    table: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('table') }})
     

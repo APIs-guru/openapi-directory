@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ObjectIdentifierAndLinkNameTuple } from "./objectidentifierandlinknametuple";
 
 
+
 export class ListObjectParentsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=ParentLinks", elemType: shared.ObjectIdentifierAndLinkNameTuple })
+  @SpeakeasyMetadata({ data: "json, name=ParentLinks", elemType: ObjectIdentifierAndLinkNameTuple })
   parentLinks?: ObjectIdentifierAndLinkNameTuple[];
 
-  @Metadata({ data: "json, name=Parents" })
+  @SpeakeasyMetadata({ data: "json, name=Parents" })
   parents?: Map<string, string>;
 }

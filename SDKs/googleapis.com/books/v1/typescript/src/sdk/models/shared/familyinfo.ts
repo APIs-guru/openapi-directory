@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // FamilyInfoMembership
@@ -6,27 +7,27 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Family membership info of the user that made the request.
 **/
 export class FamilyInfoMembership extends SpeakeasyBase {
-  @Metadata({ data: "json, name=acquirePermission" })
+  @SpeakeasyMetadata({ data: "json, name=acquirePermission" })
   acquirePermission?: string;
 
-  @Metadata({ data: "json, name=ageGroup" })
+  @SpeakeasyMetadata({ data: "json, name=ageGroup" })
   ageGroup?: string;
 
-  @Metadata({ data: "json, name=allowedMaturityRating" })
+  @SpeakeasyMetadata({ data: "json, name=allowedMaturityRating" })
   allowedMaturityRating?: string;
 
-  @Metadata({ data: "json, name=isInFamily" })
+  @SpeakeasyMetadata({ data: "json, name=isInFamily" })
   isInFamily?: boolean;
 
-  @Metadata({ data: "json, name=role" })
+  @SpeakeasyMetadata({ data: "json, name=role" })
   role?: string;
 }
 
 
 export class FamilyInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=membership" })
+  @SpeakeasyMetadata({ data: "json, name=membership" })
   membership?: FamilyInfoMembership;
 }

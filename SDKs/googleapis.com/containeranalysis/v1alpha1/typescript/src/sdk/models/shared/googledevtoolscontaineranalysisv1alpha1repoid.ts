@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleDevtoolsContaineranalysisV1alpha1ProjectRepoId } from "./googledevtoolscontaineranalysisv1alpha1projectrepoid";
+
 
 
 // GoogleDevtoolsContaineranalysisV1alpha1RepoId
@@ -7,9 +8,9 @@ import { GoogleDevtoolsContaineranalysisV1alpha1ProjectRepoId } from "./googlede
  * A unique identifier for a Cloud Repo.
 **/
 export class GoogleDevtoolsContaineranalysisV1alpha1RepoId extends SpeakeasyBase {
-  @Metadata({ data: "json, name=projectRepoId" })
+  @SpeakeasyMetadata({ data: "json, name=projectRepoId" })
   projectRepoId?: GoogleDevtoolsContaineranalysisV1alpha1ProjectRepoId;
 
-  @Metadata({ data: "json, name=uid" })
+  @SpeakeasyMetadata({ data: "json, name=uid" })
   uid?: string;
 }

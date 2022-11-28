@@ -1,0 +1,24 @@
+export var ObFeeFrequency1Code2Enum;
+(function (ObFeeFrequency1Code2Enum) {
+    ObFeeFrequency1Code2Enum["Feac"] = "FEAC";
+    ObFeeFrequency1Code2Enum["Feao"] = "FEAO";
+    ObFeeFrequency1Code2Enum["Fecp"] = "FECP";
+    ObFeeFrequency1Code2Enum["Feda"] = "FEDA";
+    ObFeeFrequency1Code2Enum["Feho"] = "FEHO";
+    ObFeeFrequency1Code2Enum["Fei"] = "FEI";
+    ObFeeFrequency1Code2Enum["Femo"] = "FEMO";
+    ObFeeFrequency1Code2Enum["Feoa"] = "FEOA";
+    ObFeeFrequency1Code2Enum["Feot"] = "FEOT";
+    ObFeeFrequency1Code2Enum["Fepc"] = "FEPC";
+    ObFeeFrequency1Code2Enum["Feph"] = "FEPH";
+    ObFeeFrequency1Code2Enum["Fepo"] = "FEPO";
+    ObFeeFrequency1Code2Enum["Feps"] = "FEPS";
+    ObFeeFrequency1Code2Enum["Fept"] = "FEPT";
+    ObFeeFrequency1Code2Enum["Fepta"] = "FEPTA";
+    ObFeeFrequency1Code2Enum["Feptp"] = "FEPTP";
+    ObFeeFrequency1Code2Enum["Fequ"] = "FEQU";
+    ObFeeFrequency1Code2Enum["Fesm"] = "FESM";
+    ObFeeFrequency1Code2Enum["Fest"] = "FEST";
+    ObFeeFrequency1Code2Enum["Fewe"] = "FEWE";
+    ObFeeFrequency1Code2Enum["Feye"] = "FEYE";
+})(ObFeeFrequency1Code2Enum || (ObFeeFrequency1Code2Enum = {}));

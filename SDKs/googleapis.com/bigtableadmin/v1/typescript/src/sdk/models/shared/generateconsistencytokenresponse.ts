@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GenerateConsistencyTokenResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Response message for google.bigtable.admin.v2.BigtableTableAdmin.GenerateConsistencyToken
 **/
 export class GenerateConsistencyTokenResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=consistencyToken" })
+  @SpeakeasyMetadata({ data: "json, name=consistencyToken" })
   consistencyToken?: string;
 }

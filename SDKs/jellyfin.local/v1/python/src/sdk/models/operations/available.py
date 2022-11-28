@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -10,17 +11,17 @@ class AvailableQueryParams:
 
 @dataclass
 class AvailableSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class AvailableRequest:
-    query_params: AvailableQueryParams = field(default=None)
-    security: AvailableSecurity = field(default=None)
+    query_params: AvailableQueryParams = field()
+    security: AvailableSecurity = field()
     
 
 @dataclass
 class AvailableResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

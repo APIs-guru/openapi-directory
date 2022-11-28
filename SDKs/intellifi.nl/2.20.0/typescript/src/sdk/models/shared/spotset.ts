@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SpotSet extends SpeakeasyBase {
-  @Metadata({ data: "json, name=created_by" })
+  @SpeakeasyMetadata({ data: "json, name=created_by" })
   createdBy?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=setid" })
+  @SpeakeasyMetadata({ data: "json, name=setid" })
   setid?: number;
 
-  @Metadata({ data: "json, name=spot_id" })
+  @SpeakeasyMetadata({ data: "json, name=spot_id" })
   spotId?: string;
 
-  @Metadata({ data: "json, name=time_created" })
+  @SpeakeasyMetadata({ data: "json, name=time_created" })
   timeCreated?: string;
 
-  @Metadata({ data: "json, name=time_updated" })
+  @SpeakeasyMetadata({ data: "json, name=time_updated" })
   timeUpdated?: string;
 }

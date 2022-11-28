@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Payload } from "./payload";
+
 
 
 // SqsAction
@@ -7,12 +8,12 @@ import { Payload } from "./payload";
  * Sends information about the detector model instance and the event that triggered the action to an Amazon SQS queue.
 **/
 export class SqsAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=payload" })
+  @SpeakeasyMetadata({ data: "json, name=payload" })
   payload?: Payload;
 
-  @Metadata({ data: "json, name=queueUrl" })
+  @SpeakeasyMetadata({ data: "json, name=queueUrl" })
   queueUrl: string;
 
-  @Metadata({ data: "json, name=useBase64" })
+  @SpeakeasyMetadata({ data: "json, name=useBase64" })
   useBase64?: boolean;
 }

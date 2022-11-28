@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ImapSettingsExpungeBehaviorEnum {
-    ExpungeBehaviorUnspecified = "expungeBehaviorUnspecified"
-,    Archive = "archive"
-,    Trash = "trash"
-,    DeleteForever = "deleteForever"
+    ExpungeBehaviorUnspecified = "expungeBehaviorUnspecified",
+    Archive = "archive",
+    Trash = "trash",
+    DeleteForever = "deleteForever"
 }
 
 
@@ -13,15 +14,15 @@ export enum ImapSettingsExpungeBehaviorEnum {
  * IMAP settings for an account.
 **/
 export class ImapSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=autoExpunge" })
+  @SpeakeasyMetadata({ data: "json, name=autoExpunge" })
   autoExpunge?: boolean;
 
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=expungeBehavior" })
+  @SpeakeasyMetadata({ data: "json, name=expungeBehavior" })
   expungeBehavior?: ImapSettingsExpungeBehaviorEnum;
 
-  @Metadata({ data: "json, name=maxFolderSize" })
+  @SpeakeasyMetadata({ data: "json, name=maxFolderSize" })
   maxFolderSize?: number;
 }

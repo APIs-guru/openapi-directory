@@ -1,10 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import parameter
-from . import parameter
-from . import parameter
-from . import parameter
+from sdk import utils
+from . import *
 
 class VariableFormatValueCaseConversionTypeEnum(str, Enum):
     NONE = "none"
@@ -15,9 +14,9 @@ class VariableFormatValueCaseConversionTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class VariableFormatValue:
-    case_conversion_type: Optional[VariableFormatValueCaseConversionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'caseConversionType' }})
-    convert_false_to_value: Optional[parameter.Parameter] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'convertFalseToValue' }})
-    convert_null_to_value: Optional[parameter.Parameter] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'convertNullToValue' }})
-    convert_true_to_value: Optional[parameter.Parameter] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'convertTrueToValue' }})
-    convert_undefined_to_value: Optional[parameter.Parameter] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'convertUndefinedToValue' }})
+    case_conversion_type: Optional[VariableFormatValueCaseConversionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('caseConversionType') }})
+    convert_false_to_value: Optional[Parameter] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('convertFalseToValue') }})
+    convert_null_to_value: Optional[Parameter] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('convertNullToValue') }})
+    convert_true_to_value: Optional[Parameter] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('convertTrueToValue') }})
+    convert_undefined_to_value: Optional[Parameter] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('convertUndefinedToValue') }})
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // DeleteTrustRequest
 /**
  * Deletes the local side of an existing trust relationship between the Managed Microsoft AD directory and the external domain.
@@ -33,11 +33,11 @@ var DeleteTrustRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DeleteAssociatedConditionalForwarder" }),
+        SpeakeasyMetadata({ data: "json, name=DeleteAssociatedConditionalForwarder" }),
         __metadata("design:type", Boolean)
     ], DeleteTrustRequest.prototype, "deleteAssociatedConditionalForwarder", void 0);
     __decorate([
-        Metadata({ data: "json, name=TrustId" }),
+        SpeakeasyMetadata({ data: "json, name=TrustId" }),
         __metadata("design:type", String)
     ], DeleteTrustRequest.prototype, "trustId", void 0);
     return DeleteTrustRequest;

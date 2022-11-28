@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ItvUpdateIntentStrongResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clientSecret" })
+  @SpeakeasyMetadata({ data: "json, name=clientSecret" })
   clientSecret?: string;
 
-  @Metadata({ data: "json, name=intentId" })
+  @SpeakeasyMetadata({ data: "json, name=intentId" })
   intentId?: string;
 
-  @Metadata({ data: "json, name=intentType" })
+  @SpeakeasyMetadata({ data: "json, name=intentType" })
   intentType?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 }

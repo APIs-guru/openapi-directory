@@ -15,12 +15,12 @@ class GetConsumerV1ResourcesQueryParams:
 
 @dataclass
 class GetConsumerV1ResourcesRequest:
-    query_params: GetConsumerV1ResourcesQueryParams = field(default=None)
+    query_params: GetConsumerV1ResourcesQueryParams = field()
     
 
 @dataclass
 class GetConsumerV1ResourcesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     resource_list_view_model: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

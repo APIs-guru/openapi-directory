@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Range } from "./range";
 import { SectionStyle } from "./sectionstyle";
+
 
 
 // UpdateSectionStyleRequest
@@ -8,12 +9,12 @@ import { SectionStyle } from "./sectionstyle";
  * Updates the SectionStyle.
 **/
 export class UpdateSectionStyleRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fields" })
+  @SpeakeasyMetadata({ data: "json, name=fields" })
   fields?: string;
 
-  @Metadata({ data: "json, name=range" })
+  @SpeakeasyMetadata({ data: "json, name=range" })
   range?: Range;
 
-  @Metadata({ data: "json, name=sectionStyle" })
+  @SpeakeasyMetadata({ data: "json, name=sectionStyle" })
   sectionStyle?: SectionStyle;
 }

@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetConnectionPathParams:
-    connection_id: str = field(default=None, metadata={'path_param': { 'field_name': 'connectionId', 'style': 'simple', 'explode': False }})
+    connection_id: str = field(metadata={'path_param': { 'field_name': 'connectionId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,16 +24,16 @@ class GetConnectionHeaders:
 
 @dataclass
 class GetConnectionRequest:
-    path_params: GetConnectionPathParams = field(default=None)
-    headers: GetConnectionHeaders = field(default=None)
+    headers: GetConnectionHeaders = field()
+    path_params: GetConnectionPathParams = field()
     
 
 @dataclass
 class GetConnectionResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     forbidden_exception: Optional[Any] = field(default=None)
     get_connection_response: Optional[shared.GetConnectionResponse] = field(default=None)
     gone_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

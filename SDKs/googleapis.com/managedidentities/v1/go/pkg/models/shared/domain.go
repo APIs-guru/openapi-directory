@@ -13,6 +13,20 @@ const (
 	DomainStateEnumUnavailable           DomainStateEnum = "UNAVAILABLE"
 )
 
+// DomainInput
+// Represents a managed Microsoft Active Directory domain. If the domain is being changed, it will be placed into the UPDATING state, which indicates that the resource is being reconciled. At this point, Get will reflect an intermediate state.
+type DomainInput struct {
+	Admin              *string           `json:"admin,omitempty"`
+	AuditLogsEnabled   *bool             `json:"auditLogsEnabled,omitempty"`
+	AuthorizedNetworks []string          `json:"authorizedNetworks,omitempty"`
+	Labels             map[string]string `json:"labels,omitempty"`
+	Locations          []string          `json:"locations,omitempty"`
+	Name               *string           `json:"name,omitempty"`
+	ReservedIPRange    *string           `json:"reservedIpRange,omitempty"`
+}
+
+// Domain
+// Represents a managed Microsoft Active Directory domain. If the domain is being changed, it will be placed into the UPDATING state, which indicates that the resource is being reconciled. At this point, Get will reflect an intermediate state.
 type Domain struct {
 	Admin              *string           `json:"admin,omitempty"`
 	AuditLogsEnabled   *bool             `json:"auditLogsEnabled,omitempty"`

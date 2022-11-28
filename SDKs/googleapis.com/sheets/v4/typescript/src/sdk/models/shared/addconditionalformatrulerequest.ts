@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConditionalFormatRule } from "./conditionalformatrule";
+
 
 
 // AddConditionalFormatRuleRequest
@@ -7,9 +8,9 @@ import { ConditionalFormatRule } from "./conditionalformatrule";
  * Adds a new conditional format rule at the given index. All subsequent rules' indexes are incremented.
 **/
 export class AddConditionalFormatRuleRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=index" })
+  @SpeakeasyMetadata({ data: "json, name=index" })
   index?: number;
 
-  @Metadata({ data: "json, name=rule" })
+  @SpeakeasyMetadata({ data: "json, name=rule" })
   rule?: ConditionalFormatRule;
 }

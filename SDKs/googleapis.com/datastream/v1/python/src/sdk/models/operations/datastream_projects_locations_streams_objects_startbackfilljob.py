@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DatastreamProjectsLocationsStreamsObjectsStartBackfillJobPathParams:
-    object: str = field(default=None, metadata={'path_param': { 'field_name': 'object', 'style': 'simple', 'explode': False }})
+    object: str = field(metadata={'path_param': { 'field_name': 'object', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class DatastreamProjectsLocationsStreamsObjectsStartBackfillJobQueryParams:
 
 @dataclass
 class DatastreamProjectsLocationsStreamsObjectsStartBackfillJobSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DatastreamProjectsLocationsStreamsObjectsStartBackfillJobRequest:
-    path_params: DatastreamProjectsLocationsStreamsObjectsStartBackfillJobPathParams = field(default=None)
-    query_params: DatastreamProjectsLocationsStreamsObjectsStartBackfillJobQueryParams = field(default=None)
+    path_params: DatastreamProjectsLocationsStreamsObjectsStartBackfillJobPathParams = field()
+    query_params: DatastreamProjectsLocationsStreamsObjectsStartBackfillJobQueryParams = field()
+    security: DatastreamProjectsLocationsStreamsObjectsStartBackfillJobSecurity = field()
     request: Optional[dict[str, Any]] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DatastreamProjectsLocationsStreamsObjectsStartBackfillJobSecurity = field(default=None)
     
 
 @dataclass
 class DatastreamProjectsLocationsStreamsObjectsStartBackfillJobResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     start_backfill_job_response: Optional[shared.StartBackfillJobResponse] = field(default=None)
-    status_code: int = field(default=None)
     

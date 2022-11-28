@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContainerInstanceFieldEnum } from "./containerinstancefieldenum";
 
 
+
 export class DescribeContainerInstancesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cluster" })
+  @SpeakeasyMetadata({ data: "json, name=cluster" })
   cluster?: string;
 
-  @Metadata({ data: "json, name=containerInstances" })
+  @SpeakeasyMetadata({ data: "json, name=containerInstances" })
   containerInstances: string[];
 
-  @Metadata({ data: "json, name=include" })
+  @SpeakeasyMetadata({ data: "json, name=include" })
   include?: ContainerInstanceFieldEnum[];
 }

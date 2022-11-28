@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccountsGetRequestOptions } from "./accountsgetrequestoptions";
 // AccountsGetRequest
 /**
@@ -34,19 +34,19 @@ var AccountsGetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=access_token" }),
+        SpeakeasyMetadata({ data: "json, name=access_token" }),
         __metadata("design:type", String)
     ], AccountsGetRequest.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=client_id" }),
+        SpeakeasyMetadata({ data: "json, name=client_id" }),
         __metadata("design:type", String)
     ], AccountsGetRequest.prototype, "clientId", void 0);
     __decorate([
-        Metadata({ data: "json, name=options" }),
+        SpeakeasyMetadata({ data: "json, name=options" }),
         __metadata("design:type", AccountsGetRequestOptions)
     ], AccountsGetRequest.prototype, "options", void 0);
     __decorate([
-        Metadata({ data: "json, name=secret" }),
+        SpeakeasyMetadata({ data: "json, name=secret" }),
         __metadata("design:type", String)
     ], AccountsGetRequest.prototype, "secret", void 0);
     return AccountsGetRequest;

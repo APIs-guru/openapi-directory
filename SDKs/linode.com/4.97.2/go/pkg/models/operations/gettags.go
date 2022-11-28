@@ -9,22 +9,9 @@ type GetTagsQueryParams struct {
 	PageSize *int64 `queryParam:"style=form,explode=true,name=page_size"`
 }
 
-type GetTagsSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type GetTagsSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type GetTagsSecurity struct {
-	Option1 *GetTagsSecurityOption1 `security:"option"`
-	Option2 *GetTagsSecurityOption2 `security:"option"`
-}
-
-type GetTagsRequest struct {
-	QueryParams GetTagsQueryParams
-	Security    GetTagsSecurity
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
 }
 
 type GetTags200ApplicationJSON struct {
@@ -36,6 +23,11 @@ type GetTags200ApplicationJSON struct {
 
 type GetTagsDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type GetTagsRequest struct {
+	QueryParams GetTagsQueryParams
+	Security    GetTagsSecurity
 }
 
 type GetTagsResponse struct {

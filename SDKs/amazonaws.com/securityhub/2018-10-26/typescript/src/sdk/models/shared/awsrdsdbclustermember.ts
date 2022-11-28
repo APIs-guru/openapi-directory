@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsRdsDbClusterMember
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about an instance in the DB cluster.
 **/
 export class AwsRdsDbClusterMember extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DbClusterParameterGroupStatus" })
+  @SpeakeasyMetadata({ data: "json, name=DbClusterParameterGroupStatus" })
   dbClusterParameterGroupStatus?: string;
 
-  @Metadata({ data: "json, name=DbInstanceIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=DbInstanceIdentifier" })
   dbInstanceIdentifier?: string;
 
-  @Metadata({ data: "json, name=IsClusterWriter" })
+  @SpeakeasyMetadata({ data: "json, name=IsClusterWriter" })
   isClusterWriter?: boolean;
 
-  @Metadata({ data: "json, name=PromotionTier" })
+  @SpeakeasyMetadata({ data: "json, name=PromotionTier" })
   promotionTier?: number;
 }

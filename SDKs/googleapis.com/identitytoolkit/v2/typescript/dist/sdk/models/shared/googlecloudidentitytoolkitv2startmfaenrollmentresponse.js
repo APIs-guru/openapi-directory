@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudIdentitytoolkitV2StartMfaPhoneResponseInfo } from "./googlecloudidentitytoolkitv2startmfaphoneresponseinfo";
 // GoogleCloudIdentitytoolkitV2StartMfaEnrollmentResponse
 /**
@@ -34,7 +34,7 @@ var GoogleCloudIdentitytoolkitV2StartMfaEnrollmentResponse = /** @class */ (func
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=phoneSessionInfo" }),
+        SpeakeasyMetadata({ data: "json, name=phoneSessionInfo" }),
         __metadata("design:type", GoogleCloudIdentitytoolkitV2StartMfaPhoneResponseInfo)
     ], GoogleCloudIdentitytoolkitV2StartMfaEnrollmentResponse.prototype, "phoneSessionInfo", void 0);
     return GoogleCloudIdentitytoolkitV2StartMfaEnrollmentResponse;

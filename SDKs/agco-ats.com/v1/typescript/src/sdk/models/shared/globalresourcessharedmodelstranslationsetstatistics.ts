@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GlobalResourcesSharedModelsTranslationSetStatistics
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Statistics for a translation set
 **/
 export class GlobalResourcesSharedModelsTranslationSetStatistics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LanguageIDs" })
+  @SpeakeasyMetadata({ data: "json, name=LanguageIDs" })
   languageIDs?: number[];
 
-  @Metadata({ data: "json, name=StringCount" })
+  @SpeakeasyMetadata({ data: "json, name=StringCount" })
   stringCount?: number;
 }

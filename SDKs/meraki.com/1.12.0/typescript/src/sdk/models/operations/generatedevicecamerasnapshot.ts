@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GenerateDeviceCameraSnapshotPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=serial" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=serial" })
   serial: string;
 }
 
 
 export class GenerateDeviceCameraSnapshotRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fullframe" })
+  @SpeakeasyMetadata({ data: "json, name=fullframe" })
   fullframe?: boolean;
 
-  @Metadata({ data: "json, name=timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=timestamp" })
   timestamp?: Date;
 }
 
 
 export class GenerateDeviceCameraSnapshotRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GenerateDeviceCameraSnapshotPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: GenerateDeviceCameraSnapshotRequestBody;
 }
 
 
 export class GenerateDeviceCameraSnapshotResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   generateDeviceCameraSnapshot202ApplicationJsonObject?: Map<string, any>;
 }

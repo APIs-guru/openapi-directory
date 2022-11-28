@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Envelope } from "./envelope";
 import { InTotoStatement } from "./intotostatement";
+
 
 
 // DsseAttestationOccurrence
@@ -8,9 +9,9 @@ import { InTotoStatement } from "./intotostatement";
  * Deprecated. Prefer to use a regular Occurrence, and populate the Envelope at the top level of the Occurrence.
 **/
 export class DsseAttestationOccurrence extends SpeakeasyBase {
-  @Metadata({ data: "json, name=envelope" })
+  @SpeakeasyMetadata({ data: "json, name=envelope" })
   envelope?: Envelope;
 
-  @Metadata({ data: "json, name=statement" })
+  @SpeakeasyMetadata({ data: "json, name=statement" })
   statement?: InTotoStatement;
 }

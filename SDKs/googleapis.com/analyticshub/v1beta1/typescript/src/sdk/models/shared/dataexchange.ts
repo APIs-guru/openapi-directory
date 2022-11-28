@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DataExchange
@@ -6,24 +7,46 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A data exchange is a container that lets you share data. Along with the descriptive information about the data exchange, it contains listings that reference shared datasets.
 **/
 export class DataExchange extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=documentation" })
+  @SpeakeasyMetadata({ data: "json, name=documentation" })
   documentation?: string;
 
-  @Metadata({ data: "json, name=icon" })
+  @SpeakeasyMetadata({ data: "json, name=icon" })
   icon?: string;
 
-  @Metadata({ data: "json, name=listingCount" })
+  @SpeakeasyMetadata({ data: "json, name=listingCount" })
   listingCount?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=primaryContact" })
+  @SpeakeasyMetadata({ data: "json, name=primaryContact" })
+  primaryContact?: string;
+}
+
+
+// DataExchangeInput
+/** 
+ * A data exchange is a container that lets you share data. Along with the descriptive information about the data exchange, it contains listings that reference shared datasets.
+**/
+export class DataExchangeInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
+  displayName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=documentation" })
+  documentation?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=icon" })
+  icon?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=primaryContact" })
   primaryContact?: string;
 }

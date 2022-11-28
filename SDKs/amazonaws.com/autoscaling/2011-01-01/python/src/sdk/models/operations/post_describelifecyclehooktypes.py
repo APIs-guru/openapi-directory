@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDescribeLifecycleHookTypesActionEnum(str, Enum):
     DESCRIBE_LIFECYCLE_HOOK_TYPES = "DescribeLifecycleHookTypes"
@@ -10,8 +14,8 @@ class PostDescribeLifecycleHookTypesVersionEnum(str, Enum):
 
 @dataclass
 class PostDescribeLifecycleHookTypesQueryParams:
-    action: PostDescribeLifecycleHookTypesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDescribeLifecycleHookTypesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDescribeLifecycleHookTypesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDescribeLifecycleHookTypesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,13 +31,13 @@ class PostDescribeLifecycleHookTypesHeaders:
 
 @dataclass
 class PostDescribeLifecycleHookTypesRequest:
-    query_params: PostDescribeLifecycleHookTypesQueryParams = field(default=None)
-    headers: PostDescribeLifecycleHookTypesHeaders = field(default=None)
+    headers: PostDescribeLifecycleHookTypesHeaders = field()
+    query_params: PostDescribeLifecycleHookTypesQueryParams = field()
     
 
 @dataclass
 class PostDescribeLifecycleHookTypesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

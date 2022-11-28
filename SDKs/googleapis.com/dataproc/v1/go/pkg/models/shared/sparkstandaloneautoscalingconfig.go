@@ -1,5 +1,7 @@
 package shared
 
+// SparkStandaloneAutoscalingConfig
+// Basic autoscaling configurations for Spark Standalone.
 type SparkStandaloneAutoscalingConfig struct {
 	GracefulDecommissionTimeout *string  `json:"gracefulDecommissionTimeout,omitempty"`
 	ScaleDownFactor             *float64 `json:"scaleDownFactor,omitempty"`

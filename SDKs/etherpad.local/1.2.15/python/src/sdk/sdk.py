@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
-from typing import List,Optional
-from sdk.models import operations, shared
+from typing import Optional
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -12,30 +15,58 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
-    
-    def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
+            self._server_url = server_url
 
+        
+    
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        
+    
+
+    def config_security(self, security: shared.Security):
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        
+    
+    
     
     def append_chat_message_using_get(self, request: operations.AppendChatMessageUsingGetRequest) -> operations.AppendChatMessageUsingGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""appends a chat message
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/appendChatMessage"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -62,15 +93,17 @@ class SDK:
 
     
     def append_chat_message_using_post(self, request: operations.AppendChatMessageUsingPostRequest) -> operations.AppendChatMessageUsingPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""appends a chat message
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/appendChatMessage"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -97,15 +130,14 @@ class SDK:
 
     
     def append_text_using_get(self, request: operations.AppendTextUsingGetRequest) -> operations.AppendTextUsingGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/appendText"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -132,15 +164,14 @@ class SDK:
 
     
     def append_text_using_post(self, request: operations.AppendTextUsingPostRequest) -> operations.AppendTextUsingPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/appendText"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -167,13 +198,16 @@ class SDK:
 
     
     def check_token_using_get(self) -> operations.CheckTokenUsingGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""returns ok when the current api token is valid
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/checkToken"
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -200,13 +234,16 @@ class SDK:
 
     
     def check_token_using_post(self) -> operations.CheckTokenUsingPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""returns ok when the current api token is valid
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/checkToken"
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -233,15 +270,14 @@ class SDK:
 
     
     def copy_pad_using_get(self, request: operations.CopyPadUsingGetRequest) -> operations.CopyPadUsingGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/copyPad"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -268,15 +304,14 @@ class SDK:
 
     
     def copy_pad_using_post(self, request: operations.CopyPadUsingPostRequest) -> operations.CopyPadUsingPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/copyPad"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -303,15 +338,14 @@ class SDK:
 
     
     def copy_pad_without_history_using_get(self, request: operations.CopyPadWithoutHistoryUsingGetRequest) -> operations.CopyPadWithoutHistoryUsingGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/copyPadWithoutHistory"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -338,15 +372,14 @@ class SDK:
 
     
     def copy_pad_without_history_using_post(self, request: operations.CopyPadWithoutHistoryUsingPostRequest) -> operations.CopyPadWithoutHistoryUsingPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/copyPadWithoutHistory"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -373,15 +406,17 @@ class SDK:
 
     
     def create_author_if_not_exists_for_using_get(self, request: operations.CreateAuthorIfNotExistsForUsingGetRequest) -> operations.CreateAuthorIfNotExistsForUsingGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""this functions helps you to map your application author ids to Etherpad author ids
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/createAuthorIfNotExistsFor"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -408,15 +443,17 @@ class SDK:
 
     
     def create_author_if_not_exists_for_using_post(self, request: operations.CreateAuthorIfNotExistsForUsingPostRequest) -> operations.CreateAuthorIfNotExistsForUsingPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""this functions helps you to map your application author ids to Etherpad author ids
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/createAuthorIfNotExistsFor"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -443,15 +480,17 @@ class SDK:
 
     
     def create_author_using_get(self, request: operations.CreateAuthorUsingGetRequest) -> operations.CreateAuthorUsingGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""creates a new author
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/createAuthor"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -478,15 +517,17 @@ class SDK:
 
     
     def create_author_using_post(self, request: operations.CreateAuthorUsingPostRequest) -> operations.CreateAuthorUsingPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""creates a new author
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/createAuthor"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -513,15 +554,14 @@ class SDK:
 
     
     def create_diff_html_using_get(self, request: operations.CreateDiffHTMLUsingGetRequest) -> operations.CreateDiffHTMLUsingGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/createDiffHTML"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -548,15 +588,14 @@ class SDK:
 
     
     def create_diff_html_using_post(self, request: operations.CreateDiffHTMLUsingPostRequest) -> operations.CreateDiffHTMLUsingPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/createDiffHTML"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -583,15 +622,17 @@ class SDK:
 
     
     def create_group_if_not_exists_for_using_get(self, request: operations.CreateGroupIfNotExistsForUsingGetRequest) -> operations.CreateGroupIfNotExistsForUsingGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""this functions helps you to map your application group ids to Etherpad group ids
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/createGroupIfNotExistsFor"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -618,15 +659,17 @@ class SDK:
 
     
     def create_group_if_not_exists_for_using_post(self, request: operations.CreateGroupIfNotExistsForUsingPostRequest) -> operations.CreateGroupIfNotExistsForUsingPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""this functions helps you to map your application group ids to Etherpad group ids
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/createGroupIfNotExistsFor"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -653,15 +696,17 @@ class SDK:
 
     
     def create_group_pad_using_get(self, request: operations.CreateGroupPadUsingGetRequest) -> operations.CreateGroupPadUsingGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""creates a new pad in this group
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/createGroupPad"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -688,15 +733,17 @@ class SDK:
 
     
     def create_group_pad_using_post(self, request: operations.CreateGroupPadUsingPostRequest) -> operations.CreateGroupPadUsingPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""creates a new pad in this group
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/createGroupPad"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -723,13 +770,16 @@ class SDK:
 
     
     def create_group_using_get(self) -> operations.CreateGroupUsingGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""creates a new group
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/createGroup"
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -756,13 +806,16 @@ class SDK:
 
     
     def create_group_using_post(self) -> operations.CreateGroupUsingPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""creates a new group
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/createGroup"
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -789,15 +842,17 @@ class SDK:
 
     
     def create_pad_using_get(self, request: operations.CreatePadUsingGetRequest) -> operations.CreatePadUsingGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""creates a new (non-group) pad. Note that if you need to create a group Pad, you should call createGroupPad
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/createPad"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -824,15 +879,17 @@ class SDK:
 
     
     def create_pad_using_post(self, request: operations.CreatePadUsingPostRequest) -> operations.CreatePadUsingPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""creates a new (non-group) pad. Note that if you need to create a group Pad, you should call createGroupPad
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/createPad"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -859,15 +916,17 @@ class SDK:
 
     
     def create_session_using_get(self, request: operations.CreateSessionUsingGetRequest) -> operations.CreateSessionUsingGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""creates a new session. validUntil is an unix timestamp in seconds
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/createSession"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -894,15 +953,17 @@ class SDK:
 
     
     def create_session_using_post(self, request: operations.CreateSessionUsingPostRequest) -> operations.CreateSessionUsingPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""creates a new session. validUntil is an unix timestamp in seconds
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/createSession"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -929,15 +990,17 @@ class SDK:
 
     
     def delete_group_using_get(self, request: operations.DeleteGroupUsingGetRequest) -> operations.DeleteGroupUsingGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""deletes a group
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/deleteGroup"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -964,15 +1027,17 @@ class SDK:
 
     
     def delete_group_using_post(self, request: operations.DeleteGroupUsingPostRequest) -> operations.DeleteGroupUsingPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""deletes a group
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/deleteGroup"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -999,15 +1064,17 @@ class SDK:
 
     
     def delete_pad_using_get(self, request: operations.DeletePadUsingGetRequest) -> operations.DeletePadUsingGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""deletes a pad
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/deletePad"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1034,15 +1101,17 @@ class SDK:
 
     
     def delete_pad_using_post(self, request: operations.DeletePadUsingPostRequest) -> operations.DeletePadUsingPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""deletes a pad
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/deletePad"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1069,15 +1138,17 @@ class SDK:
 
     
     def delete_session_using_get(self, request: operations.DeleteSessionUsingGetRequest) -> operations.DeleteSessionUsingGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""deletes a session
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/deleteSession"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1104,15 +1175,17 @@ class SDK:
 
     
     def delete_session_using_post(self, request: operations.DeleteSessionUsingPostRequest) -> operations.DeleteSessionUsingPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""deletes a session
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/deleteSession"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1139,15 +1212,14 @@ class SDK:
 
     
     def get_attribute_pool_using_get(self, request: operations.GetAttributePoolUsingGetRequest) -> operations.GetAttributePoolUsingGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getAttributePool"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1174,15 +1246,14 @@ class SDK:
 
     
     def get_attribute_pool_using_post(self, request: operations.GetAttributePoolUsingPostRequest) -> operations.GetAttributePoolUsingPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getAttributePool"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1209,15 +1280,17 @@ class SDK:
 
     
     def get_author_name_using_get(self, request: operations.GetAuthorNameUsingGetRequest) -> operations.GetAuthorNameUsingGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns the Author Name of the author
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getAuthorName"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1244,15 +1317,17 @@ class SDK:
 
     
     def get_author_name_using_post(self, request: operations.GetAuthorNameUsingPostRequest) -> operations.GetAuthorNameUsingPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns the Author Name of the author
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getAuthorName"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1279,15 +1354,17 @@ class SDK:
 
     
     def get_chat_head_using_get(self, request: operations.GetChatHeadUsingGetRequest) -> operations.GetChatHeadUsingGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""returns the chatHead (chat-message) of the pad
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getChatHead"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1314,15 +1391,17 @@ class SDK:
 
     
     def get_chat_head_using_post(self, request: operations.GetChatHeadUsingPostRequest) -> operations.GetChatHeadUsingPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""returns the chatHead (chat-message) of the pad
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getChatHead"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1349,15 +1428,17 @@ class SDK:
 
     
     def get_chat_history_using_get(self, request: operations.GetChatHistoryUsingGetRequest) -> operations.GetChatHistoryUsingGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""returns the chat history
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getChatHistory"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1384,15 +1465,17 @@ class SDK:
 
     
     def get_chat_history_using_post(self, request: operations.GetChatHistoryUsingPostRequest) -> operations.GetChatHistoryUsingPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""returns the chat history
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getChatHistory"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1419,15 +1502,17 @@ class SDK:
 
     
     def get_html_using_get(self, request: operations.GetHTMLUsingGetRequest) -> operations.GetHTMLUsingGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""returns the text of a pad formatted as HTML
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getHTML"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1454,15 +1539,17 @@ class SDK:
 
     
     def get_html_using_post(self, request: operations.GetHTMLUsingPostRequest) -> operations.GetHTMLUsingPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""returns the text of a pad formatted as HTML
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getHTML"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1489,15 +1576,17 @@ class SDK:
 
     
     def get_last_edited_using_get(self, request: operations.GetLastEditedUsingGetRequest) -> operations.GetLastEditedUsingGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""returns the timestamp of the last revision of the pad
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getLastEdited"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1524,15 +1613,17 @@ class SDK:
 
     
     def get_last_edited_using_post(self, request: operations.GetLastEditedUsingPostRequest) -> operations.GetLastEditedUsingPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""returns the timestamp of the last revision of the pad
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getLastEdited"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1559,15 +1650,14 @@ class SDK:
 
     
     def get_pad_id_using_get(self, request: operations.GetPadIDUsingGetRequest) -> operations.GetPadIDUsingGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getPadID"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1594,15 +1684,14 @@ class SDK:
 
     
     def get_pad_id_using_post(self, request: operations.GetPadIDUsingPostRequest) -> operations.GetPadIDUsingPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getPadID"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1629,15 +1718,17 @@ class SDK:
 
     
     def get_public_status_using_get(self, request: operations.GetPublicStatusUsingGetRequest) -> operations.GetPublicStatusUsingGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""return true of false
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getPublicStatus"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1664,15 +1755,17 @@ class SDK:
 
     
     def get_public_status_using_post(self, request: operations.GetPublicStatusUsingPostRequest) -> operations.GetPublicStatusUsingPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""return true of false
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getPublicStatus"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1699,15 +1792,17 @@ class SDK:
 
     
     def get_read_only_id_using_get(self, request: operations.GetReadOnlyIDUsingGetRequest) -> operations.GetReadOnlyIDUsingGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""returns the read only link of a pad
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getReadOnlyID"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1734,15 +1829,17 @@ class SDK:
 
     
     def get_read_only_id_using_post(self, request: operations.GetReadOnlyIDUsingPostRequest) -> operations.GetReadOnlyIDUsingPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""returns the read only link of a pad
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getReadOnlyID"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1769,15 +1866,14 @@ class SDK:
 
     
     def get_revision_changeset_using_get(self, request: operations.GetRevisionChangesetUsingGetRequest) -> operations.GetRevisionChangesetUsingGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getRevisionChangeset"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1804,15 +1900,14 @@ class SDK:
 
     
     def get_revision_changeset_using_post(self, request: operations.GetRevisionChangesetUsingPostRequest) -> operations.GetRevisionChangesetUsingPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getRevisionChangeset"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1839,15 +1934,17 @@ class SDK:
 
     
     def get_revisions_count_using_get(self, request: operations.GetRevisionsCountUsingGetRequest) -> operations.GetRevisionsCountUsingGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""returns the number of revisions of this pad
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getRevisionsCount"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1874,15 +1971,17 @@ class SDK:
 
     
     def get_revisions_count_using_post(self, request: operations.GetRevisionsCountUsingPostRequest) -> operations.GetRevisionsCountUsingPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""returns the number of revisions of this pad
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getRevisionsCount"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1909,15 +2008,14 @@ class SDK:
 
     
     def get_saved_revisions_count_using_get(self, request: operations.GetSavedRevisionsCountUsingGetRequest) -> operations.GetSavedRevisionsCountUsingGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getSavedRevisionsCount"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1944,15 +2042,14 @@ class SDK:
 
     
     def get_saved_revisions_count_using_post(self, request: operations.GetSavedRevisionsCountUsingPostRequest) -> operations.GetSavedRevisionsCountUsingPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getSavedRevisionsCount"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1979,15 +2076,17 @@ class SDK:
 
     
     def get_session_info_using_get(self, request: operations.GetSessionInfoUsingGetRequest) -> operations.GetSessionInfoUsingGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""returns informations about a session
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getSessionInfo"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2014,15 +2113,17 @@ class SDK:
 
     
     def get_session_info_using_post(self, request: operations.GetSessionInfoUsingPostRequest) -> operations.GetSessionInfoUsingPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""returns informations about a session
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getSessionInfo"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2049,13 +2150,13 @@ class SDK:
 
     
     def get_stats_using_get(self) -> operations.GetStatsUsingGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getStats"
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2082,13 +2183,13 @@ class SDK:
 
     
     def get_stats_using_post(self) -> operations.GetStatsUsingPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getStats"
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2115,15 +2216,17 @@ class SDK:
 
     
     def get_text_using_get(self, request: operations.GetTextUsingGetRequest) -> operations.GetTextUsingGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""returns the text of a pad
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getText"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2150,15 +2253,17 @@ class SDK:
 
     
     def get_text_using_post(self, request: operations.GetTextUsingPostRequest) -> operations.GetTextUsingPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""returns the text of a pad
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getText"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2185,13 +2290,13 @@ class SDK:
 
     
     def list_all_groups_using_get(self) -> operations.ListAllGroupsUsingGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/listAllGroups"
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2218,13 +2323,13 @@ class SDK:
 
     
     def list_all_groups_using_post(self) -> operations.ListAllGroupsUsingPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/listAllGroups"
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2251,13 +2356,16 @@ class SDK:
 
     
     def list_all_pads_using_get(self) -> operations.ListAllPadsUsingGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""list all the pads
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/listAllPads"
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2284,13 +2392,16 @@ class SDK:
 
     
     def list_all_pads_using_post(self) -> operations.ListAllPadsUsingPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""list all the pads
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/listAllPads"
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2317,15 +2428,17 @@ class SDK:
 
     
     def list_authors_of_pad_using_get(self, request: operations.ListAuthorsOfPadUsingGetRequest) -> operations.ListAuthorsOfPadUsingGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""returns an array of authors who contributed to this pad
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/listAuthorsOfPad"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2352,15 +2465,17 @@ class SDK:
 
     
     def list_authors_of_pad_using_post(self, request: operations.ListAuthorsOfPadUsingPostRequest) -> operations.ListAuthorsOfPadUsingPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""returns an array of authors who contributed to this pad
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/listAuthorsOfPad"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2387,15 +2502,17 @@ class SDK:
 
     
     def list_pads_of_author_using_get(self, request: operations.ListPadsOfAuthorUsingGetRequest) -> operations.ListPadsOfAuthorUsingGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""returns an array of all pads this author contributed to
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/listPadsOfAuthor"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2422,15 +2539,17 @@ class SDK:
 
     
     def list_pads_of_author_using_post(self, request: operations.ListPadsOfAuthorUsingPostRequest) -> operations.ListPadsOfAuthorUsingPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""returns an array of all pads this author contributed to
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/listPadsOfAuthor"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2457,15 +2576,17 @@ class SDK:
 
     
     def list_pads_using_get(self, request: operations.ListPadsUsingGetRequest) -> operations.ListPadsUsingGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""returns all pads of this group
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/listPads"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2492,15 +2613,17 @@ class SDK:
 
     
     def list_pads_using_post(self, request: operations.ListPadsUsingPostRequest) -> operations.ListPadsUsingPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""returns all pads of this group
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/listPads"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2527,15 +2650,14 @@ class SDK:
 
     
     def list_saved_revisions_using_get(self, request: operations.ListSavedRevisionsUsingGetRequest) -> operations.ListSavedRevisionsUsingGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/listSavedRevisions"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2562,15 +2684,14 @@ class SDK:
 
     
     def list_saved_revisions_using_post(self, request: operations.ListSavedRevisionsUsingPostRequest) -> operations.ListSavedRevisionsUsingPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/listSavedRevisions"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2597,15 +2718,17 @@ class SDK:
 
     
     def list_sessions_of_author_using_get(self, request: operations.ListSessionsOfAuthorUsingGetRequest) -> operations.ListSessionsOfAuthorUsingGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""returns all sessions of an author
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/listSessionsOfAuthor"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2632,15 +2755,17 @@ class SDK:
 
     
     def list_sessions_of_author_using_post(self, request: operations.ListSessionsOfAuthorUsingPostRequest) -> operations.ListSessionsOfAuthorUsingPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""returns all sessions of an author
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/listSessionsOfAuthor"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2667,15 +2792,14 @@ class SDK:
 
     
     def list_sessions_of_group_using_get(self, request: operations.ListSessionsOfGroupUsingGetRequest) -> operations.ListSessionsOfGroupUsingGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/listSessionsOfGroup"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2702,15 +2826,14 @@ class SDK:
 
     
     def list_sessions_of_group_using_post(self, request: operations.ListSessionsOfGroupUsingPostRequest) -> operations.ListSessionsOfGroupUsingPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/listSessionsOfGroup"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2737,15 +2860,14 @@ class SDK:
 
     
     def move_pad_using_get(self, request: operations.MovePadUsingGetRequest) -> operations.MovePadUsingGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/movePad"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2772,15 +2894,14 @@ class SDK:
 
     
     def move_pad_using_post(self, request: operations.MovePadUsingPostRequest) -> operations.MovePadUsingPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/movePad"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2807,15 +2928,17 @@ class SDK:
 
     
     def pad_users_count_using_get(self, request: operations.PadUsersCountUsingGetRequest) -> operations.PadUsersCountUsingGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""returns the number of user that are currently editing this pad
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/padUsersCount"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2842,15 +2965,17 @@ class SDK:
 
     
     def pad_users_count_using_post(self, request: operations.PadUsersCountUsingPostRequest) -> operations.PadUsersCountUsingPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""returns the number of user that are currently editing this pad
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/padUsersCount"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2877,15 +3002,17 @@ class SDK:
 
     
     def pad_users_using_get(self, request: operations.PadUsersUsingGetRequest) -> operations.PadUsersUsingGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""returns the list of users that are currently editing this pad
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/padUsers"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2912,15 +3039,17 @@ class SDK:
 
     
     def pad_users_using_post(self, request: operations.PadUsersUsingPostRequest) -> operations.PadUsersUsingPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""returns the list of users that are currently editing this pad
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/padUsers"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2947,15 +3076,14 @@ class SDK:
 
     
     def restore_revision_using_get(self, request: operations.RestoreRevisionUsingGetRequest) -> operations.RestoreRevisionUsingGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/restoreRevision"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2982,15 +3110,14 @@ class SDK:
 
     
     def restore_revision_using_post(self, request: operations.RestoreRevisionUsingPostRequest) -> operations.RestoreRevisionUsingPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/restoreRevision"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3017,15 +3144,14 @@ class SDK:
 
     
     def save_revision_using_get(self, request: operations.SaveRevisionUsingGetRequest) -> operations.SaveRevisionUsingGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/saveRevision"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3052,15 +3178,14 @@ class SDK:
 
     
     def save_revision_using_post(self, request: operations.SaveRevisionUsingPostRequest) -> operations.SaveRevisionUsingPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/saveRevision"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3087,15 +3212,17 @@ class SDK:
 
     
     def send_clients_message_using_get(self, request: operations.SendClientsMessageUsingGetRequest) -> operations.SendClientsMessageUsingGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""sends a custom message of type msg to the pad
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/sendClientsMessage"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3122,15 +3249,17 @@ class SDK:
 
     
     def send_clients_message_using_post(self, request: operations.SendClientsMessageUsingPostRequest) -> operations.SendClientsMessageUsingPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""sends a custom message of type msg to the pad
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/sendClientsMessage"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3157,15 +3286,17 @@ class SDK:
 
     
     def set_html_using_get(self, request: operations.SetHTMLUsingGetRequest) -> operations.SetHTMLUsingGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""sets the text of a pad with HTML
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/setHTML"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3192,15 +3323,17 @@ class SDK:
 
     
     def set_html_using_post(self, request: operations.SetHTMLUsingPostRequest) -> operations.SetHTMLUsingPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""sets the text of a pad with HTML
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/setHTML"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3227,15 +3360,17 @@ class SDK:
 
     
     def set_public_status_using_get(self, request: operations.SetPublicStatusUsingGetRequest) -> operations.SetPublicStatusUsingGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""sets a boolean for the public status of a pad
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/setPublicStatus"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3262,15 +3397,17 @@ class SDK:
 
     
     def set_public_status_using_post(self, request: operations.SetPublicStatusUsingPostRequest) -> operations.SetPublicStatusUsingPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""sets a boolean for the public status of a pad
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/setPublicStatus"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3297,15 +3434,17 @@ class SDK:
 
     
     def set_text_using_get(self, request: operations.SetTextUsingGetRequest) -> operations.SetTextUsingGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""sets the text of a pad
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/setText"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3332,15 +3471,17 @@ class SDK:
 
     
     def set_text_using_post(self, request: operations.SetTextUsingPostRequest) -> operations.SetTextUsingPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""sets the text of a pad
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/setText"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 

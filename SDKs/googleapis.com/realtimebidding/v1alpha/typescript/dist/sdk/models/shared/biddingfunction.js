@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var BiddingFunctionStateEnum;
 (function (BiddingFunctionStateEnum) {
     BiddingFunctionStateEnum["StateUnspecified"] = "STATE_UNSPECIFIED";
@@ -45,21 +45,45 @@ var BiddingFunction = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=biddingFunction" }),
+        SpeakeasyMetadata({ data: "json, name=biddingFunction" }),
         __metadata("design:type", String)
     ], BiddingFunction.prototype, "biddingFunction", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], BiddingFunction.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], BiddingFunction.prototype, "state", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], BiddingFunction.prototype, "type", void 0);
     return BiddingFunction;
 }(SpeakeasyBase));
 export { BiddingFunction };
+// BiddingFunctionInput
+/**
+ * The bidding function to be executed as part of the TURTLEDOVE simulation experiment bidding flow.
+**/
+var BiddingFunctionInput = /** @class */ (function (_super) {
+    __extends(BiddingFunctionInput, _super);
+    function BiddingFunctionInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=biddingFunction" }),
+        __metadata("design:type", String)
+    ], BiddingFunctionInput.prototype, "biddingFunction", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=name" }),
+        __metadata("design:type", String)
+    ], BiddingFunctionInput.prototype, "name", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=type" }),
+        __metadata("design:type", String)
+    ], BiddingFunctionInput.prototype, "type", void 0);
+    return BiddingFunctionInput;
+}(SpeakeasyBase));
+export { BiddingFunctionInput };

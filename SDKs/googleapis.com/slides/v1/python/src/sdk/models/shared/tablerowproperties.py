@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import dimension
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class TableRowProperties:
-    min_row_height: Optional[dimension.Dimension] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'minRowHeight' }})
+    r"""TableRowProperties
+    Properties of each row in a table.
+    """
+    
+    min_row_height: Optional[Dimension] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('minRowHeight') }})
     

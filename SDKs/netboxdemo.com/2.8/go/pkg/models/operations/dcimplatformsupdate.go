@@ -10,7 +10,7 @@ type DcimPlatformsUpdatePathParams struct {
 
 type DcimPlatformsUpdateRequest struct {
 	PathParams DcimPlatformsUpdatePathParams
-	Request    shared.WritablePlatform `request:"mediaType=application/json"`
+	Request    shared.WritablePlatformInput `request:"mediaType=application/json"`
 }
 
 type DcimPlatformsUpdateResponse struct {

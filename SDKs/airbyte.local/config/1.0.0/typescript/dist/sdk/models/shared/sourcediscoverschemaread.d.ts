@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AirbyteCatalog } from "./airbytecatalog";
 import { SynchronousJobRead } from "./synchronousjobread";
 /**

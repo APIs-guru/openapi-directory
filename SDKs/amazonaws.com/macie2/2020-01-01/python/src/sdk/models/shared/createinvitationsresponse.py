@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import unprocessedaccount
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateInvitationsResponse:
-    unprocessed_accounts: Optional[List[unprocessedaccount.UnprocessedAccount]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'unprocessedAccounts' }})
+    unprocessed_accounts: Optional[List[UnprocessedAccount]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('unprocessedAccounts') }})
     

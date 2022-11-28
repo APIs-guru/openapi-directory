@@ -12,14 +12,14 @@ class GetAPIV1EnvironmentsQueryParams:
 
 @dataclass
 class GetAPIV1EnvironmentsRequest:
-    query_params: GetAPIV1EnvironmentsQueryParams = field(default=None)
+    query_params: GetAPIV1EnvironmentsQueryParams = field()
     
 
 @dataclass
 class GetAPIV1EnvironmentsResponse:
-    body: bytes = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     cloud_environment_results: Optional[List[shared.CloudEnvironmentResult]] = field(default=None)
-    content_type: str = field(default=None)
     problem_details: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

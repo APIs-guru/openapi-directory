@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AudioChannelInput } from "./audiochannelinput";
+
 
 
 // AudioChannel
@@ -8,6 +8,6 @@ import { AudioChannelInput } from "./audiochannelinput";
  * The audio channel.
 **/
 export class AudioChannel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=inputs", elemType: shared.AudioChannelInput })
+  @SpeakeasyMetadata({ data: "json, name=inputs", elemType: AudioChannelInput })
   inputs?: AudioChannelInput[];
 }

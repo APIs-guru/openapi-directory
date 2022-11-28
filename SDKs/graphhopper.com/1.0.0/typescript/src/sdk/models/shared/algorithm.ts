@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum AlgorithmObjectiveEnum {
-    TransportTime = "transport_time"
-,    CompletionTime = "completion_time"
+    TransportTime = "transport_time",
+    CompletionTime = "completion_time"
 }
 
 export enum AlgorithmProblemTypeEnum {
-    Min = "min"
-,    MinMax = "min-max"
+    Min = "min",
+    MinMax = "min-max"
 }
 
 
@@ -16,9 +17,9 @@ export enum AlgorithmProblemTypeEnum {
  * Use `objectives` instead.
 **/
 export class Algorithm extends SpeakeasyBase {
-  @Metadata({ data: "json, name=objective" })
+  @SpeakeasyMetadata({ data: "json, name=objective" })
   objective?: AlgorithmObjectiveEnum;
 
-  @Metadata({ data: "json, name=problem_type" })
+  @SpeakeasyMetadata({ data: "json, name=problem_type" })
   problemType?: AlgorithmProblemTypeEnum;
 }

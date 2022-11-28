@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateSignalingChannelHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -35,60 +36,60 @@ export enum CreateSignalingChannelRequestBodyChannelTypeEnum {
  * A structure that contains the configuration for the <code>SINGLE_MASTER</code> channel type.
 **/
 export class CreateSignalingChannelRequestBodySingleMasterConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MessageTtlSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=MessageTtlSeconds" })
   messageTtlSeconds?: number;
 }
 
 
 export class CreateSignalingChannelRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ChannelName" })
+  @SpeakeasyMetadata({ data: "json, name=ChannelName" })
   channelName: string;
 
-  @Metadata({ data: "json, name=ChannelType" })
+  @SpeakeasyMetadata({ data: "json, name=ChannelType" })
   channelType?: CreateSignalingChannelRequestBodyChannelTypeEnum;
 
-  @Metadata({ data: "json, name=SingleMasterConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=SingleMasterConfiguration" })
   singleMasterConfiguration?: CreateSignalingChannelRequestBodySingleMasterConfiguration;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: shared.Tag })
   tags?: shared.Tag[];
 }
 
 
 export class CreateSignalingChannelRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateSignalingChannelHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateSignalingChannelRequestBody;
 }
 
 
 export class CreateSignalingChannelResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   accessDeniedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   accountChannelLimitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   clientLimitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createSignalingChannelOutput?: shared.CreateSignalingChannelOutput;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidArgumentException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceInUseException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tagsPerResourceExceededLimitException?: any;
 }

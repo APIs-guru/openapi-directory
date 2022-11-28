@@ -24,6 +24,8 @@ const (
 	RuntimeStateEnumInitializing     RuntimeStateEnum = "INITIALIZING"
 )
 
+// Runtime
+// The definition of a Runtime for a managed notebook instance.
 type Runtime struct {
 	AccessConfig   *RuntimeAccessConfig    `json:"accessConfig,omitempty"`
 	CreateTime     *string                 `json:"createTime,omitempty"`
@@ -34,4 +36,12 @@ type Runtime struct {
 	State          *RuntimeStateEnum       `json:"state,omitempty"`
 	UpdateTime     *string                 `json:"updateTime,omitempty"`
 	VirtualMachine *VirtualMachine         `json:"virtualMachine,omitempty"`
+}
+
+// RuntimeInput
+// The definition of a Runtime for a managed notebook instance.
+type RuntimeInput struct {
+	AccessConfig   *RuntimeAccessConfigInput   `json:"accessConfig,omitempty"`
+	SoftwareConfig *RuntimeSoftwareConfigInput `json:"softwareConfig,omitempty"`
+	VirtualMachine *VirtualMachineInput        `json:"virtualMachine,omitempty"`
 }

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudsearchIndexingDatasourcesItemsUnreservePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class CloudsearchIndexingDatasourcesItemsUnreserveQueryParams:
 
 @dataclass
 class CloudsearchIndexingDatasourcesItemsUnreserveSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudsearchIndexingDatasourcesItemsUnreserveSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class CloudsearchIndexingDatasourcesItemsUnreserveSecurity:
 
 @dataclass
 class CloudsearchIndexingDatasourcesItemsUnreserveRequest:
-    path_params: CloudsearchIndexingDatasourcesItemsUnreservePathParams = field(default=None)
-    query_params: CloudsearchIndexingDatasourcesItemsUnreserveQueryParams = field(default=None)
+    path_params: CloudsearchIndexingDatasourcesItemsUnreservePathParams = field()
+    query_params: CloudsearchIndexingDatasourcesItemsUnreserveQueryParams = field()
+    security: CloudsearchIndexingDatasourcesItemsUnreserveSecurity = field()
     request: Optional[shared.UnreserveItemsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: CloudsearchIndexingDatasourcesItemsUnreserveSecurity = field(default=None)
     
 
 @dataclass
 class CloudsearchIndexingDatasourcesItemsUnreserveResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

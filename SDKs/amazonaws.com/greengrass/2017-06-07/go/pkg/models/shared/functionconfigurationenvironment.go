@@ -1,5 +1,7 @@
 package shared
 
+// FunctionConfigurationEnvironment
+// The environment configuration of the function.
 type FunctionConfigurationEnvironment struct {
 	AccessSysfs            *bool                    `json:"AccessSysfs,omitempty"`
 	Execution              *FunctionExecutionConfig `json:"Execution,omitempty"`

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // FontFile
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Class FontFile.
 **/
 export class FontFile extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DateCreated" })
+  @SpeakeasyMetadata({ data: "json, name=DateCreated" })
   dateCreated?: Date;
 
-  @Metadata({ data: "json, name=DateModified" })
+  @SpeakeasyMetadata({ data: "json, name=DateModified" })
   dateModified?: Date;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Size" })
+  @SpeakeasyMetadata({ data: "json, name=Size" })
   size?: number;
 }

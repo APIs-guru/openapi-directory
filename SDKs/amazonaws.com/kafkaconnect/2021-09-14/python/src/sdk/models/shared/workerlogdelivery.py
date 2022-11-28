@@ -1,15 +1,18 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import cloudwatchlogslogdelivery
-from . import firehoselogdelivery
-from . import s3logdelivery
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class WorkerLogDelivery:
-    cloud_watch_logs: Optional[cloudwatchlogslogdelivery.CloudWatchLogsLogDelivery] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cloudWatchLogs' }})
-    firehose: Optional[firehoselogdelivery.FirehoseLogDelivery] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'firehose' }})
-    s3: Optional[s3logdelivery.S3LogDelivery] = field(default=None, metadata={'dataclasses_json': { 'field_name': 's3' }})
+    r"""WorkerLogDelivery
+    Workers can send worker logs to different destination types. This configuration specifies the details of these destinations.
+    """
+    
+    cloud_watch_logs: Optional[CloudWatchLogsLogDelivery] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cloudWatchLogs') }})
+    firehose: Optional[FirehoseLogDelivery] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('firehose') }})
+    s3: Optional[S3LogDelivery] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('s3') }})
     

@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class LayoutEnum(str, Enum):
     BOTTOM_BANNER = "BOTTOM_BANNER"

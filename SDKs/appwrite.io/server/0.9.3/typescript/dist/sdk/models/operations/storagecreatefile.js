@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var StorageCreateFileRequestBody = /** @class */ (function (_super) {
     __extends(StorageCreateFileRequestBody, _super);
@@ -30,15 +30,15 @@ var StorageCreateFileRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "multipart_form, name=file" }),
+        SpeakeasyMetadata({ data: "multipart_form, name=file" }),
         __metadata("design:type", String)
     ], StorageCreateFileRequestBody.prototype, "file", void 0);
     __decorate([
-        Metadata({ data: "multipart_form, name=read" }),
+        SpeakeasyMetadata({ data: "multipart_form, name=read" }),
         __metadata("design:type", Array)
     ], StorageCreateFileRequestBody.prototype, "read", void 0);
     __decorate([
-        Metadata({ data: "multipart_form, name=write" }),
+        SpeakeasyMetadata({ data: "multipart_form, name=write" }),
         __metadata("design:type", Array)
     ], StorageCreateFileRequestBody.prototype, "write", void 0);
     return StorageCreateFileRequestBody;
@@ -50,15 +50,15 @@ var StorageCreateFileSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeJwt)
     ], StorageCreateFileSecurity.prototype, "jwt", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeKey)
     ], StorageCreateFileSecurity.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeProject)
     ], StorageCreateFileSecurity.prototype, "project", void 0);
     return StorageCreateFileSecurity;
@@ -70,11 +70,11 @@ var StorageCreateFileRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=multipart/form-data" }),
+        SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" }),
         __metadata("design:type", StorageCreateFileRequestBody)
     ], StorageCreateFileRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", StorageCreateFileSecurity)
     ], StorageCreateFileRequest.prototype, "security", void 0);
     return StorageCreateFileRequest;
@@ -86,15 +86,15 @@ var StorageCreateFileResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], StorageCreateFileResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], StorageCreateFileResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.File)
     ], StorageCreateFileResponse.prototype, "file", void 0);
     return StorageCreateFileResponse;

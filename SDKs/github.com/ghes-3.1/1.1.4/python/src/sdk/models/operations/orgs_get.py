@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class OrgsGetPathParams:
-    org: str = field(default=None, metadata={'path_param': { 'field_name': 'org', 'style': 'simple', 'explode': False }})
+    org: str = field(metadata={'path_param': { 'field_name': 'org', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class OrgsGetRequest:
-    path_params: OrgsGetPathParams = field(default=None)
+    path_params: OrgsGetPathParams = field()
     
 
 @dataclass
 class OrgsGetResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     basic_error: Optional[shared.BasicError] = field(default=None)
     organization_full: Optional[shared.OrganizationFull] = field(default=None)
     

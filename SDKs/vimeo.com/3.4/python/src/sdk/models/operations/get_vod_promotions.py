@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetVodPromotionsPathParams:
-    ondemand_id: float = field(default=None, metadata={'path_param': { 'field_name': 'ondemand_id', 'style': 'simple', 'explode': False }})
+    ondemand_id: float = field(metadata={'path_param': { 'field_name': 'ondemand_id', 'style': 'simple', 'explode': False }})
     
 class GetVodPromotionsFilterEnum(str, Enum):
     BATCH = "batch"
@@ -16,27 +17,27 @@ class GetVodPromotionsFilterEnum(str, Enum):
 
 @dataclass
 class GetVodPromotionsQueryParams:
-    filter: GetVodPromotionsFilterEnum = field(default=None, metadata={'query_param': { 'field_name': 'filter', 'style': 'form', 'explode': True }})
+    filter: GetVodPromotionsFilterEnum = field(metadata={'query_param': { 'field_name': 'filter', 'style': 'form', 'explode': True }})
     page: Optional[float] = field(default=None, metadata={'query_param': { 'field_name': 'page', 'style': 'form', 'explode': True }})
     per_page: Optional[float] = field(default=None, metadata={'query_param': { 'field_name': 'per_page', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class GetVodPromotionsSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetVodPromotionsRequest:
-    path_params: GetVodPromotionsPathParams = field(default=None)
-    query_params: GetVodPromotionsQueryParams = field(default=None)
-    security: GetVodPromotionsSecurity = field(default=None)
+    path_params: GetVodPromotionsPathParams = field()
+    query_params: GetVodPromotionsQueryParams = field()
+    security: GetVodPromotionsSecurity = field()
     
 
 @dataclass
 class GetVodPromotionsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     legacy_error: Optional[shared.LegacyError] = field(default=None)
     on_demand_promotion: Optional[shared.OnDemandPromotion] = field(default=None)
     

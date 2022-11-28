@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var HideTaskPathParams = /** @class */ (function (_super) {
     __extends(HideTaskPathParams, _super);
@@ -30,7 +30,7 @@ var HideTaskPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=task_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=task_id" }),
         __metadata("design:type", String)
     ], HideTaskPathParams.prototype, "taskId", void 0);
     return HideTaskPathParams;
@@ -42,7 +42,7 @@ var HideTaskSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
         __metadata("design:type", shared.SchemeBearerAuth)
     ], HideTaskSecurity.prototype, "bearerAuth", void 0);
     return HideTaskSecurity;
@@ -54,11 +54,11 @@ var HideTaskRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", HideTaskPathParams)
     ], HideTaskRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", HideTaskSecurity)
     ], HideTaskRequest.prototype, "security", void 0);
     return HideTaskRequest;
@@ -70,15 +70,15 @@ var HideTaskResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], HideTaskResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], HideTaskResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], HideTaskResponse.prototype, "statusCode", void 0);
     return HideTaskResponse;

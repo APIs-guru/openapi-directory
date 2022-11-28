@@ -1,5 +1,7 @@
 package shared
 
+// ResultImage
+// Image belonging to a custom search result.
 type ResultImage struct {
 	ByteSize        *int32  `json:"byteSize,omitempty"`
 	ContextLink     *string `json:"contextLink,omitempty"`
@@ -10,12 +12,16 @@ type ResultImage struct {
 	Width           *int32  `json:"width,omitempty"`
 }
 
+// ResultLabels
+// Refinement label associated with a custom search result.
 type ResultLabels struct {
 	DisplayName *string `json:"displayName,omitempty"`
 	LabelWithOp *string `json:"label_with_op,omitempty"`
 	Name        *string `json:"name,omitempty"`
 }
 
+// Result
+// A custom search result.
 type Result struct {
 	CacheID          *string                `json:"cacheId,omitempty"`
 	DisplayLink      *string                `json:"displayLink,omitempty"`

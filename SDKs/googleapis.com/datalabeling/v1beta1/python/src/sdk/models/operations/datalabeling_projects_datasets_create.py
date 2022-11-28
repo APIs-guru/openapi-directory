@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DatalabelingProjectsDatasetsCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class DatalabelingProjectsDatasetsCreateQueryParams:
 
 @dataclass
 class DatalabelingProjectsDatasetsCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DatalabelingProjectsDatasetsCreateRequest:
-    path_params: DatalabelingProjectsDatasetsCreatePathParams = field(default=None)
-    query_params: DatalabelingProjectsDatasetsCreateQueryParams = field(default=None)
+    path_params: DatalabelingProjectsDatasetsCreatePathParams = field()
+    query_params: DatalabelingProjectsDatasetsCreateQueryParams = field()
+    security: DatalabelingProjectsDatasetsCreateSecurity = field()
     request: Optional[shared.GoogleCloudDatalabelingV1beta1CreateDatasetRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DatalabelingProjectsDatasetsCreateSecurity = field(default=None)
     
 
 @dataclass
 class DatalabelingProjectsDatasetsCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_datalabeling_v1beta1_dataset: Optional[shared.GoogleCloudDatalabelingV1beta1Dataset] = field(default=None)
-    status_code: int = field(default=None)
     

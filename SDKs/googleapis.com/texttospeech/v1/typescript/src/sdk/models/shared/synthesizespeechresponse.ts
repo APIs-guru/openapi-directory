@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SynthesizeSpeechResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The message returned to the client by the `SynthesizeSpeech` method.
 **/
 export class SynthesizeSpeechResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=audioContent" })
+  @SpeakeasyMetadata({ data: "json, name=audioContent" })
   audioContent?: string;
 }

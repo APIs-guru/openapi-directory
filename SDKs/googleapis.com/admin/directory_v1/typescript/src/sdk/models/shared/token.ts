@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Token
@@ -6,27 +7,27 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * JSON template for token resource in Directory API.
 **/
 export class Token extends SpeakeasyBase {
-  @Metadata({ data: "json, name=anonymous" })
+  @SpeakeasyMetadata({ data: "json, name=anonymous" })
   anonymous?: boolean;
 
-  @Metadata({ data: "json, name=clientId" })
+  @SpeakeasyMetadata({ data: "json, name=clientId" })
   clientId?: string;
 
-  @Metadata({ data: "json, name=displayText" })
+  @SpeakeasyMetadata({ data: "json, name=displayText" })
   displayText?: string;
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=nativeApp" })
+  @SpeakeasyMetadata({ data: "json, name=nativeApp" })
   nativeApp?: boolean;
 
-  @Metadata({ data: "json, name=scopes" })
+  @SpeakeasyMetadata({ data: "json, name=scopes" })
   scopes?: string[];
 
-  @Metadata({ data: "json, name=userKey" })
+  @SpeakeasyMetadata({ data: "json, name=userKey" })
   userKey?: string;
 }

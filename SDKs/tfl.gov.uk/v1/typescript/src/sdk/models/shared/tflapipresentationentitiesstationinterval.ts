@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TflApiPresentationEntitiesInterval } from "./tflapipresentationentitiesinterval";
 
 
+
 export class TflApiPresentationEntitiesStationInterval extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=intervals", elemType: shared.TflApiPresentationEntitiesInterval })
+  @SpeakeasyMetadata({ data: "json, name=intervals", elemType: TflApiPresentationEntitiesInterval })
   intervals?: TflApiPresentationEntitiesInterval[];
 }

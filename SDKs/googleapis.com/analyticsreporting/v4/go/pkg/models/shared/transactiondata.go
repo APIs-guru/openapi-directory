@@ -1,5 +1,7 @@
 package shared
 
+// TransactionData
+// Represents details collected when the visitor performs a transaction on the page.
 type TransactionData struct {
 	TransactionID       *string  `json:"transactionId,omitempty"`
 	TransactionRevenue  *float64 `json:"transactionRevenue,omitempty"`

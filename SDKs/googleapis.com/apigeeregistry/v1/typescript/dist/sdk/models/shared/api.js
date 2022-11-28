@@ -22,7 +22,51 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+// ApiInput
+/**
+ * A top-level description of an API. Produced by producers and are commitments to provide services.
+**/
+var ApiInput = /** @class */ (function (_super) {
+    __extends(ApiInput, _super);
+    function ApiInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=annotations" }),
+        __metadata("design:type", Map)
+    ], ApiInput.prototype, "annotations", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=availability" }),
+        __metadata("design:type", String)
+    ], ApiInput.prototype, "availability", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=description" }),
+        __metadata("design:type", String)
+    ], ApiInput.prototype, "description", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
+        __metadata("design:type", String)
+    ], ApiInput.prototype, "displayName", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=labels" }),
+        __metadata("design:type", Map)
+    ], ApiInput.prototype, "labels", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=name" }),
+        __metadata("design:type", String)
+    ], ApiInput.prototype, "name", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=recommendedDeployment" }),
+        __metadata("design:type", String)
+    ], ApiInput.prototype, "recommendedDeployment", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=recommendedVersion" }),
+        __metadata("design:type", String)
+    ], ApiInput.prototype, "recommendedVersion", void 0);
+    return ApiInput;
+}(SpeakeasyBase));
+export { ApiInput };
 // Api
 /**
  * A top-level description of an API. Produced by producers and are commitments to provide services.
@@ -33,43 +77,43 @@ var Api = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=annotations" }),
+        SpeakeasyMetadata({ data: "json, name=annotations" }),
         __metadata("design:type", Map)
     ], Api.prototype, "annotations", void 0);
     __decorate([
-        Metadata({ data: "json, name=availability" }),
+        SpeakeasyMetadata({ data: "json, name=availability" }),
         __metadata("design:type", String)
     ], Api.prototype, "availability", void 0);
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", String)
     ], Api.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], Api.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=displayName" }),
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
         __metadata("design:type", String)
     ], Api.prototype, "displayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=labels" }),
+        SpeakeasyMetadata({ data: "json, name=labels" }),
         __metadata("design:type", Map)
     ], Api.prototype, "labels", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Api.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=recommendedDeployment" }),
+        SpeakeasyMetadata({ data: "json, name=recommendedDeployment" }),
         __metadata("design:type", String)
     ], Api.prototype, "recommendedDeployment", void 0);
     __decorate([
-        Metadata({ data: "json, name=recommendedVersion" }),
+        SpeakeasyMetadata({ data: "json, name=recommendedVersion" }),
         __metadata("design:type", String)
     ], Api.prototype, "recommendedVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateTime" }),
+        SpeakeasyMetadata({ data: "json, name=updateTime" }),
         __metadata("design:type", String)
     ], Api.prototype, "updateTime", void 0);
     return Api;

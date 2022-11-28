@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StorageConnectorTypeEnum } from "./storageconnectortypeenum";
 // StorageConnector
 /**
@@ -34,15 +34,15 @@ var StorageConnector = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ConnectorType" }),
+        SpeakeasyMetadata({ data: "json, name=ConnectorType" }),
         __metadata("design:type", String)
     ], StorageConnector.prototype, "connectorType", void 0);
     __decorate([
-        Metadata({ data: "json, name=Domains" }),
+        SpeakeasyMetadata({ data: "json, name=Domains" }),
         __metadata("design:type", Array)
     ], StorageConnector.prototype, "domains", void 0);
     __decorate([
-        Metadata({ data: "json, name=ResourceIdentifier" }),
+        SpeakeasyMetadata({ data: "json, name=ResourceIdentifier" }),
         __metadata("design:type", String)
     ], StorageConnector.prototype, "resourceIdentifier", void 0);
     return StorageConnector;

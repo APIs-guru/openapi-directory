@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// JobInfoJobInfoErrors
+// The job infos' errors
 type JobInfoJobInfoErrors struct {
 	Error []string `json:"Error,omitempty"`
 }

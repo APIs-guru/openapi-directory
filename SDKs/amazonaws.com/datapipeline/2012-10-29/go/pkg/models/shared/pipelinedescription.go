@@ -1,5 +1,7 @@
 package shared
 
+// PipelineDescription
+// Contains pipeline metadata.
 type PipelineDescription struct {
 	Description *string `json:"description,omitempty"`
 	Fields      []Field `json:"fields"`

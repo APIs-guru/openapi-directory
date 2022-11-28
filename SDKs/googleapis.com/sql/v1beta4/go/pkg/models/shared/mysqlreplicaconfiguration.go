@@ -1,5 +1,7 @@
 package shared
 
+// MySQLReplicaConfiguration
+// Read-replica configuration specific to MySQL databases.
 type MySQLReplicaConfiguration struct {
 	CaCertificate           *string `json:"caCertificate,omitempty"`
 	ClientCertificate       *string `json:"clientCertificate,omitempty"`

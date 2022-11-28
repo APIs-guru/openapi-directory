@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Tag } from "./tag";
+
 
 
 // AddTagsToOnPremisesInstancesInput
@@ -8,9 +8,9 @@ import { Tag } from "./tag";
  * Represents the input of, and adds tags to, an on-premises instance operation.
 **/
 export class AddTagsToOnPremisesInstancesInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=instanceNames" })
+  @SpeakeasyMetadata({ data: "json, name=instanceNames" })
   instanceNames: string[];
 
-  @Metadata({ data: "json, name=tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=tags", elemType: Tag })
   tags: Tag[];
 }

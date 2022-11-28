@@ -1,458 +1,458 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class BoxScorePlayersPpaAverage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=passing" })
+  @SpeakeasyMetadata({ data: "json, name=passing" })
   passing?: number;
 
-  @Metadata({ data: "json, name=quarter1" })
+  @SpeakeasyMetadata({ data: "json, name=quarter1" })
   quarter1?: number;
 
-  @Metadata({ data: "json, name=quarter2" })
+  @SpeakeasyMetadata({ data: "json, name=quarter2" })
   quarter2?: number;
 
-  @Metadata({ data: "json, name=quarter3" })
+  @SpeakeasyMetadata({ data: "json, name=quarter3" })
   quarter3?: number;
 
-  @Metadata({ data: "json, name=quarter4" })
+  @SpeakeasyMetadata({ data: "json, name=quarter4" })
   quarter4?: number;
 
-  @Metadata({ data: "json, name=rushing" })
+  @SpeakeasyMetadata({ data: "json, name=rushing" })
   rushing?: number;
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total?: number;
 }
 
 
 export class BoxScorePlayersPpaCumulative extends SpeakeasyBase {
-  @Metadata({ data: "json, name=passing" })
+  @SpeakeasyMetadata({ data: "json, name=passing" })
   passing?: number;
 
-  @Metadata({ data: "json, name=quarter1" })
+  @SpeakeasyMetadata({ data: "json, name=quarter1" })
   quarter1?: number;
 
-  @Metadata({ data: "json, name=quarter2" })
+  @SpeakeasyMetadata({ data: "json, name=quarter2" })
   quarter2?: number;
 
-  @Metadata({ data: "json, name=quarter3" })
+  @SpeakeasyMetadata({ data: "json, name=quarter3" })
   quarter3?: number;
 
-  @Metadata({ data: "json, name=quarter4" })
+  @SpeakeasyMetadata({ data: "json, name=quarter4" })
   quarter4?: number;
 
-  @Metadata({ data: "json, name=rushing" })
+  @SpeakeasyMetadata({ data: "json, name=rushing" })
   rushing?: number;
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total?: number;
 }
 
 
 export class BoxScorePlayersPpa extends SpeakeasyBase {
-  @Metadata({ data: "json, name=average" })
+  @SpeakeasyMetadata({ data: "json, name=average" })
   average?: BoxScorePlayersPpaAverage;
 
-  @Metadata({ data: "json, name=cumulative" })
+  @SpeakeasyMetadata({ data: "json, name=cumulative" })
   cumulative?: BoxScorePlayersPpaCumulative;
 
-  @Metadata({ data: "json, name=player" })
+  @SpeakeasyMetadata({ data: "json, name=player" })
   player?: string;
 
-  @Metadata({ data: "json, name=position" })
+  @SpeakeasyMetadata({ data: "json, name=position" })
   position?: string;
 
-  @Metadata({ data: "json, name=team" })
+  @SpeakeasyMetadata({ data: "json, name=team" })
   team?: string;
 }
 
 
 export class BoxScorePlayersUsage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=passing" })
+  @SpeakeasyMetadata({ data: "json, name=passing" })
   passing?: number;
 
-  @Metadata({ data: "json, name=player" })
+  @SpeakeasyMetadata({ data: "json, name=player" })
   player?: string;
 
-  @Metadata({ data: "json, name=position" })
+  @SpeakeasyMetadata({ data: "json, name=position" })
   position?: string;
 
-  @Metadata({ data: "json, name=quarter1" })
+  @SpeakeasyMetadata({ data: "json, name=quarter1" })
   quarter1?: number;
 
-  @Metadata({ data: "json, name=quarter2" })
+  @SpeakeasyMetadata({ data: "json, name=quarter2" })
   quarter2?: number;
 
-  @Metadata({ data: "json, name=quarter3" })
+  @SpeakeasyMetadata({ data: "json, name=quarter3" })
   quarter3?: number;
 
-  @Metadata({ data: "json, name=quarter4" })
+  @SpeakeasyMetadata({ data: "json, name=quarter4" })
   quarter4?: number;
 
-  @Metadata({ data: "json, name=rushing" })
+  @SpeakeasyMetadata({ data: "json, name=rushing" })
   rushing?: number;
 
-  @Metadata({ data: "json, name=team" })
+  @SpeakeasyMetadata({ data: "json, name=team" })
   team?: string;
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total?: number;
 }
 
 
 export class BoxScorePlayers extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ppa", elemType: shared.BoxScorePlayersPpa })
+  @SpeakeasyMetadata({ data: "json, name=ppa", elemType: BoxScorePlayersPpa })
   ppa?: BoxScorePlayersPpa[];
 
-  @Metadata({ data: "json, name=usage", elemType: shared.BoxScorePlayersUsage })
+  @SpeakeasyMetadata({ data: "json, name=usage", elemType: BoxScorePlayersUsage })
   usage?: BoxScorePlayersUsage[];
 }
 
 
 export class BoxScoreTeamsCumulativePpaOverall extends SpeakeasyBase {
-  @Metadata({ data: "json, name=quarter1" })
+  @SpeakeasyMetadata({ data: "json, name=quarter1" })
   quarter1?: number;
 
-  @Metadata({ data: "json, name=quarter2" })
+  @SpeakeasyMetadata({ data: "json, name=quarter2" })
   quarter2?: number;
 
-  @Metadata({ data: "json, name=quarter3" })
+  @SpeakeasyMetadata({ data: "json, name=quarter3" })
   quarter3?: number;
 
-  @Metadata({ data: "json, name=quarter4" })
+  @SpeakeasyMetadata({ data: "json, name=quarter4" })
   quarter4?: number;
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total?: number;
 }
 
 
 export class BoxScoreTeamsCumulativePpaPassing extends SpeakeasyBase {
-  @Metadata({ data: "json, name=quarter1" })
+  @SpeakeasyMetadata({ data: "json, name=quarter1" })
   quarter1?: number;
 
-  @Metadata({ data: "json, name=quarter2" })
+  @SpeakeasyMetadata({ data: "json, name=quarter2" })
   quarter2?: number;
 
-  @Metadata({ data: "json, name=quarter3" })
+  @SpeakeasyMetadata({ data: "json, name=quarter3" })
   quarter3?: number;
 
-  @Metadata({ data: "json, name=quarter4" })
+  @SpeakeasyMetadata({ data: "json, name=quarter4" })
   quarter4?: number;
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total?: number;
 }
 
 
 export class BoxScoreTeamsCumulativePpaRushing extends SpeakeasyBase {
-  @Metadata({ data: "json, name=quarter1" })
+  @SpeakeasyMetadata({ data: "json, name=quarter1" })
   quarter1?: number;
 
-  @Metadata({ data: "json, name=quarter2" })
+  @SpeakeasyMetadata({ data: "json, name=quarter2" })
   quarter2?: number;
 
-  @Metadata({ data: "json, name=quarter3" })
+  @SpeakeasyMetadata({ data: "json, name=quarter3" })
   quarter3?: number;
 
-  @Metadata({ data: "json, name=quarter4" })
+  @SpeakeasyMetadata({ data: "json, name=quarter4" })
   quarter4?: number;
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total?: number;
 }
 
 
 export class BoxScoreTeamsCumulativePpa extends SpeakeasyBase {
-  @Metadata({ data: "json, name=overall" })
+  @SpeakeasyMetadata({ data: "json, name=overall" })
   overall?: BoxScoreTeamsCumulativePpaOverall;
 
-  @Metadata({ data: "json, name=passing" })
+  @SpeakeasyMetadata({ data: "json, name=passing" })
   passing?: BoxScoreTeamsCumulativePpaPassing;
 
-  @Metadata({ data: "json, name=plays" })
+  @SpeakeasyMetadata({ data: "json, name=plays" })
   plays?: number;
 
-  @Metadata({ data: "json, name=rushing" })
+  @SpeakeasyMetadata({ data: "json, name=rushing" })
   rushing?: BoxScoreTeamsCumulativePpaRushing;
 
-  @Metadata({ data: "json, name=team" })
+  @SpeakeasyMetadata({ data: "json, name=team" })
   team?: string;
 }
 
 
 export class BoxScoreTeamsExplosivenessOverall extends SpeakeasyBase {
-  @Metadata({ data: "json, name=quarter1" })
+  @SpeakeasyMetadata({ data: "json, name=quarter1" })
   quarter1?: number;
 
-  @Metadata({ data: "json, name=quarter2" })
+  @SpeakeasyMetadata({ data: "json, name=quarter2" })
   quarter2?: number;
 
-  @Metadata({ data: "json, name=quarter3" })
+  @SpeakeasyMetadata({ data: "json, name=quarter3" })
   quarter3?: number;
 
-  @Metadata({ data: "json, name=quarter4" })
+  @SpeakeasyMetadata({ data: "json, name=quarter4" })
   quarter4?: number;
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total?: number;
 }
 
 
 export class BoxScoreTeamsExplosiveness extends SpeakeasyBase {
-  @Metadata({ data: "json, name=overall" })
+  @SpeakeasyMetadata({ data: "json, name=overall" })
   overall?: BoxScoreTeamsExplosivenessOverall;
 
-  @Metadata({ data: "json, name=team" })
+  @SpeakeasyMetadata({ data: "json, name=team" })
   team?: string;
 }
 
 
 export class BoxScoreTeamsFieldPosition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=averageStart" })
+  @SpeakeasyMetadata({ data: "json, name=averageStart" })
   averageStart?: number;
 
-  @Metadata({ data: "json, name=averageStartingPredictedPoints" })
+  @SpeakeasyMetadata({ data: "json, name=averageStartingPredictedPoints" })
   averageStartingPredictedPoints?: number;
 
-  @Metadata({ data: "json, name=team" })
+  @SpeakeasyMetadata({ data: "json, name=team" })
   team?: string;
 }
 
 
 export class BoxScoreTeamsHavoc extends SpeakeasyBase {
-  @Metadata({ data: "json, name=db" })
+  @SpeakeasyMetadata({ data: "json, name=db" })
   db?: number;
 
-  @Metadata({ data: "json, name=frontSeven" })
+  @SpeakeasyMetadata({ data: "json, name=frontSeven" })
   frontSeven?: number;
 
-  @Metadata({ data: "json, name=team" })
+  @SpeakeasyMetadata({ data: "json, name=team" })
   team?: string;
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total?: number;
 }
 
 
 export class BoxScoreTeamsPpaOverall extends SpeakeasyBase {
-  @Metadata({ data: "json, name=quarter1" })
+  @SpeakeasyMetadata({ data: "json, name=quarter1" })
   quarter1?: number;
 
-  @Metadata({ data: "json, name=quarter2" })
+  @SpeakeasyMetadata({ data: "json, name=quarter2" })
   quarter2?: number;
 
-  @Metadata({ data: "json, name=quarter3" })
+  @SpeakeasyMetadata({ data: "json, name=quarter3" })
   quarter3?: number;
 
-  @Metadata({ data: "json, name=quarter4" })
+  @SpeakeasyMetadata({ data: "json, name=quarter4" })
   quarter4?: number;
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total?: number;
 }
 
 
 export class BoxScoreTeamsPpaPassing extends SpeakeasyBase {
-  @Metadata({ data: "json, name=quarter1" })
+  @SpeakeasyMetadata({ data: "json, name=quarter1" })
   quarter1?: number;
 
-  @Metadata({ data: "json, name=quarter2" })
+  @SpeakeasyMetadata({ data: "json, name=quarter2" })
   quarter2?: number;
 
-  @Metadata({ data: "json, name=quarter3" })
+  @SpeakeasyMetadata({ data: "json, name=quarter3" })
   quarter3?: number;
 
-  @Metadata({ data: "json, name=quarter4" })
+  @SpeakeasyMetadata({ data: "json, name=quarter4" })
   quarter4?: number;
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total?: number;
 }
 
 
 export class BoxScoreTeamsPpaRushing extends SpeakeasyBase {
-  @Metadata({ data: "json, name=quarter1" })
+  @SpeakeasyMetadata({ data: "json, name=quarter1" })
   quarter1?: number;
 
-  @Metadata({ data: "json, name=quarter2" })
+  @SpeakeasyMetadata({ data: "json, name=quarter2" })
   quarter2?: number;
 
-  @Metadata({ data: "json, name=quarter3" })
+  @SpeakeasyMetadata({ data: "json, name=quarter3" })
   quarter3?: number;
 
-  @Metadata({ data: "json, name=quarter4" })
+  @SpeakeasyMetadata({ data: "json, name=quarter4" })
   quarter4?: number;
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total?: number;
 }
 
 
 export class BoxScoreTeamsPpa extends SpeakeasyBase {
-  @Metadata({ data: "json, name=overall" })
+  @SpeakeasyMetadata({ data: "json, name=overall" })
   overall?: BoxScoreTeamsPpaOverall;
 
-  @Metadata({ data: "json, name=passing" })
+  @SpeakeasyMetadata({ data: "json, name=passing" })
   passing?: BoxScoreTeamsPpaPassing;
 
-  @Metadata({ data: "json, name=plays" })
+  @SpeakeasyMetadata({ data: "json, name=plays" })
   plays?: number;
 
-  @Metadata({ data: "json, name=rushing" })
+  @SpeakeasyMetadata({ data: "json, name=rushing" })
   rushing?: BoxScoreTeamsPpaRushing;
 
-  @Metadata({ data: "json, name=team" })
+  @SpeakeasyMetadata({ data: "json, name=team" })
   team?: string;
 }
 
 
 export class BoxScoreTeamsRushing extends SpeakeasyBase {
-  @Metadata({ data: "json, name=lineYards" })
+  @SpeakeasyMetadata({ data: "json, name=lineYards" })
   lineYards?: number;
 
-  @Metadata({ data: "json, name=lineYardsAverage" })
+  @SpeakeasyMetadata({ data: "json, name=lineYardsAverage" })
   lineYardsAverage?: number;
 
-  @Metadata({ data: "json, name=openFieldYards" })
+  @SpeakeasyMetadata({ data: "json, name=openFieldYards" })
   openFieldYards?: number;
 
-  @Metadata({ data: "json, name=openFieldYardsAverage" })
+  @SpeakeasyMetadata({ data: "json, name=openFieldYardsAverage" })
   openFieldYardsAverage?: number;
 
-  @Metadata({ data: "json, name=powerSuccess" })
+  @SpeakeasyMetadata({ data: "json, name=powerSuccess" })
   powerSuccess?: number;
 
-  @Metadata({ data: "json, name=secondLevelYards" })
+  @SpeakeasyMetadata({ data: "json, name=secondLevelYards" })
   secondLevelYards?: number;
 
-  @Metadata({ data: "json, name=secondLevelYardsAverage" })
+  @SpeakeasyMetadata({ data: "json, name=secondLevelYardsAverage" })
   secondLevelYardsAverage?: number;
 
-  @Metadata({ data: "json, name=stuffRate" })
+  @SpeakeasyMetadata({ data: "json, name=stuffRate" })
   stuffRate?: number;
 
-  @Metadata({ data: "json, name=team" })
+  @SpeakeasyMetadata({ data: "json, name=team" })
   team?: string;
 }
 
 
 export class BoxScoreTeamsScoringOpportunities extends SpeakeasyBase {
-  @Metadata({ data: "json, name=opportunities" })
+  @SpeakeasyMetadata({ data: "json, name=opportunities" })
   opportunities?: number;
 
-  @Metadata({ data: "json, name=points" })
+  @SpeakeasyMetadata({ data: "json, name=points" })
   points?: number;
 
-  @Metadata({ data: "json, name=pointsPerOpportunity" })
+  @SpeakeasyMetadata({ data: "json, name=pointsPerOpportunity" })
   pointsPerOpportunity?: number;
 
-  @Metadata({ data: "json, name=team" })
+  @SpeakeasyMetadata({ data: "json, name=team" })
   team?: string;
 }
 
 
 export class BoxScoreTeamsSuccessRatesOverall extends SpeakeasyBase {
-  @Metadata({ data: "json, name=quarter1" })
+  @SpeakeasyMetadata({ data: "json, name=quarter1" })
   quarter1?: number;
 
-  @Metadata({ data: "json, name=quarter2" })
+  @SpeakeasyMetadata({ data: "json, name=quarter2" })
   quarter2?: number;
 
-  @Metadata({ data: "json, name=quarter3" })
+  @SpeakeasyMetadata({ data: "json, name=quarter3" })
   quarter3?: number;
 
-  @Metadata({ data: "json, name=quarter4" })
+  @SpeakeasyMetadata({ data: "json, name=quarter4" })
   quarter4?: number;
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total?: number;
 }
 
 
 export class BoxScoreTeamsSuccessRatesPassingDowns extends SpeakeasyBase {
-  @Metadata({ data: "json, name=quarter1" })
+  @SpeakeasyMetadata({ data: "json, name=quarter1" })
   quarter1?: number;
 
-  @Metadata({ data: "json, name=quarter2" })
+  @SpeakeasyMetadata({ data: "json, name=quarter2" })
   quarter2?: number;
 
-  @Metadata({ data: "json, name=quarter3" })
+  @SpeakeasyMetadata({ data: "json, name=quarter3" })
   quarter3?: number;
 
-  @Metadata({ data: "json, name=quarter4" })
+  @SpeakeasyMetadata({ data: "json, name=quarter4" })
   quarter4?: number;
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total?: number;
 }
 
 
 export class BoxScoreTeamsSuccessRatesStandardDowns extends SpeakeasyBase {
-  @Metadata({ data: "json, name=quarter1" })
+  @SpeakeasyMetadata({ data: "json, name=quarter1" })
   quarter1?: number;
 
-  @Metadata({ data: "json, name=quarter2" })
+  @SpeakeasyMetadata({ data: "json, name=quarter2" })
   quarter2?: number;
 
-  @Metadata({ data: "json, name=quarter3" })
+  @SpeakeasyMetadata({ data: "json, name=quarter3" })
   quarter3?: number;
 
-  @Metadata({ data: "json, name=quarter4" })
+  @SpeakeasyMetadata({ data: "json, name=quarter4" })
   quarter4?: number;
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total?: number;
 }
 
 
 export class BoxScoreTeamsSuccessRates extends SpeakeasyBase {
-  @Metadata({ data: "json, name=overall" })
+  @SpeakeasyMetadata({ data: "json, name=overall" })
   overall?: BoxScoreTeamsSuccessRatesOverall;
 
-  @Metadata({ data: "json, name=passingDowns" })
+  @SpeakeasyMetadata({ data: "json, name=passingDowns" })
   passingDowns?: BoxScoreTeamsSuccessRatesPassingDowns;
 
-  @Metadata({ data: "json, name=standardDowns" })
+  @SpeakeasyMetadata({ data: "json, name=standardDowns" })
   standardDowns?: BoxScoreTeamsSuccessRatesStandardDowns;
 
-  @Metadata({ data: "json, name=team" })
+  @SpeakeasyMetadata({ data: "json, name=team" })
   team?: string;
 }
 
 
 export class BoxScoreTeams extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cumulativePpa", elemType: shared.BoxScoreTeamsCumulativePpa })
+  @SpeakeasyMetadata({ data: "json, name=cumulativePpa", elemType: BoxScoreTeamsCumulativePpa })
   cumulativePpa?: BoxScoreTeamsCumulativePpa[];
 
-  @Metadata({ data: "json, name=explosiveness", elemType: shared.BoxScoreTeamsExplosiveness })
+  @SpeakeasyMetadata({ data: "json, name=explosiveness", elemType: BoxScoreTeamsExplosiveness })
   explosiveness?: BoxScoreTeamsExplosiveness[];
 
-  @Metadata({ data: "json, name=fieldPosition", elemType: shared.BoxScoreTeamsFieldPosition })
+  @SpeakeasyMetadata({ data: "json, name=fieldPosition", elemType: BoxScoreTeamsFieldPosition })
   fieldPosition?: BoxScoreTeamsFieldPosition[];
 
-  @Metadata({ data: "json, name=havoc", elemType: shared.BoxScoreTeamsHavoc })
+  @SpeakeasyMetadata({ data: "json, name=havoc", elemType: BoxScoreTeamsHavoc })
   havoc?: BoxScoreTeamsHavoc[];
 
-  @Metadata({ data: "json, name=ppa", elemType: shared.BoxScoreTeamsPpa })
+  @SpeakeasyMetadata({ data: "json, name=ppa", elemType: BoxScoreTeamsPpa })
   ppa?: BoxScoreTeamsPpa[];
 
-  @Metadata({ data: "json, name=rushing", elemType: shared.BoxScoreTeamsRushing })
+  @SpeakeasyMetadata({ data: "json, name=rushing", elemType: BoxScoreTeamsRushing })
   rushing?: BoxScoreTeamsRushing[];
 
-  @Metadata({ data: "json, name=scoringOpportunities", elemType: shared.BoxScoreTeamsScoringOpportunities })
+  @SpeakeasyMetadata({ data: "json, name=scoringOpportunities", elemType: BoxScoreTeamsScoringOpportunities })
   scoringOpportunities?: BoxScoreTeamsScoringOpportunities[];
 
-  @Metadata({ data: "json, name=successRates", elemType: shared.BoxScoreTeamsSuccessRates })
+  @SpeakeasyMetadata({ data: "json, name=successRates", elemType: BoxScoreTeamsSuccessRates })
   successRates?: BoxScoreTeamsSuccessRates[];
 }
 
 
 export class BoxScore extends SpeakeasyBase {
-  @Metadata({ data: "json, name=players" })
+  @SpeakeasyMetadata({ data: "json, name=players" })
   players?: BoxScorePlayers;
 
-  @Metadata({ data: "json, name=teams" })
+  @SpeakeasyMetadata({ data: "json, name=teams" })
   teams?: BoxScoreTeams;
 }

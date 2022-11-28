@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Status } from "./status";
 import { TimeSeries } from "./timeseries";
+
 
 
 // ListTimeSeriesResponse
@@ -9,15 +9,15 @@ import { TimeSeries } from "./timeseries";
  * The ListTimeSeries response.
 **/
 export class ListTimeSeriesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=executionErrors", elemType: shared.Status })
+  @SpeakeasyMetadata({ data: "json, name=executionErrors", elemType: Status })
   executionErrors?: Status[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=timeSeries", elemType: shared.TimeSeries })
+  @SpeakeasyMetadata({ data: "json, name=timeSeries", elemType: TimeSeries })
   timeSeries?: TimeSeries[];
 
-  @Metadata({ data: "json, name=unit" })
+  @SpeakeasyMetadata({ data: "json, name=unit" })
   unit?: string;
 }

@@ -31,7 +31,7 @@ type ManagedidentitiesProjectsLocationsGlobalDomainsUpdateLdapssettingsSecurity 
 type ManagedidentitiesProjectsLocationsGlobalDomainsUpdateLdapssettingsRequest struct {
 	PathParams  ManagedidentitiesProjectsLocationsGlobalDomainsUpdateLdapssettingsPathParams
 	QueryParams ManagedidentitiesProjectsLocationsGlobalDomainsUpdateLdapssettingsQueryParams
-	Request     *shared.LdapsSettings `request:"mediaType=application/json"`
+	Request     *shared.LdapsSettingsInput `request:"mediaType=application/json"`
 	Security    ManagedidentitiesProjectsLocationsGlobalDomainsUpdateLdapssettingsSecurity
 }
 

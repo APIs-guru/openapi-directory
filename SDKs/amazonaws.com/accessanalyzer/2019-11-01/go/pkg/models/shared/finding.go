@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Finding
+// Contains information about a finding.
 type Finding struct {
 	Action               []string          `json:"action,omitempty"`
 	AnalyzedAt           time.Time         `json:"analyzedAt"`

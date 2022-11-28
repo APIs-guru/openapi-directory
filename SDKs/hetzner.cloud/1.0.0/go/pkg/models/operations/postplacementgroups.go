@@ -12,10 +12,8 @@ type PostPlacementGroupsCreatePlacementGroupRequest struct {
 	Type   PostPlacementGroupsCreatePlacementGroupRequestTypeEnum `json:"type"`
 }
 
-type PostPlacementGroupsRequest struct {
-	Request *PostPlacementGroupsCreatePlacementGroupRequest `request:"mediaType=application/json"`
-}
-
+// PostPlacementGroupsCreatePlacementGroupResponseNullableActionError
+// Error message for the Action if error occurred, otherwise null
 type PostPlacementGroupsCreatePlacementGroupResponseNullableActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -63,6 +61,10 @@ type PostPlacementGroupsCreatePlacementGroupResponsePlacementGroup struct {
 type PostPlacementGroupsCreatePlacementGroupResponse struct {
 	Action         *PostPlacementGroupsCreatePlacementGroupResponseNullableAction `json:"action,omitempty"`
 	PlacementGroup PostPlacementGroupsCreatePlacementGroupResponsePlacementGroup  `json:"placement_group"`
+}
+
+type PostPlacementGroupsRequest struct {
+	Request *PostPlacementGroupsCreatePlacementGroupRequest `request:"mediaType=application/json"`
 }
 
 type PostPlacementGroupsResponse struct {

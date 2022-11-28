@@ -11,12 +11,12 @@ class GetSiteIPAddressesQueryParams:
 
 @dataclass
 class GetSiteIPAddressesRequest:
-    query_params: GetSiteIPAddressesQueryParams = field(default=None)
+    query_params: GetSiteIPAddressesQueryParams = field()
     
 
 @dataclass
 class GetSiteIPAddressesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     ip_address_entities: Optional[List[shared.IPAddressEntity]] = field(default=None)
-    status_code: int = field(default=None)
     

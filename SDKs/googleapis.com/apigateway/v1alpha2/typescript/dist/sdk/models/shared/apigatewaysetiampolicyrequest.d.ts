@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ApigatewayPolicy } from "./apigatewaypolicy";
 /**
  * Request message for `SetIamPolicy` method.

@@ -11,6 +11,21 @@ const (
 	ConsentStateEnumRejected         ConsentStateEnum = "REJECTED"
 )
 
+// ConsentInput
+// Represents a user's consent.
+type ConsentInput struct {
+	ConsentArtifact *string                                `json:"consentArtifact,omitempty"`
+	ExpireTime      *string                                `json:"expireTime,omitempty"`
+	Metadata        map[string]string                      `json:"metadata,omitempty"`
+	Name            *string                                `json:"name,omitempty"`
+	Policies        []GoogleCloudHealthcareV1ConsentPolicy `json:"policies,omitempty"`
+	State           *ConsentStateEnum                      `json:"state,omitempty"`
+	TTL             *string                                `json:"ttl,omitempty"`
+	UserID          *string                                `json:"userId,omitempty"`
+}
+
+// Consent
+// Represents a user's consent.
 type Consent struct {
 	ConsentArtifact    *string                                `json:"consentArtifact,omitempty"`
 	ExpireTime         *string                                `json:"expireTime,omitempty"`

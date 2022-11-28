@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import securityhubconfiguration
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetFindingsPublicationConfigurationResponse:
-    security_hub_configuration: Optional[securityhubconfiguration.SecurityHubConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'securityHubConfiguration' }})
+    security_hub_configuration: Optional[SecurityHubConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('securityHubConfiguration') }})
     

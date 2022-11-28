@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ServerTypeEnum } from "./servertypeenum";
 import { VmServer } from "./vmserver";
 // Server
@@ -35,23 +35,23 @@ var Server = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=replicationJobId" }),
+        SpeakeasyMetadata({ data: "json, name=replicationJobId" }),
         __metadata("design:type", String)
     ], Server.prototype, "replicationJobId", void 0);
     __decorate([
-        Metadata({ data: "json, name=replicationJobTerminated" }),
+        SpeakeasyMetadata({ data: "json, name=replicationJobTerminated" }),
         __metadata("design:type", Boolean)
     ], Server.prototype, "replicationJobTerminated", void 0);
     __decorate([
-        Metadata({ data: "json, name=serverId" }),
+        SpeakeasyMetadata({ data: "json, name=serverId" }),
         __metadata("design:type", String)
     ], Server.prototype, "serverId", void 0);
     __decorate([
-        Metadata({ data: "json, name=serverType" }),
+        SpeakeasyMetadata({ data: "json, name=serverType" }),
         __metadata("design:type", String)
     ], Server.prototype, "serverType", void 0);
     __decorate([
-        Metadata({ data: "json, name=vmServer" }),
+        SpeakeasyMetadata({ data: "json, name=vmServer" }),
         __metadata("design:type", VmServer)
     ], Server.prototype, "vmServer", void 0);
     return Server;

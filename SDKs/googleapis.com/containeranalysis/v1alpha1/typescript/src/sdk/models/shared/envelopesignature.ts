@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // EnvelopeSignature
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A DSSE signature
 **/
 export class EnvelopeSignature extends SpeakeasyBase {
-  @Metadata({ data: "json, name=keyid" })
+  @SpeakeasyMetadata({ data: "json, name=keyid" })
   keyid?: string;
 
-  @Metadata({ data: "json, name=sig" })
+  @SpeakeasyMetadata({ data: "json, name=sig" })
   sig?: string;
 }

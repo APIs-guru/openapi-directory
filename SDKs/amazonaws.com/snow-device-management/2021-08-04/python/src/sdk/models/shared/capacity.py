@@ -1,14 +1,19 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class Capacity:
-    available: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'available' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    total: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    unit: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'unit' }})
-    used: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'used' }})
+    r"""Capacity
+    The physical capacity of the Amazon Web Services Snow Family device. 
+    """
+    
+    available: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('available') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    total: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    unit: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('unit') }})
+    used: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('used') }})
     

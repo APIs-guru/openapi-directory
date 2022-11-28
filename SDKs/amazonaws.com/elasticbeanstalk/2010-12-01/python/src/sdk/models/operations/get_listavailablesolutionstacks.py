@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetListAvailableSolutionStacksActionEnum(str, Enum):
     LIST_AVAILABLE_SOLUTION_STACKS = "ListAvailableSolutionStacks"
@@ -10,8 +14,8 @@ class GetListAvailableSolutionStacksVersionEnum(str, Enum):
 
 @dataclass
 class GetListAvailableSolutionStacksQueryParams:
-    action: GetListAvailableSolutionStacksActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: GetListAvailableSolutionStacksVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetListAvailableSolutionStacksActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetListAvailableSolutionStacksVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,13 +31,13 @@ class GetListAvailableSolutionStacksHeaders:
 
 @dataclass
 class GetListAvailableSolutionStacksRequest:
-    query_params: GetListAvailableSolutionStacksQueryParams = field(default=None)
-    headers: GetListAvailableSolutionStacksHeaders = field(default=None)
+    headers: GetListAvailableSolutionStacksHeaders = field()
+    query_params: GetListAvailableSolutionStacksQueryParams = field()
     
 
 @dataclass
 class GetListAvailableSolutionStacksResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,5 +1,7 @@
 package shared
 
+// HiveJob
+// A Dataproc job for running Apache Hive (https://hive.apache.org/) queries on YARN.
 type HiveJob struct {
 	ContinueOnFailure *bool             `json:"continueOnFailure,omitempty"`
 	JarFileUris       []string          `json:"jarFileUris,omitempty"`

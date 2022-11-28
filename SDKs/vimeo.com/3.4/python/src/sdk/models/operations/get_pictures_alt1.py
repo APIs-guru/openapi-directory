@@ -11,12 +11,12 @@ class GetPicturesAlt1QueryParams:
 
 @dataclass
 class GetPicturesAlt1Request:
-    query_params: GetPicturesAlt1QueryParams = field(default=None)
+    query_params: GetPicturesAlt1QueryParams = field()
     
 
 @dataclass
 class GetPicturesAlt1Response:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     pictures: Optional[List[shared.Picture]] = field(default=None)
     

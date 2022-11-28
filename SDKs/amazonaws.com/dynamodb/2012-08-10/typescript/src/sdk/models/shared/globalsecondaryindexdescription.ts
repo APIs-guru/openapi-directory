@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IndexStatusEnum } from "./indexstatusenum";
 import { KeySchemaElement } from "./keyschemaelement";
 import { Projection } from "./projection";
 import { ProvisionedThroughputDescription } from "./provisionedthroughputdescription";
+
 
 
 // GlobalSecondaryIndexDescription
@@ -11,30 +11,30 @@ import { ProvisionedThroughputDescription } from "./provisionedthroughputdescrip
  * Represents the properties of a global secondary index.
 **/
 export class GlobalSecondaryIndexDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Backfilling" })
+  @SpeakeasyMetadata({ data: "json, name=Backfilling" })
   backfilling?: boolean;
 
-  @Metadata({ data: "json, name=IndexArn" })
+  @SpeakeasyMetadata({ data: "json, name=IndexArn" })
   indexArn?: string;
 
-  @Metadata({ data: "json, name=IndexName" })
+  @SpeakeasyMetadata({ data: "json, name=IndexName" })
   indexName?: string;
 
-  @Metadata({ data: "json, name=IndexSizeBytes" })
+  @SpeakeasyMetadata({ data: "json, name=IndexSizeBytes" })
   indexSizeBytes?: number;
 
-  @Metadata({ data: "json, name=IndexStatus" })
+  @SpeakeasyMetadata({ data: "json, name=IndexStatus" })
   indexStatus?: IndexStatusEnum;
 
-  @Metadata({ data: "json, name=ItemCount" })
+  @SpeakeasyMetadata({ data: "json, name=ItemCount" })
   itemCount?: number;
 
-  @Metadata({ data: "json, name=KeySchema", elemType: shared.KeySchemaElement })
+  @SpeakeasyMetadata({ data: "json, name=KeySchema", elemType: KeySchemaElement })
   keySchema?: KeySchemaElement[];
 
-  @Metadata({ data: "json, name=Projection" })
+  @SpeakeasyMetadata({ data: "json, name=Projection" })
   projection?: Projection;
 
-  @Metadata({ data: "json, name=ProvisionedThroughput" })
+  @SpeakeasyMetadata({ data: "json, name=ProvisionedThroughput" })
   provisionedThroughput?: ProvisionedThroughputDescription;
 }

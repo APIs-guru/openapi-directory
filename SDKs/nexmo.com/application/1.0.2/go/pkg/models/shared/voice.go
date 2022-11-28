@@ -20,6 +20,8 @@ type VoiceWebhooks struct {
 	HTTPMethod   VoiceWebhooksHTTPMethodEnum   `json:"http_method"`
 }
 
+// Voice
+// The Nexmo product that you access with this application.
 type Voice struct {
 	Webhooks []VoiceWebhooks `json:"webhooks,omitempty"`
 }

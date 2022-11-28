@@ -22,6 +22,8 @@ type PutSessionHeaders struct {
 	XAmzSignedHeaders   *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// PutSessionRequestBodySessionState
+// The state of the user's session with Amazon Lex V2.
 type PutSessionRequestBodySessionState struct {
 	ActiveContexts       []shared.ActiveContext `json:"activeContexts,omitempty"`
 	DialogAction         *shared.DialogAction   `json:"dialogAction,omitempty"`

@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProvisionedCapacityDescription } from "./provisionedcapacitydescription";
 
 
+
 export class ListProvisionedCapacityOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ProvisionedCapacityList", elemType: shared.ProvisionedCapacityDescription })
+  @SpeakeasyMetadata({ data: "json, name=ProvisionedCapacityList", elemType: ProvisionedCapacityDescription })
   provisionedCapacityList?: ProvisionedCapacityDescription[];
 }

@@ -15,13 +15,13 @@ type UpdateTagQueryParams struct {
 	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
+type UpdateTag200ApplicationJSON struct {
+	Data *shared.TagResponse `json:"data,omitempty"`
+}
+
 type UpdateTagRequest struct {
 	PathParams  UpdateTagPathParams
 	QueryParams UpdateTagQueryParams
-}
-
-type UpdateTag200ApplicationJSON struct {
-	Data *shared.TagResponse `json:"data,omitempty"`
 }
 
 type UpdateTagResponse struct {

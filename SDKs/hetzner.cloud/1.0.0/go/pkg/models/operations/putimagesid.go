@@ -16,11 +16,8 @@ type PutImagesIDUpdateImageRequest struct {
 	Type        *PutImagesIDUpdateImageRequestTypeEnum `json:"type,omitempty"`
 }
 
-type PutImagesIDRequest struct {
-	PathParams PutImagesIDPathParams
-	Request    *PutImagesIDUpdateImageRequest `request:"mediaType=application/json"`
-}
-
+// PutImagesID200ApplicationJSONImageCreatedFrom
+// Information about the Server the Image was created from
 type PutImagesID200ApplicationJSONImageCreatedFrom struct {
 	ID   int64  `json:"id"`
 	Name string `json:"name"`
@@ -36,6 +33,8 @@ const (
 	PutImagesID200ApplicationJSONImageOsFlavorEnumUnknown PutImagesID200ApplicationJSONImageOsFlavorEnum = "unknown"
 )
 
+// PutImagesID200ApplicationJSONImageProtection
+// Protection configuration for the Resource
 type PutImagesID200ApplicationJSONImageProtection struct {
 	Delete bool `json:"delete"`
 }
@@ -81,6 +80,11 @@ type PutImagesID200ApplicationJSONImage struct {
 
 type PutImagesID200ApplicationJSON struct {
 	Image *PutImagesID200ApplicationJSONImage `json:"image,omitempty"`
+}
+
+type PutImagesIDRequest struct {
+	PathParams PutImagesIDPathParams
+	Request    *PutImagesIDUpdateImageRequest `request:"mediaType=application/json"`
 }
 
 type PutImagesIDResponse struct {

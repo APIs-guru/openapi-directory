@@ -1,7 +1,8 @@
 
 
+
 export enum LastCrawlStatusEnum {
-    Succeeded = "SUCCEEDED"
-,    Cancelled = "CANCELLED"
-,    Failed = "FAILED"
+    Succeeded = "SUCCEEDED",
+    Cancelled = "CANCELLED",
+    Failed = "FAILED"
 }

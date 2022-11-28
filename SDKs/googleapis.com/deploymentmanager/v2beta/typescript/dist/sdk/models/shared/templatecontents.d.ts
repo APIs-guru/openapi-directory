@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ImportFile } from "./importfile";
 export declare enum TemplateContentsInterpreterEnum {
     UnknownInterpreter = "UNKNOWN_INTERPRETER",

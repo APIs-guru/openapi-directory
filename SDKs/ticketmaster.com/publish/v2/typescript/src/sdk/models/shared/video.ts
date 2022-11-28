@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LicensingInformation } from "./licensinginformation";
 import { Source } from "./source";
+
 
 
 // Video
@@ -8,15 +9,15 @@ import { Source } from "./source";
  * This class defines an entitlement data on the Publish API
 **/
 export class Video extends SpeakeasyBase {
-  @Metadata({ data: "json, name=embedUrl" })
+  @SpeakeasyMetadata({ data: "json, name=embedUrl" })
   embedUrl?: string;
 
-  @Metadata({ data: "json, name=licensingInformation" })
+  @SpeakeasyMetadata({ data: "json, name=licensingInformation" })
   licensingInformation: LicensingInformation;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source: Source;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url: string;
 }

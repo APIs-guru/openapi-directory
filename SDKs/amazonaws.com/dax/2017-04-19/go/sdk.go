@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://dax.{region}.amazonaws.com",
 	"https://dax.{region}.amazonaws.com",
 	"http://dax.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/dax/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// CreateCluster - Creates a DAX cluster. All nodes in the cluster run the same DAX caching software.
 func (s *SDK) CreateCluster(ctx context.Context, request operations.CreateClusterRequest) (*operations.CreateClusterResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonDAXV3.CreateCluster"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -81,7 +108,7 @@ func (s *SDK) CreateCluster(ctx context.Context, request operations.CreateCluste
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -261,8 +288,9 @@ func (s *SDK) CreateCluster(ctx context.Context, request operations.CreateCluste
 	return res, nil
 }
 
+// CreateParameterGroup - Creates a new parameter group. A parameter group is a collection of parameters that you apply to all of the nodes in a DAX cluster.
 func (s *SDK) CreateParameterGroup(ctx context.Context, request operations.CreateParameterGroupRequest) (*operations.CreateParameterGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonDAXV3.CreateParameterGroup"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -282,7 +310,7 @@ func (s *SDK) CreateParameterGroup(ctx context.Context, request operations.Creat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -372,8 +400,9 @@ func (s *SDK) CreateParameterGroup(ctx context.Context, request operations.Creat
 	return res, nil
 }
 
+// CreateSubnetGroup - Creates a new subnet group.
 func (s *SDK) CreateSubnetGroup(ctx context.Context, request operations.CreateSubnetGroupRequest) (*operations.CreateSubnetGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonDAXV3.CreateSubnetGroup"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -393,7 +422,7 @@ func (s *SDK) CreateSubnetGroup(ctx context.Context, request operations.CreateSu
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -473,8 +502,9 @@ func (s *SDK) CreateSubnetGroup(ctx context.Context, request operations.CreateSu
 	return res, nil
 }
 
+// DecreaseReplicationFactor - <p>Removes one or more nodes from a DAX cluster.</p> <note> <p>You cannot use <code>DecreaseReplicationFactor</code> to remove the last node in a DAX cluster. If you need to do this, use <code>DeleteCluster</code> instead.</p> </note>
 func (s *SDK) DecreaseReplicationFactor(ctx context.Context, request operations.DecreaseReplicationFactorRequest) (*operations.DecreaseReplicationFactorResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonDAXV3.DecreaseReplicationFactor"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -494,7 +524,7 @@ func (s *SDK) DecreaseReplicationFactor(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -584,8 +614,9 @@ func (s *SDK) DecreaseReplicationFactor(ctx context.Context, request operations.
 	return res, nil
 }
 
+// DeleteCluster - Deletes a previously provisioned DAX cluster. <i>DeleteCluster</i> deletes all associated nodes, node endpoints and the DAX cluster itself. When you receive a successful response from this action, DAX immediately begins deleting the cluster; you cannot cancel or revert this action.
 func (s *SDK) DeleteCluster(ctx context.Context, request operations.DeleteClusterRequest) (*operations.DeleteClusterResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonDAXV3.DeleteCluster"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -605,7 +636,7 @@ func (s *SDK) DeleteCluster(ctx context.Context, request operations.DeleteCluste
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -685,8 +716,9 @@ func (s *SDK) DeleteCluster(ctx context.Context, request operations.DeleteCluste
 	return res, nil
 }
 
+// DeleteParameterGroup - Deletes the specified parameter group. You cannot delete a parameter group if it is associated with any DAX clusters.
 func (s *SDK) DeleteParameterGroup(ctx context.Context, request operations.DeleteParameterGroupRequest) (*operations.DeleteParameterGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonDAXV3.DeleteParameterGroup"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -706,7 +738,7 @@ func (s *SDK) DeleteParameterGroup(ctx context.Context, request operations.Delet
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -786,8 +818,9 @@ func (s *SDK) DeleteParameterGroup(ctx context.Context, request operations.Delet
 	return res, nil
 }
 
+// DeleteSubnetGroup - <p>Deletes a subnet group.</p> <note> <p>You cannot delete a subnet group if it is associated with any DAX clusters.</p> </note>
 func (s *SDK) DeleteSubnetGroup(ctx context.Context, request operations.DeleteSubnetGroupRequest) (*operations.DeleteSubnetGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonDAXV3.DeleteSubnetGroup"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -807,7 +840,7 @@ func (s *SDK) DeleteSubnetGroup(ctx context.Context, request operations.DeleteSu
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -867,8 +900,9 @@ func (s *SDK) DeleteSubnetGroup(ctx context.Context, request operations.DeleteSu
 	return res, nil
 }
 
+// DescribeClusters - <p>Returns information about all provisioned DAX clusters if no cluster identifier is specified, or about a specific DAX cluster if a cluster identifier is supplied.</p> <p>If the cluster is in the CREATING state, only cluster level information will be displayed until all of the nodes are successfully provisioned.</p> <p>If the cluster is in the DELETING state, only cluster level information will be displayed.</p> <p>If nodes are currently being added to the DAX cluster, node endpoint information and creation time for the additional nodes will not be displayed until they are completely provisioned. When the DAX cluster state is <i>available</i>, the cluster is ready for use.</p> <p>If nodes are currently being removed from the DAX cluster, no endpoint information for the removed nodes is displayed.</p>
 func (s *SDK) DescribeClusters(ctx context.Context, request operations.DescribeClustersRequest) (*operations.DescribeClustersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonDAXV3.DescribeClusters"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -888,7 +922,7 @@ func (s *SDK) DescribeClusters(ctx context.Context, request operations.DescribeC
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -958,8 +992,9 @@ func (s *SDK) DescribeClusters(ctx context.Context, request operations.DescribeC
 	return res, nil
 }
 
+// DescribeDefaultParameters - Returns the default system parameter information for the DAX caching software.
 func (s *SDK) DescribeDefaultParameters(ctx context.Context, request operations.DescribeDefaultParametersRequest) (*operations.DescribeDefaultParametersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonDAXV3.DescribeDefaultParameters"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -979,7 +1014,7 @@ func (s *SDK) DescribeDefaultParameters(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1039,8 +1074,9 @@ func (s *SDK) DescribeDefaultParameters(ctx context.Context, request operations.
 	return res, nil
 }
 
+// DescribeEvents - <p>Returns events related to DAX clusters and parameter groups. You can obtain events specific to a particular DAX cluster or parameter group by providing the name as a parameter.</p> <p>By default, only the events occurring within the last 24 hours are returned; however, you can retrieve up to 14 days' worth of events if necessary.</p>
 func (s *SDK) DescribeEvents(ctx context.Context, request operations.DescribeEventsRequest) (*operations.DescribeEventsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonDAXV3.DescribeEvents"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1060,7 +1096,7 @@ func (s *SDK) DescribeEvents(ctx context.Context, request operations.DescribeEve
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1120,8 +1156,9 @@ func (s *SDK) DescribeEvents(ctx context.Context, request operations.DescribeEve
 	return res, nil
 }
 
+// DescribeParameterGroups - Returns a list of parameter group descriptions. If a parameter group name is specified, the list will contain only the descriptions for that group.
 func (s *SDK) DescribeParameterGroups(ctx context.Context, request operations.DescribeParameterGroupsRequest) (*operations.DescribeParameterGroupsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonDAXV3.DescribeParameterGroups"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1141,7 +1178,7 @@ func (s *SDK) DescribeParameterGroups(ctx context.Context, request operations.De
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1211,8 +1248,9 @@ func (s *SDK) DescribeParameterGroups(ctx context.Context, request operations.De
 	return res, nil
 }
 
+// DescribeParameters - Returns the detailed parameter list for a particular parameter group.
 func (s *SDK) DescribeParameters(ctx context.Context, request operations.DescribeParametersRequest) (*operations.DescribeParametersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonDAXV3.DescribeParameters"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1232,7 +1270,7 @@ func (s *SDK) DescribeParameters(ctx context.Context, request operations.Describ
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1302,8 +1340,9 @@ func (s *SDK) DescribeParameters(ctx context.Context, request operations.Describ
 	return res, nil
 }
 
+// DescribeSubnetGroups - Returns a list of subnet group descriptions. If a subnet group name is specified, the list will contain only the description of that group.
 func (s *SDK) DescribeSubnetGroups(ctx context.Context, request operations.DescribeSubnetGroupsRequest) (*operations.DescribeSubnetGroupsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonDAXV3.DescribeSubnetGroups"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1323,7 +1362,7 @@ func (s *SDK) DescribeSubnetGroups(ctx context.Context, request operations.Descr
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1373,8 +1412,9 @@ func (s *SDK) DescribeSubnetGroups(ctx context.Context, request operations.Descr
 	return res, nil
 }
 
+// IncreaseReplicationFactor - Adds one or more nodes to a DAX cluster.
 func (s *SDK) IncreaseReplicationFactor(ctx context.Context, request operations.IncreaseReplicationFactorRequest) (*operations.IncreaseReplicationFactorResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonDAXV3.IncreaseReplicationFactor"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1394,7 +1434,7 @@ func (s *SDK) IncreaseReplicationFactor(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1514,8 +1554,9 @@ func (s *SDK) IncreaseReplicationFactor(ctx context.Context, request operations.
 	return res, nil
 }
 
+// ListTags - List all of the tags for a DAX cluster. You can call <code>ListTags</code> up to 10 times per second, per account.
 func (s *SDK) ListTags(ctx context.Context, request operations.ListTagsRequest) (*operations.ListTagsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonDAXV3.ListTags"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1535,7 +1576,7 @@ func (s *SDK) ListTags(ctx context.Context, request operations.ListTagsRequest) 
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1625,8 +1666,9 @@ func (s *SDK) ListTags(ctx context.Context, request operations.ListTagsRequest) 
 	return res, nil
 }
 
+// RebootNode - <p>Reboots a single node of a DAX cluster. The reboot action takes place as soon as possible. During the reboot, the node status is set to REBOOTING.</p> <note> <p> <code>RebootNode</code> restarts the DAX engine process and does not remove the contents of the cache. </p> </note>
 func (s *SDK) RebootNode(ctx context.Context, request operations.RebootNodeRequest) (*operations.RebootNodeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonDAXV3.RebootNode"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1646,7 +1688,7 @@ func (s *SDK) RebootNode(ctx context.Context, request operations.RebootNodeReque
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1736,8 +1778,9 @@ func (s *SDK) RebootNode(ctx context.Context, request operations.RebootNodeReque
 	return res, nil
 }
 
+// TagResource - Associates a set of tags with a DAX resource. You can call <code>TagResource</code> up to 5 times per second, per account.
 func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceRequest) (*operations.TagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonDAXV3.TagResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1757,7 +1800,7 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1857,8 +1900,9 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 	return res, nil
 }
 
+// UntagResource - Removes the association of tags from a DAX resource. You can call <code>UntagResource</code> up to 5 times per second, per account.
 func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourceRequest) (*operations.UntagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonDAXV3.UntagResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1878,7 +1922,7 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1978,8 +2022,9 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 	return res, nil
 }
 
+// UpdateCluster - Modifies the settings for a DAX cluster. You can use this action to change one or more cluster configuration parameters by specifying the parameters and the new values.
 func (s *SDK) UpdateCluster(ctx context.Context, request operations.UpdateClusterRequest) (*operations.UpdateClusterResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonDAXV3.UpdateCluster"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1999,7 +2044,7 @@ func (s *SDK) UpdateCluster(ctx context.Context, request operations.UpdateCluste
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2099,8 +2144,9 @@ func (s *SDK) UpdateCluster(ctx context.Context, request operations.UpdateCluste
 	return res, nil
 }
 
+// UpdateParameterGroup - Modifies the parameters of a parameter group. You can modify up to 20 parameters in a single request by submitting a list parameter name and value pairs.
 func (s *SDK) UpdateParameterGroup(ctx context.Context, request operations.UpdateParameterGroupRequest) (*operations.UpdateParameterGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonDAXV3.UpdateParameterGroup"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2120,7 +2166,7 @@ func (s *SDK) UpdateParameterGroup(ctx context.Context, request operations.Updat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2200,8 +2246,9 @@ func (s *SDK) UpdateParameterGroup(ctx context.Context, request operations.Updat
 	return res, nil
 }
 
+// UpdateSubnetGroup - Modifies an existing subnet group.
 func (s *SDK) UpdateSubnetGroup(ctx context.Context, request operations.UpdateSubnetGroupRequest) (*operations.UpdateSubnetGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonDAXV3.UpdateSubnetGroup"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2221,7 +2268,7 @@ func (s *SDK) UpdateSubnetGroup(ctx context.Context, request operations.UpdateSu
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

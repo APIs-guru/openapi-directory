@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AuthToken extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authToken" })
+  @SpeakeasyMetadata({ data: "json, name=authToken" })
   authToken?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }

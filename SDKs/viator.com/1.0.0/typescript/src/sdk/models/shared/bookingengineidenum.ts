@@ -1,8 +1,9 @@
 
 
+
 export enum BookingEngineIdEnum {
-    FreesaleBe = "FreesaleBE"
-,    UnconditionalBe = "UnconditionalBE"
-,    DeferredCrmbe = "DeferredCRMBE"
-,    FreesaleOnRequestBe = "FreesaleOnRequestBE"
+    FreesaleBe = "FreesaleBE",
+    UnconditionalBe = "UnconditionalBE",
+    DeferredCrmbe = "DeferredCRMBE",
+    FreesaleOnRequestBe = "FreesaleOnRequestBE"
 }

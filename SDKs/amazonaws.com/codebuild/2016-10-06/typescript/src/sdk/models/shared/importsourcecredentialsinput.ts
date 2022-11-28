@@ -1,21 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AuthTypeEnum } from "./authtypeenum";
 import { ServerTypeEnum } from "./servertypeenum";
 
 
+
 export class ImportSourceCredentialsInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authType" })
+  @SpeakeasyMetadata({ data: "json, name=authType" })
   authType: AuthTypeEnum;
 
-  @Metadata({ data: "json, name=serverType" })
+  @SpeakeasyMetadata({ data: "json, name=serverType" })
   serverType: ServerTypeEnum;
 
-  @Metadata({ data: "json, name=shouldOverwrite" })
+  @SpeakeasyMetadata({ data: "json, name=shouldOverwrite" })
   shouldOverwrite?: boolean;
 
-  @Metadata({ data: "json, name=token" })
+  @SpeakeasyMetadata({ data: "json, name=token" })
   token: string;
 
-  @Metadata({ data: "json, name=username" })
+  @SpeakeasyMetadata({ data: "json, name=username" })
   username?: string;
 }

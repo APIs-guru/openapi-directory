@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ScriptProjectsDeploymentsDeletePathParams:
-    deployment_id: str = field(default=None, metadata={'path_param': { 'field_name': 'deploymentId', 'style': 'simple', 'explode': False }})
-    script_id: str = field(default=None, metadata={'path_param': { 'field_name': 'scriptId', 'style': 'simple', 'explode': False }})
+    deployment_id: str = field(metadata={'path_param': { 'field_name': 'deploymentId', 'style': 'simple', 'explode': False }})
+    script_id: str = field(metadata={'path_param': { 'field_name': 'scriptId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +27,20 @@ class ScriptProjectsDeploymentsDeleteQueryParams:
 
 @dataclass
 class ScriptProjectsDeploymentsDeleteSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ScriptProjectsDeploymentsDeleteRequest:
-    path_params: ScriptProjectsDeploymentsDeletePathParams = field(default=None)
-    query_params: ScriptProjectsDeploymentsDeleteQueryParams = field(default=None)
-    security: ScriptProjectsDeploymentsDeleteSecurity = field(default=None)
+    path_params: ScriptProjectsDeploymentsDeletePathParams = field()
+    query_params: ScriptProjectsDeploymentsDeleteQueryParams = field()
+    security: ScriptProjectsDeploymentsDeleteSecurity = field()
     
 
 @dataclass
 class ScriptProjectsDeploymentsDeleteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

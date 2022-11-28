@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FieldTypeDefinition } from "./fieldtypedefinition";
 export var InputFieldDefinitionSupportedValueTypesEnum;
 (function (InputFieldDefinitionSupportedValueTypesEnum) {
@@ -40,15 +40,15 @@ var InputFieldDefinition = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=isRequired" }),
+        SpeakeasyMetadata({ data: "json, name=isRequired" }),
         __metadata("design:type", Boolean)
     ], InputFieldDefinition.prototype, "isRequired", void 0);
     __decorate([
-        Metadata({ data: "json, name=supportedValueTypes" }),
+        SpeakeasyMetadata({ data: "json, name=supportedValueTypes" }),
         __metadata("design:type", Array)
     ], InputFieldDefinition.prototype, "supportedValueTypes", void 0);
     __decorate([
-        Metadata({ data: "json, name=typeDefinition" }),
+        SpeakeasyMetadata({ data: "json, name=typeDefinition" }),
         __metadata("design:type", FieldTypeDefinition)
     ], InputFieldDefinition.prototype, "typeDefinition", void 0);
     return InputFieldDefinition;

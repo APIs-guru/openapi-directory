@@ -86,3 +86,34 @@ type SongForAPIContract struct {
 	Version             *int32                                     `json:"version,omitempty"`
 	WebLinks            []WebLinkForAPIContract                    `json:"webLinks,omitempty"`
 }
+
+type SongForAPIContractInput struct {
+	AdditionalNames     *string                                    `json:"additionalNames,omitempty"`
+	Albums              []AlbumContractInput                       `json:"albums,omitempty"`
+	ArtistString        *string                                    `json:"artistString,omitempty"`
+	Artists             []ArtistForSongContract                    `json:"artists,omitempty"`
+	CreateDate          *time.Time                                 `json:"createDate,omitempty"`
+	DefaultName         *string                                    `json:"defaultName,omitempty"`
+	DefaultNameLanguage *SongForAPIContractDefaultNameLanguageEnum `json:"defaultNameLanguage,omitempty"`
+	Deleted             *bool                                      `json:"deleted,omitempty"`
+	FavoritedTimes      *int32                                     `json:"favoritedTimes,omitempty"`
+	ID                  *int32                                     `json:"id,omitempty"`
+	LengthSeconds       *int32                                     `json:"lengthSeconds,omitempty"`
+	Lyrics              []LyricsForSongContract                    `json:"lyrics,omitempty"`
+	MainPicture         *EntryThumbForAPIContract                  `json:"mainPicture,omitempty"`
+	MergedTo            *int32                                     `json:"mergedTo,omitempty"`
+	Name                *string                                    `json:"name,omitempty"`
+	Names               []LocalizedStringContract                  `json:"names,omitempty"`
+	OriginalVersionID   *int32                                     `json:"originalVersionId,omitempty"`
+	PublishDate         *time.Time                                 `json:"publishDate,omitempty"`
+	PvServices          *SongForAPIContractPvServicesEnum          `json:"pvServices,omitempty"`
+	Pvs                 []PvContract                               `json:"pvs,omitempty"`
+	RatingScore         *int32                                     `json:"ratingScore,omitempty"`
+	ReleaseEvent        *ReleaseEventForAPIContractInput           `json:"releaseEvent,omitempty"`
+	SongType            *SongForAPIContractSongTypeEnum            `json:"songType,omitempty"`
+	Status              *SongForAPIContractStatusEnum              `json:"status,omitempty"`
+	Tags                []TagUsageForAPIContract                   `json:"tags,omitempty"`
+	ThumbURL            *string                                    `json:"thumbUrl,omitempty"`
+	Version             *int32                                     `json:"version,omitempty"`
+	WebLinks            []WebLinkForAPIContract                    `json:"webLinks,omitempty"`
+}

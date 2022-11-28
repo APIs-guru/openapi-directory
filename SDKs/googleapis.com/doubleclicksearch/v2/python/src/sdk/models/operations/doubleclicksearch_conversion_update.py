@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -20,20 +24,20 @@ class DoubleclicksearchConversionUpdateQueryParams:
 
 @dataclass
 class DoubleclicksearchConversionUpdateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DoubleclicksearchConversionUpdateRequest:
-    query_params: DoubleclicksearchConversionUpdateQueryParams = field(default=None)
+    query_params: DoubleclicksearchConversionUpdateQueryParams = field()
+    security: DoubleclicksearchConversionUpdateSecurity = field()
     request: Optional[shared.ConversionList] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DoubleclicksearchConversionUpdateSecurity = field(default=None)
     
 
 @dataclass
 class DoubleclicksearchConversionUpdateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     conversion_list: Optional[shared.ConversionList] = field(default=None)
-    status_code: int = field(default=None)
     

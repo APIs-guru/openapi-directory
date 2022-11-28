@@ -4,8 +4,8 @@ from typing import Any,Optional
 
 @dataclass
 class GetNetworkInsightApplicationHealthByTimePathParams:
-    application_id: str = field(default=None, metadata={'path_param': { 'field_name': 'applicationId', 'style': 'simple', 'explode': False }})
-    network_id: str = field(default=None, metadata={'path_param': { 'field_name': 'networkId', 'style': 'simple', 'explode': False }})
+    application_id: str = field(metadata={'path_param': { 'field_name': 'applicationId', 'style': 'simple', 'explode': False }})
+    network_id: str = field(metadata={'path_param': { 'field_name': 'networkId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,13 +18,13 @@ class GetNetworkInsightApplicationHealthByTimeQueryParams:
 
 @dataclass
 class GetNetworkInsightApplicationHealthByTimeRequest:
-    path_params: GetNetworkInsightApplicationHealthByTimePathParams = field(default=None)
-    query_params: GetNetworkInsightApplicationHealthByTimeQueryParams = field(default=None)
+    path_params: GetNetworkInsightApplicationHealthByTimePathParams = field()
+    query_params: GetNetworkInsightApplicationHealthByTimeQueryParams = field()
     
 
 @dataclass
 class GetNetworkInsightApplicationHealthByTimeResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_network_insight_application_health_by_time_200_application_json_object: Optional[dict[str, Any]] = field(default=None)
     

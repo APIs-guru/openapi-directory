@@ -10,7 +10,7 @@ type PutUserVotesShowsShowIDPathParams struct {
 
 type PutUserVotesShowsShowIDRequest struct {
 	PathParams PutUserVotesShowsShowIDPathParams
-	Request    *shared.ShowVote `request:"mediaType=application/json"`
+	Request    *shared.ShowVoteInput `request:"mediaType=application/json"`
 }
 
 type PutUserVotesShowsShowIDResponse struct {

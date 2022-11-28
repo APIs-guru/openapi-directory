@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import deploymentjobs
+from sdk import utils
+from . import *
 
 class PhaseStateEnum(str, Enum):
     STATE_UNSPECIFIED = "STATE_UNSPECIFIED"
@@ -15,7 +17,11 @@ class PhaseStateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Phase:
-    deployment_jobs: Optional[deploymentjobs.DeploymentJobs] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deploymentJobs' }})
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    state: Optional[PhaseStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
+    r"""Phase
+    Phase represents a collection of jobs that are logically grouped together for a `Rollout`.
+    """
+    
+    deployment_jobs: Optional[DeploymentJobs] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('deploymentJobs') }})
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    state: Optional[PhaseStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
     

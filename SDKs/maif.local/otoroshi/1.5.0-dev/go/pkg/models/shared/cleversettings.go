@@ -1,5 +1,7 @@
 package shared
 
+// CleverSettings
+// Configuration for CleverCloud client
 type CleverSettings struct {
 	ConsumerKey    string `json:"consumerKey"`
 	ConsumerSecret string `json:"consumerSecret"`

@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConnectionTypeEnum } from "./connectiontypeenum";
 import { ContentHandlingStrategyEnum } from "./contenthandlingstrategyenum";
 import { IntegrationTypeEnum } from "./integrationtypeenum";
@@ -6,64 +6,65 @@ import { PassthroughBehaviorEnum } from "./passthroughbehaviorenum";
 import { TlsConfig } from "./tlsconfig";
 
 
+
 export class UpdateIntegrationResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApiGatewayManaged" })
+  @SpeakeasyMetadata({ data: "json, name=ApiGatewayManaged" })
   apiGatewayManaged?: boolean;
 
-  @Metadata({ data: "json, name=ConnectionId" })
+  @SpeakeasyMetadata({ data: "json, name=ConnectionId" })
   connectionId?: string;
 
-  @Metadata({ data: "json, name=ConnectionType" })
+  @SpeakeasyMetadata({ data: "json, name=ConnectionType" })
   connectionType?: ConnectionTypeEnum;
 
-  @Metadata({ data: "json, name=ContentHandlingStrategy" })
+  @SpeakeasyMetadata({ data: "json, name=ContentHandlingStrategy" })
   contentHandlingStrategy?: ContentHandlingStrategyEnum;
 
-  @Metadata({ data: "json, name=CredentialsArn" })
+  @SpeakeasyMetadata({ data: "json, name=CredentialsArn" })
   credentialsArn?: string;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=IntegrationId" })
+  @SpeakeasyMetadata({ data: "json, name=IntegrationId" })
   integrationId?: string;
 
-  @Metadata({ data: "json, name=IntegrationMethod" })
+  @SpeakeasyMetadata({ data: "json, name=IntegrationMethod" })
   integrationMethod?: string;
 
-  @Metadata({ data: "json, name=IntegrationResponseSelectionExpression" })
+  @SpeakeasyMetadata({ data: "json, name=IntegrationResponseSelectionExpression" })
   integrationResponseSelectionExpression?: string;
 
-  @Metadata({ data: "json, name=IntegrationSubtype" })
+  @SpeakeasyMetadata({ data: "json, name=IntegrationSubtype" })
   integrationSubtype?: string;
 
-  @Metadata({ data: "json, name=IntegrationType" })
+  @SpeakeasyMetadata({ data: "json, name=IntegrationType" })
   integrationType?: IntegrationTypeEnum;
 
-  @Metadata({ data: "json, name=IntegrationUri" })
+  @SpeakeasyMetadata({ data: "json, name=IntegrationUri" })
   integrationUri?: string;
 
-  @Metadata({ data: "json, name=PassthroughBehavior" })
+  @SpeakeasyMetadata({ data: "json, name=PassthroughBehavior" })
   passthroughBehavior?: PassthroughBehaviorEnum;
 
-  @Metadata({ data: "json, name=PayloadFormatVersion" })
+  @SpeakeasyMetadata({ data: "json, name=PayloadFormatVersion" })
   payloadFormatVersion?: string;
 
-  @Metadata({ data: "json, name=RequestParameters" })
+  @SpeakeasyMetadata({ data: "json, name=RequestParameters" })
   requestParameters?: Map<string, string>;
 
-  @Metadata({ data: "json, name=RequestTemplates" })
+  @SpeakeasyMetadata({ data: "json, name=RequestTemplates" })
   requestTemplates?: Map<string, string>;
 
-  @Metadata({ data: "json, name=ResponseParameters" })
+  @SpeakeasyMetadata({ data: "json, name=ResponseParameters" })
   responseParameters?: Map<string, Map<string, string>>;
 
-  @Metadata({ data: "json, name=TemplateSelectionExpression" })
+  @SpeakeasyMetadata({ data: "json, name=TemplateSelectionExpression" })
   templateSelectionExpression?: string;
 
-  @Metadata({ data: "json, name=TimeoutInMillis" })
+  @SpeakeasyMetadata({ data: "json, name=TimeoutInMillis" })
   timeoutInMillis?: number;
 
-  @Metadata({ data: "json, name=TlsConfig" })
+  @SpeakeasyMetadata({ data: "json, name=TlsConfig" })
   tlsConfig?: TlsConfig;
 }

@@ -1,9 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Image } from "./image";
 import { Signature } from "./signature";
-import { Signature } from "./signature";
-import { Signature } from "./signature";
+
 
 
 // ConsentArtifact
@@ -11,27 +9,27 @@ import { Signature } from "./signature";
  * Documentation of a user's consent.
 **/
 export class ConsentArtifact extends SpeakeasyBase {
-  @Metadata({ data: "json, name=consentContentScreenshots", elemType: shared.Image })
+  @SpeakeasyMetadata({ data: "json, name=consentContentScreenshots", elemType: Image })
   consentContentScreenshots?: Image[];
 
-  @Metadata({ data: "json, name=consentContentVersion" })
+  @SpeakeasyMetadata({ data: "json, name=consentContentVersion" })
   consentContentVersion?: string;
 
-  @Metadata({ data: "json, name=guardianSignature" })
+  @SpeakeasyMetadata({ data: "json, name=guardianSignature" })
   guardianSignature?: Signature;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: Map<string, string>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=userId" })
+  @SpeakeasyMetadata({ data: "json, name=userId" })
   userId?: string;
 
-  @Metadata({ data: "json, name=userSignature" })
+  @SpeakeasyMetadata({ data: "json, name=userSignature" })
   userSignature?: Signature;
 
-  @Metadata({ data: "json, name=witnessSignature" })
+  @SpeakeasyMetadata({ data: "json, name=witnessSignature" })
   witnessSignature?: Signature;
 }

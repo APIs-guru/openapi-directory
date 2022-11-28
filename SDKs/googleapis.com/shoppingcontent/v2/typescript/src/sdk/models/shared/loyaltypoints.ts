@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class LoyaltyPoints extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=pointsValue" })
+  @SpeakeasyMetadata({ data: "json, name=pointsValue" })
   pointsValue?: string;
 
-  @Metadata({ data: "json, name=ratio" })
+  @SpeakeasyMetadata({ data: "json, name=ratio" })
   ratio?: number;
 }

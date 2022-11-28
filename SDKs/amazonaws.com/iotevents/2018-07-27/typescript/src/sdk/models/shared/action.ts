@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ClearTimerAction } from "./cleartimeraction";
 import { DynamoDbAction } from "./dynamodbaction";
 import { DynamoDBv2Action } from "./dynamodbv2action";
@@ -14,47 +14,48 @@ import { SnsTopicPublishAction } from "./snstopicpublishaction";
 import { SqsAction } from "./sqsaction";
 
 
+
 // Action
 /** 
  * An action to be performed when the <code>condition</code> is TRUE.
 **/
 export class Action extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clearTimer" })
+  @SpeakeasyMetadata({ data: "json, name=clearTimer" })
   clearTimer?: ClearTimerAction;
 
-  @Metadata({ data: "json, name=dynamoDB" })
+  @SpeakeasyMetadata({ data: "json, name=dynamoDB" })
   dynamoDb?: DynamoDbAction;
 
-  @Metadata({ data: "json, name=dynamoDBv2" })
+  @SpeakeasyMetadata({ data: "json, name=dynamoDBv2" })
   dynamoDBv2?: DynamoDBv2Action;
 
-  @Metadata({ data: "json, name=firehose" })
+  @SpeakeasyMetadata({ data: "json, name=firehose" })
   firehose?: FirehoseAction;
 
-  @Metadata({ data: "json, name=iotEvents" })
+  @SpeakeasyMetadata({ data: "json, name=iotEvents" })
   iotEvents?: IotEventsAction;
 
-  @Metadata({ data: "json, name=iotSiteWise" })
+  @SpeakeasyMetadata({ data: "json, name=iotSiteWise" })
   iotSiteWise?: IotSiteWiseAction;
 
-  @Metadata({ data: "json, name=iotTopicPublish" })
+  @SpeakeasyMetadata({ data: "json, name=iotTopicPublish" })
   iotTopicPublish?: IotTopicPublishAction;
 
-  @Metadata({ data: "json, name=lambda" })
+  @SpeakeasyMetadata({ data: "json, name=lambda" })
   lambda?: LambdaAction;
 
-  @Metadata({ data: "json, name=resetTimer" })
+  @SpeakeasyMetadata({ data: "json, name=resetTimer" })
   resetTimer?: ResetTimerAction;
 
-  @Metadata({ data: "json, name=setTimer" })
+  @SpeakeasyMetadata({ data: "json, name=setTimer" })
   setTimer?: SetTimerAction;
 
-  @Metadata({ data: "json, name=setVariable" })
+  @SpeakeasyMetadata({ data: "json, name=setVariable" })
   setVariable?: SetVariableAction;
 
-  @Metadata({ data: "json, name=sns" })
+  @SpeakeasyMetadata({ data: "json, name=sns" })
   sns?: SnsTopicPublishAction;
 
-  @Metadata({ data: "json, name=sqs" })
+  @SpeakeasyMetadata({ data: "json, name=sqs" })
   sqs?: SqsAction;
 }

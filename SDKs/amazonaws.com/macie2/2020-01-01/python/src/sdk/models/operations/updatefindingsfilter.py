@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdateFindingsFilterPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,36 +32,40 @@ class UpdateFindingsFilterRequestBodyActionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class UpdateFindingsFilterRequestBodyFindingCriteria:
-    criterion: Optional[dict[str, shared.CriterionAdditionalProperties]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'criterion' }})
+    r"""UpdateFindingsFilterRequestBodyFindingCriteria
+    Specifies, as a map, one or more property-based conditions that filter the results of a query for findings.
+    """
+    
+    criterion: Optional[dict[str, shared.CriterionAdditionalProperties]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('criterion') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateFindingsFilterRequestBody:
-    action: Optional[UpdateFindingsFilterRequestBodyActionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
-    client_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clientToken' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    finding_criteria: Optional[UpdateFindingsFilterRequestBodyFindingCriteria] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'findingCriteria' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    position: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'position' }})
+    action: Optional[UpdateFindingsFilterRequestBodyActionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('action') }})
+    client_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clientToken') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    finding_criteria: Optional[UpdateFindingsFilterRequestBodyFindingCriteria] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('findingCriteria') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    position: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('position') }})
     
 
 @dataclass
 class UpdateFindingsFilterRequest:
-    path_params: UpdateFindingsFilterPathParams = field(default=None)
-    headers: UpdateFindingsFilterHeaders = field(default=None)
-    request: UpdateFindingsFilterRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateFindingsFilterHeaders = field()
+    path_params: UpdateFindingsFilterPathParams = field()
+    request: UpdateFindingsFilterRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateFindingsFilterResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_quota_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     update_findings_filter_response: Optional[shared.UpdateFindingsFilterResponse] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)

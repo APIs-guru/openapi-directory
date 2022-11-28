@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class JobsProjectsClientEventsCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class JobsProjectsClientEventsCreateQueryParams:
 
 @dataclass
 class JobsProjectsClientEventsCreateSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class JobsProjectsClientEventsCreateSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class JobsProjectsClientEventsCreateSecurity:
 
 @dataclass
 class JobsProjectsClientEventsCreateRequest:
-    path_params: JobsProjectsClientEventsCreatePathParams = field(default=None)
-    query_params: JobsProjectsClientEventsCreateQueryParams = field(default=None)
+    path_params: JobsProjectsClientEventsCreatePathParams = field()
+    query_params: JobsProjectsClientEventsCreateQueryParams = field()
+    security: JobsProjectsClientEventsCreateSecurity = field()
     request: Optional[shared.CreateClientEventRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: JobsProjectsClientEventsCreateSecurity = field(default=None)
     
 
 @dataclass
 class JobsProjectsClientEventsCreateResponse:
+    content_type: str = field()
+    status_code: int = field()
     client_event: Optional[shared.ClientEvent] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

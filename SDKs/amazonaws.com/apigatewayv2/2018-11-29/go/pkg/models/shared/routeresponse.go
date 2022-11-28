@@ -1,5 +1,7 @@
 package shared
 
+// RouteResponse
+// Represents a route response.
 type RouteResponse struct {
 	ModelSelectionExpression *string                         `json:"ModelSelectionExpression,omitempty"`
 	ResponseModels           map[string]string               `json:"ResponseModels,omitempty"`

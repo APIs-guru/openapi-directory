@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// BandwidthSnapshotEntity
+// List Bandwidth Snapshots
 type BandwidthSnapshotEntity struct {
 	BytesReceived     *float64   `json:"bytes_received,omitempty"`
 	BytesSent         *float64   `json:"bytes_sent,omitempty"`

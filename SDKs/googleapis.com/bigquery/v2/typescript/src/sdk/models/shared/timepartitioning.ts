@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TimePartitioning extends SpeakeasyBase {
-  @Metadata({ data: "json, name=expirationMs" })
+  @SpeakeasyMetadata({ data: "json, name=expirationMs" })
   expirationMs?: string;
 
-  @Metadata({ data: "json, name=field" })
+  @SpeakeasyMetadata({ data: "json, name=field" })
   field?: string;
 
-  @Metadata({ data: "json, name=requirePartitionFilter" })
+  @SpeakeasyMetadata({ data: "json, name=requirePartitionFilter" })
   requirePartitionFilter?: boolean;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum AudioConfigAudioEncodingEnum {
     AudioEncodingUnspecified = "AUDIO_ENCODING_UNSPECIFIED",
     Linear16 = "LINEAR16",

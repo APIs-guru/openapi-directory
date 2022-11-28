@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class RedisProjectsLocationsInstancesGetAuthStringPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class RedisProjectsLocationsInstancesGetAuthStringQueryParams:
 
 @dataclass
 class RedisProjectsLocationsInstancesGetAuthStringSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class RedisProjectsLocationsInstancesGetAuthStringRequest:
-    path_params: RedisProjectsLocationsInstancesGetAuthStringPathParams = field(default=None)
-    query_params: RedisProjectsLocationsInstancesGetAuthStringQueryParams = field(default=None)
-    security: RedisProjectsLocationsInstancesGetAuthStringSecurity = field(default=None)
+    path_params: RedisProjectsLocationsInstancesGetAuthStringPathParams = field()
+    query_params: RedisProjectsLocationsInstancesGetAuthStringQueryParams = field()
+    security: RedisProjectsLocationsInstancesGetAuthStringSecurity = field()
     
 
 @dataclass
 class RedisProjectsLocationsInstancesGetAuthStringResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     instance_auth_string: Optional[shared.InstanceAuthString] = field(default=None)
-    status_code: int = field(default=None)
     

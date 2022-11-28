@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleChromeManagementV1GraphicsAdapterInfo
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information of a graphics adapter (GPU).
 **/
 export class GoogleChromeManagementV1GraphicsAdapterInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=adapter" })
+  @SpeakeasyMetadata({ data: "json, name=adapter" })
   adapter?: string;
 
-  @Metadata({ data: "json, name=deviceId" })
+  @SpeakeasyMetadata({ data: "json, name=deviceId" })
   deviceId?: string;
 
-  @Metadata({ data: "json, name=driverVersion" })
+  @SpeakeasyMetadata({ data: "json, name=driverVersion" })
   driverVersion?: string;
 }

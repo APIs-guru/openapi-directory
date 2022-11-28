@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SourceRevision } from "./sourcerevision";
 import { PipelineExecutionStatusEnum } from "./pipelineexecutionstatusenum";
 import { StopExecutionTrigger } from "./stopexecutiontrigger";
 import { ExecutionTrigger } from "./executiontrigger";
+
 
 
 // PipelineExecutionSummary
@@ -11,24 +11,24 @@ import { ExecutionTrigger } from "./executiontrigger";
  * Summary information about a pipeline execution.
 **/
 export class PipelineExecutionSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=lastUpdateTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdateTime" })
   lastUpdateTime?: Date;
 
-  @Metadata({ data: "json, name=pipelineExecutionId" })
+  @SpeakeasyMetadata({ data: "json, name=pipelineExecutionId" })
   pipelineExecutionId?: string;
 
-  @Metadata({ data: "json, name=sourceRevisions", elemType: shared.SourceRevision })
+  @SpeakeasyMetadata({ data: "json, name=sourceRevisions", elemType: SourceRevision })
   sourceRevisions?: SourceRevision[];
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: Date;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: PipelineExecutionStatusEnum;
 
-  @Metadata({ data: "json, name=stopTrigger" })
+  @SpeakeasyMetadata({ data: "json, name=stopTrigger" })
   stopTrigger?: StopExecutionTrigger;
 
-  @Metadata({ data: "json, name=trigger" })
+  @SpeakeasyMetadata({ data: "json, name=trigger" })
   trigger?: ExecutionTrigger;
 }

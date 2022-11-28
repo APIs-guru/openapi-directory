@@ -8,6 +8,8 @@ const (
 	GoogleCloudMlV1MetricSpecNameEnumGpuDutyCycle          GoogleCloudMlV1MetricSpecNameEnum = "GPU_DUTY_CYCLE"
 )
 
+// GoogleCloudMlV1MetricSpec
+// MetricSpec contains the specifications to use to calculate the desired nodes count when autoscaling is enabled.
 type GoogleCloudMlV1MetricSpec struct {
 	Name   *GoogleCloudMlV1MetricSpecNameEnum `json:"name,omitempty"`
 	Target *int32                             `json:"target,omitempty"`

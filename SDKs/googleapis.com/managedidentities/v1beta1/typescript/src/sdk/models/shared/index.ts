@@ -6,6 +6,8 @@ export * from "./certificate";
 export * from "./checkmigrationpermissionresponse";
 export * from "./detachtrustrequest";
 export * from "./domain";
+export * from "./domainjoinmachinerequest";
+export * from "./domainjoinmachineresponse";
 export * from "./enablemigrationrequest";
 export * from "./expr";
 export * from "./extendschemarequest";

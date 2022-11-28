@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class EssentialcontactsProjectsContactsSendTestMessagePathParams:
-    resource: str = field(default=None, metadata={'path_param': { 'field_name': 'resource', 'style': 'simple', 'explode': False }})
+    resource: str = field(metadata={'path_param': { 'field_name': 'resource', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class EssentialcontactsProjectsContactsSendTestMessageQueryParams:
 
 @dataclass
 class EssentialcontactsProjectsContactsSendTestMessageSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class EssentialcontactsProjectsContactsSendTestMessageRequest:
-    path_params: EssentialcontactsProjectsContactsSendTestMessagePathParams = field(default=None)
-    query_params: EssentialcontactsProjectsContactsSendTestMessageQueryParams = field(default=None)
+    path_params: EssentialcontactsProjectsContactsSendTestMessagePathParams = field()
+    query_params: EssentialcontactsProjectsContactsSendTestMessageQueryParams = field()
+    security: EssentialcontactsProjectsContactsSendTestMessageSecurity = field()
     request: Optional[shared.GoogleCloudEssentialcontactsV1SendTestMessageRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: EssentialcontactsProjectsContactsSendTestMessageSecurity = field(default=None)
     
 
 @dataclass
 class EssentialcontactsProjectsContactsSendTestMessageResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_protobuf_empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

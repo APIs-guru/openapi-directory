@@ -1,5 +1,7 @@
 package shared
 
+// EnterpriseCrmEventbusProtoSuspensionAuthPermissions
+// LINT.IfChange
 type EnterpriseCrmEventbusProtoSuspensionAuthPermissions struct {
 	GaiaIdentity *EnterpriseCrmEventbusProtoSuspensionAuthPermissionsGaiaIdentity `json:"gaiaIdentity,omitempty"`
 	GoogleGroup  *EnterpriseCrmEventbusProtoSuspensionAuthPermissionsGaiaIdentity `json:"googleGroup,omitempty"`

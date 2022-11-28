@@ -12,17 +12,17 @@ type GetOpenapiVersionOpenapiSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type GetOpenapiVersionOpenapiRequest struct {
-	PathParams GetOpenapiVersionOpenapiPathParams
-	Security   GetOpenapiVersionOpenapiSecurity
-}
-
 type GetOpenapiVersionOpenapi404ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
 }
 
 type GetOpenapiVersionOpenapi500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type GetOpenapiVersionOpenapiRequest struct {
+	PathParams GetOpenapiVersionOpenapiPathParams
+	Security   GetOpenapiVersionOpenapiSecurity
 }
 
 type GetOpenapiVersionOpenapiResponse struct {

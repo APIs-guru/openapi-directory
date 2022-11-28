@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BatchStrategyEnum } from "./batchstrategyenum";
 import { DataProcessing } from "./dataprocessing";
 import { ExperimentConfig } from "./experimentconfig";
@@ -10,43 +9,44 @@ import { TransformOutput } from "./transformoutput";
 import { TransformResources } from "./transformresources";
 
 
+
 export class CreateTransformJobRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BatchStrategy" })
+  @SpeakeasyMetadata({ data: "json, name=BatchStrategy" })
   batchStrategy?: BatchStrategyEnum;
 
-  @Metadata({ data: "json, name=DataProcessing" })
+  @SpeakeasyMetadata({ data: "json, name=DataProcessing" })
   dataProcessing?: DataProcessing;
 
-  @Metadata({ data: "json, name=Environment" })
+  @SpeakeasyMetadata({ data: "json, name=Environment" })
   environment?: Map<string, string>;
 
-  @Metadata({ data: "json, name=ExperimentConfig" })
+  @SpeakeasyMetadata({ data: "json, name=ExperimentConfig" })
   experimentConfig?: ExperimentConfig;
 
-  @Metadata({ data: "json, name=MaxConcurrentTransforms" })
+  @SpeakeasyMetadata({ data: "json, name=MaxConcurrentTransforms" })
   maxConcurrentTransforms?: number;
 
-  @Metadata({ data: "json, name=MaxPayloadInMB" })
+  @SpeakeasyMetadata({ data: "json, name=MaxPayloadInMB" })
   maxPayloadInMb?: number;
 
-  @Metadata({ data: "json, name=ModelClientConfig" })
+  @SpeakeasyMetadata({ data: "json, name=ModelClientConfig" })
   modelClientConfig?: ModelClientConfig;
 
-  @Metadata({ data: "json, name=ModelName" })
+  @SpeakeasyMetadata({ data: "json, name=ModelName" })
   modelName: string;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 
-  @Metadata({ data: "json, name=TransformInput" })
+  @SpeakeasyMetadata({ data: "json, name=TransformInput" })
   transformInput: TransformInput;
 
-  @Metadata({ data: "json, name=TransformJobName" })
+  @SpeakeasyMetadata({ data: "json, name=TransformJobName" })
   transformJobName: string;
 
-  @Metadata({ data: "json, name=TransformOutput" })
+  @SpeakeasyMetadata({ data: "json, name=TransformOutput" })
   transformOutput: TransformOutput;
 
-  @Metadata({ data: "json, name=TransformResources" })
+  @SpeakeasyMetadata({ data: "json, name=TransformResources" })
   transformResources: TransformResources;
 }

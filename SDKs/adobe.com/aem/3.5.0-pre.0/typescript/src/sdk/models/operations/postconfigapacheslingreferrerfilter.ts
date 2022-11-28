@@ -1,43 +1,44 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostConfigApacheSlingReferrerFilterQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=allow.empty" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=allow.empty" })
   allowEmpty?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=allow.empty@TypeHint" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=allow.empty@TypeHint" })
   allowEmptyAtTypeHint?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=allow.hosts" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=allow.hosts" })
   allowHosts?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=allow.hosts.regexp" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=allow.hosts.regexp" })
   allowHostsRegexp?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=allow.hosts.regexp@TypeHint" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=allow.hosts.regexp@TypeHint" })
   allowHostsRegexpAtTypeHint?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=allow.hosts@TypeHint" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=allow.hosts@TypeHint" })
   allowHostsAtTypeHint?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter.methods" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter.methods" })
   filterMethods?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter.methods@TypeHint" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter.methods@TypeHint" })
   filterMethodsAtTypeHint?: string;
 }
 
 
 export class PostConfigApacheSlingReferrerFilterRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PostConfigApacheSlingReferrerFilterQueryParams;
 }
 
 
 export class PostConfigApacheSlingReferrerFilterResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDescribeOrderableDbInstanceOptionsActionEnum(str, Enum):
     DESCRIBE_ORDERABLE_DB_INSTANCE_OPTIONS = "DescribeOrderableDBInstanceOptions"
@@ -10,10 +14,10 @@ class PostDescribeOrderableDbInstanceOptionsVersionEnum(str, Enum):
 
 @dataclass
 class PostDescribeOrderableDbInstanceOptionsQueryParams:
-    action: PostDescribeOrderableDbInstanceOptionsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: PostDescribeOrderableDbInstanceOptionsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDescribeOrderableDbInstanceOptionsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
     max_records: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'MaxRecords', 'style': 'form', 'explode': True }})
-    version: PostDescribeOrderableDbInstanceOptionsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,14 +33,14 @@ class PostDescribeOrderableDbInstanceOptionsHeaders:
 
 @dataclass
 class PostDescribeOrderableDbInstanceOptionsRequest:
-    query_params: PostDescribeOrderableDbInstanceOptionsQueryParams = field(default=None)
-    headers: PostDescribeOrderableDbInstanceOptionsHeaders = field(default=None)
+    headers: PostDescribeOrderableDbInstanceOptionsHeaders = field()
+    query_params: PostDescribeOrderableDbInstanceOptionsQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDescribeOrderableDbInstanceOptionsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

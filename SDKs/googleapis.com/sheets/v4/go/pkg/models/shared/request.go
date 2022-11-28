@@ -1,5 +1,7 @@
 package shared
 
+// Request
+// A single kind of update to apply to a spreadsheet.
 type Request struct {
 	AddBanding                   *AddBandingRequest                   `json:"addBanding,omitempty"`
 	AddChart                     *AddChartRequest                     `json:"addChart,omitempty"`

@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class DrivelabelsLabelsListMinimumRoleEnum(str, Enum):
@@ -38,12 +39,12 @@ class DrivelabelsLabelsListQueryParams:
 
 @dataclass
 class DrivelabelsLabelsListRequest:
-    query_params: DrivelabelsLabelsListQueryParams = field(default=None)
+    query_params: DrivelabelsLabelsListQueryParams = field()
     
 
 @dataclass
 class DrivelabelsLabelsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_apps_drive_labels_v2beta_list_labels_response: Optional[shared.GoogleAppsDriveLabelsV2betaListLabelsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

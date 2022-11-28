@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CategoryType } from "./categorytype";
 import { Deposit } from "./deposit";
 import { TimeDuration } from "./timeduration";
@@ -7,41 +6,42 @@ import { PaymentMethod } from "./paymentmethod";
 import { Error } from "./error";
 
 
+
 // SetPaymentPolicyResponse
 /** 
  * Complex type that that gets populated with a response containing a payment policy.
 **/
 export class SetPaymentPolicyResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=categoryTypes", elemType: shared.CategoryType })
+  @SpeakeasyMetadata({ data: "json, name=categoryTypes", elemType: CategoryType })
   categoryTypes?: CategoryType[];
 
-  @Metadata({ data: "json, name=deposit" })
+  @SpeakeasyMetadata({ data: "json, name=deposit" })
   deposit?: Deposit;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=fullPaymentDueIn" })
+  @SpeakeasyMetadata({ data: "json, name=fullPaymentDueIn" })
   fullPaymentDueIn?: TimeDuration;
 
-  @Metadata({ data: "json, name=immediatePay" })
+  @SpeakeasyMetadata({ data: "json, name=immediatePay" })
   immediatePay?: boolean;
 
-  @Metadata({ data: "json, name=marketplaceId" })
+  @SpeakeasyMetadata({ data: "json, name=marketplaceId" })
   marketplaceId?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=paymentInstructions" })
+  @SpeakeasyMetadata({ data: "json, name=paymentInstructions" })
   paymentInstructions?: string;
 
-  @Metadata({ data: "json, name=paymentMethods", elemType: shared.PaymentMethod })
+  @SpeakeasyMetadata({ data: "json, name=paymentMethods", elemType: PaymentMethod })
   paymentMethods?: PaymentMethod[];
 
-  @Metadata({ data: "json, name=paymentPolicyId" })
+  @SpeakeasyMetadata({ data: "json, name=paymentPolicyId" })
   paymentPolicyId?: string;
 
-  @Metadata({ data: "json, name=warnings", elemType: shared.Error })
+  @SpeakeasyMetadata({ data: "json, name=warnings", elemType: Error })
   warnings?: Error[];
 }

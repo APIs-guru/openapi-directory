@@ -32,7 +32,7 @@ type VmmigrationProjectsLocationsSourcesMigratingVmsCloneJobsCreateSecurity stru
 type VmmigrationProjectsLocationsSourcesMigratingVmsCloneJobsCreateRequest struct {
 	PathParams  VmmigrationProjectsLocationsSourcesMigratingVmsCloneJobsCreatePathParams
 	QueryParams VmmigrationProjectsLocationsSourcesMigratingVmsCloneJobsCreateQueryParams
-	Request     *shared.CloneJob `request:"mediaType=application/json"`
+	Request     *shared.CloneJobInput `request:"mediaType=application/json"`
 	Security    VmmigrationProjectsLocationsSourcesMigratingVmsCloneJobsCreateSecurity
 }
 

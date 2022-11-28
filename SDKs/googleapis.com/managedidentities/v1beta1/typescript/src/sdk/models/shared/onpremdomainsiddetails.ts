@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum OnPremDomainSidDetailsSidFilteringStateEnum {
-    SidFilteringStateUnspecified = "SID_FILTERING_STATE_UNSPECIFIED"
-,    Enabled = "ENABLED"
-,    Disabled = "DISABLED"
+    SidFilteringStateUnspecified = "SID_FILTERING_STATE_UNSPECIFIED",
+    Enabled = "ENABLED",
+    Disabled = "DISABLED"
 }
 
 
@@ -12,9 +13,9 @@ export enum OnPremDomainSidDetailsSidFilteringStateEnum {
  * OnPremDomainDetails is the message which contains details of on-prem domain which is trusted and needs to be migrated.
 **/
 export class OnPremDomainSidDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=sidFilteringState" })
+  @SpeakeasyMetadata({ data: "json, name=sidFilteringState" })
   sidFilteringState?: OnPremDomainSidDetailsSidFilteringStateEnum;
 }

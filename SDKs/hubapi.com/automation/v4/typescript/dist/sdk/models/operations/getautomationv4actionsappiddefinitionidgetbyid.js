@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetAutomationV4ActionsAppIdDefinitionIdGetByIdPathParams = /** @class */ (function (_super) {
     __extends(GetAutomationV4ActionsAppIdDefinitionIdGetByIdPathParams, _super);
@@ -30,11 +30,11 @@ var GetAutomationV4ActionsAppIdDefinitionIdGetByIdPathParams = /** @class */ (fu
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=appId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=appId" }),
         __metadata("design:type", Number)
     ], GetAutomationV4ActionsAppIdDefinitionIdGetByIdPathParams.prototype, "appId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=definitionId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=definitionId" }),
         __metadata("design:type", String)
     ], GetAutomationV4ActionsAppIdDefinitionIdGetByIdPathParams.prototype, "definitionId", void 0);
     return GetAutomationV4ActionsAppIdDefinitionIdGetByIdPathParams;
@@ -46,7 +46,7 @@ var GetAutomationV4ActionsAppIdDefinitionIdGetByIdQueryParams = /** @class */ (f
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=archived" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=archived" }),
         __metadata("design:type", Boolean)
     ], GetAutomationV4ActionsAppIdDefinitionIdGetByIdQueryParams.prototype, "archived", void 0);
     return GetAutomationV4ActionsAppIdDefinitionIdGetByIdQueryParams;
@@ -58,7 +58,7 @@ var GetAutomationV4ActionsAppIdDefinitionIdGetByIdSecurity = /** @class */ (func
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
         __metadata("design:type", shared.SchemeDeveloperHapikey)
     ], GetAutomationV4ActionsAppIdDefinitionIdGetByIdSecurity.prototype, "developerHapikey", void 0);
     return GetAutomationV4ActionsAppIdDefinitionIdGetByIdSecurity;
@@ -70,15 +70,15 @@ var GetAutomationV4ActionsAppIdDefinitionIdGetByIdRequest = /** @class */ (funct
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAutomationV4ActionsAppIdDefinitionIdGetByIdPathParams)
     ], GetAutomationV4ActionsAppIdDefinitionIdGetByIdRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAutomationV4ActionsAppIdDefinitionIdGetByIdQueryParams)
     ], GetAutomationV4ActionsAppIdDefinitionIdGetByIdRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAutomationV4ActionsAppIdDefinitionIdGetByIdSecurity)
     ], GetAutomationV4ActionsAppIdDefinitionIdGetByIdRequest.prototype, "security", void 0);
     return GetAutomationV4ActionsAppIdDefinitionIdGetByIdRequest;
@@ -90,19 +90,19 @@ var GetAutomationV4ActionsAppIdDefinitionIdGetByIdResponse = /** @class */ (func
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetAutomationV4ActionsAppIdDefinitionIdGetByIdResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetAutomationV4ActionsAppIdDefinitionIdGetByIdResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ExtensionActionDefinition)
     ], GetAutomationV4ActionsAppIdDefinitionIdGetByIdResponse.prototype, "extensionActionDefinition", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetAutomationV4ActionsAppIdDefinitionIdGetByIdResponse.prototype, "statusCode", void 0);
     return GetAutomationV4ActionsAppIdDefinitionIdGetByIdResponse;

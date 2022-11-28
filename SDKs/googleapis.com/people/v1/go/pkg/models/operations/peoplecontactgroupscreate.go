@@ -25,7 +25,7 @@ type PeopleContactGroupsCreateSecurity struct {
 
 type PeopleContactGroupsCreateRequest struct {
 	QueryParams PeopleContactGroupsCreateQueryParams
-	Request     *shared.CreateContactGroupRequest `request:"mediaType=application/json"`
+	Request     *shared.CreateContactGroupRequestInput `request:"mediaType=application/json"`
 	Security    PeopleContactGroupsCreateSecurity
 }
 

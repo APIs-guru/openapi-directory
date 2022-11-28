@@ -13,14 +13,14 @@ type ActivityMarkRepoNotificationsAsReadRequestBody struct {
 	LastReadAt *time.Time `json:"last_read_at,omitempty"`
 }
 
-type ActivityMarkRepoNotificationsAsReadRequest struct {
-	PathParams ActivityMarkRepoNotificationsAsReadPathParams
-	Request    *ActivityMarkRepoNotificationsAsReadRequestBody `request:"mediaType=application/json"`
-}
-
 type ActivityMarkRepoNotificationsAsRead202ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
 	URL     *string `json:"url,omitempty"`
+}
+
+type ActivityMarkRepoNotificationsAsReadRequest struct {
+	PathParams ActivityMarkRepoNotificationsAsReadPathParams
+	Request    *ActivityMarkRepoNotificationsAsReadRequestBody `request:"mediaType=application/json"`
 }
 
 type ActivityMarkRepoNotificationsAsReadResponse struct {

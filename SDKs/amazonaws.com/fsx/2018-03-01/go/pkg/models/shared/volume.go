@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Volume
+// Describes an Amazon FSx for NetApp ONTAP volume.
 type Volume struct {
 	CreationTime              *time.Time                 `json:"CreationTime,omitempty"`
 	FileSystemID              *string                    `json:"FileSystemId,omitempty"`

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Membership
 /**
  * Membership
@@ -33,39 +33,39 @@ var Membership = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=$id" }),
+        SpeakeasyMetadata({ data: "json, name=$id" }),
         __metadata("design:type", String)
     ], Membership.prototype, "dollarId", void 0);
     __decorate([
-        Metadata({ data: "json, name=confirm" }),
+        SpeakeasyMetadata({ data: "json, name=confirm" }),
         __metadata("design:type", Boolean)
     ], Membership.prototype, "confirm", void 0);
     __decorate([
-        Metadata({ data: "json, name=email" }),
+        SpeakeasyMetadata({ data: "json, name=email" }),
         __metadata("design:type", String)
     ], Membership.prototype, "email", void 0);
     __decorate([
-        Metadata({ data: "json, name=invited" }),
+        SpeakeasyMetadata({ data: "json, name=invited" }),
         __metadata("design:type", Number)
     ], Membership.prototype, "invited", void 0);
     __decorate([
-        Metadata({ data: "json, name=joined" }),
+        SpeakeasyMetadata({ data: "json, name=joined" }),
         __metadata("design:type", Number)
     ], Membership.prototype, "joined", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Membership.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=roles" }),
+        SpeakeasyMetadata({ data: "json, name=roles" }),
         __metadata("design:type", Array)
     ], Membership.prototype, "roles", void 0);
     __decorate([
-        Metadata({ data: "json, name=teamId" }),
+        SpeakeasyMetadata({ data: "json, name=teamId" }),
         __metadata("design:type", String)
     ], Membership.prototype, "teamId", void 0);
     __decorate([
-        Metadata({ data: "json, name=userId" }),
+        SpeakeasyMetadata({ data: "json, name=userId" }),
         __metadata("design:type", String)
     ], Membership.prototype, "userId", void 0);
     return Membership;

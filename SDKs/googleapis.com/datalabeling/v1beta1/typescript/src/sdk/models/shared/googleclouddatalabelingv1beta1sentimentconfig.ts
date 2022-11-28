@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDatalabelingV1beta1SentimentConfig
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Config for setting up sentiments.
 **/
 export class GoogleCloudDatalabelingV1beta1SentimentConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enableLabelSentimentSelection" })
+  @SpeakeasyMetadata({ data: "json, name=enableLabelSentimentSelection" })
   enableLabelSentimentSelection?: boolean;
 }

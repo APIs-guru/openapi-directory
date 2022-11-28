@@ -1,11 +1,12 @@
 
 
+
 export enum JobRunStateEnum {
-    Starting = "STARTING"
-,    Running = "RUNNING"
-,    Stopping = "STOPPING"
-,    Stopped = "STOPPED"
-,    Succeeded = "SUCCEEDED"
-,    Failed = "FAILED"
-,    Timeout = "TIMEOUT"
+    Starting = "STARTING",
+    Running = "RUNNING",
+    Stopping = "STOPPING",
+    Stopped = "STOPPED",
+    Succeeded = "SUCCEEDED",
+    Failed = "FAILED",
+    Timeout = "TIMEOUT"
 }

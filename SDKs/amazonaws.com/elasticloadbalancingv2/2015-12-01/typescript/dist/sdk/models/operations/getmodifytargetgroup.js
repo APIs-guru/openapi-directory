@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetModifyTargetGroupActionEnum;
 (function (GetModifyTargetGroupActionEnum) {
     GetModifyTargetGroupActionEnum["ModifyTargetGroup"] = "ModifyTargetGroup";
@@ -47,11 +47,11 @@ var GetModifyTargetGroupMatcher = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, name=GrpcCode" }),
+        SpeakeasyMetadata({ data: "queryParam, name=GrpcCode" }),
         __metadata("design:type", String)
     ], GetModifyTargetGroupMatcher.prototype, "grpcCode", void 0);
     __decorate([
-        Metadata({ data: "queryParam, name=HttpCode" }),
+        SpeakeasyMetadata({ data: "queryParam, name=HttpCode" }),
         __metadata("design:type", String)
     ], GetModifyTargetGroupMatcher.prototype, "httpCode", void 0);
     return GetModifyTargetGroupMatcher;
@@ -67,51 +67,51 @@ var GetModifyTargetGroupQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" }),
         __metadata("design:type", String)
     ], GetModifyTargetGroupQueryParams.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=HealthCheckEnabled" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=HealthCheckEnabled" }),
         __metadata("design:type", Boolean)
     ], GetModifyTargetGroupQueryParams.prototype, "healthCheckEnabled", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=HealthCheckIntervalSeconds" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=HealthCheckIntervalSeconds" }),
         __metadata("design:type", Number)
     ], GetModifyTargetGroupQueryParams.prototype, "healthCheckIntervalSeconds", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=HealthCheckPath" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=HealthCheckPath" }),
         __metadata("design:type", String)
     ], GetModifyTargetGroupQueryParams.prototype, "healthCheckPath", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=HealthCheckPort" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=HealthCheckPort" }),
         __metadata("design:type", String)
     ], GetModifyTargetGroupQueryParams.prototype, "healthCheckPort", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=HealthCheckProtocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=HealthCheckProtocol" }),
         __metadata("design:type", String)
     ], GetModifyTargetGroupQueryParams.prototype, "healthCheckProtocol", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=HealthCheckTimeoutSeconds" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=HealthCheckTimeoutSeconds" }),
         __metadata("design:type", Number)
     ], GetModifyTargetGroupQueryParams.prototype, "healthCheckTimeoutSeconds", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=HealthyThresholdCount" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=HealthyThresholdCount" }),
         __metadata("design:type", Number)
     ], GetModifyTargetGroupQueryParams.prototype, "healthyThresholdCount", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Matcher" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Matcher" }),
         __metadata("design:type", GetModifyTargetGroupMatcher)
     ], GetModifyTargetGroupQueryParams.prototype, "matcher", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=TargetGroupArn" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=TargetGroupArn" }),
         __metadata("design:type", String)
     ], GetModifyTargetGroupQueryParams.prototype, "targetGroupArn", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=UnhealthyThresholdCount" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=UnhealthyThresholdCount" }),
         __metadata("design:type", Number)
     ], GetModifyTargetGroupQueryParams.prototype, "unhealthyThresholdCount", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" }),
         __metadata("design:type", String)
     ], GetModifyTargetGroupQueryParams.prototype, "version", void 0);
     return GetModifyTargetGroupQueryParams;
@@ -123,31 +123,31 @@ var GetModifyTargetGroupHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], GetModifyTargetGroupHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], GetModifyTargetGroupHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], GetModifyTargetGroupHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], GetModifyTargetGroupHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], GetModifyTargetGroupHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], GetModifyTargetGroupHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], GetModifyTargetGroupHeaders.prototype, "xAmzSignedHeaders", void 0);
     return GetModifyTargetGroupHeaders;
@@ -159,11 +159,11 @@ var GetModifyTargetGroupRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetModifyTargetGroupQueryParams)
     ], GetModifyTargetGroupRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetModifyTargetGroupHeaders)
     ], GetModifyTargetGroupRequest.prototype, "headers", void 0);
     return GetModifyTargetGroupRequest;
@@ -175,15 +175,15 @@ var GetModifyTargetGroupResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetModifyTargetGroupResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetModifyTargetGroupResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetModifyTargetGroupResponse.prototype, "statusCode", void 0);
     return GetModifyTargetGroupResponse;

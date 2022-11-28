@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // InferenceS3OutputConfiguration
 /**
  *  Specifies configuration information for the output results from the inference, including output S3 location.
@@ -33,11 +33,11 @@ var InferenceS3OutputConfiguration = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Bucket" }),
+        SpeakeasyMetadata({ data: "json, name=Bucket" }),
         __metadata("design:type", String)
     ], InferenceS3OutputConfiguration.prototype, "bucket", void 0);
     __decorate([
-        Metadata({ data: "json, name=Prefix" }),
+        SpeakeasyMetadata({ data: "json, name=Prefix" }),
         __metadata("design:type", String)
     ], InferenceS3OutputConfiguration.prototype, "prefix", void 0);
     return InferenceS3OutputConfiguration;

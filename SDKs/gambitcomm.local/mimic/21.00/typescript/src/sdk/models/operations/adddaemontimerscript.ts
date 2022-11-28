@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AddDaemonTimerScriptPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=arg" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=arg" })
   arg: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=interval" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=interval" })
   interval: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=script" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=script" })
   script: string;
 }
 
 
 export class AddDaemonTimerScriptRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: AddDaemonTimerScriptPathParams;
 }
 
 
 export class AddDaemonTimerScriptResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   addDaemonTimerScript200ApplicationJsonString?: string;
 }

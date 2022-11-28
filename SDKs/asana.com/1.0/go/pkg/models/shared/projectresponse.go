@@ -95,6 +95,8 @@ const (
 	ProjectResponseIconEnumCoins          ProjectResponseIconEnum = "coins"
 )
 
+// ProjectResponseOwner
+// The current owner of the project, may be null.
 type ProjectResponseOwner struct {
 	Gid          *string `json:"gid,omitempty"`
 	Name         *string `json:"name,omitempty"`

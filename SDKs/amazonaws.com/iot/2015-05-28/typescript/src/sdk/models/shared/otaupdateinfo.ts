@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsJobExecutionsRolloutConfig } from "./awsjobexecutionsrolloutconfig";
 import { AwsJobPresignedUrlConfig } from "./awsjobpresignedurlconfig";
 import { ErrorInfo } from "./errorinfo";
@@ -9,56 +8,57 @@ import { ProtocolEnum } from "./protocolenum";
 import { TargetSelectionEnum } from "./targetselectionenum";
 
 
+
 // OtaUpdateInfo
 /** 
  * Information about an OTA update.
 **/
 export class OtaUpdateInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=additionalParameters" })
+  @SpeakeasyMetadata({ data: "json, name=additionalParameters" })
   additionalParameters?: Map<string, string>;
 
-  @Metadata({ data: "json, name=awsIotJobArn" })
+  @SpeakeasyMetadata({ data: "json, name=awsIotJobArn" })
   awsIotJobArn?: string;
 
-  @Metadata({ data: "json, name=awsIotJobId" })
+  @SpeakeasyMetadata({ data: "json, name=awsIotJobId" })
   awsIotJobId?: string;
 
-  @Metadata({ data: "json, name=awsJobExecutionsRolloutConfig" })
+  @SpeakeasyMetadata({ data: "json, name=awsJobExecutionsRolloutConfig" })
   awsJobExecutionsRolloutConfig?: AwsJobExecutionsRolloutConfig;
 
-  @Metadata({ data: "json, name=awsJobPresignedUrlConfig" })
+  @SpeakeasyMetadata({ data: "json, name=awsJobPresignedUrlConfig" })
   awsJobPresignedUrlConfig?: AwsJobPresignedUrlConfig;
 
-  @Metadata({ data: "json, name=creationDate" })
+  @SpeakeasyMetadata({ data: "json, name=creationDate" })
   creationDate?: Date;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=errorInfo" })
+  @SpeakeasyMetadata({ data: "json, name=errorInfo" })
   errorInfo?: ErrorInfo;
 
-  @Metadata({ data: "json, name=lastModifiedDate" })
+  @SpeakeasyMetadata({ data: "json, name=lastModifiedDate" })
   lastModifiedDate?: Date;
 
-  @Metadata({ data: "json, name=otaUpdateArn" })
+  @SpeakeasyMetadata({ data: "json, name=otaUpdateArn" })
   otaUpdateArn?: string;
 
-  @Metadata({ data: "json, name=otaUpdateFiles", elemType: shared.OtaUpdateFile })
+  @SpeakeasyMetadata({ data: "json, name=otaUpdateFiles", elemType: OtaUpdateFile })
   otaUpdateFiles?: OtaUpdateFile[];
 
-  @Metadata({ data: "json, name=otaUpdateId" })
+  @SpeakeasyMetadata({ data: "json, name=otaUpdateId" })
   otaUpdateId?: string;
 
-  @Metadata({ data: "json, name=otaUpdateStatus" })
+  @SpeakeasyMetadata({ data: "json, name=otaUpdateStatus" })
   otaUpdateStatus?: OtaUpdateStatusEnum;
 
-  @Metadata({ data: "json, name=protocols" })
+  @SpeakeasyMetadata({ data: "json, name=protocols" })
   protocols?: ProtocolEnum[];
 
-  @Metadata({ data: "json, name=targetSelection" })
+  @SpeakeasyMetadata({ data: "json, name=targetSelection" })
   targetSelection?: TargetSelectionEnum;
 
-  @Metadata({ data: "json, name=targets" })
+  @SpeakeasyMetadata({ data: "json, name=targets" })
   targets?: string[];
 }

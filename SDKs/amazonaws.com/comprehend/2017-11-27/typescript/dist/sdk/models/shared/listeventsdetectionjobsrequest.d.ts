@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { EventsDetectionJobFilter } from "./eventsdetectionjobfilter";
 export declare class ListEventsDetectionJobsRequest extends SpeakeasyBase {
     filter?: EventsDetectionJobFilter;

@@ -4,8 +4,8 @@ from typing import List,Optional
 
 @dataclass
 class PutRealmUsersIDExecuteActionsEmailPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
-    realm: str = field(default=None, metadata={'path_param': { 'field_name': 'realm', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    realm: str = field(metadata={'path_param': { 'field_name': 'realm', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,13 +17,13 @@ class PutRealmUsersIDExecuteActionsEmailQueryParams:
 
 @dataclass
 class PutRealmUsersIDExecuteActionsEmailRequest:
-    path_params: PutRealmUsersIDExecuteActionsEmailPathParams = field(default=None)
-    query_params: PutRealmUsersIDExecuteActionsEmailQueryParams = field(default=None)
-    request: List[str] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    path_params: PutRealmUsersIDExecuteActionsEmailPathParams = field()
+    query_params: PutRealmUsersIDExecuteActionsEmailQueryParams = field()
+    request: List[str] = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PutRealmUsersIDExecuteActionsEmailResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

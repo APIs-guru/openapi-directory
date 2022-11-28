@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContextAttribute } from "./contextattribute";
 import { Interaction } from "./interaction";
 import { SearchQualityMetadata } from "./searchqualitymetadata";
+
 
 
 // ItemMetadata
@@ -10,42 +10,42 @@ import { SearchQualityMetadata } from "./searchqualitymetadata";
  * Available metadata fields for the item.
 **/
 export class ItemMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=containerName" })
+  @SpeakeasyMetadata({ data: "json, name=containerName" })
   containerName?: string;
 
-  @Metadata({ data: "json, name=contentLanguage" })
+  @SpeakeasyMetadata({ data: "json, name=contentLanguage" })
   contentLanguage?: string;
 
-  @Metadata({ data: "json, name=contextAttributes", elemType: shared.ContextAttribute })
+  @SpeakeasyMetadata({ data: "json, name=contextAttributes", elemType: ContextAttribute })
   contextAttributes?: ContextAttribute[];
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=hash" })
+  @SpeakeasyMetadata({ data: "json, name=hash" })
   hash?: string;
 
-  @Metadata({ data: "json, name=interactions", elemType: shared.Interaction })
+  @SpeakeasyMetadata({ data: "json, name=interactions", elemType: Interaction })
   interactions?: Interaction[];
 
-  @Metadata({ data: "json, name=keywords" })
+  @SpeakeasyMetadata({ data: "json, name=keywords" })
   keywords?: string[];
 
-  @Metadata({ data: "json, name=mimeType" })
+  @SpeakeasyMetadata({ data: "json, name=mimeType" })
   mimeType?: string;
 
-  @Metadata({ data: "json, name=objectType" })
+  @SpeakeasyMetadata({ data: "json, name=objectType" })
   objectType?: string;
 
-  @Metadata({ data: "json, name=searchQualityMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=searchQualityMetadata" })
   searchQualityMetadata?: SearchQualityMetadata;
 
-  @Metadata({ data: "json, name=sourceRepositoryUrl" })
+  @SpeakeasyMetadata({ data: "json, name=sourceRepositoryUrl" })
   sourceRepositoryUrl?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 }

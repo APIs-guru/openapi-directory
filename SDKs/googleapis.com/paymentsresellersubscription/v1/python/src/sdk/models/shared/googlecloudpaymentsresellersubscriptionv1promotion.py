@@ -1,9 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googlecloudpaymentsresellersubscriptionv1duration
-from . import googlecloudpaymentsresellersubscriptionv1promotionintroductorypricingdetails
-from . import googletypelocalizedtext
+from sdk import utils
+from . import *
 
 class GoogleCloudPaymentsResellerSubscriptionV1PromotionPromotionTypeEnum(str, Enum):
     PROMOTION_TYPE_UNSPECIFIED = "PROMOTION_TYPE_UNSPECIFIED"
@@ -14,13 +14,17 @@ class GoogleCloudPaymentsResellerSubscriptionV1PromotionPromotionTypeEnum(str, E
 @dataclass_json
 @dataclass
 class GoogleCloudPaymentsResellerSubscriptionV1Promotion:
-    applicable_products: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'applicableProducts' }})
-    end_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'endTime' }})
-    free_trial_duration: Optional[googlecloudpaymentsresellersubscriptionv1duration.GoogleCloudPaymentsResellerSubscriptionV1Duration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'freeTrialDuration' }})
-    introductory_pricing_details: Optional[googlecloudpaymentsresellersubscriptionv1promotionintroductorypricingdetails.GoogleCloudPaymentsResellerSubscriptionV1PromotionIntroductoryPricingDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'introductoryPricingDetails' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    promotion_type: Optional[GoogleCloudPaymentsResellerSubscriptionV1PromotionPromotionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'promotionType' }})
-    region_codes: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'regionCodes' }})
-    start_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'startTime' }})
-    titles: Optional[List[googletypelocalizedtext.GoogleTypeLocalizedText]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'titles' }})
+    r"""GoogleCloudPaymentsResellerSubscriptionV1Promotion
+    A Promotion resource that defines a promotion for a subscription that can be resold.
+    """
+    
+    applicable_products: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('applicableProducts') }})
+    end_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('endTime') }})
+    free_trial_duration: Optional[GoogleCloudPaymentsResellerSubscriptionV1Duration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('freeTrialDuration') }})
+    introductory_pricing_details: Optional[GoogleCloudPaymentsResellerSubscriptionV1PromotionIntroductoryPricingDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('introductoryPricingDetails') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    promotion_type: Optional[GoogleCloudPaymentsResellerSubscriptionV1PromotionPromotionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('promotionType') }})
+    region_codes: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('regionCodes') }})
+    start_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('startTime') }})
+    titles: Optional[List[GoogleTypeLocalizedText]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('titles') }})
     

@@ -11,6 +11,8 @@ const (
 	GoogleMapsPlayablelocationsV3PlayerReportReasonsEnumTemporarilyInaccessible      GoogleMapsPlayablelocationsV3PlayerReportReasonsEnum = "TEMPORARILY_INACCESSIBLE"
 )
 
+// GoogleMapsPlayablelocationsV3PlayerReport
+// A report submitted by a player about a playable location that is considered inappropriate for use in the game.
 type GoogleMapsPlayablelocationsV3PlayerReport struct {
 	LanguageCode  *string                                                `json:"languageCode,omitempty"`
 	LocationName  *string                                                `json:"locationName,omitempty"`

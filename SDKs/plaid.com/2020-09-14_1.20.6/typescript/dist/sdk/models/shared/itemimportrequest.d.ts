@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ItemImportRequestOptions } from "./itemimportrequestoptions";
 import { ProductsEnum } from "./productsenum";
 import { ItemImportRequestUserAuth } from "./itemimportrequestuserauth";

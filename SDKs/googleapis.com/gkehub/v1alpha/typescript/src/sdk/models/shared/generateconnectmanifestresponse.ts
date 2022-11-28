@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConnectAgentResource } from "./connectagentresource";
+
 
 
 // GenerateConnectManifestResponse
@@ -8,6 +8,6 @@ import { ConnectAgentResource } from "./connectagentresource";
  * GenerateConnectManifestResponse contains manifest information for installing/upgrading a Connect agent.
 **/
 export class GenerateConnectManifestResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=manifest", elemType: shared.ConnectAgentResource })
+  @SpeakeasyMetadata({ data: "json, name=manifest", elemType: ConnectAgentResource })
   manifest?: ConnectAgentResource[];
 }

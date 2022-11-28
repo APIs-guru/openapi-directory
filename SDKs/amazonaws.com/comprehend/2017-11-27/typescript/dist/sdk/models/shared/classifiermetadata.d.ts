@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ClassifierEvaluationMetrics } from "./classifierevaluationmetrics";
 /**
  * Provides information about a document classifier.

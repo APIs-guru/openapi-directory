@@ -1,33 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateDynamicThingGroupPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=thingGroupName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=thingGroupName" })
   thingGroupName: string;
 }
 
 
 export class UpdateDynamicThingGroupHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -37,69 +38,69 @@ export class UpdateDynamicThingGroupHeaders extends SpeakeasyBase {
  * Thing group properties.
 **/
 export class UpdateDynamicThingGroupRequestBodyThingGroupProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attributePayload" })
+  @SpeakeasyMetadata({ data: "json, name=attributePayload" })
   attributePayload?: shared.AttributePayload;
 
-  @Metadata({ data: "json, name=thingGroupDescription" })
+  @SpeakeasyMetadata({ data: "json, name=thingGroupDescription" })
   thingGroupDescription?: string;
 }
 
 
 export class UpdateDynamicThingGroupRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=expectedVersion" })
+  @SpeakeasyMetadata({ data: "json, name=expectedVersion" })
   expectedVersion?: number;
 
-  @Metadata({ data: "json, name=indexName" })
+  @SpeakeasyMetadata({ data: "json, name=indexName" })
   indexName?: string;
 
-  @Metadata({ data: "json, name=queryString" })
+  @SpeakeasyMetadata({ data: "json, name=queryString" })
   queryString?: string;
 
-  @Metadata({ data: "json, name=queryVersion" })
+  @SpeakeasyMetadata({ data: "json, name=queryVersion" })
   queryVersion?: string;
 
-  @Metadata({ data: "json, name=thingGroupProperties" })
+  @SpeakeasyMetadata({ data: "json, name=thingGroupProperties" })
   thingGroupProperties: UpdateDynamicThingGroupRequestBodyThingGroupProperties;
 }
 
 
 export class UpdateDynamicThingGroupRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateDynamicThingGroupPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdateDynamicThingGroupHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdateDynamicThingGroupRequestBody;
 }
 
 
 export class UpdateDynamicThingGroupResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalFailureException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidQueryException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateDynamicThingGroupResponse?: shared.UpdateDynamicThingGroupResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   versionConflictException?: any;
 }

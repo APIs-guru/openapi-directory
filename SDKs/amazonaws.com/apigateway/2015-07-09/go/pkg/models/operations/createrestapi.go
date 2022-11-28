@@ -21,6 +21,8 @@ const (
 	CreateRestAPIRequestBodyAPIKeySourceEnumAuthorizer CreateRestAPIRequestBodyAPIKeySourceEnum = "AUTHORIZER"
 )
 
+// CreateRestAPIRequestBodyEndpointConfiguration
+// The endpoint configuration to indicate the types of endpoints an API (<a>RestApi</a>) or its custom domain name (<a>DomainName</a>) has.
 type CreateRestAPIRequestBodyEndpointConfiguration struct {
 	Types          []shared.EndpointTypeEnum `json:"types,omitempty"`
 	VpcEndpointIds []string                  `json:"vpcEndpointIds,omitempty"`

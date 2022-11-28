@@ -5,12 +5,12 @@ from sdk.models import shared
 
 @dataclass
 class WhenAResponseIsReceivedRequest:
-    request: shared.SubscribeToEventBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.SubscribeToEventBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class WhenAResponseIsReceivedResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     event_subscriptions_response: Optional[shared.EventSubscriptionsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

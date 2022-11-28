@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// UserDefinedFunction
+// Represents the equivalent of a Hive user-defined function (<code>UDF</code>) definition.
 type UserDefinedFunction struct {
 	CatalogID    *string            `json:"CatalogId,omitempty"`
 	ClassName    *string            `json:"ClassName,omitempty"`

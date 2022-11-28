@@ -8,11 +8,8 @@ type PostServersIDActionsDetachFromNetworkDetachFromNetworkRequest struct {
 	Network int64 `json:"network"`
 }
 
-type PostServersIDActionsDetachFromNetworkRequest struct {
-	PathParams PostServersIDActionsDetachFromNetworkPathParams
-	Request    *PostServersIDActionsDetachFromNetworkDetachFromNetworkRequest `request:"mediaType=application/json"`
-}
-
+// PostServersIDActionsDetachFromNetworkActionResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type PostServersIDActionsDetachFromNetworkActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -44,6 +41,11 @@ type PostServersIDActionsDetachFromNetworkActionResponseAction struct {
 
 type PostServersIDActionsDetachFromNetworkActionResponse struct {
 	Action PostServersIDActionsDetachFromNetworkActionResponseAction `json:"action"`
+}
+
+type PostServersIDActionsDetachFromNetworkRequest struct {
+	PathParams PostServersIDActionsDetachFromNetworkPathParams
+	Request    *PostServersIDActionsDetachFromNetworkDetachFromNetworkRequest `request:"mediaType=application/json"`
 }
 
 type PostServersIDActionsDetachFromNetworkResponse struct {

@@ -22,34 +22,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ProtectionResult = /** @class */ (function (_super) {
     __extends(ProtectionResult, _super);
     function ProtectionResult() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ozone" }),
+        SpeakeasyMetadata({ data: "json, name=ozone" }),
         __metadata("design:type", Number)
     ], ProtectionResult.prototype, "ozone", void 0);
     __decorate([
-        Metadata({ data: "json, name=ozone_time" }),
+        SpeakeasyMetadata({ data: "json, name=ozone_time" }),
         __metadata("design:type", String)
     ], ProtectionResult.prototype, "ozoneTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=uv" }),
+        SpeakeasyMetadata({ data: "json, name=uv" }),
         __metadata("design:type", Number)
     ], ProtectionResult.prototype, "uv", void 0);
     __decorate([
-        Metadata({ data: "json, name=uv_max" }),
+        SpeakeasyMetadata({ data: "json, name=uv_max" }),
         __metadata("design:type", Number)
     ], ProtectionResult.prototype, "uvMax", void 0);
     __decorate([
-        Metadata({ data: "json, name=uv_max_time" }),
+        SpeakeasyMetadata({ data: "json, name=uv_max_time" }),
         __metadata("design:type", String)
     ], ProtectionResult.prototype, "uvMaxTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=uv_time" }),
+        SpeakeasyMetadata({ data: "json, name=uv_time" }),
         __metadata("design:type", String)
     ], ProtectionResult.prototype, "uvTime", void 0);
     return ProtectionResult;

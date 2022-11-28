@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class IntegrationsProjectsLocationsSfdcInstancesListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -29,20 +30,20 @@ class IntegrationsProjectsLocationsSfdcInstancesListQueryParams:
 
 @dataclass
 class IntegrationsProjectsLocationsSfdcInstancesListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class IntegrationsProjectsLocationsSfdcInstancesListRequest:
-    path_params: IntegrationsProjectsLocationsSfdcInstancesListPathParams = field(default=None)
-    query_params: IntegrationsProjectsLocationsSfdcInstancesListQueryParams = field(default=None)
-    security: IntegrationsProjectsLocationsSfdcInstancesListSecurity = field(default=None)
+    path_params: IntegrationsProjectsLocationsSfdcInstancesListPathParams = field()
+    query_params: IntegrationsProjectsLocationsSfdcInstancesListQueryParams = field()
+    security: IntegrationsProjectsLocationsSfdcInstancesListSecurity = field()
     
 
 @dataclass
 class IntegrationsProjectsLocationsSfdcInstancesListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_integrations_v1alpha_list_sfdc_instances_response: Optional[shared.GoogleCloudIntegrationsV1alphaListSfdcInstancesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

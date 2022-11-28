@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetFunctionConcurrencyResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ReservedConcurrentExecutions" })
+  @SpeakeasyMetadata({ data: "json, name=ReservedConcurrentExecutions" })
   reservedConcurrentExecutions?: number;
 }

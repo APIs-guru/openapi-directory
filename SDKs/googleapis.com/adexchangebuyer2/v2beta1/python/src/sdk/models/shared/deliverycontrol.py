@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import frequencycap
+from sdk import utils
+from . import *
 
 class DeliveryControlCreativeBlockingLevelEnum(str, Enum):
     CREATIVE_BLOCKING_LEVEL_UNSPECIFIED = "CREATIVE_BLOCKING_LEVEL_UNSPECIFIED"
@@ -18,7 +20,11 @@ class DeliveryControlDeliveryRateTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class DeliveryControl:
-    creative_blocking_level: Optional[DeliveryControlCreativeBlockingLevelEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'creativeBlockingLevel' }})
-    delivery_rate_type: Optional[DeliveryControlDeliveryRateTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deliveryRateType' }})
-    frequency_caps: Optional[List[frequencycap.FrequencyCap]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'frequencyCaps' }})
+    r"""DeliveryControl
+    Message contains details about how the deals will be paced.
+    """
+    
+    creative_blocking_level: Optional[DeliveryControlCreativeBlockingLevelEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('creativeBlockingLevel') }})
+    delivery_rate_type: Optional[DeliveryControlDeliveryRateTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('deliveryRateType') }})
+    frequency_caps: Optional[List[FrequencyCap]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('frequencyCaps') }})
     

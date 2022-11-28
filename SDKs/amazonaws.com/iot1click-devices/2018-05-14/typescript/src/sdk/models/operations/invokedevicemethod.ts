@@ -1,33 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class InvokeDeviceMethodPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=deviceId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=deviceId" })
   deviceId: string;
 }
 
 
 export class InvokeDeviceMethodHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -37,60 +38,60 @@ export class InvokeDeviceMethodHeaders extends SpeakeasyBase {
  * The device method to invoke.
 **/
 export class InvokeDeviceMethodRequestBodyDeviceMethod extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DeviceType" })
+  @SpeakeasyMetadata({ data: "json, name=DeviceType" })
   deviceType?: string;
 
-  @Metadata({ data: "json, name=MethodName" })
+  @SpeakeasyMetadata({ data: "json, name=MethodName" })
   methodName?: string;
 }
 
 
 export class InvokeDeviceMethodRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deviceMethod" })
+  @SpeakeasyMetadata({ data: "json, name=deviceMethod" })
   deviceMethod?: InvokeDeviceMethodRequestBodyDeviceMethod;
 
-  @Metadata({ data: "json, name=deviceMethodParameters" })
+  @SpeakeasyMetadata({ data: "json, name=deviceMethodParameters" })
   deviceMethodParameters?: string;
 }
 
 
 export class InvokeDeviceMethodRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: InvokeDeviceMethodPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: InvokeDeviceMethodHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: InvokeDeviceMethodRequestBody;
 }
 
 
 export class InvokeDeviceMethodResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalFailureException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invokeDeviceMethodResponse?: shared.InvokeDeviceMethodResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   preconditionFailedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   rangeNotSatisfiableException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceConflictException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

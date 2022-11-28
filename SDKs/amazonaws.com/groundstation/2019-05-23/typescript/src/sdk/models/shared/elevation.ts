@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AngleUnitsEnum } from "./angleunitsenum";
+
 
 
 // Elevation
@@ -7,9 +8,9 @@ import { AngleUnitsEnum } from "./angleunitsenum";
  * Elevation angle of the satellite in the sky during a contact.
 **/
 export class Elevation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=unit" })
+  @SpeakeasyMetadata({ data: "json, name=unit" })
   unit: AngleUnitsEnum;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value: number;
 }

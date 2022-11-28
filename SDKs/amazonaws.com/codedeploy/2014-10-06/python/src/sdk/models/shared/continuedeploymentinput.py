@@ -1,12 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import deploymentwaittype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ContinueDeploymentInput:
-    deployment_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deploymentId' }})
-    deployment_wait_type: Optional[deploymentwaittype_enum.DeploymentWaitTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deploymentWaitType' }})
+    deployment_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('deploymentId') }})
+    deployment_wait_type: Optional[DeploymentWaitTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('deploymentWaitType') }})
     

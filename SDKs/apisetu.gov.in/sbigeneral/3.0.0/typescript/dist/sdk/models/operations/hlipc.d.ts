@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class HlipcRequestBodyCertificateParameters extends SpeakeasyBase {
     udf1: string;
@@ -16,10 +16,6 @@ export declare class HlipcRequestBody extends SpeakeasyBase {
 export declare class HlipcSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class HlipcRequest extends SpeakeasyBase {
-    request?: HlipcRequestBody;
-    security: HlipcSecurity;
 }
 export declare enum Hlipc400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -102,6 +98,10 @@ export declare enum Hlipc504ApplicationJsonErrorDescriptionEnum {
 export declare class Hlipc504ApplicationJson extends SpeakeasyBase {
     error?: Hlipc504ApplicationJsonErrorEnum;
     errorDescription?: Hlipc504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class HlipcRequest extends SpeakeasyBase {
+    request?: HlipcRequestBody;
+    security: HlipcSecurity;
 }
 export declare class HlipcResponse extends SpeakeasyBase {
     contentType: string;

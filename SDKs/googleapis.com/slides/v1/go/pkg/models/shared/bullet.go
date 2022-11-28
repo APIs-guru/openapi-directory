@@ -1,5 +1,7 @@
 package shared
 
+// Bullet
+// Describes the bullet of a paragraph.
 type Bullet struct {
 	BulletStyle  *TextStyle `json:"bulletStyle,omitempty"`
 	Glyph        *string    `json:"glyph,omitempty"`

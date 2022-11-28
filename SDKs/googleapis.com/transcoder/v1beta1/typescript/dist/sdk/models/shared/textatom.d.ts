@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { TextInput } from "./textinput";
 /**
  * The mapping for the `Job.edit_list` atoms with text `EditAtom.inputs`.

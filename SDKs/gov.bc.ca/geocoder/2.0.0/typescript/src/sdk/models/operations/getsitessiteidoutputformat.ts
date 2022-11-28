@@ -1,62 +1,63 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetSitesSiteIdOutputFormatOutputFormatEnum {
-    Json = "json"
-,    Geojson = "geojson"
-,    Xhtml = "xhtml"
-,    Kml = "kml"
-,    Gml = "gml"
-,    Csv = "csv"
-,    Shpz = "shpz"
+    Json = "json",
+    Geojson = "geojson",
+    Xhtml = "xhtml",
+    Kml = "kml",
+    Gml = "gml",
+    Csv = "csv",
+    Shpz = "shpz"
 }
 
 
 export class GetSitesSiteIdOutputFormatPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=outputFormat" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=outputFormat" })
   outputFormat: GetSitesSiteIdOutputFormatOutputFormatEnum;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=siteID" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=siteID" })
   siteId: string;
 }
 
 export enum GetSitesSiteIdOutputFormatLocationDescriptorEnum {
-    Any = "any"
-,    AccessPoint = "accessPoint"
-,    FrontDoorPoint = "frontDoorPoint"
-,    ParcelPoint = "parcelPoint"
-,    RooftopPoint = "rooftopPoint"
-,    RoutingPoint = "routingPoint"
+    Any = "any",
+    AccessPoint = "accessPoint",
+    FrontDoorPoint = "frontDoorPoint",
+    ParcelPoint = "parcelPoint",
+    RooftopPoint = "rooftopPoint",
+    RoutingPoint = "routingPoint"
 }
 
 
 export class GetSitesSiteIdOutputFormatQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=brief" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=brief" })
   brief?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=locationDescriptor" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=locationDescriptor" })
   locationDescriptor?: GetSitesSiteIdOutputFormatLocationDescriptorEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=outputSRS" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=outputSRS" })
   outputSrs?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=setBack" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=setBack" })
   setBack?: number;
 }
 
 
 export class GetSitesSiteIdOutputFormatRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetSitesSiteIdOutputFormatPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetSitesSiteIdOutputFormatQueryParams;
 }
 
 
 export class GetSitesSiteIdOutputFormatResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

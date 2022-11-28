@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudApigeeV1SharedFlowRevision
+// The metadata describing a shared flow revision.
 type GoogleCloudApigeeV1SharedFlowRevision struct {
 	ConfigurationVersion       *GoogleCloudApigeeV1ConfigVersion `json:"configurationVersion,omitempty"`
 	ContextInfo                *string                           `json:"contextInfo,omitempty"`

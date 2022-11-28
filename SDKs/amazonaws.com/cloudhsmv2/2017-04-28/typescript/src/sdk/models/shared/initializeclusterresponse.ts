@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ClusterStateEnum } from "./clusterstateenum";
 
 
+
 export class InitializeClusterResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=State" })
+  @SpeakeasyMetadata({ data: "json, name=State" })
   state?: ClusterStateEnum;
 
-  @Metadata({ data: "json, name=StateMessage" })
+  @SpeakeasyMetadata({ data: "json, name=StateMessage" })
   stateMessage?: string;
 }

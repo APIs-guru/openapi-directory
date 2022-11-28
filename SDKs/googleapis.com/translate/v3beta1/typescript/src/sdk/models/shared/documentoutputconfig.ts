@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GcsDestination } from "./gcsdestination";
+
 
 
 // DocumentOutputConfig
@@ -7,9 +8,9 @@ import { GcsDestination } from "./gcsdestination";
  * A document translation request output config.
 **/
 export class DocumentOutputConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=gcsDestination" })
+  @SpeakeasyMetadata({ data: "json, name=gcsDestination" })
   gcsDestination?: GcsDestination;
 
-  @Metadata({ data: "json, name=mimeType" })
+  @SpeakeasyMetadata({ data: "json, name=mimeType" })
   mimeType?: string;
 }

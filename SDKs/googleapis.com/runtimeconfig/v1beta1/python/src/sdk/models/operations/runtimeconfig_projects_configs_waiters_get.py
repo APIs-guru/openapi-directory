@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class RuntimeconfigProjectsConfigsWaitersGetPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class RuntimeconfigProjectsConfigsWaitersGetQueryParams:
 
 @dataclass
 class RuntimeconfigProjectsConfigsWaitersGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class RuntimeconfigProjectsConfigsWaitersGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,14 +44,14 @@ class RuntimeconfigProjectsConfigsWaitersGetSecurity:
 
 @dataclass
 class RuntimeconfigProjectsConfigsWaitersGetRequest:
-    path_params: RuntimeconfigProjectsConfigsWaitersGetPathParams = field(default=None)
-    query_params: RuntimeconfigProjectsConfigsWaitersGetQueryParams = field(default=None)
-    security: RuntimeconfigProjectsConfigsWaitersGetSecurity = field(default=None)
+    path_params: RuntimeconfigProjectsConfigsWaitersGetPathParams = field()
+    query_params: RuntimeconfigProjectsConfigsWaitersGetQueryParams = field()
+    security: RuntimeconfigProjectsConfigsWaitersGetSecurity = field()
     
 
 @dataclass
 class RuntimeconfigProjectsConfigsWaitersGetResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     waiter: Optional[shared.Waiter] = field(default=None)
     

@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 from typing import Any,List,Optional
+from sdk.models import shared
 
 
 @dataclass
@@ -9,18 +10,18 @@ class DeleteItemsQueryParams:
 
 @dataclass
 class DeleteItemsSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class DeleteItemsRequest:
-    query_params: DeleteItemsQueryParams = field(default=None)
-    security: DeleteItemsSecurity = field(default=None)
+    query_params: DeleteItemsQueryParams = field()
+    security: DeleteItemsSecurity = field()
     
 
 @dataclass
 class DeleteItemsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     problem_details: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

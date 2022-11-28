@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OnPremDomainDetails } from "./onpremdomaindetails";
+
 
 
 // EnableMigrationRequest
@@ -8,6 +8,6 @@ import { OnPremDomainDetails } from "./onpremdomaindetails";
  * EnableMigrationRequest is the request message for EnableMigration method.
 **/
 export class EnableMigrationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=migratingDomains", elemType: shared.OnPremDomainDetails })
+  @SpeakeasyMetadata({ data: "json, name=migratingDomains", elemType: OnPremDomainDetails })
   migratingDomains?: OnPremDomainDetails[];
 }

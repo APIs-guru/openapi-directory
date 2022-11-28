@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -20,20 +21,20 @@ class PolicytroubleshooterIamTroubleshootQueryParams:
 
 @dataclass
 class PolicytroubleshooterIamTroubleshootSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class PolicytroubleshooterIamTroubleshootRequest:
-    query_params: PolicytroubleshooterIamTroubleshootQueryParams = field(default=None)
+    query_params: PolicytroubleshooterIamTroubleshootQueryParams = field()
+    security: PolicytroubleshooterIamTroubleshootSecurity = field()
     request: Optional[shared.GoogleCloudPolicytroubleshooterV1betaTroubleshootIamPolicyRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: PolicytroubleshooterIamTroubleshootSecurity = field(default=None)
     
 
 @dataclass
 class PolicytroubleshooterIamTroubleshootResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_policytroubleshooter_v1beta_troubleshoot_iam_policy_response: Optional[shared.GoogleCloudPolicytroubleshooterV1betaTroubleshootIamPolicyResponse] = field(default=None)
-    status_code: int = field(default=None)
     

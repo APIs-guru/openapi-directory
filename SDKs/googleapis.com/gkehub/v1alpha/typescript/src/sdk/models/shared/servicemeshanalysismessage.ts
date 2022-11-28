@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ServiceMeshAnalysisMessageBase } from "./servicemeshanalysismessagebase";
+
 
 
 // ServiceMeshAnalysisMessage
@@ -7,15 +8,15 @@ import { ServiceMeshAnalysisMessageBase } from "./servicemeshanalysismessagebase
  * AnalysisMessage is a single message produced by an analyzer, and it used to communicate to the end user about the state of their Service Mesh configuration.
 **/
 export class ServiceMeshAnalysisMessage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=args" })
+  @SpeakeasyMetadata({ data: "json, name=args" })
   args?: Map<string, any>;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=messageBase" })
+  @SpeakeasyMetadata({ data: "json, name=messageBase" })
   messageBase?: ServiceMeshAnalysisMessageBase;
 
-  @Metadata({ data: "json, name=resourcePaths" })
+  @SpeakeasyMetadata({ data: "json, name=resourcePaths" })
   resourcePaths?: string[];
 }

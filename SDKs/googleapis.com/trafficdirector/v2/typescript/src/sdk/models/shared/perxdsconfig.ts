@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ClustersConfigDump } from "./clustersconfigdump";
 import { ListenersConfigDump } from "./listenersconfigdump";
 import { RoutesConfigDump } from "./routesconfigdump";
 import { ScopedRoutesConfigDump } from "./scopedroutesconfigdump";
 
+
 export enum PerXdsConfigStatusEnum {
-    Unknown = "UNKNOWN"
-,    Synced = "SYNCED"
-,    NotSent = "NOT_SENT"
-,    Stale = "STALE"
-,    Error = "ERROR"
+    Unknown = "UNKNOWN",
+    Synced = "SYNCED",
+    NotSent = "NOT_SENT",
+    Stale = "STALE",
+    Error = "ERROR"
 }
 
 
@@ -18,18 +19,18 @@ export enum PerXdsConfigStatusEnum {
  * Detailed config (per xDS) with status. [#next-free-field: 6]
 **/
 export class PerXdsConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clusterConfig" })
+  @SpeakeasyMetadata({ data: "json, name=clusterConfig" })
   clusterConfig?: ClustersConfigDump;
 
-  @Metadata({ data: "json, name=listenerConfig" })
+  @SpeakeasyMetadata({ data: "json, name=listenerConfig" })
   listenerConfig?: ListenersConfigDump;
 
-  @Metadata({ data: "json, name=routeConfig" })
+  @SpeakeasyMetadata({ data: "json, name=routeConfig" })
   routeConfig?: RoutesConfigDump;
 
-  @Metadata({ data: "json, name=scopedRouteConfig" })
+  @SpeakeasyMetadata({ data: "json, name=scopedRouteConfig" })
   scopedRouteConfig?: ScopedRoutesConfigDump;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: PerXdsConfigStatusEnum;
 }

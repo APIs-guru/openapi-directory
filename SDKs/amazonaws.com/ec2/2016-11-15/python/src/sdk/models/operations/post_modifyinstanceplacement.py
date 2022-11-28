@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostModifyInstancePlacementActionEnum(str, Enum):
     MODIFY_INSTANCE_PLACEMENT = "ModifyInstancePlacement"
@@ -10,8 +14,8 @@ class PostModifyInstancePlacementVersionEnum(str, Enum):
 
 @dataclass
 class PostModifyInstancePlacementQueryParams:
-    action: PostModifyInstancePlacementActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostModifyInstancePlacementVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostModifyInstancePlacementActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostModifyInstancePlacementVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostModifyInstancePlacementHeaders:
 
 @dataclass
 class PostModifyInstancePlacementRequest:
-    query_params: PostModifyInstancePlacementQueryParams = field(default=None)
-    headers: PostModifyInstancePlacementHeaders = field(default=None)
+    headers: PostModifyInstancePlacementHeaders = field()
+    query_params: PostModifyInstancePlacementQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostModifyInstancePlacementResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

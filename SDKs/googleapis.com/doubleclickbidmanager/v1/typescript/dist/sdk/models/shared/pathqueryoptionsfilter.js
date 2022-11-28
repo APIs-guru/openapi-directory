@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var PathQueryOptionsFilterFilterEnum;
 (function (PathQueryOptionsFilterFilterEnum) {
     PathQueryOptionsFilterFilterEnum["FilterUnknown"] = "FILTER_UNKNOWN";
@@ -334,15 +334,15 @@ var PathQueryOptionsFilter = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=filter" }),
+        SpeakeasyMetadata({ data: "json, name=filter" }),
         __metadata("design:type", String)
     ], PathQueryOptionsFilter.prototype, "filter", void 0);
     __decorate([
-        Metadata({ data: "json, name=match" }),
+        SpeakeasyMetadata({ data: "json, name=match" }),
         __metadata("design:type", String)
     ], PathQueryOptionsFilter.prototype, "match", void 0);
     __decorate([
-        Metadata({ data: "json, name=values" }),
+        SpeakeasyMetadata({ data: "json, name=values" }),
         __metadata("design:type", Array)
     ], PathQueryOptionsFilter.prototype, "values", void 0);
     return PathQueryOptionsFilter;

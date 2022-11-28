@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AppengineAppsFirewallIngressRulesDeletePathParams:
-    apps_id: str = field(default=None, metadata={'path_param': { 'field_name': 'appsId', 'style': 'simple', 'explode': False }})
-    ingress_rules_id: str = field(default=None, metadata={'path_param': { 'field_name': 'ingressRulesId', 'style': 'simple', 'explode': False }})
+    apps_id: str = field(metadata={'path_param': { 'field_name': 'appsId', 'style': 'simple', 'explode': False }})
+    ingress_rules_id: str = field(metadata={'path_param': { 'field_name': 'ingressRulesId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +27,20 @@ class AppengineAppsFirewallIngressRulesDeleteQueryParams:
 
 @dataclass
 class AppengineAppsFirewallIngressRulesDeleteSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AppengineAppsFirewallIngressRulesDeleteRequest:
-    path_params: AppengineAppsFirewallIngressRulesDeletePathParams = field(default=None)
-    query_params: AppengineAppsFirewallIngressRulesDeleteQueryParams = field(default=None)
-    security: AppengineAppsFirewallIngressRulesDeleteSecurity = field(default=None)
+    path_params: AppengineAppsFirewallIngressRulesDeletePathParams = field()
+    query_params: AppengineAppsFirewallIngressRulesDeleteQueryParams = field()
+    security: AppengineAppsFirewallIngressRulesDeleteSecurity = field()
     
 
 @dataclass
 class AppengineAppsFirewallIngressRulesDeleteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

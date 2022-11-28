@@ -1,11 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import loglevel_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ZeppelinMonitoringConfigurationUpdate:
-    log_level_update: loglevel_enum.LogLevelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LogLevelUpdate' }})
+    r"""ZeppelinMonitoringConfigurationUpdate
+    Updates to the monitoring configuration for Apache Zeppelin within a Kinesis Data Analytics Studio notebook.
+    """
+    
+    log_level_update: LogLevelEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('LogLevelUpdate') }})
     

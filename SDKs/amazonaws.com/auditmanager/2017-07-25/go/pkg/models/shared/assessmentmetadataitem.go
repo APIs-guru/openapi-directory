@@ -4,6 +4,9 @@ import (
 	"time"
 )
 
+// AssessmentMetadataItem
+//
+//	A metadata object associated with an assessment in Audit Manager.
 type AssessmentMetadataItem struct {
 	ComplianceType *string               `json:"complianceType,omitempty"`
 	CreationTime   *time.Time            `json:"creationTime,omitempty"`

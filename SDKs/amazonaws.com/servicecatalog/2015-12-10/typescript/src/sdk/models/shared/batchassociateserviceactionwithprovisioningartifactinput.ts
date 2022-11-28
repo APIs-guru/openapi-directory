@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ServiceActionAssociation } from "./serviceactionassociation";
 
 
+
 export class BatchAssociateServiceActionWithProvisioningArtifactInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AcceptLanguage" })
+  @SpeakeasyMetadata({ data: "json, name=AcceptLanguage" })
   acceptLanguage?: string;
 
-  @Metadata({ data: "json, name=ServiceActionAssociations", elemType: shared.ServiceActionAssociation })
+  @SpeakeasyMetadata({ data: "json, name=ServiceActionAssociations", elemType: ServiceActionAssociation })
   serviceActionAssociations: ServiceActionAssociation[];
 }

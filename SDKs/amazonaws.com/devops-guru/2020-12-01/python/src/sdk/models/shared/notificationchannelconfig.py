@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import snschannelconfig
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class NotificationChannelConfig:
-    sns: snschannelconfig.SnsChannelConfig = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Sns' }})
+    r"""NotificationChannelConfig
+     Information about notification channels you have configured with DevOps Guru. The one supported notification channel is Amazon Simple Notification Service (Amazon SNS).
+    """
+    
+    sns: SnsChannelConfig = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Sns') }})
     

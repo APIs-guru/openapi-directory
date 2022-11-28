@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostTreeActivationQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ignoredeactivated" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ignoredeactivated" })
   ignoredeactivated: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=onlymodified" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=onlymodified" })
   onlymodified: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=path" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=path" })
   path: string;
 }
 
 
 export class PostTreeActivationRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PostTreeActivationQueryParams;
 }
 
 
 export class PostTreeActivationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

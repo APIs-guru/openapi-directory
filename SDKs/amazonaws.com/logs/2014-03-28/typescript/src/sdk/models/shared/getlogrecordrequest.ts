@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetLogRecordRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=logRecordPointer" })
+  @SpeakeasyMetadata({ data: "json, name=logRecordPointer" })
   logRecordPointer: string;
 }

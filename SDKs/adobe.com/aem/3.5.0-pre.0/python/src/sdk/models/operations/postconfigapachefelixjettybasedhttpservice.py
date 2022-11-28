@@ -28,11 +28,11 @@ class PostConfigApacheFelixJettyBasedHTTPServiceQueryParams:
 
 @dataclass
 class PostConfigApacheFelixJettyBasedHTTPServiceRequest:
-    query_params: PostConfigApacheFelixJettyBasedHTTPServiceQueryParams = field(default=None)
+    query_params: PostConfigApacheFelixJettyBasedHTTPServiceQueryParams = field()
     
 
 @dataclass
 class PostConfigApacheFelixJettyBasedHTTPServiceResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

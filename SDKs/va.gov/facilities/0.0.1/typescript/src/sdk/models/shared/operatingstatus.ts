@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum OperatingStatusCodeEnum {
-    Normal = "NORMAL"
-,    Notice = "NOTICE"
-,    Limited = "LIMITED"
-,    Closed = "CLOSED"
+    Normal = "NORMAL",
+    Notice = "NOTICE",
+    Limited = "LIMITED",
+    Closed = "CLOSED"
 }
 
 
@@ -13,9 +14,9 @@ export enum OperatingStatusCodeEnum {
  * Current status of facility operations. The overall status of the facility, which can be: Normal Hours and Services, Facility Notice, Limited Hours and/or Services, or Closed. This field replaces active_status.
 **/
 export class OperatingStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=additional_info" })
+  @SpeakeasyMetadata({ data: "json, name=additional_info" })
   additionalInfo?: string;
 
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code: OperatingStatusCodeEnum;
 }

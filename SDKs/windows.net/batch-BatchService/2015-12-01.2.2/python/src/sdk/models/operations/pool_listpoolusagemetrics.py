@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Any,List,Optional
@@ -7,8 +7,8 @@ from typing import Any,List,Optional
 
 @dataclass
 class PoolListPoolUsageMetricsQueryParams:
+    api_version: str = field(metadata={'query_param': { 'field_name': 'api-version', 'style': 'form', 'explode': True }})
     dollar_filter: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': '$filter', 'style': 'form', 'explode': True }})
-    api_version: str = field(default=None, metadata={'query_param': { 'field_name': 'api-version', 'style': 'form', 'explode': True }})
     endtime: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'endtime', 'style': 'form', 'explode': True }})
     maxresults: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'maxresults', 'style': 'form', 'explode': True }})
     starttime: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'starttime', 'style': 'form', 'explode': True }})
@@ -24,15 +24,15 @@ class PoolListPoolUsageMetricsHeaders:
 
 @dataclass
 class PoolListPoolUsageMetricsRequest:
-    query_params: PoolListPoolUsageMetricsQueryParams = field(default=None)
-    headers: PoolListPoolUsageMetricsHeaders = field(default=None)
+    headers: PoolListPoolUsageMetricsHeaders = field()
+    query_params: PoolListPoolUsageMetricsQueryParams = field()
     
 
 @dataclass
 class PoolListPoolUsageMetricsResponse:
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     batch_error: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
     pool_list_pool_usage_metrics_result: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

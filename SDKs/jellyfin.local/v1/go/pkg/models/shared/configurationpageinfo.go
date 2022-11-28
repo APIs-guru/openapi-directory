@@ -1,5 +1,7 @@
 package shared
 
+// ConfigurationPageInfo
+// The configuration page info.
 type ConfigurationPageInfo struct {
 	ConfigurationPageType *ConfigurationPageTypeEnum `json:"ConfigurationPageType,omitempty"`
 	DisplayName           *string                    `json:"DisplayName,omitempty"`

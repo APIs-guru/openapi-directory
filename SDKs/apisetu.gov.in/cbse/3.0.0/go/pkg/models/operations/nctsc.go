@@ -28,11 +28,6 @@ type NctscSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type NctscRequest struct {
-	Request  *NctscRequestBody `request:"mediaType=application/json"`
-	Security NctscSecurity
-}
-
 type Nctsc400ApplicationJSONErrorEnum string
 
 const (
@@ -162,6 +157,11 @@ const (
 type Nctsc504ApplicationJSON struct {
 	Error            *Nctsc504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Nctsc504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type NctscRequest struct {
+	Request  *NctscRequestBody `request:"mediaType=application/json"`
+	Security NctscSecurity
 }
 
 type NctscResponse struct {

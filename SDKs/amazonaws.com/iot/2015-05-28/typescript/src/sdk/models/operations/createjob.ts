@@ -1,33 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateJobPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=jobId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=jobId" })
   jobId: string;
 }
 
 
 export class CreateJobHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -37,7 +38,7 @@ export class CreateJobHeaders extends SpeakeasyBase {
  * The criteria that determine when and how a job abort takes place.
 **/
 export class CreateJobRequestBodyAbortConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=criteriaList", elemType: shared.AbortCriteria })
+  @SpeakeasyMetadata({ data: "json, name=criteriaList", elemType: shared.AbortCriteria })
   criteriaList?: shared.AbortCriteria[];
 }
 
@@ -47,10 +48,10 @@ export class CreateJobRequestBodyAbortConfig extends SpeakeasyBase {
  * Allows you to create a staged rollout of a job.
 **/
 export class CreateJobRequestBodyJobExecutionsRolloutConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=exponentialRate" })
+  @SpeakeasyMetadata({ data: "json, name=exponentialRate" })
   exponentialRate?: shared.ExponentialRolloutRate;
 
-  @Metadata({ data: "json, name=maximumPerMinute" })
+  @SpeakeasyMetadata({ data: "json, name=maximumPerMinute" })
   maximumPerMinute?: number;
 }
 
@@ -60,16 +61,16 @@ export class CreateJobRequestBodyJobExecutionsRolloutConfig extends SpeakeasyBas
  * Configuration for pre-signed S3 URLs.
 **/
 export class CreateJobRequestBodyPresignedUrlConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=expiresInSec" })
+  @SpeakeasyMetadata({ data: "json, name=expiresInSec" })
   expiresInSec?: number;
 
-  @Metadata({ data: "json, name=roleArn" })
+  @SpeakeasyMetadata({ data: "json, name=roleArn" })
   roleArn?: string;
 }
 
 export enum CreateJobRequestBodyTargetSelectionEnum {
-    Continuous = "CONTINUOUS"
-,    Snapshot = "SNAPSHOT"
+    Continuous = "CONTINUOUS",
+    Snapshot = "SNAPSHOT"
 }
 
 
@@ -78,87 +79,87 @@ export enum CreateJobRequestBodyTargetSelectionEnum {
  * Specifies the amount of time each device has to finish its execution of the job. A timer is started when the job execution status is set to <code>IN_PROGRESS</code>. If the job execution status is not set to another terminal state before the timer expires, it will be automatically set to <code>TIMED_OUT</code>.
 **/
 export class CreateJobRequestBodyTimeoutConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=inProgressTimeoutInMinutes" })
+  @SpeakeasyMetadata({ data: "json, name=inProgressTimeoutInMinutes" })
   inProgressTimeoutInMinutes?: number;
 }
 
 
 export class CreateJobRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=abortConfig" })
+  @SpeakeasyMetadata({ data: "json, name=abortConfig" })
   abortConfig?: CreateJobRequestBodyAbortConfig;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=document" })
+  @SpeakeasyMetadata({ data: "json, name=document" })
   document?: string;
 
-  @Metadata({ data: "json, name=documentSource" })
+  @SpeakeasyMetadata({ data: "json, name=documentSource" })
   documentSource?: string;
 
-  @Metadata({ data: "json, name=jobExecutionsRolloutConfig" })
+  @SpeakeasyMetadata({ data: "json, name=jobExecutionsRolloutConfig" })
   jobExecutionsRolloutConfig?: CreateJobRequestBodyJobExecutionsRolloutConfig;
 
-  @Metadata({ data: "json, name=jobTemplateArn" })
+  @SpeakeasyMetadata({ data: "json, name=jobTemplateArn" })
   jobTemplateArn?: string;
 
-  @Metadata({ data: "json, name=namespaceId" })
+  @SpeakeasyMetadata({ data: "json, name=namespaceId" })
   namespaceId?: string;
 
-  @Metadata({ data: "json, name=presignedUrlConfig" })
+  @SpeakeasyMetadata({ data: "json, name=presignedUrlConfig" })
   presignedUrlConfig?: CreateJobRequestBodyPresignedUrlConfig;
 
-  @Metadata({ data: "json, name=tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=tags", elemType: shared.Tag })
   tags?: shared.Tag[];
 
-  @Metadata({ data: "json, name=targetSelection" })
+  @SpeakeasyMetadata({ data: "json, name=targetSelection" })
   targetSelection?: CreateJobRequestBodyTargetSelectionEnum;
 
-  @Metadata({ data: "json, name=targets" })
+  @SpeakeasyMetadata({ data: "json, name=targets" })
   targets: string[];
 
-  @Metadata({ data: "json, name=timeoutConfig" })
+  @SpeakeasyMetadata({ data: "json, name=timeoutConfig" })
   timeoutConfig?: CreateJobRequestBodyTimeoutConfig;
 }
 
 
 export class CreateJobRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CreateJobPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateJobHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateJobRequestBody;
 }
 
 
 export class CreateJobResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createJobResponse?: shared.CreateJobResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   limitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceAlreadyExistsException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceUnavailableException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 }

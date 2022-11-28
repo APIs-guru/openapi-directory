@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class MybusinessverificationsLocationsVerificationsListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,13 +28,13 @@ class MybusinessverificationsLocationsVerificationsListQueryParams:
 
 @dataclass
 class MybusinessverificationsLocationsVerificationsListRequest:
-    path_params: MybusinessverificationsLocationsVerificationsListPathParams = field(default=None)
-    query_params: MybusinessverificationsLocationsVerificationsListQueryParams = field(default=None)
+    path_params: MybusinessverificationsLocationsVerificationsListPathParams = field()
+    query_params: MybusinessverificationsLocationsVerificationsListQueryParams = field()
     
 
 @dataclass
 class MybusinessverificationsLocationsVerificationsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_verifications_response: Optional[shared.ListVerificationsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

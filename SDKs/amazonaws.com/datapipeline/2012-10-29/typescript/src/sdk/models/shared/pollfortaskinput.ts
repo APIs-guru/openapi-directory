@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InstanceIdentity } from "./instanceidentity";
+
 
 
 // PollForTaskInput
@@ -7,12 +8,12 @@ import { InstanceIdentity } from "./instanceidentity";
  * Contains the parameters for PollForTask.
 **/
 export class PollForTaskInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hostname" })
+  @SpeakeasyMetadata({ data: "json, name=hostname" })
   hostname?: string;
 
-  @Metadata({ data: "json, name=instanceIdentity" })
+  @SpeakeasyMetadata({ data: "json, name=instanceIdentity" })
   instanceIdentity?: InstanceIdentity;
 
-  @Metadata({ data: "json, name=workerGroup" })
+  @SpeakeasyMetadata({ data: "json, name=workerGroup" })
   workerGroup: string;
 }

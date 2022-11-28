@@ -18,6 +18,8 @@ type CreateEmailTemplateHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateEmailTemplateRequestBodyEmailTemplateRequest
+// Specifies the content and settings for a message template that can be used in messages that are sent through the email channel.
 type CreateEmailTemplateRequestBodyEmailTemplateRequest struct {
 	DefaultSubstitutions *string           `json:"DefaultSubstitutions,omitempty"`
 	HTMLPart             *string           `json:"HtmlPart,omitempty"`

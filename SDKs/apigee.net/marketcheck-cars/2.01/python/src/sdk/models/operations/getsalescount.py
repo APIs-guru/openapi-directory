@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetSalesCountCarTypeEnum(str, Enum):
@@ -30,13 +31,13 @@ class GetSalesCountQueryParams:
 
 @dataclass
 class GetSalesCountRequest:
-    query_params: GetSalesCountQueryParams = field(default=None)
+    query_params: GetSalesCountQueryParams = field()
     
 
 @dataclass
 class GetSalesCountResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[shared.Error] = field(default=None)
     sales: Optional[shared.Sales] = field(default=None)
-    status_code: int = field(default=None)
     

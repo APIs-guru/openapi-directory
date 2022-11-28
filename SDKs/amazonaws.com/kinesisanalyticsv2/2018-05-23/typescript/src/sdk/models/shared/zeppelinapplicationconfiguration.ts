@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CatalogConfiguration } from "./catalogconfiguration";
 import { CustomArtifactConfiguration } from "./customartifactconfiguration";
 import { DeployAsApplicationConfiguration } from "./deployasapplicationconfiguration";
 import { ZeppelinMonitoringConfiguration } from "./zeppelinmonitoringconfiguration";
+
 
 
 // ZeppelinApplicationConfiguration
@@ -11,15 +11,15 @@ import { ZeppelinMonitoringConfiguration } from "./zeppelinmonitoringconfigurati
  * The configuration of a Kinesis Data Analytics Studio notebook.
 **/
 export class ZeppelinApplicationConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CatalogConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=CatalogConfiguration" })
   catalogConfiguration?: CatalogConfiguration;
 
-  @Metadata({ data: "json, name=CustomArtifactsConfiguration", elemType: shared.CustomArtifactConfiguration })
+  @SpeakeasyMetadata({ data: "json, name=CustomArtifactsConfiguration", elemType: CustomArtifactConfiguration })
   customArtifactsConfiguration?: CustomArtifactConfiguration[];
 
-  @Metadata({ data: "json, name=DeployAsApplicationConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=DeployAsApplicationConfiguration" })
   deployAsApplicationConfiguration?: DeployAsApplicationConfiguration;
 
-  @Metadata({ data: "json, name=MonitoringConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=MonitoringConfiguration" })
   monitoringConfiguration?: ZeppelinMonitoringConfiguration;
 }

@@ -1,49 +1,50 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ReposUpdateInvitationPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=invitation_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=invitation_id" })
   invitationId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=owner" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=owner" })
   owner: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repo" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repo" })
   repo: string;
 }
 
 export enum ReposUpdateInvitationRequestBodyPermissionsEnum {
-    Read = "read"
-,    Write = "write"
-,    Maintain = "maintain"
-,    Triage = "triage"
-,    Admin = "admin"
+    Read = "read",
+    Write = "write",
+    Maintain = "maintain",
+    Triage = "triage",
+    Admin = "admin"
 }
 
 
 export class ReposUpdateInvitationRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=permissions" })
+  @SpeakeasyMetadata({ data: "json, name=permissions" })
   permissions?: ReposUpdateInvitationRequestBodyPermissionsEnum;
 }
 
 
 export class ReposUpdateInvitationRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ReposUpdateInvitationPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: ReposUpdateInvitationRequestBody;
 }
 
 
 export class ReposUpdateInvitationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   repositoryInvitation?: shared.RepositoryInvitation;
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InputLambdaProcessorUpdate } from "./inputlambdaprocessorupdate";
+
 
 
 // InputProcessingConfigurationUpdate
@@ -7,6 +8,6 @@ import { InputLambdaProcessorUpdate } from "./inputlambdaprocessorupdate";
  * For a SQL-based Kinesis Data Analytics application, describes updates to an <a>InputProcessingConfiguration</a>.
 **/
 export class InputProcessingConfigurationUpdate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=InputLambdaProcessorUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=InputLambdaProcessorUpdate" })
   inputLambdaProcessorUpdate: InputLambdaProcessorUpdate;
 }

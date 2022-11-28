@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import compensationhistogramrequest
-from . import customattributehistogramrequest
+from sdk import utils
+from . import *
 
 class HistogramFacetsSimpleHistogramFacetsEnum(str, Enum):
     SEARCH_TYPE_UNSPECIFIED = "SEARCH_TYPE_UNSPECIFIED"
@@ -27,7 +28,11 @@ class HistogramFacetsSimpleHistogramFacetsEnum(str, Enum):
 @dataclass_json
 @dataclass
 class HistogramFacets:
-    compensation_histogram_facets: Optional[List[compensationhistogramrequest.CompensationHistogramRequest]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'compensationHistogramFacets' }})
-    custom_attribute_histogram_facets: Optional[List[customattributehistogramrequest.CustomAttributeHistogramRequest]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'customAttributeHistogramFacets' }})
-    simple_histogram_facets: Optional[List[HistogramFacetsSimpleHistogramFacetsEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'simpleHistogramFacets' }})
+    r"""HistogramFacets
+    Input only. Histogram facets to be specified in SearchJobsRequest.
+    """
+    
+    compensation_histogram_facets: Optional[List[CompensationHistogramRequest]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('compensationHistogramFacets') }})
+    custom_attribute_histogram_facets: Optional[List[CustomAttributeHistogramRequest]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('customAttributeHistogramFacets') }})
+    simple_histogram_facets: Optional[List[HistogramFacetsSimpleHistogramFacetsEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('simpleHistogramFacets') }})
     

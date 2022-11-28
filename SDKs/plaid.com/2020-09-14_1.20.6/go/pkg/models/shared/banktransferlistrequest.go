@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// BankTransferListRequest
+// BankTransferListRequest defines the request schema for `/bank_transfer/list`
 type BankTransferListRequest struct {
 	ClientID             *string                    `json:"client_id,omitempty"`
 	Count                *int64                     `json:"count,omitempty"`

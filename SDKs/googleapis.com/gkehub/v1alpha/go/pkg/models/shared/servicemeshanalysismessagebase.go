@@ -9,6 +9,8 @@ const (
 	ServiceMeshAnalysisMessageBaseLevelEnumInfo             ServiceMeshAnalysisMessageBaseLevelEnum = "INFO"
 )
 
+// ServiceMeshAnalysisMessageBase
+// AnalysisMessageBase describes some common information that is needed for all messages.
 type ServiceMeshAnalysisMessageBase struct {
 	DocumentationURL *string                                  `json:"documentationUrl,omitempty"`
 	Level            *ServiceMeshAnalysisMessageBaseLevelEnum `json:"level,omitempty"`

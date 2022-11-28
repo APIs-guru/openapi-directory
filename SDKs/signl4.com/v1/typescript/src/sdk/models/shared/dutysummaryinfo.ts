@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DutySummaryInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dutyEnd" })
+  @SpeakeasyMetadata({ data: "json, name=dutyEnd" })
   dutyEnd?: Date;
 
-  @Metadata({ data: "json, name=dutyId" })
+  @SpeakeasyMetadata({ data: "json, name=dutyId" })
   dutyId?: string;
 
-  @Metadata({ data: "json, name=dutyStart" })
+  @SpeakeasyMetadata({ data: "json, name=dutyStart" })
   dutyStart?: Date;
 }

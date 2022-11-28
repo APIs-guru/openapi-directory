@@ -4,21 +4,9 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-type GetLkeVersionsSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type GetLkeVersionsSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type GetLkeVersionsSecurity struct {
-	Option1 *GetLkeVersionsSecurityOption1 `security:"option"`
-	Option2 *GetLkeVersionsSecurityOption2 `security:"option"`
-}
-
-type GetLkeVersionsRequest struct {
-	Security GetLkeVersionsSecurity
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
 }
 
 type GetLkeVersions200ApplicationJSON struct {
@@ -30,6 +18,10 @@ type GetLkeVersions200ApplicationJSON struct {
 
 type GetLkeVersionsDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type GetLkeVersionsRequest struct {
+	Security GetLkeVersionsSecurity
 }
 
 type GetLkeVersionsResponse struct {

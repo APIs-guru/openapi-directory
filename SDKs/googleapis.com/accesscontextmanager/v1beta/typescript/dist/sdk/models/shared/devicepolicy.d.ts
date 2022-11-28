@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { OsConstraint } from "./osconstraint";
 export declare enum DevicePolicyAllowedDeviceManagementLevelsEnum {
     ManagementUnspecified = "MANAGEMENT_UNSPECIFIED",

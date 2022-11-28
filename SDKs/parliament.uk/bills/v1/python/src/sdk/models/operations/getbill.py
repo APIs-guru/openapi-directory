@@ -5,19 +5,19 @@ from sdk.models import shared
 
 @dataclass
 class GetBillPathParams:
-    bill_id: int = field(default=None, metadata={'path_param': { 'field_name': 'billId', 'style': 'simple', 'explode': False }})
+    bill_id: int = field(metadata={'path_param': { 'field_name': 'billId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetBillRequest:
-    path_params: GetBillPathParams = field(default=None)
+    path_params: GetBillPathParams = field()
     
 
 @dataclass
 class GetBillResponse:
+    content_type: str = field()
+    status_code: int = field()
     bill: Optional[shared.Bill] = field(default=None)
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    body: Optional[bytes] = field(default=None)
     problem_details: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

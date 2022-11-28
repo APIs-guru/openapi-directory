@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * Used to represent any event. With this format, the `objectType` and `eventType` values are stringified CRM types. Example object:
  * <br/>

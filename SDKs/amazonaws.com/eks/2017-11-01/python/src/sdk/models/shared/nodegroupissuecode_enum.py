@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class NodegroupIssueCodeEnum(str, Enum):
     AUTO_SCALING_GROUP_NOT_FOUND = "AutoScalingGroupNotFound"

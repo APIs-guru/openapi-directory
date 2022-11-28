@@ -1,76 +1,77 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TaxRatesByIpAddressQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=domain" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=domain" })
   domain?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter" })
   filter?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ip" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ip" })
   ip?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=product_code" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=product_code" })
   productCode?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=zip" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=zip" })
   zip?: string;
 }
 
 
-export class TaxRatesByIpAddressRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: TaxRatesByIpAddressQueryParams;
-}
-
-
 export class TaxRatesByIpAddress200ApplicationJsonTaxes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Country" })
+  @SpeakeasyMetadata({ data: "json, name=Country" })
   country?: string;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: string;
 
-  @Metadata({ data: "json, name=data_name" })
+  @SpeakeasyMetadata({ data: "json, name=data_name" })
   dataName?: string;
 
-  @Metadata({ data: "json, name=data_value" })
+  @SpeakeasyMetadata({ data: "json, name=data_value" })
   dataValue?: string;
 }
 
 
 export class TaxRatesByIpAddress200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=country_name" })
+  @SpeakeasyMetadata({ data: "json, name=country_name" })
   countryName?: string;
 
-  @Metadata({ data: "json, name=taxes", elemType: operations.TaxRatesByIpAddress200ApplicationJsonTaxes })
+  @SpeakeasyMetadata({ data: "json, name=taxes", elemType: TaxRatesByIpAddress200ApplicationJsonTaxes })
   taxes?: TaxRatesByIpAddress200ApplicationJsonTaxes[];
 }
 
 
 export class TaxRatesByIpAddress500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: string;
 
-  @Metadata({ data: "json, name=fields" })
+  @SpeakeasyMetadata({ data: "json, name=fields" })
   fields?: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class TaxRatesByIpAddressRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: TaxRatesByIpAddressQueryParams;
+}
+
+
 export class TaxRatesByIpAddressResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: operations.TaxRatesByIpAddress200ApplicationJson })
+  @SpeakeasyMetadata({ elemType: TaxRatesByIpAddress200ApplicationJson })
   taxRatesByIpAddress200ApplicationJsonObjects?: TaxRatesByIpAddress200ApplicationJson[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   taxRatesByIpAddress500ApplicationJsonObject?: TaxRatesByIpAddress500ApplicationJson;
 }

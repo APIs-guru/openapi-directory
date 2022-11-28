@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Constraints extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowExplicitContent" })
+  @SpeakeasyMetadata({ data: "json, name=allowExplicitContent" })
   allowExplicitContent?: boolean;
 
-  @Metadata({ data: "json, name=maximumQueueSegmentItemCount" })
+  @SpeakeasyMetadata({ data: "json, name=maximumQueueSegmentItemCount" })
   maximumQueueSegmentItemCount?: number;
 
-  @Metadata({ data: "json, name=updateUserTasteProfile" })
+  @SpeakeasyMetadata({ data: "json, name=updateUserTasteProfile" })
   updateUserTasteProfile?: boolean;
 }

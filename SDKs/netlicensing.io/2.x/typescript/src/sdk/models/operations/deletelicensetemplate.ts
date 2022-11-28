@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DeleteLicenseTemplatePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=licenseTemplateNumber" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=licenseTemplateNumber" })
   licenseTemplateNumber: string;
 }
 
 
 export class DeleteLicenseTemplateQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=forceCascade" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=forceCascade" })
   forceCascade?: boolean;
 }
 
 
 export class DeleteLicenseTemplateSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   basicAuth: shared.SchemeBasicAuth;
 }
 
 
 export class DeleteLicenseTemplateRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DeleteLicenseTemplatePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: DeleteLicenseTemplateQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: DeleteLicenseTemplateSecurity;
 }
 
 
 export class DeleteLicenseTemplateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   netlicensing?: any;
 }

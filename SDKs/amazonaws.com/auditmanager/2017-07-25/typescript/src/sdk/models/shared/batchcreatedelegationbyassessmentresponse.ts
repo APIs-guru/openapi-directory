@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Delegation } from "./delegation";
 import { BatchCreateDelegationByAssessmentError } from "./batchcreatedelegationbyassessmenterror";
 
 
+
 export class BatchCreateDelegationByAssessmentResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=delegations", elemType: shared.Delegation })
+  @SpeakeasyMetadata({ data: "json, name=delegations", elemType: Delegation })
   delegations?: Delegation[];
 
-  @Metadata({ data: "json, name=errors", elemType: shared.BatchCreateDelegationByAssessmentError })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: BatchCreateDelegationByAssessmentError })
   errors?: BatchCreateDelegationByAssessmentError[];
 }

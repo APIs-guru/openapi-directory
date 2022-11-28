@@ -1,5 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FieldMetadata } from "./fieldmetadata";
+import { FieldMetadataInput } from "./fieldmetadata";
+
 
 
 // Address
@@ -7,39 +9,79 @@ import { FieldMetadata } from "./fieldmetadata";
  * A person's physical address. May be a P.O. box or street address. All fields are optional.
 **/
 export class Address extends SpeakeasyBase {
-  @Metadata({ data: "json, name=city" })
+  @SpeakeasyMetadata({ data: "json, name=city" })
   city?: string;
 
-  @Metadata({ data: "json, name=country" })
+  @SpeakeasyMetadata({ data: "json, name=country" })
   country?: string;
 
-  @Metadata({ data: "json, name=countryCode" })
+  @SpeakeasyMetadata({ data: "json, name=countryCode" })
   countryCode?: string;
 
-  @Metadata({ data: "json, name=extendedAddress" })
+  @SpeakeasyMetadata({ data: "json, name=extendedAddress" })
   extendedAddress?: string;
 
-  @Metadata({ data: "json, name=formattedType" })
+  @SpeakeasyMetadata({ data: "json, name=formattedType" })
   formattedType?: string;
 
-  @Metadata({ data: "json, name=formattedValue" })
+  @SpeakeasyMetadata({ data: "json, name=formattedValue" })
   formattedValue?: string;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: FieldMetadata;
 
-  @Metadata({ data: "json, name=poBox" })
+  @SpeakeasyMetadata({ data: "json, name=poBox" })
   poBox?: string;
 
-  @Metadata({ data: "json, name=postalCode" })
+  @SpeakeasyMetadata({ data: "json, name=postalCode" })
   postalCode?: string;
 
-  @Metadata({ data: "json, name=region" })
+  @SpeakeasyMetadata({ data: "json, name=region" })
   region?: string;
 
-  @Metadata({ data: "json, name=streetAddress" })
+  @SpeakeasyMetadata({ data: "json, name=streetAddress" })
   streetAddress?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
+  type?: string;
+}
+
+
+// AddressInput
+/** 
+ * A person's physical address. May be a P.O. box or street address. All fields are optional.
+**/
+export class AddressInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=city" })
+  city?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=country" })
+  country?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=countryCode" })
+  countryCode?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=extendedAddress" })
+  extendedAddress?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=formattedValue" })
+  formattedValue?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
+  metadata?: FieldMetadataInput;
+
+  @SpeakeasyMetadata({ data: "json, name=poBox" })
+  poBox?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=postalCode" })
+  postalCode?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=region" })
+  region?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=streetAddress" })
+  streetAddress?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }

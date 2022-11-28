@@ -1,5 +1,7 @@
 package shared
 
+// AddSubnetworkRequest
+// Request to create a subnetwork in a previously peered service network.
 type AddSubnetworkRequest struct {
 	Consumer         *string  `json:"consumer,omitempty"`
 	ConsumerNetwork  *string  `json:"consumerNetwork,omitempty"`

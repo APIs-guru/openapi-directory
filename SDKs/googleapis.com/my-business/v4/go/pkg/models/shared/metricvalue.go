@@ -21,6 +21,8 @@ const (
 	MetricValueMetricEnumLocalPostActionsCallToAction MetricValueMetricEnum = "LOCAL_POST_ACTIONS_CALL_TO_ACTION"
 )
 
+// MetricValue
+// A value for a single Metric from a starting time.
 type MetricValue struct {
 	DimensionalValues []DimensionalMetricValue `json:"dimensionalValues,omitempty"`
 	Metric            *MetricValueMetricEnum   `json:"metric,omitempty"`

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RegressionEvaluationMetrics
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Metrics for regression problems.
 **/
 export class RegressionEvaluationMetrics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=meanAbsoluteError" })
+  @SpeakeasyMetadata({ data: "json, name=meanAbsoluteError" })
   meanAbsoluteError?: number;
 
-  @Metadata({ data: "json, name=meanAbsolutePercentageError" })
+  @SpeakeasyMetadata({ data: "json, name=meanAbsolutePercentageError" })
   meanAbsolutePercentageError?: number;
 
-  @Metadata({ data: "json, name=rSquared" })
+  @SpeakeasyMetadata({ data: "json, name=rSquared" })
   rSquared?: number;
 
-  @Metadata({ data: "json, name=rootMeanSquaredError" })
+  @SpeakeasyMetadata({ data: "json, name=rootMeanSquaredError" })
   rootMeanSquaredError?: number;
 
-  @Metadata({ data: "json, name=rootMeanSquaredLogError" })
+  @SpeakeasyMetadata({ data: "json, name=rootMeanSquaredLogError" })
   rootMeanSquaredLogError?: number;
 }

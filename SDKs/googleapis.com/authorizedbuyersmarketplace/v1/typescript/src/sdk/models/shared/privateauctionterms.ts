@@ -1,5 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Price } from "./price";
+
+
+
+// PrivateAuctionTermsInput
+/** 
+ * Pricing terms for Private Auctions.
+**/
+export class PrivateAuctionTermsInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=floorPrice" })
+  floorPrice?: Price;
+}
 
 
 // PrivateAuctionTerms
@@ -7,9 +18,9 @@ import { Price } from "./price";
  * Pricing terms for Private Auctions.
 **/
 export class PrivateAuctionTerms extends SpeakeasyBase {
-  @Metadata({ data: "json, name=floorPrice" })
+  @SpeakeasyMetadata({ data: "json, name=floorPrice" })
   floorPrice?: Price;
 
-  @Metadata({ data: "json, name=openAuctionAllowed" })
+  @SpeakeasyMetadata({ data: "json, name=openAuctionAllowed" })
   openAuctionAllowed?: boolean;
 }

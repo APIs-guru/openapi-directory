@@ -24,6 +24,8 @@ const (
 	ParentEntityFilterFilterTypeEnumFilterTypeLineItemID       ParentEntityFilterFilterTypeEnum = "FILTER_TYPE_LINE_ITEM_ID"
 )
 
+// ParentEntityFilter
+// A filtering option that filters on selected file types belonging to a chosen set of filter entities.
 type ParentEntityFilter struct {
 	FileType   []ParentEntityFilterFileTypeEnum  `json:"fileType,omitempty"`
 	FilterIds  []string                          `json:"filterIds,omitempty"`

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CardDisplayProperty } from "./carddisplayproperty";
+
 
 
 // CardDisplayBody
@@ -8,6 +8,6 @@ import { CardDisplayProperty } from "./carddisplayproperty";
  * Configuration for displayed info on a card
 **/
 export class CardDisplayBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=properties", elemType: shared.CardDisplayProperty })
+  @SpeakeasyMetadata({ data: "json, name=properties", elemType: CardDisplayProperty })
   properties: CardDisplayProperty[];
 }

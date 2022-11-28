@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Record } from "./record";
+
 
 
 // ListRecordsResponse
@@ -8,30 +8,30 @@ import { Record } from "./record";
  * Returned for a successful ListRecordsRequest.
 **/
 export class ListRecordsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Count" })
+  @SpeakeasyMetadata({ data: "json, name=Count" })
   count?: number;
 
-  @Metadata({ data: "json, name=DatasetDeletedAfterRequestedSyncCount" })
+  @SpeakeasyMetadata({ data: "json, name=DatasetDeletedAfterRequestedSyncCount" })
   datasetDeletedAfterRequestedSyncCount?: boolean;
 
-  @Metadata({ data: "json, name=DatasetExists" })
+  @SpeakeasyMetadata({ data: "json, name=DatasetExists" })
   datasetExists?: boolean;
 
-  @Metadata({ data: "json, name=DatasetSyncCount" })
+  @SpeakeasyMetadata({ data: "json, name=DatasetSyncCount" })
   datasetSyncCount?: number;
 
-  @Metadata({ data: "json, name=LastModifiedBy" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedBy" })
   lastModifiedBy?: string;
 
-  @Metadata({ data: "json, name=MergedDatasetNames" })
+  @SpeakeasyMetadata({ data: "json, name=MergedDatasetNames" })
   mergedDatasetNames?: string[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=Records", elemType: shared.Record })
+  @SpeakeasyMetadata({ data: "json, name=Records", elemType: Record })
   records?: Record[];
 
-  @Metadata({ data: "json, name=SyncSessionToken" })
+  @SpeakeasyMetadata({ data: "json, name=SyncSessionToken" })
   syncSessionToken?: string;
 }

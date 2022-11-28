@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
@@ -13,17 +14,17 @@ class PostAddressAutocompleteHeaders:
 @dataclass_json
 @dataclass
 class PostAddressAutocompleteRequestBody:
-    input: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Input' }})
+    input: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Input') }})
     
 
 @dataclass
 class PostAddressAutocompleteRequest:
-    headers: PostAddressAutocompleteHeaders = field(default=None)
+    headers: PostAddressAutocompleteHeaders = field()
     request: Optional[PostAddressAutocompleteRequestBody] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PostAddressAutocompleteResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

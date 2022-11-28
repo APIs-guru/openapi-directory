@@ -1,13 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googleclouddataplexv1storageformatcsvoptions
-from . import googleclouddataplexv1storageformatjsonoptions
-
-class GoogleCloudDataplexV1StorageFormatCompressionFormatEnum(str, Enum):
-    COMPRESSION_FORMAT_UNSPECIFIED = "COMPRESSION_FORMAT_UNSPECIFIED"
-    GZIP = "GZIP"
-    BZIP2 = "BZIP2"
+from sdk import utils
+from . import *
 
 class GoogleCloudDataplexV1StorageFormatFormatEnum(str, Enum):
     FORMAT_UNSPECIFIED = "FORMAT_UNSPECIFIED"
@@ -24,13 +20,35 @@ class GoogleCloudDataplexV1StorageFormatFormatEnum(str, Enum):
     OTHER = "OTHER"
     UNKNOWN = "UNKNOWN"
 
+class GoogleCloudDataplexV1StorageFormatCompressionFormatEnum(str, Enum):
+    COMPRESSION_FORMAT_UNSPECIFIED = "COMPRESSION_FORMAT_UNSPECIFIED"
+    GZIP = "GZIP"
+    BZIP2 = "BZIP2"
+
 
 @dataclass_json
 @dataclass
 class GoogleCloudDataplexV1StorageFormat:
-    compression_format: Optional[GoogleCloudDataplexV1StorageFormatCompressionFormatEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'compressionFormat' }})
-    csv: Optional[googleclouddataplexv1storageformatcsvoptions.GoogleCloudDataplexV1StorageFormatCsvOptions] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'csv' }})
-    format: Optional[GoogleCloudDataplexV1StorageFormatFormatEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'format' }})
-    json: Optional[googleclouddataplexv1storageformatjsonoptions.GoogleCloudDataplexV1StorageFormatJSONOptions] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'json' }})
-    mime_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mimeType' }})
+    r"""GoogleCloudDataplexV1StorageFormat
+    Describes the format of the data within its storage location.
+    """
+    
+    compression_format: Optional[GoogleCloudDataplexV1StorageFormatCompressionFormatEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('compressionFormat') }})
+    csv: Optional[GoogleCloudDataplexV1StorageFormatCsvOptions] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('csv') }})
+    format: Optional[GoogleCloudDataplexV1StorageFormatFormatEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('format') }})
+    json: Optional[GoogleCloudDataplexV1StorageFormatJSONOptions] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('json') }})
+    mime_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mimeType') }})
+    
+
+@dataclass_json
+@dataclass
+class GoogleCloudDataplexV1StorageFormatInput:
+    r"""GoogleCloudDataplexV1StorageFormatInput
+    Describes the format of the data within its storage location.
+    """
+    
+    compression_format: Optional[GoogleCloudDataplexV1StorageFormatCompressionFormatEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('compressionFormat') }})
+    csv: Optional[GoogleCloudDataplexV1StorageFormatCsvOptions] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('csv') }})
+    json: Optional[GoogleCloudDataplexV1StorageFormatJSONOptions] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('json') }})
+    mime_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mimeType') }})
     

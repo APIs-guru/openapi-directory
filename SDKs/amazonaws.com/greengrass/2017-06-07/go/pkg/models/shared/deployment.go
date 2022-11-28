@@ -1,5 +1,7 @@
 package shared
 
+// Deployment
+// Information about a deployment.
 type Deployment struct {
 	CreatedAt      *string             `json:"CreatedAt,omitempty"`
 	DeploymentArn  *string             `json:"DeploymentArn,omitempty"`

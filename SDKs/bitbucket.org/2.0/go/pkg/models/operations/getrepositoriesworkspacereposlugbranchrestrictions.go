@@ -14,22 +14,10 @@ type GetRepositoriesWorkspaceRepoSlugBranchRestrictionsQueryParams struct {
 	Pattern *string `queryParam:"style=form,explode=true,name=pattern"`
 }
 
-type GetRepositoriesWorkspaceRepoSlugBranchRestrictionsSecurityOption1 struct {
-	Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
-}
-
-type GetRepositoriesWorkspaceRepoSlugBranchRestrictionsSecurityOption2 struct {
-	Basic shared.SchemeBasic `security:"scheme,type=http,subtype=basic"`
-}
-
-type GetRepositoriesWorkspaceRepoSlugBranchRestrictionsSecurityOption3 struct {
-	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
-}
-
 type GetRepositoriesWorkspaceRepoSlugBranchRestrictionsSecurity struct {
-	Option1 *GetRepositoriesWorkspaceRepoSlugBranchRestrictionsSecurityOption1 `security:"option"`
-	Option2 *GetRepositoriesWorkspaceRepoSlugBranchRestrictionsSecurityOption2 `security:"option"`
-	Option3 *GetRepositoriesWorkspaceRepoSlugBranchRestrictionsSecurityOption3 `security:"option"`
+	Oauth2 *shared.SchemeOauth2 `security:"scheme,type=oauth2"`
+	Basic  *shared.SchemeBasic  `security:"scheme,type=http,subtype=basic"`
+	APIKey *shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type GetRepositoriesWorkspaceRepoSlugBranchRestrictionsRequest struct {

@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TimeSpan } from "./timespan";
 import { BuiltImage } from "./builtimage";
 import { UploadedMavenArtifact } from "./uploadedmavenartifact";
 import { UploadedPythonPackage } from "./uploadedpythonpackage";
+
 
 
 // Results
@@ -11,27 +11,27 @@ import { UploadedPythonPackage } from "./uploadedpythonpackage";
  * Artifacts created by the build pipeline.
 **/
 export class Results extends SpeakeasyBase {
-  @Metadata({ data: "json, name=artifactManifest" })
+  @SpeakeasyMetadata({ data: "json, name=artifactManifest" })
   artifactManifest?: string;
 
-  @Metadata({ data: "json, name=artifactTiming" })
+  @SpeakeasyMetadata({ data: "json, name=artifactTiming" })
   artifactTiming?: TimeSpan;
 
-  @Metadata({ data: "json, name=buildStepImages" })
+  @SpeakeasyMetadata({ data: "json, name=buildStepImages" })
   buildStepImages?: string[];
 
-  @Metadata({ data: "json, name=buildStepOutputs" })
+  @SpeakeasyMetadata({ data: "json, name=buildStepOutputs" })
   buildStepOutputs?: string[];
 
-  @Metadata({ data: "json, name=images", elemType: shared.BuiltImage })
+  @SpeakeasyMetadata({ data: "json, name=images", elemType: BuiltImage })
   images?: BuiltImage[];
 
-  @Metadata({ data: "json, name=mavenArtifacts", elemType: shared.UploadedMavenArtifact })
+  @SpeakeasyMetadata({ data: "json, name=mavenArtifacts", elemType: UploadedMavenArtifact })
   mavenArtifacts?: UploadedMavenArtifact[];
 
-  @Metadata({ data: "json, name=numArtifacts" })
+  @SpeakeasyMetadata({ data: "json, name=numArtifacts" })
   numArtifacts?: string;
 
-  @Metadata({ data: "json, name=pythonPackages", elemType: shared.UploadedPythonPackage })
+  @SpeakeasyMetadata({ data: "json, name=pythonPackages", elemType: UploadedPythonPackage })
   pythonPackages?: UploadedPythonPackage[];
 }

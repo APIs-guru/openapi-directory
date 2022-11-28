@@ -12,6 +12,8 @@ const (
 	GoogleAudienceGoogleAudienceTypeEnumGoogleAudienceTypeExtendedDemographic GoogleAudienceGoogleAudienceTypeEnum = "GOOGLE_AUDIENCE_TYPE_EXTENDED_DEMOGRAPHIC"
 )
 
+// GoogleAudience
+// Describes a Google audience resource. Includes Google audience lists.
 type GoogleAudience struct {
 	DisplayName        *string                               `json:"displayName,omitempty"`
 	GoogleAudienceID   *string                               `json:"googleAudienceId,omitempty"`

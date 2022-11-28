@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { RuleStateEnum } from "./rulestateenum";
 import { Tag } from "./tag";
 export declare class PutRuleRequest extends SpeakeasyBase {

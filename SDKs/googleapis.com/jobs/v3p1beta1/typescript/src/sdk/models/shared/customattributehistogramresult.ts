@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NumericBucketingResult } from "./numericbucketingresult";
+
 
 
 // CustomAttributeHistogramResult
@@ -7,12 +8,12 @@ import { NumericBucketingResult } from "./numericbucketingresult";
  * Output only. Custom attribute histogram result.
 **/
 export class CustomAttributeHistogramResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: string;
 
-  @Metadata({ data: "json, name=longValueHistogramResult" })
+  @SpeakeasyMetadata({ data: "json, name=longValueHistogramResult" })
   longValueHistogramResult?: NumericBucketingResult;
 
-  @Metadata({ data: "json, name=stringValueHistogramResult" })
+  @SpeakeasyMetadata({ data: "json, name=stringValueHistogramResult" })
   stringValueHistogramResult?: Map<string, number>;
 }

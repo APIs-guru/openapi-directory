@@ -1,5 +1,7 @@
 package shared
 
-type ValidateSchemaRequest struct {
-	Schema *Schema `json:"schema,omitempty"`
+// ValidateSchemaRequestInput
+// Request for the `ValidateSchema` method.
+type ValidateSchemaRequestInput struct {
+	Schema *SchemaInput `json:"schema,omitempty"`
 }

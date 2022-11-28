@@ -18,12 +18,16 @@ type SetIdentityPoolConfigurationHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// SetIdentityPoolConfigurationRequestBodyCognitoStreams
+// Configuration options for configure Cognito streams.
 type SetIdentityPoolConfigurationRequestBodyCognitoStreams struct {
 	RoleArn         *string                     `json:"RoleArn,omitempty"`
 	StreamName      *string                     `json:"StreamName,omitempty"`
 	StreamingStatus *shared.StreamingStatusEnum `json:"StreamingStatus,omitempty"`
 }
 
+// SetIdentityPoolConfigurationRequestBodyPushSync
+// Configuration options to be applied to the identity pool.
 type SetIdentityPoolConfigurationRequestBodyPushSync struct {
 	ApplicationArns []string `json:"ApplicationArns,omitempty"`
 	RoleArn         *string  `json:"RoleArn,omitempty"`

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var SnowExportAssetsCsvSecurity = /** @class */ (function (_super) {
     __extends(SnowExportAssetsCsvSecurity, _super);
@@ -30,7 +30,7 @@ var SnowExportAssetsCsvSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
         __metadata("design:type", shared.SchemeBearerAuth)
     ], SnowExportAssetsCsvSecurity.prototype, "bearerAuth", void 0);
     return SnowExportAssetsCsvSecurity;
@@ -42,7 +42,7 @@ var SnowExportAssetsCsvRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SnowExportAssetsCsvSecurity)
     ], SnowExportAssetsCsvRequest.prototype, "security", void 0);
     return SnowExportAssetsCsvRequest;
@@ -54,15 +54,15 @@ var SnowExportAssetsCsvResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], SnowExportAssetsCsvResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], SnowExportAssetsCsvResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], SnowExportAssetsCsvResponse.prototype, "snowExportAssetsCsv200TextCsvBinaryString", void 0);
     return SnowExportAssetsCsvResponse;

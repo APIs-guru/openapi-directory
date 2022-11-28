@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetGeneratedPolicyPathParams:
-    job_id: str = field(default=None, metadata={'path_param': { 'field_name': 'jobId', 'style': 'simple', 'explode': False }})
+    job_id: str = field(metadata={'path_param': { 'field_name': 'jobId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,18 +30,18 @@ class GetGeneratedPolicyHeaders:
 
 @dataclass
 class GetGeneratedPolicyRequest:
-    path_params: GetGeneratedPolicyPathParams = field(default=None)
-    query_params: GetGeneratedPolicyQueryParams = field(default=None)
-    headers: GetGeneratedPolicyHeaders = field(default=None)
+    headers: GetGeneratedPolicyHeaders = field()
+    path_params: GetGeneratedPolicyPathParams = field()
+    query_params: GetGeneratedPolicyQueryParams = field()
     
 
 @dataclass
 class GetGeneratedPolicyResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_generated_policy_response: Optional[shared.GetGeneratedPolicyResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

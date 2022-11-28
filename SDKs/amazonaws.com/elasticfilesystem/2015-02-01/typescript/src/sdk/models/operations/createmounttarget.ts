@@ -1,101 +1,102 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateMountTargetHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class CreateMountTargetRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FileSystemId" })
+  @SpeakeasyMetadata({ data: "json, name=FileSystemId" })
   fileSystemId: string;
 
-  @Metadata({ data: "json, name=IpAddress" })
+  @SpeakeasyMetadata({ data: "json, name=IpAddress" })
   ipAddress?: string;
 
-  @Metadata({ data: "json, name=SecurityGroups" })
+  @SpeakeasyMetadata({ data: "json, name=SecurityGroups" })
   securityGroups?: string[];
 
-  @Metadata({ data: "json, name=SubnetId" })
+  @SpeakeasyMetadata({ data: "json, name=SubnetId" })
   subnetId: string;
 }
 
 
 export class CreateMountTargetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateMountTargetHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateMountTargetRequestBody;
 }
 
 
 export class CreateMountTargetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   availabilityZonesMismatch?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   badRequest?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   fileSystemNotFound?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   incorrectFileSystemLifeCycleState?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerError?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   ipAddressInUse?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   mountTargetConflict?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   mountTargetDescription?: shared.MountTargetDescription;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   networkInterfaceLimitExceeded?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   noFreeAddressesInSubnet?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   securityGroupLimitExceeded?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   securityGroupNotFound?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   subnetNotFound?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   unsupportedAvailabilityZone?: any;
 }

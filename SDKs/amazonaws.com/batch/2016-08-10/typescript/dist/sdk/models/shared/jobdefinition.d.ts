@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ContainerProperties } from "./containerproperties";
 import { NodeProperties } from "./nodeproperties";
 import { PlatformCapabilityEnum } from "./platformcapabilityenum";

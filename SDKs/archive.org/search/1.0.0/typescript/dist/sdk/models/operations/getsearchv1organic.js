@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetSearchV1OrganicQueryParams = /** @class */ (function (_super) {
     __extends(GetSearchV1OrganicQueryParams, _super);
@@ -30,23 +30,23 @@ var GetSearchV1OrganicQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], GetSearchV1OrganicQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=field" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=field" }),
         __metadata("design:type", String)
     ], GetSearchV1OrganicQueryParams.prototype, "field", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=q" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=q" }),
         __metadata("design:type", String)
     ], GetSearchV1OrganicQueryParams.prototype, "q", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=size" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=size" }),
         __metadata("design:type", Number)
     ], GetSearchV1OrganicQueryParams.prototype, "size", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=total_only" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=total_only" }),
         __metadata("design:type", Boolean)
     ], GetSearchV1OrganicQueryParams.prototype, "totalOnly", void 0);
     return GetSearchV1OrganicQueryParams;
@@ -58,7 +58,7 @@ var GetSearchV1OrganicRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetSearchV1OrganicQueryParams)
     ], GetSearchV1OrganicRequest.prototype, "queryParams", void 0);
     return GetSearchV1OrganicRequest;
@@ -70,23 +70,23 @@ var GetSearchV1OrganicResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetSearchV1OrganicResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetSearchV1OrganicResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], GetSearchV1OrganicResponse.prototype, "error", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.OrganicResult)
     ], GetSearchV1OrganicResponse.prototype, "organicResult", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetSearchV1OrganicResponse.prototype, "statusCode", void 0);
     return GetSearchV1OrganicResponse;

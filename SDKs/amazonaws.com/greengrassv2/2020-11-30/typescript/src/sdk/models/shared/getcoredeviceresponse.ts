@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CoreDeviceStatusEnum } from "./coredevicestatusenum";
 
 
+
 export class GetCoreDeviceResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=architecture" })
+  @SpeakeasyMetadata({ data: "json, name=architecture" })
   architecture?: string;
 
-  @Metadata({ data: "json, name=coreDeviceThingName" })
+  @SpeakeasyMetadata({ data: "json, name=coreDeviceThingName" })
   coreDeviceThingName?: string;
 
-  @Metadata({ data: "json, name=coreVersion" })
+  @SpeakeasyMetadata({ data: "json, name=coreVersion" })
   coreVersion?: string;
 
-  @Metadata({ data: "json, name=lastStatusUpdateTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=lastStatusUpdateTimestamp" })
   lastStatusUpdateTimestamp?: Date;
 
-  @Metadata({ data: "json, name=platform" })
+  @SpeakeasyMetadata({ data: "json, name=platform" })
   platform?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: CoreDeviceStatusEnum;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 }

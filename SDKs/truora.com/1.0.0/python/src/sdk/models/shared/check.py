@@ -1,16 +1,12 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import companysummary
-from . import score
-from . import score
-from . import status
-from . import summary
-from . import vehiclesummary
-from . import wronginput
+from sdk import utils
+from . import *
 
 class CheckCountryEnum(str, Enum):
     ALL = "ALL"
@@ -310,44 +306,48 @@ class CheckStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Check:
-    birth_certificate: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'birth_certificate' }})
-    check_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'check_id' }})
-    company_summary: Optional[companysummary.CompanySummary] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'company_summary' }})
-    country: CheckCountryEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'country' }})
-    creation_date: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'creation_date', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    date_of_birth: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'date_of_birth', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    diplomatic_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'diplomatic_id' }})
-    driver_license: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'driver_license' }})
-    first_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_name' }})
-    foreign_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'foreign_id' }})
-    homonym_probability: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'homonym_probability' }})
-    homonym_score: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'homonym_score' }})
-    homonym_scores: Optional[List[score.Score]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'homonym_scores' }})
-    id_score: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id_score' }})
-    issue_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'issue_date', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    last_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'last_name' }})
-    license_plate: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'license_plate' }})
-    national_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'national_id' }})
-    native_country: Optional[CheckNativeCountryEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'native_country' }})
-    owner_document_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'owner_document_id' }})
-    owner_document_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'owner_document_type' }})
-    passport: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'passport' }})
-    payment_date: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'payment_date' }})
-    pep: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pep' }})
-    phone_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'phone_number' }})
-    professional_card: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'professional_card' }})
-    ptp: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ptp' }})
-    region: Optional[CheckRegionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'region' }})
-    report_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'report_id' }})
-    score: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'score' }})
-    scores: Optional[List[score.Score]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'scores' }})
-    status: CheckStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    statuses: List[status.Status] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'statuses' }})
-    summary: summary.Summary = field(default=None, metadata={'dataclasses_json': { 'field_name': 'summary' }})
-    tax_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tax_id' }})
-    type: Any = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    update_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'update_date', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    vehicle_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'vehicle_id' }})
-    vehicle_summary: Optional[vehiclesummary.VehicleSummary] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'vehicle_summary' }})
-    wrong_inputs: Optional[List[wronginput.WrongInput]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'wrong_inputs' }})
+    r"""Check
+    Represents a background check
+    """
+    
+    check_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('check_id') }})
+    country: CheckCountryEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('country') }})
+    creation_date: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('creation_date'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    id_score: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id_score') }})
+    score: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('score') }})
+    status: CheckStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    statuses: List[Status] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('statuses') }})
+    summary: Summary = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('summary') }})
+    type: Any = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    birth_certificate: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('birth_certificate') }})
+    company_summary: Optional[CompanySummary] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('company_summary') }})
+    date_of_birth: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('date_of_birth'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    diplomatic_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('diplomatic_id') }})
+    driver_license: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('driver_license') }})
+    first_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('first_name') }})
+    foreign_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('foreign_id') }})
+    homonym_probability: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('homonym_probability') }})
+    homonym_score: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('homonym_score') }})
+    homonym_scores: Optional[List[Score]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('homonym_scores') }})
+    issue_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('issue_date'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    last_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('last_name') }})
+    license_plate: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('license_plate') }})
+    national_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('national_id') }})
+    native_country: Optional[CheckNativeCountryEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('native_country') }})
+    owner_document_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('owner_document_id') }})
+    owner_document_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('owner_document_type') }})
+    passport: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('passport') }})
+    payment_date: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('payment_date') }})
+    pep: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pep') }})
+    phone_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('phone_number') }})
+    professional_card: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('professional_card') }})
+    ptp: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ptp') }})
+    region: Optional[CheckRegionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('region') }})
+    report_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('report_id') }})
+    scores: Optional[List[Score]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('scores') }})
+    tax_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tax_id') }})
+    update_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('update_date'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    vehicle_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('vehicle_id') }})
+    vehicle_summary: Optional[VehicleSummary] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('vehicle_summary') }})
+    wrong_inputs: Optional[List[WrongInput]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('wrong_inputs') }})
     

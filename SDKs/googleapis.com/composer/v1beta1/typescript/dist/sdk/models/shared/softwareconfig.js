@@ -22,7 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { CloudDataLineageIntegration } from "./clouddatalineageintegration";
 // SoftwareConfig
 /**
  * Specifies the selection and configuration of software inside the environment.
@@ -33,27 +34,31 @@ var SoftwareConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=airflowConfigOverrides" }),
+        SpeakeasyMetadata({ data: "json, name=airflowConfigOverrides" }),
         __metadata("design:type", Map)
     ], SoftwareConfig.prototype, "airflowConfigOverrides", void 0);
     __decorate([
-        Metadata({ data: "json, name=envVariables" }),
+        SpeakeasyMetadata({ data: "json, name=cloudDataLineageIntegration" }),
+        __metadata("design:type", CloudDataLineageIntegration)
+    ], SoftwareConfig.prototype, "cloudDataLineageIntegration", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=envVariables" }),
         __metadata("design:type", Map)
     ], SoftwareConfig.prototype, "envVariables", void 0);
     __decorate([
-        Metadata({ data: "json, name=imageVersion" }),
+        SpeakeasyMetadata({ data: "json, name=imageVersion" }),
         __metadata("design:type", String)
     ], SoftwareConfig.prototype, "imageVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=pypiPackages" }),
+        SpeakeasyMetadata({ data: "json, name=pypiPackages" }),
         __metadata("design:type", Map)
     ], SoftwareConfig.prototype, "pypiPackages", void 0);
     __decorate([
-        Metadata({ data: "json, name=pythonVersion" }),
+        SpeakeasyMetadata({ data: "json, name=pythonVersion" }),
         __metadata("design:type", String)
     ], SoftwareConfig.prototype, "pythonVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=schedulerCount" }),
+        SpeakeasyMetadata({ data: "json, name=schedulerCount" }),
         __metadata("design:type", Number)
     ], SoftwareConfig.prototype, "schedulerCount", void 0);
     return SoftwareConfig;

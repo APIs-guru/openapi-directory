@@ -1,30 +1,31 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum BadgeExpiryExpiryTypeEnum {
-    Date = "date"
-,    Timeframe = "timeframe"
+    Date = "date",
+    Timeframe = "timeframe"
 }
 
 export enum BadgeExpiryTimeframeUnitEnum {
-    Days = "days"
-,    Months = "months"
-,    Years = "years"
+    Days = "days",
+    Months = "months",
+    Years = "years"
 }
 
 
 export class BadgeExpiry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=expirationDate" })
+  @SpeakeasyMetadata({ data: "json, name=expirationDate" })
   expirationDate?: Date;
 
-  @Metadata({ data: "json, name=expires" })
+  @SpeakeasyMetadata({ data: "json, name=expires" })
   expires?: boolean;
 
-  @Metadata({ data: "json, name=expiryType" })
+  @SpeakeasyMetadata({ data: "json, name=expiryType" })
   expiryType?: BadgeExpiryExpiryTypeEnum;
 
-  @Metadata({ data: "json, name=timeframeAmount" })
+  @SpeakeasyMetadata({ data: "json, name=timeframeAmount" })
   timeframeAmount?: number;
 
-  @Metadata({ data: "json, name=timeframeUnit" })
+  @SpeakeasyMetadata({ data: "json, name=timeframeUnit" })
   timeframeUnit?: BadgeExpiryTimeframeUnitEnum;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SystemsManagerAgent
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains settings for the SSM agent on your build instance.
 **/
 export class SystemsManagerAgent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=uninstallAfterBuild" })
+  @SpeakeasyMetadata({ data: "json, name=uninstallAfterBuild" })
   uninstallAfterBuild?: boolean;
 }

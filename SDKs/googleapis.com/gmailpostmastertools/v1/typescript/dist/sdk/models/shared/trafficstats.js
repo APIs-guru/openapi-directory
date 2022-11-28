@@ -22,8 +22,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { DeliveryError } from "./deliveryerror";
+import { IpReputation } from "./ipreputation";
+import { FeedbackLoop } from "./feedbackloop";
 export var TrafficStatsDomainReputationEnum;
 (function (TrafficStatsDomainReputationEnum) {
     TrafficStatsDomainReputationEnum["ReputationCategoryUnspecified"] = "REPUTATION_CATEGORY_UNSPECIFIED";
@@ -42,47 +44,47 @@ var TrafficStats = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=deliveryErrors", elemType: shared.DeliveryError }),
+        SpeakeasyMetadata({ data: "json, name=deliveryErrors", elemType: DeliveryError }),
         __metadata("design:type", Array)
     ], TrafficStats.prototype, "deliveryErrors", void 0);
     __decorate([
-        Metadata({ data: "json, name=dkimSuccessRatio" }),
+        SpeakeasyMetadata({ data: "json, name=dkimSuccessRatio" }),
         __metadata("design:type", Number)
     ], TrafficStats.prototype, "dkimSuccessRatio", void 0);
     __decorate([
-        Metadata({ data: "json, name=dmarcSuccessRatio" }),
+        SpeakeasyMetadata({ data: "json, name=dmarcSuccessRatio" }),
         __metadata("design:type", Number)
     ], TrafficStats.prototype, "dmarcSuccessRatio", void 0);
     __decorate([
-        Metadata({ data: "json, name=domainReputation" }),
+        SpeakeasyMetadata({ data: "json, name=domainReputation" }),
         __metadata("design:type", String)
     ], TrafficStats.prototype, "domainReputation", void 0);
     __decorate([
-        Metadata({ data: "json, name=inboundEncryptionRatio" }),
+        SpeakeasyMetadata({ data: "json, name=inboundEncryptionRatio" }),
         __metadata("design:type", Number)
     ], TrafficStats.prototype, "inboundEncryptionRatio", void 0);
     __decorate([
-        Metadata({ data: "json, name=ipReputations", elemType: shared.IpReputation }),
+        SpeakeasyMetadata({ data: "json, name=ipReputations", elemType: IpReputation }),
         __metadata("design:type", Array)
     ], TrafficStats.prototype, "ipReputations", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], TrafficStats.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=outboundEncryptionRatio" }),
+        SpeakeasyMetadata({ data: "json, name=outboundEncryptionRatio" }),
         __metadata("design:type", Number)
     ], TrafficStats.prototype, "outboundEncryptionRatio", void 0);
     __decorate([
-        Metadata({ data: "json, name=spammyFeedbackLoops", elemType: shared.FeedbackLoop }),
+        SpeakeasyMetadata({ data: "json, name=spammyFeedbackLoops", elemType: FeedbackLoop }),
         __metadata("design:type", Array)
     ], TrafficStats.prototype, "spammyFeedbackLoops", void 0);
     __decorate([
-        Metadata({ data: "json, name=spfSuccessRatio" }),
+        SpeakeasyMetadata({ data: "json, name=spfSuccessRatio" }),
         __metadata("design:type", Number)
     ], TrafficStats.prototype, "spfSuccessRatio", void 0);
     __decorate([
-        Metadata({ data: "json, name=userReportedSpamRatio" }),
+        SpeakeasyMetadata({ data: "json, name=userReportedSpamRatio" }),
         __metadata("design:type", Number)
     ], TrafficStats.prototype, "userReportedSpamRatio", void 0);
     return TrafficStats;

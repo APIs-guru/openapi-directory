@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SplitShardInput
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the input for <code>SplitShard</code>.
 **/
 export class SplitShardInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NewStartingHashKey" })
+  @SpeakeasyMetadata({ data: "json, name=NewStartingHashKey" })
   newStartingHashKey: string;
 
-  @Metadata({ data: "json, name=ShardToSplit" })
+  @SpeakeasyMetadata({ data: "json, name=ShardToSplit" })
   shardToSplit: string;
 
-  @Metadata({ data: "json, name=StreamName" })
+  @SpeakeasyMetadata({ data: "json, name=StreamName" })
   streamName: string;
 }

@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class AuthResourcesEnum(str, Enum):
     USER_POOL_ONLY = "USER_POOL_ONLY"

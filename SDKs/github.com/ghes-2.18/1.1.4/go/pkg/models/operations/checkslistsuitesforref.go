@@ -17,14 +17,14 @@ type ChecksListSuitesForRefQueryParams struct {
 	PerPage   *int64  `queryParam:"style=form,explode=true,name=per_page"`
 }
 
-type ChecksListSuitesForRefRequest struct {
-	PathParams  ChecksListSuitesForRefPathParams
-	QueryParams ChecksListSuitesForRefQueryParams
-}
-
 type ChecksListSuitesForRef200ApplicationJSON struct {
 	CheckSuites []shared.CheckSuite `json:"check_suites"`
 	TotalCount  int64               `json:"total_count"`
+}
+
+type ChecksListSuitesForRefRequest struct {
+	PathParams  ChecksListSuitesForRefPathParams
+	QueryParams ChecksListSuitesForRefQueryParams
 }
 
 type ChecksListSuitesForRefResponse struct {

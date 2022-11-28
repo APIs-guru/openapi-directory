@@ -15,6 +15,8 @@ type InitiateVaultLockHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// InitiateVaultLockRequestBodyPolicy
+// Contains the vault lock policy.
 type InitiateVaultLockRequestBodyPolicy struct {
 	Policy *string `json:"Policy,omitempty"`
 }

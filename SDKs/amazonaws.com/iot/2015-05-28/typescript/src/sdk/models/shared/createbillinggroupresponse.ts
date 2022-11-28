@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateBillingGroupResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=billingGroupArn" })
+  @SpeakeasyMetadata({ data: "json, name=billingGroupArn" })
   billingGroupArn?: string;
 
-  @Metadata({ data: "json, name=billingGroupId" })
+  @SpeakeasyMetadata({ data: "json, name=billingGroupId" })
   billingGroupId?: string;
 
-  @Metadata({ data: "json, name=billingGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=billingGroupName" })
   billingGroupName?: string;
 }

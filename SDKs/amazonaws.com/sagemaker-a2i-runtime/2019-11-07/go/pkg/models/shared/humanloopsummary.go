@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// HumanLoopSummary
+// Summary information about the human loop.
 type HumanLoopSummary struct {
 	CreationTime      *time.Time           `json:"CreationTime,omitempty"`
 	FailureReason     *string              `json:"FailureReason,omitempty"`

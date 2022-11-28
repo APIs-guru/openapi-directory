@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ContentReturnaddressDeletePathParams:
-    merchant_id: str = field(default=None, metadata={'path_param': { 'field_name': 'merchantId', 'style': 'simple', 'explode': False }})
-    return_address_id: str = field(default=None, metadata={'path_param': { 'field_name': 'returnAddressId', 'style': 'simple', 'explode': False }})
+    merchant_id: str = field(metadata={'path_param': { 'field_name': 'merchantId', 'style': 'simple', 'explode': False }})
+    return_address_id: str = field(metadata={'path_param': { 'field_name': 'returnAddressId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,19 +27,19 @@ class ContentReturnaddressDeleteQueryParams:
 
 @dataclass
 class ContentReturnaddressDeleteSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ContentReturnaddressDeleteRequest:
-    path_params: ContentReturnaddressDeletePathParams = field(default=None)
-    query_params: ContentReturnaddressDeleteQueryParams = field(default=None)
-    security: ContentReturnaddressDeleteSecurity = field(default=None)
+    path_params: ContentReturnaddressDeletePathParams = field()
+    query_params: ContentReturnaddressDeleteQueryParams = field()
+    security: ContentReturnaddressDeleteSecurity = field()
     
 
 @dataclass
 class ContentReturnaddressDeleteResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

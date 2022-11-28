@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// GenericRevisionInfo
+// Information about an application revision.
 type GenericRevisionInfo struct {
 	DeploymentGroups []string   `json:"deploymentGroups,omitempty"`
 	Description      *string    `json:"description,omitempty"`

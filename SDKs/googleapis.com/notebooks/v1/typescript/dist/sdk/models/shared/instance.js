@@ -22,12 +22,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AcceleratorConfig } from "./acceleratorconfig";
 import { ContainerImage } from "./containerimage";
+import { Disk } from "./disk";
 import { ReservationAffinity } from "./reservationaffinity";
 import { ShieldedInstanceConfig } from "./shieldedinstanceconfig";
+import { UpgradeHistoryEntry } from "./upgradehistoryentry";
 import { VmImage } from "./vmimage";
 export var InstanceBootDiskTypeEnum;
 (function (InstanceBootDiskTypeEnum) {
@@ -82,149 +83,277 @@ var Instance = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=acceleratorConfig" }),
+        SpeakeasyMetadata({ data: "json, name=acceleratorConfig" }),
         __metadata("design:type", AcceleratorConfig)
     ], Instance.prototype, "acceleratorConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=bootDiskSizeGb" }),
+        SpeakeasyMetadata({ data: "json, name=bootDiskSizeGb" }),
         __metadata("design:type", String)
     ], Instance.prototype, "bootDiskSizeGb", void 0);
     __decorate([
-        Metadata({ data: "json, name=bootDiskType" }),
+        SpeakeasyMetadata({ data: "json, name=bootDiskType" }),
         __metadata("design:type", String)
     ], Instance.prototype, "bootDiskType", void 0);
     __decorate([
-        Metadata({ data: "json, name=canIpForward" }),
+        SpeakeasyMetadata({ data: "json, name=canIpForward" }),
         __metadata("design:type", Boolean)
     ], Instance.prototype, "canIpForward", void 0);
     __decorate([
-        Metadata({ data: "json, name=containerImage" }),
+        SpeakeasyMetadata({ data: "json, name=containerImage" }),
         __metadata("design:type", ContainerImage)
     ], Instance.prototype, "containerImage", void 0);
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", String)
     ], Instance.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=creator" }),
+        SpeakeasyMetadata({ data: "json, name=creator" }),
         __metadata("design:type", String)
     ], Instance.prototype, "creator", void 0);
     __decorate([
-        Metadata({ data: "json, name=customGpuDriverPath" }),
+        SpeakeasyMetadata({ data: "json, name=customGpuDriverPath" }),
         __metadata("design:type", String)
     ], Instance.prototype, "customGpuDriverPath", void 0);
     __decorate([
-        Metadata({ data: "json, name=dataDiskSizeGb" }),
+        SpeakeasyMetadata({ data: "json, name=dataDiskSizeGb" }),
         __metadata("design:type", String)
     ], Instance.prototype, "dataDiskSizeGb", void 0);
     __decorate([
-        Metadata({ data: "json, name=dataDiskType" }),
+        SpeakeasyMetadata({ data: "json, name=dataDiskType" }),
         __metadata("design:type", String)
     ], Instance.prototype, "dataDiskType", void 0);
     __decorate([
-        Metadata({ data: "json, name=diskEncryption" }),
+        SpeakeasyMetadata({ data: "json, name=diskEncryption" }),
         __metadata("design:type", String)
     ], Instance.prototype, "diskEncryption", void 0);
     __decorate([
-        Metadata({ data: "json, name=disks", elemType: shared.Disk }),
+        SpeakeasyMetadata({ data: "json, name=disks", elemType: Disk }),
         __metadata("design:type", Array)
     ], Instance.prototype, "disks", void 0);
     __decorate([
-        Metadata({ data: "json, name=installGpuDriver" }),
+        SpeakeasyMetadata({ data: "json, name=installGpuDriver" }),
         __metadata("design:type", Boolean)
     ], Instance.prototype, "installGpuDriver", void 0);
     __decorate([
-        Metadata({ data: "json, name=instanceOwners" }),
+        SpeakeasyMetadata({ data: "json, name=instanceOwners" }),
         __metadata("design:type", Array)
     ], Instance.prototype, "instanceOwners", void 0);
     __decorate([
-        Metadata({ data: "json, name=kmsKey" }),
+        SpeakeasyMetadata({ data: "json, name=kmsKey" }),
         __metadata("design:type", String)
     ], Instance.prototype, "kmsKey", void 0);
     __decorate([
-        Metadata({ data: "json, name=labels" }),
+        SpeakeasyMetadata({ data: "json, name=labels" }),
         __metadata("design:type", Map)
     ], Instance.prototype, "labels", void 0);
     __decorate([
-        Metadata({ data: "json, name=machineType" }),
+        SpeakeasyMetadata({ data: "json, name=machineType" }),
         __metadata("design:type", String)
     ], Instance.prototype, "machineType", void 0);
     __decorate([
-        Metadata({ data: "json, name=metadata" }),
+        SpeakeasyMetadata({ data: "json, name=metadata" }),
         __metadata("design:type", Map)
     ], Instance.prototype, "metadata", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Instance.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=network" }),
+        SpeakeasyMetadata({ data: "json, name=network" }),
         __metadata("design:type", String)
     ], Instance.prototype, "network", void 0);
     __decorate([
-        Metadata({ data: "json, name=nicType" }),
+        SpeakeasyMetadata({ data: "json, name=nicType" }),
         __metadata("design:type", String)
     ], Instance.prototype, "nicType", void 0);
     __decorate([
-        Metadata({ data: "json, name=noProxyAccess" }),
+        SpeakeasyMetadata({ data: "json, name=noProxyAccess" }),
         __metadata("design:type", Boolean)
     ], Instance.prototype, "noProxyAccess", void 0);
     __decorate([
-        Metadata({ data: "json, name=noPublicIp" }),
+        SpeakeasyMetadata({ data: "json, name=noPublicIp" }),
         __metadata("design:type", Boolean)
     ], Instance.prototype, "noPublicIp", void 0);
     __decorate([
-        Metadata({ data: "json, name=noRemoveDataDisk" }),
+        SpeakeasyMetadata({ data: "json, name=noRemoveDataDisk" }),
         __metadata("design:type", Boolean)
     ], Instance.prototype, "noRemoveDataDisk", void 0);
     __decorate([
-        Metadata({ data: "json, name=postStartupScript" }),
+        SpeakeasyMetadata({ data: "json, name=postStartupScript" }),
         __metadata("design:type", String)
     ], Instance.prototype, "postStartupScript", void 0);
     __decorate([
-        Metadata({ data: "json, name=proxyUri" }),
+        SpeakeasyMetadata({ data: "json, name=proxyUri" }),
         __metadata("design:type", String)
     ], Instance.prototype, "proxyUri", void 0);
     __decorate([
-        Metadata({ data: "json, name=reservationAffinity" }),
+        SpeakeasyMetadata({ data: "json, name=reservationAffinity" }),
         __metadata("design:type", ReservationAffinity)
     ], Instance.prototype, "reservationAffinity", void 0);
     __decorate([
-        Metadata({ data: "json, name=serviceAccount" }),
+        SpeakeasyMetadata({ data: "json, name=serviceAccount" }),
         __metadata("design:type", String)
     ], Instance.prototype, "serviceAccount", void 0);
     __decorate([
-        Metadata({ data: "json, name=serviceAccountScopes" }),
+        SpeakeasyMetadata({ data: "json, name=serviceAccountScopes" }),
         __metadata("design:type", Array)
     ], Instance.prototype, "serviceAccountScopes", void 0);
     __decorate([
-        Metadata({ data: "json, name=shieldedInstanceConfig" }),
+        SpeakeasyMetadata({ data: "json, name=shieldedInstanceConfig" }),
         __metadata("design:type", ShieldedInstanceConfig)
     ], Instance.prototype, "shieldedInstanceConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], Instance.prototype, "state", void 0);
     __decorate([
-        Metadata({ data: "json, name=subnet" }),
+        SpeakeasyMetadata({ data: "json, name=subnet" }),
         __metadata("design:type", String)
     ], Instance.prototype, "subnet", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags" }),
+        SpeakeasyMetadata({ data: "json, name=tags" }),
         __metadata("design:type", Array)
     ], Instance.prototype, "tags", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateTime" }),
+        SpeakeasyMetadata({ data: "json, name=updateTime" }),
         __metadata("design:type", String)
     ], Instance.prototype, "updateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=upgradeHistory", elemType: shared.UpgradeHistoryEntry }),
+        SpeakeasyMetadata({ data: "json, name=upgradeHistory", elemType: UpgradeHistoryEntry }),
         __metadata("design:type", Array)
     ], Instance.prototype, "upgradeHistory", void 0);
     __decorate([
-        Metadata({ data: "json, name=vmImage" }),
+        SpeakeasyMetadata({ data: "json, name=vmImage" }),
         __metadata("design:type", VmImage)
     ], Instance.prototype, "vmImage", void 0);
     return Instance;
 }(SpeakeasyBase));
 export { Instance };
+// InstanceInput
+/**
+ * The definition of a notebook instance.
+**/
+var InstanceInput = /** @class */ (function (_super) {
+    __extends(InstanceInput, _super);
+    function InstanceInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=acceleratorConfig" }),
+        __metadata("design:type", AcceleratorConfig)
+    ], InstanceInput.prototype, "acceleratorConfig", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=bootDiskSizeGb" }),
+        __metadata("design:type", String)
+    ], InstanceInput.prototype, "bootDiskSizeGb", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=bootDiskType" }),
+        __metadata("design:type", String)
+    ], InstanceInput.prototype, "bootDiskType", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=canIpForward" }),
+        __metadata("design:type", Boolean)
+    ], InstanceInput.prototype, "canIpForward", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=containerImage" }),
+        __metadata("design:type", ContainerImage)
+    ], InstanceInput.prototype, "containerImage", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=customGpuDriverPath" }),
+        __metadata("design:type", String)
+    ], InstanceInput.prototype, "customGpuDriverPath", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=dataDiskSizeGb" }),
+        __metadata("design:type", String)
+    ], InstanceInput.prototype, "dataDiskSizeGb", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=dataDiskType" }),
+        __metadata("design:type", String)
+    ], InstanceInput.prototype, "dataDiskType", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=diskEncryption" }),
+        __metadata("design:type", String)
+    ], InstanceInput.prototype, "diskEncryption", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=installGpuDriver" }),
+        __metadata("design:type", Boolean)
+    ], InstanceInput.prototype, "installGpuDriver", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=instanceOwners" }),
+        __metadata("design:type", Array)
+    ], InstanceInput.prototype, "instanceOwners", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=kmsKey" }),
+        __metadata("design:type", String)
+    ], InstanceInput.prototype, "kmsKey", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=labels" }),
+        __metadata("design:type", Map)
+    ], InstanceInput.prototype, "labels", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=machineType" }),
+        __metadata("design:type", String)
+    ], InstanceInput.prototype, "machineType", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=metadata" }),
+        __metadata("design:type", Map)
+    ], InstanceInput.prototype, "metadata", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=network" }),
+        __metadata("design:type", String)
+    ], InstanceInput.prototype, "network", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=nicType" }),
+        __metadata("design:type", String)
+    ], InstanceInput.prototype, "nicType", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=noProxyAccess" }),
+        __metadata("design:type", Boolean)
+    ], InstanceInput.prototype, "noProxyAccess", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=noPublicIp" }),
+        __metadata("design:type", Boolean)
+    ], InstanceInput.prototype, "noPublicIp", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=noRemoveDataDisk" }),
+        __metadata("design:type", Boolean)
+    ], InstanceInput.prototype, "noRemoveDataDisk", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=postStartupScript" }),
+        __metadata("design:type", String)
+    ], InstanceInput.prototype, "postStartupScript", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=reservationAffinity" }),
+        __metadata("design:type", ReservationAffinity)
+    ], InstanceInput.prototype, "reservationAffinity", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=serviceAccount" }),
+        __metadata("design:type", String)
+    ], InstanceInput.prototype, "serviceAccount", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=serviceAccountScopes" }),
+        __metadata("design:type", Array)
+    ], InstanceInput.prototype, "serviceAccountScopes", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=shieldedInstanceConfig" }),
+        __metadata("design:type", ShieldedInstanceConfig)
+    ], InstanceInput.prototype, "shieldedInstanceConfig", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=subnet" }),
+        __metadata("design:type", String)
+    ], InstanceInput.prototype, "subnet", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=tags" }),
+        __metadata("design:type", Array)
+    ], InstanceInput.prototype, "tags", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=upgradeHistory", elemType: UpgradeHistoryEntry }),
+        __metadata("design:type", Array)
+    ], InstanceInput.prototype, "upgradeHistory", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=vmImage" }),
+        __metadata("design:type", VmImage)
+    ], InstanceInput.prototype, "vmImage", void 0);
+    return InstanceInput;
+}(SpeakeasyBase));
+export { InstanceInput };

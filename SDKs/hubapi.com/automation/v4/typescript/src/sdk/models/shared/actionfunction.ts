@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ActionFunctionFunctionTypeEnum {
-    PreActionExecution = "PRE_ACTION_EXECUTION"
-,    PreFetchOptions = "PRE_FETCH_OPTIONS"
-,    PostFetchOptions = "POST_FETCH_OPTIONS"
+    PreActionExecution = "PRE_ACTION_EXECUTION",
+    PreFetchOptions = "PRE_FETCH_OPTIONS",
+    PostFetchOptions = "POST_FETCH_OPTIONS"
 }
 
 
@@ -12,12 +13,12 @@ export enum ActionFunctionFunctionTypeEnum {
  * A serverless function associated with this custom workflow action.
 **/
 export class ActionFunction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=functionSource" })
+  @SpeakeasyMetadata({ data: "json, name=functionSource" })
   functionSource: string;
 
-  @Metadata({ data: "json, name=functionType" })
+  @SpeakeasyMetadata({ data: "json, name=functionType" })
   functionType: ActionFunctionFunctionTypeEnum;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 }

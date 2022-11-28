@@ -1,33 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateEventSourceMappingPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=UUID" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=UUID" })
   uuid: string;
 }
 
 
 export class UpdateEventSourceMappingHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -37,90 +38,90 @@ export class UpdateEventSourceMappingHeaders extends SpeakeasyBase {
  * A configuration object that specifies the destination of an event after Lambda processes it.
 **/
 export class UpdateEventSourceMappingRequestBodyDestinationConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=OnFailure" })
+  @SpeakeasyMetadata({ data: "json, name=OnFailure" })
   onFailure?: shared.OnFailure;
 
-  @Metadata({ data: "json, name=OnSuccess" })
+  @SpeakeasyMetadata({ data: "json, name=OnSuccess" })
   onSuccess?: shared.OnSuccess;
 }
 
 
 export class UpdateEventSourceMappingRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BatchSize" })
+  @SpeakeasyMetadata({ data: "json, name=BatchSize" })
   batchSize?: number;
 
-  @Metadata({ data: "json, name=BisectBatchOnFunctionError" })
+  @SpeakeasyMetadata({ data: "json, name=BisectBatchOnFunctionError" })
   bisectBatchOnFunctionError?: boolean;
 
-  @Metadata({ data: "json, name=DestinationConfig" })
+  @SpeakeasyMetadata({ data: "json, name=DestinationConfig" })
   destinationConfig?: UpdateEventSourceMappingRequestBodyDestinationConfig;
 
-  @Metadata({ data: "json, name=Enabled" })
+  @SpeakeasyMetadata({ data: "json, name=Enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=FunctionName" })
+  @SpeakeasyMetadata({ data: "json, name=FunctionName" })
   functionName?: string;
 
-  @Metadata({ data: "json, name=FunctionResponseTypes" })
+  @SpeakeasyMetadata({ data: "json, name=FunctionResponseTypes" })
   functionResponseTypes?: shared.FunctionResponseTypeEnum[];
 
-  @Metadata({ data: "json, name=MaximumBatchingWindowInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=MaximumBatchingWindowInSeconds" })
   maximumBatchingWindowInSeconds?: number;
 
-  @Metadata({ data: "json, name=MaximumRecordAgeInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=MaximumRecordAgeInSeconds" })
   maximumRecordAgeInSeconds?: number;
 
-  @Metadata({ data: "json, name=MaximumRetryAttempts" })
+  @SpeakeasyMetadata({ data: "json, name=MaximumRetryAttempts" })
   maximumRetryAttempts?: number;
 
-  @Metadata({ data: "json, name=ParallelizationFactor" })
+  @SpeakeasyMetadata({ data: "json, name=ParallelizationFactor" })
   parallelizationFactor?: number;
 
-  @Metadata({ data: "json, name=SourceAccessConfigurations", elemType: shared.SourceAccessConfiguration })
+  @SpeakeasyMetadata({ data: "json, name=SourceAccessConfigurations", elemType: shared.SourceAccessConfiguration })
   sourceAccessConfigurations?: shared.SourceAccessConfiguration[];
 
-  @Metadata({ data: "json, name=TumblingWindowInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=TumblingWindowInSeconds" })
   tumblingWindowInSeconds?: number;
 }
 
 
 export class UpdateEventSourceMappingRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateEventSourceMappingPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdateEventSourceMappingHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdateEventSourceMappingRequestBody;
 }
 
 
 export class UpdateEventSourceMappingResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   eventSourceMappingConfiguration?: shared.EventSourceMappingConfiguration;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidParameterValueException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceConflictException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceInUseException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tooManyRequestsException?: any;
 }

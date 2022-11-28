@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TimeInterval } from "./timeinterval";
 import { TypedValue } from "./typedvalue";
+
 
 
 // Point
@@ -8,9 +9,9 @@ import { TypedValue } from "./typedvalue";
  * A single data point in a time series.
 **/
 export class Point extends SpeakeasyBase {
-  @Metadata({ data: "json, name=interval" })
+  @SpeakeasyMetadata({ data: "json, name=interval" })
   interval?: TimeInterval;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: TypedValue;
 }

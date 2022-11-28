@@ -8,11 +8,8 @@ type PostLoadBalancersIDActionsChangeTypeChangeTypeRequest struct {
 	LoadBalancerType string `json:"load_balancer_type"`
 }
 
-type PostLoadBalancersIDActionsChangeTypeRequest struct {
-	PathParams PostLoadBalancersIDActionsChangeTypePathParams
-	Request    *PostLoadBalancersIDActionsChangeTypeChangeTypeRequest `request:"mediaType=application/json"`
-}
-
+// PostLoadBalancersIDActionsChangeTypeActionResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type PostLoadBalancersIDActionsChangeTypeActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -44,6 +41,11 @@ type PostLoadBalancersIDActionsChangeTypeActionResponseAction struct {
 
 type PostLoadBalancersIDActionsChangeTypeActionResponse struct {
 	Action PostLoadBalancersIDActionsChangeTypeActionResponseAction `json:"action"`
+}
+
+type PostLoadBalancersIDActionsChangeTypeRequest struct {
+	PathParams PostLoadBalancersIDActionsChangeTypePathParams
+	Request    *PostLoadBalancersIDActionsChangeTypeChangeTypeRequest `request:"mediaType=application/json"`
 }
 
 type PostLoadBalancersIDActionsChangeTypeResponse struct {

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Stage
+// Represents an API stage.
 type Stage struct {
 	AccessLogSettings           *AccessLogSettings       `json:"AccessLogSettings,omitempty"`
 	APIGatewayManaged           *bool                    `json:"ApiGatewayManaged,omitempty"`

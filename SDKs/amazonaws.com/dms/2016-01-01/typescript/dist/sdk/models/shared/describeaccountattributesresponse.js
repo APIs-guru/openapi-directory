@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { AccountQuota } from "./accountquota";
 // DescribeAccountAttributesResponse
 /**
  * <p/>
@@ -34,11 +34,11 @@ var DescribeAccountAttributesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AccountQuotas", elemType: shared.AccountQuota }),
+        SpeakeasyMetadata({ data: "json, name=AccountQuotas", elemType: AccountQuota }),
         __metadata("design:type", Array)
     ], DescribeAccountAttributesResponse.prototype, "accountQuotas", void 0);
     __decorate([
-        Metadata({ data: "json, name=UniqueAccountIdentifier" }),
+        SpeakeasyMetadata({ data: "json, name=UniqueAccountIdentifier" }),
         __metadata("design:type", String)
     ], DescribeAccountAttributesResponse.prototype, "uniqueAccountIdentifier", void 0);
     return DescribeAccountAttributesResponse;

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MetricsScope } from "./metricsscope";
+
 
 
 // ListMetricsScopesByMonitoredProjectResponse
@@ -8,6 +8,6 @@ import { MetricsScope } from "./metricsscope";
  * Response for the ListMetricsScopesByMonitoredProject method.
 **/
 export class ListMetricsScopesByMonitoredProjectResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=metricsScopes", elemType: shared.MetricsScope })
+  @SpeakeasyMetadata({ data: "json, name=metricsScopes", elemType: MetricsScope })
   metricsScopes?: MetricsScope[];
 }

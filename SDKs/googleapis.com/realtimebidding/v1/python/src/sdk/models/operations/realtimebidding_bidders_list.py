@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -22,19 +23,19 @@ class RealtimebiddingBiddersListQueryParams:
 
 @dataclass
 class RealtimebiddingBiddersListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class RealtimebiddingBiddersListRequest:
-    query_params: RealtimebiddingBiddersListQueryParams = field(default=None)
-    security: RealtimebiddingBiddersListSecurity = field(default=None)
+    query_params: RealtimebiddingBiddersListQueryParams = field()
+    security: RealtimebiddingBiddersListSecurity = field()
     
 
 @dataclass
 class RealtimebiddingBiddersListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_bidders_response: Optional[shared.ListBiddersResponse] = field(default=None)
-    status_code: int = field(default=None)
     

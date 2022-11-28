@@ -1,5 +1,7 @@
 package shared
 
+// AssessmentRunFilter
+// Used as the request parameter in the <a>ListAssessmentRuns</a> action.
 type AssessmentRunFilter struct {
 	CompletionTimeRange  *TimestampRange          `json:"completionTimeRange,omitempty"`
 	DurationRange        *DurationRange           `json:"durationRange,omitempty"`

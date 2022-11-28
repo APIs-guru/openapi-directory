@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DebugOptions } from "./debugoptions";
+
 
 
 // StartUploadItemRequest
@@ -7,9 +8,9 @@ import { DebugOptions } from "./debugoptions";
  * Start upload file request.
 **/
 export class StartUploadItemRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=connectorName" })
+  @SpeakeasyMetadata({ data: "json, name=connectorName" })
   connectorName?: string;
 
-  @Metadata({ data: "json, name=debugOptions" })
+  @SpeakeasyMetadata({ data: "json, name=debugOptions" })
   debugOptions?: DebugOptions;
 }

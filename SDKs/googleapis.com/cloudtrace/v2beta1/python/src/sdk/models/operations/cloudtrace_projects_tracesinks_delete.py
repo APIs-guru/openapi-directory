@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudtraceProjectsTraceSinksDeletePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class CloudtraceProjectsTraceSinksDeleteQueryParams:
 
 @dataclass
 class CloudtraceProjectsTraceSinksDeleteSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudtraceProjectsTraceSinksDeleteSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,14 +44,14 @@ class CloudtraceProjectsTraceSinksDeleteSecurity:
 
 @dataclass
 class CloudtraceProjectsTraceSinksDeleteRequest:
-    path_params: CloudtraceProjectsTraceSinksDeletePathParams = field(default=None)
-    query_params: CloudtraceProjectsTraceSinksDeleteQueryParams = field(default=None)
-    security: CloudtraceProjectsTraceSinksDeleteSecurity = field(default=None)
+    path_params: CloudtraceProjectsTraceSinksDeletePathParams = field()
+    query_params: CloudtraceProjectsTraceSinksDeleteQueryParams = field()
+    security: CloudtraceProjectsTraceSinksDeleteSecurity = field()
     
 
 @dataclass
 class CloudtraceProjectsTraceSinksDeleteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

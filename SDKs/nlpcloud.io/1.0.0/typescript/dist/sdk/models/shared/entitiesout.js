@@ -22,15 +22,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { EntityOut } from "./entityout";
 var EntitiesOut = /** @class */ (function (_super) {
     __extends(EntitiesOut, _super);
     function EntitiesOut() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=entities", elemType: shared.EntityOut }),
+        SpeakeasyMetadata({ data: "json, name=entities", elemType: EntityOut }),
         __metadata("design:type", Array)
     ], EntitiesOut.prototype, "entities", void 0);
     return EntitiesOut;

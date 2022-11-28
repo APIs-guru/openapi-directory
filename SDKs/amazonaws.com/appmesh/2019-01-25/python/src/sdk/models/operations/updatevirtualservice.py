@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdateVirtualServicePathParams:
-    mesh_name: str = field(default=None, metadata={'path_param': { 'field_name': 'meshName', 'style': 'simple', 'explode': False }})
-    virtual_service_name: str = field(default=None, metadata={'path_param': { 'field_name': 'virtualServiceName', 'style': 'simple', 'explode': False }})
+    mesh_name: str = field(metadata={'path_param': { 'field_name': 'meshName', 'style': 'simple', 'explode': False }})
+    virtual_service_name: str = field(metadata={'path_param': { 'field_name': 'virtualServiceName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -29,35 +33,39 @@ class UpdateVirtualServiceHeaders:
 @dataclass_json
 @dataclass
 class UpdateVirtualServiceRequestBodySpec:
-    provider: Optional[shared.VirtualServiceProvider] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'provider' }})
+    r"""UpdateVirtualServiceRequestBodySpec
+    An object that represents the specification of a virtual service.
+    """
+    
+    provider: Optional[shared.VirtualServiceProvider] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('provider') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateVirtualServiceRequestBody:
-    client_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clientToken' }})
-    spec: UpdateVirtualServiceRequestBodySpec = field(default=None, metadata={'dataclasses_json': { 'field_name': 'spec' }})
+    spec: UpdateVirtualServiceRequestBodySpec = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('spec') }})
+    client_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clientToken') }})
     
 
 @dataclass
 class UpdateVirtualServiceRequest:
-    path_params: UpdateVirtualServicePathParams = field(default=None)
-    query_params: UpdateVirtualServiceQueryParams = field(default=None)
-    headers: UpdateVirtualServiceHeaders = field(default=None)
-    request: UpdateVirtualServiceRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateVirtualServiceHeaders = field()
+    path_params: UpdateVirtualServicePathParams = field()
+    query_params: UpdateVirtualServiceQueryParams = field()
+    request: UpdateVirtualServiceRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateVirtualServiceResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     forbidden_exception: Optional[Any] = field(default=None)
     internal_server_error_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     update_virtual_service_output: Optional[shared.UpdateVirtualServiceOutput] = field(default=None)
     

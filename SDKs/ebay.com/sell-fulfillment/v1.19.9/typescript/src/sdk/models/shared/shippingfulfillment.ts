@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LineItemReference } from "./lineitemreference";
+
 
 
 // ShippingFulfillment
@@ -8,18 +8,18 @@ import { LineItemReference } from "./lineitemreference";
  * This type contains the complete details of an existing fulfillment for an order.
 **/
 export class ShippingFulfillment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fulfillmentId" })
+  @SpeakeasyMetadata({ data: "json, name=fulfillmentId" })
   fulfillmentId?: string;
 
-  @Metadata({ data: "json, name=lineItems", elemType: shared.LineItemReference })
+  @SpeakeasyMetadata({ data: "json, name=lineItems", elemType: LineItemReference })
   lineItems?: LineItemReference[];
 
-  @Metadata({ data: "json, name=shipmentTrackingNumber" })
+  @SpeakeasyMetadata({ data: "json, name=shipmentTrackingNumber" })
   shipmentTrackingNumber?: string;
 
-  @Metadata({ data: "json, name=shippedDate" })
+  @SpeakeasyMetadata({ data: "json, name=shippedDate" })
   shippedDate?: string;
 
-  @Metadata({ data: "json, name=shippingCarrierCode" })
+  @SpeakeasyMetadata({ data: "json, name=shippingCarrierCode" })
   shippingCarrierCode?: string;
 }

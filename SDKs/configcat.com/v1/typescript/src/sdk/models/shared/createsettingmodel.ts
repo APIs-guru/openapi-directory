@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SettingTypeEnum } from "./settingtypeenum";
 
 
+
 export class CreateSettingModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hint" })
+  @SpeakeasyMetadata({ data: "json, name=hint" })
   hint?: string;
 
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=settingType" })
+  @SpeakeasyMetadata({ data: "json, name=settingType" })
   settingType: SettingTypeEnum;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: number[];
 }

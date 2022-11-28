@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // YadifConfig
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Yet Another Deinterlacing Filter Configuration.
 **/
 export class YadifConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deinterlaceAllFrames" })
+  @SpeakeasyMetadata({ data: "json, name=deinterlaceAllFrames" })
   deinterlaceAllFrames?: boolean;
 
-  @Metadata({ data: "json, name=disableSpatialInterlacing" })
+  @SpeakeasyMetadata({ data: "json, name=disableSpatialInterlacing" })
   disableSpatialInterlacing?: boolean;
 
-  @Metadata({ data: "json, name=mode" })
+  @SpeakeasyMetadata({ data: "json, name=mode" })
   mode?: string;
 
-  @Metadata({ data: "json, name=parity" })
+  @SpeakeasyMetadata({ data: "json, name=parity" })
   parity?: string;
 }

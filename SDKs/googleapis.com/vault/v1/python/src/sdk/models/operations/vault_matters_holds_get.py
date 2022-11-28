@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class VaultMattersHoldsGetPathParams:
-    hold_id: str = field(default=None, metadata={'path_param': { 'field_name': 'holdId', 'style': 'simple', 'explode': False }})
-    matter_id: str = field(default=None, metadata={'path_param': { 'field_name': 'matterId', 'style': 'simple', 'explode': False }})
+    hold_id: str = field(metadata={'path_param': { 'field_name': 'holdId', 'style': 'simple', 'explode': False }})
+    matter_id: str = field(metadata={'path_param': { 'field_name': 'matterId', 'style': 'simple', 'explode': False }})
     
 class VaultMattersHoldsGetViewEnum(str, Enum):
     HOLD_VIEW_UNSPECIFIED = "HOLD_VIEW_UNSPECIFIED"
@@ -32,14 +33,14 @@ class VaultMattersHoldsGetQueryParams:
 
 @dataclass
 class VaultMattersHoldsGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class VaultMattersHoldsGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -50,14 +51,14 @@ class VaultMattersHoldsGetSecurity:
 
 @dataclass
 class VaultMattersHoldsGetRequest:
-    path_params: VaultMattersHoldsGetPathParams = field(default=None)
-    query_params: VaultMattersHoldsGetQueryParams = field(default=None)
-    security: VaultMattersHoldsGetSecurity = field(default=None)
+    path_params: VaultMattersHoldsGetPathParams = field()
+    query_params: VaultMattersHoldsGetQueryParams = field()
+    security: VaultMattersHoldsGetSecurity = field()
     
 
 @dataclass
 class VaultMattersHoldsGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     hold: Optional[shared.Hold] = field(default=None)
-    status_code: int = field(default=None)
     

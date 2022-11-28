@@ -1,5 +1,7 @@
 package shared
 
+// WordInfo
+// Word-specific information for recognized words.
 type WordInfo struct {
 	Confidence *float32 `json:"confidence,omitempty"`
 	EndTime    *string  `json:"endTime,omitempty"`

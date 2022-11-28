@@ -13,13 +13,13 @@ type GetJobQueryParams struct {
 	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
+type GetJob200ApplicationJSON struct {
+	Data *shared.JobResponse `json:"data,omitempty"`
+}
+
 type GetJobRequest struct {
 	PathParams  GetJobPathParams
 	QueryParams GetJobQueryParams
-}
-
-type GetJob200ApplicationJSON struct {
-	Data *shared.JobResponse `json:"data,omitempty"`
 }
 
 type GetJobResponse struct {

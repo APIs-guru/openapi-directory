@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { HttpHeaderMatch } from "./httpheadermatch";
 /**
  * Specification of traffic destination attributes.

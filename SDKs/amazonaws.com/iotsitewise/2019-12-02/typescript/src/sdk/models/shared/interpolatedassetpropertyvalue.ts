@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TimeInNanos } from "./timeinnanos";
 import { Variant } from "./variant";
+
 
 
 // InterpolatedAssetPropertyValue
@@ -8,9 +9,9 @@ import { Variant } from "./variant";
  * Contains information about an interpolated asset property value.
 **/
 export class InterpolatedAssetPropertyValue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=timestamp" })
   timestamp: TimeInNanos;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value: Variant;
 }

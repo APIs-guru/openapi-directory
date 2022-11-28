@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DriveEndTime = /** @class */ (function (_super) {
     __extends(DriveEndTime, _super);
     function DriveEndTime() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=minutes" }),
+        SpeakeasyMetadata({ data: "json, name=minutes" }),
         __metadata("design:type", Number)
     ], DriveEndTime.prototype, "minutes", void 0);
     __decorate([
-        Metadata({ data: "json, name=seconds" }),
+        SpeakeasyMetadata({ data: "json, name=seconds" }),
         __metadata("design:type", Number)
     ], DriveEndTime.prototype, "seconds", void 0);
     return DriveEndTime;
@@ -45,11 +45,11 @@ var DriveStartTime = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=minutes" }),
+        SpeakeasyMetadata({ data: "json, name=minutes" }),
         __metadata("design:type", Number)
     ], DriveStartTime.prototype, "minutes", void 0);
     __decorate([
-        Metadata({ data: "json, name=seconds" }),
+        SpeakeasyMetadata({ data: "json, name=seconds" }),
         __metadata("design:type", Number)
     ], DriveStartTime.prototype, "seconds", void 0);
     return DriveStartTime;
@@ -61,99 +61,99 @@ var Drive = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=defense" }),
+        SpeakeasyMetadata({ data: "json, name=defense" }),
         __metadata("design:type", String)
     ], Drive.prototype, "defense", void 0);
     __decorate([
-        Metadata({ data: "json, name=defense_conference" }),
+        SpeakeasyMetadata({ data: "json, name=defense_conference" }),
         __metadata("design:type", String)
     ], Drive.prototype, "defenseConference", void 0);
     __decorate([
-        Metadata({ data: "json, name=drive_number" }),
+        SpeakeasyMetadata({ data: "json, name=drive_number" }),
         __metadata("design:type", Number)
     ], Drive.prototype, "driveNumber", void 0);
     __decorate([
-        Metadata({ data: "json, name=drive_result" }),
+        SpeakeasyMetadata({ data: "json, name=drive_result" }),
         __metadata("design:type", String)
     ], Drive.prototype, "driveResult", void 0);
     __decorate([
-        Metadata({ data: "json, name=end_defense_score" }),
+        SpeakeasyMetadata({ data: "json, name=end_defense_score" }),
         __metadata("design:type", Number)
     ], Drive.prototype, "endDefenseScore", void 0);
     __decorate([
-        Metadata({ data: "json, name=end_offense_score" }),
+        SpeakeasyMetadata({ data: "json, name=end_offense_score" }),
         __metadata("design:type", Number)
     ], Drive.prototype, "endOffenseScore", void 0);
     __decorate([
-        Metadata({ data: "json, name=end_period" }),
+        SpeakeasyMetadata({ data: "json, name=end_period" }),
         __metadata("design:type", Number)
     ], Drive.prototype, "endPeriod", void 0);
     __decorate([
-        Metadata({ data: "json, name=end_time" }),
+        SpeakeasyMetadata({ data: "json, name=end_time" }),
         __metadata("design:type", DriveEndTime)
     ], Drive.prototype, "endTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=end_yardline" }),
+        SpeakeasyMetadata({ data: "json, name=end_yardline" }),
         __metadata("design:type", Number)
     ], Drive.prototype, "endYardline", void 0);
     __decorate([
-        Metadata({ data: "json, name=end_yards_to_goal" }),
+        SpeakeasyMetadata({ data: "json, name=end_yards_to_goal" }),
         __metadata("design:type", Number)
     ], Drive.prototype, "endYardsToGoal", void 0);
     __decorate([
-        Metadata({ data: "json, name=game_id" }),
+        SpeakeasyMetadata({ data: "json, name=game_id" }),
         __metadata("design:type", Number)
     ], Drive.prototype, "gameId", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", Number)
     ], Drive.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=is_home_offense" }),
+        SpeakeasyMetadata({ data: "json, name=is_home_offense" }),
         __metadata("design:type", Boolean)
     ], Drive.prototype, "isHomeOffense", void 0);
     __decorate([
-        Metadata({ data: "json, name=offense" }),
+        SpeakeasyMetadata({ data: "json, name=offense" }),
         __metadata("design:type", String)
     ], Drive.prototype, "offense", void 0);
     __decorate([
-        Metadata({ data: "json, name=offense_conference" }),
+        SpeakeasyMetadata({ data: "json, name=offense_conference" }),
         __metadata("design:type", String)
     ], Drive.prototype, "offenseConference", void 0);
     __decorate([
-        Metadata({ data: "json, name=plays" }),
+        SpeakeasyMetadata({ data: "json, name=plays" }),
         __metadata("design:type", Number)
     ], Drive.prototype, "plays", void 0);
     __decorate([
-        Metadata({ data: "json, name=scoring" }),
+        SpeakeasyMetadata({ data: "json, name=scoring" }),
         __metadata("design:type", Boolean)
     ], Drive.prototype, "scoring", void 0);
     __decorate([
-        Metadata({ data: "json, name=start_defense_score" }),
+        SpeakeasyMetadata({ data: "json, name=start_defense_score" }),
         __metadata("design:type", Number)
     ], Drive.prototype, "startDefenseScore", void 0);
     __decorate([
-        Metadata({ data: "json, name=start_offense_score" }),
+        SpeakeasyMetadata({ data: "json, name=start_offense_score" }),
         __metadata("design:type", Number)
     ], Drive.prototype, "startOffenseScore", void 0);
     __decorate([
-        Metadata({ data: "json, name=start_period" }),
+        SpeakeasyMetadata({ data: "json, name=start_period" }),
         __metadata("design:type", Number)
     ], Drive.prototype, "startPeriod", void 0);
     __decorate([
-        Metadata({ data: "json, name=start_time" }),
+        SpeakeasyMetadata({ data: "json, name=start_time" }),
         __metadata("design:type", DriveStartTime)
     ], Drive.prototype, "startTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=start_yardline" }),
+        SpeakeasyMetadata({ data: "json, name=start_yardline" }),
         __metadata("design:type", Number)
     ], Drive.prototype, "startYardline", void 0);
     __decorate([
-        Metadata({ data: "json, name=start_yards_to_goal" }),
+        SpeakeasyMetadata({ data: "json, name=start_yards_to_goal" }),
         __metadata("design:type", Number)
     ], Drive.prototype, "startYardsToGoal", void 0);
     __decorate([
-        Metadata({ data: "json, name=yards" }),
+        SpeakeasyMetadata({ data: "json, name=yards" }),
         __metadata("design:type", Number)
     ], Drive.prototype, "yards", void 0);
     return Drive;

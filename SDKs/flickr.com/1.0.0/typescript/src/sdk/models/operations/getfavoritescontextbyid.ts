@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetFavoritesContextByIdQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=api_key" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_key" })
   apiKey: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=photo_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=photo_id" })
   photoId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=user_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=user_id" })
   userId?: string;
 }
 
 
-export class GetFavoritesContextByIdRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetFavoritesContextByIdQueryParams;
-}
-
-
 export class GetFavoritesContextById200ApplicationJsonCount extends SpeakeasyBase {
-  @Metadata({ data: "json, name=_content" })
+  @SpeakeasyMetadata({ data: "json, name=_content" })
   content?: string;
 }
 
 
 export class GetFavoritesContextById200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count?: GetFavoritesContextById200ApplicationJsonCount;
 
-  @Metadata({ data: "json, name=nextphoto" })
+  @SpeakeasyMetadata({ data: "json, name=nextphoto" })
   nextphoto?: shared.ContextPhoto;
 
-  @Metadata({ data: "json, name=prevphoto" })
+  @SpeakeasyMetadata({ data: "json, name=prevphoto" })
   prevphoto?: shared.ContextPhoto;
 
-  @Metadata({ data: "json, name=stat" })
+  @SpeakeasyMetadata({ data: "json, name=stat" })
   stat?: string;
 }
 
 
+export class GetFavoritesContextByIdRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetFavoritesContextByIdQueryParams;
+}
+
+
 export class GetFavoritesContextByIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getFavoritesContextById200ApplicationJsonObject?: GetFavoritesContextById200ApplicationJson;
 }

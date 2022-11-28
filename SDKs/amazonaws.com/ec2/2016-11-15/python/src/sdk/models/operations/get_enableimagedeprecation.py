@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 
 class GetEnableImageDeprecationActionEnum(str, Enum):
     ENABLE_IMAGE_DEPRECATION = "EnableImageDeprecation"
@@ -13,11 +14,11 @@ class GetEnableImageDeprecationVersionEnum(str, Enum):
 
 @dataclass
 class GetEnableImageDeprecationQueryParams:
-    action: GetEnableImageDeprecationActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    deprecate_at: datetime = field(default=None, metadata={'query_param': { 'field_name': 'DeprecateAt', 'style': 'form', 'explode': True }})
+    action: GetEnableImageDeprecationActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    deprecate_at: datetime = field(metadata={'query_param': { 'field_name': 'DeprecateAt', 'style': 'form', 'explode': True }})
+    image_id: str = field(metadata={'query_param': { 'field_name': 'ImageId', 'style': 'form', 'explode': True }})
+    version: GetEnableImageDeprecationVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    image_id: str = field(default=None, metadata={'query_param': { 'field_name': 'ImageId', 'style': 'form', 'explode': True }})
-    version: GetEnableImageDeprecationVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -33,13 +34,13 @@ class GetEnableImageDeprecationHeaders:
 
 @dataclass
 class GetEnableImageDeprecationRequest:
-    query_params: GetEnableImageDeprecationQueryParams = field(default=None)
-    headers: GetEnableImageDeprecationHeaders = field(default=None)
+    headers: GetEnableImageDeprecationHeaders = field()
+    query_params: GetEnableImageDeprecationQueryParams = field()
     
 
 @dataclass
 class GetEnableImageDeprecationResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

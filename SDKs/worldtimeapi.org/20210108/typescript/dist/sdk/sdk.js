@@ -10,11 +10,9 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 import axios from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
 import * as operations from "./models/operations";
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
-var Servers = [
+import * as utils from "../internal/utils";
+export var ServerList = [
     "http://worldtimeapi.org/api/",
 ];
 export function WithServerURL(serverURL, params) {
@@ -22,12 +20,12 @@ export function WithServerURL(serverURL, params) {
         if (params != null) {
             serverURL = utils.ReplaceParameters(serverURL, params);
         }
-        sdk.serverURL = serverURL;
+        sdk._serverURL = serverURL;
     };
 }
 export function WithClient(client) {
     return function (sdk) {
-        sdk.defaultClient = client;
+        sdk._defaultClient = client;
     };
 }
 var SDK = /** @class */ (function () {
@@ -37,43 +35,42 @@ var SDK = /** @class */ (function () {
             opts[_i] = arguments[_i];
         }
         var _this = this;
+        this._language = "typescript";
+        this._sdkVersion = "0.0.1";
+        this._genVersion = "internal";
         opts.forEach(function (o) { return o(_this); });
-        if (this.serverURL == "") {
-            this.serverURL = Servers[0];
+        if (this._serverURL == "") {
+            this._serverURL = ServerList[0];
         }
-        if (!this.defaultClient) {
-            this.defaultClient = axios.create({ baseURL: this.serverURL });
+        if (!this._defaultClient) {
+            this._defaultClient = axios.create({ baseURL: this._serverURL });
         }
-        if (!this.securityClient) {
-            if (this.security) {
-                this.securityClient = CreateSecurityClient(this.defaultClient, this.security);
-            }
-            else {
-                this.securityClient = this.defaultClient;
-            }
+        if (!this._securityClient) {
+            this._securityClient = this._defaultClient;
         }
     }
-    // GetIp - request the current time based on the ip of the request. note: this is a "best guess" obtained from open-source data.
-    SDK.prototype.GetIp = function (config) {
-        var baseURL = this.serverURL;
+    /**
+     * getIp - request the current time based on the ip of the request. note: this is a "best guess" obtained from open-source data.
+    **/
+    SDK.prototype.getIp = function (config) {
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/ip";
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.dateTimeJsonResponse = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
                 default:
-                    if (MatchContentType(contentType, "application/json")) {
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.errorJsonResponse = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
@@ -82,30 +79,31 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    // GetIpIpv4 - request the current time based on the ip of the request. note: this is a "best guess" obtained from open-source data.
-    SDK.prototype.GetIpIpv4 = function (req, config) {
+    /**
+     * getIpIpv4 - request the current time based on the ip of the request. note: this is a "best guess" obtained from open-source data.
+    **/
+    SDK.prototype.getIpIpv4 = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetIpIpv4Request(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/ip/{ipv4}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.dateTimeJsonResponse = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
                 default:
-                    if (MatchContentType(contentType, "application/json")) {
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.errorJsonResponse = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
@@ -114,30 +112,31 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    // GetIpIpv4Txt - request the current time based on the ip of the request. note: this is a "best guess" obtained from open-source data.
-    SDK.prototype.GetIpIpv4Txt = function (req, config) {
+    /**
+     * getIpIpv4Txt - request the current time based on the ip of the request. note: this is a "best guess" obtained from open-source data.
+    **/
+    SDK.prototype.getIpIpv4Txt = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetIpIpv4TxtRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/ip/{ipv4}.txt", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/plain")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/plain")) {
                         res.dateTimeTextResponse = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data);
                     }
                     break;
                 default:
-                    if (MatchContentType(contentType, "text/plain")) {
+                    if (utils.MatchContentType(contentType, "text/plain")) {
                         res.errorTextResponse = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data);
                     }
                     break;
@@ -146,27 +145,28 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    // GetIpTxt - request the current time based on the ip of the request. note: this is a "best guess" obtained from open-source data.
-    SDK.prototype.GetIpTxt = function (config) {
-        var baseURL = this.serverURL;
+    /**
+     * getIpTxt - request the current time based on the ip of the request. note: this is a "best guess" obtained from open-source data.
+    **/
+    SDK.prototype.getIpTxt = function (config) {
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/ip.txt";
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/plain")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/plain")) {
                         res.dateTimeTextResponse = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data);
                     }
                     break;
                 default:
-                    if (MatchContentType(contentType, "text/plain")) {
+                    if (utils.MatchContentType(contentType, "text/plain")) {
                         res.errorTextResponse = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data);
                     }
                     break;
@@ -175,22 +175,23 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    // GetTimezone - a listing of all timezones.
-    SDK.prototype.GetTimezone = function (config) {
-        var baseURL = this.serverURL;
+    /**
+     * getTimezone - a listing of all timezones.
+    **/
+    SDK.prototype.getTimezone = function (config) {
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/timezone";
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
+            switch (true) {
                 default:
-                    if (MatchContentType(contentType, "application/json")) {
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.listJsonResponse = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
@@ -199,30 +200,31 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    // GetTimezoneArea - a listing of all timezones available for that area.
-    SDK.prototype.GetTimezoneArea = function (req, config) {
+    /**
+     * getTimezoneArea - a listing of all timezones available for that area.
+    **/
+    SDK.prototype.getTimezoneArea = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetTimezoneAreaRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/timezone/{area}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.listJsonResponse = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
                 default:
-                    if (MatchContentType(contentType, "application/json")) {
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.errorJsonResponse = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
@@ -231,30 +233,31 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    // GetTimezoneAreaLocation - request the current time for a timezone.
-    SDK.prototype.GetTimezoneAreaLocation = function (req, config) {
+    /**
+     * getTimezoneAreaLocation - request the current time for a timezone.
+    **/
+    SDK.prototype.getTimezoneAreaLocation = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetTimezoneAreaLocationRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/timezone/{area}/{location}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.dateTimeJsonResponse = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
                 default:
-                    if (MatchContentType(contentType, "application/json")) {
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.errorJsonResponse = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
@@ -263,30 +266,31 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    // GetTimezoneAreaLocationRegion - request the current time for a timezone.
-    SDK.prototype.GetTimezoneAreaLocationRegion = function (req, config) {
+    /**
+     * getTimezoneAreaLocationRegion - request the current time for a timezone.
+    **/
+    SDK.prototype.getTimezoneAreaLocationRegion = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetTimezoneAreaLocationRegionRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/timezone/{area}/{location}/{region}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.dateTimeJsonResponse = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
                 default:
-                    if (MatchContentType(contentType, "application/json")) {
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.errorJsonResponse = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
@@ -295,30 +299,31 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    // GetTimezoneAreaLocationRegionTxt - request the current time for a timezone.
-    SDK.prototype.GetTimezoneAreaLocationRegionTxt = function (req, config) {
+    /**
+     * getTimezoneAreaLocationRegionTxt - request the current time for a timezone.
+    **/
+    SDK.prototype.getTimezoneAreaLocationRegionTxt = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetTimezoneAreaLocationRegionTxtRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/timezone/{area}/{location}/{region}.txt", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/plain")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/plain")) {
                         res.dateTimeTextResponse = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data);
                     }
                     break;
                 default:
-                    if (MatchContentType(contentType, "text/plain")) {
+                    if (utils.MatchContentType(contentType, "text/plain")) {
                         res.errorTextResponse = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data);
                     }
                     break;
@@ -327,30 +332,31 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    // GetTimezoneAreaLocationTxt - request the current time for a timezone.
-    SDK.prototype.GetTimezoneAreaLocationTxt = function (req, config) {
+    /**
+     * getTimezoneAreaLocationTxt - request the current time for a timezone.
+    **/
+    SDK.prototype.getTimezoneAreaLocationTxt = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetTimezoneAreaLocationTxtRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/timezone/{area}/{location}.txt", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/plain")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/plain")) {
                         res.dateTimeTextResponse = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data);
                     }
                     break;
                 default:
-                    if (MatchContentType(contentType, "text/plain")) {
+                    if (utils.MatchContentType(contentType, "text/plain")) {
                         res.errorTextResponse = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data);
                     }
                     break;
@@ -359,30 +365,31 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    // GetTimezoneAreaTxt - a listing of all timezones available for that area.
-    SDK.prototype.GetTimezoneAreaTxt = function (req, config) {
+    /**
+     * getTimezoneAreaTxt - a listing of all timezones available for that area.
+    **/
+    SDK.prototype.getTimezoneAreaTxt = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetTimezoneAreaTxtRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/timezone/{area}.txt", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "text/plain")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "text/plain")) {
                         res.listTextResponse = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data);
                     }
                     break;
                 default:
-                    if (MatchContentType(contentType, "text/plain")) {
+                    if (utils.MatchContentType(contentType, "text/plain")) {
                         res.errorTextResponse = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data);
                     }
                     break;
@@ -391,22 +398,23 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    // GetTimezoneTxt - a listing of all timezones.
-    SDK.prototype.GetTimezoneTxt = function (config) {
-        var baseURL = this.serverURL;
+    /**
+     * getTimezoneTxt - a listing of all timezones.
+    **/
+    SDK.prototype.getTimezoneTxt = function (config) {
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/timezone.txt";
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
+            switch (true) {
                 default:
-                    if (MatchContentType(contentType, "text/plain")) {
+                    if (utils.MatchContentType(contentType, "text/plain")) {
                         res.listTextResponse = JSON.stringify(httpRes === null || httpRes === void 0 ? void 0 : httpRes.data);
                     }
                     break;

@@ -22,6 +22,8 @@ const (
 	JobEventTypeEnumNotInterested                 JobEventTypeEnum = "NOT_INTERESTED"
 )
 
+// JobEvent
+// An event issued when a job seeker interacts with the application that implements Cloud Talent Solution.
 type JobEvent struct {
 	Jobs []string          `json:"jobs,omitempty"`
 	Type *JobEventTypeEnum `json:"type,omitempty"`

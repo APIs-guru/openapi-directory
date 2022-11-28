@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum RestoreServerXAmzTargetEnum {
     OpsWorksCmV20161101RestoreServer = "OpsWorksCM_V2016_11_01.RestoreServer"

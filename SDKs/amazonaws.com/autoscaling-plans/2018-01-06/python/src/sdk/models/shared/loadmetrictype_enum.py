@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class LoadMetricTypeEnum(str, Enum):
     ASG_TOTAL_CPU_UTILIZATION = "ASGTotalCPUUtilization"

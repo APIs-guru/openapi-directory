@@ -25,7 +25,7 @@ type CloudidentityDevicesCreateSecurity struct {
 
 type CloudidentityDevicesCreateRequest struct {
 	QueryParams CloudidentityDevicesCreateQueryParams
-	Request     *shared.CreateDeviceRequest `request:"mediaType=application/json"`
+	Request     *shared.CreateDeviceRequestInput `request:"mediaType=application/json"`
 	Security    CloudidentityDevicesCreateSecurity
 }
 

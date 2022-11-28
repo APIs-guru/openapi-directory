@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleCloudDataplexV1ContentNotebookKernelTypeEnum {
-    KernelTypeUnspecified = "KERNEL_TYPE_UNSPECIFIED"
-,    Python3 = "PYTHON3"
+    KernelTypeUnspecified = "KERNEL_TYPE_UNSPECIFIED",
+    Python3 = "PYTHON3"
 }
 
 
@@ -11,6 +12,6 @@ export enum GoogleCloudDataplexV1ContentNotebookKernelTypeEnum {
  * Configuration for Notebook content.
 **/
 export class GoogleCloudDataplexV1ContentNotebook extends SpeakeasyBase {
-  @Metadata({ data: "json, name=kernelType" })
+  @SpeakeasyMetadata({ data: "json, name=kernelType" })
   kernelType?: GoogleCloudDataplexV1ContentNotebookKernelTypeEnum;
 }

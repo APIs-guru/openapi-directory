@@ -1,5 +1,7 @@
 package shared
 
+// ItemMetadata
+// Available metadata fields for the item.
 type ItemMetadata struct {
 	ContainerName         *string                `json:"containerName,omitempty"`
 	ContentLanguage       *string                `json:"contentLanguage,omitempty"`

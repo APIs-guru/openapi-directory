@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RemixInfo
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Info about the sources of this asset (i.e. assets that were remixed to create this asset).
 **/
 export class RemixInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=sourceAsset" })
+  @SpeakeasyMetadata({ data: "json, name=sourceAsset" })
   sourceAsset?: string[];
 }

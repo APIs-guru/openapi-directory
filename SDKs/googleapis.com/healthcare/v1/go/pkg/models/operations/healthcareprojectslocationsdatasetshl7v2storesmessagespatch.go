@@ -31,7 +31,7 @@ type HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesPatchSecurity struct 
 type HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesPatchRequest struct {
 	PathParams  HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesPatchPathParams
 	QueryParams HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesPatchQueryParams
-	Request     *shared.Message `request:"mediaType=application/json"`
+	Request     *shared.MessageInput `request:"mediaType=application/json"`
 	Security    HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesPatchSecurity
 }
 

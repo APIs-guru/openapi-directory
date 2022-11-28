@@ -15,13 +15,13 @@ type GetItemsForPortfolioQueryParams struct {
 	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
+type GetItemsForPortfolio200ApplicationJSON struct {
+	Data []shared.ProjectCompact `json:"data,omitempty"`
+}
+
 type GetItemsForPortfolioRequest struct {
 	PathParams  GetItemsForPortfolioPathParams
 	QueryParams GetItemsForPortfolioQueryParams
-}
-
-type GetItemsForPortfolio200ApplicationJSON struct {
-	Data []shared.ProjectCompact `json:"data,omitempty"`
 }
 
 type GetItemsForPortfolioResponse struct {

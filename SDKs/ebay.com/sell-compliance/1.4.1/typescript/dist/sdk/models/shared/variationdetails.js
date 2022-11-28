@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { NameValueList } from "./namevaluelist";
 // VariationDetails
 /**
  * This type is used to identify the product variation that has the listing violation.
@@ -34,11 +34,11 @@ var VariationDetails = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=sku" }),
+        SpeakeasyMetadata({ data: "json, name=sku" }),
         __metadata("design:type", String)
     ], VariationDetails.prototype, "sku", void 0);
     __decorate([
-        Metadata({ data: "json, name=variationAspects", elemType: shared.NameValueList }),
+        SpeakeasyMetadata({ data: "json, name=variationAspects", elemType: NameValueList }),
         __metadata("design:type", Array)
     ], VariationDetails.prototype, "variationAspects", void 0);
     return VariationDetails;

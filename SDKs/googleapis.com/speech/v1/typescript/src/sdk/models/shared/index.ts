@@ -18,6 +18,7 @@ export * from "./recognizeresponse";
 export * from "./security";
 export * from "./speakerdiarizationconfig";
 export * from "./speechadaptation";
+export * from "./speechadaptationinfo";
 export * from "./speechcontext";
 export * from "./speechrecognitionalternative";
 export * from "./speechrecognitionresult";

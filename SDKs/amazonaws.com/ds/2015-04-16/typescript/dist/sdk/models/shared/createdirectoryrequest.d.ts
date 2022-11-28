@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DirectorySizeEnum } from "./directorysizeenum";
 import { Tag } from "./tag";
 import { DirectoryVpcSettings } from "./directoryvpcsettings";

@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -24,25 +28,25 @@ class ListWebsiteCertificateAuthoritiesHeaders:
 @dataclass_json
 @dataclass
 class ListWebsiteCertificateAuthoritiesRequestBody:
-    fleet_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FleetArn' }})
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MaxResults' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
+    fleet_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('FleetArn') }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MaxResults') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
     
 
 @dataclass
 class ListWebsiteCertificateAuthoritiesRequest:
-    query_params: ListWebsiteCertificateAuthoritiesQueryParams = field(default=None)
-    headers: ListWebsiteCertificateAuthoritiesHeaders = field(default=None)
-    request: ListWebsiteCertificateAuthoritiesRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ListWebsiteCertificateAuthoritiesHeaders = field()
+    query_params: ListWebsiteCertificateAuthoritiesQueryParams = field()
+    request: ListWebsiteCertificateAuthoritiesRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ListWebsiteCertificateAuthoritiesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_server_error_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     list_website_certificate_authorities_response: Optional[shared.ListWebsiteCertificateAuthoritiesResponse] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

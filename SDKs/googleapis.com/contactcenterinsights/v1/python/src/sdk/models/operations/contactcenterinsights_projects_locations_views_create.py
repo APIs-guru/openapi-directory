@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ContactcenterinsightsProjectsLocationsViewsCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class ContactcenterinsightsProjectsLocationsViewsCreateQueryParams:
 
 @dataclass
 class ContactcenterinsightsProjectsLocationsViewsCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ContactcenterinsightsProjectsLocationsViewsCreateRequest:
-    path_params: ContactcenterinsightsProjectsLocationsViewsCreatePathParams = field(default=None)
-    query_params: ContactcenterinsightsProjectsLocationsViewsCreateQueryParams = field(default=None)
-    request: Optional[shared.GoogleCloudContactcenterinsightsV1View] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ContactcenterinsightsProjectsLocationsViewsCreateSecurity = field(default=None)
+    path_params: ContactcenterinsightsProjectsLocationsViewsCreatePathParams = field()
+    query_params: ContactcenterinsightsProjectsLocationsViewsCreateQueryParams = field()
+    security: ContactcenterinsightsProjectsLocationsViewsCreateSecurity = field()
+    request: Optional[shared.GoogleCloudContactcenterinsightsV1ViewInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ContactcenterinsightsProjectsLocationsViewsCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_contactcenterinsights_v1_view: Optional[shared.GoogleCloudContactcenterinsightsV1View] = field(default=None)
-    status_code: int = field(default=None)
     

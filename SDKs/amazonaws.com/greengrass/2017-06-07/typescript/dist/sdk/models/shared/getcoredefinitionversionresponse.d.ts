@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CoreDefinitionVersion } from "./coredefinitionversion";
 export declare class GetCoreDefinitionVersionResponse extends SpeakeasyBase {
     arn?: string;

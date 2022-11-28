@@ -1,5 +1,7 @@
 package shared
 
+// CampaignSummary
+// Represents a summarized campaign information associated with this invoice.
 type CampaignSummary struct {
 	BillingInvoiceCode *string `json:"billingInvoiceCode,omitempty"`
 	CampaignID         *string `json:"campaignId,omitempty"`

@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Link } from "./link";
 import { DebateContribution } from "./debatecontribution";
 
 
+
 export class DebateContributionItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=links", elemType: shared.Link })
+  @SpeakeasyMetadata({ data: "json, name=links", elemType: Link })
   links?: Link[];
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: DebateContribution;
 }

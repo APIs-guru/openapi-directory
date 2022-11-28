@@ -1,52 +1,53 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum GetFlaggedItemsSearchDirectionEnum {
-    Before = "BEFORE"
-,    After = "AFTER"
+    Before = "BEFORE",
+    After = "AFTER"
 }
 
 
 export class GetFlaggedItemsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=numberOfResults" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=numberOfResults" })
   numberOfResults?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=searchDirection" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=searchDirection" })
   searchDirection: GetFlaggedItemsSearchDirectionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=searchPointer" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=searchPointer" })
   searchPointer?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=timestamp" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timestamp" })
   timestamp: Date;
 }
 
 
 export class GetFlaggedItemsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth: shared.SchemeOauth;
 }
 
 
 export class GetFlaggedItemsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetFlaggedItemsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetFlaggedItemsSecurity;
 }
 
 
 export class GetFlaggedItemsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   flaggedItemsResult?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

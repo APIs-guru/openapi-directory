@@ -22,9 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WafAction } from "./wafaction";
+import { ExcludedRule } from "./excludedrule";
 import { WafOverrideAction } from "./wafoverrideaction";
 import { WafRuleTypeEnum } from "./wafruletypeenum";
 // ActivatedRule
@@ -37,27 +37,27 @@ var ActivatedRule = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Action" }),
+        SpeakeasyMetadata({ data: "json, name=Action" }),
         __metadata("design:type", WafAction)
     ], ActivatedRule.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "json, name=ExcludedRules", elemType: shared.ExcludedRule }),
+        SpeakeasyMetadata({ data: "json, name=ExcludedRules", elemType: ExcludedRule }),
         __metadata("design:type", Array)
     ], ActivatedRule.prototype, "excludedRules", void 0);
     __decorate([
-        Metadata({ data: "json, name=OverrideAction" }),
+        SpeakeasyMetadata({ data: "json, name=OverrideAction" }),
         __metadata("design:type", WafOverrideAction)
     ], ActivatedRule.prototype, "overrideAction", void 0);
     __decorate([
-        Metadata({ data: "json, name=Priority" }),
+        SpeakeasyMetadata({ data: "json, name=Priority" }),
         __metadata("design:type", Number)
     ], ActivatedRule.prototype, "priority", void 0);
     __decorate([
-        Metadata({ data: "json, name=RuleId" }),
+        SpeakeasyMetadata({ data: "json, name=RuleId" }),
         __metadata("design:type", String)
     ], ActivatedRule.prototype, "ruleId", void 0);
     __decorate([
-        Metadata({ data: "json, name=Type" }),
+        SpeakeasyMetadata({ data: "json, name=Type" }),
         __metadata("design:type", String)
     ], ActivatedRule.prototype, "type", void 0);
     return ActivatedRule;

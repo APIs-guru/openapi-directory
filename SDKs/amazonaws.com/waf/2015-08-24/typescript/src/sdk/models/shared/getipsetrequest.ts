@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetIpSetRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=IPSetId" })
+  @SpeakeasyMetadata({ data: "json, name=IPSetId" })
   ipSetId: string;
 }

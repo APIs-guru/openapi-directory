@@ -1,19 +1,21 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import filemodetypeenum_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class PutFileInput:
-    branch_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'branchName' }})
-    commit_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'commitMessage' }})
-    email: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'email' }})
-    file_content: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fileContent' }})
-    file_mode: Optional[filemodetypeenum_enum.FileModeTypeEnumEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fileMode' }})
-    file_path: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'filePath' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    parent_commit_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'parentCommitId' }})
-    repository_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'repositoryName' }})
+    branch_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('branchName') }})
+    file_content: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('fileContent') }})
+    file_path: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('filePath') }})
+    repository_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('repositoryName') }})
+    commit_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('commitMessage') }})
+    email: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('email') }})
+    file_mode: Optional[FileModeTypeEnumEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fileMode') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    parent_commit_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('parentCommitId') }})
     

@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateStudioInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DefaultS3Location" })
+  @SpeakeasyMetadata({ data: "json, name=DefaultS3Location" })
   defaultS3Location?: string;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=StudioId" })
+  @SpeakeasyMetadata({ data: "json, name=StudioId" })
   studioId: string;
 
-  @Metadata({ data: "json, name=SubnetIds" })
+  @SpeakeasyMetadata({ data: "json, name=SubnetIds" })
   subnetIds?: string[];
 }

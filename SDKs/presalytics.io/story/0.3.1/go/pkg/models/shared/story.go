@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Story
+// Model for story objects
 type Story struct {
 	Collaborators  []StoryCollaborator   `json:"collaborators,omitempty"`
 	CreatedAt      *time.Time            `json:"created_at,omitempty"`

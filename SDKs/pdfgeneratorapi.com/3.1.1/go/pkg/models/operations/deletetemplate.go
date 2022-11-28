@@ -4,10 +4,6 @@ type DeleteTemplateQueryParams struct {
 	TemplateID int64 `queryParam:"style=form,explode=true,name=templateId"`
 }
 
-type DeleteTemplateRequest struct {
-	QueryParams DeleteTemplateQueryParams
-}
-
 type DeleteTemplate200ApplicationJSONResponse struct {
 	Success *bool `json:"success,omitempty"`
 }
@@ -77,6 +73,10 @@ type DeleteTemplate422ApplicationJSON struct {
 type DeleteTemplate500ApplicationJSON struct {
 	Error  *string `json:"error,omitempty"`
 	Status *int64  `json:"status,omitempty"`
+}
+
+type DeleteTemplateRequest struct {
+	QueryParams DeleteTemplateQueryParams
 }
 
 type DeleteTemplateResponse struct {

@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConnectionTypeEnum } from "./connectiontypeenum";
 import { EnvironmentLifecycle } from "./environmentlifecycle";
 import { ManagedCredentialsStatusEnum } from "./managedcredentialsstatusenum";
 import { EnvironmentTypeEnum } from "./environmenttypeenum";
+
 
 
 // Environment
@@ -10,30 +11,30 @@ import { EnvironmentTypeEnum } from "./environmenttypeenum";
  * Information about an Cloud9 development environment.
 **/
 export class Environment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn: string;
 
-  @Metadata({ data: "json, name=connectionType" })
+  @SpeakeasyMetadata({ data: "json, name=connectionType" })
   connectionType?: ConnectionTypeEnum;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=lifecycle" })
+  @SpeakeasyMetadata({ data: "json, name=lifecycle" })
   lifecycle?: EnvironmentLifecycle;
 
-  @Metadata({ data: "json, name=managedCredentialsStatus" })
+  @SpeakeasyMetadata({ data: "json, name=managedCredentialsStatus" })
   managedCredentialsStatus?: ManagedCredentialsStatusEnum;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=ownerArn" })
+  @SpeakeasyMetadata({ data: "json, name=ownerArn" })
   ownerArn: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: EnvironmentTypeEnum;
 }

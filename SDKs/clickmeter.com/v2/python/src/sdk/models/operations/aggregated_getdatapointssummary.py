@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class AggregatedGetDatapointsSummarySortDirectionEnum(str, Enum):
@@ -36,6 +37,8 @@ class AggregatedGetDatapointsSummaryTypeEnum(str, Enum):
 
 @dataclass
 class AggregatedGetDatapointsSummaryQueryParams:
+    time_frame: AggregatedGetDatapointsSummaryTimeFrameEnum = field(metadata={'query_param': { 'field_name': 'timeFrame', 'style': 'form', 'explode': True }})
+    type: AggregatedGetDatapointsSummaryTypeEnum = field(metadata={'query_param': { 'field_name': 'type', 'style': 'form', 'explode': True }})
     favourite: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'favourite', 'style': 'form', 'explode': True }})
     from_day: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'fromDay', 'style': 'form', 'explode': True }})
     group_id: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'groupId', 'style': 'form', 'explode': True }})
@@ -46,19 +49,17 @@ class AggregatedGetDatapointsSummaryQueryParams:
     status: Optional[AggregatedGetDatapointsSummaryStatusEnum] = field(default=None, metadata={'query_param': { 'field_name': 'status', 'style': 'form', 'explode': True }})
     tag: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'tag', 'style': 'form', 'explode': True }})
     text_search: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'textSearch', 'style': 'form', 'explode': True }})
-    time_frame: AggregatedGetDatapointsSummaryTimeFrameEnum = field(default=None, metadata={'query_param': { 'field_name': 'timeFrame', 'style': 'form', 'explode': True }})
     to_day: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'toDay', 'style': 'form', 'explode': True }})
-    type: AggregatedGetDatapointsSummaryTypeEnum = field(default=None, metadata={'query_param': { 'field_name': 'type', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class AggregatedGetDatapointsSummaryRequest:
-    query_params: AggregatedGetDatapointsSummaryQueryParams = field(default=None)
+    query_params: AggregatedGetDatapointsSummaryQueryParams = field()
     
 
 @dataclass
 class AggregatedGetDatapointsSummaryResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_core_dto_aggregated_aggregated_summary_result: Optional[shared.APICoreDtoAggregatedAggregatedSummaryResult] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

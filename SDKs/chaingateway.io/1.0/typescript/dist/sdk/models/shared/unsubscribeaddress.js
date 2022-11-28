@@ -22,30 +22,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var UnsubscribeAddress = /** @class */ (function (_super) {
     __extends(UnsubscribeAddress, _super);
     function UnsubscribeAddress() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=contractaddress" }),
+        SpeakeasyMetadata({ data: "json, name=contractaddress" }),
         __metadata("design:type", String)
     ], UnsubscribeAddress.prototype, "contractaddress", void 0);
     __decorate([
-        Metadata({ data: "json, name=deleted" }),
+        SpeakeasyMetadata({ data: "json, name=deleted" }),
         __metadata("design:type", Boolean)
     ], UnsubscribeAddress.prototype, "deleted", void 0);
     __decorate([
-        Metadata({ data: "json, name=ethereumaddress" }),
+        SpeakeasyMetadata({ data: "json, name=ethereumaddress" }),
         __metadata("design:type", String)
     ], UnsubscribeAddress.prototype, "ethereumaddress", void 0);
     __decorate([
-        Metadata({ data: "json, name=ok" }),
+        SpeakeasyMetadata({ data: "json, name=ok" }),
         __metadata("design:type", Boolean)
     ], UnsubscribeAddress.prototype, "ok", void 0);
     __decorate([
-        Metadata({ data: "json, name=url" }),
+        SpeakeasyMetadata({ data: "json, name=url" }),
         __metadata("design:type", String)
     ], UnsubscribeAddress.prototype, "url", void 0);
     return UnsubscribeAddress;

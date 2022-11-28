@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class DescribeIdentityPoolUsagePathParams:
-    identity_pool_id: str = field(default=None, metadata={'path_param': { 'field_name': 'IdentityPoolId', 'style': 'simple', 'explode': False }})
+    identity_pool_id: str = field(metadata={'path_param': { 'field_name': 'IdentityPoolId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,18 +24,18 @@ class DescribeIdentityPoolUsageHeaders:
 
 @dataclass
 class DescribeIdentityPoolUsageRequest:
-    path_params: DescribeIdentityPoolUsagePathParams = field(default=None)
-    headers: DescribeIdentityPoolUsageHeaders = field(default=None)
+    headers: DescribeIdentityPoolUsageHeaders = field()
+    path_params: DescribeIdentityPoolUsagePathParams = field()
     
 
 @dataclass
 class DescribeIdentityPoolUsageResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     describe_identity_pool_usage_response: Optional[shared.DescribeIdentityPoolUsageResponse] = field(default=None)
     internal_error_exception: Optional[Any] = field(default=None)
     invalid_parameter_exception: Optional[Any] = field(default=None)
     not_authorized_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

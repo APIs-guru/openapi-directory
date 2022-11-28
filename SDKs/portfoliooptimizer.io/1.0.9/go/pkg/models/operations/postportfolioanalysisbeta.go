@@ -1,15 +1,15 @@
 package operations
 
-type PostPortfolioAnalysisBetaRequest struct {
-	Request map[string]interface{} `request:"mediaType=application/json"`
-}
-
 type PostPortfolioAnalysisBeta200ApplicationJSONPortfolios struct {
 	PortfolioBeta float64 `json:"portfolioBeta"`
 }
 
 type PostPortfolioAnalysisBeta200ApplicationJSON struct {
 	Portfolios []PostPortfolioAnalysisBeta200ApplicationJSONPortfolios `json:"portfolios"`
+}
+
+type PostPortfolioAnalysisBetaRequest struct {
+	Request map[string]interface{} `request:"mediaType=application/json"`
 }
 
 type PostPortfolioAnalysisBetaResponse struct {

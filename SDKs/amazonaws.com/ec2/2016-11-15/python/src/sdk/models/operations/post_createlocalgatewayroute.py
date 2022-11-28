@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostCreateLocalGatewayRouteActionEnum(str, Enum):
     CREATE_LOCAL_GATEWAY_ROUTE = "CreateLocalGatewayRoute"
@@ -10,8 +14,8 @@ class PostCreateLocalGatewayRouteVersionEnum(str, Enum):
 
 @dataclass
 class PostCreateLocalGatewayRouteQueryParams:
-    action: PostCreateLocalGatewayRouteActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostCreateLocalGatewayRouteVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostCreateLocalGatewayRouteActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostCreateLocalGatewayRouteVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostCreateLocalGatewayRouteHeaders:
 
 @dataclass
 class PostCreateLocalGatewayRouteRequest:
-    query_params: PostCreateLocalGatewayRouteQueryParams = field(default=None)
-    headers: PostCreateLocalGatewayRouteHeaders = field(default=None)
+    headers: PostCreateLocalGatewayRouteHeaders = field()
+    query_params: PostCreateLocalGatewayRouteQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostCreateLocalGatewayRouteResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConditionalForwarder } from "./conditionalforwarder";
+
 
 
 // DescribeConditionalForwardersResult
@@ -8,6 +8,6 @@ import { ConditionalForwarder } from "./conditionalforwarder";
  * The result of a DescribeConditionalForwarder request.
 **/
 export class DescribeConditionalForwardersResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConditionalForwarders", elemType: shared.ConditionalForwarder })
+  @SpeakeasyMetadata({ data: "json, name=ConditionalForwarders", elemType: ConditionalForwarder })
   conditionalForwarders?: ConditionalForwarder[];
 }

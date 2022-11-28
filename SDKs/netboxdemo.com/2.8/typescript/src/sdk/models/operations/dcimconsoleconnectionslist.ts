@@ -1,89 +1,90 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DcimConsoleConnectionsListQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=connection_status" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=connection_status" })
   connectionStatus?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=connection_status__n" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=connection_status__n" })
   connectionStatusN?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=device" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=device" })
   device?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=device_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=device_id" })
   deviceId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name" })
   name?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=name__ic" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name__ic" })
   nameIc?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=name__ie" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name__ie" })
   nameIe?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=name__iew" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name__iew" })
   nameIew?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=name__isw" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name__isw" })
   nameIsw?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=name__n" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name__n" })
   nameN?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=name__nic" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name__nic" })
   nameNic?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=name__nie" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name__nie" })
   nameNie?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=name__niew" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name__niew" })
   nameNiew?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=name__nisw" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name__nisw" })
   nameNisw?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=site" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=site" })
   site?: string;
 }
 
 
-export class DcimConsoleConnectionsListRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: DcimConsoleConnectionsListQueryParams;
-}
-
-
 export class DcimConsoleConnectionsList200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count: number;
 
-  @Metadata({ data: "json, name=next" })
+  @SpeakeasyMetadata({ data: "json, name=next" })
   next?: string;
 
-  @Metadata({ data: "json, name=previous" })
+  @SpeakeasyMetadata({ data: "json, name=previous" })
   previous?: string;
 
-  @Metadata({ data: "json, name=results", elemType: shared.ConsolePort })
+  @SpeakeasyMetadata({ data: "json, name=results", elemType: shared.ConsolePort })
   results: shared.ConsolePort[];
 }
 
 
+export class DcimConsoleConnectionsListRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: DcimConsoleConnectionsListQueryParams;
+}
+
+
 export class DcimConsoleConnectionsListResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   dcimConsoleConnectionsList200ApplicationJsonObject?: DcimConsoleConnectionsList200ApplicationJson;
 }

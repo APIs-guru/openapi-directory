@@ -1,16 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Tag } from "./tag";
 import { UiTemplate } from "./uitemplate";
 
 
+
 export class CreateHumanTaskUiRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=HumanTaskUiName" })
+  @SpeakeasyMetadata({ data: "json, name=HumanTaskUiName" })
   humanTaskUiName: string;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 
-  @Metadata({ data: "json, name=UiTemplate" })
+  @SpeakeasyMetadata({ data: "json, name=UiTemplate" })
   uiTemplate: UiTemplate;
 }

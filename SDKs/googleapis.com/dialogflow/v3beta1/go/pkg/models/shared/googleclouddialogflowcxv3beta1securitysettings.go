@@ -21,6 +21,8 @@ const (
 	GoogleCloudDialogflowCxV3beta1SecuritySettingsRedactionStrategyEnumRedactWithService            GoogleCloudDialogflowCxV3beta1SecuritySettingsRedactionStrategyEnum = "REDACT_WITH_SERVICE"
 )
 
+// GoogleCloudDialogflowCxV3beta1SecuritySettings
+// Represents the settings related to security issues, such as data redaction and data retention. It may take hours for updates on the settings to propagate to all the related components and take effect.
 type GoogleCloudDialogflowCxV3beta1SecuritySettings struct {
 	AudioExportSettings    *GoogleCloudDialogflowCxV3beta1SecuritySettingsAudioExportSettings    `json:"audioExportSettings,omitempty"`
 	DeidentifyTemplate     *string                                                               `json:"deidentifyTemplate,omitempty"`

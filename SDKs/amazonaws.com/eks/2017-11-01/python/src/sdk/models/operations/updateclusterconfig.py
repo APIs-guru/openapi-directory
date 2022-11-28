@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdateClusterConfigPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,43 +27,51 @@ class UpdateClusterConfigHeaders:
 @dataclass_json
 @dataclass
 class UpdateClusterConfigRequestBodyLogging:
-    cluster_logging: Optional[List[shared.LogSetup]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clusterLogging' }})
+    r"""UpdateClusterConfigRequestBodyLogging
+    An object representing the logging configuration for resources in your cluster.
+    """
+    
+    cluster_logging: Optional[List[shared.LogSetup]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clusterLogging') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateClusterConfigRequestBodyResourcesVpcConfig:
-    endpoint_private_access: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'endpointPrivateAccess' }})
-    endpoint_public_access: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'endpointPublicAccess' }})
-    public_access_cidrs: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'publicAccessCidrs' }})
-    security_group_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'securityGroupIds' }})
-    subnet_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'subnetIds' }})
+    r"""UpdateClusterConfigRequestBodyResourcesVpcConfig
+    An object representing the VPC configuration to use for an Amazon EKS cluster.
+    """
+    
+    endpoint_private_access: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('endpointPrivateAccess') }})
+    endpoint_public_access: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('endpointPublicAccess') }})
+    public_access_cidrs: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('publicAccessCidrs') }})
+    security_group_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('securityGroupIds') }})
+    subnet_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('subnetIds') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateClusterConfigRequestBody:
-    client_request_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clientRequestToken' }})
-    logging: Optional[UpdateClusterConfigRequestBodyLogging] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'logging' }})
-    resources_vpc_config: Optional[UpdateClusterConfigRequestBodyResourcesVpcConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourcesVpcConfig' }})
+    client_request_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clientRequestToken') }})
+    logging: Optional[UpdateClusterConfigRequestBodyLogging] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('logging') }})
+    resources_vpc_config: Optional[UpdateClusterConfigRequestBodyResourcesVpcConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourcesVpcConfig') }})
     
 
 @dataclass
 class UpdateClusterConfigRequest:
-    path_params: UpdateClusterConfigPathParams = field(default=None)
-    headers: UpdateClusterConfigHeaders = field(default=None)
-    request: UpdateClusterConfigRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateClusterConfigHeaders = field()
+    path_params: UpdateClusterConfigPathParams = field()
+    request: UpdateClusterConfigRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateClusterConfigResponse:
+    content_type: str = field()
+    status_code: int = field()
     client_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     invalid_parameter_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     resource_in_use_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     server_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     update_cluster_config_response: Optional[shared.UpdateClusterConfigResponse] = field(default=None)
     

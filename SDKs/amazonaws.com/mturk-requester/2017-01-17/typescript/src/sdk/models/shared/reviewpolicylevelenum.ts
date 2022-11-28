@@ -1,6 +1,7 @@
 
 
+
 export enum ReviewPolicyLevelEnum {
-    Assignment = "Assignment"
-,    Hit = "HIT"
+    Assignment = "Assignment",
+    Hit = "HIT"
 }

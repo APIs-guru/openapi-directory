@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ClassifierEvaluationMetrics
@@ -6,27 +7,27 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes the result metrics for the test data associated with an documentation classifier.
 **/
 export class ClassifierEvaluationMetrics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Accuracy" })
+  @SpeakeasyMetadata({ data: "json, name=Accuracy" })
   accuracy?: number;
 
-  @Metadata({ data: "json, name=F1Score" })
+  @SpeakeasyMetadata({ data: "json, name=F1Score" })
   f1Score?: number;
 
-  @Metadata({ data: "json, name=HammingLoss" })
+  @SpeakeasyMetadata({ data: "json, name=HammingLoss" })
   hammingLoss?: number;
 
-  @Metadata({ data: "json, name=MicroF1Score" })
+  @SpeakeasyMetadata({ data: "json, name=MicroF1Score" })
   microF1Score?: number;
 
-  @Metadata({ data: "json, name=MicroPrecision" })
+  @SpeakeasyMetadata({ data: "json, name=MicroPrecision" })
   microPrecision?: number;
 
-  @Metadata({ data: "json, name=MicroRecall" })
+  @SpeakeasyMetadata({ data: "json, name=MicroRecall" })
   microRecall?: number;
 
-  @Metadata({ data: "json, name=Precision" })
+  @SpeakeasyMetadata({ data: "json, name=Precision" })
   precision?: number;
 
-  @Metadata({ data: "json, name=Recall" })
+  @SpeakeasyMetadata({ data: "json, name=Recall" })
   recall?: number;
 }

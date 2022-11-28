@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SimpleAmount } from "./simpleamount";
 import { RefundItem } from "./refunditem";
+
 
 
 // IssueRefundRequest
@@ -9,15 +9,15 @@ import { RefundItem } from "./refunditem";
  * The base type used by the request payload of the issueRefund method.
 **/
 export class IssueRefundRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=comment" })
+  @SpeakeasyMetadata({ data: "json, name=comment" })
   comment?: string;
 
-  @Metadata({ data: "json, name=orderLevelRefundAmount" })
+  @SpeakeasyMetadata({ data: "json, name=orderLevelRefundAmount" })
   orderLevelRefundAmount?: SimpleAmount;
 
-  @Metadata({ data: "json, name=reasonForRefund" })
+  @SpeakeasyMetadata({ data: "json, name=reasonForRefund" })
   reasonForRefund?: string;
 
-  @Metadata({ data: "json, name=refundItems", elemType: shared.RefundItem })
+  @SpeakeasyMetadata({ data: "json, name=refundItems", elemType: RefundItem })
   refundItems?: RefundItem[];
 }

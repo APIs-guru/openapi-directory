@@ -12,16 +12,16 @@ type DeleteFolderSecurity struct {
 	APITokenBasic shared.SchemeAPITokenBasic `security:"scheme,type=http,subtype=basic"`
 }
 
-type DeleteFolderRequest struct {
-	PathParams DeleteFolderPathParams
-	Security   DeleteFolderSecurity
-}
-
 type DeleteFolderFolder struct {
 	ID             *string `json:"id,omitempty"`
 	Name           *string `json:"name,omitempty"`
 	ParentFolderID *string `json:"parent_folder_id,omitempty"`
 	Path           *string `json:"path,omitempty"`
+}
+
+type DeleteFolderRequest struct {
+	PathParams DeleteFolderPathParams
+	Security   DeleteFolderSecurity
 }
 
 type DeleteFolderResponse struct {

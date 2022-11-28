@@ -18,10 +18,6 @@ type GetSSHKeysQueryParams struct {
 	Sort          *GetSSHKeysSortEnum `queryParam:"style=form,explode=true,name=sort"`
 }
 
-type GetSSHKeysRequest struct {
-	QueryParams GetSSHKeysQueryParams
-}
-
 type GetSSHKeys200ApplicationJSONMetaPagination struct {
 	LastPage     float64 `json:"last_page"`
 	NextPage     float64 `json:"next_page"`
@@ -47,6 +43,10 @@ type GetSSHKeys200ApplicationJSONSSHKeys struct {
 type GetSSHKeys200ApplicationJSON struct {
 	Meta    *GetSSHKeys200ApplicationJSONMeta     `json:"meta,omitempty"`
 	SSHKeys []GetSSHKeys200ApplicationJSONSSHKeys `json:"ssh_keys"`
+}
+
+type GetSSHKeysRequest struct {
+	QueryParams GetSSHKeysQueryParams
 }
 
 type GetSSHKeysResponse struct {

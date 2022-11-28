@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // EffectiveTag
 /**
  * An EffectiveTag represents a tag that applies to a resource during policy evaluation. Tags can be either directly bound to a resource or inherited from its ancestor. EffectiveTag contains the name and namespaced_name of the tag value and tag key, with additional fields of `inherited` to indicate the inheritance status of the effective tag.
@@ -33,23 +33,23 @@ var EffectiveTag = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=inherited" }),
+        SpeakeasyMetadata({ data: "json, name=inherited" }),
         __metadata("design:type", Boolean)
     ], EffectiveTag.prototype, "inherited", void 0);
     __decorate([
-        Metadata({ data: "json, name=namespacedTagKey" }),
+        SpeakeasyMetadata({ data: "json, name=namespacedTagKey" }),
         __metadata("design:type", String)
     ], EffectiveTag.prototype, "namespacedTagKey", void 0);
     __decorate([
-        Metadata({ data: "json, name=namespacedTagValue" }),
+        SpeakeasyMetadata({ data: "json, name=namespacedTagValue" }),
         __metadata("design:type", String)
     ], EffectiveTag.prototype, "namespacedTagValue", void 0);
     __decorate([
-        Metadata({ data: "json, name=tagKey" }),
+        SpeakeasyMetadata({ data: "json, name=tagKey" }),
         __metadata("design:type", String)
     ], EffectiveTag.prototype, "tagKey", void 0);
     __decorate([
-        Metadata({ data: "json, name=tagValue" }),
+        SpeakeasyMetadata({ data: "json, name=tagValue" }),
         __metadata("design:type", String)
     ], EffectiveTag.prototype, "tagValue", void 0);
     return EffectiveTag;

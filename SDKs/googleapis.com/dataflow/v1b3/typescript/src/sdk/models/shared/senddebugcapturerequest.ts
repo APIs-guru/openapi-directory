@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum SendDebugCaptureRequestDataFormatEnum {
-    DataFormatUnspecified = "DATA_FORMAT_UNSPECIFIED"
-,    Raw = "RAW"
-,    Json = "JSON"
-,    Zlib = "ZLIB"
-,    Brotli = "BROTLI"
+    DataFormatUnspecified = "DATA_FORMAT_UNSPECIFIED",
+    Raw = "RAW",
+    Json = "JSON",
+    Zlib = "ZLIB",
+    Brotli = "BROTLI"
 }
 
 
@@ -14,18 +15,18 @@ export enum SendDebugCaptureRequestDataFormatEnum {
  * Request to send encoded debug information. Next ID: 8
 **/
 export class SendDebugCaptureRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=componentId" })
+  @SpeakeasyMetadata({ data: "json, name=componentId" })
   componentId?: string;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: string;
 
-  @Metadata({ data: "json, name=dataFormat" })
+  @SpeakeasyMetadata({ data: "json, name=dataFormat" })
   dataFormat?: SendDebugCaptureRequestDataFormatEnum;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: string;
 
-  @Metadata({ data: "json, name=workerId" })
+  @SpeakeasyMetadata({ data: "json, name=workerId" })
   workerId?: string;
 }

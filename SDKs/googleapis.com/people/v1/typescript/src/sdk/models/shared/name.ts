@@ -1,5 +1,53 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { FieldMetadataInput } from "./fieldmetadata";
 import { FieldMetadata } from "./fieldmetadata";
+
+
+
+// NameInput
+/** 
+ * A person's name. If the name is a mononym, the family name is empty.
+**/
+export class NameInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=familyName" })
+  familyName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=givenName" })
+  givenName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=honorificPrefix" })
+  honorificPrefix?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=honorificSuffix" })
+  honorificSuffix?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
+  metadata?: FieldMetadataInput;
+
+  @SpeakeasyMetadata({ data: "json, name=middleName" })
+  middleName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=phoneticFamilyName" })
+  phoneticFamilyName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=phoneticFullName" })
+  phoneticFullName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=phoneticGivenName" })
+  phoneticGivenName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=phoneticHonorificPrefix" })
+  phoneticHonorificPrefix?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=phoneticHonorificSuffix" })
+  phoneticHonorificSuffix?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=phoneticMiddleName" })
+  phoneticMiddleName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=unstructuredName" })
+  unstructuredName?: string;
+}
 
 
 // Name
@@ -7,48 +55,48 @@ import { FieldMetadata } from "./fieldmetadata";
  * A person's name. If the name is a mononym, the family name is empty.
 **/
 export class Name extends SpeakeasyBase {
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=displayNameLastFirst" })
+  @SpeakeasyMetadata({ data: "json, name=displayNameLastFirst" })
   displayNameLastFirst?: string;
 
-  @Metadata({ data: "json, name=familyName" })
+  @SpeakeasyMetadata({ data: "json, name=familyName" })
   familyName?: string;
 
-  @Metadata({ data: "json, name=givenName" })
+  @SpeakeasyMetadata({ data: "json, name=givenName" })
   givenName?: string;
 
-  @Metadata({ data: "json, name=honorificPrefix" })
+  @SpeakeasyMetadata({ data: "json, name=honorificPrefix" })
   honorificPrefix?: string;
 
-  @Metadata({ data: "json, name=honorificSuffix" })
+  @SpeakeasyMetadata({ data: "json, name=honorificSuffix" })
   honorificSuffix?: string;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: FieldMetadata;
 
-  @Metadata({ data: "json, name=middleName" })
+  @SpeakeasyMetadata({ data: "json, name=middleName" })
   middleName?: string;
 
-  @Metadata({ data: "json, name=phoneticFamilyName" })
+  @SpeakeasyMetadata({ data: "json, name=phoneticFamilyName" })
   phoneticFamilyName?: string;
 
-  @Metadata({ data: "json, name=phoneticFullName" })
+  @SpeakeasyMetadata({ data: "json, name=phoneticFullName" })
   phoneticFullName?: string;
 
-  @Metadata({ data: "json, name=phoneticGivenName" })
+  @SpeakeasyMetadata({ data: "json, name=phoneticGivenName" })
   phoneticGivenName?: string;
 
-  @Metadata({ data: "json, name=phoneticHonorificPrefix" })
+  @SpeakeasyMetadata({ data: "json, name=phoneticHonorificPrefix" })
   phoneticHonorificPrefix?: string;
 
-  @Metadata({ data: "json, name=phoneticHonorificSuffix" })
+  @SpeakeasyMetadata({ data: "json, name=phoneticHonorificSuffix" })
   phoneticHonorificSuffix?: string;
 
-  @Metadata({ data: "json, name=phoneticMiddleName" })
+  @SpeakeasyMetadata({ data: "json, name=phoneticMiddleName" })
   phoneticMiddleName?: string;
 
-  @Metadata({ data: "json, name=unstructuredName" })
+  @SpeakeasyMetadata({ data: "json, name=unstructuredName" })
   unstructuredName?: string;
 }

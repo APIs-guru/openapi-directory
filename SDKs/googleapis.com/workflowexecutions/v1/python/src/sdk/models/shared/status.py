@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import step
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Status:
-    current_steps: Optional[List[step.Step]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'currentSteps' }})
+    r"""Status
+    Represents the current status of this execution.
+    """
+    
+    current_steps: Optional[List[Step]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('currentSteps') }})
     

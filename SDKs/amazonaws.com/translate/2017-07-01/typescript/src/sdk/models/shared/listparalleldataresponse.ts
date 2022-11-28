@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ParallelDataProperties } from "./paralleldataproperties";
 
 
+
 export class ListParallelDataResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=ParallelDataPropertiesList", elemType: shared.ParallelDataProperties })
+  @SpeakeasyMetadata({ data: "json, name=ParallelDataPropertiesList", elemType: ParallelDataProperties })
   parallelDataPropertiesList?: ParallelDataProperties[];
 }

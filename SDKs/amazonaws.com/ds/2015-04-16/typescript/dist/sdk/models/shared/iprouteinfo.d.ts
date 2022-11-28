@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { IpRouteStatusMsgEnum } from "./iproutestatusmsgenum";
 /**
  * Information about one or more IP address blocks.

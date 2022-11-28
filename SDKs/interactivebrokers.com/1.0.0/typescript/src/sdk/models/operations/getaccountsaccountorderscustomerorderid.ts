@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetAccountsAccountOrdersCustomerOrderIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=CustomerOrderId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=CustomerOrderId" })
   customerOrderId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=account" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=account" })
   account: string;
 }
 
 
 export class GetAccountsAccountOrdersCustomerOrderIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetAccountsAccountOrdersCustomerOrderIdPathParams;
 }
 
 
 export class GetAccountsAccountOrdersCustomerOrderIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.OrderState })
+  @SpeakeasyMetadata({ elemType: shared.OrderState })
   orderStates?: shared.OrderState[];
 }

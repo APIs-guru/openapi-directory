@@ -1,5 +1,7 @@
 package shared
 
+// EndpointInput
+// Input object for the endpoint
 type EndpointInput struct {
 	EndTimeOffset                 *string                               `json:"EndTimeOffset,omitempty"`
 	EndpointName                  string                                `json:"EndpointName"`

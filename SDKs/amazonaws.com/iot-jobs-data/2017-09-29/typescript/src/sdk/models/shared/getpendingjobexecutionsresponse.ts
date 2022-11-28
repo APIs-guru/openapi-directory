@@ -1,13 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { JobExecutionSummary } from "./jobexecutionsummary";
-import { JobExecutionSummary } from "./jobexecutionsummary";
+
 
 
 export class GetPendingJobExecutionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=inProgressJobs", elemType: shared.JobExecutionSummary })
+  @SpeakeasyMetadata({ data: "json, name=inProgressJobs", elemType: JobExecutionSummary })
   inProgressJobs?: JobExecutionSummary[];
 
-  @Metadata({ data: "json, name=queuedJobs", elemType: shared.JobExecutionSummary })
+  @SpeakeasyMetadata({ data: "json, name=queuedJobs", elemType: JobExecutionSummary })
   queuedJobs?: JobExecutionSummary[];
 }

@@ -8,12 +8,12 @@ type GetLongviewSubscriptionPathParams struct {
 	SubscriptionID string `pathParam:"style=simple,explode=false,name=subscriptionId"`
 }
 
-type GetLongviewSubscriptionRequest struct {
-	PathParams GetLongviewSubscriptionPathParams
-}
-
 type GetLongviewSubscriptionDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type GetLongviewSubscriptionRequest struct {
+	PathParams GetLongviewSubscriptionPathParams
 }
 
 type GetLongviewSubscriptionResponse struct {

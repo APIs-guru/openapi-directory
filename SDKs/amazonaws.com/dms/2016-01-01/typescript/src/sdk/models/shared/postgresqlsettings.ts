@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PluginNameValueEnum } from "./pluginnamevalueenum";
+
 
 
 // PostgreSqlSettings
@@ -7,57 +8,57 @@ import { PluginNameValueEnum } from "./pluginnamevalueenum";
  * Provides information that defines a PostgreSQL endpoint.
 **/
 export class PostgreSqlSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AfterConnectScript" })
+  @SpeakeasyMetadata({ data: "json, name=AfterConnectScript" })
   afterConnectScript?: string;
 
-  @Metadata({ data: "json, name=CaptureDdls" })
+  @SpeakeasyMetadata({ data: "json, name=CaptureDdls" })
   captureDdls?: boolean;
 
-  @Metadata({ data: "json, name=DatabaseName" })
+  @SpeakeasyMetadata({ data: "json, name=DatabaseName" })
   databaseName?: string;
 
-  @Metadata({ data: "json, name=DdlArtifactsSchema" })
+  @SpeakeasyMetadata({ data: "json, name=DdlArtifactsSchema" })
   ddlArtifactsSchema?: string;
 
-  @Metadata({ data: "json, name=ExecuteTimeout" })
+  @SpeakeasyMetadata({ data: "json, name=ExecuteTimeout" })
   executeTimeout?: number;
 
-  @Metadata({ data: "json, name=FailTasksOnLobTruncation" })
+  @SpeakeasyMetadata({ data: "json, name=FailTasksOnLobTruncation" })
   failTasksOnLobTruncation?: boolean;
 
-  @Metadata({ data: "json, name=HeartbeatEnable" })
+  @SpeakeasyMetadata({ data: "json, name=HeartbeatEnable" })
   heartbeatEnable?: boolean;
 
-  @Metadata({ data: "json, name=HeartbeatFrequency" })
+  @SpeakeasyMetadata({ data: "json, name=HeartbeatFrequency" })
   heartbeatFrequency?: number;
 
-  @Metadata({ data: "json, name=HeartbeatSchema" })
+  @SpeakeasyMetadata({ data: "json, name=HeartbeatSchema" })
   heartbeatSchema?: string;
 
-  @Metadata({ data: "json, name=MaxFileSize" })
+  @SpeakeasyMetadata({ data: "json, name=MaxFileSize" })
   maxFileSize?: number;
 
-  @Metadata({ data: "json, name=Password" })
+  @SpeakeasyMetadata({ data: "json, name=Password" })
   password?: string;
 
-  @Metadata({ data: "json, name=PluginName" })
+  @SpeakeasyMetadata({ data: "json, name=PluginName" })
   pluginName?: PluginNameValueEnum;
 
-  @Metadata({ data: "json, name=Port" })
+  @SpeakeasyMetadata({ data: "json, name=Port" })
   port?: number;
 
-  @Metadata({ data: "json, name=SecretsManagerAccessRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=SecretsManagerAccessRoleArn" })
   secretsManagerAccessRoleArn?: string;
 
-  @Metadata({ data: "json, name=SecretsManagerSecretId" })
+  @SpeakeasyMetadata({ data: "json, name=SecretsManagerSecretId" })
   secretsManagerSecretId?: string;
 
-  @Metadata({ data: "json, name=ServerName" })
+  @SpeakeasyMetadata({ data: "json, name=ServerName" })
   serverName?: string;
 
-  @Metadata({ data: "json, name=SlotName" })
+  @SpeakeasyMetadata({ data: "json, name=SlotName" })
   slotName?: string;
 
-  @Metadata({ data: "json, name=Username" })
+  @SpeakeasyMetadata({ data: "json, name=Username" })
   username?: string;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { IdentityDescription } from "./identitydescription";
 /**
  * The response to a ListIdentities request.

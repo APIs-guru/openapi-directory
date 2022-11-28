@@ -1,68 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RescueLinodeInstancePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=linodeId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=linodeId" })
   linodeId: number;
 }
 
 
 export class RescueLinodeInstanceRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=devices" })
+  @SpeakeasyMetadata({ data: "json, name=devices" })
   devices?: shared.RescueDevices;
 }
 
 
-export class RescueLinodeInstanceSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class RescueLinodeInstanceSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class RescueLinodeInstanceSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: RescueLinodeInstanceSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: RescueLinodeInstanceSecurityOption2;
-}
-
-
-export class RescueLinodeInstanceRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: RescueLinodeInstancePathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: RescueLinodeInstanceRequestBody;
-
-  @Metadata()
-  security: RescueLinodeInstanceSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class RescueLinodeInstanceDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class RescueLinodeInstanceRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: RescueLinodeInstancePathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: RescueLinodeInstanceRequestBody;
+
+  @SpeakeasyMetadata()
+  security: RescueLinodeInstanceSecurity;
+}
+
+
 export class RescueLinodeInstanceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   rescueLinodeInstance200ApplicationJsonObject?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   rescueLinodeInstanceDefaultApplicationJsonObject?: RescueLinodeInstanceDefaultApplicationJson;
 }

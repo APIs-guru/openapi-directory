@@ -1,15 +1,18 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import codegennodearg
-from . import codegennodearg
-from . import codegennodearg
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Location:
-    dynamo_db: Optional[List[codegennodearg.CodeGenNodeArg]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DynamoDB' }})
-    jdbc: Optional[List[codegennodearg.CodeGenNodeArg]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Jdbc' }})
-    s3: Optional[List[codegennodearg.CodeGenNodeArg]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'S3' }})
+    r"""Location
+    The location of resources.
+    """
+    
+    dynamo_db: Optional[List[CodeGenNodeArg]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DynamoDB') }})
+    jdbc: Optional[List[CodeGenNodeArg]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Jdbc') }})
+    s3: Optional[List[CodeGenNodeArg]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('S3') }})
     

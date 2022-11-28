@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CacheHitResult
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Details on the cache hit of a pipeline execution step.
 **/
 export class CacheHitResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SourcePipelineExecutionArn" })
+  @SpeakeasyMetadata({ data: "json, name=SourcePipelineExecutionArn" })
   sourcePipelineExecutionArn?: string;
 }

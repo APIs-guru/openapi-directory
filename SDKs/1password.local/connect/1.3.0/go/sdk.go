@@ -11,7 +11,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://1password.local",
 	"http://localhost:8080/v1",
 }
@@ -21,9 +21,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -34,27 +38,45 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// CreateVaultItem - Create a new Item
 func (s *SDK) CreateVaultItem(ctx context.Context, request operations.CreateVaultItemRequest) (*operations.CreateVaultItemResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/vaults/{vaultUuid}/items", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -69,7 +91,7 @@ func (s *SDK) CreateVaultItem(ctx context.Context, request operations.CreateVaul
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -139,8 +161,9 @@ func (s *SDK) CreateVaultItem(ctx context.Context, request operations.CreateVaul
 	return res, nil
 }
 
+// DeleteVaultItem - Delete an Item
 func (s *SDK) DeleteVaultItem(ctx context.Context, request operations.DeleteVaultItemRequest) (*operations.DeleteVaultItemResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/vaults/{vaultUuid}/items/{itemUuid}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -148,7 +171,7 @@ func (s *SDK) DeleteVaultItem(ctx context.Context, request operations.DeleteVaul
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -199,8 +222,9 @@ func (s *SDK) DeleteVaultItem(ctx context.Context, request operations.DeleteVaul
 	return res, nil
 }
 
+// DownloadFileByID - Get the content of a File
 func (s *SDK) DownloadFileByID(ctx context.Context, request operations.DownloadFileByIDRequest) (*operations.DownloadFileByIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/vaults/{vaultUuid}/items/{itemUuid}/files/{fileUuid}/content", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -208,7 +232,7 @@ func (s *SDK) DownloadFileByID(ctx context.Context, request operations.DownloadF
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -260,8 +284,9 @@ func (s *SDK) DownloadFileByID(ctx context.Context, request operations.DownloadF
 	return res, nil
 }
 
+// GetAPIActivity - Retrieve a list of API Requests that have been made.
 func (s *SDK) GetAPIActivity(ctx context.Context, request operations.GetAPIActivityRequest) (*operations.GetAPIActivityResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/activity"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -271,7 +296,7 @@ func (s *SDK) GetAPIActivity(ctx context.Context, request operations.GetAPIActiv
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -313,8 +338,9 @@ func (s *SDK) GetAPIActivity(ctx context.Context, request operations.GetAPIActiv
 	return res, nil
 }
 
+// GetDetailsOfFileByID - Get the details of a File
 func (s *SDK) GetDetailsOfFileByID(ctx context.Context, request operations.GetDetailsOfFileByIDRequest) (*operations.GetDetailsOfFileByIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/vaults/{vaultUuid}/items/{itemUuid}/files/{fileUuid}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -324,7 +350,7 @@ func (s *SDK) GetDetailsOfFileByID(ctx context.Context, request operations.GetDe
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -394,8 +420,9 @@ func (s *SDK) GetDetailsOfFileByID(ctx context.Context, request operations.GetDe
 	return res, nil
 }
 
+// GetHeartbeat - Ping the server for liveness
 func (s *SDK) GetHeartbeat(ctx context.Context, request operations.GetHeartbeatRequest) (*operations.GetHeartbeatResponse, error) {
-	baseURL := operations.GetHeartbeatServers[0]
+	baseURL := operations.GetHeartbeatServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -407,7 +434,7 @@ func (s *SDK) GetHeartbeat(ctx context.Context, request operations.GetHeartbeatR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -438,8 +465,9 @@ func (s *SDK) GetHeartbeat(ctx context.Context, request operations.GetHeartbeatR
 	return res, nil
 }
 
+// GetItemFiles - Get all the files inside an Item
 func (s *SDK) GetItemFiles(ctx context.Context, request operations.GetItemFilesRequest) (*operations.GetItemFilesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/vaults/{vaultUuid}/items/{itemUuid}/files", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -449,7 +477,7 @@ func (s *SDK) GetItemFiles(ctx context.Context, request operations.GetItemFilesR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -509,8 +537,10 @@ func (s *SDK) GetItemFiles(ctx context.Context, request operations.GetItemFilesR
 	return res, nil
 }
 
+// GetPrometheusMetrics - Query server for exposed Prometheus metrics
+// See Prometheus documentation for a complete data model.
 func (s *SDK) GetPrometheusMetrics(ctx context.Context, request operations.GetPrometheusMetricsRequest) (*operations.GetPrometheusMetricsResponse, error) {
-	baseURL := operations.GetPrometheusMetricsServers[0]
+	baseURL := operations.GetPrometheusMetricsServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -522,7 +552,7 @@ func (s *SDK) GetPrometheusMetrics(ctx context.Context, request operations.GetPr
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -553,8 +583,9 @@ func (s *SDK) GetPrometheusMetrics(ctx context.Context, request operations.GetPr
 	return res, nil
 }
 
+// GetServerHealth - Get state of the server and its dependencies.
 func (s *SDK) GetServerHealth(ctx context.Context, request operations.GetServerHealthRequest) (*operations.GetServerHealthResponse, error) {
-	baseURL := operations.GetServerHealthServers[0]
+	baseURL := operations.GetServerHealthServerList[0]
 	if request.ServerURL != nil {
 		baseURL = *request.ServerURL
 	}
@@ -566,7 +597,7 @@ func (s *SDK) GetServerHealth(ctx context.Context, request operations.GetServerH
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -596,8 +627,9 @@ func (s *SDK) GetServerHealth(ctx context.Context, request operations.GetServerH
 	return res, nil
 }
 
+// GetVaultByID - Get Vault details and metadata
 func (s *SDK) GetVaultByID(ctx context.Context, request operations.GetVaultByIDRequest) (*operations.GetVaultByIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/vaults/{vaultUuid}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -605,7 +637,7 @@ func (s *SDK) GetVaultByID(ctx context.Context, request operations.GetVaultByIDR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -665,8 +697,9 @@ func (s *SDK) GetVaultByID(ctx context.Context, request operations.GetVaultByIDR
 	return res, nil
 }
 
+// GetVaultItemByID - Get the details of an Item
 func (s *SDK) GetVaultItemByID(ctx context.Context, request operations.GetVaultItemByIDRequest) (*operations.GetVaultItemByIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/vaults/{vaultUuid}/items/{itemUuid}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -674,7 +707,7 @@ func (s *SDK) GetVaultItemByID(ctx context.Context, request operations.GetVaultI
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -734,8 +767,9 @@ func (s *SDK) GetVaultItemByID(ctx context.Context, request operations.GetVaultI
 	return res, nil
 }
 
+// GetVaultItems - Get all items for inside a Vault
 func (s *SDK) GetVaultItems(ctx context.Context, request operations.GetVaultItemsRequest) (*operations.GetVaultItemsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/vaults/{vaultUuid}/items", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -745,7 +779,7 @@ func (s *SDK) GetVaultItems(ctx context.Context, request operations.GetVaultItem
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -795,8 +829,9 @@ func (s *SDK) GetVaultItems(ctx context.Context, request operations.GetVaultItem
 	return res, nil
 }
 
+// GetVaults - Get all Vaults
 func (s *SDK) GetVaults(ctx context.Context, request operations.GetVaultsRequest) (*operations.GetVaultsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/vaults"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -806,7 +841,7 @@ func (s *SDK) GetVaults(ctx context.Context, request operations.GetVaultsRequest
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -846,8 +881,12 @@ func (s *SDK) GetVaults(ctx context.Context, request operations.GetVaultsRequest
 	return res, nil
 }
 
+// PatchVaultItem - Update a subset of Item attributes
+// Applies a modified [RFC6902 JSON Patch](https://tools.ietf.org/html/rfc6902) document to an Item or ItemField. This endpoint only supports `add`, `remove` and `replace` operations.
+//
+// When modifying a specific ItemField, the ItemField's ID in the `path` attribute of the operation object: `/fields/{fieldId}`
 func (s *SDK) PatchVaultItem(ctx context.Context, request operations.PatchVaultItemRequest) (*operations.PatchVaultItemResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/vaults/{vaultUuid}/items/{itemUuid}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -862,7 +901,7 @@ func (s *SDK) PatchVaultItem(ctx context.Context, request operations.PatchVaultI
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -922,8 +961,9 @@ func (s *SDK) PatchVaultItem(ctx context.Context, request operations.PatchVaultI
 	return res, nil
 }
 
+// UpdateVaultItem - Update an Item
 func (s *SDK) UpdateVaultItem(ctx context.Context, request operations.UpdateVaultItemRequest) (*operations.UpdateVaultItemResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/vaults/{vaultUuid}/items/{itemUuid}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -938,7 +978,7 @@ func (s *SDK) UpdateVaultItem(ctx context.Context, request operations.UpdateVaul
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {

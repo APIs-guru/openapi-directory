@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class SasportalNodesNodesDeploymentsCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class SasportalNodesNodesDeploymentsCreateQueryParams:
 
 @dataclass
 class SasportalNodesNodesDeploymentsCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class SasportalNodesNodesDeploymentsCreateRequest:
-    path_params: SasportalNodesNodesDeploymentsCreatePathParams = field(default=None)
-    query_params: SasportalNodesNodesDeploymentsCreateQueryParams = field(default=None)
-    request: Optional[shared.SasPortalDeployment] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: SasportalNodesNodesDeploymentsCreateSecurity = field(default=None)
+    path_params: SasportalNodesNodesDeploymentsCreatePathParams = field()
+    query_params: SasportalNodesNodesDeploymentsCreateQueryParams = field()
+    security: SasportalNodesNodesDeploymentsCreateSecurity = field()
+    request: Optional[shared.SasPortalDeploymentInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class SasportalNodesNodesDeploymentsCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     sas_portal_deployment: Optional[shared.SasPortalDeployment] = field(default=None)
-    status_code: int = field(default=None)
     

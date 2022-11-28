@@ -1,5 +1,7 @@
 package shared
 
+// IosInfo
+// iOS related attributes to the Dynamic Link..
 type IosInfo struct {
 	IosAppStoreID       *string `json:"iosAppStoreId,omitempty"`
 	IosBundleID         *string `json:"iosBundleId,omitempty"`

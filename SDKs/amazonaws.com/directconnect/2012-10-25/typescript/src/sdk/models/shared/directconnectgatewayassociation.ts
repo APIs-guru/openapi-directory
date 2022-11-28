@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RouteFilterPrefix } from "./routefilterprefix";
 import { AssociatedGateway } from "./associatedgateway";
 import { DirectConnectGatewayAssociationStateEnum } from "./directconnectgatewayassociationstateenum";
+
 
 
 // DirectConnectGatewayAssociation
@@ -10,33 +10,33 @@ import { DirectConnectGatewayAssociationStateEnum } from "./directconnectgateway
  * Information about an association between a Direct Connect gateway and a virtual private gateway or transit gateway.
 **/
 export class DirectConnectGatewayAssociation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowedPrefixesToDirectConnectGateway", elemType: shared.RouteFilterPrefix })
+  @SpeakeasyMetadata({ data: "json, name=allowedPrefixesToDirectConnectGateway", elemType: RouteFilterPrefix })
   allowedPrefixesToDirectConnectGateway?: RouteFilterPrefix[];
 
-  @Metadata({ data: "json, name=associatedGateway" })
+  @SpeakeasyMetadata({ data: "json, name=associatedGateway" })
   associatedGateway?: AssociatedGateway;
 
-  @Metadata({ data: "json, name=associationId" })
+  @SpeakeasyMetadata({ data: "json, name=associationId" })
   associationId?: string;
 
-  @Metadata({ data: "json, name=associationState" })
+  @SpeakeasyMetadata({ data: "json, name=associationState" })
   associationState?: DirectConnectGatewayAssociationStateEnum;
 
-  @Metadata({ data: "json, name=directConnectGatewayId" })
+  @SpeakeasyMetadata({ data: "json, name=directConnectGatewayId" })
   directConnectGatewayId?: string;
 
-  @Metadata({ data: "json, name=directConnectGatewayOwnerAccount" })
+  @SpeakeasyMetadata({ data: "json, name=directConnectGatewayOwnerAccount" })
   directConnectGatewayOwnerAccount?: string;
 
-  @Metadata({ data: "json, name=stateChangeError" })
+  @SpeakeasyMetadata({ data: "json, name=stateChangeError" })
   stateChangeError?: string;
 
-  @Metadata({ data: "json, name=virtualGatewayId" })
+  @SpeakeasyMetadata({ data: "json, name=virtualGatewayId" })
   virtualGatewayId?: string;
 
-  @Metadata({ data: "json, name=virtualGatewayOwnerAccount" })
+  @SpeakeasyMetadata({ data: "json, name=virtualGatewayOwnerAccount" })
   virtualGatewayOwnerAccount?: string;
 
-  @Metadata({ data: "json, name=virtualGatewayRegion" })
+  @SpeakeasyMetadata({ data: "json, name=virtualGatewayRegion" })
   virtualGatewayRegion?: string;
 }

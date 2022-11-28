@@ -5,24 +5,24 @@ from sdk.models import shared
 
 @dataclass
 class GetVolumesFsNameJSONPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetVolumesFsNameJSONHeaders:
-    x_auth_project_id: str = field(default=None, metadata={'header': { 'field_name': 'X-Auth-Project-Id', 'style': 'simple', 'explode': False }})
-    x_auth_token: str = field(default=None, metadata={'header': { 'field_name': 'X-Auth-Token', 'style': 'simple', 'explode': False }})
+    x_auth_project_id: str = field(metadata={'header': { 'field_name': 'X-Auth-Project-Id', 'style': 'simple', 'explode': False }})
+    x_auth_token: str = field(metadata={'header': { 'field_name': 'X-Auth-Token', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetVolumesFsNameJSONRequest:
-    path_params: GetVolumesFsNameJSONPathParams = field(default=None)
-    headers: GetVolumesFsNameJSONHeaders = field(default=None)
+    headers: GetVolumesFsNameJSONHeaders = field()
+    path_params: GetVolumesFsNameJSONPathParams = field()
     
 
 @dataclass
 class GetVolumesFsNameJSONResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_fileshare_details: Optional[List[shared.GetFileshareDetails]] = field(default=None)
-    status_code: int = field(default=None)
     

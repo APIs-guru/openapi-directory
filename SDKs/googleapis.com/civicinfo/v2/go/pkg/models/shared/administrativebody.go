@@ -1,5 +1,7 @@
 package shared
 
+// AdministrativeBody
+// Information about an election administrative body (e.g. County Board of Elections).
 type AdministrativeBody struct {
 	AbsenteeVotingInfoURL               *string            `json:"absenteeVotingInfoUrl,omitempty"`
 	BallotInfoURL                       *string            `json:"ballotInfoUrl,omitempty"`

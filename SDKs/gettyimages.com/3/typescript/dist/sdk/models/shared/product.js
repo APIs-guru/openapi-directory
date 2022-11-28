@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DownloadRequirements } from "./downloadrequirements";
 import { OverageDetails } from "./overagedetails";
 import { ProductStatusEnum } from "./productstatusenum";
@@ -33,67 +33,67 @@ var Product = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=agreement_name" }),
+        SpeakeasyMetadata({ data: "json, name=agreement_name" }),
         __metadata("design:type", String)
     ], Product.prototype, "agreementName", void 0);
     __decorate([
-        Metadata({ data: "json, name=application_website" }),
+        SpeakeasyMetadata({ data: "json, name=application_website" }),
         __metadata("design:type", String)
     ], Product.prototype, "applicationWebsite", void 0);
     __decorate([
-        Metadata({ data: "json, name=credits_remaining" }),
+        SpeakeasyMetadata({ data: "json, name=credits_remaining" }),
         __metadata("design:type", Number)
     ], Product.prototype, "creditsRemaining", void 0);
     __decorate([
-        Metadata({ data: "json, name=download_limit" }),
+        SpeakeasyMetadata({ data: "json, name=download_limit" }),
         __metadata("design:type", Number)
     ], Product.prototype, "downloadLimit", void 0);
     __decorate([
-        Metadata({ data: "json, name=download_limit_duration" }),
+        SpeakeasyMetadata({ data: "json, name=download_limit_duration" }),
         __metadata("design:type", String)
     ], Product.prototype, "downloadLimitDuration", void 0);
     __decorate([
-        Metadata({ data: "json, name=download_limit_reset_utc_date" }),
+        SpeakeasyMetadata({ data: "json, name=download_limit_reset_utc_date" }),
         __metadata("design:type", Date)
     ], Product.prototype, "downloadLimitResetUtcDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=download_requirements" }),
+        SpeakeasyMetadata({ data: "json, name=download_requirements" }),
         __metadata("design:type", DownloadRequirements)
     ], Product.prototype, "downloadRequirements", void 0);
     __decorate([
-        Metadata({ data: "json, name=downloads_remaining" }),
+        SpeakeasyMetadata({ data: "json, name=downloads_remaining" }),
         __metadata("design:type", Number)
     ], Product.prototype, "downloadsRemaining", void 0);
     __decorate([
-        Metadata({ data: "json, name=expiration_utc_date" }),
+        SpeakeasyMetadata({ data: "json, name=expiration_utc_date" }),
         __metadata("design:type", Date)
     ], Product.prototype, "expirationUtcDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", Number)
     ], Product.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=imagepack_resolution" }),
+        SpeakeasyMetadata({ data: "json, name=imagepack_resolution" }),
         __metadata("design:type", String)
     ], Product.prototype, "imagepackResolution", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Product.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=overage" }),
+        SpeakeasyMetadata({ data: "json, name=overage" }),
         __metadata("design:type", OverageDetails)
     ], Product.prototype, "overage", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], Product.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=team_credits" }),
+        SpeakeasyMetadata({ data: "json, name=team_credits" }),
         __metadata("design:type", Number)
     ], Product.prototype, "teamCredits", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], Product.prototype, "type", void 0);
     return Product;

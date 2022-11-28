@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostTerminateClientVpnConnectionsActionEnum(str, Enum):
     TERMINATE_CLIENT_VPN_CONNECTIONS = "TerminateClientVpnConnections"
@@ -10,8 +14,8 @@ class PostTerminateClientVpnConnectionsVersionEnum(str, Enum):
 
 @dataclass
 class PostTerminateClientVpnConnectionsQueryParams:
-    action: PostTerminateClientVpnConnectionsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostTerminateClientVpnConnectionsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostTerminateClientVpnConnectionsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostTerminateClientVpnConnectionsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostTerminateClientVpnConnectionsHeaders:
 
 @dataclass
 class PostTerminateClientVpnConnectionsRequest:
-    query_params: PostTerminateClientVpnConnectionsQueryParams = field(default=None)
-    headers: PostTerminateClientVpnConnectionsHeaders = field(default=None)
+    headers: PostTerminateClientVpnConnectionsHeaders = field()
+    query_params: PostTerminateClientVpnConnectionsQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostTerminateClientVpnConnectionsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

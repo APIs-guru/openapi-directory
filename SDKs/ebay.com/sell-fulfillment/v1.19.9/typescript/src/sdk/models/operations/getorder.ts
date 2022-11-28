@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetOrderPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=orderId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=orderId" })
   orderId: string;
 }
 
 
 export class GetOrderQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fieldGroups" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fieldGroups" })
   fieldGroups?: string;
 }
 
 
 export class GetOrderSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   apiAuth: shared.SchemeApiAuth;
 }
 
 
 export class GetOrderRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetOrderPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetOrderQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetOrderSecurity;
 }
 
 
 export class GetOrderResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   order?: shared.Order;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

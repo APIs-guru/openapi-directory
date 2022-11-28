@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DriveTeamdrivesUpdatePathParams:
-    team_drive_id: str = field(default=None, metadata={'path_param': { 'field_name': 'teamDriveId', 'style': 'simple', 'explode': False }})
+    team_drive_id: str = field(metadata={'path_param': { 'field_name': 'teamDriveId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,21 +26,21 @@ class DriveTeamdrivesUpdateQueryParams:
 
 @dataclass
 class DriveTeamdrivesUpdateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DriveTeamdrivesUpdateRequest:
-    path_params: DriveTeamdrivesUpdatePathParams = field(default=None)
-    query_params: DriveTeamdrivesUpdateQueryParams = field(default=None)
+    path_params: DriveTeamdrivesUpdatePathParams = field()
+    query_params: DriveTeamdrivesUpdateQueryParams = field()
+    security: DriveTeamdrivesUpdateSecurity = field()
     request: Optional[shared.TeamDrive] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DriveTeamdrivesUpdateSecurity = field(default=None)
     
 
 @dataclass
 class DriveTeamdrivesUpdateResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     team_drive: Optional[shared.TeamDrive] = field(default=None)
     

@@ -14,6 +14,8 @@ type StartDetectorModelAnalysisHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// StartDetectorModelAnalysisRequestBodyDetectorModelDefinition
+// Information that defines how a detector operates.
 type StartDetectorModelAnalysisRequestBodyDetectorModelDefinition struct {
 	InitialStateName *string        `json:"initialStateName,omitempty"`
 	States           []shared.State `json:"states,omitempty"`

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,20 +29,20 @@ class HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsListQueryP
 
 @dataclass
 class HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsListRequest:
-    path_params: HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsListPathParams = field(default=None)
-    query_params: HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsListQueryParams = field(default=None)
-    security: HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsListSecurity = field(default=None)
+    path_params: HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsListPathParams = field()
+    query_params: HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsListQueryParams = field()
+    security: HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsListSecurity = field()
     
 
 @dataclass
 class HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_user_data_mappings_response: Optional[shared.ListUserDataMappingsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ReportViewingQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=itemId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=itemId" })
   itemId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sessionId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sessionId" })
   sessionId?: string;
 }
 
 
 export class ReportViewingSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   customAuthentication: shared.SchemeCustomAuthentication;
 }
 
 
 export class ReportViewingRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ReportViewingQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: ReportViewingSecurity;
 }
 
 
 export class ReportViewingResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

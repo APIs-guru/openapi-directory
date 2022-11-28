@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { BatchInferenceJobConfig } from "./batchinferencejobconfig";
 import { BatchInferenceJobInput } from "./batchinferencejobinput";
 import { BatchInferenceJobOutput } from "./batchinferencejoboutput";

@@ -4,7 +4,7 @@ from typing import Any,Optional
 
 @dataclass
 class GetRealmGroupsCountPathParams:
-    realm: str = field(default=None, metadata={'path_param': { 'field_name': 'realm', 'style': 'simple', 'explode': False }})
+    realm: str = field(metadata={'path_param': { 'field_name': 'realm', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,13 +15,13 @@ class GetRealmGroupsCountQueryParams:
 
 @dataclass
 class GetRealmGroupsCountRequest:
-    path_params: GetRealmGroupsCountPathParams = field(default=None)
-    query_params: GetRealmGroupsCountQueryParams = field(default=None)
+    path_params: GetRealmGroupsCountPathParams = field()
+    query_params: GetRealmGroupsCountQueryParams = field()
     
 
 @dataclass
 class GetRealmGroupsCountResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_realm_groups_count_2_xx_application_json_object: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

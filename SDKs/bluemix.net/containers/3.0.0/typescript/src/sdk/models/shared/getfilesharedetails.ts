@@ -1,16 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Fileshare } from "./fileshare";
 import { FileshareUsage } from "./fileshareusage";
 
 
+
 export class GetFileshareDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fs", elemType: shared.Fileshare })
+  @SpeakeasyMetadata({ data: "json, name=fs", elemType: Fileshare })
   fs?: Fileshare[];
 
-  @Metadata({ data: "json, name=fsUsage", elemType: shared.FileshareUsage })
+  @SpeakeasyMetadata({ data: "json, name=fsUsage", elemType: FileshareUsage })
   fsUsage?: FileshareUsage[];
 
-  @Metadata({ data: "json, name=volnames" })
+  @SpeakeasyMetadata({ data: "json, name=volnames" })
   volnames?: string[];
 }

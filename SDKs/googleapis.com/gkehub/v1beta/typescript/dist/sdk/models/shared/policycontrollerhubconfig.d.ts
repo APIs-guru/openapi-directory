@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { PolicyControllerMonitoringConfig } from "./policycontrollermonitoringconfig";
 import { PolicyControllerTemplateLibraryConfig } from "./policycontrollertemplatelibraryconfig";
 export declare enum PolicyControllerHubConfigInstallSpecEnum {

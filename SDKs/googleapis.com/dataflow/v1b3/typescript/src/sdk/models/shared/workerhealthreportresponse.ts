@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // WorkerHealthReportResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * WorkerHealthReportResponse contains information returned to the worker in response to a health ping.
 **/
 export class WorkerHealthReportResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=reportInterval" })
+  @SpeakeasyMetadata({ data: "json, name=reportInterval" })
   reportInterval?: string;
 }

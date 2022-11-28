@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ExecutionProperty
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An execution property of a job.
 **/
 export class ExecutionProperty extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MaxConcurrentRuns" })
+  @SpeakeasyMetadata({ data: "json, name=MaxConcurrentRuns" })
   maxConcurrentRuns?: number;
 }

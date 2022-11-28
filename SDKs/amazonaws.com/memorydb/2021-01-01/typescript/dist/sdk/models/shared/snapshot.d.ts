@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ClusterConfiguration } from "./clusterconfiguration";
 /**
  * Represents a copy of an entire cluster as of the time when the snapshot was taken.

@@ -32,6 +32,8 @@ const (
 	ListingStateEnumActive           ListingStateEnum = "ACTIVE"
 )
 
+// Listing
+// A listing is what gets published into a data exchange that a subscriber can subscribe to. It contains a reference to the data source along with descriptive information that will help subscribers find and subscribe the data.
 type Listing struct {
 	BigqueryDataset *BigQueryDatasetSource  `json:"bigqueryDataset,omitempty"`
 	Categories      []ListingCategoriesEnum `json:"categories,omitempty"`
@@ -45,4 +47,19 @@ type Listing struct {
 	Publisher       *Publisher              `json:"publisher,omitempty"`
 	RequestAccess   *string                 `json:"requestAccess,omitempty"`
 	State           *ListingStateEnum       `json:"state,omitempty"`
+}
+
+// ListingInput
+// A listing is what gets published into a data exchange that a subscriber can subscribe to. It contains a reference to the data source along with descriptive information that will help subscribers find and subscribe the data.
+type ListingInput struct {
+	BigqueryDataset *BigQueryDatasetSource  `json:"bigqueryDataset,omitempty"`
+	Categories      []ListingCategoriesEnum `json:"categories,omitempty"`
+	DataProvider    *DataProvider           `json:"dataProvider,omitempty"`
+	Description     *string                 `json:"description,omitempty"`
+	DisplayName     *string                 `json:"displayName,omitempty"`
+	Documentation   *string                 `json:"documentation,omitempty"`
+	Icon            *string                 `json:"icon,omitempty"`
+	PrimaryContact  *string                 `json:"primaryContact,omitempty"`
+	Publisher       *Publisher              `json:"publisher,omitempty"`
+	RequestAccess   *string                 `json:"requestAccess,omitempty"`
 }

@@ -1,67 +1,68 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum ListPeopleHasExternalIdEnum {
-    True = "true"
-,    False = "false"
+    True = "true",
+    False = "false"
 }
 
 
 export class ListPeopleQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=authority" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=authority" })
   authority?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=has_external_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=has_external_id" })
   hasExternalId?: ListPeopleHasExternalIdEnum[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=id" })
   id?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=id_type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=id_type" })
   idType?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page_size" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_size" })
   pageSize?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=partner_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=partner_id" })
   partnerId?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=partner_pid" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=partner_pid" })
   partnerPid?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=pid" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pid" })
   pid?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=programme" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=programme" })
   programme?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=q" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=q" })
   q?: string;
 }
 
 
 export class ListPeopleRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ListPeopleQueryParams;
 }
 
 
 export class ListPeopleResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorModel?: shared.ErrorModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   nitro?: any;
 }

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetModifyClusterSnapshotActionEnum(str, Enum):
     MODIFY_CLUSTER_SNAPSHOT = "ModifyClusterSnapshot"
@@ -10,11 +14,11 @@ class GetModifyClusterSnapshotVersionEnum(str, Enum):
 
 @dataclass
 class GetModifyClusterSnapshotQueryParams:
-    action: GetModifyClusterSnapshotActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetModifyClusterSnapshotActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    snapshot_identifier: str = field(metadata={'query_param': { 'field_name': 'SnapshotIdentifier', 'style': 'form', 'explode': True }})
+    version: GetModifyClusterSnapshotVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     force: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'Force', 'style': 'form', 'explode': True }})
     manual_snapshot_retention_period: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'ManualSnapshotRetentionPeriod', 'style': 'form', 'explode': True }})
-    snapshot_identifier: str = field(default=None, metadata={'query_param': { 'field_name': 'SnapshotIdentifier', 'style': 'form', 'explode': True }})
-    version: GetModifyClusterSnapshotVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetModifyClusterSnapshotHeaders:
 
 @dataclass
 class GetModifyClusterSnapshotRequest:
-    query_params: GetModifyClusterSnapshotQueryParams = field(default=None)
-    headers: GetModifyClusterSnapshotHeaders = field(default=None)
+    headers: GetModifyClusterSnapshotHeaders = field()
+    query_params: GetModifyClusterSnapshotQueryParams = field()
     
 
 @dataclass
 class GetModifyClusterSnapshotResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

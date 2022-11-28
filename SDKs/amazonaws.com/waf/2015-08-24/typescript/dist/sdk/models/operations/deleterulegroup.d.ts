@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum DeleteRuleGroupXAmzTargetEnum {
     Awswaf20150824DeleteRuleGroup = "AWSWAF_20150824.DeleteRuleGroup"

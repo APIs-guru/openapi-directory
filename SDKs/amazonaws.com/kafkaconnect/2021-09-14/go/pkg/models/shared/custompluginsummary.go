@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// CustomPluginSummary
+// A summary of the custom plugin.
 type CustomPluginSummary struct {
 	CreationTime      *time.Time                   `json:"creationTime,omitempty"`
 	CustomPluginArn   *string                      `json:"customPluginArn,omitempty"`

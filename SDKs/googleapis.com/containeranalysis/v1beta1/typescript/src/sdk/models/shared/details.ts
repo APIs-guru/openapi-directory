@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Attestation } from "./attestation";
+
 
 
 // Details
@@ -7,6 +8,6 @@ import { Attestation } from "./attestation";
  * Details of an attestation occurrence.
 **/
 export class Details extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attestation" })
+  @SpeakeasyMetadata({ data: "json, name=attestation" })
   attestation?: Attestation;
 }

@@ -16,12 +16,6 @@ type GetChartPkCacheScreenshotSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type GetChartPkCacheScreenshotRequest struct {
-	PathParams  GetChartPkCacheScreenshotPathParams
-	QueryParams GetChartPkCacheScreenshotQueryParams
-	Security    GetChartPkCacheScreenshotSecurity
-}
-
 type GetChartPkCacheScreenshot400ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
 }
@@ -36,6 +30,12 @@ type GetChartPkCacheScreenshot404ApplicationJSON struct {
 
 type GetChartPkCacheScreenshot500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type GetChartPkCacheScreenshotRequest struct {
+	PathParams  GetChartPkCacheScreenshotPathParams
+	QueryParams GetChartPkCacheScreenshotQueryParams
+	Security    GetChartPkCacheScreenshotSecurity
 }
 
 type GetChartPkCacheScreenshotResponse struct {

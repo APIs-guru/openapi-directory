@@ -1,5 +1,7 @@
 package shared
 
+// ValidatePipelineDefinitionInput
+// Contains the parameters for ValidatePipelineDefinition.
 type ValidatePipelineDefinitionInput struct {
 	ParameterObjects []ParameterObject `json:"parameterObjects,omitempty"`
 	ParameterValues  []ParameterValue  `json:"parameterValues,omitempty"`

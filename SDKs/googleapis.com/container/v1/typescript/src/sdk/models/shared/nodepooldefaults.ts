@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NodeConfigDefaults } from "./nodeconfigdefaults";
+
 
 
 // NodePoolDefaults
@@ -7,6 +8,6 @@ import { NodeConfigDefaults } from "./nodeconfigdefaults";
  * Subset of Nodepool message that has defaults.
 **/
 export class NodePoolDefaults extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nodeConfigDefaults" })
+  @SpeakeasyMetadata({ data: "json, name=nodeConfigDefaults" })
   nodeConfigDefaults?: NodeConfigDefaults;
 }

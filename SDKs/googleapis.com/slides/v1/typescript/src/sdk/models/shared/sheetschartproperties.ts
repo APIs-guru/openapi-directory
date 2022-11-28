@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ImageProperties } from "./imageproperties";
+
 
 
 // SheetsChartProperties
@@ -7,6 +8,6 @@ import { ImageProperties } from "./imageproperties";
  * The properties of the SheetsChart.
 **/
 export class SheetsChartProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=chartImageProperties" })
+  @SpeakeasyMetadata({ data: "json, name=chartImageProperties" })
   chartImageProperties?: ImageProperties;
 }

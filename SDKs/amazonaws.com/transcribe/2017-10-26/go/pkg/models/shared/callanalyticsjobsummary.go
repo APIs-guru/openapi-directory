@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// CallAnalyticsJobSummary
+// Provides summary information about a call analytics job.
 type CallAnalyticsJobSummary struct {
 	CallAnalyticsJobName   *string                     `json:"CallAnalyticsJobName,omitempty"`
 	CallAnalyticsJobStatus *CallAnalyticsJobStatusEnum `json:"CallAnalyticsJobStatus,omitempty"`

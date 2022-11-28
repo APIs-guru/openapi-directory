@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProductViewSummary } from "./productviewsummary";
 import { ProvisioningArtifact } from "./provisioningartifact";
+
 
 
 // ProvisioningArtifactView
@@ -8,9 +9,9 @@ import { ProvisioningArtifact } from "./provisioningartifact";
  * An object that contains summary information about a product view and a provisioning artifact.
 **/
 export class ProvisioningArtifactView extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ProductViewSummary" })
+  @SpeakeasyMetadata({ data: "json, name=ProductViewSummary" })
   productViewSummary?: ProductViewSummary;
 
-  @Metadata({ data: "json, name=ProvisioningArtifact" })
+  @SpeakeasyMetadata({ data: "json, name=ProvisioningArtifact" })
   provisioningArtifact?: ProvisioningArtifact;
 }

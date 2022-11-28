@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import loggroupfield
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetLogGroupFieldsResponse:
-    log_group_fields: Optional[List[loggroupfield.LogGroupField]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'logGroupFields' }})
+    log_group_fields: Optional[List[LogGroupField]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('logGroupFields') }})
     

@@ -5,10 +5,10 @@ from sdk.models import shared
 
 @dataclass
 class PullsListCommentsForReviewPathParams:
-    owner: str = field(default=None, metadata={'path_param': { 'field_name': 'owner', 'style': 'simple', 'explode': False }})
-    pull_number: int = field(default=None, metadata={'path_param': { 'field_name': 'pull_number', 'style': 'simple', 'explode': False }})
-    repo: str = field(default=None, metadata={'path_param': { 'field_name': 'repo', 'style': 'simple', 'explode': False }})
-    review_id: int = field(default=None, metadata={'path_param': { 'field_name': 'review_id', 'style': 'simple', 'explode': False }})
+    owner: str = field(metadata={'path_param': { 'field_name': 'owner', 'style': 'simple', 'explode': False }})
+    pull_number: int = field(metadata={'path_param': { 'field_name': 'pull_number', 'style': 'simple', 'explode': False }})
+    repo: str = field(metadata={'path_param': { 'field_name': 'repo', 'style': 'simple', 'explode': False }})
+    review_id: int = field(metadata={'path_param': { 'field_name': 'review_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -19,15 +19,15 @@ class PullsListCommentsForReviewQueryParams:
 
 @dataclass
 class PullsListCommentsForReviewRequest:
-    path_params: PullsListCommentsForReviewPathParams = field(default=None)
-    query_params: PullsListCommentsForReviewQueryParams = field(default=None)
+    path_params: PullsListCommentsForReviewPathParams = field()
+    query_params: PullsListCommentsForReviewQueryParams = field()
     
 
 @dataclass
 class PullsListCommentsForReviewResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     basic_error: Optional[shared.BasicError] = field(default=None)
     review_comments: Optional[List[shared.ReviewComment]] = field(default=None)
     

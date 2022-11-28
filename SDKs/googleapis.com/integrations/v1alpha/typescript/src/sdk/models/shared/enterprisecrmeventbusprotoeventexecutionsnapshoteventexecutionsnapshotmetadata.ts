@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class EnterpriseCrmEventbusProtoEventExecutionSnapshotEventExecutionSnapshotMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=eventAttemptNum" })
+  @SpeakeasyMetadata({ data: "json, name=eventAttemptNum" })
   eventAttemptNum?: number;
 
-  @Metadata({ data: "json, name=taskAttemptNum" })
+  @SpeakeasyMetadata({ data: "json, name=taskAttemptNum" })
   taskAttemptNum?: number;
 
-  @Metadata({ data: "json, name=taskName" })
+  @SpeakeasyMetadata({ data: "json, name=taskName" })
   taskName?: string;
 
-  @Metadata({ data: "json, name=taskNumber" })
+  @SpeakeasyMetadata({ data: "json, name=taskNumber" })
   taskNumber?: string;
 }

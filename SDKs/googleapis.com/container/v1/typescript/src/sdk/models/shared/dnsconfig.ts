@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum DnsConfigClusterDnsEnum {
-    ProviderUnspecified = "PROVIDER_UNSPECIFIED"
-,    PlatformDefault = "PLATFORM_DEFAULT"
-,    CloudDns = "CLOUD_DNS"
+    ProviderUnspecified = "PROVIDER_UNSPECIFIED",
+    PlatformDefault = "PLATFORM_DEFAULT",
+    CloudDns = "CLOUD_DNS"
 }
 
 export enum DnsConfigClusterDnsScopeEnum {
-    DnsScopeUnspecified = "DNS_SCOPE_UNSPECIFIED"
-,    VpcScope = "VPC_SCOPE"
+    DnsScopeUnspecified = "DNS_SCOPE_UNSPECIFIED",
+    VpcScope = "VPC_SCOPE"
 }
 
 
@@ -17,12 +18,12 @@ export enum DnsConfigClusterDnsScopeEnum {
  * DNSConfig contains the desired set of options for configuring clusterDNS.
 **/
 export class DnsConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clusterDns" })
+  @SpeakeasyMetadata({ data: "json, name=clusterDns" })
   clusterDns?: DnsConfigClusterDnsEnum;
 
-  @Metadata({ data: "json, name=clusterDnsDomain" })
+  @SpeakeasyMetadata({ data: "json, name=clusterDnsDomain" })
   clusterDnsDomain?: string;
 
-  @Metadata({ data: "json, name=clusterDnsScope" })
+  @SpeakeasyMetadata({ data: "json, name=clusterDnsScope" })
   clusterDnsScope?: DnsConfigClusterDnsScopeEnum;
 }

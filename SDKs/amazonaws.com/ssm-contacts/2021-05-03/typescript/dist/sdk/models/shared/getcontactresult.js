@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Plan } from "./plan";
 import { ContactTypeEnum } from "./contacttypeenum";
 var GetContactResult = /** @class */ (function (_super) {
@@ -31,23 +31,23 @@ var GetContactResult = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Alias" }),
+        SpeakeasyMetadata({ data: "json, name=Alias" }),
         __metadata("design:type", String)
     ], GetContactResult.prototype, "alias", void 0);
     __decorate([
-        Metadata({ data: "json, name=ContactArn" }),
+        SpeakeasyMetadata({ data: "json, name=ContactArn" }),
         __metadata("design:type", String)
     ], GetContactResult.prototype, "contactArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=DisplayName" }),
+        SpeakeasyMetadata({ data: "json, name=DisplayName" }),
         __metadata("design:type", String)
     ], GetContactResult.prototype, "displayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=Plan" }),
+        SpeakeasyMetadata({ data: "json, name=Plan" }),
         __metadata("design:type", Plan)
     ], GetContactResult.prototype, "plan", void 0);
     __decorate([
-        Metadata({ data: "json, name=Type" }),
+        SpeakeasyMetadata({ data: "json, name=Type" }),
         __metadata("design:type", String)
     ], GetContactResult.prototype, "type", void 0);
     return GetContactResult;

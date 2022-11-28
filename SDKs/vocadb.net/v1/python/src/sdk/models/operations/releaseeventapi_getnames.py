@@ -10,15 +10,15 @@ class ReleaseEventAPIGetNamesQueryParams:
 
 @dataclass
 class ReleaseEventAPIGetNamesRequest:
-    query_params: ReleaseEventAPIGetNamesQueryParams = field(default=None)
+    query_params: ReleaseEventAPIGetNamesQueryParams = field()
     
 
 @dataclass
 class ReleaseEventAPIGetNamesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     release_event_api_get_names_200_application_json_strings: Optional[List[str]] = field(default=None)
     release_event_api_get_names_200_application_jsonp_strings: Optional[List[str]] = field(default=None)
     release_event_api_get_names_200_text_json_strings: Optional[List[str]] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MetricTransformation } from "./metrictransformation";
+
 
 
 // MetricFilter
@@ -8,18 +8,18 @@ import { MetricTransformation } from "./metrictransformation";
  * Metric filters express how CloudWatch Logs would extract metric observations from ingested log events and transform them into metric data in a CloudWatch metric.
 **/
 export class MetricFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=creationTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationTime" })
   creationTime?: number;
 
-  @Metadata({ data: "json, name=filterName" })
+  @SpeakeasyMetadata({ data: "json, name=filterName" })
   filterName?: string;
 
-  @Metadata({ data: "json, name=filterPattern" })
+  @SpeakeasyMetadata({ data: "json, name=filterPattern" })
   filterPattern?: string;
 
-  @Metadata({ data: "json, name=logGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=logGroupName" })
   logGroupName?: string;
 
-  @Metadata({ data: "json, name=metricTransformations", elemType: shared.MetricTransformation })
+  @SpeakeasyMetadata({ data: "json, name=metricTransformations", elemType: MetricTransformation })
   metricTransformations?: MetricTransformation[];
 }

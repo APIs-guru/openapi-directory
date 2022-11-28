@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class NotebooksProjectsLocationsRuntimesRefreshRuntimeTokenInternalPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class NotebooksProjectsLocationsRuntimesRefreshRuntimeTokenInternalQueryParams:
 
 @dataclass
 class NotebooksProjectsLocationsRuntimesRefreshRuntimeTokenInternalSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class NotebooksProjectsLocationsRuntimesRefreshRuntimeTokenInternalRequest:
-    path_params: NotebooksProjectsLocationsRuntimesRefreshRuntimeTokenInternalPathParams = field(default=None)
-    query_params: NotebooksProjectsLocationsRuntimesRefreshRuntimeTokenInternalQueryParams = field(default=None)
+    path_params: NotebooksProjectsLocationsRuntimesRefreshRuntimeTokenInternalPathParams = field()
+    query_params: NotebooksProjectsLocationsRuntimesRefreshRuntimeTokenInternalQueryParams = field()
+    security: NotebooksProjectsLocationsRuntimesRefreshRuntimeTokenInternalSecurity = field()
     request: Optional[shared.RefreshRuntimeTokenInternalRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: NotebooksProjectsLocationsRuntimesRefreshRuntimeTokenInternalSecurity = field(default=None)
     
 
 @dataclass
 class NotebooksProjectsLocationsRuntimesRefreshRuntimeTokenInternalResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     refresh_runtime_token_internal_response: Optional[shared.RefreshRuntimeTokenInternalResponse] = field(default=None)
-    status_code: int = field(default=None)
     

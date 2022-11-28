@@ -1,28 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Variable } from "./variable";
 import { SourceLocation } from "./sourcelocation";
 import { StackFrame } from "./stackframe";
 import { StatusMessage } from "./statusmessage";
-import { Variable } from "./variable";
+
 
 export enum BreakpointActionEnum {
-    Capture = "CAPTURE"
-,    Log = "LOG"
+    Capture = "CAPTURE",
+    Log = "LOG"
 }
 
 export enum BreakpointLogLevelEnum {
-    Info = "INFO"
-,    Warning = "WARNING"
-,    Error = "ERROR"
+    Info = "INFO",
+    Warning = "WARNING",
+    Error = "ERROR"
 }
 
 export enum BreakpointStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    StateCanaryPendingAgents = "STATE_CANARY_PENDING_AGENTS"
-,    StateCanaryActive = "STATE_CANARY_ACTIVE"
-,    StateRollingToAll = "STATE_ROLLING_TO_ALL"
-,    StateIsFinal = "STATE_IS_FINAL"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    StateCanaryPendingAgents = "STATE_CANARY_PENDING_AGENTS",
+    StateCanaryActive = "STATE_CANARY_ACTIVE",
+    StateRollingToAll = "STATE_ROLLING_TO_ALL",
+    StateIsFinal = "STATE_IS_FINAL"
 }
 
 
@@ -31,57 +30,57 @@ export enum BreakpointStateEnum {
  * ------------------------------------------------------------------------------ ## Breakpoint (the resource) Represents the breakpoint specification, status and results.
 **/
 export class Breakpoint extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action?: BreakpointActionEnum;
 
-  @Metadata({ data: "json, name=canaryExpireTime" })
+  @SpeakeasyMetadata({ data: "json, name=canaryExpireTime" })
   canaryExpireTime?: string;
 
-  @Metadata({ data: "json, name=condition" })
+  @SpeakeasyMetadata({ data: "json, name=condition" })
   condition?: string;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=evaluatedExpressions", elemType: shared.Variable })
+  @SpeakeasyMetadata({ data: "json, name=evaluatedExpressions", elemType: Variable })
   evaluatedExpressions?: Variable[];
 
-  @Metadata({ data: "json, name=expressions" })
+  @SpeakeasyMetadata({ data: "json, name=expressions" })
   expressions?: string[];
 
-  @Metadata({ data: "json, name=finalTime" })
+  @SpeakeasyMetadata({ data: "json, name=finalTime" })
   finalTime?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=isFinalState" })
+  @SpeakeasyMetadata({ data: "json, name=isFinalState" })
   isFinalState?: boolean;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: SourceLocation;
 
-  @Metadata({ data: "json, name=logLevel" })
+  @SpeakeasyMetadata({ data: "json, name=logLevel" })
   logLevel?: BreakpointLogLevelEnum;
 
-  @Metadata({ data: "json, name=logMessageFormat" })
+  @SpeakeasyMetadata({ data: "json, name=logMessageFormat" })
   logMessageFormat?: string;
 
-  @Metadata({ data: "json, name=stackFrames", elemType: shared.StackFrame })
+  @SpeakeasyMetadata({ data: "json, name=stackFrames", elemType: StackFrame })
   stackFrames?: StackFrame[];
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: BreakpointStateEnum;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: StatusMessage;
 
-  @Metadata({ data: "json, name=userEmail" })
+  @SpeakeasyMetadata({ data: "json, name=userEmail" })
   userEmail?: string;
 
-  @Metadata({ data: "json, name=variableTable", elemType: shared.Variable })
+  @SpeakeasyMetadata({ data: "json, name=variableTable", elemType: Variable })
   variableTable?: Variable[];
 }

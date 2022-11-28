@@ -18,6 +18,8 @@ const (
 	MetadataExportStateEnumCancelled        MetadataExportStateEnum = "CANCELLED"
 )
 
+// MetadataExport
+// The details of a metadata export operation.
 type MetadataExport struct {
 	DatabaseDumpType  *MetadataExportDatabaseDumpTypeEnum `json:"databaseDumpType,omitempty"`
 	DestinationGcsURI *string                             `json:"destinationGcsUri,omitempty"`

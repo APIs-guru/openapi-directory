@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class VirtualClusterStateEnum(str, Enum):
     RUNNING = "RUNNING"

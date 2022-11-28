@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // AddAttachmentsToSetResponse
 /**
  * The ID and expiry time of the attachment set returned by the <a>AddAttachmentsToSet</a> operation.
@@ -33,11 +33,11 @@ var AddAttachmentsToSetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=attachmentSetId" }),
+        SpeakeasyMetadata({ data: "json, name=attachmentSetId" }),
         __metadata("design:type", String)
     ], AddAttachmentsToSetResponse.prototype, "attachmentSetId", void 0);
     __decorate([
-        Metadata({ data: "json, name=expiryTime" }),
+        SpeakeasyMetadata({ data: "json, name=expiryTime" }),
         __metadata("design:type", String)
     ], AddAttachmentsToSetResponse.prototype, "expiryTime", void 0);
     return AddAttachmentsToSetResponse;

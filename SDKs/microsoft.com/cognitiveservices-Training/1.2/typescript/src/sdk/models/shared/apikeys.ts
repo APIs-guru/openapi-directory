@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { KeyPair } from "./keypair";
-import { KeyPair } from "./keypair";
+
 
 
 export class ApiKeys extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PredictionKeys" })
+  @SpeakeasyMetadata({ data: "json, name=PredictionKeys" })
   predictionKeys?: KeyPair;
 
-  @Metadata({ data: "json, name=TrainingKeys" })
+  @SpeakeasyMetadata({ data: "json, name=TrainingKeys" })
   trainingKeys?: KeyPair;
 }

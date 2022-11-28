@@ -22,8 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // StagedEmployeeAdditionalDirectDeposit
 /**
  * The additional direct deposit model
@@ -34,31 +33,31 @@ var StagedEmployeeAdditionalDirectDeposit = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=accountNumber" }),
+        SpeakeasyMetadata({ data: "json, name=accountNumber" }),
         __metadata("design:type", String)
     ], StagedEmployeeAdditionalDirectDeposit.prototype, "accountNumber", void 0);
     __decorate([
-        Metadata({ data: "json, name=accountType" }),
+        SpeakeasyMetadata({ data: "json, name=accountType" }),
         __metadata("design:type", String)
     ], StagedEmployeeAdditionalDirectDeposit.prototype, "accountType", void 0);
     __decorate([
-        Metadata({ data: "json, name=amount" }),
+        SpeakeasyMetadata({ data: "json, name=amount" }),
         __metadata("design:type", Number)
     ], StagedEmployeeAdditionalDirectDeposit.prototype, "amount", void 0);
     __decorate([
-        Metadata({ data: "json, name=amountType" }),
+        SpeakeasyMetadata({ data: "json, name=amountType" }),
         __metadata("design:type", String)
     ], StagedEmployeeAdditionalDirectDeposit.prototype, "amountType", void 0);
     __decorate([
-        Metadata({ data: "json, name=isSkipPreNote" }),
+        SpeakeasyMetadata({ data: "json, name=isSkipPreNote" }),
         __metadata("design:type", Boolean)
     ], StagedEmployeeAdditionalDirectDeposit.prototype, "isSkipPreNote", void 0);
     __decorate([
-        Metadata({ data: "json, name=preNoteDate" }),
+        SpeakeasyMetadata({ data: "json, name=preNoteDate" }),
         __metadata("design:type", String)
     ], StagedEmployeeAdditionalDirectDeposit.prototype, "preNoteDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=routingNumber" }),
+        SpeakeasyMetadata({ data: "json, name=routingNumber" }),
         __metadata("design:type", String)
     ], StagedEmployeeAdditionalDirectDeposit.prototype, "routingNumber", void 0);
     return StagedEmployeeAdditionalDirectDeposit;
@@ -74,27 +73,27 @@ var StagedEmployeeBenefitSetup = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=benefitClass" }),
+        SpeakeasyMetadata({ data: "json, name=benefitClass" }),
         __metadata("design:type", String)
     ], StagedEmployeeBenefitSetup.prototype, "benefitClass", void 0);
     __decorate([
-        Metadata({ data: "json, name=benefitClassEffectiveDate" }),
+        SpeakeasyMetadata({ data: "json, name=benefitClassEffectiveDate" }),
         __metadata("design:type", String)
     ], StagedEmployeeBenefitSetup.prototype, "benefitClassEffectiveDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=benefitSalary" }),
+        SpeakeasyMetadata({ data: "json, name=benefitSalary" }),
         __metadata("design:type", Number)
     ], StagedEmployeeBenefitSetup.prototype, "benefitSalary", void 0);
     __decorate([
-        Metadata({ data: "json, name=benefitSalaryEffectiveDate" }),
+        SpeakeasyMetadata({ data: "json, name=benefitSalaryEffectiveDate" }),
         __metadata("design:type", String)
     ], StagedEmployeeBenefitSetup.prototype, "benefitSalaryEffectiveDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=doNotApplyAdministrativePeriod" }),
+        SpeakeasyMetadata({ data: "json, name=doNotApplyAdministrativePeriod" }),
         __metadata("design:type", Boolean)
     ], StagedEmployeeBenefitSetup.prototype, "doNotApplyAdministrativePeriod", void 0);
     __decorate([
-        Metadata({ data: "json, name=isMeasureAcaEligibility" }),
+        SpeakeasyMetadata({ data: "json, name=isMeasureAcaEligibility" }),
         __metadata("design:type", Boolean)
     ], StagedEmployeeBenefitSetup.prototype, "isMeasureAcaEligibility", void 0);
     return StagedEmployeeBenefitSetup;
@@ -110,15 +109,15 @@ var StagedEmployeeCustomBooleanFields = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=category" }),
+        SpeakeasyMetadata({ data: "json, name=category" }),
         __metadata("design:type", String)
     ], StagedEmployeeCustomBooleanFields.prototype, "category", void 0);
     __decorate([
-        Metadata({ data: "json, name=label" }),
+        SpeakeasyMetadata({ data: "json, name=label" }),
         __metadata("design:type", String)
     ], StagedEmployeeCustomBooleanFields.prototype, "label", void 0);
     __decorate([
-        Metadata({ data: "json, name=value" }),
+        SpeakeasyMetadata({ data: "json, name=value" }),
         __metadata("design:type", Boolean)
     ], StagedEmployeeCustomBooleanFields.prototype, "value", void 0);
     return StagedEmployeeCustomBooleanFields;
@@ -134,15 +133,15 @@ var StagedEmployeeCustomDateFields = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=category" }),
+        SpeakeasyMetadata({ data: "json, name=category" }),
         __metadata("design:type", String)
     ], StagedEmployeeCustomDateFields.prototype, "category", void 0);
     __decorate([
-        Metadata({ data: "json, name=label" }),
+        SpeakeasyMetadata({ data: "json, name=label" }),
         __metadata("design:type", String)
     ], StagedEmployeeCustomDateFields.prototype, "label", void 0);
     __decorate([
-        Metadata({ data: "json, name=value" }),
+        SpeakeasyMetadata({ data: "json, name=value" }),
         __metadata("design:type", String)
     ], StagedEmployeeCustomDateFields.prototype, "value", void 0);
     return StagedEmployeeCustomDateFields;
@@ -158,15 +157,15 @@ var StagedEmployeeCustomDropDownFields = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=category" }),
+        SpeakeasyMetadata({ data: "json, name=category" }),
         __metadata("design:type", String)
     ], StagedEmployeeCustomDropDownFields.prototype, "category", void 0);
     __decorate([
-        Metadata({ data: "json, name=label" }),
+        SpeakeasyMetadata({ data: "json, name=label" }),
         __metadata("design:type", String)
     ], StagedEmployeeCustomDropDownFields.prototype, "label", void 0);
     __decorate([
-        Metadata({ data: "json, name=value" }),
+        SpeakeasyMetadata({ data: "json, name=value" }),
         __metadata("design:type", String)
     ], StagedEmployeeCustomDropDownFields.prototype, "value", void 0);
     return StagedEmployeeCustomDropDownFields;
@@ -182,15 +181,15 @@ var StagedEmployeeCustomNumberFields = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=category" }),
+        SpeakeasyMetadata({ data: "json, name=category" }),
         __metadata("design:type", String)
     ], StagedEmployeeCustomNumberFields.prototype, "category", void 0);
     __decorate([
-        Metadata({ data: "json, name=label" }),
+        SpeakeasyMetadata({ data: "json, name=label" }),
         __metadata("design:type", String)
     ], StagedEmployeeCustomNumberFields.prototype, "label", void 0);
     __decorate([
-        Metadata({ data: "json, name=value" }),
+        SpeakeasyMetadata({ data: "json, name=value" }),
         __metadata("design:type", Number)
     ], StagedEmployeeCustomNumberFields.prototype, "value", void 0);
     return StagedEmployeeCustomNumberFields;
@@ -206,15 +205,15 @@ var StagedEmployeeCustomTextFields = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=category" }),
+        SpeakeasyMetadata({ data: "json, name=category" }),
         __metadata("design:type", String)
     ], StagedEmployeeCustomTextFields.prototype, "category", void 0);
     __decorate([
-        Metadata({ data: "json, name=label" }),
+        SpeakeasyMetadata({ data: "json, name=label" }),
         __metadata("design:type", String)
     ], StagedEmployeeCustomTextFields.prototype, "label", void 0);
     __decorate([
-        Metadata({ data: "json, name=value" }),
+        SpeakeasyMetadata({ data: "json, name=value" }),
         __metadata("design:type", String)
     ], StagedEmployeeCustomTextFields.prototype, "value", void 0);
     return StagedEmployeeCustomTextFields;
@@ -230,99 +229,99 @@ var StagedEmployeeDepartmentPosition = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=changeReason" }),
+        SpeakeasyMetadata({ data: "json, name=changeReason" }),
         __metadata("design:type", String)
     ], StagedEmployeeDepartmentPosition.prototype, "changeReason", void 0);
     __decorate([
-        Metadata({ data: "json, name=clockBadgeNumber" }),
+        SpeakeasyMetadata({ data: "json, name=clockBadgeNumber" }),
         __metadata("design:type", String)
     ], StagedEmployeeDepartmentPosition.prototype, "clockBadgeNumber", void 0);
     __decorate([
-        Metadata({ data: "json, name=costCenter1" }),
+        SpeakeasyMetadata({ data: "json, name=costCenter1" }),
         __metadata("design:type", String)
     ], StagedEmployeeDepartmentPosition.prototype, "costCenter1", void 0);
     __decorate([
-        Metadata({ data: "json, name=costCenter2" }),
+        SpeakeasyMetadata({ data: "json, name=costCenter2" }),
         __metadata("design:type", String)
     ], StagedEmployeeDepartmentPosition.prototype, "costCenter2", void 0);
     __decorate([
-        Metadata({ data: "json, name=costCenter3" }),
+        SpeakeasyMetadata({ data: "json, name=costCenter3" }),
         __metadata("design:type", String)
     ], StagedEmployeeDepartmentPosition.prototype, "costCenter3", void 0);
     __decorate([
-        Metadata({ data: "json, name=effectiveDate" }),
+        SpeakeasyMetadata({ data: "json, name=effectiveDate" }),
         __metadata("design:type", String)
     ], StagedEmployeeDepartmentPosition.prototype, "effectiveDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=employeeType" }),
+        SpeakeasyMetadata({ data: "json, name=employeeType" }),
         __metadata("design:type", String)
     ], StagedEmployeeDepartmentPosition.prototype, "employeeType", void 0);
     __decorate([
-        Metadata({ data: "json, name=equalEmploymentOpportunityClass" }),
+        SpeakeasyMetadata({ data: "json, name=equalEmploymentOpportunityClass" }),
         __metadata("design:type", String)
     ], StagedEmployeeDepartmentPosition.prototype, "equalEmploymentOpportunityClass", void 0);
     __decorate([
-        Metadata({ data: "json, name=isMinimumWageExempt" }),
+        SpeakeasyMetadata({ data: "json, name=isMinimumWageExempt" }),
         __metadata("design:type", Boolean)
     ], StagedEmployeeDepartmentPosition.prototype, "isMinimumWageExempt", void 0);
     __decorate([
-        Metadata({ data: "json, name=isOvertimeExempt" }),
+        SpeakeasyMetadata({ data: "json, name=isOvertimeExempt" }),
         __metadata("design:type", Boolean)
     ], StagedEmployeeDepartmentPosition.prototype, "isOvertimeExempt", void 0);
     __decorate([
-        Metadata({ data: "json, name=isSupervisorReviewer" }),
+        SpeakeasyMetadata({ data: "json, name=isSupervisorReviewer" }),
         __metadata("design:type", Boolean)
     ], StagedEmployeeDepartmentPosition.prototype, "isSupervisorReviewer", void 0);
     __decorate([
-        Metadata({ data: "json, name=isUnionDuesCollected" }),
+        SpeakeasyMetadata({ data: "json, name=isUnionDuesCollected" }),
         __metadata("design:type", Boolean)
     ], StagedEmployeeDepartmentPosition.prototype, "isUnionDuesCollected", void 0);
     __decorate([
-        Metadata({ data: "json, name=isUnionInitiationCollected" }),
+        SpeakeasyMetadata({ data: "json, name=isUnionInitiationCollected" }),
         __metadata("design:type", Boolean)
     ], StagedEmployeeDepartmentPosition.prototype, "isUnionInitiationCollected", void 0);
     __decorate([
-        Metadata({ data: "json, name=jobTitle" }),
+        SpeakeasyMetadata({ data: "json, name=jobTitle" }),
         __metadata("design:type", String)
     ], StagedEmployeeDepartmentPosition.prototype, "jobTitle", void 0);
     __decorate([
-        Metadata({ data: "json, name=payGroup" }),
+        SpeakeasyMetadata({ data: "json, name=payGroup" }),
         __metadata("design:type", String)
     ], StagedEmployeeDepartmentPosition.prototype, "payGroup", void 0);
     __decorate([
-        Metadata({ data: "json, name=positionCode" }),
+        SpeakeasyMetadata({ data: "json, name=positionCode" }),
         __metadata("design:type", String)
     ], StagedEmployeeDepartmentPosition.prototype, "positionCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=shift" }),
+        SpeakeasyMetadata({ data: "json, name=shift" }),
         __metadata("design:type", String)
     ], StagedEmployeeDepartmentPosition.prototype, "shift", void 0);
     __decorate([
-        Metadata({ data: "json, name=supervisorCompanyNumber" }),
+        SpeakeasyMetadata({ data: "json, name=supervisorCompanyNumber" }),
         __metadata("design:type", String)
     ], StagedEmployeeDepartmentPosition.prototype, "supervisorCompanyNumber", void 0);
     __decorate([
-        Metadata({ data: "json, name=supervisorEmployeeId" }),
+        SpeakeasyMetadata({ data: "json, name=supervisorEmployeeId" }),
         __metadata("design:type", String)
     ], StagedEmployeeDepartmentPosition.prototype, "supervisorEmployeeId", void 0);
     __decorate([
-        Metadata({ data: "json, name=tipped" }),
+        SpeakeasyMetadata({ data: "json, name=tipped" }),
         __metadata("design:type", String)
     ], StagedEmployeeDepartmentPosition.prototype, "tipped", void 0);
     __decorate([
-        Metadata({ data: "json, name=unionAffiliationDate" }),
+        SpeakeasyMetadata({ data: "json, name=unionAffiliationDate" }),
         __metadata("design:type", String)
     ], StagedEmployeeDepartmentPosition.prototype, "unionAffiliationDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=unionCode" }),
+        SpeakeasyMetadata({ data: "json, name=unionCode" }),
         __metadata("design:type", String)
     ], StagedEmployeeDepartmentPosition.prototype, "unionCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=unionPosition" }),
+        SpeakeasyMetadata({ data: "json, name=unionPosition" }),
         __metadata("design:type", String)
     ], StagedEmployeeDepartmentPosition.prototype, "unionPosition", void 0);
     __decorate([
-        Metadata({ data: "json, name=workersCompensation" }),
+        SpeakeasyMetadata({ data: "json, name=workersCompensation" }),
         __metadata("design:type", String)
     ], StagedEmployeeDepartmentPosition.prototype, "workersCompensation", void 0);
     return StagedEmployeeDepartmentPosition;
@@ -338,43 +337,43 @@ var StagedEmployeeFederalTax = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=amount" }),
+        SpeakeasyMetadata({ data: "json, name=amount" }),
         __metadata("design:type", Number)
     ], StagedEmployeeFederalTax.prototype, "amount", void 0);
     __decorate([
-        Metadata({ data: "json, name=deductionsAmount" }),
+        SpeakeasyMetadata({ data: "json, name=deductionsAmount" }),
         __metadata("design:type", Number)
     ], StagedEmployeeFederalTax.prototype, "deductionsAmount", void 0);
     __decorate([
-        Metadata({ data: "json, name=dependentsAmount" }),
+        SpeakeasyMetadata({ data: "json, name=dependentsAmount" }),
         __metadata("design:type", Number)
     ], StagedEmployeeFederalTax.prototype, "dependentsAmount", void 0);
     __decorate([
-        Metadata({ data: "json, name=exemptions" }),
+        SpeakeasyMetadata({ data: "json, name=exemptions" }),
         __metadata("design:type", Number)
     ], StagedEmployeeFederalTax.prototype, "exemptions", void 0);
     __decorate([
-        Metadata({ data: "json, name=filingStatus" }),
+        SpeakeasyMetadata({ data: "json, name=filingStatus" }),
         __metadata("design:type", String)
     ], StagedEmployeeFederalTax.prototype, "filingStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=higherRate" }),
+        SpeakeasyMetadata({ data: "json, name=higherRate" }),
         __metadata("design:type", Boolean)
     ], StagedEmployeeFederalTax.prototype, "higherRate", void 0);
     __decorate([
-        Metadata({ data: "json, name=otherIncomeAmount" }),
+        SpeakeasyMetadata({ data: "json, name=otherIncomeAmount" }),
         __metadata("design:type", Number)
     ], StagedEmployeeFederalTax.prototype, "otherIncomeAmount", void 0);
     __decorate([
-        Metadata({ data: "json, name=percentage" }),
+        SpeakeasyMetadata({ data: "json, name=percentage" }),
         __metadata("design:type", Number)
     ], StagedEmployeeFederalTax.prototype, "percentage", void 0);
     __decorate([
-        Metadata({ data: "json, name=taxCalculationCode" }),
+        SpeakeasyMetadata({ data: "json, name=taxCalculationCode" }),
         __metadata("design:type", String)
     ], StagedEmployeeFederalTax.prototype, "taxCalculationCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=w4FormYear" }),
+        SpeakeasyMetadata({ data: "json, name=w4FormYear" }),
         __metadata("design:type", Number)
     ], StagedEmployeeFederalTax.prototype, "w4FormYear", void 0);
     return StagedEmployeeFederalTax;
@@ -390,43 +389,43 @@ var StagedEmployeeHomeAddress = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=address1" }),
+        SpeakeasyMetadata({ data: "json, name=address1" }),
         __metadata("design:type", String)
     ], StagedEmployeeHomeAddress.prototype, "address1", void 0);
     __decorate([
-        Metadata({ data: "json, name=address2" }),
+        SpeakeasyMetadata({ data: "json, name=address2" }),
         __metadata("design:type", String)
     ], StagedEmployeeHomeAddress.prototype, "address2", void 0);
     __decorate([
-        Metadata({ data: "json, name=city" }),
+        SpeakeasyMetadata({ data: "json, name=city" }),
         __metadata("design:type", String)
     ], StagedEmployeeHomeAddress.prototype, "city", void 0);
     __decorate([
-        Metadata({ data: "json, name=country" }),
+        SpeakeasyMetadata({ data: "json, name=country" }),
         __metadata("design:type", String)
     ], StagedEmployeeHomeAddress.prototype, "country", void 0);
     __decorate([
-        Metadata({ data: "json, name=county" }),
+        SpeakeasyMetadata({ data: "json, name=county" }),
         __metadata("design:type", String)
     ], StagedEmployeeHomeAddress.prototype, "county", void 0);
     __decorate([
-        Metadata({ data: "json, name=emailAddress" }),
+        SpeakeasyMetadata({ data: "json, name=emailAddress" }),
         __metadata("design:type", String)
     ], StagedEmployeeHomeAddress.prototype, "emailAddress", void 0);
     __decorate([
-        Metadata({ data: "json, name=mobilePhone" }),
+        SpeakeasyMetadata({ data: "json, name=mobilePhone" }),
         __metadata("design:type", String)
     ], StagedEmployeeHomeAddress.prototype, "mobilePhone", void 0);
     __decorate([
-        Metadata({ data: "json, name=phone" }),
+        SpeakeasyMetadata({ data: "json, name=phone" }),
         __metadata("design:type", String)
     ], StagedEmployeeHomeAddress.prototype, "phone", void 0);
     __decorate([
-        Metadata({ data: "json, name=postalCode" }),
+        SpeakeasyMetadata({ data: "json, name=postalCode" }),
         __metadata("design:type", String)
     ], StagedEmployeeHomeAddress.prototype, "postalCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], StagedEmployeeHomeAddress.prototype, "state", void 0);
     return StagedEmployeeHomeAddress;
@@ -442,27 +441,27 @@ var StagedEmployeeLocalTax = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=exemptions" }),
+        SpeakeasyMetadata({ data: "json, name=exemptions" }),
         __metadata("design:type", Number)
     ], StagedEmployeeLocalTax.prototype, "exemptions", void 0);
     __decorate([
-        Metadata({ data: "json, name=exemptions2" }),
+        SpeakeasyMetadata({ data: "json, name=exemptions2" }),
         __metadata("design:type", Number)
     ], StagedEmployeeLocalTax.prototype, "exemptions2", void 0);
     __decorate([
-        Metadata({ data: "json, name=filingStatus" }),
+        SpeakeasyMetadata({ data: "json, name=filingStatus" }),
         __metadata("design:type", String)
     ], StagedEmployeeLocalTax.prototype, "filingStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=residentPSD" }),
+        SpeakeasyMetadata({ data: "json, name=residentPSD" }),
         __metadata("design:type", String)
     ], StagedEmployeeLocalTax.prototype, "residentPsd", void 0);
     __decorate([
-        Metadata({ data: "json, name=taxCode" }),
+        SpeakeasyMetadata({ data: "json, name=taxCode" }),
         __metadata("design:type", String)
     ], StagedEmployeeLocalTax.prototype, "taxCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=workPSD" }),
+        SpeakeasyMetadata({ data: "json, name=workPSD" }),
         __metadata("design:type", String)
     ], StagedEmployeeLocalTax.prototype, "workPsd", void 0);
     return StagedEmployeeLocalTax;
@@ -478,23 +477,23 @@ var StagedEmployeeMainDirectDeposit = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=accountNumber" }),
+        SpeakeasyMetadata({ data: "json, name=accountNumber" }),
         __metadata("design:type", String)
     ], StagedEmployeeMainDirectDeposit.prototype, "accountNumber", void 0);
     __decorate([
-        Metadata({ data: "json, name=accountType" }),
+        SpeakeasyMetadata({ data: "json, name=accountType" }),
         __metadata("design:type", String)
     ], StagedEmployeeMainDirectDeposit.prototype, "accountType", void 0);
     __decorate([
-        Metadata({ data: "json, name=isSkipPreNote" }),
+        SpeakeasyMetadata({ data: "json, name=isSkipPreNote" }),
         __metadata("design:type", Boolean)
     ], StagedEmployeeMainDirectDeposit.prototype, "isSkipPreNote", void 0);
     __decorate([
-        Metadata({ data: "json, name=preNoteDate" }),
+        SpeakeasyMetadata({ data: "json, name=preNoteDate" }),
         __metadata("design:type", String)
     ], StagedEmployeeMainDirectDeposit.prototype, "preNoteDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=routingNumber" }),
+        SpeakeasyMetadata({ data: "json, name=routingNumber" }),
         __metadata("design:type", String)
     ], StagedEmployeeMainDirectDeposit.prototype, "routingNumber", void 0);
     return StagedEmployeeMainDirectDeposit;
@@ -510,59 +509,59 @@ var StagedEmployeeNonPrimaryStateTax = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=amount" }),
+        SpeakeasyMetadata({ data: "json, name=amount" }),
         __metadata("design:type", Number)
     ], StagedEmployeeNonPrimaryStateTax.prototype, "amount", void 0);
     __decorate([
-        Metadata({ data: "json, name=deductionsAmount" }),
+        SpeakeasyMetadata({ data: "json, name=deductionsAmount" }),
         __metadata("design:type", Number)
     ], StagedEmployeeNonPrimaryStateTax.prototype, "deductionsAmount", void 0);
     __decorate([
-        Metadata({ data: "json, name=dependentsAmount" }),
+        SpeakeasyMetadata({ data: "json, name=dependentsAmount" }),
         __metadata("design:type", Number)
     ], StagedEmployeeNonPrimaryStateTax.prototype, "dependentsAmount", void 0);
     __decorate([
-        Metadata({ data: "json, name=exemptions" }),
+        SpeakeasyMetadata({ data: "json, name=exemptions" }),
         __metadata("design:type", Number)
     ], StagedEmployeeNonPrimaryStateTax.prototype, "exemptions", void 0);
     __decorate([
-        Metadata({ data: "json, name=exemptions2" }),
+        SpeakeasyMetadata({ data: "json, name=exemptions2" }),
         __metadata("design:type", Number)
     ], StagedEmployeeNonPrimaryStateTax.prototype, "exemptions2", void 0);
     __decorate([
-        Metadata({ data: "json, name=filingStatus" }),
+        SpeakeasyMetadata({ data: "json, name=filingStatus" }),
         __metadata("design:type", String)
     ], StagedEmployeeNonPrimaryStateTax.prototype, "filingStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=higherRate" }),
+        SpeakeasyMetadata({ data: "json, name=higherRate" }),
         __metadata("design:type", Boolean)
     ], StagedEmployeeNonPrimaryStateTax.prototype, "higherRate", void 0);
     __decorate([
-        Metadata({ data: "json, name=otherIncomeAmount" }),
+        SpeakeasyMetadata({ data: "json, name=otherIncomeAmount" }),
         __metadata("design:type", Number)
     ], StagedEmployeeNonPrimaryStateTax.prototype, "otherIncomeAmount", void 0);
     __decorate([
-        Metadata({ data: "json, name=percentage" }),
+        SpeakeasyMetadata({ data: "json, name=percentage" }),
         __metadata("design:type", Number)
     ], StagedEmployeeNonPrimaryStateTax.prototype, "percentage", void 0);
     __decorate([
-        Metadata({ data: "json, name=reciprocityCode" }),
+        SpeakeasyMetadata({ data: "json, name=reciprocityCode" }),
         __metadata("design:type", String)
     ], StagedEmployeeNonPrimaryStateTax.prototype, "reciprocityCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=specialCheckCalc" }),
+        SpeakeasyMetadata({ data: "json, name=specialCheckCalc" }),
         __metadata("design:type", String)
     ], StagedEmployeeNonPrimaryStateTax.prototype, "specialCheckCalc", void 0);
     __decorate([
-        Metadata({ data: "json, name=taxCalculationCode" }),
+        SpeakeasyMetadata({ data: "json, name=taxCalculationCode" }),
         __metadata("design:type", String)
     ], StagedEmployeeNonPrimaryStateTax.prototype, "taxCalculationCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=taxCode" }),
+        SpeakeasyMetadata({ data: "json, name=taxCode" }),
         __metadata("design:type", String)
     ], StagedEmployeeNonPrimaryStateTax.prototype, "taxCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=w4FormYear" }),
+        SpeakeasyMetadata({ data: "json, name=w4FormYear" }),
         __metadata("design:type", Number)
     ], StagedEmployeeNonPrimaryStateTax.prototype, "w4FormYear", void 0);
     return StagedEmployeeNonPrimaryStateTax;
@@ -578,43 +577,43 @@ var StagedEmployeePrimaryPayRate = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=baseRate" }),
+        SpeakeasyMetadata({ data: "json, name=baseRate" }),
         __metadata("design:type", Number)
     ], StagedEmployeePrimaryPayRate.prototype, "baseRate", void 0);
     __decorate([
-        Metadata({ data: "json, name=changeReason" }),
+        SpeakeasyMetadata({ data: "json, name=changeReason" }),
         __metadata("design:type", String)
     ], StagedEmployeePrimaryPayRate.prototype, "changeReason", void 0);
     __decorate([
-        Metadata({ data: "json, name=defaultHours" }),
+        SpeakeasyMetadata({ data: "json, name=defaultHours" }),
         __metadata("design:type", Number)
     ], StagedEmployeePrimaryPayRate.prototype, "defaultHours", void 0);
     __decorate([
-        Metadata({ data: "json, name=effectiveDate" }),
+        SpeakeasyMetadata({ data: "json, name=effectiveDate" }),
         __metadata("design:type", String)
     ], StagedEmployeePrimaryPayRate.prototype, "effectiveDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=isAutoPay" }),
+        SpeakeasyMetadata({ data: "json, name=isAutoPay" }),
         __metadata("design:type", Boolean)
     ], StagedEmployeePrimaryPayRate.prototype, "isAutoPay", void 0);
     __decorate([
-        Metadata({ data: "json, name=payFrequency" }),
+        SpeakeasyMetadata({ data: "json, name=payFrequency" }),
         __metadata("design:type", String)
     ], StagedEmployeePrimaryPayRate.prototype, "payFrequency", void 0);
     __decorate([
-        Metadata({ data: "json, name=payGrade" }),
+        SpeakeasyMetadata({ data: "json, name=payGrade" }),
         __metadata("design:type", String)
     ], StagedEmployeePrimaryPayRate.prototype, "payGrade", void 0);
     __decorate([
-        Metadata({ data: "json, name=payType" }),
+        SpeakeasyMetadata({ data: "json, name=payType" }),
         __metadata("design:type", String)
     ], StagedEmployeePrimaryPayRate.prototype, "payType", void 0);
     __decorate([
-        Metadata({ data: "json, name=ratePer" }),
+        SpeakeasyMetadata({ data: "json, name=ratePer" }),
         __metadata("design:type", String)
     ], StagedEmployeePrimaryPayRate.prototype, "ratePer", void 0);
     __decorate([
-        Metadata({ data: "json, name=salary" }),
+        SpeakeasyMetadata({ data: "json, name=salary" }),
         __metadata("design:type", Number)
     ], StagedEmployeePrimaryPayRate.prototype, "salary", void 0);
     return StagedEmployeePrimaryPayRate;
@@ -630,55 +629,55 @@ var StagedEmployeePrimaryStateTax = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=amount" }),
+        SpeakeasyMetadata({ data: "json, name=amount" }),
         __metadata("design:type", Number)
     ], StagedEmployeePrimaryStateTax.prototype, "amount", void 0);
     __decorate([
-        Metadata({ data: "json, name=deductionsAmount" }),
+        SpeakeasyMetadata({ data: "json, name=deductionsAmount" }),
         __metadata("design:type", Number)
     ], StagedEmployeePrimaryStateTax.prototype, "deductionsAmount", void 0);
     __decorate([
-        Metadata({ data: "json, name=dependentsAmount" }),
+        SpeakeasyMetadata({ data: "json, name=dependentsAmount" }),
         __metadata("design:type", Number)
     ], StagedEmployeePrimaryStateTax.prototype, "dependentsAmount", void 0);
     __decorate([
-        Metadata({ data: "json, name=exemptions" }),
+        SpeakeasyMetadata({ data: "json, name=exemptions" }),
         __metadata("design:type", Number)
     ], StagedEmployeePrimaryStateTax.prototype, "exemptions", void 0);
     __decorate([
-        Metadata({ data: "json, name=exemptions2" }),
+        SpeakeasyMetadata({ data: "json, name=exemptions2" }),
         __metadata("design:type", Number)
     ], StagedEmployeePrimaryStateTax.prototype, "exemptions2", void 0);
     __decorate([
-        Metadata({ data: "json, name=filingStatus" }),
+        SpeakeasyMetadata({ data: "json, name=filingStatus" }),
         __metadata("design:type", String)
     ], StagedEmployeePrimaryStateTax.prototype, "filingStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=higherRate" }),
+        SpeakeasyMetadata({ data: "json, name=higherRate" }),
         __metadata("design:type", Boolean)
     ], StagedEmployeePrimaryStateTax.prototype, "higherRate", void 0);
     __decorate([
-        Metadata({ data: "json, name=otherIncomeAmount" }),
+        SpeakeasyMetadata({ data: "json, name=otherIncomeAmount" }),
         __metadata("design:type", Number)
     ], StagedEmployeePrimaryStateTax.prototype, "otherIncomeAmount", void 0);
     __decorate([
-        Metadata({ data: "json, name=percentage" }),
+        SpeakeasyMetadata({ data: "json, name=percentage" }),
         __metadata("design:type", Number)
     ], StagedEmployeePrimaryStateTax.prototype, "percentage", void 0);
     __decorate([
-        Metadata({ data: "json, name=specialCheckCalc" }),
+        SpeakeasyMetadata({ data: "json, name=specialCheckCalc" }),
         __metadata("design:type", String)
     ], StagedEmployeePrimaryStateTax.prototype, "specialCheckCalc", void 0);
     __decorate([
-        Metadata({ data: "json, name=taxCalculationCode" }),
+        SpeakeasyMetadata({ data: "json, name=taxCalculationCode" }),
         __metadata("design:type", String)
     ], StagedEmployeePrimaryStateTax.prototype, "taxCalculationCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=taxCode" }),
+        SpeakeasyMetadata({ data: "json, name=taxCode" }),
         __metadata("design:type", String)
     ], StagedEmployeePrimaryStateTax.prototype, "taxCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=w4FormYear" }),
+        SpeakeasyMetadata({ data: "json, name=w4FormYear" }),
         __metadata("design:type", Number)
     ], StagedEmployeePrimaryStateTax.prototype, "w4FormYear", void 0);
     return StagedEmployeePrimaryStateTax;
@@ -694,27 +693,27 @@ var StagedEmployeeStatus = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=adjustedSeniorityDate" }),
+        SpeakeasyMetadata({ data: "json, name=adjustedSeniorityDate" }),
         __metadata("design:type", String)
     ], StagedEmployeeStatus.prototype, "adjustedSeniorityDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=changeReason" }),
+        SpeakeasyMetadata({ data: "json, name=changeReason" }),
         __metadata("design:type", String)
     ], StagedEmployeeStatus.prototype, "changeReason", void 0);
     __decorate([
-        Metadata({ data: "json, name=effectiveDate" }),
+        SpeakeasyMetadata({ data: "json, name=effectiveDate" }),
         __metadata("design:type", String)
     ], StagedEmployeeStatus.prototype, "effectiveDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=employeeStatus" }),
+        SpeakeasyMetadata({ data: "json, name=employeeStatus" }),
         __metadata("design:type", String)
     ], StagedEmployeeStatus.prototype, "employeeStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=hireDate" }),
+        SpeakeasyMetadata({ data: "json, name=hireDate" }),
         __metadata("design:type", String)
     ], StagedEmployeeStatus.prototype, "hireDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=isEligibleForRehire" }),
+        SpeakeasyMetadata({ data: "json, name=isEligibleForRehire" }),
         __metadata("design:type", Boolean)
     ], StagedEmployeeStatus.prototype, "isEligibleForRehire", void 0);
     return StagedEmployeeStatus;
@@ -730,15 +729,15 @@ var StagedEmployeeWebTime = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=badgeNumber" }),
+        SpeakeasyMetadata({ data: "json, name=badgeNumber" }),
         __metadata("design:type", String)
     ], StagedEmployeeWebTime.prototype, "badgeNumber", void 0);
     __decorate([
-        Metadata({ data: "json, name=chargeRate" }),
+        SpeakeasyMetadata({ data: "json, name=chargeRate" }),
         __metadata("design:type", Number)
     ], StagedEmployeeWebTime.prototype, "chargeRate", void 0);
     __decorate([
-        Metadata({ data: "json, name=isTimeLaborEnabled" }),
+        SpeakeasyMetadata({ data: "json, name=isTimeLaborEnabled" }),
         __metadata("design:type", Boolean)
     ], StagedEmployeeWebTime.prototype, "isTimeLaborEnabled", void 0);
     return StagedEmployeeWebTime;
@@ -754,51 +753,51 @@ var StagedEmployeeWorkAddress = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=address1" }),
+        SpeakeasyMetadata({ data: "json, name=address1" }),
         __metadata("design:type", String)
     ], StagedEmployeeWorkAddress.prototype, "address1", void 0);
     __decorate([
-        Metadata({ data: "json, name=address2" }),
+        SpeakeasyMetadata({ data: "json, name=address2" }),
         __metadata("design:type", String)
     ], StagedEmployeeWorkAddress.prototype, "address2", void 0);
     __decorate([
-        Metadata({ data: "json, name=city" }),
+        SpeakeasyMetadata({ data: "json, name=city" }),
         __metadata("design:type", String)
     ], StagedEmployeeWorkAddress.prototype, "city", void 0);
     __decorate([
-        Metadata({ data: "json, name=country" }),
+        SpeakeasyMetadata({ data: "json, name=country" }),
         __metadata("design:type", String)
     ], StagedEmployeeWorkAddress.prototype, "country", void 0);
     __decorate([
-        Metadata({ data: "json, name=county" }),
+        SpeakeasyMetadata({ data: "json, name=county" }),
         __metadata("design:type", String)
     ], StagedEmployeeWorkAddress.prototype, "county", void 0);
     __decorate([
-        Metadata({ data: "json, name=emailAddress" }),
+        SpeakeasyMetadata({ data: "json, name=emailAddress" }),
         __metadata("design:type", String)
     ], StagedEmployeeWorkAddress.prototype, "emailAddress", void 0);
     __decorate([
-        Metadata({ data: "json, name=mobilePhone" }),
+        SpeakeasyMetadata({ data: "json, name=mobilePhone" }),
         __metadata("design:type", String)
     ], StagedEmployeeWorkAddress.prototype, "mobilePhone", void 0);
     __decorate([
-        Metadata({ data: "json, name=pager" }),
+        SpeakeasyMetadata({ data: "json, name=pager" }),
         __metadata("design:type", String)
     ], StagedEmployeeWorkAddress.prototype, "pager", void 0);
     __decorate([
-        Metadata({ data: "json, name=phone" }),
+        SpeakeasyMetadata({ data: "json, name=phone" }),
         __metadata("design:type", String)
     ], StagedEmployeeWorkAddress.prototype, "phone", void 0);
     __decorate([
-        Metadata({ data: "json, name=phoneExtension" }),
+        SpeakeasyMetadata({ data: "json, name=phoneExtension" }),
         __metadata("design:type", String)
     ], StagedEmployeeWorkAddress.prototype, "phoneExtension", void 0);
     __decorate([
-        Metadata({ data: "json, name=postalCode" }),
+        SpeakeasyMetadata({ data: "json, name=postalCode" }),
         __metadata("design:type", String)
     ], StagedEmployeeWorkAddress.prototype, "postalCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], StagedEmployeeWorkAddress.prototype, "state", void 0);
     return StagedEmployeeWorkAddress;
@@ -814,59 +813,59 @@ var StagedEmployeeWorkEligibility = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=alienOrAdmissionDocumentNumber" }),
+        SpeakeasyMetadata({ data: "json, name=alienOrAdmissionDocumentNumber" }),
         __metadata("design:type", String)
     ], StagedEmployeeWorkEligibility.prototype, "alienOrAdmissionDocumentNumber", void 0);
     __decorate([
-        Metadata({ data: "json, name=attestedDate" }),
+        SpeakeasyMetadata({ data: "json, name=attestedDate" }),
         __metadata("design:type", String)
     ], StagedEmployeeWorkEligibility.prototype, "attestedDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=countryOfIssuance" }),
+        SpeakeasyMetadata({ data: "json, name=countryOfIssuance" }),
         __metadata("design:type", String)
     ], StagedEmployeeWorkEligibility.prototype, "countryOfIssuance", void 0);
     __decorate([
-        Metadata({ data: "json, name=foreignPassportNumber" }),
+        SpeakeasyMetadata({ data: "json, name=foreignPassportNumber" }),
         __metadata("design:type", String)
     ], StagedEmployeeWorkEligibility.prototype, "foreignPassportNumber", void 0);
     __decorate([
-        Metadata({ data: "json, name=i94AdmissionNumber" }),
+        SpeakeasyMetadata({ data: "json, name=i94AdmissionNumber" }),
         __metadata("design:type", String)
     ], StagedEmployeeWorkEligibility.prototype, "i94AdmissionNumber", void 0);
     __decorate([
-        Metadata({ data: "json, name=i9DateVerified" }),
+        SpeakeasyMetadata({ data: "json, name=i9DateVerified" }),
         __metadata("design:type", String)
     ], StagedEmployeeWorkEligibility.prototype, "i9DateVerified", void 0);
     __decorate([
-        Metadata({ data: "json, name=i9Notes" }),
+        SpeakeasyMetadata({ data: "json, name=i9Notes" }),
         __metadata("design:type", String)
     ], StagedEmployeeWorkEligibility.prototype, "i9Notes", void 0);
     __decorate([
-        Metadata({ data: "json, name=isI9Verified" }),
+        SpeakeasyMetadata({ data: "json, name=isI9Verified" }),
         __metadata("design:type", Boolean)
     ], StagedEmployeeWorkEligibility.prototype, "isI9Verified", void 0);
     __decorate([
-        Metadata({ data: "json, name=isSsnVerified" }),
+        SpeakeasyMetadata({ data: "json, name=isSsnVerified" }),
         __metadata("design:type", Boolean)
     ], StagedEmployeeWorkEligibility.prototype, "isSsnVerified", void 0);
     __decorate([
-        Metadata({ data: "json, name=ssnDateVerified" }),
+        SpeakeasyMetadata({ data: "json, name=ssnDateVerified" }),
         __metadata("design:type", String)
     ], StagedEmployeeWorkEligibility.prototype, "ssnDateVerified", void 0);
     __decorate([
-        Metadata({ data: "json, name=ssnNotes" }),
+        SpeakeasyMetadata({ data: "json, name=ssnNotes" }),
         __metadata("design:type", String)
     ], StagedEmployeeWorkEligibility.prototype, "ssnNotes", void 0);
     __decorate([
-        Metadata({ data: "json, name=visaType" }),
+        SpeakeasyMetadata({ data: "json, name=visaType" }),
         __metadata("design:type", String)
     ], StagedEmployeeWorkEligibility.prototype, "visaType", void 0);
     __decorate([
-        Metadata({ data: "json, name=workAuthorization" }),
+        SpeakeasyMetadata({ data: "json, name=workAuthorization" }),
         __metadata("design:type", String)
     ], StagedEmployeeWorkEligibility.prototype, "workAuthorization", void 0);
     __decorate([
-        Metadata({ data: "json, name=workUntil" }),
+        SpeakeasyMetadata({ data: "json, name=workUntil" }),
         __metadata("design:type", String)
     ], StagedEmployeeWorkEligibility.prototype, "workUntil", void 0);
     return StagedEmployeeWorkEligibility;
@@ -882,183 +881,183 @@ var StagedEmployee = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=additionalDirectDeposit", elemType: shared.StagedEmployeeAdditionalDirectDeposit }),
+        SpeakeasyMetadata({ data: "json, name=additionalDirectDeposit", elemType: StagedEmployeeAdditionalDirectDeposit }),
         __metadata("design:type", Array)
     ], StagedEmployee.prototype, "additionalDirectDeposit", void 0);
     __decorate([
-        Metadata({ data: "json, name=benefitSetup", elemType: shared.StagedEmployeeBenefitSetup }),
+        SpeakeasyMetadata({ data: "json, name=benefitSetup", elemType: StagedEmployeeBenefitSetup }),
         __metadata("design:type", Array)
     ], StagedEmployee.prototype, "benefitSetup", void 0);
     __decorate([
-        Metadata({ data: "json, name=birthDate" }),
+        SpeakeasyMetadata({ data: "json, name=birthDate" }),
         __metadata("design:type", String)
     ], StagedEmployee.prototype, "birthDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=customBooleanFields", elemType: shared.StagedEmployeeCustomBooleanFields }),
+        SpeakeasyMetadata({ data: "json, name=customBooleanFields", elemType: StagedEmployeeCustomBooleanFields }),
         __metadata("design:type", Array)
     ], StagedEmployee.prototype, "customBooleanFields", void 0);
     __decorate([
-        Metadata({ data: "json, name=customDateFields", elemType: shared.StagedEmployeeCustomDateFields }),
+        SpeakeasyMetadata({ data: "json, name=customDateFields", elemType: StagedEmployeeCustomDateFields }),
         __metadata("design:type", Array)
     ], StagedEmployee.prototype, "customDateFields", void 0);
     __decorate([
-        Metadata({ data: "json, name=customDropDownFields", elemType: shared.StagedEmployeeCustomDropDownFields }),
+        SpeakeasyMetadata({ data: "json, name=customDropDownFields", elemType: StagedEmployeeCustomDropDownFields }),
         __metadata("design:type", Array)
     ], StagedEmployee.prototype, "customDropDownFields", void 0);
     __decorate([
-        Metadata({ data: "json, name=customNumberFields", elemType: shared.StagedEmployeeCustomNumberFields }),
+        SpeakeasyMetadata({ data: "json, name=customNumberFields", elemType: StagedEmployeeCustomNumberFields }),
         __metadata("design:type", Array)
     ], StagedEmployee.prototype, "customNumberFields", void 0);
     __decorate([
-        Metadata({ data: "json, name=customTextFields", elemType: shared.StagedEmployeeCustomTextFields }),
+        SpeakeasyMetadata({ data: "json, name=customTextFields", elemType: StagedEmployeeCustomTextFields }),
         __metadata("design:type", Array)
     ], StagedEmployee.prototype, "customTextFields", void 0);
     __decorate([
-        Metadata({ data: "json, name=departmentPosition", elemType: shared.StagedEmployeeDepartmentPosition }),
+        SpeakeasyMetadata({ data: "json, name=departmentPosition", elemType: StagedEmployeeDepartmentPosition }),
         __metadata("design:type", Array)
     ], StagedEmployee.prototype, "departmentPosition", void 0);
     __decorate([
-        Metadata({ data: "json, name=disabilityDescription" }),
+        SpeakeasyMetadata({ data: "json, name=disabilityDescription" }),
         __metadata("design:type", String)
     ], StagedEmployee.prototype, "disabilityDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=employeeId" }),
+        SpeakeasyMetadata({ data: "json, name=employeeId" }),
         __metadata("design:type", String)
     ], StagedEmployee.prototype, "employeeId", void 0);
     __decorate([
-        Metadata({ data: "json, name=ethnicity" }),
+        SpeakeasyMetadata({ data: "json, name=ethnicity" }),
         __metadata("design:type", String)
     ], StagedEmployee.prototype, "ethnicity", void 0);
     __decorate([
-        Metadata({ data: "json, name=federalTax", elemType: shared.StagedEmployeeFederalTax }),
+        SpeakeasyMetadata({ data: "json, name=federalTax", elemType: StagedEmployeeFederalTax }),
         __metadata("design:type", Array)
     ], StagedEmployee.prototype, "federalTax", void 0);
     __decorate([
-        Metadata({ data: "json, name=firstName" }),
+        SpeakeasyMetadata({ data: "json, name=firstName" }),
         __metadata("design:type", String)
     ], StagedEmployee.prototype, "firstName", void 0);
     __decorate([
-        Metadata({ data: "json, name=fitwExemptReason" }),
+        SpeakeasyMetadata({ data: "json, name=fitwExemptReason" }),
         __metadata("design:type", String)
     ], StagedEmployee.prototype, "fitwExemptReason", void 0);
     __decorate([
-        Metadata({ data: "json, name=futaExemptReason" }),
+        SpeakeasyMetadata({ data: "json, name=futaExemptReason" }),
         __metadata("design:type", String)
     ], StagedEmployee.prototype, "futaExemptReason", void 0);
     __decorate([
-        Metadata({ data: "json, name=gender" }),
+        SpeakeasyMetadata({ data: "json, name=gender" }),
         __metadata("design:type", String)
     ], StagedEmployee.prototype, "gender", void 0);
     __decorate([
-        Metadata({ data: "json, name=homeAddress", elemType: shared.StagedEmployeeHomeAddress }),
+        SpeakeasyMetadata({ data: "json, name=homeAddress", elemType: StagedEmployeeHomeAddress }),
         __metadata("design:type", Array)
     ], StagedEmployee.prototype, "homeAddress", void 0);
     __decorate([
-        Metadata({ data: "json, name=isEmployee943" }),
+        SpeakeasyMetadata({ data: "json, name=isEmployee943" }),
         __metadata("design:type", Boolean)
     ], StagedEmployee.prototype, "isEmployee943", void 0);
     __decorate([
-        Metadata({ data: "json, name=isSmoker" }),
+        SpeakeasyMetadata({ data: "json, name=isSmoker" }),
         __metadata("design:type", Boolean)
     ], StagedEmployee.prototype, "isSmoker", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastName" }),
+        SpeakeasyMetadata({ data: "json, name=lastName" }),
         __metadata("design:type", String)
     ], StagedEmployee.prototype, "lastName", void 0);
     __decorate([
-        Metadata({ data: "json, name=localTax", elemType: shared.StagedEmployeeLocalTax }),
+        SpeakeasyMetadata({ data: "json, name=localTax", elemType: StagedEmployeeLocalTax }),
         __metadata("design:type", Array)
     ], StagedEmployee.prototype, "localTax", void 0);
     __decorate([
-        Metadata({ data: "json, name=mainDirectDeposit", elemType: shared.StagedEmployeeMainDirectDeposit }),
+        SpeakeasyMetadata({ data: "json, name=mainDirectDeposit", elemType: StagedEmployeeMainDirectDeposit }),
         __metadata("design:type", Array)
     ], StagedEmployee.prototype, "mainDirectDeposit", void 0);
     __decorate([
-        Metadata({ data: "json, name=maritalStatus" }),
+        SpeakeasyMetadata({ data: "json, name=maritalStatus" }),
         __metadata("design:type", String)
     ], StagedEmployee.prototype, "maritalStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=medExemptReason" }),
+        SpeakeasyMetadata({ data: "json, name=medExemptReason" }),
         __metadata("design:type", String)
     ], StagedEmployee.prototype, "medExemptReason", void 0);
     __decorate([
-        Metadata({ data: "json, name=middleName" }),
+        SpeakeasyMetadata({ data: "json, name=middleName" }),
         __metadata("design:type", String)
     ], StagedEmployee.prototype, "middleName", void 0);
     __decorate([
-        Metadata({ data: "json, name=nonPrimaryStateTax", elemType: shared.StagedEmployeeNonPrimaryStateTax }),
+        SpeakeasyMetadata({ data: "json, name=nonPrimaryStateTax", elemType: StagedEmployeeNonPrimaryStateTax }),
         __metadata("design:type", Array)
     ], StagedEmployee.prototype, "nonPrimaryStateTax", void 0);
     __decorate([
-        Metadata({ data: "json, name=preferredName" }),
+        SpeakeasyMetadata({ data: "json, name=preferredName" }),
         __metadata("design:type", String)
     ], StagedEmployee.prototype, "preferredName", void 0);
     __decorate([
-        Metadata({ data: "json, name=primaryPayRate", elemType: shared.StagedEmployeePrimaryPayRate }),
+        SpeakeasyMetadata({ data: "json, name=primaryPayRate", elemType: StagedEmployeePrimaryPayRate }),
         __metadata("design:type", Array)
     ], StagedEmployee.prototype, "primaryPayRate", void 0);
     __decorate([
-        Metadata({ data: "json, name=primaryStateTax", elemType: shared.StagedEmployeePrimaryStateTax }),
+        SpeakeasyMetadata({ data: "json, name=primaryStateTax", elemType: StagedEmployeePrimaryStateTax }),
         __metadata("design:type", Array)
     ], StagedEmployee.prototype, "primaryStateTax", void 0);
     __decorate([
-        Metadata({ data: "json, name=priorLastName" }),
+        SpeakeasyMetadata({ data: "json, name=priorLastName" }),
         __metadata("design:type", String)
     ], StagedEmployee.prototype, "priorLastName", void 0);
     __decorate([
-        Metadata({ data: "json, name=salutation" }),
+        SpeakeasyMetadata({ data: "json, name=salutation" }),
         __metadata("design:type", String)
     ], StagedEmployee.prototype, "salutation", void 0);
     __decorate([
-        Metadata({ data: "json, name=sitwExemptReason" }),
+        SpeakeasyMetadata({ data: "json, name=sitwExemptReason" }),
         __metadata("design:type", String)
     ], StagedEmployee.prototype, "sitwExemptReason", void 0);
     __decorate([
-        Metadata({ data: "json, name=ssExemptReason" }),
+        SpeakeasyMetadata({ data: "json, name=ssExemptReason" }),
         __metadata("design:type", String)
     ], StagedEmployee.prototype, "ssExemptReason", void 0);
     __decorate([
-        Metadata({ data: "json, name=ssn" }),
+        SpeakeasyMetadata({ data: "json, name=ssn" }),
         __metadata("design:type", String)
     ], StagedEmployee.prototype, "ssn", void 0);
     __decorate([
-        Metadata({ data: "json, name=status", elemType: shared.StagedEmployeeStatus }),
+        SpeakeasyMetadata({ data: "json, name=status", elemType: StagedEmployeeStatus }),
         __metadata("design:type", Array)
     ], StagedEmployee.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=suffix" }),
+        SpeakeasyMetadata({ data: "json, name=suffix" }),
         __metadata("design:type", String)
     ], StagedEmployee.prototype, "suffix", void 0);
     __decorate([
-        Metadata({ data: "json, name=suiExemptReason" }),
+        SpeakeasyMetadata({ data: "json, name=suiExemptReason" }),
         __metadata("design:type", String)
     ], StagedEmployee.prototype, "suiExemptReason", void 0);
     __decorate([
-        Metadata({ data: "json, name=suiState" }),
+        SpeakeasyMetadata({ data: "json, name=suiState" }),
         __metadata("design:type", String)
     ], StagedEmployee.prototype, "suiState", void 0);
     __decorate([
-        Metadata({ data: "json, name=taxDistributionCode1099R" }),
+        SpeakeasyMetadata({ data: "json, name=taxDistributionCode1099R" }),
         __metadata("design:type", String)
     ], StagedEmployee.prototype, "taxDistributionCode1099R", void 0);
     __decorate([
-        Metadata({ data: "json, name=taxForm" }),
+        SpeakeasyMetadata({ data: "json, name=taxForm" }),
         __metadata("design:type", String)
     ], StagedEmployee.prototype, "taxForm", void 0);
     __decorate([
-        Metadata({ data: "json, name=veteranDescription" }),
+        SpeakeasyMetadata({ data: "json, name=veteranDescription" }),
         __metadata("design:type", String)
     ], StagedEmployee.prototype, "veteranDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=webTime" }),
+        SpeakeasyMetadata({ data: "json, name=webTime" }),
         __metadata("design:type", StagedEmployeeWebTime)
     ], StagedEmployee.prototype, "webTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=workAddress", elemType: shared.StagedEmployeeWorkAddress }),
+        SpeakeasyMetadata({ data: "json, name=workAddress", elemType: StagedEmployeeWorkAddress }),
         __metadata("design:type", Array)
     ], StagedEmployee.prototype, "workAddress", void 0);
     __decorate([
-        Metadata({ data: "json, name=workEligibility", elemType: shared.StagedEmployeeWorkEligibility }),
+        SpeakeasyMetadata({ data: "json, name=workEligibility", elemType: StagedEmployeeWorkEligibility }),
         __metadata("design:type", Array)
     ], StagedEmployee.prototype, "workEligibility", void 0);
     return StagedEmployee;

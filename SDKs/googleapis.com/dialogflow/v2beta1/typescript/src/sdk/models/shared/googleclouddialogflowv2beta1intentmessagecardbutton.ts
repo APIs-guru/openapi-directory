@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDialogflowV2beta1IntentMessageCardButton
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Optional. Contains information about a button.
 **/
 export class GoogleCloudDialogflowV2beta1IntentMessageCardButton extends SpeakeasyBase {
-  @Metadata({ data: "json, name=postback" })
+  @SpeakeasyMetadata({ data: "json, name=postback" })
   postback?: string;
 
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: string;
 }

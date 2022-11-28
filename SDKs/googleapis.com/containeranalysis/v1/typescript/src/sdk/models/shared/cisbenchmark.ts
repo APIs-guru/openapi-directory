@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum CisBenchmarkSeverityEnum {
-    SeverityUnspecified = "SEVERITY_UNSPECIFIED"
-,    Minimal = "MINIMAL"
-,    Low = "LOW"
-,    Medium = "MEDIUM"
-,    High = "HIGH"
-,    Critical = "CRITICAL"
+    SeverityUnspecified = "SEVERITY_UNSPECIFIED",
+    Minimal = "MINIMAL",
+    Low = "LOW",
+    Medium = "MEDIUM",
+    High = "HIGH",
+    Critical = "CRITICAL"
 }
 
 
@@ -15,9 +16,9 @@ export enum CisBenchmarkSeverityEnum {
  * A compliance check that is a CIS benchmark.
 **/
 export class CisBenchmark extends SpeakeasyBase {
-  @Metadata({ data: "json, name=profileLevel" })
+  @SpeakeasyMetadata({ data: "json, name=profileLevel" })
   profileLevel?: number;
 
-  @Metadata({ data: "json, name=severity" })
+  @SpeakeasyMetadata({ data: "json, name=severity" })
   severity?: CisBenchmarkSeverityEnum;
 }

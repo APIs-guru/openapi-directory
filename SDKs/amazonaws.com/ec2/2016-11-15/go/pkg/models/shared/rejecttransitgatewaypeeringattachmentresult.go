@@ -1,0 +1,5 @@
+package shared
+
+type RejectTransitGatewayPeeringAttachmentResult struct {
+	TransitGatewayPeeringAttachment *TransitGatewayPeeringAttachment
+}

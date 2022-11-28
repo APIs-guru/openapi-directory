@@ -1,5 +1,7 @@
 package shared
 
+// PaginatedTreeentries
+// A paginated list of commit_file and/or commit_directory objects.
 type PaginatedTreeentries struct {
 	Next     *string                  `json:"next,omitempty"`
 	Page     *int64                   `json:"page,omitempty"`

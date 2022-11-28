@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class KioskCustomizationDeviceSettingsEnum(str, Enum):
     DEVICE_SETTINGS_UNSPECIFIED = "DEVICE_SETTINGS_UNSPECIFIED"
@@ -33,9 +35,13 @@ class KioskCustomizationSystemNavigationEnum(str, Enum):
 @dataclass_json
 @dataclass
 class KioskCustomization:
-    device_settings: Optional[KioskCustomizationDeviceSettingsEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deviceSettings' }})
-    power_button_actions: Optional[KioskCustomizationPowerButtonActionsEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'powerButtonActions' }})
-    status_bar: Optional[KioskCustomizationStatusBarEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'statusBar' }})
-    system_error_warnings: Optional[KioskCustomizationSystemErrorWarningsEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'systemErrorWarnings' }})
-    system_navigation: Optional[KioskCustomizationSystemNavigationEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'systemNavigation' }})
+    r"""KioskCustomization
+    Settings controlling the behavior of a device in kiosk mode. To enable kiosk mode, set kioskCustomLauncherEnabled to true or specify an app in the policy with installType KIOSK.
+    """
+    
+    device_settings: Optional[KioskCustomizationDeviceSettingsEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('deviceSettings') }})
+    power_button_actions: Optional[KioskCustomizationPowerButtonActionsEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('powerButtonActions') }})
+    status_bar: Optional[KioskCustomizationStatusBarEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('statusBar') }})
+    system_error_warnings: Optional[KioskCustomizationSystemErrorWarningsEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('systemErrorWarnings') }})
+    system_navigation: Optional[KioskCustomizationSystemNavigationEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('systemNavigation') }})
     

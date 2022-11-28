@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DomainIspPlacement } from "./domainispplacement";
 import { VolumeStatistics } from "./volumestatistics";
+
 
 
 // OverallVolume
@@ -9,12 +9,12 @@ import { VolumeStatistics } from "./volumestatistics";
  * An object that contains information about email that was sent from the selected domain.
 **/
 export class OverallVolume extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DomainIspPlacements", elemType: shared.DomainIspPlacement })
+  @SpeakeasyMetadata({ data: "json, name=DomainIspPlacements", elemType: DomainIspPlacement })
   domainIspPlacements?: DomainIspPlacement[];
 
-  @Metadata({ data: "json, name=ReadRatePercent" })
+  @SpeakeasyMetadata({ data: "json, name=ReadRatePercent" })
   readRatePercent?: number;
 
-  @Metadata({ data: "json, name=VolumeStatistics" })
+  @SpeakeasyMetadata({ data: "json, name=VolumeStatistics" })
   volumeStatistics?: VolumeStatistics;
 }

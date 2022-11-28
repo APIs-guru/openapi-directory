@@ -29,11 +29,6 @@ type SocerSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type SocerRequest struct {
-	Request  *SocerRequestBody `request:"mediaType=application/json"`
-	Security SocerSecurity
-}
-
 type Socer400ApplicationJSONErrorEnum string
 
 const (
@@ -163,6 +158,11 @@ const (
 type Socer504ApplicationJSON struct {
 	Error            *Socer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Socer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type SocerRequest struct {
+	Request  *SocerRequestBody `request:"mediaType=application/json"`
+	Security SocerSecurity
 }
 
 type SocerResponse struct {

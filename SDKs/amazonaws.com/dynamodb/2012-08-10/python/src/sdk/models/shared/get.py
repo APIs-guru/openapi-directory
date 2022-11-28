@@ -1,14 +1,19 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import attributevalue
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Get:
-    expression_attribute_names: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ExpressionAttributeNames' }})
-    key: dict[str, attributevalue.AttributeValue] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Key' }})
-    projection_expression: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProjectionExpression' }})
-    table_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TableName' }})
+    r"""Get
+    Specifies an item and related attribute values to retrieve in a <code>TransactGetItem</code> object.
+    """
+    
+    key: dict[str, AttributeValue] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Key') }})
+    table_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('TableName') }})
+    expression_attribute_names: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ExpressionAttributeNames') }})
+    projection_expression: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ProjectionExpression') }})
     

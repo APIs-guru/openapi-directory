@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ChannelContentOwnerDetails
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The contentOwnerDetails object encapsulates channel data that is relevant for YouTube Partners linked with the channel.
 **/
 export class ChannelContentOwnerDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=contentOwner" })
+  @SpeakeasyMetadata({ data: "json, name=contentOwner" })
   contentOwner?: string;
 
-  @Metadata({ data: "json, name=timeLinked" })
+  @SpeakeasyMetadata({ data: "json, name=timeLinked" })
   timeLinked?: Date;
 }

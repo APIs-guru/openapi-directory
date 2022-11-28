@@ -40,7 +40,7 @@ type JobsProjectsTenantsJobsBatchUpdateSecurity struct {
 type JobsProjectsTenantsJobsBatchUpdateRequest struct {
 	PathParams  JobsProjectsTenantsJobsBatchUpdatePathParams
 	QueryParams JobsProjectsTenantsJobsBatchUpdateQueryParams
-	Request     *shared.BatchUpdateJobsRequest `request:"mediaType=application/json"`
+	Request     *shared.BatchUpdateJobsRequestInput `request:"mediaType=application/json"`
 	Security    JobsProjectsTenantsJobsBatchUpdateSecurity
 }
 

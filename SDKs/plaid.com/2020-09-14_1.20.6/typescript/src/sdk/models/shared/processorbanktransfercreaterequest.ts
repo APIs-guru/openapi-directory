@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AchClassEnum } from "./achclassenum";
 import { BankTransferNetworkEnum } from "./banktransfernetworkenum";
 import { BankTransferTypeEnum } from "./banktransfertypeenum";
+
 
 
 // ProcessorBankTransferCreateRequest
@@ -9,45 +10,45 @@ import { BankTransferTypeEnum } from "./banktransfertypeenum";
  * ProcessorBankTransferCreateRequest defines the request schema for `/processor/bank_transfer/create`
 **/
 export class ProcessorBankTransferCreateRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ach_class" })
+  @SpeakeasyMetadata({ data: "json, name=ach_class" })
   achClass?: AchClassEnum;
 
-  @Metadata({ data: "json, name=amount" })
+  @SpeakeasyMetadata({ data: "json, name=amount" })
   amount: string;
 
-  @Metadata({ data: "json, name=client_id" })
+  @SpeakeasyMetadata({ data: "json, name=client_id" })
   clientId?: string;
 
-  @Metadata({ data: "json, name=custom_tag" })
+  @SpeakeasyMetadata({ data: "json, name=custom_tag" })
   customTag?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description: string;
 
-  @Metadata({ data: "json, name=idempotency_key" })
+  @SpeakeasyMetadata({ data: "json, name=idempotency_key" })
   idempotencyKey: string;
 
-  @Metadata({ data: "json, name=iso_currency_code" })
+  @SpeakeasyMetadata({ data: "json, name=iso_currency_code" })
   isoCurrencyCode: string;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: Map<string, string>;
 
-  @Metadata({ data: "json, name=network" })
+  @SpeakeasyMetadata({ data: "json, name=network" })
   network: BankTransferNetworkEnum;
 
-  @Metadata({ data: "json, name=origination_account_id" })
+  @SpeakeasyMetadata({ data: "json, name=origination_account_id" })
   originationAccountId?: string;
 
-  @Metadata({ data: "json, name=processor_token" })
+  @SpeakeasyMetadata({ data: "json, name=processor_token" })
   processorToken: string;
 
-  @Metadata({ data: "json, name=secret" })
+  @SpeakeasyMetadata({ data: "json, name=secret" })
   secret?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: BankTransferTypeEnum;
 
-  @Metadata({ data: "json, name=user" })
+  @SpeakeasyMetadata({ data: "json, name=user" })
   user: Map<string, any>;
 }

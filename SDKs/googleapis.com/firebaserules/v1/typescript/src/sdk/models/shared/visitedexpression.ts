@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SourcePosition } from "./sourceposition";
+
 
 
 // VisitedExpression
@@ -7,9 +8,9 @@ import { SourcePosition } from "./sourceposition";
  * Store the position and access outcome for an expression visited in rules.
 **/
 export class VisitedExpression extends SpeakeasyBase {
-  @Metadata({ data: "json, name=sourcePosition" })
+  @SpeakeasyMetadata({ data: "json, name=sourcePosition" })
   sourcePosition?: SourcePosition;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: any;
 }

@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class RequestS3TagPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,14 +15,14 @@ class RequestS3TagHeaders:
 
 @dataclass
 class RequestS3TagRequest:
-    path_params: RequestS3TagPathParams = field(default=None)
-    headers: RequestS3TagHeaders = field(default=None)
+    headers: RequestS3TagHeaders = field()
+    path_params: RequestS3TagPathParams = field()
     
 
 @dataclass
 class RequestS3TagResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     s3_tag: Optional[shared.S3Tag] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -14,6 +14,8 @@ type GetFindingStatisticsHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// GetFindingStatisticsRequestBodyFindingCriteria
+// Specifies, as a map, one or more property-based conditions that filter the results of a query for findings.
 type GetFindingStatisticsRequestBodyFindingCriteria struct {
 	Criterion map[string]shared.CriterionAdditionalProperties `json:"criterion,omitempty"`
 }
@@ -27,6 +29,8 @@ const (
 	GetFindingStatisticsRequestBodyGroupByEnumSeverityDescription           GetFindingStatisticsRequestBodyGroupByEnum = "severity.description"
 )
 
+// GetFindingStatisticsRequestBodySortCriteria
+// Specifies criteria for sorting the results of a query that retrieves aggregated statistical data about findings.
 type GetFindingStatisticsRequestBodySortCriteria struct {
 	AttributeName *shared.FindingStatisticsSortAttributeNameEnum `json:"attributeName,omitempty"`
 	OrderBy       *shared.OrderByEnum                            `json:"orderBy,omitempty"`

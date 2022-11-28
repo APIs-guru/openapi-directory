@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostAcceptTransitGatewayMulticastDomainAssociationsActionEnum(str, Enum):
     ACCEPT_TRANSIT_GATEWAY_MULTICAST_DOMAIN_ASSOCIATIONS = "AcceptTransitGatewayMulticastDomainAssociations"
@@ -10,8 +14,8 @@ class PostAcceptTransitGatewayMulticastDomainAssociationsVersionEnum(str, Enum):
 
 @dataclass
 class PostAcceptTransitGatewayMulticastDomainAssociationsQueryParams:
-    action: PostAcceptTransitGatewayMulticastDomainAssociationsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostAcceptTransitGatewayMulticastDomainAssociationsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostAcceptTransitGatewayMulticastDomainAssociationsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostAcceptTransitGatewayMulticastDomainAssociationsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostAcceptTransitGatewayMulticastDomainAssociationsHeaders:
 
 @dataclass
 class PostAcceptTransitGatewayMulticastDomainAssociationsRequest:
-    query_params: PostAcceptTransitGatewayMulticastDomainAssociationsQueryParams = field(default=None)
-    headers: PostAcceptTransitGatewayMulticastDomainAssociationsHeaders = field(default=None)
+    headers: PostAcceptTransitGatewayMulticastDomainAssociationsHeaders = field()
+    query_params: PostAcceptTransitGatewayMulticastDomainAssociationsQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostAcceptTransitGatewayMulticastDomainAssociationsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

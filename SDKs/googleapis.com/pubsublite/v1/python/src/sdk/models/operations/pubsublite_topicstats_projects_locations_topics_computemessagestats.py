@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class PubsubliteTopicStatsProjectsLocationsTopicsComputeMessageStatsPathParams:
-    topic: str = field(default=None, metadata={'path_param': { 'field_name': 'topic', 'style': 'simple', 'explode': False }})
+    topic: str = field(metadata={'path_param': { 'field_name': 'topic', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class PubsubliteTopicStatsProjectsLocationsTopicsComputeMessageStatsQueryParams:
 
 @dataclass
 class PubsubliteTopicStatsProjectsLocationsTopicsComputeMessageStatsSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class PubsubliteTopicStatsProjectsLocationsTopicsComputeMessageStatsRequest:
-    path_params: PubsubliteTopicStatsProjectsLocationsTopicsComputeMessageStatsPathParams = field(default=None)
-    query_params: PubsubliteTopicStatsProjectsLocationsTopicsComputeMessageStatsQueryParams = field(default=None)
+    path_params: PubsubliteTopicStatsProjectsLocationsTopicsComputeMessageStatsPathParams = field()
+    query_params: PubsubliteTopicStatsProjectsLocationsTopicsComputeMessageStatsQueryParams = field()
+    security: PubsubliteTopicStatsProjectsLocationsTopicsComputeMessageStatsSecurity = field()
     request: Optional[shared.ComputeMessageStatsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: PubsubliteTopicStatsProjectsLocationsTopicsComputeMessageStatsSecurity = field(default=None)
     
 
 @dataclass
 class PubsubliteTopicStatsProjectsLocationsTopicsComputeMessageStatsResponse:
+    content_type: str = field()
+    status_code: int = field()
     compute_message_stats_response: Optional[shared.ComputeMessageStatsResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

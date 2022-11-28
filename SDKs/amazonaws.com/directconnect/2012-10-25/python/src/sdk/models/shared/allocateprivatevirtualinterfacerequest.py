@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import newprivatevirtualinterfaceallocation
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AllocatePrivateVirtualInterfaceRequest:
-    connection_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connectionId' }})
-    new_private_virtual_interface_allocation: newprivatevirtualinterfaceallocation.NewPrivateVirtualInterfaceAllocation = field(default=None, metadata={'dataclasses_json': { 'field_name': 'newPrivateVirtualInterfaceAllocation' }})
-    owner_account: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ownerAccount' }})
+    connection_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('connectionId') }})
+    new_private_virtual_interface_allocation: NewPrivateVirtualInterfaceAllocation = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('newPrivateVirtualInterfaceAllocation') }})
+    owner_account: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ownerAccount') }})
     

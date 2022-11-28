@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WorkflowType } from "./workflowtype";
 
 
+
 export class DeprecateWorkflowTypeInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=domain" })
+  @SpeakeasyMetadata({ data: "json, name=domain" })
   domain: string;
 
-  @Metadata({ data: "json, name=workflowType" })
+  @SpeakeasyMetadata({ data: "json, name=workflowType" })
   workflowType: WorkflowType;
 }

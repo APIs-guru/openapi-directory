@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,23 +22,23 @@ class DeregisterRobotHeaders:
 @dataclass_json
 @dataclass
 class DeregisterRobotRequestBody:
-    fleet: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fleet' }})
-    robot: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'robot' }})
+    fleet: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('fleet') }})
+    robot: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('robot') }})
     
 
 @dataclass
 class DeregisterRobotRequest:
-    headers: DeregisterRobotHeaders = field(default=None)
-    request: DeregisterRobotRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: DeregisterRobotHeaders = field()
+    request: DeregisterRobotRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DeregisterRobotResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     deregister_robot_response: Optional[shared.DeregisterRobotResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     invalid_parameter_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

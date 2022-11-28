@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class FirebaseappcheckProjectsAppsExchangeDebugTokenPathParams:
-    app: str = field(default=None, metadata={'path_param': { 'field_name': 'app', 'style': 'simple', 'explode': False }})
+    app: str = field(metadata={'path_param': { 'field_name': 'app', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class FirebaseappcheckProjectsAppsExchangeDebugTokenQueryParams:
 
 @dataclass
 class FirebaseappcheckProjectsAppsExchangeDebugTokenSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FirebaseappcheckProjectsAppsExchangeDebugTokenSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class FirebaseappcheckProjectsAppsExchangeDebugTokenSecurity:
 
 @dataclass
 class FirebaseappcheckProjectsAppsExchangeDebugTokenRequest:
-    path_params: FirebaseappcheckProjectsAppsExchangeDebugTokenPathParams = field(default=None)
-    query_params: FirebaseappcheckProjectsAppsExchangeDebugTokenQueryParams = field(default=None)
+    path_params: FirebaseappcheckProjectsAppsExchangeDebugTokenPathParams = field()
+    query_params: FirebaseappcheckProjectsAppsExchangeDebugTokenQueryParams = field()
+    security: FirebaseappcheckProjectsAppsExchangeDebugTokenSecurity = field()
     request: Optional[shared.GoogleFirebaseAppcheckV1ExchangeDebugTokenRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: FirebaseappcheckProjectsAppsExchangeDebugTokenSecurity = field(default=None)
     
 
 @dataclass
 class FirebaseappcheckProjectsAppsExchangeDebugTokenResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_firebase_appcheck_v1_app_check_token: Optional[shared.GoogleFirebaseAppcheckV1AppCheckToken] = field(default=None)
-    status_code: int = field(default=None)
     

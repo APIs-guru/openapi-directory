@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AcLsUpdateStatus
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The status of the ACL update
 **/
 export class AcLsUpdateStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ACLToApply" })
+  @SpeakeasyMetadata({ data: "json, name=ACLToApply" })
   aclToApply?: string;
 }

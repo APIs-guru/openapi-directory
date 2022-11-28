@@ -1,5 +1,7 @@
 package shared
 
+// SandboxBankTransferSimulateRequest
+// SandboxBankTransferSimulateRequest defines the request schema for `/sandbox/bank_transfer/simulate`
 type SandboxBankTransferSimulateRequest struct {
 	BankTransferID string                 `json:"bank_transfer_id"`
 	ClientID       *string                `json:"client_id,omitempty"`

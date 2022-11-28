@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateHumanTaskUiResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=HumanTaskUiArn" })
+  @SpeakeasyMetadata({ data: "json, name=HumanTaskUiArn" })
   humanTaskUiArn: string;
 }

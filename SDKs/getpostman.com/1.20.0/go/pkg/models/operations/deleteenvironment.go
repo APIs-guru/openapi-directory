@@ -4,10 +4,6 @@ type DeleteEnvironmentPathParams struct {
 	EnvironmentUID string `pathParam:"style=simple,explode=false,name=environment_uid"`
 }
 
-type DeleteEnvironmentRequest struct {
-	PathParams DeleteEnvironmentPathParams
-}
-
 type DeleteEnvironment200ApplicationJSONEnvironment struct {
 	ID  *string `json:"id,omitempty"`
 	UID *string `json:"uid,omitempty"`
@@ -24,6 +20,10 @@ type DeleteEnvironment404ApplicationJSONError struct {
 
 type DeleteEnvironment404ApplicationJSON struct {
 	Error *DeleteEnvironment404ApplicationJSONError `json:"error,omitempty"`
+}
+
+type DeleteEnvironmentRequest struct {
+	PathParams DeleteEnvironmentPathParams
 }
 
 type DeleteEnvironmentResponse struct {

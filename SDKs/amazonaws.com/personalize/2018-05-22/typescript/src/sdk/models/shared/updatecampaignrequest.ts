@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CampaignConfig } from "./campaignconfig";
 
 
+
 export class UpdateCampaignRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=campaignArn" })
+  @SpeakeasyMetadata({ data: "json, name=campaignArn" })
   campaignArn: string;
 
-  @Metadata({ data: "json, name=campaignConfig" })
+  @SpeakeasyMetadata({ data: "json, name=campaignConfig" })
   campaignConfig?: CampaignConfig;
 
-  @Metadata({ data: "json, name=minProvisionedTPS" })
+  @SpeakeasyMetadata({ data: "json, name=minProvisionedTPS" })
   minProvisionedTps?: number;
 
-  @Metadata({ data: "json, name=solutionVersionArn" })
+  @SpeakeasyMetadata({ data: "json, name=solutionVersionArn" })
   solutionVersionArn?: string;
 }

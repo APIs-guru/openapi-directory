@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class DatabaseDumpDatabaseTypeEnum(str, Enum):
     DATABASE_TYPE_UNSPECIFIED = "DATABASE_TYPE_UNSPECIFIED"
@@ -15,8 +17,12 @@ class DatabaseDumpTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class DatabaseDump:
-    database_type: Optional[DatabaseDumpDatabaseTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'databaseType' }})
-    gcs_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gcsUri' }})
-    source_database: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sourceDatabase' }})
-    type: Optional[DatabaseDumpTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""DatabaseDump
+    A specification of the location of and metadata about a database dump from a relational database management system.
+    """
+    
+    database_type: Optional[DatabaseDumpDatabaseTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('databaseType') }})
+    gcs_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('gcsUri') }})
+    source_database: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sourceDatabase') }})
+    type: Optional[DatabaseDumpTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

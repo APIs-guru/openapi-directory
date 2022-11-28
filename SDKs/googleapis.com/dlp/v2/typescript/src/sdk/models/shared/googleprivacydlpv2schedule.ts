@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GooglePrivacyDlpV2Schedule
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Schedule for inspect job triggers.
 **/
 export class GooglePrivacyDlpV2Schedule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=recurrencePeriodDuration" })
+  @SpeakeasyMetadata({ data: "json, name=recurrencePeriodDuration" })
   recurrencePeriodDuration?: string;
 }

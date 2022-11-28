@@ -1,5 +1,7 @@
 package shared
 
+// EventRetrieved
+// Retrieve Events Response Payload Object Item
 type EventRetrieved struct {
 	Body      map[string]interface{} `json:"body"`
 	From      *string                `json:"from,omitempty"`

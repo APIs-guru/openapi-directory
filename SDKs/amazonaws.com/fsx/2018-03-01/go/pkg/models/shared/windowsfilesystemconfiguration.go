@@ -1,5 +1,7 @@
 package shared
 
+// WindowsFileSystemConfiguration
+// The configuration for this Microsoft Windows file system.
 type WindowsFileSystemConfiguration struct {
 	ActiveDirectoryID                       *string                               `json:"ActiveDirectoryId,omitempty"`
 	Aliases                                 []Alias                               `json:"Aliases,omitempty"`

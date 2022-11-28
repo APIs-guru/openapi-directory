@@ -40,6 +40,8 @@ const (
 	PasswordRequirementsUnifiedLockSettingsEnumRequireSeparateWorkLock         PasswordRequirementsUnifiedLockSettingsEnum = "REQUIRE_SEPARATE_WORK_LOCK"
 )
 
+// PasswordRequirements
+// Requirements for the password used to unlock a device.
 type PasswordRequirements struct {
 	MaximumFailedPasswordsForWipe *int32                                         `json:"maximumFailedPasswordsForWipe,omitempty"`
 	PasswordExpirationTimeout     *string                                        `json:"passwordExpirationTimeout,omitempty"`

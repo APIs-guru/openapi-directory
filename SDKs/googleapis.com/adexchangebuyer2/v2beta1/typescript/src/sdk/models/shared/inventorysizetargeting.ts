@@ -1,7 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AdSize } from "./adsize";
-import { AdSize } from "./adsize";
+
 
 
 // InventorySizeTargeting
@@ -9,9 +8,9 @@ import { AdSize } from "./adsize";
  * Represents the size of an ad unit that can be targeted on an ad request. It only applies to Private Auction, AdX Preferred Deals and Auction Packages. This targeting does not apply to Programmatic Guaranteed and Preferred Deals in Ad Manager.
 **/
 export class InventorySizeTargeting extends SpeakeasyBase {
-  @Metadata({ data: "json, name=excludedInventorySizes", elemType: shared.AdSize })
+  @SpeakeasyMetadata({ data: "json, name=excludedInventorySizes", elemType: AdSize })
   excludedInventorySizes?: AdSize[];
 
-  @Metadata({ data: "json, name=targetedInventorySizes", elemType: shared.AdSize })
+  @SpeakeasyMetadata({ data: "json, name=targetedInventorySizes", elemType: AdSize })
   targetedInventorySizes?: AdSize[];
 }

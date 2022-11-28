@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class SongAPIGetHighlightedSongsFieldsEnum(str, Enum):
@@ -31,13 +32,13 @@ class SongAPIGetHighlightedSongsQueryParams:
 
 @dataclass
 class SongAPIGetHighlightedSongsRequest:
-    query_params: SongAPIGetHighlightedSongsQueryParams = field(default=None)
+    query_params: SongAPIGetHighlightedSongsQueryParams = field()
     
 
 @dataclass
 class SongAPIGetHighlightedSongsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     song_for_api_contracts: Optional[List[shared.SongForAPIContract]] = field(default=None)
-    status_code: int = field(default=None)
     

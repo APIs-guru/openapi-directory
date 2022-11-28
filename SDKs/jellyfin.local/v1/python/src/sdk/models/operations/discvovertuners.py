@@ -10,18 +10,18 @@ class DiscvoverTunersQueryParams:
 
 @dataclass
 class DiscvoverTunersSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class DiscvoverTunersRequest:
-    query_params: DiscvoverTunersQueryParams = field(default=None)
-    security: DiscvoverTunersSecurity = field(default=None)
+    query_params: DiscvoverTunersQueryParams = field()
+    security: DiscvoverTunersSecurity = field()
     
 
 @dataclass
 class DiscvoverTunersResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     tuner_host_infos: Optional[List[shared.TunerHostInfo]] = field(default=None)
     

@@ -13,18 +13,18 @@ class GetTransactionsQueryParams:
 
 @dataclass
 class GetTransactionsSecurity:
-    api_auth: shared.SchemeAPIAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    api_auth: shared.SchemeAPIAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetTransactionsRequest:
-    query_params: GetTransactionsQueryParams = field(default=None)
-    security: GetTransactionsSecurity = field(default=None)
+    query_params: GetTransactionsQueryParams = field()
+    security: GetTransactionsSecurity = field()
     
 
 @dataclass
 class GetTransactionsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     transactions: Optional[shared.Transactions] = field(default=None)
     

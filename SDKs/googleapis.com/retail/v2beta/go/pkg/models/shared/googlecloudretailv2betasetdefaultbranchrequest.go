@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudRetailV2betaSetDefaultBranchRequest
+// Request message to set a specified branch as new default_branch.
 type GoogleCloudRetailV2betaSetDefaultBranchRequest struct {
 	BranchID *string `json:"branchId,omitempty"`
 	Force    *bool   `json:"force,omitempty"`

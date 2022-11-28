@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ListImagesFilter } from "./listimagesfilter";
 export declare class ListImagesRequest extends SpeakeasyBase {
     filter?: ListImagesFilter;

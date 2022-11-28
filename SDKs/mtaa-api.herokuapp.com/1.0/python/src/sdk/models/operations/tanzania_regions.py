@@ -4,16 +4,16 @@ from dataclasses import dataclass, field
 
 @dataclass
 class TanzaniaRegionsPathParams:
-    country: str = field(default=None, metadata={'path_param': { 'field_name': 'country', 'style': 'simple', 'explode': False }})
+    country: str = field(metadata={'path_param': { 'field_name': 'country', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class TanzaniaRegionsRequest:
-    path_params: TanzaniaRegionsPathParams = field(default=None)
+    path_params: TanzaniaRegionsPathParams = field()
     
 
 @dataclass
 class TanzaniaRegionsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

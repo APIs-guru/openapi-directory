@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import trackingissue
+from sdk import utils
+from . import *
 
 class ErrorGroupResolutionStatusEnum(str, Enum):
     RESOLUTION_STATUS_UNSPECIFIED = "RESOLUTION_STATUS_UNSPECIFIED"
@@ -14,8 +16,12 @@ class ErrorGroupResolutionStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ErrorGroup:
-    group_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'groupId' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    resolution_status: Optional[ErrorGroupResolutionStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resolutionStatus' }})
-    tracking_issues: Optional[List[trackingissue.TrackingIssue]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'trackingIssues' }})
+    r"""ErrorGroup
+    Description of a group of similar error events.
+    """
+    
+    group_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('groupId') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    resolution_status: Optional[ErrorGroupResolutionStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resolutionStatus') }})
+    tracking_issues: Optional[List[TrackingIssue]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('trackingIssues') }})
     

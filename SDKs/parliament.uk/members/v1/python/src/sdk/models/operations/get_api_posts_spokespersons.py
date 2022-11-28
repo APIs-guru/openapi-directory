@@ -10,13 +10,13 @@ class GetAPIPostsSpokespersonsQueryParams:
 
 @dataclass
 class GetAPIPostsSpokespersonsRequest:
-    query_params: GetAPIPostsSpokespersonsQueryParams = field(default=None)
+    query_params: GetAPIPostsSpokespersonsQueryParams = field()
     
 
 @dataclass
 class GetAPIPostsSpokespersonsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     government_opposition_post_items: Optional[List[shared.GovernmentOppositionPostItem]] = field(default=None)
-    status_code: int = field(default=None)
     

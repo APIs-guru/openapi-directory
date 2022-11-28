@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { MemberTypeEnum } from "./membertypeenum";
 import { PermissionTypeEnum } from "./permissiontypeenum";
 /**

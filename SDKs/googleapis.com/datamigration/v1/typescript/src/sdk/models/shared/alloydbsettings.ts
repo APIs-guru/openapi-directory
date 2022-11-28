@@ -1,6 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { UserPasswordInput } from "./userpassword";
+import { PrimaryInstanceSettingsInput } from "./primaryinstancesettings";
 import { UserPassword } from "./userpassword";
 import { PrimaryInstanceSettings } from "./primaryinstancesettings";
+
+
+
+// AlloyDbSettingsInput
+/** 
+ * Settings for creating an AlloyDB cluster.
+**/
+export class AlloyDbSettingsInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=initialUser" })
+  initialUser?: UserPasswordInput;
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=primaryInstanceSettings" })
+  primaryInstanceSettings?: PrimaryInstanceSettingsInput;
+
+  @SpeakeasyMetadata({ data: "json, name=vpcNetwork" })
+  vpcNetwork?: string;
+}
 
 
 // AlloyDbSettings
@@ -8,15 +30,15 @@ import { PrimaryInstanceSettings } from "./primaryinstancesettings";
  * Settings for creating an AlloyDB cluster.
 **/
 export class AlloyDbSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=initialUser" })
+  @SpeakeasyMetadata({ data: "json, name=initialUser" })
   initialUser?: UserPassword;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=primaryInstanceSettings" })
+  @SpeakeasyMetadata({ data: "json, name=primaryInstanceSettings" })
   primaryInstanceSettings?: PrimaryInstanceSettings;
 
-  @Metadata({ data: "json, name=vpcNetwork" })
+  @SpeakeasyMetadata({ data: "json, name=vpcNetwork" })
   vpcNetwork?: string;
 }

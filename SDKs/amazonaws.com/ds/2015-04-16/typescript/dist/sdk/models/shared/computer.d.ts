@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Attribute } from "./attribute";
 /**
  * Contains information about a computer account in a directory.

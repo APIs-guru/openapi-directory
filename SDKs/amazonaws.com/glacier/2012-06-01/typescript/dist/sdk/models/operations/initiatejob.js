@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var InitiateJobPathParams = /** @class */ (function (_super) {
     __extends(InitiateJobPathParams, _super);
@@ -30,11 +30,11 @@ var InitiateJobPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=accountId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=accountId" }),
         __metadata("design:type", String)
     ], InitiateJobPathParams.prototype, "accountId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=vaultName" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=vaultName" }),
         __metadata("design:type", String)
     ], InitiateJobPathParams.prototype, "vaultName", void 0);
     return InitiateJobPathParams;
@@ -46,31 +46,31 @@ var InitiateJobHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], InitiateJobHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], InitiateJobHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], InitiateJobHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], InitiateJobHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], InitiateJobHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], InitiateJobHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], InitiateJobHeaders.prototype, "xAmzSignedHeaders", void 0);
     return InitiateJobHeaders;
@@ -86,43 +86,43 @@ var InitiateJobRequestBodyJobParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ArchiveId" }),
+        SpeakeasyMetadata({ data: "json, name=ArchiveId" }),
         __metadata("design:type", String)
     ], InitiateJobRequestBodyJobParameters.prototype, "archiveId", void 0);
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], InitiateJobRequestBodyJobParameters.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=Format" }),
+        SpeakeasyMetadata({ data: "json, name=Format" }),
         __metadata("design:type", String)
     ], InitiateJobRequestBodyJobParameters.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=InventoryRetrievalParameters" }),
+        SpeakeasyMetadata({ data: "json, name=InventoryRetrievalParameters" }),
         __metadata("design:type", shared.InventoryRetrievalJobInput)
     ], InitiateJobRequestBodyJobParameters.prototype, "inventoryRetrievalParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=OutputLocation" }),
+        SpeakeasyMetadata({ data: "json, name=OutputLocation" }),
         __metadata("design:type", shared.OutputLocation)
     ], InitiateJobRequestBodyJobParameters.prototype, "outputLocation", void 0);
     __decorate([
-        Metadata({ data: "json, name=RetrievalByteRange" }),
+        SpeakeasyMetadata({ data: "json, name=RetrievalByteRange" }),
         __metadata("design:type", String)
     ], InitiateJobRequestBodyJobParameters.prototype, "retrievalByteRange", void 0);
     __decorate([
-        Metadata({ data: "json, name=SNSTopic" }),
+        SpeakeasyMetadata({ data: "json, name=SNSTopic" }),
         __metadata("design:type", String)
     ], InitiateJobRequestBodyJobParameters.prototype, "snsTopic", void 0);
     __decorate([
-        Metadata({ data: "json, name=SelectParameters" }),
+        SpeakeasyMetadata({ data: "json, name=SelectParameters" }),
         __metadata("design:type", shared.SelectParameters)
     ], InitiateJobRequestBodyJobParameters.prototype, "selectParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=Tier" }),
+        SpeakeasyMetadata({ data: "json, name=Tier" }),
         __metadata("design:type", String)
     ], InitiateJobRequestBodyJobParameters.prototype, "tier", void 0);
     __decorate([
-        Metadata({ data: "json, name=Type" }),
+        SpeakeasyMetadata({ data: "json, name=Type" }),
         __metadata("design:type", String)
     ], InitiateJobRequestBodyJobParameters.prototype, "type", void 0);
     return InitiateJobRequestBodyJobParameters;
@@ -134,7 +134,7 @@ var InitiateJobRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=jobParameters" }),
+        SpeakeasyMetadata({ data: "json, name=jobParameters" }),
         __metadata("design:type", InitiateJobRequestBodyJobParameters)
     ], InitiateJobRequestBody.prototype, "jobParameters", void 0);
     return InitiateJobRequestBody;
@@ -146,15 +146,15 @@ var InitiateJobRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", InitiateJobPathParams)
     ], InitiateJobRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", InitiateJobHeaders)
     ], InitiateJobRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", InitiateJobRequestBody)
     ], InitiateJobRequest.prototype, "request", void 0);
     return InitiateJobRequest;
@@ -166,39 +166,39 @@ var InitiateJobResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], InitiateJobResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], InitiateJobResponse.prototype, "initiateJobOutput", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], InitiateJobResponse.prototype, "insufficientCapacityException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], InitiateJobResponse.prototype, "invalidParameterValueException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], InitiateJobResponse.prototype, "missingParameterValueException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], InitiateJobResponse.prototype, "policyEnforcedException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], InitiateJobResponse.prototype, "resourceNotFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], InitiateJobResponse.prototype, "serviceUnavailableException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], InitiateJobResponse.prototype, "statusCode", void 0);
     return InitiateJobResponse;

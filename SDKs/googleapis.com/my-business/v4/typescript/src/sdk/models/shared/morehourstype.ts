@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MoreHoursType
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * More hours types that a business can offers, in addition to its regular hours.
 **/
 export class MoreHoursType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=hoursTypeId" })
+  @SpeakeasyMetadata({ data: "json, name=hoursTypeId" })
   hoursTypeId?: string;
 
-  @Metadata({ data: "json, name=localizedDisplayName" })
+  @SpeakeasyMetadata({ data: "json, name=localizedDisplayName" })
   localizedDisplayName?: string;
 }

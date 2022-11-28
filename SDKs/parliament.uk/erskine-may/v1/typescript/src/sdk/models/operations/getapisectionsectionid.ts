@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetApiSectionSectionIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=sectionId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=sectionId" })
   sectionId: number;
 }
 
 
 export class GetApiSectionSectionIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetApiSectionSectionIdPathParams;
 }
 
 
 export class GetApiSectionSectionIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   erskineMaySectionDetail?: shared.ErskineMaySectionDetail;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

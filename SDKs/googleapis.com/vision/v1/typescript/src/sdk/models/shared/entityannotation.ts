@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BoundingPoly } from "./boundingpoly";
 import { LocationInfo } from "./locationinfo";
 import { Property } from "./property";
+
 
 
 // EntityAnnotation
@@ -10,30 +10,30 @@ import { Property } from "./property";
  * Set of detected entity features.
 **/
 export class EntityAnnotation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=boundingPoly" })
+  @SpeakeasyMetadata({ data: "json, name=boundingPoly" })
   boundingPoly?: BoundingPoly;
 
-  @Metadata({ data: "json, name=confidence" })
+  @SpeakeasyMetadata({ data: "json, name=confidence" })
   confidence?: number;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=locale" })
+  @SpeakeasyMetadata({ data: "json, name=locale" })
   locale?: string;
 
-  @Metadata({ data: "json, name=locations", elemType: shared.LocationInfo })
+  @SpeakeasyMetadata({ data: "json, name=locations", elemType: LocationInfo })
   locations?: LocationInfo[];
 
-  @Metadata({ data: "json, name=mid" })
+  @SpeakeasyMetadata({ data: "json, name=mid" })
   mid?: string;
 
-  @Metadata({ data: "json, name=properties", elemType: shared.Property })
+  @SpeakeasyMetadata({ data: "json, name=properties", elemType: Property })
   properties?: Property[];
 
-  @Metadata({ data: "json, name=score" })
+  @SpeakeasyMetadata({ data: "json, name=score" })
   score?: number;
 
-  @Metadata({ data: "json, name=topicality" })
+  @SpeakeasyMetadata({ data: "json, name=topicality" })
   topicality?: number;
 }

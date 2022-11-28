@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MonitoringJobDefinition } from "./monitoringjobdefinition";
 import { MonitoringTypeEnum } from "./monitoringtypeenum";
 import { ScheduleConfig } from "./scheduleconfig";
+
 
 
 // MonitoringScheduleConfig
@@ -9,15 +10,15 @@ import { ScheduleConfig } from "./scheduleconfig";
  * Configures the monitoring schedule and defines the monitoring job.
 **/
 export class MonitoringScheduleConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MonitoringJobDefinition" })
+  @SpeakeasyMetadata({ data: "json, name=MonitoringJobDefinition" })
   monitoringJobDefinition?: MonitoringJobDefinition;
 
-  @Metadata({ data: "json, name=MonitoringJobDefinitionName" })
+  @SpeakeasyMetadata({ data: "json, name=MonitoringJobDefinitionName" })
   monitoringJobDefinitionName?: string;
 
-  @Metadata({ data: "json, name=MonitoringType" })
+  @SpeakeasyMetadata({ data: "json, name=MonitoringType" })
   monitoringType?: MonitoringTypeEnum;
 
-  @Metadata({ data: "json, name=ScheduleConfig" })
+  @SpeakeasyMetadata({ data: "json, name=ScheduleConfig" })
   scheduleConfig?: ScheduleConfig;
 }

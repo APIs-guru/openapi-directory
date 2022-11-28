@@ -1,5 +1,7 @@
 package shared
 
+// ReadinessCheck
+// Readiness checking configuration for VM instances. Unhealthy instances are removed from traffic rotation.
 type ReadinessCheck struct {
 	AppStartTimeout  *string `json:"appStartTimeout,omitempty"`
 	CheckInterval    *string `json:"checkInterval,omitempty"`

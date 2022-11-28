@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetCallsOrderEnum(str, Enum):
@@ -36,18 +37,18 @@ class GetCallsQueryParams:
 
 @dataclass
 class GetCallsSecurity:
-    bearer_auth: shared.SchemeBearerAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_auth: shared.SchemeBearerAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class GetCallsRequest:
-    query_params: GetCallsQueryParams = field(default=None)
-    security: GetCallsSecurity = field(default=None)
+    query_params: GetCallsQueryParams = field()
+    security: GetCallsSecurity = field()
     
 
 @dataclass
 class GetCallsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_calls_response: Optional[shared.GetCallsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

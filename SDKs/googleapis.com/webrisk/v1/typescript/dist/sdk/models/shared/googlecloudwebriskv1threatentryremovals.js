@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudWebriskV1RawIndices } from "./googlecloudwebriskv1rawindices";
 import { GoogleCloudWebriskV1RiceDeltaEncoding } from "./googlecloudwebriskv1ricedeltaencoding";
 // GoogleCloudWebriskV1ThreatEntryRemovals
@@ -35,11 +35,11 @@ var GoogleCloudWebriskV1ThreatEntryRemovals = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=rawIndices" }),
+        SpeakeasyMetadata({ data: "json, name=rawIndices" }),
         __metadata("design:type", GoogleCloudWebriskV1RawIndices)
     ], GoogleCloudWebriskV1ThreatEntryRemovals.prototype, "rawIndices", void 0);
     __decorate([
-        Metadata({ data: "json, name=riceIndices" }),
+        SpeakeasyMetadata({ data: "json, name=riceIndices" }),
         __metadata("design:type", GoogleCloudWebriskV1RiceDeltaEncoding)
     ], GoogleCloudWebriskV1ThreatEntryRemovals.prototype, "riceIndices", void 0);
     return GoogleCloudWebriskV1ThreatEntryRemovals;

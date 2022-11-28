@@ -1,4 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { UsageMetrics } from "./usagemetrics";
+
 
 
 // RuntimeInfo
@@ -6,12 +8,25 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Runtime information about workload execution.
 **/
 export class RuntimeInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=diagnosticOutputUri" })
+  @SpeakeasyMetadata({ data: "json, name=approximateUsage" })
+  approximateUsage?: UsageMetrics;
+
+  @SpeakeasyMetadata({ data: "json, name=diagnosticOutputUri" })
   diagnosticOutputUri?: string;
 
-  @Metadata({ data: "json, name=endpoints" })
+  @SpeakeasyMetadata({ data: "json, name=endpoints" })
   endpoints?: Map<string, string>;
 
-  @Metadata({ data: "json, name=outputUri" })
+  @SpeakeasyMetadata({ data: "json, name=outputUri" })
   outputUri?: string;
+}
+
+
+// RuntimeInfoInput
+/** 
+ * Runtime information about workload execution.
+**/
+export class RuntimeInfoInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=approximateUsage" })
+  approximateUsage?: UsageMetrics;
 }

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudsearchDebugIdentitysourcesItemsListForunmappedidentityPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -30,14 +31,14 @@ class CloudsearchDebugIdentitysourcesItemsListForunmappedidentityQueryParams:
 
 @dataclass
 class CloudsearchDebugIdentitysourcesItemsListForunmappedidentitySecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudsearchDebugIdentitysourcesItemsListForunmappedidentitySecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -48,14 +49,14 @@ class CloudsearchDebugIdentitysourcesItemsListForunmappedidentitySecurity:
 
 @dataclass
 class CloudsearchDebugIdentitysourcesItemsListForunmappedidentityRequest:
-    path_params: CloudsearchDebugIdentitysourcesItemsListForunmappedidentityPathParams = field(default=None)
-    query_params: CloudsearchDebugIdentitysourcesItemsListForunmappedidentityQueryParams = field(default=None)
-    security: CloudsearchDebugIdentitysourcesItemsListForunmappedidentitySecurity = field(default=None)
+    path_params: CloudsearchDebugIdentitysourcesItemsListForunmappedidentityPathParams = field()
+    query_params: CloudsearchDebugIdentitysourcesItemsListForunmappedidentityQueryParams = field()
+    security: CloudsearchDebugIdentitysourcesItemsListForunmappedidentitySecurity = field()
     
 
 @dataclass
 class CloudsearchDebugIdentitysourcesItemsListForunmappedidentityResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_item_names_for_unmapped_identity_response: Optional[shared.ListItemNamesForUnmappedIdentityResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AttachInstancesToLoadBalancerRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=instanceNames" })
+  @SpeakeasyMetadata({ data: "json, name=instanceNames" })
   instanceNames: string[];
 
-  @Metadata({ data: "json, name=loadBalancerName" })
+  @SpeakeasyMetadata({ data: "json, name=loadBalancerName" })
   loadBalancerName: string;
 }

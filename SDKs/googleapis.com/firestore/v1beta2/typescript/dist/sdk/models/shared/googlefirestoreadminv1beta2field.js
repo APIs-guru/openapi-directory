@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleFirestoreAdminV1beta2IndexConfig } from "./googlefirestoreadminv1beta2indexconfig";
 // GoogleFirestoreAdminV1beta2Field
 /**
@@ -34,11 +34,11 @@ var GoogleFirestoreAdminV1beta2Field = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=indexConfig" }),
+        SpeakeasyMetadata({ data: "json, name=indexConfig" }),
         __metadata("design:type", GoogleFirestoreAdminV1beta2IndexConfig)
     ], GoogleFirestoreAdminV1beta2Field.prototype, "indexConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], GoogleFirestoreAdminV1beta2Field.prototype, "name", void 0);
     return GoogleFirestoreAdminV1beta2Field;

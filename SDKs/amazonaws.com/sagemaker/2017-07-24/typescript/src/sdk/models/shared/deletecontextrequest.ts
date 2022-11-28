@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteContextRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ContextName" })
+  @SpeakeasyMetadata({ data: "json, name=ContextName" })
   contextName: string;
 }

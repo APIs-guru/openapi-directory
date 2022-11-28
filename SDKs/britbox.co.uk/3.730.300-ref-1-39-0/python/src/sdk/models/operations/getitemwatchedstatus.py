@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetItemWatchedStatusPathParams:
-    item_id: str = field(default=None, metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
+    item_id: str = field(metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,20 +17,20 @@ class GetItemWatchedStatusQueryParams:
 
 @dataclass
 class GetItemWatchedStatusSecurity:
-    profile_auth: shared.SchemeProfileAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    profile_auth: shared.SchemeProfileAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetItemWatchedStatusRequest:
-    path_params: GetItemWatchedStatusPathParams = field(default=None)
-    query_params: GetItemWatchedStatusQueryParams = field(default=None)
-    security: GetItemWatchedStatusSecurity = field(default=None)
+    path_params: GetItemWatchedStatusPathParams = field()
+    query_params: GetItemWatchedStatusQueryParams = field()
+    security: GetItemWatchedStatusSecurity = field()
     
 
 @dataclass
 class GetItemWatchedStatusResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     service_error: Optional[shared.ServiceError] = field(default=None)
-    status_code: int = field(default=None)
     watched: Optional[shared.Watched] = field(default=None)
     

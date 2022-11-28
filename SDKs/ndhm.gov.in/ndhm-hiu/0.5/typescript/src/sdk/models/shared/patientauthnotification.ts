@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PatientDemographicResponse } from "./patientdemographicresponse";
 import { AccessTokenValidity } from "./accesstokenvalidity";
 
+
 export enum PatientAuthNotificationAuthStatusEnum {
-    Granted = "GRANTED"
-,    Denied = "DENIED"
+    Granted = "GRANTED",
+    Denied = "DENIED"
 }
 
 
@@ -17,30 +18,30 @@ export enum PatientAuthNotificationAuthStatusEnum {
  * 
 **/
 export class PatientAuthNotificationAuth extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessToken" })
+  @SpeakeasyMetadata({ data: "json, name=accessToken" })
   accessToken?: string;
 
-  @Metadata({ data: "json, name=patient" })
+  @SpeakeasyMetadata({ data: "json, name=patient" })
   patient?: PatientDemographicResponse;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: PatientAuthNotificationAuthStatusEnum;
 
-  @Metadata({ data: "json, name=transactionId" })
+  @SpeakeasyMetadata({ data: "json, name=transactionId" })
   transactionId: string;
 
-  @Metadata({ data: "json, name=validity" })
+  @SpeakeasyMetadata({ data: "json, name=validity" })
   validity?: AccessTokenValidity;
 }
 
 
 export class PatientAuthNotification extends SpeakeasyBase {
-  @Metadata({ data: "json, name=auth" })
+  @SpeakeasyMetadata({ data: "json, name=auth" })
   auth?: PatientAuthNotificationAuth;
 
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId: string;
 
-  @Metadata({ data: "json, name=timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=timestamp" })
   timestamp: Date;
 }

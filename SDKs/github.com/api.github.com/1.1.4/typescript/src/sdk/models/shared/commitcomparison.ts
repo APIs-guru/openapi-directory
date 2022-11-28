@@ -1,15 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { Commit } from "./commit";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Commit } from "./commit";
 import { DiffEntry } from "./diffentry";
-import { Commit } from "./commit";
+
 
 export enum CommitComparisonStatusEnum {
-    Diverged = "diverged"
-,    Ahead = "ahead"
-,    Behind = "behind"
-,    Identical = "identical"
+    Diverged = "diverged",
+    Ahead = "ahead",
+    Behind = "behind",
+    Identical = "identical"
 }
 
 
@@ -18,42 +16,42 @@ export enum CommitComparisonStatusEnum {
  * Commit Comparison
 **/
 export class CommitComparison extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ahead_by" })
+  @SpeakeasyMetadata({ data: "json, name=ahead_by" })
   aheadBy: number;
 
-  @Metadata({ data: "json, name=base_commit" })
+  @SpeakeasyMetadata({ data: "json, name=base_commit" })
   baseCommit: Commit;
 
-  @Metadata({ data: "json, name=behind_by" })
+  @SpeakeasyMetadata({ data: "json, name=behind_by" })
   behindBy: number;
 
-  @Metadata({ data: "json, name=commits", elemType: shared.Commit })
+  @SpeakeasyMetadata({ data: "json, name=commits", elemType: Commit })
   commits: Commit[];
 
-  @Metadata({ data: "json, name=diff_url" })
+  @SpeakeasyMetadata({ data: "json, name=diff_url" })
   diffUrl: string;
 
-  @Metadata({ data: "json, name=files", elemType: shared.DiffEntry })
+  @SpeakeasyMetadata({ data: "json, name=files", elemType: DiffEntry })
   files: DiffEntry[];
 
-  @Metadata({ data: "json, name=html_url" })
+  @SpeakeasyMetadata({ data: "json, name=html_url" })
   htmlUrl: string;
 
-  @Metadata({ data: "json, name=merge_base_commit" })
+  @SpeakeasyMetadata({ data: "json, name=merge_base_commit" })
   mergeBaseCommit: Commit;
 
-  @Metadata({ data: "json, name=patch_url" })
+  @SpeakeasyMetadata({ data: "json, name=patch_url" })
   patchUrl: string;
 
-  @Metadata({ data: "json, name=permalink_url" })
+  @SpeakeasyMetadata({ data: "json, name=permalink_url" })
   permalinkUrl: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: CommitComparisonStatusEnum;
 
-  @Metadata({ data: "json, name=total_commits" })
+  @SpeakeasyMetadata({ data: "json, name=total_commits" })
   totalCommits: number;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url: string;
 }

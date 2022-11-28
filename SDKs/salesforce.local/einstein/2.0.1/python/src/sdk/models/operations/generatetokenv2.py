@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class GenerateTokenV2RequestBodyGrantTypeEnum(str, Enum):
@@ -23,7 +24,7 @@ class GenerateTokenV2Request:
 
 @dataclass
 class GenerateTokenV2Response:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     generate_access_token_response: Optional[shared.GenerateAccessTokenResponse] = field(default=None)
-    status_code: int = field(default=None)
     

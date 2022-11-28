@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudIdentitytoolkitAdminV2AllowByDefault
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Defines a policy of allowing every region by default and adding disallowed regions to a disallow list.
 **/
 export class GoogleCloudIdentitytoolkitAdminV2AllowByDefault extends SpeakeasyBase {
-  @Metadata({ data: "json, name=disallowedRegions" })
+  @SpeakeasyMetadata({ data: "json, name=disallowedRegions" })
   disallowedRegions?: string[];
 }

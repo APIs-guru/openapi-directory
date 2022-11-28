@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var RecognitionMetadataInteractionTypeEnum;
 (function (RecognitionMetadataInteractionTypeEnum) {
     RecognitionMetadataInteractionTypeEnum["InteractionTypeUnspecified"] = "INTERACTION_TYPE_UNSPECIFIED";
@@ -68,35 +68,35 @@ var RecognitionMetadata = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=audioTopic" }),
+        SpeakeasyMetadata({ data: "json, name=audioTopic" }),
         __metadata("design:type", String)
     ], RecognitionMetadata.prototype, "audioTopic", void 0);
     __decorate([
-        Metadata({ data: "json, name=industryNaicsCodeOfAudio" }),
+        SpeakeasyMetadata({ data: "json, name=industryNaicsCodeOfAudio" }),
         __metadata("design:type", Number)
     ], RecognitionMetadata.prototype, "industryNaicsCodeOfAudio", void 0);
     __decorate([
-        Metadata({ data: "json, name=interactionType" }),
+        SpeakeasyMetadata({ data: "json, name=interactionType" }),
         __metadata("design:type", String)
     ], RecognitionMetadata.prototype, "interactionType", void 0);
     __decorate([
-        Metadata({ data: "json, name=microphoneDistance" }),
+        SpeakeasyMetadata({ data: "json, name=microphoneDistance" }),
         __metadata("design:type", String)
     ], RecognitionMetadata.prototype, "microphoneDistance", void 0);
     __decorate([
-        Metadata({ data: "json, name=originalMediaType" }),
+        SpeakeasyMetadata({ data: "json, name=originalMediaType" }),
         __metadata("design:type", String)
     ], RecognitionMetadata.prototype, "originalMediaType", void 0);
     __decorate([
-        Metadata({ data: "json, name=originalMimeType" }),
+        SpeakeasyMetadata({ data: "json, name=originalMimeType" }),
         __metadata("design:type", String)
     ], RecognitionMetadata.prototype, "originalMimeType", void 0);
     __decorate([
-        Metadata({ data: "json, name=recordingDeviceName" }),
+        SpeakeasyMetadata({ data: "json, name=recordingDeviceName" }),
         __metadata("design:type", String)
     ], RecognitionMetadata.prototype, "recordingDeviceName", void 0);
     __decorate([
-        Metadata({ data: "json, name=recordingDeviceType" }),
+        SpeakeasyMetadata({ data: "json, name=recordingDeviceType" }),
         __metadata("design:type", String)
     ], RecognitionMetadata.prototype, "recordingDeviceType", void 0);
     return RecognitionMetadata;

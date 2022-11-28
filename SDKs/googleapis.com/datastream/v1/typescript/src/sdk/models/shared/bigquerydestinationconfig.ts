@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SingleTargetDataset } from "./singletargetdataset";
 import { SourceHierarchyDatasets } from "./sourcehierarchydatasets";
 
 
+
 export class BigQueryDestinationConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataFreshness" })
+  @SpeakeasyMetadata({ data: "json, name=dataFreshness" })
   dataFreshness?: string;
 
-  @Metadata({ data: "json, name=singleTargetDataset" })
+  @SpeakeasyMetadata({ data: "json, name=singleTargetDataset" })
   singleTargetDataset?: SingleTargetDataset;
 
-  @Metadata({ data: "json, name=sourceHierarchyDatasets" })
+  @SpeakeasyMetadata({ data: "json, name=sourceHierarchyDatasets" })
   sourceHierarchyDatasets?: SourceHierarchyDatasets;
 }

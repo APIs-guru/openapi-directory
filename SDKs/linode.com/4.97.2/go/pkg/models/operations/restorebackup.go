@@ -14,27 +14,19 @@ type RestoreBackupRequestBody struct {
 	Overwrite *bool `json:"overwrite,omitempty"`
 }
 
-type RestoreBackupSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type RestoreBackupSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type RestoreBackupSecurity struct {
-	Option1 *RestoreBackupSecurityOption1 `security:"option"`
-	Option2 *RestoreBackupSecurityOption2 `security:"option"`
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
+}
+
+type RestoreBackupDefaultApplicationJSON struct {
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type RestoreBackupRequest struct {
 	PathParams RestoreBackupPathParams
 	Request    RestoreBackupRequestBody `request:"mediaType=application/json"`
 	Security   RestoreBackupSecurity
-}
-
-type RestoreBackupDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type RestoreBackupResponse struct {

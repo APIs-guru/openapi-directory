@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // UpdateJsonClassifierRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies a JSON classifier to be updated.
 **/
 export class UpdateJsonClassifierRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=JsonPath" })
+  @SpeakeasyMetadata({ data: "json, name=JsonPath" })
   jsonPath?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 }

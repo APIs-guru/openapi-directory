@@ -17,15 +17,15 @@ type AddImageWatermarkV1RequestBody struct {
 	Transparency *int32                              `multipartForm:"name=transparency"`
 }
 
-type AddImageWatermarkV1Request struct {
-	Request AddImageWatermarkV1RequestBody `request:"mediaType=multipart/form-data"`
-}
-
 type AddImageWatermarkV14XxApplicationProblemPlusJSON struct {
 	Errors map[string]interface{} `json:"errors,omitempty"`
 	Status *int64                 `json:"status,omitempty"`
 	Title  *string                `json:"title,omitempty"`
 	Type   *string                `json:"type,omitempty"`
+}
+
+type AddImageWatermarkV1Request struct {
+	Request AddImageWatermarkV1RequestBody `request:"mediaType=multipart/form-data"`
 }
 
 type AddImageWatermarkV1Response struct {

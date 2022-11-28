@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FileUploadAnswers } from "./fileuploadanswers";
 import { Grade } from "./grade";
 import { TextAnswers } from "./textanswers";
+
 
 
 // Answer
@@ -9,15 +10,15 @@ import { TextAnswers } from "./textanswers";
  * The submitted answer for a question.
 **/
 export class Answer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fileUploadAnswers" })
+  @SpeakeasyMetadata({ data: "json, name=fileUploadAnswers" })
   fileUploadAnswers?: FileUploadAnswers;
 
-  @Metadata({ data: "json, name=grade" })
+  @SpeakeasyMetadata({ data: "json, name=grade" })
   grade?: Grade;
 
-  @Metadata({ data: "json, name=questionId" })
+  @SpeakeasyMetadata({ data: "json, name=questionId" })
   questionId?: string;
 
-  @Metadata({ data: "json, name=textAnswers" })
+  @SpeakeasyMetadata({ data: "json, name=textAnswers" })
   textAnswers?: TextAnswers;
 }

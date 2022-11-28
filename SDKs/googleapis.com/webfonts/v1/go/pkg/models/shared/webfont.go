@@ -1,5 +1,7 @@
 package shared
 
+// Webfont
+// Metadata describing a family of fonts.
 type Webfont struct {
 	Category     *string           `json:"category,omitempty"`
 	Family       *string           `json:"family,omitempty"`

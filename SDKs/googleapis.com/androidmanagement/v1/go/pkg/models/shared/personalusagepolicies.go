@@ -9,6 +9,8 @@ const (
 	PersonalUsagePoliciesPersonalPlayStoreModeEnumAllowlist                PersonalUsagePoliciesPersonalPlayStoreModeEnum = "ALLOWLIST"
 )
 
+// PersonalUsagePolicies
+// Policies controlling personal usage on a company-owned device with a work profile.
 type PersonalUsagePolicies struct {
 	AccountTypesWithManagementDisabled []string                                        `json:"accountTypesWithManagementDisabled,omitempty"`
 	CameraDisabled                     *bool                                           `json:"cameraDisabled,omitempty"`

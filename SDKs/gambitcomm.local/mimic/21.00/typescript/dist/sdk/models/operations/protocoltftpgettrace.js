@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ProtocolTftpGetTracePathParams = /** @class */ (function (_super) {
     __extends(ProtocolTftpGetTracePathParams, _super);
@@ -30,7 +30,7 @@ var ProtocolTftpGetTracePathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
         __metadata("design:type", Number)
     ], ProtocolTftpGetTracePathParams.prototype, "agentNum", void 0);
     return ProtocolTftpGetTracePathParams;
@@ -42,7 +42,7 @@ var ProtocolTftpGetTraceRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProtocolTftpGetTracePathParams)
     ], ProtocolTftpGetTraceRequest.prototype, "pathParams", void 0);
     return ProtocolTftpGetTraceRequest;
@@ -54,15 +54,15 @@ var ProtocolTftpGetTraceResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ConfigTftp)
     ], ProtocolTftpGetTraceResponse.prototype, "configTftp", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolTftpGetTraceResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProtocolTftpGetTraceResponse.prototype, "statusCode", void 0);
     return ProtocolTftpGetTraceResponse;

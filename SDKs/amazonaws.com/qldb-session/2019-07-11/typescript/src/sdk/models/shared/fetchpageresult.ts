@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IoUsage } from "./iousage";
 import { Page } from "./page";
 import { TimingInformation } from "./timinginformation";
+
 
 
 // FetchPageResult
@@ -9,12 +10,12 @@ import { TimingInformation } from "./timinginformation";
  * Contains the page that was fetched.
 **/
 export class FetchPageResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConsumedIOs" })
+  @SpeakeasyMetadata({ data: "json, name=ConsumedIOs" })
   consumedIOs?: IoUsage;
 
-  @Metadata({ data: "json, name=Page" })
+  @SpeakeasyMetadata({ data: "json, name=Page" })
   page?: Page;
 
-  @Metadata({ data: "json, name=TimingInformation" })
+  @SpeakeasyMetadata({ data: "json, name=TimingInformation" })
   timingInformation?: TimingInformation;
 }

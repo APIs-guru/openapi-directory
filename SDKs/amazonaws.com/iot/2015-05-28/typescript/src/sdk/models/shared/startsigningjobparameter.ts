@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Destination } from "./destination";
 import { SigningProfileParameter } from "./signingprofileparameter";
+
 
 
 // StartSigningJobParameter
@@ -8,12 +9,12 @@ import { SigningProfileParameter } from "./signingprofileparameter";
  * Information required to start a signing job.
 **/
 export class StartSigningJobParameter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=destination" })
+  @SpeakeasyMetadata({ data: "json, name=destination" })
   destination?: Destination;
 
-  @Metadata({ data: "json, name=signingProfileName" })
+  @SpeakeasyMetadata({ data: "json, name=signingProfileName" })
   signingProfileName?: string;
 
-  @Metadata({ data: "json, name=signingProfileParameter" })
+  @SpeakeasyMetadata({ data: "json, name=signingProfileParameter" })
   signingProfileParameter?: SigningProfileParameter;
 }

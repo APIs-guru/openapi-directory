@@ -1,54 +1,55 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ClaimIntoOrganizationPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=organizationId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=organizationId" })
   organizationId: string;
 }
 
 export enum ClaimIntoOrganizationRequestBodyLicensesModeEnum {
-    AddDevices = "addDevices"
-,    Renew = "renew"
+    AddDevices = "addDevices",
+    Renew = "renew"
 }
 
 
 export class ClaimIntoOrganizationRequestBodyLicenses extends SpeakeasyBase {
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key: string;
 
-  @Metadata({ data: "json, name=mode" })
+  @SpeakeasyMetadata({ data: "json, name=mode" })
   mode?: ClaimIntoOrganizationRequestBodyLicensesModeEnum;
 }
 
 
 export class ClaimIntoOrganizationRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=licenses", elemType: operations.ClaimIntoOrganizationRequestBodyLicenses })
+  @SpeakeasyMetadata({ data: "json, name=licenses", elemType: ClaimIntoOrganizationRequestBodyLicenses })
   licenses?: ClaimIntoOrganizationRequestBodyLicenses[];
 
-  @Metadata({ data: "json, name=orders" })
+  @SpeakeasyMetadata({ data: "json, name=orders" })
   orders?: string[];
 
-  @Metadata({ data: "json, name=serials" })
+  @SpeakeasyMetadata({ data: "json, name=serials" })
   serials?: string[];
 }
 
 
 export class ClaimIntoOrganizationRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ClaimIntoOrganizationPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: ClaimIntoOrganizationRequestBody;
 }
 
 
 export class ClaimIntoOrganizationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   claimIntoOrganization200ApplicationJsonObject?: Map<string, any>;
 }

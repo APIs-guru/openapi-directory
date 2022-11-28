@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ProcessingJob
+// An Amazon SageMaker processing job that is used to analyze data and evaluate models. For more information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/processing-job.html">Process Data and Evaluate Models</a>.
 type ProcessingJob struct {
 	AppSpecification       *AppSpecification            `json:"AppSpecification,omitempty"`
 	AutoMlJobArn           *string                      `json:"AutoMLJobArn,omitempty"`

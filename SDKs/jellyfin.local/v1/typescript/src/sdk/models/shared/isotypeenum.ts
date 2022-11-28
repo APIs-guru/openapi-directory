@@ -1,6 +1,7 @@
 
 
+
 export enum IsoTypeEnum {
-    Dvd = "Dvd"
-,    BluRay = "BluRay"
+    Dvd = "Dvd",
+    BluRay = "BluRay"
 }

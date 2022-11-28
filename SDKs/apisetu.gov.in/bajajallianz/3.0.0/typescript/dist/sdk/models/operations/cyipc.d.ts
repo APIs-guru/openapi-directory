@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class CyipcRequestBodyCertificateParameters extends SpeakeasyBase {
     fullName: string;
@@ -16,10 +16,6 @@ export declare class CyipcRequestBody extends SpeakeasyBase {
 export declare class CyipcSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class CyipcRequest extends SpeakeasyBase {
-    request?: CyipcRequestBody;
-    security: CyipcSecurity;
 }
 export declare enum Cyipc400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -102,6 +98,10 @@ export declare enum Cyipc504ApplicationJsonErrorDescriptionEnum {
 export declare class Cyipc504ApplicationJson extends SpeakeasyBase {
     error?: Cyipc504ApplicationJsonErrorEnum;
     errorDescription?: Cyipc504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class CyipcRequest extends SpeakeasyBase {
+    request?: CyipcRequestBody;
+    security: CyipcSecurity;
 }
 export declare class CyipcResponse extends SpeakeasyBase {
     contentType: string;

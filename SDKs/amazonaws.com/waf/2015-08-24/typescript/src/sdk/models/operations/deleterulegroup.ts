@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
+
 
 export enum DeleteRuleGroupXAmzTargetEnum {
     Awswaf20150824DeleteRuleGroup = "AWSWAF_20150824.DeleteRuleGroup"
@@ -7,72 +8,72 @@ export enum DeleteRuleGroupXAmzTargetEnum {
 
 
 export class DeleteRuleGroupHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Target" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Target" })
   xAmzTarget: DeleteRuleGroupXAmzTargetEnum;
 }
 
 
 export class DeleteRuleGroupRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: DeleteRuleGroupHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.DeleteRuleGroupRequest;
 }
 
 
 export class DeleteRuleGroupResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteRuleGroupResponse?: shared.DeleteRuleGroupResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   wafInternalErrorException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   wafInvalidOperationException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   wafNonEmptyEntityException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   wafNonexistentItemException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   wafReferencedItemException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   wafStaleDataException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   wafTagOperationException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   wafTagOperationInternalErrorException?: any;
 }

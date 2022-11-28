@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var AnnotatedGeneRequest = /** @class */ (function (_super) {
     __extends(AnnotatedGeneRequest, _super);
     function AnnotatedGeneRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=accId" }),
+        SpeakeasyMetadata({ data: "json, name=accId" }),
         __metadata("design:type", String)
     ], AnnotatedGeneRequest.prototype, "accId", void 0);
     __decorate([
-        Metadata({ data: "json, name=evidenceCodes" }),
+        SpeakeasyMetadata({ data: "json, name=evidenceCodes" }),
         __metadata("design:type", Array)
     ], AnnotatedGeneRequest.prototype, "evidenceCodes", void 0);
     __decorate([
-        Metadata({ data: "json, name=speciesTypeKeys" }),
+        SpeakeasyMetadata({ data: "json, name=speciesTypeKeys" }),
         __metadata("design:type", Array)
     ], AnnotatedGeneRequest.prototype, "speciesTypeKeys", void 0);
     return AnnotatedGeneRequest;

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class MybusinessAccountsListRecommendGoogleLocationsPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,13 +28,13 @@ class MybusinessAccountsListRecommendGoogleLocationsQueryParams:
 
 @dataclass
 class MybusinessAccountsListRecommendGoogleLocationsRequest:
-    path_params: MybusinessAccountsListRecommendGoogleLocationsPathParams = field(default=None)
-    query_params: MybusinessAccountsListRecommendGoogleLocationsQueryParams = field(default=None)
+    path_params: MybusinessAccountsListRecommendGoogleLocationsPathParams = field()
+    query_params: MybusinessAccountsListRecommendGoogleLocationsQueryParams = field()
     
 
 @dataclass
 class MybusinessAccountsListRecommendGoogleLocationsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_recommended_google_locations_response: Optional[shared.ListRecommendedGoogleLocationsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

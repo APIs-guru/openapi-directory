@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GatewayConfigGatewayAuthMethodEnum;
 (function (GatewayConfigGatewayAuthMethodEnum) {
     GatewayConfigGatewayAuthMethodEnum["GatewayAuthMethodUnspecified"] = "GATEWAY_AUTH_METHOD_UNSPECIFIED";
@@ -46,19 +46,19 @@ var GatewayConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=gatewayAuthMethod" }),
+        SpeakeasyMetadata({ data: "json, name=gatewayAuthMethod" }),
         __metadata("design:type", String)
     ], GatewayConfig.prototype, "gatewayAuthMethod", void 0);
     __decorate([
-        Metadata({ data: "json, name=gatewayType" }),
+        SpeakeasyMetadata({ data: "json, name=gatewayType" }),
         __metadata("design:type", String)
     ], GatewayConfig.prototype, "gatewayType", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastAccessedGatewayId" }),
+        SpeakeasyMetadata({ data: "json, name=lastAccessedGatewayId" }),
         __metadata("design:type", String)
     ], GatewayConfig.prototype, "lastAccessedGatewayId", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastAccessedGatewayTime" }),
+        SpeakeasyMetadata({ data: "json, name=lastAccessedGatewayTime" }),
         __metadata("design:type", String)
     ], GatewayConfig.prototype, "lastAccessedGatewayTime", void 0);
     return GatewayConfig;

@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class AquifersReadPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=aquifer_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=aquifer_id" })
   aquiferId: number;
 }
 
 
 export class AquifersReadRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: AquifersReadPathParams;
 }
 
 
 export class AquifersReadResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   aquifer?: shared.Aquifer;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

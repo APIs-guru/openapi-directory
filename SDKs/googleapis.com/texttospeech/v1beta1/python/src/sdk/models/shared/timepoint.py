@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class Timepoint:
-    mark_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'markName' }})
-    time_seconds: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timeSeconds' }})
+    r"""Timepoint
+    This contains a mapping between a certain point in the input text and a corresponding time in the output audio.
+    """
+    
+    mark_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('markName') }})
+    time_seconds: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('timeSeconds') }})
     

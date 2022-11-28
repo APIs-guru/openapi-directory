@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { DominantLanguage } from "./dominantlanguage";
 // BatchDetectDominantLanguageItemResult
 /**
  * The result of calling the operation. The operation returns one object for each document that is successfully processed by the operation.
@@ -34,11 +34,11 @@ var BatchDetectDominantLanguageItemResult = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Index" }),
+        SpeakeasyMetadata({ data: "json, name=Index" }),
         __metadata("design:type", Number)
     ], BatchDetectDominantLanguageItemResult.prototype, "index", void 0);
     __decorate([
-        Metadata({ data: "json, name=Languages", elemType: shared.DominantLanguage }),
+        SpeakeasyMetadata({ data: "json, name=Languages", elemType: DominantLanguage }),
         __metadata("design:type", Array)
     ], BatchDetectDominantLanguageItemResult.prototype, "languages", void 0);
     return BatchDetectDominantLanguageItemResult;

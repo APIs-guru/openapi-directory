@@ -9,6 +9,8 @@ const (
 	SetMasterAuthRequestActionEnumSetUsername      SetMasterAuthRequestActionEnum = "SET_USERNAME"
 )
 
+// SetMasterAuthRequest
+// SetMasterAuthRequest updates the admin password of a cluster.
 type SetMasterAuthRequest struct {
 	Action    *SetMasterAuthRequestActionEnum `json:"action,omitempty"`
 	ClusterID *string                         `json:"clusterId,omitempty"`

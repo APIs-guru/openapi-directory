@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SnowflakeConnectorProfileProperties
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  The connector-specific profile properties required when using Snowflake. 
 **/
 export class SnowflakeConnectorProfileProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountName" })
+  @SpeakeasyMetadata({ data: "json, name=accountName" })
   accountName?: string;
 
-  @Metadata({ data: "json, name=bucketName" })
+  @SpeakeasyMetadata({ data: "json, name=bucketName" })
   bucketName: string;
 
-  @Metadata({ data: "json, name=bucketPrefix" })
+  @SpeakeasyMetadata({ data: "json, name=bucketPrefix" })
   bucketPrefix?: string;
 
-  @Metadata({ data: "json, name=privateLinkServiceName" })
+  @SpeakeasyMetadata({ data: "json, name=privateLinkServiceName" })
   privateLinkServiceName?: string;
 
-  @Metadata({ data: "json, name=region" })
+  @SpeakeasyMetadata({ data: "json, name=region" })
   region?: string;
 
-  @Metadata({ data: "json, name=stage" })
+  @SpeakeasyMetadata({ data: "json, name=stage" })
   stage: string;
 
-  @Metadata({ data: "json, name=warehouse" })
+  @SpeakeasyMetadata({ data: "json, name=warehouse" })
   warehouse: string;
 }

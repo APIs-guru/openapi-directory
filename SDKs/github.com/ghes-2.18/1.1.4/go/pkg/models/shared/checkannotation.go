@@ -1,5 +1,7 @@
 package shared
 
+// CheckAnnotation
+// Check Annotation
 type CheckAnnotation struct {
 	AnnotationLevel string `json:"annotation_level"`
 	BlobHref        string `json:"blob_href"`

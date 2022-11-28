@@ -22,19 +22,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { AssessmentEvidenceFolder } from "./assessmentevidencefolder";
 var GetEvidenceFoldersByAssessmentControlResponse = /** @class */ (function (_super) {
     __extends(GetEvidenceFoldersByAssessmentControlResponse, _super);
     function GetEvidenceFoldersByAssessmentControlResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=evidenceFolders", elemType: shared.AssessmentEvidenceFolder }),
+        SpeakeasyMetadata({ data: "json, name=evidenceFolders", elemType: AssessmentEvidenceFolder }),
         __metadata("design:type", Array)
     ], GetEvidenceFoldersByAssessmentControlResponse.prototype, "evidenceFolders", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextToken" }),
         __metadata("design:type", String)
     ], GetEvidenceFoldersByAssessmentControlResponse.prototype, "nextToken", void 0);
     return GetEvidenceFoldersByAssessmentControlResponse;

@@ -5,13 +5,13 @@ from sdk.models import shared
 
 @dataclass
 class RepertoireCreaRequest:
-    request: shared.RepertoirEcreaterequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.RepertoirEcreaterequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class RepertoireCreaResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     erreur: Optional[shared.Erreur] = field(default=None)
     repertoir_ecreatereponse: Optional[shared.RepertoirEcreatereponse] = field(default=None)
-    status_code: int = field(default=None)
     

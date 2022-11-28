@@ -1,0 +1,16 @@
+package shared
+
+type VideoParticipantSummaryEnumTwilioRealmEnum string
+
+const (
+	VideoParticipantSummaryEnumTwilioRealmEnumUs1 VideoParticipantSummaryEnumTwilioRealmEnum = "us1"
+	VideoParticipantSummaryEnumTwilioRealmEnumUs2 VideoParticipantSummaryEnumTwilioRealmEnum = "us2"
+	VideoParticipantSummaryEnumTwilioRealmEnumAu1 VideoParticipantSummaryEnumTwilioRealmEnum = "au1"
+	VideoParticipantSummaryEnumTwilioRealmEnumBr1 VideoParticipantSummaryEnumTwilioRealmEnum = "br1"
+	VideoParticipantSummaryEnumTwilioRealmEnumIe1 VideoParticipantSummaryEnumTwilioRealmEnum = "ie1"
+	VideoParticipantSummaryEnumTwilioRealmEnumJp1 VideoParticipantSummaryEnumTwilioRealmEnum = "jp1"
+	VideoParticipantSummaryEnumTwilioRealmEnumSg1 VideoParticipantSummaryEnumTwilioRealmEnum = "sg1"
+	VideoParticipantSummaryEnumTwilioRealmEnumIn1 VideoParticipantSummaryEnumTwilioRealmEnum = "in1"
+	VideoParticipantSummaryEnumTwilioRealmEnumDe1 VideoParticipantSummaryEnumTwilioRealmEnum = "de1"
+	VideoParticipantSummaryEnumTwilioRealmEnumGll VideoParticipantSummaryEnumTwilioRealmEnum = "gll"
+)

@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateDataExporterConfigPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=dataExporterConfigId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=dataExporterConfigId" })
   dataExporterConfigId: string;
 }
 
 
 export class UpdateDataExporterConfigSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   otoroshiAuth: shared.SchemeOtoroshiAuth;
 }
 
 
 export class UpdateDataExporterConfigRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateDataExporterConfigPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: shared.DataExporterConfig;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: UpdateDataExporterConfigSecurity;
 }
 
 
 export class UpdateDataExporterConfigResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   dataExporterConfig?: shared.DataExporterConfig;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

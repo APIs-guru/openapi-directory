@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AppLinkedAppInfo } from "./applinkedappinfo";
 import { AppManualAppInfo } from "./appmanualappinfo";
+
 
 
 // App
@@ -8,18 +9,18 @@ import { AppManualAppInfo } from "./appmanualappinfo";
  * Describes an AdMob app for a specific platform (For example: Android or iOS).
 **/
 export class App extends SpeakeasyBase {
-  @Metadata({ data: "json, name=appId" })
+  @SpeakeasyMetadata({ data: "json, name=appId" })
   appId?: string;
 
-  @Metadata({ data: "json, name=linkedAppInfo" })
+  @SpeakeasyMetadata({ data: "json, name=linkedAppInfo" })
   linkedAppInfo?: AppLinkedAppInfo;
 
-  @Metadata({ data: "json, name=manualAppInfo" })
+  @SpeakeasyMetadata({ data: "json, name=manualAppInfo" })
   manualAppInfo?: AppManualAppInfo;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=platform" })
+  @SpeakeasyMetadata({ data: "json, name=platform" })
   platform?: string;
 }

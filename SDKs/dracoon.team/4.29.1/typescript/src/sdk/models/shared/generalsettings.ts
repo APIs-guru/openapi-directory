@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AuthTokenRestrictions } from "./authtokenrestrictions";
+
 
 
 // GeneralSettings
@@ -7,33 +8,33 @@ import { AuthTokenRestrictions } from "./authtokenrestrictions";
  * General settings
 **/
 export class GeneralSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authTokenRestrictions" })
+  @SpeakeasyMetadata({ data: "json, name=authTokenRestrictions" })
   authTokenRestrictions?: AuthTokenRestrictions;
 
-  @Metadata({ data: "json, name=cryptoEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=cryptoEnabled" })
   cryptoEnabled?: boolean;
 
-  @Metadata({ data: "json, name=emailNotificationButtonEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=emailNotificationButtonEnabled" })
   emailNotificationButtonEnabled?: boolean;
 
-  @Metadata({ data: "json, name=eulaEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=eulaEnabled" })
   eulaEnabled?: boolean;
 
-  @Metadata({ data: "json, name=hideLoginInputFields" })
+  @SpeakeasyMetadata({ data: "json, name=hideLoginInputFields" })
   hideLoginInputFields?: boolean;
 
-  @Metadata({ data: "json, name=mediaServerEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=mediaServerEnabled" })
   mediaServerEnabled?: boolean;
 
-  @Metadata({ data: "json, name=s3TagsEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=s3TagsEnabled" })
   s3TagsEnabled?: boolean;
 
-  @Metadata({ data: "json, name=sharePasswordSmsEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=sharePasswordSmsEnabled" })
   sharePasswordSmsEnabled?: boolean;
 
-  @Metadata({ data: "json, name=useS3Storage" })
+  @SpeakeasyMetadata({ data: "json, name=useS3Storage" })
   useS3Storage?: boolean;
 
-  @Metadata({ data: "json, name=weakPasswordEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=weakPasswordEnabled" })
   weakPasswordEnabled?: boolean;
 }

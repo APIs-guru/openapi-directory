@@ -1,15 +1,18 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import googletypecolor
-from . import googletypecolor
-from . import googletypecolor
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleAppsDriveLabelsV2betaBadgeColors:
-    background_color: Optional[googletypecolor.GoogleTypeColor] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'backgroundColor' }})
-    foreground_color: Optional[googletypecolor.GoogleTypeColor] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'foregroundColor' }})
-    solo_color: Optional[googletypecolor.GoogleTypeColor] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'soloColor' }})
+    r"""GoogleAppsDriveLabelsV2betaBadgeColors
+    The color derived from BadgeConfig and changed to the closest recommended supported color.
+    """
+    
+    background_color: Optional[GoogleTypeColor] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('backgroundColor') }})
+    foreground_color: Optional[GoogleTypeColor] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('foregroundColor') }})
+    solo_color: Optional[GoogleTypeColor] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('soloColor') }})
     

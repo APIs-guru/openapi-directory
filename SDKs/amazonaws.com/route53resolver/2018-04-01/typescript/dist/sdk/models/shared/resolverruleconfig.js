@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { TargetAddress } from "./targetaddress";
 // ResolverRuleConfig
 /**
  * In an <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_UpdateResolverRule.html">UpdateResolverRule</a> request, information about the changes that you want to make.
@@ -34,15 +34,15 @@ var ResolverRuleConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], ResolverRuleConfig.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=ResolverEndpointId" }),
+        SpeakeasyMetadata({ data: "json, name=ResolverEndpointId" }),
         __metadata("design:type", String)
     ], ResolverRuleConfig.prototype, "resolverEndpointId", void 0);
     __decorate([
-        Metadata({ data: "json, name=TargetIps", elemType: shared.TargetAddress }),
+        SpeakeasyMetadata({ data: "json, name=TargetIps", elemType: TargetAddress }),
         __metadata("design:type", Array)
     ], ResolverRuleConfig.prototype, "targetIps", void 0);
     return ResolverRuleConfig;

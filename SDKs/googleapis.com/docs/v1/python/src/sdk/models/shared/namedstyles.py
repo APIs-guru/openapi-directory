@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import namedstyle
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class NamedStyles:
-    styles: Optional[List[namedstyle.NamedStyle]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'styles' }})
+    r"""NamedStyles
+    The named styles. Paragraphs in the document can inherit their TextStyle and ParagraphStyle from these named styles.
+    """
+    
+    styles: Optional[List[NamedStyle]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('styles') }})
     

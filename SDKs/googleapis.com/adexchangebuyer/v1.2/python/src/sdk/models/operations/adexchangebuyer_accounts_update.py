@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AdexchangebuyerAccountsUpdatePathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,21 +25,21 @@ class AdexchangebuyerAccountsUpdateQueryParams:
 
 @dataclass
 class AdexchangebuyerAccountsUpdateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AdexchangebuyerAccountsUpdateRequest:
-    path_params: AdexchangebuyerAccountsUpdatePathParams = field(default=None)
-    query_params: AdexchangebuyerAccountsUpdateQueryParams = field(default=None)
+    path_params: AdexchangebuyerAccountsUpdatePathParams = field()
+    query_params: AdexchangebuyerAccountsUpdateQueryParams = field()
+    security: AdexchangebuyerAccountsUpdateSecurity = field()
     request: Optional[shared.Account] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AdexchangebuyerAccountsUpdateSecurity = field(default=None)
     
 
 @dataclass
 class AdexchangebuyerAccountsUpdateResponse:
+    content_type: str = field()
+    status_code: int = field()
     account: Optional[shared.Account] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

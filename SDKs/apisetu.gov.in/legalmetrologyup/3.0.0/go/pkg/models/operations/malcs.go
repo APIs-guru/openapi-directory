@@ -27,11 +27,6 @@ type MalcsSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type MalcsRequest struct {
-	Request  *MalcsRequestBody `request:"mediaType=application/json"`
-	Security MalcsSecurity
-}
-
 type Malcs400ApplicationJSONErrorEnum string
 
 const (
@@ -161,6 +156,11 @@ const (
 type Malcs504ApplicationJSON struct {
 	Error            *Malcs504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Malcs504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type MalcsRequest struct {
+	Request  *MalcsRequestBody `request:"mediaType=application/json"`
+	Security MalcsSecurity
 }
 
 type MalcsResponse struct {

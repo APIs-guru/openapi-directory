@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetResizeClusterActionEnum(str, Enum):
     RESIZE_CLUSTER = "ResizeCluster"
@@ -10,13 +14,13 @@ class GetResizeClusterVersionEnum(str, Enum):
 
 @dataclass
 class GetResizeClusterQueryParams:
-    action: GetResizeClusterActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetResizeClusterActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    cluster_identifier: str = field(metadata={'query_param': { 'field_name': 'ClusterIdentifier', 'style': 'form', 'explode': True }})
+    version: GetResizeClusterVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     classic: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'Classic', 'style': 'form', 'explode': True }})
-    cluster_identifier: str = field(default=None, metadata={'query_param': { 'field_name': 'ClusterIdentifier', 'style': 'form', 'explode': True }})
     cluster_type: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'ClusterType', 'style': 'form', 'explode': True }})
     node_type: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NodeType', 'style': 'form', 'explode': True }})
     number_of_nodes: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'NumberOfNodes', 'style': 'form', 'explode': True }})
-    version: GetResizeClusterVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -32,13 +36,13 @@ class GetResizeClusterHeaders:
 
 @dataclass
 class GetResizeClusterRequest:
-    query_params: GetResizeClusterQueryParams = field(default=None)
-    headers: GetResizeClusterHeaders = field(default=None)
+    headers: GetResizeClusterHeaders = field()
+    query_params: GetResizeClusterQueryParams = field()
     
 
 @dataclass
 class GetResizeClusterResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

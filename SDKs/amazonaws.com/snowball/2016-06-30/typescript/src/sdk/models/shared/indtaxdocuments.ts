@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // IndTaxDocuments
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The tax documents required in AWS Regions in India.
 **/
 export class IndTaxDocuments extends SpeakeasyBase {
-  @Metadata({ data: "json, name=GSTIN" })
+  @SpeakeasyMetadata({ data: "json, name=GSTIN" })
   gstin?: string;
 }

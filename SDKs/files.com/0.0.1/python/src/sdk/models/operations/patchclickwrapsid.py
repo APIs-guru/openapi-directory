@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class PatchClickwrapsIDPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 class PatchClickwrapsIDRequestBodyUseWithBundlesEnum(str, Enum):
     NONE = "none"
@@ -33,13 +34,13 @@ class PatchClickwrapsIDRequestBody:
 
 @dataclass
 class PatchClickwrapsIDRequest:
-    path_params: PatchClickwrapsIDPathParams = field(default=None)
+    path_params: PatchClickwrapsIDPathParams = field()
     request: Optional[PatchClickwrapsIDRequestBody] = field(default=None, metadata={'request': { 'media_type': 'multipart/form-data' }})
     
 
 @dataclass
 class PatchClickwrapsIDResponse:
+    content_type: str = field()
+    status_code: int = field()
     clickwrap_entity: Optional[shared.ClickwrapEntity] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

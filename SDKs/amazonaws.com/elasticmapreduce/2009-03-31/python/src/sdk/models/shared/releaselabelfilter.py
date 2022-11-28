@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class ReleaseLabelFilter:
-    application: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Application' }})
-    prefix: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Prefix' }})
+    r"""ReleaseLabelFilter
+    The release label filters by application or version prefix.
+    """
+    
+    application: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Application') }})
+    prefix: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Prefix') }})
     

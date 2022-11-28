@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DealPauseStatus } from "./dealpausestatus";
+
 
 
 // DealServingMetadata
@@ -7,6 +8,6 @@ import { DealPauseStatus } from "./dealpausestatus";
  * Message captures metadata about the serving status of a deal.
 **/
 export class DealServingMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dealPauseStatus" })
+  @SpeakeasyMetadata({ data: "json, name=dealPauseStatus" })
   dealPauseStatus?: DealPauseStatus;
 }

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AdexchangebuyerMarketplacedealsDeletePathParams:
-    proposal_id: str = field(default=None, metadata={'path_param': { 'field_name': 'proposalId', 'style': 'simple', 'explode': False }})
+    proposal_id: str = field(metadata={'path_param': { 'field_name': 'proposalId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,21 +22,21 @@ class AdexchangebuyerMarketplacedealsDeleteQueryParams:
 
 @dataclass
 class AdexchangebuyerMarketplacedealsDeleteSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AdexchangebuyerMarketplacedealsDeleteRequest:
-    path_params: AdexchangebuyerMarketplacedealsDeletePathParams = field(default=None)
-    query_params: AdexchangebuyerMarketplacedealsDeleteQueryParams = field(default=None)
+    path_params: AdexchangebuyerMarketplacedealsDeletePathParams = field()
+    query_params: AdexchangebuyerMarketplacedealsDeleteQueryParams = field()
+    security: AdexchangebuyerMarketplacedealsDeleteSecurity = field()
     request: Optional[shared.DeleteOrderDealsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AdexchangebuyerMarketplacedealsDeleteSecurity = field(default=None)
     
 
 @dataclass
 class AdexchangebuyerMarketplacedealsDeleteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     delete_order_deals_response: Optional[shared.DeleteOrderDealsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

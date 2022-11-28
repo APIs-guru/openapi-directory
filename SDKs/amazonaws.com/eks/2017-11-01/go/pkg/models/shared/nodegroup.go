@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Nodegroup
+// An object representing an Amazon EKS managed node group.
 type Nodegroup struct {
 	AmiType        *AmiTypesEnum                `json:"amiType,omitempty"`
 	CapacityType   *CapacityTypesEnum           `json:"capacityType,omitempty"`

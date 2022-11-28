@@ -1,5 +1,7 @@
 package shared
 
+// Statistics
+// A map of key-value pairs for all supported statistics. Currently, only count is supported.
 type Statistics struct {
 	Average      *float64 `json:"average,omitempty"`
 	Count        *int64   `json:"count,omitempty"`

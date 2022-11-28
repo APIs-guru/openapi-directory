@@ -17,12 +17,12 @@ type GetGoalsQueryParams struct {
 	Workspace        *string  `queryParam:"style=form,explode=true,name=workspace"`
 }
 
-type GetGoalsRequest struct {
-	QueryParams GetGoalsQueryParams
-}
-
 type GetGoals200ApplicationJSON struct {
 	Data []shared.GoalCompact `json:"data,omitempty"`
+}
+
+type GetGoalsRequest struct {
+	QueryParams GetGoalsQueryParams
 }
 
 type GetGoalsResponse struct {

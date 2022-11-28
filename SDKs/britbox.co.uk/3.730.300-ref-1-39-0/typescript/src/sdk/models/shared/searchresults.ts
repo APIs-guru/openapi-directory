@@ -1,31 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { ItemList } from "./itemlist";
-import { ItemList } from "./itemlist";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ItemList } from "./itemlist";
 import { Person } from "./person";
-import { ItemList } from "./itemlist";
+
 
 
 export class SearchResults extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items" })
+  @SpeakeasyMetadata({ data: "json, name=items" })
   items?: ItemList;
 
-  @Metadata({ data: "json, name=movies" })
+  @SpeakeasyMetadata({ data: "json, name=movies" })
   movies?: ItemList;
 
-  @Metadata({ data: "json, name=other" })
+  @SpeakeasyMetadata({ data: "json, name=other" })
   other?: ItemList;
 
-  @Metadata({ data: "json, name=people", elemType: shared.Person })
+  @SpeakeasyMetadata({ data: "json, name=people", elemType: Person })
   people?: Person[];
 
-  @Metadata({ data: "json, name=term" })
+  @SpeakeasyMetadata({ data: "json, name=term" })
   term: string;
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total: number;
 
-  @Metadata({ data: "json, name=tv" })
+  @SpeakeasyMetadata({ data: "json, name=tv" })
   tv?: ItemList;
 }

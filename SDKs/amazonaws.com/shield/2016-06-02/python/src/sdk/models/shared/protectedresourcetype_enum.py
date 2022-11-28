@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ProtectedResourceTypeEnum(str, Enum):
     CLOUDFRONT_DISTRIBUTION = "CLOUDFRONT_DISTRIBUTION"

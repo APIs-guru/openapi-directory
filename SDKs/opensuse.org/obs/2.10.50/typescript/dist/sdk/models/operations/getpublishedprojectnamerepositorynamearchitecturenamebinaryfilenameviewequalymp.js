@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetPublishedProjectNameRepositoryNameArchitectureNameBinaryFilenameViewEqualYmpPathParams = /** @class */ (function (_super) {
     __extends(GetPublishedProjectNameRepositoryNameArchitectureNameBinaryFilenameViewEqualYmpPathParams, _super);
@@ -30,19 +30,19 @@ var GetPublishedProjectNameRepositoryNameArchitectureNameBinaryFilenameViewEqual
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=architecture_name" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=architecture_name" }),
         __metadata("design:type", String)
     ], GetPublishedProjectNameRepositoryNameArchitectureNameBinaryFilenameViewEqualYmpPathParams.prototype, "architectureName", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=binary_filename" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=binary_filename" }),
         __metadata("design:type", String)
     ], GetPublishedProjectNameRepositoryNameArchitectureNameBinaryFilenameViewEqualYmpPathParams.prototype, "binaryFilename", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=project_name" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=project_name" }),
         __metadata("design:type", String)
     ], GetPublishedProjectNameRepositoryNameArchitectureNameBinaryFilenameViewEqualYmpPathParams.prototype, "projectName", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=repository_name" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repository_name" }),
         __metadata("design:type", String)
     ], GetPublishedProjectNameRepositoryNameArchitectureNameBinaryFilenameViewEqualYmpPathParams.prototype, "repositoryName", void 0);
     return GetPublishedProjectNameRepositoryNameArchitectureNameBinaryFilenameViewEqualYmpPathParams;
@@ -54,7 +54,7 @@ var GetPublishedProjectNameRepositoryNameArchitectureNameBinaryFilenameViewEqual
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
         __metadata("design:type", shared.SchemeBasicAuthentication)
     ], GetPublishedProjectNameRepositoryNameArchitectureNameBinaryFilenameViewEqualYmpSecurity.prototype, "basicAuthentication", void 0);
     return GetPublishedProjectNameRepositoryNameArchitectureNameBinaryFilenameViewEqualYmpSecurity;
@@ -66,11 +66,11 @@ var GetPublishedProjectNameRepositoryNameArchitectureNameBinaryFilenameViewEqual
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetPublishedProjectNameRepositoryNameArchitectureNameBinaryFilenameViewEqualYmpPathParams)
     ], GetPublishedProjectNameRepositoryNameArchitectureNameBinaryFilenameViewEqualYmpRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetPublishedProjectNameRepositoryNameArchitectureNameBinaryFilenameViewEqualYmpSecurity)
     ], GetPublishedProjectNameRepositoryNameArchitectureNameBinaryFilenameViewEqualYmpRequest.prototype, "security", void 0);
     return GetPublishedProjectNameRepositoryNameArchitectureNameBinaryFilenameViewEqualYmpRequest;
@@ -82,15 +82,15 @@ var GetPublishedProjectNameRepositoryNameArchitectureNameBinaryFilenameViewEqual
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetPublishedProjectNameRepositoryNameArchitectureNameBinaryFilenameViewEqualYmpResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetPublishedProjectNameRepositoryNameArchitectureNameBinaryFilenameViewEqualYmpResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetPublishedProjectNameRepositoryNameArchitectureNameBinaryFilenameViewEqualYmpResponse.prototype, "statusCode", void 0);
     return GetPublishedProjectNameRepositoryNameArchitectureNameBinaryFilenameViewEqualYmpResponse;

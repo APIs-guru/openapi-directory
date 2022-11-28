@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RegisteredInterest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createdWhen" })
+  @SpeakeasyMetadata({ data: "json, name=createdWhen" })
   createdWhen?: Date;
 
-  @Metadata({ data: "json, name=deletedWhen" })
+  @SpeakeasyMetadata({ data: "json, name=deletedWhen" })
   deletedWhen?: Date;
 
-  @Metadata({ data: "json, name=interest" })
+  @SpeakeasyMetadata({ data: "json, name=interest" })
   interest?: string;
 
-  @Metadata({ data: "json, name=lastAmendedWhen" })
+  @SpeakeasyMetadata({ data: "json, name=lastAmendedWhen" })
   lastAmendedWhen?: Date;
 }

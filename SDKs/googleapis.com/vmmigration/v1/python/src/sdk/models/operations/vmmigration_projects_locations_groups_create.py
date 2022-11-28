@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class VmmigrationProjectsLocationsGroupsCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,21 +28,21 @@ class VmmigrationProjectsLocationsGroupsCreateQueryParams:
 
 @dataclass
 class VmmigrationProjectsLocationsGroupsCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class VmmigrationProjectsLocationsGroupsCreateRequest:
-    path_params: VmmigrationProjectsLocationsGroupsCreatePathParams = field(default=None)
-    query_params: VmmigrationProjectsLocationsGroupsCreateQueryParams = field(default=None)
-    request: Optional[shared.Group] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: VmmigrationProjectsLocationsGroupsCreateSecurity = field(default=None)
+    path_params: VmmigrationProjectsLocationsGroupsCreatePathParams = field()
+    query_params: VmmigrationProjectsLocationsGroupsCreateQueryParams = field()
+    security: VmmigrationProjectsLocationsGroupsCreateSecurity = field()
+    request: Optional[shared.GroupInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class VmmigrationProjectsLocationsGroupsCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudRetailV2alphaControl } from "./googlecloudretailv2alphacontrol";
+
 
 
 // GoogleCloudRetailV2alphaListControlsResponse
@@ -8,9 +8,9 @@ import { GoogleCloudRetailV2alphaControl } from "./googlecloudretailv2alphacontr
  * Response for ListControls method.
 **/
 export class GoogleCloudRetailV2alphaListControlsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=controls", elemType: shared.GoogleCloudRetailV2alphaControl })
+  @SpeakeasyMetadata({ data: "json, name=controls", elemType: GoogleCloudRetailV2alphaControl })
   controls?: GoogleCloudRetailV2alphaControl[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

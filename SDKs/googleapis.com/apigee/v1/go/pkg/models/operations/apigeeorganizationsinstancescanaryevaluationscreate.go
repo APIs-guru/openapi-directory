@@ -30,7 +30,7 @@ type ApigeeOrganizationsInstancesCanaryevaluationsCreateSecurity struct {
 type ApigeeOrganizationsInstancesCanaryevaluationsCreateRequest struct {
 	PathParams  ApigeeOrganizationsInstancesCanaryevaluationsCreatePathParams
 	QueryParams ApigeeOrganizationsInstancesCanaryevaluationsCreateQueryParams
-	Request     *shared.GoogleCloudApigeeV1CanaryEvaluation `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudApigeeV1CanaryEvaluationInput `request:"mediaType=application/json"`
 	Security    ApigeeOrganizationsInstancesCanaryevaluationsCreateSecurity
 }
 

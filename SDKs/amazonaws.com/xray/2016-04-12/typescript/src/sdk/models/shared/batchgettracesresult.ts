@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Trace } from "./trace";
 
 
+
 export class BatchGetTracesResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=Traces", elemType: shared.Trace })
+  @SpeakeasyMetadata({ data: "json, name=Traces", elemType: Trace })
   traces?: Trace[];
 
-  @Metadata({ data: "json, name=UnprocessedTraceIds" })
+  @SpeakeasyMetadata({ data: "json, name=UnprocessedTraceIds" })
   unprocessedTraceIds?: string[];
 }

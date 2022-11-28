@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class TagmanagerAccountsContainersWorkspacesTriggersCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class TagmanagerAccountsContainersWorkspacesTriggersCreateQueryParams:
 
 @dataclass
 class TagmanagerAccountsContainersWorkspacesTriggersCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class TagmanagerAccountsContainersWorkspacesTriggersCreateRequest:
-    path_params: TagmanagerAccountsContainersWorkspacesTriggersCreatePathParams = field(default=None)
-    query_params: TagmanagerAccountsContainersWorkspacesTriggersCreateQueryParams = field(default=None)
+    path_params: TagmanagerAccountsContainersWorkspacesTriggersCreatePathParams = field()
+    query_params: TagmanagerAccountsContainersWorkspacesTriggersCreateQueryParams = field()
+    security: TagmanagerAccountsContainersWorkspacesTriggersCreateSecurity = field()
     request: Optional[shared.Trigger] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: TagmanagerAccountsContainersWorkspacesTriggersCreateSecurity = field(default=None)
     
 
 @dataclass
 class TagmanagerAccountsContainersWorkspacesTriggersCreateResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     trigger: Optional[shared.Trigger] = field(default=None)
     

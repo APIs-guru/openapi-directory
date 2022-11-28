@@ -1,33 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetNamesNameIdOutputFormatOutputFormatEnum {
-    Json = "json"
-,    Xml = "xml"
-,    Kml = "kml"
-,    Csv = "csv"
-,    Html = "html"
+    Json = "json",
+    Xml = "xml",
+    Kml = "kml",
+    Csv = "csv",
+    Html = "html"
 }
 
 
 export class GetNamesNameIdOutputFormatPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=nameId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=nameId" })
   nameId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=outputFormat" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=outputFormat" })
   outputFormat: GetNamesNameIdOutputFormatOutputFormatEnum;
 }
 
 
 export class GetNamesNameIdOutputFormatRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetNamesNameIdOutputFormatPathParams;
 }
 
 
 export class GetNamesNameIdOutputFormatResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

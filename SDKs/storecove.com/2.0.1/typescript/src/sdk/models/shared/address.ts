@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CountryEnum } from "./countryenum";
+
 
 
 // Address
@@ -7,21 +8,21 @@ import { CountryEnum } from "./countryenum";
  * The address
 **/
 export class Address extends SpeakeasyBase {
-  @Metadata({ data: "json, name=city" })
+  @SpeakeasyMetadata({ data: "json, name=city" })
   city?: string;
 
-  @Metadata({ data: "json, name=country" })
+  @SpeakeasyMetadata({ data: "json, name=country" })
   country: CountryEnum;
 
-  @Metadata({ data: "json, name=county" })
+  @SpeakeasyMetadata({ data: "json, name=county" })
   county?: string;
 
-  @Metadata({ data: "json, name=street1" })
+  @SpeakeasyMetadata({ data: "json, name=street1" })
   street1?: string;
 
-  @Metadata({ data: "json, name=street2" })
+  @SpeakeasyMetadata({ data: "json, name=street2" })
   street2?: string;
 
-  @Metadata({ data: "json, name=zip" })
+  @SpeakeasyMetadata({ data: "json, name=zip" })
   zip?: string;
 }

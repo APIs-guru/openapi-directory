@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { UrlTypeEnum } from "./urltypeenum";
 export declare class CreateApplicationPresignedUrlRequest extends SpeakeasyBase {
     applicationName: string;

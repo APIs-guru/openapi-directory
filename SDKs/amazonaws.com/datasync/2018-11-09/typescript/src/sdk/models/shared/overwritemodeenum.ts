@@ -1,6 +1,7 @@
 
 
+
 export enum OverwriteModeEnum {
-    Always = "ALWAYS"
-,    Never = "NEVER"
+    Always = "ALWAYS",
+    Never = "NEVER"
 }

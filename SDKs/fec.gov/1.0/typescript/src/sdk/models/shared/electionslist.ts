@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ElectionsList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cycle" })
+  @SpeakeasyMetadata({ data: "json, name=cycle" })
   cycle?: number;
 
-  @Metadata({ data: "json, name=district" })
+  @SpeakeasyMetadata({ data: "json, name=district" })
   district?: string;
 
-  @Metadata({ data: "json, name=office" })
+  @SpeakeasyMetadata({ data: "json, name=office" })
   office?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: string;
 }

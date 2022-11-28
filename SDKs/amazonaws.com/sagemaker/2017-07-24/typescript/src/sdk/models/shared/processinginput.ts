@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DatasetDefinition } from "./datasetdefinition";
 import { ProcessingS3Input } from "./processings3input";
+
 
 
 // ProcessingInput
@@ -8,15 +9,15 @@ import { ProcessingS3Input } from "./processings3input";
  * The inputs for a processing job. The processing input must specify exactly one of either <code>S3Input</code> or <code>DatasetDefinition</code> types.
 **/
 export class ProcessingInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AppManaged" })
+  @SpeakeasyMetadata({ data: "json, name=AppManaged" })
   appManaged?: boolean;
 
-  @Metadata({ data: "json, name=DatasetDefinition" })
+  @SpeakeasyMetadata({ data: "json, name=DatasetDefinition" })
   datasetDefinition?: DatasetDefinition;
 
-  @Metadata({ data: "json, name=InputName" })
+  @SpeakeasyMetadata({ data: "json, name=InputName" })
   inputName: string;
 
-  @Metadata({ data: "json, name=S3Input" })
+  @SpeakeasyMetadata({ data: "json, name=S3Input" })
   s3Input?: ProcessingS3Input;
 }

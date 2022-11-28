@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RetentionPolicy
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * RetentionPolicy defines a Backup retention policy for a BackupPlan.
 **/
 export class RetentionPolicy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=backupDeleteLockDays" })
+  @SpeakeasyMetadata({ data: "json, name=backupDeleteLockDays" })
   backupDeleteLockDays?: number;
 
-  @Metadata({ data: "json, name=backupRetainDays" })
+  @SpeakeasyMetadata({ data: "json, name=backupRetainDays" })
   backupRetainDays?: number;
 
-  @Metadata({ data: "json, name=locked" })
+  @SpeakeasyMetadata({ data: "json, name=locked" })
   locked?: boolean;
 }

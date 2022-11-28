@@ -40,7 +40,7 @@ type IdentitytoolkitProjectsTenantsCreateSecurity struct {
 type IdentitytoolkitProjectsTenantsCreateRequest struct {
 	PathParams  IdentitytoolkitProjectsTenantsCreatePathParams
 	QueryParams IdentitytoolkitProjectsTenantsCreateQueryParams
-	Request     *shared.GoogleCloudIdentitytoolkitAdminV2Tenant `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudIdentitytoolkitAdminV2TenantInput `request:"mediaType=application/json"`
 	Security    IdentitytoolkitProjectsTenantsCreateSecurity
 }
 

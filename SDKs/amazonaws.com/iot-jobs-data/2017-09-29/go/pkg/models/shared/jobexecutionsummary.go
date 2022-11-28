@@ -1,5 +1,7 @@
 package shared
 
+// JobExecutionSummary
+// Contains a subset of information about a job execution.
 type JobExecutionSummary struct {
 	ExecutionNumber *int64  `json:"executionNumber,omitempty"`
 	JobID           *string `json:"jobId,omitempty"`

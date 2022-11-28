@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ListOperationsForConnectionRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.ConnectionIdRequestBody;
 }
 
 
 export class ListOperationsForConnectionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidInputExceptionInfo?: shared.InvalidInputExceptionInfo;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   notFoundKnownExceptionInfo?: shared.NotFoundKnownExceptionInfo;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   operationReadList?: shared.OperationReadList;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

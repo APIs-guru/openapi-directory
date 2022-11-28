@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RepositoryCatalogData } from "./repositorycatalogdata";
 
 
+
 export class GetRepositoryCatalogDataResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=catalogData" })
+  @SpeakeasyMetadata({ data: "json, name=catalogData" })
   catalogData?: RepositoryCatalogData;
 }

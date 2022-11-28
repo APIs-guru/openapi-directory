@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InAppMessageContent } from "./inappmessagecontent";
 import { LayoutEnum } from "./layoutenum";
 import { TemplateTypeEnum } from "./templatetypeenum";
+
 
 
 // InAppTemplateResponse
@@ -10,36 +10,36 @@ import { TemplateTypeEnum } from "./templatetypeenum";
  * In-App Template Response.
 **/
 export class InAppTemplateResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Arn" })
+  @SpeakeasyMetadata({ data: "json, name=Arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=Content", elemType: shared.InAppMessageContent })
+  @SpeakeasyMetadata({ data: "json, name=Content", elemType: InAppMessageContent })
   content?: InAppMessageContent[];
 
-  @Metadata({ data: "json, name=CreationDate" })
+  @SpeakeasyMetadata({ data: "json, name=CreationDate" })
   creationDate: string;
 
-  @Metadata({ data: "json, name=CustomConfig" })
+  @SpeakeasyMetadata({ data: "json, name=CustomConfig" })
   customConfig?: Map<string, string>;
 
-  @Metadata({ data: "json, name=LastModifiedDate" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedDate" })
   lastModifiedDate: string;
 
-  @Metadata({ data: "json, name=Layout" })
+  @SpeakeasyMetadata({ data: "json, name=Layout" })
   layout?: LayoutEnum;
 
-  @Metadata({ data: "json, name=TemplateDescription" })
+  @SpeakeasyMetadata({ data: "json, name=TemplateDescription" })
   templateDescription?: string;
 
-  @Metadata({ data: "json, name=TemplateName" })
+  @SpeakeasyMetadata({ data: "json, name=TemplateName" })
   templateName: string;
 
-  @Metadata({ data: "json, name=TemplateType" })
+  @SpeakeasyMetadata({ data: "json, name=TemplateType" })
   templateType: TemplateTypeEnum;
 
-  @Metadata({ data: "json, name=Version" })
+  @SpeakeasyMetadata({ data: "json, name=Version" })
   version?: string;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 }

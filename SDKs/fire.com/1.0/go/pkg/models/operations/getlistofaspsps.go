@@ -9,10 +9,6 @@ type GetListOfAspspsQueryParams struct {
 	Currency *string `queryParam:"style=form,explode=true,name=currency"`
 }
 
-type GetListOfAspspsRequest struct {
-	QueryParams GetListOfAspspsQueryParams
-}
-
 type GetListOfAspspsAspspsAspspCountry struct {
 	Code        *string `json:"code,omitempty"`
 	Description *string `json:"description,omitempty"`
@@ -31,6 +27,10 @@ type GetListOfAspspsAspspsAspsp struct {
 type GetListOfAspspsAspsps struct {
 	Aspsps []GetListOfAspspsAspspsAspsp `json:"aspsps,omitempty"`
 	Total  *int64                       `json:"total,omitempty"`
+}
+
+type GetListOfAspspsRequest struct {
+	QueryParams GetListOfAspspsQueryParams
 }
 
 type GetListOfAspspsResponse struct {

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class GetMarketingV3MarketingEventsEventsExternalEventIdGetByIdPathParams extends SpeakeasyBase {
     externalEventId: string;
@@ -6,15 +6,10 @@ export declare class GetMarketingV3MarketingEventsEventsExternalEventIdGetByIdPa
 export declare class GetMarketingV3MarketingEventsEventsExternalEventIdGetByIdQueryParams extends SpeakeasyBase {
     externalAccountId: string;
 }
-export declare class GetMarketingV3MarketingEventsEventsExternalEventIdGetByIdSecurityOption1 extends SpeakeasyBase {
-    hapikey: shared.SchemeHapikey;
-}
-export declare class GetMarketingV3MarketingEventsEventsExternalEventIdGetByIdSecurityOption2 extends SpeakeasyBase {
-    oauth2Legacy: shared.SchemeOauth2Legacy;
-}
 export declare class GetMarketingV3MarketingEventsEventsExternalEventIdGetByIdSecurity extends SpeakeasyBase {
-    option1?: GetMarketingV3MarketingEventsEventsExternalEventIdGetByIdSecurityOption1;
-    option2?: GetMarketingV3MarketingEventsEventsExternalEventIdGetByIdSecurityOption2;
+    hapikey?: shared.SchemeHapikey;
+    oauth2Legacy?: shared.SchemeOauth2Legacy;
+    privateAppsLegacy?: shared.SchemePrivateAppsLegacy;
 }
 export declare class GetMarketingV3MarketingEventsEventsExternalEventIdGetByIdRequest extends SpeakeasyBase {
     pathParams: GetMarketingV3MarketingEventsEventsExternalEventIdGetByIdPathParams;

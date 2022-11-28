@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://apigateway.{region}.amazonaws.com",
 	"https://apigateway.{region}.amazonaws.com",
 	"http://apigateway.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/apigateway/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// CreateAPI - Creates an Api resource.
 func (s *SDK) CreateAPI(ctx context.Context, request operations.CreateAPIRequest) (*operations.CreateAPIResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v2/apis"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -81,7 +108,7 @@ func (s *SDK) CreateAPI(ctx context.Context, request operations.CreateAPIRequest
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -151,8 +178,9 @@ func (s *SDK) CreateAPI(ctx context.Context, request operations.CreateAPIRequest
 	return res, nil
 }
 
+// CreateAPIMapping - Creates an API mapping.
 func (s *SDK) CreateAPIMapping(ctx context.Context, request operations.CreateAPIMappingRequest) (*operations.CreateAPIMappingResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/domainnames/{domainName}/apimappings", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -172,7 +200,7 @@ func (s *SDK) CreateAPIMapping(ctx context.Context, request operations.CreateAPI
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -242,8 +270,9 @@ func (s *SDK) CreateAPIMapping(ctx context.Context, request operations.CreateAPI
 	return res, nil
 }
 
+// CreateAuthorizer - Creates an Authorizer for an API.
 func (s *SDK) CreateAuthorizer(ctx context.Context, request operations.CreateAuthorizerRequest) (*operations.CreateAuthorizerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/apis/{apiId}/authorizers", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -263,7 +292,7 @@ func (s *SDK) CreateAuthorizer(ctx context.Context, request operations.CreateAut
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -333,8 +362,9 @@ func (s *SDK) CreateAuthorizer(ctx context.Context, request operations.CreateAut
 	return res, nil
 }
 
+// CreateDeployment - Creates a Deployment for an API.
 func (s *SDK) CreateDeployment(ctx context.Context, request operations.CreateDeploymentRequest) (*operations.CreateDeploymentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/apis/{apiId}/deployments", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -354,7 +384,7 @@ func (s *SDK) CreateDeployment(ctx context.Context, request operations.CreateDep
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -424,8 +454,9 @@ func (s *SDK) CreateDeployment(ctx context.Context, request operations.CreateDep
 	return res, nil
 }
 
+// CreateDomainName - Creates a domain name.
 func (s *SDK) CreateDomainName(ctx context.Context, request operations.CreateDomainNameRequest) (*operations.CreateDomainNameResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v2/domainnames"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -445,7 +476,7 @@ func (s *SDK) CreateDomainName(ctx context.Context, request operations.CreateDom
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -525,8 +556,9 @@ func (s *SDK) CreateDomainName(ctx context.Context, request operations.CreateDom
 	return res, nil
 }
 
+// CreateIntegration - Creates an Integration.
 func (s *SDK) CreateIntegration(ctx context.Context, request operations.CreateIntegrationRequest) (*operations.CreateIntegrationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/apis/{apiId}/integrations", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -546,7 +578,7 @@ func (s *SDK) CreateIntegration(ctx context.Context, request operations.CreateIn
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -616,8 +648,9 @@ func (s *SDK) CreateIntegration(ctx context.Context, request operations.CreateIn
 	return res, nil
 }
 
+// CreateIntegrationResponse - Creates an IntegrationResponses.
 func (s *SDK) CreateIntegrationResponse(ctx context.Context, request operations.CreateIntegrationResponseRequest) (*operations.CreateIntegrationResponseResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/apis/{apiId}/integrations/{integrationId}/integrationresponses", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -637,7 +670,7 @@ func (s *SDK) CreateIntegrationResponse(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -707,8 +740,9 @@ func (s *SDK) CreateIntegrationResponse(ctx context.Context, request operations.
 	return res, nil
 }
 
+// CreateModel - Creates a Model for an API.
 func (s *SDK) CreateModel(ctx context.Context, request operations.CreateModelRequest) (*operations.CreateModelResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/apis/{apiId}/models", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -728,7 +762,7 @@ func (s *SDK) CreateModel(ctx context.Context, request operations.CreateModelReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -798,8 +832,9 @@ func (s *SDK) CreateModel(ctx context.Context, request operations.CreateModelReq
 	return res, nil
 }
 
+// CreateRoute - Creates a Route for an API.
 func (s *SDK) CreateRoute(ctx context.Context, request operations.CreateRouteRequest) (*operations.CreateRouteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/apis/{apiId}/routes", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -819,7 +854,7 @@ func (s *SDK) CreateRoute(ctx context.Context, request operations.CreateRouteReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -889,8 +924,9 @@ func (s *SDK) CreateRoute(ctx context.Context, request operations.CreateRouteReq
 	return res, nil
 }
 
+// CreateRouteResponse - Creates a RouteResponse for a Route.
 func (s *SDK) CreateRouteResponse(ctx context.Context, request operations.CreateRouteResponseRequest) (*operations.CreateRouteResponseResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/apis/{apiId}/routes/{routeId}/routeresponses", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -910,7 +946,7 @@ func (s *SDK) CreateRouteResponse(ctx context.Context, request operations.Create
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -980,8 +1016,9 @@ func (s *SDK) CreateRouteResponse(ctx context.Context, request operations.Create
 	return res, nil
 }
 
+// CreateStage - Creates a Stage for an API.
 func (s *SDK) CreateStage(ctx context.Context, request operations.CreateStageRequest) (*operations.CreateStageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/apis/{apiId}/stages", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1001,7 +1038,7 @@ func (s *SDK) CreateStage(ctx context.Context, request operations.CreateStageReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1071,8 +1108,9 @@ func (s *SDK) CreateStage(ctx context.Context, request operations.CreateStageReq
 	return res, nil
 }
 
+// CreateVpcLink - Creates a VPC link.
 func (s *SDK) CreateVpcLink(ctx context.Context, request operations.CreateVpcLinkRequest) (*operations.CreateVpcLinkResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v2/vpclinks"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1092,7 +1130,7 @@ func (s *SDK) CreateVpcLink(ctx context.Context, request operations.CreateVpcLin
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1142,8 +1180,9 @@ func (s *SDK) CreateVpcLink(ctx context.Context, request operations.CreateVpcLin
 	return res, nil
 }
 
+// DeleteAccessLogSettings - Deletes the AccessLogSettings for a Stage. To disable access logging for a Stage, delete its AccessLogSettings.
 func (s *SDK) DeleteAccessLogSettings(ctx context.Context, request operations.DeleteAccessLogSettingsRequest) (*operations.DeleteAccessLogSettingsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/apis/{apiId}/stages/{stageName}/accesslogsettings", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1153,7 +1192,7 @@ func (s *SDK) DeleteAccessLogSettings(ctx context.Context, request operations.De
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1194,8 +1233,9 @@ func (s *SDK) DeleteAccessLogSettings(ctx context.Context, request operations.De
 	return res, nil
 }
 
+// DeleteAPI - Deletes an Api resource.
 func (s *SDK) DeleteAPI(ctx context.Context, request operations.DeleteAPIRequest) (*operations.DeleteAPIResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/apis/{apiId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1205,7 +1245,7 @@ func (s *SDK) DeleteAPI(ctx context.Context, request operations.DeleteAPIRequest
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1246,8 +1286,9 @@ func (s *SDK) DeleteAPI(ctx context.Context, request operations.DeleteAPIRequest
 	return res, nil
 }
 
+// DeleteAPIMapping - Deletes an API mapping.
 func (s *SDK) DeleteAPIMapping(ctx context.Context, request operations.DeleteAPIMappingRequest) (*operations.DeleteAPIMappingResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/domainnames/{domainName}/apimappings/{apiMappingId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1257,7 +1298,7 @@ func (s *SDK) DeleteAPIMapping(ctx context.Context, request operations.DeleteAPI
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1308,8 +1349,9 @@ func (s *SDK) DeleteAPIMapping(ctx context.Context, request operations.DeleteAPI
 	return res, nil
 }
 
+// DeleteAuthorizer - Deletes an Authorizer.
 func (s *SDK) DeleteAuthorizer(ctx context.Context, request operations.DeleteAuthorizerRequest) (*operations.DeleteAuthorizerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/apis/{apiId}/authorizers/{authorizerId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1319,7 +1361,7 @@ func (s *SDK) DeleteAuthorizer(ctx context.Context, request operations.DeleteAut
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1360,8 +1402,9 @@ func (s *SDK) DeleteAuthorizer(ctx context.Context, request operations.DeleteAut
 	return res, nil
 }
 
+// DeleteCorsConfiguration - Deletes a CORS configuration.
 func (s *SDK) DeleteCorsConfiguration(ctx context.Context, request operations.DeleteCorsConfigurationRequest) (*operations.DeleteCorsConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/apis/{apiId}/cors", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1371,7 +1414,7 @@ func (s *SDK) DeleteCorsConfiguration(ctx context.Context, request operations.De
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1412,8 +1455,9 @@ func (s *SDK) DeleteCorsConfiguration(ctx context.Context, request operations.De
 	return res, nil
 }
 
+// DeleteDeployment - Deletes a Deployment.
 func (s *SDK) DeleteDeployment(ctx context.Context, request operations.DeleteDeploymentRequest) (*operations.DeleteDeploymentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/apis/{apiId}/deployments/{deploymentId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1423,7 +1467,7 @@ func (s *SDK) DeleteDeployment(ctx context.Context, request operations.DeleteDep
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1464,8 +1508,9 @@ func (s *SDK) DeleteDeployment(ctx context.Context, request operations.DeleteDep
 	return res, nil
 }
 
+// DeleteDomainName - Deletes a domain name.
 func (s *SDK) DeleteDomainName(ctx context.Context, request operations.DeleteDomainNameRequest) (*operations.DeleteDomainNameResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/domainnames/{domainName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1475,7 +1520,7 @@ func (s *SDK) DeleteDomainName(ctx context.Context, request operations.DeleteDom
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1516,8 +1561,9 @@ func (s *SDK) DeleteDomainName(ctx context.Context, request operations.DeleteDom
 	return res, nil
 }
 
+// DeleteIntegration - Deletes an Integration.
 func (s *SDK) DeleteIntegration(ctx context.Context, request operations.DeleteIntegrationRequest) (*operations.DeleteIntegrationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/apis/{apiId}/integrations/{integrationId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1527,7 +1573,7 @@ func (s *SDK) DeleteIntegration(ctx context.Context, request operations.DeleteIn
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1568,8 +1614,9 @@ func (s *SDK) DeleteIntegration(ctx context.Context, request operations.DeleteIn
 	return res, nil
 }
 
+// DeleteIntegrationResponse - Deletes an IntegrationResponses.
 func (s *SDK) DeleteIntegrationResponse(ctx context.Context, request operations.DeleteIntegrationResponseRequest) (*operations.DeleteIntegrationResponseResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/apis/{apiId}/integrations/{integrationId}/integrationresponses/{integrationResponseId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1579,7 +1626,7 @@ func (s *SDK) DeleteIntegrationResponse(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1620,8 +1667,9 @@ func (s *SDK) DeleteIntegrationResponse(ctx context.Context, request operations.
 	return res, nil
 }
 
+// DeleteModel - Deletes a Model.
 func (s *SDK) DeleteModel(ctx context.Context, request operations.DeleteModelRequest) (*operations.DeleteModelResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/apis/{apiId}/models/{modelId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1631,7 +1679,7 @@ func (s *SDK) DeleteModel(ctx context.Context, request operations.DeleteModelReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1672,8 +1720,9 @@ func (s *SDK) DeleteModel(ctx context.Context, request operations.DeleteModelReq
 	return res, nil
 }
 
+// DeleteRoute - Deletes a Route.
 func (s *SDK) DeleteRoute(ctx context.Context, request operations.DeleteRouteRequest) (*operations.DeleteRouteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/apis/{apiId}/routes/{routeId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1683,7 +1732,7 @@ func (s *SDK) DeleteRoute(ctx context.Context, request operations.DeleteRouteReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1724,8 +1773,9 @@ func (s *SDK) DeleteRoute(ctx context.Context, request operations.DeleteRouteReq
 	return res, nil
 }
 
+// DeleteRouteRequestParameter - Deletes a route request parameter.
 func (s *SDK) DeleteRouteRequestParameter(ctx context.Context, request operations.DeleteRouteRequestParameterRequest) (*operations.DeleteRouteRequestParameterResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/apis/{apiId}/routes/{routeId}/requestparameters/{requestParameterKey}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1735,7 +1785,7 @@ func (s *SDK) DeleteRouteRequestParameter(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1776,8 +1826,9 @@ func (s *SDK) DeleteRouteRequestParameter(ctx context.Context, request operation
 	return res, nil
 }
 
+// DeleteRouteResponse - Deletes a RouteResponse.
 func (s *SDK) DeleteRouteResponse(ctx context.Context, request operations.DeleteRouteResponseRequest) (*operations.DeleteRouteResponseResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/apis/{apiId}/routes/{routeId}/routeresponses/{routeResponseId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1787,7 +1838,7 @@ func (s *SDK) DeleteRouteResponse(ctx context.Context, request operations.Delete
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1828,8 +1879,9 @@ func (s *SDK) DeleteRouteResponse(ctx context.Context, request operations.Delete
 	return res, nil
 }
 
+// DeleteRouteSettings - Deletes the RouteSettings for a stage.
 func (s *SDK) DeleteRouteSettings(ctx context.Context, request operations.DeleteRouteSettingsRequest) (*operations.DeleteRouteSettingsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/apis/{apiId}/stages/{stageName}/routesettings/{routeKey}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1839,7 +1891,7 @@ func (s *SDK) DeleteRouteSettings(ctx context.Context, request operations.Delete
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1880,8 +1932,9 @@ func (s *SDK) DeleteRouteSettings(ctx context.Context, request operations.Delete
 	return res, nil
 }
 
+// DeleteStage - Deletes a Stage.
 func (s *SDK) DeleteStage(ctx context.Context, request operations.DeleteStageRequest) (*operations.DeleteStageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/apis/{apiId}/stages/{stageName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1891,7 +1944,7 @@ func (s *SDK) DeleteStage(ctx context.Context, request operations.DeleteStageReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1932,8 +1985,9 @@ func (s *SDK) DeleteStage(ctx context.Context, request operations.DeleteStageReq
 	return res, nil
 }
 
+// DeleteVpcLink - Deletes a VPC link.
 func (s *SDK) DeleteVpcLink(ctx context.Context, request operations.DeleteVpcLinkRequest) (*operations.DeleteVpcLinkResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/vpclinks/{vpcLinkId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1943,7 +1997,7 @@ func (s *SDK) DeleteVpcLink(ctx context.Context, request operations.DeleteVpcLin
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1994,7 +2048,7 @@ func (s *SDK) DeleteVpcLink(ctx context.Context, request operations.DeleteVpcLin
 }
 
 func (s *SDK) ExportAPI(ctx context.Context, request operations.ExportAPIRequest) (*operations.ExportAPIResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/apis/{apiId}/exports/{specification}#outputType", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2006,7 +2060,7 @@ func (s *SDK) ExportAPI(ctx context.Context, request operations.ExportAPIRequest
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2066,8 +2120,9 @@ func (s *SDK) ExportAPI(ctx context.Context, request operations.ExportAPIRequest
 	return res, nil
 }
 
+// GetAPI - Gets an Api resource.
 func (s *SDK) GetAPI(ctx context.Context, request operations.GetAPIRequest) (*operations.GetAPIResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/apis/{apiId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2077,7 +2132,7 @@ func (s *SDK) GetAPI(ctx context.Context, request operations.GetAPIRequest) (*op
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2127,8 +2182,9 @@ func (s *SDK) GetAPI(ctx context.Context, request operations.GetAPIRequest) (*op
 	return res, nil
 }
 
+// GetAPIMapping - Gets an API mapping.
 func (s *SDK) GetAPIMapping(ctx context.Context, request operations.GetAPIMappingRequest) (*operations.GetAPIMappingResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/domainnames/{domainName}/apimappings/{apiMappingId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2138,7 +2194,7 @@ func (s *SDK) GetAPIMapping(ctx context.Context, request operations.GetAPIMappin
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2198,8 +2254,9 @@ func (s *SDK) GetAPIMapping(ctx context.Context, request operations.GetAPIMappin
 	return res, nil
 }
 
+// GetAPIMappings - Gets API mappings.
 func (s *SDK) GetAPIMappings(ctx context.Context, request operations.GetAPIMappingsRequest) (*operations.GetAPIMappingsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/domainnames/{domainName}/apimappings", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2211,7 +2268,7 @@ func (s *SDK) GetAPIMappings(ctx context.Context, request operations.GetAPIMappi
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2271,8 +2328,9 @@ func (s *SDK) GetAPIMappings(ctx context.Context, request operations.GetAPIMappi
 	return res, nil
 }
 
+// GetApis - Gets a collection of Api resources.
 func (s *SDK) GetApis(ctx context.Context, request operations.GetApisRequest) (*operations.GetApisResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v2/apis"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2284,7 +2342,7 @@ func (s *SDK) GetApis(ctx context.Context, request operations.GetApisRequest) (*
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2344,8 +2402,9 @@ func (s *SDK) GetApis(ctx context.Context, request operations.GetApisRequest) (*
 	return res, nil
 }
 
+// GetAuthorizer - Gets an Authorizer.
 func (s *SDK) GetAuthorizer(ctx context.Context, request operations.GetAuthorizerRequest) (*operations.GetAuthorizerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/apis/{apiId}/authorizers/{authorizerId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2355,7 +2414,7 @@ func (s *SDK) GetAuthorizer(ctx context.Context, request operations.GetAuthorize
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2405,8 +2464,9 @@ func (s *SDK) GetAuthorizer(ctx context.Context, request operations.GetAuthorize
 	return res, nil
 }
 
+// GetAuthorizers - Gets the Authorizers for an API.
 func (s *SDK) GetAuthorizers(ctx context.Context, request operations.GetAuthorizersRequest) (*operations.GetAuthorizersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/apis/{apiId}/authorizers", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2418,7 +2478,7 @@ func (s *SDK) GetAuthorizers(ctx context.Context, request operations.GetAuthoriz
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2478,8 +2538,9 @@ func (s *SDK) GetAuthorizers(ctx context.Context, request operations.GetAuthoriz
 	return res, nil
 }
 
+// GetDeployment - Gets a Deployment.
 func (s *SDK) GetDeployment(ctx context.Context, request operations.GetDeploymentRequest) (*operations.GetDeploymentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/apis/{apiId}/deployments/{deploymentId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2489,7 +2550,7 @@ func (s *SDK) GetDeployment(ctx context.Context, request operations.GetDeploymen
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2539,8 +2600,9 @@ func (s *SDK) GetDeployment(ctx context.Context, request operations.GetDeploymen
 	return res, nil
 }
 
+// GetDeployments - Gets the Deployments for an API.
 func (s *SDK) GetDeployments(ctx context.Context, request operations.GetDeploymentsRequest) (*operations.GetDeploymentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/apis/{apiId}/deployments", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2552,7 +2614,7 @@ func (s *SDK) GetDeployments(ctx context.Context, request operations.GetDeployme
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2612,8 +2674,9 @@ func (s *SDK) GetDeployments(ctx context.Context, request operations.GetDeployme
 	return res, nil
 }
 
+// GetDomainName - Gets a domain name.
 func (s *SDK) GetDomainName(ctx context.Context, request operations.GetDomainNameRequest) (*operations.GetDomainNameResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/domainnames/{domainName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2623,7 +2686,7 @@ func (s *SDK) GetDomainName(ctx context.Context, request operations.GetDomainNam
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2673,8 +2736,9 @@ func (s *SDK) GetDomainName(ctx context.Context, request operations.GetDomainNam
 	return res, nil
 }
 
+// GetDomainNames - Gets the domain names for an AWS account.
 func (s *SDK) GetDomainNames(ctx context.Context, request operations.GetDomainNamesRequest) (*operations.GetDomainNamesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v2/domainnames"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2686,7 +2750,7 @@ func (s *SDK) GetDomainNames(ctx context.Context, request operations.GetDomainNa
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2746,8 +2810,9 @@ func (s *SDK) GetDomainNames(ctx context.Context, request operations.GetDomainNa
 	return res, nil
 }
 
+// GetIntegration - Gets an Integration.
 func (s *SDK) GetIntegration(ctx context.Context, request operations.GetIntegrationRequest) (*operations.GetIntegrationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/apis/{apiId}/integrations/{integrationId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2757,7 +2822,7 @@ func (s *SDK) GetIntegration(ctx context.Context, request operations.GetIntegrat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2807,8 +2872,9 @@ func (s *SDK) GetIntegration(ctx context.Context, request operations.GetIntegrat
 	return res, nil
 }
 
+// GetIntegrationResponse - Gets an IntegrationResponses.
 func (s *SDK) GetIntegrationResponse(ctx context.Context, request operations.GetIntegrationResponseRequest) (*operations.GetIntegrationResponseResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/apis/{apiId}/integrations/{integrationId}/integrationresponses/{integrationResponseId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2818,7 +2884,7 @@ func (s *SDK) GetIntegrationResponse(ctx context.Context, request operations.Get
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2868,8 +2934,9 @@ func (s *SDK) GetIntegrationResponse(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetIntegrationResponses - Gets the IntegrationResponses for an Integration.
 func (s *SDK) GetIntegrationResponses(ctx context.Context, request operations.GetIntegrationResponsesRequest) (*operations.GetIntegrationResponsesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/apis/{apiId}/integrations/{integrationId}/integrationresponses", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2881,7 +2948,7 @@ func (s *SDK) GetIntegrationResponses(ctx context.Context, request operations.Ge
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2941,8 +3008,9 @@ func (s *SDK) GetIntegrationResponses(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetIntegrations - Gets the Integrations for an API.
 func (s *SDK) GetIntegrations(ctx context.Context, request operations.GetIntegrationsRequest) (*operations.GetIntegrationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/apis/{apiId}/integrations", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2954,7 +3022,7 @@ func (s *SDK) GetIntegrations(ctx context.Context, request operations.GetIntegra
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3014,8 +3082,9 @@ func (s *SDK) GetIntegrations(ctx context.Context, request operations.GetIntegra
 	return res, nil
 }
 
+// GetModel - Gets a Model.
 func (s *SDK) GetModel(ctx context.Context, request operations.GetModelRequest) (*operations.GetModelResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/apis/{apiId}/models/{modelId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3025,7 +3094,7 @@ func (s *SDK) GetModel(ctx context.Context, request operations.GetModelRequest) 
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3075,8 +3144,9 @@ func (s *SDK) GetModel(ctx context.Context, request operations.GetModelRequest) 
 	return res, nil
 }
 
+// GetModelTemplate - Gets a model template.
 func (s *SDK) GetModelTemplate(ctx context.Context, request operations.GetModelTemplateRequest) (*operations.GetModelTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/apis/{apiId}/models/{modelId}/template", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3086,7 +3156,7 @@ func (s *SDK) GetModelTemplate(ctx context.Context, request operations.GetModelT
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3136,8 +3206,9 @@ func (s *SDK) GetModelTemplate(ctx context.Context, request operations.GetModelT
 	return res, nil
 }
 
+// GetModels - Gets the Models for an API.
 func (s *SDK) GetModels(ctx context.Context, request operations.GetModelsRequest) (*operations.GetModelsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/apis/{apiId}/models", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3149,7 +3220,7 @@ func (s *SDK) GetModels(ctx context.Context, request operations.GetModelsRequest
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3209,8 +3280,9 @@ func (s *SDK) GetModels(ctx context.Context, request operations.GetModelsRequest
 	return res, nil
 }
 
+// GetRoute - Gets a Route.
 func (s *SDK) GetRoute(ctx context.Context, request operations.GetRouteRequest) (*operations.GetRouteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/apis/{apiId}/routes/{routeId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3220,7 +3292,7 @@ func (s *SDK) GetRoute(ctx context.Context, request operations.GetRouteRequest) 
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3270,8 +3342,9 @@ func (s *SDK) GetRoute(ctx context.Context, request operations.GetRouteRequest) 
 	return res, nil
 }
 
+// GetRouteResponse - Gets a RouteResponse.
 func (s *SDK) GetRouteResponse(ctx context.Context, request operations.GetRouteResponseRequest) (*operations.GetRouteResponseResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/apis/{apiId}/routes/{routeId}/routeresponses/{routeResponseId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3281,7 +3354,7 @@ func (s *SDK) GetRouteResponse(ctx context.Context, request operations.GetRouteR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3331,8 +3404,9 @@ func (s *SDK) GetRouteResponse(ctx context.Context, request operations.GetRouteR
 	return res, nil
 }
 
+// GetRouteResponses - Gets the RouteResponses for a Route.
 func (s *SDK) GetRouteResponses(ctx context.Context, request operations.GetRouteResponsesRequest) (*operations.GetRouteResponsesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/apis/{apiId}/routes/{routeId}/routeresponses", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3344,7 +3418,7 @@ func (s *SDK) GetRouteResponses(ctx context.Context, request operations.GetRoute
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3404,8 +3478,9 @@ func (s *SDK) GetRouteResponses(ctx context.Context, request operations.GetRoute
 	return res, nil
 }
 
+// GetRoutes - Gets the Routes for an API.
 func (s *SDK) GetRoutes(ctx context.Context, request operations.GetRoutesRequest) (*operations.GetRoutesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/apis/{apiId}/routes", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3417,7 +3492,7 @@ func (s *SDK) GetRoutes(ctx context.Context, request operations.GetRoutesRequest
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3477,8 +3552,9 @@ func (s *SDK) GetRoutes(ctx context.Context, request operations.GetRoutesRequest
 	return res, nil
 }
 
+// GetStage - Gets a Stage.
 func (s *SDK) GetStage(ctx context.Context, request operations.GetStageRequest) (*operations.GetStageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/apis/{apiId}/stages/{stageName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3488,7 +3564,7 @@ func (s *SDK) GetStage(ctx context.Context, request operations.GetStageRequest) 
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3538,8 +3614,9 @@ func (s *SDK) GetStage(ctx context.Context, request operations.GetStageRequest) 
 	return res, nil
 }
 
+// GetStages - Gets the Stages for an API.
 func (s *SDK) GetStages(ctx context.Context, request operations.GetStagesRequest) (*operations.GetStagesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/apis/{apiId}/stages", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3551,7 +3628,7 @@ func (s *SDK) GetStages(ctx context.Context, request operations.GetStagesRequest
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3611,8 +3688,9 @@ func (s *SDK) GetStages(ctx context.Context, request operations.GetStagesRequest
 	return res, nil
 }
 
+// GetTags - Gets a collection of Tag resources.
 func (s *SDK) GetTags(ctx context.Context, request operations.GetTagsRequest) (*operations.GetTagsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/tags/{resource-arn}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3622,7 +3700,7 @@ func (s *SDK) GetTags(ctx context.Context, request operations.GetTagsRequest) (*
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3692,8 +3770,9 @@ func (s *SDK) GetTags(ctx context.Context, request operations.GetTagsRequest) (*
 	return res, nil
 }
 
+// GetVpcLink - Gets a VPC link.
 func (s *SDK) GetVpcLink(ctx context.Context, request operations.GetVpcLinkRequest) (*operations.GetVpcLinkResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/vpclinks/{vpcLinkId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3703,7 +3782,7 @@ func (s *SDK) GetVpcLink(ctx context.Context, request operations.GetVpcLinkReque
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3753,8 +3832,9 @@ func (s *SDK) GetVpcLink(ctx context.Context, request operations.GetVpcLinkReque
 	return res, nil
 }
 
+// GetVpcLinks - Gets a collection of VPC links.
 func (s *SDK) GetVpcLinks(ctx context.Context, request operations.GetVpcLinksRequest) (*operations.GetVpcLinksResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v2/vpclinks"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3766,7 +3846,7 @@ func (s *SDK) GetVpcLinks(ctx context.Context, request operations.GetVpcLinksReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3816,8 +3896,9 @@ func (s *SDK) GetVpcLinks(ctx context.Context, request operations.GetVpcLinksReq
 	return res, nil
 }
 
+// ImportAPI - Imports an API.
 func (s *SDK) ImportAPI(ctx context.Context, request operations.ImportAPIRequest) (*operations.ImportAPIResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v2/apis"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3839,7 +3920,7 @@ func (s *SDK) ImportAPI(ctx context.Context, request operations.ImportAPIRequest
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3909,8 +3990,9 @@ func (s *SDK) ImportAPI(ctx context.Context, request operations.ImportAPIRequest
 	return res, nil
 }
 
+// ReimportAPI - Puts an Api resource.
 func (s *SDK) ReimportAPI(ctx context.Context, request operations.ReimportAPIRequest) (*operations.ReimportAPIResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/apis/{apiId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3932,7 +4014,7 @@ func (s *SDK) ReimportAPI(ctx context.Context, request operations.ReimportAPIReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4002,8 +4084,9 @@ func (s *SDK) ReimportAPI(ctx context.Context, request operations.ReimportAPIReq
 	return res, nil
 }
 
+// ResetAuthorizersCache - Resets all authorizer cache entries on a stage. Supported only for HTTP APIs.
 func (s *SDK) ResetAuthorizersCache(ctx context.Context, request operations.ResetAuthorizersCacheRequest) (*operations.ResetAuthorizersCacheResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/apis/{apiId}/stages/{stageName}/cache/authorizers", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -4013,7 +4096,7 @@ func (s *SDK) ResetAuthorizersCache(ctx context.Context, request operations.Rese
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4054,8 +4137,9 @@ func (s *SDK) ResetAuthorizersCache(ctx context.Context, request operations.Rese
 	return res, nil
 }
 
+// TagResource - Creates a new Tag resource to represent a tag.
 func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceRequest) (*operations.TagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/tags/{resource-arn}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4075,7 +4159,7 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4145,8 +4229,9 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 	return res, nil
 }
 
+// UntagResource - Deletes a Tag.
 func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourceRequest) (*operations.UntagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/tags/{resource-arn}#tagKeys", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -4158,7 +4243,7 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4219,8 +4304,9 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 	return res, nil
 }
 
+// UpdateAPI - Updates an Api resource.
 func (s *SDK) UpdateAPI(ctx context.Context, request operations.UpdateAPIRequest) (*operations.UpdateAPIResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/apis/{apiId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4240,7 +4326,7 @@ func (s *SDK) UpdateAPI(ctx context.Context, request operations.UpdateAPIRequest
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4310,8 +4396,9 @@ func (s *SDK) UpdateAPI(ctx context.Context, request operations.UpdateAPIRequest
 	return res, nil
 }
 
+// UpdateAPIMapping - The API mapping.
 func (s *SDK) UpdateAPIMapping(ctx context.Context, request operations.UpdateAPIMappingRequest) (*operations.UpdateAPIMappingResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/domainnames/{domainName}/apimappings/{apiMappingId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4331,7 +4418,7 @@ func (s *SDK) UpdateAPIMapping(ctx context.Context, request operations.UpdateAPI
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4401,8 +4488,9 @@ func (s *SDK) UpdateAPIMapping(ctx context.Context, request operations.UpdateAPI
 	return res, nil
 }
 
+// UpdateAuthorizer - Updates an Authorizer.
 func (s *SDK) UpdateAuthorizer(ctx context.Context, request operations.UpdateAuthorizerRequest) (*operations.UpdateAuthorizerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/apis/{apiId}/authorizers/{authorizerId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4422,7 +4510,7 @@ func (s *SDK) UpdateAuthorizer(ctx context.Context, request operations.UpdateAut
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4492,8 +4580,9 @@ func (s *SDK) UpdateAuthorizer(ctx context.Context, request operations.UpdateAut
 	return res, nil
 }
 
+// UpdateDeployment - Updates a Deployment.
 func (s *SDK) UpdateDeployment(ctx context.Context, request operations.UpdateDeploymentRequest) (*operations.UpdateDeploymentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/apis/{apiId}/deployments/{deploymentId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4513,7 +4602,7 @@ func (s *SDK) UpdateDeployment(ctx context.Context, request operations.UpdateDep
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4583,8 +4672,9 @@ func (s *SDK) UpdateDeployment(ctx context.Context, request operations.UpdateDep
 	return res, nil
 }
 
+// UpdateDomainName - Updates a domain name.
 func (s *SDK) UpdateDomainName(ctx context.Context, request operations.UpdateDomainNameRequest) (*operations.UpdateDomainNameResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/domainnames/{domainName}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4604,7 +4694,7 @@ func (s *SDK) UpdateDomainName(ctx context.Context, request operations.UpdateDom
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4674,8 +4764,9 @@ func (s *SDK) UpdateDomainName(ctx context.Context, request operations.UpdateDom
 	return res, nil
 }
 
+// UpdateIntegration - Updates an Integration.
 func (s *SDK) UpdateIntegration(ctx context.Context, request operations.UpdateIntegrationRequest) (*operations.UpdateIntegrationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/apis/{apiId}/integrations/{integrationId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4695,7 +4786,7 @@ func (s *SDK) UpdateIntegration(ctx context.Context, request operations.UpdateIn
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4765,8 +4856,9 @@ func (s *SDK) UpdateIntegration(ctx context.Context, request operations.UpdateIn
 	return res, nil
 }
 
+// UpdateIntegrationResponse - Updates an IntegrationResponses.
 func (s *SDK) UpdateIntegrationResponse(ctx context.Context, request operations.UpdateIntegrationResponseRequest) (*operations.UpdateIntegrationResponseResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/apis/{apiId}/integrations/{integrationId}/integrationresponses/{integrationResponseId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4786,7 +4878,7 @@ func (s *SDK) UpdateIntegrationResponse(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4856,8 +4948,9 @@ func (s *SDK) UpdateIntegrationResponse(ctx context.Context, request operations.
 	return res, nil
 }
 
+// UpdateModel - Updates a Model.
 func (s *SDK) UpdateModel(ctx context.Context, request operations.UpdateModelRequest) (*operations.UpdateModelResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/apis/{apiId}/models/{modelId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4877,7 +4970,7 @@ func (s *SDK) UpdateModel(ctx context.Context, request operations.UpdateModelReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4947,8 +5040,9 @@ func (s *SDK) UpdateModel(ctx context.Context, request operations.UpdateModelReq
 	return res, nil
 }
 
+// UpdateRoute - Updates a Route.
 func (s *SDK) UpdateRoute(ctx context.Context, request operations.UpdateRouteRequest) (*operations.UpdateRouteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/apis/{apiId}/routes/{routeId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4968,7 +5062,7 @@ func (s *SDK) UpdateRoute(ctx context.Context, request operations.UpdateRouteReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5038,8 +5132,9 @@ func (s *SDK) UpdateRoute(ctx context.Context, request operations.UpdateRouteReq
 	return res, nil
 }
 
+// UpdateRouteResponse - Updates a RouteResponse.
 func (s *SDK) UpdateRouteResponse(ctx context.Context, request operations.UpdateRouteResponseRequest) (*operations.UpdateRouteResponseResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/apis/{apiId}/routes/{routeId}/routeresponses/{routeResponseId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5059,7 +5154,7 @@ func (s *SDK) UpdateRouteResponse(ctx context.Context, request operations.Update
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5129,8 +5224,9 @@ func (s *SDK) UpdateRouteResponse(ctx context.Context, request operations.Update
 	return res, nil
 }
 
+// UpdateStage - Updates a Stage.
 func (s *SDK) UpdateStage(ctx context.Context, request operations.UpdateStageRequest) (*operations.UpdateStageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/apis/{apiId}/stages/{stageName}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5150,7 +5246,7 @@ func (s *SDK) UpdateStage(ctx context.Context, request operations.UpdateStageReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5220,8 +5316,9 @@ func (s *SDK) UpdateStage(ctx context.Context, request operations.UpdateStageReq
 	return res, nil
 }
 
+// UpdateVpcLink - Updates a VPC link.
 func (s *SDK) UpdateVpcLink(ctx context.Context, request operations.UpdateVpcLinkRequest) (*operations.UpdateVpcLinkResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v2/vpclinks/{vpcLinkId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5241,7 +5338,7 @@ func (s *SDK) UpdateVpcLink(ctx context.Context, request operations.UpdateVpcLin
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

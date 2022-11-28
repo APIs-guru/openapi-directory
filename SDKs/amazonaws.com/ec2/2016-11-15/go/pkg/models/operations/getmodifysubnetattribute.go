@@ -6,14 +6,20 @@ const (
 	GetModifySubnetAttributeActionEnumModifySubnetAttribute GetModifySubnetAttributeActionEnum = "ModifySubnetAttribute"
 )
 
+// GetModifySubnetAttributeAssignIpv6AddressOnCreation
+// Describes a value for a resource attribute that is a Boolean value.
 type GetModifySubnetAttributeAssignIpv6AddressOnCreation struct {
 	Value *bool `queryParam:"name=Value"`
 }
 
+// GetModifySubnetAttributeMapCustomerOwnedIPOnLaunch
+// Describes a value for a resource attribute that is a Boolean value.
 type GetModifySubnetAttributeMapCustomerOwnedIPOnLaunch struct {
 	Value *bool `queryParam:"name=Value"`
 }
 
+// GetModifySubnetAttributeMapPublicIPOnLaunch
+// Describes a value for a resource attribute that is a Boolean value.
 type GetModifySubnetAttributeMapPublicIPOnLaunch struct {
 	Value *bool `queryParam:"name=Value"`
 }

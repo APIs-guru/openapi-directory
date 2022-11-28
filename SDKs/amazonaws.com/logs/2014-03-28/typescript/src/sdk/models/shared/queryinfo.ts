@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { QueryStatusEnum } from "./querystatusenum";
+
 
 
 // QueryInfo
@@ -7,18 +8,18 @@ import { QueryStatusEnum } from "./querystatusenum";
  * Information about one CloudWatch Logs Insights query that matches the request in a <code>DescribeQueries</code> operation. 
 **/
 export class QueryInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: number;
 
-  @Metadata({ data: "json, name=logGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=logGroupName" })
   logGroupName?: string;
 
-  @Metadata({ data: "json, name=queryId" })
+  @SpeakeasyMetadata({ data: "json, name=queryId" })
   queryId?: string;
 
-  @Metadata({ data: "json, name=queryString" })
+  @SpeakeasyMetadata({ data: "json, name=queryString" })
   queryString?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: QueryStatusEnum;
 }

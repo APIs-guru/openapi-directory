@@ -28,11 +28,6 @@ type RatcrSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type RatcrRequest struct {
-	Request  *RatcrRequestBody `request:"mediaType=application/json"`
-	Security RatcrSecurity
-}
-
 type Ratcr400ApplicationJSONErrorEnum string
 
 const (
@@ -162,6 +157,11 @@ const (
 type Ratcr504ApplicationJSON struct {
 	Error            *Ratcr504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Ratcr504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type RatcrRequest struct {
+	Request  *RatcrRequestBody `request:"mediaType=application/json"`
+	Security RatcrSecurity
 }
 
 type RatcrResponse struct {

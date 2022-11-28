@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteRankExpressionActionEnum(str, Enum):
     DELETE_RANK_EXPRESSION = "DeleteRankExpression"
@@ -10,10 +14,10 @@ class GetDeleteRankExpressionVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteRankExpressionQueryParams:
-    action: GetDeleteRankExpressionActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    domain_name: str = field(default=None, metadata={'query_param': { 'field_name': 'DomainName', 'style': 'form', 'explode': True }})
-    rank_name: str = field(default=None, metadata={'query_param': { 'field_name': 'RankName', 'style': 'form', 'explode': True }})
-    version: GetDeleteRankExpressionVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetDeleteRankExpressionActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    domain_name: str = field(metadata={'query_param': { 'field_name': 'DomainName', 'style': 'form', 'explode': True }})
+    rank_name: str = field(metadata={'query_param': { 'field_name': 'RankName', 'style': 'form', 'explode': True }})
+    version: GetDeleteRankExpressionVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetDeleteRankExpressionHeaders:
 
 @dataclass
 class GetDeleteRankExpressionRequest:
-    query_params: GetDeleteRankExpressionQueryParams = field(default=None)
-    headers: GetDeleteRankExpressionHeaders = field(default=None)
+    headers: GetDeleteRankExpressionHeaders = field()
+    query_params: GetDeleteRankExpressionQueryParams = field()
     
 
 @dataclass
 class GetDeleteRankExpressionResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

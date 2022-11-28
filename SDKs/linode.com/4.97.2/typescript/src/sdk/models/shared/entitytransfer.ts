@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // EntityTransferEntities
@@ -7,17 +8,17 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * 
 **/
 export class EntityTransferEntities extends SpeakeasyBase {
-  @Metadata({ data: "json, name=linodes" })
+  @SpeakeasyMetadata({ data: "json, name=linodes" })
   linodes?: number[];
 }
 
 export enum EntityTransferStatusEnum {
-    Accepted = "accepted"
-,    Cancelled = "cancelled"
-,    Completed = "completed"
-,    Failed = "failed"
-,    Pending = "pending"
-,    Stale = "stale"
+    Accepted = "accepted",
+    Cancelled = "cancelled",
+    Completed = "completed",
+    Failed = "failed",
+    Pending = "pending",
+    Stale = "stale"
 }
 
 
@@ -27,24 +28,24 @@ export enum EntityTransferStatusEnum {
  * 
 **/
 export class EntityTransfer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=entities" })
+  @SpeakeasyMetadata({ data: "json, name=entities" })
   entities?: EntityTransferEntities;
 
-  @Metadata({ data: "json, name=expiry" })
+  @SpeakeasyMetadata({ data: "json, name=expiry" })
   expiry?: Date;
 
-  @Metadata({ data: "json, name=is_sender" })
+  @SpeakeasyMetadata({ data: "json, name=is_sender" })
   isSender?: boolean;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: EntityTransferStatusEnum;
 
-  @Metadata({ data: "json, name=token" })
+  @SpeakeasyMetadata({ data: "json, name=token" })
   token?: string;
 
-  @Metadata({ data: "json, name=updated" })
+  @SpeakeasyMetadata({ data: "json, name=updated" })
   updated?: Date;
 }

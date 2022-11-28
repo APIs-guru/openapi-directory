@@ -11,14 +11,14 @@ class PostGpxQueryParams:
 
 @dataclass
 class PostGpxRequest:
-    query_params: PostGpxQueryParams = field(default=None)
+    query_params: PostGpxQueryParams = field()
     
 
 @dataclass
 class PostGpxResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     gh_error: Optional[shared.GhError] = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
     route_response: Optional[shared.RouteResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,7 @@
 package shared
 
+// AthenaDatasetDefinition
+// Configuration for Athena Dataset Definition input.
 type AthenaDatasetDefinition struct {
 	Catalog           string                           `json:"Catalog"`
 	Database          string                           `json:"Database"`

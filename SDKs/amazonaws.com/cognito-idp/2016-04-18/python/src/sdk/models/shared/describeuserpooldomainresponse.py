@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import domaindescriptiontype
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeUserPoolDomainResponse:
-    domain_description: Optional[domaindescriptiontype.DomainDescriptionType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DomainDescription' }})
+    domain_description: Optional[DomainDescriptionType] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DomainDescription') }})
     

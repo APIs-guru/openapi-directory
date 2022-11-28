@@ -1,7 +1,8 @@
 
 
+
 export enum ConfirmationStateEnum {
-    Confirmed = "Confirmed"
-,    Denied = "Denied"
-,    None = "None"
+    Confirmed = "Confirmed",
+    Denied = "Denied",
+    None = "None"
 }

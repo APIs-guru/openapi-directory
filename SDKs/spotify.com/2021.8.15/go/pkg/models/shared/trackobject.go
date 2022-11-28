@@ -1,5 +1,8 @@
 package shared
 
+// TrackObject
+
+// https://developer.spotify.com/documentation/web-api/reference/#object-trackobject - Find more info on the official Spotify Web API Reference
 type TrackObject struct {
 	Album            *SimplifiedAlbumObject  `json:"album,omitempty"`
 	Artists          []ArtistObject          `json:"artists,omitempty"`

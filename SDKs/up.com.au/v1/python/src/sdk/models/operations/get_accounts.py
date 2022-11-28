@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from sdk.models import shared
 
 
@@ -10,12 +10,12 @@ class GetAccountsQueryParams:
 
 @dataclass
 class GetAccountsRequest:
-    query_params: GetAccountsQueryParams = field(default=None)
+    query_params: GetAccountsQueryParams = field()
     
 
 @dataclass
 class GetAccountsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_accounts_response: Optional[shared.ListAccountsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

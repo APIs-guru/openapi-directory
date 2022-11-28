@@ -1,5 +1,7 @@
 package shared
 
+// BandedRange
+// A banded (alternating colors) range in a sheet.
 type BandedRange struct {
 	BandedRangeID    *int32             `json:"bandedRangeId,omitempty"`
 	ColumnProperties *BandingProperties `json:"columnProperties,omitempty"`

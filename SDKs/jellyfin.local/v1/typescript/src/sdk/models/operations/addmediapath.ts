@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class AddMediaPathQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=refreshLibrary" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=refreshLibrary" })
   refreshLibrary?: boolean;
 }
 
 
 export class AddMediaPathRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
   mediaPathDto?: shared.MediaPathDto;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   mediaPathDto1?: shared.MediaPathDto;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   mediaPathDto2?: shared.MediaPathDto;
 }
 
 
 export class AddMediaPathSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   customAuthentication: shared.SchemeCustomAuthentication;
 }
 
 
 export class AddMediaPathRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: AddMediaPathQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request: AddMediaPathRequests;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: AddMediaPathSecurity;
 }
 
 
 export class AddMediaPathResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -22,23 +22,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Beleg } from "./beleg";
 var BelegeBelegeGruppe = /** @class */ (function (_super) {
     __extends(BelegeBelegeGruppe, _super);
     function BelegeBelegeGruppe() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Belege-kompakt" }),
+        SpeakeasyMetadata({ data: "json, name=Belege-kompakt" }),
         __metadata("design:type", Array)
     ], BelegeBelegeGruppe.prototype, "belegeKompakt", void 0);
     __decorate([
-        Metadata({ data: "json, name=Signaturzertifikat" }),
+        SpeakeasyMetadata({ data: "json, name=Signaturzertifikat" }),
         __metadata("design:type", String)
     ], BelegeBelegeGruppe.prototype, "signaturzertifikat", void 0);
     __decorate([
-        Metadata({ data: "json, name=Zertifizierungsstellen" }),
+        SpeakeasyMetadata({ data: "json, name=Zertifizierungsstellen" }),
         __metadata("design:type", Array)
     ], BelegeBelegeGruppe.prototype, "zertifizierungsstellen", void 0);
     return BelegeBelegeGruppe;
@@ -50,11 +50,11 @@ var Belege = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Belege", elemType: shared.Beleg }),
+        SpeakeasyMetadata({ data: "json, name=Belege", elemType: Beleg }),
         __metadata("design:type", Array)
     ], Belege.prototype, "belege", void 0);
     __decorate([
-        Metadata({ data: "json, name=Belege-Gruppe", elemType: shared.BelegeBelegeGruppe }),
+        SpeakeasyMetadata({ data: "json, name=Belege-Gruppe", elemType: BelegeBelegeGruppe }),
         __metadata("design:type", Array)
     ], Belege.prototype, "belegeGruppe", void 0);
     return Belege;

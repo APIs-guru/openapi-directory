@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationAuthorizationConfigDetails
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * <p/>
 **/
 export class AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationAuthorizationConfigDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccessPointId" })
+  @SpeakeasyMetadata({ data: "json, name=AccessPointId" })
   accessPointId?: string;
 
-  @Metadata({ data: "json, name=Iam" })
+  @SpeakeasyMetadata({ data: "json, name=Iam" })
   iam?: string;
 }

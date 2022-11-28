@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleSecuritySafebrowsingV4RawIndices
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A set of raw indices to remove from a local list.
 **/
 export class GoogleSecuritySafebrowsingV4RawIndices extends SpeakeasyBase {
-  @Metadata({ data: "json, name=indices" })
+  @SpeakeasyMetadata({ data: "json, name=indices" })
   indices?: number[];
 }

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostRequestSpotInstancesActionEnum(str, Enum):
     REQUEST_SPOT_INSTANCES = "RequestSpotInstances"
@@ -10,8 +14,8 @@ class PostRequestSpotInstancesVersionEnum(str, Enum):
 
 @dataclass
 class PostRequestSpotInstancesQueryParams:
-    action: PostRequestSpotInstancesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostRequestSpotInstancesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostRequestSpotInstancesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostRequestSpotInstancesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostRequestSpotInstancesHeaders:
 
 @dataclass
 class PostRequestSpotInstancesRequest:
-    query_params: PostRequestSpotInstancesQueryParams = field(default=None)
-    headers: PostRequestSpotInstancesHeaders = field(default=None)
+    headers: PostRequestSpotInstancesHeaders = field()
+    query_params: PostRequestSpotInstancesQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostRequestSpotInstancesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

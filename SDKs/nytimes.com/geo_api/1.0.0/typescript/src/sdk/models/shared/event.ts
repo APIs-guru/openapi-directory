@@ -1,61 +1,62 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Event extends SpeakeasyBase {
-  @Metadata({ data: "json, name=city" })
+  @SpeakeasyMetadata({ data: "json, name=city" })
   city?: string;
 
-  @Metadata({ data: "json, name=critic_name" })
+  @SpeakeasyMetadata({ data: "json, name=critic_name" })
   criticName?: string;
 
-  @Metadata({ data: "json, name=event_detail_url" })
+  @SpeakeasyMetadata({ data: "json, name=event_detail_url" })
   eventDetailUrl?: string;
 
-  @Metadata({ data: "json, name=event_id" })
+  @SpeakeasyMetadata({ data: "json, name=event_id" })
   eventId?: number;
 
-  @Metadata({ data: "json, name=event_name" })
+  @SpeakeasyMetadata({ data: "json, name=event_name" })
   eventName?: string;
 
-  @Metadata({ data: "json, name=event_schedule_id" })
+  @SpeakeasyMetadata({ data: "json, name=event_schedule_id" })
   eventScheduleId?: number;
 
-  @Metadata({ data: "json, name=festival" })
+  @SpeakeasyMetadata({ data: "json, name=festival" })
   festival?: boolean;
 
-  @Metadata({ data: "json, name=film_rating" })
+  @SpeakeasyMetadata({ data: "json, name=film_rating" })
   filmRating?: boolean;
 
-  @Metadata({ data: "json, name=free" })
+  @SpeakeasyMetadata({ data: "json, name=free" })
   free?: boolean;
 
-  @Metadata({ data: "json, name=kid_friendly" })
+  @SpeakeasyMetadata({ data: "json, name=kid_friendly" })
   kidFriendly?: boolean;
 
-  @Metadata({ data: "json, name=last_chance" })
+  @SpeakeasyMetadata({ data: "json, name=last_chance" })
   lastChance?: boolean;
 
-  @Metadata({ data: "json, name=last_modified" })
+  @SpeakeasyMetadata({ data: "json, name=last_modified" })
   lastModified?: string;
 
-  @Metadata({ data: "json, name=long_running_show" })
+  @SpeakeasyMetadata({ data: "json, name=long_running_show" })
   longRunningShow?: boolean;
 
-  @Metadata({ data: "json, name=previews_and_openings" })
+  @SpeakeasyMetadata({ data: "json, name=previews_and_openings" })
   previewsAndOpenings?: boolean;
 
-  @Metadata({ data: "json, name=recur_days" })
+  @SpeakeasyMetadata({ data: "json, name=recur_days" })
   recurDays?: string[];
 
-  @Metadata({ data: "json, name=recurring_start_date" })
+  @SpeakeasyMetadata({ data: "json, name=recurring_start_date" })
   recurringStartDate?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: string;
 
-  @Metadata({ data: "json, name=times_pick" })
+  @SpeakeasyMetadata({ data: "json, name=times_pick" })
   timesPick?: boolean;
 
-  @Metadata({ data: "json, name=web_description" })
+  @SpeakeasyMetadata({ data: "json, name=web_description" })
   webDescription?: string;
 }

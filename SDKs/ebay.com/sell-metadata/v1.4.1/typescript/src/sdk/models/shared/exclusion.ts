@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Exclusion
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * This type returns a list of properties (and their associated values) that are excluded from requiring an ePID value (from the eBay Catalog) for items that are listed in the associated category.
 **/
 export class Exclusion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=brands" })
+  @SpeakeasyMetadata({ data: "json, name=brands" })
   brands?: string[];
 }

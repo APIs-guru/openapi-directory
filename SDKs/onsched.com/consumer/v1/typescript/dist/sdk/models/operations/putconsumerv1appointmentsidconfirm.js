@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PutConsumerV1AppointmentsIdConfirmPathParams = /** @class */ (function (_super) {
     __extends(PutConsumerV1AppointmentsIdConfirmPathParams, _super);
     function PutConsumerV1AppointmentsIdConfirmPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", Number)
     ], PutConsumerV1AppointmentsIdConfirmPathParams.prototype, "id", void 0);
     return PutConsumerV1AppointmentsIdConfirmPathParams;
@@ -41,7 +41,7 @@ var PutConsumerV1AppointmentsIdConfirmQueryParams = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=undo" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=undo" }),
         __metadata("design:type", Boolean)
     ], PutConsumerV1AppointmentsIdConfirmQueryParams.prototype, "undo", void 0);
     return PutConsumerV1AppointmentsIdConfirmQueryParams;
@@ -53,11 +53,11 @@ var PutConsumerV1AppointmentsIdConfirmRequest = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PutConsumerV1AppointmentsIdConfirmPathParams)
     ], PutConsumerV1AppointmentsIdConfirmRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PutConsumerV1AppointmentsIdConfirmQueryParams)
     ], PutConsumerV1AppointmentsIdConfirmRequest.prototype, "queryParams", void 0);
     return PutConsumerV1AppointmentsIdConfirmRequest;
@@ -69,11 +69,11 @@ var PutConsumerV1AppointmentsIdConfirmResponse = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PutConsumerV1AppointmentsIdConfirmResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PutConsumerV1AppointmentsIdConfirmResponse.prototype, "statusCode", void 0);
     return PutConsumerV1AppointmentsIdConfirmResponse;

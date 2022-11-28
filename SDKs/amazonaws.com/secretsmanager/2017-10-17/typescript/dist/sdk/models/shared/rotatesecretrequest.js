@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RotationRulesType } from "./rotationrulestype";
 var RotateSecretRequest = /** @class */ (function (_super) {
     __extends(RotateSecretRequest, _super);
@@ -30,19 +30,19 @@ var RotateSecretRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ClientRequestToken" }),
+        SpeakeasyMetadata({ data: "json, name=ClientRequestToken" }),
         __metadata("design:type", String)
     ], RotateSecretRequest.prototype, "clientRequestToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=RotationLambdaARN" }),
+        SpeakeasyMetadata({ data: "json, name=RotationLambdaARN" }),
         __metadata("design:type", String)
     ], RotateSecretRequest.prototype, "rotationLambdaArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=RotationRules" }),
+        SpeakeasyMetadata({ data: "json, name=RotationRules" }),
         __metadata("design:type", RotationRulesType)
     ], RotateSecretRequest.prototype, "rotationRules", void 0);
     __decorate([
-        Metadata({ data: "json, name=SecretId" }),
+        SpeakeasyMetadata({ data: "json, name=SecretId" }),
         __metadata("design:type", String)
     ], RotateSecretRequest.prototype, "secretId", void 0);
     return RotateSecretRequest;

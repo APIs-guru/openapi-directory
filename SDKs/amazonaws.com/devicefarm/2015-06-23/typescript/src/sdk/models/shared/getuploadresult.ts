@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Upload } from "./upload";
+
 
 
 // GetUploadResult
@@ -7,6 +8,6 @@ import { Upload } from "./upload";
  * Represents the result of a get upload request.
 **/
 export class GetUploadResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=upload" })
+  @SpeakeasyMetadata({ data: "json, name=upload" })
   upload?: Upload;
 }

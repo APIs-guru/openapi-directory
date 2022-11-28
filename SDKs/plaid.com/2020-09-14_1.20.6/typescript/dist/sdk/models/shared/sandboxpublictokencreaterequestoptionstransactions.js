@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // SandboxPublicTokenCreateRequestOptionsTransactions
 /**
  * SandboxPublicTokenCreateRequestOptionsTransactions is an optional set of parameters corresponding to transactions options.
@@ -33,11 +33,11 @@ var SandboxPublicTokenCreateRequestOptionsTransactions = /** @class */ (function
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=end_date" }),
+        SpeakeasyMetadata({ data: "json, name=end_date" }),
         __metadata("design:type", Date)
     ], SandboxPublicTokenCreateRequestOptionsTransactions.prototype, "endDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=start_date" }),
+        SpeakeasyMetadata({ data: "json, name=start_date" }),
         __metadata("design:type", Date)
     ], SandboxPublicTokenCreateRequestOptionsTransactions.prototype, "startDate", void 0);
     return SandboxPublicTokenCreateRequestOptionsTransactions;

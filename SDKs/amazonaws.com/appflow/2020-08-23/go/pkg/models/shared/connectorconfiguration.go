@@ -1,5 +1,8 @@
 package shared
 
+// ConnectorConfiguration
+//
+//	The configuration settings related to a given connector.
 type ConnectorConfiguration struct {
 	CanUseAsDestination              *bool                       `json:"canUseAsDestination,omitempty"`
 	CanUseAsSource                   *bool                       `json:"canUseAsSource,omitempty"`

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleFirebaseAppcheckV1betaExchangeDebugTokenRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request message for the ExchangeDebugToken method.
 **/
 export class GoogleFirebaseAppcheckV1betaExchangeDebugTokenRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=debugToken" })
+  @SpeakeasyMetadata({ data: "json, name=debugToken" })
   debugToken?: string;
 }

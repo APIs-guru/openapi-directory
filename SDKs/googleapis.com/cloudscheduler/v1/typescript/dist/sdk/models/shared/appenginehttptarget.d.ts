@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AppEngineRouting } from "./appenginerouting";
 export declare enum AppEngineHttpTargetHttpMethodEnum {
     HttpMethodUnspecified = "HTTP_METHOD_UNSPECIFIED",

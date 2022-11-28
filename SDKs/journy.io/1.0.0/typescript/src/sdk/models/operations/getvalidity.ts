@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GetValidity200ApplicationJsonData
@@ -6,123 +7,123 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Validation of API Key
 **/
 export class GetValidity200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=permissions" })
+  @SpeakeasyMetadata({ data: "json, name=permissions" })
   permissions: string[];
 }
 
 
 export class GetValidity200ApplicationJsonMeta extends SpeakeasyBase {
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: number;
 }
 
 
 export class GetValidity200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: GetValidity200ApplicationJsonData;
 
-  @Metadata({ data: "json, name=meta" })
+  @SpeakeasyMetadata({ data: "json, name=meta" })
   meta: GetValidity200ApplicationJsonMeta;
 }
 
 
 export class GetValidity401ApplicationJsonMeta extends SpeakeasyBase {
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: number;
 }
 
 
 export class GetValidity401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 
-  @Metadata({ data: "json, name=meta" })
+  @SpeakeasyMetadata({ data: "json, name=meta" })
   meta: GetValidity401ApplicationJsonMeta;
 }
 
 
 export class GetValidity403ApplicationJsonMeta extends SpeakeasyBase {
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: number;
 }
 
 
 export class GetValidity403ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 
-  @Metadata({ data: "json, name=meta" })
+  @SpeakeasyMetadata({ data: "json, name=meta" })
   meta: GetValidity403ApplicationJsonMeta;
 }
 
 
 export class GetValidity429ApplicationJsonMeta extends SpeakeasyBase {
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: number;
 }
 
 
 export class GetValidity429ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 
-  @Metadata({ data: "json, name=meta" })
+  @SpeakeasyMetadata({ data: "json, name=meta" })
   meta: GetValidity429ApplicationJsonMeta;
 }
 
 
 export class GetValidity500ApplicationJsonMeta extends SpeakeasyBase {
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: number;
 }
 
 
 export class GetValidity500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 
-  @Metadata({ data: "json, name=meta" })
+  @SpeakeasyMetadata({ data: "json, name=meta" })
   meta: GetValidity500ApplicationJsonMeta;
 }
 
 
 export class GetValidityResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getValidity200ApplicationJsonObject?: GetValidity200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getValidity401ApplicationJsonObject?: GetValidity401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getValidity403ApplicationJsonObject?: GetValidity403ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getValidity429ApplicationJsonObject?: GetValidity429ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getValidity500ApplicationJsonObject?: GetValidity500ApplicationJson;
 }

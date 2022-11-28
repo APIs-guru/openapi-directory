@@ -15,11 +15,6 @@ type GetEditorURLQueryParams struct {
 	TemplateID int64                     `queryParam:"style=form,explode=true,name=templateId"`
 }
 
-type GetEditorURLRequest struct {
-	QueryParams GetEditorURLQueryParams
-	Request     map[string]interface{} `request:"mediaType=application/json"`
-}
-
 type GetEditorURL200ApplicationJSON struct {
 	Response *string `json:"response,omitempty"`
 }
@@ -85,6 +80,11 @@ type GetEditorURL422ApplicationJSON struct {
 type GetEditorURL500ApplicationJSON struct {
 	Error  *string `json:"error,omitempty"`
 	Status *int64  `json:"status,omitempty"`
+}
+
+type GetEditorURLRequest struct {
+	QueryParams GetEditorURLQueryParams
+	Request     map[string]interface{} `request:"mediaType=application/json"`
 }
 
 type GetEditorURLResponse struct {

@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DescribeDocumentClassifierRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DocumentClassifierArn" })
+  @SpeakeasyMetadata({ data: "json, name=DocumentClassifierArn" })
   documentClassifierArn: string;
 }

@@ -18,6 +18,8 @@ type CreateAliasHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateAliasRequestBodyRoutingConfig
+// The <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html">traffic-shifting</a> configuration of a Lambda function alias.
 type CreateAliasRequestBodyRoutingConfig struct {
 	AdditionalVersionWeights map[string]float64 `json:"AdditionalVersionWeights,omitempty"`
 }

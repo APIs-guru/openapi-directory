@@ -1,48 +1,49 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleCloudVisionV1p2beta1SafeSearchAnnotationAdultEnum {
-    Unknown = "UNKNOWN"
-,    VeryUnlikely = "VERY_UNLIKELY"
-,    Unlikely = "UNLIKELY"
-,    Possible = "POSSIBLE"
-,    Likely = "LIKELY"
-,    VeryLikely = "VERY_LIKELY"
+    Unknown = "UNKNOWN",
+    VeryUnlikely = "VERY_UNLIKELY",
+    Unlikely = "UNLIKELY",
+    Possible = "POSSIBLE",
+    Likely = "LIKELY",
+    VeryLikely = "VERY_LIKELY"
 }
 
 export enum GoogleCloudVisionV1p2beta1SafeSearchAnnotationMedicalEnum {
-    Unknown = "UNKNOWN"
-,    VeryUnlikely = "VERY_UNLIKELY"
-,    Unlikely = "UNLIKELY"
-,    Possible = "POSSIBLE"
-,    Likely = "LIKELY"
-,    VeryLikely = "VERY_LIKELY"
+    Unknown = "UNKNOWN",
+    VeryUnlikely = "VERY_UNLIKELY",
+    Unlikely = "UNLIKELY",
+    Possible = "POSSIBLE",
+    Likely = "LIKELY",
+    VeryLikely = "VERY_LIKELY"
 }
 
 export enum GoogleCloudVisionV1p2beta1SafeSearchAnnotationRacyEnum {
-    Unknown = "UNKNOWN"
-,    VeryUnlikely = "VERY_UNLIKELY"
-,    Unlikely = "UNLIKELY"
-,    Possible = "POSSIBLE"
-,    Likely = "LIKELY"
-,    VeryLikely = "VERY_LIKELY"
+    Unknown = "UNKNOWN",
+    VeryUnlikely = "VERY_UNLIKELY",
+    Unlikely = "UNLIKELY",
+    Possible = "POSSIBLE",
+    Likely = "LIKELY",
+    VeryLikely = "VERY_LIKELY"
 }
 
 export enum GoogleCloudVisionV1p2beta1SafeSearchAnnotationSpoofEnum {
-    Unknown = "UNKNOWN"
-,    VeryUnlikely = "VERY_UNLIKELY"
-,    Unlikely = "UNLIKELY"
-,    Possible = "POSSIBLE"
-,    Likely = "LIKELY"
-,    VeryLikely = "VERY_LIKELY"
+    Unknown = "UNKNOWN",
+    VeryUnlikely = "VERY_UNLIKELY",
+    Unlikely = "UNLIKELY",
+    Possible = "POSSIBLE",
+    Likely = "LIKELY",
+    VeryLikely = "VERY_LIKELY"
 }
 
 export enum GoogleCloudVisionV1p2beta1SafeSearchAnnotationViolenceEnum {
-    Unknown = "UNKNOWN"
-,    VeryUnlikely = "VERY_UNLIKELY"
-,    Unlikely = "UNLIKELY"
-,    Possible = "POSSIBLE"
-,    Likely = "LIKELY"
-,    VeryLikely = "VERY_LIKELY"
+    Unknown = "UNKNOWN",
+    VeryUnlikely = "VERY_UNLIKELY",
+    Unlikely = "UNLIKELY",
+    Possible = "POSSIBLE",
+    Likely = "LIKELY",
+    VeryLikely = "VERY_LIKELY"
 }
 
 
@@ -51,18 +52,18 @@ export enum GoogleCloudVisionV1p2beta1SafeSearchAnnotationViolenceEnum {
  * Set of features pertaining to the image, computed by computer vision methods over safe-search verticals (for example, adult, spoof, medical, violence).
 **/
 export class GoogleCloudVisionV1p2beta1SafeSearchAnnotation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=adult" })
+  @SpeakeasyMetadata({ data: "json, name=adult" })
   adult?: GoogleCloudVisionV1p2beta1SafeSearchAnnotationAdultEnum;
 
-  @Metadata({ data: "json, name=medical" })
+  @SpeakeasyMetadata({ data: "json, name=medical" })
   medical?: GoogleCloudVisionV1p2beta1SafeSearchAnnotationMedicalEnum;
 
-  @Metadata({ data: "json, name=racy" })
+  @SpeakeasyMetadata({ data: "json, name=racy" })
   racy?: GoogleCloudVisionV1p2beta1SafeSearchAnnotationRacyEnum;
 
-  @Metadata({ data: "json, name=spoof" })
+  @SpeakeasyMetadata({ data: "json, name=spoof" })
   spoof?: GoogleCloudVisionV1p2beta1SafeSearchAnnotationSpoofEnum;
 
-  @Metadata({ data: "json, name=violence" })
+  @SpeakeasyMetadata({ data: "json, name=violence" })
   violence?: GoogleCloudVisionV1p2beta1SafeSearchAnnotationViolenceEnum;
 }

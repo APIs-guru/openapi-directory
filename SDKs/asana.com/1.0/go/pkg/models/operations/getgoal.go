@@ -13,13 +13,13 @@ type GetGoalQueryParams struct {
 	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
+type GetGoal200ApplicationJSON struct {
+	Data *shared.GoalResponse `json:"data,omitempty"`
+}
+
 type GetGoalRequest struct {
 	PathParams  GetGoalPathParams
 	QueryParams GetGoalQueryParams
-}
-
-type GetGoal200ApplicationJSON struct {
-	Data *shared.GoalResponse `json:"data,omitempty"`
 }
 
 type GetGoalResponse struct {

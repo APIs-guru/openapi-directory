@@ -1,5 +1,7 @@
 package shared
 
+// SessionEntity
+// Create user session (log in)
 type SessionEntity struct {
 	Allowed2faMethodSms   *bool   `json:"allowed_2fa_method_sms,omitempty"`
 	Allowed2faMethodTotp  *bool   `json:"allowed_2fa_method_totp,omitempty"`

@@ -1,24 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ParameterStringFilter } from "./parameterstringfilter";
 
 
+
 export class GetParametersByPathRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=ParameterFilters", elemType: shared.ParameterStringFilter })
+  @SpeakeasyMetadata({ data: "json, name=ParameterFilters", elemType: ParameterStringFilter })
   parameterFilters?: ParameterStringFilter[];
 
-  @Metadata({ data: "json, name=Path" })
+  @SpeakeasyMetadata({ data: "json, name=Path" })
   path: string;
 
-  @Metadata({ data: "json, name=Recursive" })
+  @SpeakeasyMetadata({ data: "json, name=Recursive" })
   recursive?: boolean;
 
-  @Metadata({ data: "json, name=WithDecryption" })
+  @SpeakeasyMetadata({ data: "json, name=WithDecryption" })
   withDecryption?: boolean;
 }

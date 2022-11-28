@@ -1,52 +1,53 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EncodingContextEnum } from "./encodingcontextenum";
 import { TranscodeSeekInfoEnum } from "./transcodeseekinfoenum";
 import { DlnaProfileTypeEnum } from "./dlnaprofiletypeenum";
 
 
+
 export class TranscodingProfile extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AudioCodec" })
+  @SpeakeasyMetadata({ data: "json, name=AudioCodec" })
   audioCodec?: string;
 
-  @Metadata({ data: "json, name=BreakOnNonKeyFrames" })
+  @SpeakeasyMetadata({ data: "json, name=BreakOnNonKeyFrames" })
   breakOnNonKeyFrames?: boolean;
 
-  @Metadata({ data: "json, name=Container" })
+  @SpeakeasyMetadata({ data: "json, name=Container" })
   container?: string;
 
-  @Metadata({ data: "json, name=Context" })
+  @SpeakeasyMetadata({ data: "json, name=Context" })
   context?: EncodingContextEnum;
 
-  @Metadata({ data: "json, name=CopyTimestamps" })
+  @SpeakeasyMetadata({ data: "json, name=CopyTimestamps" })
   copyTimestamps?: boolean;
 
-  @Metadata({ data: "json, name=EnableMpegtsM2TsMode" })
+  @SpeakeasyMetadata({ data: "json, name=EnableMpegtsM2TsMode" })
   enableMpegtsM2TsMode?: boolean;
 
-  @Metadata({ data: "json, name=EnableSubtitlesInManifest" })
+  @SpeakeasyMetadata({ data: "json, name=EnableSubtitlesInManifest" })
   enableSubtitlesInManifest?: boolean;
 
-  @Metadata({ data: "json, name=EstimateContentLength" })
+  @SpeakeasyMetadata({ data: "json, name=EstimateContentLength" })
   estimateContentLength?: boolean;
 
-  @Metadata({ data: "json, name=MaxAudioChannels" })
+  @SpeakeasyMetadata({ data: "json, name=MaxAudioChannels" })
   maxAudioChannels?: string;
 
-  @Metadata({ data: "json, name=MinSegments" })
+  @SpeakeasyMetadata({ data: "json, name=MinSegments" })
   minSegments?: number;
 
-  @Metadata({ data: "json, name=Protocol" })
+  @SpeakeasyMetadata({ data: "json, name=Protocol" })
   protocol?: string;
 
-  @Metadata({ data: "json, name=SegmentLength" })
+  @SpeakeasyMetadata({ data: "json, name=SegmentLength" })
   segmentLength?: number;
 
-  @Metadata({ data: "json, name=TranscodeSeekInfo" })
+  @SpeakeasyMetadata({ data: "json, name=TranscodeSeekInfo" })
   transcodeSeekInfo?: TranscodeSeekInfoEnum;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: DlnaProfileTypeEnum;
 
-  @Metadata({ data: "json, name=VideoCodec" })
+  @SpeakeasyMetadata({ data: "json, name=VideoCodec" })
   videoCodec?: string;
 }

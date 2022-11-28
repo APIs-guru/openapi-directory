@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class GlobalLiveStatsSecurity:
-    otoroshi_auth: shared.SchemeOtoroshiAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    otoroshi_auth: shared.SchemeOtoroshiAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
     
 
 @dataclass
 class GlobalLiveStatsRequest:
-    security: GlobalLiveStatsSecurity = field(default=None)
+    security: GlobalLiveStatsSecurity = field()
     
 
 @dataclass
 class GlobalLiveStatsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     stats: Optional[shared.Stats] = field(default=None)
-    status_code: int = field(default=None)
     

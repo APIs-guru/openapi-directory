@@ -5,23 +5,23 @@ from sdk.models import shared
 
 @dataclass
 class GetAgentPathParams:
-    agent_id: str = field(default=None, metadata={'path_param': { 'field_name': 'agent_id', 'style': 'simple', 'explode': False }})
+    agent_id: str = field(metadata={'path_param': { 'field_name': 'agent_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetAgentSecurity:
-    bearer_auth: shared.SchemeBearerAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_auth: shared.SchemeBearerAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class GetAgentRequest:
-    path_params: GetAgentPathParams = field(default=None)
-    security: GetAgentSecurity = field(default=None)
+    path_params: GetAgentPathParams = field()
+    security: GetAgentSecurity = field()
     
 
 @dataclass
 class GetAgentResponse:
+    content_type: str = field()
+    status_code: int = field()
     agent: Optional[shared.Agent] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

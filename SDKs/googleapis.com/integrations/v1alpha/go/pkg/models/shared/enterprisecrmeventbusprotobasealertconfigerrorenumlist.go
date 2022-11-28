@@ -7,6 +7,8 @@ const (
 	EnterpriseCrmEventbusProtoBaseAlertConfigErrorEnumListFilterTypeEnumExclusive        EnterpriseCrmEventbusProtoBaseAlertConfigErrorEnumListFilterTypeEnum = "EXCLUSIVE"
 )
 
+// EnterpriseCrmEventbusProtoBaseAlertConfigErrorEnumList
+// List of error enums for alerts.
 type EnterpriseCrmEventbusProtoBaseAlertConfigErrorEnumList struct {
 	EnumStrings []string                                                              `json:"enumStrings,omitempty"`
 	FilterType  *EnterpriseCrmEventbusProtoBaseAlertConfigErrorEnumListFilterTypeEnum `json:"filterType,omitempty"`

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetModifyVpcAttributeActionEnum(str, Enum):
     MODIFY_VPC_ATTRIBUTE = "ModifyVpcAttribute"
@@ -7,11 +11,19 @@ class GetModifyVpcAttributeActionEnum(str, Enum):
 
 @dataclass
 class GetModifyVpcAttributeEnableDNSHostnames:
+    r"""GetModifyVpcAttributeEnableDNSHostnames
+    Describes a value for a resource attribute that is a Boolean value.
+    """
+    
     value: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'Value' }})
     
 
 @dataclass
 class GetModifyVpcAttributeEnableDNSSupport:
+    r"""GetModifyVpcAttributeEnableDNSSupport
+    Describes a value for a resource attribute that is a Boolean value.
+    """
+    
     value: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'Value' }})
     
 class GetModifyVpcAttributeVersionEnum(str, Enum):
@@ -20,11 +32,11 @@ class GetModifyVpcAttributeVersionEnum(str, Enum):
 
 @dataclass
 class GetModifyVpcAttributeQueryParams:
-    action: GetModifyVpcAttributeActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetModifyVpcAttributeActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetModifyVpcAttributeVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    vpc_id: str = field(metadata={'query_param': { 'field_name': 'VpcId', 'style': 'form', 'explode': True }})
     enable_dns_hostnames: Optional[GetModifyVpcAttributeEnableDNSHostnames] = field(default=None, metadata={'query_param': { 'field_name': 'EnableDnsHostnames', 'style': 'form', 'explode': True }})
     enable_dns_support: Optional[GetModifyVpcAttributeEnableDNSSupport] = field(default=None, metadata={'query_param': { 'field_name': 'EnableDnsSupport', 'style': 'form', 'explode': True }})
-    version: GetModifyVpcAttributeVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
-    vpc_id: str = field(default=None, metadata={'query_param': { 'field_name': 'VpcId', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -40,12 +52,12 @@ class GetModifyVpcAttributeHeaders:
 
 @dataclass
 class GetModifyVpcAttributeRequest:
-    query_params: GetModifyVpcAttributeQueryParams = field(default=None)
-    headers: GetModifyVpcAttributeHeaders = field(default=None)
+    headers: GetModifyVpcAttributeHeaders = field()
+    query_params: GetModifyVpcAttributeQueryParams = field()
     
 
 @dataclass
 class GetModifyVpcAttributeResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

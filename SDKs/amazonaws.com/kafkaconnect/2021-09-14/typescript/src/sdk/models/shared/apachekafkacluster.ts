@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Vpc } from "./vpc";
+
 
 
 // ApacheKafkaCluster
@@ -7,9 +8,9 @@ import { Vpc } from "./vpc";
  * The details of the Apache Kafka cluster to which the connector is connected.
 **/
 export class ApacheKafkaCluster extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bootstrapServers" })
+  @SpeakeasyMetadata({ data: "json, name=bootstrapServers" })
   bootstrapServers: string;
 
-  @Metadata({ data: "json, name=vpc" })
+  @SpeakeasyMetadata({ data: "json, name=vpc" })
   vpc: Vpc;
 }

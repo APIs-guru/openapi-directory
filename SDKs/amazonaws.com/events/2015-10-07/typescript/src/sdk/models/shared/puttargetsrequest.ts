@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Target } from "./target";
 
 
+
 export class PutTargetsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EventBusName" })
+  @SpeakeasyMetadata({ data: "json, name=EventBusName" })
   eventBusName?: string;
 
-  @Metadata({ data: "json, name=Rule" })
+  @SpeakeasyMetadata({ data: "json, name=Rule" })
   rule: string;
 
-  @Metadata({ data: "json, name=Targets", elemType: shared.Target })
+  @SpeakeasyMetadata({ data: "json, name=Targets", elemType: Target })
   targets: Target[];
 }

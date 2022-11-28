@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ApplicationVerifyResponse
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A third party application verification response resource.
 **/
 export class ApplicationVerifyResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alternate_player_id" })
+  @SpeakeasyMetadata({ data: "json, name=alternate_player_id" })
   alternatePlayerId?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=player_id" })
+  @SpeakeasyMetadata({ data: "json, name=player_id" })
   playerId?: string;
 }

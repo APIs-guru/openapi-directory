@@ -1,13 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import distance
-from . import pagination
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class FacilitiesMetadata:
-    distances: List[distance.Distance] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'distances' }})
-    pagination: pagination.Pagination = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pagination' }})
+    distances: List[Distance] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('distances') }})
+    pagination: Pagination = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('pagination') }})
     

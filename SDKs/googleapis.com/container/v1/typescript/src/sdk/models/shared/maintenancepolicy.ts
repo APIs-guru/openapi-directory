@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MaintenanceWindow } from "./maintenancewindow";
+
 
 
 // MaintenancePolicy
@@ -7,9 +8,9 @@ import { MaintenanceWindow } from "./maintenancewindow";
  * MaintenancePolicy defines the maintenance policy to be used for the cluster.
 **/
 export class MaintenancePolicy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=resourceVersion" })
+  @SpeakeasyMetadata({ data: "json, name=resourceVersion" })
   resourceVersion?: string;
 
-  @Metadata({ data: "json, name=window" })
+  @SpeakeasyMetadata({ data: "json, name=window" })
   window?: MaintenanceWindow;
 }

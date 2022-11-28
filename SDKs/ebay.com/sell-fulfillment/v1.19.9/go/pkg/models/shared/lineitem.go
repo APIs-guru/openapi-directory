@@ -1,5 +1,7 @@
 package shared
 
+// LineItem
+// This type contains the details of each line item in an order.
 type LineItem struct {
 	AppliedPromotions               []AppliedPromotion               `json:"appliedPromotions,omitempty"`
 	DeliveryCost                    *DeliveryCost                    `json:"deliveryCost,omitempty"`

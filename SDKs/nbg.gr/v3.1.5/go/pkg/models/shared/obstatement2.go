@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ObStatement2
+// Provides further details on a statement resource.
 type ObStatement2 struct {
 	AccountID          string                           `json:"AccountId"`
 	CreationDateTime   time.Time                        `json:"CreationDateTime"`

@@ -16,13 +16,13 @@ type GetProjectMembershipsForProjectQueryParams struct {
 	User      *string  `queryParam:"style=form,explode=true,name=user"`
 }
 
+type GetProjectMembershipsForProject200ApplicationJSON struct {
+	Data []shared.ProjectMembershipCompact `json:"data,omitempty"`
+}
+
 type GetProjectMembershipsForProjectRequest struct {
 	PathParams  GetProjectMembershipsForProjectPathParams
 	QueryParams GetProjectMembershipsForProjectQueryParams
-}
-
-type GetProjectMembershipsForProject200ApplicationJSON struct {
-	Data []shared.ProjectMembershipCompact `json:"data,omitempty"`
 }
 
 type GetProjectMembershipsForProjectResponse struct {

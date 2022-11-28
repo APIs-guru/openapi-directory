@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import devicereference
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CustomerRemoveConfigurationRequest:
-    device: Optional[devicereference.DeviceReference] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'device' }})
+    r"""CustomerRemoveConfigurationRequest
+    Request message for customer to remove the configuration from device.
+    """
+    
+    device: Optional[DeviceReference] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('device') }})
     

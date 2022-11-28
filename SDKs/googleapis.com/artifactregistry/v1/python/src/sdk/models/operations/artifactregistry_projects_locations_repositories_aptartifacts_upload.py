@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ArtifactregistryProjectsLocationsRepositoriesAptArtifactsUploadPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class ArtifactregistryProjectsLocationsRepositoriesAptArtifactsUploadQueryParams
 
 @dataclass
 class ArtifactregistryProjectsLocationsRepositoriesAptArtifactsUploadSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ArtifactregistryProjectsLocationsRepositoriesAptArtifactsUploadRequest:
-    path_params: ArtifactregistryProjectsLocationsRepositoriesAptArtifactsUploadPathParams = field(default=None)
-    query_params: ArtifactregistryProjectsLocationsRepositoriesAptArtifactsUploadQueryParams = field(default=None)
+    path_params: ArtifactregistryProjectsLocationsRepositoriesAptArtifactsUploadPathParams = field()
+    query_params: ArtifactregistryProjectsLocationsRepositoriesAptArtifactsUploadQueryParams = field()
+    security: ArtifactregistryProjectsLocationsRepositoriesAptArtifactsUploadSecurity = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'application/octet-stream' }})
-    security: ArtifactregistryProjectsLocationsRepositoriesAptArtifactsUploadSecurity = field(default=None)
     
 
 @dataclass
 class ArtifactregistryProjectsLocationsRepositoriesAptArtifactsUploadResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     upload_apt_artifact_media_response: Optional[shared.UploadAptArtifactMediaResponse] = field(default=None)
     

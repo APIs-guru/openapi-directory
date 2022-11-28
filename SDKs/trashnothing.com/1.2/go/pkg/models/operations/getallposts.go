@@ -14,31 +14,19 @@ type GetAllPostsQueryParams struct {
 	Types            string    `queryParam:"style=form,explode=true,name=types"`
 }
 
-type GetAllPostsSecurityOption1 struct {
-	Oauth2Implicit shared.SchemeOauth2Implicit `security:"scheme,type=oauth2"`
-}
-
-type GetAllPostsSecurityOption2 struct {
-	Oauth2Code shared.SchemeOauth2Code `security:"scheme,type=oauth2"`
-}
-
-type GetAllPostsSecurityOption3 struct {
-	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=query"`
-}
-
 type GetAllPostsSecurity struct {
-	Option1 *GetAllPostsSecurityOption1 `security:"option"`
-	Option2 *GetAllPostsSecurityOption2 `security:"option"`
-	Option3 *GetAllPostsSecurityOption3 `security:"option"`
+	Oauth2Implicit *shared.SchemeOauth2Implicit `security:"scheme,type=oauth2"`
+	Oauth2Code     *shared.SchemeOauth2Code     `security:"scheme,type=oauth2"`
+	APIKey         *shared.SchemeAPIKey         `security:"scheme,type=apiKey,subtype=query"`
+}
+
+type GetAllPosts200ApplicationJSON struct {
+	Posts []shared.Post `json:"posts,omitempty"`
 }
 
 type GetAllPostsRequest struct {
 	QueryParams GetAllPostsQueryParams
 	Security    GetAllPostsSecurity
-}
-
-type GetAllPosts200ApplicationJSON struct {
-	Posts []shared.Post `json:"posts,omitempty"`
 }
 
 type GetAllPostsResponse struct {

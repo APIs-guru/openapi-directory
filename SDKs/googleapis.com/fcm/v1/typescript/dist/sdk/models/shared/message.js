@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AndroidConfig } from "./androidconfig";
 import { ApnsConfig } from "./apnsconfig";
 import { FcmOptions } from "./fcmoptions";
@@ -38,43 +38,43 @@ var Message = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=android" }),
+        SpeakeasyMetadata({ data: "json, name=android" }),
         __metadata("design:type", AndroidConfig)
     ], Message.prototype, "android", void 0);
     __decorate([
-        Metadata({ data: "json, name=apns" }),
+        SpeakeasyMetadata({ data: "json, name=apns" }),
         __metadata("design:type", ApnsConfig)
     ], Message.prototype, "apns", void 0);
     __decorate([
-        Metadata({ data: "json, name=condition" }),
+        SpeakeasyMetadata({ data: "json, name=condition" }),
         __metadata("design:type", String)
     ], Message.prototype, "condition", void 0);
     __decorate([
-        Metadata({ data: "json, name=data" }),
+        SpeakeasyMetadata({ data: "json, name=data" }),
         __metadata("design:type", Map)
     ], Message.prototype, "data", void 0);
     __decorate([
-        Metadata({ data: "json, name=fcmOptions" }),
+        SpeakeasyMetadata({ data: "json, name=fcmOptions" }),
         __metadata("design:type", FcmOptions)
     ], Message.prototype, "fcmOptions", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Message.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=notification" }),
+        SpeakeasyMetadata({ data: "json, name=notification" }),
         __metadata("design:type", Notification)
     ], Message.prototype, "notification", void 0);
     __decorate([
-        Metadata({ data: "json, name=token" }),
+        SpeakeasyMetadata({ data: "json, name=token" }),
         __metadata("design:type", String)
     ], Message.prototype, "token", void 0);
     __decorate([
-        Metadata({ data: "json, name=topic" }),
+        SpeakeasyMetadata({ data: "json, name=topic" }),
         __metadata("design:type", String)
     ], Message.prototype, "topic", void 0);
     __decorate([
-        Metadata({ data: "json, name=webpush" }),
+        SpeakeasyMetadata({ data: "json, name=webpush" }),
         __metadata("design:type", WebpushConfig)
     ], Message.prototype, "webpush", void 0);
     return Message;

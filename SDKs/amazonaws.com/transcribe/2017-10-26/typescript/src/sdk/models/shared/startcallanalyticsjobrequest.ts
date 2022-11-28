@@ -1,29 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ChannelDefinition } from "./channeldefinition";
 import { Media } from "./media";
 import { CallAnalyticsJobSettings } from "./callanalyticsjobsettings";
 
 
+
 export class StartCallAnalyticsJobRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CallAnalyticsJobName" })
+  @SpeakeasyMetadata({ data: "json, name=CallAnalyticsJobName" })
   callAnalyticsJobName: string;
 
-  @Metadata({ data: "json, name=ChannelDefinitions", elemType: shared.ChannelDefinition })
+  @SpeakeasyMetadata({ data: "json, name=ChannelDefinitions", elemType: ChannelDefinition })
   channelDefinitions?: ChannelDefinition[];
 
-  @Metadata({ data: "json, name=DataAccessRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=DataAccessRoleArn" })
   dataAccessRoleArn: string;
 
-  @Metadata({ data: "json, name=Media" })
+  @SpeakeasyMetadata({ data: "json, name=Media" })
   media: Media;
 
-  @Metadata({ data: "json, name=OutputEncryptionKMSKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=OutputEncryptionKMSKeyId" })
   outputEncryptionKmsKeyId?: string;
 
-  @Metadata({ data: "json, name=OutputLocation" })
+  @SpeakeasyMetadata({ data: "json, name=OutputLocation" })
   outputLocation?: string;
 
-  @Metadata({ data: "json, name=Settings" })
+  @SpeakeasyMetadata({ data: "json, name=Settings" })
   settings?: CallAnalyticsJobSettings;
 }

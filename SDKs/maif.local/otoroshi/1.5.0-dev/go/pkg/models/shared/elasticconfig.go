@@ -1,5 +1,7 @@
 package shared
 
+// ElasticConfig
+// The configuration for elastic access
 type ElasticConfig struct {
 	ClusterURI string            `json:"clusterUri"`
 	Headers    map[string]string `json:"headers"`

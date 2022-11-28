@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googlecloudapigeev1metricaggregation
-from . import googletypeinterval
+from sdk import utils
+from . import *
 
 class GoogleCloudApigeeV1QueryTimeSeriesStatsRequestTimestampOrderEnum(str, Enum):
     ORDER_UNSPECIFIED = "ORDER_UNSPECIFIED"
@@ -20,12 +21,16 @@ class GoogleCloudApigeeV1QueryTimeSeriesStatsRequestWindowSizeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleCloudApigeeV1QueryTimeSeriesStatsRequest:
-    dimensions: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dimensions' }})
-    filter: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'filter' }})
-    metrics: Optional[List[googlecloudapigeev1metricaggregation.GoogleCloudApigeeV1MetricAggregation]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metrics' }})
-    page_size: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pageSize' }})
-    page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pageToken' }})
-    time_range: Optional[googletypeinterval.GoogleTypeInterval] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timeRange' }})
-    timestamp_order: Optional[GoogleCloudApigeeV1QueryTimeSeriesStatsRequestTimestampOrderEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timestampOrder' }})
-    window_size: Optional[GoogleCloudApigeeV1QueryTimeSeriesStatsRequestWindowSizeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'windowSize' }})
+    r"""GoogleCloudApigeeV1QueryTimeSeriesStatsRequest
+    QueryTimeSeriesStatsRequest represents a query that returns a collection of time series sequences grouped by their values.
+    """
+    
+    dimensions: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dimensions') }})
+    filter: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('filter') }})
+    metrics: Optional[List[GoogleCloudApigeeV1MetricAggregation]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('metrics') }})
+    page_size: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pageSize') }})
+    page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pageToken') }})
+    time_range: Optional[GoogleTypeInterval] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('timeRange') }})
+    timestamp_order: Optional[GoogleCloudApigeeV1QueryTimeSeriesStatsRequestTimestampOrderEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('timestampOrder') }})
+    window_size: Optional[GoogleCloudApigeeV1QueryTimeSeriesStatsRequestWindowSizeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('windowSize') }})
     

@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EngineAttribute } from "./engineattribute";
 
 
+
 export class ExportServerEngineAttributeRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ExportAttributeName" })
+  @SpeakeasyMetadata({ data: "json, name=ExportAttributeName" })
   exportAttributeName: string;
 
-  @Metadata({ data: "json, name=InputAttributes", elemType: shared.EngineAttribute })
+  @SpeakeasyMetadata({ data: "json, name=InputAttributes", elemType: EngineAttribute })
   inputAttributes?: EngineAttribute[];
 
-  @Metadata({ data: "json, name=ServerName" })
+  @SpeakeasyMetadata({ data: "json, name=ServerName" })
   serverName: string;
 }

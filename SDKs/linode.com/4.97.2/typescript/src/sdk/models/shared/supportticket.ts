@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SupportTicketEntity
@@ -7,23 +8,23 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * 
 **/
 export class SupportTicketEntity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }
 
 export enum SupportTicketStatusEnum {
-    Closed = "closed"
-,    New = "new"
-,    Open = "open"
+    Closed = "closed",
+    New = "new",
+    Open = "open"
 }
 
 
@@ -33,42 +34,42 @@ export enum SupportTicketStatusEnum {
  * 
 **/
 export class SupportTicket extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attachments" })
+  @SpeakeasyMetadata({ data: "json, name=attachments" })
   attachments?: string[];
 
-  @Metadata({ data: "json, name=closable" })
+  @SpeakeasyMetadata({ data: "json, name=closable" })
   closable?: boolean;
 
-  @Metadata({ data: "json, name=closed" })
+  @SpeakeasyMetadata({ data: "json, name=closed" })
   closed?: Date;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=entity" })
+  @SpeakeasyMetadata({ data: "json, name=entity" })
   entity?: SupportTicketEntity;
 
-  @Metadata({ data: "json, name=gravatar_id" })
+  @SpeakeasyMetadata({ data: "json, name=gravatar_id" })
   gravatarId?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=opened" })
+  @SpeakeasyMetadata({ data: "json, name=opened" })
   opened?: Date;
 
-  @Metadata({ data: "json, name=opened_by" })
+  @SpeakeasyMetadata({ data: "json, name=opened_by" })
   openedBy?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: SupportTicketStatusEnum;
 
-  @Metadata({ data: "json, name=summary" })
+  @SpeakeasyMetadata({ data: "json, name=summary" })
   summary?: string;
 
-  @Metadata({ data: "json, name=updated" })
+  @SpeakeasyMetadata({ data: "json, name=updated" })
   updated?: Date;
 
-  @Metadata({ data: "json, name=updated_by" })
+  @SpeakeasyMetadata({ data: "json, name=updated_by" })
   updatedBy?: string;
 }

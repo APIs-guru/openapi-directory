@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import wmxsitemapcontent
+from sdk import utils
+from . import *
 
 class WmxSitemapTypeEnum(str, Enum):
     NOT_SITEMAP = "NOT_SITEMAP"
@@ -16,13 +18,17 @@ class WmxSitemapTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class WmxSitemap:
-    contents: Optional[List[wmxsitemapcontent.WmxSitemapContent]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'contents' }})
-    errors: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errors' }})
-    is_pending: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'isPending' }})
-    is_sitemaps_index: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'isSitemapsIndex' }})
-    last_downloaded: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lastDownloaded' }})
-    last_submitted: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lastSubmitted' }})
-    path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'path' }})
-    type: Optional[WmxSitemapTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    warnings: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'warnings' }})
+    r"""WmxSitemap
+    Contains detailed information about a specific URL submitted as a [sitemap](https://support.google.com/webmasters/answer/156184).
+    """
+    
+    contents: Optional[List[WmxSitemapContent]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('contents') }})
+    errors: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errors') }})
+    is_pending: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('isPending') }})
+    is_sitemaps_index: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('isSitemapsIndex') }})
+    last_downloaded: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lastDownloaded') }})
+    last_submitted: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lastSubmitted') }})
+    path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('path') }})
+    type: Optional[WmxSitemapTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    warnings: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('warnings') }})
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SandboxStandingOrder
@@ -6,27 +7,27 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Standing order information
 **/
 export class SandboxStandingOrder extends SpeakeasyBase {
-  @Metadata({ data: "json, name=amount" })
+  @SpeakeasyMetadata({ data: "json, name=amount" })
   amount?: number;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=finalPaymentDate" })
+  @SpeakeasyMetadata({ data: "json, name=finalPaymentDate" })
   finalPaymentDate?: Date;
 
-  @Metadata({ data: "json, name=firstPaymentDate" })
+  @SpeakeasyMetadata({ data: "json, name=firstPaymentDate" })
   firstPaymentDate?: Date;
 
-  @Metadata({ data: "json, name=frequency" })
+  @SpeakeasyMetadata({ data: "json, name=frequency" })
   frequency: string;
 
-  @Metadata({ data: "json, name=lastPaymentDate" })
+  @SpeakeasyMetadata({ data: "json, name=lastPaymentDate" })
   lastPaymentDate?: Date;
 
-  @Metadata({ data: "json, name=nextPaymentDate" })
+  @SpeakeasyMetadata({ data: "json, name=nextPaymentDate" })
   nextPaymentDate?: Date;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 }

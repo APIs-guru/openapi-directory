@@ -1,16 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ServiceMeshStatusDetails } from "./servicemeshstatusdetails";
 
+
 export enum ServiceMeshControlPlaneManagementStateEnum {
-    LifecycleStateUnspecified = "LIFECYCLE_STATE_UNSPECIFIED"
-,    Disabled = "DISABLED"
-,    FailedPrecondition = "FAILED_PRECONDITION"
-,    Provisioning = "PROVISIONING"
-,    Active = "ACTIVE"
-,    Stalled = "STALLED"
-,    NeedsAttention = "NEEDS_ATTENTION"
-,    Degraded = "DEGRADED"
+    LifecycleStateUnspecified = "LIFECYCLE_STATE_UNSPECIFIED",
+    Disabled = "DISABLED",
+    FailedPrecondition = "FAILED_PRECONDITION",
+    Provisioning = "PROVISIONING",
+    Active = "ACTIVE",
+    Stalled = "STALLED",
+    NeedsAttention = "NEEDS_ATTENTION",
+    Degraded = "DEGRADED"
 }
 
 
@@ -19,9 +19,9 @@ export enum ServiceMeshControlPlaneManagementStateEnum {
  * Status of control plane management.
 **/
 export class ServiceMeshControlPlaneManagement extends SpeakeasyBase {
-  @Metadata({ data: "json, name=details", elemType: shared.ServiceMeshStatusDetails })
+  @SpeakeasyMetadata({ data: "json, name=details", elemType: ServiceMeshStatusDetails })
   details?: ServiceMeshStatusDetails[];
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: ServiceMeshControlPlaneManagementStateEnum;
 }

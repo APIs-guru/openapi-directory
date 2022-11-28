@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateSystemModelsUpdateGroupClientRelationship extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Active, form, name=Active;" })
+  @SpeakeasyMetadata({ data: "json, name=Active, form, name=Active;" })
   active?: boolean;
 
-  @Metadata({ data: "json, name=ClientID, form, name=ClientID;" })
+  @SpeakeasyMetadata({ data: "json, name=ClientID, form, name=ClientID;" })
   clientId: string;
 
-  @Metadata({ data: "json, name=LastCheckin, form, name=LastCheckin;" })
+  @SpeakeasyMetadata({ data: "json, name=LastCheckin, form, name=LastCheckin;" })
   lastCheckin?: Date;
 
-  @Metadata({ data: "json, name=RelationshipID, form, name=RelationshipID;" })
+  @SpeakeasyMetadata({ data: "json, name=RelationshipID, form, name=RelationshipID;" })
   relationshipId?: string;
 
-  @Metadata({ data: "json, name=UpdateGroupID, form, name=UpdateGroupID;" })
+  @SpeakeasyMetadata({ data: "json, name=UpdateGroupID, form, name=UpdateGroupID;" })
   updateGroupId: string;
 }

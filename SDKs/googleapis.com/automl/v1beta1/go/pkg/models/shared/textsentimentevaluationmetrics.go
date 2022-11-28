@@ -1,5 +1,7 @@
 package shared
 
+// TextSentimentEvaluationMetrics
+// Model evaluation metrics for text sentiment problems.
 type TextSentimentEvaluationMetrics struct {
 	AnnotationSpecID  []string         `json:"annotationSpecId,omitempty"`
 	ConfusionMatrix   *ConfusionMatrix `json:"confusionMatrix,omitempty"`

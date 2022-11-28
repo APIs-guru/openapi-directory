@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostModifyListenerActionEnum(str, Enum):
     MODIFY_LISTENER = "ModifyListener"
@@ -10,8 +14,8 @@ class PostModifyListenerVersionEnum(str, Enum):
 
 @dataclass
 class PostModifyListenerQueryParams:
-    action: PostModifyListenerActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostModifyListenerVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostModifyListenerActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostModifyListenerVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostModifyListenerHeaders:
 
 @dataclass
 class PostModifyListenerRequest:
-    query_params: PostModifyListenerQueryParams = field(default=None)
-    headers: PostModifyListenerHeaders = field(default=None)
+    headers: PostModifyListenerHeaders = field()
+    query_params: PostModifyListenerQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostModifyListenerResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

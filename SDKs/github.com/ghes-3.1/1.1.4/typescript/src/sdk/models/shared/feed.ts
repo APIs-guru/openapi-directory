@@ -1,38 +1,31 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LinkWithType } from "./linkwithtype";
-import { LinkWithType } from "./linkwithtype";
-import { LinkWithType } from "./linkwithtype";
-import { LinkWithType } from "./linkwithtype";
-import { LinkWithType } from "./linkwithtype";
-import { LinkWithType } from "./linkwithtype";
-import { LinkWithType } from "./linkwithtype";
-import { LinkWithType } from "./linkwithtype";
+
 
 
 export class FeedLinks extends SpeakeasyBase {
-  @Metadata({ data: "json, name=current_user" })
+  @SpeakeasyMetadata({ data: "json, name=current_user" })
   currentUser?: LinkWithType;
 
-  @Metadata({ data: "json, name=current_user_actor" })
+  @SpeakeasyMetadata({ data: "json, name=current_user_actor" })
   currentUserActor?: LinkWithType;
 
-  @Metadata({ data: "json, name=current_user_organization" })
+  @SpeakeasyMetadata({ data: "json, name=current_user_organization" })
   currentUserOrganization?: LinkWithType;
 
-  @Metadata({ data: "json, name=current_user_organizations", elemType: shared.LinkWithType })
+  @SpeakeasyMetadata({ data: "json, name=current_user_organizations", elemType: LinkWithType })
   currentUserOrganizations?: LinkWithType[];
 
-  @Metadata({ data: "json, name=current_user_public" })
+  @SpeakeasyMetadata({ data: "json, name=current_user_public" })
   currentUserPublic?: LinkWithType;
 
-  @Metadata({ data: "json, name=security_advisories" })
+  @SpeakeasyMetadata({ data: "json, name=security_advisories" })
   securityAdvisories?: LinkWithType;
 
-  @Metadata({ data: "json, name=timeline" })
+  @SpeakeasyMetadata({ data: "json, name=timeline" })
   timeline: LinkWithType;
 
-  @Metadata({ data: "json, name=user" })
+  @SpeakeasyMetadata({ data: "json, name=user" })
   user: LinkWithType;
 }
 
@@ -42,30 +35,30 @@ export class FeedLinks extends SpeakeasyBase {
  * Feed
 **/
 export class Feed extends SpeakeasyBase {
-  @Metadata({ data: "json, name=_links" })
+  @SpeakeasyMetadata({ data: "json, name=_links" })
   links: FeedLinks;
 
-  @Metadata({ data: "json, name=current_user_actor_url" })
+  @SpeakeasyMetadata({ data: "json, name=current_user_actor_url" })
   currentUserActorUrl?: string;
 
-  @Metadata({ data: "json, name=current_user_organization_url" })
+  @SpeakeasyMetadata({ data: "json, name=current_user_organization_url" })
   currentUserOrganizationUrl?: string;
 
-  @Metadata({ data: "json, name=current_user_organization_urls" })
+  @SpeakeasyMetadata({ data: "json, name=current_user_organization_urls" })
   currentUserOrganizationUrls?: string[];
 
-  @Metadata({ data: "json, name=current_user_public_url" })
+  @SpeakeasyMetadata({ data: "json, name=current_user_public_url" })
   currentUserPublicUrl?: string;
 
-  @Metadata({ data: "json, name=current_user_url" })
+  @SpeakeasyMetadata({ data: "json, name=current_user_url" })
   currentUserUrl?: string;
 
-  @Metadata({ data: "json, name=security_advisories_url" })
+  @SpeakeasyMetadata({ data: "json, name=security_advisories_url" })
   securityAdvisoriesUrl?: string;
 
-  @Metadata({ data: "json, name=timeline_url" })
+  @SpeakeasyMetadata({ data: "json, name=timeline_url" })
   timelineUrl: string;
 
-  @Metadata({ data: "json, name=user_url" })
+  @SpeakeasyMetadata({ data: "json, name=user_url" })
   userUrl: string;
 }

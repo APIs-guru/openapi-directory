@@ -1,14 +1,18 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class BatchImportEvidenceToAssessmentControlPathParams:
-    assessment_id: str = field(default=None, metadata={'path_param': { 'field_name': 'assessmentId', 'style': 'simple', 'explode': False }})
-    control_id: str = field(default=None, metadata={'path_param': { 'field_name': 'controlId', 'style': 'simple', 'explode': False }})
-    control_set_id: str = field(default=None, metadata={'path_param': { 'field_name': 'controlSetId', 'style': 'simple', 'explode': False }})
+    assessment_id: str = field(metadata={'path_param': { 'field_name': 'assessmentId', 'style': 'simple', 'explode': False }})
+    control_id: str = field(metadata={'path_param': { 'field_name': 'controlId', 'style': 'simple', 'explode': False }})
+    control_set_id: str = field(metadata={'path_param': { 'field_name': 'controlSetId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,23 +29,23 @@ class BatchImportEvidenceToAssessmentControlHeaders:
 @dataclass_json
 @dataclass
 class BatchImportEvidenceToAssessmentControlRequestBody:
-    manual_evidence: List[shared.ManualEvidence] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'manualEvidence' }})
+    manual_evidence: List[shared.ManualEvidence] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('manualEvidence') }})
     
 
 @dataclass
 class BatchImportEvidenceToAssessmentControlRequest:
-    path_params: BatchImportEvidenceToAssessmentControlPathParams = field(default=None)
-    headers: BatchImportEvidenceToAssessmentControlHeaders = field(default=None)
-    request: BatchImportEvidenceToAssessmentControlRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: BatchImportEvidenceToAssessmentControlHeaders = field()
+    path_params: BatchImportEvidenceToAssessmentControlPathParams = field()
+    request: BatchImportEvidenceToAssessmentControlRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class BatchImportEvidenceToAssessmentControlResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
     batch_import_evidence_to_assessment_control_response: Optional[shared.BatchImportEvidenceToAssessmentControlResponse] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

@@ -9,13 +9,13 @@ type ProjectsGetPermissionForUserPathParams struct {
 	Username  string `pathParam:"style=simple,explode=false,name=username"`
 }
 
-type ProjectsGetPermissionForUserRequest struct {
-	PathParams ProjectsGetPermissionForUserPathParams
-}
-
 type ProjectsGetPermissionForUser415ApplicationJSON struct {
 	DocumentationURL string `json:"documentation_url"`
 	Message          string `json:"message"`
+}
+
+type ProjectsGetPermissionForUserRequest struct {
+	PathParams ProjectsGetPermissionForUserPathParams
 }
 
 type ProjectsGetPermissionForUserResponse struct {

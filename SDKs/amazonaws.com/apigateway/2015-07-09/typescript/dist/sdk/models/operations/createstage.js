@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CreateStagePathParams = /** @class */ (function (_super) {
     __extends(CreateStagePathParams, _super);
@@ -30,7 +30,7 @@ var CreateStagePathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=restapi_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=restapi_id" }),
         __metadata("design:type", String)
     ], CreateStagePathParams.prototype, "restapiId", void 0);
     return CreateStagePathParams;
@@ -42,31 +42,31 @@ var CreateStageHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], CreateStageHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], CreateStageHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], CreateStageHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], CreateStageHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], CreateStageHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], CreateStageHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], CreateStageHeaders.prototype, "xAmzSignedHeaders", void 0);
     return CreateStageHeaders;
@@ -93,19 +93,19 @@ var CreateStageRequestBodyCanarySettings = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=deploymentId" }),
+        SpeakeasyMetadata({ data: "json, name=deploymentId" }),
         __metadata("design:type", String)
     ], CreateStageRequestBodyCanarySettings.prototype, "deploymentId", void 0);
     __decorate([
-        Metadata({ data: "json, name=percentTraffic" }),
+        SpeakeasyMetadata({ data: "json, name=percentTraffic" }),
         __metadata("design:type", Number)
     ], CreateStageRequestBodyCanarySettings.prototype, "percentTraffic", void 0);
     __decorate([
-        Metadata({ data: "json, name=stageVariableOverrides" }),
+        SpeakeasyMetadata({ data: "json, name=stageVariableOverrides" }),
         __metadata("design:type", Map)
     ], CreateStageRequestBodyCanarySettings.prototype, "stageVariableOverrides", void 0);
     __decorate([
-        Metadata({ data: "json, name=useStageCache" }),
+        SpeakeasyMetadata({ data: "json, name=useStageCache" }),
         __metadata("design:type", Boolean)
     ], CreateStageRequestBodyCanarySettings.prototype, "useStageCache", void 0);
     return CreateStageRequestBodyCanarySettings;
@@ -117,43 +117,43 @@ var CreateStageRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=cacheClusterEnabled" }),
+        SpeakeasyMetadata({ data: "json, name=cacheClusterEnabled" }),
         __metadata("design:type", Boolean)
     ], CreateStageRequestBody.prototype, "cacheClusterEnabled", void 0);
     __decorate([
-        Metadata({ data: "json, name=cacheClusterSize" }),
+        SpeakeasyMetadata({ data: "json, name=cacheClusterSize" }),
         __metadata("design:type", String)
     ], CreateStageRequestBody.prototype, "cacheClusterSize", void 0);
     __decorate([
-        Metadata({ data: "json, name=canarySettings" }),
+        SpeakeasyMetadata({ data: "json, name=canarySettings" }),
         __metadata("design:type", CreateStageRequestBodyCanarySettings)
     ], CreateStageRequestBody.prototype, "canarySettings", void 0);
     __decorate([
-        Metadata({ data: "json, name=deploymentId" }),
+        SpeakeasyMetadata({ data: "json, name=deploymentId" }),
         __metadata("design:type", String)
     ], CreateStageRequestBody.prototype, "deploymentId", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], CreateStageRequestBody.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=documentationVersion" }),
+        SpeakeasyMetadata({ data: "json, name=documentationVersion" }),
         __metadata("design:type", String)
     ], CreateStageRequestBody.prototype, "documentationVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=stageName" }),
+        SpeakeasyMetadata({ data: "json, name=stageName" }),
         __metadata("design:type", String)
     ], CreateStageRequestBody.prototype, "stageName", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags" }),
+        SpeakeasyMetadata({ data: "json, name=tags" }),
         __metadata("design:type", Map)
     ], CreateStageRequestBody.prototype, "tags", void 0);
     __decorate([
-        Metadata({ data: "json, name=tracingEnabled" }),
+        SpeakeasyMetadata({ data: "json, name=tracingEnabled" }),
         __metadata("design:type", Boolean)
     ], CreateStageRequestBody.prototype, "tracingEnabled", void 0);
     __decorate([
-        Metadata({ data: "json, name=variables" }),
+        SpeakeasyMetadata({ data: "json, name=variables" }),
         __metadata("design:type", Map)
     ], CreateStageRequestBody.prototype, "variables", void 0);
     return CreateStageRequestBody;
@@ -165,15 +165,15 @@ var CreateStageRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateStagePathParams)
     ], CreateStageRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateStageHeaders)
     ], CreateStageRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", CreateStageRequestBody)
     ], CreateStageRequest.prototype, "request", void 0);
     return CreateStageRequest;
@@ -185,39 +185,39 @@ var CreateStageResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateStageResponse.prototype, "badRequestException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateStageResponse.prototype, "conflictException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CreateStageResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateStageResponse.prototype, "limitExceededException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateStageResponse.prototype, "notFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Stage)
     ], CreateStageResponse.prototype, "stage", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CreateStageResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateStageResponse.prototype, "tooManyRequestsException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateStageResponse.prototype, "unauthorizedException", void 0);
     return CreateStageResponse;

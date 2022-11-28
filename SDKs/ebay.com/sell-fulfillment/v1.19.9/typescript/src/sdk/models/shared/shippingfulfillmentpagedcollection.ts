@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ShippingFulfillment } from "./shippingfulfillment";
 import { Error } from "./error";
+
 
 
 // ShippingFulfillmentPagedCollection
@@ -9,12 +9,12 @@ import { Error } from "./error";
  * This type contains the specifications for the entire collection of shipping fulfillments that are associated with the order specified by a getShippingFulfillments call. The fulfillments container returns an array of all the fulfillments in the collection.
 **/
 export class ShippingFulfillmentPagedCollection extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fulfillments", elemType: shared.ShippingFulfillment })
+  @SpeakeasyMetadata({ data: "json, name=fulfillments", elemType: ShippingFulfillment })
   fulfillments?: ShippingFulfillment[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total?: number;
 
-  @Metadata({ data: "json, name=warnings", elemType: shared.Error })
+  @SpeakeasyMetadata({ data: "json, name=warnings", elemType: Error })
   warnings?: Error[];
 }

@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,23 +22,24 @@ class CreateMountTargetHeaders:
 @dataclass_json
 @dataclass
 class CreateMountTargetRequestBody:
-    file_system_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FileSystemId' }})
-    ip_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IpAddress' }})
-    security_groups: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SecurityGroups' }})
-    subnet_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SubnetId' }})
+    file_system_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('FileSystemId') }})
+    subnet_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('SubnetId') }})
+    ip_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('IpAddress') }})
+    security_groups: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SecurityGroups') }})
     
 
 @dataclass
 class CreateMountTargetRequest:
-    headers: CreateMountTargetHeaders = field(default=None)
-    request: CreateMountTargetRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateMountTargetHeaders = field()
+    request: CreateMountTargetRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateMountTargetResponse:
+    content_type: str = field()
+    status_code: int = field()
     availability_zones_mismatch: Optional[Any] = field(default=None)
     bad_request: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     file_system_not_found: Optional[Any] = field(default=None)
     incorrect_file_system_life_cycle_state: Optional[Any] = field(default=None)
     internal_server_error: Optional[Any] = field(default=None)
@@ -45,7 +50,6 @@ class CreateMountTargetResponse:
     no_free_addresses_in_subnet: Optional[Any] = field(default=None)
     security_group_limit_exceeded: Optional[Any] = field(default=None)
     security_group_not_found: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     subnet_not_found: Optional[Any] = field(default=None)
     unsupported_availability_zone: Optional[Any] = field(default=None)
     

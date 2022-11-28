@@ -1,22 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccountStatusItemLevelIssue } from "./accountstatusitemlevelissue";
 import { AccountStatusStatistics } from "./accountstatusstatistics";
 
 
+
 export class AccountStatusProducts extends SpeakeasyBase {
-  @Metadata({ data: "json, name=channel" })
+  @SpeakeasyMetadata({ data: "json, name=channel" })
   channel?: string;
 
-  @Metadata({ data: "json, name=country" })
+  @SpeakeasyMetadata({ data: "json, name=country" })
   country?: string;
 
-  @Metadata({ data: "json, name=destination" })
+  @SpeakeasyMetadata({ data: "json, name=destination" })
   destination?: string;
 
-  @Metadata({ data: "json, name=itemLevelIssues", elemType: shared.AccountStatusItemLevelIssue })
+  @SpeakeasyMetadata({ data: "json, name=itemLevelIssues", elemType: AccountStatusItemLevelIssue })
   itemLevelIssues?: AccountStatusItemLevelIssue[];
 
-  @Metadata({ data: "json, name=statistics" })
+  @SpeakeasyMetadata({ data: "json, name=statistics" })
   statistics?: AccountStatusStatistics;
 }

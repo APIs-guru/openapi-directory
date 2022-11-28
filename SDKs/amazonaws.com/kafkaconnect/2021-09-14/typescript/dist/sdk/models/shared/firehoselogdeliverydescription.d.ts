@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * A description of the settings for delivering logs to Amazon Kinesis Data Firehose.
 **/

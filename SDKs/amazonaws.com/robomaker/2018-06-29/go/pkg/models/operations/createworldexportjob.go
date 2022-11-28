@@ -14,6 +14,8 @@ type CreateWorldExportJobHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateWorldExportJobRequestBodyOutputLocation
+// The output location.
 type CreateWorldExportJobRequestBodyOutputLocation struct {
 	S3Bucket *string `json:"s3Bucket,omitempty"`
 	S3Prefix *string `json:"s3Prefix,omitempty"`

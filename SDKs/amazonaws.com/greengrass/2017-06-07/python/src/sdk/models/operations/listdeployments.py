@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class ListDeploymentsPathParams:
-    group_id: str = field(default=None, metadata={'path_param': { 'field_name': 'GroupId', 'style': 'simple', 'explode': False }})
+    group_id: str = field(metadata={'path_param': { 'field_name': 'GroupId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,15 +30,15 @@ class ListDeploymentsHeaders:
 
 @dataclass
 class ListDeploymentsRequest:
-    path_params: ListDeploymentsPathParams = field(default=None)
-    query_params: ListDeploymentsQueryParams = field(default=None)
-    headers: ListDeploymentsHeaders = field(default=None)
+    headers: ListDeploymentsHeaders = field()
+    path_params: ListDeploymentsPathParams = field()
+    query_params: ListDeploymentsQueryParams = field()
     
 
 @dataclass
 class ListDeploymentsResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     list_deployments_response: Optional[shared.ListDeploymentsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

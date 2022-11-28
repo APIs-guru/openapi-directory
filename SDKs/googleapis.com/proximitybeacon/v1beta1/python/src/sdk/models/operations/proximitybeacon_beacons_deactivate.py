@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ProximitybeaconBeaconsDeactivatePathParams:
-    beacon_name: str = field(default=None, metadata={'path_param': { 'field_name': 'beaconName', 'style': 'simple', 'explode': False }})
+    beacon_name: str = field(metadata={'path_param': { 'field_name': 'beaconName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +27,20 @@ class ProximitybeaconBeaconsDeactivateQueryParams:
 
 @dataclass
 class ProximitybeaconBeaconsDeactivateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ProximitybeaconBeaconsDeactivateRequest:
-    path_params: ProximitybeaconBeaconsDeactivatePathParams = field(default=None)
-    query_params: ProximitybeaconBeaconsDeactivateQueryParams = field(default=None)
-    security: ProximitybeaconBeaconsDeactivateSecurity = field(default=None)
+    path_params: ProximitybeaconBeaconsDeactivatePathParams = field()
+    query_params: ProximitybeaconBeaconsDeactivateQueryParams = field()
+    security: ProximitybeaconBeaconsDeactivateSecurity = field()
     
 
 @dataclass
 class ProximitybeaconBeaconsDeactivateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

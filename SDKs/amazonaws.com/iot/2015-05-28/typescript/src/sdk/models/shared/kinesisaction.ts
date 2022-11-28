@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // KinesisAction
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes an action to write data to an Amazon Kinesis stream.
 **/
 export class KinesisAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=partitionKey" })
+  @SpeakeasyMetadata({ data: "json, name=partitionKey" })
   partitionKey?: string;
 
-  @Metadata({ data: "json, name=roleArn" })
+  @SpeakeasyMetadata({ data: "json, name=roleArn" })
   roleArn: string;
 
-  @Metadata({ data: "json, name=streamName" })
+  @SpeakeasyMetadata({ data: "json, name=streamName" })
   streamName: string;
 }

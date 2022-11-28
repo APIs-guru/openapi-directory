@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Application } from "./application";
 import { ResourceError } from "./resourceerror";
 import { ImagePermissions } from "./imagepermissions";
@@ -9,59 +8,60 @@ import { ImageStateChangeReason } from "./imagestatechangereason";
 import { VisibilityTypeEnum } from "./visibilitytypeenum";
 
 
+
 // Image
 /** 
  * Describes an image.
 **/
 export class Image extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Applications", elemType: shared.Application })
+  @SpeakeasyMetadata({ data: "json, name=Applications", elemType: Application })
   applications?: Application[];
 
-  @Metadata({ data: "json, name=AppstreamAgentVersion" })
+  @SpeakeasyMetadata({ data: "json, name=AppstreamAgentVersion" })
   appstreamAgentVersion?: string;
 
-  @Metadata({ data: "json, name=Arn" })
+  @SpeakeasyMetadata({ data: "json, name=Arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=BaseImageArn" })
+  @SpeakeasyMetadata({ data: "json, name=BaseImageArn" })
   baseImageArn?: string;
 
-  @Metadata({ data: "json, name=CreatedTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedTime" })
   createdTime?: Date;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=DisplayName" })
+  @SpeakeasyMetadata({ data: "json, name=DisplayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=ImageBuilderName" })
+  @SpeakeasyMetadata({ data: "json, name=ImageBuilderName" })
   imageBuilderName?: string;
 
-  @Metadata({ data: "json, name=ImageBuilderSupported" })
+  @SpeakeasyMetadata({ data: "json, name=ImageBuilderSupported" })
   imageBuilderSupported?: boolean;
 
-  @Metadata({ data: "json, name=ImageErrors", elemType: shared.ResourceError })
+  @SpeakeasyMetadata({ data: "json, name=ImageErrors", elemType: ResourceError })
   imageErrors?: ResourceError[];
 
-  @Metadata({ data: "json, name=ImagePermissions" })
+  @SpeakeasyMetadata({ data: "json, name=ImagePermissions" })
   imagePermissions?: ImagePermissions;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 
-  @Metadata({ data: "json, name=Platform" })
+  @SpeakeasyMetadata({ data: "json, name=Platform" })
   platform?: PlatformTypeEnum;
 
-  @Metadata({ data: "json, name=PublicBaseImageReleasedDate" })
+  @SpeakeasyMetadata({ data: "json, name=PublicBaseImageReleasedDate" })
   publicBaseImageReleasedDate?: Date;
 
-  @Metadata({ data: "json, name=State" })
+  @SpeakeasyMetadata({ data: "json, name=State" })
   state?: ImageStateEnum;
 
-  @Metadata({ data: "json, name=StateChangeReason" })
+  @SpeakeasyMetadata({ data: "json, name=StateChangeReason" })
   stateChangeReason?: ImageStateChangeReason;
 
-  @Metadata({ data: "json, name=Visibility" })
+  @SpeakeasyMetadata({ data: "json, name=Visibility" })
   visibility?: VisibilityTypeEnum;
 }

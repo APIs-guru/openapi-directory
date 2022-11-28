@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteFileSystemPathParams:
-    file_system_id: str = field(default=None, metadata={'path_param': { 'field_name': 'FileSystemId', 'style': 'simple', 'explode': False }})
+    file_system_id: str = field(metadata={'path_param': { 'field_name': 'FileSystemId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,16 +23,16 @@ class DeleteFileSystemHeaders:
 
 @dataclass
 class DeleteFileSystemRequest:
-    path_params: DeleteFileSystemPathParams = field(default=None)
-    headers: DeleteFileSystemHeaders = field(default=None)
+    headers: DeleteFileSystemHeaders = field()
+    path_params: DeleteFileSystemPathParams = field()
     
 
 @dataclass
 class DeleteFileSystemResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     file_system_in_use: Optional[Any] = field(default=None)
     file_system_not_found: Optional[Any] = field(default=None)
     internal_server_error: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

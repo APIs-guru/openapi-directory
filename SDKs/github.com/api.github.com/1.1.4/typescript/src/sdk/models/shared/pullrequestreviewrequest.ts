@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TeamSimple } from "./teamsimple";
 import { SimpleUser } from "./simpleuser";
+
 
 
 // PullRequestReviewRequest
@@ -9,9 +9,9 @@ import { SimpleUser } from "./simpleuser";
  * Pull Request Review Request
 **/
 export class PullRequestReviewRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=teams", elemType: shared.TeamSimple })
+  @SpeakeasyMetadata({ data: "json, name=teams", elemType: TeamSimple })
   teams: TeamSimple[];
 
-  @Metadata({ data: "json, name=users", elemType: shared.SimpleUser })
+  @SpeakeasyMetadata({ data: "json, name=users", elemType: SimpleUser })
   users: SimpleUser[];
 }

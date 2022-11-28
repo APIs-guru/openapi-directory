@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,25 +22,25 @@ class CreateMembersHeaders:
 @dataclass_json
 @dataclass
 class CreateMembersRequestBody:
-    accounts: List[shared.Account] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Accounts' }})
-    disable_email_notification: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DisableEmailNotification' }})
-    graph_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'GraphArn' }})
-    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Message' }})
+    accounts: List[shared.Account] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Accounts') }})
+    graph_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('GraphArn') }})
+    disable_email_notification: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DisableEmailNotification') }})
+    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Message') }})
     
 
 @dataclass
 class CreateMembersRequest:
-    headers: CreateMembersHeaders = field(default=None)
-    request: CreateMembersRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateMembersHeaders = field()
+    request: CreateMembersRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateMembersResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     create_members_response: Optional[shared.CreateMembersResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_quota_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

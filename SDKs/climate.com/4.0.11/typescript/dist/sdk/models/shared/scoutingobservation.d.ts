@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ScoutingTag } from "./scoutingtag";
 export declare enum ScoutingObservationLocationDisplayColorEnum {
     Number307af7 = "#307af7",

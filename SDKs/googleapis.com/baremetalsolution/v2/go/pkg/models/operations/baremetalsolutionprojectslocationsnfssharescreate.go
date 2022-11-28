@@ -30,7 +30,7 @@ type BaremetalsolutionProjectsLocationsNfsSharesCreateSecurity struct {
 type BaremetalsolutionProjectsLocationsNfsSharesCreateRequest struct {
 	PathParams  BaremetalsolutionProjectsLocationsNfsSharesCreatePathParams
 	QueryParams BaremetalsolutionProjectsLocationsNfsSharesCreateQueryParams
-	Request     *shared.NfsShare `request:"mediaType=application/json"`
+	Request     *shared.NfsShareInput `request:"mediaType=application/json"`
 	Security    BaremetalsolutionProjectsLocationsNfsSharesCreateSecurity
 }
 

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ReferencesCountriesByCountryCodeGetPathParams = /** @class */ (function (_super) {
     __extends(ReferencesCountriesByCountryCodeGetPathParams, _super);
@@ -30,7 +30,7 @@ var ReferencesCountriesByCountryCodeGetPathParams = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=countryCode" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=countryCode" }),
         __metadata("design:type", String)
     ], ReferencesCountriesByCountryCodeGetPathParams.prototype, "countryCode", void 0);
     return ReferencesCountriesByCountryCodeGetPathParams;
@@ -42,15 +42,15 @@ var ReferencesCountriesByCountryCodeGetQueryParams = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=lang" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lang" }),
         __metadata("design:type", String)
     ], ReferencesCountriesByCountryCodeGetQueryParams.prototype, "lang", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", String)
     ], ReferencesCountriesByCountryCodeGetQueryParams.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=offset" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" }),
         __metadata("design:type", String)
     ], ReferencesCountriesByCountryCodeGetQueryParams.prototype, "offset", void 0);
     return ReferencesCountriesByCountryCodeGetQueryParams;
@@ -62,7 +62,7 @@ var ReferencesCountriesByCountryCodeGetHeaders = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Accept" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept" }),
         __metadata("design:type", String)
     ], ReferencesCountriesByCountryCodeGetHeaders.prototype, "accept", void 0);
     return ReferencesCountriesByCountryCodeGetHeaders;
@@ -74,7 +74,7 @@ var ReferencesCountriesByCountryCodeGetSecurity = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeAuth)
     ], ReferencesCountriesByCountryCodeGetSecurity.prototype, "auth", void 0);
     return ReferencesCountriesByCountryCodeGetSecurity;
@@ -86,19 +86,19 @@ var ReferencesCountriesByCountryCodeGetRequest = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ReferencesCountriesByCountryCodeGetPathParams)
     ], ReferencesCountriesByCountryCodeGetRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ReferencesCountriesByCountryCodeGetQueryParams)
     ], ReferencesCountriesByCountryCodeGetRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ReferencesCountriesByCountryCodeGetHeaders)
     ], ReferencesCountriesByCountryCodeGetRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ReferencesCountriesByCountryCodeGetSecurity)
     ], ReferencesCountriesByCountryCodeGetRequest.prototype, "security", void 0);
     return ReferencesCountriesByCountryCodeGetRequest;
@@ -110,15 +110,15 @@ var ReferencesCountriesByCountryCodeGetResponse = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ReferencesCountriesByCountryCodeGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], ReferencesCountriesByCountryCodeGetResponse.prototype, "referencesCountriesByCountryCodeGet200ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ReferencesCountriesByCountryCodeGetResponse.prototype, "statusCode", void 0);
     return ReferencesCountriesByCountryCodeGetResponse;

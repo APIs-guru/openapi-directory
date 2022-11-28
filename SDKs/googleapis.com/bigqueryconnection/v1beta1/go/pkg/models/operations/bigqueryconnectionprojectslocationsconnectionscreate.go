@@ -41,7 +41,7 @@ type BigqueryconnectionProjectsLocationsConnectionsCreateSecurity struct {
 type BigqueryconnectionProjectsLocationsConnectionsCreateRequest struct {
 	PathParams  BigqueryconnectionProjectsLocationsConnectionsCreatePathParams
 	QueryParams BigqueryconnectionProjectsLocationsConnectionsCreateQueryParams
-	Request     *shared.Connection `request:"mediaType=application/json"`
+	Request     *shared.ConnectionInput `request:"mediaType=application/json"`
 	Security    BigqueryconnectionProjectsLocationsConnectionsCreateSecurity
 }
 

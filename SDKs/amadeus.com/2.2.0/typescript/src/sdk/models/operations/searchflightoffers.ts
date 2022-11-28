@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SearchFlightOffersHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-HTTP-Method-Override" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-HTTP-Method-Override" })
   xHttpMethodOverride: string;
 }
 
 
 export class SearchFlightOffersRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: SearchFlightOffersHeaders;
 
-  @Metadata({ data: "request, media_type=application/vnd.amadeus+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/vnd.amadeus+json" })
   request: any;
 }
 
 
 export class SearchFlightOffersResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error400?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error500?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   success?: any;
 }

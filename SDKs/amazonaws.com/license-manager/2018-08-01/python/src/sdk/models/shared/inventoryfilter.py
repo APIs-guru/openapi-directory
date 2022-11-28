@@ -1,13 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import inventoryfiltercondition_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class InventoryFilter:
-    condition: inventoryfiltercondition_enum.InventoryFilterConditionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Condition' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
-    value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Value' }})
+    r"""InventoryFilter
+    An inventory filter.
+    """
+    
+    condition: InventoryFilterConditionEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Condition') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
+    value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Value') }})
     

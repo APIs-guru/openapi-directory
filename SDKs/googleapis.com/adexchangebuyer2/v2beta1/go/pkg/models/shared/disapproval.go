@@ -107,6 +107,8 @@ const (
 	DisapprovalReasonEnumExperimentalMedicalTreatment         DisapprovalReasonEnum = "EXPERIMENTAL_MEDICAL_TREATMENT"
 )
 
+// Disapproval
+// Output only. The reason and details for a disapproval.
 type Disapproval struct {
 	Details []string               `json:"details,omitempty"`
 	Reason  *DisapprovalReasonEnum `json:"reason,omitempty"`

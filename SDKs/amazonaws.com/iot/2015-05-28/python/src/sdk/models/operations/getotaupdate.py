@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetOtaUpdatePathParams:
-    ota_update_id: str = field(default=None, metadata={'path_param': { 'field_name': 'otaUpdateId', 'style': 'simple', 'explode': False }})
+    ota_update_id: str = field(metadata={'path_param': { 'field_name': 'otaUpdateId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,19 +24,19 @@ class GetOtaUpdateHeaders:
 
 @dataclass
 class GetOtaUpdateRequest:
-    path_params: GetOtaUpdatePathParams = field(default=None)
-    headers: GetOtaUpdateHeaders = field(default=None)
+    headers: GetOtaUpdateHeaders = field()
+    path_params: GetOtaUpdatePathParams = field()
     
 
 @dataclass
 class GetOtaUpdateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_ota_update_response: Optional[shared.GetOtaUpdateResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

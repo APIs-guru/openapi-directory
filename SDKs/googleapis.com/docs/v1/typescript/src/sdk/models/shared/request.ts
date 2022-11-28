@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CreateFooterRequest } from "./createfooterrequest";
 import { CreateFootnoteRequest } from "./createfootnoterequest";
 import { CreateHeaderRequest } from "./createheaderrequest";
@@ -34,107 +34,108 @@ import { UpdateTableRowStyleRequest } from "./updatetablerowstylerequest";
 import { UpdateTextStyleRequest } from "./updatetextstylerequest";
 
 
+
 // Request
 /** 
  * A single update to apply to a document.
 **/
 export class Request extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createFooter" })
+  @SpeakeasyMetadata({ data: "json, name=createFooter" })
   createFooter?: CreateFooterRequest;
 
-  @Metadata({ data: "json, name=createFootnote" })
+  @SpeakeasyMetadata({ data: "json, name=createFootnote" })
   createFootnote?: CreateFootnoteRequest;
 
-  @Metadata({ data: "json, name=createHeader" })
+  @SpeakeasyMetadata({ data: "json, name=createHeader" })
   createHeader?: CreateHeaderRequest;
 
-  @Metadata({ data: "json, name=createNamedRange" })
+  @SpeakeasyMetadata({ data: "json, name=createNamedRange" })
   createNamedRange?: CreateNamedRangeRequest;
 
-  @Metadata({ data: "json, name=createParagraphBullets" })
+  @SpeakeasyMetadata({ data: "json, name=createParagraphBullets" })
   createParagraphBullets?: CreateParagraphBulletsRequest;
 
-  @Metadata({ data: "json, name=deleteContentRange" })
+  @SpeakeasyMetadata({ data: "json, name=deleteContentRange" })
   deleteContentRange?: DeleteContentRangeRequest;
 
-  @Metadata({ data: "json, name=deleteFooter" })
+  @SpeakeasyMetadata({ data: "json, name=deleteFooter" })
   deleteFooter?: DeleteFooterRequest;
 
-  @Metadata({ data: "json, name=deleteHeader" })
+  @SpeakeasyMetadata({ data: "json, name=deleteHeader" })
   deleteHeader?: DeleteHeaderRequest;
 
-  @Metadata({ data: "json, name=deleteNamedRange" })
+  @SpeakeasyMetadata({ data: "json, name=deleteNamedRange" })
   deleteNamedRange?: DeleteNamedRangeRequest;
 
-  @Metadata({ data: "json, name=deleteParagraphBullets" })
+  @SpeakeasyMetadata({ data: "json, name=deleteParagraphBullets" })
   deleteParagraphBullets?: DeleteParagraphBulletsRequest;
 
-  @Metadata({ data: "json, name=deletePositionedObject" })
+  @SpeakeasyMetadata({ data: "json, name=deletePositionedObject" })
   deletePositionedObject?: DeletePositionedObjectRequest;
 
-  @Metadata({ data: "json, name=deleteTableColumn" })
+  @SpeakeasyMetadata({ data: "json, name=deleteTableColumn" })
   deleteTableColumn?: DeleteTableColumnRequest;
 
-  @Metadata({ data: "json, name=deleteTableRow" })
+  @SpeakeasyMetadata({ data: "json, name=deleteTableRow" })
   deleteTableRow?: DeleteTableRowRequest;
 
-  @Metadata({ data: "json, name=insertInlineImage" })
+  @SpeakeasyMetadata({ data: "json, name=insertInlineImage" })
   insertInlineImage?: InsertInlineImageRequest;
 
-  @Metadata({ data: "json, name=insertPageBreak" })
+  @SpeakeasyMetadata({ data: "json, name=insertPageBreak" })
   insertPageBreak?: InsertPageBreakRequest;
 
-  @Metadata({ data: "json, name=insertSectionBreak" })
+  @SpeakeasyMetadata({ data: "json, name=insertSectionBreak" })
   insertSectionBreak?: InsertSectionBreakRequest;
 
-  @Metadata({ data: "json, name=insertTable" })
+  @SpeakeasyMetadata({ data: "json, name=insertTable" })
   insertTable?: InsertTableRequest;
 
-  @Metadata({ data: "json, name=insertTableColumn" })
+  @SpeakeasyMetadata({ data: "json, name=insertTableColumn" })
   insertTableColumn?: InsertTableColumnRequest;
 
-  @Metadata({ data: "json, name=insertTableRow" })
+  @SpeakeasyMetadata({ data: "json, name=insertTableRow" })
   insertTableRow?: InsertTableRowRequest;
 
-  @Metadata({ data: "json, name=insertText" })
+  @SpeakeasyMetadata({ data: "json, name=insertText" })
   insertText?: InsertTextRequest;
 
-  @Metadata({ data: "json, name=mergeTableCells" })
+  @SpeakeasyMetadata({ data: "json, name=mergeTableCells" })
   mergeTableCells?: MergeTableCellsRequest;
 
-  @Metadata({ data: "json, name=pinTableHeaderRows" })
+  @SpeakeasyMetadata({ data: "json, name=pinTableHeaderRows" })
   pinTableHeaderRows?: PinTableHeaderRowsRequest;
 
-  @Metadata({ data: "json, name=replaceAllText" })
+  @SpeakeasyMetadata({ data: "json, name=replaceAllText" })
   replaceAllText?: ReplaceAllTextRequest;
 
-  @Metadata({ data: "json, name=replaceImage" })
+  @SpeakeasyMetadata({ data: "json, name=replaceImage" })
   replaceImage?: ReplaceImageRequest;
 
-  @Metadata({ data: "json, name=replaceNamedRangeContent" })
+  @SpeakeasyMetadata({ data: "json, name=replaceNamedRangeContent" })
   replaceNamedRangeContent?: ReplaceNamedRangeContentRequest;
 
-  @Metadata({ data: "json, name=unmergeTableCells" })
+  @SpeakeasyMetadata({ data: "json, name=unmergeTableCells" })
   unmergeTableCells?: UnmergeTableCellsRequest;
 
-  @Metadata({ data: "json, name=updateDocumentStyle" })
+  @SpeakeasyMetadata({ data: "json, name=updateDocumentStyle" })
   updateDocumentStyle?: UpdateDocumentStyleRequest;
 
-  @Metadata({ data: "json, name=updateParagraphStyle" })
+  @SpeakeasyMetadata({ data: "json, name=updateParagraphStyle" })
   updateParagraphStyle?: UpdateParagraphStyleRequest;
 
-  @Metadata({ data: "json, name=updateSectionStyle" })
+  @SpeakeasyMetadata({ data: "json, name=updateSectionStyle" })
   updateSectionStyle?: UpdateSectionStyleRequest;
 
-  @Metadata({ data: "json, name=updateTableCellStyle" })
+  @SpeakeasyMetadata({ data: "json, name=updateTableCellStyle" })
   updateTableCellStyle?: UpdateTableCellStyleRequest;
 
-  @Metadata({ data: "json, name=updateTableColumnProperties" })
+  @SpeakeasyMetadata({ data: "json, name=updateTableColumnProperties" })
   updateTableColumnProperties?: UpdateTableColumnPropertiesRequest;
 
-  @Metadata({ data: "json, name=updateTableRowStyle" })
+  @SpeakeasyMetadata({ data: "json, name=updateTableRowStyle" })
   updateTableRowStyle?: UpdateTableRowStyleRequest;
 
-  @Metadata({ data: "json, name=updateTextStyle" })
+  @SpeakeasyMetadata({ data: "json, name=updateTextStyle" })
   updateTextStyle?: UpdateTextStyleRequest;
 }

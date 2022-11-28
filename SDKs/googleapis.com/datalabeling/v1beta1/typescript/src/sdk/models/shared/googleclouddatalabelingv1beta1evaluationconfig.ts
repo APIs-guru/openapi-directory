@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDatalabelingV1beta1BoundingBoxEvaluationOptions } from "./googleclouddatalabelingv1beta1boundingboxevaluationoptions";
+
 
 
 // GoogleCloudDatalabelingV1beta1EvaluationConfig
@@ -7,6 +8,6 @@ import { GoogleCloudDatalabelingV1beta1BoundingBoxEvaluationOptions } from "./go
  * Configuration details used for calculating evaluation metrics and creating an Evaluation.
 **/
 export class GoogleCloudDatalabelingV1beta1EvaluationConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=boundingBoxEvaluationOptions" })
+  @SpeakeasyMetadata({ data: "json, name=boundingBoxEvaluationOptions" })
   boundingBoxEvaluationOptions?: GoogleCloudDatalabelingV1beta1BoundingBoxEvaluationOptions;
 }

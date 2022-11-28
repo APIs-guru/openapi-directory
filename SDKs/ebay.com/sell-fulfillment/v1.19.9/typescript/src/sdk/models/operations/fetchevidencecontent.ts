@@ -1,54 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export const FETCHEVIDENCECONTENT_SERVERS = [
-	"https://apiz.ebay.com{basePath}",
-];
 
+export const FetchEvidenceContentServerList = [
+	"https://apiz.ebay.com{basePath}",
+] as const;
 
 
 export class FetchEvidenceContentPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=payment_dispute_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=payment_dispute_id" })
   paymentDisputeId: string;
 }
 
 
 export class FetchEvidenceContentQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=evidence_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=evidence_id" })
   evidenceId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=file_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=file_id" })
   fileId: string;
 }
 
 
 export class FetchEvidenceContentSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   apiAuth: shared.SchemeApiAuth;
 }
 
 
 export class FetchEvidenceContentRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   serverUrl?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: FetchEvidenceContentPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: FetchEvidenceContentQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: FetchEvidenceContentSecurity;
 }
 
 
 export class FetchEvidenceContentResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

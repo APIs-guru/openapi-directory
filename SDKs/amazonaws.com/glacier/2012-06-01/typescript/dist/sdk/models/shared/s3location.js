@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Grant } from "./grant";
 import { CannedAclEnum } from "./cannedaclenum";
 import { Encryption } from "./encryption";
 import { StorageClassEnum } from "./storageclassenum";
@@ -37,35 +37,35 @@ var S3Location = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AccessControlList", elemType: shared.Grant }),
+        SpeakeasyMetadata({ data: "json, name=AccessControlList", elemType: Grant }),
         __metadata("design:type", Array)
     ], S3Location.prototype, "accessControlList", void 0);
     __decorate([
-        Metadata({ data: "json, name=BucketName" }),
+        SpeakeasyMetadata({ data: "json, name=BucketName" }),
         __metadata("design:type", String)
     ], S3Location.prototype, "bucketName", void 0);
     __decorate([
-        Metadata({ data: "json, name=CannedACL" }),
+        SpeakeasyMetadata({ data: "json, name=CannedACL" }),
         __metadata("design:type", String)
     ], S3Location.prototype, "cannedAcl", void 0);
     __decorate([
-        Metadata({ data: "json, name=Encryption" }),
+        SpeakeasyMetadata({ data: "json, name=Encryption" }),
         __metadata("design:type", Encryption)
     ], S3Location.prototype, "encryption", void 0);
     __decorate([
-        Metadata({ data: "json, name=Prefix" }),
+        SpeakeasyMetadata({ data: "json, name=Prefix" }),
         __metadata("design:type", String)
     ], S3Location.prototype, "prefix", void 0);
     __decorate([
-        Metadata({ data: "json, name=StorageClass" }),
+        SpeakeasyMetadata({ data: "json, name=StorageClass" }),
         __metadata("design:type", String)
     ], S3Location.prototype, "storageClass", void 0);
     __decorate([
-        Metadata({ data: "json, name=Tagging" }),
+        SpeakeasyMetadata({ data: "json, name=Tagging" }),
         __metadata("design:type", Map)
     ], S3Location.prototype, "tagging", void 0);
     __decorate([
-        Metadata({ data: "json, name=UserMetadata" }),
+        SpeakeasyMetadata({ data: "json, name=UserMetadata" }),
         __metadata("design:type", Map)
     ], S3Location.prototype, "userMetadata", void 0);
     return S3Location;

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PlayerSession } from "./playersession";
+
 
 
 // CreatePlayerSessionsOutput
@@ -8,6 +8,6 @@ import { PlayerSession } from "./playersession";
  * Represents the returned data in response to a request operation.
 **/
 export class CreatePlayerSessionsOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PlayerSessions", elemType: shared.PlayerSession })
+  @SpeakeasyMetadata({ data: "json, name=PlayerSessions", elemType: PlayerSession })
   playerSessions?: PlayerSession[];
 }

@@ -10,6 +10,8 @@ const (
 	PivotMetricAggregationsEnumCount                        PivotMetricAggregationsEnum = "COUNT"
 )
 
+// Pivot
+// Describes the visible dimension columns and rows in the report response.
 type Pivot struct {
 	FieldNames         []string                      `json:"fieldNames,omitempty"`
 	Limit              *string                       `json:"limit,omitempty"`

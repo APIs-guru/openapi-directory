@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TierEnum } from "./tierenum";
 var DescribeComponentConfigurationResponse = /** @class */ (function (_super) {
     __extends(DescribeComponentConfigurationResponse, _super);
@@ -30,15 +30,15 @@ var DescribeComponentConfigurationResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ComponentConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=ComponentConfiguration" }),
         __metadata("design:type", String)
     ], DescribeComponentConfigurationResponse.prototype, "componentConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=Monitor" }),
+        SpeakeasyMetadata({ data: "json, name=Monitor" }),
         __metadata("design:type", Boolean)
     ], DescribeComponentConfigurationResponse.prototype, "monitor", void 0);
     __decorate([
-        Metadata({ data: "json, name=Tier" }),
+        SpeakeasyMetadata({ data: "json, name=Tier" }),
         __metadata("design:type", String)
     ], DescribeComponentConfigurationResponse.prototype, "tier", void 0);
     return DescribeComponentConfigurationResponse;

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetRosterQueryParams = /** @class */ (function (_super) {
     __extends(GetRosterQueryParams, _super);
@@ -30,11 +30,11 @@ var GetRosterQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=team" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=team" }),
         __metadata("design:type", String)
     ], GetRosterQueryParams.prototype, "team", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=year" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=year" }),
         __metadata("design:type", Number)
     ], GetRosterQueryParams.prototype, "year", void 0);
     return GetRosterQueryParams;
@@ -46,7 +46,7 @@ var GetRosterRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetRosterQueryParams)
     ], GetRosterRequest.prototype, "queryParams", void 0);
     return GetRosterRequest;
@@ -58,15 +58,15 @@ var GetRosterResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetRosterResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata({ elemType: shared.Player }),
+        SpeakeasyMetadata({ elemType: shared.Player }),
         __metadata("design:type", Array)
     ], GetRosterResponse.prototype, "players", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetRosterResponse.prototype, "statusCode", void 0);
     return GetRosterResponse;

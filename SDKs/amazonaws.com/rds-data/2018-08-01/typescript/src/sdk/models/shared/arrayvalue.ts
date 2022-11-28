@@ -1,6 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { ArrayValue } from "./arrayvalue";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ArrayValue
@@ -8,18 +7,18 @@ import { ArrayValue } from "./arrayvalue";
  * Contains an array.
 **/
 export class ArrayValue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arrayValues", elemType: shared.ArrayValue })
+  @SpeakeasyMetadata({ data: "json, name=arrayValues", elemType: ArrayValue })
   arrayValues?: ArrayValue[];
 
-  @Metadata({ data: "json, name=booleanValues" })
+  @SpeakeasyMetadata({ data: "json, name=booleanValues" })
   booleanValues?: boolean[];
 
-  @Metadata({ data: "json, name=doubleValues" })
+  @SpeakeasyMetadata({ data: "json, name=doubleValues" })
   doubleValues?: number[];
 
-  @Metadata({ data: "json, name=longValues" })
+  @SpeakeasyMetadata({ data: "json, name=longValues" })
   longValues?: number[];
 
-  @Metadata({ data: "json, name=stringValues" })
+  @SpeakeasyMetadata({ data: "json, name=stringValues" })
   stringValues?: string[];
 }

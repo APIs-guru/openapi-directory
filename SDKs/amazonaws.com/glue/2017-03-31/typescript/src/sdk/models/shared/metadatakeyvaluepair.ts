@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MetadataKeyValuePair
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A structure containing a key value pair for metadata.
 **/
 export class MetadataKeyValuePair extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MetadataKey" })
+  @SpeakeasyMetadata({ data: "json, name=MetadataKey" })
   metadataKey?: string;
 
-  @Metadata({ data: "json, name=MetadataValue" })
+  @SpeakeasyMetadata({ data: "json, name=MetadataValue" })
   metadataValue?: string;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BatchGetRecordError
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The error that has occurred when attempting to retrieve a batch of Records.
 **/
 export class BatchGetRecordError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ErrorCode" })
+  @SpeakeasyMetadata({ data: "json, name=ErrorCode" })
   errorCode: string;
 
-  @Metadata({ data: "json, name=ErrorMessage" })
+  @SpeakeasyMetadata({ data: "json, name=ErrorMessage" })
   errorMessage: string;
 
-  @Metadata({ data: "json, name=FeatureGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=FeatureGroupName" })
   featureGroupName: string;
 
-  @Metadata({ data: "json, name=RecordIdentifierValueAsString" })
+  @SpeakeasyMetadata({ data: "json, name=RecordIdentifierValueAsString" })
   recordIdentifierValueAsString: string;
 }

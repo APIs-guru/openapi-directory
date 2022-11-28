@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BranchInfo } from "./branchinfo";
+
 
 
 // GetBranchOutput
@@ -7,6 +8,6 @@ import { BranchInfo } from "./branchinfo";
  * Represents the output of a get branch operation.
 **/
 export class GetBranchOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=branch" })
+  @SpeakeasyMetadata({ data: "json, name=branch" })
   branch?: BranchInfo;
 }

@@ -1,62 +1,63 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ExtensionCtrlGetAccountExtensionsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=account_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=account_id" })
   accountId: string;
 }
 
 
 export class ExtensionCtrlGetAccountExtensionsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=email" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=email" })
   email?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=location_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=location_id" })
   locationId?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=login_name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=login_name" })
   loginName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page_size" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_size" })
   pageSize?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=phone_number" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=phone_number" })
   phoneNumber?: string;
 }
 
 
 export class ExtensionCtrlGetAccountExtensionsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   bearerAuth: shared.SchemeBearerAuth;
 }
 
 
 export class ExtensionCtrlGetAccountExtensionsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ExtensionCtrlGetAccountExtensionsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ExtensionCtrlGetAccountExtensionsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: ExtensionCtrlGetAccountExtensionsSecurity;
 }
 
 
 export class ExtensionCtrlGetAccountExtensionsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   endUserRouteHalResponse?: shared.EndUserRouteHalResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationErrorsResponse?: shared.ValidationErrorsResponse;
 }

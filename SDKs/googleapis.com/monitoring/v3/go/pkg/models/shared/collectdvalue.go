@@ -10,6 +10,8 @@ const (
 	CollectdValueDataSourceTypeEnumAbsolute                  CollectdValueDataSourceTypeEnum = "ABSOLUTE"
 )
 
+// CollectdValue
+// A single data point from a collectd-based plugin.
 type CollectdValue struct {
 	DataSourceName *string                          `json:"dataSourceName,omitempty"`
 	DataSourceType *CollectdValueDataSourceTypeEnum `json:"dataSourceType,omitempty"`

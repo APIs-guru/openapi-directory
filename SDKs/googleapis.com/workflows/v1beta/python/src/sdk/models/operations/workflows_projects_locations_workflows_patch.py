@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class WorkflowsProjectsLocationsWorkflowsPatchPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +30,21 @@ class WorkflowsProjectsLocationsWorkflowsPatchQueryParams:
 
 @dataclass
 class WorkflowsProjectsLocationsWorkflowsPatchSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class WorkflowsProjectsLocationsWorkflowsPatchRequest:
-    path_params: WorkflowsProjectsLocationsWorkflowsPatchPathParams = field(default=None)
-    query_params: WorkflowsProjectsLocationsWorkflowsPatchQueryParams = field(default=None)
-    request: Optional[shared.Workflow] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: WorkflowsProjectsLocationsWorkflowsPatchSecurity = field(default=None)
+    path_params: WorkflowsProjectsLocationsWorkflowsPatchPathParams = field()
+    query_params: WorkflowsProjectsLocationsWorkflowsPatchQueryParams = field()
+    security: WorkflowsProjectsLocationsWorkflowsPatchSecurity = field()
+    request: Optional[shared.WorkflowInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class WorkflowsProjectsLocationsWorkflowsPatchResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

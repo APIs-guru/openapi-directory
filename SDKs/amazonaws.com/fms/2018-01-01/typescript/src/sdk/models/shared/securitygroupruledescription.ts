@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SecurityGroupRuleDescription
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes a set of permissions for a security group rule.
 **/
 export class SecurityGroupRuleDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FromPort" })
+  @SpeakeasyMetadata({ data: "json, name=FromPort" })
   fromPort?: number;
 
-  @Metadata({ data: "json, name=IPV4Range" })
+  @SpeakeasyMetadata({ data: "json, name=IPV4Range" })
   ipv4Range?: string;
 
-  @Metadata({ data: "json, name=IPV6Range" })
+  @SpeakeasyMetadata({ data: "json, name=IPV6Range" })
   ipv6Range?: string;
 
-  @Metadata({ data: "json, name=PrefixListId" })
+  @SpeakeasyMetadata({ data: "json, name=PrefixListId" })
   prefixListId?: string;
 
-  @Metadata({ data: "json, name=Protocol" })
+  @SpeakeasyMetadata({ data: "json, name=Protocol" })
   protocol?: string;
 
-  @Metadata({ data: "json, name=ToPort" })
+  @SpeakeasyMetadata({ data: "json, name=ToPort" })
   toPort?: number;
 }

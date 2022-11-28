@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { LambdaFunctionMemoryProjectedMetric } from "./lambdafunctionmemoryprojectedmetric";
 /**
  * Describes a recommendation option for an Lambda function.

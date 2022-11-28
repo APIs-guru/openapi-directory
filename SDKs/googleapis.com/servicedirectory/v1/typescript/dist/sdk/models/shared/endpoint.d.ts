@@ -1,8 +1,19 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * An individual endpoint that provides a service. The service must already exist to create an endpoint.
 **/
 export declare class Endpoint extends SpeakeasyBase {
+    address?: string;
+    annotations?: Map<string, string>;
+    name?: string;
+    network?: string;
+    port?: number;
+    uid?: string;
+}
+/**
+ * An individual endpoint that provides a service. The service must already exist to create an endpoint.
+**/
+export declare class EndpointInput extends SpeakeasyBase {
     address?: string;
     annotations?: Map<string, string>;
     name?: string;

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Event } from "./event";
+
 
 
 // OnEnterLifecycle
@@ -8,6 +8,6 @@ import { Event } from "./event";
  * When entering this state, perform these <code>actions</code> if the <code>condition</code> is TRUE.
 **/
 export class OnEnterLifecycle extends SpeakeasyBase {
-  @Metadata({ data: "json, name=events", elemType: shared.Event })
+  @SpeakeasyMetadata({ data: "json, name=events", elemType: Event })
   events?: Event[];
 }

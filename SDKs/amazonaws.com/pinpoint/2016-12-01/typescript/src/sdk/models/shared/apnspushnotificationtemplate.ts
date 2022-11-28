@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActionEnum } from "./actionenum";
+
 
 
 // ApnsPushNotificationTemplate
@@ -7,24 +8,24 @@ import { ActionEnum } from "./actionenum";
  * Specifies channel-specific content and settings for a message template that can be used in push notifications that are sent through the APNs (Apple Push Notification service) channel.
 **/
 export class ApnsPushNotificationTemplate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Action" })
+  @SpeakeasyMetadata({ data: "json, name=Action" })
   action?: ActionEnum;
 
-  @Metadata({ data: "json, name=Body" })
+  @SpeakeasyMetadata({ data: "json, name=Body" })
   body?: string;
 
-  @Metadata({ data: "json, name=MediaUrl" })
+  @SpeakeasyMetadata({ data: "json, name=MediaUrl" })
   mediaUrl?: string;
 
-  @Metadata({ data: "json, name=RawContent" })
+  @SpeakeasyMetadata({ data: "json, name=RawContent" })
   rawContent?: string;
 
-  @Metadata({ data: "json, name=Sound" })
+  @SpeakeasyMetadata({ data: "json, name=Sound" })
   sound?: string;
 
-  @Metadata({ data: "json, name=Title" })
+  @SpeakeasyMetadata({ data: "json, name=Title" })
   title?: string;
 
-  @Metadata({ data: "json, name=Url" })
+  @SpeakeasyMetadata({ data: "json, name=Url" })
   url?: string;
 }

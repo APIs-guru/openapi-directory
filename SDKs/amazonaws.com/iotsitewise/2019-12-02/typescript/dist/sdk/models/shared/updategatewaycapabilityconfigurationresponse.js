@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CapabilitySyncStatusEnum } from "./capabilitysyncstatusenum";
 var UpdateGatewayCapabilityConfigurationResponse = /** @class */ (function (_super) {
     __extends(UpdateGatewayCapabilityConfigurationResponse, _super);
@@ -30,11 +30,11 @@ var UpdateGatewayCapabilityConfigurationResponse = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=capabilityNamespace" }),
+        SpeakeasyMetadata({ data: "json, name=capabilityNamespace" }),
         __metadata("design:type", String)
     ], UpdateGatewayCapabilityConfigurationResponse.prototype, "capabilityNamespace", void 0);
     __decorate([
-        Metadata({ data: "json, name=capabilitySyncStatus" }),
+        SpeakeasyMetadata({ data: "json, name=capabilitySyncStatus" }),
         __metadata("design:type", String)
     ], UpdateGatewayCapabilityConfigurationResponse.prototype, "capabilitySyncStatus", void 0);
     return UpdateGatewayCapabilityConfigurationResponse;

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { EngineAttribute } from "./engineattribute";
 import { MaintenanceStatusEnum } from "./maintenancestatusenum";
 import { ServerStatusEnum } from "./serverstatusenum";

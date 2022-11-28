@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GetVolumesSortEnum(str, Enum):
     ID = "id"
@@ -26,45 +28,48 @@ class GetVolumesQueryParams:
     status: Optional[GetVolumesStatusEnum] = field(default=None, metadata={'query_param': { 'field_name': 'status', 'style': 'form', 'explode': True }})
     
 
-@dataclass
-class GetVolumesRequest:
-    query_params: GetVolumesQueryParams = field(default=None)
-    
-
 @dataclass_json
 @dataclass
 class GetVolumes200ApplicationJSONMetaPagination:
-    last_page: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'last_page' }})
-    next_page: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page' }})
-    page: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'page' }})
-    per_page: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'per_page' }})
-    previous_page: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'previous_page' }})
-    total_entries: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total_entries' }})
+    last_page: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('last_page') }})
+    next_page: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('next_page') }})
+    page: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('page') }})
+    per_page: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('per_page') }})
+    previous_page: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('previous_page') }})
+    total_entries: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total_entries') }})
     
 
 @dataclass_json
 @dataclass
 class GetVolumes200ApplicationJSONMeta:
-    pagination: GetVolumes200ApplicationJSONMetaPagination = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pagination' }})
+    pagination: GetVolumes200ApplicationJSONMetaPagination = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('pagination') }})
     
 
 @dataclass_json
 @dataclass
 class GetVolumes200ApplicationJSONVolumesLocation:
-    city: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'city' }})
-    country: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'country' }})
-    description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    id: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    latitude: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'latitude' }})
-    longitude: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'longitude' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    network_zone: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'network_zone' }})
+    r"""GetVolumes200ApplicationJSONVolumesLocation
+    Location of the Volume. Volume can only be attached to Servers in the same Location.
+    """
+    
+    city: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('city') }})
+    country: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('country') }})
+    description: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    id: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    latitude: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('latitude') }})
+    longitude: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('longitude') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    network_zone: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('network_zone') }})
     
 
 @dataclass_json
 @dataclass
 class GetVolumes200ApplicationJSONVolumesProtection:
-    delete: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'delete' }})
+    r"""GetVolumes200ApplicationJSONVolumesProtection
+    Protection configuration for the Resource
+    """
+    
+    delete: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('delete') }})
     
 class GetVolumes200ApplicationJSONVolumesStatusEnum(str, Enum):
     CREATING = "creating"
@@ -74,29 +79,34 @@ class GetVolumes200ApplicationJSONVolumesStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GetVolumes200ApplicationJSONVolumes:
-    created: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created' }})
-    format: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'format' }})
-    id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    labels: dict[str, str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labels' }})
-    linux_device: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'linux_device' }})
-    location: GetVolumes200ApplicationJSONVolumesLocation = field(default=None, metadata={'dataclasses_json': { 'field_name': 'location' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    protection: GetVolumes200ApplicationJSONVolumesProtection = field(default=None, metadata={'dataclasses_json': { 'field_name': 'protection' }})
-    server: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'server' }})
-    size: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'size' }})
-    status: GetVolumes200ApplicationJSONVolumesStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    created: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('created') }})
+    format: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('format') }})
+    id: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    labels: dict[str, str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('labels') }})
+    linux_device: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('linux_device') }})
+    location: GetVolumes200ApplicationJSONVolumesLocation = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('location') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    protection: GetVolumes200ApplicationJSONVolumesProtection = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('protection') }})
+    server: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('server') }})
+    size: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('size') }})
+    status: GetVolumes200ApplicationJSONVolumesStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     
 
 @dataclass_json
 @dataclass
 class GetVolumes200ApplicationJSON:
-    meta: Optional[GetVolumes200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
-    volumes: List[GetVolumes200ApplicationJSONVolumes] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'volumes' }})
+    volumes: List[GetVolumes200ApplicationJSONVolumes] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('volumes') }})
+    meta: Optional[GetVolumes200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('meta') }})
+    
+
+@dataclass
+class GetVolumesRequest:
+    query_params: GetVolumesQueryParams = field()
     
 
 @dataclass
 class GetVolumesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_volumes_200_application_json_object: Optional[GetVolumes200ApplicationJSON] = field(default=None)
-    status_code: int = field(default=None)
     

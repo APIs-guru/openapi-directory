@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GoogleAppsCloudidentityDevicesV1DeviceUserCompromisedStateEnum;
 (function (GoogleAppsCloudidentityDevicesV1DeviceUserCompromisedStateEnum) {
     GoogleAppsCloudidentityDevicesV1DeviceUserCompromisedStateEnum["CompromisedStateUnspecified"] = "COMPROMISED_STATE_UNSPECIFIED";
@@ -55,43 +55,43 @@ var GoogleAppsCloudidentityDevicesV1DeviceUser = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=compromisedState" }),
+        SpeakeasyMetadata({ data: "json, name=compromisedState" }),
         __metadata("design:type", String)
     ], GoogleAppsCloudidentityDevicesV1DeviceUser.prototype, "compromisedState", void 0);
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", String)
     ], GoogleAppsCloudidentityDevicesV1DeviceUser.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=firstSyncTime" }),
+        SpeakeasyMetadata({ data: "json, name=firstSyncTime" }),
         __metadata("design:type", String)
     ], GoogleAppsCloudidentityDevicesV1DeviceUser.prototype, "firstSyncTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=languageCode" }),
+        SpeakeasyMetadata({ data: "json, name=languageCode" }),
         __metadata("design:type", String)
     ], GoogleAppsCloudidentityDevicesV1DeviceUser.prototype, "languageCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastSyncTime" }),
+        SpeakeasyMetadata({ data: "json, name=lastSyncTime" }),
         __metadata("design:type", String)
     ], GoogleAppsCloudidentityDevicesV1DeviceUser.prototype, "lastSyncTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=managementState" }),
+        SpeakeasyMetadata({ data: "json, name=managementState" }),
         __metadata("design:type", String)
     ], GoogleAppsCloudidentityDevicesV1DeviceUser.prototype, "managementState", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], GoogleAppsCloudidentityDevicesV1DeviceUser.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=passwordState" }),
+        SpeakeasyMetadata({ data: "json, name=passwordState" }),
         __metadata("design:type", String)
     ], GoogleAppsCloudidentityDevicesV1DeviceUser.prototype, "passwordState", void 0);
     __decorate([
-        Metadata({ data: "json, name=userAgent" }),
+        SpeakeasyMetadata({ data: "json, name=userAgent" }),
         __metadata("design:type", String)
     ], GoogleAppsCloudidentityDevicesV1DeviceUser.prototype, "userAgent", void 0);
     __decorate([
-        Metadata({ data: "json, name=userEmail" }),
+        SpeakeasyMetadata({ data: "json, name=userEmail" }),
         __metadata("design:type", String)
     ], GoogleAppsCloudidentityDevicesV1DeviceUser.prototype, "userEmail", void 0);
     return GoogleAppsCloudidentityDevicesV1DeviceUser;

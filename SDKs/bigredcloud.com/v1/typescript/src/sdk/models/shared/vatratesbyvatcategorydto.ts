@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VatRateDto } from "./vatratedto";
 
 
+
 export class VatRatesByVatCategoryDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=vatCategoryId" })
+  @SpeakeasyMetadata({ data: "json, name=vatCategoryId" })
   vatCategoryId?: number;
 
-  @Metadata({ data: "json, name=vatRates", elemType: shared.VatRateDto })
+  @SpeakeasyMetadata({ data: "json, name=vatRates", elemType: VatRateDto })
   vatRates?: VatRateDto[];
 }

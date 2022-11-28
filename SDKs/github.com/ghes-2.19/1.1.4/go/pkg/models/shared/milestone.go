@@ -33,6 +33,8 @@ const (
 	MilestoneStateEnumClosed MilestoneStateEnum = "closed"
 )
 
+// Milestone
+// A collection of related issues and pull requests.
 type Milestone struct {
 	ClosedAt     time.Time           `json:"closed_at"`
 	ClosedIssues int64               `json:"closed_issues"`

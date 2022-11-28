@@ -8,6 +8,8 @@ const (
 	CreateTaskRequestResponseViewEnumFull            CreateTaskRequestResponseViewEnum = "FULL"
 )
 
+// CreateTaskRequest
+// Request message for CreateTask.
 type CreateTaskRequest struct {
 	ResponseView *CreateTaskRequestResponseViewEnum `json:"responseView,omitempty"`
 	Task         *Task                              `json:"task,omitempty"`

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InstalledComponentLifecycleStateEnum } from "./installedcomponentlifecyclestateenum";
+
 
 
 // InstalledComponent
@@ -7,18 +8,18 @@ import { InstalledComponentLifecycleStateEnum } from "./installedcomponentlifecy
  * Contains information about a component on a Greengrass core device.
 **/
 export class InstalledComponent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=componentName" })
+  @SpeakeasyMetadata({ data: "json, name=componentName" })
   componentName?: string;
 
-  @Metadata({ data: "json, name=componentVersion" })
+  @SpeakeasyMetadata({ data: "json, name=componentVersion" })
   componentVersion?: string;
 
-  @Metadata({ data: "json, name=isRoot" })
+  @SpeakeasyMetadata({ data: "json, name=isRoot" })
   isRoot?: boolean;
 
-  @Metadata({ data: "json, name=lifecycleState" })
+  @SpeakeasyMetadata({ data: "json, name=lifecycleState" })
   lifecycleState?: InstalledComponentLifecycleStateEnum;
 
-  @Metadata({ data: "json, name=lifecycleStateDetails" })
+  @SpeakeasyMetadata({ data: "json, name=lifecycleStateDetails" })
   lifecycleStateDetails?: string;
 }

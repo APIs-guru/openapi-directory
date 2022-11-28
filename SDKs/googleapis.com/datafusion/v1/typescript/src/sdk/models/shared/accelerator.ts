@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum AcceleratorAcceleratorTypeEnum {
-    AcceleratorTypeUnspecified = "ACCELERATOR_TYPE_UNSPECIFIED"
-,    Cdc = "CDC"
-,    Healthcare = "HEALTHCARE"
-,    CcaiInsights = "CCAI_INSIGHTS"
+    AcceleratorTypeUnspecified = "ACCELERATOR_TYPE_UNSPECIFIED",
+    Cdc = "CDC",
+    Healthcare = "HEALTHCARE",
+    CcaiInsights = "CCAI_INSIGHTS"
 }
 
 export enum AcceleratorStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Enabled = "ENABLED"
-,    Disabled = "DISABLED"
-,    Unknown = "UNKNOWN"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Enabled = "ENABLED",
+    Disabled = "DISABLED",
+    Unknown = "UNKNOWN"
 }
 
 
@@ -20,9 +21,9 @@ export enum AcceleratorStateEnum {
  * Identifies Data Fusion accelerators for an instance.
 **/
 export class Accelerator extends SpeakeasyBase {
-  @Metadata({ data: "json, name=acceleratorType" })
+  @SpeakeasyMetadata({ data: "json, name=acceleratorType" })
   acceleratorType?: AcceleratorAcceleratorTypeEnum;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: AcceleratorStateEnum;
 }

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostRestoreManagedPrefixListVersionActionEnum(str, Enum):
     RESTORE_MANAGED_PREFIX_LIST_VERSION = "RestoreManagedPrefixListVersion"
@@ -10,8 +14,8 @@ class PostRestoreManagedPrefixListVersionVersionEnum(str, Enum):
 
 @dataclass
 class PostRestoreManagedPrefixListVersionQueryParams:
-    action: PostRestoreManagedPrefixListVersionActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostRestoreManagedPrefixListVersionVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostRestoreManagedPrefixListVersionActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostRestoreManagedPrefixListVersionVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostRestoreManagedPrefixListVersionHeaders:
 
 @dataclass
 class PostRestoreManagedPrefixListVersionRequest:
-    query_params: PostRestoreManagedPrefixListVersionQueryParams = field(default=None)
-    headers: PostRestoreManagedPrefixListVersionHeaders = field(default=None)
+    headers: PostRestoreManagedPrefixListVersionHeaders = field()
+    query_params: PostRestoreManagedPrefixListVersionQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostRestoreManagedPrefixListVersionResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

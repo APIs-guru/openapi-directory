@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteUserActionEnum(str, Enum):
     DELETE_USER = "DeleteUser"
@@ -10,9 +14,9 @@ class GetDeleteUserVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteUserQueryParams:
-    action: GetDeleteUserActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    user_id: str = field(default=None, metadata={'query_param': { 'field_name': 'UserId', 'style': 'form', 'explode': True }})
-    version: GetDeleteUserVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetDeleteUserActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    user_id: str = field(metadata={'query_param': { 'field_name': 'UserId', 'style': 'form', 'explode': True }})
+    version: GetDeleteUserVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetDeleteUserHeaders:
 
 @dataclass
 class GetDeleteUserRequest:
-    query_params: GetDeleteUserQueryParams = field(default=None)
-    headers: GetDeleteUserHeaders = field(default=None)
+    headers: GetDeleteUserHeaders = field()
+    query_params: GetDeleteUserQueryParams = field()
     
 
 @dataclass
 class GetDeleteUserResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

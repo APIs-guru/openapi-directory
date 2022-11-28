@@ -1,94 +1,95 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateSessionUsingPostQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=authorID" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=authorID" })
   authorId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=groupID" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=groupID" })
   groupId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=validUntil" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=validUntil" })
   validUntil?: string;
 }
 
 
-export class CreateSessionUsingPostRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: CreateSessionUsingPostQueryParams;
-}
-
-
 export class CreateSessionUsingPost200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=sessionID" })
+  @SpeakeasyMetadata({ data: "json, name=sessionID" })
   sessionId?: string;
 }
 
 
 export class CreateSessionUsingPost200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: CreateSessionUsingPost200ApplicationJsonData;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class CreateSessionUsingPost400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class CreateSessionUsingPost401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class CreateSessionUsingPost500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class CreateSessionUsingPostRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: CreateSessionUsingPostQueryParams;
+}
+
+
 export class CreateSessionUsingPostResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createSessionUsingPost200ApplicationJsonObject?: CreateSessionUsingPost200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createSessionUsingPost400ApplicationJsonObject?: CreateSessionUsingPost400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createSessionUsingPost401ApplicationJsonObject?: CreateSessionUsingPost401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createSessionUsingPost500ApplicationJsonObject?: CreateSessionUsingPost500ApplicationJson;
 }

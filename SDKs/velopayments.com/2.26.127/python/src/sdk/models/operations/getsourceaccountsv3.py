@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -18,14 +19,14 @@ class GetSourceAccountsV3QueryParams:
 
 @dataclass
 class GetSourceAccountsV3Request:
-    query_params: GetSourceAccountsV3QueryParams = field(default=None)
+    query_params: GetSourceAccountsV3QueryParams = field()
     
 
 @dataclass
 class GetSourceAccountsV3Response:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_source_account_response_v3: Optional[shared.ListSourceAccountResponseV3] = field(default=None)
-    status_code: int = field(default=None)
     inline_response_400: Optional[Any] = field(default=None)
     inline_response_401: Optional[Any] = field(default=None)
     inline_response_403: Optional[Any] = field(default=None)

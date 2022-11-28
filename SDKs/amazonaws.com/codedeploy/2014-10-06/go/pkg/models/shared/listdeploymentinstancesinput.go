@@ -1,5 +1,8 @@
 package shared
 
+// ListDeploymentInstancesInput
+//
+//	Represents the input of a <code>ListDeploymentInstances</code> operation.
 type ListDeploymentInstancesInput struct {
 	DeploymentID         string               `json:"deploymentId"`
 	InstanceStatusFilter []InstanceStatusEnum `json:"instanceStatusFilter,omitempty"`

@@ -12,12 +12,12 @@ class GetReviewsQueryParams:
 
 @dataclass
 class GetReviewsRequest:
-    query_params: GetReviewsQueryParams = field(default=None)
+    query_params: GetReviewsQueryParams = field()
     
 
 @dataclass
 class GetReviewsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

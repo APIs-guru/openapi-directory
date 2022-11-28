@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { FlowTemplateSummary } from "./flowtemplatesummary";
 export declare class SearchFlowTemplatesResponse extends SpeakeasyBase {
     nextToken?: string;

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CrAllocationStrategyEnum } from "./crallocationstrategyenum";
 import { Ec2Configuration } from "./ec2configuration";
 import { LaunchTemplateSpecification } from "./launchtemplatespecification";

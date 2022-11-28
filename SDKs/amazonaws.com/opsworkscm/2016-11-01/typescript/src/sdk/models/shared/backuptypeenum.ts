@@ -1,6 +1,7 @@
 
 
+
 export enum BackupTypeEnum {
-    Automated = "AUTOMATED"
-,    Manual = "MANUAL"
+    Automated = "AUTOMATED",
+    Manual = "MANUAL"
 }

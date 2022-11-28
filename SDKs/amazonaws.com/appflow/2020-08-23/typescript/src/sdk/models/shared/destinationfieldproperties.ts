@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WriteOperationTypeEnum } from "./writeoperationtypeenum";
+
 
 
 // DestinationFieldProperties
@@ -7,18 +8,18 @@ import { WriteOperationTypeEnum } from "./writeoperationtypeenum";
  *  The properties that can be applied to a field when connector is being used as a destination. 
 **/
 export class DestinationFieldProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=isCreatable" })
+  @SpeakeasyMetadata({ data: "json, name=isCreatable" })
   isCreatable?: boolean;
 
-  @Metadata({ data: "json, name=isNullable" })
+  @SpeakeasyMetadata({ data: "json, name=isNullable" })
   isNullable?: boolean;
 
-  @Metadata({ data: "json, name=isUpdatable" })
+  @SpeakeasyMetadata({ data: "json, name=isUpdatable" })
   isUpdatable?: boolean;
 
-  @Metadata({ data: "json, name=isUpsertable" })
+  @SpeakeasyMetadata({ data: "json, name=isUpsertable" })
   isUpsertable?: boolean;
 
-  @Metadata({ data: "json, name=supportedWriteOperations" })
+  @SpeakeasyMetadata({ data: "json, name=supportedWriteOperations" })
   supportedWriteOperations?: WriteOperationTypeEnum[];
 }

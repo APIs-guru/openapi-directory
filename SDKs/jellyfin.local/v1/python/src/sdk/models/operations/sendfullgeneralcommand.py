@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class SendFullGeneralCommandPathParams:
-    session_id: str = field(default=None, metadata={'path_param': { 'field_name': 'sessionId', 'style': 'simple', 'explode': False }})
+    session_id: str = field(metadata={'path_param': { 'field_name': 'sessionId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,18 +17,18 @@ class SendFullGeneralCommandRequests:
 
 @dataclass
 class SendFullGeneralCommandSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class SendFullGeneralCommandRequest:
-    path_params: SendFullGeneralCommandPathParams = field(default=None)
-    request: SendFullGeneralCommandRequests = field(default=None)
-    security: SendFullGeneralCommandSecurity = field(default=None)
+    path_params: SendFullGeneralCommandPathParams = field()
+    request: SendFullGeneralCommandRequests = field()
+    security: SendFullGeneralCommandSecurity = field()
     
 
 @dataclass
 class SendFullGeneralCommandResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

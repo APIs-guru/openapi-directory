@@ -1,70 +1,71 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SslSetupQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=httpsHostname" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=httpsHostname" })
   httpsHostname: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=httpsPort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=httpsPort" })
   httpsPort: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=keystorePassword" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=keystorePassword" })
   keystorePassword: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=keystorePasswordConfirm" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=keystorePasswordConfirm" })
   keystorePasswordConfirm: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=truststorePassword" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=truststorePassword" })
   truststorePassword: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=truststorePasswordConfirm" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=truststorePasswordConfirm" })
   truststorePasswordConfirm: string;
 }
 
 
 export class SslSetupRequestBodyCertificateFile extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, name=certificateFile" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=certificateFile" })
   certificateFile: string;
 
-  @Metadata({ data: "multipart_form, content=true" })
+  @SpeakeasyMetadata({ data: "multipart_form, content=true" })
   content: Uint8Array;
 }
 
 
 export class SslSetupRequestBodyPrivatekeyFile extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, content=true" })
+  @SpeakeasyMetadata({ data: "multipart_form, content=true" })
   content: Uint8Array;
 
-  @Metadata({ data: "multipart_form, name=privatekeyFile" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=privatekeyFile" })
   privatekeyFile: string;
 }
 
 
 export class SslSetupRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, file=true" })
+  @SpeakeasyMetadata({ data: "multipart_form, file=true" })
   certificateFile?: SslSetupRequestBodyCertificateFile;
 
-  @Metadata({ data: "multipart_form, file=true" })
+  @SpeakeasyMetadata({ data: "multipart_form, file=true" })
   privatekeyFile?: SslSetupRequestBodyPrivatekeyFile;
 }
 
 
 export class SslSetupRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: SslSetupQueryParams;
 
-  @Metadata({ data: "request, media_type=multipart/form-data" })
+  @SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" })
   request?: SslSetupRequestBody;
 }
 
 
 export class SslSetupResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   sslSetupDefaultTextPlainString?: string;
 }

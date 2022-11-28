@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DiskInfo
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes a disk.
 **/
 export class DiskInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=isSystemDisk" })
+  @SpeakeasyMetadata({ data: "json, name=isSystemDisk" })
   isSystemDisk?: boolean;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path?: string;
 
-  @Metadata({ data: "json, name=sizeInGb" })
+  @SpeakeasyMetadata({ data: "json, name=sizeInGb" })
   sizeInGb?: number;
 }

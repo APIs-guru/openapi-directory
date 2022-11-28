@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDeleteDbParameterGroupActionEnum(str, Enum):
     DELETE_DB_PARAMETER_GROUP = "DeleteDBParameterGroup"
@@ -10,8 +14,8 @@ class PostDeleteDbParameterGroupVersionEnum(str, Enum):
 
 @dataclass
 class PostDeleteDbParameterGroupQueryParams:
-    action: PostDeleteDbParameterGroupActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDeleteDbParameterGroupVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDeleteDbParameterGroupActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDeleteDbParameterGroupVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDeleteDbParameterGroupHeaders:
 
 @dataclass
 class PostDeleteDbParameterGroupRequest:
-    query_params: PostDeleteDbParameterGroupQueryParams = field(default=None)
-    headers: PostDeleteDbParameterGroupHeaders = field(default=None)
+    headers: PostDeleteDbParameterGroupHeaders = field()
+    query_params: PostDeleteDbParameterGroupQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDeleteDbParameterGroupResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

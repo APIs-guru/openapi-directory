@@ -1,5 +1,7 @@
 package shared
 
+// StateViewModel
+// View model for state object
 type StateViewModel struct {
 	Code        *string `json:"code,omitempty"`
 	Country     *string `json:"country,omitempty"`

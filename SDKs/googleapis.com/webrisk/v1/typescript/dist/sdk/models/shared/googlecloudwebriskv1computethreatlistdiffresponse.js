@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudWebriskV1ThreatEntryAdditions } from "./googlecloudwebriskv1threatentryadditions";
 import { GoogleCloudWebriskV1ComputeThreatListDiffResponseChecksum } from "./googlecloudwebriskv1computethreatlistdiffresponsechecksum";
 import { GoogleCloudWebriskV1ThreatEntryRemovals } from "./googlecloudwebriskv1threatentryremovals";
@@ -38,27 +38,27 @@ var GoogleCloudWebriskV1ComputeThreatListDiffResponse = /** @class */ (function 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=additions" }),
+        SpeakeasyMetadata({ data: "json, name=additions" }),
         __metadata("design:type", GoogleCloudWebriskV1ThreatEntryAdditions)
     ], GoogleCloudWebriskV1ComputeThreatListDiffResponse.prototype, "additions", void 0);
     __decorate([
-        Metadata({ data: "json, name=checksum" }),
+        SpeakeasyMetadata({ data: "json, name=checksum" }),
         __metadata("design:type", GoogleCloudWebriskV1ComputeThreatListDiffResponseChecksum)
     ], GoogleCloudWebriskV1ComputeThreatListDiffResponse.prototype, "checksum", void 0);
     __decorate([
-        Metadata({ data: "json, name=newVersionToken" }),
+        SpeakeasyMetadata({ data: "json, name=newVersionToken" }),
         __metadata("design:type", String)
     ], GoogleCloudWebriskV1ComputeThreatListDiffResponse.prototype, "newVersionToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=recommendedNextDiff" }),
+        SpeakeasyMetadata({ data: "json, name=recommendedNextDiff" }),
         __metadata("design:type", String)
     ], GoogleCloudWebriskV1ComputeThreatListDiffResponse.prototype, "recommendedNextDiff", void 0);
     __decorate([
-        Metadata({ data: "json, name=removals" }),
+        SpeakeasyMetadata({ data: "json, name=removals" }),
         __metadata("design:type", GoogleCloudWebriskV1ThreatEntryRemovals)
     ], GoogleCloudWebriskV1ComputeThreatListDiffResponse.prototype, "removals", void 0);
     __decorate([
-        Metadata({ data: "json, name=responseType" }),
+        SpeakeasyMetadata({ data: "json, name=responseType" }),
         __metadata("design:type", String)
     ], GoogleCloudWebriskV1ComputeThreatListDiffResponse.prototype, "responseType", void 0);
     return GoogleCloudWebriskV1ComputeThreatListDiffResponse;

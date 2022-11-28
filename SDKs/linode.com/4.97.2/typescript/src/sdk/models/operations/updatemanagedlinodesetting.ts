@@ -1,62 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateManagedLinodeSettingPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=linodeId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=linodeId" })
   linodeId: number;
 }
 
 
-export class UpdateManagedLinodeSettingSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class UpdateManagedLinodeSettingSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class UpdateManagedLinodeSettingSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: UpdateManagedLinodeSettingSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: UpdateManagedLinodeSettingSecurityOption2;
-}
-
-
-export class UpdateManagedLinodeSettingRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: UpdateManagedLinodeSettingPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: shared.ManagedLinodeSettings;
-
-  @Metadata()
-  security: UpdateManagedLinodeSettingSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class UpdateManagedLinodeSettingDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class UpdateManagedLinodeSettingRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: UpdateManagedLinodeSettingPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: shared.ManagedLinodeSettingsInput;
+
+  @SpeakeasyMetadata()
+  security: UpdateManagedLinodeSettingSecurity;
+}
+
+
 export class UpdateManagedLinodeSettingResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   managedLinodeSettings?: shared.ManagedLinodeSettings;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateManagedLinodeSettingDefaultApplicationJsonObject?: UpdateManagedLinodeSettingDefaultApplicationJson;
 }

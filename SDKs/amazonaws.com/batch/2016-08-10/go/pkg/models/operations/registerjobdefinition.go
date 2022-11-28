@@ -14,6 +14,8 @@ type RegisterJobDefinitionHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// RegisterJobDefinitionRequestBodyContainerProperties
+// Container properties are used in job definitions to describe the container that's launched as part of a job.
 type RegisterJobDefinitionRequestBodyContainerProperties struct {
 	Command                      []string                             `json:"command,omitempty"`
 	Environment                  []shared.KeyValuePair                `json:"environment,omitempty"`
@@ -37,17 +39,23 @@ type RegisterJobDefinitionRequestBodyContainerProperties struct {
 	Volumes                      []shared.Volume                      `json:"volumes,omitempty"`
 }
 
+// RegisterJobDefinitionRequestBodyNodeProperties
+// An object representing the node properties of a multi-node parallel job.
 type RegisterJobDefinitionRequestBodyNodeProperties struct {
 	MainNode            *int64                     `json:"mainNode,omitempty"`
 	NodeRangeProperties []shared.NodeRangeProperty `json:"nodeRangeProperties,omitempty"`
 	NumNodes            *int64                     `json:"numNodes,omitempty"`
 }
 
+// RegisterJobDefinitionRequestBodyRetryStrategy
+// The retry strategy associated with a job. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/job_retries.html">Automated job retries</a> in the <i>Batch User Guide</i>.
 type RegisterJobDefinitionRequestBodyRetryStrategy struct {
 	Attempts       *int64                  `json:"attempts,omitempty"`
 	EvaluateOnExit []shared.EvaluateOnExit `json:"evaluateOnExit,omitempty"`
 }
 
+// RegisterJobDefinitionRequestBodyTimeout
+// An object representing a job timeout configuration.
 type RegisterJobDefinitionRequestBodyTimeout struct {
 	AttemptDurationSeconds *int64 `json:"attemptDurationSeconds,omitempty"`
 }

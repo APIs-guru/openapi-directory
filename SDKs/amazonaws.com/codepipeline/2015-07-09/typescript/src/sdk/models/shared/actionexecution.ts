@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ErrorDetails } from "./errordetails";
 import { ActionExecutionStatusEnum } from "./actionexecutionstatusenum";
+
 
 
 // ActionExecution
@@ -8,33 +9,33 @@ import { ActionExecutionStatusEnum } from "./actionexecutionstatusenum";
  * Represents information about the run of an action.
 **/
 export class ActionExecution extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actionExecutionId" })
+  @SpeakeasyMetadata({ data: "json, name=actionExecutionId" })
   actionExecutionId?: string;
 
-  @Metadata({ data: "json, name=errorDetails" })
+  @SpeakeasyMetadata({ data: "json, name=errorDetails" })
   errorDetails?: ErrorDetails;
 
-  @Metadata({ data: "json, name=externalExecutionId" })
+  @SpeakeasyMetadata({ data: "json, name=externalExecutionId" })
   externalExecutionId?: string;
 
-  @Metadata({ data: "json, name=externalExecutionUrl" })
+  @SpeakeasyMetadata({ data: "json, name=externalExecutionUrl" })
   externalExecutionUrl?: string;
 
-  @Metadata({ data: "json, name=lastStatusChange" })
+  @SpeakeasyMetadata({ data: "json, name=lastStatusChange" })
   lastStatusChange?: Date;
 
-  @Metadata({ data: "json, name=lastUpdatedBy" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdatedBy" })
   lastUpdatedBy?: string;
 
-  @Metadata({ data: "json, name=percentComplete" })
+  @SpeakeasyMetadata({ data: "json, name=percentComplete" })
   percentComplete?: number;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: ActionExecutionStatusEnum;
 
-  @Metadata({ data: "json, name=summary" })
+  @SpeakeasyMetadata({ data: "json, name=summary" })
   summary?: string;
 
-  @Metadata({ data: "json, name=token" })
+  @SpeakeasyMetadata({ data: "json, name=token" })
   token?: string;
 }

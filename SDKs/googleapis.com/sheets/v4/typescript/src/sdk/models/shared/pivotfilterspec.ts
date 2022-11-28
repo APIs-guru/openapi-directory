@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataSourceColumnReference } from "./datasourcecolumnreference";
 import { PivotFilterCriteria } from "./pivotfiltercriteria";
+
 
 
 // PivotFilterSpec
@@ -8,12 +9,12 @@ import { PivotFilterCriteria } from "./pivotfiltercriteria";
  * The pivot table filter criteria associated with a specific source column offset.
 **/
 export class PivotFilterSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=columnOffsetIndex" })
+  @SpeakeasyMetadata({ data: "json, name=columnOffsetIndex" })
   columnOffsetIndex?: number;
 
-  @Metadata({ data: "json, name=dataSourceColumnReference" })
+  @SpeakeasyMetadata({ data: "json, name=dataSourceColumnReference" })
   dataSourceColumnReference?: DataSourceColumnReference;
 
-  @Metadata({ data: "json, name=filterCriteria" })
+  @SpeakeasyMetadata({ data: "json, name=filterCriteria" })
   filterCriteria?: PivotFilterCriteria;
 }

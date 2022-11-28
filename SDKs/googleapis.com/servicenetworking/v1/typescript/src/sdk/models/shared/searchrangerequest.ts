@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SearchRangeRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request to search for an unused range within allocated ranges.
 **/
 export class SearchRangeRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ipPrefixLength" })
+  @SpeakeasyMetadata({ data: "json, name=ipPrefixLength" })
   ipPrefixLength?: number;
 
-  @Metadata({ data: "json, name=network" })
+  @SpeakeasyMetadata({ data: "json, name=network" })
   network?: string;
 }

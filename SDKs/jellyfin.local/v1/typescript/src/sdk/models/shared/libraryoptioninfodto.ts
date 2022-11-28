@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LibraryOptionInfoDto
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Library option info dto.
 **/
 export class LibraryOptionInfoDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DefaultEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=DefaultEnabled" })
   defaultEnabled?: boolean;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 }

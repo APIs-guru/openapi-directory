@@ -17,6 +17,8 @@ const (
 	DNSKeyTypeEnumZoneSigning DNSKeyTypeEnum = "zoneSigning"
 )
 
+// DNSKey
+// A DNSSEC key pair.
 type DNSKey struct {
 	Algorithm    *DNSKeyAlgorithmEnum `json:"algorithm,omitempty"`
 	CreationTime *string              `json:"creationTime,omitempty"`

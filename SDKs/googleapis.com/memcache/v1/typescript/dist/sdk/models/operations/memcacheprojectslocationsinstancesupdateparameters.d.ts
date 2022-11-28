@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class MemcacheProjectsLocationsInstancesUpdateParametersPathParams extends SpeakeasyBase {
     name: string;
@@ -23,7 +23,7 @@ export declare class MemcacheProjectsLocationsInstancesUpdateParametersSecurity 
 export declare class MemcacheProjectsLocationsInstancesUpdateParametersRequest extends SpeakeasyBase {
     pathParams: MemcacheProjectsLocationsInstancesUpdateParametersPathParams;
     queryParams: MemcacheProjectsLocationsInstancesUpdateParametersQueryParams;
-    request?: shared.UpdateParametersRequest;
+    request?: shared.UpdateParametersRequestInput;
     security: MemcacheProjectsLocationsInstancesUpdateParametersSecurity;
 }
 export declare class MemcacheProjectsLocationsInstancesUpdateParametersResponse extends SpeakeasyBase {

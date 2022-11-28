@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class CreateWebLoginTokenPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'Name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'Name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,17 +24,17 @@ class CreateWebLoginTokenHeaders:
 
 @dataclass
 class CreateWebLoginTokenRequest:
-    path_params: CreateWebLoginTokenPathParams = field(default=None)
-    headers: CreateWebLoginTokenHeaders = field(default=None)
+    headers: CreateWebLoginTokenHeaders = field()
+    path_params: CreateWebLoginTokenPathParams = field()
     
 
 @dataclass
 class CreateWebLoginTokenResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     create_web_login_token_response: Optional[shared.CreateWebLoginTokenResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

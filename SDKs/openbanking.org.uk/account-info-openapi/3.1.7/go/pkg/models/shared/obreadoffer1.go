@@ -4,11 +4,15 @@ import (
 	"time"
 )
 
+// ObReadOffer1DataOfferAmount
+// Amount of money associated with the offer type.
 type ObReadOffer1DataOfferAmount struct {
 	Amount   string `json:"Amount"`
 	Currency string `json:"Currency"`
 }
 
+// ObReadOffer1DataOfferFee
+// Fee associated with the offer type.
 type ObReadOffer1DataOfferFee struct {
 	Amount   string `json:"Amount"`
 	Currency string `json:"Currency"`

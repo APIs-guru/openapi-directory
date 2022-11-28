@@ -1,18 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Post } from "./post";
 
 
+
 export class Chamber extends SpeakeasyBase {
-  @Metadata({ data: "json, name=classification" })
+  @SpeakeasyMetadata({ data: "json, name=classification" })
   classification: string;
 
-  @Metadata({ data: "json, name=districts", elemType: shared.Post })
+  @SpeakeasyMetadata({ data: "json, name=districts", elemType: Post })
   districts?: Post[];
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 }

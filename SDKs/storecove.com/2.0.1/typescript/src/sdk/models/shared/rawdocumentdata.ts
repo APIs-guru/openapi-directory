@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum RawDocumentDataParseStrategyEnum {
-    Ubl = "ubl"
-,    Cii = "cii"
-,    Idoc = "idoc"
+    Ubl = "ubl",
+    Cii = "cii",
+    Idoc = "idoc"
 }
 
 
@@ -12,18 +13,18 @@ export enum RawDocumentDataParseStrategyEnum {
  * A document to send, in base64 encoded format.
 **/
 export class RawDocumentData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=document" })
+  @SpeakeasyMetadata({ data: "json, name=document" })
   document: string;
 
-  @Metadata({ data: "json, name=documentTypeId" })
+  @SpeakeasyMetadata({ data: "json, name=documentTypeId" })
   documentTypeId?: string;
 
-  @Metadata({ data: "json, name=parse" })
+  @SpeakeasyMetadata({ data: "json, name=parse" })
   parse?: boolean;
 
-  @Metadata({ data: "json, name=parseStrategy" })
+  @SpeakeasyMetadata({ data: "json, name=parseStrategy" })
   parseStrategy?: RawDocumentDataParseStrategyEnum;
 
-  @Metadata({ data: "json, name=processId" })
+  @SpeakeasyMetadata({ data: "json, name=processId" })
   processId?: string;
 }

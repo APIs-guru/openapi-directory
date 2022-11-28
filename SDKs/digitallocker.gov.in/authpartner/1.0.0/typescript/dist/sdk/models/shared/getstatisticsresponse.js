@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetStatisticsResponseMonthwiseRegistationsDetails2 = /** @class */ (function (_super) {
     __extends(GetStatisticsResponseMonthwiseRegistationsDetails2, _super);
     function GetStatisticsResponseMonthwiseRegistationsDetails2() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=count" }),
+        SpeakeasyMetadata({ data: "json, name=count" }),
         __metadata("design:type", Number)
     ], GetStatisticsResponseMonthwiseRegistationsDetails2.prototype, "count", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", Number)
     ], GetStatisticsResponseMonthwiseRegistationsDetails2.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=month" }),
+        SpeakeasyMetadata({ data: "json, name=month" }),
         __metadata("design:type", Number)
     ], GetStatisticsResponseMonthwiseRegistationsDetails2.prototype, "month", void 0);
     __decorate([
-        Metadata({ data: "json, name=year" }),
+        SpeakeasyMetadata({ data: "json, name=year" }),
         __metadata("design:type", Number)
     ], GetStatisticsResponseMonthwiseRegistationsDetails2.prototype, "year", void 0);
     return GetStatisticsResponseMonthwiseRegistationsDetails2;
@@ -57,23 +57,23 @@ var GetStatisticsResponseMonthwiseRegistations = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=count" }),
+        SpeakeasyMetadata({ data: "json, name=count" }),
         __metadata("design:type", Number)
     ], GetStatisticsResponseMonthwiseRegistations.prototype, "count", void 0);
     __decorate([
-        Metadata({ data: "json, name=details2" }),
+        SpeakeasyMetadata({ data: "json, name=details2" }),
         __metadata("design:type", GetStatisticsResponseMonthwiseRegistationsDetails2)
     ], GetStatisticsResponseMonthwiseRegistations.prototype, "details2", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", Number)
     ], GetStatisticsResponseMonthwiseRegistations.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=month" }),
+        SpeakeasyMetadata({ data: "json, name=month" }),
         __metadata("design:type", Number)
     ], GetStatisticsResponseMonthwiseRegistations.prototype, "month", void 0);
     __decorate([
-        Metadata({ data: "json, name=year" }),
+        SpeakeasyMetadata({ data: "json, name=year" }),
         __metadata("design:type", Number)
     ], GetStatisticsResponseMonthwiseRegistations.prototype, "year", void 0);
     return GetStatisticsResponseMonthwiseRegistations;
@@ -85,15 +85,15 @@ var GetStatisticsResponseYearwiseAuthenticDocumentsDetails = /** @class */ (func
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=count" }),
+        SpeakeasyMetadata({ data: "json, name=count" }),
         __metadata("design:type", Number)
     ], GetStatisticsResponseYearwiseAuthenticDocumentsDetails.prototype, "count", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", Number)
     ], GetStatisticsResponseYearwiseAuthenticDocumentsDetails.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=year" }),
+        SpeakeasyMetadata({ data: "json, name=year" }),
         __metadata("design:type", Number)
     ], GetStatisticsResponseYearwiseAuthenticDocumentsDetails.prototype, "year", void 0);
     return GetStatisticsResponseYearwiseAuthenticDocumentsDetails;
@@ -105,15 +105,15 @@ var GetStatisticsResponseYearwiseAuthenticDocumentsDetails1 = /** @class */ (fun
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=count" }),
+        SpeakeasyMetadata({ data: "json, name=count" }),
         __metadata("design:type", Number)
     ], GetStatisticsResponseYearwiseAuthenticDocumentsDetails1.prototype, "count", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", Number)
     ], GetStatisticsResponseYearwiseAuthenticDocumentsDetails1.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=year" }),
+        SpeakeasyMetadata({ data: "json, name=year" }),
         __metadata("design:type", Number)
     ], GetStatisticsResponseYearwiseAuthenticDocumentsDetails1.prototype, "year", void 0);
     return GetStatisticsResponseYearwiseAuthenticDocumentsDetails1;
@@ -125,15 +125,15 @@ var GetStatisticsResponseYearwiseAuthenticDocumentsDetails2 = /** @class */ (fun
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=count" }),
+        SpeakeasyMetadata({ data: "json, name=count" }),
         __metadata("design:type", Number)
     ], GetStatisticsResponseYearwiseAuthenticDocumentsDetails2.prototype, "count", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", Number)
     ], GetStatisticsResponseYearwiseAuthenticDocumentsDetails2.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=year" }),
+        SpeakeasyMetadata({ data: "json, name=year" }),
         __metadata("design:type", Number)
     ], GetStatisticsResponseYearwiseAuthenticDocumentsDetails2.prototype, "year", void 0);
     return GetStatisticsResponseYearwiseAuthenticDocumentsDetails2;
@@ -149,27 +149,27 @@ var GetStatisticsResponseYearwiseAuthenticDocuments = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=count" }),
+        SpeakeasyMetadata({ data: "json, name=count" }),
         __metadata("design:type", Number)
     ], GetStatisticsResponseYearwiseAuthenticDocuments.prototype, "count", void 0);
     __decorate([
-        Metadata({ data: "json, name=details" }),
+        SpeakeasyMetadata({ data: "json, name=details" }),
         __metadata("design:type", GetStatisticsResponseYearwiseAuthenticDocumentsDetails)
     ], GetStatisticsResponseYearwiseAuthenticDocuments.prototype, "details", void 0);
     __decorate([
-        Metadata({ data: "json, name=details1" }),
+        SpeakeasyMetadata({ data: "json, name=details1" }),
         __metadata("design:type", GetStatisticsResponseYearwiseAuthenticDocumentsDetails1)
     ], GetStatisticsResponseYearwiseAuthenticDocuments.prototype, "details1", void 0);
     __decorate([
-        Metadata({ data: "json, name=details2" }),
+        SpeakeasyMetadata({ data: "json, name=details2" }),
         __metadata("design:type", GetStatisticsResponseYearwiseAuthenticDocumentsDetails2)
     ], GetStatisticsResponseYearwiseAuthenticDocuments.prototype, "details2", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", Number)
     ], GetStatisticsResponseYearwiseAuthenticDocuments.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=year" }),
+        SpeakeasyMetadata({ data: "json, name=year" }),
         __metadata("design:type", Number)
     ], GetStatisticsResponseYearwiseAuthenticDocuments.prototype, "year", void 0);
     return GetStatisticsResponseYearwiseAuthenticDocuments;
@@ -181,31 +181,31 @@ var GetStatisticsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=authentic_documents" }),
+        SpeakeasyMetadata({ data: "json, name=authentic_documents" }),
         __metadata("design:type", String)
     ], GetStatisticsResponse.prototype, "authenticDocuments", void 0);
     __decorate([
-        Metadata({ data: "json, name=count_as_on" }),
+        SpeakeasyMetadata({ data: "json, name=count_as_on" }),
         __metadata("design:type", String)
     ], GetStatisticsResponse.prototype, "countAsOn", void 0);
     __decorate([
-        Metadata({ data: "json, name=issuers" }),
+        SpeakeasyMetadata({ data: "json, name=issuers" }),
         __metadata("design:type", String)
     ], GetStatisticsResponse.prototype, "issuers", void 0);
     __decorate([
-        Metadata({ data: "json, name=monthwise_registations" }),
+        SpeakeasyMetadata({ data: "json, name=monthwise_registations" }),
         __metadata("design:type", GetStatisticsResponseMonthwiseRegistations)
     ], GetStatisticsResponse.prototype, "monthwiseRegistations", void 0);
     __decorate([
-        Metadata({ data: "json, name=requestors" }),
+        SpeakeasyMetadata({ data: "json, name=requestors" }),
         __metadata("design:type", String)
     ], GetStatisticsResponse.prototype, "requestors", void 0);
     __decorate([
-        Metadata({ data: "json, name=users" }),
+        SpeakeasyMetadata({ data: "json, name=users" }),
         __metadata("design:type", String)
     ], GetStatisticsResponse.prototype, "users", void 0);
     __decorate([
-        Metadata({ data: "json, name=yearwise_authentic_documents" }),
+        SpeakeasyMetadata({ data: "json, name=yearwise_authentic_documents" }),
         __metadata("design:type", GetStatisticsResponseYearwiseAuthenticDocuments)
     ], GetStatisticsResponse.prototype, "yearwiseAuthenticDocuments", void 0);
     return GetStatisticsResponse;

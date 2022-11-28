@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GoogleChromeManagementV1BrowserVersionChannelEnum(str, Enum):
     RELEASE_CHANNEL_UNSPECIFIED = "RELEASE_CHANNEL_UNSPECIFIED"
@@ -23,9 +25,13 @@ class GoogleChromeManagementV1BrowserVersionSystemEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleChromeManagementV1BrowserVersion:
-    channel: Optional[GoogleChromeManagementV1BrowserVersionChannelEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'channel' }})
-    count: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'count' }})
-    device_os_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deviceOsVersion' }})
-    system: Optional[GoogleChromeManagementV1BrowserVersionSystemEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'system' }})
-    version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'version' }})
+    r"""GoogleChromeManagementV1BrowserVersion
+    Describes a browser version and its install count.
+    """
+    
+    channel: Optional[GoogleChromeManagementV1BrowserVersionChannelEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('channel') }})
+    count: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('count') }})
+    device_os_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('deviceOsVersion') }})
+    system: Optional[GoogleChromeManagementV1BrowserVersionSystemEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('system') }})
+    version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('version') }})
     

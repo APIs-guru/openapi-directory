@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class BatchGetTriggersRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=TriggerNames" })
+  @SpeakeasyMetadata({ data: "json, name=TriggerNames" })
   triggerNames: string[];
 }

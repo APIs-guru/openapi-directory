@@ -28,11 +28,6 @@ type EscerSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type EscerRequest struct {
-	Request  *EscerRequestBody `request:"mediaType=application/json"`
-	Security EscerSecurity
-}
-
 type Escer400ApplicationJSONErrorEnum string
 
 const (
@@ -162,6 +157,11 @@ const (
 type Escer504ApplicationJSON struct {
 	Error            *Escer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Escer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type EscerRequest struct {
+	Request  *EscerRequestBody `request:"mediaType=application/json"`
+	Security EscerSecurity
 }
 
 type EscerResponse struct {

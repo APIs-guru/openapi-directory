@@ -1,47 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
-export class PostGet3dsAvailabilitySecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
-  basicAuth: shared.SchemeBasicAuth;
-}
-
-
-export class PostGet3dsAvailabilitySecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
-  apiKeyAuth: shared.SchemeApiKeyAuth;
-}
-
 
 export class PostGet3dsAvailabilitySecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: PostGet3dsAvailabilitySecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  basicAuth?: shared.SchemeBasicAuth;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: PostGet3dsAvailabilitySecurityOption2;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  apiKeyAuth?: shared.SchemeApiKeyAuth;
 }
 
 
 export class PostGet3dsAvailabilityRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: PostGet3dsAvailabilitySecurity;
 }
 
 
 export class PostGet3dsAvailabilityResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceError?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   threeDsAvailabilityResponse?: any;
 }

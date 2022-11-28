@@ -1,11 +1,19 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import updatemetadataarguments
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateDeviceMetadataInBatchRequest:
-    updates: Optional[List[updatemetadataarguments.UpdateMetadataArguments]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updates' }})
+    r"""UpdateDeviceMetadataInBatchRequest
+    Request to update device metadata in batch.
+    """
+    
+    updates: Optional[List[UpdateMetadataArguments]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('updates') }})
     

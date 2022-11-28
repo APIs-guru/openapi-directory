@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BwdifConfig } from "./bwdifconfig";
 import { YadifConfig } from "./yadifconfig";
 // Deinterlace
@@ -35,11 +35,11 @@ var Deinterlace = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=bwdif" }),
+        SpeakeasyMetadata({ data: "json, name=bwdif" }),
         __metadata("design:type", BwdifConfig)
     ], Deinterlace.prototype, "bwdif", void 0);
     __decorate([
-        Metadata({ data: "json, name=yadif" }),
+        SpeakeasyMetadata({ data: "json, name=yadif" }),
         __metadata("design:type", YadifConfig)
     ], Deinterlace.prototype, "yadif", void 0);
     return Deinterlace;

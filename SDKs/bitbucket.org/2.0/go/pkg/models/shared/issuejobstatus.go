@@ -9,6 +9,8 @@ const (
 	IssueJobStatusStatusEnumFailure  IssueJobStatusStatusEnum = "FAILURE"
 )
 
+// IssueJobStatus
+// The status of an import or export job
 type IssueJobStatus struct {
 	Count  *int64                    `json:"count,omitempty"`
 	Pct    *float64                  `json:"pct,omitempty"`

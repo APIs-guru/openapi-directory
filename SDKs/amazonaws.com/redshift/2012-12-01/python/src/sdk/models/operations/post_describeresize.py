@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDescribeResizeActionEnum(str, Enum):
     DESCRIBE_RESIZE = "DescribeResize"
@@ -10,8 +14,8 @@ class PostDescribeResizeVersionEnum(str, Enum):
 
 @dataclass
 class PostDescribeResizeQueryParams:
-    action: PostDescribeResizeActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDescribeResizeVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDescribeResizeActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDescribeResizeVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDescribeResizeHeaders:
 
 @dataclass
 class PostDescribeResizeRequest:
-    query_params: PostDescribeResizeQueryParams = field(default=None)
-    headers: PostDescribeResizeHeaders = field(default=None)
+    headers: PostDescribeResizeHeaders = field()
+    query_params: PostDescribeResizeQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDescribeResizeResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

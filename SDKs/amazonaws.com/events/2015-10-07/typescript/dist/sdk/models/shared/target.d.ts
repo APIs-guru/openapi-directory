@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { BatchParameters } from "./batchparameters";
 import { DeadLetterConfig } from "./deadletterconfig";
 import { EcsParameters } from "./ecsparameters";

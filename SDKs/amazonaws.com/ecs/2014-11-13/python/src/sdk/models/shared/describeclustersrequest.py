@@ -1,12 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import clusterfield_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeClustersRequest:
-    clusters: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clusters' }})
-    include: Optional[List[clusterfield_enum.ClusterFieldEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'include' }})
+    clusters: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clusters') }})
+    include: Optional[List[ClusterFieldEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('include') }})
     

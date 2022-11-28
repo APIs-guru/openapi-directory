@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDatalabelingV1beta1EvaluationJob } from "./googleclouddatalabelingv1beta1evaluationjob";
+
 
 
 // GoogleCloudDatalabelingV1beta1CreateEvaluationJobRequest
@@ -7,6 +8,6 @@ import { GoogleCloudDatalabelingV1beta1EvaluationJob } from "./googleclouddatala
  * Request message for CreateEvaluationJob.
 **/
 export class GoogleCloudDatalabelingV1beta1CreateEvaluationJobRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=job" })
+  @SpeakeasyMetadata({ data: "json, name=job" })
   job?: GoogleCloudDatalabelingV1beta1EvaluationJob;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AccountUsage
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The number of functions and amount of storage in use.
 **/
 export class AccountUsage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FunctionCount" })
+  @SpeakeasyMetadata({ data: "json, name=FunctionCount" })
   functionCount?: number;
 
-  @Metadata({ data: "json, name=TotalCodeSize" })
+  @SpeakeasyMetadata({ data: "json, name=TotalCodeSize" })
   totalCodeSize?: number;
 }

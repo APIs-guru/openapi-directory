@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class PubsubProjectsTopicsCreatePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class PubsubProjectsTopicsCreateQueryParams:
 
 @dataclass
 class PubsubProjectsTopicsCreateSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class PubsubProjectsTopicsCreateSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class PubsubProjectsTopicsCreateSecurity:
 
 @dataclass
 class PubsubProjectsTopicsCreateRequest:
-    path_params: PubsubProjectsTopicsCreatePathParams = field(default=None)
-    query_params: PubsubProjectsTopicsCreateQueryParams = field(default=None)
+    path_params: PubsubProjectsTopicsCreatePathParams = field()
+    query_params: PubsubProjectsTopicsCreateQueryParams = field()
+    security: PubsubProjectsTopicsCreateSecurity = field()
     request: Optional[shared.Topic] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: PubsubProjectsTopicsCreateSecurity = field(default=None)
     
 
 @dataclass
 class PubsubProjectsTopicsCreateResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     topic: Optional[shared.Topic] = field(default=None)
     

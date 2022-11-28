@@ -8,6 +8,8 @@ const (
 	DeleteTypeEnumPermanentDelete DeleteTypeEnum = "PERMANENT_DELETE"
 )
 
+// Delete
+// An object was deleted.
 type Delete struct {
 	Type *DeleteTypeEnum `json:"type,omitempty"`
 }

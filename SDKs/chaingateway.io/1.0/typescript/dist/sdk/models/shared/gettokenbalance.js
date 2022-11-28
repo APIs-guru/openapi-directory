@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetTokenBalance = /** @class */ (function (_super) {
     __extends(GetTokenBalance, _super);
     function GetTokenBalance() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=balance" }),
+        SpeakeasyMetadata({ data: "json, name=balance" }),
         __metadata("design:type", Number)
     ], GetTokenBalance.prototype, "balance", void 0);
     __decorate([
-        Metadata({ data: "json, name=contractaddress" }),
+        SpeakeasyMetadata({ data: "json, name=contractaddress" }),
         __metadata("design:type", String)
     ], GetTokenBalance.prototype, "contractaddress", void 0);
     __decorate([
-        Metadata({ data: "json, name=ethereumaddress" }),
+        SpeakeasyMetadata({ data: "json, name=ethereumaddress" }),
         __metadata("design:type", String)
     ], GetTokenBalance.prototype, "ethereumaddress", void 0);
     __decorate([
-        Metadata({ data: "json, name=ok" }),
+        SpeakeasyMetadata({ data: "json, name=ok" }),
         __metadata("design:type", Boolean)
     ], GetTokenBalance.prototype, "ok", void 0);
     return GetTokenBalance;

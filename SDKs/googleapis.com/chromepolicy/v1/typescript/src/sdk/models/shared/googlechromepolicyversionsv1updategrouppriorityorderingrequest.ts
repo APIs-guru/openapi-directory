@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleChromePolicyVersionsV1PolicyTargetKey } from "./googlechromepolicyversionsv1policytargetkey";
+
 
 
 // GoogleChromePolicyVersionsV1UpdateGroupPriorityOrderingRequest
@@ -7,12 +8,12 @@ import { GoogleChromePolicyVersionsV1PolicyTargetKey } from "./googlechromepolic
  * Request message for updating the group priority ordering of an app.
 **/
 export class GoogleChromePolicyVersionsV1UpdateGroupPriorityOrderingRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=groupIds" })
+  @SpeakeasyMetadata({ data: "json, name=groupIds" })
   groupIds?: string[];
 
-  @Metadata({ data: "json, name=policyNamespace" })
+  @SpeakeasyMetadata({ data: "json, name=policyNamespace" })
   policyNamespace?: string;
 
-  @Metadata({ data: "json, name=policyTargetKey" })
+  @SpeakeasyMetadata({ data: "json, name=policyTargetKey" })
   policyTargetKey?: GoogleChromePolicyVersionsV1PolicyTargetKey;
 }

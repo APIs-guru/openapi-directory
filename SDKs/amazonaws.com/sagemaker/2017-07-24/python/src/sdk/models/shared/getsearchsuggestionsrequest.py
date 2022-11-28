@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import resourcetype_enum
-from . import suggestionquery
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetSearchSuggestionsRequest:
-    resource: resourcetype_enum.ResourceTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Resource' }})
-    suggestion_query: Optional[suggestionquery.SuggestionQuery] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SuggestionQuery' }})
+    resource: ResourceTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Resource') }})
+    suggestion_query: Optional[SuggestionQuery] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SuggestionQuery') }})
     

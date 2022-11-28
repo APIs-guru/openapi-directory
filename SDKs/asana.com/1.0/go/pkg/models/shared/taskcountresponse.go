@@ -1,5 +1,7 @@
 package shared
 
+// TaskCountResponse
+// A response object returned from the task count endpoint.
 type TaskCountResponse struct {
 	NumCompletedMilestones  *int64 `json:"num_completed_milestones,omitempty"`
 	NumCompletedTasks       *int64 `json:"num_completed_tasks,omitempty"`

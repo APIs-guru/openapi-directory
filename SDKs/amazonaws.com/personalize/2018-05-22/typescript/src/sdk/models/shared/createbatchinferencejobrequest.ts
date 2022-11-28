@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BatchInferenceJobConfig } from "./batchinferencejobconfig";
 import { BatchInferenceJobInput } from "./batchinferencejobinput";
 import { BatchInferenceJobOutput } from "./batchinferencejoboutput";
 
 
+
 export class CreateBatchInferenceJobRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=batchInferenceJobConfig" })
+  @SpeakeasyMetadata({ data: "json, name=batchInferenceJobConfig" })
   batchInferenceJobConfig?: BatchInferenceJobConfig;
 
-  @Metadata({ data: "json, name=filterArn" })
+  @SpeakeasyMetadata({ data: "json, name=filterArn" })
   filterArn?: string;
 
-  @Metadata({ data: "json, name=jobInput" })
+  @SpeakeasyMetadata({ data: "json, name=jobInput" })
   jobInput: BatchInferenceJobInput;
 
-  @Metadata({ data: "json, name=jobName" })
+  @SpeakeasyMetadata({ data: "json, name=jobName" })
   jobName: string;
 
-  @Metadata({ data: "json, name=jobOutput" })
+  @SpeakeasyMetadata({ data: "json, name=jobOutput" })
   jobOutput: BatchInferenceJobOutput;
 
-  @Metadata({ data: "json, name=numResults" })
+  @SpeakeasyMetadata({ data: "json, name=numResults" })
   numResults?: number;
 
-  @Metadata({ data: "json, name=roleArn" })
+  @SpeakeasyMetadata({ data: "json, name=roleArn" })
   roleArn: string;
 
-  @Metadata({ data: "json, name=solutionVersionArn" })
+  @SpeakeasyMetadata({ data: "json, name=solutionVersionArn" })
   solutionVersionArn: string;
 }

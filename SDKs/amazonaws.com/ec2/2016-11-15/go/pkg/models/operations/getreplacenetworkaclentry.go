@@ -6,11 +6,15 @@ const (
 	GetReplaceNetworkACLEntryActionEnumReplaceNetworkACLEntry GetReplaceNetworkACLEntryActionEnum = "ReplaceNetworkAclEntry"
 )
 
+// GetReplaceNetworkACLEntryIcmp
+// Describes the ICMP type and code.
 type GetReplaceNetworkACLEntryIcmp struct {
 	Code *int64 `queryParam:"name=Code"`
 	Type *int64 `queryParam:"name=Type"`
 }
 
+// GetReplaceNetworkACLEntryPortRange
+// Describes a range of ports.
 type GetReplaceNetworkACLEntryPortRange struct {
 	From *int64 `queryParam:"name=From"`
 	To   *int64 `queryParam:"name=To"`

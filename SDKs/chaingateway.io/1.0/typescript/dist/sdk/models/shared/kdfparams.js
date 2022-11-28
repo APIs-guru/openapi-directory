@@ -22,30 +22,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Kdfparams = /** @class */ (function (_super) {
     __extends(Kdfparams, _super);
     function Kdfparams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=dklen" }),
+        SpeakeasyMetadata({ data: "json, name=dklen" }),
         __metadata("design:type", Number)
     ], Kdfparams.prototype, "dklen", void 0);
     __decorate([
-        Metadata({ data: "json, name=n" }),
+        SpeakeasyMetadata({ data: "json, name=n" }),
         __metadata("design:type", Number)
     ], Kdfparams.prototype, "n", void 0);
     __decorate([
-        Metadata({ data: "json, name=p" }),
+        SpeakeasyMetadata({ data: "json, name=p" }),
         __metadata("design:type", Number)
     ], Kdfparams.prototype, "p", void 0);
     __decorate([
-        Metadata({ data: "json, name=r" }),
+        SpeakeasyMetadata({ data: "json, name=r" }),
         __metadata("design:type", Number)
     ], Kdfparams.prototype, "r", void 0);
     __decorate([
-        Metadata({ data: "json, name=salt" }),
+        SpeakeasyMetadata({ data: "json, name=salt" }),
         __metadata("design:type", String)
     ], Kdfparams.prototype, "salt", void 0);
     return Kdfparams;

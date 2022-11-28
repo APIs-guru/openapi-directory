@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { V3StopAccessibilityWheelchair } from "./v3stopaccessibilitywheelchair";
 
 
+
 export class V3StopAccessibility extends SpeakeasyBase {
-  @Metadata({ data: "json, name=audio_customer_information" })
+  @SpeakeasyMetadata({ data: "json, name=audio_customer_information" })
   audioCustomerInformation?: boolean;
 
-  @Metadata({ data: "json, name=escalator" })
+  @SpeakeasyMetadata({ data: "json, name=escalator" })
   escalator?: boolean;
 
-  @Metadata({ data: "json, name=hearing_loop" })
+  @SpeakeasyMetadata({ data: "json, name=hearing_loop" })
   hearingLoop?: boolean;
 
-  @Metadata({ data: "json, name=lift" })
+  @SpeakeasyMetadata({ data: "json, name=lift" })
   lift?: boolean;
 
-  @Metadata({ data: "json, name=lighting" })
+  @SpeakeasyMetadata({ data: "json, name=lighting" })
   lighting?: boolean;
 
-  @Metadata({ data: "json, name=platform_number" })
+  @SpeakeasyMetadata({ data: "json, name=platform_number" })
   platformNumber?: number;
 
-  @Metadata({ data: "json, name=stairs" })
+  @SpeakeasyMetadata({ data: "json, name=stairs" })
   stairs?: boolean;
 
-  @Metadata({ data: "json, name=stop_accessible" })
+  @SpeakeasyMetadata({ data: "json, name=stop_accessible" })
   stopAccessible?: boolean;
 
-  @Metadata({ data: "json, name=tactile_ground_surface_indicator" })
+  @SpeakeasyMetadata({ data: "json, name=tactile_ground_surface_indicator" })
   tactileGroundSurfaceIndicator?: boolean;
 
-  @Metadata({ data: "json, name=waiting_room" })
+  @SpeakeasyMetadata({ data: "json, name=waiting_room" })
   waitingRoom?: boolean;
 
-  @Metadata({ data: "json, name=wheelchair" })
+  @SpeakeasyMetadata({ data: "json, name=wheelchair" })
   wheelchair?: V3StopAccessibilityWheelchair;
 }

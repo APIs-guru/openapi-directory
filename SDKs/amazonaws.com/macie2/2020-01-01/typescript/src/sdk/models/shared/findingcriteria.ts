@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CriterionAdditionalProperties } from "./criterionadditionalproperties";
+
 
 
 // FindingCriteria
@@ -8,6 +8,6 @@ import { CriterionAdditionalProperties } from "./criterionadditionalproperties";
  * Specifies, as a map, one or more property-based conditions that filter the results of a query for findings.
 **/
 export class FindingCriteria extends SpeakeasyBase {
-  @Metadata({ data: "json, name=criterion", elemType: shared.CriterionAdditionalProperties })
+  @SpeakeasyMetadata({ data: "json, name=criterion", elemType: CriterionAdditionalProperties })
   criterion?: Map<string, CriterionAdditionalProperties>;
 }

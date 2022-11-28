@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,14 +23,18 @@ class CreateLifecyclePolicyHeaders:
 @dataclass_json
 @dataclass
 class CreateLifecyclePolicyRequestBodyPolicyDetails:
-    actions: Optional[List[shared.Action]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Actions' }})
-    event_source: Optional[shared.EventSource] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EventSource' }})
-    parameters: Optional[shared.Parameters] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Parameters' }})
-    policy_type: Optional[shared.PolicyTypeValuesEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PolicyType' }})
-    resource_locations: Optional[List[shared.ResourceLocationValuesEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ResourceLocations' }})
-    resource_types: Optional[List[shared.ResourceTypeValuesEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ResourceTypes' }})
-    schedules: Optional[List[shared.Schedule]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Schedules' }})
-    target_tags: Optional[List[shared.Tag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TargetTags' }})
+    r"""CreateLifecyclePolicyRequestBodyPolicyDetails
+    Specifies the configuration of a lifecycle policy.
+    """
+    
+    actions: Optional[List[shared.Action]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Actions') }})
+    event_source: Optional[shared.EventSource] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('EventSource') }})
+    parameters: Optional[shared.Parameters] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Parameters') }})
+    policy_type: Optional[shared.PolicyTypeValuesEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PolicyType') }})
+    resource_locations: Optional[List[shared.ResourceLocationValuesEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ResourceLocations') }})
+    resource_types: Optional[List[shared.ResourceTypeValuesEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ResourceTypes') }})
+    schedules: Optional[List[shared.Schedule]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Schedules') }})
+    target_tags: Optional[List[shared.Tag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TargetTags') }})
     
 class CreateLifecyclePolicyRequestBodyStateEnum(str, Enum):
     ENABLED = "ENABLED"
@@ -35,25 +44,25 @@ class CreateLifecyclePolicyRequestBodyStateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CreateLifecyclePolicyRequestBody:
-    description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
-    execution_role_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ExecutionRoleArn' }})
-    policy_details: CreateLifecyclePolicyRequestBodyPolicyDetails = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PolicyDetails' }})
-    state: CreateLifecyclePolicyRequestBodyStateEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'State' }})
-    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Tags' }})
+    description: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Description') }})
+    execution_role_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ExecutionRoleArn') }})
+    policy_details: CreateLifecyclePolicyRequestBodyPolicyDetails = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('PolicyDetails') }})
+    state: CreateLifecyclePolicyRequestBodyStateEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('State') }})
+    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Tags') }})
     
 
 @dataclass
 class CreateLifecyclePolicyRequest:
-    headers: CreateLifecyclePolicyHeaders = field(default=None)
-    request: CreateLifecyclePolicyRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateLifecyclePolicyHeaders = field()
+    request: CreateLifecyclePolicyRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateLifecyclePolicyResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     create_lifecycle_policy_response: Optional[shared.CreateLifecyclePolicyResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

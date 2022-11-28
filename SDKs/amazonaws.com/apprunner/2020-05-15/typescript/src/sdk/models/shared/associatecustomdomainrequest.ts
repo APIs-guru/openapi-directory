@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AssociateCustomDomainRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DomainName" })
+  @SpeakeasyMetadata({ data: "json, name=DomainName" })
   domainName: string;
 
-  @Metadata({ data: "json, name=EnableWWWSubdomain" })
+  @SpeakeasyMetadata({ data: "json, name=EnableWWWSubdomain" })
   enableWwwSubdomain?: boolean;
 
-  @Metadata({ data: "json, name=ServiceArn" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceArn" })
   serviceArn: string;
 }

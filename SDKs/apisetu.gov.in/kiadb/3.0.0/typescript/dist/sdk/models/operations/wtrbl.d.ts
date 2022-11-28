@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class WtrblRequestBodyCertificateParameters extends SpeakeasyBase {
     dob: string;
@@ -18,10 +18,6 @@ export declare class WtrblRequestBody extends SpeakeasyBase {
 export declare class WtrblSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class WtrblRequest extends SpeakeasyBase {
-    request?: WtrblRequestBody;
-    security: WtrblSecurity;
 }
 export declare enum Wtrbl400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -104,6 +100,10 @@ export declare enum Wtrbl504ApplicationJsonErrorDescriptionEnum {
 export declare class Wtrbl504ApplicationJson extends SpeakeasyBase {
     error?: Wtrbl504ApplicationJsonErrorEnum;
     errorDescription?: Wtrbl504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class WtrblRequest extends SpeakeasyBase {
+    request?: WtrblRequestBody;
+    security: WtrblSecurity;
 }
 export declare class WtrblResponse extends SpeakeasyBase {
     contentType: string;

@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export const CREATEFIREWALLS_SERVERS = [
-	"https://api.linode.com/v4",
-];
 
+export const CreateFirewallsServerList = [
+	"https://api.linode.com/v4",
+] as const;
 
 
 // CreateFirewallsRequestBodyDevices
@@ -14,18 +14,18 @@ export const CREATEFIREWALLS_SERVERS = [
  * 
 **/
 export class CreateFirewallsRequestBodyDevices extends SpeakeasyBase {
-  @Metadata({ data: "json, name=linodes" })
+  @SpeakeasyMetadata({ data: "json, name=linodes" })
   linodes?: number[];
 }
 
 export enum CreateFirewallsRequestBodyRulesInboundPolicyEnum {
-    Accept = "ACCEPT"
-,    Drop = "DROP"
+    Accept = "ACCEPT",
+    Drop = "DROP"
 }
 
 export enum CreateFirewallsRequestBodyRulesOutboundPolicyEnum {
-    Accept = "ACCEPT"
-,    Drop = "DROP"
+    Accept = "ACCEPT",
+    Drop = "DROP"
 }
 
 
@@ -37,102 +37,72 @@ export enum CreateFirewallsRequestBodyRulesOutboundPolicyEnum {
  * 
 **/
 export class CreateFirewallsRequestBodyRules extends SpeakeasyBase {
-  @Metadata({ data: "json, name=inbound", elemType: shared.FirewallRuleConfig })
+  @SpeakeasyMetadata({ data: "json, name=inbound", elemType: shared.FirewallRuleConfig })
   inbound?: shared.FirewallRuleConfig[];
 
-  @Metadata({ data: "json, name=inbound_policy" })
+  @SpeakeasyMetadata({ data: "json, name=inbound_policy" })
   inboundPolicy?: CreateFirewallsRequestBodyRulesInboundPolicyEnum;
 
-  @Metadata({ data: "json, name=outbound", elemType: shared.FirewallRuleConfig })
+  @SpeakeasyMetadata({ data: "json, name=outbound", elemType: shared.FirewallRuleConfig })
   outbound?: shared.FirewallRuleConfig[];
 
-  @Metadata({ data: "json, name=outbound_policy" })
+  @SpeakeasyMetadata({ data: "json, name=outbound_policy" })
   outboundPolicy?: CreateFirewallsRequestBodyRulesOutboundPolicyEnum;
 }
 
-export enum CreateFirewallsRequestBodyStatusEnum {
-    Enabled = "enabled"
-,    Disabled = "disabled"
-,    Deleted = "deleted"
-}
 
-
-export class CreateFirewallsRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=created" })
-  created?: Date;
-
-  @Metadata({ data: "json, name=devices" })
+export class CreateFirewallsRequestBodyInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=devices" })
   devices?: CreateFirewallsRequestBodyDevices;
 
-  @Metadata({ data: "json, name=id" })
-  id?: number;
-
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label: string;
 
-  @Metadata({ data: "json, name=rules" })
+  @SpeakeasyMetadata({ data: "json, name=rules" })
   rules: CreateFirewallsRequestBodyRules;
 
-  @Metadata({ data: "json, name=status" })
-  status?: CreateFirewallsRequestBodyStatusEnum;
-
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: string[];
-
-  @Metadata({ data: "json, name=updated" })
-  updated?: Date;
-}
-
-
-export class CreateFirewallsSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class CreateFirewallsSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
 }
 
 
 export class CreateFirewallsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: CreateFirewallsSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: CreateFirewallsSecurityOption2;
-}
-
-
-export class CreateFirewallsRequest extends SpeakeasyBase {
-  @Metadata()
-  serverUrl?: string;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: CreateFirewallsRequestBody;
-
-  @Metadata()
-  security: CreateFirewallsSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class CreateFirewallsDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class CreateFirewallsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  serverUrl?: string;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: CreateFirewallsRequestBodyInput;
+
+  @SpeakeasyMetadata()
+  security: CreateFirewallsSecurity;
+}
+
+
 export class CreateFirewallsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   firewall?: shared.Firewall;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createFirewallsDefaultApplicationJsonObject?: CreateFirewallsDefaultApplicationJson;
 }

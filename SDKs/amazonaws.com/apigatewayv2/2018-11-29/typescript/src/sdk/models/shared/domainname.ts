@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DomainNameConfiguration } from "./domainnameconfiguration";
 import { MutualTlsAuthentication } from "./mutualtlsauthentication";
+
 
 
 // DomainName
@@ -9,18 +9,18 @@ import { MutualTlsAuthentication } from "./mutualtlsauthentication";
  * Represents a domain name.
 **/
 export class DomainName extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApiMappingSelectionExpression" })
+  @SpeakeasyMetadata({ data: "json, name=ApiMappingSelectionExpression" })
   apiMappingSelectionExpression?: string;
 
-  @Metadata({ data: "json, name=DomainName" })
+  @SpeakeasyMetadata({ data: "json, name=DomainName" })
   domainName: string;
 
-  @Metadata({ data: "json, name=DomainNameConfigurations", elemType: shared.DomainNameConfiguration })
+  @SpeakeasyMetadata({ data: "json, name=DomainNameConfigurations", elemType: DomainNameConfiguration })
   domainNameConfigurations?: DomainNameConfiguration[];
 
-  @Metadata({ data: "json, name=MutualTlsAuthentication" })
+  @SpeakeasyMetadata({ data: "json, name=MutualTlsAuthentication" })
   mutualTlsAuthentication?: MutualTlsAuthentication;
 
-  @Metadata({ data: "json, name=Tags" })
+  @SpeakeasyMetadata({ data: "json, name=Tags" })
   tags?: Map<string, string>;
 }

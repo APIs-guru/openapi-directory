@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from sdk.models import shared
 
 
@@ -13,19 +13,19 @@ class FunctionsListQueryParams:
 
 @dataclass
 class FunctionsListSecurity:
-    key: shared.SchemeKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
-    project: shared.SchemeProject = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    key: shared.SchemeKey = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    project: shared.SchemeProject = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class FunctionsListRequest:
-    query_params: FunctionsListQueryParams = field(default=None)
-    security: FunctionsListSecurity = field(default=None)
+    query_params: FunctionsListQueryParams = field()
+    security: FunctionsListSecurity = field()
     
 
 @dataclass
 class FunctionsListResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     function_list: Optional[shared.FunctionList] = field(default=None)
     

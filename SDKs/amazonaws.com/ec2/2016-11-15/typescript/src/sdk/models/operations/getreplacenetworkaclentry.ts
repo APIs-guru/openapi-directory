@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetReplaceNetworkAclEntryActionEnum {
     ReplaceNetworkAclEntry = "ReplaceNetworkAclEntry"
@@ -10,10 +11,10 @@ export enum GetReplaceNetworkAclEntryActionEnum {
  * Describes the ICMP type and code.
 **/
 export class GetReplaceNetworkAclEntryIcmp extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, name=Code" })
+  @SpeakeasyMetadata({ data: "queryParam, name=Code" })
   code?: number;
 
-  @Metadata({ data: "queryParam, name=Type" })
+  @SpeakeasyMetadata({ data: "queryParam, name=Type" })
   type?: number;
 }
 
@@ -23,16 +24,16 @@ export class GetReplaceNetworkAclEntryIcmp extends SpeakeasyBase {
  * Describes a range of ports.
 **/
 export class GetReplaceNetworkAclEntryPortRange extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, name=From" })
+  @SpeakeasyMetadata({ data: "queryParam, name=From" })
   from?: number;
 
-  @Metadata({ data: "queryParam, name=To" })
+  @SpeakeasyMetadata({ data: "queryParam, name=To" })
   to?: number;
 }
 
 export enum GetReplaceNetworkAclEntryRuleActionEnum {
-    Allow = "allow"
-,    Deny = "deny"
+    Allow = "allow",
+    Deny = "deny"
 }
 
 export enum GetReplaceNetworkAclEntryVersionEnum {
@@ -41,81 +42,81 @@ export enum GetReplaceNetworkAclEntryVersionEnum {
 
 
 export class GetReplaceNetworkAclEntryQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Action" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" })
   action: GetReplaceNetworkAclEntryActionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=CidrBlock" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=CidrBlock" })
   cidrBlock?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=DryRun" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DryRun" })
   dryRun?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Egress" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Egress" })
   egress: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Icmp" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Icmp" })
   icmp?: GetReplaceNetworkAclEntryIcmp;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Ipv6CidrBlock" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Ipv6CidrBlock" })
   ipv6CidrBlock?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=NetworkAclId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=NetworkAclId" })
   networkAclId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=PortRange" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=PortRange" })
   portRange?: GetReplaceNetworkAclEntryPortRange;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Protocol" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Protocol" })
   protocol: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=RuleAction" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=RuleAction" })
   ruleAction: GetReplaceNetworkAclEntryRuleActionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=RuleNumber" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=RuleNumber" })
   ruleNumber: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" })
   version: GetReplaceNetworkAclEntryVersionEnum;
 }
 
 
 export class GetReplaceNetworkAclEntryHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class GetReplaceNetworkAclEntryRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetReplaceNetworkAclEntryQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetReplaceNetworkAclEntryHeaders;
 }
 
 
 export class GetReplaceNetworkAclEntryResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

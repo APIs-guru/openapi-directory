@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudPolicysimulatorV1beta1ReplayResultsSummary
+// Summary statistics about the replayed log entries.
 type GoogleCloudPolicysimulatorV1beta1ReplayResultsSummary struct {
 	DifferenceCount *int32          `json:"differenceCount,omitempty"`
 	ErrorCount      *int32          `json:"errorCount,omitempty"`

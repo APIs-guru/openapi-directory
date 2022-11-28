@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LinkRequestBodyIdentification
@@ -6,10 +7,10 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * User identification requires a userId, email or both
 **/
 export class LinkRequestBodyIdentification extends SpeakeasyBase {
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=userId" })
+  @SpeakeasyMetadata({ data: "json, name=userId" })
   userId?: string;
 }
 
@@ -19,34 +20,28 @@ export class LinkRequestBodyIdentification extends SpeakeasyBase {
  * Link web activity to user
 **/
 export class LinkRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deviceId" })
+  @SpeakeasyMetadata({ data: "json, name=deviceId" })
   deviceId: string;
 
-  @Metadata({ data: "json, name=identification" })
+  @SpeakeasyMetadata({ data: "json, name=identification" })
   identification: LinkRequestBodyIdentification;
 }
 
 
-export class LinkRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: LinkRequestBody;
-}
-
-
 export class Link201ApplicationJsonMeta extends SpeakeasyBase {
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: number;
 }
 
 
 export class Link201ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 
-  @Metadata({ data: "json, name=meta" })
+  @SpeakeasyMetadata({ data: "json, name=meta" })
   meta: Link201ApplicationJsonMeta;
 }
 
@@ -56,13 +51,13 @@ export class Link201ApplicationJson extends SpeakeasyBase {
  * All query-, header- and path- parameters that seemed incorrect
 **/
 export class Link400ApplicationJsonErrorsParameters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=header" })
+  @SpeakeasyMetadata({ data: "json, name=header" })
   header?: Map<string, string>;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path?: Map<string, string>;
 
-  @Metadata({ data: "json, name=query" })
+  @SpeakeasyMetadata({ data: "json, name=query" })
   query?: Map<string, string>;
 }
 
@@ -72,132 +67,138 @@ export class Link400ApplicationJsonErrorsParameters extends SpeakeasyBase {
  * Map that sums up all received values that seemed incorrect
 **/
 export class Link400ApplicationJsonErrors extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fields" })
+  @SpeakeasyMetadata({ data: "json, name=fields" })
   fields?: Map<string, string>;
 
-  @Metadata({ data: "json, name=parameters" })
+  @SpeakeasyMetadata({ data: "json, name=parameters" })
   parameters?: Link400ApplicationJsonErrorsParameters;
 }
 
 
 export class Link400ApplicationJsonMeta extends SpeakeasyBase {
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: number;
 }
 
 
 export class Link400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors" })
+  @SpeakeasyMetadata({ data: "json, name=errors" })
   errors: Link400ApplicationJsonErrors;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 
-  @Metadata({ data: "json, name=meta" })
+  @SpeakeasyMetadata({ data: "json, name=meta" })
   meta: Link400ApplicationJsonMeta;
 }
 
 
 export class Link401ApplicationJsonMeta extends SpeakeasyBase {
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: number;
 }
 
 
 export class Link401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 
-  @Metadata({ data: "json, name=meta" })
+  @SpeakeasyMetadata({ data: "json, name=meta" })
   meta: Link401ApplicationJsonMeta;
 }
 
 
 export class Link403ApplicationJsonMeta extends SpeakeasyBase {
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: number;
 }
 
 
 export class Link403ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 
-  @Metadata({ data: "json, name=meta" })
+  @SpeakeasyMetadata({ data: "json, name=meta" })
   meta: Link403ApplicationJsonMeta;
 }
 
 
 export class Link429ApplicationJsonMeta extends SpeakeasyBase {
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: number;
 }
 
 
 export class Link429ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 
-  @Metadata({ data: "json, name=meta" })
+  @SpeakeasyMetadata({ data: "json, name=meta" })
   meta: Link429ApplicationJsonMeta;
 }
 
 
 export class Link500ApplicationJsonMeta extends SpeakeasyBase {
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: number;
 }
 
 
 export class Link500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 
-  @Metadata({ data: "json, name=meta" })
+  @SpeakeasyMetadata({ data: "json, name=meta" })
   meta: Link500ApplicationJsonMeta;
 }
 
 
+export class LinkRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: LinkRequestBody;
+}
+
+
 export class LinkResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   link201ApplicationJsonObject?: Link201ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   link400ApplicationJsonObject?: Link400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   link401ApplicationJsonObject?: Link401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   link403ApplicationJsonObject?: Link403ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   link429ApplicationJsonObject?: Link429ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   link500ApplicationJsonObject?: Link500ApplicationJson;
 }

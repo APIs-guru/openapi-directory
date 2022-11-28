@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class FlowTagEnum(str, Enum):
     TAG_TRAFFIC_TYPE_UNKNOWN = "TAG_TRAFFIC_TYPE_UNKNOWN"

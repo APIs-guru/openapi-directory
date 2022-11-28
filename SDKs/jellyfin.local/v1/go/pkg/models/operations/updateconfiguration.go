@@ -4,10 +4,10 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-type UpdateConfigurationRequests struct {
-	ServerConfiguration  *shared.ServerConfiguration `request:"mediaType=application/*+json"`
-	ServerConfiguration1 *shared.ServerConfiguration `request:"mediaType=application/json"`
-	ServerConfiguration2 *shared.ServerConfiguration `request:"mediaType=text/json"`
+type UpdateConfigurationRequestsInput struct {
+	ServerConfiguration  *shared.ServerConfigurationInput `request:"mediaType=application/*+json"`
+	ServerConfiguration1 *shared.ServerConfigurationInput `request:"mediaType=application/json"`
+	ServerConfiguration2 *shared.ServerConfigurationInput `request:"mediaType=text/json"`
 }
 
 type UpdateConfigurationSecurity struct {
@@ -15,7 +15,7 @@ type UpdateConfigurationSecurity struct {
 }
 
 type UpdateConfigurationRequest struct {
-	Request  UpdateConfigurationRequests
+	Request  UpdateConfigurationRequestsInput
 	Security UpdateConfigurationSecurity
 }
 

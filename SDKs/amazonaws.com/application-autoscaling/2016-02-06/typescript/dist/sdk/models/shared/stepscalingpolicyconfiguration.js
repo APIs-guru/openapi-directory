@@ -22,10 +22,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AdjustmentTypeEnum } from "./adjustmenttypeenum";
 import { MetricAggregationTypeEnum } from "./metricaggregationtypeenum";
+import { StepAdjustment } from "./stepadjustment";
 // StepScalingPolicyConfiguration
 /**
  * Represents a step scaling policy configuration to use with Application Auto Scaling.
@@ -36,23 +36,23 @@ var StepScalingPolicyConfiguration = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AdjustmentType" }),
+        SpeakeasyMetadata({ data: "json, name=AdjustmentType" }),
         __metadata("design:type", String)
     ], StepScalingPolicyConfiguration.prototype, "adjustmentType", void 0);
     __decorate([
-        Metadata({ data: "json, name=Cooldown" }),
+        SpeakeasyMetadata({ data: "json, name=Cooldown" }),
         __metadata("design:type", Number)
     ], StepScalingPolicyConfiguration.prototype, "cooldown", void 0);
     __decorate([
-        Metadata({ data: "json, name=MetricAggregationType" }),
+        SpeakeasyMetadata({ data: "json, name=MetricAggregationType" }),
         __metadata("design:type", String)
     ], StepScalingPolicyConfiguration.prototype, "metricAggregationType", void 0);
     __decorate([
-        Metadata({ data: "json, name=MinAdjustmentMagnitude" }),
+        SpeakeasyMetadata({ data: "json, name=MinAdjustmentMagnitude" }),
         __metadata("design:type", Number)
     ], StepScalingPolicyConfiguration.prototype, "minAdjustmentMagnitude", void 0);
     __decorate([
-        Metadata({ data: "json, name=StepAdjustments", elemType: shared.StepAdjustment }),
+        SpeakeasyMetadata({ data: "json, name=StepAdjustments", elemType: StepAdjustment }),
         __metadata("design:type", Array)
     ], StepScalingPolicyConfiguration.prototype, "stepAdjustments", void 0);
     return StepScalingPolicyConfiguration;

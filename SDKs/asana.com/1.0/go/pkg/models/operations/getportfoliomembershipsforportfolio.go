@@ -16,13 +16,13 @@ type GetPortfolioMembershipsForPortfolioQueryParams struct {
 	User      *string  `queryParam:"style=form,explode=true,name=user"`
 }
 
+type GetPortfolioMembershipsForPortfolio200ApplicationJSON struct {
+	Data []shared.PortfolioMembershipCompact `json:"data,omitempty"`
+}
+
 type GetPortfolioMembershipsForPortfolioRequest struct {
 	PathParams  GetPortfolioMembershipsForPortfolioPathParams
 	QueryParams GetPortfolioMembershipsForPortfolioQueryParams
-}
-
-type GetPortfolioMembershipsForPortfolio200ApplicationJSON struct {
-	Data []shared.PortfolioMembershipCompact `json:"data,omitempty"`
 }
 
 type GetPortfolioMembershipsForPortfolioResponse struct {

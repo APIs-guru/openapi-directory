@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum DeleteEnvironmentAccountConnectionXAmzTargetEnum {
     AwsProton20200720DeleteEnvironmentAccountConnection = "AwsProton20200720.DeleteEnvironmentAccountConnection"

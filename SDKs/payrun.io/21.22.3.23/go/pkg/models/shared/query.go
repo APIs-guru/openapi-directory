@@ -1,9 +1,13 @@
 package shared
 
+// QueryQueryGroup
+// The querys' groups
 type QueryQueryGroup struct {
 	Group []interface{} `json:"Group,omitempty"`
 }
 
+// QueryQueryVariable
+// The querys' variables
 type QueryQueryVariable struct {
 	Variable []interface{} `json:"Variable,omitempty"`
 }

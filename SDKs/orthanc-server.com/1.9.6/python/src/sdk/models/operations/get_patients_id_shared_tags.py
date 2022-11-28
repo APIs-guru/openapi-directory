@@ -4,7 +4,7 @@ from typing import Any,Optional
 
 @dataclass
 class GetPatientsIDSharedTagsPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,13 +15,13 @@ class GetPatientsIDSharedTagsQueryParams:
 
 @dataclass
 class GetPatientsIDSharedTagsRequest:
-    path_params: GetPatientsIDSharedTagsPathParams = field(default=None)
-    query_params: GetPatientsIDSharedTagsQueryParams = field(default=None)
+    path_params: GetPatientsIDSharedTagsPathParams = field()
+    query_params: GetPatientsIDSharedTagsQueryParams = field()
     
 
 @dataclass
 class GetPatientsIDSharedTagsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_patients_id_shared_tags_200_application_json_any: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

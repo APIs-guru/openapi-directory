@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// InstanceInfo
+// Information about an on-premises instance.
 type InstanceInfo struct {
 	DeregisterTime *time.Time `json:"deregisterTime,omitempty"`
 	IamSessionArn  *string    `json:"iamSessionArn,omitempty"`

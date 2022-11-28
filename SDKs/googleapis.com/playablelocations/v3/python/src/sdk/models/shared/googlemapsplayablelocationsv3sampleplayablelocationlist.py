@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import googlemapsplayablelocationsv3sampleplayablelocation
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleMapsPlayablelocationsV3SamplePlayableLocationList:
-    locations: Optional[List[googlemapsplayablelocationsv3sampleplayablelocation.GoogleMapsPlayablelocationsV3SamplePlayableLocation]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'locations' }})
+    r"""GoogleMapsPlayablelocationsV3SamplePlayableLocationList
+    A list of PlayableLocation objects that satisfies a single Criterion.
+    """
+    
+    locations: Optional[List[GoogleMapsPlayablelocationsV3SamplePlayableLocation]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('locations') }})
     

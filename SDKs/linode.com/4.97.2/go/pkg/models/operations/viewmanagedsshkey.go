@@ -4,29 +4,23 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-type ViewManagedSSHKeySecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type ViewManagedSSHKeySecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type ViewManagedSSHKeySecurity struct {
-	Option1 *ViewManagedSSHKeySecurityOption1 `security:"option"`
-	Option2 *ViewManagedSSHKeySecurityOption2 `security:"option"`
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
 }
 
-type ViewManagedSSHKeyRequest struct {
-	Security ViewManagedSSHKeySecurity
-}
-
+// ViewManagedSSHKey200ApplicationJSON
+// A unique SSH public key that allows Linode's special forces to access a Managed server to respond to Issues.
 type ViewManagedSSHKey200ApplicationJSON struct {
 	SSHKey *string `json:"ssh_key,omitempty"`
 }
 
 type ViewManagedSSHKeyDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type ViewManagedSSHKeyRequest struct {
+	Security ViewManagedSSHKeySecurity
 }
 
 type ViewManagedSSHKeyResponse struct {

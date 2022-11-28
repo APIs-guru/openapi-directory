@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PutFactQueryParams = /** @class */ (function (_super) {
     __extends(PutFactQueryParams, _super);
@@ -30,19 +30,19 @@ var PutFactQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=category" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=category" }),
         __metadata("design:type", String)
     ], PutFactQueryParams.prototype, "category", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fact" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fact" }),
         __metadata("design:type", String)
     ], PutFactQueryParams.prototype, "fact", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=subcategory" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=subcategory" }),
         __metadata("design:type", String)
     ], PutFactQueryParams.prototype, "subcategory", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=tags" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tags" }),
         __metadata("design:type", String)
     ], PutFactQueryParams.prototype, "tags", void 0);
     return PutFactQueryParams;
@@ -54,7 +54,7 @@ var PutFactSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeXFungeneratorsApiSecret)
     ], PutFactSecurity.prototype, "xFungeneratorsApiSecret", void 0);
     return PutFactSecurity;
@@ -66,11 +66,11 @@ var PutFactRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PutFactQueryParams)
     ], PutFactRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PutFactSecurity)
     ], PutFactRequest.prototype, "security", void 0);
     return PutFactRequest;
@@ -82,11 +82,11 @@ var PutFactResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PutFactResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PutFactResponse.prototype, "statusCode", void 0);
     return PutFactResponse;

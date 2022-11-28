@@ -1,31 +1,59 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
+
+
+export class LeaveTypeInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=CurrentRecord" })
+  currentRecord?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=IsPaidLeave" })
+  isPaidLeave?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=LeaveLoadingRate" })
+  leaveLoadingRate?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=LeaveTypeID" })
+  leaveTypeId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=Name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=NormalEntitlement" })
+  normalEntitlement?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=ShowOnPayslip" })
+  showOnPayslip?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=TypeOfUnits" })
+  typeOfUnits?: string;
+}
 
 
 export class LeaveType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CurrentRecord" })
+  @SpeakeasyMetadata({ data: "json, name=CurrentRecord" })
   currentRecord?: boolean;
 
-  @Metadata({ data: "json, name=IsPaidLeave" })
+  @SpeakeasyMetadata({ data: "json, name=IsPaidLeave" })
   isPaidLeave?: boolean;
 
-  @Metadata({ data: "json, name=LeaveLoadingRate" })
+  @SpeakeasyMetadata({ data: "json, name=LeaveLoadingRate" })
   leaveLoadingRate?: number;
 
-  @Metadata({ data: "json, name=LeaveTypeID" })
+  @SpeakeasyMetadata({ data: "json, name=LeaveTypeID" })
   leaveTypeId?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=NormalEntitlement" })
+  @SpeakeasyMetadata({ data: "json, name=NormalEntitlement" })
   normalEntitlement?: number;
 
-  @Metadata({ data: "json, name=ShowOnPayslip" })
+  @SpeakeasyMetadata({ data: "json, name=ShowOnPayslip" })
   showOnPayslip?: boolean;
 
-  @Metadata({ data: "json, name=TypeOfUnits" })
+  @SpeakeasyMetadata({ data: "json, name=TypeOfUnits" })
   typeOfUnits?: string;
 
-  @Metadata({ data: "json, name=UpdatedDateUTC" })
+  @SpeakeasyMetadata({ data: "json, name=UpdatedDateUTC" })
   updatedDateUtc?: string;
 }

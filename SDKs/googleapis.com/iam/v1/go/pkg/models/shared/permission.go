@@ -17,6 +17,8 @@ const (
 	PermissionStageEnumDeprecated PermissionStageEnum = "DEPRECATED"
 )
 
+// Permission
+// A permission which can be included by a role.
 type Permission struct {
 	APIDisabled             *bool                                  `json:"apiDisabled,omitempty"`
 	CustomRolesSupportLevel *PermissionCustomRolesSupportLevelEnum `json:"customRolesSupportLevel,omitempty"`

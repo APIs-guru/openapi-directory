@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ServerGroup } from "./servergroup";
 import { Tag } from "./tag";
 export declare class UpdateAppRequest extends SpeakeasyBase {

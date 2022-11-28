@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AppointmentAuditViewModel } from "./appointmentauditviewmodel";
 import { CustomFieldViewModel } from "./customfieldviewmodel";
 import { AppointmentCustomerViewModel } from "./appointmentcustomerviewmodel";

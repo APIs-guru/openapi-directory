@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Buyer } from "./buyer";
+
 
 
 // ListBuyersResponse
@@ -8,9 +8,9 @@ import { Buyer } from "./buyer";
  * A response containing buyer account information.
 **/
 export class ListBuyersResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=buyers", elemType: shared.Buyer })
+  @SpeakeasyMetadata({ data: "json, name=buyers", elemType: Buyer })
   buyers?: Buyer[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

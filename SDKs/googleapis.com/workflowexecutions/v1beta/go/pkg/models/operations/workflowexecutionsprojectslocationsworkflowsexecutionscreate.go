@@ -30,7 +30,7 @@ type WorkflowexecutionsProjectsLocationsWorkflowsExecutionsCreateSecurity struct
 type WorkflowexecutionsProjectsLocationsWorkflowsExecutionsCreateRequest struct {
 	PathParams  WorkflowexecutionsProjectsLocationsWorkflowsExecutionsCreatePathParams
 	QueryParams WorkflowexecutionsProjectsLocationsWorkflowsExecutionsCreateQueryParams
-	Request     *shared.Execution `request:"mediaType=application/json"`
+	Request     *shared.ExecutionInput `request:"mediaType=application/json"`
 	Security    WorkflowexecutionsProjectsLocationsWorkflowsExecutionsCreateSecurity
 }
 

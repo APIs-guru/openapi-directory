@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SentimentDetectionJobProperties } from "./sentimentdetectionjobproperties";
 
 
+
 export class DescribeSentimentDetectionJobResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SentimentDetectionJobProperties" })
+  @SpeakeasyMetadata({ data: "json, name=SentimentDetectionJobProperties" })
   sentimentDetectionJobProperties?: SentimentDetectionJobProperties;
 }

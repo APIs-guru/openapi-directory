@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import payslip
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Payslips:
-    payslips: Optional[List[payslip.Payslip]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Payslips' }})
+    payslips: Optional[List[Payslip]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Payslips') }})
     

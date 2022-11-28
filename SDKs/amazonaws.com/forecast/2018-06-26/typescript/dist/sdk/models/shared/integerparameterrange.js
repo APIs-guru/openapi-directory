@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ScalingTypeEnum } from "./scalingtypeenum";
 // IntegerParameterRange
 /**
@@ -34,19 +34,19 @@ var IntegerParameterRange = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=MaxValue" }),
+        SpeakeasyMetadata({ data: "json, name=MaxValue" }),
         __metadata("design:type", Number)
     ], IntegerParameterRange.prototype, "maxValue", void 0);
     __decorate([
-        Metadata({ data: "json, name=MinValue" }),
+        SpeakeasyMetadata({ data: "json, name=MinValue" }),
         __metadata("design:type", Number)
     ], IntegerParameterRange.prototype, "minValue", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], IntegerParameterRange.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=ScalingType" }),
+        SpeakeasyMetadata({ data: "json, name=ScalingType" }),
         __metadata("design:type", String)
     ], IntegerParameterRange.prototype, "scalingType", void 0);
     return IntegerParameterRange;

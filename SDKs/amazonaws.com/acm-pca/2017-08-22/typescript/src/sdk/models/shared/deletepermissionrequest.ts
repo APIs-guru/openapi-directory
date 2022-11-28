@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeletePermissionRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CertificateAuthorityArn" })
+  @SpeakeasyMetadata({ data: "json, name=CertificateAuthorityArn" })
   certificateAuthorityArn: string;
 
-  @Metadata({ data: "json, name=Principal" })
+  @SpeakeasyMetadata({ data: "json, name=Principal" })
   principal: string;
 
-  @Metadata({ data: "json, name=SourceAccount" })
+  @SpeakeasyMetadata({ data: "json, name=SourceAccount" })
   sourceAccount?: string;
 }

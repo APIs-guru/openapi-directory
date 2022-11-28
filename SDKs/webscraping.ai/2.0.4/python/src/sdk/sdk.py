@@ -1,8 +1,12 @@
-import warnings
+
+
 import requests
-from typing import List,Optional
-from sdk.models import operations, shared
+from sdk.models import shared
 from . import utils
+
+from .account import Account
+from .html import HTML
+from .selected_html import SelectedHTML
 
 
 SERVERS = [
@@ -11,193 +15,75 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+    account: Account
+    html: HTML
+    selected_html: SelectedHTML
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        self._init_sdks()
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        self._init_sdks()
     
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        self._init_sdks()
+    
+
     def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
-
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        self._init_sdks()
     
-    def account(self) -> operations.AccountResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/account"
-
-        client = self.client
-
-        r = client.request("GET", url)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.AccountResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.Account])
-                res.account = out
-        elif r.status_code == 403:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.Error])
-                res.error = out
-
-        return res
-
     
-    def get_html(self, request: operations.GetHTMLRequest) -> operations.GetHTMLResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/html"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.GetHTMLResponse(status_code=r.status_code, content_type=content_type)
+    def _init_sdks(self):
         
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "text/html"):
-                res.get_html_200_text_html_string = r.content
-        elif r.status_code == 400:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.Error])
-                res.error = out
-        elif r.status_code == 402:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.Error])
-                res.error = out
-        elif r.status_code == 403:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.Error])
-                res.error = out
-        elif r.status_code == 429:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.Error])
-                res.error = out
-        elif r.status_code == 500:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.Error])
-                res.error = out
-        elif r.status_code == 502:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.PageError])
-                res.page_error = out
-        elif r.status_code == 504:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.Error])
-                res.error = out
-
-        return res
-
+        self.account = Account(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.html = HTML(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.selected_html = SelectedHTML(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
     
-    def get_selected(self, request: operations.GetSelectedRequest) -> operations.GetSelectedResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/selected"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.GetSelectedResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "text/html"):
-                res.get_selected_200_text_html_string = r.content
-        elif r.status_code == 400:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.Error])
-                res.error = out
-        elif r.status_code == 402:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.Error])
-                res.error = out
-        elif r.status_code == 403:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.Error])
-                res.error = out
-        elif r.status_code == 429:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.Error])
-                res.error = out
-        elif r.status_code == 500:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.Error])
-                res.error = out
-        elif r.status_code == 502:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.PageError])
-                res.page_error = out
-        elif r.status_code == 504:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.Error])
-                res.error = out
-
-        return res
-
-    
-    def get_selected_multiple(self, request: operations.GetSelectedMultipleRequest) -> operations.GetSelectedMultipleResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/selected-multiple"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.GetSelectedMultipleResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[List[str]])
-                res.selected_areas = out
-        elif r.status_code == 400:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.Error])
-                res.error = out
-        elif r.status_code == 402:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.Error])
-                res.error = out
-        elif r.status_code == 403:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.Error])
-                res.error = out
-        elif r.status_code == 429:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.Error])
-                res.error = out
-        elif r.status_code == 500:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.Error])
-                res.error = out
-        elif r.status_code == 502:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.PageError])
-                res.page_error = out
-        elif r.status_code == 504:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.Error])
-                res.error = out
-
-        return res
-
     

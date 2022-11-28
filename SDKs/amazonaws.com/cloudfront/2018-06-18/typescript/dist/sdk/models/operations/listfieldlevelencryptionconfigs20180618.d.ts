@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class ListFieldLevelEncryptionConfigs20180618QueryParams extends SpeakeasyBase {
     marker?: string;
     maxItems?: string;

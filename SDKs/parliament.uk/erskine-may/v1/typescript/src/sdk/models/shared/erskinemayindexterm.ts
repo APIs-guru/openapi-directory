@@ -1,30 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { ErskineMayIndexTerm } from "./erskinemayindexterm";
-import { ErskineMayIndexTerm } from "./erskinemayindexterm";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ErskineMayParagraphSearchResult } from "./erskinemayparagraphsearchresult";
 import { ErskineMayIndexTermSeeLink } from "./erskinemayindextermseelink";
 
 
+
 export class ErskineMayIndexTerm extends SpeakeasyBase {
-  @Metadata({ data: "json, name=childTerms", elemType: shared.ErskineMayIndexTerm })
+  @SpeakeasyMetadata({ data: "json, name=childTerms", elemType: ErskineMayIndexTerm })
   childTerms?: ErskineMayIndexTerm[];
 
-  @Metadata({ data: "json, name=displayAs" })
+  @SpeakeasyMetadata({ data: "json, name=displayAs" })
   displayAs?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=parentTerm" })
+  @SpeakeasyMetadata({ data: "json, name=parentTerm" })
   parentTerm?: ErskineMayIndexTerm;
 
-  @Metadata({ data: "json, name=references", elemType: shared.ErskineMayParagraphSearchResult })
+  @SpeakeasyMetadata({ data: "json, name=references", elemType: ErskineMayParagraphSearchResult })
   references?: ErskineMayParagraphSearchResult[];
 
-  @Metadata({ data: "json, name=seeLinks", elemType: shared.ErskineMayIndexTermSeeLink })
+  @SpeakeasyMetadata({ data: "json, name=seeLinks", elemType: ErskineMayIndexTermSeeLink })
   seeLinks?: ErskineMayIndexTermSeeLink[];
 
-  @Metadata({ data: "json, name=term" })
+  @SpeakeasyMetadata({ data: "json, name=term" })
   term?: string;
 }

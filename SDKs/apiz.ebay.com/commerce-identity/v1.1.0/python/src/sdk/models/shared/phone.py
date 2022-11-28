@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class Phone:
-    country_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'countryCode' }})
-    number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'number' }})
-    phone_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'phoneType' }})
+    r"""Phone
+    The type that defines the fields for the details of a phone.
+    """
+    
+    country_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('countryCode') }})
+    number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('number') }})
+    phone_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('phoneType') }})
     

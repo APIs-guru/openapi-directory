@@ -11,6 +11,8 @@ const (
 	GoogleCloudDialogflowCxV3OutputAudioConfigAudioEncodingEnumOutputAudioEncodingMulaw       GoogleCloudDialogflowCxV3OutputAudioConfigAudioEncodingEnum = "OUTPUT_AUDIO_ENCODING_MULAW"
 )
 
+// GoogleCloudDialogflowCxV3OutputAudioConfig
+// Instructs the speech synthesizer how to generate the output audio content.
 type GoogleCloudDialogflowCxV3OutputAudioConfig struct {
 	AudioEncoding          *GoogleCloudDialogflowCxV3OutputAudioConfigAudioEncodingEnum `json:"audioEncoding,omitempty"`
 	SampleRateHertz        *int32                                                       `json:"sampleRateHertz,omitempty"`

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SendAs } from "./sendas";
+
 
 
 // ListSendAsResponse
@@ -8,6 +8,6 @@ import { SendAs } from "./sendas";
  * Response for the ListSendAs method.
 **/
 export class ListSendAsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=sendAs", elemType: shared.SendAs })
+  @SpeakeasyMetadata({ data: "json, name=sendAs", elemType: SendAs })
   sendAs?: SendAs[];
 }

@@ -1,5 +1,7 @@
 package shared
 
+// GoogleAppsDriveLabelsV2betaFieldLimits
+// Field constants governing the structure of a Field; such as, the maximum title length, minimum and maximum field values or length, etc.
 type GoogleAppsDriveLabelsV2betaFieldLimits struct {
 	DateLimits           *GoogleAppsDriveLabelsV2betaDateLimits      `json:"dateLimits,omitempty"`
 	IntegerLimits        *GoogleAppsDriveLabelsV2betaIntegerLimits   `json:"integerLimits,omitempty"`

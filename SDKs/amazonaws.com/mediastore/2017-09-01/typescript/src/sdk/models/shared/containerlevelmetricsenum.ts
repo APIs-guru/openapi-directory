@@ -1,6 +1,7 @@
 
 
+
 export enum ContainerLevelMetricsEnum {
-    Enabled = "ENABLED"
-,    Disabled = "DISABLED"
+    Enabled = "ENABLED",
+    Disabled = "DISABLED"
 }

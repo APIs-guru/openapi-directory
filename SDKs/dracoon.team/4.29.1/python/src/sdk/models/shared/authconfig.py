@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import authmethod
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AuthConfig:
-    auth_methods: List[authmethod.AuthMethod] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'authMethods' }})
+    r"""AuthConfig
+    Authentication settings
+    """
+    
+    auth_methods: List[AuthMethod] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('authMethods') }})
     

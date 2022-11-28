@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AuthorizerTypeEnum } from "./authorizertypeenum";
 // Authorizer
 /**
@@ -34,43 +34,43 @@ var Authorizer = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=authType" }),
+        SpeakeasyMetadata({ data: "json, name=authType" }),
         __metadata("design:type", String)
     ], Authorizer.prototype, "authType", void 0);
     __decorate([
-        Metadata({ data: "json, name=authorizerCredentials" }),
+        SpeakeasyMetadata({ data: "json, name=authorizerCredentials" }),
         __metadata("design:type", String)
     ], Authorizer.prototype, "authorizerCredentials", void 0);
     __decorate([
-        Metadata({ data: "json, name=authorizerResultTtlInSeconds" }),
+        SpeakeasyMetadata({ data: "json, name=authorizerResultTtlInSeconds" }),
         __metadata("design:type", Number)
     ], Authorizer.prototype, "authorizerResultTtlInSeconds", void 0);
     __decorate([
-        Metadata({ data: "json, name=authorizerUri" }),
+        SpeakeasyMetadata({ data: "json, name=authorizerUri" }),
         __metadata("design:type", String)
     ], Authorizer.prototype, "authorizerUri", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], Authorizer.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=identitySource" }),
+        SpeakeasyMetadata({ data: "json, name=identitySource" }),
         __metadata("design:type", String)
     ], Authorizer.prototype, "identitySource", void 0);
     __decorate([
-        Metadata({ data: "json, name=identityValidationExpression" }),
+        SpeakeasyMetadata({ data: "json, name=identityValidationExpression" }),
         __metadata("design:type", String)
     ], Authorizer.prototype, "identityValidationExpression", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Authorizer.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=providerARNs" }),
+        SpeakeasyMetadata({ data: "json, name=providerARNs" }),
         __metadata("design:type", Array)
     ], Authorizer.prototype, "providerArNs", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], Authorizer.prototype, "type", void 0);
     return Authorizer;

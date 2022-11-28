@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import source
+from sdk import utils
+from . import *
 
 class SourceSplitShardDerivationModeEnum(str, Enum):
     SOURCE_DERIVATION_MODE_UNKNOWN = "SOURCE_DERIVATION_MODE_UNKNOWN"
@@ -13,6 +15,10 @@ class SourceSplitShardDerivationModeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class SourceSplitShard:
-    derivation_mode: Optional[SourceSplitShardDerivationModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'derivationMode' }})
-    source: Optional[source.Source] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'source' }})
+    r"""SourceSplitShard
+    DEPRECATED in favor of DerivedSource.
+    """
+    
+    derivation_mode: Optional[SourceSplitShardDerivationModeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('derivationMode') }})
+    source: Optional[Source] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('source') }})
     

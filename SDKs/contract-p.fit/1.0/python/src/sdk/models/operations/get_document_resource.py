@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetDocumentResourcePathParams:
-    document_id: str = field(default=None, metadata={'path_param': { 'field_name': 'document_id', 'style': 'simple', 'explode': False }})
+    document_id: str = field(metadata={'path_param': { 'field_name': 'document_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,13 +15,13 @@ class GetDocumentResourceHeaders:
 
 @dataclass
 class GetDocumentResourceRequest:
-    path_params: GetDocumentResourcePathParams = field(default=None)
-    headers: GetDocumentResourceHeaders = field(default=None)
+    headers: GetDocumentResourceHeaders = field()
+    path_params: GetDocumentResourcePathParams = field()
     
 
 @dataclass
 class GetDocumentResourceResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     document_model_get: Optional[shared.DocumentModelGet] = field(default=None)
-    status_code: int = field(default=None)
     

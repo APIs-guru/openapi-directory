@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetDisableAvailabilityZonesForLoadBalancerActionEnum(str, Enum):
     DISABLE_AVAILABILITY_ZONES_FOR_LOAD_BALANCER = "DisableAvailabilityZonesForLoadBalancer"
@@ -10,10 +14,10 @@ class GetDisableAvailabilityZonesForLoadBalancerVersionEnum(str, Enum):
 
 @dataclass
 class GetDisableAvailabilityZonesForLoadBalancerQueryParams:
-    action: GetDisableAvailabilityZonesForLoadBalancerActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    availability_zones: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'AvailabilityZones', 'style': 'form', 'explode': True }})
-    load_balancer_name: str = field(default=None, metadata={'query_param': { 'field_name': 'LoadBalancerName', 'style': 'form', 'explode': True }})
-    version: GetDisableAvailabilityZonesForLoadBalancerVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetDisableAvailabilityZonesForLoadBalancerActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    availability_zones: List[str] = field(metadata={'query_param': { 'field_name': 'AvailabilityZones', 'style': 'form', 'explode': True }})
+    load_balancer_name: str = field(metadata={'query_param': { 'field_name': 'LoadBalancerName', 'style': 'form', 'explode': True }})
+    version: GetDisableAvailabilityZonesForLoadBalancerVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetDisableAvailabilityZonesForLoadBalancerHeaders:
 
 @dataclass
 class GetDisableAvailabilityZonesForLoadBalancerRequest:
-    query_params: GetDisableAvailabilityZonesForLoadBalancerQueryParams = field(default=None)
-    headers: GetDisableAvailabilityZonesForLoadBalancerHeaders = field(default=None)
+    headers: GetDisableAvailabilityZonesForLoadBalancerHeaders = field()
+    query_params: GetDisableAvailabilityZonesForLoadBalancerQueryParams = field()
     
 
 @dataclass
 class GetDisableAvailabilityZonesForLoadBalancerResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CreateFolderRequest
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request model for creating a folder
 **/
 export class CreateFolderRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=notes" })
+  @SpeakeasyMetadata({ data: "json, name=notes" })
   notes?: string;
 
-  @Metadata({ data: "json, name=parentId" })
+  @SpeakeasyMetadata({ data: "json, name=parentId" })
   parentId: number;
 
-  @Metadata({ data: "json, name=timestampCreation" })
+  @SpeakeasyMetadata({ data: "json, name=timestampCreation" })
   timestampCreation?: Date;
 
-  @Metadata({ data: "json, name=timestampModification" })
+  @SpeakeasyMetadata({ data: "json, name=timestampModification" })
   timestampModification?: Date;
 }

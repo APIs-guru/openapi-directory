@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -22,20 +23,32 @@ class CloudresourcemanagerProjectsSearchQueryParams:
     
 
 @dataclass
+class CloudresourcemanagerProjectsSearchSecurityOption1:
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    
+
+@dataclass
+class CloudresourcemanagerProjectsSearchSecurityOption2:
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    
+
+@dataclass
 class CloudresourcemanagerProjectsSearchSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    option1: Optional[CloudresourcemanagerProjectsSearchSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
+    option2: Optional[CloudresourcemanagerProjectsSearchSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
     
 
 @dataclass
 class CloudresourcemanagerProjectsSearchRequest:
-    query_params: CloudresourcemanagerProjectsSearchQueryParams = field(default=None)
-    security: CloudresourcemanagerProjectsSearchSecurity = field(default=None)
+    query_params: CloudresourcemanagerProjectsSearchQueryParams = field()
+    security: CloudresourcemanagerProjectsSearchSecurity = field()
     
 
 @dataclass
 class CloudresourcemanagerProjectsSearchResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     search_projects_response: Optional[shared.SearchProjectsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

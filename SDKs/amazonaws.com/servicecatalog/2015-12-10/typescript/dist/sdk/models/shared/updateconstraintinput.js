@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var UpdateConstraintInput = /** @class */ (function (_super) {
     __extends(UpdateConstraintInput, _super);
     function UpdateConstraintInput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AcceptLanguage" }),
+        SpeakeasyMetadata({ data: "json, name=AcceptLanguage" }),
         __metadata("design:type", String)
     ], UpdateConstraintInput.prototype, "acceptLanguage", void 0);
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], UpdateConstraintInput.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=Id" }),
+        SpeakeasyMetadata({ data: "json, name=Id" }),
         __metadata("design:type", String)
     ], UpdateConstraintInput.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=Parameters" }),
+        SpeakeasyMetadata({ data: "json, name=Parameters" }),
         __metadata("design:type", String)
     ], UpdateConstraintInput.prototype, "parameters", void 0);
     return UpdateConstraintInput;

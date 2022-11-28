@@ -4,6 +4,8 @@ type DictlayerdataCommon struct {
 	Title *string `json:"title,omitempty"`
 }
 
+// DictlayerdataDictSource
+// The source, url and attribution for this dictionary data.
 type DictlayerdataDictSource struct {
 	Attribution *string `json:"attribution,omitempty"`
 	URL         *string `json:"url,omitempty"`
@@ -75,6 +77,8 @@ type DictlayerdataDictWordsSenses struct {
 	Synonyms         []DictlayerdataDictWordsSensesSynonyms     `json:"synonyms,omitempty"`
 }
 
+// DictlayerdataDictWordsSource
+// The words with different meanings but not related words, e.g. "go" (game) and "go" (verb).
 type DictlayerdataDictWordsSource struct {
 	Attribution *string `json:"attribution,omitempty"`
 	URL         *string `json:"url,omitempty"`

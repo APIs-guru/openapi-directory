@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { NamespacedName } from "./namespacedname";
 export declare enum VolumeRestoreStateEnum {
     StateUnspecified = "STATE_UNSPECIFIED",

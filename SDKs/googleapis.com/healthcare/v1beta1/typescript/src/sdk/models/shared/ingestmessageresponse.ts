@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Message } from "./message";
+
 
 
 // IngestMessageResponse
@@ -7,9 +8,9 @@ import { Message } from "./message";
  * Acknowledges that a message has been ingested into the specified HL7v2 store.
 **/
 export class IngestMessageResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hl7Ack" })
+  @SpeakeasyMetadata({ data: "json, name=hl7Ack" })
   hl7Ack?: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: Message;
 }

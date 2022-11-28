@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { QuotaError } from "./quotaerror";
 import { AllocateInfo } from "./allocateinfo";
 import { MetricValueSet } from "./metricvalueset";
+
 
 
 // AllocateQuotaResponse
@@ -10,18 +10,18 @@ import { MetricValueSet } from "./metricvalueset";
  * Response message for the AllocateQuota method.
 **/
 export class AllocateQuotaResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allocateErrors", elemType: shared.QuotaError })
+  @SpeakeasyMetadata({ data: "json, name=allocateErrors", elemType: QuotaError })
   allocateErrors?: QuotaError[];
 
-  @Metadata({ data: "json, name=allocateInfo" })
+  @SpeakeasyMetadata({ data: "json, name=allocateInfo" })
   allocateInfo?: AllocateInfo;
 
-  @Metadata({ data: "json, name=operationId" })
+  @SpeakeasyMetadata({ data: "json, name=operationId" })
   operationId?: string;
 
-  @Metadata({ data: "json, name=quotaMetrics", elemType: shared.MetricValueSet })
+  @SpeakeasyMetadata({ data: "json, name=quotaMetrics", elemType: MetricValueSet })
   quotaMetrics?: MetricValueSet[];
 
-  @Metadata({ data: "json, name=serviceConfigId" })
+  @SpeakeasyMetadata({ data: "json, name=serviceConfigId" })
   serviceConfigId?: string;
 }

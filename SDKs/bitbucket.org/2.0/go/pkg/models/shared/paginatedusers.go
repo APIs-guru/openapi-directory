@@ -1,5 +1,7 @@
 package shared
 
+// PaginatedUsers
+// A paginated list of users.
 type PaginatedUsers struct {
 	Next     *string                  `json:"next,omitempty"`
 	Page     *int64                   `json:"page,omitempty"`

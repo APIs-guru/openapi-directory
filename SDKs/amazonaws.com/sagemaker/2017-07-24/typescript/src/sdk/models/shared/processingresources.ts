@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProcessingClusterConfig } from "./processingclusterconfig";
+
 
 
 // ProcessingResources
@@ -7,6 +8,6 @@ import { ProcessingClusterConfig } from "./processingclusterconfig";
  * Identifies the resources, ML compute instances, and ML storage volumes to deploy for a processing job. In distributed training, you specify more than one instance.
 **/
 export class ProcessingResources extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClusterConfig" })
+  @SpeakeasyMetadata({ data: "json, name=ClusterConfig" })
   clusterConfig: ProcessingClusterConfig;
 }

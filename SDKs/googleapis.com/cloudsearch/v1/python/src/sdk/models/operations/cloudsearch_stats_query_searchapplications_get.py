@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudsearchStatsQuerySearchapplicationsGetPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -31,20 +35,20 @@ class CloudsearchStatsQuerySearchapplicationsGetQueryParams:
 
 @dataclass
 class CloudsearchStatsQuerySearchapplicationsGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudsearchStatsQuerySearchapplicationsGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudsearchStatsQuerySearchapplicationsGetSecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -56,14 +60,14 @@ class CloudsearchStatsQuerySearchapplicationsGetSecurity:
 
 @dataclass
 class CloudsearchStatsQuerySearchapplicationsGetRequest:
-    path_params: CloudsearchStatsQuerySearchapplicationsGetPathParams = field(default=None)
-    query_params: CloudsearchStatsQuerySearchapplicationsGetQueryParams = field(default=None)
-    security: CloudsearchStatsQuerySearchapplicationsGetSecurity = field(default=None)
+    path_params: CloudsearchStatsQuerySearchapplicationsGetPathParams = field()
+    query_params: CloudsearchStatsQuerySearchapplicationsGetQueryParams = field()
+    security: CloudsearchStatsQuerySearchapplicationsGetSecurity = field()
     
 
 @dataclass
 class CloudsearchStatsQuerySearchapplicationsGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_search_application_query_stats_response: Optional[shared.GetSearchApplicationQueryStatsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

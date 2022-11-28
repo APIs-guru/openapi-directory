@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var IlpmtRequestBodyCertificateParameters = /** @class */ (function (_super) {
     __extends(IlpmtRequestBodyCertificateParameters, _super);
@@ -30,19 +30,19 @@ var IlpmtRequestBodyCertificateParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=FullName" }),
+        SpeakeasyMetadata({ data: "json, name=FullName" }),
         __metadata("design:type", String)
     ], IlpmtRequestBodyCertificateParameters.prototype, "fullName", void 0);
     __decorate([
-        Metadata({ data: "json, name=UID" }),
+        SpeakeasyMetadata({ data: "json, name=UID" }),
         __metadata("design:type", String)
     ], IlpmtRequestBodyCertificateParameters.prototype, "uid", void 0);
     __decorate([
-        Metadata({ data: "json, name=eILPAppId" }),
+        SpeakeasyMetadata({ data: "json, name=eILPAppId" }),
         __metadata("design:type", String)
     ], IlpmtRequestBodyCertificateParameters.prototype, "eIlpAppId", void 0);
     __decorate([
-        Metadata({ data: "json, name=eILPContactNumber" }),
+        SpeakeasyMetadata({ data: "json, name=eILPContactNumber" }),
         __metadata("design:type", String)
     ], IlpmtRequestBodyCertificateParameters.prototype, "eIlpContactNumber", void 0);
     return IlpmtRequestBodyCertificateParameters;
@@ -58,19 +58,19 @@ var IlpmtRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=certificateParameters" }),
+        SpeakeasyMetadata({ data: "json, name=certificateParameters" }),
         __metadata("design:type", IlpmtRequestBodyCertificateParameters)
     ], IlpmtRequestBody.prototype, "certificateParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=consentArtifact" }),
+        SpeakeasyMetadata({ data: "json, name=consentArtifact" }),
         __metadata("design:type", Object)
     ], IlpmtRequestBody.prototype, "consentArtifact", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], IlpmtRequestBody.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=txnId" }),
+        SpeakeasyMetadata({ data: "json, name=txnId" }),
         __metadata("design:type", String)
     ], IlpmtRequestBody.prototype, "txnId", void 0);
     return IlpmtRequestBody;
@@ -82,32 +82,16 @@ var IlpmtSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], IlpmtSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeClientId)
     ], IlpmtSecurity.prototype, "clientId", void 0);
     return IlpmtSecurity;
 }(SpeakeasyBase));
 export { IlpmtSecurity };
-var IlpmtRequest = /** @class */ (function (_super) {
-    __extends(IlpmtRequest, _super);
-    function IlpmtRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", IlpmtRequestBody)
-    ], IlpmtRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", IlpmtSecurity)
-    ], IlpmtRequest.prototype, "security", void 0);
-    return IlpmtRequest;
-}(SpeakeasyBase));
-export { IlpmtRequest };
 export var Ilpmt400ApplicationJsonErrorEnum;
 (function (Ilpmt400ApplicationJsonErrorEnum) {
     Ilpmt400ApplicationJsonErrorEnum["MissingParameter"] = "missing_parameter";
@@ -130,11 +114,11 @@ var Ilpmt400ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Ilpmt400ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Ilpmt400ApplicationJson.prototype, "errorDescription", void 0);
     return Ilpmt400ApplicationJson;
@@ -156,11 +140,11 @@ var Ilpmt401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Ilpmt401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Ilpmt401ApplicationJson.prototype, "errorDescription", void 0);
     return Ilpmt401ApplicationJson;
@@ -182,11 +166,11 @@ var Ilpmt404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Ilpmt404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Ilpmt404ApplicationJson.prototype, "errorDescription", void 0);
     return Ilpmt404ApplicationJson;
@@ -206,11 +190,11 @@ var Ilpmt500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Ilpmt500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Ilpmt500ApplicationJson.prototype, "errorDescription", void 0);
     return Ilpmt500ApplicationJson;
@@ -230,11 +214,11 @@ var Ilpmt502ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Ilpmt502ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Ilpmt502ApplicationJson.prototype, "errorDescription", void 0);
     return Ilpmt502ApplicationJson;
@@ -254,11 +238,11 @@ var Ilpmt503ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Ilpmt503ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Ilpmt503ApplicationJson.prototype, "errorDescription", void 0);
     return Ilpmt503ApplicationJson;
@@ -278,55 +262,71 @@ var Ilpmt504ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Ilpmt504ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Ilpmt504ApplicationJson.prototype, "errorDescription", void 0);
     return Ilpmt504ApplicationJson;
 }(SpeakeasyBase));
 export { Ilpmt504ApplicationJson };
+var IlpmtRequest = /** @class */ (function (_super) {
+    __extends(IlpmtRequest, _super);
+    function IlpmtRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", IlpmtRequestBody)
+    ], IlpmtRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", IlpmtSecurity)
+    ], IlpmtRequest.prototype, "security", void 0);
+    return IlpmtRequest;
+}(SpeakeasyBase));
+export { IlpmtRequest };
 var IlpmtResponse = /** @class */ (function (_super) {
     __extends(IlpmtResponse, _super);
     function IlpmtResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], IlpmtResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], IlpmtResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Ilpmt400ApplicationJson)
     ], IlpmtResponse.prototype, "ilpmt400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Ilpmt401ApplicationJson)
     ], IlpmtResponse.prototype, "ilpmt401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Ilpmt404ApplicationJson)
     ], IlpmtResponse.prototype, "ilpmt404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Ilpmt500ApplicationJson)
     ], IlpmtResponse.prototype, "ilpmt500ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Ilpmt502ApplicationJson)
     ], IlpmtResponse.prototype, "ilpmt502ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Ilpmt503ApplicationJson)
     ], IlpmtResponse.prototype, "ilpmt503ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Ilpmt504ApplicationJson)
     ], IlpmtResponse.prototype, "ilpmt504ApplicationJsonObject", void 0);
     return IlpmtResponse;

@@ -26,6 +26,8 @@ const (
 	ProcessorTokenCreateRequestProcessorEnumWyre           ProcessorTokenCreateRequestProcessorEnum = "wyre"
 )
 
+// ProcessorTokenCreateRequest
+// ProcessorTokenCreateRequest defines the request schema for `/processor/token/create`
 type ProcessorTokenCreateRequest struct {
 	AccessToken string                                   `json:"access_token"`
 	AccountID   string                                   `json:"account_id"`

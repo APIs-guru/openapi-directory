@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class BigquerydatatransferProjectsTransferConfigsRunsListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 class BigquerydatatransferProjectsTransferConfigsRunsListRunAttemptEnum(str, Enum):
     RUN_ATTEMPT_UNSPECIFIED = "RUN_ATTEMPT_UNSPECIFIED"
@@ -41,20 +42,20 @@ class BigquerydatatransferProjectsTransferConfigsRunsListQueryParams:
 
 @dataclass
 class BigquerydatatransferProjectsTransferConfigsRunsListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BigquerydatatransferProjectsTransferConfigsRunsListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BigquerydatatransferProjectsTransferConfigsRunsListSecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -66,14 +67,14 @@ class BigquerydatatransferProjectsTransferConfigsRunsListSecurity:
 
 @dataclass
 class BigquerydatatransferProjectsTransferConfigsRunsListRequest:
-    path_params: BigquerydatatransferProjectsTransferConfigsRunsListPathParams = field(default=None)
-    query_params: BigquerydatatransferProjectsTransferConfigsRunsListQueryParams = field(default=None)
-    security: BigquerydatatransferProjectsTransferConfigsRunsListSecurity = field(default=None)
+    path_params: BigquerydatatransferProjectsTransferConfigsRunsListPathParams = field()
+    query_params: BigquerydatatransferProjectsTransferConfigsRunsListQueryParams = field()
+    security: BigquerydatatransferProjectsTransferConfigsRunsListSecurity = field()
     
 
 @dataclass
 class BigquerydatatransferProjectsTransferConfigsRunsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_transfer_runs_response: Optional[shared.ListTransferRunsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

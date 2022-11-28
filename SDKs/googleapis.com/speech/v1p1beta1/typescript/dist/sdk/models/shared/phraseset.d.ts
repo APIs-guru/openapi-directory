@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Phrase } from "./phrase";
 /**
  * Provides "hints" to the speech recognizer to favor specific words and phrases in the results.

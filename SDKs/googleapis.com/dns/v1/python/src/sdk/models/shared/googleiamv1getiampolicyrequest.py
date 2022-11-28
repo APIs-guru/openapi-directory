@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import googleiamv1getpolicyoptions
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleIamV1GetIamPolicyRequest:
-    options: Optional[googleiamv1getpolicyoptions.GoogleIamV1GetPolicyOptions] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
+    r"""GoogleIamV1GetIamPolicyRequest
+    Request message for `GetIamPolicy` method.
+    """
+    
+    options: Optional[GoogleIamV1GetPolicyOptions] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
     

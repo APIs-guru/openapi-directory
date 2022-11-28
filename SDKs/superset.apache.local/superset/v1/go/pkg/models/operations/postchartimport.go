@@ -19,11 +19,6 @@ type PostChartImportSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type PostChartImportRequest struct {
-	Request  PostChartImportRequestBody `request:"mediaType=multipart/form-data"`
-	Security PostChartImportSecurity
-}
-
 type PostChartImport200ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
 }
@@ -42,6 +37,11 @@ type PostChartImport422ApplicationJSON struct {
 
 type PostChartImport500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type PostChartImportRequest struct {
+	Request  PostChartImportRequestBody `request:"mediaType=multipart/form-data"`
+	Security PostChartImportSecurity
 }
 
 type PostChartImportResponse struct {

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetModifyTrafficMirrorSessionActionEnum(str, Enum):
@@ -11,16 +15,16 @@ class GetModifyTrafficMirrorSessionVersionEnum(str, Enum):
 
 @dataclass
 class GetModifyTrafficMirrorSessionQueryParams:
-    action: GetModifyTrafficMirrorSessionActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetModifyTrafficMirrorSessionActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    traffic_mirror_session_id: str = field(metadata={'query_param': { 'field_name': 'TrafficMirrorSessionId', 'style': 'form', 'explode': True }})
+    version: GetModifyTrafficMirrorSessionVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     description: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Description', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
     packet_length: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'PacketLength', 'style': 'form', 'explode': True }})
     remove_field: Optional[List[shared.TrafficMirrorSessionFieldEnum]] = field(default=None, metadata={'query_param': { 'field_name': 'RemoveField', 'style': 'form', 'explode': True }})
     session_number: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'SessionNumber', 'style': 'form', 'explode': True }})
     traffic_mirror_filter_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'TrafficMirrorFilterId', 'style': 'form', 'explode': True }})
-    traffic_mirror_session_id: str = field(default=None, metadata={'query_param': { 'field_name': 'TrafficMirrorSessionId', 'style': 'form', 'explode': True }})
     traffic_mirror_target_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'TrafficMirrorTargetId', 'style': 'form', 'explode': True }})
-    version: GetModifyTrafficMirrorSessionVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     virtual_network_id: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'VirtualNetworkId', 'style': 'form', 'explode': True }})
     
 
@@ -37,13 +41,13 @@ class GetModifyTrafficMirrorSessionHeaders:
 
 @dataclass
 class GetModifyTrafficMirrorSessionRequest:
-    query_params: GetModifyTrafficMirrorSessionQueryParams = field(default=None)
-    headers: GetModifyTrafficMirrorSessionHeaders = field(default=None)
+    headers: GetModifyTrafficMirrorSessionHeaders = field()
+    query_params: GetModifyTrafficMirrorSessionQueryParams = field()
     
 
 @dataclass
 class GetModifyTrafficMirrorSessionResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

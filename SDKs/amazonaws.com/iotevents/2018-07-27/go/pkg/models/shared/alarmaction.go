@@ -1,5 +1,7 @@
 package shared
 
+// AlarmAction
+// Specifies one of the following actions to receive notifications when the alarm state changes.
 type AlarmAction struct {
 	DynamoDb        *DynamoDbAction        `json:"dynamoDB,omitempty"`
 	DynamoDBv2      *DynamoDBv2Action      `json:"dynamoDBv2,omitempty"`

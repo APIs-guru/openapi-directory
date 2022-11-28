@@ -1,5 +1,7 @@
 package shared
 
+// BatchUpdateSpreadsheetRequest
+// The request for updating any aspect of a spreadsheet.
 type BatchUpdateSpreadsheetRequest struct {
 	IncludeSpreadsheetInResponse *bool     `json:"includeSpreadsheetInResponse,omitempty"`
 	Requests                     []Request `json:"requests,omitempty"`

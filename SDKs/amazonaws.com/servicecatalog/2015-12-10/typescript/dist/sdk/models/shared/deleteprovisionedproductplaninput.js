@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DeleteProvisionedProductPlanInput = /** @class */ (function (_super) {
     __extends(DeleteProvisionedProductPlanInput, _super);
     function DeleteProvisionedProductPlanInput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AcceptLanguage" }),
+        SpeakeasyMetadata({ data: "json, name=AcceptLanguage" }),
         __metadata("design:type", String)
     ], DeleteProvisionedProductPlanInput.prototype, "acceptLanguage", void 0);
     __decorate([
-        Metadata({ data: "json, name=IgnoreErrors" }),
+        SpeakeasyMetadata({ data: "json, name=IgnoreErrors" }),
         __metadata("design:type", Boolean)
     ], DeleteProvisionedProductPlanInput.prototype, "ignoreErrors", void 0);
     __decorate([
-        Metadata({ data: "json, name=PlanId" }),
+        SpeakeasyMetadata({ data: "json, name=PlanId" }),
         __metadata("design:type", String)
     ], DeleteProvisionedProductPlanInput.prototype, "planId", void 0);
     return DeleteProvisionedProductPlanInput;

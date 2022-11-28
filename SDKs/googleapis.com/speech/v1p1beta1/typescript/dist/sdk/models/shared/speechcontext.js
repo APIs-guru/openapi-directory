@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // SpeechContext
 /**
  * Provides "hints" to the speech recognizer to favor specific words and phrases in the results.
@@ -33,11 +33,11 @@ var SpeechContext = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=boost" }),
+        SpeakeasyMetadata({ data: "json, name=boost" }),
         __metadata("design:type", Number)
     ], SpeechContext.prototype, "boost", void 0);
     __decorate([
-        Metadata({ data: "json, name=phrases" }),
+        SpeakeasyMetadata({ data: "json, name=phrases" }),
         __metadata("design:type", Array)
     ], SpeechContext.prototype, "phrases", void 0);
     return SpeechContext;

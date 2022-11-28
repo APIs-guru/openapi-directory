@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetGetSuggestedFollowsAllQueryParams = /** @class */ (function (_super) {
     __extends(GetGetSuggestedFollowsAllQueryParams, _super);
     function GetGetSuggestedFollowsAllQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=in_onboarding" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=in_onboarding" }),
         __metadata("design:type", Boolean)
     ], GetGetSuggestedFollowsAllQueryParams.prototype, "inOnboarding", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" }),
         __metadata("design:type", Number)
     ], GetGetSuggestedFollowsAllQueryParams.prototype, "page", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page_size" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_size" }),
         __metadata("design:type", Number)
     ], GetGetSuggestedFollowsAllQueryParams.prototype, "pageSize", void 0);
     return GetGetSuggestedFollowsAllQueryParams;
@@ -49,7 +49,7 @@ var GetGetSuggestedFollowsAllRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetGetSuggestedFollowsAllQueryParams)
     ], GetGetSuggestedFollowsAllRequest.prototype, "queryParams", void 0);
     return GetGetSuggestedFollowsAllRequest;
@@ -61,11 +61,11 @@ var GetGetSuggestedFollowsAllResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetGetSuggestedFollowsAllResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetGetSuggestedFollowsAllResponse.prototype, "statusCode", void 0);
     return GetGetSuggestedFollowsAllResponse;

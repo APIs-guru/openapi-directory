@@ -1,86 +1,87 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DeleteDashboardPkPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=pk" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=pk" })
   pk: number;
 }
 
 
 export class DeleteDashboardPkSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   jwt: shared.SchemeJwt;
 }
 
 
-export class DeleteDashboardPkRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: DeleteDashboardPkPathParams;
-
-  @Metadata()
-  security: DeleteDashboardPkSecurity;
-}
-
-
 export class DeleteDashboardPk200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class DeleteDashboardPk401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class DeleteDashboardPk403ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class DeleteDashboardPk404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class DeleteDashboardPk422ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class DeleteDashboardPk500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class DeleteDashboardPkRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: DeleteDashboardPkPathParams;
+
+  @SpeakeasyMetadata()
+  security: DeleteDashboardPkSecurity;
+}
+
+
 export class DeleteDashboardPkResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteDashboardPk200ApplicationJsonObject?: DeleteDashboardPk200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteDashboardPk401ApplicationJsonObject?: DeleteDashboardPk401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteDashboardPk403ApplicationJsonObject?: DeleteDashboardPk403ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteDashboardPk404ApplicationJsonObject?: DeleteDashboardPk404ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteDashboardPk422ApplicationJsonObject?: DeleteDashboardPk422ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteDashboardPk500ApplicationJsonObject?: DeleteDashboardPk500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

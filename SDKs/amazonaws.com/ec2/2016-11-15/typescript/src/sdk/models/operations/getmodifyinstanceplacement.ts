@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetModifyInstancePlacementActionEnum {
     ModifyInstancePlacement = "ModifyInstancePlacement"
 }
 
 export enum GetModifyInstancePlacementAffinityEnum {
-    Default = "default"
-,    Host = "host"
+    Default = "default",
+    Host = "host"
 }
 
 export enum GetModifyInstancePlacementTenancyEnum {
-    Dedicated = "dedicated"
-,    Host = "host"
+    Dedicated = "dedicated",
+    Host = "host"
 }
 
 export enum GetModifyInstancePlacementVersionEnum {
@@ -20,75 +21,75 @@ export enum GetModifyInstancePlacementVersionEnum {
 
 
 export class GetModifyInstancePlacementQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Action" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" })
   action: GetModifyInstancePlacementActionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Affinity" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Affinity" })
   affinity?: GetModifyInstancePlacementAffinityEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=GroupName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=GroupName" })
   groupName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=HostId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=HostId" })
   hostId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=HostResourceGroupArn" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=HostResourceGroupArn" })
   hostResourceGroupArn?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=InstanceId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=InstanceId" })
   instanceId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=PartitionNumber" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=PartitionNumber" })
   partitionNumber?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Tenancy" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Tenancy" })
   tenancy?: GetModifyInstancePlacementTenancyEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" })
   version: GetModifyInstancePlacementVersionEnum;
 }
 
 
 export class GetModifyInstancePlacementHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class GetModifyInstancePlacementRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetModifyInstancePlacementQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetModifyInstancePlacementHeaders;
 }
 
 
 export class GetModifyInstancePlacementResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

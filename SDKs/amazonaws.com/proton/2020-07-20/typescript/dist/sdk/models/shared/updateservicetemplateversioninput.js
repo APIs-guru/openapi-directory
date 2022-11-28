@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { CompatibleEnvironmentTemplateInput } from "./compatibleenvironmenttemplateinput";
 import { TemplateVersionStatusEnum } from "./templateversionstatusenum";
 var UpdateServiceTemplateVersionInput = /** @class */ (function (_super) {
     __extends(UpdateServiceTemplateVersionInput, _super);
@@ -31,27 +31,27 @@ var UpdateServiceTemplateVersionInput = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=compatibleEnvironmentTemplates", elemType: shared.CompatibleEnvironmentTemplateInput }),
+        SpeakeasyMetadata({ data: "json, name=compatibleEnvironmentTemplates", elemType: CompatibleEnvironmentTemplateInput }),
         __metadata("design:type", Array)
     ], UpdateServiceTemplateVersionInput.prototype, "compatibleEnvironmentTemplates", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], UpdateServiceTemplateVersionInput.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=majorVersion" }),
+        SpeakeasyMetadata({ data: "json, name=majorVersion" }),
         __metadata("design:type", String)
     ], UpdateServiceTemplateVersionInput.prototype, "majorVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=minorVersion" }),
+        SpeakeasyMetadata({ data: "json, name=minorVersion" }),
         __metadata("design:type", String)
     ], UpdateServiceTemplateVersionInput.prototype, "minorVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], UpdateServiceTemplateVersionInput.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=templateName" }),
+        SpeakeasyMetadata({ data: "json, name=templateName" }),
         __metadata("design:type", String)
     ], UpdateServiceTemplateVersionInput.prototype, "templateName", void 0);
     return UpdateServiceTemplateVersionInput;

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetDescribeUsageLimitsActionEnum(str, Enum):
     DESCRIBE_USAGE_LIMITS = "DescribeUsageLimits"
@@ -14,7 +18,8 @@ class GetDescribeUsageLimitsVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeUsageLimitsQueryParams:
-    action: GetDescribeUsageLimitsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribeUsageLimitsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDescribeUsageLimitsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     cluster_identifier: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'ClusterIdentifier', 'style': 'form', 'explode': True }})
     feature_type: Optional[GetDescribeUsageLimitsFeatureTypeEnum] = field(default=None, metadata={'query_param': { 'field_name': 'FeatureType', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
@@ -22,7 +27,6 @@ class GetDescribeUsageLimitsQueryParams:
     tag_keys: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'TagKeys', 'style': 'form', 'explode': True }})
     tag_values: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'TagValues', 'style': 'form', 'explode': True }})
     usage_limit_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'UsageLimitId', 'style': 'form', 'explode': True }})
-    version: GetDescribeUsageLimitsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -38,13 +42,13 @@ class GetDescribeUsageLimitsHeaders:
 
 @dataclass
 class GetDescribeUsageLimitsRequest:
-    query_params: GetDescribeUsageLimitsQueryParams = field(default=None)
-    headers: GetDescribeUsageLimitsHeaders = field(default=None)
+    headers: GetDescribeUsageLimitsHeaders = field()
+    query_params: GetDescribeUsageLimitsQueryParams = field()
     
 
 @dataclass
 class GetDescribeUsageLimitsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

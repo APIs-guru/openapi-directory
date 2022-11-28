@@ -1,5 +1,7 @@
 package shared
 
+// RecommenderConfigurationResponse
+// Provides information about Amazon Pinpoint configuration settings for retrieving and processing data from a recommender model.
 type RecommenderConfigurationResponse struct {
 	Attributes                    map[string]string `json:"Attributes,omitempty"`
 	CreationDate                  string            `json:"CreationDate"`

@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class GroupsCountStatusEnum(str, Enum):
@@ -19,13 +20,13 @@ class GroupsCountQueryParams:
 
 @dataclass
 class GroupsCountRequest:
-    query_params: GroupsCountQueryParams = field(default=None)
+    query_params: GroupsCountQueryParams = field()
     
 
 @dataclass
 class GroupsCountResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_core_responses_count_responce: Optional[shared.APICoreResponsesCountResponce] = field(default=None)
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    body: Optional[bytes] = field(default=None)
     

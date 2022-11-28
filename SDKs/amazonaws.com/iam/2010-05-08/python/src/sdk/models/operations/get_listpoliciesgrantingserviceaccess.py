@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetListPoliciesGrantingServiceAccessActionEnum(str, Enum):
     LIST_POLICIES_GRANTING_SERVICE_ACCESS = "ListPoliciesGrantingServiceAccess"
@@ -10,11 +14,11 @@ class GetListPoliciesGrantingServiceAccessVersionEnum(str, Enum):
 
 @dataclass
 class GetListPoliciesGrantingServiceAccessQueryParams:
-    action: GetListPoliciesGrantingServiceAccessActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    arn: str = field(default=None, metadata={'query_param': { 'field_name': 'Arn', 'style': 'form', 'explode': True }})
+    action: GetListPoliciesGrantingServiceAccessActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    arn: str = field(metadata={'query_param': { 'field_name': 'Arn', 'style': 'form', 'explode': True }})
+    service_namespaces: List[str] = field(metadata={'query_param': { 'field_name': 'ServiceNamespaces', 'style': 'form', 'explode': True }})
+    version: GetListPoliciesGrantingServiceAccessVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
-    service_namespaces: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'ServiceNamespaces', 'style': 'form', 'explode': True }})
-    version: GetListPoliciesGrantingServiceAccessVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetListPoliciesGrantingServiceAccessHeaders:
 
 @dataclass
 class GetListPoliciesGrantingServiceAccessRequest:
-    query_params: GetListPoliciesGrantingServiceAccessQueryParams = field(default=None)
-    headers: GetListPoliciesGrantingServiceAccessHeaders = field(default=None)
+    headers: GetListPoliciesGrantingServiceAccessHeaders = field()
+    query_params: GetListPoliciesGrantingServiceAccessQueryParams = field()
     
 
 @dataclass
 class GetListPoliciesGrantingServiceAccessResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

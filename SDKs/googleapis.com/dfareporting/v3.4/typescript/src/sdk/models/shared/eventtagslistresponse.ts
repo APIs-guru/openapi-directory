@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EventTag } from "./eventtag";
+
 
 
 // EventTagsListResponse
@@ -8,9 +8,9 @@ import { EventTag } from "./eventtag";
  * Event Tag List Response
 **/
 export class EventTagsListResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=eventTags", elemType: shared.EventTag })
+  @SpeakeasyMetadata({ data: "json, name=eventTags", elemType: EventTag })
   eventTags?: EventTag[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 }

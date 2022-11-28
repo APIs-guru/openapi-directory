@@ -1,6 +1,6 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export declare const CHANGEACCOUNTSETTINGS_SERVERS: string[];
+export declare const ChangeAccountSettingsServerList: readonly ["https://rest.nexmo.com"];
 export declare class ChangeAccountSettingsQueryParams extends SpeakeasyBase {
     apiKey: string;
     apiSecret: string;

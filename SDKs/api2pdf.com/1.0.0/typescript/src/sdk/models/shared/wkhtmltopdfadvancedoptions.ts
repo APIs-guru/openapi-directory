@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class WkHtmlToPdfAdvancedOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=orientation" })
+  @SpeakeasyMetadata({ data: "json, name=orientation" })
   orientation?: string;
 
-  @Metadata({ data: "json, name=pageSize" })
+  @SpeakeasyMetadata({ data: "json, name=pageSize" })
   pageSize?: string;
 }

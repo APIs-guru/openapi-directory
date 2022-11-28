@@ -1,157 +1,136 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { FloatUnit } from "./floatunit";
-import { FloatUnit } from "./floatunit";
-import { FloatUnit } from "./floatunit";
-import { FloatUnit } from "./floatunit";
-import { FloatUnit } from "./floatunit";
-import { FloatUnit } from "./floatunit";
-import { FloatUnit } from "./floatunit";
-import { FloatUnit } from "./floatunit";
-import { FloatUnit } from "./floatunit";
-import { FloatUnit } from "./floatunit";
-import { FloatUnit } from "./floatunit";
-import { FloatUnit } from "./floatunit";
-import { FloatUnit } from "./floatunit";
-import { FloatUnit } from "./floatunit";
-import { FloatUnit } from "./floatunit";
-import { FloatUnit } from "./floatunit";
-import { FloatUnit } from "./floatunit";
-import { FloatUnit } from "./floatunit";
-import { FloatUnit } from "./floatunit";
-import { FloatUnit } from "./floatunit";
-import { FloatUnit } from "./floatunit";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FloatUnit } from "./floatunit";
 import { VoluntaryNutritionFact } from "./voluntarynutritionfact";
 
 
+
 export class Nutrition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=addedSugars" })
+  @SpeakeasyMetadata({ data: "json, name=addedSugars" })
   addedSugars?: FloatUnit;
 
-  @Metadata({ data: "json, name=addedSugarsDailyPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=addedSugarsDailyPercentage" })
   addedSugarsDailyPercentage?: number;
 
-  @Metadata({ data: "json, name=calcium" })
+  @SpeakeasyMetadata({ data: "json, name=calcium" })
   calcium?: FloatUnit;
 
-  @Metadata({ data: "json, name=calciumDailyPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=calciumDailyPercentage" })
   calciumDailyPercentage?: number;
 
-  @Metadata({ data: "json, name=cholesterol" })
+  @SpeakeasyMetadata({ data: "json, name=cholesterol" })
   cholesterol?: FloatUnit;
 
-  @Metadata({ data: "json, name=cholesterolDailyPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=cholesterolDailyPercentage" })
   cholesterolDailyPercentage?: number;
 
-  @Metadata({ data: "json, name=dietaryFiber" })
+  @SpeakeasyMetadata({ data: "json, name=dietaryFiber" })
   dietaryFiber?: FloatUnit;
 
-  @Metadata({ data: "json, name=dietaryFiberDailyPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=dietaryFiberDailyPercentage" })
   dietaryFiberDailyPercentage?: number;
 
-  @Metadata({ data: "json, name=energy" })
+  @SpeakeasyMetadata({ data: "json, name=energy" })
   energy?: FloatUnit;
 
-  @Metadata({ data: "json, name=energyFromFat" })
+  @SpeakeasyMetadata({ data: "json, name=energyFromFat" })
   energyFromFat?: FloatUnit;
 
-  @Metadata({ data: "json, name=folateDailyPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=folateDailyPercentage" })
   folateDailyPercentage?: number;
 
-  @Metadata({ data: "json, name=folateFolicAcid" })
+  @SpeakeasyMetadata({ data: "json, name=folateFolicAcid" })
   folateFolicAcid?: FloatUnit;
 
-  @Metadata({ data: "json, name=folateMcgDfe" })
+  @SpeakeasyMetadata({ data: "json, name=folateMcgDfe" })
   folateMcgDfe?: number;
 
-  @Metadata({ data: "json, name=iron" })
+  @SpeakeasyMetadata({ data: "json, name=iron" })
   iron?: FloatUnit;
 
-  @Metadata({ data: "json, name=ironDailyPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=ironDailyPercentage" })
   ironDailyPercentage?: number;
 
-  @Metadata({ data: "json, name=monounsaturatedFat" })
+  @SpeakeasyMetadata({ data: "json, name=monounsaturatedFat" })
   monounsaturatedFat?: FloatUnit;
 
-  @Metadata({ data: "json, name=nutritionFactMeasure" })
+  @SpeakeasyMetadata({ data: "json, name=nutritionFactMeasure" })
   nutritionFactMeasure?: string;
 
-  @Metadata({ data: "json, name=polyols" })
+  @SpeakeasyMetadata({ data: "json, name=polyols" })
   polyols?: FloatUnit;
 
-  @Metadata({ data: "json, name=polyunsaturatedFat" })
+  @SpeakeasyMetadata({ data: "json, name=polyunsaturatedFat" })
   polyunsaturatedFat?: FloatUnit;
 
-  @Metadata({ data: "json, name=potassium" })
+  @SpeakeasyMetadata({ data: "json, name=potassium" })
   potassium?: FloatUnit;
 
-  @Metadata({ data: "json, name=potassiumDailyPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=potassiumDailyPercentage" })
   potassiumDailyPercentage?: number;
 
-  @Metadata({ data: "json, name=preparedSizeDescription" })
+  @SpeakeasyMetadata({ data: "json, name=preparedSizeDescription" })
   preparedSizeDescription?: string;
 
-  @Metadata({ data: "json, name=protein" })
+  @SpeakeasyMetadata({ data: "json, name=protein" })
   protein?: FloatUnit;
 
-  @Metadata({ data: "json, name=proteinDailyPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=proteinDailyPercentage" })
   proteinDailyPercentage?: number;
 
-  @Metadata({ data: "json, name=saturatedFat" })
+  @SpeakeasyMetadata({ data: "json, name=saturatedFat" })
   saturatedFat?: FloatUnit;
 
-  @Metadata({ data: "json, name=saturatedFatDailyPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=saturatedFatDailyPercentage" })
   saturatedFatDailyPercentage?: number;
 
-  @Metadata({ data: "json, name=servingSizeDescription" })
+  @SpeakeasyMetadata({ data: "json, name=servingSizeDescription" })
   servingSizeDescription?: string;
 
-  @Metadata({ data: "json, name=servingSizeMeasure" })
+  @SpeakeasyMetadata({ data: "json, name=servingSizeMeasure" })
   servingSizeMeasure?: FloatUnit;
 
-  @Metadata({ data: "json, name=servingsPerContainer" })
+  @SpeakeasyMetadata({ data: "json, name=servingsPerContainer" })
   servingsPerContainer?: string;
 
-  @Metadata({ data: "json, name=sodium" })
+  @SpeakeasyMetadata({ data: "json, name=sodium" })
   sodium?: FloatUnit;
 
-  @Metadata({ data: "json, name=sodiumDailyPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=sodiumDailyPercentage" })
   sodiumDailyPercentage?: number;
 
-  @Metadata({ data: "json, name=starch" })
+  @SpeakeasyMetadata({ data: "json, name=starch" })
   starch?: FloatUnit;
 
-  @Metadata({ data: "json, name=totalCarbohydrate" })
+  @SpeakeasyMetadata({ data: "json, name=totalCarbohydrate" })
   totalCarbohydrate?: FloatUnit;
 
-  @Metadata({ data: "json, name=totalCarbohydrateDailyPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=totalCarbohydrateDailyPercentage" })
   totalCarbohydrateDailyPercentage?: number;
 
-  @Metadata({ data: "json, name=totalFat" })
+  @SpeakeasyMetadata({ data: "json, name=totalFat" })
   totalFat?: FloatUnit;
 
-  @Metadata({ data: "json, name=totalFatDailyPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=totalFatDailyPercentage" })
   totalFatDailyPercentage?: number;
 
-  @Metadata({ data: "json, name=totalSugars" })
+  @SpeakeasyMetadata({ data: "json, name=totalSugars" })
   totalSugars?: FloatUnit;
 
-  @Metadata({ data: "json, name=totalSugarsDailyPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=totalSugarsDailyPercentage" })
   totalSugarsDailyPercentage?: number;
 
-  @Metadata({ data: "json, name=transFat" })
+  @SpeakeasyMetadata({ data: "json, name=transFat" })
   transFat?: FloatUnit;
 
-  @Metadata({ data: "json, name=transFatDailyPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=transFatDailyPercentage" })
   transFatDailyPercentage?: number;
 
-  @Metadata({ data: "json, name=vitaminD" })
+  @SpeakeasyMetadata({ data: "json, name=vitaminD" })
   vitaminD?: FloatUnit;
 
-  @Metadata({ data: "json, name=vitaminDDailyPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=vitaminDDailyPercentage" })
   vitaminDDailyPercentage?: number;
 
-  @Metadata({ data: "json, name=voluntaryNutritionFact", elemType: shared.VoluntaryNutritionFact })
+  @SpeakeasyMetadata({ data: "json, name=voluntaryNutritionFact", elemType: VoluntaryNutritionFact })
   voluntaryNutritionFact?: VoluntaryNutritionFact[];
 }

@@ -19,6 +19,8 @@ const (
 	GoogleChromeManagementV1TotalMemoryEncryptionInfoEncryptionStateEnumMemoryEncryptionStateMktme       GoogleChromeManagementV1TotalMemoryEncryptionInfoEncryptionStateEnum = "MEMORY_ENCRYPTION_STATE_MKTME"
 )
 
+// GoogleChromeManagementV1TotalMemoryEncryptionInfo
+// Memory encryption information of a device. * This field provides device information, which is static and will not change over time. * Data for this field is controlled via policy: [ReportDeviceMemoryInfo](https://chromeenterprise.google/policies/#ReportDeviceMemoryInfo) * Data Collection Frequency: At device startup * Default Data Reporting Frequency: At device startup - Policy Controlled: Yes * Cache: If the device is offline, the collected data is stored locally, and will be reported when the device is next online: Yes * Reported for affiliated users only: N/A
 type GoogleChromeManagementV1TotalMemoryEncryptionInfo struct {
 	EncryptionAlgorithm *GoogleChromeManagementV1TotalMemoryEncryptionInfoEncryptionAlgorithmEnum `json:"encryptionAlgorithm,omitempty"`
 	EncryptionState     *GoogleChromeManagementV1TotalMemoryEncryptionInfoEncryptionStateEnum     `json:"encryptionState,omitempty"`

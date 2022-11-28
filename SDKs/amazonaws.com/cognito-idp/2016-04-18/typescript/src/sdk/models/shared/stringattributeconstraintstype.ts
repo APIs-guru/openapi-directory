@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // StringAttributeConstraintsType
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The constraints associated with a string attribute.
 **/
 export class StringAttributeConstraintsType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MaxLength" })
+  @SpeakeasyMetadata({ data: "json, name=MaxLength" })
   maxLength?: string;
 
-  @Metadata({ data: "json, name=MinLength" })
+  @SpeakeasyMetadata({ data: "json, name=MinLength" })
   minLength?: string;
 }

@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import deletednode
-from . import range
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DeletedNodeVersionsList:
-    items: List[deletednode.DeletedNode] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'items' }})
-    range: range.Range = field(default=None, metadata={'dataclasses_json': { 'field_name': 'range' }})
+    r"""DeletedNodeVersionsList
+    List of deleted versions of nodes
+    """
+    
+    items: List[DeletedNode] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('items') }})
+    range: Range = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('range') }})
     

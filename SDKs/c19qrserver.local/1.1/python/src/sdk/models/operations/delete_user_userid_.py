@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class DeleteUserUserIDPathParams:
-    user_id: int = field(default=None, metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
+    user_id: int = field(metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DeleteUserUserIDRequest:
-    path_params: DeleteUserUserIDPathParams = field(default=None)
+    path_params: DeleteUserUserIDPathParams = field()
     
 
 @dataclass
 class DeleteUserUserIDResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     invalid_token: Optional[shared.InvalidToken] = field(default=None)
     

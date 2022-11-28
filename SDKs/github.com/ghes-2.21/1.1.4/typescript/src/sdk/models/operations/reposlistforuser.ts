@@ -1,68 +1,69 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ReposListForUserPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=username" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=username" })
   username: string;
 }
 
 export enum ReposListForUserDirectionEnum {
-    Asc = "asc"
-,    Desc = "desc"
+    Asc = "asc",
+    Desc = "desc"
 }
 
 export enum ReposListForUserSortEnum {
-    Created = "created"
-,    Updated = "updated"
-,    Pushed = "pushed"
-,    FullName = "full_name"
+    Created = "created",
+    Updated = "updated",
+    Pushed = "pushed",
+    FullName = "full_name"
 }
 
 export enum ReposListForUserTypeEnum {
-    All = "all"
-,    Owner = "owner"
-,    Member = "member"
+    All = "all",
+    Owner = "owner",
+    Member = "member"
 }
 
 
 export class ReposListForUserQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=direction" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=direction" })
   direction?: ReposListForUserDirectionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: ReposListForUserSortEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=type" })
   type?: ReposListForUserTypeEnum;
 }
 
 
 export class ReposListForUserRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ReposListForUserPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ReposListForUserQueryParams;
 }
 
 
 export class ReposListForUserResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.MinimalRepository })
+  @SpeakeasyMetadata({ elemType: shared.MinimalRepository })
   minimalRepositories?: shared.MinimalRepository[];
 }

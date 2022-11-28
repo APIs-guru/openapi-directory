@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum FiveHundredAndThreeServiceUnavailableCodeEnum {
     ServiceUnavailable = "SERVICE_UNAVAILABLE"
@@ -10,15 +11,15 @@ export enum FiveHundredAndThreeServiceUnavailableMessageEnum {
 
 
 export class FiveHundredAndThreeServiceUnavailable extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: FiveHundredAndThreeServiceUnavailableCodeEnum;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: FiveHundredAndThreeServiceUnavailableMessageEnum;
 
-  @Metadata({ data: "json, name=timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=timestamp" })
   timestamp?: string;
 
-  @Metadata({ data: "json, name=trackingId" })
+  @SpeakeasyMetadata({ data: "json, name=trackingId" })
   trackingId?: string;
 }

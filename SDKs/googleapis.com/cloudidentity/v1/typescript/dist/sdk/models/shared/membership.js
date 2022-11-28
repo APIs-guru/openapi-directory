@@ -22,9 +22,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EntityKey } from "./entitykey";
+import { MembershipRole1 } from "./membershiprole1";
+import { MembershipRole } from "./membershiprole";
 export var MembershipTypeEnum;
 (function (MembershipTypeEnum) {
     MembershipTypeEnum["TypeUnspecified"] = "TYPE_UNSPECIFIED";
@@ -34,6 +35,26 @@ export var MembershipTypeEnum;
     MembershipTypeEnum["SharedDrive"] = "SHARED_DRIVE";
     MembershipTypeEnum["Other"] = "OTHER";
 })(MembershipTypeEnum || (MembershipTypeEnum = {}));
+// MembershipInput
+/**
+ * A membership within the Cloud Identity Groups API. A `Membership` defines a relationship between a `Group` and an entity belonging to that `Group`, referred to as a "member".
+**/
+var MembershipInput = /** @class */ (function (_super) {
+    __extends(MembershipInput, _super);
+    function MembershipInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=preferredMemberKey" }),
+        __metadata("design:type", EntityKey)
+    ], MembershipInput.prototype, "preferredMemberKey", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=roles", elemType: MembershipRole1 }),
+        __metadata("design:type", Array)
+    ], MembershipInput.prototype, "roles", void 0);
+    return MembershipInput;
+}(SpeakeasyBase));
+export { MembershipInput };
 // Membership
 /**
  * A membership within the Cloud Identity Groups API. A `Membership` defines a relationship between a `Group` and an entity belonging to that `Group`, referred to as a "member".
@@ -44,27 +65,27 @@ var Membership = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", String)
     ], Membership.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Membership.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=preferredMemberKey" }),
+        SpeakeasyMetadata({ data: "json, name=preferredMemberKey" }),
         __metadata("design:type", EntityKey)
     ], Membership.prototype, "preferredMemberKey", void 0);
     __decorate([
-        Metadata({ data: "json, name=roles", elemType: shared.MembershipRole }),
+        SpeakeasyMetadata({ data: "json, name=roles", elemType: MembershipRole }),
         __metadata("design:type", Array)
     ], Membership.prototype, "roles", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], Membership.prototype, "type", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateTime" }),
+        SpeakeasyMetadata({ data: "json, name=updateTime" }),
         __metadata("design:type", String)
     ], Membership.prototype, "updateTime", void 0);
     return Membership;

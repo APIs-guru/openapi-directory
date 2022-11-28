@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetUsersIdBudgetPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
 
 export class GetUsersIdBudgetQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=roll_up" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=roll_up" })
   rollUp?: boolean;
 }
 
 
 export class GetUsersIdBudgetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetUsersIdBudgetPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetUsersIdBudgetQueryParams;
 }
 
 
 export class GetUsersIdBudgetResponse extends SpeakeasyBase {
-  @Metadata({ elemType: shared.BudgetAnalysisPackage })
+  @SpeakeasyMetadata({ elemType: shared.BudgetAnalysisPackage })
   budgetAnalysisPackages?: shared.BudgetAnalysisPackage[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

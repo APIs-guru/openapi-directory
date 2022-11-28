@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VirtualRouterData } from "./virtualrouterdata";
+
 
 
 // UpdateVirtualRouterOutput
@@ -7,6 +8,6 @@ import { VirtualRouterData } from "./virtualrouterdata";
  * <zonbook></zonbook><xhtml></xhtml>
 **/
 export class UpdateVirtualRouterOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=virtualRouter" })
+  @SpeakeasyMetadata({ data: "json, name=virtualRouter" })
   virtualRouter: VirtualRouterData;
 }

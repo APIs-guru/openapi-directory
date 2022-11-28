@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CreateContinuousCheckInput
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  Represents to CreateContinuousCheckInput
 **/
 export class CreateContinuousCheckInput extends SpeakeasyBase {
-  @Metadata({ data: "form, name=check_id;" })
+  @SpeakeasyMetadata({ data: "form, name=check_id;" })
   checkId?: string;
 
-  @Metadata({ data: "form, name=frequency;" })
+  @SpeakeasyMetadata({ data: "form, name=frequency;" })
   frequency?: string;
 
-  @Metadata({ data: "form, name=status;" })
+  @SpeakeasyMetadata({ data: "form, name=status;" })
   status?: string;
 }

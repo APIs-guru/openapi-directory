@@ -15,17 +15,9 @@ type GetV4LayersScoutingObservationsHeaders struct {
 	XNextToken *string `header:"style=simple,explode=false,name=X-Next-Token"`
 }
 
-type GetV4LayersScoutingObservationsSecurityOption1 struct {
-	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
-}
-
-type GetV4LayersScoutingObservationsSecurityOption2 struct {
-	Oauth2AuthorizationCode shared.SchemeOauth2AuthorizationCode `security:"scheme,type=oauth2"`
-}
-
 type GetV4LayersScoutingObservationsSecurity struct {
-	Option1 *GetV4LayersScoutingObservationsSecurityOption1 `security:"option"`
-	Option2 *GetV4LayersScoutingObservationsSecurityOption2 `security:"option"`
+	APIKey                  *shared.SchemeAPIKey                  `security:"scheme,type=apiKey,subtype=header"`
+	Oauth2AuthorizationCode *shared.SchemeOauth2AuthorizationCode `security:"scheme,type=oauth2"`
 }
 
 type GetV4LayersScoutingObservationsRequest struct {

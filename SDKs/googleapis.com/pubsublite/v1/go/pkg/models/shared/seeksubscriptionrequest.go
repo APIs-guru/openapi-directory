@@ -8,6 +8,8 @@ const (
 	SeekSubscriptionRequestNamedTargetEnumHead                   SeekSubscriptionRequestNamedTargetEnum = "HEAD"
 )
 
+// SeekSubscriptionRequest
+// Request for SeekSubscription.
 type SeekSubscriptionRequest struct {
 	NamedTarget *SeekSubscriptionRequestNamedTargetEnum `json:"namedTarget,omitempty"`
 	TimeTarget  *TimeTarget                             `json:"timeTarget,omitempty"`

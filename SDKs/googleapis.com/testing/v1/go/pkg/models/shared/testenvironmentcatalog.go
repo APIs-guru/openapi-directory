@@ -1,5 +1,7 @@
 package shared
 
+// TestEnvironmentCatalog
+// A description of a test environment.
 type TestEnvironmentCatalog struct {
 	AndroidDeviceCatalog        *AndroidDeviceCatalog        `json:"androidDeviceCatalog,omitempty"`
 	DeviceIPBlockCatalog        *DeviceIPBlockCatalog        `json:"deviceIpBlockCatalog,omitempty"`

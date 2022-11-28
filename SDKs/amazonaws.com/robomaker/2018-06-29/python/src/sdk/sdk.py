@@ -1,8 +1,11 @@
-import warnings
+
+__doc__ = """ SDK Documentation: https://docs.aws.amazon.com/robomaker/ - Amazon Web Services documentation"""
 import requests
-from typing import Any,List,Optional
-from sdk.models import operations, shared
+from typing import Any,Optional
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -14,37 +17,63 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    r"""SDK Documentation: https://docs.aws.amazon.com/robomaker/ - Amazon Web Services documentation"""
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
-    
-    def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
+            self._server_url = server_url
 
+        
+    
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        
+    
+
+    def config_security(self, security: shared.Security):
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        
+    
+    
     
     def batch_delete_worlds(self, request: operations.BatchDeleteWorldsRequest) -> operations.BatchDeleteWorldsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes one or more worlds in a batch operation.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/batchDeleteWorlds"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -71,22 +100,22 @@ class SDK:
 
     
     def batch_describe_simulation_job(self, request: operations.BatchDescribeSimulationJobRequest) -> operations.BatchDescribeSimulationJobResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Describes one or more simulation jobs.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/batchDescribeSimulationJob"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -117,22 +146,22 @@ class SDK:
 
     
     def cancel_deployment_job(self, request: operations.CancelDeploymentJobRequest) -> operations.CancelDeploymentJobResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Cancels the specified deployment job.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/cancelDeploymentJob"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -163,22 +192,22 @@ class SDK:
 
     
     def cancel_simulation_job(self, request: operations.CancelSimulationJobRequest) -> operations.CancelSimulationJobResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Cancels the specified simulation job.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/cancelSimulationJob"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -209,22 +238,22 @@ class SDK:
 
     
     def cancel_simulation_job_batch(self, request: operations.CancelSimulationJobBatchRequest) -> operations.CancelSimulationJobBatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Cancels a simulation job batch. When you cancel a simulation job batch, you are also cancelling all of the active simulation jobs created as part of the batch. 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/cancelSimulationJobBatch"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -255,22 +284,22 @@ class SDK:
 
     
     def cancel_world_export_job(self, request: operations.CancelWorldExportJobRequest) -> operations.CancelWorldExportJobResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Cancels the specified export job.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/cancelWorldExportJob"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -301,22 +330,22 @@ class SDK:
 
     
     def cancel_world_generation_job(self, request: operations.CancelWorldGenerationJobRequest) -> operations.CancelWorldGenerationJobResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Cancels the specified world generator job.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/cancelWorldGenerationJob"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -347,22 +376,22 @@ class SDK:
 
     
     def create_deployment_job(self, request: operations.CreateDeploymentJobRequest) -> operations.CreateDeploymentJobResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Deploys a specific version of a robot application to robots in a fleet.</p> <p>The robot application must have a numbered <code>applicationVersion</code> for consistency reasons. To create a new version, use <code>CreateRobotApplicationVersion</code> or see <a href=\"https://docs.aws.amazon.com/robomaker/latest/dg/create-robot-application-version.html\">Creating a Robot Application Version</a>. </p> <note> <p>After 90 days, deployment jobs expire and will be deleted. They will no longer be accessible. </p> </note>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/createDeploymentJob"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -405,22 +434,22 @@ class SDK:
 
     
     def create_fleet(self, request: operations.CreateFleetRequest) -> operations.CreateFleetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a fleet, a logical group of robots running the same robot application.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/createFleet"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -451,22 +480,22 @@ class SDK:
 
     
     def create_robot(self, request: operations.CreateRobotRequest) -> operations.CreateRobotResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a robot.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/createRobot"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -501,22 +530,22 @@ class SDK:
 
     
     def create_robot_application(self, request: operations.CreateRobotApplicationRequest) -> operations.CreateRobotApplicationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a robot application. 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/createRobotApplication"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -555,22 +584,22 @@ class SDK:
 
     
     def create_robot_application_version(self, request: operations.CreateRobotApplicationVersionRequest) -> operations.CreateRobotApplicationVersionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a version of a robot application.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/createRobotApplicationVersion"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -605,22 +634,22 @@ class SDK:
 
     
     def create_simulation_application(self, request: operations.CreateSimulationApplicationRequest) -> operations.CreateSimulationApplicationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a simulation application.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/createSimulationApplication"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -659,22 +688,22 @@ class SDK:
 
     
     def create_simulation_application_version(self, request: operations.CreateSimulationApplicationVersionRequest) -> operations.CreateSimulationApplicationVersionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a simulation application with a specific revision id.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/createSimulationApplicationVersion"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -709,22 +738,22 @@ class SDK:
 
     
     def create_simulation_job(self, request: operations.CreateSimulationJobRequest) -> operations.CreateSimulationJobResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Creates a simulation job.</p> <note> <p>After 90 days, simulation jobs expire and will be deleted. They will no longer be accessible. </p> </note>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/createSimulationJob"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -767,22 +796,22 @@ class SDK:
 
     
     def create_world_export_job(self, request: operations.CreateWorldExportJobRequest) -> operations.CreateWorldExportJobResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a world export job.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/createWorldExportJob"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -821,22 +850,22 @@ class SDK:
 
     
     def create_world_generation_job(self, request: operations.CreateWorldGenerationJobRequest) -> operations.CreateWorldGenerationJobResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates worlds using the specified template.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/createWorldGenerationJob"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -879,22 +908,22 @@ class SDK:
 
     
     def create_world_template(self, request: operations.CreateWorldTemplateRequest) -> operations.CreateWorldTemplateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a world template.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/createWorldTemplate"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -933,22 +962,22 @@ class SDK:
 
     
     def delete_fleet(self, request: operations.DeleteFleetRequest) -> operations.DeleteFleetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a fleet.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/deleteFleet"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -975,22 +1004,22 @@ class SDK:
 
     
     def delete_robot(self, request: operations.DeleteRobotRequest) -> operations.DeleteRobotResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a robot.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/deleteRobot"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1017,22 +1046,22 @@ class SDK:
 
     
     def delete_robot_application(self, request: operations.DeleteRobotApplicationRequest) -> operations.DeleteRobotApplicationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a robot application.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/deleteRobotApplication"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1059,22 +1088,22 @@ class SDK:
 
     
     def delete_simulation_application(self, request: operations.DeleteSimulationApplicationRequest) -> operations.DeleteSimulationApplicationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a simulation application.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/deleteSimulationApplication"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1101,22 +1130,22 @@ class SDK:
 
     
     def delete_world_template(self, request: operations.DeleteWorldTemplateRequest) -> operations.DeleteWorldTemplateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a world template.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/deleteWorldTemplate"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1147,22 +1176,22 @@ class SDK:
 
     
     def deregister_robot(self, request: operations.DeregisterRobotRequest) -> operations.DeregisterRobotResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deregisters a robot.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/deregisterRobot"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1193,22 +1222,22 @@ class SDK:
 
     
     def describe_deployment_job(self, request: operations.DescribeDeploymentJobRequest) -> operations.DescribeDeploymentJobResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Describes a deployment job.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/describeDeploymentJob"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1239,22 +1268,22 @@ class SDK:
 
     
     def describe_fleet(self, request: operations.DescribeFleetRequest) -> operations.DescribeFleetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Describes a fleet.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/describeFleet"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1285,22 +1314,22 @@ class SDK:
 
     
     def describe_robot(self, request: operations.DescribeRobotRequest) -> operations.DescribeRobotResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Describes a robot.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/describeRobot"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1331,22 +1360,22 @@ class SDK:
 
     
     def describe_robot_application(self, request: operations.DescribeRobotApplicationRequest) -> operations.DescribeRobotApplicationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Describes a robot application.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/describeRobotApplication"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1377,22 +1406,22 @@ class SDK:
 
     
     def describe_simulation_application(self, request: operations.DescribeSimulationApplicationRequest) -> operations.DescribeSimulationApplicationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Describes a simulation application.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/describeSimulationApplication"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1423,22 +1452,22 @@ class SDK:
 
     
     def describe_simulation_job(self, request: operations.DescribeSimulationJobRequest) -> operations.DescribeSimulationJobResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Describes a simulation job.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/describeSimulationJob"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1469,22 +1498,22 @@ class SDK:
 
     
     def describe_simulation_job_batch(self, request: operations.DescribeSimulationJobBatchRequest) -> operations.DescribeSimulationJobBatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Describes a simulation job batch.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/describeSimulationJobBatch"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1511,22 +1540,22 @@ class SDK:
 
     
     def describe_world(self, request: operations.DescribeWorldRequest) -> operations.DescribeWorldResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Describes a world.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/describeWorld"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1557,22 +1586,22 @@ class SDK:
 
     
     def describe_world_export_job(self, request: operations.DescribeWorldExportJobRequest) -> operations.DescribeWorldExportJobResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Describes a world export job.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/describeWorldExportJob"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1603,22 +1632,22 @@ class SDK:
 
     
     def describe_world_generation_job(self, request: operations.DescribeWorldGenerationJobRequest) -> operations.DescribeWorldGenerationJobResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Describes a world generation job.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/describeWorldGenerationJob"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1649,22 +1678,22 @@ class SDK:
 
     
     def describe_world_template(self, request: operations.DescribeWorldTemplateRequest) -> operations.DescribeWorldTemplateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Describes a world template.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/describeWorldTemplate"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1695,22 +1724,22 @@ class SDK:
 
     
     def get_world_template_body(self, request: operations.GetWorldTemplateBodyRequest) -> operations.GetWorldTemplateBodyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets the world template body.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getWorldTemplateBody"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1741,24 +1770,23 @@ class SDK:
 
     
     def list_deployment_jobs(self, request: operations.ListDeploymentJobsRequest) -> operations.ListDeploymentJobsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of deployment jobs for a fleet. You can optionally provide filters to retrieve specific deployment jobs. 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/listDeploymentJobs"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1789,24 +1817,23 @@ class SDK:
 
     
     def list_fleets(self, request: operations.ListFleetsRequest) -> operations.ListFleetsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of fleets. You can optionally provide filters to retrieve specific fleets. 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/listFleets"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1837,24 +1864,23 @@ class SDK:
 
     
     def list_robot_applications(self, request: operations.ListRobotApplicationsRequest) -> operations.ListRobotApplicationsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of robot application. You can optionally provide filters to retrieve specific robot applications.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/listRobotApplications"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1881,24 +1907,23 @@ class SDK:
 
     
     def list_robots(self, request: operations.ListRobotsRequest) -> operations.ListRobotsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of robots. You can optionally provide filters to retrieve specific robots.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/listRobots"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1929,24 +1954,23 @@ class SDK:
 
     
     def list_simulation_applications(self, request: operations.ListSimulationApplicationsRequest) -> operations.ListSimulationApplicationsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of simulation applications. You can optionally provide filters to retrieve specific simulation applications. 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/listSimulationApplications"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1973,24 +1997,23 @@ class SDK:
 
     
     def list_simulation_job_batches(self, request: operations.ListSimulationJobBatchesRequest) -> operations.ListSimulationJobBatchesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list simulation job batches. You can optionally provide filters to retrieve specific simulation batch jobs. 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/listSimulationJobBatches"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2013,24 +2036,23 @@ class SDK:
 
     
     def list_simulation_jobs(self, request: operations.ListSimulationJobsRequest) -> operations.ListSimulationJobsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of simulation jobs. You can optionally provide filters to retrieve specific simulation jobs. 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/listSimulationJobs"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2057,15 +2079,17 @@ class SDK:
 
     
     def list_tags_for_resource(self, request: operations.ListTagsForResourceRequest) -> operations.ListTagsForResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists all tags on a AWS RoboMaker resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/tags/{resourceArn}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2096,24 +2120,23 @@ class SDK:
 
     
     def list_world_export_jobs(self, request: operations.ListWorldExportJobsRequest) -> operations.ListWorldExportJobsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists world export jobs.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/listWorldExportJobs"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2140,24 +2163,23 @@ class SDK:
 
     
     def list_world_generation_jobs(self, request: operations.ListWorldGenerationJobsRequest) -> operations.ListWorldGenerationJobsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists world generator jobs.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/listWorldGenerationJobs"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2184,24 +2206,23 @@ class SDK:
 
     
     def list_world_templates(self, request: operations.ListWorldTemplatesRequest) -> operations.ListWorldTemplatesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists world templates.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/listWorldTemplates"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2228,24 +2249,23 @@ class SDK:
 
     
     def list_worlds(self, request: operations.ListWorldsRequest) -> operations.ListWorldsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists worlds.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/listWorlds"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2272,22 +2292,22 @@ class SDK:
 
     
     def register_robot(self, request: operations.RegisterRobotRequest) -> operations.RegisterRobotResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Registers a robot with a fleet.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/registerRobot"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2322,22 +2342,22 @@ class SDK:
 
     
     def restart_simulation_job(self, request: operations.RestartSimulationJobRequest) -> operations.RestartSimulationJobResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Restarts a running simulation job.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/restartSimulationJob"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2372,22 +2392,22 @@ class SDK:
 
     
     def start_simulation_job_batch(self, request: operations.StartSimulationJobBatchRequest) -> operations.StartSimulationJobBatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Starts a new simulation job batch. The batch is defined using one or more <code>SimulationJobRequest</code> objects. 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/startSimulationJobBatch"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2422,22 +2442,22 @@ class SDK:
 
     
     def sync_deployment_job(self, request: operations.SyncDeploymentJobRequest) -> operations.SyncDeploymentJobResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Syncrhonizes robots in a fleet to the latest deployment. This is helpful if robots were added after a deployment.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/syncDeploymentJob"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2480,22 +2500,22 @@ class SDK:
 
     
     def tag_resource(self, request: operations.TagResourceRequest) -> operations.TagResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Adds or edits tags for a AWS RoboMaker resource.</p> <p>Each tag consists of a tag key and a tag value. Tag keys and tag values are both required, but tag values can be empty strings. </p> <p>For information about the rules that apply to tag keys and tag values, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html\">User-Defined Tag Restrictions</a> in the <i>AWS Billing and Cost Management User Guide</i>. </p>
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/tags/{resourceArn}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2526,17 +2546,18 @@ class SDK:
 
     
     def untag_resource(self, request: operations.UntagResourceRequest) -> operations.UntagResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Removes the specified tags from the specified AWS RoboMaker resource.</p> <p>To remove a tag, specify the tag key. To change the tag value of an existing tag key, use <a href=\"https://docs.aws.amazon.com/robomaker/latest/dg/API_TagResource.html\"> <code>TagResource</code> </a>. </p>
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/tags/{resourceArn}#tagKeys", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2567,22 +2588,22 @@ class SDK:
 
     
     def update_robot_application(self, request: operations.UpdateRobotApplicationRequest) -> operations.UpdateRobotApplicationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates a robot application.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/updateRobotApplication"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2617,22 +2638,22 @@ class SDK:
 
     
     def update_simulation_application(self, request: operations.UpdateSimulationApplicationRequest) -> operations.UpdateSimulationApplicationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates a simulation application.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/updateSimulationApplication"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2667,22 +2688,22 @@ class SDK:
 
     
     def update_world_template(self, request: operations.UpdateWorldTemplateRequest) -> operations.UpdateWorldTemplateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates a world template.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/updateWorldTemplate"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

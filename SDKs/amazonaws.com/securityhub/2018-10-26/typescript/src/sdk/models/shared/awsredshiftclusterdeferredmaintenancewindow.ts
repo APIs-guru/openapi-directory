@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsRedshiftClusterDeferredMaintenanceWindow
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A time windows during which maintenance was deferred for an Amazon Redshift cluster.
 **/
 export class AwsRedshiftClusterDeferredMaintenanceWindow extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DeferMaintenanceEndTime" })
+  @SpeakeasyMetadata({ data: "json, name=DeferMaintenanceEndTime" })
   deferMaintenanceEndTime?: string;
 
-  @Metadata({ data: "json, name=DeferMaintenanceIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=DeferMaintenanceIdentifier" })
   deferMaintenanceIdentifier?: string;
 
-  @Metadata({ data: "json, name=DeferMaintenanceStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=DeferMaintenanceStartTime" })
   deferMaintenanceStartTime?: string;
 }

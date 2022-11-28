@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDetachLoadBalancerTargetGroupsActionEnum(str, Enum):
     DETACH_LOAD_BALANCER_TARGET_GROUPS = "DetachLoadBalancerTargetGroups"
@@ -10,8 +14,8 @@ class PostDetachLoadBalancerTargetGroupsVersionEnum(str, Enum):
 
 @dataclass
 class PostDetachLoadBalancerTargetGroupsQueryParams:
-    action: PostDetachLoadBalancerTargetGroupsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDetachLoadBalancerTargetGroupsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDetachLoadBalancerTargetGroupsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDetachLoadBalancerTargetGroupsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDetachLoadBalancerTargetGroupsHeaders:
 
 @dataclass
 class PostDetachLoadBalancerTargetGroupsRequest:
-    query_params: PostDetachLoadBalancerTargetGroupsQueryParams = field(default=None)
-    headers: PostDetachLoadBalancerTargetGroupsHeaders = field(default=None)
+    headers: PostDetachLoadBalancerTargetGroupsHeaders = field()
+    query_params: PostDetachLoadBalancerTargetGroupsQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDetachLoadBalancerTargetGroupsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

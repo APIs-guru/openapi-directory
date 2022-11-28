@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DecodeIntegrityTokenRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request to decode the integrity token.
 **/
 export class DecodeIntegrityTokenRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=integrityToken" })
+  @SpeakeasyMetadata({ data: "json, name=integrityToken" })
   integrityToken?: string;
 }

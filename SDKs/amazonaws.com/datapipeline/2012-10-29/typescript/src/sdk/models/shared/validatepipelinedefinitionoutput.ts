@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ValidationError } from "./validationerror";
 import { ValidationWarning } from "./validationwarning";
+
 
 
 // ValidatePipelineDefinitionOutput
@@ -9,12 +9,12 @@ import { ValidationWarning } from "./validationwarning";
  * Contains the output of ValidatePipelineDefinition.
 **/
 export class ValidatePipelineDefinitionOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errored" })
+  @SpeakeasyMetadata({ data: "json, name=errored" })
   errored: boolean;
 
-  @Metadata({ data: "json, name=validationErrors", elemType: shared.ValidationError })
+  @SpeakeasyMetadata({ data: "json, name=validationErrors", elemType: ValidationError })
   validationErrors?: ValidationError[];
 
-  @Metadata({ data: "json, name=validationWarnings", elemType: shared.ValidationWarning })
+  @SpeakeasyMetadata({ data: "json, name=validationWarnings", elemType: ValidationWarning })
   validationWarnings?: ValidationWarning[];
 }

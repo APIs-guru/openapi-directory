@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActiveDirectoryConfiguration } from "./activedirectoryconfiguration";
 import { ComputeFarmConfiguration } from "./computefarmconfiguration";
 import { LicenseServiceConfiguration } from "./licenseserviceconfiguration";
 import { SharedFileSystemConfiguration } from "./sharedfilesystemconfiguration";
+
 
 
 // StudioComponentConfiguration
@@ -10,15 +11,15 @@ import { SharedFileSystemConfiguration } from "./sharedfilesystemconfiguration";
  * The configuration of the studio component, based on component type.
 **/
 export class StudioComponentConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=activeDirectoryConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=activeDirectoryConfiguration" })
   activeDirectoryConfiguration?: ActiveDirectoryConfiguration;
 
-  @Metadata({ data: "json, name=computeFarmConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=computeFarmConfiguration" })
   computeFarmConfiguration?: ComputeFarmConfiguration;
 
-  @Metadata({ data: "json, name=licenseServiceConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=licenseServiceConfiguration" })
   licenseServiceConfiguration?: LicenseServiceConfiguration;
 
-  @Metadata({ data: "json, name=sharedFileSystemConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=sharedFileSystemConfiguration" })
   sharedFileSystemConfiguration?: SharedFileSystemConfiguration;
 }

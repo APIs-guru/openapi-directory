@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { RecommendationExportJob } from "./recommendationexportjob";
 export declare class DescribeRecommendationExportJobsResponse extends SpeakeasyBase {
     nextToken?: string;

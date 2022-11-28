@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // DefaultContinuousHyperParameterRange
 /**
  * Provides the name and default range of a continuous hyperparameter and whether the hyperparameter is tunable. A tunable hyperparameter can have its value determined during hyperparameter optimization (HPO).
@@ -33,19 +33,19 @@ var DefaultContinuousHyperParameterRange = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=isTunable" }),
+        SpeakeasyMetadata({ data: "json, name=isTunable" }),
         __metadata("design:type", Boolean)
     ], DefaultContinuousHyperParameterRange.prototype, "isTunable", void 0);
     __decorate([
-        Metadata({ data: "json, name=maxValue" }),
+        SpeakeasyMetadata({ data: "json, name=maxValue" }),
         __metadata("design:type", Number)
     ], DefaultContinuousHyperParameterRange.prototype, "maxValue", void 0);
     __decorate([
-        Metadata({ data: "json, name=minValue" }),
+        SpeakeasyMetadata({ data: "json, name=minValue" }),
         __metadata("design:type", Number)
     ], DefaultContinuousHyperParameterRange.prototype, "minValue", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], DefaultContinuousHyperParameterRange.prototype, "name", void 0);
     return DefaultContinuousHyperParameterRange;

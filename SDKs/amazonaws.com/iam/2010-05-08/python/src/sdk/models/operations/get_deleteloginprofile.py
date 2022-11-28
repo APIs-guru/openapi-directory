@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteLoginProfileActionEnum(str, Enum):
     DELETE_LOGIN_PROFILE = "DeleteLoginProfile"
@@ -10,9 +14,9 @@ class GetDeleteLoginProfileVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteLoginProfileQueryParams:
-    action: GetDeleteLoginProfileActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    user_name: str = field(default=None, metadata={'query_param': { 'field_name': 'UserName', 'style': 'form', 'explode': True }})
-    version: GetDeleteLoginProfileVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetDeleteLoginProfileActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    user_name: str = field(metadata={'query_param': { 'field_name': 'UserName', 'style': 'form', 'explode': True }})
+    version: GetDeleteLoginProfileVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetDeleteLoginProfileHeaders:
 
 @dataclass
 class GetDeleteLoginProfileRequest:
-    query_params: GetDeleteLoginProfileQueryParams = field(default=None)
-    headers: GetDeleteLoginProfileHeaders = field(default=None)
+    headers: GetDeleteLoginProfileHeaders = field()
+    query_params: GetDeleteLoginProfileQueryParams = field()
     
 
 @dataclass
 class GetDeleteLoginProfileResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

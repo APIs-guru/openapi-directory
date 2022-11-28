@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class LiveChatNewSponsorDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=isUpgrade" })
+  @SpeakeasyMetadata({ data: "json, name=isUpgrade" })
   isUpgrade?: boolean;
 
-  @Metadata({ data: "json, name=memberLevelName" })
+  @SpeakeasyMetadata({ data: "json, name=memberLevelName" })
   memberLevelName?: string;
 }

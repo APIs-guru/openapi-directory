@@ -1,5 +1,5 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
-export declare const GETPROMETHEUSMETRICS_SERVERS: string[];
+import { SpeakeasyBase } from "../../../internal/utils";
+export declare const GetPrometheusMetricsServerList: readonly ["http://localhost:8080"];
 export declare class GetPrometheusMetricsRequest extends SpeakeasyBase {
     serverUrl?: string;
 }

@@ -1,20 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { Request } from "./request";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { RequestInput } from "./request";
 import { WriteControl } from "./writecontrol";
 
 
-// BatchUpdateFormRequest
+
+// BatchUpdateFormRequestInput
 /** 
  * A batch of updates to perform on a form. All the specified updates are made or none of them are.
 **/
-export class BatchUpdateFormRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=includeFormInResponse" })
+export class BatchUpdateFormRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=includeFormInResponse" })
   includeFormInResponse?: boolean;
 
-  @Metadata({ data: "json, name=requests", elemType: shared.Request })
-  requests?: Request[];
+  @SpeakeasyMetadata({ data: "json, name=requests", elemType: RequestInput })
+  requests?: RequestInput[];
 
-  @Metadata({ data: "json, name=writeControl" })
+  @SpeakeasyMetadata({ data: "json, name=writeControl" })
   writeControl?: WriteControl;
 }

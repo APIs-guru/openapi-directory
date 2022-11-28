@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import salestax
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SalesTaxes:
-    sales_taxes: Optional[List[salestax.SalesTax]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'salesTaxes' }})
+    r"""SalesTaxes
+    A list of sales tax tables.
+    """
+    
+    sales_taxes: Optional[List[SalesTax]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('salesTaxes') }})
     

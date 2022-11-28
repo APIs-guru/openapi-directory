@@ -10,7 +10,7 @@ type IpamIPAddressesUpdatePathParams struct {
 
 type IpamIPAddressesUpdateRequest struct {
 	PathParams IpamIPAddressesUpdatePathParams
-	Request    shared.WritableIPAddress `request:"mediaType=application/json"`
+	Request    shared.WritableIPAddressInput `request:"mediaType=application/json"`
 }
 
 type IpamIPAddressesUpdateResponse struct {

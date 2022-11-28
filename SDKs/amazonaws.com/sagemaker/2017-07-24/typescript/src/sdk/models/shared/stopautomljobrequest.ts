@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class StopAutoMlJobRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AutoMLJobName" })
+  @SpeakeasyMetadata({ data: "json, name=AutoMLJobName" })
   autoMlJobName: string;
 }

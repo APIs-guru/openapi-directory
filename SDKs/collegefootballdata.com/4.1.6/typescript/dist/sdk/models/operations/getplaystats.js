@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetPlayStatsQueryParams = /** @class */ (function (_super) {
     __extends(GetPlayStatsQueryParams, _super);
@@ -30,35 +30,35 @@ var GetPlayStatsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=athleteId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=athleteId" }),
         __metadata("design:type", Number)
     ], GetPlayStatsQueryParams.prototype, "athleteId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=conference" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=conference" }),
         __metadata("design:type", String)
     ], GetPlayStatsQueryParams.prototype, "conference", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=gameId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=gameId" }),
         __metadata("design:type", Number)
     ], GetPlayStatsQueryParams.prototype, "gameId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=seasonType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=seasonType" }),
         __metadata("design:type", String)
     ], GetPlayStatsQueryParams.prototype, "seasonType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=statTypeId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=statTypeId" }),
         __metadata("design:type", Number)
     ], GetPlayStatsQueryParams.prototype, "statTypeId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=team" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=team" }),
         __metadata("design:type", String)
     ], GetPlayStatsQueryParams.prototype, "team", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=week" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=week" }),
         __metadata("design:type", Number)
     ], GetPlayStatsQueryParams.prototype, "week", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=year" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=year" }),
         __metadata("design:type", Number)
     ], GetPlayStatsQueryParams.prototype, "year", void 0);
     return GetPlayStatsQueryParams;
@@ -70,7 +70,7 @@ var GetPlayStatsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetPlayStatsQueryParams)
     ], GetPlayStatsRequest.prototype, "queryParams", void 0);
     return GetPlayStatsRequest;
@@ -82,15 +82,15 @@ var GetPlayStatsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetPlayStatsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata({ elemType: shared.PlayStat }),
+        SpeakeasyMetadata({ elemType: shared.PlayStat }),
         __metadata("design:type", Array)
     ], GetPlayStatsResponse.prototype, "playStats", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetPlayStatsResponse.prototype, "statusCode", void 0);
     return GetPlayStatsResponse;

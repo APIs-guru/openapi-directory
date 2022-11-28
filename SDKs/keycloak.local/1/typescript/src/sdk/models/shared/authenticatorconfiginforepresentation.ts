@@ -1,18 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConfigPropertyRepresentation } from "./configpropertyrepresentation";
 
 
+
 export class AuthenticatorConfigInfoRepresentation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=helpText" })
+  @SpeakeasyMetadata({ data: "json, name=helpText" })
   helpText?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=properties", elemType: shared.ConfigPropertyRepresentation })
+  @SpeakeasyMetadata({ data: "json, name=properties", elemType: ConfigPropertyRepresentation })
   properties?: ConfigPropertyRepresentation[];
 
-  @Metadata({ data: "json, name=providerId" })
+  @SpeakeasyMetadata({ data: "json, name=providerId" })
   providerId?: string;
 }

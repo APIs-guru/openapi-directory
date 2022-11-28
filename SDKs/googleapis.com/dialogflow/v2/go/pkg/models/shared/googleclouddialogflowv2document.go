@@ -21,6 +21,22 @@ const (
 	GoogleCloudDialogflowV2DocumentStateEnumDeleting         GoogleCloudDialogflowV2DocumentStateEnum = "DELETING"
 )
 
+// GoogleCloudDialogflowV2DocumentInput
+// A knowledge document to be used by a KnowledgeBase. For more information, see the [knowledge base guide](https://cloud.google.com/dialogflow/docs/how/knowledge-bases). Note: The `projects.agent.knowledgeBases.documents` resource is deprecated; only use `projects.knowledgeBases.documents`.
+type GoogleCloudDialogflowV2DocumentInput struct {
+	ContentURI         *string                                             `json:"contentUri,omitempty"`
+	DisplayName        *string                                             `json:"displayName,omitempty"`
+	EnableAutoReload   *bool                                               `json:"enableAutoReload,omitempty"`
+	KnowledgeTypes     []GoogleCloudDialogflowV2DocumentKnowledgeTypesEnum `json:"knowledgeTypes,omitempty"`
+	LatestReloadStatus *GoogleCloudDialogflowV2DocumentReloadStatus        `json:"latestReloadStatus,omitempty"`
+	Metadata           map[string]string                                   `json:"metadata,omitempty"`
+	MimeType           *string                                             `json:"mimeType,omitempty"`
+	Name               *string                                             `json:"name,omitempty"`
+	RawContent         *string                                             `json:"rawContent,omitempty"`
+}
+
+// GoogleCloudDialogflowV2Document
+// A knowledge document to be used by a KnowledgeBase. For more information, see the [knowledge base guide](https://cloud.google.com/dialogflow/docs/how/knowledge-bases). Note: The `projects.agent.knowledgeBases.documents` resource is deprecated; only use `projects.knowledgeBases.documents`.
 type GoogleCloudDialogflowV2Document struct {
 	ContentURI         *string                                             `json:"contentUri,omitempty"`
 	DisplayName        *string                                             `json:"displayName,omitempty"`

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AuthorizationLoggingOptions } from "./authorizationloggingoptions";
 export declare enum CloudAuditOptionsLogNameEnum {
     UnspecifiedLogName = "UNSPECIFIED_LOG_NAME",

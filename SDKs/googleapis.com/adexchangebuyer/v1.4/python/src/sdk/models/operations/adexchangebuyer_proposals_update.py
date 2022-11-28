@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class AdexchangebuyerProposalsUpdateUpdateActionEnum(str, Enum):
@@ -13,9 +17,9 @@ class AdexchangebuyerProposalsUpdateUpdateActionEnum(str, Enum):
 
 @dataclass
 class AdexchangebuyerProposalsUpdatePathParams:
-    proposal_id: str = field(default=None, metadata={'path_param': { 'field_name': 'proposalId', 'style': 'simple', 'explode': False }})
-    revision_number: str = field(default=None, metadata={'path_param': { 'field_name': 'revisionNumber', 'style': 'simple', 'explode': False }})
-    update_action: AdexchangebuyerProposalsUpdateUpdateActionEnum = field(default=None, metadata={'path_param': { 'field_name': 'updateAction', 'style': 'simple', 'explode': False }})
+    proposal_id: str = field(metadata={'path_param': { 'field_name': 'proposalId', 'style': 'simple', 'explode': False }})
+    revision_number: str = field(metadata={'path_param': { 'field_name': 'revisionNumber', 'style': 'simple', 'explode': False }})
+    update_action: AdexchangebuyerProposalsUpdateUpdateActionEnum = field(metadata={'path_param': { 'field_name': 'updateAction', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -31,21 +35,21 @@ class AdexchangebuyerProposalsUpdateQueryParams:
 
 @dataclass
 class AdexchangebuyerProposalsUpdateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AdexchangebuyerProposalsUpdateRequest:
-    path_params: AdexchangebuyerProposalsUpdatePathParams = field(default=None)
-    query_params: AdexchangebuyerProposalsUpdateQueryParams = field(default=None)
+    path_params: AdexchangebuyerProposalsUpdatePathParams = field()
+    query_params: AdexchangebuyerProposalsUpdateQueryParams = field()
+    security: AdexchangebuyerProposalsUpdateSecurity = field()
     request: Optional[shared.Proposal] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AdexchangebuyerProposalsUpdateSecurity = field(default=None)
     
 
 @dataclass
 class AdexchangebuyerProposalsUpdateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     proposal: Optional[shared.Proposal] = field(default=None)
-    status_code: int = field(default=None)
     

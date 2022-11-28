@@ -32,7 +32,7 @@ type DatamigrationProjectsLocationsMigrationJobsCreateSecurity struct {
 type DatamigrationProjectsLocationsMigrationJobsCreateRequest struct {
 	PathParams  DatamigrationProjectsLocationsMigrationJobsCreatePathParams
 	QueryParams DatamigrationProjectsLocationsMigrationJobsCreateQueryParams
-	Request     *shared.MigrationJob `request:"mediaType=application/json"`
+	Request     *shared.MigrationJobInput `request:"mediaType=application/json"`
 	Security    DatamigrationProjectsLocationsMigrationJobsCreateSecurity
 }
 

@@ -36,6 +36,8 @@ const (
 	KeyValueIconEnumVideoPlay              KeyValueIconEnum = "VIDEO_PLAY"
 )
 
+// KeyValue
+// A UI element contains a key (label) and a value (content). And this element may also contain some actions such as onclick button.
 type KeyValue struct {
 	BottomLabel      *string           `json:"bottomLabel,omitempty"`
 	Button           *Button           `json:"button,omitempty"`

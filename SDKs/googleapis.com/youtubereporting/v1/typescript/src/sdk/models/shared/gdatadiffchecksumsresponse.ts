@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GdataCompositeMedia } from "./gdatacompositemedia";
-import { GdataCompositeMedia } from "./gdatacompositemedia";
+
 
 
 // GdataDiffChecksumsResponse
@@ -8,18 +8,18 @@ import { GdataCompositeMedia } from "./gdatacompositemedia";
  * gdata
 **/
 export class GdataDiffChecksumsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=checksumsLocation" })
+  @SpeakeasyMetadata({ data: "json, name=checksumsLocation" })
   checksumsLocation?: GdataCompositeMedia;
 
-  @Metadata({ data: "json, name=chunkSizeBytes" })
+  @SpeakeasyMetadata({ data: "json, name=chunkSizeBytes" })
   chunkSizeBytes?: string;
 
-  @Metadata({ data: "json, name=objectLocation" })
+  @SpeakeasyMetadata({ data: "json, name=objectLocation" })
   objectLocation?: GdataCompositeMedia;
 
-  @Metadata({ data: "json, name=objectSizeBytes" })
+  @SpeakeasyMetadata({ data: "json, name=objectSizeBytes" })
   objectSizeBytes?: string;
 
-  @Metadata({ data: "json, name=objectVersion" })
+  @SpeakeasyMetadata({ data: "json, name=objectVersion" })
   objectVersion?: string;
 }

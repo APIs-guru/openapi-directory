@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DownloadRequirements } from "./downloadrequirements";
 import { OverageDetails } from "./overagedetails";
 import { ProductStatusEnum } from "./productstatusenum";
 import { ProductTypeResponseEnum } from "./producttyperesponseenum";
 
 
+
 export class Product extends SpeakeasyBase {
-  @Metadata({ data: "json, name=agreement_name" })
+  @SpeakeasyMetadata({ data: "json, name=agreement_name" })
   agreementName?: string;
 
-  @Metadata({ data: "json, name=application_website" })
+  @SpeakeasyMetadata({ data: "json, name=application_website" })
   applicationWebsite?: string;
 
-  @Metadata({ data: "json, name=credits_remaining" })
+  @SpeakeasyMetadata({ data: "json, name=credits_remaining" })
   creditsRemaining?: number;
 
-  @Metadata({ data: "json, name=download_limit" })
+  @SpeakeasyMetadata({ data: "json, name=download_limit" })
   downloadLimit?: number;
 
-  @Metadata({ data: "json, name=download_limit_duration" })
+  @SpeakeasyMetadata({ data: "json, name=download_limit_duration" })
   downloadLimitDuration?: string;
 
-  @Metadata({ data: "json, name=download_limit_reset_utc_date" })
+  @SpeakeasyMetadata({ data: "json, name=download_limit_reset_utc_date" })
   downloadLimitResetUtcDate?: Date;
 
-  @Metadata({ data: "json, name=download_requirements" })
+  @SpeakeasyMetadata({ data: "json, name=download_requirements" })
   downloadRequirements?: DownloadRequirements;
 
-  @Metadata({ data: "json, name=downloads_remaining" })
+  @SpeakeasyMetadata({ data: "json, name=downloads_remaining" })
   downloadsRemaining?: number;
 
-  @Metadata({ data: "json, name=expiration_utc_date" })
+  @SpeakeasyMetadata({ data: "json, name=expiration_utc_date" })
   expirationUtcDate?: Date;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=imagepack_resolution" })
+  @SpeakeasyMetadata({ data: "json, name=imagepack_resolution" })
   imagepackResolution?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=overage" })
+  @SpeakeasyMetadata({ data: "json, name=overage" })
   overage?: OverageDetails;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: ProductStatusEnum;
 
-  @Metadata({ data: "json, name=team_credits" })
+  @SpeakeasyMetadata({ data: "json, name=team_credits" })
   teamCredits?: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: ProductTypeResponseEnum;
 }

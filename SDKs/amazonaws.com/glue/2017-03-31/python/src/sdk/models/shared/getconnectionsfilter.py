@@ -1,12 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import connectiontype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetConnectionsFilter:
-    connection_type: Optional[connectiontype_enum.ConnectionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ConnectionType' }})
-    match_criteria: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MatchCriteria' }})
+    r"""GetConnectionsFilter
+    Filters the connection definitions that are returned by the <code>GetConnections</code> API operation.
+    """
+    
+    connection_type: Optional[ConnectionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ConnectionType') }})
+    match_criteria: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MatchCriteria') }})
     

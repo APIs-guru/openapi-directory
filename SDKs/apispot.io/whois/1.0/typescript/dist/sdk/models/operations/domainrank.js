@@ -22,58 +22,58 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DomainRankPathParams = /** @class */ (function (_super) {
     __extends(DomainRankPathParams, _super);
     function DomainRankPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=domain" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=domain" }),
         __metadata("design:type", String)
     ], DomainRankPathParams.prototype, "domain", void 0);
     return DomainRankPathParams;
 }(SpeakeasyBase));
 export { DomainRankPathParams };
-var DomainRankRequest = /** @class */ (function (_super) {
-    __extends(DomainRankRequest, _super);
-    function DomainRankRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata(),
-        __metadata("design:type", DomainRankPathParams)
-    ], DomainRankRequest.prototype, "pathParams", void 0);
-    return DomainRankRequest;
-}(SpeakeasyBase));
-export { DomainRankRequest };
 var DomainRank200ApplicationJson = /** @class */ (function (_super) {
     __extends(DomainRank200ApplicationJson, _super);
     function DomainRank200ApplicationJson() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=rank" }),
+        SpeakeasyMetadata({ data: "json, name=rank" }),
         __metadata("design:type", Number)
     ], DomainRank200ApplicationJson.prototype, "rank", void 0);
     return DomainRank200ApplicationJson;
 }(SpeakeasyBase));
 export { DomainRank200ApplicationJson };
+var DomainRankRequest = /** @class */ (function (_super) {
+    __extends(DomainRankRequest, _super);
+    function DomainRankRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", DomainRankPathParams)
+    ], DomainRankRequest.prototype, "pathParams", void 0);
+    return DomainRankRequest;
+}(SpeakeasyBase));
+export { DomainRankRequest };
 var DomainRankResponse = /** @class */ (function (_super) {
     __extends(DomainRankResponse, _super);
     function DomainRankResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DomainRankResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DomainRankResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DomainRank200ApplicationJson)
     ], DomainRankResponse.prototype, "domainRank200ApplicationJsonObject", void 0);
     return DomainRankResponse;

@@ -30,7 +30,7 @@ type ManagedidentitiesProjectsLocationsGlobalDomainsAttachTrustSecurity struct {
 type ManagedidentitiesProjectsLocationsGlobalDomainsAttachTrustRequest struct {
 	PathParams  ManagedidentitiesProjectsLocationsGlobalDomainsAttachTrustPathParams
 	QueryParams ManagedidentitiesProjectsLocationsGlobalDomainsAttachTrustQueryParams
-	Request     *shared.AttachTrustRequest `request:"mediaType=application/json"`
+	Request     *shared.AttachTrustRequestInput `request:"mediaType=application/json"`
 	Security    ManagedidentitiesProjectsLocationsGlobalDomainsAttachTrustSecurity
 }
 

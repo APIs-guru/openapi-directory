@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateSystemModelsUpdateGroupSubscription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClientID, form, name=ClientID;" })
+  @SpeakeasyMetadata({ data: "json, name=ClientID, form, name=ClientID;" })
   clientId: string;
 
-  @Metadata({ data: "json, name=Include, form, name=Include;" })
+  @SpeakeasyMetadata({ data: "json, name=Include, form, name=Include;" })
   include: boolean;
 
-  @Metadata({ data: "json, name=PackageTypeID, form, name=PackageTypeID;" })
+  @SpeakeasyMetadata({ data: "json, name=PackageTypeID, form, name=PackageTypeID;" })
   packageTypeId: string;
 
-  @Metadata({ data: "json, name=UpdateGroupID, form, name=UpdateGroupID;" })
+  @SpeakeasyMetadata({ data: "json, name=UpdateGroupID, form, name=UpdateGroupID;" })
   updateGroupId: string;
 
-  @Metadata({ data: "json, name=UpdateGroupSubscriptionID, form, name=UpdateGroupSubscriptionID;" })
+  @SpeakeasyMetadata({ data: "json, name=UpdateGroupSubscriptionID, form, name=UpdateGroupSubscriptionID;" })
   updateGroupSubscriptionId?: number;
 }

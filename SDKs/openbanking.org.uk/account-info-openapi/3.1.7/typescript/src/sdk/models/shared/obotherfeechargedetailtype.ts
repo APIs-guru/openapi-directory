@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ObFeeCategory1CodeEnum } from "./obfeecategory1codeenum";
+
 
 
 // ObOtherFeeChargeDetailType
@@ -7,15 +8,15 @@ import { ObFeeCategory1CodeEnum } from "./obfeecategory1codeenum";
  * Other Fee/charge type which is not available in the standard code set
 **/
 export class ObOtherFeeChargeDetailType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Code" })
+  @SpeakeasyMetadata({ data: "json, name=Code" })
   code?: string;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description: string;
 
-  @Metadata({ data: "json, name=FeeCategory" })
+  @SpeakeasyMetadata({ data: "json, name=FeeCategory" })
   feeCategory: ObFeeCategory1CodeEnum;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 }

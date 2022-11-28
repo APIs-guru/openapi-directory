@@ -25,15 +25,15 @@ type GetSearchJSONQueryParams struct {
 	Query  string                   `queryParam:"style=form,explode=true,name=query"`
 }
 
-type GetSearchJSONRequest struct {
-	QueryParams GetSearchJSONQueryParams
-}
-
 type GetSearchJSON200ApplicationJSON struct {
 	Copyright  *string                  `json:"copyright,omitempty"`
 	NumResults *int64                   `json:"num_results,omitempty"`
 	Results    []shared.ConceptRelation `json:"results,omitempty"`
 	Status     *string                  `json:"status,omitempty"`
+}
+
+type GetSearchJSONRequest struct {
+	QueryParams GetSearchJSONQueryParams
 }
 
 type GetSearchJSONResponse struct {

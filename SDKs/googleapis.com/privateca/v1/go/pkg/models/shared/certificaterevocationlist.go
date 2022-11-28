@@ -8,6 +8,8 @@ const (
 	CertificateRevocationListStateEnumSuperseded       CertificateRevocationListStateEnum = "SUPERSEDED"
 )
 
+// CertificateRevocationList
+// A CertificateRevocationList corresponds to a signed X.509 certificate Revocation List (CRL). A CRL contains the serial numbers of certificates that should no longer be trusted.
 type CertificateRevocationList struct {
 	AccessURL           *string                             `json:"accessUrl,omitempty"`
 	CreateTime          *string                             `json:"createTime,omitempty"`

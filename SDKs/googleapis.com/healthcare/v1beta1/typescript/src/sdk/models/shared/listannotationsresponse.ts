@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Annotation } from "./annotation";
+
 
 
 // ListAnnotationsResponse
@@ -8,9 +8,9 @@ import { Annotation } from "./annotation";
  * Lists the Annotations in the specified Annotation store.
 **/
 export class ListAnnotationsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=annotations", elemType: shared.Annotation })
+  @SpeakeasyMetadata({ data: "json, name=annotations", elemType: Annotation })
   annotations?: Annotation[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

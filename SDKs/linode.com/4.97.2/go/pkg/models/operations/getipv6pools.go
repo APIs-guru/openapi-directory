@@ -9,22 +9,9 @@ type GetIPv6PoolsQueryParams struct {
 	PageSize *int64 `queryParam:"style=form,explode=true,name=page_size"`
 }
 
-type GetIPv6PoolsSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type GetIPv6PoolsSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type GetIPv6PoolsSecurity struct {
-	Option1 *GetIPv6PoolsSecurityOption1 `security:"option"`
-	Option2 *GetIPv6PoolsSecurityOption2 `security:"option"`
-}
-
-type GetIPv6PoolsRequest struct {
-	QueryParams GetIPv6PoolsQueryParams
-	Security    GetIPv6PoolsSecurity
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
 }
 
 type GetIPv6Pools200ApplicationJSON struct {
@@ -36,6 +23,11 @@ type GetIPv6Pools200ApplicationJSON struct {
 
 type GetIPv6PoolsDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type GetIPv6PoolsRequest struct {
+	QueryParams GetIPv6PoolsQueryParams
+	Security    GetIPv6PoolsSecurity
 }
 
 type GetIPv6PoolsResponse struct {

@@ -12,6 +12,8 @@ const (
 	CharacterRulesMustContainCharactersEnumNone      CharacterRulesMustContainCharactersEnum = "none"
 )
 
+// CharacterRules
+// Password character rules
 type CharacterRules struct {
 	MustContainCharacters            []CharacterRulesMustContainCharactersEnum `json:"mustContainCharacters"`
 	NumberOfCharacteristicsToEnforce int32                                     `json:"numberOfCharacteristicsToEnforce"`

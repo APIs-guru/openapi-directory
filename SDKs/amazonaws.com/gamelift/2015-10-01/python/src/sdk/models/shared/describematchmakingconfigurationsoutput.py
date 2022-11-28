@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import matchmakingconfiguration
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeMatchmakingConfigurationsOutput:
-    configurations: Optional[List[matchmakingconfiguration.MatchmakingConfiguration]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Configurations' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
+    r"""DescribeMatchmakingConfigurationsOutput
+    Represents the returned data in response to a request operation.
+    """
+    
+    configurations: Optional[List[MatchmakingConfiguration]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Configurations') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
     

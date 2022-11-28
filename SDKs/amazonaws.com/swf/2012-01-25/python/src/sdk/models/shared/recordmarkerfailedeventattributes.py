@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import recordmarkerfailedcause_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class RecordMarkerFailedEventAttributes:
-    cause: recordmarkerfailedcause_enum.RecordMarkerFailedCauseEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cause' }})
-    decision_task_completed_event_id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'decisionTaskCompletedEventId' }})
-    marker_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'markerName' }})
+    r"""RecordMarkerFailedEventAttributes
+    Provides the details of the <code>RecordMarkerFailed</code> event.
+    """
+    
+    cause: RecordMarkerFailedCauseEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('cause') }})
+    decision_task_completed_event_id: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('decisionTaskCompletedEventId') }})
+    marker_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('markerName') }})
     

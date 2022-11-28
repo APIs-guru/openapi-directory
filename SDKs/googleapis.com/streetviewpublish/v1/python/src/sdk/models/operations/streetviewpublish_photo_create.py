@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -20,20 +21,20 @@ class StreetviewpublishPhotoCreateQueryParams:
 
 @dataclass
 class StreetviewpublishPhotoCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class StreetviewpublishPhotoCreateRequest:
-    query_params: StreetviewpublishPhotoCreateQueryParams = field(default=None)
-    request: Optional[shared.Photo] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: StreetviewpublishPhotoCreateSecurity = field(default=None)
+    query_params: StreetviewpublishPhotoCreateQueryParams = field()
+    security: StreetviewpublishPhotoCreateSecurity = field()
+    request: Optional[shared.PhotoInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class StreetviewpublishPhotoCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     photo: Optional[shared.Photo] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,7 @@
 package shared
 
+// HTTPEndpointDestinationDescription
+// Describes the HTTP endpoint destination.
 type HTTPEndpointDestinationDescription struct {
 	BufferingHints           *HTTPEndpointBufferingHints       `json:"BufferingHints,omitempty"`
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions         `json:"CloudWatchLoggingOptions,omitempty"`

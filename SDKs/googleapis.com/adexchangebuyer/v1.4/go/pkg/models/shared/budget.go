@@ -1,5 +1,7 @@
 package shared
 
+// Budget
+// The configuration data for Ad Exchange RTB - Budget API.
 type Budget struct {
 	AccountID    *string `json:"accountId,omitempty"`
 	BillingID    *string `json:"billingId,omitempty"`

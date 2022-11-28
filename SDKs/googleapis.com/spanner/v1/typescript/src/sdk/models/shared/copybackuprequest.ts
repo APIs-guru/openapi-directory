@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CopyBackupEncryptionConfig } from "./copybackupencryptionconfig";
+
 
 
 // CopyBackupRequest
@@ -7,15 +8,15 @@ import { CopyBackupEncryptionConfig } from "./copybackupencryptionconfig";
  * The request for CopyBackup.
 **/
 export class CopyBackupRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=backupId" })
+  @SpeakeasyMetadata({ data: "json, name=backupId" })
   backupId?: string;
 
-  @Metadata({ data: "json, name=encryptionConfig" })
+  @SpeakeasyMetadata({ data: "json, name=encryptionConfig" })
   encryptionConfig?: CopyBackupEncryptionConfig;
 
-  @Metadata({ data: "json, name=expireTime" })
+  @SpeakeasyMetadata({ data: "json, name=expireTime" })
   expireTime?: string;
 
-  @Metadata({ data: "json, name=sourceBackup" })
+  @SpeakeasyMetadata({ data: "json, name=sourceBackup" })
   sourceBackup?: string;
 }

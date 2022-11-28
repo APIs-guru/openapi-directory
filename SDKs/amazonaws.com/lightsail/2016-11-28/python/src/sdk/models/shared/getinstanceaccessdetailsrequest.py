@@ -1,12 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import instanceaccessprotocol_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetInstanceAccessDetailsRequest:
-    instance_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'instanceName' }})
-    protocol: Optional[instanceaccessprotocol_enum.InstanceAccessProtocolEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'protocol' }})
+    instance_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('instanceName') }})
+    protocol: Optional[InstanceAccessProtocolEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('protocol') }})
     

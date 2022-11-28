@@ -1,59 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RevokeTrustedDevicePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=deviceId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=deviceId" })
   deviceId: number;
 }
 
 
-export class RevokeTrustedDeviceSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class RevokeTrustedDeviceSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class RevokeTrustedDeviceSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: RevokeTrustedDeviceSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: RevokeTrustedDeviceSecurityOption2;
-}
-
-
-export class RevokeTrustedDeviceRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: RevokeTrustedDevicePathParams;
-
-  @Metadata()
-  security: RevokeTrustedDeviceSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class RevokeTrustedDeviceDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class RevokeTrustedDeviceRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: RevokeTrustedDevicePathParams;
+
+  @SpeakeasyMetadata()
+  security: RevokeTrustedDeviceSecurity;
+}
+
+
 export class RevokeTrustedDeviceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   revokeTrustedDevice200ApplicationJsonObject?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   revokeTrustedDeviceDefaultApplicationJsonObject?: RevokeTrustedDeviceDefaultApplicationJson;
 }

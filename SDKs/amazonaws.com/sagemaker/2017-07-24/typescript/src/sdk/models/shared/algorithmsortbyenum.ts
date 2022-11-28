@@ -1,6 +1,7 @@
 
 
+
 export enum AlgorithmSortByEnum {
-    Name = "Name"
-,    CreationTime = "CreationTime"
+    Name = "Name",
+    CreationTime = "CreationTime"
 }

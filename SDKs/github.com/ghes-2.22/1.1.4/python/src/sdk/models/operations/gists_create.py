@@ -1,13 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass_json
 @dataclass
 class GistsCreateRequestBodyFiles:
-    content: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'content' }})
+    content: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('content') }})
     
 class GistsCreateRequestBodyPublic2Enum(str, Enum):
     TRUE = "true"
@@ -17,9 +19,9 @@ class GistsCreateRequestBodyPublic2Enum(str, Enum):
 @dataclass_json
 @dataclass
 class GistsCreateRequestBody:
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    files: dict[str, GistsCreateRequestBodyFiles] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'files' }})
-    public: Optional[Any] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'public' }})
+    files: dict[str, GistsCreateRequestBodyFiles] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('files') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    public: Optional[Any] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('public') }})
     
 
 @dataclass
@@ -29,9 +31,9 @@ class GistsCreateRequest:
 
 @dataclass
 class GistsCreateResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     basic_error: Optional[shared.BasicError] = field(default=None)
     gist_simple: Optional[shared.GistSimple] = field(default=None)
     validation_error: Optional[shared.ValidationError] = field(default=None)

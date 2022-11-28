@@ -1,5 +1,7 @@
 package shared
 
+// GoogleAppsDriveLabelsV2betaFieldSchemaCapabilities
+// The capabilities related to this field when editing the field.
 type GoogleAppsDriveLabelsV2betaFieldSchemaCapabilities struct {
 	CanDelete  *bool `json:"canDelete,omitempty"`
 	CanDisable *bool `json:"canDisable,omitempty"`

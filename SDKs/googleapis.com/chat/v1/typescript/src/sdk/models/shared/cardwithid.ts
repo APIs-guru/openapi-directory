@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleAppsCardV1Card } from "./googleappscardv1card";
+
 
 
 // CardWithId
@@ -7,9 +8,9 @@ import { GoogleAppsCardV1Card } from "./googleappscardv1card";
  * Widgets for Chat apps to specify.
 **/
 export class CardWithId extends SpeakeasyBase {
-  @Metadata({ data: "json, name=card" })
+  @SpeakeasyMetadata({ data: "json, name=card" })
   card?: GoogleAppsCardV1Card;
 
-  @Metadata({ data: "json, name=cardId" })
+  @SpeakeasyMetadata({ data: "json, name=cardId" })
   cardId?: string;
 }

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import taxrate
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class TaxRatesCreateRequest:
-    tax_rates: List[taxrate.TaxRate] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'taxRates' }})
+    tax_rates: List[TaxRate] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('taxRates') }})
     

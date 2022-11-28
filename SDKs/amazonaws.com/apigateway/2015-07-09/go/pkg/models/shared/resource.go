@@ -1,5 +1,7 @@
 package shared
 
+// Resource
+// <p>Represents an API resource.</p> <div class="seeAlso"> <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html">Create an API</a> </div>
 type Resource struct {
 	ID              *string           `json:"id,omitempty"`
 	ParentID        *string           `json:"parentId,omitempty"`

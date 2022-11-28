@@ -1,7 +1,8 @@
 
 
+
 export enum FilterNameEnum {
-    Finding = "Finding"
-,    FindingReasonCodes = "FindingReasonCodes"
-,    RecommendationSourceType = "RecommendationSourceType"
+    Finding = "Finding",
+    FindingReasonCodes = "FindingReasonCodes",
+    RecommendationSourceType = "RecommendationSourceType"
 }

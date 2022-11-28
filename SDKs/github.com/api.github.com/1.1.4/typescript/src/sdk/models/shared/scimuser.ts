@@ -1,57 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ScimUserEmails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=primary" })
+  @SpeakeasyMetadata({ data: "json, name=primary" })
   primary?: boolean;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value: string;
 }
 
 
 export class ScimUserMeta extends SpeakeasyBase {
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=lastModified" })
+  @SpeakeasyMetadata({ data: "json, name=lastModified" })
   lastModified?: Date;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: string;
 
-  @Metadata({ data: "json, name=resourceType" })
+  @SpeakeasyMetadata({ data: "json, name=resourceType" })
   resourceType?: string;
 }
 
 
 export class ScimUserName extends SpeakeasyBase {
-  @Metadata({ data: "json, name=familyName" })
+  @SpeakeasyMetadata({ data: "json, name=familyName" })
   familyName: string;
 
-  @Metadata({ data: "json, name=formatted" })
+  @SpeakeasyMetadata({ data: "json, name=formatted" })
   formatted?: string;
 
-  @Metadata({ data: "json, name=givenName" })
+  @SpeakeasyMetadata({ data: "json, name=givenName" })
   givenName: string;
 }
 
 export enum ScimUserOperationsOpEnum {
-    Add = "add"
-,    Remove = "remove"
-,    Replace = "replace"
+    Add = "add",
+    Remove = "remove",
+    Replace = "replace"
 }
 
 
 export class ScimUserOperations extends SpeakeasyBase {
-  @Metadata({ data: "json, name=op" })
+  @SpeakeasyMetadata({ data: "json, name=op" })
   op: ScimUserOperationsOpEnum;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: any;
 }
 
@@ -61,39 +61,39 @@ export class ScimUserOperations extends SpeakeasyBase {
  * SCIM /Users provisioning endpoints
 **/
 export class ScimUser extends SpeakeasyBase {
-  @Metadata({ data: "json, name=active" })
+  @SpeakeasyMetadata({ data: "json, name=active" })
   active: boolean;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=emails", elemType: shared.ScimUserEmails })
+  @SpeakeasyMetadata({ data: "json, name=emails", elemType: ScimUserEmails })
   emails: ScimUserEmails[];
 
-  @Metadata({ data: "json, name=externalId" })
+  @SpeakeasyMetadata({ data: "json, name=externalId" })
   externalId: string;
 
-  @Metadata({ data: "json, name=groups" })
+  @SpeakeasyMetadata({ data: "json, name=groups" })
   groups?: any[];
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=meta" })
+  @SpeakeasyMetadata({ data: "json, name=meta" })
   meta: ScimUserMeta;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: ScimUserName;
 
-  @Metadata({ data: "json, name=operations", elemType: shared.ScimUserOperations })
+  @SpeakeasyMetadata({ data: "json, name=operations", elemType: ScimUserOperations })
   operations?: ScimUserOperations[];
 
-  @Metadata({ data: "json, name=organization_id" })
+  @SpeakeasyMetadata({ data: "json, name=organization_id" })
   organizationId?: number;
 
-  @Metadata({ data: "json, name=schemas" })
+  @SpeakeasyMetadata({ data: "json, name=schemas" })
   schemas: string[];
 
-  @Metadata({ data: "json, name=userName" })
+  @SpeakeasyMetadata({ data: "json, name=userName" })
   userName: string;
 }

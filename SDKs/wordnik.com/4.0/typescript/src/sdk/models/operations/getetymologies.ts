@@ -1,39 +1,40 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetEtymologiesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=word" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=word" })
   word: string;
 }
 
 export enum GetEtymologiesUseCanonicalEnum {
-    False = "false"
-,    True = "true"
+    False = "false",
+    True = "true"
 }
 
 
 export class GetEtymologiesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=useCanonical" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=useCanonical" })
   useCanonical?: GetEtymologiesUseCanonicalEnum;
 }
 
 
 export class GetEtymologiesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetEtymologiesPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetEtymologiesQueryParams;
 }
 
 
 export class GetEtymologiesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

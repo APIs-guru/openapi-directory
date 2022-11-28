@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CandidateProperties } from "./candidateproperties";
 import { CandidateStatusEnum } from "./candidatestatusenum";
 import { AutoMlCandidateStep } from "./automlcandidatestep";
@@ -8,41 +7,42 @@ import { AutoMlContainerDefinition } from "./automlcontainerdefinition";
 import { ObjectiveStatusEnum } from "./objectivestatusenum";
 
 
+
 // AutoMlCandidate
 /** 
  * Information about a candidate produced by an AutoML training job, including its status, steps, and other properties.
 **/
 export class AutoMlCandidate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CandidateName" })
+  @SpeakeasyMetadata({ data: "json, name=CandidateName" })
   candidateName: string;
 
-  @Metadata({ data: "json, name=CandidateProperties" })
+  @SpeakeasyMetadata({ data: "json, name=CandidateProperties" })
   candidateProperties?: CandidateProperties;
 
-  @Metadata({ data: "json, name=CandidateStatus" })
+  @SpeakeasyMetadata({ data: "json, name=CandidateStatus" })
   candidateStatus: CandidateStatusEnum;
 
-  @Metadata({ data: "json, name=CandidateSteps", elemType: shared.AutoMlCandidateStep })
+  @SpeakeasyMetadata({ data: "json, name=CandidateSteps", elemType: AutoMlCandidateStep })
   candidateSteps: AutoMlCandidateStep[];
 
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime: Date;
 
-  @Metadata({ data: "json, name=EndTime" })
+  @SpeakeasyMetadata({ data: "json, name=EndTime" })
   endTime?: Date;
 
-  @Metadata({ data: "json, name=FailureReason" })
+  @SpeakeasyMetadata({ data: "json, name=FailureReason" })
   failureReason?: string;
 
-  @Metadata({ data: "json, name=FinalAutoMLJobObjectiveMetric" })
+  @SpeakeasyMetadata({ data: "json, name=FinalAutoMLJobObjectiveMetric" })
   finalAutoMlJobObjectiveMetric?: FinalAutoMlJobObjectiveMetric;
 
-  @Metadata({ data: "json, name=InferenceContainers", elemType: shared.AutoMlContainerDefinition })
+  @SpeakeasyMetadata({ data: "json, name=InferenceContainers", elemType: AutoMlContainerDefinition })
   inferenceContainers?: AutoMlContainerDefinition[];
 
-  @Metadata({ data: "json, name=LastModifiedTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedTime" })
   lastModifiedTime: Date;
 
-  @Metadata({ data: "json, name=ObjectiveStatus" })
+  @SpeakeasyMetadata({ data: "json, name=ObjectiveStatus" })
   objectiveStatus: ObjectiveStatusEnum;
 }

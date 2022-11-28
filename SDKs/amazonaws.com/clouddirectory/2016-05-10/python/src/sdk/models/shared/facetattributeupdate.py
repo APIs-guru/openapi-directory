@@ -1,13 +1,21 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import updateactiontype_enum
-from . import facetattribute
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class FacetAttributeUpdate:
-    action: Optional[updateactiontype_enum.UpdateActionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Action' }})
-    attribute: Optional[facetattribute.FacetAttribute] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Attribute' }})
+    r"""FacetAttributeUpdate
+    A structure that contains information used to update an attribute.
+    """
+    
+    action: Optional[UpdateActionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Action') }})
+    attribute: Optional[FacetAttribute] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Attribute') }})
     

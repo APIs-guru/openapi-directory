@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -26,20 +30,20 @@ class CloudsearchStatsGetSearchapplicationQueryParams:
 
 @dataclass
 class CloudsearchStatsGetSearchapplicationSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudsearchStatsGetSearchapplicationSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudsearchStatsGetSearchapplicationSecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -51,13 +55,13 @@ class CloudsearchStatsGetSearchapplicationSecurity:
 
 @dataclass
 class CloudsearchStatsGetSearchapplicationRequest:
-    query_params: CloudsearchStatsGetSearchapplicationQueryParams = field(default=None)
-    security: CloudsearchStatsGetSearchapplicationSecurity = field(default=None)
+    query_params: CloudsearchStatsGetSearchapplicationQueryParams = field()
+    security: CloudsearchStatsGetSearchapplicationSecurity = field()
     
 
 @dataclass
 class CloudsearchStatsGetSearchapplicationResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_customer_search_application_stats_response: Optional[shared.GetCustomerSearchApplicationStatsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

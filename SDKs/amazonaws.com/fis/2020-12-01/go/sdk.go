@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://fis.{region}.amazonaws.com",
 	"https://fis.{region}.amazonaws.com",
 	"http://fis.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/fis/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// CreateExperimentTemplate - <p>Creates an experiment template. </p> <p>To create a template, specify the following information: </p> <ul> <li> <p> <b>Targets</b>: A target can be a specific resource in your AWS environment, or one or more resources that match criteria that you specify, for example, resources that have specific tags.</p> </li> <li> <p> <b>Actions</b>: The actions to carry out on the target. You can specify multiple actions, the duration of each action, and when to start each action during an experiment.</p> </li> <li> <p> <b>Stop conditions</b>: If a stop condition is triggered while an experiment is running, the experiment is automatically stopped. You can define a stop condition as a CloudWatch alarm.</p> </li> </ul> <p>For more information, see the <a href="https://docs.aws.amazon.com/fis/latest/userguide/">AWS Fault Injection Simulator User Guide</a>.</p>
 func (s *SDK) CreateExperimentTemplate(ctx context.Context, request operations.CreateExperimentTemplateRequest) (*operations.CreateExperimentTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/experimentTemplates"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -81,7 +108,7 @@ func (s *SDK) CreateExperimentTemplate(ctx context.Context, request operations.C
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -151,8 +178,9 @@ func (s *SDK) CreateExperimentTemplate(ctx context.Context, request operations.C
 	return res, nil
 }
 
+// DeleteExperimentTemplate - Deletes the specified experiment template.
 func (s *SDK) DeleteExperimentTemplate(ctx context.Context, request operations.DeleteExperimentTemplateRequest) (*operations.DeleteExperimentTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/experimentTemplates/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -162,7 +190,7 @@ func (s *SDK) DeleteExperimentTemplate(ctx context.Context, request operations.D
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -212,8 +240,9 @@ func (s *SDK) DeleteExperimentTemplate(ctx context.Context, request operations.D
 	return res, nil
 }
 
+// GetAction - Gets information about the specified AWS FIS action.
 func (s *SDK) GetAction(ctx context.Context, request operations.GetActionRequest) (*operations.GetActionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/actions/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -223,7 +252,7 @@ func (s *SDK) GetAction(ctx context.Context, request operations.GetActionRequest
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -273,8 +302,9 @@ func (s *SDK) GetAction(ctx context.Context, request operations.GetActionRequest
 	return res, nil
 }
 
+// GetExperiment - Gets information about the specified experiment.
 func (s *SDK) GetExperiment(ctx context.Context, request operations.GetExperimentRequest) (*operations.GetExperimentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/experiments/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -284,7 +314,7 @@ func (s *SDK) GetExperiment(ctx context.Context, request operations.GetExperimen
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -334,8 +364,9 @@ func (s *SDK) GetExperiment(ctx context.Context, request operations.GetExperimen
 	return res, nil
 }
 
+// GetExperimentTemplate - Gets information about the specified experiment template.
 func (s *SDK) GetExperimentTemplate(ctx context.Context, request operations.GetExperimentTemplateRequest) (*operations.GetExperimentTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/experimentTemplates/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -345,7 +376,7 @@ func (s *SDK) GetExperimentTemplate(ctx context.Context, request operations.GetE
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -395,8 +426,9 @@ func (s *SDK) GetExperimentTemplate(ctx context.Context, request operations.GetE
 	return res, nil
 }
 
+// ListActions - Lists the available AWS FIS actions.
 func (s *SDK) ListActions(ctx context.Context, request operations.ListActionsRequest) (*operations.ListActionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/actions"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -408,7 +440,7 @@ func (s *SDK) ListActions(ctx context.Context, request operations.ListActionsReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -448,8 +480,9 @@ func (s *SDK) ListActions(ctx context.Context, request operations.ListActionsReq
 	return res, nil
 }
 
+// ListExperimentTemplates - Lists your experiment templates.
 func (s *SDK) ListExperimentTemplates(ctx context.Context, request operations.ListExperimentTemplatesRequest) (*operations.ListExperimentTemplatesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/experimentTemplates"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -461,7 +494,7 @@ func (s *SDK) ListExperimentTemplates(ctx context.Context, request operations.Li
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -501,8 +534,9 @@ func (s *SDK) ListExperimentTemplates(ctx context.Context, request operations.Li
 	return res, nil
 }
 
+// ListExperiments - Lists your experiments.
 func (s *SDK) ListExperiments(ctx context.Context, request operations.ListExperimentsRequest) (*operations.ListExperimentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/experiments"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -514,7 +548,7 @@ func (s *SDK) ListExperiments(ctx context.Context, request operations.ListExperi
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -554,8 +588,9 @@ func (s *SDK) ListExperiments(ctx context.Context, request operations.ListExperi
 	return res, nil
 }
 
+// ListTagsForResource - Lists the tags for the specified resource.
 func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTagsForResourceRequest) (*operations.ListTagsForResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{resourceArn}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -565,7 +600,7 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -595,8 +630,9 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 	return res, nil
 }
 
+// StartExperiment - Starts running an experiment from the specified experiment template.
 func (s *SDK) StartExperiment(ctx context.Context, request operations.StartExperimentRequest) (*operations.StartExperimentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/experiments"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -616,7 +652,7 @@ func (s *SDK) StartExperiment(ctx context.Context, request operations.StartExper
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -686,8 +722,9 @@ func (s *SDK) StartExperiment(ctx context.Context, request operations.StartExper
 	return res, nil
 }
 
+// StopExperiment - Stops the specified experiment.
 func (s *SDK) StopExperiment(ctx context.Context, request operations.StopExperimentRequest) (*operations.StopExperimentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/experiments/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -697,7 +734,7 @@ func (s *SDK) StopExperiment(ctx context.Context, request operations.StopExperim
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -747,8 +784,9 @@ func (s *SDK) StopExperiment(ctx context.Context, request operations.StopExperim
 	return res, nil
 }
 
+// TagResource - Applies the specified tags to the specified resource.
 func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceRequest) (*operations.TagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{resourceArn}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -768,7 +806,7 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -798,8 +836,9 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 	return res, nil
 }
 
+// UntagResource - Removes the specified tags from the specified resource.
 func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourceRequest) (*operations.UntagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{resourceArn}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -811,7 +850,7 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -841,8 +880,9 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 	return res, nil
 }
 
+// UpdateExperimentTemplate - Updates the specified experiment template.
 func (s *SDK) UpdateExperimentTemplate(ctx context.Context, request operations.UpdateExperimentTemplateRequest) (*operations.UpdateExperimentTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/experimentTemplates/{id}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -862,7 +902,7 @@ func (s *SDK) UpdateExperimentTemplate(ctx context.Context, request operations.U
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

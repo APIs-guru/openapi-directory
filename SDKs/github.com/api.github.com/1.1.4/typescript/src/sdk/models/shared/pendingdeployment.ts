@@ -1,33 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SimpleUser } from "./simpleuser";
 import { TeamSimple } from "./teamsimple";
 import { DeploymentReviewerTypeEnum } from "./deploymentreviewertypeenum";
 
 
+
 export class PendingDeploymentEnvironment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=html_url" })
+  @SpeakeasyMetadata({ data: "json, name=html_url" })
   htmlUrl?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=node_id" })
+  @SpeakeasyMetadata({ data: "json, name=node_id" })
   nodeId?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }
 
 
 export class PendingDeploymentReviewers extends SpeakeasyBase {
-  @Metadata({ data: "json, name=reviewer" })
+  @SpeakeasyMetadata({ data: "json, name=reviewer" })
   reviewer?: any;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: DeploymentReviewerTypeEnum;
 }
 
@@ -37,18 +37,18 @@ export class PendingDeploymentReviewers extends SpeakeasyBase {
  * Details of a deployment that is waiting for protection rules to pass
 **/
 export class PendingDeployment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=current_user_can_approve" })
+  @SpeakeasyMetadata({ data: "json, name=current_user_can_approve" })
   currentUserCanApprove: boolean;
 
-  @Metadata({ data: "json, name=environment" })
+  @SpeakeasyMetadata({ data: "json, name=environment" })
   environment: PendingDeploymentEnvironment;
 
-  @Metadata({ data: "json, name=reviewers", elemType: shared.PendingDeploymentReviewers })
+  @SpeakeasyMetadata({ data: "json, name=reviewers", elemType: PendingDeploymentReviewers })
   reviewers: PendingDeploymentReviewers[];
 
-  @Metadata({ data: "json, name=wait_timer" })
+  @SpeakeasyMetadata({ data: "json, name=wait_timer" })
   waitTimer: number;
 
-  @Metadata({ data: "json, name=wait_timer_started_at" })
+  @SpeakeasyMetadata({ data: "json, name=wait_timer_started_at" })
   waitTimerStartedAt: Date;
 }

@@ -10,6 +10,8 @@ const (
 	GdataCompositeMediaReferenceTypeEnumCosmoBinaryReference GdataCompositeMediaReferenceTypeEnum = "COSMO_BINARY_REFERENCE"
 )
 
+// GdataCompositeMedia
+// gdata
 type GdataCompositeMedia struct {
 	BlobRef              *string                               `json:"blobRef,omitempty"`
 	Blobstore2Info       *GdataBlobstore2Info                  `json:"blobstore2Info,omitempty"`

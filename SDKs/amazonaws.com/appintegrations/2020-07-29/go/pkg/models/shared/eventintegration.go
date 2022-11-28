@@ -1,5 +1,7 @@
 package shared
 
+// EventIntegration
+// The event integration.
 type EventIntegration struct {
 	Description         *string           `json:"Description,omitempty"`
 	EventBridgeBus      *string           `json:"EventBridgeBus,omitempty"`

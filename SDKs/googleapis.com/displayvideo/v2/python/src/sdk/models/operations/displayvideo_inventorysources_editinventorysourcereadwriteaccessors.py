@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DisplayvideoInventorySourcesEditInventorySourceReadWriteAccessorsPathParams:
-    inventory_source_id: str = field(default=None, metadata={'path_param': { 'field_name': 'inventorySourceId', 'style': 'simple', 'explode': False }})
+    inventory_source_id: str = field(metadata={'path_param': { 'field_name': 'inventorySourceId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class DisplayvideoInventorySourcesEditInventorySourceReadWriteAccessorsQueryPara
 
 @dataclass
 class DisplayvideoInventorySourcesEditInventorySourceReadWriteAccessorsSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DisplayvideoInventorySourcesEditInventorySourceReadWriteAccessorsRequest:
-    path_params: DisplayvideoInventorySourcesEditInventorySourceReadWriteAccessorsPathParams = field(default=None)
-    query_params: DisplayvideoInventorySourcesEditInventorySourceReadWriteAccessorsQueryParams = field(default=None)
+    path_params: DisplayvideoInventorySourcesEditInventorySourceReadWriteAccessorsPathParams = field()
+    query_params: DisplayvideoInventorySourcesEditInventorySourceReadWriteAccessorsQueryParams = field()
+    security: DisplayvideoInventorySourcesEditInventorySourceReadWriteAccessorsSecurity = field()
     request: Optional[shared.EditInventorySourceReadWriteAccessorsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DisplayvideoInventorySourcesEditInventorySourceReadWriteAccessorsSecurity = field(default=None)
     
 
 @dataclass
 class DisplayvideoInventorySourcesEditInventorySourceReadWriteAccessorsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     inventory_source_accessors: Optional[shared.InventorySourceAccessors] = field(default=None)
-    status_code: int = field(default=None)
     

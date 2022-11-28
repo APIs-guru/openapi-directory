@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Configuration } from "./configuration";
 import { ListMeta } from "./listmeta";
+
 
 
 // ListConfigurationsResponse
@@ -9,18 +9,18 @@ import { ListMeta } from "./listmeta";
  * ListConfigurationsResponse is a list of Configuration resources.
 **/
 export class ListConfigurationsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=apiVersion" })
+  @SpeakeasyMetadata({ data: "json, name=apiVersion" })
   apiVersion?: string;
 
-  @Metadata({ data: "json, name=items", elemType: shared.Configuration })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: Configuration })
   items?: Configuration[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: ListMeta;
 
-  @Metadata({ data: "json, name=unreachable" })
+  @SpeakeasyMetadata({ data: "json, name=unreachable" })
   unreachable?: string[];
 }

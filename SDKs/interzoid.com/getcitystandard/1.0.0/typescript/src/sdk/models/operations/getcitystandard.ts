@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetcitystandardQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=city" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=city" })
   city: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=license" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=license" })
   license: string;
 }
 
 
-export class GetcitystandardRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetcitystandardQueryParams;
-}
-
-
 export class Getcitystandard200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CityStandard" })
+  @SpeakeasyMetadata({ data: "json, name=CityStandard" })
   cityStandard?: string;
 
-  @Metadata({ data: "json, name=Code" })
+  @SpeakeasyMetadata({ data: "json, name=Code" })
   code?: string;
 
-  @Metadata({ data: "json, name=Credits" })
+  @SpeakeasyMetadata({ data: "json, name=Credits" })
   credits?: string;
 }
 
 
+export class GetcitystandardRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetcitystandardQueryParams;
+}
+
+
 export class GetcitystandardResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getcitystandard200ApplicationJsonObject?: Getcitystandard200ApplicationJson;
 }

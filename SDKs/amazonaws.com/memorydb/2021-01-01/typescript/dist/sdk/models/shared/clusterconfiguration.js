@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ShardDetail } from "./sharddetail";
 // ClusterConfiguration
 /**
  * A list of cluster configuration options.
@@ -34,59 +34,59 @@ var ClusterConfiguration = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], ClusterConfiguration.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=EngineVersion" }),
+        SpeakeasyMetadata({ data: "json, name=EngineVersion" }),
         __metadata("design:type", String)
     ], ClusterConfiguration.prototype, "engineVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=MaintenanceWindow" }),
+        SpeakeasyMetadata({ data: "json, name=MaintenanceWindow" }),
         __metadata("design:type", String)
     ], ClusterConfiguration.prototype, "maintenanceWindow", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], ClusterConfiguration.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=NodeType" }),
+        SpeakeasyMetadata({ data: "json, name=NodeType" }),
         __metadata("design:type", String)
     ], ClusterConfiguration.prototype, "nodeType", void 0);
     __decorate([
-        Metadata({ data: "json, name=NumShards" }),
+        SpeakeasyMetadata({ data: "json, name=NumShards" }),
         __metadata("design:type", Number)
     ], ClusterConfiguration.prototype, "numShards", void 0);
     __decorate([
-        Metadata({ data: "json, name=ParameterGroupName" }),
+        SpeakeasyMetadata({ data: "json, name=ParameterGroupName" }),
         __metadata("design:type", String)
     ], ClusterConfiguration.prototype, "parameterGroupName", void 0);
     __decorate([
-        Metadata({ data: "json, name=Port" }),
+        SpeakeasyMetadata({ data: "json, name=Port" }),
         __metadata("design:type", Number)
     ], ClusterConfiguration.prototype, "port", void 0);
     __decorate([
-        Metadata({ data: "json, name=Shards", elemType: shared.ShardDetail }),
+        SpeakeasyMetadata({ data: "json, name=Shards", elemType: ShardDetail }),
         __metadata("design:type", Array)
     ], ClusterConfiguration.prototype, "shards", void 0);
     __decorate([
-        Metadata({ data: "json, name=SnapshotRetentionLimit" }),
+        SpeakeasyMetadata({ data: "json, name=SnapshotRetentionLimit" }),
         __metadata("design:type", Number)
     ], ClusterConfiguration.prototype, "snapshotRetentionLimit", void 0);
     __decorate([
-        Metadata({ data: "json, name=SnapshotWindow" }),
+        SpeakeasyMetadata({ data: "json, name=SnapshotWindow" }),
         __metadata("design:type", String)
     ], ClusterConfiguration.prototype, "snapshotWindow", void 0);
     __decorate([
-        Metadata({ data: "json, name=SubnetGroupName" }),
+        SpeakeasyMetadata({ data: "json, name=SubnetGroupName" }),
         __metadata("design:type", String)
     ], ClusterConfiguration.prototype, "subnetGroupName", void 0);
     __decorate([
-        Metadata({ data: "json, name=TopicArn" }),
+        SpeakeasyMetadata({ data: "json, name=TopicArn" }),
         __metadata("design:type", String)
     ], ClusterConfiguration.prototype, "topicArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=VpcId" }),
+        SpeakeasyMetadata({ data: "json, name=VpcId" }),
         __metadata("design:type", String)
     ], ClusterConfiguration.prototype, "vpcId", void 0);
     return ClusterConfiguration;

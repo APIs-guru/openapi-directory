@@ -27,7 +27,7 @@ type DisplayvideoInventorySourceGroupsCreateSecurity struct {
 
 type DisplayvideoInventorySourceGroupsCreateRequest struct {
 	QueryParams DisplayvideoInventorySourceGroupsCreateQueryParams
-	Request     *shared.InventorySourceGroup `request:"mediaType=application/json"`
+	Request     *shared.InventorySourceGroupInput `request:"mediaType=application/json"`
 	Security    DisplayvideoInventorySourceGroupsCreateSecurity
 }
 

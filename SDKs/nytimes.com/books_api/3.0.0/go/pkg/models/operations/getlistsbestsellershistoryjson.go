@@ -18,11 +18,6 @@ type GetListsBestSellersHistoryJSONSecurity struct {
 	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=query"`
 }
 
-type GetListsBestSellersHistoryJSONRequest struct {
-	QueryParams GetListsBestSellersHistoryJSONQueryParams
-	Security    GetListsBestSellersHistoryJSONSecurity
-}
-
 type GetListsBestSellersHistoryJSON200ApplicationJSONResultsIsbns struct {
 	Isbn10 *string `json:"isbn10,omitempty"`
 	Isbn13 *string `json:"isbn13,omitempty"`
@@ -68,6 +63,11 @@ type GetListsBestSellersHistoryJSON200ApplicationJSON struct {
 	NumResults *int64                                                    `json:"num_results,omitempty"`
 	Results    []GetListsBestSellersHistoryJSON200ApplicationJSONResults `json:"results,omitempty"`
 	Status     *string                                                   `json:"status,omitempty"`
+}
+
+type GetListsBestSellersHistoryJSONRequest struct {
+	QueryParams GetListsBestSellersHistoryJSONQueryParams
+	Security    GetListsBestSellersHistoryJSONSecurity
 }
 
 type GetListsBestSellersHistoryJSONResponse struct {

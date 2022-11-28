@@ -1,5 +1,7 @@
 package shared
 
+// ReportLocalPostInsightsResponse
+// Response message for Insights.ReportLocalPostInsights
 type ReportLocalPostInsightsResponse struct {
 	LocalPostMetrics []LocalPostMetrics `json:"localPostMetrics,omitempty"`
 	Name             *string            `json:"name,omitempty"`

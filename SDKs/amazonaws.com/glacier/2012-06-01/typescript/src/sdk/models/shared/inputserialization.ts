@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CsvInput } from "./csvinput";
+
 
 
 // InputSerialization
@@ -7,6 +8,6 @@ import { CsvInput } from "./csvinput";
  * Describes how the archive is serialized.
 **/
 export class InputSerialization extends SpeakeasyBase {
-  @Metadata({ data: "json, name=csv" })
+  @SpeakeasyMetadata({ data: "json, name=csv" })
   csv?: CsvInput;
 }

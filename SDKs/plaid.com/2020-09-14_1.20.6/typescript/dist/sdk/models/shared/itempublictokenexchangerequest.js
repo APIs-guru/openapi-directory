@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ItemPublicTokenExchangeRequest
 /**
  * ItemPublicTokenExchangeRequest defines the request schema for `/item/public_token/exchange`
@@ -33,15 +33,15 @@ var ItemPublicTokenExchangeRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=client_id" }),
+        SpeakeasyMetadata({ data: "json, name=client_id" }),
         __metadata("design:type", String)
     ], ItemPublicTokenExchangeRequest.prototype, "clientId", void 0);
     __decorate([
-        Metadata({ data: "json, name=public_token" }),
+        SpeakeasyMetadata({ data: "json, name=public_token" }),
         __metadata("design:type", String)
     ], ItemPublicTokenExchangeRequest.prototype, "publicToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=secret" }),
+        SpeakeasyMetadata({ data: "json, name=secret" }),
         __metadata("design:type", String)
     ], ItemPublicTokenExchangeRequest.prototype, "secret", void 0);
     return ItemPublicTokenExchangeRequest;

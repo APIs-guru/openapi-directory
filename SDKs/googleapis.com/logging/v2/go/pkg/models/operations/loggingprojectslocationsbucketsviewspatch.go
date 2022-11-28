@@ -41,7 +41,7 @@ type LoggingProjectsLocationsBucketsViewsPatchSecurity struct {
 type LoggingProjectsLocationsBucketsViewsPatchRequest struct {
 	PathParams  LoggingProjectsLocationsBucketsViewsPatchPathParams
 	QueryParams LoggingProjectsLocationsBucketsViewsPatchQueryParams
-	Request     *shared.LogView `request:"mediaType=application/json"`
+	Request     *shared.LogViewInput `request:"mediaType=application/json"`
 	Security    LoggingProjectsLocationsBucketsViewsPatchSecurity
 }
 

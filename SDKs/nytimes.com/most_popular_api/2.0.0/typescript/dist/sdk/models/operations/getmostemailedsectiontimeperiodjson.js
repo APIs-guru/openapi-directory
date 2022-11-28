@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetMostemailedSectionTimePeriodJsonPathParams = /** @class */ (function (_super) {
     __extends(GetMostemailedSectionTimePeriodJsonPathParams, _super);
@@ -30,11 +30,11 @@ var GetMostemailedSectionTimePeriodJsonPathParams = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=section" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=section" }),
         __metadata("design:type", String)
     ], GetMostemailedSectionTimePeriodJsonPathParams.prototype, "section", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=time-period" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=time-period" }),
         __metadata("design:type", String)
     ], GetMostemailedSectionTimePeriodJsonPathParams.prototype, "timePeriod", void 0);
     return GetMostemailedSectionTimePeriodJsonPathParams;
@@ -46,47 +46,31 @@ var GetMostemailedSectionTimePeriodJsonSecurity = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], GetMostemailedSectionTimePeriodJsonSecurity.prototype, "apiKey", void 0);
     return GetMostemailedSectionTimePeriodJsonSecurity;
 }(SpeakeasyBase));
 export { GetMostemailedSectionTimePeriodJsonSecurity };
-var GetMostemailedSectionTimePeriodJsonRequest = /** @class */ (function (_super) {
-    __extends(GetMostemailedSectionTimePeriodJsonRequest, _super);
-    function GetMostemailedSectionTimePeriodJsonRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata(),
-        __metadata("design:type", GetMostemailedSectionTimePeriodJsonPathParams)
-    ], GetMostemailedSectionTimePeriodJsonRequest.prototype, "pathParams", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", GetMostemailedSectionTimePeriodJsonSecurity)
-    ], GetMostemailedSectionTimePeriodJsonRequest.prototype, "security", void 0);
-    return GetMostemailedSectionTimePeriodJsonRequest;
-}(SpeakeasyBase));
-export { GetMostemailedSectionTimePeriodJsonRequest };
 var GetMostemailedSectionTimePeriodJson200ApplicationJson = /** @class */ (function (_super) {
     __extends(GetMostemailedSectionTimePeriodJson200ApplicationJson, _super);
     function GetMostemailedSectionTimePeriodJson200ApplicationJson() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=copyright" }),
+        SpeakeasyMetadata({ data: "json, name=copyright" }),
         __metadata("design:type", String)
     ], GetMostemailedSectionTimePeriodJson200ApplicationJson.prototype, "copyright", void 0);
     __decorate([
-        Metadata({ data: "json, name=num_results" }),
+        SpeakeasyMetadata({ data: "json, name=num_results" }),
         __metadata("design:type", Number)
     ], GetMostemailedSectionTimePeriodJson200ApplicationJson.prototype, "numResults", void 0);
     __decorate([
-        Metadata({ data: "json, name=results", elemType: shared.ArticleWithCountType }),
+        SpeakeasyMetadata({ data: "json, name=results", elemType: shared.ArticleWithCountType }),
         __metadata("design:type", Array)
     ], GetMostemailedSectionTimePeriodJson200ApplicationJson.prototype, "results", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], GetMostemailedSectionTimePeriodJson200ApplicationJson.prototype, "status", void 0);
     return GetMostemailedSectionTimePeriodJson200ApplicationJson;
@@ -98,51 +82,67 @@ var GetMostemailedSectionTimePeriodJson400ApplicationJson = /** @class */ (funct
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=copyright" }),
+        SpeakeasyMetadata({ data: "json, name=copyright" }),
         __metadata("design:type", String)
     ], GetMostemailedSectionTimePeriodJson400ApplicationJson.prototype, "copyright", void 0);
     __decorate([
-        Metadata({ data: "json, name=errors" }),
+        SpeakeasyMetadata({ data: "json, name=errors" }),
         __metadata("design:type", Array)
     ], GetMostemailedSectionTimePeriodJson400ApplicationJson.prototype, "errors", void 0);
     __decorate([
-        Metadata({ data: "json, name=results" }),
+        SpeakeasyMetadata({ data: "json, name=results" }),
         __metadata("design:type", Array)
     ], GetMostemailedSectionTimePeriodJson400ApplicationJson.prototype, "results", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], GetMostemailedSectionTimePeriodJson400ApplicationJson.prototype, "status", void 0);
     return GetMostemailedSectionTimePeriodJson400ApplicationJson;
 }(SpeakeasyBase));
 export { GetMostemailedSectionTimePeriodJson400ApplicationJson };
+var GetMostemailedSectionTimePeriodJsonRequest = /** @class */ (function (_super) {
+    __extends(GetMostemailedSectionTimePeriodJsonRequest, _super);
+    function GetMostemailedSectionTimePeriodJsonRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", GetMostemailedSectionTimePeriodJsonPathParams)
+    ], GetMostemailedSectionTimePeriodJsonRequest.prototype, "pathParams", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", GetMostemailedSectionTimePeriodJsonSecurity)
+    ], GetMostemailedSectionTimePeriodJsonRequest.prototype, "security", void 0);
+    return GetMostemailedSectionTimePeriodJsonRequest;
+}(SpeakeasyBase));
+export { GetMostemailedSectionTimePeriodJsonRequest };
 var GetMostemailedSectionTimePeriodJsonResponse = /** @class */ (function (_super) {
     __extends(GetMostemailedSectionTimePeriodJsonResponse, _super);
     function GetMostemailedSectionTimePeriodJsonResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetMostemailedSectionTimePeriodJsonResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetMostemailedSectionTimePeriodJsonResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetMostemailedSectionTimePeriodJson200ApplicationJson)
     ], GetMostemailedSectionTimePeriodJsonResponse.prototype, "getMostemailedSectionTimePeriodJson200ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetMostemailedSectionTimePeriodJson400ApplicationJson)
     ], GetMostemailedSectionTimePeriodJsonResponse.prototype, "getMostemailedSectionTimePeriodJson400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], GetMostemailedSectionTimePeriodJsonResponse.prototype, "getMostemailedSectionTimePeriodJson403ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetMostemailedSectionTimePeriodJsonResponse.prototype, "statusCode", void 0);
     return GetMostemailedSectionTimePeriodJsonResponse;

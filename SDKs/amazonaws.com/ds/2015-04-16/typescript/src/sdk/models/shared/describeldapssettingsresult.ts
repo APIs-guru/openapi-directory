@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LdapsSettingInfo } from "./ldapssettinginfo";
 
 
+
 export class DescribeLdapsSettingsResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LDAPSSettingsInfo", elemType: shared.LdapsSettingInfo })
+  @SpeakeasyMetadata({ data: "json, name=LDAPSSettingsInfo", elemType: LdapsSettingInfo })
   ldapsSettingsInfo?: LdapsSettingInfo[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

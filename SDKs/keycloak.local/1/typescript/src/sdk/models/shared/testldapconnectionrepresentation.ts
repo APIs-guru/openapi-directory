@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TestLdapConnectionRepresentation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action?: string;
 
-  @Metadata({ data: "json, name=bindCredential" })
+  @SpeakeasyMetadata({ data: "json, name=bindCredential" })
   bindCredential?: string;
 
-  @Metadata({ data: "json, name=bindDn" })
+  @SpeakeasyMetadata({ data: "json, name=bindDn" })
   bindDn?: string;
 
-  @Metadata({ data: "json, name=componentId" })
+  @SpeakeasyMetadata({ data: "json, name=componentId" })
   componentId?: string;
 
-  @Metadata({ data: "json, name=connectionTimeout" })
+  @SpeakeasyMetadata({ data: "json, name=connectionTimeout" })
   connectionTimeout?: string;
 
-  @Metadata({ data: "json, name=connectionUrl" })
+  @SpeakeasyMetadata({ data: "json, name=connectionUrl" })
   connectionUrl?: string;
 
-  @Metadata({ data: "json, name=startTls" })
+  @SpeakeasyMetadata({ data: "json, name=startTls" })
   startTls?: string;
 
-  @Metadata({ data: "json, name=useTruststoreSpi" })
+  @SpeakeasyMetadata({ data: "json, name=useTruststoreSpi" })
   useTruststoreSpi?: string;
 }

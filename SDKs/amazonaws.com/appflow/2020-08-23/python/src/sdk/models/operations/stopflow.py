@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,22 +22,22 @@ class StopFlowHeaders:
 @dataclass_json
 @dataclass
 class StopFlowRequestBody:
-    flow_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'flowName' }})
+    flow_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('flowName') }})
     
 
 @dataclass
 class StopFlowRequest:
-    headers: StopFlowHeaders = field(default=None)
-    request: StopFlowRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: StopFlowHeaders = field()
+    request: StopFlowRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class StopFlowResponse:
+    content_type: str = field()
+    status_code: int = field()
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     stop_flow_response: Optional[shared.StopFlowResponse] = field(default=None)
     unsupported_operation_exception: Optional[Any] = field(default=None)
     

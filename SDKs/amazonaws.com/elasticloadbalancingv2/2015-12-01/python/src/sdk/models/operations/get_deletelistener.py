@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteListenerActionEnum(str, Enum):
     DELETE_LISTENER = "DeleteListener"
@@ -10,9 +14,9 @@ class GetDeleteListenerVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteListenerQueryParams:
-    action: GetDeleteListenerActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    listener_arn: str = field(default=None, metadata={'query_param': { 'field_name': 'ListenerArn', 'style': 'form', 'explode': True }})
-    version: GetDeleteListenerVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetDeleteListenerActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    listener_arn: str = field(metadata={'query_param': { 'field_name': 'ListenerArn', 'style': 'form', 'explode': True }})
+    version: GetDeleteListenerVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetDeleteListenerHeaders:
 
 @dataclass
 class GetDeleteListenerRequest:
-    query_params: GetDeleteListenerQueryParams = field(default=None)
-    headers: GetDeleteListenerHeaders = field(default=None)
+    headers: GetDeleteListenerHeaders = field()
+    query_params: GetDeleteListenerQueryParams = field()
     
 
 @dataclass
 class GetDeleteListenerResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

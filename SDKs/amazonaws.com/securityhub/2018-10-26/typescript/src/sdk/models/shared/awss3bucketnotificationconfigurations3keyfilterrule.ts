@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsS3BucketNotificationConfigurationS3KeyFilterRuleNameEnum } from "./awss3bucketnotificationconfigurations3keyfilterrulenameenum";
+
 
 
 // AwsS3BucketNotificationConfigurationS3KeyFilterRule
@@ -7,9 +8,9 @@ import { AwsS3BucketNotificationConfigurationS3KeyFilterRuleNameEnum } from "./a
  * Details for a filter rule.
 **/
 export class AwsS3BucketNotificationConfigurationS3KeyFilterRule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: AwsS3BucketNotificationConfigurationS3KeyFilterRuleNameEnum;
 
-  @Metadata({ data: "json, name=Value" })
+  @SpeakeasyMetadata({ data: "json, name=Value" })
   value?: string;
 }

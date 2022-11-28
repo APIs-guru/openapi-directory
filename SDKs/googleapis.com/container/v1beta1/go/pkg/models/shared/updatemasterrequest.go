@@ -1,5 +1,7 @@
 package shared
 
+// UpdateMasterRequest
+// UpdateMasterRequest updates the master of the cluster.
 type UpdateMasterRequest struct {
 	ClusterID     *string `json:"clusterId,omitempty"`
 	MasterVersion *string `json:"masterVersion,omitempty"`

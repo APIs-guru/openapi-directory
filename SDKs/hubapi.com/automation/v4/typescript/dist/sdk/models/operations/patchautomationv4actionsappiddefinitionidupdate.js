@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PatchAutomationV4ActionsAppIdDefinitionIdUpdatePathParams = /** @class */ (function (_super) {
     __extends(PatchAutomationV4ActionsAppIdDefinitionIdUpdatePathParams, _super);
@@ -30,11 +30,11 @@ var PatchAutomationV4ActionsAppIdDefinitionIdUpdatePathParams = /** @class */ (f
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=appId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=appId" }),
         __metadata("design:type", Number)
     ], PatchAutomationV4ActionsAppIdDefinitionIdUpdatePathParams.prototype, "appId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=definitionId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=definitionId" }),
         __metadata("design:type", String)
     ], PatchAutomationV4ActionsAppIdDefinitionIdUpdatePathParams.prototype, "definitionId", void 0);
     return PatchAutomationV4ActionsAppIdDefinitionIdUpdatePathParams;
@@ -46,7 +46,7 @@ var PatchAutomationV4ActionsAppIdDefinitionIdUpdateSecurity = /** @class */ (fun
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
         __metadata("design:type", shared.SchemeDeveloperHapikey)
     ], PatchAutomationV4ActionsAppIdDefinitionIdUpdateSecurity.prototype, "developerHapikey", void 0);
     return PatchAutomationV4ActionsAppIdDefinitionIdUpdateSecurity;
@@ -58,15 +58,15 @@ var PatchAutomationV4ActionsAppIdDefinitionIdUpdateRequest = /** @class */ (func
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PatchAutomationV4ActionsAppIdDefinitionIdUpdatePathParams)
     ], PatchAutomationV4ActionsAppIdDefinitionIdUpdateRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.ExtensionActionDefinitionPatch)
     ], PatchAutomationV4ActionsAppIdDefinitionIdUpdateRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PatchAutomationV4ActionsAppIdDefinitionIdUpdateSecurity)
     ], PatchAutomationV4ActionsAppIdDefinitionIdUpdateRequest.prototype, "security", void 0);
     return PatchAutomationV4ActionsAppIdDefinitionIdUpdateRequest;
@@ -78,19 +78,19 @@ var PatchAutomationV4ActionsAppIdDefinitionIdUpdateResponse = /** @class */ (fun
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], PatchAutomationV4ActionsAppIdDefinitionIdUpdateResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PatchAutomationV4ActionsAppIdDefinitionIdUpdateResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ExtensionActionDefinition)
     ], PatchAutomationV4ActionsAppIdDefinitionIdUpdateResponse.prototype, "extensionActionDefinition", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PatchAutomationV4ActionsAppIdDefinitionIdUpdateResponse.prototype, "statusCode", void 0);
     return PatchAutomationV4ActionsAppIdDefinitionIdUpdateResponse;

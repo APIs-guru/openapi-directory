@@ -14,6 +14,8 @@ type PutLoggingOptionsHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// PutLoggingOptionsRequestBodyLoggingOptions
+// The values of the AWS IoT Events logging options.
 type PutLoggingOptionsRequestBodyLoggingOptions struct {
 	DetectorDebugOptions []shared.DetectorDebugOption `json:"detectorDebugOptions,omitempty"`
 	Enabled              *bool                        `json:"enabled,omitempty"`

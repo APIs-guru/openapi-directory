@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 
 class CurrentSeasonFormatEnum(str, Enum):
     XML = "XML"
@@ -8,17 +9,17 @@ class CurrentSeasonFormatEnum(str, Enum):
 
 @dataclass
 class CurrentSeasonPathParams:
-    format: CurrentSeasonFormatEnum = field(default=None, metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
+    format: CurrentSeasonFormatEnum = field(metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class CurrentSeasonRequest:
-    path_params: CurrentSeasonPathParams = field(default=None)
+    path_params: CurrentSeasonPathParams = field()
     
 
 @dataclass
 class CurrentSeasonResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     current_season_200_application_json_integer: Optional[int] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Operation } from "./operation";
 // ReportRequest
 /**
  * Request message for the Report method.
@@ -34,11 +34,11 @@ var ReportRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=operations", elemType: shared.Operation }),
+        SpeakeasyMetadata({ data: "json, name=operations", elemType: Operation }),
         __metadata("design:type", Array)
     ], ReportRequest.prototype, "operations", void 0);
     __decorate([
-        Metadata({ data: "json, name=serviceConfigId" }),
+        SpeakeasyMetadata({ data: "json, name=serviceConfigId" }),
         __metadata("design:type", String)
     ], ReportRequest.prototype, "serviceConfigId", void 0);
     return ReportRequest;

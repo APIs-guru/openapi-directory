@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InputConfig } from "./inputconfig";
+
 
 
 // ImportDataRequest
@@ -7,6 +8,6 @@ import { InputConfig } from "./inputconfig";
  * Request message for AutoMl.ImportData.
 **/
 export class ImportDataRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=inputConfig" })
+  @SpeakeasyMetadata({ data: "json, name=inputConfig" })
   inputConfig?: InputConfig;
 }

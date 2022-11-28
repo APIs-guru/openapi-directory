@@ -9,13 +9,13 @@ type GetCompanyTimeOffTypesQueryParams struct {
 	Offset *int64 `queryParam:"style=form,explode=true,name=offset"`
 }
 
-type GetCompanyTimeOffTypesRequest struct {
-	QueryParams GetCompanyTimeOffTypesQueryParams
-}
-
 type GetCompanyTimeOffTypes200ApplicationJSON struct {
 	Data    []shared.TimeOffTypeResource `json:"data,omitempty"`
 	Success *bool                        `json:"success,omitempty"`
+}
+
+type GetCompanyTimeOffTypesRequest struct {
+	QueryParams GetCompanyTimeOffTypesQueryParams
 }
 
 type GetCompanyTimeOffTypesResponse struct {

@@ -1,15 +1,15 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class GetfullnamematchQueryParams extends SpeakeasyBase {
     fullname: string;
     license: string;
-}
-export declare class GetfullnamematchRequest extends SpeakeasyBase {
-    queryParams: GetfullnamematchQueryParams;
 }
 export declare class Getfullnamematch200ApplicationJson extends SpeakeasyBase {
     code?: string;
     credits?: string;
     simkey?: string;
+}
+export declare class GetfullnamematchRequest extends SpeakeasyBase {
+    queryParams: GetfullnamematchQueryParams;
 }
 export declare class GetfullnamematchResponse extends SpeakeasyBase {
     contentType: string;

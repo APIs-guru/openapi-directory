@@ -1,10 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RuleSource } from "./rulesource";
 
+
 export enum GoogleCloudFunctionRulePatchRequestModeEnum {
-    Single = "single"
-,    Batch = "batch"
+    Single = "single",
+    Batch = "batch"
 }
 
 export enum GoogleCloudFunctionRulePatchRuleTypeEnum {
@@ -12,8 +12,8 @@ export enum GoogleCloudFunctionRulePatchRuleTypeEnum {
 }
 
 export enum GoogleCloudFunctionRulePatchStatusEnum {
-    Enabled = "enabled"
-,    Disabled = "disabled"
+    Enabled = "enabled",
+    Disabled = "disabled"
 }
 
 export enum GoogleCloudFunctionRulePatchTargetFormatEnum {
@@ -22,51 +22,51 @@ export enum GoogleCloudFunctionRulePatchTargetFormatEnum {
 
 
 export class GoogleCloudFunctionRulePatchTargetHeaders extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }
 
 
 export class GoogleCloudFunctionRulePatchTarget extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enveloped" })
+  @SpeakeasyMetadata({ data: "json, name=enveloped" })
   enveloped?: boolean;
 
-  @Metadata({ data: "json, name=format" })
+  @SpeakeasyMetadata({ data: "json, name=format" })
   format?: GoogleCloudFunctionRulePatchTargetFormatEnum;
 
-  @Metadata({ data: "json, name=functionName" })
+  @SpeakeasyMetadata({ data: "json, name=functionName" })
   functionName?: string;
 
-  @Metadata({ data: "json, name=headers", elemType: shared.GoogleCloudFunctionRulePatchTargetHeaders })
+  @SpeakeasyMetadata({ data: "json, name=headers", elemType: GoogleCloudFunctionRulePatchTargetHeaders })
   headers?: GoogleCloudFunctionRulePatchTargetHeaders[];
 
-  @Metadata({ data: "json, name=projectId" })
+  @SpeakeasyMetadata({ data: "json, name=projectId" })
   projectId?: string;
 
-  @Metadata({ data: "json, name=region" })
+  @SpeakeasyMetadata({ data: "json, name=region" })
   region?: string;
 
-  @Metadata({ data: "json, name=signingKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=signingKeyId" })
   signingKeyId?: string;
 }
 
 
 export class GoogleCloudFunctionRulePatch extends SpeakeasyBase {
-  @Metadata({ data: "json, name=requestMode" })
+  @SpeakeasyMetadata({ data: "json, name=requestMode" })
   requestMode?: GoogleCloudFunctionRulePatchRequestModeEnum;
 
-  @Metadata({ data: "json, name=ruleType" })
+  @SpeakeasyMetadata({ data: "json, name=ruleType" })
   ruleType?: GoogleCloudFunctionRulePatchRuleTypeEnum;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: RuleSource;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: GoogleCloudFunctionRulePatchStatusEnum;
 
-  @Metadata({ data: "json, name=target" })
+  @SpeakeasyMetadata({ data: "json, name=target" })
   target?: GoogleCloudFunctionRulePatchTarget;
 }

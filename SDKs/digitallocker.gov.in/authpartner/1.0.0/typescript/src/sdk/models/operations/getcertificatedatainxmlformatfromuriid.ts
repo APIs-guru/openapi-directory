@@ -1,77 +1,78 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetCertificateDataInXmlFormatFromUriIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=uri" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=uri" })
   uri: string;
 }
 
 
 export class GetCertificateDataInXmlFormatFromUriIdSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   bearerAuth: shared.SchemeBearerAuth;
 }
 
 
-export class GetCertificateDataInXmlFormatFromUriIdRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetCertificateDataInXmlFormatFromUriIdPathParams;
-
-  @Metadata()
-  security: GetCertificateDataInXmlFormatFromUriIdSecurity;
-}
-
-
 export class GetCertificateDataInXmlFormatFromUriId400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: string;
 
-  @Metadata({ data: "json, name=error_description" })
+  @SpeakeasyMetadata({ data: "json, name=error_description" })
   errorDescription?: string;
 }
 
 
 export class GetCertificateDataInXmlFormatFromUriId401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: string;
 
-  @Metadata({ data: "json, name=error_description" })
+  @SpeakeasyMetadata({ data: "json, name=error_description" })
   errorDescription?: string;
 }
 
 
 export class GetCertificateDataInXmlFormatFromUriId404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: string;
 
-  @Metadata({ data: "json, name=error_description" })
+  @SpeakeasyMetadata({ data: "json, name=error_description" })
   errorDescription?: string;
 }
 
 
+export class GetCertificateDataInXmlFormatFromUriIdRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetCertificateDataInXmlFormatFromUriIdPathParams;
+
+  @SpeakeasyMetadata()
+  security: GetCertificateDataInXmlFormatFromUriIdSecurity;
+}
+
+
 export class GetCertificateDataInXmlFormatFromUriIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getCertificateDataInXmlFormatFromUriId400ApplicationJsonObject?: GetCertificateDataInXmlFormatFromUriId400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getCertificateDataInXmlFormatFromUriId401ApplicationJsonObject?: GetCertificateDataInXmlFormatFromUriId401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getCertificateDataInXmlFormatFromUriId404ApplicationJsonObject?: GetCertificateDataInXmlFormatFromUriId404ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getCertificateDataInXmlFormatFromUriId500ApplicationJsonOneOf?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getCertificateDataInXmlFormatFromUriId503ApplicationJsonOneOf?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

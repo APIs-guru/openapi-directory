@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsEc2NetworkAclAssociation } from "./awsec2networkaclassociation";
 import { AwsEc2NetworkAclEntry } from "./awsec2networkaclentry";
+
 
 
 // AwsEc2NetworkAclDetails
@@ -9,21 +9,21 @@ import { AwsEc2NetworkAclEntry } from "./awsec2networkaclentry";
  * Contains details about an EC2 network access control list (ACL).
 **/
 export class AwsEc2NetworkAclDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Associations", elemType: shared.AwsEc2NetworkAclAssociation })
+  @SpeakeasyMetadata({ data: "json, name=Associations", elemType: AwsEc2NetworkAclAssociation })
   associations?: AwsEc2NetworkAclAssociation[];
 
-  @Metadata({ data: "json, name=Entries", elemType: shared.AwsEc2NetworkAclEntry })
+  @SpeakeasyMetadata({ data: "json, name=Entries", elemType: AwsEc2NetworkAclEntry })
   entries?: AwsEc2NetworkAclEntry[];
 
-  @Metadata({ data: "json, name=IsDefault" })
+  @SpeakeasyMetadata({ data: "json, name=IsDefault" })
   isDefault?: boolean;
 
-  @Metadata({ data: "json, name=NetworkAclId" })
+  @SpeakeasyMetadata({ data: "json, name=NetworkAclId" })
   networkAclId?: string;
 
-  @Metadata({ data: "json, name=OwnerId" })
+  @SpeakeasyMetadata({ data: "json, name=OwnerId" })
   ownerId?: string;
 
-  @Metadata({ data: "json, name=VpcId" })
+  @SpeakeasyMetadata({ data: "json, name=VpcId" })
   vpcId?: string;
 }

@@ -8,6 +8,8 @@ const (
 	GoogleAPIServiceusageV1ServiceStateEnumEnabled          GoogleAPIServiceusageV1ServiceStateEnum = "ENABLED"
 )
 
+// GoogleAPIServiceusageV1Service
+// A service that is available for use by the consumer.
 type GoogleAPIServiceusageV1Service struct {
 	Config *GoogleAPIServiceusageV1ServiceConfig    `json:"config,omitempty"`
 	Name   *string                                  `json:"name,omitempty"`

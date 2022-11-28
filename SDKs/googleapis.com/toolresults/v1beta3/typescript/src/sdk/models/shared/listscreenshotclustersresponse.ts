@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ScreenshotCluster } from "./screenshotcluster";
 
 
+
 export class ListScreenshotClustersResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clusters", elemType: shared.ScreenshotCluster })
+  @SpeakeasyMetadata({ data: "json, name=clusters", elemType: ScreenshotCluster })
   clusters?: ScreenshotCluster[];
 }

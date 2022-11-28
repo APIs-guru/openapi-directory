@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GetHostnameSuggestionResult
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains the response to a <code>GetHostnameSuggestion</code> request.
 **/
 export class GetHostnameSuggestionResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Hostname" })
+  @SpeakeasyMetadata({ data: "json, name=Hostname" })
   hostname?: string;
 
-  @Metadata({ data: "json, name=LayerId" })
+  @SpeakeasyMetadata({ data: "json, name=LayerId" })
   layerId?: string;
 }

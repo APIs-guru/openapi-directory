@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AmpUrl
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * AMP URL response for a requested URL.
 **/
 export class AmpUrl extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ampUrl" })
+  @SpeakeasyMetadata({ data: "json, name=ampUrl" })
   ampUrl?: string;
 
-  @Metadata({ data: "json, name=cdnAmpUrl" })
+  @SpeakeasyMetadata({ data: "json, name=cdnAmpUrl" })
   cdnAmpUrl?: string;
 
-  @Metadata({ data: "json, name=originalUrl" })
+  @SpeakeasyMetadata({ data: "json, name=originalUrl" })
   originalUrl?: string;
 }

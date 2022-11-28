@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BuiltInVariable } from "./builtinvariable";
 import { Client } from "./client";
 import { Container } from "./container";
 import { CustomTemplate } from "./customtemplate";
 import { Folder } from "./folder";
+import { GtagConfig } from "./gtagconfig";
 import { Tag } from "./tag";
 import { Trigger } from "./trigger";
 import { Variable } from "./variable";
 import { Zone } from "./zone";
+
 
 
 // ContainerVersion
@@ -16,57 +17,60 @@ import { Zone } from "./zone";
  * Represents a Google Tag Manager Container Version.
 **/
 export class ContainerVersion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=builtInVariable", elemType: shared.BuiltInVariable })
+  @SpeakeasyMetadata({ data: "json, name=builtInVariable", elemType: BuiltInVariable })
   builtInVariable?: BuiltInVariable[];
 
-  @Metadata({ data: "json, name=client", elemType: shared.Client })
+  @SpeakeasyMetadata({ data: "json, name=client", elemType: Client })
   client?: Client[];
 
-  @Metadata({ data: "json, name=container" })
+  @SpeakeasyMetadata({ data: "json, name=container" })
   container?: Container;
 
-  @Metadata({ data: "json, name=containerId" })
+  @SpeakeasyMetadata({ data: "json, name=containerId" })
   containerId?: string;
 
-  @Metadata({ data: "json, name=containerVersionId" })
+  @SpeakeasyMetadata({ data: "json, name=containerVersionId" })
   containerVersionId?: string;
 
-  @Metadata({ data: "json, name=customTemplate", elemType: shared.CustomTemplate })
+  @SpeakeasyMetadata({ data: "json, name=customTemplate", elemType: CustomTemplate })
   customTemplate?: CustomTemplate[];
 
-  @Metadata({ data: "json, name=deleted" })
+  @SpeakeasyMetadata({ data: "json, name=deleted" })
   deleted?: boolean;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=fingerprint" })
+  @SpeakeasyMetadata({ data: "json, name=fingerprint" })
   fingerprint?: string;
 
-  @Metadata({ data: "json, name=folder", elemType: shared.Folder })
+  @SpeakeasyMetadata({ data: "json, name=folder", elemType: Folder })
   folder?: Folder[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=gtagConfig", elemType: GtagConfig })
+  gtagConfig?: GtagConfig[];
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path?: string;
 
-  @Metadata({ data: "json, name=tag", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=tag", elemType: Tag })
   tag?: Tag[];
 
-  @Metadata({ data: "json, name=tagManagerUrl" })
+  @SpeakeasyMetadata({ data: "json, name=tagManagerUrl" })
   tagManagerUrl?: string;
 
-  @Metadata({ data: "json, name=trigger", elemType: shared.Trigger })
+  @SpeakeasyMetadata({ data: "json, name=trigger", elemType: Trigger })
   trigger?: Trigger[];
 
-  @Metadata({ data: "json, name=variable", elemType: shared.Variable })
+  @SpeakeasyMetadata({ data: "json, name=variable", elemType: Variable })
   variable?: Variable[];
 
-  @Metadata({ data: "json, name=zone", elemType: shared.Zone })
+  @SpeakeasyMetadata({ data: "json, name=zone", elemType: Zone })
   zone?: Zone[];
 }

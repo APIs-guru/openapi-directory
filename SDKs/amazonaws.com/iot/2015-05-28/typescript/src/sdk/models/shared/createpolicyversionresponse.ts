@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CreatePolicyVersionResponse
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The output of the CreatePolicyVersion operation.
 **/
 export class CreatePolicyVersionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=isDefaultVersion" })
+  @SpeakeasyMetadata({ data: "json, name=isDefaultVersion" })
   isDefaultVersion?: boolean;
 
-  @Metadata({ data: "json, name=policyArn" })
+  @SpeakeasyMetadata({ data: "json, name=policyArn" })
   policyArn?: string;
 
-  @Metadata({ data: "json, name=policyDocument" })
+  @SpeakeasyMetadata({ data: "json, name=policyDocument" })
   policyDocument?: string;
 
-  @Metadata({ data: "json, name=policyVersionId" })
+  @SpeakeasyMetadata({ data: "json, name=policyVersionId" })
   policyVersionId?: string;
 }

@@ -1,6 +1,7 @@
 
 
+
 export enum ResolverKindEnum {
-    Unit = "UNIT"
-,    Pipeline = "PIPELINE"
+    Unit = "UNIT",
+    Pipeline = "PIPELINE"
 }

@@ -13,15 +13,15 @@ type DcimPowerConnectionsListQueryParams struct {
 	Site             *string `queryParam:"style=form,explode=true,name=site"`
 }
 
-type DcimPowerConnectionsListRequest struct {
-	QueryParams DcimPowerConnectionsListQueryParams
-}
-
 type DcimPowerConnectionsList200ApplicationJSON struct {
 	Count    int64              `json:"count"`
 	Next     *string            `json:"next,omitempty"`
 	Previous *string            `json:"previous,omitempty"`
 	Results  []shared.PowerPort `json:"results"`
+}
+
+type DcimPowerConnectionsListRequest struct {
+	QueryParams DcimPowerConnectionsListQueryParams
 }
 
 type DcimPowerConnectionsListResponse struct {

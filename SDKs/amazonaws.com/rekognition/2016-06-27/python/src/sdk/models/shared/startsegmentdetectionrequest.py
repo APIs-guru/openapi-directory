@@ -1,19 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import startsegmentdetectionfilters
-from . import notificationchannel
-from . import segmenttype_enum
-from . import video
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class StartSegmentDetectionRequest:
-    client_request_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ClientRequestToken' }})
-    filters: Optional[startsegmentdetectionfilters.StartSegmentDetectionFilters] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Filters' }})
-    job_tag: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'JobTag' }})
-    notification_channel: Optional[notificationchannel.NotificationChannel] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NotificationChannel' }})
-    segment_types: List[segmenttype_enum.SegmentTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SegmentTypes' }})
-    video: video.Video = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Video' }})
+    segment_types: List[SegmentTypeEnum] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('SegmentTypes') }})
+    video: Video = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Video') }})
+    client_request_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ClientRequestToken') }})
+    filters: Optional[StartSegmentDetectionFilters] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Filters') }})
+    job_tag: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('JobTag') }})
+    notification_channel: Optional[NotificationChannel] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NotificationChannel') }})
     

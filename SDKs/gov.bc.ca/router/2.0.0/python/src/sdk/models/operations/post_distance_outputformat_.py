@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 
 class PostDistanceOutputFormatOutputFormatEnum(str, Enum):
     JSON = "json"
@@ -12,7 +13,7 @@ class PostDistanceOutputFormatOutputFormatEnum(str, Enum):
 
 @dataclass
 class PostDistanceOutputFormatPathParams:
-    output_format: PostDistanceOutputFormatOutputFormatEnum = field(default=None, metadata={'path_param': { 'field_name': 'outputFormat', 'style': 'simple', 'explode': False }})
+    output_format: PostDistanceOutputFormatOutputFormatEnum = field(metadata={'path_param': { 'field_name': 'outputFormat', 'style': 'simple', 'explode': False }})
     
 class PostDistanceOutputFormatCriteriaEnum(str, Enum):
     SHORTEST = "shortest"
@@ -25,25 +26,25 @@ class PostDistanceOutputFormatDistanceUnitEnum(str, Enum):
 
 @dataclass
 class PostDistanceOutputFormatQueryParams:
+    points: str = field(metadata={'query_param': { 'field_name': 'points', 'style': 'form', 'explode': True }})
     correct_side: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'correctSide', 'style': 'form', 'explode': True }})
     criteria: Optional[PostDistanceOutputFormatCriteriaEnum] = field(default=None, metadata={'query_param': { 'field_name': 'criteria', 'style': 'form', 'explode': True }})
     departure: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'departure', 'style': 'form', 'explode': True }})
     disable: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'disable', 'style': 'form', 'explode': True }})
     distance_unit: Optional[PostDistanceOutputFormatDistanceUnitEnum] = field(default=None, metadata={'query_param': { 'field_name': 'distanceUnit', 'style': 'form', 'explode': True }})
     output_srs: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'outputSRS', 'style': 'form', 'explode': True }})
-    points: str = field(default=None, metadata={'query_param': { 'field_name': 'points', 'style': 'form', 'explode': True }})
     round_trip: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'roundTrip', 'style': 'form', 'explode': True }})
     route_description: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'routeDescription', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class PostDistanceOutputFormatRequest:
-    path_params: PostDistanceOutputFormatPathParams = field(default=None)
-    query_params: PostDistanceOutputFormatQueryParams = field(default=None)
+    path_params: PostDistanceOutputFormatPathParams = field()
+    query_params: PostDistanceOutputFormatQueryParams = field()
     
 
 @dataclass
 class PostDistanceOutputFormatResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

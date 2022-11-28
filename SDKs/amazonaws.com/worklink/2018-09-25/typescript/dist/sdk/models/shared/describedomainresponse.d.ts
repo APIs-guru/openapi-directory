@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DomainStatusEnum } from "./domainstatusenum";
 export declare class DescribeDomainResponse extends SpeakeasyBase {
     acmCertificateArn?: string;

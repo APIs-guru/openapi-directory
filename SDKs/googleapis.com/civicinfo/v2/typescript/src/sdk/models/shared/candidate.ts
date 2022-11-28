@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Channel } from "./channel";
+
 
 
 // Candidate
@@ -8,27 +8,27 @@ import { Channel } from "./channel";
  * Information about a candidate running for elected office.
 **/
 export class Candidate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=candidateUrl" })
+  @SpeakeasyMetadata({ data: "json, name=candidateUrl" })
   candidateUrl?: string;
 
-  @Metadata({ data: "json, name=channels", elemType: shared.Channel })
+  @SpeakeasyMetadata({ data: "json, name=channels", elemType: Channel })
   channels?: Channel[];
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=orderOnBallot" })
+  @SpeakeasyMetadata({ data: "json, name=orderOnBallot" })
   orderOnBallot?: string;
 
-  @Metadata({ data: "json, name=party" })
+  @SpeakeasyMetadata({ data: "json, name=party" })
   party?: string;
 
-  @Metadata({ data: "json, name=phone" })
+  @SpeakeasyMetadata({ data: "json, name=phone" })
   phone?: string;
 
-  @Metadata({ data: "json, name=photoUrl" })
+  @SpeakeasyMetadata({ data: "json, name=photoUrl" })
   photoUrl?: string;
 }

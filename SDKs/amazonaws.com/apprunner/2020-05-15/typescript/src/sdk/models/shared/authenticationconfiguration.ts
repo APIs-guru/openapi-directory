@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AuthenticationConfiguration
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes resources needed to authenticate access to some source repositories. The specific resource depends on the repository provider.
 **/
 export class AuthenticationConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccessRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=AccessRoleArn" })
   accessRoleArn?: string;
 
-  @Metadata({ data: "json, name=ConnectionArn" })
+  @SpeakeasyMetadata({ data: "json, name=ConnectionArn" })
   connectionArn?: string;
 }

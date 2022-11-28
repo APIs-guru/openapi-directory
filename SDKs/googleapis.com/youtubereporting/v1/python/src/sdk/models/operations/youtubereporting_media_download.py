@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class YoutubereportingMediaDownloadPathParams:
-    resource_name: str = field(default=None, metadata={'path_param': { 'field_name': 'resourceName', 'style': 'simple', 'explode': False }})
+    resource_name: str = field(metadata={'path_param': { 'field_name': 'resourceName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class YoutubereportingMediaDownloadQueryParams:
 
 @dataclass
 class YoutubereportingMediaDownloadSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class YoutubereportingMediaDownloadSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,14 +44,14 @@ class YoutubereportingMediaDownloadSecurity:
 
 @dataclass
 class YoutubereportingMediaDownloadRequest:
-    path_params: YoutubereportingMediaDownloadPathParams = field(default=None)
-    query_params: YoutubereportingMediaDownloadQueryParams = field(default=None)
-    security: YoutubereportingMediaDownloadSecurity = field(default=None)
+    path_params: YoutubereportingMediaDownloadPathParams = field()
+    query_params: YoutubereportingMediaDownloadQueryParams = field()
+    security: YoutubereportingMediaDownloadSecurity = field()
     
 
 @dataclass
 class YoutubereportingMediaDownloadResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     gdata_media: Optional[shared.GdataMedia] = field(default=None)
-    status_code: int = field(default=None)
     

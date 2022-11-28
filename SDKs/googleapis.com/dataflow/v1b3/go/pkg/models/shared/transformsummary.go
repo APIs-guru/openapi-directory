@@ -14,6 +14,8 @@ const (
 	TransformSummaryKindEnumShuffleKind    TransformSummaryKindEnum = "SHUFFLE_KIND"
 )
 
+// TransformSummary
+// Description of the type, names/ids, and input/outputs for a transform.
 type TransformSummary struct {
 	DisplayData          []DisplayData             `json:"displayData,omitempty"`
 	ID                   *string                   `json:"id,omitempty"`

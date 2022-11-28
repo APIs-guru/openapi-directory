@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import proposal
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListProposalsResponse:
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextPageToken' }})
-    proposals: Optional[List[proposal.Proposal]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'proposals' }})
+    r"""ListProposalsResponse
+    Response message for listing proposals.
+    """
+    
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextPageToken') }})
+    proposals: Optional[List[Proposal]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('proposals') }})
     

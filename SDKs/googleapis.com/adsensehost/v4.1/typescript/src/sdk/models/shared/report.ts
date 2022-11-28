@@ -1,38 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ReportHeaders extends SpeakeasyBase {
-  @Metadata({ data: "json, name=currency" })
+  @SpeakeasyMetadata({ data: "json, name=currency" })
   currency?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }
 
 
 export class Report extends SpeakeasyBase {
-  @Metadata({ data: "json, name=averages" })
+  @SpeakeasyMetadata({ data: "json, name=averages" })
   averages?: string[];
 
-  @Metadata({ data: "json, name=headers", elemType: shared.ReportHeaders })
+  @SpeakeasyMetadata({ data: "json, name=headers", elemType: ReportHeaders })
   headers?: ReportHeaders[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=rows" })
+  @SpeakeasyMetadata({ data: "json, name=rows" })
   rows?: string[][];
 
-  @Metadata({ data: "json, name=totalMatchedRows" })
+  @SpeakeasyMetadata({ data: "json, name=totalMatchedRows" })
   totalMatchedRows?: string;
 
-  @Metadata({ data: "json, name=totals" })
+  @SpeakeasyMetadata({ data: "json, name=totals" })
   totals?: string[];
 
-  @Metadata({ data: "json, name=warnings" })
+  @SpeakeasyMetadata({ data: "json, name=warnings" })
   warnings?: string[];
 }

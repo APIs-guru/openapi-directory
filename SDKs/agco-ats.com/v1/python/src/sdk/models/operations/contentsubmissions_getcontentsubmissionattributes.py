@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class ContentSubmissionsGetContentSubmissionAttributesPathParams:
-    content_submission_id: int = field(default=None, metadata={'path_param': { 'field_name': 'contentSubmissionID', 'style': 'simple', 'explode': False }})
+    content_submission_id: int = field(metadata={'path_param': { 'field_name': 'contentSubmissionID', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,14 +17,14 @@ class ContentSubmissionsGetContentSubmissionAttributesQueryParams:
 
 @dataclass
 class ContentSubmissionsGetContentSubmissionAttributesRequest:
-    path_params: ContentSubmissionsGetContentSubmissionAttributesPathParams = field(default=None)
-    query_params: ContentSubmissionsGetContentSubmissionAttributesQueryParams = field(default=None)
+    path_params: ContentSubmissionsGetContentSubmissionAttributesPathParams = field()
+    query_params: ContentSubmissionsGetContentSubmissionAttributesQueryParams = field()
     
 
 @dataclass
 class ContentSubmissionsGetContentSubmissionAttributesResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_models_api_error: Optional[shared.APIModelsAPIError] = field(default=None)
     api_paged_response_content_submission_shared_business_entities_content_submission_attribute_: Optional[shared.APIPagedResponseContentSubmissionSharedBusinessEntitiesContentSubmissionAttribute] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

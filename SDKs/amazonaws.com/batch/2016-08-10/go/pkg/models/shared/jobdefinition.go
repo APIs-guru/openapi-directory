@@ -1,5 +1,7 @@
 package shared
 
+// JobDefinition
+// An object representing an Batch job definition.
 type JobDefinition struct {
 	ContainerProperties  *ContainerProperties     `json:"containerProperties,omitempty"`
 	JobDefinitionArn     string                   `json:"jobDefinitionArn"`

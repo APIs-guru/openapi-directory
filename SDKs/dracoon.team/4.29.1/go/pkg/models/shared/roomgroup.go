@@ -7,6 +7,8 @@ const (
 	RoomGroupNewGroupMemberAcceptanceEnumPending   RoomGroupNewGroupMemberAcceptanceEnum = "pending"
 )
 
+// RoomGroup
+// Group information
 type RoomGroup struct {
 	ID                       int64                                  `json:"id"`
 	IsGranted                bool                                   `json:"isGranted"`

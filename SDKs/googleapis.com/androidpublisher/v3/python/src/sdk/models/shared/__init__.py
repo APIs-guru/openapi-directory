@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .acquisitiontargetingrule import *
 from .alt_enum import *
 from .apk import *
@@ -63,6 +63,7 @@ from .localizedtext import *
 from .managedproducttaxandcompliancesettings import *
 from .migratebaseplanpricesrequest import *
 from .money import *
+from .offerdetails import *
 from .offertag import *
 from .otherregionsbaseplanconfig import *
 from .otherregionssubscriptionofferconfig import *
@@ -91,6 +92,7 @@ from .subscribewithgoogleinfo import *
 from .subscription import *
 from .subscriptioncancelsurveyresult import *
 from .subscriptiondeferralinfo import *
+from .subscriptionitempricechangedetails import *
 from .subscriptionlisting import *
 from .subscriptionoffer import *
 from .subscriptionofferphase import *

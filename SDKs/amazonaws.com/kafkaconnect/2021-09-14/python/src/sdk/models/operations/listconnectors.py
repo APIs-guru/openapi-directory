@@ -1,5 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
@@ -23,20 +26,20 @@ class ListConnectorsHeaders:
 
 @dataclass
 class ListConnectorsRequest:
-    query_params: ListConnectorsQueryParams = field(default=None)
-    headers: ListConnectorsHeaders = field(default=None)
+    headers: ListConnectorsHeaders = field()
+    query_params: ListConnectorsQueryParams = field()
     
 
 @dataclass
 class ListConnectorsResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     forbidden_exception: Optional[Any] = field(default=None)
     internal_server_error_exception: Optional[Any] = field(default=None)
     list_connectors_response: Optional[shared.ListConnectorsResponse] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

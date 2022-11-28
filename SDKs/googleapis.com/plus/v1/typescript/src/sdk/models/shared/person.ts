@@ -1,5 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PersonAgeRange
@@ -7,10 +7,10 @@ import * as shared from "../shared";
  * The age range of the person. Valid ranges are 17 or younger, 18 to 20, and 21 or older. Age is determined from the user's birthday using Western age reckoning.
 **/
 export class PersonAgeRange extends SpeakeasyBase {
-  @Metadata({ data: "json, name=max" })
+  @SpeakeasyMetadata({ data: "json, name=max" })
   max?: number;
 
-  @Metadata({ data: "json, name=min" })
+  @SpeakeasyMetadata({ data: "json, name=min" })
   min?: number;
 }
 
@@ -20,10 +20,10 @@ export class PersonAgeRange extends SpeakeasyBase {
  * Extra information about the cover photo.
 **/
 export class PersonCoverCoverInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=leftImageOffset" })
+  @SpeakeasyMetadata({ data: "json, name=leftImageOffset" })
   leftImageOffset?: number;
 
-  @Metadata({ data: "json, name=topImageOffset" })
+  @SpeakeasyMetadata({ data: "json, name=topImageOffset" })
   topImageOffset?: number;
 }
 
@@ -33,13 +33,13 @@ export class PersonCoverCoverInfo extends SpeakeasyBase {
  * The person's primary cover image.
 **/
 export class PersonCoverCoverPhoto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=height" })
+  @SpeakeasyMetadata({ data: "json, name=height" })
   height?: number;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 
-  @Metadata({ data: "json, name=width" })
+  @SpeakeasyMetadata({ data: "json, name=width" })
   width?: number;
 }
 
@@ -49,22 +49,22 @@ export class PersonCoverCoverPhoto extends SpeakeasyBase {
  * The cover photo content.
 **/
 export class PersonCover extends SpeakeasyBase {
-  @Metadata({ data: "json, name=coverInfo" })
+  @SpeakeasyMetadata({ data: "json, name=coverInfo" })
   coverInfo?: PersonCoverCoverInfo;
 
-  @Metadata({ data: "json, name=coverPhoto" })
+  @SpeakeasyMetadata({ data: "json, name=coverPhoto" })
   coverPhoto?: PersonCoverCoverPhoto;
 
-  @Metadata({ data: "json, name=layout" })
+  @SpeakeasyMetadata({ data: "json, name=layout" })
   layout?: string;
 }
 
 
 export class PersonEmails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }
 
@@ -74,10 +74,10 @@ export class PersonEmails extends SpeakeasyBase {
  * The representation of the person's profile photo.
 **/
 export class PersonImage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=isDefault" })
+  @SpeakeasyMetadata({ data: "json, name=isDefault" })
   isDefault?: boolean;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }
 
@@ -87,165 +87,165 @@ export class PersonImage extends SpeakeasyBase {
  * An object representation of the individual components of a person's name.
 **/
 export class PersonName extends SpeakeasyBase {
-  @Metadata({ data: "json, name=familyName" })
+  @SpeakeasyMetadata({ data: "json, name=familyName" })
   familyName?: string;
 
-  @Metadata({ data: "json, name=formatted" })
+  @SpeakeasyMetadata({ data: "json, name=formatted" })
   formatted?: string;
 
-  @Metadata({ data: "json, name=givenName" })
+  @SpeakeasyMetadata({ data: "json, name=givenName" })
   givenName?: string;
 
-  @Metadata({ data: "json, name=honorificPrefix" })
+  @SpeakeasyMetadata({ data: "json, name=honorificPrefix" })
   honorificPrefix?: string;
 
-  @Metadata({ data: "json, name=honorificSuffix" })
+  @SpeakeasyMetadata({ data: "json, name=honorificSuffix" })
   honorificSuffix?: string;
 
-  @Metadata({ data: "json, name=middleName" })
+  @SpeakeasyMetadata({ data: "json, name=middleName" })
   middleName?: string;
 }
 
 
 export class PersonOrganizations extends SpeakeasyBase {
-  @Metadata({ data: "json, name=department" })
+  @SpeakeasyMetadata({ data: "json, name=department" })
   department?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=endDate" })
+  @SpeakeasyMetadata({ data: "json, name=endDate" })
   endDate?: string;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=primary" })
+  @SpeakeasyMetadata({ data: "json, name=primary" })
   primary?: boolean;
 
-  @Metadata({ data: "json, name=startDate" })
+  @SpeakeasyMetadata({ data: "json, name=startDate" })
   startDate?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }
 
 
 export class PersonPlacesLived extends SpeakeasyBase {
-  @Metadata({ data: "json, name=primary" })
+  @SpeakeasyMetadata({ data: "json, name=primary" })
   primary?: boolean;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }
 
 
 export class PersonUrls extends SpeakeasyBase {
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }
 
 
 export class Person extends SpeakeasyBase {
-  @Metadata({ data: "json, name=aboutMe" })
+  @SpeakeasyMetadata({ data: "json, name=aboutMe" })
   aboutMe?: string;
 
-  @Metadata({ data: "json, name=ageRange" })
+  @SpeakeasyMetadata({ data: "json, name=ageRange" })
   ageRange?: PersonAgeRange;
 
-  @Metadata({ data: "json, name=birthday" })
+  @SpeakeasyMetadata({ data: "json, name=birthday" })
   birthday?: string;
 
-  @Metadata({ data: "json, name=braggingRights" })
+  @SpeakeasyMetadata({ data: "json, name=braggingRights" })
   braggingRights?: string;
 
-  @Metadata({ data: "json, name=circledByCount" })
+  @SpeakeasyMetadata({ data: "json, name=circledByCount" })
   circledByCount?: number;
 
-  @Metadata({ data: "json, name=cover" })
+  @SpeakeasyMetadata({ data: "json, name=cover" })
   cover?: PersonCover;
 
-  @Metadata({ data: "json, name=currentLocation" })
+  @SpeakeasyMetadata({ data: "json, name=currentLocation" })
   currentLocation?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=domain" })
+  @SpeakeasyMetadata({ data: "json, name=domain" })
   domain?: string;
 
-  @Metadata({ data: "json, name=emails", elemType: shared.PersonEmails })
+  @SpeakeasyMetadata({ data: "json, name=emails", elemType: PersonEmails })
   emails?: PersonEmails[];
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=gender" })
+  @SpeakeasyMetadata({ data: "json, name=gender" })
   gender?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=image" })
+  @SpeakeasyMetadata({ data: "json, name=image" })
   image?: PersonImage;
 
-  @Metadata({ data: "json, name=isPlusUser" })
+  @SpeakeasyMetadata({ data: "json, name=isPlusUser" })
   isPlusUser?: boolean;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=language" })
+  @SpeakeasyMetadata({ data: "json, name=language" })
   language?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: PersonName;
 
-  @Metadata({ data: "json, name=nickname" })
+  @SpeakeasyMetadata({ data: "json, name=nickname" })
   nickname?: string;
 
-  @Metadata({ data: "json, name=objectType" })
+  @SpeakeasyMetadata({ data: "json, name=objectType" })
   objectType?: string;
 
-  @Metadata({ data: "json, name=occupation" })
+  @SpeakeasyMetadata({ data: "json, name=occupation" })
   occupation?: string;
 
-  @Metadata({ data: "json, name=organizations", elemType: shared.PersonOrganizations })
+  @SpeakeasyMetadata({ data: "json, name=organizations", elemType: PersonOrganizations })
   organizations?: PersonOrganizations[];
 
-  @Metadata({ data: "json, name=placesLived", elemType: shared.PersonPlacesLived })
+  @SpeakeasyMetadata({ data: "json, name=placesLived", elemType: PersonPlacesLived })
   placesLived?: PersonPlacesLived[];
 
-  @Metadata({ data: "json, name=plusOneCount" })
+  @SpeakeasyMetadata({ data: "json, name=plusOneCount" })
   plusOneCount?: number;
 
-  @Metadata({ data: "json, name=relationshipStatus" })
+  @SpeakeasyMetadata({ data: "json, name=relationshipStatus" })
   relationshipStatus?: string;
 
-  @Metadata({ data: "json, name=skills" })
+  @SpeakeasyMetadata({ data: "json, name=skills" })
   skills?: string;
 
-  @Metadata({ data: "json, name=tagline" })
+  @SpeakeasyMetadata({ data: "json, name=tagline" })
   tagline?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 
-  @Metadata({ data: "json, name=urls", elemType: shared.PersonUrls })
+  @SpeakeasyMetadata({ data: "json, name=urls", elemType: PersonUrls })
   urls?: PersonUrls[];
 
-  @Metadata({ data: "json, name=verified" })
+  @SpeakeasyMetadata({ data: "json, name=verified" })
   verified?: boolean;
 }

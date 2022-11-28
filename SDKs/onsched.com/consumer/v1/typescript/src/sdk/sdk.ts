@@ -1,18 +1,15 @@
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
+import FormData from "form-data";
 import * as operations from "./models/operations";
-import { ParamsSerializerOptions } from "axios";
-import { GetQueryParamSerializer } from "../internal/utils/queryparams";
-import { SerializeRequestBody } from "../internal/utils/requestbody";
-import FormData from 'form-data';
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import * as utils from "../internal/utils";
 import { Security } from "./models/shared";
+
+
 
 type OptsFunc = (sdk: SDK) => void;
 
-const Servers = [
-  "https://onsched.com",
+export const ServerList = [
+	"https://onsched.com",
 ] as const;
 
 export function WithServerURL(
@@ -23,13 +20,13 @@ export function WithServerURL(
     if (params != null) {
       serverURL = utils.ReplaceParameters(serverURL, params);
     }
-    sdk.serverURL = serverURL;
+    sdk._serverURL = serverURL;
   };
 }
 
 export function WithClient(client: AxiosInstance): OptsFunc {
   return (sdk: SDK) => {
-    sdk.defaultClient = client;
+    sdk._defaultClient = client;
   };
 }
 
@@ -38,48 +35,54 @@ export function WithSecurity(security: Security): OptsFunc {
     security = new Security(security);
   }
   return (sdk: SDK) => {
-    sdk.security = security;
+    sdk._security = security;
   };
 }
 
 
 export class SDK {
-  defaultClient?: AxiosInstance;
-  securityClient?: AxiosInstance;
-  security?: any;
-  serverURL: string;
+
+  public _defaultClient: AxiosInstance;
+  public _securityClient: AxiosInstance;
+  public _security?: Security;
+  public _serverURL: string;
+  private _language = "typescript";
+  private _sdkVersion = "0.0.1";
+  private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
-    if (this.serverURL == "") {
-      this.serverURL = Servers[0];
+    if (this._serverURL == "") {
+      this._serverURL = ServerList[0];
     }
 
-    if (!this.defaultClient) {
-      this.defaultClient = axios.create({ baseURL: this.serverURL });
+    if (!this._defaultClient) {
+      this._defaultClient = axios.create({ baseURL: this._serverURL });
     }
 
-    if (!this.securityClient) {
-      if (this.security) {
-        this.securityClient = CreateSecurityClient(
-          this.defaultClient,
-          this.security
+    if (!this._securityClient) {
+      if (this._security) {
+        this._securityClient = utils.CreateSecurityClient(
+          this._defaultClient,
+          this._security
         );
       } else {
-        this.securityClient = this.defaultClient;
+        this._securityClient = this._defaultClient;
       }
     }
+    
   }
   
-  // DeleteConsumerV1AppointmentsId - Returns an appointment object
-  /** 
+  /**
+   * deleteConsumerV1AppointmentsId - Returns an appointment object
+   *
    * This end point deletes a booking. Only appointments in a "IN" initial status can be deleted.
    * Past dated appointments cannot be cancelled.<br /><br />
    * 
    * A valid appointment id is required. You can use the appointmentId returned from GET /consumer/v1/appointments. <br /><br />
    * For more information see <a href="https://onsched.readme.io/docs/appointments-overview">Appointment Overview</a>
   **/
-  DeleteConsumerV1AppointmentsId(
+  deleteConsumerV1AppointmentsId(
     req: operations.DeleteConsumerV1AppointmentsIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteConsumerV1AppointmentsIdResponse> {
@@ -87,22 +90,24 @@ export class SDK {
       req = new operations.DeleteConsumerV1AppointmentsIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/consumer/v1/appointments/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteConsumerV1AppointmentsIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteConsumerV1AppointmentsIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.appointmentViewModel = httpRes?.data;
             }
             break;
@@ -114,7 +119,7 @@ export class SDK {
   }
 
   
-  DeleteConsumerV1CustomersId(
+  deleteConsumerV1CustomersId(
     req: operations.DeleteConsumerV1CustomersIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteConsumerV1CustomersIdResponse> {
@@ -122,21 +127,23 @@ export class SDK {
       req = new operations.DeleteConsumerV1CustomersIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/consumer/v1/customers/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteConsumerV1CustomersIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.DeleteConsumerV1CustomersIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -146,7 +153,7 @@ export class SDK {
   }
 
   
-  DeleteConsumerV1CustomersSubscriptionsId(
+  deleteConsumerV1CustomersSubscriptionsId(
     req: operations.DeleteConsumerV1CustomersSubscriptionsIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteConsumerV1CustomersSubscriptionsIdResponse> {
@@ -154,21 +161,23 @@ export class SDK {
       req = new operations.DeleteConsumerV1CustomersSubscriptionsIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/consumer/v1/customers/subscriptions/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteConsumerV1CustomersSubscriptionsIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.DeleteConsumerV1CustomersSubscriptionsIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -178,14 +187,15 @@ export class SDK {
   }
 
   
-  // GetConsumerV1Appointments - Returns a list of appointments.
-  /** 
+  /**
+   * getConsumerV1Appointments - Returns a list of appointments.
+   *
    * The results are returned in pages. Use the offset and limit parameters to control the page start and size. Default offset is 0, and limit is 20.<br /><br />
    * Use the other query parameters to optionally filter the list by using the query parameters. <br /><br />
    * This endpoint returns appoinments using paging. <br /><br />
    * See more information at <a href="https://onsched.readme.io/docs/appointments-overview">Appointments Overview</a>
   **/
-  GetConsumerV1Appointments(
+  getConsumerV1Appointments(
     req: operations.GetConsumerV1AppointmentsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetConsumerV1AppointmentsResponse> {
@@ -193,11 +203,12 @@ export class SDK {
       req = new operations.GetConsumerV1AppointmentsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/consumer/v1/appointments";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -206,17 +217,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetConsumerV1AppointmentsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetConsumerV1AppointmentsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.appointmentListViewModel = httpRes?.data;
             }
             break;
@@ -228,8 +240,9 @@ export class SDK {
   }
 
   
-  // GetConsumerV1AppointmentsBookingfields - Returns a list of appointment booking fields
-  /** 
+  /**
+   * getConsumerV1AppointmentsBookingfields - Returns a list of appointment booking fields
+   *
    * This end point returns Booking Field definitions.<br></br>
    * 
    * Appointment booking fields are different than Customer booking fields. Appointment booking fields are
@@ -243,7 +256,7 @@ export class SDK {
    * miscellaneous appointment attributes including address information.<br></br>
    * For more information see <a href="https://onsched.readme.io/docs/custom-booking-fields">Appointment booking fields</a>
   **/
-  GetConsumerV1AppointmentsBookingfields(
+  getConsumerV1AppointmentsBookingfields(
     req: operations.GetConsumerV1AppointmentsBookingfieldsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetConsumerV1AppointmentsBookingfieldsResponse> {
@@ -251,11 +264,12 @@ export class SDK {
       req = new operations.GetConsumerV1AppointmentsBookingfieldsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/consumer/v1/appointments/bookingfields";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -264,17 +278,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetConsumerV1AppointmentsBookingfieldsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetConsumerV1AppointmentsBookingfieldsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.bookingFieldListViewModel = httpRes?.data;
             }
             break;
@@ -286,8 +301,9 @@ export class SDK {
   }
 
   
-  // GetConsumerV1AppointmentsCustomfields - Returns a list of appointment custom field definitions
-  /** 
+  /**
+   * getConsumerV1AppointmentsCustomfields - Returns a list of appointment custom field definitions
+   *
    * This end point returns your Appointment custom field definitions.<br /><br />
    * 
    * Appointment custom fields are different than Customer custom fields. Appointment custom fields are
@@ -298,7 +314,7 @@ export class SDK {
    * in PUT /consumer/v1/appointments/customfields <br /><br />
    * For more information see <a href="https://onsched.readme.io/docs/custom-booking-fields">Appointment booking fields</a>
   **/
-  GetConsumerV1AppointmentsCustomfields(
+  getConsumerV1AppointmentsCustomfields(
     req: operations.GetConsumerV1AppointmentsCustomfieldsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetConsumerV1AppointmentsCustomfieldsResponse> {
@@ -306,11 +322,12 @@ export class SDK {
       req = new operations.GetConsumerV1AppointmentsCustomfieldsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/consumer/v1/appointments/customfields";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -319,17 +336,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetConsumerV1AppointmentsCustomfieldsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetConsumerV1AppointmentsCustomfieldsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.customFieldDefinitionListViewModel = httpRes?.data;
             }
             break;
@@ -341,13 +359,14 @@ export class SDK {
   }
 
   
-  // GetConsumerV1AppointmentsId - Returns an appointment object.
-  /** 
+  /**
+   * getConsumerV1AppointmentsId - Returns an appointment object.
+   *
    * The result returned is a single appointment object. A valid id is required to find the appointment. <br /><br />
    * 
    * See more information at <a href="https://onsched.readme.io/docs/appointments-overview">Appointments Overview</a>
   **/
-  GetConsumerV1AppointmentsId(
+  getConsumerV1AppointmentsId(
     req: operations.GetConsumerV1AppointmentsIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetConsumerV1AppointmentsIdResponse> {
@@ -355,22 +374,24 @@ export class SDK {
       req = new operations.GetConsumerV1AppointmentsIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/consumer/v1/appointments/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetConsumerV1AppointmentsIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetConsumerV1AppointmentsIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.appointmentViewModel = httpRes?.data;
             }
             break;
@@ -382,8 +403,9 @@ export class SDK {
   }
 
   
-  // GetConsumerV1AvailabilityServiceIdStartDateEndDate - Returns a list of available times.
-  /** 
+  /**
+   * getConsumerV1AvailabilityServiceIdStartDateEndDate - Returns a list of available times.
+   *
    * Choose your search criteria carefully. Availability is an expensive call. If you search availability for all resources
    * then you should only do so for a single date. If you decide to search availability for multiple dates you should only do so
    * for a specific resource by specifying the optional resourceId parameter.<br /><br />
@@ -412,7 +434,7 @@ export class SDK {
    * 
    * See more information at <a href="https://onsched.readme.io/docs/availability-overview">Availability Overview</a>
   **/
-  GetConsumerV1AvailabilityServiceIdStartDateEndDate(
+  getConsumerV1AvailabilityServiceIdStartDateEndDate(
     req: operations.GetConsumerV1AvailabilityServiceIdStartDateEndDateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetConsumerV1AvailabilityServiceIdStartDateEndDateResponse> {
@@ -420,11 +442,12 @@ export class SDK {
       req = new operations.GetConsumerV1AvailabilityServiceIdStartDateEndDateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/consumer/v1/availability/{serviceId}/{startDate}/{endDate}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -433,17 +456,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetConsumerV1AvailabilityServiceIdStartDateEndDateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetConsumerV1AvailabilityServiceIdStartDateEndDateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.availabilityViewModel = httpRes?.data;
             }
             break;
@@ -455,13 +479,14 @@ export class SDK {
   }
 
   
-  // GetConsumerV1AvailabilityServiceIdStartDateEndDateDays - Returns a list of available days.
-  /** 
+  /**
+   * getConsumerV1AvailabilityServiceIdStartDateEndDateDays - Returns a list of available days.
+   *
    * This end point is used to show day level availability. For example if the business is closed, or there is a public holiday.
    * 
    * Day level availability is a good way to restrict your choices of dates in your app and improve usability.
   **/
-  GetConsumerV1AvailabilityServiceIdStartDateEndDateDays(
+  getConsumerV1AvailabilityServiceIdStartDateEndDateDays(
     req: operations.GetConsumerV1AvailabilityServiceIdStartDateEndDateDaysRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetConsumerV1AvailabilityServiceIdStartDateEndDateDaysResponse> {
@@ -469,11 +494,12 @@ export class SDK {
       req = new operations.GetConsumerV1AvailabilityServiceIdStartDateEndDateDaysRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/consumer/v1/availability/{serviceId}/{startDate}/{endDate}/days", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -482,17 +508,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetConsumerV1AvailabilityServiceIdStartDateEndDateDaysResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetConsumerV1AvailabilityServiceIdStartDateEndDateDaysResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.availabilityDayViewModel = httpRes?.data;
             }
             break;
@@ -504,12 +531,13 @@ export class SDK {
   }
 
   
-  // GetConsumerV1AvailabilityServiceIdStartDateEndDateTimes - Returns a list of available times.
-  /** 
+  /**
+   * getConsumerV1AvailabilityServiceIdStartDateEndDateTimes - Returns a list of available times.
+   *
    * <b>Deprecation Notice</b> : This endpoint is no longer being maintained and will be deprecated in a future release.        
    *             Use the /consumer/v1/availability{serviceId}/{startDate}/{endDate} endpoint instead.
   **/
-  GetConsumerV1AvailabilityServiceIdStartDateEndDateTimes(
+  getConsumerV1AvailabilityServiceIdStartDateEndDateTimes(
     req: operations.GetConsumerV1AvailabilityServiceIdStartDateEndDateTimesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetConsumerV1AvailabilityServiceIdStartDateEndDateTimesResponse> {
@@ -517,11 +545,12 @@ export class SDK {
       req = new operations.GetConsumerV1AvailabilityServiceIdStartDateEndDateTimesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/consumer/v1/availability/{serviceId}/{startDate}/{endDate}/times", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -530,17 +559,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetConsumerV1AvailabilityServiceIdStartDateEndDateTimesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetConsumerV1AvailabilityServiceIdStartDateEndDateTimesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.availability3ViewModel = httpRes?.data;
             }
             break;
@@ -552,11 +582,12 @@ export class SDK {
   }
 
   
-  // GetConsumerV1AvailabilityServiceIdStartDateEndDateUnavailable - Returns a list of unavailable times.
-  /** 
+  /**
+   * getConsumerV1AvailabilityServiceIdStartDateEndDateUnavailable - Returns a list of unavailable times.
+   *
    * This endpoint is used to show unavailable times and provides information why the time is unavailable.
   **/
-  GetConsumerV1AvailabilityServiceIdStartDateEndDateUnavailable(
+  getConsumerV1AvailabilityServiceIdStartDateEndDateUnavailable(
     req: operations.GetConsumerV1AvailabilityServiceIdStartDateEndDateUnavailableRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetConsumerV1AvailabilityServiceIdStartDateEndDateUnavailableResponse> {
@@ -564,11 +595,12 @@ export class SDK {
       req = new operations.GetConsumerV1AvailabilityServiceIdStartDateEndDateUnavailableRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/consumer/v1/availability/{serviceId}/{startDate}/{endDate}/unavailable", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -577,17 +609,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetConsumerV1AvailabilityServiceIdStartDateEndDateUnavailableResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetConsumerV1AvailabilityServiceIdStartDateEndDateUnavailableResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.unavailableTimeListViewModel = httpRes?.data;
             }
             break;
@@ -599,12 +632,13 @@ export class SDK {
   }
 
   
-  // GetConsumerV1AvailabilityServiceIdStartDateEndDateWindows - Returns a list of available booking window times.
-  /** 
+  /**
+   * getConsumerV1AvailabilityServiceIdStartDateEndDateWindows - Returns a list of available booking window times.
+   *
    * This end point may be removed in the next release. It is used for server based availability from UnavailableTimes.
    * Use the v1/consumer/availability{serviceId}/{startDate}/{endDate} endpoint instead.
   **/
-  GetConsumerV1AvailabilityServiceIdStartDateEndDateWindows(
+  getConsumerV1AvailabilityServiceIdStartDateEndDateWindows(
     req: operations.GetConsumerV1AvailabilityServiceIdStartDateEndDateWindowsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetConsumerV1AvailabilityServiceIdStartDateEndDateWindowsResponse> {
@@ -612,11 +646,12 @@ export class SDK {
       req = new operations.GetConsumerV1AvailabilityServiceIdStartDateEndDateWindowsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/consumer/v1/availability/{serviceId}/{startDate}/{endDate}/windows", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -625,17 +660,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetConsumerV1AvailabilityServiceIdStartDateEndDateWindowsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetConsumerV1AvailabilityServiceIdStartDateEndDateWindowsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.windowAvailabilityViewModel = httpRes?.data;
             }
             break;
@@ -647,12 +683,13 @@ export class SDK {
   }
 
   
-  // GetConsumerV1Customers - Returns a list of customers.
-  /** 
+  /**
+   * getConsumerV1Customers - Returns a list of customers.
+   *
    * The results are returned in pages. Use the offset and limit parameters to control the page start and size. Default offset is 0, and limit is 20.
    * Use the other query parameters to optionally filter the results list.
   **/
-  GetConsumerV1Customers(
+  getConsumerV1Customers(
     req: operations.GetConsumerV1CustomersRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetConsumerV1CustomersResponse> {
@@ -660,11 +697,12 @@ export class SDK {
       req = new operations.GetConsumerV1CustomersRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/consumer/v1/customers";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -673,17 +711,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetConsumerV1CustomersResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetConsumerV1CustomersResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.customerListViewModel = httpRes?.data;
             }
             break;
@@ -695,8 +734,9 @@ export class SDK {
   }
 
   
-  // GetConsumerV1CustomersBookingfields - Returns a list of customer booking fields
-  /** 
+  /**
+   * getConsumerV1CustomersBookingfields - Returns a list of customer booking fields
+   *
    * This end point returns Booking Field definitions.
    * 
    * Customer booking fields are different than Appointment booking fields. Customer booking fields are
@@ -709,7 +749,7 @@ export class SDK {
    * Customer Booking Fields include any custom customer fields you wish to capture with the Booking and also
    * miscellaneous customer attributes including Company Name, Customer Demographic information and Address information.
   **/
-  GetConsumerV1CustomersBookingfields(
+  getConsumerV1CustomersBookingfields(
     req: operations.GetConsumerV1CustomersBookingfieldsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetConsumerV1CustomersBookingfieldsResponse> {
@@ -717,11 +757,12 @@ export class SDK {
       req = new operations.GetConsumerV1CustomersBookingfieldsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/consumer/v1/customers/bookingfields";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -730,17 +771,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetConsumerV1CustomersBookingfieldsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetConsumerV1CustomersBookingfieldsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.bookingFieldListViewModel = httpRes?.data;
             }
             break;
@@ -752,30 +794,32 @@ export class SDK {
   }
 
   
-  // GetConsumerV1CustomersCountries - Returns a list of country objects
-  /** 
+  /**
+   * getConsumerV1CustomersCountries - Returns a list of country objects
+   *
    * Returns a list of countries with the associated country code. Country codes are based on the 2 character ANSI standard.
   **/
-  GetConsumerV1CustomersCountries(
-    
+  getConsumerV1CustomersCountries(
     config?: AxiosRequestConfig
   ): Promise<operations.GetConsumerV1CustomersCountriesResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/consumer/v1/customers/countries";
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetConsumerV1CustomersCountriesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetConsumerV1CustomersCountriesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.countryViewModels = httpRes?.data;
             }
             break;
@@ -787,8 +831,9 @@ export class SDK {
   }
 
   
-  // GetConsumerV1CustomersCustomfields - Returns a list of customField objects
-  /** 
+  /**
+   * getConsumerV1CustomersCustomfields - Returns a list of customField objects
+   *
    * This end point returns your Customer custom field definitions.
    * 
    * Customer custom fields are different than Appointment custom fields. Appointment custom fields are
@@ -798,7 +843,7 @@ export class SDK {
    * Use the key field, and type to determine how to update field values
    * in POST /consumer/v1/customers and PUT /consumer/v1/customers/{id}
   **/
-  GetConsumerV1CustomersCustomfields(
+  getConsumerV1CustomersCustomfields(
     req: operations.GetConsumerV1CustomersCustomfieldsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetConsumerV1CustomersCustomfieldsResponse> {
@@ -806,11 +851,12 @@ export class SDK {
       req = new operations.GetConsumerV1CustomersCustomfieldsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/consumer/v1/customers/customfields";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -819,17 +865,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetConsumerV1CustomersCustomfieldsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetConsumerV1CustomersCustomfieldsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.customFieldDefinitionListViewModel = httpRes?.data;
             }
             break;
@@ -841,12 +888,13 @@ export class SDK {
   }
 
   
-  // GetConsumerV1CustomersId - Returns a customer object.
-  /** 
+  /**
+   * getConsumerV1CustomersId - Returns a customer object.
+   *
    * The result returned is a single customer object. An id is required to find the customer. Find customer id's using either the GET consumer/v1/customers end point,
    * or the GET consumer/v1/appointments end point. A customer object is automatically created with the first booking if it doesn't already exist.
   **/
-  GetConsumerV1CustomersId(
+  getConsumerV1CustomersId(
     req: operations.GetConsumerV1CustomersIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetConsumerV1CustomersIdResponse> {
@@ -854,22 +902,24 @@ export class SDK {
       req = new operations.GetConsumerV1CustomersIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/consumer/v1/customers/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetConsumerV1CustomersIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetConsumerV1CustomersIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.customerViewModel = httpRes?.data;
             }
             break;
@@ -881,8 +931,9 @@ export class SDK {
   }
 
   
-  // GetConsumerV1CustomersIdPlanlimitsServiceIdResourceIdDateTimeTz - Returns a list of customer booking limits.
-  /** 
+  /**
+   * getConsumerV1CustomersIdPlanlimitsServiceIdResourceIdDateTimeTz - Returns a list of customer booking limits.
+   *
    * The result returned is list of limit rules as defined by the subscribed customer plan along with Booking Counts/Minutes
    * The results indicate the remaining bookings count / minutes. Use the results in your app to determine if the customer should continue booking.
    * You can enforce Limits in periods: Daily,Weekly,Monthly and for maximum total limits. Maximum total limits is based on six months prior to
@@ -892,7 +943,7 @@ export class SDK {
    * All parameters are required. If resourceId is not applicable for a non-resource calendar, pass zero.
    * Format of the dateTimeTz field is 2018-10-30T10:00-5:00
   **/
-  GetConsumerV1CustomersIdPlanlimitsServiceIdResourceIdDateTimeTz(
+  getConsumerV1CustomersIdPlanlimitsServiceIdResourceIdDateTimeTz(
     req: operations.GetConsumerV1CustomersIdPlanlimitsServiceIdResourceIdDateTimeTzRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetConsumerV1CustomersIdPlanlimitsServiceIdResourceIdDateTimeTzResponse> {
@@ -900,22 +951,24 @@ export class SDK {
       req = new operations.GetConsumerV1CustomersIdPlanlimitsServiceIdResourceIdDateTimeTzRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/consumer/v1/customers/{id}/planlimits/{serviceId}/{resourceId}/{dateTimeTz}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetConsumerV1CustomersIdPlanlimitsServiceIdResourceIdDateTimeTzResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetConsumerV1CustomersIdPlanlimitsServiceIdResourceIdDateTimeTzResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.planLimitListViewModel = httpRes?.data;
             }
             break;
@@ -927,11 +980,12 @@ export class SDK {
   }
 
   
-  // GetConsumerV1CustomersIdSubscriptions - Returns a customer subscription object.
-  /** 
+  /**
+   * getConsumerV1CustomersIdSubscriptions - Returns a customer subscription object.
+   *
    * The result returned is a single customer subscription object. A customer can only be subsribed to a single Customer Plan
   **/
-  GetConsumerV1CustomersIdSubscriptions(
+  getConsumerV1CustomersIdSubscriptions(
     req: operations.GetConsumerV1CustomersIdSubscriptionsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetConsumerV1CustomersIdSubscriptionsResponse> {
@@ -939,22 +993,24 @@ export class SDK {
       req = new operations.GetConsumerV1CustomersIdSubscriptionsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/consumer/v1/customers/{id}/subscriptions", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetConsumerV1CustomersIdSubscriptionsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetConsumerV1CustomersIdSubscriptionsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.customerSubscriptionViewModel = httpRes?.data;
             }
             break;
@@ -966,12 +1022,13 @@ export class SDK {
   }
 
   
-  // GetConsumerV1CustomersPlans - Returns a list of customers.
-  /** 
+  /**
+   * getConsumerV1CustomersPlans - Returns a list of customers.
+   *
    * The results are returned in pages. Use the offset and limit parameters to control the page start and size. Default offset is 0, and limit is 20.
    * Use the other query parameters to optionally filter the results list.
   **/
-  GetConsumerV1CustomersPlans(
+  getConsumerV1CustomersPlans(
     req: operations.GetConsumerV1CustomersPlansRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetConsumerV1CustomersPlansResponse> {
@@ -979,11 +1036,12 @@ export class SDK {
       req = new operations.GetConsumerV1CustomersPlansRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/consumer/v1/customers/plans";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -992,17 +1050,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetConsumerV1CustomersPlansResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetConsumerV1CustomersPlansResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.customerPlanListViewModel = httpRes?.data;
             }
             break;
@@ -1014,12 +1073,13 @@ export class SDK {
   }
 
   
-  // GetConsumerV1CustomersPlansId - Returns a customer object.
-  /** 
+  /**
+   * getConsumerV1CustomersPlansId - Returns a customer object.
+   *
    * The result returned is a single customer object. An id is required to find the customer. Find customer id's using either the GET consumer/v1/customers end point,
    * or the GET consumer/v1/appointments end point. A customer object is automatically created with the first booking if it doesn't already exist.
   **/
-  GetConsumerV1CustomersPlansId(
+  getConsumerV1CustomersPlansId(
     req: operations.GetConsumerV1CustomersPlansIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetConsumerV1CustomersPlansIdResponse> {
@@ -1027,22 +1087,24 @@ export class SDK {
       req = new operations.GetConsumerV1CustomersPlansIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/consumer/v1/customers/plans/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetConsumerV1CustomersPlansIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetConsumerV1CustomersPlansIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.customerPlanViewModel = httpRes?.data;
             }
             break;
@@ -1054,13 +1116,14 @@ export class SDK {
   }
 
   
-  // GetConsumerV1CustomersStates - Returns a list of state objects
-  /** 
+  /**
+   * getConsumerV1CustomersStates - Returns a list of state objects
+   *
    * Returns a list of states with the associated state code and country. 
    * 
    * Contact us if states for your countries of operation are not currently loaded.
   **/
-  GetConsumerV1CustomersStates(
+  getConsumerV1CustomersStates(
     req: operations.GetConsumerV1CustomersStatesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetConsumerV1CustomersStatesResponse> {
@@ -1068,11 +1131,12 @@ export class SDK {
       req = new operations.GetConsumerV1CustomersStatesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/consumer/v1/customers/states";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1081,17 +1145,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetConsumerV1CustomersStatesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetConsumerV1CustomersStatesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.stateViewModels = httpRes?.data;
             }
             break;
@@ -1103,12 +1168,13 @@ export class SDK {
   }
 
   
-  // GetConsumerV1CustomersSubscriptions - Returns a list of customer subscriptions.
-  /** 
+  /**
+   * getConsumerV1CustomersSubscriptions - Returns a list of customer subscriptions.
+   *
    * The results are returned in pages. Use the offset and limit parameters to control the page start and size. Default offset is 0, and limit is 20.
    * Use the other query parameters to optionally filter the results list.
   **/
-  GetConsumerV1CustomersSubscriptions(
+  getConsumerV1CustomersSubscriptions(
     req: operations.GetConsumerV1CustomersSubscriptionsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetConsumerV1CustomersSubscriptionsResponse> {
@@ -1116,11 +1182,12 @@ export class SDK {
       req = new operations.GetConsumerV1CustomersSubscriptionsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/consumer/v1/customers/subscriptions";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1129,17 +1196,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetConsumerV1CustomersSubscriptionsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetConsumerV1CustomersSubscriptionsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.customerSubscriptionListViewModel = httpRes?.data;
             }
             break;
@@ -1151,11 +1219,12 @@ export class SDK {
   }
 
   
-  // GetConsumerV1CustomersSubscriptionsId - Returns a customer subscription object.
-  /** 
+  /**
+   * getConsumerV1CustomersSubscriptionsId - Returns a customer subscription object.
+   *
    * The result returned is a single customer subscription object.
   **/
-  GetConsumerV1CustomersSubscriptionsId(
+  getConsumerV1CustomersSubscriptionsId(
     req: operations.GetConsumerV1CustomersSubscriptionsIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetConsumerV1CustomersSubscriptionsIdResponse> {
@@ -1163,22 +1232,24 @@ export class SDK {
       req = new operations.GetConsumerV1CustomersSubscriptionsIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/consumer/v1/customers/subscriptions/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetConsumerV1CustomersSubscriptionsIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetConsumerV1CustomersSubscriptionsIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.customerSubscriptionViewModel = httpRes?.data;
             }
             break;
@@ -1190,8 +1261,9 @@ export class SDK {
   }
 
   
-  // GetConsumerV1Locations - Returns a list of business locations.
-  /** 
+  /**
+   * getConsumerV1Locations - Returns a list of business locations.
+   *
    * Use this api end point if you have multiple business locations in your company.
    * The results are returned in pages. Use the offset and limit parameters to control the page start and size. Default offset is 0, and limit is 20.
    * Use the other query parameters to optionally filter the results list.
@@ -1200,7 +1272,7 @@ export class SDK {
    * Location services allow you to exclude company scoped services for locations that do not offer them.
    * You can explicitly define which services are offered or if none are defined then all services are offererd
   **/
-  GetConsumerV1Locations(
+  getConsumerV1Locations(
     req: operations.GetConsumerV1LocationsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetConsumerV1LocationsResponse> {
@@ -1208,11 +1280,12 @@ export class SDK {
       req = new operations.GetConsumerV1LocationsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/consumer/v1/locations";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1221,17 +1294,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetConsumerV1LocationsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetConsumerV1LocationsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.locationListViewModel = httpRes?.data;
             }
             break;
@@ -1243,11 +1317,12 @@ export class SDK {
   }
 
   
-  // GetConsumerV1LocationsId - Returns a business location object.
-  /** 
+  /**
+   * getConsumerV1LocationsId - Returns a business location object.
+   *
    * The result returned is a single location object. An id is required to find the location. Find location id's using the GET consumer/v1/locations end point,
   **/
-  GetConsumerV1LocationsId(
+  getConsumerV1LocationsId(
     req: operations.GetConsumerV1LocationsIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetConsumerV1LocationsIdResponse> {
@@ -1255,22 +1330,24 @@ export class SDK {
       req = new operations.GetConsumerV1LocationsIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/consumer/v1/locations/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetConsumerV1LocationsIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetConsumerV1LocationsIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.locationViewModel = httpRes?.data;
             }
             break;
@@ -1282,12 +1359,13 @@ export class SDK {
   }
 
   
-  // GetConsumerV1Resources - Returns a list of resources.
-  /** 
+  /**
+   * getConsumerV1Resources - Returns a list of resources.
+   *
    * The results are returned in pages. Use the offset and limit parameters to control the page start and size. Default offset is 0, and limit is 20.
    * Use the other query parameters to optionally filter the results list.
   **/
-  GetConsumerV1Resources(
+  getConsumerV1Resources(
     req: operations.GetConsumerV1ResourcesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetConsumerV1ResourcesResponse> {
@@ -1295,11 +1373,12 @@ export class SDK {
       req = new operations.GetConsumerV1ResourcesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/consumer/v1/resources";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1308,23 +1387,24 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetConsumerV1ResourcesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetConsumerV1ResourcesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceListViewModel = httpRes?.data;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -1334,12 +1414,13 @@ export class SDK {
   }
 
   
-  // GetConsumerV1ResourcesId - Returns a resource object.
-  /** 
+  /**
+   * getConsumerV1ResourcesId - Returns a resource object.
+   *
    * The result returned is a single resource object. An id is required to find the resource. Find customer id's using either the GET consumer/v1/resources end point,
    * or the GET consumer/v1/appointments end point.
   **/
-  GetConsumerV1ResourcesId(
+  getConsumerV1ResourcesId(
     req: operations.GetConsumerV1ResourcesIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetConsumerV1ResourcesIdResponse> {
@@ -1347,22 +1428,24 @@ export class SDK {
       req = new operations.GetConsumerV1ResourcesIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/consumer/v1/resources/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetConsumerV1ResourcesIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetConsumerV1ResourcesIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceViewModel = httpRes?.data;
             }
             break;
@@ -1374,14 +1457,15 @@ export class SDK {
   }
 
   
-  // GetConsumerV1ResourcesIdServices - Returns a list of resource services.
-  /** 
+  /**
+   * getConsumerV1ResourcesIdServices - Returns a list of resource services.
+   *
    * The results are returned in pages. Use the offset and limit parameters to control the page start and size. Default offset is 0, and limit is 20.
    * Use the other query parameters to optionally filter the results list.
    * Resource services are used to explicitly define the services that can be booked for a resource. If no resource services are defined then by
    * default all services can be booked for the resource.
   **/
-  GetConsumerV1ResourcesIdServices(
+  getConsumerV1ResourcesIdServices(
     req: operations.GetConsumerV1ResourcesIdServicesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetConsumerV1ResourcesIdServicesResponse> {
@@ -1389,11 +1473,12 @@ export class SDK {
       req = new operations.GetConsumerV1ResourcesIdServicesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/consumer/v1/resources/{id}/services", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1402,25 +1487,26 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetConsumerV1ResourcesIdServicesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetConsumerV1ResourcesIdServicesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceServiceListViewModel = httpRes?.data;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -1430,12 +1516,13 @@ export class SDK {
   }
 
   
-  // GetConsumerV1Servicegroups - Returns a list of service groups.
-  /** 
+  /**
+   * getConsumerV1Servicegroups - Returns a list of service groups.
+   *
    * The results are returned in pages. Use the offset and limit parameters to control the page start and size. Default offset is 0, and limit is 20.
    * Use the other query parameters to optionally filter the results list.
   **/
-  GetConsumerV1Servicegroups(
+  getConsumerV1Servicegroups(
     req: operations.GetConsumerV1ServicegroupsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetConsumerV1ServicegroupsResponse> {
@@ -1443,11 +1530,12 @@ export class SDK {
       req = new operations.GetConsumerV1ServicegroupsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/consumer/v1/servicegroups";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1456,17 +1544,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetConsumerV1ServicegroupsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetConsumerV1ServicegroupsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceGroupListViewModel = httpRes?.data;
             }
             break;
@@ -1478,12 +1567,13 @@ export class SDK {
   }
 
   
-  // GetConsumerV1ServicegroupsId - Returns a serviceGroup object.
-  /** 
+  /**
+   * getConsumerV1ServicegroupsId - Returns a serviceGroup object.
+   *
    * The result returned is a single serviceGroup object. An id is required to find the serviceGroup. Find serviceGroup id's using 
    * the GET consumer/v1/servicegroups end point,
   **/
-  GetConsumerV1ServicegroupsId(
+  getConsumerV1ServicegroupsId(
     req: operations.GetConsumerV1ServicegroupsIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetConsumerV1ServicegroupsIdResponse> {
@@ -1491,22 +1581,24 @@ export class SDK {
       req = new operations.GetConsumerV1ServicegroupsIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/consumer/v1/servicegroups/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetConsumerV1ServicegroupsIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetConsumerV1ServicegroupsIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceGroupViewModel = httpRes?.data;
             }
             break;
@@ -1518,13 +1610,14 @@ export class SDK {
   }
 
   
-  // GetConsumerV1Services - Returns a list of services.
-  /** 
+  /**
+   * getConsumerV1Services - Returns a list of services.
+   *
    * Use this endpoint to get services available at your business location and/or company. If no locationId is provided the primary company will be queried. 
    * The results are returned in pages. Use the offset and limit parameters to control the page start and size.
    * Default offset is <b>0</b>, and limit is <b>20</b>. Use the other query parameters to optionally filter the results list.
   **/
-  GetConsumerV1Services(
+  getConsumerV1Services(
     req: operations.GetConsumerV1ServicesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetConsumerV1ServicesResponse> {
@@ -1532,11 +1625,12 @@ export class SDK {
       req = new operations.GetConsumerV1ServicesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/consumer/v1/services";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1545,17 +1639,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetConsumerV1ServicesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetConsumerV1ServicesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceListViewModel = httpRes?.data;
             }
             break;
@@ -1567,8 +1662,10 @@ export class SDK {
   }
 
   
-  // GetConsumerV1ServicesAllocationsId - Get a service allocation
-  GetConsumerV1ServicesAllocationsId(
+  /**
+   * getConsumerV1ServicesAllocationsId - Get a service allocation
+  **/
+  getConsumerV1ServicesAllocationsId(
     req: operations.GetConsumerV1ServicesAllocationsIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetConsumerV1ServicesAllocationsIdResponse> {
@@ -1576,22 +1673,24 @@ export class SDK {
       req = new operations.GetConsumerV1ServicesAllocationsIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/consumer/v1/services/allocations/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetConsumerV1ServicesAllocationsIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetConsumerV1ServicesAllocationsIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceAllocationViewModel = httpRes?.data;
             }
             break;
@@ -1603,12 +1702,13 @@ export class SDK {
   }
 
   
-  // GetConsumerV1ServicesId - Returns a service object.
-  /** 
+  /**
+   * getConsumerV1ServicesId - Returns a service object.
+   *
    * The result returned is a single service object. An id is required to find the service. Find service id's using either the GET consumer/v1/service end point,
    * or the GET consumer/v1/appointments end point.
   **/
-  GetConsumerV1ServicesId(
+  getConsumerV1ServicesId(
     req: operations.GetConsumerV1ServicesIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetConsumerV1ServicesIdResponse> {
@@ -1616,22 +1716,24 @@ export class SDK {
       req = new operations.GetConsumerV1ServicesIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/consumer/v1/services/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetConsumerV1ServicesIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetConsumerV1ServicesIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceViewModel = httpRes?.data;
             }
             break;
@@ -1643,8 +1745,9 @@ export class SDK {
   }
 
   
-  // GetConsumerV1ServicesIdAllocations - Returns a list of service allocations.
-  /** 
+  /**
+   * getConsumerV1ServicesIdAllocations - Returns a list of service allocations.
+   *
    * This endpoint is used primarily for event booking. When you create service type events, you allocation specific occurrences of the event 
    * against the service. 
    * 
@@ -1654,7 +1757,7 @@ export class SDK {
    * The results are returned in pages. Use the offset and limit parameters to control the page start and size. Default offset is 0, and limit is 20.
    * Use the other query parameters to optionally filter the results list.
   **/
-  GetConsumerV1ServicesIdAllocations(
+  getConsumerV1ServicesIdAllocations(
     req: operations.GetConsumerV1ServicesIdAllocationsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetConsumerV1ServicesIdAllocationsResponse> {
@@ -1662,11 +1765,12 @@ export class SDK {
       req = new operations.GetConsumerV1ServicesIdAllocationsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/consumer/v1/services/{id}/allocations", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1675,25 +1779,26 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetConsumerV1ServicesIdAllocationsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetConsumerV1ServicesIdAllocationsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceAllocationListViewModel = httpRes?.data;
             }
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
         }
 
@@ -1703,12 +1808,13 @@ export class SDK {
   }
 
   
-  // GetConsumerV1ServicesIdResources - Returns a list of resources.
-  /** 
+  /**
+   * getConsumerV1ServicesIdResources - Returns a list of resources.
+   *
    * The results are returned in pages. Use the offset and limit parameters to control the page start and size. Default offset is 0, and limit is 20.
    * Use the other query parameters to optionally filter the results list.
   **/
-  GetConsumerV1ServicesIdResources(
+  getConsumerV1ServicesIdResources(
     req: operations.GetConsumerV1ServicesIdResourcesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetConsumerV1ServicesIdResourcesResponse> {
@@ -1716,11 +1822,12 @@ export class SDK {
       req = new operations.GetConsumerV1ServicesIdResourcesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/consumer/v1/services/{id}/resources", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1729,17 +1836,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetConsumerV1ServicesIdResourcesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetConsumerV1ServicesIdResourcesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceListViewModel = httpRes?.data;
             }
             break;
@@ -1751,12 +1859,13 @@ export class SDK {
   }
 
   
-  // GetConsumerV1Settings - Returns a list of customers.
-  /** 
+  /**
+   * getConsumerV1Settings - Returns a list of customers.
+   *
    * The results are returned in pages. Use the offset and limit parameters to control the page start and size. Default offset is 0, and limit is 20.
    * Use the other query parameters to optionally filter the results list.
   **/
-  GetConsumerV1Settings(
+  getConsumerV1Settings(
     req: operations.GetConsumerV1SettingsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetConsumerV1SettingsResponse> {
@@ -1764,11 +1873,12 @@ export class SDK {
       req = new operations.GetConsumerV1SettingsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/consumer/v1/settings";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1777,17 +1887,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetConsumerV1SettingsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetConsumerV1SettingsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.onlineSettingsViewModel = httpRes?.data;
             }
             break;
@@ -1799,7 +1910,7 @@ export class SDK {
   }
 
   
-  GetPlanId(
+  getPlanId(
     req: operations.GetPlanIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetPlanIdResponse> {
@@ -1807,11 +1918,12 @@ export class SDK {
       req = new operations.GetPlanIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/{planId}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1820,16 +1932,17 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetPlanIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.GetPlanIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -1839,8 +1952,9 @@ export class SDK {
   }
 
   
-  // PostConsumerV1Appointments - Returns an appointment object
-  /** 
+  /**
+   * postConsumerV1Appointments - Returns an appointment object
+   *
    * <p>This end point creates a new appointment in an Initial "IN" status. The exception is if completeBooking parameter set.</p>
    * <br />
    * <p>If you supply a valid customerId in the body, then the POST will create either a booking or reservation using the customer data.</p>
@@ -1887,7 +2001,7 @@ export class SDK {
    *              See more information at <a href="https://onsched.readme.io/docs/appointments-overview">Appointments Overview</a></p>
    * <br />
   **/
-  PostConsumerV1Appointments(
+  postConsumerV1Appointments(
     req: operations.PostConsumerV1AppointmentsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostConsumerV1AppointmentsResponse> {
@@ -1895,22 +2009,22 @@ export class SDK {
       req = new operations.PostConsumerV1AppointmentsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/consumer/v1/appointments";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1921,20 +2035,21 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostConsumerV1AppointmentsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostConsumerV1AppointmentsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.appointmentInitialViewModel = httpRes?.data;
             }
             break;
@@ -1946,14 +2061,15 @@ export class SDK {
   }
 
   
-  // PostConsumerV1Customers - Creates a new customer object.
-  /** 
+  /**
+   * postConsumerV1Customers - Creates a new customer object.
+   *
    * Use this endpoint to create a new customer. If not specified the business location id defaults to the first location in the company.
    * Email Address and a lastname are required for creating a new customer.
    * Type 0 = Person, Type 1 = Business
    * For type 0, the firstname and lastname fields are used. For type 1, the Name field is used and the name field is also used to populate the lastname.
   **/
-  PostConsumerV1Customers(
+  postConsumerV1Customers(
     req: operations.PostConsumerV1CustomersRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostConsumerV1CustomersResponse> {
@@ -1961,38 +2077,39 @@ export class SDK {
       req = new operations.PostConsumerV1CustomersRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/consumer/v1/customers";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostConsumerV1CustomersResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostConsumerV1CustomersResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.customerViewModel = httpRes?.data;
             }
             break;
@@ -2004,11 +2121,12 @@ export class SDK {
   }
 
   
-  // PostConsumerV1CustomersIdSubscriptions - Creates a new customer subscription object.
-  /** 
+  /**
+   * postConsumerV1CustomersIdSubscriptions - Creates a new customer subscription object.
+   *
    * Use this endpoint to create a new customer subscription.
   **/
-  PostConsumerV1CustomersIdSubscriptions(
+  postConsumerV1CustomersIdSubscriptions(
     req: operations.PostConsumerV1CustomersIdSubscriptionsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostConsumerV1CustomersIdSubscriptionsResponse> {
@@ -2016,38 +2134,39 @@ export class SDK {
       req = new operations.PostConsumerV1CustomersIdSubscriptionsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/consumer/v1/customers/{id}/subscriptions", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostConsumerV1CustomersIdSubscriptionsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostConsumerV1CustomersIdSubscriptionsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.customerSubscriptionViewModel = httpRes?.data;
             }
             break;
@@ -2059,8 +2178,9 @@ export class SDK {
   }
 
   
-  // PutConsumerV1AppointmentsIdBook - Returns an appointment object
-  /** 
+  /**
+   * putConsumerV1AppointmentsIdBook - Returns an appointment object
+   *
    * This end point completes a new booking. Only appointments in the "IN" initial status can be booked.
    * by saving all the relevant details of the booking. <br /><br />
    * 
@@ -2071,7 +2191,7 @@ export class SDK {
    * See more information at <a href="https://onsched.readme.io/docs/appointments-overview">Appointments Overview</a> and 
    * <a href="https://onsched.readme.io/docs/custom-booking-fields">Custom Booking Fields</a>
   **/
-  PutConsumerV1AppointmentsIdBook(
+  putConsumerV1AppointmentsIdBook(
     req: operations.PutConsumerV1AppointmentsIdBookRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PutConsumerV1AppointmentsIdBookResponse> {
@@ -2079,38 +2199,39 @@ export class SDK {
       req = new operations.PutConsumerV1AppointmentsIdBookRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/consumer/v1/appointments/{id}/book", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PutConsumerV1AppointmentsIdBookResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PutConsumerV1AppointmentsIdBookResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.appointmentViewModel = httpRes?.data;
             }
             break;
@@ -2122,15 +2243,16 @@ export class SDK {
   }
 
   
-  // PutConsumerV1AppointmentsIdCancel - Returns an appointment object
-  /** 
+  /**
+   * putConsumerV1AppointmentsIdCancel - Returns an appointment object
+   *
    * This end point cancels a booking or reservation. Only appointments in a "BK" booked, or "RS" reserved status can be cancelled.
    * Past dated appointments cannot be cancelled. <br /><br />
    * 
    * A valid appointment id is required. Use the appointmentId returned from POST /consumer/v1/appointments. <br /><br />
    * For more information see <a href="https://onsched.readme.io/docs/appointments-overview">Appointment Overview</a>
   **/
-  PutConsumerV1AppointmentsIdCancel(
+  putConsumerV1AppointmentsIdCancel(
     req: operations.PutConsumerV1AppointmentsIdCancelRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PutConsumerV1AppointmentsIdCancelResponse> {
@@ -2138,22 +2260,24 @@ export class SDK {
       req = new operations.PutConsumerV1AppointmentsIdCancelRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/consumer/v1/appointments/{id}/cancel", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .put(url, {
+      .request({
+        url: url,
+        method: "put",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PutConsumerV1AppointmentsIdCancelResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PutConsumerV1AppointmentsIdCancelResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.appointmentViewModel = httpRes?.data;
             }
             break;
@@ -2165,8 +2289,10 @@ export class SDK {
   }
 
   
-  // PutConsumerV1AppointmentsIdConfirm - Set the Appointment Confirm property to true or false
-  PutConsumerV1AppointmentsIdConfirm(
+  /**
+   * putConsumerV1AppointmentsIdConfirm - Set the Appointment Confirm property to true or false
+  **/
+  putConsumerV1AppointmentsIdConfirm(
     req: operations.PutConsumerV1AppointmentsIdConfirmRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PutConsumerV1AppointmentsIdConfirmResponse> {
@@ -2174,11 +2300,12 @@ export class SDK {
       req = new operations.PutConsumerV1AppointmentsIdConfirmRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/consumer/v1/appointments/{id}/confirm", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2187,16 +2314,17 @@ export class SDK {
     };
     
     return client
-      .put(url, {
+      .request({
+        url: url,
+        method: "put",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PutConsumerV1AppointmentsIdConfirmResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PutConsumerV1AppointmentsIdConfirmResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -2206,8 +2334,10 @@ export class SDK {
   }
 
   
-  // PutConsumerV1AppointmentsIdNoshow - For more information see <a href="https://onsched.readme.io/docs/appointments-overview">Appointment Overview</a>
-  PutConsumerV1AppointmentsIdNoshow(
+  /**
+   * putConsumerV1AppointmentsIdNoshow - For more information see <a href="https://onsched.readme.io/docs/appointments-overview">Appointment Overview</a>
+  **/
+  putConsumerV1AppointmentsIdNoshow(
     req: operations.PutConsumerV1AppointmentsIdNoshowRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PutConsumerV1AppointmentsIdNoshowResponse> {
@@ -2215,37 +2345,38 @@ export class SDK {
       req = new operations.PutConsumerV1AppointmentsIdNoshowRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/consumer/v1/appointments/{id}/noshow", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PutConsumerV1AppointmentsIdNoshowResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PutConsumerV1AppointmentsIdNoshowResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -2255,8 +2386,9 @@ export class SDK {
   }
 
   
-  // PutConsumerV1AppointmentsIdReschedule - Returns an appointment object
-  /** 
+  /**
+   * putConsumerV1AppointmentsIdReschedule - Returns an appointment object
+   *
    * This end point reschedules a booking. Only appointments in a "BK" booked status can be rescheduled.
    * Past dated appointments cannot be cancelled.<br /><br />
    * 
@@ -2274,7 +2406,7 @@ export class SDK {
    * 
    * For more information see <a href="https://onsched.readme.io/docs/appointments-overview">Appointment Overview</a>
   **/
-  PutConsumerV1AppointmentsIdReschedule(
+  putConsumerV1AppointmentsIdReschedule(
     req: operations.PutConsumerV1AppointmentsIdRescheduleRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PutConsumerV1AppointmentsIdRescheduleResponse> {
@@ -2282,38 +2414,39 @@ export class SDK {
       req = new operations.PutConsumerV1AppointmentsIdRescheduleRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/consumer/v1/appointments/{id}/reschedule", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PutConsumerV1AppointmentsIdRescheduleResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PutConsumerV1AppointmentsIdRescheduleResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.appointmentViewModel = httpRes?.data;
             }
             break;
@@ -2325,8 +2458,9 @@ export class SDK {
   }
 
   
-  // PutConsumerV1AppointmentsIdReserve - Returns an appointment object
-  /** 
+  /**
+   * putConsumerV1AppointmentsIdReserve - Returns an appointment object
+   *
    * This end point completes a new reservation. Only appointments in the "IN" initial status can be booked.
    * by saving all the relevant details of the booking.<br /><br />
    * 
@@ -2344,7 +2478,7 @@ export class SDK {
    * to understand your definitions of custom fields and what key and values to update. <br /><br />
    * See more information at <a href="https://onsched.readme.io/docs/appointments-overview">Appointments Overview</a><br /><br />
   **/
-  PutConsumerV1AppointmentsIdReserve(
+  putConsumerV1AppointmentsIdReserve(
     req: operations.PutConsumerV1AppointmentsIdReserveRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PutConsumerV1AppointmentsIdReserveResponse> {
@@ -2352,22 +2486,22 @@ export class SDK {
       req = new operations.PutConsumerV1AppointmentsIdReserveRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/consumer/v1/appointments/{id}/reserve", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2378,19 +2512,20 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PutConsumerV1AppointmentsIdReserveResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PutConsumerV1AppointmentsIdReserveResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -2400,12 +2535,13 @@ export class SDK {
   }
 
   
-  // PutConsumerV1CustomersId - Updates a customer object.
-  /** 
+  /**
+   * putConsumerV1CustomersId - Updates a customer object.
+   *
    * Use this endpoint to update customer information. If not specified the business location id defaults to the first location in the company.
    * Blank fields are not changed
   **/
-  PutConsumerV1CustomersId(
+  putConsumerV1CustomersId(
     req: operations.PutConsumerV1CustomersIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PutConsumerV1CustomersIdResponse> {
@@ -2413,37 +2549,38 @@ export class SDK {
       req = new operations.PutConsumerV1CustomersIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/consumer/v1/customers/{id}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PutConsumerV1CustomersIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PutConsumerV1CustomersIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -2453,11 +2590,12 @@ export class SDK {
   }
 
   
-  // PutConsumerV1CustomersSubscriptionsId - Updates a customer subscription object.
-  /** 
+  /**
+   * putConsumerV1CustomersSubscriptionsId - Updates a customer subscription object.
+   *
    * Use this endpoint to update customer subscription information.
   **/
-  PutConsumerV1CustomersSubscriptionsId(
+  putConsumerV1CustomersSubscriptionsId(
     req: operations.PutConsumerV1CustomersSubscriptionsIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PutConsumerV1CustomersSubscriptionsIdResponse> {
@@ -2465,37 +2603,38 @@ export class SDK {
       req = new operations.PutConsumerV1CustomersSubscriptionsIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/consumer/v1/customers/subscriptions/{id}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PutConsumerV1CustomersSubscriptionsIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PutConsumerV1CustomersSubscriptionsIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 

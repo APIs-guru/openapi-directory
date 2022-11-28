@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// EntitiesDetectionJobProperties
+// Provides information about an entities detection job.
 type EntitiesDetectionJobProperties struct {
 	DataAccessRoleArn   *string           `json:"DataAccessRoleArn,omitempty"`
 	EndTime             *time.Time        `json:"EndTime,omitempty"`

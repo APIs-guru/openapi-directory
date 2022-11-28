@@ -30,6 +30,8 @@ const (
 	HookEventEventEnumRepoPush                         HookEventEventEnum = "repo:push"
 )
 
+// HookEvent
+// An event, associated with a resource or subject type.
 type HookEvent struct {
 	Category    *string             `json:"category,omitempty"`
 	Description *string             `json:"description,omitempty"`

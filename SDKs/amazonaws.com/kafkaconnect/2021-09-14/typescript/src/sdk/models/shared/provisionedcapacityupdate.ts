@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ProvisionedCapacityUpdate
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An update to a connector's fixed capacity.
 **/
 export class ProvisionedCapacityUpdate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=mcuCount" })
+  @SpeakeasyMetadata({ data: "json, name=mcuCount" })
   mcuCount: number;
 
-  @Metadata({ data: "json, name=workerCount" })
+  @SpeakeasyMetadata({ data: "json, name=workerCount" })
   workerCount: number;
 }

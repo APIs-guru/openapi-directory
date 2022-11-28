@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { S3KeyOutput } from "./s3keyoutput";
+
 
 
 // DataSource
@@ -8,12 +8,12 @@ import { S3KeyOutput } from "./s3keyoutput";
  * Information about a data source.
 **/
 export class DataSource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=s3Bucket" })
+  @SpeakeasyMetadata({ data: "json, name=s3Bucket" })
   s3Bucket?: string;
 
-  @Metadata({ data: "json, name=s3Keys", elemType: shared.S3KeyOutput })
+  @SpeakeasyMetadata({ data: "json, name=s3Keys", elemType: S3KeyOutput })
   s3Keys?: S3KeyOutput[];
 }

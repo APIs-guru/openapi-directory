@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// OtaUpdateInfo
+// Information about an OTA update.
 type OtaUpdateInfo struct {
 	AdditionalParameters          map[string]string              `json:"additionalParameters,omitempty"`
 	AwsIotJobArn                  *string                        `json:"awsIotJobArn,omitempty"`

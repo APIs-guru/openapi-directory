@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Result } from "./result";
 import { Promotion } from "./promotion";
+
 
 
 // SearchQueriesNextPage
@@ -9,112 +9,112 @@ import { Promotion } from "./promotion";
  * Custom search request metadata.
 **/
 export class SearchQueriesNextPage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count?: number;
 
-  @Metadata({ data: "json, name=cr" })
+  @SpeakeasyMetadata({ data: "json, name=cr" })
   cr?: string;
 
-  @Metadata({ data: "json, name=cx" })
+  @SpeakeasyMetadata({ data: "json, name=cx" })
   cx?: string;
 
-  @Metadata({ data: "json, name=dateRestrict" })
+  @SpeakeasyMetadata({ data: "json, name=dateRestrict" })
   dateRestrict?: string;
 
-  @Metadata({ data: "json, name=disableCnTwTranslation" })
+  @SpeakeasyMetadata({ data: "json, name=disableCnTwTranslation" })
   disableCnTwTranslation?: string;
 
-  @Metadata({ data: "json, name=exactTerms" })
+  @SpeakeasyMetadata({ data: "json, name=exactTerms" })
   exactTerms?: string;
 
-  @Metadata({ data: "json, name=excludeTerms" })
+  @SpeakeasyMetadata({ data: "json, name=excludeTerms" })
   excludeTerms?: string;
 
-  @Metadata({ data: "json, name=fileType" })
+  @SpeakeasyMetadata({ data: "json, name=fileType" })
   fileType?: string;
 
-  @Metadata({ data: "json, name=filter" })
+  @SpeakeasyMetadata({ data: "json, name=filter" })
   filter?: string;
 
-  @Metadata({ data: "json, name=gl" })
+  @SpeakeasyMetadata({ data: "json, name=gl" })
   gl?: string;
 
-  @Metadata({ data: "json, name=googleHost" })
+  @SpeakeasyMetadata({ data: "json, name=googleHost" })
   googleHost?: string;
 
-  @Metadata({ data: "json, name=highRange" })
+  @SpeakeasyMetadata({ data: "json, name=highRange" })
   highRange?: string;
 
-  @Metadata({ data: "json, name=hl" })
+  @SpeakeasyMetadata({ data: "json, name=hl" })
   hl?: string;
 
-  @Metadata({ data: "json, name=hq" })
+  @SpeakeasyMetadata({ data: "json, name=hq" })
   hq?: string;
 
-  @Metadata({ data: "json, name=imgColorType" })
+  @SpeakeasyMetadata({ data: "json, name=imgColorType" })
   imgColorType?: string;
 
-  @Metadata({ data: "json, name=imgDominantColor" })
+  @SpeakeasyMetadata({ data: "json, name=imgDominantColor" })
   imgDominantColor?: string;
 
-  @Metadata({ data: "json, name=imgSize" })
+  @SpeakeasyMetadata({ data: "json, name=imgSize" })
   imgSize?: string;
 
-  @Metadata({ data: "json, name=imgType" })
+  @SpeakeasyMetadata({ data: "json, name=imgType" })
   imgType?: string;
 
-  @Metadata({ data: "json, name=inputEncoding" })
+  @SpeakeasyMetadata({ data: "json, name=inputEncoding" })
   inputEncoding?: string;
 
-  @Metadata({ data: "json, name=language" })
+  @SpeakeasyMetadata({ data: "json, name=language" })
   language?: string;
 
-  @Metadata({ data: "json, name=linkSite" })
+  @SpeakeasyMetadata({ data: "json, name=linkSite" })
   linkSite?: string;
 
-  @Metadata({ data: "json, name=lowRange" })
+  @SpeakeasyMetadata({ data: "json, name=lowRange" })
   lowRange?: string;
 
-  @Metadata({ data: "json, name=orTerms" })
+  @SpeakeasyMetadata({ data: "json, name=orTerms" })
   orTerms?: string;
 
-  @Metadata({ data: "json, name=outputEncoding" })
+  @SpeakeasyMetadata({ data: "json, name=outputEncoding" })
   outputEncoding?: string;
 
-  @Metadata({ data: "json, name=relatedSite" })
+  @SpeakeasyMetadata({ data: "json, name=relatedSite" })
   relatedSite?: string;
 
-  @Metadata({ data: "json, name=rights" })
+  @SpeakeasyMetadata({ data: "json, name=rights" })
   rights?: string;
 
-  @Metadata({ data: "json, name=safe" })
+  @SpeakeasyMetadata({ data: "json, name=safe" })
   safe?: string;
 
-  @Metadata({ data: "json, name=searchTerms" })
+  @SpeakeasyMetadata({ data: "json, name=searchTerms" })
   searchTerms?: string;
 
-  @Metadata({ data: "json, name=searchType" })
+  @SpeakeasyMetadata({ data: "json, name=searchType" })
   searchType?: string;
 
-  @Metadata({ data: "json, name=siteSearch" })
+  @SpeakeasyMetadata({ data: "json, name=siteSearch" })
   siteSearch?: string;
 
-  @Metadata({ data: "json, name=siteSearchFilter" })
+  @SpeakeasyMetadata({ data: "json, name=siteSearchFilter" })
   siteSearchFilter?: string;
 
-  @Metadata({ data: "json, name=sort" })
+  @SpeakeasyMetadata({ data: "json, name=sort" })
   sort?: string;
 
-  @Metadata({ data: "json, name=startIndex" })
+  @SpeakeasyMetadata({ data: "json, name=startIndex" })
   startIndex?: number;
 
-  @Metadata({ data: "json, name=startPage" })
+  @SpeakeasyMetadata({ data: "json, name=startPage" })
   startPage?: number;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=totalResults" })
+  @SpeakeasyMetadata({ data: "json, name=totalResults" })
   totalResults?: string;
 }
 
@@ -124,112 +124,112 @@ export class SearchQueriesNextPage extends SpeakeasyBase {
  * Custom search request metadata.
 **/
 export class SearchQueriesPreviousPage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count?: number;
 
-  @Metadata({ data: "json, name=cr" })
+  @SpeakeasyMetadata({ data: "json, name=cr" })
   cr?: string;
 
-  @Metadata({ data: "json, name=cx" })
+  @SpeakeasyMetadata({ data: "json, name=cx" })
   cx?: string;
 
-  @Metadata({ data: "json, name=dateRestrict" })
+  @SpeakeasyMetadata({ data: "json, name=dateRestrict" })
   dateRestrict?: string;
 
-  @Metadata({ data: "json, name=disableCnTwTranslation" })
+  @SpeakeasyMetadata({ data: "json, name=disableCnTwTranslation" })
   disableCnTwTranslation?: string;
 
-  @Metadata({ data: "json, name=exactTerms" })
+  @SpeakeasyMetadata({ data: "json, name=exactTerms" })
   exactTerms?: string;
 
-  @Metadata({ data: "json, name=excludeTerms" })
+  @SpeakeasyMetadata({ data: "json, name=excludeTerms" })
   excludeTerms?: string;
 
-  @Metadata({ data: "json, name=fileType" })
+  @SpeakeasyMetadata({ data: "json, name=fileType" })
   fileType?: string;
 
-  @Metadata({ data: "json, name=filter" })
+  @SpeakeasyMetadata({ data: "json, name=filter" })
   filter?: string;
 
-  @Metadata({ data: "json, name=gl" })
+  @SpeakeasyMetadata({ data: "json, name=gl" })
   gl?: string;
 
-  @Metadata({ data: "json, name=googleHost" })
+  @SpeakeasyMetadata({ data: "json, name=googleHost" })
   googleHost?: string;
 
-  @Metadata({ data: "json, name=highRange" })
+  @SpeakeasyMetadata({ data: "json, name=highRange" })
   highRange?: string;
 
-  @Metadata({ data: "json, name=hl" })
+  @SpeakeasyMetadata({ data: "json, name=hl" })
   hl?: string;
 
-  @Metadata({ data: "json, name=hq" })
+  @SpeakeasyMetadata({ data: "json, name=hq" })
   hq?: string;
 
-  @Metadata({ data: "json, name=imgColorType" })
+  @SpeakeasyMetadata({ data: "json, name=imgColorType" })
   imgColorType?: string;
 
-  @Metadata({ data: "json, name=imgDominantColor" })
+  @SpeakeasyMetadata({ data: "json, name=imgDominantColor" })
   imgDominantColor?: string;
 
-  @Metadata({ data: "json, name=imgSize" })
+  @SpeakeasyMetadata({ data: "json, name=imgSize" })
   imgSize?: string;
 
-  @Metadata({ data: "json, name=imgType" })
+  @SpeakeasyMetadata({ data: "json, name=imgType" })
   imgType?: string;
 
-  @Metadata({ data: "json, name=inputEncoding" })
+  @SpeakeasyMetadata({ data: "json, name=inputEncoding" })
   inputEncoding?: string;
 
-  @Metadata({ data: "json, name=language" })
+  @SpeakeasyMetadata({ data: "json, name=language" })
   language?: string;
 
-  @Metadata({ data: "json, name=linkSite" })
+  @SpeakeasyMetadata({ data: "json, name=linkSite" })
   linkSite?: string;
 
-  @Metadata({ data: "json, name=lowRange" })
+  @SpeakeasyMetadata({ data: "json, name=lowRange" })
   lowRange?: string;
 
-  @Metadata({ data: "json, name=orTerms" })
+  @SpeakeasyMetadata({ data: "json, name=orTerms" })
   orTerms?: string;
 
-  @Metadata({ data: "json, name=outputEncoding" })
+  @SpeakeasyMetadata({ data: "json, name=outputEncoding" })
   outputEncoding?: string;
 
-  @Metadata({ data: "json, name=relatedSite" })
+  @SpeakeasyMetadata({ data: "json, name=relatedSite" })
   relatedSite?: string;
 
-  @Metadata({ data: "json, name=rights" })
+  @SpeakeasyMetadata({ data: "json, name=rights" })
   rights?: string;
 
-  @Metadata({ data: "json, name=safe" })
+  @SpeakeasyMetadata({ data: "json, name=safe" })
   safe?: string;
 
-  @Metadata({ data: "json, name=searchTerms" })
+  @SpeakeasyMetadata({ data: "json, name=searchTerms" })
   searchTerms?: string;
 
-  @Metadata({ data: "json, name=searchType" })
+  @SpeakeasyMetadata({ data: "json, name=searchType" })
   searchType?: string;
 
-  @Metadata({ data: "json, name=siteSearch" })
+  @SpeakeasyMetadata({ data: "json, name=siteSearch" })
   siteSearch?: string;
 
-  @Metadata({ data: "json, name=siteSearchFilter" })
+  @SpeakeasyMetadata({ data: "json, name=siteSearchFilter" })
   siteSearchFilter?: string;
 
-  @Metadata({ data: "json, name=sort" })
+  @SpeakeasyMetadata({ data: "json, name=sort" })
   sort?: string;
 
-  @Metadata({ data: "json, name=startIndex" })
+  @SpeakeasyMetadata({ data: "json, name=startIndex" })
   startIndex?: number;
 
-  @Metadata({ data: "json, name=startPage" })
+  @SpeakeasyMetadata({ data: "json, name=startPage" })
   startPage?: number;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=totalResults" })
+  @SpeakeasyMetadata({ data: "json, name=totalResults" })
   totalResults?: string;
 }
 
@@ -239,112 +239,112 @@ export class SearchQueriesPreviousPage extends SpeakeasyBase {
  * Custom search request metadata.
 **/
 export class SearchQueriesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count?: number;
 
-  @Metadata({ data: "json, name=cr" })
+  @SpeakeasyMetadata({ data: "json, name=cr" })
   cr?: string;
 
-  @Metadata({ data: "json, name=cx" })
+  @SpeakeasyMetadata({ data: "json, name=cx" })
   cx?: string;
 
-  @Metadata({ data: "json, name=dateRestrict" })
+  @SpeakeasyMetadata({ data: "json, name=dateRestrict" })
   dateRestrict?: string;
 
-  @Metadata({ data: "json, name=disableCnTwTranslation" })
+  @SpeakeasyMetadata({ data: "json, name=disableCnTwTranslation" })
   disableCnTwTranslation?: string;
 
-  @Metadata({ data: "json, name=exactTerms" })
+  @SpeakeasyMetadata({ data: "json, name=exactTerms" })
   exactTerms?: string;
 
-  @Metadata({ data: "json, name=excludeTerms" })
+  @SpeakeasyMetadata({ data: "json, name=excludeTerms" })
   excludeTerms?: string;
 
-  @Metadata({ data: "json, name=fileType" })
+  @SpeakeasyMetadata({ data: "json, name=fileType" })
   fileType?: string;
 
-  @Metadata({ data: "json, name=filter" })
+  @SpeakeasyMetadata({ data: "json, name=filter" })
   filter?: string;
 
-  @Metadata({ data: "json, name=gl" })
+  @SpeakeasyMetadata({ data: "json, name=gl" })
   gl?: string;
 
-  @Metadata({ data: "json, name=googleHost" })
+  @SpeakeasyMetadata({ data: "json, name=googleHost" })
   googleHost?: string;
 
-  @Metadata({ data: "json, name=highRange" })
+  @SpeakeasyMetadata({ data: "json, name=highRange" })
   highRange?: string;
 
-  @Metadata({ data: "json, name=hl" })
+  @SpeakeasyMetadata({ data: "json, name=hl" })
   hl?: string;
 
-  @Metadata({ data: "json, name=hq" })
+  @SpeakeasyMetadata({ data: "json, name=hq" })
   hq?: string;
 
-  @Metadata({ data: "json, name=imgColorType" })
+  @SpeakeasyMetadata({ data: "json, name=imgColorType" })
   imgColorType?: string;
 
-  @Metadata({ data: "json, name=imgDominantColor" })
+  @SpeakeasyMetadata({ data: "json, name=imgDominantColor" })
   imgDominantColor?: string;
 
-  @Metadata({ data: "json, name=imgSize" })
+  @SpeakeasyMetadata({ data: "json, name=imgSize" })
   imgSize?: string;
 
-  @Metadata({ data: "json, name=imgType" })
+  @SpeakeasyMetadata({ data: "json, name=imgType" })
   imgType?: string;
 
-  @Metadata({ data: "json, name=inputEncoding" })
+  @SpeakeasyMetadata({ data: "json, name=inputEncoding" })
   inputEncoding?: string;
 
-  @Metadata({ data: "json, name=language" })
+  @SpeakeasyMetadata({ data: "json, name=language" })
   language?: string;
 
-  @Metadata({ data: "json, name=linkSite" })
+  @SpeakeasyMetadata({ data: "json, name=linkSite" })
   linkSite?: string;
 
-  @Metadata({ data: "json, name=lowRange" })
+  @SpeakeasyMetadata({ data: "json, name=lowRange" })
   lowRange?: string;
 
-  @Metadata({ data: "json, name=orTerms" })
+  @SpeakeasyMetadata({ data: "json, name=orTerms" })
   orTerms?: string;
 
-  @Metadata({ data: "json, name=outputEncoding" })
+  @SpeakeasyMetadata({ data: "json, name=outputEncoding" })
   outputEncoding?: string;
 
-  @Metadata({ data: "json, name=relatedSite" })
+  @SpeakeasyMetadata({ data: "json, name=relatedSite" })
   relatedSite?: string;
 
-  @Metadata({ data: "json, name=rights" })
+  @SpeakeasyMetadata({ data: "json, name=rights" })
   rights?: string;
 
-  @Metadata({ data: "json, name=safe" })
+  @SpeakeasyMetadata({ data: "json, name=safe" })
   safe?: string;
 
-  @Metadata({ data: "json, name=searchTerms" })
+  @SpeakeasyMetadata({ data: "json, name=searchTerms" })
   searchTerms?: string;
 
-  @Metadata({ data: "json, name=searchType" })
+  @SpeakeasyMetadata({ data: "json, name=searchType" })
   searchType?: string;
 
-  @Metadata({ data: "json, name=siteSearch" })
+  @SpeakeasyMetadata({ data: "json, name=siteSearch" })
   siteSearch?: string;
 
-  @Metadata({ data: "json, name=siteSearchFilter" })
+  @SpeakeasyMetadata({ data: "json, name=siteSearchFilter" })
   siteSearchFilter?: string;
 
-  @Metadata({ data: "json, name=sort" })
+  @SpeakeasyMetadata({ data: "json, name=sort" })
   sort?: string;
 
-  @Metadata({ data: "json, name=startIndex" })
+  @SpeakeasyMetadata({ data: "json, name=startIndex" })
   startIndex?: number;
 
-  @Metadata({ data: "json, name=startPage" })
+  @SpeakeasyMetadata({ data: "json, name=startPage" })
   startPage?: number;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=totalResults" })
+  @SpeakeasyMetadata({ data: "json, name=totalResults" })
   totalResults?: string;
 }
 
@@ -354,13 +354,13 @@ export class SearchQueriesRequest extends SpeakeasyBase {
  * Query metadata for the previous, current, and next pages of results.
 **/
 export class SearchQueries extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPage", elemType: shared.SearchQueriesNextPage })
+  @SpeakeasyMetadata({ data: "json, name=nextPage", elemType: SearchQueriesNextPage })
   nextPage?: SearchQueriesNextPage[];
 
-  @Metadata({ data: "json, name=previousPage", elemType: shared.SearchQueriesPreviousPage })
+  @SpeakeasyMetadata({ data: "json, name=previousPage", elemType: SearchQueriesPreviousPage })
   previousPage?: SearchQueriesPreviousPage[];
 
-  @Metadata({ data: "json, name=request", elemType: shared.SearchQueriesRequest })
+  @SpeakeasyMetadata({ data: "json, name=request", elemType: SearchQueriesRequest })
   request?: SearchQueriesRequest[];
 }
 
@@ -370,16 +370,16 @@ export class SearchQueries extends SpeakeasyBase {
  * Metadata about a search operation.
 **/
 export class SearchSearchInformation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=formattedSearchTime" })
+  @SpeakeasyMetadata({ data: "json, name=formattedSearchTime" })
   formattedSearchTime?: string;
 
-  @Metadata({ data: "json, name=formattedTotalResults" })
+  @SpeakeasyMetadata({ data: "json, name=formattedTotalResults" })
   formattedTotalResults?: string;
 
-  @Metadata({ data: "json, name=searchTime" })
+  @SpeakeasyMetadata({ data: "json, name=searchTime" })
   searchTime?: number;
 
-  @Metadata({ data: "json, name=totalResults" })
+  @SpeakeasyMetadata({ data: "json, name=totalResults" })
   totalResults?: string;
 }
 
@@ -389,10 +389,10 @@ export class SearchSearchInformation extends SpeakeasyBase {
  * Spell correction information for a query.
 **/
 export class SearchSpelling extends SpeakeasyBase {
-  @Metadata({ data: "json, name=correctedQuery" })
+  @SpeakeasyMetadata({ data: "json, name=correctedQuery" })
   correctedQuery?: string;
 
-  @Metadata({ data: "json, name=htmlCorrectedQuery" })
+  @SpeakeasyMetadata({ data: "json, name=htmlCorrectedQuery" })
   htmlCorrectedQuery?: string;
 }
 
@@ -402,10 +402,10 @@ export class SearchSpelling extends SpeakeasyBase {
  * OpenSearch template and URL.
 **/
 export class SearchUrl extends SpeakeasyBase {
-  @Metadata({ data: "json, name=template" })
+  @SpeakeasyMetadata({ data: "json, name=template" })
   template?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }
 
@@ -415,27 +415,27 @@ export class SearchUrl extends SpeakeasyBase {
  * Response to a custom search request.
 **/
 export class Search extends SpeakeasyBase {
-  @Metadata({ data: "json, name=context" })
+  @SpeakeasyMetadata({ data: "json, name=context" })
   context?: Map<string, any>;
 
-  @Metadata({ data: "json, name=items", elemType: shared.Result })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: Result })
   items?: Result[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=promotions", elemType: shared.Promotion })
+  @SpeakeasyMetadata({ data: "json, name=promotions", elemType: Promotion })
   promotions?: Promotion[];
 
-  @Metadata({ data: "json, name=queries" })
+  @SpeakeasyMetadata({ data: "json, name=queries" })
   queries?: SearchQueries;
 
-  @Metadata({ data: "json, name=searchInformation" })
+  @SpeakeasyMetadata({ data: "json, name=searchInformation" })
   searchInformation?: SearchSearchInformation;
 
-  @Metadata({ data: "json, name=spelling" })
+  @SpeakeasyMetadata({ data: "json, name=spelling" })
   spelling?: SearchSpelling;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: SearchUrl;
 }

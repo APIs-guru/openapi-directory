@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { TimeOfDay } from "./timeofday";
 export declare enum WeeklyMaintenanceWindowDayEnum {
     DayOfWeekUnspecified = "DAY_OF_WEEK_UNSPECIFIED",

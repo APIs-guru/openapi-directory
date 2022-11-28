@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DfareportingUserRolePermissionGroupsListPathParams:
-    profile_id: str = field(default=None, metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
+    profile_id: str = field(metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class DfareportingUserRolePermissionGroupsListQueryParams:
 
 @dataclass
 class DfareportingUserRolePermissionGroupsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DfareportingUserRolePermissionGroupsListRequest:
-    path_params: DfareportingUserRolePermissionGroupsListPathParams = field(default=None)
-    query_params: DfareportingUserRolePermissionGroupsListQueryParams = field(default=None)
-    security: DfareportingUserRolePermissionGroupsListSecurity = field(default=None)
+    path_params: DfareportingUserRolePermissionGroupsListPathParams = field()
+    query_params: DfareportingUserRolePermissionGroupsListQueryParams = field()
+    security: DfareportingUserRolePermissionGroupsListSecurity = field()
     
 
 @dataclass
 class DfareportingUserRolePermissionGroupsListResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     user_role_permission_groups_list_response: Optional[shared.UserRolePermissionGroupsListResponse] = field(default=None)
     

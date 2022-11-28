@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetScanResultsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     example112s: Optional[List[shared.Example112]] = field(default=None)
-    status_code: int = field(default=None)
     

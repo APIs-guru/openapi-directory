@@ -1,9 +1,13 @@
 package shared
 
+// PageAuthorImage
+// The creator's avatar.
 type PageAuthorImage struct {
 	URL *string `json:"url,omitempty"`
 }
 
+// PageAuthor
+// The author of this Page.
 type PageAuthor struct {
 	DisplayName *string          `json:"displayName,omitempty"`
 	ID          *string          `json:"id,omitempty"`
@@ -11,6 +15,8 @@ type PageAuthor struct {
 	URL         *string          `json:"url,omitempty"`
 }
 
+// PageBlog
+// Data about the blog containing this Page.
 type PageBlog struct {
 	ID *string `json:"id,omitempty"`
 }

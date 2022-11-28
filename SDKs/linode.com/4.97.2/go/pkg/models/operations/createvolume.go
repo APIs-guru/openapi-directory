@@ -13,26 +13,18 @@ type CreateVolumeRequestBody struct {
 	Tags     []string `json:"tags,omitempty"`
 }
 
-type CreateVolumeSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type CreateVolumeSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type CreateVolumeSecurity struct {
-	Option1 *CreateVolumeSecurityOption1 `security:"option"`
-	Option2 *CreateVolumeSecurityOption2 `security:"option"`
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
+}
+
+type CreateVolumeDefaultApplicationJSON struct {
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type CreateVolumeRequest struct {
 	Request  CreateVolumeRequestBody `request:"mediaType=application/json"`
 	Security CreateVolumeSecurity
-}
-
-type CreateVolumeDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type CreateVolumeResponse struct {

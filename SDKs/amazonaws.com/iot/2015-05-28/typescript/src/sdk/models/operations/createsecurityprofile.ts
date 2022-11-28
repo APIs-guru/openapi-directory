@@ -1,89 +1,90 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateSecurityProfilePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=securityProfileName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=securityProfileName" })
   securityProfileName: string;
 }
 
 
 export class CreateSecurityProfileHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class CreateSecurityProfileRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=additionalMetricsToRetain" })
+  @SpeakeasyMetadata({ data: "json, name=additionalMetricsToRetain" })
   additionalMetricsToRetain?: string[];
 
-  @Metadata({ data: "json, name=additionalMetricsToRetainV2", elemType: shared.MetricToRetain })
+  @SpeakeasyMetadata({ data: "json, name=additionalMetricsToRetainV2", elemType: shared.MetricToRetain })
   additionalMetricsToRetainV2?: shared.MetricToRetain[];
 
-  @Metadata({ data: "json, name=alertTargets", elemType: shared.AlertTarget })
+  @SpeakeasyMetadata({ data: "json, name=alertTargets", elemType: shared.AlertTarget })
   alertTargets?: Map<string, shared.AlertTarget>;
 
-  @Metadata({ data: "json, name=behaviors", elemType: shared.Behavior })
+  @SpeakeasyMetadata({ data: "json, name=behaviors", elemType: shared.Behavior })
   behaviors?: shared.Behavior[];
 
-  @Metadata({ data: "json, name=securityProfileDescription" })
+  @SpeakeasyMetadata({ data: "json, name=securityProfileDescription" })
   securityProfileDescription?: string;
 
-  @Metadata({ data: "json, name=tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=tags", elemType: shared.Tag })
   tags?: shared.Tag[];
 }
 
 
 export class CreateSecurityProfileRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CreateSecurityProfilePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateSecurityProfileHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateSecurityProfileRequestBody;
 }
 
 
 export class CreateSecurityProfileResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createSecurityProfileResponse?: shared.CreateSecurityProfileResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalFailureException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceAlreadyExistsException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 }

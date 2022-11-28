@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CpuVendorArchitectureEnum } from "./cpuvendorarchitectureenum";
+
 
 
 // RecommendationPreferences
@@ -7,6 +8,6 @@ import { CpuVendorArchitectureEnum } from "./cpuvendorarchitectureenum";
  * Describes preferences for recommendations.
 **/
 export class RecommendationPreferences extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cpuVendorArchitectures" })
+  @SpeakeasyMetadata({ data: "json, name=cpuVendorArchitectures" })
   cpuVendorArchitectures?: CpuVendorArchitectureEnum[];
 }

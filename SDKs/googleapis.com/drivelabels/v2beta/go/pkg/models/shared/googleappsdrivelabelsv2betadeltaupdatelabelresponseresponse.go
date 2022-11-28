@@ -1,5 +1,7 @@
 package shared
 
+// GoogleAppsDriveLabelsV2betaDeltaUpdateLabelResponseResponse
+// A single response from an update.
 type GoogleAppsDriveLabelsV2betaDeltaUpdateLabelResponseResponse struct {
 	CreateField                     *GoogleAppsDriveLabelsV2betaDeltaUpdateLabelResponseCreateFieldResponse                     `json:"createField,omitempty"`
 	CreateSelectionChoice           *GoogleAppsDriveLabelsV2betaDeltaUpdateLabelResponseCreateSelectionChoiceResponse           `json:"createSelectionChoice,omitempty"`

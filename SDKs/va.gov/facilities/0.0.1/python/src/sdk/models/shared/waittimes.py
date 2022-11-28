@@ -1,15 +1,16 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import patientwaittime
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class WaitTimes:
-    effective_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'effective_date', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    health: Optional[List[patientwaittime.PatientWaitTime]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'health' }})
+    effective_date: Optional[date] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('effective_date'), 'encoder': utils.dateisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    health: Optional[List[PatientWaitTime]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('health') }})
     

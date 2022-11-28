@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -20,19 +21,19 @@ class ProximitybeaconGetEidparamsQueryParams:
 
 @dataclass
 class ProximitybeaconGetEidparamsSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ProximitybeaconGetEidparamsRequest:
-    query_params: ProximitybeaconGetEidparamsQueryParams = field(default=None)
-    security: ProximitybeaconGetEidparamsSecurity = field(default=None)
+    query_params: ProximitybeaconGetEidparamsQueryParams = field()
+    security: ProximitybeaconGetEidparamsSecurity = field()
     
 
 @dataclass
 class ProximitybeaconGetEidparamsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     ephemeral_id_registration_params: Optional[shared.EphemeralIDRegistrationParams] = field(default=None)
-    status_code: int = field(default=None)
     

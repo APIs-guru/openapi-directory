@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NumericBucketingOption } from "./numericbucketingoption";
+
 
 
 // CustomAttributeHistogramRequest
@@ -7,12 +8,12 @@ import { NumericBucketingOption } from "./numericbucketingoption";
  * Custom attributes histogram request. An error is thrown if neither string_value_histogram or long_value_histogram_bucketing_option has been defined.
 **/
 export class CustomAttributeHistogramRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: string;
 
-  @Metadata({ data: "json, name=longValueHistogramBucketingOption" })
+  @SpeakeasyMetadata({ data: "json, name=longValueHistogramBucketingOption" })
   longValueHistogramBucketingOption?: NumericBucketingOption;
 
-  @Metadata({ data: "json, name=stringValueHistogram" })
+  @SpeakeasyMetadata({ data: "json, name=stringValueHistogram" })
   stringValueHistogram?: boolean;
 }

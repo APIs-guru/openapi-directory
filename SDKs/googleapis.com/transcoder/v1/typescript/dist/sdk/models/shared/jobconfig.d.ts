@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AdBreak } from "./adbreak";
 import { EditAtom } from "./editatom";
 import { ElementaryStream } from "./elementarystream";

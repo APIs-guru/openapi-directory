@@ -26,6 +26,8 @@ const (
 	GoogleCloudDialogflowV2AgentTierEnumTierEnterprisePlus GoogleCloudDialogflowV2AgentTierEnum = "TIER_ENTERPRISE_PLUS"
 )
 
+// GoogleCloudDialogflowV2Agent
+// A Dialogflow agent is a virtual agent that handles conversations with your end-users. It is a natural language understanding module that understands the nuances of human language. Dialogflow translates end-user text or audio during a conversation to structured data that your apps and services can understand. You design and build a Dialogflow agent to handle the types of conversations required for your system. For more information about agents, see the [Agent guide](https://cloud.google.com/dialogflow/docs/agents-overview).
 type GoogleCloudDialogflowV2Agent struct {
 	APIVersion              *GoogleCloudDialogflowV2AgentAPIVersionEnum `json:"apiVersion,omitempty"`
 	AvatarURI               *string                                     `json:"avatarUri,omitempty"`

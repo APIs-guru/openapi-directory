@@ -9,6 +9,9 @@ const (
 	GoogleCloudDialogflowV2SpeechToTextConfigSpeechModelVariantEnumUseEnhanced                   GoogleCloudDialogflowV2SpeechToTextConfigSpeechModelVariantEnum = "USE_ENHANCED"
 )
 
+// GoogleCloudDialogflowV2SpeechToTextConfig
+// Configures speech transcription for ConversationProfile.
 type GoogleCloudDialogflowV2SpeechToTextConfig struct {
+	Model              *string                                                          `json:"model,omitempty"`
 	SpeechModelVariant *GoogleCloudDialogflowV2SpeechToTextConfigSpeechModelVariantEnum `json:"speechModelVariant,omitempty"`
 }

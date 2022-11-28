@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResolverRuleConfig } from "./resolverruleconfig";
 
 
+
 export class UpdateResolverRuleRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Config" })
+  @SpeakeasyMetadata({ data: "json, name=Config" })
   config: ResolverRuleConfig;
 
-  @Metadata({ data: "json, name=ResolverRuleId" })
+  @SpeakeasyMetadata({ data: "json, name=ResolverRuleId" })
   resolverRuleId: string;
 }

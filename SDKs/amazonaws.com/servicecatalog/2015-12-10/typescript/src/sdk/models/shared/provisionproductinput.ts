@@ -1,47 +1,47 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProvisioningParameter } from "./provisioningparameter";
 import { ProvisioningPreferences } from "./provisioningpreferences";
 import { Tag } from "./tag";
 
 
+
 export class ProvisionProductInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AcceptLanguage" })
+  @SpeakeasyMetadata({ data: "json, name=AcceptLanguage" })
   acceptLanguage?: string;
 
-  @Metadata({ data: "json, name=NotificationArns" })
+  @SpeakeasyMetadata({ data: "json, name=NotificationArns" })
   notificationArns?: string[];
 
-  @Metadata({ data: "json, name=PathId" })
+  @SpeakeasyMetadata({ data: "json, name=PathId" })
   pathId?: string;
 
-  @Metadata({ data: "json, name=PathName" })
+  @SpeakeasyMetadata({ data: "json, name=PathName" })
   pathName?: string;
 
-  @Metadata({ data: "json, name=ProductId" })
+  @SpeakeasyMetadata({ data: "json, name=ProductId" })
   productId?: string;
 
-  @Metadata({ data: "json, name=ProductName" })
+  @SpeakeasyMetadata({ data: "json, name=ProductName" })
   productName?: string;
 
-  @Metadata({ data: "json, name=ProvisionToken" })
+  @SpeakeasyMetadata({ data: "json, name=ProvisionToken" })
   provisionToken: string;
 
-  @Metadata({ data: "json, name=ProvisionedProductName" })
+  @SpeakeasyMetadata({ data: "json, name=ProvisionedProductName" })
   provisionedProductName: string;
 
-  @Metadata({ data: "json, name=ProvisioningArtifactId" })
+  @SpeakeasyMetadata({ data: "json, name=ProvisioningArtifactId" })
   provisioningArtifactId?: string;
 
-  @Metadata({ data: "json, name=ProvisioningArtifactName" })
+  @SpeakeasyMetadata({ data: "json, name=ProvisioningArtifactName" })
   provisioningArtifactName?: string;
 
-  @Metadata({ data: "json, name=ProvisioningParameters", elemType: shared.ProvisioningParameter })
+  @SpeakeasyMetadata({ data: "json, name=ProvisioningParameters", elemType: ProvisioningParameter })
   provisioningParameters?: ProvisioningParameter[];
 
-  @Metadata({ data: "json, name=ProvisioningPreferences" })
+  @SpeakeasyMetadata({ data: "json, name=ProvisioningPreferences" })
   provisioningPreferences?: ProvisioningPreferences;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 }

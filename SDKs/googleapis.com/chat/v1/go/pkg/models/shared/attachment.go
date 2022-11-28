@@ -8,6 +8,19 @@ const (
 	AttachmentSourceEnumUploadedContent   AttachmentSourceEnum = "UPLOADED_CONTENT"
 )
 
+// AttachmentInput
+// An attachment in Google Chat.
+type AttachmentInput struct {
+	AttachmentDataRef *AttachmentDataRef    `json:"attachmentDataRef,omitempty"`
+	ContentName       *string               `json:"contentName,omitempty"`
+	ContentType       *string               `json:"contentType,omitempty"`
+	DriveDataRef      *DriveDataRef         `json:"driveDataRef,omitempty"`
+	Name              *string               `json:"name,omitempty"`
+	Source            *AttachmentSourceEnum `json:"source,omitempty"`
+}
+
+// Attachment
+// An attachment in Google Chat.
 type Attachment struct {
 	AttachmentDataRef *AttachmentDataRef    `json:"attachmentDataRef,omitempty"`
 	ContentName       *string               `json:"contentName,omitempty"`

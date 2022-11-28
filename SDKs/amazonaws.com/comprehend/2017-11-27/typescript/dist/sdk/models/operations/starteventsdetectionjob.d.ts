@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum StartEventsDetectionJobXAmzTargetEnum {
     Comprehend20171127StartEventsDetectionJob = "Comprehend_20171127.StartEventsDetectionJob"

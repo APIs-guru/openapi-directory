@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class MonthlyActiveUsersForLast30DaysQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=app_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=app_id" })
   appId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ending_at" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ending_at" })
   endingAt?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=length" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=length" })
   length?: string;
 }
 
 
 export class MonthlyActiveUsersForLast30DaysRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: MonthlyActiveUsersForLast30DaysQueryParams;
 }
 
 
 export class MonthlyActiveUsersForLast30DaysResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

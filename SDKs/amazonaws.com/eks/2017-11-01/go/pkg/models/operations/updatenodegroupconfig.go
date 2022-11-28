@@ -19,22 +19,30 @@ type UpdateNodegroupConfigHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateNodegroupConfigRequestBodyLabels
+// An object representing a Kubernetes label change for a managed node group.
 type UpdateNodegroupConfigRequestBodyLabels struct {
 	AddOrUpdateLabels map[string]string `json:"addOrUpdateLabels,omitempty"`
 	RemoveLabels      []string          `json:"removeLabels,omitempty"`
 }
 
+// UpdateNodegroupConfigRequestBodyScalingConfig
+// An object representing the scaling configuration details for the Auto Scaling group that is associated with your node group. When creating a node group, you must specify all or none of the properties. When updating a node group, you can specify any or none of the properties.
 type UpdateNodegroupConfigRequestBodyScalingConfig struct {
 	DesiredSize *int64 `json:"desiredSize,omitempty"`
 	MaxSize     *int64 `json:"maxSize,omitempty"`
 	MinSize     *int64 `json:"minSize,omitempty"`
 }
 
+// UpdateNodegroupConfigRequestBodyTaints
+// An object representing the details of an update to a taints payload.
 type UpdateNodegroupConfigRequestBodyTaints struct {
 	AddOrUpdateTaints []shared.Taint `json:"addOrUpdateTaints,omitempty"`
 	RemoveTaints      []shared.Taint `json:"removeTaints,omitempty"`
 }
 
+// UpdateNodegroupConfigRequestBodyUpdateConfig
+// The node group update configuration.
 type UpdateNodegroupConfigRequestBodyUpdateConfig struct {
 	MaxUnavailable           *int64 `json:"maxUnavailable,omitempty"`
 	MaxUnavailablePercentage *int64 `json:"maxUnavailablePercentage,omitempty"`

@@ -4,7 +4,7 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-var CancelBookingQuoteServers = []string{
+var CancelBookingQuoteServerList = []string{
 	"https://api.sandbox.viator.com/partner",
 }
 

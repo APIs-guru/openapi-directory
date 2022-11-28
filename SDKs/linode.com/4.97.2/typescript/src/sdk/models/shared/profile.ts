@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ProfileAuthenticationTypeEnum {
-    Password = "password"
-,    Github = "github"
+    Password = "password",
+    Github = "github"
 }
 
 export enum ProfileLishAuthMethodEnum {
-    PasswordKeys = "password_keys"
-,    KeysOnly = "keys_only"
-,    Disabled = "disabled"
+    PasswordKeys = "password_keys",
+    KeysOnly = "keys_only",
+    Disabled = "disabled"
 }
 
 
@@ -20,23 +21,55 @@ export enum ProfileLishAuthMethodEnum {
  * 
 **/
 export class ProfileReferrals extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: string;
 
-  @Metadata({ data: "json, name=completed" })
+  @SpeakeasyMetadata({ data: "json, name=completed" })
   completed?: number;
 
-  @Metadata({ data: "json, name=credit" })
+  @SpeakeasyMetadata({ data: "json, name=credit" })
   credit?: number;
 
-  @Metadata({ data: "json, name=pending" })
+  @SpeakeasyMetadata({ data: "json, name=pending" })
   pending?: number;
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total?: number;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
+}
+
+
+// ProfileInput
+/** 
+ * A Profile represents your User in our system. This is where you can change information about your User. This information is available to any OAuth Client regardless of requested scopes, and can be used to populate User information in third-party applications.
+ * 
+**/
+export class ProfileInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=authorized_keys" })
+  authorizedKeys?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=email" })
+  email?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=email_notifications" })
+  emailNotifications?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=ip_whitelist_enabled" })
+  ipWhitelistEnabled?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=lish_auth_method" })
+  lishAuthMethod?: ProfileLishAuthMethodEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=restricted" })
+  restricted?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=timezone" })
+  timezone?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=two_factor_auth" })
+  twoFactorAuth?: boolean;
 }
 
 
@@ -46,39 +79,39 @@ export class ProfileReferrals extends SpeakeasyBase {
  * 
 **/
 export class Profile extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authentication_type" })
+  @SpeakeasyMetadata({ data: "json, name=authentication_type" })
   authenticationType?: ProfileAuthenticationTypeEnum;
 
-  @Metadata({ data: "json, name=authorized_keys" })
+  @SpeakeasyMetadata({ data: "json, name=authorized_keys" })
   authorizedKeys?: string[];
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=email_notifications" })
+  @SpeakeasyMetadata({ data: "json, name=email_notifications" })
   emailNotifications?: boolean;
 
-  @Metadata({ data: "json, name=ip_whitelist_enabled" })
+  @SpeakeasyMetadata({ data: "json, name=ip_whitelist_enabled" })
   ipWhitelistEnabled?: boolean;
 
-  @Metadata({ data: "json, name=lish_auth_method" })
+  @SpeakeasyMetadata({ data: "json, name=lish_auth_method" })
   lishAuthMethod?: ProfileLishAuthMethodEnum;
 
-  @Metadata({ data: "json, name=referrals" })
+  @SpeakeasyMetadata({ data: "json, name=referrals" })
   referrals?: ProfileReferrals;
 
-  @Metadata({ data: "json, name=restricted" })
+  @SpeakeasyMetadata({ data: "json, name=restricted" })
   restricted?: boolean;
 
-  @Metadata({ data: "json, name=timezone" })
+  @SpeakeasyMetadata({ data: "json, name=timezone" })
   timezone?: string;
 
-  @Metadata({ data: "json, name=two_factor_auth" })
+  @SpeakeasyMetadata({ data: "json, name=two_factor_auth" })
   twoFactorAuth?: boolean;
 
-  @Metadata({ data: "json, name=uid" })
+  @SpeakeasyMetadata({ data: "json, name=uid" })
   uid?: number;
 
-  @Metadata({ data: "json, name=username" })
+  @SpeakeasyMetadata({ data: "json, name=username" })
   username?: string;
 }

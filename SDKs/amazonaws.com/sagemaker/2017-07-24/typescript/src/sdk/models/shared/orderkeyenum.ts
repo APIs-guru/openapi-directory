@@ -1,6 +1,7 @@
 
 
+
 export enum OrderKeyEnum {
-    Ascending = "Ascending"
-,    Descending = "Descending"
+    Ascending = "Ascending",
+    Descending = "Descending"
 }

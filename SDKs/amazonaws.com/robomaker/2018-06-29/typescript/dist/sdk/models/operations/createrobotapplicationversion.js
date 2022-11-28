@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CreateRobotApplicationVersionHeaders = /** @class */ (function (_super) {
     __extends(CreateRobotApplicationVersionHeaders, _super);
@@ -30,31 +30,31 @@ var CreateRobotApplicationVersionHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], CreateRobotApplicationVersionHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], CreateRobotApplicationVersionHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], CreateRobotApplicationVersionHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], CreateRobotApplicationVersionHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], CreateRobotApplicationVersionHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], CreateRobotApplicationVersionHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], CreateRobotApplicationVersionHeaders.prototype, "xAmzSignedHeaders", void 0);
     return CreateRobotApplicationVersionHeaders;
@@ -66,19 +66,19 @@ var CreateRobotApplicationVersionRequestBody = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=application" }),
+        SpeakeasyMetadata({ data: "json, name=application" }),
         __metadata("design:type", String)
     ], CreateRobotApplicationVersionRequestBody.prototype, "application", void 0);
     __decorate([
-        Metadata({ data: "json, name=currentRevisionId" }),
+        SpeakeasyMetadata({ data: "json, name=currentRevisionId" }),
         __metadata("design:type", String)
     ], CreateRobotApplicationVersionRequestBody.prototype, "currentRevisionId", void 0);
     __decorate([
-        Metadata({ data: "json, name=imageDigest" }),
+        SpeakeasyMetadata({ data: "json, name=imageDigest" }),
         __metadata("design:type", String)
     ], CreateRobotApplicationVersionRequestBody.prototype, "imageDigest", void 0);
     __decorate([
-        Metadata({ data: "json, name=s3Etags" }),
+        SpeakeasyMetadata({ data: "json, name=s3Etags" }),
         __metadata("design:type", Array)
     ], CreateRobotApplicationVersionRequestBody.prototype, "s3Etags", void 0);
     return CreateRobotApplicationVersionRequestBody;
@@ -90,11 +90,11 @@ var CreateRobotApplicationVersionRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateRobotApplicationVersionHeaders)
     ], CreateRobotApplicationVersionRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", CreateRobotApplicationVersionRequestBody)
     ], CreateRobotApplicationVersionRequest.prototype, "request", void 0);
     return CreateRobotApplicationVersionRequest;
@@ -106,35 +106,35 @@ var CreateRobotApplicationVersionResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CreateRobotApplicationVersionResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.CreateRobotApplicationVersionResponse)
     ], CreateRobotApplicationVersionResponse.prototype, "createRobotApplicationVersionResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateRobotApplicationVersionResponse.prototype, "idempotentParameterMismatchException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateRobotApplicationVersionResponse.prototype, "internalServerException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateRobotApplicationVersionResponse.prototype, "invalidParameterException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateRobotApplicationVersionResponse.prototype, "limitExceededException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CreateRobotApplicationVersionResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateRobotApplicationVersionResponse.prototype, "throttlingException", void 0);
     return CreateRobotApplicationVersionResponse;

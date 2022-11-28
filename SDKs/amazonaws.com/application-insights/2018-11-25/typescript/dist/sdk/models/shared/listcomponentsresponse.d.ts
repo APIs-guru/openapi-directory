@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ApplicationComponent } from "./applicationcomponent";
 export declare class ListComponentsResponse extends SpeakeasyBase {
     applicationComponentList?: ApplicationComponent[];

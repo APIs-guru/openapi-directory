@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LoggingConfig } from "./loggingconfig";
 import { QueryList } from "./querylist";
+
 
 
 // TrinoJob
@@ -8,24 +9,24 @@ import { QueryList } from "./querylist";
  * A Dataproc job for running Trino (https://trino.io/) queries. IMPORTANT: The Dataproc Trino Optional Component (https://cloud.google.com/dataproc/docs/concepts/components/trino) must be enabled when the cluster is created to submit a Trino job to the cluster.
 **/
 export class TrinoJob extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clientTags" })
+  @SpeakeasyMetadata({ data: "json, name=clientTags" })
   clientTags?: string[];
 
-  @Metadata({ data: "json, name=continueOnFailure" })
+  @SpeakeasyMetadata({ data: "json, name=continueOnFailure" })
   continueOnFailure?: boolean;
 
-  @Metadata({ data: "json, name=loggingConfig" })
+  @SpeakeasyMetadata({ data: "json, name=loggingConfig" })
   loggingConfig?: LoggingConfig;
 
-  @Metadata({ data: "json, name=outputFormat" })
+  @SpeakeasyMetadata({ data: "json, name=outputFormat" })
   outputFormat?: string;
 
-  @Metadata({ data: "json, name=properties" })
+  @SpeakeasyMetadata({ data: "json, name=properties" })
   properties?: Map<string, string>;
 
-  @Metadata({ data: "json, name=queryFileUri" })
+  @SpeakeasyMetadata({ data: "json, name=queryFileUri" })
   queryFileUri?: string;
 
-  @Metadata({ data: "json, name=queryList" })
+  @SpeakeasyMetadata({ data: "json, name=queryList" })
   queryList?: QueryList;
 }

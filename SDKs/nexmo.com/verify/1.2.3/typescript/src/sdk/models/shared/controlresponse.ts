@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ControlResponseCommandEnum {
-    Cancel = "cancel"
-,    TriggerNextEvent = "trigger_next_event"
+    Cancel = "cancel",
+    TriggerNextEvent = "trigger_next_event"
 }
 
 
@@ -11,9 +12,9 @@ export enum ControlResponseCommandEnum {
  * Success
 **/
 export class ControlResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=command" })
+  @SpeakeasyMetadata({ data: "json, name=command" })
   command?: ControlResponseCommandEnum;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 }

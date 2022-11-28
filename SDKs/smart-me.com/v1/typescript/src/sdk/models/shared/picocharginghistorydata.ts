@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PicoChargingHistoryData
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Api container for the charging station history
 **/
 export class PicoChargingHistoryData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Duration" })
+  @SpeakeasyMetadata({ data: "json, name=Duration" })
   duration?: number;
 
-  @Metadata({ data: "json, name=EnergyUsed" })
+  @SpeakeasyMetadata({ data: "json, name=EnergyUsed" })
   energyUsed?: number;
 
-  @Metadata({ data: "json, name=StartTime" })
+  @SpeakeasyMetadata({ data: "json, name=StartTime" })
   startTime?: Date;
 }

@@ -1,4 +1,15 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
+/**
+ * Describes a particular version of an API. ApiVersions are what consumers actually use.
+**/
+export declare class ApiVersionInput extends SpeakeasyBase {
+    annotations?: Map<string, string>;
+    description?: string;
+    displayName?: string;
+    labels?: Map<string, string>;
+    name?: string;
+    state?: string;
+}
 /**
  * Describes a particular version of an API. ApiVersions are what consumers actually use.
 **/

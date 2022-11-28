@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .achievementdefinition import *
 from .achievementdefinitionslistresponse import *
 from .achievementincrementresponse import *

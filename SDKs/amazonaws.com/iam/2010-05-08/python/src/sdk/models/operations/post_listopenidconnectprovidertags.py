@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostListOpenIDConnectProviderTagsActionEnum(str, Enum):
     LIST_OPEN_ID_CONNECT_PROVIDER_TAGS = "ListOpenIDConnectProviderTags"
@@ -10,8 +14,8 @@ class PostListOpenIDConnectProviderTagsVersionEnum(str, Enum):
 
 @dataclass
 class PostListOpenIDConnectProviderTagsQueryParams:
-    action: PostListOpenIDConnectProviderTagsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostListOpenIDConnectProviderTagsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostListOpenIDConnectProviderTagsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostListOpenIDConnectProviderTagsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostListOpenIDConnectProviderTagsHeaders:
 
 @dataclass
 class PostListOpenIDConnectProviderTagsRequest:
-    query_params: PostListOpenIDConnectProviderTagsQueryParams = field(default=None)
-    headers: PostListOpenIDConnectProviderTagsHeaders = field(default=None)
+    headers: PostListOpenIDConnectProviderTagsHeaders = field()
+    query_params: PostListOpenIDConnectProviderTagsQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostListOpenIDConnectProviderTagsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

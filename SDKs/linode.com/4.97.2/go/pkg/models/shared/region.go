@@ -12,6 +12,8 @@ const (
 	RegionStatusEnumOutage RegionStatusEnum = "outage"
 )
 
+// Region
+// An area where Linode services are available.
 type Region struct {
 	Capabilities []string          `json:"capabilities,omitempty"`
 	Country      *string           `json:"country,omitempty"`

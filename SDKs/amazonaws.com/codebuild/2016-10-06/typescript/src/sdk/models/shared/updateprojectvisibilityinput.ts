@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProjectVisibilityTypeEnum } from "./projectvisibilitytypeenum";
 
 
+
 export class UpdateProjectVisibilityInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=projectArn" })
+  @SpeakeasyMetadata({ data: "json, name=projectArn" })
   projectArn: string;
 
-  @Metadata({ data: "json, name=projectVisibility" })
+  @SpeakeasyMetadata({ data: "json, name=projectVisibility" })
   projectVisibility: ProjectVisibilityTypeEnum;
 
-  @Metadata({ data: "json, name=resourceAccessRole" })
+  @SpeakeasyMetadata({ data: "json, name=resourceAccessRole" })
   resourceAccessRole?: string;
 }

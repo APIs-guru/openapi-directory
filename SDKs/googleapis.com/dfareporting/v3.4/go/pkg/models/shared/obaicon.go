@@ -1,5 +1,7 @@
 package shared
 
+// ObaIcon
+// Online Behavioral Advertiser icon.
 type ObaIcon struct {
 	IconClickThroughURL  *string `json:"iconClickThroughUrl,omitempty"`
 	IconClickTrackingURL *string `json:"iconClickTrackingUrl,omitempty"`

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ClusterStatus } from "./clusterstatus";
+
 
 
 // ClusterSummary
@@ -7,21 +8,21 @@ import { ClusterStatus } from "./clusterstatus";
  * The summary description of the cluster.
 **/
 export class ClusterSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClusterArn" })
+  @SpeakeasyMetadata({ data: "json, name=ClusterArn" })
   clusterArn?: string;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=NormalizedInstanceHours" })
+  @SpeakeasyMetadata({ data: "json, name=NormalizedInstanceHours" })
   normalizedInstanceHours?: number;
 
-  @Metadata({ data: "json, name=OutpostArn" })
+  @SpeakeasyMetadata({ data: "json, name=OutpostArn" })
   outpostArn?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: ClusterStatus;
 }

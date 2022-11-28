@@ -1,135 +1,199 @@
 import { AxiosInstance, AxiosRequestConfig } from "axios";
 import * as operations from "./models/operations";
 import { Security } from "./models/shared";
-declare type OptsFunc = (sdk: SDK) => void;
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://ibl.api.bbci.co.uk/ibl/v1", "http://ibl.api.bbci.co.uk/ibl/v1"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare function WithSecurity(security: Security): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _security?: Security;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
     /**
+     * getBroadcastsByChannel - Get broadcasts by channel
+     *
      * Get broadcasts by channel
     **/
-    GetBroadcastsByChannel(req: operations.GetBroadcastsByChannelRequest, config?: AxiosRequestConfig): Promise<operations.GetBroadcastsByChannelResponse>;
+    getBroadcastsByChannel(req: operations.GetBroadcastsByChannelRequest, config?: AxiosRequestConfig): Promise<operations.GetBroadcastsByChannelResponse>;
     /**
+     * getCategories - Get categories
+     *
      * Get the list of all the categories in TV & iPlayer.
     **/
-    GetCategories(req: operations.GetCategoriesRequest, config?: AxiosRequestConfig): Promise<operations.GetCategoriesResponse>;
+    getCategories(req: operations.GetCategoriesRequest, config?: AxiosRequestConfig): Promise<operations.GetCategoriesResponse>;
     /**
+     * getChannels - List all the channels.
+     *
      * Get the list of all the channels TV & iPlayer.
     **/
-    GetChannels(req: operations.GetChannelsRequest, config?: AxiosRequestConfig): Promise<operations.GetChannelsResponse>;
+    getChannels(req: operations.GetChannelsRequest, config?: AxiosRequestConfig): Promise<operations.GetChannelsResponse>;
     /**
+     * getClips - Get Clips
+     *
      * Get Clips
     **/
-    GetClips(req: operations.GetClipsRequest, config?: AxiosRequestConfig): Promise<operations.GetClipsResponse>;
+    getClips(req: operations.GetClipsRequest, config?: AxiosRequestConfig): Promise<operations.GetClipsResponse>;
     /**
+     * getEpisodesByCategory - List all the episodes for a category.
+     *
      * Get the list of all the episodes for a given category in TV & iPlayer.
     **/
-    GetEpisodesByCategory(req: operations.GetEpisodesByCategoryRequest, config?: AxiosRequestConfig): Promise<operations.GetEpisodesByCategoryResponse>;
+    getEpisodesByCategory(req: operations.GetEpisodesByCategoryRequest, config?: AxiosRequestConfig): Promise<operations.GetEpisodesByCategoryResponse>;
     /**
+     * getEpisodesByGroup - Get episodes by group, brand or series
+     *
      * Get episodes by group, brand or series
     **/
-    GetEpisodesByGroup(req: operations.GetEpisodesByGroupRequest, config?: AxiosRequestConfig): Promise<operations.GetEpisodesByGroupResponse>;
+    getEpisodesByGroup(req: operations.GetEpisodesByGroupRequest, config?: AxiosRequestConfig): Promise<operations.GetEpisodesByGroupResponse>;
     /**
+     * getEpisodesByParentPid - Child episodes for a given programme pid.
+     *
      * Get the child episodes belonging to a given programme identifier.
     **/
-    GetEpisodesByParentPid(req: operations.GetEpisodesByParentPidRequest, config?: AxiosRequestConfig): Promise<operations.GetEpisodesByParentPidResponse>;
+    getEpisodesByParentPid(req: operations.GetEpisodesByParentPidRequest, config?: AxiosRequestConfig): Promise<operations.GetEpisodesByParentPidResponse>;
     /**
+     * getHighlightsByCategory - List the highlights for a category.
+     *
      * Get the editorial highlights of a given category in TV & iPlayer.
     **/
-    GetHighlightsByCategory(req: operations.GetHighlightsByCategoryRequest, config?: AxiosRequestConfig): Promise<operations.GetHighlightsByCategoryResponse>;
+    getHighlightsByCategory(req: operations.GetHighlightsByCategoryRequest, config?: AxiosRequestConfig): Promise<operations.GetHighlightsByCategoryResponse>;
     /**
+     * getHighlightsByChannel - List the highlights for a channel.
+     *
      * Get the editorial highlights of a given channel in TV & iPlayer.
     **/
-    GetHighlightsByChannel(req: operations.GetHighlightsByChannelRequest, config?: AxiosRequestConfig): Promise<operations.GetHighlightsByChannelResponse>;
+    getHighlightsByChannel(req: operations.GetHighlightsByChannelRequest, config?: AxiosRequestConfig): Promise<operations.GetHighlightsByChannelResponse>;
     /**
+     * getOnwardJourney - Get Onward Journey
+     *
      * Get Onward Journey (next programme)
     **/
-    GetOnwardJourney(req: operations.GetOnwardJourneyRequest, config?: AxiosRequestConfig): Promise<operations.GetOnwardJourneyResponse>;
+    getOnwardJourney(req: operations.GetOnwardJourneyRequest, config?: AxiosRequestConfig): Promise<operations.GetOnwardJourneyResponse>;
     /**
+     * getProgrammeByPid - Episode for a given pid.
+     *
      * Get the episode for a given episode identifier.
     **/
-    GetProgrammeByPid(req: operations.GetProgrammeByPidRequest, config?: AxiosRequestConfig): Promise<operations.GetProgrammeByPidResponse>;
+    getProgrammeByPid(req: operations.GetProgrammeByPidRequest, config?: AxiosRequestConfig): Promise<operations.GetProgrammeByPidResponse>;
     /**
+     * getProgrammeHighlights - Get programme highlights
+     *
      * Get programme highlights
     **/
-    GetProgrammeHighlights(req: operations.GetProgrammeHighlightsRequest, config?: AxiosRequestConfig): Promise<operations.GetProgrammeHighlightsResponse>;
+    getProgrammeHighlights(req: operations.GetProgrammeHighlightsRequest, config?: AxiosRequestConfig): Promise<operations.GetProgrammeHighlightsResponse>;
     /**
+     * getProgrammeRecommendations - Get programme recommendations
+     *
      * Get programme recommendations
     **/
-    GetProgrammeRecommendations(req: operations.GetProgrammeRecommendationsRequest, config?: AxiosRequestConfig): Promise<operations.GetProgrammeRecommendationsResponse>;
+    getProgrammeRecommendations(req: operations.GetProgrammeRecommendationsRequest, config?: AxiosRequestConfig): Promise<operations.GetProgrammeRecommendationsResponse>;
     /**
+     * getProgrammesAtoZSearch - Programmes by initial title character
+     *
      * Get the Programmes whose title begins with the given initial character.
     **/
-    GetProgrammesAtoZSearch(req: operations.GetProgrammesAtoZSearchRequest, config?: AxiosRequestConfig): Promise<operations.GetProgrammesAtoZSearchResponse>;
+    getProgrammesAtoZSearch(req: operations.GetProgrammesAtoZSearchRequest, config?: AxiosRequestConfig): Promise<operations.GetProgrammesAtoZSearchResponse>;
     /**
+     * getProgrammesByCategory - List all the programmes for a category.
+     *
      * Get the list of all the Programmes (TLEOs) for a given category in TV & iPlayer.
     **/
-    GetProgrammesByCategory(req: operations.GetProgrammesByCategoryRequest, config?: AxiosRequestConfig): Promise<operations.GetProgrammesByCategoryResponse>;
+    getProgrammesByCategory(req: operations.GetProgrammesByCategoryRequest, config?: AxiosRequestConfig): Promise<operations.GetProgrammesByCategoryResponse>;
     /**
+     * getProgrammesByChannel - Get programmes by channel
+     *
      * Get programmes by channel
     **/
-    GetProgrammesByChannel(req: operations.GetProgrammesByChannelRequest, config?: AxiosRequestConfig): Promise<operations.GetProgrammesByChannelResponse>;
+    getProgrammesByChannel(req: operations.GetProgrammesByChannelRequest, config?: AxiosRequestConfig): Promise<operations.GetProgrammesByChannelResponse>;
     /**
+     * getProgrammesByParentPid - Programme for a given pid.
+     *
      * Get the programme for a given programme identifier.
     **/
-    GetProgrammesByParentPid(req: operations.GetProgrammesByParentPidRequest, config?: AxiosRequestConfig): Promise<operations.GetProgrammesByParentPidResponse>;
+    getProgrammesByParentPid(req: operations.GetProgrammesByParentPidRequest, config?: AxiosRequestConfig): Promise<operations.GetProgrammesByParentPidResponse>;
     /**
+     * getProgrammesPopular - Get programmes popular
+     *
      * Get programmes popular
     **/
-    GetProgrammesPopular(req: operations.GetProgrammesPopularRequest, config?: AxiosRequestConfig): Promise<operations.GetProgrammesPopularResponse>;
+    getProgrammesPopular(req: operations.GetProgrammesPopularRequest, config?: AxiosRequestConfig): Promise<operations.GetProgrammesPopularResponse>;
     /**
+     * getRegions - List all regions
+     *
      * Get the list of all the regions TV & iPlayer.
     **/
-    GetRegions(req: operations.GetRegionsRequest, config?: AxiosRequestConfig): Promise<operations.GetRegionsResponse>;
+    getRegions(req: operations.GetRegionsRequest, config?: AxiosRequestConfig): Promise<operations.GetRegionsResponse>;
     /**
+     * getScheduleByChannel - Get schedule by channel
+     *
      * Get schedule by channel
     **/
-    GetScheduleByChannel(req: operations.GetScheduleByChannelRequest, config?: AxiosRequestConfig): Promise<operations.GetScheduleByChannelResponse>;
+    getScheduleByChannel(req: operations.GetScheduleByChannelRequest, config?: AxiosRequestConfig): Promise<operations.GetScheduleByChannelResponse>;
     /**
+     * getSchema - Get schema
+     *
      * Get schema
     **/
-    GetSchema(config?: AxiosRequestConfig): Promise<operations.GetSchemaResponse>;
+    getSchema(config?: AxiosRequestConfig): Promise<operations.GetSchemaResponse>;
     /**
+     * getStatus - Get status
+     *
      * Get the current iPlayer business layer status. This tells the caller the status of the iPlayer data, but not necessarily the overall status of the website. In the future it might include the status of the dependent data services within the BBC.
     **/
-    GetStatus(config?: AxiosRequestConfig): Promise<operations.GetStatusResponse>;
+    getStatus(config?: AxiosRequestConfig): Promise<operations.GetStatusResponse>;
     /**
+     * getSubCategories - Get sub-categories
+     *
      * Get sub-categories
     **/
-    GetSubCategories(req: operations.GetSubCategoriesRequest, config?: AxiosRequestConfig): Promise<operations.GetSubCategoriesResponse>;
+    getSubCategories(req: operations.GetSubCategoriesRequest, config?: AxiosRequestConfig): Promise<operations.GetSubCategoriesResponse>;
     /**
+     * getTrailersPreRolls - Get Trailers (pre-rolls)
+     *
      * Get Trailers (pre-rolls)
     **/
-    GetTrailersPreRolls(req: operations.GetTrailersPreRollsRequest, config?: AxiosRequestConfig): Promise<operations.GetTrailersPreRollsResponse>;
+    getTrailersPreRolls(req: operations.GetTrailersPreRollsRequest, config?: AxiosRequestConfig): Promise<operations.GetTrailersPreRollsResponse>;
     /**
+     * getUserStorePurchases - Get user store purchases
+     *
      * Get user store purchases
     **/
-    GetUserStorePurchases(req: operations.GetUserStorePurchasesRequest, config?: AxiosRequestConfig): Promise<operations.GetUserStorePurchasesResponse>;
+    getUserStorePurchases(req: operations.GetUserStorePurchasesRequest, config?: AxiosRequestConfig): Promise<operations.GetUserStorePurchasesResponse>;
     /**
+     * getUserStoreRecommendations - Get user store recommendations
+     *
      * Get user store recommendations
     **/
-    GetUserStoreRecommendations(req: operations.GetUserStoreRecommendationsRequest, config?: AxiosRequestConfig): Promise<operations.GetUserStoreRecommendationsResponse>;
+    getUserStoreRecommendations(req: operations.GetUserStoreRecommendationsRequest, config?: AxiosRequestConfig): Promise<operations.GetUserStoreRecommendationsResponse>;
     /**
+     * getUserWatching - Get user watching
+     *
      * Get user watching
     **/
-    GetUserWatching(req: operations.GetUserWatchingRequest, config?: AxiosRequestConfig): Promise<operations.GetUserWatchingResponse>;
+    getUserWatching(req: operations.GetUserWatchingRequest, config?: AxiosRequestConfig): Promise<operations.GetUserWatchingResponse>;
     /**
+     * searchSuggest - Search-suggest
+     *
      * Search-suggest
     **/
-    SearchSuggest(req: operations.SearchSuggestRequest, config?: AxiosRequestConfig): Promise<operations.SearchSuggestResponse>;
+    searchSuggest(req: operations.SearchSuggestRequest, config?: AxiosRequestConfig): Promise<operations.SearchSuggestResponse>;
     /**
+     * search - Search
+     *
      * Search
     **/
-    Search(req: operations.SearchRequest, config?: AxiosRequestConfig): Promise<operations.SearchResponse>;
+    search(req: operations.SearchRequest, config?: AxiosRequestConfig): Promise<operations.SearchResponse>;
     /**
+     * getPostRolls - Get Follow-ups (post-rolls)
+     *
      * Get Follow-ups (post-rolls)
     **/
-    GetPostRolls(req: operations.GetPostRollsRequest, config?: AxiosRequestConfig): Promise<operations.GetPostRollsResponse>;
+    getPostRolls(req: operations.GetPostRollsRequest, config?: AxiosRequestConfig): Promise<operations.GetPostRollsResponse>;
 }
 export {};

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResolverRuleConfig } from "./resolverruleconfig";
 var UpdateResolverRuleRequest = /** @class */ (function (_super) {
     __extends(UpdateResolverRuleRequest, _super);
@@ -30,11 +30,11 @@ var UpdateResolverRuleRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Config" }),
+        SpeakeasyMetadata({ data: "json, name=Config" }),
         __metadata("design:type", ResolverRuleConfig)
     ], UpdateResolverRuleRequest.prototype, "config", void 0);
     __decorate([
-        Metadata({ data: "json, name=ResolverRuleId" }),
+        SpeakeasyMetadata({ data: "json, name=ResolverRuleId" }),
         __metadata("design:type", String)
     ], UpdateResolverRuleRequest.prototype, "resolverRuleId", void 0);
     return UpdateResolverRuleRequest;

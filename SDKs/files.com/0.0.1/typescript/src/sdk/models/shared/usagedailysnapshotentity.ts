@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // UsageDailySnapshotEntity
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * List Usage Daily Snapshots
 **/
 export class UsageDailySnapshotEntity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=current_storage" })
+  @SpeakeasyMetadata({ data: "json, name=current_storage" })
   currentStorage?: number;
 
-  @Metadata({ data: "json, name=date" })
+  @SpeakeasyMetadata({ data: "json, name=date" })
   date?: Date;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=usage_by_top_level_dir" })
+  @SpeakeasyMetadata({ data: "json, name=usage_by_top_level_dir" })
   usageByTopLevelDir?: any[];
 }

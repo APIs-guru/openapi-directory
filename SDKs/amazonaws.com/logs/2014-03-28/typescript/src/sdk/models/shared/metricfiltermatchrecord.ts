@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MetricFilterMatchRecord
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents a matched event.
 **/
 export class MetricFilterMatchRecord extends SpeakeasyBase {
-  @Metadata({ data: "json, name=eventMessage" })
+  @SpeakeasyMetadata({ data: "json, name=eventMessage" })
   eventMessage?: string;
 
-  @Metadata({ data: "json, name=eventNumber" })
+  @SpeakeasyMetadata({ data: "json, name=eventNumber" })
   eventNumber?: number;
 
-  @Metadata({ data: "json, name=extractedValues" })
+  @SpeakeasyMetadata({ data: "json, name=extractedValues" })
   extractedValues?: Map<string, string>;
 }

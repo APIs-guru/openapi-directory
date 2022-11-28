@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetWinProbabilityDataQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=gameId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=gameId" })
   gameId: number;
 }
 
 
 export class GetWinProbabilityDataRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetWinProbabilityDataQueryParams;
 }
 
 
 export class GetWinProbabilityDataResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.PlayWp })
+  @SpeakeasyMetadata({ elemType: shared.PlayWp })
   playWps?: shared.PlayWp[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

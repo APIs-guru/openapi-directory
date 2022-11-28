@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DomainControllerStatusEnum } from "./domaincontrollerstatusenum";
 // DomainController
 /**
@@ -34,43 +34,43 @@ var DomainController = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AvailabilityZone" }),
+        SpeakeasyMetadata({ data: "json, name=AvailabilityZone" }),
         __metadata("design:type", String)
     ], DomainController.prototype, "availabilityZone", void 0);
     __decorate([
-        Metadata({ data: "json, name=DirectoryId" }),
+        SpeakeasyMetadata({ data: "json, name=DirectoryId" }),
         __metadata("design:type", String)
     ], DomainController.prototype, "directoryId", void 0);
     __decorate([
-        Metadata({ data: "json, name=DnsIpAddr" }),
+        SpeakeasyMetadata({ data: "json, name=DnsIpAddr" }),
         __metadata("design:type", String)
     ], DomainController.prototype, "dnsIpAddr", void 0);
     __decorate([
-        Metadata({ data: "json, name=DomainControllerId" }),
+        SpeakeasyMetadata({ data: "json, name=DomainControllerId" }),
         __metadata("design:type", String)
     ], DomainController.prototype, "domainControllerId", void 0);
     __decorate([
-        Metadata({ data: "json, name=LaunchTime" }),
+        SpeakeasyMetadata({ data: "json, name=LaunchTime" }),
         __metadata("design:type", Date)
     ], DomainController.prototype, "launchTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=Status" }),
+        SpeakeasyMetadata({ data: "json, name=Status" }),
         __metadata("design:type", String)
     ], DomainController.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=StatusLastUpdatedDateTime" }),
+        SpeakeasyMetadata({ data: "json, name=StatusLastUpdatedDateTime" }),
         __metadata("design:type", Date)
     ], DomainController.prototype, "statusLastUpdatedDateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=StatusReason" }),
+        SpeakeasyMetadata({ data: "json, name=StatusReason" }),
         __metadata("design:type", String)
     ], DomainController.prototype, "statusReason", void 0);
     __decorate([
-        Metadata({ data: "json, name=SubnetId" }),
+        SpeakeasyMetadata({ data: "json, name=SubnetId" }),
         __metadata("design:type", String)
     ], DomainController.prototype, "subnetId", void 0);
     __decorate([
-        Metadata({ data: "json, name=VpcId" }),
+        SpeakeasyMetadata({ data: "json, name=VpcId" }),
         __metadata("design:type", String)
     ], DomainController.prototype, "vpcId", void 0);
     return DomainController;

@@ -1,5 +1,7 @@
 package shared
 
+// Workspace
+// A single workspace.
 type Workspace struct {
 	CreateTime  *string `json:"createTime,omitempty"`
 	DisplayName *string `json:"displayName,omitempty"`

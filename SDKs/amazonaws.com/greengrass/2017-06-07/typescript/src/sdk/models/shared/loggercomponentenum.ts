@@ -1,6 +1,7 @@
 
 
+
 export enum LoggerComponentEnum {
-    GreengrassSystem = "GreengrassSystem"
-,    Lambda = "Lambda"
+    GreengrassSystem = "GreengrassSystem",
+    Lambda = "Lambda"
 }

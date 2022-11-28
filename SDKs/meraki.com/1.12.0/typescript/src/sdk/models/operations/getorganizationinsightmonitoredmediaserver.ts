@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetOrganizationInsightMonitoredMediaServerPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=monitoredMediaServerId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=monitoredMediaServerId" })
   monitoredMediaServerId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=organizationId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=organizationId" })
   organizationId: string;
 }
 
 
 export class GetOrganizationInsightMonitoredMediaServerRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetOrganizationInsightMonitoredMediaServerPathParams;
 }
 
 
 export class GetOrganizationInsightMonitoredMediaServerResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getOrganizationInsightMonitoredMediaServer200ApplicationJsonObject?: Map<string, any>;
 }

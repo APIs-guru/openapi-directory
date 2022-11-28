@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class LanguagesUpdateLanguagePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=LocaleID" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=LocaleID" })
   localeId: number;
 }
 
 
 export class LanguagesUpdateLanguageRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/xml" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/xml" })
   applicationXml: Uint8Array;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   globalResourcesSharedModelsLanguage?: shared.GlobalResourcesSharedModelsLanguage;
 
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
   globalResourcesSharedModelsLanguage1?: shared.GlobalResourcesSharedModelsLanguage;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   globalResourcesSharedModelsLanguage2?: shared.GlobalResourcesSharedModelsLanguage;
 
-  @Metadata({ data: "request, media_type=text/xml" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/xml" })
   textXml: Uint8Array;
 }
 
 
 export class LanguagesUpdateLanguageRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: LanguagesUpdateLanguagePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request: LanguagesUpdateLanguageRequests;
 }
 
 
 export class LanguagesUpdateLanguageResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class FundingEventTypeEnum(str, Enum):
     PAYOR_FUNDING_DETECTED = "PAYOR_FUNDING_DETECTED"

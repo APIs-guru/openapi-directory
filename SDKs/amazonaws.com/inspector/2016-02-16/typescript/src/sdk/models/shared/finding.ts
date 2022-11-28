@@ -1,11 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AssetAttributes } from "./assetattributes";
 import { AssetTypeEnum } from "./assettypeenum";
 import { Attribute } from "./attribute";
 import { InspectorServiceAttributes } from "./inspectorserviceattributes";
 import { SeverityEnum } from "./severityenum";
-import { Attribute } from "./attribute";
+
 
 
 // Finding
@@ -13,57 +12,57 @@ import { Attribute } from "./attribute";
  * Contains information about an Amazon Inspector finding. This data type is used as the response element in the <a>DescribeFindings</a> action.
 **/
 export class Finding extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn: string;
 
-  @Metadata({ data: "json, name=assetAttributes" })
+  @SpeakeasyMetadata({ data: "json, name=assetAttributes" })
   assetAttributes?: AssetAttributes;
 
-  @Metadata({ data: "json, name=assetType" })
+  @SpeakeasyMetadata({ data: "json, name=assetType" })
   assetType?: AssetTypeEnum;
 
-  @Metadata({ data: "json, name=attributes", elemType: shared.Attribute })
+  @SpeakeasyMetadata({ data: "json, name=attributes", elemType: Attribute })
   attributes: Attribute[];
 
-  @Metadata({ data: "json, name=confidence" })
+  @SpeakeasyMetadata({ data: "json, name=confidence" })
   confidence?: number;
 
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt: Date;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=indicatorOfCompromise" })
+  @SpeakeasyMetadata({ data: "json, name=indicatorOfCompromise" })
   indicatorOfCompromise?: boolean;
 
-  @Metadata({ data: "json, name=numericSeverity" })
+  @SpeakeasyMetadata({ data: "json, name=numericSeverity" })
   numericSeverity?: number;
 
-  @Metadata({ data: "json, name=recommendation" })
+  @SpeakeasyMetadata({ data: "json, name=recommendation" })
   recommendation?: string;
 
-  @Metadata({ data: "json, name=schemaVersion" })
+  @SpeakeasyMetadata({ data: "json, name=schemaVersion" })
   schemaVersion?: number;
 
-  @Metadata({ data: "json, name=service" })
+  @SpeakeasyMetadata({ data: "json, name=service" })
   service?: string;
 
-  @Metadata({ data: "json, name=serviceAttributes" })
+  @SpeakeasyMetadata({ data: "json, name=serviceAttributes" })
   serviceAttributes?: InspectorServiceAttributes;
 
-  @Metadata({ data: "json, name=severity" })
+  @SpeakeasyMetadata({ data: "json, name=severity" })
   severity?: SeverityEnum;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=updatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=updatedAt" })
   updatedAt: Date;
 
-  @Metadata({ data: "json, name=userAttributes", elemType: shared.Attribute })
+  @SpeakeasyMetadata({ data: "json, name=userAttributes", elemType: Attribute })
   userAttributes: Attribute[];
 }

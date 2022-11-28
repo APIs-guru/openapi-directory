@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudIntegrationsV1alphaMonitorExecutionStatsRequestMashQueryComponent } from "./googlecloudintegrationsv1alphamonitorexecutionstatsrequestmashquerycomponent";
 import { GoogleCloudIntegrationsV1alphaMonitorExecutionStatsRequestMashQueryOperationMode } from "./googlecloudintegrationsv1alphamonitorexecutionstatsrequestmashqueryoperationmode";
-import { GoogleCloudIntegrationsV1alphaMonitorExecutionStatsRequestMashQueryComponent } from "./googlecloudintegrationsv1alphamonitorexecutionstatsrequestmashquerycomponent";
+
 
 
 // GoogleCloudIntegrationsV1alphaMonitorExecutionStatsRequestMashQuery
@@ -9,12 +9,12 @@ import { GoogleCloudIntegrationsV1alphaMonitorExecutionStatsRequestMashQueryComp
  * The MashQuery for searching data, set both queries for Join Operation.
 **/
 export class GoogleCloudIntegrationsV1alphaMonitorExecutionStatsRequestMashQuery extends SpeakeasyBase {
-  @Metadata({ data: "json, name=firstQuery" })
+  @SpeakeasyMetadata({ data: "json, name=firstQuery" })
   firstQuery?: GoogleCloudIntegrationsV1alphaMonitorExecutionStatsRequestMashQueryComponent;
 
-  @Metadata({ data: "json, name=operationMode" })
+  @SpeakeasyMetadata({ data: "json, name=operationMode" })
   operationMode?: GoogleCloudIntegrationsV1alphaMonitorExecutionStatsRequestMashQueryOperationMode;
 
-  @Metadata({ data: "json, name=secondQuery" })
+  @SpeakeasyMetadata({ data: "json, name=secondQuery" })
   secondQuery?: GoogleCloudIntegrationsV1alphaMonitorExecutionStatsRequestMashQueryComponent;
 }

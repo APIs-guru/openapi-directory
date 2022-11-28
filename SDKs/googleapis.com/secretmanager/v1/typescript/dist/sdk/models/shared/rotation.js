@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Rotation
 /**
  * The rotation time and period for a Secret. At next_rotation_time, Secret Manager will send a Pub/Sub notification to the topics configured on the Secret. Secret.topics must be set to configure rotation.
@@ -33,11 +33,11 @@ var Rotation = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=nextRotationTime" }),
+        SpeakeasyMetadata({ data: "json, name=nextRotationTime" }),
         __metadata("design:type", String)
     ], Rotation.prototype, "nextRotationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=rotationPeriod" }),
+        SpeakeasyMetadata({ data: "json, name=rotationPeriod" }),
         __metadata("design:type", String)
     ], Rotation.prototype, "rotationPeriod", void 0);
     return Rotation;

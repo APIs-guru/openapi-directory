@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AndroiddeviceprovisioningCustomersConfigurationsPatchPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,14 +30,14 @@ class AndroiddeviceprovisioningCustomersConfigurationsPatchQueryParams:
 
 @dataclass
 class AndroiddeviceprovisioningCustomersConfigurationsPatchRequest:
-    path_params: AndroiddeviceprovisioningCustomersConfigurationsPatchPathParams = field(default=None)
-    query_params: AndroiddeviceprovisioningCustomersConfigurationsPatchQueryParams = field(default=None)
-    request: Optional[shared.Configuration] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    path_params: AndroiddeviceprovisioningCustomersConfigurationsPatchPathParams = field()
+    query_params: AndroiddeviceprovisioningCustomersConfigurationsPatchQueryParams = field()
+    request: Optional[shared.ConfigurationInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class AndroiddeviceprovisioningCustomersConfigurationsPatchResponse:
+    content_type: str = field()
+    status_code: int = field()
     configuration: Optional[shared.Configuration] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

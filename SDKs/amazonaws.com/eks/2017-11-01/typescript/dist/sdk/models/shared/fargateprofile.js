@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { FargateProfileSelector } from "./fargateprofileselector";
 import { FargateProfileStatusEnum } from "./fargateprofilestatusenum";
 // FargateProfile
 /**
@@ -35,39 +35,39 @@ var FargateProfile = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=clusterName" }),
+        SpeakeasyMetadata({ data: "json, name=clusterName" }),
         __metadata("design:type", String)
     ], FargateProfile.prototype, "clusterName", void 0);
     __decorate([
-        Metadata({ data: "json, name=createdAt" }),
+        SpeakeasyMetadata({ data: "json, name=createdAt" }),
         __metadata("design:type", Date)
     ], FargateProfile.prototype, "createdAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=fargateProfileArn" }),
+        SpeakeasyMetadata({ data: "json, name=fargateProfileArn" }),
         __metadata("design:type", String)
     ], FargateProfile.prototype, "fargateProfileArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=fargateProfileName" }),
+        SpeakeasyMetadata({ data: "json, name=fargateProfileName" }),
         __metadata("design:type", String)
     ], FargateProfile.prototype, "fargateProfileName", void 0);
     __decorate([
-        Metadata({ data: "json, name=podExecutionRoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=podExecutionRoleArn" }),
         __metadata("design:type", String)
     ], FargateProfile.prototype, "podExecutionRoleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=selectors", elemType: shared.FargateProfileSelector }),
+        SpeakeasyMetadata({ data: "json, name=selectors", elemType: FargateProfileSelector }),
         __metadata("design:type", Array)
     ], FargateProfile.prototype, "selectors", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], FargateProfile.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=subnets" }),
+        SpeakeasyMetadata({ data: "json, name=subnets" }),
         __metadata("design:type", Array)
     ], FargateProfile.prototype, "subnets", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags" }),
+        SpeakeasyMetadata({ data: "json, name=tags" }),
         __metadata("design:type", Map)
     ], FargateProfile.prototype, "tags", void 0);
     return FargateProfile;

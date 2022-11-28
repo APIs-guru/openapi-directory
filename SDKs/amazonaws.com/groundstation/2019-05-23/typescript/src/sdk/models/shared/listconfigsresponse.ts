@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConfigListItem } from "./configlistitem";
+
 
 
 // ListConfigsResponse
@@ -8,9 +8,9 @@ import { ConfigListItem } from "./configlistitem";
  * <p/>
 **/
 export class ListConfigsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=configList", elemType: shared.ConfigListItem })
+  @SpeakeasyMetadata({ data: "json, name=configList", elemType: ConfigListItem })
   configList?: ConfigListItem[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

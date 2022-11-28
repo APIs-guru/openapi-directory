@@ -1,27 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ControllersFilterData } from "./controllersfilterdata";
 
 
+
 export class ControllersListMeta extends SpeakeasyBase {
-  @Metadata({ data: "json, name=filter", elemType: shared.ControllersFilterData })
+  @SpeakeasyMetadata({ data: "json, name=filter", elemType: ControllersFilterData })
   filter?: Map<string, ControllersFilterData>;
 
-  @Metadata({ data: "json, name=limit" })
+  @SpeakeasyMetadata({ data: "json, name=limit" })
   limit?: number;
 
-  @Metadata({ data: "json, name=offset" })
+  @SpeakeasyMetadata({ data: "json, name=offset" })
   offset?: number;
 
-  @Metadata({ data: "json, name=search" })
+  @SpeakeasyMetadata({ data: "json, name=search" })
   search?: string;
 
-  @Metadata({ data: "json, name=sort" })
+  @SpeakeasyMetadata({ data: "json, name=sort" })
   sort?: string[];
 
-  @Metadata({ data: "json, name=subtotals" })
+  @SpeakeasyMetadata({ data: "json, name=subtotals" })
   subtotals?: Map<string, number>;
 
-  @Metadata({ data: "json, name=total_items" })
+  @SpeakeasyMetadata({ data: "json, name=total_items" })
   totalItems?: number;
 }

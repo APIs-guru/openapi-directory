@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CreateAuthUriResponse
@@ -6,30 +7,30 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Response of creating the IDP authentication URL.
 **/
 export class CreateAuthUriResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allProviders" })
+  @SpeakeasyMetadata({ data: "json, name=allProviders" })
   allProviders?: string[];
 
-  @Metadata({ data: "json, name=authUri" })
+  @SpeakeasyMetadata({ data: "json, name=authUri" })
   authUri?: string;
 
-  @Metadata({ data: "json, name=captchaRequired" })
+  @SpeakeasyMetadata({ data: "json, name=captchaRequired" })
   captchaRequired?: boolean;
 
-  @Metadata({ data: "json, name=forExistingProvider" })
+  @SpeakeasyMetadata({ data: "json, name=forExistingProvider" })
   forExistingProvider?: boolean;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=providerId" })
+  @SpeakeasyMetadata({ data: "json, name=providerId" })
   providerId?: string;
 
-  @Metadata({ data: "json, name=registered" })
+  @SpeakeasyMetadata({ data: "json, name=registered" })
   registered?: boolean;
 
-  @Metadata({ data: "json, name=sessionId" })
+  @SpeakeasyMetadata({ data: "json, name=sessionId" })
   sessionId?: string;
 
-  @Metadata({ data: "json, name=signinMethods" })
+  @SpeakeasyMetadata({ data: "json, name=signinMethods" })
   signinMethods?: string[];
 }

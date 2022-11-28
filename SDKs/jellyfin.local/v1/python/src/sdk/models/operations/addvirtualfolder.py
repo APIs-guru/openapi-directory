@@ -20,18 +20,18 @@ class AddVirtualFolderRequests:
 
 @dataclass
 class AddVirtualFolderSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class AddVirtualFolderRequest:
-    query_params: AddVirtualFolderQueryParams = field(default=None)
+    query_params: AddVirtualFolderQueryParams = field()
+    security: AddVirtualFolderSecurity = field()
     request: Optional[AddVirtualFolderRequests] = field(default=None)
-    security: AddVirtualFolderSecurity = field(default=None)
     
 
 @dataclass
 class AddVirtualFolderResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

@@ -1,6 +1,7 @@
 
 
+
 export enum TrainingModeEnum {
-    Full = "FULL"
-,    Update = "UPDATE"
+    Full = "FULL",
+    Update = "UPDATE"
 }

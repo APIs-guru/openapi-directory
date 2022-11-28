@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import List,Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,30 +14,50 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def get_forecast(self, request: operations.GetForecastRequest) -> operations.GetForecastResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get hourly UV Index Forecast by location and date. Optional altitude, ozone level and datetime could be provided.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/forecast"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -49,17 +72,18 @@ class SDK:
 
     
     def get_protection(self, request: operations.GetProtectionRequest) -> operations.GetProtectionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get daily protection time by location, UV Index from and UV Index to with 10 minutes accuracy. Optional altitide and ozone level could be provided.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/protection"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -74,17 +98,18 @@ class SDK:
 
     
     def get_uv(self, request: operations.GetUvRequest) -> operations.GetUvResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get real-time UV Index by location. Optional altitude, ozone level and datetime could be provided.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/uv"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 

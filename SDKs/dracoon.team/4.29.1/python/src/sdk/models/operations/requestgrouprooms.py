@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class RequestGroupRoomsPathParams:
-    group_id: int = field(default=None, metadata={'path_param': { 'field_name': 'group_id', 'style': 'simple', 'explode': False }})
+    group_id: int = field(metadata={'path_param': { 'field_name': 'group_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,15 +26,15 @@ class RequestGroupRoomsHeaders:
 
 @dataclass
 class RequestGroupRoomsRequest:
-    path_params: RequestGroupRoomsPathParams = field(default=None)
-    query_params: RequestGroupRoomsQueryParams = field(default=None)
-    headers: RequestGroupRoomsHeaders = field(default=None)
+    headers: RequestGroupRoomsHeaders = field()
+    path_params: RequestGroupRoomsPathParams = field()
+    query_params: RequestGroupRoomsQueryParams = field()
     
 
 @dataclass
 class RequestGroupRoomsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     room_tree_data_list: Optional[shared.RoomTreeDataList] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,22 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Tax } from "./tax";
-import { Tax } from "./tax";
+
 
 
 export class AllowanceCharge extends SpeakeasyBase {
-  @Metadata({ data: "json, name=amountExcludingVat" })
+  @SpeakeasyMetadata({ data: "json, name=amountExcludingVat" })
   amountExcludingVat: number;
 
-  @Metadata({ data: "json, name=reason" })
+  @SpeakeasyMetadata({ data: "json, name=reason" })
   reason?: string;
 
-  @Metadata({ data: "json, name=reasonCode" })
+  @SpeakeasyMetadata({ data: "json, name=reasonCode" })
   reasonCode?: string;
 
-  @Metadata({ data: "json, name=tax" })
+  @SpeakeasyMetadata({ data: "json, name=tax" })
   tax: Tax;
 
-  @Metadata({ data: "json, name=taxes_duties_fees", elemType: shared.Tax })
+  @SpeakeasyMetadata({ data: "json, name=taxes_duties_fees", elemType: Tax })
   taxesDutiesFees?: Tax[];
 }

@@ -1,51 +1,52 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetListOfCountriesFormatEnum {
-    Json = "json"
-,    Xml = "xml"
+    Json = "json",
+    Xml = "xml"
 }
 
 
 export class GetListOfCountriesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=format" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=format" })
   format?: GetListOfCountriesFormatEnum;
 }
 
 
-export class GetListOfCountriesRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetListOfCountriesQueryParams;
-}
-
-
 export class GetListOfCountries200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alpha-2-code" })
+  @SpeakeasyMetadata({ data: "json, name=alpha-2-code" })
   alpha2Code?: string;
 
-  @Metadata({ data: "json, name=alpha-3-code" })
+  @SpeakeasyMetadata({ data: "json, name=alpha-3-code" })
   alpha3Code?: string;
 
-  @Metadata({ data: "json, name=latitude" })
+  @SpeakeasyMetadata({ data: "json, name=latitude" })
   latitude?: number;
 
-  @Metadata({ data: "json, name=longitude" })
+  @SpeakeasyMetadata({ data: "json, name=longitude" })
   longitude?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
 
 
+export class GetListOfCountriesRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetListOfCountriesQueryParams;
+}
+
+
 export class GetListOfCountriesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: operations.GetListOfCountries200ApplicationJson })
+  @SpeakeasyMetadata({ elemType: GetListOfCountries200ApplicationJson })
   getListOfCountries200ApplicationJsonObjects?: GetListOfCountries200ApplicationJson[];
 }

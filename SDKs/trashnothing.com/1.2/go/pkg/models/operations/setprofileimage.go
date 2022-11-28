@@ -17,13 +17,13 @@ type SetProfileImageRequestBody struct {
 	SetDefault       *int64                           `multipartForm:"name=set_default"`
 }
 
-type SetProfileImageRequest struct {
-	Request *SetProfileImageRequestBody `request:"mediaType=multipart/form-data"`
-}
-
 type SetProfileImage200ApplicationJSON struct {
 	Photo *shared.PhotoResult `json:"photo,omitempty"`
 	User  *shared.CurrentUser `json:"user,omitempty"`
+}
+
+type SetProfileImageRequest struct {
+	Request *SetProfileImageRequestBody `request:"mediaType=multipart/form-data"`
 }
 
 type SetProfileImageResponse struct {

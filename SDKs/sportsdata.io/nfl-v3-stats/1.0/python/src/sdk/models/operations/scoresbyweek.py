@@ -4,19 +4,19 @@ from typing import Any,List,Optional
 
 @dataclass
 class ScoresByWeekPathParams:
-    format: str = field(default=None, metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
-    season: str = field(default=None, metadata={'path_param': { 'field_name': 'season', 'style': 'simple', 'explode': False }})
-    week: str = field(default=None, metadata={'path_param': { 'field_name': 'week', 'style': 'simple', 'explode': False }})
+    format: str = field(metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
+    season: str = field(metadata={'path_param': { 'field_name': 'season', 'style': 'simple', 'explode': False }})
+    week: str = field(metadata={'path_param': { 'field_name': 'week', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ScoresByWeekRequest:
-    path_params: ScoresByWeekPathParams = field(default=None)
+    path_params: ScoresByWeekPathParams = field()
     
 
 @dataclass
 class ScoresByWeekResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     scores: Optional[List[Any]] = field(default=None)
-    status_code: int = field(default=None)
     

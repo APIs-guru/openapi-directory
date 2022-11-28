@@ -1,16 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { FirewallRuleConfig } from "./firewallruleconfig";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FirewallRuleConfig } from "./firewallruleconfig";
 
+
 export enum FirewallRulesInboundPolicyEnum {
-    Accept = "ACCEPT"
-,    Drop = "DROP"
+    Accept = "ACCEPT",
+    Drop = "DROP"
 }
 
 export enum FirewallRulesOutboundPolicyEnum {
-    Accept = "ACCEPT"
-,    Drop = "DROP"
+    Accept = "ACCEPT",
+    Drop = "DROP"
 }
 
 
@@ -22,23 +21,23 @@ export enum FirewallRulesOutboundPolicyEnum {
  * 
 **/
 export class FirewallRules extends SpeakeasyBase {
-  @Metadata({ data: "json, name=inbound", elemType: shared.FirewallRuleConfig })
+  @SpeakeasyMetadata({ data: "json, name=inbound", elemType: FirewallRuleConfig })
   inbound?: FirewallRuleConfig[];
 
-  @Metadata({ data: "json, name=inbound_policy" })
+  @SpeakeasyMetadata({ data: "json, name=inbound_policy" })
   inboundPolicy?: FirewallRulesInboundPolicyEnum;
 
-  @Metadata({ data: "json, name=outbound", elemType: shared.FirewallRuleConfig })
+  @SpeakeasyMetadata({ data: "json, name=outbound", elemType: FirewallRuleConfig })
   outbound?: FirewallRuleConfig[];
 
-  @Metadata({ data: "json, name=outbound_policy" })
+  @SpeakeasyMetadata({ data: "json, name=outbound_policy" })
   outboundPolicy?: FirewallRulesOutboundPolicyEnum;
 }
 
 export enum FirewallStatusEnum {
-    Enabled = "enabled"
-,    Disabled = "disabled"
-,    Deleted = "deleted"
+    Enabled = "enabled",
+    Disabled = "disabled",
+    Deleted = "deleted"
 }
 
 
@@ -48,24 +47,24 @@ export enum FirewallStatusEnum {
  * 
 **/
 export class Firewall extends SpeakeasyBase {
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 
-  @Metadata({ data: "json, name=rules" })
+  @SpeakeasyMetadata({ data: "json, name=rules" })
   rules?: FirewallRules;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: FirewallStatusEnum;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: string[];
 
-  @Metadata({ data: "json, name=updated" })
+  @SpeakeasyMetadata({ data: "json, name=updated" })
   updated?: Date;
 }

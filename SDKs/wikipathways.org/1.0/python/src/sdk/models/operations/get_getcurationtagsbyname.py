@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 
 class GetGetCurationTagsByNameFormatEnum(str, Enum):
     JSON = "json"
@@ -12,17 +13,17 @@ class GetGetCurationTagsByNameFormatEnum(str, Enum):
 
 @dataclass
 class GetGetCurationTagsByNameQueryParams:
+    tag_name: str = field(metadata={'query_param': { 'field_name': 'tagName', 'style': 'form', 'explode': True }})
     format: Optional[GetGetCurationTagsByNameFormatEnum] = field(default=None, metadata={'query_param': { 'field_name': 'format', 'style': 'form', 'explode': True }})
-    tag_name: str = field(default=None, metadata={'query_param': { 'field_name': 'tagName', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class GetGetCurationTagsByNameRequest:
-    query_params: GetGetCurationTagsByNameQueryParams = field(default=None)
+    query_params: GetGetCurationTagsByNameQueryParams = field()
     
 
 @dataclass
 class GetGetCurationTagsByNameResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

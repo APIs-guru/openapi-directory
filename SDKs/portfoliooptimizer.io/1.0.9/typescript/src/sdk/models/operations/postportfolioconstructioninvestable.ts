@@ -1,61 +1,62 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostPortfolioConstructionInvestableRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assets" })
+  @SpeakeasyMetadata({ data: "json, name=assets" })
   assets: number;
 
-  @Metadata({ data: "json, name=assetsGroups" })
+  @SpeakeasyMetadata({ data: "json, name=assetsGroups" })
   assetsGroups?: number[][];
 
-  @Metadata({ data: "json, name=assetsGroupsWeights" })
+  @SpeakeasyMetadata({ data: "json, name=assetsGroupsWeights" })
   assetsGroupsWeights?: number[];
 
-  @Metadata({ data: "json, name=assetsMinimumNotionalValues" })
+  @SpeakeasyMetadata({ data: "json, name=assetsMinimumNotionalValues" })
   assetsMinimumNotionalValues?: number[];
 
-  @Metadata({ data: "json, name=assetsMinimumPositions" })
+  @SpeakeasyMetadata({ data: "json, name=assetsMinimumPositions" })
   assetsMinimumPositions?: number[];
 
-  @Metadata({ data: "json, name=assetsPrices" })
+  @SpeakeasyMetadata({ data: "json, name=assetsPrices" })
   assetsPrices: number[];
 
-  @Metadata({ data: "json, name=assetsSizeLots" })
+  @SpeakeasyMetadata({ data: "json, name=assetsSizeLots" })
   assetsSizeLots?: number[];
 
-  @Metadata({ data: "json, name=assetsWeights" })
+  @SpeakeasyMetadata({ data: "json, name=assetsWeights" })
   assetsWeights?: number[];
 
-  @Metadata({ data: "json, name=maximumAssetsGroupsWeights" })
+  @SpeakeasyMetadata({ data: "json, name=maximumAssetsGroupsWeights" })
   maximumAssetsGroupsWeights?: number[];
 
-  @Metadata({ data: "json, name=portfolioValue" })
+  @SpeakeasyMetadata({ data: "json, name=portfolioValue" })
   portfolioValue: number;
 }
 
 
-export class PostPortfolioConstructionInvestableRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: PostPortfolioConstructionInvestableRequestBody;
-}
-
-
 export class PostPortfolioConstructionInvestable200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assetsPositions" })
+  @SpeakeasyMetadata({ data: "json, name=assetsPositions" })
   assetsPositions: number[];
 
-  @Metadata({ data: "json, name=assetsWeights" })
+  @SpeakeasyMetadata({ data: "json, name=assetsWeights" })
   assetsWeights: number[];
 }
 
 
+export class PostPortfolioConstructionInvestableRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: PostPortfolioConstructionInvestableRequestBody;
+}
+
+
 export class PostPortfolioConstructionInvestableResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postPortfolioConstructionInvestable200ApplicationJsonObject?: PostPortfolioConstructionInvestable200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetInfoTldZonePathParams = /** @class */ (function (_super) {
     __extends(GetInfoTldZonePathParams, _super);
@@ -30,7 +30,7 @@ var GetInfoTldZonePathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=zone" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=zone" }),
         __metadata("design:type", String)
     ], GetInfoTldZonePathParams.prototype, "zone", void 0);
     return GetInfoTldZonePathParams;
@@ -42,11 +42,11 @@ var GetInfoTldZoneQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", Number)
     ], GetInfoTldZoneQueryParams.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" }),
         __metadata("design:type", String)
     ], GetInfoTldZoneQueryParams.prototype, "page", void 0);
     return GetInfoTldZoneQueryParams;
@@ -58,11 +58,11 @@ var GetInfoTldZoneRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetInfoTldZonePathParams)
     ], GetInfoTldZoneRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetInfoTldZoneQueryParams)
     ], GetInfoTldZoneRequest.prototype, "queryParams", void 0);
     return GetInfoTldZoneRequest;
@@ -74,15 +74,15 @@ var GetInfoTldZoneResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetInfoTldZoneResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetInfoTldZoneResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ZoneInfo)
     ], GetInfoTldZoneResponse.prototype, "zoneInfo", void 0);
     return GetInfoTldZoneResponse;

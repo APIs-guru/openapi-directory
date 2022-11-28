@@ -11,17 +11,23 @@ const (
 	ObWriteFileConsentResponse4DataAuthorisationAuthorisationTypeEnumSingle ObWriteFileConsentResponse4DataAuthorisationAuthorisationTypeEnum = "Single"
 )
 
+// ObWriteFileConsentResponse4DataAuthorisation
+// The authorisation type request from the TPP.
 type ObWriteFileConsentResponse4DataAuthorisation struct {
 	AuthorisationType  ObWriteFileConsentResponse4DataAuthorisationAuthorisationTypeEnum `json:"AuthorisationType"`
 	CompletionDateTime *time.Time                                                        `json:"CompletionDateTime,omitempty"`
 }
 
+// ObWriteFileConsentResponse4DataCharges
+// Set of elements used to provide details of a charge for the payment initiation.
 type ObWriteFileConsentResponse4DataCharges struct {
 	Amount       ObActiveOrHistoricCurrencyAndAmount `json:"Amount"`
 	ChargeBearer ObChargeBearerType1CodeEnum         `json:"ChargeBearer"`
 	Type         string                              `json:"Type"`
 }
 
+// ObWriteFileConsentResponse4DataInitiationDebtorAccount
+// Unambiguous identification of the account of the debtor to which a debit entry will be made as a result of the transaction.
 type ObWriteFileConsentResponse4DataInitiationDebtorAccount struct {
 	Identification          string  `json:"Identification"`
 	Name                    *string `json:"Name,omitempty"`
@@ -29,11 +35,15 @@ type ObWriteFileConsentResponse4DataInitiationDebtorAccount struct {
 	SecondaryIdentification *string `json:"SecondaryIdentification,omitempty"`
 }
 
+// ObWriteFileConsentResponse4DataInitiationRemittanceInformation
+// Information supplied to enable the matching of an entry with the items that the transfer is intended to settle, such as commercial invoices in an accounts' receivable system.
 type ObWriteFileConsentResponse4DataInitiationRemittanceInformation struct {
 	Reference    *string `json:"Reference,omitempty"`
 	Unstructured *string `json:"Unstructured,omitempty"`
 }
 
+// ObWriteFileConsentResponse4DataInitiation
+// The Initiation payload is sent by the initiating party to the ASPSP. It is used to request movement of funds using a payment file.
 type ObWriteFileConsentResponse4DataInitiation struct {
 	ControlSum                 *float64                                                        `json:"ControlSum,omitempty"`
 	DebtorAccount              *ObWriteFileConsentResponse4DataInitiationDebtorAccount         `json:"DebtorAccount,omitempty"`

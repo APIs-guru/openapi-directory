@@ -4,9 +4,9 @@ from typing import Optional
 
 @dataclass
 class Destiny2GetLeaderboardsForCharacterPathParams:
-    character_id: int = field(default=None, metadata={'path_param': { 'field_name': 'characterId', 'style': 'simple', 'explode': False }})
-    destiny_membership_id: int = field(default=None, metadata={'path_param': { 'field_name': 'destinyMembershipId', 'style': 'simple', 'explode': False }})
-    membership_type: int = field(default=None, metadata={'path_param': { 'field_name': 'membershipType', 'style': 'simple', 'explode': False }})
+    character_id: int = field(metadata={'path_param': { 'field_name': 'characterId', 'style': 'simple', 'explode': False }})
+    destiny_membership_id: int = field(metadata={'path_param': { 'field_name': 'destinyMembershipId', 'style': 'simple', 'explode': False }})
+    membership_type: int = field(metadata={'path_param': { 'field_name': 'membershipType', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,13 +18,13 @@ class Destiny2GetLeaderboardsForCharacterQueryParams:
 
 @dataclass
 class Destiny2GetLeaderboardsForCharacterRequest:
-    path_params: Destiny2GetLeaderboardsForCharacterPathParams = field(default=None)
-    query_params: Destiny2GetLeaderboardsForCharacterQueryParams = field(default=None)
+    path_params: Destiny2GetLeaderboardsForCharacterPathParams = field()
+    query_params: Destiny2GetLeaderboardsForCharacterQueryParams = field()
     
 
 @dataclass
 class Destiny2GetLeaderboardsForCharacterResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

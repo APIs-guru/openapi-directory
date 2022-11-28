@@ -5,23 +5,23 @@ from sdk.models import shared
 
 @dataclass
 class GetWebhookPathParams:
-    webhook_id: str = field(default=None, metadata={'path_param': { 'field_name': 'webhookId', 'style': 'simple', 'explode': False }})
+    webhook_id: str = field(metadata={'path_param': { 'field_name': 'webhookId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetWebhookSecurity:
-    bearer_auth: shared.SchemeBearerAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_auth: shared.SchemeBearerAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class GetWebhookRequest:
-    path_params: GetWebhookPathParams = field(default=None)
-    security: GetWebhookSecurity = field(default=None)
+    path_params: GetWebhookPathParams = field()
+    security: GetWebhookSecurity = field()
     
 
 @dataclass
 class GetWebhookResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     webhook: Optional[shared.Webhook] = field(default=None)
     

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// UpdateSystemModelsUpdateMetricsData
+// Model that retrieves the data for UpdateMetrics
 type UpdateSystemModelsUpdateMetricsData struct {
 	ActiveVersion         *string                                                          `json:"ActiveVersion,omitempty"`
 	ActiveVersionByClient []UpdateSystemModelsUpdateMetricsDataActiveVersionByClientRecord `json:"ActiveVersionByClient,omitempty"`

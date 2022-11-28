@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ClientForbiddenProblemReasonEnum {
-    OfficialClientForbidden = "official-client-forbidden"
-,    ClientNotEnrolled = "client-not-enrolled"
+    OfficialClientForbidden = "official-client-forbidden",
+    ClientNotEnrolled = "client-not-enrolled"
 }
 
 
@@ -11,18 +12,18 @@ export enum ClientForbiddenProblemReasonEnum {
  * A problem that indicates your client is forbidden from making this request.
 **/
 export class ClientForbiddenProblem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=detail" })
+  @SpeakeasyMetadata({ data: "json, name=detail" })
   detail: string;
 
-  @Metadata({ data: "json, name=reason" })
+  @SpeakeasyMetadata({ data: "json, name=reason" })
   reason?: ClientForbiddenProblemReasonEnum;
 
-  @Metadata({ data: "json, name=registration_url" })
+  @SpeakeasyMetadata({ data: "json, name=registration_url" })
   registrationUrl?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }

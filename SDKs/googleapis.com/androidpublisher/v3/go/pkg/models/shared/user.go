@@ -1,15 +1,5 @@
 package shared
 
-type UserAccessStateEnum string
-
-const (
-	UserAccessStateEnumAccessStateUnspecified UserAccessStateEnum = "ACCESS_STATE_UNSPECIFIED"
-	UserAccessStateEnumInvited                UserAccessStateEnum = "INVITED"
-	UserAccessStateEnumInvitationExpired      UserAccessStateEnum = "INVITATION_EXPIRED"
-	UserAccessStateEnumAccessGranted          UserAccessStateEnum = "ACCESS_GRANTED"
-	UserAccessStateEnumAccessExpired          UserAccessStateEnum = "ACCESS_EXPIRED"
-)
-
 type UserDeveloperAccountPermissionsEnum string
 
 const (
@@ -30,6 +20,27 @@ const (
 	UserDeveloperAccountPermissionsEnumCanManageOrdersGlobal               UserDeveloperAccountPermissionsEnum = "CAN_MANAGE_ORDERS_GLOBAL"
 )
 
+type UserAccessStateEnum string
+
+const (
+	UserAccessStateEnumAccessStateUnspecified UserAccessStateEnum = "ACCESS_STATE_UNSPECIFIED"
+	UserAccessStateEnumInvited                UserAccessStateEnum = "INVITED"
+	UserAccessStateEnumInvitationExpired      UserAccessStateEnum = "INVITATION_EXPIRED"
+	UserAccessStateEnumAccessGranted          UserAccessStateEnum = "ACCESS_GRANTED"
+	UserAccessStateEnumAccessExpired          UserAccessStateEnum = "ACCESS_EXPIRED"
+)
+
+// UserInput
+// A user resource.
+type UserInput struct {
+	DeveloperAccountPermissions []UserDeveloperAccountPermissionsEnum `json:"developerAccountPermissions,omitempty"`
+	Email                       *string                               `json:"email,omitempty"`
+	ExpirationTime              *string                               `json:"expirationTime,omitempty"`
+	Name                        *string                               `json:"name,omitempty"`
+}
+
+// User
+// A user resource.
 type User struct {
 	AccessState                 *UserAccessStateEnum                  `json:"accessState,omitempty"`
 	DeveloperAccountPermissions []UserDeveloperAccountPermissionsEnum `json:"developerAccountPermissions,omitempty"`

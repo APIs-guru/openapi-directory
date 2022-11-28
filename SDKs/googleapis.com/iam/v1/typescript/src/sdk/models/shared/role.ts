@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum RoleStageEnum {
-    Alpha = "ALPHA"
-,    Beta = "BETA"
-,    Ga = "GA"
-,    Deprecated = "DEPRECATED"
-,    Disabled = "DISABLED"
-,    Eap = "EAP"
+    Alpha = "ALPHA",
+    Beta = "BETA",
+    Ga = "GA",
+    Deprecated = "DEPRECATED",
+    Disabled = "DISABLED",
+    Eap = "EAP"
 }
 
 
@@ -15,24 +16,24 @@ export enum RoleStageEnum {
  * A role in the Identity and Access Management API.
 **/
 export class Role extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deleted" })
+  @SpeakeasyMetadata({ data: "json, name=deleted" })
   deleted?: boolean;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=includedPermissions" })
+  @SpeakeasyMetadata({ data: "json, name=includedPermissions" })
   includedPermissions?: string[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=stage" })
+  @SpeakeasyMetadata({ data: "json, name=stage" })
   stage?: RoleStageEnum;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

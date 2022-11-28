@@ -1,5 +1,7 @@
 package shared
 
+// Listing
+// A localized store listing. The resource for ListingsService.
 type Listing struct {
 	FullDescription  *string `json:"fullDescription,omitempty"`
 	Language         *string `json:"language,omitempty"`

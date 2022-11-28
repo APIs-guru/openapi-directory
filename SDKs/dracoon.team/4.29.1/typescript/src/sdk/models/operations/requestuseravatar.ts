@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RequestUserAvatarPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=user_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=user_id" })
   userId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=uuid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=uuid" })
   uuid: string;
 }
 
 
 export class RequestUserAvatarRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: RequestUserAvatarPathParams;
 }
 
 
 export class RequestUserAvatarResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   avatar?: shared.Avatar;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

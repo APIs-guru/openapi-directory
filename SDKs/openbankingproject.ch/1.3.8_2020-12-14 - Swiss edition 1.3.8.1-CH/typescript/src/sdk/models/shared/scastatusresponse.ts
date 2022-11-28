@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ScaStatusEnum } from "./scastatusenum";
+
 
 
 // ScaStatusResponse
@@ -7,12 +8,12 @@ import { ScaStatusEnum } from "./scastatusenum";
  * Body of the JSON response with SCA Status.
 **/
 export class ScaStatusResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=psuMessage" })
+  @SpeakeasyMetadata({ data: "json, name=psuMessage" })
   psuMessage?: string;
 
-  @Metadata({ data: "json, name=scaStatus" })
+  @SpeakeasyMetadata({ data: "json, name=scaStatus" })
   scaStatus: ScaStatusEnum;
 
-  @Metadata({ data: "json, name=trustedBeneficiaryFlag" })
+  @SpeakeasyMetadata({ data: "json, name=trustedBeneficiaryFlag" })
   trustedBeneficiaryFlag?: boolean;
 }

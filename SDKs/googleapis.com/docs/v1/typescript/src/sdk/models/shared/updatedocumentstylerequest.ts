@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DocumentStyle } from "./documentstyle";
+
 
 
 // UpdateDocumentStyleRequest
@@ -7,9 +8,9 @@ import { DocumentStyle } from "./documentstyle";
  * Updates the DocumentStyle.
 **/
 export class UpdateDocumentStyleRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=documentStyle" })
+  @SpeakeasyMetadata({ data: "json, name=documentStyle" })
   documentStyle?: DocumentStyle;
 
-  @Metadata({ data: "json, name=fields" })
+  @SpeakeasyMetadata({ data: "json, name=fields" })
   fields?: string;
 }

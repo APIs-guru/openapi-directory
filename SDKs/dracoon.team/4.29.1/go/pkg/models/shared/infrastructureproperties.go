@@ -1,5 +1,7 @@
 package shared
 
+// InfrastructureProperties
+// Infrastructure properties
 type InfrastructureProperties struct {
 	IsDracoonCloud           *bool   `json:"isDracoonCloud,omitempty"`
 	MediaServerConfigEnabled *bool   `json:"mediaServerConfigEnabled,omitempty"`

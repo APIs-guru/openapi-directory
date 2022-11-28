@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class Adexchangebuyer2AccountsFinalizedProposalsResumePathParams:
-    account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
-    proposal_id: str = field(default=None, metadata={'path_param': { 'field_name': 'proposalId', 'style': 'simple', 'explode': False }})
+    account_id: str = field(metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
+    proposal_id: str = field(metadata={'path_param': { 'field_name': 'proposalId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +27,21 @@ class Adexchangebuyer2AccountsFinalizedProposalsResumeQueryParams:
 
 @dataclass
 class Adexchangebuyer2AccountsFinalizedProposalsResumeSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class Adexchangebuyer2AccountsFinalizedProposalsResumeRequest:
-    path_params: Adexchangebuyer2AccountsFinalizedProposalsResumePathParams = field(default=None)
-    query_params: Adexchangebuyer2AccountsFinalizedProposalsResumeQueryParams = field(default=None)
+    path_params: Adexchangebuyer2AccountsFinalizedProposalsResumePathParams = field()
+    query_params: Adexchangebuyer2AccountsFinalizedProposalsResumeQueryParams = field()
+    security: Adexchangebuyer2AccountsFinalizedProposalsResumeSecurity = field()
     request: Optional[shared.ResumeProposalDealsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: Adexchangebuyer2AccountsFinalizedProposalsResumeSecurity = field(default=None)
     
 
 @dataclass
 class Adexchangebuyer2AccountsFinalizedProposalsResumeResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     proposal: Optional[shared.Proposal] = field(default=None)
-    status_code: int = field(default=None)
     

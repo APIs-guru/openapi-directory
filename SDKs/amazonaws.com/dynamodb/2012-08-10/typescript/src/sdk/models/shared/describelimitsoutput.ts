@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DescribeLimitsOutput
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the output of a <code>DescribeLimits</code> operation.
 **/
 export class DescribeLimitsOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccountMaxReadCapacityUnits" })
+  @SpeakeasyMetadata({ data: "json, name=AccountMaxReadCapacityUnits" })
   accountMaxReadCapacityUnits?: number;
 
-  @Metadata({ data: "json, name=AccountMaxWriteCapacityUnits" })
+  @SpeakeasyMetadata({ data: "json, name=AccountMaxWriteCapacityUnits" })
   accountMaxWriteCapacityUnits?: number;
 
-  @Metadata({ data: "json, name=TableMaxReadCapacityUnits" })
+  @SpeakeasyMetadata({ data: "json, name=TableMaxReadCapacityUnits" })
   tableMaxReadCapacityUnits?: number;
 
-  @Metadata({ data: "json, name=TableMaxWriteCapacityUnits" })
+  @SpeakeasyMetadata({ data: "json, name=TableMaxWriteCapacityUnits" })
   tableMaxWriteCapacityUnits?: number;
 }

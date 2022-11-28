@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetMonatsbelegePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=registrierkasseUuid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=registrierkasseUuid" })
   registrierkasseUuid: string;
 }
 
 
 export class GetMonatsbelegeQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=month" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=month" })
   month?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=year" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=year" })
   year?: number;
 }
 
 
 export class GetMonatsbelegeRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetMonatsbelegePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetMonatsbelegeQueryParams;
 }
 
 
 export class GetMonatsbelegeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.Monatsbeleg })
+  @SpeakeasyMetadata({ elemType: shared.Monatsbeleg })
   monatsbelegs?: shared.Monatsbeleg[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

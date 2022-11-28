@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // HumanTaskUiSummary
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Container for human task user interface information.
 **/
 export class HumanTaskUiSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime: Date;
 
-  @Metadata({ data: "json, name=HumanTaskUiArn" })
+  @SpeakeasyMetadata({ data: "json, name=HumanTaskUiArn" })
   humanTaskUiArn: string;
 
-  @Metadata({ data: "json, name=HumanTaskUiName" })
+  @SpeakeasyMetadata({ data: "json, name=HumanTaskUiName" })
   humanTaskUiName: string;
 }

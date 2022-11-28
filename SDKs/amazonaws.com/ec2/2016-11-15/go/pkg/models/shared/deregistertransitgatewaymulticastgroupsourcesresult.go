@@ -1,0 +1,5 @@
+package shared
+
+type DeregisterTransitGatewayMulticastGroupSourcesResult struct {
+	DeregisteredMulticastGroupSources *TransitGatewayMulticastDeregisteredGroupSources
+}

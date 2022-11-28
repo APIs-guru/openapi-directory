@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 
 class GetHeatingMarginCoverageDirectionEnum(str, Enum):
     ASC = "asc"
@@ -20,12 +21,12 @@ class GetHeatingMarginCoverageQueryParams:
 
 @dataclass
 class GetHeatingMarginCoverageRequest:
-    query_params: GetHeatingMarginCoverageQueryParams = field(default=None)
+    query_params: GetHeatingMarginCoverageQueryParams = field()
     
 
 @dataclass
 class GetHeatingMarginCoverageResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

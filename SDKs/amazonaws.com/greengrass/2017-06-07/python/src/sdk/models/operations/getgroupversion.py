@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetGroupVersionPathParams:
-    group_id: str = field(default=None, metadata={'path_param': { 'field_name': 'GroupId', 'style': 'simple', 'explode': False }})
-    group_version_id: str = field(default=None, metadata={'path_param': { 'field_name': 'GroupVersionId', 'style': 'simple', 'explode': False }})
+    group_id: str = field(metadata={'path_param': { 'field_name': 'GroupId', 'style': 'simple', 'explode': False }})
+    group_version_id: str = field(metadata={'path_param': { 'field_name': 'GroupVersionId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,14 +25,14 @@ class GetGroupVersionHeaders:
 
 @dataclass
 class GetGroupVersionRequest:
-    path_params: GetGroupVersionPathParams = field(default=None)
-    headers: GetGroupVersionHeaders = field(default=None)
+    headers: GetGroupVersionHeaders = field()
+    path_params: GetGroupVersionPathParams = field()
     
 
 @dataclass
 class GetGroupVersionResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_group_version_response: Optional[shared.GetGroupVersionResponse] = field(default=None)
-    status_code: int = field(default=None)
     

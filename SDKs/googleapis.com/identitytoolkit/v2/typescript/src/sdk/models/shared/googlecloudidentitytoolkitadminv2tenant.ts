@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudIdentitytoolkitAdminV2ClientPermissionConfig } from "./googlecloudidentitytoolkitadminv2clientpermissionconfig";
+import { GoogleCloudIdentitytoolkitAdminV2EmailPrivacyConfig } from "./googlecloudidentitytoolkitadminv2emailprivacyconfig";
 import { GoogleCloudIdentitytoolkitAdminV2HashConfig } from "./googlecloudidentitytoolkitadminv2hashconfig";
 import { GoogleCloudIdentitytoolkitAdminV2Inheritance } from "./googlecloudidentitytoolkitadminv2inheritance";
 import { GoogleCloudIdentitytoolkitAdminV2MultiFactorAuthConfig } from "./googlecloudidentitytoolkitadminv2multifactorauthconfig";
@@ -7,50 +8,100 @@ import { GoogleCloudIdentitytoolkitAdminV2MonitoringConfig } from "./googlecloud
 import { GoogleCloudIdentitytoolkitAdminV2SmsRegionConfig } from "./googlecloudidentitytoolkitadminv2smsregionconfig";
 
 
+
 // GoogleCloudIdentitytoolkitAdminV2Tenant
 /** 
  * A Tenant contains configuration for the tenant in a multi-tenant project.
 **/
 export class GoogleCloudIdentitytoolkitAdminV2Tenant extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowPasswordSignup" })
+  @SpeakeasyMetadata({ data: "json, name=allowPasswordSignup" })
   allowPasswordSignup?: boolean;
 
-  @Metadata({ data: "json, name=autodeleteAnonymousUsers" })
+  @SpeakeasyMetadata({ data: "json, name=autodeleteAnonymousUsers" })
   autodeleteAnonymousUsers?: boolean;
 
-  @Metadata({ data: "json, name=client" })
+  @SpeakeasyMetadata({ data: "json, name=client" })
   client?: GoogleCloudIdentitytoolkitAdminV2ClientPermissionConfig;
 
-  @Metadata({ data: "json, name=disableAuth" })
+  @SpeakeasyMetadata({ data: "json, name=disableAuth" })
   disableAuth?: boolean;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=enableAnonymousUser" })
+  @SpeakeasyMetadata({ data: "json, name=emailPrivacyConfig" })
+  emailPrivacyConfig?: GoogleCloudIdentitytoolkitAdminV2EmailPrivacyConfig;
+
+  @SpeakeasyMetadata({ data: "json, name=enableAnonymousUser" })
   enableAnonymousUser?: boolean;
 
-  @Metadata({ data: "json, name=enableEmailLinkSignin" })
+  @SpeakeasyMetadata({ data: "json, name=enableEmailLinkSignin" })
   enableEmailLinkSignin?: boolean;
 
-  @Metadata({ data: "json, name=hashConfig" })
+  @SpeakeasyMetadata({ data: "json, name=hashConfig" })
   hashConfig?: GoogleCloudIdentitytoolkitAdminV2HashConfig;
 
-  @Metadata({ data: "json, name=inheritance" })
+  @SpeakeasyMetadata({ data: "json, name=inheritance" })
   inheritance?: GoogleCloudIdentitytoolkitAdminV2Inheritance;
 
-  @Metadata({ data: "json, name=mfaConfig" })
+  @SpeakeasyMetadata({ data: "json, name=mfaConfig" })
   mfaConfig?: GoogleCloudIdentitytoolkitAdminV2MultiFactorAuthConfig;
 
-  @Metadata({ data: "json, name=monitoring" })
+  @SpeakeasyMetadata({ data: "json, name=monitoring" })
   monitoring?: GoogleCloudIdentitytoolkitAdminV2MonitoringConfig;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=smsRegionConfig" })
+  @SpeakeasyMetadata({ data: "json, name=smsRegionConfig" })
   smsRegionConfig?: GoogleCloudIdentitytoolkitAdminV2SmsRegionConfig;
 
-  @Metadata({ data: "json, name=testPhoneNumbers" })
+  @SpeakeasyMetadata({ data: "json, name=testPhoneNumbers" })
+  testPhoneNumbers?: Map<string, string>;
+}
+
+
+// GoogleCloudIdentitytoolkitAdminV2TenantInput
+/** 
+ * A Tenant contains configuration for the tenant in a multi-tenant project.
+**/
+export class GoogleCloudIdentitytoolkitAdminV2TenantInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=allowPasswordSignup" })
+  allowPasswordSignup?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=autodeleteAnonymousUsers" })
+  autodeleteAnonymousUsers?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=client" })
+  client?: GoogleCloudIdentitytoolkitAdminV2ClientPermissionConfig;
+
+  @SpeakeasyMetadata({ data: "json, name=disableAuth" })
+  disableAuth?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
+  displayName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=emailPrivacyConfig" })
+  emailPrivacyConfig?: GoogleCloudIdentitytoolkitAdminV2EmailPrivacyConfig;
+
+  @SpeakeasyMetadata({ data: "json, name=enableAnonymousUser" })
+  enableAnonymousUser?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=enableEmailLinkSignin" })
+  enableEmailLinkSignin?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=inheritance" })
+  inheritance?: GoogleCloudIdentitytoolkitAdminV2Inheritance;
+
+  @SpeakeasyMetadata({ data: "json, name=mfaConfig" })
+  mfaConfig?: GoogleCloudIdentitytoolkitAdminV2MultiFactorAuthConfig;
+
+  @SpeakeasyMetadata({ data: "json, name=monitoring" })
+  monitoring?: GoogleCloudIdentitytoolkitAdminV2MonitoringConfig;
+
+  @SpeakeasyMetadata({ data: "json, name=smsRegionConfig" })
+  smsRegionConfig?: GoogleCloudIdentitytoolkitAdminV2SmsRegionConfig;
+
+  @SpeakeasyMetadata({ data: "json, name=testPhoneNumbers" })
   testPhoneNumbers?: Map<string, string>;
 }

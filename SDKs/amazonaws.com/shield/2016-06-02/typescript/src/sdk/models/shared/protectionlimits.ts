@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Limit } from "./limit";
+
 
 
 // ProtectionLimits
@@ -8,6 +8,6 @@ import { Limit } from "./limit";
  * Limits settings on protections for your subscription. 
 **/
 export class ProtectionLimits extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ProtectedResourceTypeLimits", elemType: shared.Limit })
+  @SpeakeasyMetadata({ data: "json, name=ProtectedResourceTypeLimits", elemType: Limit })
   protectedResourceTypeLimits: Limit[];
 }

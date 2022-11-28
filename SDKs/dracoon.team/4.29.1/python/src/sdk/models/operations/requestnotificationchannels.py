@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from sdk.models import shared
 
 
@@ -10,13 +10,13 @@ class RequestNotificationChannelsHeaders:
 
 @dataclass
 class RequestNotificationChannelsRequest:
-    headers: RequestNotificationChannelsHeaders = field(default=None)
+    headers: RequestNotificationChannelsHeaders = field()
     
 
 @dataclass
 class RequestNotificationChannelsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     notification_channel_list: Optional[shared.NotificationChannelList] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class ListTagsForResourcePathParams:
-    resource_arn: str = field(default=None, metadata={'path_param': { 'field_name': 'resource-arn', 'style': 'simple', 'explode': False }})
+    resource_arn: str = field(metadata={'path_param': { 'field_name': 'resource-arn', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,14 +24,14 @@ class ListTagsForResourceHeaders:
 
 @dataclass
 class ListTagsForResourceRequest:
-    path_params: ListTagsForResourcePathParams = field(default=None)
-    headers: ListTagsForResourceHeaders = field(default=None)
+    headers: ListTagsForResourceHeaders = field()
+    path_params: ListTagsForResourcePathParams = field()
     
 
 @dataclass
 class ListTagsForResourceResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     list_tags_for_resource_response: Optional[shared.ListTagsForResourceResponse] = field(default=None)
-    status_code: int = field(default=None)
     

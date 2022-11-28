@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum ExecuteProvisionedProductPlanXAmzTargetEnum {
     Aws242ServiceCatalogServiceExecuteProvisionedProductPlan = "AWS242ServiceCatalogService.ExecuteProvisionedProductPlan"

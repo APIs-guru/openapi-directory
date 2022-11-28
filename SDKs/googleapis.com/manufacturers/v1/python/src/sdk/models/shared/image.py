@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ImageStatusEnum(str, Enum):
     STATUS_UNSPECIFIED = "STATUS_UNSPECIFIED"
@@ -26,7 +28,11 @@ class ImageTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Image:
-    image_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'imageUrl' }})
-    status: Optional[ImageStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    type: Optional[ImageTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""Image
+    An image.
+    """
+    
+    image_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('imageUrl') }})
+    status: Optional[ImageStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    type: Optional[ImageTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

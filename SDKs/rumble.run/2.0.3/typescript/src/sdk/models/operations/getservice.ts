@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetServicePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=service_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=service_id" })
   serviceId: string;
 }
 
 
 export class GetServiceSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   bearerAuth: shared.SchemeBearerAuth;
 }
 
 
 export class GetServiceRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetServicePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetServiceSecurity;
 }
 
 
 export class GetServiceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   service?: shared.Service;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

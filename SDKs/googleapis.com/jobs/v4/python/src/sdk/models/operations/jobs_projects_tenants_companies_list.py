@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class JobsProjectsTenantsCompaniesListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,14 +29,14 @@ class JobsProjectsTenantsCompaniesListQueryParams:
 
 @dataclass
 class JobsProjectsTenantsCompaniesListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class JobsProjectsTenantsCompaniesListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -46,14 +47,14 @@ class JobsProjectsTenantsCompaniesListSecurity:
 
 @dataclass
 class JobsProjectsTenantsCompaniesListRequest:
-    path_params: JobsProjectsTenantsCompaniesListPathParams = field(default=None)
-    query_params: JobsProjectsTenantsCompaniesListQueryParams = field(default=None)
-    security: JobsProjectsTenantsCompaniesListSecurity = field(default=None)
+    path_params: JobsProjectsTenantsCompaniesListPathParams = field()
+    query_params: JobsProjectsTenantsCompaniesListQueryParams = field()
+    security: JobsProjectsTenantsCompaniesListSecurity = field()
     
 
 @dataclass
 class JobsProjectsTenantsCompaniesListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_companies_response: Optional[shared.ListCompaniesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

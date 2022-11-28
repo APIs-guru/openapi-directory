@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApiVersion } from "./apiversion";
+
 
 
 // ListApiVersionsResponse
@@ -8,9 +8,9 @@ import { ApiVersion } from "./apiversion";
  * Response message for ListApiVersions.
 **/
 export class ListApiVersionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=apiVersions", elemType: shared.ApiVersion })
+  @SpeakeasyMetadata({ data: "json, name=apiVersions", elemType: ApiVersion })
   apiVersions?: ApiVersion[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

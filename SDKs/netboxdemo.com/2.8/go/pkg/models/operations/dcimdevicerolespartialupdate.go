@@ -10,7 +10,7 @@ type DcimDeviceRolesPartialUpdatePathParams struct {
 
 type DcimDeviceRolesPartialUpdateRequest struct {
 	PathParams DcimDeviceRolesPartialUpdatePathParams
-	Request    shared.DeviceRole `request:"mediaType=application/json"`
+	Request    shared.DeviceRoleInput `request:"mediaType=application/json"`
 }
 
 type DcimDeviceRolesPartialUpdateResponse struct {

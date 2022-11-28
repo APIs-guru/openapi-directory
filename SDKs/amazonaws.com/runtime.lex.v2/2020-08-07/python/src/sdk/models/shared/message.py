@@ -1,14 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import messagecontenttype_enum
-from . import imageresponsecard
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Message:
-    content: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'content' }})
-    content_type: messagecontenttype_enum.MessageContentTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'contentType' }})
-    image_response_card: Optional[imageresponsecard.ImageResponseCard] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'imageResponseCard' }})
+    r"""Message
+    Container for text that is returned to the customer..
+    """
+    
+    content_type: MessageContentTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('contentType') }})
+    content: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('content') }})
+    image_response_card: Optional[ImageResponseCard] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('imageResponseCard') }})
     

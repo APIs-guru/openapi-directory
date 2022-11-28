@@ -25,11 +25,6 @@ type PullsMergeRequestBody struct {
 	Sha           *string                               `json:"sha,omitempty"`
 }
 
-type PullsMergeRequest struct {
-	PathParams PullsMergePathParams
-	Request    *PullsMergeRequestBody `request:"mediaType=application/json"`
-}
-
 type PullsMerge405ApplicationJSON struct {
 	DocumentationURL *string `json:"documentation_url,omitempty"`
 	Message          *string `json:"message,omitempty"`
@@ -38,6 +33,11 @@ type PullsMerge405ApplicationJSON struct {
 type PullsMerge409ApplicationJSON struct {
 	DocumentationURL *string `json:"documentation_url,omitempty"`
 	Message          *string `json:"message,omitempty"`
+}
+
+type PullsMergeRequest struct {
+	PathParams PullsMergePathParams
+	Request    *PullsMergeRequestBody `request:"mediaType=application/json"`
 }
 
 type PullsMergeResponse struct {

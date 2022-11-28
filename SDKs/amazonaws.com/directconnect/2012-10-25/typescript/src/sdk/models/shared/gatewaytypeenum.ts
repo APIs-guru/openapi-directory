@@ -1,6 +1,7 @@
 
 
+
 export enum GatewayTypeEnum {
-    VirtualPrivateGateway = "virtualPrivateGateway"
-,    TransitGateway = "transitGateway"
+    VirtualPrivateGateway = "virtualPrivateGateway",
+    TransitGateway = "transitGateway"
 }

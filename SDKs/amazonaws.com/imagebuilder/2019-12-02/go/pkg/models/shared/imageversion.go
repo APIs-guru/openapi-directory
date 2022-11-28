@@ -1,5 +1,7 @@
 package shared
 
+// ImageVersion
+// The defining characteristics of a specific version of an Image Builder image.
 type ImageVersion struct {
 	Arn         *string        `json:"arn,omitempty"`
 	DateCreated *string        `json:"dateCreated,omitempty"`

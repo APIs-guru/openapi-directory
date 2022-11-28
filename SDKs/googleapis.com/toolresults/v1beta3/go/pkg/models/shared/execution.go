@@ -9,6 +9,8 @@ const (
 	ExecutionStateEnumComplete     ExecutionStateEnum = "complete"
 )
 
+// Execution
+// An Execution represents a collection of Steps. For instance, it could represent: - a mobile test executed across a range of device configurations - a jenkins job with a build step followed by a test step The maximum size of an execution message is 1 MiB. An Execution can be updated until its state is set to COMPLETE at which point it becomes immutable.
 type Execution struct {
 	CompletionTime        *Timestamp               `json:"completionTime,omitempty"`
 	CreationTime          *Timestamp               `json:"creationTime,omitempty"`

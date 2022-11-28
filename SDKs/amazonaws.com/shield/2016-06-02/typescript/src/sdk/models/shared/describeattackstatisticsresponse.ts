@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AttackStatisticsDataItem } from "./attackstatisticsdataitem";
 import { TimeRange } from "./timerange";
 
 
+
 export class DescribeAttackStatisticsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DataItems", elemType: shared.AttackStatisticsDataItem })
+  @SpeakeasyMetadata({ data: "json, name=DataItems", elemType: AttackStatisticsDataItem })
   dataItems: AttackStatisticsDataItem[];
 
-  @Metadata({ data: "json, name=TimeRange" })
+  @SpeakeasyMetadata({ data: "json, name=TimeRange" })
   timeRange: TimeRange;
 }

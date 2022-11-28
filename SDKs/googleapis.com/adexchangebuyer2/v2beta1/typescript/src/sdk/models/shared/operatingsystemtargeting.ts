@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CriteriaTargeting } from "./criteriatargeting";
-import { CriteriaTargeting } from "./criteriatargeting";
+
 
 
 // OperatingSystemTargeting
@@ -8,9 +8,9 @@ import { CriteriaTargeting } from "./criteriatargeting";
  * Represents targeting information for operating systems.
 **/
 export class OperatingSystemTargeting extends SpeakeasyBase {
-  @Metadata({ data: "json, name=operatingSystemCriteria" })
+  @SpeakeasyMetadata({ data: "json, name=operatingSystemCriteria" })
   operatingSystemCriteria?: CriteriaTargeting;
 
-  @Metadata({ data: "json, name=operatingSystemVersionCriteria" })
+  @SpeakeasyMetadata({ data: "json, name=operatingSystemVersionCriteria" })
   operatingSystemVersionCriteria?: CriteriaTargeting;
 }

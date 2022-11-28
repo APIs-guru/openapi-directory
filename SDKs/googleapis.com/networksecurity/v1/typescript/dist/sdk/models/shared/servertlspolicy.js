@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MtlsPolicy } from "./mtlspolicy";
 import { GoogleCloudNetworksecurityV1CertificateProvider } from "./googlecloudnetworksecurityv1certificateprovider";
 // ServerTlsPolicy
@@ -35,37 +35,73 @@ var ServerTlsPolicy = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=allowOpen" }),
+        SpeakeasyMetadata({ data: "json, name=allowOpen" }),
         __metadata("design:type", Boolean)
     ], ServerTlsPolicy.prototype, "allowOpen", void 0);
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", String)
     ], ServerTlsPolicy.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], ServerTlsPolicy.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=labels" }),
+        SpeakeasyMetadata({ data: "json, name=labels" }),
         __metadata("design:type", Map)
     ], ServerTlsPolicy.prototype, "labels", void 0);
     __decorate([
-        Metadata({ data: "json, name=mtlsPolicy" }),
+        SpeakeasyMetadata({ data: "json, name=mtlsPolicy" }),
         __metadata("design:type", MtlsPolicy)
     ], ServerTlsPolicy.prototype, "mtlsPolicy", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], ServerTlsPolicy.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=serverCertificate" }),
+        SpeakeasyMetadata({ data: "json, name=serverCertificate" }),
         __metadata("design:type", GoogleCloudNetworksecurityV1CertificateProvider)
     ], ServerTlsPolicy.prototype, "serverCertificate", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateTime" }),
+        SpeakeasyMetadata({ data: "json, name=updateTime" }),
         __metadata("design:type", String)
     ], ServerTlsPolicy.prototype, "updateTime", void 0);
     return ServerTlsPolicy;
 }(SpeakeasyBase));
 export { ServerTlsPolicy };
+// ServerTlsPolicyInput
+/**
+ * ServerTlsPolicy is a resource that specifies how a server should authenticate incoming requests. This resource itself does not affect configuration unless it is attached to a target HTTPS proxy or endpoint config selector resource.
+**/
+var ServerTlsPolicyInput = /** @class */ (function (_super) {
+    __extends(ServerTlsPolicyInput, _super);
+    function ServerTlsPolicyInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=allowOpen" }),
+        __metadata("design:type", Boolean)
+    ], ServerTlsPolicyInput.prototype, "allowOpen", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=description" }),
+        __metadata("design:type", String)
+    ], ServerTlsPolicyInput.prototype, "description", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=labels" }),
+        __metadata("design:type", Map)
+    ], ServerTlsPolicyInput.prototype, "labels", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=mtlsPolicy" }),
+        __metadata("design:type", MtlsPolicy)
+    ], ServerTlsPolicyInput.prototype, "mtlsPolicy", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=name" }),
+        __metadata("design:type", String)
+    ], ServerTlsPolicyInput.prototype, "name", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=serverCertificate" }),
+        __metadata("design:type", GoogleCloudNetworksecurityV1CertificateProvider)
+    ], ServerTlsPolicyInput.prototype, "serverCertificate", void 0);
+    return ServerTlsPolicyInput;
+}(SpeakeasyBase));
+export { ServerTlsPolicyInput };

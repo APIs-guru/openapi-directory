@@ -1,5 +1,7 @@
 package shared
 
+// StagedEmployeeAdditionalDirectDeposit
+// The additional direct deposit model
 type StagedEmployeeAdditionalDirectDeposit struct {
 	AccountNumber *string  `json:"accountNumber,omitempty"`
 	AccountType   *string  `json:"accountType,omitempty"`
@@ -10,6 +12,8 @@ type StagedEmployeeAdditionalDirectDeposit struct {
 	RoutingNumber *string  `json:"routingNumber,omitempty"`
 }
 
+// StagedEmployeeBenefitSetup
+// The benefit setup model
 type StagedEmployeeBenefitSetup struct {
 	BenefitClass                   *string  `json:"benefitClass,omitempty"`
 	BenefitClassEffectiveDate      *string  `json:"benefitClassEffectiveDate,omitempty"`
@@ -79,6 +83,8 @@ type StagedEmployeeCustomTextFields struct {
 	Value    string                                     `json:"value"`
 }
 
+// StagedEmployeeDepartmentPosition
+// The Department Position model
 type StagedEmployeeDepartmentPosition struct {
 	ChangeReason                    *string `json:"changeReason,omitempty"`
 	ClockBadgeNumber                *string `json:"clockBadgeNumber,omitempty"`
@@ -106,6 +112,8 @@ type StagedEmployeeDepartmentPosition struct {
 	WorkersCompensation             *string `json:"workersCompensation,omitempty"`
 }
 
+// StagedEmployeeFederalTax
+// The Federal Tax model
 type StagedEmployeeFederalTax struct {
 	Amount             *float64 `json:"amount,omitempty"`
 	DeductionsAmount   *float64 `json:"deductionsAmount,omitempty"`
@@ -119,6 +127,8 @@ type StagedEmployeeFederalTax struct {
 	W4FormYear         *int64   `json:"w4FormYear,omitempty"`
 }
 
+// StagedEmployeeHomeAddress
+// The address model
 type StagedEmployeeHomeAddress struct {
 	Address1     *string `json:"address1,omitempty"`
 	Address2     *string `json:"address2,omitempty"`
@@ -132,6 +142,8 @@ type StagedEmployeeHomeAddress struct {
 	State        *string `json:"state,omitempty"`
 }
 
+// StagedEmployeeLocalTax
+// The Local Tax model
 type StagedEmployeeLocalTax struct {
 	Exemptions   *float64 `json:"exemptions,omitempty"`
 	Exemptions2  *float64 `json:"exemptions2,omitempty"`
@@ -141,6 +153,8 @@ type StagedEmployeeLocalTax struct {
 	WorkPsd      *string  `json:"workPSD,omitempty"`
 }
 
+// StagedEmployeeMainDirectDeposit
+// The Main Direct Deposit model
 type StagedEmployeeMainDirectDeposit struct {
 	AccountNumber *string `json:"accountNumber,omitempty"`
 	AccountType   *string `json:"accountType,omitempty"`
@@ -149,6 +163,8 @@ type StagedEmployeeMainDirectDeposit struct {
 	RoutingNumber *string `json:"routingNumber,omitempty"`
 }
 
+// StagedEmployeeNonPrimaryStateTax
+// The Non-Primary State Tax model
 type StagedEmployeeNonPrimaryStateTax struct {
 	Amount             *float64 `json:"amount,omitempty"`
 	DeductionsAmount   *float64 `json:"deductionsAmount,omitempty"`
@@ -166,6 +182,8 @@ type StagedEmployeeNonPrimaryStateTax struct {
 	W4FormYear         *int64   `json:"w4FormYear,omitempty"`
 }
 
+// StagedEmployeePrimaryPayRate
+// The Primary Pay Rate model
 type StagedEmployeePrimaryPayRate struct {
 	BaseRate      *float64 `json:"baseRate,omitempty"`
 	ChangeReason  *string  `json:"changeReason,omitempty"`
@@ -179,6 +197,8 @@ type StagedEmployeePrimaryPayRate struct {
 	Salary        *float64 `json:"salary,omitempty"`
 }
 
+// StagedEmployeePrimaryStateTax
+// The State Tax model
 type StagedEmployeePrimaryStateTax struct {
 	Amount             *float64 `json:"amount,omitempty"`
 	DeductionsAmount   *float64 `json:"deductionsAmount,omitempty"`
@@ -195,6 +215,8 @@ type StagedEmployeePrimaryStateTax struct {
 	W4FormYear         *int64   `json:"w4FormYear,omitempty"`
 }
 
+// StagedEmployeeStatus
+// The employee status model
 type StagedEmployeeStatus struct {
 	AdjustedSeniorityDate *string `json:"adjustedSeniorityDate,omitempty"`
 	ChangeReason          *string `json:"changeReason,omitempty"`
@@ -204,12 +226,16 @@ type StagedEmployeeStatus struct {
 	IsEligibleForRehire   *bool   `json:"isEligibleForRehire,omitempty"`
 }
 
+// StagedEmployeeWebTime
+// Add Web Time badge number and charge rate and synchronize Web Pay and Web Time employee data.
 type StagedEmployeeWebTime struct {
 	BadgeNumber        *string  `json:"badgeNumber,omitempty"`
 	ChargeRate         *float64 `json:"chargeRate,omitempty"`
 	IsTimeLaborEnabled *bool    `json:"isTimeLaborEnabled,omitempty"`
 }
 
+// StagedEmployeeWorkAddress
+// The address model
 type StagedEmployeeWorkAddress struct {
 	Address1       *string `json:"address1,omitempty"`
 	Address2       *string `json:"address2,omitempty"`
@@ -225,6 +251,8 @@ type StagedEmployeeWorkAddress struct {
 	State          *string `json:"state,omitempty"`
 }
 
+// StagedEmployeeWorkEligibility
+// The Work Eligibility model
 type StagedEmployeeWorkEligibility struct {
 	AlienOrAdmissionDocumentNumber *string `json:"alienOrAdmissionDocumentNumber,omitempty"`
 	AttestedDate                   *string `json:"attestedDate,omitempty"`
@@ -242,6 +270,8 @@ type StagedEmployeeWorkEligibility struct {
 	WorkUntil                      *string `json:"workUntil,omitempty"`
 }
 
+// StagedEmployee
+// The staged employee model
 type StagedEmployee struct {
 	AdditionalDirectDeposit  []StagedEmployeeAdditionalDirectDeposit `json:"additionalDirectDeposit,omitempty"`
 	BenefitSetup             []StagedEmployeeBenefitSetup            `json:"benefitSetup,omitempty"`

@@ -15,6 +15,8 @@ const (
 	GoogleCloudDialogflowV2IntentMessagePlatformEnumGoogleHangouts      GoogleCloudDialogflowV2IntentMessagePlatformEnum = "GOOGLE_HANGOUTS"
 )
 
+// GoogleCloudDialogflowV2IntentMessage
+// A rich response message. Corresponds to the intent `Response` field in the Dialogflow console. For more information, see [Rich response messages](https://cloud.google.com/dialogflow/docs/intents-rich-messages).
 type GoogleCloudDialogflowV2IntentMessage struct {
 	BasicCard          *GoogleCloudDialogflowV2IntentMessageBasicCard          `json:"basicCard,omitempty"`
 	BrowseCarouselCard *GoogleCloudDialogflowV2IntentMessageBrowseCarouselCard `json:"browseCarouselCard,omitempty"`

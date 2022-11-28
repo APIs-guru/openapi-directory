@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Label
 /**
  * A key-value pair applied to a given object.
@@ -33,15 +33,15 @@ var Label = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=key" }),
+        SpeakeasyMetadata({ data: "json, name=key" }),
         __metadata("design:type", String)
     ], Label.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "json, name=numValue" }),
+        SpeakeasyMetadata({ data: "json, name=numValue" }),
         __metadata("design:type", String)
     ], Label.prototype, "numValue", void 0);
     __decorate([
-        Metadata({ data: "json, name=strValue" }),
+        SpeakeasyMetadata({ data: "json, name=strValue" }),
         __metadata("design:type", String)
     ], Label.prototype, "strValue", void 0);
     return Label;

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CreateRowRequest } from "./createrowrequest";
+
 
 
 // BatchCreateRowsRequest
@@ -8,6 +8,6 @@ import { CreateRowRequest } from "./createrowrequest";
  * Request message for TablesService.BatchCreateRows.
 **/
 export class BatchCreateRowsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=requests", elemType: shared.CreateRowRequest })
+  @SpeakeasyMetadata({ data: "json, name=requests", elemType: CreateRowRequest })
   requests?: CreateRowRequest[];
 }

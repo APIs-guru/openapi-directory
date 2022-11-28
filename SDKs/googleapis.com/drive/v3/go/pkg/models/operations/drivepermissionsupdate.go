@@ -42,7 +42,7 @@ type DrivePermissionsUpdateSecurity struct {
 type DrivePermissionsUpdateRequest struct {
 	PathParams  DrivePermissionsUpdatePathParams
 	QueryParams DrivePermissionsUpdateQueryParams
-	Request     *shared.Permission `request:"mediaType=application/json"`
+	Request     *shared.PermissionInput `request:"mediaType=application/json"`
 	Security    DrivePermissionsUpdateSecurity
 }
 

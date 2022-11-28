@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class PostSubtypeEnum(str, Enum):
     SUBTYPE_UNSPECIFIED = "SUBTYPE_UNSPECIFIED"
@@ -15,5 +17,9 @@ class PostSubtypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Post:
-    subtype: Optional[PostSubtypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'subtype' }})
+    r"""Post
+    A regular posted comment.
+    """
+    
+    subtype: Optional[PostSubtypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('subtype') }})
     

@@ -10,6 +10,8 @@ const (
 	RoomDataTypeEnumRoom RoomDataTypeEnum = "room"
 )
 
+// RoomData
+// Room information
 type RoomData struct {
 	Children                  []RoomData        `json:"children,omitempty"`
 	CntAdmins                 *int32            `json:"cntAdmins,omitempty"`

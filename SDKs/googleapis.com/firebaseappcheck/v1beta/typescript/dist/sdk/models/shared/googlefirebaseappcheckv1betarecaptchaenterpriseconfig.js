@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GoogleFirebaseAppcheckV1betaRecaptchaEnterpriseConfig
 /**
  * An app's reCAPTCHA Enterprise configuration object. This configuration is used by ExchangeRecaptchaEnterpriseToken to validate reCAPTCHA tokens issued to apps by reCAPTCHA Enterprise. It also controls certain properties of the returned `AppCheckToken`, such as its ttl.
@@ -33,15 +33,15 @@ var GoogleFirebaseAppcheckV1betaRecaptchaEnterpriseConfig = /** @class */ (funct
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], GoogleFirebaseAppcheckV1betaRecaptchaEnterpriseConfig.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=siteKey" }),
+        SpeakeasyMetadata({ data: "json, name=siteKey" }),
         __metadata("design:type", String)
     ], GoogleFirebaseAppcheckV1betaRecaptchaEnterpriseConfig.prototype, "siteKey", void 0);
     __decorate([
-        Metadata({ data: "json, name=tokenTtl" }),
+        SpeakeasyMetadata({ data: "json, name=tokenTtl" }),
         __metadata("design:type", String)
     ], GoogleFirebaseAppcheckV1betaRecaptchaEnterpriseConfig.prototype, "tokenTtl", void 0);
     return GoogleFirebaseAppcheckV1betaRecaptchaEnterpriseConfig;

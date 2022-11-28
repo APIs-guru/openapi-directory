@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateInstanceProfileRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=excludeAppPackagesFromCleanup" })
+  @SpeakeasyMetadata({ data: "json, name=excludeAppPackagesFromCleanup" })
   excludeAppPackagesFromCleanup?: string[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=packageCleanup" })
+  @SpeakeasyMetadata({ data: "json, name=packageCleanup" })
   packageCleanup?: boolean;
 
-  @Metadata({ data: "json, name=rebootAfterUse" })
+  @SpeakeasyMetadata({ data: "json, name=rebootAfterUse" })
   rebootAfterUse?: boolean;
 }

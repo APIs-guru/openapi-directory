@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDocumentaiV1beta2TableExtractionParams
+// Parameters to control table extraction behavior.
 type GoogleCloudDocumentaiV1beta2TableExtractionParams struct {
 	Enabled         *bool                                        `json:"enabled,omitempty"`
 	HeaderHints     []string                                     `json:"headerHints,omitempty"`

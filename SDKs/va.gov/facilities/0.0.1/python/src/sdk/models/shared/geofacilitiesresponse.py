@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import geofacility
+from sdk import utils
+from . import *
 
 class GeoFacilitiesResponseTypeEnum(str, Enum):
     FEATURE_COLLECTION = "FeatureCollection"
@@ -10,6 +12,6 @@ class GeoFacilitiesResponseTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GeoFacilitiesResponse:
-    features: Optional[List[geofacility.GeoFacility]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'features' }})
-    type: GeoFacilitiesResponseTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    type: GeoFacilitiesResponseTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    features: Optional[List[GeoFacility]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('features') }})
     

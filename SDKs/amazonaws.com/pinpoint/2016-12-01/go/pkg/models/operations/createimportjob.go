@@ -18,6 +18,8 @@ type CreateImportJobHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateImportJobRequestBodyImportJobRequest
+// Specifies the settings for a job that imports endpoint definitions from an Amazon Simple Storage Service (Amazon S3) bucket.
 type CreateImportJobRequestBodyImportJobRequest struct {
 	DefineSegment     *bool              `json:"DefineSegment,omitempty"`
 	ExternalID        *string            `json:"ExternalId,omitempty"`

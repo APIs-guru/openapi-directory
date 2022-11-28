@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class LineStatusByIdsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=ids" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ids" })
   ids: string[];
 }
 
 
 export class LineStatusByIdsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=detail" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=detail" })
   detail?: boolean;
 }
 
 
 export class LineStatusByIdsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: LineStatusByIdsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: LineStatusByIdsQueryParams;
 }
 
 
 export class LineStatusByIdsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.TflApiPresentationEntitiesLine })
+  @SpeakeasyMetadata({ elemType: shared.TflApiPresentationEntitiesLine })
   tflApiPresentationEntitiesLines?: shared.TflApiPresentationEntitiesLine[];
 }

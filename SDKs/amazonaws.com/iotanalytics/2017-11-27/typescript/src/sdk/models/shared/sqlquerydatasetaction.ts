@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { QueryFilter } from "./queryfilter";
+
 
 
 // SqlQueryDatasetAction
@@ -8,9 +8,9 @@ import { QueryFilter } from "./queryfilter";
  * The SQL query to modify the message.
 **/
 export class SqlQueryDatasetAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=filters", elemType: shared.QueryFilter })
+  @SpeakeasyMetadata({ data: "json, name=filters", elemType: QueryFilter })
   filters?: QueryFilter[];
 
-  @Metadata({ data: "json, name=sqlQuery" })
+  @SpeakeasyMetadata({ data: "json, name=sqlQuery" })
   sqlQuery: string;
 }

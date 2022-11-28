@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class UsersListFollowersForUserPathParams:
-    username: str = field(default=None, metadata={'path_param': { 'field_name': 'username', 'style': 'simple', 'explode': False }})
+    username: str = field(metadata={'path_param': { 'field_name': 'username', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,14 +16,14 @@ class UsersListFollowersForUserQueryParams:
 
 @dataclass
 class UsersListFollowersForUserRequest:
-    path_params: UsersListFollowersForUserPathParams = field(default=None)
-    query_params: UsersListFollowersForUserQueryParams = field(default=None)
+    path_params: UsersListFollowersForUserPathParams = field()
+    query_params: UsersListFollowersForUserQueryParams = field()
     
 
 @dataclass
 class UsersListFollowersForUserResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     simple_users: Optional[List[shared.SimpleUser]] = field(default=None)
     

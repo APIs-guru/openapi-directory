@@ -17,6 +17,8 @@ const (
 	DatabaseStateEnumReadyOptimizing  DatabaseStateEnum = "READY_OPTIMIZING"
 )
 
+// Database
+// A Cloud Spanner database.
 type Database struct {
 	CreateTime             *string                      `json:"createTime,omitempty"`
 	DatabaseDialect        *DatabaseDatabaseDialectEnum `json:"databaseDialect,omitempty"`

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Aggregates
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains the (pre-calculated) aggregate values for an asset property.
 **/
 export class Aggregates extends SpeakeasyBase {
-  @Metadata({ data: "json, name=average" })
+  @SpeakeasyMetadata({ data: "json, name=average" })
   average?: number;
 
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count?: number;
 
-  @Metadata({ data: "json, name=maximum" })
+  @SpeakeasyMetadata({ data: "json, name=maximum" })
   maximum?: number;
 
-  @Metadata({ data: "json, name=minimum" })
+  @SpeakeasyMetadata({ data: "json, name=minimum" })
   minimum?: number;
 
-  @Metadata({ data: "json, name=standardDeviation" })
+  @SpeakeasyMetadata({ data: "json, name=standardDeviation" })
   standardDeviation?: number;
 
-  @Metadata({ data: "json, name=sum" })
+  @SpeakeasyMetadata({ data: "json, name=sum" })
   sum?: number;
 }

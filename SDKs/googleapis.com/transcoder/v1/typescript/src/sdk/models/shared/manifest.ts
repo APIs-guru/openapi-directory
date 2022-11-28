@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ManifestTypeEnum {
-    ManifestTypeUnspecified = "MANIFEST_TYPE_UNSPECIFIED"
-,    Hls = "HLS"
-,    Dash = "DASH"
+    ManifestTypeUnspecified = "MANIFEST_TYPE_UNSPECIFIED",
+    Hls = "HLS",
+    Dash = "DASH"
 }
 
 
@@ -12,12 +13,12 @@ export enum ManifestTypeEnum {
  * Manifest configuration.
 **/
 export class Manifest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fileName" })
+  @SpeakeasyMetadata({ data: "json, name=fileName" })
   fileName?: string;
 
-  @Metadata({ data: "json, name=muxStreams" })
+  @SpeakeasyMetadata({ data: "json, name=muxStreams" })
   muxStreams?: string[];
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: ManifestTypeEnum;
 }

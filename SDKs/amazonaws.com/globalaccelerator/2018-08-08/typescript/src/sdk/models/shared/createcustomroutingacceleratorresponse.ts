@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CustomRoutingAccelerator } from "./customroutingaccelerator";
 
 
+
 export class CreateCustomRoutingAcceleratorResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Accelerator" })
+  @SpeakeasyMetadata({ data: "json, name=Accelerator" })
   accelerator?: CustomRoutingAccelerator;
 }

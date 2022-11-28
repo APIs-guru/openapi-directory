@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteAssessmentFrameworkPathParams:
-    framework_id: str = field(default=None, metadata={'path_param': { 'field_name': 'frameworkId', 'style': 'simple', 'explode': False }})
+    framework_id: str = field(metadata={'path_param': { 'field_name': 'frameworkId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,17 +23,17 @@ class DeleteAssessmentFrameworkHeaders:
 
 @dataclass
 class DeleteAssessmentFrameworkRequest:
-    path_params: DeleteAssessmentFrameworkPathParams = field(default=None)
-    headers: DeleteAssessmentFrameworkHeaders = field(default=None)
+    headers: DeleteAssessmentFrameworkHeaders = field()
+    path_params: DeleteAssessmentFrameworkPathParams = field()
     
 
 @dataclass
 class DeleteAssessmentFrameworkResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     delete_assessment_framework_response: Optional[dict[str, Any]] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

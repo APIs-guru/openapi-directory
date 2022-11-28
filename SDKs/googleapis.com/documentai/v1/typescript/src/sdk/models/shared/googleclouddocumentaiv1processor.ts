@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleCloudDocumentaiV1ProcessorStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Enabled = "ENABLED"
-,    Disabled = "DISABLED"
-,    Enabling = "ENABLING"
-,    Disabling = "DISABLING"
-,    Creating = "CREATING"
-,    Failed = "FAILED"
-,    Deleting = "DELETING"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Enabled = "ENABLED",
+    Disabled = "DISABLED",
+    Enabling = "ENABLING",
+    Disabling = "DISABLING",
+    Creating = "CREATING",
+    Failed = "FAILED",
+    Deleting = "DELETING"
 }
 
 
@@ -17,27 +18,49 @@ export enum GoogleCloudDocumentaiV1ProcessorStateEnum {
  * The first-class citizen for Document AI. Each processor defines how to extract structural information from a document.
 **/
 export class GoogleCloudDocumentaiV1Processor extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=defaultProcessorVersion" })
+  @SpeakeasyMetadata({ data: "json, name=defaultProcessorVersion" })
   defaultProcessorVersion?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=kmsKeyName" })
+  @SpeakeasyMetadata({ data: "json, name=kmsKeyName" })
   kmsKeyName?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=processEndpoint" })
+  @SpeakeasyMetadata({ data: "json, name=processEndpoint" })
   processEndpoint?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: GoogleCloudDocumentaiV1ProcessorStateEnum;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
+  type?: string;
+}
+
+
+// GoogleCloudDocumentaiV1ProcessorInput
+/** 
+ * The first-class citizen for Document AI. Each processor defines how to extract structural information from a document.
+**/
+export class GoogleCloudDocumentaiV1ProcessorInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
+  createTime?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=defaultProcessorVersion" })
+  defaultProcessorVersion?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
+  displayName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=kmsKeyName" })
+  kmsKeyName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }

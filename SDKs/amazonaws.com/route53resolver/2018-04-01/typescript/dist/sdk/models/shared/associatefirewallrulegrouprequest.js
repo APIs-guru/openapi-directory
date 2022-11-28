@@ -22,40 +22,40 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MutationProtectionStatusEnum } from "./mutationprotectionstatusenum";
+import { Tag } from "./tag";
 var AssociateFirewallRuleGroupRequest = /** @class */ (function (_super) {
     __extends(AssociateFirewallRuleGroupRequest, _super);
     function AssociateFirewallRuleGroupRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CreatorRequestId" }),
+        SpeakeasyMetadata({ data: "json, name=CreatorRequestId" }),
         __metadata("design:type", String)
     ], AssociateFirewallRuleGroupRequest.prototype, "creatorRequestId", void 0);
     __decorate([
-        Metadata({ data: "json, name=FirewallRuleGroupId" }),
+        SpeakeasyMetadata({ data: "json, name=FirewallRuleGroupId" }),
         __metadata("design:type", String)
     ], AssociateFirewallRuleGroupRequest.prototype, "firewallRuleGroupId", void 0);
     __decorate([
-        Metadata({ data: "json, name=MutationProtection" }),
+        SpeakeasyMetadata({ data: "json, name=MutationProtection" }),
         __metadata("design:type", String)
     ], AssociateFirewallRuleGroupRequest.prototype, "mutationProtection", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], AssociateFirewallRuleGroupRequest.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=Priority" }),
+        SpeakeasyMetadata({ data: "json, name=Priority" }),
         __metadata("design:type", Number)
     ], AssociateFirewallRuleGroupRequest.prototype, "priority", void 0);
     __decorate([
-        Metadata({ data: "json, name=Tags", elemType: shared.Tag }),
+        SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag }),
         __metadata("design:type", Array)
     ], AssociateFirewallRuleGroupRequest.prototype, "tags", void 0);
     __decorate([
-        Metadata({ data: "json, name=VpcId" }),
+        SpeakeasyMetadata({ data: "json, name=VpcId" }),
         __metadata("design:type", String)
     ], AssociateFirewallRuleGroupRequest.prototype, "vpcId", void 0);
     return AssociateFirewallRuleGroupRequest;

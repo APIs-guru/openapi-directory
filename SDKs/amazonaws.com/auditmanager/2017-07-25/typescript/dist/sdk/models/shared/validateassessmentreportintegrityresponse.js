@@ -22,30 +22,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ValidateAssessmentReportIntegrityResponse = /** @class */ (function (_super) {
     __extends(ValidateAssessmentReportIntegrityResponse, _super);
     function ValidateAssessmentReportIntegrityResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=signatureAlgorithm" }),
+        SpeakeasyMetadata({ data: "json, name=signatureAlgorithm" }),
         __metadata("design:type", String)
     ], ValidateAssessmentReportIntegrityResponse.prototype, "signatureAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "json, name=signatureDateTime" }),
+        SpeakeasyMetadata({ data: "json, name=signatureDateTime" }),
         __metadata("design:type", String)
     ], ValidateAssessmentReportIntegrityResponse.prototype, "signatureDateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=signatureKeyId" }),
+        SpeakeasyMetadata({ data: "json, name=signatureKeyId" }),
         __metadata("design:type", String)
     ], ValidateAssessmentReportIntegrityResponse.prototype, "signatureKeyId", void 0);
     __decorate([
-        Metadata({ data: "json, name=signatureValid" }),
+        SpeakeasyMetadata({ data: "json, name=signatureValid" }),
         __metadata("design:type", Boolean)
     ], ValidateAssessmentReportIntegrityResponse.prototype, "signatureValid", void 0);
     __decorate([
-        Metadata({ data: "json, name=validationErrors" }),
+        SpeakeasyMetadata({ data: "json, name=validationErrors" }),
         __metadata("design:type", Array)
     ], ValidateAssessmentReportIntegrityResponse.prototype, "validationErrors", void 0);
     return ValidateAssessmentReportIntegrityResponse;

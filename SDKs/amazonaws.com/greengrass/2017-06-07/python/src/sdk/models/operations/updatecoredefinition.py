@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
 class UpdateCoreDefinitionPathParams:
-    core_definition_id: str = field(default=None, metadata={'path_param': { 'field_name': 'CoreDefinitionId', 'style': 'simple', 'explode': False }})
+    core_definition_id: str = field(metadata={'path_param': { 'field_name': 'CoreDefinitionId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,20 +26,20 @@ class UpdateCoreDefinitionHeaders:
 @dataclass_json
 @dataclass
 class UpdateCoreDefinitionRequestBody:
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
     
 
 @dataclass
 class UpdateCoreDefinitionRequest:
-    path_params: UpdateCoreDefinitionPathParams = field(default=None)
-    headers: UpdateCoreDefinitionHeaders = field(default=None)
-    request: UpdateCoreDefinitionRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateCoreDefinitionHeaders = field()
+    path_params: UpdateCoreDefinitionPathParams = field()
+    request: UpdateCoreDefinitionRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateCoreDefinitionResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     update_core_definition_response: Optional[dict[str, Any]] = field(default=None)
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetCreateTemplateActionEnum;
 (function (GetCreateTemplateActionEnum) {
     GetCreateTemplateActionEnum["CreateTemplate"] = "CreateTemplate";
@@ -37,19 +37,19 @@ var GetCreateTemplateTemplate = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, name=HtmlPart" }),
+        SpeakeasyMetadata({ data: "queryParam, name=HtmlPart" }),
         __metadata("design:type", String)
     ], GetCreateTemplateTemplate.prototype, "htmlPart", void 0);
     __decorate([
-        Metadata({ data: "queryParam, name=SubjectPart" }),
+        SpeakeasyMetadata({ data: "queryParam, name=SubjectPart" }),
         __metadata("design:type", String)
     ], GetCreateTemplateTemplate.prototype, "subjectPart", void 0);
     __decorate([
-        Metadata({ data: "queryParam, name=TemplateName" }),
+        SpeakeasyMetadata({ data: "queryParam, name=TemplateName" }),
         __metadata("design:type", String)
     ], GetCreateTemplateTemplate.prototype, "templateName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, name=TextPart" }),
+        SpeakeasyMetadata({ data: "queryParam, name=TextPart" }),
         __metadata("design:type", String)
     ], GetCreateTemplateTemplate.prototype, "textPart", void 0);
     return GetCreateTemplateTemplate;
@@ -65,15 +65,15 @@ var GetCreateTemplateQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" }),
         __metadata("design:type", String)
     ], GetCreateTemplateQueryParams.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Template" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Template" }),
         __metadata("design:type", GetCreateTemplateTemplate)
     ], GetCreateTemplateQueryParams.prototype, "template", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" }),
         __metadata("design:type", String)
     ], GetCreateTemplateQueryParams.prototype, "version", void 0);
     return GetCreateTemplateQueryParams;
@@ -85,31 +85,31 @@ var GetCreateTemplateHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], GetCreateTemplateHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], GetCreateTemplateHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], GetCreateTemplateHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], GetCreateTemplateHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], GetCreateTemplateHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], GetCreateTemplateHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], GetCreateTemplateHeaders.prototype, "xAmzSignedHeaders", void 0);
     return GetCreateTemplateHeaders;
@@ -121,11 +121,11 @@ var GetCreateTemplateRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetCreateTemplateQueryParams)
     ], GetCreateTemplateRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetCreateTemplateHeaders)
     ], GetCreateTemplateRequest.prototype, "headers", void 0);
     return GetCreateTemplateRequest;
@@ -137,15 +137,15 @@ var GetCreateTemplateResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetCreateTemplateResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetCreateTemplateResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetCreateTemplateResponse.prototype, "statusCode", void 0);
     return GetCreateTemplateResponse;

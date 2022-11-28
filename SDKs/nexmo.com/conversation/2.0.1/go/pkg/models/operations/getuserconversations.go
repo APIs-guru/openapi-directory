@@ -8,10 +8,6 @@ type GetuserConversationsPathParams struct {
 	UserID string `pathParam:"style=simple,explode=false,name=user_id"`
 }
 
-type GetuserConversationsRequest struct {
-	PathParams GetuserConversationsPathParams
-}
-
 type GetuserConversations200ApplicationJSONTimestamp struct {
 	Created *string `json:"created,omitempty"`
 }
@@ -26,6 +22,10 @@ type GetuserConversations200ApplicationJSON struct {
 	SequenceNumber *int64                                           `json:"sequence_number,omitempty"`
 	State          *shared.MemberStateEnum                          `json:"state,omitempty"`
 	Timestamp      *GetuserConversations200ApplicationJSONTimestamp `json:"timestamp,omitempty"`
+}
+
+type GetuserConversationsRequest struct {
+	PathParams GetuserConversationsPathParams
 }
 
 type GetuserConversationsResponse struct {

@@ -1,15 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import feedbackvaluetype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateAuthEventFeedbackRequest:
-    event_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EventId' }})
-    feedback_token: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeedbackToken' }})
-    feedback_value: feedbackvaluetype_enum.FeedbackValueTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeedbackValue' }})
-    user_pool_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'UserPoolId' }})
-    username: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Username' }})
+    event_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('EventId') }})
+    feedback_token: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeedbackToken') }})
+    feedback_value: FeedbackValueTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeedbackValue') }})
+    user_pool_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('UserPoolId') }})
+    username: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Username') }})
     

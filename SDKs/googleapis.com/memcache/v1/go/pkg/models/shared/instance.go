@@ -18,6 +18,24 @@ const (
 	InstanceStateEnumPerformingMaintenance InstanceStateEnum = "PERFORMING_MAINTENANCE"
 )
 
+// InstanceInput
+// A Memorystore for Memcached instance
+type InstanceInput struct {
+	AuthorizedNetwork *string                                      `json:"authorizedNetwork,omitempty"`
+	DisplayName       *string                                      `json:"displayName,omitempty"`
+	InstanceMessages  []InstanceMessage                            `json:"instanceMessages,omitempty"`
+	Labels            map[string]string                            `json:"labels,omitempty"`
+	MaintenancePolicy *GoogleCloudMemcacheV1MaintenancePolicyInput `json:"maintenancePolicy,omitempty"`
+	MemcacheVersion   *InstanceMemcacheVersionEnum                 `json:"memcacheVersion,omitempty"`
+	Name              *string                                      `json:"name,omitempty"`
+	NodeConfig        *NodeConfig                                  `json:"nodeConfig,omitempty"`
+	NodeCount         *int32                                       `json:"nodeCount,omitempty"`
+	Parameters        *MemcacheParametersInput                     `json:"parameters,omitempty"`
+	Zones             []string                                     `json:"zones,omitempty"`
+}
+
+// Instance
+// A Memorystore for Memcached instance
 type Instance struct {
 	AuthorizedNetwork   *string                                 `json:"authorizedNetwork,omitempty"`
 	CreateTime          *string                                 `json:"createTime,omitempty"`

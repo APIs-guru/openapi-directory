@@ -1,6 +1,7 @@
 
 
+
 export enum InventoryAttributeDataTypeEnum {
-    String = "string"
-,    Number = "number"
+    String = "string",
+    Number = "number"
 }

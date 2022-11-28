@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostUpdateSecurityGroupRuleDescriptionsEgressActionEnum(str, Enum):
     UPDATE_SECURITY_GROUP_RULE_DESCRIPTIONS_EGRESS = "UpdateSecurityGroupRuleDescriptionsEgress"
@@ -10,8 +14,8 @@ class PostUpdateSecurityGroupRuleDescriptionsEgressVersionEnum(str, Enum):
 
 @dataclass
 class PostUpdateSecurityGroupRuleDescriptionsEgressQueryParams:
-    action: PostUpdateSecurityGroupRuleDescriptionsEgressActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostUpdateSecurityGroupRuleDescriptionsEgressVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostUpdateSecurityGroupRuleDescriptionsEgressActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostUpdateSecurityGroupRuleDescriptionsEgressVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostUpdateSecurityGroupRuleDescriptionsEgressHeaders:
 
 @dataclass
 class PostUpdateSecurityGroupRuleDescriptionsEgressRequest:
-    query_params: PostUpdateSecurityGroupRuleDescriptionsEgressQueryParams = field(default=None)
-    headers: PostUpdateSecurityGroupRuleDescriptionsEgressHeaders = field(default=None)
+    headers: PostUpdateSecurityGroupRuleDescriptionsEgressHeaders = field()
+    query_params: PostUpdateSecurityGroupRuleDescriptionsEgressQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostUpdateSecurityGroupRuleDescriptionsEgressResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

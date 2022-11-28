@@ -22,10 +22,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { DeploymentApplicationConfig } from "./deploymentapplicationconfig";
 import { DeploymentConfig } from "./deploymentconfig";
 import { DeploymentJobErrorCodeEnum } from "./deploymentjoberrorcodeenum";
+import { RobotDeployment } from "./robotdeployment";
 import { DeploymentStatusEnum } from "./deploymentstatusenum";
 var DescribeDeploymentJobResponse = /** @class */ (function (_super) {
     __extends(DescribeDeploymentJobResponse, _super);
@@ -33,43 +34,43 @@ var DescribeDeploymentJobResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=arn" }),
+        SpeakeasyMetadata({ data: "json, name=arn" }),
         __metadata("design:type", String)
     ], DescribeDeploymentJobResponse.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=createdAt" }),
+        SpeakeasyMetadata({ data: "json, name=createdAt" }),
         __metadata("design:type", Date)
     ], DescribeDeploymentJobResponse.prototype, "createdAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=deploymentApplicationConfigs", elemType: shared.DeploymentApplicationConfig }),
+        SpeakeasyMetadata({ data: "json, name=deploymentApplicationConfigs", elemType: DeploymentApplicationConfig }),
         __metadata("design:type", Array)
     ], DescribeDeploymentJobResponse.prototype, "deploymentApplicationConfigs", void 0);
     __decorate([
-        Metadata({ data: "json, name=deploymentConfig" }),
+        SpeakeasyMetadata({ data: "json, name=deploymentConfig" }),
         __metadata("design:type", DeploymentConfig)
     ], DescribeDeploymentJobResponse.prototype, "deploymentConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=failureCode" }),
+        SpeakeasyMetadata({ data: "json, name=failureCode" }),
         __metadata("design:type", String)
     ], DescribeDeploymentJobResponse.prototype, "failureCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=failureReason" }),
+        SpeakeasyMetadata({ data: "json, name=failureReason" }),
         __metadata("design:type", String)
     ], DescribeDeploymentJobResponse.prototype, "failureReason", void 0);
     __decorate([
-        Metadata({ data: "json, name=fleet" }),
+        SpeakeasyMetadata({ data: "json, name=fleet" }),
         __metadata("design:type", String)
     ], DescribeDeploymentJobResponse.prototype, "fleet", void 0);
     __decorate([
-        Metadata({ data: "json, name=robotDeploymentSummary", elemType: shared.RobotDeployment }),
+        SpeakeasyMetadata({ data: "json, name=robotDeploymentSummary", elemType: RobotDeployment }),
         __metadata("design:type", Array)
     ], DescribeDeploymentJobResponse.prototype, "robotDeploymentSummary", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], DescribeDeploymentJobResponse.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags" }),
+        SpeakeasyMetadata({ data: "json, name=tags" }),
         __metadata("design:type", Map)
     ], DescribeDeploymentJobResponse.prototype, "tags", void 0);
     return DescribeDeploymentJobResponse;

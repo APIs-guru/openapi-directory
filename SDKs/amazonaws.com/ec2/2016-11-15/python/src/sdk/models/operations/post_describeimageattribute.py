@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDescribeImageAttributeActionEnum(str, Enum):
     DESCRIBE_IMAGE_ATTRIBUTE = "DescribeImageAttribute"
@@ -10,8 +14,8 @@ class PostDescribeImageAttributeVersionEnum(str, Enum):
 
 @dataclass
 class PostDescribeImageAttributeQueryParams:
-    action: PostDescribeImageAttributeActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDescribeImageAttributeVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDescribeImageAttributeActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDescribeImageAttributeVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDescribeImageAttributeHeaders:
 
 @dataclass
 class PostDescribeImageAttributeRequest:
-    query_params: PostDescribeImageAttributeQueryParams = field(default=None)
-    headers: PostDescribeImageAttributeHeaders = field(default=None)
+    headers: PostDescribeImageAttributeHeaders = field()
+    query_params: PostDescribeImageAttributeQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDescribeImageAttributeResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

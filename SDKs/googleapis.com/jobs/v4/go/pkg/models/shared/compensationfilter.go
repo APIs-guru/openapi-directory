@@ -23,6 +23,8 @@ const (
 	CompensationFilterUnitsEnumOtherCompensationUnit       CompensationFilterUnitsEnum = "OTHER_COMPENSATION_UNIT"
 )
 
+// CompensationFilter
+// Filter on job compensation type and amount.
 type CompensationFilter struct {
 	IncludeJobsWithUnspecifiedCompensationRange *bool                         `json:"includeJobsWithUnspecifiedCompensationRange,omitempty"`
 	Range                                       *CompensationRange            `json:"range,omitempty"`

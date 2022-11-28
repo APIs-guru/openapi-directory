@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AssociationOverview
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about the association.
 **/
 export class AssociationOverview extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AssociationStatusAggregatedCount" })
+  @SpeakeasyMetadata({ data: "json, name=AssociationStatusAggregatedCount" })
   associationStatusAggregatedCount?: Map<string, number>;
 
-  @Metadata({ data: "json, name=DetailedStatus" })
+  @SpeakeasyMetadata({ data: "json, name=DetailedStatus" })
   detailedStatus?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: string;
 }

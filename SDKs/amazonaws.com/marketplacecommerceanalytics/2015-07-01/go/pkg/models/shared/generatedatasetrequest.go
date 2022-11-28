@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// GenerateDataSetRequest
+// Container for the parameters to the GenerateDataSet operation.
 type GenerateDataSetRequest struct {
 	CustomerDefinedValues   map[string]string `json:"customerDefinedValues,omitempty"`
 	DataSetPublicationDate  time.Time         `json:"dataSetPublicationDate"`

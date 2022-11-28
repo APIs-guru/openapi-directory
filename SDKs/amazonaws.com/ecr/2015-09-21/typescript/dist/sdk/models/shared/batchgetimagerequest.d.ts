@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ImageIdentifier } from "./imageidentifier";
 export declare class BatchGetImageRequest extends SpeakeasyBase {
     acceptedMediaTypes?: string[];

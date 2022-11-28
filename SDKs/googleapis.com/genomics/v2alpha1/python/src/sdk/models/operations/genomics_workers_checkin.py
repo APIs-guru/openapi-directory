@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GenomicsWorkersCheckInPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class GenomicsWorkersCheckInQueryParams:
 
 @dataclass
 class GenomicsWorkersCheckInSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GenomicsWorkersCheckInSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class GenomicsWorkersCheckInSecurity:
 
 @dataclass
 class GenomicsWorkersCheckInRequest:
-    path_params: GenomicsWorkersCheckInPathParams = field(default=None)
-    query_params: GenomicsWorkersCheckInQueryParams = field(default=None)
+    path_params: GenomicsWorkersCheckInPathParams = field()
+    query_params: GenomicsWorkersCheckInQueryParams = field()
+    security: GenomicsWorkersCheckInSecurity = field()
     request: Optional[shared.CheckInRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: GenomicsWorkersCheckInSecurity = field(default=None)
     
 
 @dataclass
 class GenomicsWorkersCheckInResponse:
+    content_type: str = field()
+    status_code: int = field()
     check_in_response: Optional[shared.CheckInResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

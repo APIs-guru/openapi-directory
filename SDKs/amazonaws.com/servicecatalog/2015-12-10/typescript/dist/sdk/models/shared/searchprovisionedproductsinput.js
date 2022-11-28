@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccessLevelFilter } from "./accesslevelfilter";
 import { SortOrderEnum } from "./sortorderenum";
 var SearchProvisionedProductsInput = /** @class */ (function (_super) {
@@ -31,31 +31,31 @@ var SearchProvisionedProductsInput = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AcceptLanguage" }),
+        SpeakeasyMetadata({ data: "json, name=AcceptLanguage" }),
         __metadata("design:type", String)
     ], SearchProvisionedProductsInput.prototype, "acceptLanguage", void 0);
     __decorate([
-        Metadata({ data: "json, name=AccessLevelFilter" }),
+        SpeakeasyMetadata({ data: "json, name=AccessLevelFilter" }),
         __metadata("design:type", AccessLevelFilter)
     ], SearchProvisionedProductsInput.prototype, "accessLevelFilter", void 0);
     __decorate([
-        Metadata({ data: "json, name=Filters" }),
+        SpeakeasyMetadata({ data: "json, name=Filters" }),
         __metadata("design:type", Map)
     ], SearchProvisionedProductsInput.prototype, "filters", void 0);
     __decorate([
-        Metadata({ data: "json, name=PageSize" }),
+        SpeakeasyMetadata({ data: "json, name=PageSize" }),
         __metadata("design:type", Number)
     ], SearchProvisionedProductsInput.prototype, "pageSize", void 0);
     __decorate([
-        Metadata({ data: "json, name=PageToken" }),
+        SpeakeasyMetadata({ data: "json, name=PageToken" }),
         __metadata("design:type", String)
     ], SearchProvisionedProductsInput.prototype, "pageToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=SortBy" }),
+        SpeakeasyMetadata({ data: "json, name=SortBy" }),
         __metadata("design:type", String)
     ], SearchProvisionedProductsInput.prototype, "sortBy", void 0);
     __decorate([
-        Metadata({ data: "json, name=SortOrder" }),
+        SpeakeasyMetadata({ data: "json, name=SortOrder" }),
         __metadata("design:type", String)
     ], SearchProvisionedProductsInput.prototype, "sortOrder", void 0);
     return SearchProvisionedProductsInput;

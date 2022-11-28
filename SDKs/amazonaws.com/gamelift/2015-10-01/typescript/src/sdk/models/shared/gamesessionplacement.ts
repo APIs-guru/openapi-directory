@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GameProperty } from "./gameproperty";
 import { PlacedPlayerSession } from "./placedplayersession";
 import { PlayerLatency } from "./playerlatency";
 import { GameSessionPlacementStateEnum } from "./gamesessionplacementstateenum";
+
 
 
 // GameSessionPlacement
@@ -11,57 +11,57 @@ import { GameSessionPlacementStateEnum } from "./gamesessionplacementstateenum";
  * <p>Object that describes a <a>StartGameSessionPlacement</a> request. This object includes the full details of the original request plus the current status and start/end time stamps.</p> <p>Game session placement-related operations include:</p> <ul> <li> <p> <a>StartGameSessionPlacement</a> </p> </li> <li> <p> <a>DescribeGameSessionPlacement</a> </p> </li> <li> <p> <a>StopGameSessionPlacement</a> </p> </li> </ul>
 **/
 export class GameSessionPlacement extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DnsName" })
+  @SpeakeasyMetadata({ data: "json, name=DnsName" })
   dnsName?: string;
 
-  @Metadata({ data: "json, name=EndTime" })
+  @SpeakeasyMetadata({ data: "json, name=EndTime" })
   endTime?: Date;
 
-  @Metadata({ data: "json, name=GameProperties", elemType: shared.GameProperty })
+  @SpeakeasyMetadata({ data: "json, name=GameProperties", elemType: GameProperty })
   gameProperties?: GameProperty[];
 
-  @Metadata({ data: "json, name=GameSessionArn" })
+  @SpeakeasyMetadata({ data: "json, name=GameSessionArn" })
   gameSessionArn?: string;
 
-  @Metadata({ data: "json, name=GameSessionData" })
+  @SpeakeasyMetadata({ data: "json, name=GameSessionData" })
   gameSessionData?: string;
 
-  @Metadata({ data: "json, name=GameSessionId" })
+  @SpeakeasyMetadata({ data: "json, name=GameSessionId" })
   gameSessionId?: string;
 
-  @Metadata({ data: "json, name=GameSessionName" })
+  @SpeakeasyMetadata({ data: "json, name=GameSessionName" })
   gameSessionName?: string;
 
-  @Metadata({ data: "json, name=GameSessionQueueName" })
+  @SpeakeasyMetadata({ data: "json, name=GameSessionQueueName" })
   gameSessionQueueName?: string;
 
-  @Metadata({ data: "json, name=GameSessionRegion" })
+  @SpeakeasyMetadata({ data: "json, name=GameSessionRegion" })
   gameSessionRegion?: string;
 
-  @Metadata({ data: "json, name=IpAddress" })
+  @SpeakeasyMetadata({ data: "json, name=IpAddress" })
   ipAddress?: string;
 
-  @Metadata({ data: "json, name=MatchmakerData" })
+  @SpeakeasyMetadata({ data: "json, name=MatchmakerData" })
   matchmakerData?: string;
 
-  @Metadata({ data: "json, name=MaximumPlayerSessionCount" })
+  @SpeakeasyMetadata({ data: "json, name=MaximumPlayerSessionCount" })
   maximumPlayerSessionCount?: number;
 
-  @Metadata({ data: "json, name=PlacedPlayerSessions", elemType: shared.PlacedPlayerSession })
+  @SpeakeasyMetadata({ data: "json, name=PlacedPlayerSessions", elemType: PlacedPlayerSession })
   placedPlayerSessions?: PlacedPlayerSession[];
 
-  @Metadata({ data: "json, name=PlacementId" })
+  @SpeakeasyMetadata({ data: "json, name=PlacementId" })
   placementId?: string;
 
-  @Metadata({ data: "json, name=PlayerLatencies", elemType: shared.PlayerLatency })
+  @SpeakeasyMetadata({ data: "json, name=PlayerLatencies", elemType: PlayerLatency })
   playerLatencies?: PlayerLatency[];
 
-  @Metadata({ data: "json, name=Port" })
+  @SpeakeasyMetadata({ data: "json, name=Port" })
   port?: number;
 
-  @Metadata({ data: "json, name=StartTime" })
+  @SpeakeasyMetadata({ data: "json, name=StartTime" })
   startTime?: Date;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: GameSessionPlacementStateEnum;
 }

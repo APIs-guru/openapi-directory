@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 
 
 @dataclass
@@ -10,11 +10,11 @@ class SegmentListQueryParams:
 
 @dataclass
 class SegmentListRequest:
-    query_params: SegmentListQueryParams = field(default=None)
+    query_params: SegmentListQueryParams = field()
     
 
 @dataclass
 class SegmentListResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

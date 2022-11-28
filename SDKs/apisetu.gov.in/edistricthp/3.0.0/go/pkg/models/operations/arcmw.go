@@ -26,11 +26,6 @@ type ArcmwSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type ArcmwRequest struct {
-	Request  *ArcmwRequestBody `request:"mediaType=application/json"`
-	Security ArcmwSecurity
-}
-
 type Arcmw400ApplicationJSONErrorEnum string
 
 const (
@@ -160,6 +155,11 @@ const (
 type Arcmw504ApplicationJSON struct {
 	Error            *Arcmw504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Arcmw504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type ArcmwRequest struct {
+	Request  *ArcmwRequestBody `request:"mediaType=application/json"`
+	Security ArcmwSecurity
 }
 
 type ArcmwResponse struct {

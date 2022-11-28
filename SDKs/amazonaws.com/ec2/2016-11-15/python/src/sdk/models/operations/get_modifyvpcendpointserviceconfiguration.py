@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetModifyVpcEndpointServiceConfigurationActionEnum(str, Enum):
     MODIFY_VPC_ENDPOINT_SERVICE_CONFIGURATION = "ModifyVpcEndpointServiceConfiguration"
@@ -10,8 +14,10 @@ class GetModifyVpcEndpointServiceConfigurationVersionEnum(str, Enum):
 
 @dataclass
 class GetModifyVpcEndpointServiceConfigurationQueryParams:
+    action: GetModifyVpcEndpointServiceConfigurationActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    service_id: str = field(metadata={'query_param': { 'field_name': 'ServiceId', 'style': 'form', 'explode': True }})
+    version: GetModifyVpcEndpointServiceConfigurationVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     acceptance_required: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'AcceptanceRequired', 'style': 'form', 'explode': True }})
-    action: GetModifyVpcEndpointServiceConfigurationActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
     add_gateway_load_balancer_arn: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'AddGatewayLoadBalancerArn', 'style': 'form', 'explode': True }})
     add_network_load_balancer_arn: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'AddNetworkLoadBalancerArn', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
@@ -19,8 +25,6 @@ class GetModifyVpcEndpointServiceConfigurationQueryParams:
     remove_gateway_load_balancer_arn: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'RemoveGatewayLoadBalancerArn', 'style': 'form', 'explode': True }})
     remove_network_load_balancer_arn: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'RemoveNetworkLoadBalancerArn', 'style': 'form', 'explode': True }})
     remove_private_dns_name: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'RemovePrivateDnsName', 'style': 'form', 'explode': True }})
-    service_id: str = field(default=None, metadata={'query_param': { 'field_name': 'ServiceId', 'style': 'form', 'explode': True }})
-    version: GetModifyVpcEndpointServiceConfigurationVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -36,13 +40,13 @@ class GetModifyVpcEndpointServiceConfigurationHeaders:
 
 @dataclass
 class GetModifyVpcEndpointServiceConfigurationRequest:
-    query_params: GetModifyVpcEndpointServiceConfigurationQueryParams = field(default=None)
-    headers: GetModifyVpcEndpointServiceConfigurationHeaders = field(default=None)
+    headers: GetModifyVpcEndpointServiceConfigurationHeaders = field()
+    query_params: GetModifyVpcEndpointServiceConfigurationQueryParams = field()
     
 
 @dataclass
 class GetModifyVpcEndpointServiceConfigurationResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ApiPlanSubscriptionOut
@@ -6,60 +7,60 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The API Plan governing the subscription.
 **/
 export class ApiPlanSubscriptionOut extends SpeakeasyBase {
-  @Metadata({ data: "json, name=apiKey" })
+  @SpeakeasyMetadata({ data: "json, name=apiKey" })
   apiKey?: string;
 
-  @Metadata({ data: "json, name=currency" })
+  @SpeakeasyMetadata({ data: "json, name=currency" })
   currency?: string;
 
-  @Metadata({ data: "json, name=currencyFactor" })
+  @SpeakeasyMetadata({ data: "json, name=currencyFactor" })
   currencyFactor?: number;
 
-  @Metadata({ data: "json, name=planBaseFeesKey" })
+  @SpeakeasyMetadata({ data: "json, name=planBaseFeesKey" })
   planBaseFeesKey?: string;
 
-  @Metadata({ data: "json, name=planEnded" })
+  @SpeakeasyMetadata({ data: "json, name=planEnded" })
   planEnded?: number;
 
-  @Metadata({ data: "json, name=planName" })
+  @SpeakeasyMetadata({ data: "json, name=planName" })
   planName?: string;
 
-  @Metadata({ data: "json, name=planQuota" })
+  @SpeakeasyMetadata({ data: "json, name=planQuota" })
   planQuota?: number;
 
-  @Metadata({ data: "json, name=planStarted" })
+  @SpeakeasyMetadata({ data: "json, name=planStarted" })
   planStarted?: number;
 
-  @Metadata({ data: "json, name=planStatus" })
+  @SpeakeasyMetadata({ data: "json, name=planStatus" })
   planStatus?: string;
 
-  @Metadata({ data: "json, name=price" })
+  @SpeakeasyMetadata({ data: "json, name=price" })
   price?: number;
 
-  @Metadata({ data: "json, name=priceOverage" })
+  @SpeakeasyMetadata({ data: "json, name=priceOverage" })
   priceOverage?: number;
 
-  @Metadata({ data: "json, name=priceOverageUSD" })
+  @SpeakeasyMetadata({ data: "json, name=priceOverageUSD" })
   priceOverageUsd?: number;
 
-  @Metadata({ data: "json, name=priceUSD" })
+  @SpeakeasyMetadata({ data: "json, name=priceUSD" })
   priceUsd?: number;
 
-  @Metadata({ data: "json, name=priorPlanStarted" })
+  @SpeakeasyMetadata({ data: "json, name=priorPlanStarted" })
   priorPlanStarted?: number;
 
-  @Metadata({ data: "json, name=stripeCustomerId" })
+  @SpeakeasyMetadata({ data: "json, name=stripeCustomerId" })
   stripeCustomerId?: string;
 
-  @Metadata({ data: "json, name=stripeStatus" })
+  @SpeakeasyMetadata({ data: "json, name=stripeStatus" })
   stripeStatus?: string;
 
-  @Metadata({ data: "json, name=stripeSubscription" })
+  @SpeakeasyMetadata({ data: "json, name=stripeSubscription" })
   stripeSubscription?: string;
 
-  @Metadata({ data: "json, name=taxRate" })
+  @SpeakeasyMetadata({ data: "json, name=taxRate" })
   taxRate?: number;
 
-  @Metadata({ data: "json, name=userId" })
+  @SpeakeasyMetadata({ data: "json, name=userId" })
   userId?: string;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // FeedbackLoop
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * [Feedback loop](https://support.google.com/mail/answer/6254652) identifier information.
 **/
 export class FeedbackLoop extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=spamRatio" })
+  @SpeakeasyMetadata({ data: "json, name=spamRatio" })
   spamRatio?: number;
 }

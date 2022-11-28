@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowV2beta1ResponseMessageLiveAgentHandoff } from "./googleclouddialogflowv2beta1responsemessageliveagenthandoff";
 import { GoogleCloudDialogflowV2beta1ResponseMessageMixedAudio } from "./googleclouddialogflowv2beta1responsemessagemixedaudio";
 import { GoogleCloudDialogflowV2beta1ResponseMessageTelephonyTransferCall } from "./googleclouddialogflowv2beta1responsemessagetelephonytransfercall";
 import { GoogleCloudDialogflowV2beta1ResponseMessageText } from "./googleclouddialogflowv2beta1responsemessagetext";
+
 
 
 // GoogleCloudDialogflowV2beta1ResponseMessage
@@ -10,21 +11,21 @@ import { GoogleCloudDialogflowV2beta1ResponseMessageText } from "./googleclouddi
  * Response messages from an automated agent.
 **/
 export class GoogleCloudDialogflowV2beta1ResponseMessage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=endInteraction" })
+  @SpeakeasyMetadata({ data: "json, name=endInteraction" })
   endInteraction?: Map<string, any>;
 
-  @Metadata({ data: "json, name=liveAgentHandoff" })
+  @SpeakeasyMetadata({ data: "json, name=liveAgentHandoff" })
   liveAgentHandoff?: GoogleCloudDialogflowV2beta1ResponseMessageLiveAgentHandoff;
 
-  @Metadata({ data: "json, name=mixedAudio" })
+  @SpeakeasyMetadata({ data: "json, name=mixedAudio" })
   mixedAudio?: GoogleCloudDialogflowV2beta1ResponseMessageMixedAudio;
 
-  @Metadata({ data: "json, name=payload" })
+  @SpeakeasyMetadata({ data: "json, name=payload" })
   payload?: Map<string, any>;
 
-  @Metadata({ data: "json, name=telephonyTransferCall" })
+  @SpeakeasyMetadata({ data: "json, name=telephonyTransferCall" })
   telephonyTransferCall?: GoogleCloudDialogflowV2beta1ResponseMessageTelephonyTransferCall;
 
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: GoogleCloudDialogflowV2beta1ResponseMessageText;
 }

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DimensionMetadata } from "./dimensionmetadata";
 
+
 export enum DimensionCompatibilityCompatibilityEnum {
-    CompatibilityUnspecified = "COMPATIBILITY_UNSPECIFIED"
-,    Compatible = "COMPATIBLE"
-,    Incompatible = "INCOMPATIBLE"
+    CompatibilityUnspecified = "COMPATIBILITY_UNSPECIFIED",
+    Compatible = "COMPATIBLE",
+    Incompatible = "INCOMPATIBLE"
 }
 
 
@@ -13,9 +14,9 @@ export enum DimensionCompatibilityCompatibilityEnum {
  * The compatibility for a single dimension.
 **/
 export class DimensionCompatibility extends SpeakeasyBase {
-  @Metadata({ data: "json, name=compatibility" })
+  @SpeakeasyMetadata({ data: "json, name=compatibility" })
   compatibility?: DimensionCompatibilityCompatibilityEnum;
 
-  @Metadata({ data: "json, name=dimensionMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=dimensionMetadata" })
   dimensionMetadata?: DimensionMetadata;
 }

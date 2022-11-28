@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ExportTaskExecutionInfo
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the status of an export task.
 **/
 export class ExportTaskExecutionInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=completionTime" })
+  @SpeakeasyMetadata({ data: "json, name=completionTime" })
   completionTime?: number;
 
-  @Metadata({ data: "json, name=creationTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationTime" })
   creationTime?: number;
 }

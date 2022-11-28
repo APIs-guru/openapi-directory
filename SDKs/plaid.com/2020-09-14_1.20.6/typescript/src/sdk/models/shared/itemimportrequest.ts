@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ItemImportRequestOptions } from "./itemimportrequestoptions";
 import { ProductsEnum } from "./productsenum";
 import { ItemImportRequestUserAuth } from "./itemimportrequestuserauth";
+
 
 
 // ItemImportRequest
@@ -9,18 +10,18 @@ import { ItemImportRequestUserAuth } from "./itemimportrequestuserauth";
  * ItemImportRequest defines the request schema for `/item/import`
 **/
 export class ItemImportRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=client_id" })
+  @SpeakeasyMetadata({ data: "json, name=client_id" })
   clientId?: string;
 
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options?: ItemImportRequestOptions;
 
-  @Metadata({ data: "json, name=products" })
+  @SpeakeasyMetadata({ data: "json, name=products" })
   products: ProductsEnum[];
 
-  @Metadata({ data: "json, name=secret" })
+  @SpeakeasyMetadata({ data: "json, name=secret" })
   secret?: string;
 
-  @Metadata({ data: "json, name=user_auth" })
+  @SpeakeasyMetadata({ data: "json, name=user_auth" })
   userAuth: ItemImportRequestUserAuth;
 }

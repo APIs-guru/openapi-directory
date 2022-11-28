@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class PostLocksPathPathParams:
-    path: str = field(default=None, metadata={'path_param': { 'field_name': 'path', 'style': 'simple', 'explode': False }})
+    path: str = field(metadata={'path_param': { 'field_name': 'path', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,13 +18,13 @@ class PostLocksPathRequestBody:
 
 @dataclass
 class PostLocksPathRequest:
-    path_params: PostLocksPathPathParams = field(default=None)
+    path_params: PostLocksPathPathParams = field()
     request: Optional[PostLocksPathRequestBody] = field(default=None, metadata={'request': { 'media_type': 'multipart/form-data' }})
     
 
 @dataclass
 class PostLocksPathResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     lock_entity: Optional[shared.LockEntity] = field(default=None)
-    status_code: int = field(default=None)
     

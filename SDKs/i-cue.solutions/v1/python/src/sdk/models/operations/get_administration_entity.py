@@ -10,13 +10,13 @@ class GetAdministrationEntityHeaders:
 
 @dataclass
 class GetAdministrationEntityRequest:
-    headers: GetAdministrationEntityHeaders = field(default=None)
+    headers: GetAdministrationEntityHeaders = field()
     
 
 @dataclass
 class GetAdministrationEntityResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     entities: Optional[List[shared.Entity]] = field(default=None)
-    status_code: int = field(default=None)
     

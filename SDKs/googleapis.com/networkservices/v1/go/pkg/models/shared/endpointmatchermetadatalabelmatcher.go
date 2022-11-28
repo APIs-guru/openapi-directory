@@ -8,6 +8,8 @@ const (
 	EndpointMatcherMetadataLabelMatcherMetadataLabelMatchCriteriaEnumMatchAll                              EndpointMatcherMetadataLabelMatcherMetadataLabelMatchCriteriaEnum = "MATCH_ALL"
 )
 
+// EndpointMatcherMetadataLabelMatcher
+// The matcher that is based on node metadata presented by xDS clients.
 type EndpointMatcherMetadataLabelMatcher struct {
 	MetadataLabelMatchCriteria *EndpointMatcherMetadataLabelMatcherMetadataLabelMatchCriteriaEnum `json:"metadataLabelMatchCriteria,omitempty"`
 	MetadataLabels             []EndpointMatcherMetadataLabelMatcherMetadataLabels                `json:"metadataLabels,omitempty"`

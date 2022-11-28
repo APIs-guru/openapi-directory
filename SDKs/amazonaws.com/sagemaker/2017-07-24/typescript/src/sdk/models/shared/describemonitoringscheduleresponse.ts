@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MonitoringExecutionSummary } from "./monitoringexecutionsummary";
 import { MonitoringScheduleConfig } from "./monitoringscheduleconfig";
 import { ScheduleStatusEnum } from "./schedulestatusenum";
 import { MonitoringTypeEnum } from "./monitoringtypeenum";
 
 
+
 export class DescribeMonitoringScheduleResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime: Date;
 
-  @Metadata({ data: "json, name=EndpointName" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointName" })
   endpointName?: string;
 
-  @Metadata({ data: "json, name=FailureReason" })
+  @SpeakeasyMetadata({ data: "json, name=FailureReason" })
   failureReason?: string;
 
-  @Metadata({ data: "json, name=LastModifiedTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedTime" })
   lastModifiedTime: Date;
 
-  @Metadata({ data: "json, name=LastMonitoringExecutionSummary" })
+  @SpeakeasyMetadata({ data: "json, name=LastMonitoringExecutionSummary" })
   lastMonitoringExecutionSummary?: MonitoringExecutionSummary;
 
-  @Metadata({ data: "json, name=MonitoringScheduleArn" })
+  @SpeakeasyMetadata({ data: "json, name=MonitoringScheduleArn" })
   monitoringScheduleArn: string;
 
-  @Metadata({ data: "json, name=MonitoringScheduleConfig" })
+  @SpeakeasyMetadata({ data: "json, name=MonitoringScheduleConfig" })
   monitoringScheduleConfig: MonitoringScheduleConfig;
 
-  @Metadata({ data: "json, name=MonitoringScheduleName" })
+  @SpeakeasyMetadata({ data: "json, name=MonitoringScheduleName" })
   monitoringScheduleName: string;
 
-  @Metadata({ data: "json, name=MonitoringScheduleStatus" })
+  @SpeakeasyMetadata({ data: "json, name=MonitoringScheduleStatus" })
   monitoringScheduleStatus: ScheduleStatusEnum;
 
-  @Metadata({ data: "json, name=MonitoringType" })
+  @SpeakeasyMetadata({ data: "json, name=MonitoringType" })
   monitoringType?: MonitoringTypeEnum;
 }

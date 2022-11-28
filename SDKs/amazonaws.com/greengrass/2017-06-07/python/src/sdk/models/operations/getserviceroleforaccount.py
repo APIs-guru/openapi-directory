@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
@@ -16,13 +19,13 @@ class GetServiceRoleForAccountHeaders:
 
 @dataclass
 class GetServiceRoleForAccountRequest:
-    headers: GetServiceRoleForAccountHeaders = field(default=None)
+    headers: GetServiceRoleForAccountHeaders = field()
     
 
 @dataclass
 class GetServiceRoleForAccountResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_service_role_for_account_response: Optional[shared.GetServiceRoleForAccountResponse] = field(default=None)
     internal_server_error_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

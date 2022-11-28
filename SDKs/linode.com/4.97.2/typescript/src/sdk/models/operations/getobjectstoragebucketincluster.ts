@@ -1,81 +1,69 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export const GETOBJECTSTORAGEBUCKETINCLUSTER_SERVERS = [
-	"https://api.linode.com/v4",
-];
 
+export const GetObjectStorageBucketinClusterServerList = [
+	"https://api.linode.com/v4",
+] as const;
 
 
 export class GetObjectStorageBucketinClusterPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=clusterId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=clusterId" })
   clusterId: string;
 }
 
 
-export class GetObjectStorageBucketinClusterSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class GetObjectStorageBucketinClusterSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class GetObjectStorageBucketinClusterSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: GetObjectStorageBucketinClusterSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: GetObjectStorageBucketinClusterSecurityOption2;
-}
-
-
-export class GetObjectStorageBucketinClusterRequest extends SpeakeasyBase {
-  @Metadata()
-  serverUrl?: string;
-
-  @Metadata()
-  pathParams: GetObjectStorageBucketinClusterPathParams;
-
-  @Metadata()
-  security: GetObjectStorageBucketinClusterSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class GetObjectStorageBucketinCluster200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data", elemType: shared.ObjectStorageBucket })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: shared.ObjectStorageBucket })
   data?: shared.ObjectStorageBucket[];
 
-  @Metadata({ data: "json, name=page" })
+  @SpeakeasyMetadata({ data: "json, name=page" })
   page?: number;
 
-  @Metadata({ data: "json, name=pages" })
+  @SpeakeasyMetadata({ data: "json, name=pages" })
   pages?: number;
 
-  @Metadata({ data: "json, name=results" })
+  @SpeakeasyMetadata({ data: "json, name=results" })
   results?: number;
 }
 
 
 export class GetObjectStorageBucketinClusterDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class GetObjectStorageBucketinClusterRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  serverUrl?: string;
+
+  @SpeakeasyMetadata()
+  pathParams: GetObjectStorageBucketinClusterPathParams;
+
+  @SpeakeasyMetadata()
+  security: GetObjectStorageBucketinClusterSecurity;
+}
+
+
 export class GetObjectStorageBucketinClusterResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getObjectStorageBucketinCluster200ApplicationJsonObject?: GetObjectStorageBucketinCluster200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getObjectStorageBucketinClusterDefaultApplicationJsonObject?: GetObjectStorageBucketinClusterDefaultApplicationJson;
 }

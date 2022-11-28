@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AnnotateFileRequest } from "./annotatefilerequest";
+
 
 
 // BatchAnnotateFilesRequest
@@ -8,9 +8,9 @@ import { AnnotateFileRequest } from "./annotatefilerequest";
  * A list of requests to annotate files using the BatchAnnotateFiles API.
 **/
 export class BatchAnnotateFilesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=parent" })
+  @SpeakeasyMetadata({ data: "json, name=parent" })
   parent?: string;
 
-  @Metadata({ data: "json, name=requests", elemType: shared.AnnotateFileRequest })
+  @SpeakeasyMetadata({ data: "json, name=requests", elemType: AnnotateFileRequest })
   requests?: AnnotateFileRequest[];
 }

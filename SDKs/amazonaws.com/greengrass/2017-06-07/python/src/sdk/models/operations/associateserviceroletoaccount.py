@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,20 +22,20 @@ class AssociateServiceRoleToAccountHeaders:
 @dataclass_json
 @dataclass
 class AssociateServiceRoleToAccountRequestBody:
-    role_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RoleArn' }})
+    role_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('RoleArn') }})
     
 
 @dataclass
 class AssociateServiceRoleToAccountRequest:
-    headers: AssociateServiceRoleToAccountHeaders = field(default=None)
-    request: AssociateServiceRoleToAccountRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: AssociateServiceRoleToAccountHeaders = field()
+    request: AssociateServiceRoleToAccountRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class AssociateServiceRoleToAccountResponse:
+    content_type: str = field()
+    status_code: int = field()
     associate_service_role_to_account_response: Optional[shared.AssociateServiceRoleToAccountResponse] = field(default=None)
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_error_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

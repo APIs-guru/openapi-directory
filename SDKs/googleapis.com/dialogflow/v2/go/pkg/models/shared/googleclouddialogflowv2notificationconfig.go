@@ -8,6 +8,8 @@ const (
 	GoogleCloudDialogflowV2NotificationConfigMessageFormatEnumJSON                     GoogleCloudDialogflowV2NotificationConfigMessageFormatEnum = "JSON"
 )
 
+// GoogleCloudDialogflowV2NotificationConfig
+// Defines notification behavior.
 type GoogleCloudDialogflowV2NotificationConfig struct {
 	MessageFormat *GoogleCloudDialogflowV2NotificationConfigMessageFormatEnum `json:"messageFormat,omitempty"`
 	Topic         *string                                                     `json:"topic,omitempty"`

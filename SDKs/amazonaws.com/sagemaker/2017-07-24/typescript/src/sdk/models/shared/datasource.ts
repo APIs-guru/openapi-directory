@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FileSystemDataSource } from "./filesystemdatasource";
 import { S3DataSource } from "./s3datasource";
+
 
 
 // DataSource
@@ -8,9 +9,9 @@ import { S3DataSource } from "./s3datasource";
  * Describes the location of the channel data.
 **/
 export class DataSource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FileSystemDataSource" })
+  @SpeakeasyMetadata({ data: "json, name=FileSystemDataSource" })
   fileSystemDataSource?: FileSystemDataSource;
 
-  @Metadata({ data: "json, name=S3DataSource" })
+  @SpeakeasyMetadata({ data: "json, name=S3DataSource" })
   s3DataSource?: S3DataSource;
 }

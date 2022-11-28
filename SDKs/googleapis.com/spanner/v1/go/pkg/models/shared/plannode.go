@@ -8,6 +8,8 @@ const (
 	PlanNodeKindEnumScalar          PlanNodeKindEnum = "SCALAR"
 )
 
+// PlanNode
+// Node information for nodes appearing in a QueryPlan.plan_nodes.
 type PlanNode struct {
 	ChildLinks          []ChildLink            `json:"childLinks,omitempty"`
 	DisplayName         *string                `json:"displayName,omitempty"`

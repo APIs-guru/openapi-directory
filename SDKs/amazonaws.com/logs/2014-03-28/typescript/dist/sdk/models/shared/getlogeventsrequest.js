@@ -22,38 +22,38 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetLogEventsRequest = /** @class */ (function (_super) {
     __extends(GetLogEventsRequest, _super);
     function GetLogEventsRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=endTime" }),
+        SpeakeasyMetadata({ data: "json, name=endTime" }),
         __metadata("design:type", Number)
     ], GetLogEventsRequest.prototype, "endTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=limit" }),
+        SpeakeasyMetadata({ data: "json, name=limit" }),
         __metadata("design:type", Number)
     ], GetLogEventsRequest.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "json, name=logGroupName" }),
+        SpeakeasyMetadata({ data: "json, name=logGroupName" }),
         __metadata("design:type", String)
     ], GetLogEventsRequest.prototype, "logGroupName", void 0);
     __decorate([
-        Metadata({ data: "json, name=logStreamName" }),
+        SpeakeasyMetadata({ data: "json, name=logStreamName" }),
         __metadata("design:type", String)
     ], GetLogEventsRequest.prototype, "logStreamName", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextToken" }),
         __metadata("design:type", String)
     ], GetLogEventsRequest.prototype, "nextToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=startFromHead" }),
+        SpeakeasyMetadata({ data: "json, name=startFromHead" }),
         __metadata("design:type", Boolean)
     ], GetLogEventsRequest.prototype, "startFromHead", void 0);
     __decorate([
-        Metadata({ data: "json, name=startTime" }),
+        SpeakeasyMetadata({ data: "json, name=startTime" }),
         __metadata("design:type", Number)
     ], GetLogEventsRequest.prototype, "startTime", void 0);
     return GetLogEventsRequest;

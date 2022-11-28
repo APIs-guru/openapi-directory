@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Update
+// An object representing an asynchronous update.
 type Update struct {
 	CreatedAt *time.Time        `json:"createdAt,omitempty"`
 	Errors    []ErrorDetail     `json:"errors,omitempty"`

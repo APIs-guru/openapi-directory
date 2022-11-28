@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
+
 
 export enum GetRecordsXAmzTargetEnum {
     Kinesis20131202GetRecords = "Kinesis_20131202.GetRecords"
@@ -7,78 +8,78 @@ export enum GetRecordsXAmzTargetEnum {
 
 
 export class GetRecordsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Target" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Target" })
   xAmzTarget: GetRecordsXAmzTargetEnum;
 }
 
 
 export class GetRecordsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetRecordsHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.GetRecordsInput;
 }
 
 
 export class GetRecordsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   expiredIteratorException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getRecordsOutput?: shared.GetRecordsOutput;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidArgumentException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   kmsAccessDeniedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   kmsDisabledException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   kmsInvalidStateException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   kmsNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   kmsOptInRequired?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   kmsThrottlingException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   provisionedThroughputExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

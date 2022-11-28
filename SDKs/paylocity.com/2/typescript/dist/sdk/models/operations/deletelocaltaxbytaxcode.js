@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var DeleteLocalTaxByTaxCodePathParams = /** @class */ (function (_super) {
     __extends(DeleteLocalTaxByTaxCodePathParams, _super);
@@ -30,15 +30,15 @@ var DeleteLocalTaxByTaxCodePathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=companyId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=companyId" }),
         __metadata("design:type", String)
     ], DeleteLocalTaxByTaxCodePathParams.prototype, "companyId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=employeeId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=employeeId" }),
         __metadata("design:type", String)
     ], DeleteLocalTaxByTaxCodePathParams.prototype, "employeeId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=taxCode" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=taxCode" }),
         __metadata("design:type", String)
     ], DeleteLocalTaxByTaxCodePathParams.prototype, "taxCode", void 0);
     return DeleteLocalTaxByTaxCodePathParams;
@@ -50,7 +50,7 @@ var DeleteLocalTaxByTaxCodeSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemePaylocityAuth)
     ], DeleteLocalTaxByTaxCodeSecurity.prototype, "paylocityAuth", void 0);
     return DeleteLocalTaxByTaxCodeSecurity;
@@ -62,11 +62,11 @@ var DeleteLocalTaxByTaxCodeRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteLocalTaxByTaxCodePathParams)
     ], DeleteLocalTaxByTaxCodeRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteLocalTaxByTaxCodeSecurity)
     ], DeleteLocalTaxByTaxCodeRequest.prototype, "security", void 0);
     return DeleteLocalTaxByTaxCodeRequest;
@@ -78,15 +78,15 @@ var DeleteLocalTaxByTaxCodeResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DeleteLocalTaxByTaxCodeResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DeleteLocalTaxByTaxCodeResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata({ elemType: shared.Error }),
+        SpeakeasyMetadata({ elemType: shared.Error }),
         __metadata("design:type", Array)
     ], DeleteLocalTaxByTaxCodeResponse.prototype, "errors", void 0);
     return DeleteLocalTaxByTaxCodeResponse;

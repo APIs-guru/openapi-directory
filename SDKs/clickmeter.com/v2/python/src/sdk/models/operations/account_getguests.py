@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class AccountGetGuestsSortDirectionEnum(str, Enum):
@@ -18,12 +19,12 @@ class AccountGetGuestsQueryParams:
 
 @dataclass
 class AccountGetGuestsRequest:
-    query_params: AccountGetGuestsQueryParams = field(default=None)
+    query_params: AccountGetGuestsQueryParams = field()
     
 
 @dataclass
 class AccountGetGuestsResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_core_responses_entities_response_api_core_responses_entity_uri_system_int64_: Optional[shared.APICoreResponsesEntitiesResponseAPICoreResponsesEntityURISystemInt64] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

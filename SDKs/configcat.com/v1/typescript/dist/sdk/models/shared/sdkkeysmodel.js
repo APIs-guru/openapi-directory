@@ -22,20 +22,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-var SdkKeysModel = /** @class */ (function (_super) {
-    __extends(SdkKeysModel, _super);
-    function SdkKeysModel() {
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+var SDKKeysModel = /** @class */ (function (_super) {
+    __extends(SDKKeysModel, _super);
+    function SDKKeysModel() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=primary" }),
+        SpeakeasyMetadata({ data: "json, name=primary" }),
         __metadata("design:type", String)
-    ], SdkKeysModel.prototype, "primary", void 0);
+    ], SDKKeysModel.prototype, "primary", void 0);
     __decorate([
-        Metadata({ data: "json, name=secondary" }),
+        SpeakeasyMetadata({ data: "json, name=secondary" }),
         __metadata("design:type", String)
-    ], SdkKeysModel.prototype, "secondary", void 0);
-    return SdkKeysModel;
+    ], SDKKeysModel.prototype, "secondary", void 0);
+    return SDKKeysModel;
 }(SpeakeasyBase));
-export { SdkKeysModel };
+export { SDKKeysModel };

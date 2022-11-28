@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum AttributeParametersScoreTypeEnum {
-    ScoreTypeUnspecified = "SCORE_TYPE_UNSPECIFIED"
-,    Probability = "PROBABILITY"
-,    StdDevScore = "STD_DEV_SCORE"
-,    Percentile = "PERCENTILE"
-,    Raw = "RAW"
+    ScoreTypeUnspecified = "SCORE_TYPE_UNSPECIFIED",
+    Probability = "PROBABILITY",
+    StdDevScore = "STD_DEV_SCORE",
+    Percentile = "PERCENTILE",
+    Raw = "RAW"
 }
 
 
@@ -14,9 +15,9 @@ export enum AttributeParametersScoreTypeEnum {
  * Configurable parameters for attribute scoring.
 **/
 export class AttributeParameters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=scoreThreshold" })
+  @SpeakeasyMetadata({ data: "json, name=scoreThreshold" })
   scoreThreshold?: number;
 
-  @Metadata({ data: "json, name=scoreType" })
+  @SpeakeasyMetadata({ data: "json, name=scoreType" })
   scoreType?: AttributeParametersScoreTypeEnum;
 }

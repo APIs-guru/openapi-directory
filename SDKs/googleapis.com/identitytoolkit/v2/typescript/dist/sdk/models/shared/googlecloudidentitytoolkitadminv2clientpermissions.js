@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GoogleCloudIdentitytoolkitAdminV2ClientPermissions
 /**
  * Configuration related to restricting a user's ability to affect their account.
@@ -33,11 +33,11 @@ var GoogleCloudIdentitytoolkitAdminV2ClientPermissions = /** @class */ (function
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=disabledUserDeletion" }),
+        SpeakeasyMetadata({ data: "json, name=disabledUserDeletion" }),
         __metadata("design:type", Boolean)
     ], GoogleCloudIdentitytoolkitAdminV2ClientPermissions.prototype, "disabledUserDeletion", void 0);
     __decorate([
-        Metadata({ data: "json, name=disabledUserSignup" }),
+        SpeakeasyMetadata({ data: "json, name=disabledUserSignup" }),
         __metadata("design:type", Boolean)
     ], GoogleCloudIdentitytoolkitAdminV2ClientPermissions.prototype, "disabledUserSignup", void 0);
     return GoogleCloudIdentitytoolkitAdminV2ClientPermissions;

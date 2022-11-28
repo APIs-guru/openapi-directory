@@ -16,12 +16,6 @@ type GetAnnotationLayerRelatedColumnNameSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type GetAnnotationLayerRelatedColumnNameRequest struct {
-	PathParams  GetAnnotationLayerRelatedColumnNamePathParams
-	QueryParams GetAnnotationLayerRelatedColumnNameQueryParams
-	Security    GetAnnotationLayerRelatedColumnNameSecurity
-}
-
 type GetAnnotationLayerRelatedColumnName400ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
 }
@@ -36,6 +30,12 @@ type GetAnnotationLayerRelatedColumnName404ApplicationJSON struct {
 
 type GetAnnotationLayerRelatedColumnName500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type GetAnnotationLayerRelatedColumnNameRequest struct {
+	PathParams  GetAnnotationLayerRelatedColumnNamePathParams
+	QueryParams GetAnnotationLayerRelatedColumnNameQueryParams
+	Security    GetAnnotationLayerRelatedColumnNameSecurity
 }
 
 type GetAnnotationLayerRelatedColumnNameResponse struct {

@@ -1,59 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetTicketPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=ticketId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ticketId" })
   ticketId: number;
 }
 
 
-export class GetTicketSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class GetTicketSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class GetTicketSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: GetTicketSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: GetTicketSecurityOption2;
-}
-
-
-export class GetTicketRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetTicketPathParams;
-
-  @Metadata()
-  security: GetTicketSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class GetTicketDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class GetTicketRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetTicketPathParams;
+
+  @SpeakeasyMetadata()
+  security: GetTicketSecurity;
+}
+
+
 export class GetTicketResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   supportTicket?: shared.SupportTicket;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getTicketDefaultApplicationJsonObject?: GetTicketDefaultApplicationJson;
 }

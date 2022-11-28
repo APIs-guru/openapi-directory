@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AuthorisationConfirmation
@@ -7,6 +8,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * 
 **/
 export class AuthorisationConfirmation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=confirmationCode" })
+  @SpeakeasyMetadata({ data: "json, name=confirmationCode" })
   confirmationCode: string;
 }

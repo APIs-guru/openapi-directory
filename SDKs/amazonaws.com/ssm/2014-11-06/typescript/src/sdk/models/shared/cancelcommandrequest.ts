@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CancelCommandRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * <p/>
 **/
 export class CancelCommandRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CommandId" })
+  @SpeakeasyMetadata({ data: "json, name=CommandId" })
   commandId: string;
 
-  @Metadata({ data: "json, name=InstanceIds" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceIds" })
   instanceIds?: string[];
 }

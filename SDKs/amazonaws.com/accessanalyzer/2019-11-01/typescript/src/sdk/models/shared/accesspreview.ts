@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Configuration } from "./configuration";
 import { AccessPreviewStatusEnum } from "./accesspreviewstatusenum";
 import { AccessPreviewStatusReason } from "./accesspreviewstatusreason";
+
 
 
 // AccessPreview
@@ -10,21 +10,21 @@ import { AccessPreviewStatusReason } from "./accesspreviewstatusreason";
  * Contains information about an access preview.
 **/
 export class AccessPreview extends SpeakeasyBase {
-  @Metadata({ data: "json, name=analyzerArn" })
+  @SpeakeasyMetadata({ data: "json, name=analyzerArn" })
   analyzerArn: string;
 
-  @Metadata({ data: "json, name=configurations", elemType: shared.Configuration })
+  @SpeakeasyMetadata({ data: "json, name=configurations", elemType: Configuration })
   configurations: Map<string, Configuration>;
 
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt: Date;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: AccessPreviewStatusEnum;
 
-  @Metadata({ data: "json, name=statusReason" })
+  @SpeakeasyMetadata({ data: "json, name=statusReason" })
   statusReason?: AccessPreviewStatusReason;
 }

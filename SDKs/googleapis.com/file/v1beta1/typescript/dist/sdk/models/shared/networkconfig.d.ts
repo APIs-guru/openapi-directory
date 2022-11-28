@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum NetworkConfigConnectModeEnum {
     ConnectModeUnspecified = "CONNECT_MODE_UNSPECIFIED",
     DirectPeering = "DIRECT_PEERING",
@@ -7,6 +7,15 @@ export declare enum NetworkConfigConnectModeEnum {
 export declare enum NetworkConfigModesEnum {
     AddressModeUnspecified = "ADDRESS_MODE_UNSPECIFIED",
     ModeIpv4 = "MODE_IPV4"
+}
+/**
+ * Network configuration for the instance.
+**/
+export declare class NetworkConfigInput extends SpeakeasyBase {
+    connectMode?: NetworkConfigConnectModeEnum;
+    modes?: NetworkConfigModesEnum[];
+    network?: string;
+    reservedIpRange?: string;
 }
 /**
  * Network configuration for the instance.

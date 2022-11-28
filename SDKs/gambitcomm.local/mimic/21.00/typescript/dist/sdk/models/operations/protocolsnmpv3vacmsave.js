@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ProtocolSnmpv3VacmSavePathParams = /** @class */ (function (_super) {
     __extends(ProtocolSnmpv3VacmSavePathParams, _super);
     function ProtocolSnmpv3VacmSavePathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
         __metadata("design:type", Number)
     ], ProtocolSnmpv3VacmSavePathParams.prototype, "agentNum", void 0);
     return ProtocolSnmpv3VacmSavePathParams;
@@ -41,7 +41,7 @@ var ProtocolSnmpv3VacmSaveRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProtocolSnmpv3VacmSavePathParams)
     ], ProtocolSnmpv3VacmSaveRequest.prototype, "pathParams", void 0);
     return ProtocolSnmpv3VacmSaveRequest;
@@ -53,15 +53,15 @@ var ProtocolSnmpv3VacmSaveResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolSnmpv3VacmSaveResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProtocolSnmpv3VacmSaveResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Array)
     ], ProtocolSnmpv3VacmSaveResponse.prototype, "protocolSnmpv3VacmSave200ApplicationJsonStrings", void 0);
     return ProtocolSnmpv3VacmSaveResponse;

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConsumerQuotaMetric } from "./consumerquotametric";
+
 
 
 // ListConsumerQuotaMetricsResponse
@@ -8,9 +8,9 @@ import { ConsumerQuotaMetric } from "./consumerquotametric";
  * Response message for ListConsumerQuotaMetrics
 **/
 export class ListConsumerQuotaMetricsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=metrics", elemType: shared.ConsumerQuotaMetric })
+  @SpeakeasyMetadata({ data: "json, name=metrics", elemType: ConsumerQuotaMetric })
   metrics?: ConsumerQuotaMetric[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

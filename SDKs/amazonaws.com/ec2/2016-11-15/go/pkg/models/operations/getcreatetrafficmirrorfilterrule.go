@@ -6,6 +6,8 @@ const (
 	GetCreateTrafficMirrorFilterRuleActionEnumCreateTrafficMirrorFilterRule GetCreateTrafficMirrorFilterRuleActionEnum = "CreateTrafficMirrorFilterRule"
 )
 
+// GetCreateTrafficMirrorFilterRuleDestinationPortRange
+// Information about the Traffic Mirror filter rule port range.
 type GetCreateTrafficMirrorFilterRuleDestinationPortRange struct {
 	FromPort *int64 `queryParam:"name=FromPort"`
 	ToPort   *int64 `queryParam:"name=ToPort"`
@@ -18,6 +20,8 @@ const (
 	GetCreateTrafficMirrorFilterRuleRuleActionEnumReject GetCreateTrafficMirrorFilterRuleRuleActionEnum = "reject"
 )
 
+// GetCreateTrafficMirrorFilterRuleSourcePortRange
+// Information about the Traffic Mirror filter rule port range.
 type GetCreateTrafficMirrorFilterRuleSourcePortRange struct {
 	FromPort *int64 `queryParam:"name=FromPort"`
 	ToPort   *int64 `queryParam:"name=ToPort"`

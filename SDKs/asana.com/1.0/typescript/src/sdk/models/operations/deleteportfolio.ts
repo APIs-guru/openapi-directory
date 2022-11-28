@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DeletePortfolioPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=portfolio_gid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=portfolio_gid" })
   portfolioGid: string;
 }
 
 
 export class DeletePortfolioQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
   optFields?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
   optPretty?: boolean;
 }
 
 
-export class DeletePortfolioRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: DeletePortfolioPathParams;
-
-  @Metadata()
-  queryParams: DeletePortfolioQueryParams;
-}
-
-
 export class DeletePortfolio200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 }
 
 
+export class DeletePortfolioRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: DeletePortfolioPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: DeletePortfolioQueryParams;
+}
+
+
 export class DeletePortfolioResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deletePortfolio200ApplicationJsonObject?: DeletePortfolio200ApplicationJson;
 }

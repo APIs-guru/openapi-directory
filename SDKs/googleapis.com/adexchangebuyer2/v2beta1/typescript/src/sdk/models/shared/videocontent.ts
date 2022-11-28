@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // VideoContent
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Video content for a creative.
 **/
 export class VideoContent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=videoUrl" })
+  @SpeakeasyMetadata({ data: "json, name=videoUrl" })
   videoUrl?: string;
 
-  @Metadata({ data: "json, name=videoVastXml" })
+  @SpeakeasyMetadata({ data: "json, name=videoVastXml" })
   videoVastXml?: string;
 }

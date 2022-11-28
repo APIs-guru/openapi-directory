@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// RequestedServiceQuotaChange
+// Information about a quota increase request.
 type RequestedServiceQuotaChange struct {
 	CaseID       *string            `json:"CaseId,omitempty"`
 	Created      *time.Time         `json:"Created,omitempty"`

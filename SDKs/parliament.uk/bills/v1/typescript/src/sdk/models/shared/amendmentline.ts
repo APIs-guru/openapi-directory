@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AmendmentLine extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hangingIndentation" })
+  @SpeakeasyMetadata({ data: "json, name=hangingIndentation" })
   hangingIndentation?: string;
 
-  @Metadata({ data: "json, name=imageType" })
+  @SpeakeasyMetadata({ data: "json, name=imageType" })
   imageType?: string;
 
-  @Metadata({ data: "json, name=indentation" })
+  @SpeakeasyMetadata({ data: "json, name=indentation" })
   indentation?: number;
 
-  @Metadata({ data: "json, name=isImage" })
+  @SpeakeasyMetadata({ data: "json, name=isImage" })
   isImage?: boolean;
 
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: string;
 }

@@ -22,8 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { IdentityServiceAuthMethod } from "./identityserviceauthmethod";
+import { IdentityServiceAuthMethodInput } from "./identityserviceauthmethod";
 // IdentityServiceMembershipSpec
 /**
  * **Anthos Identity Service**: Configuration for a single Membership.
@@ -34,9 +35,25 @@ var IdentityServiceMembershipSpec = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=authMethods", elemType: shared.IdentityServiceAuthMethod }),
+        SpeakeasyMetadata({ data: "json, name=authMethods", elemType: IdentityServiceAuthMethod }),
         __metadata("design:type", Array)
     ], IdentityServiceMembershipSpec.prototype, "authMethods", void 0);
     return IdentityServiceMembershipSpec;
 }(SpeakeasyBase));
 export { IdentityServiceMembershipSpec };
+// IdentityServiceMembershipSpecInput
+/**
+ * **Anthos Identity Service**: Configuration for a single Membership.
+**/
+var IdentityServiceMembershipSpecInput = /** @class */ (function (_super) {
+    __extends(IdentityServiceMembershipSpecInput, _super);
+    function IdentityServiceMembershipSpecInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=authMethods", elemType: IdentityServiceAuthMethodInput }),
+        __metadata("design:type", Array)
+    ], IdentityServiceMembershipSpecInput.prototype, "authMethods", void 0);
+    return IdentityServiceMembershipSpecInput;
+}(SpeakeasyBase));
+export { IdentityServiceMembershipSpecInput };

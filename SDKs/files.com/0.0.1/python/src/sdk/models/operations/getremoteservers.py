@@ -11,12 +11,12 @@ class GetRemoteServersQueryParams:
 
 @dataclass
 class GetRemoteServersRequest:
-    query_params: GetRemoteServersQueryParams = field(default=None)
+    query_params: GetRemoteServersQueryParams = field()
     
 
 @dataclass
 class GetRemoteServersResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     remote_server_entities: Optional[List[shared.RemoteServerEntity]] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudIdentitytoolkitAdminV2AllowByDefault } from "./googlecloudidentitytoolkitadminv2allowbydefault";
 import { GoogleCloudIdentitytoolkitAdminV2AllowlistOnly } from "./googlecloudidentitytoolkitadminv2allowlistonly";
 // GoogleCloudIdentitytoolkitAdminV2SmsRegionConfig
@@ -35,11 +35,11 @@ var GoogleCloudIdentitytoolkitAdminV2SmsRegionConfig = /** @class */ (function (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=allowByDefault" }),
+        SpeakeasyMetadata({ data: "json, name=allowByDefault" }),
         __metadata("design:type", GoogleCloudIdentitytoolkitAdminV2AllowByDefault)
     ], GoogleCloudIdentitytoolkitAdminV2SmsRegionConfig.prototype, "allowByDefault", void 0);
     __decorate([
-        Metadata({ data: "json, name=allowlistOnly" }),
+        SpeakeasyMetadata({ data: "json, name=allowlistOnly" }),
         __metadata("design:type", GoogleCloudIdentitytoolkitAdminV2AllowlistOnly)
     ], GoogleCloudIdentitytoolkitAdminV2SmsRegionConfig.prototype, "allowlistOnly", void 0);
     return GoogleCloudIdentitytoolkitAdminV2SmsRegionConfig;

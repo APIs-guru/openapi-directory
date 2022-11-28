@@ -17,6 +17,8 @@ const (
 	AcceleratorConfigTypeEnumTpuV3                      AcceleratorConfigTypeEnum = "TPU_V3"
 )
 
+// AcceleratorConfig
+// Definition of a hardware accelerator. Note that not all combinations of `type` and `core_count` are valid. Check [GPUs on Compute Engine](/compute/docs/gpus/#gpus-list) to find a valid combination. TPUs are not supported.
 type AcceleratorConfig struct {
 	CoreCount *string                    `json:"coreCount,omitempty"`
 	Type      *AcceleratorConfigTypeEnum `json:"type,omitempty"`

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Backup } from "./backup";
+
 
 
 // ListBackupsResponse
@@ -8,9 +8,9 @@ import { Backup } from "./backup";
  * The response for ListBackups.
 **/
 export class ListBackupsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=backups", elemType: shared.Backup })
+  @SpeakeasyMetadata({ data: "json, name=backups", elemType: Backup })
   backups?: Backup[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

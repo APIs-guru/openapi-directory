@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// TopicsDetectionJobProperties
+// Provides information about a topic detection job.
 type TopicsDetectionJobProperties struct {
 	DataAccessRoleArn *string           `json:"DataAccessRoleArn,omitempty"`
 	EndTime           *time.Time        `json:"EndTime,omitempty"`

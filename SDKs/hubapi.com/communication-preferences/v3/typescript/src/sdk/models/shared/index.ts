@@ -1,3 +1,5 @@
+export * from "./error";
+export * from "./errordetail";
 export * from "./publicsubscriptionstatus";
 export * from "./publicsubscriptionstatusesresponse";
 export * from "./publicupdatesubscriptionstatusrequest";

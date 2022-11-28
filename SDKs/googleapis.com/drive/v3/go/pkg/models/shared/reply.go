@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Reply
+// A reply to a comment on a file.
 type Reply struct {
 	Action       *string    `json:"action,omitempty"`
 	Author       *User      `json:"author,omitempty"`

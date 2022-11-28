@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BoundingBox } from "./boundingbox";
-import { BoundingBox } from "./boundingbox";
+
 
 
 // GeolocateBounds
@@ -9,9 +9,9 @@ import { BoundingBox } from "./boundingbox";
  * 
 **/
 export class GeolocateBounds extends SpeakeasyBase {
-  @Metadata({ data: "json, name=default" })
+  @SpeakeasyMetadata({ data: "json, name=default" })
   default?: BoundingBox;
 
-  @Metadata({ data: "json, name=limit" })
+  @SpeakeasyMetadata({ data: "json, name=limit" })
   limit?: BoundingBox;
 }

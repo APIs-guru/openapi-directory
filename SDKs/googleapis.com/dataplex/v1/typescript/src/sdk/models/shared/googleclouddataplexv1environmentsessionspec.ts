@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GoogleCloudDataplexV1EnvironmentSessionSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enableFastStartup" })
+  @SpeakeasyMetadata({ data: "json, name=enableFastStartup" })
   enableFastStartup?: boolean;
 
-  @Metadata({ data: "json, name=maxIdleDuration" })
+  @SpeakeasyMetadata({ data: "json, name=maxIdleDuration" })
   maxIdleDuration?: string;
 }

@@ -12,14 +12,14 @@ type SearchStickersQueryParams struct {
 	Rating *string `queryParam:"style=form,explode=true,name=rating"`
 }
 
-type SearchStickersRequest struct {
-	QueryParams SearchStickersQueryParams
-}
-
 type SearchStickers200ApplicationJSON struct {
 	Data       []shared.Gif       `json:"data,omitempty"`
 	Meta       *shared.Meta       `json:"meta,omitempty"`
 	Pagination *shared.Pagination `json:"pagination,omitempty"`
+}
+
+type SearchStickersRequest struct {
+	QueryParams SearchStickersQueryParams
 }
 
 type SearchStickersResponse struct {

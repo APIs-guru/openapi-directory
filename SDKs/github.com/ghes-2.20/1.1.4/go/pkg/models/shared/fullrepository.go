@@ -279,6 +279,8 @@ type FullRepositoryRepository struct {
 	WatchersCount          int64                                       `json:"watchers_count"`
 }
 
+// FullRepository
+// Full Repository
 type FullRepository struct {
 	AllowMergeCommit       *bool                       `json:"allow_merge_commit,omitempty"`
 	AllowRebaseMerge       *bool                       `json:"allow_rebase_merge,omitempty"`

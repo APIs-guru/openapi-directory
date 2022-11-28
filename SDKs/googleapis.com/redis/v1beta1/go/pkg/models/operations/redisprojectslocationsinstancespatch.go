@@ -31,7 +31,7 @@ type RedisProjectsLocationsInstancesPatchSecurity struct {
 type RedisProjectsLocationsInstancesPatchRequest struct {
 	PathParams  RedisProjectsLocationsInstancesPatchPathParams
 	QueryParams RedisProjectsLocationsInstancesPatchQueryParams
-	Request     *shared.Instance `request:"mediaType=application/json"`
+	Request     *shared.InstanceInput `request:"mediaType=application/json"`
 	Security    RedisProjectsLocationsInstancesPatchSecurity
 }
 

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { SettingTypeEnum } from "./settingtypeenum";
 import { TagModel } from "./tagmodel";
 export declare class SettingModel extends SpeakeasyBase {

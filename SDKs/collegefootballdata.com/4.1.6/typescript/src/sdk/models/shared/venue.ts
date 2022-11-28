@@ -1,52 +1,53 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class VenueLocation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=x" })
+  @SpeakeasyMetadata({ data: "json, name=x" })
   x?: number;
 
-  @Metadata({ data: "json, name=y" })
+  @SpeakeasyMetadata({ data: "json, name=y" })
   y?: number;
 }
 
 
 export class Venue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=capacity" })
+  @SpeakeasyMetadata({ data: "json, name=capacity" })
   capacity?: number;
 
-  @Metadata({ data: "json, name=city" })
+  @SpeakeasyMetadata({ data: "json, name=city" })
   city?: string;
 
-  @Metadata({ data: "json, name=country_code" })
+  @SpeakeasyMetadata({ data: "json, name=country_code" })
   countryCode?: string;
 
-  @Metadata({ data: "json, name=dome" })
+  @SpeakeasyMetadata({ data: "json, name=dome" })
   dome?: boolean;
 
-  @Metadata({ data: "json, name=elevation" })
+  @SpeakeasyMetadata({ data: "json, name=elevation" })
   elevation?: number;
 
-  @Metadata({ data: "json, name=grass" })
+  @SpeakeasyMetadata({ data: "json, name=grass" })
   grass?: boolean;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: VenueLocation;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: string;
 
-  @Metadata({ data: "json, name=timezone" })
+  @SpeakeasyMetadata({ data: "json, name=timezone" })
   timezone?: string;
 
-  @Metadata({ data: "json, name=year" })
+  @SpeakeasyMetadata({ data: "json, name=year" })
   year?: number;
 
-  @Metadata({ data: "json, name=zip" })
+  @SpeakeasyMetadata({ data: "json, name=zip" })
   zip?: string;
 }

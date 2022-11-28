@@ -1,83 +1,84 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetAsyncEventQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=last_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=last_id" })
   lastId?: string;
 }
 
 
 export class GetAsyncEventSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   jwt: shared.SchemeJwt;
 }
 
 
-export class GetAsyncEventRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetAsyncEventQueryParams;
-
-  @Metadata()
-  security: GetAsyncEventSecurity;
-}
-
-
 export class GetAsyncEvent200ApplicationJsonResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=channel_id" })
+  @SpeakeasyMetadata({ data: "json, name=channel_id" })
   channelId?: string;
 
-  @Metadata({ data: "json, name=errors" })
+  @SpeakeasyMetadata({ data: "json, name=errors" })
   errors?: Map<string, any>[];
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=job_id" })
+  @SpeakeasyMetadata({ data: "json, name=job_id" })
   jobId?: string;
 
-  @Metadata({ data: "json, name=result_url" })
+  @SpeakeasyMetadata({ data: "json, name=result_url" })
   resultUrl?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 
-  @Metadata({ data: "json, name=user_id" })
+  @SpeakeasyMetadata({ data: "json, name=user_id" })
   userId?: number;
 }
 
 
 export class GetAsyncEvent200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=result", elemType: operations.GetAsyncEvent200ApplicationJsonResult })
+  @SpeakeasyMetadata({ data: "json, name=result", elemType: GetAsyncEvent200ApplicationJsonResult })
   result?: GetAsyncEvent200ApplicationJsonResult[];
 }
 
 
 export class GetAsyncEvent401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetAsyncEvent500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class GetAsyncEventRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetAsyncEventQueryParams;
+
+  @SpeakeasyMetadata()
+  security: GetAsyncEventSecurity;
+}
+
+
 export class GetAsyncEventResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getAsyncEvent200ApplicationJsonObject?: GetAsyncEvent200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getAsyncEvent401ApplicationJsonObject?: GetAsyncEvent401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getAsyncEvent500ApplicationJsonObject?: GetAsyncEvent500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

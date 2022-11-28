@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RoleAliasDescription } from "./rolealiasdescription";
 
 
+
 export class DescribeRoleAliasResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=roleAliasDescription" })
+  @SpeakeasyMetadata({ data: "json, name=roleAliasDescription" })
   roleAliasDescription?: RoleAliasDescription;
 }

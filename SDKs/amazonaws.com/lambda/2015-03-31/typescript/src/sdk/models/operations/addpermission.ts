@@ -1,110 +1,111 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class AddPermissionPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=FunctionName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=FunctionName" })
   functionName: string;
 }
 
 
 export class AddPermissionQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Qualifier" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Qualifier" })
   qualifier?: string;
 }
 
 
 export class AddPermissionHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class AddPermissionRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Action" })
+  @SpeakeasyMetadata({ data: "json, name=Action" })
   action: string;
 
-  @Metadata({ data: "json, name=EventSourceToken" })
+  @SpeakeasyMetadata({ data: "json, name=EventSourceToken" })
   eventSourceToken?: string;
 
-  @Metadata({ data: "json, name=Principal" })
+  @SpeakeasyMetadata({ data: "json, name=Principal" })
   principal: string;
 
-  @Metadata({ data: "json, name=RevisionId" })
+  @SpeakeasyMetadata({ data: "json, name=RevisionId" })
   revisionId?: string;
 
-  @Metadata({ data: "json, name=SourceAccount" })
+  @SpeakeasyMetadata({ data: "json, name=SourceAccount" })
   sourceAccount?: string;
 
-  @Metadata({ data: "json, name=SourceArn" })
+  @SpeakeasyMetadata({ data: "json, name=SourceArn" })
   sourceArn?: string;
 
-  @Metadata({ data: "json, name=StatementId" })
+  @SpeakeasyMetadata({ data: "json, name=StatementId" })
   statementId: string;
 }
 
 
 export class AddPermissionRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: AddPermissionPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: AddPermissionQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: AddPermissionHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: AddPermissionRequestBody;
 }
 
 
 export class AddPermissionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   addPermissionResponse?: shared.AddPermissionResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidParameterValueException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   policyLengthExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   preconditionFailedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceConflictException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tooManyRequestsException?: any;
 }

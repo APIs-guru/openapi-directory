@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class PostUploadQueryParams:
-    token: str = field(default=None, metadata={'query_param': { 'field_name': 'token', 'style': 'form', 'explode': True }})
+    token: str = field(metadata={'query_param': { 'field_name': 'token', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -15,15 +15,15 @@ class PostUploadHeaders:
 
 @dataclass
 class PostUploadRequest:
-    query_params: PostUploadQueryParams = field(default=None)
-    headers: PostUploadHeaders = field(default=None)
+    headers: PostUploadHeaders = field()
+    query_params: PostUploadQueryParams = field()
     request: Optional[shared.TokenUploadPayload] = field(default=None, metadata={'request': { 'media_type': 'multipart/form-data' }})
     
 
 @dataclass
 class PostUploadResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     bad_request: Optional[shared.BadRequest] = field(default=None)
     video: Optional[shared.Video] = field(default=None)
     

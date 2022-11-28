@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class DeleteAssetModelPathParams:
-    asset_model_id: str = field(default=None, metadata={'path_param': { 'field_name': 'assetModelId', 'style': 'simple', 'explode': False }})
+    asset_model_id: str = field(metadata={'path_param': { 'field_name': 'assetModelId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,19 +29,19 @@ class DeleteAssetModelHeaders:
 
 @dataclass
 class DeleteAssetModelRequest:
-    path_params: DeleteAssetModelPathParams = field(default=None)
-    query_params: DeleteAssetModelQueryParams = field(default=None)
-    headers: DeleteAssetModelHeaders = field(default=None)
+    headers: DeleteAssetModelHeaders = field()
+    path_params: DeleteAssetModelPathParams = field()
+    query_params: DeleteAssetModelQueryParams = field()
     
 
 @dataclass
 class DeleteAssetModelResponse:
+    content_type: str = field()
+    status_code: int = field()
     conflicting_operation_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     delete_asset_model_response: Optional[shared.DeleteAssetModelResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

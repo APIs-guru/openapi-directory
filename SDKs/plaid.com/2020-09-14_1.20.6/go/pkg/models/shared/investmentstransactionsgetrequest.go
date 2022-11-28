@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// InvestmentsTransactionsGetRequest
+// InvestmentsTransactionsGetRequest defines the request schema for `/investments/transactions/get`
 type InvestmentsTransactionsGetRequest struct {
 	AccessToken string                                    `json:"access_token"`
 	ClientID    *string                                   `json:"client_id,omitempty"`

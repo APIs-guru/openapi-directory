@@ -29,14 +29,14 @@ type ReactionsListForCommitCommentQueryParams struct {
 	PerPage *int64                                    `queryParam:"style=form,explode=true,name=per_page"`
 }
 
-type ReactionsListForCommitCommentRequest struct {
-	PathParams  ReactionsListForCommitCommentPathParams
-	QueryParams ReactionsListForCommitCommentQueryParams
-}
-
 type ReactionsListForCommitComment415ApplicationJSON struct {
 	DocumentationURL string `json:"documentation_url"`
 	Message          string `json:"message"`
+}
+
+type ReactionsListForCommitCommentRequest struct {
+	PathParams  ReactionsListForCommitCommentPathParams
+	QueryParams ReactionsListForCommitCommentQueryParams
 }
 
 type ReactionsListForCommitCommentResponse struct {

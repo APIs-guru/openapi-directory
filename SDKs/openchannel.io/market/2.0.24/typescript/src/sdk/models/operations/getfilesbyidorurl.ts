@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetFilesByIdOrUrlQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fileIdOrUrl" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fileIdOrUrl" })
   fileIdOrUrl: string;
 }
 
 
 export class GetFilesByIdOrUrlRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetFilesByIdOrUrlQueryParams;
 }
 
 
 export class GetFilesByIdOrUrlResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

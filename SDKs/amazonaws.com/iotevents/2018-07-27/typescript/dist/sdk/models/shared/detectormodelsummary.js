@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // DetectorModelSummary
 /**
  * Information about the detector model.
@@ -33,15 +33,15 @@ var DetectorModelSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=creationTime" }),
+        SpeakeasyMetadata({ data: "json, name=creationTime" }),
         __metadata("design:type", Date)
     ], DetectorModelSummary.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=detectorModelDescription" }),
+        SpeakeasyMetadata({ data: "json, name=detectorModelDescription" }),
         __metadata("design:type", String)
     ], DetectorModelSummary.prototype, "detectorModelDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=detectorModelName" }),
+        SpeakeasyMetadata({ data: "json, name=detectorModelName" }),
         __metadata("design:type", String)
     ], DetectorModelSummary.prototype, "detectorModelName", void 0);
     return DetectorModelSummary;

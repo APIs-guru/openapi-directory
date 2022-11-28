@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetSyndicatedVideosFormatEnum(str, Enum):
@@ -14,7 +15,7 @@ class GetSyndicatedVideosFormatEnum(str, Enum):
 
 @dataclass
 class GetSyndicatedVideosPathParams:
-    format: GetSyndicatedVideosFormatEnum = field(default=None, metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
+    format: GetSyndicatedVideosFormatEnum = field(metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -30,15 +31,15 @@ class GetSyndicatedVideosQueryParams:
 
 @dataclass
 class GetSyndicatedVideosRequest:
-    path_params: GetSyndicatedVideosPathParams = field(default=None)
-    query_params: GetSyndicatedVideosQueryParams = field(default=None)
+    path_params: GetSyndicatedVideosPathParams = field()
+    query_params: GetSyndicatedVideosQueryParams = field()
     
 
 @dataclass
 class GetSyndicatedVideosResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     get_syndicated_videos_204_application_json_object: Optional[dict[str, Any]] = field(default=None)
     

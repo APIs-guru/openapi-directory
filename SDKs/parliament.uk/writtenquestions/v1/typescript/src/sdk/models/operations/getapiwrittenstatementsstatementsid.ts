@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetApiWrittenstatementsStatementsIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
 
 export class GetApiWrittenstatementsStatementsIdQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=expandMember" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=expandMember" })
   expandMember?: boolean;
 }
 
 
 export class GetApiWrittenstatementsStatementsIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetApiWrittenstatementsStatementsIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetApiWrittenstatementsStatementsIdQueryParams;
 }
 
 
 export class GetApiWrittenstatementsStatementsIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: Map<string, Map<string, any>>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statementsViewModelSearchResult?: shared.StatementsViewModelSearchResult;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

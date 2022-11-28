@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class GetRecipeRecipeIDReviewPathParams:
-    recipe_id: int = field(default=None, metadata={'path_param': { 'field_name': 'recipeId', 'style': 'simple', 'explode': False }})
+    recipe_id: int = field(metadata={'path_param': { 'field_name': 'recipeId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetRecipeRecipeIDReviewRequest:
-    path_params: GetRecipeRecipeIDReviewPathParams = field(default=None)
+    path_params: GetRecipeRecipeIDReviewPathParams = field()
     
 
 @dataclass
 class GetRecipeRecipeIDReviewResponse:
+    content_type: str = field()
+    status_code: int = field()
     big_oven_model_api_review: Optional[shared.BigOvenModelAPIReview] = field(default=None)
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    body: Optional[bytes] = field(default=None)
     

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AddonVersionInfo } from "./addonversioninfo";
+
 
 
 // AddonInfo
@@ -8,12 +8,12 @@ import { AddonVersionInfo } from "./addonversioninfo";
  * Information about an add-on.
 **/
 export class AddonInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=addonName" })
+  @SpeakeasyMetadata({ data: "json, name=addonName" })
   addonName?: string;
 
-  @Metadata({ data: "json, name=addonVersions", elemType: shared.AddonVersionInfo })
+  @SpeakeasyMetadata({ data: "json, name=addonVersions", elemType: AddonVersionInfo })
   addonVersions?: AddonVersionInfo[];
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }

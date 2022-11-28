@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DescribeBuildInput
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the input for a request operation.
 **/
 export class DescribeBuildInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BuildId" })
+  @SpeakeasyMetadata({ data: "json, name=BuildId" })
   buildId: string;
 }

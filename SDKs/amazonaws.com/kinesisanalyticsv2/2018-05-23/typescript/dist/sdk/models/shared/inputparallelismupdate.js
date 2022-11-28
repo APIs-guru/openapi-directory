@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // InputParallelismUpdate
 /**
  * For a SQL-based Kinesis Data Analytics application, provides updates to the parallelism count.
@@ -33,7 +33,7 @@ var InputParallelismUpdate = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CountUpdate" }),
+        SpeakeasyMetadata({ data: "json, name=CountUpdate" }),
         __metadata("design:type", Number)
     ], InputParallelismUpdate.prototype, "countUpdate", void 0);
     return InputParallelismUpdate;

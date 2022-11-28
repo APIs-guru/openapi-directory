@@ -1,46 +1,47 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class MigrationsSetLfsPreferencePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=owner" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=owner" })
   owner: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repo" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repo" })
   repo: string;
 }
 
 export enum MigrationsSetLfsPreferenceRequestBodyUseLfsEnum {
-    OptIn = "opt_in"
-,    OptOut = "opt_out"
+    OptIn = "opt_in",
+    OptOut = "opt_out"
 }
 
 
 export class MigrationsSetLfsPreferenceRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=use_lfs" })
+  @SpeakeasyMetadata({ data: "json, name=use_lfs" })
   useLfs: MigrationsSetLfsPreferenceRequestBodyUseLfsEnum;
 }
 
 
 export class MigrationsSetLfsPreferenceRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: MigrationsSetLfsPreferencePathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: MigrationsSetLfsPreferenceRequestBody;
 }
 
 
 export class MigrationsSetLfsPreferenceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   import?: shared.Import;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationError?: shared.ValidationError;
 }

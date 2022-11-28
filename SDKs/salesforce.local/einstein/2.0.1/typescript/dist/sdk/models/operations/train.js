@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var TrainRequestBody = /** @class */ (function (_super) {
     __extends(TrainRequestBody, _super);
@@ -30,27 +30,27 @@ var TrainRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "multipart_form, name=algorithm" }),
+        SpeakeasyMetadata({ data: "multipart_form, name=algorithm" }),
         __metadata("design:type", String)
     ], TrainRequestBody.prototype, "algorithm", void 0);
     __decorate([
-        Metadata({ data: "multipart_form, name=datasetId" }),
+        SpeakeasyMetadata({ data: "multipart_form, name=datasetId" }),
         __metadata("design:type", Number)
     ], TrainRequestBody.prototype, "datasetId", void 0);
     __decorate([
-        Metadata({ data: "multipart_form, name=epochs" }),
+        SpeakeasyMetadata({ data: "multipart_form, name=epochs" }),
         __metadata("design:type", Number)
     ], TrainRequestBody.prototype, "epochs", void 0);
     __decorate([
-        Metadata({ data: "multipart_form, name=learningRate" }),
+        SpeakeasyMetadata({ data: "multipart_form, name=learningRate" }),
         __metadata("design:type", Number)
     ], TrainRequestBody.prototype, "learningRate", void 0);
     __decorate([
-        Metadata({ data: "multipart_form, name=name" }),
+        SpeakeasyMetadata({ data: "multipart_form, name=name" }),
         __metadata("design:type", String)
     ], TrainRequestBody.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "multipart_form, name=trainParams;json=true" }),
+        SpeakeasyMetadata({ data: "multipart_form, name=trainParams;json=true" }),
         __metadata("design:type", shared.V2LanguageTrainParams)
     ], TrainRequestBody.prototype, "trainParams", void 0);
     return TrainRequestBody;
@@ -62,7 +62,7 @@ var TrainSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
         __metadata("design:type", shared.SchemeBearerToken)
     ], TrainSecurity.prototype, "bearerToken", void 0);
     return TrainSecurity;
@@ -74,11 +74,11 @@ var TrainRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=multipart/form-data" }),
+        SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" }),
         __metadata("design:type", TrainRequestBody)
     ], TrainRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", TrainSecurity)
     ], TrainRequest.prototype, "security", void 0);
     return TrainRequest;
@@ -90,15 +90,15 @@ var TrainResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], TrainResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], TrainResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.TrainResponse)
     ], TrainResponse.prototype, "trainResponse", void 0);
     return TrainResponse;

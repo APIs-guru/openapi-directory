@@ -50,7 +50,7 @@ type OsloginUsersImportSSHPublicKeySecurity struct {
 type OsloginUsersImportSSHPublicKeyRequest struct {
 	PathParams  OsloginUsersImportSSHPublicKeyPathParams
 	QueryParams OsloginUsersImportSSHPublicKeyQueryParams
-	Request     *shared.SSHPublicKey `request:"mediaType=application/json"`
+	Request     *shared.SSHPublicKeyInput `request:"mediaType=application/json"`
 	Security    OsloginUsersImportSSHPublicKeySecurity
 }
 

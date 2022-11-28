@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Environment } from "./environment";
+
 
 
 // ListEnvironmentsResponse
@@ -8,9 +8,9 @@ import { Environment } from "./environment";
  * List Environments Response.
 **/
 export class ListEnvironmentsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=environment", elemType: shared.Environment })
+  @SpeakeasyMetadata({ data: "json, name=environment", elemType: Environment })
   environment?: Environment[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

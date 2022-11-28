@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostGetClusterCredentialsActionEnum(str, Enum):
     GET_CLUSTER_CREDENTIALS = "GetClusterCredentials"
@@ -10,8 +14,8 @@ class PostGetClusterCredentialsVersionEnum(str, Enum):
 
 @dataclass
 class PostGetClusterCredentialsQueryParams:
-    action: PostGetClusterCredentialsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostGetClusterCredentialsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostGetClusterCredentialsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostGetClusterCredentialsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostGetClusterCredentialsHeaders:
 
 @dataclass
 class PostGetClusterCredentialsRequest:
-    query_params: PostGetClusterCredentialsQueryParams = field(default=None)
-    headers: PostGetClusterCredentialsHeaders = field(default=None)
+    headers: PostGetClusterCredentialsHeaders = field()
+    query_params: PostGetClusterCredentialsQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostGetClusterCredentialsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

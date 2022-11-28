@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BackendApiAppSyncAuthSettings
@@ -6,27 +7,27 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The authentication settings for accessing provisioned data models in your Amplify project.
 **/
 export class BackendApiAppSyncAuthSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CognitoUserPoolId" })
+  @SpeakeasyMetadata({ data: "json, name=CognitoUserPoolId" })
   cognitoUserPoolId?: string;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=ExpirationTime" })
+  @SpeakeasyMetadata({ data: "json, name=ExpirationTime" })
   expirationTime?: number;
 
-  @Metadata({ data: "json, name=OpenIDAuthTTL" })
+  @SpeakeasyMetadata({ data: "json, name=OpenIDAuthTTL" })
   openIdAuthTtl?: string;
 
-  @Metadata({ data: "json, name=OpenIDClientId" })
+  @SpeakeasyMetadata({ data: "json, name=OpenIDClientId" })
   openIdClientId?: string;
 
-  @Metadata({ data: "json, name=OpenIDIatTTL" })
+  @SpeakeasyMetadata({ data: "json, name=OpenIDIatTTL" })
   openIdIatTtl?: string;
 
-  @Metadata({ data: "json, name=OpenIDIssueURL" })
+  @SpeakeasyMetadata({ data: "json, name=OpenIDIssueURL" })
   openIdIssueUrl?: string;
 
-  @Metadata({ data: "json, name=OpenIDProviderName" })
+  @SpeakeasyMetadata({ data: "json, name=OpenIDProviderName" })
   openIdProviderName?: string;
 }

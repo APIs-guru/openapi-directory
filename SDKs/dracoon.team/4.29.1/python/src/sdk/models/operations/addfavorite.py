@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class AddFavoritePathParams:
-    node_id: int = field(default=None, metadata={'path_param': { 'field_name': 'node_id', 'style': 'simple', 'explode': False }})
+    node_id: int = field(metadata={'path_param': { 'field_name': 'node_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,14 +19,14 @@ class AddFavoriteHeaders:
 
 @dataclass
 class AddFavoriteRequest:
-    path_params: AddFavoritePathParams = field(default=None)
-    headers: AddFavoriteHeaders = field(default=None)
+    headers: AddFavoriteHeaders = field()
+    path_params: AddFavoritePathParams = field()
     
 
 @dataclass
 class AddFavoriteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     node: Optional[shared.Node] = field(default=None)
-    status_code: int = field(default=None)
     

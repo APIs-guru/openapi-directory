@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostListAccountAliasesActionEnum(str, Enum):
     LIST_ACCOUNT_ALIASES = "ListAccountAliases"
@@ -10,10 +14,10 @@ class PostListAccountAliasesVersionEnum(str, Enum):
 
 @dataclass
 class PostListAccountAliasesQueryParams:
-    action: PostListAccountAliasesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: PostListAccountAliasesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostListAccountAliasesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
     max_items: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'MaxItems', 'style': 'form', 'explode': True }})
-    version: PostListAccountAliasesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,14 +33,14 @@ class PostListAccountAliasesHeaders:
 
 @dataclass
 class PostListAccountAliasesRequest:
-    query_params: PostListAccountAliasesQueryParams = field(default=None)
-    headers: PostListAccountAliasesHeaders = field(default=None)
+    headers: PostListAccountAliasesHeaders = field()
+    query_params: PostListAccountAliasesQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostListAccountAliasesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

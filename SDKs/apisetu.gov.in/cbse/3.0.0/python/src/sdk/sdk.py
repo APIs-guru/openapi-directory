@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import Optional
 from sdk.models import operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,32 +14,53 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def hpcer(self, request: operations.HpcerRequest) -> operations.HpcerResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Class XII Passing Certificate
+        API to verify Class XII Passing Certificate.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/hpcer/certificate"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -77,19 +101,21 @@ class SDK:
 
     
     def hscer(self, request: operations.HscerRequest) -> operations.HscerResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Class XII Marksheet
+        API to verify Class XII Marksheet.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/hscer/certificate"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -131,19 +157,21 @@ class SDK:
 
     
     def hsmgr(self, request: operations.HsmgrRequest) -> operations.HsmgrResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Class XII Migration Certificate
+        API to verify Class XII Migration Certificate.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/hsmgr/certificate"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -184,19 +212,21 @@ class SDK:
 
     
     def nchsc(self, request: operations.NchscRequest) -> operations.NchscResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""NCHMCT Skill Certificate (X)
+        API to verify NCHMCT Skill Certificate (X).
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/nchsc/certificate"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -237,19 +267,21 @@ class SDK:
 
     
     def nctsc(self, request: operations.NctscRequest) -> operations.NctscResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""NCHMCT Skill Certificate (XII)
+        API to verify NCHMCT Skill Certificate (XII).
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/nctsc/certificate"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -290,19 +322,21 @@ class SDK:
 
     
     def nsesc(self, request: operations.NsescRequest) -> operations.NsescResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""NSE Skill Certificate (X)
+        API to verify NSE Skill Certificate (X).
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/nsesc/certificate"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -343,19 +377,21 @@ class SDK:
 
     
     def nstsc(self, request: operations.NstscRequest) -> operations.NstscResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""NSE Skill Certificate (XII)
+        API to verify NSE Skill Certificate (XII).
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/nstsc/certificate"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -396,19 +432,21 @@ class SDK:
 
     
     def ntltr(self, request: operations.NtltrRequest) -> operations.NtltrResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""NEET Rank Letter
+        API to verify NEET Rank Letter.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/ntltr/certificate"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -449,19 +487,21 @@ class SDK:
 
     
     def ntmks(self, request: operations.NtmksRequest) -> operations.NtmksResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""NEET Marksheet
+        API to verify NEET Marksheet.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/ntmks/certificate"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -502,19 +542,21 @@ class SDK:
 
     
     def skhsc(self, request: operations.SkhscRequest) -> operations.SkhscResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Skill Certificate (X)
+        API to verify Skill Certificate (X).
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/skhsc/certificate"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -555,19 +597,21 @@ class SDK:
 
     
     def sktsc(self, request: operations.SktscRequest) -> operations.SktscResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Skill Certificate (XII)
+        API to verify Skill Certificate (XII).
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/sktsc/certificate"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -608,19 +652,21 @@ class SDK:
 
     
     def spcer(self, request: operations.SpcerRequest) -> operations.SpcerResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Class X Passing Certificate
+        API to verify Class X Passing Certificate.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/spcer/certificate"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -661,19 +707,21 @@ class SDK:
 
     
     def sscer(self, request: operations.SscerRequest) -> operations.SscerResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Class X Marksheet
+        API to verify Class X Marksheet.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/sscer/certificate"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -715,19 +763,21 @@ class SDK:
 
     
     def ssmgr(self, request: operations.SsmgrRequest) -> operations.SsmgrResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Class X Migration Certificate
+        API to verify Class X Migration Certificate.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/ssmgr/certificate"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -768,19 +818,21 @@ class SDK:
 
     
     def tetcr(self, request: operations.TetcrRequest) -> operations.TetcrResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Teachers Eligibility Test Certificate
+        API to verify Teachers Eligibility Test Certificate.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tetcr/certificate"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -821,19 +873,21 @@ class SDK:
 
     
     def tetms(self, request: operations.TetmsRequest) -> operations.TetmsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Teachers Eligibility Test Mark Sheet
+        API to verify Teachers Eligibility Test Mark Sheet.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tetms/certificate"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

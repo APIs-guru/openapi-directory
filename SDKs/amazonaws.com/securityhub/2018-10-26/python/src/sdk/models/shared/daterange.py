@@ -1,12 +1,21 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import daterangeunit_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DateRange:
-    unit: Optional[daterangeunit_enum.DateRangeUnitEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Unit' }})
-    value: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Value' }})
+    r"""DateRange
+    A date range for the date filter.
+    """
+    
+    unit: Optional[DateRangeUnitEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Unit') }})
+    value: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Value') }})
     

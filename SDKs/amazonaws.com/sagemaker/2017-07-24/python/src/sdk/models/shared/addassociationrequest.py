@@ -1,13 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import associationedgetype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AddAssociationRequest:
-    association_type: Optional[associationedgetype_enum.AssociationEdgeTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AssociationType' }})
-    destination_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DestinationArn' }})
-    source_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SourceArn' }})
+    destination_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('DestinationArn') }})
+    source_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('SourceArn') }})
+    association_type: Optional[AssociationEdgeTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AssociationType') }})
     

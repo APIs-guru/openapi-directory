@@ -12,18 +12,18 @@ class CreateUserByNameRequests:
 
 @dataclass
 class CreateUserByNameSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class CreateUserByNameRequest:
-    request: CreateUserByNameRequests = field(default=None)
-    security: CreateUserByNameSecurity = field(default=None)
+    request: CreateUserByNameRequests = field()
+    security: CreateUserByNameSecurity = field()
     
 
 @dataclass
 class CreateUserByNameResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     user_dto: Optional[shared.UserDto] = field(default=None)
     

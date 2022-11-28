@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googletypedate
+from sdk import utils
+from . import *
 
 class ChromeCrosDpanelAutosettingsProtoPolicyAPILifecyclePolicyAPILifecycleStageEnum(str, Enum):
     API_UNSPECIFIED = "API_UNSPECIFIED"
@@ -14,7 +16,7 @@ class ChromeCrosDpanelAutosettingsProtoPolicyAPILifecyclePolicyAPILifecycleStage
 @dataclass_json
 @dataclass
 class ChromeCrosDpanelAutosettingsProtoPolicyAPILifecycle:
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    end_support: Optional[googletypedate.GoogleTypeDate] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'endSupport' }})
-    policy_api_lifecycle_stage: Optional[ChromeCrosDpanelAutosettingsProtoPolicyAPILifecyclePolicyAPILifecycleStageEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'policyApiLifecycleStage' }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    end_support: Optional[GoogleTypeDate] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('endSupport') }})
+    policy_api_lifecycle_stage: Optional[ChromeCrosDpanelAutosettingsProtoPolicyAPILifecyclePolicyAPILifecycleStageEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('policyApiLifecycleStage') }})
     

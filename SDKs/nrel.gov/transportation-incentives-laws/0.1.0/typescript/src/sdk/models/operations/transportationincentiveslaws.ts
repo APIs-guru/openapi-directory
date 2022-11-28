@@ -1,76 +1,77 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum TransportationIncentivesLawsOutputFormatEnum {
-    Json = "json"
-,    Xml = "xml"
-,    Csv = "csv"
+    Json = "json",
+    Xml = "xml",
+    Csv = "csv"
 }
 
 
 export class TransportationIncentivesLawsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=output_format" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=output_format" })
   outputFormat: TransportationIncentivesLawsOutputFormatEnum;
 }
 
 
 export class TransportationIncentivesLawsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=api_key" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_key" })
   apiKey: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=expired" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=expired" })
   expired?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=incentive_type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=incentive_type" })
   incentiveType?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=jurisdiction" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=jurisdiction" })
   jurisdiction?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=keyword" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=keyword" })
   keyword?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=law_type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=law_type" })
   lawType?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=local" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=local" })
   local?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=poc" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=poc" })
   poc?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=recent" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=recent" })
   recent?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=regulation_type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=regulation_type" })
   regulationType?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=technology" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=technology" })
   technology?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=user_type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=user_type" })
   userType?: string;
 }
 
 
 export class TransportationIncentivesLawsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: TransportationIncentivesLawsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: TransportationIncentivesLawsQueryParams;
 }
 
 
 export class TransportationIncentivesLawsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -18,6 +18,8 @@ type UpdateDomainHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateDomainRequestBodyMatching
+// The flag that enables the matching process of duplicate profiles.
 type UpdateDomainRequestBodyMatching struct {
 	Enabled *bool `json:"Enabled,omitempty"`
 }

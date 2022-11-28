@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Category } from "./category";
+
 
 
 // CategoryListResponse
@@ -8,12 +8,12 @@ import { Category } from "./category";
  * A third party list metagame categories response.
 **/
 export class CategoryListResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.Category })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: Category })
   items?: Category[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

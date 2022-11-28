@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // StreamingApplianceSnapshotConfig
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Streaming appliance snapshot configuration.
 **/
 export class StreamingApplianceSnapshotConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=importStateEndpoint" })
+  @SpeakeasyMetadata({ data: "json, name=importStateEndpoint" })
   importStateEndpoint?: string;
 
-  @Metadata({ data: "json, name=snapshotId" })
+  @SpeakeasyMetadata({ data: "json, name=snapshotId" })
   snapshotId?: string;
 }

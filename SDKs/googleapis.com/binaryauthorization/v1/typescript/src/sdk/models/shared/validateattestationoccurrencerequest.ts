@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AttestationOccurrence } from "./attestationoccurrence";
+
 
 
 // ValidateAttestationOccurrenceRequest
@@ -7,12 +8,12 @@ import { AttestationOccurrence } from "./attestationoccurrence";
  * Request message for ValidationHelperV1.ValidateAttestationOccurrence.
 **/
 export class ValidateAttestationOccurrenceRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attestation" })
+  @SpeakeasyMetadata({ data: "json, name=attestation" })
   attestation?: AttestationOccurrence;
 
-  @Metadata({ data: "json, name=occurrenceNote" })
+  @SpeakeasyMetadata({ data: "json, name=occurrenceNote" })
   occurrenceNote?: string;
 
-  @Metadata({ data: "json, name=occurrenceResourceUri" })
+  @SpeakeasyMetadata({ data: "json, name=occurrenceResourceUri" })
   occurrenceResourceUri?: string;
 }

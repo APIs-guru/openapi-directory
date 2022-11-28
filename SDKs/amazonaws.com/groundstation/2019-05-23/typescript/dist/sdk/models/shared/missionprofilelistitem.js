@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // MissionProfileListItem
 /**
  * Item in a list of mission profiles.
@@ -33,19 +33,19 @@ var MissionProfileListItem = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=missionProfileArn" }),
+        SpeakeasyMetadata({ data: "json, name=missionProfileArn" }),
         __metadata("design:type", String)
     ], MissionProfileListItem.prototype, "missionProfileArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=missionProfileId" }),
+        SpeakeasyMetadata({ data: "json, name=missionProfileId" }),
         __metadata("design:type", String)
     ], MissionProfileListItem.prototype, "missionProfileId", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], MissionProfileListItem.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=region" }),
+        SpeakeasyMetadata({ data: "json, name=region" }),
         __metadata("design:type", String)
     ], MissionProfileListItem.prototype, "region", void 0);
     return MissionProfileListItem;

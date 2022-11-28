@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class DcimConsolePortsReadPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DcimConsolePortsReadRequest:
-    path_params: DcimConsolePortsReadPathParams = field(default=None)
+    path_params: DcimConsolePortsReadPathParams = field()
     
 
 @dataclass
 class DcimConsolePortsReadResponse:
+    content_type: str = field()
+    status_code: int = field()
     console_port: Optional[shared.ConsolePort] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

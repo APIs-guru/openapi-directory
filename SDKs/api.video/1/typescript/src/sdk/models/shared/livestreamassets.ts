@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class LiveStreamAssets extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hls" })
+  @SpeakeasyMetadata({ data: "json, name=hls" })
   hls?: string;
 
-  @Metadata({ data: "json, name=iframe" })
+  @SpeakeasyMetadata({ data: "json, name=iframe" })
   iframe?: string;
 
-  @Metadata({ data: "json, name=player" })
+  @SpeakeasyMetadata({ data: "json, name=player" })
   player?: string;
 
-  @Metadata({ data: "json, name=thumbnail" })
+  @SpeakeasyMetadata({ data: "json, name=thumbnail" })
   thumbnail?: string;
 }

@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Job } from "./job";
 // ListJobsResponse
 /**
  * Response message for listing jobs using ListJobs.
@@ -34,11 +34,11 @@ var ListJobsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=jobs", elemType: shared.Job }),
+        SpeakeasyMetadata({ data: "json, name=jobs", elemType: Job }),
         __metadata("design:type", Array)
     ], ListJobsResponse.prototype, "jobs", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextPageToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextPageToken" }),
         __metadata("design:type", String)
     ], ListJobsResponse.prototype, "nextPageToken", void 0);
     return ListJobsResponse;

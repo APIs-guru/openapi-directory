@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IpAddressMembershipCriteria } from "./ipaddressmembershipcriteria";
 import { SearchMembershipCriteria } from "./searchmembershipcriteria";
 
+
 export enum GroupMembershipCriteriaMembershipTypeEnum {
-    SearchMembershipCriteria = "SearchMembershipCriteria"
-,    IpAddressMembershipCriteria = "IPAddressMembershipCriteria"
+    SearchMembershipCriteria = "SearchMembershipCriteria",
+    IpAddressMembershipCriteria = "IPAddressMembershipCriteria"
 }
 
 
@@ -13,12 +14,12 @@ export enum GroupMembershipCriteriaMembershipTypeEnum {
  * EntityType currently restricted to VirtualMachine
 **/
 export class GroupMembershipCriteria extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ip_address_membership_criteria" })
+  @SpeakeasyMetadata({ data: "json, name=ip_address_membership_criteria" })
   ipAddressMembershipCriteria?: IpAddressMembershipCriteria;
 
-  @Metadata({ data: "json, name=membership_type" })
+  @SpeakeasyMetadata({ data: "json, name=membership_type" })
   membershipType?: GroupMembershipCriteriaMembershipTypeEnum;
 
-  @Metadata({ data: "json, name=search_membership_criteria" })
+  @SpeakeasyMetadata({ data: "json, name=search_membership_criteria" })
   searchMembershipCriteria?: SearchMembershipCriteria;
 }

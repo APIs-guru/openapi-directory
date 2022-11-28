@@ -30,7 +30,7 @@ type RetailProjectsLocationsCatalogsBranchesProductsImportSecurity struct {
 type RetailProjectsLocationsCatalogsBranchesProductsImportRequest struct {
 	PathParams  RetailProjectsLocationsCatalogsBranchesProductsImportPathParams
 	QueryParams RetailProjectsLocationsCatalogsBranchesProductsImportQueryParams
-	Request     *shared.GoogleCloudRetailV2alphaImportProductsRequest `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudRetailV2alphaImportProductsRequestInput `request:"mediaType=application/json"`
 	Security    RetailProjectsLocationsCatalogsBranchesProductsImportSecurity
 }
 

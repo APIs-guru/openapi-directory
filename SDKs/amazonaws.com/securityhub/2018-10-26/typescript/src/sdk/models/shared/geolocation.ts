@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GeoLocation
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides the latitude and longitude coordinates of a location.
 **/
 export class GeoLocation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Lat" })
+  @SpeakeasyMetadata({ data: "json, name=Lat" })
   lat?: number;
 
-  @Metadata({ data: "json, name=Lon" })
+  @SpeakeasyMetadata({ data: "json, name=Lon" })
   lon?: number;
 }

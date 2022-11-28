@@ -1,7 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import daterange
+from sdk import utils
+from . import *
 
 class LineItemFlightFlightDateTypeEnum(str, Enum):
     LINE_ITEM_FLIGHT_DATE_TYPE_UNSPECIFIED = "LINE_ITEM_FLIGHT_DATE_TYPE_UNSPECIFIED"
@@ -12,6 +17,10 @@ class LineItemFlightFlightDateTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class LineItemFlight:
-    date_range: Optional[daterange.DateRange] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dateRange' }})
-    flight_date_type: Optional[LineItemFlightFlightDateTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'flightDateType' }})
+    r"""LineItemFlight
+    Settings that control the active duration of a line item.
+    """
+    
+    date_range: Optional[DateRange] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dateRange') }})
+    flight_date_type: Optional[LineItemFlightFlightDateTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('flightDateType') }})
     

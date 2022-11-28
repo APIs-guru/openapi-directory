@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetMySqlDatabasePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=databaseName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=databaseName" })
   databaseName: string;
 }
 
 
 export class GetMySqlDatabaseQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=database_name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=database_name" })
   databaseName: string;
 }
 
 
 export class GetMySqlDatabaseRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetMySqlDatabasePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetMySqlDatabaseQueryParams;
 }
 
 
 export class GetMySqlDatabaseResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   mySqlDatabase?: shared.MySqlDatabase;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

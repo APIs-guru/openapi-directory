@@ -22,42 +22,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetApiV2ListMarketsHeaders = /** @class */ (function (_super) {
     __extends(GetApiV2ListMarketsHeaders, _super);
     function GetApiV2ListMarketsHeaders() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-RapidApi-Key" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-RapidApi-Key" }),
         __metadata("design:type", String)
     ], GetApiV2ListMarketsHeaders.prototype, "xRapidApiKey", void 0);
     return GetApiV2ListMarketsHeaders;
 }(SpeakeasyBase));
 export { GetApiV2ListMarketsHeaders };
-var GetApiV2ListMarketsRequest = /** @class */ (function (_super) {
-    __extends(GetApiV2ListMarketsRequest, _super);
-    function GetApiV2ListMarketsRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata(),
-        __metadata("design:type", GetApiV2ListMarketsHeaders)
-    ], GetApiV2ListMarketsRequest.prototype, "headers", void 0);
-    return GetApiV2ListMarketsRequest;
-}(SpeakeasyBase));
-export { GetApiV2ListMarketsRequest };
 var GetApiV2ListMarkets200ApplicationJsonData = /** @class */ (function (_super) {
     __extends(GetApiV2ListMarkets200ApplicationJsonData, _super);
     function GetApiV2ListMarkets200ApplicationJsonData() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=all" }),
+        SpeakeasyMetadata({ data: "json, name=all" }),
         __metadata("design:type", Array)
     ], GetApiV2ListMarkets200ApplicationJsonData.prototype, "all", void 0);
     __decorate([
-        Metadata({ data: "json, name=allowed_for_your_subscription" }),
+        SpeakeasyMetadata({ data: "json, name=allowed_for_your_subscription" }),
         __metadata("design:type", Array)
     ], GetApiV2ListMarkets200ApplicationJsonData.prototype, "allowedForYourSubscription", void 0);
     return GetApiV2ListMarkets200ApplicationJsonData;
@@ -69,7 +57,7 @@ var GetApiV2ListMarkets200ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=data" }),
+        SpeakeasyMetadata({ data: "json, name=data" }),
         __metadata("design:type", GetApiV2ListMarkets200ApplicationJsonData)
     ], GetApiV2ListMarkets200ApplicationJson.prototype, "data", void 0);
     return GetApiV2ListMarkets200ApplicationJson;
@@ -81,31 +69,43 @@ var GetApiV2ListMarkets404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=errors" }),
+        SpeakeasyMetadata({ data: "json, name=errors" }),
         __metadata("design:type", Map)
     ], GetApiV2ListMarkets404ApplicationJson.prototype, "errors", void 0);
     return GetApiV2ListMarkets404ApplicationJson;
 }(SpeakeasyBase));
 export { GetApiV2ListMarkets404ApplicationJson };
+var GetApiV2ListMarketsRequest = /** @class */ (function (_super) {
+    __extends(GetApiV2ListMarketsRequest, _super);
+    function GetApiV2ListMarketsRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", GetApiV2ListMarketsHeaders)
+    ], GetApiV2ListMarketsRequest.prototype, "headers", void 0);
+    return GetApiV2ListMarketsRequest;
+}(SpeakeasyBase));
+export { GetApiV2ListMarketsRequest };
 var GetApiV2ListMarketsResponse = /** @class */ (function (_super) {
     __extends(GetApiV2ListMarketsResponse, _super);
     function GetApiV2ListMarketsResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetApiV2ListMarketsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetApiV2ListMarkets200ApplicationJson)
     ], GetApiV2ListMarketsResponse.prototype, "getApiV2ListMarkets200ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetApiV2ListMarkets404ApplicationJson)
     ], GetApiV2ListMarketsResponse.prototype, "getApiV2ListMarkets404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetApiV2ListMarketsResponse.prototype, "statusCode", void 0);
     return GetApiV2ListMarketsResponse;

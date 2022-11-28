@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleMapsPlayablelocationsV3SampleSpacingOptionsPointTypeEnum {
-    PointTypeUnspecified = "POINT_TYPE_UNSPECIFIED"
-,    CenterPoint = "CENTER_POINT"
-,    SnappedPoint = "SNAPPED_POINT"
+    PointTypeUnspecified = "POINT_TYPE_UNSPECIFIED",
+    CenterPoint = "CENTER_POINT",
+    SnappedPoint = "SNAPPED_POINT"
 }
 
 
@@ -12,9 +13,9 @@ export enum GoogleMapsPlayablelocationsV3SampleSpacingOptionsPointTypeEnum {
  * A set of options that specifies the separation between playable locations.
 **/
 export class GoogleMapsPlayablelocationsV3SampleSpacingOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=minSpacingMeters" })
+  @SpeakeasyMetadata({ data: "json, name=minSpacingMeters" })
   minSpacingMeters?: number;
 
-  @Metadata({ data: "json, name=pointType" })
+  @SpeakeasyMetadata({ data: "json, name=pointType" })
   pointType?: GoogleMapsPlayablelocationsV3SampleSpacingOptionsPointTypeEnum;
 }

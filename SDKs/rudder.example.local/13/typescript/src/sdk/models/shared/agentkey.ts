@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum AgentKeyStatusEnum {
-    Certified = "certified"
-,    Undefined = "undefined"
+    Certified = "certified",
+    Undefined = "undefined"
 }
 
 
@@ -11,9 +12,9 @@ export enum AgentKeyStatusEnum {
  * Information about agent key or certificate
 **/
 export class AgentKey extends SpeakeasyBase {
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: AgentKeyStatusEnum;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value: string;
 }

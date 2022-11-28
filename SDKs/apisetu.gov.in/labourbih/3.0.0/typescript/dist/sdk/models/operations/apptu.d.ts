@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class ApptuRequestBodyCertificateParameters extends SpeakeasyBase {
     refNo: string;
@@ -16,10 +16,6 @@ export declare class ApptuRequestBody extends SpeakeasyBase {
 export declare class ApptuSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class ApptuRequest extends SpeakeasyBase {
-    request?: ApptuRequestBody;
-    security: ApptuSecurity;
 }
 export declare enum Apptu400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -102,6 +98,10 @@ export declare enum Apptu504ApplicationJsonErrorDescriptionEnum {
 export declare class Apptu504ApplicationJson extends SpeakeasyBase {
     error?: Apptu504ApplicationJsonErrorEnum;
     errorDescription?: Apptu504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class ApptuRequest extends SpeakeasyBase {
+    request?: ApptuRequestBody;
+    security: ApptuSecurity;
 }
 export declare class ApptuResponse extends SpeakeasyBase {
     contentType: string;

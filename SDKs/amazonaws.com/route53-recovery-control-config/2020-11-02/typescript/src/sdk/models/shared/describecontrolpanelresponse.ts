@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ControlPanel } from "./controlpanel";
 
 
+
 export class DescribeControlPanelResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ControlPanel" })
+  @SpeakeasyMetadata({ data: "json, name=ControlPanel" })
   controlPanel?: ControlPanel;
 }

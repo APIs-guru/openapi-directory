@@ -1,20 +1,15 @@
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
+import FormData from "form-data";
 import * as operations from "./models/operations";
-import { ParamsSerializerOptions } from "axios";
-import { GetQueryParamSerializer } from "../internal/utils/queryparams";
-import { SerializeRequestBody } from "../internal/utils/requestbody";
-import FormData from 'form-data';
-import {GetHeadersFromRequest} from "../internal/utils/headers";
-import {GetHeadersFromResponse} from "../internal/utils/headers";
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import * as utils from "../internal/utils";
 import { Security } from "./models/shared";
+
+
 
 type OptsFunc = (sdk: SDK) => void;
 
-const Servers = [
-  "https://circleci.com/api/v1",
+export const ServerList = [
+	"https://circleci.com/api/v1",
 ] as const;
 
 export function WithServerURL(
@@ -25,13 +20,13 @@ export function WithServerURL(
     if (params != null) {
       serverURL = utils.ReplaceParameters(serverURL, params);
     }
-    sdk.serverURL = serverURL;
+    sdk._serverURL = serverURL;
   };
 }
 
 export function WithClient(client: AxiosInstance): OptsFunc {
   return (sdk: SDK) => {
-    sdk.defaultClient = client;
+    sdk._defaultClient = client;
   };
 }
 
@@ -40,42 +35,49 @@ export function WithSecurity(security: Security): OptsFunc {
     security = new Security(security);
   }
   return (sdk: SDK) => {
-    sdk.security = security;
+    sdk._security = security;
   };
 }
 
 
 export class SDK {
-  defaultClient?: AxiosInstance;
-  securityClient?: AxiosInstance;
-  security?: any;
-  serverURL: string;
+
+  public _defaultClient: AxiosInstance;
+  public _securityClient: AxiosInstance;
+  public _security?: Security;
+  public _serverURL: string;
+  private _language = "typescript";
+  private _sdkVersion = "0.0.1";
+  private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
-    if (this.serverURL == "") {
-      this.serverURL = Servers[0];
+    if (this._serverURL == "") {
+      this._serverURL = ServerList[0];
     }
 
-    if (!this.defaultClient) {
-      this.defaultClient = axios.create({ baseURL: this.serverURL });
+    if (!this._defaultClient) {
+      this._defaultClient = axios.create({ baseURL: this._serverURL });
     }
 
-    if (!this.securityClient) {
-      if (this.security) {
-        this.securityClient = CreateSecurityClient(
-          this.defaultClient,
-          this.security
+    if (!this._securityClient) {
+      if (this._security) {
+        this._securityClient = utils.CreateSecurityClient(
+          this._defaultClient,
+          this._security
         );
       } else {
-        this.securityClient = this.defaultClient;
+        this._securityClient = this._defaultClient;
       }
     }
+    
   }
   
-  // DeleteProjectUsernameProjectBuildCache - Clears the cache for a project.
-
-  DeleteProjectUsernameProjectBuildCache(
+  /**
+   * deleteProjectUsernameProjectBuildCache - Clears the cache for a project.
+   * 
+  **/
+  deleteProjectUsernameProjectBuildCache(
     req: operations.DeleteProjectUsernameProjectBuildCacheRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteProjectUsernameProjectBuildCacheResponse> {
@@ -83,22 +85,24 @@ export class SDK {
       req = new operations.DeleteProjectUsernameProjectBuildCacheRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/project/{username}/{project}/build-cache", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteProjectUsernameProjectBuildCacheResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteProjectUsernameProjectBuildCacheResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteProjectUsernameProjectBuildCache200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -110,9 +114,11 @@ export class SDK {
   }
 
   
-  // DeleteProjectUsernameProjectCheckoutKeyFingerprint - Delete a checkout key.
-
-  DeleteProjectUsernameProjectCheckoutKeyFingerprint(
+  /**
+   * deleteProjectUsernameProjectCheckoutKeyFingerprint - Delete a checkout key.
+   * 
+  **/
+  deleteProjectUsernameProjectCheckoutKeyFingerprint(
     req: operations.DeleteProjectUsernameProjectCheckoutKeyFingerprintRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteProjectUsernameProjectCheckoutKeyFingerprintResponse> {
@@ -120,22 +126,24 @@ export class SDK {
       req = new operations.DeleteProjectUsernameProjectCheckoutKeyFingerprintRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/project/{username}/{project}/checkout-key/{fingerprint}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteProjectUsernameProjectCheckoutKeyFingerprintResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteProjectUsernameProjectCheckoutKeyFingerprintResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteProjectUsernameProjectCheckoutKeyFingerprint200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -147,9 +155,11 @@ export class SDK {
   }
 
   
-  // DeleteProjectUsernameProjectEnvvarName - Deletes the environment variable named ':name'
-
-  DeleteProjectUsernameProjectEnvvarName(
+  /**
+   * deleteProjectUsernameProjectEnvvarName - Deletes the environment variable named ':name'
+   * 
+  **/
+  deleteProjectUsernameProjectEnvvarName(
     req: operations.DeleteProjectUsernameProjectEnvvarNameRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteProjectUsernameProjectEnvvarNameResponse> {
@@ -157,22 +167,24 @@ export class SDK {
       req = new operations.DeleteProjectUsernameProjectEnvvarNameRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/project/{username}/{project}/envvar/{name}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteProjectUsernameProjectEnvvarNameResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteProjectUsernameProjectEnvvarNameResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteProjectUsernameProjectEnvvarName200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -184,28 +196,31 @@ export class SDK {
   }
 
   
-  // GetMe - Provides information about the signed in user.
-
-  GetMe(
-    
+  /**
+   * getMe - Provides information about the signed in user.
+   * 
+  **/
+  getMe(
     config?: AxiosRequestConfig
   ): Promise<operations.GetMeResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/me";
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetMeResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetMeResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.user = httpRes?.data;
             }
             break;
@@ -217,9 +232,11 @@ export class SDK {
   }
 
   
-  // GetProjectUsernameProject - Build summary for each of the last 30 builds for a single git repo.
-
-  GetProjectUsernameProject(
+  /**
+   * getProjectUsernameProject - Build summary for each of the last 30 builds for a single git repo.
+   * 
+  **/
+  getProjectUsernameProject(
     req: operations.GetProjectUsernameProjectRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetProjectUsernameProjectResponse> {
@@ -227,11 +244,12 @@ export class SDK {
       req = new operations.GetProjectUsernameProjectRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/project/{username}/{project}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -240,17 +258,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetProjectUsernameProjectResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetProjectUsernameProjectResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.builds = httpRes?.data;
             }
             break;
@@ -262,10 +281,12 @@ export class SDK {
   }
 
   
-  // GetProjectUsernameProjectBuildNum - Full details for a single build. The response includes all of the fields from the build summary.
-This is also the payload for the [notification webhooks](/docs/configuration/#notify), in which case this object is the value to a key named 'payload'.
-
-  GetProjectUsernameProjectBuildNum(
+  /**
+   * getProjectUsernameProjectBuildNum - Full details for a single build. The response includes all of the fields from the build summary.
+   * This is also the payload for the [notification webhooks](/docs/configuration/#notify), in which case this object is the value to a key named 'payload'.
+   * 
+  **/
+  getProjectUsernameProjectBuildNum(
     req: operations.GetProjectUsernameProjectBuildNumRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetProjectUsernameProjectBuildNumResponse> {
@@ -273,22 +294,24 @@ This is also the payload for the [notification webhooks](/docs/configuration/#no
       req = new operations.GetProjectUsernameProjectBuildNumRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/project/{username}/{project}/{build_num}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetProjectUsernameProjectBuildNumResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetProjectUsernameProjectBuildNumResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.buildDetail = httpRes?.data;
             }
             break;
@@ -300,9 +323,11 @@ This is also the payload for the [notification webhooks](/docs/configuration/#no
   }
 
   
-  // GetProjectUsernameProjectBuildNumArtifacts - List the artifacts produced by a given build.
-
-  GetProjectUsernameProjectBuildNumArtifacts(
+  /**
+   * getProjectUsernameProjectBuildNumArtifacts - List the artifacts produced by a given build.
+   * 
+  **/
+  getProjectUsernameProjectBuildNumArtifacts(
     req: operations.GetProjectUsernameProjectBuildNumArtifactsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetProjectUsernameProjectBuildNumArtifactsResponse> {
@@ -310,22 +335,24 @@ This is also the payload for the [notification webhooks](/docs/configuration/#no
       req = new operations.GetProjectUsernameProjectBuildNumArtifactsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/project/{username}/{project}/{build_num}/artifacts", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetProjectUsernameProjectBuildNumArtifactsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetProjectUsernameProjectBuildNumArtifactsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.artifacts = httpRes?.data;
             }
             break;
@@ -337,10 +364,12 @@ This is also the payload for the [notification webhooks](/docs/configuration/#no
   }
 
   
-  // GetProjectUsernameProjectBuildNumTests - Provides test metadata for a build
-Note: [Learn how to set up your builds to collect test metadata](https://circleci.com/docs/test-metadata/)
-
-  GetProjectUsernameProjectBuildNumTests(
+  /**
+   * getProjectUsernameProjectBuildNumTests - Provides test metadata for a build
+   * Note: [Learn how to set up your builds to collect test metadata](https://circleci.com/docs/test-metadata/)
+   * 
+  **/
+  getProjectUsernameProjectBuildNumTests(
     req: operations.GetProjectUsernameProjectBuildNumTestsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetProjectUsernameProjectBuildNumTestsResponse> {
@@ -348,22 +377,24 @@ Note: [Learn how to set up your builds to collect test metadata](https://circlec
       req = new operations.GetProjectUsernameProjectBuildNumTestsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/project/{username}/{project}/{build_num}/tests", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetProjectUsernameProjectBuildNumTestsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetProjectUsernameProjectBuildNumTestsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.tests = httpRes?.data;
             }
             break;
@@ -375,9 +406,11 @@ Note: [Learn how to set up your builds to collect test metadata](https://circlec
   }
 
   
-  // GetProjectUsernameProjectCheckoutKey - Lists checkout keys.
-
-  GetProjectUsernameProjectCheckoutKey(
+  /**
+   * getProjectUsernameProjectCheckoutKey - Lists checkout keys.
+   * 
+  **/
+  getProjectUsernameProjectCheckoutKey(
     req: operations.GetProjectUsernameProjectCheckoutKeyRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetProjectUsernameProjectCheckoutKeyResponse> {
@@ -385,22 +418,24 @@ Note: [Learn how to set up your builds to collect test metadata](https://circlec
       req = new operations.GetProjectUsernameProjectCheckoutKeyRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/project/{username}/{project}/checkout-key", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetProjectUsernameProjectCheckoutKeyResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetProjectUsernameProjectCheckoutKeyResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.keys = httpRes?.data;
             }
             break;
@@ -412,9 +447,11 @@ Note: [Learn how to set up your builds to collect test metadata](https://circlec
   }
 
   
-  // GetProjectUsernameProjectCheckoutKeyFingerprint - Get a checkout key.
-
-  GetProjectUsernameProjectCheckoutKeyFingerprint(
+  /**
+   * getProjectUsernameProjectCheckoutKeyFingerprint - Get a checkout key.
+   * 
+  **/
+  getProjectUsernameProjectCheckoutKeyFingerprint(
     req: operations.GetProjectUsernameProjectCheckoutKeyFingerprintRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetProjectUsernameProjectCheckoutKeyFingerprintResponse> {
@@ -422,22 +459,24 @@ Note: [Learn how to set up your builds to collect test metadata](https://circlec
       req = new operations.GetProjectUsernameProjectCheckoutKeyFingerprintRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/project/{username}/{project}/checkout-key/{fingerprint}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetProjectUsernameProjectCheckoutKeyFingerprintResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetProjectUsernameProjectCheckoutKeyFingerprintResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.key = httpRes?.data;
             }
             break;
@@ -449,9 +488,11 @@ Note: [Learn how to set up your builds to collect test metadata](https://circlec
   }
 
   
-  // GetProjectUsernameProjectEnvvar - Lists the environment variables for :project
-
-  GetProjectUsernameProjectEnvvar(
+  /**
+   * getProjectUsernameProjectEnvvar - Lists the environment variables for :project
+   * 
+  **/
+  getProjectUsernameProjectEnvvar(
     req: operations.GetProjectUsernameProjectEnvvarRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetProjectUsernameProjectEnvvarResponse> {
@@ -459,22 +500,24 @@ Note: [Learn how to set up your builds to collect test metadata](https://circlec
       req = new operations.GetProjectUsernameProjectEnvvarRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/project/{username}/{project}/envvar", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetProjectUsernameProjectEnvvarResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetProjectUsernameProjectEnvvarResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.envvars = httpRes?.data;
             }
             break;
@@ -486,9 +529,11 @@ Note: [Learn how to set up your builds to collect test metadata](https://circlec
   }
 
   
-  // GetProjectUsernameProjectEnvvarName - Gets the hidden value of environment variable :name
-
-  GetProjectUsernameProjectEnvvarName(
+  /**
+   * getProjectUsernameProjectEnvvarName - Gets the hidden value of environment variable :name
+   * 
+  **/
+  getProjectUsernameProjectEnvvarName(
     req: operations.GetProjectUsernameProjectEnvvarNameRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetProjectUsernameProjectEnvvarNameResponse> {
@@ -496,22 +541,24 @@ Note: [Learn how to set up your builds to collect test metadata](https://circlec
       req = new operations.GetProjectUsernameProjectEnvvarNameRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/project/{username}/{project}/envvar/{name}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetProjectUsernameProjectEnvvarNameResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetProjectUsernameProjectEnvvarNameResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.envvar = httpRes?.data;
             }
             break;
@@ -523,28 +570,31 @@ Note: [Learn how to set up your builds to collect test metadata](https://circlec
   }
 
   
-  // GetProjects - List of all the projects you're following on CircleCI, with build information organized by branch.
-
-  GetProjects(
-    
+  /**
+   * getProjects - List of all the projects you're following on CircleCI, with build information organized by branch.
+   * 
+  **/
+  getProjects(
     config?: AxiosRequestConfig
   ): Promise<operations.GetProjectsResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/projects";
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetProjectsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetProjectsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.projects = httpRes?.data;
             }
             break;
@@ -556,9 +606,11 @@ Note: [Learn how to set up your builds to collect test metadata](https://circlec
   }
 
   
-  // GetRecentBuilds - Build summary for each of the last 30 recent builds, ordered by build_num.
-
-  GetRecentBuilds(
+  /**
+   * getRecentBuilds - Build summary for each of the last 30 recent builds, ordered by build_num.
+   * 
+  **/
+  getRecentBuilds(
     req: operations.GetRecentBuildsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetRecentBuildsResponse> {
@@ -566,11 +618,12 @@ Note: [Learn how to set up your builds to collect test metadata](https://circlec
       req = new operations.GetRecentBuildsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/recent-builds";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -579,17 +632,18 @@ Note: [Learn how to set up your builds to collect test metadata](https://circlec
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetRecentBuildsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetRecentBuildsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.builds = httpRes?.data;
             }
             break;
@@ -601,9 +655,11 @@ Note: [Learn how to set up your builds to collect test metadata](https://circlec
   }
 
   
-  // PostProjectUsernameProject - Triggers a new build, returns a summary of the build.
-
-  PostProjectUsernameProject(
+  /**
+   * postProjectUsernameProject - Triggers a new build, returns a summary of the build.
+   * 
+  **/
+  postProjectUsernameProject(
     req: operations.PostProjectUsernameProjectRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostProjectUsernameProjectResponse> {
@@ -611,38 +667,39 @@ Note: [Learn how to set up your builds to collect test metadata](https://circlec
       req = new operations.PostProjectUsernameProjectRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/project/{username}/{project}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostProjectUsernameProjectResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostProjectUsernameProjectResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.buildSummary = httpRes?.data;
             }
             break;
@@ -654,9 +711,11 @@ Note: [Learn how to set up your builds to collect test metadata](https://circlec
   }
 
   
-  // PostProjectUsernameProjectBuildNumCancel - Cancels the build, returns a summary of the build.
-
-  PostProjectUsernameProjectBuildNumCancel(
+  /**
+   * postProjectUsernameProjectBuildNumCancel - Cancels the build, returns a summary of the build.
+   * 
+  **/
+  postProjectUsernameProjectBuildNumCancel(
     req: operations.PostProjectUsernameProjectBuildNumCancelRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostProjectUsernameProjectBuildNumCancelResponse> {
@@ -664,22 +723,24 @@ Note: [Learn how to set up your builds to collect test metadata](https://circlec
       req = new operations.PostProjectUsernameProjectBuildNumCancelRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/project/{username}/{project}/{build_num}/cancel", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostProjectUsernameProjectBuildNumCancelResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostProjectUsernameProjectBuildNumCancelResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.build = httpRes?.data;
             }
             break;
@@ -691,9 +752,11 @@ Note: [Learn how to set up your builds to collect test metadata](https://circlec
   }
 
   
-  // PostProjectUsernameProjectBuildNumRetry - Retries the build, returns a summary of the new build.
-
-  PostProjectUsernameProjectBuildNumRetry(
+  /**
+   * postProjectUsernameProjectBuildNumRetry - Retries the build, returns a summary of the new build.
+   * 
+  **/
+  postProjectUsernameProjectBuildNumRetry(
     req: operations.PostProjectUsernameProjectBuildNumRetryRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostProjectUsernameProjectBuildNumRetryResponse> {
@@ -701,22 +764,24 @@ Note: [Learn how to set up your builds to collect test metadata](https://circlec
       req = new operations.PostProjectUsernameProjectBuildNumRetryRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/project/{username}/{project}/{build_num}/retry", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostProjectUsernameProjectBuildNumRetryResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostProjectUsernameProjectBuildNumRetryResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.build = httpRes?.data;
             }
             break;
@@ -728,10 +793,12 @@ Note: [Learn how to set up your builds to collect test metadata](https://circlec
   }
 
   
-  // PostProjectUsernameProjectCheckoutKey - Creates a new checkout key.
-Only usable with a user API token.
-
-  PostProjectUsernameProjectCheckoutKey(
+  /**
+   * postProjectUsernameProjectCheckoutKey - Creates a new checkout key.
+   * Only usable with a user API token.
+   * 
+  **/
+  postProjectUsernameProjectCheckoutKey(
     req: operations.PostProjectUsernameProjectCheckoutKeyRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostProjectUsernameProjectCheckoutKeyResponse> {
@@ -739,38 +806,39 @@ Only usable with a user API token.
       req = new operations.PostProjectUsernameProjectCheckoutKeyRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/project/{username}/{project}/checkout-key", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostProjectUsernameProjectCheckoutKeyResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostProjectUsernameProjectCheckoutKeyResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.key = httpRes?.data;
             }
             break;
@@ -782,9 +850,11 @@ Only usable with a user API token.
   }
 
   
-  // PostProjectUsernameProjectEnvvar - Creates a new environment variable
-
-  PostProjectUsernameProjectEnvvar(
+  /**
+   * postProjectUsernameProjectEnvvar - Creates a new environment variable
+   * 
+  **/
+  postProjectUsernameProjectEnvvar(
     req: operations.PostProjectUsernameProjectEnvvarRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostProjectUsernameProjectEnvvarResponse> {
@@ -792,22 +862,24 @@ Only usable with a user API token.
       req = new operations.PostProjectUsernameProjectEnvvarRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/project/{username}/{project}/envvar", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostProjectUsernameProjectEnvvarResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostProjectUsernameProjectEnvvarResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.envvar = httpRes?.data;
             }
             break;
@@ -819,9 +891,11 @@ Only usable with a user API token.
   }
 
   
-  // PostProjectUsernameProjectSshKey - Create an ssh key used to access external systems that require SSH key-based authentication
-
-  PostProjectUsernameProjectSshKey(
+  /**
+   * postProjectUsernameProjectSshKey - Create an ssh key used to access external systems that require SSH key-based authentication
+   * 
+  **/
+  postProjectUsernameProjectSshKey(
     req: operations.PostProjectUsernameProjectSshKeyRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostProjectUsernameProjectSshKeyResponse> {
@@ -829,40 +903,40 @@ Only usable with a user API token.
       req = new operations.PostProjectUsernameProjectSshKeyRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/project/{username}/{project}/ssh-key", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostProjectUsernameProjectSshKeyResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
+        const res: operations.PostProjectUsernameProjectSshKeyResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
           default:
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postProjectUsernameProjectSshKeyDefaultApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -874,12 +948,14 @@ Only usable with a user API token.
   }
 
   
-  // PostProjectUsernameProjectTreeBranch - Triggers a new build, returns a summary of the build.
-Optional build parameters can be set using an experimental API.
-
-Note: For more about build parameters, read about [using parameterized builds](https://circleci.com/docs/parameterized-builds/)
-
-  PostProjectUsernameProjectTreeBranch(
+  /**
+   * postProjectUsernameProjectTreeBranch - Triggers a new build, returns a summary of the build.
+   * Optional build parameters can be set using an experimental API.
+   * 
+   * Note: For more about build parameters, read about [using parameterized builds](https://circleci.com/docs/parameterized-builds/)
+   * 
+  **/
+  postProjectUsernameProjectTreeBranch(
     req: operations.PostProjectUsernameProjectTreeBranchRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostProjectUsernameProjectTreeBranchResponse> {
@@ -887,38 +963,39 @@ Note: For more about build parameters, read about [using parameterized builds](h
       req = new operations.PostProjectUsernameProjectTreeBranchRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/project/{username}/{project}/tree/{branch}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostProjectUsernameProjectTreeBranchResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostProjectUsernameProjectTreeBranchResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.build = httpRes?.data;
             }
             break;
@@ -930,28 +1007,31 @@ Note: For more about build parameters, read about [using parameterized builds](h
   }
 
   
-  // PostUserHerokuKey - Adds your Heroku API key to CircleCI, takes apikey as form param name.
-
-  PostUserHerokuKey(
-    
+  /**
+   * postUserHerokuKey - Adds your Heroku API key to CircleCI, takes apikey as form param name.
+   * 
+  **/
+  postUserHerokuKey(
     config?: AxiosRequestConfig
   ): Promise<operations.PostUserHerokuKeyResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/user/heroku-key";
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostUserHerokuKeyResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostUserHerokuKeyResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postUserHerokuKey403ApplicationJsonObject = httpRes?.data;
             }
             break;

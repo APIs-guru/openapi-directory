@@ -1,5 +1,8 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
 from sdk.models import shared
 
 
@@ -24,16 +27,16 @@ class ListEventSourcesHeaders:
 
 @dataclass
 class ListEventSourcesRequest:
-    query_params: ListEventSourcesQueryParams = field(default=None)
-    headers: ListEventSourcesHeaders = field(default=None)
+    headers: ListEventSourcesHeaders = field()
+    query_params: ListEventSourcesQueryParams = field()
     
 
 @dataclass
 class ListEventSourcesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     invalid_parameter_value_exception: Optional[shared.InvalidParameterValueException] = field(default=None)
     list_event_sources_response: Optional[shared.ListEventSourcesResponse] = field(default=None)
     resource_not_found_exception: Optional[shared.ResourceNotFoundException] = field(default=None)
     service_exception: Optional[shared.ServiceException] = field(default=None)
-    status_code: int = field(default=None)
     

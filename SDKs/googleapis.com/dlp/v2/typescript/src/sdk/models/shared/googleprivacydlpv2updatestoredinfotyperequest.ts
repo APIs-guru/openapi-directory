@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GooglePrivacyDlpV2StoredInfoTypeConfig } from "./googleprivacydlpv2storedinfotypeconfig";
+
 
 
 // GooglePrivacyDlpV2UpdateStoredInfoTypeRequest
@@ -7,9 +8,9 @@ import { GooglePrivacyDlpV2StoredInfoTypeConfig } from "./googleprivacydlpv2stor
  * Request message for UpdateStoredInfoType.
 **/
 export class GooglePrivacyDlpV2UpdateStoredInfoTypeRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=config" })
+  @SpeakeasyMetadata({ data: "json, name=config" })
   config?: GooglePrivacyDlpV2StoredInfoTypeConfig;
 
-  @Metadata({ data: "json, name=updateMask" })
+  @SpeakeasyMetadata({ data: "json, name=updateMask" })
   updateMask?: string;
 }

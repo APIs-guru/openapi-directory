@@ -1,5 +1,7 @@
 package shared
 
+// WorkerResource
+// Configuration for resources used by Airflow workers.
 type WorkerResource struct {
 	CPU       *float32 `json:"cpu,omitempty"`
 	MaxCount  *int32   `json:"maxCount,omitempty"`

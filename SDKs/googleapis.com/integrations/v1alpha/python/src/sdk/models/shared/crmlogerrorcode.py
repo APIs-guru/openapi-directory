@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class CrmlogErrorCodeCommonErrorCodeEnum(str, Enum):
     COMMON_ERROR_CODE_UNSPECIFIED = "COMMON_ERROR_CODE_UNSPECIFIED"
@@ -70,5 +72,9 @@ class CrmlogErrorCodeCommonErrorCodeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CrmlogErrorCode:
-    common_error_code: Optional[CrmlogErrorCodeCommonErrorCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'commonErrorCode' }})
+    r"""CrmlogErrorCode
+    Registered ids for errors, as \"oneof\" enums. Each task or logical grouping of tasks may share the same enum.
+    """
+    
+    common_error_code: Optional[CrmlogErrorCodeCommonErrorCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('commonErrorCode') }})
     

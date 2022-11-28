@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PivotSelection } from "./pivotselection";
+
 
 
 // PivotOrderBy
@@ -8,9 +8,9 @@ import { PivotSelection } from "./pivotselection";
  * Sorts by a pivot column group.
 **/
 export class PivotOrderBy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=metricName" })
+  @SpeakeasyMetadata({ data: "json, name=metricName" })
   metricName?: string;
 
-  @Metadata({ data: "json, name=pivotSelections", elemType: shared.PivotSelection })
+  @SpeakeasyMetadata({ data: "json, name=pivotSelections", elemType: PivotSelection })
   pivotSelections?: PivotSelection[];
 }

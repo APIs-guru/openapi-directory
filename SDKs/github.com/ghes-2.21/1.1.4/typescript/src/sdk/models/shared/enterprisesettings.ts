@@ -1,412 +1,413 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class EnterpriseSettingsEnterpriseAvatar extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri?: string;
 }
 
 
 export class EnterpriseSettingsEnterpriseCas extends SpeakeasyBase {
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }
 
 
 export class EnterpriseSettingsEnterpriseCollectd extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=encryption" })
+  @SpeakeasyMetadata({ data: "json, name=encryption" })
   encryption?: string;
 
-  @Metadata({ data: "json, name=password" })
+  @SpeakeasyMetadata({ data: "json, name=password" })
   password?: string;
 
-  @Metadata({ data: "json, name=port" })
+  @SpeakeasyMetadata({ data: "json, name=port" })
   port?: number;
 
-  @Metadata({ data: "json, name=server" })
+  @SpeakeasyMetadata({ data: "json, name=server" })
   server?: string;
 
-  @Metadata({ data: "json, name=username" })
+  @SpeakeasyMetadata({ data: "json, name=username" })
   username?: string;
 }
 
 
 export class EnterpriseSettingsEnterpriseCustomer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=public_key_data" })
+  @SpeakeasyMetadata({ data: "json, name=public_key_data" })
   publicKeyData?: string;
 
-  @Metadata({ data: "json, name=secret_key_data" })
+  @SpeakeasyMetadata({ data: "json, name=secret_key_data" })
   secretKeyData?: string;
 
-  @Metadata({ data: "json, name=uuid" })
+  @SpeakeasyMetadata({ data: "json, name=uuid" })
   uuid?: string;
 }
 
 
 export class EnterpriseSettingsEnterpriseGithubOauth extends SpeakeasyBase {
-  @Metadata({ data: "json, name=client_id" })
+  @SpeakeasyMetadata({ data: "json, name=client_id" })
   clientId?: string;
 
-  @Metadata({ data: "json, name=client_secret" })
+  @SpeakeasyMetadata({ data: "json, name=client_secret" })
   clientSecret?: string;
 
-  @Metadata({ data: "json, name=organization_name" })
+  @SpeakeasyMetadata({ data: "json, name=organization_name" })
   organizationName?: string;
 
-  @Metadata({ data: "json, name=organization_team" })
+  @SpeakeasyMetadata({ data: "json, name=organization_team" })
   organizationTeam?: string;
 }
 
 
 export class EnterpriseSettingsEnterpriseGithubSsl extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cert" })
+  @SpeakeasyMetadata({ data: "json, name=cert" })
   cert?: string;
 
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: string;
 }
 
 
 export class EnterpriseSettingsEnterpriseLdapProfile extends SpeakeasyBase {
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: string;
 
-  @Metadata({ data: "json, name=mail" })
+  @SpeakeasyMetadata({ data: "json, name=mail" })
   mail?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=uid" })
+  @SpeakeasyMetadata({ data: "json, name=uid" })
   uid?: string;
 }
 
 
 export class EnterpriseSettingsEnterpriseLdapReconciliation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=org" })
+  @SpeakeasyMetadata({ data: "json, name=org" })
   org?: string;
 
-  @Metadata({ data: "json, name=user" })
+  @SpeakeasyMetadata({ data: "json, name=user" })
   user?: string;
 }
 
 
 export class EnterpriseSettingsEnterpriseLdap extends SpeakeasyBase {
-  @Metadata({ data: "json, name=admin_group" })
+  @SpeakeasyMetadata({ data: "json, name=admin_group" })
   adminGroup?: string;
 
-  @Metadata({ data: "json, name=base" })
+  @SpeakeasyMetadata({ data: "json, name=base" })
   base?: any[];
 
-  @Metadata({ data: "json, name=bind_dn" })
+  @SpeakeasyMetadata({ data: "json, name=bind_dn" })
   bindDn?: string;
 
-  @Metadata({ data: "json, name=host" })
+  @SpeakeasyMetadata({ data: "json, name=host" })
   host?: string;
 
-  @Metadata({ data: "json, name=method" })
+  @SpeakeasyMetadata({ data: "json, name=method" })
   method?: string;
 
-  @Metadata({ data: "json, name=password" })
+  @SpeakeasyMetadata({ data: "json, name=password" })
   password?: string;
 
-  @Metadata({ data: "json, name=port" })
+  @SpeakeasyMetadata({ data: "json, name=port" })
   port?: number;
 
-  @Metadata({ data: "json, name=posix_support" })
+  @SpeakeasyMetadata({ data: "json, name=posix_support" })
   posixSupport?: boolean;
 
-  @Metadata({ data: "json, name=profile" })
+  @SpeakeasyMetadata({ data: "json, name=profile" })
   profile?: EnterpriseSettingsEnterpriseLdapProfile;
 
-  @Metadata({ data: "json, name=reconciliation" })
+  @SpeakeasyMetadata({ data: "json, name=reconciliation" })
   reconciliation?: EnterpriseSettingsEnterpriseLdapReconciliation;
 
-  @Metadata({ data: "json, name=recursive_group_search" })
+  @SpeakeasyMetadata({ data: "json, name=recursive_group_search" })
   recursiveGroupSearch?: boolean;
 
-  @Metadata({ data: "json, name=search_strategy" })
+  @SpeakeasyMetadata({ data: "json, name=search_strategy" })
   searchStrategy?: string;
 
-  @Metadata({ data: "json, name=sync_enabled" })
+  @SpeakeasyMetadata({ data: "json, name=sync_enabled" })
   syncEnabled?: boolean;
 
-  @Metadata({ data: "json, name=team_sync_interval" })
+  @SpeakeasyMetadata({ data: "json, name=team_sync_interval" })
   teamSyncInterval?: number;
 
-  @Metadata({ data: "json, name=uid" })
+  @SpeakeasyMetadata({ data: "json, name=uid" })
   uid?: string;
 
-  @Metadata({ data: "json, name=user_groups" })
+  @SpeakeasyMetadata({ data: "json, name=user_groups" })
   userGroups?: any[];
 
-  @Metadata({ data: "json, name=user_sync_emails" })
+  @SpeakeasyMetadata({ data: "json, name=user_sync_emails" })
   userSyncEmails?: boolean;
 
-  @Metadata({ data: "json, name=user_sync_interval" })
+  @SpeakeasyMetadata({ data: "json, name=user_sync_interval" })
   userSyncInterval?: number;
 
-  @Metadata({ data: "json, name=user_sync_keys" })
+  @SpeakeasyMetadata({ data: "json, name=user_sync_keys" })
   userSyncKeys?: boolean;
 
-  @Metadata({ data: "json, name=virtual_attribute_enabled" })
+  @SpeakeasyMetadata({ data: "json, name=virtual_attribute_enabled" })
   virtualAttributeEnabled?: boolean;
 }
 
 
 export class EnterpriseSettingsEnterpriseLicense extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cluster_support" })
+  @SpeakeasyMetadata({ data: "json, name=cluster_support" })
   clusterSupport?: boolean;
 
-  @Metadata({ data: "json, name=evaluation" })
+  @SpeakeasyMetadata({ data: "json, name=evaluation" })
   evaluation?: boolean;
 
-  @Metadata({ data: "json, name=expire_at" })
+  @SpeakeasyMetadata({ data: "json, name=expire_at" })
   expireAt?: string;
 
-  @Metadata({ data: "json, name=perpetual" })
+  @SpeakeasyMetadata({ data: "json, name=perpetual" })
   perpetual?: boolean;
 
-  @Metadata({ data: "json, name=seats" })
+  @SpeakeasyMetadata({ data: "json, name=seats" })
   seats?: number;
 
-  @Metadata({ data: "json, name=ssh_allowed" })
+  @SpeakeasyMetadata({ data: "json, name=ssh_allowed" })
   sshAllowed?: boolean;
 
-  @Metadata({ data: "json, name=support_key" })
+  @SpeakeasyMetadata({ data: "json, name=support_key" })
   supportKey?: string;
 
-  @Metadata({ data: "json, name=unlimited_seating" })
+  @SpeakeasyMetadata({ data: "json, name=unlimited_seating" })
   unlimitedSeating?: boolean;
 }
 
 
 export class EnterpriseSettingsEnterpriseMapping extends SpeakeasyBase {
-  @Metadata({ data: "json, name=basemap" })
+  @SpeakeasyMetadata({ data: "json, name=basemap" })
   basemap?: string;
 
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=tileserver" })
+  @SpeakeasyMetadata({ data: "json, name=tileserver" })
   tileserver?: string;
 
-  @Metadata({ data: "json, name=token" })
+  @SpeakeasyMetadata({ data: "json, name=token" })
   token?: string;
 }
 
 
 export class EnterpriseSettingsEnterpriseNtp extends SpeakeasyBase {
-  @Metadata({ data: "json, name=primary_server" })
+  @SpeakeasyMetadata({ data: "json, name=primary_server" })
   primaryServer?: string;
 
-  @Metadata({ data: "json, name=secondary_server" })
+  @SpeakeasyMetadata({ data: "json, name=secondary_server" })
   secondaryServer?: string;
 }
 
 
 export class EnterpriseSettingsEnterprisePages extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 }
 
 
 export class EnterpriseSettingsEnterpriseSaml extends SpeakeasyBase {
-  @Metadata({ data: "json, name=certificate" })
+  @SpeakeasyMetadata({ data: "json, name=certificate" })
   certificate?: string;
 
-  @Metadata({ data: "json, name=certificate_path" })
+  @SpeakeasyMetadata({ data: "json, name=certificate_path" })
   certificatePath?: string;
 
-  @Metadata({ data: "json, name=disable_admin_demote" })
+  @SpeakeasyMetadata({ data: "json, name=disable_admin_demote" })
   disableAdminDemote?: boolean;
 
-  @Metadata({ data: "json, name=idp_initiated_sso" })
+  @SpeakeasyMetadata({ data: "json, name=idp_initiated_sso" })
   idpInitiatedSso?: boolean;
 
-  @Metadata({ data: "json, name=issuer" })
+  @SpeakeasyMetadata({ data: "json, name=issuer" })
   issuer?: string;
 
-  @Metadata({ data: "json, name=sso_url" })
+  @SpeakeasyMetadata({ data: "json, name=sso_url" })
   ssoUrl?: string;
 }
 
 
 export class EnterpriseSettingsEnterpriseSmtp extends SpeakeasyBase {
-  @Metadata({ data: "json, name=address" })
+  @SpeakeasyMetadata({ data: "json, name=address" })
   address?: string;
 
-  @Metadata({ data: "json, name=authentication" })
+  @SpeakeasyMetadata({ data: "json, name=authentication" })
   authentication?: string;
 
-  @Metadata({ data: "json, name=discard-to-noreply-address" })
+  @SpeakeasyMetadata({ data: "json, name=discard-to-noreply-address" })
   discardToNoreplyAddress?: boolean;
 
-  @Metadata({ data: "json, name=domain" })
+  @SpeakeasyMetadata({ data: "json, name=domain" })
   domain?: string;
 
-  @Metadata({ data: "json, name=enable_starttls_auto" })
+  @SpeakeasyMetadata({ data: "json, name=enable_starttls_auto" })
   enableStarttlsAuto?: boolean;
 
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=noreply_address" })
+  @SpeakeasyMetadata({ data: "json, name=noreply_address" })
   noreplyAddress?: string;
 
-  @Metadata({ data: "json, name=password" })
+  @SpeakeasyMetadata({ data: "json, name=password" })
   password?: string;
 
-  @Metadata({ data: "json, name=port" })
+  @SpeakeasyMetadata({ data: "json, name=port" })
   port?: string;
 
-  @Metadata({ data: "json, name=support_address" })
+  @SpeakeasyMetadata({ data: "json, name=support_address" })
   supportAddress?: string;
 
-  @Metadata({ data: "json, name=support_address_type" })
+  @SpeakeasyMetadata({ data: "json, name=support_address_type" })
   supportAddressType?: string;
 
-  @Metadata({ data: "json, name=user_name" })
+  @SpeakeasyMetadata({ data: "json, name=user_name" })
   userName?: string;
 
-  @Metadata({ data: "json, name=username" })
+  @SpeakeasyMetadata({ data: "json, name=username" })
   username?: string;
 }
 
 
 export class EnterpriseSettingsEnterpriseSnmp extends SpeakeasyBase {
-  @Metadata({ data: "json, name=community" })
+  @SpeakeasyMetadata({ data: "json, name=community" })
   community?: string;
 
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 }
 
 
 export class EnterpriseSettingsEnterpriseSyslog extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=protocol_name" })
+  @SpeakeasyMetadata({ data: "json, name=protocol_name" })
   protocolName?: string;
 
-  @Metadata({ data: "json, name=server" })
+  @SpeakeasyMetadata({ data: "json, name=server" })
   server?: string;
 }
 
 
 export class EnterpriseSettingsEnterprise extends SpeakeasyBase {
-  @Metadata({ data: "json, name=admin_password" })
+  @SpeakeasyMetadata({ data: "json, name=admin_password" })
   adminPassword?: string;
 
-  @Metadata({ data: "json, name=assets" })
+  @SpeakeasyMetadata({ data: "json, name=assets" })
   assets?: string;
 
-  @Metadata({ data: "json, name=auth_mode" })
+  @SpeakeasyMetadata({ data: "json, name=auth_mode" })
   authMode?: string;
 
-  @Metadata({ data: "json, name=avatar" })
+  @SpeakeasyMetadata({ data: "json, name=avatar" })
   avatar?: EnterpriseSettingsEnterpriseAvatar;
 
-  @Metadata({ data: "json, name=cas" })
+  @SpeakeasyMetadata({ data: "json, name=cas" })
   cas?: EnterpriseSettingsEnterpriseCas;
 
-  @Metadata({ data: "json, name=collectd" })
+  @SpeakeasyMetadata({ data: "json, name=collectd" })
   collectd?: EnterpriseSettingsEnterpriseCollectd;
 
-  @Metadata({ data: "json, name=configuration_id" })
+  @SpeakeasyMetadata({ data: "json, name=configuration_id" })
   configurationId?: number;
 
-  @Metadata({ data: "json, name=configuration_run_count" })
+  @SpeakeasyMetadata({ data: "json, name=configuration_run_count" })
   configurationRunCount?: number;
 
-  @Metadata({ data: "json, name=customer" })
+  @SpeakeasyMetadata({ data: "json, name=customer" })
   customer?: EnterpriseSettingsEnterpriseCustomer;
 
-  @Metadata({ data: "json, name=expire_sessions" })
+  @SpeakeasyMetadata({ data: "json, name=expire_sessions" })
   expireSessions?: boolean;
 
-  @Metadata({ data: "json, name=github_hostname" })
+  @SpeakeasyMetadata({ data: "json, name=github_hostname" })
   githubHostname?: string;
 
-  @Metadata({ data: "json, name=github_oauth" })
+  @SpeakeasyMetadata({ data: "json, name=github_oauth" })
   githubOauth?: EnterpriseSettingsEnterpriseGithubOauth;
 
-  @Metadata({ data: "json, name=github_ssl" })
+  @SpeakeasyMetadata({ data: "json, name=github_ssl" })
   githubSsl?: EnterpriseSettingsEnterpriseGithubSsl;
 
-  @Metadata({ data: "json, name=http_proxy" })
+  @SpeakeasyMetadata({ data: "json, name=http_proxy" })
   httpProxy?: string;
 
-  @Metadata({ data: "json, name=identicons_host" })
+  @SpeakeasyMetadata({ data: "json, name=identicons_host" })
   identiconsHost?: string;
 
-  @Metadata({ data: "json, name=ldap" })
+  @SpeakeasyMetadata({ data: "json, name=ldap" })
   ldap?: EnterpriseSettingsEnterpriseLdap;
 
-  @Metadata({ data: "json, name=license" })
+  @SpeakeasyMetadata({ data: "json, name=license" })
   license?: EnterpriseSettingsEnterpriseLicense;
 
-  @Metadata({ data: "json, name=load_balancer" })
+  @SpeakeasyMetadata({ data: "json, name=load_balancer" })
   loadBalancer?: string;
 
-  @Metadata({ data: "json, name=mapping" })
+  @SpeakeasyMetadata({ data: "json, name=mapping" })
   mapping?: EnterpriseSettingsEnterpriseMapping;
 
-  @Metadata({ data: "json, name=ntp" })
+  @SpeakeasyMetadata({ data: "json, name=ntp" })
   ntp?: EnterpriseSettingsEnterpriseNtp;
 
-  @Metadata({ data: "json, name=pages" })
+  @SpeakeasyMetadata({ data: "json, name=pages" })
   pages?: EnterpriseSettingsEnterprisePages;
 
-  @Metadata({ data: "json, name=private_mode" })
+  @SpeakeasyMetadata({ data: "json, name=private_mode" })
   privateMode?: boolean;
 
-  @Metadata({ data: "json, name=public_pages" })
+  @SpeakeasyMetadata({ data: "json, name=public_pages" })
   publicPages?: boolean;
 
-  @Metadata({ data: "json, name=saml" })
+  @SpeakeasyMetadata({ data: "json, name=saml" })
   saml?: EnterpriseSettingsEnterpriseSaml;
 
-  @Metadata({ data: "json, name=signup_enabled" })
+  @SpeakeasyMetadata({ data: "json, name=signup_enabled" })
   signupEnabled?: boolean;
 
-  @Metadata({ data: "json, name=smtp" })
+  @SpeakeasyMetadata({ data: "json, name=smtp" })
   smtp?: EnterpriseSettingsEnterpriseSmtp;
 
-  @Metadata({ data: "json, name=snmp" })
+  @SpeakeasyMetadata({ data: "json, name=snmp" })
   snmp?: EnterpriseSettingsEnterpriseSnmp;
 
-  @Metadata({ data: "json, name=subdomain_isolation" })
+  @SpeakeasyMetadata({ data: "json, name=subdomain_isolation" })
   subdomainIsolation?: boolean;
 
-  @Metadata({ data: "json, name=syslog" })
+  @SpeakeasyMetadata({ data: "json, name=syslog" })
   syslog?: EnterpriseSettingsEnterpriseSyslog;
 
-  @Metadata({ data: "json, name=timezone" })
+  @SpeakeasyMetadata({ data: "json, name=timezone" })
   timezone?: string;
 }
 
 
 export class EnterpriseSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enterprise" })
+  @SpeakeasyMetadata({ data: "json, name=enterprise" })
   enterprise?: EnterpriseSettingsEnterprise;
 
-  @Metadata({ data: "json, name=run_list" })
+  @SpeakeasyMetadata({ data: "json, name=run_list" })
   runList?: string[];
 }

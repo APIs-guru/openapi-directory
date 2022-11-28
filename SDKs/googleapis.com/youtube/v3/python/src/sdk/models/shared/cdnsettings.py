@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import ingestioninfo
+from sdk import utils
+from . import *
 
 class CdnSettingsFrameRateEnum(str, Enum):
     THIRTYFPS = "30fps"
@@ -28,9 +30,13 @@ class CdnSettingsResolutionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CdnSettings:
-    format: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'format' }})
-    frame_rate: Optional[CdnSettingsFrameRateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'frameRate' }})
-    ingestion_info: Optional[ingestioninfo.IngestionInfo] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ingestionInfo' }})
-    ingestion_type: Optional[CdnSettingsIngestionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ingestionType' }})
-    resolution: Optional[CdnSettingsResolutionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resolution' }})
+    r"""CdnSettings
+    Brief description of the live stream cdn settings.
+    """
+    
+    format: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('format') }})
+    frame_rate: Optional[CdnSettingsFrameRateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('frameRate') }})
+    ingestion_info: Optional[IngestionInfo] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ingestionInfo') }})
+    ingestion_type: Optional[CdnSettingsIngestionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ingestionType') }})
+    resolution: Optional[CdnSettingsResolutionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resolution') }})
     

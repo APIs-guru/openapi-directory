@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RecipeGetStepQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=recipeId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=recipeId" })
   recipeId: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=stepId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=stepId" })
   stepId: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=userName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userName" })
   userName: string;
 }
 
 
 export class RecipeGetStepRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: RecipeGetStepQueryParams;
 }
 
 
 export class RecipeGetStepResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   recipeGetStep200ApplicationJsonString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   recipeGetStep200ApplicationXmlString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   recipeGetStep200TextJsonString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   recipeGetStep200TextXmlString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

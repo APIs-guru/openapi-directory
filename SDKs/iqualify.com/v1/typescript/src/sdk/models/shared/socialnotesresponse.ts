@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SocialNotesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=firstName" })
+  @SpeakeasyMetadata({ data: "json, name=firstName" })
   firstName?: string;
 
-  @Metadata({ data: "json, name=lastName" })
+  @SpeakeasyMetadata({ data: "json, name=lastName" })
   lastName?: string;
 
-  @Metadata({ data: "json, name=pageId" })
+  @SpeakeasyMetadata({ data: "json, name=pageId" })
   pageId?: string;
 
-  @Metadata({ data: "json, name=personId" })
+  @SpeakeasyMetadata({ data: "json, name=personId" })
   personId?: string;
 
-  @Metadata({ data: "json, name=social-note-content" })
+  @SpeakeasyMetadata({ data: "json, name=social-note-content" })
   socialNoteContent?: string;
 
-  @Metadata({ data: "json, name=social-note-paragraphId" })
+  @SpeakeasyMetadata({ data: "json, name=social-note-paragraphId" })
   socialNoteParagraphId?: string;
 
-  @Metadata({ data: "json, name=userId" })
+  @SpeakeasyMetadata({ data: "json, name=userId" })
   userId?: string;
 }

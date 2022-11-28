@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class CertificatemanagerProjectsLocationsCertificateMapsCreatePathParams extends SpeakeasyBase {
     parent: string;
@@ -24,7 +24,7 @@ export declare class CertificatemanagerProjectsLocationsCertificateMapsCreateSec
 export declare class CertificatemanagerProjectsLocationsCertificateMapsCreateRequest extends SpeakeasyBase {
     pathParams: CertificatemanagerProjectsLocationsCertificateMapsCreatePathParams;
     queryParams: CertificatemanagerProjectsLocationsCertificateMapsCreateQueryParams;
-    request?: shared.CertificateMap;
+    request?: shared.CertificateMapInput;
     security: CertificatemanagerProjectsLocationsCertificateMapsCreateSecurity;
 }
 export declare class CertificatemanagerProjectsLocationsCertificateMapsCreateResponse extends SpeakeasyBase {

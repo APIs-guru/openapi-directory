@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetModifyCapacityReservationActionEnum {
     ModifyCapacityReservation = "ModifyCapacityReservation"
 }
 
 export enum GetModifyCapacityReservationEndDateTypeEnum {
-    Unlimited = "unlimited"
-,    Limited = "limited"
+    Unlimited = "unlimited",
+    Limited = "limited"
 }
 
 export enum GetModifyCapacityReservationVersionEnum {
@@ -15,72 +16,72 @@ export enum GetModifyCapacityReservationVersionEnum {
 
 
 export class GetModifyCapacityReservationQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Accept" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Accept" })
   accept?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Action" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" })
   action: GetModifyCapacityReservationActionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=CapacityReservationId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=CapacityReservationId" })
   capacityReservationId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=DryRun" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DryRun" })
   dryRun?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=EndDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=EndDate" })
   endDate?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=EndDateType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=EndDateType" })
   endDateType?: GetModifyCapacityReservationEndDateTypeEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=InstanceCount" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=InstanceCount" })
   instanceCount?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" })
   version: GetModifyCapacityReservationVersionEnum;
 }
 
 
 export class GetModifyCapacityReservationHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class GetModifyCapacityReservationRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetModifyCapacityReservationQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetModifyCapacityReservationHeaders;
 }
 
 
 export class GetModifyCapacityReservationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

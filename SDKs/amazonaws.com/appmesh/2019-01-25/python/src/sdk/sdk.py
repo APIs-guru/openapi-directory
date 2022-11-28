@@ -1,8 +1,11 @@
-import warnings
+
+__doc__ = """ SDK Documentation: https://docs.aws.amazon.com/appmesh/ - Amazon Web Services documentation"""
 import requests
-from typing import Any,List,Optional
-from sdk.models import operations, shared
+from typing import Any,Optional
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -14,39 +17,64 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    r"""SDK Documentation: https://docs.aws.amazon.com/appmesh/ - Amazon Web Services documentation"""
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
-    
-    def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
+            self._server_url = server_url
 
+        
+    
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        
+    
+
+    def config_security(self, security: shared.Security):
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        
+    
+    
     
     def create_gateway_route(self, request: operations.CreateGatewayRouteRequest) -> operations.CreateGatewayRouteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Creates a gateway route.</p> <p>A gateway route is attached to a virtual gateway and routes traffic to an existing virtual service. If a route matches a request, it can distribute traffic to a target virtual service.</p> <p>For more information about gateway routes, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/gateway-routes.html\">Gateway routes</a>.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v20190125/meshes/{meshName}/virtualGateway/{virtualGatewayName}/gatewayRoutes", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -93,22 +121,22 @@ class SDK:
 
     
     def create_mesh(self, request: operations.CreateMeshRequest) -> operations.CreateMeshResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Creates a service mesh.</p> <p> A service mesh is a logical boundary for network traffic between services that are represented by resources within the mesh. After you create your service mesh, you can create virtual services, virtual nodes, virtual routers, and routes to distribute traffic between the applications in your mesh.</p> <p>For more information about service meshes, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/meshes.html\">Service meshes</a>.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v20190125/meshes"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -155,24 +183,23 @@ class SDK:
 
     
     def create_route(self, request: operations.CreateRouteRequest) -> operations.CreateRouteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Creates a route that is associated with a virtual router.</p> <p> You can route several different protocols and define a retry policy for a route. Traffic can be routed to one or more virtual nodes.</p> <p>For more information about routes, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/routes.html\">Routes</a>.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v20190125/meshes/{meshName}/virtualRouter/{virtualRouterName}/routes", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -219,24 +246,23 @@ class SDK:
 
     
     def create_virtual_gateway(self, request: operations.CreateVirtualGatewayRequest) -> operations.CreateVirtualGatewayResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Creates a virtual gateway.</p> <p>A virtual gateway allows resources outside your mesh to communicate to resources that are inside your mesh. The virtual gateway represents an Envoy proxy running in an Amazon ECS task, in a Kubernetes service, or on an Amazon EC2 instance. Unlike a virtual node, which represents an Envoy running with an application, a virtual gateway represents Envoy deployed by itself.</p> <p>For more information about virtual gateways, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_gateways.html\">Virtual gateways</a>. </p>
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v20190125/meshes/{meshName}/virtualGateways", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -283,24 +309,23 @@ class SDK:
 
     
     def create_virtual_node(self, request: operations.CreateVirtualNodeRequest) -> operations.CreateVirtualNodeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Creates a virtual node within a service mesh.</p> <p> A virtual node acts as a logical pointer to a particular task group, such as an Amazon ECS service or a Kubernetes deployment. When you create a virtual node, you can specify the service discovery information for your task group, and whether the proxy running in a task group will communicate with other proxies using Transport Layer Security (TLS).</p> <p>You define a <code>listener</code> for any inbound traffic that your virtual node expects. Any virtual service that your virtual node expects to communicate to is specified as a <code>backend</code>.</p> <p>The response metadata for your new virtual node contains the <code>arn</code> that is associated with the virtual node. Set this value to the full ARN; for example, <code>arn:aws:appmesh:us-west-2:123456789012:myMesh/default/virtualNode/myApp</code>) as the <code>APPMESH_RESOURCE_ARN</code> environment variable for your task group's Envoy proxy container in your task definition or pod spec. This is then mapped to the <code>node.id</code> and <code>node.cluster</code> Envoy parameters.</p> <note> <p>By default, App Mesh uses the name of the resource you specified in <code>APPMESH_RESOURCE_ARN</code> when Envoy is referring to itself in metrics and traces. You can override this behavior by setting the <code>APPMESH_RESOURCE_CLUSTER</code> environment variable with your own name.</p> </note> <p>For more information about virtual nodes, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_nodes.html\">Virtual nodes</a>. You must be using <code>1.15.0</code> or later of the Envoy image when setting these variables. For more information aboutApp Mesh Envoy variables, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/envoy.html\">Envoy image</a> in the AWS App Mesh User Guide.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v20190125/meshes/{meshName}/virtualNodes", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -347,24 +372,23 @@ class SDK:
 
     
     def create_virtual_router(self, request: operations.CreateVirtualRouterRequest) -> operations.CreateVirtualRouterResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Creates a virtual router within a service mesh.</p> <p>Specify a <code>listener</code> for any inbound traffic that your virtual router receives. Create a virtual router for each protocol and port that you need to route. Virtual routers handle traffic for one or more virtual services within your mesh. After you create your virtual router, create and associate routes for your virtual router that direct incoming requests to different virtual nodes.</p> <p>For more information about virtual routers, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_routers.html\">Virtual routers</a>.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v20190125/meshes/{meshName}/virtualRouters", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -411,24 +435,23 @@ class SDK:
 
     
     def create_virtual_service(self, request: operations.CreateVirtualServiceRequest) -> operations.CreateVirtualServiceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Creates a virtual service within a service mesh.</p> <p>A virtual service is an abstraction of a real service that is provided by a virtual node directly or indirectly by means of a virtual router. Dependent services call your virtual service by its <code>virtualServiceName</code>, and those requests are routed to the virtual node or virtual router that is specified as the provider for the virtual service.</p> <p>For more information about virtual services, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_services.html\">Virtual services</a>.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v20190125/meshes/{meshName}/virtualServices", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -475,17 +498,18 @@ class SDK:
 
     
     def delete_gateway_route(self, request: operations.DeleteGatewayRouteRequest) -> operations.DeleteGatewayRouteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes an existing gateway route.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v20190125/meshes/{meshName}/virtualGateway/{virtualGatewayName}/gatewayRoutes/{gatewayRouteName}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -528,15 +552,17 @@ class SDK:
 
     
     def delete_mesh(self, request: operations.DeleteMeshRequest) -> operations.DeleteMeshResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Deletes an existing service mesh.</p> <p>You must delete all resources (virtual services, routes, virtual routers, and virtual nodes) in the service mesh before you can delete the mesh itself.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v20190125/meshes/{meshName}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -579,17 +605,18 @@ class SDK:
 
     
     def delete_route(self, request: operations.DeleteRouteRequest) -> operations.DeleteRouteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes an existing route.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v20190125/meshes/{meshName}/virtualRouter/{virtualRouterName}/routes/{routeName}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -632,17 +659,18 @@ class SDK:
 
     
     def delete_virtual_gateway(self, request: operations.DeleteVirtualGatewayRequest) -> operations.DeleteVirtualGatewayResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes an existing virtual gateway. You cannot delete a virtual gateway if any gateway routes are associated to it.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v20190125/meshes/{meshName}/virtualGateways/{virtualGatewayName}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -685,17 +713,18 @@ class SDK:
 
     
     def delete_virtual_node(self, request: operations.DeleteVirtualNodeRequest) -> operations.DeleteVirtualNodeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Deletes an existing virtual node.</p> <p>You must delete any virtual services that list a virtual node as a service provider before you can delete the virtual node itself.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v20190125/meshes/{meshName}/virtualNodes/{virtualNodeName}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -738,17 +767,18 @@ class SDK:
 
     
     def delete_virtual_router(self, request: operations.DeleteVirtualRouterRequest) -> operations.DeleteVirtualRouterResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Deletes an existing virtual router.</p> <p>You must delete any routes associated with the virtual router before you can delete the router itself.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v20190125/meshes/{meshName}/virtualRouters/{virtualRouterName}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -791,17 +821,18 @@ class SDK:
 
     
     def delete_virtual_service(self, request: operations.DeleteVirtualServiceRequest) -> operations.DeleteVirtualServiceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes an existing virtual service.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v20190125/meshes/{meshName}/virtualServices/{virtualServiceName}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -844,17 +875,18 @@ class SDK:
 
     
     def describe_gateway_route(self, request: operations.DescribeGatewayRouteRequest) -> operations.DescribeGatewayRouteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Describes an existing gateway route.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v20190125/meshes/{meshName}/virtualGateway/{virtualGatewayName}/gatewayRoutes/{gatewayRouteName}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -893,17 +925,18 @@ class SDK:
 
     
     def describe_mesh(self, request: operations.DescribeMeshRequest) -> operations.DescribeMeshResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Describes an existing service mesh.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v20190125/meshes/{meshName}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -942,17 +975,18 @@ class SDK:
 
     
     def describe_route(self, request: operations.DescribeRouteRequest) -> operations.DescribeRouteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Describes an existing route.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v20190125/meshes/{meshName}/virtualRouter/{virtualRouterName}/routes/{routeName}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -991,17 +1025,18 @@ class SDK:
 
     
     def describe_virtual_gateway(self, request: operations.DescribeVirtualGatewayRequest) -> operations.DescribeVirtualGatewayResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Describes an existing virtual gateway.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v20190125/meshes/{meshName}/virtualGateways/{virtualGatewayName}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1040,17 +1075,18 @@ class SDK:
 
     
     def describe_virtual_node(self, request: operations.DescribeVirtualNodeRequest) -> operations.DescribeVirtualNodeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Describes an existing virtual node.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v20190125/meshes/{meshName}/virtualNodes/{virtualNodeName}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1089,17 +1125,18 @@ class SDK:
 
     
     def describe_virtual_router(self, request: operations.DescribeVirtualRouterRequest) -> operations.DescribeVirtualRouterResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Describes an existing virtual router.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v20190125/meshes/{meshName}/virtualRouters/{virtualRouterName}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1138,17 +1175,18 @@ class SDK:
 
     
     def describe_virtual_service(self, request: operations.DescribeVirtualServiceRequest) -> operations.DescribeVirtualServiceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Describes an existing virtual service.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v20190125/meshes/{meshName}/virtualServices/{virtualServiceName}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1187,17 +1225,18 @@ class SDK:
 
     
     def list_gateway_routes(self, request: operations.ListGatewayRoutesRequest) -> operations.ListGatewayRoutesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of existing gateway routes that are associated to a virtual gateway.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v20190125/meshes/{meshName}/virtualGateway/{virtualGatewayName}/gatewayRoutes", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1236,17 +1275,18 @@ class SDK:
 
     
     def list_meshes(self, request: operations.ListMeshesRequest) -> operations.ListMeshesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of existing service meshes.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v20190125/meshes"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1285,17 +1325,18 @@ class SDK:
 
     
     def list_routes(self, request: operations.ListRoutesRequest) -> operations.ListRoutesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of existing routes in a service mesh.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v20190125/meshes/{meshName}/virtualRouter/{virtualRouterName}/routes", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1334,17 +1375,18 @@ class SDK:
 
     
     def list_tags_for_resource(self, request: operations.ListTagsForResourceRequest) -> operations.ListTagsForResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List the tags for an App Mesh resource.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v20190125/tags#resourceArn"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1383,17 +1425,18 @@ class SDK:
 
     
     def list_virtual_gateways(self, request: operations.ListVirtualGatewaysRequest) -> operations.ListVirtualGatewaysResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of existing virtual gateways in a service mesh.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v20190125/meshes/{meshName}/virtualGateways", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1432,17 +1475,18 @@ class SDK:
 
     
     def list_virtual_nodes(self, request: operations.ListVirtualNodesRequest) -> operations.ListVirtualNodesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of existing virtual nodes.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v20190125/meshes/{meshName}/virtualNodes", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1481,17 +1525,18 @@ class SDK:
 
     
     def list_virtual_routers(self, request: operations.ListVirtualRoutersRequest) -> operations.ListVirtualRoutersResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of existing virtual routers in a service mesh.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v20190125/meshes/{meshName}/virtualRouters", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1530,17 +1575,18 @@ class SDK:
 
     
     def list_virtual_services(self, request: operations.ListVirtualServicesRequest) -> operations.ListVirtualServicesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of existing virtual services in a service mesh.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v20190125/meshes/{meshName}/virtualServices", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1579,24 +1625,23 @@ class SDK:
 
     
     def tag_resource(self, request: operations.TagResourceRequest) -> operations.TagResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Associates the specified tags to a resource with the specified <code>resourceArn</code>. If existing tags on a resource aren't specified in the request parameters, they aren't changed. When a resource is deleted, the tags associated with that resource are also deleted.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v20190125/tag#resourceArn"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1639,24 +1684,23 @@ class SDK:
 
     
     def untag_resource(self, request: operations.UntagResourceRequest) -> operations.UntagResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes specified tags from a resource.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v20190125/untag#resourceArn"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1695,24 +1739,23 @@ class SDK:
 
     
     def update_gateway_route(self, request: operations.UpdateGatewayRouteRequest) -> operations.UpdateGatewayRouteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates an existing gateway route that is associated to a specified virtual gateway in a service mesh.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v20190125/meshes/{meshName}/virtualGateway/{virtualGatewayName}/gatewayRoutes/{gatewayRouteName}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1759,22 +1802,22 @@ class SDK:
 
     
     def update_mesh(self, request: operations.UpdateMeshRequest) -> operations.UpdateMeshResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates an existing service mesh.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v20190125/meshes/{meshName}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1817,24 +1860,23 @@ class SDK:
 
     
     def update_route(self, request: operations.UpdateRouteRequest) -> operations.UpdateRouteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates an existing route for a specified service mesh and virtual router.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v20190125/meshes/{meshName}/virtualRouter/{virtualRouterName}/routes/{routeName}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1881,24 +1923,23 @@ class SDK:
 
     
     def update_virtual_gateway(self, request: operations.UpdateVirtualGatewayRequest) -> operations.UpdateVirtualGatewayResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates an existing virtual gateway in a specified service mesh.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v20190125/meshes/{meshName}/virtualGateways/{virtualGatewayName}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1945,24 +1986,23 @@ class SDK:
 
     
     def update_virtual_node(self, request: operations.UpdateVirtualNodeRequest) -> operations.UpdateVirtualNodeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates an existing virtual node in a specified service mesh.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v20190125/meshes/{meshName}/virtualNodes/{virtualNodeName}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2009,24 +2049,23 @@ class SDK:
 
     
     def update_virtual_router(self, request: operations.UpdateVirtualRouterRequest) -> operations.UpdateVirtualRouterResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates an existing virtual router in a specified service mesh.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v20190125/meshes/{meshName}/virtualRouters/{virtualRouterName}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2073,24 +2112,23 @@ class SDK:
 
     
     def update_virtual_service(self, request: operations.UpdateVirtualServiceRequest) -> operations.UpdateVirtualServiceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates an existing virtual service in a specified service mesh.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v20190125/meshes/{meshName}/virtualServices/{virtualServiceName}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

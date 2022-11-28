@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CustomizedLoadMetricSpecification } from "./customizedloadmetricspecification";
 import { PredefinedLoadMetricSpecification } from "./predefinedloadmetricspecification";
 import { PredictiveScalingMaxCapacityBehaviorEnum } from "./predictivescalingmaxcapacitybehaviorenum";

@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { GoogleAppsDriveLabelsV2betaFieldSelectionOptionsChoice } from "./googleappsdrivelabelsv2betafieldselectionoptionschoice";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GoogleAppsDriveLabelsV2betaFieldSelectionOptionsChoiceInput } from "./googleappsdrivelabelsv2betafieldselectionoptionschoice";
 
 
-// GoogleAppsDriveLabelsV2betaDeltaUpdateLabelRequestCreateSelectionChoiceRequest
+
+// GoogleAppsDriveLabelsV2betaDeltaUpdateLabelRequestCreateSelectionChoiceRequestInput
 /** 
  * Request to create a Selection Choice.
 **/
-export class GoogleAppsDriveLabelsV2betaDeltaUpdateLabelRequestCreateSelectionChoiceRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=choice" })
-  choice?: GoogleAppsDriveLabelsV2betaFieldSelectionOptionsChoice;
+export class GoogleAppsDriveLabelsV2betaDeltaUpdateLabelRequestCreateSelectionChoiceRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=choice" })
+  choice?: GoogleAppsDriveLabelsV2betaFieldSelectionOptionsChoiceInput;
 
-  @Metadata({ data: "json, name=fieldId" })
+  @SpeakeasyMetadata({ data: "json, name=fieldId" })
   fieldId?: string;
 }

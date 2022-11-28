@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ReplicaDescription
+// Contains the details of the replica.
 type ReplicaDescription struct {
 	GlobalSecondaryIndexes        []ReplicaGlobalSecondaryIndexDescription `json:"GlobalSecondaryIndexes,omitempty"`
 	KmsMasterKeyID                *string                                  `json:"KMSMasterKeyId,omitempty"`

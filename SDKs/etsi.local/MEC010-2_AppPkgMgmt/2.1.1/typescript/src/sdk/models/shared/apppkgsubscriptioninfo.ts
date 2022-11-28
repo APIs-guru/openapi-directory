@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AppPkgSubscriptionInfoLinks } from "./apppkgsubscriptioninfolinks";
 import { AppPkgSubscriptionTypeEnum } from "./apppkgsubscriptiontypeenum";
+
 
 
 // AppPkgSubscriptionInfo
@@ -8,15 +9,15 @@ import { AppPkgSubscriptionTypeEnum } from "./apppkgsubscriptiontypeenum";
  * 'The data type represents a subscription to notification of application package management for the onboarding, or operational state change of application package'
 **/
 export class AppPkgSubscriptionInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=_links" })
+  @SpeakeasyMetadata({ data: "json, name=_links" })
   links: AppPkgSubscriptionInfoLinks;
 
-  @Metadata({ data: "json, name=callbackUri" })
+  @SpeakeasyMetadata({ data: "json, name=callbackUri" })
   callbackUri: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=subscriptionType" })
+  @SpeakeasyMetadata({ data: "json, name=subscriptionType" })
   subscriptionType: AppPkgSubscriptionTypeEnum;
 }

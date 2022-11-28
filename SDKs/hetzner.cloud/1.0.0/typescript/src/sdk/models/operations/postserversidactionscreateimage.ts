@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostServersIdActionsCreateImagePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
@@ -12,34 +13,25 @@ export class PostServersIdActionsCreateImagePathParams extends SpeakeasyBase {
  * User-defined labels (key-value pairs)
 **/
 export class PostServersIdActionsCreateImageCreateImageRequestLabels extends SpeakeasyBase {
-  @Metadata({ data: "json, name=labelkey" })
+  @SpeakeasyMetadata({ data: "json, name=labelkey" })
   labelkey?: string;
 }
 
 export enum PostServersIdActionsCreateImageCreateImageRequestTypeEnum {
-    Snapshot = "snapshot"
-,    Backup = "backup"
+    Snapshot = "snapshot",
+    Backup = "backup"
 }
 
 
 export class PostServersIdActionsCreateImageCreateImageRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: PostServersIdActionsCreateImageCreateImageRequestLabels;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: PostServersIdActionsCreateImageCreateImageRequestTypeEnum;
-}
-
-
-export class PostServersIdActionsCreateImageRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: PostServersIdActionsCreateImagePathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: PostServersIdActionsCreateImageCreateImageRequest;
 }
 
 
@@ -48,52 +40,52 @@ export class PostServersIdActionsCreateImageRequest extends SpeakeasyBase {
  * Error message for the Action if error occurred, otherwise null
 **/
 export class PostServersIdActionsCreateImage201ApplicationJsonActionError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 }
 
 
 export class PostServersIdActionsCreateImage201ApplicationJsonActionResources extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }
 
 export enum PostServersIdActionsCreateImage201ApplicationJsonActionStatusEnum {
-    Success = "success"
-,    Running = "running"
-,    Error = "error"
+    Success = "success",
+    Running = "running",
+    Error = "error"
 }
 
 
 export class PostServersIdActionsCreateImage201ApplicationJsonAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=command" })
+  @SpeakeasyMetadata({ data: "json, name=command" })
   command: string;
 
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error: PostServersIdActionsCreateImage201ApplicationJsonActionError;
 
-  @Metadata({ data: "json, name=finished" })
+  @SpeakeasyMetadata({ data: "json, name=finished" })
   finished: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=progress" })
+  @SpeakeasyMetadata({ data: "json, name=progress" })
   progress: number;
 
-  @Metadata({ data: "json, name=resources", elemType: operations.PostServersIdActionsCreateImage201ApplicationJsonActionResources })
+  @SpeakeasyMetadata({ data: "json, name=resources", elemType: PostServersIdActionsCreateImage201ApplicationJsonActionResources })
   resources: PostServersIdActionsCreateImage201ApplicationJsonActionResources[];
 
-  @Metadata({ data: "json, name=started" })
+  @SpeakeasyMetadata({ data: "json, name=started" })
   started: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: PostServersIdActionsCreateImage201ApplicationJsonActionStatusEnum;
 }
 
@@ -103,19 +95,19 @@ export class PostServersIdActionsCreateImage201ApplicationJsonAction extends Spe
  * Information about the Server the Image was created from
 **/
 export class PostServersIdActionsCreateImage201ApplicationJsonImageCreatedFrom extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 }
 
 export enum PostServersIdActionsCreateImage201ApplicationJsonImageOsFlavorEnum {
-    Ubuntu = "ubuntu"
-,    Centos = "centos"
-,    Debian = "debian"
-,    Fedora = "fedora"
-,    Unknown = "unknown"
+    Ubuntu = "ubuntu",
+    Centos = "centos",
+    Debian = "debian",
+    Fedora = "fedora",
+    Unknown = "unknown"
 }
 
 
@@ -124,98 +116,107 @@ export enum PostServersIdActionsCreateImage201ApplicationJsonImageOsFlavorEnum {
  * Protection configuration for the Resource
 **/
 export class PostServersIdActionsCreateImage201ApplicationJsonImageProtection extends SpeakeasyBase {
-  @Metadata({ data: "json, name=delete" })
+  @SpeakeasyMetadata({ data: "json, name=delete" })
   delete: boolean;
 }
 
 export enum PostServersIdActionsCreateImage201ApplicationJsonImageStatusEnum {
-    Available = "available"
-,    Creating = "creating"
-,    Unavailable = "unavailable"
+    Available = "available",
+    Creating = "creating",
+    Unavailable = "unavailable"
 }
 
 export enum PostServersIdActionsCreateImage201ApplicationJsonImageTypeEnum {
-    System = "system"
-,    App = "app"
-,    Snapshot = "snapshot"
-,    Backup = "backup"
-,    Temporary = "temporary"
+    System = "system",
+    App = "app",
+    Snapshot = "snapshot",
+    Backup = "backup",
+    Temporary = "temporary"
 }
 
 
 export class PostServersIdActionsCreateImage201ApplicationJsonImage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bound_to" })
+  @SpeakeasyMetadata({ data: "json, name=bound_to" })
   boundTo: number;
 
-  @Metadata({ data: "json, name=build_id" })
+  @SpeakeasyMetadata({ data: "json, name=build_id" })
   buildId?: string;
 
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created: string;
 
-  @Metadata({ data: "json, name=created_from" })
+  @SpeakeasyMetadata({ data: "json, name=created_from" })
   createdFrom: PostServersIdActionsCreateImage201ApplicationJsonImageCreatedFrom;
 
-  @Metadata({ data: "json, name=deleted" })
+  @SpeakeasyMetadata({ data: "json, name=deleted" })
   deleted: string;
 
-  @Metadata({ data: "json, name=deprecated" })
+  @SpeakeasyMetadata({ data: "json, name=deprecated" })
   deprecated: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description: string;
 
-  @Metadata({ data: "json, name=disk_size" })
+  @SpeakeasyMetadata({ data: "json, name=disk_size" })
   diskSize: number;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=image_size" })
+  @SpeakeasyMetadata({ data: "json, name=image_size" })
   imageSize: number;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels: Map<string, string>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=os_flavor" })
+  @SpeakeasyMetadata({ data: "json, name=os_flavor" })
   osFlavor: PostServersIdActionsCreateImage201ApplicationJsonImageOsFlavorEnum;
 
-  @Metadata({ data: "json, name=os_version" })
+  @SpeakeasyMetadata({ data: "json, name=os_version" })
   osVersion: string;
 
-  @Metadata({ data: "json, name=protection" })
+  @SpeakeasyMetadata({ data: "json, name=protection" })
   protection: PostServersIdActionsCreateImage201ApplicationJsonImageProtection;
 
-  @Metadata({ data: "json, name=rapid_deploy" })
+  @SpeakeasyMetadata({ data: "json, name=rapid_deploy" })
   rapidDeploy?: boolean;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: PostServersIdActionsCreateImage201ApplicationJsonImageStatusEnum;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: PostServersIdActionsCreateImage201ApplicationJsonImageTypeEnum;
 }
 
 
 export class PostServersIdActionsCreateImage201ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action?: PostServersIdActionsCreateImage201ApplicationJsonAction;
 
-  @Metadata({ data: "json, name=image" })
+  @SpeakeasyMetadata({ data: "json, name=image" })
   image?: PostServersIdActionsCreateImage201ApplicationJsonImage;
 }
 
 
+export class PostServersIdActionsCreateImageRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: PostServersIdActionsCreateImagePathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: PostServersIdActionsCreateImageCreateImageRequest;
+}
+
+
 export class PostServersIdActionsCreateImageResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postServersIdActionsCreateImage201ApplicationJsonObject?: PostServersIdActionsCreateImage201ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

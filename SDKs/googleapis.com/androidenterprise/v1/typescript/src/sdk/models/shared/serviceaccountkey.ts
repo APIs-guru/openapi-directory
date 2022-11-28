@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ServiceAccountKeyTypeEnum {
-    GoogleCredentials = "googleCredentials"
-,    Pkcs12 = "pkcs12"
+    GoogleCredentials = "googleCredentials",
+    Pkcs12 = "pkcs12"
 }
 
 
@@ -11,15 +12,15 @@ export enum ServiceAccountKeyTypeEnum {
  * Credentials that can be used to authenticate as a service account.
 **/
 export class ServiceAccountKey extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=publicData" })
+  @SpeakeasyMetadata({ data: "json, name=publicData" })
   publicData?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: ServiceAccountKeyTypeEnum;
 }

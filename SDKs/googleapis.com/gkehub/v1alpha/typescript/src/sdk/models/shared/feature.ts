@@ -1,10 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MembershipFeatureSpec } from "./membershipfeaturespec";
 import { MembershipFeatureState } from "./membershipfeaturestate";
 import { FeatureResourceState } from "./featureresourcestate";
+import { ScopeFeatureState } from "./scopefeaturestate";
 import { CommonFeatureSpec } from "./commonfeaturespec";
 import { CommonFeatureState } from "./commonfeaturestate";
+import { MembershipFeatureSpecInput } from "./membershipfeaturespec";
+import { CommonFeatureState1 } from "./commonfeaturestate1";
+
 
 
 // Feature
@@ -12,33 +15,64 @@ import { CommonFeatureState } from "./commonfeaturestate";
  * Feature represents the settings and status of any Hub Feature.
 **/
 export class Feature extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=deleteTime" })
+  @SpeakeasyMetadata({ data: "json, name=deleteTime" })
   deleteTime?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=membershipSpecs", elemType: shared.MembershipFeatureSpec })
+  @SpeakeasyMetadata({ data: "json, name=membershipSpecs", elemType: MembershipFeatureSpec })
   membershipSpecs?: Map<string, MembershipFeatureSpec>;
 
-  @Metadata({ data: "json, name=membershipStates", elemType: shared.MembershipFeatureState })
+  @SpeakeasyMetadata({ data: "json, name=membershipStates", elemType: MembershipFeatureState })
   membershipStates?: Map<string, MembershipFeatureState>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=resourceState" })
+  @SpeakeasyMetadata({ data: "json, name=resourceState" })
   resourceState?: FeatureResourceState;
 
-  @Metadata({ data: "json, name=spec" })
+  @SpeakeasyMetadata({ data: "json, name=scopeSpecs" })
+  scopeSpecs?: Map<string, Map<string, any>>;
+
+  @SpeakeasyMetadata({ data: "json, name=scopeStates", elemType: ScopeFeatureState })
+  scopeStates?: Map<string, ScopeFeatureState>;
+
+  @SpeakeasyMetadata({ data: "json, name=spec" })
   spec?: CommonFeatureSpec;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: CommonFeatureState;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
+}
+
+
+// FeatureInput
+/** 
+ * Feature represents the settings and status of any Hub Feature.
+**/
+export class FeatureInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=membershipSpecs", elemType: MembershipFeatureSpecInput })
+  membershipSpecs?: Map<string, MembershipFeatureSpecInput>;
+
+  @SpeakeasyMetadata({ data: "json, name=resourceState" })
+  resourceState?: FeatureResourceState;
+
+  @SpeakeasyMetadata({ data: "json, name=scopeSpecs" })
+  scopeSpecs?: Map<string, Map<string, any>>;
+
+  @SpeakeasyMetadata({ data: "json, name=spec" })
+  spec?: CommonFeatureSpec;
+
+  @SpeakeasyMetadata({ data: "json, name=state" })
+  state?: CommonFeatureState1;
 }

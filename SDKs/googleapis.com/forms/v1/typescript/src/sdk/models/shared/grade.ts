@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Feedback } from "./feedback";
+
 
 
 // Grade
@@ -7,12 +8,12 @@ import { Feedback } from "./feedback";
  * Grade information associated with a respondent's answer to a question.
 **/
 export class Grade extends SpeakeasyBase {
-  @Metadata({ data: "json, name=correct" })
+  @SpeakeasyMetadata({ data: "json, name=correct" })
   correct?: boolean;
 
-  @Metadata({ data: "json, name=feedback" })
+  @SpeakeasyMetadata({ data: "json, name=feedback" })
   feedback?: Feedback;
 
-  @Metadata({ data: "json, name=score" })
+  @SpeakeasyMetadata({ data: "json, name=score" })
   score?: number;
 }

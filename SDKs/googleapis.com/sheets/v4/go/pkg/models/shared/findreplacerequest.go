@@ -1,5 +1,7 @@
 package shared
 
+// FindReplaceRequest
+// Finds and replaces data in cells over a range, sheet, or all sheets.
 type FindReplaceRequest struct {
 	AllSheets       *bool      `json:"allSheets,omitempty"`
 	Find            *string    `json:"find,omitempty"`

@@ -13,23 +13,9 @@ type GetLinodeVolumesQueryParams struct {
 	PageSize *int64 `queryParam:"style=form,explode=true,name=page_size"`
 }
 
-type GetLinodeVolumesSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type GetLinodeVolumesSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type GetLinodeVolumesSecurity struct {
-	Option1 *GetLinodeVolumesSecurityOption1 `security:"option"`
-	Option2 *GetLinodeVolumesSecurityOption2 `security:"option"`
-}
-
-type GetLinodeVolumesRequest struct {
-	PathParams  GetLinodeVolumesPathParams
-	QueryParams GetLinodeVolumesQueryParams
-	Security    GetLinodeVolumesSecurity
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
 }
 
 type GetLinodeVolumes200ApplicationJSON struct {
@@ -41,6 +27,12 @@ type GetLinodeVolumes200ApplicationJSON struct {
 
 type GetLinodeVolumesDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type GetLinodeVolumesRequest struct {
+	PathParams  GetLinodeVolumesPathParams
+	QueryParams GetLinodeVolumesQueryParams
+	Security    GetLinodeVolumesSecurity
 }
 
 type GetLinodeVolumesResponse struct {

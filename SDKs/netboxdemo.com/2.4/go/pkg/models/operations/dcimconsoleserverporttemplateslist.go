@@ -11,15 +11,15 @@ type DcimConsoleServerPortTemplatesListQueryParams struct {
 	Offset       *int64  `queryParam:"style=form,explode=true,name=offset"`
 }
 
-type DcimConsoleServerPortTemplatesListRequest struct {
-	QueryParams DcimConsoleServerPortTemplatesListQueryParams
-}
-
 type DcimConsoleServerPortTemplatesList200ApplicationJSON struct {
 	Count    int64                              `json:"count"`
 	Next     *string                            `json:"next,omitempty"`
 	Previous *string                            `json:"previous,omitempty"`
 	Results  []shared.ConsoleServerPortTemplate `json:"results"`
+}
+
+type DcimConsoleServerPortTemplatesListRequest struct {
+	QueryParams DcimConsoleServerPortTemplatesListQueryParams
 }
 
 type DcimConsoleServerPortTemplatesListResponse struct {

@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetConnectorDefinitionVersionPathParams:
-    connector_definition_id: str = field(default=None, metadata={'path_param': { 'field_name': 'ConnectorDefinitionId', 'style': 'simple', 'explode': False }})
-    connector_definition_version_id: str = field(default=None, metadata={'path_param': { 'field_name': 'ConnectorDefinitionVersionId', 'style': 'simple', 'explode': False }})
+    connector_definition_id: str = field(metadata={'path_param': { 'field_name': 'ConnectorDefinitionId', 'style': 'simple', 'explode': False }})
+    connector_definition_version_id: str = field(metadata={'path_param': { 'field_name': 'ConnectorDefinitionVersionId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,15 +30,15 @@ class GetConnectorDefinitionVersionHeaders:
 
 @dataclass
 class GetConnectorDefinitionVersionRequest:
-    path_params: GetConnectorDefinitionVersionPathParams = field(default=None)
-    query_params: GetConnectorDefinitionVersionQueryParams = field(default=None)
-    headers: GetConnectorDefinitionVersionHeaders = field(default=None)
+    headers: GetConnectorDefinitionVersionHeaders = field()
+    path_params: GetConnectorDefinitionVersionPathParams = field()
+    query_params: GetConnectorDefinitionVersionQueryParams = field()
     
 
 @dataclass
 class GetConnectorDefinitionVersionResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_connector_definition_version_response: Optional[shared.GetConnectorDefinitionVersionResponse] = field(default=None)
-    status_code: int = field(default=None)
     

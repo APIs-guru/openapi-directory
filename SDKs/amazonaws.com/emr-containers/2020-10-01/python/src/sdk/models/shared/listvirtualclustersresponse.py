@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import virtualcluster
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListVirtualClustersResponse:
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextToken' }})
-    virtual_clusters: Optional[List[virtualcluster.VirtualCluster]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'virtualClusters' }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextToken') }})
+    virtual_clusters: Optional[List[VirtualCluster]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('virtualClusters') }})
     

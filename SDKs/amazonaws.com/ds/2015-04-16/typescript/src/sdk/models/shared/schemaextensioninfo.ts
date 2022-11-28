@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SchemaExtensionStatusEnum } from "./schemaextensionstatusenum";
+
 
 
 // SchemaExtensionInfo
@@ -7,24 +8,24 @@ import { SchemaExtensionStatusEnum } from "./schemaextensionstatusenum";
  * Information about a schema extension.
 **/
 export class SchemaExtensionInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=DirectoryId" })
+  @SpeakeasyMetadata({ data: "json, name=DirectoryId" })
   directoryId?: string;
 
-  @Metadata({ data: "json, name=EndDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=EndDateTime" })
   endDateTime?: Date;
 
-  @Metadata({ data: "json, name=SchemaExtensionId" })
+  @SpeakeasyMetadata({ data: "json, name=SchemaExtensionId" })
   schemaExtensionId?: string;
 
-  @Metadata({ data: "json, name=SchemaExtensionStatus" })
+  @SpeakeasyMetadata({ data: "json, name=SchemaExtensionStatus" })
   schemaExtensionStatus?: SchemaExtensionStatusEnum;
 
-  @Metadata({ data: "json, name=SchemaExtensionStatusReason" })
+  @SpeakeasyMetadata({ data: "json, name=SchemaExtensionStatusReason" })
   schemaExtensionStatusReason?: string;
 
-  @Metadata({ data: "json, name=StartDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=StartDateTime" })
   startDateTime?: Date;
 }

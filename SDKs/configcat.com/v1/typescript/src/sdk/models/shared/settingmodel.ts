@@ -1,40 +1,40 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SettingTypeEnum } from "./settingtypeenum";
 import { TagModel } from "./tagmodel";
 
 
+
 export class SettingModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=configId" })
+  @SpeakeasyMetadata({ data: "json, name=configId" })
   configId?: string;
 
-  @Metadata({ data: "json, name=configName" })
+  @SpeakeasyMetadata({ data: "json, name=configName" })
   configName?: string;
 
-  @Metadata({ data: "json, name=expirationWarningAt" })
+  @SpeakeasyMetadata({ data: "json, name=expirationWarningAt" })
   expirationWarningAt?: Date;
 
-  @Metadata({ data: "json, name=hint" })
+  @SpeakeasyMetadata({ data: "json, name=hint" })
   hint?: string;
 
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=ownerUserEmail" })
+  @SpeakeasyMetadata({ data: "json, name=ownerUserEmail" })
   ownerUserEmail?: string;
 
-  @Metadata({ data: "json, name=ownerUserFullName" })
+  @SpeakeasyMetadata({ data: "json, name=ownerUserFullName" })
   ownerUserFullName?: string;
 
-  @Metadata({ data: "json, name=settingId" })
+  @SpeakeasyMetadata({ data: "json, name=settingId" })
   settingId?: number;
 
-  @Metadata({ data: "json, name=settingType" })
+  @SpeakeasyMetadata({ data: "json, name=settingType" })
   settingType?: SettingTypeEnum;
 
-  @Metadata({ data: "json, name=tags", elemType: shared.TagModel })
+  @SpeakeasyMetadata({ data: "json, name=tags", elemType: TagModel })
   tags?: TagModel[];
 }

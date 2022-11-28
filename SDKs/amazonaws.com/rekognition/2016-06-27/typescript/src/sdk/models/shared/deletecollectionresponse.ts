@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteCollectionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=StatusCode" })
+  @SpeakeasyMetadata({ data: "json, name=StatusCode" })
   statusCode?: number;
 }

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ResourcesettingsProjectsSettingsGetPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 class ResourcesettingsProjectsSettingsGetViewEnum(str, Enum):
     SETTING_VIEW_UNSPECIFIED = "SETTING_VIEW_UNSPECIFIED"
@@ -32,20 +33,20 @@ class ResourcesettingsProjectsSettingsGetQueryParams:
 
 @dataclass
 class ResourcesettingsProjectsSettingsGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ResourcesettingsProjectsSettingsGetRequest:
-    path_params: ResourcesettingsProjectsSettingsGetPathParams = field(default=None)
-    query_params: ResourcesettingsProjectsSettingsGetQueryParams = field(default=None)
-    security: ResourcesettingsProjectsSettingsGetSecurity = field(default=None)
+    path_params: ResourcesettingsProjectsSettingsGetPathParams = field()
+    query_params: ResourcesettingsProjectsSettingsGetQueryParams = field()
+    security: ResourcesettingsProjectsSettingsGetSecurity = field()
     
 
 @dataclass
 class ResourcesettingsProjectsSettingsGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_resourcesettings_v1_setting: Optional[shared.GoogleCloudResourcesettingsV1Setting] = field(default=None)
-    status_code: int = field(default=None)
     

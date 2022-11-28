@@ -1,23 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { ProfileCondition } from "./profilecondition";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProfileCondition } from "./profilecondition";
 import { CodecTypeEnum } from "./codectypeenum";
 
 
+
 export class CodecProfile extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApplyConditions", elemType: shared.ProfileCondition })
+  @SpeakeasyMetadata({ data: "json, name=ApplyConditions", elemType: ProfileCondition })
   applyConditions?: ProfileCondition[];
 
-  @Metadata({ data: "json, name=Codec" })
+  @SpeakeasyMetadata({ data: "json, name=Codec" })
   codec?: string;
 
-  @Metadata({ data: "json, name=Conditions", elemType: shared.ProfileCondition })
+  @SpeakeasyMetadata({ data: "json, name=Conditions", elemType: ProfileCondition })
   conditions?: ProfileCondition[];
 
-  @Metadata({ data: "json, name=Container" })
+  @SpeakeasyMetadata({ data: "json, name=Container" })
   container?: string;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: CodecTypeEnum;
 }

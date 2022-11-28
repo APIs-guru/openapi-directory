@@ -23,6 +23,8 @@ const (
 	ScoreDetailSeverityEnumVeryHigh ScoreDetailSeverityEnum = "very_high"
 )
 
+// ScoreDetail
+// Represents score detail of a background check
 type ScoreDetail struct {
 	Result   ScoreDetailResultEnum   `json:"result"`
 	Score    float32                 `json:"score"`

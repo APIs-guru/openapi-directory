@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class UgdcnRequestBodyCertificateParameters extends SpeakeasyBase {
     documentNumber: string;
@@ -15,10 +15,6 @@ export declare class UgdcnRequestBody extends SpeakeasyBase {
 export declare class UgdcnSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class UgdcnRequest extends SpeakeasyBase {
-    request?: UgdcnRequestBody;
-    security: UgdcnSecurity;
 }
 export declare enum Ugdcn400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -101,6 +97,10 @@ export declare enum Ugdcn504ApplicationJsonErrorDescriptionEnum {
 export declare class Ugdcn504ApplicationJson extends SpeakeasyBase {
     error?: Ugdcn504ApplicationJsonErrorEnum;
     errorDescription?: Ugdcn504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class UgdcnRequest extends SpeakeasyBase {
+    request?: UgdcnRequestBody;
+    security: UgdcnSecurity;
 }
 export declare class UgdcnResponse extends SpeakeasyBase {
     contentType: string;

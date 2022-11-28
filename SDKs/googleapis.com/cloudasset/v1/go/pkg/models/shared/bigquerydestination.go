@@ -1,5 +1,7 @@
 package shared
 
+// BigQueryDestination
+// A BigQuery destination for exporting assets to.
 type BigQueryDestination struct {
 	Dataset                    *string        `json:"dataset,omitempty"`
 	Force                      *bool          `json:"force,omitempty"`

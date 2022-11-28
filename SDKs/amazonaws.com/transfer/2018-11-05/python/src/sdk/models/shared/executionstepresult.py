@@ -1,14 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import executionerror
-from . import workflowsteptype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ExecutionStepResult:
-    error: Optional[executionerror.ExecutionError] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Error' }})
-    outputs: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Outputs' }})
-    step_type: Optional[workflowsteptype_enum.WorkflowStepTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StepType' }})
+    r"""ExecutionStepResult
+    Specifies the following details for the step: error (if any), outputs (if any), and the step type.
+    """
+    
+    error: Optional[ExecutionError] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Error') }})
+    outputs: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Outputs') }})
+    step_type: Optional[WorkflowStepTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StepType') }})
     

@@ -1,5 +1,7 @@
 package shared
 
+// Sheet
+// A sheet in a spreadsheet.
 type Sheet struct {
 	BandedRanges       []BandedRange           `json:"bandedRanges,omitempty"`
 	BasicFilter        *BasicFilter            `json:"basicFilter,omitempty"`

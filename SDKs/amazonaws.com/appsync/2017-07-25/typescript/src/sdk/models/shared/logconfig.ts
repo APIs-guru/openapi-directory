@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FieldLogLevelEnum } from "./fieldloglevelenum";
+
 
 
 // LogConfig
@@ -7,12 +8,12 @@ import { FieldLogLevelEnum } from "./fieldloglevelenum";
  * The CloudWatch Logs configuration.
 **/
 export class LogConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cloudWatchLogsRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=cloudWatchLogsRoleArn" })
   cloudWatchLogsRoleArn: string;
 
-  @Metadata({ data: "json, name=excludeVerboseContent" })
+  @SpeakeasyMetadata({ data: "json, name=excludeVerboseContent" })
   excludeVerboseContent?: boolean;
 
-  @Metadata({ data: "json, name=fieldLogLevel" })
+  @SpeakeasyMetadata({ data: "json, name=fieldLogLevel" })
   fieldLogLevel: FieldLogLevelEnum;
 }

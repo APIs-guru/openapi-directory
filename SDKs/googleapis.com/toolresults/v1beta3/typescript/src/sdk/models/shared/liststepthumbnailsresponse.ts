@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Image } from "./image";
+
 
 
 // ListStepThumbnailsResponse
@@ -8,9 +8,9 @@ import { Image } from "./image";
  * A response containing the thumbnails in a step.
 **/
 export class ListStepThumbnailsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=thumbnails", elemType: shared.Image })
+  @SpeakeasyMetadata({ data: "json, name=thumbnails", elemType: Image })
   thumbnails?: Image[];
 }

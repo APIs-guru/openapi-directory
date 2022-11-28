@@ -17,14 +17,14 @@ type RemoveSubgoalRequestBody struct {
 	Data *shared.GoalRemoveSubgoalRequest `json:"data,omitempty"`
 }
 
+type RemoveSubgoal200ApplicationJSON struct {
+	Data map[string]interface{} `json:"data,omitempty"`
+}
+
 type RemoveSubgoalRequest struct {
 	PathParams  RemoveSubgoalPathParams
 	QueryParams RemoveSubgoalQueryParams
 	Request     RemoveSubgoalRequestBody `request:"mediaType=application/json"`
-}
-
-type RemoveSubgoal200ApplicationJSON struct {
-	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type RemoveSubgoalResponse struct {

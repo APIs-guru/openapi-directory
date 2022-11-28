@@ -1,5 +1,7 @@
 package shared
 
+// ServiceStatistics
+// Response statistics for a service.
 type ServiceStatistics struct {
 	ErrorStatistics   *ErrorStatistics `json:"ErrorStatistics,omitempty"`
 	FaultStatistics   *FaultStatistics `json:"FaultStatistics,omitempty"`

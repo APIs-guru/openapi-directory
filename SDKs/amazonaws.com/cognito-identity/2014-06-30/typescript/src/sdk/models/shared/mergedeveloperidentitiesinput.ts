@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MergeDeveloperIdentitiesInput
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Input to the <code>MergeDeveloperIdentities</code> action.
 **/
 export class MergeDeveloperIdentitiesInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DestinationUserIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=DestinationUserIdentifier" })
   destinationUserIdentifier: string;
 
-  @Metadata({ data: "json, name=DeveloperProviderName" })
+  @SpeakeasyMetadata({ data: "json, name=DeveloperProviderName" })
   developerProviderName: string;
 
-  @Metadata({ data: "json, name=IdentityPoolId" })
+  @SpeakeasyMetadata({ data: "json, name=IdentityPoolId" })
   identityPoolId: string;
 
-  @Metadata({ data: "json, name=SourceUserIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=SourceUserIdentifier" })
   sourceUserIdentifier: string;
 }

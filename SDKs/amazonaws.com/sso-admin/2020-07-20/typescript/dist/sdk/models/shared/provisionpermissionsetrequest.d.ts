@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ProvisionTargetTypeEnum } from "./provisiontargettypeenum";
 export declare class ProvisionPermissionSetRequest extends SpeakeasyBase {
     instanceArn: string;

@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetMapVersionNumberStaticimagePathParams = /** @class */ (function (_super) {
     __extends(GetMapVersionNumberStaticimagePathParams, _super);
     function GetMapVersionNumberStaticimagePathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=versionNumber" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=versionNumber" }),
         __metadata("design:type", Number)
     ], GetMapVersionNumberStaticimagePathParams.prototype, "versionNumber", void 0);
     return GetMapVersionNumberStaticimagePathParams;
@@ -63,39 +63,39 @@ var GetMapVersionNumberStaticimageQueryParams = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=bbox" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=bbox" }),
         __metadata("design:type", String)
     ], GetMapVersionNumberStaticimageQueryParams.prototype, "bbox", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=center" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=center" }),
         __metadata("design:type", String)
     ], GetMapVersionNumberStaticimageQueryParams.prototype, "center", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=format" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=format" }),
         __metadata("design:type", String)
     ], GetMapVersionNumberStaticimageQueryParams.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=height" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=height" }),
         __metadata("design:type", Number)
     ], GetMapVersionNumberStaticimageQueryParams.prototype, "height", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=layer" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=layer" }),
         __metadata("design:type", String)
     ], GetMapVersionNumberStaticimageQueryParams.prototype, "layer", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=style" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=style" }),
         __metadata("design:type", String)
     ], GetMapVersionNumberStaticimageQueryParams.prototype, "style", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=view" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=view" }),
         __metadata("design:type", String)
     ], GetMapVersionNumberStaticimageQueryParams.prototype, "view", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=width" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=width" }),
         __metadata("design:type", Number)
     ], GetMapVersionNumberStaticimageQueryParams.prototype, "width", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=zoom" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=zoom" }),
         __metadata("design:type", Number)
     ], GetMapVersionNumberStaticimageQueryParams.prototype, "zoom", void 0);
     return GetMapVersionNumberStaticimageQueryParams;
@@ -107,11 +107,11 @@ var GetMapVersionNumberStaticimageRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetMapVersionNumberStaticimagePathParams)
     ], GetMapVersionNumberStaticimageRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetMapVersionNumberStaticimageQueryParams)
     ], GetMapVersionNumberStaticimageRequest.prototype, "queryParams", void 0);
     return GetMapVersionNumberStaticimageRequest;
@@ -123,11 +123,11 @@ var GetMapVersionNumberStaticimageResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetMapVersionNumberStaticimageResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetMapVersionNumberStaticimageResponse.prototype, "statusCode", void 0);
     return GetMapVersionNumberStaticimageResponse;

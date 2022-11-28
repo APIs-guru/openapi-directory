@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GoogleExampleLibraryagentV1Shelf } from "./googleexamplelibraryagentv1shelf";
 /**
  * Response message for LibraryAgent.ListShelves.

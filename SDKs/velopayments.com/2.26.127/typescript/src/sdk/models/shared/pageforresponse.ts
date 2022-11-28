@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PageForResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=numberOfElements" })
+  @SpeakeasyMetadata({ data: "json, name=numberOfElements" })
   numberOfElements?: number;
 
-  @Metadata({ data: "json, name=page" })
+  @SpeakeasyMetadata({ data: "json, name=page" })
   page?: number;
 
-  @Metadata({ data: "json, name=pageSize" })
+  @SpeakeasyMetadata({ data: "json, name=pageSize" })
   pageSize?: number;
 
-  @Metadata({ data: "json, name=totalElements" })
+  @SpeakeasyMetadata({ data: "json, name=totalElements" })
   totalElements?: number;
 
-  @Metadata({ data: "json, name=totalPages" })
+  @SpeakeasyMetadata({ data: "json, name=totalPages" })
   totalPages?: number;
 }

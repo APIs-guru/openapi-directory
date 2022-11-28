@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,21 +22,22 @@ class DisassociateResourceShareHeaders:
 @dataclass_json
 @dataclass
 class DisassociateResourceShareRequestBody:
-    client_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clientToken' }})
-    principals: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'principals' }})
-    resource_arns: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceArns' }})
-    resource_share_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceShareArn' }})
+    resource_share_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceShareArn') }})
+    client_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clientToken') }})
+    principals: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('principals') }})
+    resource_arns: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceArns') }})
     
 
 @dataclass
 class DisassociateResourceShareRequest:
-    headers: DisassociateResourceShareHeaders = field(default=None)
-    request: DisassociateResourceShareRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: DisassociateResourceShareHeaders = field()
+    request: DisassociateResourceShareRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DisassociateResourceShareResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     disassociate_resource_share_response: Optional[shared.DisassociateResourceShareResponse] = field(default=None)
     idempotent_parameter_mismatch_exception: Optional[Any] = field(default=None)
     invalid_client_token_exception: Optional[Any] = field(default=None)
@@ -43,6 +48,5 @@ class DisassociateResourceShareResponse:
     resource_share_limit_exceeded_exception: Optional[Any] = field(default=None)
     server_internal_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     unknown_resource_exception: Optional[Any] = field(default=None)
     

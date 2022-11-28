@@ -1,5 +1,7 @@
 package shared
 
+// GoogleLongrunningOperation
+// This resource represents a long-running operation that is the result of a network API call.
 type GoogleLongrunningOperation struct {
 	Done     *bool                  `json:"done,omitempty"`
 	Error    *GoogleRPCStatus       `json:"error,omitempty"`

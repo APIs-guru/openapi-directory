@@ -1,5 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
@@ -22,17 +25,17 @@ class ListTopicRuleDestinationsHeaders:
 
 @dataclass
 class ListTopicRuleDestinationsRequest:
-    query_params: ListTopicRuleDestinationsQueryParams = field(default=None)
-    headers: ListTopicRuleDestinationsHeaders = field(default=None)
+    headers: ListTopicRuleDestinationsHeaders = field()
+    query_params: ListTopicRuleDestinationsQueryParams = field()
     
 
 @dataclass
 class ListTopicRuleDestinationsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     list_topic_rule_destinations_response: Optional[shared.ListTopicRuleDestinationsResponse] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

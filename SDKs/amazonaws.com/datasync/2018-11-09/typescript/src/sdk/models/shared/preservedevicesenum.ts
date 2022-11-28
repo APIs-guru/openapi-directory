@@ -1,6 +1,7 @@
 
 
+
 export enum PreserveDevicesEnum {
-    None = "NONE"
-,    Preserve = "PRESERVE"
+    None = "NONE",
+    Preserve = "PRESERVE"
 }

@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SchemaVersionErrorItem } from "./schemaversionerroritem";
 
 
+
 export class DeleteSchemaVersionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SchemaVersionErrors", elemType: shared.SchemaVersionErrorItem })
+  @SpeakeasyMetadata({ data: "json, name=SchemaVersionErrors", elemType: SchemaVersionErrorItem })
   schemaVersionErrors?: SchemaVersionErrorItem[];
 }

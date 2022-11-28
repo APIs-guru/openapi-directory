@@ -23,6 +23,8 @@ type GetObjectInformationHeaders struct {
 	XAmzDataPartition    string                                        `header:"style=simple,explode=false,name=x-amz-data-partition"`
 }
 
+// GetObjectInformationRequestBodyObjectReference
+// The reference that identifies an object.
 type GetObjectInformationRequestBodyObjectReference struct {
 	Selector *string `json:"Selector,omitempty"`
 }

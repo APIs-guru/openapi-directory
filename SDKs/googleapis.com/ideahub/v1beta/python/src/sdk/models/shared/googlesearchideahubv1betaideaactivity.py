@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GoogleSearchIdeahubV1betaIdeaActivityTypeEnum(str, Enum):
     TYPE_UNSPECIFIED = "TYPE_UNSPECIFIED"
@@ -13,9 +15,13 @@ class GoogleSearchIdeahubV1betaIdeaActivityTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleSearchIdeahubV1betaIdeaActivity:
-    ideas: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ideas' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    topics: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'topics' }})
-    type: Optional[GoogleSearchIdeahubV1betaIdeaActivityTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""GoogleSearchIdeahubV1betaIdeaActivity
+    An idea activity entry.
+    """
+    
+    ideas: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ideas') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    topics: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('topics') }})
+    type: Optional[GoogleSearchIdeahubV1betaIdeaActivityTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     

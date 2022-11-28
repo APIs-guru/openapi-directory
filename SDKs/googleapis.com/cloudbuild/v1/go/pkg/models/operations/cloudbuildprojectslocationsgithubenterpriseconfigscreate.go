@@ -32,7 +32,7 @@ type CloudbuildProjectsLocationsGithubEnterpriseConfigsCreateSecurity struct {
 type CloudbuildProjectsLocationsGithubEnterpriseConfigsCreateRequest struct {
 	PathParams  CloudbuildProjectsLocationsGithubEnterpriseConfigsCreatePathParams
 	QueryParams CloudbuildProjectsLocationsGithubEnterpriseConfigsCreateQueryParams
-	Request     *shared.GitHubEnterpriseConfig `request:"mediaType=application/json"`
+	Request     *shared.GitHubEnterpriseConfigInput `request:"mediaType=application/json"`
 	Security    CloudbuildProjectsLocationsGithubEnterpriseConfigsCreateSecurity
 }
 

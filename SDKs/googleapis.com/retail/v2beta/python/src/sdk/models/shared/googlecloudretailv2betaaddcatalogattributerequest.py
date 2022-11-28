@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import googlecloudretailv2betacatalogattribute
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
-class GoogleCloudRetailV2betaAddCatalogAttributeRequest:
-    catalog_attribute: Optional[googlecloudretailv2betacatalogattribute.GoogleCloudRetailV2betaCatalogAttribute] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'catalogAttribute' }})
+class GoogleCloudRetailV2betaAddCatalogAttributeRequestInput:
+    r"""GoogleCloudRetailV2betaAddCatalogAttributeRequestInput
+    Request for CatalogService.AddCatalogAttribute method.
+    """
+    
+    catalog_attribute: Optional[GoogleCloudRetailV2betaCatalogAttributeInput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('catalogAttribute') }})
     

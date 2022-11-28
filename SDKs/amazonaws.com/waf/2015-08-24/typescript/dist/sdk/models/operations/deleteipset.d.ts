@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum DeleteIpSetXAmzTargetEnum {
     Awswaf20150824DeleteIpSet = "AWSWAF_20150824.DeleteIPSet"

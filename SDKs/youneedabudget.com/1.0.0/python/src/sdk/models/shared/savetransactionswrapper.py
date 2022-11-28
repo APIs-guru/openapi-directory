@@ -1,13 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import savetransaction
-from . import savetransaction
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SaveTransactionsWrapper:
-    transaction: Optional[savetransaction.SaveTransaction] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'transaction' }})
-    transactions: Optional[List[savetransaction.SaveTransaction]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'transactions' }})
+    transaction: Optional[SaveTransaction] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('transaction') }})
+    transactions: Optional[List[SaveTransaction]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('transactions') }})
     

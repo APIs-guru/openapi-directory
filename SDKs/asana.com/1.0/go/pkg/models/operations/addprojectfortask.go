@@ -17,14 +17,14 @@ type AddProjectForTaskRequestBody struct {
 	Data *shared.TaskAddProjectRequest `json:"data,omitempty"`
 }
 
+type AddProjectForTask200ApplicationJSON struct {
+	Data map[string]interface{} `json:"data,omitempty"`
+}
+
 type AddProjectForTaskRequest struct {
 	PathParams  AddProjectForTaskPathParams
 	QueryParams AddProjectForTaskQueryParams
 	Request     AddProjectForTaskRequestBody `request:"mediaType=application/json"`
-}
-
-type AddProjectForTask200ApplicationJSON struct {
-	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type AddProjectForTaskResponse struct {

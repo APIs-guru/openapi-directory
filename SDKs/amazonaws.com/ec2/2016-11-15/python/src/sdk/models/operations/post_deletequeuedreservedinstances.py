@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDeleteQueuedReservedInstancesActionEnum(str, Enum):
     DELETE_QUEUED_RESERVED_INSTANCES = "DeleteQueuedReservedInstances"
@@ -10,8 +14,8 @@ class PostDeleteQueuedReservedInstancesVersionEnum(str, Enum):
 
 @dataclass
 class PostDeleteQueuedReservedInstancesQueryParams:
-    action: PostDeleteQueuedReservedInstancesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDeleteQueuedReservedInstancesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDeleteQueuedReservedInstancesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDeleteQueuedReservedInstancesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDeleteQueuedReservedInstancesHeaders:
 
 @dataclass
 class PostDeleteQueuedReservedInstancesRequest:
-    query_params: PostDeleteQueuedReservedInstancesQueryParams = field(default=None)
-    headers: PostDeleteQueuedReservedInstancesHeaders = field(default=None)
+    headers: PostDeleteQueuedReservedInstancesHeaders = field()
+    query_params: PostDeleteQueuedReservedInstancesQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDeleteQueuedReservedInstancesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

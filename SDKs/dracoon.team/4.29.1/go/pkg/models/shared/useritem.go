@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// UserItem
+// User information
 type UserItem struct {
 	AvatarUUID          string          `json:"avatarUuid"`
 	CreatedAt           *time.Time      `json:"createdAt,omitempty"`

@@ -18,14 +18,14 @@ class PostAlertsAcknowledgeAllRequests:
 
 @dataclass
 class PostAlertsAcknowledgeAllRequest:
-    query_params: PostAlertsAcknowledgeAllQueryParams = field(default=None)
+    query_params: PostAlertsAcknowledgeAllQueryParams = field()
     request: Optional[PostAlertsAcknowledgeAllRequests] = field(default=None)
     
 
 @dataclass
 class PostAlertsAcknowledgeAllResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     error_response_content: Optional[shared.ErrorResponseContent] = field(default=None)
-    status_code: int = field(default=None)
     

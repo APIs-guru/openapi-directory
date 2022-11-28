@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ImageScanFinding } from "./imagescanfinding";
+
 
 
 // ImageScanFindings
@@ -8,15 +8,15 @@ import { ImageScanFinding } from "./imagescanfinding";
  * The details of an image scan.
 **/
 export class ImageScanFindings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=findingSeverityCounts" })
+  @SpeakeasyMetadata({ data: "json, name=findingSeverityCounts" })
   findingSeverityCounts?: Map<string, number>;
 
-  @Metadata({ data: "json, name=findings", elemType: shared.ImageScanFinding })
+  @SpeakeasyMetadata({ data: "json, name=findings", elemType: ImageScanFinding })
   findings?: ImageScanFinding[];
 
-  @Metadata({ data: "json, name=imageScanCompletedAt" })
+  @SpeakeasyMetadata({ data: "json, name=imageScanCompletedAt" })
   imageScanCompletedAt?: Date;
 
-  @Metadata({ data: "json, name=vulnerabilitySourceUpdatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=vulnerabilitySourceUpdatedAt" })
   vulnerabilitySourceUpdatedAt?: Date;
 }

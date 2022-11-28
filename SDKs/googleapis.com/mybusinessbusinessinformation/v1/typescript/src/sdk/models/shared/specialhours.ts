@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SpecialHourPeriod } from "./specialhourperiod";
+
 
 
 // SpecialHours
@@ -8,6 +8,6 @@ import { SpecialHourPeriod } from "./specialhourperiod";
  * Represents a set of time periods when a location's operational hours differ from its normal business hours.
 **/
 export class SpecialHours extends SpeakeasyBase {
-  @Metadata({ data: "json, name=specialHourPeriods", elemType: shared.SpecialHourPeriod })
+  @SpeakeasyMetadata({ data: "json, name=specialHourPeriods", elemType: SpecialHourPeriod })
   specialHourPeriods?: SpecialHourPeriod[];
 }

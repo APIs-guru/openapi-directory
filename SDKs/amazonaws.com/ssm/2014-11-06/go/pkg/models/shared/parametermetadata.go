@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ParameterMetadata
+// Metadata includes information like the ARN of the last user and the date/time the parameter was last used.
 type ParameterMetadata struct {
 	AllowedPattern   *string                 `json:"AllowedPattern,omitempty"`
 	DataType         *string                 `json:"DataType,omitempty"`

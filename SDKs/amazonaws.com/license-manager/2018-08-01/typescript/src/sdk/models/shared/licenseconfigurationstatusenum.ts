@@ -1,6 +1,7 @@
 
 
+
 export enum LicenseConfigurationStatusEnum {
-    Available = "AVAILABLE"
-,    Disabled = "DISABLED"
+    Available = "AVAILABLE",
+    Disabled = "DISABLED"
 }

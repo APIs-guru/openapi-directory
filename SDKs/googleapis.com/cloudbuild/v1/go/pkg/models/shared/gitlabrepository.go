@@ -1,5 +1,7 @@
 package shared
 
+// GitLabRepository
+// Proto Representing a GitLabRepository
 type GitLabRepository struct {
 	BrowseURI    *string             `json:"browseUri,omitempty"`
 	Description  *string             `json:"description,omitempty"`

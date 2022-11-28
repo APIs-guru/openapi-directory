@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum BiddingFunctionStateEnum {
     StateUnspecified = "STATE_UNSPECIFIED",
     Active = "ACTIVE",
@@ -16,5 +16,13 @@ export declare class BiddingFunction extends SpeakeasyBase {
     biddingFunction?: string;
     name?: string;
     state?: BiddingFunctionStateEnum;
+    type?: BiddingFunctionTypeEnum;
+}
+/**
+ * The bidding function to be executed as part of the TURTLEDOVE simulation experiment bidding flow.
+**/
+export declare class BiddingFunctionInput extends SpeakeasyBase {
+    biddingFunction?: string;
+    name?: string;
     type?: BiddingFunctionTypeEnum;
 }

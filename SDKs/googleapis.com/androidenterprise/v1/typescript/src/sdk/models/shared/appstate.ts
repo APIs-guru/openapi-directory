@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { KeyedAppState } from "./keyedappstate";
+
 
 
 // AppState
@@ -8,9 +8,9 @@ import { KeyedAppState } from "./keyedappstate";
  * List of states set by the app.
 **/
 export class AppState extends SpeakeasyBase {
-  @Metadata({ data: "json, name=keyedAppState", elemType: shared.KeyedAppState })
+  @SpeakeasyMetadata({ data: "json, name=keyedAppState", elemType: KeyedAppState })
   keyedAppState?: KeyedAppState[];
 
-  @Metadata({ data: "json, name=packageName" })
+  @SpeakeasyMetadata({ data: "json, name=packageName" })
   packageName?: string;
 }

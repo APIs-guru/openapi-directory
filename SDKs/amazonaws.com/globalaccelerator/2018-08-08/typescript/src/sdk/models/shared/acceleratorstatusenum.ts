@@ -1,6 +1,7 @@
 
 
+
 export enum AcceleratorStatusEnum {
-    Deployed = "DEPLOYED"
-,    InProgress = "IN_PROGRESS"
+    Deployed = "DEPLOYED",
+    InProgress = "IN_PROGRESS"
 }

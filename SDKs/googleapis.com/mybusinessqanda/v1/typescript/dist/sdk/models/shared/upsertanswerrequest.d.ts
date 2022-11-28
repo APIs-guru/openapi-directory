@@ -1,8 +1,8 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
-import { Answer } from "./answer";
+import { SpeakeasyBase } from "../../../internal/utils";
+import { AnswerInput } from "./answer";
 /**
  * Request message for QuestionsAndAnswers.UpsertAnswer
 **/
-export declare class UpsertAnswerRequest extends SpeakeasyBase {
-    answer?: Answer;
+export declare class UpsertAnswerRequestInput extends SpeakeasyBase {
+    answer?: AnswerInput;
 }

@@ -1,5 +1,50 @@
 package shared
 
+type MediaSourceInfoInput struct {
+	AnalyzeDurationMs          *int32                        `json:"AnalyzeDurationMs,omitempty"`
+	Bitrate                    *int32                        `json:"Bitrate,omitempty"`
+	BufferMs                   *int32                        `json:"BufferMs,omitempty"`
+	Container                  *string                       `json:"Container,omitempty"`
+	DefaultAudioStreamIndex    *int32                        `json:"DefaultAudioStreamIndex,omitempty"`
+	DefaultSubtitleStreamIndex *int32                        `json:"DefaultSubtitleStreamIndex,omitempty"`
+	ETag                       *string                       `json:"ETag,omitempty"`
+	EncoderPath                *string                       `json:"EncoderPath,omitempty"`
+	EncoderProtocol            *MediaProtocolEnum            `json:"EncoderProtocol,omitempty"`
+	Formats                    []string                      `json:"Formats,omitempty"`
+	GenPtsInput                *bool                         `json:"GenPtsInput,omitempty"`
+	ID                         *string                       `json:"Id,omitempty"`
+	IgnoreDts                  *bool                         `json:"IgnoreDts,omitempty"`
+	IgnoreIndex                *bool                         `json:"IgnoreIndex,omitempty"`
+	IsInfiniteStream           *bool                         `json:"IsInfiniteStream,omitempty"`
+	IsRemote                   *bool                         `json:"IsRemote,omitempty"`
+	IsoType                    *IsoTypeEnum                  `json:"IsoType,omitempty"`
+	LiveStreamID               *string                       `json:"LiveStreamId,omitempty"`
+	MediaAttachments           []MediaAttachment             `json:"MediaAttachments,omitempty"`
+	MediaStreams               []MediaStreamInput            `json:"MediaStreams,omitempty"`
+	Name                       *string                       `json:"Name,omitempty"`
+	OpenToken                  *string                       `json:"OpenToken,omitempty"`
+	Path                       *string                       `json:"Path,omitempty"`
+	Protocol                   *MediaProtocolEnum            `json:"Protocol,omitempty"`
+	ReadAtNativeFramerate      *bool                         `json:"ReadAtNativeFramerate,omitempty"`
+	RequiredHTTPHeaders        map[string]string             `json:"RequiredHttpHeaders,omitempty"`
+	RequiresClosing            *bool                         `json:"RequiresClosing,omitempty"`
+	RequiresLooping            *bool                         `json:"RequiresLooping,omitempty"`
+	RequiresOpening            *bool                         `json:"RequiresOpening,omitempty"`
+	RunTimeTicks               *int64                        `json:"RunTimeTicks,omitempty"`
+	Size                       *int64                        `json:"Size,omitempty"`
+	SupportsDirectPlay         *bool                         `json:"SupportsDirectPlay,omitempty"`
+	SupportsDirectStream       *bool                         `json:"SupportsDirectStream,omitempty"`
+	SupportsProbing            *bool                         `json:"SupportsProbing,omitempty"`
+	SupportsTranscoding        *bool                         `json:"SupportsTranscoding,omitempty"`
+	Timestamp                  *TransportStreamTimestampEnum `json:"Timestamp,omitempty"`
+	TranscodingContainer       *string                       `json:"TranscodingContainer,omitempty"`
+	TranscodingSubProtocol     *string                       `json:"TranscodingSubProtocol,omitempty"`
+	TranscodingURL             *string                       `json:"TranscodingUrl,omitempty"`
+	Type                       *MediaSourceTypeEnum          `json:"Type,omitempty"`
+	Video3DFormat              *Video3DFormatEnum            `json:"Video3DFormat,omitempty"`
+	VideoType                  *VideoTypeEnum                `json:"VideoType,omitempty"`
+}
+
 type MediaSourceInfo struct {
 	AnalyzeDurationMs          *int32                        `json:"AnalyzeDurationMs,omitempty"`
 	Bitrate                    *int32                        `json:"Bitrate,omitempty"`

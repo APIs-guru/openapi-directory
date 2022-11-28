@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum ShaCertificateCertTypeEnum {
     ShaCertificateTypeUnspecified = "SHA_CERTIFICATE_TYPE_UNSPECIFIED",
     Sha1 = "SHA_1",

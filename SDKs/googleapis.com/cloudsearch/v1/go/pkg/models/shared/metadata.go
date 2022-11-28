@@ -1,5 +1,7 @@
 package shared
 
+// Metadata
+// Metadata of a matched search result.
 type Metadata struct {
 	CreateTime     *string                `json:"createTime,omitempty"`
 	DisplayOptions *ResultDisplayMetadata `json:"displayOptions,omitempty"`

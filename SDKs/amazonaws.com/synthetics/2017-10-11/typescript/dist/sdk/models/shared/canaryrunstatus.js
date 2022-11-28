@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CanaryRunStateEnum } from "./canaryrunstateenum";
 import { CanaryRunStateReasonCodeEnum } from "./canaryrunstatereasoncodeenum";
 // CanaryRunStatus
@@ -35,15 +35,15 @@ var CanaryRunStatus = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=State" }),
+        SpeakeasyMetadata({ data: "json, name=State" }),
         __metadata("design:type", String)
     ], CanaryRunStatus.prototype, "state", void 0);
     __decorate([
-        Metadata({ data: "json, name=StateReason" }),
+        SpeakeasyMetadata({ data: "json, name=StateReason" }),
         __metadata("design:type", String)
     ], CanaryRunStatus.prototype, "stateReason", void 0);
     __decorate([
-        Metadata({ data: "json, name=StateReasonCode" }),
+        SpeakeasyMetadata({ data: "json, name=StateReasonCode" }),
         __metadata("design:type", String)
     ], CanaryRunStatus.prototype, "stateReasonCode", void 0);
     return CanaryRunStatus;

@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum LoggingVariantConfigVariantEnum {
-    VariantUnspecified = "VARIANT_UNSPECIFIED"
-,    Default = "DEFAULT"
-,    MaxThroughput = "MAX_THROUGHPUT"
+    VariantUnspecified = "VARIANT_UNSPECIFIED",
+    Default = "DEFAULT",
+    MaxThroughput = "MAX_THROUGHPUT"
 }
 
 
@@ -12,6 +13,6 @@ export enum LoggingVariantConfigVariantEnum {
  * LoggingVariantConfig specifies the behaviour of the logging component.
 **/
 export class LoggingVariantConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=variant" })
+  @SpeakeasyMetadata({ data: "json, name=variant" })
   variant?: LoggingVariantConfigVariantEnum;
 }

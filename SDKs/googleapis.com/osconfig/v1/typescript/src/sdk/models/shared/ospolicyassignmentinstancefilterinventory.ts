@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // OsPolicyAssignmentInstanceFilterInventory
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * VM inventory details.
 **/
 export class OsPolicyAssignmentInstanceFilterInventory extends SpeakeasyBase {
-  @Metadata({ data: "json, name=osShortName" })
+  @SpeakeasyMetadata({ data: "json, name=osShortName" })
   osShortName?: string;
 
-  @Metadata({ data: "json, name=osVersion" })
+  @SpeakeasyMetadata({ data: "json, name=osVersion" })
   osVersion?: string;
 }

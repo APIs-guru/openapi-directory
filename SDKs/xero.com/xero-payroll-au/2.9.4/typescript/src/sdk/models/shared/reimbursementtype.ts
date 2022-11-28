@@ -1,19 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ReimbursementType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccountCode" })
+  @SpeakeasyMetadata({ data: "json, name=AccountCode" })
   accountCode?: string;
 
-  @Metadata({ data: "json, name=CurrentRecord" })
+  @SpeakeasyMetadata({ data: "json, name=CurrentRecord" })
   currentRecord?: boolean;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=ReimbursementTypeID" })
+  @SpeakeasyMetadata({ data: "json, name=ReimbursementTypeID" })
   reimbursementTypeId?: string;
 
-  @Metadata({ data: "json, name=UpdatedDateUTC" })
+  @SpeakeasyMetadata({ data: "json, name=UpdatedDateUTC" })
   updatedDateUtc?: string;
+}
+
+
+export class ReimbursementTypeInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=AccountCode" })
+  accountCode?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=CurrentRecord" })
+  currentRecord?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=Name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=ReimbursementTypeID" })
+  reimbursementTypeId?: string;
 }

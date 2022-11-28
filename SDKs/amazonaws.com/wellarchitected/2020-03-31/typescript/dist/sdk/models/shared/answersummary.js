@@ -22,8 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ChoiceAnswerSummary } from "./choiceanswersummary";
+import { Choice } from "./choice";
 import { AnswerReasonEnum } from "./answerreasonenum";
 import { RiskEnum } from "./riskenum";
 // AnswerSummary
@@ -36,39 +37,39 @@ var AnswerSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ChoiceAnswerSummaries", elemType: shared.ChoiceAnswerSummary }),
+        SpeakeasyMetadata({ data: "json, name=ChoiceAnswerSummaries", elemType: ChoiceAnswerSummary }),
         __metadata("design:type", Array)
     ], AnswerSummary.prototype, "choiceAnswerSummaries", void 0);
     __decorate([
-        Metadata({ data: "json, name=Choices", elemType: shared.Choice }),
+        SpeakeasyMetadata({ data: "json, name=Choices", elemType: Choice }),
         __metadata("design:type", Array)
     ], AnswerSummary.prototype, "choices", void 0);
     __decorate([
-        Metadata({ data: "json, name=IsApplicable" }),
+        SpeakeasyMetadata({ data: "json, name=IsApplicable" }),
         __metadata("design:type", Boolean)
     ], AnswerSummary.prototype, "isApplicable", void 0);
     __decorate([
-        Metadata({ data: "json, name=PillarId" }),
+        SpeakeasyMetadata({ data: "json, name=PillarId" }),
         __metadata("design:type", String)
     ], AnswerSummary.prototype, "pillarId", void 0);
     __decorate([
-        Metadata({ data: "json, name=QuestionId" }),
+        SpeakeasyMetadata({ data: "json, name=QuestionId" }),
         __metadata("design:type", String)
     ], AnswerSummary.prototype, "questionId", void 0);
     __decorate([
-        Metadata({ data: "json, name=QuestionTitle" }),
+        SpeakeasyMetadata({ data: "json, name=QuestionTitle" }),
         __metadata("design:type", String)
     ], AnswerSummary.prototype, "questionTitle", void 0);
     __decorate([
-        Metadata({ data: "json, name=Reason" }),
+        SpeakeasyMetadata({ data: "json, name=Reason" }),
         __metadata("design:type", String)
     ], AnswerSummary.prototype, "reason", void 0);
     __decorate([
-        Metadata({ data: "json, name=Risk" }),
+        SpeakeasyMetadata({ data: "json, name=Risk" }),
         __metadata("design:type", String)
     ], AnswerSummary.prototype, "risk", void 0);
     __decorate([
-        Metadata({ data: "json, name=SelectedChoices" }),
+        SpeakeasyMetadata({ data: "json, name=SelectedChoices" }),
         __metadata("design:type", Array)
     ], AnswerSummary.prototype, "selectedChoices", void 0);
     return AnswerSummary;

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDescribeReservedCacheNodesOfferingsActionEnum(str, Enum):
     DESCRIBE_RESERVED_CACHE_NODES_OFFERINGS = "DescribeReservedCacheNodesOfferings"
@@ -10,7 +14,8 @@ class GetDescribeReservedCacheNodesOfferingsVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeReservedCacheNodesOfferingsQueryParams:
-    action: GetDescribeReservedCacheNodesOfferingsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribeReservedCacheNodesOfferingsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDescribeReservedCacheNodesOfferingsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     cache_node_type: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'CacheNodeType', 'style': 'form', 'explode': True }})
     duration: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Duration', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
@@ -18,7 +23,6 @@ class GetDescribeReservedCacheNodesOfferingsQueryParams:
     offering_type: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'OfferingType', 'style': 'form', 'explode': True }})
     product_description: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'ProductDescription', 'style': 'form', 'explode': True }})
     reserved_cache_nodes_offering_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'ReservedCacheNodesOfferingId', 'style': 'form', 'explode': True }})
-    version: GetDescribeReservedCacheNodesOfferingsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -34,13 +38,13 @@ class GetDescribeReservedCacheNodesOfferingsHeaders:
 
 @dataclass
 class GetDescribeReservedCacheNodesOfferingsRequest:
-    query_params: GetDescribeReservedCacheNodesOfferingsQueryParams = field(default=None)
-    headers: GetDescribeReservedCacheNodesOfferingsHeaders = field(default=None)
+    headers: GetDescribeReservedCacheNodesOfferingsHeaders = field()
+    query_params: GetDescribeReservedCacheNodesOfferingsQueryParams = field()
     
 
 @dataclass
 class GetDescribeReservedCacheNodesOfferingsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

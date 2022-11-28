@@ -1,5 +1,7 @@
 package shared
 
+// OcrResult
+// Array of probabilities for the prediction.
 type OcrResult struct {
 	Attributes  *Attributes  `json:"attributes,omitempty"`
 	BoundingBox *BoundingBox `json:"boundingBox,omitempty"`

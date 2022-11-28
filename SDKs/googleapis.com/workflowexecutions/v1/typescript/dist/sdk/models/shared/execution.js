@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Error } from "./error";
 import { Status } from "./status";
 export var ExecutionCallLogLevelEnum;
@@ -49,45 +49,73 @@ var Execution = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=argument" }),
+        SpeakeasyMetadata({ data: "json, name=argument" }),
         __metadata("design:type", String)
     ], Execution.prototype, "argument", void 0);
     __decorate([
-        Metadata({ data: "json, name=callLogLevel" }),
+        SpeakeasyMetadata({ data: "json, name=callLogLevel" }),
         __metadata("design:type", String)
     ], Execution.prototype, "callLogLevel", void 0);
     __decorate([
-        Metadata({ data: "json, name=endTime" }),
+        SpeakeasyMetadata({ data: "json, name=endTime" }),
         __metadata("design:type", String)
     ], Execution.prototype, "endTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", Error)
     ], Execution.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Execution.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=result" }),
+        SpeakeasyMetadata({ data: "json, name=result" }),
         __metadata("design:type", String)
     ], Execution.prototype, "result", void 0);
     __decorate([
-        Metadata({ data: "json, name=startTime" }),
+        SpeakeasyMetadata({ data: "json, name=startTime" }),
         __metadata("design:type", String)
     ], Execution.prototype, "startTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], Execution.prototype, "state", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", Status)
     ], Execution.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=workflowRevisionId" }),
+        SpeakeasyMetadata({ data: "json, name=workflowRevisionId" }),
         __metadata("design:type", String)
     ], Execution.prototype, "workflowRevisionId", void 0);
     return Execution;
 }(SpeakeasyBase));
 export { Execution };
+// ExecutionInput
+/**
+ * A running instance of a [Workflow](/workflows/docs/reference/rest/v1/projects.locations.workflows).
+**/
+var ExecutionInput = /** @class */ (function (_super) {
+    __extends(ExecutionInput, _super);
+    function ExecutionInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=argument" }),
+        __metadata("design:type", String)
+    ], ExecutionInput.prototype, "argument", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=callLogLevel" }),
+        __metadata("design:type", String)
+    ], ExecutionInput.prototype, "callLogLevel", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=error" }),
+        __metadata("design:type", Error)
+    ], ExecutionInput.prototype, "error", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=status" }),
+        __metadata("design:type", Status)
+    ], ExecutionInput.prototype, "status", void 0);
+    return ExecutionInput;
+}(SpeakeasyBase));
+export { ExecutionInput };

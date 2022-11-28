@@ -15,10 +15,6 @@ type UploadInventoryRequestBody struct {
 	Signature *UploadInventoryRequestBodySignature `multipartForm:"file"`
 }
 
-type UploadInventoryRequest struct {
-	Request *UploadInventoryRequestBody `request:"mediaType=multipart/form-data"`
-}
-
 type UploadInventory200ApplicationJSONActionEnum string
 
 const (
@@ -36,6 +32,10 @@ type UploadInventory200ApplicationJSON struct {
 	Action UploadInventory200ApplicationJSONActionEnum `json:"action"`
 	Data   string                                      `json:"data"`
 	Result UploadInventory200ApplicationJSONResultEnum `json:"result"`
+}
+
+type UploadInventoryRequest struct {
+	Request *UploadInventoryRequestBody `request:"mediaType=multipart/form-data"`
 }
 
 type UploadInventoryResponse struct {

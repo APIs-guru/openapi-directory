@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ExitBehaviorEnum } from "./exitbehaviorenum";
+
 
 
 // Tool
@@ -7,18 +8,18 @@ import { ExitBehaviorEnum } from "./exitbehaviorenum";
  * Information about a tool. Tools are used in a simulation job.
 **/
 export class Tool extends SpeakeasyBase {
-  @Metadata({ data: "json, name=command" })
+  @SpeakeasyMetadata({ data: "json, name=command" })
   command: string;
 
-  @Metadata({ data: "json, name=exitBehavior" })
+  @SpeakeasyMetadata({ data: "json, name=exitBehavior" })
   exitBehavior?: ExitBehaviorEnum;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=streamOutputToCloudWatch" })
+  @SpeakeasyMetadata({ data: "json, name=streamOutputToCloudWatch" })
   streamOutputToCloudWatch?: boolean;
 
-  @Metadata({ data: "json, name=streamUI" })
+  @SpeakeasyMetadata({ data: "json, name=streamUI" })
   streamUi?: boolean;
 }

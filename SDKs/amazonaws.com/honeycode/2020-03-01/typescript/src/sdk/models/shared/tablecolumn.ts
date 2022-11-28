@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FormatEnum } from "./formatenum";
+
 
 
 // TableColumn
@@ -7,12 +8,12 @@ import { FormatEnum } from "./formatenum";
  * An object that contains attributes about a single column in a table
 **/
 export class TableColumn extends SpeakeasyBase {
-  @Metadata({ data: "json, name=format" })
+  @SpeakeasyMetadata({ data: "json, name=format" })
   format?: FormatEnum;
 
-  @Metadata({ data: "json, name=tableColumnId" })
+  @SpeakeasyMetadata({ data: "json, name=tableColumnId" })
   tableColumnId?: string;
 
-  @Metadata({ data: "json, name=tableColumnName" })
+  @SpeakeasyMetadata({ data: "json, name=tableColumnName" })
   tableColumnName?: string;
 }

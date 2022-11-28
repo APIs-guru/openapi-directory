@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// JobSummary
+// The job summary.
 type JobSummary struct {
 	CompletedAt     *time.Time           `json:"completedAt,omitempty"`
 	CreatedAt       *time.Time           `json:"createdAt,omitempty"`

@@ -8,26 +8,18 @@ type RevokeTrustedDevicePathParams struct {
 	DeviceID int64 `pathParam:"style=simple,explode=false,name=deviceId"`
 }
 
-type RevokeTrustedDeviceSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type RevokeTrustedDeviceSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type RevokeTrustedDeviceSecurity struct {
-	Option1 *RevokeTrustedDeviceSecurityOption1 `security:"option"`
-	Option2 *RevokeTrustedDeviceSecurityOption2 `security:"option"`
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
+}
+
+type RevokeTrustedDeviceDefaultApplicationJSON struct {
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type RevokeTrustedDeviceRequest struct {
 	PathParams RevokeTrustedDevicePathParams
 	Security   RevokeTrustedDeviceSecurity
-}
-
-type RevokeTrustedDeviceDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type RevokeTrustedDeviceResponse struct {

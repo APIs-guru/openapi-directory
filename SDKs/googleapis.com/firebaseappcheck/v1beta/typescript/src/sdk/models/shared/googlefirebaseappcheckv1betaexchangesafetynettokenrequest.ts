@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleFirebaseAppcheckV1betaExchangeSafetyNetTokenRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request message for the ExchangeSafetyNetToken method.
 **/
 export class GoogleFirebaseAppcheckV1betaExchangeSafetyNetTokenRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=safetyNetToken" })
+  @SpeakeasyMetadata({ data: "json, name=safetyNetToken" })
   safetyNetToken?: string;
 }

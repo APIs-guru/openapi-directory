@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ListProvisionedConcurrencyConfigsPathParams:
-    function_name: str = field(default=None, metadata={'path_param': { 'field_name': 'FunctionName', 'style': 'simple', 'explode': False }})
+    function_name: str = field(metadata={'path_param': { 'field_name': 'FunctionName', 'style': 'simple', 'explode': False }})
     
 class ListProvisionedConcurrencyConfigsListEnum(str, Enum):
     ALL = "ALL"
@@ -13,7 +17,7 @@ class ListProvisionedConcurrencyConfigsListEnum(str, Enum):
 
 @dataclass
 class ListProvisionedConcurrencyConfigsQueryParams:
-    list: ListProvisionedConcurrencyConfigsListEnum = field(default=None, metadata={'query_param': { 'field_name': 'List', 'style': 'form', 'explode': True }})
+    list: ListProvisionedConcurrencyConfigsListEnum = field(metadata={'query_param': { 'field_name': 'List', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
     max_items: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxItems', 'style': 'form', 'explode': True }})
     
@@ -31,18 +35,18 @@ class ListProvisionedConcurrencyConfigsHeaders:
 
 @dataclass
 class ListProvisionedConcurrencyConfigsRequest:
-    path_params: ListProvisionedConcurrencyConfigsPathParams = field(default=None)
-    query_params: ListProvisionedConcurrencyConfigsQueryParams = field(default=None)
-    headers: ListProvisionedConcurrencyConfigsHeaders = field(default=None)
+    headers: ListProvisionedConcurrencyConfigsHeaders = field()
+    path_params: ListProvisionedConcurrencyConfigsPathParams = field()
+    query_params: ListProvisionedConcurrencyConfigsQueryParams = field()
     
 
 @dataclass
 class ListProvisionedConcurrencyConfigsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     invalid_parameter_value_exception: Optional[Any] = field(default=None)
     list_provisioned_concurrency_configs_response: Optional[shared.ListProvisionedConcurrencyConfigsResponse] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

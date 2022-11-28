@@ -1,0 +1,19 @@
+import { AxiosInstance, AxiosRequestConfig } from "axios";
+import * as operations from "./models/operations";
+export declare class Types {
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    _language: string;
+    _sdkVersion: string;
+    _genVersion: string;
+    constructor(defaultClient: AxiosInstance, securityClient: AxiosInstance, serverURL: string, language: string, sdkVersion: string, genVersion: string);
+    /**
+     * deploymentmanagerTypesGet - Gets information about a specific type.
+    **/
+    deploymentmanagerTypesGet(req: operations.DeploymentmanagerTypesGetRequest, config?: AxiosRequestConfig): Promise<operations.DeploymentmanagerTypesGetResponse>;
+    /**
+     * deploymentmanagerTypesList - Lists all resource types for Deployment Manager.
+    **/
+    deploymentmanagerTypesList(req: operations.DeploymentmanagerTypesListRequest, config?: AxiosRequestConfig): Promise<operations.DeploymentmanagerTypesListResponse>;
+}

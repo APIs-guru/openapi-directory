@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class CreateSmsTemplatePathParams:
-    template_name: str = field(default=None, metadata={'path_param': { 'field_name': 'template-name', 'style': 'simple', 'explode': False }})
+    template_name: str = field(metadata={'path_param': { 'field_name': 'template-name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,34 +27,38 @@ class CreateSmsTemplateHeaders:
 @dataclass_json
 @dataclass
 class CreateSmsTemplateRequestBodySmsTemplateRequest:
-    body: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Body' }})
-    default_substitutions: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DefaultSubstitutions' }})
-    recommender_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RecommenderId' }})
-    template_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TemplateDescription' }})
-    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
+    r"""CreateSmsTemplateRequestBodySmsTemplateRequest
+    Specifies the content and settings for a message template that can be used in text messages that are sent through the SMS channel.
+    """
+    
+    body: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Body') }})
+    default_substitutions: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DefaultSubstitutions') }})
+    recommender_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('RecommenderId') }})
+    template_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TemplateDescription') }})
+    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     
 
 @dataclass_json
 @dataclass
 class CreateSmsTemplateRequestBody:
-    sms_template_request: CreateSmsTemplateRequestBodySmsTemplateRequest = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SMSTemplateRequest' }})
+    sms_template_request: CreateSmsTemplateRequestBodySmsTemplateRequest = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('SMSTemplateRequest') }})
     
 
 @dataclass
 class CreateSmsTemplateRequest:
-    path_params: CreateSmsTemplatePathParams = field(default=None)
-    headers: CreateSmsTemplateHeaders = field(default=None)
-    request: CreateSmsTemplateRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateSmsTemplateHeaders = field()
+    path_params: CreateSmsTemplatePathParams = field()
+    request: CreateSmsTemplateRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateSmsTemplateResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     create_sms_template_response: Optional[shared.CreateSmsTemplateResponse] = field(default=None)
     forbidden_exception: Optional[Any] = field(default=None)
     internal_server_error_exception: Optional[Any] = field(default=None)
     method_not_allowed_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

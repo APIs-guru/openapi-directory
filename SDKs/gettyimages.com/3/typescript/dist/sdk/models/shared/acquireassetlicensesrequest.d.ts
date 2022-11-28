@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ExtendedLicensesEnum } from "./extendedlicensesenum";
 export declare class AcquireAssetLicensesRequest extends SpeakeasyBase {
     licenseTypes: ExtendedLicensesEnum[];

@@ -1,5 +1,7 @@
 package shared
 
+// LighthouseCategoryV5
+// A Lighthouse category.
 type LighthouseCategoryV5 struct {
 	AuditRefs         []AuditRefs  `json:"auditRefs,omitempty"`
 	Description       *string      `json:"description,omitempty"`

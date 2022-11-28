@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DescribeHubResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AutoEnableControls" })
+  @SpeakeasyMetadata({ data: "json, name=AutoEnableControls" })
   autoEnableControls?: boolean;
 
-  @Metadata({ data: "json, name=HubArn" })
+  @SpeakeasyMetadata({ data: "json, name=HubArn" })
   hubArn?: string;
 
-  @Metadata({ data: "json, name=SubscribedAt" })
+  @SpeakeasyMetadata({ data: "json, name=SubscribedAt" })
   subscribedAt?: string;
 }

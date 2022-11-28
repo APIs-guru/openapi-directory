@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Dataset } from "./dataset";
 /**
  * Returned for a successful ListDatasets request.

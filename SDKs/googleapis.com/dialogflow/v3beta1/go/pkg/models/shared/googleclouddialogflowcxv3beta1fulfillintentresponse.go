@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDialogflowCxV3beta1FulfillIntentResponse
+// Response of FulfillIntent
 type GoogleCloudDialogflowCxV3beta1FulfillIntentResponse struct {
 	OutputAudio       *string                                          `json:"outputAudio,omitempty"`
 	OutputAudioConfig *GoogleCloudDialogflowCxV3beta1OutputAudioConfig `json:"outputAudioConfig,omitempty"`

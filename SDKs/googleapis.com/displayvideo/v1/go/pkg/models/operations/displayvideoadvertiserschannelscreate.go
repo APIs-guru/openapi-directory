@@ -31,7 +31,7 @@ type DisplayvideoAdvertisersChannelsCreateSecurity struct {
 type DisplayvideoAdvertisersChannelsCreateRequest struct {
 	PathParams  DisplayvideoAdvertisersChannelsCreatePathParams
 	QueryParams DisplayvideoAdvertisersChannelsCreateQueryParams
-	Request     *shared.Channel `request:"mediaType=application/json"`
+	Request     *shared.ChannelInput `request:"mediaType=application/json"`
 	Security    DisplayvideoAdvertisersChannelsCreateSecurity
 }
 

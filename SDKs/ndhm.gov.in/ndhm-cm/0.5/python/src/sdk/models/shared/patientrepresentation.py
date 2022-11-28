@@ -1,15 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import carecontextrepresentation
-from . import identifiertype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class PatientRepresentation:
-    care_contexts: List[carecontextrepresentation.CareContextRepresentation] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'careContexts' }})
-    display: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'display' }})
-    matched_by: Optional[List[identifiertype_enum.IdentifierTypeEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'matchedBy' }})
-    reference_number: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'referenceNumber' }})
+    care_contexts: List[CareContextRepresentation] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('careContexts') }})
+    display: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('display') }})
+    reference_number: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('referenceNumber') }})
+    matched_by: Optional[List[IdentifierTypeEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('matchedBy') }})
     

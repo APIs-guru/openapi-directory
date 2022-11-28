@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import observation
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class RelatedObservations:
-    observation_list: Optional[List[observation.Observation]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ObservationList' }})
+    r"""RelatedObservations
+    Describes observations related to the problem.
+    """
+    
+    observation_list: Optional[List[Observation]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ObservationList') }})
     

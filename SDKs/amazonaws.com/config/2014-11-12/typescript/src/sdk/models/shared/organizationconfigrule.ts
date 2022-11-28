@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OrganizationCustomRuleMetadata } from "./organizationcustomrulemetadata";
 import { OrganizationManagedRuleMetadata } from "./organizationmanagedrulemetadata";
+
 
 
 // OrganizationConfigRule
@@ -8,21 +9,21 @@ import { OrganizationManagedRuleMetadata } from "./organizationmanagedrulemetada
  * An organization config rule that has information about config rules that Config creates in member accounts.
 **/
 export class OrganizationConfigRule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ExcludedAccounts" })
+  @SpeakeasyMetadata({ data: "json, name=ExcludedAccounts" })
   excludedAccounts?: string[];
 
-  @Metadata({ data: "json, name=LastUpdateTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastUpdateTime" })
   lastUpdateTime?: Date;
 
-  @Metadata({ data: "json, name=OrganizationConfigRuleArn" })
+  @SpeakeasyMetadata({ data: "json, name=OrganizationConfigRuleArn" })
   organizationConfigRuleArn: string;
 
-  @Metadata({ data: "json, name=OrganizationConfigRuleName" })
+  @SpeakeasyMetadata({ data: "json, name=OrganizationConfigRuleName" })
   organizationConfigRuleName: string;
 
-  @Metadata({ data: "json, name=OrganizationCustomRuleMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=OrganizationCustomRuleMetadata" })
   organizationCustomRuleMetadata?: OrganizationCustomRuleMetadata;
 
-  @Metadata({ data: "json, name=OrganizationManagedRuleMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=OrganizationManagedRuleMetadata" })
   organizationManagedRuleMetadata?: OrganizationManagedRuleMetadata;
 }

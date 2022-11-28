@@ -19,6 +19,8 @@ type CalculateRouteHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CalculateRouteRequestBodyCarModeOptions
+// Contains details about additional route preferences for requests that specify <code>TravelMode</code> as <code>Car</code>.
 type CalculateRouteRequestBodyCarModeOptions struct {
 	AvoidFerries *bool `json:"AvoidFerries,omitempty"`
 	AvoidTolls   *bool `json:"AvoidTolls,omitempty"`
@@ -39,6 +41,8 @@ const (
 	CalculateRouteRequestBodyTravelModeEnumWalking CalculateRouteRequestBodyTravelModeEnum = "Walking"
 )
 
+// CalculateRouteRequestBodyTruckModeOptions
+// Contains details about additional route preferences for requests that specify <code>TravelMode</code> as <code>Truck</code>.
 type CalculateRouteRequestBodyTruckModeOptions struct {
 	AvoidFerries *bool                   `json:"AvoidFerries,omitempty"`
 	AvoidTolls   *bool                   `json:"AvoidTolls,omitempty"`

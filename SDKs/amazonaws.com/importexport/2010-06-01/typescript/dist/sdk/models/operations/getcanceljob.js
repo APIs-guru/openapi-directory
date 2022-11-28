@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetCancelJobActionEnum;
 (function (GetCancelJobActionEnum) {
     GetCancelJobActionEnum["CancelJob"] = "CancelJob";
@@ -41,43 +41,43 @@ var GetCancelJobQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=APIVersion" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=APIVersion" }),
         __metadata("design:type", String)
     ], GetCancelJobQueryParams.prototype, "apiVersion", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=AWSAccessKeyId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=AWSAccessKeyId" }),
         __metadata("design:type", String)
     ], GetCancelJobQueryParams.prototype, "awsAccessKeyId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" }),
         __metadata("design:type", String)
     ], GetCancelJobQueryParams.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=JobId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=JobId" }),
         __metadata("design:type", String)
     ], GetCancelJobQueryParams.prototype, "jobId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Operation" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Operation" }),
         __metadata("design:type", String)
     ], GetCancelJobQueryParams.prototype, "operation", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Signature" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Signature" }),
         __metadata("design:type", String)
     ], GetCancelJobQueryParams.prototype, "signature", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=SignatureMethod" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=SignatureMethod" }),
         __metadata("design:type", String)
     ], GetCancelJobQueryParams.prototype, "signatureMethod", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=SignatureVersion" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=SignatureVersion" }),
         __metadata("design:type", String)
     ], GetCancelJobQueryParams.prototype, "signatureVersion", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Timestamp" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Timestamp" }),
         __metadata("design:type", String)
     ], GetCancelJobQueryParams.prototype, "timestamp", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" }),
         __metadata("design:type", String)
     ], GetCancelJobQueryParams.prototype, "version", void 0);
     return GetCancelJobQueryParams;
@@ -89,7 +89,7 @@ var GetCancelJobRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetCancelJobQueryParams)
     ], GetCancelJobRequest.prototype, "queryParams", void 0);
     return GetCancelJobRequest;
@@ -101,15 +101,15 @@ var GetCancelJobResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetCancelJobResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetCancelJobResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetCancelJobResponse.prototype, "statusCode", void 0);
     return GetCancelJobResponse;

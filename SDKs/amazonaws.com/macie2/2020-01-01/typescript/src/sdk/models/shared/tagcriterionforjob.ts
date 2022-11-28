@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { JobComparatorEnum } from "./jobcomparatorenum";
 import { TagCriterionPairForJob } from "./tagcriterionpairforjob";
+
 
 
 // TagCriterionForJob
@@ -9,9 +9,9 @@ import { TagCriterionPairForJob } from "./tagcriterionpairforjob";
  * Specifies a tag-based condition that determines whether an S3 bucket is included or excluded from a classification job.
 **/
 export class TagCriterionForJob extends SpeakeasyBase {
-  @Metadata({ data: "json, name=comparator" })
+  @SpeakeasyMetadata({ data: "json, name=comparator" })
   comparator?: JobComparatorEnum;
 
-  @Metadata({ data: "json, name=tagValues", elemType: shared.TagCriterionPairForJob })
+  @SpeakeasyMetadata({ data: "json, name=tagValues", elemType: TagCriterionPairForJob })
   tagValues?: TagCriterionPairForJob[];
 }

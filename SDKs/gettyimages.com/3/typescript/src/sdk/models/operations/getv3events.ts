@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetV3EventsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=false;name=fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=fields" })
   fields?: shared.EventDetailFieldValuesEnum[];
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=ids" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=ids" })
   ids?: number[];
 }
 
 
 export class GetV3EventsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Accept-Language" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept-Language" })
   acceptLanguage?: string;
 }
 
 
 export class GetV3EventsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetV3EventsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetV3EventsHeaders;
 }
 
 
 export class GetV3EventsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

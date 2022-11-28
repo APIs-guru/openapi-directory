@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CustomErrorRule
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A custom error rule.
 **/
 export class CustomErrorRule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=isErrorType" })
+  @SpeakeasyMetadata({ data: "json, name=isErrorType" })
   isErrorType?: boolean;
 
-  @Metadata({ data: "json, name=selector" })
+  @SpeakeasyMetadata({ data: "json, name=selector" })
   selector?: string;
 }

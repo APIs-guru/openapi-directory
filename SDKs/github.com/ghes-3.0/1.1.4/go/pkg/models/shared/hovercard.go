@@ -5,6 +5,8 @@ type HovercardContexts struct {
 	Octicon string `json:"octicon"`
 }
 
+// Hovercard
+// Hovercard
 type Hovercard struct {
 	Contexts []HovercardContexts `json:"contexts"`
 }

@@ -10,15 +10,15 @@ class AddOrDeleteRulesQueryParams:
 
 @dataclass
 class AddOrDeleteRulesRequest:
-    query_params: AddOrDeleteRulesQueryParams = field(default=None)
-    request: Any = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    query_params: AddOrDeleteRulesQueryParams = field()
+    request: Any = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class AddOrDeleteRulesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[Any] = field(default=None)
     problem: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     add_or_delete_rules_200_application_json_one_of: Optional[Any] = field(default=None)
     

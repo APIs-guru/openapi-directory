@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccountSettings } from "./accountsettings";
 
 
+
 export class UpdateAccountSettingsOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountSettings" })
+  @SpeakeasyMetadata({ data: "json, name=accountSettings" })
   accountSettings: AccountSettings;
 }

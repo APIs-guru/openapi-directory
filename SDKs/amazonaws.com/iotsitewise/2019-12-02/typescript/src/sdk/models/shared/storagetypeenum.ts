@@ -1,6 +1,7 @@
 
 
+
 export enum StorageTypeEnum {
-    SitewiseDefaultStorage = "SITEWISE_DEFAULT_STORAGE"
-,    MultiLayerStorage = "MULTI_LAYER_STORAGE"
+    SitewiseDefaultStorage = "SITEWISE_DEFAULT_STORAGE",
+    MultiLayerStorage = "MULTI_LAYER_STORAGE"
 }

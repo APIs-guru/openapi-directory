@@ -1,5 +1,7 @@
 package shared
 
+// ReportData
+// The data part of the report.
 type ReportData struct {
 	DataLastRefreshed  *string           `json:"dataLastRefreshed,omitempty"`
 	EmptyReason        *string           `json:"emptyReason,omitempty"`

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostRegisterInstancesWithLoadBalancerActionEnum(str, Enum):
     REGISTER_INSTANCES_WITH_LOAD_BALANCER = "RegisterInstancesWithLoadBalancer"
@@ -10,8 +14,8 @@ class PostRegisterInstancesWithLoadBalancerVersionEnum(str, Enum):
 
 @dataclass
 class PostRegisterInstancesWithLoadBalancerQueryParams:
-    action: PostRegisterInstancesWithLoadBalancerActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostRegisterInstancesWithLoadBalancerVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostRegisterInstancesWithLoadBalancerActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostRegisterInstancesWithLoadBalancerVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostRegisterInstancesWithLoadBalancerHeaders:
 
 @dataclass
 class PostRegisterInstancesWithLoadBalancerRequest:
-    query_params: PostRegisterInstancesWithLoadBalancerQueryParams = field(default=None)
-    headers: PostRegisterInstancesWithLoadBalancerHeaders = field(default=None)
+    headers: PostRegisterInstancesWithLoadBalancerHeaders = field()
+    query_params: PostRegisterInstancesWithLoadBalancerQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostRegisterInstancesWithLoadBalancerResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

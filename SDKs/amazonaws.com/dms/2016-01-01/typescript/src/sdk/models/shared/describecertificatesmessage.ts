@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Filter } from "./filter";
 
 
+
 export class DescribeCertificatesMessage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Filters", elemType: shared.Filter })
+  @SpeakeasyMetadata({ data: "json, name=Filters", elemType: Filter })
   filters?: Filter[];
 
-  @Metadata({ data: "json, name=Marker" })
+  @SpeakeasyMetadata({ data: "json, name=Marker" })
   marker?: string;
 
-  @Metadata({ data: "json, name=MaxRecords" })
+  @SpeakeasyMetadata({ data: "json, name=MaxRecords" })
   maxRecords?: number;
 }

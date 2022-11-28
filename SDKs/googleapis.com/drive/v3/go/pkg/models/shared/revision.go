@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Revision
+// The metadata for a revision to a file.
 type Revision struct {
 	ExportLinks            map[string]string `json:"exportLinks,omitempty"`
 	ID                     *string           `json:"id,omitempty"`

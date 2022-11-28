@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import customermanageds3storage
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class MultiLayerStorage:
-    customer_managed_s3_storage: customermanageds3storage.CustomerManagedS3Storage = field(default=None, metadata={'dataclasses_json': { 'field_name': 'customerManagedS3Storage' }})
+    r"""MultiLayerStorage
+    Contains information about the storage destination.
+    """
+    
+    customer_managed_s3_storage: CustomerManagedS3Storage = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('customerManagedS3Storage') }})
     

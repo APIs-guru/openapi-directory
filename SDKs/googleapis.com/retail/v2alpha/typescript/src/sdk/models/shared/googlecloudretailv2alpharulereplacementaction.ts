@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudRetailV2alphaRuleReplacementAction
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Replaces a term in the query. Multiple replacement candidates can be specified. All `query_terms` will be replaced with the replacement term. Example: Replace "gShoe" with "google shoe".
 **/
 export class GoogleCloudRetailV2alphaRuleReplacementAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=queryTerms" })
+  @SpeakeasyMetadata({ data: "json, name=queryTerms" })
   queryTerms?: string[];
 
-  @Metadata({ data: "json, name=replacementTerm" })
+  @SpeakeasyMetadata({ data: "json, name=replacementTerm" })
   replacementTerm?: string;
 
-  @Metadata({ data: "json, name=term" })
+  @SpeakeasyMetadata({ data: "json, name=term" })
   term?: string;
 }

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IntegerOperatorOptions } from "./integeroperatoroptions";
 
+
 export enum IntegerPropertyOptionsOrderedRankingEnum {
-    NoOrder = "NO_ORDER"
-,    Ascending = "ASCENDING"
-,    Descending = "DESCENDING"
+    NoOrder = "NO_ORDER",
+    Ascending = "ASCENDING",
+    Descending = "DESCENDING"
 }
 
 
@@ -13,15 +14,15 @@ export enum IntegerPropertyOptionsOrderedRankingEnum {
  * The options for integer properties.
 **/
 export class IntegerPropertyOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=maximumValue" })
+  @SpeakeasyMetadata({ data: "json, name=maximumValue" })
   maximumValue?: string;
 
-  @Metadata({ data: "json, name=minimumValue" })
+  @SpeakeasyMetadata({ data: "json, name=minimumValue" })
   minimumValue?: string;
 
-  @Metadata({ data: "json, name=operatorOptions" })
+  @SpeakeasyMetadata({ data: "json, name=operatorOptions" })
   operatorOptions?: IntegerOperatorOptions;
 
-  @Metadata({ data: "json, name=orderedRanking" })
+  @SpeakeasyMetadata({ data: "json, name=orderedRanking" })
   orderedRanking?: IntegerPropertyOptionsOrderedRankingEnum;
 }

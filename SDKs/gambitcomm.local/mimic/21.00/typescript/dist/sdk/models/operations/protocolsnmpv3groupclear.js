@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ProtocolSnmpv3GroupClearPathParams = /** @class */ (function (_super) {
     __extends(ProtocolSnmpv3GroupClearPathParams, _super);
     function ProtocolSnmpv3GroupClearPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
         __metadata("design:type", Number)
     ], ProtocolSnmpv3GroupClearPathParams.prototype, "agentNum", void 0);
     return ProtocolSnmpv3GroupClearPathParams;
@@ -41,7 +41,7 @@ var ProtocolSnmpv3GroupClearRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProtocolSnmpv3GroupClearPathParams)
     ], ProtocolSnmpv3GroupClearRequest.prototype, "pathParams", void 0);
     return ProtocolSnmpv3GroupClearRequest;
@@ -53,15 +53,15 @@ var ProtocolSnmpv3GroupClearResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolSnmpv3GroupClearResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProtocolSnmpv3GroupClearResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolSnmpv3GroupClearResponse.prototype, "protocolSnmpv3GroupClear200ApplicationJsonString", void 0);
     return ProtocolSnmpv3GroupClearResponse;

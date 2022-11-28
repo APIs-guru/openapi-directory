@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 class ListCoreDevicesStatusEnum(str, Enum):
@@ -28,17 +32,17 @@ class ListCoreDevicesHeaders:
 
 @dataclass
 class ListCoreDevicesRequest:
-    query_params: ListCoreDevicesQueryParams = field(default=None)
-    headers: ListCoreDevicesHeaders = field(default=None)
+    headers: ListCoreDevicesHeaders = field()
+    query_params: ListCoreDevicesQueryParams = field()
     
 
 @dataclass
 class ListCoreDevicesResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     list_core_devices_response: Optional[shared.ListCoreDevicesResponse] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

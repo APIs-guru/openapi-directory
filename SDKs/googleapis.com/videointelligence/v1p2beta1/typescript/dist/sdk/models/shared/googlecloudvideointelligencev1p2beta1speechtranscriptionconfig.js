@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GoogleCloudVideointelligenceV1p2beta1SpeechContext } from "./googlecloudvideointelligencev1p2beta1speechcontext";
 // GoogleCloudVideointelligenceV1p2beta1SpeechTranscriptionConfig
 /**
  * Config for SPEECH_TRANSCRIPTION.
@@ -34,39 +34,39 @@ var GoogleCloudVideointelligenceV1p2beta1SpeechTranscriptionConfig = /** @class 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=audioTracks" }),
+        SpeakeasyMetadata({ data: "json, name=audioTracks" }),
         __metadata("design:type", Array)
     ], GoogleCloudVideointelligenceV1p2beta1SpeechTranscriptionConfig.prototype, "audioTracks", void 0);
     __decorate([
-        Metadata({ data: "json, name=diarizationSpeakerCount" }),
+        SpeakeasyMetadata({ data: "json, name=diarizationSpeakerCount" }),
         __metadata("design:type", Number)
     ], GoogleCloudVideointelligenceV1p2beta1SpeechTranscriptionConfig.prototype, "diarizationSpeakerCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=enableAutomaticPunctuation" }),
+        SpeakeasyMetadata({ data: "json, name=enableAutomaticPunctuation" }),
         __metadata("design:type", Boolean)
     ], GoogleCloudVideointelligenceV1p2beta1SpeechTranscriptionConfig.prototype, "enableAutomaticPunctuation", void 0);
     __decorate([
-        Metadata({ data: "json, name=enableSpeakerDiarization" }),
+        SpeakeasyMetadata({ data: "json, name=enableSpeakerDiarization" }),
         __metadata("design:type", Boolean)
     ], GoogleCloudVideointelligenceV1p2beta1SpeechTranscriptionConfig.prototype, "enableSpeakerDiarization", void 0);
     __decorate([
-        Metadata({ data: "json, name=enableWordConfidence" }),
+        SpeakeasyMetadata({ data: "json, name=enableWordConfidence" }),
         __metadata("design:type", Boolean)
     ], GoogleCloudVideointelligenceV1p2beta1SpeechTranscriptionConfig.prototype, "enableWordConfidence", void 0);
     __decorate([
-        Metadata({ data: "json, name=filterProfanity" }),
+        SpeakeasyMetadata({ data: "json, name=filterProfanity" }),
         __metadata("design:type", Boolean)
     ], GoogleCloudVideointelligenceV1p2beta1SpeechTranscriptionConfig.prototype, "filterProfanity", void 0);
     __decorate([
-        Metadata({ data: "json, name=languageCode" }),
+        SpeakeasyMetadata({ data: "json, name=languageCode" }),
         __metadata("design:type", String)
     ], GoogleCloudVideointelligenceV1p2beta1SpeechTranscriptionConfig.prototype, "languageCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=maxAlternatives" }),
+        SpeakeasyMetadata({ data: "json, name=maxAlternatives" }),
         __metadata("design:type", Number)
     ], GoogleCloudVideointelligenceV1p2beta1SpeechTranscriptionConfig.prototype, "maxAlternatives", void 0);
     __decorate([
-        Metadata({ data: "json, name=speechContexts", elemType: shared.GoogleCloudVideointelligenceV1p2beta1SpeechContext }),
+        SpeakeasyMetadata({ data: "json, name=speechContexts", elemType: GoogleCloudVideointelligenceV1p2beta1SpeechContext }),
         __metadata("design:type", Array)
     ], GoogleCloudVideointelligenceV1p2beta1SpeechTranscriptionConfig.prototype, "speechContexts", void 0);
     return GoogleCloudVideointelligenceV1p2beta1SpeechTranscriptionConfig;

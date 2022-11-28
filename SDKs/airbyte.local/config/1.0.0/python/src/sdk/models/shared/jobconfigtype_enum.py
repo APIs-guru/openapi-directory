@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class JobConfigTypeEnum(str, Enum):
     CHECK_CONNECTION_SOURCE = "check_connection_source"

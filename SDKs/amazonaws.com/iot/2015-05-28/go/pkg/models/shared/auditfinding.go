@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// AuditFinding
+// The findings (results) of the audit.
 type AuditFinding struct {
 	CheckName                  *string                   `json:"checkName,omitempty"`
 	FindingID                  *string                   `json:"findingId,omitempty"`

@@ -6,6 +6,8 @@ type AppIcons struct {
 	Size     *int32  `json:"size,omitempty"`
 }
 
+// App
+// The apps resource provides a list of the apps that a user has installed, with information about each app's supported MIME types, file extensions, and other details.
 type App struct {
 	Authorized              *bool      `json:"authorized,omitempty"`
 	CreateInFolderTemplate  *string    `json:"createInFolderTemplate,omitempty"`

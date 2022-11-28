@@ -1,5 +1,7 @@
 package shared
 
+// EntityMention
+// An entity mention in the document.
 type EntityMention struct {
 	CertaintyAssessment *Feature       `json:"certaintyAssessment,omitempty"`
 	Confidence          *float64       `json:"confidence,omitempty"`

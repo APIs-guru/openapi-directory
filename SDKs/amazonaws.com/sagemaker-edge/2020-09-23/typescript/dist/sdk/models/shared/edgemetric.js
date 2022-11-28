@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // EdgeMetric
 /**
  * Information required for edge device metrics.
@@ -33,19 +33,19 @@ var EdgeMetric = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Dimension" }),
+        SpeakeasyMetadata({ data: "json, name=Dimension" }),
         __metadata("design:type", String)
     ], EdgeMetric.prototype, "dimension", void 0);
     __decorate([
-        Metadata({ data: "json, name=MetricName" }),
+        SpeakeasyMetadata({ data: "json, name=MetricName" }),
         __metadata("design:type", String)
     ], EdgeMetric.prototype, "metricName", void 0);
     __decorate([
-        Metadata({ data: "json, name=Timestamp" }),
+        SpeakeasyMetadata({ data: "json, name=Timestamp" }),
         __metadata("design:type", Date)
     ], EdgeMetric.prototype, "timestamp", void 0);
     __decorate([
-        Metadata({ data: "json, name=Value" }),
+        SpeakeasyMetadata({ data: "json, name=Value" }),
         __metadata("design:type", Number)
     ], EdgeMetric.prototype, "value", void 0);
     return EdgeMetric;

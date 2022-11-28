@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum UpdateArtifactRuleConfigRuleEnum {
-    Validity = "VALIDITY"
-,    Compatibility = "COMPATIBILITY"
+    Validity = "VALIDITY",
+    Compatibility = "COMPATIBILITY"
 }
 
 
 export class UpdateArtifactRuleConfigPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=artifactId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=artifactId" })
   artifactId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=rule" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=rule" })
   rule: UpdateArtifactRuleConfigRuleEnum;
 }
 
 
 export class UpdateArtifactRuleConfigRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateArtifactRuleConfigPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.Rule;
 }
 
 
 export class UpdateArtifactRuleConfigResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   rule?: shared.Rule;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -19,6 +19,8 @@ const (
 	ObTransactionCardInstrument1CardSchemeNameEnumVisa            ObTransactionCardInstrument1CardSchemeNameEnum = "VISA"
 )
 
+// ObTransactionCardInstrument1
+// Set of elements to describe the card instrument used in the transaction.
 type ObTransactionCardInstrument1 struct {
 	AuthorisationType *ObTransactionCardInstrument1AuthorisationTypeEnum `json:"AuthorisationType,omitempty"`
 	CardSchemeName    ObTransactionCardInstrument1CardSchemeNameEnum     `json:"CardSchemeName"`

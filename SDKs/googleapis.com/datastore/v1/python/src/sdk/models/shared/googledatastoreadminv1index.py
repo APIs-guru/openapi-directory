@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googledatastoreadminv1indexedproperty
+from sdk import utils
+from . import *
 
 class GoogleDatastoreAdminV1IndexAncestorEnum(str, Enum):
     ANCESTOR_MODE_UNSPECIFIED = "ANCESTOR_MODE_UNSPECIFIED"
@@ -18,11 +20,27 @@ class GoogleDatastoreAdminV1IndexStateEnum(str, Enum):
 
 @dataclass_json
 @dataclass
+class GoogleDatastoreAdminV1IndexInput:
+    r"""GoogleDatastoreAdminV1IndexInput
+    Datastore composite index definition.
+    """
+    
+    ancestor: Optional[GoogleDatastoreAdminV1IndexAncestorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ancestor') }})
+    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
+    properties: Optional[List[GoogleDatastoreAdminV1IndexedProperty]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('properties') }})
+    
+
+@dataclass_json
+@dataclass
 class GoogleDatastoreAdminV1Index:
-    ancestor: Optional[GoogleDatastoreAdminV1IndexAncestorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ancestor' }})
-    index_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'indexId' }})
-    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
-    project_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'projectId' }})
-    properties: Optional[List[googledatastoreadminv1indexedproperty.GoogleDatastoreAdminV1IndexedProperty]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'properties' }})
-    state: Optional[GoogleDatastoreAdminV1IndexStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
+    r"""GoogleDatastoreAdminV1Index
+    Datastore composite index definition.
+    """
+    
+    ancestor: Optional[GoogleDatastoreAdminV1IndexAncestorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ancestor') }})
+    index_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('indexId') }})
+    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
+    project_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('projectId') }})
+    properties: Optional[List[GoogleDatastoreAdminV1IndexedProperty]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('properties') }})
+    state: Optional[GoogleDatastoreAdminV1IndexStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
     

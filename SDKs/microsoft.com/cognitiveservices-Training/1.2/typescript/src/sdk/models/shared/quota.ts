@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Quota
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents a quota
 **/
 export class Quota extends SpeakeasyBase {
-  @Metadata({ data: "json, name=TimeUntilReset" })
+  @SpeakeasyMetadata({ data: "json, name=TimeUntilReset" })
   timeUntilReset?: string;
 
-  @Metadata({ data: "json, name=Total" })
+  @SpeakeasyMetadata({ data: "json, name=Total" })
   total?: number;
 
-  @Metadata({ data: "json, name=Used" })
+  @SpeakeasyMetadata({ data: "json, name=Used" })
   used?: number;
 }

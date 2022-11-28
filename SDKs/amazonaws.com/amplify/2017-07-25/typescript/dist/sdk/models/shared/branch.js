@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StageEnum } from "./stageenum";
 // Branch
 /**
@@ -34,111 +34,111 @@ var Branch = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=activeJobId" }),
+        SpeakeasyMetadata({ data: "json, name=activeJobId" }),
         __metadata("design:type", String)
     ], Branch.prototype, "activeJobId", void 0);
     __decorate([
-        Metadata({ data: "json, name=associatedResources" }),
+        SpeakeasyMetadata({ data: "json, name=associatedResources" }),
         __metadata("design:type", Array)
     ], Branch.prototype, "associatedResources", void 0);
     __decorate([
-        Metadata({ data: "json, name=backendEnvironmentArn" }),
+        SpeakeasyMetadata({ data: "json, name=backendEnvironmentArn" }),
         __metadata("design:type", String)
     ], Branch.prototype, "backendEnvironmentArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=basicAuthCredentials" }),
+        SpeakeasyMetadata({ data: "json, name=basicAuthCredentials" }),
         __metadata("design:type", String)
     ], Branch.prototype, "basicAuthCredentials", void 0);
     __decorate([
-        Metadata({ data: "json, name=branchArn" }),
+        SpeakeasyMetadata({ data: "json, name=branchArn" }),
         __metadata("design:type", String)
     ], Branch.prototype, "branchArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=branchName" }),
+        SpeakeasyMetadata({ data: "json, name=branchName" }),
         __metadata("design:type", String)
     ], Branch.prototype, "branchName", void 0);
     __decorate([
-        Metadata({ data: "json, name=buildSpec" }),
+        SpeakeasyMetadata({ data: "json, name=buildSpec" }),
         __metadata("design:type", String)
     ], Branch.prototype, "buildSpec", void 0);
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", Date)
     ], Branch.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=customDomains" }),
+        SpeakeasyMetadata({ data: "json, name=customDomains" }),
         __metadata("design:type", Array)
     ], Branch.prototype, "customDomains", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], Branch.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=destinationBranch" }),
+        SpeakeasyMetadata({ data: "json, name=destinationBranch" }),
         __metadata("design:type", String)
     ], Branch.prototype, "destinationBranch", void 0);
     __decorate([
-        Metadata({ data: "json, name=displayName" }),
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
         __metadata("design:type", String)
     ], Branch.prototype, "displayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=enableAutoBuild" }),
+        SpeakeasyMetadata({ data: "json, name=enableAutoBuild" }),
         __metadata("design:type", Boolean)
     ], Branch.prototype, "enableAutoBuild", void 0);
     __decorate([
-        Metadata({ data: "json, name=enableBasicAuth" }),
+        SpeakeasyMetadata({ data: "json, name=enableBasicAuth" }),
         __metadata("design:type", Boolean)
     ], Branch.prototype, "enableBasicAuth", void 0);
     __decorate([
-        Metadata({ data: "json, name=enableNotification" }),
+        SpeakeasyMetadata({ data: "json, name=enableNotification" }),
         __metadata("design:type", Boolean)
     ], Branch.prototype, "enableNotification", void 0);
     __decorate([
-        Metadata({ data: "json, name=enablePerformanceMode" }),
+        SpeakeasyMetadata({ data: "json, name=enablePerformanceMode" }),
         __metadata("design:type", Boolean)
     ], Branch.prototype, "enablePerformanceMode", void 0);
     __decorate([
-        Metadata({ data: "json, name=enablePullRequestPreview" }),
+        SpeakeasyMetadata({ data: "json, name=enablePullRequestPreview" }),
         __metadata("design:type", Boolean)
     ], Branch.prototype, "enablePullRequestPreview", void 0);
     __decorate([
-        Metadata({ data: "json, name=environmentVariables" }),
+        SpeakeasyMetadata({ data: "json, name=environmentVariables" }),
         __metadata("design:type", Map)
     ], Branch.prototype, "environmentVariables", void 0);
     __decorate([
-        Metadata({ data: "json, name=framework" }),
+        SpeakeasyMetadata({ data: "json, name=framework" }),
         __metadata("design:type", String)
     ], Branch.prototype, "framework", void 0);
     __decorate([
-        Metadata({ data: "json, name=pullRequestEnvironmentName" }),
+        SpeakeasyMetadata({ data: "json, name=pullRequestEnvironmentName" }),
         __metadata("design:type", String)
     ], Branch.prototype, "pullRequestEnvironmentName", void 0);
     __decorate([
-        Metadata({ data: "json, name=sourceBranch" }),
+        SpeakeasyMetadata({ data: "json, name=sourceBranch" }),
         __metadata("design:type", String)
     ], Branch.prototype, "sourceBranch", void 0);
     __decorate([
-        Metadata({ data: "json, name=stage" }),
+        SpeakeasyMetadata({ data: "json, name=stage" }),
         __metadata("design:type", String)
     ], Branch.prototype, "stage", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags" }),
+        SpeakeasyMetadata({ data: "json, name=tags" }),
         __metadata("design:type", Map)
     ], Branch.prototype, "tags", void 0);
     __decorate([
-        Metadata({ data: "json, name=thumbnailUrl" }),
+        SpeakeasyMetadata({ data: "json, name=thumbnailUrl" }),
         __metadata("design:type", String)
     ], Branch.prototype, "thumbnailUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=totalNumberOfJobs" }),
+        SpeakeasyMetadata({ data: "json, name=totalNumberOfJobs" }),
         __metadata("design:type", String)
     ], Branch.prototype, "totalNumberOfJobs", void 0);
     __decorate([
-        Metadata({ data: "json, name=ttl" }),
+        SpeakeasyMetadata({ data: "json, name=ttl" }),
         __metadata("design:type", String)
     ], Branch.prototype, "ttl", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateTime" }),
+        SpeakeasyMetadata({ data: "json, name=updateTime" }),
         __metadata("design:type", Date)
     ], Branch.prototype, "updateTime", void 0);
     return Branch;

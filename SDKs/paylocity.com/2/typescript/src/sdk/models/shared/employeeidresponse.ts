@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // EmployeeIdResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The EmployeeId Response Model
 **/
 export class EmployeeIdResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=employeeId" })
+  @SpeakeasyMetadata({ data: "json, name=employeeId" })
   employeeId?: string;
 }

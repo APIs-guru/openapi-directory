@@ -1,5 +1,7 @@
 package shared
 
+// MongoDbSettings
+// Provides information that defines a MongoDB endpoint.
 type MongoDbSettings struct {
 	AuthMechanism               *AuthMechanismValueEnum `json:"AuthMechanism,omitempty"`
 	AuthSource                  *string                 `json:"AuthSource,omitempty"`

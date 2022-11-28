@@ -1,6 +1,7 @@
 
 
+
 export enum EndpointConfigSortKeyEnum {
-    Name = "Name"
-,    CreationTime = "CreationTime"
+    Name = "Name",
+    CreationTime = "CreationTime"
 }

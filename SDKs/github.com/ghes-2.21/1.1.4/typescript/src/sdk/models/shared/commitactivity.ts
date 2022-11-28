@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CommitActivity
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Commit Activity
 **/
 export class CommitActivity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=days" })
+  @SpeakeasyMetadata({ data: "json, name=days" })
   days: number[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total: number;
 
-  @Metadata({ data: "json, name=week" })
+  @SpeakeasyMetadata({ data: "json, name=week" })
   week: number;
 }

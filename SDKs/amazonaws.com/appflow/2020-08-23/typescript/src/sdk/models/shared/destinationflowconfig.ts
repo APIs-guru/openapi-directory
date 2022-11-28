@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConnectorTypeEnum } from "./connectortypeenum";
 import { DestinationConnectorProperties } from "./destinationconnectorproperties";
+
 
 
 // DestinationFlowConfig
@@ -8,12 +9,12 @@ import { DestinationConnectorProperties } from "./destinationconnectorproperties
  *  Contains information about the configuration of destination connectors present in the flow. 
 **/
 export class DestinationFlowConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=connectorProfileName" })
+  @SpeakeasyMetadata({ data: "json, name=connectorProfileName" })
   connectorProfileName?: string;
 
-  @Metadata({ data: "json, name=connectorType" })
+  @SpeakeasyMetadata({ data: "json, name=connectorType" })
   connectorType: ConnectorTypeEnum;
 
-  @Metadata({ data: "json, name=destinationConnectorProperties" })
+  @SpeakeasyMetadata({ data: "json, name=destinationConnectorProperties" })
   destinationConnectorProperties: DestinationConnectorProperties;
 }

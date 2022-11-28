@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { LateDataRuleConfiguration } from "./latedataruleconfiguration";
 /**
  * A structure that contains the name and configuration information of a late data rule.

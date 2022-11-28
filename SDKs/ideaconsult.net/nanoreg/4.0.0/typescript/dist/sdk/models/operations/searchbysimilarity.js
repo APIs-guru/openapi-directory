@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var SearchBySimilarityPathParams = /** @class */ (function (_super) {
     __extends(SearchBySimilarityPathParams, _super);
@@ -30,7 +30,7 @@ var SearchBySimilarityPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=db" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=db" }),
         __metadata("design:type", String)
     ], SearchBySimilarityPathParams.prototype, "db", void 0);
     return SearchBySimilarityPathParams;
@@ -48,47 +48,47 @@ var SearchBySimilarityQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=b64search" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=b64search" }),
         __metadata("design:type", String)
     ], SearchBySimilarityQueryParams.prototype, "b64search", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=bundle_uri" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=bundle_uri" }),
         __metadata("design:type", String)
     ], SearchBySimilarityQueryParams.prototype, "bundleUri", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=dataset_uri" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dataset_uri" }),
         __metadata("design:type", String)
     ], SearchBySimilarityQueryParams.prototype, "datasetUri", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=filterBySubstance" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filterBySubstance" }),
         __metadata("design:type", Boolean)
     ], SearchBySimilarityQueryParams.prototype, "filterBySubstance", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=mol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=mol" }),
         __metadata("design:type", Boolean)
     ], SearchBySimilarityQueryParams.prototype, "mol", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" }),
         __metadata("design:type", Number)
     ], SearchBySimilarityQueryParams.prototype, "page", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=pagesize" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pagesize" }),
         __metadata("design:type", Number)
     ], SearchBySimilarityQueryParams.prototype, "pagesize", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sameas" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sameas" }),
         __metadata("design:type", String)
     ], SearchBySimilarityQueryParams.prototype, "sameas", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search" }),
         __metadata("design:type", String)
     ], SearchBySimilarityQueryParams.prototype, "search", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=threshold" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=threshold" }),
         __metadata("design:type", Number)
     ], SearchBySimilarityQueryParams.prototype, "threshold", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=type" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=type" }),
         __metadata("design:type", String)
     ], SearchBySimilarityQueryParams.prototype, "type", void 0);
     return SearchBySimilarityQueryParams;
@@ -100,11 +100,11 @@ var SearchBySimilarityRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SearchBySimilarityPathParams)
     ], SearchBySimilarityRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SearchBySimilarityQueryParams)
     ], SearchBySimilarityRequest.prototype, "queryParams", void 0);
     return SearchBySimilarityRequest;
@@ -116,15 +116,15 @@ var SearchBySimilarityResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], SearchBySimilarityResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Dataset)
     ], SearchBySimilarityResponse.prototype, "dataset", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], SearchBySimilarityResponse.prototype, "statusCode", void 0);
     return SearchBySimilarityResponse;

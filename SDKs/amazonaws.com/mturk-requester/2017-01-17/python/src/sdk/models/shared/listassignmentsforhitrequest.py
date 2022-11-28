@@ -1,14 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import assignmentstatus_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListAssignmentsForHitRequest:
-    assignment_statuses: Optional[List[assignmentstatus_enum.AssignmentStatusEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AssignmentStatuses' }})
-    hit_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'HITId' }})
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MaxResults' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
+    hit_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('HITId') }})
+    assignment_statuses: Optional[List[AssignmentStatusEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AssignmentStatuses') }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MaxResults') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
     

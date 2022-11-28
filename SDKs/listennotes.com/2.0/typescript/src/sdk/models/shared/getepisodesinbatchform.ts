@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetEpisodesInBatchForm extends SpeakeasyBase {
-  @Metadata({ data: "form, name=ids;" })
+  @SpeakeasyMetadata({ data: "form, name=ids;" })
   ids: string;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class EgipcRequestBodyCertificateParameters extends SpeakeasyBase {
     inscode: string;
@@ -17,10 +17,6 @@ export declare class EgipcRequestBody extends SpeakeasyBase {
 export declare class EgipcSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class EgipcRequest extends SpeakeasyBase {
-    request?: EgipcRequestBody;
-    security: EgipcSecurity;
 }
 export declare enum Egipc400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -103,6 +99,10 @@ export declare enum Egipc504ApplicationJsonErrorDescriptionEnum {
 export declare class Egipc504ApplicationJson extends SpeakeasyBase {
     error?: Egipc504ApplicationJsonErrorEnum;
     errorDescription?: Egipc504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class EgipcRequest extends SpeakeasyBase {
+    request?: EgipcRequestBody;
+    security: EgipcSecurity;
 }
 export declare class EgipcResponse extends SpeakeasyBase {
     contentType: string;

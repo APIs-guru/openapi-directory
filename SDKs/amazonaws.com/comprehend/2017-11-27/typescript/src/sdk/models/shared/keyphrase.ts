@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // KeyPhrase
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes a key noun phrase.
 **/
 export class KeyPhrase extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BeginOffset" })
+  @SpeakeasyMetadata({ data: "json, name=BeginOffset" })
   beginOffset?: number;
 
-  @Metadata({ data: "json, name=EndOffset" })
+  @SpeakeasyMetadata({ data: "json, name=EndOffset" })
   endOffset?: number;
 
-  @Metadata({ data: "json, name=Score" })
+  @SpeakeasyMetadata({ data: "json, name=Score" })
   score?: number;
 
-  @Metadata({ data: "json, name=Text" })
+  @SpeakeasyMetadata({ data: "json, name=Text" })
   text?: string;
 }

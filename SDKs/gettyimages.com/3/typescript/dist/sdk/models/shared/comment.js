@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Collaborator } from "./collaborator";
 import { CommentPermissions } from "./commentpermissions";
 var Comment = /** @class */ (function (_super) {
@@ -31,23 +31,23 @@ var Comment = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=created_by" }),
+        SpeakeasyMetadata({ data: "json, name=created_by" }),
         __metadata("design:type", Collaborator)
     ], Comment.prototype, "createdBy", void 0);
     __decorate([
-        Metadata({ data: "json, name=date_created" }),
+        SpeakeasyMetadata({ data: "json, name=date_created" }),
         __metadata("design:type", Date)
     ], Comment.prototype, "dateCreated", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], Comment.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=permissions" }),
+        SpeakeasyMetadata({ data: "json, name=permissions" }),
         __metadata("design:type", CommentPermissions)
     ], Comment.prototype, "permissions", void 0);
     __decorate([
-        Metadata({ data: "json, name=text" }),
+        SpeakeasyMetadata({ data: "json, name=text" }),
         __metadata("design:type", String)
     ], Comment.prototype, "text", void 0);
     return Comment;

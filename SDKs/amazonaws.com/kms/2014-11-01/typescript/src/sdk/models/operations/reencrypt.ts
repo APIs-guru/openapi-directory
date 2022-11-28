@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
+
 
 export enum ReEncryptXAmzTargetEnum {
     TrentServiceReEncrypt = "TrentService.ReEncrypt"
@@ -7,78 +8,78 @@ export enum ReEncryptXAmzTargetEnum {
 
 
 export class ReEncryptHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Target" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Target" })
   xAmzTarget: ReEncryptXAmzTargetEnum;
 }
 
 
 export class ReEncryptRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: ReEncryptHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.ReEncryptRequest;
 }
 
 
 export class ReEncryptResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   dependencyTimeoutException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   disabledException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   incorrectKeyException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidCiphertextException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidGrantTokenException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidKeyUsageException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   kmsInternalException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   kmsInvalidStateException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   keyUnavailableException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   notFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   reEncryptResponse?: shared.ReEncryptResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

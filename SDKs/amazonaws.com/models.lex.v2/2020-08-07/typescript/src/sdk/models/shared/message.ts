@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CustomPayload } from "./custompayload";
 import { ImageResponseCard } from "./imageresponsecard";
 import { PlainTextMessage } from "./plaintextmessage";
 import { SsmlMessage } from "./ssmlmessage";
+
 
 
 // Message
@@ -10,15 +11,15 @@ import { SsmlMessage } from "./ssmlmessage";
  * The object that provides message text and it's type.
 **/
 export class Message extends SpeakeasyBase {
-  @Metadata({ data: "json, name=customPayload" })
+  @SpeakeasyMetadata({ data: "json, name=customPayload" })
   customPayload?: CustomPayload;
 
-  @Metadata({ data: "json, name=imageResponseCard" })
+  @SpeakeasyMetadata({ data: "json, name=imageResponseCard" })
   imageResponseCard?: ImageResponseCard;
 
-  @Metadata({ data: "json, name=plainTextMessage" })
+  @SpeakeasyMetadata({ data: "json, name=plainTextMessage" })
   plainTextMessage?: PlainTextMessage;
 
-  @Metadata({ data: "json, name=ssmlMessage" })
+  @SpeakeasyMetadata({ data: "json, name=ssmlMessage" })
   ssmlMessage?: SsmlMessage;
 }

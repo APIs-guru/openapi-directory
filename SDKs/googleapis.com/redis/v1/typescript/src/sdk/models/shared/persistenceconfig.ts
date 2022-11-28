@@ -1,17 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum PersistenceConfigPersistenceModeEnum {
-    PersistenceModeUnspecified = "PERSISTENCE_MODE_UNSPECIFIED"
-,    Disabled = "DISABLED"
-,    Rdb = "RDB"
+    PersistenceModeUnspecified = "PERSISTENCE_MODE_UNSPECIFIED",
+    Disabled = "DISABLED",
+    Rdb = "RDB"
 }
 
 export enum PersistenceConfigRdbSnapshotPeriodEnum {
-    SnapshotPeriodUnspecified = "SNAPSHOT_PERIOD_UNSPECIFIED"
-,    OneHour = "ONE_HOUR"
-,    SixHours = "SIX_HOURS"
-,    TwelveHours = "TWELVE_HOURS"
-,    TwentyFourHours = "TWENTY_FOUR_HOURS"
+    SnapshotPeriodUnspecified = "SNAPSHOT_PERIOD_UNSPECIFIED",
+    OneHour = "ONE_HOUR",
+    SixHours = "SIX_HOURS",
+    TwelveHours = "TWELVE_HOURS",
+    TwentyFourHours = "TWENTY_FOUR_HOURS"
+}
+
+
+// PersistenceConfigInput
+/** 
+ * Configuration of the persistence functionality.
+**/
+export class PersistenceConfigInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=persistenceMode" })
+  persistenceMode?: PersistenceConfigPersistenceModeEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=rdbSnapshotPeriod" })
+  rdbSnapshotPeriod?: PersistenceConfigRdbSnapshotPeriodEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=rdbSnapshotStartTime" })
+  rdbSnapshotStartTime?: string;
 }
 
 
@@ -20,15 +37,15 @@ export enum PersistenceConfigRdbSnapshotPeriodEnum {
  * Configuration of the persistence functionality.
 **/
 export class PersistenceConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=persistenceMode" })
+  @SpeakeasyMetadata({ data: "json, name=persistenceMode" })
   persistenceMode?: PersistenceConfigPersistenceModeEnum;
 
-  @Metadata({ data: "json, name=rdbNextSnapshotTime" })
+  @SpeakeasyMetadata({ data: "json, name=rdbNextSnapshotTime" })
   rdbNextSnapshotTime?: string;
 
-  @Metadata({ data: "json, name=rdbSnapshotPeriod" })
+  @SpeakeasyMetadata({ data: "json, name=rdbSnapshotPeriod" })
   rdbSnapshotPeriod?: PersistenceConfigRdbSnapshotPeriodEnum;
 
-  @Metadata({ data: "json, name=rdbSnapshotStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=rdbSnapshotStartTime" })
   rdbSnapshotStartTime?: string;
 }

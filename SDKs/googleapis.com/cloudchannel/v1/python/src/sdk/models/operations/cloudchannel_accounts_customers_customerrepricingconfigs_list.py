@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudchannelAccountsCustomersCustomerRepricingConfigsListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,20 +29,20 @@ class CloudchannelAccountsCustomersCustomerRepricingConfigsListQueryParams:
 
 @dataclass
 class CloudchannelAccountsCustomersCustomerRepricingConfigsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudchannelAccountsCustomersCustomerRepricingConfigsListRequest:
-    path_params: CloudchannelAccountsCustomersCustomerRepricingConfigsListPathParams = field(default=None)
-    query_params: CloudchannelAccountsCustomersCustomerRepricingConfigsListQueryParams = field(default=None)
-    security: CloudchannelAccountsCustomersCustomerRepricingConfigsListSecurity = field(default=None)
+    path_params: CloudchannelAccountsCustomersCustomerRepricingConfigsListPathParams = field()
+    query_params: CloudchannelAccountsCustomersCustomerRepricingConfigsListQueryParams = field()
+    security: CloudchannelAccountsCustomersCustomerRepricingConfigsListSecurity = field()
     
 
 @dataclass
 class CloudchannelAccountsCustomersCustomerRepricingConfigsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_channel_v1_list_customer_repricing_configs_response: Optional[shared.GoogleCloudChannelV1ListCustomerRepricingConfigsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

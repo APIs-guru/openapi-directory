@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Vote extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actedAsTeller" })
+  @SpeakeasyMetadata({ data: "json, name=actedAsTeller" })
   actedAsTeller?: boolean;
 
-  @Metadata({ data: "json, name=date" })
+  @SpeakeasyMetadata({ data: "json, name=date" })
   date?: Date;
 
-  @Metadata({ data: "json, name=divisionNumber" })
+  @SpeakeasyMetadata({ data: "json, name=divisionNumber" })
   divisionNumber?: number;
 
-  @Metadata({ data: "json, name=house" })
+  @SpeakeasyMetadata({ data: "json, name=house" })
   house?: number;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=inAffirmativeLobby" })
+  @SpeakeasyMetadata({ data: "json, name=inAffirmativeLobby" })
   inAffirmativeLobby?: boolean;
 
-  @Metadata({ data: "json, name=numberAgainst" })
+  @SpeakeasyMetadata({ data: "json, name=numberAgainst" })
   numberAgainst?: number;
 
-  @Metadata({ data: "json, name=numberInFavour" })
+  @SpeakeasyMetadata({ data: "json, name=numberInFavour" })
   numberInFavour?: number;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

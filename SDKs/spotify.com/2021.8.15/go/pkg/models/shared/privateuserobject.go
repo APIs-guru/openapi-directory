@@ -1,5 +1,8 @@
 package shared
 
+// PrivateUserObject
+
+// https://developer.spotify.com/documentation/web-api/reference/#object-privateuserobject - Find more info on the official Spotify Web API Reference
 type PrivateUserObject struct {
 	Country         *string                        `json:"country,omitempty"`
 	DisplayName     *string                        `json:"display_name,omitempty"`

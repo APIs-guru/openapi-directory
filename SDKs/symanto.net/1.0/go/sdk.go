@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://api.symanto.net",
 }
 
@@ -19,9 +19,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -32,33 +36,64 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// Communication - Communication & Tonality
+// Identify the purpose and writing style of a written text.
+//
+// Supported Languages: [`ar`, `de`, `en`, `es`, `fr`, `it`, `nl`, `pt`, `ru`, `tr`, `zh`]
+//
+// Returned labels:
+// * action-seeking
+// * fact-oriented
+// * information-seeking
+// * self-revealing
 func (s *SDK) Communication(ctx context.Context, request operations.CommunicationRequest) (*operations.CommunicationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/communication"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -75,7 +110,7 @@ func (s *SDK) Communication(ctx context.Context, request operations.Communicatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -115,8 +150,21 @@ func (s *SDK) Communication(ctx context.Context, request operations.Communicatio
 	return res, nil
 }
 
+// EkmanEmotion - Emotion Analysis
+// Detect the emotions of the text based on Ekman.
+//
+// Supported Langauges: [`en`, `de`, `es`]
+//
+// Returned labels:
+// * anger
+// * disgust
+// * fear
+// * joy
+// * sadness
+// * surprise
+// * no-emotion
 func (s *SDK) EkmanEmotion(ctx context.Context, request operations.EkmanEmotionRequest) (*operations.EkmanEmotionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ekman-emotion"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -133,7 +181,7 @@ func (s *SDK) EkmanEmotion(ctx context.Context, request operations.EkmanEmotionR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -173,8 +221,20 @@ func (s *SDK) EkmanEmotion(ctx context.Context, request operations.EkmanEmotionR
 	return res, nil
 }
 
+// Emotion - Emotion Analysis
+// Detect the emotions of the text.
+//
+// Supported Langauges: [`en`, `de`, `es`]
+//
+// Returned labels:
+// * anger
+// * joy
+// * love
+// * sadness
+// * surprise
+// * uncategorized
 func (s *SDK) Emotion(ctx context.Context, request operations.EmotionRequest) (*operations.EmotionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/emotion"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -191,7 +251,7 @@ func (s *SDK) Emotion(ctx context.Context, request operations.EmotionRequest) (*
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -231,8 +291,13 @@ func (s *SDK) Emotion(ctx context.Context, request operations.EmotionRequest) (*
 	return res, nil
 }
 
+// LanguageDetection - Language Detection
+// Identifies what language a text is written in. Only languages that our API supports can be analyzed.
+//
+// Returned labels:
+// * language_code of the detected language
 func (s *SDK) LanguageDetection(ctx context.Context, request operations.LanguageDetectionRequest) (*operations.LanguageDetectionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/language-detection"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -247,7 +312,7 @@ func (s *SDK) LanguageDetection(ctx context.Context, request operations.Language
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -287,8 +352,17 @@ func (s *SDK) LanguageDetection(ctx context.Context, request operations.Language
 	return res, nil
 }
 
+// Personality - Personality Traits
+// Predict the personality trait of author of any written text.
+//
+// Supported Languages: [`ar`, `de`, `en`, `es`, `fr`, `it`, `nl`, `pt`, `ru`, `tr`, `zh`]
+//
+// Returned labels:
+//
+// * emotional
+// * rational
 func (s *SDK) Personality(ctx context.Context, request operations.PersonalityRequest) (*operations.PersonalityResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/personality"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -305,7 +379,7 @@ func (s *SDK) Personality(ctx context.Context, request operations.PersonalityReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -345,8 +419,16 @@ func (s *SDK) Personality(ctx context.Context, request operations.PersonalityReq
 	return res, nil
 }
 
+// Sentiment - Sentiment Analysis
+// Evaluate the overall tonality of the text.
+//
+// Supported Languages: [`en`, `de`, `es`]
+//
+// Returned labels:
+// * positive
+// * negative
 func (s *SDK) Sentiment(ctx context.Context, request operations.SentimentRequest) (*operations.SentimentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/sentiment"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -363,7 +445,7 @@ func (s *SDK) Sentiment(ctx context.Context, request operations.SentimentRequest
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -403,8 +485,9 @@ func (s *SDK) Sentiment(ctx context.Context, request operations.SentimentRequest
 	return res, nil
 }
 
+// TopicSentiment - Extracts topics and sentiments and relates them.
 func (s *SDK) TopicSentiment(ctx context.Context, request operations.TopicSentimentRequest) (*operations.TopicSentimentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/topic-sentiment"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -421,7 +504,7 @@ func (s *SDK) TopicSentiment(ctx context.Context, request operations.TopicSentim
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

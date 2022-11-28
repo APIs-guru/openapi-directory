@@ -1,17 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DisplayOption } from "./displayoption";
 
+
 export enum CardDisplayPropertyDataTypeEnum {
-    Boolean = "BOOLEAN"
-,    Currency = "CURRENCY"
-,    Date = "DATE"
-,    Datetime = "DATETIME"
-,    Email = "EMAIL"
-,    Link = "LINK"
-,    Numeric = "NUMERIC"
-,    String = "STRING"
-,    Status = "STATUS"
+    Boolean = "BOOLEAN",
+    Currency = "CURRENCY",
+    Date = "DATE",
+    Datetime = "DATETIME",
+    Email = "EMAIL",
+    Link = "LINK",
+    Numeric = "NUMERIC",
+    String = "STRING",
+    Status = "STATUS"
 }
 
 
@@ -20,15 +20,15 @@ export enum CardDisplayPropertyDataTypeEnum {
  * Definition for a card display property.
 **/
 export class CardDisplayProperty extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataType" })
+  @SpeakeasyMetadata({ data: "json, name=dataType" })
   dataType: CardDisplayPropertyDataTypeEnum;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=options", elemType: shared.DisplayOption })
+  @SpeakeasyMetadata({ data: "json, name=options", elemType: DisplayOption })
   options: DisplayOption[];
 }

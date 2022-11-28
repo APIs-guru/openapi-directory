@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ChartDataFilterOpEnum(str, Enum):
     EQUAL_EQUAL_ = "=="
@@ -23,7 +25,7 @@ class ChartDataFilterOpEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ChartDataFilter:
-    col: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'col' }})
-    op: ChartDataFilterOpEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'op' }})
-    val: Optional[Any] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'val' }})
+    col: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('col') }})
+    op: ChartDataFilterOpEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('op') }})
+    val: Optional[Any] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('val') }})
     

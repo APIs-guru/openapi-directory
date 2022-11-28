@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from sdk.models import shared
 
 
@@ -10,12 +10,12 @@ class GetConsumerV1CustomersBookingfieldsQueryParams:
 
 @dataclass
 class GetConsumerV1CustomersBookingfieldsRequest:
-    query_params: GetConsumerV1CustomersBookingfieldsQueryParams = field(default=None)
+    query_params: GetConsumerV1CustomersBookingfieldsQueryParams = field()
     
 
 @dataclass
 class GetConsumerV1CustomersBookingfieldsResponse:
+    content_type: str = field()
+    status_code: int = field()
     booking_field_list_view_model: Optional[shared.BookingFieldListViewModel] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

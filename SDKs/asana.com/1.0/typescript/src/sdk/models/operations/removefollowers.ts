@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RemoveFollowersPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=goal_gid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=goal_gid" })
   goalGid: string;
 }
 
 
 export class RemoveFollowersQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
   optFields?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
   optPretty?: boolean;
 }
 
 
 export class RemoveFollowersRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: shared.TaskAddFollowersRequest;
 }
 
 
-export class RemoveFollowersRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: RemoveFollowersPathParams;
-
-  @Metadata()
-  queryParams: RemoveFollowersQueryParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: RemoveFollowersRequestBody;
-}
-
-
 export class RemoveFollowers201ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: shared.GoalResponse;
 }
 
 
+export class RemoveFollowersRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: RemoveFollowersPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: RemoveFollowersQueryParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: RemoveFollowersRequestBody;
+}
+
+
 export class RemoveFollowersResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   removeFollowers201ApplicationJsonObject?: RemoveFollowers201ApplicationJson;
 }

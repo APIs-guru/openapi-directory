@@ -1,13 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import validationstatus_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class NotificationContext:
-    status: Optional[validationstatus_enum.ValidationStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    status_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'statusMessage' }})
-    validation_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'validationId' }})
+    r"""NotificationContext
+    Contains the status of validating an application.
+    """
+    
+    status: Optional[ValidationStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    status_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('statusMessage') }})
+    validation_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('validationId') }})
     

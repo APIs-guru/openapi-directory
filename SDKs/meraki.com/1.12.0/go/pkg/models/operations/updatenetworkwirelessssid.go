@@ -5,6 +5,8 @@ type UpdateNetworkWirelessSsidPathParams struct {
 	Number    string `pathParam:"style=simple,explode=false,name=number"`
 }
 
+// UpdateNetworkWirelessSsidRequestBodyActiveDirectoryCredentials
+// (Optional) The credentials of the user account to be used by the AP to bind to your Active Directory server. The Active Directory account should have permissions on all your Active Directory servers. Only valid if the splashPage is 'Password-protected with Active Directory'.
 type UpdateNetworkWirelessSsidRequestBodyActiveDirectoryCredentials struct {
 	LogonName *string `json:"logonName,omitempty"`
 	Password  *string `json:"password,omitempty"`
@@ -15,6 +17,8 @@ type UpdateNetworkWirelessSsidRequestBodyActiveDirectoryServers struct {
 	Port *int64 `json:"port,omitempty"`
 }
 
+// UpdateNetworkWirelessSsidRequestBodyActiveDirectory
+// The current setting for Active Directory. Only valid if splashPage is 'Password-protected with Active Directory'
 type UpdateNetworkWirelessSsidRequestBodyActiveDirectory struct {
 	Credentials *UpdateNetworkWirelessSsidRequestBodyActiveDirectoryCredentials `json:"credentials,omitempty"`
 	Servers     []UpdateNetworkWirelessSsidRequestBodyActiveDirectoryServers    `json:"servers,omitempty"`
@@ -39,16 +43,22 @@ const (
 	UpdateNetworkWirelessSsidRequestBodyAuthModeEnumIpskWithoutRadius                     UpdateNetworkWirelessSsidRequestBodyAuthModeEnum = "ipsk-without-radius"
 )
 
+// UpdateNetworkWirelessSsidRequestBodyDNSRewrite
+// DNS servers rewrite settings
 type UpdateNetworkWirelessSsidRequestBodyDNSRewrite struct {
 	DNSCustomNameservers []string `json:"dnsCustomNameservers,omitempty"`
 	Enabled              *bool    `json:"enabled,omitempty"`
 }
 
+// UpdateNetworkWirelessSsidRequestBodyDot11r
+// The current setting for 802.11r
 type UpdateNetworkWirelessSsidRequestBodyDot11r struct {
 	Adaptive *bool `json:"adaptive,omitempty"`
 	Enabled  *bool `json:"enabled,omitempty"`
 }
 
+// UpdateNetworkWirelessSsidRequestBodyDot11w
+// The current setting for Protected Management Frames (802.11w).
 type UpdateNetworkWirelessSsidRequestBodyDot11w struct {
 	Enabled  *bool `json:"enabled,omitempty"`
 	Required *bool `json:"required,omitempty"`
@@ -68,11 +78,15 @@ const (
 	UpdateNetworkWirelessSsidRequestBodyEnterpriseAdminAccessEnumAccessEnabled  UpdateNetworkWirelessSsidRequestBodyEnterpriseAdminAccessEnum = "access enabled"
 )
 
+// UpdateNetworkWirelessSsidRequestBodyLdapCredentials
+// (Optional) The credentials of the user account to be used by the AP to bind to your LDAP server. The LDAP account should have permissions on all your LDAP servers.
 type UpdateNetworkWirelessSsidRequestBodyLdapCredentials struct {
 	DistinguishedName *string `json:"distinguishedName,omitempty"`
 	Password          *string `json:"password,omitempty"`
 }
 
+// UpdateNetworkWirelessSsidRequestBodyLdapServerCaCertificate
+// The CA certificate used to sign the LDAP server's key.
 type UpdateNetworkWirelessSsidRequestBodyLdapServerCaCertificate struct {
 	Contents *string `json:"contents,omitempty"`
 }
@@ -82,6 +96,8 @@ type UpdateNetworkWirelessSsidRequestBodyLdapServers struct {
 	Port int64  `json:"port"`
 }
 
+// UpdateNetworkWirelessSsidRequestBodyLdap
+// The current setting for LDAP. Only valid if splashPage is 'Password-protected with LDAP'.
 type UpdateNetworkWirelessSsidRequestBodyLdap struct {
 	BaseDistinguishedName *string                                                      `json:"baseDistinguishedName,omitempty"`
 	Credentials           *UpdateNetworkWirelessSsidRequestBodyLdapCredentials         `json:"credentials,omitempty"`
@@ -89,10 +105,14 @@ type UpdateNetworkWirelessSsidRequestBodyLdap struct {
 	Servers               []UpdateNetworkWirelessSsidRequestBodyLdapServers            `json:"servers,omitempty"`
 }
 
+// UpdateNetworkWirelessSsidRequestBodyLocalRadiusCertificateAuthenticationClientRootCaCertificate
+// The Client CA Certificate used to sign the client certificate.
 type UpdateNetworkWirelessSsidRequestBodyLocalRadiusCertificateAuthenticationClientRootCaCertificate struct {
 	Contents *string `json:"contents,omitempty"`
 }
 
+// UpdateNetworkWirelessSsidRequestBodyLocalRadiusCertificateAuthentication
+// The current setting for certificate verification.
 type UpdateNetworkWirelessSsidRequestBodyLocalRadiusCertificateAuthentication struct {
 	ClientRootCaCertificate *UpdateNetworkWirelessSsidRequestBodyLocalRadiusCertificateAuthenticationClientRootCaCertificate `json:"clientRootCaCertificate,omitempty"`
 	Enabled                 *bool                                                                                            `json:"enabled,omitempty"`
@@ -101,16 +121,22 @@ type UpdateNetworkWirelessSsidRequestBodyLocalRadiusCertificateAuthentication st
 	UseOcsp                 *bool                                                                                            `json:"useOcsp,omitempty"`
 }
 
+// UpdateNetworkWirelessSsidRequestBodyLocalRadiusPasswordAuthentication
+// The current setting for password-based authentication.
 type UpdateNetworkWirelessSsidRequestBodyLocalRadiusPasswordAuthentication struct {
 	Enabled *bool `json:"enabled,omitempty"`
 }
 
+// UpdateNetworkWirelessSsidRequestBodyLocalRadius
+// The current setting for Local Authentication, a built-in RADIUS server on the access point. Only valid if authMode is '8021x-localradius'.
 type UpdateNetworkWirelessSsidRequestBodyLocalRadius struct {
 	CacheTimeout              *int64                                                                    `json:"cacheTimeout,omitempty"`
 	CertificateAuthentication *UpdateNetworkWirelessSsidRequestBodyLocalRadiusCertificateAuthentication `json:"certificateAuthentication,omitempty"`
 	PasswordAuthentication    *UpdateNetworkWirelessSsidRequestBodyLocalRadiusPasswordAuthentication    `json:"passwordAuthentication,omitempty"`
 }
 
+// UpdateNetworkWirelessSsidRequestBodyOauth
+// The OAuth settings of this SSID. Only valid if splashPage is 'Google OAuth'.
 type UpdateNetworkWirelessSsidRequestBodyOauth struct {
 	AllowedDomains []string `json:"allowedDomains,omitempty"`
 }

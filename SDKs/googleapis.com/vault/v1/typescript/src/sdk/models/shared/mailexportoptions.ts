@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum MailExportOptionsExportFormatEnum {
-    ExportFormatUnspecified = "EXPORT_FORMAT_UNSPECIFIED"
-,    Mbox = "MBOX"
-,    Pst = "PST"
+    ExportFormatUnspecified = "EXPORT_FORMAT_UNSPECIFIED",
+    Mbox = "MBOX",
+    Pst = "PST"
 }
 
 
@@ -12,12 +13,12 @@ export enum MailExportOptionsExportFormatEnum {
  * Options for Gmail exports.
 **/
 export class MailExportOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=exportFormat" })
+  @SpeakeasyMetadata({ data: "json, name=exportFormat" })
   exportFormat?: MailExportOptionsExportFormatEnum;
 
-  @Metadata({ data: "json, name=showConfidentialModeContent" })
+  @SpeakeasyMetadata({ data: "json, name=showConfidentialModeContent" })
   showConfidentialModeContent?: boolean;
 
-  @Metadata({ data: "json, name=useNewExport" })
+  @SpeakeasyMetadata({ data: "json, name=useNewExport" })
   useNewExport?: boolean;
 }

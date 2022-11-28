@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserGroup } from "./usergroup";
 import { Range } from "./range";
+
 
 
 // UserGroupList
@@ -9,9 +9,9 @@ import { Range } from "./range";
  * List of groups
 **/
 export class UserGroupList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.UserGroup })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: UserGroup })
   items: UserGroup[];
 
-  @Metadata({ data: "json, name=range" })
+  @SpeakeasyMetadata({ data: "json, name=range" })
   range: Range;
 }

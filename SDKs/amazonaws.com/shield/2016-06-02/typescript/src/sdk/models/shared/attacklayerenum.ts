@@ -1,6 +1,7 @@
 
 
+
 export enum AttackLayerEnum {
-    Network = "NETWORK"
-,    Application = "APPLICATION"
+    Network = "NETWORK",
+    Application = "APPLICATION"
 }

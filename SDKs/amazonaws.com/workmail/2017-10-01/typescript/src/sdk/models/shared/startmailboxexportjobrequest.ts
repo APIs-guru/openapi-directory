@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class StartMailboxExportJobRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClientToken" })
+  @SpeakeasyMetadata({ data: "json, name=ClientToken" })
   clientToken: string;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=EntityId" })
+  @SpeakeasyMetadata({ data: "json, name=EntityId" })
   entityId: string;
 
-  @Metadata({ data: "json, name=KmsKeyArn" })
+  @SpeakeasyMetadata({ data: "json, name=KmsKeyArn" })
   kmsKeyArn: string;
 
-  @Metadata({ data: "json, name=OrganizationId" })
+  @SpeakeasyMetadata({ data: "json, name=OrganizationId" })
   organizationId: string;
 
-  @Metadata({ data: "json, name=RoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=RoleArn" })
   roleArn: string;
 
-  @Metadata({ data: "json, name=S3BucketName" })
+  @SpeakeasyMetadata({ data: "json, name=S3BucketName" })
   s3BucketName: string;
 
-  @Metadata({ data: "json, name=S3Prefix" })
+  @SpeakeasyMetadata({ data: "json, name=S3Prefix" })
   s3Prefix: string;
 }

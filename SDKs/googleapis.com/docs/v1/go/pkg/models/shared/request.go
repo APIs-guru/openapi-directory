@@ -1,5 +1,7 @@
 package shared
 
+// Request
+// A single update to apply to a document.
 type Request struct {
 	CreateFooter                *CreateFooterRequest                `json:"createFooter,omitempty"`
 	CreateFootnote              *CreateFootnoteRequest              `json:"createFootnote,omitempty"`

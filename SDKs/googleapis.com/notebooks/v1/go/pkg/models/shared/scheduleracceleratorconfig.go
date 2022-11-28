@@ -14,6 +14,8 @@ const (
 	SchedulerAcceleratorConfigTypeEnumTpuV3                               SchedulerAcceleratorConfigTypeEnum = "TPU_V3"
 )
 
+// SchedulerAcceleratorConfig
+// Definition of a hardware accelerator. Note that not all combinations of `type` and `core_count` are valid. Check [GPUs on Compute Engine](https://cloud.google.com/compute/docs/gpus) to find a valid combination. TPUs are not supported.
 type SchedulerAcceleratorConfig struct {
 	CoreCount *string                             `json:"coreCount,omitempty"`
 	Type      *SchedulerAcceleratorConfigTypeEnum `json:"type,omitempty"`

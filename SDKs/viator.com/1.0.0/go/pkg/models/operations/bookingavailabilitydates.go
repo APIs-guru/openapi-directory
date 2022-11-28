@@ -8,11 +8,6 @@ type BookingAvailabilityDatesHeaders struct {
 	AcceptLanguage string `header:"style=simple,explode=false,name=Accept-Language"`
 }
 
-type BookingAvailabilityDatesRequest struct {
-	QueryParams BookingAvailabilityDatesQueryParams
-	Headers     BookingAvailabilityDatesHeaders
-}
-
 type BookingAvailabilityDates200ApplicationJSON struct {
 	Data             map[string][]string    `json:"data,omitempty"`
 	DateStamp        *string                `json:"dateStamp,omitempty"`
@@ -27,6 +22,11 @@ type BookingAvailabilityDates200ApplicationJSON struct {
 	Success          *bool                  `json:"success,omitempty"`
 	TotalCount       *int64                 `json:"totalCount,omitempty"`
 	Vmid             *string                `json:"vmid,omitempty"`
+}
+
+type BookingAvailabilityDatesRequest struct {
+	QueryParams BookingAvailabilityDatesQueryParams
+	Headers     BookingAvailabilityDatesHeaders
 }
 
 type BookingAvailabilityDatesResponse struct {

@@ -1,5 +1,7 @@
 package shared
 
+// RepairClusterRequest
+// A request to repair a cluster.
 type RepairClusterRequest struct {
 	ClusterUUID                 *string    `json:"clusterUuid,omitempty"`
 	GracefulDecommissionTimeout *string    `json:"gracefulDecommissionTimeout,omitempty"`

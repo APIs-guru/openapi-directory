@@ -1,5 +1,7 @@
 package shared
 
+// FirewallDomainList
+// <p>High-level information about a list of firewall domains for use in a <a>FirewallRule</a>. This is returned by <a>GetFirewallDomainList</a>.</p> <p>To retrieve the domains that are defined for this domain list, call <a>ListFirewallDomains</a>.</p>
 type FirewallDomainList struct {
 	Arn              *string                       `json:"Arn,omitempty"`
 	CreationTime     *string                       `json:"CreationTime,omitempty"`

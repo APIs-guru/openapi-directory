@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDocumentaiV1beta3DocumentPageToken
+// A detected token.
 type GoogleCloudDocumentaiV1beta3DocumentPageToken struct {
 	DetectedBreak     *GoogleCloudDocumentaiV1beta3DocumentPageTokenDetectedBreak `json:"detectedBreak,omitempty"`
 	DetectedLanguages []GoogleCloudDocumentaiV1beta3DocumentPageDetectedLanguage  `json:"detectedLanguages,omitempty"`

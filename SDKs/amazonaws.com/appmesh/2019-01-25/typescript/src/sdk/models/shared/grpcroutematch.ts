@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GrpcRouteMetadata } from "./grpcroutemetadata";
+
 
 
 // GrpcRouteMatch
@@ -8,12 +8,12 @@ import { GrpcRouteMetadata } from "./grpcroutemetadata";
  * An object that represents the criteria for determining a request match.
 **/
 export class GrpcRouteMatch extends SpeakeasyBase {
-  @Metadata({ data: "json, name=metadata", elemType: shared.GrpcRouteMetadata })
+  @SpeakeasyMetadata({ data: "json, name=metadata", elemType: GrpcRouteMetadata })
   metadata?: GrpcRouteMetadata[];
 
-  @Metadata({ data: "json, name=methodName" })
+  @SpeakeasyMetadata({ data: "json, name=methodName" })
   methodName?: string;
 
-  @Metadata({ data: "json, name=serviceName" })
+  @SpeakeasyMetadata({ data: "json, name=serviceName" })
   serviceName?: string;
 }

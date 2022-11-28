@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OrganizationalUnit } from "./organizationalunit";
 
 
+
 export class CreateOrganizationalUnitResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=OrganizationalUnit" })
+  @SpeakeasyMetadata({ data: "json, name=OrganizationalUnit" })
   organizationalUnit?: OrganizationalUnit;
 }

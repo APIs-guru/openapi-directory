@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetReportPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=report_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=report_id" })
   reportId: string;
 }
 
 
 export class GetReportSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   apiKey: shared.SchemeApiKey;
 }
 
 
 export class GetReportRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetReportPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetReportSecurity;
 }
 
 
 export class GetReportResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   reportOutput?: shared.ReportOutput;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

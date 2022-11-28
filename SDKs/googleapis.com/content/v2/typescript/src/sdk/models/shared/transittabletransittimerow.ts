@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TransitTableTransitTimeRowTransitTimeValue } from "./transittabletransittimerowtransittimevalue";
 
 
+
 export class TransitTableTransitTimeRow extends SpeakeasyBase {
-  @Metadata({ data: "json, name=values", elemType: shared.TransitTableTransitTimeRowTransitTimeValue })
+  @SpeakeasyMetadata({ data: "json, name=values", elemType: TransitTableTransitTimeRowTransitTimeValue })
   values?: TransitTableTransitTimeRowTransitTimeValue[];
 }

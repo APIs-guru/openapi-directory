@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import attributevaluemetadata
+from sdk import utils
+from . import *
 
 class AttributeMetadataValueTypeEnum(str, Enum):
     ATTRIBUTE_VALUE_TYPE_UNSPECIFIED = "ATTRIBUTE_VALUE_TYPE_UNSPECIFIED"
@@ -14,11 +16,15 @@ class AttributeMetadataValueTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class AttributeMetadata:
-    attribute_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'attributeId' }})
-    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayName' }})
-    group_display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'groupDisplayName' }})
-    is_deprecated: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'isDeprecated' }})
-    is_repeatable: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'isRepeatable' }})
-    value_metadata: Optional[List[attributevaluemetadata.AttributeValueMetadata]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'valueMetadata' }})
-    value_type: Optional[AttributeMetadataValueTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'valueType' }})
+    r"""AttributeMetadata
+    Metadata for an attribute. Contains display information for the attribute, including a localized name and a heading for grouping related attributes together.
+    """
+    
+    attribute_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('attributeId') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    group_display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('groupDisplayName') }})
+    is_deprecated: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('isDeprecated') }})
+    is_repeatable: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('isRepeatable') }})
+    value_metadata: Optional[List[AttributeValueMetadata]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('valueMetadata') }})
+    value_type: Optional[AttributeMetadataValueTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('valueType') }})
     

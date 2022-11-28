@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReviewReplyResult } from "./reviewreplyresult";
+
 
 
 // ReviewsReplyResponse
@@ -7,6 +8,6 @@ import { ReviewReplyResult } from "./reviewreplyresult";
  * Response on status of replying to a review.
 **/
 export class ReviewsReplyResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result?: ReviewReplyResult;
 }

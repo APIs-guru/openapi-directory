@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Comment } from "./comment";
+
 
 
 // PostAuthorImage
@@ -8,7 +8,7 @@ import { Comment } from "./comment";
  * The creator's avatar.
 **/
 export class PostAuthorImage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }
 
@@ -18,16 +18,16 @@ export class PostAuthorImage extends SpeakeasyBase {
  * The author of this Post.
 **/
 export class PostAuthor extends SpeakeasyBase {
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=image" })
+  @SpeakeasyMetadata({ data: "json, name=image" })
   image?: PostAuthorImage;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }
 
@@ -37,13 +37,13 @@ export class PostAuthor extends SpeakeasyBase {
  * Data about the blog containing this Post.
 **/
 export class PostBlog extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 }
 
 
 export class PostImages extends SpeakeasyBase {
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }
 
@@ -53,23 +53,23 @@ export class PostImages extends SpeakeasyBase {
  * The location for geotagged posts.
 **/
 export class PostLocation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=lat" })
+  @SpeakeasyMetadata({ data: "json, name=lat" })
   lat?: number;
 
-  @Metadata({ data: "json, name=lng" })
+  @SpeakeasyMetadata({ data: "json, name=lng" })
   lng?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=span" })
+  @SpeakeasyMetadata({ data: "json, name=span" })
   span?: string;
 }
 
 export enum PostReaderCommentsEnum {
-    Allow = "ALLOW"
-,    DontAllowShowExisting = "DONT_ALLOW_SHOW_EXISTING"
-,    DontAllowHideExisting = "DONT_ALLOW_HIDE_EXISTING"
+    Allow = "ALLOW",
+    DontAllowShowExisting = "DONT_ALLOW_SHOW_EXISTING",
+    DontAllowHideExisting = "DONT_ALLOW_HIDE_EXISTING"
 }
 
 
@@ -78,82 +78,82 @@ export enum PostReaderCommentsEnum {
  * The container of comments on this Post.
 **/
 export class PostReplies extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.Comment })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: Comment })
   items?: Comment[];
 
-  @Metadata({ data: "json, name=selfLink" })
+  @SpeakeasyMetadata({ data: "json, name=selfLink" })
   selfLink?: string;
 
-  @Metadata({ data: "json, name=totalItems" })
+  @SpeakeasyMetadata({ data: "json, name=totalItems" })
   totalItems?: string;
 }
 
 export enum PostStatusEnum {
-    Live = "LIVE"
-,    Draft = "DRAFT"
-,    Scheduled = "SCHEDULED"
-,    SoftTrashed = "SOFT_TRASHED"
+    Live = "LIVE",
+    Draft = "DRAFT",
+    Scheduled = "SCHEDULED",
+    SoftTrashed = "SOFT_TRASHED"
 }
 
 
 export class Post extends SpeakeasyBase {
-  @Metadata({ data: "json, name=author" })
+  @SpeakeasyMetadata({ data: "json, name=author" })
   author?: PostAuthor;
 
-  @Metadata({ data: "json, name=blog" })
+  @SpeakeasyMetadata({ data: "json, name=blog" })
   blog?: PostBlog;
 
-  @Metadata({ data: "json, name=content" })
+  @SpeakeasyMetadata({ data: "json, name=content" })
   content?: string;
 
-  @Metadata({ data: "json, name=customMetaData" })
+  @SpeakeasyMetadata({ data: "json, name=customMetaData" })
   customMetaData?: string;
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=images", elemType: shared.PostImages })
+  @SpeakeasyMetadata({ data: "json, name=images", elemType: PostImages })
   images?: PostImages[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: string[];
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: PostLocation;
 
-  @Metadata({ data: "json, name=published" })
+  @SpeakeasyMetadata({ data: "json, name=published" })
   published?: string;
 
-  @Metadata({ data: "json, name=readerComments" })
+  @SpeakeasyMetadata({ data: "json, name=readerComments" })
   readerComments?: PostReaderCommentsEnum;
 
-  @Metadata({ data: "json, name=replies" })
+  @SpeakeasyMetadata({ data: "json, name=replies" })
   replies?: PostReplies;
 
-  @Metadata({ data: "json, name=selfLink" })
+  @SpeakeasyMetadata({ data: "json, name=selfLink" })
   selfLink?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: PostStatusEnum;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=titleLink" })
+  @SpeakeasyMetadata({ data: "json, name=titleLink" })
   titleLink?: string;
 
-  @Metadata({ data: "json, name=trashed" })
+  @SpeakeasyMetadata({ data: "json, name=trashed" })
   trashed?: string;
 
-  @Metadata({ data: "json, name=updated" })
+  @SpeakeasyMetadata({ data: "json, name=updated" })
   updated?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }

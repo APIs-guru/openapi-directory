@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { JobStatusEnum } from "./jobstatusenum";
 // Step
 /**
@@ -34,47 +34,47 @@ var Step = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=artifactsUrl" }),
+        SpeakeasyMetadata({ data: "json, name=artifactsUrl" }),
         __metadata("design:type", String)
     ], Step.prototype, "artifactsUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=context" }),
+        SpeakeasyMetadata({ data: "json, name=context" }),
         __metadata("design:type", String)
     ], Step.prototype, "context", void 0);
     __decorate([
-        Metadata({ data: "json, name=endTime" }),
+        SpeakeasyMetadata({ data: "json, name=endTime" }),
         __metadata("design:type", Date)
     ], Step.prototype, "endTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=logUrl" }),
+        SpeakeasyMetadata({ data: "json, name=logUrl" }),
         __metadata("design:type", String)
     ], Step.prototype, "logUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=screenshots" }),
+        SpeakeasyMetadata({ data: "json, name=screenshots" }),
         __metadata("design:type", Map)
     ], Step.prototype, "screenshots", void 0);
     __decorate([
-        Metadata({ data: "json, name=startTime" }),
+        SpeakeasyMetadata({ data: "json, name=startTime" }),
         __metadata("design:type", Date)
     ], Step.prototype, "startTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], Step.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=statusReason" }),
+        SpeakeasyMetadata({ data: "json, name=statusReason" }),
         __metadata("design:type", String)
     ], Step.prototype, "statusReason", void 0);
     __decorate([
-        Metadata({ data: "json, name=stepName" }),
+        SpeakeasyMetadata({ data: "json, name=stepName" }),
         __metadata("design:type", String)
     ], Step.prototype, "stepName", void 0);
     __decorate([
-        Metadata({ data: "json, name=testArtifactsUrl" }),
+        SpeakeasyMetadata({ data: "json, name=testArtifactsUrl" }),
         __metadata("design:type", String)
     ], Step.prototype, "testArtifactsUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=testConfigUrl" }),
+        SpeakeasyMetadata({ data: "json, name=testConfigUrl" }),
         __metadata("design:type", String)
     ], Step.prototype, "testConfigUrl", void 0);
     return Step;

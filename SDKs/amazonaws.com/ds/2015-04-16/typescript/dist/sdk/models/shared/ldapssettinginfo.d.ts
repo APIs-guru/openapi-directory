@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { LdapsStatusEnum } from "./ldapsstatusenum";
 /**
  * Contains general information about the LDAPS settings.

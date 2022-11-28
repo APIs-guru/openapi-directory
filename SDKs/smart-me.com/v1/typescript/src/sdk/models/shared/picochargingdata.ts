@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum PicoChargingDataStateEnum {
-    Booting = "Booting"
-,    ReadyNoCarConnected = "ReadyNoCarConnected"
-,    ReadyCarConnected = "ReadyCarConnected"
-,    StartedWaitForCar = "StartedWaitForCar"
-,    Charging = "Charging"
-,    Offline = "Offline"
+    Booting = "Booting",
+    ReadyNoCarConnected = "ReadyNoCarConnected",
+    ReadyCarConnected = "ReadyCarConnected",
+    StartedWaitForCar = "StartedWaitForCar",
+    Charging = "Charging",
+    Offline = "Offline"
 }
 
 
@@ -15,18 +16,18 @@ export enum PicoChargingDataStateEnum {
  * Container class for the pico charging station API
 **/
 export class PicoChargingData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ActiveChargingEnergy" })
+  @SpeakeasyMetadata({ data: "json, name=ActiveChargingEnergy" })
   activeChargingEnergy?: number;
 
-  @Metadata({ data: "json, name=ActiveChargingPower" })
+  @SpeakeasyMetadata({ data: "json, name=ActiveChargingPower" })
   activeChargingPower?: number;
 
-  @Metadata({ data: "json, name=Duration" })
+  @SpeakeasyMetadata({ data: "json, name=Duration" })
   duration?: number;
 
-  @Metadata({ data: "json, name=State" })
+  @SpeakeasyMetadata({ data: "json, name=State" })
   state?: PicoChargingDataStateEnum;
 
-  @Metadata({ data: "json, name=ValueDate" })
+  @SpeakeasyMetadata({ data: "json, name=ValueDate" })
   valueDate?: Date;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataSetTypeEnum } from "./datasettypeenum";
 // GenerateDataSetRequest
 /**
@@ -34,31 +34,31 @@ var GenerateDataSetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=customerDefinedValues" }),
+        SpeakeasyMetadata({ data: "json, name=customerDefinedValues" }),
         __metadata("design:type", Map)
     ], GenerateDataSetRequest.prototype, "customerDefinedValues", void 0);
     __decorate([
-        Metadata({ data: "json, name=dataSetPublicationDate" }),
+        SpeakeasyMetadata({ data: "json, name=dataSetPublicationDate" }),
         __metadata("design:type", Date)
     ], GenerateDataSetRequest.prototype, "dataSetPublicationDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=dataSetType" }),
+        SpeakeasyMetadata({ data: "json, name=dataSetType" }),
         __metadata("design:type", String)
     ], GenerateDataSetRequest.prototype, "dataSetType", void 0);
     __decorate([
-        Metadata({ data: "json, name=destinationS3BucketName" }),
+        SpeakeasyMetadata({ data: "json, name=destinationS3BucketName" }),
         __metadata("design:type", String)
     ], GenerateDataSetRequest.prototype, "destinationS3BucketName", void 0);
     __decorate([
-        Metadata({ data: "json, name=destinationS3Prefix" }),
+        SpeakeasyMetadata({ data: "json, name=destinationS3Prefix" }),
         __metadata("design:type", String)
     ], GenerateDataSetRequest.prototype, "destinationS3Prefix", void 0);
     __decorate([
-        Metadata({ data: "json, name=roleNameArn" }),
+        SpeakeasyMetadata({ data: "json, name=roleNameArn" }),
         __metadata("design:type", String)
     ], GenerateDataSetRequest.prototype, "roleNameArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=snsTopicArn" }),
+        SpeakeasyMetadata({ data: "json, name=snsTopicArn" }),
         __metadata("design:type", String)
     ], GenerateDataSetRequest.prototype, "snsTopicArn", void 0);
     return GenerateDataSetRequest;

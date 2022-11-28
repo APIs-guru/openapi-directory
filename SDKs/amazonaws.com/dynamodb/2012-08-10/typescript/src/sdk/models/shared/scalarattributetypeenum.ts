@@ -1,7 +1,8 @@
 
 
+
 export enum ScalarAttributeTypeEnum {
-    S = "S"
-,    N = "N"
-,    B = "B"
+    S = "S",
+    N = "N",
+    B = "B"
 }

@@ -1,5 +1,7 @@
 package shared
 
+// MarketplaceNote
+// A proposal is associated with a bunch of notes which may optionally be associated with a deal and/or revision number.
 type MarketplaceNote struct {
 	CreatorRole            *string `json:"creatorRole,omitempty"`
 	DealID                 *string `json:"dealId,omitempty"`

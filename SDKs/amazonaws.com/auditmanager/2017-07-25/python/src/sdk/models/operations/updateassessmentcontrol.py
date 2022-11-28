@@ -1,14 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdateAssessmentControlPathParams:
-    assessment_id: str = field(default=None, metadata={'path_param': { 'field_name': 'assessmentId', 'style': 'simple', 'explode': False }})
-    control_id: str = field(default=None, metadata={'path_param': { 'field_name': 'controlId', 'style': 'simple', 'explode': False }})
-    control_set_id: str = field(default=None, metadata={'path_param': { 'field_name': 'controlSetId', 'style': 'simple', 'explode': False }})
+    assessment_id: str = field(metadata={'path_param': { 'field_name': 'assessmentId', 'style': 'simple', 'explode': False }})
+    control_id: str = field(metadata={'path_param': { 'field_name': 'controlId', 'style': 'simple', 'explode': False }})
+    control_set_id: str = field(metadata={'path_param': { 'field_name': 'controlSetId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -30,24 +35,24 @@ class UpdateAssessmentControlRequestBodyControlStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class UpdateAssessmentControlRequestBody:
-    comment_body: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'commentBody' }})
-    control_status: Optional[UpdateAssessmentControlRequestBodyControlStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'controlStatus' }})
+    comment_body: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('commentBody') }})
+    control_status: Optional[UpdateAssessmentControlRequestBodyControlStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('controlStatus') }})
     
 
 @dataclass
 class UpdateAssessmentControlRequest:
-    path_params: UpdateAssessmentControlPathParams = field(default=None)
-    headers: UpdateAssessmentControlHeaders = field(default=None)
-    request: UpdateAssessmentControlRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateAssessmentControlHeaders = field()
+    path_params: UpdateAssessmentControlPathParams = field()
+    request: UpdateAssessmentControlRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateAssessmentControlResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     update_assessment_control_response: Optional[shared.UpdateAssessmentControlResponse] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

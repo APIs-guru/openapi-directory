@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetDistrictTeamsPathParams:
-    district_key: str = field(default=None, metadata={'path_param': { 'field_name': 'district_key', 'style': 'simple', 'explode': False }})
+    district_key: str = field(metadata={'path_param': { 'field_name': 'district_key', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,20 +15,20 @@ class GetDistrictTeamsHeaders:
 
 @dataclass
 class GetDistrictTeamsSecurity:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    api_key: shared.SchemeAPIKey = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetDistrictTeamsRequest:
-    path_params: GetDistrictTeamsPathParams = field(default=None)
-    headers: GetDistrictTeamsHeaders = field(default=None)
-    security: GetDistrictTeamsSecurity = field(default=None)
+    headers: GetDistrictTeamsHeaders = field()
+    path_params: GetDistrictTeamsPathParams = field()
+    security: GetDistrictTeamsSecurity = field()
     
 
 @dataclass
 class GetDistrictTeamsResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     teams: Optional[List[shared.Team]] = field(default=None)
     

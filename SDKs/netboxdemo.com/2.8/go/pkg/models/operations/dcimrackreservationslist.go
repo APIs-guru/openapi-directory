@@ -44,15 +44,15 @@ type DcimRackReservationsListQueryParams struct {
 	UserIDN        *string `queryParam:"style=form,explode=true,name=user_id__n"`
 }
 
-type DcimRackReservationsListRequest struct {
-	QueryParams DcimRackReservationsListQueryParams
-}
-
 type DcimRackReservationsList200ApplicationJSON struct {
 	Count    int64                    `json:"count"`
 	Next     *string                  `json:"next,omitempty"`
 	Previous *string                  `json:"previous,omitempty"`
 	Results  []shared.RackReservation `json:"results"`
+}
+
+type DcimRackReservationsListRequest struct {
+	QueryParams DcimRackReservationsListQueryParams
 }
 
 type DcimRackReservationsListResponse struct {

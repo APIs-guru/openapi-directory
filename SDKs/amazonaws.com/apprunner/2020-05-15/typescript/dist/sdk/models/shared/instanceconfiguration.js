@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // InstanceConfiguration
 /**
  * Describes the runtime configuration of an AWS App Runner service instance (scaling unit).
@@ -33,15 +33,15 @@ var InstanceConfiguration = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Cpu" }),
+        SpeakeasyMetadata({ data: "json, name=Cpu" }),
         __metadata("design:type", String)
     ], InstanceConfiguration.prototype, "cpu", void 0);
     __decorate([
-        Metadata({ data: "json, name=InstanceRoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=InstanceRoleArn" }),
         __metadata("design:type", String)
     ], InstanceConfiguration.prototype, "instanceRoleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=Memory" }),
+        SpeakeasyMetadata({ data: "json, name=Memory" }),
         __metadata("design:type", String)
     ], InstanceConfiguration.prototype, "memory", void 0);
     return InstanceConfiguration;

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CpuUtilization } from "./cpuutilization";
 import { DiskUtilization } from "./diskutilization";
 import { NetworkUtilization } from "./networkutilization";

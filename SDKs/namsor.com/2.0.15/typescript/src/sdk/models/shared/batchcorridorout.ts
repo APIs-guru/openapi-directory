@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CorridorOut } from "./corridorout";
 
 
+
 export class BatchCorridorOut extends SpeakeasyBase {
-  @Metadata({ data: "json, name=corridorFromTo", elemType: shared.CorridorOut })
+  @SpeakeasyMetadata({ data: "json, name=corridorFromTo", elemType: CorridorOut })
   corridorFromTo?: CorridorOut[];
 }

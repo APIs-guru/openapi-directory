@@ -1,5 +1,7 @@
 package shared
 
+// PolicyTopicEvidence
+// Evidence associated with a policy topic entry.
 type PolicyTopicEvidence struct {
 	DestinationNotCrawlable *DestinationNotCrawlableEvidence `json:"destinationNotCrawlable,omitempty"`
 	DestinationNotWorking   *DestinationNotWorkingEvidence   `json:"destinationNotWorking,omitempty"`

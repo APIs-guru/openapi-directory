@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var DeleteIntegrationLinkPathParams = /** @class */ (function (_super) {
     __extends(DeleteIntegrationLinkPathParams, _super);
@@ -30,19 +30,19 @@ var DeleteIntegrationLinkPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=environmentId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=environmentId" }),
         __metadata("design:type", String)
     ], DeleteIntegrationLinkPathParams.prototype, "environmentId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=integrationLinkType" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=integrationLinkType" }),
         __metadata("design:type", String)
     ], DeleteIntegrationLinkPathParams.prototype, "integrationLinkType", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=key" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=key" }),
         __metadata("design:type", String)
     ], DeleteIntegrationLinkPathParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=settingId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=settingId" }),
         __metadata("design:type", Number)
     ], DeleteIntegrationLinkPathParams.prototype, "settingId", void 0);
     return DeleteIntegrationLinkPathParams;
@@ -54,7 +54,7 @@ var DeleteIntegrationLinkRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteIntegrationLinkPathParams)
     ], DeleteIntegrationLinkRequest.prototype, "pathParams", void 0);
     return DeleteIntegrationLinkRequest;
@@ -66,15 +66,15 @@ var DeleteIntegrationLinkResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DeleteIntegrationLinkResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.DeleteIntegrationLinkModel)
     ], DeleteIntegrationLinkResponse.prototype, "deleteIntegrationLinkModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DeleteIntegrationLinkResponse.prototype, "statusCode", void 0);
     return DeleteIntegrationLinkResponse;

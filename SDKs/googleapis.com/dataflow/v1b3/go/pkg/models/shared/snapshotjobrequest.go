@@ -1,5 +1,7 @@
 package shared
 
+// SnapshotJobRequest
+// Request to create a snapshot of a job.
 type SnapshotJobRequest struct {
 	Description     *string `json:"description,omitempty"`
 	Location        *string `json:"location,omitempty"`

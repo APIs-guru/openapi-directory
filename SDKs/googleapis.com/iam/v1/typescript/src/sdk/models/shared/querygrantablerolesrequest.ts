@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum QueryGrantableRolesRequestViewEnum {
-    Basic = "BASIC"
-,    Full = "FULL"
+    Basic = "BASIC",
+    Full = "FULL"
 }
 
 
@@ -11,15 +12,15 @@ export enum QueryGrantableRolesRequestViewEnum {
  * The grantable role query request.
 **/
 export class QueryGrantableRolesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fullResourceName" })
+  @SpeakeasyMetadata({ data: "json, name=fullResourceName" })
   fullResourceName?: string;
 
-  @Metadata({ data: "json, name=pageSize" })
+  @SpeakeasyMetadata({ data: "json, name=pageSize" })
   pageSize?: number;
 
-  @Metadata({ data: "json, name=pageToken" })
+  @SpeakeasyMetadata({ data: "json, name=pageToken" })
   pageToken?: string;
 
-  @Metadata({ data: "json, name=view" })
+  @SpeakeasyMetadata({ data: "json, name=view" })
   view?: QueryGrantableRolesRequestViewEnum;
 }

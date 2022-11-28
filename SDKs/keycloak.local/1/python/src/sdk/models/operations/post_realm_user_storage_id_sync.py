@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class PostRealmUserStorageIDSyncPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
-    realm: str = field(default=None, metadata={'path_param': { 'field_name': 'realm', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    realm: str = field(metadata={'path_param': { 'field_name': 'realm', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,13 +16,13 @@ class PostRealmUserStorageIDSyncQueryParams:
 
 @dataclass
 class PostRealmUserStorageIDSyncRequest:
-    path_params: PostRealmUserStorageIDSyncPathParams = field(default=None)
-    query_params: PostRealmUserStorageIDSyncQueryParams = field(default=None)
+    path_params: PostRealmUserStorageIDSyncPathParams = field()
+    query_params: PostRealmUserStorageIDSyncQueryParams = field()
     
 
 @dataclass
 class PostRealmUserStorageIDSyncResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     synchronization_result: Optional[shared.SynchronizationResult] = field(default=None)
     

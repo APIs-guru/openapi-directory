@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DefaultResponseDtoOfBoolean
@@ -8,15 +9,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *             
 **/
 export class DefaultResponseDtoOfBoolean extends SpeakeasyBase {
-  @Metadata({ data: "json, name=isError" })
+  @SpeakeasyMetadata({ data: "json, name=isError" })
   isError?: boolean;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=responseException" })
+  @SpeakeasyMetadata({ data: "json, name=responseException" })
   responseException?: any;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result?: boolean;
 }

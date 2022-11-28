@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PolicyTypeEnum } from "./policytypeenum";
 import { TargetTrackingConfiguration } from "./targettrackingconfiguration";
+
 
 
 // ScalingPolicy
@@ -8,12 +9,12 @@ import { TargetTrackingConfiguration } from "./targettrackingconfiguration";
  * Represents a scaling policy.
 **/
 export class ScalingPolicy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PolicyName" })
+  @SpeakeasyMetadata({ data: "json, name=PolicyName" })
   policyName: string;
 
-  @Metadata({ data: "json, name=PolicyType" })
+  @SpeakeasyMetadata({ data: "json, name=PolicyType" })
   policyType: PolicyTypeEnum;
 
-  @Metadata({ data: "json, name=TargetTrackingConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=TargetTrackingConfiguration" })
   targetTrackingConfiguration?: TargetTrackingConfiguration;
 }

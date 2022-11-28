@@ -1,16 +1,19 @@
-import { AxiosInstance, AxiosRequestConfig } from "axios";
-import * as operations from "./models/operations";
-declare type OptsFunc = (sdk: SDK) => void;
+import { AxiosInstance } from "axios";
+import { Inapppurchases } from "./inapppurchases";
+import { Purchases } from "./purchases";
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://www.googleapis.com/androidpublisher/v1.1/applications"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    inapppurchases: Inapppurchases;
+    purchases: Purchases;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
-    AndroidpublisherInapppurchasesGet(req: operations.AndroidpublisherInapppurchasesGetRequest, config?: AxiosRequestConfig): Promise<operations.AndroidpublisherInapppurchasesGetResponse>;
-    AndroidpublisherPurchasesCancel(req: operations.AndroidpublisherPurchasesCancelRequest, config?: AxiosRequestConfig): Promise<operations.AndroidpublisherPurchasesCancelResponse>;
-    AndroidpublisherPurchasesGet(req: operations.AndroidpublisherPurchasesGetRequest, config?: AxiosRequestConfig): Promise<operations.AndroidpublisherPurchasesGetResponse>;
 }
 export {};

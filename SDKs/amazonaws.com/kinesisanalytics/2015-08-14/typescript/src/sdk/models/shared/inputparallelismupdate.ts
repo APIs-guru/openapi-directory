@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // InputParallelismUpdate
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides updates to the parallelism count.
 **/
 export class InputParallelismUpdate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CountUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=CountUpdate" })
   countUpdate?: number;
 }

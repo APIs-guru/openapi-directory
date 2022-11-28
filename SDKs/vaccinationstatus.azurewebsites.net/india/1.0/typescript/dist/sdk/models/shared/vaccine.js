@@ -22,42 +22,42 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Vaccine = /** @class */ (function (_super) {
     __extends(Vaccine, _super);
     function Vaccine() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=dose" }),
+        SpeakeasyMetadata({ data: "json, name=dose" }),
         __metadata("design:type", Number)
     ], Vaccine.prototype, "dose", void 0);
     __decorate([
-        Metadata({ data: "json, name=identityType" }),
+        SpeakeasyMetadata({ data: "json, name=identityType" }),
         __metadata("design:type", String)
     ], Vaccine.prototype, "identityType", void 0);
     __decorate([
-        Metadata({ data: "json, name=identityValue" }),
+        SpeakeasyMetadata({ data: "json, name=identityValue" }),
         __metadata("design:type", String)
     ], Vaccine.prototype, "identityValue", void 0);
     __decorate([
-        Metadata({ data: "json, name=vaccinatedBy" }),
+        SpeakeasyMetadata({ data: "json, name=vaccinatedBy" }),
         __metadata("design:type", String)
     ], Vaccine.prototype, "vaccinatedBy", void 0);
     __decorate([
-        Metadata({ data: "json, name=vaccinationDate" }),
+        SpeakeasyMetadata({ data: "json, name=vaccinationDate" }),
         __metadata("design:type", String)
     ], Vaccine.prototype, "vaccinationDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=vaccinationPlace" }),
+        SpeakeasyMetadata({ data: "json, name=vaccinationPlace" }),
         __metadata("design:type", String)
     ], Vaccine.prototype, "vaccinationPlace", void 0);
     __decorate([
-        Metadata({ data: "json, name=vaccinationStatus" }),
+        SpeakeasyMetadata({ data: "json, name=vaccinationStatus" }),
         __metadata("design:type", String)
     ], Vaccine.prototype, "vaccinationStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=vaccineName" }),
+        SpeakeasyMetadata({ data: "json, name=vaccineName" }),
         __metadata("design:type", String)
     ], Vaccine.prototype, "vaccineName", void 0);
     return Vaccine;

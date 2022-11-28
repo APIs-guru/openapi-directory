@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import Any,Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,28 +14,49 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def config_config_get(self, request: operations.ConfigConfigGetRequest) -> operations.ConfigConfigGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Config
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/config"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -51,17 +75,18 @@ class SDK:
 
     
     def discord_get_discord_get(self, request: operations.DiscordGetDiscordGetRequest) -> operations.DiscordGetDiscordGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Discord Get
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/discord"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -80,22 +105,22 @@ class SDK:
 
     
     def discord_post_discord_post(self, request: operations.DiscordPostDiscordPostRequest) -> operations.DiscordPostDiscordPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Discord Post
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/discord"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -114,17 +139,18 @@ class SDK:
 
     
     def slack_get_slack_get(self, request: operations.SlackGetSlackGetRequest) -> operations.SlackGetSlackGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Slack Get
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/slack"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -143,22 +169,22 @@ class SDK:
 
     
     def slack_post_slack_post(self, request: operations.SlackPostSlackPostRequest) -> operations.SlackPostSlackPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Slack Post
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/slack"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -177,17 +203,18 @@ class SDK:
 
     
     def sns_get_sns_get(self, request: operations.SnsGetSnsGetRequest) -> operations.SnsGetSnsGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Sns Get
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/sns"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -206,22 +233,22 @@ class SDK:
 
     
     def sns_post_sns_post(self, request: operations.SnsPostSnsPostRequest) -> operations.SnsPostSnsPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Sns Post
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/sns"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -240,17 +267,18 @@ class SDK:
 
     
     def topic_topic_topic_name_get(self, request: operations.TopicTopicTopicNameGetRequest) -> operations.TopicTopicTopicNameGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Topic
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/topic/{topic_name}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -269,17 +297,18 @@ class SDK:
 
     
     def twilio_message_get_twilio_get(self, request: operations.TwilioMessageGetTwilioGetRequest) -> operations.TwilioMessageGetTwilioGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Twilio Message Get
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/twilio"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -298,22 +327,22 @@ class SDK:
 
     
     def twilio_message_post_twilio_post(self, request: operations.TwilioMessagePostTwilioPostRequest) -> operations.TwilioMessagePostTwilioPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Twilio Message Post
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/twilio"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

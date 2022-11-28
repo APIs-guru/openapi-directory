@@ -1,5 +1,7 @@
 package shared
 
+// AwsIamRoleDetails
+// Contains information about an IAM role, including all of the role's policies.
 type AwsIamRoleDetails struct {
 	AssumeRolePolicyDocument *string                       `json:"AssumeRolePolicyDocument,omitempty"`
 	AttachedManagedPolicies  []AwsIamAttachedManagedPolicy `json:"AttachedManagedPolicies,omitempty"`

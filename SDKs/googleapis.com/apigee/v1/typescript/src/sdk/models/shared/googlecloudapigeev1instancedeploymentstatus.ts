@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudApigeeV1InstanceDeploymentStatusDeployedRevision } from "./googlecloudapigeev1instancedeploymentstatusdeployedrevision";
 import { GoogleCloudApigeeV1InstanceDeploymentStatusDeployedRoute } from "./googlecloudapigeev1instancedeploymentstatusdeployedroute";
+
 
 
 // GoogleCloudApigeeV1InstanceDeploymentStatus
@@ -9,12 +9,12 @@ import { GoogleCloudApigeeV1InstanceDeploymentStatusDeployedRoute } from "./goog
  * The status of a deployment as reported by a single instance.
 **/
 export class GoogleCloudApigeeV1InstanceDeploymentStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deployedRevisions", elemType: shared.GoogleCloudApigeeV1InstanceDeploymentStatusDeployedRevision })
+  @SpeakeasyMetadata({ data: "json, name=deployedRevisions", elemType: GoogleCloudApigeeV1InstanceDeploymentStatusDeployedRevision })
   deployedRevisions?: GoogleCloudApigeeV1InstanceDeploymentStatusDeployedRevision[];
 
-  @Metadata({ data: "json, name=deployedRoutes", elemType: shared.GoogleCloudApigeeV1InstanceDeploymentStatusDeployedRoute })
+  @SpeakeasyMetadata({ data: "json, name=deployedRoutes", elemType: GoogleCloudApigeeV1InstanceDeploymentStatusDeployedRoute })
   deployedRoutes?: GoogleCloudApigeeV1InstanceDeploymentStatusDeployedRoute[];
 
-  @Metadata({ data: "json, name=instance" })
+  @SpeakeasyMetadata({ data: "json, name=instance" })
   instance?: string;
 }

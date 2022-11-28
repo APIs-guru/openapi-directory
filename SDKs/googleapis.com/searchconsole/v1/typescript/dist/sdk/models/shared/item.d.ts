@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { RichResultsIssue } from "./richresultsissue";
 /**
  * A specific rich result found on the page.

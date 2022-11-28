@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ListTagOptionsFilters } from "./listtagoptionsfilters";
 var ListTagOptionsInput = /** @class */ (function (_super) {
     __extends(ListTagOptionsInput, _super);
@@ -30,15 +30,15 @@ var ListTagOptionsInput = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Filters" }),
+        SpeakeasyMetadata({ data: "json, name=Filters" }),
         __metadata("design:type", ListTagOptionsFilters)
     ], ListTagOptionsInput.prototype, "filters", void 0);
     __decorate([
-        Metadata({ data: "json, name=PageSize" }),
+        SpeakeasyMetadata({ data: "json, name=PageSize" }),
         __metadata("design:type", Number)
     ], ListTagOptionsInput.prototype, "pageSize", void 0);
     __decorate([
-        Metadata({ data: "json, name=PageToken" }),
+        SpeakeasyMetadata({ data: "json, name=PageToken" }),
         __metadata("design:type", String)
     ], ListTagOptionsInput.prototype, "pageToken", void 0);
     return ListTagOptionsInput;

@@ -1,4 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
+
+
+// TrafficTargetInput
+/** 
+ * TrafficTarget holds a single entry of the routing table for a Route.
+**/
+export class TrafficTargetInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=configurationName" })
+  configurationName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=latestRevision" })
+  latestRevision?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=percent" })
+  percent?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=revisionName" })
+  revisionName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=tag" })
+  tag?: string;
+}
 
 
 // TrafficTarget
@@ -6,21 +29,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * TrafficTarget holds a single entry of the routing table for a Route.
 **/
 export class TrafficTarget extends SpeakeasyBase {
-  @Metadata({ data: "json, name=configurationName" })
+  @SpeakeasyMetadata({ data: "json, name=configurationName" })
   configurationName?: string;
 
-  @Metadata({ data: "json, name=latestRevision" })
+  @SpeakeasyMetadata({ data: "json, name=latestRevision" })
   latestRevision?: boolean;
 
-  @Metadata({ data: "json, name=percent" })
+  @SpeakeasyMetadata({ data: "json, name=percent" })
   percent?: number;
 
-  @Metadata({ data: "json, name=revisionName" })
+  @SpeakeasyMetadata({ data: "json, name=revisionName" })
   revisionName?: string;
 
-  @Metadata({ data: "json, name=tag" })
+  @SpeakeasyMetadata({ data: "json, name=tag" })
   tag?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }

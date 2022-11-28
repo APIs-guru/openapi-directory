@@ -1,62 +1,63 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ReferencesAirportsByAirportCodeGetPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=airportCode" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=airportCode" })
   airportCode: string;
 }
 
 
 export class ReferencesAirportsByAirportCodeGetQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=LHoperated" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=LHoperated" })
   lHoperated?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=lang" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lang" })
   lang?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: string;
 }
 
 
 export class ReferencesAirportsByAirportCodeGetHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Accept" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept" })
   accept: string;
 }
 
 
 export class ReferencesAirportsByAirportCodeGetSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   auth: shared.SchemeAuth;
 }
 
 
 export class ReferencesAirportsByAirportCodeGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ReferencesAirportsByAirportCodeGetPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ReferencesAirportsByAirportCodeGetQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: ReferencesAirportsByAirportCodeGetHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: ReferencesAirportsByAirportCodeGetSecurity;
 }
 
 
 export class ReferencesAirportsByAirportCodeGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   airportResponse?: shared.AirportResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

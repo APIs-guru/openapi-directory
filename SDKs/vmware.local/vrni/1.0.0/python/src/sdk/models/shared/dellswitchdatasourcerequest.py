@@ -1,19 +1,20 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import passwordcredentials
-from . import dellswitchtype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DellSwitchDataSourceRequest:
-    credentials: Optional[passwordcredentials.PasswordCredentials] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'credentials' }})
-    enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enabled' }})
-    fqdn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fqdn' }})
-    ip: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ip' }})
-    nickname: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nickname' }})
-    notes: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'notes' }})
-    proxy_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'proxy_id' }})
-    switch_type: Optional[dellswitchtype_enum.DellSwitchTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'switch_type' }})
+    nickname: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('nickname') }})
+    proxy_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('proxy_id') }})
+    credentials: Optional[PasswordCredentials] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('credentials') }})
+    enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('enabled') }})
+    fqdn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fqdn') }})
+    ip: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ip') }})
+    notes: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('notes') }})
+    switch_type: Optional[DellSwitchTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('switch_type') }})
     

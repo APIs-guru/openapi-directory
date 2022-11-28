@@ -1,5 +1,7 @@
 package shared
 
+// GooglePrivacyDlpV2ContentLocation
+// Precise location of the finding within a document, record, image, or metadata container.
 type GooglePrivacyDlpV2ContentLocation struct {
 	ContainerName      *string                             `json:"containerName,omitempty"`
 	ContainerTimestamp *string                             `json:"containerTimestamp,omitempty"`

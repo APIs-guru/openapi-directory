@@ -4,10 +4,8 @@ type PostServersIDActionsShutdownPathParams struct {
 	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type PostServersIDActionsShutdownRequest struct {
-	PathParams PostServersIDActionsShutdownPathParams
-}
-
+// PostServersIDActionsShutdownActionResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type PostServersIDActionsShutdownActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -39,6 +37,10 @@ type PostServersIDActionsShutdownActionResponseAction struct {
 
 type PostServersIDActionsShutdownActionResponse struct {
 	Action PostServersIDActionsShutdownActionResponseAction `json:"action"`
+}
+
+type PostServersIDActionsShutdownRequest struct {
+	PathParams PostServersIDActionsShutdownPathParams
 }
 
 type PostServersIDActionsShutdownResponse struct {

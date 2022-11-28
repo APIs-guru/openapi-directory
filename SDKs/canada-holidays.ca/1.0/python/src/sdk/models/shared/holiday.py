@@ -1,10 +1,12 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import province
+from sdk import utils
+from . import *
 
 class HolidayFederalEnum(str, Enum):
     ZERO = "0"
@@ -16,10 +18,14 @@ class HolidayFederalEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Holiday:
-    date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'date', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    federal: Optional[HolidayFederalEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'federal' }})
-    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    name_fr: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name Fr' }})
-    name_en: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nameEn' }})
-    provinces: Optional[List[province.Province]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'provinces' }})
+    r"""Holiday
+    A Canadian holiday. Includes a name, date, and a list of regions that observe this holiday.
+    """
+    
+    date_: Optional[date] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('date'), 'encoder': utils.dateisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    federal: Optional[HolidayFederalEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('federal') }})
+    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    name_fr: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name Fr') }})
+    name_en: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nameEn') }})
+    provinces: Optional[List[Province]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('provinces') }})
     

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudAssuredworkloadsV1Violation } from "./googlecloudassuredworkloadsv1violation";
+
 
 
 // GoogleCloudAssuredworkloadsV1ListViolationsResponse
@@ -8,9 +8,9 @@ import { GoogleCloudAssuredworkloadsV1Violation } from "./googlecloudassuredwork
  * Response of ListViolations endpoint.
 **/
 export class GoogleCloudAssuredworkloadsV1ListViolationsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=violations", elemType: shared.GoogleCloudAssuredworkloadsV1Violation })
+  @SpeakeasyMetadata({ data: "json, name=violations", elemType: GoogleCloudAssuredworkloadsV1Violation })
   violations?: GoogleCloudAssuredworkloadsV1Violation[];
 }

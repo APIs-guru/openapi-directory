@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { EbsInstanceBlockDeviceSpecification } from "./ebsinstanceblockdevicespecification";
 /**
  * Defines block device mappings for the instance used to configure your image.

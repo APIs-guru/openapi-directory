@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class GamesAchievementsReadPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GamesAchievementsReadRequest:
-    path_params: GamesAchievementsReadPathParams = field(default=None)
+    path_params: GamesAchievementsReadPathParams = field()
     
 
 @dataclass
 class GamesAchievementsReadResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     parent_achievement: Optional[shared.ParentAchievement] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DfareportingCreativeFieldValuesInsertPathParams:
-    creative_field_id: str = field(default=None, metadata={'path_param': { 'field_name': 'creativeFieldId', 'style': 'simple', 'explode': False }})
-    profile_id: str = field(default=None, metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
+    creative_field_id: str = field(metadata={'path_param': { 'field_name': 'creativeFieldId', 'style': 'simple', 'explode': False }})
+    profile_id: str = field(metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +27,21 @@ class DfareportingCreativeFieldValuesInsertQueryParams:
 
 @dataclass
 class DfareportingCreativeFieldValuesInsertSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DfareportingCreativeFieldValuesInsertRequest:
-    path_params: DfareportingCreativeFieldValuesInsertPathParams = field(default=None)
-    query_params: DfareportingCreativeFieldValuesInsertQueryParams = field(default=None)
+    path_params: DfareportingCreativeFieldValuesInsertPathParams = field()
+    query_params: DfareportingCreativeFieldValuesInsertQueryParams = field()
+    security: DfareportingCreativeFieldValuesInsertSecurity = field()
     request: Optional[shared.CreativeFieldValue] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DfareportingCreativeFieldValuesInsertSecurity = field(default=None)
     
 
 @dataclass
 class DfareportingCreativeFieldValuesInsertResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     creative_field_value: Optional[shared.CreativeFieldValue] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -11,12 +11,12 @@ class GetStatisticsCollectionQueryParams:
 
 @dataclass
 class GetStatisticsCollectionRequest:
-    query_params: GetStatisticsCollectionQueryParams = field(default=None)
+    query_params: GetStatisticsCollectionQueryParams = field()
     
 
 @dataclass
 class GetStatisticsCollectionResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     zone_stats: Optional[List[shared.ZoneStats]] = field(default=None)
     

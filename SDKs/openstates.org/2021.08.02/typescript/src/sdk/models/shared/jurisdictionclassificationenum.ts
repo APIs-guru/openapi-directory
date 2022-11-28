@@ -1,7 +1,8 @@
 
 
+
 export enum JurisdictionClassificationEnum {
-    State = "state"
-,    Municipality = "municipality"
-,    Country = "country"
+    State = "state",
+    Municipality = "municipality",
+    Country = "country"
 }

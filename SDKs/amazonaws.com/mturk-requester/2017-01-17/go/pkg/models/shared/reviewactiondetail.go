@@ -4,6 +4,9 @@ import (
 	"time"
 )
 
+// ReviewActionDetail
+//
+//	Both the AssignmentReviewReport and the HITReviewReport elements contains the ReviewActionDetail data structure. This structure is returned multiple times for each action specified in the Review Policy.
 type ReviewActionDetail struct {
 	ActionID     *string                 `json:"ActionId,omitempty"`
 	ActionName   *string                 `json:"ActionName,omitempty"`

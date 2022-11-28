@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DirectoryConnectSettingsDescription
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains information about an AD Connector directory.
 **/
 export class DirectoryConnectSettingsDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AvailabilityZones" })
+  @SpeakeasyMetadata({ data: "json, name=AvailabilityZones" })
   availabilityZones?: string[];
 
-  @Metadata({ data: "json, name=ConnectIps" })
+  @SpeakeasyMetadata({ data: "json, name=ConnectIps" })
   connectIps?: string[];
 
-  @Metadata({ data: "json, name=CustomerUserName" })
+  @SpeakeasyMetadata({ data: "json, name=CustomerUserName" })
   customerUserName?: string;
 
-  @Metadata({ data: "json, name=SecurityGroupId" })
+  @SpeakeasyMetadata({ data: "json, name=SecurityGroupId" })
   securityGroupId?: string;
 
-  @Metadata({ data: "json, name=SubnetIds" })
+  @SpeakeasyMetadata({ data: "json, name=SubnetIds" })
   subnetIds?: string[];
 
-  @Metadata({ data: "json, name=VpcId" })
+  @SpeakeasyMetadata({ data: "json, name=VpcId" })
   vpcId?: string;
 }

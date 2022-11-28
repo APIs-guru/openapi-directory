@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import tablecelllocation
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class InsertTableColumnRequest:
-    insert_right: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'insertRight' }})
-    table_cell_location: Optional[tablecelllocation.TableCellLocation] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tableCellLocation' }})
+    r"""InsertTableColumnRequest
+    Inserts an empty column into a table.
+    """
+    
+    insert_right: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('insertRight') }})
+    table_cell_location: Optional[TableCellLocation] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tableCellLocation') }})
     

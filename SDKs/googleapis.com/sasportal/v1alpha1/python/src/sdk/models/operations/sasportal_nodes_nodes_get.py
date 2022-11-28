@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class SasportalNodesNodesGetPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class SasportalNodesNodesGetQueryParams:
 
 @dataclass
 class SasportalNodesNodesGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class SasportalNodesNodesGetRequest:
-    path_params: SasportalNodesNodesGetPathParams = field(default=None)
-    query_params: SasportalNodesNodesGetQueryParams = field(default=None)
-    security: SasportalNodesNodesGetSecurity = field(default=None)
+    path_params: SasportalNodesNodesGetPathParams = field()
+    query_params: SasportalNodesNodesGetQueryParams = field()
+    security: SasportalNodesNodesGetSecurity = field()
     
 
 @dataclass
 class SasportalNodesNodesGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     sas_portal_node: Optional[shared.SasPortalNode] = field(default=None)
-    status_code: int = field(default=None)
     

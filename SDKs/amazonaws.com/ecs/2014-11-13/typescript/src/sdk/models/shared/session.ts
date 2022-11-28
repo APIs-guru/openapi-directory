@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Session
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The details of the execute command session.
 **/
 export class Session extends SpeakeasyBase {
-  @Metadata({ data: "json, name=sessionId" })
+  @SpeakeasyMetadata({ data: "json, name=sessionId" })
   sessionId?: string;
 
-  @Metadata({ data: "json, name=streamUrl" })
+  @SpeakeasyMetadata({ data: "json, name=streamUrl" })
   streamUrl?: string;
 
-  @Metadata({ data: "json, name=tokenValue" })
+  @SpeakeasyMetadata({ data: "json, name=tokenValue" })
   tokenValue?: string;
 }

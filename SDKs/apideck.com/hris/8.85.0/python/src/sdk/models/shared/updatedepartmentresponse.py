@@ -1,0 +1,19 @@
+from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from dataclasses_json import dataclass_json
+from sdk import utils
+from . import *
+
+
+@dataclass_json
+@dataclass
+class UpdateDepartmentResponse:
+    data: UnifiedID = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
+    operation: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('operation') }})
+    resource: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('resource') }})
+    service: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('service') }})
+    status: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    status_code: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status_code') }})
+    

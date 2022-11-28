@@ -19,11 +19,6 @@ type PostSavedQueryImportSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type PostSavedQueryImportRequest struct {
-	Request  PostSavedQueryImportRequestBody `request:"mediaType=multipart/form-data"`
-	Security PostSavedQueryImportSecurity
-}
-
 type PostSavedQueryImport200ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
 }
@@ -42,6 +37,11 @@ type PostSavedQueryImport422ApplicationJSON struct {
 
 type PostSavedQueryImport500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type PostSavedQueryImportRequest struct {
+	Request  PostSavedQueryImportRequestBody `request:"mediaType=multipart/form-data"`
+	Security PostSavedQueryImportSecurity
 }
 
 type PostSavedQueryImportResponse struct {

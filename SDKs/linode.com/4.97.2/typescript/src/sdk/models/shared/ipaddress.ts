@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum IpAddressTypeEnum {
-    Ipv4 = "ipv4"
-,    Ipv6 = "ipv6"
-,    Ipv6Pool = "ipv6/pool"
-,    Ipv6Range = "ipv6/range"
+    Ipv4 = "ipv4",
+    Ipv6 = "ipv6",
+    Ipv6Pool = "ipv6/pool",
+    Ipv6Range = "ipv6/range"
 }
 
 
@@ -14,30 +15,41 @@ export enum IpAddressTypeEnum {
  * 
 **/
 export class IpAddress extends SpeakeasyBase {
-  @Metadata({ data: "json, name=address" })
+  @SpeakeasyMetadata({ data: "json, name=address" })
   address?: string;
 
-  @Metadata({ data: "json, name=gateway" })
+  @SpeakeasyMetadata({ data: "json, name=gateway" })
   gateway?: string;
 
-  @Metadata({ data: "json, name=linode_id" })
+  @SpeakeasyMetadata({ data: "json, name=linode_id" })
   linodeId?: number;
 
-  @Metadata({ data: "json, name=prefix" })
+  @SpeakeasyMetadata({ data: "json, name=prefix" })
   prefix?: number;
 
-  @Metadata({ data: "json, name=public" })
+  @SpeakeasyMetadata({ data: "json, name=public" })
   public?: boolean;
 
-  @Metadata({ data: "json, name=rdns" })
+  @SpeakeasyMetadata({ data: "json, name=rdns" })
   rdns?: string;
 
-  @Metadata({ data: "json, name=region" })
+  @SpeakeasyMetadata({ data: "json, name=region" })
   region?: string;
 
-  @Metadata({ data: "json, name=subnet_mask" })
+  @SpeakeasyMetadata({ data: "json, name=subnet_mask" })
   subnetMask?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: IpAddressTypeEnum;
+}
+
+
+// IpAddressInput
+/** 
+ * An IP address that exists in Linode's system, either IPv4 or IPv6.
+ * 
+**/
+export class IpAddressInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=rdns" })
+  rdns?: string;
 }

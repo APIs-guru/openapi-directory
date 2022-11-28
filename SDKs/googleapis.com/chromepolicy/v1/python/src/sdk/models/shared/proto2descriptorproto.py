@@ -1,18 +1,21 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import proto2enumdescriptorproto
-from . import proto2fielddescriptorproto
-from . import proto2descriptorproto
-from . import proto2oneofdescriptorproto
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Proto2DescriptorProto:
-    enum_type: Optional[List[proto2enumdescriptorproto.Proto2EnumDescriptorProto]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enumType' }})
-    field: Optional[List[proto2fielddescriptorproto.Proto2FieldDescriptorProto]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'field' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    nested_type: Optional[List[proto2descriptorproto.Proto2DescriptorProto]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nestedType' }})
-    oneof_decl: Optional[List[proto2oneofdescriptorproto.Proto2OneofDescriptorProto]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'oneofDecl' }})
+    r"""Proto2DescriptorProto
+    Describes a message type.
+    """
+    
+    enum_type: Optional[List[Proto2EnumDescriptorProto]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('enumType') }})
+    field: Optional[List[Proto2FieldDescriptorProto]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('field') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    nested_type: Optional[List[Proto2DescriptorProto]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nestedType') }})
+    oneof_decl: Optional[List[Proto2OneofDescriptorProto]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('oneofDecl') }})
     

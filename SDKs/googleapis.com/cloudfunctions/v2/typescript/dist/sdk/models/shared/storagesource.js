@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // StorageSource
 /**
  * Location of the source in an archive file in Google Cloud Storage.
@@ -33,15 +33,15 @@ var StorageSource = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=bucket" }),
+        SpeakeasyMetadata({ data: "json, name=bucket" }),
         __metadata("design:type", String)
     ], StorageSource.prototype, "bucket", void 0);
     __decorate([
-        Metadata({ data: "json, name=generation" }),
+        SpeakeasyMetadata({ data: "json, name=generation" }),
         __metadata("design:type", String)
     ], StorageSource.prototype, "generation", void 0);
     __decorate([
-        Metadata({ data: "json, name=object" }),
+        SpeakeasyMetadata({ data: "json, name=object" }),
         __metadata("design:type", String)
     ], StorageSource.prototype, "object", void 0);
     return StorageSource;

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActionDescription } from "./actiondescription";
+
 
 export enum ListActionsResponseStatusEnum {
     Success = "success"
@@ -8,15 +8,15 @@ export enum ListActionsResponseStatusEnum {
 
 
 export class ListActionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=api" })
+  @SpeakeasyMetadata({ data: "json, name=api" })
   api: string;
 
-  @Metadata({ data: "json, name=method" })
+  @SpeakeasyMetadata({ data: "json, name=method" })
   method: string;
 
-  @Metadata({ data: "json, name=response", elemType: shared.ActionDescription })
+  @SpeakeasyMetadata({ data: "json, name=response", elemType: ActionDescription })
   response: ActionDescription[];
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: ListActionsResponseStatusEnum;
 }

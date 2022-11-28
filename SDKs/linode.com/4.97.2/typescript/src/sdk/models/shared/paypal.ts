@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PayPal
@@ -7,12 +8,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * 
 **/
 export class PayPal extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cancel_url" })
+  @SpeakeasyMetadata({ data: "json, name=cancel_url" })
   cancelUrl: string;
 
-  @Metadata({ data: "json, name=redirect_url" })
+  @SpeakeasyMetadata({ data: "json, name=redirect_url" })
   redirectUrl: string;
 
-  @Metadata({ data: "json, name=usd" })
+  @SpeakeasyMetadata({ data: "json, name=usd" })
   usd: string;
 }

@@ -1,7 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import eventperiodrange
+from sdk import utils
+from . import *
 
 class EventBatchRecordFailureFailureCauseEnum(str, Enum):
     EVENT_FAILURE_CAUSE_UNSPECIFIED = "EVENT_FAILURE_CAUSE_UNSPECIFIED"
@@ -16,7 +21,11 @@ class EventBatchRecordFailureFailureCauseEnum(str, Enum):
 @dataclass_json
 @dataclass
 class EventBatchRecordFailure:
-    failure_cause: Optional[EventBatchRecordFailureFailureCauseEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'failureCause' }})
-    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
-    range: Optional[eventperiodrange.EventPeriodRange] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'range' }})
+    r"""EventBatchRecordFailure
+    A batch update failure resource.
+    """
+    
+    failure_cause: Optional[EventBatchRecordFailureFailureCauseEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('failureCause') }})
+    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
+    range: Optional[EventPeriodRange] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('range') }})
     

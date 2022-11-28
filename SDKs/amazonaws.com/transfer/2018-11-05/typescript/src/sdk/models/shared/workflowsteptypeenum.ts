@@ -1,8 +1,9 @@
 
 
+
 export enum WorkflowStepTypeEnum {
-    Copy = "COPY"
-,    Custom = "CUSTOM"
-,    Tag = "TAG"
-,    Delete = "DELETE"
+    Copy = "COPY",
+    Custom = "CUSTOM",
+    Tag = "TAG",
+    Delete = "DELETE"
 }

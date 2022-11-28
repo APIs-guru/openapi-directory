@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ActionNotificationExportEntity
@@ -6,42 +7,42 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Show Action Notification Export
 **/
 export class ActionNotificationExportEntity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=end_at" })
+  @SpeakeasyMetadata({ data: "json, name=end_at" })
   endAt?: Date;
 
-  @Metadata({ data: "json, name=export_version" })
+  @SpeakeasyMetadata({ data: "json, name=export_version" })
   exportVersion?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=query_folder" })
+  @SpeakeasyMetadata({ data: "json, name=query_folder" })
   queryFolder?: string;
 
-  @Metadata({ data: "json, name=query_message" })
+  @SpeakeasyMetadata({ data: "json, name=query_message" })
   queryMessage?: string;
 
-  @Metadata({ data: "json, name=query_path" })
+  @SpeakeasyMetadata({ data: "json, name=query_path" })
   queryPath?: string;
 
-  @Metadata({ data: "json, name=query_request_method" })
+  @SpeakeasyMetadata({ data: "json, name=query_request_method" })
   queryRequestMethod?: string;
 
-  @Metadata({ data: "json, name=query_request_url" })
+  @SpeakeasyMetadata({ data: "json, name=query_request_url" })
   queryRequestUrl?: string;
 
-  @Metadata({ data: "json, name=query_status" })
+  @SpeakeasyMetadata({ data: "json, name=query_status" })
   queryStatus?: string;
 
-  @Metadata({ data: "json, name=query_success" })
+  @SpeakeasyMetadata({ data: "json, name=query_success" })
   querySuccess?: boolean;
 
-  @Metadata({ data: "json, name=results_url" })
+  @SpeakeasyMetadata({ data: "json, name=results_url" })
   resultsUrl?: string;
 
-  @Metadata({ data: "json, name=start_at" })
+  @SpeakeasyMetadata({ data: "json, name=start_at" })
   startAt?: Date;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 }

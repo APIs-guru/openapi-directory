@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum UpdateSystemModelsPackageTypeIDtoBundleSubscriptionTypeEnum {
-    Required = "Required"
-,    IncludeByDefault = "IncludeByDefault"
-,    ExcludeByDefault = "ExcludeByDefault"
+    Required = "Required",
+    IncludeByDefault = "IncludeByDefault",
+    ExcludeByDefault = "ExcludeByDefault"
 }
 
 
 export class UpdateSystemModelsPackageTypeIDtoBundle extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BundleID, form, name=BundleID;" })
+  @SpeakeasyMetadata({ data: "json, name=BundleID, form, name=BundleID;" })
   bundleId: string;
 
-  @Metadata({ data: "json, name=PackageTypeID, form, name=PackageTypeID;" })
+  @SpeakeasyMetadata({ data: "json, name=PackageTypeID, form, name=PackageTypeID;" })
   packageTypeId: string;
 
-  @Metadata({ data: "json, name=PackageVersion, form, name=PackageVersion;" })
+  @SpeakeasyMetadata({ data: "json, name=PackageVersion, form, name=PackageVersion;" })
   packageVersion: number;
 
-  @Metadata({ data: "json, name=Priority, form, name=Priority;" })
+  @SpeakeasyMetadata({ data: "json, name=Priority, form, name=Priority;" })
   priority: number;
 
-  @Metadata({ data: "json, name=SubscriptionType, form, name=SubscriptionType;" })
+  @SpeakeasyMetadata({ data: "json, name=SubscriptionType, form, name=SubscriptionType;" })
   subscriptionType?: UpdateSystemModelsPackageTypeIDtoBundleSubscriptionTypeEnum;
 }

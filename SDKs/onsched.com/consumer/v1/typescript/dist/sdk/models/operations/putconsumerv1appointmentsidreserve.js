@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PutConsumerV1AppointmentsIdReservePathParams = /** @class */ (function (_super) {
     __extends(PutConsumerV1AppointmentsIdReservePathParams, _super);
@@ -30,7 +30,7 @@ var PutConsumerV1AppointmentsIdReservePathParams = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], PutConsumerV1AppointmentsIdReservePathParams.prototype, "id", void 0);
     return PutConsumerV1AppointmentsIdReservePathParams;
@@ -42,7 +42,7 @@ var PutConsumerV1AppointmentsIdReserveQueryParams = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sendNotifications" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sendNotifications" }),
         __metadata("design:type", Boolean)
     ], PutConsumerV1AppointmentsIdReserveQueryParams.prototype, "sendNotifications", void 0);
     return PutConsumerV1AppointmentsIdReserveQueryParams;
@@ -54,19 +54,19 @@ var PutConsumerV1AppointmentsIdReserveRequests = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/*+json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/*+json" }),
         __metadata("design:type", shared.AppointmentReserveModel)
     ], PutConsumerV1AppointmentsIdReserveRequests.prototype, "appointmentReserveModel", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.AppointmentReserveModel)
     ], PutConsumerV1AppointmentsIdReserveRequests.prototype, "appointmentReserveModel1", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json-patch+json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json-patch+json" }),
         __metadata("design:type", shared.AppointmentReserveModel)
     ], PutConsumerV1AppointmentsIdReserveRequests.prototype, "appointmentReserveModel2", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=text/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=text/json" }),
         __metadata("design:type", shared.AppointmentReserveModel)
     ], PutConsumerV1AppointmentsIdReserveRequests.prototype, "appointmentReserveModel3", void 0);
     return PutConsumerV1AppointmentsIdReserveRequests;
@@ -78,15 +78,15 @@ var PutConsumerV1AppointmentsIdReserveRequest = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PutConsumerV1AppointmentsIdReservePathParams)
     ], PutConsumerV1AppointmentsIdReserveRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PutConsumerV1AppointmentsIdReserveQueryParams)
     ], PutConsumerV1AppointmentsIdReserveRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PutConsumerV1AppointmentsIdReserveRequests)
     ], PutConsumerV1AppointmentsIdReserveRequest.prototype, "request", void 0);
     return PutConsumerV1AppointmentsIdReserveRequest;
@@ -98,11 +98,11 @@ var PutConsumerV1AppointmentsIdReserveResponse = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PutConsumerV1AppointmentsIdReserveResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PutConsumerV1AppointmentsIdReserveResponse.prototype, "statusCode", void 0);
     return PutConsumerV1AppointmentsIdReserveResponse;

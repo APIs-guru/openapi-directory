@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleAnalyticsAdminV1alphaFirebaseLink
@@ -6,12 +7,22 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A link between a GA4 property and a Firebase project.
 **/
 export class GoogleAnalyticsAdminV1alphaFirebaseLink extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=project" })
+  @SpeakeasyMetadata({ data: "json, name=project" })
+  project?: string;
+}
+
+
+// GoogleAnalyticsAdminV1alphaFirebaseLinkInput
+/** 
+ * A link between a GA4 property and a Firebase project.
+**/
+export class GoogleAnalyticsAdminV1alphaFirebaseLinkInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=project" })
   project?: string;
 }

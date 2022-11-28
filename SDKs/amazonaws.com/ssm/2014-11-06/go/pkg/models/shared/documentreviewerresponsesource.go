@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// DocumentReviewerResponseSource
+// Information about a reviewer's response to a document review request.
 type DocumentReviewerResponseSource struct {
 	Comment      []DocumentReviewCommentSource `json:"Comment,omitempty"`
 	CreateTime   *time.Time                    `json:"CreateTime,omitempty"`

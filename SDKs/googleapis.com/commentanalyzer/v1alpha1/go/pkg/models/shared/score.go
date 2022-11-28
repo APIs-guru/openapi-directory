@@ -10,6 +10,8 @@ const (
 	ScoreTypeEnumRaw                  ScoreTypeEnum = "RAW"
 )
 
+// Score
+// Analysis scores are described by a value and a ScoreType.
 type Score struct {
 	Type  *ScoreTypeEnum `json:"type,omitempty"`
 	Value *float32       `json:"value,omitempty"`

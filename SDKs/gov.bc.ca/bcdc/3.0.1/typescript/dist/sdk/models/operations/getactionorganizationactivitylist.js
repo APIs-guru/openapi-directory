@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetActionOrganizationActivityListQueryParams = /** @class */ (function (_super) {
     __extends(GetActionOrganizationActivityListQueryParams, _super);
     function GetActionOrganizationActivityListQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=id" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=id" }),
         __metadata("design:type", String)
     ], GetActionOrganizationActivityListQueryParams.prototype, "id", void 0);
     return GetActionOrganizationActivityListQueryParams;
@@ -41,7 +41,7 @@ var GetActionOrganizationActivityListRequest = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetActionOrganizationActivityListQueryParams)
     ], GetActionOrganizationActivityListRequest.prototype, "queryParams", void 0);
     return GetActionOrganizationActivityListRequest;
@@ -53,11 +53,11 @@ var GetActionOrganizationActivityListResponse = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetActionOrganizationActivityListResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetActionOrganizationActivityListResponse.prototype, "statusCode", void 0);
     return GetActionOrganizationActivityListResponse;

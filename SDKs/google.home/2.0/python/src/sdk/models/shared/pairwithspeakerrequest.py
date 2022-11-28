@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class PairwithSpeakerRequest:
-    connect: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connect' }})
-    mac_address: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mac_address' }})
-    profile: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'profile' }})
+    connect: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('connect') }})
+    mac_address: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('mac_address') }})
+    profile: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('profile') }})
     

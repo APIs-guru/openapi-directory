@@ -1,5 +1,7 @@
 package shared
 
+// InventoryOsInfo
+// Operating system information for the VM.
 type InventoryOsInfo struct {
 	Architecture         *string `json:"architecture,omitempty"`
 	Hostname             *string `json:"hostname,omitempty"`

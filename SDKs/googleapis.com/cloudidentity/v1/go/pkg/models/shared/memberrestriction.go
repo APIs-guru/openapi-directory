@@ -1,6 +1,7 @@
 package shared
 
+// MemberRestriction
+// The definition of MemberRestriction
 type MemberRestriction struct {
-	Evaluation *RestrictionEvaluation `json:"evaluation,omitempty"`
-	Query      *string                `json:"query,omitempty"`
+	Query *string `json:"query,omitempty"`
 }

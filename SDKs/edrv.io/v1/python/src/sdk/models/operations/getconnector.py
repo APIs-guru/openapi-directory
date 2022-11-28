@@ -4,7 +4,7 @@ from typing import Optional
 
 @dataclass
 class GetConnectorPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,12 +16,12 @@ class GetConnectorQueryParams:
 
 @dataclass
 class GetConnectorRequest:
-    path_params: GetConnectorPathParams = field(default=None)
-    query_params: GetConnectorQueryParams = field(default=None)
+    path_params: GetConnectorPathParams = field()
+    query_params: GetConnectorQueryParams = field()
     
 
 @dataclass
 class GetConnectorResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

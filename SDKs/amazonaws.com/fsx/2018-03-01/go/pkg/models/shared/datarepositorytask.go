@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// DataRepositoryTask
+// A description of the data repository task. You use data repository tasks to perform bulk transfer operations between your Amazon FSx file system and its linked data repository.
 type DataRepositoryTask struct {
 	CreationTime   time.Time                         `json:"CreationTime"`
 	EndTime        *time.Time                        `json:"EndTime,omitempty"`

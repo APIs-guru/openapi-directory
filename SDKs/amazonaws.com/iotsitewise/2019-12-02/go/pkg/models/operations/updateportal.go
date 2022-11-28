@@ -18,11 +18,15 @@ type UpdatePortalHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdatePortalRequestBodyAlarms
+// Contains the configuration information of an alarm created in an IoT SiteWise Monitor portal. You can use the alarm to monitor an asset property and get notified when the asset property value is outside a specified range. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/appguide/monitor-alarms.html">Monitoring with alarms</a> in the <i>IoT SiteWise Application Guide</i>.
 type UpdatePortalRequestBodyAlarms struct {
 	AlarmRoleArn          *string `json:"alarmRoleArn,omitempty"`
 	NotificationLambdaArn *string `json:"notificationLambdaArn,omitempty"`
 }
 
+// UpdatePortalRequestBodyPortalLogoImage
+// <p>Contains an image that is one of the following:</p> <ul> <li> <p>An image file. Choose this option to upload a new image.</p> </li> <li> <p>The ID of an existing image. Choose this option to keep an existing image.</p> </li> </ul>
 type UpdatePortalRequestBodyPortalLogoImage struct {
 	File *shared.ImageFile `json:"file,omitempty"`
 	ID   *string           `json:"id,omitempty"`

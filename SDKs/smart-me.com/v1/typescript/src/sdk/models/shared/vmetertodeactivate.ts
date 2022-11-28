@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // VMeterToDeactivate
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Deactivates a virtual Meter
 **/
 export class VMeterToDeactivate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ID, form, name=ID;" })
+  @SpeakeasyMetadata({ data: "json, name=ID, form, name=ID;" })
   id?: string;
 }

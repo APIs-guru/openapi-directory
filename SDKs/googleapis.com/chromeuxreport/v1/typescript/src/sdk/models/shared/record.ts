@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CollectionPeriod } from "./collectionperiod";
 import { Key } from "./key";
 import { Metric } from "./metric";
+
 
 
 // Record
@@ -10,12 +10,12 @@ import { Metric } from "./metric";
  * Record is a single Chrome UX report data record. It contains use experience statistics for a single url pattern and set of dimensions.
 **/
 export class Record extends SpeakeasyBase {
-  @Metadata({ data: "json, name=collectionPeriod" })
+  @SpeakeasyMetadata({ data: "json, name=collectionPeriod" })
   collectionPeriod?: CollectionPeriod;
 
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: Key;
 
-  @Metadata({ data: "json, name=metrics", elemType: shared.Metric })
+  @SpeakeasyMetadata({ data: "json, name=metrics", elemType: Metric })
   metrics?: Map<string, Metric>;
 }

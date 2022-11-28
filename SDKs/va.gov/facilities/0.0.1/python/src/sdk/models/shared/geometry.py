@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GeometryTypeEnum(str, Enum):
     POINT = "Point"
@@ -9,6 +11,6 @@ class GeometryTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Geometry:
-    coordinates: Optional[List[float]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'coordinates' }})
-    type: GeometryTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    type: GeometryTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    coordinates: Optional[List[float]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('coordinates') }})
     

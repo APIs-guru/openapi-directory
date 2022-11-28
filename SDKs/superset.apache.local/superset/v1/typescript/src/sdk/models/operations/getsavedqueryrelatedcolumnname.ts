@@ -1,80 +1,81 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetSavedQueryRelatedColumnNamePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=column_name" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=column_name" })
   columnName: string;
 }
 
 
 export class GetSavedQueryRelatedColumnNameQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, serialization=json;name=q" })
+  @SpeakeasyMetadata({ data: "queryParam, serialization=json;name=q" })
   q?: shared.GetRelatedSchema;
 }
 
 
 export class GetSavedQueryRelatedColumnNameSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   jwt: shared.SchemeJwt;
 }
 
 
-export class GetSavedQueryRelatedColumnNameRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetSavedQueryRelatedColumnNamePathParams;
-
-  @Metadata()
-  queryParams: GetSavedQueryRelatedColumnNameQueryParams;
-
-  @Metadata()
-  security: GetSavedQueryRelatedColumnNameSecurity;
-}
-
-
 export class GetSavedQueryRelatedColumnName400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetSavedQueryRelatedColumnName401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetSavedQueryRelatedColumnName404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetSavedQueryRelatedColumnName500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class GetSavedQueryRelatedColumnNameRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetSavedQueryRelatedColumnNamePathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: GetSavedQueryRelatedColumnNameQueryParams;
+
+  @SpeakeasyMetadata()
+  security: GetSavedQueryRelatedColumnNameSecurity;
+}
+
+
 export class GetSavedQueryRelatedColumnNameResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getSavedQueryRelatedColumnName400ApplicationJsonObject?: GetSavedQueryRelatedColumnName400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getSavedQueryRelatedColumnName401ApplicationJsonObject?: GetSavedQueryRelatedColumnName401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getSavedQueryRelatedColumnName404ApplicationJsonObject?: GetSavedQueryRelatedColumnName404ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getSavedQueryRelatedColumnName500ApplicationJsonObject?: GetSavedQueryRelatedColumnName500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   relatedResponseSchema?: shared.RelatedResponseSchema;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,33 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Dataset } from "./dataset";
 import { Session } from "./session";
 
+
 export enum AggregateBucketTypeEnum {
-    Unknown = "unknown"
-,    Time = "time"
-,    Session = "session"
-,    ActivityType = "activityType"
-,    ActivitySegment = "activitySegment"
+    Unknown = "unknown",
+    Time = "time",
+    Session = "session",
+    ActivityType = "activityType",
+    ActivitySegment = "activitySegment"
 }
 
 
 export class AggregateBucket extends SpeakeasyBase {
-  @Metadata({ data: "json, name=activity" })
+  @SpeakeasyMetadata({ data: "json, name=activity" })
   activity?: number;
 
-  @Metadata({ data: "json, name=dataset", elemType: shared.Dataset })
+  @SpeakeasyMetadata({ data: "json, name=dataset", elemType: Dataset })
   dataset?: Dataset[];
 
-  @Metadata({ data: "json, name=endTimeMillis" })
+  @SpeakeasyMetadata({ data: "json, name=endTimeMillis" })
   endTimeMillis?: string;
 
-  @Metadata({ data: "json, name=session" })
+  @SpeakeasyMetadata({ data: "json, name=session" })
   session?: Session;
 
-  @Metadata({ data: "json, name=startTimeMillis" })
+  @SpeakeasyMetadata({ data: "json, name=startTimeMillis" })
   startTimeMillis?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: AggregateBucketTypeEnum;
 }

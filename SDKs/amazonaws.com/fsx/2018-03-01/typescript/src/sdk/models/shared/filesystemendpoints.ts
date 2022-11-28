@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FileSystemEndpoint } from "./filesystemendpoint";
-import { FileSystemEndpoint } from "./filesystemendpoint";
+
 
 
 // FileSystemEndpoints
@@ -8,9 +8,9 @@ import { FileSystemEndpoint } from "./filesystemendpoint";
  * An Amazon FSx for NetApp ONTAP file system has the following endpoints that are used to access data or to manage the file system using the NetApp ONTAP CLI, REST API, or NetApp SnapMirror.
 **/
 export class FileSystemEndpoints extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Intercluster" })
+  @SpeakeasyMetadata({ data: "json, name=Intercluster" })
   intercluster?: FileSystemEndpoint;
 
-  @Metadata({ data: "json, name=Management" })
+  @SpeakeasyMetadata({ data: "json, name=Management" })
   management?: FileSystemEndpoint;
 }

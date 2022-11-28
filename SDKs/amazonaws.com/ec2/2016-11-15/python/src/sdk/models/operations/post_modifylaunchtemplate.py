@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostModifyLaunchTemplateActionEnum(str, Enum):
     MODIFY_LAUNCH_TEMPLATE = "ModifyLaunchTemplate"
@@ -10,8 +14,8 @@ class PostModifyLaunchTemplateVersionEnum(str, Enum):
 
 @dataclass
 class PostModifyLaunchTemplateQueryParams:
-    action: PostModifyLaunchTemplateActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostModifyLaunchTemplateVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostModifyLaunchTemplateActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostModifyLaunchTemplateVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostModifyLaunchTemplateHeaders:
 
 @dataclass
 class PostModifyLaunchTemplateRequest:
-    query_params: PostModifyLaunchTemplateQueryParams = field(default=None)
-    headers: PostModifyLaunchTemplateHeaders = field(default=None)
+    headers: PostModifyLaunchTemplateHeaders = field()
+    query_params: PostModifyLaunchTemplateQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostModifyLaunchTemplateResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

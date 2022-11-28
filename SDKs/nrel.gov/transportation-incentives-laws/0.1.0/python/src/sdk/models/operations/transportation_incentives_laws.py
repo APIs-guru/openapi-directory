@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 
 class TransportationIncentivesLawsOutputFormatEnum(str, Enum):
     JSON = "json"
@@ -9,12 +10,12 @@ class TransportationIncentivesLawsOutputFormatEnum(str, Enum):
 
 @dataclass
 class TransportationIncentivesLawsPathParams:
-    output_format: TransportationIncentivesLawsOutputFormatEnum = field(default=None, metadata={'path_param': { 'field_name': 'output_format', 'style': 'simple', 'explode': False }})
+    output_format: TransportationIncentivesLawsOutputFormatEnum = field(metadata={'path_param': { 'field_name': 'output_format', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class TransportationIncentivesLawsQueryParams:
-    api_key: str = field(default=None, metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
+    api_key: str = field(metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
     expired: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'expired', 'style': 'form', 'explode': True }})
     incentive_type: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'incentive_type', 'style': 'form', 'explode': True }})
     jurisdiction: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'jurisdiction', 'style': 'form', 'explode': True }})
@@ -31,13 +32,13 @@ class TransportationIncentivesLawsQueryParams:
 
 @dataclass
 class TransportationIncentivesLawsRequest:
-    path_params: TransportationIncentivesLawsPathParams = field(default=None)
-    query_params: TransportationIncentivesLawsQueryParams = field(default=None)
+    path_params: TransportationIncentivesLawsPathParams = field()
+    query_params: TransportationIncentivesLawsQueryParams = field()
     
 
 @dataclass
 class TransportationIncentivesLawsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ClassroomUserProfilesGuardiansGetPathParams:
-    guardian_id: str = field(default=None, metadata={'path_param': { 'field_name': 'guardianId', 'style': 'simple', 'explode': False }})
-    student_id: str = field(default=None, metadata={'path_param': { 'field_name': 'studentId', 'style': 'simple', 'explode': False }})
+    guardian_id: str = field(metadata={'path_param': { 'field_name': 'guardianId', 'style': 'simple', 'explode': False }})
+    student_id: str = field(metadata={'path_param': { 'field_name': 'studentId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +27,20 @@ class ClassroomUserProfilesGuardiansGetQueryParams:
 
 @dataclass
 class ClassroomUserProfilesGuardiansGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ClassroomUserProfilesGuardiansGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ClassroomUserProfilesGuardiansGetSecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -51,14 +52,14 @@ class ClassroomUserProfilesGuardiansGetSecurity:
 
 @dataclass
 class ClassroomUserProfilesGuardiansGetRequest:
-    path_params: ClassroomUserProfilesGuardiansGetPathParams = field(default=None)
-    query_params: ClassroomUserProfilesGuardiansGetQueryParams = field(default=None)
-    security: ClassroomUserProfilesGuardiansGetSecurity = field(default=None)
+    path_params: ClassroomUserProfilesGuardiansGetPathParams = field()
+    query_params: ClassroomUserProfilesGuardiansGetQueryParams = field()
+    security: ClassroomUserProfilesGuardiansGetSecurity = field()
     
 
 @dataclass
 class ClassroomUserProfilesGuardiansGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     guardian: Optional[shared.Guardian] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -4,7 +4,7 @@ from typing import Optional
 
 @dataclass
 class GetResourcesMediaIDContentPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -14,13 +14,13 @@ class GetResourcesMediaIDContentQueryParams:
 
 @dataclass
 class GetResourcesMediaIDContentRequest:
-    path_params: GetResourcesMediaIDContentPathParams = field(default=None)
-    query_params: GetResourcesMediaIDContentQueryParams = field(default=None)
+    path_params: GetResourcesMediaIDContentPathParams = field()
+    query_params: GetResourcesMediaIDContentQueryParams = field()
     
 
 @dataclass
 class GetResourcesMediaIDContentResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_resources_media_id_content_200_application_json_string: Optional[str] = field(default=None)
-    status_code: int = field(default=None)
     

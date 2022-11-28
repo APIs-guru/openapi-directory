@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GooglePrivacyDlpV2InfoTypeCategoryIndustryCategoryEnum(str, Enum):
     INDUSTRY_UNSPECIFIED = "INDUSTRY_UNSPECIFIED"
@@ -50,6 +52,7 @@ class GooglePrivacyDlpV2InfoTypeCategoryLocationCategoryEnum(str, Enum):
     URUGUAY = "URUGUAY"
     VENEZUELA = "VENEZUELA"
     INTERNAL = "INTERNAL"
+    NEW_ZEALAND = "NEW_ZEALAND"
 
 class GooglePrivacyDlpV2InfoTypeCategoryTypeCategoryEnum(str, Enum):
     TYPE_UNSPECIFIED = "TYPE_UNSPECIFIED"
@@ -65,7 +68,11 @@ class GooglePrivacyDlpV2InfoTypeCategoryTypeCategoryEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GooglePrivacyDlpV2InfoTypeCategory:
-    industry_category: Optional[GooglePrivacyDlpV2InfoTypeCategoryIndustryCategoryEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'industryCategory' }})
-    location_category: Optional[GooglePrivacyDlpV2InfoTypeCategoryLocationCategoryEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'locationCategory' }})
-    type_category: Optional[GooglePrivacyDlpV2InfoTypeCategoryTypeCategoryEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'typeCategory' }})
+    r"""GooglePrivacyDlpV2InfoTypeCategory
+    Classification of infoTypes to organize them according to geographic location, industry, and data type.
+    """
+    
+    industry_category: Optional[GooglePrivacyDlpV2InfoTypeCategoryIndustryCategoryEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('industryCategory') }})
+    location_category: Optional[GooglePrivacyDlpV2InfoTypeCategoryLocationCategoryEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('locationCategory') }})
+    type_category: Optional[GooglePrivacyDlpV2InfoTypeCategoryTypeCategoryEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('typeCategory') }})
     

@@ -37,6 +37,8 @@ const (
 	URLMapSecurityLevelEnumSecureAlways      URLMapSecurityLevelEnum = "SECURE_ALWAYS"
 )
 
+// URLMap
+// URL pattern and description of how the URL should be handled. App Engine can handle URLs by executing application code or by serving static files uploaded with the version, such as images, CSS, or JavaScript.
 type URLMap struct {
 	APIEndpoint              *APIEndpointHandler                 `json:"apiEndpoint,omitempty"`
 	AuthFailAction           *URLMapAuthFailActionEnum           `json:"authFailAction,omitempty"`

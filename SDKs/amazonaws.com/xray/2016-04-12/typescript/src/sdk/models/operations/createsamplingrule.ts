@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateSamplingRuleHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -31,81 +32,81 @@ export class CreateSamplingRuleHeaders extends SpeakeasyBase {
  * A sampling rule that services use to decide whether to instrument a request. Rule fields can match properties of the service, or properties of a request. The service can ignore rules that don't match its properties.
 **/
 export class CreateSamplingRuleRequestBodySamplingRule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Attributes" })
+  @SpeakeasyMetadata({ data: "json, name=Attributes" })
   attributes?: Map<string, string>;
 
-  @Metadata({ data: "json, name=FixedRate" })
+  @SpeakeasyMetadata({ data: "json, name=FixedRate" })
   fixedRate?: number;
 
-  @Metadata({ data: "json, name=HTTPMethod" })
+  @SpeakeasyMetadata({ data: "json, name=HTTPMethod" })
   httpMethod?: string;
 
-  @Metadata({ data: "json, name=Host" })
+  @SpeakeasyMetadata({ data: "json, name=Host" })
   host?: string;
 
-  @Metadata({ data: "json, name=Priority" })
+  @SpeakeasyMetadata({ data: "json, name=Priority" })
   priority?: number;
 
-  @Metadata({ data: "json, name=ReservoirSize" })
+  @SpeakeasyMetadata({ data: "json, name=ReservoirSize" })
   reservoirSize?: number;
 
-  @Metadata({ data: "json, name=ResourceARN" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceARN" })
   resourceArn?: string;
 
-  @Metadata({ data: "json, name=RuleARN" })
+  @SpeakeasyMetadata({ data: "json, name=RuleARN" })
   ruleArn?: string;
 
-  @Metadata({ data: "json, name=RuleName" })
+  @SpeakeasyMetadata({ data: "json, name=RuleName" })
   ruleName?: string;
 
-  @Metadata({ data: "json, name=ServiceName" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceName" })
   serviceName?: string;
 
-  @Metadata({ data: "json, name=ServiceType" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceType" })
   serviceType?: string;
 
-  @Metadata({ data: "json, name=URLPath" })
+  @SpeakeasyMetadata({ data: "json, name=URLPath" })
   urlPath?: string;
 
-  @Metadata({ data: "json, name=Version" })
+  @SpeakeasyMetadata({ data: "json, name=Version" })
   version?: number;
 }
 
 
 export class CreateSamplingRuleRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SamplingRule" })
+  @SpeakeasyMetadata({ data: "json, name=SamplingRule" })
   samplingRule: CreateSamplingRuleRequestBodySamplingRule;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: shared.Tag })
   tags?: shared.Tag[];
 }
 
 
 export class CreateSamplingRuleRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateSamplingRuleHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateSamplingRuleRequestBody;
 }
 
 
 export class CreateSamplingRuleResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createSamplingRuleResult?: shared.CreateSamplingRuleResult;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   ruleLimitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttledException?: any;
 }

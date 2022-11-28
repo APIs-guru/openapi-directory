@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List,Optional
 from sdk.models import shared
 
@@ -13,13 +16,13 @@ class AppsListInstallationsQueryParams:
 
 @dataclass
 class AppsListInstallationsRequest:
-    query_params: AppsListInstallationsQueryParams = field(default=None)
+    query_params: AppsListInstallationsQueryParams = field()
     
 
 @dataclass
 class AppsListInstallationsResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     installations: Optional[List[shared.Installation]] = field(default=None)
     

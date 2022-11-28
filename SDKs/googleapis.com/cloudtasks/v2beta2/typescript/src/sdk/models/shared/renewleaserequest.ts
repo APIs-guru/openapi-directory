@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum RenewLeaseRequestResponseViewEnum {
-    ViewUnspecified = "VIEW_UNSPECIFIED"
-,    Basic = "BASIC"
-,    Full = "FULL"
+    ViewUnspecified = "VIEW_UNSPECIFIED",
+    Basic = "BASIC",
+    Full = "FULL"
 }
 
 
@@ -12,12 +13,12 @@ export enum RenewLeaseRequestResponseViewEnum {
  * Request message for renewing a lease using RenewLease.
 **/
 export class RenewLeaseRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=leaseDuration" })
+  @SpeakeasyMetadata({ data: "json, name=leaseDuration" })
   leaseDuration?: string;
 
-  @Metadata({ data: "json, name=responseView" })
+  @SpeakeasyMetadata({ data: "json, name=responseView" })
   responseView?: RenewLeaseRequestResponseViewEnum;
 
-  @Metadata({ data: "json, name=scheduleTime" })
+  @SpeakeasyMetadata({ data: "json, name=scheduleTime" })
   scheduleTime?: string;
 }

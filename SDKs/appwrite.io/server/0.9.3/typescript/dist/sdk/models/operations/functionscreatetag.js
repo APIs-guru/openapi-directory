@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var FunctionsCreateTagPathParams = /** @class */ (function (_super) {
     __extends(FunctionsCreateTagPathParams, _super);
@@ -30,7 +30,7 @@ var FunctionsCreateTagPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=functionId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=functionId" }),
         __metadata("design:type", String)
     ], FunctionsCreateTagPathParams.prototype, "functionId", void 0);
     return FunctionsCreateTagPathParams;
@@ -42,11 +42,11 @@ var FunctionsCreateTagRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "multipart_form, name=code" }),
+        SpeakeasyMetadata({ data: "multipart_form, name=code" }),
         __metadata("design:type", String)
     ], FunctionsCreateTagRequestBody.prototype, "code", void 0);
     __decorate([
-        Metadata({ data: "multipart_form, name=command" }),
+        SpeakeasyMetadata({ data: "multipart_form, name=command" }),
         __metadata("design:type", String)
     ], FunctionsCreateTagRequestBody.prototype, "command", void 0);
     return FunctionsCreateTagRequestBody;
@@ -58,11 +58,11 @@ var FunctionsCreateTagSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeKey)
     ], FunctionsCreateTagSecurity.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeProject)
     ], FunctionsCreateTagSecurity.prototype, "project", void 0);
     return FunctionsCreateTagSecurity;
@@ -74,15 +74,15 @@ var FunctionsCreateTagRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FunctionsCreateTagPathParams)
     ], FunctionsCreateTagRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=multipart/form-data" }),
+        SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" }),
         __metadata("design:type", FunctionsCreateTagRequestBody)
     ], FunctionsCreateTagRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FunctionsCreateTagSecurity)
     ], FunctionsCreateTagRequest.prototype, "security", void 0);
     return FunctionsCreateTagRequest;
@@ -94,15 +94,15 @@ var FunctionsCreateTagResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], FunctionsCreateTagResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], FunctionsCreateTagResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Tag)
     ], FunctionsCreateTagResponse.prototype, "tag", void 0);
     return FunctionsCreateTagResponse;

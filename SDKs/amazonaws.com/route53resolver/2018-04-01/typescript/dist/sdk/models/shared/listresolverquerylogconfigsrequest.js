@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Filter } from "./filter";
 import { SortOrderEnum } from "./sortorderenum";
 var ListResolverQueryLogConfigsRequest = /** @class */ (function (_super) {
     __extends(ListResolverQueryLogConfigsRequest, _super);
@@ -31,23 +31,23 @@ var ListResolverQueryLogConfigsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Filters", elemType: shared.Filter }),
+        SpeakeasyMetadata({ data: "json, name=Filters", elemType: Filter }),
         __metadata("design:type", Array)
     ], ListResolverQueryLogConfigsRequest.prototype, "filters", void 0);
     __decorate([
-        Metadata({ data: "json, name=MaxResults" }),
+        SpeakeasyMetadata({ data: "json, name=MaxResults" }),
         __metadata("design:type", Number)
     ], ListResolverQueryLogConfigsRequest.prototype, "maxResults", void 0);
     __decorate([
-        Metadata({ data: "json, name=NextToken" }),
+        SpeakeasyMetadata({ data: "json, name=NextToken" }),
         __metadata("design:type", String)
     ], ListResolverQueryLogConfigsRequest.prototype, "nextToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=SortBy" }),
+        SpeakeasyMetadata({ data: "json, name=SortBy" }),
         __metadata("design:type", String)
     ], ListResolverQueryLogConfigsRequest.prototype, "sortBy", void 0);
     __decorate([
-        Metadata({ data: "json, name=SortOrder" }),
+        SpeakeasyMetadata({ data: "json, name=SortOrder" }),
         __metadata("design:type", String)
     ], ListResolverQueryLogConfigsRequest.prototype, "sortOrder", void 0);
     return ListResolverQueryLogConfigsRequest;

@@ -7,6 +7,8 @@ const (
 	GoogleCloudDataplexV1ContentNotebookKernelTypeEnumPython3               GoogleCloudDataplexV1ContentNotebookKernelTypeEnum = "PYTHON3"
 )
 
+// GoogleCloudDataplexV1ContentNotebook
+// Configuration for Notebook content.
 type GoogleCloudDataplexV1ContentNotebook struct {
 	KernelType *GoogleCloudDataplexV1ContentNotebookKernelTypeEnum `json:"kernelType,omitempty"`
 }

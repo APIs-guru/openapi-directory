@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApplicationSource } from "./applicationsource";
 import { ScalingInstruction } from "./scalinginstruction";
 import { ScalingPlanStatusCodeEnum } from "./scalingplanstatuscodeenum";
+
 
 
 // ScalingPlan
@@ -10,27 +10,27 @@ import { ScalingPlanStatusCodeEnum } from "./scalingplanstatuscodeenum";
  * Represents a scaling plan.
 **/
 export class ScalingPlan extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApplicationSource" })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationSource" })
   applicationSource: ApplicationSource;
 
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=ScalingInstructions", elemType: shared.ScalingInstruction })
+  @SpeakeasyMetadata({ data: "json, name=ScalingInstructions", elemType: ScalingInstruction })
   scalingInstructions: ScalingInstruction[];
 
-  @Metadata({ data: "json, name=ScalingPlanName" })
+  @SpeakeasyMetadata({ data: "json, name=ScalingPlanName" })
   scalingPlanName: string;
 
-  @Metadata({ data: "json, name=ScalingPlanVersion" })
+  @SpeakeasyMetadata({ data: "json, name=ScalingPlanVersion" })
   scalingPlanVersion: number;
 
-  @Metadata({ data: "json, name=StatusCode" })
+  @SpeakeasyMetadata({ data: "json, name=StatusCode" })
   statusCode: ScalingPlanStatusCodeEnum;
 
-  @Metadata({ data: "json, name=StatusMessage" })
+  @SpeakeasyMetadata({ data: "json, name=StatusMessage" })
   statusMessage?: string;
 
-  @Metadata({ data: "json, name=StatusStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=StatusStartTime" })
   statusStartTime?: Date;
 }

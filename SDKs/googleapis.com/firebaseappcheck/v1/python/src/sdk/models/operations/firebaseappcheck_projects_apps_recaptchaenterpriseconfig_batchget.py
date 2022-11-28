@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class FirebaseappcheckProjectsAppsRecaptchaEnterpriseConfigBatchGetPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,14 +27,14 @@ class FirebaseappcheckProjectsAppsRecaptchaEnterpriseConfigBatchGetQueryParams:
 
 @dataclass
 class FirebaseappcheckProjectsAppsRecaptchaEnterpriseConfigBatchGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FirebaseappcheckProjectsAppsRecaptchaEnterpriseConfigBatchGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -44,14 +45,14 @@ class FirebaseappcheckProjectsAppsRecaptchaEnterpriseConfigBatchGetSecurity:
 
 @dataclass
 class FirebaseappcheckProjectsAppsRecaptchaEnterpriseConfigBatchGetRequest:
-    path_params: FirebaseappcheckProjectsAppsRecaptchaEnterpriseConfigBatchGetPathParams = field(default=None)
-    query_params: FirebaseappcheckProjectsAppsRecaptchaEnterpriseConfigBatchGetQueryParams = field(default=None)
-    security: FirebaseappcheckProjectsAppsRecaptchaEnterpriseConfigBatchGetSecurity = field(default=None)
+    path_params: FirebaseappcheckProjectsAppsRecaptchaEnterpriseConfigBatchGetPathParams = field()
+    query_params: FirebaseappcheckProjectsAppsRecaptchaEnterpriseConfigBatchGetQueryParams = field()
+    security: FirebaseappcheckProjectsAppsRecaptchaEnterpriseConfigBatchGetSecurity = field()
     
 
 @dataclass
 class FirebaseappcheckProjectsAppsRecaptchaEnterpriseConfigBatchGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_firebase_appcheck_v1_batch_get_recaptcha_enterprise_configs_response: Optional[shared.GoogleFirebaseAppcheckV1BatchGetRecaptchaEnterpriseConfigsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

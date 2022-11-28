@@ -1,5 +1,7 @@
 package shared
 
+// AwsSsmComplianceSummary
+// Provides the details about the compliance status for a patch.
 type AwsSsmComplianceSummary struct {
 	ComplianceType                 *string `json:"ComplianceType,omitempty"`
 	CompliantCriticalCount         *int64  `json:"CompliantCriticalCount,omitempty"`

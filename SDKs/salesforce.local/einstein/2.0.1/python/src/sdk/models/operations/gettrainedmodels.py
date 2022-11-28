@@ -1,11 +1,11 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetTrainedModelsPathParams:
-    dataset_id: str = field(default=None, metadata={'path_param': { 'field_name': 'datasetId', 'style': 'simple', 'explode': False }})
+    dataset_id: str = field(metadata={'path_param': { 'field_name': 'datasetId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,19 +16,19 @@ class GetTrainedModelsQueryParams:
 
 @dataclass
 class GetTrainedModelsSecurity:
-    bearer_token: shared.SchemeBearerToken = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_token: shared.SchemeBearerToken = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class GetTrainedModelsRequest:
-    path_params: GetTrainedModelsPathParams = field(default=None)
-    query_params: GetTrainedModelsQueryParams = field(default=None)
-    security: GetTrainedModelsSecurity = field(default=None)
+    path_params: GetTrainedModelsPathParams = field()
+    query_params: GetTrainedModelsQueryParams = field()
+    security: GetTrainedModelsSecurity = field()
     
 
 @dataclass
 class GetTrainedModelsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     model_list: Optional[shared.ModelList] = field(default=None)
-    status_code: int = field(default=None)
     

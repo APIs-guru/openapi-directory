@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ApplicationDetail
+// Describes the application, including the application Amazon Resource Name (ARN), status, latest version, and input and output configurations.
 type ApplicationDetail struct {
 	ApplicationArn                                 string                                          `json:"ApplicationARN"`
 	ApplicationConfigurationDescription            *ApplicationConfigurationDescription            `json:"ApplicationConfigurationDescription,omitempty"`

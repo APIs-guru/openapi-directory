@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,20 +22,20 @@ class DescribeJobsHeaders:
 @dataclass_json
 @dataclass
 class DescribeJobsRequestBody:
-    jobs: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'jobs' }})
+    jobs: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('jobs') }})
     
 
 @dataclass
 class DescribeJobsRequest:
-    headers: DescribeJobsHeaders = field(default=None)
-    request: DescribeJobsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: DescribeJobsHeaders = field()
+    request: DescribeJobsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DescribeJobsResponse:
+    content_type: str = field()
+    status_code: int = field()
     client_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     describe_jobs_response: Optional[shared.DescribeJobsResponse] = field(default=None)
     server_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

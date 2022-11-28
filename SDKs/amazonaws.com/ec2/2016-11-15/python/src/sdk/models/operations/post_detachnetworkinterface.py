@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDetachNetworkInterfaceActionEnum(str, Enum):
     DETACH_NETWORK_INTERFACE = "DetachNetworkInterface"
@@ -10,8 +14,8 @@ class PostDetachNetworkInterfaceVersionEnum(str, Enum):
 
 @dataclass
 class PostDetachNetworkInterfaceQueryParams:
-    action: PostDetachNetworkInterfaceActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDetachNetworkInterfaceVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDetachNetworkInterfaceActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDetachNetworkInterfaceVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,13 +31,13 @@ class PostDetachNetworkInterfaceHeaders:
 
 @dataclass
 class PostDetachNetworkInterfaceRequest:
-    query_params: PostDetachNetworkInterfaceQueryParams = field(default=None)
-    headers: PostDetachNetworkInterfaceHeaders = field(default=None)
+    headers: PostDetachNetworkInterfaceHeaders = field()
+    query_params: PostDetachNetworkInterfaceQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDetachNetworkInterfaceResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

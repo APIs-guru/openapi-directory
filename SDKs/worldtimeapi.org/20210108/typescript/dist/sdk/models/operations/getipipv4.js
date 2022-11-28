@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetIpIpv4PathParams = /** @class */ (function (_super) {
     __extends(GetIpIpv4PathParams, _super);
     function GetIpIpv4PathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=ipv4" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ipv4" }),
         __metadata("design:type", String)
     ], GetIpIpv4PathParams.prototype, "ipv4", void 0);
     return GetIpIpv4PathParams;
@@ -41,7 +41,7 @@ var GetIpIpv4Request = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetIpIpv4PathParams)
     ], GetIpIpv4Request.prototype, "pathParams", void 0);
     return GetIpIpv4Request;
@@ -53,19 +53,19 @@ var GetIpIpv4Response = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetIpIpv4Response.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], GetIpIpv4Response.prototype, "dateTimeJsonResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], GetIpIpv4Response.prototype, "errorJsonResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetIpIpv4Response.prototype, "statusCode", void 0);
     return GetIpIpv4Response;

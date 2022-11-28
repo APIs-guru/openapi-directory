@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostModifyFleetActionEnum(str, Enum):
     MODIFY_FLEET = "ModifyFleet"
@@ -10,8 +14,8 @@ class PostModifyFleetVersionEnum(str, Enum):
 
 @dataclass
 class PostModifyFleetQueryParams:
-    action: PostModifyFleetActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostModifyFleetVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostModifyFleetActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostModifyFleetVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostModifyFleetHeaders:
 
 @dataclass
 class PostModifyFleetRequest:
-    query_params: PostModifyFleetQueryParams = field(default=None)
-    headers: PostModifyFleetHeaders = field(default=None)
+    headers: PostModifyFleetHeaders = field()
+    query_params: PostModifyFleetQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostModifyFleetResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,128 +1,128 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetTxResponseVinScriptSig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=asm" })
+  @SpeakeasyMetadata({ data: "json, name=asm" })
   asm?: string;
 
-  @Metadata({ data: "json, name=hex" })
+  @SpeakeasyMetadata({ data: "json, name=hex" })
   hex?: string;
 }
 
 
 export class GetTxResponseVin extends SpeakeasyBase {
-  @Metadata({ data: "json, name=n" })
+  @SpeakeasyMetadata({ data: "json, name=n" })
   n?: number;
 
-  @Metadata({ data: "json, name=scriptSig" })
+  @SpeakeasyMetadata({ data: "json, name=scriptSig" })
   scriptSig?: GetTxResponseVinScriptSig;
 
-  @Metadata({ data: "json, name=sequence" })
+  @SpeakeasyMetadata({ data: "json, name=sequence" })
   sequence?: number;
 
-  @Metadata({ data: "json, name=txid" })
+  @SpeakeasyMetadata({ data: "json, name=txid" })
   txid?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: number;
 
-  @Metadata({ data: "json, name=valueSat" })
+  @SpeakeasyMetadata({ data: "json, name=valueSat" })
   valueSat?: number;
 
-  @Metadata({ data: "json, name=vout" })
+  @SpeakeasyMetadata({ data: "json, name=vout" })
   vout?: number;
 }
 
 
 export class GetTxResponseVoutScriptPubKey extends SpeakeasyBase {
-  @Metadata({ data: "json, name=addresses" })
+  @SpeakeasyMetadata({ data: "json, name=addresses" })
   addresses?: string[];
 
-  @Metadata({ data: "json, name=asm" })
+  @SpeakeasyMetadata({ data: "json, name=asm" })
   asm?: string;
 
-  @Metadata({ data: "json, name=hex" })
+  @SpeakeasyMetadata({ data: "json, name=hex" })
   hex?: string;
 
-  @Metadata({ data: "json, name=reqSigs" })
+  @SpeakeasyMetadata({ data: "json, name=reqSigs" })
   reqSigs?: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }
 
 
 export class GetTxResponseVout extends SpeakeasyBase {
-  @Metadata({ data: "json, name=blockheight" })
+  @SpeakeasyMetadata({ data: "json, name=blockheight" })
   blockheight?: number;
 
-  @Metadata({ data: "json, name=n" })
+  @SpeakeasyMetadata({ data: "json, name=n" })
   n?: number;
 
-  @Metadata({ data: "json, name=scriptPubKey" })
+  @SpeakeasyMetadata({ data: "json, name=scriptPubKey" })
   scriptPubKey?: GetTxResponseVoutScriptPubKey;
 
-  @Metadata({ data: "json, name=used" })
+  @SpeakeasyMetadata({ data: "json, name=used" })
   used?: boolean;
 
-  @Metadata({ data: "json, name=usedBlockheight" })
+  @SpeakeasyMetadata({ data: "json, name=usedBlockheight" })
   usedBlockheight?: number;
 
-  @Metadata({ data: "json, name=usedTxid" })
+  @SpeakeasyMetadata({ data: "json, name=usedTxid" })
   usedTxid?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: number;
 }
 
 
 export class GetTxResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=blockhash" })
+  @SpeakeasyMetadata({ data: "json, name=blockhash" })
   blockhash?: string;
 
-  @Metadata({ data: "json, name=blockheight" })
+  @SpeakeasyMetadata({ data: "json, name=blockheight" })
   blockheight?: number;
 
-  @Metadata({ data: "json, name=blocktime" })
+  @SpeakeasyMetadata({ data: "json, name=blocktime" })
   blocktime?: number;
 
-  @Metadata({ data: "json, name=confirmations" })
+  @SpeakeasyMetadata({ data: "json, name=confirmations" })
   confirmations?: number;
 
-  @Metadata({ data: "json, name=fee" })
+  @SpeakeasyMetadata({ data: "json, name=fee" })
   fee?: number;
 
-  @Metadata({ data: "json, name=fees" })
+  @SpeakeasyMetadata({ data: "json, name=fees" })
   fees?: number;
 
-  @Metadata({ data: "json, name=locktime" })
+  @SpeakeasyMetadata({ data: "json, name=locktime" })
   locktime?: number;
 
-  @Metadata({ data: "json, name=size" })
+  @SpeakeasyMetadata({ data: "json, name=size" })
   size?: number;
 
-  @Metadata({ data: "json, name=time" })
+  @SpeakeasyMetadata({ data: "json, name=time" })
   time?: number;
 
-  @Metadata({ data: "json, name=totalsent" })
+  @SpeakeasyMetadata({ data: "json, name=totalsent" })
   totalsent?: number;
 
-  @Metadata({ data: "json, name=txid" })
+  @SpeakeasyMetadata({ data: "json, name=txid" })
   txid?: string;
 
-  @Metadata({ data: "json, name=valueIn" })
+  @SpeakeasyMetadata({ data: "json, name=valueIn" })
   valueIn?: number;
 
-  @Metadata({ data: "json, name=valueOut" })
+  @SpeakeasyMetadata({ data: "json, name=valueOut" })
   valueOut?: number;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: number;
 
-  @Metadata({ data: "json, name=vin", elemType: shared.GetTxResponseVin })
+  @SpeakeasyMetadata({ data: "json, name=vin", elemType: GetTxResponseVin })
   vin?: GetTxResponseVin[];
 
-  @Metadata({ data: "json, name=vout", elemType: shared.GetTxResponseVout })
+  @SpeakeasyMetadata({ data: "json, name=vout", elemType: GetTxResponseVout })
   vout?: GetTxResponseVout[];
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudRecommendationengineV1beta1GcsSource
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Google Cloud Storage location for input content. format.
 **/
 export class GoogleCloudRecommendationengineV1beta1GcsSource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=inputUris" })
+  @SpeakeasyMetadata({ data: "json, name=inputUris" })
   inputUris?: string[];
 
-  @Metadata({ data: "json, name=jsonSchema" })
+  @SpeakeasyMetadata({ data: "json, name=jsonSchema" })
   jsonSchema?: string;
 }

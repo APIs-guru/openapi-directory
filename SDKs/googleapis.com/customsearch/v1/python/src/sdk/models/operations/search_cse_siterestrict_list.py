@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class SearchCseSiterestrictListImgColorTypeEnum(str, Enum):
@@ -108,12 +112,12 @@ class SearchCseSiterestrictListQueryParams:
 
 @dataclass
 class SearchCseSiterestrictListRequest:
-    query_params: SearchCseSiterestrictListQueryParams = field(default=None)
+    query_params: SearchCseSiterestrictListQueryParams = field()
     
 
 @dataclass
 class SearchCseSiterestrictListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     search: Optional[shared.Search] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -10,36 +10,21 @@ class GetUserPermissionsRepositoriesQueryParams:
     
 
 @dataclass
-class GetUserPermissionsRepositoriesSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    
-
-@dataclass
-class GetUserPermissionsRepositoriesSecurityOption2:
-    basic: shared.SchemeBasic = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
-    
-
-@dataclass
-class GetUserPermissionsRepositoriesSecurityOption3:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
-    
-
-@dataclass
 class GetUserPermissionsRepositoriesSecurity:
-    option1: Optional[GetUserPermissionsRepositoriesSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[GetUserPermissionsRepositoriesSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
-    option3: Optional[GetUserPermissionsRepositoriesSecurityOption3] = field(default=None, metadata={'security': { 'option': True }})
+    api_key: Optional[shared.SchemeAPIKey] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    basic: Optional[shared.SchemeBasic] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    oauth2: Optional[shared.SchemeOauth2] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetUserPermissionsRepositoriesRequest:
-    query_params: GetUserPermissionsRepositoriesQueryParams = field(default=None)
-    security: GetUserPermissionsRepositoriesSecurity = field(default=None)
+    query_params: GetUserPermissionsRepositoriesQueryParams = field()
+    security: GetUserPermissionsRepositoriesSecurity = field()
     
 
 @dataclass
 class GetUserPermissionsRepositoriesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     paginated_repository_permissions: Optional[shared.PaginatedRepositoryPermissions] = field(default=None)
     

@@ -1,5 +1,7 @@
 package shared
 
+// License
+// Software license that is managed in AWS License Manager.
 type License struct {
 	Beneficiary              *string                   `json:"Beneficiary,omitempty"`
 	ConsumptionConfiguration *ConsumptionConfiguration `json:"ConsumptionConfiguration,omitempty"`

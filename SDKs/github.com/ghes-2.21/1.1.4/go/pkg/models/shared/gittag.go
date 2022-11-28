@@ -12,6 +12,8 @@ type GitTagTagger struct {
 	Name  string `json:"name"`
 }
 
+// GitTag
+// Metadata for a Git tag
 type GitTag struct {
 	Message      string        `json:"message"`
 	NodeID       string        `json:"node_id"`

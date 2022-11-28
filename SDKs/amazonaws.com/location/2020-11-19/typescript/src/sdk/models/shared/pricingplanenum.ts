@@ -1,7 +1,8 @@
 
 
+
 export enum PricingPlanEnum {
-    RequestBasedUsage = "RequestBasedUsage"
-,    MobileAssetTracking = "MobileAssetTracking"
-,    MobileAssetManagement = "MobileAssetManagement"
+    RequestBasedUsage = "RequestBasedUsage",
+    MobileAssetTracking = "MobileAssetTracking",
+    MobileAssetManagement = "MobileAssetManagement"
 }

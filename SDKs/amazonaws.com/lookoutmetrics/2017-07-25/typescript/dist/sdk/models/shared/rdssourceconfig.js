@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VpcConfiguration } from "./vpcconfiguration";
 // RdsSourceConfig
 /**
@@ -34,35 +34,35 @@ var RdsSourceConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DBInstanceIdentifier" }),
+        SpeakeasyMetadata({ data: "json, name=DBInstanceIdentifier" }),
         __metadata("design:type", String)
     ], RdsSourceConfig.prototype, "dbInstanceIdentifier", void 0);
     __decorate([
-        Metadata({ data: "json, name=DatabaseHost" }),
+        SpeakeasyMetadata({ data: "json, name=DatabaseHost" }),
         __metadata("design:type", String)
     ], RdsSourceConfig.prototype, "databaseHost", void 0);
     __decorate([
-        Metadata({ data: "json, name=DatabaseName" }),
+        SpeakeasyMetadata({ data: "json, name=DatabaseName" }),
         __metadata("design:type", String)
     ], RdsSourceConfig.prototype, "databaseName", void 0);
     __decorate([
-        Metadata({ data: "json, name=DatabasePort" }),
+        SpeakeasyMetadata({ data: "json, name=DatabasePort" }),
         __metadata("design:type", Number)
     ], RdsSourceConfig.prototype, "databasePort", void 0);
     __decorate([
-        Metadata({ data: "json, name=RoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=RoleArn" }),
         __metadata("design:type", String)
     ], RdsSourceConfig.prototype, "roleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=SecretManagerArn" }),
+        SpeakeasyMetadata({ data: "json, name=SecretManagerArn" }),
         __metadata("design:type", String)
     ], RdsSourceConfig.prototype, "secretManagerArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=TableName" }),
+        SpeakeasyMetadata({ data: "json, name=TableName" }),
         __metadata("design:type", String)
     ], RdsSourceConfig.prototype, "tableName", void 0);
     __decorate([
-        Metadata({ data: "json, name=VpcConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=VpcConfiguration" }),
         __metadata("design:type", VpcConfiguration)
     ], RdsSourceConfig.prototype, "vpcConfiguration", void 0);
     return RdsSourceConfig;

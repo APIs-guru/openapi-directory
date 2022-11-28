@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LfTagPair } from "./lftagpair";
 
 
+
 export class ListLfTagsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LFTags", elemType: shared.LfTagPair })
+  @SpeakeasyMetadata({ data: "json, name=LFTags", elemType: LfTagPair })
   lfTags?: LfTagPair[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

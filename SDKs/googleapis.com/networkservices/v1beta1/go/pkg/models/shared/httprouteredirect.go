@@ -11,6 +11,8 @@ const (
 	HTTPRouteRedirectResponseCodeEnumPermanentRedirect       HTTPRouteRedirectResponseCodeEnum = "PERMANENT_REDIRECT"
 )
 
+// HTTPRouteRedirect
+// The specification for redirecting traffic.
 type HTTPRouteRedirect struct {
 	HostRedirect  *string                            `json:"hostRedirect,omitempty"`
 	HTTPSRedirect *bool                              `json:"httpsRedirect,omitempty"`

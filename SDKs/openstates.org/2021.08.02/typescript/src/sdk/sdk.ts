@@ -1,16 +1,13 @@
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
 import * as operations from "./models/operations";
-import { ParamsSerializerOptions } from "axios";
-import { GetQueryParamSerializer } from "../internal/utils/queryparams";
-import {GetHeadersFromRequest} from "../internal/utils/headers";
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import * as utils from "../internal/utils";
+
+
 
 type OptsFunc = (sdk: SDK) => void;
 
-const Servers = [
-  "https://openstates.org",
+export const ServerList = [
+	"https://openstates.org",
 ] as const;
 
 export function WithServerURL(
@@ -21,50 +18,49 @@ export function WithServerURL(
     if (params != null) {
       serverURL = utils.ReplaceParameters(serverURL, params);
     }
-    sdk.serverURL = serverURL;
+    sdk._serverURL = serverURL;
   };
 }
 
 export function WithClient(client: AxiosInstance): OptsFunc {
   return (sdk: SDK) => {
-    sdk.defaultClient = client;
+    sdk._defaultClient = client;
   };
 }
 
 
 export class SDK {
-  defaultClient?: AxiosInstance;
-  securityClient?: AxiosInstance;
-  security?: any;
-  serverURL: string;
+
+  public _defaultClient: AxiosInstance;
+  public _securityClient: AxiosInstance;
+  
+  public _serverURL: string;
+  private _language = "typescript";
+  private _sdkVersion = "0.0.1";
+  private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
-    if (this.serverURL == "") {
-      this.serverURL = Servers[0];
+    if (this._serverURL == "") {
+      this._serverURL = ServerList[0];
     }
 
-    if (!this.defaultClient) {
-      this.defaultClient = axios.create({ baseURL: this.serverURL });
+    if (!this._defaultClient) {
+      this._defaultClient = axios.create({ baseURL: this._serverURL });
     }
 
-    if (!this.securityClient) {
-      if (this.security) {
-        this.securityClient = CreateSecurityClient(
-          this.defaultClient,
-          this.security
-        );
-      } else {
-        this.securityClient = this.defaultClient;
-      }
+    if (!this._securityClient) {
+      this._securityClient = this._defaultClient;
     }
+    
   }
   
-  // BillDetailBillsJurisdictionSessionBillIdGet - Bill Detail
-  /** 
+  /**
+   * billDetailBillsJurisdictionSessionBillIdGet - Bill Detail
+   *
    * Obtain bill information based on (state, session, bill_id).
   **/
-  BillDetailBillsJurisdictionSessionBillIdGet(
+  billDetailBillsJurisdictionSessionBillIdGet(
     req: operations.BillDetailBillsJurisdictionSessionBillIdGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.BillDetailBillsJurisdictionSessionBillIdGetResponse> {
@@ -72,13 +68,11 @@ export class SDK {
       req = new operations.BillDetailBillsJurisdictionSessionBillIdGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/bills/{jurisdiction}/{session}/{bill_id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -87,22 +81,24 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.BillDetailBillsJurisdictionSessionBillIdGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.BillDetailBillsJurisdictionSessionBillIdGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.bill = httpRes?.data;
             }
             break;
-          case 422:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 422:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.httpValidationError = httpRes?.data;
             }
             break;
@@ -114,11 +110,12 @@ export class SDK {
   }
 
   
-  // BillDetailByIdBillsOcdBillOpenstatesBillIdGet - Bill Detail By Id
-  /** 
+  /**
+   * billDetailByIdBillsOcdBillOpenstatesBillIdGet - Bill Detail By Id
+   *
    * Obtain bill information by internal ID in the format ocd-bill/*uuid*. 
   **/
-  BillDetailByIdBillsOcdBillOpenstatesBillIdGet(
+  billDetailByIdBillsOcdBillOpenstatesBillIdGet(
     req: operations.BillDetailByIdBillsOcdBillOpenstatesBillIdGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.BillDetailByIdBillsOcdBillOpenstatesBillIdGetResponse> {
@@ -126,13 +123,11 @@ export class SDK {
       req = new operations.BillDetailByIdBillsOcdBillOpenstatesBillIdGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/bills/ocd-bill/{openstates_bill_id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -141,22 +136,24 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.BillDetailByIdBillsOcdBillOpenstatesBillIdGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.BillDetailByIdBillsOcdBillOpenstatesBillIdGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.bill = httpRes?.data;
             }
             break;
-          case 422:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 422:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.httpValidationError = httpRes?.data;
             }
             break;
@@ -168,14 +165,15 @@ export class SDK {
   }
 
   
-  // BillsSearchBillsGet - Bills Search
-  /** 
+  /**
+   * billsSearchBillsGet - Bills Search
+   *
    * Search for bills matching given criteria.
    * 
    * Must either specify a jurisdiction or a full text query (q).  Additional parameters will
    * futher restrict bills returned.
   **/
-  BillsSearchBillsGet(
+  billsSearchBillsGet(
     req: operations.BillsSearchBillsGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.BillsSearchBillsGetResponse> {
@@ -183,13 +181,11 @@ export class SDK {
       req = new operations.BillsSearchBillsGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/bills";
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -198,22 +194,24 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.BillsSearchBillsGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.BillsSearchBillsGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.billList = httpRes?.data;
             }
             break;
-          case 422:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 422:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.httpValidationError = httpRes?.data;
             }
             break;
@@ -225,11 +223,12 @@ export class SDK {
   }
 
   
-  // CommitteeDetailCommitteesCommitteeIdGet - Committee Detail
-  /** 
+  /**
+   * committeeDetailCommitteesCommitteeIdGet - Committee Detail
+   *
    * Get details on a single committee by ID.
   **/
-  CommitteeDetailCommitteesCommitteeIdGet(
+  committeeDetailCommitteesCommitteeIdGet(
     req: operations.CommitteeDetailCommitteesCommitteeIdGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CommitteeDetailCommitteesCommitteeIdGetResponse> {
@@ -237,13 +236,11 @@ export class SDK {
       req = new operations.CommitteeDetailCommitteesCommitteeIdGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/committees/{committee_id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -252,22 +249,24 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CommitteeDetailCommitteesCommitteeIdGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CommitteeDetailCommitteesCommitteeIdGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.committee = httpRes?.data;
             }
             break;
-          case 422:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 422:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.httpValidationError = httpRes?.data;
             }
             break;
@@ -279,8 +278,10 @@ export class SDK {
   }
 
   
-  // CommitteeListCommitteesGet - Committee List
-  CommitteeListCommitteesGet(
+  /**
+   * committeeListCommitteesGet - Committee List
+  **/
+  committeeListCommitteesGet(
     req: operations.CommitteeListCommitteesGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CommitteeListCommitteesGetResponse> {
@@ -288,13 +289,11 @@ export class SDK {
       req = new operations.CommitteeListCommitteesGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/committees";
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -303,22 +302,24 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CommitteeListCommitteesGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CommitteeListCommitteesGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.committeeList = httpRes?.data;
             }
             break;
-          case 422:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 422:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.httpValidationError = httpRes?.data;
             }
             break;
@@ -330,11 +331,12 @@ export class SDK {
   }
 
   
-  // JurisdictionDetailJurisdictionsJurisdictionIdGet - Jurisdiction Detail
-  /** 
+  /**
+   * jurisdictionDetailJurisdictionsJurisdictionIdGet - Jurisdiction Detail
+   *
    * Get details on a single Jurisdiction (e.g. state or municipality). 
   **/
-  JurisdictionDetailJurisdictionsJurisdictionIdGet(
+  jurisdictionDetailJurisdictionsJurisdictionIdGet(
     req: operations.JurisdictionDetailJurisdictionsJurisdictionIdGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.JurisdictionDetailJurisdictionsJurisdictionIdGetResponse> {
@@ -342,13 +344,11 @@ export class SDK {
       req = new operations.JurisdictionDetailJurisdictionsJurisdictionIdGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/jurisdictions/{jurisdiction_id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -357,22 +357,24 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.JurisdictionDetailJurisdictionsJurisdictionIdGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.JurisdictionDetailJurisdictionsJurisdictionIdGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.jurisdiction = httpRes?.data;
             }
             break;
-          case 422:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 422:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.httpValidationError = httpRes?.data;
             }
             break;
@@ -384,11 +386,12 @@ export class SDK {
   }
 
   
-  // JurisdictionListJurisdictionsGet - Jurisdiction List
-  /** 
+  /**
+   * jurisdictionListJurisdictionsGet - Jurisdiction List
+   *
    * Get list of supported Jurisdictions, a Jurisdiction is a state or municipality.
   **/
-  JurisdictionListJurisdictionsGet(
+  jurisdictionListJurisdictionsGet(
     req: operations.JurisdictionListJurisdictionsGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.JurisdictionListJurisdictionsGetResponse> {
@@ -396,13 +399,11 @@ export class SDK {
       req = new operations.JurisdictionListJurisdictionsGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/jurisdictions";
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -411,22 +412,24 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.JurisdictionListJurisdictionsGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.JurisdictionListJurisdictionsGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.jurisdictionList = httpRes?.data;
             }
             break;
-          case 422:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 422:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.httpValidationError = httpRes?.data;
             }
             break;
@@ -438,13 +441,14 @@ export class SDK {
   }
 
   
-  // PeopleGeoPeopleGeoGet - People Geo
-  /** 
+  /**
+   * peopleGeoPeopleGeoGet - People Geo
+   *
    * Get list of people currently representing a given location.
    * 
    * **Note:** Currently limited to state legislators.  Governors & mayors are not included.
   **/
-  PeopleGeoPeopleGeoGet(
+  peopleGeoPeopleGeoGet(
     req: operations.PeopleGeoPeopleGeoGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PeopleGeoPeopleGeoGetResponse> {
@@ -452,13 +456,11 @@ export class SDK {
       req = new operations.PeopleGeoPeopleGeoGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/people.geo";
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -467,22 +469,24 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PeopleGeoPeopleGeoGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PeopleGeoPeopleGeoGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.personList = httpRes?.data;
             }
             break;
-          case 422:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 422:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.httpValidationError = httpRes?.data;
             }
             break;
@@ -494,13 +498,14 @@ export class SDK {
   }
 
   
-  // PeopleSearchPeopleGet - People Search
-  /** 
+  /**
+   * peopleSearchPeopleGet - People Search
+   *
    * Get list of people matching selected criteria.
    * 
    * Must provide either **jurisdiction**, **name**, or one or more **id** parameters.
   **/
-  PeopleSearchPeopleGet(
+  peopleSearchPeopleGet(
     req: operations.PeopleSearchPeopleGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PeopleSearchPeopleGetResponse> {
@@ -508,13 +513,11 @@ export class SDK {
       req = new operations.PeopleSearchPeopleGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/people";
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -523,22 +526,24 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PeopleSearchPeopleGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PeopleSearchPeopleGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.personList = httpRes?.data;
             }
             break;
-          case 422:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 422:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.httpValidationError = httpRes?.data;
             }
             break;

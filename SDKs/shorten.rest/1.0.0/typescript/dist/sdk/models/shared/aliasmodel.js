@@ -22,39 +22,41 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { DestinationModel } from "./destinationmodel";
+import { MetaTagModel } from "./metatagmodel";
+import { SnippetModel } from "./snippetmodel";
 var AliasModel = /** @class */ (function (_super) {
     __extends(AliasModel, _super);
     function AliasModel() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=createdAt" }),
+        SpeakeasyMetadata({ data: "json, name=createdAt" }),
         __metadata("design:type", Number)
     ], AliasModel.prototype, "createdAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=destinations", elemType: shared.DestinationModel }),
+        SpeakeasyMetadata({ data: "json, name=destinations", elemType: DestinationModel }),
         __metadata("design:type", Array)
     ], AliasModel.prototype, "destinations", void 0);
     __decorate([
-        Metadata({ data: "json, name=domainName" }),
+        SpeakeasyMetadata({ data: "json, name=domainName" }),
         __metadata("design:type", String)
     ], AliasModel.prototype, "domainName", void 0);
     __decorate([
-        Metadata({ data: "json, name=metatags", elemType: shared.MetaTagModel }),
+        SpeakeasyMetadata({ data: "json, name=metatags", elemType: MetaTagModel }),
         __metadata("design:type", Array)
     ], AliasModel.prototype, "metatags", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], AliasModel.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=snippets", elemType: shared.SnippetModel }),
+        SpeakeasyMetadata({ data: "json, name=snippets", elemType: SnippetModel }),
         __metadata("design:type", Array)
     ], AliasModel.prototype, "snippets", void 0);
     __decorate([
-        Metadata({ data: "json, name=updatedAt" }),
+        SpeakeasyMetadata({ data: "json, name=updatedAt" }),
         __metadata("design:type", Number)
     ], AliasModel.prototype, "updatedAt", void 0);
     return AliasModel;

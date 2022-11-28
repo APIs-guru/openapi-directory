@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ResourceTypeEnum(str, Enum):
     AWS_S3_BUCKET = "AWS::S3::Bucket"

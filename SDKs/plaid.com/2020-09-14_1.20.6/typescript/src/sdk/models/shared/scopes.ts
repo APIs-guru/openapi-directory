@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccountAccess } from "./accountaccess";
+
 
 
 // Scopes
@@ -8,12 +8,12 @@ import { AccountAccess } from "./accountaccess";
  * The scopes object
 **/
 export class Scopes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accounts", elemType: shared.AccountAccess })
+  @SpeakeasyMetadata({ data: "json, name=accounts", elemType: AccountAccess })
   accounts?: AccountAccess[];
 
-  @Metadata({ data: "json, name=new_accounts" })
+  @SpeakeasyMetadata({ data: "json, name=new_accounts" })
   newAccounts?: boolean;
 
-  @Metadata({ data: "json, name=product_access" })
+  @SpeakeasyMetadata({ data: "json, name=product_access" })
   productAccess?: Map<string, any>;
 }

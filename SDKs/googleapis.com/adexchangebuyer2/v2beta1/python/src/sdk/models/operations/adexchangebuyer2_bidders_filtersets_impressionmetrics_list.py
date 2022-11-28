@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class Adexchangebuyer2BiddersFilterSetsImpressionMetricsListPathParams:
-    filter_set_name: str = field(default=None, metadata={'path_param': { 'field_name': 'filterSetName', 'style': 'simple', 'explode': False }})
+    filter_set_name: str = field(metadata={'path_param': { 'field_name': 'filterSetName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class Adexchangebuyer2BiddersFilterSetsImpressionMetricsListQueryParams:
 
 @dataclass
 class Adexchangebuyer2BiddersFilterSetsImpressionMetricsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class Adexchangebuyer2BiddersFilterSetsImpressionMetricsListRequest:
-    path_params: Adexchangebuyer2BiddersFilterSetsImpressionMetricsListPathParams = field(default=None)
-    query_params: Adexchangebuyer2BiddersFilterSetsImpressionMetricsListQueryParams = field(default=None)
-    security: Adexchangebuyer2BiddersFilterSetsImpressionMetricsListSecurity = field(default=None)
+    path_params: Adexchangebuyer2BiddersFilterSetsImpressionMetricsListPathParams = field()
+    query_params: Adexchangebuyer2BiddersFilterSetsImpressionMetricsListQueryParams = field()
+    security: Adexchangebuyer2BiddersFilterSetsImpressionMetricsListSecurity = field()
     
 
 @dataclass
 class Adexchangebuyer2BiddersFilterSetsImpressionMetricsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_impression_metrics_response: Optional[shared.ListImpressionMetricsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

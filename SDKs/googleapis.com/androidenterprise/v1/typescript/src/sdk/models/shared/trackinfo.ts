@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TrackInfo
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Id to name association of a track.
 **/
 export class TrackInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=trackAlias" })
+  @SpeakeasyMetadata({ data: "json, name=trackAlias" })
   trackAlias?: string;
 
-  @Metadata({ data: "json, name=trackId" })
+  @SpeakeasyMetadata({ data: "json, name=trackId" })
   trackId?: string;
 }

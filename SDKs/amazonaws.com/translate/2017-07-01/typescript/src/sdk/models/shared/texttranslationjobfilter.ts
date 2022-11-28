@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { JobStatusEnum } from "./jobstatusenum";
+
 
 
 // TextTranslationJobFilter
@@ -7,15 +8,15 @@ import { JobStatusEnum } from "./jobstatusenum";
  * Provides information for filtering a list of translation jobs. For more information, see <a>ListTextTranslationJobs</a>.
 **/
 export class TextTranslationJobFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=JobName" })
+  @SpeakeasyMetadata({ data: "json, name=JobName" })
   jobName?: string;
 
-  @Metadata({ data: "json, name=JobStatus" })
+  @SpeakeasyMetadata({ data: "json, name=JobStatus" })
   jobStatus?: JobStatusEnum;
 
-  @Metadata({ data: "json, name=SubmittedAfterTime" })
+  @SpeakeasyMetadata({ data: "json, name=SubmittedAfterTime" })
   submittedAfterTime?: Date;
 
-  @Metadata({ data: "json, name=SubmittedBeforeTime" })
+  @SpeakeasyMetadata({ data: "json, name=SubmittedBeforeTime" })
   submittedBeforeTime?: Date;
 }

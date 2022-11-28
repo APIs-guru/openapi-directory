@@ -1,5 +1,7 @@
 package shared
 
+// LoadBasedAutoScalingConfiguration
+// Describes a layer's load-based auto scaling configuration.
 type LoadBasedAutoScalingConfiguration struct {
 	DownScaling *AutoScalingThresholds `json:"DownScaling,omitempty"`
 	Enable      *bool                  `json:"Enable,omitempty"`

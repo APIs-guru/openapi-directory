@@ -16,13 +16,13 @@ type GetProjectsForWorkspaceQueryParams struct {
 	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
+type GetProjectsForWorkspace200ApplicationJSON struct {
+	Data []shared.ProjectCompact `json:"data,omitempty"`
+}
+
 type GetProjectsForWorkspaceRequest struct {
 	PathParams  GetProjectsForWorkspacePathParams
 	QueryParams GetProjectsForWorkspaceQueryParams
-}
-
-type GetProjectsForWorkspace200ApplicationJSON struct {
-	Data []shared.ProjectCompact `json:"data,omitempty"`
 }
 
 type GetProjectsForWorkspaceResponse struct {

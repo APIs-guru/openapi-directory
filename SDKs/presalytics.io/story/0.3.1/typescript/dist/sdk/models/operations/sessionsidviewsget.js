@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var SessionsIdViewsGetPathParams = /** @class */ (function (_super) {
     __extends(SessionsIdViewsGetPathParams, _super);
@@ -30,7 +30,7 @@ var SessionsIdViewsGetPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=session_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=session_id" }),
         __metadata("design:type", String)
     ], SessionsIdViewsGetPathParams.prototype, "sessionId", void 0);
     return SessionsIdViewsGetPathParams;
@@ -42,7 +42,7 @@ var SessionsIdViewsGetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SessionsIdViewsGetPathParams)
     ], SessionsIdViewsGetRequest.prototype, "pathParams", void 0);
     return SessionsIdViewsGetRequest;
@@ -54,19 +54,19 @@ var SessionsIdViewsGetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], SessionsIdViewsGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], SessionsIdViewsGetResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], SessionsIdViewsGetResponse.prototype, "problemDetail", void 0);
     __decorate([
-        Metadata({ elemType: shared.View }),
+        SpeakeasyMetadata({ elemType: shared.View }),
         __metadata("design:type", Array)
     ], SessionsIdViewsGetResponse.prototype, "views", void 0);
     return SessionsIdViewsGetResponse;

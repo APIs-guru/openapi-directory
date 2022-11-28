@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class WebsecurityscannerProjectsScanConfigsDeletePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class WebsecurityscannerProjectsScanConfigsDeleteQueryParams:
 
 @dataclass
 class WebsecurityscannerProjectsScanConfigsDeleteSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class WebsecurityscannerProjectsScanConfigsDeleteRequest:
-    path_params: WebsecurityscannerProjectsScanConfigsDeletePathParams = field(default=None)
-    query_params: WebsecurityscannerProjectsScanConfigsDeleteQueryParams = field(default=None)
-    security: WebsecurityscannerProjectsScanConfigsDeleteSecurity = field(default=None)
+    path_params: WebsecurityscannerProjectsScanConfigsDeletePathParams = field()
+    query_params: WebsecurityscannerProjectsScanConfigsDeleteQueryParams = field()
+    security: WebsecurityscannerProjectsScanConfigsDeleteSecurity = field()
     
 
 @dataclass
 class WebsecurityscannerProjectsScanConfigsDeleteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 
 class DriverDetailsFormatEnum(str, Enum):
     XML = "xml"
@@ -8,18 +9,18 @@ class DriverDetailsFormatEnum(str, Enum):
 
 @dataclass
 class DriverDetailsPathParams:
-    driverid: str = field(default=None, metadata={'path_param': { 'field_name': 'driverid', 'style': 'simple', 'explode': False }})
-    format: DriverDetailsFormatEnum = field(default=None, metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
+    driverid: str = field(metadata={'path_param': { 'field_name': 'driverid', 'style': 'simple', 'explode': False }})
+    format: DriverDetailsFormatEnum = field(metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DriverDetailsRequest:
-    path_params: DriverDetailsPathParams = field(default=None)
+    path_params: DriverDetailsPathParams = field()
     
 
 @dataclass
 class DriverDetailsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     driver: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

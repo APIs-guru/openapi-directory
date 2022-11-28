@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ObjectAccessControl
 /**
  * An access-control entry.
@@ -33,51 +33,51 @@ var ObjectAccessControl = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=bucket" }),
+        SpeakeasyMetadata({ data: "json, name=bucket" }),
         __metadata("design:type", String)
     ], ObjectAccessControl.prototype, "bucket", void 0);
     __decorate([
-        Metadata({ data: "json, name=domain" }),
+        SpeakeasyMetadata({ data: "json, name=domain" }),
         __metadata("design:type", String)
     ], ObjectAccessControl.prototype, "domain", void 0);
     __decorate([
-        Metadata({ data: "json, name=email" }),
+        SpeakeasyMetadata({ data: "json, name=email" }),
         __metadata("design:type", String)
     ], ObjectAccessControl.prototype, "email", void 0);
     __decorate([
-        Metadata({ data: "json, name=entity" }),
+        SpeakeasyMetadata({ data: "json, name=entity" }),
         __metadata("design:type", String)
     ], ObjectAccessControl.prototype, "entity", void 0);
     __decorate([
-        Metadata({ data: "json, name=entityId" }),
+        SpeakeasyMetadata({ data: "json, name=entityId" }),
         __metadata("design:type", String)
     ], ObjectAccessControl.prototype, "entityId", void 0);
     __decorate([
-        Metadata({ data: "json, name=etag" }),
+        SpeakeasyMetadata({ data: "json, name=etag" }),
         __metadata("design:type", String)
     ], ObjectAccessControl.prototype, "etag", void 0);
     __decorate([
-        Metadata({ data: "json, name=generation" }),
+        SpeakeasyMetadata({ data: "json, name=generation" }),
         __metadata("design:type", String)
     ], ObjectAccessControl.prototype, "generation", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], ObjectAccessControl.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=kind" }),
+        SpeakeasyMetadata({ data: "json, name=kind" }),
         __metadata("design:type", String)
     ], ObjectAccessControl.prototype, "kind", void 0);
     __decorate([
-        Metadata({ data: "json, name=object" }),
+        SpeakeasyMetadata({ data: "json, name=object" }),
         __metadata("design:type", String)
     ], ObjectAccessControl.prototype, "object", void 0);
     __decorate([
-        Metadata({ data: "json, name=role" }),
+        SpeakeasyMetadata({ data: "json, name=role" }),
         __metadata("design:type", String)
     ], ObjectAccessControl.prototype, "role", void 0);
     __decorate([
-        Metadata({ data: "json, name=selfLink" }),
+        SpeakeasyMetadata({ data: "json, name=selfLink" }),
         __metadata("design:type", String)
     ], ObjectAccessControl.prototype, "selfLink", void 0);
     return ObjectAccessControl;

@@ -1,5 +1,7 @@
 package shared
 
+// ReviewObject
+// **object** containing a single user review
 type ReviewObject struct {
 	OwnerAvatarURL *string `json:"ownerAvatarURL,omitempty"`
 	OwnerCountry   *string `json:"ownerCountry,omitempty"`

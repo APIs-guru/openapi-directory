@@ -34,6 +34,8 @@ const (
 	FirstAndThirdPartyAudienceFirstAndThirdPartyAudienceTypeEnumFirstAndThirdPartyAudienceTypeThirdParty  FirstAndThirdPartyAudienceFirstAndThirdPartyAudienceTypeEnum = "FIRST_AND_THIRD_PARTY_AUDIENCE_TYPE_THIRD_PARTY"
 )
 
+// FirstAndThirdPartyAudience
+// Describes a first or third party audience list used for targeting. First party audiences are created via usage of client data. Third party audiences are provided by Third Party data providers and can only be licensed to customers.
 type FirstAndThirdPartyAudience struct {
 	ActiveDisplayAudienceSize      *string                                                       `json:"activeDisplayAudienceSize,omitempty"`
 	AppID                          *string                                                       `json:"appId,omitempty"`
@@ -53,4 +55,17 @@ type FirstAndThirdPartyAudience struct {
 	MobileDeviceIDList             *MobileDeviceIDList                                           `json:"mobileDeviceIdList,omitempty"`
 	Name                           *string                                                       `json:"name,omitempty"`
 	YoutubeAudienceSize            *string                                                       `json:"youtubeAudienceSize,omitempty"`
+}
+
+// FirstAndThirdPartyAudienceInput
+// Describes a first or third party audience list used for targeting. First party audiences are created via usage of client data. Third party audiences are provided by Third Party data providers and can only be licensed to customers.
+type FirstAndThirdPartyAudienceInput struct {
+	AppID                          *string                                                       `json:"appId,omitempty"`
+	AudienceType                   *FirstAndThirdPartyAudienceAudienceTypeEnum                   `json:"audienceType,omitempty"`
+	ContactInfoList                *ContactInfoList                                              `json:"contactInfoList,omitempty"`
+	Description                    *string                                                       `json:"description,omitempty"`
+	DisplayName                    *string                                                       `json:"displayName,omitempty"`
+	FirstAndThirdPartyAudienceType *FirstAndThirdPartyAudienceFirstAndThirdPartyAudienceTypeEnum `json:"firstAndThirdPartyAudienceType,omitempty"`
+	MembershipDurationDays         *string                                                       `json:"membershipDurationDays,omitempty"`
+	MobileDeviceIDList             *MobileDeviceIDList                                           `json:"mobileDeviceIdList,omitempty"`
 }

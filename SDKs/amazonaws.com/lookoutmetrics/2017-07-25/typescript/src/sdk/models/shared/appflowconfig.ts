@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AppFlowConfig
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Details about an Amazon AppFlow flow datasource.
 **/
 export class AppFlowConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FlowName" })
+  @SpeakeasyMetadata({ data: "json, name=FlowName" })
   flowName: string;
 
-  @Metadata({ data: "json, name=RoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=RoleArn" })
   roleArn: string;
 }

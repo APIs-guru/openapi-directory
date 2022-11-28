@@ -1,5 +1,7 @@
 package shared
 
+// WebPropertySummary
+// JSON template for an Analytics WebPropertySummary. WebPropertySummary returns basic information (i.e., summary) for a web property.
 type WebPropertySummary struct {
 	ID                    *string          `json:"id,omitempty"`
 	InternalWebPropertyID *string          `json:"internalWebPropertyId,omitempty"`

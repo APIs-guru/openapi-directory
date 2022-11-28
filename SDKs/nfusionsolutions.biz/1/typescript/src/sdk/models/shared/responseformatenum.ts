@@ -1,6 +1,7 @@
 
 
+
 export enum ResponseFormatEnum {
-    Json = "json"
-,    Xml = "xml"
+    Json = "json",
+    Xml = "xml"
 }

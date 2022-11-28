@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class DescribeFileSystemPolicyPathParams:
-    file_system_id: str = field(default=None, metadata={'path_param': { 'field_name': 'FileSystemId', 'style': 'simple', 'explode': False }})
+    file_system_id: str = field(metadata={'path_param': { 'field_name': 'FileSystemId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,16 +24,16 @@ class DescribeFileSystemPolicyHeaders:
 
 @dataclass
 class DescribeFileSystemPolicyRequest:
-    path_params: DescribeFileSystemPolicyPathParams = field(default=None)
-    headers: DescribeFileSystemPolicyHeaders = field(default=None)
+    headers: DescribeFileSystemPolicyHeaders = field()
+    path_params: DescribeFileSystemPolicyPathParams = field()
     
 
 @dataclass
 class DescribeFileSystemPolicyResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     file_system_not_found: Optional[Any] = field(default=None)
     file_system_policy_description: Optional[shared.FileSystemPolicyDescription] = field(default=None)
     internal_server_error: Optional[Any] = field(default=None)
     policy_not_found: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

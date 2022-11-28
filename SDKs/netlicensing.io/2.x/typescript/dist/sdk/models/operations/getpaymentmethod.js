@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetPaymentMethodPathParams = /** @class */ (function (_super) {
     __extends(GetPaymentMethodPathParams, _super);
@@ -30,7 +30,7 @@ var GetPaymentMethodPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=paymentMethodNumber" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=paymentMethodNumber" }),
         __metadata("design:type", String)
     ], GetPaymentMethodPathParams.prototype, "paymentMethodNumber", void 0);
     return GetPaymentMethodPathParams;
@@ -42,7 +42,7 @@ var GetPaymentMethodSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
         __metadata("design:type", shared.SchemeBasicAuth)
     ], GetPaymentMethodSecurity.prototype, "basicAuth", void 0);
     return GetPaymentMethodSecurity;
@@ -54,11 +54,11 @@ var GetPaymentMethodRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetPaymentMethodPathParams)
     ], GetPaymentMethodRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetPaymentMethodSecurity)
     ], GetPaymentMethodRequest.prototype, "security", void 0);
     return GetPaymentMethodRequest;
@@ -70,19 +70,19 @@ var GetPaymentMethodResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetPaymentMethodResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetPaymentMethodResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetPaymentMethodResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], GetPaymentMethodResponse.prototype, "netlicensing", void 0);
     return GetPaymentMethodResponse;

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // FindMatchesParameters
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The parameters to configure the find matches transform.
 **/
 export class FindMatchesParameters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccuracyCostTradeoff" })
+  @SpeakeasyMetadata({ data: "json, name=AccuracyCostTradeoff" })
   accuracyCostTradeoff?: number;
 
-  @Metadata({ data: "json, name=EnforceProvidedLabels" })
+  @SpeakeasyMetadata({ data: "json, name=EnforceProvidedLabels" })
   enforceProvidedLabels?: boolean;
 
-  @Metadata({ data: "json, name=PrecisionRecallTradeoff" })
+  @SpeakeasyMetadata({ data: "json, name=PrecisionRecallTradeoff" })
   precisionRecallTradeoff?: number;
 
-  @Metadata({ data: "json, name=PrimaryKeyColumnName" })
+  @SpeakeasyMetadata({ data: "json, name=PrimaryKeyColumnName" })
   primaryKeyColumnName?: string;
 }

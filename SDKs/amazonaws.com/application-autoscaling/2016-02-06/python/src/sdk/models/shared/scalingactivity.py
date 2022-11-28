@@ -1,26 +1,30 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import scalabledimension_enum
-from . import servicenamespace_enum
-from . import scalingactivitystatuscode_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ScalingActivity:
-    activity_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ActivityId' }})
-    cause: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Cause' }})
-    description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
-    details: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Details' }})
-    end_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EndTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    resource_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ResourceId' }})
-    scalable_dimension: scalabledimension_enum.ScalableDimensionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ScalableDimension' }})
-    service_namespace: servicenamespace_enum.ServiceNamespaceEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ServiceNamespace' }})
-    start_time: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StartTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    status_code: scalingactivitystatuscode_enum.ScalingActivityStatusCodeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StatusCode' }})
-    status_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StatusMessage' }})
+    r"""ScalingActivity
+    Represents a scaling activity.
+    """
+    
+    activity_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ActivityId') }})
+    cause: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Cause') }})
+    description: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Description') }})
+    resource_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ResourceId') }})
+    scalable_dimension: ScalableDimensionEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ScalableDimension') }})
+    service_namespace: ServiceNamespaceEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ServiceNamespace') }})
+    start_time: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('StartTime'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    status_code: ScalingActivityStatusCodeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('StatusCode') }})
+    details: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Details') }})
+    end_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('EndTime'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    status_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StatusMessage') }})
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GamesGameSeriesListPathParams = /** @class */ (function (_super) {
     __extends(GamesGameSeriesListPathParams, _super);
@@ -30,7 +30,7 @@ var GamesGameSeriesListPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=game_pk" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=game_pk" }),
         __metadata("design:type", String)
     ], GamesGameSeriesListPathParams.prototype, "gamePk", void 0);
     return GamesGameSeriesListPathParams;
@@ -42,71 +42,71 @@ var GamesGameSeriesListQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" }),
         __metadata("design:type", Number)
     ], GamesGameSeriesListQueryParams.prototype, "page", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page_size" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_size" }),
         __metadata("design:type", Number)
     ], GamesGameSeriesListQueryParams.prototype, "pageSize", void 0);
     return GamesGameSeriesListQueryParams;
 }(SpeakeasyBase));
 export { GamesGameSeriesListQueryParams };
-var GamesGameSeriesListRequest = /** @class */ (function (_super) {
-    __extends(GamesGameSeriesListRequest, _super);
-    function GamesGameSeriesListRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata(),
-        __metadata("design:type", GamesGameSeriesListPathParams)
-    ], GamesGameSeriesListRequest.prototype, "pathParams", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", GamesGameSeriesListQueryParams)
-    ], GamesGameSeriesListRequest.prototype, "queryParams", void 0);
-    return GamesGameSeriesListRequest;
-}(SpeakeasyBase));
-export { GamesGameSeriesListRequest };
 var GamesGameSeriesList200ApplicationJson = /** @class */ (function (_super) {
     __extends(GamesGameSeriesList200ApplicationJson, _super);
     function GamesGameSeriesList200ApplicationJson() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=count" }),
+        SpeakeasyMetadata({ data: "json, name=count" }),
         __metadata("design:type", Number)
     ], GamesGameSeriesList200ApplicationJson.prototype, "count", void 0);
     __decorate([
-        Metadata({ data: "json, name=next" }),
+        SpeakeasyMetadata({ data: "json, name=next" }),
         __metadata("design:type", String)
     ], GamesGameSeriesList200ApplicationJson.prototype, "next", void 0);
     __decorate([
-        Metadata({ data: "json, name=previous" }),
+        SpeakeasyMetadata({ data: "json, name=previous" }),
         __metadata("design:type", String)
     ], GamesGameSeriesList200ApplicationJson.prototype, "previous", void 0);
     __decorate([
-        Metadata({ data: "json, name=results", elemType: shared.Game }),
+        SpeakeasyMetadata({ data: "json, name=results", elemType: shared.Game }),
         __metadata("design:type", Array)
     ], GamesGameSeriesList200ApplicationJson.prototype, "results", void 0);
     return GamesGameSeriesList200ApplicationJson;
 }(SpeakeasyBase));
 export { GamesGameSeriesList200ApplicationJson };
+var GamesGameSeriesListRequest = /** @class */ (function (_super) {
+    __extends(GamesGameSeriesListRequest, _super);
+    function GamesGameSeriesListRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", GamesGameSeriesListPathParams)
+    ], GamesGameSeriesListRequest.prototype, "pathParams", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", GamesGameSeriesListQueryParams)
+    ], GamesGameSeriesListRequest.prototype, "queryParams", void 0);
+    return GamesGameSeriesListRequest;
+}(SpeakeasyBase));
+export { GamesGameSeriesListRequest };
 var GamesGameSeriesListResponse = /** @class */ (function (_super) {
     __extends(GamesGameSeriesListResponse, _super);
     function GamesGameSeriesListResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GamesGameSeriesListResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GamesGameSeriesListResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GamesGameSeriesList200ApplicationJson)
     ], GamesGameSeriesListResponse.prototype, "gamesGameSeriesList200ApplicationJsonObject", void 0);
     return GamesGameSeriesListResponse;

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Command
+// Describes a command request.
 type Command struct {
 	CloudWatchOutputConfig *CloudWatchOutputConfig `json:"CloudWatchOutputConfig,omitempty"`
 	CommandID              *string                 `json:"CommandId,omitempty"`

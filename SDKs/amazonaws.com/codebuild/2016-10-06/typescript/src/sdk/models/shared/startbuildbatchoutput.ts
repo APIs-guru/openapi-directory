@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BuildBatch } from "./buildbatch";
 
 
+
 export class StartBuildBatchOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=buildBatch" })
+  @SpeakeasyMetadata({ data: "json, name=buildBatch" })
   buildBatch?: BuildBatch;
 }

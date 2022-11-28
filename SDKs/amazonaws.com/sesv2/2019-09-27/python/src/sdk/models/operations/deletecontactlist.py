@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 
 
 @dataclass
 class DeleteContactListPathParams:
-    contact_list_name: str = field(default=None, metadata={'path_param': { 'field_name': 'ContactListName', 'style': 'simple', 'explode': False }})
+    contact_list_name: str = field(metadata={'path_param': { 'field_name': 'ContactListName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,17 +23,17 @@ class DeleteContactListHeaders:
 
 @dataclass
 class DeleteContactListRequest:
-    path_params: DeleteContactListPathParams = field(default=None)
-    headers: DeleteContactListHeaders = field(default=None)
+    headers: DeleteContactListHeaders = field()
+    path_params: DeleteContactListPathParams = field()
     
 
 @dataclass
 class DeleteContactListResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
     concurrent_modification_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     delete_contact_list_response: Optional[dict[str, Any]] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

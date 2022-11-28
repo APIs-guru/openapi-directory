@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -27,19 +28,19 @@ class BooksPromoofferDismissQueryParams:
 
 @dataclass
 class BooksPromoofferDismissSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BooksPromoofferDismissRequest:
-    query_params: BooksPromoofferDismissQueryParams = field(default=None)
-    security: BooksPromoofferDismissSecurity = field(default=None)
+    query_params: BooksPromoofferDismissQueryParams = field()
+    security: BooksPromoofferDismissSecurity = field()
     
 
 @dataclass
 class BooksPromoofferDismissResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

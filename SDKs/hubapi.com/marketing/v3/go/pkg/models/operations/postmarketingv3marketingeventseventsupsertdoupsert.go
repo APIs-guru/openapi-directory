@@ -4,17 +4,10 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-type PostMarketingV3MarketingEventsEventsUpsertDoUpsertSecurityOption1 struct {
-	Hapikey shared.SchemeHapikey `security:"scheme,type=apiKey,subtype=query"`
-}
-
-type PostMarketingV3MarketingEventsEventsUpsertDoUpsertSecurityOption2 struct {
-	Oauth2Legacy shared.SchemeOauth2Legacy `security:"scheme,type=oauth2"`
-}
-
 type PostMarketingV3MarketingEventsEventsUpsertDoUpsertSecurity struct {
-	Option1 *PostMarketingV3MarketingEventsEventsUpsertDoUpsertSecurityOption1 `security:"option"`
-	Option2 *PostMarketingV3MarketingEventsEventsUpsertDoUpsertSecurityOption2 `security:"option"`
+	Hapikey           *shared.SchemeHapikey           `security:"scheme,type=apiKey,subtype=query"`
+	PrivateAppsLegacy *shared.SchemePrivateAppsLegacy `security:"scheme,type=apiKey,subtype=header"`
+	Oauth2Legacy      *shared.SchemeOauth2Legacy      `security:"scheme,type=oauth2"`
 }
 
 type PostMarketingV3MarketingEventsEventsUpsertDoUpsertRequest struct {

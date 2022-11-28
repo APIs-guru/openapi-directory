@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Certificate
@@ -6,39 +7,39 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A SSL/TLS X509 certificate
 **/
 export class Certificate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=autoRenew" })
+  @SpeakeasyMetadata({ data: "json, name=autoRenew" })
   autoRenew: string;
 
-  @Metadata({ data: "json, name=ca" })
+  @SpeakeasyMetadata({ data: "json, name=ca" })
   ca: string;
 
-  @Metadata({ data: "json, name=caRef" })
+  @SpeakeasyMetadata({ data: "json, name=caRef" })
   caRef: string;
 
-  @Metadata({ data: "json, name=chain" })
+  @SpeakeasyMetadata({ data: "json, name=chain" })
   chain: string;
 
-  @Metadata({ data: "json, name=domain" })
+  @SpeakeasyMetadata({ data: "json, name=domain" })
   domain: string;
 
-  @Metadata({ data: "json, name=from" })
+  @SpeakeasyMetadata({ data: "json, name=from" })
   from: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=privateKey" })
+  @SpeakeasyMetadata({ data: "json, name=privateKey" })
   privateKey: string;
 
-  @Metadata({ data: "json, name=selfSigned" })
+  @SpeakeasyMetadata({ data: "json, name=selfSigned" })
   selfSigned: string;
 
-  @Metadata({ data: "json, name=subject" })
+  @SpeakeasyMetadata({ data: "json, name=subject" })
   subject: string;
 
-  @Metadata({ data: "json, name=to" })
+  @SpeakeasyMetadata({ data: "json, name=to" })
   to: string;
 
-  @Metadata({ data: "json, name=valid" })
+  @SpeakeasyMetadata({ data: "json, name=valid" })
   valid: string;
 }

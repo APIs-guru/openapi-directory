@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ExperimentActionState } from "./experimentactionstate";
+
 
 
 // ExperimentAction
@@ -7,21 +8,21 @@ import { ExperimentActionState } from "./experimentactionstate";
  * Describes the action for an experiment.
 **/
 export class ExperimentAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actionId" })
+  @SpeakeasyMetadata({ data: "json, name=actionId" })
   actionId?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=parameters" })
+  @SpeakeasyMetadata({ data: "json, name=parameters" })
   parameters?: Map<string, string>;
 
-  @Metadata({ data: "json, name=startAfter" })
+  @SpeakeasyMetadata({ data: "json, name=startAfter" })
   startAfter?: string[];
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: ExperimentActionState;
 
-  @Metadata({ data: "json, name=targets" })
+  @SpeakeasyMetadata({ data: "json, name=targets" })
   targets?: Map<string, string>;
 }

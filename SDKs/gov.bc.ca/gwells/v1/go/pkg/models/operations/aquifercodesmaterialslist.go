@@ -9,15 +9,15 @@ type AquiferCodesMaterialsListQueryParams struct {
 	Offset *int64 `queryParam:"style=form,explode=true,name=offset"`
 }
 
-type AquiferCodesMaterialsListRequest struct {
-	QueryParams AquiferCodesMaterialsListQueryParams
-}
-
 type AquiferCodesMaterialsList200ApplicationJSON struct {
 	Count    int64                    `json:"count"`
 	Next     *string                  `json:"next,omitempty"`
 	Previous *string                  `json:"previous,omitempty"`
 	Results  []shared.AquiferMaterial `json:"results"`
+}
+
+type AquiferCodesMaterialsListRequest struct {
+	QueryParams AquiferCodesMaterialsListQueryParams
 }
 
 type AquiferCodesMaterialsListResponse struct {

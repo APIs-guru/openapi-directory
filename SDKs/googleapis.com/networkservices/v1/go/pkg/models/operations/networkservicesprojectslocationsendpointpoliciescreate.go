@@ -31,7 +31,7 @@ type NetworkservicesProjectsLocationsEndpointPoliciesCreateSecurity struct {
 type NetworkservicesProjectsLocationsEndpointPoliciesCreateRequest struct {
 	PathParams  NetworkservicesProjectsLocationsEndpointPoliciesCreatePathParams
 	QueryParams NetworkservicesProjectsLocationsEndpointPoliciesCreateQueryParams
-	Request     *shared.EndpointPolicy `request:"mediaType=application/json"`
+	Request     *shared.EndpointPolicyInput `request:"mediaType=application/json"`
 	Security    NetworkservicesProjectsLocationsEndpointPoliciesCreateSecurity
 }
 

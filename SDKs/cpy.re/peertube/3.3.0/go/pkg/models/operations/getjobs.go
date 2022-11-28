@@ -30,15 +30,15 @@ type GetJobsSecurity struct {
 	OAuth2 shared.SchemeOAuth2 `security:"scheme,type=oauth2"`
 }
 
+type GetJobs200ApplicationJSON struct {
+	Data  []interface{} `json:"data,omitempty"`
+	Total *int64        `json:"total,omitempty"`
+}
+
 type GetJobsRequest struct {
 	PathParams  GetJobsPathParams
 	QueryParams GetJobsQueryParams
 	Security    GetJobsSecurity
-}
-
-type GetJobs200ApplicationJSON struct {
-	Data  []interface{} `json:"data,omitempty"`
-	Total *int64        `json:"total,omitempty"`
 }
 
 type GetJobsResponse struct {

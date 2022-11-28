@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SsmTargetAccountEnum } from "./ssmtargetaccountenum";
+
 
 
 // SsmAutomation
@@ -7,18 +8,18 @@ import { SsmTargetAccountEnum } from "./ssmtargetaccountenum";
  * Details about the Systems Manager automation document that will be used as a runbook during an incident.
 **/
 export class SsmAutomation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=documentName" })
+  @SpeakeasyMetadata({ data: "json, name=documentName" })
   documentName: string;
 
-  @Metadata({ data: "json, name=documentVersion" })
+  @SpeakeasyMetadata({ data: "json, name=documentVersion" })
   documentVersion?: string;
 
-  @Metadata({ data: "json, name=parameters" })
+  @SpeakeasyMetadata({ data: "json, name=parameters" })
   parameters?: Map<string, string[]>;
 
-  @Metadata({ data: "json, name=roleArn" })
+  @SpeakeasyMetadata({ data: "json, name=roleArn" })
   roleArn: string;
 
-  @Metadata({ data: "json, name=targetAccount" })
+  @SpeakeasyMetadata({ data: "json, name=targetAccount" })
   targetAccount?: SsmTargetAccountEnum;
 }

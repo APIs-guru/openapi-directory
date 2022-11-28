@@ -19,6 +19,8 @@ type UpdateJourneyHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateJourneyRequestBodyWriteJourneyRequest
+// Specifies the configuration and other settings for a journey.
 type UpdateJourneyRequestBodyWriteJourneyRequest struct {
 	Activities             map[string]shared.Activity `json:"Activities,omitempty"`
 	CreationDate           *string                    `json:"CreationDate,omitempty"`

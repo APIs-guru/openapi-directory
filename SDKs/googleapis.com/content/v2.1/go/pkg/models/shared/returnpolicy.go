@@ -1,5 +1,7 @@
 package shared
 
+// ReturnPolicy
+// Return policy resource.
 type ReturnPolicy struct {
 	Country              *string                        `json:"country,omitempty"`
 	Kind                 *string                        `json:"kind,omitempty"`

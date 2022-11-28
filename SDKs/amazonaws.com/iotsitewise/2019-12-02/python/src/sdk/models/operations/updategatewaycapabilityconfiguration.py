@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdateGatewayCapabilityConfigurationPathParams:
-    gateway_id: str = field(default=None, metadata={'path_param': { 'field_name': 'gatewayId', 'style': 'simple', 'explode': False }})
+    gateway_id: str = field(metadata={'path_param': { 'field_name': 'gatewayId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,26 +27,26 @@ class UpdateGatewayCapabilityConfigurationHeaders:
 @dataclass_json
 @dataclass
 class UpdateGatewayCapabilityConfigurationRequestBody:
-    capability_configuration: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'capabilityConfiguration' }})
-    capability_namespace: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'capabilityNamespace' }})
+    capability_configuration: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('capabilityConfiguration') }})
+    capability_namespace: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('capabilityNamespace') }})
     
 
 @dataclass
 class UpdateGatewayCapabilityConfigurationRequest:
-    path_params: UpdateGatewayCapabilityConfigurationPathParams = field(default=None)
-    headers: UpdateGatewayCapabilityConfigurationHeaders = field(default=None)
-    request: UpdateGatewayCapabilityConfigurationRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateGatewayCapabilityConfigurationHeaders = field()
+    path_params: UpdateGatewayCapabilityConfigurationPathParams = field()
+    request: UpdateGatewayCapabilityConfigurationRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateGatewayCapabilityConfigurationResponse:
+    content_type: str = field()
+    status_code: int = field()
     conflicting_operation_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     update_gateway_capability_configuration_response: Optional[shared.UpdateGatewayCapabilityConfigurationResponse] = field(default=None)
     

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StageEnum } from "./stageenum";
+
 
 
 // AutoBranchCreationConfig
@@ -7,33 +8,33 @@ import { StageEnum } from "./stageenum";
  *  Describes the automated branch creation configuration. 
 **/
 export class AutoBranchCreationConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=basicAuthCredentials" })
+  @SpeakeasyMetadata({ data: "json, name=basicAuthCredentials" })
   basicAuthCredentials?: string;
 
-  @Metadata({ data: "json, name=buildSpec" })
+  @SpeakeasyMetadata({ data: "json, name=buildSpec" })
   buildSpec?: string;
 
-  @Metadata({ data: "json, name=enableAutoBuild" })
+  @SpeakeasyMetadata({ data: "json, name=enableAutoBuild" })
   enableAutoBuild?: boolean;
 
-  @Metadata({ data: "json, name=enableBasicAuth" })
+  @SpeakeasyMetadata({ data: "json, name=enableBasicAuth" })
   enableBasicAuth?: boolean;
 
-  @Metadata({ data: "json, name=enablePerformanceMode" })
+  @SpeakeasyMetadata({ data: "json, name=enablePerformanceMode" })
   enablePerformanceMode?: boolean;
 
-  @Metadata({ data: "json, name=enablePullRequestPreview" })
+  @SpeakeasyMetadata({ data: "json, name=enablePullRequestPreview" })
   enablePullRequestPreview?: boolean;
 
-  @Metadata({ data: "json, name=environmentVariables" })
+  @SpeakeasyMetadata({ data: "json, name=environmentVariables" })
   environmentVariables?: Map<string, string>;
 
-  @Metadata({ data: "json, name=framework" })
+  @SpeakeasyMetadata({ data: "json, name=framework" })
   framework?: string;
 
-  @Metadata({ data: "json, name=pullRequestEnvironmentName" })
+  @SpeakeasyMetadata({ data: "json, name=pullRequestEnvironmentName" })
   pullRequestEnvironmentName?: string;
 
-  @Metadata({ data: "json, name=stage" })
+  @SpeakeasyMetadata({ data: "json, name=stage" })
   stage?: StageEnum;
 }

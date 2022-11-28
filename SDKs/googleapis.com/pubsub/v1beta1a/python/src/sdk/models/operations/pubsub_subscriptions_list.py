@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -23,14 +24,14 @@ class PubsubSubscriptionsListQueryParams:
 
 @dataclass
 class PubsubSubscriptionsListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class PubsubSubscriptionsListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -41,13 +42,13 @@ class PubsubSubscriptionsListSecurity:
 
 @dataclass
 class PubsubSubscriptionsListRequest:
-    query_params: PubsubSubscriptionsListQueryParams = field(default=None)
-    security: PubsubSubscriptionsListSecurity = field(default=None)
+    query_params: PubsubSubscriptionsListQueryParams = field()
+    security: PubsubSubscriptionsListSecurity = field()
     
 
 @dataclass
 class PubsubSubscriptionsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_subscriptions_response: Optional[shared.ListSubscriptionsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

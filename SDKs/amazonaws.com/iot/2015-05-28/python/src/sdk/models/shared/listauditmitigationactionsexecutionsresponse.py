@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import auditmitigationactionexecutionmetadata
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListAuditMitigationActionsExecutionsResponse:
-    actions_executions: Optional[List[auditmitigationactionexecutionmetadata.AuditMitigationActionExecutionMetadata]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'actionsExecutions' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextToken' }})
+    actions_executions: Optional[List[AuditMitigationActionExecutionMetadata]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('actionsExecutions') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextToken') }})
     

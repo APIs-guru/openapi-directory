@@ -1,5 +1,8 @@
 package shared
 
+// ConnectorOperator
+//
+//	The operation to be performed on the provided source fields.
 type ConnectorOperator struct {
 	Amplitude       *AmplitudeConnectorOperatorEnum       `json:"Amplitude,omitempty"`
 	Datadog         *DatadogConnectorOperatorEnum         `json:"Datadog,omitempty"`

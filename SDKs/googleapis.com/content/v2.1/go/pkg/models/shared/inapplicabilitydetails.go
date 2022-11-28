@@ -14,6 +14,8 @@ const (
 	InapplicabilityDetailsInapplicableReasonEnumInvalidFloorConfig              InapplicabilityDetailsInapplicableReasonEnum = "INVALID_FLOOR_CONFIG"
 )
 
+// InapplicabilityDetails
+// Map of inapplicability details.
 type InapplicabilityDetails struct {
 	InapplicableCount  *string                                       `json:"inapplicableCount,omitempty"`
 	InapplicableReason *InapplicabilityDetailsInapplicableReasonEnum `json:"inapplicableReason,omitempty"`

@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class TelemetryData:
-    level: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'level' }})
-    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
-    optional_values: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'optionalValues' }})
-    time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'time' }})
+    level: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('level') }})
+    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('message') }})
+    optional_values: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('optionalValues') }})
+    time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('time') }})
     

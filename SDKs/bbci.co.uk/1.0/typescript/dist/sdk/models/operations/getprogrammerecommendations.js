@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetProgrammeRecommendationsPathParams = /** @class */ (function (_super) {
     __extends(GetProgrammeRecommendationsPathParams, _super);
@@ -30,7 +30,7 @@ var GetProgrammeRecommendationsPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=pid" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=pid" }),
         __metadata("design:type", String)
     ], GetProgrammeRecommendationsPathParams.prototype, "pid", void 0);
     return GetProgrammeRecommendationsPathParams;
@@ -42,19 +42,19 @@ var GetProgrammeRecommendationsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=availability" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=availability" }),
         __metadata("design:type", String)
     ], GetProgrammeRecommendationsQueryParams.prototype, "availability", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" }),
         __metadata("design:type", Number)
     ], GetProgrammeRecommendationsQueryParams.prototype, "page", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=per_page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" }),
         __metadata("design:type", Number)
     ], GetProgrammeRecommendationsQueryParams.prototype, "perPage", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=rights" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=rights" }),
         __metadata("design:type", String)
     ], GetProgrammeRecommendationsQueryParams.prototype, "rights", void 0);
     return GetProgrammeRecommendationsQueryParams;
@@ -66,11 +66,11 @@ var GetProgrammeRecommendationsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetProgrammeRecommendationsPathParams)
     ], GetProgrammeRecommendationsRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetProgrammeRecommendationsQueryParams)
     ], GetProgrammeRecommendationsRequest.prototype, "queryParams", void 0);
     return GetProgrammeRecommendationsRequest;
@@ -82,15 +82,15 @@ var GetProgrammeRecommendationsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetProgrammeRecommendationsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetProgrammeRecommendationsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], GetProgrammeRecommendationsResponse.prototype, "ibl", void 0);
     return GetProgrammeRecommendationsResponse;

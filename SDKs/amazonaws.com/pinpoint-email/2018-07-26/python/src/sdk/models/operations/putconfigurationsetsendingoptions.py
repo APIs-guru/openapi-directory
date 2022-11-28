@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
 class PutConfigurationSetSendingOptionsPathParams:
-    configuration_set_name: str = field(default=None, metadata={'path_param': { 'field_name': 'ConfigurationSetName', 'style': 'simple', 'explode': False }})
+    configuration_set_name: str = field(metadata={'path_param': { 'field_name': 'ConfigurationSetName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,22 +26,22 @@ class PutConfigurationSetSendingOptionsHeaders:
 @dataclass_json
 @dataclass
 class PutConfigurationSetSendingOptionsRequestBody:
-    sending_enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SendingEnabled' }})
+    sending_enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SendingEnabled') }})
     
 
 @dataclass
 class PutConfigurationSetSendingOptionsRequest:
-    path_params: PutConfigurationSetSendingOptionsPathParams = field(default=None)
-    headers: PutConfigurationSetSendingOptionsHeaders = field(default=None)
-    request: PutConfigurationSetSendingOptionsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: PutConfigurationSetSendingOptionsHeaders = field()
+    path_params: PutConfigurationSetSendingOptionsPathParams = field()
+    request: PutConfigurationSetSendingOptionsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PutConfigurationSetSendingOptionsResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
     put_configuration_set_sending_options_response: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import colorstop
+from sdk import utils
+from . import *
 
 class RecolorNameEnum(str, Enum):
     NONE = "NONE"
@@ -34,6 +36,10 @@ class RecolorNameEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Recolor:
-    name: Optional[RecolorNameEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    recolor_stops: Optional[List[colorstop.ColorStop]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'recolorStops' }})
+    r"""Recolor
+    A recolor effect applied on an image.
+    """
+    
+    name: Optional[RecolorNameEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    recolor_stops: Optional[List[ColorStop]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('recolorStops') }})
     

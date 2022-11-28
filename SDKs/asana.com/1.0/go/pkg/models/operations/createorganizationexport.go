@@ -15,13 +15,13 @@ type CreateOrganizationExportRequestBody struct {
 	Data *shared.OrganizationExportRequest `json:"data,omitempty"`
 }
 
+type CreateOrganizationExport201ApplicationJSON struct {
+	Data *shared.OrganizationExportResponse `json:"data,omitempty"`
+}
+
 type CreateOrganizationExportRequest struct {
 	QueryParams CreateOrganizationExportQueryParams
 	Request     CreateOrganizationExportRequestBody `request:"mediaType=application/json"`
-}
-
-type CreateOrganizationExport201ApplicationJSON struct {
-	Data *shared.OrganizationExportResponse `json:"data,omitempty"`
 }
 
 type CreateOrganizationExportResponse struct {

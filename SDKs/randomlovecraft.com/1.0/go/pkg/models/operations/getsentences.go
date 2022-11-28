@@ -8,12 +8,12 @@ type GetSentencesQueryParams struct {
 	Limit *int64 `queryParam:"style=form,explode=true,name=limit"`
 }
 
-type GetSentencesRequest struct {
-	QueryParams GetSentencesQueryParams
-}
-
 type GetSentences200ApplicationJSON struct {
 	Data []shared.Sentence `json:"data,omitempty"`
+}
+
+type GetSentencesRequest struct {
+	QueryParams GetSentencesQueryParams
 }
 
 type GetSentencesResponse struct {

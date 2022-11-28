@@ -1,8 +1,11 @@
-import warnings
+
+__doc__ = """ SDK Documentation: https://www.pdfblocks.com/docs/api/v1 - Documentation and examples"""
 import requests
 from typing import Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -12,37 +15,65 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    r"""SDK Documentation: https://www.pdfblocks.com/docs/api/v1 - Documentation and examples"""
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
-    
-    def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
+            self._server_url = server_url
 
+        
+    
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        
+    
+
+    def config_security(self, security: shared.Security):
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        
+    
+    
     
     def add_image_watermark_v1(self, request: operations.AddImageWatermarkV1Request) -> operations.AddImageWatermarkV1Response:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add an image watermark to a PDF
+        Add an image watermark to each page of a PDF document.
+        https://www.pdfblocks.com/docs/api/v1/add-watermark-image - Documentation and examples
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/add_watermark/image"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -60,22 +91,24 @@ class SDK:
 
     
     def add_password_v1(self, request: operations.AddPasswordV1Request) -> operations.AddPasswordV1Response:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add a password to a PDF
+        Protect a PDF document with a password. Encrypt the PDF document to prevent unauthorized access.
+        https://www.pdfblocks.com/docs/api/v1/add-password - Documentation and examples
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/add_password"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -93,22 +126,24 @@ class SDK:
 
     
     def add_restrictions_v1(self, request: operations.AddRestrictionsV1Request) -> operations.AddRestrictionsV1Response:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add restrictions to a PDF
+        Add restrictions to prevent copying, printing, and modifying a PDF document.
+        https://www.pdfblocks.com/docs/api/v1/add-restrictions - Documentation and examples
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/add_restrictions"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -126,22 +161,24 @@ class SDK:
 
     
     def add_text_watermark_v1(self, request: operations.AddTextWatermarkV1Request) -> operations.AddTextWatermarkV1Response:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add a text watermark to a PDF
+        Add a text watermark to each page of a PDF document. Choose from several watermark templates.
+        https://www.pdfblocks.com/docs/api/v1/add-watermark-text - Documentation and examples
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/add_watermark/text"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -159,22 +196,24 @@ class SDK:
 
     
     def extract_pages_v1(self, request: operations.ExtractPagesV1Request) -> operations.ExtractPagesV1Response:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Extract pages from a PDF
+        Extract one or more pages from a PDF document.
+        https://www.pdfblocks.com/docs/api/v1/extract-pages - Documentation and examples
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/extract_pages"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -192,22 +231,24 @@ class SDK:
 
     
     def merge_documents_v1(self, request: operations.MergeDocumentsV1Request) -> operations.MergeDocumentsV1Response:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Merge PDF documents
+        Combine multiple PDF documents into a single PDF document.
+        https://www.pdfblocks.com/docs/api/v1/merge-documents - Documentation and examples
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/merge_documents"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -225,22 +266,24 @@ class SDK:
 
     
     def remove_pages_v1(self, request: operations.RemovePagesV1Request) -> operations.RemovePagesV1Response:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Remove pages from a PDF
+        Remove one or more pages from a PDF document.
+        https://www.pdfblocks.com/docs/api/v1/remove-pages - Documentation and examples
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/remove_pages"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -258,22 +301,24 @@ class SDK:
 
     
     def remove_password_v1(self, request: operations.RemovePasswordV1Request) -> operations.RemovePasswordV1Response:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Remove the password from a PDF
+        Remove the password from an encrypted PDF document. The PDF document will no longer require a password to open.
+        https://www.pdfblocks.com/docs/api/v1/remove-password - Documentation and examples
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/remove_password"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -291,22 +336,24 @@ class SDK:
 
     
     def remove_restrictions_v1(self, request: operations.RemoveRestrictionsV1Request) -> operations.RemoveRestrictionsV1Response:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Remove the restrictions from a PDF
+        Remove all the restrictions from a PDF document.
+        https://www.pdfblocks.com/docs/api/v1/remove-restrictions - Documentation and examples
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/remove_restrictions"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -324,22 +371,24 @@ class SDK:
 
     
     def remove_signatures_v1(self, request: operations.RemoveSignaturesV1Request) -> operations.RemoveSignaturesV1Response:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Remove the signatures from a PDF
+        Remove the cryptographic signatures and timestamps from a PDF document.
+        https://www.pdfblocks.com/docs/api/v1/remove-signatures - Documentation and examples
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/remove_signatures"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -357,22 +406,24 @@ class SDK:
 
     
     def reverse_pages_v1(self, request: operations.ReversePagesV1Request) -> operations.ReversePagesV1Response:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Reverse the pages of a PDF
+        Reverse the order of the pages of a PDF document.
+        https://www.pdfblocks.com/docs/api/v1/reverse-pages - Documentation and examples
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/reverse_pages"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -390,22 +441,24 @@ class SDK:
 
     
     def rotate_pages_v1(self, request: operations.RotatePagesV1Request) -> operations.RotatePagesV1Response:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Rotate pages in a PDF
+        Rotate one or more pages in a PDF document.
+        https://www.pdfblocks.com/docs/api/v1/rotate-pages - Documentation and examples
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/rotate_pages"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

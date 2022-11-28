@@ -15,6 +15,8 @@ type CreateAuditSuppressionHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateAuditSuppressionRequestBodyResourceIdentifier
+// Information that identifies the noncompliant resource.
 type CreateAuditSuppressionRequestBodyResourceIdentifier struct {
 	Account                 *string                         `json:"account,omitempty"`
 	CaCertificateID         *string                         `json:"caCertificateId,omitempty"`

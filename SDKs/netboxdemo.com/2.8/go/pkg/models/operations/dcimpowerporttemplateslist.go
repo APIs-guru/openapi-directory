@@ -42,15 +42,15 @@ type DcimPowerPortTemplatesListQueryParams struct {
 	TypeN            *string `queryParam:"style=form,explode=true,name=type__n"`
 }
 
-type DcimPowerPortTemplatesListRequest struct {
-	QueryParams DcimPowerPortTemplatesListQueryParams
-}
-
 type DcimPowerPortTemplatesList200ApplicationJSON struct {
 	Count    int64                      `json:"count"`
 	Next     *string                    `json:"next,omitempty"`
 	Previous *string                    `json:"previous,omitempty"`
 	Results  []shared.PowerPortTemplate `json:"results"`
+}
+
+type DcimPowerPortTemplatesListRequest struct {
+	QueryParams DcimPowerPortTemplatesListQueryParams
 }
 
 type DcimPowerPortTemplatesListResponse struct {

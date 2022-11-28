@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TflApiPresentationEntitiesStatusSeverity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=modeName" })
+  @SpeakeasyMetadata({ data: "json, name=modeName" })
   modeName?: string;
 
-  @Metadata({ data: "json, name=severityLevel" })
+  @SpeakeasyMetadata({ data: "json, name=severityLevel" })
   severityLevel?: number;
 }

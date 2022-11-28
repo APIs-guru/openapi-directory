@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 class CreateRepositoryXAmzTargetEnum(str, Enum):
@@ -8,6 +12,7 @@ class CreateRepositoryXAmzTargetEnum(str, Enum):
 
 @dataclass
 class CreateRepositoryHeaders:
+    x_amz_target: CreateRepositoryXAmzTargetEnum = field(metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm', 'style': 'simple', 'explode': False }})
     x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256', 'style': 'simple', 'explode': False }})
     x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential', 'style': 'simple', 'explode': False }})
@@ -15,18 +20,18 @@ class CreateRepositoryHeaders:
     x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token', 'style': 'simple', 'explode': False }})
     x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature', 'style': 'simple', 'explode': False }})
     x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders', 'style': 'simple', 'explode': False }})
-    x_amz_target: CreateRepositoryXAmzTargetEnum = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class CreateRepositoryRequest:
-    headers: CreateRepositoryHeaders = field(default=None)
-    request: shared.CreateRepositoryRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateRepositoryHeaders = field()
+    request: shared.CreateRepositoryRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateRepositoryResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     create_repository_response: Optional[shared.CreateRepositoryResponse] = field(default=None)
     invalid_parameter_exception: Optional[Any] = field(default=None)
     invalid_tag_parameter_exception: Optional[Any] = field(default=None)
@@ -34,6 +39,5 @@ class CreateRepositoryResponse:
     limit_exceeded_exception: Optional[Any] = field(default=None)
     repository_already_exists_exception: Optional[Any] = field(default=None)
     server_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_tags_exception: Optional[Any] = field(default=None)
     

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConnectionStatusEnum } from "./connectionstatusenum";
+
 
 
 // ConnectionState
@@ -7,9 +8,9 @@ import { ConnectionStatusEnum } from "./connectionstatusenum";
  * The state of a connection.
 **/
 export class ConnectionState extends SpeakeasyBase {
-  @Metadata({ data: "json, name=lastUpdatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdatedAt" })
   lastUpdatedAt?: Date;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: ConnectionStatusEnum;
 }

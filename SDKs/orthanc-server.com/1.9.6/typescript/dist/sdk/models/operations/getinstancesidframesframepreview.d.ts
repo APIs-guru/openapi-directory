@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class GetInstancesIdFramesFramePreviewPathParams extends SpeakeasyBase {
     frame: number;
     id: string;

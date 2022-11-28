@@ -5,12 +5,12 @@ from sdk.models import shared
 
 @dataclass
 class AccessibilityRequest:
-    request: shared.AccessibilityRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.AccessibilityRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class AccessibilityResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     getcurrentvalues: Optional[shared.Getcurrentvalues] = field(default=None)
-    status_code: int = field(default=None)
     

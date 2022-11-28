@@ -1,12 +1,9 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class AppApiWmmEndpointsWmmMagneticFieldQueryParams extends SpeakeasyBase {
     altitude: number;
     latitude: number;
     longitude: number;
     year: number;
-}
-export declare class AppApiWmmEndpointsWmmMagneticFieldRequest extends SpeakeasyBase {
-    queryParams: AppApiWmmEndpointsWmmMagneticFieldQueryParams;
 }
 /**
  * The angle in the horizontal plane between magnetic north and true north. Declination is positive when magnetic north is east of true north.
@@ -45,6 +42,9 @@ export declare class AppApiWmmEndpointsWmmMagneticField200ApplicationJson extend
     gridVariation?: AppApiWmmEndpointsWmmMagneticField200ApplicationJsonGridVariation;
     inclination?: AppApiWmmEndpointsWmmMagneticField200ApplicationJsonInclination;
     totalIntensity?: AppApiWmmEndpointsWmmMagneticField200ApplicationJsonTotalIntensity;
+}
+export declare class AppApiWmmEndpointsWmmMagneticFieldRequest extends SpeakeasyBase {
+    queryParams: AppApiWmmEndpointsWmmMagneticFieldQueryParams;
 }
 export declare class AppApiWmmEndpointsWmmMagneticFieldResponse extends SpeakeasyBase {
     contentType: string;

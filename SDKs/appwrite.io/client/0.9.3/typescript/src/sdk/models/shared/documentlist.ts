@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DocumentList
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Documents List
 **/
 export class DocumentList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=documents" })
+  @SpeakeasyMetadata({ data: "json, name=documents" })
   documents: Map<string, any>[];
 
-  @Metadata({ data: "json, name=sum" })
+  @SpeakeasyMetadata({ data: "json, name=sum" })
   sum: number;
 }

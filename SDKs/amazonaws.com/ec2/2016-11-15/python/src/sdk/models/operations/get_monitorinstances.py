@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetMonitorInstancesActionEnum(str, Enum):
     MONITOR_INSTANCES = "MonitorInstances"
@@ -10,10 +14,10 @@ class GetMonitorInstancesVersionEnum(str, Enum):
 
 @dataclass
 class GetMonitorInstancesQueryParams:
-    action: GetMonitorInstancesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetMonitorInstancesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    instance_id: List[str] = field(metadata={'query_param': { 'field_name': 'InstanceId', 'style': 'form', 'explode': True }})
+    version: GetMonitorInstancesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    instance_id: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'InstanceId', 'style': 'form', 'explode': True }})
-    version: GetMonitorInstancesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetMonitorInstancesHeaders:
 
 @dataclass
 class GetMonitorInstancesRequest:
-    query_params: GetMonitorInstancesQueryParams = field(default=None)
-    headers: GetMonitorInstancesHeaders = field(default=None)
+    headers: GetMonitorInstancesHeaders = field()
+    query_params: GetMonitorInstancesQueryParams = field()
     
 
 @dataclass
 class GetMonitorInstancesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

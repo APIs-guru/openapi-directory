@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { BatchDeleteImportDataError } from "./batchdeleteimportdataerror";
 export declare class BatchDeleteImportDataResponse extends SpeakeasyBase {
     errors?: BatchDeleteImportDataError[];

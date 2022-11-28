@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RepositoryMetadata } from "./repositorymetadata";
+
 
 
 // CreateRepositoryOutput
@@ -7,6 +8,6 @@ import { RepositoryMetadata } from "./repositorymetadata";
  * Represents the output of a create repository operation.
 **/
 export class CreateRepositoryOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=repositoryMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=repositoryMetadata" })
   repositoryMetadata?: RepositoryMetadata;
 }

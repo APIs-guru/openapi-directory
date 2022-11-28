@@ -1,5 +1,7 @@
 package shared
 
+// BuildProvenance
+// Provenance of a build. Contains all information needed to verify the full details about the build from source to completion.
 type BuildProvenance struct {
 	BuildOptions     map[string]string `json:"buildOptions,omitempty"`
 	BuilderVersion   *string           `json:"builderVersion,omitempty"`

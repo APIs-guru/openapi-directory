@@ -22,19 +22,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SystemTemplateSummary } from "./systemtemplatesummary";
 var SearchSystemTemplatesResponse = /** @class */ (function (_super) {
     __extends(SearchSystemTemplatesResponse, _super);
     function SearchSystemTemplatesResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=nextToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextToken" }),
         __metadata("design:type", String)
     ], SearchSystemTemplatesResponse.prototype, "nextToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=summaries", elemType: shared.SystemTemplateSummary }),
+        SpeakeasyMetadata({ data: "json, name=summaries", elemType: SystemTemplateSummary }),
         __metadata("design:type", Array)
     ], SearchSystemTemplatesResponse.prototype, "summaries", void 0);
     return SearchSystemTemplatesResponse;

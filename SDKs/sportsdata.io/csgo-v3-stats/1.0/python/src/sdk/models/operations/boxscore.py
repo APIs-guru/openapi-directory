@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 
 class BoxScoreFormatEnum(str, Enum):
     XML = "xml"
@@ -8,18 +9,18 @@ class BoxScoreFormatEnum(str, Enum):
 
 @dataclass
 class BoxScorePathParams:
-    format: BoxScoreFormatEnum = field(default=None, metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
-    gameid: str = field(default=None, metadata={'path_param': { 'field_name': 'gameid', 'style': 'simple', 'explode': False }})
+    format: BoxScoreFormatEnum = field(metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
+    gameid: str = field(metadata={'path_param': { 'field_name': 'gameid', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class BoxScoreRequest:
-    path_params: BoxScorePathParams = field(default=None)
+    path_params: BoxScorePathParams = field()
     
 
 @dataclass
 class BoxScoreResponse:
+    content_type: str = field()
+    status_code: int = field()
     box_scores: Optional[List[Any]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

@@ -8,6 +8,8 @@ const (
 	GoogleCloudRunV2TrafficTargetStatusTypeEnumTrafficTargetAllocationTypeRevision    GoogleCloudRunV2TrafficTargetStatusTypeEnum = "TRAFFIC_TARGET_ALLOCATION_TYPE_REVISION"
 )
 
+// GoogleCloudRunV2TrafficTargetStatus
+// Represents the observed state of a single `TrafficTarget` entry.
 type GoogleCloudRunV2TrafficTargetStatus struct {
 	Percent  *int32                                       `json:"percent,omitempty"`
 	Revision *string                                      `json:"revision,omitempty"`

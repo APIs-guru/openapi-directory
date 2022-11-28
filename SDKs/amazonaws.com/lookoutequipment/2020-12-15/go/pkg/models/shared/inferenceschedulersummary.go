@@ -1,5 +1,7 @@
 package shared
 
+// InferenceSchedulerSummary
+// Contains information about the specific inference scheduler, including data delay offset, model name and ARN, status, and so on.
 type InferenceSchedulerSummary struct {
 	DataDelayOffsetInMinutes *int64                        `json:"DataDelayOffsetInMinutes,omitempty"`
 	DataUploadFrequency      *DataUploadFrequencyEnum      `json:"DataUploadFrequency,omitempty"`

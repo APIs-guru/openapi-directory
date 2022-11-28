@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetApiTextPasswordQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=hasDigits" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=hasDigits" })
   hasDigits: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=hasSpecial" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=hasSpecial" })
   hasSpecial: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=hasUppercase" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=hasUppercase" })
   hasUppercase: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=length" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=length" })
   length: number;
 }
 
 
 export class GetApiTextPasswordHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Api-Key" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Api-Key" })
   xApiKey?: string;
 }
 
 
 export class GetApiTextPasswordRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetApiTextPasswordQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetApiTextPasswordHeaders;
 }
 
 
 export class GetApiTextPasswordResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

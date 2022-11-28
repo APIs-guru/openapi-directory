@@ -31,7 +31,7 @@ type CloudbuildProjectsLocationsBitbucketServerConfigsCreateSecurity struct {
 type CloudbuildProjectsLocationsBitbucketServerConfigsCreateRequest struct {
 	PathParams  CloudbuildProjectsLocationsBitbucketServerConfigsCreatePathParams
 	QueryParams CloudbuildProjectsLocationsBitbucketServerConfigsCreateQueryParams
-	Request     *shared.BitbucketServerConfig `request:"mediaType=application/json"`
+	Request     *shared.BitbucketServerConfigInput `request:"mediaType=application/json"`
 	Security    CloudbuildProjectsLocationsBitbucketServerConfigsCreateSecurity
 }
 

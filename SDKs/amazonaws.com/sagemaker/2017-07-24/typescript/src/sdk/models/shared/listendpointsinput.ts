@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EndpointSortKeyEnum } from "./endpointsortkeyenum";
 import { OrderKeyEnum } from "./orderkeyenum";
 import { EndpointStatusEnum } from "./endpointstatusenum";
 
 
+
 export class ListEndpointsInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreationTimeAfter" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTimeAfter" })
   creationTimeAfter?: Date;
 
-  @Metadata({ data: "json, name=CreationTimeBefore" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTimeBefore" })
   creationTimeBefore?: Date;
 
-  @Metadata({ data: "json, name=LastModifiedTimeAfter" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedTimeAfter" })
   lastModifiedTimeAfter?: Date;
 
-  @Metadata({ data: "json, name=LastModifiedTimeBefore" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedTimeBefore" })
   lastModifiedTimeBefore?: Date;
 
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=NameContains" })
+  @SpeakeasyMetadata({ data: "json, name=NameContains" })
   nameContains?: string;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=SortBy" })
+  @SpeakeasyMetadata({ data: "json, name=SortBy" })
   sortBy?: EndpointSortKeyEnum;
 
-  @Metadata({ data: "json, name=SortOrder" })
+  @SpeakeasyMetadata({ data: "json, name=SortOrder" })
   sortOrder?: OrderKeyEnum;
 
-  @Metadata({ data: "json, name=StatusEquals" })
+  @SpeakeasyMetadata({ data: "json, name=StatusEquals" })
   statusEquals?: EndpointStatusEnum;
 }

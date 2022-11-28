@@ -1,5 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
@@ -22,17 +25,17 @@ class ListEventIntegrationsHeaders:
 
 @dataclass
 class ListEventIntegrationsRequest:
-    query_params: ListEventIntegrationsQueryParams = field(default=None)
-    headers: ListEventIntegrationsHeaders = field(default=None)
+    headers: ListEventIntegrationsHeaders = field()
+    query_params: ListEventIntegrationsQueryParams = field()
     
 
 @dataclass
 class ListEventIntegrationsResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_service_error: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     list_event_integrations_response: Optional[shared.ListEventIntegrationsResponse] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

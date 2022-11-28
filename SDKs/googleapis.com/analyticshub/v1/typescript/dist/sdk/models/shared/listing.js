@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BigQueryDatasetSource } from "./bigquerydatasetsource";
 import { DataProvider } from "./dataprovider";
 import { Publisher } from "./publisher";
@@ -54,6 +54,58 @@ export var ListingStateEnum;
     ListingStateEnum["StateUnspecified"] = "STATE_UNSPECIFIED";
     ListingStateEnum["Active"] = "ACTIVE";
 })(ListingStateEnum || (ListingStateEnum = {}));
+// ListingInput
+/**
+ * A listing is what gets published into a data exchange that a subscriber can subscribe to. It contains a reference to the data source along with descriptive information that will help subscribers find and subscribe the data.
+**/
+var ListingInput = /** @class */ (function (_super) {
+    __extends(ListingInput, _super);
+    function ListingInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=bigqueryDataset" }),
+        __metadata("design:type", BigQueryDatasetSource)
+    ], ListingInput.prototype, "bigqueryDataset", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=categories" }),
+        __metadata("design:type", Array)
+    ], ListingInput.prototype, "categories", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=dataProvider" }),
+        __metadata("design:type", DataProvider)
+    ], ListingInput.prototype, "dataProvider", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=description" }),
+        __metadata("design:type", String)
+    ], ListingInput.prototype, "description", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
+        __metadata("design:type", String)
+    ], ListingInput.prototype, "displayName", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=documentation" }),
+        __metadata("design:type", String)
+    ], ListingInput.prototype, "documentation", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=icon" }),
+        __metadata("design:type", String)
+    ], ListingInput.prototype, "icon", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=primaryContact" }),
+        __metadata("design:type", String)
+    ], ListingInput.prototype, "primaryContact", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=publisher" }),
+        __metadata("design:type", Publisher)
+    ], ListingInput.prototype, "publisher", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=requestAccess" }),
+        __metadata("design:type", String)
+    ], ListingInput.prototype, "requestAccess", void 0);
+    return ListingInput;
+}(SpeakeasyBase));
+export { ListingInput };
 // Listing
 /**
  * A listing is what gets published into a data exchange that a subscriber can subscribe to. It contains a reference to the data source along with descriptive information that will help subscribers find and subscribe the data.
@@ -64,51 +116,51 @@ var Listing = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=bigqueryDataset" }),
+        SpeakeasyMetadata({ data: "json, name=bigqueryDataset" }),
         __metadata("design:type", BigQueryDatasetSource)
     ], Listing.prototype, "bigqueryDataset", void 0);
     __decorate([
-        Metadata({ data: "json, name=categories" }),
+        SpeakeasyMetadata({ data: "json, name=categories" }),
         __metadata("design:type", Array)
     ], Listing.prototype, "categories", void 0);
     __decorate([
-        Metadata({ data: "json, name=dataProvider" }),
+        SpeakeasyMetadata({ data: "json, name=dataProvider" }),
         __metadata("design:type", DataProvider)
     ], Listing.prototype, "dataProvider", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], Listing.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=displayName" }),
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
         __metadata("design:type", String)
     ], Listing.prototype, "displayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=documentation" }),
+        SpeakeasyMetadata({ data: "json, name=documentation" }),
         __metadata("design:type", String)
     ], Listing.prototype, "documentation", void 0);
     __decorate([
-        Metadata({ data: "json, name=icon" }),
+        SpeakeasyMetadata({ data: "json, name=icon" }),
         __metadata("design:type", String)
     ], Listing.prototype, "icon", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Listing.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=primaryContact" }),
+        SpeakeasyMetadata({ data: "json, name=primaryContact" }),
         __metadata("design:type", String)
     ], Listing.prototype, "primaryContact", void 0);
     __decorate([
-        Metadata({ data: "json, name=publisher" }),
+        SpeakeasyMetadata({ data: "json, name=publisher" }),
         __metadata("design:type", Publisher)
     ], Listing.prototype, "publisher", void 0);
     __decorate([
-        Metadata({ data: "json, name=requestAccess" }),
+        SpeakeasyMetadata({ data: "json, name=requestAccess" }),
         __metadata("design:type", String)
     ], Listing.prototype, "requestAccess", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], Listing.prototype, "state", void 0);
     return Listing;

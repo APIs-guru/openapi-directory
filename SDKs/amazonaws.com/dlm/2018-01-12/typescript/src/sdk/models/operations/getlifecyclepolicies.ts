@@ -1,83 +1,84 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum GetLifecyclePoliciesStateEnum {
-    Enabled = "ENABLED"
-,    Disabled = "DISABLED"
-,    Error = "ERROR"
+    Enabled = "ENABLED",
+    Disabled = "DISABLED",
+    Error = "ERROR"
 }
 
 
 export class GetLifecyclePoliciesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=policyIds" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=policyIds" })
   policyIds?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=resourceTypes" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=resourceTypes" })
   resourceTypes?: shared.ResourceTypeValuesEnum[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=state" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=state" })
   state?: GetLifecyclePoliciesStateEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=tagsToAdd" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tagsToAdd" })
   tagsToAdd?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=targetTags" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=targetTags" })
   targetTags?: string[];
 }
 
 
 export class GetLifecyclePoliciesHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class GetLifecyclePoliciesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetLifecyclePoliciesQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetLifecyclePoliciesHeaders;
 }
 
 
 export class GetLifecyclePoliciesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getLifecyclePoliciesResponse?: shared.GetLifecyclePoliciesResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   limitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

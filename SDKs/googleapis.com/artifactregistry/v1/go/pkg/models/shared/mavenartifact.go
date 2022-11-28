@@ -1,5 +1,7 @@
 package shared
 
+// MavenArtifact
+// MavenArtifact represents a maven artifact.
 type MavenArtifact struct {
 	ArtifactID *string `json:"artifactId,omitempty"`
 	CreateTime *string `json:"createTime,omitempty"`

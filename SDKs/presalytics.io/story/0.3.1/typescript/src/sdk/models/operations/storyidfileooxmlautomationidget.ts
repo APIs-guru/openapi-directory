@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class StoryIdFileOoxmlautomationidGetPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=ooxml_automation_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ooxml_automation_id" })
   ooxmlAutomationId: string;
 }
 
 
 export class StoryIdFileOoxmlautomationidGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: StoryIdFileOoxmlautomationidGetPathParams;
 }
 
 
 export class StoryIdFileOoxmlautomationidGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   excelSpreadsheet?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   powerpointPresentation?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   wordDocument?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetail?: any;
 }

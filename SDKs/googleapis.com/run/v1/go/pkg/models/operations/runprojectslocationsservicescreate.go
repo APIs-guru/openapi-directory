@@ -31,7 +31,7 @@ type RunProjectsLocationsServicesCreateSecurity struct {
 type RunProjectsLocationsServicesCreateRequest struct {
 	PathParams  RunProjectsLocationsServicesCreatePathParams
 	QueryParams RunProjectsLocationsServicesCreateQueryParams
-	Request     *shared.Service `request:"mediaType=application/json"`
+	Request     *shared.ServiceInput `request:"mediaType=application/json"`
 	Security    RunProjectsLocationsServicesCreateSecurity
 }
 

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Nameserver
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Nameserver includes the following elements.
 **/
 export class Nameserver extends SpeakeasyBase {
-  @Metadata({ data: "json, name=GlueIps" })
+  @SpeakeasyMetadata({ data: "json, name=GlueIps" })
   glueIps?: string[];
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 }

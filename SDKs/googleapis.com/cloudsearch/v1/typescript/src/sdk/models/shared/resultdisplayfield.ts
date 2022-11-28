@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NamedProperty } from "./namedproperty";
+
 
 
 // ResultDisplayField
@@ -7,12 +8,12 @@ import { NamedProperty } from "./namedproperty";
  * Display Fields for Search Results
 **/
 export class ResultDisplayField extends SpeakeasyBase {
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 
-  @Metadata({ data: "json, name=operatorName" })
+  @SpeakeasyMetadata({ data: "json, name=operatorName" })
   operatorName?: string;
 
-  @Metadata({ data: "json, name=property" })
+  @SpeakeasyMetadata({ data: "json, name=property" })
   property?: NamedProperty;
 }

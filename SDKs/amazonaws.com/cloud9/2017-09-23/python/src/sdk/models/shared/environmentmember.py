@@ -1,18 +1,24 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import permissions_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class EnvironmentMember:
-    environment_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'environmentId' }})
-    last_access: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lastAccess', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    permissions: permissions_enum.PermissionsEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'permissions' }})
-    user_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'userArn' }})
-    user_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'userId' }})
+    r"""EnvironmentMember
+    Information about an environment member for an Cloud9 development environment.
+    """
+    
+    environment_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('environmentId') }})
+    permissions: PermissionsEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('permissions') }})
+    user_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('userArn') }})
+    user_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('userId') }})
+    last_access: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lastAccess'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     

@@ -4,6 +4,9 @@ import (
 	"time"
 )
 
+// Delegation
+//
+//	The assignment of a control set to a delegate for review.
 type Delegation struct {
 	AssessmentID   *string               `json:"assessmentId,omitempty"`
 	AssessmentName *string               `json:"assessmentName,omitempty"`

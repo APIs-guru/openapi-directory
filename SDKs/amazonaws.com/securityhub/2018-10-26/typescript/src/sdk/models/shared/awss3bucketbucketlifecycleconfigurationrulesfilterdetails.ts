@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateDetails } from "./awss3bucketbucketlifecycleconfigurationrulesfilterpredicatedetails";
+
 
 
 // AwsS3BucketBucketLifecycleConfigurationRulesFilterDetails
@@ -7,6 +8,6 @@ import { AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateDetails } fr
  * Identifies the objects that a rule applies to.
 **/
 export class AwsS3BucketBucketLifecycleConfigurationRulesFilterDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Predicate" })
+  @SpeakeasyMetadata({ data: "json, name=Predicate" })
   predicate?: AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateDetails;
 }

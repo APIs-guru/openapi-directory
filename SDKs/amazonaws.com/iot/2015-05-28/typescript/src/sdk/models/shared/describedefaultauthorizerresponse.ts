@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AuthorizerDescription } from "./authorizerdescription";
 
 
+
 export class DescribeDefaultAuthorizerResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authorizerDescription" })
+  @SpeakeasyMetadata({ data: "json, name=authorizerDescription" })
   authorizerDescription?: AuthorizerDescription;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// RadiusSettings
+// Contains information about a Remote Authentication Dial In User Service (RADIUS) server.
 type RadiusSettings struct {
 	AuthenticationProtocol *RadiusAuthenticationProtocolEnum `json:"AuthenticationProtocol,omitempty"`
 	DisplayLabel           *string                           `json:"DisplayLabel,omitempty"`

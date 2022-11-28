@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import device
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DeviceEvent:
-    device: Optional[device.Device] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Device' }})
-    std_event: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StdEvent' }})
+    device: Optional[Device] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Device') }})
+    std_event: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StdEvent') }})
     

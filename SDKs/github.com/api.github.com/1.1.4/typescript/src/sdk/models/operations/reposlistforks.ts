@@ -1,66 +1,67 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ReposListForksPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=owner" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=owner" })
   owner: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repo" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repo" })
   repo: string;
 }
 
 export enum ReposListForksSortEnum {
-    Newest = "newest"
-,    Oldest = "oldest"
-,    Stargazers = "stargazers"
-,    Watchers = "watchers"
+    Newest = "newest",
+    Oldest = "oldest",
+    Stargazers = "stargazers",
+    Watchers = "watchers"
 }
 
 
 export class ReposListForksQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=org" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=org" })
   org?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=organization" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=organization" })
   organization?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: ReposListForksSortEnum;
 }
 
 
 export class ReposListForksRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ReposListForksPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ReposListForksQueryParams;
 }
 
 
 export class ReposListForksResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 
-  @Metadata({ elemType: shared.MinimalRepository })
+  @SpeakeasyMetadata({ elemType: shared.MinimalRepository })
   minimalRepositories?: shared.MinimalRepository[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   scimError?: shared.ScimError;
 }

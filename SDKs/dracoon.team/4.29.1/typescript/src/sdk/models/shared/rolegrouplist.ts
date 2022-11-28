@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RoleGroup } from "./rolegroup";
 import { Range } from "./range";
+
 
 
 // RoleGroupList
@@ -9,9 +9,9 @@ import { Range } from "./range";
  * List of groups with assigned role
 **/
 export class RoleGroupList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.RoleGroup })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: RoleGroup })
   items: RoleGroup[];
 
-  @Metadata({ data: "json, name=range" })
+  @SpeakeasyMetadata({ data: "json, name=range" })
   range: Range;
 }

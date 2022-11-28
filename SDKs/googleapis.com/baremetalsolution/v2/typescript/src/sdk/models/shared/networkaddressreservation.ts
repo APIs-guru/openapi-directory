@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // NetworkAddressReservation
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A reservation of one or more addresses in a network.
 **/
 export class NetworkAddressReservation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=endAddress" })
+  @SpeakeasyMetadata({ data: "json, name=endAddress" })
   endAddress?: string;
 
-  @Metadata({ data: "json, name=note" })
+  @SpeakeasyMetadata({ data: "json, name=note" })
   note?: string;
 
-  @Metadata({ data: "json, name=startAddress" })
+  @SpeakeasyMetadata({ data: "json, name=startAddress" })
   startAddress?: string;
 }

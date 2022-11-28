@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DimensionContribution } from "./dimensioncontribution";
+
 
 
 // ContributionMatrix
@@ -8,6 +8,6 @@ import { DimensionContribution } from "./dimensioncontribution";
  * Details about dimensions that contributed to an anomaly.
 **/
 export class ContributionMatrix extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DimensionContributionList", elemType: shared.DimensionContribution })
+  @SpeakeasyMetadata({ data: "json, name=DimensionContributionList", elemType: DimensionContribution })
   dimensionContributionList?: DimensionContribution[];
 }

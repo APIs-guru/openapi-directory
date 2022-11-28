@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { WmxSitemapContent } from "./wmxsitemapcontent";
 export var WmxSitemapTypeEnum;
 (function (WmxSitemapTypeEnum) {
     WmxSitemapTypeEnum["NotSitemap"] = "NOT_SITEMAP";
@@ -44,39 +44,39 @@ var WmxSitemap = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=contents", elemType: shared.WmxSitemapContent }),
+        SpeakeasyMetadata({ data: "json, name=contents", elemType: WmxSitemapContent }),
         __metadata("design:type", Array)
     ], WmxSitemap.prototype, "contents", void 0);
     __decorate([
-        Metadata({ data: "json, name=errors" }),
+        SpeakeasyMetadata({ data: "json, name=errors" }),
         __metadata("design:type", String)
     ], WmxSitemap.prototype, "errors", void 0);
     __decorate([
-        Metadata({ data: "json, name=isPending" }),
+        SpeakeasyMetadata({ data: "json, name=isPending" }),
         __metadata("design:type", Boolean)
     ], WmxSitemap.prototype, "isPending", void 0);
     __decorate([
-        Metadata({ data: "json, name=isSitemapsIndex" }),
+        SpeakeasyMetadata({ data: "json, name=isSitemapsIndex" }),
         __metadata("design:type", Boolean)
     ], WmxSitemap.prototype, "isSitemapsIndex", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastDownloaded" }),
+        SpeakeasyMetadata({ data: "json, name=lastDownloaded" }),
         __metadata("design:type", String)
     ], WmxSitemap.prototype, "lastDownloaded", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastSubmitted" }),
+        SpeakeasyMetadata({ data: "json, name=lastSubmitted" }),
         __metadata("design:type", String)
     ], WmxSitemap.prototype, "lastSubmitted", void 0);
     __decorate([
-        Metadata({ data: "json, name=path" }),
+        SpeakeasyMetadata({ data: "json, name=path" }),
         __metadata("design:type", String)
     ], WmxSitemap.prototype, "path", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], WmxSitemap.prototype, "type", void 0);
     __decorate([
-        Metadata({ data: "json, name=warnings" }),
+        SpeakeasyMetadata({ data: "json, name=warnings" }),
         __metadata("design:type", String)
     ], WmxSitemap.prototype, "warnings", void 0);
     return WmxSitemap;

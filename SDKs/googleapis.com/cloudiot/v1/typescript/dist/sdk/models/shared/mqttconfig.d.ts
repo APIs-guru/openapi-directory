@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum MqttConfigMqttEnabledStateEnum {
     MqttStateUnspecified = "MQTT_STATE_UNSPECIFIED",
     MqttEnabled = "MQTT_ENABLED",

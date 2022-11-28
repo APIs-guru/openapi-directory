@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var MetricDescriptorMetadataLaunchStageEnum;
 (function (MetricDescriptorMetadataLaunchStageEnum) {
     MetricDescriptorMetadataLaunchStageEnum["LaunchStageUnspecified"] = "LAUNCH_STAGE_UNSPECIFIED";
@@ -44,15 +44,15 @@ var MetricDescriptorMetadata = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ingestDelay" }),
+        SpeakeasyMetadata({ data: "json, name=ingestDelay" }),
         __metadata("design:type", String)
     ], MetricDescriptorMetadata.prototype, "ingestDelay", void 0);
     __decorate([
-        Metadata({ data: "json, name=launchStage" }),
+        SpeakeasyMetadata({ data: "json, name=launchStage" }),
         __metadata("design:type", String)
     ], MetricDescriptorMetadata.prototype, "launchStage", void 0);
     __decorate([
-        Metadata({ data: "json, name=samplePeriod" }),
+        SpeakeasyMetadata({ data: "json, name=samplePeriod" }),
         __metadata("design:type", String)
     ], MetricDescriptorMetadata.prototype, "samplePeriod", void 0);
     return MetricDescriptorMetadata;

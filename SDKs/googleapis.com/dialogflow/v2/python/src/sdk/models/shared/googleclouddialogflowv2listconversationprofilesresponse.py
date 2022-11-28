@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import googleclouddialogflowv2conversationprofile
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleCloudDialogflowV2ListConversationProfilesResponse:
-    conversation_profiles: Optional[List[googleclouddialogflowv2conversationprofile.GoogleCloudDialogflowV2ConversationProfile]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'conversationProfiles' }})
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextPageToken' }})
+    r"""GoogleCloudDialogflowV2ListConversationProfilesResponse
+    The response message for ConversationProfiles.ListConversationProfiles.
+    """
+    
+    conversation_profiles: Optional[List[GoogleCloudDialogflowV2ConversationProfile]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('conversationProfiles') }})
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextPageToken') }})
     

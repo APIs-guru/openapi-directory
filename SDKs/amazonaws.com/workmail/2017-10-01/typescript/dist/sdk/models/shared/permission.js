@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MemberTypeEnum } from "./membertypeenum";
 // Permission
 /**
@@ -34,15 +34,15 @@ var Permission = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=GranteeId" }),
+        SpeakeasyMetadata({ data: "json, name=GranteeId" }),
         __metadata("design:type", String)
     ], Permission.prototype, "granteeId", void 0);
     __decorate([
-        Metadata({ data: "json, name=GranteeType" }),
+        SpeakeasyMetadata({ data: "json, name=GranteeType" }),
         __metadata("design:type", String)
     ], Permission.prototype, "granteeType", void 0);
     __decorate([
-        Metadata({ data: "json, name=PermissionValues" }),
+        SpeakeasyMetadata({ data: "json, name=PermissionValues" }),
         __metadata("design:type", Array)
     ], Permission.prototype, "permissionValues", void 0);
     return Permission;

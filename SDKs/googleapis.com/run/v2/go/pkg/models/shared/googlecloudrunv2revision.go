@@ -21,6 +21,8 @@ const (
 	GoogleCloudRunV2RevisionLaunchStageEnumDeprecated             GoogleCloudRunV2RevisionLaunchStageEnum = "DEPRECATED"
 )
 
+// GoogleCloudRunV2Revision
+// A Revision is an immutable snapshot of code and configuration. A Revision references a container image. Revisions are only created by updates to its parent Service.
 type GoogleCloudRunV2Revision struct {
 	Annotations                   map[string]string                                 `json:"annotations,omitempty"`
 	Conditions                    []GoogleCloudRunV2Condition                       `json:"conditions,omitempty"`

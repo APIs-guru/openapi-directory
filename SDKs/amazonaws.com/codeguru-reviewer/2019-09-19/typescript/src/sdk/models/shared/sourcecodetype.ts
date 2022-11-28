@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BranchDiffSourceCodeType } from "./branchdiffsourcecodetype";
 import { CommitDiffSourceCodeType } from "./commitdiffsourcecodetype";
 import { RepositoryHeadSourceCodeType } from "./repositoryheadsourcecodetype";
@@ -6,23 +6,24 @@ import { RequestMetadata } from "./requestmetadata";
 import { S3BucketRepository } from "./s3bucketrepository";
 
 
+
 // SourceCodeType
 /** 
  *  Specifies the source code that is analyzed in a code review. 
 **/
 export class SourceCodeType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BranchDiff" })
+  @SpeakeasyMetadata({ data: "json, name=BranchDiff" })
   branchDiff?: BranchDiffSourceCodeType;
 
-  @Metadata({ data: "json, name=CommitDiff" })
+  @SpeakeasyMetadata({ data: "json, name=CommitDiff" })
   commitDiff?: CommitDiffSourceCodeType;
 
-  @Metadata({ data: "json, name=RepositoryHead" })
+  @SpeakeasyMetadata({ data: "json, name=RepositoryHead" })
   repositoryHead?: RepositoryHeadSourceCodeType;
 
-  @Metadata({ data: "json, name=RequestMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=RequestMetadata" })
   requestMetadata?: RequestMetadata;
 
-  @Metadata({ data: "json, name=S3BucketRepository" })
+  @SpeakeasyMetadata({ data: "json, name=S3BucketRepository" })
   s3BucketRepository?: S3BucketRepository;
 }

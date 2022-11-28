@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DownloadDefaultKeyPairResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=privateKeyBase64" })
+  @SpeakeasyMetadata({ data: "json, name=privateKeyBase64" })
   privateKeyBase64?: string;
 
-  @Metadata({ data: "json, name=publicKeyBase64" })
+  @SpeakeasyMetadata({ data: "json, name=publicKeyBase64" })
   publicKeyBase64?: string;
 }

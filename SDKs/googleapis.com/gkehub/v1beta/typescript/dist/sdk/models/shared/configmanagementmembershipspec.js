@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConfigManagementBinauthzConfig } from "./configmanagementbinauthzconfig";
 import { ConfigManagementConfigSync } from "./configmanagementconfigsync";
 import { ConfigManagementHierarchyControllerConfig } from "./configmanagementhierarchycontrollerconfig";
@@ -37,23 +37,23 @@ var ConfigManagementMembershipSpec = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=binauthz" }),
+        SpeakeasyMetadata({ data: "json, name=binauthz" }),
         __metadata("design:type", ConfigManagementBinauthzConfig)
     ], ConfigManagementMembershipSpec.prototype, "binauthz", void 0);
     __decorate([
-        Metadata({ data: "json, name=configSync" }),
+        SpeakeasyMetadata({ data: "json, name=configSync" }),
         __metadata("design:type", ConfigManagementConfigSync)
     ], ConfigManagementMembershipSpec.prototype, "configSync", void 0);
     __decorate([
-        Metadata({ data: "json, name=hierarchyController" }),
+        SpeakeasyMetadata({ data: "json, name=hierarchyController" }),
         __metadata("design:type", ConfigManagementHierarchyControllerConfig)
     ], ConfigManagementMembershipSpec.prototype, "hierarchyController", void 0);
     __decorate([
-        Metadata({ data: "json, name=policyController" }),
+        SpeakeasyMetadata({ data: "json, name=policyController" }),
         __metadata("design:type", ConfigManagementPolicyController)
     ], ConfigManagementMembershipSpec.prototype, "policyController", void 0);
     __decorate([
-        Metadata({ data: "json, name=version" }),
+        SpeakeasyMetadata({ data: "json, name=version" }),
         __metadata("design:type", String)
     ], ConfigManagementMembershipSpec.prototype, "version", void 0);
     return ConfigManagementMembershipSpec;

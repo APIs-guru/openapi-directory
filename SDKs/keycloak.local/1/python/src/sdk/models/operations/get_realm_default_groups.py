@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class GetRealmDefaultGroupsPathParams:
-    realm: str = field(default=None, metadata={'path_param': { 'field_name': 'realm', 'style': 'simple', 'explode': False }})
+    realm: str = field(metadata={'path_param': { 'field_name': 'realm', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetRealmDefaultGroupsRequest:
-    path_params: GetRealmDefaultGroupsPathParams = field(default=None)
+    path_params: GetRealmDefaultGroupsPathParams = field()
     
 
 @dataclass
 class GetRealmDefaultGroupsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     group_representations: Optional[List[shared.GroupRepresentation]] = field(default=None)
-    status_code: int = field(default=None)
     

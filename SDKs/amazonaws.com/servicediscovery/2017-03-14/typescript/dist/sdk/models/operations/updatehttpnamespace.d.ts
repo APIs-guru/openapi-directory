@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum UpdateHttpNamespaceXAmzTargetEnum {
     Route53AutoNamingV20170314UpdateHttpNamespace = "Route53AutoNaming_v20170314.UpdateHttpNamespace"

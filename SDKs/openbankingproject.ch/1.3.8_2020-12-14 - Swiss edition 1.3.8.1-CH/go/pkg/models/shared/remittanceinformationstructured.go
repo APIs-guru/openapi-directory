@@ -8,6 +8,8 @@ const (
 	RemittanceInformationStructuredScoRorQrRorIpiEnumIpi  RemittanceInformationStructuredScoRorQrRorIpiEnum = "IPI"
 )
 
+// RemittanceInformationStructured
+// Structured remittance information.
 type RemittanceInformationStructured struct {
 	ScoRorQrRorIpi                  *RemittanceInformationStructuredScoRorQrRorIpiEnum `json:"SCORorQRRorIPI,omitempty"`
 	AdditionalRemittanceInformation *string                                            `json:"additionalRemittanceInformation,omitempty"`

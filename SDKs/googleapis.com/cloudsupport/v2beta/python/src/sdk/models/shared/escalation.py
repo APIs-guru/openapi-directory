@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class EscalationReasonEnum(str, Enum):
     REASON_UNSPECIFIED = "REASON_UNSPECIFIED"
@@ -12,6 +14,10 @@ class EscalationReasonEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Escalation:
-    justification: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'justification' }})
-    reason: Optional[EscalationReasonEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reason' }})
+    r"""Escalation
+    An escalation of a support case.
+    """
+    
+    justification: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('justification') }})
+    reason: Optional[EscalationReasonEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('reason') }})
     

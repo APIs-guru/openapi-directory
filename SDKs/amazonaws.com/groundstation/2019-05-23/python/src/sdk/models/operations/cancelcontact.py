@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class CancelContactPathParams:
-    contact_id: str = field(default=None, metadata={'path_param': { 'field_name': 'contactId', 'style': 'simple', 'explode': False }})
+    contact_id: str = field(metadata={'path_param': { 'field_name': 'contactId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,16 +24,16 @@ class CancelContactHeaders:
 
 @dataclass
 class CancelContactRequest:
-    path_params: CancelContactPathParams = field(default=None)
-    headers: CancelContactHeaders = field(default=None)
+    headers: CancelContactHeaders = field()
+    path_params: CancelContactPathParams = field()
     
 
 @dataclass
 class CancelContactResponse:
+    content_type: str = field()
+    status_code: int = field()
     contact_id_response: Optional[shared.ContactIDResponse] = field(default=None)
-    content_type: str = field(default=None)
     dependency_exception: Optional[Any] = field(default=None)
     invalid_parameter_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

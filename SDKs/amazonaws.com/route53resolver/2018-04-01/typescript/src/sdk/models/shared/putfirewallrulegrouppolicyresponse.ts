@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PutFirewallRuleGroupPolicyResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ReturnValue" })
+  @SpeakeasyMetadata({ data: "json, name=ReturnValue" })
   returnValue?: boolean;
 }

@@ -8,6 +8,8 @@ const (
 	HashTypeEnumMd5                 HashTypeEnum = "MD5"
 )
 
+// Hash
+// A hash of file content.
 type Hash struct {
 	Type  *HashTypeEnum `json:"type,omitempty"`
 	Value *string       `json:"value,omitempty"`

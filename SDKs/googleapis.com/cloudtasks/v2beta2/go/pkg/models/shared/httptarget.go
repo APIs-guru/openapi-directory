@@ -13,6 +13,8 @@ const (
 	HTTPTargetHTTPMethodEnumOptions               HTTPTargetHTTPMethodEnum = "OPTIONS"
 )
 
+// HTTPTarget
+// HTTP target. When specified as a Queue, all the tasks with [HttpRequest] will be overridden according to the target.
 type HTTPTarget struct {
 	HeaderOverrides []HeaderOverride          `json:"headerOverrides,omitempty"`
 	HTTPMethod      *HTTPTargetHTTPMethodEnum `json:"httpMethod,omitempty"`

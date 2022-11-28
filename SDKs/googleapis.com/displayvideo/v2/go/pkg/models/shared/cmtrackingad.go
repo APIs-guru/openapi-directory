@@ -1,5 +1,7 @@
 package shared
 
+// CmTrackingAd
+// A Campaign Manager 360 tracking ad.
 type CmTrackingAd struct {
 	CmAdID        *string `json:"cmAdId,omitempty"`
 	CmCreativeID  *string `json:"cmCreativeId,omitempty"`

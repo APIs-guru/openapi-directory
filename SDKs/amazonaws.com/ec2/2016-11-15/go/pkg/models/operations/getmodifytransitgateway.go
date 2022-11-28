@@ -10,6 +10,8 @@ const (
 	GetModifyTransitGatewayActionEnumModifyTransitGateway GetModifyTransitGatewayActionEnum = "ModifyTransitGateway"
 )
 
+// GetModifyTransitGatewayOptions
+// The transit gateway options.
 type GetModifyTransitGatewayOptions struct {
 	AddTransitGatewayCidrBlocks    []string                                      `queryParam:"name=AddTransitGatewayCidrBlocks"`
 	AssociationDefaultRouteTableID *string                                       `queryParam:"name=AssociationDefaultRouteTableId"`

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostListCustomVerificationEmailTemplatesActionEnum(str, Enum):
     LIST_CUSTOM_VERIFICATION_EMAIL_TEMPLATES = "ListCustomVerificationEmailTemplates"
@@ -10,10 +14,10 @@ class PostListCustomVerificationEmailTemplatesVersionEnum(str, Enum):
 
 @dataclass
 class PostListCustomVerificationEmailTemplatesQueryParams:
-    action: PostListCustomVerificationEmailTemplatesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: PostListCustomVerificationEmailTemplatesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostListCustomVerificationEmailTemplatesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     max_results: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'MaxResults', 'style': 'form', 'explode': True }})
     next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NextToken', 'style': 'form', 'explode': True }})
-    version: PostListCustomVerificationEmailTemplatesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,14 +33,14 @@ class PostListCustomVerificationEmailTemplatesHeaders:
 
 @dataclass
 class PostListCustomVerificationEmailTemplatesRequest:
-    query_params: PostListCustomVerificationEmailTemplatesQueryParams = field(default=None)
-    headers: PostListCustomVerificationEmailTemplatesHeaders = field(default=None)
+    headers: PostListCustomVerificationEmailTemplatesHeaders = field()
+    query_params: PostListCustomVerificationEmailTemplatesQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostListCustomVerificationEmailTemplatesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

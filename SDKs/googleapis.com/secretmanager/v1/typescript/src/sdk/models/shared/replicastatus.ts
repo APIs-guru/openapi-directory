@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CustomerManagedEncryptionStatus } from "./customermanagedencryptionstatus";
+
 
 
 // ReplicaStatus
@@ -7,9 +8,9 @@ import { CustomerManagedEncryptionStatus } from "./customermanagedencryptionstat
  * Describes the status of a user-managed replica for the SecretVersion.
 **/
 export class ReplicaStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=customerManagedEncryption" })
+  @SpeakeasyMetadata({ data: "json, name=customerManagedEncryption" })
   customerManagedEncryption?: CustomerManagedEncryptionStatus;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: string;
 }

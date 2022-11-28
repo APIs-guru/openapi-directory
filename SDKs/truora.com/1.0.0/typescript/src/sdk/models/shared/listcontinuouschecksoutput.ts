@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Check } from "./check";
+
 
 
 // ListContinuousChecksOutput
@@ -8,12 +8,12 @@ import { Check } from "./check";
  * Represents to ListContinuousChecksOutput
 **/
 export class ListContinuousChecksOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=continuous_checks", elemType: shared.Check })
+  @SpeakeasyMetadata({ data: "json, name=continuous_checks", elemType: Check })
   continuousChecks?: Check[];
 
-  @Metadata({ data: "json, name=next" })
+  @SpeakeasyMetadata({ data: "json, name=next" })
   next?: string;
 
-  @Metadata({ data: "json, name=self" })
+  @SpeakeasyMetadata({ data: "json, name=self" })
   self?: string;
 }

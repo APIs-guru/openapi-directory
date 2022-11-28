@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Compatibility } from "./compatibility";
 // AddonVersionInfo
 /**
  * Information about an add-on version.
@@ -34,15 +34,15 @@ var AddonVersionInfo = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=addonVersion" }),
+        SpeakeasyMetadata({ data: "json, name=addonVersion" }),
         __metadata("design:type", String)
     ], AddonVersionInfo.prototype, "addonVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=architecture" }),
+        SpeakeasyMetadata({ data: "json, name=architecture" }),
         __metadata("design:type", Array)
     ], AddonVersionInfo.prototype, "architecture", void 0);
     __decorate([
-        Metadata({ data: "json, name=compatibilities", elemType: shared.Compatibility }),
+        SpeakeasyMetadata({ data: "json, name=compatibilities", elemType: Compatibility }),
         __metadata("design:type", Array)
     ], AddonVersionInfo.prototype, "compatibilities", void 0);
     return AddonVersionInfo;

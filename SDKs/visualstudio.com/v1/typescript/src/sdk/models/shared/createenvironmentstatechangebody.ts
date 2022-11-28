@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateEnvironmentStateChangeBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=newValue" })
+  @SpeakeasyMetadata({ data: "json, name=newValue" })
   newValue?: number;
 
-  @Metadata({ data: "json, name=oldValue" })
+  @SpeakeasyMetadata({ data: "json, name=oldValue" })
   oldValue?: number;
 
-  @Metadata({ data: "json, name=time" })
+  @SpeakeasyMetadata({ data: "json, name=time" })
   time?: Date;
 }

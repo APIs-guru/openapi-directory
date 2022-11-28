@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Vaccine } from "./vaccine";
 export declare class VaccineResponse extends SpeakeasyBase {
     age?: number;

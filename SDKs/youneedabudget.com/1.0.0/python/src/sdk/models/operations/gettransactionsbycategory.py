@@ -1,15 +1,16 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetTransactionsByCategoryPathParams:
-    budget_id: str = field(default=None, metadata={'path_param': { 'field_name': 'budget_id', 'style': 'simple', 'explode': False }})
-    category_id: str = field(default=None, metadata={'path_param': { 'field_name': 'category_id', 'style': 'simple', 'explode': False }})
+    budget_id: str = field(metadata={'path_param': { 'field_name': 'budget_id', 'style': 'simple', 'explode': False }})
+    category_id: str = field(metadata={'path_param': { 'field_name': 'category_id', 'style': 'simple', 'explode': False }})
     
 class GetTransactionsByCategoryTypeEnum(str, Enum):
     UNCATEGORIZED = "uncategorized"
@@ -19,20 +20,20 @@ class GetTransactionsByCategoryTypeEnum(str, Enum):
 @dataclass
 class GetTransactionsByCategoryQueryParams:
     last_knowledge_of_server: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'last_knowledge_of_server', 'style': 'form', 'explode': True }})
-    since_date: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'since_date', 'style': 'form', 'explode': True }})
+    since_date: Optional[date] = field(default=None, metadata={'query_param': { 'field_name': 'since_date', 'style': 'form', 'explode': True }})
     type: Optional[GetTransactionsByCategoryTypeEnum] = field(default=None, metadata={'query_param': { 'field_name': 'type', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class GetTransactionsByCategoryRequest:
-    path_params: GetTransactionsByCategoryPathParams = field(default=None)
-    query_params: GetTransactionsByCategoryQueryParams = field(default=None)
+    path_params: GetTransactionsByCategoryPathParams = field()
+    query_params: GetTransactionsByCategoryQueryParams = field()
     
 
 @dataclass
 class GetTransactionsByCategoryResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     hybrid_transactions_response: Optional[shared.HybridTransactionsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

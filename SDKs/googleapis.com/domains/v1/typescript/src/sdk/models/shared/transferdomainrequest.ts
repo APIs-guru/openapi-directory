@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AuthorizationCode } from "./authorizationcode";
-import { Registration } from "./registration";
+import { RegistrationInput } from "./registration";
 import { Money } from "./money";
 
+
 export enum TransferDomainRequestContactNoticesEnum {
-    ContactNoticeUnspecified = "CONTACT_NOTICE_UNSPECIFIED"
-,    PublicContactDataAcknowledgement = "PUBLIC_CONTACT_DATA_ACKNOWLEDGEMENT"
+    ContactNoticeUnspecified = "CONTACT_NOTICE_UNSPECIFIED",
+    PublicContactDataAcknowledgement = "PUBLIC_CONTACT_DATA_ACKNOWLEDGEMENT"
 }
 
 
-// TransferDomainRequest
+// TransferDomainRequestInput
 /** 
  * Request for the `TransferDomain` method.
 **/
-export class TransferDomainRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authorizationCode" })
+export class TransferDomainRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=authorizationCode" })
   authorizationCode?: AuthorizationCode;
 
-  @Metadata({ data: "json, name=contactNotices" })
+  @SpeakeasyMetadata({ data: "json, name=contactNotices" })
   contactNotices?: TransferDomainRequestContactNoticesEnum[];
 
-  @Metadata({ data: "json, name=registration" })
-  registration?: Registration;
+  @SpeakeasyMetadata({ data: "json, name=registration" })
+  registration?: RegistrationInput;
 
-  @Metadata({ data: "json, name=validateOnly" })
+  @SpeakeasyMetadata({ data: "json, name=validateOnly" })
   validateOnly?: boolean;
 
-  @Metadata({ data: "json, name=yearlyPrice" })
+  @SpeakeasyMetadata({ data: "json, name=yearlyPrice" })
   yearlyPrice?: Money;
 }

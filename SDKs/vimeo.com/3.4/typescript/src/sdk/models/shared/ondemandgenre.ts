@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // OnDemandGenreInteractionsPage
@@ -6,19 +7,19 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Interactions for On Demand pages that are in this genre.
 **/
 export class OnDemandGenreInteractionsPage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=added" })
+  @SpeakeasyMetadata({ data: "json, name=added" })
   added: boolean;
 
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
 
 export class OnDemandGenreInteractions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=page" })
+  @SpeakeasyMetadata({ data: "json, name=page" })
   page: OnDemandGenreInteractionsPage;
 }
 
@@ -28,10 +29,10 @@ export class OnDemandGenreInteractions extends SpeakeasyBase {
  * Information about the On Demand pages related to this group.
 **/
 export class OnDemandGenreMetadataConnectionsPages extends SpeakeasyBase {
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options: string[];
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }
 
@@ -41,33 +42,33 @@ export class OnDemandGenreMetadataConnectionsPages extends SpeakeasyBase {
  * A collection of information connected to this resource.
 **/
 export class OnDemandGenreMetadataConnections extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pages" })
+  @SpeakeasyMetadata({ data: "json, name=pages" })
   pages: OnDemandGenreMetadataConnectionsPages;
 }
 
 
 export class OnDemandGenreMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=connections" })
+  @SpeakeasyMetadata({ data: "json, name=connections" })
   connections: OnDemandGenreMetadataConnections;
 }
 
 
 export class OnDemandGenre extends SpeakeasyBase {
-  @Metadata({ data: "json, name=canonical" })
+  @SpeakeasyMetadata({ data: "json, name=canonical" })
   canonical: string;
 
-  @Metadata({ data: "json, name=interactions" })
+  @SpeakeasyMetadata({ data: "json, name=interactions" })
   interactions: OnDemandGenreInteractions;
 
-  @Metadata({ data: "json, name=link" })
+  @SpeakeasyMetadata({ data: "json, name=link" })
   link: string;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata: OnDemandGenreMetadata;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }

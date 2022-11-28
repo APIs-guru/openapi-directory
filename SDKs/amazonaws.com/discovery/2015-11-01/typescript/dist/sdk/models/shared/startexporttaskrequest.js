@@ -22,27 +22,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ExportFilter } from "./exportfilter";
 var StartExportTaskRequest = /** @class */ (function (_super) {
     __extends(StartExportTaskRequest, _super);
     function StartExportTaskRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=endTime" }),
+        SpeakeasyMetadata({ data: "json, name=endTime" }),
         __metadata("design:type", Date)
     ], StartExportTaskRequest.prototype, "endTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=exportDataFormat" }),
+        SpeakeasyMetadata({ data: "json, name=exportDataFormat" }),
         __metadata("design:type", Array)
     ], StartExportTaskRequest.prototype, "exportDataFormat", void 0);
     __decorate([
-        Metadata({ data: "json, name=filters", elemType: shared.ExportFilter }),
+        SpeakeasyMetadata({ data: "json, name=filters", elemType: ExportFilter }),
         __metadata("design:type", Array)
     ], StartExportTaskRequest.prototype, "filters", void 0);
     __decorate([
-        Metadata({ data: "json, name=startTime" }),
+        SpeakeasyMetadata({ data: "json, name=startTime" }),
         __metadata("design:type", Date)
     ], StartExportTaskRequest.prototype, "startTime", void 0);
     return StartExportTaskRequest;

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GamesConfigurationAchievementConfigurationsListPathParams:
-    application_id: str = field(default=None, metadata={'path_param': { 'field_name': 'applicationId', 'style': 'simple', 'explode': False }})
+    application_id: str = field(metadata={'path_param': { 'field_name': 'applicationId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class GamesConfigurationAchievementConfigurationsListQueryParams:
 
 @dataclass
 class GamesConfigurationAchievementConfigurationsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GamesConfigurationAchievementConfigurationsListRequest:
-    path_params: GamesConfigurationAchievementConfigurationsListPathParams = field(default=None)
-    query_params: GamesConfigurationAchievementConfigurationsListQueryParams = field(default=None)
-    security: GamesConfigurationAchievementConfigurationsListSecurity = field(default=None)
+    path_params: GamesConfigurationAchievementConfigurationsListPathParams = field()
+    query_params: GamesConfigurationAchievementConfigurationsListQueryParams = field()
+    security: GamesConfigurationAchievementConfigurationsListSecurity = field()
     
 
 @dataclass
 class GamesConfigurationAchievementConfigurationsListResponse:
+    content_type: str = field()
+    status_code: int = field()
     achievement_configuration_list_response: Optional[shared.AchievementConfigurationListResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

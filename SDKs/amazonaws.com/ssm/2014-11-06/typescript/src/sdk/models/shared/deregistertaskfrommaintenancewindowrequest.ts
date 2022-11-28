@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeregisterTaskFromMaintenanceWindowRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=WindowId" })
+  @SpeakeasyMetadata({ data: "json, name=WindowId" })
   windowId: string;
 
-  @Metadata({ data: "json, name=WindowTaskId" })
+  @SpeakeasyMetadata({ data: "json, name=WindowTaskId" })
   windowTaskId: string;
 }

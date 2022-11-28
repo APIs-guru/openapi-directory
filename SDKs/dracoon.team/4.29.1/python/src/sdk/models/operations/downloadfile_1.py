@@ -4,7 +4,7 @@ from typing import Optional
 
 @dataclass
 class DownloadFile1PathParams:
-    file_id: int = field(default=None, metadata={'path_param': { 'field_name': 'file_id', 'style': 'simple', 'explode': False }})
+    file_id: int = field(metadata={'path_param': { 'field_name': 'file_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,14 +21,14 @@ class DownloadFile1Headers:
 
 @dataclass
 class DownloadFile1Request:
-    path_params: DownloadFile1PathParams = field(default=None)
-    query_params: DownloadFile1QueryParams = field(default=None)
-    headers: DownloadFile1Headers = field(default=None)
+    headers: DownloadFile1Headers = field()
+    path_params: DownloadFile1PathParams = field()
+    query_params: DownloadFile1QueryParams = field()
     
 
 @dataclass
 class DownloadFile1Response:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

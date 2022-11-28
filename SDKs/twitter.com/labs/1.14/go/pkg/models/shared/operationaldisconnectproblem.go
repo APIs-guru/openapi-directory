@@ -14,6 +14,8 @@ const (
 	OperationalDisconnectProblemDisconnectTypeEnumClientApplicationStateDegraded OperationalDisconnectProblemDisconnectTypeEnum = "ClientApplicationStateDegraded"
 )
 
+// OperationalDisconnectProblem
+// You have been disconnected for operational reasons.
 type OperationalDisconnectProblem struct {
 	Detail         string                                          `json:"detail"`
 	DisconnectType *OperationalDisconnectProblemDisconnectTypeEnum `json:"disconnect_type,omitempty"`

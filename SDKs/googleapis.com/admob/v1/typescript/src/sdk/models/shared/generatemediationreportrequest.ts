@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MediationReportSpec } from "./mediationreportspec";
+
 
 
 // GenerateMediationReportRequest
 /** 
- * Request to generate an AdMob Mediation report.
+ * Request to generate an AdMob mediation report.
 **/
 export class GenerateMediationReportRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=reportSpec" })
+  @SpeakeasyMetadata({ data: "json, name=reportSpec" })
   reportSpec?: MediationReportSpec;
 }

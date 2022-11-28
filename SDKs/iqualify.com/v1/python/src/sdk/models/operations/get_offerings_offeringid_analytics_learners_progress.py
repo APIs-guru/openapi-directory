@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class GetOfferingsOfferingIDAnalyticsLearnersProgressPathParams:
-    offering_id: str = field(default=None, metadata={'path_param': { 'field_name': 'offeringId', 'style': 'simple', 'explode': False }})
+    offering_id: str = field(metadata={'path_param': { 'field_name': 'offeringId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetOfferingsOfferingIDAnalyticsLearnersProgressRequest:
-    path_params: GetOfferingsOfferingIDAnalyticsLearnersProgressPathParams = field(default=None)
+    path_params: GetOfferingsOfferingIDAnalyticsLearnersProgressPathParams = field()
     
 
 @dataclass
 class GetOfferingsOfferingIDAnalyticsLearnersProgressResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[shared.Error] = field(default=None)
     learner_progress_responses: Optional[List[shared.LearnerProgressResponse]] = field(default=None)
-    status_code: int = field(default=None)
     

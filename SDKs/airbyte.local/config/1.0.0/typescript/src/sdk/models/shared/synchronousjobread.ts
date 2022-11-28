@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { JobConfigTypeEnum } from "./jobconfigtypeenum";
 import { LogRead } from "./logread";
 
 
+
 export class SynchronousJobRead extends SpeakeasyBase {
-  @Metadata({ data: "json, name=configId" })
+  @SpeakeasyMetadata({ data: "json, name=configId" })
   configId?: string;
 
-  @Metadata({ data: "json, name=configType" })
+  @SpeakeasyMetadata({ data: "json, name=configType" })
   configType: JobConfigTypeEnum;
 
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt: number;
 
-  @Metadata({ data: "json, name=endedAt" })
+  @SpeakeasyMetadata({ data: "json, name=endedAt" })
   endedAt: number;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=logs" })
+  @SpeakeasyMetadata({ data: "json, name=logs" })
   logs?: LogRead;
 
-  @Metadata({ data: "json, name=succeeded" })
+  @SpeakeasyMetadata({ data: "json, name=succeeded" })
   succeeded: boolean;
 }

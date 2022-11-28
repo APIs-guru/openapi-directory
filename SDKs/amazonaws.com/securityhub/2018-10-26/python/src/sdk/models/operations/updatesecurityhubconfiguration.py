@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
@@ -17,23 +21,23 @@ class UpdateSecurityHubConfigurationHeaders:
 @dataclass_json
 @dataclass
 class UpdateSecurityHubConfigurationRequestBody:
-    auto_enable_controls: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AutoEnableControls' }})
+    auto_enable_controls: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AutoEnableControls') }})
     
 
 @dataclass
 class UpdateSecurityHubConfigurationRequest:
-    headers: UpdateSecurityHubConfigurationHeaders = field(default=None)
-    request: UpdateSecurityHubConfigurationRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateSecurityHubConfigurationHeaders = field()
+    request: UpdateSecurityHubConfigurationRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateSecurityHubConfigurationResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_exception: Optional[Any] = field(default=None)
     invalid_access_exception: Optional[Any] = field(default=None)
     invalid_input_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     update_security_hub_configuration_response: Optional[dict[str, Any]] = field(default=None)
     

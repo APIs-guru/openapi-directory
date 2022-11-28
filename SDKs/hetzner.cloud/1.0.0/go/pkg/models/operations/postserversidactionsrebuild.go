@@ -8,11 +8,8 @@ type PostServersIDActionsRebuildRebuildServerRequest struct {
 	Image string `json:"image"`
 }
 
-type PostServersIDActionsRebuildRequest struct {
-	PathParams PostServersIDActionsRebuildPathParams
-	Request    *PostServersIDActionsRebuildRebuildServerRequest `request:"mediaType=application/json"`
-}
-
+// PostServersIDActionsRebuild201ApplicationJSONActionError
+// Error message for the Action if error occurred, otherwise null
 type PostServersIDActionsRebuild201ApplicationJSONActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -45,6 +42,11 @@ type PostServersIDActionsRebuild201ApplicationJSONAction struct {
 type PostServersIDActionsRebuild201ApplicationJSON struct {
 	Action       *PostServersIDActionsRebuild201ApplicationJSONAction `json:"action,omitempty"`
 	RootPassword *string                                              `json:"root_password,omitempty"`
+}
+
+type PostServersIDActionsRebuildRequest struct {
+	PathParams PostServersIDActionsRebuildPathParams
+	Request    *PostServersIDActionsRebuildRebuildServerRequest `request:"mediaType=application/json"`
 }
 
 type PostServersIDActionsRebuildResponse struct {

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CloudWatchLogsDestination } from "./cloudwatchlogsdestination";
 import { KinesisFirehoseDestination } from "./kinesisfirehosedestination";
 import { SnsDestination } from "./snsdestination";
@@ -36,27 +36,27 @@ var EventDestination = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CloudWatchLogsDestination" }),
+        SpeakeasyMetadata({ data: "json, name=CloudWatchLogsDestination" }),
         __metadata("design:type", CloudWatchLogsDestination)
     ], EventDestination.prototype, "cloudWatchLogsDestination", void 0);
     __decorate([
-        Metadata({ data: "json, name=Enabled" }),
+        SpeakeasyMetadata({ data: "json, name=Enabled" }),
         __metadata("design:type", Boolean)
     ], EventDestination.prototype, "enabled", void 0);
     __decorate([
-        Metadata({ data: "json, name=KinesisFirehoseDestination" }),
+        SpeakeasyMetadata({ data: "json, name=KinesisFirehoseDestination" }),
         __metadata("design:type", KinesisFirehoseDestination)
     ], EventDestination.prototype, "kinesisFirehoseDestination", void 0);
     __decorate([
-        Metadata({ data: "json, name=MatchingEventTypes" }),
+        SpeakeasyMetadata({ data: "json, name=MatchingEventTypes" }),
         __metadata("design:type", Array)
     ], EventDestination.prototype, "matchingEventTypes", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], EventDestination.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=SnsDestination" }),
+        SpeakeasyMetadata({ data: "json, name=SnsDestination" }),
         __metadata("design:type", SnsDestination)
     ], EventDestination.prototype, "snsDestination", void 0);
     return EventDestination;

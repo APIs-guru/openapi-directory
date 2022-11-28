@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EndpointGroup } from "./endpointgroup";
 
 
+
 export class UpdateEndpointGroupResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EndpointGroup" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointGroup" })
   endpointGroup?: EndpointGroup;
 }

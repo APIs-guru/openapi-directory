@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var NetworkInstanceIpModeEnum;
 (function (NetworkInstanceIpModeEnum) {
     NetworkInstanceIpModeEnum["InstanceIpModeUnspecified"] = "INSTANCE_IP_MODE_UNSPECIFIED";
@@ -39,27 +39,27 @@ var Network = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=forwardedPorts" }),
+        SpeakeasyMetadata({ data: "json, name=forwardedPorts" }),
         __metadata("design:type", Array)
     ], Network.prototype, "forwardedPorts", void 0);
     __decorate([
-        Metadata({ data: "json, name=instanceIpMode" }),
+        SpeakeasyMetadata({ data: "json, name=instanceIpMode" }),
         __metadata("design:type", String)
     ], Network.prototype, "instanceIpMode", void 0);
     __decorate([
-        Metadata({ data: "json, name=instanceTag" }),
+        SpeakeasyMetadata({ data: "json, name=instanceTag" }),
         __metadata("design:type", String)
     ], Network.prototype, "instanceTag", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Network.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=sessionAffinity" }),
+        SpeakeasyMetadata({ data: "json, name=sessionAffinity" }),
         __metadata("design:type", Boolean)
     ], Network.prototype, "sessionAffinity", void 0);
     __decorate([
-        Metadata({ data: "json, name=subnetworkName" }),
+        SpeakeasyMetadata({ data: "json, name=subnetworkName" }),
         __metadata("design:type", String)
     ], Network.prototype, "subnetworkName", void 0);
     return Network;

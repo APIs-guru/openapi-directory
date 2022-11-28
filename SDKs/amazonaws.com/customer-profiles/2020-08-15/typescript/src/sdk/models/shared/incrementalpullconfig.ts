@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // IncrementalPullConfig
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies the configuration used when importing incremental records from the source.
 **/
 export class IncrementalPullConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DatetimeTypeFieldName" })
+  @SpeakeasyMetadata({ data: "json, name=DatetimeTypeFieldName" })
   datetimeTypeFieldName?: string;
 }

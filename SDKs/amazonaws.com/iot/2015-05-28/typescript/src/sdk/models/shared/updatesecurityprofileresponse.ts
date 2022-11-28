@@ -1,38 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MetricToRetain } from "./metrictoretain";
 import { AlertTarget } from "./alerttarget";
 import { Behavior } from "./behavior";
 
 
+
 export class UpdateSecurityProfileResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=additionalMetricsToRetain" })
+  @SpeakeasyMetadata({ data: "json, name=additionalMetricsToRetain" })
   additionalMetricsToRetain?: string[];
 
-  @Metadata({ data: "json, name=additionalMetricsToRetainV2", elemType: shared.MetricToRetain })
+  @SpeakeasyMetadata({ data: "json, name=additionalMetricsToRetainV2", elemType: MetricToRetain })
   additionalMetricsToRetainV2?: MetricToRetain[];
 
-  @Metadata({ data: "json, name=alertTargets", elemType: shared.AlertTarget })
+  @SpeakeasyMetadata({ data: "json, name=alertTargets", elemType: AlertTarget })
   alertTargets?: Map<string, AlertTarget>;
 
-  @Metadata({ data: "json, name=behaviors", elemType: shared.Behavior })
+  @SpeakeasyMetadata({ data: "json, name=behaviors", elemType: Behavior })
   behaviors?: Behavior[];
 
-  @Metadata({ data: "json, name=creationDate" })
+  @SpeakeasyMetadata({ data: "json, name=creationDate" })
   creationDate?: Date;
 
-  @Metadata({ data: "json, name=lastModifiedDate" })
+  @SpeakeasyMetadata({ data: "json, name=lastModifiedDate" })
   lastModifiedDate?: Date;
 
-  @Metadata({ data: "json, name=securityProfileArn" })
+  @SpeakeasyMetadata({ data: "json, name=securityProfileArn" })
   securityProfileArn?: string;
 
-  @Metadata({ data: "json, name=securityProfileDescription" })
+  @SpeakeasyMetadata({ data: "json, name=securityProfileDescription" })
   securityProfileDescription?: string;
 
-  @Metadata({ data: "json, name=securityProfileName" })
+  @SpeakeasyMetadata({ data: "json, name=securityProfileName" })
   securityProfileName?: string;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: number;
 }

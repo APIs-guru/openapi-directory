@@ -1,6 +1,7 @@
 
 
+
 export enum SkipCountEnum {
-    True = "true"
-,    False = "false"
+    True = "true",
+    False = "false"
 }

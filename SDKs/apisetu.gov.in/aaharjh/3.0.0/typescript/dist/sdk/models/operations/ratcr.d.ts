@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class RatcrRequestBodyCertificateParameters extends SpeakeasyBase {
     dob: string;
@@ -18,10 +18,6 @@ export declare class RatcrRequestBody extends SpeakeasyBase {
 export declare class RatcrSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class RatcrRequest extends SpeakeasyBase {
-    request?: RatcrRequestBody;
-    security: RatcrSecurity;
 }
 export declare enum Ratcr400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -104,6 +100,10 @@ export declare enum Ratcr504ApplicationJsonErrorDescriptionEnum {
 export declare class Ratcr504ApplicationJson extends SpeakeasyBase {
     error?: Ratcr504ApplicationJsonErrorEnum;
     errorDescription?: Ratcr504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class RatcrRequest extends SpeakeasyBase {
+    request?: RatcrRequestBody;
+    security: RatcrSecurity;
 }
 export declare class RatcrResponse extends SpeakeasyBase {
     contentType: string;

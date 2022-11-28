@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConnectorStateEnum } from "./connectorstateenum";
 
 
+
 export class UpdateConnectorResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=connectorArn" })
+  @SpeakeasyMetadata({ data: "json, name=connectorArn" })
   connectorArn?: string;
 
-  @Metadata({ data: "json, name=connectorState" })
+  @SpeakeasyMetadata({ data: "json, name=connectorState" })
   connectorState?: ConnectorStateEnum;
 }

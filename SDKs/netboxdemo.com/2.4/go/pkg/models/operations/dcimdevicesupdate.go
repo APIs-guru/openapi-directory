@@ -10,7 +10,7 @@ type DcimDevicesUpdatePathParams struct {
 
 type DcimDevicesUpdateRequest struct {
 	PathParams DcimDevicesUpdatePathParams
-	Request    shared.WritableDevice `request:"mediaType=application/json"`
+	Request    shared.WritableDeviceInput `request:"mediaType=application/json"`
 }
 
 type DcimDevicesUpdateResponse struct {

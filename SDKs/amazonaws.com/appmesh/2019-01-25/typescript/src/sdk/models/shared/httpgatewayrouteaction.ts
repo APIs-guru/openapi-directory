@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HttpGatewayRouteRewrite } from "./httpgatewayrouterewrite";
 import { GatewayRouteTarget } from "./gatewayroutetarget";
+
 
 
 // HttpGatewayRouteAction
@@ -8,9 +9,9 @@ import { GatewayRouteTarget } from "./gatewayroutetarget";
  * An object that represents the action to take if a match is determined.
 **/
 export class HttpGatewayRouteAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=rewrite" })
+  @SpeakeasyMetadata({ data: "json, name=rewrite" })
   rewrite?: HttpGatewayRouteRewrite;
 
-  @Metadata({ data: "json, name=target" })
+  @SpeakeasyMetadata({ data: "json, name=target" })
   target: GatewayRouteTarget;
 }

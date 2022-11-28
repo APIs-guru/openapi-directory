@@ -1,5 +1,7 @@
 package shared
 
+// HyperParameterTrainingJobDefinition
+// Defines the training jobs launched by a hyperparameter tuning job.
 type HyperParameterTrainingJobDefinition struct {
 	AlgorithmSpecification                HyperParameterAlgorithmSpecification `json:"AlgorithmSpecification"`
 	CheckpointConfig                      *CheckpointConfig                    `json:"CheckpointConfig,omitempty"`

@@ -1,67 +1,68 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Wireless extends SpeakeasyBase {
-  @Metadata({ data: "json, name=agent_name" })
+  @SpeakeasyMetadata({ data: "json, name=agent_name" })
   agentName?: string;
 
-  @Metadata({ data: "json, name=authentication" })
+  @SpeakeasyMetadata({ data: "json, name=authentication" })
   authentication?: string;
 
-  @Metadata({ data: "json, name=bssid" })
+  @SpeakeasyMetadata({ data: "json, name=bssid" })
   bssid?: string;
 
-  @Metadata({ data: "json, name=channels" })
+  @SpeakeasyMetadata({ data: "json, name=channels" })
   channels?: string;
 
-  @Metadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata({ data: "json, name=created_at" })
   createdAt?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, string>;
 
-  @Metadata({ data: "json, name=encryption" })
+  @SpeakeasyMetadata({ data: "json, name=encryption" })
   encryption?: string;
 
-  @Metadata({ data: "json, name=essid" })
+  @SpeakeasyMetadata({ data: "json, name=essid" })
   essid?: string;
 
-  @Metadata({ data: "json, name=family" })
+  @SpeakeasyMetadata({ data: "json, name=family" })
   family?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=interface" })
+  @SpeakeasyMetadata({ data: "json, name=interface" })
   interface?: string;
 
-  @Metadata({ data: "json, name=last_agent_id" })
+  @SpeakeasyMetadata({ data: "json, name=last_agent_id" })
   lastAgentId?: string;
 
-  @Metadata({ data: "json, name=last_seen" })
+  @SpeakeasyMetadata({ data: "json, name=last_seen" })
   lastSeen?: number;
 
-  @Metadata({ data: "json, name=last_task_id" })
+  @SpeakeasyMetadata({ data: "json, name=last_task_id" })
   lastTaskId?: string;
 
-  @Metadata({ data: "json, name=org_name" })
+  @SpeakeasyMetadata({ data: "json, name=org_name" })
   orgName?: string;
 
-  @Metadata({ data: "json, name=organization_id" })
+  @SpeakeasyMetadata({ data: "json, name=organization_id" })
   organizationId?: string;
 
-  @Metadata({ data: "json, name=signal" })
+  @SpeakeasyMetadata({ data: "json, name=signal" })
   signal?: number;
 
-  @Metadata({ data: "json, name=site_id" })
+  @SpeakeasyMetadata({ data: "json, name=site_id" })
   siteId?: string;
 
-  @Metadata({ data: "json, name=site_name" })
+  @SpeakeasyMetadata({ data: "json, name=site_name" })
   siteName?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 
-  @Metadata({ data: "json, name=vendor" })
+  @SpeakeasyMetadata({ data: "json, name=vendor" })
   vendor?: string;
 }

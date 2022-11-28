@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DestinationSchema } from "./destinationschema";
 import { KinesisFirehoseOutputUpdate } from "./kinesisfirehoseoutputupdate";
 import { KinesisStreamsOutputUpdate } from "./kinesisstreamsoutputupdate";

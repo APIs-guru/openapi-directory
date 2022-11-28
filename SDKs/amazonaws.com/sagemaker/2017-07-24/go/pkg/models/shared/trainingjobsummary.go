@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// TrainingJobSummary
+// Provides summary information about a training job.
 type TrainingJobSummary struct {
 	CreationTime      time.Time             `json:"CreationTime"`
 	LastModifiedTime  *time.Time            `json:"LastModifiedTime,omitempty"`

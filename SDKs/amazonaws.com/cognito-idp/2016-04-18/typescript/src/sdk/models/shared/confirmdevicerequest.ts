@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeviceSecretVerifierConfigType } from "./devicesecretverifierconfigtype";
+
 
 
 // ConfirmDeviceRequest
@@ -7,15 +8,15 @@ import { DeviceSecretVerifierConfigType } from "./devicesecretverifierconfigtype
  * Confirms the device request.
 **/
 export class ConfirmDeviceRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccessToken" })
+  @SpeakeasyMetadata({ data: "json, name=AccessToken" })
   accessToken: string;
 
-  @Metadata({ data: "json, name=DeviceKey" })
+  @SpeakeasyMetadata({ data: "json, name=DeviceKey" })
   deviceKey: string;
 
-  @Metadata({ data: "json, name=DeviceName" })
+  @SpeakeasyMetadata({ data: "json, name=DeviceName" })
   deviceName?: string;
 
-  @Metadata({ data: "json, name=DeviceSecretVerifierConfig" })
+  @SpeakeasyMetadata({ data: "json, name=DeviceSecretVerifierConfig" })
   deviceSecretVerifierConfig?: DeviceSecretVerifierConfigType;
 }

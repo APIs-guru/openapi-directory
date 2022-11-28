@@ -60,15 +60,15 @@ type IpamPrefixesListQueryParams struct {
 	WithinInclude  *string  `queryParam:"style=form,explode=true,name=within_include"`
 }
 
-type IpamPrefixesListRequest struct {
-	QueryParams IpamPrefixesListQueryParams
-}
-
 type IpamPrefixesList200ApplicationJSON struct {
 	Count    int64           `json:"count"`
 	Next     *string         `json:"next,omitempty"`
 	Previous *string         `json:"previous,omitempty"`
 	Results  []shared.Prefix `json:"results"`
+}
+
+type IpamPrefixesListRequest struct {
+	QueryParams IpamPrefixesListQueryParams
 }
 
 type IpamPrefixesListResponse struct {

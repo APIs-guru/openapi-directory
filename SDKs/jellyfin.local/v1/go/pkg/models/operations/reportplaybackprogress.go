@@ -4,10 +4,10 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-type ReportPlaybackProgressRequests struct {
-	PlaybackProgressInfo  *shared.PlaybackProgressInfo `request:"mediaType=application/*+json"`
-	PlaybackProgressInfo1 *shared.PlaybackProgressInfo `request:"mediaType=application/json"`
-	PlaybackProgressInfo2 *shared.PlaybackProgressInfo `request:"mediaType=text/json"`
+type ReportPlaybackProgressRequestsInput struct {
+	PlaybackProgressInfo  *shared.PlaybackProgressInfoInput `request:"mediaType=application/*+json"`
+	PlaybackProgressInfo1 *shared.PlaybackProgressInfoInput `request:"mediaType=application/json"`
+	PlaybackProgressInfo2 *shared.PlaybackProgressInfoInput `request:"mediaType=text/json"`
 }
 
 type ReportPlaybackProgressSecurity struct {
@@ -15,7 +15,7 @@ type ReportPlaybackProgressSecurity struct {
 }
 
 type ReportPlaybackProgressRequest struct {
-	Request  *ReportPlaybackProgressRequests
+	Request  *ReportPlaybackProgressRequestsInput
 	Security ReportPlaybackProgressSecurity
 }
 

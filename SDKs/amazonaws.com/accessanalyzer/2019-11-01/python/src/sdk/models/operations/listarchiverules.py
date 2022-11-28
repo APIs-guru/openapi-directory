@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class ListArchiveRulesPathParams:
-    analyzer_name: str = field(default=None, metadata={'path_param': { 'field_name': 'analyzerName', 'style': 'simple', 'explode': False }})
+    analyzer_name: str = field(metadata={'path_param': { 'field_name': 'analyzerName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,18 +30,18 @@ class ListArchiveRulesHeaders:
 
 @dataclass
 class ListArchiveRulesRequest:
-    path_params: ListArchiveRulesPathParams = field(default=None)
-    query_params: ListArchiveRulesQueryParams = field(default=None)
-    headers: ListArchiveRulesHeaders = field(default=None)
+    headers: ListArchiveRulesHeaders = field()
+    path_params: ListArchiveRulesPathParams = field()
+    query_params: ListArchiveRulesQueryParams = field()
     
 
 @dataclass
 class ListArchiveRulesResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     list_archive_rules_response: Optional[shared.ListArchiveRulesResponse] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

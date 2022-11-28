@@ -1,5 +1,7 @@
 package shared
 
+// AnalysisResult
+// Contains the result of the analysis.
 type AnalysisResult struct {
 	Level     *AnalysisResultLevelEnum `json:"level,omitempty"`
 	Locations []AnalysisResultLocation `json:"locations,omitempty"`

@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import destinationroute
+from sdk import utils
+from . import *
 
 class ConfigTransportProtocolEnum(str, Enum):
     TRANSPORT_PROTOCOL_UNSPECIFIED = "TRANSPORT_PROTOCOL_UNSPECIFIED"
@@ -11,6 +13,10 @@ class ConfigTransportProtocolEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Config:
-    destination_routes: Optional[List[destinationroute.DestinationRoute]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'destinationRoutes' }})
-    transport_protocol: Optional[ConfigTransportProtocolEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'transportProtocol' }})
+    r"""Config
+    The basic ingress config for ClientGateways.
+    """
+    
+    destination_routes: Optional[List[DestinationRoute]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('destinationRoutes') }})
+    transport_protocol: Optional[ConfigTransportProtocolEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('transportProtocol') }})
     

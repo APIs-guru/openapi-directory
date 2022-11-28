@@ -1,0 +1,9 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+/**
+ * The rating of a Product.
+**/
+export declare class GoogleCloudRetailV2alphaRating extends SpeakeasyBase {
+    averageRating?: number;
+    ratingCount?: number;
+    ratingHistogram?: number[];
+}

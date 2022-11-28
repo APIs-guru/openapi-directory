@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TextExtractionEvaluationMetricsConfidenceMetricsEntry } from "./textextractionevaluationmetricsconfidencemetricsentry";
+
 
 
 // TextExtractionEvaluationMetrics
@@ -8,9 +8,9 @@ import { TextExtractionEvaluationMetricsConfidenceMetricsEntry } from "./textext
  * Model evaluation metrics for text extraction problems.
 **/
 export class TextExtractionEvaluationMetrics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=auPrc" })
+  @SpeakeasyMetadata({ data: "json, name=auPrc" })
   auPrc?: number;
 
-  @Metadata({ data: "json, name=confidenceMetricsEntries", elemType: shared.TextExtractionEvaluationMetricsConfidenceMetricsEntry })
+  @SpeakeasyMetadata({ data: "json, name=confidenceMetricsEntries", elemType: TextExtractionEvaluationMetricsConfidenceMetricsEntry })
   confidenceMetricsEntries?: TextExtractionEvaluationMetricsConfidenceMetricsEntry[];
 }

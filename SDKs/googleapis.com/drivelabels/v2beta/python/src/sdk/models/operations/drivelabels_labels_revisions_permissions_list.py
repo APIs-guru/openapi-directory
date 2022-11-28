@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DrivelabelsLabelsRevisionsPermissionsListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,13 +29,13 @@ class DrivelabelsLabelsRevisionsPermissionsListQueryParams:
 
 @dataclass
 class DrivelabelsLabelsRevisionsPermissionsListRequest:
-    path_params: DrivelabelsLabelsRevisionsPermissionsListPathParams = field(default=None)
-    query_params: DrivelabelsLabelsRevisionsPermissionsListQueryParams = field(default=None)
+    path_params: DrivelabelsLabelsRevisionsPermissionsListPathParams = field()
+    query_params: DrivelabelsLabelsRevisionsPermissionsListQueryParams = field()
     
 
 @dataclass
 class DrivelabelsLabelsRevisionsPermissionsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_apps_drive_labels_v2beta_list_label_permissions_response: Optional[shared.GoogleAppsDriveLabelsV2betaListLabelPermissionsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,6 +1,7 @@
 
 
+
 export enum MailTypeEnum {
-    Marketing = "MARKETING"
-,    Transactional = "TRANSACTIONAL"
+    Marketing = "MARKETING",
+    Transactional = "TRANSACTIONAL"
 }

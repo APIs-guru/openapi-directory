@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SqlServerAuditConfig
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * SQL Server specific audit configuration.
 **/
 export class SqlServerAuditConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bucket" })
+  @SpeakeasyMetadata({ data: "json, name=bucket" })
   bucket?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=retentionInterval" })
+  @SpeakeasyMetadata({ data: "json, name=retentionInterval" })
   retentionInterval?: string;
 
-  @Metadata({ data: "json, name=uploadInterval" })
+  @SpeakeasyMetadata({ data: "json, name=uploadInterval" })
   uploadInterval?: string;
 }

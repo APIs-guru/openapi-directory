@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class InapplicabilityDetailsInapplicableReasonEnum(str, Enum):
     INAPPLICABLE_REASON_UNSPECIFIED = "INAPPLICABLE_REASON_UNSPECIFIED"
@@ -17,6 +19,10 @@ class InapplicabilityDetailsInapplicableReasonEnum(str, Enum):
 @dataclass_json
 @dataclass
 class InapplicabilityDetails:
-    inapplicable_count: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'inapplicableCount' }})
-    inapplicable_reason: Optional[InapplicabilityDetailsInapplicableReasonEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'inapplicableReason' }})
+    r"""InapplicabilityDetails
+    Map of inapplicability details.
+    """
+    
+    inapplicable_count: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('inapplicableCount') }})
+    inapplicable_reason: Optional[InapplicabilityDetailsInapplicableReasonEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('inapplicableReason') }})
     

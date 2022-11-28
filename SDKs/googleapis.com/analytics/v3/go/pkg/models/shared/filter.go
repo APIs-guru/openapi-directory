@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// FilterAdvancedDetails
+// Details for the filter of the type ADVANCED.
 type FilterAdvancedDetails struct {
 	CaseSensitive       *bool   `json:"caseSensitive,omitempty"`
 	ExtractA            *string `json:"extractA,omitempty"`
@@ -20,16 +22,22 @@ type FilterAdvancedDetails struct {
 	OverrideOutputField *bool   `json:"overrideOutputField,omitempty"`
 }
 
+// FilterLowercaseDetails
+// Details for the filter of the type LOWER.
 type FilterLowercaseDetails struct {
 	Field      *string `json:"field,omitempty"`
 	FieldIndex *int32  `json:"fieldIndex,omitempty"`
 }
 
+// FilterParentLink
+// Parent link for this filter. Points to the account to which this filter belongs.
 type FilterParentLink struct {
 	Href *string `json:"href,omitempty"`
 	Type *string `json:"type,omitempty"`
 }
 
+// FilterSearchAndReplaceDetails
+// Details for the filter of the type SEARCH_AND_REPLACE.
 type FilterSearchAndReplaceDetails struct {
 	CaseSensitive *bool   `json:"caseSensitive,omitempty"`
 	Field         *string `json:"field,omitempty"`
@@ -38,11 +46,15 @@ type FilterSearchAndReplaceDetails struct {
 	SearchString  *string `json:"searchString,omitempty"`
 }
 
+// FilterUppercaseDetails
+// Details for the filter of the type UPPER.
 type FilterUppercaseDetails struct {
 	Field      *string `json:"field,omitempty"`
 	FieldIndex *int32  `json:"fieldIndex,omitempty"`
 }
 
+// Filter
+// JSON template for an Analytics account filter.
 type Filter struct {
 	AccountID               *string                        `json:"accountId,omitempty"`
 	AdvancedDetails         *FilterAdvancedDetails         `json:"advancedDetails,omitempty"`
@@ -58,5 +70,21 @@ type Filter struct {
 	SelfLink                *string                        `json:"selfLink,omitempty"`
 	Type                    *string                        `json:"type,omitempty"`
 	Updated                 *time.Time                     `json:"updated,omitempty"`
+	UppercaseDetails        *FilterUppercaseDetails        `json:"uppercaseDetails,omitempty"`
+}
+
+// FilterInput
+// JSON template for an Analytics account filter.
+type FilterInput struct {
+	AccountID               *string                        `json:"accountId,omitempty"`
+	AdvancedDetails         *FilterAdvancedDetails         `json:"advancedDetails,omitempty"`
+	ExcludeDetails          *FilterExpression              `json:"excludeDetails,omitempty"`
+	ID                      *string                        `json:"id,omitempty"`
+	IncludeDetails          *FilterExpression              `json:"includeDetails,omitempty"`
+	LowercaseDetails        *FilterLowercaseDetails        `json:"lowercaseDetails,omitempty"`
+	Name                    *string                        `json:"name,omitempty"`
+	ParentLink              *FilterParentLink              `json:"parentLink,omitempty"`
+	SearchAndReplaceDetails *FilterSearchAndReplaceDetails `json:"searchAndReplaceDetails,omitempty"`
+	Type                    *string                        `json:"type,omitempty"`
 	UppercaseDetails        *FilterUppercaseDetails        `json:"uppercaseDetails,omitempty"`
 }

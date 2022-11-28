@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ConfigManagementHierarchyControllerDeploymentStateExtensionEnum {
-    DeploymentStateUnspecified = "DEPLOYMENT_STATE_UNSPECIFIED"
-,    NotInstalled = "NOT_INSTALLED"
-,    Installed = "INSTALLED"
-,    Error = "ERROR"
+    DeploymentStateUnspecified = "DEPLOYMENT_STATE_UNSPECIFIED",
+    NotInstalled = "NOT_INSTALLED",
+    Installed = "INSTALLED",
+    Error = "ERROR"
 }
 
 export enum ConfigManagementHierarchyControllerDeploymentStateHncEnum {
-    DeploymentStateUnspecified = "DEPLOYMENT_STATE_UNSPECIFIED"
-,    NotInstalled = "NOT_INSTALLED"
-,    Installed = "INSTALLED"
-,    Error = "ERROR"
+    DeploymentStateUnspecified = "DEPLOYMENT_STATE_UNSPECIFIED",
+    NotInstalled = "NOT_INSTALLED",
+    Installed = "INSTALLED",
+    Error = "ERROR"
 }
 
 
@@ -20,9 +21,9 @@ export enum ConfigManagementHierarchyControllerDeploymentStateHncEnum {
  * Deployment state for Hierarchy Controller
 **/
 export class ConfigManagementHierarchyControllerDeploymentState extends SpeakeasyBase {
-  @Metadata({ data: "json, name=extension" })
+  @SpeakeasyMetadata({ data: "json, name=extension" })
   extension?: ConfigManagementHierarchyControllerDeploymentStateExtensionEnum;
 
-  @Metadata({ data: "json, name=hnc" })
+  @SpeakeasyMetadata({ data: "json, name=hnc" })
   hnc?: ConfigManagementHierarchyControllerDeploymentStateHncEnum;
 }

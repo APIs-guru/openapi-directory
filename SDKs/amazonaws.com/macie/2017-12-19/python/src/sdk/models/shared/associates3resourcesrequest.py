@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import s3resourceclassification
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AssociateS3ResourcesRequest:
-    member_account_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'memberAccountId' }})
-    s3_resources: List[s3resourceclassification.S3ResourceClassification] = field(default=None, metadata={'dataclasses_json': { 'field_name': 's3Resources' }})
+    s3_resources: List[S3ResourceClassification] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('s3Resources') }})
+    member_account_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('memberAccountId') }})
     

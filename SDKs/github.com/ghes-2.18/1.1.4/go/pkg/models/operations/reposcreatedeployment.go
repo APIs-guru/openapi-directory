@@ -21,13 +21,13 @@ type ReposCreateDeploymentRequestBody struct {
 	TransientEnvironment  *bool        `json:"transient_environment,omitempty"`
 }
 
+type ReposCreateDeployment202ApplicationJSON struct {
+	Message *string `json:"message,omitempty"`
+}
+
 type ReposCreateDeploymentRequest struct {
 	PathParams ReposCreateDeploymentPathParams
 	Request    *ReposCreateDeploymentRequestBody `request:"mediaType=application/json"`
-}
-
-type ReposCreateDeployment202ApplicationJSON struct {
-	Message *string `json:"message,omitempty"`
 }
 
 type ReposCreateDeploymentResponse struct {

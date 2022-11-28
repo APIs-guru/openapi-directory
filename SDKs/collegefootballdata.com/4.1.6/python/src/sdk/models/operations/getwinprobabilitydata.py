@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class GetWinProbabilityDataQueryParams:
-    game_id: int = field(default=None, metadata={'query_param': { 'field_name': 'gameId', 'style': 'form', 'explode': True }})
+    game_id: int = field(metadata={'query_param': { 'field_name': 'gameId', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class GetWinProbabilityDataRequest:
-    query_params: GetWinProbabilityDataQueryParams = field(default=None)
+    query_params: GetWinProbabilityDataQueryParams = field()
     
 
 @dataclass
 class GetWinProbabilityDataResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     play_wps: Optional[List[shared.PlayWp]] = field(default=None)
-    status_code: int = field(default=None)
     

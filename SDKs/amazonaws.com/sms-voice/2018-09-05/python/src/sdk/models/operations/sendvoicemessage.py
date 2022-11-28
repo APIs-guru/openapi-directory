@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,33 +22,37 @@ class SendVoiceMessageHeaders:
 @dataclass_json
 @dataclass
 class SendVoiceMessageRequestBodyContent:
-    call_instructions_message: Optional[shared.CallInstructionsMessageType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CallInstructionsMessage' }})
-    plain_text_message: Optional[shared.PlainTextMessageType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PlainTextMessage' }})
-    ssml_message: Optional[shared.SsmlMessageType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SSMLMessage' }})
+    r"""SendVoiceMessageRequestBodyContent
+    An object that contains a voice message and information about the recipient that you want to send it to.
+    """
+    
+    call_instructions_message: Optional[shared.CallInstructionsMessageType] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CallInstructionsMessage') }})
+    plain_text_message: Optional[shared.PlainTextMessageType] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PlainTextMessage') }})
+    ssml_message: Optional[shared.SsmlMessageType] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SSMLMessage') }})
     
 
 @dataclass_json
 @dataclass
 class SendVoiceMessageRequestBody:
-    caller_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CallerId' }})
-    configuration_set_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ConfigurationSetName' }})
-    content: Optional[SendVoiceMessageRequestBodyContent] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Content' }})
-    destination_phone_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DestinationPhoneNumber' }})
-    origination_phone_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OriginationPhoneNumber' }})
+    caller_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CallerId') }})
+    configuration_set_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ConfigurationSetName') }})
+    content: Optional[SendVoiceMessageRequestBodyContent] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Content') }})
+    destination_phone_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DestinationPhoneNumber') }})
+    origination_phone_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('OriginationPhoneNumber') }})
     
 
 @dataclass
 class SendVoiceMessageRequest:
-    headers: SendVoiceMessageHeaders = field(default=None)
-    request: SendVoiceMessageRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: SendVoiceMessageHeaders = field()
+    request: SendVoiceMessageRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class SendVoiceMessageResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_service_error_exception: Optional[Any] = field(default=None)
     send_voice_message_response: Optional[shared.SendVoiceMessageResponse] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

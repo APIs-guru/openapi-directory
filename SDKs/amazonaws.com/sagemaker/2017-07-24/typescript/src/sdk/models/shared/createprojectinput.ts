@@ -1,19 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ServiceCatalogProvisioningDetails } from "./servicecatalogprovisioningdetails";
 import { Tag } from "./tag";
 
 
+
 export class CreateProjectInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ProjectDescription" })
+  @SpeakeasyMetadata({ data: "json, name=ProjectDescription" })
   projectDescription?: string;
 
-  @Metadata({ data: "json, name=ProjectName" })
+  @SpeakeasyMetadata({ data: "json, name=ProjectName" })
   projectName: string;
 
-  @Metadata({ data: "json, name=ServiceCatalogProvisioningDetails" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceCatalogProvisioningDetails" })
   serviceCatalogProvisioningDetails: ServiceCatalogProvisioningDetails;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 }

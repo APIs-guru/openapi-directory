@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class CreateImagesFromDataPathParams:
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,32 +15,32 @@ class CreateImagesFromDataQueryParams:
 
 @dataclass
 class CreateImagesFromDataHeaders:
-    training_key: str = field(default=None, metadata={'header': { 'field_name': 'Training-Key', 'style': 'simple', 'explode': False }})
+    training_key: str = field(metadata={'header': { 'field_name': 'Training-Key', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class CreateImagesFromDataRequestBodyImageData:
-    content: bytes = field(default=None, metadata={'multipart_form': { 'content': True }})
-    image_data: str = field(default=None, metadata={'multipart_form': { 'field_name': 'imageData' }})
+    content: bytes = field(metadata={'multipart_form': { 'content': True }})
+    image_data: str = field(metadata={'multipart_form': { 'field_name': 'imageData' }})
     
 
 @dataclass
 class CreateImagesFromDataRequestBody:
-    image_data: CreateImagesFromDataRequestBodyImageData = field(default=None, metadata={'multipart_form': { 'file': True }})
+    image_data: CreateImagesFromDataRequestBodyImageData = field(metadata={'multipart_form': { 'file': True }})
     
 
 @dataclass
 class CreateImagesFromDataRequest:
-    path_params: CreateImagesFromDataPathParams = field(default=None)
-    query_params: CreateImagesFromDataQueryParams = field(default=None)
-    headers: CreateImagesFromDataHeaders = field(default=None)
-    request: CreateImagesFromDataRequestBody = field(default=None, metadata={'request': { 'media_type': 'multipart/form-data' }})
+    headers: CreateImagesFromDataHeaders = field()
+    path_params: CreateImagesFromDataPathParams = field()
+    query_params: CreateImagesFromDataQueryParams = field()
+    request: CreateImagesFromDataRequestBody = field(metadata={'request': { 'media_type': 'multipart/form-data' }})
     
 
 @dataclass
 class CreateImagesFromDataResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     image_create_summary: Optional[shared.ImageCreateSummary] = field(default=None)
-    status_code: int = field(default=None)
     

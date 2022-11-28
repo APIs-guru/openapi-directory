@@ -1,5 +1,7 @@
 package shared
 
+// JobInput
+// Information about the file that you're transcoding.
 type JobInput struct {
 	AspectRatio        *string             `json:"AspectRatio,omitempty"`
 	Container          *string             `json:"Container,omitempty"`

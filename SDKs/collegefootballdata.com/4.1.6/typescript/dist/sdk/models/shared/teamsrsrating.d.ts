@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class TeamSrsRating extends SpeakeasyBase {
     conference?: string;
     division?: string;

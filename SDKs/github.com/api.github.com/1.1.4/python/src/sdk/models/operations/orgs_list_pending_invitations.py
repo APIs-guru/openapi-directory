@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class OrgsListPendingInvitationsPathParams:
-    org: str = field(default=None, metadata={'path_param': { 'field_name': 'org', 'style': 'simple', 'explode': False }})
+    org: str = field(metadata={'path_param': { 'field_name': 'org', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,15 +16,15 @@ class OrgsListPendingInvitationsQueryParams:
 
 @dataclass
 class OrgsListPendingInvitationsRequest:
-    path_params: OrgsListPendingInvitationsPathParams = field(default=None)
-    query_params: OrgsListPendingInvitationsQueryParams = field(default=None)
+    path_params: OrgsListPendingInvitationsPathParams = field()
+    query_params: OrgsListPendingInvitationsQueryParams = field()
     
 
 @dataclass
 class OrgsListPendingInvitationsResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     basic_error: Optional[shared.BasicError] = field(default=None)
     organization_invitations: Optional[List[shared.OrganizationInvitation]] = field(default=None)
     

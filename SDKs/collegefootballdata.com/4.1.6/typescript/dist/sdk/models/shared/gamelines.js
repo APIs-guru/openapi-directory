@@ -22,43 +22,42 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GameLinesLines = /** @class */ (function (_super) {
     __extends(GameLinesLines, _super);
     function GameLinesLines() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=awayMoneyline" }),
+        SpeakeasyMetadata({ data: "json, name=awayMoneyline" }),
         __metadata("design:type", Number)
     ], GameLinesLines.prototype, "awayMoneyline", void 0);
     __decorate([
-        Metadata({ data: "json, name=formattedSpread" }),
+        SpeakeasyMetadata({ data: "json, name=formattedSpread" }),
         __metadata("design:type", String)
     ], GameLinesLines.prototype, "formattedSpread", void 0);
     __decorate([
-        Metadata({ data: "json, name=homeMoneyline" }),
+        SpeakeasyMetadata({ data: "json, name=homeMoneyline" }),
         __metadata("design:type", Number)
     ], GameLinesLines.prototype, "homeMoneyline", void 0);
     __decorate([
-        Metadata({ data: "json, name=overUnder" }),
+        SpeakeasyMetadata({ data: "json, name=overUnder" }),
         __metadata("design:type", Number)
     ], GameLinesLines.prototype, "overUnder", void 0);
     __decorate([
-        Metadata({ data: "json, name=overUnderOpen" }),
+        SpeakeasyMetadata({ data: "json, name=overUnderOpen" }),
         __metadata("design:type", Number)
     ], GameLinesLines.prototype, "overUnderOpen", void 0);
     __decorate([
-        Metadata({ data: "json, name=provider" }),
+        SpeakeasyMetadata({ data: "json, name=provider" }),
         __metadata("design:type", String)
     ], GameLinesLines.prototype, "provider", void 0);
     __decorate([
-        Metadata({ data: "json, name=spread" }),
+        SpeakeasyMetadata({ data: "json, name=spread" }),
         __metadata("design:type", Number)
     ], GameLinesLines.prototype, "spread", void 0);
     __decorate([
-        Metadata({ data: "json, name=spreadOpen" }),
+        SpeakeasyMetadata({ data: "json, name=spreadOpen" }),
         __metadata("design:type", Number)
     ], GameLinesLines.prototype, "spreadOpen", void 0);
     return GameLinesLines;
@@ -70,47 +69,47 @@ var GameLines = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=awayConference" }),
+        SpeakeasyMetadata({ data: "json, name=awayConference" }),
         __metadata("design:type", String)
     ], GameLines.prototype, "awayConference", void 0);
     __decorate([
-        Metadata({ data: "json, name=awayScore" }),
+        SpeakeasyMetadata({ data: "json, name=awayScore" }),
         __metadata("design:type", Number)
     ], GameLines.prototype, "awayScore", void 0);
     __decorate([
-        Metadata({ data: "json, name=awayTeam" }),
+        SpeakeasyMetadata({ data: "json, name=awayTeam" }),
         __metadata("design:type", String)
     ], GameLines.prototype, "awayTeam", void 0);
     __decorate([
-        Metadata({ data: "json, name=homeConference" }),
+        SpeakeasyMetadata({ data: "json, name=homeConference" }),
         __metadata("design:type", String)
     ], GameLines.prototype, "homeConference", void 0);
     __decorate([
-        Metadata({ data: "json, name=homeScore" }),
+        SpeakeasyMetadata({ data: "json, name=homeScore" }),
         __metadata("design:type", Number)
     ], GameLines.prototype, "homeScore", void 0);
     __decorate([
-        Metadata({ data: "json, name=homeTeam" }),
+        SpeakeasyMetadata({ data: "json, name=homeTeam" }),
         __metadata("design:type", String)
     ], GameLines.prototype, "homeTeam", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", Number)
     ], GameLines.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=lines", elemType: shared.GameLinesLines }),
+        SpeakeasyMetadata({ data: "json, name=lines", elemType: GameLinesLines }),
         __metadata("design:type", Array)
     ], GameLines.prototype, "lines", void 0);
     __decorate([
-        Metadata({ data: "json, name=season" }),
+        SpeakeasyMetadata({ data: "json, name=season" }),
         __metadata("design:type", Number)
     ], GameLines.prototype, "season", void 0);
     __decorate([
-        Metadata({ data: "json, name=seasonType" }),
+        SpeakeasyMetadata({ data: "json, name=seasonType" }),
         __metadata("design:type", String)
     ], GameLines.prototype, "seasonType", void 0);
     __decorate([
-        Metadata({ data: "json, name=week" }),
+        SpeakeasyMetadata({ data: "json, name=week" }),
         __metadata("design:type", Number)
     ], GameLines.prototype, "week", void 0);
     return GameLines;

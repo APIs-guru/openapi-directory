@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ServiceActionAssociationErrorCodeEnum } from "./serviceactionassociationerrorcodeenum";
 /**
  * An object containing information about the error, along with identifying information about the self-service action and its associations.

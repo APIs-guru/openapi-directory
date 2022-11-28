@@ -1,5 +1,7 @@
 package shared
 
+// LicenseAssignment
+// Representation of a license assignment.
 type LicenseAssignment struct {
 	Etags       *string `json:"etags,omitempty"`
 	Kind        *string `json:"kind,omitempty"`

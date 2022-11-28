@@ -1,5 +1,7 @@
 package shared
 
+// CreateHsmRequest
+// Contains the inputs for the <code>CreateHsm</code> operation.
 type CreateHsmRequest struct {
 	ClientToken      *string              `json:"ClientToken,omitempty"`
 	EniIP            *string              `json:"EniIp,omitempty"`

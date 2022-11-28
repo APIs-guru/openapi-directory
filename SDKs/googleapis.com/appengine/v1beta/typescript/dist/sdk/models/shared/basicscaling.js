@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // BasicScaling
 /**
  * A service with basic scaling will create an instance when the application receives a request. The instance will be turned down when the app becomes idle. Basic scaling is ideal for work that is intermittent or driven by user activity.
@@ -33,11 +33,11 @@ var BasicScaling = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=idleTimeout" }),
+        SpeakeasyMetadata({ data: "json, name=idleTimeout" }),
         __metadata("design:type", String)
     ], BasicScaling.prototype, "idleTimeout", void 0);
     __decorate([
-        Metadata({ data: "json, name=maxInstances" }),
+        SpeakeasyMetadata({ data: "json, name=maxInstances" }),
         __metadata("design:type", Number)
     ], BasicScaling.prototype, "maxInstances", void 0);
     return BasicScaling;

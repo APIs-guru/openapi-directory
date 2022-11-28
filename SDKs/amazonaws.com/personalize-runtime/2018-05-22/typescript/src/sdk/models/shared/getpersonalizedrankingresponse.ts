@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PredictedItem } from "./predicteditem";
 
 
+
 export class GetPersonalizedRankingResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=personalizedRanking", elemType: shared.PredictedItem })
+  @SpeakeasyMetadata({ data: "json, name=personalizedRanking", elemType: PredictedItem })
   personalizedRanking?: PredictedItem[];
 
-  @Metadata({ data: "json, name=recommendationId" })
+  @SpeakeasyMetadata({ data: "json, name=recommendationId" })
   recommendationId?: string;
 }

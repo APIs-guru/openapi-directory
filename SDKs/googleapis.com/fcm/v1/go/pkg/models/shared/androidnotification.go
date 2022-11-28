@@ -20,6 +20,8 @@ const (
 	AndroidNotificationVisibilityEnumSecret                AndroidNotificationVisibilityEnum = "SECRET"
 )
 
+// AndroidNotification
+// Notification to send to android devices.
 type AndroidNotification struct {
 	Body                    *string                                      `json:"body,omitempty"`
 	BodyLocArgs             []string                                     `json:"bodyLocArgs,omitempty"`

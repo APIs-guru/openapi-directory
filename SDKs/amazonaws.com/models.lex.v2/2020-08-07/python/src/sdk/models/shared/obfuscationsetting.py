@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import obfuscationsettingtype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ObfuscationSetting:
-    obfuscation_setting_type: obfuscationsettingtype_enum.ObfuscationSettingTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'obfuscationSettingType' }})
+    r"""ObfuscationSetting
+    Determines whether Amazon Lex obscures slot values in conversation logs. 
+    """
+    
+    obfuscation_setting_type: ObfuscationSettingTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('obfuscationSettingType') }})
     

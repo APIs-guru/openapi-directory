@@ -1,5 +1,7 @@
 package shared
 
+// ImageVersion
+// ImageVersion information
 type ImageVersion struct {
 	CreationDisabled        *bool    `json:"creationDisabled,omitempty"`
 	ImageVersionID          *string  `json:"imageVersionId,omitempty"`

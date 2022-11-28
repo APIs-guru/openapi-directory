@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DisplayvideoAdvertisersLineItemsBulkEditAssignedTargetingOptionsPathParams:
-    advertiser_id: str = field(default=None, metadata={'path_param': { 'field_name': 'advertiserId', 'style': 'simple', 'explode': False }})
+    advertiser_id: str = field(metadata={'path_param': { 'field_name': 'advertiserId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class DisplayvideoAdvertisersLineItemsBulkEditAssignedTargetingOptionsQueryParam
 
 @dataclass
 class DisplayvideoAdvertisersLineItemsBulkEditAssignedTargetingOptionsSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DisplayvideoAdvertisersLineItemsBulkEditAssignedTargetingOptionsRequest:
-    path_params: DisplayvideoAdvertisersLineItemsBulkEditAssignedTargetingOptionsPathParams = field(default=None)
-    query_params: DisplayvideoAdvertisersLineItemsBulkEditAssignedTargetingOptionsQueryParams = field(default=None)
-    request: Optional[shared.BulkEditAssignedTargetingOptionsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DisplayvideoAdvertisersLineItemsBulkEditAssignedTargetingOptionsSecurity = field(default=None)
+    path_params: DisplayvideoAdvertisersLineItemsBulkEditAssignedTargetingOptionsPathParams = field()
+    query_params: DisplayvideoAdvertisersLineItemsBulkEditAssignedTargetingOptionsQueryParams = field()
+    security: DisplayvideoAdvertisersLineItemsBulkEditAssignedTargetingOptionsSecurity = field()
+    request: Optional[shared.BulkEditAssignedTargetingOptionsRequestInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DisplayvideoAdvertisersLineItemsBulkEditAssignedTargetingOptionsResponse:
+    content_type: str = field()
+    status_code: int = field()
     bulk_edit_assigned_targeting_options_response: Optional[shared.BulkEditAssignedTargetingOptionsResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

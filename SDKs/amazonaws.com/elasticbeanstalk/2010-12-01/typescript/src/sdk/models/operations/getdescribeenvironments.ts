@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetDescribeEnvironmentsActionEnum {
     DescribeEnvironments = "DescribeEnvironments"
@@ -10,78 +11,78 @@ export enum GetDescribeEnvironmentsVersionEnum {
 
 
 export class GetDescribeEnvironmentsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Action" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" })
   action: GetDescribeEnvironmentsActionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ApplicationName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ApplicationName" })
   applicationName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=EnvironmentIds" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=EnvironmentIds" })
   environmentIds?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=EnvironmentNames" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=EnvironmentNames" })
   environmentNames?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=IncludeDeleted" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=IncludeDeleted" })
   includeDeleted?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=IncludedDeletedBackTo" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=IncludedDeletedBackTo" })
   includedDeletedBackTo?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=MaxRecords" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MaxRecords" })
   maxRecords?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=NextToken" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" })
   version: GetDescribeEnvironmentsVersionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=VersionLabel" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=VersionLabel" })
   versionLabel?: string;
 }
 
 
 export class GetDescribeEnvironmentsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class GetDescribeEnvironmentsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetDescribeEnvironmentsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetDescribeEnvironmentsHeaders;
 }
 
 
 export class GetDescribeEnvironmentsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

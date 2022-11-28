@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BigQueryDestinationConfig } from "./bigquerydestinationconfig";
 import { GcsDestinationConfig } from "./gcsdestinationconfig";
+
 
 
 // DestinationConfig
@@ -8,12 +9,12 @@ import { GcsDestinationConfig } from "./gcsdestinationconfig";
  * The configuration of the stream destination.
 **/
 export class DestinationConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bigqueryDestinationConfig" })
+  @SpeakeasyMetadata({ data: "json, name=bigqueryDestinationConfig" })
   bigqueryDestinationConfig?: BigQueryDestinationConfig;
 
-  @Metadata({ data: "json, name=destinationConnectionProfile" })
+  @SpeakeasyMetadata({ data: "json, name=destinationConnectionProfile" })
   destinationConnectionProfile?: string;
 
-  @Metadata({ data: "json, name=gcsDestinationConfig" })
+  @SpeakeasyMetadata({ data: "json, name=gcsDestinationConfig" })
   gcsDestinationConfig?: GcsDestinationConfig;
 }

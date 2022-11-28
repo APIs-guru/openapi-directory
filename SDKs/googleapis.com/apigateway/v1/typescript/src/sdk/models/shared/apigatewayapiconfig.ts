@@ -1,17 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApigatewayApiConfigGrpcServiceDefinition } from "./apigatewayapiconfiggrpcservicedefinition";
 import { ApigatewayApiConfigFile } from "./apigatewayapiconfigfile";
 import { ApigatewayApiConfigOpenApiDocument } from "./apigatewayapiconfigopenapidocument";
 
+
 export enum ApigatewayApiConfigStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Creating = "CREATING"
-,    Active = "ACTIVE"
-,    Failed = "FAILED"
-,    Deleting = "DELETING"
-,    Updating = "UPDATING"
-,    Activating = "ACTIVATING"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Creating = "CREATING",
+    Active = "ACTIVE",
+    Failed = "FAILED",
+    Deleting = "DELETING",
+    Updating = "UPDATING",
+    Activating = "ACTIVATING"
+}
+
+
+// ApigatewayApiConfigInput
+/** 
+ * An API Configuration is a combination of settings for both the Managed Service and Gateways serving this API Config.
+**/
+export class ApigatewayApiConfigInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
+  displayName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=gatewayServiceAccount" })
+  gatewayServiceAccount?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=grpcServices", elemType: ApigatewayApiConfigGrpcServiceDefinition })
+  grpcServices?: ApigatewayApiConfigGrpcServiceDefinition[];
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=managedServiceConfigs", elemType: ApigatewayApiConfigFile })
+  managedServiceConfigs?: ApigatewayApiConfigFile[];
+
+  @SpeakeasyMetadata({ data: "json, name=openapiDocuments", elemType: ApigatewayApiConfigOpenApiDocument })
+  openapiDocuments?: ApigatewayApiConfigOpenApiDocument[];
 }
 
 
@@ -20,36 +45,36 @@ export enum ApigatewayApiConfigStateEnum {
  * An API Configuration is a combination of settings for both the Managed Service and Gateways serving this API Config.
 **/
 export class ApigatewayApiConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=gatewayServiceAccount" })
+  @SpeakeasyMetadata({ data: "json, name=gatewayServiceAccount" })
   gatewayServiceAccount?: string;
 
-  @Metadata({ data: "json, name=grpcServices", elemType: shared.ApigatewayApiConfigGrpcServiceDefinition })
+  @SpeakeasyMetadata({ data: "json, name=grpcServices", elemType: ApigatewayApiConfigGrpcServiceDefinition })
   grpcServices?: ApigatewayApiConfigGrpcServiceDefinition[];
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=managedServiceConfigs", elemType: shared.ApigatewayApiConfigFile })
+  @SpeakeasyMetadata({ data: "json, name=managedServiceConfigs", elemType: ApigatewayApiConfigFile })
   managedServiceConfigs?: ApigatewayApiConfigFile[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=openapiDocuments", elemType: shared.ApigatewayApiConfigOpenApiDocument })
+  @SpeakeasyMetadata({ data: "json, name=openapiDocuments", elemType: ApigatewayApiConfigOpenApiDocument })
   openapiDocuments?: ApigatewayApiConfigOpenApiDocument[];
 
-  @Metadata({ data: "json, name=serviceConfigId" })
+  @SpeakeasyMetadata({ data: "json, name=serviceConfigId" })
   serviceConfigId?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: ApigatewayApiConfigStateEnum;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 }

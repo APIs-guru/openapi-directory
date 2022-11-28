@@ -1,5 +1,7 @@
 package shared
 
+// CustomChannelTargetingInfo
+// The targeting information of this custom channel, if activated.
 type CustomChannelTargetingInfo struct {
 	AdsAppearOn  *string `json:"adsAppearOn,omitempty"`
 	Description  *string `json:"description,omitempty"`

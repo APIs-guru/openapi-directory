@@ -23,6 +23,8 @@ const (
 	UpdateMetricSetRequestBodyMetricSetFrequencyEnumPt5M  UpdateMetricSetRequestBodyMetricSetFrequencyEnum = "PT5M"
 )
 
+// UpdateMetricSetRequestBodyMetricSource
+// Contains information about source data used to generate a metric.
 type UpdateMetricSetRequestBodyMetricSource struct {
 	AppFlowConfig        *shared.AppFlowConfig        `json:"AppFlowConfig,omitempty"`
 	CloudWatchConfig     *shared.CloudWatchConfig     `json:"CloudWatchConfig,omitempty"`
@@ -31,6 +33,8 @@ type UpdateMetricSetRequestBodyMetricSource struct {
 	S3SourceConfig       *shared.S3SourceConfig       `json:"S3SourceConfig,omitempty"`
 }
 
+// UpdateMetricSetRequestBodyTimestampColumn
+// Contains information about the column used to track time in a source data file.
 type UpdateMetricSetRequestBodyTimestampColumn struct {
 	ColumnFormat *string `json:"ColumnFormat,omitempty"`
 	ColumnName   *string `json:"ColumnName,omitempty"`

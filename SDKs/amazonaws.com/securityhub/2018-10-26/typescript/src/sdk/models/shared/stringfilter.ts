@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StringFilterComparisonEnum } from "./stringfiltercomparisonenum";
+
 
 
 // StringFilter
@@ -7,9 +8,9 @@ import { StringFilterComparisonEnum } from "./stringfiltercomparisonenum";
  * A string filter for querying findings.
 **/
 export class StringFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Comparison" })
+  @SpeakeasyMetadata({ data: "json, name=Comparison" })
   comparison?: StringFilterComparisonEnum;
 
-  @Metadata({ data: "json, name=Value" })
+  @SpeakeasyMetadata({ data: "json, name=Value" })
   value?: string;
 }

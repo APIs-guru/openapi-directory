@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // FileSystemConfig
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The Amazon Elastic File System (EFS) storage configuration for a SageMaker image.
 **/
 export class FileSystemConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DefaultGid" })
+  @SpeakeasyMetadata({ data: "json, name=DefaultGid" })
   defaultGid?: number;
 
-  @Metadata({ data: "json, name=DefaultUid" })
+  @SpeakeasyMetadata({ data: "json, name=DefaultUid" })
   defaultUid?: number;
 
-  @Metadata({ data: "json, name=MountPath" })
+  @SpeakeasyMetadata({ data: "json, name=MountPath" })
   mountPath?: string;
 }

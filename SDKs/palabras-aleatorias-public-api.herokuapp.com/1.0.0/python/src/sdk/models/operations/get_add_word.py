@@ -12,11 +12,11 @@ class GetAddWordQueryParams:
 
 @dataclass
 class GetAddWordRequest:
-    query_params: GetAddWordQueryParams = field(default=None)
+    query_params: GetAddWordQueryParams = field()
     
 
 @dataclass
 class GetAddWordResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

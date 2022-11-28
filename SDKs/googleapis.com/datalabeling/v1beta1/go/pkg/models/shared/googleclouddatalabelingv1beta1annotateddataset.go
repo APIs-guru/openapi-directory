@@ -26,6 +26,8 @@ const (
 	GoogleCloudDatalabelingV1beta1AnnotatedDatasetAnnotationTypeEnumGeneralClassificationAnnotation    GoogleCloudDatalabelingV1beta1AnnotatedDatasetAnnotationTypeEnum = "GENERAL_CLASSIFICATION_ANNOTATION"
 )
 
+// GoogleCloudDatalabelingV1beta1AnnotatedDataset
+// AnnotatedDataset is a set holding annotations for data in a Dataset. Each labeling task will generate an AnnotatedDataset under the Dataset that the task is requested for.
 type GoogleCloudDatalabelingV1beta1AnnotatedDataset struct {
 	AnnotationSource      *GoogleCloudDatalabelingV1beta1AnnotatedDatasetAnnotationSourceEnum `json:"annotationSource,omitempty"`
 	AnnotationType        *GoogleCloudDatalabelingV1beta1AnnotatedDatasetAnnotationTypeEnum   `json:"annotationType,omitempty"`

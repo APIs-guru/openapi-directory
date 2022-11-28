@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PortForwardingConfig } from "./portforwardingconfig";
+
 
 
 // LaunchConfig
@@ -7,18 +8,18 @@ import { PortForwardingConfig } from "./portforwardingconfig";
  * Information about a launch configuration.
 **/
 export class LaunchConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=environmentVariables" })
+  @SpeakeasyMetadata({ data: "json, name=environmentVariables" })
   environmentVariables?: Map<string, string>;
 
-  @Metadata({ data: "json, name=launchFile" })
+  @SpeakeasyMetadata({ data: "json, name=launchFile" })
   launchFile: string;
 
-  @Metadata({ data: "json, name=packageName" })
+  @SpeakeasyMetadata({ data: "json, name=packageName" })
   packageName: string;
 
-  @Metadata({ data: "json, name=portForwardingConfig" })
+  @SpeakeasyMetadata({ data: "json, name=portForwardingConfig" })
   portForwardingConfig?: PortForwardingConfig;
 
-  @Metadata({ data: "json, name=streamUI" })
+  @SpeakeasyMetadata({ data: "json, name=streamUI" })
   streamUi?: boolean;
 }

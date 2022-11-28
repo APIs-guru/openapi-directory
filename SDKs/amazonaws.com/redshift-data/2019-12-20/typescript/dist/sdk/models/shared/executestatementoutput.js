@@ -22,34 +22,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ExecuteStatementOutput = /** @class */ (function (_super) {
     __extends(ExecuteStatementOutput, _super);
     function ExecuteStatementOutput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ClusterIdentifier" }),
+        SpeakeasyMetadata({ data: "json, name=ClusterIdentifier" }),
         __metadata("design:type", String)
     ], ExecuteStatementOutput.prototype, "clusterIdentifier", void 0);
     __decorate([
-        Metadata({ data: "json, name=CreatedAt" }),
+        SpeakeasyMetadata({ data: "json, name=CreatedAt" }),
         __metadata("design:type", Date)
     ], ExecuteStatementOutput.prototype, "createdAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=Database" }),
+        SpeakeasyMetadata({ data: "json, name=Database" }),
         __metadata("design:type", String)
     ], ExecuteStatementOutput.prototype, "database", void 0);
     __decorate([
-        Metadata({ data: "json, name=DbUser" }),
+        SpeakeasyMetadata({ data: "json, name=DbUser" }),
         __metadata("design:type", String)
     ], ExecuteStatementOutput.prototype, "dbUser", void 0);
     __decorate([
-        Metadata({ data: "json, name=Id" }),
+        SpeakeasyMetadata({ data: "json, name=Id" }),
         __metadata("design:type", String)
     ], ExecuteStatementOutput.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=SecretArn" }),
+        SpeakeasyMetadata({ data: "json, name=SecretArn" }),
         __metadata("design:type", String)
     ], ExecuteStatementOutput.prototype, "secretArn", void 0);
     return ExecuteStatementOutput;

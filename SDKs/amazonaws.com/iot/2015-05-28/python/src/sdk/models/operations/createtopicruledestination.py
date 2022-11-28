@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,30 +22,34 @@ class CreateTopicRuleDestinationHeaders:
 @dataclass_json
 @dataclass
 class CreateTopicRuleDestinationRequestBodyDestinationConfiguration:
-    http_url_configuration: Optional[shared.HTTPURLDestinationConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'httpUrlConfiguration' }})
-    vpc_configuration: Optional[shared.VpcDestinationConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'vpcConfiguration' }})
+    r"""CreateTopicRuleDestinationRequestBodyDestinationConfiguration
+    Configuration of the topic rule destination.
+    """
+    
+    http_url_configuration: Optional[shared.HTTPURLDestinationConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('httpUrlConfiguration') }})
+    vpc_configuration: Optional[shared.VpcDestinationConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('vpcConfiguration') }})
     
 
 @dataclass_json
 @dataclass
 class CreateTopicRuleDestinationRequestBody:
-    destination_configuration: CreateTopicRuleDestinationRequestBodyDestinationConfiguration = field(default=None, metadata={'dataclasses_json': { 'field_name': 'destinationConfiguration' }})
+    destination_configuration: CreateTopicRuleDestinationRequestBodyDestinationConfiguration = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('destinationConfiguration') }})
     
 
 @dataclass
 class CreateTopicRuleDestinationRequest:
-    headers: CreateTopicRuleDestinationHeaders = field(default=None)
-    request: CreateTopicRuleDestinationRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateTopicRuleDestinationHeaders = field()
+    request: CreateTopicRuleDestinationRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateTopicRuleDestinationResponse:
+    content_type: str = field()
+    status_code: int = field()
     conflicting_resource_update_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     create_topic_rule_destination_response: Optional[shared.CreateTopicRuleDestinationResponse] = field(default=None)
     internal_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     resource_already_exists_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
+from sdk.models import shared
 
 
 @dataclass
 class OperationsFlightstatusByFlightNumberAndDateGetPathParams:
-    date: str = field(default=None, metadata={'path_param': { 'field_name': 'date', 'style': 'simple', 'explode': False }})
-    flight_number: str = field(default=None, metadata={'path_param': { 'field_name': 'flightNumber', 'style': 'simple', 'explode': False }})
+    date_: str = field(metadata={'path_param': { 'field_name': 'date', 'style': 'simple', 'explode': False }})
+    flight_number: str = field(metadata={'path_param': { 'field_name': 'flightNumber', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,25 +20,25 @@ class OperationsFlightstatusByFlightNumberAndDateGetQueryParams:
 
 @dataclass
 class OperationsFlightstatusByFlightNumberAndDateGetHeaders:
-    accept: str = field(default=None, metadata={'header': { 'field_name': 'Accept', 'style': 'simple', 'explode': False }})
+    accept: str = field(metadata={'header': { 'field_name': 'Accept', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class OperationsFlightstatusByFlightNumberAndDateGetSecurity:
-    auth: shared.SchemeAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    auth: shared.SchemeAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class OperationsFlightstatusByFlightNumberAndDateGetRequest:
-    path_params: OperationsFlightstatusByFlightNumberAndDateGetPathParams = field(default=None)
-    query_params: OperationsFlightstatusByFlightNumberAndDateGetQueryParams = field(default=None)
-    headers: OperationsFlightstatusByFlightNumberAndDateGetHeaders = field(default=None)
-    security: OperationsFlightstatusByFlightNumberAndDateGetSecurity = field(default=None)
+    headers: OperationsFlightstatusByFlightNumberAndDateGetHeaders = field()
+    path_params: OperationsFlightstatusByFlightNumberAndDateGetPathParams = field()
+    query_params: OperationsFlightstatusByFlightNumberAndDateGetQueryParams = field()
+    security: OperationsFlightstatusByFlightNumberAndDateGetSecurity = field()
     
 
 @dataclass
 class OperationsFlightstatusByFlightNumberAndDateGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operations_flightstatus_by_flight_number_and_date_get_200_application_json_object: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

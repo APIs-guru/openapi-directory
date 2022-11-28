@@ -1,8 +1,9 @@
 
 
+
 export enum SpatialEnum {
-    Country = "country"
-,    Location = "location"
-,    Project = "project"
-,    Total = "total"
+    Country = "country",
+    Location = "location",
+    Project = "project",
+    Total = "total"
 }

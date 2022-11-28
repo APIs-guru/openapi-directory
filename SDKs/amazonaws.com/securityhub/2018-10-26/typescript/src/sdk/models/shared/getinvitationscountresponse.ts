@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetInvitationsCountResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=InvitationsCount" })
+  @SpeakeasyMetadata({ data: "json, name=InvitationsCount" })
   invitationsCount?: number;
 }

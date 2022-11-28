@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BotChannelAssociation } from "./botchannelassociation";
 
 
+
 export class GetBotChannelAssociationsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=botChannelAssociations", elemType: shared.BotChannelAssociation })
+  @SpeakeasyMetadata({ data: "json, name=botChannelAssociations", elemType: BotChannelAssociation })
   botChannelAssociations?: BotChannelAssociation[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

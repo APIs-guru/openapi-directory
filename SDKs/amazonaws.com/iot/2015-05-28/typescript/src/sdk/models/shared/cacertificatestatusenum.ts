@@ -1,6 +1,7 @@
 
 
+
 export enum CaCertificateStatusEnum {
-    Active = "ACTIVE"
-,    Inactive = "INACTIVE"
+    Active = "ACTIVE",
+    Inactive = "INACTIVE"
 }

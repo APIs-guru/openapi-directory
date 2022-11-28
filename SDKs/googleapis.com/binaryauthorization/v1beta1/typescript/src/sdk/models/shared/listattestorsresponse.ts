@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Attestor } from "./attestor";
+
 
 
 // ListAttestorsResponse
@@ -8,9 +8,9 @@ import { Attestor } from "./attestor";
  * Response message for BinauthzManagementService.ListAttestors.
 **/
 export class ListAttestorsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attestors", elemType: shared.Attestor })
+  @SpeakeasyMetadata({ data: "json, name=attestors", elemType: Attestor })
   attestors?: Attestor[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

@@ -8,6 +8,8 @@ const (
 	DayPartTargetingTimeZoneTypeEnumUser                    DayPartTargetingTimeZoneTypeEnum = "USER"
 )
 
+// DayPartTargeting
+// Represents Daypart targeting.
 type DayPartTargeting struct {
 	DayParts     []DayPart                         `json:"dayParts,omitempty"`
 	TimeZoneType *DayPartTargetingTimeZoneTypeEnum `json:"timeZoneType,omitempty"`

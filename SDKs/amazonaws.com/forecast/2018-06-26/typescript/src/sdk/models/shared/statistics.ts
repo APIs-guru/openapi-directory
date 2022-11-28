@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Statistics
@@ -6,39 +7,39 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides statistics for each data field imported into to an Amazon Forecast dataset with the <a>CreateDatasetImportJob</a> operation.
 **/
 export class Statistics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Avg" })
+  @SpeakeasyMetadata({ data: "json, name=Avg" })
   avg?: number;
 
-  @Metadata({ data: "json, name=Count" })
+  @SpeakeasyMetadata({ data: "json, name=Count" })
   count?: number;
 
-  @Metadata({ data: "json, name=CountDistinct" })
+  @SpeakeasyMetadata({ data: "json, name=CountDistinct" })
   countDistinct?: number;
 
-  @Metadata({ data: "json, name=CountDistinctLong" })
+  @SpeakeasyMetadata({ data: "json, name=CountDistinctLong" })
   countDistinctLong?: number;
 
-  @Metadata({ data: "json, name=CountLong" })
+  @SpeakeasyMetadata({ data: "json, name=CountLong" })
   countLong?: number;
 
-  @Metadata({ data: "json, name=CountNan" })
+  @SpeakeasyMetadata({ data: "json, name=CountNan" })
   countNan?: number;
 
-  @Metadata({ data: "json, name=CountNanLong" })
+  @SpeakeasyMetadata({ data: "json, name=CountNanLong" })
   countNanLong?: number;
 
-  @Metadata({ data: "json, name=CountNull" })
+  @SpeakeasyMetadata({ data: "json, name=CountNull" })
   countNull?: number;
 
-  @Metadata({ data: "json, name=CountNullLong" })
+  @SpeakeasyMetadata({ data: "json, name=CountNullLong" })
   countNullLong?: number;
 
-  @Metadata({ data: "json, name=Max" })
+  @SpeakeasyMetadata({ data: "json, name=Max" })
   max?: string;
 
-  @Metadata({ data: "json, name=Min" })
+  @SpeakeasyMetadata({ data: "json, name=Min" })
   min?: string;
 
-  @Metadata({ data: "json, name=Stddev" })
+  @SpeakeasyMetadata({ data: "json, name=Stddev" })
   stddev?: number;
 }

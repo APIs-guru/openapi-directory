@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import inventorydeletionsummaryitem
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class InventoryDeletionSummary:
-    remaining_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RemainingCount' }})
-    summary_items: Optional[List[inventorydeletionsummaryitem.InventoryDeletionSummaryItem]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SummaryItems' }})
-    total_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TotalCount' }})
+    r"""InventoryDeletionSummary
+    Information about the delete operation.
+    """
+    
+    remaining_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('RemainingCount') }})
+    summary_items: Optional[List[InventoryDeletionSummaryItem]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SummaryItems') }})
+    total_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TotalCount') }})
     

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SoftwareRecipe } from "./softwarerecipe";
+
 
 
 // EffectiveGuestPolicySourcedSoftwareRecipe
@@ -7,9 +8,9 @@ import { SoftwareRecipe } from "./softwarerecipe";
  * A guest policy recipe including its source.
 **/
 export class EffectiveGuestPolicySourcedSoftwareRecipe extends SpeakeasyBase {
-  @Metadata({ data: "json, name=softwareRecipe" })
+  @SpeakeasyMetadata({ data: "json, name=softwareRecipe" })
   softwareRecipe?: SoftwareRecipe;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: string;
 }

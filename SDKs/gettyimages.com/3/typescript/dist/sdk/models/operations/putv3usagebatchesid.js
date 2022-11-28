@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PutV3UsageBatchesIdPathParams = /** @class */ (function (_super) {
     __extends(PutV3UsageBatchesIdPathParams, _super);
@@ -30,7 +30,7 @@ var PutV3UsageBatchesIdPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], PutV3UsageBatchesIdPathParams.prototype, "id", void 0);
     return PutV3UsageBatchesIdPathParams;
@@ -42,11 +42,11 @@ var PutV3UsageBatchesIdRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PutV3UsageBatchesIdPathParams)
     ], PutV3UsageBatchesIdRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.ReportUsageBatchRequest)
     ], PutV3UsageBatchesIdRequest.prototype, "request", void 0);
     return PutV3UsageBatchesIdRequest;
@@ -58,15 +58,15 @@ var PutV3UsageBatchesIdResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PutV3UsageBatchesIdResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PutV3UsageBatchesIdResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ReportUsageBatchResponse)
     ], PutV3UsageBatchesIdResponse.prototype, "reportUsageBatchResponse", void 0);
     return PutV3UsageBatchesIdResponse;

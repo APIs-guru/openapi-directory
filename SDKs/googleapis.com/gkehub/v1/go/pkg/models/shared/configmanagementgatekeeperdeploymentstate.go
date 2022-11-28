@@ -27,6 +27,8 @@ const (
 	ConfigManagementGatekeeperDeploymentStateGatekeeperMutationEnumError                      ConfigManagementGatekeeperDeploymentStateGatekeeperMutationEnum = "ERROR"
 )
 
+// ConfigManagementGatekeeperDeploymentState
+// State of Policy Controller installation.
 type ConfigManagementGatekeeperDeploymentState struct {
 	GatekeeperAudit                  *ConfigManagementGatekeeperDeploymentStateGatekeeperAuditEnum                  `json:"gatekeeperAudit,omitempty"`
 	GatekeeperControllerManagerState *ConfigManagementGatekeeperDeploymentStateGatekeeperControllerManagerStateEnum `json:"gatekeeperControllerManagerState,omitempty"`

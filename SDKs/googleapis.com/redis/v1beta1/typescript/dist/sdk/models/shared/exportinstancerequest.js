@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OutputConfig } from "./outputconfig";
 // ExportInstanceRequest
 /**
@@ -34,7 +34,7 @@ var ExportInstanceRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=outputConfig" }),
+        SpeakeasyMetadata({ data: "json, name=outputConfig" }),
         __metadata("design:type", OutputConfig)
     ], ExportInstanceRequest.prototype, "outputConfig", void 0);
     return ExportInstanceRequest;

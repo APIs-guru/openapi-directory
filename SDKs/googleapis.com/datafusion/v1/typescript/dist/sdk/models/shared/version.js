@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var VersionTypeEnum;
 (function (VersionTypeEnum) {
     VersionTypeEnum["TypeUnspecified"] = "TYPE_UNSPECIFIED";
@@ -39,19 +39,19 @@ var Version = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=availableFeatures" }),
+        SpeakeasyMetadata({ data: "json, name=availableFeatures" }),
         __metadata("design:type", Array)
     ], Version.prototype, "availableFeatures", void 0);
     __decorate([
-        Metadata({ data: "json, name=defaultVersion" }),
+        SpeakeasyMetadata({ data: "json, name=defaultVersion" }),
         __metadata("design:type", Boolean)
     ], Version.prototype, "defaultVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], Version.prototype, "type", void 0);
     __decorate([
-        Metadata({ data: "json, name=versionNumber" }),
+        SpeakeasyMetadata({ data: "json, name=versionNumber" }),
         __metadata("design:type", String)
     ], Version.prototype, "versionNumber", void 0);
     return Version;

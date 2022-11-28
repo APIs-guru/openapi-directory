@@ -1,9 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import entitykey
-from . import entitykey
-from . import membershiprole
+from sdk import utils
+from . import *
 
 class MembershipTypeEnum(str, Enum):
     TYPE_UNSPECIFIED = "TYPE_UNSPECIFIED"
@@ -16,12 +19,28 @@ class MembershipTypeEnum(str, Enum):
 
 @dataclass_json
 @dataclass
+class MembershipInput:
+    r"""MembershipInput
+    A membership within the Cloud Identity Groups API. A `Membership` defines a relationship between a `Group` and an entity belonging to that `Group`, referred to as a \"member\".
+    """
+    
+    member_key: Optional[EntityKey] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('memberKey') }})
+    preferred_member_key: Optional[EntityKey] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('preferredMemberKey') }})
+    roles: Optional[List[MembershipRole]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('roles') }})
+    
+
+@dataclass_json
+@dataclass
 class Membership:
-    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createTime' }})
-    member_key: Optional[entitykey.EntityKey] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'memberKey' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    preferred_member_key: Optional[entitykey.EntityKey] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'preferredMemberKey' }})
-    roles: Optional[List[membershiprole.MembershipRole]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'roles' }})
-    type: Optional[MembershipTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updateTime' }})
+    r"""Membership
+    A membership within the Cloud Identity Groups API. A `Membership` defines a relationship between a `Group` and an entity belonging to that `Group`, referred to as a \"member\".
+    """
+    
+    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createTime') }})
+    member_key: Optional[EntityKey] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('memberKey') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    preferred_member_key: Optional[EntityKey] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('preferredMemberKey') }})
+    roles: Optional[List[MembershipRole1]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('roles') }})
+    type: Optional[MembershipTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('updateTime') }})
     

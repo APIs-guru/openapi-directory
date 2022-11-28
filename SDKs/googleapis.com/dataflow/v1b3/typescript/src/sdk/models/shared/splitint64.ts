@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SplitInt64
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A representation of an int64, n, that is immune to precision loss when encoded in JSON.
 **/
 export class SplitInt64 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=highBits" })
+  @SpeakeasyMetadata({ data: "json, name=highBits" })
   highBits?: number;
 
-  @Metadata({ data: "json, name=lowBits" })
+  @SpeakeasyMetadata({ data: "json, name=lowBits" })
   lowBits?: number;
 }

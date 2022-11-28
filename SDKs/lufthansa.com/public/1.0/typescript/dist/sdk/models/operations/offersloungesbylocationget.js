@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var OffersLoungesByLocationGetPathParams = /** @class */ (function (_super) {
     __extends(OffersLoungesByLocationGetPathParams, _super);
@@ -30,7 +30,7 @@ var OffersLoungesByLocationGetPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=location" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=location" }),
         __metadata("design:type", String)
     ], OffersLoungesByLocationGetPathParams.prototype, "location", void 0);
     return OffersLoungesByLocationGetPathParams;
@@ -42,15 +42,15 @@ var OffersLoungesByLocationGetQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=cabinClass" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=cabinClass" }),
         __metadata("design:type", String)
     ], OffersLoungesByLocationGetQueryParams.prototype, "cabinClass", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=lang" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lang" }),
         __metadata("design:type", String)
     ], OffersLoungesByLocationGetQueryParams.prototype, "lang", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=tierCode" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tierCode" }),
         __metadata("design:type", String)
     ], OffersLoungesByLocationGetQueryParams.prototype, "tierCode", void 0);
     return OffersLoungesByLocationGetQueryParams;
@@ -62,7 +62,7 @@ var OffersLoungesByLocationGetHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Accept" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept" }),
         __metadata("design:type", String)
     ], OffersLoungesByLocationGetHeaders.prototype, "accept", void 0);
     return OffersLoungesByLocationGetHeaders;
@@ -74,7 +74,7 @@ var OffersLoungesByLocationGetSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeAuth)
     ], OffersLoungesByLocationGetSecurity.prototype, "auth", void 0);
     return OffersLoungesByLocationGetSecurity;
@@ -86,19 +86,19 @@ var OffersLoungesByLocationGetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", OffersLoungesByLocationGetPathParams)
     ], OffersLoungesByLocationGetRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", OffersLoungesByLocationGetQueryParams)
     ], OffersLoungesByLocationGetRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", OffersLoungesByLocationGetHeaders)
     ], OffersLoungesByLocationGetRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", OffersLoungesByLocationGetSecurity)
     ], OffersLoungesByLocationGetRequest.prototype, "security", void 0);
     return OffersLoungesByLocationGetRequest;
@@ -110,15 +110,15 @@ var OffersLoungesByLocationGetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], OffersLoungesByLocationGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], OffersLoungesByLocationGetResponse.prototype, "offersLoungesByLocationGet200ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], OffersLoungesByLocationGetResponse.prototype, "statusCode", void 0);
     return OffersLoungesByLocationGetResponse;

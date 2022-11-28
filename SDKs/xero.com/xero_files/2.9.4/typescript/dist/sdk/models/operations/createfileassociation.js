@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CreateFileAssociationPathParams = /** @class */ (function (_super) {
     __extends(CreateFileAssociationPathParams, _super);
@@ -30,7 +30,7 @@ var CreateFileAssociationPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=FileId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=FileId" }),
         __metadata("design:type", String)
     ], CreateFileAssociationPathParams.prototype, "fileId", void 0);
     return CreateFileAssociationPathParams;
@@ -42,7 +42,7 @@ var CreateFileAssociationHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=xero-tenant-id" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=xero-tenant-id" }),
         __metadata("design:type", String)
     ], CreateFileAssociationHeaders.prototype, "xeroTenantId", void 0);
     return CreateFileAssociationHeaders;
@@ -54,7 +54,7 @@ var CreateFileAssociationSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOAuth2)
     ], CreateFileAssociationSecurity.prototype, "oAuth2", void 0);
     return CreateFileAssociationSecurity;
@@ -66,19 +66,19 @@ var CreateFileAssociationRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateFileAssociationPathParams)
     ], CreateFileAssociationRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateFileAssociationHeaders)
     ], CreateFileAssociationRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.Association)
     ], CreateFileAssociationRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateFileAssociationSecurity)
     ], CreateFileAssociationRequest.prototype, "security", void 0);
     return CreateFileAssociationRequest;
@@ -90,15 +90,15 @@ var CreateFileAssociationResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Association)
     ], CreateFileAssociationResponse.prototype, "association", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CreateFileAssociationResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CreateFileAssociationResponse.prototype, "statusCode", void 0);
     return CreateFileAssociationResponse;

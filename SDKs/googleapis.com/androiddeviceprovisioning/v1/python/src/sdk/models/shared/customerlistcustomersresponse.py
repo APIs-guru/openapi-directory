@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import company
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CustomerListCustomersResponse:
-    customers: Optional[List[company.Company]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'customers' }})
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextPageToken' }})
+    r"""CustomerListCustomersResponse
+    Response message for listing my customers.
+    """
+    
+    customers: Optional[List[Company]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('customers') }})
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextPageToken') }})
     

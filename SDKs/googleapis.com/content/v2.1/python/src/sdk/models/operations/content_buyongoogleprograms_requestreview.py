@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ContentBuyongoogleprogramsRequestreviewPathParams:
-    merchant_id: str = field(default=None, metadata={'path_param': { 'field_name': 'merchantId', 'style': 'simple', 'explode': False }})
-    region_code: str = field(default=None, metadata={'path_param': { 'field_name': 'regionCode', 'style': 'simple', 'explode': False }})
+    merchant_id: str = field(metadata={'path_param': { 'field_name': 'merchantId', 'style': 'simple', 'explode': False }})
+    region_code: str = field(metadata={'path_param': { 'field_name': 'regionCode', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +27,20 @@ class ContentBuyongoogleprogramsRequestreviewQueryParams:
 
 @dataclass
 class ContentBuyongoogleprogramsRequestreviewSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ContentBuyongoogleprogramsRequestreviewRequest:
-    path_params: ContentBuyongoogleprogramsRequestreviewPathParams = field(default=None)
-    query_params: ContentBuyongoogleprogramsRequestreviewQueryParams = field(default=None)
+    path_params: ContentBuyongoogleprogramsRequestreviewPathParams = field()
+    query_params: ContentBuyongoogleprogramsRequestreviewQueryParams = field()
+    security: ContentBuyongoogleprogramsRequestreviewSecurity = field()
     request: Optional[dict[str, Any]] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ContentBuyongoogleprogramsRequestreviewSecurity = field(default=None)
     
 
 @dataclass
 class ContentBuyongoogleprogramsRequestreviewResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
+
 
 export enum CreateUnreferencedMergeCommitXAmzTargetEnum {
     CodeCommit20150413CreateUnreferencedMergeCommit = "CodeCommit_20150413.CreateUnreferencedMergeCommit"
@@ -7,156 +8,156 @@ export enum CreateUnreferencedMergeCommitXAmzTargetEnum {
 
 
 export class CreateUnreferencedMergeCommitHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Target" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Target" })
   xAmzTarget: CreateUnreferencedMergeCommitXAmzTargetEnum;
 }
 
 
 export class CreateUnreferencedMergeCommitRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateUnreferencedMergeCommitHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.CreateUnreferencedMergeCommitInput;
 }
 
 
 export class CreateUnreferencedMergeCommitResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   commitDoesNotExistException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   commitMessageLengthExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   commitRequiredException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   concurrentReferenceUpdateException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createUnreferencedMergeCommitOutput?: shared.CreateUnreferencedMergeCommitOutput;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   encryptionIntegrityChecksFailedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   encryptionKeyAccessDeniedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   encryptionKeyDisabledException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   encryptionKeyNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   encryptionKeyUnavailableException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   fileContentSizeLimitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   fileModeRequiredException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   folderContentSizeLimitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidCommitException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidConflictDetailLevelException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidConflictResolutionException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidConflictResolutionStrategyException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidEmailException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidFileModeException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidMergeOptionException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidPathException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidReplacementContentException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidReplacementTypeException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRepositoryNameException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   manualMergeRequiredException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   maximumConflictResolutionEntriesExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   maximumFileContentToLoadExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   maximumItemsToCompareExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   mergeOptionRequiredException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   multipleConflictResolutionEntriesException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   nameLengthExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   pathRequiredException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   replacementContentRequiredException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   replacementTypeRequiredException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   repositoryDoesNotExistException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   repositoryNameRequiredException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tipsDivergenceExceededException?: any;
 }

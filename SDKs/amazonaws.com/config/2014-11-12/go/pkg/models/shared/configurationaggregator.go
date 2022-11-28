@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ConfigurationAggregator
+// The details about the configuration aggregator, including information about source accounts, regions, and metadata of the aggregator.
 type ConfigurationAggregator struct {
 	AccountAggregationSources     []AccountAggregationSource     `json:"AccountAggregationSources,omitempty"`
 	ConfigurationAggregatorArn    *string                        `json:"ConfigurationAggregatorArn,omitempty"`

@@ -1,52 +1,53 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum TransportationAirportShuttleExceptionEnum {
-    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED"
-,    UnderConstruction = "UNDER_CONSTRUCTION"
-,    DependentOnSeason = "DEPENDENT_ON_SEASON"
-,    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
+    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED",
+    UnderConstruction = "UNDER_CONSTRUCTION",
+    DependentOnSeason = "DEPENDENT_ON_SEASON",
+    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
 }
 
 export enum TransportationCarRentalOnPropertyExceptionEnum {
-    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED"
-,    UnderConstruction = "UNDER_CONSTRUCTION"
-,    DependentOnSeason = "DEPENDENT_ON_SEASON"
-,    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
+    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED",
+    UnderConstruction = "UNDER_CONSTRUCTION",
+    DependentOnSeason = "DEPENDENT_ON_SEASON",
+    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
 }
 
 export enum TransportationFreeAirportShuttleExceptionEnum {
-    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED"
-,    UnderConstruction = "UNDER_CONSTRUCTION"
-,    DependentOnSeason = "DEPENDENT_ON_SEASON"
-,    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
+    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED",
+    UnderConstruction = "UNDER_CONSTRUCTION",
+    DependentOnSeason = "DEPENDENT_ON_SEASON",
+    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
 }
 
 export enum TransportationFreePrivateCarServiceExceptionEnum {
-    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED"
-,    UnderConstruction = "UNDER_CONSTRUCTION"
-,    DependentOnSeason = "DEPENDENT_ON_SEASON"
-,    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
+    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED",
+    UnderConstruction = "UNDER_CONSTRUCTION",
+    DependentOnSeason = "DEPENDENT_ON_SEASON",
+    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
 }
 
 export enum TransportationLocalShuttleExceptionEnum {
-    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED"
-,    UnderConstruction = "UNDER_CONSTRUCTION"
-,    DependentOnSeason = "DEPENDENT_ON_SEASON"
-,    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
+    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED",
+    UnderConstruction = "UNDER_CONSTRUCTION",
+    DependentOnSeason = "DEPENDENT_ON_SEASON",
+    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
 }
 
 export enum TransportationPrivateCarServiceExceptionEnum {
-    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED"
-,    UnderConstruction = "UNDER_CONSTRUCTION"
-,    DependentOnSeason = "DEPENDENT_ON_SEASON"
-,    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
+    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED",
+    UnderConstruction = "UNDER_CONSTRUCTION",
+    DependentOnSeason = "DEPENDENT_ON_SEASON",
+    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
 }
 
 export enum TransportationTransferExceptionEnum {
-    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED"
-,    UnderConstruction = "UNDER_CONSTRUCTION"
-,    DependentOnSeason = "DEPENDENT_ON_SEASON"
-,    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
+    ExceptionUnspecified = "EXCEPTION_UNSPECIFIED",
+    UnderConstruction = "UNDER_CONSTRUCTION",
+    DependentOnSeason = "DEPENDENT_ON_SEASON",
+    DependentOnDayOfWeek = "DEPENDENT_ON_DAY_OF_WEEK"
 }
 
 
@@ -55,45 +56,45 @@ export enum TransportationTransferExceptionEnum {
  * Vehicles or vehicular services facilitated or owned by the property.
 **/
 export class Transportation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=airportShuttle" })
+  @SpeakeasyMetadata({ data: "json, name=airportShuttle" })
   airportShuttle?: boolean;
 
-  @Metadata({ data: "json, name=airportShuttleException" })
+  @SpeakeasyMetadata({ data: "json, name=airportShuttleException" })
   airportShuttleException?: TransportationAirportShuttleExceptionEnum;
 
-  @Metadata({ data: "json, name=carRentalOnProperty" })
+  @SpeakeasyMetadata({ data: "json, name=carRentalOnProperty" })
   carRentalOnProperty?: boolean;
 
-  @Metadata({ data: "json, name=carRentalOnPropertyException" })
+  @SpeakeasyMetadata({ data: "json, name=carRentalOnPropertyException" })
   carRentalOnPropertyException?: TransportationCarRentalOnPropertyExceptionEnum;
 
-  @Metadata({ data: "json, name=freeAirportShuttle" })
+  @SpeakeasyMetadata({ data: "json, name=freeAirportShuttle" })
   freeAirportShuttle?: boolean;
 
-  @Metadata({ data: "json, name=freeAirportShuttleException" })
+  @SpeakeasyMetadata({ data: "json, name=freeAirportShuttleException" })
   freeAirportShuttleException?: TransportationFreeAirportShuttleExceptionEnum;
 
-  @Metadata({ data: "json, name=freePrivateCarService" })
+  @SpeakeasyMetadata({ data: "json, name=freePrivateCarService" })
   freePrivateCarService?: boolean;
 
-  @Metadata({ data: "json, name=freePrivateCarServiceException" })
+  @SpeakeasyMetadata({ data: "json, name=freePrivateCarServiceException" })
   freePrivateCarServiceException?: TransportationFreePrivateCarServiceExceptionEnum;
 
-  @Metadata({ data: "json, name=localShuttle" })
+  @SpeakeasyMetadata({ data: "json, name=localShuttle" })
   localShuttle?: boolean;
 
-  @Metadata({ data: "json, name=localShuttleException" })
+  @SpeakeasyMetadata({ data: "json, name=localShuttleException" })
   localShuttleException?: TransportationLocalShuttleExceptionEnum;
 
-  @Metadata({ data: "json, name=privateCarService" })
+  @SpeakeasyMetadata({ data: "json, name=privateCarService" })
   privateCarService?: boolean;
 
-  @Metadata({ data: "json, name=privateCarServiceException" })
+  @SpeakeasyMetadata({ data: "json, name=privateCarServiceException" })
   privateCarServiceException?: TransportationPrivateCarServiceExceptionEnum;
 
-  @Metadata({ data: "json, name=transfer" })
+  @SpeakeasyMetadata({ data: "json, name=transfer" })
   transfer?: boolean;
 
-  @Metadata({ data: "json, name=transferException" })
+  @SpeakeasyMetadata({ data: "json, name=transferException" })
   transferException?: TransportationTransferExceptionEnum;
 }

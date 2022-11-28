@@ -1,5 +1,7 @@
 package shared
 
+// OwnerDirectoryDescription
+// Describes the directory owner account details that have been shared to the directory consumer account.
 type OwnerDirectoryDescription struct {
 	AccountID      *string                          `json:"AccountId,omitempty"`
 	DirectoryID    *string                          `json:"DirectoryId,omitempty"`

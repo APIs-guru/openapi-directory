@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Workteam
+// Provides details about a labeling work team.
 type Workteam struct {
 	CreateDate                *time.Time                 `json:"CreateDate,omitempty"`
 	Description               string                     `json:"Description"`

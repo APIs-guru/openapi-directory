@@ -1,44 +1,44 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Committee } from "./committee";
 import { HouseEnum } from "./houseenum";
 import { BillStageSitting } from "./billstagesitting";
 
 
+
 export class BillStageDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=abbreviation" })
+  @SpeakeasyMetadata({ data: "json, name=abbreviation" })
   abbreviation?: string;
 
-  @Metadata({ data: "json, name=committee" })
+  @SpeakeasyMetadata({ data: "json, name=committee" })
   committee?: Committee;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=house" })
+  @SpeakeasyMetadata({ data: "json, name=house" })
   house?: HouseEnum;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=lastUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdate" })
   lastUpdate?: Date;
 
-  @Metadata({ data: "json, name=nextStageBillStageId" })
+  @SpeakeasyMetadata({ data: "json, name=nextStageBillStageId" })
   nextStageBillStageId?: number;
 
-  @Metadata({ data: "json, name=previousStageBillStageId" })
+  @SpeakeasyMetadata({ data: "json, name=previousStageBillStageId" })
   previousStageBillStageId?: number;
 
-  @Metadata({ data: "json, name=sessionId" })
+  @SpeakeasyMetadata({ data: "json, name=sessionId" })
   sessionId?: number;
 
-  @Metadata({ data: "json, name=sortOrder" })
+  @SpeakeasyMetadata({ data: "json, name=sortOrder" })
   sortOrder?: number;
 
-  @Metadata({ data: "json, name=stageId" })
+  @SpeakeasyMetadata({ data: "json, name=stageId" })
   stageId?: number;
 
-  @Metadata({ data: "json, name=stageSittings", elemType: shared.BillStageSitting })
+  @SpeakeasyMetadata({ data: "json, name=stageSittings", elemType: BillStageSitting })
   stageSittings?: BillStageSitting[];
 }

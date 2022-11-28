@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 
 class ConvertRequestBodyValidateEnum(str, Enum):
     ON = "on"
@@ -19,9 +23,9 @@ class ConvertRequest:
 
 @dataclass
 class ConvertResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     convert_200_application_json_any: Optional[Any] = field(default=None)
     convert_400_application_json_any: Optional[Any] = field(default=None)
     

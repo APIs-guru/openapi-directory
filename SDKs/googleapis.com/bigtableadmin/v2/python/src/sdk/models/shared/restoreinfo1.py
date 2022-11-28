@@ -1,0 +1,18 @@
+from dataclasses import dataclass, field
+from typing import Optional
+from enum import Enum
+from dataclasses_json import dataclass_json
+from sdk import utils
+from . import *
+
+
+@dataclass_json
+@dataclass
+class RestoreInfo1:
+    r"""RestoreInfo1
+    Information about a table restore.
+    """
+    
+    backup_info: Optional[BackupInfo] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('backupInfo') }})
+    source_type: Optional[RestoreInfoSourceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sourceType') }})
+    

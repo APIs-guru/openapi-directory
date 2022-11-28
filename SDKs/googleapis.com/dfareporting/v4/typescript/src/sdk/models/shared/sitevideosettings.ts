@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SiteCompanionSetting } from "./sitecompanionsetting";
 import { ObaIcon } from "./obaicon";
 import { SiteSkippableSetting } from "./siteskippablesetting";
 import { SiteTranscodeSetting } from "./sitetranscodesetting";
 
+
 export enum SiteVideoSettingsOrientationEnum {
-    Any = "ANY"
-,    Landscape = "LANDSCAPE"
-,    Portrait = "PORTRAIT"
+    Any = "ANY",
+    Landscape = "LANDSCAPE",
+    Portrait = "PORTRAIT"
 }
 
 
@@ -16,27 +17,27 @@ export enum SiteVideoSettingsOrientationEnum {
  * Video Settings
 **/
 export class SiteVideoSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=companionSettings" })
+  @SpeakeasyMetadata({ data: "json, name=companionSettings" })
   companionSettings?: SiteCompanionSetting;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=obaEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=obaEnabled" })
   obaEnabled?: boolean;
 
-  @Metadata({ data: "json, name=obaSettings" })
+  @SpeakeasyMetadata({ data: "json, name=obaSettings" })
   obaSettings?: ObaIcon;
 
-  @Metadata({ data: "json, name=orientation" })
+  @SpeakeasyMetadata({ data: "json, name=orientation" })
   orientation?: SiteVideoSettingsOrientationEnum;
 
-  @Metadata({ data: "json, name=publisherSpecificationId" })
+  @SpeakeasyMetadata({ data: "json, name=publisherSpecificationId" })
   publisherSpecificationId?: string;
 
-  @Metadata({ data: "json, name=skippableSettings" })
+  @SpeakeasyMetadata({ data: "json, name=skippableSettings" })
   skippableSettings?: SiteSkippableSetting;
 
-  @Metadata({ data: "json, name=transcodeSettings" })
+  @SpeakeasyMetadata({ data: "json, name=transcodeSettings" })
   transcodeSettings?: SiteTranscodeSetting;
 }

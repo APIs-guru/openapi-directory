@@ -1,7 +1,9 @@
 package shared
 
-type GoogleCloudChannelV1TransferEntitlementsRequest struct {
-	AuthToken    *string                           `json:"authToken,omitempty"`
-	Entitlements []GoogleCloudChannelV1Entitlement `json:"entitlements,omitempty"`
-	RequestID    *string                           `json:"requestId,omitempty"`
+// GoogleCloudChannelV1TransferEntitlementsRequestInput
+// Request message for CloudChannelService.TransferEntitlements.
+type GoogleCloudChannelV1TransferEntitlementsRequestInput struct {
+	AuthToken    *string                                `json:"authToken,omitempty"`
+	Entitlements []GoogleCloudChannelV1EntitlementInput `json:"entitlements,omitempty"`
+	RequestID    *string                                `json:"requestId,omitempty"`
 }

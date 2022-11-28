@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VerificationSettings } from "./verificationsettings";
+
 
 
 // PassThrough
@@ -7,9 +8,9 @@ import { VerificationSettings } from "./verificationsettings";
  * Strategy where only signature and field values are verified
 **/
 export class PassThrough extends SpeakeasyBase {
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 
-  @Metadata({ data: "json, name=verificationSettings" })
+  @SpeakeasyMetadata({ data: "json, name=verificationSettings" })
   verificationSettings: VerificationSettings;
 }

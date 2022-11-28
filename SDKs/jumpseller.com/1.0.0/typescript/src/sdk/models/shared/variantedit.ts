@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VariantEditFields } from "./varianteditfields";
 
 
+
 export class VariantEdit extends SpeakeasyBase {
-  @Metadata({ data: "json, name=variant" })
+  @SpeakeasyMetadata({ data: "json, name=variant" })
   variant?: VariantEditFields;
 }

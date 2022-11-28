@@ -1,5 +1,7 @@
 package shared
 
+// Cluster
+// Contains all of the attributes of a specific DAX cluster.
 type Cluster struct {
 	ActiveNodes                   *int64                             `json:"ActiveNodes,omitempty"`
 	ClusterArn                    *string                            `json:"ClusterArn,omitempty"`

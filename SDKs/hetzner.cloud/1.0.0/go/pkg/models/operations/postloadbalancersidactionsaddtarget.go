@@ -4,14 +4,20 @@ type PostLoadBalancersIDActionsAddTargetPathParams struct {
 	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
+// PostLoadBalancersIDActionsAddTargetAddTargetRequestIP
+// IP targets where the traffic should be routed through. It is only possible to use the (Public or vSwitch) IPs of Hetzner Online Root Servers belonging to the project owner. IPs belonging to other users are blocked. Additionally IPs belonging to services provided by Hetzner Cloud (Servers, Load Balancers, ...) are blocked as well.
 type PostLoadBalancersIDActionsAddTargetAddTargetRequestIP struct {
 	IP string `json:"ip"`
 }
 
+// PostLoadBalancersIDActionsAddTargetAddTargetRequestLabelSelector
+// Configuration for label selector targets, required if type is `label_selector`
 type PostLoadBalancersIDActionsAddTargetAddTargetRequestLabelSelector struct {
 	Selector string `json:"selector"`
 }
 
+// PostLoadBalancersIDActionsAddTargetAddTargetRequestServer
+// Configuration for type Server, required if type is `server`
 type PostLoadBalancersIDActionsAddTargetAddTargetRequestServer struct {
 	ID float64 `json:"id"`
 }
@@ -32,11 +38,8 @@ type PostLoadBalancersIDActionsAddTargetAddTargetRequest struct {
 	UsePrivateIP  *bool                                                             `json:"use_private_ip,omitempty"`
 }
 
-type PostLoadBalancersIDActionsAddTargetRequest struct {
-	PathParams PostLoadBalancersIDActionsAddTargetPathParams
-	Request    *PostLoadBalancersIDActionsAddTargetAddTargetRequest `request:"mediaType=application/json"`
-}
-
+// PostLoadBalancersIDActionsAddTargetActionResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type PostLoadBalancersIDActionsAddTargetActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -68,6 +71,11 @@ type PostLoadBalancersIDActionsAddTargetActionResponseAction struct {
 
 type PostLoadBalancersIDActionsAddTargetActionResponse struct {
 	Action PostLoadBalancersIDActionsAddTargetActionResponseAction `json:"action"`
+}
+
+type PostLoadBalancersIDActionsAddTargetRequest struct {
+	PathParams PostLoadBalancersIDActionsAddTargetPathParams
+	Request    *PostLoadBalancersIDActionsAddTargetAddTargetRequest `request:"mediaType=application/json"`
 }
 
 type PostLoadBalancersIDActionsAddTargetResponse struct {

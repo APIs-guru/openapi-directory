@@ -13,13 +13,13 @@ type GetUserQueryParams struct {
 	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
+type GetUser200ApplicationJSON struct {
+	Data *shared.UserResponse `json:"data,omitempty"`
+}
+
 type GetUserRequest struct {
 	PathParams  GetUserPathParams
 	QueryParams GetUserQueryParams
-}
-
-type GetUser200ApplicationJSON struct {
-	Data *shared.UserResponse `json:"data,omitempty"`
 }
 
 type GetUserResponse struct {

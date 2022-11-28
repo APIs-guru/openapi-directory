@@ -1,16 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DirectiveDetailsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=directiveId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=directiveId" })
   directiveId: string;
-}
-
-
-export class DirectiveDetailsRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: DirectiveDetailsPathParams;
 }
 
 export enum DirectiveDetails200ApplicationJsonActionEnum {
@@ -19,35 +14,41 @@ export enum DirectiveDetails200ApplicationJsonActionEnum {
 
 
 export class DirectiveDetails200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=directives", elemType: shared.Directive })
+  @SpeakeasyMetadata({ data: "json, name=directives", elemType: shared.Directive })
   directives: shared.Directive[];
 }
 
 export enum DirectiveDetails200ApplicationJsonResultEnum {
-    Success = "success"
-,    Error = "error"
+    Success = "success",
+    Error = "error"
 }
 
 
 export class DirectiveDetails200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: DirectiveDetails200ApplicationJsonActionEnum;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: DirectiveDetails200ApplicationJsonData;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result: DirectiveDetails200ApplicationJsonResultEnum;
 }
 
 
+export class DirectiveDetailsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: DirectiveDetailsPathParams;
+}
+
+
 export class DirectiveDetailsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   directiveDetails200ApplicationJsonObject?: DirectiveDetails200ApplicationJson;
 }

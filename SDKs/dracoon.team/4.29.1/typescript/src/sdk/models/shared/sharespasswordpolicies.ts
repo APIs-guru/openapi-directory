@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CharacterRules } from "./characterrules";
 import { UserInfo } from "./userinfo";
+
 
 
 // SharesPasswordPolicies
@@ -8,24 +9,24 @@ import { UserInfo } from "./userinfo";
  * Shares password policies
 **/
 export class SharesPasswordPolicies extends SpeakeasyBase {
-  @Metadata({ data: "json, name=characterRules" })
+  @SpeakeasyMetadata({ data: "json, name=characterRules" })
   characterRules?: CharacterRules;
 
-  @Metadata({ data: "json, name=minLength" })
+  @SpeakeasyMetadata({ data: "json, name=minLength" })
   minLength?: number;
 
-  @Metadata({ data: "json, name=rejectDictionaryWords" })
+  @SpeakeasyMetadata({ data: "json, name=rejectDictionaryWords" })
   rejectDictionaryWords?: boolean;
 
-  @Metadata({ data: "json, name=rejectKeyboardPatterns" })
+  @SpeakeasyMetadata({ data: "json, name=rejectKeyboardPatterns" })
   rejectKeyboardPatterns?: boolean;
 
-  @Metadata({ data: "json, name=rejectUserInfo" })
+  @SpeakeasyMetadata({ data: "json, name=rejectUserInfo" })
   rejectUserInfo?: boolean;
 
-  @Metadata({ data: "json, name=updatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=updatedAt" })
   updatedAt?: Date;
 
-  @Metadata({ data: "json, name=updatedBy" })
+  @SpeakeasyMetadata({ data: "json, name=updatedBy" })
   updatedBy?: UserInfo;
 }

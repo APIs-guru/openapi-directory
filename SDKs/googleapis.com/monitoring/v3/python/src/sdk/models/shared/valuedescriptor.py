@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ValueDescriptorMetricKindEnum(str, Enum):
     METRIC_KIND_UNSPECIFIED = "METRIC_KIND_UNSPECIFIED"
@@ -21,8 +23,12 @@ class ValueDescriptorValueTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ValueDescriptor:
-    key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
-    metric_kind: Optional[ValueDescriptorMetricKindEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metricKind' }})
-    unit: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'unit' }})
-    value_type: Optional[ValueDescriptorValueTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'valueType' }})
+    r"""ValueDescriptor
+    A descriptor for the value columns in a data point.
+    """
+    
+    key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('key') }})
+    metric_kind: Optional[ValueDescriptorMetricKindEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('metricKind') }})
+    unit: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('unit') }})
+    value_type: Optional[ValueDescriptorValueTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('valueType') }})
     

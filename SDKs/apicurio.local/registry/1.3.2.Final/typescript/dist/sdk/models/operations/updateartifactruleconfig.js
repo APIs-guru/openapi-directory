@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export var UpdateArtifactRuleConfigRuleEnum;
 (function (UpdateArtifactRuleConfigRuleEnum) {
@@ -35,11 +35,11 @@ var UpdateArtifactRuleConfigPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=artifactId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=artifactId" }),
         __metadata("design:type", String)
     ], UpdateArtifactRuleConfigPathParams.prototype, "artifactId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=rule" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=rule" }),
         __metadata("design:type", String)
     ], UpdateArtifactRuleConfigPathParams.prototype, "rule", void 0);
     return UpdateArtifactRuleConfigPathParams;
@@ -51,11 +51,11 @@ var UpdateArtifactRuleConfigRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateArtifactRuleConfigPathParams)
     ], UpdateArtifactRuleConfigRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.Rule)
     ], UpdateArtifactRuleConfigRequest.prototype, "request", void 0);
     return UpdateArtifactRuleConfigRequest;
@@ -67,19 +67,19 @@ var UpdateArtifactRuleConfigResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UpdateArtifactRuleConfigResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Error)
     ], UpdateArtifactRuleConfigResponse.prototype, "error", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Rule)
     ], UpdateArtifactRuleConfigResponse.prototype, "rule", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UpdateArtifactRuleConfigResponse.prototype, "statusCode", void 0);
     return UpdateArtifactRuleConfigResponse;

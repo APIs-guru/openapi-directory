@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SelectAggregateResourceConfigRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConfigurationAggregatorName" })
+  @SpeakeasyMetadata({ data: "json, name=ConfigurationAggregatorName" })
   configurationAggregatorName: string;
 
-  @Metadata({ data: "json, name=Expression" })
+  @SpeakeasyMetadata({ data: "json, name=Expression" })
   expression: string;
 
-  @Metadata({ data: "json, name=Limit" })
+  @SpeakeasyMetadata({ data: "json, name=Limit" })
   limit?: number;
 
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

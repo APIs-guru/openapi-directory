@@ -1,5 +1,7 @@
 package shared
 
+// AwsEcsServiceServiceRegistriesDetails
+// Information about a service discovery registry to assign to the service.
 type AwsEcsServiceServiceRegistriesDetails struct {
 	ContainerName *string `json:"ContainerName,omitempty"`
 	ContainerPort *int64  `json:"ContainerPort,omitempty"`

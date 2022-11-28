@@ -18,6 +18,8 @@ type StartAuditMitigationActionsTaskHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// StartAuditMitigationActionsTaskRequestBodyTarget
+// Used in MitigationActionParams, this information identifies the target findings to which the mitigation actions are applied. Only one entry appears.
 type StartAuditMitigationActionsTaskRequestBodyTarget struct {
 	AuditCheckToReasonCodeFilter map[string][]string `json:"auditCheckToReasonCodeFilter,omitempty"`
 	AuditTaskID                  *string             `json:"auditTaskId,omitempty"`

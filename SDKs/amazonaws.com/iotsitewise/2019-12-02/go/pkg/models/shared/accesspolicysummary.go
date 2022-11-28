@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// AccessPolicySummary
+// Contains an access policy that defines an identity's access to an IoT SiteWise Monitor resource.
 type AccessPolicySummary struct {
 	CreationDate   *time.Time     `json:"creationDate,omitempty"`
 	ID             string         `json:"id"`

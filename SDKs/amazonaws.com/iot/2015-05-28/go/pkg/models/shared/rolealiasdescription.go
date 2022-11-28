@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// RoleAliasDescription
+// Role alias description.
 type RoleAliasDescription struct {
 	CreationDate              *time.Time `json:"creationDate,omitempty"`
 	CredentialDurationSeconds *int64     `json:"credentialDurationSeconds,omitempty"`

@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsAccount } from "./awsaccount";
 import { AwsService } from "./awsservice";
+
 
 
 // Scope
@@ -9,9 +9,9 @@ import { AwsService } from "./awsservice";
  *  The wrapper that contains the accounts and services in scope for the assessment. 
 **/
 export class Scope extends SpeakeasyBase {
-  @Metadata({ data: "json, name=awsAccounts", elemType: shared.AwsAccount })
+  @SpeakeasyMetadata({ data: "json, name=awsAccounts", elemType: AwsAccount })
   awsAccounts?: AwsAccount[];
 
-  @Metadata({ data: "json, name=awsServices", elemType: shared.AwsService })
+  @SpeakeasyMetadata({ data: "json, name=awsServices", elemType: AwsService })
   awsServices?: AwsService[];
 }

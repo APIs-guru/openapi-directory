@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ErrorGroupStats } from "./errorgroupstats";
 /**
  * Contains a set of requested error group stats.

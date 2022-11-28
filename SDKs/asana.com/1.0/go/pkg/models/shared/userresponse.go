@@ -1,5 +1,7 @@
 package shared
 
+// UserResponsePhoto
+// A map of the user’s profile photo in various sizes, or null if no photo is set. Sizes provided are 21, 27, 36, 60, 128, and 1024. All images are in PNG format, except for 1024 (which is in JPEG format).
 type UserResponsePhoto struct {
 	Image1024x1024 *string `json:"image_1024x1024,omitempty"`
 	Image128x128   *string `json:"image_128x128,omitempty"`

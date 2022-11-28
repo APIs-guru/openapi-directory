@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DatabaseConfig } from "./databaseconfig";
 import { EncryptionConfig } from "./encryptionconfig";
 import { MaintenanceWindow } from "./maintenancewindow";
@@ -9,12 +9,14 @@ import { SoftwareConfig } from "./softwareconfig";
 import { WebServerConfig } from "./webserverconfig";
 import { WebServerNetworkAccessControl } from "./webservernetworkaccesscontrol";
 import { WorkloadsConfig } from "./workloadsconfig";
+import { PrivateEnvironmentConfigInput } from "./privateenvironmentconfig";
+
 
 export enum EnvironmentConfigEnvironmentSizeEnum {
-    EnvironmentSizeUnspecified = "ENVIRONMENT_SIZE_UNSPECIFIED"
-,    EnvironmentSizeSmall = "ENVIRONMENT_SIZE_SMALL"
-,    EnvironmentSizeMedium = "ENVIRONMENT_SIZE_MEDIUM"
-,    EnvironmentSizeLarge = "ENVIRONMENT_SIZE_LARGE"
+    EnvironmentSizeUnspecified = "ENVIRONMENT_SIZE_UNSPECIFIED",
+    EnvironmentSizeSmall = "ENVIRONMENT_SIZE_SMALL",
+    EnvironmentSizeMedium = "ENVIRONMENT_SIZE_MEDIUM",
+    EnvironmentSizeLarge = "ENVIRONMENT_SIZE_LARGE"
 }
 
 
@@ -23,48 +25,100 @@ export enum EnvironmentConfigEnvironmentSizeEnum {
  * Configuration information for an environment.
 **/
 export class EnvironmentConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=airflowUri" })
+  @SpeakeasyMetadata({ data: "json, name=airflowUri" })
   airflowUri?: string;
 
-  @Metadata({ data: "json, name=dagGcsPrefix" })
+  @SpeakeasyMetadata({ data: "json, name=dagGcsPrefix" })
   dagGcsPrefix?: string;
 
-  @Metadata({ data: "json, name=databaseConfig" })
+  @SpeakeasyMetadata({ data: "json, name=databaseConfig" })
   databaseConfig?: DatabaseConfig;
 
-  @Metadata({ data: "json, name=encryptionConfig" })
+  @SpeakeasyMetadata({ data: "json, name=encryptionConfig" })
   encryptionConfig?: EncryptionConfig;
 
-  @Metadata({ data: "json, name=environmentSize" })
+  @SpeakeasyMetadata({ data: "json, name=environmentSize" })
   environmentSize?: EnvironmentConfigEnvironmentSizeEnum;
 
-  @Metadata({ data: "json, name=gkeCluster" })
+  @SpeakeasyMetadata({ data: "json, name=gkeCluster" })
   gkeCluster?: string;
 
-  @Metadata({ data: "json, name=maintenanceWindow" })
+  @SpeakeasyMetadata({ data: "json, name=maintenanceWindow" })
   maintenanceWindow?: MaintenanceWindow;
 
-  @Metadata({ data: "json, name=masterAuthorizedNetworksConfig" })
+  @SpeakeasyMetadata({ data: "json, name=masterAuthorizedNetworksConfig" })
   masterAuthorizedNetworksConfig?: MasterAuthorizedNetworksConfig;
 
-  @Metadata({ data: "json, name=nodeConfig" })
+  @SpeakeasyMetadata({ data: "json, name=nodeConfig" })
   nodeConfig?: NodeConfig;
 
-  @Metadata({ data: "json, name=nodeCount" })
+  @SpeakeasyMetadata({ data: "json, name=nodeCount" })
   nodeCount?: number;
 
-  @Metadata({ data: "json, name=privateEnvironmentConfig" })
+  @SpeakeasyMetadata({ data: "json, name=privateEnvironmentConfig" })
   privateEnvironmentConfig?: PrivateEnvironmentConfig;
 
-  @Metadata({ data: "json, name=softwareConfig" })
+  @SpeakeasyMetadata({ data: "json, name=softwareConfig" })
   softwareConfig?: SoftwareConfig;
 
-  @Metadata({ data: "json, name=webServerConfig" })
+  @SpeakeasyMetadata({ data: "json, name=webServerConfig" })
   webServerConfig?: WebServerConfig;
 
-  @Metadata({ data: "json, name=webServerNetworkAccessControl" })
+  @SpeakeasyMetadata({ data: "json, name=webServerNetworkAccessControl" })
   webServerNetworkAccessControl?: WebServerNetworkAccessControl;
 
-  @Metadata({ data: "json, name=workloadsConfig" })
+  @SpeakeasyMetadata({ data: "json, name=workloadsConfig" })
+  workloadsConfig?: WorkloadsConfig;
+}
+
+
+// EnvironmentConfigInput
+/** 
+ * Configuration information for an environment.
+**/
+export class EnvironmentConfigInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=airflowUri" })
+  airflowUri?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=dagGcsPrefix" })
+  dagGcsPrefix?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=databaseConfig" })
+  databaseConfig?: DatabaseConfig;
+
+  @SpeakeasyMetadata({ data: "json, name=encryptionConfig" })
+  encryptionConfig?: EncryptionConfig;
+
+  @SpeakeasyMetadata({ data: "json, name=environmentSize" })
+  environmentSize?: EnvironmentConfigEnvironmentSizeEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=gkeCluster" })
+  gkeCluster?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=maintenanceWindow" })
+  maintenanceWindow?: MaintenanceWindow;
+
+  @SpeakeasyMetadata({ data: "json, name=masterAuthorizedNetworksConfig" })
+  masterAuthorizedNetworksConfig?: MasterAuthorizedNetworksConfig;
+
+  @SpeakeasyMetadata({ data: "json, name=nodeConfig" })
+  nodeConfig?: NodeConfig;
+
+  @SpeakeasyMetadata({ data: "json, name=nodeCount" })
+  nodeCount?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=privateEnvironmentConfig" })
+  privateEnvironmentConfig?: PrivateEnvironmentConfigInput;
+
+  @SpeakeasyMetadata({ data: "json, name=softwareConfig" })
+  softwareConfig?: SoftwareConfig;
+
+  @SpeakeasyMetadata({ data: "json, name=webServerConfig" })
+  webServerConfig?: WebServerConfig;
+
+  @SpeakeasyMetadata({ data: "json, name=webServerNetworkAccessControl" })
+  webServerNetworkAccessControl?: WebServerNetworkAccessControl;
+
+  @SpeakeasyMetadata({ data: "json, name=workloadsConfig" })
   workloadsConfig?: WorkloadsConfig;
 }

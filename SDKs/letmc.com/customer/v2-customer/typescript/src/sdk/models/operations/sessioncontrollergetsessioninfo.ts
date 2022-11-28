@@ -1,43 +1,44 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SessionControllerGetSessionInfoPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=shortName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=shortName" })
   shortName: string;
 }
 
 
 export class SessionControllerGetSessionInfoQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=token" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=token" })
   token: string;
 }
 
 
 export class SessionControllerGetSessionInfoRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: SessionControllerGetSessionInfoPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: SessionControllerGetSessionInfoQueryParams;
 }
 
 
 export class SessionControllerGetSessionInfoResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   sessionControllerGetSessionInfo200ApplicationJsonString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   sessionControllerGetSessionInfo200ApplicationXmlString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   sessionControllerGetSessionInfo200TextJsonString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   sessionControllerGetSessionInfo200TextXmlString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

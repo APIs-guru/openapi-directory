@@ -22,106 +22,106 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetemailinfoQueryParams = /** @class */ (function (_super) {
     __extends(GetemailinfoQueryParams, _super);
     function GetemailinfoQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=email" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=email" }),
         __metadata("design:type", String)
     ], GetemailinfoQueryParams.prototype, "email", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=license" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=license" }),
         __metadata("design:type", String)
     ], GetemailinfoQueryParams.prototype, "license", void 0);
     return GetemailinfoQueryParams;
 }(SpeakeasyBase));
 export { GetemailinfoQueryParams };
-var GetemailinfoRequest = /** @class */ (function (_super) {
-    __extends(GetemailinfoRequest, _super);
-    function GetemailinfoRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata(),
-        __metadata("design:type", GetemailinfoQueryParams)
-    ], GetemailinfoRequest.prototype, "queryParams", void 0);
-    return GetemailinfoRequest;
-}(SpeakeasyBase));
-export { GetemailinfoRequest };
 var Getemailinfo200ApplicationJson = /** @class */ (function (_super) {
     __extends(Getemailinfo200ApplicationJson, _super);
     function Getemailinfo200ApplicationJson() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Code" }),
+        SpeakeasyMetadata({ data: "json, name=Code" }),
         __metadata("design:type", String)
     ], Getemailinfo200ApplicationJson.prototype, "code", void 0);
     __decorate([
-        Metadata({ data: "json, name=Credits" }),
+        SpeakeasyMetadata({ data: "json, name=Credits" }),
         __metadata("design:type", String)
     ], Getemailinfo200ApplicationJson.prototype, "credits", void 0);
     __decorate([
-        Metadata({ data: "json, name=Email" }),
+        SpeakeasyMetadata({ data: "json, name=Email" }),
         __metadata("design:type", String)
     ], Getemailinfo200ApplicationJson.prototype, "email", void 0);
     __decorate([
-        Metadata({ data: "json, name=Geolocation" }),
+        SpeakeasyMetadata({ data: "json, name=Geolocation" }),
         __metadata("design:type", String)
     ], Getemailinfo200ApplicationJson.prototype, "geolocation", void 0);
     __decorate([
-        Metadata({ data: "json, name=Info" }),
+        SpeakeasyMetadata({ data: "json, name=Info" }),
         __metadata("design:type", String)
     ], Getemailinfo200ApplicationJson.prototype, "info", void 0);
     __decorate([
-        Metadata({ data: "json, name=IsDisposable" }),
+        SpeakeasyMetadata({ data: "json, name=IsDisposable" }),
         __metadata("design:type", String)
     ], Getemailinfo200ApplicationJson.prototype, "isDisposable", void 0);
     __decorate([
-        Metadata({ data: "json, name=IsEducational" }),
+        SpeakeasyMetadata({ data: "json, name=IsEducational" }),
         __metadata("design:type", String)
     ], Getemailinfo200ApplicationJson.prototype, "isEducational", void 0);
     __decorate([
-        Metadata({ data: "json, name=IsGeneric" }),
+        SpeakeasyMetadata({ data: "json, name=IsGeneric" }),
         __metadata("design:type", String)
     ], Getemailinfo200ApplicationJson.prototype, "isGeneric", void 0);
     __decorate([
-        Metadata({ data: "json, name=IsGovernment" }),
+        SpeakeasyMetadata({ data: "json, name=IsGovernment" }),
         __metadata("design:type", String)
     ], Getemailinfo200ApplicationJson.prototype, "isGovernment", void 0);
     __decorate([
-        Metadata({ data: "json, name=IsOrganizational" }),
+        SpeakeasyMetadata({ data: "json, name=IsOrganizational" }),
         __metadata("design:type", String)
     ], Getemailinfo200ApplicationJson.prototype, "isOrganizational", void 0);
     __decorate([
-        Metadata({ data: "json, name=IsVulgar" }),
+        SpeakeasyMetadata({ data: "json, name=IsVulgar" }),
         __metadata("design:type", String)
     ], Getemailinfo200ApplicationJson.prototype, "isVulgar", void 0);
     __decorate([
-        Metadata({ data: "json, name=Response" }),
+        SpeakeasyMetadata({ data: "json, name=Response" }),
         __metadata("design:type", String)
     ], Getemailinfo200ApplicationJson.prototype, "response", void 0);
     return Getemailinfo200ApplicationJson;
 }(SpeakeasyBase));
 export { Getemailinfo200ApplicationJson };
+var GetemailinfoRequest = /** @class */ (function (_super) {
+    __extends(GetemailinfoRequest, _super);
+    function GetemailinfoRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", GetemailinfoQueryParams)
+    ], GetemailinfoRequest.prototype, "queryParams", void 0);
+    return GetemailinfoRequest;
+}(SpeakeasyBase));
+export { GetemailinfoRequest };
 var GetemailinfoResponse = /** @class */ (function (_super) {
     __extends(GetemailinfoResponse, _super);
     function GetemailinfoResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetemailinfoResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetemailinfoResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Getemailinfo200ApplicationJson)
     ], GetemailinfoResponse.prototype, "getemailinfo200ApplicationJsonObject", void 0);
     return GetemailinfoResponse;

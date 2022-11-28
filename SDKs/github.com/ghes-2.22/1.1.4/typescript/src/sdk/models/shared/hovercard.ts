@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class HovercardContexts extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 
-  @Metadata({ data: "json, name=octicon" })
+  @SpeakeasyMetadata({ data: "json, name=octicon" })
   octicon: string;
 }
 
@@ -16,6 +16,6 @@ export class HovercardContexts extends SpeakeasyBase {
  * Hovercard
 **/
 export class Hovercard extends SpeakeasyBase {
-  @Metadata({ data: "json, name=contexts", elemType: shared.HovercardContexts })
+  @SpeakeasyMetadata({ data: "json, name=contexts", elemType: HovercardContexts })
   contexts: HovercardContexts[];
 }

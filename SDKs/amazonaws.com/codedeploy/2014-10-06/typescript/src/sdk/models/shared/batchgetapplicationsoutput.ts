@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApplicationInfo } from "./applicationinfo";
+
 
 
 // BatchGetApplicationsOutput
@@ -8,6 +8,6 @@ import { ApplicationInfo } from "./applicationinfo";
  * Represents the output of a <code>BatchGetApplications</code> operation.
 **/
 export class BatchGetApplicationsOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=applicationsInfo", elemType: shared.ApplicationInfo })
+  @SpeakeasyMetadata({ data: "json, name=applicationsInfo", elemType: ApplicationInfo })
   applicationsInfo?: ApplicationInfo[];
 }

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum SecretVersionStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Enabled = "ENABLED"
-,    Disabled = "DISABLED"
-,    Destroyed = "DESTROYED"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Enabled = "ENABLED",
+    Disabled = "DISABLED",
+    Destroyed = "DESTROYED"
 }
 
 
@@ -13,15 +14,15 @@ export enum SecretVersionStateEnum {
  * A secret version resource in the Secret Manager API.
 **/
 export class SecretVersion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=destroyTime" })
+  @SpeakeasyMetadata({ data: "json, name=destroyTime" })
   destroyTime?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: SecretVersionStateEnum;
 }

@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from sdk.models import shared
 
 
@@ -12,25 +12,25 @@ class FindListingRecommendationsQueryParams:
 
 @dataclass
 class FindListingRecommendationsHeaders:
-    x_ebay_c_marketplace_id: str = field(default=None, metadata={'header': { 'field_name': 'X-EBAY-C-MARKETPLACE-ID', 'style': 'simple', 'explode': False }})
+    x_ebay_c_marketplace_id: str = field(metadata={'header': { 'field_name': 'X-EBAY-C-MARKETPLACE-ID', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class FindListingRecommendationsSecurity:
-    api_auth: shared.SchemeAPIAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    api_auth: shared.SchemeAPIAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FindListingRecommendationsRequest:
-    query_params: FindListingRecommendationsQueryParams = field(default=None)
-    headers: FindListingRecommendationsHeaders = field(default=None)
+    headers: FindListingRecommendationsHeaders = field()
+    query_params: FindListingRecommendationsQueryParams = field()
+    security: FindListingRecommendationsSecurity = field()
     request: Optional[shared.FindListingRecommendationRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: FindListingRecommendationsSecurity = field(default=None)
     
 
 @dataclass
 class FindListingRecommendationsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     paged_listing_recommendation_collection: Optional[shared.PagedListingRecommendationCollection] = field(default=None)
-    status_code: int = field(default=None)
     

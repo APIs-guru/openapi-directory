@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class EinVerificationBasicQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ein" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ein" })
   ein: string;
 }
 
 
 export class EinVerificationBasicSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   userKey: shared.SchemeUserKey;
 }
 
 
 export class EinVerificationBasicRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: EinVerificationBasicQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: EinVerificationBasicSecurity;
 }
 
 
 export class EinVerificationBasicResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   einVerificationBasic200ApplicationJsonAny?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   einVerificationBasicDefaultApplicationJsonAny?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

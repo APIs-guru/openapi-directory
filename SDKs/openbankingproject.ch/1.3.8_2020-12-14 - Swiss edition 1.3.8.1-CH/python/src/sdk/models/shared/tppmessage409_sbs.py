@@ -1,15 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import tppmessagecategory_enum
-from . import messagecode409_sbs_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class TppMessage409Sbs:
-    category: tppmessagecategory_enum.TppMessageCategoryEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'category' }})
-    code: messagecode409_sbs_enum.MessageCode409SbsEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
-    path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'path' }})
-    text: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'text' }})
+    category: TppMessageCategoryEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('category') }})
+    code: MessageCode409SbsEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('code') }})
+    path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('path') }})
+    text: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('text') }})
     

@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetDriverPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class GetDriverQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=include_group" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=include_group" })
   includeGroup?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=include_organization" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=include_organization" })
   includeOrganization?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=include_tokens" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=include_tokens" })
   includeTokens?: boolean;
 }
 
 
 export class GetDriverRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetDriverPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetDriverQueryParams;
 }
 
 
 export class GetDriverResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

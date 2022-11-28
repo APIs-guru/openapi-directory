@@ -1,5 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ErrorOptions
@@ -7,10 +7,10 @@ import * as shared from "../shared";
  * The error option model
 **/
 export class ErrorOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 }
 
@@ -20,15 +20,15 @@ export class ErrorOptions extends SpeakeasyBase {
  * The error model
 **/
 export class Error extends SpeakeasyBase {
-  @Metadata({ data: "json, name=field" })
+  @SpeakeasyMetadata({ data: "json, name=field" })
   field?: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=options", elemType: shared.ErrorOptions })
+  @SpeakeasyMetadata({ data: "json, name=options", elemType: ErrorOptions })
   options?: ErrorOptions[];
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path?: string;
 }

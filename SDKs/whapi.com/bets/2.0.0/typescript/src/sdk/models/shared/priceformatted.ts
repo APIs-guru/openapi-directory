@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PriceFormatted extends SpeakeasyBase {
-  @Metadata({ data: "json, name=american" })
+  @SpeakeasyMetadata({ data: "json, name=american" })
   american?: string;
 
-  @Metadata({ data: "json, name=decimal" })
+  @SpeakeasyMetadata({ data: "json, name=decimal" })
   decimal?: number;
 
-  @Metadata({ data: "json, name=fractional" })
+  @SpeakeasyMetadata({ data: "json, name=fractional" })
   fractional?: string;
 }

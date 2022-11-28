@@ -7,6 +7,8 @@ type APIErrorErrors struct {
 	Title  *string `json:"title,omitempty"`
 }
 
+// APIError
+// API invocation or processing error
 type APIError struct {
 	Errors []APIErrorErrors `json:"errors,omitempty"`
 }

@@ -20,7 +20,7 @@ type MybusinessaccountmanagementAccountsCreateQueryParams struct {
 
 type MybusinessaccountmanagementAccountsCreateRequest struct {
 	QueryParams MybusinessaccountmanagementAccountsCreateQueryParams
-	Request     *shared.Account `request:"mediaType=application/json"`
+	Request     *shared.AccountInput `request:"mediaType=application/json"`
 }
 
 type MybusinessaccountmanagementAccountsCreateResponse struct {

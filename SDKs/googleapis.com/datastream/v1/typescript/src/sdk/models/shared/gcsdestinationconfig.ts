@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { JsonFileFormat } from "./jsonfileformat";
+
 
 
 // GcsDestinationConfig
@@ -7,18 +8,18 @@ import { JsonFileFormat } from "./jsonfileformat";
  * Google Cloud Storage destination configuration
 **/
 export class GcsDestinationConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=avroFileFormat" })
+  @SpeakeasyMetadata({ data: "json, name=avroFileFormat" })
   avroFileFormat?: Map<string, any>;
 
-  @Metadata({ data: "json, name=fileRotationInterval" })
+  @SpeakeasyMetadata({ data: "json, name=fileRotationInterval" })
   fileRotationInterval?: string;
 
-  @Metadata({ data: "json, name=fileRotationMb" })
+  @SpeakeasyMetadata({ data: "json, name=fileRotationMb" })
   fileRotationMb?: number;
 
-  @Metadata({ data: "json, name=jsonFileFormat" })
+  @SpeakeasyMetadata({ data: "json, name=jsonFileFormat" })
   jsonFileFormat?: JsonFileFormat;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path?: string;
 }

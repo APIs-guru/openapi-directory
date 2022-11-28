@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// HmacKeyMetadata
+// JSON template to produce a JSON-style HMAC Key metadata resource.
 type HmacKeyMetadata struct {
 	AccessID            *string    `json:"accessId,omitempty"`
 	Etag                *string    `json:"etag,omitempty"`

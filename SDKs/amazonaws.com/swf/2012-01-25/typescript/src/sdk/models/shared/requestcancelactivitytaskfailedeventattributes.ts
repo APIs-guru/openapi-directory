@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RequestCancelActivityTaskFailedCauseEnum } from "./requestcancelactivitytaskfailedcauseenum";
+
 
 
 // RequestCancelActivityTaskFailedEventAttributes
@@ -7,12 +8,12 @@ import { RequestCancelActivityTaskFailedCauseEnum } from "./requestcancelactivit
  * Provides the details of the <code>RequestCancelActivityTaskFailed</code> event.
 **/
 export class RequestCancelActivityTaskFailedEventAttributes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=activityId" })
+  @SpeakeasyMetadata({ data: "json, name=activityId" })
   activityId: string;
 
-  @Metadata({ data: "json, name=cause" })
+  @SpeakeasyMetadata({ data: "json, name=cause" })
   cause: RequestCancelActivityTaskFailedCauseEnum;
 
-  @Metadata({ data: "json, name=decisionTaskCompletedEventId" })
+  @SpeakeasyMetadata({ data: "json, name=decisionTaskCompletedEventId" })
   decisionTaskCompletedEventId: number;
 }

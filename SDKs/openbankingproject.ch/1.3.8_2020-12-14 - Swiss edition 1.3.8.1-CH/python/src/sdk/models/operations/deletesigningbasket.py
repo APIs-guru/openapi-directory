@@ -1,15 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DeleteSigningBasketPathParams:
-    basket_id: str = field(default=None, metadata={'path_param': { 'field_name': 'basketId', 'style': 'simple', 'explode': False }})
+    basket_id: str = field(metadata={'path_param': { 'field_name': 'basketId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DeleteSigningBasketHeaders:
+    x_request_id: str = field(metadata={'header': { 'field_name': 'X-Request-ID', 'style': 'simple', 'explode': False }})
     digest: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Digest', 'style': 'simple', 'explode': False }})
     psu_accept: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'PSU-Accept', 'style': 'simple', 'explode': False }})
     psu_accept_charset: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'PSU-Accept-Charset', 'style': 'simple', 'explode': False }})
@@ -23,7 +25,6 @@ class DeleteSigningBasketHeaders:
     psu_user_agent: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'PSU-User-Agent', 'style': 'simple', 'explode': False }})
     signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Signature', 'style': 'simple', 'explode': False }})
     tpp_signature_certificate: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'TPP-Signature-Certificate', 'style': 'simple', 'explode': False }})
-    x_request_id: str = field(default=None, metadata={'header': { 'field_name': 'X-Request-ID', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -33,14 +34,16 @@ class DeleteSigningBasketSecurity:
 
 @dataclass
 class DeleteSigningBasketRequest:
-    path_params: DeleteSigningBasketPathParams = field(default=None)
-    headers: DeleteSigningBasketHeaders = field(default=None)
-    security: DeleteSigningBasketSecurity = field(default=None)
+    headers: DeleteSigningBasketHeaders = field()
+    path_params: DeleteSigningBasketPathParams = field()
+    security: DeleteSigningBasketSecurity = field()
     
 
 @dataclass
 class DeleteSigningBasketResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     error400_ng_sbs: Optional[shared.Error400NgSbs] = field(default=None)
     error400_sbs: Optional[shared.Error400Sbs] = field(default=None)
     error401_ng_sbs: Optional[shared.Error401NgSbs] = field(default=None)
@@ -53,6 +56,4 @@ class DeleteSigningBasketResponse:
     error405_sbs: Optional[shared.Error405Sbs] = field(default=None)
     error409_ng_sbs: Optional[shared.Error409NgSbs] = field(default=None)
     error409_sbs: Optional[shared.Error409Sbs] = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
     

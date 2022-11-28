@@ -26,6 +26,8 @@ const (
 	PolicyProductAvailabilityPolicyEnumAll                                  PolicyProductAvailabilityPolicyEnum = "all"
 )
 
+// Policy
+// The device policy for a given managed device.
 type Policy struct {
 	AutoUpdatePolicy          *PolicyAutoUpdatePolicyEnum          `json:"autoUpdatePolicy,omitempty"`
 	DeviceReportPolicy        *PolicyDeviceReportPolicyEnum        `json:"deviceReportPolicy,omitempty"`

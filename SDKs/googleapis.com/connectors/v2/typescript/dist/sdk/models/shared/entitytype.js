@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Field } from "./field";
 // EntityType
 /**
  * EntityType message contains metadata information about a single entity type present in the external system.
@@ -34,11 +34,11 @@ var EntityType = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=fields", elemType: shared.Field }),
+        SpeakeasyMetadata({ data: "json, name=fields", elemType: Field }),
         __metadata("design:type", Array)
     ], EntityType.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], EntityType.prototype, "name", void 0);
     return EntityType;

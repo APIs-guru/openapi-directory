@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Attribute } from "./attribute";
 import { Measurement } from "./measurement";
 import { Metric } from "./metric";
@@ -37,19 +37,19 @@ var PropertyType = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=attribute" }),
+        SpeakeasyMetadata({ data: "json, name=attribute" }),
         __metadata("design:type", Attribute)
     ], PropertyType.prototype, "attribute", void 0);
     __decorate([
-        Metadata({ data: "json, name=measurement" }),
+        SpeakeasyMetadata({ data: "json, name=measurement" }),
         __metadata("design:type", Measurement)
     ], PropertyType.prototype, "measurement", void 0);
     __decorate([
-        Metadata({ data: "json, name=metric" }),
+        SpeakeasyMetadata({ data: "json, name=metric" }),
         __metadata("design:type", Metric)
     ], PropertyType.prototype, "metric", void 0);
     __decorate([
-        Metadata({ data: "json, name=transform" }),
+        SpeakeasyMetadata({ data: "json, name=transform" }),
         __metadata("design:type", Transform)
     ], PropertyType.prototype, "transform", void 0);
     return PropertyType;

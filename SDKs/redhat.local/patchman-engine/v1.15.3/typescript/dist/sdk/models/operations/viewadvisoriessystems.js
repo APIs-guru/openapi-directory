@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ViewAdvisoriesSystemsSecurity = /** @class */ (function (_super) {
     __extends(ViewAdvisoriesSystemsSecurity, _super);
@@ -30,7 +30,7 @@ var ViewAdvisoriesSystemsSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeRhIdentity)
     ], ViewAdvisoriesSystemsSecurity.prototype, "rhIdentity", void 0);
     return ViewAdvisoriesSystemsSecurity;
@@ -42,11 +42,11 @@ var ViewAdvisoriesSystemsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.ControllersSystemsAdvisoriesRequest)
     ], ViewAdvisoriesSystemsRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ViewAdvisoriesSystemsSecurity)
     ], ViewAdvisoriesSystemsRequest.prototype, "security", void 0);
     return ViewAdvisoriesSystemsRequest;
@@ -58,15 +58,15 @@ var ViewAdvisoriesSystemsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ViewAdvisoriesSystemsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ViewAdvisoriesSystemsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ControllersAdvisoriesSystemsResponse)
     ], ViewAdvisoriesSystemsResponse.prototype, "controllersAdvisoriesSystemsResponse", void 0);
     return ViewAdvisoriesSystemsResponse;

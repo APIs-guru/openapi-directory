@@ -1,5 +1,7 @@
 package shared
 
+// SavingsPlanOfferingRate
+// Information about a Savings Plan offering rate.
 type SavingsPlanOfferingRate struct {
 	Operation           *string                         `json:"operation,omitempty"`
 	ProductType         *SavingsPlanProductTypeEnum     `json:"productType,omitempty"`

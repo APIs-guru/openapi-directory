@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostListAllowedNodeTypeModificationsActionEnum(str, Enum):
     LIST_ALLOWED_NODE_TYPE_MODIFICATIONS = "ListAllowedNodeTypeModifications"
@@ -10,8 +14,8 @@ class PostListAllowedNodeTypeModificationsVersionEnum(str, Enum):
 
 @dataclass
 class PostListAllowedNodeTypeModificationsQueryParams:
-    action: PostListAllowedNodeTypeModificationsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostListAllowedNodeTypeModificationsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostListAllowedNodeTypeModificationsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostListAllowedNodeTypeModificationsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostListAllowedNodeTypeModificationsHeaders:
 
 @dataclass
 class PostListAllowedNodeTypeModificationsRequest:
-    query_params: PostListAllowedNodeTypeModificationsQueryParams = field(default=None)
-    headers: PostListAllowedNodeTypeModificationsHeaders = field(default=None)
+    headers: PostListAllowedNodeTypeModificationsHeaders = field()
+    query_params: PostListAllowedNodeTypeModificationsQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostListAllowedNodeTypeModificationsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

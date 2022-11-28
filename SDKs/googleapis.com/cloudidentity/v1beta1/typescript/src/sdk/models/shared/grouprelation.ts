@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EntityKey } from "./entitykey";
 import { TransitiveMembershipRole } from "./transitivemembershiprole";
 
+
 export enum GroupRelationRelationTypeEnum {
-    RelationTypeUnspecified = "RELATION_TYPE_UNSPECIFIED"
-,    Direct = "DIRECT"
-,    Indirect = "INDIRECT"
-,    DirectAndIndirect = "DIRECT_AND_INDIRECT"
+    RelationTypeUnspecified = "RELATION_TYPE_UNSPECIFIED",
+    Direct = "DIRECT",
+    Indirect = "INDIRECT",
+    DirectAndIndirect = "DIRECT_AND_INDIRECT"
 }
 
 
@@ -16,21 +16,21 @@ export enum GroupRelationRelationTypeEnum {
  * Message representing a transitive group of a user or a group.
 **/
 export class GroupRelation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=group" })
+  @SpeakeasyMetadata({ data: "json, name=group" })
   group?: string;
 
-  @Metadata({ data: "json, name=groupKey" })
+  @SpeakeasyMetadata({ data: "json, name=groupKey" })
   groupKey?: EntityKey;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=relationType" })
+  @SpeakeasyMetadata({ data: "json, name=relationType" })
   relationType?: GroupRelationRelationTypeEnum;
 
-  @Metadata({ data: "json, name=roles", elemType: shared.TransitiveMembershipRole })
+  @SpeakeasyMetadata({ data: "json, name=roles", elemType: TransitiveMembershipRole })
   roles?: TransitiveMembershipRole[];
 }

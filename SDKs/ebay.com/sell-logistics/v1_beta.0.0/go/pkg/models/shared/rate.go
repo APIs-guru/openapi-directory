@@ -1,5 +1,7 @@
 package shared
 
+// Rate
+// This complex type contains live quote information about a shipping service that's available for a given shipping quote request, including the shipping carrier and service, delivery window, shipping cost, and additional shipping options.
 type Rate struct {
 	AdditionalOptions        []AdditionalOption `json:"additionalOptions,omitempty"`
 	BaseShippingCost         *Amount            `json:"baseShippingCost,omitempty"`

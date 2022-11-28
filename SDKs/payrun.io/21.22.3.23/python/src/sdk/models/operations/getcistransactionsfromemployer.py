@@ -5,25 +5,25 @@ from sdk.models import shared
 
 @dataclass
 class GetCisTransactionsFromEmployerPathParams:
-    employer_id: str = field(default=None, metadata={'path_param': { 'field_name': 'EmployerId', 'style': 'simple', 'explode': False }})
+    employer_id: str = field(metadata={'path_param': { 'field_name': 'EmployerId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetCisTransactionsFromEmployerHeaders:
-    api_version: str = field(default=None, metadata={'header': { 'field_name': 'Api-Version', 'style': 'simple', 'explode': False }})
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
+    api_version: str = field(metadata={'header': { 'field_name': 'Api-Version', 'style': 'simple', 'explode': False }})
+    authorization: str = field(metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetCisTransactionsFromEmployerRequest:
-    path_params: GetCisTransactionsFromEmployerPathParams = field(default=None)
-    headers: GetCisTransactionsFromEmployerHeaders = field(default=None)
+    headers: GetCisTransactionsFromEmployerHeaders = field()
+    path_params: GetCisTransactionsFromEmployerPathParams = field()
     
 
 @dataclass
 class GetCisTransactionsFromEmployerResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_model: Optional[shared.ErrorModel] = field(default=None)
     link_collection: Optional[shared.LinkCollection] = field(default=None)
-    status_code: int = field(default=None)
     

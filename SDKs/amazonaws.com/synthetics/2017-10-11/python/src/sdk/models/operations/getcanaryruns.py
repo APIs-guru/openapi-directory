@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class GetCanaryRunsPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -29,24 +33,24 @@ class GetCanaryRunsHeaders:
 @dataclass_json
 @dataclass
 class GetCanaryRunsRequestBody:
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MaxResults' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MaxResults') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
     
 
 @dataclass
 class GetCanaryRunsRequest:
-    path_params: GetCanaryRunsPathParams = field(default=None)
-    query_params: GetCanaryRunsQueryParams = field(default=None)
-    headers: GetCanaryRunsHeaders = field(default=None)
-    request: GetCanaryRunsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: GetCanaryRunsHeaders = field()
+    path_params: GetCanaryRunsPathParams = field()
+    query_params: GetCanaryRunsQueryParams = field()
+    request: GetCanaryRunsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class GetCanaryRunsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_canary_runs_response: Optional[shared.GetCanaryRunsResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

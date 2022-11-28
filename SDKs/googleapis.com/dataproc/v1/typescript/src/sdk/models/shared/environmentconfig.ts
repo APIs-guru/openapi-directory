@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ExecutionConfig } from "./executionconfig";
 import { PeripheralsConfig } from "./peripheralsconfig";
+
 
 
 // EnvironmentConfig
@@ -8,9 +9,9 @@ import { PeripheralsConfig } from "./peripheralsconfig";
  * Environment configuration for a workload.
 **/
 export class EnvironmentConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=executionConfig" })
+  @SpeakeasyMetadata({ data: "json, name=executionConfig" })
   executionConfig?: ExecutionConfig;
 
-  @Metadata({ data: "json, name=peripheralsConfig" })
+  @SpeakeasyMetadata({ data: "json, name=peripheralsConfig" })
   peripheralsConfig?: PeripheralsConfig;
 }

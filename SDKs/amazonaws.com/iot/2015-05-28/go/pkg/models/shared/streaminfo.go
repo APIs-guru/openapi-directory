@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// StreamInfo
+// Information about a stream.
 type StreamInfo struct {
 	CreatedAt     *time.Time   `json:"createdAt,omitempty"`
 	Description   *string      `json:"description,omitempty"`

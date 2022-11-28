@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetAnalysisForCommitPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=commit-id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=commit-id" })
   commitId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=project-id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=project-id" })
   projectId: number;
 }
 
 
 export class GetAnalysisForCommitSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   accessToken: shared.SchemeAccessToken;
 }
 
 
 export class GetAnalysisForCommitRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetAnalysisForCommitPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetAnalysisForCommitSecurity;
 }
 
 
 export class GetAnalysisForCommitResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   analysis?: shared.Analysis;
 }

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class BaremetalsolutionProjectsProvisioningQuotasListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class BaremetalsolutionProjectsProvisioningQuotasListQueryParams:
 
 @dataclass
 class BaremetalsolutionProjectsProvisioningQuotasListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BaremetalsolutionProjectsProvisioningQuotasListRequest:
-    path_params: BaremetalsolutionProjectsProvisioningQuotasListPathParams = field(default=None)
-    query_params: BaremetalsolutionProjectsProvisioningQuotasListQueryParams = field(default=None)
-    security: BaremetalsolutionProjectsProvisioningQuotasListSecurity = field(default=None)
+    path_params: BaremetalsolutionProjectsProvisioningQuotasListPathParams = field()
+    query_params: BaremetalsolutionProjectsProvisioningQuotasListQueryParams = field()
+    security: BaremetalsolutionProjectsProvisioningQuotasListSecurity = field()
     
 
 @dataclass
 class BaremetalsolutionProjectsProvisioningQuotasListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_provisioning_quotas_response: Optional[shared.ListProvisioningQuotasResponse] = field(default=None)
-    status_code: int = field(default=None)
     

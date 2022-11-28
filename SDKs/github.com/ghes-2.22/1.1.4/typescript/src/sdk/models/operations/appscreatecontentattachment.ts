@@ -1,62 +1,63 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class AppsCreateContentAttachmentPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=content_reference_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=content_reference_id" })
   contentReferenceId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=owner" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=owner" })
   owner: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repo" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repo" })
   repo: string;
 }
 
 
 export class AppsCreateContentAttachmentRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=body" })
+  @SpeakeasyMetadata({ data: "json, name=body" })
   body: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title: string;
 }
 
 
-export class AppsCreateContentAttachmentRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: AppsCreateContentAttachmentPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: AppsCreateContentAttachmentRequestBody;
-}
-
-
 export class AppsCreateContentAttachment415ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=documentation_url" })
+  @SpeakeasyMetadata({ data: "json, name=documentation_url" })
   documentationUrl: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 }
 
 
+export class AppsCreateContentAttachmentRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: AppsCreateContentAttachmentPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: AppsCreateContentAttachmentRequestBody;
+}
+
+
 export class AppsCreateContentAttachmentResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   appsCreateContentAttachment415ApplicationJsonObject?: AppsCreateContentAttachment415ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentReferenceAttachment?: shared.ContentReferenceAttachment;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationError?: shared.ValidationError;
 }

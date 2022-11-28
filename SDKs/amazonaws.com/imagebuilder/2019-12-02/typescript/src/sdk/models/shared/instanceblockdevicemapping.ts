@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EbsInstanceBlockDeviceSpecification } from "./ebsinstanceblockdevicespecification";
+
 
 
 // InstanceBlockDeviceMapping
@@ -7,15 +8,15 @@ import { EbsInstanceBlockDeviceSpecification } from "./ebsinstanceblockdevicespe
  * Defines block device mappings for the instance used to configure your image.
 **/
 export class InstanceBlockDeviceMapping extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deviceName" })
+  @SpeakeasyMetadata({ data: "json, name=deviceName" })
   deviceName?: string;
 
-  @Metadata({ data: "json, name=ebs" })
+  @SpeakeasyMetadata({ data: "json, name=ebs" })
   ebs?: EbsInstanceBlockDeviceSpecification;
 
-  @Metadata({ data: "json, name=noDevice" })
+  @SpeakeasyMetadata({ data: "json, name=noDevice" })
   noDevice?: string;
 
-  @Metadata({ data: "json, name=virtualName" })
+  @SpeakeasyMetadata({ data: "json, name=virtualName" })
   virtualName?: string;
 }

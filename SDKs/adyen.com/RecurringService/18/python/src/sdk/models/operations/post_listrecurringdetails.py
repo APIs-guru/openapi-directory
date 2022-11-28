@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from typing import Any,Optional
 
 
 @dataclass
@@ -9,7 +9,7 @@ class PostListRecurringDetailsRequest:
 
 @dataclass
 class PostListRecurringDetailsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     recurring_details_result: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

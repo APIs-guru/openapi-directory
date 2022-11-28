@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class GetRandomWordQueryParams extends SpeakeasyBase {
     excludePartOfSpeech?: string;
     hasDictionaryDef?: string;

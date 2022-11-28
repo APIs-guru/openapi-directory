@@ -1,5 +1,7 @@
 package shared
 
+// ResourceRecordSet
+// A unit of data that is returned by the DNS servers.
 type ResourceRecordSet struct {
 	Kind             *string             `json:"kind,omitempty"`
 	Name             *string             `json:"name,omitempty"`

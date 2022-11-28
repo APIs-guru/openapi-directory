@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetLogEntriesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=hasUserId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=hasUserId" })
   hasUserId?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=minDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=minDate" })
   minDate?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=startIndex" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=startIndex" })
   startIndex?: number;
 }
 
 
 export class GetLogEntriesSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   customAuthentication: shared.SchemeCustomAuthentication;
 }
 
 
 export class GetLogEntriesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetLogEntriesQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetLogEntriesSecurity;
 }
 
 
 export class GetLogEntriesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   activityLogEntryQueryResult?: shared.ActivityLogEntryQueryResult;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

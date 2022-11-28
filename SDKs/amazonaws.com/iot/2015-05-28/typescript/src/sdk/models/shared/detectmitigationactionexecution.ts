@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DetectMitigationActionExecutionStatusEnum } from "./detectmitigationactionexecutionstatusenum";
+
 
 
 // DetectMitigationActionExecution
@@ -7,30 +8,30 @@ import { DetectMitigationActionExecutionStatusEnum } from "./detectmitigationact
  *  Describes which mitigation actions should be executed. 
 **/
 export class DetectMitigationActionExecution extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actionName" })
+  @SpeakeasyMetadata({ data: "json, name=actionName" })
   actionName?: string;
 
-  @Metadata({ data: "json, name=errorCode" })
+  @SpeakeasyMetadata({ data: "json, name=errorCode" })
   errorCode?: string;
 
-  @Metadata({ data: "json, name=executionEndDate" })
+  @SpeakeasyMetadata({ data: "json, name=executionEndDate" })
   executionEndDate?: Date;
 
-  @Metadata({ data: "json, name=executionStartDate" })
+  @SpeakeasyMetadata({ data: "json, name=executionStartDate" })
   executionStartDate?: Date;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: DetectMitigationActionExecutionStatusEnum;
 
-  @Metadata({ data: "json, name=taskId" })
+  @SpeakeasyMetadata({ data: "json, name=taskId" })
   taskId?: string;
 
-  @Metadata({ data: "json, name=thingName" })
+  @SpeakeasyMetadata({ data: "json, name=thingName" })
   thingName?: string;
 
-  @Metadata({ data: "json, name=violationId" })
+  @SpeakeasyMetadata({ data: "json, name=violationId" })
   violationId?: string;
 }

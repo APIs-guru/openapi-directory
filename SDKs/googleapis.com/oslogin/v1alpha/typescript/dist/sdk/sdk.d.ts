@@ -1,19 +1,17 @@
-import { AxiosInstance, AxiosRequestConfig } from "axios";
-import * as operations from "./models/operations";
-declare type OptsFunc = (sdk: SDK) => void;
+import { AxiosInstance } from "axios";
+import { Users } from "./users";
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://oslogin.googleapis.com/"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    users: Users;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
-    OsloginUsersGetLoginProfile(req: operations.OsloginUsersGetLoginProfileRequest, config?: AxiosRequestConfig): Promise<operations.OsloginUsersGetLoginProfileResponse>;
-    OsloginUsersImportSshPublicKey(req: operations.OsloginUsersImportSshPublicKeyRequest, config?: AxiosRequestConfig): Promise<operations.OsloginUsersImportSshPublicKeyResponse>;
-    OsloginUsersSshPublicKeysCreate(req: operations.OsloginUsersSshPublicKeysCreateRequest, config?: AxiosRequestConfig): Promise<operations.OsloginUsersSshPublicKeysCreateResponse>;
-    OsloginUsersSshPublicKeysDelete(req: operations.OsloginUsersSshPublicKeysDeleteRequest, config?: AxiosRequestConfig): Promise<operations.OsloginUsersSshPublicKeysDeleteResponse>;
-    OsloginUsersSshPublicKeysGet(req: operations.OsloginUsersSshPublicKeysGetRequest, config?: AxiosRequestConfig): Promise<operations.OsloginUsersSshPublicKeysGetResponse>;
-    OsloginUsersSshPublicKeysPatch(req: operations.OsloginUsersSshPublicKeysPatchRequest, config?: AxiosRequestConfig): Promise<operations.OsloginUsersSshPublicKeysPatchResponse>;
 }
 export {};

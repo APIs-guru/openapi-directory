@@ -1,5 +1,7 @@
 package shared
 
+// RepoSource
+// Location of the source in a Google Cloud Source Repository.
 type RepoSource struct {
 	BranchName    *string           `json:"branchName,omitempty"`
 	CommitSha     *string           `json:"commitSha,omitempty"`

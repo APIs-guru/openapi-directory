@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ContentGetContentByTagAndTypePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=locale" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=locale" })
   locale: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=tag" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=tag" })
   tag: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=type" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=type" })
   type: string;
 }
 
 
 export class ContentGetContentByTagAndTypeQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=head" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=head" })
   head?: boolean;
 }
 
 
 export class ContentGetContentByTagAndTypeRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ContentGetContentByTagAndTypePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ContentGetContentByTagAndTypeQueryParams;
 }
 
 
 export class ContentGetContentByTagAndTypeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

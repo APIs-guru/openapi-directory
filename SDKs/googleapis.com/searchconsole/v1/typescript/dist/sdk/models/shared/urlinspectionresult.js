@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AmpInspectionResult } from "./ampinspectionresult";
 import { IndexStatusInspectionResult } from "./indexstatusinspectionresult";
 import { MobileUsabilityInspectionResult } from "./mobileusabilityinspectionresult";
@@ -37,23 +37,23 @@ var UrlInspectionResult = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ampResult" }),
+        SpeakeasyMetadata({ data: "json, name=ampResult" }),
         __metadata("design:type", AmpInspectionResult)
     ], UrlInspectionResult.prototype, "ampResult", void 0);
     __decorate([
-        Metadata({ data: "json, name=indexStatusResult" }),
+        SpeakeasyMetadata({ data: "json, name=indexStatusResult" }),
         __metadata("design:type", IndexStatusInspectionResult)
     ], UrlInspectionResult.prototype, "indexStatusResult", void 0);
     __decorate([
-        Metadata({ data: "json, name=inspectionResultLink" }),
+        SpeakeasyMetadata({ data: "json, name=inspectionResultLink" }),
         __metadata("design:type", String)
     ], UrlInspectionResult.prototype, "inspectionResultLink", void 0);
     __decorate([
-        Metadata({ data: "json, name=mobileUsabilityResult" }),
+        SpeakeasyMetadata({ data: "json, name=mobileUsabilityResult" }),
         __metadata("design:type", MobileUsabilityInspectionResult)
     ], UrlInspectionResult.prototype, "mobileUsabilityResult", void 0);
     __decorate([
-        Metadata({ data: "json, name=richResultsResult" }),
+        SpeakeasyMetadata({ data: "json, name=richResultsResult" }),
         __metadata("design:type", RichResultsInspectionResult)
     ], UrlInspectionResult.prototype, "richResultsResult", void 0);
     return UrlInspectionResult;

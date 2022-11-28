@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var DeleteWorkspaceIdMembersIdPathParams = /** @class */ (function (_super) {
     __extends(DeleteWorkspaceIdMembersIdPathParams, _super);
@@ -30,11 +30,11 @@ var DeleteWorkspaceIdMembersIdPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], DeleteWorkspaceIdMembersIdPathParams.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=workspace_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=workspace_id" }),
         __metadata("design:type", String)
     ], DeleteWorkspaceIdMembersIdPathParams.prototype, "workspaceId", void 0);
     return DeleteWorkspaceIdMembersIdPathParams;
@@ -46,7 +46,7 @@ var DeleteWorkspaceIdMembersIdSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeBearer)
     ], DeleteWorkspaceIdMembersIdSecurity.prototype, "bearer", void 0);
     return DeleteWorkspaceIdMembersIdSecurity;
@@ -58,11 +58,11 @@ var DeleteWorkspaceIdMembersIdRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteWorkspaceIdMembersIdPathParams)
     ], DeleteWorkspaceIdMembersIdRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteWorkspaceIdMembersIdSecurity)
     ], DeleteWorkspaceIdMembersIdRequest.prototype, "security", void 0);
     return DeleteWorkspaceIdMembersIdRequest;
@@ -74,11 +74,11 @@ var DeleteWorkspaceIdMembersIdResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DeleteWorkspaceIdMembersIdResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DeleteWorkspaceIdMembersIdResponse.prototype, "statusCode", void 0);
     return DeleteWorkspaceIdMembersIdResponse;

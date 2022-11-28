@@ -1,5 +1,7 @@
 package shared
 
+// RedisSettings
+// Provides information that defines a Redis target endpoint.
 type RedisSettings struct {
 	AuthPassword        *string                       `json:"AuthPassword,omitempty"`
 	AuthType            *RedisAuthTypeValueEnum       `json:"AuthType,omitempty"`

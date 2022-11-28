@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from typing import Any,Optional
 from sdk.models import shared
 
 
@@ -13,12 +13,12 @@ class ListServiceOfferingNodesQueryParams:
 
 @dataclass
 class ListServiceOfferingNodesRequest:
-    query_params: ListServiceOfferingNodesQueryParams = field(default=None)
+    query_params: ListServiceOfferingNodesQueryParams = field()
     
 
 @dataclass
 class ListServiceOfferingNodesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     service_offering_nodes_collection: Optional[shared.ServiceOfferingNodesCollection] = field(default=None)
-    status_code: int = field(default=None)
     

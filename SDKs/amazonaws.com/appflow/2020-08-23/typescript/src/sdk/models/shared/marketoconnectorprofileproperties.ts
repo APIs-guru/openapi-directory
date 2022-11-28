@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MarketoConnectorProfileProperties
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  The connector-specific profile properties required when using Marketo. 
 **/
 export class MarketoConnectorProfileProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=instanceUrl" })
+  @SpeakeasyMetadata({ data: "json, name=instanceUrl" })
   instanceUrl: string;
 }

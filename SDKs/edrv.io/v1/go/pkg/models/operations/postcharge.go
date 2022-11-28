@@ -15,15 +15,15 @@ type PostChargeRequestBody struct {
 	Action PostChargeRequestBodyActionEnum `json:"action"`
 }
 
-type PostChargeRequest struct {
-	PathParams PostChargePathParams
-	Request    PostChargeRequestBody `request:"mediaType=application/json"`
-}
-
 type PostCharge200ApplicationJSON struct {
 	Message *string                `json:"message,omitempty"`
 	Ok      *bool                  `json:"ok,omitempty"`
 	Result  map[string]interface{} `json:"result,omitempty"`
+}
+
+type PostChargeRequest struct {
+	PathParams PostChargePathParams
+	Request    PostChargeRequestBody `request:"mediaType=application/json"`
 }
 
 type PostChargeResponse struct {

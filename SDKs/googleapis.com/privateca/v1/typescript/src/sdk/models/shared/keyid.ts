@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // KeyId
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A KeyId identifies a specific public key, usually by hashing the public key.
 **/
 export class KeyId extends SpeakeasyBase {
-  @Metadata({ data: "json, name=keyId" })
+  @SpeakeasyMetadata({ data: "json, name=keyId" })
   keyId?: string;
 }

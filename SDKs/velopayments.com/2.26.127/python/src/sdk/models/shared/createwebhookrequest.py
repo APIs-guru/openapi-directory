@@ -1,15 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import category_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateWebhookRequest:
-    authorization_header: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'authorizationHeader' }})
-    categories: Optional[List[category_enum.CategoryEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'categories' }})
-    enabled: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enabled' }})
-    payor_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'payorId' }})
-    webhook_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'webhookUrl' }})
+    enabled: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('enabled') }})
+    payor_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('payorId') }})
+    webhook_url: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('webhookUrl') }})
+    authorization_header: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('authorizationHeader') }})
+    categories: Optional[List[CategoryEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('categories') }})
     

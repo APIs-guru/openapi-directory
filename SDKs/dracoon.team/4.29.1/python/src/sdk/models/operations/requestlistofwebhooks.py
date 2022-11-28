@@ -1,5 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
@@ -19,14 +22,14 @@ class RequestListOfWebhooksHeaders:
 
 @dataclass
 class RequestListOfWebhooksRequest:
-    query_params: RequestListOfWebhooksQueryParams = field(default=None)
-    headers: RequestListOfWebhooksHeaders = field(default=None)
+    headers: RequestListOfWebhooksHeaders = field()
+    query_params: RequestListOfWebhooksQueryParams = field()
     
 
 @dataclass
 class RequestListOfWebhooksResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     webhook_list: Optional[shared.WebhookList] = field(default=None)
     

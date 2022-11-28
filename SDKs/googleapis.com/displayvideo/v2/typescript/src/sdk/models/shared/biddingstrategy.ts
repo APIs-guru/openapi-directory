@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FixedBidStrategy } from "./fixedbidstrategy";
 import { MaximizeSpendBidStrategy } from "./maximizespendbidstrategy";
 import { PerformanceGoalBidStrategy } from "./performancegoalbidstrategy";
+
 
 
 // BiddingStrategy
@@ -9,12 +10,12 @@ import { PerformanceGoalBidStrategy } from "./performancegoalbidstrategy";
  * Settings that control the bid strategy. Bid strategy determines the bid price.
 **/
 export class BiddingStrategy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fixedBid" })
+  @SpeakeasyMetadata({ data: "json, name=fixedBid" })
   fixedBid?: FixedBidStrategy;
 
-  @Metadata({ data: "json, name=maximizeSpendAutoBid" })
+  @SpeakeasyMetadata({ data: "json, name=maximizeSpendAutoBid" })
   maximizeSpendAutoBid?: MaximizeSpendBidStrategy;
 
-  @Metadata({ data: "json, name=performanceGoalAutoBid" })
+  @SpeakeasyMetadata({ data: "json, name=performanceGoalAutoBid" })
   performanceGoalAutoBid?: PerformanceGoalBidStrategy;
 }

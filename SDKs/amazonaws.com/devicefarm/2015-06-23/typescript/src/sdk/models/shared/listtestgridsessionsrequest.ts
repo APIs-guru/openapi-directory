@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TestGridSessionStatusEnum } from "./testgridsessionstatusenum";
 
 
+
 export class ListTestGridSessionsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=creationTimeAfter" })
+  @SpeakeasyMetadata({ data: "json, name=creationTimeAfter" })
   creationTimeAfter?: Date;
 
-  @Metadata({ data: "json, name=creationTimeBefore" })
+  @SpeakeasyMetadata({ data: "json, name=creationTimeBefore" })
   creationTimeBefore?: Date;
 
-  @Metadata({ data: "json, name=endTimeAfter" })
+  @SpeakeasyMetadata({ data: "json, name=endTimeAfter" })
   endTimeAfter?: Date;
 
-  @Metadata({ data: "json, name=endTimeBefore" })
+  @SpeakeasyMetadata({ data: "json, name=endTimeBefore" })
   endTimeBefore?: Date;
 
-  @Metadata({ data: "json, name=maxResult" })
+  @SpeakeasyMetadata({ data: "json, name=maxResult" })
   maxResult?: number;
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=projectArn" })
+  @SpeakeasyMetadata({ data: "json, name=projectArn" })
   projectArn: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: TestGridSessionStatusEnum;
 }

@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataFilter } from "./datafilter";
 import { ValueRange } from "./valuerange";
+
 
 
 // MatchedValueRange
@@ -9,9 +9,9 @@ import { ValueRange } from "./valuerange";
  * A value range that was matched by one or more data filers.
 **/
 export class MatchedValueRange extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataFilters", elemType: shared.DataFilter })
+  @SpeakeasyMetadata({ data: "json, name=dataFilters", elemType: DataFilter })
   dataFilters?: DataFilter[];
 
-  @Metadata({ data: "json, name=valueRange" })
+  @SpeakeasyMetadata({ data: "json, name=valueRange" })
   valueRange?: ValueRange;
 }

@@ -30,7 +30,7 @@ type CloudsupportCasesCreateSecurity struct {
 type CloudsupportCasesCreateRequest struct {
 	PathParams  CloudsupportCasesCreatePathParams
 	QueryParams CloudsupportCasesCreateQueryParams
-	Request     *shared.Case `request:"mediaType=application/json"`
+	Request     *shared.CaseInput `request:"mediaType=application/json"`
 	Security    CloudsupportCasesCreateSecurity
 }
 

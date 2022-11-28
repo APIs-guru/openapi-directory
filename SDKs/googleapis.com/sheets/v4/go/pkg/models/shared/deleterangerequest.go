@@ -8,6 +8,8 @@ const (
 	DeleteRangeRequestShiftDimensionEnumColumns              DeleteRangeRequestShiftDimensionEnum = "COLUMNS"
 )
 
+// DeleteRangeRequest
+// Deletes a range of cells, shifting other cells into the deleted area.
 type DeleteRangeRequest struct {
 	Range          *GridRange                            `json:"range,omitempty"`
 	ShiftDimension *DeleteRangeRequestShiftDimensionEnum `json:"shiftDimension,omitempty"`

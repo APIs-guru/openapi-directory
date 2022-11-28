@@ -5,23 +5,23 @@ from sdk.models import shared
 
 @dataclass
 class GetOrderTaskPathParams:
-    task_id: str = field(default=None, metadata={'path_param': { 'field_name': 'task_id', 'style': 'simple', 'explode': False }})
+    task_id: str = field(metadata={'path_param': { 'field_name': 'task_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetOrderTaskSecurity:
-    api_auth: shared.SchemeAPIAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    api_auth: shared.SchemeAPIAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetOrderTaskRequest:
-    path_params: GetOrderTaskPathParams = field(default=None)
-    security: GetOrderTaskSecurity = field(default=None)
+    path_params: GetOrderTaskPathParams = field()
+    security: GetOrderTaskSecurity = field()
     
 
 @dataclass
 class GetOrderTaskResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     order_task: Optional[shared.OrderTask] = field(default=None)
-    status_code: int = field(default=None)
     

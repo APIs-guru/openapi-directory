@@ -1,5 +1,7 @@
 package shared
 
+// SetTaskStatusInput
+// Contains the parameters for SetTaskStatus.
 type SetTaskStatusInput struct {
 	ErrorID         *string        `json:"errorId,omitempty"`
 	ErrorMessage    *string        `json:"errorMessage,omitempty"`

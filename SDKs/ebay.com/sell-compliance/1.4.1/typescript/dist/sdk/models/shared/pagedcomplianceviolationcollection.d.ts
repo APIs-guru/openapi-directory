@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ComplianceViolation } from "./complianceviolation";
 /**
  * This type is the base response type of the getListingViolations method.

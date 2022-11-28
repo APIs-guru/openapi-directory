@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ServiceActionAssociation
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A self-service action association consisting of the Action ID, the Product ID, and the Provisioning Artifact ID.
 **/
 export class ServiceActionAssociation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ProductId" })
+  @SpeakeasyMetadata({ data: "json, name=ProductId" })
   productId: string;
 
-  @Metadata({ data: "json, name=ProvisioningArtifactId" })
+  @SpeakeasyMetadata({ data: "json, name=ProvisioningArtifactId" })
   provisioningArtifactId: string;
 
-  @Metadata({ data: "json, name=ServiceActionId" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceActionId" })
   serviceActionId: string;
 }

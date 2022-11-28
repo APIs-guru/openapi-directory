@@ -18,7 +18,7 @@ class PostSetupV1LocationsBulkRequest:
 
 @dataclass
 class PostSetupV1LocationsBulkResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     location_view_models: Optional[List[shared.LocationViewModel]] = field(default=None)
-    status_code: int = field(default=None)
     

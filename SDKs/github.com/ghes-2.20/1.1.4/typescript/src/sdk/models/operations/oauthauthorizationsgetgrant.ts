@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class OauthAuthorizationsGetGrantPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=grant_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=grant_id" })
   grantId: number;
 }
 
 
 export class OauthAuthorizationsGetGrantRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: OauthAuthorizationsGetGrantPathParams;
 }
 
 
 export class OauthAuthorizationsGetGrantResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   applicationGrant?: shared.ApplicationGrant;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 }

@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Compute } from "./compute";
 import { DataSourceConfig } from "./datasourceconfig";
 import { FailureBehaviorEnum } from "./failurebehaviorenum";
@@ -10,44 +9,45 @@ import { SimulationApplicationConfig } from "./simulationapplicationconfig";
 import { VpcConfig } from "./vpcconfig";
 
 
+
 // SimulationJobRequest
 /** 
  * Information about a simulation job request.
 **/
 export class SimulationJobRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=compute" })
+  @SpeakeasyMetadata({ data: "json, name=compute" })
   compute?: Compute;
 
-  @Metadata({ data: "json, name=dataSources", elemType: shared.DataSourceConfig })
+  @SpeakeasyMetadata({ data: "json, name=dataSources", elemType: DataSourceConfig })
   dataSources?: DataSourceConfig[];
 
-  @Metadata({ data: "json, name=failureBehavior" })
+  @SpeakeasyMetadata({ data: "json, name=failureBehavior" })
   failureBehavior?: FailureBehaviorEnum;
 
-  @Metadata({ data: "json, name=iamRole" })
+  @SpeakeasyMetadata({ data: "json, name=iamRole" })
   iamRole?: string;
 
-  @Metadata({ data: "json, name=loggingConfig" })
+  @SpeakeasyMetadata({ data: "json, name=loggingConfig" })
   loggingConfig?: LoggingConfig;
 
-  @Metadata({ data: "json, name=maxJobDurationInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=maxJobDurationInSeconds" })
   maxJobDurationInSeconds: number;
 
-  @Metadata({ data: "json, name=outputLocation" })
+  @SpeakeasyMetadata({ data: "json, name=outputLocation" })
   outputLocation?: OutputLocation;
 
-  @Metadata({ data: "json, name=robotApplications", elemType: shared.RobotApplicationConfig })
+  @SpeakeasyMetadata({ data: "json, name=robotApplications", elemType: RobotApplicationConfig })
   robotApplications?: RobotApplicationConfig[];
 
-  @Metadata({ data: "json, name=simulationApplications", elemType: shared.SimulationApplicationConfig })
+  @SpeakeasyMetadata({ data: "json, name=simulationApplications", elemType: SimulationApplicationConfig })
   simulationApplications?: SimulationApplicationConfig[];
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 
-  @Metadata({ data: "json, name=useDefaultApplications" })
+  @SpeakeasyMetadata({ data: "json, name=useDefaultApplications" })
   useDefaultApplications?: boolean;
 
-  @Metadata({ data: "json, name=vpcConfig" })
+  @SpeakeasyMetadata({ data: "json, name=vpcConfig" })
   vpcConfig?: VpcConfig;
 }

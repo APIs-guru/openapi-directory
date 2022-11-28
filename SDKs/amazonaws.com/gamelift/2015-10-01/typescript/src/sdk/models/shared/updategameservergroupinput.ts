@@ -1,23 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BalancingStrategyEnum } from "./balancingstrategyenum";
 import { GameServerProtectionPolicyEnum } from "./gameserverprotectionpolicyenum";
 import { InstanceDefinition } from "./instancedefinition";
 
 
+
 export class UpdateGameServerGroupInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BalancingStrategy" })
+  @SpeakeasyMetadata({ data: "json, name=BalancingStrategy" })
   balancingStrategy?: BalancingStrategyEnum;
 
-  @Metadata({ data: "json, name=GameServerGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=GameServerGroupName" })
   gameServerGroupName: string;
 
-  @Metadata({ data: "json, name=GameServerProtectionPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=GameServerProtectionPolicy" })
   gameServerProtectionPolicy?: GameServerProtectionPolicyEnum;
 
-  @Metadata({ data: "json, name=InstanceDefinitions", elemType: shared.InstanceDefinition })
+  @SpeakeasyMetadata({ data: "json, name=InstanceDefinitions", elemType: InstanceDefinition })
   instanceDefinitions?: InstanceDefinition[];
 
-  @Metadata({ data: "json, name=RoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=RoleArn" })
   roleArn?: string;
 }

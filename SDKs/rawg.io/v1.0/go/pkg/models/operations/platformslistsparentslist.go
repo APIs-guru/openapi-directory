@@ -10,15 +10,15 @@ type PlatformsListsParentsListQueryParams struct {
 	PageSize *int64  `queryParam:"style=form,explode=true,name=page_size"`
 }
 
-type PlatformsListsParentsListRequest struct {
-	QueryParams PlatformsListsParentsListQueryParams
-}
-
 type PlatformsListsParentsList200ApplicationJSON struct {
 	Count    int64                         `json:"count"`
 	Next     *string                       `json:"next,omitempty"`
 	Previous *string                       `json:"previous,omitempty"`
 	Results  []shared.PlatformParentSingle `json:"results"`
+}
+
+type PlatformsListsParentsListRequest struct {
+	QueryParams PlatformsListsParentsListQueryParams
 }
 
 type PlatformsListsParentsListResponse struct {

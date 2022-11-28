@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Studio
+// Details for an Amazon EMR Studio including ID, creation time, name, and so on.
 type Studio struct {
 	AuthMode                   *AuthModeEnum `json:"AuthMode,omitempty"`
 	CreationTime               *time.Time    `json:"CreationTime,omitempty"`

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GeneratedPolicy } from "./generatedpolicy";
+
 
 
 // GeneratedPolicyResult
@@ -8,9 +8,9 @@ import { GeneratedPolicy } from "./generatedpolicy";
  * Contains the text for the generated policy and its details.
 **/
 export class GeneratedPolicyResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=generatedPolicies", elemType: shared.GeneratedPolicy })
+  @SpeakeasyMetadata({ data: "json, name=generatedPolicies", elemType: GeneratedPolicy })
   generatedPolicies?: GeneratedPolicy[];
 
-  @Metadata({ data: "json, name=properties" })
+  @SpeakeasyMetadata({ data: "json, name=properties" })
   properties: any;
 }

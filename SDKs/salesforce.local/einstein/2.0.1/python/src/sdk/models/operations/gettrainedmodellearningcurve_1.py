@@ -1,11 +1,11 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetTrainedModelLearningCurve1PathParams:
-    model_id: str = field(default=None, metadata={'path_param': { 'field_name': 'modelId', 'style': 'simple', 'explode': False }})
+    model_id: str = field(metadata={'path_param': { 'field_name': 'modelId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,19 +16,19 @@ class GetTrainedModelLearningCurve1QueryParams:
 
 @dataclass
 class GetTrainedModelLearningCurve1Security:
-    bearer_token: shared.SchemeBearerToken = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_token: shared.SchemeBearerToken = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class GetTrainedModelLearningCurve1Request:
-    path_params: GetTrainedModelLearningCurve1PathParams = field(default=None)
-    query_params: GetTrainedModelLearningCurve1QueryParams = field(default=None)
-    security: GetTrainedModelLearningCurve1Security = field(default=None)
+    path_params: GetTrainedModelLearningCurve1PathParams = field()
+    query_params: GetTrainedModelLearningCurve1QueryParams = field()
+    security: GetTrainedModelLearningCurve1Security = field()
     
 
 @dataclass
 class GetTrainedModelLearningCurve1Response:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     learning_curve_list: Optional[shared.LearningCurveList] = field(default=None)
-    status_code: int = field(default=None)
     

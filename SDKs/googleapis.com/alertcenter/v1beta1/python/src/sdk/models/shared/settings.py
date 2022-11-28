@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import notification
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Settings:
-    notifications: Optional[List[notification.Notification]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'notifications' }})
+    r"""Settings
+    Customer-level settings.
+    """
+    
+    notifications: Optional[List[Notification]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('notifications') }})
     

@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetV3VideosQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=false;name=fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=fields" })
   fields?: shared.VideoDetailFieldValuesEnum[];
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=ids" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=ids" })
   ids?: string[];
 }
 
 
 export class GetV3VideosHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Accept-Language" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept-Language" })
   acceptLanguage?: string;
 }
 
 
 export class GetV3VideosRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetV3VideosQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetV3VideosHeaders;
 }
 
 
 export class GetV3VideosResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

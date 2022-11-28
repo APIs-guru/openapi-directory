@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NotificationConfig } from "./notificationconfig";
+
 
 
 // ListNotificationConfigsResponse
@@ -8,9 +8,9 @@ import { NotificationConfig } from "./notificationconfig";
  * Response message for listing notification configs.
 **/
 export class ListNotificationConfigsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=notificationConfigs", elemType: shared.NotificationConfig })
+  @SpeakeasyMetadata({ data: "json, name=notificationConfigs", elemType: NotificationConfig })
   notificationConfigs?: NotificationConfig[];
 }

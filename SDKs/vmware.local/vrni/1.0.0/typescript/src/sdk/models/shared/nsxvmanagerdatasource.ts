@@ -1,42 +1,43 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PasswordCredentials } from "./passwordcredentials";
 import { DataSourceTypeEnum } from "./datasourcetypeenum";
 
 
+
 export class NsxvManagerDataSource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=central_cli_enabled" })
+  @SpeakeasyMetadata({ data: "json, name=central_cli_enabled" })
   centralCliEnabled?: boolean;
 
-  @Metadata({ data: "json, name=credentials" })
+  @SpeakeasyMetadata({ data: "json, name=credentials" })
   credentials?: PasswordCredentials;
 
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=entity_id" })
+  @SpeakeasyMetadata({ data: "json, name=entity_id" })
   entityId?: string;
 
-  @Metadata({ data: "json, name=entity_type" })
+  @SpeakeasyMetadata({ data: "json, name=entity_type" })
   entityType?: DataSourceTypeEnum;
 
-  @Metadata({ data: "json, name=fqdn" })
+  @SpeakeasyMetadata({ data: "json, name=fqdn" })
   fqdn?: string;
 
-  @Metadata({ data: "json, name=ip" })
+  @SpeakeasyMetadata({ data: "json, name=ip" })
   ip?: string;
 
-  @Metadata({ data: "json, name=ipfix_enabled" })
+  @SpeakeasyMetadata({ data: "json, name=ipfix_enabled" })
   ipfixEnabled?: boolean;
 
-  @Metadata({ data: "json, name=nickname" })
+  @SpeakeasyMetadata({ data: "json, name=nickname" })
   nickname?: string;
 
-  @Metadata({ data: "json, name=notes" })
+  @SpeakeasyMetadata({ data: "json, name=notes" })
   notes?: string;
 
-  @Metadata({ data: "json, name=proxy_id" })
+  @SpeakeasyMetadata({ data: "json, name=proxy_id" })
   proxyId?: string;
 
-  @Metadata({ data: "json, name=vcenter_id" })
+  @SpeakeasyMetadata({ data: "json, name=vcenter_id" })
   vcenterId?: string;
 }

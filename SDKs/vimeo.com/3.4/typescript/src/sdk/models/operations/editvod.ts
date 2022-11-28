@@ -1,71 +1,72 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class EditVodPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=ondemand_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ondemand_id" })
   ondemandId: number;
 }
 
 
 export class EditVodRequestBodyPreorder extends SpeakeasyBase {
-  @Metadata({ data: "json, name=active" })
+  @SpeakeasyMetadata({ data: "json, name=active" })
   active?: boolean;
 
-  @Metadata({ data: "json, name=publish_time" })
+  @SpeakeasyMetadata({ data: "json, name=publish_time" })
   publishTime?: string;
 }
 
 
 export class EditVodRequestBodyPublish extends SpeakeasyBase {
-  @Metadata({ data: "json, name=active" })
+  @SpeakeasyMetadata({ data: "json, name=active" })
   active?: boolean;
 }
 
 
 export class EditVodRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=link" })
+  @SpeakeasyMetadata({ data: "json, name=link" })
   link?: string;
 
-  @Metadata({ data: "json, name=preorder" })
+  @SpeakeasyMetadata({ data: "json, name=preorder" })
   preorder?: EditVodRequestBodyPreorder;
 
-  @Metadata({ data: "json, name=publish" })
+  @SpeakeasyMetadata({ data: "json, name=publish" })
   publish?: EditVodRequestBodyPublish;
 
-  @Metadata({ data: "json, name=publish_when_ready" })
+  @SpeakeasyMetadata({ data: "json, name=publish_when_ready" })
   publishWhenReady?: boolean;
 }
 
 
 export class EditVodSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2: shared.SchemeOauth2;
 }
 
 
 export class EditVodRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: EditVodPathParams;
 
-  @Metadata({ data: "request, media_type=application/vnd.vimeo.ondemand.page+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/vnd.vimeo.ondemand.page+json" })
   request?: EditVodRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: EditVodSecurity;
 }
 
 
 export class EditVodResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   legacyError?: shared.LegacyError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   onDemandPage?: shared.OnDemandPage;
 }

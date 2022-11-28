@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApiKeys } from "./apikeys";
 import { AccountQuota } from "./accountquota";
+
 
 
 // Account
@@ -8,15 +9,15 @@ import { AccountQuota } from "./accountquota";
  * Represents a user account
 **/
 export class Account extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Email" })
+  @SpeakeasyMetadata({ data: "json, name=Email" })
   email?: string;
 
-  @Metadata({ data: "json, name=Keys" })
+  @SpeakeasyMetadata({ data: "json, name=Keys" })
   keys?: ApiKeys;
 
-  @Metadata({ data: "json, name=Quotas" })
+  @SpeakeasyMetadata({ data: "json, name=Quotas" })
   quotas?: AccountQuota;
 
-  @Metadata({ data: "json, name=UserName" })
+  @SpeakeasyMetadata({ data: "json, name=UserName" })
   userName?: string;
 }

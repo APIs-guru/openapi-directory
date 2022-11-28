@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteGlobalClusterActionEnum(str, Enum):
     DELETE_GLOBAL_CLUSTER = "DeleteGlobalCluster"
@@ -10,9 +14,9 @@ class GetDeleteGlobalClusterVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteGlobalClusterQueryParams:
-    action: GetDeleteGlobalClusterActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    global_cluster_identifier: str = field(default=None, metadata={'query_param': { 'field_name': 'GlobalClusterIdentifier', 'style': 'form', 'explode': True }})
-    version: GetDeleteGlobalClusterVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetDeleteGlobalClusterActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    global_cluster_identifier: str = field(metadata={'query_param': { 'field_name': 'GlobalClusterIdentifier', 'style': 'form', 'explode': True }})
+    version: GetDeleteGlobalClusterVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetDeleteGlobalClusterHeaders:
 
 @dataclass
 class GetDeleteGlobalClusterRequest:
-    query_params: GetDeleteGlobalClusterQueryParams = field(default=None)
-    headers: GetDeleteGlobalClusterHeaders = field(default=None)
+    headers: GetDeleteGlobalClusterHeaders = field()
+    query_params: GetDeleteGlobalClusterQueryParams = field()
     
 
 @dataclass
 class GetDeleteGlobalClusterResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

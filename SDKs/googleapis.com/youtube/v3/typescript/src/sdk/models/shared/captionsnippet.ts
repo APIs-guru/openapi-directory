@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum CaptionSnippetAudioTrackTypeEnum {
-    Unknown = "unknown"
-,    Primary = "primary"
-,    Commentary = "commentary"
-,    Descriptive = "descriptive"
+    Unknown = "unknown",
+    Primary = "primary",
+    Commentary = "commentary",
+    Descriptive = "descriptive"
 }
 
 export enum CaptionSnippetFailureReasonEnum {
-    UnknownFormat = "unknownFormat"
-,    UnsupportedFormat = "unsupportedFormat"
-,    ProcessingFailed = "processingFailed"
+    UnknownFormat = "unknownFormat",
+    UnsupportedFormat = "unsupportedFormat",
+    ProcessingFailed = "processingFailed"
 }
 
 export enum CaptionSnippetStatusEnum {
-    Serving = "serving"
-,    Syncing = "syncing"
-,    Failed = "failed"
+    Serving = "serving",
+    Syncing = "syncing",
+    Failed = "failed"
 }
 
 export enum CaptionSnippetTrackKindEnum {
-    Standard = "standard"
-,    Asr = "ASR"
-,    Forced = "forced"
+    Standard = "standard",
+    Asr = "ASR",
+    Forced = "forced"
 }
 
 
@@ -31,42 +32,42 @@ export enum CaptionSnippetTrackKindEnum {
  * Basic details about a caption track, such as its language and name.
 **/
 export class CaptionSnippet extends SpeakeasyBase {
-  @Metadata({ data: "json, name=audioTrackType" })
+  @SpeakeasyMetadata({ data: "json, name=audioTrackType" })
   audioTrackType?: CaptionSnippetAudioTrackTypeEnum;
 
-  @Metadata({ data: "json, name=failureReason" })
+  @SpeakeasyMetadata({ data: "json, name=failureReason" })
   failureReason?: CaptionSnippetFailureReasonEnum;
 
-  @Metadata({ data: "json, name=isAutoSynced" })
+  @SpeakeasyMetadata({ data: "json, name=isAutoSynced" })
   isAutoSynced?: boolean;
 
-  @Metadata({ data: "json, name=isCC" })
+  @SpeakeasyMetadata({ data: "json, name=isCC" })
   isCc?: boolean;
 
-  @Metadata({ data: "json, name=isDraft" })
+  @SpeakeasyMetadata({ data: "json, name=isDraft" })
   isDraft?: boolean;
 
-  @Metadata({ data: "json, name=isEasyReader" })
+  @SpeakeasyMetadata({ data: "json, name=isEasyReader" })
   isEasyReader?: boolean;
 
-  @Metadata({ data: "json, name=isLarge" })
+  @SpeakeasyMetadata({ data: "json, name=isLarge" })
   isLarge?: boolean;
 
-  @Metadata({ data: "json, name=language" })
+  @SpeakeasyMetadata({ data: "json, name=language" })
   language?: string;
 
-  @Metadata({ data: "json, name=lastUpdated" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdated" })
   lastUpdated?: Date;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: CaptionSnippetStatusEnum;
 
-  @Metadata({ data: "json, name=trackKind" })
+  @SpeakeasyMetadata({ data: "json, name=trackKind" })
   trackKind?: CaptionSnippetTrackKindEnum;
 
-  @Metadata({ data: "json, name=videoId" })
+  @SpeakeasyMetadata({ data: "json, name=videoId" })
   videoId?: string;
 }

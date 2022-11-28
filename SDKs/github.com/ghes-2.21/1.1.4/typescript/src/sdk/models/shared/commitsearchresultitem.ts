@@ -1,147 +1,147 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Verification } from "./verification";
 import { MinimalRepository } from "./minimalrepository";
 import { SearchResultTextMatches } from "./searchresulttextmatches";
 
 
+
 export class CommitSearchResultItemSimpleUser extends SpeakeasyBase {
-  @Metadata({ data: "json, name=avatar_url" })
+  @SpeakeasyMetadata({ data: "json, name=avatar_url" })
   avatarUrl: string;
 
-  @Metadata({ data: "json, name=events_url" })
+  @SpeakeasyMetadata({ data: "json, name=events_url" })
   eventsUrl: string;
 
-  @Metadata({ data: "json, name=followers_url" })
+  @SpeakeasyMetadata({ data: "json, name=followers_url" })
   followersUrl: string;
 
-  @Metadata({ data: "json, name=following_url" })
+  @SpeakeasyMetadata({ data: "json, name=following_url" })
   followingUrl: string;
 
-  @Metadata({ data: "json, name=gists_url" })
+  @SpeakeasyMetadata({ data: "json, name=gists_url" })
   gistsUrl: string;
 
-  @Metadata({ data: "json, name=gravatar_id" })
+  @SpeakeasyMetadata({ data: "json, name=gravatar_id" })
   gravatarId: string;
 
-  @Metadata({ data: "json, name=html_url" })
+  @SpeakeasyMetadata({ data: "json, name=html_url" })
   htmlUrl: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=login" })
+  @SpeakeasyMetadata({ data: "json, name=login" })
   login: string;
 
-  @Metadata({ data: "json, name=node_id" })
+  @SpeakeasyMetadata({ data: "json, name=node_id" })
   nodeId: string;
 
-  @Metadata({ data: "json, name=organizations_url" })
+  @SpeakeasyMetadata({ data: "json, name=organizations_url" })
   organizationsUrl: string;
 
-  @Metadata({ data: "json, name=received_events_url" })
+  @SpeakeasyMetadata({ data: "json, name=received_events_url" })
   receivedEventsUrl: string;
 
-  @Metadata({ data: "json, name=repos_url" })
+  @SpeakeasyMetadata({ data: "json, name=repos_url" })
   reposUrl: string;
 
-  @Metadata({ data: "json, name=site_admin" })
+  @SpeakeasyMetadata({ data: "json, name=site_admin" })
   siteAdmin: boolean;
 
-  @Metadata({ data: "json, name=starred_at" })
+  @SpeakeasyMetadata({ data: "json, name=starred_at" })
   starredAt?: string;
 
-  @Metadata({ data: "json, name=starred_url" })
+  @SpeakeasyMetadata({ data: "json, name=starred_url" })
   starredUrl: string;
 
-  @Metadata({ data: "json, name=subscriptions_url" })
+  @SpeakeasyMetadata({ data: "json, name=subscriptions_url" })
   subscriptionsUrl: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url: string;
 }
 
 
 export class CommitSearchResultItemCommitAuthor extends SpeakeasyBase {
-  @Metadata({ data: "json, name=date" })
+  @SpeakeasyMetadata({ data: "json, name=date" })
   date: Date;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 }
 
 
 export class CommitSearchResultItemCommitGitUser extends SpeakeasyBase {
-  @Metadata({ data: "json, name=date" })
+  @SpeakeasyMetadata({ data: "json, name=date" })
   date?: string;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
 
 
 export class CommitSearchResultItemCommitTree extends SpeakeasyBase {
-  @Metadata({ data: "json, name=sha" })
+  @SpeakeasyMetadata({ data: "json, name=sha" })
   sha: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url: string;
 }
 
 
 export class CommitSearchResultItemCommit extends SpeakeasyBase {
-  @Metadata({ data: "json, name=author" })
+  @SpeakeasyMetadata({ data: "json, name=author" })
   author: CommitSearchResultItemCommitAuthor;
 
-  @Metadata({ data: "json, name=comment_count" })
+  @SpeakeasyMetadata({ data: "json, name=comment_count" })
   commentCount: number;
 
-  @Metadata({ data: "json, name=committer" })
+  @SpeakeasyMetadata({ data: "json, name=committer" })
   committer: CommitSearchResultItemCommitGitUser;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 
-  @Metadata({ data: "json, name=tree" })
+  @SpeakeasyMetadata({ data: "json, name=tree" })
   tree: CommitSearchResultItemCommitTree;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url: string;
 
-  @Metadata({ data: "json, name=verification" })
+  @SpeakeasyMetadata({ data: "json, name=verification" })
   verification?: Verification;
 }
 
 
 export class CommitSearchResultItemGitUser extends SpeakeasyBase {
-  @Metadata({ data: "json, name=date" })
+  @SpeakeasyMetadata({ data: "json, name=date" })
   date?: string;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
 
 
 export class CommitSearchResultItemParents extends SpeakeasyBase {
-  @Metadata({ data: "json, name=html_url" })
+  @SpeakeasyMetadata({ data: "json, name=html_url" })
   htmlUrl?: string;
 
-  @Metadata({ data: "json, name=sha" })
+  @SpeakeasyMetadata({ data: "json, name=sha" })
   sha?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }
 
@@ -151,39 +151,39 @@ export class CommitSearchResultItemParents extends SpeakeasyBase {
  * Commit Search Result Item
 **/
 export class CommitSearchResultItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=author" })
+  @SpeakeasyMetadata({ data: "json, name=author" })
   author: CommitSearchResultItemSimpleUser;
 
-  @Metadata({ data: "json, name=comments_url" })
+  @SpeakeasyMetadata({ data: "json, name=comments_url" })
   commentsUrl: string;
 
-  @Metadata({ data: "json, name=commit" })
+  @SpeakeasyMetadata({ data: "json, name=commit" })
   commit: CommitSearchResultItemCommit;
 
-  @Metadata({ data: "json, name=committer" })
+  @SpeakeasyMetadata({ data: "json, name=committer" })
   committer: CommitSearchResultItemGitUser;
 
-  @Metadata({ data: "json, name=html_url" })
+  @SpeakeasyMetadata({ data: "json, name=html_url" })
   htmlUrl: string;
 
-  @Metadata({ data: "json, name=node_id" })
+  @SpeakeasyMetadata({ data: "json, name=node_id" })
   nodeId: string;
 
-  @Metadata({ data: "json, name=parents", elemType: shared.CommitSearchResultItemParents })
+  @SpeakeasyMetadata({ data: "json, name=parents", elemType: CommitSearchResultItemParents })
   parents: CommitSearchResultItemParents[];
 
-  @Metadata({ data: "json, name=repository" })
+  @SpeakeasyMetadata({ data: "json, name=repository" })
   repository: MinimalRepository;
 
-  @Metadata({ data: "json, name=score" })
+  @SpeakeasyMetadata({ data: "json, name=score" })
   score: number;
 
-  @Metadata({ data: "json, name=sha" })
+  @SpeakeasyMetadata({ data: "json, name=sha" })
   sha: string;
 
-  @Metadata({ data: "json, name=text_matches", elemType: shared.SearchResultTextMatches })
+  @SpeakeasyMetadata({ data: "json, name=text_matches", elemType: SearchResultTextMatches })
   textMatches?: SearchResultTextMatches[];
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url: string;
 }

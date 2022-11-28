@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Answer } from "./answer";
+
 
 
 // UpdateAnswerOutput
@@ -7,12 +8,12 @@ import { Answer } from "./answer";
  * Output of a update answer call.
 **/
 export class UpdateAnswerOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Answer" })
+  @SpeakeasyMetadata({ data: "json, name=Answer" })
   answer?: Answer;
 
-  @Metadata({ data: "json, name=LensAlias" })
+  @SpeakeasyMetadata({ data: "json, name=LensAlias" })
   lensAlias?: string;
 
-  @Metadata({ data: "json, name=WorkloadId" })
+  @SpeakeasyMetadata({ data: "json, name=WorkloadId" })
   workloadId?: string;
 }

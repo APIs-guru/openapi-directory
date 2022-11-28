@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ReposUpdateInformationAboutPagesSitePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=owner" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=owner" })
   owner: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repo" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repo" })
   repo: string;
 }
 
 export enum ReposUpdateInformationAboutPagesSiteRequestBodySourceEnum {
-    GhPages = "gh-pages"
-,    Master = "master"
-,    MasterDocs = "master /docs"
+    GhPages = "gh-pages",
+    Master = "master",
+    MasterDocs = "master /docs"
 }
 
 
 export class ReposUpdateInformationAboutPagesSiteRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=https_enforced" })
+  @SpeakeasyMetadata({ data: "json, name=https_enforced" })
   httpsEnforced?: boolean;
 
-  @Metadata({ data: "json, name=public" })
+  @SpeakeasyMetadata({ data: "json, name=public" })
   public?: boolean;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: ReposUpdateInformationAboutPagesSiteRequestBodySourceEnum;
 }
 
 
 export class ReposUpdateInformationAboutPagesSiteRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ReposUpdateInformationAboutPagesSitePathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: ReposUpdateInformationAboutPagesSiteRequestBody;
 }
 
 
 export class ReposUpdateInformationAboutPagesSiteResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   scimError?: shared.ScimError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationError?: shared.ValidationError;
 }

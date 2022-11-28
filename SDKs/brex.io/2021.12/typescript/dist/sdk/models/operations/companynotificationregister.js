@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CompanyNotificationRegisterPathParams = /** @class */ (function (_super) {
     __extends(CompanyNotificationRegisterPathParams, _super);
@@ -30,7 +30,7 @@ var CompanyNotificationRegisterPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], CompanyNotificationRegisterPathParams.prototype, "id", void 0);
     return CompanyNotificationRegisterPathParams;
@@ -42,7 +42,7 @@ var CompanyNotificationRegisterRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "form, name=callbackUrl;" }),
+        SpeakeasyMetadata({ data: "form, name=callbackUrl;" }),
         __metadata("design:type", String)
     ], CompanyNotificationRegisterRequestBody.prototype, "callbackUrl", void 0);
     return CompanyNotificationRegisterRequestBody;
@@ -54,7 +54,7 @@ var CompanyNotificationRegisterSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeUserKey)
     ], CompanyNotificationRegisterSecurity.prototype, "userKey", void 0);
     return CompanyNotificationRegisterSecurity;
@@ -66,15 +66,15 @@ var CompanyNotificationRegisterRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CompanyNotificationRegisterPathParams)
     ], CompanyNotificationRegisterRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
         __metadata("design:type", CompanyNotificationRegisterRequestBody)
     ], CompanyNotificationRegisterRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CompanyNotificationRegisterSecurity)
     ], CompanyNotificationRegisterRequest.prototype, "security", void 0);
     return CompanyNotificationRegisterRequest;
@@ -86,19 +86,19 @@ var CompanyNotificationRegisterResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CompanyNotificationRegisterResponse.prototype, "companyNotificationRegister200ApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CompanyNotificationRegisterResponse.prototype, "companyNotificationRegisterDefaultApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CompanyNotificationRegisterResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CompanyNotificationRegisterResponse.prototype, "statusCode", void 0);
     return CompanyNotificationRegisterResponse;

@@ -1,67 +1,68 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SearchHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=galaxy-ap-name" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=galaxy-ap-name" })
   galaxyApName?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=galaxy-ap-password" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=galaxy-ap-password" })
   galaxyApPassword?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=galaxy-search-type" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=galaxy-search-type" })
   galaxySearchType?: string;
 }
 
 
 export class SearchRequestBodyAddress extends SpeakeasyBase {
-  @Metadata({ data: "json, name=addressLine1" })
+  @SpeakeasyMetadata({ data: "json, name=addressLine1" })
   addressLine1?: string;
 
-  @Metadata({ data: "json, name=addressLine2" })
+  @SpeakeasyMetadata({ data: "json, name=addressLine2" })
   addressLine2?: string;
 }
 
 
 export class SearchRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Address" })
+  @SpeakeasyMetadata({ data: "json, name=Address" })
   address?: SearchRequestBodyAddress;
 
-  @Metadata({ data: "json, name=Age" })
+  @SpeakeasyMetadata({ data: "json, name=Age" })
   age?: number;
 
-  @Metadata({ data: "json, name=Dob" })
+  @SpeakeasyMetadata({ data: "json, name=Dob" })
   dob?: string;
 
-  @Metadata({ data: "json, name=Email" })
+  @SpeakeasyMetadata({ data: "json, name=Email" })
   email?: string;
 
-  @Metadata({ data: "json, name=FirstName" })
+  @SpeakeasyMetadata({ data: "json, name=FirstName" })
   firstName?: string;
 
-  @Metadata({ data: "json, name=LastName" })
+  @SpeakeasyMetadata({ data: "json, name=LastName" })
   lastName?: string;
 
-  @Metadata({ data: "json, name=MiddleName" })
+  @SpeakeasyMetadata({ data: "json, name=MiddleName" })
   middleName?: string;
 
-  @Metadata({ data: "json, name=PhoneNumber" })
+  @SpeakeasyMetadata({ data: "json, name=PhoneNumber" })
   phoneNumber?: string;
 }
 
 
 export class SearchRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: SearchHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: SearchRequestBody;
 }
 
 
 export class SearchResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

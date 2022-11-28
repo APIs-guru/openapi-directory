@@ -22,19 +22,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { AttachedManagedPolicy } from "./attachedmanagedpolicy";
 var ListManagedPoliciesInPermissionSetResponse = /** @class */ (function (_super) {
     __extends(ListManagedPoliciesInPermissionSetResponse, _super);
     function ListManagedPoliciesInPermissionSetResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AttachedManagedPolicies", elemType: shared.AttachedManagedPolicy }),
+        SpeakeasyMetadata({ data: "json, name=AttachedManagedPolicies", elemType: AttachedManagedPolicy }),
         __metadata("design:type", Array)
     ], ListManagedPoliciesInPermissionSetResponse.prototype, "attachedManagedPolicies", void 0);
     __decorate([
-        Metadata({ data: "json, name=NextToken" }),
+        SpeakeasyMetadata({ data: "json, name=NextToken" }),
         __metadata("design:type", String)
     ], ListManagedPoliciesInPermissionSetResponse.prototype, "nextToken", void 0);
     return ListManagedPoliciesInPermissionSetResponse;

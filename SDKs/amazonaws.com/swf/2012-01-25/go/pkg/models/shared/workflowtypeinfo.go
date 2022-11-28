@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// WorkflowTypeInfo
+// Contains information about a workflow type.
 type WorkflowTypeInfo struct {
 	CreationDate    time.Time              `json:"creationDate"`
 	DeprecationDate *time.Time             `json:"deprecationDate,omitempty"`

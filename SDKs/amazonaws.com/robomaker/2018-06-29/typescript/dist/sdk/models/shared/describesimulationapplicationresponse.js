@@ -22,63 +22,63 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Environment } from "./environment";
 import { RenderingEngine } from "./renderingengine";
 import { RobotSoftwareSuite } from "./robotsoftwaresuite";
 import { SimulationSoftwareSuite } from "./simulationsoftwaresuite";
+import { Source } from "./source";
 var DescribeSimulationApplicationResponse = /** @class */ (function (_super) {
     __extends(DescribeSimulationApplicationResponse, _super);
     function DescribeSimulationApplicationResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=arn" }),
+        SpeakeasyMetadata({ data: "json, name=arn" }),
         __metadata("design:type", String)
     ], DescribeSimulationApplicationResponse.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=environment" }),
+        SpeakeasyMetadata({ data: "json, name=environment" }),
         __metadata("design:type", Environment)
     ], DescribeSimulationApplicationResponse.prototype, "environment", void 0);
     __decorate([
-        Metadata({ data: "json, name=imageDigest" }),
+        SpeakeasyMetadata({ data: "json, name=imageDigest" }),
         __metadata("design:type", String)
     ], DescribeSimulationApplicationResponse.prototype, "imageDigest", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastUpdatedAt" }),
+        SpeakeasyMetadata({ data: "json, name=lastUpdatedAt" }),
         __metadata("design:type", Date)
     ], DescribeSimulationApplicationResponse.prototype, "lastUpdatedAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], DescribeSimulationApplicationResponse.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=renderingEngine" }),
+        SpeakeasyMetadata({ data: "json, name=renderingEngine" }),
         __metadata("design:type", RenderingEngine)
     ], DescribeSimulationApplicationResponse.prototype, "renderingEngine", void 0);
     __decorate([
-        Metadata({ data: "json, name=revisionId" }),
+        SpeakeasyMetadata({ data: "json, name=revisionId" }),
         __metadata("design:type", String)
     ], DescribeSimulationApplicationResponse.prototype, "revisionId", void 0);
     __decorate([
-        Metadata({ data: "json, name=robotSoftwareSuite" }),
+        SpeakeasyMetadata({ data: "json, name=robotSoftwareSuite" }),
         __metadata("design:type", RobotSoftwareSuite)
     ], DescribeSimulationApplicationResponse.prototype, "robotSoftwareSuite", void 0);
     __decorate([
-        Metadata({ data: "json, name=simulationSoftwareSuite" }),
+        SpeakeasyMetadata({ data: "json, name=simulationSoftwareSuite" }),
         __metadata("design:type", SimulationSoftwareSuite)
     ], DescribeSimulationApplicationResponse.prototype, "simulationSoftwareSuite", void 0);
     __decorate([
-        Metadata({ data: "json, name=sources", elemType: shared.Source }),
+        SpeakeasyMetadata({ data: "json, name=sources", elemType: Source }),
         __metadata("design:type", Array)
     ], DescribeSimulationApplicationResponse.prototype, "sources", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags" }),
+        SpeakeasyMetadata({ data: "json, name=tags" }),
         __metadata("design:type", Map)
     ], DescribeSimulationApplicationResponse.prototype, "tags", void 0);
     __decorate([
-        Metadata({ data: "json, name=version" }),
+        SpeakeasyMetadata({ data: "json, name=version" }),
         __metadata("design:type", String)
     ], DescribeSimulationApplicationResponse.prototype, "version", void 0);
     return DescribeSimulationApplicationResponse;

@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass_json
 @dataclass
 class UsersAddEmailForAuthenticatedRequestBody1:
-    emails: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'emails' }})
+    emails: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('emails') }})
     
 
 @dataclass
@@ -17,8 +18,8 @@ class UsersAddEmailForAuthenticatedRequest:
 
 @dataclass
 class UsersAddEmailForAuthenticatedResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     basic_error: Optional[shared.BasicError] = field(default=None)
     emails: Optional[List[shared.Email]] = field(default=None)
     validation_error: Optional[shared.ValidationError] = field(default=None)

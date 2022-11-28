@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WorkspaceProperties } from "./workspaceproperties";
 
 
+
 export class ModifyWorkspacePropertiesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=WorkspaceId" })
+  @SpeakeasyMetadata({ data: "json, name=WorkspaceId" })
   workspaceId: string;
 
-  @Metadata({ data: "json, name=WorkspaceProperties" })
+  @SpeakeasyMetadata({ data: "json, name=WorkspaceProperties" })
   workspaceProperties: WorkspaceProperties;
 }

@@ -1,67 +1,68 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ReactionsListForTeamDiscussionPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=discussion_number" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=discussion_number" })
   discussionNumber: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=team_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=team_id" })
   teamId: number;
 }
 
 export enum ReactionsListForTeamDiscussionContentEnum {
-    Plus1 = "+1"
-,    Minus1 = "-1"
-,    Laugh = "laugh"
-,    Confused = "confused"
-,    Heart = "heart"
-,    Hooray = "hooray"
-,    Rocket = "rocket"
-,    Eyes = "eyes"
+    Plus1 = "+1",
+    Minus1 = "-1",
+    Laugh = "laugh",
+    Confused = "confused",
+    Heart = "heart",
+    Hooray = "hooray",
+    Rocket = "rocket",
+    Eyes = "eyes"
 }
 
 
 export class ReactionsListForTeamDiscussionQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=content" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=content" })
   content?: ReactionsListForTeamDiscussionContentEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 }
 
 
 export class ReactionsListForTeamDiscussionHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=accept" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=accept" })
   accept: string;
 }
 
 
 export class ReactionsListForTeamDiscussionRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ReactionsListForTeamDiscussionPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ReactionsListForTeamDiscussionQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: ReactionsListForTeamDiscussionHeaders;
 }
 
 
 export class ReactionsListForTeamDiscussionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.Reaction })
+  @SpeakeasyMetadata({ elemType: shared.Reaction })
   reactions?: shared.Reaction[];
 }

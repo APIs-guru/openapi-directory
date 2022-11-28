@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetScrobbleShowsShowIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=show_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=show_id" })
   showId: number;
 }
 
@@ -13,27 +14,27 @@ export enum GetScrobbleShowsShowIdEmbedEnum {
 
 
 export class GetScrobbleShowsShowIdQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=embed" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=embed" })
   embed?: GetScrobbleShowsShowIdEmbedEnum;
 }
 
 
 export class GetScrobbleShowsShowIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetScrobbleShowsShowIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetScrobbleShowsShowIdQueryParams;
 }
 
 
 export class GetScrobbleShowsShowIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.MarkedEpisode })
+  @SpeakeasyMetadata({ elemType: shared.MarkedEpisode })
   markedEpisodes?: shared.MarkedEpisode[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // FindReplaceResponse
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The result of the find/replace.
 **/
 export class FindReplaceResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=formulasChanged" })
+  @SpeakeasyMetadata({ data: "json, name=formulasChanged" })
   formulasChanged?: number;
 
-  @Metadata({ data: "json, name=occurrencesChanged" })
+  @SpeakeasyMetadata({ data: "json, name=occurrencesChanged" })
   occurrencesChanged?: number;
 
-  @Metadata({ data: "json, name=rowsChanged" })
+  @SpeakeasyMetadata({ data: "json, name=rowsChanged" })
   rowsChanged?: number;
 
-  @Metadata({ data: "json, name=sheetsChanged" })
+  @SpeakeasyMetadata({ data: "json, name=sheetsChanged" })
   sheetsChanged?: number;
 
-  @Metadata({ data: "json, name=valuesChanged" })
+  @SpeakeasyMetadata({ data: "json, name=valuesChanged" })
   valuesChanged?: number;
 }

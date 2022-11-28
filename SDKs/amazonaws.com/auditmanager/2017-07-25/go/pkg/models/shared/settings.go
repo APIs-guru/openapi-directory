@@ -1,5 +1,8 @@
 package shared
 
+// Settings
+//
+//	The settings object that holds all supported Audit Manager settings.
 type Settings struct {
 	DefaultAssessmentReportsDestination *AssessmentReportsDestination `json:"defaultAssessmentReportsDestination,omitempty"`
 	DefaultProcessOwners                []Role                        `json:"defaultProcessOwners,omitempty"`

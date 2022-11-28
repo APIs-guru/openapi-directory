@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// IntentSummary
+// Summary information about an intent returned by the <code>ListIntents</code> operation.
 type IntentSummary struct {
 	Description           *string         `json:"description,omitempty"`
 	InputContexts         []InputContext  `json:"inputContexts,omitempty"`

@@ -4,10 +4,6 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-type CreateGroupRequest struct {
-	Request *shared.GroupNew `request:"mediaType=application/json"`
-}
-
 type CreateGroup200ApplicationJSONActionEnum string
 
 const (
@@ -29,6 +25,10 @@ type CreateGroup200ApplicationJSON struct {
 	Action CreateGroup200ApplicationJSONActionEnum `json:"action"`
 	Data   CreateGroup200ApplicationJSONData       `json:"data"`
 	Result CreateGroup200ApplicationJSONResultEnum `json:"result"`
+}
+
+type CreateGroupRequest struct {
+	Request *shared.GroupNew `request:"mediaType=application/json"`
 }
 
 type CreateGroupResponse struct {

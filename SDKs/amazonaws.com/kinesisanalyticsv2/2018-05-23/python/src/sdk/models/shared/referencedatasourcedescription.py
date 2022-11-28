@@ -1,15 +1,19 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import sourceschema
-from . import s3referencedatasourcedescription
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ReferenceDataSourceDescription:
-    reference_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ReferenceId' }})
-    reference_schema: Optional[sourceschema.SourceSchema] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ReferenceSchema' }})
-    s3_reference_data_source_description: s3referencedatasourcedescription.S3ReferenceDataSourceDescription = field(default=None, metadata={'dataclasses_json': { 'field_name': 'S3ReferenceDataSourceDescription' }})
-    table_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TableName' }})
+    r"""ReferenceDataSourceDescription
+    For a SQL-based Kinesis Data Analytics application, describes the reference data source configured for an application.
+    """
+    
+    reference_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ReferenceId') }})
+    s3_reference_data_source_description: S3ReferenceDataSourceDescription = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('S3ReferenceDataSourceDescription') }})
+    table_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('TableName') }})
+    reference_schema: Optional[SourceSchema] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ReferenceSchema') }})
     

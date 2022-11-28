@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var AvatarsGetImageQueryParams = /** @class */ (function (_super) {
     __extends(AvatarsGetImageQueryParams, _super);
@@ -30,15 +30,15 @@ var AvatarsGetImageQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=height" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=height" }),
         __metadata("design:type", Number)
     ], AvatarsGetImageQueryParams.prototype, "height", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=url" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=url" }),
         __metadata("design:type", String)
     ], AvatarsGetImageQueryParams.prototype, "url", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=width" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=width" }),
         __metadata("design:type", Number)
     ], AvatarsGetImageQueryParams.prototype, "width", void 0);
     return AvatarsGetImageQueryParams;
@@ -50,11 +50,11 @@ var AvatarsGetImageSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeJwt)
     ], AvatarsGetImageSecurity.prototype, "jwt", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeProject)
     ], AvatarsGetImageSecurity.prototype, "project", void 0);
     return AvatarsGetImageSecurity;
@@ -66,11 +66,11 @@ var AvatarsGetImageRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AvatarsGetImageQueryParams)
     ], AvatarsGetImageRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AvatarsGetImageSecurity)
     ], AvatarsGetImageRequest.prototype, "security", void 0);
     return AvatarsGetImageRequest;
@@ -82,11 +82,11 @@ var AvatarsGetImageResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], AvatarsGetImageResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], AvatarsGetImageResponse.prototype, "statusCode", void 0);
     return AvatarsGetImageResponse;

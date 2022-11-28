@@ -4,17 +4,9 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-type FetchUploadStatusesSecurityOption1 struct {
-	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
-}
-
-type FetchUploadStatusesSecurityOption2 struct {
-	Oauth2AuthorizationCode shared.SchemeOauth2AuthorizationCode `security:"scheme,type=oauth2"`
-}
-
 type FetchUploadStatusesSecurity struct {
-	Option1 *FetchUploadStatusesSecurityOption1 `security:"option"`
-	Option2 *FetchUploadStatusesSecurityOption2 `security:"option"`
+	APIKey                  *shared.SchemeAPIKey                  `security:"scheme,type=apiKey,subtype=header"`
+	Oauth2AuthorizationCode *shared.SchemeOauth2AuthorizationCode `security:"scheme,type=oauth2"`
 }
 
 type FetchUploadStatusesRequest struct {

@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MavenArtifact } from "./mavenartifact";
 import { ArtifactObjects } from "./artifactobjects";
 import { PythonPackage } from "./pythonpackage";
+
 
 
 // Artifacts
@@ -10,15 +10,15 @@ import { PythonPackage } from "./pythonpackage";
  * Artifacts produced by a build that should be uploaded upon successful completion of all build steps.
 **/
 export class Artifacts extends SpeakeasyBase {
-  @Metadata({ data: "json, name=images" })
+  @SpeakeasyMetadata({ data: "json, name=images" })
   images?: string[];
 
-  @Metadata({ data: "json, name=mavenArtifacts", elemType: shared.MavenArtifact })
+  @SpeakeasyMetadata({ data: "json, name=mavenArtifacts", elemType: MavenArtifact })
   mavenArtifacts?: MavenArtifact[];
 
-  @Metadata({ data: "json, name=objects" })
+  @SpeakeasyMetadata({ data: "json, name=objects" })
   objects?: ArtifactObjects;
 
-  @Metadata({ data: "json, name=pythonPackages", elemType: shared.PythonPackage })
+  @SpeakeasyMetadata({ data: "json, name=pythonPackages", elemType: PythonPackage })
   pythonPackages?: PythonPackage[];
 }

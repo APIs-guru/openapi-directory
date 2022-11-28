@@ -1,48 +1,49 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum GetFacilityIdsTypeEnum {
-    Health = "health"
-,    Cemetery = "cemetery"
-,    Benefits = "benefits"
-,    VetCenter = "vet_center"
+    Health = "health",
+    Cemetery = "cemetery",
+    Benefits = "benefits",
+    VetCenter = "vet_center"
 }
 
 
 export class GetFacilityIdsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=type" })
   type?: GetFacilityIdsTypeEnum;
 }
 
 
 export class GetFacilityIdsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   apikey: shared.SchemeApikey;
 }
 
 
 export class GetFacilityIdsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetFacilityIdsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetFacilityIdsSecurity;
 }
 
 
 export class GetFacilityIdsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiError?: shared.ApiError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   facilitiesIdsResponse?: shared.FacilitiesIdsResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   genericError?: shared.GenericError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

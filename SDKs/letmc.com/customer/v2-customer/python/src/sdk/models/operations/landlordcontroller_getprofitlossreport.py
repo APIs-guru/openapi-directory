@@ -5,23 +5,23 @@ from sdk.models import shared
 
 @dataclass
 class LandlordControllerGetProfitLossReportPathParams:
-    short_name: str = field(default=None, metadata={'path_param': { 'field_name': 'shortName', 'style': 'simple', 'explode': False }})
+    short_name: str = field(metadata={'path_param': { 'field_name': 'shortName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class LandlordControllerGetProfitLossReportQueryParams:
-    token: str = field(default=None, metadata={'query_param': { 'field_name': 'token', 'style': 'form', 'explode': True }})
+    token: str = field(metadata={'query_param': { 'field_name': 'token', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class LandlordControllerGetProfitLossReportRequest:
-    path_params: LandlordControllerGetProfitLossReportPathParams = field(default=None)
-    query_params: LandlordControllerGetProfitLossReportQueryParams = field(default=None)
+    path_params: LandlordControllerGetProfitLossReportPathParams = field()
+    query_params: LandlordControllerGetProfitLossReportQueryParams = field()
     
 
 @dataclass
 class LandlordControllerGetProfitLossReportResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     landlord_profit_loss_model: Optional[shared.LandlordProfitLossModel] = field(default=None)
-    status_code: int = field(default=None)
     

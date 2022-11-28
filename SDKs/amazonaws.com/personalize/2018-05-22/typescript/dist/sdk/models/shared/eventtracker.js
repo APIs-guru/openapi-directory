@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // EventTracker
 /**
  * Provides information about an event tracker.
@@ -33,35 +33,35 @@ var EventTracker = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=accountId" }),
+        SpeakeasyMetadata({ data: "json, name=accountId" }),
         __metadata("design:type", String)
     ], EventTracker.prototype, "accountId", void 0);
     __decorate([
-        Metadata({ data: "json, name=creationDateTime" }),
+        SpeakeasyMetadata({ data: "json, name=creationDateTime" }),
         __metadata("design:type", Date)
     ], EventTracker.prototype, "creationDateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=datasetGroupArn" }),
+        SpeakeasyMetadata({ data: "json, name=datasetGroupArn" }),
         __metadata("design:type", String)
     ], EventTracker.prototype, "datasetGroupArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=eventTrackerArn" }),
+        SpeakeasyMetadata({ data: "json, name=eventTrackerArn" }),
         __metadata("design:type", String)
     ], EventTracker.prototype, "eventTrackerArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastUpdatedDateTime" }),
+        SpeakeasyMetadata({ data: "json, name=lastUpdatedDateTime" }),
         __metadata("design:type", Date)
     ], EventTracker.prototype, "lastUpdatedDateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], EventTracker.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], EventTracker.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=trackingId" }),
+        SpeakeasyMetadata({ data: "json, name=trackingId" }),
         __metadata("design:type", String)
     ], EventTracker.prototype, "trackingId", void 0);
     return EventTracker;

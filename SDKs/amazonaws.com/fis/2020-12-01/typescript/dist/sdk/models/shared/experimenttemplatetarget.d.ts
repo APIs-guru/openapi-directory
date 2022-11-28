@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ExperimentTemplateTargetFilter } from "./experimenttemplatetargetfilter";
 /**
  * Describes a target for an experiment template.

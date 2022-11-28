@@ -1,18 +1,23 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
 from dataclasses_json import dataclass_json
-from . import dynamiclistenerstate
-from . import dynamiclistenerstate
-from . import updatefailurestate
-from . import dynamiclistenerstate
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DynamicListener:
-    active_state: Optional[dynamiclistenerstate.DynamicListenerState] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'activeState' }})
-    draining_state: Optional[dynamiclistenerstate.DynamicListenerState] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'drainingState' }})
-    error_state: Optional[updatefailurestate.UpdateFailureState] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorState' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    warming_state: Optional[dynamiclistenerstate.DynamicListenerState] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'warmingState' }})
+    r"""DynamicListener
+    Describes a dynamically loaded listener via the LDS API. [#next-free-field: 6]
+    """
+    
+    active_state: Optional[DynamicListenerState] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('activeState') }})
+    draining_state: Optional[DynamicListenerState] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('drainingState') }})
+    error_state: Optional[UpdateFailureState] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorState') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    warming_state: Optional[DynamicListenerState] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('warmingState') }})
     

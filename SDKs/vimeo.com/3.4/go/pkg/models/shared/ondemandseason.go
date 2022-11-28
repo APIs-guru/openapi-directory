@@ -1,5 +1,7 @@
 package shared
 
+// OnDemandSeasonMetadataConnectionsVideos
+// The Videos connection.
 type OnDemandSeasonMetadataConnectionsVideos struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
@@ -28,125 +30,167 @@ const (
 	OnDemandSeasonUserAccountEnumProducer     OnDemandSeasonUserAccountEnum = "producer"
 )
 
+// OnDemandSeasonUserMetadataConnectionsAlbums
+// Information about the albums created by this user.
 type OnDemandSeasonUserMetadataConnectionsAlbums struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// OnDemandSeasonUserMetadataConnectionsAppearances
+// Information about the appearances of this user in other videos.
 type OnDemandSeasonUserMetadataConnectionsAppearances struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// OnDemandSeasonUserMetadataConnectionsBlock
+// Information on the users that the current user has blocked. This data requires a bearer token with the `private` scope.
 type OnDemandSeasonUserMetadataConnectionsBlock struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// OnDemandSeasonUserMetadataConnectionsCategories
+// Information about this user's followed categories.
 type OnDemandSeasonUserMetadataConnectionsCategories struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// OnDemandSeasonUserMetadataConnectionsChannels
+// Information about this user's subscribed channels.
 type OnDemandSeasonUserMetadataConnectionsChannels struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// OnDemandSeasonUserMetadataConnectionsFeed
+// Information about this user's feed.
 type OnDemandSeasonUserMetadataConnectionsFeed struct {
 	Options []string `json:"options"`
 	URI     string   `json:"uri"`
 }
 
+// OnDemandSeasonUserMetadataConnectionsFolders
+// Information about this user's folders.
 type OnDemandSeasonUserMetadataConnectionsFolders struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// OnDemandSeasonUserMetadataConnectionsFollowers
+// Information about the user's followers.
 type OnDemandSeasonUserMetadataConnectionsFollowers struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// OnDemandSeasonUserMetadataConnectionsFollowing
+// Information about the users that the current user is following.
 type OnDemandSeasonUserMetadataConnectionsFollowing struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// OnDemandSeasonUserMetadataConnectionsGroups
+// Information about the groups created by this user.
 type OnDemandSeasonUserMetadataConnectionsGroups struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// OnDemandSeasonUserMetadataConnectionsLikes
+// Information about the videos that this user has liked.
 type OnDemandSeasonUserMetadataConnectionsLikes struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// OnDemandSeasonUserMetadataConnectionsModeratedChannels
+// Information about the channels that this user moderates.
 type OnDemandSeasonUserMetadataConnectionsModeratedChannels struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// OnDemandSeasonUserMetadataConnectionsPictures
+// Information about this user's portraits.
 type OnDemandSeasonUserMetadataConnectionsPictures struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// OnDemandSeasonUserMetadataConnectionsPortfolios
+// Information about this user's portfolios.
 type OnDemandSeasonUserMetadataConnectionsPortfolios struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// OnDemandSeasonUserMetadataConnectionsRecommendedChannels
+// A collection of recommended channels for the current user to follow. This data requires a bearer token with the `private` scope.
 type OnDemandSeasonUserMetadataConnectionsRecommendedChannels struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// OnDemandSeasonUserMetadataConnectionsRecommendedUsers
+// A Collection of recommended users for the current user to follow. This data requires a bearer token with the `private` scope.
 type OnDemandSeasonUserMetadataConnectionsRecommendedUsers struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// OnDemandSeasonUserMetadataConnectionsShared
+// Information about the videos that have been shared with this user.
 type OnDemandSeasonUserMetadataConnectionsShared struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// OnDemandSeasonUserMetadataConnectionsVideos
+// Information about the videos uploaded by this user.
 type OnDemandSeasonUserMetadataConnectionsVideos struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// OnDemandSeasonUserMetadataConnectionsWatchedVideos
+// Information about the videos that this user has watched.
 type OnDemandSeasonUserMetadataConnectionsWatchedVideos struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// OnDemandSeasonUserMetadataConnectionsWatchlater
+// Information about the videos that this user wants to watch later.
 type OnDemandSeasonUserMetadataConnectionsWatchlater struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// OnDemandSeasonUserMetadataConnections
+// The list of resource URIs related to the user.
 type OnDemandSeasonUserMetadataConnections struct {
 	Albums              OnDemandSeasonUserMetadataConnectionsAlbums              `json:"albums"`
 	Appearances         OnDemandSeasonUserMetadataConnectionsAppearances         `json:"appearances"`
@@ -175,6 +219,8 @@ type OnDemandSeasonUserMetadataInteractionsAddPrivacyUser struct {
 	URI     *string  `json:"uri,omitempty"`
 }
 
+// OnDemandSeasonUserMetadataInteractionsBlock
+// Information related to the block status of this user.
 type OnDemandSeasonUserMetadataInteractionsBlock struct {
 	Added     bool     `json:"added"`
 	AddedTime string   `json:"added_time"`
@@ -182,12 +228,16 @@ type OnDemandSeasonUserMetadataInteractionsBlock struct {
 	URI       string   `json:"uri"`
 }
 
+// OnDemandSeasonUserMetadataInteractionsFollow
+// Information related to the followed status of this user.
 type OnDemandSeasonUserMetadataInteractionsFollow struct {
 	Added   bool     `json:"added"`
 	Options []string `json:"options"`
 	URI     string   `json:"uri"`
 }
 
+// OnDemandSeasonUserMetadataInteractionsReport
+// Information regarding where and how to report a user.
 type OnDemandSeasonUserMetadataInteractionsReport struct {
 	Options []string `json:"options"`
 	Reason  []string `json:"reason"`
@@ -201,6 +251,8 @@ type OnDemandSeasonUserMetadataInteractions struct {
 	Report         OnDemandSeasonUserMetadataInteractionsReport          `json:"report"`
 }
 
+// OnDemandSeasonUserMetadata
+// The user's metadata.
 type OnDemandSeasonUserMetadata struct {
 	Connections  OnDemandSeasonUserMetadataConnections  `json:"connections"`
 	Interactions OnDemandSeasonUserMetadataInteractions `json:"interactions"`
@@ -250,12 +302,16 @@ type OnDemandSeasonUserPreferences struct {
 	Videos *OnDemandSeasonUserPreferencesVideos `json:"videos,omitempty"`
 }
 
+// OnDemandSeasonUserUploadQuotaLifetime
+// Information about the user's lifetime upload usage.
 type OnDemandSeasonUserUploadQuotaLifetime struct {
 	Free float64 `json:"free"`
 	Max  float64 `json:"max"`
 	Used float64 `json:"used"`
 }
 
+// OnDemandSeasonUserUploadQuotaPeriodic
+// Information about the user's usage for the current period.
 type OnDemandSeasonUserUploadQuotaPeriodic struct {
 	Free      float64 `json:"free"`
 	Max       float64 `json:"max"`
@@ -270,6 +326,8 @@ const (
 	OnDemandSeasonUserUploadQuotaSpaceShowingEnumPeriodic OnDemandSeasonUserUploadQuotaSpaceShowingEnum = "periodic"
 )
 
+// OnDemandSeasonUserUploadQuotaSpace
+// Information about the user's upload space remaining for the current period.
 type OnDemandSeasonUserUploadQuotaSpace struct {
 	Free    float64                                       `json:"free"`
 	Max     float64                                       `json:"max"`
@@ -277,6 +335,8 @@ type OnDemandSeasonUserUploadQuotaSpace struct {
 	Used    float64                                       `json:"used"`
 }
 
+// OnDemandSeasonUserUploadQuota
+// Appears only when the user has upload access and is looking at their own user record.
 type OnDemandSeasonUserUploadQuota struct {
 	Lifetime OnDemandSeasonUserUploadQuotaLifetime `json:"lifetime"`
 	Periodic OnDemandSeasonUserUploadQuotaPeriodic `json:"periodic"`
@@ -289,6 +349,8 @@ type OnDemandSeasonUserWebsites struct {
 	Name        string `json:"name"`
 }
 
+// OnDemandSeasonUser
+// The creator of this On Demand page.
 type OnDemandSeasonUser struct {
 	Account       OnDemandSeasonUserAccountEnum  `json:"account"`
 	Bio           string                         `json:"bio"`

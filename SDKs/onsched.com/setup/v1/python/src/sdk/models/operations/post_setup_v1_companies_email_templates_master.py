@@ -18,7 +18,7 @@ class PostSetupV1CompaniesEmailTemplatesMasterRequest:
 
 @dataclass
 class PostSetupV1CompaniesEmailTemplatesMasterResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     master_email_template_settings_view_model: Optional[shared.MasterEmailTemplateSettingsViewModel] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProvisionedConcurrencyStatusEnumEnum } from "./provisionedconcurrencystatusenumenum";
 var PutProvisionedConcurrencyConfigResponse = /** @class */ (function (_super) {
     __extends(PutProvisionedConcurrencyConfigResponse, _super);
@@ -30,27 +30,27 @@ var PutProvisionedConcurrencyConfigResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AllocatedProvisionedConcurrentExecutions" }),
+        SpeakeasyMetadata({ data: "json, name=AllocatedProvisionedConcurrentExecutions" }),
         __metadata("design:type", Number)
     ], PutProvisionedConcurrencyConfigResponse.prototype, "allocatedProvisionedConcurrentExecutions", void 0);
     __decorate([
-        Metadata({ data: "json, name=AvailableProvisionedConcurrentExecutions" }),
+        SpeakeasyMetadata({ data: "json, name=AvailableProvisionedConcurrentExecutions" }),
         __metadata("design:type", Number)
     ], PutProvisionedConcurrencyConfigResponse.prototype, "availableProvisionedConcurrentExecutions", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastModified" }),
+        SpeakeasyMetadata({ data: "json, name=LastModified" }),
         __metadata("design:type", String)
     ], PutProvisionedConcurrencyConfigResponse.prototype, "lastModified", void 0);
     __decorate([
-        Metadata({ data: "json, name=RequestedProvisionedConcurrentExecutions" }),
+        SpeakeasyMetadata({ data: "json, name=RequestedProvisionedConcurrentExecutions" }),
         __metadata("design:type", Number)
     ], PutProvisionedConcurrencyConfigResponse.prototype, "requestedProvisionedConcurrentExecutions", void 0);
     __decorate([
-        Metadata({ data: "json, name=Status" }),
+        SpeakeasyMetadata({ data: "json, name=Status" }),
         __metadata("design:type", String)
     ], PutProvisionedConcurrencyConfigResponse.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=StatusReason" }),
+        SpeakeasyMetadata({ data: "json, name=StatusReason" }),
         __metadata("design:type", String)
     ], PutProvisionedConcurrencyConfigResponse.prototype, "statusReason", void 0);
     return PutProvisionedConcurrencyConfigResponse;

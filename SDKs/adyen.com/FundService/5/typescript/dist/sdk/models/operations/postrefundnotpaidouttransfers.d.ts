@@ -1,14 +1,8 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export declare class PostRefundNotPaidOutTransfersSecurityOption1 extends SpeakeasyBase {
-    basicAuth: shared.SchemeBasicAuth;
-}
-export declare class PostRefundNotPaidOutTransfersSecurityOption2 extends SpeakeasyBase {
-    apiKeyAuth: shared.SchemeApiKeyAuth;
-}
 export declare class PostRefundNotPaidOutTransfersSecurity extends SpeakeasyBase {
-    option1?: PostRefundNotPaidOutTransfersSecurityOption1;
-    option2?: PostRefundNotPaidOutTransfersSecurityOption2;
+    basicAuth?: shared.SchemeBasicAuth;
+    apiKeyAuth?: shared.SchemeApiKeyAuth;
 }
 export declare class PostRefundNotPaidOutTransfersRequest extends SpeakeasyBase {
     request?: any;

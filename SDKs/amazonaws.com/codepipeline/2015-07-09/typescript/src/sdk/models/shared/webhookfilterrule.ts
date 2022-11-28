@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // WebhookFilterRule
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The event criteria that specify when a webhook notification is sent to your URL.
 **/
 export class WebhookFilterRule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=jsonPath" })
+  @SpeakeasyMetadata({ data: "json, name=jsonPath" })
   jsonPath: string;
 
-  @Metadata({ data: "json, name=matchEquals" })
+  @SpeakeasyMetadata({ data: "json, name=matchEquals" })
   matchEquals?: string;
 }

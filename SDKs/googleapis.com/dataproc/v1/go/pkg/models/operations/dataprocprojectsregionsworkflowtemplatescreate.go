@@ -30,7 +30,7 @@ type DataprocProjectsRegionsWorkflowTemplatesCreateSecurity struct {
 type DataprocProjectsRegionsWorkflowTemplatesCreateRequest struct {
 	PathParams  DataprocProjectsRegionsWorkflowTemplatesCreatePathParams
 	QueryParams DataprocProjectsRegionsWorkflowTemplatesCreateQueryParams
-	Request     *shared.WorkflowTemplate `request:"mediaType=application/json"`
+	Request     *shared.WorkflowTemplateInput `request:"mediaType=application/json"`
 	Security    DataprocProjectsRegionsWorkflowTemplatesCreateSecurity
 }
 

@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LandlordMaintenanceCertificateModel } from "./landlordmaintenancecertificatemodel";
 import { LettingsLandlordDocument } from "./lettingslandlorddocument";
 import { LandlordLettingsInspectionModel } from "./landlordlettingsinspectionmodel";
 import { LandlordMaintenancePreferenceModel } from "./landlordmaintenancepreferencemodel";
+
 
 
 // LandlordTenancyModel
@@ -11,63 +11,63 @@ import { LandlordMaintenancePreferenceModel } from "./landlordmaintenanceprefere
  * Landlord Tenancy Model.
 **/
 export class LandlordTenancyModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ActualEndDate" })
+  @SpeakeasyMetadata({ data: "json, name=ActualEndDate" })
   actualEndDate?: Date;
 
-  @Metadata({ data: "json, name=Beds" })
+  @SpeakeasyMetadata({ data: "json, name=Beds" })
   beds?: number;
 
-  @Metadata({ data: "json, name=Bond" })
+  @SpeakeasyMetadata({ data: "json, name=Bond" })
   bond?: number;
 
-  @Metadata({ data: "json, name=BranchID" })
+  @SpeakeasyMetadata({ data: "json, name=BranchID" })
   branchId?: string;
 
-  @Metadata({ data: "json, name=Certificates", elemType: shared.LandlordMaintenanceCertificateModel })
+  @SpeakeasyMetadata({ data: "json, name=Certificates", elemType: LandlordMaintenanceCertificateModel })
   certificates?: LandlordMaintenanceCertificateModel[];
 
-  @Metadata({ data: "json, name=Documents", elemType: shared.LettingsLandlordDocument })
+  @SpeakeasyMetadata({ data: "json, name=Documents", elemType: LettingsLandlordDocument })
   documents?: LettingsLandlordDocument[];
 
-  @Metadata({ data: "json, name=FixedDate" })
+  @SpeakeasyMetadata({ data: "json, name=FixedDate" })
   fixedDate?: Date;
 
-  @Metadata({ data: "json, name=GlobalReference" })
+  @SpeakeasyMetadata({ data: "json, name=GlobalReference" })
   globalReference?: string;
 
-  @Metadata({ data: "json, name=ID" })
+  @SpeakeasyMetadata({ data: "json, name=ID" })
   id?: string;
 
-  @Metadata({ data: "json, name=Inspections", elemType: shared.LandlordLettingsInspectionModel })
+  @SpeakeasyMetadata({ data: "json, name=Inspections", elemType: LandlordLettingsInspectionModel })
   inspections?: LandlordLettingsInspectionModel[];
 
-  @Metadata({ data: "json, name=ManagedRent" })
+  @SpeakeasyMetadata({ data: "json, name=ManagedRent" })
   managedRent?: boolean;
 
-  @Metadata({ data: "json, name=Preferences", elemType: shared.LandlordMaintenancePreferenceModel })
+  @SpeakeasyMetadata({ data: "json, name=Preferences", elemType: LandlordMaintenancePreferenceModel })
   preferences?: LandlordMaintenancePreferenceModel[];
 
-  @Metadata({ data: "json, name=PreviousRentAmount" })
+  @SpeakeasyMetadata({ data: "json, name=PreviousRentAmount" })
   previousRentAmount?: number;
 
-  @Metadata({ data: "json, name=PropertyAddress" })
+  @SpeakeasyMetadata({ data: "json, name=PropertyAddress" })
   propertyAddress?: string;
 
-  @Metadata({ data: "json, name=Rent" })
+  @SpeakeasyMetadata({ data: "json, name=Rent" })
   rent?: string;
 
-  @Metadata({ data: "json, name=RentAmount" })
+  @SpeakeasyMetadata({ data: "json, name=RentAmount" })
   rentAmount?: number;
 
-  @Metadata({ data: "json, name=StartDate" })
+  @SpeakeasyMetadata({ data: "json, name=StartDate" })
   startDate?: Date;
 
-  @Metadata({ data: "json, name=TenancyProperty" })
+  @SpeakeasyMetadata({ data: "json, name=TenancyProperty" })
   tenancyProperty?: string;
 
-  @Metadata({ data: "json, name=TenancyState" })
+  @SpeakeasyMetadata({ data: "json, name=TenancyState" })
   tenancyState?: string;
 
-  @Metadata({ data: "json, name=Tenants" })
+  @SpeakeasyMetadata({ data: "json, name=Tenants" })
   tenants?: string[];
 }

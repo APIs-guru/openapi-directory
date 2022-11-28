@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Document } from "./document";
 import { Features } from "./features";
 export declare enum AnnotateTextRequestEncodingTypeEnum {

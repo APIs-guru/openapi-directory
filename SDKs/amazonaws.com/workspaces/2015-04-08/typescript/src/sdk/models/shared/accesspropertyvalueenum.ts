@@ -1,6 +1,7 @@
 
 
+
 export enum AccessPropertyValueEnum {
-    Allow = "ALLOW"
-,    Deny = "DENY"
+    Allow = "ALLOW",
+    Deny = "DENY"
 }

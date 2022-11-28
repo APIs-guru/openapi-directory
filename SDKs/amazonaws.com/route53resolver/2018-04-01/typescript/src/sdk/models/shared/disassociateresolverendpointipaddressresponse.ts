@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResolverEndpoint } from "./resolverendpoint";
 
 
+
 export class DisassociateResolverEndpointIpAddressResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ResolverEndpoint" })
+  @SpeakeasyMetadata({ data: "json, name=ResolverEndpoint" })
   resolverEndpoint?: ResolverEndpoint;
 }

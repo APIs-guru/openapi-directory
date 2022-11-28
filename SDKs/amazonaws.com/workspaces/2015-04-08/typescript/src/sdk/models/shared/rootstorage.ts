@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RootStorage
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes the root volume for a WorkSpace bundle.
 **/
 export class RootStorage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Capacity" })
+  @SpeakeasyMetadata({ data: "json, name=Capacity" })
   capacity?: string;
 }

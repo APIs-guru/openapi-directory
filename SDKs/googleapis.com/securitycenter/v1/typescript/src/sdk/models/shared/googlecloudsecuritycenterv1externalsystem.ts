@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudSecuritycenterV1ExternalSystem
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Representation of third party SIEM/SOAR fields within SCC.
 **/
 export class GoogleCloudSecuritycenterV1ExternalSystem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assignees" })
+  @SpeakeasyMetadata({ data: "json, name=assignees" })
   assignees?: string[];
 
-  @Metadata({ data: "json, name=externalSystemUpdateTime" })
+  @SpeakeasyMetadata({ data: "json, name=externalSystemUpdateTime" })
   externalSystemUpdateTime?: string;
 
-  @Metadata({ data: "json, name=externalUid" })
+  @SpeakeasyMetadata({ data: "json, name=externalUid" })
   externalUid?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 }

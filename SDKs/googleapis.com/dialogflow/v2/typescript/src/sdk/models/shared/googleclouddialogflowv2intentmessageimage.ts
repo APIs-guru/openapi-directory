@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDialogflowV2IntentMessageImage
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The image response message.
 **/
 export class GoogleCloudDialogflowV2IntentMessageImage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessibilityText" })
+  @SpeakeasyMetadata({ data: "json, name=accessibilityText" })
   accessibilityText?: string;
 
-  @Metadata({ data: "json, name=imageUri" })
+  @SpeakeasyMetadata({ data: "json, name=imageUri" })
   imageUri?: string;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// Asset
+// An asset in Google Cloud. An asset can be any resource in the Google Cloud [resource hierarchy](https://cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy), a resource outside the Google Cloud resource hierarchy (such as Google Kubernetes Engine clusters and objects), or a policy (e.g. Cloud IAM policy), or a relationship (e.g. an INSTANCE_TO_INSTANCEGROUP relationship). See [Supported asset types](https://cloud.google.com/asset-inventory/docs/supported-asset-types) for more information.
 type Asset struct {
 	AccessLevel      *GoogleIdentityAccesscontextmanagerV1AccessLevel      `json:"accessLevel,omitempty"`
 	AccessPolicy     *GoogleIdentityAccesscontextmanagerV1AccessPolicy     `json:"accessPolicy,omitempty"`

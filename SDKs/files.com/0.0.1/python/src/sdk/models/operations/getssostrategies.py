@@ -11,12 +11,12 @@ class GetSsoStrategiesQueryParams:
 
 @dataclass
 class GetSsoStrategiesRequest:
-    query_params: GetSsoStrategiesQueryParams = field(default=None)
+    query_params: GetSsoStrategiesQueryParams = field()
     
 
 @dataclass
 class GetSsoStrategiesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     sso_strategy_entities: Optional[List[shared.SsoStrategyEntity]] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudRetailV2alphaCustomAttribute } from "./googlecloudretailv2alphacustomattribute";
+
 
 
 // GoogleCloudRetailV2alphaCompleteQueryResponseCompletionResult
@@ -8,9 +8,9 @@ import { GoogleCloudRetailV2alphaCustomAttribute } from "./googlecloudretailv2al
  * Resource that represents completion results.
 **/
 export class GoogleCloudRetailV2alphaCompleteQueryResponseCompletionResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attributes", elemType: shared.GoogleCloudRetailV2alphaCustomAttribute })
+  @SpeakeasyMetadata({ data: "json, name=attributes", elemType: GoogleCloudRetailV2alphaCustomAttribute })
   attributes?: Map<string, GoogleCloudRetailV2alphaCustomAttribute>;
 
-  @Metadata({ data: "json, name=suggestion" })
+  @SpeakeasyMetadata({ data: "json, name=suggestion" })
   suggestion?: string;
 }

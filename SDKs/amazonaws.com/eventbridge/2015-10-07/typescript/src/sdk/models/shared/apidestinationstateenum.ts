@@ -1,6 +1,7 @@
 
 
+
 export enum ApiDestinationStateEnum {
-    Active = "ACTIVE"
-,    Inactive = "INACTIVE"
+    Active = "ACTIVE",
+    Inactive = "INACTIVE"
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleAppsDriveLabelsV2betaListLimits
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Limits for list-variant of a Field type.
 **/
 export class GoogleAppsDriveLabelsV2betaListLimits extends SpeakeasyBase {
-  @Metadata({ data: "json, name=maxEntries" })
+  @SpeakeasyMetadata({ data: "json, name=maxEntries" })
   maxEntries?: number;
 }

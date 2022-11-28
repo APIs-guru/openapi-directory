@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import indexattachment
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BatchListIndexResponse:
-    index_attachments: Optional[List[indexattachment.IndexAttachment]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IndexAttachments' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
+    r"""BatchListIndexResponse
+    Represents the output of a <a>ListIndex</a> response operation.
+    """
+    
+    index_attachments: Optional[List[IndexAttachment]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('IndexAttachments') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
     

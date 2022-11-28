@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Capacity } from "./capacity";
 import { UnlockStateEnum } from "./unlockstateenum";
 import { PhysicalNetworkInterface } from "./physicalnetworkinterface";

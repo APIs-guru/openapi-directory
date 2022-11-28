@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OrgClassificationEnum } from "./orgclassificationenum";
 
 
+
 export class CurrentRole extends SpeakeasyBase {
-  @Metadata({ data: "json, name=district" })
+  @SpeakeasyMetadata({ data: "json, name=district" })
   district?: any;
 
-  @Metadata({ data: "json, name=division_id" })
+  @SpeakeasyMetadata({ data: "json, name=division_id" })
   divisionId?: string;
 
-  @Metadata({ data: "json, name=org_classification" })
+  @SpeakeasyMetadata({ data: "json, name=org_classification" })
   orgClassification: OrgClassificationEnum;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title: string;
 }

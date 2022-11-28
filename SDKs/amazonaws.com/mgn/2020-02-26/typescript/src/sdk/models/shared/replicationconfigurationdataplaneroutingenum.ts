@@ -1,6 +1,7 @@
 
 
+
 export enum ReplicationConfigurationDataPlaneRoutingEnum {
-    PrivateIp = "PRIVATE_IP"
-,    PublicIp = "PUBLIC_IP"
+    PrivateIp = "PRIVATE_IP",
+    PublicIp = "PUBLIC_IP"
 }

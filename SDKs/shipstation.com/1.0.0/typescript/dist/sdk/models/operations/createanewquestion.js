@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var CreateANewQuestionRequestBody = /** @class */ (function (_super) {
     __extends(CreateANewQuestionRequestBody, _super);
     function CreateANewQuestionRequestBody() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=choices" }),
+        SpeakeasyMetadata({ data: "json, name=choices" }),
         __metadata("design:type", Array)
     ], CreateANewQuestionRequestBody.prototype, "choices", void 0);
     __decorate([
-        Metadata({ data: "json, name=question" }),
+        SpeakeasyMetadata({ data: "json, name=question" }),
         __metadata("design:type", String)
     ], CreateANewQuestionRequestBody.prototype, "question", void 0);
     return CreateANewQuestionRequestBody;
@@ -45,7 +45,7 @@ var CreateANewQuestionRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", CreateANewQuestionRequestBody)
     ], CreateANewQuestionRequest.prototype, "request", void 0);
     return CreateANewQuestionRequest;
@@ -57,15 +57,15 @@ var CreateANewQuestionResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CreateANewQuestionResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], CreateANewQuestionResponse.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CreateANewQuestionResponse.prototype, "statusCode", void 0);
     return CreateANewQuestionResponse;

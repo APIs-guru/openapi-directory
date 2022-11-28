@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ShareMethodEnum } from "./sharemethodenum";
 import { ShareTarget } from "./sharetarget";
 export declare class ShareDirectoryRequest extends SpeakeasyBase {

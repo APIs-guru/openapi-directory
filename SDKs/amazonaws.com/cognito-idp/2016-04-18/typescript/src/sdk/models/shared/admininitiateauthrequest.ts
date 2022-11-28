@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AnalyticsMetadataType } from "./analyticsmetadatatype";
 import { AuthFlowTypeEnum } from "./authflowtypeenum";
 import { ContextDataType } from "./contextdatatype";
+
 
 
 // AdminInitiateAuthRequest
@@ -9,24 +10,24 @@ import { ContextDataType } from "./contextdatatype";
  * Initiates the authorization request, as an administrator.
 **/
 export class AdminInitiateAuthRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AnalyticsMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=AnalyticsMetadata" })
   analyticsMetadata?: AnalyticsMetadataType;
 
-  @Metadata({ data: "json, name=AuthFlow" })
+  @SpeakeasyMetadata({ data: "json, name=AuthFlow" })
   authFlow: AuthFlowTypeEnum;
 
-  @Metadata({ data: "json, name=AuthParameters" })
+  @SpeakeasyMetadata({ data: "json, name=AuthParameters" })
   authParameters?: Map<string, string>;
 
-  @Metadata({ data: "json, name=ClientId" })
+  @SpeakeasyMetadata({ data: "json, name=ClientId" })
   clientId: string;
 
-  @Metadata({ data: "json, name=ClientMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=ClientMetadata" })
   clientMetadata?: Map<string, string>;
 
-  @Metadata({ data: "json, name=ContextData" })
+  @SpeakeasyMetadata({ data: "json, name=ContextData" })
   contextData?: ContextDataType;
 
-  @Metadata({ data: "json, name=UserPoolId" })
+  @SpeakeasyMetadata({ data: "json, name=UserPoolId" })
   userPoolId: string;
 }

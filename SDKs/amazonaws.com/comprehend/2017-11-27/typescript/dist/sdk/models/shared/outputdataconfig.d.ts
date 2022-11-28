@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * <p>Provides configuration parameters for the output of topic detection jobs.</p> <p/>
 **/

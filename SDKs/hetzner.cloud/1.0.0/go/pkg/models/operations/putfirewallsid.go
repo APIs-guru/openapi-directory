@@ -9,11 +9,6 @@ type PutFirewallsIDUpdateFirewallRequest struct {
 	Name   *string                `json:"name,omitempty"`
 }
 
-type PutFirewallsIDRequest struct {
-	PathParams PutFirewallsIDPathParams
-	Request    *PutFirewallsIDUpdateFirewallRequest `request:"mediaType=application/json"`
-}
-
 type PutFirewallsIDFirewallResponseFirewallAppliedToAppliedToResourcesServer struct {
 	ID int64 `json:"id"`
 }
@@ -88,6 +83,11 @@ type PutFirewallsIDFirewallResponseFirewall struct {
 
 type PutFirewallsIDFirewallResponse struct {
 	Firewall PutFirewallsIDFirewallResponseFirewall `json:"firewall"`
+}
+
+type PutFirewallsIDRequest struct {
+	PathParams PutFirewallsIDPathParams
+	Request    *PutFirewallsIDUpdateFirewallRequest `request:"mediaType=application/json"`
 }
 
 type PutFirewallsIDResponse struct {

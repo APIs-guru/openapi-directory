@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GoogleFirebaseAppcheckV1AppCheckToken } from "./googlefirebaseappcheckv1appchecktoken";
 /**
  * Response message for the ExchangeAppAttestAttestation method.

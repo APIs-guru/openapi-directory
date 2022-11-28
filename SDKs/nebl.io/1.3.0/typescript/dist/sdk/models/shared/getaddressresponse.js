@@ -22,58 +22,58 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetAddressResponse = /** @class */ (function (_super) {
     __extends(GetAddressResponse, _super);
     function GetAddressResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=addrStr" }),
+        SpeakeasyMetadata({ data: "json, name=addrStr" }),
         __metadata("design:type", String)
     ], GetAddressResponse.prototype, "addrStr", void 0);
     __decorate([
-        Metadata({ data: "json, name=balance" }),
+        SpeakeasyMetadata({ data: "json, name=balance" }),
         __metadata("design:type", Number)
     ], GetAddressResponse.prototype, "balance", void 0);
     __decorate([
-        Metadata({ data: "json, name=balanceSat" }),
+        SpeakeasyMetadata({ data: "json, name=balanceSat" }),
         __metadata("design:type", Number)
     ], GetAddressResponse.prototype, "balanceSat", void 0);
     __decorate([
-        Metadata({ data: "json, name=totalReceived" }),
+        SpeakeasyMetadata({ data: "json, name=totalReceived" }),
         __metadata("design:type", Number)
     ], GetAddressResponse.prototype, "totalReceived", void 0);
     __decorate([
-        Metadata({ data: "json, name=totalReceivedSat" }),
+        SpeakeasyMetadata({ data: "json, name=totalReceivedSat" }),
         __metadata("design:type", Number)
     ], GetAddressResponse.prototype, "totalReceivedSat", void 0);
     __decorate([
-        Metadata({ data: "json, name=totalSent" }),
+        SpeakeasyMetadata({ data: "json, name=totalSent" }),
         __metadata("design:type", Number)
     ], GetAddressResponse.prototype, "totalSent", void 0);
     __decorate([
-        Metadata({ data: "json, name=totalSentSat" }),
+        SpeakeasyMetadata({ data: "json, name=totalSentSat" }),
         __metadata("design:type", Number)
     ], GetAddressResponse.prototype, "totalSentSat", void 0);
     __decorate([
-        Metadata({ data: "json, name=transactions" }),
+        SpeakeasyMetadata({ data: "json, name=transactions" }),
         __metadata("design:type", Array)
     ], GetAddressResponse.prototype, "transactions", void 0);
     __decorate([
-        Metadata({ data: "json, name=txAppearances" }),
+        SpeakeasyMetadata({ data: "json, name=txAppearances" }),
         __metadata("design:type", Number)
     ], GetAddressResponse.prototype, "txAppearances", void 0);
     __decorate([
-        Metadata({ data: "json, name=unconfirmedBalance" }),
+        SpeakeasyMetadata({ data: "json, name=unconfirmedBalance" }),
         __metadata("design:type", Number)
     ], GetAddressResponse.prototype, "unconfirmedBalance", void 0);
     __decorate([
-        Metadata({ data: "json, name=unconfirmedBalanceSat" }),
+        SpeakeasyMetadata({ data: "json, name=unconfirmedBalanceSat" }),
         __metadata("design:type", Number)
     ], GetAddressResponse.prototype, "unconfirmedBalanceSat", void 0);
     __decorate([
-        Metadata({ data: "json, name=unconfirmedTxAppearances" }),
+        SpeakeasyMetadata({ data: "json, name=unconfirmedTxAppearances" }),
         __metadata("design:type", Number)
     ], GetAddressResponse.prototype, "unconfirmedTxAppearances", void 0);
     return GetAddressResponse;

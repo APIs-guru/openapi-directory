@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import googlecloudidentitytoolkitadminv2requestlogging
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleCloudIdentitytoolkitAdminV2MonitoringConfig:
-    request_logging: Optional[googlecloudidentitytoolkitadminv2requestlogging.GoogleCloudIdentitytoolkitAdminV2RequestLogging] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'requestLogging' }})
+    r"""GoogleCloudIdentitytoolkitAdminV2MonitoringConfig
+    Configuration related to monitoring project activity.
+    """
+    
+    request_logging: Optional[GoogleCloudIdentitytoolkitAdminV2RequestLogging] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('requestLogging') }})
     

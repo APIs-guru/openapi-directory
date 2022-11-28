@@ -19,6 +19,8 @@ const (
 	SummaryIdentityStatusEnumDead     SummaryIdentityStatusEnum = "dead"
 )
 
+// Summary
+// Represents a background check summary
 type Summary struct {
 	DateOfBirth    *time.Time                 `json:"date_of_birth,omitempty"`
 	DeathDate      *time.Time                 `json:"death_date,omitempty"`

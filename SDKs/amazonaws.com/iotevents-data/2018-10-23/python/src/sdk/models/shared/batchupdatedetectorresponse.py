@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import batchupdatedetectorerrorentry
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BatchUpdateDetectorResponse:
-    batch_update_detector_error_entries: Optional[List[batchupdatedetectorerrorentry.BatchUpdateDetectorErrorEntry]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'batchUpdateDetectorErrorEntries' }})
+    batch_update_detector_error_entries: Optional[List[BatchUpdateDetectorErrorEntry]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('batchUpdateDetectorErrorEntries') }})
     

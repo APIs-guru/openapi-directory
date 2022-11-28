@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ErrorStatistics
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about requests that failed with a 4xx Client Error status code.
 **/
 export class ErrorStatistics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=OtherCount" })
+  @SpeakeasyMetadata({ data: "json, name=OtherCount" })
   otherCount?: number;
 
-  @Metadata({ data: "json, name=ThrottleCount" })
+  @SpeakeasyMetadata({ data: "json, name=ThrottleCount" })
   throttleCount?: number;
 
-  @Metadata({ data: "json, name=TotalCount" })
+  @SpeakeasyMetadata({ data: "json, name=TotalCount" })
   totalCount?: number;
 }

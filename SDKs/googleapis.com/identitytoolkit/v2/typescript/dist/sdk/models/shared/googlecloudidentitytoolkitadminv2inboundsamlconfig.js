@@ -22,9 +22,42 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudIdentitytoolkitAdminV2IdpConfig } from "./googlecloudidentitytoolkitadminv2idpconfig";
+import { GoogleCloudIdentitytoolkitAdminV2SpConfigInput } from "./googlecloudidentitytoolkitadminv2spconfig";
 import { GoogleCloudIdentitytoolkitAdminV2SpConfig } from "./googlecloudidentitytoolkitadminv2spconfig";
+// GoogleCloudIdentitytoolkitAdminV2InboundSamlConfigInput
+/**
+ * A pair of SAML RP-IDP configurations when the project acts as the relying party.
+**/
+var GoogleCloudIdentitytoolkitAdminV2InboundSamlConfigInput = /** @class */ (function (_super) {
+    __extends(GoogleCloudIdentitytoolkitAdminV2InboundSamlConfigInput, _super);
+    function GoogleCloudIdentitytoolkitAdminV2InboundSamlConfigInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
+        __metadata("design:type", String)
+    ], GoogleCloudIdentitytoolkitAdminV2InboundSamlConfigInput.prototype, "displayName", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=enabled" }),
+        __metadata("design:type", Boolean)
+    ], GoogleCloudIdentitytoolkitAdminV2InboundSamlConfigInput.prototype, "enabled", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=idpConfig" }),
+        __metadata("design:type", GoogleCloudIdentitytoolkitAdminV2IdpConfig)
+    ], GoogleCloudIdentitytoolkitAdminV2InboundSamlConfigInput.prototype, "idpConfig", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=name" }),
+        __metadata("design:type", String)
+    ], GoogleCloudIdentitytoolkitAdminV2InboundSamlConfigInput.prototype, "name", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=spConfig" }),
+        __metadata("design:type", GoogleCloudIdentitytoolkitAdminV2SpConfigInput)
+    ], GoogleCloudIdentitytoolkitAdminV2InboundSamlConfigInput.prototype, "spConfig", void 0);
+    return GoogleCloudIdentitytoolkitAdminV2InboundSamlConfigInput;
+}(SpeakeasyBase));
+export { GoogleCloudIdentitytoolkitAdminV2InboundSamlConfigInput };
 // GoogleCloudIdentitytoolkitAdminV2InboundSamlConfig
 /**
  * A pair of SAML RP-IDP configurations when the project acts as the relying party.
@@ -35,23 +68,23 @@ var GoogleCloudIdentitytoolkitAdminV2InboundSamlConfig = /** @class */ (function
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=displayName" }),
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
         __metadata("design:type", String)
     ], GoogleCloudIdentitytoolkitAdminV2InboundSamlConfig.prototype, "displayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=enabled" }),
+        SpeakeasyMetadata({ data: "json, name=enabled" }),
         __metadata("design:type", Boolean)
     ], GoogleCloudIdentitytoolkitAdminV2InboundSamlConfig.prototype, "enabled", void 0);
     __decorate([
-        Metadata({ data: "json, name=idpConfig" }),
+        SpeakeasyMetadata({ data: "json, name=idpConfig" }),
         __metadata("design:type", GoogleCloudIdentitytoolkitAdminV2IdpConfig)
     ], GoogleCloudIdentitytoolkitAdminV2InboundSamlConfig.prototype, "idpConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], GoogleCloudIdentitytoolkitAdminV2InboundSamlConfig.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=spConfig" }),
+        SpeakeasyMetadata({ data: "json, name=spConfig" }),
         __metadata("design:type", GoogleCloudIdentitytoolkitAdminV2SpConfig)
     ], GoogleCloudIdentitytoolkitAdminV2InboundSamlConfig.prototype, "spConfig", void 0);
     return GoogleCloudIdentitytoolkitAdminV2InboundSamlConfig;

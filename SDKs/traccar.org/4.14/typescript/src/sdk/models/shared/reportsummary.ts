@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ReportSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=averageSpeed" })
+  @SpeakeasyMetadata({ data: "json, name=averageSpeed" })
   averageSpeed?: number;
 
-  @Metadata({ data: "json, name=deviceId" })
+  @SpeakeasyMetadata({ data: "json, name=deviceId" })
   deviceId?: number;
 
-  @Metadata({ data: "json, name=deviceName" })
+  @SpeakeasyMetadata({ data: "json, name=deviceName" })
   deviceName?: string;
 
-  @Metadata({ data: "json, name=distance" })
+  @SpeakeasyMetadata({ data: "json, name=distance" })
   distance?: number;
 
-  @Metadata({ data: "json, name=engineHours" })
+  @SpeakeasyMetadata({ data: "json, name=engineHours" })
   engineHours?: number;
 
-  @Metadata({ data: "json, name=maxSpeed" })
+  @SpeakeasyMetadata({ data: "json, name=maxSpeed" })
   maxSpeed?: number;
 
-  @Metadata({ data: "json, name=spentFuel" })
+  @SpeakeasyMetadata({ data: "json, name=spentFuel" })
   spentFuel?: number;
 }

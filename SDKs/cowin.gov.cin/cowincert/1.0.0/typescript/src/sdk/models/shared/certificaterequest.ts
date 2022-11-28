@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CertificateRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=beneficiaryId" })
+  @SpeakeasyMetadata({ data: "json, name=beneficiaryId" })
   beneficiaryId?: string;
 
-  @Metadata({ data: "json, name=mobile" })
+  @SpeakeasyMetadata({ data: "json, name=mobile" })
   mobile?: string;
 }

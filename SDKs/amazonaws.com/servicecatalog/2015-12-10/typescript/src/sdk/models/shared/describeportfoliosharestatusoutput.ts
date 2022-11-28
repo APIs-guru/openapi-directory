@@ -1,21 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ShareDetails } from "./sharedetails";
 import { ShareStatusEnum } from "./sharestatusenum";
 
 
+
 export class DescribePortfolioShareStatusOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=OrganizationNodeValue" })
+  @SpeakeasyMetadata({ data: "json, name=OrganizationNodeValue" })
   organizationNodeValue?: string;
 
-  @Metadata({ data: "json, name=PortfolioId" })
+  @SpeakeasyMetadata({ data: "json, name=PortfolioId" })
   portfolioId?: string;
 
-  @Metadata({ data: "json, name=PortfolioShareToken" })
+  @SpeakeasyMetadata({ data: "json, name=PortfolioShareToken" })
   portfolioShareToken?: string;
 
-  @Metadata({ data: "json, name=ShareDetails" })
+  @SpeakeasyMetadata({ data: "json, name=ShareDetails" })
   shareDetails?: ShareDetails;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: ShareStatusEnum;
 }

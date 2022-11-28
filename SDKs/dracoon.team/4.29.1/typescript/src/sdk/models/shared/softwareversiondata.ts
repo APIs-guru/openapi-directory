@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SoftwareVersionData
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Software version information
 **/
 export class SoftwareVersionData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=buildDate" })
+  @SpeakeasyMetadata({ data: "json, name=buildDate" })
   buildDate: Date;
 
-  @Metadata({ data: "json, name=isDracoonCloud" })
+  @SpeakeasyMetadata({ data: "json, name=isDracoonCloud" })
   isDracoonCloud?: boolean;
 
-  @Metadata({ data: "json, name=restApiVersion" })
+  @SpeakeasyMetadata({ data: "json, name=restApiVersion" })
   restApiVersion: string;
 
-  @Metadata({ data: "json, name=scmRevisionNumber" })
+  @SpeakeasyMetadata({ data: "json, name=scmRevisionNumber" })
   scmRevisionNumber: string;
 
-  @Metadata({ data: "json, name=sdsServerVersion" })
+  @SpeakeasyMetadata({ data: "json, name=sdsServerVersion" })
   sdsServerVersion: string;
 }

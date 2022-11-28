@@ -20,6 +20,8 @@ const (
 	GooglePrivacyDlpV2DlpJobTypeEnumRiskAnalysisJob       GooglePrivacyDlpV2DlpJobTypeEnum = "RISK_ANALYSIS_JOB"
 )
 
+// GooglePrivacyDlpV2DlpJob
+// Combines all of the information about a DLP job.
 type GooglePrivacyDlpV2DlpJob struct {
 	CreateTime     *string                                         `json:"createTime,omitempty"`
 	EndTime        *string                                         `json:"endTime,omitempty"`

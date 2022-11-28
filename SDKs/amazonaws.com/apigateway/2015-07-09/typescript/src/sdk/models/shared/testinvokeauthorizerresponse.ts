@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TestInvokeAuthorizerResponse
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the response of the test invoke request for a custom <a>Authorizer</a>
 **/
 export class TestInvokeAuthorizerResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authorization" })
+  @SpeakeasyMetadata({ data: "json, name=authorization" })
   authorization?: Map<string, string[]>;
 
-  @Metadata({ data: "json, name=claims" })
+  @SpeakeasyMetadata({ data: "json, name=claims" })
   claims?: Map<string, string>;
 
-  @Metadata({ data: "json, name=clientStatus" })
+  @SpeakeasyMetadata({ data: "json, name=clientStatus" })
   clientStatus?: number;
 
-  @Metadata({ data: "json, name=latency" })
+  @SpeakeasyMetadata({ data: "json, name=latency" })
   latency?: number;
 
-  @Metadata({ data: "json, name=log" })
+  @SpeakeasyMetadata({ data: "json, name=log" })
   log?: string;
 
-  @Metadata({ data: "json, name=policy" })
+  @SpeakeasyMetadata({ data: "json, name=policy" })
   policy?: string;
 
-  @Metadata({ data: "json, name=principalId" })
+  @SpeakeasyMetadata({ data: "json, name=principalId" })
   principalId?: string;
 }

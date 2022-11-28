@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { KeyValueEntry } from "./keyvalueentry";
 import { Range } from "./range";
+
 
 
 // ProfileAttributes
@@ -9,9 +9,9 @@ import { Range } from "./range";
  * User profile attributes
 **/
 export class ProfileAttributes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.KeyValueEntry })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: KeyValueEntry })
   items: KeyValueEntry[];
 
-  @Metadata({ data: "json, name=range" })
+  @SpeakeasyMetadata({ data: "json, name=range" })
   range: Range;
 }

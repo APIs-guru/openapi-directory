@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostCreatePlacementGroupActionEnum(str, Enum):
     CREATE_PLACEMENT_GROUP = "CreatePlacementGroup"
@@ -10,8 +14,8 @@ class PostCreatePlacementGroupVersionEnum(str, Enum):
 
 @dataclass
 class PostCreatePlacementGroupQueryParams:
-    action: PostCreatePlacementGroupActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostCreatePlacementGroupVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostCreatePlacementGroupActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostCreatePlacementGroupVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostCreatePlacementGroupHeaders:
 
 @dataclass
 class PostCreatePlacementGroupRequest:
-    query_params: PostCreatePlacementGroupQueryParams = field(default=None)
-    headers: PostCreatePlacementGroupHeaders = field(default=None)
+    headers: PostCreatePlacementGroupHeaders = field()
+    query_params: PostCreatePlacementGroupQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostCreatePlacementGroupResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

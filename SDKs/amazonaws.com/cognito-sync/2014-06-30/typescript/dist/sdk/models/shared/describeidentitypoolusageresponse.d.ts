@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { IdentityPoolUsage } from "./identitypoolusage";
 /**
  * Response to a successful DescribeIdentityPoolUsage request.

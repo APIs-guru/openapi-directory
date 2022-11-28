@@ -1,5 +1,7 @@
 package shared
 
+// ScheduleTemplateCollection
+// The type that defines the fields for a paginated result set of schedule templates. The response consists of 0 or more sequenced pages where each page has 0 or more items.
 type ScheduleTemplateCollection struct {
 	Href              *string                    `json:"href,omitempty"`
 	Limit             *int32                     `json:"limit,omitempty"`

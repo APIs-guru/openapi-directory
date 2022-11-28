@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetReisezentrenLocLatLonDistPathParams = /** @class */ (function (_super) {
     __extends(GetReisezentrenLocLatLonDistPathParams, _super);
@@ -30,15 +30,15 @@ var GetReisezentrenLocLatLonDistPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=dist" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=dist" }),
         __metadata("design:type", Number)
     ], GetReisezentrenLocLatLonDistPathParams.prototype, "dist", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=lat" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=lat" }),
         __metadata("design:type", Number)
     ], GetReisezentrenLocLatLonDistPathParams.prototype, "lat", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=lon" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=lon" }),
         __metadata("design:type", Number)
     ], GetReisezentrenLocLatLonDistPathParams.prototype, "lon", void 0);
     return GetReisezentrenLocLatLonDistPathParams;
@@ -50,7 +50,7 @@ var GetReisezentrenLocLatLonDistRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetReisezentrenLocLatLonDistPathParams)
     ], GetReisezentrenLocLatLonDistRequest.prototype, "pathParams", void 0);
     return GetReisezentrenLocLatLonDistRequest;
@@ -62,15 +62,15 @@ var GetReisezentrenLocLatLonDistResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetReisezentrenLocLatLonDistResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetReisezentrenLocLatLonDistResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.TravelCenter)
     ], GetReisezentrenLocLatLonDistResponse.prototype, "travelCenter", void 0);
     return GetReisezentrenLocLatLonDistResponse;

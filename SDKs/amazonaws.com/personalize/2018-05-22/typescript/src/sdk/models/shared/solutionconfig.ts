@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AutoMlConfig } from "./automlconfig";
 import { HpoConfig } from "./hpoconfig";
 import { OptimizationObjective } from "./optimizationobjective";
+
 
 
 // SolutionConfig
@@ -9,21 +10,21 @@ import { OptimizationObjective } from "./optimizationobjective";
  * Describes the configuration properties for the solution.
 **/
 export class SolutionConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=algorithmHyperParameters" })
+  @SpeakeasyMetadata({ data: "json, name=algorithmHyperParameters" })
   algorithmHyperParameters?: Map<string, string>;
 
-  @Metadata({ data: "json, name=autoMLConfig" })
+  @SpeakeasyMetadata({ data: "json, name=autoMLConfig" })
   autoMlConfig?: AutoMlConfig;
 
-  @Metadata({ data: "json, name=eventValueThreshold" })
+  @SpeakeasyMetadata({ data: "json, name=eventValueThreshold" })
   eventValueThreshold?: string;
 
-  @Metadata({ data: "json, name=featureTransformationParameters" })
+  @SpeakeasyMetadata({ data: "json, name=featureTransformationParameters" })
   featureTransformationParameters?: Map<string, string>;
 
-  @Metadata({ data: "json, name=hpoConfig" })
+  @SpeakeasyMetadata({ data: "json, name=hpoConfig" })
   hpoConfig?: HpoConfig;
 
-  @Metadata({ data: "json, name=optimizationObjective" })
+  @SpeakeasyMetadata({ data: "json, name=optimizationObjective" })
   optimizationObjective?: OptimizationObjective;
 }

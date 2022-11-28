@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Vpc
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about the VPC in which the connector resides.
 **/
 export class Vpc extends SpeakeasyBase {
-  @Metadata({ data: "json, name=securityGroups" })
+  @SpeakeasyMetadata({ data: "json, name=securityGroups" })
   securityGroups?: string[];
 
-  @Metadata({ data: "json, name=subnets" })
+  @SpeakeasyMetadata({ data: "json, name=subnets" })
   subnets: string[];
 }

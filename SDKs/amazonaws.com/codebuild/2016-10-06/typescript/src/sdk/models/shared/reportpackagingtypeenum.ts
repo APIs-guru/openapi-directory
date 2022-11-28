@@ -1,6 +1,7 @@
 
 
+
 export enum ReportPackagingTypeEnum {
-    Zip = "ZIP"
-,    None = "NONE"
+    Zip = "ZIP",
+    None = "NONE"
 }

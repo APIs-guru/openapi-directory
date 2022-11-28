@@ -11,14 +11,14 @@ class ActivityListWatchedReposForAuthenticatedUserQueryParams:
 
 @dataclass
 class ActivityListWatchedReposForAuthenticatedUserRequest:
-    query_params: ActivityListWatchedReposForAuthenticatedUserQueryParams = field(default=None)
+    query_params: ActivityListWatchedReposForAuthenticatedUserQueryParams = field()
     
 
 @dataclass
 class ActivityListWatchedReposForAuthenticatedUserResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     basic_error: Optional[shared.BasicError] = field(default=None)
     minimal_repositories: Optional[List[shared.MinimalRepository]] = field(default=None)
     

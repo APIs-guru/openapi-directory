@@ -18,6 +18,8 @@ const (
 	GoogleCloudAssuredworkloadsV1beta1WorkloadSaaEnrollmentResponseSetupStatusEnumStatusComplete        GoogleCloudAssuredworkloadsV1beta1WorkloadSaaEnrollmentResponseSetupStatusEnum = "STATUS_COMPLETE"
 )
 
+// GoogleCloudAssuredworkloadsV1beta1WorkloadSaaEnrollmentResponse
+// Signed Access Approvals (SAA) enrollment response.
 type GoogleCloudAssuredworkloadsV1beta1WorkloadSaaEnrollmentResponse struct {
 	SetupErrors []GoogleCloudAssuredworkloadsV1beta1WorkloadSaaEnrollmentResponseSetupErrorsEnum `json:"setupErrors,omitempty"`
 	SetupStatus *GoogleCloudAssuredworkloadsV1beta1WorkloadSaaEnrollmentResponseSetupStatusEnum  `json:"setupStatus,omitempty"`

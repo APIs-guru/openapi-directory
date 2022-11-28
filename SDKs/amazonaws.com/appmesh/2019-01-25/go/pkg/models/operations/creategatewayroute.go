@@ -23,6 +23,8 @@ type CreateGatewayRouteHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateGatewayRouteRequestBodySpec
+// An object that represents a gateway route specification. Specify one gateway route type.
 type CreateGatewayRouteRequestBodySpec struct {
 	GrpcRoute  *shared.GrpcGatewayRoute `json:"grpcRoute,omitempty"`
 	Http2Route *shared.HTTPGatewayRoute `json:"http2Route,omitempty"`

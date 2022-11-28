@@ -1,5 +1,7 @@
 package shared
 
+// Device
+// Third-party device definition. Next ID = 14
 type Device struct {
 	Attributes                   map[string]interface{} `json:"attributes,omitempty"`
 	CustomData                   map[string]interface{} `json:"customData,omitempty"`

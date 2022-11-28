@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GeneratedSplitApk
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Download metadata for a split APK.
 **/
 export class GeneratedSplitApk extends SpeakeasyBase {
-  @Metadata({ data: "json, name=downloadId" })
+  @SpeakeasyMetadata({ data: "json, name=downloadId" })
   downloadId?: string;
 
-  @Metadata({ data: "json, name=moduleName" })
+  @SpeakeasyMetadata({ data: "json, name=moduleName" })
   moduleName?: string;
 
-  @Metadata({ data: "json, name=splitId" })
+  @SpeakeasyMetadata({ data: "json, name=splitId" })
   splitId?: string;
 
-  @Metadata({ data: "json, name=variantId" })
+  @SpeakeasyMetadata({ data: "json, name=variantId" })
   variantId?: number;
 }

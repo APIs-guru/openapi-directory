@@ -1,5 +1,7 @@
 package shared
 
+// AssetReportCreateRequest
+// AssetReportCreateRequest defines the request schema for `/asset_report/create`
 type AssetReportCreateRequest struct {
 	AccessTokens  []string                         `json:"access_tokens"`
 	ClientID      *string                          `json:"client_id,omitempty"`

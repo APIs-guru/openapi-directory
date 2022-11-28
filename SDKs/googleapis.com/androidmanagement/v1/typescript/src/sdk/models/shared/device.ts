@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApplicationReport } from "./applicationreport";
 import { PasswordRequirements } from "./passwordrequirements";
 import { CommonCriteriaModeInfo } from "./commoncriteriamodeinfo";
@@ -17,32 +16,33 @@ import { SecurityPosture } from "./securityposture";
 import { SoftwareInfo } from "./softwareinfo";
 import { User } from "./user";
 
+
 export enum DeviceAppliedStateEnum {
-    DeviceStateUnspecified = "DEVICE_STATE_UNSPECIFIED"
-,    Active = "ACTIVE"
-,    Disabled = "DISABLED"
-,    Deleted = "DELETED"
-,    Provisioning = "PROVISIONING"
+    DeviceStateUnspecified = "DEVICE_STATE_UNSPECIFIED",
+    Active = "ACTIVE",
+    Disabled = "DISABLED",
+    Deleted = "DELETED",
+    Provisioning = "PROVISIONING"
 }
 
 export enum DeviceManagementModeEnum {
-    ManagementModeUnspecified = "MANAGEMENT_MODE_UNSPECIFIED"
-,    DeviceOwner = "DEVICE_OWNER"
-,    ProfileOwner = "PROFILE_OWNER"
+    ManagementModeUnspecified = "MANAGEMENT_MODE_UNSPECIFIED",
+    DeviceOwner = "DEVICE_OWNER",
+    ProfileOwner = "PROFILE_OWNER"
 }
 
 export enum DeviceOwnershipEnum {
-    OwnershipUnspecified = "OWNERSHIP_UNSPECIFIED"
-,    CompanyOwned = "COMPANY_OWNED"
-,    PersonallyOwned = "PERSONALLY_OWNED"
+    OwnershipUnspecified = "OWNERSHIP_UNSPECIFIED",
+    CompanyOwned = "COMPANY_OWNED",
+    PersonallyOwned = "PERSONALLY_OWNED"
 }
 
 export enum DeviceStateEnum {
-    DeviceStateUnspecified = "DEVICE_STATE_UNSPECIFIED"
-,    Active = "ACTIVE"
-,    Disabled = "DISABLED"
-,    Deleted = "DELETED"
-,    Provisioning = "PROVISIONING"
+    DeviceStateUnspecified = "DEVICE_STATE_UNSPECIFIED",
+    Active = "ACTIVE",
+    Disabled = "DISABLED",
+    Deleted = "DELETED",
+    Provisioning = "PROVISIONING"
 }
 
 
@@ -51,108 +51,108 @@ export enum DeviceStateEnum {
  * A device owned by an enterprise. Unless otherwise noted, all fields are read-only and can't be modified by enterprises.devices.patch.
 **/
 export class Device extends SpeakeasyBase {
-  @Metadata({ data: "json, name=apiLevel" })
+  @SpeakeasyMetadata({ data: "json, name=apiLevel" })
   apiLevel?: number;
 
-  @Metadata({ data: "json, name=applicationReports", elemType: shared.ApplicationReport })
+  @SpeakeasyMetadata({ data: "json, name=applicationReports", elemType: ApplicationReport })
   applicationReports?: ApplicationReport[];
 
-  @Metadata({ data: "json, name=appliedPasswordPolicies", elemType: shared.PasswordRequirements })
+  @SpeakeasyMetadata({ data: "json, name=appliedPasswordPolicies", elemType: PasswordRequirements })
   appliedPasswordPolicies?: PasswordRequirements[];
 
-  @Metadata({ data: "json, name=appliedPolicyName" })
+  @SpeakeasyMetadata({ data: "json, name=appliedPolicyName" })
   appliedPolicyName?: string;
 
-  @Metadata({ data: "json, name=appliedPolicyVersion" })
+  @SpeakeasyMetadata({ data: "json, name=appliedPolicyVersion" })
   appliedPolicyVersion?: string;
 
-  @Metadata({ data: "json, name=appliedState" })
+  @SpeakeasyMetadata({ data: "json, name=appliedState" })
   appliedState?: DeviceAppliedStateEnum;
 
-  @Metadata({ data: "json, name=commonCriteriaModeInfo" })
+  @SpeakeasyMetadata({ data: "json, name=commonCriteriaModeInfo" })
   commonCriteriaModeInfo?: CommonCriteriaModeInfo;
 
-  @Metadata({ data: "json, name=deviceSettings" })
+  @SpeakeasyMetadata({ data: "json, name=deviceSettings" })
   deviceSettings?: DeviceSettings;
 
-  @Metadata({ data: "json, name=disabledReason" })
+  @SpeakeasyMetadata({ data: "json, name=disabledReason" })
   disabledReason?: UserFacingMessage;
 
-  @Metadata({ data: "json, name=displays", elemType: shared.Display })
+  @SpeakeasyMetadata({ data: "json, name=displays", elemType: Display })
   displays?: Display[];
 
-  @Metadata({ data: "json, name=enrollmentTime" })
+  @SpeakeasyMetadata({ data: "json, name=enrollmentTime" })
   enrollmentTime?: string;
 
-  @Metadata({ data: "json, name=enrollmentTokenData" })
+  @SpeakeasyMetadata({ data: "json, name=enrollmentTokenData" })
   enrollmentTokenData?: string;
 
-  @Metadata({ data: "json, name=enrollmentTokenName" })
+  @SpeakeasyMetadata({ data: "json, name=enrollmentTokenName" })
   enrollmentTokenName?: string;
 
-  @Metadata({ data: "json, name=hardwareInfo" })
+  @SpeakeasyMetadata({ data: "json, name=hardwareInfo" })
   hardwareInfo?: HardwareInfo;
 
-  @Metadata({ data: "json, name=hardwareStatusSamples", elemType: shared.HardwareStatus })
+  @SpeakeasyMetadata({ data: "json, name=hardwareStatusSamples", elemType: HardwareStatus })
   hardwareStatusSamples?: HardwareStatus[];
 
-  @Metadata({ data: "json, name=lastPolicyComplianceReportTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastPolicyComplianceReportTime" })
   lastPolicyComplianceReportTime?: string;
 
-  @Metadata({ data: "json, name=lastPolicySyncTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastPolicySyncTime" })
   lastPolicySyncTime?: string;
 
-  @Metadata({ data: "json, name=lastStatusReportTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastStatusReportTime" })
   lastStatusReportTime?: string;
 
-  @Metadata({ data: "json, name=managementMode" })
+  @SpeakeasyMetadata({ data: "json, name=managementMode" })
   managementMode?: DeviceManagementModeEnum;
 
-  @Metadata({ data: "json, name=memoryEvents", elemType: shared.MemoryEvent })
+  @SpeakeasyMetadata({ data: "json, name=memoryEvents", elemType: MemoryEvent })
   memoryEvents?: MemoryEvent[];
 
-  @Metadata({ data: "json, name=memoryInfo" })
+  @SpeakeasyMetadata({ data: "json, name=memoryInfo" })
   memoryInfo?: MemoryInfo;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=networkInfo" })
+  @SpeakeasyMetadata({ data: "json, name=networkInfo" })
   networkInfo?: NetworkInfo;
 
-  @Metadata({ data: "json, name=nonComplianceDetails", elemType: shared.NonComplianceDetail })
+  @SpeakeasyMetadata({ data: "json, name=nonComplianceDetails", elemType: NonComplianceDetail })
   nonComplianceDetails?: NonComplianceDetail[];
 
-  @Metadata({ data: "json, name=ownership" })
+  @SpeakeasyMetadata({ data: "json, name=ownership" })
   ownership?: DeviceOwnershipEnum;
 
-  @Metadata({ data: "json, name=policyCompliant" })
+  @SpeakeasyMetadata({ data: "json, name=policyCompliant" })
   policyCompliant?: boolean;
 
-  @Metadata({ data: "json, name=policyName" })
+  @SpeakeasyMetadata({ data: "json, name=policyName" })
   policyName?: string;
 
-  @Metadata({ data: "json, name=powerManagementEvents", elemType: shared.PowerManagementEvent })
+  @SpeakeasyMetadata({ data: "json, name=powerManagementEvents", elemType: PowerManagementEvent })
   powerManagementEvents?: PowerManagementEvent[];
 
-  @Metadata({ data: "json, name=previousDeviceNames" })
+  @SpeakeasyMetadata({ data: "json, name=previousDeviceNames" })
   previousDeviceNames?: string[];
 
-  @Metadata({ data: "json, name=securityPosture" })
+  @SpeakeasyMetadata({ data: "json, name=securityPosture" })
   securityPosture?: SecurityPosture;
 
-  @Metadata({ data: "json, name=softwareInfo" })
+  @SpeakeasyMetadata({ data: "json, name=softwareInfo" })
   softwareInfo?: SoftwareInfo;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: DeviceStateEnum;
 
-  @Metadata({ data: "json, name=systemProperties" })
+  @SpeakeasyMetadata({ data: "json, name=systemProperties" })
   systemProperties?: Map<string, string>;
 
-  @Metadata({ data: "json, name=user" })
+  @SpeakeasyMetadata({ data: "json, name=user" })
   user?: User;
 
-  @Metadata({ data: "json, name=userName" })
+  @SpeakeasyMetadata({ data: "json, name=userName" })
   userName?: string;
 }

@@ -4,6 +4,8 @@ type UpdateNetworkCellularGatewayUplinkPathParams struct {
 	NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
 }
 
+// UpdateNetworkCellularGatewayUplinkRequestBodyBandwidthLimits
+// The bandwidth settings for the 'cellular' uplink
 type UpdateNetworkCellularGatewayUplinkRequestBodyBandwidthLimits struct {
 	LimitDown *int64 `json:"limitDown,omitempty"`
 	LimitUp   *int64 `json:"limitUp,omitempty"`

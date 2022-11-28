@@ -1,5 +1,7 @@
 package shared
 
-type BatchCreatePrintServersRequest struct {
-	Requests []CreatePrintServerRequest `json:"requests,omitempty"`
+// BatchCreatePrintServersRequestInput
+// Request to add multiple new print servers in a batch.
+type BatchCreatePrintServersRequestInput struct {
+	Requests []CreatePrintServerRequestInput `json:"requests,omitempty"`
 }

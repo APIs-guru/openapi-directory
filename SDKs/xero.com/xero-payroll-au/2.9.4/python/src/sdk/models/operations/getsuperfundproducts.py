@@ -11,25 +11,25 @@ class GetSuperfundProductsQueryParams:
 
 @dataclass
 class GetSuperfundProductsHeaders:
-    xero_tenant_id: str = field(default=None, metadata={'header': { 'field_name': 'Xero-Tenant-Id', 'style': 'simple', 'explode': False }})
+    xero_tenant_id: str = field(metadata={'header': { 'field_name': 'Xero-Tenant-Id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetSuperfundProductsSecurity:
-    o_auth2: shared.SchemeOAuth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    o_auth2: shared.SchemeOAuth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetSuperfundProductsRequest:
-    query_params: GetSuperfundProductsQueryParams = field(default=None)
-    headers: GetSuperfundProductsHeaders = field(default=None)
-    security: GetSuperfundProductsSecurity = field(default=None)
+    headers: GetSuperfundProductsHeaders = field()
+    query_params: GetSuperfundProductsQueryParams = field()
+    security: GetSuperfundProductsSecurity = field()
     
 
 @dataclass
 class GetSuperfundProductsResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_exception: Optional[shared.APIException] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     super_fund_products: Optional[shared.SuperFundProducts] = field(default=None)
     

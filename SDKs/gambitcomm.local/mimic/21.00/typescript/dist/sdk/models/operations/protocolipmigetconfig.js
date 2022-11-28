@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ProtocolIpmiGetConfigPathParams = /** @class */ (function (_super) {
     __extends(ProtocolIpmiGetConfigPathParams, _super);
@@ -30,7 +30,7 @@ var ProtocolIpmiGetConfigPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
         __metadata("design:type", Number)
     ], ProtocolIpmiGetConfigPathParams.prototype, "agentNum", void 0);
     return ProtocolIpmiGetConfigPathParams;
@@ -42,7 +42,7 @@ var ProtocolIpmiGetConfigRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProtocolIpmiGetConfigPathParams)
     ], ProtocolIpmiGetConfigRequest.prototype, "pathParams", void 0);
     return ProtocolIpmiGetConfigRequest;
@@ -54,15 +54,15 @@ var ProtocolIpmiGetConfigResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ConfigIpmi)
     ], ProtocolIpmiGetConfigResponse.prototype, "configIpmi", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolIpmiGetConfigResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProtocolIpmiGetConfigResponse.prototype, "statusCode", void 0);
     return ProtocolIpmiGetConfigResponse;

@@ -1,5 +1,7 @@
 package shared
 
+// ListAliasesInput
+// Represents the input for a request operation.
 type ListAliasesInput struct {
 	Limit               *int64                   `json:"Limit,omitempty"`
 	Name                *string                  `json:"Name,omitempty"`

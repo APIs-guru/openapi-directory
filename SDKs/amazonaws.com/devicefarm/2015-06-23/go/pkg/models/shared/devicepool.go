@@ -1,5 +1,7 @@
 package shared
 
+// DevicePool
+// Represents a collection of device types.
 type DevicePool struct {
 	Arn         *string             `json:"arn,omitempty"`
 	Description *string             `json:"description,omitempty"`

@@ -27,11 +27,6 @@ type RpcerSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type RpcerRequest struct {
-	Request  *RpcerRequestBody `request:"mediaType=application/json"`
-	Security RpcerSecurity
-}
-
 type Rpcer400ApplicationJSONErrorEnum string
 
 const (
@@ -161,6 +156,11 @@ const (
 type Rpcer504ApplicationJSON struct {
 	Error            *Rpcer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Rpcer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type RpcerRequest struct {
+	Request  *RpcerRequestBody `request:"mediaType=application/json"`
+	Security RpcerSecurity
 }
 
 type RpcerResponse struct {

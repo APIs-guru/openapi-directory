@@ -1,10 +1,7 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class GetglobalnumberinfoQueryParams extends SpeakeasyBase {
     intlnumber: string;
     license: string;
-}
-export declare class GetglobalnumberinfoRequest extends SpeakeasyBase {
-    queryParams: GetglobalnumberinfoQueryParams;
 }
 export declare class Getglobalnumberinfo200ApplicationJson extends SpeakeasyBase {
     code?: string;
@@ -17,6 +14,9 @@ export declare class Getglobalnumberinfo200ApplicationJson extends SpeakeasyBase
     primaryLanguage?: string;
     region?: string;
     wealth?: string;
+}
+export declare class GetglobalnumberinfoRequest extends SpeakeasyBase {
+    queryParams: GetglobalnumberinfoQueryParams;
 }
 export declare class GetglobalnumberinfoResponse extends SpeakeasyBase {
     contentType: string;

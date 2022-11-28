@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CloudWatchEventSourceEnum } from "./cloudwatcheventsourceenum";
 import { LogFilterEnum } from "./logfilterenum";
+
 
 
 // Observation
@@ -8,138 +9,138 @@ import { LogFilterEnum } from "./logfilterenum";
  * Describes an anomaly or error with the application.
 **/
 export class Observation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CloudWatchEventDetailType" })
+  @SpeakeasyMetadata({ data: "json, name=CloudWatchEventDetailType" })
   cloudWatchEventDetailType?: string;
 
-  @Metadata({ data: "json, name=CloudWatchEventId" })
+  @SpeakeasyMetadata({ data: "json, name=CloudWatchEventId" })
   cloudWatchEventId?: string;
 
-  @Metadata({ data: "json, name=CloudWatchEventSource" })
+  @SpeakeasyMetadata({ data: "json, name=CloudWatchEventSource" })
   cloudWatchEventSource?: CloudWatchEventSourceEnum;
 
-  @Metadata({ data: "json, name=CodeDeployApplication" })
+  @SpeakeasyMetadata({ data: "json, name=CodeDeployApplication" })
   codeDeployApplication?: string;
 
-  @Metadata({ data: "json, name=CodeDeployDeploymentGroup" })
+  @SpeakeasyMetadata({ data: "json, name=CodeDeployDeploymentGroup" })
   codeDeployDeploymentGroup?: string;
 
-  @Metadata({ data: "json, name=CodeDeployDeploymentId" })
+  @SpeakeasyMetadata({ data: "json, name=CodeDeployDeploymentId" })
   codeDeployDeploymentId?: string;
 
-  @Metadata({ data: "json, name=CodeDeployInstanceGroupId" })
+  @SpeakeasyMetadata({ data: "json, name=CodeDeployInstanceGroupId" })
   codeDeployInstanceGroupId?: string;
 
-  @Metadata({ data: "json, name=CodeDeployState" })
+  @SpeakeasyMetadata({ data: "json, name=CodeDeployState" })
   codeDeployState?: string;
 
-  @Metadata({ data: "json, name=EbsCause" })
+  @SpeakeasyMetadata({ data: "json, name=EbsCause" })
   ebsCause?: string;
 
-  @Metadata({ data: "json, name=EbsEvent" })
+  @SpeakeasyMetadata({ data: "json, name=EbsEvent" })
   ebsEvent?: string;
 
-  @Metadata({ data: "json, name=EbsRequestId" })
+  @SpeakeasyMetadata({ data: "json, name=EbsRequestId" })
   ebsRequestId?: string;
 
-  @Metadata({ data: "json, name=EbsResult" })
+  @SpeakeasyMetadata({ data: "json, name=EbsResult" })
   ebsResult?: string;
 
-  @Metadata({ data: "json, name=Ec2State" })
+  @SpeakeasyMetadata({ data: "json, name=Ec2State" })
   ec2State?: string;
 
-  @Metadata({ data: "json, name=EndTime" })
+  @SpeakeasyMetadata({ data: "json, name=EndTime" })
   endTime?: Date;
 
-  @Metadata({ data: "json, name=HealthEventArn" })
+  @SpeakeasyMetadata({ data: "json, name=HealthEventArn" })
   healthEventArn?: string;
 
-  @Metadata({ data: "json, name=HealthEventDescription" })
+  @SpeakeasyMetadata({ data: "json, name=HealthEventDescription" })
   healthEventDescription?: string;
 
-  @Metadata({ data: "json, name=HealthEventTypeCategory" })
+  @SpeakeasyMetadata({ data: "json, name=HealthEventTypeCategory" })
   healthEventTypeCategory?: string;
 
-  @Metadata({ data: "json, name=HealthEventTypeCode" })
+  @SpeakeasyMetadata({ data: "json, name=HealthEventTypeCode" })
   healthEventTypeCode?: string;
 
-  @Metadata({ data: "json, name=HealthService" })
+  @SpeakeasyMetadata({ data: "json, name=HealthService" })
   healthService?: string;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=LineTime" })
+  @SpeakeasyMetadata({ data: "json, name=LineTime" })
   lineTime?: Date;
 
-  @Metadata({ data: "json, name=LogFilter" })
+  @SpeakeasyMetadata({ data: "json, name=LogFilter" })
   logFilter?: LogFilterEnum;
 
-  @Metadata({ data: "json, name=LogGroup" })
+  @SpeakeasyMetadata({ data: "json, name=LogGroup" })
   logGroup?: string;
 
-  @Metadata({ data: "json, name=LogText" })
+  @SpeakeasyMetadata({ data: "json, name=LogText" })
   logText?: string;
 
-  @Metadata({ data: "json, name=MetricName" })
+  @SpeakeasyMetadata({ data: "json, name=MetricName" })
   metricName?: string;
 
-  @Metadata({ data: "json, name=MetricNamespace" })
+  @SpeakeasyMetadata({ data: "json, name=MetricNamespace" })
   metricNamespace?: string;
 
-  @Metadata({ data: "json, name=RdsEventCategories" })
+  @SpeakeasyMetadata({ data: "json, name=RdsEventCategories" })
   rdsEventCategories?: string;
 
-  @Metadata({ data: "json, name=RdsEventMessage" })
+  @SpeakeasyMetadata({ data: "json, name=RdsEventMessage" })
   rdsEventMessage?: string;
 
-  @Metadata({ data: "json, name=S3EventName" })
+  @SpeakeasyMetadata({ data: "json, name=S3EventName" })
   s3EventName?: string;
 
-  @Metadata({ data: "json, name=SourceARN" })
+  @SpeakeasyMetadata({ data: "json, name=SourceARN" })
   sourceArn?: string;
 
-  @Metadata({ data: "json, name=SourceType" })
+  @SpeakeasyMetadata({ data: "json, name=SourceType" })
   sourceType?: string;
 
-  @Metadata({ data: "json, name=StartTime" })
+  @SpeakeasyMetadata({ data: "json, name=StartTime" })
   startTime?: Date;
 
-  @Metadata({ data: "json, name=StatesArn" })
+  @SpeakeasyMetadata({ data: "json, name=StatesArn" })
   statesArn?: string;
 
-  @Metadata({ data: "json, name=StatesExecutionArn" })
+  @SpeakeasyMetadata({ data: "json, name=StatesExecutionArn" })
   statesExecutionArn?: string;
 
-  @Metadata({ data: "json, name=StatesInput" })
+  @SpeakeasyMetadata({ data: "json, name=StatesInput" })
   statesInput?: string;
 
-  @Metadata({ data: "json, name=StatesStatus" })
+  @SpeakeasyMetadata({ data: "json, name=StatesStatus" })
   statesStatus?: string;
 
-  @Metadata({ data: "json, name=Unit" })
+  @SpeakeasyMetadata({ data: "json, name=Unit" })
   unit?: string;
 
-  @Metadata({ data: "json, name=Value" })
+  @SpeakeasyMetadata({ data: "json, name=Value" })
   value?: number;
 
-  @Metadata({ data: "json, name=XRayErrorPercent" })
+  @SpeakeasyMetadata({ data: "json, name=XRayErrorPercent" })
   xRayErrorPercent?: number;
 
-  @Metadata({ data: "json, name=XRayFaultPercent" })
+  @SpeakeasyMetadata({ data: "json, name=XRayFaultPercent" })
   xRayFaultPercent?: number;
 
-  @Metadata({ data: "json, name=XRayNodeName" })
+  @SpeakeasyMetadata({ data: "json, name=XRayNodeName" })
   xRayNodeName?: string;
 
-  @Metadata({ data: "json, name=XRayNodeType" })
+  @SpeakeasyMetadata({ data: "json, name=XRayNodeType" })
   xRayNodeType?: string;
 
-  @Metadata({ data: "json, name=XRayRequestAverageLatency" })
+  @SpeakeasyMetadata({ data: "json, name=XRayRequestAverageLatency" })
   xRayRequestAverageLatency?: number;
 
-  @Metadata({ data: "json, name=XRayRequestCount" })
+  @SpeakeasyMetadata({ data: "json, name=XRayRequestCount" })
   xRayRequestCount?: number;
 
-  @Metadata({ data: "json, name=XRayThrottlePercent" })
+  @SpeakeasyMetadata({ data: "json, name=XRayThrottlePercent" })
   xRayThrottlePercent?: number;
 }

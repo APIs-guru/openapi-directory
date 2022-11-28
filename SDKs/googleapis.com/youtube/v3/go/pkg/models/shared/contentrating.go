@@ -939,6 +939,8 @@ const (
 	ContentRatingYtRatingEnumYtAgeRestricted ContentRatingYtRatingEnum = "ytAgeRestricted"
 )
 
+// ContentRating
+// Ratings schemes. The country-specific ratings are mostly for movies and shows. LINT.IfChange
 type ContentRating struct {
 	AcbRating              *ContentRatingAcbRatingEnum              `json:"acbRating,omitempty"`
 	AgcomRating            *ContentRatingAgcomRatingEnum            `json:"agcomRating,omitempty"`

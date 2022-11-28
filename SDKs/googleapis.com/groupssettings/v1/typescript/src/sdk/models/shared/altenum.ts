@@ -1,6 +1,7 @@
 
 
+
 export enum AltEnum {
-    Atom = "atom"
-,    Json = "json"
+    Atom = "atom",
+    Json = "json"
 }

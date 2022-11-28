@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class SearchFormatEnum(str, Enum):
@@ -17,15 +21,15 @@ class SearchQParserEnum(str, Enum):
 
 @dataclass
 class SearchQueryParams:
+    format: SearchFormatEnum = field(metadata={'query_param': { 'field_name': 'format', 'style': 'form', 'explode': True }})
+    pretty: SearchPrettyEnum = field(metadata={'query_param': { 'field_name': 'pretty', 'style': 'form', 'explode': True }})
+    q: str = field(metadata={'query_param': { 'field_name': 'q', 'style': 'form', 'explode': True }})
     cursor: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'cursor', 'style': 'form', 'explode': True }})
     expr: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'expr', 'style': 'form', 'explode': True }})
     facet: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'facet', 'style': 'form', 'explode': True }})
-    format: SearchFormatEnum = field(default=None, metadata={'query_param': { 'field_name': 'format', 'style': 'form', 'explode': True }})
     fq: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'fq', 'style': 'form', 'explode': True }})
     highlight: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'highlight', 'style': 'form', 'explode': True }})
     partial: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'partial', 'style': 'form', 'explode': True }})
-    pretty: SearchPrettyEnum = field(default=None, metadata={'query_param': { 'field_name': 'pretty', 'style': 'form', 'explode': True }})
-    q: str = field(default=None, metadata={'query_param': { 'field_name': 'q', 'style': 'form', 'explode': True }})
     q_options: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'q.options', 'style': 'form', 'explode': True }})
     q_parser: Optional[SearchQParserEnum] = field(default=None, metadata={'query_param': { 'field_name': 'q.parser', 'style': 'form', 'explode': True }})
     return_: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'return', 'style': 'form', 'explode': True }})
@@ -48,14 +52,14 @@ class SearchHeaders:
 
 @dataclass
 class SearchRequest:
-    query_params: SearchQueryParams = field(default=None)
-    headers: SearchHeaders = field(default=None)
+    headers: SearchHeaders = field()
+    query_params: SearchQueryParams = field()
     
 
 @dataclass
 class SearchResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     search_exception: Optional[shared.SearchException] = field(default=None)
     search_response: Optional[shared.SearchResponse] = field(default=None)
-    status_code: int = field(default=None)
     

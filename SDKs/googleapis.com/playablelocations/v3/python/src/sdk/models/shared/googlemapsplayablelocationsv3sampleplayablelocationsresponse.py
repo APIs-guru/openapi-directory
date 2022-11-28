@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from dataclasses_json import dataclass_json
-from . import googlemapsplayablelocationsv3sampleplayablelocationlist
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleMapsPlayablelocationsV3SamplePlayableLocationsResponse:
-    locations_per_game_object_type: Optional[dict[str, googlemapsplayablelocationsv3sampleplayablelocationlist.GoogleMapsPlayablelocationsV3SamplePlayableLocationList]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'locationsPerGameObjectType' }})
-    ttl: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ttl' }})
+    r"""GoogleMapsPlayablelocationsV3SamplePlayableLocationsResponse
+     Response for the SamplePlayableLocations method.
+    """
+    
+    locations_per_game_object_type: Optional[dict[str, GoogleMapsPlayablelocationsV3SamplePlayableLocationList]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('locationsPerGameObjectType') }})
+    ttl: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ttl') }})
     

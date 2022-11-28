@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AutoRollbackConfiguration } from "./autorollbackconfiguration";
 import { BlueGreenDeploymentConfiguration } from "./bluegreendeploymentconfiguration";
 import { ComputePlatformEnum } from "./computeplatformenum";
@@ -10,10 +10,10 @@ import { FileExistsBehaviorEnum } from "./fileexistsbehaviorenum";
 import { LoadBalancerInfo } from "./loadbalancerinfo";
 import { RevisionLocation } from "./revisionlocation";
 import { RelatedDeployments } from "./relateddeployments";
-import { RevisionLocation } from "./revisionlocation";
 import { RollbackInfo } from "./rollbackinfo";
 import { DeploymentStatusEnum } from "./deploymentstatusenum";
 import { TargetInstances } from "./targetinstances";
+
 
 
 // DeploymentInfo
@@ -21,90 +21,90 @@ import { TargetInstances } from "./targetinstances";
  * Information about a deployment.
 **/
 export class DeploymentInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=additionalDeploymentStatusInfo" })
+  @SpeakeasyMetadata({ data: "json, name=additionalDeploymentStatusInfo" })
   additionalDeploymentStatusInfo?: string;
 
-  @Metadata({ data: "json, name=applicationName" })
+  @SpeakeasyMetadata({ data: "json, name=applicationName" })
   applicationName?: string;
 
-  @Metadata({ data: "json, name=autoRollbackConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=autoRollbackConfiguration" })
   autoRollbackConfiguration?: AutoRollbackConfiguration;
 
-  @Metadata({ data: "json, name=blueGreenDeploymentConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=blueGreenDeploymentConfiguration" })
   blueGreenDeploymentConfiguration?: BlueGreenDeploymentConfiguration;
 
-  @Metadata({ data: "json, name=completeTime" })
+  @SpeakeasyMetadata({ data: "json, name=completeTime" })
   completeTime?: Date;
 
-  @Metadata({ data: "json, name=computePlatform" })
+  @SpeakeasyMetadata({ data: "json, name=computePlatform" })
   computePlatform?: ComputePlatformEnum;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: Date;
 
-  @Metadata({ data: "json, name=creator" })
+  @SpeakeasyMetadata({ data: "json, name=creator" })
   creator?: DeploymentCreatorEnum;
 
-  @Metadata({ data: "json, name=deploymentConfigName" })
+  @SpeakeasyMetadata({ data: "json, name=deploymentConfigName" })
   deploymentConfigName?: string;
 
-  @Metadata({ data: "json, name=deploymentGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=deploymentGroupName" })
   deploymentGroupName?: string;
 
-  @Metadata({ data: "json, name=deploymentId" })
+  @SpeakeasyMetadata({ data: "json, name=deploymentId" })
   deploymentId?: string;
 
-  @Metadata({ data: "json, name=deploymentOverview" })
+  @SpeakeasyMetadata({ data: "json, name=deploymentOverview" })
   deploymentOverview?: DeploymentOverview;
 
-  @Metadata({ data: "json, name=deploymentStatusMessages" })
+  @SpeakeasyMetadata({ data: "json, name=deploymentStatusMessages" })
   deploymentStatusMessages?: string[];
 
-  @Metadata({ data: "json, name=deploymentStyle" })
+  @SpeakeasyMetadata({ data: "json, name=deploymentStyle" })
   deploymentStyle?: DeploymentStyle;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=errorInformation" })
+  @SpeakeasyMetadata({ data: "json, name=errorInformation" })
   errorInformation?: ErrorInformation;
 
-  @Metadata({ data: "json, name=externalId" })
+  @SpeakeasyMetadata({ data: "json, name=externalId" })
   externalId?: string;
 
-  @Metadata({ data: "json, name=fileExistsBehavior" })
+  @SpeakeasyMetadata({ data: "json, name=fileExistsBehavior" })
   fileExistsBehavior?: FileExistsBehaviorEnum;
 
-  @Metadata({ data: "json, name=ignoreApplicationStopFailures" })
+  @SpeakeasyMetadata({ data: "json, name=ignoreApplicationStopFailures" })
   ignoreApplicationStopFailures?: boolean;
 
-  @Metadata({ data: "json, name=instanceTerminationWaitTimeStarted" })
+  @SpeakeasyMetadata({ data: "json, name=instanceTerminationWaitTimeStarted" })
   instanceTerminationWaitTimeStarted?: boolean;
 
-  @Metadata({ data: "json, name=loadBalancerInfo" })
+  @SpeakeasyMetadata({ data: "json, name=loadBalancerInfo" })
   loadBalancerInfo?: LoadBalancerInfo;
 
-  @Metadata({ data: "json, name=previousRevision" })
+  @SpeakeasyMetadata({ data: "json, name=previousRevision" })
   previousRevision?: RevisionLocation;
 
-  @Metadata({ data: "json, name=relatedDeployments" })
+  @SpeakeasyMetadata({ data: "json, name=relatedDeployments" })
   relatedDeployments?: RelatedDeployments;
 
-  @Metadata({ data: "json, name=revision" })
+  @SpeakeasyMetadata({ data: "json, name=revision" })
   revision?: RevisionLocation;
 
-  @Metadata({ data: "json, name=rollbackInfo" })
+  @SpeakeasyMetadata({ data: "json, name=rollbackInfo" })
   rollbackInfo?: RollbackInfo;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: Date;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: DeploymentStatusEnum;
 
-  @Metadata({ data: "json, name=targetInstances" })
+  @SpeakeasyMetadata({ data: "json, name=targetInstances" })
   targetInstances?: TargetInstances;
 
-  @Metadata({ data: "json, name=updateOutdatedInstancesOnly" })
+  @SpeakeasyMetadata({ data: "json, name=updateOutdatedInstancesOnly" })
   updateOutdatedInstancesOnly?: boolean;
 }

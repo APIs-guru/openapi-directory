@@ -9,11 +9,11 @@ class PostInventoryFinancialImapctForecastAccuracyHeaders:
 
 @dataclass
 class PostInventoryFinancialImapctForecastAccuracyRequest:
-    headers: PostInventoryFinancialImapctForecastAccuracyHeaders = field(default=None)
+    headers: PostInventoryFinancialImapctForecastAccuracyHeaders = field()
     
 
 @dataclass
 class PostInventoryFinancialImapctForecastAccuracyResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EnterpriseCrmEventbusProtoCondition } from "./enterprisecrmeventbusprotocondition";
+
 
 
 // EnterpriseCrmEventbusProtoCombinedCondition
@@ -8,6 +8,6 @@ import { EnterpriseCrmEventbusProtoCondition } from "./enterprisecrmeventbusprot
  * This message recursively combines constituent conditions using logical AND.
 **/
 export class EnterpriseCrmEventbusProtoCombinedCondition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=conditions", elemType: shared.EnterpriseCrmEventbusProtoCondition })
+  @SpeakeasyMetadata({ data: "json, name=conditions", elemType: EnterpriseCrmEventbusProtoCondition })
   conditions?: EnterpriseCrmEventbusProtoCondition[];
 }

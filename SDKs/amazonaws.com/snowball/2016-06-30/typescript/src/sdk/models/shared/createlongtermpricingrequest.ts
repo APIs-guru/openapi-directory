@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LongTermPricingTypeEnum } from "./longtermpricingtypeenum";
 import { SnowballTypeEnum } from "./snowballtypeenum";
 
 
+
 export class CreateLongTermPricingRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=IsLongTermPricingAutoRenew" })
+  @SpeakeasyMetadata({ data: "json, name=IsLongTermPricingAutoRenew" })
   isLongTermPricingAutoRenew?: boolean;
 
-  @Metadata({ data: "json, name=LongTermPricingType" })
+  @SpeakeasyMetadata({ data: "json, name=LongTermPricingType" })
   longTermPricingType: LongTermPricingTypeEnum;
 
-  @Metadata({ data: "json, name=SnowballType" })
+  @SpeakeasyMetadata({ data: "json, name=SnowballType" })
   snowballType?: SnowballTypeEnum;
 }

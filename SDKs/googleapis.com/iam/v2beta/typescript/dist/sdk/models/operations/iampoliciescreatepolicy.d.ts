@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class IamPoliciesCreatePolicyPathParams extends SpeakeasyBase {
     parent: string;
@@ -24,7 +24,7 @@ export declare class IamPoliciesCreatePolicySecurity extends SpeakeasyBase {
 export declare class IamPoliciesCreatePolicyRequest extends SpeakeasyBase {
     pathParams: IamPoliciesCreatePolicyPathParams;
     queryParams: IamPoliciesCreatePolicyQueryParams;
-    request?: shared.GoogleIamV2betaPolicy;
+    request?: shared.GoogleIamV2betaPolicyInput;
     security: IamPoliciesCreatePolicySecurity;
 }
 export declare class IamPoliciesCreatePolicyResponse extends SpeakeasyBase {

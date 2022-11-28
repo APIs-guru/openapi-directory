@@ -1,0 +1,37 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import { UserUserToUserContext } from "./userusertousercontext";
+export declare class UserGeneralUser extends SpeakeasyBase {
+    about?: string;
+    blizzardDisplayName?: string;
+    context?: UserUserToUserContext;
+    displayName?: string;
+    fbDisplayName?: string;
+    firstAccess?: Date;
+    isDeleted?: boolean;
+    lastBanReportId?: number;
+    lastUpdate?: Date;
+    legacyPortalUid?: number;
+    locale?: string;
+    localeInheritDefault?: boolean;
+    membershipId?: number;
+    normalizedName?: string;
+    profileBanExpire?: Date;
+    profilePicture?: number;
+    profilePicturePath?: string;
+    profilePictureWidePath?: string;
+    profileTheme?: number;
+    profileThemeName?: string;
+    psnDisplayName?: string;
+    showActivity?: boolean;
+    showGroupMessaging?: boolean;
+    stadiaDisplayName?: string;
+    statusDate?: Date;
+    statusText?: string;
+    steamDisplayName?: string;
+    successMessageFlags?: number;
+    twitchDisplayName?: string;
+    uniqueName?: string;
+    userTitle?: number;
+    userTitleDisplay?: string;
+    xboxDisplayName?: string;
+}

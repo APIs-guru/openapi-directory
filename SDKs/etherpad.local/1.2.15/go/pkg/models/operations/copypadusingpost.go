@@ -6,10 +6,6 @@ type CopyPadUsingPostQueryParams struct {
 	SourceID      *string `queryParam:"style=form,explode=true,name=sourceID"`
 }
 
-type CopyPadUsingPostRequest struct {
-	QueryParams CopyPadUsingPostQueryParams
-}
-
 type CopyPadUsingPost200ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
@@ -32,6 +28,10 @@ type CopyPadUsingPost500ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
 	Message *string                `json:"message,omitempty"`
+}
+
+type CopyPadUsingPostRequest struct {
+	QueryParams CopyPadUsingPostQueryParams
 }
 
 type CopyPadUsingPostResponse struct {

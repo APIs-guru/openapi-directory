@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import portfoliodetail
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListAcceptedPortfolioSharesOutput:
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextPageToken' }})
-    portfolio_details: Optional[List[portfoliodetail.PortfolioDetail]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PortfolioDetails' }})
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextPageToken') }})
+    portfolio_details: Optional[List[PortfolioDetail]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PortfolioDetails') }})
     

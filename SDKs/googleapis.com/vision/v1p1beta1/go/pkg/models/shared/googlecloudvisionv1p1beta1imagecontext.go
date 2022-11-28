@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudVisionV1p1beta1ImageContext
+// Image context and/or feature-specific parameters.
 type GoogleCloudVisionV1p1beta1ImageContext struct {
 	CropHintsParams     *GoogleCloudVisionV1p1beta1CropHintsParams     `json:"cropHintsParams,omitempty"`
 	LanguageHints       []string                                       `json:"languageHints,omitempty"`

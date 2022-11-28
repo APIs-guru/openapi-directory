@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ProtocolMqttClientSetWillqosPathParams = /** @class */ (function (_super) {
     __extends(ProtocolMqttClientSetWillqosPathParams, _super);
     function ProtocolMqttClientSetWillqosPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
         __metadata("design:type", Number)
     ], ProtocolMqttClientSetWillqosPathParams.prototype, "agentNum", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=qos" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=qos" }),
         __metadata("design:type", String)
     ], ProtocolMqttClientSetWillqosPathParams.prototype, "qos", void 0);
     return ProtocolMqttClientSetWillqosPathParams;
@@ -45,7 +45,7 @@ var ProtocolMqttClientSetWillqosRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProtocolMqttClientSetWillqosPathParams)
     ], ProtocolMqttClientSetWillqosRequest.prototype, "pathParams", void 0);
     return ProtocolMqttClientSetWillqosRequest;
@@ -57,15 +57,15 @@ var ProtocolMqttClientSetWillqosResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolMqttClientSetWillqosResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProtocolMqttClientSetWillqosResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Array)
     ], ProtocolMqttClientSetWillqosResponse.prototype, "protocolMqttClientSetWillqos200ApplicationJsonInt32Integers", void 0);
     return ProtocolMqttClientSetWillqosResponse;

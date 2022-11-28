@@ -9,14 +9,14 @@ type ActivityListPublicEventsQueryParams struct {
 	PerPage *int64 `queryParam:"style=form,explode=true,name=per_page"`
 }
 
-type ActivityListPublicEventsRequest struct {
-	QueryParams ActivityListPublicEventsQueryParams
-}
-
 type ActivityListPublicEvents503ApplicationJSON struct {
 	Code             *string `json:"code,omitempty"`
 	DocumentationURL *string `json:"documentation_url,omitempty"`
 	Message          *string `json:"message,omitempty"`
+}
+
+type ActivityListPublicEventsRequest struct {
+	QueryParams ActivityListPublicEventsQueryParams
 }
 
 type ActivityListPublicEventsResponse struct {

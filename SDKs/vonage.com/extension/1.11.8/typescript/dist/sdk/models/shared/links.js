@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FirstHref } from "./firsthref";
 import { NextHref } from "./nexthref";
 import { PrevHref } from "./prevhref";
@@ -33,19 +33,19 @@ var Links = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=first" }),
+        SpeakeasyMetadata({ data: "json, name=first" }),
         __metadata("design:type", FirstHref)
     ], Links.prototype, "first", void 0);
     __decorate([
-        Metadata({ data: "json, name=next" }),
+        SpeakeasyMetadata({ data: "json, name=next" }),
         __metadata("design:type", NextHref)
     ], Links.prototype, "next", void 0);
     __decorate([
-        Metadata({ data: "json, name=prev" }),
+        SpeakeasyMetadata({ data: "json, name=prev" }),
         __metadata("design:type", PrevHref)
     ], Links.prototype, "prev", void 0);
     __decorate([
-        Metadata({ data: "json, name=self" }),
+        SpeakeasyMetadata({ data: "json, name=self" }),
         __metadata("design:type", SelfHref)
     ], Links.prototype, "self", void 0);
     return Links;

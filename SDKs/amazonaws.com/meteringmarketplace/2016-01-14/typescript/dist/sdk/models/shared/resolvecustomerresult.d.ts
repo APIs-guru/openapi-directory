@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * The result of the ResolveCustomer operation. Contains the CustomerIdentifier and product code.
 **/

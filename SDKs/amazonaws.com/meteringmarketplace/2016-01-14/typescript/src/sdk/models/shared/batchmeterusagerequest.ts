@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UsageRecord } from "./usagerecord";
+
 
 
 // BatchMeterUsageRequest
@@ -8,9 +8,9 @@ import { UsageRecord } from "./usagerecord";
  * A BatchMeterUsageRequest contains UsageRecords, which indicate quantities of usage within your application.
 **/
 export class BatchMeterUsageRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ProductCode" })
+  @SpeakeasyMetadata({ data: "json, name=ProductCode" })
   productCode: string;
 
-  @Metadata({ data: "json, name=UsageRecords", elemType: shared.UsageRecord })
+  @SpeakeasyMetadata({ data: "json, name=UsageRecords", elemType: UsageRecord })
   usageRecords: UsageRecord[];
 }

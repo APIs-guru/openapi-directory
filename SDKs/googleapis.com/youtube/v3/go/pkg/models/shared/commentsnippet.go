@@ -21,6 +21,8 @@ const (
 	CommentSnippetViewerRatingEnumDislike CommentSnippetViewerRatingEnum = "dislike"
 )
 
+// CommentSnippet
+// Basic details about a comment, such as its author and text.
 type CommentSnippet struct {
 	AuthorChannelID       *CommentSnippetAuthorChannelID      `json:"authorChannelId,omitempty"`
 	AuthorChannelURL      *string                             `json:"authorChannelUrl,omitempty"`

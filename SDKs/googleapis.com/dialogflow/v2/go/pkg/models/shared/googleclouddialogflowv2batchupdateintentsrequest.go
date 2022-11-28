@@ -7,8 +7,8 @@ const (
 	GoogleCloudDialogflowV2BatchUpdateIntentsRequestIntentViewEnumIntentViewFull        GoogleCloudDialogflowV2BatchUpdateIntentsRequestIntentViewEnum = "INTENT_VIEW_FULL"
 )
 
-type GoogleCloudDialogflowV2BatchUpdateIntentsRequest struct {
-	IntentBatchInline *GoogleCloudDialogflowV2IntentBatch                             `json:"intentBatchInline,omitempty"`
+type GoogleCloudDialogflowV2BatchUpdateIntentsRequestInput struct {
+	IntentBatchInline *GoogleCloudDialogflowV2IntentBatchInput                        `json:"intentBatchInline,omitempty"`
 	IntentBatchURI    *string                                                         `json:"intentBatchUri,omitempty"`
 	IntentView        *GoogleCloudDialogflowV2BatchUpdateIntentsRequestIntentViewEnum `json:"intentView,omitempty"`
 	LanguageCode      *string                                                         `json:"languageCode,omitempty"`

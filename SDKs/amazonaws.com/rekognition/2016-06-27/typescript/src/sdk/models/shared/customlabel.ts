@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Geometry } from "./geometry";
+
 
 
 // CustomLabel
@@ -7,12 +8,12 @@ import { Geometry } from "./geometry";
  * A custom label detected in an image by a call to <a>DetectCustomLabels</a>.
 **/
 export class CustomLabel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Confidence" })
+  @SpeakeasyMetadata({ data: "json, name=Confidence" })
   confidence?: number;
 
-  @Metadata({ data: "json, name=Geometry" })
+  @SpeakeasyMetadata({ data: "json, name=Geometry" })
   geometry?: Geometry;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 }

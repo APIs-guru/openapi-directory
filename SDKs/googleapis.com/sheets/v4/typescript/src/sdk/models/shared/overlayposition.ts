@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GridCoordinate } from "./gridcoordinate";
+
 
 
 // OverlayPosition
@@ -7,18 +8,18 @@ import { GridCoordinate } from "./gridcoordinate";
  * The location an object is overlaid on top of a grid.
 **/
 export class OverlayPosition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=anchorCell" })
+  @SpeakeasyMetadata({ data: "json, name=anchorCell" })
   anchorCell?: GridCoordinate;
 
-  @Metadata({ data: "json, name=heightPixels" })
+  @SpeakeasyMetadata({ data: "json, name=heightPixels" })
   heightPixels?: number;
 
-  @Metadata({ data: "json, name=offsetXPixels" })
+  @SpeakeasyMetadata({ data: "json, name=offsetXPixels" })
   offsetXPixels?: number;
 
-  @Metadata({ data: "json, name=offsetYPixels" })
+  @SpeakeasyMetadata({ data: "json, name=offsetYPixels" })
   offsetYPixels?: number;
 
-  @Metadata({ data: "json, name=widthPixels" })
+  @SpeakeasyMetadata({ data: "json, name=widthPixels" })
   widthPixels?: number;
 }

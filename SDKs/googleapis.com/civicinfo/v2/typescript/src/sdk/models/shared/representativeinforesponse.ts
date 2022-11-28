@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GeographicDivision } from "./geographicdivision";
 import { SimpleAddressType } from "./simpleaddresstype";
 import { Office } from "./office";
 import { Official } from "./official";
+
 
 
 // RepresentativeInfoResponse
@@ -11,18 +11,18 @@ import { Official } from "./official";
  * The result of a representative info lookup query.
 **/
 export class RepresentativeInfoResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=divisions", elemType: shared.GeographicDivision })
+  @SpeakeasyMetadata({ data: "json, name=divisions", elemType: GeographicDivision })
   divisions?: Map<string, GeographicDivision>;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=normalizedInput" })
+  @SpeakeasyMetadata({ data: "json, name=normalizedInput" })
   normalizedInput?: SimpleAddressType;
 
-  @Metadata({ data: "json, name=offices", elemType: shared.Office })
+  @SpeakeasyMetadata({ data: "json, name=offices", elemType: Office })
   offices?: Office[];
 
-  @Metadata({ data: "json, name=officials", elemType: shared.Official })
+  @SpeakeasyMetadata({ data: "json, name=officials", elemType: Official })
   officials?: Official[];
 }

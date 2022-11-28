@@ -1,23 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActiveContext } from "./activecontext";
 import { DialogAction } from "./dialogaction";
 import { IntentSummary } from "./intentsummary";
 
 
+
 export class GetSessionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=activeContexts", elemType: shared.ActiveContext })
+  @SpeakeasyMetadata({ data: "json, name=activeContexts", elemType: ActiveContext })
   activeContexts?: ActiveContext[];
 
-  @Metadata({ data: "json, name=dialogAction" })
+  @SpeakeasyMetadata({ data: "json, name=dialogAction" })
   dialogAction?: DialogAction;
 
-  @Metadata({ data: "json, name=recentIntentSummaryView", elemType: shared.IntentSummary })
+  @SpeakeasyMetadata({ data: "json, name=recentIntentSummaryView", elemType: IntentSummary })
   recentIntentSummaryView?: IntentSummary[];
 
-  @Metadata({ data: "json, name=sessionAttributes" })
+  @SpeakeasyMetadata({ data: "json, name=sessionAttributes" })
   sessionAttributes?: Map<string, string>;
 
-  @Metadata({ data: "json, name=sessionId" })
+  @SpeakeasyMetadata({ data: "json, name=sessionId" })
   sessionId?: string;
 }

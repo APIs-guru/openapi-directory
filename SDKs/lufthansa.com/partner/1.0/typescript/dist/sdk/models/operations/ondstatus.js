@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var OndStatusQueryParams = /** @class */ (function (_super) {
     __extends(OndStatusQueryParams, _super);
@@ -30,15 +30,15 @@ var OndStatusQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=catalogues" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=catalogues" }),
         __metadata("design:type", String)
     ], OndStatusQueryParams.prototype, "catalogues", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=new-routes" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=new-routes" }),
         __metadata("design:type", String)
     ], OndStatusQueryParams.prototype, "newRoutes", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=old-routes" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=old-routes" }),
         __metadata("design:type", String)
     ], OndStatusQueryParams.prototype, "oldRoutes", void 0);
     return OndStatusQueryParams;
@@ -50,7 +50,7 @@ var OndStatusHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Accept" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept" }),
         __metadata("design:type", String)
     ], OndStatusHeaders.prototype, "accept", void 0);
     return OndStatusHeaders;
@@ -62,7 +62,7 @@ var OndStatusSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeAuth)
     ], OndStatusSecurity.prototype, "auth", void 0);
     return OndStatusSecurity;
@@ -74,15 +74,15 @@ var OndStatusRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", OndStatusQueryParams)
     ], OndStatusRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", OndStatusHeaders)
     ], OndStatusRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", OndStatusSecurity)
     ], OndStatusRequest.prototype, "security", void 0);
     return OndStatusRequest;
@@ -94,15 +94,15 @@ var OndStatusResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], OndStatusResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], OndStatusResponse.prototype, "ondStatus200ApplicationJsonString", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], OndStatusResponse.prototype, "statusCode", void 0);
     return OndStatusResponse;

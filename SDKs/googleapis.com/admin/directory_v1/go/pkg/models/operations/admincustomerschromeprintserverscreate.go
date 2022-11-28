@@ -30,7 +30,7 @@ type AdminCustomersChromePrintServersCreateSecurity struct {
 type AdminCustomersChromePrintServersCreateRequest struct {
 	PathParams  AdminCustomersChromePrintServersCreatePathParams
 	QueryParams AdminCustomersChromePrintServersCreateQueryParams
-	Request     *shared.PrintServer `request:"mediaType=application/json"`
+	Request     *shared.PrintServerInput `request:"mediaType=application/json"`
 	Security    AdminCustomersChromePrintServersCreateSecurity
 }
 

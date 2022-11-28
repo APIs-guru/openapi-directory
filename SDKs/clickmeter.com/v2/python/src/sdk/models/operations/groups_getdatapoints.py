@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GroupsGetDatapointsPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 class GroupsGetDatapointsSortDirectionEnum(str, Enum):
     ASC = "asc"
@@ -39,13 +40,13 @@ class GroupsGetDatapointsQueryParams:
 
 @dataclass
 class GroupsGetDatapointsRequest:
-    path_params: GroupsGetDatapointsPathParams = field(default=None)
-    query_params: GroupsGetDatapointsQueryParams = field(default=None)
+    path_params: GroupsGetDatapointsPathParams = field()
+    query_params: GroupsGetDatapointsQueryParams = field()
     
 
 @dataclass
 class GroupsGetDatapointsResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_core_responses_entities_response_api_core_responses_entity_uri_system_int64_: Optional[shared.APICoreResponsesEntitiesResponseAPICoreResponsesEntityURISystemInt64] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

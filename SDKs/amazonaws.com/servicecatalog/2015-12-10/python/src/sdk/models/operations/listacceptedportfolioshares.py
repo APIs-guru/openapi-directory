@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -14,6 +18,7 @@ class ListAcceptedPortfolioSharesXAmzTargetEnum(str, Enum):
 
 @dataclass
 class ListAcceptedPortfolioSharesHeaders:
+    x_amz_target: ListAcceptedPortfolioSharesXAmzTargetEnum = field(metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm', 'style': 'simple', 'explode': False }})
     x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256', 'style': 'simple', 'explode': False }})
     x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential', 'style': 'simple', 'explode': False }})
@@ -21,21 +26,20 @@ class ListAcceptedPortfolioSharesHeaders:
     x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token', 'style': 'simple', 'explode': False }})
     x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature', 'style': 'simple', 'explode': False }})
     x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders', 'style': 'simple', 'explode': False }})
-    x_amz_target: ListAcceptedPortfolioSharesXAmzTargetEnum = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ListAcceptedPortfolioSharesRequest:
-    query_params: ListAcceptedPortfolioSharesQueryParams = field(default=None)
-    headers: ListAcceptedPortfolioSharesHeaders = field(default=None)
-    request: shared.ListAcceptedPortfolioSharesInput = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ListAcceptedPortfolioSharesHeaders = field()
+    query_params: ListAcceptedPortfolioSharesQueryParams = field()
+    request: shared.ListAcceptedPortfolioSharesInput = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ListAcceptedPortfolioSharesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     invalid_parameters_exception: Optional[Any] = field(default=None)
     list_accepted_portfolio_shares_output: Optional[shared.ListAcceptedPortfolioSharesOutput] = field(default=None)
     operation_not_supported_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

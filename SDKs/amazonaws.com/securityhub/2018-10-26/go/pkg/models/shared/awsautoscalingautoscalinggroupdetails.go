@@ -1,5 +1,7 @@
 package shared
 
+// AwsAutoScalingAutoScalingGroupDetails
+// Provides details about an auto scaling group.
 type AwsAutoScalingAutoScalingGroupDetails struct {
 	CreatedTime             *string  `json:"CreatedTime,omitempty"`
 	HealthCheckGracePeriod  *int64   `json:"HealthCheckGracePeriod,omitempty"`

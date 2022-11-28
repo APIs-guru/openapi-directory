@@ -13,13 +13,13 @@ type GetProjectMembershipQueryParams struct {
 	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
+type GetProjectMembership200ApplicationJSON struct {
+	Data *shared.ProjectMembershipResponse `json:"data,omitempty"`
+}
+
 type GetProjectMembershipRequest struct {
 	PathParams  GetProjectMembershipPathParams
 	QueryParams GetProjectMembershipQueryParams
-}
-
-type GetProjectMembership200ApplicationJSON struct {
-	Data *shared.ProjectMembershipResponse `json:"data,omitempty"`
 }
 
 type GetProjectMembershipResponse struct {

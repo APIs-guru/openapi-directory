@@ -12,6 +12,8 @@ const (
 	JobStateEnumAborted          JobStateEnum = "ABORTED"
 )
 
+// Job
+// Job represents an operation for a `Rollout`.
 type Job struct {
 	DeployJob map[string]interface{} `json:"deployJob,omitempty"`
 	ID        *string                `json:"id,omitempty"`

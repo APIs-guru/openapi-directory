@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ComplianceTypeEnum } from "./compliancetypeenum";
+
 
 
 // Evaluation
@@ -7,18 +8,18 @@ import { ComplianceTypeEnum } from "./compliancetypeenum";
  * Identifies an Amazon Web Services resource and indicates whether it complies with the Config rule that it was evaluated against.
 **/
 export class Evaluation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Annotation" })
+  @SpeakeasyMetadata({ data: "json, name=Annotation" })
   annotation?: string;
 
-  @Metadata({ data: "json, name=ComplianceResourceId" })
+  @SpeakeasyMetadata({ data: "json, name=ComplianceResourceId" })
   complianceResourceId: string;
 
-  @Metadata({ data: "json, name=ComplianceResourceType" })
+  @SpeakeasyMetadata({ data: "json, name=ComplianceResourceType" })
   complianceResourceType: string;
 
-  @Metadata({ data: "json, name=ComplianceType" })
+  @SpeakeasyMetadata({ data: "json, name=ComplianceType" })
   complianceType: ComplianceTypeEnum;
 
-  @Metadata({ data: "json, name=OrderingTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=OrderingTimestamp" })
   orderingTimestamp: Date;
 }

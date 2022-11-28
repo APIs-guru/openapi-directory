@@ -1,14 +1,14 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export declare class GetSdkPathParams extends SpeakeasyBase {
+export declare class GetSDKPathParams extends SpeakeasyBase {
     restapiId: string;
     sdkType: string;
     stageName: string;
 }
-export declare class GetSdkQueryParams extends SpeakeasyBase {
+export declare class GetSDKQueryParams extends SpeakeasyBase {
     parameters?: Map<string, string>;
 }
-export declare class GetSdkHeaders extends SpeakeasyBase {
+export declare class GetSDKHeaders extends SpeakeasyBase {
     xAmzAlgorithm?: string;
     xAmzContentSha256?: string;
     xAmzCredential?: string;
@@ -17,18 +17,18 @@ export declare class GetSdkHeaders extends SpeakeasyBase {
     xAmzSignature?: string;
     xAmzSignedHeaders?: string;
 }
-export declare class GetSdkRequest extends SpeakeasyBase {
-    pathParams: GetSdkPathParams;
-    queryParams: GetSdkQueryParams;
-    headers: GetSdkHeaders;
+export declare class GetSDKRequest extends SpeakeasyBase {
+    pathParams: GetSDKPathParams;
+    queryParams: GetSDKQueryParams;
+    headers: GetSDKHeaders;
 }
-export declare class GetSdkResponse extends SpeakeasyBase {
+export declare class GetSDKResponse extends SpeakeasyBase {
     badRequestException?: any;
     conflictException?: any;
     contentType: string;
     limitExceededException?: any;
     notFoundException?: any;
-    sdkResponse?: shared.SdkResponse;
+    sdkResponse?: shared.SDKResponse;
     statusCode: number;
     tooManyRequestsException?: any;
     unauthorizedException?: any;

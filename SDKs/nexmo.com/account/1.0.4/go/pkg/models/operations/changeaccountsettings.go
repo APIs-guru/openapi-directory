@@ -4,7 +4,7 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-var ChangeAccountSettingsServers = []string{
+var ChangeAccountSettingsServerList = []string{
 	"https://rest.nexmo.com",
 }
 

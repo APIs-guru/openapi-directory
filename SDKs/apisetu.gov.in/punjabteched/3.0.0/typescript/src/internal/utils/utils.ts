@@ -72,22 +72,22 @@ export class SpeakeasyBase {
           if (isSpeakeasyBase(prop.type)) {
             (this as any)[prop.key] = new prop.type(value);
           } else if (
-              prop.type.name == "Array" &&
-              isSpeakeasyBase(prop.elemType)
+            prop.type.name == "Array" &&
+            isSpeakeasyBase(prop.elemType)
           ) {
             (this as any)[prop.key] = handleArray(
-                value,
-                prop.elemType,
-                prop.elemDepth
+              value,
+              prop.elemType,
+              prop.elemDepth
             );
           } else if (
-              prop.type.name == "Object" &&
-              isSpeakeasyBase(prop.elemType)
+            prop.type.name == "Object" &&
+            isSpeakeasyBase(prop.elemType)
           ) {
             (this as any)[prop.key] = handleObject(
-                value,
-                prop.elemType,
-                prop.elemDepth
+              value,
+              prop.elemType,
+              prop.elemDepth
             );
           } else {
             (this as any)[prop.key] = value;
@@ -98,9 +98,9 @@ export class SpeakeasyBase {
   }
 }
 
-export function Metadata<
-    T extends SpeakeasyBase = Record<string | symbol, unknown>
-    >(params?: {
+export function SpeakeasyMetadata<
+  T extends SpeakeasyBase = Record<string | symbol, unknown>
+>(params?: {
   data?: string;
   elemType?: { new (): T };
   elemDepth?: number;
@@ -136,8 +136,8 @@ export function Metadata<
 }
 
 export function ReplaceParameters(
-    stringWithParams: string,
-    params: Map<string, string>
+  stringWithParams: string,
+  params: Map<string, string>
 ): string {
   let res: string = stringWithParams;
   params.forEach((value, key) => {
@@ -148,9 +148,9 @@ export function ReplaceParameters(
 }
 
 export function GenerateURL(
-    serverURL: string,
-    path: string,
-    pathParams: any
+  serverURL: string,
+  path: string,
+  pathParams: any
 ): string {
   const url: string = serverURL.replace(/\/$/, "") + path;
   const parsedParameters: Map<string, string> = new Map<string, string>();
@@ -159,18 +159,18 @@ export function GenerateURL(
     const ppAnn: string = Reflect.getMetadata(ppMetadataKey, pathParams, fname);
     if (ppAnn == null) return;
     const ppDecorator: ParamDecorator = ParseParamDecorator(
-        ppAnn,
-        fname,
-        "simple",
-        false
+      ppAnn,
+      fname,
+      "simple",
+      false
     );
     if (ppDecorator == null) return;
     switch (ppDecorator.Style) {
       case "simple":
         const simpleParams: Map<string, string> = GetSimplePathParams(
-            ppDecorator.ParamName,
-            pathParams[fname],
-            ppDecorator.Explode
+          ppDecorator.ParamName,
+          pathParams[fname],
+          ppDecorator.Explode
         );
         simpleParams.forEach((value, key) => {
           parsedParameters.set(key, value);
@@ -181,16 +181,16 @@ export function GenerateURL(
 }
 
 export function ParseParamDecorator(
-    ann: string,
-    fName: string,
-    defaultStyle: string,
-    defaultExplode: boolean
+  ann: string,
+  fName: string,
+  defaultStyle: string,
+  defaultExplode: boolean
 ): ParamDecorator {
   // style=simple;explode=false;name=apiID
   const decorator: ParamDecorator = new ParamDecorator(
-      defaultStyle,
-      defaultExplode,
-      fName.toLowerCase()
+    defaultStyle,
+    defaultExplode,
+    fName.toLowerCase()
   );
 
   ann.split(";").forEach((annPart) => {

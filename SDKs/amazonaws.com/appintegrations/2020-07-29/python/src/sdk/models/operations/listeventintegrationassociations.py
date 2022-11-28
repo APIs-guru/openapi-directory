@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class ListEventIntegrationAssociationsPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'Name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'Name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,19 +30,19 @@ class ListEventIntegrationAssociationsHeaders:
 
 @dataclass
 class ListEventIntegrationAssociationsRequest:
-    path_params: ListEventIntegrationAssociationsPathParams = field(default=None)
-    query_params: ListEventIntegrationAssociationsQueryParams = field(default=None)
-    headers: ListEventIntegrationAssociationsHeaders = field(default=None)
+    headers: ListEventIntegrationAssociationsHeaders = field()
+    path_params: ListEventIntegrationAssociationsPathParams = field()
+    query_params: ListEventIntegrationAssociationsQueryParams = field()
     
 
 @dataclass
 class ListEventIntegrationAssociationsResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_service_error: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     list_event_integration_associations_response: Optional[shared.ListEventIntegrationAssociationsResponse] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

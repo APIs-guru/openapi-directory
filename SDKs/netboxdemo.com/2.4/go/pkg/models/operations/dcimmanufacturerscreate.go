@@ -5,7 +5,7 @@ import (
 )
 
 type DcimManufacturersCreateRequest struct {
-	Request shared.Manufacturer `request:"mediaType=application/json"`
+	Request shared.ManufacturerInput `request:"mediaType=application/json"`
 }
 
 type DcimManufacturersCreateResponse struct {

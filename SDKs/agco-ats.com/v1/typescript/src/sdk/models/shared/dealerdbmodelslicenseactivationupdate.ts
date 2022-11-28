@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DealerDbModelsLicenseActivationUpdate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LicenseVersion, form, name=LicenseVersion;" })
+  @SpeakeasyMetadata({ data: "json, name=LicenseVersion, form, name=LicenseVersion;" })
   licenseVersion: string;
 
-  @Metadata({ data: "json, name=SystemInfo, form, name=SystemInfo;" })
+  @SpeakeasyMetadata({ data: "json, name=SystemInfo, form, name=SystemInfo;" })
   systemInfo?: string;
 }

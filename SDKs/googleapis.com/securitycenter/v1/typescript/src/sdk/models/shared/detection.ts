@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Detection
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Memory hash detection contributing to the binary family match.
 **/
 export class Detection extends SpeakeasyBase {
-  @Metadata({ data: "json, name=binary" })
+  @SpeakeasyMetadata({ data: "json, name=binary" })
   binary?: string;
 
-  @Metadata({ data: "json, name=percentPagesMatched" })
+  @SpeakeasyMetadata({ data: "json, name=percentPagesMatched" })
   percentPagesMatched?: number;
 }

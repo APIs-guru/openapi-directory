@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SuppressedDestination } from "./suppresseddestination";
+
 
 
 // GetSuppressedDestinationResponse
@@ -7,6 +8,6 @@ import { SuppressedDestination } from "./suppresseddestination";
  * Information about the suppressed email address.
 **/
 export class GetSuppressedDestinationResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SuppressedDestination" })
+  @SpeakeasyMetadata({ data: "json, name=SuppressedDestination" })
   suppressedDestination: SuppressedDestination;
 }

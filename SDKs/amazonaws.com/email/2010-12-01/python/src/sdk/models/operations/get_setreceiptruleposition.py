@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetSetReceiptRulePositionActionEnum(str, Enum):
     SET_RECEIPT_RULE_POSITION = "SetReceiptRulePosition"
@@ -10,11 +14,11 @@ class GetSetReceiptRulePositionVersionEnum(str, Enum):
 
 @dataclass
 class GetSetReceiptRulePositionQueryParams:
-    action: GetSetReceiptRulePositionActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetSetReceiptRulePositionActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    rule_name: str = field(metadata={'query_param': { 'field_name': 'RuleName', 'style': 'form', 'explode': True }})
+    rule_set_name: str = field(metadata={'query_param': { 'field_name': 'RuleSetName', 'style': 'form', 'explode': True }})
+    version: GetSetReceiptRulePositionVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     after: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'After', 'style': 'form', 'explode': True }})
-    rule_name: str = field(default=None, metadata={'query_param': { 'field_name': 'RuleName', 'style': 'form', 'explode': True }})
-    rule_set_name: str = field(default=None, metadata={'query_param': { 'field_name': 'RuleSetName', 'style': 'form', 'explode': True }})
-    version: GetSetReceiptRulePositionVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetSetReceiptRulePositionHeaders:
 
 @dataclass
 class GetSetReceiptRulePositionRequest:
-    query_params: GetSetReceiptRulePositionQueryParams = field(default=None)
-    headers: GetSetReceiptRulePositionHeaders = field(default=None)
+    headers: GetSetReceiptRulePositionHeaders = field()
+    query_params: GetSetReceiptRulePositionQueryParams = field()
     
 
 @dataclass
 class GetSetReceiptRulePositionResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

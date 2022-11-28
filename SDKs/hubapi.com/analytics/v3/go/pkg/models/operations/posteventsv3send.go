@@ -4,17 +4,10 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-type PostEventsV3SendSecurityOption1 struct {
-	Hapikey shared.SchemeHapikey `security:"scheme,type=apiKey,subtype=query"`
-}
-
-type PostEventsV3SendSecurityOption2 struct {
-	Oauth2Legacy shared.SchemeOauth2Legacy `security:"scheme,type=oauth2"`
-}
-
 type PostEventsV3SendSecurity struct {
-	Option1 *PostEventsV3SendSecurityOption1 `security:"option"`
-	Option2 *PostEventsV3SendSecurityOption2 `security:"option"`
+	Hapikey           *shared.SchemeHapikey           `security:"scheme,type=apiKey,subtype=query"`
+	PrivateAppsLegacy *shared.SchemePrivateAppsLegacy `security:"scheme,type=apiKey,subtype=header"`
+	Oauth2Legacy      *shared.SchemeOauth2Legacy      `security:"scheme,type=oauth2"`
 }
 
 type PostEventsV3SendRequest struct {

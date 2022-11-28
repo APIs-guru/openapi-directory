@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ReportStateAndNotificationDevice
 /**
  * The states and notifications specific to a device.
@@ -33,11 +33,11 @@ var ReportStateAndNotificationDevice = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=notifications" }),
+        SpeakeasyMetadata({ data: "json, name=notifications" }),
         __metadata("design:type", Map)
     ], ReportStateAndNotificationDevice.prototype, "notifications", void 0);
     __decorate([
-        Metadata({ data: "json, name=states" }),
+        SpeakeasyMetadata({ data: "json, name=states" }),
         __metadata("design:type", Map)
     ], ReportStateAndNotificationDevice.prototype, "states", void 0);
     return ReportStateAndNotificationDevice;

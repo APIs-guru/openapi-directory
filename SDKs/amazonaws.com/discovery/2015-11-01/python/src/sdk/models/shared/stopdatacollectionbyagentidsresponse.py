@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import agentconfigurationstatus
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class StopDataCollectionByAgentIdsResponse:
-    agents_configuration_status: Optional[List[agentconfigurationstatus.AgentConfigurationStatus]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'agentsConfigurationStatus' }})
+    agents_configuration_status: Optional[List[AgentConfigurationStatus]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('agentsConfigurationStatus') }})
     

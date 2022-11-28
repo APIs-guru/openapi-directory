@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class VaultMattersExportsDeletePathParams:
-    export_id: str = field(default=None, metadata={'path_param': { 'field_name': 'exportId', 'style': 'simple', 'explode': False }})
-    matter_id: str = field(default=None, metadata={'path_param': { 'field_name': 'matterId', 'style': 'simple', 'explode': False }})
+    export_id: str = field(metadata={'path_param': { 'field_name': 'exportId', 'style': 'simple', 'explode': False }})
+    matter_id: str = field(metadata={'path_param': { 'field_name': 'matterId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +27,20 @@ class VaultMattersExportsDeleteQueryParams:
 
 @dataclass
 class VaultMattersExportsDeleteSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class VaultMattersExportsDeleteRequest:
-    path_params: VaultMattersExportsDeletePathParams = field(default=None)
-    query_params: VaultMattersExportsDeleteQueryParams = field(default=None)
-    security: VaultMattersExportsDeleteSecurity = field(default=None)
+    path_params: VaultMattersExportsDeletePathParams = field()
+    query_params: VaultMattersExportsDeleteQueryParams = field()
+    security: VaultMattersExportsDeleteSecurity = field()
     
 
 @dataclass
 class VaultMattersExportsDeleteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

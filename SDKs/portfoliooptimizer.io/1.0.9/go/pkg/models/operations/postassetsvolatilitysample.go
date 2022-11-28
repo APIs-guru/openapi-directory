@@ -8,16 +8,16 @@ type PostAssetsVolatilitySampleRequestBody struct {
 	Assets []PostAssetsVolatilitySampleRequestBodyAssets `json:"assets"`
 }
 
-type PostAssetsVolatilitySampleRequest struct {
-	Request PostAssetsVolatilitySampleRequestBody `request:"mediaType=application/json"`
-}
-
 type PostAssetsVolatilitySample200ApplicationJSONAssets struct {
 	AssetVolatility float64 `json:"assetVolatility"`
 }
 
 type PostAssetsVolatilitySample200ApplicationJSON struct {
 	Assets []PostAssetsVolatilitySample200ApplicationJSONAssets `json:"assets"`
+}
+
+type PostAssetsVolatilitySampleRequest struct {
+	Request PostAssetsVolatilitySampleRequestBody `request:"mediaType=application/json"`
 }
 
 type PostAssetsVolatilitySampleResponse struct {

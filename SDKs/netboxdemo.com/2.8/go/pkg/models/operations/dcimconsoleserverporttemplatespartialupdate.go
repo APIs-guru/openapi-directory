@@ -10,7 +10,7 @@ type DcimConsoleServerPortTemplatesPartialUpdatePathParams struct {
 
 type DcimConsoleServerPortTemplatesPartialUpdateRequest struct {
 	PathParams DcimConsoleServerPortTemplatesPartialUpdatePathParams
-	Request    shared.WritableConsoleServerPortTemplate `request:"mediaType=application/json"`
+	Request    shared.WritableConsoleServerPortTemplateInput `request:"mediaType=application/json"`
 }
 
 type DcimConsoleServerPortTemplatesPartialUpdateResponse struct {

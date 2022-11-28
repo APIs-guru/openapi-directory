@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetV3AffiliatesSearchVideosQueryParams = /** @class */ (function (_super) {
     __extends(GetV3AffiliatesSearchVideosQueryParams, _super);
@@ -30,7 +30,7 @@ var GetV3AffiliatesSearchVideosQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=phrase" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=phrase" }),
         __metadata("design:type", String)
     ], GetV3AffiliatesSearchVideosQueryParams.prototype, "phrase", void 0);
     return GetV3AffiliatesSearchVideosQueryParams;
@@ -42,7 +42,7 @@ var GetV3AffiliatesSearchVideosHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Accept-Language" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept-Language" }),
         __metadata("design:type", String)
     ], GetV3AffiliatesSearchVideosHeaders.prototype, "acceptLanguage", void 0);
     return GetV3AffiliatesSearchVideosHeaders;
@@ -54,11 +54,11 @@ var GetV3AffiliatesSearchVideosRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetV3AffiliatesSearchVideosQueryParams)
     ], GetV3AffiliatesSearchVideosRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetV3AffiliatesSearchVideosHeaders)
     ], GetV3AffiliatesSearchVideosRequest.prototype, "headers", void 0);
     return GetV3AffiliatesSearchVideosRequest;
@@ -70,15 +70,15 @@ var GetV3AffiliatesSearchVideosResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.AffiliateVideoSearchResponse)
     ], GetV3AffiliatesSearchVideosResponse.prototype, "affiliateVideoSearchResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetV3AffiliatesSearchVideosResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetV3AffiliatesSearchVideosResponse.prototype, "statusCode", void 0);
     return GetV3AffiliatesSearchVideosResponse;

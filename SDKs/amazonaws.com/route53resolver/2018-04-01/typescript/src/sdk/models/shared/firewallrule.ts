@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActionEnum } from "./actionenum";
 import { BlockOverrideDnsTypeEnum } from "./blockoverridednstypeenum";
 import { BlockResponseEnum } from "./blockresponseenum";
+
 
 
 // FirewallRule
@@ -9,39 +10,39 @@ import { BlockResponseEnum } from "./blockresponseenum";
  * A single firewall rule in a rule group.
 **/
 export class FirewallRule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Action" })
+  @SpeakeasyMetadata({ data: "json, name=Action" })
   action?: ActionEnum;
 
-  @Metadata({ data: "json, name=BlockOverrideDnsType" })
+  @SpeakeasyMetadata({ data: "json, name=BlockOverrideDnsType" })
   blockOverrideDnsType?: BlockOverrideDnsTypeEnum;
 
-  @Metadata({ data: "json, name=BlockOverrideDomain" })
+  @SpeakeasyMetadata({ data: "json, name=BlockOverrideDomain" })
   blockOverrideDomain?: string;
 
-  @Metadata({ data: "json, name=BlockOverrideTtl" })
+  @SpeakeasyMetadata({ data: "json, name=BlockOverrideTtl" })
   blockOverrideTtl?: number;
 
-  @Metadata({ data: "json, name=BlockResponse" })
+  @SpeakeasyMetadata({ data: "json, name=BlockResponse" })
   blockResponse?: BlockResponseEnum;
 
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime?: string;
 
-  @Metadata({ data: "json, name=CreatorRequestId" })
+  @SpeakeasyMetadata({ data: "json, name=CreatorRequestId" })
   creatorRequestId?: string;
 
-  @Metadata({ data: "json, name=FirewallDomainListId" })
+  @SpeakeasyMetadata({ data: "json, name=FirewallDomainListId" })
   firewallDomainListId?: string;
 
-  @Metadata({ data: "json, name=FirewallRuleGroupId" })
+  @SpeakeasyMetadata({ data: "json, name=FirewallRuleGroupId" })
   firewallRuleGroupId?: string;
 
-  @Metadata({ data: "json, name=ModificationTime" })
+  @SpeakeasyMetadata({ data: "json, name=ModificationTime" })
   modificationTime?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Priority" })
+  @SpeakeasyMetadata({ data: "json, name=Priority" })
   priority?: number;
 }

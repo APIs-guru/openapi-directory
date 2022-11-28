@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DocumentClassifierInputDataConfig } from "./documentclassifierinputdataconfig";
 import { LanguageCodeEnum } from "./languagecodeenum";
 import { DocumentClassifierModeEnum } from "./documentclassifiermodeenum";

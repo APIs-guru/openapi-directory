@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContentMatcher } from "./contentmatcher";
 import { HttpCheck } from "./httpcheck";
 import { InternalChecker } from "./internalchecker";
@@ -7,18 +6,19 @@ import { MonitoredResource } from "./monitoredresource";
 import { ResourceGroup } from "./resourcegroup";
 import { TcpCheck } from "./tcpcheck";
 
+
 export enum UptimeCheckConfigCheckerTypeEnum {
-    CheckerTypeUnspecified = "CHECKER_TYPE_UNSPECIFIED"
-,    StaticIpCheckers = "STATIC_IP_CHECKERS"
-,    VpcCheckers = "VPC_CHECKERS"
+    CheckerTypeUnspecified = "CHECKER_TYPE_UNSPECIFIED",
+    StaticIpCheckers = "STATIC_IP_CHECKERS",
+    VpcCheckers = "VPC_CHECKERS"
 }
 
 export enum UptimeCheckConfigSelectedRegionsEnum {
-    RegionUnspecified = "REGION_UNSPECIFIED"
-,    Usa = "USA"
-,    Europe = "EUROPE"
-,    SouthAmerica = "SOUTH_AMERICA"
-,    AsiaPacific = "ASIA_PACIFIC"
+    RegionUnspecified = "REGION_UNSPECIFIED",
+    Usa = "USA",
+    Europe = "EUROPE",
+    SouthAmerica = "SOUTH_AMERICA",
+    AsiaPacific = "ASIA_PACIFIC"
 }
 
 
@@ -27,45 +27,45 @@ export enum UptimeCheckConfigSelectedRegionsEnum {
  * This message configures which resources and services to monitor for availability.
 **/
 export class UptimeCheckConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=checkerType" })
+  @SpeakeasyMetadata({ data: "json, name=checkerType" })
   checkerType?: UptimeCheckConfigCheckerTypeEnum;
 
-  @Metadata({ data: "json, name=contentMatchers", elemType: shared.ContentMatcher })
+  @SpeakeasyMetadata({ data: "json, name=contentMatchers", elemType: ContentMatcher })
   contentMatchers?: ContentMatcher[];
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=httpCheck" })
+  @SpeakeasyMetadata({ data: "json, name=httpCheck" })
   httpCheck?: HttpCheck;
 
-  @Metadata({ data: "json, name=internalCheckers", elemType: shared.InternalChecker })
+  @SpeakeasyMetadata({ data: "json, name=internalCheckers", elemType: InternalChecker })
   internalCheckers?: InternalChecker[];
 
-  @Metadata({ data: "json, name=isInternal" })
+  @SpeakeasyMetadata({ data: "json, name=isInternal" })
   isInternal?: boolean;
 
-  @Metadata({ data: "json, name=monitoredResource" })
+  @SpeakeasyMetadata({ data: "json, name=monitoredResource" })
   monitoredResource?: MonitoredResource;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=period" })
+  @SpeakeasyMetadata({ data: "json, name=period" })
   period?: string;
 
-  @Metadata({ data: "json, name=resourceGroup" })
+  @SpeakeasyMetadata({ data: "json, name=resourceGroup" })
   resourceGroup?: ResourceGroup;
 
-  @Metadata({ data: "json, name=selectedRegions" })
+  @SpeakeasyMetadata({ data: "json, name=selectedRegions" })
   selectedRegions?: UptimeCheckConfigSelectedRegionsEnum[];
 
-  @Metadata({ data: "json, name=tcpCheck" })
+  @SpeakeasyMetadata({ data: "json, name=tcpCheck" })
   tcpCheck?: TcpCheck;
 
-  @Metadata({ data: "json, name=timeout" })
+  @SpeakeasyMetadata({ data: "json, name=timeout" })
   timeout?: string;
 
-  @Metadata({ data: "json, name=userLabels" })
+  @SpeakeasyMetadata({ data: "json, name=userLabels" })
   userLabels?: Map<string, string>;
 }

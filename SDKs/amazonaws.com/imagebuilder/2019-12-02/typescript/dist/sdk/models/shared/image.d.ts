@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ContainerRecipe } from "./containerrecipe";
 import { DistributionConfiguration } from "./distributionconfiguration";
 import { ImageRecipe } from "./imagerecipe";

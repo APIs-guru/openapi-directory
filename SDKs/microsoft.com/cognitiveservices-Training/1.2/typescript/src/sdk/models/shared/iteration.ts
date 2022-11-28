@@ -1,4 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
+
+
+// IterationInput
+/** 
+ * Iteration model to be sent over JSON
+**/
+export class IterationInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=IsDefault, form, name=IsDefault;" })
+  isDefault?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=Name, form, name=Name;" })
+  name?: string;
+}
 
 
 // Iteration
@@ -6,33 +20,33 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Iteration model to be sent over JSON
 **/
 export class Iteration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Created, form, name=Created;" })
+  @SpeakeasyMetadata({ data: "json, name=Created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=DomainId, form, name=DomainId;" })
+  @SpeakeasyMetadata({ data: "json, name=DomainId" })
   domainId?: string;
 
-  @Metadata({ data: "json, name=Exportable, form, name=Exportable;" })
+  @SpeakeasyMetadata({ data: "json, name=Exportable" })
   exportable?: boolean;
 
-  @Metadata({ data: "json, name=Id, form, name=Id;" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=IsDefault, form, name=IsDefault;" })
+  @SpeakeasyMetadata({ data: "json, name=IsDefault" })
   isDefault?: boolean;
 
-  @Metadata({ data: "json, name=LastModified, form, name=LastModified;" })
+  @SpeakeasyMetadata({ data: "json, name=LastModified" })
   lastModified?: Date;
 
-  @Metadata({ data: "json, name=Name, form, name=Name;" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=ProjectId, form, name=ProjectId;" })
+  @SpeakeasyMetadata({ data: "json, name=ProjectId" })
   projectId?: string;
 
-  @Metadata({ data: "json, name=Status, form, name=Status;" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: string;
 
-  @Metadata({ data: "json, name=TrainedAt, form, name=TrainedAt;" })
+  @SpeakeasyMetadata({ data: "json, name=TrainedAt" })
   trainedAt?: Date;
 }

@@ -12,13 +12,13 @@ class TagsPutRequests:
 
 @dataclass
 class TagsPutRequest:
-    request: TagsPutRequests = field(default=None)
+    request: TagsPutRequests = field()
     
 
 @dataclass
 class TagsPutResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_core_responses_entity_uri_system_int64_: Optional[shared.APICoreResponsesEntityURISystemInt64] = field(default=None)
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    body: Optional[bytes] = field(default=None)
     

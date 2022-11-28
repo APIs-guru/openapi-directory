@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetDeregisterInstanceEventNotificationAttributesActionEnum(str, Enum):
     DEREGISTER_INSTANCE_EVENT_NOTIFICATION_ATTRIBUTES = "DeregisterInstanceEventNotificationAttributes"
@@ -7,6 +11,10 @@ class GetDeregisterInstanceEventNotificationAttributesActionEnum(str, Enum):
 
 @dataclass
 class GetDeregisterInstanceEventNotificationAttributesInstanceTagAttribute:
+    r"""GetDeregisterInstanceEventNotificationAttributesInstanceTagAttribute
+    Information about the tag keys to deregister for the current Region. You can either specify individual tag keys or deregister all tag keys in the current Region. You must specify either <code>IncludeAllTagsOfInstance</code> or <code>InstanceTagKeys</code> in the request
+    """
+    
     include_all_tags_of_instance: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'IncludeAllTagsOfInstance' }})
     instance_tag_keys: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'InstanceTagKeys' }})
     
@@ -16,10 +24,10 @@ class GetDeregisterInstanceEventNotificationAttributesVersionEnum(str, Enum):
 
 @dataclass
 class GetDeregisterInstanceEventNotificationAttributesQueryParams:
-    action: GetDeregisterInstanceEventNotificationAttributesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDeregisterInstanceEventNotificationAttributesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDeregisterInstanceEventNotificationAttributesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
     instance_tag_attribute: Optional[GetDeregisterInstanceEventNotificationAttributesInstanceTagAttribute] = field(default=None, metadata={'query_param': { 'field_name': 'InstanceTagAttribute', 'style': 'form', 'explode': True }})
-    version: GetDeregisterInstanceEventNotificationAttributesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -35,13 +43,13 @@ class GetDeregisterInstanceEventNotificationAttributesHeaders:
 
 @dataclass
 class GetDeregisterInstanceEventNotificationAttributesRequest:
-    query_params: GetDeregisterInstanceEventNotificationAttributesQueryParams = field(default=None)
-    headers: GetDeregisterInstanceEventNotificationAttributesHeaders = field(default=None)
+    headers: GetDeregisterInstanceEventNotificationAttributesHeaders = field()
+    query_params: GetDeregisterInstanceEventNotificationAttributesQueryParams = field()
     
 
 @dataclass
 class GetDeregisterInstanceEventNotificationAttributesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

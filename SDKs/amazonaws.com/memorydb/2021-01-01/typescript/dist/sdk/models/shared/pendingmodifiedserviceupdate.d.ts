@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ServiceUpdateStatusEnum } from "./serviceupdatestatusenum";
 /**
  * Update action that has yet to be processed for the corresponding apply/stop request

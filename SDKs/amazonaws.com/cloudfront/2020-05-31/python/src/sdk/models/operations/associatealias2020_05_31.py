@@ -1,15 +1,18 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 
 
 @dataclass
 class AssociateAlias20200531PathParams:
-    target_distribution_id: str = field(default=None, metadata={'path_param': { 'field_name': 'TargetDistributionId', 'style': 'simple', 'explode': False }})
+    target_distribution_id: str = field(metadata={'path_param': { 'field_name': 'TargetDistributionId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class AssociateAlias20200531QueryParams:
-    alias: str = field(default=None, metadata={'query_param': { 'field_name': 'Alias', 'style': 'form', 'explode': True }})
+    alias: str = field(metadata={'query_param': { 'field_name': 'Alias', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -25,14 +28,14 @@ class AssociateAlias20200531Headers:
 
 @dataclass
 class AssociateAlias20200531Request:
-    path_params: AssociateAlias20200531PathParams = field(default=None)
-    query_params: AssociateAlias20200531QueryParams = field(default=None)
-    headers: AssociateAlias20200531Headers = field(default=None)
+    headers: AssociateAlias20200531Headers = field()
+    path_params: AssociateAlias20200531PathParams = field()
+    query_params: AssociateAlias20200531QueryParams = field()
     
 
 @dataclass
 class AssociateAlias20200531Response:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

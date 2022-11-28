@@ -1,23 +1,25 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import mobiledeviceaccessruleeffect_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateMobileDeviceAccessRuleRequest:
-    client_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ClientToken' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
-    device_models: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DeviceModels' }})
-    device_operating_systems: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DeviceOperatingSystems' }})
-    device_types: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DeviceTypes' }})
-    device_user_agents: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DeviceUserAgents' }})
-    effect: mobiledeviceaccessruleeffect_enum.MobileDeviceAccessRuleEffectEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Effect' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
-    not_device_models: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NotDeviceModels' }})
-    not_device_operating_systems: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NotDeviceOperatingSystems' }})
-    not_device_types: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NotDeviceTypes' }})
-    not_device_user_agents: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NotDeviceUserAgents' }})
-    organization_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OrganizationId' }})
+    effect: MobileDeviceAccessRuleEffectEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Effect') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
+    organization_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('OrganizationId') }})
+    client_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ClientToken') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Description') }})
+    device_models: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DeviceModels') }})
+    device_operating_systems: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DeviceOperatingSystems') }})
+    device_types: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DeviceTypes') }})
+    device_user_agents: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DeviceUserAgents') }})
+    not_device_models: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NotDeviceModels') }})
+    not_device_operating_systems: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NotDeviceOperatingSystems') }})
+    not_device_types: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NotDeviceTypes') }})
+    not_device_user_agents: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NotDeviceUserAgents') }})
     

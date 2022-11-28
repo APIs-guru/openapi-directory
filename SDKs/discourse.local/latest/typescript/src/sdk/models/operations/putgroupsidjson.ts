@@ -1,46 +1,47 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PutGroupsIdJsonPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
 
 export class PutGroupsIdJsonRequestBodyGroup extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 }
 
 
 export class PutGroupsIdJsonRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=group" })
+  @SpeakeasyMetadata({ data: "json, name=group" })
   group: PutGroupsIdJsonRequestBodyGroup;
 }
 
 
-export class PutGroupsIdJsonRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: PutGroupsIdJsonPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: PutGroupsIdJsonRequestBody;
-}
-
-
 export class PutGroupsIdJson200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=success" })
+  @SpeakeasyMetadata({ data: "json, name=success" })
   success?: string;
 }
 
 
+export class PutGroupsIdJsonRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: PutGroupsIdJsonPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: PutGroupsIdJsonRequestBody;
+}
+
+
 export class PutGroupsIdJsonResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   putGroupsIdJson200ApplicationJsonObject?: PutGroupsIdJson200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

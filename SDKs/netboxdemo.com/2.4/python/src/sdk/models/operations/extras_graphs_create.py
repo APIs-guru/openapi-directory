@@ -5,12 +5,12 @@ from sdk.models import shared
 
 @dataclass
 class ExtrasGraphsCreateRequest:
-    request: shared.WritableGraph = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.WritableGraphInput = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ExtrasGraphsCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     graph: Optional[shared.Graph] = field(default=None)
-    status_code: int = field(default=None)
     

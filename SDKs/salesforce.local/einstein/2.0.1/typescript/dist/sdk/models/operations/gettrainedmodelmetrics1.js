@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetTrainedModelMetrics1PathParams = /** @class */ (function (_super) {
     __extends(GetTrainedModelMetrics1PathParams, _super);
@@ -30,7 +30,7 @@ var GetTrainedModelMetrics1PathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=modelId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=modelId" }),
         __metadata("design:type", String)
     ], GetTrainedModelMetrics1PathParams.prototype, "modelId", void 0);
     return GetTrainedModelMetrics1PathParams;
@@ -42,7 +42,7 @@ var GetTrainedModelMetrics1Security = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
         __metadata("design:type", shared.SchemeBearerToken)
     ], GetTrainedModelMetrics1Security.prototype, "bearerToken", void 0);
     return GetTrainedModelMetrics1Security;
@@ -54,11 +54,11 @@ var GetTrainedModelMetrics1Request = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetTrainedModelMetrics1PathParams)
     ], GetTrainedModelMetrics1Request.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetTrainedModelMetrics1Security)
     ], GetTrainedModelMetrics1Request.prototype, "security", void 0);
     return GetTrainedModelMetrics1Request;
@@ -70,15 +70,15 @@ var GetTrainedModelMetrics1Response = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetTrainedModelMetrics1Response.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Metrics)
     ], GetTrainedModelMetrics1Response.prototype, "metrics", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetTrainedModelMetrics1Response.prototype, "statusCode", void 0);
     return GetTrainedModelMetrics1Response;

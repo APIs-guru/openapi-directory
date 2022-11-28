@@ -1,13 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import jobstatus_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class StartFhirImportJobResponse:
-    datastore_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DatastoreId' }})
-    job_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'JobId' }})
-    job_status: jobstatus_enum.JobStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'JobStatus' }})
+    job_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('JobId') }})
+    job_status: JobStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('JobStatus') }})
+    datastore_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DatastoreId') }})
     

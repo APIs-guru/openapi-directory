@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ValidatorConfigJsonOpEnum {
-    LessThan = "<"
-,    LessThanEqual = "<="
-,    GreaterThan = ">"
-,    GreaterThanEqual = ">="
-,    EqualEqual = "=="
-,    NotEqual = "!="
+    LessThan = "<",
+    LessThanEqual = "<=",
+    GreaterThan = ">",
+    GreaterThanEqual = ">=",
+    EqualEqual = "==",
+    NotEqual = "!="
 }
 
 
 export class ValidatorConfigJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=op" })
+  @SpeakeasyMetadata({ data: "json, name=op" })
   op?: ValidatorConfigJsonOpEnum;
 
-  @Metadata({ data: "json, name=threshold" })
+  @SpeakeasyMetadata({ data: "json, name=threshold" })
   threshold?: number;
 }

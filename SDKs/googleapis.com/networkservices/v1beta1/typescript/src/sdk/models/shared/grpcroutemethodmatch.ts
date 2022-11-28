@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GrpcRouteMethodMatchTypeEnum {
-    TypeUnspecified = "TYPE_UNSPECIFIED"
-,    Exact = "EXACT"
-,    RegularExpression = "REGULAR_EXPRESSION"
+    TypeUnspecified = "TYPE_UNSPECIFIED",
+    Exact = "EXACT",
+    RegularExpression = "REGULAR_EXPRESSION"
 }
 
 
@@ -12,15 +13,15 @@ export enum GrpcRouteMethodMatchTypeEnum {
  * Specifies a match against a method.
 **/
 export class GrpcRouteMethodMatch extends SpeakeasyBase {
-  @Metadata({ data: "json, name=caseSensitive" })
+  @SpeakeasyMetadata({ data: "json, name=caseSensitive" })
   caseSensitive?: boolean;
 
-  @Metadata({ data: "json, name=grpcMethod" })
+  @SpeakeasyMetadata({ data: "json, name=grpcMethod" })
   grpcMethod?: string;
 
-  @Metadata({ data: "json, name=grpcService" })
+  @SpeakeasyMetadata({ data: "json, name=grpcService" })
   grpcService?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: GrpcRouteMethodMatchTypeEnum;
 }

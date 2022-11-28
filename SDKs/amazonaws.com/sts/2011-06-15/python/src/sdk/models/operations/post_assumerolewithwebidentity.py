@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostAssumeRoleWithWebIdentityActionEnum(str, Enum):
     ASSUME_ROLE_WITH_WEB_IDENTITY = "AssumeRoleWithWebIdentity"
@@ -10,8 +14,8 @@ class PostAssumeRoleWithWebIdentityVersionEnum(str, Enum):
 
 @dataclass
 class PostAssumeRoleWithWebIdentityQueryParams:
-    action: PostAssumeRoleWithWebIdentityActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostAssumeRoleWithWebIdentityVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostAssumeRoleWithWebIdentityActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostAssumeRoleWithWebIdentityVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostAssumeRoleWithWebIdentityHeaders:
 
 @dataclass
 class PostAssumeRoleWithWebIdentityRequest:
-    query_params: PostAssumeRoleWithWebIdentityQueryParams = field(default=None)
-    headers: PostAssumeRoleWithWebIdentityHeaders = field(default=None)
+    headers: PostAssumeRoleWithWebIdentityHeaders = field()
+    query_params: PostAssumeRoleWithWebIdentityQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostAssumeRoleWithWebIdentityResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

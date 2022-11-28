@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var EgipcRequestBodyCertificateParameters = /** @class */ (function (_super) {
     __extends(EgipcRequestBodyCertificateParameters, _super);
@@ -30,15 +30,15 @@ var EgipcRequestBodyCertificateParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=INSCODE" }),
+        SpeakeasyMetadata({ data: "json, name=INSCODE" }),
         __metadata("design:type", String)
     ], EgipcRequestBodyCertificateParameters.prototype, "inscode", void 0);
     __decorate([
-        Metadata({ data: "json, name=POLNO" }),
+        SpeakeasyMetadata({ data: "json, name=POLNO" }),
         __metadata("design:type", String)
     ], EgipcRequestBodyCertificateParameters.prototype, "polno", void 0);
     __decorate([
-        Metadata({ data: "json, name=STARTDT" }),
+        SpeakeasyMetadata({ data: "json, name=STARTDT" }),
         __metadata("design:type", String)
     ], EgipcRequestBodyCertificateParameters.prototype, "startdt", void 0);
     return EgipcRequestBodyCertificateParameters;
@@ -54,19 +54,19 @@ var EgipcRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=certificateParameters" }),
+        SpeakeasyMetadata({ data: "json, name=certificateParameters" }),
         __metadata("design:type", EgipcRequestBodyCertificateParameters)
     ], EgipcRequestBody.prototype, "certificateParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=consentArtifact" }),
+        SpeakeasyMetadata({ data: "json, name=consentArtifact" }),
         __metadata("design:type", Object)
     ], EgipcRequestBody.prototype, "consentArtifact", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], EgipcRequestBody.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=txnId" }),
+        SpeakeasyMetadata({ data: "json, name=txnId" }),
         __metadata("design:type", String)
     ], EgipcRequestBody.prototype, "txnId", void 0);
     return EgipcRequestBody;
@@ -78,32 +78,16 @@ var EgipcSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], EgipcSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeClientId)
     ], EgipcSecurity.prototype, "clientId", void 0);
     return EgipcSecurity;
 }(SpeakeasyBase));
 export { EgipcSecurity };
-var EgipcRequest = /** @class */ (function (_super) {
-    __extends(EgipcRequest, _super);
-    function EgipcRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", EgipcRequestBody)
-    ], EgipcRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", EgipcSecurity)
-    ], EgipcRequest.prototype, "security", void 0);
-    return EgipcRequest;
-}(SpeakeasyBase));
-export { EgipcRequest };
 export var Egipc400ApplicationJsonErrorEnum;
 (function (Egipc400ApplicationJsonErrorEnum) {
     Egipc400ApplicationJsonErrorEnum["MissingParameter"] = "missing_parameter";
@@ -126,11 +110,11 @@ var Egipc400ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Egipc400ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Egipc400ApplicationJson.prototype, "errorDescription", void 0);
     return Egipc400ApplicationJson;
@@ -152,11 +136,11 @@ var Egipc401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Egipc401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Egipc401ApplicationJson.prototype, "errorDescription", void 0);
     return Egipc401ApplicationJson;
@@ -178,11 +162,11 @@ var Egipc404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Egipc404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Egipc404ApplicationJson.prototype, "errorDescription", void 0);
     return Egipc404ApplicationJson;
@@ -202,11 +186,11 @@ var Egipc500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Egipc500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Egipc500ApplicationJson.prototype, "errorDescription", void 0);
     return Egipc500ApplicationJson;
@@ -226,11 +210,11 @@ var Egipc502ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Egipc502ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Egipc502ApplicationJson.prototype, "errorDescription", void 0);
     return Egipc502ApplicationJson;
@@ -250,11 +234,11 @@ var Egipc503ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Egipc503ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Egipc503ApplicationJson.prototype, "errorDescription", void 0);
     return Egipc503ApplicationJson;
@@ -274,55 +258,71 @@ var Egipc504ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Egipc504ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Egipc504ApplicationJson.prototype, "errorDescription", void 0);
     return Egipc504ApplicationJson;
 }(SpeakeasyBase));
 export { Egipc504ApplicationJson };
+var EgipcRequest = /** @class */ (function (_super) {
+    __extends(EgipcRequest, _super);
+    function EgipcRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", EgipcRequestBody)
+    ], EgipcRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", EgipcSecurity)
+    ], EgipcRequest.prototype, "security", void 0);
+    return EgipcRequest;
+}(SpeakeasyBase));
+export { EgipcRequest };
 var EgipcResponse = /** @class */ (function (_super) {
     __extends(EgipcResponse, _super);
     function EgipcResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], EgipcResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], EgipcResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Egipc400ApplicationJson)
     ], EgipcResponse.prototype, "egipc400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Egipc401ApplicationJson)
     ], EgipcResponse.prototype, "egipc401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Egipc404ApplicationJson)
     ], EgipcResponse.prototype, "egipc404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Egipc500ApplicationJson)
     ], EgipcResponse.prototype, "egipc500ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Egipc502ApplicationJson)
     ], EgipcResponse.prototype, "egipc502ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Egipc503ApplicationJson)
     ], EgipcResponse.prototype, "egipc503ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Egipc504ApplicationJson)
     ], EgipcResponse.prototype, "egipc504ApplicationJsonObject", void 0);
     return EgipcResponse;

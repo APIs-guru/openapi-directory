@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FeedbackValueEnum } from "./feedbackvalueenum";
 import { SeverityLevelEnum } from "./severitylevelenum";
 import { StatusEnum } from "./statusenum";
+
 
 
 // Problem
@@ -9,33 +10,33 @@ import { StatusEnum } from "./statusenum";
  * Describes a problem that is detected by correlating observations.
 **/
 export class Problem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AffectedResource" })
+  @SpeakeasyMetadata({ data: "json, name=AffectedResource" })
   affectedResource?: string;
 
-  @Metadata({ data: "json, name=EndTime" })
+  @SpeakeasyMetadata({ data: "json, name=EndTime" })
   endTime?: Date;
 
-  @Metadata({ data: "json, name=Feedback" })
+  @SpeakeasyMetadata({ data: "json, name=Feedback" })
   feedback?: Map<string, FeedbackValueEnum>;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=Insights" })
+  @SpeakeasyMetadata({ data: "json, name=Insights" })
   insights?: string;
 
-  @Metadata({ data: "json, name=ResourceGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceGroupName" })
   resourceGroupName?: string;
 
-  @Metadata({ data: "json, name=SeverityLevel" })
+  @SpeakeasyMetadata({ data: "json, name=SeverityLevel" })
   severityLevel?: SeverityLevelEnum;
 
-  @Metadata({ data: "json, name=StartTime" })
+  @SpeakeasyMetadata({ data: "json, name=StartTime" })
   startTime?: Date;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: StatusEnum;
 
-  @Metadata({ data: "json, name=Title" })
+  @SpeakeasyMetadata({ data: "json, name=Title" })
   title?: string;
 }

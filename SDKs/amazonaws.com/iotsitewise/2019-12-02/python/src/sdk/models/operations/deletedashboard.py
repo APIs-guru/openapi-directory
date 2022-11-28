@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteDashboardPathParams:
-    dashboard_id: str = field(default=None, metadata={'path_param': { 'field_name': 'dashboardId', 'style': 'simple', 'explode': False }})
+    dashboard_id: str = field(metadata={'path_param': { 'field_name': 'dashboardId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,18 +28,18 @@ class DeleteDashboardHeaders:
 
 @dataclass
 class DeleteDashboardRequest:
-    path_params: DeleteDashboardPathParams = field(default=None)
-    query_params: DeleteDashboardQueryParams = field(default=None)
-    headers: DeleteDashboardHeaders = field(default=None)
+    headers: DeleteDashboardHeaders = field()
+    path_params: DeleteDashboardPathParams = field()
+    query_params: DeleteDashboardQueryParams = field()
     
 
 @dataclass
 class DeleteDashboardResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     delete_dashboard_response: Optional[dict[str, Any]] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

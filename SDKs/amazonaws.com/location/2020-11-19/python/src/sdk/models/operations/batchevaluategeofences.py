@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class BatchEvaluateGeofencesPathParams:
-    collection_name: str = field(default=None, metadata={'path_param': { 'field_name': 'CollectionName', 'style': 'simple', 'explode': False }})
+    collection_name: str = field(metadata={'path_param': { 'field_name': 'CollectionName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,24 +27,24 @@ class BatchEvaluateGeofencesHeaders:
 @dataclass_json
 @dataclass
 class BatchEvaluateGeofencesRequestBody:
-    device_position_updates: List[shared.DevicePositionUpdate] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DevicePositionUpdates' }})
+    device_position_updates: List[shared.DevicePositionUpdate] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('DevicePositionUpdates') }})
     
 
 @dataclass
 class BatchEvaluateGeofencesRequest:
-    path_params: BatchEvaluateGeofencesPathParams = field(default=None)
-    headers: BatchEvaluateGeofencesHeaders = field(default=None)
-    request: BatchEvaluateGeofencesRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: BatchEvaluateGeofencesHeaders = field()
+    path_params: BatchEvaluateGeofencesPathParams = field()
+    request: BatchEvaluateGeofencesRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class BatchEvaluateGeofencesResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
     batch_evaluate_geofences_response: Optional[shared.BatchEvaluateGeofencesResponse] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

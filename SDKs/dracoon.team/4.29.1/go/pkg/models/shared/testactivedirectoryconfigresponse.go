@@ -1,5 +1,7 @@
 package shared
 
+// TestActiveDirectoryConfigResponse
+// Response model for testing connection for Active Directory configuration
 type TestActiveDirectoryConfigResponse struct {
 	LdapUsersDomain     string  `json:"ldapUsersDomain"`
 	ServerAdminName     string  `json:"serverAdminName"`

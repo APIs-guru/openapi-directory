@@ -1,6 +1,37 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AuxiliaryMessage } from "./auxiliarymessage";
+
+
+
+// PrinterInput
+/** 
+ * Printer configuration.
+**/
+export class PrinterInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
+  displayName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=id" })
+  id?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=makeAndModel" })
+  makeAndModel?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=orgUnitId" })
+  orgUnitId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=uri" })
+  uri?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=useDriverlessConfig" })
+  useDriverlessConfig?: boolean;
+}
 
 
 // Printer
@@ -8,33 +39,33 @@ import { AuxiliaryMessage } from "./auxiliarymessage";
  * Printer configuration.
 **/
 export class Printer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=auxiliaryMessages", elemType: shared.AuxiliaryMessage })
+  @SpeakeasyMetadata({ data: "json, name=auxiliaryMessages", elemType: AuxiliaryMessage })
   auxiliaryMessages?: AuxiliaryMessage[];
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=makeAndModel" })
+  @SpeakeasyMetadata({ data: "json, name=makeAndModel" })
   makeAndModel?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=orgUnitId" })
+  @SpeakeasyMetadata({ data: "json, name=orgUnitId" })
   orgUnitId?: string;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri?: string;
 
-  @Metadata({ data: "json, name=useDriverlessConfig" })
+  @SpeakeasyMetadata({ data: "json, name=useDriverlessConfig" })
   useDriverlessConfig?: boolean;
 }

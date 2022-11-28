@@ -1,21 +1,22 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class LicensingLicenseAssignmentsListForProductAndSkuPathParams:
-    product_id: str = field(default=None, metadata={'path_param': { 'field_name': 'productId', 'style': 'simple', 'explode': False }})
-    sku_id: str = field(default=None, metadata={'path_param': { 'field_name': 'skuId', 'style': 'simple', 'explode': False }})
+    product_id: str = field(metadata={'path_param': { 'field_name': 'productId', 'style': 'simple', 'explode': False }})
+    sku_id: str = field(metadata={'path_param': { 'field_name': 'skuId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class LicensingLicenseAssignmentsListForProductAndSkuQueryParams:
+    customer_id: str = field(metadata={'query_param': { 'field_name': 'customerId', 'style': 'form', 'explode': True }})
     dollar_xgafv: Optional[shared.XgafvEnum] = field(default=None, metadata={'query_param': { 'field_name': '$.xgafv', 'style': 'form', 'explode': True }})
     access_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'access_token', 'style': 'form', 'explode': True }})
     alt: Optional[shared.AltEnum] = field(default=None, metadata={'query_param': { 'field_name': 'alt', 'style': 'form', 'explode': True }})
     callback: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'callback', 'style': 'form', 'explode': True }})
-    customer_id: str = field(default=None, metadata={'query_param': { 'field_name': 'customerId', 'style': 'form', 'explode': True }})
     fields: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'fields', 'style': 'form', 'explode': True }})
     key: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'key', 'style': 'form', 'explode': True }})
     max_results: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'maxResults', 'style': 'form', 'explode': True }})
@@ -29,20 +30,20 @@ class LicensingLicenseAssignmentsListForProductAndSkuQueryParams:
 
 @dataclass
 class LicensingLicenseAssignmentsListForProductAndSkuSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class LicensingLicenseAssignmentsListForProductAndSkuRequest:
-    path_params: LicensingLicenseAssignmentsListForProductAndSkuPathParams = field(default=None)
-    query_params: LicensingLicenseAssignmentsListForProductAndSkuQueryParams = field(default=None)
-    security: LicensingLicenseAssignmentsListForProductAndSkuSecurity = field(default=None)
+    path_params: LicensingLicenseAssignmentsListForProductAndSkuPathParams = field()
+    query_params: LicensingLicenseAssignmentsListForProductAndSkuQueryParams = field()
+    security: LicensingLicenseAssignmentsListForProductAndSkuSecurity = field()
     
 
 @dataclass
 class LicensingLicenseAssignmentsListForProductAndSkuResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     license_assignment_list: Optional[shared.LicenseAssignmentList] = field(default=None)
-    status_code: int = field(default=None)
     

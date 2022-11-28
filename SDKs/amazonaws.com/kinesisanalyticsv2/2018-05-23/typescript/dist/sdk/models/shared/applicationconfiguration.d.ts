@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ApplicationCodeConfiguration } from "./applicationcodeconfiguration";
 import { ApplicationSnapshotConfiguration } from "./applicationsnapshotconfiguration";
 import { EnvironmentProperties } from "./environmentproperties";

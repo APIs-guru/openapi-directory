@@ -1,5 +1,7 @@
 package shared
 
+// MappingEntry
+// Defines a mapping.
 type MappingEntry struct {
 	SourcePath  *string `json:"SourcePath,omitempty"`
 	SourceTable *string `json:"SourceTable,omitempty"`

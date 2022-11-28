@@ -10,6 +10,8 @@ const (
 	AutoscalingEventEventTypeEnumNoChange                 AutoscalingEventEventTypeEnum = "NO_CHANGE"
 )
 
+// AutoscalingEvent
+// A structured message reporting an autoscaling decision made by the Dataflow service.
 type AutoscalingEvent struct {
 	CurrentNumWorkers *string                        `json:"currentNumWorkers,omitempty"`
 	Description       *StructuredMessage             `json:"description,omitempty"`

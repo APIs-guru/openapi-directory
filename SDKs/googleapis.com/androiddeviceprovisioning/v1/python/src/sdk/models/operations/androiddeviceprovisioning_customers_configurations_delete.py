@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AndroiddeviceprovisioningCustomersConfigurationsDeletePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,13 +26,13 @@ class AndroiddeviceprovisioningCustomersConfigurationsDeleteQueryParams:
 
 @dataclass
 class AndroiddeviceprovisioningCustomersConfigurationsDeleteRequest:
-    path_params: AndroiddeviceprovisioningCustomersConfigurationsDeletePathParams = field(default=None)
-    query_params: AndroiddeviceprovisioningCustomersConfigurationsDeleteQueryParams = field(default=None)
+    path_params: AndroiddeviceprovisioningCustomersConfigurationsDeletePathParams = field()
+    query_params: AndroiddeviceprovisioningCustomersConfigurationsDeleteQueryParams = field()
     
 
 @dataclass
 class AndroiddeviceprovisioningCustomersConfigurationsDeleteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,6 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Service } from "./service";
+import { ServiceInput } from "./service";
 export declare enum BackupStateEnum {
     StateUnspecified = "STATE_UNSPECIFIED",
     Creating = "CREATING",
@@ -19,4 +20,12 @@ export declare class Backup extends SpeakeasyBase {
     restoringServices?: string[];
     serviceRevision?: Service;
     state?: BackupStateEnum;
+}
+/**
+ * The details of a backup resource.
+**/
+export declare class BackupInput extends SpeakeasyBase {
+    description?: string;
+    name?: string;
+    serviceRevision?: ServiceInput;
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Computer } from "./computer";
+
 
 
 // CreateComputerResult
@@ -7,6 +8,6 @@ import { Computer } from "./computer";
  * Contains the results for the <a>CreateComputer</a> operation.
 **/
 export class CreateComputerResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Computer" })
+  @SpeakeasyMetadata({ data: "json, name=Computer" })
   computer?: Computer;
 }

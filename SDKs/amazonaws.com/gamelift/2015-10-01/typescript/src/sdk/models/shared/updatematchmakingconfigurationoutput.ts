@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MatchmakingConfiguration } from "./matchmakingconfiguration";
+
 
 
 // UpdateMatchmakingConfigurationOutput
@@ -7,6 +8,6 @@ import { MatchmakingConfiguration } from "./matchmakingconfiguration";
  * Represents the returned data in response to a request operation.
 **/
 export class UpdateMatchmakingConfigurationOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Configuration" })
+  @SpeakeasyMetadata({ data: "json, name=Configuration" })
   configuration?: MatchmakingConfiguration;
 }

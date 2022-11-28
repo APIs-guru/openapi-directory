@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import plannode
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class QueryPlan:
-    plan_nodes: Optional[List[plannode.PlanNode]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'planNodes' }})
+    r"""QueryPlan
+    Contains an ordered list of nodes appearing in the query plan.
+    """
+    
+    plan_nodes: Optional[List[PlanNode]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('planNodes') }})
     

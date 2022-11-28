@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ObWriteDomesticScheduled2DataInitiationCreditorAccount
+// Unambiguous identification of the account of the creditor to which a credit entry will be posted as a result of the payment transaction.
 type ObWriteDomesticScheduled2DataInitiationCreditorAccount struct {
 	Identification          string  `json:"Identification"`
 	Name                    string  `json:"Name"`
@@ -11,6 +13,8 @@ type ObWriteDomesticScheduled2DataInitiationCreditorAccount struct {
 	SecondaryIdentification *string `json:"SecondaryIdentification,omitempty"`
 }
 
+// ObWriteDomesticScheduled2DataInitiationDebtorAccount
+// Unambiguous identification of the account of the debtor to which a debit entry will be made as a result of the transaction.
 type ObWriteDomesticScheduled2DataInitiationDebtorAccount struct {
 	Identification          string  `json:"Identification"`
 	Name                    *string `json:"Name,omitempty"`
@@ -18,16 +22,23 @@ type ObWriteDomesticScheduled2DataInitiationDebtorAccount struct {
 	SecondaryIdentification *string `json:"SecondaryIdentification,omitempty"`
 }
 
+// ObWriteDomesticScheduled2DataInitiationInstructedAmount
+// Amount of money to be moved between the debtor and creditor, before deduction of charges, expressed in the currency as ordered by the initiating party.
+// Usage: This amount has to be transported unchanged through the transaction chain.
 type ObWriteDomesticScheduled2DataInitiationInstructedAmount struct {
 	Amount   string `json:"Amount"`
 	Currency string `json:"Currency"`
 }
 
+// ObWriteDomesticScheduled2DataInitiationRemittanceInformation
+// Information supplied to enable the matching of an entry with the items that the transfer is intended to settle, such as commercial invoices in an accounts' receivable system.
 type ObWriteDomesticScheduled2DataInitiationRemittanceInformation struct {
 	Reference    *string `json:"Reference,omitempty"`
 	Unstructured *string `json:"Unstructured,omitempty"`
 }
 
+// ObWriteDomesticScheduled2DataInitiation
+// The Initiation payload is sent by the initiating party to the ASPSP. It is used to request movement of funds from the debtor account to a creditor for a single scheduled domestic payment.
 type ObWriteDomesticScheduled2DataInitiation struct {
 	CreditorAccount            ObWriteDomesticScheduled2DataInitiationCreditorAccount        `json:"CreditorAccount"`
 	CreditorPostalAddress      *ObPostalAddress6                                             `json:"CreditorPostalAddress,omitempty"`

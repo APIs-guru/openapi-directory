@@ -8,11 +8,6 @@ type UpdateGroupCategoryPathParams struct {
 	GroupCategoryID string `pathParam:"style=simple,explode=false,name=groupCategoryId"`
 }
 
-type UpdateGroupCategoryRequest struct {
-	PathParams UpdateGroupCategoryPathParams
-	Request    shared.GroupCategoryUpdate `request:"mediaType=application/json"`
-}
-
 type UpdateGroupCategory200ApplicationJSONActionEnum string
 
 const (
@@ -34,6 +29,11 @@ type UpdateGroupCategory200ApplicationJSON struct {
 	Action UpdateGroupCategory200ApplicationJSONActionEnum `json:"action"`
 	Data   UpdateGroupCategory200ApplicationJSONData       `json:"data"`
 	Result UpdateGroupCategory200ApplicationJSONResultEnum `json:"result"`
+}
+
+type UpdateGroupCategoryRequest struct {
+	PathParams UpdateGroupCategoryPathParams
+	Request    shared.GroupCategoryUpdate `request:"mediaType=application/json"`
 }
 
 type UpdateGroupCategoryResponse struct {

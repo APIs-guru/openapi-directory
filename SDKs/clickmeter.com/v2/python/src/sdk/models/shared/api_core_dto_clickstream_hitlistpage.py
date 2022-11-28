@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import api_core_dto_clickstream_hit
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class APICoreDtoClickStreamHitListPage:
-    hits: Optional[List[api_core_dto_clickstream_hit.APICoreDtoClickStreamHit]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'hits' }})
-    last_key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lastKey' }})
+    hits: Optional[List[APICoreDtoClickStreamHit]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('hits') }})
+    last_key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lastKey') }})
     

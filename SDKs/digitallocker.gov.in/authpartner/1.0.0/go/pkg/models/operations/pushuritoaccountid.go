@@ -8,11 +8,6 @@ type PushURIToAccountIDSecurity struct {
 	Oauthsecurity shared.SchemeOauthsecurity `security:"scheme,type=oauth2"`
 }
 
-type PushURIToAccountIDRequest struct {
-	Request  *interface{} `request:"mediaType=multipart/form-data"`
-	Security PushURIToAccountIDSecurity
-}
-
 type PushURIToAccountID400ApplicationJSON struct {
 	Error            *string `json:"error,omitempty"`
 	ErrorDescription *string `json:"error_description,omitempty"`
@@ -31,6 +26,11 @@ type PushURIToAccountID404ApplicationJSON struct {
 type PushURIToAccountID500ApplicationJSON struct {
 	Error            *string `json:"error,omitempty"`
 	ErrorDescription *string `json:"error_description,omitempty"`
+}
+
+type PushURIToAccountIDRequest struct {
+	Request  *interface{} `request:"mediaType=multipart/form-data"`
+	Security PushURIToAccountIDSecurity
 }
 
 type PushURIToAccountIDResponse struct {

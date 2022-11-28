@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsEc2NetworkInterfaceIpV6AddressDetail
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides information about an IPV6 address that is associated with the network interface.
 **/
 export class AwsEc2NetworkInterfaceIpV6AddressDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=IpV6Address" })
+  @SpeakeasyMetadata({ data: "json, name=IpV6Address" })
   ipV6Address?: string;
 }

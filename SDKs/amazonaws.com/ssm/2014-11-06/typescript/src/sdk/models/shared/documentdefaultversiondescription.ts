@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DocumentDefaultVersionDescription
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A default version of a document.
 **/
 export class DocumentDefaultVersionDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DefaultVersion" })
+  @SpeakeasyMetadata({ data: "json, name=DefaultVersion" })
   defaultVersion?: string;
 
-  @Metadata({ data: "json, name=DefaultVersionName" })
+  @SpeakeasyMetadata({ data: "json, name=DefaultVersionName" })
   defaultVersionName?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 }

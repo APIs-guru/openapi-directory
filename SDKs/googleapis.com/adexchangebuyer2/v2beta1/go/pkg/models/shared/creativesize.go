@@ -36,6 +36,8 @@ const (
 	CreativeSizeSkippableAdTypeEnumNotSkippable               CreativeSizeSkippableAdTypeEnum = "NOT_SKIPPABLE"
 )
 
+// CreativeSize
+// Specifies the size of the creative.
 type CreativeSize struct {
 	AllowedFormats   []CreativeSizeAllowedFormatsEnum  `json:"allowedFormats,omitempty"`
 	CompanionSizes   []Size                            `json:"companionSizes,omitempty"`

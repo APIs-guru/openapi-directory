@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudVisionV1p2beta1WebDetectionWebPage
+// Metadata for web pages.
 type GoogleCloudVisionV1p2beta1WebDetectionWebPage struct {
 	FullMatchingImages    []GoogleCloudVisionV1p2beta1WebDetectionWebImage `json:"fullMatchingImages,omitempty"`
 	PageTitle             *string                                          `json:"pageTitle,omitempty"`

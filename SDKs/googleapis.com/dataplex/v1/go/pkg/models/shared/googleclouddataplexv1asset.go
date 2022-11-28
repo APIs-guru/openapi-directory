@@ -10,6 +10,8 @@ const (
 	GoogleCloudDataplexV1AssetStateEnumActionRequired   GoogleCloudDataplexV1AssetStateEnum = "ACTION_REQUIRED"
 )
 
+// GoogleCloudDataplexV1Asset
+// An asset represents a cloud resource that is being managed within a lake as a member of a zone.
 type GoogleCloudDataplexV1Asset struct {
 	CreateTime      *string                                    `json:"createTime,omitempty"`
 	Description     *string                                    `json:"description,omitempty"`
@@ -24,4 +26,17 @@ type GoogleCloudDataplexV1Asset struct {
 	State           *GoogleCloudDataplexV1AssetStateEnum       `json:"state,omitempty"`
 	UID             *string                                    `json:"uid,omitempty"`
 	UpdateTime      *string                                    `json:"updateTime,omitempty"`
+}
+
+// GoogleCloudDataplexV1AssetInput
+// An asset represents a cloud resource that is being managed within a lake as a member of a zone.
+type GoogleCloudDataplexV1AssetInput struct {
+	Description     *string                                    `json:"description,omitempty"`
+	DiscoverySpec   *GoogleCloudDataplexV1AssetDiscoverySpec   `json:"discoverySpec,omitempty"`
+	DiscoveryStatus *GoogleCloudDataplexV1AssetDiscoveryStatus `json:"discoveryStatus,omitempty"`
+	DisplayName     *string                                    `json:"displayName,omitempty"`
+	Labels          map[string]string                          `json:"labels,omitempty"`
+	ResourceSpec    *GoogleCloudDataplexV1AssetResourceSpec    `json:"resourceSpec,omitempty"`
+	ResourceStatus  *GoogleCloudDataplexV1AssetResourceStatus  `json:"resourceStatus,omitempty"`
+	SecurityStatus  *GoogleCloudDataplexV1AssetSecurityStatus  `json:"securityStatus,omitempty"`
 }

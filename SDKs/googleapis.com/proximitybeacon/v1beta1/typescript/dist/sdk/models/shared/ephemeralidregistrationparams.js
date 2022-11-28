@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // EphemeralIdRegistrationParams
 /**
  * Information a client needs to provision and register beacons that broadcast Eddystone-EID format beacon IDs, using Elliptic curve Diffie-Hellman key exchange. See [the Eddystone specification](https://github.com/google/eddystone/tree/master/eddystone-eid) at GitHub.
@@ -33,15 +33,15 @@ var EphemeralIdRegistrationParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=maxRotationPeriodExponent" }),
+        SpeakeasyMetadata({ data: "json, name=maxRotationPeriodExponent" }),
         __metadata("design:type", Number)
     ], EphemeralIdRegistrationParams.prototype, "maxRotationPeriodExponent", void 0);
     __decorate([
-        Metadata({ data: "json, name=minRotationPeriodExponent" }),
+        SpeakeasyMetadata({ data: "json, name=minRotationPeriodExponent" }),
         __metadata("design:type", Number)
     ], EphemeralIdRegistrationParams.prototype, "minRotationPeriodExponent", void 0);
     __decorate([
-        Metadata({ data: "json, name=serviceEcdhPublicKey" }),
+        SpeakeasyMetadata({ data: "json, name=serviceEcdhPublicKey" }),
         __metadata("design:type", String)
     ], EphemeralIdRegistrationParams.prototype, "serviceEcdhPublicKey", void 0);
     return EphemeralIdRegistrationParams;

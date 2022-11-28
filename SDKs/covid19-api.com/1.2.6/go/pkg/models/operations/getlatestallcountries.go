@@ -15,10 +15,6 @@ type GetLatestAllCountriesQueryParams struct {
 	Format *GetLatestAllCountriesFormatEnum `queryParam:"style=form,explode=true,name=format"`
 }
 
-type GetLatestAllCountriesRequest struct {
-	QueryParams GetLatestAllCountriesQueryParams
-}
-
 type GetLatestAllCountries200ApplicationJSON struct {
 	Confirmed  *int64     `json:"confirmed,omitempty"`
 	Country    *string    `json:"country,omitempty"`
@@ -29,6 +25,10 @@ type GetLatestAllCountries200ApplicationJSON struct {
 	Latitude   *float32   `json:"latitude,omitempty"`
 	Longitude  *float32   `json:"longitude,omitempty"`
 	Recovered  *int64     `json:"recovered,omitempty"`
+}
+
+type GetLatestAllCountriesRequest struct {
+	QueryParams GetLatestAllCountriesQueryParams
 }
 
 type GetLatestAllCountriesResponse struct {

@@ -8,6 +8,8 @@ const (
 	NiCallerIdentityCallerTypeEnumUnknown  NiCallerIdentityCallerTypeEnum = "unknown"
 )
 
+// NiCallerIdentity
+// Information about the network `number` is currently connected to.
 type NiCallerIdentity struct {
 	CallerName *string                         `json:"caller_name,omitempty"`
 	CallerType *NiCallerIdentityCallerTypeEnum `json:"caller_type,omitempty"`

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BooleanColumnStatisticsData
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Defines column statistics supported for Boolean data columns.
 **/
 export class BooleanColumnStatisticsData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NumberOfFalses" })
+  @SpeakeasyMetadata({ data: "json, name=NumberOfFalses" })
   numberOfFalses: number;
 
-  @Metadata({ data: "json, name=NumberOfNulls" })
+  @SpeakeasyMetadata({ data: "json, name=NumberOfNulls" })
   numberOfNulls: number;
 
-  @Metadata({ data: "json, name=NumberOfTrues" })
+  @SpeakeasyMetadata({ data: "json, name=NumberOfTrues" })
   numberOfTrues: number;
 }

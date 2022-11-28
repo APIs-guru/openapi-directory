@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MetricHeader } from "./metricheader";
+
 
 
 // ColumnHeader
@@ -7,9 +8,9 @@ import { MetricHeader } from "./metricheader";
  * Column headers.
 **/
 export class ColumnHeader extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dimensions" })
+  @SpeakeasyMetadata({ data: "json, name=dimensions" })
   dimensions?: string[];
 
-  @Metadata({ data: "json, name=metricHeader" })
+  @SpeakeasyMetadata({ data: "json, name=metricHeader" })
   metricHeader?: MetricHeader;
 }

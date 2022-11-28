@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ItvCardDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=card_type" })
+  @SpeakeasyMetadata({ data: "json, name=card_type" })
   cardType: string;
 
-  @Metadata({ data: "json, name=exp_month" })
+  @SpeakeasyMetadata({ data: "json, name=exp_month" })
   expMonth: number;
 
-  @Metadata({ data: "json, name=exp_year" })
+  @SpeakeasyMetadata({ data: "json, name=exp_year" })
   expYear: number;
 
-  @Metadata({ data: "json, name=last4" })
+  @SpeakeasyMetadata({ data: "json, name=last4" })
   last4: string;
 }

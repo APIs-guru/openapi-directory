@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // AccountLimit
 /**
  * Limits that are related to concurrency and storage. All file and storage sizes are in bytes.
@@ -33,23 +33,23 @@ var AccountLimit = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CodeSizeUnzipped" }),
+        SpeakeasyMetadata({ data: "json, name=CodeSizeUnzipped" }),
         __metadata("design:type", Number)
     ], AccountLimit.prototype, "codeSizeUnzipped", void 0);
     __decorate([
-        Metadata({ data: "json, name=CodeSizeZipped" }),
+        SpeakeasyMetadata({ data: "json, name=CodeSizeZipped" }),
         __metadata("design:type", Number)
     ], AccountLimit.prototype, "codeSizeZipped", void 0);
     __decorate([
-        Metadata({ data: "json, name=ConcurrentExecutions" }),
+        SpeakeasyMetadata({ data: "json, name=ConcurrentExecutions" }),
         __metadata("design:type", Number)
     ], AccountLimit.prototype, "concurrentExecutions", void 0);
     __decorate([
-        Metadata({ data: "json, name=TotalCodeSize" }),
+        SpeakeasyMetadata({ data: "json, name=TotalCodeSize" }),
         __metadata("design:type", Number)
     ], AccountLimit.prototype, "totalCodeSize", void 0);
     __decorate([
-        Metadata({ data: "json, name=UnreservedConcurrentExecutions" }),
+        SpeakeasyMetadata({ data: "json, name=UnreservedConcurrentExecutions" }),
         __metadata("design:type", Number)
     ], AccountLimit.prototype, "unreservedConcurrentExecutions", void 0);
     return AccountLimit;

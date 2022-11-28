@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ComputeEnvironmentOrder } from "./computeenvironmentorder";
 import { JqStateEnum } from "./jqstateenum";
 import { JqStatusEnum } from "./jqstatusenum";
+
 
 
 // JobQueueDetail
@@ -10,27 +10,27 @@ import { JqStatusEnum } from "./jqstatusenum";
  * An object representing the details of an Batch job queue.
 **/
 export class JobQueueDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=computeEnvironmentOrder", elemType: shared.ComputeEnvironmentOrder })
+  @SpeakeasyMetadata({ data: "json, name=computeEnvironmentOrder", elemType: ComputeEnvironmentOrder })
   computeEnvironmentOrder: ComputeEnvironmentOrder[];
 
-  @Metadata({ data: "json, name=jobQueueArn" })
+  @SpeakeasyMetadata({ data: "json, name=jobQueueArn" })
   jobQueueArn: string;
 
-  @Metadata({ data: "json, name=jobQueueName" })
+  @SpeakeasyMetadata({ data: "json, name=jobQueueName" })
   jobQueueName: string;
 
-  @Metadata({ data: "json, name=priority" })
+  @SpeakeasyMetadata({ data: "json, name=priority" })
   priority: number;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state: JqStateEnum;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: JqStatusEnum;
 
-  @Metadata({ data: "json, name=statusReason" })
+  @SpeakeasyMetadata({ data: "json, name=statusReason" })
   statusReason?: string;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 }

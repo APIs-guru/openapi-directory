@@ -1,6 +1,7 @@
 
 
+
 export enum AccessDirectionEnum {
-    Inbound = "inbound"
-,    Outbound = "outbound"
+    Inbound = "inbound",
+    Outbound = "outbound"
 }

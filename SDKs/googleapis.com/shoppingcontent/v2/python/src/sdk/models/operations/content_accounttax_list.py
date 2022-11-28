@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ContentAccounttaxListPathParams:
-    merchant_id: str = field(default=None, metadata={'path_param': { 'field_name': 'merchantId', 'style': 'simple', 'explode': False }})
+    merchant_id: str = field(metadata={'path_param': { 'field_name': 'merchantId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class ContentAccounttaxListQueryParams:
 
 @dataclass
 class ContentAccounttaxListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ContentAccounttaxListRequest:
-    path_params: ContentAccounttaxListPathParams = field(default=None)
-    query_params: ContentAccounttaxListQueryParams = field(default=None)
-    security: ContentAccounttaxListSecurity = field(default=None)
+    path_params: ContentAccounttaxListPathParams = field()
+    query_params: ContentAccounttaxListQueryParams = field()
+    security: ContentAccounttaxListSecurity = field()
     
 
 @dataclass
 class ContentAccounttaxListResponse:
+    content_type: str = field()
+    status_code: int = field()
     accounttax_list_response: Optional[shared.AccounttaxListResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

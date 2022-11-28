@@ -1,26 +1,24 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import authorizerconfig
-from . import domainconfigurationstatus_enum
-from . import domaintype_enum
-from . import servercertificatesummary
-from . import servicetype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeDomainConfigurationResponse:
-    authorizer_config: Optional[authorizerconfig.AuthorizerConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'authorizerConfig' }})
-    domain_configuration_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'domainConfigurationArn' }})
-    domain_configuration_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'domainConfigurationName' }})
-    domain_configuration_status: Optional[domainconfigurationstatus_enum.DomainConfigurationStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'domainConfigurationStatus' }})
-    domain_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'domainName' }})
-    domain_type: Optional[domaintype_enum.DomainTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'domainType' }})
-    last_status_change_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lastStatusChangeDate', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    server_certificates: Optional[List[servercertificatesummary.ServerCertificateSummary]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'serverCertificates' }})
-    service_type: Optional[servicetype_enum.ServiceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'serviceType' }})
+    authorizer_config: Optional[AuthorizerConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('authorizerConfig') }})
+    domain_configuration_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('domainConfigurationArn') }})
+    domain_configuration_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('domainConfigurationName') }})
+    domain_configuration_status: Optional[DomainConfigurationStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('domainConfigurationStatus') }})
+    domain_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('domainName') }})
+    domain_type: Optional[DomainTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('domainType') }})
+    last_status_change_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lastStatusChangeDate'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    server_certificates: Optional[List[ServerCertificateSummary]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('serverCertificates') }})
+    service_type: Optional[ServiceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('serviceType') }})
     

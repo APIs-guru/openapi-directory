@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { QuotaOperation } from "./quotaoperation";
+
 
 
 // AllocateQuotaRequest
@@ -7,9 +8,9 @@ import { QuotaOperation } from "./quotaoperation";
  * Request message for the AllocateQuota method.
 **/
 export class AllocateQuotaRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allocateOperation" })
+  @SpeakeasyMetadata({ data: "json, name=allocateOperation" })
   allocateOperation?: QuotaOperation;
 
-  @Metadata({ data: "json, name=serviceConfigId" })
+  @SpeakeasyMetadata({ data: "json, name=serviceConfigId" })
   serviceConfigId?: string;
 }

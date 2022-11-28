@@ -34,6 +34,15 @@ const (
 	GeoRegionAssignedTargetingOptionDetailsGeoRegionTypeEnumGeoRegionTypeDistrict              GeoRegionAssignedTargetingOptionDetailsGeoRegionTypeEnum = "GEO_REGION_TYPE_DISTRICT"
 )
 
+// GeoRegionAssignedTargetingOptionDetailsInput
+// Details for assigned geographic region targeting option. This will be populated in the details field of an AssignedTargetingOption when targeting_type is `TARGETING_TYPE_GEO_REGION`.
+type GeoRegionAssignedTargetingOptionDetailsInput struct {
+	Negative          *bool   `json:"negative,omitempty"`
+	TargetingOptionID *string `json:"targetingOptionId,omitempty"`
+}
+
+// GeoRegionAssignedTargetingOptionDetails
+// Details for assigned geographic region targeting option. This will be populated in the details field of an AssignedTargetingOption when targeting_type is `TARGETING_TYPE_GEO_REGION`.
 type GeoRegionAssignedTargetingOptionDetails struct {
 	DisplayName       *string                                                   `json:"displayName,omitempty"`
 	GeoRegionType     *GeoRegionAssignedTargetingOptionDetailsGeoRegionTypeEnum `json:"geoRegionType,omitempty"`

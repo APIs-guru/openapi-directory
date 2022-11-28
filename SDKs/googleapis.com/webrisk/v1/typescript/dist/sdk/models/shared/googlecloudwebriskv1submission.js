@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GoogleCloudWebriskV1SubmissionThreatTypesEnum;
 (function (GoogleCloudWebriskV1SubmissionThreatTypesEnum) {
     GoogleCloudWebriskV1SubmissionThreatTypesEnum["ThreatTypeUnspecified"] = "THREAT_TYPE_UNSPECIFIED";
@@ -41,11 +41,11 @@ var GoogleCloudWebriskV1Submission = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=threatTypes" }),
+        SpeakeasyMetadata({ data: "json, name=threatTypes" }),
         __metadata("design:type", Array)
     ], GoogleCloudWebriskV1Submission.prototype, "threatTypes", void 0);
     __decorate([
-        Metadata({ data: "json, name=uri" }),
+        SpeakeasyMetadata({ data: "json, name=uri" }),
         __metadata("design:type", String)
     ], GoogleCloudWebriskV1Submission.prototype, "uri", void 0);
     return GoogleCloudWebriskV1Submission;

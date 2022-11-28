@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CustomSourceLocation
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Identifies the location of a custom souce.
 **/
 export class CustomSourceLocation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=stateful" })
+  @SpeakeasyMetadata({ data: "json, name=stateful" })
   stateful?: boolean;
 }

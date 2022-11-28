@@ -1,4 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SubscriptionItemPriceChangeDetails } from "./subscriptionitempricechangedetails";
+
 
 
 // AutoRenewingPlan
@@ -6,6 +8,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information related to an auto renewing plan.
 **/
 export class AutoRenewingPlan extends SpeakeasyBase {
-  @Metadata({ data: "json, name=autoRenewEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=autoRenewEnabled" })
   autoRenewEnabled?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=priceChangeDetails" })
+  priceChangeDetails?: SubscriptionItemPriceChangeDetails;
 }

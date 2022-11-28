@@ -15,9 +15,20 @@ const (
 	NetworkConfigModesEnumModeIpv4               NetworkConfigModesEnum = "MODE_IPV4"
 )
 
+// NetworkConfig
+// Network configuration for the instance.
 type NetworkConfig struct {
 	ConnectMode     *NetworkConfigConnectModeEnum `json:"connectMode,omitempty"`
 	IPAddresses     []string                      `json:"ipAddresses,omitempty"`
+	Modes           []NetworkConfigModesEnum      `json:"modes,omitempty"`
+	Network         *string                       `json:"network,omitempty"`
+	ReservedIPRange *string                       `json:"reservedIpRange,omitempty"`
+}
+
+// NetworkConfigInput
+// Network configuration for the instance.
+type NetworkConfigInput struct {
+	ConnectMode     *NetworkConfigConnectModeEnum `json:"connectMode,omitempty"`
 	Modes           []NetworkConfigModesEnum      `json:"modes,omitempty"`
 	Network         *string                       `json:"network,omitempty"`
 	ReservedIPRange *string                       `json:"reservedIpRange,omitempty"`

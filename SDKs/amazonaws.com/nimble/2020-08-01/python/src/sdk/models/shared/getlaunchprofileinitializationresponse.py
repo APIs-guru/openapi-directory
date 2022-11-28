@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import launchprofileinitialization
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetLaunchProfileInitializationResponse:
-    launch_profile_initialization: Optional[launchprofileinitialization.LaunchProfileInitialization] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'launchProfileInitialization' }})
+    launch_profile_initialization: Optional[LaunchProfileInitialization] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('launchProfileInitialization') }})
     

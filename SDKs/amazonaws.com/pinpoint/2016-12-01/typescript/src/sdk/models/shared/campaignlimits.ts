@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CampaignLimits
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * For a campaign, specifies limits on the messages that the campaign can send. For an application, specifies the default limits for messages that campaigns in the application can send.
 **/
 export class CampaignLimits extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Daily" })
+  @SpeakeasyMetadata({ data: "json, name=Daily" })
   daily?: number;
 
-  @Metadata({ data: "json, name=MaximumDuration" })
+  @SpeakeasyMetadata({ data: "json, name=MaximumDuration" })
   maximumDuration?: number;
 
-  @Metadata({ data: "json, name=MessagesPerSecond" })
+  @SpeakeasyMetadata({ data: "json, name=MessagesPerSecond" })
   messagesPerSecond?: number;
 
-  @Metadata({ data: "json, name=Session" })
+  @SpeakeasyMetadata({ data: "json, name=Session" })
   session?: number;
 
-  @Metadata({ data: "json, name=Total" })
+  @SpeakeasyMetadata({ data: "json, name=Total" })
   total?: number;
 }

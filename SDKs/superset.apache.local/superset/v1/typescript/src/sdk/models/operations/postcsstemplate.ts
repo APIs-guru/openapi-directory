@@ -1,74 +1,75 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostCssTemplateSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   jwt: shared.SchemeJwt;
 }
 
 
-export class PostCssTemplateRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: shared.CssTemplateRestApiPost;
-
-  @Metadata()
-  security: PostCssTemplateSecurity;
-}
-
-
 export class PostCssTemplate201ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result?: shared.CssTemplateRestApiPost;
 }
 
 
 export class PostCssTemplate400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PostCssTemplate401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PostCssTemplate422ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PostCssTemplate500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class PostCssTemplateRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: shared.CssTemplateRestApiPost;
+
+  @SpeakeasyMetadata()
+  security: PostCssTemplateSecurity;
+}
+
+
 export class PostCssTemplateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postCssTemplate201ApplicationJsonObject?: PostCssTemplate201ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postCssTemplate400ApplicationJsonObject?: PostCssTemplate400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postCssTemplate401ApplicationJsonObject?: PostCssTemplate401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postCssTemplate422ApplicationJsonObject?: PostCssTemplate422ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postCssTemplate500ApplicationJsonObject?: PostCssTemplate500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

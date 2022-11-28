@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GoogleAppsCloudidentityDevicesV1AndroidAttributes } from "./googleappscloudidentitydevicesv1androidattributes";
 export declare enum GoogleAppsCloudidentityDevicesV1DeviceCompromisedStateEnum {
     CompromisedStateUnspecified = "COMPROMISED_STATE_UNSPECIFIED",
@@ -34,6 +34,17 @@ export declare enum GoogleAppsCloudidentityDevicesV1DeviceOwnerTypeEnum {
     DeviceOwnershipUnspecified = "DEVICE_OWNERSHIP_UNSPECIFIED",
     Company = "COMPANY",
     Byod = "BYOD"
+}
+/**
+ *  A Device within the Cloud Identity Devices API. Represents a Device known to Google Cloud, independent of the device ownership, type, and whether it is assigned or in use by a user.
+**/
+export declare class GoogleAppsCloudidentityDevicesV1DeviceInput extends SpeakeasyBase {
+    androidSpecificAttributes?: GoogleAppsCloudidentityDevicesV1AndroidAttributes;
+    assetTag?: string;
+    deviceId?: string;
+    lastSyncTime?: string;
+    serialNumber?: string;
+    wifiMacAddresses?: string[];
 }
 /**
  *  A Device within the Cloud Identity Devices API. Represents a Device known to Google Cloud, independent of the device ownership, type, and whether it is assigned or in use by a user.

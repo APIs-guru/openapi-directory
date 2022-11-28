@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DefaultEmailOptionTypeEnum } from "./defaultemailoptiontypeenum";
+
 
 
 // VerificationMessageTemplateType
@@ -7,21 +8,21 @@ import { DefaultEmailOptionTypeEnum } from "./defaultemailoptiontypeenum";
  * The template for verification messages.
 **/
 export class VerificationMessageTemplateType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DefaultEmailOption" })
+  @SpeakeasyMetadata({ data: "json, name=DefaultEmailOption" })
   defaultEmailOption?: DefaultEmailOptionTypeEnum;
 
-  @Metadata({ data: "json, name=EmailMessage" })
+  @SpeakeasyMetadata({ data: "json, name=EmailMessage" })
   emailMessage?: string;
 
-  @Metadata({ data: "json, name=EmailMessageByLink" })
+  @SpeakeasyMetadata({ data: "json, name=EmailMessageByLink" })
   emailMessageByLink?: string;
 
-  @Metadata({ data: "json, name=EmailSubject" })
+  @SpeakeasyMetadata({ data: "json, name=EmailSubject" })
   emailSubject?: string;
 
-  @Metadata({ data: "json, name=EmailSubjectByLink" })
+  @SpeakeasyMetadata({ data: "json, name=EmailSubjectByLink" })
   emailSubjectByLink?: string;
 
-  @Metadata({ data: "json, name=SmsMessage" })
+  @SpeakeasyMetadata({ data: "json, name=SmsMessage" })
   smsMessage?: string;
 }

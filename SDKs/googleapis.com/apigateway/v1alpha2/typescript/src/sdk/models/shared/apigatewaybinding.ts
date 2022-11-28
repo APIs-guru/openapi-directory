@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApigatewayExpr } from "./apigatewayexpr";
+
 
 
 // ApigatewayBinding
@@ -7,12 +8,12 @@ import { ApigatewayExpr } from "./apigatewayexpr";
  * Associates `members` with a `role`.
 **/
 export class ApigatewayBinding extends SpeakeasyBase {
-  @Metadata({ data: "json, name=condition" })
+  @SpeakeasyMetadata({ data: "json, name=condition" })
   condition?: ApigatewayExpr;
 
-  @Metadata({ data: "json, name=members" })
+  @SpeakeasyMetadata({ data: "json, name=members" })
   members?: string[];
 
-  @Metadata({ data: "json, name=role" })
+  @SpeakeasyMetadata({ data: "json, name=role" })
   role?: string;
 }

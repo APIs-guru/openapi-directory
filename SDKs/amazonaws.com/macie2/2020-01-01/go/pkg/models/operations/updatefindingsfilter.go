@@ -25,6 +25,8 @@ const (
 	UpdateFindingsFilterRequestBodyActionEnumNoop    UpdateFindingsFilterRequestBodyActionEnum = "NOOP"
 )
 
+// UpdateFindingsFilterRequestBodyFindingCriteria
+// Specifies, as a map, one or more property-based conditions that filter the results of a query for findings.
 type UpdateFindingsFilterRequestBodyFindingCriteria struct {
 	Criterion map[string]shared.CriterionAdditionalProperties `json:"criterion,omitempty"`
 }

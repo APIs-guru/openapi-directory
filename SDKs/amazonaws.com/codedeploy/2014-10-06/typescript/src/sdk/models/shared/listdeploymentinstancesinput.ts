@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InstanceStatusEnum } from "./instancestatusenum";
 import { InstanceTypeEnum } from "./instancetypeenum";
+
 
 
 // ListDeploymentInstancesInput
@@ -8,15 +9,15 @@ import { InstanceTypeEnum } from "./instancetypeenum";
  *  Represents the input of a <code>ListDeploymentInstances</code> operation. 
 **/
 export class ListDeploymentInstancesInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deploymentId" })
+  @SpeakeasyMetadata({ data: "json, name=deploymentId" })
   deploymentId: string;
 
-  @Metadata({ data: "json, name=instanceStatusFilter" })
+  @SpeakeasyMetadata({ data: "json, name=instanceStatusFilter" })
   instanceStatusFilter?: InstanceStatusEnum[];
 
-  @Metadata({ data: "json, name=instanceTypeFilter" })
+  @SpeakeasyMetadata({ data: "json, name=instanceTypeFilter" })
   instanceTypeFilter?: InstanceTypeEnum[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

@@ -22,10 +22,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HttpRequestContext } from "./httprequestcontext";
 import { SourceLocation } from "./sourcelocation";
+import { SourceReference } from "./sourcereference";
 // ErrorContext
 /**
  * A description of the context in which an error occurred. This data should be provided by the application when reporting an error, unless the error report has been generated automatically from Google App Engine logs.
@@ -36,19 +36,19 @@ var ErrorContext = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=httpRequest" }),
+        SpeakeasyMetadata({ data: "json, name=httpRequest" }),
         __metadata("design:type", HttpRequestContext)
     ], ErrorContext.prototype, "httpRequest", void 0);
     __decorate([
-        Metadata({ data: "json, name=reportLocation" }),
+        SpeakeasyMetadata({ data: "json, name=reportLocation" }),
         __metadata("design:type", SourceLocation)
     ], ErrorContext.prototype, "reportLocation", void 0);
     __decorate([
-        Metadata({ data: "json, name=sourceReferences", elemType: shared.SourceReference }),
+        SpeakeasyMetadata({ data: "json, name=sourceReferences", elemType: SourceReference }),
         __metadata("design:type", Array)
     ], ErrorContext.prototype, "sourceReferences", void 0);
     __decorate([
-        Metadata({ data: "json, name=user" }),
+        SpeakeasyMetadata({ data: "json, name=user" }),
         __metadata("design:type", String)
     ], ErrorContext.prototype, "user", void 0);
     return ErrorContext;

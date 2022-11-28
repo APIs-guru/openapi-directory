@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PartOfSpeechTagTypeEnum } from "./partofspeechtagtypeenum";
 // PartOfSpeechTag
 /**
@@ -34,11 +34,11 @@ var PartOfSpeechTag = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Score" }),
+        SpeakeasyMetadata({ data: "json, name=Score" }),
         __metadata("design:type", Number)
     ], PartOfSpeechTag.prototype, "score", void 0);
     __decorate([
-        Metadata({ data: "json, name=Tag" }),
+        SpeakeasyMetadata({ data: "json, name=Tag" }),
         __metadata("design:type", String)
     ], PartOfSpeechTag.prototype, "tag", void 0);
     return PartOfSpeechTag;

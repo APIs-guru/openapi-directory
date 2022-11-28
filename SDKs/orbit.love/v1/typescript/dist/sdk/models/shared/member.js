@@ -22,90 +22,90 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Member = /** @class */ (function (_super) {
     __extends(Member, _super);
     function Member() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=bio" }),
+        SpeakeasyMetadata({ data: "json, name=bio" }),
         __metadata("design:type", String)
     ], Member.prototype, "bio", void 0);
     __decorate([
-        Metadata({ data: "json, name=birthday" }),
+        SpeakeasyMetadata({ data: "json, name=birthday" }),
         __metadata("design:type", String)
     ], Member.prototype, "birthday", void 0);
     __decorate([
-        Metadata({ data: "json, name=company" }),
+        SpeakeasyMetadata({ data: "json, name=company" }),
         __metadata("design:type", String)
     ], Member.prototype, "company", void 0);
     __decorate([
-        Metadata({ data: "json, name=devto" }),
+        SpeakeasyMetadata({ data: "json, name=devto" }),
         __metadata("design:type", String)
     ], Member.prototype, "devto", void 0);
     __decorate([
-        Metadata({ data: "json, name=email" }),
+        SpeakeasyMetadata({ data: "json, name=email" }),
         __metadata("design:type", String)
     ], Member.prototype, "email", void 0);
     __decorate([
-        Metadata({ data: "json, name=github" }),
+        SpeakeasyMetadata({ data: "json, name=github" }),
         __metadata("design:type", String)
     ], Member.prototype, "github", void 0);
     __decorate([
-        Metadata({ data: "json, name=linkedin" }),
+        SpeakeasyMetadata({ data: "json, name=linkedin" }),
         __metadata("design:type", String)
     ], Member.prototype, "linkedin", void 0);
     __decorate([
-        Metadata({ data: "json, name=location" }),
+        SpeakeasyMetadata({ data: "json, name=location" }),
         __metadata("design:type", String)
     ], Member.prototype, "location", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Member.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=pronouns" }),
+        SpeakeasyMetadata({ data: "json, name=pronouns" }),
         __metadata("design:type", String)
     ], Member.prototype, "pronouns", void 0);
     __decorate([
-        Metadata({ data: "json, name=shipping_address" }),
+        SpeakeasyMetadata({ data: "json, name=shipping_address" }),
         __metadata("design:type", String)
     ], Member.prototype, "shippingAddress", void 0);
     __decorate([
-        Metadata({ data: "json, name=slug" }),
+        SpeakeasyMetadata({ data: "json, name=slug" }),
         __metadata("design:type", String)
     ], Member.prototype, "slug", void 0);
     __decorate([
-        Metadata({ data: "json, name=tag_list" }),
+        SpeakeasyMetadata({ data: "json, name=tag_list" }),
         __metadata("design:type", String)
     ], Member.prototype, "tagList", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags" }),
+        SpeakeasyMetadata({ data: "json, name=tags" }),
         __metadata("design:type", String)
     ], Member.prototype, "tags", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags_to_add" }),
+        SpeakeasyMetadata({ data: "json, name=tags_to_add" }),
         __metadata("design:type", String)
     ], Member.prototype, "tagsToAdd", void 0);
     __decorate([
-        Metadata({ data: "json, name=teammate" }),
+        SpeakeasyMetadata({ data: "json, name=teammate" }),
         __metadata("design:type", Boolean)
     ], Member.prototype, "teammate", void 0);
     __decorate([
-        Metadata({ data: "json, name=title" }),
+        SpeakeasyMetadata({ data: "json, name=title" }),
         __metadata("design:type", String)
     ], Member.prototype, "title", void 0);
     __decorate([
-        Metadata({ data: "json, name=tshirt" }),
+        SpeakeasyMetadata({ data: "json, name=tshirt" }),
         __metadata("design:type", String)
     ], Member.prototype, "tshirt", void 0);
     __decorate([
-        Metadata({ data: "json, name=twitter" }),
+        SpeakeasyMetadata({ data: "json, name=twitter" }),
         __metadata("design:type", String)
     ], Member.prototype, "twitter", void 0);
     __decorate([
-        Metadata({ data: "json, name=url" }),
+        SpeakeasyMetadata({ data: "json, name=url" }),
         __metadata("design:type", String)
     ], Member.prototype, "url", void 0);
     return Member;

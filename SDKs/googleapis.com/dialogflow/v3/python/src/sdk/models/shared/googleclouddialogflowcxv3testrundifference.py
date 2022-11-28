@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GoogleCloudDialogflowCxV3TestRunDifferenceTypeEnum(str, Enum):
     DIFF_TYPE_UNSPECIFIED = "DIFF_TYPE_UNSPECIFIED"
@@ -13,6 +15,10 @@ class GoogleCloudDialogflowCxV3TestRunDifferenceTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleCloudDialogflowCxV3TestRunDifference:
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    type: Optional[GoogleCloudDialogflowCxV3TestRunDifferenceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""GoogleCloudDialogflowCxV3TestRunDifference
+    The description of differences between original and replayed agent output.
+    """
+    
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    type: Optional[GoogleCloudDialogflowCxV3TestRunDifferenceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

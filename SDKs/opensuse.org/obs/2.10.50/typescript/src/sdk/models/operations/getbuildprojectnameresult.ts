@@ -1,68 +1,69 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetBuildProjectNameResultPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=project_name" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=project_name" })
   projectName: string;
 }
 
 export enum GetBuildProjectNameResultViewEnum {
-    Summary = "summary"
-,    Status = "status"
-,    Binarylist = "binarylist"
+    Summary = "summary",
+    Status = "status",
+    Binarylist = "binarylist"
 }
 
 
 export class GetBuildProjectNameResultQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=arch" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=arch" })
   arch?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=lastbuild" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lastbuild" })
   lastbuild?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=locallink" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=locallink" })
   locallink?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=multibuild" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=multibuild" })
   multibuild?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=package" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=package" })
   package?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=repository" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=repository" })
   repository?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=view" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=view" })
   view?: GetBuildProjectNameResultViewEnum;
 }
 
 
 export class GetBuildProjectNameResultSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   basicAuthentication: shared.SchemeBasicAuthentication;
 }
 
 
 export class GetBuildProjectNameResultRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetBuildProjectNameResultPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetBuildProjectNameResultQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetBuildProjectNameResultSecurity;
 }
 
 
 export class GetBuildProjectNameResultResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

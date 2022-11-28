@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PermissionTypeEnum } from "./permissiontypeenum";
 import { ShareStatusEnum } from "./sharestatusenum";
 // WorkloadShareSummary
@@ -35,19 +35,19 @@ var WorkloadShareSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=PermissionType" }),
+        SpeakeasyMetadata({ data: "json, name=PermissionType" }),
         __metadata("design:type", String)
     ], WorkloadShareSummary.prototype, "permissionType", void 0);
     __decorate([
-        Metadata({ data: "json, name=ShareId" }),
+        SpeakeasyMetadata({ data: "json, name=ShareId" }),
         __metadata("design:type", String)
     ], WorkloadShareSummary.prototype, "shareId", void 0);
     __decorate([
-        Metadata({ data: "json, name=SharedWith" }),
+        SpeakeasyMetadata({ data: "json, name=SharedWith" }),
         __metadata("design:type", String)
     ], WorkloadShareSummary.prototype, "sharedWith", void 0);
     __decorate([
-        Metadata({ data: "json, name=Status" }),
+        SpeakeasyMetadata({ data: "json, name=Status" }),
         __metadata("design:type", String)
     ], WorkloadShareSummary.prototype, "status", void 0);
     return WorkloadShareSummary;

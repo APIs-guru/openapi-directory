@@ -50,6 +50,8 @@ const (
 	ChartDataQueryObjectExtrasTimeGrainSqlaEnumP1W19700104T000000Z                               ChartDataQueryObjectExtrasTimeGrainSqlaEnum = "P1W/1970-01-04T00:00:00Z"
 )
 
+// ChartDataQueryObjectExtras
+// Extra parameters to add to the query.
 type ChartDataQueryObjectExtras struct {
 	DruidTimeOrigin    *string                                      `json:"druid_time_origin,omitempty"`
 	Having             *string                                      `json:"having,omitempty"`

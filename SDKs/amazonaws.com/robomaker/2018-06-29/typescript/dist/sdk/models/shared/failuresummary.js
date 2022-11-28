@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { WorldFailure } from "./worldfailure";
 // FailureSummary
 /**
  * Information about worlds that failed.
@@ -34,11 +34,11 @@ var FailureSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=failures", elemType: shared.WorldFailure }),
+        SpeakeasyMetadata({ data: "json, name=failures", elemType: WorldFailure }),
         __metadata("design:type", Array)
     ], FailureSummary.prototype, "failures", void 0);
     __decorate([
-        Metadata({ data: "json, name=totalFailureCount" }),
+        SpeakeasyMetadata({ data: "json, name=totalFailureCount" }),
         __metadata("design:type", Number)
     ], FailureSummary.prototype, "totalFailureCount", void 0);
     return FailureSummary;

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AddCreativeRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request message for adding creative to be used in the bidding process for the finalized deal.
 **/
 export class AddCreativeRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=creative" })
+  @SpeakeasyMetadata({ data: "json, name=creative" })
   creative?: string;
 }

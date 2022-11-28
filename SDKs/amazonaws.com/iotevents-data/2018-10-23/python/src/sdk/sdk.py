@@ -1,8 +1,11 @@
-import warnings
+
+__doc__ = """ SDK Documentation: https://docs.aws.amazon.com/iotevents/ - Amazon Web Services documentation"""
 import requests
-from typing import Any,List,Optional
-from sdk.models import operations, shared
+from typing import Any,Optional
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -14,37 +17,63 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    r"""SDK Documentation: https://docs.aws.amazon.com/iotevents/ - Amazon Web Services documentation"""
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
-    
-    def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
+            self._server_url = server_url
 
+        
+    
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        
+    
+
+    def config_security(self, security: shared.Security):
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        
+    
+    
     
     def batch_acknowledge_alarm(self, request: operations.BatchAcknowledgeAlarmRequest) -> operations.BatchAcknowledgeAlarmResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Acknowledges one or more alarms. The alarms change to the <code>ACKNOWLEDGED</code> state after you acknowledge them.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/alarms/acknowledge"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -75,22 +104,22 @@ class SDK:
 
     
     def batch_disable_alarm(self, request: operations.BatchDisableAlarmRequest) -> operations.BatchDisableAlarmResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Disables one or more alarms. The alarms change to the <code>DISABLED</code> state after you disable them.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/alarms/disable"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -121,22 +150,22 @@ class SDK:
 
     
     def batch_enable_alarm(self, request: operations.BatchEnableAlarmRequest) -> operations.BatchEnableAlarmResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Enables one or more alarms. The alarms change to the <code>NORMAL</code> state after you enable them.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/alarms/enable"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -167,22 +196,22 @@ class SDK:
 
     
     def batch_put_message(self, request: operations.BatchPutMessageRequest) -> operations.BatchPutMessageResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Sends a set of messages to the AWS IoT Events system. Each message payload is transformed into the input you specify (<code>\"inputName\"</code>) and ingested into any detectors that monitor that input. If multiple messages are sent, the order in which the messages are processed isn't guaranteed. To guarantee ordering, you must send messages one at a time and wait for a successful response.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/inputs/messages"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -213,22 +242,22 @@ class SDK:
 
     
     def batch_reset_alarm(self, request: operations.BatchResetAlarmRequest) -> operations.BatchResetAlarmResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Resets one or more alarms. The alarms return to the <code>NORMAL</code> state after you reset them.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/alarms/reset"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -259,22 +288,22 @@ class SDK:
 
     
     def batch_snooze_alarm(self, request: operations.BatchSnoozeAlarmRequest) -> operations.BatchSnoozeAlarmResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Changes one or more alarms to the snooze mode. The alarms change to the <code>SNOOZE_DISABLED</code> state after you set them to the snooze mode.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/alarms/snooze"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -305,22 +334,22 @@ class SDK:
 
     
     def batch_update_detector(self, request: operations.BatchUpdateDetectorRequest) -> operations.BatchUpdateDetectorResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates the state, variable values, and timer settings of one or more detectors (instances) of a specified detector model.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/detectors"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -351,17 +380,18 @@ class SDK:
 
     
     def describe_alarm(self, request: operations.DescribeAlarmRequest) -> operations.DescribeAlarmResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about an alarm.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/alarms/{alarmModelName}/keyValues/", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -396,17 +426,18 @@ class SDK:
 
     
     def describe_detector(self, request: operations.DescribeDetectorRequest) -> operations.DescribeDetectorResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns information about the specified detector (instance).
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/detectors/{detectorModelName}/keyValues/", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -441,17 +472,18 @@ class SDK:
 
     
     def list_alarms(self, request: operations.ListAlarmsRequest) -> operations.ListAlarmsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists one or more alarms. The operation returns only the metadata associated with each alarm.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/alarms/{alarmModelName}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -486,17 +518,18 @@ class SDK:
 
     
     def list_detectors(self, request: operations.ListDetectorsRequest) -> operations.ListDetectorsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists detectors (the instances of a detector model).
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/detectors/{detectorModelName}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 

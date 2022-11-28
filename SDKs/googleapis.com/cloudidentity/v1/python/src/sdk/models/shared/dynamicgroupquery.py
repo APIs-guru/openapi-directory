@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class DynamicGroupQueryResourceTypeEnum(str, Enum):
     RESOURCE_TYPE_UNSPECIFIED = "RESOURCE_TYPE_UNSPECIFIED"
@@ -10,6 +12,10 @@ class DynamicGroupQueryResourceTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class DynamicGroupQuery:
-    query: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'query' }})
-    resource_type: Optional[DynamicGroupQueryResourceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceType' }})
+    r"""DynamicGroupQuery
+    Defines a query on a resource.
+    """
+    
+    query: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('query') }})
+    resource_type: Optional[DynamicGroupQueryResourceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceType') }})
     

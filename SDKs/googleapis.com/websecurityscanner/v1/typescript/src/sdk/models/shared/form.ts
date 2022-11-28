@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Form
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * ! Information about a vulnerability with an HTML.
 **/
 export class Form extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actionUri" })
+  @SpeakeasyMetadata({ data: "json, name=actionUri" })
   actionUri?: string;
 
-  @Metadata({ data: "json, name=fields" })
+  @SpeakeasyMetadata({ data: "json, name=fields" })
   fields?: string[];
 }

@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class SessionsIdViewsPostPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=session_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=session_id" })
   sessionId: string;
 }
 
@@ -13,42 +14,42 @@ export class SessionsIdViewsPostPathParams extends SpeakeasyBase {
  * A page view required a page number from the story outline to be created
 **/
 export class SessionsIdViewsPostRequiredParametersToCreateAView extends SpeakeasyBase {
-  @Metadata({ data: "json, name=activeMSecs" })
+  @SpeakeasyMetadata({ data: "json, name=activeMSecs" })
   activeMSecs?: number;
 
-  @Metadata({ data: "json, name=additional" })
+  @SpeakeasyMetadata({ data: "json, name=additional" })
   additional?: string;
 
-  @Metadata({ data: "json, name=endTime" })
+  @SpeakeasyMetadata({ data: "json, name=endTime" })
   endTime: Date;
 
-  @Metadata({ data: "json, name=pageNumber" })
+  @SpeakeasyMetadata({ data: "json, name=pageNumber" })
   pageNumber: number;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime: Date;
 }
 
 
 export class SessionsIdViewsPostRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: SessionsIdViewsPostPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: SessionsIdViewsPostRequiredParametersToCreateAView;
 }
 
 
 export class SessionsIdViewsPostResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetail?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   view?: shared.View;
 }

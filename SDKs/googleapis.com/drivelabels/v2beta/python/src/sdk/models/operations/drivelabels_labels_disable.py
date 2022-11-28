@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DrivelabelsLabelsDisablePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class DrivelabelsLabelsDisableQueryParams:
 
 @dataclass
 class DrivelabelsLabelsDisableRequest:
-    path_params: DrivelabelsLabelsDisablePathParams = field(default=None)
-    query_params: DrivelabelsLabelsDisableQueryParams = field(default=None)
+    path_params: DrivelabelsLabelsDisablePathParams = field()
+    query_params: DrivelabelsLabelsDisableQueryParams = field()
     request: Optional[shared.GoogleAppsDriveLabelsV2betaDisableLabelRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DrivelabelsLabelsDisableResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_apps_drive_labels_v2beta_label: Optional[shared.GoogleAppsDriveLabelsV2betaLabel] = field(default=None)
-    status_code: int = field(default=None)
     

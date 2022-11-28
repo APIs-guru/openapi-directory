@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class GetAPIPostsDepartmentsTypePathParams:
-    type: int = field(default=None, metadata={'path_param': { 'field_name': 'type', 'style': 'simple', 'explode': False }})
+    type: int = field(metadata={'path_param': { 'field_name': 'type', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetAPIPostsDepartmentsTypeRequest:
-    path_params: GetAPIPostsDepartmentsTypePathParams = field(default=None)
+    path_params: GetAPIPostsDepartmentsTypePathParams = field()
     
 
 @dataclass
 class GetAPIPostsDepartmentsTypeResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     government_departments: Optional[List[shared.GovernmentDepartment]] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DeviceAuthorizationCodeResponse = /** @class */ (function (_super) {
     __extends(DeviceAuthorizationCodeResponse, _super);
     function DeviceAuthorizationCodeResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=device_code" }),
+        SpeakeasyMetadata({ data: "json, name=device_code" }),
         __metadata("design:type", String)
     ], DeviceAuthorizationCodeResponse.prototype, "deviceCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=dl_masked_email" }),
+        SpeakeasyMetadata({ data: "json, name=dl_masked_email" }),
         __metadata("design:type", String)
     ], DeviceAuthorizationCodeResponse.prototype, "dlMaskedEmail", void 0);
     __decorate([
-        Metadata({ data: "json, name=dl_masked_mobile" }),
+        SpeakeasyMetadata({ data: "json, name=dl_masked_mobile" }),
         __metadata("design:type", Number)
     ], DeviceAuthorizationCodeResponse.prototype, "dlMaskedMobile", void 0);
     __decorate([
-        Metadata({ data: "json, name=expires_in" }),
+        SpeakeasyMetadata({ data: "json, name=expires_in" }),
         __metadata("design:type", Number)
     ], DeviceAuthorizationCodeResponse.prototype, "expiresIn", void 0);
     return DeviceAuthorizationCodeResponse;

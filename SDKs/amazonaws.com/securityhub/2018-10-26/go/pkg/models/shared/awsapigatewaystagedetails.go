@@ -1,5 +1,7 @@
 package shared
 
+// AwsAPIGatewayStageDetails
+// Provides information about a version 1 Amazon API Gateway stage.
 type AwsAPIGatewayStageDetails struct {
 	AccessLogSettings    *AwsAPIGatewayAccessLogSettings `json:"AccessLogSettings,omitempty"`
 	CacheClusterEnabled  *bool                           `json:"CacheClusterEnabled,omitempty"`

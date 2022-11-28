@@ -10,6 +10,8 @@ const (
 	FleetLifecycleStateCodeEnumUpdating        FleetLifecycleStateCodeEnum = "UPDATING"
 )
 
+// FleetLifecycleState
+// FleetLifecycleState describes the state of a Fleet resource.
 type FleetLifecycleState struct {
 	Code *FleetLifecycleStateCodeEnum `json:"code,omitempty"`
 }

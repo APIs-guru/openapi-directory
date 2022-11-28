@@ -1,6 +1,7 @@
 
 
+
 export enum ValidationEnum {
-    Enable = "ENABLE"
-,    Disable = "DISABLE"
+    Enable = "ENABLE",
+    Disable = "DISABLE"
 }

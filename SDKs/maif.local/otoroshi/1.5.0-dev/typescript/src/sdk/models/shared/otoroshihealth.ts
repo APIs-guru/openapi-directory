@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum OtoroshiHealthDatastoreEnum {
-    Healthy = "healthy"
-,    Unhealthy = "unhealthy"
-,    Unreachable = "unreachable"
+    Healthy = "healthy",
+    Unhealthy = "unhealthy",
+    Unreachable = "unreachable"
 }
 
 export enum OtoroshiHealthOtoroshiEnum {
-    Healthy = "healthy"
-,    Unhealthy = "unhealthy"
-,    Down = "down"
+    Healthy = "healthy",
+    Unhealthy = "unhealthy",
+    Down = "down"
 }
 
 
@@ -18,9 +19,9 @@ export enum OtoroshiHealthOtoroshiEnum {
  * The structure that represent current Otoroshi health
 **/
 export class OtoroshiHealth extends SpeakeasyBase {
-  @Metadata({ data: "json, name=datastore" })
+  @SpeakeasyMetadata({ data: "json, name=datastore" })
   datastore: OtoroshiHealthDatastoreEnum;
 
-  @Metadata({ data: "json, name=otoroshi" })
+  @SpeakeasyMetadata({ data: "json, name=otoroshi" })
   otoroshi: OtoroshiHealthOtoroshiEnum;
 }

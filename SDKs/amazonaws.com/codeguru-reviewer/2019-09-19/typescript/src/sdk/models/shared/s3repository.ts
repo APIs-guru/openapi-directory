@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // S3Repository
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  Information about a repository in an S3 bucket. 
 **/
 export class S3Repository extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BucketName" })
+  @SpeakeasyMetadata({ data: "json, name=BucketName" })
   bucketName: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 }

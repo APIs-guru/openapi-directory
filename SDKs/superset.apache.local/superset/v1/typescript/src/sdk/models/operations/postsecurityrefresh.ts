@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostSecurityRefreshSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   jwtRefresh: shared.SchemeJwtRefresh;
 }
 
 
-export class PostSecurityRefreshRequest extends SpeakeasyBase {
-  @Metadata()
-  security: PostSecurityRefreshSecurity;
-}
-
-
 export class PostSecurityRefresh200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=access_token" })
+  @SpeakeasyMetadata({ data: "json, name=access_token" })
   accessToken?: string;
 }
 
 
 export class PostSecurityRefresh401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PostSecurityRefresh500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class PostSecurityRefreshRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  security: PostSecurityRefreshSecurity;
+}
+
+
 export class PostSecurityRefreshResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postSecurityRefresh200ApplicationJsonObject?: PostSecurityRefresh200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postSecurityRefresh401ApplicationJsonObject?: PostSecurityRefresh401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postSecurityRefresh500ApplicationJsonObject?: PostSecurityRefresh500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

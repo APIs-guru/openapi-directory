@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum ServiceAccountKeyKeyAlgorithmEnum {
     KeyAlgUnspecified = "KEY_ALG_UNSPECIFIED",
     KeyAlgRsa1024 = "KEY_ALG_RSA_1024",

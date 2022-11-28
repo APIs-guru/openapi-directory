@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class UpdateFolderPathParams:
-    folder_id: int = field(default=None, metadata={'path_param': { 'field_name': 'folder_id', 'style': 'simple', 'explode': False }})
+    folder_id: int = field(metadata={'path_param': { 'field_name': 'folder_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,15 +19,15 @@ class UpdateFolderHeaders:
 
 @dataclass
 class UpdateFolderRequest:
-    path_params: UpdateFolderPathParams = field(default=None)
-    headers: UpdateFolderHeaders = field(default=None)
-    request: shared.UpdateFolderRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateFolderHeaders = field()
+    path_params: UpdateFolderPathParams = field()
+    request: shared.UpdateFolderRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateFolderResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     node: Optional[shared.Node] = field(default=None)
-    status_code: int = field(default=None)
     

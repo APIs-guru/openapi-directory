@@ -11,6 +11,8 @@ const (
 	FixableTotalByDigestSeverityEnumCritical            FixableTotalByDigestSeverityEnum = "CRITICAL"
 )
 
+// FixableTotalByDigest
+// Per resource and severity counts of fixable and total vulnerabilities.
 type FixableTotalByDigest struct {
 	FixableCount *string                           `json:"fixableCount,omitempty"`
 	Resource     *Resource                         `json:"resource,omitempty"`

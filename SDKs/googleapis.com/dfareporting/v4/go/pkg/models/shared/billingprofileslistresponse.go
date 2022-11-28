@@ -1,5 +1,7 @@
 package shared
 
+// BillingProfilesListResponse
+// Billing profile List Response
 type BillingProfilesListResponse struct {
 	BillingProfiles []BillingProfile `json:"billingProfiles,omitempty"`
 	Kind            *string          `json:"kind,omitempty"`

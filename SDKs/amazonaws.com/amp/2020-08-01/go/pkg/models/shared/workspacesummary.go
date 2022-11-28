@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// WorkspaceSummary
+// Represents a summary of the properties of a workspace.
 type WorkspaceSummary struct {
 	Alias       *string           `json:"alias,omitempty"`
 	Arn         string            `json:"arn"`

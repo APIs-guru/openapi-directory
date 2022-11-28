@@ -1,5 +1,7 @@
 package shared
 
+// ComponentSummary
+// A high-level summary of a component.
 type ComponentSummary struct {
 	Arn                 *string            `json:"arn,omitempty"`
 	ChangeDescription   *string            `json:"changeDescription,omitempty"`

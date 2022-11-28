@@ -1,23 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContentHandlingStrategyEnum } from "./contenthandlingstrategyenum";
 
 
+
 export class GetIntegrationResponseResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ContentHandlingStrategy" })
+  @SpeakeasyMetadata({ data: "json, name=ContentHandlingStrategy" })
   contentHandlingStrategy?: ContentHandlingStrategyEnum;
 
-  @Metadata({ data: "json, name=IntegrationResponseId" })
+  @SpeakeasyMetadata({ data: "json, name=IntegrationResponseId" })
   integrationResponseId?: string;
 
-  @Metadata({ data: "json, name=IntegrationResponseKey" })
+  @SpeakeasyMetadata({ data: "json, name=IntegrationResponseKey" })
   integrationResponseKey?: string;
 
-  @Metadata({ data: "json, name=ResponseParameters" })
+  @SpeakeasyMetadata({ data: "json, name=ResponseParameters" })
   responseParameters?: Map<string, string>;
 
-  @Metadata({ data: "json, name=ResponseTemplates" })
+  @SpeakeasyMetadata({ data: "json, name=ResponseTemplates" })
   responseTemplates?: Map<string, string>;
 
-  @Metadata({ data: "json, name=TemplateSelectionExpression" })
+  @SpeakeasyMetadata({ data: "json, name=TemplateSelectionExpression" })
   templateSelectionExpression?: string;
 }

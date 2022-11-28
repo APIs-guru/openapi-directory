@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import site
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ReplaceSitesResponse:
-    sites: Optional[List[site.Site]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sites' }})
+    r"""ReplaceSitesResponse
+    Response message for SiteService.ReplaceSites.
+    """
+    
+    sites: Optional[List[Site]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sites') }})
     

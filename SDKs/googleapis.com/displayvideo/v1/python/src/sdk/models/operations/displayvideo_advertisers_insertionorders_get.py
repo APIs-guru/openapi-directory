@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DisplayvideoAdvertisersInsertionOrdersGetPathParams:
-    advertiser_id: str = field(default=None, metadata={'path_param': { 'field_name': 'advertiserId', 'style': 'simple', 'explode': False }})
-    insertion_order_id: str = field(default=None, metadata={'path_param': { 'field_name': 'insertionOrderId', 'style': 'simple', 'explode': False }})
+    advertiser_id: str = field(metadata={'path_param': { 'field_name': 'advertiserId', 'style': 'simple', 'explode': False }})
+    insertion_order_id: str = field(metadata={'path_param': { 'field_name': 'insertionOrderId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +27,20 @@ class DisplayvideoAdvertisersInsertionOrdersGetQueryParams:
 
 @dataclass
 class DisplayvideoAdvertisersInsertionOrdersGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DisplayvideoAdvertisersInsertionOrdersGetRequest:
-    path_params: DisplayvideoAdvertisersInsertionOrdersGetPathParams = field(default=None)
-    query_params: DisplayvideoAdvertisersInsertionOrdersGetQueryParams = field(default=None)
-    security: DisplayvideoAdvertisersInsertionOrdersGetSecurity = field(default=None)
+    path_params: DisplayvideoAdvertisersInsertionOrdersGetPathParams = field()
+    query_params: DisplayvideoAdvertisersInsertionOrdersGetQueryParams = field()
+    security: DisplayvideoAdvertisersInsertionOrdersGetSecurity = field()
     
 
 @dataclass
 class DisplayvideoAdvertisersInsertionOrdersGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     insertion_order: Optional[shared.InsertionOrder] = field(default=None)
-    status_code: int = field(default=None)
     

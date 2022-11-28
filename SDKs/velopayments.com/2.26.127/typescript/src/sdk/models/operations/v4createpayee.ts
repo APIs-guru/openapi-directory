@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class V4CreatePayeeMultipartFormData extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, name=file;json=true", elemType: shared.CreatePayeesCsvRequest2 })
+  @SpeakeasyMetadata({ data: "multipart_form, name=file;json=true", elemType: shared.CreatePayeesCsvRequest2 })
   file?: shared.CreatePayeesCsvRequest2[];
 
-  @Metadata({ data: "multipart_form, name=payorId" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=payorId" })
   payorId?: string;
 }
 
 
-export class V4CreatePayeeRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  createPayeesRequest2?: shared.CreatePayeesRequest2;
+export class V4CreatePayeeRequestsInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  createPayeesRequest2?: shared.CreatePayeesRequest2Input;
 
-  @Metadata({ data: "request, media_type=multipart/form-data" })
+  @SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" })
   object?: V4CreatePayeeMultipartFormData;
 }
 
 
 export class V4CreatePayeeRequest extends SpeakeasyBase {
-  @Metadata()
-  request?: V4CreatePayeeRequests;
+  @SpeakeasyMetadata()
+  request?: V4CreatePayeeRequestsInput;
 }
 
 
 export class V4CreatePayeeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createPayeesCsvResponse2?: shared.CreatePayeesCsvResponse2;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   inlineResponse400?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   inlineResponse401?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   inlineResponse403?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   inlineResponse404?: any;
 }

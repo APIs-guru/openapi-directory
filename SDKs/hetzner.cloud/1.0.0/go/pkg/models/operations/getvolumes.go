@@ -28,10 +28,6 @@ type GetVolumesQueryParams struct {
 	Status        *GetVolumesStatusEnum `queryParam:"style=form,explode=true,name=status"`
 }
 
-type GetVolumesRequest struct {
-	QueryParams GetVolumesQueryParams
-}
-
 type GetVolumes200ApplicationJSONMetaPagination struct {
 	LastPage     float64 `json:"last_page"`
 	NextPage     float64 `json:"next_page"`
@@ -45,6 +41,8 @@ type GetVolumes200ApplicationJSONMeta struct {
 	Pagination GetVolumes200ApplicationJSONMetaPagination `json:"pagination"`
 }
 
+// GetVolumes200ApplicationJSONVolumesLocation
+// Location of the Volume. Volume can only be attached to Servers in the same Location.
 type GetVolumes200ApplicationJSONVolumesLocation struct {
 	City        string  `json:"city"`
 	Country     string  `json:"country"`
@@ -56,6 +54,8 @@ type GetVolumes200ApplicationJSONVolumesLocation struct {
 	NetworkZone string  `json:"network_zone"`
 }
 
+// GetVolumes200ApplicationJSONVolumesProtection
+// Protection configuration for the Resource
 type GetVolumes200ApplicationJSONVolumesProtection struct {
 	Delete bool `json:"delete"`
 }
@@ -84,6 +84,10 @@ type GetVolumes200ApplicationJSONVolumes struct {
 type GetVolumes200ApplicationJSON struct {
 	Meta    *GetVolumes200ApplicationJSONMeta     `json:"meta,omitempty"`
 	Volumes []GetVolumes200ApplicationJSONVolumes `json:"volumes"`
+}
+
+type GetVolumesRequest struct {
+	QueryParams GetVolumesQueryParams
 }
 
 type GetVolumesResponse struct {

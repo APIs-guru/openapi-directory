@@ -19,9 +19,9 @@ type SetUserAttributesRequest struct {
 	Request    shared.UserAttributes `request:"mediaType=application/json"`
 }
 
-type SetUserAttributesResponse struct {
+type SetUserAttributesResponseOutput struct {
 	ContentType   string
 	ErrorResponse *shared.ErrorResponse
 	StatusCode    int64
-	UserData      *shared.UserData
+	UserData      *shared.UserDataOutput
 }

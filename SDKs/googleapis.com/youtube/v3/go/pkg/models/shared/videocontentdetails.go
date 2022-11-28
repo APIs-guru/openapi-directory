@@ -21,6 +21,8 @@ const (
 	VideoContentDetailsProjectionEnumThreeHundredAndSixty VideoContentDetailsProjectionEnum = "360"
 )
 
+// VideoContentDetails
+// Details about the content of a YouTube Video.
 type VideoContentDetails struct {
 	Caption            *VideoContentDetailsCaptionEnum       `json:"caption,omitempty"`
 	ContentRating      *ContentRating                        `json:"contentRating,omitempty"`

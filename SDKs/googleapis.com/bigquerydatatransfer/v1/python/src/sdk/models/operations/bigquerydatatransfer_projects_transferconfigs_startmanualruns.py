@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class BigquerydatatransferProjectsTransferConfigsStartManualRunsPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class BigquerydatatransferProjectsTransferConfigsStartManualRunsQueryParams:
 
 @dataclass
 class BigquerydatatransferProjectsTransferConfigsStartManualRunsSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BigquerydatatransferProjectsTransferConfigsStartManualRunsSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class BigquerydatatransferProjectsTransferConfigsStartManualRunsSecurity:
 
 @dataclass
 class BigquerydatatransferProjectsTransferConfigsStartManualRunsRequest:
-    path_params: BigquerydatatransferProjectsTransferConfigsStartManualRunsPathParams = field(default=None)
-    query_params: BigquerydatatransferProjectsTransferConfigsStartManualRunsQueryParams = field(default=None)
+    path_params: BigquerydatatransferProjectsTransferConfigsStartManualRunsPathParams = field()
+    query_params: BigquerydatatransferProjectsTransferConfigsStartManualRunsQueryParams = field()
+    security: BigquerydatatransferProjectsTransferConfigsStartManualRunsSecurity = field()
     request: Optional[shared.StartManualTransferRunsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: BigquerydatatransferProjectsTransferConfigsStartManualRunsSecurity = field(default=None)
     
 
 @dataclass
 class BigquerydatatransferProjectsTransferConfigsStartManualRunsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     start_manual_transfer_runs_response: Optional[shared.StartManualTransferRunsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

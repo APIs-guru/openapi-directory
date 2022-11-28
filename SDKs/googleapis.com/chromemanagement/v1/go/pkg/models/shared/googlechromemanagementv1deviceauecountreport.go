@@ -18,6 +18,8 @@ const (
 	GoogleChromeManagementV1DeviceAueCountReportAueMonthEnumDecember         GoogleChromeManagementV1DeviceAueCountReportAueMonthEnum = "DECEMBER"
 )
 
+// GoogleChromeManagementV1DeviceAueCountReport
+// Report for CountChromeDevicesPerAueDateResponse, contains the count of devices of a specific model and auto update expiration range.
 type GoogleChromeManagementV1DeviceAueCountReport struct {
 	AueMonth *GoogleChromeManagementV1DeviceAueCountReportAueMonthEnum `json:"aueMonth,omitempty"`
 	AueYear  *string                                                   `json:"aueYear,omitempty"`

@@ -22,45 +22,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-var PostUploadDocumentSecurityOption1 = /** @class */ (function (_super) {
-    __extends(PostUploadDocumentSecurityOption1, _super);
-    function PostUploadDocumentSecurityOption1() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
-        __metadata("design:type", shared.SchemeBasicAuth)
-    ], PostUploadDocumentSecurityOption1.prototype, "basicAuth", void 0);
-    return PostUploadDocumentSecurityOption1;
-}(SpeakeasyBase));
-export { PostUploadDocumentSecurityOption1 };
-var PostUploadDocumentSecurityOption2 = /** @class */ (function (_super) {
-    __extends(PostUploadDocumentSecurityOption2, _super);
-    function PostUploadDocumentSecurityOption2() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
-        __metadata("design:type", shared.SchemeApiKeyAuth)
-    ], PostUploadDocumentSecurityOption2.prototype, "apiKeyAuth", void 0);
-    return PostUploadDocumentSecurityOption2;
-}(SpeakeasyBase));
-export { PostUploadDocumentSecurityOption2 };
 var PostUploadDocumentSecurity = /** @class */ (function (_super) {
     __extends(PostUploadDocumentSecurity, _super);
     function PostUploadDocumentSecurity() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", PostUploadDocumentSecurityOption1)
-    ], PostUploadDocumentSecurity.prototype, "option1", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        __metadata("design:type", shared.SchemeBasicAuth)
+    ], PostUploadDocumentSecurity.prototype, "basicAuth", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", PostUploadDocumentSecurityOption2)
-    ], PostUploadDocumentSecurity.prototype, "option2", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        __metadata("design:type", shared.SchemeApiKeyAuth)
+    ], PostUploadDocumentSecurity.prototype, "apiKeyAuth", void 0);
     return PostUploadDocumentSecurity;
 }(SpeakeasyBase));
 export { PostUploadDocumentSecurity };
@@ -70,11 +46,11 @@ var PostUploadDocumentRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", Object)
     ], PostUploadDocumentRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostUploadDocumentSecurity)
     ], PostUploadDocumentRequest.prototype, "security", void 0);
     return PostUploadDocumentRequest;
@@ -86,19 +62,19 @@ var PostUploadDocumentResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostUploadDocumentResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PostUploadDocumentResponse.prototype, "serviceError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostUploadDocumentResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PostUploadDocumentResponse.prototype, "updateAccountHolderResponse", void 0);
     return PostUploadDocumentResponse;

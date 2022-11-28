@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GoogleCloudPaymentsResellerSubscriptionV1Amount
 /**
  * Describes the amount unit including the currency code.
@@ -33,11 +33,11 @@ var GoogleCloudPaymentsResellerSubscriptionV1Amount = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=amountMicros" }),
+        SpeakeasyMetadata({ data: "json, name=amountMicros" }),
         __metadata("design:type", String)
     ], GoogleCloudPaymentsResellerSubscriptionV1Amount.prototype, "amountMicros", void 0);
     __decorate([
-        Metadata({ data: "json, name=currencyCode" }),
+        SpeakeasyMetadata({ data: "json, name=currencyCode" }),
         __metadata("design:type", String)
     ], GoogleCloudPaymentsResellerSubscriptionV1Amount.prototype, "currencyCode", void 0);
     return GoogleCloudPaymentsResellerSubscriptionV1Amount;

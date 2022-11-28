@@ -13,6 +13,8 @@ const (
 	GoogleCloudIntegrationsV1alphaFailurePolicyRetryStrategyEnumRestartIntegrationWithBackoff GoogleCloudIntegrationsV1alphaFailurePolicyRetryStrategyEnum = "RESTART_INTEGRATION_WITH_BACKOFF"
 )
 
+// GoogleCloudIntegrationsV1alphaFailurePolicy
+// Policy that defines the task retry logic and failure type. If no FailurePolicy is defined for a task, all its dependent tasks will not be executed (i.e, a `retry_strategy` of NONE will be applied).
 type GoogleCloudIntegrationsV1alphaFailurePolicy struct {
 	IntervalTime  *string                                                       `json:"intervalTime,omitempty"`
 	MaxRetries    *int32                                                        `json:"maxRetries,omitempty"`

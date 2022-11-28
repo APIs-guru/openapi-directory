@@ -22,10 +22,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+// TagBindingInput
+/**
+ * A TagBinding represents a connection between a TagValue and a cloud resource Once a TagBinding is created, the TagValue is applied to all the descendants of the Google Cloud resource.
+**/
+var TagBindingInput = /** @class */ (function (_super) {
+    __extends(TagBindingInput, _super);
+    function TagBindingInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=parent" }),
+        __metadata("design:type", String)
+    ], TagBindingInput.prototype, "parent", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=tagValue" }),
+        __metadata("design:type", String)
+    ], TagBindingInput.prototype, "tagValue", void 0);
+    return TagBindingInput;
+}(SpeakeasyBase));
+export { TagBindingInput };
 // TagBinding
 /**
- * A TagBinding represents a connection between a TagValue and a cloud resource (currently project, folder, or organization). Once a TagBinding is created, the TagValue is applied to all the descendants of the cloud resource.
+ * A TagBinding represents a connection between a TagValue and a cloud resource Once a TagBinding is created, the TagValue is applied to all the descendants of the Google Cloud resource.
 **/
 var TagBinding = /** @class */ (function (_super) {
     __extends(TagBinding, _super);
@@ -33,15 +53,15 @@ var TagBinding = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], TagBinding.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=parent" }),
+        SpeakeasyMetadata({ data: "json, name=parent" }),
         __metadata("design:type", String)
     ], TagBinding.prototype, "parent", void 0);
     __decorate([
-        Metadata({ data: "json, name=tagValue" }),
+        SpeakeasyMetadata({ data: "json, name=tagValue" }),
         __metadata("design:type", String)
     ], TagBinding.prototype, "tagValue", void 0);
     return TagBinding;

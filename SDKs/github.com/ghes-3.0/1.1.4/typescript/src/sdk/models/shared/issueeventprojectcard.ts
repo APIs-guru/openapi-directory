@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // IssueEventProjectCard
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Issue Event Project Card
 **/
 export class IssueEventProjectCard extends SpeakeasyBase {
-  @Metadata({ data: "json, name=column_name" })
+  @SpeakeasyMetadata({ data: "json, name=column_name" })
   columnName: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=previous_column_name" })
+  @SpeakeasyMetadata({ data: "json, name=previous_column_name" })
   previousColumnName?: string;
 
-  @Metadata({ data: "json, name=project_id" })
+  @SpeakeasyMetadata({ data: "json, name=project_id" })
   projectId: number;
 
-  @Metadata({ data: "json, name=project_url" })
+  @SpeakeasyMetadata({ data: "json, name=project_url" })
   projectUrl: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url: string;
 }

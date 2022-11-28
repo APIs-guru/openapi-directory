@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudBeyondcorpSaasplatformInsightsV1alphaInsightMetadataField
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Field metadata. Commonly understandable name and description for the field. Multiple such fields constitute the Insight.
 **/
 export class GoogleCloudBeyondcorpSaasplatformInsightsV1alphaInsightMetadataField extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=filterAlias" })
+  @SpeakeasyMetadata({ data: "json, name=filterAlias" })
   filterAlias?: string;
 
-  @Metadata({ data: "json, name=filterable" })
+  @SpeakeasyMetadata({ data: "json, name=filterable" })
   filterable?: boolean;
 
-  @Metadata({ data: "json, name=groupable" })
+  @SpeakeasyMetadata({ data: "json, name=groupable" })
   groupable?: boolean;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 }

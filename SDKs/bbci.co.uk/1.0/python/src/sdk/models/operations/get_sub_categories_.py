@@ -1,27 +1,28 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetSubCategoriesPathParams:
-    category: str = field(default=None, metadata={'path_param': { 'field_name': 'category', 'style': 'simple', 'explode': False }})
+    category: str = field(metadata={'path_param': { 'field_name': 'category', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetSubCategoriesQueryParams:
-    lang: shared.LangEnum = field(default=None, metadata={'query_param': { 'field_name': 'lang', 'style': 'form', 'explode': True }})
+    lang: shared.LangEnum = field(metadata={'query_param': { 'field_name': 'lang', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class GetSubCategoriesRequest:
-    path_params: GetSubCategoriesPathParams = field(default=None)
-    query_params: GetSubCategoriesQueryParams = field(default=None)
+    path_params: GetSubCategoriesPathParams = field()
+    query_params: GetSubCategoriesQueryParams = field()
     
 
 @dataclass
 class GetSubCategoriesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     ibl: Optional[Any] = field(default=None)
     

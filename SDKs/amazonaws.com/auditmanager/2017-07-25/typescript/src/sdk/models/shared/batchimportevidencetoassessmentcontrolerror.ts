@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ManualEvidence } from "./manualevidence";
+
 
 
 // BatchImportEvidenceToAssessmentControlError
@@ -7,12 +8,12 @@ import { ManualEvidence } from "./manualevidence";
  *  An error entity for the <code>BatchImportEvidenceToAssessmentControl</code> API. This is used to provide more meaningful errors than a simple string message. 
 **/
 export class BatchImportEvidenceToAssessmentControlError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errorCode" })
+  @SpeakeasyMetadata({ data: "json, name=errorCode" })
   errorCode?: string;
 
-  @Metadata({ data: "json, name=errorMessage" })
+  @SpeakeasyMetadata({ data: "json, name=errorMessage" })
   errorMessage?: string;
 
-  @Metadata({ data: "json, name=manualEvidence" })
+  @SpeakeasyMetadata({ data: "json, name=manualEvidence" })
   manualEvidence?: ManualEvidence;
 }

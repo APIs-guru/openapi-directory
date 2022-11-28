@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ExpenseDetection } from "./expensedetection";
 import { ExpenseType } from "./expensetype";
-import { ExpenseDetection } from "./expensedetection";
+
 
 
 // ExpenseField
@@ -9,15 +9,15 @@ import { ExpenseDetection } from "./expensedetection";
  * Breakdown of detected information, seperated into the catagories Type, LableDetection, and ValueDetection
 **/
 export class ExpenseField extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LabelDetection" })
+  @SpeakeasyMetadata({ data: "json, name=LabelDetection" })
   labelDetection?: ExpenseDetection;
 
-  @Metadata({ data: "json, name=PageNumber" })
+  @SpeakeasyMetadata({ data: "json, name=PageNumber" })
   pageNumber?: number;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: ExpenseType;
 
-  @Metadata({ data: "json, name=ValueDetection" })
+  @SpeakeasyMetadata({ data: "json, name=ValueDetection" })
   valueDetection?: ExpenseDetection;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ReadWrite
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Options for a transaction that can be used to read and write documents.
 **/
 export class ReadWrite extends SpeakeasyBase {
-  @Metadata({ data: "json, name=retryTransaction" })
+  @SpeakeasyMetadata({ data: "json, name=retryTransaction" })
   retryTransaction?: string;
 }

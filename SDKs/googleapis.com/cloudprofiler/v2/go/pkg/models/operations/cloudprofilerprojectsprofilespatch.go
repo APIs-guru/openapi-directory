@@ -47,7 +47,7 @@ type CloudprofilerProjectsProfilesPatchSecurity struct {
 type CloudprofilerProjectsProfilesPatchRequest struct {
 	PathParams  CloudprofilerProjectsProfilesPatchPathParams
 	QueryParams CloudprofilerProjectsProfilesPatchQueryParams
-	Request     *shared.Profile `request:"mediaType=application/json"`
+	Request     *shared.ProfileInput `request:"mediaType=application/json"`
 	Security    CloudprofilerProjectsProfilesPatchSecurity
 }
 

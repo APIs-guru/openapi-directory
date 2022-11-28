@@ -23,14 +23,14 @@ type ActionsListJobsForWorkflowRunQueryParams struct {
 	PerPage *int64                                   `queryParam:"style=form,explode=true,name=per_page"`
 }
 
-type ActionsListJobsForWorkflowRunRequest struct {
-	PathParams  ActionsListJobsForWorkflowRunPathParams
-	QueryParams ActionsListJobsForWorkflowRunQueryParams
-}
-
 type ActionsListJobsForWorkflowRun200ApplicationJSON struct {
 	Jobs       []shared.Job `json:"jobs"`
 	TotalCount int64        `json:"total_count"`
+}
+
+type ActionsListJobsForWorkflowRunRequest struct {
+	PathParams  ActionsListJobsForWorkflowRunPathParams
+	QueryParams ActionsListJobsForWorkflowRunQueryParams
 }
 
 type ActionsListJobsForWorkflowRunResponse struct {

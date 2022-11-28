@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 
-
-export class PostPortfolioAnalysisAlphaRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: Map<string, any>;
-}
 
 
 export class PostPortfolioAnalysisAlpha200ApplicationJsonPortfolios extends SpeakeasyBase {
-  @Metadata({ data: "json, name=portfolioAlpha" })
+  @SpeakeasyMetadata({ data: "json, name=portfolioAlpha" })
   portfolioAlpha: number;
 }
 
 
 export class PostPortfolioAnalysisAlpha200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=portfolios", elemType: operations.PostPortfolioAnalysisAlpha200ApplicationJsonPortfolios })
+  @SpeakeasyMetadata({ data: "json, name=portfolios", elemType: PostPortfolioAnalysisAlpha200ApplicationJsonPortfolios })
   portfolios: PostPortfolioAnalysisAlpha200ApplicationJsonPortfolios[];
 }
 
 
+export class PostPortfolioAnalysisAlphaRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: Map<string, any>;
+}
+
+
 export class PostPortfolioAnalysisAlphaResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postPortfolioAnalysisAlpha200ApplicationJsonObject?: PostPortfolioAnalysisAlpha200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

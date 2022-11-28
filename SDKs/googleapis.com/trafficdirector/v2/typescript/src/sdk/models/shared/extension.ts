@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BuildVersion } from "./buildversion";
+
 
 
 // Extension
@@ -7,18 +8,18 @@ import { BuildVersion } from "./buildversion";
  * Version and identification for an Envoy extension. [#next-free-field: 6]
 **/
 export class Extension extends SpeakeasyBase {
-  @Metadata({ data: "json, name=category" })
+  @SpeakeasyMetadata({ data: "json, name=category" })
   category?: string;
 
-  @Metadata({ data: "json, name=disabled" })
+  @SpeakeasyMetadata({ data: "json, name=disabled" })
   disabled?: boolean;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=typeDescriptor" })
+  @SpeakeasyMetadata({ data: "json, name=typeDescriptor" })
   typeDescriptor?: string;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: BuildVersion;
 }

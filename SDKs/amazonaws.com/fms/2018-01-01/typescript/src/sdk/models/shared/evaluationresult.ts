@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PolicyComplianceStatusTypeEnum } from "./policycompliancestatustypeenum";
+
 
 
 // EvaluationResult
@@ -7,12 +8,12 @@ import { PolicyComplianceStatusTypeEnum } from "./policycompliancestatustypeenum
  * Describes the compliance status for the account. An account is considered noncompliant if it includes resources that are not protected by the specified policy or that don't comply with the policy.
 **/
 export class EvaluationResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ComplianceStatus" })
+  @SpeakeasyMetadata({ data: "json, name=ComplianceStatus" })
   complianceStatus?: PolicyComplianceStatusTypeEnum;
 
-  @Metadata({ data: "json, name=EvaluationLimitExceeded" })
+  @SpeakeasyMetadata({ data: "json, name=EvaluationLimitExceeded" })
   evaluationLimitExceeded?: boolean;
 
-  @Metadata({ data: "json, name=ViolatorCount" })
+  @SpeakeasyMetadata({ data: "json, name=ViolatorCount" })
   violatorCount?: number;
 }

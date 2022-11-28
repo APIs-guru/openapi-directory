@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TimingInformation } from "./timinginformation";
+
 
 
 // StartTransactionResult
@@ -7,9 +8,9 @@ import { TimingInformation } from "./timinginformation";
  * Contains the details of the started transaction.
 **/
 export class StartTransactionResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=TimingInformation" })
+  @SpeakeasyMetadata({ data: "json, name=TimingInformation" })
   timingInformation?: TimingInformation;
 
-  @Metadata({ data: "json, name=TransactionId" })
+  @SpeakeasyMetadata({ data: "json, name=TransactionId" })
   transactionId?: string;
 }

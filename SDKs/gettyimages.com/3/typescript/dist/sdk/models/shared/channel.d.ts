@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AssetFamilyEnum } from "./assetfamilyenum";
 import { AssetTypeEnum } from "./assettypeenum";
 export declare class Channel extends SpeakeasyBase {

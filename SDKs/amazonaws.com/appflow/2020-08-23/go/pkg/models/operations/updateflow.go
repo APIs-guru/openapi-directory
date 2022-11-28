@@ -14,6 +14,9 @@ type UpdateFlowHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateFlowRequestBodySourceFlowConfig
+//
+//	Contains information about the configuration of the source connector used in the flow.
 type UpdateFlowRequestBodySourceFlowConfig struct {
 	ConnectorProfileName      *string                           `json:"connectorProfileName,omitempty"`
 	ConnectorType             *shared.ConnectorTypeEnum         `json:"connectorType,omitempty"`
@@ -21,6 +24,9 @@ type UpdateFlowRequestBodySourceFlowConfig struct {
 	SourceConnectorProperties *shared.SourceConnectorProperties `json:"sourceConnectorProperties,omitempty"`
 }
 
+// UpdateFlowRequestBodyTriggerConfig
+//
+//	The trigger settings that determine how and when Amazon AppFlow runs the specified flow.
 type UpdateFlowRequestBodyTriggerConfig struct {
 	TriggerProperties *shared.TriggerProperties `json:"triggerProperties,omitempty"`
 	TriggerType       *shared.TriggerTypeEnum   `json:"triggerType,omitempty"`

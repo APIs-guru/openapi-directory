@@ -1,19 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateBulkDataExporterConfigSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   otoroshiAuth: shared.SchemeOtoroshiAuth;
-}
-
-
-export class UpdateBulkDataExporterConfigRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/ndjson" })
-  request?: shared.DataExporterConfig;
-
-  @Metadata()
-  security: UpdateBulkDataExporterConfigSecurity;
 }
 
 export enum UpdateBulkDataExporterConfig200ApplicationJsonStatusEnum {
@@ -26,24 +18,33 @@ export enum UpdateBulkDataExporterConfig200ApplicationJsonStatusEnum {
  * The bulk response
 **/
 export class UpdateBulkDataExporterConfig200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: boolean;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: UpdateBulkDataExporterConfig200ApplicationJsonStatusEnum;
 
-  @Metadata({ data: "json, name=updated" })
+  @SpeakeasyMetadata({ data: "json, name=updated" })
   updated?: boolean;
 }
 
 
+export class UpdateBulkDataExporterConfigRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/ndjson" })
+  request?: shared.DataExporterConfig;
+
+  @SpeakeasyMetadata()
+  security: UpdateBulkDataExporterConfigSecurity;
+}
+
+
 export class UpdateBulkDataExporterConfigResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: operations.UpdateBulkDataExporterConfig200ApplicationJson })
+  @SpeakeasyMetadata({ elemType: UpdateBulkDataExporterConfig200ApplicationJson })
   updateBulkDataExporterConfig200ApplicationJsonObjects?: UpdateBulkDataExporterConfig200ApplicationJson[];
 }

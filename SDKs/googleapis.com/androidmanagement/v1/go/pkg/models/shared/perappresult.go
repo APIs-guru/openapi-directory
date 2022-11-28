@@ -10,6 +10,8 @@ const (
 	PerAppResultClearingResultEnumAPILevel                  PerAppResultClearingResultEnum = "API_LEVEL"
 )
 
+// PerAppResult
+// The result of an attempt to clear the data of a single app.
 type PerAppResult struct {
 	ClearingResult *PerAppResultClearingResultEnum `json:"clearingResult,omitempty"`
 }

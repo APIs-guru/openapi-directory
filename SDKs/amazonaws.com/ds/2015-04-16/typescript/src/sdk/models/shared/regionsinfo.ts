@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RegionsInfo
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides information about the Regions that are configured for multi-Region replication.
 **/
 export class RegionsInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AdditionalRegions" })
+  @SpeakeasyMetadata({ data: "json, name=AdditionalRegions" })
   additionalRegions?: string[];
 
-  @Metadata({ data: "json, name=PrimaryRegion" })
+  @SpeakeasyMetadata({ data: "json, name=PrimaryRegion" })
   primaryRegion?: string;
 }

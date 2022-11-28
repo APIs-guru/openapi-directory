@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HmacKeyMetadata } from "./hmackeymetadata";
+
 
 
 // HmacKeysMetadata
@@ -8,12 +8,12 @@ import { HmacKeyMetadata } from "./hmackeymetadata";
  * A list of hmacKeys.
 **/
 export class HmacKeysMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.HmacKeyMetadata })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: HmacKeyMetadata })
   items?: HmacKeyMetadata[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PendingAssignmentData } from "./pendingassignmentdata";
 import { Range } from "./range";
+
 
 
 // PendingAssignmentList
@@ -9,9 +9,9 @@ import { Range } from "./range";
  * List of pending assignments
 **/
 export class PendingAssignmentList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.PendingAssignmentData })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: PendingAssignmentData })
   items: PendingAssignmentData[];
 
-  @Metadata({ data: "json, name=range" })
+  @SpeakeasyMetadata({ data: "json, name=range" })
   range?: Range;
 }

@@ -1,22 +1,30 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import resourceaccesscontrol
-from . import credential
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ResourceUpdateErrorErrors:
-    code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
-    location: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'location' }})
-    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
+    code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('code') }})
+    location: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('location') }})
+    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('message') }})
     
 
 @dataclass_json
 @dataclass
 class ResourceUpdateError:
-    errors: Optional[List[ResourceUpdateErrorErrors]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errors' }})
+    r"""ResourceUpdateError
+    Output only. If errors are generated during update of the resource, this field will be populated.
+    """
+    
+    errors: Optional[List[ResourceUpdateErrorErrors]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errors') }})
     
 class ResourceUpdateIntentEnum(str, Enum):
     CREATE_OR_ACQUIRE = "CREATE_OR_ACQUIRE"
@@ -72,29 +80,29 @@ class ResourceUpdateWarningsCodeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ResourceUpdateWarningsData:
-    key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
-    value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('key') }})
+    value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     
 
 @dataclass_json
 @dataclass
 class ResourceUpdateWarnings:
-    code: Optional[ResourceUpdateWarningsCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
-    data: Optional[List[ResourceUpdateWarningsData]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
-    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
+    code: Optional[ResourceUpdateWarningsCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('code') }})
+    data: Optional[List[ResourceUpdateWarningsData]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
+    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('message') }})
     
 
 @dataclass_json
 @dataclass
 class ResourceUpdate:
-    access_control: Optional[resourceaccesscontrol.ResourceAccessControl] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'accessControl' }})
-    credential: Optional[credential.Credential] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'credential' }})
-    error: Optional[ResourceUpdateError] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    final_properties: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'finalProperties' }})
-    intent: Optional[ResourceUpdateIntentEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'intent' }})
-    manifest: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'manifest' }})
-    properties: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'properties' }})
-    runtime_policies: Optional[List[ResourceUpdateRuntimePoliciesEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'runtimePolicies' }})
-    state: Optional[ResourceUpdateStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
-    warnings: Optional[List[ResourceUpdateWarnings]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'warnings' }})
+    access_control: Optional[ResourceAccessControl] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('accessControl') }})
+    credential: Optional[Credential] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('credential') }})
+    error: Optional[ResourceUpdateError] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    final_properties: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('finalProperties') }})
+    intent: Optional[ResourceUpdateIntentEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('intent') }})
+    manifest: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('manifest') }})
+    properties: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('properties') }})
+    runtime_policies: Optional[List[ResourceUpdateRuntimePoliciesEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('runtimePolicies') }})
+    state: Optional[ResourceUpdateStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
+    warnings: Optional[List[ResourceUpdateWarnings]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('warnings') }})
     

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum CompletionResultTypeEnum {
-    CompletionTypeUnspecified = "COMPLETION_TYPE_UNSPECIFIED"
-,    JobTitle = "JOB_TITLE"
-,    CompanyName = "COMPANY_NAME"
-,    Combined = "COMBINED"
+    CompletionTypeUnspecified = "COMPLETION_TYPE_UNSPECIFIED",
+    JobTitle = "JOB_TITLE",
+    CompanyName = "COMPANY_NAME",
+    Combined = "COMBINED"
 }
 
 
@@ -13,12 +14,12 @@ export enum CompletionResultTypeEnum {
  * Output only. Resource that represents completion results.
 **/
 export class CompletionResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=imageUri" })
+  @SpeakeasyMetadata({ data: "json, name=imageUri" })
   imageUri?: string;
 
-  @Metadata({ data: "json, name=suggestion" })
+  @SpeakeasyMetadata({ data: "json, name=suggestion" })
   suggestion?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: CompletionResultTypeEnum;
 }

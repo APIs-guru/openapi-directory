@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetListingsByDealerListingsByDateGetQueryParams = /** @class */ (function (_super) {
     __extends(GetListingsByDealerListingsByDateGetQueryParams, _super);
@@ -30,27 +30,27 @@ var GetListingsByDealerListingsByDateGetQueryParams = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=dealerID" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dealerID" }),
         __metadata("design:type", Number)
     ], GetListingsByDealerListingsByDateGetQueryParams.prototype, "dealerId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=endDate" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=endDate" }),
         __metadata("design:type", Date)
     ], GetListingsByDealerListingsByDateGetQueryParams.prototype, "endDate", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=jwt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=jwt" }),
         __metadata("design:type", String)
     ], GetListingsByDealerListingsByDateGetQueryParams.prototype, "jwt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=newCars" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=newCars" }),
         __metadata("design:type", Boolean)
     ], GetListingsByDealerListingsByDateGetQueryParams.prototype, "newCars", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" }),
         __metadata("design:type", Number)
     ], GetListingsByDealerListingsByDateGetQueryParams.prototype, "page", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=startDate" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=startDate" }),
         __metadata("design:type", Date)
     ], GetListingsByDealerListingsByDateGetQueryParams.prototype, "startDate", void 0);
     return GetListingsByDealerListingsByDateGetQueryParams;
@@ -62,7 +62,7 @@ var GetListingsByDealerListingsByDateGetRequest = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetListingsByDealerListingsByDateGetQueryParams)
     ], GetListingsByDealerListingsByDateGetRequest.prototype, "queryParams", void 0);
     return GetListingsByDealerListingsByDateGetRequest;
@@ -74,19 +74,19 @@ var GetListingsByDealerListingsByDateGetResponse = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetListingsByDealerListingsByDateGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.HttpValidationError)
     ], GetListingsByDealerListingsByDateGetResponse.prototype, "httpValidationError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ListingResp)
     ], GetListingsByDealerListingsByDateGetResponse.prototype, "listingResp", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetListingsByDealerListingsByDateGetResponse.prototype, "statusCode", void 0);
     return GetListingsByDealerListingsByDateGetResponse;

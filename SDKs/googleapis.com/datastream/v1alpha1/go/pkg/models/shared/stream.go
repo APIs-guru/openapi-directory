@@ -14,6 +14,17 @@ const (
 	StreamStateEnumDraining          StreamStateEnum = "DRAINING"
 )
 
+type StreamInput struct {
+	BackfillAll                  *BackfillAllStrategy   `json:"backfillAll,omitempty"`
+	BackfillNone                 map[string]interface{} `json:"backfillNone,omitempty"`
+	CustomerManagedEncryptionKey *string                `json:"customerManagedEncryptionKey,omitempty"`
+	DestinationConfig            *DestinationConfig     `json:"destinationConfig,omitempty"`
+	DisplayName                  *string                `json:"displayName,omitempty"`
+	Labels                       map[string]string      `json:"labels,omitempty"`
+	SourceConfig                 *SourceConfig          `json:"sourceConfig,omitempty"`
+	State                        *StreamStateEnum       `json:"state,omitempty"`
+}
+
 type Stream struct {
 	BackfillAll                  *BackfillAllStrategy   `json:"backfillAll,omitempty"`
 	BackfillNone                 map[string]interface{} `json:"backfillNone,omitempty"`

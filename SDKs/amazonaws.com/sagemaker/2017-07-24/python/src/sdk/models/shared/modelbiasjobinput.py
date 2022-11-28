@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import endpointinput
-from . import monitoringgroundtruths3input
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ModelBiasJobInput:
-    endpoint_input: endpointinput.EndpointInput = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EndpointInput' }})
-    ground_truth_s3_input: monitoringgroundtruths3input.MonitoringGroundTruthS3Input = field(default=None, metadata={'dataclasses_json': { 'field_name': 'GroundTruthS3Input' }})
+    r"""ModelBiasJobInput
+    Inputs for the model bias job.
+    """
+    
+    endpoint_input: EndpointInput = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('EndpointInput') }})
+    ground_truth_s3_input: MonitoringGroundTruthS3Input = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('GroundTruthS3Input') }})
     

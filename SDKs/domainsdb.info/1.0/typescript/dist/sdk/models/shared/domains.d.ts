@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { MxRecords } from "./mxrecords";
 export declare class Domains extends SpeakeasyBase {
     a?: string[];

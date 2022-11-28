@@ -13,18 +13,18 @@ class GetPayoutsQueryParams:
 
 @dataclass
 class GetPayoutsSecurity:
-    api_auth: shared.SchemeAPIAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    api_auth: shared.SchemeAPIAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetPayoutsRequest:
-    query_params: GetPayoutsQueryParams = field(default=None)
-    security: GetPayoutsSecurity = field(default=None)
+    query_params: GetPayoutsQueryParams = field()
+    security: GetPayoutsSecurity = field()
     
 
 @dataclass
 class GetPayoutsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     payouts: Optional[shared.Payouts] = field(default=None)
-    status_code: int = field(default=None)
     

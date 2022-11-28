@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { FindingEnum } from "./findingenum";
 import { InstanceRecommendationFindingReasonCodeEnum } from "./instancerecommendationfindingreasoncodeenum";
 import { InstanceRecommendationOption } from "./instancerecommendationoption";

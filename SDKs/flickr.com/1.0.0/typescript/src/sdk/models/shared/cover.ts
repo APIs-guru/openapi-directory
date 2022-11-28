@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Cover extends SpeakeasyBase {
-  @Metadata({ data: "json, name=farm" })
+  @SpeakeasyMetadata({ data: "json, name=farm" })
   farm?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=isfamily" })
+  @SpeakeasyMetadata({ data: "json, name=isfamily" })
   isfamily?: boolean;
 
-  @Metadata({ data: "json, name=isfriend" })
+  @SpeakeasyMetadata({ data: "json, name=isfriend" })
   isfriend?: boolean;
 
-  @Metadata({ data: "json, name=ispublic" })
+  @SpeakeasyMetadata({ data: "json, name=ispublic" })
   ispublic?: boolean;
 
-  @Metadata({ data: "json, name=owner" })
+  @SpeakeasyMetadata({ data: "json, name=owner" })
   owner?: string;
 
-  @Metadata({ data: "json, name=secret" })
+  @SpeakeasyMetadata({ data: "json, name=secret" })
   secret?: string;
 
-  @Metadata({ data: "json, name=server" })
+  @SpeakeasyMetadata({ data: "json, name=server" })
   server?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=y" })
+  @SpeakeasyMetadata({ data: "json, name=y" })
   y?: string;
 }

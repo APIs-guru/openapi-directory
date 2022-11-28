@@ -22,34 +22,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var NiResponseAsync = /** @class */ (function (_super) {
     __extends(NiResponseAsync, _super);
     function NiResponseAsync() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error_text" }),
+        SpeakeasyMetadata({ data: "json, name=error_text" }),
         __metadata("design:type", String)
     ], NiResponseAsync.prototype, "errorText", void 0);
     __decorate([
-        Metadata({ data: "json, name=number" }),
+        SpeakeasyMetadata({ data: "json, name=number" }),
         __metadata("design:type", String)
     ], NiResponseAsync.prototype, "number", void 0);
     __decorate([
-        Metadata({ data: "json, name=remaining_balance" }),
+        SpeakeasyMetadata({ data: "json, name=remaining_balance" }),
         __metadata("design:type", String)
     ], NiResponseAsync.prototype, "remainingBalance", void 0);
     __decorate([
-        Metadata({ data: "json, name=request_id" }),
+        SpeakeasyMetadata({ data: "json, name=request_id" }),
         __metadata("design:type", String)
     ], NiResponseAsync.prototype, "requestId", void 0);
     __decorate([
-        Metadata({ data: "json, name=request_price" }),
+        SpeakeasyMetadata({ data: "json, name=request_price" }),
         __metadata("design:type", String)
     ], NiResponseAsync.prototype, "requestPrice", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", Number)
     ], NiResponseAsync.prototype, "status", void 0);
     return NiResponseAsync;

@@ -1,14 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ContainerFeatures } from "./containerfeatures";
+
 
 export enum ContainerUsageContextEnum {
-    UsageContextUnspecified = "usageContextUnspecified"
-,    Web = "web"
-,    Android = "android"
-,    Ios = "ios"
-,    AndroidSdk5 = "androidSdk5"
-,    IosSdk5 = "iosSdk5"
-,    Amp = "amp"
-,    Server = "server"
+    UsageContextUnspecified = "usageContextUnspecified",
+    Web = "web",
+    Android = "android",
+    Ios = "ios",
+    AndroidSdk5 = "androidSdk5",
+    IosSdk5 = "iosSdk5",
+    Amp = "amp",
+    Server = "server"
 }
 
 
@@ -17,33 +19,42 @@ export enum ContainerUsageContextEnum {
  * Represents a Google Tag Manager Container, which specifies the platform tags will run on, manages workspaces, and retains container versions.
 **/
 export class Container extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=containerId" })
+  @SpeakeasyMetadata({ data: "json, name=containerId" })
   containerId?: string;
 
-  @Metadata({ data: "json, name=domainName" })
+  @SpeakeasyMetadata({ data: "json, name=domainName" })
   domainName?: string[];
 
-  @Metadata({ data: "json, name=fingerprint" })
+  @SpeakeasyMetadata({ data: "json, name=features" })
+  features?: ContainerFeatures;
+
+  @SpeakeasyMetadata({ data: "json, name=fingerprint" })
   fingerprint?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=notes" })
+  @SpeakeasyMetadata({ data: "json, name=notes" })
   notes?: string;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path?: string;
 
-  @Metadata({ data: "json, name=publicId" })
+  @SpeakeasyMetadata({ data: "json, name=publicId" })
   publicId?: string;
 
-  @Metadata({ data: "json, name=tagManagerUrl" })
+  @SpeakeasyMetadata({ data: "json, name=tagIds" })
+  tagIds?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=tagManagerUrl" })
   tagManagerUrl?: string;
 
-  @Metadata({ data: "json, name=usageContext" })
+  @SpeakeasyMetadata({ data: "json, name=taggingServerUrls" })
+  taggingServerUrls?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=usageContext" })
   usageContext?: ContainerUsageContextEnum[];
 }

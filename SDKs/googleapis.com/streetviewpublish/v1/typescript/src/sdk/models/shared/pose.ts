@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LatLng } from "./latlng";
 import { Level } from "./level";
+
 
 
 // Pose
@@ -8,27 +9,27 @@ import { Level } from "./level";
  * Raw pose measurement for an entity.
 **/
 export class Pose extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accuracyMeters" })
+  @SpeakeasyMetadata({ data: "json, name=accuracyMeters" })
   accuracyMeters?: number;
 
-  @Metadata({ data: "json, name=altitude" })
+  @SpeakeasyMetadata({ data: "json, name=altitude" })
   altitude?: number;
 
-  @Metadata({ data: "json, name=gpsRecordTimestampUnixEpoch" })
+  @SpeakeasyMetadata({ data: "json, name=gpsRecordTimestampUnixEpoch" })
   gpsRecordTimestampUnixEpoch?: string;
 
-  @Metadata({ data: "json, name=heading" })
+  @SpeakeasyMetadata({ data: "json, name=heading" })
   heading?: number;
 
-  @Metadata({ data: "json, name=latLngPair" })
+  @SpeakeasyMetadata({ data: "json, name=latLngPair" })
   latLngPair?: LatLng;
 
-  @Metadata({ data: "json, name=level" })
+  @SpeakeasyMetadata({ data: "json, name=level" })
   level?: Level;
 
-  @Metadata({ data: "json, name=pitch" })
+  @SpeakeasyMetadata({ data: "json, name=pitch" })
   pitch?: number;
 
-  @Metadata({ data: "json, name=roll" })
+  @SpeakeasyMetadata({ data: "json, name=roll" })
   roll?: number;
 }

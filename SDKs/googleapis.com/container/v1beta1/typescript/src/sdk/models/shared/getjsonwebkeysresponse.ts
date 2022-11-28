@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HttpCacheControlResponseHeader } from "./httpcachecontrolresponseheader";
 import { Jwk } from "./jwk";
+
 
 
 // GetJsonWebKeysResponse
@@ -9,9 +9,9 @@ import { Jwk } from "./jwk";
  * GetJSONWebKeysResponse is a valid JSON Web Key Set as specififed in rfc 7517
 **/
 export class GetJsonWebKeysResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cacheHeader" })
+  @SpeakeasyMetadata({ data: "json, name=cacheHeader" })
   cacheHeader?: HttpCacheControlResponseHeader;
 
-  @Metadata({ data: "json, name=keys", elemType: shared.Jwk })
+  @SpeakeasyMetadata({ data: "json, name=keys", elemType: Jwk })
   keys?: Jwk[];
 }

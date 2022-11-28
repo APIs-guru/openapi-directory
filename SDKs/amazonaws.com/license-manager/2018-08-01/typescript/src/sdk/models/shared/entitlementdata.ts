@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EntitlementDataUnitEnum } from "./entitlementdataunitenum";
+
 
 
 // EntitlementData
@@ -7,12 +8,12 @@ import { EntitlementDataUnitEnum } from "./entitlementdataunitenum";
  * Data associated with an entitlement resource.
 **/
 export class EntitlementData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 
-  @Metadata({ data: "json, name=Unit" })
+  @SpeakeasyMetadata({ data: "json, name=Unit" })
   unit: EntitlementDataUnitEnum;
 
-  @Metadata({ data: "json, name=Value" })
+  @SpeakeasyMetadata({ data: "json, name=Value" })
   value?: string;
 }

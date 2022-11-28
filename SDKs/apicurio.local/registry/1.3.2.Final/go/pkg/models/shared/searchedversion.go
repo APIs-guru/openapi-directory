@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// SearchedVersion
+// Models a single artifact from the result set returned when searching for artifacts.
 type SearchedVersion struct {
 	CreatedBy   string            `json:"createdBy"`
 	CreatedOn   time.Time         `json:"createdOn"`

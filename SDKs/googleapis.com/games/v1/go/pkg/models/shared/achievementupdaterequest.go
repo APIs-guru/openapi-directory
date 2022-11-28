@@ -10,6 +10,8 @@ const (
 	AchievementUpdateRequestUpdateTypeEnumSetStepsAtLeast                  AchievementUpdateRequestUpdateTypeEnum = "SET_STEPS_AT_LEAST"
 )
 
+// AchievementUpdateRequest
+// A request to update an achievement.
 type AchievementUpdateRequest struct {
 	AchievementID          *string                                 `json:"achievementId,omitempty"`
 	IncrementPayload       *GamesAchievementIncrement              `json:"incrementPayload,omitempty"`

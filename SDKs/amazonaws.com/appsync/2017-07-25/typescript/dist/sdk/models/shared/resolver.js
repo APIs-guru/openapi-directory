@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CachingConfig } from "./cachingconfig";
 import { ResolverKindEnum } from "./resolverkindenum";
 import { PipelineConfig } from "./pipelineconfig";
@@ -37,43 +37,43 @@ var Resolver = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=cachingConfig" }),
+        SpeakeasyMetadata({ data: "json, name=cachingConfig" }),
         __metadata("design:type", CachingConfig)
     ], Resolver.prototype, "cachingConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=dataSourceName" }),
+        SpeakeasyMetadata({ data: "json, name=dataSourceName" }),
         __metadata("design:type", String)
     ], Resolver.prototype, "dataSourceName", void 0);
     __decorate([
-        Metadata({ data: "json, name=fieldName" }),
+        SpeakeasyMetadata({ data: "json, name=fieldName" }),
         __metadata("design:type", String)
     ], Resolver.prototype, "fieldName", void 0);
     __decorate([
-        Metadata({ data: "json, name=kind" }),
+        SpeakeasyMetadata({ data: "json, name=kind" }),
         __metadata("design:type", String)
     ], Resolver.prototype, "kind", void 0);
     __decorate([
-        Metadata({ data: "json, name=pipelineConfig" }),
+        SpeakeasyMetadata({ data: "json, name=pipelineConfig" }),
         __metadata("design:type", PipelineConfig)
     ], Resolver.prototype, "pipelineConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=requestMappingTemplate" }),
+        SpeakeasyMetadata({ data: "json, name=requestMappingTemplate" }),
         __metadata("design:type", String)
     ], Resolver.prototype, "requestMappingTemplate", void 0);
     __decorate([
-        Metadata({ data: "json, name=resolverArn" }),
+        SpeakeasyMetadata({ data: "json, name=resolverArn" }),
         __metadata("design:type", String)
     ], Resolver.prototype, "resolverArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=responseMappingTemplate" }),
+        SpeakeasyMetadata({ data: "json, name=responseMappingTemplate" }),
         __metadata("design:type", String)
     ], Resolver.prototype, "responseMappingTemplate", void 0);
     __decorate([
-        Metadata({ data: "json, name=syncConfig" }),
+        SpeakeasyMetadata({ data: "json, name=syncConfig" }),
         __metadata("design:type", SyncConfig)
     ], Resolver.prototype, "syncConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=typeName" }),
+        SpeakeasyMetadata({ data: "json, name=typeName" }),
         __metadata("design:type", String)
     ], Resolver.prototype, "typeName", void 0);
     return Resolver;

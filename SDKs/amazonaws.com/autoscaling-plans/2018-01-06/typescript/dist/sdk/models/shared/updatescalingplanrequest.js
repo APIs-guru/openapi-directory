@@ -22,28 +22,28 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApplicationSource } from "./applicationsource";
+import { ScalingInstruction } from "./scalinginstruction";
 var UpdateScalingPlanRequest = /** @class */ (function (_super) {
     __extends(UpdateScalingPlanRequest, _super);
     function UpdateScalingPlanRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ApplicationSource" }),
+        SpeakeasyMetadata({ data: "json, name=ApplicationSource" }),
         __metadata("design:type", ApplicationSource)
     ], UpdateScalingPlanRequest.prototype, "applicationSource", void 0);
     __decorate([
-        Metadata({ data: "json, name=ScalingInstructions", elemType: shared.ScalingInstruction }),
+        SpeakeasyMetadata({ data: "json, name=ScalingInstructions", elemType: ScalingInstruction }),
         __metadata("design:type", Array)
     ], UpdateScalingPlanRequest.prototype, "scalingInstructions", void 0);
     __decorate([
-        Metadata({ data: "json, name=ScalingPlanName" }),
+        SpeakeasyMetadata({ data: "json, name=ScalingPlanName" }),
         __metadata("design:type", String)
     ], UpdateScalingPlanRequest.prototype, "scalingPlanName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ScalingPlanVersion" }),
+        SpeakeasyMetadata({ data: "json, name=ScalingPlanVersion" }),
         __metadata("design:type", Number)
     ], UpdateScalingPlanRequest.prototype, "scalingPlanVersion", void 0);
     return UpdateScalingPlanRequest;

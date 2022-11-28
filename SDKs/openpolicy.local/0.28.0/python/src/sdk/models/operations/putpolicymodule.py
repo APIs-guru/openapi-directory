@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class PutPolicyModulePathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,15 +16,15 @@ class PutPolicyModuleQueryParams:
 
 @dataclass
 class PutPolicyModuleRequest:
-    path_params: PutPolicyModulePathParams = field(default=None)
-    query_params: PutPolicyModuleQueryParams = field(default=None)
-    request: str = field(default=None, metadata={'request': { 'media_type': 'text/plain' }})
+    path_params: PutPolicyModulePathParams = field()
+    query_params: PutPolicyModuleQueryParams = field()
+    request: str = field(metadata={'request': { 'media_type': 'text/plain' }})
     
 
 @dataclass
 class PutPolicyModuleResponse:
+    content_type: str = field()
+    status_code: int = field()
     two_hundred_result: Optional[shared.TwoHundredResult] = field(default=None)
     four_hundred: Optional[shared.FourHundred] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

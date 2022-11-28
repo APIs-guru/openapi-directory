@@ -22,38 +22,38 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var UpdateIdentityProviderConfigurationHeaders = /** @class */ (function (_super) {
     __extends(UpdateIdentityProviderConfigurationHeaders, _super);
     function UpdateIdentityProviderConfigurationHeaders() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], UpdateIdentityProviderConfigurationHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], UpdateIdentityProviderConfigurationHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], UpdateIdentityProviderConfigurationHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], UpdateIdentityProviderConfigurationHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], UpdateIdentityProviderConfigurationHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], UpdateIdentityProviderConfigurationHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], UpdateIdentityProviderConfigurationHeaders.prototype, "xAmzSignedHeaders", void 0);
     return UpdateIdentityProviderConfigurationHeaders;
@@ -69,15 +69,15 @@ var UpdateIdentityProviderConfigurationRequestBody = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=FleetArn" }),
+        SpeakeasyMetadata({ data: "json, name=FleetArn" }),
         __metadata("design:type", String)
     ], UpdateIdentityProviderConfigurationRequestBody.prototype, "fleetArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=IdentityProviderSamlMetadata" }),
+        SpeakeasyMetadata({ data: "json, name=IdentityProviderSamlMetadata" }),
         __metadata("design:type", String)
     ], UpdateIdentityProviderConfigurationRequestBody.prototype, "identityProviderSamlMetadata", void 0);
     __decorate([
-        Metadata({ data: "json, name=IdentityProviderType" }),
+        SpeakeasyMetadata({ data: "json, name=IdentityProviderType" }),
         __metadata("design:type", String)
     ], UpdateIdentityProviderConfigurationRequestBody.prototype, "identityProviderType", void 0);
     return UpdateIdentityProviderConfigurationRequestBody;
@@ -89,11 +89,11 @@ var UpdateIdentityProviderConfigurationRequest = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateIdentityProviderConfigurationHeaders)
     ], UpdateIdentityProviderConfigurationRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", UpdateIdentityProviderConfigurationRequestBody)
     ], UpdateIdentityProviderConfigurationRequest.prototype, "request", void 0);
     return UpdateIdentityProviderConfigurationRequest;
@@ -105,35 +105,35 @@ var UpdateIdentityProviderConfigurationResponse = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UpdateIdentityProviderConfigurationResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateIdentityProviderConfigurationResponse.prototype, "internalServerErrorException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateIdentityProviderConfigurationResponse.prototype, "invalidRequestException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateIdentityProviderConfigurationResponse.prototype, "resourceNotFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UpdateIdentityProviderConfigurationResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateIdentityProviderConfigurationResponse.prototype, "tooManyRequestsException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateIdentityProviderConfigurationResponse.prototype, "unauthorizedException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], UpdateIdentityProviderConfigurationResponse.prototype, "updateIdentityProviderConfigurationResponse", void 0);
     return UpdateIdentityProviderConfigurationResponse;

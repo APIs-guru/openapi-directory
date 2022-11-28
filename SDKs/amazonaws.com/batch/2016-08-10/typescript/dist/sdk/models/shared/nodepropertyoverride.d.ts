@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ContainerOverrides } from "./containeroverrides";
 /**
  * Object representing any node overrides to a job definition that's used in a <a>SubmitJob</a> API operation.

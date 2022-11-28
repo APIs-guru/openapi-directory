@@ -27,6 +27,20 @@ const (
 	ProposalProposalStateEnumFinalized                ProposalProposalStateEnum = "FINALIZED"
 )
 
+// ProposalInput
+// Represents a proposal in the Marketplace. A proposal is the unit of negotiation between a seller and a buyer and contains deals which are served. Note: You can't update, create, or otherwise modify Private Auction deals through the API. Fields are updatable unless noted otherwise.
+type ProposalInput struct {
+	BilledBuyer      *Buyer               `json:"billedBuyer,omitempty"`
+	Buyer            *Buyer               `json:"buyer,omitempty"`
+	BuyerContacts    []ContactInformation `json:"buyerContacts,omitempty"`
+	BuyerPrivateData *PrivateData         `json:"buyerPrivateData,omitempty"`
+	Deals            []DealInput          `json:"deals,omitempty"`
+	DisplayName      *string              `json:"displayName,omitempty"`
+	Seller           *SellerInput         `json:"seller,omitempty"`
+}
+
+// Proposal
+// Represents a proposal in the Marketplace. A proposal is the unit of negotiation between a seller and a buyer and contains deals which are served. Note: You can't update, create, or otherwise modify Private Auction deals through the API. Fields are updatable unless noted otherwise.
 type Proposal struct {
 	BilledBuyer                *Buyer                                  `json:"billedBuyer,omitempty"`
 	Buyer                      *Buyer                                  `json:"buyer,omitempty"`

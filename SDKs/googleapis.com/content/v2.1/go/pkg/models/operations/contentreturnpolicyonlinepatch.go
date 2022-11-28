@@ -31,7 +31,7 @@ type ContentReturnpolicyonlinePatchSecurity struct {
 type ContentReturnpolicyonlinePatchRequest struct {
 	PathParams  ContentReturnpolicyonlinePatchPathParams
 	QueryParams ContentReturnpolicyonlinePatchQueryParams
-	Request     *shared.ReturnPolicyOnline `request:"mediaType=application/json"`
+	Request     *shared.ReturnPolicyOnlineInput `request:"mediaType=application/json"`
 	Security    ContentReturnpolicyonlinePatchSecurity
 }
 

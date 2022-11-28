@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export var ListAvailabilityAvailabilityEnum;
 (function (ListAvailabilityAvailabilityEnum) {
@@ -49,39 +49,39 @@ var ListAvailabilityQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=availability" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=availability" }),
         __metadata("design:type", Array)
     ], ListAvailabilityQueryParams.prototype, "availability", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=debug" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=debug" }),
         __metadata("design:type", Boolean)
     ], ListAvailabilityQueryParams.prototype, "debug", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=descendants_of" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=descendants_of" }),
         __metadata("design:type", Array)
     ], ListAvailabilityQueryParams.prototype, "descendantsOf", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=media_set" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=media_set" }),
         __metadata("design:type", Array)
     ], ListAvailabilityQueryParams.prototype, "mediaSet", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" }),
         __metadata("design:type", Number)
     ], ListAvailabilityQueryParams.prototype, "page", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page_size" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_size" }),
         __metadata("design:type", Number)
     ], ListAvailabilityQueryParams.prototype, "pageSize", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sort" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" }),
         __metadata("design:type", String)
     ], ListAvailabilityQueryParams.prototype, "sort", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sort_direction" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort_direction" }),
         __metadata("design:type", String)
     ], ListAvailabilityQueryParams.prototype, "sortDirection", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=territory" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=territory" }),
         __metadata("design:type", Array)
     ], ListAvailabilityQueryParams.prototype, "territory", void 0);
     return ListAvailabilityQueryParams;
@@ -93,7 +93,7 @@ var ListAvailabilityRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ListAvailabilityQueryParams)
     ], ListAvailabilityRequest.prototype, "queryParams", void 0);
     return ListAvailabilityRequest;
@@ -105,23 +105,23 @@ var ListAvailabilityResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], ListAvailabilityResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ListAvailabilityResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorModel)
     ], ListAvailabilityResponse.prototype, "errorModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ListAvailabilityResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ListAvailabilityResponse.prototype, "nitro", void 0);
     return ListAvailabilityResponse;

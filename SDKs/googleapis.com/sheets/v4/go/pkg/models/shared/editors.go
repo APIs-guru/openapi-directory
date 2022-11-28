@@ -1,5 +1,7 @@
 package shared
 
+// Editors
+// The editors of a protected range.
 type Editors struct {
 	DomainUsersCanEdit *bool    `json:"domainUsersCanEdit,omitempty"`
 	Groups             []string `json:"groups,omitempty"`

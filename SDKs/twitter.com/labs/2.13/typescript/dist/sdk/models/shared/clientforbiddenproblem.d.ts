@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum ClientForbiddenProblemReasonEnum {
     OfficialClientForbidden = "official-client-forbidden",
     ClientNotEnrolled = "client-not-enrolled"

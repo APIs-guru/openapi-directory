@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Optional
@@ -29,11 +29,11 @@ class SearchProjectTermQueryParams:
 
 @dataclass
 class SearchProjectTermRequest:
-    query_params: SearchProjectTermQueryParams = field(default=None)
+    query_params: SearchProjectTermQueryParams = field()
     
 
 @dataclass
 class SearchProjectTermResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

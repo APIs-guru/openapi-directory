@@ -9,12 +9,12 @@ type PostOauthRequestTokenRequestBody struct {
 	OauthTimestamp       *string `json:"oauth_timestamp,omitempty"`
 }
 
-type PostOauthRequestTokenRequest struct {
-	Request PostOauthRequestTokenRequestBody `request:"mediaType=application/json"`
-}
-
 type PostOauthRequestToken200ApplicationJSON struct {
 	OauthToken *string `json:"oauth_token,omitempty"`
+}
+
+type PostOauthRequestTokenRequest struct {
+	Request PostOauthRequestTokenRequestBody `request:"mediaType=application/json"`
 }
 
 type PostOauthRequestTokenResponse struct {

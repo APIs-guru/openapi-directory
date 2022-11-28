@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class GetBehaviorsIDPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetBehaviorsIDRequest:
-    path_params: GetBehaviorsIDPathParams = field(default=None)
+    path_params: GetBehaviorsIDPathParams = field()
     
 
 @dataclass
 class GetBehaviorsIDResponse:
+    content_type: str = field()
+    status_code: int = field()
     behavior_entity: Optional[shared.BehaviorEntity] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

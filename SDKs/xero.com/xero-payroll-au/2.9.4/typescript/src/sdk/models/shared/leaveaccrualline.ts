@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class LeaveAccrualLine extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AutoCalculate" })
+  @SpeakeasyMetadata({ data: "json, name=AutoCalculate" })
   autoCalculate?: boolean;
 
-  @Metadata({ data: "json, name=LeaveTypeID" })
+  @SpeakeasyMetadata({ data: "json, name=LeaveTypeID" })
   leaveTypeId?: string;
 
-  @Metadata({ data: "json, name=NumberOfUnits" })
+  @SpeakeasyMetadata({ data: "json, name=NumberOfUnits" })
   numberOfUnits?: number;
 }

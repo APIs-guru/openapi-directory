@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GkehubProjectsLocationsMembershipsValidateCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +29,21 @@ class GkehubProjectsLocationsMembershipsValidateCreateQueryParams:
 
 @dataclass
 class GkehubProjectsLocationsMembershipsValidateCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GkehubProjectsLocationsMembershipsValidateCreateRequest:
-    path_params: GkehubProjectsLocationsMembershipsValidateCreatePathParams = field(default=None)
-    query_params: GkehubProjectsLocationsMembershipsValidateCreateQueryParams = field(default=None)
-    request: Optional[shared.ValidateCreateMembershipRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: GkehubProjectsLocationsMembershipsValidateCreateSecurity = field(default=None)
+    path_params: GkehubProjectsLocationsMembershipsValidateCreatePathParams = field()
+    query_params: GkehubProjectsLocationsMembershipsValidateCreateQueryParams = field()
+    security: GkehubProjectsLocationsMembershipsValidateCreateSecurity = field()
+    request: Optional[shared.ValidateCreateMembershipRequestInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class GkehubProjectsLocationsMembershipsValidateCreateResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     validate_create_membership_response: Optional[shared.ValidateCreateMembershipResponse] = field(default=None)
     

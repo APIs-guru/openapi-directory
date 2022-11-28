@@ -1,17 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ArimaFittingMetrics } from "./arimafittingmetrics";
 import { ArimaSingleModelForecastingMetrics } from "./arimasinglemodelforecastingmetrics";
 import { ArimaOrder } from "./arimaorder";
 
+
 export enum ArimaForecastingMetricsSeasonalPeriodsEnum {
-    SeasonalPeriodTypeUnspecified = "SEASONAL_PERIOD_TYPE_UNSPECIFIED"
-,    NoSeasonality = "NO_SEASONALITY"
-,    Daily = "DAILY"
-,    Weekly = "WEEKLY"
-,    Monthly = "MONTHLY"
-,    Quarterly = "QUARTERLY"
-,    Yearly = "YEARLY"
+    SeasonalPeriodTypeUnspecified = "SEASONAL_PERIOD_TYPE_UNSPECIFIED",
+    NoSeasonality = "NO_SEASONALITY",
+    Daily = "DAILY",
+    Weekly = "WEEKLY",
+    Monthly = "MONTHLY",
+    Quarterly = "QUARTERLY",
+    Yearly = "YEARLY"
 }
 
 
@@ -20,21 +20,21 @@ export enum ArimaForecastingMetricsSeasonalPeriodsEnum {
  * Model evaluation metrics for ARIMA forecasting models.
 **/
 export class ArimaForecastingMetrics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arimaFittingMetrics", elemType: shared.ArimaFittingMetrics })
+  @SpeakeasyMetadata({ data: "json, name=arimaFittingMetrics", elemType: ArimaFittingMetrics })
   arimaFittingMetrics?: ArimaFittingMetrics[];
 
-  @Metadata({ data: "json, name=arimaSingleModelForecastingMetrics", elemType: shared.ArimaSingleModelForecastingMetrics })
+  @SpeakeasyMetadata({ data: "json, name=arimaSingleModelForecastingMetrics", elemType: ArimaSingleModelForecastingMetrics })
   arimaSingleModelForecastingMetrics?: ArimaSingleModelForecastingMetrics[];
 
-  @Metadata({ data: "json, name=hasDrift" })
+  @SpeakeasyMetadata({ data: "json, name=hasDrift" })
   hasDrift?: boolean[];
 
-  @Metadata({ data: "json, name=nonSeasonalOrder", elemType: shared.ArimaOrder })
+  @SpeakeasyMetadata({ data: "json, name=nonSeasonalOrder", elemType: ArimaOrder })
   nonSeasonalOrder?: ArimaOrder[];
 
-  @Metadata({ data: "json, name=seasonalPeriods" })
+  @SpeakeasyMetadata({ data: "json, name=seasonalPeriods" })
   seasonalPeriods?: ArimaForecastingMetricsSeasonalPeriodsEnum[];
 
-  @Metadata({ data: "json, name=timeSeriesId" })
+  @SpeakeasyMetadata({ data: "json, name=timeSeriesId" })
   timeSeriesId?: string[];
 }

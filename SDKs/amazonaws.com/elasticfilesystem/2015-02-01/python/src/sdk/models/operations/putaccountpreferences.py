@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -22,19 +27,19 @@ class PutAccountPreferencesRequestBodyResourceIDTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PutAccountPreferencesRequestBody:
-    resource_id_type: PutAccountPreferencesRequestBodyResourceIDTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ResourceIdType' }})
+    resource_id_type: PutAccountPreferencesRequestBodyResourceIDTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ResourceIdType') }})
     
 
 @dataclass
 class PutAccountPreferencesRequest:
-    headers: PutAccountPreferencesHeaders = field(default=None)
-    request: PutAccountPreferencesRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: PutAccountPreferencesHeaders = field()
+    request: PutAccountPreferencesRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PutAccountPreferencesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_server_error: Optional[Any] = field(default=None)
     put_account_preferences_response: Optional[shared.PutAccountPreferencesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

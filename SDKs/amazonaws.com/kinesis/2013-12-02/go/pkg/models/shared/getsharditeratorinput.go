@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// GetShardIteratorInput
+// Represents the input for <code>GetShardIterator</code>.
 type GetShardIteratorInput struct {
 	ShardID                string                `json:"ShardId"`
 	ShardIteratorType      ShardIteratorTypeEnum `json:"ShardIteratorType"`

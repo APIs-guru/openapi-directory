@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AssignedTargetingOption } from "./assignedtargetingoption";
+
 
 
 // ListLineItemAssignedTargetingOptionsResponse
@@ -8,9 +8,9 @@ import { AssignedTargetingOption } from "./assignedtargetingoption";
  * Response message for ListLineItemAssignedTargetingOptions.
 **/
 export class ListLineItemAssignedTargetingOptionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assignedTargetingOptions", elemType: shared.AssignedTargetingOption })
+  @SpeakeasyMetadata({ data: "json, name=assignedTargetingOptions", elemType: AssignedTargetingOption })
   assignedTargetingOptions?: AssignedTargetingOption[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

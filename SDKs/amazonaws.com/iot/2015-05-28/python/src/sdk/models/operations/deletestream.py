@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteStreamPathParams:
-    stream_id: str = field(default=None, metadata={'path_param': { 'field_name': 'streamId', 'style': 'simple', 'explode': False }})
+    stream_id: str = field(metadata={'path_param': { 'field_name': 'streamId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,20 +23,20 @@ class DeleteStreamHeaders:
 
 @dataclass
 class DeleteStreamRequest:
-    path_params: DeleteStreamPathParams = field(default=None)
-    headers: DeleteStreamHeaders = field(default=None)
+    headers: DeleteStreamHeaders = field()
+    path_params: DeleteStreamPathParams = field()
     
 
 @dataclass
 class DeleteStreamResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     delete_conflict_exception: Optional[Any] = field(default=None)
     delete_stream_response: Optional[dict[str, Any]] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

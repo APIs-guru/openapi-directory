@@ -1,6 +1,7 @@
 
 
+
 export enum EncodingContextEnum {
-    Streaming = "Streaming"
-,    Static = "Static"
+    Streaming = "Streaming",
+    Static = "Static"
 }

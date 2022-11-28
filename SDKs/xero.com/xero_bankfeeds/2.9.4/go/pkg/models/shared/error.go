@@ -25,6 +25,8 @@ const (
 	ErrorTypeEnumAccountNotValid                             ErrorTypeEnum = "account-not-valid"
 )
 
+// Error
+// On error, the API consumer will receive an HTTP response with a HTTP Status Code of 4xx or 5xx and a Content-Type of application/problem+json.
 type Error struct {
 	Detail *string        `json:"detail,omitempty"`
 	Status *int64         `json:"status,omitempty"`

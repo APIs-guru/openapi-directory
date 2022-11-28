@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ProductDeliveryTimeAreaDeliveryTimeDeliveryTime
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A delivery time for this product.
 **/
 export class ProductDeliveryTimeAreaDeliveryTimeDeliveryTime extends SpeakeasyBase {
-  @Metadata({ data: "json, name=maxHandlingTimeDays" })
+  @SpeakeasyMetadata({ data: "json, name=maxHandlingTimeDays" })
   maxHandlingTimeDays?: number;
 
-  @Metadata({ data: "json, name=maxTransitTimeDays" })
+  @SpeakeasyMetadata({ data: "json, name=maxTransitTimeDays" })
   maxTransitTimeDays?: number;
 
-  @Metadata({ data: "json, name=minHandlingTimeDays" })
+  @SpeakeasyMetadata({ data: "json, name=minHandlingTimeDays" })
   minHandlingTimeDays?: number;
 
-  @Metadata({ data: "json, name=minTransitTimeDays" })
+  @SpeakeasyMetadata({ data: "json, name=minTransitTimeDays" })
   minTransitTimeDays?: number;
 }

@@ -22,9 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DomainStatusEnum } from "./domainstatusenum";
+import { SubDomain } from "./subdomain";
 // DomainAssociation
 /**
  *  Describes a domain association that associates a custom domain with an Amplify app.
@@ -35,39 +35,39 @@ var DomainAssociation = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=autoSubDomainCreationPatterns" }),
+        SpeakeasyMetadata({ data: "json, name=autoSubDomainCreationPatterns" }),
         __metadata("design:type", Array)
     ], DomainAssociation.prototype, "autoSubDomainCreationPatterns", void 0);
     __decorate([
-        Metadata({ data: "json, name=autoSubDomainIAMRole" }),
+        SpeakeasyMetadata({ data: "json, name=autoSubDomainIAMRole" }),
         __metadata("design:type", String)
     ], DomainAssociation.prototype, "autoSubDomainIamRole", void 0);
     __decorate([
-        Metadata({ data: "json, name=certificateVerificationDNSRecord" }),
+        SpeakeasyMetadata({ data: "json, name=certificateVerificationDNSRecord" }),
         __metadata("design:type", String)
     ], DomainAssociation.prototype, "certificateVerificationDnsRecord", void 0);
     __decorate([
-        Metadata({ data: "json, name=domainAssociationArn" }),
+        SpeakeasyMetadata({ data: "json, name=domainAssociationArn" }),
         __metadata("design:type", String)
     ], DomainAssociation.prototype, "domainAssociationArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=domainName" }),
+        SpeakeasyMetadata({ data: "json, name=domainName" }),
         __metadata("design:type", String)
     ], DomainAssociation.prototype, "domainName", void 0);
     __decorate([
-        Metadata({ data: "json, name=domainStatus" }),
+        SpeakeasyMetadata({ data: "json, name=domainStatus" }),
         __metadata("design:type", String)
     ], DomainAssociation.prototype, "domainStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=enableAutoSubDomain" }),
+        SpeakeasyMetadata({ data: "json, name=enableAutoSubDomain" }),
         __metadata("design:type", Boolean)
     ], DomainAssociation.prototype, "enableAutoSubDomain", void 0);
     __decorate([
-        Metadata({ data: "json, name=statusReason" }),
+        SpeakeasyMetadata({ data: "json, name=statusReason" }),
         __metadata("design:type", String)
     ], DomainAssociation.prototype, "statusReason", void 0);
     __decorate([
-        Metadata({ data: "json, name=subDomains", elemType: shared.SubDomain }),
+        SpeakeasyMetadata({ data: "json, name=subDomains", elemType: SubDomain }),
         __metadata("design:type", Array)
     ], DomainAssociation.prototype, "subDomains", void 0);
     return DomainAssociation;

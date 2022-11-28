@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var IamcredentialsProjectsServiceAccountsSignBlobPathParams = /** @class */ (function (_super) {
     __extends(IamcredentialsProjectsServiceAccountsSignBlobPathParams, _super);
@@ -30,7 +30,7 @@ var IamcredentialsProjectsServiceAccountsSignBlobPathParams = /** @class */ (fun
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=name" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=name" }),
         __metadata("design:type", String)
     ], IamcredentialsProjectsServiceAccountsSignBlobPathParams.prototype, "name", void 0);
     return IamcredentialsProjectsServiceAccountsSignBlobPathParams;
@@ -42,47 +42,47 @@ var IamcredentialsProjectsServiceAccountsSignBlobQueryParams = /** @class */ (fu
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], IamcredentialsProjectsServiceAccountsSignBlobQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], IamcredentialsProjectsServiceAccountsSignBlobQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], IamcredentialsProjectsServiceAccountsSignBlobQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], IamcredentialsProjectsServiceAccountsSignBlobQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], IamcredentialsProjectsServiceAccountsSignBlobQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], IamcredentialsProjectsServiceAccountsSignBlobQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], IamcredentialsProjectsServiceAccountsSignBlobQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], IamcredentialsProjectsServiceAccountsSignBlobQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], IamcredentialsProjectsServiceAccountsSignBlobQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], IamcredentialsProjectsServiceAccountsSignBlobQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], IamcredentialsProjectsServiceAccountsSignBlobQueryParams.prototype, "uploadProtocol", void 0);
     return IamcredentialsProjectsServiceAccountsSignBlobQueryParams;
@@ -94,11 +94,11 @@ var IamcredentialsProjectsServiceAccountsSignBlobSecurity = /** @class */ (funct
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], IamcredentialsProjectsServiceAccountsSignBlobSecurity.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], IamcredentialsProjectsServiceAccountsSignBlobSecurity.prototype, "oauth2c", void 0);
     return IamcredentialsProjectsServiceAccountsSignBlobSecurity;
@@ -110,19 +110,19 @@ var IamcredentialsProjectsServiceAccountsSignBlobRequest = /** @class */ (functi
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", IamcredentialsProjectsServiceAccountsSignBlobPathParams)
     ], IamcredentialsProjectsServiceAccountsSignBlobRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", IamcredentialsProjectsServiceAccountsSignBlobQueryParams)
     ], IamcredentialsProjectsServiceAccountsSignBlobRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.SignBlobRequest)
     ], IamcredentialsProjectsServiceAccountsSignBlobRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", IamcredentialsProjectsServiceAccountsSignBlobSecurity)
     ], IamcredentialsProjectsServiceAccountsSignBlobRequest.prototype, "security", void 0);
     return IamcredentialsProjectsServiceAccountsSignBlobRequest;
@@ -134,15 +134,15 @@ var IamcredentialsProjectsServiceAccountsSignBlobResponse = /** @class */ (funct
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], IamcredentialsProjectsServiceAccountsSignBlobResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.SignBlobResponse)
     ], IamcredentialsProjectsServiceAccountsSignBlobResponse.prototype, "signBlobResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], IamcredentialsProjectsServiceAccountsSignBlobResponse.prototype, "statusCode", void 0);
     return IamcredentialsProjectsServiceAccountsSignBlobResponse;

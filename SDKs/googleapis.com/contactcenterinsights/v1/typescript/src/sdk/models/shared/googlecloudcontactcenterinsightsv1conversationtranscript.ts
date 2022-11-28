@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudContactcenterinsightsV1ConversationTranscriptTranscriptSegment } from "./googlecloudcontactcenterinsightsv1conversationtranscripttranscriptsegment";
+
 
 
 // GoogleCloudContactcenterinsightsV1ConversationTranscript
@@ -8,6 +8,6 @@ import { GoogleCloudContactcenterinsightsV1ConversationTranscriptTranscriptSegme
  * A message representing the transcript of a conversation.
 **/
 export class GoogleCloudContactcenterinsightsV1ConversationTranscript extends SpeakeasyBase {
-  @Metadata({ data: "json, name=transcriptSegments", elemType: shared.GoogleCloudContactcenterinsightsV1ConversationTranscriptTranscriptSegment })
+  @SpeakeasyMetadata({ data: "json, name=transcriptSegments", elemType: GoogleCloudContactcenterinsightsV1ConversationTranscriptTranscriptSegment })
   transcriptSegments?: GoogleCloudContactcenterinsightsV1ConversationTranscriptTranscriptSegment[];
 }

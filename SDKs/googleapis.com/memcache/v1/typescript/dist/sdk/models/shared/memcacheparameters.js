@@ -22,20 +22,32 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var MemcacheParameters = /** @class */ (function (_super) {
     __extends(MemcacheParameters, _super);
     function MemcacheParameters() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], MemcacheParameters.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=params" }),
+        SpeakeasyMetadata({ data: "json, name=params" }),
         __metadata("design:type", Map)
     ], MemcacheParameters.prototype, "params", void 0);
     return MemcacheParameters;
 }(SpeakeasyBase));
 export { MemcacheParameters };
+var MemcacheParametersInput = /** @class */ (function (_super) {
+    __extends(MemcacheParametersInput, _super);
+    function MemcacheParametersInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=params" }),
+        __metadata("design:type", Map)
+    ], MemcacheParametersInput.prototype, "params", void 0);
+    return MemcacheParametersInput;
+}(SpeakeasyBase));
+export { MemcacheParametersInput };

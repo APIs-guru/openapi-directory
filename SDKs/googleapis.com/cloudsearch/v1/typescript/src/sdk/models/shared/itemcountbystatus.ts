@@ -1,21 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ItemCountByStatusStatusCodeEnum {
-    CodeUnspecified = "CODE_UNSPECIFIED"
-,    Error = "ERROR"
-,    Modified = "MODIFIED"
-,    NewItem = "NEW_ITEM"
-,    Accepted = "ACCEPTED"
+    CodeUnspecified = "CODE_UNSPECIFIED",
+    Error = "ERROR",
+    Modified = "MODIFIED",
+    NewItem = "NEW_ITEM",
+    Accepted = "ACCEPTED"
 }
 
 
 export class ItemCountByStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count?: string;
 
-  @Metadata({ data: "json, name=indexedItemsCount" })
+  @SpeakeasyMetadata({ data: "json, name=indexedItemsCount" })
   indexedItemsCount?: string;
 
-  @Metadata({ data: "json, name=statusCode" })
+  @SpeakeasyMetadata({ data: "json, name=statusCode" })
   statusCode?: ItemCountByStatusStatusCodeEnum;
 }

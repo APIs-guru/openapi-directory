@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateNetworkApplianceFirewallL7FirewallRulesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
@@ -11,48 +12,48 @@ export enum UpdateNetworkApplianceFirewallL7FirewallRulesRequestBodyRulesPolicyE
 }
 
 export enum UpdateNetworkApplianceFirewallL7FirewallRulesRequestBodyRulesTypeEnum {
-    Application = "application"
-,    ApplicationCategory = "applicationCategory"
-,    Host = "host"
-,    Port = "port"
-,    IpRange = "ipRange"
+    Application = "application",
+    ApplicationCategory = "applicationCategory",
+    Host = "host",
+    Port = "port",
+    IpRange = "ipRange"
 }
 
 
 export class UpdateNetworkApplianceFirewallL7FirewallRulesRequestBodyRules extends SpeakeasyBase {
-  @Metadata({ data: "json, name=policy" })
+  @SpeakeasyMetadata({ data: "json, name=policy" })
   policy?: UpdateNetworkApplianceFirewallL7FirewallRulesRequestBodyRulesPolicyEnum;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: UpdateNetworkApplianceFirewallL7FirewallRulesRequestBodyRulesTypeEnum;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }
 
 
 export class UpdateNetworkApplianceFirewallL7FirewallRulesRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=rules", elemType: operations.UpdateNetworkApplianceFirewallL7FirewallRulesRequestBodyRules })
+  @SpeakeasyMetadata({ data: "json, name=rules", elemType: UpdateNetworkApplianceFirewallL7FirewallRulesRequestBodyRules })
   rules?: UpdateNetworkApplianceFirewallL7FirewallRulesRequestBodyRules[];
 }
 
 
 export class UpdateNetworkApplianceFirewallL7FirewallRulesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateNetworkApplianceFirewallL7FirewallRulesPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: UpdateNetworkApplianceFirewallL7FirewallRulesRequestBody;
 }
 
 
 export class UpdateNetworkApplianceFirewallL7FirewallRulesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateNetworkApplianceFirewallL7FirewallRules200ApplicationJsonObject?: Map<string, any>;
 }

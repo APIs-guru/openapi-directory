@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AnalyticsMetadataColumnsListPathParams:
-    report_type: str = field(default=None, metadata={'path_param': { 'field_name': 'reportType', 'style': 'simple', 'explode': False }})
+    report_type: str = field(metadata={'path_param': { 'field_name': 'reportType', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,20 +22,20 @@ class AnalyticsMetadataColumnsListQueryParams:
 
 @dataclass
 class AnalyticsMetadataColumnsListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AnalyticsMetadataColumnsListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AnalyticsMetadataColumnsListSecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -46,14 +47,14 @@ class AnalyticsMetadataColumnsListSecurity:
 
 @dataclass
 class AnalyticsMetadataColumnsListRequest:
-    path_params: AnalyticsMetadataColumnsListPathParams = field(default=None)
-    query_params: AnalyticsMetadataColumnsListQueryParams = field(default=None)
-    security: AnalyticsMetadataColumnsListSecurity = field(default=None)
+    path_params: AnalyticsMetadataColumnsListPathParams = field()
+    query_params: AnalyticsMetadataColumnsListQueryParams = field()
+    security: AnalyticsMetadataColumnsListSecurity = field()
     
 
 @dataclass
 class AnalyticsMetadataColumnsListResponse:
+    content_type: str = field()
+    status_code: int = field()
     columns: Optional[shared.Columns] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

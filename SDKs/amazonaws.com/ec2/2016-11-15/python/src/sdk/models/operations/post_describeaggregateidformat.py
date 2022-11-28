@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDescribeAggregateIDFormatActionEnum(str, Enum):
     DESCRIBE_AGGREGATE_ID_FORMAT = "DescribeAggregateIdFormat"
@@ -10,8 +14,8 @@ class PostDescribeAggregateIDFormatVersionEnum(str, Enum):
 
 @dataclass
 class PostDescribeAggregateIDFormatQueryParams:
-    action: PostDescribeAggregateIDFormatActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDescribeAggregateIDFormatVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDescribeAggregateIDFormatActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDescribeAggregateIDFormatVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDescribeAggregateIDFormatHeaders:
 
 @dataclass
 class PostDescribeAggregateIDFormatRequest:
-    query_params: PostDescribeAggregateIDFormatQueryParams = field(default=None)
-    headers: PostDescribeAggregateIDFormatHeaders = field(default=None)
+    headers: PostDescribeAggregateIDFormatHeaders = field()
+    query_params: PostDescribeAggregateIDFormatQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDescribeAggregateIDFormatResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

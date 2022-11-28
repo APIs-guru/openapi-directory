@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetConsumerV1CustomersPlansQueryParams = /** @class */ (function (_super) {
     __extends(GetConsumerV1CustomersPlansQueryParams, _super);
     function GetConsumerV1CustomersPlansQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=groupId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=groupId" }),
         __metadata("design:type", String)
     ], GetConsumerV1CustomersPlansQueryParams.prototype, "groupId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", Number)
     ], GetConsumerV1CustomersPlansQueryParams.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=locationId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=locationId" }),
         __metadata("design:type", String)
     ], GetConsumerV1CustomersPlansQueryParams.prototype, "locationId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=offset" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" }),
         __metadata("design:type", Number)
     ], GetConsumerV1CustomersPlansQueryParams.prototype, "offset", void 0);
     return GetConsumerV1CustomersPlansQueryParams;
@@ -53,7 +53,7 @@ var GetConsumerV1CustomersPlansRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetConsumerV1CustomersPlansQueryParams)
     ], GetConsumerV1CustomersPlansRequest.prototype, "queryParams", void 0);
     return GetConsumerV1CustomersPlansRequest;
@@ -65,15 +65,15 @@ var GetConsumerV1CustomersPlansResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetConsumerV1CustomersPlansResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], GetConsumerV1CustomersPlansResponse.prototype, "customerPlanListViewModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetConsumerV1CustomersPlansResponse.prototype, "statusCode", void 0);
     return GetConsumerV1CustomersPlansResponse;

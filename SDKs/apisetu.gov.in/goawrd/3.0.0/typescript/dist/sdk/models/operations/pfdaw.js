@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PfdawRequestBodyCertificateParameters = /** @class */ (function (_super) {
     __extends(PfdawRequestBodyCertificateParameters, _super);
@@ -30,11 +30,11 @@ var PfdawRequestBodyCertificateParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=FullName" }),
+        SpeakeasyMetadata({ data: "json, name=FullName" }),
         __metadata("design:type", String)
     ], PfdawRequestBodyCertificateParameters.prototype, "fullName", void 0);
     __decorate([
-        Metadata({ data: "json, name=Registration" }),
+        SpeakeasyMetadata({ data: "json, name=Registration" }),
         __metadata("design:type", String)
     ], PfdawRequestBodyCertificateParameters.prototype, "registration", void 0);
     return PfdawRequestBodyCertificateParameters;
@@ -50,19 +50,19 @@ var PfdawRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=certificateParameters" }),
+        SpeakeasyMetadata({ data: "json, name=certificateParameters" }),
         __metadata("design:type", PfdawRequestBodyCertificateParameters)
     ], PfdawRequestBody.prototype, "certificateParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=consentArtifact" }),
+        SpeakeasyMetadata({ data: "json, name=consentArtifact" }),
         __metadata("design:type", Object)
     ], PfdawRequestBody.prototype, "consentArtifact", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], PfdawRequestBody.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=txnId" }),
+        SpeakeasyMetadata({ data: "json, name=txnId" }),
         __metadata("design:type", String)
     ], PfdawRequestBody.prototype, "txnId", void 0);
     return PfdawRequestBody;
@@ -74,32 +74,16 @@ var PfdawSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], PfdawSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeClientId)
     ], PfdawSecurity.prototype, "clientId", void 0);
     return PfdawSecurity;
 }(SpeakeasyBase));
 export { PfdawSecurity };
-var PfdawRequest = /** @class */ (function (_super) {
-    __extends(PfdawRequest, _super);
-    function PfdawRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", PfdawRequestBody)
-    ], PfdawRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", PfdawSecurity)
-    ], PfdawRequest.prototype, "security", void 0);
-    return PfdawRequest;
-}(SpeakeasyBase));
-export { PfdawRequest };
 export var Pfdaw400ApplicationJsonErrorEnum;
 (function (Pfdaw400ApplicationJsonErrorEnum) {
     Pfdaw400ApplicationJsonErrorEnum["MissingParameter"] = "missing_parameter";
@@ -122,11 +106,11 @@ var Pfdaw400ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Pfdaw400ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Pfdaw400ApplicationJson.prototype, "errorDescription", void 0);
     return Pfdaw400ApplicationJson;
@@ -148,11 +132,11 @@ var Pfdaw401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Pfdaw401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Pfdaw401ApplicationJson.prototype, "errorDescription", void 0);
     return Pfdaw401ApplicationJson;
@@ -174,11 +158,11 @@ var Pfdaw404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Pfdaw404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Pfdaw404ApplicationJson.prototype, "errorDescription", void 0);
     return Pfdaw404ApplicationJson;
@@ -198,11 +182,11 @@ var Pfdaw500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Pfdaw500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Pfdaw500ApplicationJson.prototype, "errorDescription", void 0);
     return Pfdaw500ApplicationJson;
@@ -222,11 +206,11 @@ var Pfdaw502ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Pfdaw502ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Pfdaw502ApplicationJson.prototype, "errorDescription", void 0);
     return Pfdaw502ApplicationJson;
@@ -246,11 +230,11 @@ var Pfdaw503ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Pfdaw503ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Pfdaw503ApplicationJson.prototype, "errorDescription", void 0);
     return Pfdaw503ApplicationJson;
@@ -270,55 +254,71 @@ var Pfdaw504ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Pfdaw504ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Pfdaw504ApplicationJson.prototype, "errorDescription", void 0);
     return Pfdaw504ApplicationJson;
 }(SpeakeasyBase));
 export { Pfdaw504ApplicationJson };
+var PfdawRequest = /** @class */ (function (_super) {
+    __extends(PfdawRequest, _super);
+    function PfdawRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", PfdawRequestBody)
+    ], PfdawRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", PfdawSecurity)
+    ], PfdawRequest.prototype, "security", void 0);
+    return PfdawRequest;
+}(SpeakeasyBase));
+export { PfdawRequest };
 var PfdawResponse = /** @class */ (function (_super) {
     __extends(PfdawResponse, _super);
     function PfdawResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PfdawResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PfdawResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Pfdaw400ApplicationJson)
     ], PfdawResponse.prototype, "pfdaw400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Pfdaw401ApplicationJson)
     ], PfdawResponse.prototype, "pfdaw401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Pfdaw404ApplicationJson)
     ], PfdawResponse.prototype, "pfdaw404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Pfdaw500ApplicationJson)
     ], PfdawResponse.prototype, "pfdaw500ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Pfdaw502ApplicationJson)
     ], PfdawResponse.prototype, "pfdaw502ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Pfdaw503ApplicationJson)
     ], PfdawResponse.prototype, "pfdaw503ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Pfdaw504ApplicationJson)
     ], PfdawResponse.prototype, "pfdaw504ApplicationJsonObject", void 0);
     return PfdawResponse;

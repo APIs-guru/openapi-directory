@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetModifyDbClusterActionEnum {
     ModifyDbCluster = "ModifyDBCluster"
@@ -10,10 +11,10 @@ export enum GetModifyDbClusterActionEnum {
  * <p>The configuration setting for the log types to be enabled for export to CloudWatch Logs for a specific DB instance or DB cluster.</p> <p>The <code>EnableLogTypes</code> and <code>DisableLogTypes</code> arrays determine which logs will be exported (or not exported) to CloudWatch Logs.</p>
 **/
 export class GetModifyDbClusterCloudwatchLogsExportConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, name=DisableLogTypes" })
+  @SpeakeasyMetadata({ data: "queryParam, name=DisableLogTypes" })
   disableLogTypes?: string[];
 
-  @Metadata({ data: "queryParam, name=EnableLogTypes" })
+  @SpeakeasyMetadata({ data: "queryParam, name=EnableLogTypes" })
   enableLogTypes?: string[];
 }
 
@@ -23,102 +24,102 @@ export enum GetModifyDbClusterVersionEnum {
 
 
 export class GetModifyDbClusterQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Action" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" })
   action: GetModifyDbClusterActionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ApplyImmediately" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ApplyImmediately" })
   applyImmediately?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=BackupRetentionPeriod" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=BackupRetentionPeriod" })
   backupRetentionPeriod?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=CloudwatchLogsExportConfiguration" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=CloudwatchLogsExportConfiguration" })
   cloudwatchLogsExportConfiguration?: GetModifyDbClusterCloudwatchLogsExportConfiguration;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=CopyTagsToSnapshot" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=CopyTagsToSnapshot" })
   copyTagsToSnapshot?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=DBClusterIdentifier" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DBClusterIdentifier" })
   dbClusterIdentifier: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=DBClusterParameterGroupName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DBClusterParameterGroupName" })
   dbClusterParameterGroupName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=DeletionProtection" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DeletionProtection" })
   deletionProtection?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=EnableIAMDatabaseAuthentication" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=EnableIAMDatabaseAuthentication" })
   enableIamDatabaseAuthentication?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=EngineVersion" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=EngineVersion" })
   engineVersion?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=MasterUserPassword" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MasterUserPassword" })
   masterUserPassword?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=NewDBClusterIdentifier" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=NewDBClusterIdentifier" })
   newDbClusterIdentifier?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=OptionGroupName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=OptionGroupName" })
   optionGroupName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Port" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Port" })
   port?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=PreferredBackupWindow" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=PreferredBackupWindow" })
   preferredBackupWindow?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=PreferredMaintenanceWindow" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=PreferredMaintenanceWindow" })
   preferredMaintenanceWindow?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" })
   version: GetModifyDbClusterVersionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=VpcSecurityGroupIds" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=VpcSecurityGroupIds" })
   vpcSecurityGroupIds?: string[];
 }
 
 
 export class GetModifyDbClusterHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class GetModifyDbClusterRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetModifyDbClusterQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetModifyDbClusterHeaders;
 }
 
 
 export class GetModifyDbClusterResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

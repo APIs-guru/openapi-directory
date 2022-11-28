@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,25 +22,25 @@ class GetBucketStatisticsHeaders:
 @dataclass_json
 @dataclass
 class GetBucketStatisticsRequestBody:
-    account_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'accountId' }})
+    account_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('accountId') }})
     
 
 @dataclass
 class GetBucketStatisticsRequest:
-    headers: GetBucketStatisticsHeaders = field(default=None)
-    request: GetBucketStatisticsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: GetBucketStatisticsHeaders = field()
+    request: GetBucketStatisticsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class GetBucketStatisticsResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_bucket_statistics_response: Optional[shared.GetBucketStatisticsResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_quota_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

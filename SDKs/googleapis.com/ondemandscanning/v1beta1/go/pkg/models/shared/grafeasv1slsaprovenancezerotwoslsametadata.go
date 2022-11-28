@@ -1,5 +1,7 @@
 package shared
 
+// GrafeasV1SlsaProvenanceZeroTwoSlsaMetadata
+// Other properties of the build.
 type GrafeasV1SlsaProvenanceZeroTwoSlsaMetadata struct {
 	BuildFinishedOn   *string                                         `json:"buildFinishedOn,omitempty"`
 	BuildInvocationID *string                                         `json:"buildInvocationId,omitempty"`

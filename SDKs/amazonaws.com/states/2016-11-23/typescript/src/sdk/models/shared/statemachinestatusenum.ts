@@ -1,6 +1,7 @@
 
 
+
 export enum StateMachineStatusEnum {
-    Active = "ACTIVE"
-,    Deleting = "DELETING"
+    Active = "ACTIVE",
+    Deleting = "DELETING"
 }

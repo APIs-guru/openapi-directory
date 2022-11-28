@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SchemaVersionNumber
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A structure containing the schema version information.
 **/
 export class SchemaVersionNumber extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LatestVersion" })
+  @SpeakeasyMetadata({ data: "json, name=LatestVersion" })
   latestVersion?: boolean;
 
-  @Metadata({ data: "json, name=VersionNumber" })
+  @SpeakeasyMetadata({ data: "json, name=VersionNumber" })
   versionNumber?: number;
 }

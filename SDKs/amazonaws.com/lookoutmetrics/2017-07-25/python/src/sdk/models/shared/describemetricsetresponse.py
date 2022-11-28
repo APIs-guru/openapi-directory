@@ -1,29 +1,28 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import metric
-from . import frequency_enum
-from . import metricsource
-from . import timestampcolumn
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeMetricSetResponse:
-    anomaly_detector_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AnomalyDetectorArn' }})
-    creation_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CreationTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    dimension_list: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DimensionList' }})
-    last_modification_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LastModificationTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    metric_list: Optional[List[metric.Metric]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MetricList' }})
-    metric_set_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MetricSetArn' }})
-    metric_set_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MetricSetDescription' }})
-    metric_set_frequency: Optional[frequency_enum.FrequencyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MetricSetFrequency' }})
-    metric_set_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MetricSetName' }})
-    metric_source: Optional[metricsource.MetricSource] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MetricSource' }})
-    offset: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Offset' }})
-    timestamp_column: Optional[timestampcolumn.TimestampColumn] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TimestampColumn' }})
-    timezone: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Timezone' }})
+    anomaly_detector_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AnomalyDetectorArn') }})
+    creation_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CreationTime'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    dimension_list: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DimensionList') }})
+    last_modification_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('LastModificationTime'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    metric_list: Optional[List[Metric]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MetricList') }})
+    metric_set_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MetricSetArn') }})
+    metric_set_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MetricSetDescription') }})
+    metric_set_frequency: Optional[FrequencyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MetricSetFrequency') }})
+    metric_set_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MetricSetName') }})
+    metric_source: Optional[MetricSource] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MetricSource') }})
+    offset: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Offset') }})
+    timestamp_column: Optional[TimestampColumn] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TimestampColumn') }})
+    timezone: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Timezone') }})
     

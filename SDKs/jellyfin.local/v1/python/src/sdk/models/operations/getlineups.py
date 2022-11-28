@@ -13,18 +13,18 @@ class GetLineupsQueryParams:
 
 @dataclass
 class GetLineupsSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetLineupsRequest:
-    query_params: GetLineupsQueryParams = field(default=None)
-    security: GetLineupsSecurity = field(default=None)
+    query_params: GetLineupsQueryParams = field()
+    security: GetLineupsSecurity = field()
     
 
 @dataclass
 class GetLineupsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     name_id_pairs: Optional[List[shared.NameIDPair]] = field(default=None)
-    status_code: int = field(default=None)
     

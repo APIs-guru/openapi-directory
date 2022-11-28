@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Gzip
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configuration for gzip of service responses
 **/
 export class Gzip extends SpeakeasyBase {
-  @Metadata({ data: "json, name=blackList" })
+  @SpeakeasyMetadata({ data: "json, name=blackList" })
   blackList: string[];
 
-  @Metadata({ data: "json, name=bufferSize" })
+  @SpeakeasyMetadata({ data: "json, name=bufferSize" })
   bufferSize: number;
 
-  @Metadata({ data: "json, name=chunkedThreshold" })
+  @SpeakeasyMetadata({ data: "json, name=chunkedThreshold" })
   chunkedThreshold: number;
 
-  @Metadata({ data: "json, name=compressionLevel" })
+  @SpeakeasyMetadata({ data: "json, name=compressionLevel" })
   compressionLevel: number;
 
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled: boolean;
 
-  @Metadata({ data: "json, name=excludedPatterns" })
+  @SpeakeasyMetadata({ data: "json, name=excludedPatterns" })
   excludedPatterns: string[];
 
-  @Metadata({ data: "json, name=whiteList" })
+  @SpeakeasyMetadata({ data: "json, name=whiteList" })
   whiteList: string[];
 }

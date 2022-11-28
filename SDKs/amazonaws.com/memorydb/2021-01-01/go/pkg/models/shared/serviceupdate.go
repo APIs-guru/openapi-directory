@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ServiceUpdate
+// An update that you can apply to your MemoryDB clusters.
 type ServiceUpdate struct {
 	AutoUpdateStartDate *time.Time               `json:"AutoUpdateStartDate,omitempty"`
 	ClusterName         *string                  `json:"ClusterName,omitempty"`

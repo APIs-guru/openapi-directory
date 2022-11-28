@@ -1,7 +1,8 @@
 
 
+
 export enum RequiresRecreationEnum {
-    Never = "NEVER"
-,    Conditionally = "CONDITIONALLY"
-,    Always = "ALWAYS"
+    Never = "NEVER",
+    Conditionally = "CONDITIONALLY",
+    Always = "ALWAYS"
 }

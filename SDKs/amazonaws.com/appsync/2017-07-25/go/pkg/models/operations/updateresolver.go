@@ -20,6 +20,8 @@ type UpdateResolverHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateResolverRequestBodyCachingConfig
+// The caching configuration for a resolver that has caching enabled.
 type UpdateResolverRequestBodyCachingConfig struct {
 	CachingKeys []string `json:"cachingKeys,omitempty"`
 	TTL         *int64   `json:"ttl,omitempty"`
@@ -32,10 +34,14 @@ const (
 	UpdateResolverRequestBodyKindEnumPipeline UpdateResolverRequestBodyKindEnum = "PIPELINE"
 )
 
+// UpdateResolverRequestBodyPipelineConfig
+// The pipeline configuration for a resolver of kind <code>PIPELINE</code>.
 type UpdateResolverRequestBodyPipelineConfig struct {
 	Functions []string `json:"functions,omitempty"`
 }
 
+// UpdateResolverRequestBodySyncConfig
+// <p>Describes a Sync configuration for a resolver.</p> <p>Contains information on which Conflict Detection as well as Resolution strategy should be performed when the resolver is invoked.</p>
 type UpdateResolverRequestBodySyncConfig struct {
 	ConflictDetection           *shared.ConflictDetectionTypeEnum   `json:"conflictDetection,omitempty"`
 	ConflictHandler             *shared.ConflictHandlerTypeEnum     `json:"conflictHandler,omitempty"`

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NodegroupIssueCodeEnum } from "./nodegroupissuecodeenum";
+
 
 
 // Issue
@@ -7,12 +8,12 @@ import { NodegroupIssueCodeEnum } from "./nodegroupissuecodeenum";
  * An object representing an issue with an Amazon EKS resource.
 **/
 export class Issue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: NodegroupIssueCodeEnum;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=resourceIds" })
+  @SpeakeasyMetadata({ data: "json, name=resourceIds" })
   resourceIds?: string[];
 }

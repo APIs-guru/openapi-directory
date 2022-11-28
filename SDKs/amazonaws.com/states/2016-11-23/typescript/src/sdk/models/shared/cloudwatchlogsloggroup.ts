@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CloudWatchLogsLogGroup
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * <p/>
 **/
 export class CloudWatchLogsLogGroup extends SpeakeasyBase {
-  @Metadata({ data: "json, name=logGroupArn" })
+  @SpeakeasyMetadata({ data: "json, name=logGroupArn" })
   logGroupArn?: string;
 }

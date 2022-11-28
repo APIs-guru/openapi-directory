@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // PointOfInterest
 /**
  * The section of the contact audio where that category rule was detected.
@@ -33,11 +33,11 @@ var PointOfInterest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=BeginOffsetMillis" }),
+        SpeakeasyMetadata({ data: "json, name=BeginOffsetMillis" }),
         __metadata("design:type", Number)
     ], PointOfInterest.prototype, "beginOffsetMillis", void 0);
     __decorate([
-        Metadata({ data: "json, name=EndOffsetMillis" }),
+        SpeakeasyMetadata({ data: "json, name=EndOffsetMillis" }),
         __metadata("design:type", Number)
     ], PointOfInterest.prototype, "endOffsetMillis", void 0);
     return PointOfInterest;

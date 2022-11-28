@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class EcosystemsOnePathParams:
-    ecosystem_id: str = field(default=None, metadata={'path_param': { 'field_name': 'ecosystem_id', 'style': 'simple', 'explode': False }})
+    ecosystem_id: str = field(metadata={'path_param': { 'field_name': 'ecosystem_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class EcosystemsOneRequest:
-    path_params: EcosystemsOnePathParams = field(default=None)
+    path_params: EcosystemsOnePathParams = field()
     
 
 @dataclass
 class EcosystemsOneResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_ecosystem_response: Optional[shared.GetEcosystemResponse] = field(default=None)
-    status_code: int = field(default=None)
     

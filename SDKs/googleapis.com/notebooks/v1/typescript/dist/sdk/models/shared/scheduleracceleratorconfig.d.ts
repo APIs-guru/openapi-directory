@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum SchedulerAcceleratorConfigTypeEnum {
     SchedulerAcceleratorTypeUnspecified = "SCHEDULER_ACCELERATOR_TYPE_UNSPECIFIED",
     NvidiaTeslaK80 = "NVIDIA_TESLA_K80",

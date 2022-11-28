@@ -1,9 +1,11 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class VolumeStatusEnum(str, Enum):
     CREATING = "creating"
@@ -15,15 +17,20 @@ class VolumeStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Volume:
-    created: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    filesystem_path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'filesystem_path' }})
-    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    label: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
-    linode_id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'linode_id' }})
-    linode_label: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'linode_label' }})
-    region: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'region' }})
-    size: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'size' }})
-    status: Optional[VolumeStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
-    updated: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updated', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    r"""Volume
+    A Block Storage Volume associated with your Account.
+    
+    """
+    
+    label: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('label') }})
+    created: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('created'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    filesystem_path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('filesystem_path') }})
+    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    linode_id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('linode_id') }})
+    linode_label: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('linode_label') }})
+    region: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('region') }})
+    size: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('size') }})
+    status: Optional[VolumeStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
+    updated: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('updated'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     

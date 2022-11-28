@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -15,14 +16,14 @@ class ListUsersQueryParams:
 
 @dataclass
 class ListUsersRequest:
-    query_params: ListUsersQueryParams = field(default=None)
+    query_params: ListUsersQueryParams = field()
     
 
 @dataclass
 class ListUsersResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     paged_user_response: Optional[shared.PagedUserResponse] = field(default=None)
-    status_code: int = field(default=None)
     inline_response_400: Optional[Any] = field(default=None)
     inline_response_401: Optional[Any] = field(default=None)
     inline_response_403: Optional[Any] = field(default=None)

@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class TaintEffectEnum(str, Enum):
     NO_SCHEDULE = "NO_SCHEDULE"

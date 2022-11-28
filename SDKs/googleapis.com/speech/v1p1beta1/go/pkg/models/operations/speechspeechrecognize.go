@@ -25,7 +25,7 @@ type SpeechSpeechRecognizeSecurity struct {
 
 type SpeechSpeechRecognizeRequest struct {
 	QueryParams SpeechSpeechRecognizeQueryParams
-	Request     *shared.RecognizeRequest `request:"mediaType=application/json"`
+	Request     *shared.RecognizeRequestInput `request:"mediaType=application/json"`
 	Security    SpeechSpeechRecognizeSecurity
 }
 

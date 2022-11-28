@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class AlbumAPIGetTopAlbumsFieldsEnum(str, Enum):
@@ -33,13 +34,13 @@ class AlbumAPIGetTopAlbumsQueryParams:
 
 @dataclass
 class AlbumAPIGetTopAlbumsRequest:
-    query_params: AlbumAPIGetTopAlbumsQueryParams = field(default=None)
+    query_params: AlbumAPIGetTopAlbumsQueryParams = field()
     
 
 @dataclass
 class AlbumAPIGetTopAlbumsResponse:
+    content_type: str = field()
+    status_code: int = field()
     album_for_api_contracts: Optional[List[shared.AlbumForAPIContract]] = field(default=None)
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    body: Optional[bytes] = field(default=None)
     

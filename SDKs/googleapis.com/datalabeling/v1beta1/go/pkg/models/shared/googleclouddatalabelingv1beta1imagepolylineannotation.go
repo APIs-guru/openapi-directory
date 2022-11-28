@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDatalabelingV1beta1ImagePolylineAnnotation
+// A polyline for the image annotation.
 type GoogleCloudDatalabelingV1beta1ImagePolylineAnnotation struct {
 	AnnotationSpec     *GoogleCloudDatalabelingV1beta1AnnotationSpec     `json:"annotationSpec,omitempty"`
 	NormalizedPolyline *GoogleCloudDatalabelingV1beta1NormalizedPolyline `json:"normalizedPolyline,omitempty"`

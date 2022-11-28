@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudVideointelligenceV1beta2VideoContext } from "./googlecloudvideointelligencev1beta2videocontext";
 export var GoogleCloudVideointelligenceV1beta2AnnotateVideoRequestFeaturesEnum;
 (function (GoogleCloudVideointelligenceV1beta2AnnotateVideoRequestFeaturesEnum) {
@@ -47,27 +47,27 @@ var GoogleCloudVideointelligenceV1beta2AnnotateVideoRequest = /** @class */ (fun
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=features" }),
+        SpeakeasyMetadata({ data: "json, name=features" }),
         __metadata("design:type", Array)
     ], GoogleCloudVideointelligenceV1beta2AnnotateVideoRequest.prototype, "features", void 0);
     __decorate([
-        Metadata({ data: "json, name=inputContent" }),
+        SpeakeasyMetadata({ data: "json, name=inputContent" }),
         __metadata("design:type", String)
     ], GoogleCloudVideointelligenceV1beta2AnnotateVideoRequest.prototype, "inputContent", void 0);
     __decorate([
-        Metadata({ data: "json, name=inputUri" }),
+        SpeakeasyMetadata({ data: "json, name=inputUri" }),
         __metadata("design:type", String)
     ], GoogleCloudVideointelligenceV1beta2AnnotateVideoRequest.prototype, "inputUri", void 0);
     __decorate([
-        Metadata({ data: "json, name=locationId" }),
+        SpeakeasyMetadata({ data: "json, name=locationId" }),
         __metadata("design:type", String)
     ], GoogleCloudVideointelligenceV1beta2AnnotateVideoRequest.prototype, "locationId", void 0);
     __decorate([
-        Metadata({ data: "json, name=outputUri" }),
+        SpeakeasyMetadata({ data: "json, name=outputUri" }),
         __metadata("design:type", String)
     ], GoogleCloudVideointelligenceV1beta2AnnotateVideoRequest.prototype, "outputUri", void 0);
     __decorate([
-        Metadata({ data: "json, name=videoContext" }),
+        SpeakeasyMetadata({ data: "json, name=videoContext" }),
         __metadata("design:type", GoogleCloudVideointelligenceV1beta2VideoContext)
     ], GoogleCloudVideointelligenceV1beta2AnnotateVideoRequest.prototype, "videoContext", void 0);
     return GoogleCloudVideointelligenceV1beta2AnnotateVideoRequest;

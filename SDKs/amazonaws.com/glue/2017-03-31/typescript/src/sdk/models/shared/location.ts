@@ -1,8 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CodeGenNodeArg } from "./codegennodearg";
-import { CodeGenNodeArg } from "./codegennodearg";
-import { CodeGenNodeArg } from "./codegennodearg";
+
 
 
 // Location
@@ -10,12 +8,12 @@ import { CodeGenNodeArg } from "./codegennodearg";
  * The location of resources.
 **/
 export class Location extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DynamoDB", elemType: shared.CodeGenNodeArg })
+  @SpeakeasyMetadata({ data: "json, name=DynamoDB", elemType: CodeGenNodeArg })
   dynamoDb?: CodeGenNodeArg[];
 
-  @Metadata({ data: "json, name=Jdbc", elemType: shared.CodeGenNodeArg })
+  @SpeakeasyMetadata({ data: "json, name=Jdbc", elemType: CodeGenNodeArg })
   jdbc?: CodeGenNodeArg[];
 
-  @Metadata({ data: "json, name=S3", elemType: shared.CodeGenNodeArg })
+  @SpeakeasyMetadata({ data: "json, name=S3", elemType: CodeGenNodeArg })
   s3?: CodeGenNodeArg[];
 }

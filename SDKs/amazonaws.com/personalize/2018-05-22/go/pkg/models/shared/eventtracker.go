@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// EventTracker
+// Provides information about an event tracker.
 type EventTracker struct {
 	AccountID           *string    `json:"accountId,omitempty"`
 	CreationDateTime    *time.Time `json:"creationDateTime,omitempty"`

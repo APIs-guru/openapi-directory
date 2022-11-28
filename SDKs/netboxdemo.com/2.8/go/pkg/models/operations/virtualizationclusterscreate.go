@@ -5,7 +5,7 @@ import (
 )
 
 type VirtualizationClustersCreateRequest struct {
-	Request shared.WritableCluster `request:"mediaType=application/json"`
+	Request shared.WritableClusterInput `request:"mediaType=application/json"`
 }
 
 type VirtualizationClustersCreateResponse struct {

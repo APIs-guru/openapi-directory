@@ -1,35 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export const CANCELBOOKING_SERVERS = [
-	"https://api.sandbox.viator.com/partner",
-];
 
+export const CancelBookingServerList = [
+	"https://api.sandbox.viator.com/partner",
+] as const;
 
 
 export class CancelBookingPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=booking-reference" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=booking-reference" })
   bookingReference: string;
 }
 
 
 export class CancelBookingHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Accept-Language" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept-Language" })
   acceptLanguage: string;
-}
-
-
-export class CancelBookingRequest extends SpeakeasyBase {
-  @Metadata()
-  serverUrl?: string;
-
-  @Metadata()
-  pathParams: CancelBookingPathParams;
-
-  @Metadata()
-  headers: CancelBookingHeaders;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: shared.CancellationRequest;
 }
 
 export enum CancelBooking400ApplicationJsonCodeEnum {
@@ -42,16 +27,16 @@ export enum CancelBooking400ApplicationJsonMessageEnum {
 
 
 export class CancelBooking400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: CancelBooking400ApplicationJsonCodeEnum;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: CancelBooking400ApplicationJsonMessageEnum;
 
-  @Metadata({ data: "json, name=timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=timestamp" })
   timestamp?: string;
 
-  @Metadata({ data: "json, name=trackingId" })
+  @SpeakeasyMetadata({ data: "json, name=trackingId" })
   trackingId?: string;
 }
 
@@ -65,45 +50,60 @@ export enum CancelBooking404ApplicationJsonMessageEnum {
 
 
 export class CancelBooking404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: CancelBooking404ApplicationJsonCodeEnum;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: CancelBooking404ApplicationJsonMessageEnum;
 
-  @Metadata({ data: "json, name=timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=timestamp" })
   timestamp?: string;
 
-  @Metadata({ data: "json, name=trackingId" })
+  @SpeakeasyMetadata({ data: "json, name=trackingId" })
   trackingId?: string;
 }
 
 
+export class CancelBookingRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  serverUrl?: string;
+
+  @SpeakeasyMetadata()
+  pathParams: CancelBookingPathParams;
+
+  @SpeakeasyMetadata()
+  headers: CancelBookingHeaders;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: shared.CancellationRequest;
+}
+
+
 export class CancelBookingResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   fourHundredAndOneUnauthorized?: shared.FourHundredAndOneUnauthorized;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   fourHundredAndSixNotAcceptable?: shared.FourHundredAndSixNotAcceptable;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   fiveHundredInternalServerError?: shared.FiveHundredInternalServerError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   fiveHundredAndThreeServiceUnavailable?: shared.FiveHundredAndThreeServiceUnavailable;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   cancelBookingResponse?: shared.CancelBookingResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   cancelBooking400ApplicationJsonObject?: CancelBooking400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   cancelBooking404ApplicationJsonObject?: CancelBooking404ApplicationJson;
 }

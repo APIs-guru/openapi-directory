@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * Options to configure the `/deposit_switch/create` request. If provided, cannot be `null`.
 **/

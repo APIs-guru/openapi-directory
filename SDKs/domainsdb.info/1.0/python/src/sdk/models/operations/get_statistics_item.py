@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetStatisticsItemPathParams:
-    zone: str = field(default=None, metadata={'path_param': { 'field_name': 'zone', 'style': 'simple', 'explode': False }})
+    zone: str = field(metadata={'path_param': { 'field_name': 'zone', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,13 +16,13 @@ class GetStatisticsItemQueryParams:
 
 @dataclass
 class GetStatisticsItemRequest:
-    path_params: GetStatisticsItemPathParams = field(default=None)
-    query_params: GetStatisticsItemQueryParams = field(default=None)
+    path_params: GetStatisticsItemPathParams = field()
+    query_params: GetStatisticsItemQueryParams = field()
     
 
 @dataclass
 class GetStatisticsItemResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     zone_stats: Optional[shared.ZoneStats] = field(default=None)
     

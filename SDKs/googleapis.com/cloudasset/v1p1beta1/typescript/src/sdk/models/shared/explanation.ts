@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Permissions } from "./permissions";
+
 
 
 // Explanation
@@ -8,6 +8,6 @@ import { Permissions } from "./permissions";
  * Explanation about the IAM policy search result.
 **/
 export class Explanation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=matchedPermissions", elemType: shared.Permissions })
+  @SpeakeasyMetadata({ data: "json, name=matchedPermissions", elemType: Permissions })
   matchedPermissions?: Map<string, Permissions>;
 }

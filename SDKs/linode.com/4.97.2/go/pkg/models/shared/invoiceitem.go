@@ -11,6 +11,8 @@ const (
 	InvoiceItemTypeEnumMisc   InvoiceItemTypeEnum = "misc"
 )
 
+// InvoiceItem
+// An InvoiceItem object.
 type InvoiceItem struct {
 	Amount    *float64             `json:"amount,omitempty"`
 	From      *time.Time           `json:"from,omitempty"`

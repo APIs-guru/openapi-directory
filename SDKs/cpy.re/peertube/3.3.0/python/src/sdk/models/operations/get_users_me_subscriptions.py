@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 from typing import Any,Optional
+from sdk.models import shared
 
 
 @dataclass
@@ -11,18 +12,18 @@ class GetUsersMeSubscriptionsQueryParams:
 
 @dataclass
 class GetUsersMeSubscriptionsSecurity:
-    o_auth2: shared.SchemeOAuth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    o_auth2: shared.SchemeOAuth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetUsersMeSubscriptionsRequest:
-    query_params: GetUsersMeSubscriptionsQueryParams = field(default=None)
-    security: GetUsersMeSubscriptionsSecurity = field(default=None)
+    query_params: GetUsersMeSubscriptionsQueryParams = field()
+    security: GetUsersMeSubscriptionsSecurity = field()
     
 
 @dataclass
 class GetUsersMeSubscriptionsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     video_channel_list: Optional[Any] = field(default=None)
     

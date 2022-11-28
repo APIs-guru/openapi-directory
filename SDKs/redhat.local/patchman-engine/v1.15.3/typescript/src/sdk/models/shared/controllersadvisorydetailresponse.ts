@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ControllersAdvisoryDetailItem } from "./controllersadvisorydetailitem";
 
 
+
 export class ControllersAdvisoryDetailResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: ControllersAdvisoryDetailItem;
 }

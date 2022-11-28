@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BasicAuthCredentials } from "./basicauthcredentials";
 import { OAuthCredentials } from "./oauthcredentials";
+
 
 
 // SapoDataConnectorProfileCredentials
@@ -8,9 +9,9 @@ import { OAuthCredentials } from "./oauthcredentials";
  *  The connector-specific profile credentials required when using SAPOData. 
 **/
 export class SapoDataConnectorProfileCredentials extends SpeakeasyBase {
-  @Metadata({ data: "json, name=basicAuthCredentials" })
+  @SpeakeasyMetadata({ data: "json, name=basicAuthCredentials" })
   basicAuthCredentials?: BasicAuthCredentials;
 
-  @Metadata({ data: "json, name=oAuthCredentials" })
+  @SpeakeasyMetadata({ data: "json, name=oAuthCredentials" })
   oAuthCredentials?: OAuthCredentials;
 }

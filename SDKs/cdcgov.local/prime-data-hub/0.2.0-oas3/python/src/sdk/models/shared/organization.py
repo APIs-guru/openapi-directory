@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import settingmetadata
+from sdk import utils
+from . import *
 
 class OrganizationJurisdictionEnum(str, Enum):
     NATIONAL = "National"
@@ -12,10 +14,14 @@ class OrganizationJurisdictionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Organization:
-    county_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'countyName' }})
-    description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    jurisdiction: OrganizationJurisdictionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'jurisdiction' }})
-    meta: Optional[settingmetadata.SettingMetadata] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    state_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stateCode' }})
+    r"""Organization
+    An organization connected to data hub
+    """
+    
+    description: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    jurisdiction: OrganizationJurisdictionEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('jurisdiction') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    county_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('countyName') }})
+    meta: Optional[SettingMetadata] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('meta') }})
+    state_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('stateCode') }})
     

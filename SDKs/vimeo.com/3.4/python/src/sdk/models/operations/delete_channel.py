@@ -5,23 +5,23 @@ from sdk.models import shared
 
 @dataclass
 class DeleteChannelPathParams:
-    channel_id: float = field(default=None, metadata={'path_param': { 'field_name': 'channel_id', 'style': 'simple', 'explode': False }})
+    channel_id: float = field(metadata={'path_param': { 'field_name': 'channel_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DeleteChannelSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DeleteChannelRequest:
-    path_params: DeleteChannelPathParams = field(default=None)
-    security: DeleteChannelSecurity = field(default=None)
+    path_params: DeleteChannelPathParams = field()
+    security: DeleteChannelSecurity = field()
     
 
 @dataclass
 class DeleteChannelResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     legacy_error: Optional[shared.LegacyError] = field(default=None)
     

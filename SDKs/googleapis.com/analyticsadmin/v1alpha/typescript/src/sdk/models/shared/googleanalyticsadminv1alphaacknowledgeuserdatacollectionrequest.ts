@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleAnalyticsAdminV1alphaAcknowledgeUserDataCollectionRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request message for AcknowledgeUserDataCollection RPC.
 **/
 export class GoogleAnalyticsAdminV1alphaAcknowledgeUserDataCollectionRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=acknowledgement" })
+  @SpeakeasyMetadata({ data: "json, name=acknowledgement" })
   acknowledgement?: string;
 }

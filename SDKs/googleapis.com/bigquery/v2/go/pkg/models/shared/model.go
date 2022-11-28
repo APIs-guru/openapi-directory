@@ -21,6 +21,8 @@ const (
 	ModelModelTypeEnumDnnLinearCombinedRegressor  ModelModelTypeEnum = "DNN_LINEAR_COMBINED_REGRESSOR"
 	ModelModelTypeEnumAutoencoder                 ModelModelTypeEnum = "AUTOENCODER"
 	ModelModelTypeEnumArimaPlus                   ModelModelTypeEnum = "ARIMA_PLUS"
+	ModelModelTypeEnumRandomForestRegressor       ModelModelTypeEnum = "RANDOM_FOREST_REGRESSOR"
+	ModelModelTypeEnumRandomForestClassifier      ModelModelTypeEnum = "RANDOM_FOREST_CLASSIFIER"
 )
 
 type Model struct {
@@ -43,4 +45,16 @@ type Model struct {
 	ModelType               *ModelModelTypeEnum      `json:"modelType,omitempty"`
 	OptimalTrialIds         []string                 `json:"optimalTrialIds,omitempty"`
 	TrainingRuns            []TrainingRun            `json:"trainingRuns,omitempty"`
+}
+
+type ModelInput struct {
+	BestTrialID             *string                  `json:"bestTrialId,omitempty"`
+	Description             *string                  `json:"description,omitempty"`
+	EncryptionConfiguration *EncryptionConfiguration `json:"encryptionConfiguration,omitempty"`
+	ExpirationTime          *string                  `json:"expirationTime,omitempty"`
+	FriendlyName            *string                  `json:"friendlyName,omitempty"`
+	HparamSearchSpaces      *HparamSearchSpaces      `json:"hparamSearchSpaces,omitempty"`
+	Labels                  map[string]string        `json:"labels,omitempty"`
+	ModelReference          *ModelReference          `json:"modelReference,omitempty"`
+	TrainingRuns            []TrainingRunInput       `json:"trainingRuns,omitempty"`
 }

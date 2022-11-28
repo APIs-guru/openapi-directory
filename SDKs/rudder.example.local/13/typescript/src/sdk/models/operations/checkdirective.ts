@@ -1,19 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CheckDirectivePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=directiveId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=directiveId" })
   directiveId: string;
-}
-
-
-export class CheckDirectiveRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: CheckDirectivePathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: shared.Directive;
 }
 
 export enum CheckDirective200ApplicationJsonActionEnum {
@@ -22,35 +14,44 @@ export enum CheckDirective200ApplicationJsonActionEnum {
 
 
 export class CheckDirective200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=directives", elemType: shared.Directive })
+  @SpeakeasyMetadata({ data: "json, name=directives", elemType: shared.Directive })
   directives: shared.Directive[];
 }
 
 export enum CheckDirective200ApplicationJsonResultEnum {
-    Success = "success"
-,    Error = "error"
+    Success = "success",
+    Error = "error"
 }
 
 
 export class CheckDirective200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: CheckDirective200ApplicationJsonActionEnum;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: CheckDirective200ApplicationJsonData;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result: CheckDirective200ApplicationJsonResultEnum;
 }
 
 
+export class CheckDirectiveRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: CheckDirectivePathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: shared.Directive;
+}
+
+
 export class CheckDirectiveResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   checkDirective200ApplicationJsonObject?: CheckDirective200ApplicationJson;
 }

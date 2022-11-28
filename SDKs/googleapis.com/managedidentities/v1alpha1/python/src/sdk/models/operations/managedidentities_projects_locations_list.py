@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ManagedidentitiesProjectsLocationsListPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,20 +29,20 @@ class ManagedidentitiesProjectsLocationsListQueryParams:
 
 @dataclass
 class ManagedidentitiesProjectsLocationsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ManagedidentitiesProjectsLocationsListRequest:
-    path_params: ManagedidentitiesProjectsLocationsListPathParams = field(default=None)
-    query_params: ManagedidentitiesProjectsLocationsListQueryParams = field(default=None)
-    security: ManagedidentitiesProjectsLocationsListSecurity = field(default=None)
+    path_params: ManagedidentitiesProjectsLocationsListPathParams = field()
+    query_params: ManagedidentitiesProjectsLocationsListQueryParams = field()
+    security: ManagedidentitiesProjectsLocationsListSecurity = field()
     
 
 @dataclass
 class ManagedidentitiesProjectsLocationsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_locations_response: Optional[shared.ListLocationsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

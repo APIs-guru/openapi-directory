@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DescribeTimeBasedAutoScalingRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=InstanceIds" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceIds" })
   instanceIds: string[];
 }

@@ -1,5 +1,7 @@
 package shared
 
+// NetworkInterface
+// Contains information about the network interfaces interacting with an EC2 instance. This data type is used as one of the elements of the <a>AssetAttributes</a> data type.
 type NetworkInterface struct {
 	Ipv6Addresses      []string        `json:"ipv6Addresses,omitempty"`
 	NetworkInterfaceID *string         `json:"networkInterfaceId,omitempty"`

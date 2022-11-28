@@ -23,6 +23,8 @@ const (
 	BatchUpdateValuesByDataFilterRequestValueInputOptionEnumUserEntered                 BatchUpdateValuesByDataFilterRequestValueInputOptionEnum = "USER_ENTERED"
 )
 
+// BatchUpdateValuesByDataFilterRequest
+// The request for updating more than one range of values in a spreadsheet.
 type BatchUpdateValuesByDataFilterRequest struct {
 	Data                         []DataFilterValueRange                                                `json:"data,omitempty"`
 	IncludeValuesInResponse      *bool                                                                 `json:"includeValuesInResponse,omitempty"`

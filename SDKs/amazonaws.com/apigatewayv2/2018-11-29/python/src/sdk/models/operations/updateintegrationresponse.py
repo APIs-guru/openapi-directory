@@ -1,14 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdateIntegrationResponsePathParams:
-    api_id: str = field(default=None, metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
-    integration_id: str = field(default=None, metadata={'path_param': { 'field_name': 'integrationId', 'style': 'simple', 'explode': False }})
-    integration_response_id: str = field(default=None, metadata={'path_param': { 'field_name': 'integrationResponseId', 'style': 'simple', 'explode': False }})
+    api_id: str = field(metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
+    integration_id: str = field(metadata={'path_param': { 'field_name': 'integrationId', 'style': 'simple', 'explode': False }})
+    integration_response_id: str = field(metadata={'path_param': { 'field_name': 'integrationResponseId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -29,27 +34,27 @@ class UpdateIntegrationResponseRequestBodyContentHandlingStrategyEnum(str, Enum)
 @dataclass_json
 @dataclass
 class UpdateIntegrationResponseRequestBody:
-    content_handling_strategy: Optional[UpdateIntegrationResponseRequestBodyContentHandlingStrategyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'contentHandlingStrategy' }})
-    integration_response_key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'integrationResponseKey' }})
-    response_parameters: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'responseParameters' }})
-    response_templates: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'responseTemplates' }})
-    template_selection_expression: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'templateSelectionExpression' }})
+    content_handling_strategy: Optional[UpdateIntegrationResponseRequestBodyContentHandlingStrategyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('contentHandlingStrategy') }})
+    integration_response_key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('integrationResponseKey') }})
+    response_parameters: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('responseParameters') }})
+    response_templates: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('responseTemplates') }})
+    template_selection_expression: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('templateSelectionExpression') }})
     
 
 @dataclass
 class UpdateIntegrationResponseRequest:
-    path_params: UpdateIntegrationResponsePathParams = field(default=None)
-    headers: UpdateIntegrationResponseHeaders = field(default=None)
-    request: UpdateIntegrationResponseRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateIntegrationResponseHeaders = field()
+    path_params: UpdateIntegrationResponsePathParams = field()
+    request: UpdateIntegrationResponseRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateIntegrationResponseResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     update_integration_response_response: Optional[shared.UpdateIntegrationResponseResponse] = field(default=None)
     

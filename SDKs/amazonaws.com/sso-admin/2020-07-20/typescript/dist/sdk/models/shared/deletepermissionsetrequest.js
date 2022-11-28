@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DeletePermissionSetRequest = /** @class */ (function (_super) {
     __extends(DeletePermissionSetRequest, _super);
     function DeletePermissionSetRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=InstanceArn" }),
+        SpeakeasyMetadata({ data: "json, name=InstanceArn" }),
         __metadata("design:type", String)
     ], DeletePermissionSetRequest.prototype, "instanceArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=PermissionSetArn" }),
+        SpeakeasyMetadata({ data: "json, name=PermissionSetArn" }),
         __metadata("design:type", String)
     ], DeletePermissionSetRequest.prototype, "permissionSetArn", void 0);
     return DeletePermissionSetRequest;

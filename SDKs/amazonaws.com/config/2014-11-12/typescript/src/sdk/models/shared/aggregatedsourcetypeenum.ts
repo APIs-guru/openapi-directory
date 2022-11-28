@@ -1,6 +1,7 @@
 
 
+
 export enum AggregatedSourceTypeEnum {
-    Account = "ACCOUNT"
-,    Organization = "ORGANIZATION"
+    Account = "ACCOUNT",
+    Organization = "ORGANIZATION"
 }

@@ -1,13 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import networkprofiletype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListNetworkProfilesRequest:
-    arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'arn' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextToken' }})
-    type: Optional[networkprofiletype_enum.NetworkProfileTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('arn') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextToken') }})
+    type: Optional[NetworkProfileTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import schemafacet
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BatchGetObjectInformationResponse:
-    object_identifier: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ObjectIdentifier' }})
-    schema_facets: Optional[List[schemafacet.SchemaFacet]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SchemaFacets' }})
+    r"""BatchGetObjectInformationResponse
+    Represents the output of a <a>GetObjectInformation</a> response operation.
+    """
+    
+    object_identifier: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ObjectIdentifier') }})
+    schema_facets: Optional[List[SchemaFacet]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SchemaFacets') }})
     

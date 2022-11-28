@@ -9,6 +9,8 @@ const (
 	ReceiverJurisdictionalFiltersMatchFieldsEnumAbnormalValue            ReceiverJurisdictionalFiltersMatchFieldsEnum = "ABNORMAL_VALUE"
 )
 
+// ReceiverJurisdictionalFilters
+// A single filter
 type ReceiverJurisdictionalFilters struct {
 	DoesNotMatch *bool                                         `json:"doesNotMatch,omitempty"`
 	MatchFields  *ReceiverJurisdictionalFiltersMatchFieldsEnum `json:"matchFields,omitempty"`
@@ -23,11 +25,26 @@ const (
 	ReceiverTimingFrequencyEnumDaily    ReceiverTimingFrequencyEnum = "DAILY"
 )
 
+// ReceiverTiming
+// When the report is sent if not immediately
 type ReceiverTiming struct {
 	DailyAt   *float64                    `json:"dailyAt,omitempty"`
 	Frequency ReceiverTimingFrequencyEnum `json:"frequency"`
 }
 
+// ReceiverInput
+// A receiver of reports from the data hub
+type ReceiverInput struct {
+	Description           string                          `json:"description"`
+	JurisdictionalFilters []ReceiverJurisdictionalFilters `json:"jurisdictionalFilters,omitempty"`
+	Name                  string                          `json:"name"`
+	Timing                ReceiverTiming                  `json:"timing"`
+	Topic                 string                          `json:"topic"`
+	Translations          []interface{}                   `json:"translations,omitempty"`
+}
+
+// Receiver
+// A receiver of reports from the data hub
 type Receiver struct {
 	Description           string                          `json:"description"`
 	JurisdictionalFilters []ReceiverJurisdictionalFilters `json:"jurisdictionalFilters,omitempty"`

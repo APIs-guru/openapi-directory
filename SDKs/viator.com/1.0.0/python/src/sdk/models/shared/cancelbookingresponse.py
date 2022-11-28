@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class CancelBookingResponseReasonEnum(str, Enum):
     ALREADY_CANCELLED = "ALREADY_CANCELLED"
@@ -14,7 +16,7 @@ class CancelBookingResponseStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CancelBookingResponse:
-    booking_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bookingId' }})
-    reason: Optional[CancelBookingResponseReasonEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reason' }})
-    status: Optional[CancelBookingResponseStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    booking_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('bookingId') }})
+    reason: Optional[CancelBookingResponseReasonEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('reason') }})
+    status: Optional[CancelBookingResponseStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     

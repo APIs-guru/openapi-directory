@@ -1,5 +1,7 @@
 package shared
 
+// StreamKey
+// Object specifying a stream key.
 type StreamKey struct {
 	Arn        *string           `json:"arn,omitempty"`
 	ChannelArn *string           `json:"channelArn,omitempty"`

@@ -1,59 +1,60 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AppNetworkAccessTypeEnum } from "./appnetworkaccesstypeenum";
 import { AuthModeEnum } from "./authmodeenum";
 import { UserSettings } from "./usersettings";
 import { DomainStatusEnum } from "./domainstatusenum";
 
 
+
 export class DescribeDomainResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AppNetworkAccessType" })
+  @SpeakeasyMetadata({ data: "json, name=AppNetworkAccessType" })
   appNetworkAccessType?: AppNetworkAccessTypeEnum;
 
-  @Metadata({ data: "json, name=AuthMode" })
+  @SpeakeasyMetadata({ data: "json, name=AuthMode" })
   authMode?: AuthModeEnum;
 
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=DefaultUserSettings" })
+  @SpeakeasyMetadata({ data: "json, name=DefaultUserSettings" })
   defaultUserSettings?: UserSettings;
 
-  @Metadata({ data: "json, name=DomainArn" })
+  @SpeakeasyMetadata({ data: "json, name=DomainArn" })
   domainArn?: string;
 
-  @Metadata({ data: "json, name=DomainId" })
+  @SpeakeasyMetadata({ data: "json, name=DomainId" })
   domainId?: string;
 
-  @Metadata({ data: "json, name=DomainName" })
+  @SpeakeasyMetadata({ data: "json, name=DomainName" })
   domainName?: string;
 
-  @Metadata({ data: "json, name=FailureReason" })
+  @SpeakeasyMetadata({ data: "json, name=FailureReason" })
   failureReason?: string;
 
-  @Metadata({ data: "json, name=HomeEfsFileSystemId" })
+  @SpeakeasyMetadata({ data: "json, name=HomeEfsFileSystemId" })
   homeEfsFileSystemId?: string;
 
-  @Metadata({ data: "json, name=HomeEfsFileSystemKmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=HomeEfsFileSystemKmsKeyId" })
   homeEfsFileSystemKmsKeyId?: string;
 
-  @Metadata({ data: "json, name=KmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=KmsKeyId" })
   kmsKeyId?: string;
 
-  @Metadata({ data: "json, name=LastModifiedTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedTime" })
   lastModifiedTime?: Date;
 
-  @Metadata({ data: "json, name=SingleSignOnManagedApplicationInstanceId" })
+  @SpeakeasyMetadata({ data: "json, name=SingleSignOnManagedApplicationInstanceId" })
   singleSignOnManagedApplicationInstanceId?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: DomainStatusEnum;
 
-  @Metadata({ data: "json, name=SubnetIds" })
+  @SpeakeasyMetadata({ data: "json, name=SubnetIds" })
   subnetIds?: string[];
 
-  @Metadata({ data: "json, name=Url" })
+  @SpeakeasyMetadata({ data: "json, name=Url" })
   url?: string;
 
-  @Metadata({ data: "json, name=VpcId" })
+  @SpeakeasyMetadata({ data: "json, name=VpcId" })
   vpcId?: string;
 }

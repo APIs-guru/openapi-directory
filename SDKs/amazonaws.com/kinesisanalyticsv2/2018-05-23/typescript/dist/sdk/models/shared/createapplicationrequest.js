@@ -22,46 +22,47 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApplicationConfiguration } from "./applicationconfiguration";
 import { ApplicationModeEnum } from "./applicationmodeenum";
+import { CloudWatchLoggingOption } from "./cloudwatchloggingoption";
 import { RuntimeEnvironmentEnum } from "./runtimeenvironmentenum";
+import { Tag } from "./tag";
 var CreateApplicationRequest = /** @class */ (function (_super) {
     __extends(CreateApplicationRequest, _super);
     function CreateApplicationRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ApplicationConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=ApplicationConfiguration" }),
         __metadata("design:type", ApplicationConfiguration)
     ], CreateApplicationRequest.prototype, "applicationConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=ApplicationDescription" }),
+        SpeakeasyMetadata({ data: "json, name=ApplicationDescription" }),
         __metadata("design:type", String)
     ], CreateApplicationRequest.prototype, "applicationDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=ApplicationMode" }),
+        SpeakeasyMetadata({ data: "json, name=ApplicationMode" }),
         __metadata("design:type", String)
     ], CreateApplicationRequest.prototype, "applicationMode", void 0);
     __decorate([
-        Metadata({ data: "json, name=ApplicationName" }),
+        SpeakeasyMetadata({ data: "json, name=ApplicationName" }),
         __metadata("design:type", String)
     ], CreateApplicationRequest.prototype, "applicationName", void 0);
     __decorate([
-        Metadata({ data: "json, name=CloudWatchLoggingOptions", elemType: shared.CloudWatchLoggingOption }),
+        SpeakeasyMetadata({ data: "json, name=CloudWatchLoggingOptions", elemType: CloudWatchLoggingOption }),
         __metadata("design:type", Array)
     ], CreateApplicationRequest.prototype, "cloudWatchLoggingOptions", void 0);
     __decorate([
-        Metadata({ data: "json, name=RuntimeEnvironment" }),
+        SpeakeasyMetadata({ data: "json, name=RuntimeEnvironment" }),
         __metadata("design:type", String)
     ], CreateApplicationRequest.prototype, "runtimeEnvironment", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServiceExecutionRole" }),
+        SpeakeasyMetadata({ data: "json, name=ServiceExecutionRole" }),
         __metadata("design:type", String)
     ], CreateApplicationRequest.prototype, "serviceExecutionRole", void 0);
     __decorate([
-        Metadata({ data: "json, name=Tags", elemType: shared.Tag }),
+        SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag }),
         __metadata("design:type", Array)
     ], CreateApplicationRequest.prototype, "tags", void 0);
     return CreateApplicationRequest;

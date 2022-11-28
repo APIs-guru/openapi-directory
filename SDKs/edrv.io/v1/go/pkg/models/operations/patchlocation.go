@@ -72,15 +72,15 @@ type PatchLocationRequestBody struct {
 	Timezone       *string                               `json:"timezone,omitempty"`
 }
 
-type PatchLocationRequest struct {
-	PathParams PatchLocationPathParams
-	Request    PatchLocationRequestBody `request:"mediaType=application/json"`
-}
-
 type PatchLocation200ApplicationJSON struct {
 	Message *string       `json:"message,omitempty"`
 	Ok      *bool         `json:"ok,omitempty"`
 	Result  []interface{} `json:"result,omitempty"`
+}
+
+type PatchLocationRequest struct {
+	PathParams PatchLocationPathParams
+	Request    PatchLocationRequestBody `request:"mediaType=application/json"`
 }
 
 type PatchLocationResponse struct {

@@ -1,6 +1,7 @@
 
 
+
 export enum FulfillmentActivityTypeEnum {
-    ReturnIntent = "ReturnIntent"
-,    CodeHook = "CodeHook"
+    ReturnIntent = "ReturnIntent",
+    CodeHook = "CodeHook"
 }

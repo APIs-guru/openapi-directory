@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 from typing import Optional
+from sdk.models import shared
 
 
 @dataclass
@@ -10,17 +11,17 @@ class GetShakespeareGenerateLoremIpsumQueryParams:
 
 @dataclass
 class GetShakespeareGenerateLoremIpsumSecurity:
-    x_fungenerators_api_secret: shared.SchemeXFungeneratorsAPISecret = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    x_fungenerators_api_secret: shared.SchemeXFungeneratorsAPISecret = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetShakespeareGenerateLoremIpsumRequest:
-    query_params: GetShakespeareGenerateLoremIpsumQueryParams = field(default=None)
-    security: GetShakespeareGenerateLoremIpsumSecurity = field(default=None)
+    query_params: GetShakespeareGenerateLoremIpsumQueryParams = field()
+    security: GetShakespeareGenerateLoremIpsumSecurity = field()
     
 
 @dataclass
 class GetShakespeareGenerateLoremIpsumResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

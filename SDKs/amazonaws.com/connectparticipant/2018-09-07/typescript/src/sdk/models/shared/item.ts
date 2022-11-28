@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AttachmentItem } from "./attachmentitem";
 import { ParticipantRoleEnum } from "./participantroleenum";
 import { ChatItemTypeEnum } from "./chatitemtypeenum";
+
 
 
 // Item
@@ -10,30 +10,30 @@ import { ChatItemTypeEnum } from "./chatitemtypeenum";
  * An item - message or event - that has been sent. 
 **/
 export class Item extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AbsoluteTime" })
+  @SpeakeasyMetadata({ data: "json, name=AbsoluteTime" })
   absoluteTime?: string;
 
-  @Metadata({ data: "json, name=Attachments", elemType: shared.AttachmentItem })
+  @SpeakeasyMetadata({ data: "json, name=Attachments", elemType: AttachmentItem })
   attachments?: AttachmentItem[];
 
-  @Metadata({ data: "json, name=Content" })
+  @SpeakeasyMetadata({ data: "json, name=Content" })
   content?: string;
 
-  @Metadata({ data: "json, name=ContentType" })
+  @SpeakeasyMetadata({ data: "json, name=ContentType" })
   contentType?: string;
 
-  @Metadata({ data: "json, name=DisplayName" })
+  @SpeakeasyMetadata({ data: "json, name=DisplayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=ParticipantId" })
+  @SpeakeasyMetadata({ data: "json, name=ParticipantId" })
   participantId?: string;
 
-  @Metadata({ data: "json, name=ParticipantRole" })
+  @SpeakeasyMetadata({ data: "json, name=ParticipantRole" })
   participantRole?: ParticipantRoleEnum;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: ChatItemTypeEnum;
 }

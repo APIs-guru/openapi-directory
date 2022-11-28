@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ServiceRegistry
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Details of the service registry.
 **/
 export class ServiceRegistry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=containerName" })
+  @SpeakeasyMetadata({ data: "json, name=containerName" })
   containerName?: string;
 
-  @Metadata({ data: "json, name=containerPort" })
+  @SpeakeasyMetadata({ data: "json, name=containerPort" })
   containerPort?: number;
 
-  @Metadata({ data: "json, name=port" })
+  @SpeakeasyMetadata({ data: "json, name=port" })
   port?: number;
 
-  @Metadata({ data: "json, name=registryArn" })
+  @SpeakeasyMetadata({ data: "json, name=registryArn" })
   registryArn?: string;
 }

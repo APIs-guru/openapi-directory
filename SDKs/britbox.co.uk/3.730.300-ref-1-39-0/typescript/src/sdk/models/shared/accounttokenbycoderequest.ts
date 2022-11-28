@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum AccountTokenByCodeRequestScopesEnum {
-    Catalog = "Catalog"
-,    Commerce = "Commerce"
-,    Settings = "Settings"
-,    Playback = "Playback"
+    Catalog = "Catalog",
+    Commerce = "Commerce",
+    Settings = "Settings",
+    Playback = "Playback"
 }
 
 
 export class AccountTokenByCodeRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=scopes" })
+  @SpeakeasyMetadata({ data: "json, name=scopes" })
   scopes: AccountTokenByCodeRequestScopesEnum[];
 }

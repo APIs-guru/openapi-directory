@@ -1,5 +1,7 @@
 package shared
 
+// ActivityTask
+// Unit of work sent to an activity worker.
 type ActivityTask struct {
 	ActivityID        string            `json:"activityId"`
 	ActivityType      ActivityType      `json:"activityType"`

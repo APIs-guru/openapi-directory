@@ -10,13 +10,13 @@ class AccountGetGuestsCountQueryParams:
 
 @dataclass
 class AccountGetGuestsCountRequest:
-    query_params: AccountGetGuestsCountQueryParams = field(default=None)
+    query_params: AccountGetGuestsCountQueryParams = field()
     
 
 @dataclass
 class AccountGetGuestsCountResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_core_responses_count_responce: Optional[shared.APICoreResponsesCountResponce] = field(default=None)
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    body: Optional[bytes] = field(default=None)
     

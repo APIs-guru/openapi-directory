@@ -1,15 +1,19 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import protectiveequipmentbodypart
-from . import boundingbox
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ProtectiveEquipmentPerson:
-    body_parts: Optional[List[protectiveequipmentbodypart.ProtectiveEquipmentBodyPart]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BodyParts' }})
-    bounding_box: Optional[boundingbox.BoundingBox] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BoundingBox' }})
-    confidence: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Confidence' }})
-    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Id' }})
+    r"""ProtectiveEquipmentPerson
+    A person detected by a call to <a>DetectProtectiveEquipment</a>. The API returns all persons detected in the input image in an array of <code>ProtectiveEquipmentPerson</code> objects.
+    """
+    
+    body_parts: Optional[List[ProtectiveEquipmentBodyPart]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('BodyParts') }})
+    bounding_box: Optional[BoundingBox] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('BoundingBox') }})
+    confidence: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Confidence') }})
+    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Id') }})
     

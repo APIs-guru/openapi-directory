@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HouseMembershipViewModel } from "./housemembershipviewmodel";
 import { PartyViewModel } from "./partyviewmodel";
 var MemberViewModel = /** @class */ (function (_super) {
@@ -31,35 +31,35 @@ var MemberViewModel = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", Number)
     ], MemberViewModel.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=latestHouseMembership" }),
+        SpeakeasyMetadata({ data: "json, name=latestHouseMembership" }),
         __metadata("design:type", HouseMembershipViewModel)
     ], MemberViewModel.prototype, "latestHouseMembership", void 0);
     __decorate([
-        Metadata({ data: "json, name=latestParty" }),
+        SpeakeasyMetadata({ data: "json, name=latestParty" }),
         __metadata("design:type", PartyViewModel)
     ], MemberViewModel.prototype, "latestParty", void 0);
     __decorate([
-        Metadata({ data: "json, name=nameAddressAs" }),
+        SpeakeasyMetadata({ data: "json, name=nameAddressAs" }),
         __metadata("design:type", String)
     ], MemberViewModel.prototype, "nameAddressAs", void 0);
     __decorate([
-        Metadata({ data: "json, name=nameDisplayAs" }),
+        SpeakeasyMetadata({ data: "json, name=nameDisplayAs" }),
         __metadata("design:type", String)
     ], MemberViewModel.prototype, "nameDisplayAs", void 0);
     __decorate([
-        Metadata({ data: "json, name=nameFullTitle" }),
+        SpeakeasyMetadata({ data: "json, name=nameFullTitle" }),
         __metadata("design:type", String)
     ], MemberViewModel.prototype, "nameFullTitle", void 0);
     __decorate([
-        Metadata({ data: "json, name=nameListAs" }),
+        SpeakeasyMetadata({ data: "json, name=nameListAs" }),
         __metadata("design:type", String)
     ], MemberViewModel.prototype, "nameListAs", void 0);
     __decorate([
-        Metadata({ data: "json, name=thumbnailUrl" }),
+        SpeakeasyMetadata({ data: "json, name=thumbnailUrl" }),
         __metadata("design:type", String)
     ], MemberViewModel.prototype, "thumbnailUrl", void 0);
     return MemberViewModel;

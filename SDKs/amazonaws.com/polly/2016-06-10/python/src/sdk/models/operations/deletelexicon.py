@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteLexiconPathParams:
-    lexicon_name: str = field(default=None, metadata={'path_param': { 'field_name': 'LexiconName', 'style': 'simple', 'explode': False }})
+    lexicon_name: str = field(metadata={'path_param': { 'field_name': 'LexiconName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,15 +23,15 @@ class DeleteLexiconHeaders:
 
 @dataclass
 class DeleteLexiconRequest:
-    path_params: DeleteLexiconPathParams = field(default=None)
-    headers: DeleteLexiconHeaders = field(default=None)
+    headers: DeleteLexiconHeaders = field()
+    path_params: DeleteLexiconPathParams = field()
     
 
 @dataclass
 class DeleteLexiconResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     delete_lexicon_output: Optional[dict[str, Any]] = field(default=None)
     lexicon_not_found_exception: Optional[Any] = field(default=None)
     service_failure_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

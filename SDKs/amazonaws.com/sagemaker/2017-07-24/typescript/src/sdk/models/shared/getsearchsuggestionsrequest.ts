@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceTypeEnum } from "./resourcetypeenum";
 import { SuggestionQuery } from "./suggestionquery";
 
 
+
 export class GetSearchSuggestionsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Resource" })
+  @SpeakeasyMetadata({ data: "json, name=Resource" })
   resource: ResourceTypeEnum;
 
-  @Metadata({ data: "json, name=SuggestionQuery" })
+  @SpeakeasyMetadata({ data: "json, name=SuggestionQuery" })
   suggestionQuery?: SuggestionQuery;
 }

@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TableDataImportJobStatusEnum } from "./tabledataimportjobstatusenum";
 
 
+
 export class StartTableDataImportJobResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=jobId" })
+  @SpeakeasyMetadata({ data: "json, name=jobId" })
   jobId: string;
 
-  @Metadata({ data: "json, name=jobStatus" })
+  @SpeakeasyMetadata({ data: "json, name=jobStatus" })
   jobStatus: TableDataImportJobStatusEnum;
 }

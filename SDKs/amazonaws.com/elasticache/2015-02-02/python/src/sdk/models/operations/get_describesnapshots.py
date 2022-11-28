@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDescribeSnapshotsActionEnum(str, Enum):
     DESCRIBE_SNAPSHOTS = "DescribeSnapshots"
@@ -10,7 +14,8 @@ class GetDescribeSnapshotsVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeSnapshotsQueryParams:
-    action: GetDescribeSnapshotsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribeSnapshotsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDescribeSnapshotsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     cache_cluster_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'CacheClusterId', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
     max_records: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxRecords', 'style': 'form', 'explode': True }})
@@ -18,7 +23,6 @@ class GetDescribeSnapshotsQueryParams:
     show_node_group_config: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'ShowNodeGroupConfig', 'style': 'form', 'explode': True }})
     snapshot_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'SnapshotName', 'style': 'form', 'explode': True }})
     snapshot_source: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'SnapshotSource', 'style': 'form', 'explode': True }})
-    version: GetDescribeSnapshotsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -34,13 +38,13 @@ class GetDescribeSnapshotsHeaders:
 
 @dataclass
 class GetDescribeSnapshotsRequest:
-    query_params: GetDescribeSnapshotsQueryParams = field(default=None)
-    headers: GetDescribeSnapshotsHeaders = field(default=None)
+    headers: GetDescribeSnapshotsHeaders = field()
+    query_params: GetDescribeSnapshotsQueryParams = field()
     
 
 @dataclass
 class GetDescribeSnapshotsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

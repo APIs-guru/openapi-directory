@@ -1,5 +1,7 @@
 package shared
 
+// IamPolicySearchResult
+// A result of IAM Policy search, containing information of an IAM policy.
 type IamPolicySearchResult struct {
 	AssetType    *string      `json:"assetType,omitempty"`
 	Explanation  *Explanation `json:"explanation,omitempty"`

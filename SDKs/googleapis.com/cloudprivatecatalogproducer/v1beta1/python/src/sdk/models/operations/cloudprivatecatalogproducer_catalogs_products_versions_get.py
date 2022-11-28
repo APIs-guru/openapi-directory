@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudprivatecatalogproducerCatalogsProductsVersionsGetPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class CloudprivatecatalogproducerCatalogsProductsVersionsGetQueryParams:
 
 @dataclass
 class CloudprivatecatalogproducerCatalogsProductsVersionsGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudprivatecatalogproducerCatalogsProductsVersionsGetRequest:
-    path_params: CloudprivatecatalogproducerCatalogsProductsVersionsGetPathParams = field(default=None)
-    query_params: CloudprivatecatalogproducerCatalogsProductsVersionsGetQueryParams = field(default=None)
-    security: CloudprivatecatalogproducerCatalogsProductsVersionsGetSecurity = field(default=None)
+    path_params: CloudprivatecatalogproducerCatalogsProductsVersionsGetPathParams = field()
+    query_params: CloudprivatecatalogproducerCatalogsProductsVersionsGetQueryParams = field()
+    security: CloudprivatecatalogproducerCatalogsProductsVersionsGetSecurity = field()
     
 
 @dataclass
 class CloudprivatecatalogproducerCatalogsProductsVersionsGetResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

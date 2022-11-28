@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WorkspaceRequest } from "./workspacerequest";
+
 
 
 // FailedCreateWorkspaceRequest
@@ -7,12 +8,12 @@ import { WorkspaceRequest } from "./workspacerequest";
  * Describes a WorkSpace that cannot be created.
 **/
 export class FailedCreateWorkspaceRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ErrorCode" })
+  @SpeakeasyMetadata({ data: "json, name=ErrorCode" })
   errorCode?: string;
 
-  @Metadata({ data: "json, name=ErrorMessage" })
+  @SpeakeasyMetadata({ data: "json, name=ErrorMessage" })
   errorMessage?: string;
 
-  @Metadata({ data: "json, name=WorkspaceRequest" })
+  @SpeakeasyMetadata({ data: "json, name=WorkspaceRequest" })
   workspaceRequest?: WorkspaceRequest;
 }

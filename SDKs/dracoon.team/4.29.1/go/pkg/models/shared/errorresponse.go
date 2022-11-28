@@ -1,5 +1,7 @@
 package shared
 
+// ErrorResponse
+// Error information
 type ErrorResponse struct {
 	Code      int32   `json:"code"`
 	DebugInfo *string `json:"debugInfo,omitempty"`

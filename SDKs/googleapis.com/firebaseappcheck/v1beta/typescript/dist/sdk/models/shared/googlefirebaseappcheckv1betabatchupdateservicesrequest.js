@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GoogleFirebaseAppcheckV1betaUpdateServiceRequest } from "./googlefirebaseappcheckv1betaupdateservicerequest";
 // GoogleFirebaseAppcheckV1betaBatchUpdateServicesRequest
 /**
  * Request message for the BatchUpdateServices method.
@@ -34,11 +34,11 @@ var GoogleFirebaseAppcheckV1betaBatchUpdateServicesRequest = /** @class */ (func
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=requests", elemType: shared.GoogleFirebaseAppcheckV1betaUpdateServiceRequest }),
+        SpeakeasyMetadata({ data: "json, name=requests", elemType: GoogleFirebaseAppcheckV1betaUpdateServiceRequest }),
         __metadata("design:type", Array)
     ], GoogleFirebaseAppcheckV1betaBatchUpdateServicesRequest.prototype, "requests", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateMask" }),
+        SpeakeasyMetadata({ data: "json, name=updateMask" }),
         __metadata("design:type", String)
     ], GoogleFirebaseAppcheckV1betaBatchUpdateServicesRequest.prototype, "updateMask", void 0);
     return GoogleFirebaseAppcheckV1betaBatchUpdateServicesRequest;

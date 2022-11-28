@@ -65,6 +65,8 @@ type CommitSearchResultItemParents struct {
 	URL     *string `json:"url,omitempty"`
 }
 
+// CommitSearchResultItem
+// Commit Search Result Item
 type CommitSearchResultItem struct {
 	Author      CommitSearchResultItemSimpleUser `json:"author"`
 	CommentsURL string                           `json:"comments_url"`

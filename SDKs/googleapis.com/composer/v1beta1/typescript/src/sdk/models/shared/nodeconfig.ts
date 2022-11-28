@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IpAllocationPolicy } from "./ipallocationpolicy";
+
 
 
 // NodeConfig
@@ -7,36 +8,36 @@ import { IpAllocationPolicy } from "./ipallocationpolicy";
  * The configuration information for the Kubernetes Engine nodes running the Apache Airflow software.
 **/
 export class NodeConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=diskSizeGb" })
+  @SpeakeasyMetadata({ data: "json, name=diskSizeGb" })
   diskSizeGb?: number;
 
-  @Metadata({ data: "json, name=enableIpMasqAgent" })
+  @SpeakeasyMetadata({ data: "json, name=enableIpMasqAgent" })
   enableIpMasqAgent?: boolean;
 
-  @Metadata({ data: "json, name=ipAllocationPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=ipAllocationPolicy" })
   ipAllocationPolicy?: IpAllocationPolicy;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: string;
 
-  @Metadata({ data: "json, name=machineType" })
+  @SpeakeasyMetadata({ data: "json, name=machineType" })
   machineType?: string;
 
-  @Metadata({ data: "json, name=maxPodsPerNode" })
+  @SpeakeasyMetadata({ data: "json, name=maxPodsPerNode" })
   maxPodsPerNode?: number;
 
-  @Metadata({ data: "json, name=network" })
+  @SpeakeasyMetadata({ data: "json, name=network" })
   network?: string;
 
-  @Metadata({ data: "json, name=oauthScopes" })
+  @SpeakeasyMetadata({ data: "json, name=oauthScopes" })
   oauthScopes?: string[];
 
-  @Metadata({ data: "json, name=serviceAccount" })
+  @SpeakeasyMetadata({ data: "json, name=serviceAccount" })
   serviceAccount?: string;
 
-  @Metadata({ data: "json, name=subnetwork" })
+  @SpeakeasyMetadata({ data: "json, name=subnetwork" })
   subnetwork?: string;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: string[];
 }

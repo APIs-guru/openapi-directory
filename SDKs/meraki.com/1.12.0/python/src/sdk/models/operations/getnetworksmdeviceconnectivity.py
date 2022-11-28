@@ -4,8 +4,8 @@ from typing import Any,List,Optional
 
 @dataclass
 class GetNetworkSmDeviceConnectivityPathParams:
-    device_id: str = field(default=None, metadata={'path_param': { 'field_name': 'deviceId', 'style': 'simple', 'explode': False }})
-    network_id: str = field(default=None, metadata={'path_param': { 'field_name': 'networkId', 'style': 'simple', 'explode': False }})
+    device_id: str = field(metadata={'path_param': { 'field_name': 'deviceId', 'style': 'simple', 'explode': False }})
+    network_id: str = field(metadata={'path_param': { 'field_name': 'networkId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,14 +17,14 @@ class GetNetworkSmDeviceConnectivityQueryParams:
 
 @dataclass
 class GetNetworkSmDeviceConnectivityRequest:
-    path_params: GetNetworkSmDeviceConnectivityPathParams = field(default=None)
-    query_params: GetNetworkSmDeviceConnectivityQueryParams = field(default=None)
+    path_params: GetNetworkSmDeviceConnectivityPathParams = field()
+    query_params: GetNetworkSmDeviceConnectivityQueryParams = field()
     
 
 @dataclass
 class GetNetworkSmDeviceConnectivityResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     get_network_sm_device_connectivity_200_application_json_object: Optional[dict[str, Any]] = field(default=None)
     

@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DriveFolder } from "./drivefolder";
 import { Folder } from "./folder";
 import { Owner } from "./owner";
+
 
 
 // DriveItem
@@ -9,27 +10,27 @@ import { Owner } from "./owner";
  * A Drive item, such as a file or folder.
 **/
 export class DriveItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=driveFile" })
+  @SpeakeasyMetadata({ data: "json, name=driveFile" })
   driveFile?: Map<string, any>;
 
-  @Metadata({ data: "json, name=driveFolder" })
+  @SpeakeasyMetadata({ data: "json, name=driveFolder" })
   driveFolder?: DriveFolder;
 
-  @Metadata({ data: "json, name=file" })
+  @SpeakeasyMetadata({ data: "json, name=file" })
   file?: Map<string, any>;
 
-  @Metadata({ data: "json, name=folder" })
+  @SpeakeasyMetadata({ data: "json, name=folder" })
   folder?: Folder;
 
-  @Metadata({ data: "json, name=mimeType" })
+  @SpeakeasyMetadata({ data: "json, name=mimeType" })
   mimeType?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=owner" })
+  @SpeakeasyMetadata({ data: "json, name=owner" })
   owner?: Owner;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

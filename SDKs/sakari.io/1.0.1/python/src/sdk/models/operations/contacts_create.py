@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ContactsCreatePathParams:
-    account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
+    account_id: str = field(metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
     
 class ContactsCreateMergeStrategyEnum(str, Enum):
     APPEND = "append"
@@ -26,20 +27,20 @@ class ContactsCreateRequests:
 
 @dataclass
 class ContactsCreateSecurity:
-    sakari_auth: shared.SchemeSakariAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    sakari_auth: shared.SchemeSakariAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ContactsCreateRequest:
-    path_params: ContactsCreatePathParams = field(default=None)
-    query_params: ContactsCreateQueryParams = field(default=None)
+    path_params: ContactsCreatePathParams = field()
+    query_params: ContactsCreateQueryParams = field()
+    security: ContactsCreateSecurity = field()
     request: Optional[ContactsCreateRequests] = field(default=None)
-    security: ContactsCreateSecurity = field(default=None)
     
 
 @dataclass
 class ContactsCreateResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     contacts_create_201_application_json_one_of: Optional[Any] = field(default=None)
     

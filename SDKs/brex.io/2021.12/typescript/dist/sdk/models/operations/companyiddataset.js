@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export var CompanyIdDatasetDatasetEnum;
 (function (CompanyIdDatasetDatasetEnum) {
@@ -38,11 +38,11 @@ var CompanyIdDatasetPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=dataset" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=dataset" }),
         __metadata("design:type", String)
     ], CompanyIdDatasetPathParams.prototype, "dataset", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], CompanyIdDatasetPathParams.prototype, "id", void 0);
     return CompanyIdDatasetPathParams;
@@ -61,11 +61,11 @@ var CompanyIdDatasetQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=check_stock_listing" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=check_stock_listing" }),
         __metadata("design:type", Boolean)
     ], CompanyIdDatasetQueryParams.prototype, "checkStockListing", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=lang" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lang" }),
         __metadata("design:type", String)
     ], CompanyIdDatasetQueryParams.prototype, "lang", void 0);
     return CompanyIdDatasetQueryParams;
@@ -77,7 +77,7 @@ var CompanyIdDatasetSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeUserKey)
     ], CompanyIdDatasetSecurity.prototype, "userKey", void 0);
     return CompanyIdDatasetSecurity;
@@ -89,15 +89,15 @@ var CompanyIdDatasetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CompanyIdDatasetPathParams)
     ], CompanyIdDatasetRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CompanyIdDatasetQueryParams)
     ], CompanyIdDatasetRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CompanyIdDatasetSecurity)
     ], CompanyIdDatasetRequest.prototype, "security", void 0);
     return CompanyIdDatasetRequest;
@@ -109,19 +109,19 @@ var CompanyIdDatasetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CompanyIdDatasetResponse.prototype, "companyIdDatasetDefaultApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CompanyIdDatasetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CompanyIdDatasetResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CompanyIdDatasetResponse.prototype, "oneapi1v11company1deepsearch1lei1Percent7BnumberPercent7DGetResponses200ContentApplication1jsonSchemaPropertiesCompany", void 0);
     return CompanyIdDatasetResponse;

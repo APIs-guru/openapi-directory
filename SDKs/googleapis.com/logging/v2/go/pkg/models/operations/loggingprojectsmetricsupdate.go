@@ -46,7 +46,7 @@ type LoggingProjectsMetricsUpdateSecurity struct {
 type LoggingProjectsMetricsUpdateRequest struct {
 	PathParams  LoggingProjectsMetricsUpdatePathParams
 	QueryParams LoggingProjectsMetricsUpdateQueryParams
-	Request     *shared.LogMetric `request:"mediaType=application/json"`
+	Request     *shared.LogMetricInput `request:"mediaType=application/json"`
 	Security    LoggingProjectsMetricsUpdateSecurity
 }
 

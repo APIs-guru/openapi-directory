@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ExecutionTemplate } from "./executiontemplate";
 export declare enum ExecutionStateEnum {
     StateUnspecified = "STATE_UNSPECIFIED",
@@ -11,6 +11,14 @@ export declare enum ExecutionStateEnum {
     Cancelled = "CANCELLED",
     Expired = "EXPIRED",
     Initializing = "INITIALIZING"
+}
+/**
+ * The definition of a single executed notebook.
+**/
+export declare class ExecutionInput extends SpeakeasyBase {
+    description?: string;
+    executionTemplate?: ExecutionTemplate;
+    outputNotebookFile?: string;
 }
 /**
  * The definition of a single executed notebook.

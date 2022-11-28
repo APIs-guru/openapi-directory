@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ErrorDetail } from "./errordetail";
 
 
+
 export class BatchDeleteConnectionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Errors", elemType: shared.ErrorDetail })
+  @SpeakeasyMetadata({ data: "json, name=Errors", elemType: ErrorDetail })
   errors?: Map<string, ErrorDetail>;
 
-  @Metadata({ data: "json, name=Succeeded" })
+  @SpeakeasyMetadata({ data: "json, name=Succeeded" })
   succeeded?: string[];
 }

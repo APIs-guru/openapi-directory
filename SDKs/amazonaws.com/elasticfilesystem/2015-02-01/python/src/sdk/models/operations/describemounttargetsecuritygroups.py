@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class DescribeMountTargetSecurityGroupsPathParams:
-    mount_target_id: str = field(default=None, metadata={'path_param': { 'field_name': 'MountTargetId', 'style': 'simple', 'explode': False }})
+    mount_target_id: str = field(metadata={'path_param': { 'field_name': 'MountTargetId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,17 +24,17 @@ class DescribeMountTargetSecurityGroupsHeaders:
 
 @dataclass
 class DescribeMountTargetSecurityGroupsRequest:
-    path_params: DescribeMountTargetSecurityGroupsPathParams = field(default=None)
-    headers: DescribeMountTargetSecurityGroupsHeaders = field(default=None)
+    headers: DescribeMountTargetSecurityGroupsHeaders = field()
+    path_params: DescribeMountTargetSecurityGroupsPathParams = field()
     
 
 @dataclass
 class DescribeMountTargetSecurityGroupsResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     describe_mount_target_security_groups_response: Optional[shared.DescribeMountTargetSecurityGroupsResponse] = field(default=None)
     incorrect_mount_target_state: Optional[Any] = field(default=None)
     internal_server_error: Optional[Any] = field(default=None)
     mount_target_not_found: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

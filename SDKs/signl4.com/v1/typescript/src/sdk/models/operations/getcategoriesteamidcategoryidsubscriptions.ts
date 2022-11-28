@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetCategoriesTeamIdCategoryIdSubscriptionsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=categoryId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=categoryId" })
   categoryId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=teamId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=teamId" })
   teamId: string;
 }
 
 
 export class GetCategoriesTeamIdCategoryIdSubscriptionsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetCategoriesTeamIdCategoryIdSubscriptionsPathParams;
 }
 
 
 export class GetCategoriesTeamIdCategoryIdSubscriptionsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata({ elemType: shared.CategorySubscriptionInfo })
+  @SpeakeasyMetadata({ elemType: shared.CategorySubscriptionInfo })
   categorySubscriptionInfos?: shared.CategorySubscriptionInfo[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponseContent?: shared.ErrorResponseContent;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

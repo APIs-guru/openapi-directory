@@ -17,6 +17,8 @@ const (
 	MembershipStateEnumNotAMember                 MembershipStateEnum = "NOT_A_MEMBER"
 )
 
+// Membership
+// Represents a membership relation in Google Chat, such as whether a user or Chat app is invited to, part of, or absent from a space.
 type Membership struct {
 	CreateTime *string              `json:"createTime,omitempty"`
 	Member     *User                `json:"member,omitempty"`

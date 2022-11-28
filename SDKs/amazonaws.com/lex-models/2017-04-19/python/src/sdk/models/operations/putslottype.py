@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class PutSlotTypePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,30 +32,30 @@ class PutSlotTypeRequestBodyValueSelectionStrategyEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PutSlotTypeRequestBody:
-    checksum: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'checksum' }})
-    create_version: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createVersion' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    enumeration_values: Optional[List[shared.EnumerationValue]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enumerationValues' }})
-    parent_slot_type_signature: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'parentSlotTypeSignature' }})
-    slot_type_configurations: Optional[List[shared.SlotTypeConfiguration]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'slotTypeConfigurations' }})
-    value_selection_strategy: Optional[PutSlotTypeRequestBodyValueSelectionStrategyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'valueSelectionStrategy' }})
+    checksum: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('checksum') }})
+    create_version: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createVersion') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    enumeration_values: Optional[List[shared.EnumerationValue]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('enumerationValues') }})
+    parent_slot_type_signature: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('parentSlotTypeSignature') }})
+    slot_type_configurations: Optional[List[shared.SlotTypeConfiguration]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('slotTypeConfigurations') }})
+    value_selection_strategy: Optional[PutSlotTypeRequestBodyValueSelectionStrategyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('valueSelectionStrategy') }})
     
 
 @dataclass
 class PutSlotTypeRequest:
-    path_params: PutSlotTypePathParams = field(default=None)
-    headers: PutSlotTypeHeaders = field(default=None)
-    request: PutSlotTypeRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: PutSlotTypeHeaders = field()
+    path_params: PutSlotTypePathParams = field()
+    request: PutSlotTypeRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PutSlotTypeResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     precondition_failed_exception: Optional[Any] = field(default=None)
     put_slot_type_response: Optional[shared.PutSlotTypeResponse] = field(default=None)
-    status_code: int = field(default=None)
     

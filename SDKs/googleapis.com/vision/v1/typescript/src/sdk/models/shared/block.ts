@@ -1,16 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BoundingPoly } from "./boundingpoly";
 import { Paragraph } from "./paragraph";
 import { TextProperty } from "./textproperty";
 
+
 export enum BlockBlockTypeEnum {
-    Unknown = "UNKNOWN"
-,    Text = "TEXT"
-,    Table = "TABLE"
-,    Picture = "PICTURE"
-,    Ruler = "RULER"
-,    Barcode = "BARCODE"
+    Unknown = "UNKNOWN",
+    Text = "TEXT",
+    Table = "TABLE",
+    Picture = "PICTURE",
+    Ruler = "RULER",
+    Barcode = "BARCODE"
 }
 
 
@@ -19,18 +19,18 @@ export enum BlockBlockTypeEnum {
  * Logical element on the page.
 **/
 export class Block extends SpeakeasyBase {
-  @Metadata({ data: "json, name=blockType" })
+  @SpeakeasyMetadata({ data: "json, name=blockType" })
   blockType?: BlockBlockTypeEnum;
 
-  @Metadata({ data: "json, name=boundingBox" })
+  @SpeakeasyMetadata({ data: "json, name=boundingBox" })
   boundingBox?: BoundingPoly;
 
-  @Metadata({ data: "json, name=confidence" })
+  @SpeakeasyMetadata({ data: "json, name=confidence" })
   confidence?: number;
 
-  @Metadata({ data: "json, name=paragraphs", elemType: shared.Paragraph })
+  @SpeakeasyMetadata({ data: "json, name=paragraphs", elemType: Paragraph })
   paragraphs?: Paragraph[];
 
-  @Metadata({ data: "json, name=property" })
+  @SpeakeasyMetadata({ data: "json, name=property" })
   property?: TextProperty;
 }

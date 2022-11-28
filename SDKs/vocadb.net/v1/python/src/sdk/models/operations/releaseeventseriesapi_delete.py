@@ -4,7 +4,7 @@ from typing import Optional
 
 @dataclass
 class ReleaseEventSeriesAPIDeletePathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,12 +15,12 @@ class ReleaseEventSeriesAPIDeleteQueryParams:
 
 @dataclass
 class ReleaseEventSeriesAPIDeleteRequest:
-    path_params: ReleaseEventSeriesAPIDeletePathParams = field(default=None)
-    query_params: ReleaseEventSeriesAPIDeleteQueryParams = field(default=None)
+    path_params: ReleaseEventSeriesAPIDeletePathParams = field()
+    query_params: ReleaseEventSeriesAPIDeleteQueryParams = field()
     
 
 @dataclass
 class ReleaseEventSeriesAPIDeleteResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

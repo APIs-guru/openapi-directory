@@ -1,11 +1,12 @@
 
 
+
 export enum TemporalEnum {
-    Day = "day"
-,    Month = "month"
-,    Year = "year"
-,    Moy = "moy"
-,    Dow = "dow"
-,    Hour = "hour"
-,    Hod = "hod"
+    Day = "day",
+    Month = "month",
+    Year = "year",
+    Moy = "moy",
+    Dow = "dow",
+    Hour = "hour",
+    Hod = "hod"
 }

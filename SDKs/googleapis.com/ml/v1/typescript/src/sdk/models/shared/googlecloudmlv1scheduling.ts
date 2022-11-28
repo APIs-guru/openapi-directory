@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudMlV1Scheduling
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * All parameters related to scheduling of training jobs.
 **/
 export class GoogleCloudMlV1Scheduling extends SpeakeasyBase {
-  @Metadata({ data: "json, name=maxRunningTime" })
+  @SpeakeasyMetadata({ data: "json, name=maxRunningTime" })
   maxRunningTime?: string;
 
-  @Metadata({ data: "json, name=maxWaitTime" })
+  @SpeakeasyMetadata({ data: "json, name=maxWaitTime" })
   maxWaitTime?: string;
 
-  @Metadata({ data: "json, name=priority" })
+  @SpeakeasyMetadata({ data: "json, name=priority" })
   priority?: number;
 }

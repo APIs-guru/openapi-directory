@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ApplicationDataTransfer } from "./applicationdatatransfer";
 /**
  * A Transfer resource represents the transfer of the ownership of user data between users.

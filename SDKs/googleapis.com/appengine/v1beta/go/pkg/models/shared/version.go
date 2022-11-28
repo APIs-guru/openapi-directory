@@ -22,6 +22,8 @@ const (
 	VersionServingStatusEnumStopped                  VersionServingStatusEnum = "STOPPED"
 )
 
+// Version
+// A Version resource is a specific set of source code and configuration files that are deployed into a service.
 type Version struct {
 	APIConfig                 *APIConfigHandler            `json:"apiConfig,omitempty"`
 	AppEngineApis             *bool                        `json:"appEngineApis,omitempty"`

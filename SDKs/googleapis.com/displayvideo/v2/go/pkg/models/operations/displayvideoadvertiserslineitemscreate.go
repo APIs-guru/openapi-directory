@@ -30,7 +30,7 @@ type DisplayvideoAdvertisersLineItemsCreateSecurity struct {
 type DisplayvideoAdvertisersLineItemsCreateRequest struct {
 	PathParams  DisplayvideoAdvertisersLineItemsCreatePathParams
 	QueryParams DisplayvideoAdvertisersLineItemsCreateQueryParams
-	Request     *shared.LineItem `request:"mediaType=application/json"`
+	Request     *shared.LineItemInput `request:"mediaType=application/json"`
 	Security    DisplayvideoAdvertisersLineItemsCreateSecurity
 }
 

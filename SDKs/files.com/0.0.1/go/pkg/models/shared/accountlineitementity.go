@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// AccountLineItemEntity
+// List Payments
 type AccountLineItemEntity struct {
 	Amount            *float64               `json:"amount,omitempty"`
 	Balance           *float64               `json:"balance,omitempty"`

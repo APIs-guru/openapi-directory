@@ -9,6 +9,6 @@ class PutToolsDefaultEncodingRequest:
 
 @dataclass
 class PutToolsDefaultEncodingResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

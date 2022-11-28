@@ -1,24 +1,25 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ReposUpdateInformationAboutPagesSitePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=owner" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=owner" })
   owner: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repo" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repo" })
   repo: string;
 }
 
 export enum ReposUpdateInformationAboutPagesSiteRequestBodySource1Enum {
-    GhPages = "gh-pages"
-,    Master = "master"
-,    MasterDocs = "master /docs"
+    GhPages = "gh-pages",
+    Master = "master",
+    MasterDocs = "master /docs"
 }
 
 export enum ReposUpdateInformationAboutPagesSiteRequestBodySource2PathEnum {
-    Root = "/"
-,    RootDocs = "/docs"
+    Root = "/",
+    RootDocs = "/docs"
 }
 
 
@@ -27,48 +28,48 @@ export enum ReposUpdateInformationAboutPagesSiteRequestBodySource2PathEnum {
  * Update the source for the repository. Must include the branch name and path.
 **/
 export class ReposUpdateInformationAboutPagesSiteRequestBodySource2 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=branch" })
+  @SpeakeasyMetadata({ data: "json, name=branch" })
   branch: string;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path: ReposUpdateInformationAboutPagesSiteRequestBodySource2PathEnum;
 }
 
 
 export class ReposUpdateInformationAboutPagesSiteRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cname" })
+  @SpeakeasyMetadata({ data: "json, name=cname" })
   cname?: string;
 
-  @Metadata({ data: "json, name=public" })
+  @SpeakeasyMetadata({ data: "json, name=public" })
   public?: boolean;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source: any;
 }
 
 
 export class ReposUpdateInformationAboutPagesSiteRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ReposUpdateInformationAboutPagesSitePathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: ReposUpdateInformationAboutPagesSiteRequestBody;
 }
 
 
 export class ReposUpdateInformationAboutPagesSiteResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   scimError?: shared.ScimError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationError?: shared.ValidationError;
 }

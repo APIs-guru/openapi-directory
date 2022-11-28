@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataSource } from "./datasource";
 // DatasetImportJobSummary
 /**
@@ -34,31 +34,31 @@ var DatasetImportJobSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CreationTime" }),
+        SpeakeasyMetadata({ data: "json, name=CreationTime" }),
         __metadata("design:type", Date)
     ], DatasetImportJobSummary.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=DataSource" }),
+        SpeakeasyMetadata({ data: "json, name=DataSource" }),
         __metadata("design:type", DataSource)
     ], DatasetImportJobSummary.prototype, "dataSource", void 0);
     __decorate([
-        Metadata({ data: "json, name=DatasetImportJobArn" }),
+        SpeakeasyMetadata({ data: "json, name=DatasetImportJobArn" }),
         __metadata("design:type", String)
     ], DatasetImportJobSummary.prototype, "datasetImportJobArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=DatasetImportJobName" }),
+        SpeakeasyMetadata({ data: "json, name=DatasetImportJobName" }),
         __metadata("design:type", String)
     ], DatasetImportJobSummary.prototype, "datasetImportJobName", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastModificationTime" }),
+        SpeakeasyMetadata({ data: "json, name=LastModificationTime" }),
         __metadata("design:type", Date)
     ], DatasetImportJobSummary.prototype, "lastModificationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=Message" }),
+        SpeakeasyMetadata({ data: "json, name=Message" }),
         __metadata("design:type", String)
     ], DatasetImportJobSummary.prototype, "message", void 0);
     __decorate([
-        Metadata({ data: "json, name=Status" }),
+        SpeakeasyMetadata({ data: "json, name=Status" }),
         __metadata("design:type", String)
     ], DatasetImportJobSummary.prototype, "status", void 0);
     return DatasetImportJobSummary;

@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GlobalTableDescription } from "./globaltabledescription";
 
 
+
 export class DescribeGlobalTableOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=GlobalTableDescription" })
+  @SpeakeasyMetadata({ data: "json, name=GlobalTableDescription" })
   globalTableDescription?: GlobalTableDescription;
 }

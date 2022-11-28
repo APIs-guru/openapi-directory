@@ -1,51 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export const POSTV05CONSENTSHIPNOTIFY_SERVERS = [
-	"https://your-hrp-server.com",
-];
 
+export const PostV05ConsentsHipNotifyServerList = [
+	"https://your-hrp-server.com",
+] as const;
 
 
 export class PostV05ConsentsHipNotifyHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Authorization" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" })
   authorization: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-HIP-ID" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-HIP-ID" })
   xHipId: string;
 }
 
 
 export class PostV05ConsentsHipNotifyRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/xml" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/xml" })
   applicationXml: Uint8Array;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   hipConsentNotification?: shared.HipConsentNotification;
 }
 
 
 export class PostV05ConsentsHipNotifyRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   serverUrl?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: PostV05ConsentsHipNotifyHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request: PostV05ConsentsHipNotifyRequests;
 }
 
 
 export class PostV05ConsentsHipNotifyResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

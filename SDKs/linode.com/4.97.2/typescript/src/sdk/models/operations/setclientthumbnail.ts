@@ -1,62 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class SetClientThumbnailPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=clientId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=clientId" })
   clientId: string;
 }
 
 
-export class SetClientThumbnailSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class SetClientThumbnailSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class SetClientThumbnailSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: SetClientThumbnailSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: SetClientThumbnailSecurityOption2;
-}
-
-
-export class SetClientThumbnailRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: SetClientThumbnailPathParams;
-
-  @Metadata({ data: "request, media_type=image/png" })
-  request: Uint8Array;
-
-  @Metadata()
-  security: SetClientThumbnailSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class SetClientThumbnailDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class SetClientThumbnailRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: SetClientThumbnailPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=image/png" })
+  request: Uint8Array;
+
+  @SpeakeasyMetadata()
+  security: SetClientThumbnailSecurity;
+}
+
+
 export class SetClientThumbnailResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   setClientThumbnail200ApplicationJsonObject?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   setClientThumbnailDefaultApplicationJsonObject?: SetClientThumbnailDefaultApplicationJson;
 }

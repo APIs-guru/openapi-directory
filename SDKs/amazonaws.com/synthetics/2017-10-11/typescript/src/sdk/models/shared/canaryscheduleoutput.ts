@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CanaryScheduleOutput
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * How long, in seconds, for the canary to continue making regular runs according to the schedule in the <code>Expression</code> value.
 **/
 export class CanaryScheduleOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DurationInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=DurationInSeconds" })
   durationInSeconds?: number;
 
-  @Metadata({ data: "json, name=Expression" })
+  @SpeakeasyMetadata({ data: "json, name=Expression" })
   expression?: string;
 }

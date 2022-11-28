@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { PublicKeyCredential } from "./publickeycredential";
 /**
  * A server-stored device credential used for authentication.

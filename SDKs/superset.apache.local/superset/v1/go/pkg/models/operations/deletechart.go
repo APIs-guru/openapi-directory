@@ -12,11 +12,6 @@ type DeleteChartSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type DeleteChartRequest struct {
-	QueryParams DeleteChartQueryParams
-	Security    DeleteChartSecurity
-}
-
 type DeleteChart200ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
 }
@@ -39,6 +34,11 @@ type DeleteChart422ApplicationJSON struct {
 
 type DeleteChart500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type DeleteChartRequest struct {
+	QueryParams DeleteChartQueryParams
+	Security    DeleteChartSecurity
 }
 
 type DeleteChartResponse struct {

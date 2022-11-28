@@ -22,38 +22,38 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetComplianceSummaryInput = /** @class */ (function (_super) {
     __extends(GetComplianceSummaryInput, _super);
     function GetComplianceSummaryInput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=GroupBy" }),
+        SpeakeasyMetadata({ data: "json, name=GroupBy" }),
         __metadata("design:type", Array)
     ], GetComplianceSummaryInput.prototype, "groupBy", void 0);
     __decorate([
-        Metadata({ data: "json, name=MaxResults" }),
+        SpeakeasyMetadata({ data: "json, name=MaxResults" }),
         __metadata("design:type", Number)
     ], GetComplianceSummaryInput.prototype, "maxResults", void 0);
     __decorate([
-        Metadata({ data: "json, name=PaginationToken" }),
+        SpeakeasyMetadata({ data: "json, name=PaginationToken" }),
         __metadata("design:type", String)
     ], GetComplianceSummaryInput.prototype, "paginationToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=RegionFilters" }),
+        SpeakeasyMetadata({ data: "json, name=RegionFilters" }),
         __metadata("design:type", Array)
     ], GetComplianceSummaryInput.prototype, "regionFilters", void 0);
     __decorate([
-        Metadata({ data: "json, name=ResourceTypeFilters" }),
+        SpeakeasyMetadata({ data: "json, name=ResourceTypeFilters" }),
         __metadata("design:type", Array)
     ], GetComplianceSummaryInput.prototype, "resourceTypeFilters", void 0);
     __decorate([
-        Metadata({ data: "json, name=TagKeyFilters" }),
+        SpeakeasyMetadata({ data: "json, name=TagKeyFilters" }),
         __metadata("design:type", Array)
     ], GetComplianceSummaryInput.prototype, "tagKeyFilters", void 0);
     __decorate([
-        Metadata({ data: "json, name=TargetIdFilters" }),
+        SpeakeasyMetadata({ data: "json, name=TargetIdFilters" }),
         __metadata("design:type", Array)
     ], GetComplianceSummaryInput.prototype, "targetIdFilters", void 0);
     return GetComplianceSummaryInput;

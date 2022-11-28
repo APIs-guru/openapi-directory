@@ -10,24 +10,24 @@ class EndpointSkipUsersPlaybackToPreviousTrackQueryParams:
 
 @dataclass
 class EndpointSkipUsersPlaybackToPreviousTrackHeaders:
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
+    authorization: str = field(metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class EndpointSkipUsersPlaybackToPreviousTrackSecurity:
-    spotify_auth: shared.SchemeSpotifyAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    spotify_auth: shared.SchemeSpotifyAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class EndpointSkipUsersPlaybackToPreviousTrackRequest:
-    query_params: EndpointSkipUsersPlaybackToPreviousTrackQueryParams = field(default=None)
-    headers: EndpointSkipUsersPlaybackToPreviousTrackHeaders = field(default=None)
-    security: EndpointSkipUsersPlaybackToPreviousTrackSecurity = field(default=None)
+    headers: EndpointSkipUsersPlaybackToPreviousTrackHeaders = field()
+    query_params: EndpointSkipUsersPlaybackToPreviousTrackQueryParams = field()
+    security: EndpointSkipUsersPlaybackToPreviousTrackSecurity = field()
     
 
 @dataclass
 class EndpointSkipUsersPlaybackToPreviousTrackResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response_object: Optional[shared.ErrorResponseObject] = field(default=None)
-    status_code: int = field(default=None)
     

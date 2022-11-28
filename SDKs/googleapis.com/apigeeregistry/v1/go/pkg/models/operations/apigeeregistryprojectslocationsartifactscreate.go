@@ -31,7 +31,7 @@ type ApigeeregistryProjectsLocationsArtifactsCreateSecurity struct {
 type ApigeeregistryProjectsLocationsArtifactsCreateRequest struct {
 	PathParams  ApigeeregistryProjectsLocationsArtifactsCreatePathParams
 	QueryParams ApigeeregistryProjectsLocationsArtifactsCreateQueryParams
-	Request     *shared.Artifact `request:"mediaType=application/json"`
+	Request     *shared.ArtifactInput `request:"mediaType=application/json"`
 	Security    ApigeeregistryProjectsLocationsArtifactsCreateSecurity
 }
 

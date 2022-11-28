@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import rolealiasdescription
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeRoleAliasResponse:
-    role_alias_description: Optional[rolealiasdescription.RoleAliasDescription] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'roleAliasDescription' }})
+    role_alias_description: Optional[RoleAliasDescription] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('roleAliasDescription') }})
     

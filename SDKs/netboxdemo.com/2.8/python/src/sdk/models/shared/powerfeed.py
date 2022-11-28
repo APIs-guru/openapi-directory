@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import nestedpowerpanel
-from . import nestedrack
+from sdk import utils
+from . import *
 
 class PowerFeedPhaseLabelEnum(str, Enum):
     SINGLE_PHASE = "Single phase"
@@ -19,8 +20,8 @@ class PowerFeedPhaseValueEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PowerFeedPhase:
-    label: PowerFeedPhaseLabelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
-    value: PowerFeedPhaseValueEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    label: PowerFeedPhaseLabelEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('label') }})
+    value: PowerFeedPhaseValueEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     
 class PowerFeedStatusLabelEnum(str, Enum):
     OFFLINE = "Offline"
@@ -38,8 +39,8 @@ class PowerFeedStatusValueEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PowerFeedStatus:
-    label: PowerFeedStatusLabelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
-    value: PowerFeedStatusValueEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    label: PowerFeedStatusLabelEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('label') }})
+    value: PowerFeedStatusValueEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     
 class PowerFeedSupplyLabelEnum(str, Enum):
     AC = "AC"
@@ -53,8 +54,8 @@ class PowerFeedSupplyValueEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PowerFeedSupply:
-    label: PowerFeedSupplyLabelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
-    value: PowerFeedSupplyValueEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    label: PowerFeedSupplyLabelEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('label') }})
+    value: PowerFeedSupplyValueEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     
 class PowerFeedTypeLabelEnum(str, Enum):
     PRIMARY = "Primary"
@@ -68,27 +69,27 @@ class PowerFeedTypeValueEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PowerFeedType:
-    label: PowerFeedTypeLabelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
-    value: PowerFeedTypeValueEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    label: PowerFeedTypeLabelEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('label') }})
+    value: PowerFeedTypeValueEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     
 
 @dataclass_json
 @dataclass
 class PowerFeed:
-    amperage: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'amperage' }})
-    comments: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'comments' }})
-    created: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    custom_fields: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'custom_fields' }})
-    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    last_updated: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'last_updated', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    max_utilization: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'max_utilization' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    phase: Optional[PowerFeedPhase] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'phase' }})
-    power_panel: nestedpowerpanel.NestedPowerPanel = field(default=None, metadata={'dataclasses_json': { 'field_name': 'power_panel' }})
-    rack: Optional[nestedrack.NestedRack] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rack' }})
-    status: Optional[PowerFeedStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    supply: Optional[PowerFeedSupply] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'supply' }})
-    tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
-    type: Optional[PowerFeedType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    voltage: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'voltage' }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    power_panel: NestedPowerPanel = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('power_panel') }})
+    amperage: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('amperage') }})
+    comments: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('comments') }})
+    created: Optional[date] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('created'), 'encoder': utils.dateisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    custom_fields: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('custom_fields') }})
+    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    last_updated: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('last_updated'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    max_utilization: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('max_utilization') }})
+    phase: Optional[PowerFeedPhase] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('phase') }})
+    rack: Optional[NestedRack] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rack') }})
+    status: Optional[PowerFeedStatus] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    supply: Optional[PowerFeedSupply] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('supply') }})
+    tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
+    type: Optional[PowerFeedType] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    voltage: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('voltage') }})
     

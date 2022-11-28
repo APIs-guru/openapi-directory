@@ -1,5 +1,7 @@
 package shared
 
+// CelebrityDetail
+// Information about a recognized celebrity.
 type CelebrityDetail struct {
 	BoundingBox *BoundingBox `json:"BoundingBox,omitempty"`
 	Confidence  *float32     `json:"Confidence,omitempty"`

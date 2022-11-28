@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ExperimentTemplateTargetFilter } from "./experimenttemplatetargetfilter";
 // ExperimentTemplateTarget
 /**
  * Describes a target for an experiment template.
@@ -34,23 +34,23 @@ var ExperimentTemplateTarget = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=filters", elemType: shared.ExperimentTemplateTargetFilter }),
+        SpeakeasyMetadata({ data: "json, name=filters", elemType: ExperimentTemplateTargetFilter }),
         __metadata("design:type", Array)
     ], ExperimentTemplateTarget.prototype, "filters", void 0);
     __decorate([
-        Metadata({ data: "json, name=resourceArns" }),
+        SpeakeasyMetadata({ data: "json, name=resourceArns" }),
         __metadata("design:type", Array)
     ], ExperimentTemplateTarget.prototype, "resourceArns", void 0);
     __decorate([
-        Metadata({ data: "json, name=resourceTags" }),
+        SpeakeasyMetadata({ data: "json, name=resourceTags" }),
         __metadata("design:type", Map)
     ], ExperimentTemplateTarget.prototype, "resourceTags", void 0);
     __decorate([
-        Metadata({ data: "json, name=resourceType" }),
+        SpeakeasyMetadata({ data: "json, name=resourceType" }),
         __metadata("design:type", String)
     ], ExperimentTemplateTarget.prototype, "resourceType", void 0);
     __decorate([
-        Metadata({ data: "json, name=selectionMode" }),
+        SpeakeasyMetadata({ data: "json, name=selectionMode" }),
         __metadata("design:type", String)
     ], ExperimentTemplateTarget.prototype, "selectionMode", void 0);
     return ExperimentTemplateTarget;

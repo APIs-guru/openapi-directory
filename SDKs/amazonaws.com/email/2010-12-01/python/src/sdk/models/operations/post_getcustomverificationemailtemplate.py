@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostGetCustomVerificationEmailTemplateActionEnum(str, Enum):
     GET_CUSTOM_VERIFICATION_EMAIL_TEMPLATE = "GetCustomVerificationEmailTemplate"
@@ -10,8 +14,8 @@ class PostGetCustomVerificationEmailTemplateVersionEnum(str, Enum):
 
 @dataclass
 class PostGetCustomVerificationEmailTemplateQueryParams:
-    action: PostGetCustomVerificationEmailTemplateActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostGetCustomVerificationEmailTemplateVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostGetCustomVerificationEmailTemplateActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostGetCustomVerificationEmailTemplateVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostGetCustomVerificationEmailTemplateHeaders:
 
 @dataclass
 class PostGetCustomVerificationEmailTemplateRequest:
-    query_params: PostGetCustomVerificationEmailTemplateQueryParams = field(default=None)
-    headers: PostGetCustomVerificationEmailTemplateHeaders = field(default=None)
+    headers: PostGetCustomVerificationEmailTemplateHeaders = field()
+    query_params: PostGetCustomVerificationEmailTemplateQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostGetCustomVerificationEmailTemplateResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

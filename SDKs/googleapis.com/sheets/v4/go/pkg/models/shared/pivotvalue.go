@@ -29,6 +29,8 @@ const (
 	PivotValueSummarizeFunctionEnumCustom                                PivotValueSummarizeFunctionEnum = "CUSTOM"
 )
 
+// PivotValue
+// The definition of how a value in a pivot table should be calculated.
 type PivotValue struct {
 	CalculatedDisplayType     *PivotValueCalculatedDisplayTypeEnum `json:"calculatedDisplayType,omitempty"`
 	DataSourceColumnReference *DataSourceColumnReference           `json:"dataSourceColumnReference,omitempty"`

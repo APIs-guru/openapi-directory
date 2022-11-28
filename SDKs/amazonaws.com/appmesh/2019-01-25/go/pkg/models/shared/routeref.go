@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// RouteRef
+// An object that represents a route returned by a list operation.
 type RouteRef struct {
 	Arn               string    `json:"arn"`
 	CreatedAt         time.Time `json:"createdAt"`

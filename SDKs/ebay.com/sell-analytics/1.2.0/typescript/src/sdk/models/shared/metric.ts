@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MetricBenchmark } from "./metricbenchmark";
 import { MetricDistribution } from "./metricdistribution";
+
 
 
 // Metric
@@ -9,15 +9,15 @@ import { MetricDistribution } from "./metricdistribution";
  * This complex data type defines the details of the customer service metric and benchmark data related to the associated dimension.
 **/
 export class Metric extends SpeakeasyBase {
-  @Metadata({ data: "json, name=benchmark" })
+  @SpeakeasyMetadata({ data: "json, name=benchmark" })
   benchmark?: MetricBenchmark;
 
-  @Metadata({ data: "json, name=distributions", elemType: shared.MetricDistribution })
+  @SpeakeasyMetadata({ data: "json, name=distributions", elemType: MetricDistribution })
   distributions?: MetricDistribution[];
 
-  @Metadata({ data: "json, name=metricKey" })
+  @SpeakeasyMetadata({ data: "json, name=metricKey" })
   metricKey?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }

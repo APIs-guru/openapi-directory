@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PeeredVpc } from "./peeredvpc";
+
 
 
 // Egress
@@ -7,6 +8,6 @@ import { PeeredVpc } from "./peeredvpc";
  * The details of the egress info. One of the following options should be set.
 **/
 export class Egress extends SpeakeasyBase {
-  @Metadata({ data: "json, name=peeredVpc" })
+  @SpeakeasyMetadata({ data: "json, name=peeredVpc" })
   peeredVpc?: PeeredVpc;
 }

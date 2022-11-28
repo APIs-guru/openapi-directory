@@ -8,6 +8,8 @@ const (
 	StandardHl7ConfigurationPhoneNumberFormattingEnumAreaLocalInComponentOne  StandardHl7ConfigurationPhoneNumberFormattingEnum = "AREA_LOCAL_IN_COMPONENT_ONE"
 )
 
+// StandardHl7Configuration
+// A standard HL7 configuration
 type StandardHl7Configuration struct {
 	ConvertTimestampToDateTime *string                                            `json:"convertTimestampToDateTime,omitempty"`
 	DefaultAoeToUnknown        *bool                                              `json:"defaultAoeToUnknown,omitempty"`

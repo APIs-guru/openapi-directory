@@ -1,16 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Version } from "./version";
 import { GrafeasV1FileLocation } from "./grafeasv1filelocation";
-import { Version } from "./version";
+
 
 export enum PackageIssueEffectiveSeverityEnum {
-    SeverityUnspecified = "SEVERITY_UNSPECIFIED"
-,    Minimal = "MINIMAL"
-,    Low = "LOW"
-,    Medium = "MEDIUM"
-,    High = "HIGH"
-,    Critical = "CRITICAL"
+    SeverityUnspecified = "SEVERITY_UNSPECIFIED",
+    Minimal = "MINIMAL",
+    Low = "LOW",
+    Medium = "MEDIUM",
+    High = "HIGH",
+    Critical = "CRITICAL"
 }
 
 
@@ -19,33 +18,33 @@ export enum PackageIssueEffectiveSeverityEnum {
  * A detail for a distro and package this vulnerability occurrence was found in and its associated fix (if one is available).
 **/
 export class PackageIssue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=affectedCpeUri" })
+  @SpeakeasyMetadata({ data: "json, name=affectedCpeUri" })
   affectedCpeUri?: string;
 
-  @Metadata({ data: "json, name=affectedPackage" })
+  @SpeakeasyMetadata({ data: "json, name=affectedPackage" })
   affectedPackage?: string;
 
-  @Metadata({ data: "json, name=affectedVersion" })
+  @SpeakeasyMetadata({ data: "json, name=affectedVersion" })
   affectedVersion?: Version;
 
-  @Metadata({ data: "json, name=effectiveSeverity" })
+  @SpeakeasyMetadata({ data: "json, name=effectiveSeverity" })
   effectiveSeverity?: PackageIssueEffectiveSeverityEnum;
 
-  @Metadata({ data: "json, name=fileLocation", elemType: shared.GrafeasV1FileLocation })
+  @SpeakeasyMetadata({ data: "json, name=fileLocation", elemType: GrafeasV1FileLocation })
   fileLocation?: GrafeasV1FileLocation[];
 
-  @Metadata({ data: "json, name=fixAvailable" })
+  @SpeakeasyMetadata({ data: "json, name=fixAvailable" })
   fixAvailable?: boolean;
 
-  @Metadata({ data: "json, name=fixedCpeUri" })
+  @SpeakeasyMetadata({ data: "json, name=fixedCpeUri" })
   fixedCpeUri?: string;
 
-  @Metadata({ data: "json, name=fixedPackage" })
+  @SpeakeasyMetadata({ data: "json, name=fixedPackage" })
   fixedPackage?: string;
 
-  @Metadata({ data: "json, name=fixedVersion" })
+  @SpeakeasyMetadata({ data: "json, name=fixedVersion" })
   fixedVersion?: Version;
 
-  @Metadata({ data: "json, name=packageType" })
+  @SpeakeasyMetadata({ data: "json, name=packageType" })
   packageType?: string;
 }

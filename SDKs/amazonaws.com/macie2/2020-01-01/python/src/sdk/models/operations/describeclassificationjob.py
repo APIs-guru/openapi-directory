@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class DescribeClassificationJobPathParams:
-    job_id: str = field(default=None, metadata={'path_param': { 'field_name': 'jobId', 'style': 'simple', 'explode': False }})
+    job_id: str = field(metadata={'path_param': { 'field_name': 'jobId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,20 +24,20 @@ class DescribeClassificationJobHeaders:
 
 @dataclass
 class DescribeClassificationJobRequest:
-    path_params: DescribeClassificationJobPathParams = field(default=None)
-    headers: DescribeClassificationJobHeaders = field(default=None)
+    headers: DescribeClassificationJobHeaders = field()
+    path_params: DescribeClassificationJobPathParams = field()
     
 
 @dataclass
 class DescribeClassificationJobResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     describe_classification_job_response: Optional[shared.DescribeClassificationJobResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_quota_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

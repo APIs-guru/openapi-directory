@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowCxV3TransitionRoute } from "./googleclouddialogflowcxv3transitionroute";
+
 
 
 // GoogleCloudDialogflowCxV3TransitionRouteGroupCoverageCoverageTransition
@@ -7,9 +8,9 @@ import { GoogleCloudDialogflowCxV3TransitionRoute } from "./googleclouddialogflo
  * A transition coverage in a transition route group.
 **/
 export class GoogleCloudDialogflowCxV3TransitionRouteGroupCoverageCoverageTransition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=covered" })
+  @SpeakeasyMetadata({ data: "json, name=covered" })
   covered?: boolean;
 
-  @Metadata({ data: "json, name=transitionRoute" })
+  @SpeakeasyMetadata({ data: "json, name=transitionRoute" })
   transitionRoute?: GoogleCloudDialogflowCxV3TransitionRoute;
 }

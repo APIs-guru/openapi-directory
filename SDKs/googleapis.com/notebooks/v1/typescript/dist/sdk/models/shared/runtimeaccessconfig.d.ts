@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum RuntimeAccessConfigAccessTypeEnum {
     RuntimeAccessTypeUnspecified = "RUNTIME_ACCESS_TYPE_UNSPECIFIED",
     SingleUser = "SINGLE_USER",
@@ -10,5 +10,12 @@ export declare enum RuntimeAccessConfigAccessTypeEnum {
 export declare class RuntimeAccessConfig extends SpeakeasyBase {
     accessType?: RuntimeAccessConfigAccessTypeEnum;
     proxyUri?: string;
+    runtimeOwner?: string;
+}
+/**
+ * Specifies the login configuration for Runtime
+**/
+export declare class RuntimeAccessConfigInput extends SpeakeasyBase {
+    accessType?: RuntimeAccessConfigAccessTypeEnum;
     runtimeOwner?: string;
 }

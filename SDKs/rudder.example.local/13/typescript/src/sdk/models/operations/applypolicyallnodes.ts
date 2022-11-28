@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ApplyPolicyAllNodes200ApplicationJsonActionEnum {
     ApplyPolicyAllNodes = "applyPolicyAllNodes"
@@ -6,41 +7,41 @@ export enum ApplyPolicyAllNodes200ApplicationJsonActionEnum {
 
 
 export class ApplyPolicyAllNodes200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hostname" })
+  @SpeakeasyMetadata({ data: "json, name=hostname" })
   hostname?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result?: string;
 }
 
 export enum ApplyPolicyAllNodes200ApplicationJsonResultEnum {
-    Success = "success"
-,    Error = "error"
+    Success = "success",
+    Error = "error"
 }
 
 
 export class ApplyPolicyAllNodes200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: ApplyPolicyAllNodes200ApplicationJsonActionEnum;
 
-  @Metadata({ data: "json, name=data", elemType: operations.ApplyPolicyAllNodes200ApplicationJsonData })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: ApplyPolicyAllNodes200ApplicationJsonData })
   data: ApplyPolicyAllNodes200ApplicationJsonData[];
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result: ApplyPolicyAllNodes200ApplicationJsonResultEnum;
 }
 
 
 export class ApplyPolicyAllNodesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   applyPolicyAllNodes200ApplicationJsonObject?: ApplyPolicyAllNodes200ApplicationJson;
 }

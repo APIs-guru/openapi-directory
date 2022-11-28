@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceLocation } from "./resourcelocation";
 import { ResourceTypeEnum } from "./resourcetypeenum";
 import { DiskSnapshotStateEnum } from "./disksnapshotstateenum";
 import { Tag } from "./tag";
+
 
 
 // DiskSnapshot
@@ -11,48 +11,48 @@ import { Tag } from "./tag";
  * Describes a block storage disk snapshot.
 **/
 export class DiskSnapshot extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=fromDiskArn" })
+  @SpeakeasyMetadata({ data: "json, name=fromDiskArn" })
   fromDiskArn?: string;
 
-  @Metadata({ data: "json, name=fromDiskName" })
+  @SpeakeasyMetadata({ data: "json, name=fromDiskName" })
   fromDiskName?: string;
 
-  @Metadata({ data: "json, name=fromInstanceArn" })
+  @SpeakeasyMetadata({ data: "json, name=fromInstanceArn" })
   fromInstanceArn?: string;
 
-  @Metadata({ data: "json, name=fromInstanceName" })
+  @SpeakeasyMetadata({ data: "json, name=fromInstanceName" })
   fromInstanceName?: string;
 
-  @Metadata({ data: "json, name=isFromAutoSnapshot" })
+  @SpeakeasyMetadata({ data: "json, name=isFromAutoSnapshot" })
   isFromAutoSnapshot?: boolean;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: ResourceLocation;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=progress" })
+  @SpeakeasyMetadata({ data: "json, name=progress" })
   progress?: string;
 
-  @Metadata({ data: "json, name=resourceType" })
+  @SpeakeasyMetadata({ data: "json, name=resourceType" })
   resourceType?: ResourceTypeEnum;
 
-  @Metadata({ data: "json, name=sizeInGb" })
+  @SpeakeasyMetadata({ data: "json, name=sizeInGb" })
   sizeInGb?: number;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: DiskSnapshotStateEnum;
 
-  @Metadata({ data: "json, name=supportCode" })
+  @SpeakeasyMetadata({ data: "json, name=supportCode" })
   supportCode?: string;
 
-  @Metadata({ data: "json, name=tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=tags", elemType: Tag })
   tags?: Tag[];
 }

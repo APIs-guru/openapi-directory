@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SimulationJobStatusEnum } from "./simulationjobstatusenum";
 // SimulationJobSummary
 /**
@@ -34,31 +34,31 @@ var SimulationJobSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=arn" }),
+        SpeakeasyMetadata({ data: "json, name=arn" }),
         __metadata("design:type", String)
     ], SimulationJobSummary.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=dataSourceNames" }),
+        SpeakeasyMetadata({ data: "json, name=dataSourceNames" }),
         __metadata("design:type", Array)
     ], SimulationJobSummary.prototype, "dataSourceNames", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastUpdatedAt" }),
+        SpeakeasyMetadata({ data: "json, name=lastUpdatedAt" }),
         __metadata("design:type", Date)
     ], SimulationJobSummary.prototype, "lastUpdatedAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], SimulationJobSummary.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=robotApplicationNames" }),
+        SpeakeasyMetadata({ data: "json, name=robotApplicationNames" }),
         __metadata("design:type", Array)
     ], SimulationJobSummary.prototype, "robotApplicationNames", void 0);
     __decorate([
-        Metadata({ data: "json, name=simulationApplicationNames" }),
+        SpeakeasyMetadata({ data: "json, name=simulationApplicationNames" }),
         __metadata("design:type", Array)
     ], SimulationJobSummary.prototype, "simulationApplicationNames", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], SimulationJobSummary.prototype, "status", void 0);
     return SimulationJobSummary;

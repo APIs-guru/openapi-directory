@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetContentRatingsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     content_ratings: Optional[List[shared.ContentRating]] = field(default=None)
     

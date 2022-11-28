@@ -1,15 +1,18 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import resourceutilizationreport
-from . import cputime
-from . import meminfo
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ResourceUtilizationReport:
-    containers: Optional[dict[str, resourceutilizationreport.ResourceUtilizationReport]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'containers' }})
-    cpu_time: Optional[List[cputime.CPUTime]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cpuTime' }})
-    memory_info: Optional[List[meminfo.MemInfo]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'memoryInfo' }})
+    r"""ResourceUtilizationReport
+    Worker metrics exported from workers. This contains resource utilization metrics accumulated from a variety of sources. For more information, see go/df-resource-signals.
+    """
+    
+    containers: Optional[dict[str, ResourceUtilizationReport]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('containers') }})
+    cpu_time: Optional[List[CPUTime]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cpuTime') }})
+    memory_info: Optional[List[MemInfo]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('memoryInfo') }})
     

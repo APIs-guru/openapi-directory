@@ -10,6 +10,8 @@ const (
 	TrackReleaseStatusEnumCompleted         TrackReleaseStatusEnum = "completed"
 )
 
+// TrackRelease
+// A release within a track.
 type TrackRelease struct {
 	CountryTargeting    *CountryTargeting       `json:"countryTargeting,omitempty"`
 	InAppUpdatePriority *int32                  `json:"inAppUpdatePriority,omitempty"`

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AdditionalRate
@@ -6,39 +7,39 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The additional pay rate model
 **/
 export class AdditionalRate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=changeReason" })
+  @SpeakeasyMetadata({ data: "json, name=changeReason" })
   changeReason?: string;
 
-  @Metadata({ data: "json, name=costCenter1" })
+  @SpeakeasyMetadata({ data: "json, name=costCenter1" })
   costCenter1?: string;
 
-  @Metadata({ data: "json, name=costCenter2" })
+  @SpeakeasyMetadata({ data: "json, name=costCenter2" })
   costCenter2?: string;
 
-  @Metadata({ data: "json, name=costCenter3" })
+  @SpeakeasyMetadata({ data: "json, name=costCenter3" })
   costCenter3?: string;
 
-  @Metadata({ data: "json, name=effectiveDate" })
+  @SpeakeasyMetadata({ data: "json, name=effectiveDate" })
   effectiveDate?: string;
 
-  @Metadata({ data: "json, name=endCheckDate" })
+  @SpeakeasyMetadata({ data: "json, name=endCheckDate" })
   endCheckDate?: string;
 
-  @Metadata({ data: "json, name=job" })
+  @SpeakeasyMetadata({ data: "json, name=job" })
   job?: string;
 
-  @Metadata({ data: "json, name=rate" })
+  @SpeakeasyMetadata({ data: "json, name=rate" })
   rate?: number;
 
-  @Metadata({ data: "json, name=rateCode" })
+  @SpeakeasyMetadata({ data: "json, name=rateCode" })
   rateCode?: string;
 
-  @Metadata({ data: "json, name=rateNotes" })
+  @SpeakeasyMetadata({ data: "json, name=rateNotes" })
   rateNotes?: string;
 
-  @Metadata({ data: "json, name=ratePer" })
+  @SpeakeasyMetadata({ data: "json, name=ratePer" })
   ratePer?: string;
 
-  @Metadata({ data: "json, name=shift" })
+  @SpeakeasyMetadata({ data: "json, name=shift" })
   shift?: string;
 }

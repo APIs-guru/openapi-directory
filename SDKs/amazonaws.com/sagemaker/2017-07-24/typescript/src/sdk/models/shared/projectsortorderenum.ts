@@ -1,6 +1,7 @@
 
 
+
 export enum ProjectSortOrderEnum {
-    Ascending = "Ascending"
-,    Descending = "Descending"
+    Ascending = "Ascending",
+    Descending = "Descending"
 }

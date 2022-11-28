@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostOfferingsOfferingIdUsersMarkerEmailMarksPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=markerEmail" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=markerEmail" })
   markerEmail: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=offeringId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=offeringId" })
   offeringId: string;
 }
 
 
 export class PostOfferingsOfferingIdUsersMarkerEmailMarksRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PostOfferingsOfferingIdUsersMarkerEmailMarksPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: string[];
 }
 
 
 export class PostOfferingsOfferingIdUsersMarkerEmailMarksResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata({ elemType: shared.OfferingUser })
+  @SpeakeasyMetadata({ elemType: shared.OfferingUser })
   offeringUsers?: shared.OfferingUser[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

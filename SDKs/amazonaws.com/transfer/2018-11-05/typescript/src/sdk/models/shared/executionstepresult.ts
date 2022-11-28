@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ExecutionError } from "./executionerror";
 import { WorkflowStepTypeEnum } from "./workflowsteptypeenum";
+
 
 
 // ExecutionStepResult
@@ -8,12 +9,12 @@ import { WorkflowStepTypeEnum } from "./workflowsteptypeenum";
  * Specifies the following details for the step: error (if any), outputs (if any), and the step type.
 **/
 export class ExecutionStepResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Error" })
+  @SpeakeasyMetadata({ data: "json, name=Error" })
   error?: ExecutionError;
 
-  @Metadata({ data: "json, name=Outputs" })
+  @SpeakeasyMetadata({ data: "json, name=Outputs" })
   outputs?: string;
 
-  @Metadata({ data: "json, name=StepType" })
+  @SpeakeasyMetadata({ data: "json, name=StepType" })
   stepType?: WorkflowStepTypeEnum;
 }

@@ -22,8 +22,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { InputUpdate } from "./inputupdate";
+import { OutputUpdate } from "./outputupdate";
+import { ReferenceDataSourceUpdate } from "./referencedatasourceupdate";
 // SqlApplicationConfigurationUpdate
 /**
  * Describes updates to the input streams, destination streams, and reference data sources for a SQL-based Kinesis Data Analytics application.
@@ -34,15 +36,15 @@ var SqlApplicationConfigurationUpdate = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=InputUpdates", elemType: shared.InputUpdate }),
+        SpeakeasyMetadata({ data: "json, name=InputUpdates", elemType: InputUpdate }),
         __metadata("design:type", Array)
     ], SqlApplicationConfigurationUpdate.prototype, "inputUpdates", void 0);
     __decorate([
-        Metadata({ data: "json, name=OutputUpdates", elemType: shared.OutputUpdate }),
+        SpeakeasyMetadata({ data: "json, name=OutputUpdates", elemType: OutputUpdate }),
         __metadata("design:type", Array)
     ], SqlApplicationConfigurationUpdate.prototype, "outputUpdates", void 0);
     __decorate([
-        Metadata({ data: "json, name=ReferenceDataSourceUpdates", elemType: shared.ReferenceDataSourceUpdate }),
+        SpeakeasyMetadata({ data: "json, name=ReferenceDataSourceUpdates", elemType: ReferenceDataSourceUpdate }),
         __metadata("design:type", Array)
     ], SqlApplicationConfigurationUpdate.prototype, "referenceDataSourceUpdates", void 0);
     return SqlApplicationConfigurationUpdate;

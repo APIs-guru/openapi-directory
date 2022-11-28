@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApplicationStateEnum } from "./applicationstateenum";
 
 
+
 export class DescribeApplicationResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=applicationArn" })
+  @SpeakeasyMetadata({ data: "json, name=applicationArn" })
   applicationArn: string;
 
-  @Metadata({ data: "json, name=applicationCreationDate" })
+  @SpeakeasyMetadata({ data: "json, name=applicationCreationDate" })
   applicationCreationDate: number;
 
-  @Metadata({ data: "json, name=applicationDescription" })
+  @SpeakeasyMetadata({ data: "json, name=applicationDescription" })
   applicationDescription?: string;
 
-  @Metadata({ data: "json, name=applicationId" })
+  @SpeakeasyMetadata({ data: "json, name=applicationId" })
   applicationId: string;
 
-  @Metadata({ data: "json, name=applicationLastUpdateDate" })
+  @SpeakeasyMetadata({ data: "json, name=applicationLastUpdateDate" })
   applicationLastUpdateDate: number;
 
-  @Metadata({ data: "json, name=applicationName" })
+  @SpeakeasyMetadata({ data: "json, name=applicationName" })
   applicationName: string;
 
-  @Metadata({ data: "json, name=applicationState" })
+  @SpeakeasyMetadata({ data: "json, name=applicationState" })
   applicationState: ApplicationStateEnum;
 
-  @Metadata({ data: "json, name=applicationUrl" })
+  @SpeakeasyMetadata({ data: "json, name=applicationUrl" })
   applicationUrl: string;
 
-  @Metadata({ data: "json, name=errorMessage" })
+  @SpeakeasyMetadata({ data: "json, name=errorMessage" })
   errorMessage?: string;
 
-  @Metadata({ data: "json, name=roleArn" })
+  @SpeakeasyMetadata({ data: "json, name=roleArn" })
   roleArn: string;
 
-  @Metadata({ data: "json, name=ssoClientId" })
+  @SpeakeasyMetadata({ data: "json, name=ssoClientId" })
   ssoClientId?: string;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 }

@@ -9,6 +9,8 @@ from .collectionresponseactionfunctionidentifiernopaging import *
 from .collectionresponseactionrevisionforwardpaging import *
 from .collectionresponseextensionactiondefinitionforwardpaging import *
 from .conditionalsinglefielddependency import *
+from .error import *
+from .errordetail import *
 from .extensionactiondefinition import *
 from .extensionactiondefinitioninput import *
 from .extensionactiondefinitionpatch import *

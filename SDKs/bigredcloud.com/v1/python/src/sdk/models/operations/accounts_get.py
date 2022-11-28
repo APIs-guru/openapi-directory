@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class AccountsGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     page_result_account_dto_: Optional[shared.PageResultAccountDto] = field(default=None)
-    status_code: int = field(default=None)
     

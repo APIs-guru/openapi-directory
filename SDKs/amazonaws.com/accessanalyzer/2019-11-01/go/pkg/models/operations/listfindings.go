@@ -19,6 +19,8 @@ type ListFindingsHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// ListFindingsRequestBodySort
+// The criteria used to sort.
 type ListFindingsRequestBodySort struct {
 	AttributeName *string             `json:"attributeName,omitempty"`
 	OrderBy       *shared.OrderByEnum `json:"orderBy,omitempty"`

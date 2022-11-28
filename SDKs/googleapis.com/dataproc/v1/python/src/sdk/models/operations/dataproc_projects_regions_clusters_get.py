@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DataprocProjectsRegionsClustersGetPathParams:
-    cluster_name: str = field(default=None, metadata={'path_param': { 'field_name': 'clusterName', 'style': 'simple', 'explode': False }})
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
-    region: str = field(default=None, metadata={'path_param': { 'field_name': 'region', 'style': 'simple', 'explode': False }})
+    cluster_name: str = field(metadata={'path_param': { 'field_name': 'clusterName', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
+    region: str = field(metadata={'path_param': { 'field_name': 'region', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class DataprocProjectsRegionsClustersGetQueryParams:
 
 @dataclass
 class DataprocProjectsRegionsClustersGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DataprocProjectsRegionsClustersGetRequest:
-    path_params: DataprocProjectsRegionsClustersGetPathParams = field(default=None)
-    query_params: DataprocProjectsRegionsClustersGetQueryParams = field(default=None)
-    security: DataprocProjectsRegionsClustersGetSecurity = field(default=None)
+    path_params: DataprocProjectsRegionsClustersGetPathParams = field()
+    query_params: DataprocProjectsRegionsClustersGetQueryParams = field()
+    security: DataprocProjectsRegionsClustersGetSecurity = field()
     
 
 @dataclass
 class DataprocProjectsRegionsClustersGetResponse:
+    content_type: str = field()
+    status_code: int = field()
     cluster: Optional[shared.Cluster] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

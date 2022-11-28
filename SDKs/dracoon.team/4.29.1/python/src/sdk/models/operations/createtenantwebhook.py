@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
@@ -11,14 +14,14 @@ class CreateTenantWebhookHeaders:
 
 @dataclass
 class CreateTenantWebhookRequest:
-    headers: CreateTenantWebhookHeaders = field(default=None)
-    request: shared.CreateWebhookRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateTenantWebhookHeaders = field()
+    request: shared.CreateWebhookRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateTenantWebhookResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     webhook: Optional[shared.Webhook] = field(default=None)
     

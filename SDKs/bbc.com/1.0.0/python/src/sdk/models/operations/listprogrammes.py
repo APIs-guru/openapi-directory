@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class ListProgrammesAudioDescribedEnum(str, Enum):
@@ -136,14 +137,14 @@ class ListProgrammesQueryParams:
 
 @dataclass
 class ListProgrammesRequest:
-    query_params: ListProgrammesQueryParams = field(default=None)
+    query_params: ListProgrammesQueryParams = field()
     
 
 @dataclass
 class ListProgrammesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     error_model: Optional[shared.ErrorModel] = field(default=None)
-    status_code: int = field(default=None)
     nitro: Optional[Any] = field(default=None)
     

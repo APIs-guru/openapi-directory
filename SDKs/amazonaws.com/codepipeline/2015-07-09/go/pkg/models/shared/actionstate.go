@@ -1,5 +1,7 @@
 package shared
 
+// ActionState
+// Represents information about the state of an action.
 type ActionState struct {
 	ActionName      *string          `json:"actionName,omitempty"`
 	CurrentRevision *ActionRevision  `json:"currentRevision,omitempty"`

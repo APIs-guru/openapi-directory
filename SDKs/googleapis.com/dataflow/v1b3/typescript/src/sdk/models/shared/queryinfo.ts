@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum QueryInfoQueryPropertyEnum {
-    QueryPropertyUnspecified = "QUERY_PROPERTY_UNSPECIFIED"
-,    HasUnboundedSource = "HAS_UNBOUNDED_SOURCE"
+    QueryPropertyUnspecified = "QUERY_PROPERTY_UNSPECIFIED",
+    HasUnboundedSource = "HAS_UNBOUNDED_SOURCE"
 }
 
 
@@ -11,6 +12,6 @@ export enum QueryInfoQueryPropertyEnum {
  * Information about a validated query.
 **/
 export class QueryInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=queryProperty" })
+  @SpeakeasyMetadata({ data: "json, name=queryProperty" })
   queryProperty?: QueryInfoQueryPropertyEnum[];
 }

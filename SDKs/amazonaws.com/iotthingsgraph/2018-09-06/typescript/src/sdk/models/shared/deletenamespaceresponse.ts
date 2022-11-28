@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteNamespaceResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=namespaceArn" })
+  @SpeakeasyMetadata({ data: "json, name=namespaceArn" })
   namespaceArn?: string;
 
-  @Metadata({ data: "json, name=namespaceName" })
+  @SpeakeasyMetadata({ data: "json, name=namespaceName" })
   namespaceName?: string;
 }

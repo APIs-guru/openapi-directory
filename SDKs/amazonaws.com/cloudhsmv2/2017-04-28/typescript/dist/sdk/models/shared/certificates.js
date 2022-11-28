@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Certificates
 /**
  * Contains one or more certificates or a certificate signing request (CSR).
@@ -33,23 +33,23 @@ var Certificates = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AwsHardwareCertificate" }),
+        SpeakeasyMetadata({ data: "json, name=AwsHardwareCertificate" }),
         __metadata("design:type", String)
     ], Certificates.prototype, "awsHardwareCertificate", void 0);
     __decorate([
-        Metadata({ data: "json, name=ClusterCertificate" }),
+        SpeakeasyMetadata({ data: "json, name=ClusterCertificate" }),
         __metadata("design:type", String)
     ], Certificates.prototype, "clusterCertificate", void 0);
     __decorate([
-        Metadata({ data: "json, name=ClusterCsr" }),
+        SpeakeasyMetadata({ data: "json, name=ClusterCsr" }),
         __metadata("design:type", String)
     ], Certificates.prototype, "clusterCsr", void 0);
     __decorate([
-        Metadata({ data: "json, name=HsmCertificate" }),
+        SpeakeasyMetadata({ data: "json, name=HsmCertificate" }),
         __metadata("design:type", String)
     ], Certificates.prototype, "hsmCertificate", void 0);
     __decorate([
-        Metadata({ data: "json, name=ManufacturerHardwareCertificate" }),
+        SpeakeasyMetadata({ data: "json, name=ManufacturerHardwareCertificate" }),
         __metadata("design:type", String)
     ], Certificates.prototype, "manufacturerHardwareCertificate", void 0);
     return Certificates;

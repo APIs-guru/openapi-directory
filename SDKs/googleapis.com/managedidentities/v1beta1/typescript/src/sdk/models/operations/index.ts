@@ -5,6 +5,7 @@ export * from "./managedidentitiesprojectslocationsglobaldomainscheckmigrationpe
 export * from "./managedidentitiesprojectslocationsglobaldomainscreate";
 export * from "./managedidentitiesprojectslocationsglobaldomainsdetachtrust";
 export * from "./managedidentitiesprojectslocationsglobaldomainsdisablemigration";
+export * from "./managedidentitiesprojectslocationsglobaldomainsdomainjoinmachine";
 export * from "./managedidentitiesprojectslocationsglobaldomainsenablemigration";
 export * from "./managedidentitiesprojectslocationsglobaldomainsextendschema";
 export * from "./managedidentitiesprojectslocationsglobaldomainsgetldapssettings";

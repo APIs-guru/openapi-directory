@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeleteFileEntry } from "./deletefileentry";
 import { ReplaceContentEntry } from "./replacecontententry";
 import { SetFileModeEntry } from "./setfilemodeentry";
+
 
 
 // ConflictResolution
@@ -10,12 +10,12 @@ import { SetFileModeEntry } from "./setfilemodeentry";
  * If AUTOMERGE is the conflict resolution strategy, a list of inputs to use when resolving conflicts during a merge.
 **/
 export class ConflictResolution extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deleteFiles", elemType: shared.DeleteFileEntry })
+  @SpeakeasyMetadata({ data: "json, name=deleteFiles", elemType: DeleteFileEntry })
   deleteFiles?: DeleteFileEntry[];
 
-  @Metadata({ data: "json, name=replaceContents", elemType: shared.ReplaceContentEntry })
+  @SpeakeasyMetadata({ data: "json, name=replaceContents", elemType: ReplaceContentEntry })
   replaceContents?: ReplaceContentEntry[];
 
-  @Metadata({ data: "json, name=setFileModes", elemType: shared.SetFileModeEntry })
+  @SpeakeasyMetadata({ data: "json, name=setFileModes", elemType: SetFileModeEntry })
   setFileModes?: SetFileModeEntry[];
 }

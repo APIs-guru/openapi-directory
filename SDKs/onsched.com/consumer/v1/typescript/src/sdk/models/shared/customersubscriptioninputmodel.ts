@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CustomerSubscriptionInputModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=customerPlanId" })
+  @SpeakeasyMetadata({ data: "json, name=customerPlanId" })
   customerPlanId?: string;
 
-  @Metadata({ data: "json, name=planStart" })
+  @SpeakeasyMetadata({ data: "json, name=planStart" })
   planStart?: Date;
 
-  @Metadata({ data: "json, name=trialPeriodEnd" })
+  @SpeakeasyMetadata({ data: "json, name=trialPeriodEnd" })
   trialPeriodEnd?: Date;
 }

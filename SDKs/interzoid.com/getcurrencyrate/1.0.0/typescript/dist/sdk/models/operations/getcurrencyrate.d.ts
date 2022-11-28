@@ -1,10 +1,7 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class GetcurrencyrateQueryParams extends SpeakeasyBase {
     license: string;
     symbol: string;
-}
-export declare class GetcurrencyrateRequest extends SpeakeasyBase {
-    queryParams: GetcurrencyrateQueryParams;
 }
 export declare class Getcurrencyrate200ApplicationJson extends SpeakeasyBase {
     code?: string;
@@ -13,6 +10,9 @@ export declare class Getcurrencyrate200ApplicationJson extends SpeakeasyBase {
     name?: string;
     rate?: string;
     symbol?: string;
+}
+export declare class GetcurrencyrateRequest extends SpeakeasyBase {
+    queryParams: GetcurrencyrateQueryParams;
 }
 export declare class GetcurrencyrateResponse extends SpeakeasyBase {
     contentType: string;

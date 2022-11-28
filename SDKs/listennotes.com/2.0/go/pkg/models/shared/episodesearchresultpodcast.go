@@ -1,5 +1,7 @@
 package shared
 
+// EpisodeSearchResultPodcast
+// The podcast that this episode belongs to.
 type EpisodeSearchResultPodcast struct {
 	GenreIds              []int64 `json:"genre_ids,omitempty"`
 	ID                    *string `json:"id,omitempty"`

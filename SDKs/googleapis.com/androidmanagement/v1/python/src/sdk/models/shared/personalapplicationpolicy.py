@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class PersonalApplicationPolicyInstallTypeEnum(str, Enum):
     INSTALL_TYPE_UNSPECIFIED = "INSTALL_TYPE_UNSPECIFIED"
@@ -11,6 +13,10 @@ class PersonalApplicationPolicyInstallTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PersonalApplicationPolicy:
-    install_type: Optional[PersonalApplicationPolicyInstallTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'installType' }})
-    package_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'packageName' }})
+    r"""PersonalApplicationPolicy
+    Policies for apps in the personal profile of a company-owned device with a work profile.
+    """
+    
+    install_type: Optional[PersonalApplicationPolicyInstallTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('installType') }})
+    package_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('packageName') }})
     

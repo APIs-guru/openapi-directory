@@ -22,8 +22,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ConnectionBodyParameter } from "./connectionbodyparameter";
+import { ConnectionHeaderParameter } from "./connectionheaderparameter";
+import { ConnectionQueryStringParameter } from "./connectionquerystringparameter";
 // ConnectionHttpParameters
 /**
  * Contains additional parameters for the connection.
@@ -34,15 +36,15 @@ var ConnectionHttpParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=BodyParameters", elemType: shared.ConnectionBodyParameter }),
+        SpeakeasyMetadata({ data: "json, name=BodyParameters", elemType: ConnectionBodyParameter }),
         __metadata("design:type", Array)
     ], ConnectionHttpParameters.prototype, "bodyParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=HeaderParameters", elemType: shared.ConnectionHeaderParameter }),
+        SpeakeasyMetadata({ data: "json, name=HeaderParameters", elemType: ConnectionHeaderParameter }),
         __metadata("design:type", Array)
     ], ConnectionHttpParameters.prototype, "headerParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=QueryStringParameters", elemType: shared.ConnectionQueryStringParameter }),
+        SpeakeasyMetadata({ data: "json, name=QueryStringParameters", elemType: ConnectionQueryStringParameter }),
         __metadata("design:type", Array)
     ], ConnectionHttpParameters.prototype, "queryStringParameters", void 0);
     return ConnectionHttpParameters;

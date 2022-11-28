@@ -22,10 +22,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { AutomationExecution } from "./automationexecution";
 import { ChatChannel } from "./chatchannel";
 import { IncidentRecordSource } from "./incidentrecordsource";
+import { NotificationTargetItem } from "./notificationtargetitem";
 import { IncidentRecordStatusEnum } from "./incidentrecordstatusenum";
 // IncidentRecord
 /**
@@ -37,59 +38,59 @@ var IncidentRecord = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=arn" }),
+        SpeakeasyMetadata({ data: "json, name=arn" }),
         __metadata("design:type", String)
     ], IncidentRecord.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=automationExecutions", elemType: shared.AutomationExecution }),
+        SpeakeasyMetadata({ data: "json, name=automationExecutions", elemType: AutomationExecution }),
         __metadata("design:type", Array)
     ], IncidentRecord.prototype, "automationExecutions", void 0);
     __decorate([
-        Metadata({ data: "json, name=chatChannel" }),
+        SpeakeasyMetadata({ data: "json, name=chatChannel" }),
         __metadata("design:type", ChatChannel)
     ], IncidentRecord.prototype, "chatChannel", void 0);
     __decorate([
-        Metadata({ data: "json, name=creationTime" }),
+        SpeakeasyMetadata({ data: "json, name=creationTime" }),
         __metadata("design:type", Date)
     ], IncidentRecord.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=dedupeString" }),
+        SpeakeasyMetadata({ data: "json, name=dedupeString" }),
         __metadata("design:type", String)
     ], IncidentRecord.prototype, "dedupeString", void 0);
     __decorate([
-        Metadata({ data: "json, name=impact" }),
+        SpeakeasyMetadata({ data: "json, name=impact" }),
         __metadata("design:type", Number)
     ], IncidentRecord.prototype, "impact", void 0);
     __decorate([
-        Metadata({ data: "json, name=incidentRecordSource" }),
+        SpeakeasyMetadata({ data: "json, name=incidentRecordSource" }),
         __metadata("design:type", IncidentRecordSource)
     ], IncidentRecord.prototype, "incidentRecordSource", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastModifiedBy" }),
+        SpeakeasyMetadata({ data: "json, name=lastModifiedBy" }),
         __metadata("design:type", String)
     ], IncidentRecord.prototype, "lastModifiedBy", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastModifiedTime" }),
+        SpeakeasyMetadata({ data: "json, name=lastModifiedTime" }),
         __metadata("design:type", Date)
     ], IncidentRecord.prototype, "lastModifiedTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=notificationTargets", elemType: shared.NotificationTargetItem }),
+        SpeakeasyMetadata({ data: "json, name=notificationTargets", elemType: NotificationTargetItem }),
         __metadata("design:type", Array)
     ], IncidentRecord.prototype, "notificationTargets", void 0);
     __decorate([
-        Metadata({ data: "json, name=resolvedTime" }),
+        SpeakeasyMetadata({ data: "json, name=resolvedTime" }),
         __metadata("design:type", Date)
     ], IncidentRecord.prototype, "resolvedTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], IncidentRecord.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=summary" }),
+        SpeakeasyMetadata({ data: "json, name=summary" }),
         __metadata("design:type", String)
     ], IncidentRecord.prototype, "summary", void 0);
     __decorate([
-        Metadata({ data: "json, name=title" }),
+        SpeakeasyMetadata({ data: "json, name=title" }),
         __metadata("design:type", String)
     ], IncidentRecord.prototype, "title", void 0);
     return IncidentRecord;

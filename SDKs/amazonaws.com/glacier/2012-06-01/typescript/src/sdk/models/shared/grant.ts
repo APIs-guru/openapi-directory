@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Grantee } from "./grantee";
 import { PermissionEnum } from "./permissionenum";
+
 
 
 // Grant
@@ -8,9 +9,9 @@ import { PermissionEnum } from "./permissionenum";
  * Contains information about a grant.
 **/
 export class Grant extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Grantee" })
+  @SpeakeasyMetadata({ data: "json, name=Grantee" })
   grantee?: Grantee;
 
-  @Metadata({ data: "json, name=Permission" })
+  @SpeakeasyMetadata({ data: "json, name=Permission" })
   permission?: PermissionEnum;
 }

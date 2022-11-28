@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RequestImpactStatistics
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Statistics that describe how the incident has impacted a service.
 **/
 export class RequestImpactStatistics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FaultCount" })
+  @SpeakeasyMetadata({ data: "json, name=FaultCount" })
   faultCount?: number;
 
-  @Metadata({ data: "json, name=OkCount" })
+  @SpeakeasyMetadata({ data: "json, name=OkCount" })
   okCount?: number;
 
-  @Metadata({ data: "json, name=TotalCount" })
+  @SpeakeasyMetadata({ data: "json, name=TotalCount" })
   totalCount?: number;
 }

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UnlabelParameterVersionResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=InvalidLabels" })
+  @SpeakeasyMetadata({ data: "json, name=InvalidLabels" })
   invalidLabels?: string[];
 
-  @Metadata({ data: "json, name=RemovedLabels" })
+  @SpeakeasyMetadata({ data: "json, name=RemovedLabels" })
   removedLabels?: string[];
 }

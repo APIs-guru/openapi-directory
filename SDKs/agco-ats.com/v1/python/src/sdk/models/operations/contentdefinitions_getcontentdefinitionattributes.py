@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class ContentDefinitionsGetContentDefinitionAttributesPathParams:
-    content_definition_id: int = field(default=None, metadata={'path_param': { 'field_name': 'contentDefinitionID', 'style': 'simple', 'explode': False }})
+    content_definition_id: int = field(metadata={'path_param': { 'field_name': 'contentDefinitionID', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,14 +17,14 @@ class ContentDefinitionsGetContentDefinitionAttributesQueryParams:
 
 @dataclass
 class ContentDefinitionsGetContentDefinitionAttributesRequest:
-    path_params: ContentDefinitionsGetContentDefinitionAttributesPathParams = field(default=None)
-    query_params: ContentDefinitionsGetContentDefinitionAttributesQueryParams = field(default=None)
+    path_params: ContentDefinitionsGetContentDefinitionAttributesPathParams = field()
+    query_params: ContentDefinitionsGetContentDefinitionAttributesQueryParams = field()
     
 
 @dataclass
 class ContentDefinitionsGetContentDefinitionAttributesResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_models_api_error: Optional[shared.APIModelsAPIError] = field(default=None)
     api_paged_response_content_submission_shared_business_entities_content_definition_attribute_: Optional[shared.APIPagedResponseContentSubmissionSharedBusinessEntitiesContentDefinitionAttribute] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MonitoringAppSpecification
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Container image configuration object for the monitoring job.
 **/
 export class MonitoringAppSpecification extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ContainerArguments" })
+  @SpeakeasyMetadata({ data: "json, name=ContainerArguments" })
   containerArguments?: string[];
 
-  @Metadata({ data: "json, name=ContainerEntrypoint" })
+  @SpeakeasyMetadata({ data: "json, name=ContainerEntrypoint" })
   containerEntrypoint?: string[];
 
-  @Metadata({ data: "json, name=ImageUri" })
+  @SpeakeasyMetadata({ data: "json, name=ImageUri" })
   imageUri: string;
 
-  @Metadata({ data: "json, name=PostAnalyticsProcessorSourceUri" })
+  @SpeakeasyMetadata({ data: "json, name=PostAnalyticsProcessorSourceUri" })
   postAnalyticsProcessorSourceUri?: string;
 
-  @Metadata({ data: "json, name=RecordPreprocessorSourceUri" })
+  @SpeakeasyMetadata({ data: "json, name=RecordPreprocessorSourceUri" })
   recordPreprocessorSourceUri?: string;
 }

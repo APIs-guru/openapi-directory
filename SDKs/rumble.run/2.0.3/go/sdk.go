@@ -11,7 +11,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://console.rumble.run/api/v1.0",
 }
 
@@ -20,9 +20,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -33,27 +37,45 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// CreateAccountCredential - Create a new credential
 func (s *SDK) CreateAccountCredential(ctx context.Context, request operations.CreateAccountCredentialRequest) (*operations.CreateAccountCredentialResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account/credentials"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -71,7 +93,7 @@ func (s *SDK) CreateAccountCredential(ctx context.Context, request operations.Cr
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -103,8 +125,9 @@ func (s *SDK) CreateAccountCredential(ctx context.Context, request operations.Cr
 	return res, nil
 }
 
+// CreateAccountKey - Create a new key
 func (s *SDK) CreateAccountKey(ctx context.Context, request operations.CreateAccountKeyRequest) (*operations.CreateAccountKeyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account/keys"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -122,7 +145,7 @@ func (s *SDK) CreateAccountKey(ctx context.Context, request operations.CreateAcc
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -154,8 +177,9 @@ func (s *SDK) CreateAccountKey(ctx context.Context, request operations.CreateAcc
 	return res, nil
 }
 
+// CreateAccountOrganization - Create a new organization
 func (s *SDK) CreateAccountOrganization(ctx context.Context, request operations.CreateAccountOrganizationRequest) (*operations.CreateAccountOrganizationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account/orgs"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -173,7 +197,7 @@ func (s *SDK) CreateAccountOrganization(ctx context.Context, request operations.
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -205,8 +229,9 @@ func (s *SDK) CreateAccountOrganization(ctx context.Context, request operations.
 	return res, nil
 }
 
+// CreateAccountUser - Create a new user account
 func (s *SDK) CreateAccountUser(ctx context.Context, request operations.CreateAccountUserRequest) (*operations.CreateAccountUserResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account/users"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -224,7 +249,7 @@ func (s *SDK) CreateAccountUser(ctx context.Context, request operations.CreateAc
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -256,8 +281,9 @@ func (s *SDK) CreateAccountUser(ctx context.Context, request operations.CreateAc
 	return res, nil
 }
 
+// CreateAccountUserInvite - Create a new user account and send an email invite
 func (s *SDK) CreateAccountUserInvite(ctx context.Context, request operations.CreateAccountUserInviteRequest) (*operations.CreateAccountUserInviteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account/users/invite"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -275,7 +301,7 @@ func (s *SDK) CreateAccountUserInvite(ctx context.Context, request operations.Cr
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -307,8 +333,9 @@ func (s *SDK) CreateAccountUserInvite(ctx context.Context, request operations.Cr
 	return res, nil
 }
 
+// CreateScan - Create a scan task for a given site
 func (s *SDK) CreateScan(ctx context.Context, request operations.CreateScanRequest) (*operations.CreateScanResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/org/sites/{site_id}/scan", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -323,7 +350,7 @@ func (s *SDK) CreateScan(ctx context.Context, request operations.CreateScanReque
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -357,8 +384,9 @@ func (s *SDK) CreateScan(ctx context.Context, request operations.CreateScanReque
 	return res, nil
 }
 
+// CreateSite - Create a new site
 func (s *SDK) CreateSite(ctx context.Context, request operations.CreateSiteRequest) (*operations.CreateSiteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/org/sites"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -376,7 +404,7 @@ func (s *SDK) CreateSite(ctx context.Context, request operations.CreateSiteReque
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -408,8 +436,9 @@ func (s *SDK) CreateSite(ctx context.Context, request operations.CreateSiteReque
 	return res, nil
 }
 
+// DeleteAccountOrganizationExportToken - Removes the export token from the specified organization
 func (s *SDK) DeleteAccountOrganizationExportToken(ctx context.Context, request operations.DeleteAccountOrganizationExportTokenRequest) (*operations.DeleteAccountOrganizationExportTokenResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/account/orgs/{org_id}/exportToken", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -417,7 +446,7 @@ func (s *SDK) DeleteAccountOrganizationExportToken(ctx context.Context, request 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -439,8 +468,9 @@ func (s *SDK) DeleteAccountOrganizationExportToken(ctx context.Context, request 
 	return res, nil
 }
 
+// ExportAssetsCsv - Asset inventory as CSV
 func (s *SDK) ExportAssetsCsv(ctx context.Context, request operations.ExportAssetsCsvRequest) (*operations.ExportAssetsCsvResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/export/org/assets.csv"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -450,7 +480,7 @@ func (s *SDK) ExportAssetsCsv(ctx context.Context, request operations.ExportAsse
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -481,8 +511,9 @@ func (s *SDK) ExportAssetsCsv(ctx context.Context, request operations.ExportAsse
 	return res, nil
 }
 
+// ExportAssetsCiscoCsv - Cisco serial number and model name export for Cisco Smart Net Total Care Service.
 func (s *SDK) ExportAssetsCiscoCsv(ctx context.Context, request operations.ExportAssetsCiscoCsvRequest) (*operations.ExportAssetsCiscoCsvResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/export/org/assets.cisco.csv"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -492,7 +523,7 @@ func (s *SDK) ExportAssetsCiscoCsv(ctx context.Context, request operations.Expor
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -523,8 +554,9 @@ func (s *SDK) ExportAssetsCiscoCsv(ctx context.Context, request operations.Expor
 	return res, nil
 }
 
+// ExportAssetsJSON - Exports the asset inventory
 func (s *SDK) ExportAssetsJSON(ctx context.Context, request operations.ExportAssetsJSONRequest) (*operations.ExportAssetsJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/export/org/assets.json"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -534,7 +566,7 @@ func (s *SDK) ExportAssetsJSON(ctx context.Context, request operations.ExportAss
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -565,8 +597,9 @@ func (s *SDK) ExportAssetsJSON(ctx context.Context, request operations.ExportAss
 	return res, nil
 }
 
+// ExportAssetsJsonl - Asset inventory as JSON line-delimited
 func (s *SDK) ExportAssetsJsonl(ctx context.Context, request operations.ExportAssetsJsonlRequest) (*operations.ExportAssetsJsonlResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/export/org/assets.jsonl"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -576,7 +609,7 @@ func (s *SDK) ExportAssetsJsonl(ctx context.Context, request operations.ExportAs
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -607,8 +640,9 @@ func (s *SDK) ExportAssetsJsonl(ctx context.Context, request operations.ExportAs
 	return res, nil
 }
 
+// ExportAssetsNmapXML - Asset inventory as Nmap-style XML
 func (s *SDK) ExportAssetsNmapXML(ctx context.Context, request operations.ExportAssetsNmapXMLRequest) (*operations.ExportAssetsNmapXMLResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/export/org/assets.nmap.xml"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -618,7 +652,7 @@ func (s *SDK) ExportAssetsNmapXML(ctx context.Context, request operations.Export
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -649,8 +683,9 @@ func (s *SDK) ExportAssetsNmapXML(ctx context.Context, request operations.Export
 	return res, nil
 }
 
+// ExportEventsJSON - System event log as JSON
 func (s *SDK) ExportEventsJSON(ctx context.Context, request operations.ExportEventsJSONRequest) (*operations.ExportEventsJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account/events.json"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -660,7 +695,7 @@ func (s *SDK) ExportEventsJSON(ctx context.Context, request operations.ExportEve
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -691,8 +726,9 @@ func (s *SDK) ExportEventsJSON(ctx context.Context, request operations.ExportEve
 	return res, nil
 }
 
+// ExportEventsJsonl - System event log as JSON line-delimited
 func (s *SDK) ExportEventsJsonl(ctx context.Context, request operations.ExportEventsJsonlRequest) (*operations.ExportEventsJsonlResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account/events.jsonl"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -702,7 +738,7 @@ func (s *SDK) ExportEventsJsonl(ctx context.Context, request operations.ExportEv
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -733,8 +769,9 @@ func (s *SDK) ExportEventsJsonl(ctx context.Context, request operations.ExportEv
 	return res, nil
 }
 
+// ExportServicesCsv - Service inventory as CSV
 func (s *SDK) ExportServicesCsv(ctx context.Context, request operations.ExportServicesCsvRequest) (*operations.ExportServicesCsvResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/export/org/services.csv"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -744,7 +781,7 @@ func (s *SDK) ExportServicesCsv(ctx context.Context, request operations.ExportSe
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -775,8 +812,9 @@ func (s *SDK) ExportServicesCsv(ctx context.Context, request operations.ExportSe
 	return res, nil
 }
 
+// ExportServicesJSON - Service inventory as JSON
 func (s *SDK) ExportServicesJSON(ctx context.Context, request operations.ExportServicesJSONRequest) (*operations.ExportServicesJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/export/org/services.json"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -786,7 +824,7 @@ func (s *SDK) ExportServicesJSON(ctx context.Context, request operations.ExportS
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -817,8 +855,9 @@ func (s *SDK) ExportServicesJSON(ctx context.Context, request operations.ExportS
 	return res, nil
 }
 
+// ExportServicesJsonl - Service inventory as JSON line-delimited
 func (s *SDK) ExportServicesJsonl(ctx context.Context, request operations.ExportServicesJsonlRequest) (*operations.ExportServicesJsonlResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/export/org/services.jsonl"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -828,7 +867,7 @@ func (s *SDK) ExportServicesJsonl(ctx context.Context, request operations.Export
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -859,8 +898,9 @@ func (s *SDK) ExportServicesJsonl(ctx context.Context, request operations.Export
 	return res, nil
 }
 
+// ExportSitesCsv - Site list as CSV
 func (s *SDK) ExportSitesCsv(ctx context.Context, request operations.ExportSitesCsvRequest) (*operations.ExportSitesCsvResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/export/org/sites.csv"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -868,7 +908,7 @@ func (s *SDK) ExportSitesCsv(ctx context.Context, request operations.ExportSites
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -899,8 +939,9 @@ func (s *SDK) ExportSitesCsv(ctx context.Context, request operations.ExportSites
 	return res, nil
 }
 
+// ExportSitesJSON - Export all sites
 func (s *SDK) ExportSitesJSON(ctx context.Context, request operations.ExportSitesJSONRequest) (*operations.ExportSitesJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/export/org/sites.json"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -910,7 +951,7 @@ func (s *SDK) ExportSitesJSON(ctx context.Context, request operations.ExportSite
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -941,8 +982,9 @@ func (s *SDK) ExportSitesJSON(ctx context.Context, request operations.ExportSite
 	return res, nil
 }
 
+// ExportSitesJsonl - Site list as JSON line-delimited
 func (s *SDK) ExportSitesJsonl(ctx context.Context, request operations.ExportSitesJsonlRequest) (*operations.ExportSitesJsonlResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/export/org/sites.jsonl"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -952,7 +994,7 @@ func (s *SDK) ExportSitesJsonl(ctx context.Context, request operations.ExportSit
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -983,8 +1025,9 @@ func (s *SDK) ExportSitesJsonl(ctx context.Context, request operations.ExportSit
 	return res, nil
 }
 
+// ExportWirelessCsv - Wireless inventory as CSV
 func (s *SDK) ExportWirelessCsv(ctx context.Context, request operations.ExportWirelessCsvRequest) (*operations.ExportWirelessCsvResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/export/org/wireless.csv"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -994,7 +1037,7 @@ func (s *SDK) ExportWirelessCsv(ctx context.Context, request operations.ExportWi
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1025,8 +1068,9 @@ func (s *SDK) ExportWirelessCsv(ctx context.Context, request operations.ExportWi
 	return res, nil
 }
 
+// ExportWirelessJSON - Wireless inventory as JSON
 func (s *SDK) ExportWirelessJSON(ctx context.Context, request operations.ExportWirelessJSONRequest) (*operations.ExportWirelessJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/export/org/wireless.json"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1036,7 +1080,7 @@ func (s *SDK) ExportWirelessJSON(ctx context.Context, request operations.ExportW
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1067,8 +1111,9 @@ func (s *SDK) ExportWirelessJSON(ctx context.Context, request operations.ExportW
 	return res, nil
 }
 
+// ExportWirelessJsonl - Wireless inventory as JSON line-delimited
 func (s *SDK) ExportWirelessJsonl(ctx context.Context, request operations.ExportWirelessJsonlRequest) (*operations.ExportWirelessJsonlResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/export/org/wireless.jsonl"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1078,7 +1123,7 @@ func (s *SDK) ExportWirelessJsonl(ctx context.Context, request operations.Export
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1109,8 +1154,9 @@ func (s *SDK) ExportWirelessJsonl(ctx context.Context, request operations.Export
 	return res, nil
 }
 
+// GetAccountAgents - Get all agents across all organizations
 func (s *SDK) GetAccountAgents(ctx context.Context, request operations.GetAccountAgentsRequest) (*operations.GetAccountAgentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account/agents"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1120,7 +1166,7 @@ func (s *SDK) GetAccountAgents(ctx context.Context, request operations.GetAccoun
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1151,8 +1197,9 @@ func (s *SDK) GetAccountAgents(ctx context.Context, request operations.GetAccoun
 	return res, nil
 }
 
+// GetAccountCredential - Get credential details
 func (s *SDK) GetAccountCredential(ctx context.Context, request operations.GetAccountCredentialRequest) (*operations.GetAccountCredentialResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/account/credentials/{credential_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1160,7 +1207,7 @@ func (s *SDK) GetAccountCredential(ctx context.Context, request operations.GetAc
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1192,8 +1239,9 @@ func (s *SDK) GetAccountCredential(ctx context.Context, request operations.GetAc
 	return res, nil
 }
 
+// GetAccountCredentials - Get all account credentials
 func (s *SDK) GetAccountCredentials(ctx context.Context, request operations.GetAccountCredentialsRequest) (*operations.GetAccountCredentialsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account/credentials"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1203,7 +1251,7 @@ func (s *SDK) GetAccountCredentials(ctx context.Context, request operations.GetA
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1234,8 +1282,9 @@ func (s *SDK) GetAccountCredentials(ctx context.Context, request operations.GetA
 	return res, nil
 }
 
+// GetAccountKey - Get key details
 func (s *SDK) GetAccountKey(ctx context.Context, request operations.GetAccountKeyRequest) (*operations.GetAccountKeyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/account/keys/{key_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1243,7 +1292,7 @@ func (s *SDK) GetAccountKey(ctx context.Context, request operations.GetAccountKe
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1274,8 +1323,9 @@ func (s *SDK) GetAccountKey(ctx context.Context, request operations.GetAccountKe
 	return res, nil
 }
 
+// GetAccountKeys - Get all active API keys
 func (s *SDK) GetAccountKeys(ctx context.Context, request operations.GetAccountKeysRequest) (*operations.GetAccountKeysResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account/keys"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1283,7 +1333,7 @@ func (s *SDK) GetAccountKeys(ctx context.Context, request operations.GetAccountK
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1314,8 +1364,9 @@ func (s *SDK) GetAccountKeys(ctx context.Context, request operations.GetAccountK
 	return res, nil
 }
 
+// GetAccountLicense - Get license details
 func (s *SDK) GetAccountLicense(ctx context.Context, request operations.GetAccountLicenseRequest) (*operations.GetAccountLicenseResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account/license"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1323,7 +1374,7 @@ func (s *SDK) GetAccountLicense(ctx context.Context, request operations.GetAccou
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1354,8 +1405,9 @@ func (s *SDK) GetAccountLicense(ctx context.Context, request operations.GetAccou
 	return res, nil
 }
 
+// GetAccountOrganization - Get organization details
 func (s *SDK) GetAccountOrganization(ctx context.Context, request operations.GetAccountOrganizationRequest) (*operations.GetAccountOrganizationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/account/orgs/{org_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1363,7 +1415,7 @@ func (s *SDK) GetAccountOrganization(ctx context.Context, request operations.Get
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1394,8 +1446,9 @@ func (s *SDK) GetAccountOrganization(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetAccountOrganizations - Get all organization details
 func (s *SDK) GetAccountOrganizations(ctx context.Context, request operations.GetAccountOrganizationsRequest) (*operations.GetAccountOrganizationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account/orgs"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1405,7 +1458,7 @@ func (s *SDK) GetAccountOrganizations(ctx context.Context, request operations.Ge
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1436,8 +1489,9 @@ func (s *SDK) GetAccountOrganizations(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetAccountSites - Get all sites details across all organizations
 func (s *SDK) GetAccountSites(ctx context.Context, request operations.GetAccountSitesRequest) (*operations.GetAccountSitesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account/sites"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1447,7 +1501,7 @@ func (s *SDK) GetAccountSites(ctx context.Context, request operations.GetAccount
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1478,8 +1532,9 @@ func (s *SDK) GetAccountSites(ctx context.Context, request operations.GetAccount
 	return res, nil
 }
 
+// GetAccountTasks - Get all task details across all organizations (up to 1000)
 func (s *SDK) GetAccountTasks(ctx context.Context, request operations.GetAccountTasksRequest) (*operations.GetAccountTasksResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account/tasks"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1489,7 +1544,7 @@ func (s *SDK) GetAccountTasks(ctx context.Context, request operations.GetAccount
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1520,8 +1575,9 @@ func (s *SDK) GetAccountTasks(ctx context.Context, request operations.GetAccount
 	return res, nil
 }
 
+// GetAccountUser - Get user details
 func (s *SDK) GetAccountUser(ctx context.Context, request operations.GetAccountUserRequest) (*operations.GetAccountUserResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/account/users/{user_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1529,7 +1585,7 @@ func (s *SDK) GetAccountUser(ctx context.Context, request operations.GetAccountU
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1560,8 +1616,9 @@ func (s *SDK) GetAccountUser(ctx context.Context, request operations.GetAccountU
 	return res, nil
 }
 
+// GetAccountUsers - Get all users
 func (s *SDK) GetAccountUsers(ctx context.Context, request operations.GetAccountUsersRequest) (*operations.GetAccountUsersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account/users"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1569,7 +1626,7 @@ func (s *SDK) GetAccountUsers(ctx context.Context, request operations.GetAccount
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1600,8 +1657,9 @@ func (s *SDK) GetAccountUsers(ctx context.Context, request operations.GetAccount
 	return res, nil
 }
 
+// GetAgent - Get details for a single agent
 func (s *SDK) GetAgent(ctx context.Context, request operations.GetAgentRequest) (*operations.GetAgentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/org/agents/{agent_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1609,7 +1667,7 @@ func (s *SDK) GetAgent(ctx context.Context, request operations.GetAgentRequest) 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1641,8 +1699,9 @@ func (s *SDK) GetAgent(ctx context.Context, request operations.GetAgentRequest) 
 	return res, nil
 }
 
+// GetAgents - Get all agents
 func (s *SDK) GetAgents(ctx context.Context, request operations.GetAgentsRequest) (*operations.GetAgentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/org/agents"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1650,7 +1709,7 @@ func (s *SDK) GetAgents(ctx context.Context, request operations.GetAgentsRequest
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1681,8 +1740,9 @@ func (s *SDK) GetAgents(ctx context.Context, request operations.GetAgentsRequest
 	return res, nil
 }
 
+// GetAsset - Get asset details
 func (s *SDK) GetAsset(ctx context.Context, request operations.GetAssetRequest) (*operations.GetAssetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/org/assets/{asset_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1690,7 +1750,7 @@ func (s *SDK) GetAsset(ctx context.Context, request operations.GetAssetRequest) 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1722,8 +1782,9 @@ func (s *SDK) GetAsset(ctx context.Context, request operations.GetAssetRequest) 
 	return res, nil
 }
 
+// GetAssets - Get all assets
 func (s *SDK) GetAssets(ctx context.Context, request operations.GetAssetsRequest) (*operations.GetAssetsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/org/assets"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1733,7 +1794,7 @@ func (s *SDK) GetAssets(ctx context.Context, request operations.GetAssetsRequest
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1764,8 +1825,9 @@ func (s *SDK) GetAssets(ctx context.Context, request operations.GetAssetsRequest
 	return res, nil
 }
 
+// GetKey - Get API key details
 func (s *SDK) GetKey(ctx context.Context, request operations.GetKeyRequest) (*operations.GetKeyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/org/key"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1773,7 +1835,7 @@ func (s *SDK) GetKey(ctx context.Context, request operations.GetKeyRequest) (*op
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1804,8 +1866,9 @@ func (s *SDK) GetKey(ctx context.Context, request operations.GetKeyRequest) (*op
 	return res, nil
 }
 
+// GetLatestAgentVersion - Returns latest agent version
 func (s *SDK) GetLatestAgentVersion(ctx context.Context) (*operations.GetLatestAgentVersionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/releases/agent/version"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1813,7 +1876,7 @@ func (s *SDK) GetLatestAgentVersion(ctx context.Context) (*operations.GetLatestA
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1843,8 +1906,9 @@ func (s *SDK) GetLatestAgentVersion(ctx context.Context) (*operations.GetLatestA
 	return res, nil
 }
 
+// GetLatestPlatformVersion - Returns latest platform version
 func (s *SDK) GetLatestPlatformVersion(ctx context.Context) (*operations.GetLatestPlatformVersionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/releases/platform/version"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1852,7 +1916,7 @@ func (s *SDK) GetLatestPlatformVersion(ctx context.Context) (*operations.GetLate
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1882,8 +1946,9 @@ func (s *SDK) GetLatestPlatformVersion(ctx context.Context) (*operations.GetLate
 	return res, nil
 }
 
+// GetLatestScannerVersion - Returns latest scanner version
 func (s *SDK) GetLatestScannerVersion(ctx context.Context) (*operations.GetLatestScannerVersionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/releases/scanner/version"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1891,7 +1956,7 @@ func (s *SDK) GetLatestScannerVersion(ctx context.Context) (*operations.GetLates
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1921,8 +1986,9 @@ func (s *SDK) GetLatestScannerVersion(ctx context.Context) (*operations.GetLates
 	return res, nil
 }
 
+// GetOrganization - Get organization details
 func (s *SDK) GetOrganization(ctx context.Context, request operations.GetOrganizationRequest) (*operations.GetOrganizationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/org"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1930,7 +1996,7 @@ func (s *SDK) GetOrganization(ctx context.Context, request operations.GetOrganiz
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1961,8 +2027,9 @@ func (s *SDK) GetOrganization(ctx context.Context, request operations.GetOrganiz
 	return res, nil
 }
 
+// GetService - Get service details
 func (s *SDK) GetService(ctx context.Context, request operations.GetServiceRequest) (*operations.GetServiceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/org/services/{service_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1970,7 +2037,7 @@ func (s *SDK) GetService(ctx context.Context, request operations.GetServiceReque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2002,8 +2069,9 @@ func (s *SDK) GetService(ctx context.Context, request operations.GetServiceReque
 	return res, nil
 }
 
+// GetServices - Get all services
 func (s *SDK) GetServices(ctx context.Context, request operations.GetServicesRequest) (*operations.GetServicesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/org/services"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2013,7 +2081,7 @@ func (s *SDK) GetServices(ctx context.Context, request operations.GetServicesReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2044,8 +2112,9 @@ func (s *SDK) GetServices(ctx context.Context, request operations.GetServicesReq
 	return res, nil
 }
 
+// GetSite - Get site details
 func (s *SDK) GetSite(ctx context.Context, request operations.GetSiteRequest) (*operations.GetSiteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/org/sites/{site_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2053,7 +2122,7 @@ func (s *SDK) GetSite(ctx context.Context, request operations.GetSiteRequest) (*
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2085,8 +2154,9 @@ func (s *SDK) GetSite(ctx context.Context, request operations.GetSiteRequest) (*
 	return res, nil
 }
 
+// GetSites - Get all sites
 func (s *SDK) GetSites(ctx context.Context, request operations.GetSitesRequest) (*operations.GetSitesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/org/sites"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2094,7 +2164,7 @@ func (s *SDK) GetSites(ctx context.Context, request operations.GetSitesRequest) 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2125,8 +2195,9 @@ func (s *SDK) GetSites(ctx context.Context, request operations.GetSitesRequest) 
 	return res, nil
 }
 
+// GetTask - Get task details
 func (s *SDK) GetTask(ctx context.Context, request operations.GetTaskRequest) (*operations.GetTaskResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/org/tasks/{task_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2134,7 +2205,7 @@ func (s *SDK) GetTask(ctx context.Context, request operations.GetTaskRequest) (*
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2165,8 +2236,9 @@ func (s *SDK) GetTask(ctx context.Context, request operations.GetTaskRequest) (*
 	return res, nil
 }
 
+// GetTaskChangeReport - Returns a temporary task change report data url
 func (s *SDK) GetTaskChangeReport(ctx context.Context, request operations.GetTaskChangeReportRequest) (*operations.GetTaskChangeReportResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/org/tasks/{task_id}/changes", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2174,7 +2246,7 @@ func (s *SDK) GetTaskChangeReport(ctx context.Context, request operations.GetTas
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2206,8 +2278,9 @@ func (s *SDK) GetTaskChangeReport(ctx context.Context, request operations.GetTas
 	return res, nil
 }
 
+// GetTaskScanData - Returns a temporary task scan data url
 func (s *SDK) GetTaskScanData(ctx context.Context, request operations.GetTaskScanDataRequest) (*operations.GetTaskScanDataResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/org/tasks/{task_id}/data", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2215,7 +2288,7 @@ func (s *SDK) GetTaskScanData(ctx context.Context, request operations.GetTaskSca
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2247,8 +2320,9 @@ func (s *SDK) GetTaskScanData(ctx context.Context, request operations.GetTaskSca
 	return res, nil
 }
 
+// GetTasks - Get all tasks (last 1000)
 func (s *SDK) GetTasks(ctx context.Context, request operations.GetTasksRequest) (*operations.GetTasksResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/org/tasks"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2258,7 +2332,7 @@ func (s *SDK) GetTasks(ctx context.Context, request operations.GetTasksRequest) 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2289,8 +2363,9 @@ func (s *SDK) GetTasks(ctx context.Context, request operations.GetTasksRequest) 
 	return res, nil
 }
 
+// GetWirelessLan - Get wireless LAN details
 func (s *SDK) GetWirelessLan(ctx context.Context, request operations.GetWirelessLanRequest) (*operations.GetWirelessLanResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/org/wirelesss/{wireless_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2298,7 +2373,7 @@ func (s *SDK) GetWirelessLan(ctx context.Context, request operations.GetWireless
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2329,8 +2404,9 @@ func (s *SDK) GetWirelessLan(ctx context.Context, request operations.GetWireless
 	return res, nil
 }
 
+// GetWirelessLaNs - Get all wireless LANs
 func (s *SDK) GetWirelessLaNs(ctx context.Context, request operations.GetWirelessLaNsRequest) (*operations.GetWirelessLaNsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/org/wireless"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2340,7 +2416,7 @@ func (s *SDK) GetWirelessLaNs(ctx context.Context, request operations.GetWireles
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2371,8 +2447,9 @@ func (s *SDK) GetWirelessLaNs(ctx context.Context, request operations.GetWireles
 	return res, nil
 }
 
+// HideTask - Signal that a completed task should be hidden
 func (s *SDK) HideTask(ctx context.Context, request operations.HideTaskRequest) (*operations.HideTaskResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/org/tasks/{task_id}/hide", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -2380,7 +2457,7 @@ func (s *SDK) HideTask(ctx context.Context, request operations.HideTaskRequest) 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2412,8 +2489,9 @@ func (s *SDK) HideTask(ctx context.Context, request operations.HideTaskRequest) 
 	return res, nil
 }
 
+// ImportScanData - Import a scan data file into a site
 func (s *SDK) ImportScanData(ctx context.Context, request operations.ImportScanDataRequest) (*operations.ImportScanDataResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/org/sites/{site_id}/import", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2428,7 +2506,7 @@ func (s *SDK) ImportScanData(ctx context.Context, request operations.ImportScanD
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2462,8 +2540,9 @@ func (s *SDK) ImportScanData(ctx context.Context, request operations.ImportScanD
 	return res, nil
 }
 
+// RemoveAccountCredential - Remove this credential
 func (s *SDK) RemoveAccountCredential(ctx context.Context, request operations.RemoveAccountCredentialRequest) (*operations.RemoveAccountCredentialResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/account/credentials/{credential_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -2471,7 +2550,7 @@ func (s *SDK) RemoveAccountCredential(ctx context.Context, request operations.Re
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2494,8 +2573,9 @@ func (s *SDK) RemoveAccountCredential(ctx context.Context, request operations.Re
 	return res, nil
 }
 
+// RemoveAccountKey - Remove this key
 func (s *SDK) RemoveAccountKey(ctx context.Context, request operations.RemoveAccountKeyRequest) (*operations.RemoveAccountKeyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/account/keys/{key_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -2503,7 +2583,7 @@ func (s *SDK) RemoveAccountKey(ctx context.Context, request operations.RemoveAcc
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2525,8 +2605,9 @@ func (s *SDK) RemoveAccountKey(ctx context.Context, request operations.RemoveAcc
 	return res, nil
 }
 
+// RemoveAccountOrganization - Remove this organization
 func (s *SDK) RemoveAccountOrganization(ctx context.Context, request operations.RemoveAccountOrganizationRequest) (*operations.RemoveAccountOrganizationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/account/orgs/{org_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -2534,7 +2615,7 @@ func (s *SDK) RemoveAccountOrganization(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2556,8 +2637,9 @@ func (s *SDK) RemoveAccountOrganization(ctx context.Context, request operations.
 	return res, nil
 }
 
+// RemoveAccountUser - Remove this user
 func (s *SDK) RemoveAccountUser(ctx context.Context, request operations.RemoveAccountUserRequest) (*operations.RemoveAccountUserResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/account/users/{user_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -2565,7 +2647,7 @@ func (s *SDK) RemoveAccountUser(ctx context.Context, request operations.RemoveAc
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2587,8 +2669,9 @@ func (s *SDK) RemoveAccountUser(ctx context.Context, request operations.RemoveAc
 	return res, nil
 }
 
+// RemoveAgent - Remove and uninstall an agent
 func (s *SDK) RemoveAgent(ctx context.Context, request operations.RemoveAgentRequest) (*operations.RemoveAgentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/org/agents/{agent_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -2596,7 +2679,7 @@ func (s *SDK) RemoveAgent(ctx context.Context, request operations.RemoveAgentReq
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2619,8 +2702,9 @@ func (s *SDK) RemoveAgent(ctx context.Context, request operations.RemoveAgentReq
 	return res, nil
 }
 
+// RemoveAsset - Remove an asset
 func (s *SDK) RemoveAsset(ctx context.Context, request operations.RemoveAssetRequest) (*operations.RemoveAssetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/org/assets/{asset_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -2628,7 +2712,7 @@ func (s *SDK) RemoveAsset(ctx context.Context, request operations.RemoveAssetReq
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2651,8 +2735,9 @@ func (s *SDK) RemoveAsset(ctx context.Context, request operations.RemoveAssetReq
 	return res, nil
 }
 
+// RemoveKey - Remove the current API key
 func (s *SDK) RemoveKey(ctx context.Context, request operations.RemoveKeyRequest) (*operations.RemoveKeyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/org/key"
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -2660,7 +2745,7 @@ func (s *SDK) RemoveKey(ctx context.Context, request operations.RemoveKeyRequest
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2682,8 +2767,9 @@ func (s *SDK) RemoveKey(ctx context.Context, request operations.RemoveKeyRequest
 	return res, nil
 }
 
+// RemoveService - Remove a service
 func (s *SDK) RemoveService(ctx context.Context, request operations.RemoveServiceRequest) (*operations.RemoveServiceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/org/services/{service_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -2691,7 +2777,7 @@ func (s *SDK) RemoveService(ctx context.Context, request operations.RemoveServic
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2714,8 +2800,9 @@ func (s *SDK) RemoveService(ctx context.Context, request operations.RemoveServic
 	return res, nil
 }
 
+// RemoveSite - Remove a site and associated assets
 func (s *SDK) RemoveSite(ctx context.Context, request operations.RemoveSiteRequest) (*operations.RemoveSiteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/org/sites/{site_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -2723,7 +2810,7 @@ func (s *SDK) RemoveSite(ctx context.Context, request operations.RemoveSiteReque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2746,8 +2833,9 @@ func (s *SDK) RemoveSite(ctx context.Context, request operations.RemoveSiteReque
 	return res, nil
 }
 
+// RemoveWirelessLan - Remove a wireless LAN
 func (s *SDK) RemoveWirelessLan(ctx context.Context, request operations.RemoveWirelessLanRequest) (*operations.RemoveWirelessLanResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/org/wirelesss/{wireless_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -2755,7 +2843,7 @@ func (s *SDK) RemoveWirelessLan(ctx context.Context, request operations.RemoveWi
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2778,8 +2866,9 @@ func (s *SDK) RemoveWirelessLan(ctx context.Context, request operations.RemoveWi
 	return res, nil
 }
 
+// ResetAccountUserLockout - Resets the user's lockout status
 func (s *SDK) ResetAccountUserLockout(ctx context.Context, request operations.ResetAccountUserLockoutRequest) (*operations.ResetAccountUserLockoutResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/account/users/{user_id}/resetLockout", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PATCH", url, nil)
@@ -2787,7 +2876,7 @@ func (s *SDK) ResetAccountUserLockout(ctx context.Context, request operations.Re
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2818,8 +2907,9 @@ func (s *SDK) ResetAccountUserLockout(ctx context.Context, request operations.Re
 	return res, nil
 }
 
+// ResetAccountUserMfa - Resets the user's MFA tokens
 func (s *SDK) ResetAccountUserMfa(ctx context.Context, request operations.ResetAccountUserMfaRequest) (*operations.ResetAccountUserMfaResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/account/users/{user_id}/resetMFA", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PATCH", url, nil)
@@ -2827,7 +2917,7 @@ func (s *SDK) ResetAccountUserMfa(ctx context.Context, request operations.ResetA
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2858,8 +2948,9 @@ func (s *SDK) ResetAccountUserMfa(ctx context.Context, request operations.ResetA
 	return res, nil
 }
 
+// ResetAccountUserPassword - Sends the user a password reset email
 func (s *SDK) ResetAccountUserPassword(ctx context.Context, request operations.ResetAccountUserPasswordRequest) (*operations.ResetAccountUserPasswordResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/account/users/{user_id}/resetPassword", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PATCH", url, nil)
@@ -2867,7 +2958,7 @@ func (s *SDK) ResetAccountUserPassword(ctx context.Context, request operations.R
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2898,8 +2989,9 @@ func (s *SDK) ResetAccountUserPassword(ctx context.Context, request operations.R
 	return res, nil
 }
 
+// RotateAccountKey - Rotates the key secret
 func (s *SDK) RotateAccountKey(ctx context.Context, request operations.RotateAccountKeyRequest) (*operations.RotateAccountKeyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/account/keys/{key_id}/rotate", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PATCH", url, nil)
@@ -2907,7 +2999,7 @@ func (s *SDK) RotateAccountKey(ctx context.Context, request operations.RotateAcc
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2938,8 +3030,9 @@ func (s *SDK) RotateAccountKey(ctx context.Context, request operations.RotateAcc
 	return res, nil
 }
 
+// RotateAccountOrganizationExportToken - Rotates the organization export token and returns the updated organization
 func (s *SDK) RotateAccountOrganizationExportToken(ctx context.Context, request operations.RotateAccountOrganizationExportTokenRequest) (*operations.RotateAccountOrganizationExportTokenResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/account/orgs/{org_id}/exportToken/rotate", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PATCH", url, nil)
@@ -2947,7 +3040,7 @@ func (s *SDK) RotateAccountOrganizationExportToken(ctx context.Context, request 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2978,8 +3071,9 @@ func (s *SDK) RotateAccountOrganizationExportToken(ctx context.Context, request 
 	return res, nil
 }
 
+// RotateKey - Rotate the API key secret and return the updated key
 func (s *SDK) RotateKey(ctx context.Context, request operations.RotateKeyRequest) (*operations.RotateKeyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/org/key/rotate"
 
 	req, err := http.NewRequestWithContext(ctx, "PATCH", url, nil)
@@ -2987,7 +3081,7 @@ func (s *SDK) RotateKey(ctx context.Context, request operations.RotateKeyRequest
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3018,8 +3112,9 @@ func (s *SDK) RotateKey(ctx context.Context, request operations.RotateKeyRequest
 	return res, nil
 }
 
+// SnowExportAssetsCsv - Export an asset inventory as CSV for ServiceNow integration
 func (s *SDK) SnowExportAssetsCsv(ctx context.Context, request operations.SnowExportAssetsCsvRequest) (*operations.SnowExportAssetsCsvResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/export/org/assets.servicenow.csv"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3027,7 +3122,7 @@ func (s *SDK) SnowExportAssetsCsv(ctx context.Context, request operations.SnowEx
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3058,8 +3153,9 @@ func (s *SDK) SnowExportAssetsCsv(ctx context.Context, request operations.SnowEx
 	return res, nil
 }
 
+// SnowExportAssetsJSON - Exports the asset inventory as JSON
 func (s *SDK) SnowExportAssetsJSON(ctx context.Context, request operations.SnowExportAssetsJSONRequest) (*operations.SnowExportAssetsJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/export/org/assets.servicenow.json"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3067,7 +3163,7 @@ func (s *SDK) SnowExportAssetsJSON(ctx context.Context, request operations.SnowE
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3098,8 +3194,9 @@ func (s *SDK) SnowExportAssetsJSON(ctx context.Context, request operations.SnowE
 	return res, nil
 }
 
+// SnowExportServicesCsv - Export a service inventory as CSV for ServiceNow integration
 func (s *SDK) SnowExportServicesCsv(ctx context.Context, request operations.SnowExportServicesCsvRequest) (*operations.SnowExportServicesCsvResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/export/org/services.servicenow.csv"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3107,7 +3204,7 @@ func (s *SDK) SnowExportServicesCsv(ctx context.Context, request operations.Snow
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3138,8 +3235,9 @@ func (s *SDK) SnowExportServicesCsv(ctx context.Context, request operations.Snow
 	return res, nil
 }
 
+// SplunkAssetSyncCreatedJSON - Exports the asset inventory in a sync-friendly manner using created_at as a checkpoint. Requires the Splunk entitlement.
 func (s *SDK) SplunkAssetSyncCreatedJSON(ctx context.Context, request operations.SplunkAssetSyncCreatedJSONRequest) (*operations.SplunkAssetSyncCreatedJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/export/org/assets/sync/created/assets.json"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3149,7 +3247,7 @@ func (s *SDK) SplunkAssetSyncCreatedJSON(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3180,8 +3278,9 @@ func (s *SDK) SplunkAssetSyncCreatedJSON(ctx context.Context, request operations
 	return res, nil
 }
 
+// SplunkAssetSyncUpdatedJSON - Exports the asset inventory in a sync-friendly manner using updated_at as a checkpoint. Requires the Splunk entitlement.
 func (s *SDK) SplunkAssetSyncUpdatedJSON(ctx context.Context, request operations.SplunkAssetSyncUpdatedJSONRequest) (*operations.SplunkAssetSyncUpdatedJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/export/org/assets/sync/updated/assets.json"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3191,7 +3290,7 @@ func (s *SDK) SplunkAssetSyncUpdatedJSON(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3222,8 +3321,9 @@ func (s *SDK) SplunkAssetSyncUpdatedJSON(ctx context.Context, request operations
 	return res, nil
 }
 
+// StopTask - Signal that a task should be stopped or canceledThis will also remove recurring and scheduled tasks
 func (s *SDK) StopTask(ctx context.Context, request operations.StopTaskRequest) (*operations.StopTaskResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/org/tasks/{task_id}/stop", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -3231,7 +3331,7 @@ func (s *SDK) StopTask(ctx context.Context, request operations.StopTaskRequest) 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3263,8 +3363,9 @@ func (s *SDK) StopTask(ctx context.Context, request operations.StopTaskRequest) 
 	return res, nil
 }
 
+// UpdateAccountOrganization - Update organization details
 func (s *SDK) UpdateAccountOrganization(ctx context.Context, request operations.UpdateAccountOrganizationRequest) (*operations.UpdateAccountOrganizationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/account/orgs/{org_id}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3282,7 +3383,7 @@ func (s *SDK) UpdateAccountOrganization(ctx context.Context, request operations.
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3313,8 +3414,9 @@ func (s *SDK) UpdateAccountOrganization(ctx context.Context, request operations.
 	return res, nil
 }
 
+// UpdateAccountUser - Update a user's details
 func (s *SDK) UpdateAccountUser(ctx context.Context, request operations.UpdateAccountUserRequest) (*operations.UpdateAccountUserResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/account/users/{user_id}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3332,7 +3434,7 @@ func (s *SDK) UpdateAccountUser(ctx context.Context, request operations.UpdateAc
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3363,8 +3465,9 @@ func (s *SDK) UpdateAccountUser(ctx context.Context, request operations.UpdateAc
 	return res, nil
 }
 
+// UpdateAgentSite - Update the site associated with agent
 func (s *SDK) UpdateAgentSite(ctx context.Context, request operations.UpdateAgentSiteRequest) (*operations.UpdateAgentSiteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/org/agents/{agent_id}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3382,7 +3485,7 @@ func (s *SDK) UpdateAgentSite(ctx context.Context, request operations.UpdateAgen
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3414,8 +3517,9 @@ func (s *SDK) UpdateAgentSite(ctx context.Context, request operations.UpdateAgen
 	return res, nil
 }
 
+// UpdateAssetComments - Update asset comments
 func (s *SDK) UpdateAssetComments(ctx context.Context, request operations.UpdateAssetCommentsRequest) (*operations.UpdateAssetCommentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/org/assets/{asset_id}/comments", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3433,7 +3537,7 @@ func (s *SDK) UpdateAssetComments(ctx context.Context, request operations.Update
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3465,8 +3569,9 @@ func (s *SDK) UpdateAssetComments(ctx context.Context, request operations.Update
 	return res, nil
 }
 
+// UpdateAssetTags - Update asset tags
 func (s *SDK) UpdateAssetTags(ctx context.Context, request operations.UpdateAssetTagsRequest) (*operations.UpdateAssetTagsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/org/assets/{asset_id}/tags", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3484,7 +3589,7 @@ func (s *SDK) UpdateAssetTags(ctx context.Context, request operations.UpdateAsse
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3516,8 +3621,9 @@ func (s *SDK) UpdateAssetTags(ctx context.Context, request operations.UpdateAsse
 	return res, nil
 }
 
+// UpdateOrganization - Update organization details
 func (s *SDK) UpdateOrganization(ctx context.Context, request operations.UpdateOrganizationRequest) (*operations.UpdateOrganizationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/org"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3535,7 +3641,7 @@ func (s *SDK) UpdateOrganization(ctx context.Context, request operations.UpdateO
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3566,8 +3672,9 @@ func (s *SDK) UpdateOrganization(ctx context.Context, request operations.UpdateO
 	return res, nil
 }
 
+// UpdateSite - Update a site definition
 func (s *SDK) UpdateSite(ctx context.Context, request operations.UpdateSiteRequest) (*operations.UpdateSiteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/org/sites/{site_id}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3585,7 +3692,7 @@ func (s *SDK) UpdateSite(ctx context.Context, request operations.UpdateSiteReque
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3617,8 +3724,9 @@ func (s *SDK) UpdateSite(ctx context.Context, request operations.UpdateSiteReque
 	return res, nil
 }
 
+// UpdateTask - Update task parameters
 func (s *SDK) UpdateTask(ctx context.Context, request operations.UpdateTaskRequest) (*operations.UpdateTaskResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/org/tasks/{task_id}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3636,7 +3744,7 @@ func (s *SDK) UpdateTask(ctx context.Context, request operations.UpdateTaskReque
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3668,8 +3776,9 @@ func (s *SDK) UpdateTask(ctx context.Context, request operations.UpdateTaskReque
 	return res, nil
 }
 
+// UpgradeAgent - Force an agent to update and restart
 func (s *SDK) UpgradeAgent(ctx context.Context, request operations.UpgradeAgentRequest) (*operations.UpgradeAgentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/org/agents/{agent_id}/update", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -3677,7 +3786,7 @@ func (s *SDK) UpgradeAgent(ctx context.Context, request operations.UpgradeAgentR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {

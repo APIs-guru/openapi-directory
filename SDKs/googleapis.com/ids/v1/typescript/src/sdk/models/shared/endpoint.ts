@@ -1,20 +1,43 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum EndpointSeverityEnum {
-    SeverityUnspecified = "SEVERITY_UNSPECIFIED"
-,    Informational = "INFORMATIONAL"
-,    Low = "LOW"
-,    Medium = "MEDIUM"
-,    High = "HIGH"
-,    Critical = "CRITICAL"
+    SeverityUnspecified = "SEVERITY_UNSPECIFIED",
+    Informational = "INFORMATIONAL",
+    Low = "LOW",
+    Medium = "MEDIUM",
+    High = "HIGH",
+    Critical = "CRITICAL"
 }
 
 export enum EndpointStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Creating = "CREATING"
-,    Ready = "READY"
-,    Deleting = "DELETING"
-,    Updating = "UPDATING"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Creating = "CREATING",
+    Ready = "READY",
+    Deleting = "DELETING",
+    Updating = "UPDATING"
+}
+
+
+// EndpointInput
+/** 
+ * Endpoint describes a single IDS endpoint. It defines a forwarding rule to which packets can be sent for IDS inspection.
+**/
+export class EndpointInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=network" })
+  network?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=severity" })
+  severity?: EndpointSeverityEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=trafficLogs" })
+  trafficLogs?: boolean;
 }
 
 
@@ -23,36 +46,36 @@ export enum EndpointStateEnum {
  * Endpoint describes a single IDS endpoint. It defines a forwarding rule to which packets can be sent for IDS inspection.
 **/
 export class Endpoint extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=endpointForwardingRule" })
+  @SpeakeasyMetadata({ data: "json, name=endpointForwardingRule" })
   endpointForwardingRule?: string;
 
-  @Metadata({ data: "json, name=endpointIp" })
+  @SpeakeasyMetadata({ data: "json, name=endpointIp" })
   endpointIp?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=network" })
+  @SpeakeasyMetadata({ data: "json, name=network" })
   network?: string;
 
-  @Metadata({ data: "json, name=severity" })
+  @SpeakeasyMetadata({ data: "json, name=severity" })
   severity?: EndpointSeverityEnum;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: EndpointStateEnum;
 
-  @Metadata({ data: "json, name=trafficLogs" })
+  @SpeakeasyMetadata({ data: "json, name=trafficLogs" })
   trafficLogs?: boolean;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDialogflowCxV3beta1IntentParameter
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents an intent parameter.
 **/
 export class GoogleCloudDialogflowCxV3beta1IntentParameter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=entityType" })
+  @SpeakeasyMetadata({ data: "json, name=entityType" })
   entityType?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=isList" })
+  @SpeakeasyMetadata({ data: "json, name=isList" })
   isList?: boolean;
 
-  @Metadata({ data: "json, name=redact" })
+  @SpeakeasyMetadata({ data: "json, name=redact" })
   redact?: boolean;
 }

@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { ManagementSettings } from "./managementsettings";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ManagementSettingsInput } from "./managementsettings";
 
 
-// ConfigureManagementSettingsRequest
+
+// ConfigureManagementSettingsRequestInput
 /** 
  * Request for the `ConfigureManagementSettings` method.
 **/
-export class ConfigureManagementSettingsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=managementSettings" })
-  managementSettings?: ManagementSettings;
+export class ConfigureManagementSettingsRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=managementSettings" })
+  managementSettings?: ManagementSettingsInput;
 
-  @Metadata({ data: "json, name=updateMask" })
+  @SpeakeasyMetadata({ data: "json, name=updateMask" })
   updateMask?: string;
 }

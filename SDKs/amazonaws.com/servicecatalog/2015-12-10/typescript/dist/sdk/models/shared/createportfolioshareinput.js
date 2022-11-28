@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OrganizationNode } from "./organizationnode";
 var CreatePortfolioShareInput = /** @class */ (function (_super) {
     __extends(CreatePortfolioShareInput, _super);
@@ -30,23 +30,23 @@ var CreatePortfolioShareInput = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AcceptLanguage" }),
+        SpeakeasyMetadata({ data: "json, name=AcceptLanguage" }),
         __metadata("design:type", String)
     ], CreatePortfolioShareInput.prototype, "acceptLanguage", void 0);
     __decorate([
-        Metadata({ data: "json, name=AccountId" }),
+        SpeakeasyMetadata({ data: "json, name=AccountId" }),
         __metadata("design:type", String)
     ], CreatePortfolioShareInput.prototype, "accountId", void 0);
     __decorate([
-        Metadata({ data: "json, name=OrganizationNode" }),
+        SpeakeasyMetadata({ data: "json, name=OrganizationNode" }),
         __metadata("design:type", OrganizationNode)
     ], CreatePortfolioShareInput.prototype, "organizationNode", void 0);
     __decorate([
-        Metadata({ data: "json, name=PortfolioId" }),
+        SpeakeasyMetadata({ data: "json, name=PortfolioId" }),
         __metadata("design:type", String)
     ], CreatePortfolioShareInput.prototype, "portfolioId", void 0);
     __decorate([
-        Metadata({ data: "json, name=ShareTagOptions" }),
+        SpeakeasyMetadata({ data: "json, name=ShareTagOptions" }),
         __metadata("design:type", Boolean)
     ], CreatePortfolioShareInput.prototype, "shareTagOptions", void 0);
     return CreatePortfolioShareInput;

@@ -1,5 +1,7 @@
 package shared
 
+// RelationalDatabaseParameter
+// Describes the parameters of a database.
 type RelationalDatabaseParameter struct {
 	AllowedValues  *string `json:"allowedValues,omitempty"`
 	ApplyMethod    *string `json:"applyMethod,omitempty"`

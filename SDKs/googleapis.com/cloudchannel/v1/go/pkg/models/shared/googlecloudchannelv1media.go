@@ -7,6 +7,8 @@ const (
 	GoogleCloudChannelV1MediaTypeEnumMediaTypeImage       GoogleCloudChannelV1MediaTypeEnum = "MEDIA_TYPE_IMAGE"
 )
 
+// GoogleCloudChannelV1Media
+// Represents media information.
 type GoogleCloudChannelV1Media struct {
 	Content *string                            `json:"content,omitempty"`
 	Title   *string                            `json:"title,omitempty"`

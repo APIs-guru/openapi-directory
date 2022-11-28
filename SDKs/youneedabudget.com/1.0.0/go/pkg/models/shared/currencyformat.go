@@ -1,5 +1,7 @@
 package shared
 
+// CurrencyFormat
+// The currency format setting for the budget.  In some cases the format will not be available and will be specified as null.
 type CurrencyFormat struct {
 	CurrencySymbol   string `json:"currency_symbol"`
 	DecimalDigits    int32  `json:"decimal_digits"`

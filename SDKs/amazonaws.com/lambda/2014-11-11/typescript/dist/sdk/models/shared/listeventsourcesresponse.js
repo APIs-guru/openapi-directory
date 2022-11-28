@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { EventSourceConfiguration } from "./eventsourceconfiguration";
 // ListEventSourcesResponse
 /**
  * Contains a list of event sources (see <a>API_EventSourceConfiguration</a>)
@@ -34,11 +34,11 @@ var ListEventSourcesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=EventSources", elemType: shared.EventSourceConfiguration }),
+        SpeakeasyMetadata({ data: "json, name=EventSources", elemType: EventSourceConfiguration }),
         __metadata("design:type", Array)
     ], ListEventSourcesResponse.prototype, "eventSources", void 0);
     __decorate([
-        Metadata({ data: "json, name=NextMarker" }),
+        SpeakeasyMetadata({ data: "json, name=NextMarker" }),
         __metadata("design:type", String)
     ], ListEventSourcesResponse.prototype, "nextMarker", void 0);
     return ListEventSourcesResponse;

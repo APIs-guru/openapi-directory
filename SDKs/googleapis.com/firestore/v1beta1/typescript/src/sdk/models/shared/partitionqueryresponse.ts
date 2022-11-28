@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Cursor } from "./cursor";
+
 
 
 // PartitionQueryResponse
@@ -8,9 +8,9 @@ import { Cursor } from "./cursor";
  * The response for Firestore.PartitionQuery.
 **/
 export class PartitionQueryResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=partitions", elemType: shared.Cursor })
+  @SpeakeasyMetadata({ data: "json, name=partitions", elemType: Cursor })
   partitions?: Cursor[];
 }

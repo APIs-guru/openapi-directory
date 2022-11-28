@@ -1,14 +1,14 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import failedbatchitem
-from . import upsertrowsresult
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BatchUpsertTableRowsResult:
-    failed_batch_items: Optional[List[failedbatchitem.FailedBatchItem]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'failedBatchItems' }})
-    rows: dict[str, upsertrowsresult.UpsertRowsResult] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rows' }})
-    workbook_cursor: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'workbookCursor' }})
+    rows: dict[str, UpsertRowsResult] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('rows') }})
+    workbook_cursor: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('workbookCursor') }})
+    failed_batch_items: Optional[List[FailedBatchItem]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('failedBatchItems') }})
     

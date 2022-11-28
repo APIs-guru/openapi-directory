@@ -1,5 +1,7 @@
 package shared
 
+// PerfSampleSeries
+// Resource representing a collection of performance samples (or data points)
 type PerfSampleSeries struct {
 	BasicPerfSampleSeries *BasicPerfSampleSeries `json:"basicPerfSampleSeries,omitempty"`
 	ExecutionID           *string                `json:"executionId,omitempty"`

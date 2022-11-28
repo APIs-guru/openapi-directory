@@ -22,8 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var MessagesWebhooksEndpointTypeEnum;
 (function (MessagesWebhooksEndpointTypeEnum) {
     MessagesWebhooksEndpointTypeEnum["InboundUrl"] = "inbound_url";
@@ -40,15 +39,15 @@ var MessagesWebhooks = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=endpoint" }),
+        SpeakeasyMetadata({ data: "json, name=endpoint" }),
         __metadata("design:type", String)
     ], MessagesWebhooks.prototype, "endpoint", void 0);
     __decorate([
-        Metadata({ data: "json, name=endpoint_type" }),
+        SpeakeasyMetadata({ data: "json, name=endpoint_type" }),
         __metadata("design:type", String)
     ], MessagesWebhooks.prototype, "endpointType", void 0);
     __decorate([
-        Metadata({ data: "json, name=http_method" }),
+        SpeakeasyMetadata({ data: "json, name=http_method" }),
         __metadata("design:type", String)
     ], MessagesWebhooks.prototype, "httpMethod", void 0);
     return MessagesWebhooks;
@@ -64,7 +63,7 @@ var Messages = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=webhooks", elemType: shared.MessagesWebhooks }),
+        SpeakeasyMetadata({ data: "json, name=webhooks", elemType: MessagesWebhooks }),
         __metadata("design:type", Array)
     ], Messages.prototype, "webhooks", void 0);
     return Messages;

@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class TaskStopCodeEnum(str, Enum):
     TASK_FAILED_TO_START = "TaskFailedToStart"

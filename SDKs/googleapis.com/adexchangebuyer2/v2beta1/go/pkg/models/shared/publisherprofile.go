@@ -1,5 +1,7 @@
 package shared
 
+// PublisherProfile
+// Represents a publisher profile (https://support.google.com/admanager/answer/6035806) in Marketplace. All fields are read only. All string fields are free-form text entered by the publisher unless noted otherwise.
 type PublisherProfile struct {
 	AudienceDescription      *string                             `json:"audienceDescription,omitempty"`
 	BuyerPitchStatement      *string                             `json:"buyerPitchStatement,omitempty"`

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleAnalyticsAdminV1alphaAudience } from "./googleanalyticsadminv1alphaaudience";
+
 
 
 // GoogleAnalyticsAdminV1alphaListAudiencesResponse
@@ -8,9 +8,9 @@ import { GoogleAnalyticsAdminV1alphaAudience } from "./googleanalyticsadminv1alp
  * Response message for ListAudiences RPC.
 **/
 export class GoogleAnalyticsAdminV1alphaListAudiencesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=audiences", elemType: shared.GoogleAnalyticsAdminV1alphaAudience })
+  @SpeakeasyMetadata({ data: "json, name=audiences", elemType: GoogleAnalyticsAdminV1alphaAudience })
   audiences?: GoogleAnalyticsAdminV1alphaAudience[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

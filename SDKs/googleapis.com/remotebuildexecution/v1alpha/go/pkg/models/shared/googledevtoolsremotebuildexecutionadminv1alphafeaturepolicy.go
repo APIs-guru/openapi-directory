@@ -16,6 +16,8 @@ const (
 	GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyVMVerificationEnumVMVerificationOff         GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyVMVerificationEnum = "VM_VERIFICATION_OFF"
 )
 
+// GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicy
+// FeaturePolicy defines features allowed to be used on RBE instances, as well as instance-wide behavior changes that take effect without opt-in or opt-out at usage time.
 type GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicy struct {
 	ContainerImageSources            *GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature            `json:"containerImageSources,omitempty"`
 	DockerAddCapabilities            *GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature            `json:"dockerAddCapabilities,omitempty"`

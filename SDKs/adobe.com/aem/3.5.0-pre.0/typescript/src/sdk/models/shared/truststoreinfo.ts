@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TruststoreItems } from "./truststoreitems";
 
 
+
 export class TruststoreInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=aliases", elemType: shared.TruststoreItems })
+  @SpeakeasyMetadata({ data: "json, name=aliases", elemType: TruststoreItems })
   aliases?: TruststoreItems[];
 
-  @Metadata({ data: "json, name=exists" })
+  @SpeakeasyMetadata({ data: "json, name=exists" })
   exists?: boolean;
 }

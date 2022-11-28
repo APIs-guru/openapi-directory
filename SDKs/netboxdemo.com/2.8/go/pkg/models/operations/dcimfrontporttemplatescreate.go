@@ -5,7 +5,7 @@ import (
 )
 
 type DcimFrontPortTemplatesCreateRequest struct {
-	Request shared.WritableFrontPortTemplate `request:"mediaType=application/json"`
+	Request shared.WritableFrontPortTemplateInput `request:"mediaType=application/json"`
 }
 
 type DcimFrontPortTemplatesCreateResponse struct {

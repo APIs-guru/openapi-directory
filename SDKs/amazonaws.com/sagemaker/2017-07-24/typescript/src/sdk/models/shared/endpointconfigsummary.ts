@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // EndpointConfigSummary
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides summary information for an endpoint configuration.
 **/
 export class EndpointConfigSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime: Date;
 
-  @Metadata({ data: "json, name=EndpointConfigArn" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointConfigArn" })
   endpointConfigArn: string;
 
-  @Metadata({ data: "json, name=EndpointConfigName" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointConfigName" })
   endpointConfigName: string;
 }

@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetAlertsAlertIdAttachmentsAttachmentIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=alertId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=alertId" })
   alertId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=attachmentId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=attachmentId" })
   attachmentId: string;
 }
 
 
 export class GetAlertsAlertIdAttachmentsAttachmentIdQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=height" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=height" })
   height?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=scale" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=scale" })
   scale?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=width" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=width" })
   width?: number;
 }
 
 
 export class GetAlertsAlertIdAttachmentsAttachmentIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetAlertsAlertIdAttachmentsAttachmentIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetAlertsAlertIdAttachmentsAttachmentIdQueryParams;
 }
 
 
 export class GetAlertsAlertIdAttachmentsAttachmentIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponseContent?: shared.ErrorResponseContent;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getAlertsAlertIdAttachmentsAttachmentId200ApplicationJsonBinaryString?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getAlertsAlertIdAttachmentsAttachmentId200TextJsonBinaryString?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getAlertsAlertIdAttachmentsAttachmentId200TextPlainBinaryString?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

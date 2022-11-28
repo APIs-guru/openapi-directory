@@ -1,23 +1,23 @@
 from dataclasses import dataclass, field
-
+from typing import Optional
 
 
 @dataclass
 class GetMappedQtlByPositionUsingGetPathParams:
-    chr: str = field(default=None, metadata={'path_param': { 'field_name': 'chr', 'style': 'simple', 'explode': False }})
-    map_key: int = field(default=None, metadata={'path_param': { 'field_name': 'mapKey', 'style': 'simple', 'explode': False }})
-    start: int = field(default=None, metadata={'path_param': { 'field_name': 'start', 'style': 'simple', 'explode': False }})
-    stop: int = field(default=None, metadata={'path_param': { 'field_name': 'stop', 'style': 'simple', 'explode': False }})
+    chr: str = field(metadata={'path_param': { 'field_name': 'chr', 'style': 'simple', 'explode': False }})
+    map_key: int = field(metadata={'path_param': { 'field_name': 'mapKey', 'style': 'simple', 'explode': False }})
+    start: int = field(metadata={'path_param': { 'field_name': 'start', 'style': 'simple', 'explode': False }})
+    stop: int = field(metadata={'path_param': { 'field_name': 'stop', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetMappedQtlByPositionUsingGetRequest:
-    path_params: GetMappedQtlByPositionUsingGetPathParams = field(default=None)
+    path_params: GetMappedQtlByPositionUsingGetPathParams = field()
     
 
 @dataclass
 class GetMappedQtlByPositionUsingGetResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

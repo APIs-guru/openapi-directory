@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class StoryIDGetPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,14 +18,14 @@ class StoryIDGetQueryParams:
 
 @dataclass
 class StoryIDGetRequest:
-    path_params: StoryIDGetPathParams = field(default=None)
-    query_params: StoryIDGetQueryParams = field(default=None)
+    path_params: StoryIDGetPathParams = field()
+    query_params: StoryIDGetQueryParams = field()
     
 
 @dataclass
 class StoryIDGetResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     problem_detail: Optional[Any] = field(default=None)
     story: Optional[shared.Story] = field(default=None)
     

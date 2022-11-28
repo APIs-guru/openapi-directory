@@ -1,50 +1,132 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { MaintenancePolicyInput } from "./maintenancepolicy";
+import { MaintenanceScheduleInput } from "./maintenanceschedule";
+import { PersistenceConfigInput } from "./persistenceconfig";
 import { MaintenancePolicy } from "./maintenancepolicy";
 import { MaintenanceSchedule } from "./maintenanceschedule";
 import { NodeInfo } from "./nodeinfo";
 import { PersistenceConfig } from "./persistenceconfig";
 import { TlsCertificate } from "./tlscertificate";
 
+
 export enum InstanceConnectModeEnum {
-    ConnectModeUnspecified = "CONNECT_MODE_UNSPECIFIED"
-,    DirectPeering = "DIRECT_PEERING"
-,    PrivateServiceAccess = "PRIVATE_SERVICE_ACCESS"
+    ConnectModeUnspecified = "CONNECT_MODE_UNSPECIFIED",
+    DirectPeering = "DIRECT_PEERING",
+    PrivateServiceAccess = "PRIVATE_SERVICE_ACCESS"
 }
 
 export enum InstanceReadReplicasModeEnum {
-    ReadReplicasModeUnspecified = "READ_REPLICAS_MODE_UNSPECIFIED"
-,    ReadReplicasDisabled = "READ_REPLICAS_DISABLED"
-,    ReadReplicasEnabled = "READ_REPLICAS_ENABLED"
-}
-
-export enum InstanceStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Creating = "CREATING"
-,    Ready = "READY"
-,    Updating = "UPDATING"
-,    Deleting = "DELETING"
-,    Repairing = "REPAIRING"
-,    Maintenance = "MAINTENANCE"
-,    Importing = "IMPORTING"
-,    FailingOver = "FAILING_OVER"
+    ReadReplicasModeUnspecified = "READ_REPLICAS_MODE_UNSPECIFIED",
+    ReadReplicasDisabled = "READ_REPLICAS_DISABLED",
+    ReadReplicasEnabled = "READ_REPLICAS_ENABLED"
 }
 
 export enum InstanceSuspensionReasonsEnum {
-    SuspensionReasonUnspecified = "SUSPENSION_REASON_UNSPECIFIED"
-,    CustomerManagedKeyIssue = "CUSTOMER_MANAGED_KEY_ISSUE"
+    SuspensionReasonUnspecified = "SUSPENSION_REASON_UNSPECIFIED",
+    CustomerManagedKeyIssue = "CUSTOMER_MANAGED_KEY_ISSUE"
 }
 
 export enum InstanceTierEnum {
-    TierUnspecified = "TIER_UNSPECIFIED"
-,    Basic = "BASIC"
-,    StandardHa = "STANDARD_HA"
+    TierUnspecified = "TIER_UNSPECIFIED",
+    Basic = "BASIC",
+    StandardHa = "STANDARD_HA"
 }
 
 export enum InstanceTransitEncryptionModeEnum {
-    TransitEncryptionModeUnspecified = "TRANSIT_ENCRYPTION_MODE_UNSPECIFIED"
-,    ServerAuthentication = "SERVER_AUTHENTICATION"
-,    Disabled = "DISABLED"
+    TransitEncryptionModeUnspecified = "TRANSIT_ENCRYPTION_MODE_UNSPECIFIED",
+    ServerAuthentication = "SERVER_AUTHENTICATION",
+    Disabled = "DISABLED"
+}
+
+export enum InstanceStateEnum {
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Creating = "CREATING",
+    Ready = "READY",
+    Updating = "UPDATING",
+    Deleting = "DELETING",
+    Repairing = "REPAIRING",
+    Maintenance = "MAINTENANCE",
+    Importing = "IMPORTING",
+    FailingOver = "FAILING_OVER"
+}
+
+
+// InstanceInput
+/** 
+ * A Memorystore for Redis instance.
+**/
+export class InstanceInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=alternativeLocationId" })
+  alternativeLocationId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=authEnabled" })
+  authEnabled?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=authorizedNetwork" })
+  authorizedNetwork?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=availableMaintenanceVersions" })
+  availableMaintenanceVersions?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=connectMode" })
+  connectMode?: InstanceConnectModeEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=customerManagedKey" })
+  customerManagedKey?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
+  displayName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=locationId" })
+  locationId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=maintenancePolicy" })
+  maintenancePolicy?: MaintenancePolicyInput;
+
+  @SpeakeasyMetadata({ data: "json, name=maintenanceSchedule" })
+  maintenanceSchedule?: MaintenanceScheduleInput;
+
+  @SpeakeasyMetadata({ data: "json, name=maintenanceVersion" })
+  maintenanceVersion?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=memorySizeGb" })
+  memorySizeGb?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=persistenceConfig" })
+  persistenceConfig?: PersistenceConfigInput;
+
+  @SpeakeasyMetadata({ data: "json, name=readReplicasMode" })
+  readReplicasMode?: InstanceReadReplicasModeEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=redisConfigs" })
+  redisConfigs?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=redisVersion" })
+  redisVersion?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=replicaCount" })
+  replicaCount?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=reservedIpRange" })
+  reservedIpRange?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=secondaryIpRange" })
+  secondaryIpRange?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=suspensionReasons" })
+  suspensionReasons?: InstanceSuspensionReasonsEnum[];
+
+  @SpeakeasyMetadata({ data: "json, name=tier" })
+  tier?: InstanceTierEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=transitEncryptionMode" })
+  transitEncryptionMode?: InstanceTransitEncryptionModeEnum;
 }
 
 
@@ -53,108 +135,108 @@ export enum InstanceTransitEncryptionModeEnum {
  * A Memorystore for Redis instance.
 **/
 export class Instance extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alternativeLocationId" })
+  @SpeakeasyMetadata({ data: "json, name=alternativeLocationId" })
   alternativeLocationId?: string;
 
-  @Metadata({ data: "json, name=authEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=authEnabled" })
   authEnabled?: boolean;
 
-  @Metadata({ data: "json, name=authorizedNetwork" })
+  @SpeakeasyMetadata({ data: "json, name=authorizedNetwork" })
   authorizedNetwork?: string;
 
-  @Metadata({ data: "json, name=availableMaintenanceVersions" })
+  @SpeakeasyMetadata({ data: "json, name=availableMaintenanceVersions" })
   availableMaintenanceVersions?: string[];
 
-  @Metadata({ data: "json, name=connectMode" })
+  @SpeakeasyMetadata({ data: "json, name=connectMode" })
   connectMode?: InstanceConnectModeEnum;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=currentLocationId" })
+  @SpeakeasyMetadata({ data: "json, name=currentLocationId" })
   currentLocationId?: string;
 
-  @Metadata({ data: "json, name=customerManagedKey" })
+  @SpeakeasyMetadata({ data: "json, name=customerManagedKey" })
   customerManagedKey?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=host" })
+  @SpeakeasyMetadata({ data: "json, name=host" })
   host?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=locationId" })
+  @SpeakeasyMetadata({ data: "json, name=locationId" })
   locationId?: string;
 
-  @Metadata({ data: "json, name=maintenancePolicy" })
+  @SpeakeasyMetadata({ data: "json, name=maintenancePolicy" })
   maintenancePolicy?: MaintenancePolicy;
 
-  @Metadata({ data: "json, name=maintenanceSchedule" })
+  @SpeakeasyMetadata({ data: "json, name=maintenanceSchedule" })
   maintenanceSchedule?: MaintenanceSchedule;
 
-  @Metadata({ data: "json, name=maintenanceVersion" })
+  @SpeakeasyMetadata({ data: "json, name=maintenanceVersion" })
   maintenanceVersion?: string;
 
-  @Metadata({ data: "json, name=memorySizeGb" })
+  @SpeakeasyMetadata({ data: "json, name=memorySizeGb" })
   memorySizeGb?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=nodes", elemType: shared.NodeInfo })
+  @SpeakeasyMetadata({ data: "json, name=nodes", elemType: NodeInfo })
   nodes?: NodeInfo[];
 
-  @Metadata({ data: "json, name=persistenceConfig" })
+  @SpeakeasyMetadata({ data: "json, name=persistenceConfig" })
   persistenceConfig?: PersistenceConfig;
 
-  @Metadata({ data: "json, name=persistenceIamIdentity" })
+  @SpeakeasyMetadata({ data: "json, name=persistenceIamIdentity" })
   persistenceIamIdentity?: string;
 
-  @Metadata({ data: "json, name=port" })
+  @SpeakeasyMetadata({ data: "json, name=port" })
   port?: number;
 
-  @Metadata({ data: "json, name=readEndpoint" })
+  @SpeakeasyMetadata({ data: "json, name=readEndpoint" })
   readEndpoint?: string;
 
-  @Metadata({ data: "json, name=readEndpointPort" })
+  @SpeakeasyMetadata({ data: "json, name=readEndpointPort" })
   readEndpointPort?: number;
 
-  @Metadata({ data: "json, name=readReplicasMode" })
+  @SpeakeasyMetadata({ data: "json, name=readReplicasMode" })
   readReplicasMode?: InstanceReadReplicasModeEnum;
 
-  @Metadata({ data: "json, name=redisConfigs" })
+  @SpeakeasyMetadata({ data: "json, name=redisConfigs" })
   redisConfigs?: Map<string, string>;
 
-  @Metadata({ data: "json, name=redisVersion" })
+  @SpeakeasyMetadata({ data: "json, name=redisVersion" })
   redisVersion?: string;
 
-  @Metadata({ data: "json, name=replicaCount" })
+  @SpeakeasyMetadata({ data: "json, name=replicaCount" })
   replicaCount?: number;
 
-  @Metadata({ data: "json, name=reservedIpRange" })
+  @SpeakeasyMetadata({ data: "json, name=reservedIpRange" })
   reservedIpRange?: string;
 
-  @Metadata({ data: "json, name=secondaryIpRange" })
+  @SpeakeasyMetadata({ data: "json, name=secondaryIpRange" })
   secondaryIpRange?: string;
 
-  @Metadata({ data: "json, name=serverCaCerts", elemType: shared.TlsCertificate })
+  @SpeakeasyMetadata({ data: "json, name=serverCaCerts", elemType: TlsCertificate })
   serverCaCerts?: TlsCertificate[];
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: InstanceStateEnum;
 
-  @Metadata({ data: "json, name=statusMessage" })
+  @SpeakeasyMetadata({ data: "json, name=statusMessage" })
   statusMessage?: string;
 
-  @Metadata({ data: "json, name=suspensionReasons" })
+  @SpeakeasyMetadata({ data: "json, name=suspensionReasons" })
   suspensionReasons?: InstanceSuspensionReasonsEnum[];
 
-  @Metadata({ data: "json, name=tier" })
+  @SpeakeasyMetadata({ data: "json, name=tier" })
   tier?: InstanceTierEnum;
 
-  @Metadata({ data: "json, name=transitEncryptionMode" })
+  @SpeakeasyMetadata({ data: "json, name=transitEncryptionMode" })
   transitEncryptionMode?: InstanceTransitEncryptionModeEnum;
 }

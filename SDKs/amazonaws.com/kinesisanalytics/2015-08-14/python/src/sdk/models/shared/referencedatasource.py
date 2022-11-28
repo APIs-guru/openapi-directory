@@ -1,14 +1,18 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import sourceschema
-from . import s3referencedatasource
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ReferenceDataSource:
-    reference_schema: sourceschema.SourceSchema = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ReferenceSchema' }})
-    s3_reference_data_source: Optional[s3referencedatasource.S3ReferenceDataSource] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'S3ReferenceDataSource' }})
-    table_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TableName' }})
+    r"""ReferenceDataSource
+    Describes the reference data source by providing the source information (S3 bucket name and object key name), the resulting in-application table name that is created, and the necessary schema to map the data elements in the Amazon S3 object to the in-application table.
+    """
+    
+    reference_schema: SourceSchema = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ReferenceSchema') }})
+    table_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('TableName') }})
+    s3_reference_data_source: Optional[S3ReferenceDataSource] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('S3ReferenceDataSource') }})
     

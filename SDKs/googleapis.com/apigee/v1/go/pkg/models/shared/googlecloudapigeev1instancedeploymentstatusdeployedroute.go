@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudApigeeV1InstanceDeploymentStatusDeployedRoute
+// Route deployed in the ingress routing table.
 type GoogleCloudApigeeV1InstanceDeploymentStatusDeployedRoute struct {
 	Basepath    *string `json:"basepath,omitempty"`
 	Envgroup    *string `json:"envgroup,omitempty"`

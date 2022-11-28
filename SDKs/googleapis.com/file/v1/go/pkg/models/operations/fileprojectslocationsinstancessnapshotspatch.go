@@ -31,7 +31,7 @@ type FileProjectsLocationsInstancesSnapshotsPatchSecurity struct {
 type FileProjectsLocationsInstancesSnapshotsPatchRequest struct {
 	PathParams  FileProjectsLocationsInstancesSnapshotsPatchPathParams
 	QueryParams FileProjectsLocationsInstancesSnapshotsPatchQueryParams
-	Request     *shared.Snapshot `request:"mediaType=application/json"`
+	Request     *shared.SnapshotInput `request:"mediaType=application/json"`
 	Security    FileProjectsLocationsInstancesSnapshotsPatchSecurity
 }
 

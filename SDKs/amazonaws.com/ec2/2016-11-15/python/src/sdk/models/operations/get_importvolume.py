@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetImportVolumeActionEnum(str, Enum):
@@ -8,9 +12,13 @@ class GetImportVolumeActionEnum(str, Enum):
 
 @dataclass
 class GetImportVolumeImage:
-    bytes: int = field(default=None, metadata={'query_param': { 'field_name': 'Bytes' }})
-    format: shared.DiskImageFormatEnum = field(default=None, metadata={'query_param': { 'field_name': 'Format' }})
-    import_manifest_url: str = field(default=None, metadata={'query_param': { 'field_name': 'ImportManifestUrl' }})
+    r"""GetImportVolumeImage
+    Describes a disk image.
+    """
+    
+    bytes: int = field(metadata={'query_param': { 'field_name': 'Bytes' }})
+    format: shared.DiskImageFormatEnum = field(metadata={'query_param': { 'field_name': 'Format' }})
+    import_manifest_url: str = field(metadata={'query_param': { 'field_name': 'ImportManifestUrl' }})
     
 class GetImportVolumeVersionEnum(str, Enum):
     TWO_THOUSAND_AND_SIXTEEN_11_15 = "2016-11-15"
@@ -18,18 +26,22 @@ class GetImportVolumeVersionEnum(str, Enum):
 
 @dataclass
 class GetImportVolumeVolume:
-    size: int = field(default=None, metadata={'query_param': { 'field_name': 'Size' }})
+    r"""GetImportVolumeVolume
+    Describes an EBS volume.
+    """
+    
+    size: int = field(metadata={'query_param': { 'field_name': 'Size' }})
     
 
 @dataclass
 class GetImportVolumeQueryParams:
-    action: GetImportVolumeActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    availability_zone: str = field(default=None, metadata={'query_param': { 'field_name': 'AvailabilityZone', 'style': 'form', 'explode': True }})
+    action: GetImportVolumeActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    availability_zone: str = field(metadata={'query_param': { 'field_name': 'AvailabilityZone', 'style': 'form', 'explode': True }})
+    image: GetImportVolumeImage = field(metadata={'query_param': { 'field_name': 'Image', 'style': 'form', 'explode': True }})
+    version: GetImportVolumeVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    volume: GetImportVolumeVolume = field(metadata={'query_param': { 'field_name': 'Volume', 'style': 'form', 'explode': True }})
     description: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Description', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    image: GetImportVolumeImage = field(default=None, metadata={'query_param': { 'field_name': 'Image', 'style': 'form', 'explode': True }})
-    version: GetImportVolumeVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
-    volume: GetImportVolumeVolume = field(default=None, metadata={'query_param': { 'field_name': 'Volume', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -45,13 +57,13 @@ class GetImportVolumeHeaders:
 
 @dataclass
 class GetImportVolumeRequest:
-    query_params: GetImportVolumeQueryParams = field(default=None)
-    headers: GetImportVolumeHeaders = field(default=None)
+    headers: GetImportVolumeHeaders = field()
+    query_params: GetImportVolumeQueryParams = field()
     
 
 @dataclass
 class GetImportVolumeResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceMetadata } from "./resourcemetadata";
 import { VirtualServiceSpec } from "./virtualservicespec";
 import { VirtualServiceStatus } from "./virtualservicestatus";
+
 
 
 // VirtualServiceData
@@ -9,18 +10,18 @@ import { VirtualServiceStatus } from "./virtualservicestatus";
  * An object that represents a virtual service returned by a describe operation.
 **/
 export class VirtualServiceData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=meshName" })
+  @SpeakeasyMetadata({ data: "json, name=meshName" })
   meshName: string;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata: ResourceMetadata;
 
-  @Metadata({ data: "json, name=spec" })
+  @SpeakeasyMetadata({ data: "json, name=spec" })
   spec: VirtualServiceSpec;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: VirtualServiceStatus;
 
-  @Metadata({ data: "json, name=virtualServiceName" })
+  @SpeakeasyMetadata({ data: "json, name=virtualServiceName" })
   virtualServiceName: string;
 }

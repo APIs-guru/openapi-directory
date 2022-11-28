@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Color } from "./color";
 import { ColorStyle } from "./colorstyle";
 import { ChartData } from "./chartdata";
+
 
 
 // HistogramSeries
@@ -9,12 +10,12 @@ import { ChartData } from "./chartdata";
  * A histogram series containing the series color and data.
 **/
 export class HistogramSeries extends SpeakeasyBase {
-  @Metadata({ data: "json, name=barColor" })
+  @SpeakeasyMetadata({ data: "json, name=barColor" })
   barColor?: Color;
 
-  @Metadata({ data: "json, name=barColorStyle" })
+  @SpeakeasyMetadata({ data: "json, name=barColorStyle" })
   barColorStyle?: ColorStyle;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: ChartData;
 }

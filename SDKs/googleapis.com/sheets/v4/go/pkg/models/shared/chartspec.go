@@ -10,6 +10,8 @@ const (
 	ChartSpecHiddenDimensionStrategyEnumShowAll                                 ChartSpecHiddenDimensionStrategyEnum = "SHOW_ALL"
 )
 
+// ChartSpec
+// The specifications of a chart.
 type ChartSpec struct {
 	AltText                   *string                               `json:"altText,omitempty"`
 	BackgroundColor           *Color                                `json:"backgroundColor,omitempty"`

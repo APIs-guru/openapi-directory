@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import libraryoptions
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AddVirtualFolderDto:
-    library_options: Optional[libraryoptions.LibraryOptions] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LibraryOptions' }})
+    r"""AddVirtualFolderDto
+    Add virtual folder dto.
+    """
+    
+    library_options: Optional[LibraryOptions] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('LibraryOptions') }})
     

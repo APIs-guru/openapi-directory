@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import paginginfo
+from sdk import utils
+from . import *
 
 class APIResponseObjectStatusCodeEnum(str, Enum):
     CONTINUE = "Continue"
@@ -56,9 +58,9 @@ class APIResponseObjectStatusCodeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class APIResponseObject:
-    errors: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Errors' }})
-    paging_info: Optional[paginginfo.PagingInfo] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PagingInfo' }})
-    response: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Response' }})
-    status_code: Optional[APIResponseObjectStatusCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StatusCode' }})
-    success: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Success' }})
+    errors: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Errors') }})
+    paging_info: Optional[PagingInfo] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PagingInfo') }})
+    response: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Response') }})
+    status_code: Optional[APIResponseObjectStatusCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StatusCode') }})
+    success: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Success') }})
     

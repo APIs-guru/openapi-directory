@@ -1,140 +1,269 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MediaProtocolEnum } from "./mediaprotocolenum";
 import { IsoTypeEnum } from "./isotypeenum";
 import { MediaAttachment } from "./mediaattachment";
 import { MediaStream } from "./mediastream";
-import { MediaProtocolEnum } from "./mediaprotocolenum";
 import { TransportStreamTimestampEnum } from "./transportstreamtimestampenum";
 import { MediaSourceTypeEnum } from "./mediasourcetypeenum";
 import { Video3DFormatEnum } from "./video3dformatenum";
 import { VideoTypeEnum } from "./videotypeenum";
+import { MediaStreamInput } from "./mediastream";
+
 
 
 export class MediaSourceInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AnalyzeDurationMs" })
+  @SpeakeasyMetadata({ data: "json, name=AnalyzeDurationMs" })
   analyzeDurationMs?: number;
 
-  @Metadata({ data: "json, name=Bitrate" })
+  @SpeakeasyMetadata({ data: "json, name=Bitrate" })
   bitrate?: number;
 
-  @Metadata({ data: "json, name=BufferMs" })
+  @SpeakeasyMetadata({ data: "json, name=BufferMs" })
   bufferMs?: number;
 
-  @Metadata({ data: "json, name=Container" })
+  @SpeakeasyMetadata({ data: "json, name=Container" })
   container?: string;
 
-  @Metadata({ data: "json, name=DefaultAudioStreamIndex" })
+  @SpeakeasyMetadata({ data: "json, name=DefaultAudioStreamIndex" })
   defaultAudioStreamIndex?: number;
 
-  @Metadata({ data: "json, name=DefaultSubtitleStreamIndex" })
+  @SpeakeasyMetadata({ data: "json, name=DefaultSubtitleStreamIndex" })
   defaultSubtitleStreamIndex?: number;
 
-  @Metadata({ data: "json, name=ETag" })
+  @SpeakeasyMetadata({ data: "json, name=ETag" })
   eTag?: string;
 
-  @Metadata({ data: "json, name=EncoderPath" })
+  @SpeakeasyMetadata({ data: "json, name=EncoderPath" })
   encoderPath?: string;
 
-  @Metadata({ data: "json, name=EncoderProtocol" })
+  @SpeakeasyMetadata({ data: "json, name=EncoderProtocol" })
   encoderProtocol?: MediaProtocolEnum;
 
-  @Metadata({ data: "json, name=Formats" })
+  @SpeakeasyMetadata({ data: "json, name=Formats" })
   formats?: string[];
 
-  @Metadata({ data: "json, name=GenPtsInput" })
+  @SpeakeasyMetadata({ data: "json, name=GenPtsInput" })
   genPtsInput?: boolean;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=IgnoreDts" })
+  @SpeakeasyMetadata({ data: "json, name=IgnoreDts" })
   ignoreDts?: boolean;
 
-  @Metadata({ data: "json, name=IgnoreIndex" })
+  @SpeakeasyMetadata({ data: "json, name=IgnoreIndex" })
   ignoreIndex?: boolean;
 
-  @Metadata({ data: "json, name=IsInfiniteStream" })
+  @SpeakeasyMetadata({ data: "json, name=IsInfiniteStream" })
   isInfiniteStream?: boolean;
 
-  @Metadata({ data: "json, name=IsRemote" })
+  @SpeakeasyMetadata({ data: "json, name=IsRemote" })
   isRemote?: boolean;
 
-  @Metadata({ data: "json, name=IsoType" })
+  @SpeakeasyMetadata({ data: "json, name=IsoType" })
   isoType?: IsoTypeEnum;
 
-  @Metadata({ data: "json, name=LiveStreamId" })
+  @SpeakeasyMetadata({ data: "json, name=LiveStreamId" })
   liveStreamId?: string;
 
-  @Metadata({ data: "json, name=MediaAttachments", elemType: shared.MediaAttachment })
+  @SpeakeasyMetadata({ data: "json, name=MediaAttachments", elemType: MediaAttachment })
   mediaAttachments?: MediaAttachment[];
 
-  @Metadata({ data: "json, name=MediaStreams", elemType: shared.MediaStream })
+  @SpeakeasyMetadata({ data: "json, name=MediaStreams", elemType: MediaStream })
   mediaStreams?: MediaStream[];
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=OpenToken" })
+  @SpeakeasyMetadata({ data: "json, name=OpenToken" })
   openToken?: string;
 
-  @Metadata({ data: "json, name=Path" })
+  @SpeakeasyMetadata({ data: "json, name=Path" })
   path?: string;
 
-  @Metadata({ data: "json, name=Protocol" })
+  @SpeakeasyMetadata({ data: "json, name=Protocol" })
   protocol?: MediaProtocolEnum;
 
-  @Metadata({ data: "json, name=ReadAtNativeFramerate" })
+  @SpeakeasyMetadata({ data: "json, name=ReadAtNativeFramerate" })
   readAtNativeFramerate?: boolean;
 
-  @Metadata({ data: "json, name=RequiredHttpHeaders" })
+  @SpeakeasyMetadata({ data: "json, name=RequiredHttpHeaders" })
   requiredHttpHeaders?: Map<string, string>;
 
-  @Metadata({ data: "json, name=RequiresClosing" })
+  @SpeakeasyMetadata({ data: "json, name=RequiresClosing" })
   requiresClosing?: boolean;
 
-  @Metadata({ data: "json, name=RequiresLooping" })
+  @SpeakeasyMetadata({ data: "json, name=RequiresLooping" })
   requiresLooping?: boolean;
 
-  @Metadata({ data: "json, name=RequiresOpening" })
+  @SpeakeasyMetadata({ data: "json, name=RequiresOpening" })
   requiresOpening?: boolean;
 
-  @Metadata({ data: "json, name=RunTimeTicks" })
+  @SpeakeasyMetadata({ data: "json, name=RunTimeTicks" })
   runTimeTicks?: number;
 
-  @Metadata({ data: "json, name=Size" })
+  @SpeakeasyMetadata({ data: "json, name=Size" })
   size?: number;
 
-  @Metadata({ data: "json, name=SupportsDirectPlay" })
+  @SpeakeasyMetadata({ data: "json, name=SupportsDirectPlay" })
   supportsDirectPlay?: boolean;
 
-  @Metadata({ data: "json, name=SupportsDirectStream" })
+  @SpeakeasyMetadata({ data: "json, name=SupportsDirectStream" })
   supportsDirectStream?: boolean;
 
-  @Metadata({ data: "json, name=SupportsProbing" })
+  @SpeakeasyMetadata({ data: "json, name=SupportsProbing" })
   supportsProbing?: boolean;
 
-  @Metadata({ data: "json, name=SupportsTranscoding" })
+  @SpeakeasyMetadata({ data: "json, name=SupportsTranscoding" })
   supportsTranscoding?: boolean;
 
-  @Metadata({ data: "json, name=Timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=Timestamp" })
   timestamp?: TransportStreamTimestampEnum;
 
-  @Metadata({ data: "json, name=TranscodingContainer" })
+  @SpeakeasyMetadata({ data: "json, name=TranscodingContainer" })
   transcodingContainer?: string;
 
-  @Metadata({ data: "json, name=TranscodingSubProtocol" })
+  @SpeakeasyMetadata({ data: "json, name=TranscodingSubProtocol" })
   transcodingSubProtocol?: string;
 
-  @Metadata({ data: "json, name=TranscodingUrl" })
+  @SpeakeasyMetadata({ data: "json, name=TranscodingUrl" })
   transcodingUrl?: string;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: MediaSourceTypeEnum;
 
-  @Metadata({ data: "json, name=Video3DFormat" })
+  @SpeakeasyMetadata({ data: "json, name=Video3DFormat" })
   video3DFormat?: Video3DFormatEnum;
 
-  @Metadata({ data: "json, name=VideoType" })
+  @SpeakeasyMetadata({ data: "json, name=VideoType" })
+  videoType?: VideoTypeEnum;
+}
+
+
+export class MediaSourceInfoInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=AnalyzeDurationMs" })
+  analyzeDurationMs?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=Bitrate" })
+  bitrate?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=BufferMs" })
+  bufferMs?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=Container" })
+  container?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=DefaultAudioStreamIndex" })
+  defaultAudioStreamIndex?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=DefaultSubtitleStreamIndex" })
+  defaultSubtitleStreamIndex?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=ETag" })
+  eTag?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=EncoderPath" })
+  encoderPath?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=EncoderProtocol" })
+  encoderProtocol?: MediaProtocolEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=Formats" })
+  formats?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=GenPtsInput" })
+  genPtsInput?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=Id" })
+  id?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=IgnoreDts" })
+  ignoreDts?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=IgnoreIndex" })
+  ignoreIndex?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=IsInfiniteStream" })
+  isInfiniteStream?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=IsRemote" })
+  isRemote?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=IsoType" })
+  isoType?: IsoTypeEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=LiveStreamId" })
+  liveStreamId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=MediaAttachments", elemType: MediaAttachment })
+  mediaAttachments?: MediaAttachment[];
+
+  @SpeakeasyMetadata({ data: "json, name=MediaStreams", elemType: MediaStreamInput })
+  mediaStreams?: MediaStreamInput[];
+
+  @SpeakeasyMetadata({ data: "json, name=Name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=OpenToken" })
+  openToken?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=Path" })
+  path?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=Protocol" })
+  protocol?: MediaProtocolEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=ReadAtNativeFramerate" })
+  readAtNativeFramerate?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=RequiredHttpHeaders" })
+  requiredHttpHeaders?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=RequiresClosing" })
+  requiresClosing?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=RequiresLooping" })
+  requiresLooping?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=RequiresOpening" })
+  requiresOpening?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=RunTimeTicks" })
+  runTimeTicks?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=Size" })
+  size?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=SupportsDirectPlay" })
+  supportsDirectPlay?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=SupportsDirectStream" })
+  supportsDirectStream?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=SupportsProbing" })
+  supportsProbing?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=SupportsTranscoding" })
+  supportsTranscoding?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=Timestamp" })
+  timestamp?: TransportStreamTimestampEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=TranscodingContainer" })
+  transcodingContainer?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=TranscodingSubProtocol" })
+  transcodingSubProtocol?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=TranscodingUrl" })
+  transcodingUrl?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=Type" })
+  type?: MediaSourceTypeEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=Video3DFormat" })
+  video3DFormat?: Video3DFormatEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=VideoType" })
   videoType?: VideoTypeEnum;
 }

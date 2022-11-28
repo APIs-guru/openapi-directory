@@ -1,15 +1,20 @@
 import { AxiosInstance, AxiosRequestConfig } from "axios";
 import * as operations from "./models/operations";
-declare type OptsFunc = (sdk: SDK) => void;
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://api.peoplefinderspro.com"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
     /**
+     * postAddressAutocomplete - Search
+     *
      * ###### *Click on the grey search box above, to view sample request/response objects for Address Autocomplete Search*
      *
      * Perform a search:
@@ -32,8 +37,10 @@ export declare class SDK {
      *
      * + <code>Input</code> = null (optional, string) ... address.
     **/
-    PostAddressAutocomplete(req: operations.PostAddressAutocompleteRequest, config?: AxiosRequestConfig): Promise<operations.PostAddressAutocompleteResponse>;
+    postAddressAutocomplete(req: operations.PostAddressAutocompleteRequest, config?: AxiosRequestConfig): Promise<operations.PostAddressAutocompleteResponse>;
     /**
+     * postContactEnrich - Search
+     *
      * ###### *Click on the grey search box above, to view sample request/response objects for Contact Enrichment Search*
      *
      * Perform a search:
@@ -83,8 +90,10 @@ export declare class SDK {
      *
      * + <code>Email</code> = null (optional, string) ... E-mail address.
     **/
-    PostContactEnrich(req: operations.PostContactEnrichRequest, config?: AxiosRequestConfig): Promise<operations.PostContactEnrichResponse>;
+    postContactEnrich(req: operations.PostContactEnrichRequest, config?: AxiosRequestConfig): Promise<operations.PostContactEnrichResponse>;
     /**
+     * postEmailEnrich - Search
+     *
      * ###### *Click on the grey search box above, to view sample request/response objects for Email Enrichment Search*
      *
      * Perform a search:
@@ -107,8 +116,10 @@ export declare class SDK {
      *
      * + <code>Email</code> = null (optional, string) ... E-mail address.
     **/
-    PostEmailEnrich(req: operations.PostEmailEnrichRequest, config?: AxiosRequestConfig): Promise<operations.PostEmailEnrichResponse>;
+    postEmailEnrich(req: operations.PostEmailEnrichRequest, config?: AxiosRequestConfig): Promise<operations.PostEmailEnrichResponse>;
     /**
+     * postPhoneEnrich - Search
+     *
      * ###### *Click on the grey search box above, to view sample request/response objects for Phone Enrichment Search*
      *
      * Perform a search:
@@ -131,8 +142,10 @@ export declare class SDK {
      *
      * + <code>Phone</code> = null (optional, string) ... Phone number (formats: ###-###-####, (###) ###-####).
     **/
-    PostPhoneEnrich(req: operations.PostPhoneEnrichRequest, config?: AxiosRequestConfig): Promise<operations.PostPhoneEnrichResponse>;
+    postPhoneEnrich(req: operations.PostPhoneEnrichRequest, config?: AxiosRequestConfig): Promise<operations.PostPhoneEnrichResponse>;
     /**
+     * search - Search
+     *
      * ###### *Click on the grey search box above, to view sample request/response objects for the Identity Verification Search*
      *
      * Perform a search:
@@ -182,6 +195,6 @@ export declare class SDK {
      *
      * + <code>Email</code> = null (optional, string) ... E-mail address.
     **/
-    Search(req: operations.SearchRequest, config?: AxiosRequestConfig): Promise<operations.SearchResponse>;
+    search(req: operations.SearchRequest, config?: AxiosRequestConfig): Promise<operations.SearchResponse>;
 }
 export {};

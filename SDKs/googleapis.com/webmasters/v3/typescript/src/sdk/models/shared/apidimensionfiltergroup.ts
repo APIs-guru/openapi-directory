@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApiDimensionFilter } from "./apidimensionfilter";
 
 
+
 export class ApiDimensionFilterGroup extends SpeakeasyBase {
-  @Metadata({ data: "json, name=filters", elemType: shared.ApiDimensionFilter })
+  @SpeakeasyMetadata({ data: "json, name=filters", elemType: ApiDimensionFilter })
   filters?: ApiDimensionFilter[];
 
-  @Metadata({ data: "json, name=groupType" })
+  @SpeakeasyMetadata({ data: "json, name=groupType" })
   groupType?: string;
 }

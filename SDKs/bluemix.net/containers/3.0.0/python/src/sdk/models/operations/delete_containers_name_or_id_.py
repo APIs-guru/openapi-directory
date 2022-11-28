@@ -4,7 +4,7 @@ from typing import Optional
 
 @dataclass
 class DeleteContainersNameOrIDPathParams:
-    name_or_id: str = field(default=None, metadata={'path_param': { 'field_name': 'name_or_id', 'style': 'simple', 'explode': False }})
+    name_or_id: str = field(metadata={'path_param': { 'field_name': 'name_or_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -14,19 +14,19 @@ class DeleteContainersNameOrIDQueryParams:
 
 @dataclass
 class DeleteContainersNameOrIDHeaders:
-    x_auth_project_id: str = field(default=None, metadata={'header': { 'field_name': 'X-Auth-Project-Id', 'style': 'simple', 'explode': False }})
-    x_auth_token: str = field(default=None, metadata={'header': { 'field_name': 'X-Auth-Token', 'style': 'simple', 'explode': False }})
+    x_auth_project_id: str = field(metadata={'header': { 'field_name': 'X-Auth-Project-Id', 'style': 'simple', 'explode': False }})
+    x_auth_token: str = field(metadata={'header': { 'field_name': 'X-Auth-Token', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DeleteContainersNameOrIDRequest:
-    path_params: DeleteContainersNameOrIDPathParams = field(default=None)
-    query_params: DeleteContainersNameOrIDQueryParams = field(default=None)
-    headers: DeleteContainersNameOrIDHeaders = field(default=None)
+    headers: DeleteContainersNameOrIDHeaders = field()
+    path_params: DeleteContainersNameOrIDPathParams = field()
+    query_params: DeleteContainersNameOrIDQueryParams = field()
     
 
 @dataclass
 class DeleteContainersNameOrIDResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

@@ -1,7 +1,8 @@
 
 
+
 export enum ContentTypeEnum {
-    Xml = "xml"
-,    Json = "json"
-,    Jsonp = "jsonp"
+    Xml = "xml",
+    Json = "json",
+    Jsonp = "jsonp"
 }

@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetOfferingsOfferingIdAnalyticsPulsesPulseIdResponsesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=offeringId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=offeringId" })
   offeringId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=pulseId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=pulseId" })
   pulseId: string;
 }
 
 
 export class GetOfferingsOfferingIdAnalyticsPulsesPulseIdResponsesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetOfferingsOfferingIdAnalyticsPulsesPulseIdResponsesPathParams;
 }
 
 
 export class GetOfferingsOfferingIdAnalyticsPulsesPulseIdResponsesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata({ elemType: shared.PulseResponse })
+  @SpeakeasyMetadata({ elemType: shared.PulseResponse })
   pulseResponses?: shared.PulseResponse[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

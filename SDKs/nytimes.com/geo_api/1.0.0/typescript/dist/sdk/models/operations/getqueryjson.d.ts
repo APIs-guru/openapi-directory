@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class GetQueryJsonQueryParams extends SpeakeasyBase {
     dateRange?: string;
@@ -14,11 +14,11 @@ export declare class GetQueryJsonQueryParams extends SpeakeasyBase {
     sort?: string;
     sw?: string;
 }
-export declare class GetQueryJsonRequest extends SpeakeasyBase {
-    queryParams: GetQueryJsonQueryParams;
-}
 export declare class GetQueryJson200ApplicationJson extends SpeakeasyBase {
     results?: shared.Event[];
+}
+export declare class GetQueryJsonRequest extends SpeakeasyBase {
+    queryParams: GetQueryJsonQueryParams;
 }
 export declare class GetQueryJsonResponse extends SpeakeasyBase {
     contentType: string;

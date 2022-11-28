@@ -9,22 +9,9 @@ type GetLongviewClientsQueryParams struct {
 	PageSize *int64 `queryParam:"style=form,explode=true,name=page_size"`
 }
 
-type GetLongviewClientsSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type GetLongviewClientsSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type GetLongviewClientsSecurity struct {
-	Option1 *GetLongviewClientsSecurityOption1 `security:"option"`
-	Option2 *GetLongviewClientsSecurityOption2 `security:"option"`
-}
-
-type GetLongviewClientsRequest struct {
-	QueryParams GetLongviewClientsQueryParams
-	Security    GetLongviewClientsSecurity
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
 }
 
 type GetLongviewClients200ApplicationJSON struct {
@@ -36,6 +23,11 @@ type GetLongviewClients200ApplicationJSON struct {
 
 type GetLongviewClientsDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type GetLongviewClientsRequest struct {
+	QueryParams GetLongviewClientsQueryParams
+	Security    GetLongviewClientsSecurity
 }
 
 type GetLongviewClientsResponse struct {

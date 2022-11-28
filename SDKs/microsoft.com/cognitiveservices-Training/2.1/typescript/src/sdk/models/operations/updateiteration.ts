@@ -1,62 +1,63 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateIterationPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=iterationId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=iterationId" })
   iterationId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=projectId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=projectId" })
   projectId: string;
 }
 
 
 export class UpdateIterationHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Training-Key" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Training-Key" })
   trainingKey: string;
 }
 
 
-export class UpdateIterationRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/xml" })
+export class UpdateIterationRequestsInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/xml" })
   applicationXml: Uint8Array;
 
-  @Metadata({ data: "request, media_type=application/json" })
-  iteration?: shared.Iteration;
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  iteration?: shared.IterationInput;
 
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
-  iteration1?: shared.Iteration;
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  iteration1?: shared.IterationInput;
 
-  @Metadata({ data: "request, media_type=text/json" })
-  iteration2?: shared.Iteration;
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
+  iteration2?: shared.IterationInput;
 
-  @Metadata({ data: "request, media_type=text/xml" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/xml" })
   textXml: Uint8Array;
 }
 
 
 export class UpdateIterationRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateIterationPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdateIterationHeaders;
 
-  @Metadata()
-  request: UpdateIterationRequests;
+  @SpeakeasyMetadata()
+  request: UpdateIterationRequestsInput;
 }
 
 
 export class UpdateIterationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   iteration?: shared.Iteration;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

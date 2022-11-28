@@ -1,5 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GoogleCloudMlV1VersionInput } from "./googlecloudmlv1version";
 import { GoogleCloudMlV1Version } from "./googlecloudmlv1version";
+
+
+
+// GoogleCloudMlV1ModelInput
+/** 
+ * Represents a machine learning solution. A model can have multiple versions, each of which is a deployed, trained model ready to receive prediction requests. The model itself is just a container.
+**/
+export class GoogleCloudMlV1ModelInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=defaultVersion" })
+  defaultVersion?: GoogleCloudMlV1VersionInput;
+
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=etag" })
+  etag?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=onlinePredictionConsoleLogging" })
+  onlinePredictionConsoleLogging?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=onlinePredictionLogging" })
+  onlinePredictionLogging?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=regions" })
+  regions?: string[];
+}
 
 
 // GoogleCloudMlV1Model
@@ -7,27 +40,27 @@ import { GoogleCloudMlV1Version } from "./googlecloudmlv1version";
  * Represents a machine learning solution. A model can have multiple versions, each of which is a deployed, trained model ready to receive prediction requests. The model itself is just a container.
 **/
 export class GoogleCloudMlV1Model extends SpeakeasyBase {
-  @Metadata({ data: "json, name=defaultVersion" })
+  @SpeakeasyMetadata({ data: "json, name=defaultVersion" })
   defaultVersion?: GoogleCloudMlV1Version;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=onlinePredictionConsoleLogging" })
+  @SpeakeasyMetadata({ data: "json, name=onlinePredictionConsoleLogging" })
   onlinePredictionConsoleLogging?: boolean;
 
-  @Metadata({ data: "json, name=onlinePredictionLogging" })
+  @SpeakeasyMetadata({ data: "json, name=onlinePredictionLogging" })
   onlinePredictionLogging?: boolean;
 
-  @Metadata({ data: "json, name=regions" })
+  @SpeakeasyMetadata({ data: "json, name=regions" })
   regions?: string[];
 }

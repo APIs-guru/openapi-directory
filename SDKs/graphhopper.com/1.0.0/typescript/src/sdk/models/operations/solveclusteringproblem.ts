@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class SolveClusteringProblemRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.ClusterRequest;
 }
 
 
 export class SolveClusteringProblemResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   badRequest?: shared.BadRequest;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   clusterResponse?: shared.ClusterResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalErrorMessage?: shared.InternalErrorMessage;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

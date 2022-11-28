@@ -13,12 +13,12 @@ class GetSetupV1BusinessusersQueryParams:
 
 @dataclass
 class GetSetupV1BusinessusersRequest:
-    query_params: GetSetupV1BusinessusersQueryParams = field(default=None)
+    query_params: GetSetupV1BusinessusersQueryParams = field()
     
 
 @dataclass
 class GetSetupV1BusinessusersResponse:
+    content_type: str = field()
+    status_code: int = field()
     business_user_list_view_model: Optional[dict[str, Any]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

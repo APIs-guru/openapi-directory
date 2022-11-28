@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TypedAttributeValue } from "./typedattributevalue";
+
 
 
 // AttributeNameAndValue
@@ -7,9 +8,9 @@ import { TypedAttributeValue } from "./typedattributevalue";
  * Identifies the attribute name and value for a typed link.
 **/
 export class AttributeNameAndValue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AttributeName" })
+  @SpeakeasyMetadata({ data: "json, name=AttributeName" })
   attributeName: string;
 
-  @Metadata({ data: "json, name=Value" })
+  @SpeakeasyMetadata({ data: "json, name=Value" })
   value: TypedAttributeValue;
 }

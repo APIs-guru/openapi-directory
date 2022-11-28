@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AbortTransactionResult } from "./aborttransactionresult";
 import { CommitTransactionResult } from "./committransactionresult";
 import { EndSessionResult } from "./endsessionresult";
@@ -36,31 +36,31 @@ var SendCommandResult = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AbortTransaction" }),
+        SpeakeasyMetadata({ data: "json, name=AbortTransaction" }),
         __metadata("design:type", AbortTransactionResult)
     ], SendCommandResult.prototype, "abortTransaction", void 0);
     __decorate([
-        Metadata({ data: "json, name=CommitTransaction" }),
+        SpeakeasyMetadata({ data: "json, name=CommitTransaction" }),
         __metadata("design:type", CommitTransactionResult)
     ], SendCommandResult.prototype, "commitTransaction", void 0);
     __decorate([
-        Metadata({ data: "json, name=EndSession" }),
+        SpeakeasyMetadata({ data: "json, name=EndSession" }),
         __metadata("design:type", EndSessionResult)
     ], SendCommandResult.prototype, "endSession", void 0);
     __decorate([
-        Metadata({ data: "json, name=ExecuteStatement" }),
+        SpeakeasyMetadata({ data: "json, name=ExecuteStatement" }),
         __metadata("design:type", ExecuteStatementResult)
     ], SendCommandResult.prototype, "executeStatement", void 0);
     __decorate([
-        Metadata({ data: "json, name=FetchPage" }),
+        SpeakeasyMetadata({ data: "json, name=FetchPage" }),
         __metadata("design:type", FetchPageResult)
     ], SendCommandResult.prototype, "fetchPage", void 0);
     __decorate([
-        Metadata({ data: "json, name=StartSession" }),
+        SpeakeasyMetadata({ data: "json, name=StartSession" }),
         __metadata("design:type", StartSessionResult)
     ], SendCommandResult.prototype, "startSession", void 0);
     __decorate([
-        Metadata({ data: "json, name=StartTransaction" }),
+        SpeakeasyMetadata({ data: "json, name=StartTransaction" }),
         __metadata("design:type", StartTransactionResult)
     ], SendCommandResult.prototype, "startTransaction", void 0);
     return SendCommandResult;

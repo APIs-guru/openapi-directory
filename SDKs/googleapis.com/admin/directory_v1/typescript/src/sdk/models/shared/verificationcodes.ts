@@ -1,19 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VerificationCode } from "./verificationcode";
+
 
 
 // VerificationCodes
 /** 
- * JSON response template for List verification codes operation in Directory API.
+ * JSON response template for list verification codes operation in Directory API.
 **/
 export class VerificationCodes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=items", elemType: shared.VerificationCode })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: VerificationCode })
   items?: VerificationCode[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 }

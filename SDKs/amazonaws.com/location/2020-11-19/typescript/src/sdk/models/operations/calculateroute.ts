@@ -1,33 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CalculateRoutePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=CalculatorName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=CalculatorName" })
   calculatorName: string;
 }
 
 
 export class CalculateRouteHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -37,22 +38,22 @@ export class CalculateRouteHeaders extends SpeakeasyBase {
  * Contains details about additional route preferences for requests that specify <code>TravelMode</code> as <code>Car</code>.
 **/
 export class CalculateRouteRequestBodyCarModeOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AvoidFerries" })
+  @SpeakeasyMetadata({ data: "json, name=AvoidFerries" })
   avoidFerries?: boolean;
 
-  @Metadata({ data: "json, name=AvoidTolls" })
+  @SpeakeasyMetadata({ data: "json, name=AvoidTolls" })
   avoidTolls?: boolean;
 }
 
 export enum CalculateRouteRequestBodyDistanceUnitEnum {
-    Kilometers = "Kilometers"
-,    Miles = "Miles"
+    Kilometers = "Kilometers",
+    Miles = "Miles"
 }
 
 export enum CalculateRouteRequestBodyTravelModeEnum {
-    Car = "Car"
-,    Truck = "Truck"
-,    Walking = "Walking"
+    Car = "Car",
+    Truck = "Truck",
+    Walking = "Walking"
 }
 
 
@@ -61,87 +62,87 @@ export enum CalculateRouteRequestBodyTravelModeEnum {
  * Contains details about additional route preferences for requests that specify <code>TravelMode</code> as <code>Truck</code>.
 **/
 export class CalculateRouteRequestBodyTruckModeOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AvoidFerries" })
+  @SpeakeasyMetadata({ data: "json, name=AvoidFerries" })
   avoidFerries?: boolean;
 
-  @Metadata({ data: "json, name=AvoidTolls" })
+  @SpeakeasyMetadata({ data: "json, name=AvoidTolls" })
   avoidTolls?: boolean;
 
-  @Metadata({ data: "json, name=Dimensions" })
+  @SpeakeasyMetadata({ data: "json, name=Dimensions" })
   dimensions?: shared.TruckDimensions;
 
-  @Metadata({ data: "json, name=Weight" })
+  @SpeakeasyMetadata({ data: "json, name=Weight" })
   weight?: shared.TruckWeight;
 }
 
 
 export class CalculateRouteRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CarModeOptions" })
+  @SpeakeasyMetadata({ data: "json, name=CarModeOptions" })
   carModeOptions?: CalculateRouteRequestBodyCarModeOptions;
 
-  @Metadata({ data: "json, name=DepartNow" })
+  @SpeakeasyMetadata({ data: "json, name=DepartNow" })
   departNow?: boolean;
 
-  @Metadata({ data: "json, name=DeparturePosition" })
+  @SpeakeasyMetadata({ data: "json, name=DeparturePosition" })
   departurePosition: number[];
 
-  @Metadata({ data: "json, name=DepartureTime" })
+  @SpeakeasyMetadata({ data: "json, name=DepartureTime" })
   departureTime?: Date;
 
-  @Metadata({ data: "json, name=DestinationPosition" })
+  @SpeakeasyMetadata({ data: "json, name=DestinationPosition" })
   destinationPosition: number[];
 
-  @Metadata({ data: "json, name=DistanceUnit" })
+  @SpeakeasyMetadata({ data: "json, name=DistanceUnit" })
   distanceUnit?: CalculateRouteRequestBodyDistanceUnitEnum;
 
-  @Metadata({ data: "json, name=IncludeLegGeometry" })
+  @SpeakeasyMetadata({ data: "json, name=IncludeLegGeometry" })
   includeLegGeometry?: boolean;
 
-  @Metadata({ data: "json, name=TravelMode" })
+  @SpeakeasyMetadata({ data: "json, name=TravelMode" })
   travelMode?: CalculateRouteRequestBodyTravelModeEnum;
 
-  @Metadata({ data: "json, name=TruckModeOptions" })
+  @SpeakeasyMetadata({ data: "json, name=TruckModeOptions" })
   truckModeOptions?: CalculateRouteRequestBodyTruckModeOptions;
 
-  @Metadata({ data: "json, name=WaypointPositions" })
+  @SpeakeasyMetadata({ data: "json, name=WaypointPositions" })
   waypointPositions?: number[][];
 }
 
 
 export class CalculateRouteRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CalculateRoutePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CalculateRouteHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CalculateRouteRequestBody;
 }
 
 
 export class CalculateRouteResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   accessDeniedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   calculateRouteResponse?: shared.CalculateRouteResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationException?: any;
 }

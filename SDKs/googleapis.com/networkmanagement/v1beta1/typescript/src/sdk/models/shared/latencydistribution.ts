@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LatencyPercentile } from "./latencypercentile";
+
 
 
 // LatencyDistribution
@@ -8,6 +8,6 @@ import { LatencyPercentile } from "./latencypercentile";
  * Describes measured latency distribution.
 **/
 export class LatencyDistribution extends SpeakeasyBase {
-  @Metadata({ data: "json, name=latencyPercentiles", elemType: shared.LatencyPercentile })
+  @SpeakeasyMetadata({ data: "json, name=latencyPercentiles", elemType: LatencyPercentile })
   latencyPercentiles?: LatencyPercentile[];
 }

@@ -22,19 +22,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { InsightSelector } from "./insightselector";
 var PutInsightSelectorsResponse = /** @class */ (function (_super) {
     __extends(PutInsightSelectorsResponse, _super);
     function PutInsightSelectorsResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=InsightSelectors", elemType: shared.InsightSelector }),
+        SpeakeasyMetadata({ data: "json, name=InsightSelectors", elemType: InsightSelector }),
         __metadata("design:type", Array)
     ], PutInsightSelectorsResponse.prototype, "insightSelectors", void 0);
     __decorate([
-        Metadata({ data: "json, name=TrailARN" }),
+        SpeakeasyMetadata({ data: "json, name=TrailARN" }),
         __metadata("design:type", String)
     ], PutInsightSelectorsResponse.prototype, "trailArn", void 0);
     return PutInsightSelectorsResponse;

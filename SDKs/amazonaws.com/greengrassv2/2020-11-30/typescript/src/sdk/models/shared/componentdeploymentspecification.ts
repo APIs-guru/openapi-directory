@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ComponentConfigurationUpdate } from "./componentconfigurationupdate";
 import { ComponentRunWith } from "./componentrunwith";
+
 
 
 // ComponentDeploymentSpecification
@@ -8,12 +9,12 @@ import { ComponentRunWith } from "./componentrunwith";
  * Contains information about a component to deploy.
 **/
 export class ComponentDeploymentSpecification extends SpeakeasyBase {
-  @Metadata({ data: "json, name=componentVersion" })
+  @SpeakeasyMetadata({ data: "json, name=componentVersion" })
   componentVersion?: string;
 
-  @Metadata({ data: "json, name=configurationUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=configurationUpdate" })
   configurationUpdate?: ComponentConfigurationUpdate;
 
-  @Metadata({ data: "json, name=runWith" })
+  @SpeakeasyMetadata({ data: "json, name=runWith" })
   runWith?: ComponentRunWith;
 }

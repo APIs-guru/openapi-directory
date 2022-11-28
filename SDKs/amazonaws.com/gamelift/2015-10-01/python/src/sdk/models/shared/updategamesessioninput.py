@@ -1,16 +1,24 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import playersessioncreationpolicy_enum
-from . import protectionpolicy_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateGameSessionInput:
-    game_session_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'GameSessionId' }})
-    maximum_player_session_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MaximumPlayerSessionCount' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
-    player_session_creation_policy: Optional[playersessioncreationpolicy_enum.PlayerSessionCreationPolicyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PlayerSessionCreationPolicy' }})
-    protection_policy: Optional[protectionpolicy_enum.ProtectionPolicyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProtectionPolicy' }})
+    r"""UpdateGameSessionInput
+    Represents the input for a request operation.
+    """
+    
+    game_session_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('GameSessionId') }})
+    maximum_player_session_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MaximumPlayerSessionCount') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
+    player_session_creation_policy: Optional[PlayerSessionCreationPolicyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PlayerSessionCreationPolicy') }})
+    protection_policy: Optional[ProtectionPolicyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ProtectionPolicy') }})
     

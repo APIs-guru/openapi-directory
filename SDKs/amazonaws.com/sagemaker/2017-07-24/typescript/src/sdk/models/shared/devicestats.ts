@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DeviceStats
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Status of devices.
 **/
 export class DeviceStats extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConnectedDeviceCount" })
+  @SpeakeasyMetadata({ data: "json, name=ConnectedDeviceCount" })
   connectedDeviceCount: number;
 
-  @Metadata({ data: "json, name=RegisteredDeviceCount" })
+  @SpeakeasyMetadata({ data: "json, name=RegisteredDeviceCount" })
   registeredDeviceCount: number;
 }

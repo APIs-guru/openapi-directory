@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CertificateAuthority } from "./certificateauthority";
+
 
 
 // ListCertificateAuthoritiesResponse
@@ -8,12 +8,12 @@ import { CertificateAuthority } from "./certificateauthority";
  * Response message for CertificateAuthorityService.ListCertificateAuthorities.
 **/
 export class ListCertificateAuthoritiesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=certificateAuthorities", elemType: shared.CertificateAuthority })
+  @SpeakeasyMetadata({ data: "json, name=certificateAuthorities", elemType: CertificateAuthority })
   certificateAuthorities?: CertificateAuthority[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=unreachable" })
+  @SpeakeasyMetadata({ data: "json, name=unreachable" })
   unreachable?: string[];
 }

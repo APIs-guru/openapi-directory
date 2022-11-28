@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { CollectionOverride } from "./collectionoverride";
 import { Credential } from "./credential";
 import { Options } from "./options";
 // BaseType
@@ -36,19 +36,19 @@ var BaseType = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=collectionOverrides", elemType: shared.CollectionOverride }),
+        SpeakeasyMetadata({ data: "json, name=collectionOverrides", elemType: CollectionOverride }),
         __metadata("design:type", Array)
     ], BaseType.prototype, "collectionOverrides", void 0);
     __decorate([
-        Metadata({ data: "json, name=credential" }),
+        SpeakeasyMetadata({ data: "json, name=credential" }),
         __metadata("design:type", Credential)
     ], BaseType.prototype, "credential", void 0);
     __decorate([
-        Metadata({ data: "json, name=descriptorUrl" }),
+        SpeakeasyMetadata({ data: "json, name=descriptorUrl" }),
         __metadata("design:type", String)
     ], BaseType.prototype, "descriptorUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=options" }),
+        SpeakeasyMetadata({ data: "json, name=options" }),
         __metadata("design:type", Options)
     ], BaseType.prototype, "options", void 0);
     return BaseType;

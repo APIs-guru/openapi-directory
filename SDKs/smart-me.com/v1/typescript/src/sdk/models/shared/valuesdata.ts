@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ValueData } from "./valuedata";
+
 
 
 // ValuesData
@@ -8,12 +8,12 @@ import { ValueData } from "./valuedata";
  * API Container for a Meter Value
 **/
 export class ValuesData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Date" })
+  @SpeakeasyMetadata({ data: "json, name=Date" })
   date?: Date;
 
-  @Metadata({ data: "json, name=DeviceId" })
+  @SpeakeasyMetadata({ data: "json, name=DeviceId" })
   deviceId?: string;
 
-  @Metadata({ data: "json, name=Values", elemType: shared.ValueData })
+  @SpeakeasyMetadata({ data: "json, name=Values", elemType: ValueData })
   values?: ValueData[];
 }

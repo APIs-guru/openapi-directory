@@ -1,5 +1,7 @@
 package shared
 
+// WebpushConfig
+// [Webpush protocol](https://tools.ietf.org/html/rfc8030) options.
 type WebpushConfig struct {
 	Data         map[string]string      `json:"data,omitempty"`
 	FcmOptions   *WebpushFcmOptions     `json:"fcmOptions,omitempty"`

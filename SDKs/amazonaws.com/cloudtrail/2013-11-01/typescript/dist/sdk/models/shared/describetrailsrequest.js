@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // DescribeTrailsRequest
 /**
  * Returns information about the trail.
@@ -33,11 +33,11 @@ var DescribeTrailsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=includeShadowTrails" }),
+        SpeakeasyMetadata({ data: "json, name=includeShadowTrails" }),
         __metadata("design:type", Boolean)
     ], DescribeTrailsRequest.prototype, "includeShadowTrails", void 0);
     __decorate([
-        Metadata({ data: "json, name=trailNameList" }),
+        SpeakeasyMetadata({ data: "json, name=trailNameList" }),
         __metadata("design:type", Array)
     ], DescribeTrailsRequest.prototype, "trailNameList", void 0);
     return DescribeTrailsRequest;

@@ -1,5 +1,8 @@
 package shared
 
+// SnowflakeConnectorProfileProperties
+//
+//	The connector-specific profile properties required when using Snowflake.
 type SnowflakeConnectorProfileProperties struct {
 	AccountName            *string `json:"accountName,omitempty"`
 	BucketName             string  `json:"bucketName"`

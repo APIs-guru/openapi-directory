@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GetEntitlementsRequest
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The GetEntitlementsRequest contains parameters for the GetEntitlements operation.
 **/
 export class GetEntitlementsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Filter" })
+  @SpeakeasyMetadata({ data: "json, name=Filter" })
   filter?: Map<string, string[]>;
 
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=ProductCode" })
+  @SpeakeasyMetadata({ data: "json, name=ProductCode" })
   productCode: string;
 }

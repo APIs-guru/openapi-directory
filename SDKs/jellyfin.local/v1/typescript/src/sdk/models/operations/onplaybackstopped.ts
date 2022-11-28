@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class OnPlaybackStoppedPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=itemId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=itemId" })
   itemId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=userId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=userId" })
   userId: string;
 }
 
 
 export class OnPlaybackStoppedQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=liveStreamId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=liveStreamId" })
   liveStreamId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=mediaSourceId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=mediaSourceId" })
   mediaSourceId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=nextMediaType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=nextMediaType" })
   nextMediaType?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=playSessionId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=playSessionId" })
   playSessionId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=positionTicks" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=positionTicks" })
   positionTicks?: number;
 }
 
 
 export class OnPlaybackStoppedSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   customAuthentication: shared.SchemeCustomAuthentication;
 }
 
 
 export class OnPlaybackStoppedRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: OnPlaybackStoppedPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: OnPlaybackStoppedQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: OnPlaybackStoppedSecurity;
 }
 
 
 export class OnPlaybackStoppedResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

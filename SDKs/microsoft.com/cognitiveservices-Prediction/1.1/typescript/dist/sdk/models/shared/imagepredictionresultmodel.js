@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ImageTagPredictionModel } from "./imagetagpredictionmodel";
 // ImagePredictionResultModel
 /**
  * result of an image prediction request
@@ -34,23 +34,23 @@ var ImagePredictionResultModel = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Created" }),
+        SpeakeasyMetadata({ data: "json, name=Created" }),
         __metadata("design:type", Date)
     ], ImagePredictionResultModel.prototype, "created", void 0);
     __decorate([
-        Metadata({ data: "json, name=Id" }),
+        SpeakeasyMetadata({ data: "json, name=Id" }),
         __metadata("design:type", String)
     ], ImagePredictionResultModel.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=Iteration" }),
+        SpeakeasyMetadata({ data: "json, name=Iteration" }),
         __metadata("design:type", String)
     ], ImagePredictionResultModel.prototype, "iteration", void 0);
     __decorate([
-        Metadata({ data: "json, name=Predictions", elemType: shared.ImageTagPredictionModel }),
+        SpeakeasyMetadata({ data: "json, name=Predictions", elemType: ImageTagPredictionModel }),
         __metadata("design:type", Array)
     ], ImagePredictionResultModel.prototype, "predictions", void 0);
     __decorate([
-        Metadata({ data: "json, name=Project" }),
+        SpeakeasyMetadata({ data: "json, name=Project" }),
         __metadata("design:type", String)
     ], ImagePredictionResultModel.prototype, "project", void 0);
     return ImagePredictionResultModel;

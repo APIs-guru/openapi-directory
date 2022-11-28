@@ -22,9 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export var DELETEFAX_SERVERS = [
+export var DeleteFaxServerList = [
     "https://fax.twilio.com",
 ];
 var DeleteFaxPathParams = /** @class */ (function (_super) {
@@ -33,7 +33,7 @@ var DeleteFaxPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=Sid" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=Sid" }),
         __metadata("design:type", String)
     ], DeleteFaxPathParams.prototype, "sid", void 0);
     return DeleteFaxPathParams;
@@ -45,7 +45,7 @@ var DeleteFaxSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
         __metadata("design:type", shared.SchemeAccountSidAuthToken)
     ], DeleteFaxSecurity.prototype, "accountSidAuthToken", void 0);
     return DeleteFaxSecurity;
@@ -57,15 +57,15 @@ var DeleteFaxRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DeleteFaxRequest.prototype, "serverUrl", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteFaxPathParams)
     ], DeleteFaxRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteFaxSecurity)
     ], DeleteFaxRequest.prototype, "security", void 0);
     return DeleteFaxRequest;
@@ -77,11 +77,11 @@ var DeleteFaxResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DeleteFaxResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DeleteFaxResponse.prototype, "statusCode", void 0);
     return DeleteFaxResponse;

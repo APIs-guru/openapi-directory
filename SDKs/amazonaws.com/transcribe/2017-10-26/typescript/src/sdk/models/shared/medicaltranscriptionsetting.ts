@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MedicalTranscriptionSetting
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Optional settings for the <a>StartMedicalTranscriptionJob</a> operation.
 **/
 export class MedicalTranscriptionSetting extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ChannelIdentification" })
+  @SpeakeasyMetadata({ data: "json, name=ChannelIdentification" })
   channelIdentification?: boolean;
 
-  @Metadata({ data: "json, name=MaxAlternatives" })
+  @SpeakeasyMetadata({ data: "json, name=MaxAlternatives" })
   maxAlternatives?: number;
 
-  @Metadata({ data: "json, name=MaxSpeakerLabels" })
+  @SpeakeasyMetadata({ data: "json, name=MaxSpeakerLabels" })
   maxSpeakerLabels?: number;
 
-  @Metadata({ data: "json, name=ShowAlternatives" })
+  @SpeakeasyMetadata({ data: "json, name=ShowAlternatives" })
   showAlternatives?: boolean;
 
-  @Metadata({ data: "json, name=ShowSpeakerLabels" })
+  @SpeakeasyMetadata({ data: "json, name=ShowSpeakerLabels" })
   showSpeakerLabels?: boolean;
 
-  @Metadata({ data: "json, name=VocabularyName" })
+  @SpeakeasyMetadata({ data: "json, name=VocabularyName" })
   vocabularyName?: string;
 }

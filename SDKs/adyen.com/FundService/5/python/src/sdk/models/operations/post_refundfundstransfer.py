@@ -1,33 +1,24 @@
 from dataclasses import dataclass, field
 from typing import Any,Optional
+from sdk.models import shared
 
-
-@dataclass
-class PostRefundFundsTransferSecurityOption1:
-    basic_auth: shared.SchemeBasicAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
-    
-
-@dataclass
-class PostRefundFundsTransferSecurityOption2:
-    api_key_auth: shared.SchemeAPIKeyAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
-    
 
 @dataclass
 class PostRefundFundsTransferSecurity:
-    option1: Optional[PostRefundFundsTransferSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[PostRefundFundsTransferSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
+    api_key_auth: Optional[shared.SchemeAPIKeyAuth] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    basic_auth: Optional[shared.SchemeBasicAuth] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
     
 
 @dataclass
 class PostRefundFundsTransferRequest:
+    security: PostRefundFundsTransferSecurity = field()
     request: Optional[Any] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: PostRefundFundsTransferSecurity = field(default=None)
     
 
 @dataclass
 class PostRefundFundsTransferResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     refund_funds_transfer_response: Optional[Any] = field(default=None)
     service_error: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

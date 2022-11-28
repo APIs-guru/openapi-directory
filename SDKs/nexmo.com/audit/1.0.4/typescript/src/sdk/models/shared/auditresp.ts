@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AuditEvent } from "./auditevent";
 import { PaginationLinks } from "./paginationlinks";
 import { PaginationData } from "./paginationdata";
+
 
 
 // AuditRespEmbedded
@@ -10,18 +10,18 @@ import { PaginationData } from "./paginationdata";
  * Container containing the `events` array.
 **/
 export class AuditRespEmbedded extends SpeakeasyBase {
-  @Metadata({ data: "json, name=events", elemType: shared.AuditEvent })
+  @SpeakeasyMetadata({ data: "json, name=events", elemType: AuditEvent })
   events?: AuditEvent[];
 }
 
 
 export class AuditResp extends SpeakeasyBase {
-  @Metadata({ data: "json, name=_embedded" })
+  @SpeakeasyMetadata({ data: "json, name=_embedded" })
   embedded?: AuditRespEmbedded;
 
-  @Metadata({ data: "json, name=_links" })
+  @SpeakeasyMetadata({ data: "json, name=_links" })
   links?: PaginationLinks;
 
-  @Metadata({ data: "json, name=page" })
+  @SpeakeasyMetadata({ data: "json, name=page" })
   page?: PaginationData;
 }

@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { JobComparatorEnum } from "./jobcomparatorenum";
 import { ScopeFilterKeyEnum } from "./scopefilterkeyenum";
+
 
 
 // SimpleScopeTerm
@@ -8,12 +9,12 @@ import { ScopeFilterKeyEnum } from "./scopefilterkeyenum";
  * Specifies a property-based condition that determines whether an S3 object is included or excluded from a classification job.
 **/
 export class SimpleScopeTerm extends SpeakeasyBase {
-  @Metadata({ data: "json, name=comparator" })
+  @SpeakeasyMetadata({ data: "json, name=comparator" })
   comparator?: JobComparatorEnum;
 
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: ScopeFilterKeyEnum;
 
-  @Metadata({ data: "json, name=values" })
+  @SpeakeasyMetadata({ data: "json, name=values" })
   values?: string[];
 }

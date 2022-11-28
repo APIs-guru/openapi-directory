@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// SharedDirectory
+// Details about the shared directory in the directory owner account for which the share request in the directory consumer account has been accepted.
 type SharedDirectory struct {
 	CreatedDateTime     *time.Time       `json:"CreatedDateTime,omitempty"`
 	LastUpdatedDateTime *time.Time       `json:"LastUpdatedDateTime,omitempty"`

@@ -1,61 +1,62 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateWebHookPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 export enum UpdateWebHookRequestBodyFilterEnum {
-    ConversationCreate = "CONVERSATION.CREATE"
-,    ConversationUpdate = "CONVERSATION.UPDATE"
-,    ConversationAddItem = "CONVERSATION.ADD_ITEM"
-,    ConversationUpdateItem = "CONVERSATION.UPDATE_ITEM"
-,    UserIncomingCall = "USER.INCOMING_CALL"
-,    UserUserUpdated = "USER.USER_UPDATED"
-,    UserUserSettingUpdated = "USER.USER_SETTING_UPDATED"
-,    UserSubmitFormData = "USER.SUBMIT_FORM_DATA"
+    ConversationCreate = "CONVERSATION.CREATE",
+    ConversationUpdate = "CONVERSATION.UPDATE",
+    ConversationAddItem = "CONVERSATION.ADD_ITEM",
+    ConversationUpdateItem = "CONVERSATION.UPDATE_ITEM",
+    UserIncomingCall = "USER.INCOMING_CALL",
+    UserUserUpdated = "USER.USER_UPDATED",
+    UserUserSettingUpdated = "USER.USER_SETTING_UPDATED",
+    UserSubmitFormData = "USER.SUBMIT_FORM_DATA"
 }
 
 
 export class UpdateWebHookRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "form, name=filter;" })
+  @SpeakeasyMetadata({ data: "form, name=filter;" })
   filter?: UpdateWebHookRequestBodyFilterEnum[];
 
-  @Metadata({ data: "form, name=url;" })
+  @SpeakeasyMetadata({ data: "form, name=url;" })
   url?: string;
 }
 
 
 export class UpdateWebHookSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth: shared.SchemeOauth;
 }
 
 
 export class UpdateWebHookRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateWebHookPathParams;
 
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
   request?: UpdateWebHookRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: UpdateWebHookSecurity;
 }
 
 
 export class UpdateWebHookResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   webHook?: any;
 }

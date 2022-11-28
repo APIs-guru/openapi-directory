@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ReportStateAndNotificationDevice
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The states and notifications specific to a device.
 **/
 export class ReportStateAndNotificationDevice extends SpeakeasyBase {
-  @Metadata({ data: "json, name=notifications" })
+  @SpeakeasyMetadata({ data: "json, name=notifications" })
   notifications?: Map<string, any>;
 
-  @Metadata({ data: "json, name=states" })
+  @SpeakeasyMetadata({ data: "json, name=states" })
   states?: Map<string, any>;
 }

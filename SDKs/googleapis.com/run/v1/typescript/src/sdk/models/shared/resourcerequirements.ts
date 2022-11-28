@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ResourceRequirements
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * ResourceRequirements describes the compute resource requirements.
 **/
 export class ResourceRequirements extends SpeakeasyBase {
-  @Metadata({ data: "json, name=limits" })
+  @SpeakeasyMetadata({ data: "json, name=limits" })
   limits?: Map<string, string>;
 
-  @Metadata({ data: "json, name=requests" })
+  @SpeakeasyMetadata({ data: "json, name=requests" })
   requests?: Map<string, string>;
 }

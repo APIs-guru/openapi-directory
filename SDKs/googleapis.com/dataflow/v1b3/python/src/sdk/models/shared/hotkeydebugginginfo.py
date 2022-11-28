@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import hotkeyinfo
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class HotKeyDebuggingInfo:
-    detected_hot_keys: Optional[dict[str, hotkeyinfo.HotKeyInfo]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'detectedHotKeys' }})
+    r"""HotKeyDebuggingInfo
+    Information useful for debugging a hot key detection.
+    """
+    
+    detected_hot_keys: Optional[dict[str, HotKeyInfo]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('detectedHotKeys') }})
     

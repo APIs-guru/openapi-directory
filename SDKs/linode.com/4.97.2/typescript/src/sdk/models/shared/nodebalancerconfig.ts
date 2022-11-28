@@ -1,21 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum NodeBalancerConfigAlgorithmEnum {
-    Roundrobin = "roundrobin"
-,    Leastconn = "leastconn"
-,    Source = "source"
+    Roundrobin = "roundrobin",
+    Leastconn = "leastconn",
+    Source = "source"
 }
 
 export enum NodeBalancerConfigCheckEnum {
-    None = "none"
-,    Connection = "connection"
-,    Http = "http"
-,    HttpBody = "http_body"
+    None = "none",
+    Connection = "connection",
+    Http = "http",
+    HttpBody = "http_body"
 }
 
 export enum NodeBalancerConfigCipherSuiteEnum {
-    Recommended = "recommended"
-,    Legacy = "legacy"
+    Recommended = "recommended",
+    Legacy = "legacy"
 }
 
 
@@ -25,29 +26,29 @@ export enum NodeBalancerConfigCipherSuiteEnum {
  * 
 **/
 export class NodeBalancerConfigNodesStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=down" })
+  @SpeakeasyMetadata({ data: "json, name=down" })
   down?: number;
 
-  @Metadata({ data: "json, name=up" })
+  @SpeakeasyMetadata({ data: "json, name=up" })
   up?: number;
 }
 
 export enum NodeBalancerConfigProtocolEnum {
-    Http = "http"
-,    Https = "https"
-,    Tcp = "tcp"
+    Http = "http",
+    Https = "https",
+    Tcp = "tcp"
 }
 
 export enum NodeBalancerConfigProxyProtocolEnum {
-    None = "none"
-,    V1 = "v1"
-,    V2 = "v2"
+    None = "none",
+    V1 = "v1",
+    V2 = "v2"
 }
 
 export enum NodeBalancerConfigStickinessEnum {
-    None = "none"
-,    Table = "table"
-,    HttpCookie = "http_cookie"
+    None = "none",
+    Table = "table",
+    HttpCookie = "http_cookie"
 }
 
 
@@ -59,63 +60,118 @@ export enum NodeBalancerConfigStickinessEnum {
  * 
 **/
 export class NodeBalancerConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=algorithm" })
+  @SpeakeasyMetadata({ data: "json, name=algorithm" })
   algorithm?: NodeBalancerConfigAlgorithmEnum;
 
-  @Metadata({ data: "json, name=check" })
+  @SpeakeasyMetadata({ data: "json, name=check" })
   check?: NodeBalancerConfigCheckEnum;
 
-  @Metadata({ data: "json, name=check_attempts" })
+  @SpeakeasyMetadata({ data: "json, name=check_attempts" })
   checkAttempts?: number;
 
-  @Metadata({ data: "json, name=check_body" })
+  @SpeakeasyMetadata({ data: "json, name=check_body" })
   checkBody?: string;
 
-  @Metadata({ data: "json, name=check_interval" })
+  @SpeakeasyMetadata({ data: "json, name=check_interval" })
   checkInterval?: number;
 
-  @Metadata({ data: "json, name=check_passive" })
+  @SpeakeasyMetadata({ data: "json, name=check_passive" })
   checkPassive?: boolean;
 
-  @Metadata({ data: "json, name=check_path" })
+  @SpeakeasyMetadata({ data: "json, name=check_path" })
   checkPath?: string;
 
-  @Metadata({ data: "json, name=check_timeout" })
+  @SpeakeasyMetadata({ data: "json, name=check_timeout" })
   checkTimeout?: number;
 
-  @Metadata({ data: "json, name=cipher_suite" })
+  @SpeakeasyMetadata({ data: "json, name=cipher_suite" })
   cipherSuite?: NodeBalancerConfigCipherSuiteEnum;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=nodebalancer_id" })
+  @SpeakeasyMetadata({ data: "json, name=nodebalancer_id" })
   nodebalancerId?: number;
 
-  @Metadata({ data: "json, name=nodes_status" })
+  @SpeakeasyMetadata({ data: "json, name=nodes_status" })
   nodesStatus?: NodeBalancerConfigNodesStatus;
 
-  @Metadata({ data: "json, name=port" })
+  @SpeakeasyMetadata({ data: "json, name=port" })
   port?: number;
 
-  @Metadata({ data: "json, name=protocol" })
+  @SpeakeasyMetadata({ data: "json, name=protocol" })
   protocol?: NodeBalancerConfigProtocolEnum;
 
-  @Metadata({ data: "json, name=proxy_protocol" })
+  @SpeakeasyMetadata({ data: "json, name=proxy_protocol" })
   proxyProtocol?: NodeBalancerConfigProxyProtocolEnum;
 
-  @Metadata({ data: "json, name=ssl_cert" })
+  @SpeakeasyMetadata({ data: "json, name=ssl_cert" })
   sslCert?: string;
 
-  @Metadata({ data: "json, name=ssl_commonname" })
+  @SpeakeasyMetadata({ data: "json, name=ssl_commonname" })
   sslCommonname?: string;
 
-  @Metadata({ data: "json, name=ssl_fingerprint" })
+  @SpeakeasyMetadata({ data: "json, name=ssl_fingerprint" })
   sslFingerprint?: string;
 
-  @Metadata({ data: "json, name=ssl_key" })
+  @SpeakeasyMetadata({ data: "json, name=ssl_key" })
   sslKey?: string;
 
-  @Metadata({ data: "json, name=stickiness" })
+  @SpeakeasyMetadata({ data: "json, name=stickiness" })
+  stickiness?: NodeBalancerConfigStickinessEnum;
+}
+
+
+// NodeBalancerConfigInput
+/** 
+ * A NodeBalancer config represents the configuration of this NodeBalancer on a single port.  For example, a NodeBalancer Config on port 80 would typically represent how this NodeBalancer response to HTTP requests.
+ * 
+ * NodeBalancer configs have a list of backends, called "nodes," that they forward requests between based on their configuration.
+ * 
+**/
+export class NodeBalancerConfigInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=algorithm" })
+  algorithm?: NodeBalancerConfigAlgorithmEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=check" })
+  check?: NodeBalancerConfigCheckEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=check_attempts" })
+  checkAttempts?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=check_body" })
+  checkBody?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=check_interval" })
+  checkInterval?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=check_passive" })
+  checkPassive?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=check_path" })
+  checkPath?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=check_timeout" })
+  checkTimeout?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=cipher_suite" })
+  cipherSuite?: NodeBalancerConfigCipherSuiteEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=port" })
+  port?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=protocol" })
+  protocol?: NodeBalancerConfigProtocolEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=proxy_protocol" })
+  proxyProtocol?: NodeBalancerConfigProxyProtocolEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=ssl_cert" })
+  sslCert?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=ssl_key" })
+  sslKey?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=stickiness" })
   stickiness?: NodeBalancerConfigStickinessEnum;
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SourceMetadata } from "./sourcemetadata";
+
 
 
 // SourceGetMetadataResponse
@@ -7,6 +8,6 @@ import { SourceMetadata } from "./sourcemetadata";
  * The result of a SourceGetMetadataOperation.
 **/
 export class SourceGetMetadataResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: SourceMetadata;
 }

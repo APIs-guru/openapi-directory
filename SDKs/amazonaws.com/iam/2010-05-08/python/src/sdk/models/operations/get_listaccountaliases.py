@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetListAccountAliasesActionEnum(str, Enum):
     LIST_ACCOUNT_ALIASES = "ListAccountAliases"
@@ -10,10 +14,10 @@ class GetListAccountAliasesVersionEnum(str, Enum):
 
 @dataclass
 class GetListAccountAliasesQueryParams:
-    action: GetListAccountAliasesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetListAccountAliasesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetListAccountAliasesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
     max_items: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxItems', 'style': 'form', 'explode': True }})
-    version: GetListAccountAliasesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetListAccountAliasesHeaders:
 
 @dataclass
 class GetListAccountAliasesRequest:
-    query_params: GetListAccountAliasesQueryParams = field(default=None)
-    headers: GetListAccountAliasesHeaders = field(default=None)
+    headers: GetListAccountAliasesHeaders = field()
+    query_params: GetListAccountAliasesQueryParams = field()
     
 
 @dataclass
 class GetListAccountAliasesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

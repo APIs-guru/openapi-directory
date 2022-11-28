@@ -1,5 +1,7 @@
 package shared
 
+// Image
+// An Image Builder image. You must specify exactly one recipe for the image – either a container recipe (<code>containerRecipe</code>), which creates a container image, or an image recipe (<code>imageRecipe</code>), which creates an AMI.
 type Image struct {
 	Arn                          *string                      `json:"arn,omitempty"`
 	ContainerRecipe              *ContainerRecipe             `json:"containerRecipe,omitempty"`

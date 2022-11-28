@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class TagmanagerAccountsContainersListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,14 +27,14 @@ class TagmanagerAccountsContainersListQueryParams:
 
 @dataclass
 class TagmanagerAccountsContainersListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class TagmanagerAccountsContainersListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -44,14 +45,14 @@ class TagmanagerAccountsContainersListSecurity:
 
 @dataclass
 class TagmanagerAccountsContainersListRequest:
-    path_params: TagmanagerAccountsContainersListPathParams = field(default=None)
-    query_params: TagmanagerAccountsContainersListQueryParams = field(default=None)
-    security: TagmanagerAccountsContainersListSecurity = field(default=None)
+    path_params: TagmanagerAccountsContainersListPathParams = field()
+    query_params: TagmanagerAccountsContainersListQueryParams = field()
+    security: TagmanagerAccountsContainersListSecurity = field()
     
 
 @dataclass
 class TagmanagerAccountsContainersListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_containers_response: Optional[shared.ListContainersResponse] = field(default=None)
-    status_code: int = field(default=None)
     

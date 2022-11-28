@@ -9,6 +9,8 @@ const (
 	AutofitAutofitTypeEnumShapeAutofit           AutofitAutofitTypeEnum = "SHAPE_AUTOFIT"
 )
 
+// Autofit
+// The autofit properties of a Shape.
 type Autofit struct {
 	AutofitType          *AutofitAutofitTypeEnum `json:"autofitType,omitempty"`
 	FontScale            *float32                `json:"fontScale,omitempty"`

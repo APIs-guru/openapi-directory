@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AsyncOptions } from "./asyncoptions";
 import { InputMapping } from "./inputmapping";
 import { ValidationOptions } from "./validationoptions";

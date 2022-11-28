@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import embeddedobject
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class InlineObjectProperties:
-    embedded_object: Optional[embeddedobject.EmbeddedObject] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'embeddedObject' }})
+    r"""InlineObjectProperties
+    Properties of an InlineObject.
+    """
+    
+    embedded_object: Optional[EmbeddedObject] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('embeddedObject') }})
     

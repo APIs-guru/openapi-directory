@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MonetaryAmount } from "./monetaryamount";
 import { RecurringChargeFrequencyEnum } from "./recurringchargefrequencyenum";
+
 
 
 // RecurringCharge
@@ -8,9 +9,9 @@ import { RecurringChargeFrequencyEnum } from "./recurringchargefrequencyenum";
  * Specifies whether charges for devices are recurring.
 **/
 export class RecurringCharge extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cost" })
+  @SpeakeasyMetadata({ data: "json, name=cost" })
   cost?: MonetaryAmount;
 
-  @Metadata({ data: "json, name=frequency" })
+  @SpeakeasyMetadata({ data: "json, name=frequency" })
   frequency?: RecurringChargeFrequencyEnum;
 }

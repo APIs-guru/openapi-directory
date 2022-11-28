@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DetailTypeEnum } from "./detailtypeenum";
 import { EventTypeSummary } from "./eventtypesummary";
 import { NotificationRuleStatusEnum } from "./notificationrulestatusenum";

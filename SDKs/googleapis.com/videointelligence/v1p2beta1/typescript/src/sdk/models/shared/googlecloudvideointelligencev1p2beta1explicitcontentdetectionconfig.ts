@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudVideointelligenceV1p2beta1ExplicitContentDetectionConfig
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Config for EXPLICIT_CONTENT_DETECTION.
 **/
 export class GoogleCloudVideointelligenceV1p2beta1ExplicitContentDetectionConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=model" })
+  @SpeakeasyMetadata({ data: "json, name=model" })
   model?: string;
 }

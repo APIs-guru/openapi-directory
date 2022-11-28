@@ -1,24 +1,25 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ExportPlatformEnum {
-    CoreMl = "CoreML"
-,    TensorFlow = "TensorFlow"
+    CoreMl = "CoreML",
+    TensorFlow = "TensorFlow"
 }
 
 export enum ExportStatusEnum {
-    Exporting = "Exporting"
-,    Failed = "Failed"
-,    Done = "Done"
+    Exporting = "Exporting",
+    Failed = "Failed",
+    Done = "Done"
 }
 
 
 export class Export extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DownloadUri" })
+  @SpeakeasyMetadata({ data: "json, name=DownloadUri" })
   downloadUri?: string;
 
-  @Metadata({ data: "json, name=Platform" })
+  @SpeakeasyMetadata({ data: "json, name=Platform" })
   platform?: ExportPlatformEnum;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: ExportStatusEnum;
 }

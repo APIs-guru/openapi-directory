@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // QuietTime
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies the start and end times that define a time range when messages aren't sent to endpoints.
 **/
 export class QuietTime extends SpeakeasyBase {
-  @Metadata({ data: "json, name=End" })
+  @SpeakeasyMetadata({ data: "json, name=End" })
   end?: string;
 
-  @Metadata({ data: "json, name=Start" })
+  @SpeakeasyMetadata({ data: "json, name=Start" })
   start?: string;
 }

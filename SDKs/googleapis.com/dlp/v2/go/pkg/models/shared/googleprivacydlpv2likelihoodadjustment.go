@@ -11,6 +11,8 @@ const (
 	GooglePrivacyDlpV2LikelihoodAdjustmentFixedLikelihoodEnumVeryLikely            GooglePrivacyDlpV2LikelihoodAdjustmentFixedLikelihoodEnum = "VERY_LIKELY"
 )
 
+// GooglePrivacyDlpV2LikelihoodAdjustment
+// Message for specifying an adjustment to the likelihood of a finding as part of a detection rule.
 type GooglePrivacyDlpV2LikelihoodAdjustment struct {
 	FixedLikelihood    *GooglePrivacyDlpV2LikelihoodAdjustmentFixedLikelihoodEnum `json:"fixedLikelihood,omitempty"`
 	RelativeLikelihood *int32                                                     `json:"relativeLikelihood,omitempty"`

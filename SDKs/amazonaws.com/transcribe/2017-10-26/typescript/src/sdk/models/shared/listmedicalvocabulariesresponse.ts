@@ -1,16 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VocabularyStateEnum } from "./vocabularystateenum";
 import { VocabularyInfo } from "./vocabularyinfo";
 
 
+
 export class ListMedicalVocabulariesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: VocabularyStateEnum;
 
-  @Metadata({ data: "json, name=Vocabularies", elemType: shared.VocabularyInfo })
+  @SpeakeasyMetadata({ data: "json, name=Vocabularies", elemType: VocabularyInfo })
   vocabularies?: VocabularyInfo[];
 }

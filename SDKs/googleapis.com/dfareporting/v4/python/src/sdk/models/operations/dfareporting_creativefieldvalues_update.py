@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DfareportingCreativeFieldValuesUpdatePathParams:
-    creative_field_id: str = field(default=None, metadata={'path_param': { 'field_name': 'creativeFieldId', 'style': 'simple', 'explode': False }})
-    profile_id: str = field(default=None, metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
+    creative_field_id: str = field(metadata={'path_param': { 'field_name': 'creativeFieldId', 'style': 'simple', 'explode': False }})
+    profile_id: str = field(metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +30,21 @@ class DfareportingCreativeFieldValuesUpdateQueryParams:
 
 @dataclass
 class DfareportingCreativeFieldValuesUpdateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DfareportingCreativeFieldValuesUpdateRequest:
-    path_params: DfareportingCreativeFieldValuesUpdatePathParams = field(default=None)
-    query_params: DfareportingCreativeFieldValuesUpdateQueryParams = field(default=None)
+    path_params: DfareportingCreativeFieldValuesUpdatePathParams = field()
+    query_params: DfareportingCreativeFieldValuesUpdateQueryParams = field()
+    security: DfareportingCreativeFieldValuesUpdateSecurity = field()
     request: Optional[shared.CreativeFieldValue] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DfareportingCreativeFieldValuesUpdateSecurity = field(default=None)
     
 
 @dataclass
 class DfareportingCreativeFieldValuesUpdateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     creative_field_value: Optional[shared.CreativeFieldValue] = field(default=None)
-    status_code: int = field(default=None)
     

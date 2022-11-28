@@ -7,6 +7,8 @@ const (
 	ActionInformationActionTypeEnumAnalogAction ActionInformationActionTypeEnum = "AnalogAction"
 )
 
+// ActionInformation
+// The Information about an Action of a device
 type ActionInformation struct {
 	ActionType *ActionInformationActionTypeEnum `json:"ActionType,omitempty"`
 	MaxValue   *float64                         `json:"MaxValue,omitempty"`

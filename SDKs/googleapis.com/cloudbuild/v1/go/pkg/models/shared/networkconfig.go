@@ -8,6 +8,8 @@ const (
 	NetworkConfigEgressOptionEnumPublicEgress            NetworkConfigEgressOptionEnum = "PUBLIC_EGRESS"
 )
 
+// NetworkConfig
+// Defines the network configuration for the pool.
 type NetworkConfig struct {
 	EgressOption  *NetworkConfigEgressOptionEnum `json:"egressOption,omitempty"`
 	PeeredNetwork *string                        `json:"peeredNetwork,omitempty"`

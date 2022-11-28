@@ -1,13 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import portfoliosharetype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AcceptPortfolioShareInput:
-    accept_language: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AcceptLanguage' }})
-    portfolio_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PortfolioId' }})
-    portfolio_share_type: Optional[portfoliosharetype_enum.PortfolioShareTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PortfolioShareType' }})
+    portfolio_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('PortfolioId') }})
+    accept_language: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AcceptLanguage') }})
+    portfolio_share_type: Optional[PortfolioShareTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PortfolioShareType') }})
     

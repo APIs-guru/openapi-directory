@@ -1,5 +1,7 @@
 package shared
 
+// DisplayData
+// Data provided with a pipeline or transform to provide descriptive info.
 type DisplayData struct {
 	BoolValue      *bool    `json:"boolValue,omitempty"`
 	DurationValue  *string  `json:"durationValue,omitempty"`

@@ -22,27 +22,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ImageIdentifier } from "./imageidentifier";
 var BatchGetImageRequest = /** @class */ (function (_super) {
     __extends(BatchGetImageRequest, _super);
     function BatchGetImageRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=acceptedMediaTypes" }),
+        SpeakeasyMetadata({ data: "json, name=acceptedMediaTypes" }),
         __metadata("design:type", Array)
     ], BatchGetImageRequest.prototype, "acceptedMediaTypes", void 0);
     __decorate([
-        Metadata({ data: "json, name=imageIds", elemType: shared.ImageIdentifier }),
+        SpeakeasyMetadata({ data: "json, name=imageIds", elemType: ImageIdentifier }),
         __metadata("design:type", Array)
     ], BatchGetImageRequest.prototype, "imageIds", void 0);
     __decorate([
-        Metadata({ data: "json, name=registryId" }),
+        SpeakeasyMetadata({ data: "json, name=registryId" }),
         __metadata("design:type", String)
     ], BatchGetImageRequest.prototype, "registryId", void 0);
     __decorate([
-        Metadata({ data: "json, name=repositoryName" }),
+        SpeakeasyMetadata({ data: "json, name=repositoryName" }),
         __metadata("design:type", String)
     ], BatchGetImageRequest.prototype, "repositoryName", void 0);
     return BatchGetImageRequest;

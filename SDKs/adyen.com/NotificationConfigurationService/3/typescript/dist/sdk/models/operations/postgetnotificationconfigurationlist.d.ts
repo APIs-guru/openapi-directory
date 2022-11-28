@@ -1,14 +1,8 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export declare class PostGetNotificationConfigurationListSecurityOption1 extends SpeakeasyBase {
-    basicAuth: shared.SchemeBasicAuth;
-}
-export declare class PostGetNotificationConfigurationListSecurityOption2 extends SpeakeasyBase {
-    apiKeyAuth: shared.SchemeApiKeyAuth;
-}
 export declare class PostGetNotificationConfigurationListSecurity extends SpeakeasyBase {
-    option1?: PostGetNotificationConfigurationListSecurityOption1;
-    option2?: PostGetNotificationConfigurationListSecurityOption2;
+    basicAuth?: shared.SchemeBasicAuth;
+    apiKeyAuth?: shared.SchemeApiKeyAuth;
 }
 export declare class PostGetNotificationConfigurationListRequest extends SpeakeasyBase {
     request?: any;

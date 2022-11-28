@@ -42,11 +42,13 @@ from .deleteuser import *
 from .deleteuserimage import *
 from .deleteuserimagebyindex import *
 from .deleteuseritemrating import *
+from .disableplugin import *
 from .discovertuners import *
 from .discvovertuners import *
 from .displaycontent import *
 from .downloadremoteimage import *
 from .downloadremotesubtitles import *
+from .enableplugin import *
 from .forgotpassword import *
 from .forgotpasswordpin import *
 from .get import *
@@ -194,6 +196,7 @@ from .getpingsystem import *
 from .getplaybackinfo import *
 from .getplaylistitems import *
 from .getpluginconfiguration import *
+from .getpluginimage import *
 from .getpluginmanifest import *
 from .getplugins import *
 from .getpostedplaybackinfo import *
@@ -375,6 +378,7 @@ from .syncplaysetshufflemode import *
 from .syncplaystop import *
 from .syncplayunpause import *
 from .uninstallplugin import *
+from .uninstallpluginbyversion import *
 from .unmarkfavoriteitem import *
 from .updateconfiguration import *
 from .updatedeviceoptions import *

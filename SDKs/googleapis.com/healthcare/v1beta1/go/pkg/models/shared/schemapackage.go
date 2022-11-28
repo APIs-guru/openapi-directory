@@ -17,6 +17,8 @@ const (
 	SchemaPackageUnexpectedSegmentHandlingEnumParse                                    SchemaPackageUnexpectedSegmentHandlingEnum = "PARSE"
 )
 
+// SchemaPackage
+// A schema package contains a set of schemas and type definitions.
 type SchemaPackage struct {
 	IgnoreMinOccurs           *bool                                       `json:"ignoreMinOccurs,omitempty"`
 	Schemas                   []Hl7SchemaConfig                           `json:"schemas,omitempty"`

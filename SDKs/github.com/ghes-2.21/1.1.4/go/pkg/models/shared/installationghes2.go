@@ -44,6 +44,8 @@ type InstallationGhes2SimpleUser struct {
 	URL               string  `json:"url"`
 }
 
+// InstallationGhes2
+// Installation
 type InstallationGhes2 struct {
 	AccessTokensURL     string                                   `json:"access_tokens_url"`
 	Account             interface{}                              `json:"account"`

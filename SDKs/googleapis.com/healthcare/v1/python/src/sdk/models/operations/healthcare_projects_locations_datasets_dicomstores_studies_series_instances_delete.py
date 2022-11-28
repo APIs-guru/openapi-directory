@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesInstancesDeletePathParams:
-    dicom_web_path: str = field(default=None, metadata={'path_param': { 'field_name': 'dicomWebPath', 'style': 'simple', 'explode': False }})
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    dicom_web_path: str = field(metadata={'path_param': { 'field_name': 'dicomWebPath', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +27,20 @@ class HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesInstancesDelete
 
 @dataclass
 class HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesInstancesDeleteSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesInstancesDeleteRequest:
-    path_params: HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesInstancesDeletePathParams = field(default=None)
-    query_params: HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesInstancesDeleteQueryParams = field(default=None)
-    security: HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesInstancesDeleteSecurity = field(default=None)
+    path_params: HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesInstancesDeletePathParams = field()
+    query_params: HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesInstancesDeleteQueryParams = field()
+    security: HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesInstancesDeleteSecurity = field()
     
 
 @dataclass
 class HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesInstancesDeleteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

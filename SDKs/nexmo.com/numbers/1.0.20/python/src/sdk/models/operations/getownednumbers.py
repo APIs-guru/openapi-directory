@@ -16,14 +16,14 @@ class GetOwnedNumbersQueryParams:
 
 @dataclass
 class GetOwnedNumbersRequest:
-    query_params: GetOwnedNumbersQueryParams = field(default=None)
+    query_params: GetOwnedNumbersQueryParams = field()
     
 
 @dataclass
 class GetOwnedNumbersResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     account_unauthorized: Optional[shared.AccountUnauthorized] = field(default=None)
     inbound_numbers: Optional[shared.InboundNumbers] = field(default=None)
     

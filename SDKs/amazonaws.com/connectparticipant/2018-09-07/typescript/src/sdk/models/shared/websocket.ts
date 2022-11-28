@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Websocket
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The websocket for the participant's connection.
 **/
 export class Websocket extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConnectionExpiry" })
+  @SpeakeasyMetadata({ data: "json, name=ConnectionExpiry" })
   connectionExpiry?: string;
 
-  @Metadata({ data: "json, name=Url" })
+  @SpeakeasyMetadata({ data: "json, name=Url" })
   url?: string;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ChangeActionEnum } from "./changeactionenum";
 import { RegexMatchTuple } from "./regexmatchtuple";
 // RegexMatchSetUpdate
@@ -35,11 +35,11 @@ var RegexMatchSetUpdate = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Action" }),
+        SpeakeasyMetadata({ data: "json, name=Action" }),
         __metadata("design:type", String)
     ], RegexMatchSetUpdate.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "json, name=RegexMatchTuple" }),
+        SpeakeasyMetadata({ data: "json, name=RegexMatchTuple" }),
         __metadata("design:type", RegexMatchTuple)
     ], RegexMatchSetUpdate.prototype, "regexMatchTuple", void 0);
     return RegexMatchSetUpdate;

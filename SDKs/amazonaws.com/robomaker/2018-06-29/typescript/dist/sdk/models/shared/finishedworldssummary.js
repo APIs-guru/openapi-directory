@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FailureSummary } from "./failuresummary";
 // FinishedWorldsSummary
 /**
@@ -34,15 +34,15 @@ var FinishedWorldsSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=failureSummary" }),
+        SpeakeasyMetadata({ data: "json, name=failureSummary" }),
         __metadata("design:type", FailureSummary)
     ], FinishedWorldsSummary.prototype, "failureSummary", void 0);
     __decorate([
-        Metadata({ data: "json, name=finishedCount" }),
+        SpeakeasyMetadata({ data: "json, name=finishedCount" }),
         __metadata("design:type", Number)
     ], FinishedWorldsSummary.prototype, "finishedCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=succeededWorlds" }),
+        SpeakeasyMetadata({ data: "json, name=succeededWorlds" }),
         __metadata("design:type", Array)
     ], FinishedWorldsSummary.prototype, "succeededWorlds", void 0);
     return FinishedWorldsSummary;

@@ -42,7 +42,7 @@ type PeoplePeopleUpdateContactSecurity struct {
 type PeoplePeopleUpdateContactRequest struct {
 	PathParams  PeoplePeopleUpdateContactPathParams
 	QueryParams PeoplePeopleUpdateContactQueryParams
-	Request     *shared.Person `request:"mediaType=application/json"`
+	Request     *shared.PersonInput `request:"mediaType=application/json"`
 	Security    PeoplePeopleUpdateContactSecurity
 }
 

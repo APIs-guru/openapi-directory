@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetBillStageDetailsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=billId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=billId" })
   billId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=billStageId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=billStageId" })
   billStageId: number;
 }
 
 
 export class GetBillStageDetailsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetBillStageDetailsPathParams;
 }
 
 
 export class GetBillStageDetailsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   billStageDetails?: shared.BillStageDetails;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

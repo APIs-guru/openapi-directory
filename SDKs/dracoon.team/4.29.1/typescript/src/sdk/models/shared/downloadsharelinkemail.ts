@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DownloadShareLinkEmail
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request model for sending an email of a Download Share link
 **/
 export class DownloadShareLinkEmail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=body" })
+  @SpeakeasyMetadata({ data: "json, name=body" })
   body: string;
 
-  @Metadata({ data: "json, name=receiverLanguage" })
+  @SpeakeasyMetadata({ data: "json, name=receiverLanguage" })
   receiverLanguage?: string;
 
-  @Metadata({ data: "json, name=recipients" })
+  @SpeakeasyMetadata({ data: "json, name=recipients" })
   recipients: string[];
 }

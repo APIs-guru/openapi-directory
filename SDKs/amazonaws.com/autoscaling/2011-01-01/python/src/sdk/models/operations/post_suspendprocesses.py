@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostSuspendProcessesActionEnum(str, Enum):
     SUSPEND_PROCESSES = "SuspendProcesses"
@@ -10,8 +14,8 @@ class PostSuspendProcessesVersionEnum(str, Enum):
 
 @dataclass
 class PostSuspendProcessesQueryParams:
-    action: PostSuspendProcessesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostSuspendProcessesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostSuspendProcessesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostSuspendProcessesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostSuspendProcessesHeaders:
 
 @dataclass
 class PostSuspendProcessesRequest:
-    query_params: PostSuspendProcessesQueryParams = field(default=None)
-    headers: PostSuspendProcessesHeaders = field(default=None)
+    headers: PostSuspendProcessesHeaders = field()
+    query_params: PostSuspendProcessesQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostSuspendProcessesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

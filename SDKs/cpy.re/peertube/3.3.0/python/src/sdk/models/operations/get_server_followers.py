@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -13,21 +15,21 @@ class GetServerFollowersQueryParams:
     state: Optional[shared.FollowStateEnum] = field(default=None, metadata={'query_param': { 'field_name': 'state', 'style': 'form', 'explode': True }})
     
 
-@dataclass
-class GetServerFollowersRequest:
-    query_params: GetServerFollowersQueryParams = field(default=None)
-    
-
 @dataclass_json
 @dataclass
 class GetServerFollowers200ApplicationJSON:
-    data: Optional[List[Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
-    total: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
+    data: Optional[List[Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
+    total: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    
+
+@dataclass
+class GetServerFollowersRequest:
+    query_params: GetServerFollowersQueryParams = field()
     
 
 @dataclass
 class GetServerFollowersResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_server_followers_200_application_json_object: Optional[GetServerFollowers200ApplicationJSON] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,0 +1,35 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import { TflApiPresentationEntitiesAdditionalProperties } from "./tflapipresentationentitiesadditionalproperties";
+import { TflApiPresentationEntitiesPlace } from "./tflapipresentationentitiesplace";
+import { TflApiPresentationEntitiesLineGroup } from "./tflapipresentationentitieslinegroup";
+import { TflApiPresentationEntitiesLineModeGroup } from "./tflapipresentationentitieslinemodegroup";
+import { TflApiPresentationEntitiesIdentifier } from "./tflapipresentationentitiesidentifier";
+export declare class TflApiPresentationEntitiesStopPoint extends SpeakeasyBase {
+    accessibilitySummary?: string;
+    additionalProperties?: TflApiPresentationEntitiesAdditionalProperties[];
+    children?: TflApiPresentationEntitiesPlace[];
+    childrenUrls?: string[];
+    commonName?: string;
+    distance?: number;
+    fullName?: string;
+    hubNaptanCode?: string;
+    icsCode?: string;
+    id?: string;
+    indicator?: string;
+    lat?: number;
+    lineGroup?: TflApiPresentationEntitiesLineGroup[];
+    lineModeGroups?: TflApiPresentationEntitiesLineModeGroup[];
+    lines?: TflApiPresentationEntitiesIdentifier[];
+    lon?: number;
+    modes?: string[];
+    naptanId?: string;
+    naptanMode?: string;
+    placeType?: string;
+    platformName?: string;
+    smsCode?: string;
+    stationNaptan?: string;
+    status?: boolean;
+    stopLetter?: string;
+    stopType?: string;
+    url?: string;
+}

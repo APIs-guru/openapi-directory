@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ComponentConfiguration } from "./componentconfiguration";
 import { ContainerTypeEnum } from "./containertypeenum";
 import { InstanceConfiguration } from "./instanceconfiguration";
 import { PlatformEnum } from "./platformenum";
@@ -38,71 +38,71 @@ var ContainerRecipe = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=arn" }),
+        SpeakeasyMetadata({ data: "json, name=arn" }),
         __metadata("design:type", String)
     ], ContainerRecipe.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=components", elemType: shared.ComponentConfiguration }),
+        SpeakeasyMetadata({ data: "json, name=components", elemType: ComponentConfiguration }),
         __metadata("design:type", Array)
     ], ContainerRecipe.prototype, "components", void 0);
     __decorate([
-        Metadata({ data: "json, name=containerType" }),
+        SpeakeasyMetadata({ data: "json, name=containerType" }),
         __metadata("design:type", String)
     ], ContainerRecipe.prototype, "containerType", void 0);
     __decorate([
-        Metadata({ data: "json, name=dateCreated" }),
+        SpeakeasyMetadata({ data: "json, name=dateCreated" }),
         __metadata("design:type", String)
     ], ContainerRecipe.prototype, "dateCreated", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], ContainerRecipe.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=dockerfileTemplateData" }),
+        SpeakeasyMetadata({ data: "json, name=dockerfileTemplateData" }),
         __metadata("design:type", String)
     ], ContainerRecipe.prototype, "dockerfileTemplateData", void 0);
     __decorate([
-        Metadata({ data: "json, name=encrypted" }),
+        SpeakeasyMetadata({ data: "json, name=encrypted" }),
         __metadata("design:type", Boolean)
     ], ContainerRecipe.prototype, "encrypted", void 0);
     __decorate([
-        Metadata({ data: "json, name=instanceConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=instanceConfiguration" }),
         __metadata("design:type", InstanceConfiguration)
     ], ContainerRecipe.prototype, "instanceConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=kmsKeyId" }),
+        SpeakeasyMetadata({ data: "json, name=kmsKeyId" }),
         __metadata("design:type", String)
     ], ContainerRecipe.prototype, "kmsKeyId", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], ContainerRecipe.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=owner" }),
+        SpeakeasyMetadata({ data: "json, name=owner" }),
         __metadata("design:type", String)
     ], ContainerRecipe.prototype, "owner", void 0);
     __decorate([
-        Metadata({ data: "json, name=parentImage" }),
+        SpeakeasyMetadata({ data: "json, name=parentImage" }),
         __metadata("design:type", String)
     ], ContainerRecipe.prototype, "parentImage", void 0);
     __decorate([
-        Metadata({ data: "json, name=platform" }),
+        SpeakeasyMetadata({ data: "json, name=platform" }),
         __metadata("design:type", String)
     ], ContainerRecipe.prototype, "platform", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags" }),
+        SpeakeasyMetadata({ data: "json, name=tags" }),
         __metadata("design:type", Map)
     ], ContainerRecipe.prototype, "tags", void 0);
     __decorate([
-        Metadata({ data: "json, name=targetRepository" }),
+        SpeakeasyMetadata({ data: "json, name=targetRepository" }),
         __metadata("design:type", TargetContainerRepository)
     ], ContainerRecipe.prototype, "targetRepository", void 0);
     __decorate([
-        Metadata({ data: "json, name=version" }),
+        SpeakeasyMetadata({ data: "json, name=version" }),
         __metadata("design:type", String)
     ], ContainerRecipe.prototype, "version", void 0);
     __decorate([
-        Metadata({ data: "json, name=workingDirectory" }),
+        SpeakeasyMetadata({ data: "json, name=workingDirectory" }),
         __metadata("design:type", String)
     ], ContainerRecipe.prototype, "workingDirectory", void 0);
     return ContainerRecipe;

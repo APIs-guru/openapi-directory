@@ -1,25 +1,25 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CompatibleEnvironmentTemplateInput } from "./compatibleenvironmenttemplateinput";
 import { TemplateVersionStatusEnum } from "./templateversionstatusenum";
 
 
+
 export class UpdateServiceTemplateVersionInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=compatibleEnvironmentTemplates", elemType: shared.CompatibleEnvironmentTemplateInput })
+  @SpeakeasyMetadata({ data: "json, name=compatibleEnvironmentTemplates", elemType: CompatibleEnvironmentTemplateInput })
   compatibleEnvironmentTemplates?: CompatibleEnvironmentTemplateInput[];
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=majorVersion" })
+  @SpeakeasyMetadata({ data: "json, name=majorVersion" })
   majorVersion: string;
 
-  @Metadata({ data: "json, name=minorVersion" })
+  @SpeakeasyMetadata({ data: "json, name=minorVersion" })
   minorVersion: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: TemplateVersionStatusEnum;
 
-  @Metadata({ data: "json, name=templateName" })
+  @SpeakeasyMetadata({ data: "json, name=templateName" })
   templateName: string;
 }

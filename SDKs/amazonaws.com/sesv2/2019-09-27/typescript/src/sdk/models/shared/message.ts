@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Body } from "./body";
 import { Content } from "./content";
+
 
 
 // Message
@@ -8,9 +9,9 @@ import { Content } from "./content";
  * Represents the email message that you're sending. The <code>Message</code> object consists of a subject line and a message body.
 **/
 export class Message extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Body" })
+  @SpeakeasyMetadata({ data: "json, name=Body" })
   body: Body;
 
-  @Metadata({ data: "json, name=Subject" })
+  @SpeakeasyMetadata({ data: "json, name=Subject" })
   subject: Content;
 }

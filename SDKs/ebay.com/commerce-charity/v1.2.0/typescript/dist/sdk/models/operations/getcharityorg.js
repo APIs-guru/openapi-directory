@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetCharityOrgPathParams = /** @class */ (function (_super) {
     __extends(GetCharityOrgPathParams, _super);
@@ -30,7 +30,7 @@ var GetCharityOrgPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=charity_org_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=charity_org_id" }),
         __metadata("design:type", String)
     ], GetCharityOrgPathParams.prototype, "charityOrgId", void 0);
     return GetCharityOrgPathParams;
@@ -42,7 +42,7 @@ var GetCharityOrgHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-EBAY-C-MARKETPLACE-ID" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-EBAY-C-MARKETPLACE-ID" }),
         __metadata("design:type", String)
     ], GetCharityOrgHeaders.prototype, "xEbayCMarketplaceId", void 0);
     return GetCharityOrgHeaders;
@@ -54,7 +54,7 @@ var GetCharityOrgSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeApiAuth)
     ], GetCharityOrgSecurity.prototype, "apiAuth", void 0);
     return GetCharityOrgSecurity;
@@ -66,15 +66,15 @@ var GetCharityOrgRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetCharityOrgPathParams)
     ], GetCharityOrgRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetCharityOrgHeaders)
     ], GetCharityOrgRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetCharityOrgSecurity)
     ], GetCharityOrgRequest.prototype, "security", void 0);
     return GetCharityOrgRequest;
@@ -86,15 +86,15 @@ var GetCharityOrgResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.CharityOrg)
     ], GetCharityOrgResponse.prototype, "charityOrg", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetCharityOrgResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetCharityOrgResponse.prototype, "statusCode", void 0);
     return GetCharityOrgResponse;

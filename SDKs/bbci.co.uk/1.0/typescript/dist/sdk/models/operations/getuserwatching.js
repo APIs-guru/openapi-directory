@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetUserWatchingQueryParams = /** @class */ (function (_super) {
     __extends(GetUserWatchingQueryParams, _super);
     function GetUserWatchingQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=identity_cookie" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=identity_cookie" }),
         __metadata("design:type", Number)
     ], GetUserWatchingQueryParams.prototype, "identityCookie", void 0);
     return GetUserWatchingQueryParams;
@@ -41,7 +41,7 @@ var GetUserWatchingRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetUserWatchingQueryParams)
     ], GetUserWatchingRequest.prototype, "queryParams", void 0);
     return GetUserWatchingRequest;
@@ -53,15 +53,15 @@ var GetUserWatchingResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetUserWatchingResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetUserWatchingResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], GetUserWatchingResponse.prototype, "ibl", void 0);
     return GetUserWatchingResponse;

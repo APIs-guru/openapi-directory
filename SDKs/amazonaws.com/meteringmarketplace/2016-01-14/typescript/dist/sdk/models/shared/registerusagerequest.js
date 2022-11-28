@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var RegisterUsageRequest = /** @class */ (function (_super) {
     __extends(RegisterUsageRequest, _super);
     function RegisterUsageRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Nonce" }),
+        SpeakeasyMetadata({ data: "json, name=Nonce" }),
         __metadata("design:type", String)
     ], RegisterUsageRequest.prototype, "nonce", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProductCode" }),
+        SpeakeasyMetadata({ data: "json, name=ProductCode" }),
         __metadata("design:type", String)
     ], RegisterUsageRequest.prototype, "productCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=PublicKeyVersion" }),
+        SpeakeasyMetadata({ data: "json, name=PublicKeyVersion" }),
         __metadata("design:type", Number)
     ], RegisterUsageRequest.prototype, "publicKeyVersion", void 0);
     return RegisterUsageRequest;

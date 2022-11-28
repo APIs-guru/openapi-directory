@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ListPortfolioAccessInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AcceptLanguage" })
+  @SpeakeasyMetadata({ data: "json, name=AcceptLanguage" })
   acceptLanguage?: string;
 
-  @Metadata({ data: "json, name=OrganizationParentId" })
+  @SpeakeasyMetadata({ data: "json, name=OrganizationParentId" })
   organizationParentId?: string;
 
-  @Metadata({ data: "json, name=PageSize" })
+  @SpeakeasyMetadata({ data: "json, name=PageSize" })
   pageSize?: number;
 
-  @Metadata({ data: "json, name=PageToken" })
+  @SpeakeasyMetadata({ data: "json, name=PageToken" })
   pageToken?: string;
 
-  @Metadata({ data: "json, name=PortfolioId" })
+  @SpeakeasyMetadata({ data: "json, name=PortfolioId" })
   portfolioId: string;
 }

@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AutoCorrections } from "./autocorrections";
 import { AffiliateVideo } from "./affiliatevideo";
 
 
+
 export class AffiliateVideoSearchResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=auto_corrections" })
+  @SpeakeasyMetadata({ data: "json, name=auto_corrections" })
   autoCorrections?: AutoCorrections;
 
-  @Metadata({ data: "json, name=videos", elemType: shared.AffiliateVideo })
+  @SpeakeasyMetadata({ data: "json, name=videos", elemType: AffiliateVideo })
   videos?: AffiliateVideo[];
 }

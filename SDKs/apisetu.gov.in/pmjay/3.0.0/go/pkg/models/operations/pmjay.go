@@ -29,11 +29,6 @@ type PmjaySecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type PmjayRequest struct {
-	Request  *PmjayRequestBody `request:"mediaType=application/json"`
-	Security PmjaySecurity
-}
-
 type Pmjay400ApplicationJSONErrorEnum string
 
 const (
@@ -163,6 +158,11 @@ const (
 type Pmjay504ApplicationJSON struct {
 	Error            *Pmjay504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Pmjay504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type PmjayRequest struct {
+	Request  *PmjayRequestBody `request:"mediaType=application/json"`
+	Security PmjaySecurity
 }
 
 type PmjayResponse struct {

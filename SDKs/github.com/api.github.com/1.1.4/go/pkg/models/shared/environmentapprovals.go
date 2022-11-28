@@ -21,6 +21,8 @@ const (
 	EnvironmentApprovalsStateEnumRejected EnvironmentApprovalsStateEnum = "rejected"
 )
 
+// EnvironmentApprovals
+// An entry in the reviews log for environment deployments
 type EnvironmentApprovals struct {
 	Comment      string                             `json:"comment"`
 	Environments []EnvironmentApprovalsEnvironments `json:"environments"`

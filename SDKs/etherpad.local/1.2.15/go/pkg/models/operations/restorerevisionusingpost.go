@@ -5,10 +5,6 @@ type RestoreRevisionUsingPostQueryParams struct {
 	Rev   *string `queryParam:"style=form,explode=true,name=rev"`
 }
 
-type RestoreRevisionUsingPostRequest struct {
-	QueryParams RestoreRevisionUsingPostQueryParams
-}
-
 type RestoreRevisionUsingPost200ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
@@ -31,6 +27,10 @@ type RestoreRevisionUsingPost500ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
 	Message *string                `json:"message,omitempty"`
+}
+
+type RestoreRevisionUsingPostRequest struct {
+	QueryParams RestoreRevisionUsingPostQueryParams
 }
 
 type RestoreRevisionUsingPostResponse struct {

@@ -9,6 +9,8 @@ const (
 	TextPositionHorizontalAlignmentEnumRight                      TextPositionHorizontalAlignmentEnum = "RIGHT"
 )
 
+// TextPosition
+// Position settings for text.
 type TextPosition struct {
 	HorizontalAlignment *TextPositionHorizontalAlignmentEnum `json:"horizontalAlignment,omitempty"`
 }

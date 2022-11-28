@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AddIpaliasPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=IP" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=IP" })
   ip: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" })
   agentNum: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=interface" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=interface" })
   interface: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=mask" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=mask" })
   mask: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=port" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=port" })
   port: number;
 }
 
 
 export class AddIpaliasRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: AddIpaliasPathParams;
 }
 
 
 export class AddIpaliasResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   addIpalias200ApplicationJsonString?: string;
 }

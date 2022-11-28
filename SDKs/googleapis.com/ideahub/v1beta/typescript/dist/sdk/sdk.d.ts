@@ -1,17 +1,17 @@
-import { AxiosInstance, AxiosRequestConfig } from "axios";
-import * as operations from "./models/operations";
-declare type OptsFunc = (sdk: SDK) => void;
+import { AxiosInstance } from "axios";
+import { Platforms } from "./platforms";
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://ideahub.googleapis.com/"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    platforms: Platforms;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
-    IdeahubPlatformsPropertiesIdeaActivitiesCreate(req: operations.IdeahubPlatformsPropertiesIdeaActivitiesCreateRequest, config?: AxiosRequestConfig): Promise<operations.IdeahubPlatformsPropertiesIdeaActivitiesCreateResponse>;
-    IdeahubPlatformsPropertiesIdeasList(req: operations.IdeahubPlatformsPropertiesIdeasListRequest, config?: AxiosRequestConfig): Promise<operations.IdeahubPlatformsPropertiesIdeasListResponse>;
-    IdeahubPlatformsPropertiesLocalesList(req: operations.IdeahubPlatformsPropertiesLocalesListRequest, config?: AxiosRequestConfig): Promise<operations.IdeahubPlatformsPropertiesLocalesListResponse>;
-    IdeahubPlatformsPropertiesTopicStatesPatch(req: operations.IdeahubPlatformsPropertiesTopicStatesPatchRequest, config?: AxiosRequestConfig): Promise<operations.IdeahubPlatformsPropertiesTopicStatesPatchResponse>;
 }
 export {};

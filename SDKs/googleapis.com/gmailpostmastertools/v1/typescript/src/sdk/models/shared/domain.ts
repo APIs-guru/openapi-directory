@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum DomainPermissionEnum {
-    PermissionUnspecified = "PERMISSION_UNSPECIFIED"
-,    Owner = "OWNER"
-,    Reader = "READER"
-,    None = "NONE"
+    PermissionUnspecified = "PERMISSION_UNSPECIFIED",
+    Owner = "OWNER",
+    Reader = "READER",
+    None = "NONE"
 }
 
 
@@ -13,12 +14,12 @@ export enum DomainPermissionEnum {
  * A registered domain resource in the Postmaster API.
 **/
 export class Domain extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=permission" })
+  @SpeakeasyMetadata({ data: "json, name=permission" })
   permission?: DomainPermissionEnum;
 }

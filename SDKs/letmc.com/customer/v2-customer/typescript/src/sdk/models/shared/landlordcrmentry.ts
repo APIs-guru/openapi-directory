@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LandlordCrmEntry
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Class for Landlord CRM Entries
 **/
 export class LandlordCrmEntry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BranchID" })
+  @SpeakeasyMetadata({ data: "json, name=BranchID" })
   branchId?: string;
 
-  @Metadata({ data: "json, name=GlobalReference" })
+  @SpeakeasyMetadata({ data: "json, name=GlobalReference" })
   globalReference?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=OID" })
+  @SpeakeasyMetadata({ data: "json, name=OID" })
   oid?: string;
 }

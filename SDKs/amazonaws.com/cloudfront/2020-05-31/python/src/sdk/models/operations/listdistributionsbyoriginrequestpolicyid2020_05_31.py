@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
 
 
 @dataclass
 class ListDistributionsByOriginRequestPolicyId20200531PathParams:
-    origin_request_policy_id: str = field(default=None, metadata={'path_param': { 'field_name': 'OriginRequestPolicyId', 'style': 'simple', 'explode': False }})
+    origin_request_policy_id: str = field(metadata={'path_param': { 'field_name': 'OriginRequestPolicyId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,14 +29,14 @@ class ListDistributionsByOriginRequestPolicyId20200531Headers:
 
 @dataclass
 class ListDistributionsByOriginRequestPolicyId20200531Request:
-    path_params: ListDistributionsByOriginRequestPolicyId20200531PathParams = field(default=None)
-    query_params: ListDistributionsByOriginRequestPolicyId20200531QueryParams = field(default=None)
-    headers: ListDistributionsByOriginRequestPolicyId20200531Headers = field(default=None)
+    headers: ListDistributionsByOriginRequestPolicyId20200531Headers = field()
+    path_params: ListDistributionsByOriginRequestPolicyId20200531PathParams = field()
+    query_params: ListDistributionsByOriginRequestPolicyId20200531QueryParams = field()
     
 
 @dataclass
 class ListDistributionsByOriginRequestPolicyId20200531Response:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

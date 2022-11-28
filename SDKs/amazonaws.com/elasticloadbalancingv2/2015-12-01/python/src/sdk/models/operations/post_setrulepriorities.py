@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostSetRulePrioritiesActionEnum(str, Enum):
     SET_RULE_PRIORITIES = "SetRulePriorities"
@@ -10,8 +14,8 @@ class PostSetRulePrioritiesVersionEnum(str, Enum):
 
 @dataclass
 class PostSetRulePrioritiesQueryParams:
-    action: PostSetRulePrioritiesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostSetRulePrioritiesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostSetRulePrioritiesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostSetRulePrioritiesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostSetRulePrioritiesHeaders:
 
 @dataclass
 class PostSetRulePrioritiesRequest:
-    query_params: PostSetRulePrioritiesQueryParams = field(default=None)
-    headers: PostSetRulePrioritiesHeaders = field(default=None)
+    headers: PostSetRulePrioritiesHeaders = field()
+    query_params: PostSetRulePrioritiesQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostSetRulePrioritiesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -18,6 +18,8 @@ type UpdatePipelineNotificationsHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdatePipelineNotificationsRequestBodyNotifications
+// <p>The Amazon Simple Notification Service (Amazon SNS) topic or topics to notify in order to report job status.</p> <important> <p>To receive notifications, you must also subscribe to the new topic in the Amazon SNS console.</p> </important>
 type UpdatePipelineNotificationsRequestBodyNotifications struct {
 	Completed   *string `json:"Completed,omitempty"`
 	Error       *string `json:"Error,omitempty"`

@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateQuantumTaskResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=quantumTaskArn" })
+  @SpeakeasyMetadata({ data: "json, name=quantumTaskArn" })
   quantumTaskArn: string;
 }

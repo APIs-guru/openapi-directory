@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AdvertiserTargetingConfig
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Targeting settings related to ad serving of an advertiser.
 **/
 export class AdvertiserTargetingConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=exemptTvFromViewabilityTargeting" })
+  @SpeakeasyMetadata({ data: "json, name=exemptTvFromViewabilityTargeting" })
   exemptTvFromViewabilityTargeting?: boolean;
 }

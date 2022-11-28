@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Country } from "./country";
+
 
 
 // CountriesListResponse
@@ -8,9 +8,9 @@ import { Country } from "./country";
  * Country List Response
 **/
 export class CountriesListResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=countries", elemType: shared.Country })
+  @SpeakeasyMetadata({ data: "json, name=countries", elemType: Country })
   countries?: Country[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 }

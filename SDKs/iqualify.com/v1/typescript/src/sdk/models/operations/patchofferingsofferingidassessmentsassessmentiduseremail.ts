@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PatchOfferingsOfferingIdAssessmentsAssessmentIdUserEmailPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=assessmentId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=assessmentId" })
   assessmentId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=offeringId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=offeringId" })
   offeringId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=userEmail" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=userEmail" })
   userEmail: string;
 }
 
 
 export class PatchOfferingsOfferingIdAssessmentsAssessmentIdUserEmailRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dueDate" })
+  @SpeakeasyMetadata({ data: "json, name=dueDate" })
   dueDate?: Date;
 }
 
 
 export class PatchOfferingsOfferingIdAssessmentsAssessmentIdUserEmailRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PatchOfferingsOfferingIdAssessmentsAssessmentIdUserEmailPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: PatchOfferingsOfferingIdAssessmentsAssessmentIdUserEmailRequestBody;
 }
 
 
 export class PatchOfferingsOfferingIdAssessmentsAssessmentIdUserEmailResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

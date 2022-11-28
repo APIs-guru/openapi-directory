@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateStoryPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=story_gid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=story_gid" })
   storyGid: string;
 }
 
 
 export class UpdateStoryQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
   optFields?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
   optPretty?: boolean;
 }
 
 
-export class UpdateStoryRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
-  data?: shared.StoryRequest;
-}
-
-
-export class UpdateStoryRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: UpdateStoryPathParams;
-
-  @Metadata()
-  queryParams: UpdateStoryQueryParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: UpdateStoryRequestBody;
+export class UpdateStoryRequestBodyInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=data" })
+  data?: shared.StoryRequestInput;
 }
 
 
 export class UpdateStory200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: shared.StoryResponse;
 }
 
 
+export class UpdateStoryRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: UpdateStoryPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: UpdateStoryQueryParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: UpdateStoryRequestBodyInput;
+}
+
+
 export class UpdateStoryResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateStory200ApplicationJsonObject?: UpdateStory200ApplicationJson;
 }

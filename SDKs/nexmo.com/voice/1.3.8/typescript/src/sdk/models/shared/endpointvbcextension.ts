@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // EndpointVbcExtension
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Connect to a VBC extension
 **/
 export class EndpointVbcExtension extends SpeakeasyBase {
-  @Metadata({ data: "json, name=extension" })
+  @SpeakeasyMetadata({ data: "json, name=extension" })
   extension: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var UpdateSettingValuePathParams = /** @class */ (function (_super) {
     __extends(UpdateSettingValuePathParams, _super);
@@ -30,11 +30,11 @@ var UpdateSettingValuePathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=environmentId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=environmentId" }),
         __metadata("design:type", String)
     ], UpdateSettingValuePathParams.prototype, "environmentId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=settingId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=settingId" }),
         __metadata("design:type", Number)
     ], UpdateSettingValuePathParams.prototype, "settingId", void 0);
     return UpdateSettingValuePathParams;
@@ -46,7 +46,7 @@ var UpdateSettingValueQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=reason" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=reason" }),
         __metadata("design:type", String)
     ], UpdateSettingValueQueryParams.prototype, "reason", void 0);
     return UpdateSettingValueQueryParams;
@@ -58,19 +58,19 @@ var UpdateSettingValueRequests = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/*+json", elemType: shared.Operation }),
+        SpeakeasyMetadata({ data: "request, media_type=application/*+json", elemType: shared.Operation }),
         __metadata("design:type", Array)
     ], UpdateSettingValueRequests.prototype, "operations", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json", elemType: shared.Operation }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json", elemType: shared.Operation }),
         __metadata("design:type", Array)
     ], UpdateSettingValueRequests.prototype, "operations1", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json-patch+json", elemType: shared.Operation }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json-patch+json", elemType: shared.Operation }),
         __metadata("design:type", Array)
     ], UpdateSettingValueRequests.prototype, "operations2", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=text/json", elemType: shared.Operation }),
+        SpeakeasyMetadata({ data: "request, media_type=text/json", elemType: shared.Operation }),
         __metadata("design:type", Array)
     ], UpdateSettingValueRequests.prototype, "operations3", void 0);
     return UpdateSettingValueRequests;
@@ -82,15 +82,15 @@ var UpdateSettingValueRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateSettingValuePathParams)
     ], UpdateSettingValueRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateSettingValueQueryParams)
     ], UpdateSettingValueRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateSettingValueRequests)
     ], UpdateSettingValueRequest.prototype, "request", void 0);
     return UpdateSettingValueRequest;
@@ -102,19 +102,19 @@ var UpdateSettingValueResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UpdateSettingValueResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.SettingValueModel)
     ], UpdateSettingValueResponse.prototype, "settingValueModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.SettingValueModelHaljson)
     ], UpdateSettingValueResponse.prototype, "settingValueModelHaljson", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UpdateSettingValueResponse.prototype, "statusCode", void 0);
     return UpdateSettingValueResponse;

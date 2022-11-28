@@ -5,10 +5,6 @@ type UserStatisticeDailyValueV1StatisticsIndividualDailyQueryParams struct {
 	StartDate *string `queryParam:"style=form,explode=true,name=startDate"`
 }
 
-type UserStatisticeDailyValueV1StatisticsIndividualDailyRequest struct {
-	QueryParams UserStatisticeDailyValueV1StatisticsIndividualDailyQueryParams
-}
-
 type UserStatisticeDailyValueV1StatisticsIndividualDaily200ApplicationJSONResult struct {
 	AccelerationCount               *float64 `json:"AccelerationCount,omitempty"`
 	AppID                           *string  `json:"AppId,omitempty"`
@@ -46,6 +42,10 @@ type UserStatisticeDailyValueV1StatisticsIndividualDaily200ApplicationJSON struc
 	Result []UserStatisticeDailyValueV1StatisticsIndividualDaily200ApplicationJSONResult `json:"Result,omitempty"`
 	Status *float64                                                                      `json:"Status,omitempty"`
 	Title  *string                                                                       `json:"Title,omitempty"`
+}
+
+type UserStatisticeDailyValueV1StatisticsIndividualDailyRequest struct {
+	QueryParams UserStatisticeDailyValueV1StatisticsIndividualDailyQueryParams
 }
 
 type UserStatisticeDailyValueV1StatisticsIndividualDailyResponse struct {

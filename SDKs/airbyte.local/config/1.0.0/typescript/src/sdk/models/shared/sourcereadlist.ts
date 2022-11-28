@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SourceRead } from "./sourceread";
 
 
+
 export class SourceReadList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=sources", elemType: shared.SourceRead })
+  @SpeakeasyMetadata({ data: "json, name=sources", elemType: SourceRead })
   sources: SourceRead[];
 }

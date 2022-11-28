@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -28,21 +33,21 @@ class ListImportJobsRequestBodyImportDestinationTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ListImportJobsRequestBody:
-    import_destination_type: Optional[ListImportJobsRequestBodyImportDestinationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ImportDestinationType' }})
+    import_destination_type: Optional[ListImportJobsRequestBodyImportDestinationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ImportDestinationType') }})
     
 
 @dataclass
 class ListImportJobsRequest:
-    query_params: ListImportJobsQueryParams = field(default=None)
-    headers: ListImportJobsHeaders = field(default=None)
-    request: ListImportJobsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ListImportJobsHeaders = field()
+    query_params: ListImportJobsQueryParams = field()
+    request: ListImportJobsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ListImportJobsResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     list_import_jobs_response: Optional[shared.ListImportJobsResponse] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

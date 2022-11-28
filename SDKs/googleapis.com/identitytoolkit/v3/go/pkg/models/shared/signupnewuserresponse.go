@@ -1,5 +1,7 @@
 package shared
 
+// SignupNewUserResponse
+// Response of signing up new user, creating anonymous user or anonymous user reauth.
 type SignupNewUserResponse struct {
 	DisplayName  *string `json:"displayName,omitempty"`
 	Email        *string `json:"email,omitempty"`

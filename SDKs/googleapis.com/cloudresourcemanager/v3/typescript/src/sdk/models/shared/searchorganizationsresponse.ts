@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Organization } from "./organization";
+
 
 
 // SearchOrganizationsResponse
@@ -8,9 +8,9 @@ import { Organization } from "./organization";
  * The response returned from the `SearchOrganizations` method.
 **/
 export class SearchOrganizationsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=organizations", elemType: shared.Organization })
+  @SpeakeasyMetadata({ data: "json, name=organizations", elemType: Organization })
   organizations?: Organization[];
 }

@@ -22,8 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { FieldResult } from "./fieldresult";
+import { TableResult } from "./tableresult";
 // FormRecognitionResult
 /**
  * The result of extracting form field values
@@ -34,23 +35,23 @@ var FormRecognitionResult = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=BestMatchFormSettingName" }),
+        SpeakeasyMetadata({ data: "json, name=BestMatchFormSettingName" }),
         __metadata("design:type", String)
     ], FormRecognitionResult.prototype, "bestMatchFormSettingName", void 0);
     __decorate([
-        Metadata({ data: "json, name=Diagnostics" }),
+        SpeakeasyMetadata({ data: "json, name=Diagnostics" }),
         __metadata("design:type", Array)
     ], FormRecognitionResult.prototype, "diagnostics", void 0);
     __decorate([
-        Metadata({ data: "json, name=FieldValueExtractionResult", elemType: shared.FieldResult }),
+        SpeakeasyMetadata({ data: "json, name=FieldValueExtractionResult", elemType: FieldResult }),
         __metadata("design:type", Array)
     ], FormRecognitionResult.prototype, "fieldValueExtractionResult", void 0);
     __decorate([
-        Metadata({ data: "json, name=Successful" }),
+        SpeakeasyMetadata({ data: "json, name=Successful" }),
         __metadata("design:type", Boolean)
     ], FormRecognitionResult.prototype, "successful", void 0);
     __decorate([
-        Metadata({ data: "json, name=TableValueExtractionResults", elemType: shared.TableResult }),
+        SpeakeasyMetadata({ data: "json, name=TableValueExtractionResults", elemType: TableResult }),
         __metadata("design:type", Array)
     ], FormRecognitionResult.prototype, "tableValueExtractionResults", void 0);
     return FormRecognitionResult;

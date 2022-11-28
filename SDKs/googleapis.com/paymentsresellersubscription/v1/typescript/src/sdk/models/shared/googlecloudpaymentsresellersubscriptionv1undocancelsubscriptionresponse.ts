@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudPaymentsResellerSubscriptionV1Subscription } from "./googlecloudpaymentsresellersubscriptionv1subscription";
+
 
 
 // GoogleCloudPaymentsResellerSubscriptionV1UndoCancelSubscriptionResponse
@@ -7,6 +8,6 @@ import { GoogleCloudPaymentsResellerSubscriptionV1Subscription } from "./googlec
  * Response that contains the updated subscription resource.
 **/
 export class GoogleCloudPaymentsResellerSubscriptionV1UndoCancelSubscriptionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=subscription" })
+  @SpeakeasyMetadata({ data: "json, name=subscription" })
   subscription?: GoogleCloudPaymentsResellerSubscriptionV1Subscription;
 }

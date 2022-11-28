@@ -5,12 +5,12 @@ from sdk.models import shared
 
 @dataclass
 class EmailSendSalesInvoiceRequest:
-    request: shared.SalesInvoiceEmailInfoDto = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.SalesInvoiceEmailInfoDto = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class EmailSendSalesInvoiceResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     email_send_sales_invoice_200_application_json_object: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleTypeMoney } from "./googletypemoney";
+
 
 
 // GoogleCloudApigeeV1AdjustDeveloperBalanceRequest
@@ -7,6 +8,6 @@ import { GoogleTypeMoney } from "./googletypemoney";
  * Request for AdjustDeveloperBalance.
 **/
 export class GoogleCloudApigeeV1AdjustDeveloperBalanceRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=adjustment" })
+  @SpeakeasyMetadata({ data: "json, name=adjustment" })
   adjustment?: GoogleTypeMoney;
 }

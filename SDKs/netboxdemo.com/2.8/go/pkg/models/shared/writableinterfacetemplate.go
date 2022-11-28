@@ -77,9 +77,8 @@ const (
 	WritableInterfaceTemplateTypeEnumOther                            WritableInterfaceTemplateTypeEnum = "other"
 )
 
-type WritableInterfaceTemplate struct {
+type WritableInterfaceTemplateInput struct {
 	DeviceType int64                             `json:"device_type"`
-	ID         *int64                            `json:"id,omitempty"`
 	MgmtOnly   *bool                             `json:"mgmt_only,omitempty"`
 	Name       string                            `json:"name"`
 	Type       WritableInterfaceTemplateTypeEnum `json:"type"`

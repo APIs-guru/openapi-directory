@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ApiDimensionFilterGroup } from "./apidimensionfiltergroup";
 export declare enum SearchAnalyticsQueryRequestAggregationTypeEnum {
     Auto = "AUTO",

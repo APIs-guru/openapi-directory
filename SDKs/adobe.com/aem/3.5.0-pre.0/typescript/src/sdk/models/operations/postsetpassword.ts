@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostSetPasswordQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=old" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=old" })
   old: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=plain" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=plain" })
   plain: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=verify" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=verify" })
   verify: string;
 }
 
 
 export class PostSetPasswordRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PostSetPasswordQueryParams;
 }
 
 
 export class PostSetPasswordResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postSetPasswordDefaultTextPlainString?: string;
 }

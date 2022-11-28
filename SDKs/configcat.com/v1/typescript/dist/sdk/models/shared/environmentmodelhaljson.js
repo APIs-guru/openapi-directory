@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var EnvironmentModelHaljsonEmbeddedProductEmbeddedOrganizationLinks = /** @class */ (function (_super) {
     __extends(EnvironmentModelHaljsonEmbeddedProductEmbeddedOrganizationLinks, _super);
     function EnvironmentModelHaljsonEmbeddedProductEmbeddedOrganizationLinks() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=members" }),
+        SpeakeasyMetadata({ data: "json, name=members" }),
         __metadata("design:type", String)
     ], EnvironmentModelHaljsonEmbeddedProductEmbeddedOrganizationLinks.prototype, "members", void 0);
     __decorate([
-        Metadata({ data: "json, name=products" }),
+        SpeakeasyMetadata({ data: "json, name=products" }),
         __metadata("design:type", String)
     ], EnvironmentModelHaljsonEmbeddedProductEmbeddedOrganizationLinks.prototype, "products", void 0);
     return EnvironmentModelHaljsonEmbeddedProductEmbeddedOrganizationLinks;
@@ -45,15 +45,15 @@ var EnvironmentModelHaljsonEmbeddedProductEmbeddedOrganization = /** @class */ (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=_links" }),
+        SpeakeasyMetadata({ data: "json, name=_links" }),
         __metadata("design:type", EnvironmentModelHaljsonEmbeddedProductEmbeddedOrganizationLinks)
     ], EnvironmentModelHaljsonEmbeddedProductEmbeddedOrganization.prototype, "links", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], EnvironmentModelHaljsonEmbeddedProductEmbeddedOrganization.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=organizationId" }),
+        SpeakeasyMetadata({ data: "json, name=organizationId" }),
         __metadata("design:type", String)
     ], EnvironmentModelHaljsonEmbeddedProductEmbeddedOrganization.prototype, "organizationId", void 0);
     return EnvironmentModelHaljsonEmbeddedProductEmbeddedOrganization;
@@ -65,7 +65,7 @@ var EnvironmentModelHaljsonEmbeddedProductEmbedded = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=organization" }),
+        SpeakeasyMetadata({ data: "json, name=organization" }),
         __metadata("design:type", EnvironmentModelHaljsonEmbeddedProductEmbeddedOrganization)
     ], EnvironmentModelHaljsonEmbeddedProductEmbedded.prototype, "organization", void 0);
     return EnvironmentModelHaljsonEmbeddedProductEmbedded;
@@ -77,27 +77,27 @@ var EnvironmentModelHaljsonEmbeddedProductLinks = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=configs" }),
+        SpeakeasyMetadata({ data: "json, name=configs" }),
         __metadata("design:type", String)
     ], EnvironmentModelHaljsonEmbeddedProductLinks.prototype, "configs", void 0);
     __decorate([
-        Metadata({ data: "json, name=environments" }),
+        SpeakeasyMetadata({ data: "json, name=environments" }),
         __metadata("design:type", String)
     ], EnvironmentModelHaljsonEmbeddedProductLinks.prototype, "environments", void 0);
     __decorate([
-        Metadata({ data: "json, name=members" }),
+        SpeakeasyMetadata({ data: "json, name=members" }),
         __metadata("design:type", String)
     ], EnvironmentModelHaljsonEmbeddedProductLinks.prototype, "members", void 0);
     __decorate([
-        Metadata({ data: "json, name=permission-groups" }),
+        SpeakeasyMetadata({ data: "json, name=permission-groups" }),
         __metadata("design:type", String)
     ], EnvironmentModelHaljsonEmbeddedProductLinks.prototype, "permissionGroups", void 0);
     __decorate([
-        Metadata({ data: "json, name=self" }),
+        SpeakeasyMetadata({ data: "json, name=self" }),
         __metadata("design:type", String)
     ], EnvironmentModelHaljsonEmbeddedProductLinks.prototype, "self", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags" }),
+        SpeakeasyMetadata({ data: "json, name=tags" }),
         __metadata("design:type", String)
     ], EnvironmentModelHaljsonEmbeddedProductLinks.prototype, "tags", void 0);
     return EnvironmentModelHaljsonEmbeddedProductLinks;
@@ -109,19 +109,19 @@ var EnvironmentModelHaljsonEmbeddedProduct = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=_embedded" }),
+        SpeakeasyMetadata({ data: "json, name=_embedded" }),
         __metadata("design:type", EnvironmentModelHaljsonEmbeddedProductEmbedded)
     ], EnvironmentModelHaljsonEmbeddedProduct.prototype, "embedded", void 0);
     __decorate([
-        Metadata({ data: "json, name=_links" }),
+        SpeakeasyMetadata({ data: "json, name=_links" }),
         __metadata("design:type", EnvironmentModelHaljsonEmbeddedProductLinks)
     ], EnvironmentModelHaljsonEmbeddedProduct.prototype, "links", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], EnvironmentModelHaljsonEmbeddedProduct.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=productId" }),
+        SpeakeasyMetadata({ data: "json, name=productId" }),
         __metadata("design:type", String)
     ], EnvironmentModelHaljsonEmbeddedProduct.prototype, "productId", void 0);
     return EnvironmentModelHaljsonEmbeddedProduct;
@@ -133,7 +133,7 @@ var EnvironmentModelHaljsonEmbedded = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=product" }),
+        SpeakeasyMetadata({ data: "json, name=product" }),
         __metadata("design:type", EnvironmentModelHaljsonEmbeddedProduct)
     ], EnvironmentModelHaljsonEmbedded.prototype, "product", void 0);
     return EnvironmentModelHaljsonEmbedded;
@@ -145,7 +145,7 @@ var EnvironmentModelHaljsonLinks = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=self" }),
+        SpeakeasyMetadata({ data: "json, name=self" }),
         __metadata("design:type", String)
     ], EnvironmentModelHaljsonLinks.prototype, "self", void 0);
     return EnvironmentModelHaljsonLinks;
@@ -157,19 +157,19 @@ var EnvironmentModelHaljson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=_embedded" }),
+        SpeakeasyMetadata({ data: "json, name=_embedded" }),
         __metadata("design:type", EnvironmentModelHaljsonEmbedded)
     ], EnvironmentModelHaljson.prototype, "embedded", void 0);
     __decorate([
-        Metadata({ data: "json, name=_links" }),
+        SpeakeasyMetadata({ data: "json, name=_links" }),
         __metadata("design:type", EnvironmentModelHaljsonLinks)
     ], EnvironmentModelHaljson.prototype, "links", void 0);
     __decorate([
-        Metadata({ data: "json, name=environmentId" }),
+        SpeakeasyMetadata({ data: "json, name=environmentId" }),
         __metadata("design:type", String)
     ], EnvironmentModelHaljson.prototype, "environmentId", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], EnvironmentModelHaljson.prototype, "name", void 0);
     return EnvironmentModelHaljson;

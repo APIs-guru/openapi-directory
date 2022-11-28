@@ -1,11 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import frequency_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AnomalyDetectorConfigSummary:
-    anomaly_detector_frequency: Optional[frequency_enum.FrequencyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AnomalyDetectorFrequency' }})
+    r"""AnomalyDetectorConfigSummary
+    Contains information about a detector's configuration.
+    """
+    
+    anomaly_detector_frequency: Optional[FrequencyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AnomalyDetectorFrequency') }})
     

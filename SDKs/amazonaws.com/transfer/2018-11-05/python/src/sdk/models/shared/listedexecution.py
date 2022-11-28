@@ -1,16 +1,20 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import filelocation
-from . import servicemetadata
-from . import executionstatus_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListedExecution:
-    execution_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ExecutionId' }})
-    initial_file_location: Optional[filelocation.FileLocation] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'InitialFileLocation' }})
-    service_metadata: Optional[servicemetadata.ServiceMetadata] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ServiceMetadata' }})
-    status: Optional[executionstatus_enum.ExecutionStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Status' }})
+    r"""ListedExecution
+    Returns properties of the execution that is specified.
+    """
+    
+    execution_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ExecutionId') }})
+    initial_file_location: Optional[FileLocation] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('InitialFileLocation') }})
+    service_metadata: Optional[ServiceMetadata] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ServiceMetadata') }})
+    status: Optional[ExecutionStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Status') }})
     

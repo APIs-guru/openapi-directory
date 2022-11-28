@@ -1,14 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import dkimattributes
-from . import identitytype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateEmailIdentityResponse:
-    dkim_attributes: Optional[dkimattributes.DkimAttributes] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DkimAttributes' }})
-    identity_type: Optional[identitytype_enum.IdentityTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IdentityType' }})
-    verified_for_sending_status: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'VerifiedForSendingStatus' }})
+    r"""CreateEmailIdentityResponse
+    <p>If the email identity is a domain, this object contains information about the DKIM verification status for the domain.</p> <p>If the email identity is an email address, this object is empty. </p>
+    """
+    
+    dkim_attributes: Optional[DkimAttributes] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DkimAttributes') }})
+    identity_type: Optional[IdentityTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('IdentityType') }})
+    verified_for_sending_status: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('VerifiedForSendingStatus') }})
     

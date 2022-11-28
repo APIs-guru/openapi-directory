@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SuggestionMatch } from "./suggestionmatch";
 // SuggestModel
 /**
  * Container for the suggestion information returned in a <code>SuggestResponse</code>.
@@ -34,15 +34,15 @@ var SuggestModel = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=found" }),
+        SpeakeasyMetadata({ data: "json, name=found" }),
         __metadata("design:type", Number)
     ], SuggestModel.prototype, "found", void 0);
     __decorate([
-        Metadata({ data: "json, name=query" }),
+        SpeakeasyMetadata({ data: "json, name=query" }),
         __metadata("design:type", String)
     ], SuggestModel.prototype, "query", void 0);
     __decorate([
-        Metadata({ data: "json, name=suggestions", elemType: shared.SuggestionMatch }),
+        SpeakeasyMetadata({ data: "json, name=suggestions", elemType: SuggestionMatch }),
         __metadata("design:type", Array)
     ], SuggestModel.prototype, "suggestions", void 0);
     return SuggestModel;

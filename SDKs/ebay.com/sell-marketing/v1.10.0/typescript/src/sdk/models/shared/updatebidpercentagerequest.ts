@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // UpdateBidPercentageRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * This type specifies the bid percentage for an ad campaign.
 **/
 export class UpdateBidPercentageRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bidPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=bidPercentage" })
   bidPercentage?: string;
 }

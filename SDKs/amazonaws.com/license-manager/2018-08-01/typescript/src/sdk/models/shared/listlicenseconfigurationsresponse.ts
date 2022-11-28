@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LicenseConfiguration } from "./licenseconfiguration";
 
 
+
 export class ListLicenseConfigurationsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LicenseConfigurations", elemType: shared.LicenseConfiguration })
+  @SpeakeasyMetadata({ data: "json, name=LicenseConfigurations", elemType: LicenseConfiguration })
   licenseConfigurations?: LicenseConfiguration[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

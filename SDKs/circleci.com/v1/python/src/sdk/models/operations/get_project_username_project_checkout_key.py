@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class GetProjectUsernameProjectCheckoutKeyPathParams:
-    project: str = field(default=None, metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
-    username: str = field(default=None, metadata={'path_param': { 'field_name': 'username', 'style': 'simple', 'explode': False }})
+    project: str = field(metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
+    username: str = field(metadata={'path_param': { 'field_name': 'username', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetProjectUsernameProjectCheckoutKeyRequest:
-    path_params: GetProjectUsernameProjectCheckoutKeyPathParams = field(default=None)
+    path_params: GetProjectUsernameProjectCheckoutKeyPathParams = field()
     
 
 @dataclass
 class GetProjectUsernameProjectCheckoutKeyResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     keys: Optional[List[shared.Key]] = field(default=None)
-    status_code: int = field(default=None)
     

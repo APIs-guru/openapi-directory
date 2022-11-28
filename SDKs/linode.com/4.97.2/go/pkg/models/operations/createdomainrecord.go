@@ -2,7 +2,6 @@ package operations
 
 import (
 	"openapi/pkg/models/shared"
-	"time"
 )
 
 type CreateDomainRecordPathParams struct {
@@ -31,9 +30,7 @@ const (
 	CreateDomainRecordRequestBodyTypeEnumCaa   CreateDomainRecordRequestBodyTypeEnum = "CAA"
 )
 
-type CreateDomainRecordRequestBody struct {
-	Created  *time.Time                            `json:"created,omitempty"`
-	ID       *int64                                `json:"id,omitempty"`
+type CreateDomainRecordRequestBodyInput struct {
 	Name     *string                               `json:"name,omitempty"`
 	Port     *int64                                `json:"port,omitempty"`
 	Priority *int64                                `json:"priority,omitempty"`
@@ -43,31 +40,22 @@ type CreateDomainRecordRequestBody struct {
 	Target   *string                               `json:"target,omitempty"`
 	TTLSec   *int64                                `json:"ttl_sec,omitempty"`
 	Type     CreateDomainRecordRequestBodyTypeEnum `json:"type"`
-	Updated  *time.Time                            `json:"updated,omitempty"`
 	Weight   *int64                                `json:"weight,omitempty"`
 }
 
-type CreateDomainRecordSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type CreateDomainRecordSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type CreateDomainRecordSecurity struct {
-	Option1 *CreateDomainRecordSecurityOption1 `security:"option"`
-	Option2 *CreateDomainRecordSecurityOption2 `security:"option"`
-}
-
-type CreateDomainRecordRequest struct {
-	PathParams CreateDomainRecordPathParams
-	Request    CreateDomainRecordRequestBody `request:"mediaType=application/json"`
-	Security   CreateDomainRecordSecurity
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
 }
 
 type CreateDomainRecordDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type CreateDomainRecordRequest struct {
+	PathParams CreateDomainRecordPathParams
+	Request    CreateDomainRecordRequestBodyInput `request:"mediaType=application/json"`
+	Security   CreateDomainRecordSecurity
 }
 
 type CreateDomainRecordResponse struct {

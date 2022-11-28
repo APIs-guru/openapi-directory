@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsRedshiftClusterClusterSnapshotCopyStatus
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about a cross-Region snapshot copy.
 **/
 export class AwsRedshiftClusterClusterSnapshotCopyStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DestinationRegion" })
+  @SpeakeasyMetadata({ data: "json, name=DestinationRegion" })
   destinationRegion?: string;
 
-  @Metadata({ data: "json, name=ManualSnapshotRetentionPeriod" })
+  @SpeakeasyMetadata({ data: "json, name=ManualSnapshotRetentionPeriod" })
   manualSnapshotRetentionPeriod?: number;
 
-  @Metadata({ data: "json, name=RetentionPeriod" })
+  @SpeakeasyMetadata({ data: "json, name=RetentionPeriod" })
   retentionPeriod?: number;
 
-  @Metadata({ data: "json, name=SnapshotCopyGrantName" })
+  @SpeakeasyMetadata({ data: "json, name=SnapshotCopyGrantName" })
   snapshotCopyGrantName?: string;
 }

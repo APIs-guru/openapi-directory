@@ -1,81 +1,81 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum HealthInformationNotificationNotificationNotifierTypeEnum {
-    Hiu = "HIU"
-,    Hip = "HIP"
+    Hiu = "HIU",
+    Hip = "HIP"
 }
 
 
 export class HealthInformationNotificationNotificationNotifier extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: HealthInformationNotificationNotificationNotifierTypeEnum;
 }
 
 export enum HealthInformationNotificationNotificationStatusNotificationSessionStatusEnum {
-    Transferred = "TRANSFERRED"
-,    Failed = "FAILED"
+    Transferred = "TRANSFERRED",
+    Failed = "FAILED"
 }
 
 export enum HealthInformationNotificationNotificationStatusNotificationStatusResponsesHiStatusEnum {
-    Delivered = "DELIVERED"
-,    Ok = "OK"
-,    Errored = "ERRORED"
+    Delivered = "DELIVERED",
+    Ok = "OK",
+    Errored = "ERRORED"
 }
 
 
 export class HealthInformationNotificationNotificationStatusNotificationStatusResponses extends SpeakeasyBase {
-  @Metadata({ data: "json, name=careContextReference" })
+  @SpeakeasyMetadata({ data: "json, name=careContextReference" })
   careContextReference: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=hiStatus" })
+  @SpeakeasyMetadata({ data: "json, name=hiStatus" })
   hiStatus: HealthInformationNotificationNotificationStatusNotificationStatusResponsesHiStatusEnum;
 }
 
 
 export class HealthInformationNotificationNotificationStatusNotification extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hipId" })
+  @SpeakeasyMetadata({ data: "json, name=hipId" })
   hipId: string;
 
-  @Metadata({ data: "json, name=sessionStatus" })
+  @SpeakeasyMetadata({ data: "json, name=sessionStatus" })
   sessionStatus: HealthInformationNotificationNotificationStatusNotificationSessionStatusEnum;
 
-  @Metadata({ data: "json, name=statusResponses", elemType: shared.HealthInformationNotificationNotificationStatusNotificationStatusResponses })
+  @SpeakeasyMetadata({ data: "json, name=statusResponses", elemType: HealthInformationNotificationNotificationStatusNotificationStatusResponses })
   statusResponses?: HealthInformationNotificationNotificationStatusNotificationStatusResponses[];
 }
 
 
 export class HealthInformationNotificationNotification extends SpeakeasyBase {
-  @Metadata({ data: "json, name=consentId" })
+  @SpeakeasyMetadata({ data: "json, name=consentId" })
   consentId: string;
 
-  @Metadata({ data: "json, name=doneAt" })
+  @SpeakeasyMetadata({ data: "json, name=doneAt" })
   doneAt: Date;
 
-  @Metadata({ data: "json, name=notifier" })
+  @SpeakeasyMetadata({ data: "json, name=notifier" })
   notifier: HealthInformationNotificationNotificationNotifier;
 
-  @Metadata({ data: "json, name=statusNotification" })
+  @SpeakeasyMetadata({ data: "json, name=statusNotification" })
   statusNotification: HealthInformationNotificationNotificationStatusNotification;
 
-  @Metadata({ data: "json, name=transactionId" })
+  @SpeakeasyMetadata({ data: "json, name=transactionId" })
   transactionId: string;
 }
 
 
 export class HealthInformationNotification extends SpeakeasyBase {
-  @Metadata({ data: "json, name=notification" })
+  @SpeakeasyMetadata({ data: "json, name=notification" })
   notification: HealthInformationNotificationNotification;
 
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId: string;
 
-  @Metadata({ data: "json, name=timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=timestamp" })
   timestamp: Date;
 }

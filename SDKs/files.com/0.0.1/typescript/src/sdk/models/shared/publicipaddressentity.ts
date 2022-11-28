@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PublicIpAddressEntity
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * List all possible public IP addresses
 **/
 export class PublicIpAddressEntity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ip_address" })
+  @SpeakeasyMetadata({ data: "json, name=ip_address" })
   ipAddress?: string;
 
-  @Metadata({ data: "json, name=server_name" })
+  @SpeakeasyMetadata({ data: "json, name=server_name" })
   serverName?: string;
 }

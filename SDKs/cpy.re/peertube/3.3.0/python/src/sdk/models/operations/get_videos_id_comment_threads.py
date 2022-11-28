@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetVideosIDCommentThreadsPathParams:
-    id: Any = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: Any = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,13 +18,13 @@ class GetVideosIDCommentThreadsQueryParams:
 
 @dataclass
 class GetVideosIDCommentThreadsRequest:
-    path_params: GetVideosIDCommentThreadsPathParams = field(default=None)
-    query_params: GetVideosIDCommentThreadsQueryParams = field(default=None)
+    path_params: GetVideosIDCommentThreadsPathParams = field()
+    query_params: GetVideosIDCommentThreadsQueryParams = field()
     
 
 @dataclass
 class GetVideosIDCommentThreadsResponse:
+    content_type: str = field()
+    status_code: int = field()
     comment_thread_response: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

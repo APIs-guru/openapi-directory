@@ -1,10 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
+from sdk.models import shared
 
 
 @dataclass
 class UpdateConversationCommunityPathParams:
-    conv_id: str = field(default=None, metadata={'path_param': { 'field_name': 'convId', 'style': 'simple', 'explode': False }})
+    conv_id: str = field(metadata={'path_param': { 'field_name': 'convId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,20 +19,20 @@ class UpdateConversationCommunityRequestBody:
 
 @dataclass
 class UpdateConversationCommunitySecurity:
-    oauth: shared.SchemeOauth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth: shared.SchemeOauth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class UpdateConversationCommunityRequest:
-    path_params: UpdateConversationCommunityPathParams = field(default=None)
+    path_params: UpdateConversationCommunityPathParams = field()
+    security: UpdateConversationCommunitySecurity = field()
     request: Optional[UpdateConversationCommunityRequestBody] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
-    security: UpdateConversationCommunitySecurity = field(default=None)
     
 
 @dataclass
 class UpdateConversationCommunityResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     conversation: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

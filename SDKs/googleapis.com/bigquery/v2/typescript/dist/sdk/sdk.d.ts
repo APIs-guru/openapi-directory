@@ -1,0 +1,31 @@
+import { AxiosInstance } from "axios";
+import { Datasets } from "./datasets";
+import { Jobs } from "./jobs";
+import { Models } from "./models";
+import { Projects } from "./projects";
+import { Routines } from "./routines";
+import { RowAccessPolicies } from "./rowaccesspolicies";
+import { Tabledata } from "./tabledata";
+import { Tables } from "./tables";
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://bigquery.googleapis.com/bigquery/v2"];
+export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
+export declare function WithClient(client: AxiosInstance): OptsFunc;
+export declare class SDK {
+    datasets: Datasets;
+    jobs: Jobs;
+    models: Models;
+    projects: Projects;
+    routines: Routines;
+    rowAccessPolicies: RowAccessPolicies;
+    tabledata: Tabledata;
+    tables: Tables;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
+    constructor(...opts: OptsFunc[]);
+}
+export {};

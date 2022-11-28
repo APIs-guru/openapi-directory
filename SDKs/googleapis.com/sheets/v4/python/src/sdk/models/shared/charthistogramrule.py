@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class ChartHistogramRule:
-    interval_size: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'intervalSize' }})
-    max_value: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxValue' }})
-    min_value: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'minValue' }})
+    r"""ChartHistogramRule
+    Allows you to organize numeric values in a source data column into buckets of constant size.
+    """
+    
+    interval_size: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('intervalSize') }})
+    max_value: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxValue') }})
+    min_value: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('minValue') }})
     

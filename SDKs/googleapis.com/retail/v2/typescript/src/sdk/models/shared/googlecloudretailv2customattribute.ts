@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudRetailV2CustomAttribute
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A custom attribute that is not explicitly modeled in Product.
 **/
 export class GoogleCloudRetailV2CustomAttribute extends SpeakeasyBase {
-  @Metadata({ data: "json, name=indexable" })
+  @SpeakeasyMetadata({ data: "json, name=indexable" })
   indexable?: boolean;
 
-  @Metadata({ data: "json, name=numbers" })
+  @SpeakeasyMetadata({ data: "json, name=numbers" })
   numbers?: number[];
 
-  @Metadata({ data: "json, name=searchable" })
+  @SpeakeasyMetadata({ data: "json, name=searchable" })
   searchable?: boolean;
 
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: string[];
 }

@@ -24,6 +24,8 @@ const (
 	TriggerTypeEnumElementVisibility TriggerTypeEnum = "elementVisibility"
 )
 
+// Trigger
+// Represents a Google Tag Manager Trigger
 type Trigger struct {
 	AccountID                      *string          `json:"accountId,omitempty"`
 	AutoEventFilter                []Condition      `json:"autoEventFilter,omitempty"`

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DataTransfer } from "./datatransfer";
 /**
  * Template for a collection of DataTransfer resources.

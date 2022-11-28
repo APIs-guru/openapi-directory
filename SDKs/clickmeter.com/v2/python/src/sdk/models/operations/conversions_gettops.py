@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ConversionsGetTopsPathParams:
-    conversion_id: int = field(default=None, metadata={'path_param': { 'field_name': 'conversionId', 'style': 'simple', 'explode': False }})
+    conversion_id: int = field(metadata={'path_param': { 'field_name': 'conversionId', 'style': 'simple', 'explode': False }})
     
 class ConversionsGetTopsHittypeEnum(str, Enum):
     CLICKS = "clicks"
@@ -42,22 +43,22 @@ class ConversionsGetTopsTypeEnum(str, Enum):
 
 @dataclass
 class ConversionsGetTopsQueryParams:
+    timeframe: ConversionsGetTopsTimeframeEnum = field(metadata={'query_param': { 'field_name': 'timeframe', 'style': 'form', 'explode': True }})
+    type: ConversionsGetTopsTypeEnum = field(metadata={'query_param': { 'field_name': 'type', 'style': 'form', 'explode': True }})
     from_day: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'fromDay', 'style': 'form', 'explode': True }})
     hittype: Optional[ConversionsGetTopsHittypeEnum] = field(default=None, metadata={'query_param': { 'field_name': 'hittype', 'style': 'form', 'explode': True }})
-    timeframe: ConversionsGetTopsTimeframeEnum = field(default=None, metadata={'query_param': { 'field_name': 'timeframe', 'style': 'form', 'explode': True }})
     to_day: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'toDay', 'style': 'form', 'explode': True }})
-    type: ConversionsGetTopsTypeEnum = field(default=None, metadata={'query_param': { 'field_name': 'type', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class ConversionsGetTopsRequest:
-    path_params: ConversionsGetTopsPathParams = field(default=None)
-    query_params: ConversionsGetTopsQueryParams = field(default=None)
+    path_params: ConversionsGetTopsPathParams = field()
+    query_params: ConversionsGetTopsQueryParams = field()
     
 
 @dataclass
 class ConversionsGetTopsResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_core_dto_tops_top: Optional[shared.APICoreDtoTopsTop] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

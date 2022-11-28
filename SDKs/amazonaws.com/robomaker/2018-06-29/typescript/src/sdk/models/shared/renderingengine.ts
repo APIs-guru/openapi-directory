@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RenderingEngineTypeEnum } from "./renderingenginetypeenum";
+
 
 
 // RenderingEngine
@@ -7,9 +8,9 @@ import { RenderingEngineTypeEnum } from "./renderingenginetypeenum";
  * Information about a rendering engine.
 **/
 export class RenderingEngine extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: RenderingEngineTypeEnum;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 }

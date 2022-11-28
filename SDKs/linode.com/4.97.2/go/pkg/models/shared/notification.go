@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// NotificationEntity
+// Detailed information about the Notification.
 type NotificationEntity struct {
 	ID    *int64  `json:"id,omitempty"`
 	Label *string `json:"label,omitempty"`
@@ -35,6 +37,8 @@ const (
 	NotificationTypeEnumPromotion          NotificationTypeEnum = "promotion"
 )
 
+// Notification
+// An important, often time-sensitive item related to your Account.
 type Notification struct {
 	Body     *string                   `json:"body,omitempty"`
 	Entity   *NotificationEntity       `json:"entity,omitempty"`

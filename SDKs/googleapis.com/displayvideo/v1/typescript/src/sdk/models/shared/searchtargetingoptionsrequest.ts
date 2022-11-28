@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BusinessChainSearchTerms } from "./businesschainsearchterms";
 import { GeoRegionSearchTerms } from "./georegionsearchterms";
 import { PoiSearchTerms } from "./poisearchterms";
+
 
 
 // SearchTargetingOptionsRequest
@@ -9,21 +10,21 @@ import { PoiSearchTerms } from "./poisearchterms";
  * Request message for SearchTargetingOptions.
 **/
 export class SearchTargetingOptionsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=advertiserId" })
+  @SpeakeasyMetadata({ data: "json, name=advertiserId" })
   advertiserId?: string;
 
-  @Metadata({ data: "json, name=businessChainSearchTerms" })
+  @SpeakeasyMetadata({ data: "json, name=businessChainSearchTerms" })
   businessChainSearchTerms?: BusinessChainSearchTerms;
 
-  @Metadata({ data: "json, name=geoRegionSearchTerms" })
+  @SpeakeasyMetadata({ data: "json, name=geoRegionSearchTerms" })
   geoRegionSearchTerms?: GeoRegionSearchTerms;
 
-  @Metadata({ data: "json, name=pageSize" })
+  @SpeakeasyMetadata({ data: "json, name=pageSize" })
   pageSize?: number;
 
-  @Metadata({ data: "json, name=pageToken" })
+  @SpeakeasyMetadata({ data: "json, name=pageToken" })
   pageToken?: string;
 
-  @Metadata({ data: "json, name=poiSearchTerms" })
+  @SpeakeasyMetadata({ data: "json, name=poiSearchTerms" })
   poiSearchTerms?: PoiSearchTerms;
 }

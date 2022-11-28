@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // VulnerableParameters
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about vulnerable request parameters.
 **/
 export class VulnerableParameters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=parameterNames" })
+  @SpeakeasyMetadata({ data: "json, name=parameterNames" })
   parameterNames?: string[];
 }

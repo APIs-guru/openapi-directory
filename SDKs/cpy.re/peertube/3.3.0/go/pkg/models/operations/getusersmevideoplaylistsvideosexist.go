@@ -12,11 +12,6 @@ type GetUsersMeVideoPlaylistsVideosExistSecurity struct {
 	OAuth2 shared.SchemeOAuth2 `security:"scheme,type=oauth2"`
 }
 
-type GetUsersMeVideoPlaylistsVideosExistRequest struct {
-	QueryParams GetUsersMeVideoPlaylistsVideosExistQueryParams
-	Security    GetUsersMeVideoPlaylistsVideosExistSecurity
-}
-
 type GetUsersMeVideoPlaylistsVideosExist200ApplicationJSONVideoID struct {
 	PlaylistElementID *int64 `json:"playlistElementId,omitempty"`
 	PlaylistID        *int64 `json:"playlistId,omitempty"`
@@ -26,6 +21,11 @@ type GetUsersMeVideoPlaylistsVideosExist200ApplicationJSONVideoID struct {
 
 type GetUsersMeVideoPlaylistsVideosExist200ApplicationJSON struct {
 	VideoID []GetUsersMeVideoPlaylistsVideosExist200ApplicationJSONVideoID `json:"videoId,omitempty"`
+}
+
+type GetUsersMeVideoPlaylistsVideosExistRequest struct {
+	QueryParams GetUsersMeVideoPlaylistsVideosExistQueryParams
+	Security    GetUsersMeVideoPlaylistsVideosExistSecurity
 }
 
 type GetUsersMeVideoPlaylistsVideosExistResponse struct {

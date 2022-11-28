@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 from typing import Optional
+from sdk.models import shared
 
 
 @dataclass
@@ -9,17 +10,17 @@ class GetNumbersPrimeIsFermatPrimeQueryParams:
 
 @dataclass
 class GetNumbersPrimeIsFermatPrimeSecurity:
-    x_mathtools_api_secret: shared.SchemeXMathtoolsAPISecret = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    x_mathtools_api_secret: shared.SchemeXMathtoolsAPISecret = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetNumbersPrimeIsFermatPrimeRequest:
-    query_params: GetNumbersPrimeIsFermatPrimeQueryParams = field(default=None)
-    security: GetNumbersPrimeIsFermatPrimeSecurity = field(default=None)
+    query_params: GetNumbersPrimeIsFermatPrimeQueryParams = field()
+    security: GetNumbersPrimeIsFermatPrimeSecurity = field()
     
 
 @dataclass
 class GetNumbersPrimeIsFermatPrimeResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

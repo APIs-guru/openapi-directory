@@ -5,12 +5,12 @@ from sdk.models import shared
 
 @dataclass
 class ReportsCreateRequest:
-    request: shared.ReportRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.ReportRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ReportsCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     report_response: Optional[shared.ReportResponse] = field(default=None)
-    status_code: int = field(default=None)
     

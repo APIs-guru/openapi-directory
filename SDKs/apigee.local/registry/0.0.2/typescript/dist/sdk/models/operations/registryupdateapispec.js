@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var RegistryUpdateApiSpecPathParams = /** @class */ (function (_super) {
     __extends(RegistryUpdateApiSpecPathParams, _super);
     function RegistryUpdateApiSpecPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=api" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=api" }),
         __metadata("design:type", String)
     ], RegistryUpdateApiSpecPathParams.prototype, "api", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=project" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=project" }),
         __metadata("design:type", String)
     ], RegistryUpdateApiSpecPathParams.prototype, "project", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=spec" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=spec" }),
         __metadata("design:type", String)
     ], RegistryUpdateApiSpecPathParams.prototype, "spec", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=version" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=version" }),
         __metadata("design:type", String)
     ], RegistryUpdateApiSpecPathParams.prototype, "version", void 0);
     return RegistryUpdateApiSpecPathParams;
@@ -53,11 +53,11 @@ var RegistryUpdateApiSpecQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=allow_missing" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=allow_missing" }),
         __metadata("design:type", String)
     ], RegistryUpdateApiSpecQueryParams.prototype, "allowMissing", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=update_mask" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=update_mask" }),
         __metadata("design:type", String)
     ], RegistryUpdateApiSpecQueryParams.prototype, "updateMask", void 0);
     return RegistryUpdateApiSpecQueryParams;
@@ -69,15 +69,15 @@ var RegistryUpdateApiSpecRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", RegistryUpdateApiSpecPathParams)
     ], RegistryUpdateApiSpecRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", RegistryUpdateApiSpecQueryParams)
     ], RegistryUpdateApiSpecRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", Object)
     ], RegistryUpdateApiSpecRequest.prototype, "request", void 0);
     return RegistryUpdateApiSpecRequest;
@@ -89,15 +89,15 @@ var RegistryUpdateApiSpecResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], RegistryUpdateApiSpecResponse.prototype, "apiSpec", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], RegistryUpdateApiSpecResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], RegistryUpdateApiSpecResponse.prototype, "statusCode", void 0);
     return RegistryUpdateApiSpecResponse;

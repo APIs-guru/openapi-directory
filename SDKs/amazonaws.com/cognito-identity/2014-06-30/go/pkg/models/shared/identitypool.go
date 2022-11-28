@@ -1,5 +1,7 @@
 package shared
 
+// IdentityPool
+// An object representing an Amazon Cognito identity pool.
 type IdentityPool struct {
 	AllowClassicFlow               *bool                     `json:"AllowClassicFlow,omitempty"`
 	AllowUnauthenticatedIdentities bool                      `json:"AllowUnauthenticatedIdentities"`

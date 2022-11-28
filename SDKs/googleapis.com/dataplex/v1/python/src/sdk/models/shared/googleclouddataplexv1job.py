@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GoogleCloudDataplexV1JobServiceEnum(str, Enum):
     SERVICE_UNSPECIFIED = "SERVICE_UNSPECIFIED"
@@ -19,13 +21,17 @@ class GoogleCloudDataplexV1JobStateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleCloudDataplexV1Job:
-    end_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'endTime' }})
-    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    retry_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'retryCount' }})
-    service: Optional[GoogleCloudDataplexV1JobServiceEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'service' }})
-    service_job: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'serviceJob' }})
-    start_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'startTime' }})
-    state: Optional[GoogleCloudDataplexV1JobStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
-    uid: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uid' }})
+    r"""GoogleCloudDataplexV1Job
+    A job represents an instance of a task.
+    """
+    
+    end_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('endTime') }})
+    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('message') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    retry_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('retryCount') }})
+    service: Optional[GoogleCloudDataplexV1JobServiceEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('service') }})
+    service_job: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('serviceJob') }})
+    start_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('startTime') }})
+    state: Optional[GoogleCloudDataplexV1JobStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
+    uid: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('uid') }})
     

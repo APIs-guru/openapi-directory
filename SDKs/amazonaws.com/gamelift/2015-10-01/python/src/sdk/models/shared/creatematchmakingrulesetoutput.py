@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import matchmakingruleset
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateMatchmakingRuleSetOutput:
-    rule_set: matchmakingruleset.MatchmakingRuleSet = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RuleSet' }})
+    r"""CreateMatchmakingRuleSetOutput
+    Represents the returned data in response to a request operation.
+    """
+    
+    rule_set: MatchmakingRuleSet = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('RuleSet') }})
     

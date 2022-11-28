@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostTagInstanceProfileActionEnum(str, Enum):
     TAG_INSTANCE_PROFILE = "TagInstanceProfile"
@@ -10,8 +14,8 @@ class PostTagInstanceProfileVersionEnum(str, Enum):
 
 @dataclass
 class PostTagInstanceProfileQueryParams:
-    action: PostTagInstanceProfileActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostTagInstanceProfileVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostTagInstanceProfileActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostTagInstanceProfileVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostTagInstanceProfileHeaders:
 
 @dataclass
 class PostTagInstanceProfileRequest:
-    query_params: PostTagInstanceProfileQueryParams = field(default=None)
-    headers: PostTagInstanceProfileHeaders = field(default=None)
+    headers: PostTagInstanceProfileHeaders = field()
+    query_params: PostTagInstanceProfileQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostTagInstanceProfileResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

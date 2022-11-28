@@ -10,19 +10,19 @@ class GetGenresQueryParams:
 
 @dataclass
 class GetGenresHeaders:
-    x_listen_api_key: str = field(default=None, metadata={'header': { 'field_name': 'X-ListenAPI-Key', 'style': 'simple', 'explode': False }})
+    x_listen_api_key: str = field(metadata={'header': { 'field_name': 'X-ListenAPI-Key', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetGenresRequest:
-    query_params: GetGenresQueryParams = field(default=None)
-    headers: GetGenresHeaders = field(default=None)
+    headers: GetGenresHeaders = field()
+    query_params: GetGenresQueryParams = field()
     
 
 @dataclass
 class GetGenresResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     get_genres_response: Optional[shared.GetGenresResponse] = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
     

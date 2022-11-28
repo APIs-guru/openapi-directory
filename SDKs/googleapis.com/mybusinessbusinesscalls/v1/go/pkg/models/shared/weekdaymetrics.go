@@ -13,6 +13,8 @@ const (
 	WeekDayMetricsDayEnumSunday               WeekDayMetricsDayEnum = "SUNDAY"
 )
 
+// WeekDayMetrics
+// Metrics for a week day.
 type WeekDayMetrics struct {
 	Day              *WeekDayMetricsDayEnum `json:"day,omitempty"`
 	MissedCallsCount *int32                 `json:"missedCallsCount,omitempty"`

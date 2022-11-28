@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteWorkGroupInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=RecursiveDeleteOption" })
+  @SpeakeasyMetadata({ data: "json, name=RecursiveDeleteOption" })
   recursiveDeleteOption?: boolean;
 
-  @Metadata({ data: "json, name=WorkGroup" })
+  @SpeakeasyMetadata({ data: "json, name=WorkGroup" })
   workGroup: string;
 }

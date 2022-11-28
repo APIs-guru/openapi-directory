@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ModeEnum } from "./modeenum";
 import { BackendApiAppSyncAuthSettings } from "./backendapiappsyncauthsettings";
+
 
 
 // BackendApiAuthType
@@ -8,9 +9,9 @@ import { BackendApiAppSyncAuthSettings } from "./backendapiappsyncauthsettings";
  * Describes the auth types for your configured data models.
 **/
 export class BackendApiAuthType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Mode" })
+  @SpeakeasyMetadata({ data: "json, name=Mode" })
   mode?: ModeEnum;
 
-  @Metadata({ data: "json, name=Settings" })
+  @SpeakeasyMetadata({ data: "json, name=Settings" })
   settings?: BackendApiAppSyncAuthSettings;
 }

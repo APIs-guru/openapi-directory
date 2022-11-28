@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WorkItemStatus } from "./workitemstatus";
+
 
 
 // ReportWorkItemStatusRequest
@@ -8,18 +8,18 @@ import { WorkItemStatus } from "./workitemstatus";
  * Request to report the status of WorkItems.
 **/
 export class ReportWorkItemStatusRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=currentWorkerTime" })
+  @SpeakeasyMetadata({ data: "json, name=currentWorkerTime" })
   currentWorkerTime?: string;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: string;
 
-  @Metadata({ data: "json, name=unifiedWorkerRequest" })
+  @SpeakeasyMetadata({ data: "json, name=unifiedWorkerRequest" })
   unifiedWorkerRequest?: Map<string, any>;
 
-  @Metadata({ data: "json, name=workItemStatuses", elemType: shared.WorkItemStatus })
+  @SpeakeasyMetadata({ data: "json, name=workItemStatuses", elemType: WorkItemStatus })
   workItemStatuses?: WorkItemStatus[];
 
-  @Metadata({ data: "json, name=workerId" })
+  @SpeakeasyMetadata({ data: "json, name=workerId" })
   workerId?: string;
 }

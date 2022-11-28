@@ -1,12 +1,20 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import containercondition_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ContainerDependency:
-    condition: containercondition_enum.ContainerConditionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'condition' }})
-    container_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'containerName' }})
+    r"""ContainerDependency
+    <p>The dependencies defined for container startup and shutdown. A container can contain multiple dependencies. When a dependency is defined for container startup, for container shutdown it is reversed.</p> <p>Your Amazon ECS container instances require at least version 1.26.0 of the container agent to enable container dependencies. However, we recommend using the latest container agent version. For information about checking your agent version and updating to the latest version, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html\">Updating the Amazon ECS Container Agent</a> in the <i>Amazon Elastic Container Service Developer Guide</i>. If you are using an Amazon ECS-optimized Linux AMI, your instance needs at least version 1.26.0-1 of the <code>ecs-init</code> package. If your container instances are launched from version <code>20190301</code> or later, then they contain the required versions of the container agent and <code>ecs-init</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html\">Amazon ECS-optimized Linux AMI</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p> <note> <p>For tasks using the Fargate launch type, this parameter requires that the task or service uses platform version 1.3.0 or later.</p> </note>
+    """
+    
+    condition: ContainerConditionEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('condition') }})
+    container_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('containerName') }})
     

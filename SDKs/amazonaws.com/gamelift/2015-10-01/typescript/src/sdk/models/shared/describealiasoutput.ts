@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Alias } from "./alias";
+
 
 
 // DescribeAliasOutput
@@ -7,6 +8,6 @@ import { Alias } from "./alias";
  * Represents the returned data in response to a request operation.
 **/
 export class DescribeAliasOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Alias" })
+  @SpeakeasyMetadata({ data: "json, name=Alias" })
   alias?: Alias;
 }

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetReplaceNetworkACLEntryActionEnum(str, Enum):
     REPLACE_NETWORK_ACL_ENTRY = "ReplaceNetworkAclEntry"
@@ -7,12 +11,20 @@ class GetReplaceNetworkACLEntryActionEnum(str, Enum):
 
 @dataclass
 class GetReplaceNetworkACLEntryIcmp:
+    r"""GetReplaceNetworkACLEntryIcmp
+    Describes the ICMP type and code.
+    """
+    
     code: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'Code' }})
     type: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'Type' }})
     
 
 @dataclass
 class GetReplaceNetworkACLEntryPortRange:
+    r"""GetReplaceNetworkACLEntryPortRange
+    Describes a range of ports.
+    """
+    
     from_: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'From' }})
     to: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'To' }})
     
@@ -26,18 +38,18 @@ class GetReplaceNetworkACLEntryVersionEnum(str, Enum):
 
 @dataclass
 class GetReplaceNetworkACLEntryQueryParams:
-    action: GetReplaceNetworkACLEntryActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetReplaceNetworkACLEntryActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    egress: bool = field(metadata={'query_param': { 'field_name': 'Egress', 'style': 'form', 'explode': True }})
+    network_acl_id: str = field(metadata={'query_param': { 'field_name': 'NetworkAclId', 'style': 'form', 'explode': True }})
+    protocol: str = field(metadata={'query_param': { 'field_name': 'Protocol', 'style': 'form', 'explode': True }})
+    rule_action: GetReplaceNetworkACLEntryRuleActionEnum = field(metadata={'query_param': { 'field_name': 'RuleAction', 'style': 'form', 'explode': True }})
+    rule_number: int = field(metadata={'query_param': { 'field_name': 'RuleNumber', 'style': 'form', 'explode': True }})
+    version: GetReplaceNetworkACLEntryVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     cidr_block: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'CidrBlock', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    egress: bool = field(default=None, metadata={'query_param': { 'field_name': 'Egress', 'style': 'form', 'explode': True }})
     icmp: Optional[GetReplaceNetworkACLEntryIcmp] = field(default=None, metadata={'query_param': { 'field_name': 'Icmp', 'style': 'form', 'explode': True }})
     ipv6_cidr_block: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Ipv6CidrBlock', 'style': 'form', 'explode': True }})
-    network_acl_id: str = field(default=None, metadata={'query_param': { 'field_name': 'NetworkAclId', 'style': 'form', 'explode': True }})
     port_range: Optional[GetReplaceNetworkACLEntryPortRange] = field(default=None, metadata={'query_param': { 'field_name': 'PortRange', 'style': 'form', 'explode': True }})
-    protocol: str = field(default=None, metadata={'query_param': { 'field_name': 'Protocol', 'style': 'form', 'explode': True }})
-    rule_action: GetReplaceNetworkACLEntryRuleActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'RuleAction', 'style': 'form', 'explode': True }})
-    rule_number: int = field(default=None, metadata={'query_param': { 'field_name': 'RuleNumber', 'style': 'form', 'explode': True }})
-    version: GetReplaceNetworkACLEntryVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -53,12 +65,12 @@ class GetReplaceNetworkACLEntryHeaders:
 
 @dataclass
 class GetReplaceNetworkACLEntryRequest:
-    query_params: GetReplaceNetworkACLEntryQueryParams = field(default=None)
-    headers: GetReplaceNetworkACLEntryHeaders = field(default=None)
+    headers: GetReplaceNetworkACLEntryHeaders = field()
+    query_params: GetReplaceNetworkACLEntryQueryParams = field()
     
 
 @dataclass
 class GetReplaceNetworkACLEntryResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetCreateJobActionEnum;
 (function (GetCreateJobActionEnum) {
     GetCreateJobActionEnum["CreateJob"] = "CreateJob";
@@ -46,55 +46,55 @@ var GetCreateJobQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=APIVersion" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=APIVersion" }),
         __metadata("design:type", String)
     ], GetCreateJobQueryParams.prototype, "apiVersion", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=AWSAccessKeyId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=AWSAccessKeyId" }),
         __metadata("design:type", String)
     ], GetCreateJobQueryParams.prototype, "awsAccessKeyId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" }),
         __metadata("design:type", String)
     ], GetCreateJobQueryParams.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=JobType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=JobType" }),
         __metadata("design:type", String)
     ], GetCreateJobQueryParams.prototype, "jobType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Manifest" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Manifest" }),
         __metadata("design:type", String)
     ], GetCreateJobQueryParams.prototype, "manifest", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ManifestAddendum" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ManifestAddendum" }),
         __metadata("design:type", String)
     ], GetCreateJobQueryParams.prototype, "manifestAddendum", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Operation" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Operation" }),
         __metadata("design:type", String)
     ], GetCreateJobQueryParams.prototype, "operation", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Signature" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Signature" }),
         __metadata("design:type", String)
     ], GetCreateJobQueryParams.prototype, "signature", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=SignatureMethod" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=SignatureMethod" }),
         __metadata("design:type", String)
     ], GetCreateJobQueryParams.prototype, "signatureMethod", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=SignatureVersion" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=SignatureVersion" }),
         __metadata("design:type", String)
     ], GetCreateJobQueryParams.prototype, "signatureVersion", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Timestamp" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Timestamp" }),
         __metadata("design:type", String)
     ], GetCreateJobQueryParams.prototype, "timestamp", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ValidateOnly" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ValidateOnly" }),
         __metadata("design:type", Boolean)
     ], GetCreateJobQueryParams.prototype, "validateOnly", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" }),
         __metadata("design:type", String)
     ], GetCreateJobQueryParams.prototype, "version", void 0);
     return GetCreateJobQueryParams;
@@ -106,7 +106,7 @@ var GetCreateJobRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetCreateJobQueryParams)
     ], GetCreateJobRequest.prototype, "queryParams", void 0);
     return GetCreateJobRequest;
@@ -118,15 +118,15 @@ var GetCreateJobResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetCreateJobResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetCreateJobResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetCreateJobResponse.prototype, "statusCode", void 0);
     return GetCreateJobResponse;

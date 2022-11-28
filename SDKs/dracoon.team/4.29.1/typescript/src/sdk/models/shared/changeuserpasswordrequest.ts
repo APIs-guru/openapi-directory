@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ChangeUserPasswordRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request model for updating user's password
 **/
 export class ChangeUserPasswordRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=newPassword" })
+  @SpeakeasyMetadata({ data: "json, name=newPassword" })
   newPassword: string;
 
-  @Metadata({ data: "json, name=oldPassword" })
+  @SpeakeasyMetadata({ data: "json, name=oldPassword" })
   oldPassword: string;
 }

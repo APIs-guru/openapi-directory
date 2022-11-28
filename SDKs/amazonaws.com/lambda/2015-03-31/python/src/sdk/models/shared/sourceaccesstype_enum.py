@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class SourceAccessTypeEnum(str, Enum):
     BASIC_AUTH = "BASIC_AUTH"

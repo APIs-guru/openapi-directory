@@ -1,5 +1,7 @@
 package shared
 
+// EventDates
+// Event's Dates
 type EventDates struct {
 	Access   *AccessDates `json:"access,omitempty"`
 	End      *EndDates    `json:"end,omitempty"`

@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleTypePostalAddress } from "./googletypepostaladdress";
 import { GoogleTypeDate } from "./googletypedate";
 import { GoogleTypeDateTime } from "./googletypedatetime";
 import { GoogleTypeMoney } from "./googletypemoney";
+
 
 
 // GoogleCloudDocumentaiV1DocumentEntityNormalizedValue
@@ -10,27 +11,27 @@ import { GoogleTypeMoney } from "./googletypemoney";
  * Parsed and normalized entity value.
 **/
 export class GoogleCloudDocumentaiV1DocumentEntityNormalizedValue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=addressValue" })
+  @SpeakeasyMetadata({ data: "json, name=addressValue" })
   addressValue?: GoogleTypePostalAddress;
 
-  @Metadata({ data: "json, name=booleanValue" })
+  @SpeakeasyMetadata({ data: "json, name=booleanValue" })
   booleanValue?: boolean;
 
-  @Metadata({ data: "json, name=dateValue" })
+  @SpeakeasyMetadata({ data: "json, name=dateValue" })
   dateValue?: GoogleTypeDate;
 
-  @Metadata({ data: "json, name=datetimeValue" })
+  @SpeakeasyMetadata({ data: "json, name=datetimeValue" })
   datetimeValue?: GoogleTypeDateTime;
 
-  @Metadata({ data: "json, name=floatValue" })
+  @SpeakeasyMetadata({ data: "json, name=floatValue" })
   floatValue?: number;
 
-  @Metadata({ data: "json, name=integerValue" })
+  @SpeakeasyMetadata({ data: "json, name=integerValue" })
   integerValue?: number;
 
-  @Metadata({ data: "json, name=moneyValue" })
+  @SpeakeasyMetadata({ data: "json, name=moneyValue" })
   moneyValue?: GoogleTypeMoney;
 
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: string;
 }

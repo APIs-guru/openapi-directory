@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // CallbackCompletionBatchRequest
 /**
  * Any information to send back to Workflows when completing an action callback as part of a batch request.
@@ -33,11 +33,11 @@ var CallbackCompletionBatchRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=callbackId" }),
+        SpeakeasyMetadata({ data: "json, name=callbackId" }),
         __metadata("design:type", String)
     ], CallbackCompletionBatchRequest.prototype, "callbackId", void 0);
     __decorate([
-        Metadata({ data: "json, name=outputFields" }),
+        SpeakeasyMetadata({ data: "json, name=outputFields" }),
         __metadata("design:type", Map)
     ], CallbackCompletionBatchRequest.prototype, "outputFields", void 0);
     return CallbackCompletionBatchRequest;

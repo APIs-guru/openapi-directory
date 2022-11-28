@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SetStatePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" })
   agentNum: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=object" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=object" })
   object: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=state" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=state" })
   state: number;
 }
 
 
 export class SetStateRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: SetStatePathParams;
 }
 
 
 export class SetStateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   setState200ApplicationJsonString?: string;
 }

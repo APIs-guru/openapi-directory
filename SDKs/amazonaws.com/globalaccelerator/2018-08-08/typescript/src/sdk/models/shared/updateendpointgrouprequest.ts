@@ -1,35 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EndpointConfiguration } from "./endpointconfiguration";
 import { HealthCheckProtocolEnum } from "./healthcheckprotocolenum";
 import { PortOverride } from "./portoverride";
 
 
+
 export class UpdateEndpointGroupRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EndpointConfigurations", elemType: shared.EndpointConfiguration })
+  @SpeakeasyMetadata({ data: "json, name=EndpointConfigurations", elemType: EndpointConfiguration })
   endpointConfigurations?: EndpointConfiguration[];
 
-  @Metadata({ data: "json, name=EndpointGroupArn" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointGroupArn" })
   endpointGroupArn: string;
 
-  @Metadata({ data: "json, name=HealthCheckIntervalSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=HealthCheckIntervalSeconds" })
   healthCheckIntervalSeconds?: number;
 
-  @Metadata({ data: "json, name=HealthCheckPath" })
+  @SpeakeasyMetadata({ data: "json, name=HealthCheckPath" })
   healthCheckPath?: string;
 
-  @Metadata({ data: "json, name=HealthCheckPort" })
+  @SpeakeasyMetadata({ data: "json, name=HealthCheckPort" })
   healthCheckPort?: number;
 
-  @Metadata({ data: "json, name=HealthCheckProtocol" })
+  @SpeakeasyMetadata({ data: "json, name=HealthCheckProtocol" })
   healthCheckProtocol?: HealthCheckProtocolEnum;
 
-  @Metadata({ data: "json, name=PortOverrides", elemType: shared.PortOverride })
+  @SpeakeasyMetadata({ data: "json, name=PortOverrides", elemType: PortOverride })
   portOverrides?: PortOverride[];
 
-  @Metadata({ data: "json, name=ThresholdCount" })
+  @SpeakeasyMetadata({ data: "json, name=ThresholdCount" })
   thresholdCount?: number;
 
-  @Metadata({ data: "json, name=TrafficDialPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=TrafficDialPercentage" })
   trafficDialPercentage?: number;
 }

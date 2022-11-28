@@ -12,6 +12,8 @@ const (
 	ChartDataAggregateTypeEnumSum                           ChartDataAggregateTypeEnum = "SUM"
 )
 
+// ChartData
+// The data included in a domain or series.
 type ChartData struct {
 	AggregateType   *ChartDataAggregateTypeEnum `json:"aggregateType,omitempty"`
 	ColumnReference *DataSourceColumnReference  `json:"columnReference,omitempty"`

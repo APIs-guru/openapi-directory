@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class SearchDocsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search" })
   search: string;
 }
 
 
 export class SearchDocsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=x-readme-version" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-readme-version" })
   xReadmeVersion: string;
 }
 
 
 export class SearchDocsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   apiKey: shared.SchemeApiKey;
 }
 
 
 export class SearchDocsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: SearchDocsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: SearchDocsHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: SearchDocsSecurity;
 }
 
 
 export class SearchDocsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

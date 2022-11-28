@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ConditionContext
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The IAM conditions context.
 **/
 export class ConditionContext extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessTime" })
+  @SpeakeasyMetadata({ data: "json, name=accessTime" })
   accessTime?: string;
 }

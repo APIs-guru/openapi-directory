@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NumericValue } from "./numericvalue";
-import { NumericValue } from "./numericvalue";
+
 
 
 // BetweenFilter
@@ -8,9 +8,9 @@ import { NumericValue } from "./numericvalue";
  * To express that the result needs to be between two numbers (inclusive).
 **/
 export class BetweenFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fromValue" })
+  @SpeakeasyMetadata({ data: "json, name=fromValue" })
   fromValue?: NumericValue;
 
-  @Metadata({ data: "json, name=toValue" })
+  @SpeakeasyMetadata({ data: "json, name=toValue" })
   toValue?: NumericValue;
 }

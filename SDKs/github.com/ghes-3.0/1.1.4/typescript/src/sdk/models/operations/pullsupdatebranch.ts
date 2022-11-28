@@ -1,68 +1,69 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PullsUpdateBranchPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=owner" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=owner" })
   owner: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=pull_number" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=pull_number" })
   pullNumber: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repo" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repo" })
   repo: string;
 }
 
 
 export class PullsUpdateBranchRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=expected_head_sha" })
+  @SpeakeasyMetadata({ data: "json, name=expected_head_sha" })
   expectedHeadSha?: string;
 }
 
 
-export class PullsUpdateBranchRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: PullsUpdateBranchPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: PullsUpdateBranchRequestBody;
-}
-
-
 export class PullsUpdateBranch202ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }
 
 
 export class PullsUpdateBranch415ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=documentation_url" })
+  @SpeakeasyMetadata({ data: "json, name=documentation_url" })
   documentationUrl: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 }
 
 
+export class PullsUpdateBranchRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: PullsUpdateBranchPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: PullsUpdateBranchRequestBody;
+}
+
+
 export class PullsUpdateBranchResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   pullsUpdateBranch202ApplicationJsonObject?: PullsUpdateBranch202ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   pullsUpdateBranch415ApplicationJsonObject?: PullsUpdateBranch415ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationError?: shared.ValidationError;
 }

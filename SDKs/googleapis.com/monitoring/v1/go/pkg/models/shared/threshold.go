@@ -24,6 +24,8 @@ const (
 	ThresholdTargetAxisEnumY2                    ThresholdTargetAxisEnum = "Y2"
 )
 
+// Threshold
+// Defines a threshold for categorizing time series values.
 type Threshold struct {
 	Color      *ThresholdColorEnum      `json:"color,omitempty"`
 	Direction  *ThresholdDirectionEnum  `json:"direction,omitempty"`

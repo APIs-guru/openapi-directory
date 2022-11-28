@@ -16,6 +16,8 @@ const (
 	VolumeConfigTypeEnumDisk            VolumeConfigTypeEnum = "DISK"
 )
 
+// VolumeConfig
+// Configuration parameters for a new volume.
 type VolumeConfig struct {
 	ID               *string                   `json:"id,omitempty"`
 	Location         *string                   `json:"location,omitempty"`

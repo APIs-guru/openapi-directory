@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CertificateConfiguration } from "./certificateconfiguration";
 import { IpPermission } from "./ippermission";
 import { Ec2InstanceTypeEnum } from "./ec2instancetypeenum";
@@ -11,68 +10,69 @@ import { RuntimeConfiguration } from "./runtimeconfiguration";
 import { Tag } from "./tag";
 
 
+
 // CreateFleetInput
 /** 
  * Represents the input for a request operation.
 **/
 export class CreateFleetInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BuildId" })
+  @SpeakeasyMetadata({ data: "json, name=BuildId" })
   buildId?: string;
 
-  @Metadata({ data: "json, name=CertificateConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=CertificateConfiguration" })
   certificateConfiguration?: CertificateConfiguration;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=EC2InboundPermissions", elemType: shared.IpPermission })
+  @SpeakeasyMetadata({ data: "json, name=EC2InboundPermissions", elemType: IpPermission })
   ec2InboundPermissions?: IpPermission[];
 
-  @Metadata({ data: "json, name=EC2InstanceType" })
+  @SpeakeasyMetadata({ data: "json, name=EC2InstanceType" })
   ec2InstanceType: Ec2InstanceTypeEnum;
 
-  @Metadata({ data: "json, name=FleetType" })
+  @SpeakeasyMetadata({ data: "json, name=FleetType" })
   fleetType?: FleetTypeEnum;
 
-  @Metadata({ data: "json, name=InstanceRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceRoleArn" })
   instanceRoleArn?: string;
 
-  @Metadata({ data: "json, name=Locations", elemType: shared.LocationConfiguration })
+  @SpeakeasyMetadata({ data: "json, name=Locations", elemType: LocationConfiguration })
   locations?: LocationConfiguration[];
 
-  @Metadata({ data: "json, name=LogPaths" })
+  @SpeakeasyMetadata({ data: "json, name=LogPaths" })
   logPaths?: string[];
 
-  @Metadata({ data: "json, name=MetricGroups" })
+  @SpeakeasyMetadata({ data: "json, name=MetricGroups" })
   metricGroups?: string[];
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 
-  @Metadata({ data: "json, name=NewGameSessionProtectionPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=NewGameSessionProtectionPolicy" })
   newGameSessionProtectionPolicy?: ProtectionPolicyEnum;
 
-  @Metadata({ data: "json, name=PeerVpcAwsAccountId" })
+  @SpeakeasyMetadata({ data: "json, name=PeerVpcAwsAccountId" })
   peerVpcAwsAccountId?: string;
 
-  @Metadata({ data: "json, name=PeerVpcId" })
+  @SpeakeasyMetadata({ data: "json, name=PeerVpcId" })
   peerVpcId?: string;
 
-  @Metadata({ data: "json, name=ResourceCreationLimitPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceCreationLimitPolicy" })
   resourceCreationLimitPolicy?: ResourceCreationLimitPolicy;
 
-  @Metadata({ data: "json, name=RuntimeConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=RuntimeConfiguration" })
   runtimeConfiguration?: RuntimeConfiguration;
 
-  @Metadata({ data: "json, name=ScriptId" })
+  @SpeakeasyMetadata({ data: "json, name=ScriptId" })
   scriptId?: string;
 
-  @Metadata({ data: "json, name=ServerLaunchParameters" })
+  @SpeakeasyMetadata({ data: "json, name=ServerLaunchParameters" })
   serverLaunchParameters?: string;
 
-  @Metadata({ data: "json, name=ServerLaunchPath" })
+  @SpeakeasyMetadata({ data: "json, name=ServerLaunchPath" })
   serverLaunchPath?: string;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 }

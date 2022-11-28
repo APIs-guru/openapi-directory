@@ -1,21 +1,28 @@
 import { AxiosInstance, AxiosRequestConfig } from "axios";
 import * as operations from "./models/operations";
-declare type OptsFunc = (sdk: SDK) => void;
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://apisetu.gov.in/scvtup/v3"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
     /**
+     * skcer - Skill Certificate
+     *
      * API to verify Skill Certificate.
     **/
-    Skcer(req: operations.SkcerRequest, config?: AxiosRequestConfig): Promise<operations.SkcerResponse>;
+    skcer(req: operations.SkcerRequest, config?: AxiosRequestConfig): Promise<operations.SkcerResponse>;
     /**
+     * skmst - Skill Marksheet/ Score Card
+     *
      * API to verify Skill Marksheet/ Score Card.
     **/
-    Skmst(req: operations.SkmstRequest, config?: AxiosRequestConfig): Promise<operations.SkmstResponse>;
+    skmst(req: operations.SkmstRequest, config?: AxiosRequestConfig): Promise<operations.SkmstResponse>;
 }
 export {};

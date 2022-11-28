@@ -1,9 +1,10 @@
 
 
+
 export enum RequestStatusEnum {
-    Pending = "PENDING"
-,    CaseOpened = "CASE_OPENED"
-,    Approved = "APPROVED"
-,    Denied = "DENIED"
-,    CaseClosed = "CASE_CLOSED"
+    Pending = "PENDING",
+    CaseOpened = "CASE_OPENED",
+    Approved = "APPROVED",
+    Denied = "DENIED",
+    CaseClosed = "CASE_CLOSED"
 }

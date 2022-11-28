@@ -1,89 +1,78 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CloneLinodeInstancePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=linodeId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=linodeId" })
   linodeId: number;
 }
 
 
 export class CloneLinodeInstanceRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=backups_enabled" })
+  @SpeakeasyMetadata({ data: "json, name=backups_enabled" })
   backupsEnabled?: boolean;
 
-  @Metadata({ data: "json, name=configs" })
+  @SpeakeasyMetadata({ data: "json, name=configs" })
   configs?: number[];
 
-  @Metadata({ data: "json, name=disks" })
+  @SpeakeasyMetadata({ data: "json, name=disks" })
   disks?: number[];
 
-  @Metadata({ data: "json, name=group" })
+  @SpeakeasyMetadata({ data: "json, name=group" })
   group?: string;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 
-  @Metadata({ data: "json, name=linode_id" })
+  @SpeakeasyMetadata({ data: "json, name=linode_id" })
   linodeId?: number;
 
-  @Metadata({ data: "json, name=region" })
+  @SpeakeasyMetadata({ data: "json, name=region" })
   region: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }
 
 
-export class CloneLinodeInstanceSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class CloneLinodeInstanceSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class CloneLinodeInstanceSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: CloneLinodeInstanceSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: CloneLinodeInstanceSecurityOption2;
-}
-
-
-export class CloneLinodeInstanceRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: CloneLinodeInstancePathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: CloneLinodeInstanceRequestBody;
-
-  @Metadata()
-  security: CloneLinodeInstanceSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class CloneLinodeInstanceDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class CloneLinodeInstanceRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: CloneLinodeInstancePathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: CloneLinodeInstanceRequestBody;
+
+  @SpeakeasyMetadata()
+  security: CloneLinodeInstanceSecurity;
+}
+
+
 export class CloneLinodeInstanceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   linode?: shared.Linode;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   cloneLinodeInstanceDefaultApplicationJsonObject?: CloneLinodeInstanceDefaultApplicationJson;
 }

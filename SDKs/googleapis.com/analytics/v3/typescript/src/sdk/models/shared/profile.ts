@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ProfileChildLink
@@ -6,10 +7,10 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Child link for this view (profile). Points to the list of goals for this view (profile).
 **/
 export class ProfileChildLink extends SpeakeasyBase {
-  @Metadata({ data: "json, name=href" })
+  @SpeakeasyMetadata({ data: "json, name=href" })
   href?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }
 
@@ -19,10 +20,10 @@ export class ProfileChildLink extends SpeakeasyBase {
  * Parent link for this view (profile). Points to the web property to which this view (profile) belongs.
 **/
 export class ProfileParentLink extends SpeakeasyBase {
-  @Metadata({ data: "json, name=href" })
+  @SpeakeasyMetadata({ data: "json, name=href" })
   href?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }
 
@@ -32,7 +33,7 @@ export class ProfileParentLink extends SpeakeasyBase {
  * Permissions the user has for this view (profile).
 **/
 export class ProfilePermissions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=effective" })
+  @SpeakeasyMetadata({ data: "json, name=effective" })
   effective?: string[];
 }
 
@@ -42,81 +43,145 @@ export class ProfilePermissions extends SpeakeasyBase {
  * JSON template for an Analytics view (profile).
 **/
 export class Profile extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=botFilteringEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=botFilteringEnabled" })
   botFilteringEnabled?: boolean;
 
-  @Metadata({ data: "json, name=childLink" })
+  @SpeakeasyMetadata({ data: "json, name=childLink" })
   childLink?: ProfileChildLink;
 
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=currency" })
+  @SpeakeasyMetadata({ data: "json, name=currency" })
   currency?: string;
 
-  @Metadata({ data: "json, name=defaultPage" })
+  @SpeakeasyMetadata({ data: "json, name=defaultPage" })
   defaultPage?: string;
 
-  @Metadata({ data: "json, name=eCommerceTracking" })
+  @SpeakeasyMetadata({ data: "json, name=eCommerceTracking" })
   eCommerceTracking?: boolean;
 
-  @Metadata({ data: "json, name=enhancedECommerceTracking" })
+  @SpeakeasyMetadata({ data: "json, name=enhancedECommerceTracking" })
   enhancedECommerceTracking?: boolean;
 
-  @Metadata({ data: "json, name=excludeQueryParameters" })
+  @SpeakeasyMetadata({ data: "json, name=excludeQueryParameters" })
   excludeQueryParameters?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=internalWebPropertyId" })
+  @SpeakeasyMetadata({ data: "json, name=internalWebPropertyId" })
   internalWebPropertyId?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=parentLink" })
+  @SpeakeasyMetadata({ data: "json, name=parentLink" })
   parentLink?: ProfileParentLink;
 
-  @Metadata({ data: "json, name=permissions" })
+  @SpeakeasyMetadata({ data: "json, name=permissions" })
   permissions?: ProfilePermissions;
 
-  @Metadata({ data: "json, name=selfLink" })
+  @SpeakeasyMetadata({ data: "json, name=selfLink" })
   selfLink?: string;
 
-  @Metadata({ data: "json, name=siteSearchCategoryParameters" })
+  @SpeakeasyMetadata({ data: "json, name=siteSearchCategoryParameters" })
   siteSearchCategoryParameters?: string;
 
-  @Metadata({ data: "json, name=siteSearchQueryParameters" })
+  @SpeakeasyMetadata({ data: "json, name=siteSearchQueryParameters" })
   siteSearchQueryParameters?: string;
 
-  @Metadata({ data: "json, name=starred" })
+  @SpeakeasyMetadata({ data: "json, name=starred" })
   starred?: boolean;
 
-  @Metadata({ data: "json, name=stripSiteSearchCategoryParameters" })
+  @SpeakeasyMetadata({ data: "json, name=stripSiteSearchCategoryParameters" })
   stripSiteSearchCategoryParameters?: boolean;
 
-  @Metadata({ data: "json, name=stripSiteSearchQueryParameters" })
+  @SpeakeasyMetadata({ data: "json, name=stripSiteSearchQueryParameters" })
   stripSiteSearchQueryParameters?: boolean;
 
-  @Metadata({ data: "json, name=timezone" })
+  @SpeakeasyMetadata({ data: "json, name=timezone" })
   timezone?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 
-  @Metadata({ data: "json, name=updated" })
+  @SpeakeasyMetadata({ data: "json, name=updated" })
   updated?: Date;
 
-  @Metadata({ data: "json, name=webPropertyId" })
+  @SpeakeasyMetadata({ data: "json, name=webPropertyId" })
   webPropertyId?: string;
 
-  @Metadata({ data: "json, name=websiteUrl" })
+  @SpeakeasyMetadata({ data: "json, name=websiteUrl" })
+  websiteUrl?: string;
+}
+
+
+// ProfileInput
+/** 
+ * JSON template for an Analytics view (profile).
+**/
+export class ProfileInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
+  accountId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=botFilteringEnabled" })
+  botFilteringEnabled?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=childLink" })
+  childLink?: ProfileChildLink;
+
+  @SpeakeasyMetadata({ data: "json, name=currency" })
+  currency?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=defaultPage" })
+  defaultPage?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=eCommerceTracking" })
+  eCommerceTracking?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=enhancedECommerceTracking" })
+  enhancedECommerceTracking?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=excludeQueryParameters" })
+  excludeQueryParameters?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=id" })
+  id?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=parentLink" })
+  parentLink?: ProfileParentLink;
+
+  @SpeakeasyMetadata({ data: "json, name=siteSearchCategoryParameters" })
+  siteSearchCategoryParameters?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=siteSearchQueryParameters" })
+  siteSearchQueryParameters?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=starred" })
+  starred?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=stripSiteSearchCategoryParameters" })
+  stripSiteSearchCategoryParameters?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=stripSiteSearchQueryParameters" })
+  stripSiteSearchQueryParameters?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=timezone" })
+  timezone?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=type" })
+  type?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=websiteUrl" })
   websiteUrl?: string;
 }

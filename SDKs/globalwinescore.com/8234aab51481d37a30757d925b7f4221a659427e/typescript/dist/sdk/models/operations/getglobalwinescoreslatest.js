@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetGlobalwinescoresLatestColorEnum;
 (function (GetGlobalwinescoresLatestColorEnum) {
     GetGlobalwinescoresLatestColorEnum["Red"] = "red";
@@ -42,39 +42,39 @@ var GetGlobalwinescoresLatestQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=color" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=color" }),
         __metadata("design:type", String)
     ], GetGlobalwinescoresLatestQueryParams.prototype, "color", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=is_primeurs" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=is_primeurs" }),
         __metadata("design:type", Boolean)
     ], GetGlobalwinescoresLatestQueryParams.prototype, "isPrimeurs", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", Number)
     ], GetGlobalwinescoresLatestQueryParams.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=lwin" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lwin" }),
         __metadata("design:type", String)
     ], GetGlobalwinescoresLatestQueryParams.prototype, "lwin", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=lwin_11" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lwin_11" }),
         __metadata("design:type", String)
     ], GetGlobalwinescoresLatestQueryParams.prototype, "lwin11", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=offset" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" }),
         __metadata("design:type", Number)
     ], GetGlobalwinescoresLatestQueryParams.prototype, "offset", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ordering" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ordering" }),
         __metadata("design:type", String)
     ], GetGlobalwinescoresLatestQueryParams.prototype, "ordering", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=vintage" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=vintage" }),
         __metadata("design:type", String)
     ], GetGlobalwinescoresLatestQueryParams.prototype, "vintage", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=wine_id" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=wine_id" }),
         __metadata("design:type", Array)
     ], GetGlobalwinescoresLatestQueryParams.prototype, "wineId", void 0);
     return GetGlobalwinescoresLatestQueryParams;
@@ -86,7 +86,7 @@ var GetGlobalwinescoresLatestHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Authorization" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" }),
         __metadata("design:type", String)
     ], GetGlobalwinescoresLatestHeaders.prototype, "authorization", void 0);
     return GetGlobalwinescoresLatestHeaders;
@@ -98,11 +98,11 @@ var GetGlobalwinescoresLatestRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetGlobalwinescoresLatestQueryParams)
     ], GetGlobalwinescoresLatestRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetGlobalwinescoresLatestHeaders)
     ], GetGlobalwinescoresLatestRequest.prototype, "headers", void 0);
     return GetGlobalwinescoresLatestRequest;
@@ -114,11 +114,11 @@ var GetGlobalwinescoresLatestResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetGlobalwinescoresLatestResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetGlobalwinescoresLatestResponse.prototype, "statusCode", void 0);
     return GetGlobalwinescoresLatestResponse;

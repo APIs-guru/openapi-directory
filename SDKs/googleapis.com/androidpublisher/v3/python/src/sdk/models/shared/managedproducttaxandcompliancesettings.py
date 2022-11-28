@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import regionaltaxrateinfo
+from sdk import utils
+from . import *
 
 class ManagedProductTaxAndComplianceSettingsEeaWithdrawalRightTypeEnum(str, Enum):
     WITHDRAWAL_RIGHT_TYPE_UNSPECIFIED = "WITHDRAWAL_RIGHT_TYPE_UNSPECIFIED"
@@ -12,6 +14,10 @@ class ManagedProductTaxAndComplianceSettingsEeaWithdrawalRightTypeEnum(str, Enum
 @dataclass_json
 @dataclass
 class ManagedProductTaxAndComplianceSettings:
-    eea_withdrawal_right_type: Optional[ManagedProductTaxAndComplianceSettingsEeaWithdrawalRightTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'eeaWithdrawalRightType' }})
-    tax_rate_info_by_region_code: Optional[dict[str, regionaltaxrateinfo.RegionalTaxRateInfo]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'taxRateInfoByRegionCode' }})
+    r"""ManagedProductTaxAndComplianceSettings
+    Details about taxation and legal compliance for managed products.
+    """
+    
+    eea_withdrawal_right_type: Optional[ManagedProductTaxAndComplianceSettingsEeaWithdrawalRightTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('eeaWithdrawalRightType') }})
+    tax_rate_info_by_region_code: Optional[dict[str, RegionalTaxRateInfo]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('taxRateInfoByRegionCode') }})
     

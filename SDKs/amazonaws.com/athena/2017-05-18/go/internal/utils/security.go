@@ -1,11 +1,16 @@
 package utils
 
 import (
+	"encoding/base64"
 	"fmt"
 	"net/http"
 	"reflect"
 	"strings"
 )
+
+type HTTPClient interface {
+	Do(req *http.Request) (*http.Response, error)
+}
 
 const (
 	securityTagKey = "security"
@@ -20,14 +25,14 @@ type securityTag struct {
 }
 
 type SecurityClient struct {
-	client      *http.Client
+	client      HTTPClient
 	headers     map[string]string
 	queryParams map[string]string
 }
 
-func newSecurityClient() *SecurityClient {
+func newSecurityClient(client HTTPClient) *SecurityClient {
 	return &SecurityClient{
-		client:      http.DefaultClient,
+		client:      client,
 		headers:     make(map[string]string),
 		queryParams: make(map[string]string),
 	}
@@ -49,18 +54,27 @@ func (c *SecurityClient) Do(req *http.Request) (*http.Response, error) {
 	return c.client.Do(req)
 }
 
-func CreateSecurityClient(security interface{}) *SecurityClient {
-	client := parseSecurityStruct(security)
+func ConfigureSecurityClient(c HTTPClient, security interface{}) *SecurityClient {
+	client := parseSecurityStruct(c, security)
 	if client != nil {
 		return client
 	}
 
-	return newSecurityClient()
+	return newSecurityClient(c)
 }
 
-func parseSecurityStruct(security interface{}) *SecurityClient {
+func parseSecurityStruct(c HTTPClient, security interface{}) *SecurityClient {
 	securityStructType := reflect.TypeOf(security)
 	securityValType := reflect.ValueOf(security)
+
+	if securityStructType.Kind() == reflect.Ptr {
+		if securityValType.IsNil() {
+			return nil
+		}
+
+		securityStructType = securityStructType.Elem()
+		securityValType = securityValType.Elem()
+	}
 
 	for i := 0; i < securityStructType.NumField(); i++ {
 		fieldType := securityStructType.Field(i)
@@ -73,9 +87,9 @@ func parseSecurityStruct(security interface{}) *SecurityClient {
 		secTag := parseSecurityTag(fieldType)
 		if secTag != nil {
 			if secTag.Option {
-				return parseSecurityOption(valType.Interface())
+				return parseSecurityOption(c, valType.Interface())
 			} else if secTag.Scheme {
-				client := newSecurityClient()
+				client := newSecurityClient(c)
 				parseSecurityScheme(client, secTag, valType.Interface())
 				return client
 			}
@@ -85,11 +99,11 @@ func parseSecurityStruct(security interface{}) *SecurityClient {
 	return nil
 }
 
-func parseSecurityOption(option interface{}) *SecurityClient {
+func parseSecurityOption(c HTTPClient, option interface{}) *SecurityClient {
 	optionStructType := reflect.TypeOf(option)
 	optionValType := reflect.ValueOf(option)
 
-	client := newSecurityClient()
+	client := newSecurityClient(c)
 
 	for i := 0; i < optionStructType.NumField(); i++ {
 		fieldType := optionStructType.Field(i)
@@ -105,6 +119,11 @@ func parseSecurityOption(option interface{}) *SecurityClient {
 }
 
 func parseSecurityScheme(client *SecurityClient, schemeTag *securityTag, scheme interface{}) {
+	if schemeTag.Type == "http" && schemeTag.SubType == "basic" {
+		parseBasicAuthScheme(client, scheme)
+		return
+	}
+
 	schemeStructType := reflect.TypeOf(scheme)
 	schemeValType := reflect.ValueOf(scheme)
 
@@ -135,7 +154,6 @@ func parseSecurityScheme(client *SecurityClient, schemeTag *securityTag, scheme 
 			client.headers[secTag.Name] = valType.String()
 		case "http":
 			switch schemeTag.SubType {
-			case "basic":
 			case "bearer":
 				client.headers[secTag.Name] = valType.String()
 			default:
@@ -145,6 +163,32 @@ func parseSecurityScheme(client *SecurityClient, schemeTag *securityTag, scheme 
 			panic("not supported")
 		}
 	}
+}
+
+func parseBasicAuthScheme(client *SecurityClient, scheme interface{}) {
+	schemeStructType := reflect.TypeOf(scheme)
+	schemeValType := reflect.ValueOf(scheme)
+
+	var username, password string
+
+	for i := 0; i < schemeStructType.NumField(); i++ {
+		fieldType := schemeStructType.Field(i)
+		valType := schemeValType.Field(i)
+
+		secTag := parseSecurityTag(fieldType)
+		if secTag == nil || secTag.Name == "" {
+			continue
+		}
+
+		switch secTag.Name {
+		case "username":
+			username = valType.String()
+		case "password":
+			password = valType.String()
+		}
+	}
+
+	client.headers["Authorization"] = fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(fmt.Sprintf("%s:%s", username, password))))
 }
 
 func parseSecurityTag(field reflect.StructField) *securityTag {

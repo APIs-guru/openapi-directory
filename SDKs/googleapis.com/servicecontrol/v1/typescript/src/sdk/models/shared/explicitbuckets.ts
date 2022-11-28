@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ExplicitBuckets
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describing buckets with arbitrary user-provided width.
 **/
 export class ExplicitBuckets extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bounds" })
+  @SpeakeasyMetadata({ data: "json, name=bounds" })
   bounds?: number[];
 }

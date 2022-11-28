@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ManagedidentitiesProjectsLocationsGlobalDomainsReconfigureTrustPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class ManagedidentitiesProjectsLocationsGlobalDomainsReconfigureTrustQueryParams
 
 @dataclass
 class ManagedidentitiesProjectsLocationsGlobalDomainsReconfigureTrustSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ManagedidentitiesProjectsLocationsGlobalDomainsReconfigureTrustRequest:
-    path_params: ManagedidentitiesProjectsLocationsGlobalDomainsReconfigureTrustPathParams = field(default=None)
-    query_params: ManagedidentitiesProjectsLocationsGlobalDomainsReconfigureTrustQueryParams = field(default=None)
+    path_params: ManagedidentitiesProjectsLocationsGlobalDomainsReconfigureTrustPathParams = field()
+    query_params: ManagedidentitiesProjectsLocationsGlobalDomainsReconfigureTrustQueryParams = field()
+    security: ManagedidentitiesProjectsLocationsGlobalDomainsReconfigureTrustSecurity = field()
     request: Optional[shared.ReconfigureTrustRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ManagedidentitiesProjectsLocationsGlobalDomainsReconfigureTrustSecurity = field(default=None)
     
 
 @dataclass
 class ManagedidentitiesProjectsLocationsGlobalDomainsReconfigureTrustResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

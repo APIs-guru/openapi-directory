@@ -8,10 +8,6 @@ type AccountDetailAPIIDSecurity struct {
 	BearerAuth shared.SchemeBearerAuth `security:"scheme,type=http,subtype=bearer"`
 }
 
-type AccountDetailAPIIDRequest struct {
-	Security AccountDetailAPIIDSecurity
-}
-
 type AccountDetailAPIID401ApplicationJSON struct {
 	Error            *string `json:"error,omitempty"`
 	ErrorDescription *string `json:"error_description,omitempty"`
@@ -20,6 +16,10 @@ type AccountDetailAPIID401ApplicationJSON struct {
 type AccountDetailAPIID500ApplicationJSON struct {
 	Error            *string `json:"error,omitempty"`
 	ErrorDescription *string `json:"error_description,omitempty"`
+}
+
+type AccountDetailAPIIDRequest struct {
+	Security AccountDetailAPIIDSecurity
 }
 
 type AccountDetailAPIIDResponse struct {

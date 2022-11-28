@@ -1,5 +1,7 @@
 package shared
 
+// LicenseSimple
+// License Simple
 type LicenseSimple struct {
 	HTMLURL *string `json:"html_url,omitempty"`
 	Key     string  `json:"key"`

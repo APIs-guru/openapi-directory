@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AdjustmentTypeEnum } from "./adjustmenttypeenum";
 import { MetricAggregationTypeEnum } from "./metricaggregationtypeenum";
 import { StepAdjustment } from "./stepadjustment";

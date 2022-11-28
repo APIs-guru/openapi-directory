@@ -8,6 +8,8 @@ const (
 	ExportMetadataRequestDatabaseDumpTypeEnumAvro            ExportMetadataRequestDatabaseDumpTypeEnum = "AVRO"
 )
 
+// ExportMetadataRequest
+// Request message for DataprocMetastore.ExportMetadata.
 type ExportMetadataRequest struct {
 	DatabaseDumpType     *ExportMetadataRequestDatabaseDumpTypeEnum `json:"databaseDumpType,omitempty"`
 	DestinationGcsFolder *string                                    `json:"destinationGcsFolder,omitempty"`

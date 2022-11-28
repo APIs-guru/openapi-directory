@@ -15,6 +15,8 @@ const (
 	CounterStructuredNamePortionEnumValue CounterStructuredNamePortionEnum = "VALUE"
 )
 
+// CounterStructuredName
+// Identifies a counter within a per-job namespace. Counters whose structured names are the same get merged into a single value for the job.
 type CounterStructuredName struct {
 	ComponentStepName          *string                           `json:"componentStepName,omitempty"`
 	ExecutionStepName          *string                           `json:"executionStepName,omitempty"`

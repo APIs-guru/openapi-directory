@@ -8,6 +8,8 @@ const (
 	ProjectEntityGlobalAccessEnumAnyoneWithFull ProjectEntityGlobalAccessEnum = "anyone_with_full"
 )
 
+// ProjectEntity
+// List Projects
 type ProjectEntity struct {
 	GlobalAccess *ProjectEntityGlobalAccessEnum `json:"global_access,omitempty"`
 	ID           *int32                         `json:"id,omitempty"`

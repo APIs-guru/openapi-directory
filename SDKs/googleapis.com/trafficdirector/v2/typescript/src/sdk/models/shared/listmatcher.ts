@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ValueMatcher } from "./valuematcher";
+
 
 
 // ListMatcher
@@ -7,6 +8,6 @@ import { ValueMatcher } from "./valuematcher";
  * Specifies the way to match a list value.
 **/
 export class ListMatcher extends SpeakeasyBase {
-  @Metadata({ data: "json, name=oneOf" })
+  @SpeakeasyMetadata({ data: "json, name=oneOf" })
   oneOf?: ValueMatcher;
 }

@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class V2IosKeyRestrictions:
-    allowed_bundle_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'allowedBundleIds' }})
+    r"""V2IosKeyRestrictions
+    The iOS apps that are allowed to use the key.
+    """
+    
+    allowed_bundle_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('allowedBundleIds') }})
     

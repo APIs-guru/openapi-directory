@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConfidentialNodes } from "./confidentialnodes";
+import { FastSocket } from "./fastsocket";
 import { GcfsConfig } from "./gcfsconfig";
 import { VirtualNic } from "./virtualnic";
 import { NodeKubeletConfig } from "./nodekubeletconfig";
@@ -7,10 +8,12 @@ import { NodeLabels } from "./nodelabels";
 import { LinuxNodeConfig } from "./linuxnodeconfig";
 import { NodePoolLoggingConfig } from "./nodepoolloggingconfig";
 import { NodeNetworkConfig } from "./nodenetworkconfig";
+import { ResourceLabels } from "./resourcelabels";
 import { NetworkTags } from "./networktags";
 import { NodeTaints } from "./nodetaints";
 import { UpgradeSettings } from "./upgradesettings";
 import { WorkloadMetadataConfig } from "./workloadmetadataconfig";
+
 
 
 // UpdateNodePoolRequest
@@ -18,63 +21,69 @@ import { WorkloadMetadataConfig } from "./workloadmetadataconfig";
  * SetNodePoolVersionRequest updates the version of a node pool.
 **/
 export class UpdateNodePoolRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clusterId" })
+  @SpeakeasyMetadata({ data: "json, name=clusterId" })
   clusterId?: string;
 
-  @Metadata({ data: "json, name=confidentialNodes" })
+  @SpeakeasyMetadata({ data: "json, name=confidentialNodes" })
   confidentialNodes?: ConfidentialNodes;
 
-  @Metadata({ data: "json, name=gcfsConfig" })
+  @SpeakeasyMetadata({ data: "json, name=fastSocket" })
+  fastSocket?: FastSocket;
+
+  @SpeakeasyMetadata({ data: "json, name=gcfsConfig" })
   gcfsConfig?: GcfsConfig;
 
-  @Metadata({ data: "json, name=gvnic" })
+  @SpeakeasyMetadata({ data: "json, name=gvnic" })
   gvnic?: VirtualNic;
 
-  @Metadata({ data: "json, name=imageType" })
+  @SpeakeasyMetadata({ data: "json, name=imageType" })
   imageType?: string;
 
-  @Metadata({ data: "json, name=kubeletConfig" })
+  @SpeakeasyMetadata({ data: "json, name=kubeletConfig" })
   kubeletConfig?: NodeKubeletConfig;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: NodeLabels;
 
-  @Metadata({ data: "json, name=linuxNodeConfig" })
+  @SpeakeasyMetadata({ data: "json, name=linuxNodeConfig" })
   linuxNodeConfig?: LinuxNodeConfig;
 
-  @Metadata({ data: "json, name=locations" })
+  @SpeakeasyMetadata({ data: "json, name=locations" })
   locations?: string[];
 
-  @Metadata({ data: "json, name=loggingConfig" })
+  @SpeakeasyMetadata({ data: "json, name=loggingConfig" })
   loggingConfig?: NodePoolLoggingConfig;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=nodeNetworkConfig" })
+  @SpeakeasyMetadata({ data: "json, name=nodeNetworkConfig" })
   nodeNetworkConfig?: NodeNetworkConfig;
 
-  @Metadata({ data: "json, name=nodePoolId" })
+  @SpeakeasyMetadata({ data: "json, name=nodePoolId" })
   nodePoolId?: string;
 
-  @Metadata({ data: "json, name=nodeVersion" })
+  @SpeakeasyMetadata({ data: "json, name=nodeVersion" })
   nodeVersion?: string;
 
-  @Metadata({ data: "json, name=projectId" })
+  @SpeakeasyMetadata({ data: "json, name=projectId" })
   projectId?: string;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=resourceLabels" })
+  resourceLabels?: ResourceLabels;
+
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: NetworkTags;
 
-  @Metadata({ data: "json, name=taints" })
+  @SpeakeasyMetadata({ data: "json, name=taints" })
   taints?: NodeTaints;
 
-  @Metadata({ data: "json, name=upgradeSettings" })
+  @SpeakeasyMetadata({ data: "json, name=upgradeSettings" })
   upgradeSettings?: UpgradeSettings;
 
-  @Metadata({ data: "json, name=workloadMetadataConfig" })
+  @SpeakeasyMetadata({ data: "json, name=workloadMetadataConfig" })
   workloadMetadataConfig?: WorkloadMetadataConfig;
 
-  @Metadata({ data: "json, name=zone" })
+  @SpeakeasyMetadata({ data: "json, name=zone" })
   zone?: string;
 }

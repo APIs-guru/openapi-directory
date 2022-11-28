@@ -21,6 +21,8 @@ const (
 	CreateCustomPluginRequestBodyContentTypeEnumZip CreateCustomPluginRequestBodyContentTypeEnum = "ZIP"
 )
 
+// CreateCustomPluginRequestBodyLocation
+// Information about the location of a custom plugin.
 type CreateCustomPluginRequestBodyLocation struct {
 	S3Location *shared.S3Location `json:"s3Location,omitempty"`
 }

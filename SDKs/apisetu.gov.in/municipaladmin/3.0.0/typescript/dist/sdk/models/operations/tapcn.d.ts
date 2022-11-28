@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class TapcnRequestBodyCertificateParameters extends SpeakeasyBase {
     documentNumber: string;
@@ -15,10 +15,6 @@ export declare class TapcnRequestBody extends SpeakeasyBase {
 export declare class TapcnSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class TapcnRequest extends SpeakeasyBase {
-    request?: TapcnRequestBody;
-    security: TapcnSecurity;
 }
 export declare enum Tapcn400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -101,6 +97,10 @@ export declare enum Tapcn504ApplicationJsonErrorDescriptionEnum {
 export declare class Tapcn504ApplicationJson extends SpeakeasyBase {
     error?: Tapcn504ApplicationJsonErrorEnum;
     errorDescription?: Tapcn504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class TapcnRequest extends SpeakeasyBase {
+    request?: TapcnRequestBody;
+    security: TapcnSecurity;
 }
 export declare class TapcnResponse extends SpeakeasyBase {
     contentType: string;

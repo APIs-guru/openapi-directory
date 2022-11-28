@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GeneratePresignedUrlsFilesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=upload_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=upload_id" })
   uploadId: string;
 }
 
 
 export class GeneratePresignedUrlsFilesHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Sds-Auth-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Sds-Auth-Token" })
   xSdsAuthToken?: string;
 }
 
 
 export class GeneratePresignedUrlsFilesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GeneratePresignedUrlsFilesPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GeneratePresignedUrlsFilesHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.GeneratePresignedUrlsRequest;
 }
 
 
 export class GeneratePresignedUrlsFilesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   presignedUrlList?: shared.PresignedUrlList;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

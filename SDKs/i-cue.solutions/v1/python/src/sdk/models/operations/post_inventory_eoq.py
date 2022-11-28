@@ -9,11 +9,11 @@ class PostInventoryEoqHeaders:
 
 @dataclass
 class PostInventoryEoqRequest:
-    headers: PostInventoryEoqHeaders = field(default=None)
+    headers: PostInventoryEoqHeaders = field()
     
 
 @dataclass
 class PostInventoryEoqResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

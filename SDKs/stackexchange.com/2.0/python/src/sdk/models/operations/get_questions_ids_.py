@@ -1,10 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 
 @dataclass
 class GetQuestionsIdsPathParams:
-    ids: str = field(default=None, metadata={'path_param': { 'field_name': 'ids', 'style': 'simple', 'explode': False }})
+    ids: str = field(metadata={'path_param': { 'field_name': 'ids', 'style': 'simple', 'explode': False }})
     
 class GetQuestionsIdsOrderEnum(str, Enum):
     DESC = "desc"
@@ -18,6 +22,7 @@ class GetQuestionsIdsSortEnum(str, Enum):
 
 @dataclass
 class GetQuestionsIdsQueryParams:
+    site: str = field(metadata={'query_param': { 'field_name': 'site', 'style': 'form', 'explode': True }})
     callback: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'callback', 'style': 'form', 'explode': True }})
     filter: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'filter', 'style': 'form', 'explode': True }})
     fromdate: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'fromdate', 'style': 'form', 'explode': True }})
@@ -26,20 +31,19 @@ class GetQuestionsIdsQueryParams:
     order: Optional[GetQuestionsIdsOrderEnum] = field(default=None, metadata={'query_param': { 'field_name': 'order', 'style': 'form', 'explode': True }})
     page: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'page', 'style': 'form', 'explode': True }})
     pagesize: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'pagesize', 'style': 'form', 'explode': True }})
-    site: str = field(default=None, metadata={'query_param': { 'field_name': 'site', 'style': 'form', 'explode': True }})
     sort: Optional[GetQuestionsIdsSortEnum] = field(default=None, metadata={'query_param': { 'field_name': 'sort', 'style': 'form', 'explode': True }})
     todate: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'todate', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class GetQuestionsIdsRequest:
-    path_params: GetQuestionsIdsPathParams = field(default=None)
-    query_params: GetQuestionsIdsQueryParams = field(default=None)
+    path_params: GetQuestionsIdsPathParams = field()
+    query_params: GetQuestionsIdsQueryParams = field()
     
 
 @dataclass
 class GetQuestionsIdsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

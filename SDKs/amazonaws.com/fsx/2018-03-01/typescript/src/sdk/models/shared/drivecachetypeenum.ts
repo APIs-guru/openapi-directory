@@ -1,6 +1,7 @@
 
 
+
 export enum DriveCacheTypeEnum {
-    None = "NONE"
-,    Read = "READ"
+    None = "NONE",
+    Read = "READ"
 }

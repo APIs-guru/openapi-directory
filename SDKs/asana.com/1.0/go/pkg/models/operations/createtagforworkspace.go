@@ -13,18 +13,18 @@ type CreateTagForWorkspaceQueryParams struct {
 	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
-type CreateTagForWorkspaceRequestBody struct {
+type CreateTagForWorkspaceRequestBodyInput struct {
+	Data *shared.TagResponseInput `json:"data,omitempty"`
+}
+
+type CreateTagForWorkspace201ApplicationJSON struct {
 	Data *shared.TagResponse `json:"data,omitempty"`
 }
 
 type CreateTagForWorkspaceRequest struct {
 	PathParams  CreateTagForWorkspacePathParams
 	QueryParams CreateTagForWorkspaceQueryParams
-	Request     CreateTagForWorkspaceRequestBody `request:"mediaType=application/json"`
-}
-
-type CreateTagForWorkspace201ApplicationJSON struct {
-	Data *shared.TagResponse `json:"data,omitempty"`
+	Request     CreateTagForWorkspaceRequestBodyInput `request:"mediaType=application/json"`
 }
 
 type CreateTagForWorkspaceResponse struct {

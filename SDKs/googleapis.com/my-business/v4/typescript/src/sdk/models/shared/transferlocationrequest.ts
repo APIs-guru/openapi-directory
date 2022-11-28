@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TransferLocationRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request message for Locations.TransferLocation.
 **/
 export class TransferLocationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=toAccount" })
+  @SpeakeasyMetadata({ data: "json, name=toAccount" })
   toAccount?: string;
 }

@@ -5,24 +5,24 @@ from sdk.models import shared
 
 @dataclass
 class GetAliasQueryParams:
-    alias_name: str = field(default=None, metadata={'query_param': { 'field_name': 'aliasName', 'style': 'form', 'explode': True }})
+    alias_name: str = field(metadata={'query_param': { 'field_name': 'aliasName', 'style': 'form', 'explode': True }})
     domain_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'domainName', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class GetAliasSecurity:
-    api_key_auth: shared.SchemeAPIKeyAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    api_key_auth: shared.SchemeAPIKeyAuth = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetAliasRequest:
-    query_params: GetAliasQueryParams = field(default=None)
-    security: GetAliasSecurity = field(default=None)
+    query_params: GetAliasQueryParams = field()
+    security: GetAliasSecurity = field()
     
 
 @dataclass
 class GetAliasResponse:
+    content_type: str = field()
+    status_code: int = field()
     alias_model: Optional[shared.AliasModel] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

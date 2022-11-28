@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var DoubleclickbidmanagerQueriesGetqueryPathParams = /** @class */ (function (_super) {
     __extends(DoubleclickbidmanagerQueriesGetqueryPathParams, _super);
@@ -30,7 +30,7 @@ var DoubleclickbidmanagerQueriesGetqueryPathParams = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=queryId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=queryId" }),
         __metadata("design:type", String)
     ], DoubleclickbidmanagerQueriesGetqueryPathParams.prototype, "queryId", void 0);
     return DoubleclickbidmanagerQueriesGetqueryPathParams;
@@ -42,47 +42,47 @@ var DoubleclickbidmanagerQueriesGetqueryQueryParams = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], DoubleclickbidmanagerQueriesGetqueryQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], DoubleclickbidmanagerQueriesGetqueryQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], DoubleclickbidmanagerQueriesGetqueryQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], DoubleclickbidmanagerQueriesGetqueryQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], DoubleclickbidmanagerQueriesGetqueryQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], DoubleclickbidmanagerQueriesGetqueryQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], DoubleclickbidmanagerQueriesGetqueryQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], DoubleclickbidmanagerQueriesGetqueryQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], DoubleclickbidmanagerQueriesGetqueryQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], DoubleclickbidmanagerQueriesGetqueryQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], DoubleclickbidmanagerQueriesGetqueryQueryParams.prototype, "uploadProtocol", void 0);
     return DoubleclickbidmanagerQueriesGetqueryQueryParams;
@@ -94,11 +94,11 @@ var DoubleclickbidmanagerQueriesGetquerySecurity = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], DoubleclickbidmanagerQueriesGetquerySecurity.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], DoubleclickbidmanagerQueriesGetquerySecurity.prototype, "oauth2c", void 0);
     return DoubleclickbidmanagerQueriesGetquerySecurity;
@@ -110,15 +110,15 @@ var DoubleclickbidmanagerQueriesGetqueryRequest = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DoubleclickbidmanagerQueriesGetqueryPathParams)
     ], DoubleclickbidmanagerQueriesGetqueryRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DoubleclickbidmanagerQueriesGetqueryQueryParams)
     ], DoubleclickbidmanagerQueriesGetqueryRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DoubleclickbidmanagerQueriesGetquerySecurity)
     ], DoubleclickbidmanagerQueriesGetqueryRequest.prototype, "security", void 0);
     return DoubleclickbidmanagerQueriesGetqueryRequest;
@@ -130,15 +130,15 @@ var DoubleclickbidmanagerQueriesGetqueryResponse = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DoubleclickbidmanagerQueriesGetqueryResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Query)
     ], DoubleclickbidmanagerQueriesGetqueryResponse.prototype, "query", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DoubleclickbidmanagerQueriesGetqueryResponse.prototype, "statusCode", void 0);
     return DoubleclickbidmanagerQueriesGetqueryResponse;

@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ListenerTlsFileCertificate } from "./listenertlsfilecertificate";
 import { ListenerTlsSdsCertificate } from "./listenertlssdscertificate";
+
 
 
 // ClientTlsCertificate
@@ -8,9 +9,9 @@ import { ListenerTlsSdsCertificate } from "./listenertlssdscertificate";
  * An object that represents the client's certificate.
 **/
 export class ClientTlsCertificate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=file" })
+  @SpeakeasyMetadata({ data: "json, name=file" })
   file?: ListenerTlsFileCertificate;
 
-  @Metadata({ data: "json, name=sds" })
+  @SpeakeasyMetadata({ data: "json, name=sds" })
   sds?: ListenerTlsSdsCertificate;
 }

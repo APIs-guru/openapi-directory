@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { VerificationOption } from "./verificationoption";
 /**
  * Response message for Verifications.FetchVerificationOptions.

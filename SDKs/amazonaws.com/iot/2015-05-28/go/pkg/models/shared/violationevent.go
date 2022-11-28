@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ViolationEvent
+// Information about a Device Defender security profile behavior violation.
 type ViolationEvent struct {
 	Behavior                     *Behavior                     `json:"behavior,omitempty"`
 	MetricValue                  *MetricValue                  `json:"metricValue,omitempty"`

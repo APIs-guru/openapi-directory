@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var FolderLifecycleStateEnum;
 (function (FolderLifecycleStateEnum) {
     FolderLifecycleStateEnum["LifecycleStateUnspecified"] = "LIFECYCLE_STATE_UNSPECIFIED";
@@ -39,25 +39,45 @@ var Folder = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", String)
     ], Folder.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=displayName" }),
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
         __metadata("design:type", String)
     ], Folder.prototype, "displayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=lifecycleState" }),
+        SpeakeasyMetadata({ data: "json, name=lifecycleState" }),
         __metadata("design:type", String)
     ], Folder.prototype, "lifecycleState", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Folder.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=parent" }),
+        SpeakeasyMetadata({ data: "json, name=parent" }),
         __metadata("design:type", String)
     ], Folder.prototype, "parent", void 0);
     return Folder;
 }(SpeakeasyBase));
 export { Folder };
+// FolderInput
+/**
+ * A Folder in an Organization's resource hierarchy, used to organize that Organization's resources.
+**/
+var FolderInput = /** @class */ (function (_super) {
+    __extends(FolderInput, _super);
+    function FolderInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
+        __metadata("design:type", String)
+    ], FolderInput.prototype, "displayName", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=parent" }),
+        __metadata("design:type", String)
+    ], FolderInput.prototype, "parent", void 0);
+    return FolderInput;
+}(SpeakeasyBase));
+export { FolderInput };

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // InforNexusConnectorProfileCredentials
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  The connector-specific profile credentials required by Infor Nexus. 
 **/
 export class InforNexusConnectorProfileCredentials extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=accessKeyId" })
   accessKeyId: string;
 
-  @Metadata({ data: "json, name=datakey" })
+  @SpeakeasyMetadata({ data: "json, name=datakey" })
   datakey: string;
 
-  @Metadata({ data: "json, name=secretAccessKey" })
+  @SpeakeasyMetadata({ data: "json, name=secretAccessKey" })
   secretAccessKey: string;
 
-  @Metadata({ data: "json, name=userId" })
+  @SpeakeasyMetadata({ data: "json, name=userId" })
   userId: string;
 }

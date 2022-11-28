@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PlacementDescription } from "./placementdescription";
 
 
+
 export class DescribePlacementResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=placement" })
+  @SpeakeasyMetadata({ data: "json, name=placement" })
   placement: PlacementDescription;
 }

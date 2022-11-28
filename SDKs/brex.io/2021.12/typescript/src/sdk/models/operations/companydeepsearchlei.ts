@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CompanyDeepsearchLeiPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=number" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=number" })
   number: string;
 }
 
 
 export class CompanyDeepsearchLeiQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 }
 
 
 export class CompanyDeepsearchLeiSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   userKey: shared.SchemeUserKey;
 }
 
 
 export class CompanyDeepsearchLeiRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CompanyDeepsearchLeiPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: CompanyDeepsearchLeiQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: CompanyDeepsearchLeiSecurity;
 }
 
 
 export class CompanyDeepsearchLeiResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   companyDeepsearchLei200ApplicationJsonAny?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   companyDeepsearchLeiDefaultApplicationJsonAny?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

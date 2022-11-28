@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { RobotDeploymentStepEnum } from "./robotdeploymentstepenum";
 /**
  * Information about the progress of a deployment job.

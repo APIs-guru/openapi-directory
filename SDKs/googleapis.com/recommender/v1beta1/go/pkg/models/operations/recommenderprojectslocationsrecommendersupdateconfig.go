@@ -32,7 +32,7 @@ type RecommenderProjectsLocationsRecommendersUpdateConfigSecurity struct {
 type RecommenderProjectsLocationsRecommendersUpdateConfigRequest struct {
 	PathParams  RecommenderProjectsLocationsRecommendersUpdateConfigPathParams
 	QueryParams RecommenderProjectsLocationsRecommendersUpdateConfigQueryParams
-	Request     *shared.GoogleCloudRecommenderV1beta1RecommenderConfig `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudRecommenderV1beta1RecommenderConfigInput `request:"mediaType=application/json"`
 	Security    RecommenderProjectsLocationsRecommendersUpdateConfigSecurity
 }
 

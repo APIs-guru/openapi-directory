@@ -22,19 +22,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { S3ResourceClassificationUpdate } from "./s3resourceclassificationupdate";
 var UpdateS3ResourcesRequest = /** @class */ (function (_super) {
     __extends(UpdateS3ResourcesRequest, _super);
     function UpdateS3ResourcesRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=memberAccountId" }),
+        SpeakeasyMetadata({ data: "json, name=memberAccountId" }),
         __metadata("design:type", String)
     ], UpdateS3ResourcesRequest.prototype, "memberAccountId", void 0);
     __decorate([
-        Metadata({ data: "json, name=s3ResourcesUpdate", elemType: shared.S3ResourceClassificationUpdate }),
+        SpeakeasyMetadata({ data: "json, name=s3ResourcesUpdate", elemType: S3ResourceClassificationUpdate }),
         __metadata("design:type", Array)
     ], UpdateS3ResourcesRequest.prototype, "s3ResourcesUpdate", void 0);
     return UpdateS3ResourcesRequest;

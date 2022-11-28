@@ -22,8 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { PipelineActivity } from "./pipelineactivity";
+import { ReprocessingSummary } from "./reprocessingsummary";
 // Pipeline
 /**
  * Contains information about a pipeline.
@@ -34,27 +35,27 @@ var Pipeline = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=activities", elemType: shared.PipelineActivity }),
+        SpeakeasyMetadata({ data: "json, name=activities", elemType: PipelineActivity }),
         __metadata("design:type", Array)
     ], Pipeline.prototype, "activities", void 0);
     __decorate([
-        Metadata({ data: "json, name=arn" }),
+        SpeakeasyMetadata({ data: "json, name=arn" }),
         __metadata("design:type", String)
     ], Pipeline.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=creationTime" }),
+        SpeakeasyMetadata({ data: "json, name=creationTime" }),
         __metadata("design:type", Date)
     ], Pipeline.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastUpdateTime" }),
+        SpeakeasyMetadata({ data: "json, name=lastUpdateTime" }),
         __metadata("design:type", Date)
     ], Pipeline.prototype, "lastUpdateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Pipeline.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=reprocessingSummaries", elemType: shared.ReprocessingSummary }),
+        SpeakeasyMetadata({ data: "json, name=reprocessingSummaries", elemType: ReprocessingSummary }),
         __metadata("design:type", Array)
     ], Pipeline.prototype, "reprocessingSummaries", void 0);
     return Pipeline;

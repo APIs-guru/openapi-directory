@@ -37,7 +37,7 @@ type BigqueryRoutinesInsertSecurity struct {
 type BigqueryRoutinesInsertRequest struct {
 	PathParams  BigqueryRoutinesInsertPathParams
 	QueryParams BigqueryRoutinesInsertQueryParams
-	Request     *shared.Routine `request:"mediaType=application/json"`
+	Request     *shared.RoutineInput `request:"mediaType=application/json"`
 	Security    BigqueryRoutinesInsertSecurity
 }
 

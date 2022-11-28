@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum PostActivityActivityTypeEnum {
     Content = "content"
@@ -6,12 +7,12 @@ export enum PostActivityActivityTypeEnum {
 
 
 export class PostActivity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=activity_type" })
+  @SpeakeasyMetadata({ data: "json, name=activity_type" })
   activityType: PostActivityActivityTypeEnum;
 
-  @Metadata({ data: "json, name=occurred_at" })
+  @SpeakeasyMetadata({ data: "json, name=occurred_at" })
   occurredAt?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url: string;
 }

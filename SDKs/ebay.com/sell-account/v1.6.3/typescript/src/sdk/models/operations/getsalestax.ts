@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetSalesTaxPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=countryCode" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=countryCode" })
   countryCode: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=jurisdictionId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=jurisdictionId" })
   jurisdictionId: string;
 }
 
 
 export class GetSalesTaxSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   apiAuth: shared.SchemeApiAuth;
 }
 
 
 export class GetSalesTaxRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetSalesTaxPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetSalesTaxSecurity;
 }
 
 
 export class GetSalesTaxResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   salesTax?: shared.SalesTax;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

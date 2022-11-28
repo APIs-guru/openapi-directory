@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetCreateEventSubscriptionActionEnum(str, Enum):
     CREATE_EVENT_SUBSCRIPTION = "CreateEventSubscription"
@@ -10,14 +14,14 @@ class GetCreateEventSubscriptionVersionEnum(str, Enum):
 
 @dataclass
 class GetCreateEventSubscriptionQueryParams:
-    action: GetCreateEventSubscriptionActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetCreateEventSubscriptionActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    sns_topic_arn: str = field(metadata={'query_param': { 'field_name': 'SnsTopicArn', 'style': 'form', 'explode': True }})
+    subscription_name: str = field(metadata={'query_param': { 'field_name': 'SubscriptionName', 'style': 'form', 'explode': True }})
+    version: GetCreateEventSubscriptionVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     enabled: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'Enabled', 'style': 'form', 'explode': True }})
     event_categories: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'EventCategories', 'style': 'form', 'explode': True }})
-    sns_topic_arn: str = field(default=None, metadata={'query_param': { 'field_name': 'SnsTopicArn', 'style': 'form', 'explode': True }})
     source_ids: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'SourceIds', 'style': 'form', 'explode': True }})
     source_type: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'SourceType', 'style': 'form', 'explode': True }})
-    subscription_name: str = field(default=None, metadata={'query_param': { 'field_name': 'SubscriptionName', 'style': 'form', 'explode': True }})
-    version: GetCreateEventSubscriptionVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -33,13 +37,13 @@ class GetCreateEventSubscriptionHeaders:
 
 @dataclass
 class GetCreateEventSubscriptionRequest:
-    query_params: GetCreateEventSubscriptionQueryParams = field(default=None)
-    headers: GetCreateEventSubscriptionHeaders = field(default=None)
+    headers: GetCreateEventSubscriptionHeaders = field()
+    query_params: GetCreateEventSubscriptionQueryParams = field()
     
 
 @dataclass
 class GetCreateEventSubscriptionResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

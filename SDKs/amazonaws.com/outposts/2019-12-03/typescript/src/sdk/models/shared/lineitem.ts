@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LineItem
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about a line item.
 **/
 export class LineItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CatalogItemId" })
+  @SpeakeasyMetadata({ data: "json, name=CatalogItemId" })
   catalogItemId?: string;
 
-  @Metadata({ data: "json, name=LineItemId" })
+  @SpeakeasyMetadata({ data: "json, name=LineItemId" })
   lineItemId?: string;
 
-  @Metadata({ data: "json, name=Quantity" })
+  @SpeakeasyMetadata({ data: "json, name=Quantity" })
   quantity?: number;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: string;
 }

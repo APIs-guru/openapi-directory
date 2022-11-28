@@ -1,5 +1,7 @@
 package shared
 
+// LockEntity
+// List Locks by path
 type LockEntity struct {
 	AllowAccessByAnyUser *bool   `json:"allow_access_by_any_user,omitempty"`
 	Depth                *string `json:"depth,omitempty"`

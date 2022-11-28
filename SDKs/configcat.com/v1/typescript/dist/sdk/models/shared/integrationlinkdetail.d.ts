@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ConfigModel } from "./configmodel";
 import { EnvironmentModel } from "./environmentmodel";
 import { ProductModel } from "./productmodel";

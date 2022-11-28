@@ -10,13 +10,13 @@ class StatusGetQueryParams:
 
 @dataclass
 class StatusGetRequest:
-    query_params: StatusGetQueryParams = field(default=None)
+    query_params: StatusGetQueryParams = field()
     
 
 @dataclass
 class StatusGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     message_status: Optional[shared.MessageStatus] = field(default=None)
     problem_details: Optional[shared.ProblemDetails] = field(default=None)
-    status_code: int = field(default=None)
     

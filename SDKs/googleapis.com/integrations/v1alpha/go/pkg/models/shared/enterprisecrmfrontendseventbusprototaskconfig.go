@@ -34,6 +34,8 @@ const (
 	EnterpriseCrmFrontendsEventbusProtoTaskConfigTaskTypeEnumIoTemplate   EnterpriseCrmFrontendsEventbusProtoTaskConfigTaskTypeEnum = "IO_TEMPLATE"
 )
 
+// EnterpriseCrmFrontendsEventbusProtoTaskConfig
+// The task configuration details. This is not the implementation of Task. There might be multiple TaskConfigs for the same Task. Next available id: 27
 type EnterpriseCrmFrontendsEventbusProtoTaskConfig struct {
 	AlertConfigs                 []EnterpriseCrmEventbusProtoTaskAlertConfig                                `json:"alertConfigs,omitempty"`
 	CreateTime                   *string                                                                    `json:"createTime,omitempty"`

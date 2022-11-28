@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Database
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents a database as well as an hourly status
 **/
 export class Database extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data_sets" })
+  @SpeakeasyMetadata({ data: "json, name=data_sets" })
   dataSets?: string[];
 
-  @Metadata({ data: "json, name=database_id" })
+  @SpeakeasyMetadata({ data: "json, name=database_id" })
   databaseId?: string;
 
-  @Metadata({ data: "json, name=database_name" })
+  @SpeakeasyMetadata({ data: "json, name=database_name" })
   databaseName?: string;
 
-  @Metadata({ data: "json, name=hourly_status" })
+  @SpeakeasyMetadata({ data: "json, name=hourly_status" })
   hourlyStatus?: string[];
 }

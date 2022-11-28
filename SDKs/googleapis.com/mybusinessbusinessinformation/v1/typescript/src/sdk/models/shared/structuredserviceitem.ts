@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // StructuredServiceItem
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents a structured service offered by the merchant. For eg: toilet_installation.
 **/
 export class StructuredServiceItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=serviceTypeId" })
+  @SpeakeasyMetadata({ data: "json, name=serviceTypeId" })
   serviceTypeId?: string;
 }

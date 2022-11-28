@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DetailedErrorCodeEnum } from "./detailederrorcodeenum";
+
 
 
 // DetailedError
@@ -7,9 +8,9 @@ import { DetailedErrorCodeEnum } from "./detailederrorcodeenum";
  * Contains detailed error information. 
 **/
 export class DetailedError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code: DetailedErrorCodeEnum;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 }

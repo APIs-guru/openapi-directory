@@ -16,12 +16,6 @@ type PostTIDTimerJSONRequestBody struct {
 	Time            *string `json:"time,omitempty"`
 }
 
-type PostTIDTimerJSONRequest struct {
-	PathParams PostTIDTimerJSONPathParams
-	Headers    PostTIDTimerJSONHeaders
-	Request    *PostTIDTimerJSONRequestBody `request:"mediaType=application/json"`
-}
-
 type PostTIDTimerJSON200ApplicationJSON struct {
 	BasedOnLastPost *bool   `json:"based_on_last_post,omitempty"`
 	CategoryID      *string `json:"category_id,omitempty"`
@@ -29,6 +23,12 @@ type PostTIDTimerJSON200ApplicationJSON struct {
 	Duration        *string `json:"duration,omitempty"`
 	ExecuteAt       *string `json:"execute_at,omitempty"`
 	Success         *string `json:"success,omitempty"`
+}
+
+type PostTIDTimerJSONRequest struct {
+	PathParams PostTIDTimerJSONPathParams
+	Headers    PostTIDTimerJSONHeaders
+	Request    *PostTIDTimerJSONRequestBody `request:"mediaType=application/json"`
 }
 
 type PostTIDTimerJSONResponse struct {

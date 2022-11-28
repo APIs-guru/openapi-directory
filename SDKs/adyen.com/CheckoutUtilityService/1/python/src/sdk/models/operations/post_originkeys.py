@@ -9,7 +9,7 @@ class PostOriginKeysRequest:
 
 @dataclass
 class PostOriginKeysResponse:
+    content_type: str = field()
+    status_code: int = field()
     checkout_utility_response: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

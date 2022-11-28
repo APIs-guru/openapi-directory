@@ -1,14 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import constraintdetail
-from . import status_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateConstraintOutput:
-    constraint_detail: Optional[constraintdetail.ConstraintDetail] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ConstraintDetail' }})
-    constraint_parameters: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ConstraintParameters' }})
-    status: Optional[status_enum.StatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Status' }})
+    constraint_detail: Optional[ConstraintDetail] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ConstraintDetail') }})
+    constraint_parameters: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ConstraintParameters') }})
+    status: Optional[StatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Status') }})
     

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { JobConfigTypeEnum } from "./jobconfigtypeenum";
 import { JobStatusEnum } from "./jobstatusenum";
 export declare class JobRead extends SpeakeasyBase {

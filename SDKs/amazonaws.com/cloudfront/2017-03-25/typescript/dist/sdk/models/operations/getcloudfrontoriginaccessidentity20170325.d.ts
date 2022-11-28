@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class GetCloudFrontOriginAccessIdentity20170325PathParams extends SpeakeasyBase {
     id: string;
 }

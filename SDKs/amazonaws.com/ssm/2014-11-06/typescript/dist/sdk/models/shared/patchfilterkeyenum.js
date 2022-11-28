@@ -1,0 +1,22 @@
+export var PatchFilterKeyEnum;
+(function (PatchFilterKeyEnum) {
+    PatchFilterKeyEnum["Arch"] = "ARCH";
+    PatchFilterKeyEnum["AdvisoryId"] = "ADVISORY_ID";
+    PatchFilterKeyEnum["BugzillaId"] = "BUGZILLA_ID";
+    PatchFilterKeyEnum["PatchSet"] = "PATCH_SET";
+    PatchFilterKeyEnum["Product"] = "PRODUCT";
+    PatchFilterKeyEnum["ProductFamily"] = "PRODUCT_FAMILY";
+    PatchFilterKeyEnum["Classification"] = "CLASSIFICATION";
+    PatchFilterKeyEnum["CveId"] = "CVE_ID";
+    PatchFilterKeyEnum["Epoch"] = "EPOCH";
+    PatchFilterKeyEnum["MsrcSeverity"] = "MSRC_SEVERITY";
+    PatchFilterKeyEnum["Name"] = "NAME";
+    PatchFilterKeyEnum["PatchId"] = "PATCH_ID";
+    PatchFilterKeyEnum["Section"] = "SECTION";
+    PatchFilterKeyEnum["Priority"] = "PRIORITY";
+    PatchFilterKeyEnum["Repository"] = "REPOSITORY";
+    PatchFilterKeyEnum["Release"] = "RELEASE";
+    PatchFilterKeyEnum["Severity"] = "SEVERITY";
+    PatchFilterKeyEnum["Security"] = "SECURITY";
+    PatchFilterKeyEnum["Version"] = "VERSION";
+})(PatchFilterKeyEnum || (PatchFilterKeyEnum = {}));

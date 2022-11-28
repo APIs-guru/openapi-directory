@@ -4,6 +4,9 @@ import (
 	"time"
 )
 
+// BehaviorModelTrainingSummary
+//
+//	The summary of an ML Detect behavior model.
 type BehaviorModelTrainingSummary struct {
 	BehaviorName                    *string          `json:"behaviorName,omitempty"`
 	DatapointsCollectionPercentage  *float64         `json:"datapointsCollectionPercentage,omitempty"`

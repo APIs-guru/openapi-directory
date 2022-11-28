@@ -1,0 +1,50 @@
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
+
+
+export class GlossaryListGlossary extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  categories?: string[];
+
+  @SpeakeasyMetadata()
+  content?: string;
+
+  @SpeakeasyMetadata()
+  date?: string;
+
+  @SpeakeasyMetadata()
+  excerpt?: string;
+
+  @SpeakeasyMetadata()
+  id?: string;
+
+  @SpeakeasyMetadata()
+  lang?: string;
+
+  @SpeakeasyMetadata()
+  layout?: string;
+
+  @SpeakeasyMetadata()
+  path?: string;
+
+  @SpeakeasyMetadata()
+  published?: boolean;
+
+  @SpeakeasyMetadata()
+  sort?: number;
+
+  @SpeakeasyMetadata()
+  tags?: string[];
+
+  @SpeakeasyMetadata()
+  title?: string;
+
+  @SpeakeasyMetadata()
+  url?: string;
+}
+
+
+export class GlossaryList extends SpeakeasyBase {
+  @SpeakeasyMetadata({ elemType: GlossaryListGlossary })
+  glossary?: GlossaryListGlossary[];
+}

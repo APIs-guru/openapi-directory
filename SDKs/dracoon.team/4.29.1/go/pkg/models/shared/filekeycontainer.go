@@ -1,5 +1,7 @@
 package shared
 
+// FileKeyContainer
+// File key container
 type FileKeyContainer struct {
 	Iv      string  `json:"iv"`
 	Key     string  `json:"key"`

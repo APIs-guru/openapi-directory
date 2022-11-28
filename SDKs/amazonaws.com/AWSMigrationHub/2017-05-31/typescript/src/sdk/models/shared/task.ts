@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StatusEnum } from "./statusenum";
+
 
 
 // Task
@@ -7,12 +8,12 @@ import { StatusEnum } from "./statusenum";
  * Task object encapsulating task information.
 **/
 export class Task extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ProgressPercent" })
+  @SpeakeasyMetadata({ data: "json, name=ProgressPercent" })
   progressPercent?: number;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status: StatusEnum;
 
-  @Metadata({ data: "json, name=StatusDetail" })
+  @SpeakeasyMetadata({ data: "json, name=StatusDetail" })
   statusDetail?: string;
 }

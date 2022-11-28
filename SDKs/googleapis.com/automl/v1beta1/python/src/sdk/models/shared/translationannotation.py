@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import textsnippet
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class TranslationAnnotation:
-    translated_content: Optional[textsnippet.TextSnippet] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'translatedContent' }})
+    r"""TranslationAnnotation
+    Annotation details specific to translation.
+    """
+    
+    translated_content: Optional[TextSnippet] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('translatedContent') }})
     

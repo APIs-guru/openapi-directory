@@ -12,11 +12,6 @@ type GetChartDataCacheKeySecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type GetChartDataCacheKeyRequest struct {
-	PathParams GetChartDataCacheKeyPathParams
-	Security   GetChartDataCacheKeySecurity
-}
-
 type GetChartDataCacheKey400ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
 }
@@ -35,6 +30,11 @@ type GetChartDataCacheKey422ApplicationJSON struct {
 
 type GetChartDataCacheKey500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type GetChartDataCacheKeyRequest struct {
+	PathParams GetChartDataCacheKeyPathParams
+	Security   GetChartDataCacheKeySecurity
 }
 
 type GetChartDataCacheKeyResponse struct {

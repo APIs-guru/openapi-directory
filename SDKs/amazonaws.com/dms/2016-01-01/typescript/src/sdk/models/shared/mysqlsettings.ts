@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TargetDbTypeEnum } from "./targetdbtypeenum";
+
 
 
 // MySqlSettings
@@ -7,45 +8,45 @@ import { TargetDbTypeEnum } from "./targetdbtypeenum";
  * Provides information that defines a MySQL endpoint.
 **/
 export class MySqlSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AfterConnectScript" })
+  @SpeakeasyMetadata({ data: "json, name=AfterConnectScript" })
   afterConnectScript?: string;
 
-  @Metadata({ data: "json, name=CleanSourceMetadataOnMismatch" })
+  @SpeakeasyMetadata({ data: "json, name=CleanSourceMetadataOnMismatch" })
   cleanSourceMetadataOnMismatch?: boolean;
 
-  @Metadata({ data: "json, name=DatabaseName" })
+  @SpeakeasyMetadata({ data: "json, name=DatabaseName" })
   databaseName?: string;
 
-  @Metadata({ data: "json, name=EventsPollInterval" })
+  @SpeakeasyMetadata({ data: "json, name=EventsPollInterval" })
   eventsPollInterval?: number;
 
-  @Metadata({ data: "json, name=MaxFileSize" })
+  @SpeakeasyMetadata({ data: "json, name=MaxFileSize" })
   maxFileSize?: number;
 
-  @Metadata({ data: "json, name=ParallelLoadThreads" })
+  @SpeakeasyMetadata({ data: "json, name=ParallelLoadThreads" })
   parallelLoadThreads?: number;
 
-  @Metadata({ data: "json, name=Password" })
+  @SpeakeasyMetadata({ data: "json, name=Password" })
   password?: string;
 
-  @Metadata({ data: "json, name=Port" })
+  @SpeakeasyMetadata({ data: "json, name=Port" })
   port?: number;
 
-  @Metadata({ data: "json, name=SecretsManagerAccessRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=SecretsManagerAccessRoleArn" })
   secretsManagerAccessRoleArn?: string;
 
-  @Metadata({ data: "json, name=SecretsManagerSecretId" })
+  @SpeakeasyMetadata({ data: "json, name=SecretsManagerSecretId" })
   secretsManagerSecretId?: string;
 
-  @Metadata({ data: "json, name=ServerName" })
+  @SpeakeasyMetadata({ data: "json, name=ServerName" })
   serverName?: string;
 
-  @Metadata({ data: "json, name=ServerTimezone" })
+  @SpeakeasyMetadata({ data: "json, name=ServerTimezone" })
   serverTimezone?: string;
 
-  @Metadata({ data: "json, name=TargetDbType" })
+  @SpeakeasyMetadata({ data: "json, name=TargetDbType" })
   targetDbType?: TargetDbTypeEnum;
 
-  @Metadata({ data: "json, name=Username" })
+  @SpeakeasyMetadata({ data: "json, name=Username" })
   username?: string;
 }

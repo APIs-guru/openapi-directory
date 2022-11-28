@@ -1,62 +1,63 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PackageSearchQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=activeStatus" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=activeStatus" })
   activeStatus?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=categoryId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=categoryId" })
   categoryId?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=endPrice" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=endPrice" })
   endPrice?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=gymId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=gymId" })
   gymId?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=orderBy" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=orderBy" })
   orderBy?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=requestSource" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=requestSource" })
   requestSource?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=searchText" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=searchText" })
   searchText?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=startpPrice" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=startpPrice" })
   startpPrice?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=type" })
   type?: string;
 }
 
 
 export class PackageSearchRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PackageSearchQueryParams;
 }
 
 
 export class PackageSearchResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiException?: shared.ApiException;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   defaultResponseDtoOfListOfPackageSearchDto?: shared.DefaultResponseDtoOfListOfPackageSearchDto;
 
-  @Metadata({ elemType: shared.DefaultResponseDtoOfPackageSearchDto })
+  @SpeakeasyMetadata({ elemType: shared.DefaultResponseDtoOfPackageSearchDto })
   defaultResponseDtoOfPackageSearchDtos?: shared.DefaultResponseDtoOfPackageSearchDto[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

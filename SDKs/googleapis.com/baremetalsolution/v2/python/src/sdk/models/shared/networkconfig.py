@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import intakevlanattachment
+from sdk import utils
+from . import *
 
 class NetworkConfigBandwidthEnum(str, Enum):
     BANDWIDTH_UNSPECIFIED = "BANDWIDTH_UNSPECIFIED"
@@ -26,15 +28,38 @@ class NetworkConfigTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class NetworkConfig:
-    bandwidth: Optional[NetworkConfigBandwidthEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bandwidth' }})
-    cidr: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cidr' }})
-    gcp_service: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gcpService' }})
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    jumbo_frames_enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'jumboFramesEnabled' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    service_cidr: Optional[NetworkConfigServiceCidrEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'serviceCidr' }})
-    type: Optional[NetworkConfigTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    user_note: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'userNote' }})
-    vlan_attachments: Optional[List[intakevlanattachment.IntakeVlanAttachment]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'vlanAttachments' }})
-    vlan_same_project: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'vlanSameProject' }})
+    r"""NetworkConfig
+    Configuration parameters for a new network.
+    """
+    
+    bandwidth: Optional[NetworkConfigBandwidthEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('bandwidth') }})
+    cidr: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cidr') }})
+    gcp_service: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('gcpService') }})
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    jumbo_frames_enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('jumboFramesEnabled') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    service_cidr: Optional[NetworkConfigServiceCidrEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('serviceCidr') }})
+    type: Optional[NetworkConfigTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    user_note: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('userNote') }})
+    vlan_attachments: Optional[List[IntakeVlanAttachment]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('vlanAttachments') }})
+    vlan_same_project: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('vlanSameProject') }})
+    
+
+@dataclass_json
+@dataclass
+class NetworkConfigInput:
+    r"""NetworkConfigInput
+    Configuration parameters for a new network.
+    """
+    
+    bandwidth: Optional[NetworkConfigBandwidthEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('bandwidth') }})
+    cidr: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cidr') }})
+    gcp_service: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('gcpService') }})
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    jumbo_frames_enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('jumboFramesEnabled') }})
+    service_cidr: Optional[NetworkConfigServiceCidrEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('serviceCidr') }})
+    type: Optional[NetworkConfigTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    user_note: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('userNote') }})
+    vlan_attachments: Optional[List[IntakeVlanAttachment]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('vlanAttachments') }})
+    vlan_same_project: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('vlanSameProject') }})
     

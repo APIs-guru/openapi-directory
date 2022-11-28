@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class PlusCommentsListPathParams:
-    activity_id: str = field(default=None, metadata={'path_param': { 'field_name': 'activityId', 'style': 'simple', 'explode': False }})
+    activity_id: str = field(metadata={'path_param': { 'field_name': 'activityId', 'style': 'simple', 'explode': False }})
     
 class PlusCommentsListSortOrderEnum(str, Enum):
     ASCENDING = "ascending"
@@ -28,14 +29,14 @@ class PlusCommentsListQueryParams:
 
 @dataclass
 class PlusCommentsListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class PlusCommentsListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -46,14 +47,14 @@ class PlusCommentsListSecurity:
 
 @dataclass
 class PlusCommentsListRequest:
-    path_params: PlusCommentsListPathParams = field(default=None)
-    query_params: PlusCommentsListQueryParams = field(default=None)
-    security: PlusCommentsListSecurity = field(default=None)
+    path_params: PlusCommentsListPathParams = field()
+    query_params: PlusCommentsListQueryParams = field()
+    security: PlusCommentsListSecurity = field()
     
 
 @dataclass
 class PlusCommentsListResponse:
+    content_type: str = field()
+    status_code: int = field()
     comment_feed: Optional[shared.CommentFeed] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,7 @@
 package shared
 
+// VoterInfoResponse
+// The result of a voter info lookup query.
 type VoterInfoResponse struct {
 	Contests         []Contest              `json:"contests,omitempty"`
 	DropOffLocations []PollingLocation      `json:"dropOffLocations,omitempty"`

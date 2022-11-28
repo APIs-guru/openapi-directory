@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DmsTransferSettings } from "./dmstransfersettings";
 import { DocDbSettings } from "./docdbsettings";
 import { DynamoDbSettings } from "./dynamodbsettings";
@@ -20,104 +20,105 @@ import { DmsSslModeValueEnum } from "./dmssslmodevalueenum";
 import { SybaseSettings } from "./sybasesettings";
 
 
+
 // ModifyEndpointMessage
 /** 
  * <p/>
 **/
 export class ModifyEndpointMessage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CertificateArn" })
+  @SpeakeasyMetadata({ data: "json, name=CertificateArn" })
   certificateArn?: string;
 
-  @Metadata({ data: "json, name=DatabaseName" })
+  @SpeakeasyMetadata({ data: "json, name=DatabaseName" })
   databaseName?: string;
 
-  @Metadata({ data: "json, name=DmsTransferSettings" })
+  @SpeakeasyMetadata({ data: "json, name=DmsTransferSettings" })
   dmsTransferSettings?: DmsTransferSettings;
 
-  @Metadata({ data: "json, name=DocDbSettings" })
+  @SpeakeasyMetadata({ data: "json, name=DocDbSettings" })
   docDbSettings?: DocDbSettings;
 
-  @Metadata({ data: "json, name=DynamoDbSettings" })
+  @SpeakeasyMetadata({ data: "json, name=DynamoDbSettings" })
   dynamoDbSettings?: DynamoDbSettings;
 
-  @Metadata({ data: "json, name=ElasticsearchSettings" })
+  @SpeakeasyMetadata({ data: "json, name=ElasticsearchSettings" })
   elasticsearchSettings?: ElasticsearchSettings;
 
-  @Metadata({ data: "json, name=EndpointArn" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointArn" })
   endpointArn: string;
 
-  @Metadata({ data: "json, name=EndpointIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointIdentifier" })
   endpointIdentifier?: string;
 
-  @Metadata({ data: "json, name=EndpointType" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointType" })
   endpointType?: ReplicationEndpointTypeValueEnum;
 
-  @Metadata({ data: "json, name=EngineName" })
+  @SpeakeasyMetadata({ data: "json, name=EngineName" })
   engineName?: string;
 
-  @Metadata({ data: "json, name=ExactSettings" })
+  @SpeakeasyMetadata({ data: "json, name=ExactSettings" })
   exactSettings?: boolean;
 
-  @Metadata({ data: "json, name=ExternalTableDefinition" })
+  @SpeakeasyMetadata({ data: "json, name=ExternalTableDefinition" })
   externalTableDefinition?: string;
 
-  @Metadata({ data: "json, name=ExtraConnectionAttributes" })
+  @SpeakeasyMetadata({ data: "json, name=ExtraConnectionAttributes" })
   extraConnectionAttributes?: string;
 
-  @Metadata({ data: "json, name=IBMDb2Settings" })
+  @SpeakeasyMetadata({ data: "json, name=IBMDb2Settings" })
   ibmDb2Settings?: IbmDb2Settings;
 
-  @Metadata({ data: "json, name=KafkaSettings" })
+  @SpeakeasyMetadata({ data: "json, name=KafkaSettings" })
   kafkaSettings?: KafkaSettings;
 
-  @Metadata({ data: "json, name=KinesisSettings" })
+  @SpeakeasyMetadata({ data: "json, name=KinesisSettings" })
   kinesisSettings?: KinesisSettings;
 
-  @Metadata({ data: "json, name=MicrosoftSQLServerSettings" })
+  @SpeakeasyMetadata({ data: "json, name=MicrosoftSQLServerSettings" })
   microsoftSqlServerSettings?: MicrosoftSqlServerSettings;
 
-  @Metadata({ data: "json, name=MongoDbSettings" })
+  @SpeakeasyMetadata({ data: "json, name=MongoDbSettings" })
   mongoDbSettings?: MongoDbSettings;
 
-  @Metadata({ data: "json, name=MySQLSettings" })
+  @SpeakeasyMetadata({ data: "json, name=MySQLSettings" })
   mySqlSettings?: MySqlSettings;
 
-  @Metadata({ data: "json, name=NeptuneSettings" })
+  @SpeakeasyMetadata({ data: "json, name=NeptuneSettings" })
   neptuneSettings?: NeptuneSettings;
 
-  @Metadata({ data: "json, name=OracleSettings" })
+  @SpeakeasyMetadata({ data: "json, name=OracleSettings" })
   oracleSettings?: OracleSettings;
 
-  @Metadata({ data: "json, name=Password" })
+  @SpeakeasyMetadata({ data: "json, name=Password" })
   password?: string;
 
-  @Metadata({ data: "json, name=Port" })
+  @SpeakeasyMetadata({ data: "json, name=Port" })
   port?: number;
 
-  @Metadata({ data: "json, name=PostgreSQLSettings" })
+  @SpeakeasyMetadata({ data: "json, name=PostgreSQLSettings" })
   postgreSqlSettings?: PostgreSqlSettings;
 
-  @Metadata({ data: "json, name=RedisSettings" })
+  @SpeakeasyMetadata({ data: "json, name=RedisSettings" })
   redisSettings?: RedisSettings;
 
-  @Metadata({ data: "json, name=RedshiftSettings" })
+  @SpeakeasyMetadata({ data: "json, name=RedshiftSettings" })
   redshiftSettings?: RedshiftSettings;
 
-  @Metadata({ data: "json, name=S3Settings" })
+  @SpeakeasyMetadata({ data: "json, name=S3Settings" })
   s3Settings?: S3Settings;
 
-  @Metadata({ data: "json, name=ServerName" })
+  @SpeakeasyMetadata({ data: "json, name=ServerName" })
   serverName?: string;
 
-  @Metadata({ data: "json, name=ServiceAccessRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceAccessRoleArn" })
   serviceAccessRoleArn?: string;
 
-  @Metadata({ data: "json, name=SslMode" })
+  @SpeakeasyMetadata({ data: "json, name=SslMode" })
   sslMode?: DmsSslModeValueEnum;
 
-  @Metadata({ data: "json, name=SybaseSettings" })
+  @SpeakeasyMetadata({ data: "json, name=SybaseSettings" })
   sybaseSettings?: SybaseSettings;
 
-  @Metadata({ data: "json, name=Username" })
+  @SpeakeasyMetadata({ data: "json, name=Username" })
   username?: string;
 }

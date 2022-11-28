@@ -13,3 +13,9 @@ type Blob struct {
 	UploadURL        *string `json:"upload_url,omitempty"`
 	URL              *string `json:"url,omitempty"`
 }
+
+type BlobInput struct {
+	BlobKey     *string `json:"blob_key,omitempty"`
+	ContentType *string `json:"content_type,omitempty"`
+	Filename    *string `json:"filename,omitempty"`
+}

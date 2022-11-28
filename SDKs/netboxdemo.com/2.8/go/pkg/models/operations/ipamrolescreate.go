@@ -5,7 +5,7 @@ import (
 )
 
 type IpamRolesCreateRequest struct {
-	Request shared.Role `request:"mediaType=application/json"`
+	Request shared.RoleInput `request:"mediaType=application/json"`
 }
 
 type IpamRolesCreateResponse struct {

@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CustomersGetQuotesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=itemId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=itemId" })
   itemId: number;
 }
 
 
 export class CustomersGetQuotesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CustomersGetQuotesPathParams;
 }
 
 
 export class CustomersGetQuotesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.QuoteDto })
+  @SpeakeasyMetadata({ elemType: shared.QuoteDto })
   quoteDtos?: shared.QuoteDto[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

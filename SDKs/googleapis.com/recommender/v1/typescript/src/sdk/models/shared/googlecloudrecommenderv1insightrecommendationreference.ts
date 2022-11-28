@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudRecommenderV1InsightRecommendationReference
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Reference to an associated recommendation.
 **/
 export class GoogleCloudRecommenderV1InsightRecommendationReference extends SpeakeasyBase {
-  @Metadata({ data: "json, name=recommendation" })
+  @SpeakeasyMetadata({ data: "json, name=recommendation" })
   recommendation?: string;
 }

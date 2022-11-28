@@ -1,6 +1,7 @@
 
 
+
 export enum NodeDeleteModeEnum {
-    Move = "move"
-,    Erase = "erase"
+    Move = "move",
+    Erase = "erase"
 }

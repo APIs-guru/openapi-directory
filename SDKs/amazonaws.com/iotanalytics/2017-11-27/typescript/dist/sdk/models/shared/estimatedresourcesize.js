@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // EstimatedResourceSize
 /**
  * The estimated size of the resource.
@@ -33,11 +33,11 @@ var EstimatedResourceSize = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=estimatedOn" }),
+        SpeakeasyMetadata({ data: "json, name=estimatedOn" }),
         __metadata("design:type", Date)
     ], EstimatedResourceSize.prototype, "estimatedOn", void 0);
     __decorate([
-        Metadata({ data: "json, name=estimatedSizeInBytes" }),
+        SpeakeasyMetadata({ data: "json, name=estimatedSizeInBytes" }),
         __metadata("design:type", Number)
     ], EstimatedResourceSize.prototype, "estimatedSizeInBytes", void 0);
     return EstimatedResourceSize;

@@ -31,7 +31,7 @@ type AndroidpublisherSystemapksVariantsCreateSecurity struct {
 type AndroidpublisherSystemapksVariantsCreateRequest struct {
 	PathParams  AndroidpublisherSystemapksVariantsCreatePathParams
 	QueryParams AndroidpublisherSystemapksVariantsCreateQueryParams
-	Request     *shared.Variant `request:"mediaType=application/json"`
+	Request     *shared.VariantInput `request:"mediaType=application/json"`
 	Security    AndroidpublisherSystemapksVariantsCreateSecurity
 }
 

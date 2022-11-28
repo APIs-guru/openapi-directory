@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GoogleCloudIdentitytoolkitV2StartMfaPhoneResponseInfo
 /**
  * Phone Verification info for a StartMfa response.
@@ -33,7 +33,7 @@ var GoogleCloudIdentitytoolkitV2StartMfaPhoneResponseInfo = /** @class */ (funct
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=sessionInfo" }),
+        SpeakeasyMetadata({ data: "json, name=sessionInfo" }),
         __metadata("design:type", String)
     ], GoogleCloudIdentitytoolkitV2StartMfaPhoneResponseInfo.prototype, "sessionInfo", void 0);
     return GoogleCloudIdentitytoolkitV2StartMfaPhoneResponseInfo;

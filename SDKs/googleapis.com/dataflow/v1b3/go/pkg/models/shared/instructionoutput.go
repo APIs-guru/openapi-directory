@@ -1,5 +1,7 @@
 package shared
 
+// InstructionOutput
+// An output of an instruction.
 type InstructionOutput struct {
 	Codec               map[string]interface{} `json:"codec,omitempty"`
 	Name                *string                `json:"name,omitempty"`

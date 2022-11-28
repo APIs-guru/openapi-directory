@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Segment
+// JSON template for an Analytics segment.
 type Segment struct {
 	Created    *time.Time `json:"created,omitempty"`
 	Definition *string    `json:"definition,omitempty"`

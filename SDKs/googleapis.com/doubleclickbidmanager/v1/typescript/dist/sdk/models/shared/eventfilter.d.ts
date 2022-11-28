@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { PathQueryOptionsFilter } from "./pathqueryoptionsfilter";
 /**
  * Defines the type of filter to be applied to the path, a DV360 event dimension filter.

@@ -10,6 +10,8 @@ const (
 	VideoPlayerSizeTargetingOptionDetailsVideoPlayerSizeEnumVideoPlayerSizeUnknown     VideoPlayerSizeTargetingOptionDetailsVideoPlayerSizeEnum = "VIDEO_PLAYER_SIZE_UNKNOWN"
 )
 
+// VideoPlayerSizeTargetingOptionDetails
+// Represents a targetable video player size. This will be populated in the video_player_size_details field when targeting_type is `TARGETING_TYPE_VIDEO_PLAYER_SIZE`.
 type VideoPlayerSizeTargetingOptionDetails struct {
 	VideoPlayerSize *VideoPlayerSizeTargetingOptionDetailsVideoPlayerSizeEnum `json:"videoPlayerSize,omitempty"`
 }

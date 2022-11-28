@@ -1,5 +1,7 @@
 package shared
 
+// ProcessorBankTransferCreateRequest
+// ProcessorBankTransferCreateRequest defines the request schema for `/processor/bank_transfer/create`
 type ProcessorBankTransferCreateRequest struct {
 	AchClass             *AchClassEnum           `json:"ach_class,omitempty"`
 	Amount               string                  `json:"amount"`

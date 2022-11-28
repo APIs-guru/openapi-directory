@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ConfigTelnet extends SpeakeasyBase {
-  @Metadata({ data: "json, name=keymap" })
+  @SpeakeasyMetadata({ data: "json, name=keymap" })
   keymap?: string;
 
-  @Metadata({ data: "json, name=paging_prompt" })
+  @SpeakeasyMetadata({ data: "json, name=paging_prompt" })
   pagingPrompt?: string;
 
-  @Metadata({ data: "json, name=port" })
+  @SpeakeasyMetadata({ data: "json, name=port" })
   port?: number;
 
-  @Metadata({ data: "json, name=prompt" })
+  @SpeakeasyMetadata({ data: "json, name=prompt" })
   prompt?: string;
 
-  @Metadata({ data: "json, name=rule" })
+  @SpeakeasyMetadata({ data: "json, name=rule" })
   rule?: string;
 
-  @Metadata({ data: "json, name=userdb" })
+  @SpeakeasyMetadata({ data: "json, name=userdb" })
   userdb?: string;
 }

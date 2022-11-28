@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { PubsubEvent } from "./pubsubevent";
 /**
  * Either a PubsubMessage or a truncation event. One of these two must be populated.

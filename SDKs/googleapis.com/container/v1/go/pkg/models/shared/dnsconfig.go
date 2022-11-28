@@ -15,6 +15,8 @@ const (
 	DNSConfigClusterDNSScopeEnumVpcScope            DNSConfigClusterDNSScopeEnum = "VPC_SCOPE"
 )
 
+// DNSConfig
+// DNSConfig contains the desired set of options for configuring clusterDNS.
 type DNSConfig struct {
 	ClusterDNS       *DNSConfigClusterDNSEnum      `json:"clusterDns,omitempty"`
 	ClusterDNSDomain *string                       `json:"clusterDnsDomain,omitempty"`

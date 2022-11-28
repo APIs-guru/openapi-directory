@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AccessLevelFilterKeyEnum } from "./accesslevelfilterkeyenum";
 /**
  * The access level to use to filter results.

@@ -1,5 +1,7 @@
 package shared
 
+// DeviceInstance
+// Represents the device instance.
 type DeviceInstance struct {
 	Arn             *string             `json:"arn,omitempty"`
 	DeviceArn       *string             `json:"deviceArn,omitempty"`

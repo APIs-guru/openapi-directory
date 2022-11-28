@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConfigManagementErrorResource } from "./configmanagementerrorresource";
+
 
 
 // ConfigManagementSyncError
@@ -8,12 +8,12 @@ import { ConfigManagementErrorResource } from "./configmanagementerrorresource";
  * An ACM created error representing a problem syncing configurations
 **/
 export class ConfigManagementSyncError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: string;
 
-  @Metadata({ data: "json, name=errorMessage" })
+  @SpeakeasyMetadata({ data: "json, name=errorMessage" })
   errorMessage?: string;
 
-  @Metadata({ data: "json, name=errorResources", elemType: shared.ConfigManagementErrorResource })
+  @SpeakeasyMetadata({ data: "json, name=errorResources", elemType: ConfigManagementErrorResource })
   errorResources?: ConfigManagementErrorResource[];
 }

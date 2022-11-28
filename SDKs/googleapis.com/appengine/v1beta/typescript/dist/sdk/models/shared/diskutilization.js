@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // DiskUtilization
 /**
  * Target scaling by disk usage. Only applicable in the App Engine flexible environment.
@@ -33,19 +33,19 @@ var DiskUtilization = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=targetReadBytesPerSecond" }),
+        SpeakeasyMetadata({ data: "json, name=targetReadBytesPerSecond" }),
         __metadata("design:type", Number)
     ], DiskUtilization.prototype, "targetReadBytesPerSecond", void 0);
     __decorate([
-        Metadata({ data: "json, name=targetReadOpsPerSecond" }),
+        SpeakeasyMetadata({ data: "json, name=targetReadOpsPerSecond" }),
         __metadata("design:type", Number)
     ], DiskUtilization.prototype, "targetReadOpsPerSecond", void 0);
     __decorate([
-        Metadata({ data: "json, name=targetWriteBytesPerSecond" }),
+        SpeakeasyMetadata({ data: "json, name=targetWriteBytesPerSecond" }),
         __metadata("design:type", Number)
     ], DiskUtilization.prototype, "targetWriteBytesPerSecond", void 0);
     __decorate([
-        Metadata({ data: "json, name=targetWriteOpsPerSecond" }),
+        SpeakeasyMetadata({ data: "json, name=targetWriteOpsPerSecond" }),
         __metadata("design:type", Number)
     ], DiskUtilization.prototype, "targetWriteOpsPerSecond", void 0);
     return DiskUtilization;

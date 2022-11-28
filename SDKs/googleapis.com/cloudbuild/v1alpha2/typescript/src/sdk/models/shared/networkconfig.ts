@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // NetworkConfig
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Network describes the network configuration for a `WorkerPool`.
 **/
 export class NetworkConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=peeredNetwork" })
+  @SpeakeasyMetadata({ data: "json, name=peeredNetwork" })
   peeredNetwork?: string;
 }

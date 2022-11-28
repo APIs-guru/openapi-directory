@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import apnsvoipsandboxchannelresponse
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DeleteApnsVoipSandboxChannelResponse:
-    apns_voip_sandbox_channel_response: apnsvoipsandboxchannelresponse.ApnsVoipSandboxChannelResponse = field(default=None, metadata={'dataclasses_json': { 'field_name': 'APNSVoipSandboxChannelResponse' }})
+    apns_voip_sandbox_channel_response: ApnsVoipSandboxChannelResponse = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('APNSVoipSandboxChannelResponse') }})
     

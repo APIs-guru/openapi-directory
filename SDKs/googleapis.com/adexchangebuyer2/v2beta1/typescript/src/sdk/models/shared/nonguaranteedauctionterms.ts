@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PricePerBuyer } from "./priceperbuyer";
+
 
 
 // NonGuaranteedAuctionTerms
@@ -8,9 +8,9 @@ import { PricePerBuyer } from "./priceperbuyer";
  * Terms for Private Auctions. Note that Private Auctions can be created only by the seller, but they can be returned in a get or list request.
 **/
 export class NonGuaranteedAuctionTerms extends SpeakeasyBase {
-  @Metadata({ data: "json, name=autoOptimizePrivateAuction" })
+  @SpeakeasyMetadata({ data: "json, name=autoOptimizePrivateAuction" })
   autoOptimizePrivateAuction?: boolean;
 
-  @Metadata({ data: "json, name=reservePricesPerBuyer", elemType: shared.PricePerBuyer })
+  @SpeakeasyMetadata({ data: "json, name=reservePricesPerBuyer", elemType: PricePerBuyer })
   reservePricesPerBuyer?: PricePerBuyer[];
 }

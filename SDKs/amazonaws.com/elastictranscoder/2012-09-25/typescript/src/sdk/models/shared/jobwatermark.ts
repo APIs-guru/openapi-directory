@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Encryption } from "./encryption";
+
 
 
 // JobWatermark
@@ -7,12 +8,12 @@ import { Encryption } from "./encryption";
  * Watermarks can be in .png or .jpg format. If you want to display a watermark that is not rectangular, use the .png format, which supports transparency.
 **/
 export class JobWatermark extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Encryption" })
+  @SpeakeasyMetadata({ data: "json, name=Encryption" })
   encryption?: Encryption;
 
-  @Metadata({ data: "json, name=InputKey" })
+  @SpeakeasyMetadata({ data: "json, name=InputKey" })
   inputKey?: string;
 
-  @Metadata({ data: "json, name=PresetWatermarkId" })
+  @SpeakeasyMetadata({ data: "json, name=PresetWatermarkId" })
   presetWatermarkId?: string;
 }

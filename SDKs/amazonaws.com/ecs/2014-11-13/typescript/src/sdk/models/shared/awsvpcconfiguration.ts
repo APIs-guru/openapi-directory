@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AssignPublicIpEnum } from "./assignpublicipenum";
+
 
 
 // AwsVpcConfiguration
@@ -7,12 +8,12 @@ import { AssignPublicIpEnum } from "./assignpublicipenum";
  * An object representing the networking details for a task or service.
 **/
 export class AwsVpcConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assignPublicIp" })
+  @SpeakeasyMetadata({ data: "json, name=assignPublicIp" })
   assignPublicIp?: AssignPublicIpEnum;
 
-  @Metadata({ data: "json, name=securityGroups" })
+  @SpeakeasyMetadata({ data: "json, name=securityGroups" })
   securityGroups?: string[];
 
-  @Metadata({ data: "json, name=subnets" })
+  @SpeakeasyMetadata({ data: "json, name=subnets" })
   subnets: string[];
 }

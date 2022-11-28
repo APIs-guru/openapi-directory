@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetReportDefinitionFromApplicationPathParams = /** @class */ (function (_super) {
     __extends(GetReportDefinitionFromApplicationPathParams, _super);
@@ -30,7 +30,7 @@ var GetReportDefinitionFromApplicationPathParams = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=ReportDefinitionId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ReportDefinitionId" }),
         __metadata("design:type", String)
     ], GetReportDefinitionFromApplicationPathParams.prototype, "reportDefinitionId", void 0);
     return GetReportDefinitionFromApplicationPathParams;
@@ -42,11 +42,11 @@ var GetReportDefinitionFromApplicationHeaders = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
         __metadata("design:type", String)
     ], GetReportDefinitionFromApplicationHeaders.prototype, "apiVersion", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Authorization" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" }),
         __metadata("design:type", String)
     ], GetReportDefinitionFromApplicationHeaders.prototype, "authorization", void 0);
     return GetReportDefinitionFromApplicationHeaders;
@@ -58,11 +58,11 @@ var GetReportDefinitionFromApplicationRequest = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetReportDefinitionFromApplicationPathParams)
     ], GetReportDefinitionFromApplicationRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetReportDefinitionFromApplicationHeaders)
     ], GetReportDefinitionFromApplicationRequest.prototype, "headers", void 0);
     return GetReportDefinitionFromApplicationRequest;
@@ -74,19 +74,19 @@ var GetReportDefinitionFromApplicationResponse = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetReportDefinitionFromApplicationResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorModel)
     ], GetReportDefinitionFromApplicationResponse.prototype, "errorModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ReportDefinition)
     ], GetReportDefinitionFromApplicationResponse.prototype, "reportDefinition", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetReportDefinitionFromApplicationResponse.prototype, "statusCode", void 0);
     return GetReportDefinitionFromApplicationResponse;

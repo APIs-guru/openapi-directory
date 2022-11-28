@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SchemeApikey extends SpeakeasyBase {
-  @Metadata({ data: "security, name=apikey" })
+  @SpeakeasyMetadata({ data: "security, name=apikey" })
   apiKey: string;
 }

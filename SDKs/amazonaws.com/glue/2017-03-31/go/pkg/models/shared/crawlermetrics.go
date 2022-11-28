@@ -1,5 +1,7 @@
 package shared
 
+// CrawlerMetrics
+// Metrics for a specified crawler.
 type CrawlerMetrics struct {
 	CrawlerName          *string  `json:"CrawlerName,omitempty"`
 	LastRuntimeSeconds   *float64 `json:"LastRuntimeSeconds,omitempty"`

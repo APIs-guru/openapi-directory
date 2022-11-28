@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GitStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ahead" })
+  @SpeakeasyMetadata({ data: "json, name=ahead" })
   ahead?: number;
 
-  @Metadata({ data: "json, name=behind" })
+  @SpeakeasyMetadata({ data: "json, name=behind" })
   behind?: number;
 
-  @Metadata({ data: "json, name=branch" })
+  @SpeakeasyMetadata({ data: "json, name=branch" })
   branch?: string;
 
-  @Metadata({ data: "json, name=commit" })
+  @SpeakeasyMetadata({ data: "json, name=commit" })
   commit?: string;
 
-  @Metadata({ data: "json, name=hasUncommittedChanges" })
+  @SpeakeasyMetadata({ data: "json, name=hasUncommittedChanges" })
   hasUncommittedChanges?: boolean;
 
-  @Metadata({ data: "json, name=hasUnpushedChanges" })
+  @SpeakeasyMetadata({ data: "json, name=hasUnpushedChanges" })
   hasUnpushedChanges?: boolean;
 }

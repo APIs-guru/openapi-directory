@@ -1,5 +1,7 @@
 package shared
 
+// TaskOverride
+// The overrides associated with a task.
 type TaskOverride struct {
 	ContainerOverrides            []ContainerOverride            `json:"containerOverrides,omitempty"`
 	CPU                           *string                        `json:"cpu,omitempty"`

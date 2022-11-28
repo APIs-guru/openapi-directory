@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // BatchPutGeofenceSuccess
 /**
  * Contains a summary of each geofence that was successfully stored in a given geofence collection.
@@ -33,15 +33,15 @@ var BatchPutGeofenceSuccess = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CreateTime" }),
+        SpeakeasyMetadata({ data: "json, name=CreateTime" }),
         __metadata("design:type", Date)
     ], BatchPutGeofenceSuccess.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=GeofenceId" }),
+        SpeakeasyMetadata({ data: "json, name=GeofenceId" }),
         __metadata("design:type", String)
     ], BatchPutGeofenceSuccess.prototype, "geofenceId", void 0);
     __decorate([
-        Metadata({ data: "json, name=UpdateTime" }),
+        SpeakeasyMetadata({ data: "json, name=UpdateTime" }),
         __metadata("design:type", Date)
     ], BatchPutGeofenceSuccess.prototype, "updateTime", void 0);
     return BatchPutGeofenceSuccess;

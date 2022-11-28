@@ -12,6 +12,8 @@ const (
 	HparamTuningTrialStatusEnumStoppedEarly           HparamTuningTrialStatusEnum = "STOPPED_EARLY"
 )
 
+// HparamTuningTrial
+// Training info of a trial in [hyperparameter tuning](/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-hp-tuning-overview) models.
 type HparamTuningTrial struct {
 	EndTimeMs                     *string                      `json:"endTimeMs,omitempty"`
 	ErrorMessage                  *string                      `json:"errorMessage,omitempty"`

@@ -1,10 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from dataclasses_json import dataclass_json
-from . import journeyresponse
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateJourneyResponse:
-    journey_response: journeyresponse.JourneyResponse = field(default=None, metadata={'dataclasses_json': { 'field_name': 'JourneyResponse' }})
+    journey_response: JourneyResponse = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('JourneyResponse') }})
     

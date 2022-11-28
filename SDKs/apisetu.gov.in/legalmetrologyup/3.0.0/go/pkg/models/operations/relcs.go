@@ -27,11 +27,6 @@ type RelcsSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type RelcsRequest struct {
-	Request  *RelcsRequestBody `request:"mediaType=application/json"`
-	Security RelcsSecurity
-}
-
 type Relcs400ApplicationJSONErrorEnum string
 
 const (
@@ -161,6 +156,11 @@ const (
 type Relcs504ApplicationJSON struct {
 	Error            *Relcs504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Relcs504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type RelcsRequest struct {
+	Request  *RelcsRequestBody `request:"mediaType=application/json"`
+	Security RelcsSecurity
 }
 
 type RelcsResponse struct {

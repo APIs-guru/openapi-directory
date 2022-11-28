@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  *  Represents an element of a leg within a route. A step contains instructions for how to move to the next step in the leg.
 **/

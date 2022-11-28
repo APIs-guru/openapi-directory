@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StageTransitionTypeEnum } from "./stagetransitiontypeenum";
+
 
 
 // DisableStageTransitionInput
@@ -7,15 +8,15 @@ import { StageTransitionTypeEnum } from "./stagetransitiontypeenum";
  * Represents the input of a <code>DisableStageTransition</code> action.
 **/
 export class DisableStageTransitionInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pipelineName" })
+  @SpeakeasyMetadata({ data: "json, name=pipelineName" })
   pipelineName: string;
 
-  @Metadata({ data: "json, name=reason" })
+  @SpeakeasyMetadata({ data: "json, name=reason" })
   reason: string;
 
-  @Metadata({ data: "json, name=stageName" })
+  @SpeakeasyMetadata({ data: "json, name=stageName" })
   stageName: string;
 
-  @Metadata({ data: "json, name=transitionType" })
+  @SpeakeasyMetadata({ data: "json, name=transitionType" })
   transitionType: StageTransitionTypeEnum;
 }

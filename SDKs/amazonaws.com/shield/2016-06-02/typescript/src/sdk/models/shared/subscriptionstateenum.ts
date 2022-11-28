@@ -1,6 +1,7 @@
 
 
+
 export enum SubscriptionStateEnum {
-    Active = "ACTIVE"
-,    Inactive = "INACTIVE"
+    Active = "ACTIVE",
+    Inactive = "INACTIVE"
 }

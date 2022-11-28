@@ -22,9 +22,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { InstanceBlockDeviceMapping } from "./instanceblockdevicemapping";
 import { CpuOptions } from "./cpuoptions";
+import { SecurityGroupIdentifier } from "./securitygroupidentifier";
 import { InstanceState } from "./instancestate";
 // Instance
 /**
@@ -36,55 +37,55 @@ var Instance = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=amiLaunchIndex" }),
+        SpeakeasyMetadata({ data: "json, name=amiLaunchIndex" }),
         __metadata("design:type", Number)
     ], Instance.prototype, "amiLaunchIndex", void 0);
     __decorate([
-        Metadata({ data: "json, name=blockDeviceMappings", elemType: shared.InstanceBlockDeviceMapping }),
+        SpeakeasyMetadata({ data: "json, name=blockDeviceMappings", elemType: InstanceBlockDeviceMapping }),
         __metadata("design:type", Array)
     ], Instance.prototype, "blockDeviceMappings", void 0);
     __decorate([
-        Metadata({ data: "json, name=cpuOptions" }),
+        SpeakeasyMetadata({ data: "json, name=cpuOptions" }),
         __metadata("design:type", CpuOptions)
     ], Instance.prototype, "cpuOptions", void 0);
     __decorate([
-        Metadata({ data: "json, name=createdAt" }),
+        SpeakeasyMetadata({ data: "json, name=createdAt" }),
         __metadata("design:type", Date)
     ], Instance.prototype, "createdAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=imageId" }),
+        SpeakeasyMetadata({ data: "json, name=imageId" }),
         __metadata("design:type", String)
     ], Instance.prototype, "imageId", void 0);
     __decorate([
-        Metadata({ data: "json, name=instanceId" }),
+        SpeakeasyMetadata({ data: "json, name=instanceId" }),
         __metadata("design:type", String)
     ], Instance.prototype, "instanceId", void 0);
     __decorate([
-        Metadata({ data: "json, name=instanceType" }),
+        SpeakeasyMetadata({ data: "json, name=instanceType" }),
         __metadata("design:type", String)
     ], Instance.prototype, "instanceType", void 0);
     __decorate([
-        Metadata({ data: "json, name=privateIpAddress" }),
+        SpeakeasyMetadata({ data: "json, name=privateIpAddress" }),
         __metadata("design:type", String)
     ], Instance.prototype, "privateIpAddress", void 0);
     __decorate([
-        Metadata({ data: "json, name=publicIpAddress" }),
+        SpeakeasyMetadata({ data: "json, name=publicIpAddress" }),
         __metadata("design:type", String)
     ], Instance.prototype, "publicIpAddress", void 0);
     __decorate([
-        Metadata({ data: "json, name=rootDeviceName" }),
+        SpeakeasyMetadata({ data: "json, name=rootDeviceName" }),
         __metadata("design:type", String)
     ], Instance.prototype, "rootDeviceName", void 0);
     __decorate([
-        Metadata({ data: "json, name=securityGroups", elemType: shared.SecurityGroupIdentifier }),
+        SpeakeasyMetadata({ data: "json, name=securityGroups", elemType: SecurityGroupIdentifier }),
         __metadata("design:type", Array)
     ], Instance.prototype, "securityGroups", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", InstanceState)
     ], Instance.prototype, "state", void 0);
     __decorate([
-        Metadata({ data: "json, name=updatedAt" }),
+        SpeakeasyMetadata({ data: "json, name=updatedAt" }),
         __metadata("design:type", Date)
     ], Instance.prototype, "updatedAt", void 0);
     return Instance;

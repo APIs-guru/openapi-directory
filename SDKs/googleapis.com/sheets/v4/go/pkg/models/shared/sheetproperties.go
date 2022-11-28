@@ -9,6 +9,8 @@ const (
 	SheetPropertiesSheetTypeEnumDataSource           SheetPropertiesSheetTypeEnum = "DATA_SOURCE"
 )
 
+// SheetProperties
+// Properties of a sheet.
 type SheetProperties struct {
 	DataSourceSheetProperties *DataSourceSheetProperties    `json:"dataSourceSheetProperties,omitempty"`
 	GridProperties            *GridProperties               `json:"gridProperties,omitempty"`

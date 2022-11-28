@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ChangeLog
@@ -6,45 +7,45 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes a change that a user has made to a resource.
 **/
 export class ChangeLog extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action?: string;
 
-  @Metadata({ data: "json, name=changeTime" })
+  @SpeakeasyMetadata({ data: "json, name=changeTime" })
   changeTime?: Date;
 
-  @Metadata({ data: "json, name=fieldName" })
+  @SpeakeasyMetadata({ data: "json, name=fieldName" })
   fieldName?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=newValue" })
+  @SpeakeasyMetadata({ data: "json, name=newValue" })
   newValue?: string;
 
-  @Metadata({ data: "json, name=objectId" })
+  @SpeakeasyMetadata({ data: "json, name=objectId" })
   objectId?: string;
 
-  @Metadata({ data: "json, name=objectType" })
+  @SpeakeasyMetadata({ data: "json, name=objectType" })
   objectType?: string;
 
-  @Metadata({ data: "json, name=oldValue" })
+  @SpeakeasyMetadata({ data: "json, name=oldValue" })
   oldValue?: string;
 
-  @Metadata({ data: "json, name=subaccountId" })
+  @SpeakeasyMetadata({ data: "json, name=subaccountId" })
   subaccountId?: string;
 
-  @Metadata({ data: "json, name=transactionId" })
+  @SpeakeasyMetadata({ data: "json, name=transactionId" })
   transactionId?: string;
 
-  @Metadata({ data: "json, name=userProfileId" })
+  @SpeakeasyMetadata({ data: "json, name=userProfileId" })
   userProfileId?: string;
 
-  @Metadata({ data: "json, name=userProfileName" })
+  @SpeakeasyMetadata({ data: "json, name=userProfileName" })
   userProfileName?: string;
 }

@@ -4,6 +4,9 @@ import (
 	"time"
 )
 
+// PackageDto
+// The PackageDTO Class.
+// Contains relevant fields of Package DTO by masking actual Package entity's fields in application.
 type PackageDto struct {
 	AddOns                         []PackageItemDto `json:"addOns,omitempty"`
 	AddonFee                       *float64         `json:"addonFee,omitempty"`

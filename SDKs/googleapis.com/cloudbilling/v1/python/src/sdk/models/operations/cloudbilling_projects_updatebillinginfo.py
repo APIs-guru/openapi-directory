@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudbillingProjectsUpdateBillingInfoPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +29,14 @@ class CloudbillingProjectsUpdateBillingInfoQueryParams:
 
 @dataclass
 class CloudbillingProjectsUpdateBillingInfoSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudbillingProjectsUpdateBillingInfoSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +47,15 @@ class CloudbillingProjectsUpdateBillingInfoSecurity:
 
 @dataclass
 class CloudbillingProjectsUpdateBillingInfoRequest:
-    path_params: CloudbillingProjectsUpdateBillingInfoPathParams = field(default=None)
-    query_params: CloudbillingProjectsUpdateBillingInfoQueryParams = field(default=None)
+    path_params: CloudbillingProjectsUpdateBillingInfoPathParams = field()
+    query_params: CloudbillingProjectsUpdateBillingInfoQueryParams = field()
+    security: CloudbillingProjectsUpdateBillingInfoSecurity = field()
     request: Optional[shared.ProjectBillingInfo] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: CloudbillingProjectsUpdateBillingInfoSecurity = field(default=None)
     
 
 @dataclass
 class CloudbillingProjectsUpdateBillingInfoResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     project_billing_info: Optional[shared.ProjectBillingInfo] = field(default=None)
-    status_code: int = field(default=None)
     

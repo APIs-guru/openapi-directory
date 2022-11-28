@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ScanPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=baudrate" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=baudrate" })
   baudrate: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=device" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=device" })
   device: string;
 }
 
 
 export class ScanRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ScanPathParams;
 }
 
 
 export class ScanResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   slaves?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   textError?: string;
 }

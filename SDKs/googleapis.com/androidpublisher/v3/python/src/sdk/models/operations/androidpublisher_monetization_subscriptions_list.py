@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AndroidpublisherMonetizationSubscriptionsListPathParams:
-    package_name: str = field(default=None, metadata={'path_param': { 'field_name': 'packageName', 'style': 'simple', 'explode': False }})
+    package_name: str = field(metadata={'path_param': { 'field_name': 'packageName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,20 +29,20 @@ class AndroidpublisherMonetizationSubscriptionsListQueryParams:
 
 @dataclass
 class AndroidpublisherMonetizationSubscriptionsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AndroidpublisherMonetizationSubscriptionsListRequest:
-    path_params: AndroidpublisherMonetizationSubscriptionsListPathParams = field(default=None)
-    query_params: AndroidpublisherMonetizationSubscriptionsListQueryParams = field(default=None)
-    security: AndroidpublisherMonetizationSubscriptionsListSecurity = field(default=None)
+    path_params: AndroidpublisherMonetizationSubscriptionsListPathParams = field()
+    query_params: AndroidpublisherMonetizationSubscriptionsListQueryParams = field()
+    security: AndroidpublisherMonetizationSubscriptionsListSecurity = field()
     
 
 @dataclass
 class AndroidpublisherMonetizationSubscriptionsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_subscriptions_response: Optional[shared.ListSubscriptionsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

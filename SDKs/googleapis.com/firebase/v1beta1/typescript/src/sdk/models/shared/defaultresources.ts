@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DefaultResources
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The default resources associated with the Project.
 **/
 export class DefaultResources extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hostingSite" })
+  @SpeakeasyMetadata({ data: "json, name=hostingSite" })
   hostingSite?: string;
 
-  @Metadata({ data: "json, name=locationId" })
+  @SpeakeasyMetadata({ data: "json, name=locationId" })
   locationId?: string;
 
-  @Metadata({ data: "json, name=realtimeDatabaseInstance" })
+  @SpeakeasyMetadata({ data: "json, name=realtimeDatabaseInstance" })
   realtimeDatabaseInstance?: string;
 
-  @Metadata({ data: "json, name=storageBucket" })
+  @SpeakeasyMetadata({ data: "json, name=storageBucket" })
   storageBucket?: string;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnum;
 (function (GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnum) {
     GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnum["HashAlgorithmUnspecified"] = "HASH_ALGORITHM_UNSPECIFIED";
@@ -50,23 +50,23 @@ var GoogleCloudIdentitytoolkitAdminV2HashConfig = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=algorithm" }),
+        SpeakeasyMetadata({ data: "json, name=algorithm" }),
         __metadata("design:type", String)
     ], GoogleCloudIdentitytoolkitAdminV2HashConfig.prototype, "algorithm", void 0);
     __decorate([
-        Metadata({ data: "json, name=memoryCost" }),
+        SpeakeasyMetadata({ data: "json, name=memoryCost" }),
         __metadata("design:type", Number)
     ], GoogleCloudIdentitytoolkitAdminV2HashConfig.prototype, "memoryCost", void 0);
     __decorate([
-        Metadata({ data: "json, name=rounds" }),
+        SpeakeasyMetadata({ data: "json, name=rounds" }),
         __metadata("design:type", Number)
     ], GoogleCloudIdentitytoolkitAdminV2HashConfig.prototype, "rounds", void 0);
     __decorate([
-        Metadata({ data: "json, name=saltSeparator" }),
+        SpeakeasyMetadata({ data: "json, name=saltSeparator" }),
         __metadata("design:type", String)
     ], GoogleCloudIdentitytoolkitAdminV2HashConfig.prototype, "saltSeparator", void 0);
     __decorate([
-        Metadata({ data: "json, name=signerKey" }),
+        SpeakeasyMetadata({ data: "json, name=signerKey" }),
         __metadata("design:type", String)
     ], GoogleCloudIdentitytoolkitAdminV2HashConfig.prototype, "signerKey", void 0);
     return GoogleCloudIdentitytoolkitAdminV2HashConfig;

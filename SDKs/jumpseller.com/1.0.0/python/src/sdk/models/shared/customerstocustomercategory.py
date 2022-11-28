@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import customertocustomercategory
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CustomersToCustomerCategory:
-    customers: Optional[List[customertocustomercategory.CustomerToCustomerCategory]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'customers' }})
+    customers: Optional[List[CustomerToCustomerCategory]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('customers') }})
     

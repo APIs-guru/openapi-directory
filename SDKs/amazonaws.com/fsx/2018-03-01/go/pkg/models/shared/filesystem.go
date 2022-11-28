@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// FileSystem
+// A description of a specific Amazon FSx file system.
 type FileSystem struct {
 	AdministrativeActions []AdministrativeAction          `json:"AdministrativeActions,omitempty"`
 	CreationTime          *time.Time                      `json:"CreationTime,omitempty"`

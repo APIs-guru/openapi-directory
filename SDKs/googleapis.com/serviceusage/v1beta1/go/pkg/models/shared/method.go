@@ -7,6 +7,8 @@ const (
 	MethodSyntaxEnumSyntaxProto3 MethodSyntaxEnum = "SYNTAX_PROTO3"
 )
 
+// Method
+// Method represents a method of an API interface.
 type Method struct {
 	Name              *string           `json:"name,omitempty"`
 	Options           []Option          `json:"options,omitempty"`

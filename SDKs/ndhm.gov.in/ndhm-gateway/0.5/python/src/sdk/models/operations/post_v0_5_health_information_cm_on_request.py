@@ -5,26 +5,26 @@ from sdk.models import shared
 
 @dataclass
 class PostV05HealthInformationCmOnRequestHeaders:
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
-    x_hiu_id: str = field(default=None, metadata={'header': { 'field_name': 'X-HIU-ID', 'style': 'simple', 'explode': False }})
+    authorization: str = field(metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
+    x_hiu_id: str = field(metadata={'header': { 'field_name': 'X-HIU-ID', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class PostV05HealthInformationCmOnRequestRequests:
-    application_xml: bytes = field(default=None, metadata={'request': { 'media_type': 'application/xml' }})
+    application_xml: bytes = field(metadata={'request': { 'media_type': 'application/xml' }})
     hiu_health_information_request_response: Optional[shared.HiuHealthInformationRequestResponse] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PostV05HealthInformationCmOnRequestRequest:
-    headers: PostV05HealthInformationCmOnRequestHeaders = field(default=None)
-    request: PostV05HealthInformationCmOnRequestRequests = field(default=None)
+    headers: PostV05HealthInformationCmOnRequestHeaders = field()
+    request: PostV05HealthInformationCmOnRequestRequests = field()
     
 
 @dataclass
 class PostV05HealthInformationCmOnRequestResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

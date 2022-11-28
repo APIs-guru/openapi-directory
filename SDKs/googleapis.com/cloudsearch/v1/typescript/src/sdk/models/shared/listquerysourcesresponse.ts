@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { QuerySource } from "./querysource";
+
 
 
 // ListQuerySourcesResponse
@@ -8,9 +8,9 @@ import { QuerySource } from "./querysource";
  * List sources response.
 **/
 export class ListQuerySourcesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=sources", elemType: shared.QuerySource })
+  @SpeakeasyMetadata({ data: "json, name=sources", elemType: QuerySource })
   sources?: QuerySource[];
 }

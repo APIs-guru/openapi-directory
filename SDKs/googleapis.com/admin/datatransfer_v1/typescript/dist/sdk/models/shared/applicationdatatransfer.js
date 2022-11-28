@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ApplicationTransferParam } from "./applicationtransferparam";
 // ApplicationDataTransfer
 /**
  * Template to map fields of ApplicationDataTransfer resource.
@@ -34,15 +34,15 @@ var ApplicationDataTransfer = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=applicationId" }),
+        SpeakeasyMetadata({ data: "json, name=applicationId" }),
         __metadata("design:type", String)
     ], ApplicationDataTransfer.prototype, "applicationId", void 0);
     __decorate([
-        Metadata({ data: "json, name=applicationTransferParams", elemType: shared.ApplicationTransferParam }),
+        SpeakeasyMetadata({ data: "json, name=applicationTransferParams", elemType: ApplicationTransferParam }),
         __metadata("design:type", Array)
     ], ApplicationDataTransfer.prototype, "applicationTransferParams", void 0);
     __decorate([
-        Metadata({ data: "json, name=applicationTransferStatus" }),
+        SpeakeasyMetadata({ data: "json, name=applicationTransferStatus" }),
         __metadata("design:type", String)
     ], ApplicationDataTransfer.prototype, "applicationTransferStatus", void 0);
     return ApplicationDataTransfer;

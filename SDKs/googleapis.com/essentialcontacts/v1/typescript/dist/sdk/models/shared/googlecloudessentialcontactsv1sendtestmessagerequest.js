@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GoogleCloudEssentialcontactsV1SendTestMessageRequestNotificationCategoryEnum;
 (function (GoogleCloudEssentialcontactsV1SendTestMessageRequestNotificationCategoryEnum) {
     GoogleCloudEssentialcontactsV1SendTestMessageRequestNotificationCategoryEnum["NotificationCategoryUnspecified"] = "NOTIFICATION_CATEGORY_UNSPECIFIED";
@@ -45,11 +45,11 @@ var GoogleCloudEssentialcontactsV1SendTestMessageRequest = /** @class */ (functi
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=contacts" }),
+        SpeakeasyMetadata({ data: "json, name=contacts" }),
         __metadata("design:type", Array)
     ], GoogleCloudEssentialcontactsV1SendTestMessageRequest.prototype, "contacts", void 0);
     __decorate([
-        Metadata({ data: "json, name=notificationCategory" }),
+        SpeakeasyMetadata({ data: "json, name=notificationCategory" }),
         __metadata("design:type", String)
     ], GoogleCloudEssentialcontactsV1SendTestMessageRequest.prototype, "notificationCategory", void 0);
     return GoogleCloudEssentialcontactsV1SendTestMessageRequest;

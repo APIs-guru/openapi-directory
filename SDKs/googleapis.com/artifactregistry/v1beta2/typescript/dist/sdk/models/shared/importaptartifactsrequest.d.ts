@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ImportAptArtifactsGcsSource } from "./importaptartifactsgcssource";
 /**
  * The request to import new apt artifacts.

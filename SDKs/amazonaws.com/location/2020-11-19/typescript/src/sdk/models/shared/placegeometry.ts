@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PlaceGeometry
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Places uses a point geometry to specify a location or a Place.
 **/
 export class PlaceGeometry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Point" })
+  @SpeakeasyMetadata({ data: "json, name=Point" })
   point?: number[];
 }

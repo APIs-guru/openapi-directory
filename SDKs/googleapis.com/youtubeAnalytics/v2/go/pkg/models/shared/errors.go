@@ -13,6 +13,8 @@ const (
 	ErrorsCodeEnumServiceUnavailable ErrorsCodeEnum = "SERVICE_UNAVAILABLE"
 )
 
+// Errors
+// Request Error information. The presence of an error field signals that the operation has failed.
 type Errors struct {
 	Code      *ErrorsCodeEnum `json:"code,omitempty"`
 	Error     []ErrorProto    `json:"error,omitempty"`

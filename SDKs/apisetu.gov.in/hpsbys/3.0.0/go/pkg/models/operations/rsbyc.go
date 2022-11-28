@@ -26,11 +26,6 @@ type RsbycSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type RsbycRequest struct {
-	Request  *RsbycRequestBody `request:"mediaType=application/json"`
-	Security RsbycSecurity
-}
-
 type Rsbyc400ApplicationJSONErrorEnum string
 
 const (
@@ -160,6 +155,11 @@ const (
 type Rsbyc504ApplicationJSON struct {
 	Error            *Rsbyc504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Rsbyc504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type RsbycRequest struct {
+	Request  *RsbycRequestBody `request:"mediaType=application/json"`
+	Security RsbycSecurity
 }
 
 type RsbycResponse struct {

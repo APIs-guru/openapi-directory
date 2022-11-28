@@ -1,42 +1,43 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateVirtualNodePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=meshName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=meshName" })
   meshName: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=virtualNodeName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=virtualNodeName" })
   virtualNodeName: string;
 }
 
 
 export class UpdateVirtualNodeQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=meshOwner" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=meshOwner" })
   meshOwner?: string;
 }
 
 
 export class UpdateVirtualNodeHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -46,78 +47,78 @@ export class UpdateVirtualNodeHeaders extends SpeakeasyBase {
  * An object that represents the specification of a virtual node.
 **/
 export class UpdateVirtualNodeRequestBodySpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=backendDefaults" })
+  @SpeakeasyMetadata({ data: "json, name=backendDefaults" })
   backendDefaults?: shared.BackendDefaults;
 
-  @Metadata({ data: "json, name=backends", elemType: shared.Backend })
+  @SpeakeasyMetadata({ data: "json, name=backends", elemType: shared.Backend })
   backends?: shared.Backend[];
 
-  @Metadata({ data: "json, name=listeners", elemType: shared.Listener })
+  @SpeakeasyMetadata({ data: "json, name=listeners", elemType: shared.Listener })
   listeners?: shared.Listener[];
 
-  @Metadata({ data: "json, name=logging" })
+  @SpeakeasyMetadata({ data: "json, name=logging" })
   logging?: shared.Logging;
 
-  @Metadata({ data: "json, name=serviceDiscovery" })
+  @SpeakeasyMetadata({ data: "json, name=serviceDiscovery" })
   serviceDiscovery?: shared.ServiceDiscovery;
 }
 
 
 export class UpdateVirtualNodeRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clientToken" })
+  @SpeakeasyMetadata({ data: "json, name=clientToken" })
   clientToken?: string;
 
-  @Metadata({ data: "json, name=spec" })
+  @SpeakeasyMetadata({ data: "json, name=spec" })
   spec: UpdateVirtualNodeRequestBodySpec;
 }
 
 
 export class UpdateVirtualNodeRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateVirtualNodePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: UpdateVirtualNodeQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdateVirtualNodeHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdateVirtualNodeRequestBody;
 }
 
 
 export class UpdateVirtualNodeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   badRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   conflictException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   forbiddenException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerErrorException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   limitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   notFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceUnavailableException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tooManyRequestsException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateVirtualNodeOutput?: shared.UpdateVirtualNodeOutput;
 }

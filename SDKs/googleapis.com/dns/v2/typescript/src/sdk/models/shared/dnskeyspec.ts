@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum DnsKeySpecAlgorithmEnum {
-    Rsasha1 = "RSASHA1"
-,    Rsasha256 = "RSASHA256"
-,    Rsasha512 = "RSASHA512"
-,    Ecdsap256Sha256 = "ECDSAP256SHA256"
-,    Ecdsap384Sha384 = "ECDSAP384SHA384"
+    Rsasha1 = "RSASHA1",
+    Rsasha256 = "RSASHA256",
+    Rsasha512 = "RSASHA512",
+    Ecdsap256Sha256 = "ECDSAP256SHA256",
+    Ecdsap384Sha384 = "ECDSAP384SHA384"
 }
 
 export enum DnsKeySpecKeyTypeEnum {
-    KeySigning = "KEY_SIGNING"
-,    ZoneSigning = "ZONE_SIGNING"
+    KeySigning = "KEY_SIGNING",
+    ZoneSigning = "ZONE_SIGNING"
 }
 
 
@@ -19,15 +20,15 @@ export enum DnsKeySpecKeyTypeEnum {
  * Parameters for DnsKey key generation. Used for generating initial keys for a new ManagedZone and as default when adding a new DnsKey.
 **/
 export class DnsKeySpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=algorithm" })
+  @SpeakeasyMetadata({ data: "json, name=algorithm" })
   algorithm?: DnsKeySpecAlgorithmEnum;
 
-  @Metadata({ data: "json, name=keyLength" })
+  @SpeakeasyMetadata({ data: "json, name=keyLength" })
   keyLength?: number;
 
-  @Metadata({ data: "json, name=keyType" })
+  @SpeakeasyMetadata({ data: "json, name=keyType" })
   keyType?: DnsKeySpecKeyTypeEnum;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 }

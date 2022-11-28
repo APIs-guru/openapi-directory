@@ -1,16 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CallAnalyticsJobSummary } from "./callanalyticsjobsummary";
 import { CallAnalyticsJobStatusEnum } from "./callanalyticsjobstatusenum";
 
 
+
 export class ListCallAnalyticsJobsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CallAnalyticsJobSummaries", elemType: shared.CallAnalyticsJobSummary })
+  @SpeakeasyMetadata({ data: "json, name=CallAnalyticsJobSummaries", elemType: CallAnalyticsJobSummary })
   callAnalyticsJobSummaries?: CallAnalyticsJobSummary[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: CallAnalyticsJobStatusEnum;
 }

@@ -18,6 +18,8 @@ type UpdateMeshHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateMeshRequestBodySpec
+// An object that represents the specification of a service mesh.
 type UpdateMeshRequestBodySpec struct {
 	EgressFilter *shared.EgressFilter `json:"egressFilter,omitempty"`
 }

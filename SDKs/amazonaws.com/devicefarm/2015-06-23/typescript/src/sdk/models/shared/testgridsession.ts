@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TestGridSessionStatusEnum } from "./testgridsessionstatusenum";
+
 
 
 // TestGridSession
@@ -7,21 +8,21 @@ import { TestGridSessionStatusEnum } from "./testgridsessionstatusenum";
  * A <a>TestGridSession</a> is a single instance of a browser launched from the URL provided by a call to <a>CreateTestGridUrl</a>.
 **/
 export class TestGridSession extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=billingMinutes" })
+  @SpeakeasyMetadata({ data: "json, name=billingMinutes" })
   billingMinutes?: number;
 
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=ended" })
+  @SpeakeasyMetadata({ data: "json, name=ended" })
   ended?: Date;
 
-  @Metadata({ data: "json, name=seleniumProperties" })
+  @SpeakeasyMetadata({ data: "json, name=seleniumProperties" })
   seleniumProperties?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: TestGridSessionStatusEnum;
 }

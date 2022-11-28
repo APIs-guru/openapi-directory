@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DirectoryCustomersUpdatePathParams:
-    customer_key: str = field(default=None, metadata={'path_param': { 'field_name': 'customerKey', 'style': 'simple', 'explode': False }})
+    customer_key: str = field(metadata={'path_param': { 'field_name': 'customerKey', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +29,21 @@ class DirectoryCustomersUpdateQueryParams:
 
 @dataclass
 class DirectoryCustomersUpdateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DirectoryCustomersUpdateRequest:
-    path_params: DirectoryCustomersUpdatePathParams = field(default=None)
-    query_params: DirectoryCustomersUpdateQueryParams = field(default=None)
+    path_params: DirectoryCustomersUpdatePathParams = field()
+    query_params: DirectoryCustomersUpdateQueryParams = field()
+    security: DirectoryCustomersUpdateSecurity = field()
     request: Optional[shared.Customer] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DirectoryCustomersUpdateSecurity = field(default=None)
     
 
 @dataclass
 class DirectoryCustomersUpdateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     customer: Optional[shared.Customer] = field(default=None)
-    status_code: int = field(default=None)
     

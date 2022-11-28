@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Answer } from "./answer";
 /**
  * Response message for QuestionsAndAnswers.ListAnswers

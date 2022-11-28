@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -24,25 +28,25 @@ class DescribeActionTargetsHeaders:
 @dataclass_json
 @dataclass
 class DescribeActionTargetsRequestBody:
-    action_target_arns: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ActionTargetArns' }})
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MaxResults' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
+    action_target_arns: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ActionTargetArns') }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MaxResults') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
     
 
 @dataclass
 class DescribeActionTargetsRequest:
-    query_params: DescribeActionTargetsQueryParams = field(default=None)
-    headers: DescribeActionTargetsHeaders = field(default=None)
-    request: DescribeActionTargetsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: DescribeActionTargetsHeaders = field()
+    query_params: DescribeActionTargetsQueryParams = field()
+    request: DescribeActionTargetsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DescribeActionTargetsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     describe_action_targets_response: Optional[shared.DescribeActionTargetsResponse] = field(default=None)
     internal_exception: Optional[Any] = field(default=None)
     invalid_access_exception: Optional[Any] = field(default=None)
     invalid_input_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

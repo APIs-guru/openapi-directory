@@ -1,5 +1,7 @@
 package shared
 
+// WorkerMessage
+// WorkerMessage provides information to the backend about a worker.
 type WorkerMessage struct {
 	Labels               map[string]string          `json:"labels,omitempty"`
 	Time                 *string                    `json:"time,omitempty"`

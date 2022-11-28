@@ -7,6 +7,8 @@ const (
 	SyslogConfigProtocolEnumUDP SyslogConfigProtocolEnum = "UDP"
 )
 
+// SyslogConfig
+// Syslog settings
 type SyslogConfig struct {
 	Enabled      *bool                     `json:"enabled,omitempty"`
 	Host         *string                   `json:"host,omitempty"`

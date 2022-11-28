@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDocumentaiV1GcsDocument
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies a document stored on Cloud Storage.
 **/
 export class GoogleCloudDocumentaiV1GcsDocument extends SpeakeasyBase {
-  @Metadata({ data: "json, name=gcsUri" })
+  @SpeakeasyMetadata({ data: "json, name=gcsUri" })
   gcsUri?: string;
 
-  @Metadata({ data: "json, name=mimeType" })
+  @SpeakeasyMetadata({ data: "json, name=mimeType" })
   mimeType?: string;
 }

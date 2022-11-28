@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,28 +22,28 @@ class StartChangeSetHeaders:
 @dataclass_json
 @dataclass
 class StartChangeSetRequestBody:
-    catalog: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Catalog' }})
-    change_set: List[shared.Change] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ChangeSet' }})
-    change_set_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ChangeSetName' }})
-    client_request_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ClientRequestToken' }})
+    catalog: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Catalog') }})
+    change_set: List[shared.Change] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ChangeSet') }})
+    change_set_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ChangeSetName') }})
+    client_request_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ClientRequestToken') }})
     
 
 @dataclass
 class StartChangeSetRequest:
-    headers: StartChangeSetHeaders = field(default=None)
-    request: StartChangeSetRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: StartChangeSetHeaders = field()
+    request: StartChangeSetRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class StartChangeSetResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_service_exception: Optional[Any] = field(default=None)
     resource_in_use_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_quota_exceeded_exception: Optional[Any] = field(default=None)
     start_change_set_response: Optional[shared.StartChangeSetResponse] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

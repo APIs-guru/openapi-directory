@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TransactionOptions } from "./transactionoptions";
+
 
 
 // BeginTransactionRequest
@@ -7,9 +8,9 @@ import { TransactionOptions } from "./transactionoptions";
  * The request for Datastore.BeginTransaction.
 **/
 export class BeginTransactionRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=databaseId" })
+  @SpeakeasyMetadata({ data: "json, name=databaseId" })
   databaseId?: string;
 
-  @Metadata({ data: "json, name=transactionOptions" })
+  @SpeakeasyMetadata({ data: "json, name=transactionOptions" })
   transactionOptions?: TransactionOptions;
 }

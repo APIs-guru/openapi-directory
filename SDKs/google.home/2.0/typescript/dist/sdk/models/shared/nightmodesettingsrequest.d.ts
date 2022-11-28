@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Window } from "./window";
 export declare class NightModesettingsRequest extends SpeakeasyBase {
     demoToUser: boolean;

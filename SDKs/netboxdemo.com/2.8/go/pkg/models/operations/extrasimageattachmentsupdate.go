@@ -10,7 +10,7 @@ type ExtrasImageAttachmentsUpdatePathParams struct {
 
 type ExtrasImageAttachmentsUpdateRequest struct {
 	PathParams ExtrasImageAttachmentsUpdatePathParams
-	Request    shared.ImageAttachment `request:"mediaType=application/json"`
+	Request    shared.ImageAttachmentInput `request:"mediaType=application/json"`
 }
 
 type ExtrasImageAttachmentsUpdateResponse struct {

@@ -1,15 +1,14 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import eventcategorydetail
-from . import organizationrepresentation
-from . import consentmanagerpatientid
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class HiuSubscriptionEventContent:
-    context: List[eventcategorydetail.EventCategoryDetail] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'context' }})
-    hip: organizationrepresentation.OrganizationRepresentation = field(default=None, metadata={'dataclasses_json': { 'field_name': 'hip' }})
-    patient: consentmanagerpatientid.ConsentManagerPatientID = field(default=None, metadata={'dataclasses_json': { 'field_name': 'patient' }})
+    context: List[EventCategoryDetail] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('context') }})
+    hip: OrganizationRepresentation = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('hip') }})
+    patient: ConsentManagerPatientID = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('patient') }})
     

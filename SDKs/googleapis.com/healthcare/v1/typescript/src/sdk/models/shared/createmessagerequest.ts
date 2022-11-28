@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { Message } from "./message";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { MessageInput } from "./message";
 
 
-// CreateMessageRequest
+
+// CreateMessageRequestInput
 /** 
  * Creates a new message.
 **/
-export class CreateMessageRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
-  message?: Message;
+export class CreateMessageRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=message" })
+  message?: MessageInput;
 }

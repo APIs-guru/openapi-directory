@@ -8,6 +8,16 @@ const (
 	ManualTriggerStateEnumActive           ManualTriggerStateEnum = "ACTIVE"
 )
 
+// ManualTriggerInput
+// A single manual trigger in Display & Video 360.
+type ManualTriggerInput struct {
+	ActivationDurationMinutes *string `json:"activationDurationMinutes,omitempty"`
+	AdvertiserID              *string `json:"advertiserId,omitempty"`
+	DisplayName               *string `json:"displayName,omitempty"`
+}
+
+// ManualTrigger
+// A single manual trigger in Display & Video 360.
 type ManualTrigger struct {
 	ActivationDurationMinutes *string                 `json:"activationDurationMinutes,omitempty"`
 	AdvertiserID              *string                 `json:"advertiserId,omitempty"`

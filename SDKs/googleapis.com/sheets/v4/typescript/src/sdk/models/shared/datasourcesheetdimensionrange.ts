@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataSourceColumnReference } from "./datasourcecolumnreference";
+
 
 
 // DataSourceSheetDimensionRange
@@ -8,9 +8,9 @@ import { DataSourceColumnReference } from "./datasourcecolumnreference";
  * A range along a single dimension on a DATA_SOURCE sheet.
 **/
 export class DataSourceSheetDimensionRange extends SpeakeasyBase {
-  @Metadata({ data: "json, name=columnReferences", elemType: shared.DataSourceColumnReference })
+  @SpeakeasyMetadata({ data: "json, name=columnReferences", elemType: DataSourceColumnReference })
   columnReferences?: DataSourceColumnReference[];
 
-  @Metadata({ data: "json, name=sheetId" })
+  @SpeakeasyMetadata({ data: "json, name=sheetId" })
   sheetId?: number;
 }

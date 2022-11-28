@@ -34,6 +34,8 @@ type BaseGistSimpleUser struct {
 	URL               string  `json:"url"`
 }
 
+// BaseGist
+// Base Gist
 type BaseGist struct {
 	Comments    int64                    `json:"comments"`
 	CommentsURL string                   `json:"comments_url"`

@@ -1,10 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ForwardSshTunnelConnectivity } from "./forwardsshtunnelconnectivity";
 import { GcsProfile } from "./gcsprofile";
 import { MysqlProfile } from "./mysqlprofile";
 import { OracleProfile } from "./oracleprofile";
 import { PostgresqlProfile } from "./postgresqlprofile";
 import { PrivateConnectivity } from "./privateconnectivity";
+import { MysqlProfileInput } from "./mysqlprofile";
+
 
 
 // ConnectionProfile
@@ -12,42 +14,79 @@ import { PrivateConnectivity } from "./privateconnectivity";
  * A set of reusable connection configurations to be used as a source or destination for a stream.
 **/
 export class ConnectionProfile extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bigqueryProfile" })
+  @SpeakeasyMetadata({ data: "json, name=bigqueryProfile" })
   bigqueryProfile?: Map<string, any>;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=forwardSshConnectivity" })
+  @SpeakeasyMetadata({ data: "json, name=forwardSshConnectivity" })
   forwardSshConnectivity?: ForwardSshTunnelConnectivity;
 
-  @Metadata({ data: "json, name=gcsProfile" })
+  @SpeakeasyMetadata({ data: "json, name=gcsProfile" })
   gcsProfile?: GcsProfile;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=mysqlProfile" })
+  @SpeakeasyMetadata({ data: "json, name=mysqlProfile" })
   mysqlProfile?: MysqlProfile;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=oracleProfile" })
+  @SpeakeasyMetadata({ data: "json, name=oracleProfile" })
   oracleProfile?: OracleProfile;
 
-  @Metadata({ data: "json, name=postgresqlProfile" })
+  @SpeakeasyMetadata({ data: "json, name=postgresqlProfile" })
   postgresqlProfile?: PostgresqlProfile;
 
-  @Metadata({ data: "json, name=privateConnectivity" })
+  @SpeakeasyMetadata({ data: "json, name=privateConnectivity" })
   privateConnectivity?: PrivateConnectivity;
 
-  @Metadata({ data: "json, name=staticServiceIpConnectivity" })
+  @SpeakeasyMetadata({ data: "json, name=staticServiceIpConnectivity" })
   staticServiceIpConnectivity?: Map<string, any>;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
+}
+
+
+// ConnectionProfileInput
+/** 
+ * A set of reusable connection configurations to be used as a source or destination for a stream.
+**/
+export class ConnectionProfileInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=bigqueryProfile" })
+  bigqueryProfile?: Map<string, any>;
+
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
+  displayName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=forwardSshConnectivity" })
+  forwardSshConnectivity?: ForwardSshTunnelConnectivity;
+
+  @SpeakeasyMetadata({ data: "json, name=gcsProfile" })
+  gcsProfile?: GcsProfile;
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=mysqlProfile" })
+  mysqlProfile?: MysqlProfileInput;
+
+  @SpeakeasyMetadata({ data: "json, name=oracleProfile" })
+  oracleProfile?: OracleProfile;
+
+  @SpeakeasyMetadata({ data: "json, name=postgresqlProfile" })
+  postgresqlProfile?: PostgresqlProfile;
+
+  @SpeakeasyMetadata({ data: "json, name=privateConnectivity" })
+  privateConnectivity?: PrivateConnectivity;
+
+  @SpeakeasyMetadata({ data: "json, name=staticServiceIpConnectivity" })
+  staticServiceIpConnectivity?: Map<string, any>;
 }

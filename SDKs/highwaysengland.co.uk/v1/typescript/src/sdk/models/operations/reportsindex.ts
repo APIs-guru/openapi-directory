@@ -1,52 +1,53 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ReportsIndexPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=report_type" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=report_type" })
   reportType: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=version" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=version" })
   version: string;
 }
 
 
 export class ReportsIndexQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=end_date" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=end_date" })
   endDate: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page_size" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_size" })
   pageSize: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=reportSubTypeId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=reportSubTypeId" })
   reportSubTypeId?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sites" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sites" })
   sites: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=start_date" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=start_date" })
   startDate: string;
 }
 
 
 export class ReportsIndexRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ReportsIndexPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ReportsIndexQueryParams;
 }
 
 
 export class ReportsIndexResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   object?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

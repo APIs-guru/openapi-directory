@@ -1,5 +1,7 @@
 package shared
 
+// GooglePrivacyDlpV2QuasiID
+// A column with a semantic tag attached.
 type GooglePrivacyDlpV2QuasiID struct {
 	CustomTag *string                     `json:"customTag,omitempty"`
 	Field     *GooglePrivacyDlpV2FieldID  `json:"field,omitempty"`

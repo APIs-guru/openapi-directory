@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TimestampRange
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * This data type is used in the <a>AssessmentRunFilter</a> data type.
 **/
 export class TimestampRange extends SpeakeasyBase {
-  @Metadata({ data: "json, name=beginDate" })
+  @SpeakeasyMetadata({ data: "json, name=beginDate" })
   beginDate?: Date;
 
-  @Metadata({ data: "json, name=endDate" })
+  @SpeakeasyMetadata({ data: "json, name=endDate" })
   endDate?: Date;
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Criterion } from "./criterion";
+
 
 
 // InlineArchiveRule
@@ -8,9 +8,9 @@ import { Criterion } from "./criterion";
  * An criterion statement in an archive rule. Each archive rule may have multiple criteria.
 **/
 export class InlineArchiveRule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=filter", elemType: shared.Criterion })
+  @SpeakeasyMetadata({ data: "json, name=filter", elemType: Criterion })
   filter: Map<string, Criterion>;
 
-  @Metadata({ data: "json, name=ruleName" })
+  @SpeakeasyMetadata({ data: "json, name=ruleName" })
   ruleName: string;
 }

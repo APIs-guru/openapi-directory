@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class FileUploadQuestionTypesEnum(str, Enum):
     FILE_TYPE_UNSPECIFIED = "FILE_TYPE_UNSPECIFIED"
@@ -18,8 +20,12 @@ class FileUploadQuestionTypesEnum(str, Enum):
 @dataclass_json
 @dataclass
 class FileUploadQuestion:
-    folder_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'folderId' }})
-    max_file_size: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxFileSize' }})
-    max_files: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxFiles' }})
-    types: Optional[List[FileUploadQuestionTypesEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'types' }})
+    r"""FileUploadQuestion
+    A file upload question. The API currently does not support creating file upload questions.
+    """
+    
+    folder_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('folderId') }})
+    max_file_size: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxFileSize') }})
+    max_files: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxFiles') }})
+    types: Optional[List[FileUploadQuestionTypesEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('types') }})
     

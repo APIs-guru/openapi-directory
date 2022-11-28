@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import virtualgatewayportprotocol_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class VirtualGatewayPortMapping:
-    port: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'port' }})
-    protocol: virtualgatewayportprotocol_enum.VirtualGatewayPortProtocolEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'protocol' }})
+    r"""VirtualGatewayPortMapping
+    An object that represents a port mapping.
+    """
+    
+    port: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('port') }})
+    protocol: VirtualGatewayPortProtocolEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('protocol') }})
     

@@ -1,5 +1,7 @@
 package shared
 
+// DirectoryLimits
+// Contains directory limit information for a Region.
 type DirectoryLimits struct {
 	CloudOnlyDirectoriesCurrentCount *int64 `json:"CloudOnlyDirectoriesCurrentCount,omitempty"`
 	CloudOnlyDirectoriesLimit        *int64 `json:"CloudOnlyDirectoriesLimit,omitempty"`

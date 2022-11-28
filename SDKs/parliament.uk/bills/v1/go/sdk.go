@@ -11,7 +11,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://bills-api.parliament.uk",
 }
 
@@ -20,9 +20,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -33,27 +37,45 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// GetAPIV1BillTypes - Returns a list of Bill types.
 func (s *SDK) GetAPIV1BillTypes(ctx context.Context, request operations.GetAPIV1BillTypesRequest) (*operations.GetAPIV1BillTypesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/v1/BillTypes"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -63,7 +85,7 @@ func (s *SDK) GetAPIV1BillTypes(ctx context.Context, request operations.GetAPIV1
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -131,8 +153,9 @@ func (s *SDK) GetAPIV1BillTypes(ctx context.Context, request operations.GetAPIV1
 	return res, nil
 }
 
+// GetAPIV1BillsBillIDStages - Returns all Bill stages.
 func (s *SDK) GetAPIV1BillsBillIDStages(ctx context.Context, request operations.GetAPIV1BillsBillIDStagesRequest) (*operations.GetAPIV1BillsBillIDStagesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/v1/Bills/{billId}/Stages", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -142,7 +165,7 @@ func (s *SDK) GetAPIV1BillsBillIDStages(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -234,8 +257,9 @@ func (s *SDK) GetAPIV1BillsBillIDStages(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetAPIV1BillsBillIDStagesStageIDPublications - Return a list of Bill stage publications.
 func (s *SDK) GetAPIV1BillsBillIDStagesStageIDPublications(ctx context.Context, request operations.GetAPIV1BillsBillIDStagesStageIDPublicationsRequest) (*operations.GetAPIV1BillsBillIDStagesStageIDPublicationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/v1/Bills/{billId}/Stages/{stageId}/Publications", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -243,7 +267,7 @@ func (s *SDK) GetAPIV1BillsBillIDStagesStageIDPublications(ctx context.Context, 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -335,8 +359,9 @@ func (s *SDK) GetAPIV1BillsBillIDStagesStageIDPublications(ctx context.Context, 
 	return res, nil
 }
 
+// GetAPIV1PublicationTypes - Returns a list of publication types.
 func (s *SDK) GetAPIV1PublicationTypes(ctx context.Context, request operations.GetAPIV1PublicationTypesRequest) (*operations.GetAPIV1PublicationTypesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/v1/PublicationTypes"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -346,7 +371,7 @@ func (s *SDK) GetAPIV1PublicationTypes(ctx context.Context, request operations.G
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -414,8 +439,9 @@ func (s *SDK) GetAPIV1PublicationTypes(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetAPIV1PublicationsPublicationIDDocumentsDocumentID - Return information on a document.
 func (s *SDK) GetAPIV1PublicationsPublicationIDDocumentsDocumentID(ctx context.Context, request operations.GetAPIV1PublicationsPublicationIDDocumentsDocumentIDRequest) (*operations.GetAPIV1PublicationsPublicationIDDocumentsDocumentIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/v1/Publications/{publicationId}/Documents/{documentId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -423,7 +449,7 @@ func (s *SDK) GetAPIV1PublicationsPublicationIDDocumentsDocumentID(ctx context.C
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -515,8 +541,9 @@ func (s *SDK) GetAPIV1PublicationsPublicationIDDocumentsDocumentID(ctx context.C
 	return res, nil
 }
 
+// GetAPIV1PublicationsPublicationIDDocumentsDocumentIDDownload - Return a document.
 func (s *SDK) GetAPIV1PublicationsPublicationIDDocumentsDocumentIDDownload(ctx context.Context, request operations.GetAPIV1PublicationsPublicationIDDocumentsDocumentIDDownloadRequest) (*operations.GetAPIV1PublicationsPublicationIDDocumentsDocumentIDDownloadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/v1/Publications/{publicationId}/Documents/{documentId}/Download", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -524,7 +551,7 @@ func (s *SDK) GetAPIV1PublicationsPublicationIDDocumentsDocumentIDDownload(ctx c
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -593,8 +620,9 @@ func (s *SDK) GetAPIV1PublicationsPublicationIDDocumentsDocumentIDDownload(ctx c
 	return res, nil
 }
 
+// GetAPIV1RssBillsIDRss - Returns an Rss feed of a certain Bill.
 func (s *SDK) GetAPIV1RssBillsIDRss(ctx context.Context, request operations.GetAPIV1RssBillsIDRssRequest) (*operations.GetAPIV1RssBillsIDRssResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/v1/Rss/Bills/{id}.rss", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -602,7 +630,7 @@ func (s *SDK) GetAPIV1RssBillsIDRss(ctx context.Context, request operations.GetA
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -671,8 +699,9 @@ func (s *SDK) GetAPIV1RssBillsIDRss(ctx context.Context, request operations.GetA
 	return res, nil
 }
 
+// GetAPIV1RssAllbillsRss - Returns an Rss feed of all Bills.
 func (s *SDK) GetAPIV1RssAllbillsRss(ctx context.Context) (*operations.GetAPIV1RssAllbillsRssResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/v1/Rss/allbills.rss"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -680,7 +709,7 @@ func (s *SDK) GetAPIV1RssAllbillsRss(ctx context.Context) (*operations.GetAPIV1R
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -701,8 +730,9 @@ func (s *SDK) GetAPIV1RssAllbillsRss(ctx context.Context) (*operations.GetAPIV1R
 	return res, nil
 }
 
+// GetAPIV1RssPrivatebillsRss - Returns an Rss feed of private Bills.
 func (s *SDK) GetAPIV1RssPrivatebillsRss(ctx context.Context) (*operations.GetAPIV1RssPrivatebillsRssResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/v1/Rss/privatebills.rss"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -710,7 +740,7 @@ func (s *SDK) GetAPIV1RssPrivatebillsRss(ctx context.Context) (*operations.GetAP
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -731,8 +761,9 @@ func (s *SDK) GetAPIV1RssPrivatebillsRss(ctx context.Context) (*operations.GetAP
 	return res, nil
 }
 
+// GetAPIV1RssPublicbillsRss - Returns an Rss feed of public Bills.
 func (s *SDK) GetAPIV1RssPublicbillsRss(ctx context.Context) (*operations.GetAPIV1RssPublicbillsRssResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/v1/Rss/publicbills.rss"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -740,7 +771,7 @@ func (s *SDK) GetAPIV1RssPublicbillsRss(ctx context.Context) (*operations.GetAPI
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -761,8 +792,9 @@ func (s *SDK) GetAPIV1RssPublicbillsRss(ctx context.Context) (*operations.GetAPI
 	return res, nil
 }
 
+// GetAPIV1Stages - Returns a list of Bill stages.
 func (s *SDK) GetAPIV1Stages(ctx context.Context, request operations.GetAPIV1StagesRequest) (*operations.GetAPIV1StagesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/v1/Stages"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -772,7 +804,7 @@ func (s *SDK) GetAPIV1Stages(ctx context.Context, request operations.GetAPIV1Sta
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -840,8 +872,9 @@ func (s *SDK) GetAPIV1Stages(ctx context.Context, request operations.GetAPIV1Sta
 	return res, nil
 }
 
+// GetAmendment - Returns an amendment.
 func (s *SDK) GetAmendment(ctx context.Context, request operations.GetAmendmentRequest) (*operations.GetAmendmentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/v1/Bills/{billId}/Stages/{billStageId}/Amendments/{amendmentId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -849,7 +882,7 @@ func (s *SDK) GetAmendment(ctx context.Context, request operations.GetAmendmentR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -941,8 +974,9 @@ func (s *SDK) GetAmendment(ctx context.Context, request operations.GetAmendmentR
 	return res, nil
 }
 
+// GetAmendments - Returns a list of amendments.
 func (s *SDK) GetAmendments(ctx context.Context, request operations.GetAmendmentsRequest) (*operations.GetAmendmentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/v1/Bills/{billId}/Stages/{billStageId}/Amendments", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -952,7 +986,7 @@ func (s *SDK) GetAmendments(ctx context.Context, request operations.GetAmendment
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1044,8 +1078,9 @@ func (s *SDK) GetAmendments(ctx context.Context, request operations.GetAmendment
 	return res, nil
 }
 
+// GetBill - Return a Bill.
 func (s *SDK) GetBill(ctx context.Context, request operations.GetBillRequest) (*operations.GetBillResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/v1/Bills/{billId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1053,7 +1088,7 @@ func (s *SDK) GetBill(ctx context.Context, request operations.GetBillRequest) (*
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1145,8 +1180,9 @@ func (s *SDK) GetBill(ctx context.Context, request operations.GetBillRequest) (*
 	return res, nil
 }
 
+// GetBillPublication - Return a list of Bill publications.
 func (s *SDK) GetBillPublication(ctx context.Context, request operations.GetBillPublicationRequest) (*operations.GetBillPublicationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/v1/Bills/{billId}/Publications", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1154,7 +1190,7 @@ func (s *SDK) GetBillPublication(ctx context.Context, request operations.GetBill
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1246,8 +1282,9 @@ func (s *SDK) GetBillPublication(ctx context.Context, request operations.GetBill
 	return res, nil
 }
 
+// GetBillStageDetails - Returns a Bill stage.
 func (s *SDK) GetBillStageDetails(ctx context.Context, request operations.GetBillStageDetailsRequest) (*operations.GetBillStageDetailsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/v1/Bills/{billId}/Stages/{billStageId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1255,7 +1292,7 @@ func (s *SDK) GetBillStageDetails(ctx context.Context, request operations.GetBil
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1347,8 +1384,9 @@ func (s *SDK) GetBillStageDetails(ctx context.Context, request operations.GetBil
 	return res, nil
 }
 
+// GetBills - Returns a list of Bills.
 func (s *SDK) GetBills(ctx context.Context, request operations.GetBillsRequest) (*operations.GetBillsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/v1/Bills"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1358,7 +1396,7 @@ func (s *SDK) GetBills(ctx context.Context, request operations.GetBillsRequest) 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1426,8 +1464,9 @@ func (s *SDK) GetBills(ctx context.Context, request operations.GetBillsRequest) 
 	return res, nil
 }
 
+// GetNewsArticles - Returns a list of news articles for a Bill.
 func (s *SDK) GetNewsArticles(ctx context.Context, request operations.GetNewsArticlesRequest) (*operations.GetNewsArticlesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/v1/Bills/{billId}/NewsArticles", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1437,7 +1476,7 @@ func (s *SDK) GetNewsArticles(ctx context.Context, request operations.GetNewsArt
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1529,8 +1568,9 @@ func (s *SDK) GetNewsArticles(ctx context.Context, request operations.GetNewsArt
 	return res, nil
 }
 
+// GetSittings - Returns a list of Sittings.
 func (s *SDK) GetSittings(ctx context.Context, request operations.GetSittingsRequest) (*operations.GetSittingsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/v1/Sittings"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1540,7 +1580,7 @@ func (s *SDK) GetSittings(ctx context.Context, request operations.GetSittingsReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

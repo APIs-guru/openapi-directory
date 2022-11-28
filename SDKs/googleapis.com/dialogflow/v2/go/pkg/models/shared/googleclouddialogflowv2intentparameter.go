@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDialogflowV2IntentParameter
+// Represents intent parameters.
 type GoogleCloudDialogflowV2IntentParameter struct {
 	DefaultValue          *string  `json:"defaultValue,omitempty"`
 	DisplayName           *string  `json:"displayName,omitempty"`

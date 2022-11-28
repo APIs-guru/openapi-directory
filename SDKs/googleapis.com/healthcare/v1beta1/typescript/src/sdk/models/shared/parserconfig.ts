@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SchemaPackage } from "./schemapackage";
 
+
 export enum ParserConfigVersionEnum {
-    ParserVersionUnspecified = "PARSER_VERSION_UNSPECIFIED"
-,    V1 = "V1"
-,    V2 = "V2"
-,    V3 = "V3"
+    ParserVersionUnspecified = "PARSER_VERSION_UNSPECIFIED",
+    V1 = "V1",
+    V2 = "V2",
+    V3 = "V3"
 }
 
 
@@ -14,15 +15,15 @@ export enum ParserConfigVersionEnum {
  * The configuration for the parser. It determines how the server parses the messages.
 **/
 export class ParserConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowNullHeader" })
+  @SpeakeasyMetadata({ data: "json, name=allowNullHeader" })
   allowNullHeader?: boolean;
 
-  @Metadata({ data: "json, name=schema" })
+  @SpeakeasyMetadata({ data: "json, name=schema" })
   schema?: SchemaPackage;
 
-  @Metadata({ data: "json, name=segmentTerminator" })
+  @SpeakeasyMetadata({ data: "json, name=segmentTerminator" })
   segmentTerminator?: string;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: ParserConfigVersionEnum;
 }

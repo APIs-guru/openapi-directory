@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // TagHold
 /**
  * A TagHold represents the use of a TagValue that is not captured by TagBindings. If a TagValue has any TagHolds, deletion will be blocked. This resource is intended to be created in the same cloud location as the `holder`.
@@ -33,25 +33,49 @@ var TagHold = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", String)
     ], TagHold.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=helpLink" }),
+        SpeakeasyMetadata({ data: "json, name=helpLink" }),
         __metadata("design:type", String)
     ], TagHold.prototype, "helpLink", void 0);
     __decorate([
-        Metadata({ data: "json, name=holder" }),
+        SpeakeasyMetadata({ data: "json, name=holder" }),
         __metadata("design:type", String)
     ], TagHold.prototype, "holder", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], TagHold.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=origin" }),
+        SpeakeasyMetadata({ data: "json, name=origin" }),
         __metadata("design:type", String)
     ], TagHold.prototype, "origin", void 0);
     return TagHold;
 }(SpeakeasyBase));
 export { TagHold };
+// TagHoldInput
+/**
+ * A TagHold represents the use of a TagValue that is not captured by TagBindings. If a TagValue has any TagHolds, deletion will be blocked. This resource is intended to be created in the same cloud location as the `holder`.
+**/
+var TagHoldInput = /** @class */ (function (_super) {
+    __extends(TagHoldInput, _super);
+    function TagHoldInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=helpLink" }),
+        __metadata("design:type", String)
+    ], TagHoldInput.prototype, "helpLink", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=holder" }),
+        __metadata("design:type", String)
+    ], TagHoldInput.prototype, "holder", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=origin" }),
+        __metadata("design:type", String)
+    ], TagHoldInput.prototype, "origin", void 0);
+    return TagHoldInput;
+}(SpeakeasyBase));
+export { TagHoldInput };

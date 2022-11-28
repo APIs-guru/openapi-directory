@@ -1,65 +1,66 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class MoveFolderToFolderPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=folder_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=folder_id" })
   folderId: string;
 }
 
 
 export class MoveFolderToFolderMoveFolderData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=parent_folder_id" })
+  @SpeakeasyMetadata({ data: "json, name=parent_folder_id" })
   parentFolderId?: string;
 }
 
 
 export class MoveFolderToFolderSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   apiTokenBasic: shared.SchemeApiTokenBasic;
 }
 
 
-export class MoveFolderToFolderRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: MoveFolderToFolderPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: MoveFolderToFolderMoveFolderData;
-
-  @Metadata()
-  security: MoveFolderToFolderSecurity;
-}
-
-
 export class MoveFolderToFolderFolder extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=parent_folder_id" })
+  @SpeakeasyMetadata({ data: "json, name=parent_folder_id" })
   parentFolderId?: string;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path?: string;
 }
 
 
+export class MoveFolderToFolderRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: MoveFolderToFolderPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: MoveFolderToFolderMoveFolderData;
+
+  @SpeakeasyMetadata()
+  security: MoveFolderToFolderSecurity;
+}
+
+
 export class MoveFolderToFolderResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   authenticationError?: shared.AuthenticationError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   folder?: MoveFolderToFolderFolder;
 }

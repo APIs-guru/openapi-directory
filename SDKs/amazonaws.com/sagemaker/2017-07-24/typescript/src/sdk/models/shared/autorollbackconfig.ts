@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Alarm } from "./alarm";
+
 
 
 // AutoRollbackConfig
@@ -8,6 +8,6 @@ import { Alarm } from "./alarm";
  * Currently, the <code>AutoRollbackConfig</code> API is not supported.
 **/
 export class AutoRollbackConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Alarms", elemType: shared.Alarm })
+  @SpeakeasyMetadata({ data: "json, name=Alarms", elemType: Alarm })
   alarms?: Alarm[];
 }

@@ -1,5 +1,7 @@
 package shared
 
+// GetAnswerOutput
+// Output of a get answer call.
 type GetAnswerOutput struct {
 	Answer          *Answer `json:"Answer,omitempty"`
 	LensAlias       *string `json:"LensAlias,omitempty"`

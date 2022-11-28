@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AggregationTypeNameEnum } from "./aggregationtypenameenum";
+
 
 
 // AggregationType
@@ -7,9 +8,9 @@ import { AggregationTypeNameEnum } from "./aggregationtypenameenum";
  * The type of aggregation queries.
 **/
 export class AggregationType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: AggregationTypeNameEnum;
 
-  @Metadata({ data: "json, name=values" })
+  @SpeakeasyMetadata({ data: "json, name=values" })
   values?: string[];
 }

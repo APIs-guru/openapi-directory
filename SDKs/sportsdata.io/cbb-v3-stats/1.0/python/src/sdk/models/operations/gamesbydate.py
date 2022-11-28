@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 
 class GamesByDateFormatEnum(str, Enum):
     XML = "XML"
@@ -8,18 +12,18 @@ class GamesByDateFormatEnum(str, Enum):
 
 @dataclass
 class GamesByDatePathParams:
-    date: str = field(default=None, metadata={'path_param': { 'field_name': 'date', 'style': 'simple', 'explode': False }})
-    format: GamesByDateFormatEnum = field(default=None, metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
+    date_: str = field(metadata={'path_param': { 'field_name': 'date', 'style': 'simple', 'explode': False }})
+    format: GamesByDateFormatEnum = field(metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GamesByDateRequest:
-    path_params: GamesByDatePathParams = field(default=None)
+    path_params: GamesByDatePathParams = field()
     
 
 @dataclass
 class GamesByDateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     games: Optional[List[Any]] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var RebootNodeRequest = /** @class */ (function (_super) {
     __extends(RebootNodeRequest, _super);
     function RebootNodeRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ClusterName" }),
+        SpeakeasyMetadata({ data: "json, name=ClusterName" }),
         __metadata("design:type", String)
     ], RebootNodeRequest.prototype, "clusterName", void 0);
     __decorate([
-        Metadata({ data: "json, name=NodeId" }),
+        SpeakeasyMetadata({ data: "json, name=NodeId" }),
         __metadata("design:type", String)
     ], RebootNodeRequest.prototype, "nodeId", void 0);
     return RebootNodeRequest;

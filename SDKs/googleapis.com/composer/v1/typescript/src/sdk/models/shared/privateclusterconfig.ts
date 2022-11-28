@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PrivateClusterConfig
@@ -6,12 +7,25 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configuration options for the private GKE cluster in a Cloud Composer environment.
 **/
 export class PrivateClusterConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enablePrivateEndpoint" })
+  @SpeakeasyMetadata({ data: "json, name=enablePrivateEndpoint" })
   enablePrivateEndpoint?: boolean;
 
-  @Metadata({ data: "json, name=masterIpv4CidrBlock" })
+  @SpeakeasyMetadata({ data: "json, name=masterIpv4CidrBlock" })
   masterIpv4CidrBlock?: string;
 
-  @Metadata({ data: "json, name=masterIpv4ReservedRange" })
+  @SpeakeasyMetadata({ data: "json, name=masterIpv4ReservedRange" })
   masterIpv4ReservedRange?: string;
+}
+
+
+// PrivateClusterConfigInput
+/** 
+ * Configuration options for the private GKE cluster in a Cloud Composer environment.
+**/
+export class PrivateClusterConfigInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=enablePrivateEndpoint" })
+  enablePrivateEndpoint?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=masterIpv4CidrBlock" })
+  masterIpv4CidrBlock?: string;
 }

@@ -16,12 +16,6 @@ type DeleteAnnotationLayerPkAnnotationSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type DeleteAnnotationLayerPkAnnotationRequest struct {
-	PathParams  DeleteAnnotationLayerPkAnnotationPathParams
-	QueryParams DeleteAnnotationLayerPkAnnotationQueryParams
-	Security    DeleteAnnotationLayerPkAnnotationSecurity
-}
-
 type DeleteAnnotationLayerPkAnnotation200ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
 }
@@ -40,6 +34,12 @@ type DeleteAnnotationLayerPkAnnotation422ApplicationJSON struct {
 
 type DeleteAnnotationLayerPkAnnotation500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type DeleteAnnotationLayerPkAnnotationRequest struct {
+	PathParams  DeleteAnnotationLayerPkAnnotationPathParams
+	QueryParams DeleteAnnotationLayerPkAnnotationQueryParams
+	Security    DeleteAnnotationLayerPkAnnotationSecurity
 }
 
 type DeleteAnnotationLayerPkAnnotationResponse struct {

@@ -15,6 +15,8 @@ type StartIncidentHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// StartIncidentRequestBodyTriggerDetails
+// Details about what caused the incident to be created in Incident Manager.
 type StartIncidentRequestBodyTriggerDetails struct {
 	RawData    *string    `json:"rawData,omitempty"`
 	Source     *string    `json:"source,omitempty"`

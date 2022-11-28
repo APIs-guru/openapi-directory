@@ -1,35 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LicenseCountingTypeEnum } from "./licensecountingtypeenum";
 import { ProductInformation } from "./productinformation";
 import { Tag } from "./tag";
 
 
+
 export class CreateLicenseConfigurationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=DisassociateWhenNotFound" })
+  @SpeakeasyMetadata({ data: "json, name=DisassociateWhenNotFound" })
   disassociateWhenNotFound?: boolean;
 
-  @Metadata({ data: "json, name=LicenseCount" })
+  @SpeakeasyMetadata({ data: "json, name=LicenseCount" })
   licenseCount?: number;
 
-  @Metadata({ data: "json, name=LicenseCountHardLimit" })
+  @SpeakeasyMetadata({ data: "json, name=LicenseCountHardLimit" })
   licenseCountHardLimit?: boolean;
 
-  @Metadata({ data: "json, name=LicenseCountingType" })
+  @SpeakeasyMetadata({ data: "json, name=LicenseCountingType" })
   licenseCountingType: LicenseCountingTypeEnum;
 
-  @Metadata({ data: "json, name=LicenseRules" })
+  @SpeakeasyMetadata({ data: "json, name=LicenseRules" })
   licenseRules?: string[];
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 
-  @Metadata({ data: "json, name=ProductInformationList", elemType: shared.ProductInformation })
+  @SpeakeasyMetadata({ data: "json, name=ProductInformationList", elemType: ProductInformation })
   productInformationList?: ProductInformation[];
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 }

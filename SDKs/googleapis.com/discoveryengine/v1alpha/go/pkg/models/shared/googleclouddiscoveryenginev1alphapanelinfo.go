@@ -1,0 +1,10 @@
+package shared
+
+// GoogleCloudDiscoveryengineV1alphaPanelInfo
+// Detailed panel information associated with a user event.
+type GoogleCloudDiscoveryengineV1alphaPanelInfo struct {
+	DisplayName   *string `json:"displayName,omitempty"`
+	PanelID       *string `json:"panelId,omitempty"`
+	PanelPosition *int32  `json:"panelPosition,omitempty"`
+	TotalPanels   *int32  `json:"totalPanels,omitempty"`
+}

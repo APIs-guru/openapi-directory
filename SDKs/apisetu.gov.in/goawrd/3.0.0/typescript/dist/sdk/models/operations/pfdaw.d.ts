@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class PfdawRequestBodyCertificateParameters extends SpeakeasyBase {
     fullName: string;
@@ -16,10 +16,6 @@ export declare class PfdawRequestBody extends SpeakeasyBase {
 export declare class PfdawSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class PfdawRequest extends SpeakeasyBase {
-    request?: PfdawRequestBody;
-    security: PfdawSecurity;
 }
 export declare enum Pfdaw400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -102,6 +98,10 @@ export declare enum Pfdaw504ApplicationJsonErrorDescriptionEnum {
 export declare class Pfdaw504ApplicationJson extends SpeakeasyBase {
     error?: Pfdaw504ApplicationJsonErrorEnum;
     errorDescription?: Pfdaw504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class PfdawRequest extends SpeakeasyBase {
+    request?: PfdawRequestBody;
+    security: PfdawSecurity;
 }
 export declare class PfdawResponse extends SpeakeasyBase {
     contentType: string;

@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AttributeContext } from "./attributecontext";
 import { ResourceInfo } from "./resourceinfo";
+
 
 
 // CheckRequest
@@ -9,15 +9,15 @@ import { ResourceInfo } from "./resourceinfo";
  * Request message for the Check method.
 **/
 export class CheckRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attributes" })
+  @SpeakeasyMetadata({ data: "json, name=attributes" })
   attributes?: AttributeContext;
 
-  @Metadata({ data: "json, name=flags" })
+  @SpeakeasyMetadata({ data: "json, name=flags" })
   flags?: string;
 
-  @Metadata({ data: "json, name=resources", elemType: shared.ResourceInfo })
+  @SpeakeasyMetadata({ data: "json, name=resources", elemType: ResourceInfo })
   resources?: ResourceInfo[];
 
-  @Metadata({ data: "json, name=serviceConfigId" })
+  @SpeakeasyMetadata({ data: "json, name=serviceConfigId" })
   serviceConfigId?: string;
 }

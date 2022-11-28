@@ -31,7 +31,7 @@ type NetworkservicesProjectsLocationsServiceBindingsCreateSecurity struct {
 type NetworkservicesProjectsLocationsServiceBindingsCreateRequest struct {
 	PathParams  NetworkservicesProjectsLocationsServiceBindingsCreatePathParams
 	QueryParams NetworkservicesProjectsLocationsServiceBindingsCreateQueryParams
-	Request     *shared.ServiceBinding `request:"mediaType=application/json"`
+	Request     *shared.ServiceBindingInput `request:"mediaType=application/json"`
 	Security    NetworkservicesProjectsLocationsServiceBindingsCreateSecurity
 }
 

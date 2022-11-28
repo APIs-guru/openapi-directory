@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class CreateConfigPathParams:
-    product_id: str = field(default=None, metadata={'path_param': { 'field_name': 'productId', 'style': 'simple', 'explode': False }})
+    product_id: str = field(metadata={'path_param': { 'field_name': 'productId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,14 +17,14 @@ class CreateConfigRequests:
 
 @dataclass
 class CreateConfigRequest:
-    path_params: CreateConfigPathParams = field(default=None)
-    request: CreateConfigRequests = field(default=None)
+    path_params: CreateConfigPathParams = field()
+    request: CreateConfigRequests = field()
     
 
 @dataclass
 class CreateConfigResponse:
+    content_type: str = field()
+    status_code: int = field()
     config_model: Optional[shared.ConfigModel] = field(default=None)
     config_model_haljson: Optional[shared.ConfigModelHaljson] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

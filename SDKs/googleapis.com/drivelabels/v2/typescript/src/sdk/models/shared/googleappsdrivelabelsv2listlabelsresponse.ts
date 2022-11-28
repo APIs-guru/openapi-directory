@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleAppsDriveLabelsV2Label } from "./googleappsdrivelabelsv2label";
+
 
 
 // GoogleAppsDriveLabelsV2ListLabelsResponse
@@ -8,9 +8,9 @@ import { GoogleAppsDriveLabelsV2Label } from "./googleappsdrivelabelsv2label";
  * Response for listing Labels.
 **/
 export class GoogleAppsDriveLabelsV2ListLabelsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=labels", elemType: shared.GoogleAppsDriveLabelsV2Label })
+  @SpeakeasyMetadata({ data: "json, name=labels", elemType: GoogleAppsDriveLabelsV2Label })
   labels?: GoogleAppsDriveLabelsV2Label[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

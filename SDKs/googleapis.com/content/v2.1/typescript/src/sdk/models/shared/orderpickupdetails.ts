@@ -1,19 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OrderAddress } from "./orderaddress";
 import { OrderPickupDetailsCollector } from "./orderpickupdetailscollector";
 
 
+
 export class OrderPickupDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=address" })
+  @SpeakeasyMetadata({ data: "json, name=address" })
   address?: OrderAddress;
 
-  @Metadata({ data: "json, name=collectors", elemType: shared.OrderPickupDetailsCollector })
+  @SpeakeasyMetadata({ data: "json, name=collectors", elemType: OrderPickupDetailsCollector })
   collectors?: OrderPickupDetailsCollector[];
 
-  @Metadata({ data: "json, name=locationId" })
+  @SpeakeasyMetadata({ data: "json, name=locationId" })
   locationId?: string;
 
-  @Metadata({ data: "json, name=pickupType" })
+  @SpeakeasyMetadata({ data: "json, name=pickupType" })
   pickupType?: string;
 }

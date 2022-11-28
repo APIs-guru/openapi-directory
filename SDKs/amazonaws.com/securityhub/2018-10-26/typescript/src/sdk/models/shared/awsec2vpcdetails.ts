@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CidrBlockAssociation } from "./cidrblockassociation";
 import { Ipv6CidrBlockAssociation } from "./ipv6cidrblockassociation";
+
 
 
 // AwsEc2VpcDetails
@@ -9,15 +9,15 @@ import { Ipv6CidrBlockAssociation } from "./ipv6cidrblockassociation";
  * Details about an EC2 VPC.
 **/
 export class AwsEc2VpcDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CidrBlockAssociationSet", elemType: shared.CidrBlockAssociation })
+  @SpeakeasyMetadata({ data: "json, name=CidrBlockAssociationSet", elemType: CidrBlockAssociation })
   cidrBlockAssociationSet?: CidrBlockAssociation[];
 
-  @Metadata({ data: "json, name=DhcpOptionsId" })
+  @SpeakeasyMetadata({ data: "json, name=DhcpOptionsId" })
   dhcpOptionsId?: string;
 
-  @Metadata({ data: "json, name=Ipv6CidrBlockAssociationSet", elemType: shared.Ipv6CidrBlockAssociation })
+  @SpeakeasyMetadata({ data: "json, name=Ipv6CidrBlockAssociationSet", elemType: Ipv6CidrBlockAssociation })
   ipv6CidrBlockAssociationSet?: Ipv6CidrBlockAssociation[];
 
-  @Metadata({ data: "json, name=State" })
+  @SpeakeasyMetadata({ data: "json, name=State" })
   state?: string;
 }

@@ -4,6 +4,9 @@ import (
 	"time"
 )
 
+// Evidence
+//
+//	A record that contains the information needed to demonstrate compliance with the requirements specified by a control. Examples of evidence include change activity triggered by a user, or a system configuration snapshot.
 type Evidence struct {
 	AssessmentReportSelection *string           `json:"assessmentReportSelection,omitempty"`
 	Attributes                map[string]string `json:"attributes,omitempty"`

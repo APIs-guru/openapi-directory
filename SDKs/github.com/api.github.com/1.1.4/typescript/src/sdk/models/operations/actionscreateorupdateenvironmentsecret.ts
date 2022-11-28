@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ActionsCreateOrUpdateEnvironmentSecretPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=environment_name" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=environment_name" })
   environmentName: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repository_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repository_id" })
   repositoryId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=secret_name" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=secret_name" })
   secretName: string;
 }
 
 
 export class ActionsCreateOrUpdateEnvironmentSecretRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=encrypted_value" })
+  @SpeakeasyMetadata({ data: "json, name=encrypted_value" })
   encryptedValue?: string;
 
-  @Metadata({ data: "json, name=key_id" })
+  @SpeakeasyMetadata({ data: "json, name=key_id" })
   keyId?: string;
 }
 
 
 export class ActionsCreateOrUpdateEnvironmentSecretRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ActionsCreateOrUpdateEnvironmentSecretPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: ActionsCreateOrUpdateEnvironmentSecretRequestBody;
 }
 
 
 export class ActionsCreateOrUpdateEnvironmentSecretResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

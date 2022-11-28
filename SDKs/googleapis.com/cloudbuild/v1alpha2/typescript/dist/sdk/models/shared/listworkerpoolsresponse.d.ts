@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { WorkerPool } from "./workerpool";
 /**
  * Response containing existing `WorkerPools`.

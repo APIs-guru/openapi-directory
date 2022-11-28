@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AdsenseAdunitsListPathParams:
-    ad_client_id: str = field(default=None, metadata={'path_param': { 'field_name': 'adClientId', 'style': 'simple', 'explode': False }})
+    ad_client_id: str = field(metadata={'path_param': { 'field_name': 'adClientId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -24,14 +25,14 @@ class AdsenseAdunitsListQueryParams:
 
 @dataclass
 class AdsenseAdunitsListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AdsenseAdunitsListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -42,14 +43,14 @@ class AdsenseAdunitsListSecurity:
 
 @dataclass
 class AdsenseAdunitsListRequest:
-    path_params: AdsenseAdunitsListPathParams = field(default=None)
-    query_params: AdsenseAdunitsListQueryParams = field(default=None)
-    security: AdsenseAdunitsListSecurity = field(default=None)
+    path_params: AdsenseAdunitsListPathParams = field()
+    query_params: AdsenseAdunitsListQueryParams = field()
+    security: AdsenseAdunitsListSecurity = field()
     
 
 @dataclass
 class AdsenseAdunitsListResponse:
+    content_type: str = field()
+    status_code: int = field()
     ad_units: Optional[shared.AdUnits] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

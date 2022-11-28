@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Date } from "./date";
 
+
 export enum DeviceIpBlockFormEnum {
-    DeviceFormUnspecified = "DEVICE_FORM_UNSPECIFIED"
-,    Virtual = "VIRTUAL"
-,    Physical = "PHYSICAL"
-,    Emulator = "EMULATOR"
+    DeviceFormUnspecified = "DEVICE_FORM_UNSPECIFIED",
+    Virtual = "VIRTUAL",
+    Physical = "PHYSICAL",
+    Emulator = "EMULATOR"
 }
 
 
@@ -14,12 +15,12 @@ export enum DeviceIpBlockFormEnum {
  * A single device IP block
 **/
 export class DeviceIpBlock extends SpeakeasyBase {
-  @Metadata({ data: "json, name=addedDate" })
+  @SpeakeasyMetadata({ data: "json, name=addedDate" })
   addedDate?: Date;
 
-  @Metadata({ data: "json, name=block" })
+  @SpeakeasyMetadata({ data: "json, name=block" })
   block?: string;
 
-  @Metadata({ data: "json, name=form" })
+  @SpeakeasyMetadata({ data: "json, name=form" })
   form?: DeviceIpBlockFormEnum;
 }

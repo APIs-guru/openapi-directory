@@ -1,5 +1,7 @@
 package shared
 
+// GetIosReopenAttributionResponse
+// Response for iSDK to get reopen attribution for app universal link open deeplinking. This endpoint is meant for only iOS requests.
 type GetIosReopenAttributionResponse struct {
 	DeepLink         *string `json:"deepLink,omitempty"`
 	InvitationID     *string `json:"invitationId,omitempty"`

@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleCloudDataplexV1TaskTriggerSpecTypeEnum {
-    TypeUnspecified = "TYPE_UNSPECIFIED"
-,    OnDemand = "ON_DEMAND"
-,    Recurring = "RECURRING"
+    TypeUnspecified = "TYPE_UNSPECIFIED",
+    OnDemand = "ON_DEMAND",
+    Recurring = "RECURRING"
 }
 
 
@@ -12,18 +13,18 @@ export enum GoogleCloudDataplexV1TaskTriggerSpecTypeEnum {
  * Task scheduling and trigger settings.
 **/
 export class GoogleCloudDataplexV1TaskTriggerSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=disabled" })
+  @SpeakeasyMetadata({ data: "json, name=disabled" })
   disabled?: boolean;
 
-  @Metadata({ data: "json, name=maxRetries" })
+  @SpeakeasyMetadata({ data: "json, name=maxRetries" })
   maxRetries?: number;
 
-  @Metadata({ data: "json, name=schedule" })
+  @SpeakeasyMetadata({ data: "json, name=schedule" })
   schedule?: string;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: GoogleCloudDataplexV1TaskTriggerSpecTypeEnum;
 }

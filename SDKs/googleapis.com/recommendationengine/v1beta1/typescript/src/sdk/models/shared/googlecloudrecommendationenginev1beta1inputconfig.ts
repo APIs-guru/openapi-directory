@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudRecommendationengineV1beta1BigQuerySource } from "./googlecloudrecommendationenginev1beta1bigquerysource";
 import { GoogleCloudRecommendationengineV1beta1CatalogInlineSource } from "./googlecloudrecommendationenginev1beta1cataloginlinesource";
 import { GoogleCloudRecommendationengineV1beta1GcsSource } from "./googlecloudrecommendationenginev1beta1gcssource";
 import { GoogleCloudRecommendationengineV1beta1UserEventInlineSource } from "./googlecloudrecommendationenginev1beta1usereventinlinesource";
+
 
 
 // GoogleCloudRecommendationengineV1beta1InputConfig
@@ -10,15 +11,15 @@ import { GoogleCloudRecommendationengineV1beta1UserEventInlineSource } from "./g
  * The input config source.
 **/
 export class GoogleCloudRecommendationengineV1beta1InputConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bigQuerySource" })
+  @SpeakeasyMetadata({ data: "json, name=bigQuerySource" })
   bigQuerySource?: GoogleCloudRecommendationengineV1beta1BigQuerySource;
 
-  @Metadata({ data: "json, name=catalogInlineSource" })
+  @SpeakeasyMetadata({ data: "json, name=catalogInlineSource" })
   catalogInlineSource?: GoogleCloudRecommendationengineV1beta1CatalogInlineSource;
 
-  @Metadata({ data: "json, name=gcsSource" })
+  @SpeakeasyMetadata({ data: "json, name=gcsSource" })
   gcsSource?: GoogleCloudRecommendationengineV1beta1GcsSource;
 
-  @Metadata({ data: "json, name=userEventInlineSource" })
+  @SpeakeasyMetadata({ data: "json, name=userEventInlineSource" })
   userEventInlineSource?: GoogleCloudRecommendationengineV1beta1UserEventInlineSource;
 }

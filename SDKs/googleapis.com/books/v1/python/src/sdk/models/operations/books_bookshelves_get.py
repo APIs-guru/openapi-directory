@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class BooksBookshelvesGetPathParams:
-    shelf: str = field(default=None, metadata={'path_param': { 'field_name': 'shelf', 'style': 'simple', 'explode': False }})
-    user_id: str = field(default=None, metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
+    shelf: str = field(metadata={'path_param': { 'field_name': 'shelf', 'style': 'simple', 'explode': False }})
+    user_id: str = field(metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class BooksBookshelvesGetQueryParams:
 
 @dataclass
 class BooksBookshelvesGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BooksBookshelvesGetRequest:
-    path_params: BooksBookshelvesGetPathParams = field(default=None)
-    query_params: BooksBookshelvesGetQueryParams = field(default=None)
-    security: BooksBookshelvesGetSecurity = field(default=None)
+    path_params: BooksBookshelvesGetPathParams = field()
+    query_params: BooksBookshelvesGetQueryParams = field()
+    security: BooksBookshelvesGetSecurity = field()
     
 
 @dataclass
 class BooksBookshelvesGetResponse:
+    content_type: str = field()
+    status_code: int = field()
     bookshelf: Optional[shared.Bookshelf] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

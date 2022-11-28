@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class ListTrackerConsumersPathParams:
-    tracker_name: str = field(default=None, metadata={'path_param': { 'field_name': 'TrackerName', 'style': 'simple', 'explode': False }})
+    tracker_name: str = field(metadata={'path_param': { 'field_name': 'TrackerName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -29,26 +33,26 @@ class ListTrackerConsumersHeaders:
 @dataclass_json
 @dataclass
 class ListTrackerConsumersRequestBody:
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MaxResults' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MaxResults') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
     
 
 @dataclass
 class ListTrackerConsumersRequest:
-    path_params: ListTrackerConsumersPathParams = field(default=None)
-    query_params: ListTrackerConsumersQueryParams = field(default=None)
-    headers: ListTrackerConsumersHeaders = field(default=None)
-    request: ListTrackerConsumersRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ListTrackerConsumersHeaders = field()
+    path_params: ListTrackerConsumersPathParams = field()
+    query_params: ListTrackerConsumersQueryParams = field()
+    request: ListTrackerConsumersRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ListTrackerConsumersResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     list_tracker_consumers_response: Optional[shared.ListTrackerConsumersResponse] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // FailureDetails
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The details of the step failure. The service attempts to detect the root cause for many common failures.
 **/
 export class FailureDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LogFile" })
+  @SpeakeasyMetadata({ data: "json, name=LogFile" })
   logFile?: string;
 
-  @Metadata({ data: "json, name=Message" })
+  @SpeakeasyMetadata({ data: "json, name=Message" })
   message?: string;
 
-  @Metadata({ data: "json, name=Reason" })
+  @SpeakeasyMetadata({ data: "json, name=Reason" })
   reason?: string;
 }

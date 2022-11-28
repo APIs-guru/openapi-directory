@@ -1,5 +1,7 @@
 package shared
 
+// Disk
+// An instance-attached disk resource.
 type Disk struct {
 	AutoDelete      *bool            `json:"autoDelete,omitempty"`
 	Boot            *bool            `json:"boot,omitempty"`

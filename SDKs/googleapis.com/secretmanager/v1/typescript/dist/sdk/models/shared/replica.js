@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CustomerManagedEncryption } from "./customermanagedencryption";
 // Replica
 /**
@@ -34,11 +34,11 @@ var Replica = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=customerManagedEncryption" }),
+        SpeakeasyMetadata({ data: "json, name=customerManagedEncryption" }),
         __metadata("design:type", CustomerManagedEncryption)
     ], Replica.prototype, "customerManagedEncryption", void 0);
     __decorate([
-        Metadata({ data: "json, name=location" }),
+        SpeakeasyMetadata({ data: "json, name=location" }),
         __metadata("design:type", String)
     ], Replica.prototype, "location", void 0);
     return Replica;

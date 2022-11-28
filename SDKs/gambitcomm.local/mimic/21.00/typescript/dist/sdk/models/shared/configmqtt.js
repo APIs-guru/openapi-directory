@@ -22,46 +22,46 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ConfigMqtt = /** @class */ (function (_super) {
     __extends(ConfigMqtt, _super);
     function ConfigMqtt() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=broker" }),
+        SpeakeasyMetadata({ data: "json, name=broker" }),
         __metadata("design:type", String)
     ], ConfigMqtt.prototype, "broker", void 0);
     __decorate([
-        Metadata({ data: "json, name=clientid" }),
+        SpeakeasyMetadata({ data: "json, name=clientid" }),
         __metadata("design:type", String)
     ], ConfigMqtt.prototype, "clientid", void 0);
     __decorate([
-        Metadata({ data: "json, name=filename" }),
+        SpeakeasyMetadata({ data: "json, name=filename" }),
         __metadata("design:type", String)
     ], ConfigMqtt.prototype, "filename", void 0);
     __decorate([
-        Metadata({ data: "json, name=is_tls" }),
+        SpeakeasyMetadata({ data: "json, name=is_tls" }),
         __metadata("design:type", String)
     ], ConfigMqtt.prototype, "isTls", void 0);
     __decorate([
-        Metadata({ data: "json, name=password" }),
+        SpeakeasyMetadata({ data: "json, name=password" }),
         __metadata("design:type", String)
     ], ConfigMqtt.prototype, "password", void 0);
     __decorate([
-        Metadata({ data: "json, name=port" }),
+        SpeakeasyMetadata({ data: "json, name=port" }),
         __metadata("design:type", Number)
     ], ConfigMqtt.prototype, "port", void 0);
     __decorate([
-        Metadata({ data: "json, name=tls_conf_filename" }),
+        SpeakeasyMetadata({ data: "json, name=tls_conf_filename" }),
         __metadata("design:type", String)
     ], ConfigMqtt.prototype, "tlsConfFilename", void 0);
     __decorate([
-        Metadata({ data: "json, name=username" }),
+        SpeakeasyMetadata({ data: "json, name=username" }),
         __metadata("design:type", String)
     ], ConfigMqtt.prototype, "username", void 0);
     __decorate([
-        Metadata({ data: "json, name=version" }),
+        SpeakeasyMetadata({ data: "json, name=version" }),
         __metadata("design:type", String)
     ], ConfigMqtt.prototype, "version", void 0);
     return ConfigMqtt;

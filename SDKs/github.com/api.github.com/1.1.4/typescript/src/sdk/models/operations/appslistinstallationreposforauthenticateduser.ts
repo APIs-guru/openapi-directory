@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class AppsListInstallationReposForAuthenticatedUserPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=installation_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=installation_id" })
   installationId: number;
 }
 
 
 export class AppsListInstallationReposForAuthenticatedUserQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 }
 
 
-export class AppsListInstallationReposForAuthenticatedUserRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: AppsListInstallationReposForAuthenticatedUserPathParams;
-
-  @Metadata()
-  queryParams: AppsListInstallationReposForAuthenticatedUserQueryParams;
-}
-
-
 export class AppsListInstallationReposForAuthenticatedUser200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=repositories", elemType: shared.Repository })
+  @SpeakeasyMetadata({ data: "json, name=repositories", elemType: shared.Repository })
   repositories: shared.Repository[];
 
-  @Metadata({ data: "json, name=repository_selection" })
+  @SpeakeasyMetadata({ data: "json, name=repository_selection" })
   repositorySelection?: string;
 
-  @Metadata({ data: "json, name=total_count" })
+  @SpeakeasyMetadata({ data: "json, name=total_count" })
   totalCount: number;
 }
 
 
+export class AppsListInstallationReposForAuthenticatedUserRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: AppsListInstallationReposForAuthenticatedUserPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: AppsListInstallationReposForAuthenticatedUserQueryParams;
+}
+
+
 export class AppsListInstallationReposForAuthenticatedUserResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   appsListInstallationReposForAuthenticatedUser200ApplicationJsonObject?: AppsListInstallationReposForAuthenticatedUser200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 }

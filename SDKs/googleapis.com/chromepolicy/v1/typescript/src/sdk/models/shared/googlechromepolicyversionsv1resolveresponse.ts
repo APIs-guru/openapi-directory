@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleChromePolicyVersionsV1ResolvedPolicy } from "./googlechromepolicyversionsv1resolvedpolicy";
+
 
 
 // GoogleChromePolicyVersionsV1ResolveResponse
@@ -8,9 +8,9 @@ import { GoogleChromePolicyVersionsV1ResolvedPolicy } from "./googlechromepolicy
  * Response message for getting the resolved policy value for a specific target.
 **/
 export class GoogleChromePolicyVersionsV1ResolveResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=resolvedPolicies", elemType: shared.GoogleChromePolicyVersionsV1ResolvedPolicy })
+  @SpeakeasyMetadata({ data: "json, name=resolvedPolicies", elemType: GoogleChromePolicyVersionsV1ResolvedPolicy })
   resolvedPolicies?: GoogleChromePolicyVersionsV1ResolvedPolicy[];
 }

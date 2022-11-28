@@ -1,5 +1,7 @@
 package shared
 
+// TransferDomainRequest
+// The TransferDomain request includes the following elements.
 type TransferDomainRequest struct {
 	AdminContact                    ContactDetail `json:"AdminContact"`
 	AuthCode                        *string       `json:"AuthCode,omitempty"`

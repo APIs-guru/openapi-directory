@@ -8,6 +8,8 @@ const (
 	GoogleCloudDataplexV1ZoneResourceSpecLocationTypeEnumMultiRegion             GoogleCloudDataplexV1ZoneResourceSpecLocationTypeEnum = "MULTI_REGION"
 )
 
+// GoogleCloudDataplexV1ZoneResourceSpec
+// Settings for resources attached as assets within a zone.
 type GoogleCloudDataplexV1ZoneResourceSpec struct {
 	LocationType *GoogleCloudDataplexV1ZoneResourceSpecLocationTypeEnum `json:"locationType,omitempty"`
 }

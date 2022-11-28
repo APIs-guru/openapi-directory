@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FilterOptions } from "./filteroptions";
 import { Source } from "./source";
+
 
 
 // DataSourceRestriction
@@ -9,9 +9,9 @@ import { Source } from "./source";
  * Restriction on Datasource.
 **/
 export class DataSourceRestriction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=filterOptions", elemType: shared.FilterOptions })
+  @SpeakeasyMetadata({ data: "json, name=filterOptions", elemType: FilterOptions })
   filterOptions?: FilterOptions[];
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: Source;
 }

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetCreateQueueActionEnum(str, Enum):
     CREATE_QUEUE = "CreateQueue"
@@ -10,11 +14,11 @@ class GetCreateQueueVersionEnum(str, Enum):
 
 @dataclass
 class GetCreateQueueQueryParams:
-    action: GetCreateQueueActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetCreateQueueActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    queue_name: str = field(metadata={'query_param': { 'field_name': 'QueueName', 'style': 'form', 'explode': True }})
+    version: GetCreateQueueVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     attribute: Optional[dict[str, str]] = field(default=None, metadata={'query_param': { 'field_name': 'Attribute', 'style': 'form', 'explode': True }})
-    queue_name: str = field(default=None, metadata={'query_param': { 'field_name': 'QueueName', 'style': 'form', 'explode': True }})
     tag: Optional[dict[str, str]] = field(default=None, metadata={'query_param': { 'field_name': 'Tag', 'style': 'form', 'explode': True }})
-    version: GetCreateQueueVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetCreateQueueHeaders:
 
 @dataclass
 class GetCreateQueueRequest:
-    query_params: GetCreateQueueQueryParams = field(default=None)
-    headers: GetCreateQueueHeaders = field(default=None)
+    headers: GetCreateQueueHeaders = field()
+    query_params: GetCreateQueueQueryParams = field()
     
 
 @dataclass
 class GetCreateQueueResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

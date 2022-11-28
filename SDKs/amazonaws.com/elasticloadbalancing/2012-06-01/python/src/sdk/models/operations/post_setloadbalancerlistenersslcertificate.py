@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostSetLoadBalancerListenerSslCertificateActionEnum(str, Enum):
     SET_LOAD_BALANCER_LISTENER_SSL_CERTIFICATE = "SetLoadBalancerListenerSSLCertificate"
@@ -10,8 +14,8 @@ class PostSetLoadBalancerListenerSslCertificateVersionEnum(str, Enum):
 
 @dataclass
 class PostSetLoadBalancerListenerSslCertificateQueryParams:
-    action: PostSetLoadBalancerListenerSslCertificateActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostSetLoadBalancerListenerSslCertificateVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostSetLoadBalancerListenerSslCertificateActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostSetLoadBalancerListenerSslCertificateVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostSetLoadBalancerListenerSslCertificateHeaders:
 
 @dataclass
 class PostSetLoadBalancerListenerSslCertificateRequest:
-    query_params: PostSetLoadBalancerListenerSslCertificateQueryParams = field(default=None)
-    headers: PostSetLoadBalancerListenerSslCertificateHeaders = field(default=None)
+    headers: PostSetLoadBalancerListenerSslCertificateHeaders = field()
+    query_params: PostSetLoadBalancerListenerSslCertificateQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostSetLoadBalancerListenerSslCertificateResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

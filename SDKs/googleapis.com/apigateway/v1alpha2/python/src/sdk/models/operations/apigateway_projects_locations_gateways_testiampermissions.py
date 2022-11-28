@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ApigatewayProjectsLocationsGatewaysTestIamPermissionsPathParams:
-    resource: str = field(default=None, metadata={'path_param': { 'field_name': 'resource', 'style': 'simple', 'explode': False }})
+    resource: str = field(metadata={'path_param': { 'field_name': 'resource', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class ApigatewayProjectsLocationsGatewaysTestIamPermissionsQueryParams:
 
 @dataclass
 class ApigatewayProjectsLocationsGatewaysTestIamPermissionsSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ApigatewayProjectsLocationsGatewaysTestIamPermissionsRequest:
-    path_params: ApigatewayProjectsLocationsGatewaysTestIamPermissionsPathParams = field(default=None)
-    query_params: ApigatewayProjectsLocationsGatewaysTestIamPermissionsQueryParams = field(default=None)
+    path_params: ApigatewayProjectsLocationsGatewaysTestIamPermissionsPathParams = field()
+    query_params: ApigatewayProjectsLocationsGatewaysTestIamPermissionsQueryParams = field()
+    security: ApigatewayProjectsLocationsGatewaysTestIamPermissionsSecurity = field()
     request: Optional[shared.ApigatewayTestIamPermissionsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ApigatewayProjectsLocationsGatewaysTestIamPermissionsSecurity = field(default=None)
     
 
 @dataclass
 class ApigatewayProjectsLocationsGatewaysTestIamPermissionsResponse:
+    content_type: str = field()
+    status_code: int = field()
     apigateway_test_iam_permissions_response: Optional[shared.ApigatewayTestIamPermissionsResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

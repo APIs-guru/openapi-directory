@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InputConfiguration } from "./inputconfiguration";
 import { InputDefinition } from "./inputdefinition";
+
 
 
 // Input
@@ -8,9 +9,9 @@ import { InputDefinition } from "./inputdefinition";
  * Information about the input.
 **/
 export class Input extends SpeakeasyBase {
-  @Metadata({ data: "json, name=inputConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=inputConfiguration" })
   inputConfiguration?: InputConfiguration;
 
-  @Metadata({ data: "json, name=inputDefinition" })
+  @SpeakeasyMetadata({ data: "json, name=inputDefinition" })
   inputDefinition?: InputDefinition;
 }

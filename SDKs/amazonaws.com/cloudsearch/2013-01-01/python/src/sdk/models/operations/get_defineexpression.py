@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDefineExpressionActionEnum(str, Enum):
     DEFINE_EXPRESSION = "DefineExpression"
@@ -7,8 +11,12 @@ class GetDefineExpressionActionEnum(str, Enum):
 
 @dataclass
 class GetDefineExpressionExpression:
-    expression_name: str = field(default=None, metadata={'query_param': { 'field_name': 'ExpressionName' }})
-    expression_value: str = field(default=None, metadata={'query_param': { 'field_name': 'ExpressionValue' }})
+    r"""GetDefineExpressionExpression
+    A named expression that can be evaluated at search time. Can be used to sort the search results, define other expressions, or return computed information in the search results. 
+    """
+    
+    expression_name: str = field(metadata={'query_param': { 'field_name': 'ExpressionName' }})
+    expression_value: str = field(metadata={'query_param': { 'field_name': 'ExpressionValue' }})
     
 class GetDefineExpressionVersionEnum(str, Enum):
     TWO_THOUSAND_AND_THIRTEEN_01_01 = "2013-01-01"
@@ -16,10 +24,10 @@ class GetDefineExpressionVersionEnum(str, Enum):
 
 @dataclass
 class GetDefineExpressionQueryParams:
-    action: GetDefineExpressionActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    domain_name: str = field(default=None, metadata={'query_param': { 'field_name': 'DomainName', 'style': 'form', 'explode': True }})
-    expression: GetDefineExpressionExpression = field(default=None, metadata={'query_param': { 'field_name': 'Expression', 'style': 'form', 'explode': True }})
-    version: GetDefineExpressionVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetDefineExpressionActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    domain_name: str = field(metadata={'query_param': { 'field_name': 'DomainName', 'style': 'form', 'explode': True }})
+    expression: GetDefineExpressionExpression = field(metadata={'query_param': { 'field_name': 'Expression', 'style': 'form', 'explode': True }})
+    version: GetDefineExpressionVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -35,13 +43,13 @@ class GetDefineExpressionHeaders:
 
 @dataclass
 class GetDefineExpressionRequest:
-    query_params: GetDefineExpressionQueryParams = field(default=None)
-    headers: GetDefineExpressionHeaders = field(default=None)
+    headers: GetDefineExpressionHeaders = field()
+    query_params: GetDefineExpressionQueryParams = field()
     
 
 @dataclass
 class GetDefineExpressionResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

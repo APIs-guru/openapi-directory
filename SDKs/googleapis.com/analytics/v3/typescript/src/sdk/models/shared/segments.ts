@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Segment } from "./segment";
+
 
 
 // Segments
@@ -8,27 +8,27 @@ import { Segment } from "./segment";
  * An segment collection lists Analytics segments that the user has access to. Each resource in the collection corresponds to a single Analytics segment.
 **/
 export class Segments extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.Segment })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: Segment })
   items?: Segment[];
 
-  @Metadata({ data: "json, name=itemsPerPage" })
+  @SpeakeasyMetadata({ data: "json, name=itemsPerPage" })
   itemsPerPage?: number;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=nextLink" })
+  @SpeakeasyMetadata({ data: "json, name=nextLink" })
   nextLink?: string;
 
-  @Metadata({ data: "json, name=previousLink" })
+  @SpeakeasyMetadata({ data: "json, name=previousLink" })
   previousLink?: string;
 
-  @Metadata({ data: "json, name=startIndex" })
+  @SpeakeasyMetadata({ data: "json, name=startIndex" })
   startIndex?: number;
 
-  @Metadata({ data: "json, name=totalResults" })
+  @SpeakeasyMetadata({ data: "json, name=totalResults" })
   totalResults?: number;
 
-  @Metadata({ data: "json, name=username" })
+  @SpeakeasyMetadata({ data: "json, name=username" })
   username?: string;
 }

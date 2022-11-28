@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Accessibility } from "./accessibility";
 import { Activities } from "./activities";
 import { GuestUnitFeatures } from "./guestunitfeatures";
@@ -18,10 +17,87 @@ import { Policies } from "./policies";
 import { Pools } from "./pools";
 import { Property } from "./property";
 import { Services } from "./services";
-import { GuestUnitFeatures } from "./guestunitfeatures";
-import { Sustainability } from "./sustainability";
+import { SustainabilityInput } from "./sustainability";
 import { Transportation } from "./transportation";
 import { Wellness } from "./wellness";
+import { Sustainability } from "./sustainability";
+
+
+
+// LodgingInput
+/** 
+ * Lodging of a location that provides accomodations.
+**/
+export class LodgingInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=accessibility" })
+  accessibility?: Accessibility;
+
+  @SpeakeasyMetadata({ data: "json, name=activities" })
+  activities?: Activities;
+
+  @SpeakeasyMetadata({ data: "json, name=allUnits" })
+  allUnits?: GuestUnitFeatures;
+
+  @SpeakeasyMetadata({ data: "json, name=business" })
+  business?: Business;
+
+  @SpeakeasyMetadata({ data: "json, name=commonLivingArea" })
+  commonLivingArea?: LivingArea;
+
+  @SpeakeasyMetadata({ data: "json, name=connectivity" })
+  connectivity?: Connectivity;
+
+  @SpeakeasyMetadata({ data: "json, name=families" })
+  families?: Families;
+
+  @SpeakeasyMetadata({ data: "json, name=foodAndDrink" })
+  foodAndDrink?: FoodAndDrink;
+
+  @SpeakeasyMetadata({ data: "json, name=guestUnits", elemType: GuestUnitType })
+  guestUnits?: GuestUnitType[];
+
+  @SpeakeasyMetadata({ data: "json, name=healthAndSafety" })
+  healthAndSafety?: HealthAndSafety;
+
+  @SpeakeasyMetadata({ data: "json, name=housekeeping" })
+  housekeeping?: Housekeeping;
+
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
+  metadata?: LodgingMetadata;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=parking" })
+  parking?: Parking;
+
+  @SpeakeasyMetadata({ data: "json, name=pets" })
+  pets?: Pets;
+
+  @SpeakeasyMetadata({ data: "json, name=policies" })
+  policies?: Policies;
+
+  @SpeakeasyMetadata({ data: "json, name=pools" })
+  pools?: Pools;
+
+  @SpeakeasyMetadata({ data: "json, name=property" })
+  property?: Property;
+
+  @SpeakeasyMetadata({ data: "json, name=services" })
+  services?: Services;
+
+  @SpeakeasyMetadata({ data: "json, name=someUnits" })
+  someUnits?: GuestUnitFeatures;
+
+  @SpeakeasyMetadata({ data: "json, name=sustainability" })
+  sustainability?: SustainabilityInput;
+
+  @SpeakeasyMetadata({ data: "json, name=transportation" })
+  transportation?: Transportation;
+
+  @SpeakeasyMetadata({ data: "json, name=wellness" })
+  wellness?: Wellness;
+}
 
 
 // Lodging
@@ -29,72 +105,72 @@ import { Wellness } from "./wellness";
  * Lodging of a location that provides accomodations.
 **/
 export class Lodging extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessibility" })
+  @SpeakeasyMetadata({ data: "json, name=accessibility" })
   accessibility?: Accessibility;
 
-  @Metadata({ data: "json, name=activities" })
+  @SpeakeasyMetadata({ data: "json, name=activities" })
   activities?: Activities;
 
-  @Metadata({ data: "json, name=allUnits" })
+  @SpeakeasyMetadata({ data: "json, name=allUnits" })
   allUnits?: GuestUnitFeatures;
 
-  @Metadata({ data: "json, name=business" })
+  @SpeakeasyMetadata({ data: "json, name=business" })
   business?: Business;
 
-  @Metadata({ data: "json, name=commonLivingArea" })
+  @SpeakeasyMetadata({ data: "json, name=commonLivingArea" })
   commonLivingArea?: LivingArea;
 
-  @Metadata({ data: "json, name=connectivity" })
+  @SpeakeasyMetadata({ data: "json, name=connectivity" })
   connectivity?: Connectivity;
 
-  @Metadata({ data: "json, name=families" })
+  @SpeakeasyMetadata({ data: "json, name=families" })
   families?: Families;
 
-  @Metadata({ data: "json, name=foodAndDrink" })
+  @SpeakeasyMetadata({ data: "json, name=foodAndDrink" })
   foodAndDrink?: FoodAndDrink;
 
-  @Metadata({ data: "json, name=guestUnits", elemType: shared.GuestUnitType })
+  @SpeakeasyMetadata({ data: "json, name=guestUnits", elemType: GuestUnitType })
   guestUnits?: GuestUnitType[];
 
-  @Metadata({ data: "json, name=healthAndSafety" })
+  @SpeakeasyMetadata({ data: "json, name=healthAndSafety" })
   healthAndSafety?: HealthAndSafety;
 
-  @Metadata({ data: "json, name=housekeeping" })
+  @SpeakeasyMetadata({ data: "json, name=housekeeping" })
   housekeeping?: Housekeeping;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: LodgingMetadata;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=parking" })
+  @SpeakeasyMetadata({ data: "json, name=parking" })
   parking?: Parking;
 
-  @Metadata({ data: "json, name=pets" })
+  @SpeakeasyMetadata({ data: "json, name=pets" })
   pets?: Pets;
 
-  @Metadata({ data: "json, name=policies" })
+  @SpeakeasyMetadata({ data: "json, name=policies" })
   policies?: Policies;
 
-  @Metadata({ data: "json, name=pools" })
+  @SpeakeasyMetadata({ data: "json, name=pools" })
   pools?: Pools;
 
-  @Metadata({ data: "json, name=property" })
+  @SpeakeasyMetadata({ data: "json, name=property" })
   property?: Property;
 
-  @Metadata({ data: "json, name=services" })
+  @SpeakeasyMetadata({ data: "json, name=services" })
   services?: Services;
 
-  @Metadata({ data: "json, name=someUnits" })
+  @SpeakeasyMetadata({ data: "json, name=someUnits" })
   someUnits?: GuestUnitFeatures;
 
-  @Metadata({ data: "json, name=sustainability" })
+  @SpeakeasyMetadata({ data: "json, name=sustainability" })
   sustainability?: Sustainability;
 
-  @Metadata({ data: "json, name=transportation" })
+  @SpeakeasyMetadata({ data: "json, name=transportation" })
   transportation?: Transportation;
 
-  @Metadata({ data: "json, name=wellness" })
+  @SpeakeasyMetadata({ data: "json, name=wellness" })
   wellness?: Wellness;
 }

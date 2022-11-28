@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { AcceleratorType } from "./acceleratortype";
 // ListAcceleratorTypesResponse
 /**
  * Response for ListAcceleratorTypes.
@@ -34,15 +34,15 @@ var ListAcceleratorTypesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=acceleratorTypes", elemType: shared.AcceleratorType }),
+        SpeakeasyMetadata({ data: "json, name=acceleratorTypes", elemType: AcceleratorType }),
         __metadata("design:type", Array)
     ], ListAcceleratorTypesResponse.prototype, "acceleratorTypes", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextPageToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextPageToken" }),
         __metadata("design:type", String)
     ], ListAcceleratorTypesResponse.prototype, "nextPageToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=unreachable" }),
+        SpeakeasyMetadata({ data: "json, name=unreachable" }),
         __metadata("design:type", Array)
     ], ListAcceleratorTypesResponse.prototype, "unreachable", void 0);
     return ListAcceleratorTypesResponse;

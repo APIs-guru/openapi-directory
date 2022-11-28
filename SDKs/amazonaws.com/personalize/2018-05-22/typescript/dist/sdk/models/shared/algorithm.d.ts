@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AlgorithmImage } from "./algorithmimage";
 import { DefaultHyperParameterRanges } from "./defaulthyperparameterranges";
 /**

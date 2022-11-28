@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // NamedQuery
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A query, where <code>QueryString</code> is the list of SQL query statements that comprise the query.
 **/
 export class NamedQuery extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Database" })
+  @SpeakeasyMetadata({ data: "json, name=Database" })
   database: string;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 
-  @Metadata({ data: "json, name=NamedQueryId" })
+  @SpeakeasyMetadata({ data: "json, name=NamedQueryId" })
   namedQueryId?: string;
 
-  @Metadata({ data: "json, name=QueryString" })
+  @SpeakeasyMetadata({ data: "json, name=QueryString" })
   queryString: string;
 
-  @Metadata({ data: "json, name=WorkGroup" })
+  @SpeakeasyMetadata({ data: "json, name=WorkGroup" })
   workGroup?: string;
 }

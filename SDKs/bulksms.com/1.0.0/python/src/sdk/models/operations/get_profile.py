@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class GetProfileSecurity:
-    basic_auth: shared.SchemeBasicAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    basic_auth: shared.SchemeBasicAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
     
 
 @dataclass
 class GetProfileRequest:
-    security: GetProfileSecurity = field(default=None)
+    security: GetProfileSecurity = field()
     
 
 @dataclass
 class GetProfileResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     profile: Optional[shared.Profile] = field(default=None)
-    status_code: int = field(default=None)
     

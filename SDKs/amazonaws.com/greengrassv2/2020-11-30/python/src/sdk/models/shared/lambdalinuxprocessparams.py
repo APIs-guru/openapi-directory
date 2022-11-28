@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import lambdacontainerparams
-from . import lambdaisolationmode_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class LambdaLinuxProcessParams:
-    container_params: Optional[lambdacontainerparams.LambdaContainerParams] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'containerParams' }})
-    isolation_mode: Optional[lambdaisolationmode_enum.LambdaIsolationModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'isolationMode' }})
+    r"""LambdaLinuxProcessParams
+    Contains parameters for a Linux process that contains an Lambda function.
+    """
+    
+    container_params: Optional[LambdaContainerParams] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('containerParams') }})
+    isolation_mode: Optional[LambdaIsolationModeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('isolationMode') }})
     

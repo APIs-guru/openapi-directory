@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AuthenticationTypeEnum } from "./authenticationtypeenum";
 import { SessionConnectionStateEnum } from "./sessionconnectionstateenum";
 import { NetworkAccessConfiguration } from "./networkaccessconfiguration";
@@ -37,43 +37,43 @@ var Session = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AuthenticationType" }),
+        SpeakeasyMetadata({ data: "json, name=AuthenticationType" }),
         __metadata("design:type", String)
     ], Session.prototype, "authenticationType", void 0);
     __decorate([
-        Metadata({ data: "json, name=ConnectionState" }),
+        SpeakeasyMetadata({ data: "json, name=ConnectionState" }),
         __metadata("design:type", String)
     ], Session.prototype, "connectionState", void 0);
     __decorate([
-        Metadata({ data: "json, name=FleetName" }),
+        SpeakeasyMetadata({ data: "json, name=FleetName" }),
         __metadata("design:type", String)
     ], Session.prototype, "fleetName", void 0);
     __decorate([
-        Metadata({ data: "json, name=Id" }),
+        SpeakeasyMetadata({ data: "json, name=Id" }),
         __metadata("design:type", String)
     ], Session.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=MaxExpirationTime" }),
+        SpeakeasyMetadata({ data: "json, name=MaxExpirationTime" }),
         __metadata("design:type", Date)
     ], Session.prototype, "maxExpirationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=NetworkAccessConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=NetworkAccessConfiguration" }),
         __metadata("design:type", NetworkAccessConfiguration)
     ], Session.prototype, "networkAccessConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=StackName" }),
+        SpeakeasyMetadata({ data: "json, name=StackName" }),
         __metadata("design:type", String)
     ], Session.prototype, "stackName", void 0);
     __decorate([
-        Metadata({ data: "json, name=StartTime" }),
+        SpeakeasyMetadata({ data: "json, name=StartTime" }),
         __metadata("design:type", Date)
     ], Session.prototype, "startTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=State" }),
+        SpeakeasyMetadata({ data: "json, name=State" }),
         __metadata("design:type", String)
     ], Session.prototype, "state", void 0);
     __decorate([
-        Metadata({ data: "json, name=UserId" }),
+        SpeakeasyMetadata({ data: "json, name=UserId" }),
         __metadata("design:type", String)
     ], Session.prototype, "userId", void 0);
     return Session;

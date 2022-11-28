@@ -1,5 +1,7 @@
 package shared
 
+// SslCertsInsertResponse
+// SslCert insert response.
 type SslCertsInsertResponse struct {
 	ClientCert   *SslCertDetail `json:"clientCert,omitempty"`
 	Kind         *string        `json:"kind,omitempty"`

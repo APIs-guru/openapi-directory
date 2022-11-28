@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TimeInNanos } from "./timeinnanos";
 import { Variant } from "./variant";
 // InterpolatedAssetPropertyValue
@@ -35,11 +35,11 @@ var InterpolatedAssetPropertyValue = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=timestamp" }),
+        SpeakeasyMetadata({ data: "json, name=timestamp" }),
         __metadata("design:type", TimeInNanos)
     ], InterpolatedAssetPropertyValue.prototype, "timestamp", void 0);
     __decorate([
-        Metadata({ data: "json, name=value" }),
+        SpeakeasyMetadata({ data: "json, name=value" }),
         __metadata("design:type", Variant)
     ], InterpolatedAssetPropertyValue.prototype, "value", void 0);
     return InterpolatedAssetPropertyValue;

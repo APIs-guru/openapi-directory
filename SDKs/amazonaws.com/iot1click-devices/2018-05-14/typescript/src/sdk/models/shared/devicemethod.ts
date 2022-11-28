@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeviceMethod extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DeviceType" })
+  @SpeakeasyMetadata({ data: "json, name=DeviceType" })
   deviceType?: string;
 
-  @Metadata({ data: "json, name=MethodName" })
+  @SpeakeasyMetadata({ data: "json, name=MethodName" })
   methodName?: string;
 }

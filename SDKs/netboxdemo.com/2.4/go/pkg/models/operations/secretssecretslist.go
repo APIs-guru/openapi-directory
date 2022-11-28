@@ -17,15 +17,15 @@ type SecretsSecretsListQueryParams struct {
 	Tag      *string `queryParam:"style=form,explode=true,name=tag"`
 }
 
-type SecretsSecretsListRequest struct {
-	QueryParams SecretsSecretsListQueryParams
-}
-
 type SecretsSecretsList200ApplicationJSON struct {
 	Count    int64           `json:"count"`
 	Next     *string         `json:"next,omitempty"`
 	Previous *string         `json:"previous,omitempty"`
 	Results  []shared.Secret `json:"results"`
+}
+
+type SecretsSecretsListRequest struct {
+	QueryParams SecretsSecretsListQueryParams
 }
 
 type SecretsSecretsListResponse struct {

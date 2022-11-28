@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -17,13 +18,13 @@ class SourcesGetV2SourcesGetQueryParams:
 
 @dataclass
 class SourcesGetV2SourcesGetRequest:
-    query_params: SourcesGetV2SourcesGetQueryParams = field(default=None)
+    query_params: SourcesGetV2SourcesGetQueryParams = field()
     
 
 @dataclass
 class SourcesGetV2SourcesGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     http_validation_error: Optional[shared.HTTPValidationError] = field(default=None)
     open_aq_result: Optional[shared.OpenAqResult] = field(default=None)
-    status_code: int = field(default=None)
     

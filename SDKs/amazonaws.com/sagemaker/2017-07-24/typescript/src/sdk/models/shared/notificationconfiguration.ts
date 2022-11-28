@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // NotificationConfiguration
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configures Amazon SNS notifications of available or expiring work items for work teams.
 **/
 export class NotificationConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NotificationTopicArn" })
+  @SpeakeasyMetadata({ data: "json, name=NotificationTopicArn" })
   notificationTopicArn?: string;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// Address
+// This type contains the details of a geographical address.
 type Address struct {
 	AddressLine1    *string `json:"addressLine1,omitempty"`
 	AddressLine2    *string `json:"addressLine2,omitempty"`

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetRevokeEndpointAccessActionEnum(str, Enum):
     REVOKE_ENDPOINT_ACCESS = "RevokeEndpointAccess"
@@ -10,11 +14,11 @@ class GetRevokeEndpointAccessVersionEnum(str, Enum):
 
 @dataclass
 class GetRevokeEndpointAccessQueryParams:
+    action: GetRevokeEndpointAccessActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetRevokeEndpointAccessVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     account: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Account', 'style': 'form', 'explode': True }})
-    action: GetRevokeEndpointAccessActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
     cluster_identifier: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'ClusterIdentifier', 'style': 'form', 'explode': True }})
     force: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'Force', 'style': 'form', 'explode': True }})
-    version: GetRevokeEndpointAccessVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     vpc_ids: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'VpcIds', 'style': 'form', 'explode': True }})
     
 
@@ -31,13 +35,13 @@ class GetRevokeEndpointAccessHeaders:
 
 @dataclass
 class GetRevokeEndpointAccessRequest:
-    query_params: GetRevokeEndpointAccessQueryParams = field(default=None)
-    headers: GetRevokeEndpointAccessHeaders = field(default=None)
+    headers: GetRevokeEndpointAccessHeaders = field()
+    query_params: GetRevokeEndpointAccessQueryParams = field()
     
 
 @dataclass
 class GetRevokeEndpointAccessResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

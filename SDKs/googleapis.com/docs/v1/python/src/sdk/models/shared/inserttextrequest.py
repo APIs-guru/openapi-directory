@@ -1,14 +1,18 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import endofsegmentlocation
-from . import location
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class InsertTextRequest:
-    end_of_segment_location: Optional[endofsegmentlocation.EndOfSegmentLocation] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'endOfSegmentLocation' }})
-    location: Optional[location.Location] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'location' }})
-    text: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'text' }})
+    r"""InsertTextRequest
+    Inserts text at the specified location.
+    """
+    
+    end_of_segment_location: Optional[EndOfSegmentLocation] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('endOfSegmentLocation') }})
+    location: Optional[Location] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('location') }})
+    text: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('text') }})
     

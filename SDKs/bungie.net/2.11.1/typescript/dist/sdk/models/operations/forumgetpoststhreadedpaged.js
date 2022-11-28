@@ -22,38 +22,38 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ForumGetPostsThreadedPagedPathParams = /** @class */ (function (_super) {
     __extends(ForumGetPostsThreadedPagedPathParams, _super);
     function ForumGetPostsThreadedPagedPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=getParentPost" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=getParentPost" }),
         __metadata("design:type", Boolean)
     ], ForumGetPostsThreadedPagedPathParams.prototype, "getParentPost", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=page" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=page" }),
         __metadata("design:type", Number)
     ], ForumGetPostsThreadedPagedPathParams.prototype, "page", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=pageSize" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=pageSize" }),
         __metadata("design:type", Number)
     ], ForumGetPostsThreadedPagedPathParams.prototype, "pageSize", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=parentPostId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=parentPostId" }),
         __metadata("design:type", Number)
     ], ForumGetPostsThreadedPagedPathParams.prototype, "parentPostId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=replySize" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=replySize" }),
         __metadata("design:type", Number)
     ], ForumGetPostsThreadedPagedPathParams.prototype, "replySize", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=rootThreadMode" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=rootThreadMode" }),
         __metadata("design:type", Boolean)
     ], ForumGetPostsThreadedPagedPathParams.prototype, "rootThreadMode", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=sortMode" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=sortMode" }),
         __metadata("design:type", Number)
     ], ForumGetPostsThreadedPagedPathParams.prototype, "sortMode", void 0);
     return ForumGetPostsThreadedPagedPathParams;
@@ -65,7 +65,7 @@ var ForumGetPostsThreadedPagedQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=showbanned" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=showbanned" }),
         __metadata("design:type", String)
     ], ForumGetPostsThreadedPagedQueryParams.prototype, "showbanned", void 0);
     return ForumGetPostsThreadedPagedQueryParams;
@@ -77,11 +77,11 @@ var ForumGetPostsThreadedPagedRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ForumGetPostsThreadedPagedPathParams)
     ], ForumGetPostsThreadedPagedRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ForumGetPostsThreadedPagedQueryParams)
     ], ForumGetPostsThreadedPagedRequest.prototype, "queryParams", void 0);
     return ForumGetPostsThreadedPagedRequest;
@@ -93,15 +93,15 @@ var ForumGetPostsThreadedPagedResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], ForumGetPostsThreadedPagedResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ForumGetPostsThreadedPagedResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ForumGetPostsThreadedPagedResponse.prototype, "statusCode", void 0);
     return ForumGetPostsThreadedPagedResponse;

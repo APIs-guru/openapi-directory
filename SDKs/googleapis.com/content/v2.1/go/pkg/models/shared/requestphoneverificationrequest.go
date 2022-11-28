@@ -8,6 +8,8 @@ const (
 	RequestPhoneVerificationRequestPhoneVerificationMethodEnumPhoneCall                          RequestPhoneVerificationRequestPhoneVerificationMethodEnum = "PHONE_CALL"
 )
 
+// RequestPhoneVerificationRequest
+// Request message for the RequestPhoneVerification method.
 type RequestPhoneVerificationRequest struct {
 	LanguageCode            *string                                                     `json:"languageCode,omitempty"`
 	PhoneNumber             *string                                                     `json:"phoneNumber,omitempty"`

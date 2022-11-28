@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum InputConfigurationContainerTypeEnum {
-    TariffInput = "TariffInput"
-,    DigitalInput = "DigitalInput"
+    TariffInput = "TariffInput",
+    DigitalInput = "DigitalInput"
 }
 
 
@@ -11,18 +12,18 @@ export enum InputConfigurationContainerTypeEnum {
  * Configuration for the input of a meter (digital inputs)
 **/
 export class InputConfigurationContainer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Number" })
+  @SpeakeasyMetadata({ data: "json, name=Number" })
   number?: number;
 
-  @Metadata({ data: "json, name=OffText" })
+  @SpeakeasyMetadata({ data: "json, name=OffText" })
   offText?: string;
 
-  @Metadata({ data: "json, name=OnText" })
+  @SpeakeasyMetadata({ data: "json, name=OnText" })
   onText?: string;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: InputConfigurationContainerTypeEnum;
 }

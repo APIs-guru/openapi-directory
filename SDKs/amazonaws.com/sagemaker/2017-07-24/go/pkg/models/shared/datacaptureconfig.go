@@ -1,5 +1,7 @@
 package shared
 
+// DataCaptureConfig
+// <p/>
 type DataCaptureConfig struct {
 	CaptureContentTypeHeader  *CaptureContentTypeHeader `json:"CaptureContentTypeHeader,omitempty"`
 	CaptureOptions            []CaptureOption           `json:"CaptureOptions"`

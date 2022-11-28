@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AutoScalingDescription } from "./autoscalingdescription";
 import { ProvisionedCapacityDescription } from "./provisionedcapacitydescription";
+
 
 
 // CapacityDescription
@@ -8,9 +9,9 @@ import { ProvisionedCapacityDescription } from "./provisionedcapacitydescription
  * A description of the connector's capacity.
 **/
 export class CapacityDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=autoScaling" })
+  @SpeakeasyMetadata({ data: "json, name=autoScaling" })
   autoScaling?: AutoScalingDescription;
 
-  @Metadata({ data: "json, name=provisionedCapacity" })
+  @SpeakeasyMetadata({ data: "json, name=provisionedCapacity" })
   provisionedCapacity?: ProvisionedCapacityDescription;
 }

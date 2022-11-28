@@ -22,45 +22,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-var PostCloseAccountHolderSecurityOption1 = /** @class */ (function (_super) {
-    __extends(PostCloseAccountHolderSecurityOption1, _super);
-    function PostCloseAccountHolderSecurityOption1() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
-        __metadata("design:type", shared.SchemeBasicAuth)
-    ], PostCloseAccountHolderSecurityOption1.prototype, "basicAuth", void 0);
-    return PostCloseAccountHolderSecurityOption1;
-}(SpeakeasyBase));
-export { PostCloseAccountHolderSecurityOption1 };
-var PostCloseAccountHolderSecurityOption2 = /** @class */ (function (_super) {
-    __extends(PostCloseAccountHolderSecurityOption2, _super);
-    function PostCloseAccountHolderSecurityOption2() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
-        __metadata("design:type", shared.SchemeApiKeyAuth)
-    ], PostCloseAccountHolderSecurityOption2.prototype, "apiKeyAuth", void 0);
-    return PostCloseAccountHolderSecurityOption2;
-}(SpeakeasyBase));
-export { PostCloseAccountHolderSecurityOption2 };
 var PostCloseAccountHolderSecurity = /** @class */ (function (_super) {
     __extends(PostCloseAccountHolderSecurity, _super);
     function PostCloseAccountHolderSecurity() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", PostCloseAccountHolderSecurityOption1)
-    ], PostCloseAccountHolderSecurity.prototype, "option1", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        __metadata("design:type", shared.SchemeBasicAuth)
+    ], PostCloseAccountHolderSecurity.prototype, "basicAuth", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", PostCloseAccountHolderSecurityOption2)
-    ], PostCloseAccountHolderSecurity.prototype, "option2", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        __metadata("design:type", shared.SchemeApiKeyAuth)
+    ], PostCloseAccountHolderSecurity.prototype, "apiKeyAuth", void 0);
     return PostCloseAccountHolderSecurity;
 }(SpeakeasyBase));
 export { PostCloseAccountHolderSecurity };
@@ -70,11 +46,11 @@ var PostCloseAccountHolderRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", Object)
     ], PostCloseAccountHolderRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostCloseAccountHolderSecurity)
     ], PostCloseAccountHolderRequest.prototype, "security", void 0);
     return PostCloseAccountHolderRequest;
@@ -86,19 +62,19 @@ var PostCloseAccountHolderResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PostCloseAccountHolderResponse.prototype, "closeAccountHolderResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostCloseAccountHolderResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PostCloseAccountHolderResponse.prototype, "serviceError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostCloseAccountHolderResponse.prototype, "statusCode", void 0);
     return PostCloseAccountHolderResponse;

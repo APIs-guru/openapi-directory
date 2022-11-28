@@ -11,7 +11,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://apiv2.clickmeter.com:80",
 	"https://apiv2.clickmeter.com:80",
 }
@@ -21,9 +21,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -34,33 +38,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// AccountDeleteDomainWhitelist - Delete an domain entry
 func (s *SDK) AccountDeleteDomainWhitelist(ctx context.Context, request operations.AccountDeleteDomainWhitelistRequest) (*operations.AccountDeleteDomainWhitelistResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/account/domainwhitelist/{whitelistId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -68,7 +94,7 @@ func (s *SDK) AccountDeleteDomainWhitelist(ctx context.Context, request operatio
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -121,8 +147,9 @@ func (s *SDK) AccountDeleteDomainWhitelist(ctx context.Context, request operatio
 	return res, nil
 }
 
+// AccountDeleteGuest - Delete a guest
 func (s *SDK) AccountDeleteGuest(ctx context.Context, request operations.AccountDeleteGuestRequest) (*operations.AccountDeleteGuestResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/account/guests/{guestId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -130,7 +157,7 @@ func (s *SDK) AccountDeleteGuest(ctx context.Context, request operations.Account
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -183,8 +210,9 @@ func (s *SDK) AccountDeleteGuest(ctx context.Context, request operations.Account
 	return res, nil
 }
 
+// AccountDeleteIPBlacklist - Delete an ip blacklist entry
 func (s *SDK) AccountDeleteIPBlacklist(ctx context.Context, request operations.AccountDeleteIPBlacklistRequest) (*operations.AccountDeleteIPBlacklistResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/account/ipblacklist/{blacklistId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -192,7 +220,7 @@ func (s *SDK) AccountDeleteIPBlacklist(ctx context.Context, request operations.A
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -245,8 +273,9 @@ func (s *SDK) AccountDeleteIPBlacklist(ctx context.Context, request operations.A
 	return res, nil
 }
 
+// AccountGet - Retrieve current account data
 func (s *SDK) AccountGet(ctx context.Context) (*operations.AccountGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -254,7 +283,7 @@ func (s *SDK) AccountGet(ctx context.Context) (*operations.AccountGetResponse, e
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -307,8 +336,9 @@ func (s *SDK) AccountGet(ctx context.Context) (*operations.AccountGetResponse, e
 	return res, nil
 }
 
+// AccountGetDomainWhitelist - Retrieve list of a domains allowed to redirect in DDU mode
 func (s *SDK) AccountGetDomainWhitelist(ctx context.Context, request operations.AccountGetDomainWhitelistRequest) (*operations.AccountGetDomainWhitelistResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account/domainwhitelist"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -318,7 +348,7 @@ func (s *SDK) AccountGetDomainWhitelist(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -357,8 +387,9 @@ func (s *SDK) AccountGetDomainWhitelist(ctx context.Context, request operations.
 	return res, nil
 }
 
+// AccountGetGuest - Retrieve a guest
 func (s *SDK) AccountGetGuest(ctx context.Context, request operations.AccountGetGuestRequest) (*operations.AccountGetGuestResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/account/guests/{guestId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -366,7 +397,7 @@ func (s *SDK) AccountGetGuest(ctx context.Context, request operations.AccountGet
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -419,8 +450,9 @@ func (s *SDK) AccountGetGuest(ctx context.Context, request operations.AccountGet
 	return res, nil
 }
 
+// AccountGetGuests - Retrieve list of a guest
 func (s *SDK) AccountGetGuests(ctx context.Context, request operations.AccountGetGuestsRequest) (*operations.AccountGetGuestsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account/guests"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -430,7 +462,7 @@ func (s *SDK) AccountGetGuests(ctx context.Context, request operations.AccountGe
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -469,8 +501,9 @@ func (s *SDK) AccountGetGuests(ctx context.Context, request operations.AccountGe
 	return res, nil
 }
 
+// AccountGetGuestsCount - Retrieve count of guests
 func (s *SDK) AccountGetGuestsCount(ctx context.Context, request operations.AccountGetGuestsCountRequest) (*operations.AccountGetGuestsCountResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account/guests/count"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -480,7 +513,7 @@ func (s *SDK) AccountGetGuestsCount(ctx context.Context, request operations.Acco
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -533,8 +566,9 @@ func (s *SDK) AccountGetGuestsCount(ctx context.Context, request operations.Acco
 	return res, nil
 }
 
+// AccountGetIPBlacklist - Retrieve list of a ip to exclude from event tracking
 func (s *SDK) AccountGetIPBlacklist(ctx context.Context, request operations.AccountGetIPBlacklistRequest) (*operations.AccountGetIPBlacklistResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account/ipblacklist"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -544,7 +578,7 @@ func (s *SDK) AccountGetIPBlacklist(ctx context.Context, request operations.Acco
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -583,8 +617,9 @@ func (s *SDK) AccountGetIPBlacklist(ctx context.Context, request operations.Acco
 	return res, nil
 }
 
+// AccountGetPermissions - Retrieve permissions for a guest
 func (s *SDK) AccountGetPermissions(ctx context.Context, request operations.AccountGetPermissionsRequest) (*operations.AccountGetPermissionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/account/guests/{guestId}/permissions", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -594,7 +629,7 @@ func (s *SDK) AccountGetPermissions(ctx context.Context, request operations.Acco
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -633,8 +668,9 @@ func (s *SDK) AccountGetPermissions(ctx context.Context, request operations.Acco
 	return res, nil
 }
 
+// AccountGetPermissionsCount - Retrieve count of the permissions for a guest
 func (s *SDK) AccountGetPermissionsCount(ctx context.Context, request operations.AccountGetPermissionsCountRequest) (*operations.AccountGetPermissionsCountResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/account/guests/{guestId}/permissions/count", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -644,7 +680,7 @@ func (s *SDK) AccountGetPermissionsCount(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -697,8 +733,9 @@ func (s *SDK) AccountGetPermissionsCount(ctx context.Context, request operations
 	return res, nil
 }
 
+// AccountGetPlan - Retrieve current account plan
 func (s *SDK) AccountGetPlan(ctx context.Context) (*operations.AccountGetPlanResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account/plan"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -706,7 +743,7 @@ func (s *SDK) AccountGetPlan(ctx context.Context) (*operations.AccountGetPlanRes
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -759,8 +796,9 @@ func (s *SDK) AccountGetPlan(ctx context.Context) (*operations.AccountGetPlanRes
 	return res, nil
 }
 
+// AccountPatchPermissions - Change the permission on a shared object
 func (s *SDK) AccountPatchPermissions(ctx context.Context, request operations.AccountPatchPermissionsRequest) (*operations.AccountPatchPermissionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/account/guests/{guestId}/{type}/permissions/patch", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -778,7 +816,7 @@ func (s *SDK) AccountPatchPermissions(ctx context.Context, request operations.Ac
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -831,8 +869,9 @@ func (s *SDK) AccountPatchPermissions(ctx context.Context, request operations.Ac
 	return res, nil
 }
 
+// AccountPost - Update current account data
 func (s *SDK) AccountPost(ctx context.Context, request operations.AccountPostRequest) (*operations.AccountPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -850,7 +889,7 @@ func (s *SDK) AccountPost(ctx context.Context, request operations.AccountPostReq
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -903,8 +942,9 @@ func (s *SDK) AccountPost(ctx context.Context, request operations.AccountPostReq
 	return res, nil
 }
 
+// AccountPostGuest - Update a guest
 func (s *SDK) AccountPostGuest(ctx context.Context, request operations.AccountPostGuestRequest) (*operations.AccountPostGuestResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/account/guests/{guestId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -922,7 +962,7 @@ func (s *SDK) AccountPostGuest(ctx context.Context, request operations.AccountPo
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -975,8 +1015,9 @@ func (s *SDK) AccountPostGuest(ctx context.Context, request operations.AccountPo
 	return res, nil
 }
 
+// AccountPutDomainWhitelist - Create an domain entry
 func (s *SDK) AccountPutDomainWhitelist(ctx context.Context, request operations.AccountPutDomainWhitelistRequest) (*operations.AccountPutDomainWhitelistResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account/domainwhitelist"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -994,7 +1035,7 @@ func (s *SDK) AccountPutDomainWhitelist(ctx context.Context, request operations.
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1047,8 +1088,9 @@ func (s *SDK) AccountPutDomainWhitelist(ctx context.Context, request operations.
 	return res, nil
 }
 
+// AccountPutGuest - Create a guest
 func (s *SDK) AccountPutGuest(ctx context.Context, request operations.AccountPutGuestRequest) (*operations.AccountPutGuestResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account/guests"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1066,7 +1108,7 @@ func (s *SDK) AccountPutGuest(ctx context.Context, request operations.AccountPut
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1119,8 +1161,9 @@ func (s *SDK) AccountPutGuest(ctx context.Context, request operations.AccountPut
 	return res, nil
 }
 
+// AccountPutIPBlacklist - Create an ip blacklist entry
 func (s *SDK) AccountPutIPBlacklist(ctx context.Context, request operations.AccountPutIPBlacklistRequest) (*operations.AccountPutIPBlacklistResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/account/ipblacklist"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1138,7 +1181,7 @@ func (s *SDK) AccountPutIPBlacklist(ctx context.Context, request operations.Acco
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1191,8 +1234,9 @@ func (s *SDK) AccountPutIPBlacklist(ctx context.Context, request operations.Acco
 	return res, nil
 }
 
+// AggregatedGetConversionsSummary - Retrieve statistics about a subset of conversions for a timeframe with conversions data
 func (s *SDK) AggregatedGetConversionsSummary(ctx context.Context, request operations.AggregatedGetConversionsSummaryRequest) (*operations.AggregatedGetConversionsSummaryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/aggregated/summary/conversions"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1202,7 +1246,7 @@ func (s *SDK) AggregatedGetConversionsSummary(ctx context.Context, request opera
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1241,8 +1285,9 @@ func (s *SDK) AggregatedGetConversionsSummary(ctx context.Context, request opera
 	return res, nil
 }
 
+// AggregatedGetDatapointsSummary - Retrieve statistics about a subset of datapoints for a timeframe with datapoints data
 func (s *SDK) AggregatedGetDatapointsSummary(ctx context.Context, request operations.AggregatedGetDatapointsSummaryRequest) (*operations.AggregatedGetDatapointsSummaryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/aggregated/summary/datapoints"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1252,7 +1297,7 @@ func (s *SDK) AggregatedGetDatapointsSummary(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1291,8 +1336,9 @@ func (s *SDK) AggregatedGetDatapointsSummary(ctx context.Context, request operat
 	return res, nil
 }
 
+// AggregatedGetGroupsSummary - Retrieve statistics about a subset of groups for a timeframe with groups data
 func (s *SDK) AggregatedGetGroupsSummary(ctx context.Context, request operations.AggregatedGetGroupsSummaryRequest) (*operations.AggregatedGetGroupsSummaryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/aggregated/summary/groups"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1302,7 +1348,7 @@ func (s *SDK) AggregatedGetGroupsSummary(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1341,8 +1387,9 @@ func (s *SDK) AggregatedGetGroupsSummary(ctx context.Context, request operations
 	return res, nil
 }
 
+// AggregatedGetStatisticsList - Retrieve statistics about this customer for a timeframe grouped by some temporal entity (day/week/month)
 func (s *SDK) AggregatedGetStatisticsList(ctx context.Context, request operations.AggregatedGetStatisticsListRequest) (*operations.AggregatedGetStatisticsListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/aggregated/list"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1352,7 +1399,7 @@ func (s *SDK) AggregatedGetStatisticsList(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1391,8 +1438,9 @@ func (s *SDK) AggregatedGetStatisticsList(ctx context.Context, request operation
 	return res, nil
 }
 
+// AggregatedGetStatisticsSingle - Retrieve statistics about this customer for a timeframe
 func (s *SDK) AggregatedGetStatisticsSingle(ctx context.Context, request operations.AggregatedGetStatisticsSingleRequest) (*operations.AggregatedGetStatisticsSingleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/aggregated"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1402,7 +1450,7 @@ func (s *SDK) AggregatedGetStatisticsSingle(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1441,8 +1489,9 @@ func (s *SDK) AggregatedGetStatisticsSingle(ctx context.Context, request operati
 	return res, nil
 }
 
+// ClickStreamGet - Retrieve the latest list of events of this account. Limited to last 100.
 func (s *SDK) ClickStreamGet(ctx context.Context, request operations.ClickStreamGetRequest) (*operations.ClickStreamGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/clickstream"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1452,7 +1501,7 @@ func (s *SDK) ClickStreamGet(ctx context.Context, request operations.ClickStream
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1491,8 +1540,9 @@ func (s *SDK) ClickStreamGet(ctx context.Context, request operations.ClickStream
 	return res, nil
 }
 
+// ConversionsCount - Retrieve a count of conversions
 func (s *SDK) ConversionsCount(ctx context.Context, request operations.ConversionsCountRequest) (*operations.ConversionsCountResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/conversions/count"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1502,7 +1552,7 @@ func (s *SDK) ConversionsCount(ctx context.Context, request operations.Conversio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1555,8 +1605,9 @@ func (s *SDK) ConversionsCount(ctx context.Context, request operations.Conversio
 	return res, nil
 }
 
+// ConversionsDelete - Delete conversion specified by id
 func (s *SDK) ConversionsDelete(ctx context.Context, request operations.ConversionsDeleteRequest) (*operations.ConversionsDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/conversions/{conversionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1564,7 +1615,7 @@ func (s *SDK) ConversionsDelete(ctx context.Context, request operations.Conversi
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1618,8 +1669,9 @@ func (s *SDK) ConversionsDelete(ctx context.Context, request operations.Conversi
 	return res, nil
 }
 
+// ConversionsGet - Retrieve a list of conversions
 func (s *SDK) ConversionsGet(ctx context.Context, request operations.ConversionsGetRequest) (*operations.ConversionsGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/conversions"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1629,7 +1681,7 @@ func (s *SDK) ConversionsGet(ctx context.Context, request operations.Conversions
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1668,8 +1720,9 @@ func (s *SDK) ConversionsGet(ctx context.Context, request operations.Conversions
 	return res, nil
 }
 
+// ConversionsGetDatapoints - Retrieve a list of datapoints connected to this conversion
 func (s *SDK) ConversionsGetDatapoints(ctx context.Context, request operations.ConversionsGetDatapointsRequest) (*operations.ConversionsGetDatapointsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/conversions/{conversionId}/datapoints", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1679,7 +1732,7 @@ func (s *SDK) ConversionsGetDatapoints(ctx context.Context, request operations.C
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1718,8 +1771,9 @@ func (s *SDK) ConversionsGetDatapoints(ctx context.Context, request operations.C
 	return res, nil
 }
 
+// ConversionsGetDatapointsCount - Retrieve a count of datapoints connected to this conversion
 func (s *SDK) ConversionsGetDatapointsCount(ctx context.Context, request operations.ConversionsGetDatapointsCountRequest) (*operations.ConversionsGetDatapointsCountResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/conversions/{conversionId}/datapoints/count", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1729,7 +1783,7 @@ func (s *SDK) ConversionsGetDatapointsCount(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1782,8 +1836,9 @@ func (s *SDK) ConversionsGetDatapointsCount(ctx context.Context, request operati
 	return res, nil
 }
 
+// ConversionsGetHits - Retrieve the list of events related to this conversion.
 func (s *SDK) ConversionsGetHits(ctx context.Context, request operations.ConversionsGetHitsRequest) (*operations.ConversionsGetHitsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/conversions/{conversionId}/hits", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1793,7 +1848,7 @@ func (s *SDK) ConversionsGetHits(ctx context.Context, request operations.Convers
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1832,8 +1887,9 @@ func (s *SDK) ConversionsGetHits(ctx context.Context, request operations.Convers
 	return res, nil
 }
 
+// ConversionsGetStatisticsAllList - Retrieve statistics about this customer for a timeframe related to a subset of conversions grouped by some temporal entity (day/week/month)
 func (s *SDK) ConversionsGetStatisticsAllList(ctx context.Context, request operations.ConversionsGetStatisticsAllListRequest) (*operations.ConversionsGetStatisticsAllListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/conversions/aggregated/list"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1843,7 +1899,7 @@ func (s *SDK) ConversionsGetStatisticsAllList(ctx context.Context, request opera
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1882,8 +1938,9 @@ func (s *SDK) ConversionsGetStatisticsAllList(ctx context.Context, request opera
 	return res, nil
 }
 
+// ConversionsGetStatisticsList - Retrieve statistics about this conversion for a timeframe grouped by some temporal entity (day/week/month)
 func (s *SDK) ConversionsGetStatisticsList(ctx context.Context, request operations.ConversionsGetStatisticsListRequest) (*operations.ConversionsGetStatisticsListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/conversions/{conversionId}/aggregated/list", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1893,7 +1950,7 @@ func (s *SDK) ConversionsGetStatisticsList(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1932,8 +1989,9 @@ func (s *SDK) ConversionsGetStatisticsList(ctx context.Context, request operatio
 	return res, nil
 }
 
+// ConversionsGetStatisticsSingle - Retrieve statistics about this conversion for a timeframe
 func (s *SDK) ConversionsGetStatisticsSingle(ctx context.Context, request operations.ConversionsGetStatisticsSingleRequest) (*operations.ConversionsGetStatisticsSingleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/conversions/{conversionId}/aggregated", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1943,7 +2001,7 @@ func (s *SDK) ConversionsGetStatisticsSingle(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1982,8 +2040,9 @@ func (s *SDK) ConversionsGetStatisticsSingle(ctx context.Context, request operat
 	return res, nil
 }
 
+// ConversionsGetTops - Retrieve a top report connected to this conversion
 func (s *SDK) ConversionsGetTops(ctx context.Context, request operations.ConversionsGetTopsRequest) (*operations.ConversionsGetTopsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/conversions/{conversionId}/reports", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1993,7 +2052,7 @@ func (s *SDK) ConversionsGetTops(ctx context.Context, request operations.Convers
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2033,8 +2092,9 @@ func (s *SDK) ConversionsGetTops(ctx context.Context, request operations.Convers
 	return res, nil
 }
 
+// ConversionsPatch - Modify the association between a conversion and a datapoint
 func (s *SDK) ConversionsPatch(ctx context.Context, request operations.ConversionsPatchRequest) (*operations.ConversionsPatchResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/conversions/{conversionId}/datapoints/patch", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2052,7 +2112,7 @@ func (s *SDK) ConversionsPatch(ctx context.Context, request operations.Conversio
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2106,8 +2166,9 @@ func (s *SDK) ConversionsPatch(ctx context.Context, request operations.Conversio
 	return res, nil
 }
 
+// ConversionsPatchNotes - Fast patch the "notes" field of a conversion
 func (s *SDK) ConversionsPatchNotes(ctx context.Context, request operations.ConversionsPatchNotesRequest) (*operations.ConversionsPatchNotesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/conversions/{conversionId}/notes", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2125,7 +2186,7 @@ func (s *SDK) ConversionsPatchNotes(ctx context.Context, request operations.Conv
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2180,8 +2241,9 @@ func (s *SDK) ConversionsPatchNotes(ctx context.Context, request operations.Conv
 	return res, nil
 }
 
+// ConversionsPost - Update conversion specified by id
 func (s *SDK) ConversionsPost(ctx context.Context, request operations.ConversionsPostRequest) (*operations.ConversionsPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/conversions/{conversionId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2199,7 +2261,7 @@ func (s *SDK) ConversionsPost(ctx context.Context, request operations.Conversion
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2253,8 +2315,9 @@ func (s *SDK) ConversionsPost(ctx context.Context, request operations.Conversion
 	return res, nil
 }
 
+// ConversionsPut - Create a conversion
 func (s *SDK) ConversionsPut(ctx context.Context, request operations.ConversionsPutRequest) (*operations.ConversionsPutResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/conversions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2272,7 +2335,7 @@ func (s *SDK) ConversionsPut(ctx context.Context, request operations.Conversions
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2326,8 +2389,9 @@ func (s *SDK) ConversionsPut(ctx context.Context, request operations.Conversions
 	return res, nil
 }
 
+// DataPointsCount - Count the datapoints associated to the user
 func (s *SDK) DataPointsCount(ctx context.Context, request operations.DataPointsCountRequest) (*operations.DataPointsCountResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/datapoints/count"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2337,7 +2401,7 @@ func (s *SDK) DataPointsCount(ctx context.Context, request operations.DataPoints
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2391,8 +2455,9 @@ func (s *SDK) DataPointsCount(ctx context.Context, request operations.DataPoints
 	return res, nil
 }
 
+// DataPointsDelete - Delete a datapoint
 func (s *SDK) DataPointsDelete(ctx context.Context, request operations.DataPointsDeleteRequest) (*operations.DataPointsDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/datapoints/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -2400,7 +2465,7 @@ func (s *SDK) DataPointsDelete(ctx context.Context, request operations.DataPoint
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2454,8 +2519,9 @@ func (s *SDK) DataPointsDelete(ctx context.Context, request operations.DataPoint
 	return res, nil
 }
 
+// DataPointsGet - List of all the datapoints associated to the user
 func (s *SDK) DataPointsGet(ctx context.Context, request operations.DataPointsGetRequest) (*operations.DataPointsGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/datapoints"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2465,7 +2531,7 @@ func (s *SDK) DataPointsGet(ctx context.Context, request operations.DataPointsGe
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2505,8 +2571,9 @@ func (s *SDK) DataPointsGet(ctx context.Context, request operations.DataPointsGe
 	return res, nil
 }
 
+// DataPointsGetHits - Retrieve the list of events related to this datapoint.
 func (s *SDK) DataPointsGetHits(ctx context.Context, request operations.DataPointsGetHitsRequest) (*operations.DataPointsGetHitsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/datapoints/{id}/hits", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2516,7 +2583,7 @@ func (s *SDK) DataPointsGetHits(ctx context.Context, request operations.DataPoin
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2555,8 +2622,9 @@ func (s *SDK) DataPointsGetHits(ctx context.Context, request operations.DataPoin
 	return res, nil
 }
 
+// DataPointsGetStatisticsAggregatedSingle - Retrieve statistics about this customer for a timeframe by groups
 func (s *SDK) DataPointsGetStatisticsAggregatedSingle(ctx context.Context, request operations.DataPointsGetStatisticsAggregatedSingleRequest) (*operations.DataPointsGetStatisticsAggregatedSingleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/datapoints/aggregated"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2566,7 +2634,7 @@ func (s *SDK) DataPointsGetStatisticsAggregatedSingle(ctx context.Context, reque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2605,8 +2673,9 @@ func (s *SDK) DataPointsGetStatisticsAggregatedSingle(ctx context.Context, reque
 	return res, nil
 }
 
+// DataPointsGetStatisticsAllList - Retrieve statistics about all datapoints of this customer for a timeframe grouped by some temporal entity (day/week/month)
 func (s *SDK) DataPointsGetStatisticsAllList(ctx context.Context, request operations.DataPointsGetStatisticsAllListRequest) (*operations.DataPointsGetStatisticsAllListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/datapoints/aggregated/list"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2616,7 +2685,7 @@ func (s *SDK) DataPointsGetStatisticsAllList(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2655,8 +2724,9 @@ func (s *SDK) DataPointsGetStatisticsAllList(ctx context.Context, request operat
 	return res, nil
 }
 
+// DataPointsGetStatisticsList - Retrieve statistics about this datapoint for a timeframe grouped by some temporal entity (day/week/month)
 func (s *SDK) DataPointsGetStatisticsList(ctx context.Context, request operations.DataPointsGetStatisticsListRequest) (*operations.DataPointsGetStatisticsListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/datapoints/{id}/aggregated/list", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2666,7 +2736,7 @@ func (s *SDK) DataPointsGetStatisticsList(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2705,8 +2775,9 @@ func (s *SDK) DataPointsGetStatisticsList(ctx context.Context, request operation
 	return res, nil
 }
 
+// DataPointsGetStatisticsSingle - Retrieve statistics about this datapoint for a timeframe
 func (s *SDK) DataPointsGetStatisticsSingle(ctx context.Context, request operations.DataPointsGetStatisticsSingleRequest) (*operations.DataPointsGetStatisticsSingleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/datapoints/{id}/aggregated", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2716,7 +2787,7 @@ func (s *SDK) DataPointsGetStatisticsSingle(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2755,8 +2826,9 @@ func (s *SDK) DataPointsGetStatisticsSingle(ctx context.Context, request operati
 	return res, nil
 }
 
+// DataPointsGetTops - Retrieve a top report connected to this datapoint
 func (s *SDK) DataPointsGetTops(ctx context.Context, request operations.DataPointsGetTopsRequest) (*operations.DataPointsGetTopsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/datapoints/{id}/reports", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2766,7 +2838,7 @@ func (s *SDK) DataPointsGetTops(ctx context.Context, request operations.DataPoin
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2806,8 +2878,9 @@ func (s *SDK) DataPointsGetTops(ctx context.Context, request operations.DataPoin
 	return res, nil
 }
 
+// DataPointsPatchFavourite - Fast switch the "favourite" field of a datapoint
 func (s *SDK) DataPointsPatchFavourite(ctx context.Context, request operations.DataPointsPatchFavouriteRequest) (*operations.DataPointsPatchFavouriteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/datapoints/{id}/favourite", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PUT", url, nil)
@@ -2815,7 +2888,7 @@ func (s *SDK) DataPointsPatchFavourite(ctx context.Context, request operations.D
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2870,8 +2943,9 @@ func (s *SDK) DataPointsPatchFavourite(ctx context.Context, request operations.D
 	return res, nil
 }
 
+// DataPointsPatchNotes - Fast patch the "notes" field of a datapoint
 func (s *SDK) DataPointsPatchNotes(ctx context.Context, request operations.DataPointsPatchNotesRequest) (*operations.DataPointsPatchNotesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/datapoints/{id}/notes", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2889,7 +2963,7 @@ func (s *SDK) DataPointsPatchNotes(ctx context.Context, request operations.DataP
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2944,8 +3018,9 @@ func (s *SDK) DataPointsPatchNotes(ctx context.Context, request operations.DataP
 	return res, nil
 }
 
+// DomainsCount - Retrieve count of domains
 func (s *SDK) DomainsCount(ctx context.Context, request operations.DomainsCountRequest) (*operations.DomainsCountResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/domains/count"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2955,7 +3030,7 @@ func (s *SDK) DomainsCount(ctx context.Context, request operations.DomainsCountR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3008,8 +3083,9 @@ func (s *SDK) DomainsCount(ctx context.Context, request operations.DomainsCountR
 	return res, nil
 }
 
+// DomainsDelete - Delete a domain
 func (s *SDK) DomainsDelete(ctx context.Context, request operations.DomainsDeleteRequest) (*operations.DomainsDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/domains/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -3017,7 +3093,7 @@ func (s *SDK) DomainsDelete(ctx context.Context, request operations.DomainsDelet
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3070,8 +3146,9 @@ func (s *SDK) DomainsDelete(ctx context.Context, request operations.DomainsDelet
 	return res, nil
 }
 
+// DomainsGet - Retrieve a list of domains
 func (s *SDK) DomainsGet(ctx context.Context, request operations.DomainsGetRequest) (*operations.DomainsGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/domains"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3081,7 +3158,7 @@ func (s *SDK) DomainsGet(ctx context.Context, request operations.DomainsGetReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3120,8 +3197,9 @@ func (s *SDK) DomainsGet(ctx context.Context, request operations.DomainsGetReque
 	return res, nil
 }
 
+// DomainsPut - Create a domain
 func (s *SDK) DomainsPut(ctx context.Context, request operations.DomainsPutRequest) (*operations.DomainsPutResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/domains"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3139,7 +3217,7 @@ func (s *SDK) DomainsPut(ctx context.Context, request operations.DomainsPutReque
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3192,8 +3270,9 @@ func (s *SDK) DomainsPut(ctx context.Context, request operations.DomainsPutReque
 	return res, nil
 }
 
+// DomainsUpdate - Update a domain
 func (s *SDK) DomainsUpdate(ctx context.Context, request operations.DomainsUpdateRequest) (*operations.DomainsUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/domains/{id}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3211,7 +3290,7 @@ func (s *SDK) DomainsUpdate(ctx context.Context, request operations.DomainsUpdat
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3264,8 +3343,9 @@ func (s *SDK) DomainsUpdate(ctx context.Context, request operations.DomainsUpdat
 	return res, nil
 }
 
+// GetConversionsConversionID - Retrieve conversion specified by id
 func (s *SDK) GetConversionsConversionID(ctx context.Context, request operations.GetConversionsConversionIDRequest) (*operations.GetConversionsConversionIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/conversions/{conversionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3273,7 +3353,7 @@ func (s *SDK) GetConversionsConversionID(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3327,8 +3407,9 @@ func (s *SDK) GetConversionsConversionID(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetDatapointsID - Get a datapoint
 func (s *SDK) GetDatapointsID(ctx context.Context, request operations.GetDatapointsIDRequest) (*operations.GetDatapointsIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/datapoints/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3336,7 +3417,7 @@ func (s *SDK) GetDatapointsID(ctx context.Context, request operations.GetDatapoi
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3376,8 +3457,9 @@ func (s *SDK) GetDatapointsID(ctx context.Context, request operations.GetDatapoi
 	return res, nil
 }
 
+// GetDomainsID - Get a domain
 func (s *SDK) GetDomainsID(ctx context.Context, request operations.GetDomainsIDRequest) (*operations.GetDomainsIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/domains/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3385,7 +3467,7 @@ func (s *SDK) GetDomainsID(ctx context.Context, request operations.GetDomainsIDR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3438,8 +3520,9 @@ func (s *SDK) GetDomainsID(ctx context.Context, request operations.GetDomainsIDR
 	return res, nil
 }
 
+// GetGroupsID - Get a group
 func (s *SDK) GetGroupsID(ctx context.Context, request operations.GetGroupsIDRequest) (*operations.GetGroupsIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/groups/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3447,7 +3530,7 @@ func (s *SDK) GetGroupsID(ctx context.Context, request operations.GetGroupsIDReq
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3487,8 +3570,9 @@ func (s *SDK) GetGroupsID(ctx context.Context, request operations.GetGroupsIDReq
 	return res, nil
 }
 
+// GetRetargetingID - Get a retargeting script object
 func (s *SDK) GetRetargetingID(ctx context.Context, request operations.GetRetargetingIDRequest) (*operations.GetRetargetingIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/retargeting/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3496,7 +3580,7 @@ func (s *SDK) GetRetargetingID(ctx context.Context, request operations.GetRetarg
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3550,8 +3634,9 @@ func (s *SDK) GetRetargetingID(ctx context.Context, request operations.GetRetarg
 	return res, nil
 }
 
+// GetTagsTagID - Retrieve a tag
 func (s *SDK) GetTagsTagID(ctx context.Context, request operations.GetTagsTagIDRequest) (*operations.GetTagsTagIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{tagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3559,7 +3644,7 @@ func (s *SDK) GetTagsTagID(ctx context.Context, request operations.GetTagsTagIDR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3598,8 +3683,9 @@ func (s *SDK) GetTagsTagID(ctx context.Context, request operations.GetTagsTagIDR
 	return res, nil
 }
 
+// GroupsCount - Count the groups associated to the user.
 func (s *SDK) GroupsCount(ctx context.Context, request operations.GroupsCountRequest) (*operations.GroupsCountResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/groups/count"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3609,7 +3695,7 @@ func (s *SDK) GroupsCount(ctx context.Context, request operations.GroupsCountReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3663,8 +3749,9 @@ func (s *SDK) GroupsCount(ctx context.Context, request operations.GroupsCountReq
 	return res, nil
 }
 
+// GroupsDelete - Delete group specified by id
 func (s *SDK) GroupsDelete(ctx context.Context, request operations.GroupsDeleteRequest) (*operations.GroupsDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/groups/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -3672,7 +3759,7 @@ func (s *SDK) GroupsDelete(ctx context.Context, request operations.GroupsDeleteR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3726,8 +3813,9 @@ func (s *SDK) GroupsDelete(ctx context.Context, request operations.GroupsDeleteR
 	return res, nil
 }
 
+// GroupsGet - List of all the groups associated to the user.
 func (s *SDK) GroupsGet(ctx context.Context, request operations.GroupsGetRequest) (*operations.GroupsGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/groups"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3737,7 +3825,7 @@ func (s *SDK) GroupsGet(ctx context.Context, request operations.GroupsGetRequest
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3777,8 +3865,9 @@ func (s *SDK) GroupsGet(ctx context.Context, request operations.GroupsGetRequest
 	return res, nil
 }
 
+// GroupsGetDatapoints - List of all the datapoints associated to the user in this group.
 func (s *SDK) GroupsGetDatapoints(ctx context.Context, request operations.GroupsGetDatapointsRequest) (*operations.GroupsGetDatapointsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/groups/{id}/datapoints", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3788,7 +3877,7 @@ func (s *SDK) GroupsGetDatapoints(ctx context.Context, request operations.Groups
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3828,8 +3917,9 @@ func (s *SDK) GroupsGetDatapoints(ctx context.Context, request operations.Groups
 	return res, nil
 }
 
+// GroupsGetDatapointsCount - Count the datapoints associated to the user in this group.
 func (s *SDK) GroupsGetDatapointsCount(ctx context.Context, request operations.GroupsGetDatapointsCountRequest) (*operations.GroupsGetDatapointsCountResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/groups/{id}/datapoints/count", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3839,7 +3929,7 @@ func (s *SDK) GroupsGetDatapointsCount(ctx context.Context, request operations.G
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3893,8 +3983,9 @@ func (s *SDK) GroupsGetDatapointsCount(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GroupsGetDatapointsSummary - Retrieve statistics about a subset of datapoints for a timeframe with datapoints data
 func (s *SDK) GroupsGetDatapointsSummary(ctx context.Context, request operations.GroupsGetDatapointsSummaryRequest) (*operations.GroupsGetDatapointsSummaryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/groups/{id}/aggregated/summary", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3904,7 +3995,7 @@ func (s *SDK) GroupsGetDatapointsSummary(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3943,8 +4034,9 @@ func (s *SDK) GroupsGetDatapointsSummary(ctx context.Context, request operations
 	return res, nil
 }
 
+// GroupsGetHits - Retrieve the list of events related to this group.
 func (s *SDK) GroupsGetHits(ctx context.Context, request operations.GroupsGetHitsRequest) (*operations.GroupsGetHitsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/groups/{id}/hits", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3954,7 +4046,7 @@ func (s *SDK) GroupsGetHits(ctx context.Context, request operations.GroupsGetHit
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3993,8 +4085,9 @@ func (s *SDK) GroupsGetHits(ctx context.Context, request operations.GroupsGetHit
 	return res, nil
 }
 
+// GroupsGetStatisticsAggregatedSingle - Retrieve statistics about this customer for a timeframe by groups
 func (s *SDK) GroupsGetStatisticsAggregatedSingle(ctx context.Context, request operations.GroupsGetStatisticsAggregatedSingleRequest) (*operations.GroupsGetStatisticsAggregatedSingleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/groups/aggregated"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4004,7 +4097,7 @@ func (s *SDK) GroupsGetStatisticsAggregatedSingle(ctx context.Context, request o
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4043,8 +4136,9 @@ func (s *SDK) GroupsGetStatisticsAggregatedSingle(ctx context.Context, request o
 	return res, nil
 }
 
+// GroupsGetStatisticsAllList - Retrieve statistics about all groups of this customer for a timeframe grouped by some temporal entity (day/week/month)
 func (s *SDK) GroupsGetStatisticsAllList(ctx context.Context, request operations.GroupsGetStatisticsAllListRequest) (*operations.GroupsGetStatisticsAllListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/groups/aggregated/list"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4054,7 +4148,7 @@ func (s *SDK) GroupsGetStatisticsAllList(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4093,8 +4187,9 @@ func (s *SDK) GroupsGetStatisticsAllList(ctx context.Context, request operations
 	return res, nil
 }
 
+// GroupsGetStatisticsList - Retrieve statistics about this group for a timeframe grouped by some temporal entity (day/week/month)
 func (s *SDK) GroupsGetStatisticsList(ctx context.Context, request operations.GroupsGetStatisticsListRequest) (*operations.GroupsGetStatisticsListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/groups/{id}/aggregated/list", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4104,7 +4199,7 @@ func (s *SDK) GroupsGetStatisticsList(ctx context.Context, request operations.Gr
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4143,8 +4238,9 @@ func (s *SDK) GroupsGetStatisticsList(ctx context.Context, request operations.Gr
 	return res, nil
 }
 
+// GroupsGetStatisticsSingle - Retrieve statistics about this group for a timeframe
 func (s *SDK) GroupsGetStatisticsSingle(ctx context.Context, request operations.GroupsGetStatisticsSingleRequest) (*operations.GroupsGetStatisticsSingleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/groups/{id}/aggregated", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4154,7 +4250,7 @@ func (s *SDK) GroupsGetStatisticsSingle(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4193,8 +4289,9 @@ func (s *SDK) GroupsGetStatisticsSingle(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GroupsGetTops - Retrieve a top report connected to this group
 func (s *SDK) GroupsGetTops(ctx context.Context, request operations.GroupsGetTopsRequest) (*operations.GroupsGetTopsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/groups/{id}/reports", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4204,7 +4301,7 @@ func (s *SDK) GroupsGetTops(ctx context.Context, request operations.GroupsGetTop
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4244,8 +4341,9 @@ func (s *SDK) GroupsGetTops(ctx context.Context, request operations.GroupsGetTop
 	return res, nil
 }
 
+// GroupsPatchFavourite - Fast switch the "favourite" field of a group
 func (s *SDK) GroupsPatchFavourite(ctx context.Context, request operations.GroupsPatchFavouriteRequest) (*operations.GroupsPatchFavouriteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/groups/{id}/favourite", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PUT", url, nil)
@@ -4253,7 +4351,7 @@ func (s *SDK) GroupsPatchFavourite(ctx context.Context, request operations.Group
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4308,8 +4406,9 @@ func (s *SDK) GroupsPatchFavourite(ctx context.Context, request operations.Group
 	return res, nil
 }
 
+// GroupsPatchNotes - Fast patch the "notes" field of a group
 func (s *SDK) GroupsPatchNotes(ctx context.Context, request operations.GroupsPatchNotesRequest) (*operations.GroupsPatchNotesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/groups/{id}/notes", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4327,7 +4426,7 @@ func (s *SDK) GroupsPatchNotes(ctx context.Context, request operations.GroupsPat
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4382,8 +4481,9 @@ func (s *SDK) GroupsPatchNotes(ctx context.Context, request operations.GroupsPat
 	return res, nil
 }
 
+// HitsGetHits - Retrieve the list of events related to this account.
 func (s *SDK) HitsGetHits(ctx context.Context, request operations.HitsGetHitsRequest) (*operations.HitsGetHitsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/hits"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4393,7 +4493,7 @@ func (s *SDK) HitsGetHits(ctx context.Context, request operations.HitsGetHitsReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4432,8 +4532,9 @@ func (s *SDK) HitsGetHits(ctx context.Context, request operations.HitsGetHitsReq
 	return res, nil
 }
 
+// MeGetMe - Retrieve current account data
 func (s *SDK) MeGetMe(ctx context.Context) (*operations.MeGetMeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/me"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4441,7 +4542,7 @@ func (s *SDK) MeGetMe(ctx context.Context) (*operations.MeGetMeResponse, error) 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4494,8 +4595,9 @@ func (s *SDK) MeGetMe(ctx context.Context) (*operations.MeGetMeResponse, error) 
 	return res, nil
 }
 
+// MeGetMePlan - Retrieve current account plan
 func (s *SDK) MeGetMePlan(ctx context.Context) (*operations.MeGetMePlanResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/me/plan"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4503,7 +4605,7 @@ func (s *SDK) MeGetMePlan(ctx context.Context) (*operations.MeGetMePlanResponse,
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4556,8 +4658,9 @@ func (s *SDK) MeGetMePlan(ctx context.Context) (*operations.MeGetMePlanResponse,
 	return res, nil
 }
 
+// PostAccountGuestsGuestIDTypePermissionsPatch - Change the permission on a shared object
 func (s *SDK) PostAccountGuestsGuestIDTypePermissionsPatch(ctx context.Context, request operations.PostAccountGuestsGuestIDTypePermissionsPatchRequest) (*operations.PostAccountGuestsGuestIDTypePermissionsPatchResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/account/guests/{guestId}/{type}/permissions/patch", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4575,7 +4678,7 @@ func (s *SDK) PostAccountGuestsGuestIDTypePermissionsPatch(ctx context.Context, 
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4628,8 +4731,9 @@ func (s *SDK) PostAccountGuestsGuestIDTypePermissionsPatch(ctx context.Context, 
 	return res, nil
 }
 
+// ReportsGet - Retrieve a top report
 func (s *SDK) ReportsGet(ctx context.Context, request operations.ReportsGetRequest) (*operations.ReportsGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/reports"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4639,7 +4743,7 @@ func (s *SDK) ReportsGet(ctx context.Context, request operations.ReportsGetReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4679,8 +4783,9 @@ func (s *SDK) ReportsGet(ctx context.Context, request operations.ReportsGetReque
 	return res, nil
 }
 
+// RetargetingCount - Retrieve count of retargeting scripts
 func (s *SDK) RetargetingCount(ctx context.Context) (*operations.RetargetingCountResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/retargeting/count"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4688,7 +4793,7 @@ func (s *SDK) RetargetingCount(ctx context.Context) (*operations.RetargetingCoun
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4741,8 +4846,9 @@ func (s *SDK) RetargetingCount(ctx context.Context) (*operations.RetargetingCoun
 	return res, nil
 }
 
+// RetargetingDelete - Deletes a retargeting script (and remove associations)
 func (s *SDK) RetargetingDelete(ctx context.Context, request operations.RetargetingDeleteRequest) (*operations.RetargetingDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/retargeting/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -4750,7 +4856,7 @@ func (s *SDK) RetargetingDelete(ctx context.Context, request operations.Retarget
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4804,8 +4910,9 @@ func (s *SDK) RetargetingDelete(ctx context.Context, request operations.Retarget
 	return res, nil
 }
 
+// RetargetingGet - List of all the retargeting scripts associated to the user
 func (s *SDK) RetargetingGet(ctx context.Context, request operations.RetargetingGetRequest) (*operations.RetargetingGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/retargeting"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4815,7 +4922,7 @@ func (s *SDK) RetargetingGet(ctx context.Context, request operations.Retargeting
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4855,8 +4962,9 @@ func (s *SDK) RetargetingGet(ctx context.Context, request operations.Retargeting
 	return res, nil
 }
 
+// RetargetingGetDatapoints - List of all the datapoints associated to the retargeting script.
 func (s *SDK) RetargetingGetDatapoints(ctx context.Context, request operations.RetargetingGetDatapointsRequest) (*operations.RetargetingGetDatapointsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/retargeting/{id}/datapoints", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4866,7 +4974,7 @@ func (s *SDK) RetargetingGetDatapoints(ctx context.Context, request operations.R
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4906,8 +5014,9 @@ func (s *SDK) RetargetingGetDatapoints(ctx context.Context, request operations.R
 	return res, nil
 }
 
+// RetargetingGetDatapointsCount - Count the datapoints associated to the retargeting script.
 func (s *SDK) RetargetingGetDatapointsCount(ctx context.Context, request operations.RetargetingGetDatapointsCountRequest) (*operations.RetargetingGetDatapointsCountResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/retargeting/{id}/datapoints/count", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4917,7 +5026,7 @@ func (s *SDK) RetargetingGetDatapointsCount(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4971,8 +5080,9 @@ func (s *SDK) RetargetingGetDatapointsCount(ctx context.Context, request operati
 	return res, nil
 }
 
+// RetargetingPost - Updates a retargeting script
 func (s *SDK) RetargetingPost(ctx context.Context, request operations.RetargetingPostRequest) (*operations.RetargetingPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/retargeting/{id}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4990,7 +5100,7 @@ func (s *SDK) RetargetingPost(ctx context.Context, request operations.Retargetin
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5044,8 +5154,9 @@ func (s *SDK) RetargetingPost(ctx context.Context, request operations.Retargetin
 	return res, nil
 }
 
+// RetargetingPut - Creates a retargeting script
 func (s *SDK) RetargetingPut(ctx context.Context, request operations.RetargetingPutRequest) (*operations.RetargetingPutResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/retargeting"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5063,7 +5174,7 @@ func (s *SDK) RetargetingPut(ctx context.Context, request operations.Retargeting
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5117,8 +5228,9 @@ func (s *SDK) RetargetingPut(ctx context.Context, request operations.Retargeting
 	return res, nil
 }
 
+// TagsCount - List of all the groups associated to the user filtered by this tag.
 func (s *SDK) TagsCount(ctx context.Context, request operations.TagsCountRequest) (*operations.TagsCountResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/tags/count"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5128,7 +5240,7 @@ func (s *SDK) TagsCount(ctx context.Context, request operations.TagsCountRequest
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5168,8 +5280,9 @@ func (s *SDK) TagsCount(ctx context.Context, request operations.TagsCountRequest
 	return res, nil
 }
 
+// TagsDelete - Delete a tag
 func (s *SDK) TagsDelete(ctx context.Context, request operations.TagsDeleteRequest) (*operations.TagsDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{tagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -5177,7 +5290,7 @@ func (s *SDK) TagsDelete(ctx context.Context, request operations.TagsDeleteReque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5216,8 +5329,9 @@ func (s *SDK) TagsDelete(ctx context.Context, request operations.TagsDeleteReque
 	return res, nil
 }
 
+// TagsDeleteRelatedDatapoints - Delete the association of this tag with all datapoints
 func (s *SDK) TagsDeleteRelatedDatapoints(ctx context.Context, request operations.TagsDeleteRelatedDatapointsRequest) (*operations.TagsDeleteRelatedDatapointsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{tagId}/datapoints", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -5225,7 +5339,7 @@ func (s *SDK) TagsDeleteRelatedDatapoints(ctx context.Context, request operation
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5278,8 +5392,9 @@ func (s *SDK) TagsDeleteRelatedDatapoints(ctx context.Context, request operation
 	return res, nil
 }
 
+// TagsDeleteRelatedGroups - Delete the association of this tag with all groups
 func (s *SDK) TagsDeleteRelatedGroups(ctx context.Context, request operations.TagsDeleteRelatedGroupsRequest) (*operations.TagsDeleteRelatedGroupsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{tagId}/groups", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -5287,7 +5402,7 @@ func (s *SDK) TagsDeleteRelatedGroups(ctx context.Context, request operations.Ta
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5340,8 +5455,9 @@ func (s *SDK) TagsDeleteRelatedGroups(ctx context.Context, request operations.Ta
 	return res, nil
 }
 
+// TagsGet - List of all the groups associated to the user filtered by this tag.
 func (s *SDK) TagsGet(ctx context.Context, request operations.TagsGetRequest) (*operations.TagsGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/tags"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5351,7 +5467,7 @@ func (s *SDK) TagsGet(ctx context.Context, request operations.TagsGetRequest) (*
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5391,8 +5507,9 @@ func (s *SDK) TagsGet(ctx context.Context, request operations.TagsGetRequest) (*
 	return res, nil
 }
 
+// TagsGetDatapoints - List of all the datapoints associated to the user filtered by this tag
 func (s *SDK) TagsGetDatapoints(ctx context.Context, request operations.TagsGetDatapointsRequest) (*operations.TagsGetDatapointsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{tagId}/datapoints", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5402,7 +5519,7 @@ func (s *SDK) TagsGetDatapoints(ctx context.Context, request operations.TagsGetD
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5442,8 +5559,9 @@ func (s *SDK) TagsGetDatapoints(ctx context.Context, request operations.TagsGetD
 	return res, nil
 }
 
+// TagsGetDatapointsCount - Count the datapoints associated to the user filtered by this tag
 func (s *SDK) TagsGetDatapointsCount(ctx context.Context, request operations.TagsGetDatapointsCountRequest) (*operations.TagsGetDatapointsCountResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{tagId}/datapoints/count", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5453,7 +5571,7 @@ func (s *SDK) TagsGetDatapointsCount(ctx context.Context, request operations.Tag
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5507,8 +5625,9 @@ func (s *SDK) TagsGetDatapointsCount(ctx context.Context, request operations.Tag
 	return res, nil
 }
 
+// TagsGetGroups - List of all the groups associated to the user filtered by this tag.
 func (s *SDK) TagsGetGroups(ctx context.Context, request operations.TagsGetGroupsRequest) (*operations.TagsGetGroupsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{tagId}/groups", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5518,7 +5637,7 @@ func (s *SDK) TagsGetGroups(ctx context.Context, request operations.TagsGetGroup
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5558,8 +5677,9 @@ func (s *SDK) TagsGetGroups(ctx context.Context, request operations.TagsGetGroup
 	return res, nil
 }
 
+// TagsGetGroupsCount - Count the groups associated to the user filtered by this tag
 func (s *SDK) TagsGetGroupsCount(ctx context.Context, request operations.TagsGetGroupsCountRequest) (*operations.TagsGetGroupsCountResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{tagId}/groups/count", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5569,7 +5689,7 @@ func (s *SDK) TagsGetGroupsCount(ctx context.Context, request operations.TagsGet
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5623,8 +5743,9 @@ func (s *SDK) TagsGetGroupsCount(ctx context.Context, request operations.TagsGet
 	return res, nil
 }
 
+// TagsPatchDataPoint - Associate/Deassociate a tag with a datapoint
 func (s *SDK) TagsPatchDataPoint(ctx context.Context, request operations.TagsPatchDataPointRequest) (*operations.TagsPatchDataPointResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{tagId}/datapoints/patch", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5642,7 +5763,7 @@ func (s *SDK) TagsPatchDataPoint(ctx context.Context, request operations.TagsPat
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5696,8 +5817,9 @@ func (s *SDK) TagsPatchDataPoint(ctx context.Context, request operations.TagsPat
 	return res, nil
 }
 
+// TagsPatchGroup - Associate/Deassociate a tag with a group
 func (s *SDK) TagsPatchGroup(ctx context.Context, request operations.TagsPatchGroupRequest) (*operations.TagsPatchGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{tagId}/groups/patch", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5715,7 +5837,7 @@ func (s *SDK) TagsPatchGroup(ctx context.Context, request operations.TagsPatchGr
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5769,8 +5891,9 @@ func (s *SDK) TagsPatchGroup(ctx context.Context, request operations.TagsPatchGr
 	return res, nil
 }
 
+// TagsPatchTagName - Fast patch a tag name
 func (s *SDK) TagsPatchTagName(ctx context.Context, request operations.TagsPatchTagNameRequest) (*operations.TagsPatchTagNameResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{tagId}/name", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5788,7 +5911,7 @@ func (s *SDK) TagsPatchTagName(ctx context.Context, request operations.TagsPatch
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5841,8 +5964,9 @@ func (s *SDK) TagsPatchTagName(ctx context.Context, request operations.TagsPatch
 	return res, nil
 }
 
+// TagsPut - Create a tag
 func (s *SDK) TagsPut(ctx context.Context, request operations.TagsPutRequest) (*operations.TagsPutResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/tags"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5860,7 +5984,7 @@ func (s *SDK) TagsPut(ctx context.Context, request operations.TagsPutRequest) (*
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

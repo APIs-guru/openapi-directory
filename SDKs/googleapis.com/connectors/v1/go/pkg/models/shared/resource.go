@@ -10,6 +10,8 @@ const (
 	ResourceTypeEnumGcpSecretmanagerSecretVersion ResourceTypeEnum = "GCP_SECRETMANAGER_SECRET_VERSION"
 )
 
+// Resource
+// Resource definition
 type Resource struct {
 	PathTemplate *string           `json:"pathTemplate,omitempty"`
 	Type         *ResourceTypeEnum `json:"type,omitempty"`

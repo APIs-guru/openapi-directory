@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
@@ -23,17 +26,17 @@ class GetBotsHeaders:
 
 @dataclass
 class GetBotsRequest:
-    query_params: GetBotsQueryParams = field(default=None)
-    headers: GetBotsHeaders = field(default=None)
+    headers: GetBotsHeaders = field()
+    query_params: GetBotsQueryParams = field()
     
 
 @dataclass
 class GetBotsResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_bots_response: Optional[shared.GetBotsResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

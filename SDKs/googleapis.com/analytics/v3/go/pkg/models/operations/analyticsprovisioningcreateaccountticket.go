@@ -21,7 +21,7 @@ type AnalyticsProvisioningCreateAccountTicketSecurity struct {
 
 type AnalyticsProvisioningCreateAccountTicketRequest struct {
 	QueryParams AnalyticsProvisioningCreateAccountTicketQueryParams
-	Request     *shared.AccountTicket `request:"mediaType=application/json"`
+	Request     *shared.AccountTicketInput `request:"mediaType=application/json"`
 	Security    AnalyticsProvisioningCreateAccountTicketSecurity
 }
 

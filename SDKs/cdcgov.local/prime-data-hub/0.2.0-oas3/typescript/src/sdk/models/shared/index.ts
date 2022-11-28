@@ -6,6 +6,7 @@ export * from "./detail";
 export * from "./itemrouting";
 export * from "./nulltransport";
 export * from "./organization";
+export * from "./organization1";
 export * from "./receiver";
 export * from "./report";
 export * from "./security";

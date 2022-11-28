@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EnvelopeSignature } from "./envelopesignature";
+
 
 
 // Envelope
@@ -8,12 +8,12 @@ import { EnvelopeSignature } from "./envelopesignature";
  * MUST match https://github.com/secure-systems-lab/dsse/blob/master/envelope.proto. An authenticated message of arbitrary type.
 **/
 export class Envelope extends SpeakeasyBase {
-  @Metadata({ data: "json, name=payload" })
+  @SpeakeasyMetadata({ data: "json, name=payload" })
   payload?: string;
 
-  @Metadata({ data: "json, name=payloadType" })
+  @SpeakeasyMetadata({ data: "json, name=payloadType" })
   payloadType?: string;
 
-  @Metadata({ data: "json, name=signatures", elemType: shared.EnvelopeSignature })
+  @SpeakeasyMetadata({ data: "json, name=signatures", elemType: EnvelopeSignature })
   signatures?: EnvelopeSignature[];
 }

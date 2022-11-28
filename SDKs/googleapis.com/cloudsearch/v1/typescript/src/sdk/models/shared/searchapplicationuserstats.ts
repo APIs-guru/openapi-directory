@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Date } from "./date";
 
 
+
 export class SearchApplicationUserStats extends SpeakeasyBase {
-  @Metadata({ data: "json, name=date" })
+  @SpeakeasyMetadata({ data: "json, name=date" })
   date?: Date;
 
-  @Metadata({ data: "json, name=oneDayActiveUsersCount" })
+  @SpeakeasyMetadata({ data: "json, name=oneDayActiveUsersCount" })
   oneDayActiveUsersCount?: string;
 
-  @Metadata({ data: "json, name=sevenDaysActiveUsersCount" })
+  @SpeakeasyMetadata({ data: "json, name=sevenDaysActiveUsersCount" })
   sevenDaysActiveUsersCount?: string;
 
-  @Metadata({ data: "json, name=thirtyDaysActiveUsersCount" })
+  @SpeakeasyMetadata({ data: "json, name=thirtyDaysActiveUsersCount" })
   thirtyDaysActiveUsersCount?: string;
 }

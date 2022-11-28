@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ItemizedMetricStats } from "./itemizedmetricstats";
+
 
 
 // AnomalyGroupStatistics
@@ -8,12 +8,12 @@ import { ItemizedMetricStats } from "./itemizedmetricstats";
  * Aggregated statistics for a group of anomalous metrics.
 **/
 export class AnomalyGroupStatistics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EvaluationStartDate" })
+  @SpeakeasyMetadata({ data: "json, name=EvaluationStartDate" })
   evaluationStartDate?: string;
 
-  @Metadata({ data: "json, name=ItemizedMetricStatsList", elemType: shared.ItemizedMetricStats })
+  @SpeakeasyMetadata({ data: "json, name=ItemizedMetricStatsList", elemType: ItemizedMetricStats })
   itemizedMetricStatsList?: ItemizedMetricStats[];
 
-  @Metadata({ data: "json, name=TotalCount" })
+  @SpeakeasyMetadata({ data: "json, name=TotalCount" })
   totalCount?: number;
 }

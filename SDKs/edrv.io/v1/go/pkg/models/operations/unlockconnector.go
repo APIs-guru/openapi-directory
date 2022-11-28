@@ -5,14 +5,14 @@ type UnlockconnectorRequestBody struct {
 	Connector     *string `json:"connector,omitempty"`
 }
 
-type UnlockconnectorRequest struct {
-	Request UnlockconnectorRequestBody `request:"mediaType=application/json"`
-}
-
 type Unlockconnector201ApplicationJSON struct {
 	Command map[string]interface{} `json:"command,omitempty"`
 	Message *string                `json:"message,omitempty"`
 	Ok      *bool                  `json:"ok,omitempty"`
+}
+
+type UnlockconnectorRequest struct {
+	Request UnlockconnectorRequestBody `request:"mediaType=application/json"`
 }
 
 type UnlockconnectorResponse struct {

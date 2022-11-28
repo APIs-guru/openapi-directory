@@ -1,59 +1,60 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum TranslationSetsGetTranslationSetsStateEnum {
-    OutForProcessing = "OutForProcessing"
-,    Processing = "Processing"
-,    PendingApproval = "PendingApproval"
-,    OutForTranslation = "OutForTranslation"
-,    Cancelled = "Cancelled"
-,    Completed = "Completed"
+    OutForProcessing = "OutForProcessing",
+    Processing = "Processing",
+    PendingApproval = "PendingApproval",
+    OutForTranslation = "OutForTranslation",
+    Cancelled = "Cancelled",
+    Completed = "Completed"
 }
 
 
 export class TranslationSetsGetTranslationSetsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=includeAttributes" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=includeAttributes" })
   includeAttributes?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=languageId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=languageId" })
   languageId?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=state" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=state" })
   state?: TranslationSetsGetTranslationSetsStateEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=stringId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=stringId" })
   stringId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=translationRequestID" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=translationRequestID" })
   translationRequestId?: number;
 }
 
 
 export class TranslationSetsGetTranslationSetsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: TranslationSetsGetTranslationSetsQueryParams;
 }
 
 
 export class TranslationSetsGetTranslationSetsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiIPagedResponseGlobalResourcesSharedModelsTranslationSet?: shared.ApiIPagedResponseGlobalResourcesSharedModelsTranslationSet;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   apiModelsApiError?: shared.ApiModelsApiError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

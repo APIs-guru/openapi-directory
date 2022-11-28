@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SecretPayload } from "./secretpayload";
+
 
 
 // AccessSecretVersionResponse
@@ -7,9 +8,9 @@ import { SecretPayload } from "./secretpayload";
  * Response message for SecretManagerService.AccessSecretVersion.
 **/
 export class AccessSecretVersionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=payload" })
+  @SpeakeasyMetadata({ data: "json, name=payload" })
   payload?: SecretPayload;
 }

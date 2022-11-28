@@ -30,7 +30,7 @@ type AnalyticsadminPropertiesConversionEventsCreateSecurity struct {
 type AnalyticsadminPropertiesConversionEventsCreateRequest struct {
 	PathParams  AnalyticsadminPropertiesConversionEventsCreatePathParams
 	QueryParams AnalyticsadminPropertiesConversionEventsCreateQueryParams
-	Request     *shared.GoogleAnalyticsAdminV1alphaConversionEvent `request:"mediaType=application/json"`
+	Request     *shared.GoogleAnalyticsAdminV1alphaConversionEventInput `request:"mediaType=application/json"`
 	Security    AnalyticsadminPropertiesConversionEventsCreateSecurity
 }
 

@@ -1,35 +1,49 @@
 import { AxiosInstance, AxiosRequestConfig } from "axios";
 import * as operations from "./models/operations";
 import { Security } from "./models/shared";
-declare type OptsFunc = (sdk: SDK) => void;
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://rest.nexmo.com"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare function WithSecurity(security: Security): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _security?: Security;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
     /**
+     * buyANumber - Buy a number
+     *
      * Request to purchase a specific inbound number.
     **/
-    BuyANumber(req: operations.BuyANumberRequest, config?: AxiosRequestConfig): Promise<operations.BuyANumberResponse>;
+    buyANumber(req: operations.BuyANumberRequest, config?: AxiosRequestConfig): Promise<operations.BuyANumberResponse>;
     /**
+     * cancelANumber - Cancel a number
+     *
      * Cancel your subscription for a specific inbound number.
     **/
-    CancelANumber(req: operations.CancelANumberRequest, config?: AxiosRequestConfig): Promise<operations.CancelANumberResponse>;
+    cancelANumber(req: operations.CancelANumberRequest, config?: AxiosRequestConfig): Promise<operations.CancelANumberResponse>;
     /**
+     * getAvailableNumbers - Search available numbers
+     *
      * Retrieve inbound numbers that are available for the specified country.
     **/
-    GetAvailableNumbers(req: operations.GetAvailableNumbersRequest, config?: AxiosRequestConfig): Promise<operations.GetAvailableNumbersResponse>;
+    getAvailableNumbers(req: operations.GetAvailableNumbersRequest, config?: AxiosRequestConfig): Promise<operations.GetAvailableNumbersResponse>;
     /**
+     * getOwnedNumbers - List the numbers you own
+     *
      * Retrieve all the inbound numbers associated with your Vonage account.
     **/
-    GetOwnedNumbers(req: operations.GetOwnedNumbersRequest, config?: AxiosRequestConfig): Promise<operations.GetOwnedNumbersResponse>;
+    getOwnedNumbers(req: operations.GetOwnedNumbersRequest, config?: AxiosRequestConfig): Promise<operations.GetOwnedNumbersResponse>;
     /**
+     * updateANumber - Update a number
+     *
      * Change the behaviour of a number that you own.
     **/
-    UpdateANumber(req: operations.UpdateANumberRequest, config?: AxiosRequestConfig): Promise<operations.UpdateANumberResponse>;
+    updateANumber(req: operations.UpdateANumberRequest, config?: AxiosRequestConfig): Promise<operations.UpdateANumberResponse>;
 }
 export {};

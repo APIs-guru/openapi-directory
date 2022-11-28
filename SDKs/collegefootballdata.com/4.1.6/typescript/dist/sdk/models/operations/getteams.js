@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetTeamsQueryParams = /** @class */ (function (_super) {
     __extends(GetTeamsQueryParams, _super);
@@ -30,7 +30,7 @@ var GetTeamsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=conference" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=conference" }),
         __metadata("design:type", String)
     ], GetTeamsQueryParams.prototype, "conference", void 0);
     return GetTeamsQueryParams;
@@ -42,7 +42,7 @@ var GetTeamsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetTeamsQueryParams)
     ], GetTeamsRequest.prototype, "queryParams", void 0);
     return GetTeamsRequest;
@@ -54,15 +54,15 @@ var GetTeamsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetTeamsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetTeamsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata({ elemType: shared.Team }),
+        SpeakeasyMetadata({ elemType: shared.Team }),
         __metadata("design:type", Array)
     ], GetTeamsResponse.prototype, "teams", void 0);
     return GetTeamsResponse;

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RemoveFromPlaylistRequestDto
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Class RemoveFromPlaylistRequestDto.
 **/
 export class RemoveFromPlaylistRequestDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PlaylistItemIds" })
+  @SpeakeasyMetadata({ data: "json, name=PlaylistItemIds" })
   playlistItemIds?: string[];
 }

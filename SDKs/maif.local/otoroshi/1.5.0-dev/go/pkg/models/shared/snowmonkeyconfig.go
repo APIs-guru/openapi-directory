@@ -1,5 +1,7 @@
 package shared
 
+// SnowMonkeyConfig
+// Configuration for the faults that can be injected in requests. The name Snow Monkey is an hommage to Netflix's Chaos Monkey 😉
 type SnowMonkeyConfig struct {
 	ChaosConfig                  ChaosConfig        `json:"chaosConfig"`
 	DryRun                       bool               `json:"dryRun"`

@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AttributeKeyAndValue } from "./attributekeyandvalue";
 import { ObjectReference } from "./objectreference";
 import { SchemaFacet } from "./schemafacet";
+
 
 
 // BatchCreateObject
@@ -10,18 +10,18 @@ import { SchemaFacet } from "./schemafacet";
  * Represents the output of a <a>CreateObject</a> operation.
 **/
 export class BatchCreateObject extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BatchReferenceName" })
+  @SpeakeasyMetadata({ data: "json, name=BatchReferenceName" })
   batchReferenceName?: string;
 
-  @Metadata({ data: "json, name=LinkName" })
+  @SpeakeasyMetadata({ data: "json, name=LinkName" })
   linkName?: string;
 
-  @Metadata({ data: "json, name=ObjectAttributeList", elemType: shared.AttributeKeyAndValue })
+  @SpeakeasyMetadata({ data: "json, name=ObjectAttributeList", elemType: AttributeKeyAndValue })
   objectAttributeList: AttributeKeyAndValue[];
 
-  @Metadata({ data: "json, name=ParentReference" })
+  @SpeakeasyMetadata({ data: "json, name=ParentReference" })
   parentReference?: ObjectReference;
 
-  @Metadata({ data: "json, name=SchemaFacet", elemType: shared.SchemaFacet })
+  @SpeakeasyMetadata({ data: "json, name=SchemaFacet", elemType: SchemaFacet })
   schemaFacet: SchemaFacet[];
 }

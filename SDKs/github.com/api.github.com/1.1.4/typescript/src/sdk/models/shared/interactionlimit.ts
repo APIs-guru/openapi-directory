@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InteractionExpiryEnum } from "./interactionexpiryenum";
 import { InteractionGroupEnum } from "./interactiongroupenum";
+
 
 
 // InteractionLimit
@@ -8,9 +9,9 @@ import { InteractionGroupEnum } from "./interactiongroupenum";
  * Limit interactions to a specific type of user for a specified duration
 **/
 export class InteractionLimit extends SpeakeasyBase {
-  @Metadata({ data: "json, name=expiry" })
+  @SpeakeasyMetadata({ data: "json, name=expiry" })
   expiry?: InteractionExpiryEnum;
 
-  @Metadata({ data: "json, name=limit" })
+  @SpeakeasyMetadata({ data: "json, name=limit" })
   limit: InteractionGroupEnum;
 }

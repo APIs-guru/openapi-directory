@@ -1,6 +1,7 @@
 
 
+
 export enum ClusterEndpointEncryptionTypeEnum {
-    None = "NONE"
-,    Tls = "TLS"
+    None = "NONE",
+    Tls = "TLS"
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Paging } from "./paging";
 import { Folder } from "./folder";
 export declare class CollectionResponseFolder extends SpeakeasyBase {

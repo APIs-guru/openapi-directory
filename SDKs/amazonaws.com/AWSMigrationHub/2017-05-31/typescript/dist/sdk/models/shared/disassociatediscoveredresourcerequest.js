@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DisassociateDiscoveredResourceRequest = /** @class */ (function (_super) {
     __extends(DisassociateDiscoveredResourceRequest, _super);
     function DisassociateDiscoveredResourceRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ConfigurationId" }),
+        SpeakeasyMetadata({ data: "json, name=ConfigurationId" }),
         __metadata("design:type", String)
     ], DisassociateDiscoveredResourceRequest.prototype, "configurationId", void 0);
     __decorate([
-        Metadata({ data: "json, name=DryRun" }),
+        SpeakeasyMetadata({ data: "json, name=DryRun" }),
         __metadata("design:type", Boolean)
     ], DisassociateDiscoveredResourceRequest.prototype, "dryRun", void 0);
     __decorate([
-        Metadata({ data: "json, name=MigrationTaskName" }),
+        SpeakeasyMetadata({ data: "json, name=MigrationTaskName" }),
         __metadata("design:type", String)
     ], DisassociateDiscoveredResourceRequest.prototype, "migrationTaskName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProgressUpdateStream" }),
+        SpeakeasyMetadata({ data: "json, name=ProgressUpdateStream" }),
         __metadata("design:type", String)
     ], DisassociateDiscoveredResourceRequest.prototype, "progressUpdateStream", void 0);
     return DisassociateDiscoveredResourceRequest;

@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import deployjobrunmetadata
+from sdk import utils
+from . import *
 
 class DeployJobRunFailureCauseEnum(str, Enum):
     FAILURE_CAUSE_UNSPECIFIED = "FAILURE_CAUSE_UNSPECIFIED"
@@ -13,8 +15,12 @@ class DeployJobRunFailureCauseEnum(str, Enum):
 @dataclass_json
 @dataclass
 class DeployJobRun:
-    build: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'build' }})
-    failure_cause: Optional[DeployJobRunFailureCauseEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'failureCause' }})
-    failure_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'failureMessage' }})
-    metadata: Optional[deployjobrunmetadata.DeployJobRunMetadata] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadata' }})
+    r"""DeployJobRun
+    DeployJobRun contains information specific to a deploy `JobRun`.
+    """
+    
+    build: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('build') }})
+    failure_cause: Optional[DeployJobRunFailureCauseEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('failureCause') }})
+    failure_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('failureMessage') }})
+    metadata: Optional[DeployJobRunMetadata] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('metadata') }})
     

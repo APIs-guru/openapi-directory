@@ -1,30 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReportContext } from "./reportcontext";
 import { ReportFrequency } from "./reportfrequency";
 import { Tag } from "./tag";
 import { ReportTypeEnum } from "./reporttypeenum";
 
 
+
 export class CreateLicenseManagerReportGeneratorRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClientToken" })
+  @SpeakeasyMetadata({ data: "json, name=ClientToken" })
   clientToken: string;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=ReportContext" })
+  @SpeakeasyMetadata({ data: "json, name=ReportContext" })
   reportContext: ReportContext;
 
-  @Metadata({ data: "json, name=ReportFrequency" })
+  @SpeakeasyMetadata({ data: "json, name=ReportFrequency" })
   reportFrequency: ReportFrequency;
 
-  @Metadata({ data: "json, name=ReportGeneratorName" })
+  @SpeakeasyMetadata({ data: "json, name=ReportGeneratorName" })
   reportGeneratorName: string;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type: ReportTypeEnum[];
 }

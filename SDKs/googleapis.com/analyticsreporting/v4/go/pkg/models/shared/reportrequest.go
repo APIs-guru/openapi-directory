@@ -9,6 +9,8 @@ const (
 	ReportRequestSamplingLevelEnumLarge               ReportRequestSamplingLevelEnum = "LARGE"
 )
 
+// ReportRequest
+// The main request class which specifies the Reporting API request.
 type ReportRequest struct {
 	CohortGroup            *CohortGroup                    `json:"cohortGroup,omitempty"`
 	DateRanges             []DateRange                     `json:"dateRanges,omitempty"`

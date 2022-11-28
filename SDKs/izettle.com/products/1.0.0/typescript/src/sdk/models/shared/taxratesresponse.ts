@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TaxRate } from "./taxrate";
 
 
+
 export class TaxRatesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=taxRates", elemType: shared.TaxRate })
+  @SpeakeasyMetadata({ data: "json, name=taxRates", elemType: TaxRate })
   taxRates?: TaxRate[];
 }

@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class AccessMethodTypeEnum(str, Enum):
     CA_REPOSITORY = "CA_REPOSITORY"

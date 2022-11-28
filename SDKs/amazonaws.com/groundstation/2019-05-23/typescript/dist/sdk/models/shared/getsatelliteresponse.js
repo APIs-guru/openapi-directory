@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GetSatelliteResponse
 /**
  * <p/>
@@ -33,19 +33,19 @@ var GetSatelliteResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=groundStations" }),
+        SpeakeasyMetadata({ data: "json, name=groundStations" }),
         __metadata("design:type", Array)
     ], GetSatelliteResponse.prototype, "groundStations", void 0);
     __decorate([
-        Metadata({ data: "json, name=noradSatelliteID" }),
+        SpeakeasyMetadata({ data: "json, name=noradSatelliteID" }),
         __metadata("design:type", Number)
     ], GetSatelliteResponse.prototype, "noradSatelliteId", void 0);
     __decorate([
-        Metadata({ data: "json, name=satelliteArn" }),
+        SpeakeasyMetadata({ data: "json, name=satelliteArn" }),
         __metadata("design:type", String)
     ], GetSatelliteResponse.prototype, "satelliteArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=satelliteId" }),
+        SpeakeasyMetadata({ data: "json, name=satelliteId" }),
         __metadata("design:type", String)
     ], GetSatelliteResponse.prototype, "satelliteId", void 0);
     return GetSatelliteResponse;

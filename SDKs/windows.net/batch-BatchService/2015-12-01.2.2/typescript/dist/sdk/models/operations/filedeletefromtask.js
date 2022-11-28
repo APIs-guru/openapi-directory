@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var FileDeleteFromTaskPathParams = /** @class */ (function (_super) {
     __extends(FileDeleteFromTaskPathParams, _super);
     function FileDeleteFromTaskPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=fileName" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=fileName" }),
         __metadata("design:type", String)
     ], FileDeleteFromTaskPathParams.prototype, "fileName", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=jobId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=jobId" }),
         __metadata("design:type", String)
     ], FileDeleteFromTaskPathParams.prototype, "jobId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=taskId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=taskId" }),
         __metadata("design:type", String)
     ], FileDeleteFromTaskPathParams.prototype, "taskId", void 0);
     return FileDeleteFromTaskPathParams;
@@ -49,15 +49,15 @@ var FileDeleteFromTaskQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=api-version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api-version" }),
         __metadata("design:type", String)
     ], FileDeleteFromTaskQueryParams.prototype, "apiVersion", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=recursive" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=recursive" }),
         __metadata("design:type", Boolean)
     ], FileDeleteFromTaskQueryParams.prototype, "recursive", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=timeout" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timeout" }),
         __metadata("design:type", Number)
     ], FileDeleteFromTaskQueryParams.prototype, "timeout", void 0);
     return FileDeleteFromTaskQueryParams;
@@ -69,15 +69,15 @@ var FileDeleteFromTaskHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=client-request-id" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=client-request-id" }),
         __metadata("design:type", String)
     ], FileDeleteFromTaskHeaders.prototype, "clientRequestId", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=ocp-date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=ocp-date" }),
         __metadata("design:type", String)
     ], FileDeleteFromTaskHeaders.prototype, "ocpDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=return-client-request-id" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=return-client-request-id" }),
         __metadata("design:type", Boolean)
     ], FileDeleteFromTaskHeaders.prototype, "returnClientRequestId", void 0);
     return FileDeleteFromTaskHeaders;
@@ -89,15 +89,15 @@ var FileDeleteFromTaskRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FileDeleteFromTaskPathParams)
     ], FileDeleteFromTaskRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FileDeleteFromTaskQueryParams)
     ], FileDeleteFromTaskRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FileDeleteFromTaskHeaders)
     ], FileDeleteFromTaskRequest.prototype, "headers", void 0);
     return FileDeleteFromTaskRequest;
@@ -109,19 +109,19 @@ var FileDeleteFromTaskResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], FileDeleteFromTaskResponse.prototype, "batchError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], FileDeleteFromTaskResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], FileDeleteFromTaskResponse.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], FileDeleteFromTaskResponse.prototype, "statusCode", void 0);
     return FileDeleteFromTaskResponse;

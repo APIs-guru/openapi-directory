@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class NetworkconnectivityProjectsLocationsSpokesSetIamPolicyPathParams:
-    resource: str = field(default=None, metadata={'path_param': { 'field_name': 'resource', 'style': 'simple', 'explode': False }})
+    resource: str = field(metadata={'path_param': { 'field_name': 'resource', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class NetworkconnectivityProjectsLocationsSpokesSetIamPolicyQueryParams:
 
 @dataclass
 class NetworkconnectivityProjectsLocationsSpokesSetIamPolicySecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class NetworkconnectivityProjectsLocationsSpokesSetIamPolicyRequest:
-    path_params: NetworkconnectivityProjectsLocationsSpokesSetIamPolicyPathParams = field(default=None)
-    query_params: NetworkconnectivityProjectsLocationsSpokesSetIamPolicyQueryParams = field(default=None)
+    path_params: NetworkconnectivityProjectsLocationsSpokesSetIamPolicyPathParams = field()
+    query_params: NetworkconnectivityProjectsLocationsSpokesSetIamPolicyQueryParams = field()
+    security: NetworkconnectivityProjectsLocationsSpokesSetIamPolicySecurity = field()
     request: Optional[shared.SetIamPolicyRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: NetworkconnectivityProjectsLocationsSpokesSetIamPolicySecurity = field(default=None)
     
 
 @dataclass
 class NetworkconnectivityProjectsLocationsSpokesSetIamPolicyResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     policy: Optional[shared.Policy] = field(default=None)
-    status_code: int = field(default=None)
     

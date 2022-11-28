@@ -1,5 +1,7 @@
 package shared
 
+// CreateReplicationInstanceMessage
+// <p/>
 type CreateReplicationInstanceMessage struct {
 	AllocatedStorage                 *int64   `json:"AllocatedStorage,omitempty"`
 	AutoMinorVersionUpgrade          *bool    `json:"AutoMinorVersionUpgrade,omitempty"`

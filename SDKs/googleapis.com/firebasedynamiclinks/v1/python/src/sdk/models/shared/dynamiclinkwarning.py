@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class DynamicLinkWarningWarningCodeEnum(str, Enum):
     CODE_UNSPECIFIED = "CODE_UNSPECIFIED"
@@ -37,7 +39,11 @@ class DynamicLinkWarningWarningCodeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class DynamicLinkWarning:
-    warning_code: Optional[DynamicLinkWarningWarningCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'warningCode' }})
-    warning_document_link: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'warningDocumentLink' }})
-    warning_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'warningMessage' }})
+    r"""DynamicLinkWarning
+    Dynamic Links warning messages.
+    """
+    
+    warning_code: Optional[DynamicLinkWarningWarningCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('warningCode') }})
+    warning_document_link: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('warningDocumentLink') }})
+    warning_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('warningMessage') }})
     

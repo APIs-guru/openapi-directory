@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GeofenceGeometry } from "./geofencegeometry";
 
 
+
 export class GetGeofenceResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreateTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreateTime" })
   createTime: Date;
 
-  @Metadata({ data: "json, name=GeofenceId" })
+  @SpeakeasyMetadata({ data: "json, name=GeofenceId" })
   geofenceId: string;
 
-  @Metadata({ data: "json, name=Geometry" })
+  @SpeakeasyMetadata({ data: "json, name=Geometry" })
   geometry: GeofenceGeometry;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status: string;
 
-  @Metadata({ data: "json, name=UpdateTime" })
+  @SpeakeasyMetadata({ data: "json, name=UpdateTime" })
   updateTime: Date;
 }

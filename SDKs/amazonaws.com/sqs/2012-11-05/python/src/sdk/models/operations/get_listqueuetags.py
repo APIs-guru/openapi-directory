@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 
 @dataclass
 class GetListQueueTagsPathParams:
-    account_number: int = field(default=None, metadata={'path_param': { 'field_name': 'AccountNumber', 'style': 'simple', 'explode': False }})
-    queue_name: str = field(default=None, metadata={'path_param': { 'field_name': 'QueueName', 'style': 'simple', 'explode': False }})
+    account_number: int = field(metadata={'path_param': { 'field_name': 'AccountNumber', 'style': 'simple', 'explode': False }})
+    queue_name: str = field(metadata={'path_param': { 'field_name': 'QueueName', 'style': 'simple', 'explode': False }})
     
 class GetListQueueTagsActionEnum(str, Enum):
     LIST_QUEUE_TAGS = "ListQueueTags"
@@ -16,8 +20,8 @@ class GetListQueueTagsVersionEnum(str, Enum):
 
 @dataclass
 class GetListQueueTagsQueryParams:
-    action: GetListQueueTagsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: GetListQueueTagsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetListQueueTagsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetListQueueTagsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -33,14 +37,14 @@ class GetListQueueTagsHeaders:
 
 @dataclass
 class GetListQueueTagsRequest:
-    path_params: GetListQueueTagsPathParams = field(default=None)
-    query_params: GetListQueueTagsQueryParams = field(default=None)
-    headers: GetListQueueTagsHeaders = field(default=None)
+    headers: GetListQueueTagsHeaders = field()
+    path_params: GetListQueueTagsPathParams = field()
+    query_params: GetListQueueTagsQueryParams = field()
     
 
 @dataclass
 class GetListQueueTagsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

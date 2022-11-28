@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConfigurationEventResourceTypeEnum } from "./configurationeventresourcetypeenum";
 import { ConfigurationEventStatusEnum } from "./configurationeventstatusenum";
+
 
 
 // ConfigurationEvent
@@ -8,21 +9,21 @@ import { ConfigurationEventStatusEnum } from "./configurationeventstatusenum";
  *  The event information. 
 **/
 export class ConfigurationEvent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EventDetail" })
+  @SpeakeasyMetadata({ data: "json, name=EventDetail" })
   eventDetail?: string;
 
-  @Metadata({ data: "json, name=EventResourceName" })
+  @SpeakeasyMetadata({ data: "json, name=EventResourceName" })
   eventResourceName?: string;
 
-  @Metadata({ data: "json, name=EventResourceType" })
+  @SpeakeasyMetadata({ data: "json, name=EventResourceType" })
   eventResourceType?: ConfigurationEventResourceTypeEnum;
 
-  @Metadata({ data: "json, name=EventStatus" })
+  @SpeakeasyMetadata({ data: "json, name=EventStatus" })
   eventStatus?: ConfigurationEventStatusEnum;
 
-  @Metadata({ data: "json, name=EventTime" })
+  @SpeakeasyMetadata({ data: "json, name=EventTime" })
   eventTime?: Date;
 
-  @Metadata({ data: "json, name=MonitoredResourceARN" })
+  @SpeakeasyMetadata({ data: "json, name=MonitoredResourceARN" })
   monitoredResourceArn?: string;
 }

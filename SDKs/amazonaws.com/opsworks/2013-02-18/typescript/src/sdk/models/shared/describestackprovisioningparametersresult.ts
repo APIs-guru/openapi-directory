@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DescribeStackProvisioningParametersResult
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains the response to a <code>DescribeStackProvisioningParameters</code> request.
 **/
 export class DescribeStackProvisioningParametersResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AgentInstallerUrl" })
+  @SpeakeasyMetadata({ data: "json, name=AgentInstallerUrl" })
   agentInstallerUrl?: string;
 
-  @Metadata({ data: "json, name=Parameters" })
+  @SpeakeasyMetadata({ data: "json, name=Parameters" })
   parameters?: Map<string, string>;
 }

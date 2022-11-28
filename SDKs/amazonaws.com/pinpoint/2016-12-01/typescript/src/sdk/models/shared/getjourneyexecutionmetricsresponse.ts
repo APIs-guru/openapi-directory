@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { JourneyExecutionMetricsResponse } from "./journeyexecutionmetricsresponse";
 
 
+
 export class GetJourneyExecutionMetricsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=JourneyExecutionMetricsResponse" })
+  @SpeakeasyMetadata({ data: "json, name=JourneyExecutionMetricsResponse" })
   journeyExecutionMetricsResponse: JourneyExecutionMetricsResponse;
 }

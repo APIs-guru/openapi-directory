@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Table } from "./table";
+
 
 
 // CheckDetails
@@ -8,27 +8,27 @@ import { Table } from "./table";
  * Represents background check details
 **/
 export class CheckDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=check_id" })
+  @SpeakeasyMetadata({ data: "json, name=check_id" })
   checkId: string;
 
-  @Metadata({ data: "json, name=data_set" })
+  @SpeakeasyMetadata({ data: "json, name=data_set" })
   dataSet: string;
 
-  @Metadata({ data: "json, name=database_name" })
+  @SpeakeasyMetadata({ data: "json, name=database_name" })
   databaseName: string;
 
-  @Metadata({ data: "json, name=group" })
+  @SpeakeasyMetadata({ data: "json, name=group" })
   group: any;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result: any;
 
-  @Metadata({ data: "json, name=score" })
+  @SpeakeasyMetadata({ data: "json, name=score" })
   score: number;
 
-  @Metadata({ data: "json, name=tables", elemType: shared.Table })
+  @SpeakeasyMetadata({ data: "json, name=tables", elemType: Table })
   tables: Table[];
 }

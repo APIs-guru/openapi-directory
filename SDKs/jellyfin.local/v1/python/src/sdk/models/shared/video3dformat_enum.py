@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class Video3DFormatEnum(str, Enum):
     HALF_SIDE_BY_SIDE = "HalfSideBySide"

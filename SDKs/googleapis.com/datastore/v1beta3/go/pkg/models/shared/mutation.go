@@ -1,5 +1,7 @@
 package shared
 
+// Mutation
+// A mutation to apply to an entity.
 type Mutation struct {
 	BaseVersion *string `json:"baseVersion,omitempty"`
 	Delete      *Key    `json:"delete,omitempty"`

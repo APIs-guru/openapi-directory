@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import testtargetsforshard
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Shard:
-    num_shards: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'numShards' }})
-    shard_index: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'shardIndex' }})
-    test_targets_for_shard: Optional[testtargetsforshard.TestTargetsForShard] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'testTargetsForShard' }})
+    r"""Shard
+    Output only. Details about the shard.
+    """
+    
+    num_shards: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('numShards') }})
+    shard_index: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('shardIndex') }})
+    test_targets_for_shard: Optional[TestTargetsForShard] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('testTargetsForShard') }})
     

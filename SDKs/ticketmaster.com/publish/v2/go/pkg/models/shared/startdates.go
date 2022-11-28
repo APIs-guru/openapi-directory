@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// StartDates
+// Event's Start Dates
 type StartDates struct {
 	DateTba        *bool      `json:"dateTBA,omitempty"`
 	DateTbd        *bool      `json:"dateTBD,omitempty"`

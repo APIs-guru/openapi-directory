@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var UpdateThingRuntimeConfigurationPathParams = /** @class */ (function (_super) {
     __extends(UpdateThingRuntimeConfigurationPathParams, _super);
@@ -30,7 +30,7 @@ var UpdateThingRuntimeConfigurationPathParams = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=ThingName" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ThingName" }),
         __metadata("design:type", String)
     ], UpdateThingRuntimeConfigurationPathParams.prototype, "thingName", void 0);
     return UpdateThingRuntimeConfigurationPathParams;
@@ -42,31 +42,31 @@ var UpdateThingRuntimeConfigurationHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], UpdateThingRuntimeConfigurationHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], UpdateThingRuntimeConfigurationHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], UpdateThingRuntimeConfigurationHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], UpdateThingRuntimeConfigurationHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], UpdateThingRuntimeConfigurationHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], UpdateThingRuntimeConfigurationHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], UpdateThingRuntimeConfigurationHeaders.prototype, "xAmzSignedHeaders", void 0);
     return UpdateThingRuntimeConfigurationHeaders;
@@ -82,7 +82,7 @@ var UpdateThingRuntimeConfigurationRequestBodyTelemetryConfiguration = /** @clas
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Telemetry" }),
+        SpeakeasyMetadata({ data: "json, name=Telemetry" }),
         __metadata("design:type", String)
     ], UpdateThingRuntimeConfigurationRequestBodyTelemetryConfiguration.prototype, "telemetry", void 0);
     return UpdateThingRuntimeConfigurationRequestBodyTelemetryConfiguration;
@@ -94,7 +94,7 @@ var UpdateThingRuntimeConfigurationRequestBody = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=TelemetryConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=TelemetryConfiguration" }),
         __metadata("design:type", UpdateThingRuntimeConfigurationRequestBodyTelemetryConfiguration)
     ], UpdateThingRuntimeConfigurationRequestBody.prototype, "telemetryConfiguration", void 0);
     return UpdateThingRuntimeConfigurationRequestBody;
@@ -106,15 +106,15 @@ var UpdateThingRuntimeConfigurationRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateThingRuntimeConfigurationPathParams)
     ], UpdateThingRuntimeConfigurationRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateThingRuntimeConfigurationHeaders)
     ], UpdateThingRuntimeConfigurationRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", UpdateThingRuntimeConfigurationRequestBody)
     ], UpdateThingRuntimeConfigurationRequest.prototype, "request", void 0);
     return UpdateThingRuntimeConfigurationRequest;
@@ -126,23 +126,23 @@ var UpdateThingRuntimeConfigurationResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateThingRuntimeConfigurationResponse.prototype, "badRequestException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UpdateThingRuntimeConfigurationResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateThingRuntimeConfigurationResponse.prototype, "internalServerErrorException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UpdateThingRuntimeConfigurationResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], UpdateThingRuntimeConfigurationResponse.prototype, "updateThingRuntimeConfigurationResponse", void 0);
     return UpdateThingRuntimeConfigurationResponse;

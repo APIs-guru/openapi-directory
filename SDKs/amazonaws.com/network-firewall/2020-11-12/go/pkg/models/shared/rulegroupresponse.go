@@ -1,5 +1,7 @@
 package shared
 
+// RuleGroupResponse
+// The high-level properties of a rule group. This, along with the <a>RuleGroup</a>, define the rule group. You can retrieve all objects for a rule group by calling <a>DescribeRuleGroup</a>.
 type RuleGroupResponse struct {
 	Capacity        *int64              `json:"Capacity,omitempty"`
 	Description     *string             `json:"Description,omitempty"`

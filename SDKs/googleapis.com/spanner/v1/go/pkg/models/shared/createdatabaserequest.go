@@ -8,6 +8,8 @@ const (
 	CreateDatabaseRequestDatabaseDialectEnumPostgresql                 CreateDatabaseRequestDatabaseDialectEnum = "POSTGRESQL"
 )
 
+// CreateDatabaseRequest
+// The request for CreateDatabase.
 type CreateDatabaseRequest struct {
 	CreateStatement  *string                                   `json:"createStatement,omitempty"`
 	DatabaseDialect  *CreateDatabaseRequestDatabaseDialectEnum `json:"databaseDialect,omitempty"`

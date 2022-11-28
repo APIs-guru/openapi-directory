@@ -1,5 +1,7 @@
 package shared
 
+// JobData
+// Represents other information about a job required for a job worker to complete the job.
 type JobData struct {
 	ActionConfiguration *ActionConfiguration   `json:"actionConfiguration,omitempty"`
 	ActionTypeID        *ActionTypeID          `json:"actionTypeId,omitempty"`

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NetworkTags } from "./networktags";
+
 
 
 // NodePoolAutoConfig
@@ -7,6 +8,6 @@ import { NetworkTags } from "./networktags";
  * node pool configs that apply to all auto-provisioned node pools in autopilot clusters and node auto-provisioning enabled clusters
 **/
 export class NodePoolAutoConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=networkTags" })
+  @SpeakeasyMetadata({ data: "json, name=networkTags" })
   networkTags?: NetworkTags;
 }

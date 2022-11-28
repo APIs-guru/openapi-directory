@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum DisassociateConnectorXAmzTargetEnum {
     AwsServerMigrationServiceV20161024DisassociateConnector = "AWSServerMigrationService_V2016_10_24.DisassociateConnector"

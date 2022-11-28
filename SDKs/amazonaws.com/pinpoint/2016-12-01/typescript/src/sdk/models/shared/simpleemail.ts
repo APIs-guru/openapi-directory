@@ -1,7 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SimpleEmailPart } from "./simpleemailpart";
-import { SimpleEmailPart } from "./simpleemailpart";
-import { SimpleEmailPart } from "./simpleemailpart";
+
 
 
 // SimpleEmail
@@ -9,12 +8,12 @@ import { SimpleEmailPart } from "./simpleemailpart";
  * Specifies the contents of an email message, composed of a subject, a text part, and an HTML part.
 **/
 export class SimpleEmail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=HtmlPart" })
+  @SpeakeasyMetadata({ data: "json, name=HtmlPart" })
   htmlPart?: SimpleEmailPart;
 
-  @Metadata({ data: "json, name=Subject" })
+  @SpeakeasyMetadata({ data: "json, name=Subject" })
   subject?: SimpleEmailPart;
 
-  @Metadata({ data: "json, name=TextPart" })
+  @SpeakeasyMetadata({ data: "json, name=TextPart" })
   textPart?: SimpleEmailPart;
 }

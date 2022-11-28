@@ -1,45 +1,46 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PutSessionPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=botAliasId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=botAliasId" })
   botAliasId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=botId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=botId" })
   botId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=localeId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=localeId" })
   localeId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=sessionId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=sessionId" })
   sessionId: string;
 }
 
 
 export class PutSessionHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=ResponseContentType" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=ResponseContentType" })
   responseContentType?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -49,78 +50,78 @@ export class PutSessionHeaders extends SpeakeasyBase {
  * The state of the user's session with Amazon Lex V2.
 **/
 export class PutSessionRequestBodySessionState extends SpeakeasyBase {
-  @Metadata({ data: "json, name=activeContexts", elemType: shared.ActiveContext })
+  @SpeakeasyMetadata({ data: "json, name=activeContexts", elemType: shared.ActiveContext })
   activeContexts?: shared.ActiveContext[];
 
-  @Metadata({ data: "json, name=dialogAction" })
+  @SpeakeasyMetadata({ data: "json, name=dialogAction" })
   dialogAction?: shared.DialogAction;
 
-  @Metadata({ data: "json, name=intent" })
+  @SpeakeasyMetadata({ data: "json, name=intent" })
   intent?: shared.Intent;
 
-  @Metadata({ data: "json, name=originatingRequestId" })
+  @SpeakeasyMetadata({ data: "json, name=originatingRequestId" })
   originatingRequestId?: string;
 
-  @Metadata({ data: "json, name=sessionAttributes" })
+  @SpeakeasyMetadata({ data: "json, name=sessionAttributes" })
   sessionAttributes?: Map<string, string>;
 }
 
 
 export class PutSessionRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=messages", elemType: shared.Message })
+  @SpeakeasyMetadata({ data: "json, name=messages", elemType: shared.Message })
   messages?: shared.Message[];
 
-  @Metadata({ data: "json, name=requestAttributes" })
+  @SpeakeasyMetadata({ data: "json, name=requestAttributes" })
   requestAttributes?: Map<string, string>;
 
-  @Metadata({ data: "json, name=sessionState" })
+  @SpeakeasyMetadata({ data: "json, name=sessionState" })
   sessionState: PutSessionRequestBodySessionState;
 }
 
 
 export class PutSessionRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PutSessionPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: PutSessionHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: PutSessionRequestBody;
 }
 
 
 export class PutSessionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   accessDeniedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   badGatewayException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   conflictException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   dependencyFailedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   putSessionResponse?: shared.PutSessionResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationException?: any;
 }

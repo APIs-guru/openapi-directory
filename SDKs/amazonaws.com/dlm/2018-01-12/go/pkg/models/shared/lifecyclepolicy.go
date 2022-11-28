@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// LifecyclePolicy
+// Detailed information about a lifecycle policy.
 type LifecyclePolicy struct {
 	DateCreated      *time.Time                     `json:"DateCreated,omitempty"`
 	DateModified     *time.Time                     `json:"DateModified,omitempty"`

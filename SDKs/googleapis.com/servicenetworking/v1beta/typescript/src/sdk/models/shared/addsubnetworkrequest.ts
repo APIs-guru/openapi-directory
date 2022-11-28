@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AddSubnetworkRequest
@@ -6,27 +7,27 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request to create a subnetwork in a previously peered service network.
 **/
 export class AddSubnetworkRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=consumer" })
+  @SpeakeasyMetadata({ data: "json, name=consumer" })
   consumer?: string;
 
-  @Metadata({ data: "json, name=consumerNetwork" })
+  @SpeakeasyMetadata({ data: "json, name=consumerNetwork" })
   consumerNetwork?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=ipPrefixLength" })
+  @SpeakeasyMetadata({ data: "json, name=ipPrefixLength" })
   ipPrefixLength?: number;
 
-  @Metadata({ data: "json, name=region" })
+  @SpeakeasyMetadata({ data: "json, name=region" })
   region?: string;
 
-  @Metadata({ data: "json, name=requestedAddress" })
+  @SpeakeasyMetadata({ data: "json, name=requestedAddress" })
   requestedAddress?: string;
 
-  @Metadata({ data: "json, name=subnetwork" })
+  @SpeakeasyMetadata({ data: "json, name=subnetwork" })
   subnetwork?: string;
 
-  @Metadata({ data: "json, name=subnetworkUsers" })
+  @SpeakeasyMetadata({ data: "json, name=subnetworkUsers" })
   subnetworkUsers?: string[];
 }

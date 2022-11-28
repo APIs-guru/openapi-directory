@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MinimumOrderValueTableStoreCodeSetWithMov } from "./minimumordervaluetablestorecodesetwithmov";
 
 
+
 export class MinimumOrderValueTable extends SpeakeasyBase {
-  @Metadata({ data: "json, name=storeCodeSetWithMovs", elemType: shared.MinimumOrderValueTableStoreCodeSetWithMov })
+  @SpeakeasyMetadata({ data: "json, name=storeCodeSetWithMovs", elemType: MinimumOrderValueTableStoreCodeSetWithMov })
   storeCodeSetWithMovs?: MinimumOrderValueTableStoreCodeSetWithMov[];
 }

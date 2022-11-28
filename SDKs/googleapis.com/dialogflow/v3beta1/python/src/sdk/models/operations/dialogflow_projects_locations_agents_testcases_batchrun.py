@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DialogflowProjectsLocationsAgentsTestCasesBatchRunPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class DialogflowProjectsLocationsAgentsTestCasesBatchRunQueryParams:
 
 @dataclass
 class DialogflowProjectsLocationsAgentsTestCasesBatchRunSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DialogflowProjectsLocationsAgentsTestCasesBatchRunSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class DialogflowProjectsLocationsAgentsTestCasesBatchRunSecurity:
 
 @dataclass
 class DialogflowProjectsLocationsAgentsTestCasesBatchRunRequest:
-    path_params: DialogflowProjectsLocationsAgentsTestCasesBatchRunPathParams = field(default=None)
-    query_params: DialogflowProjectsLocationsAgentsTestCasesBatchRunQueryParams = field(default=None)
+    path_params: DialogflowProjectsLocationsAgentsTestCasesBatchRunPathParams = field()
+    query_params: DialogflowProjectsLocationsAgentsTestCasesBatchRunQueryParams = field()
+    security: DialogflowProjectsLocationsAgentsTestCasesBatchRunSecurity = field()
     request: Optional[shared.GoogleCloudDialogflowCxV3beta1BatchRunTestCasesRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DialogflowProjectsLocationsAgentsTestCasesBatchRunSecurity = field(default=None)
     
 
 @dataclass
 class DialogflowProjectsLocationsAgentsTestCasesBatchRunResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_longrunning_operation: Optional[shared.GoogleLongrunningOperation] = field(default=None)
-    status_code: int = field(default=None)
     

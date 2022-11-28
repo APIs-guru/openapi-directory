@@ -10,14 +10,14 @@ class CreateS3TagHeaders:
 
 @dataclass
 class CreateS3TagRequest:
-    headers: CreateS3TagHeaders = field(default=None)
-    request: shared.S3TagCreateRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateS3TagHeaders = field()
+    request: shared.S3TagCreateRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateS3TagResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     s3_tag: Optional[shared.S3Tag] = field(default=None)
-    status_code: int = field(default=None)
     

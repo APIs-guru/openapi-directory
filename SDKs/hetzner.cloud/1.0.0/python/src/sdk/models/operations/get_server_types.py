@@ -1,16 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
 class GetServerTypesQueryParams:
     name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'name', 'style': 'form', 'explode': True }})
-    
-
-@dataclass
-class GetServerTypesRequest:
-    query_params: GetServerTypesQueryParams = field(default=None)
     
 class GetServerTypes200ApplicationJSONServerTypesCPUTypeEnum(str, Enum):
     SHARED = "shared"
@@ -20,23 +17,31 @@ class GetServerTypes200ApplicationJSONServerTypesCPUTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GetServerTypes200ApplicationJSONServerTypesPricesPriceHourly:
-    gross: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gross' }})
-    net: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'net' }})
+    r"""GetServerTypes200ApplicationJSONServerTypesPricesPriceHourly
+    Hourly costs for a Server type in this Location
+    """
+    
+    gross: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('gross') }})
+    net: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('net') }})
     
 
 @dataclass_json
 @dataclass
 class GetServerTypes200ApplicationJSONServerTypesPricesPriceMonthly:
-    gross: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gross' }})
-    net: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'net' }})
+    r"""GetServerTypes200ApplicationJSONServerTypesPricesPriceMonthly
+    Monthly costs for a Server type in this Location
+    """
+    
+    gross: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('gross') }})
+    net: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('net') }})
     
 
 @dataclass_json
 @dataclass
 class GetServerTypes200ApplicationJSONServerTypesPrices:
-    location: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'location' }})
-    price_hourly: GetServerTypes200ApplicationJSONServerTypesPricesPriceHourly = field(default=None, metadata={'dataclasses_json': { 'field_name': 'price_hourly' }})
-    price_monthly: GetServerTypes200ApplicationJSONServerTypesPricesPriceMonthly = field(default=None, metadata={'dataclasses_json': { 'field_name': 'price_monthly' }})
+    location: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('location') }})
+    price_hourly: GetServerTypes200ApplicationJSONServerTypesPricesPriceHourly = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('price_hourly') }})
+    price_monthly: GetServerTypes200ApplicationJSONServerTypesPricesPriceMonthly = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('price_monthly') }})
     
 class GetServerTypes200ApplicationJSONServerTypesStorageTypeEnum(str, Enum):
     LOCAL = "local"
@@ -46,27 +51,32 @@ class GetServerTypes200ApplicationJSONServerTypesStorageTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GetServerTypes200ApplicationJSONServerTypes:
-    cores: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cores' }})
-    cpu_type: GetServerTypes200ApplicationJSONServerTypesCPUTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cpu_type' }})
-    deprecated: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deprecated' }})
-    description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    disk: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'disk' }})
-    id: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    memory: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'memory' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    prices: List[GetServerTypes200ApplicationJSONServerTypesPrices] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'prices' }})
-    storage_type: GetServerTypes200ApplicationJSONServerTypesStorageTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'storage_type' }})
+    cores: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('cores') }})
+    cpu_type: GetServerTypes200ApplicationJSONServerTypesCPUTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('cpu_type') }})
+    deprecated: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('deprecated') }})
+    description: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    disk: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('disk') }})
+    id: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    memory: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('memory') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    prices: List[GetServerTypes200ApplicationJSONServerTypesPrices] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('prices') }})
+    storage_type: GetServerTypes200ApplicationJSONServerTypesStorageTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('storage_type') }})
     
 
 @dataclass_json
 @dataclass
 class GetServerTypes200ApplicationJSON:
-    server_types: List[GetServerTypes200ApplicationJSONServerTypes] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'server_types' }})
+    server_types: List[GetServerTypes200ApplicationJSONServerTypes] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('server_types') }})
+    
+
+@dataclass
+class GetServerTypesRequest:
+    query_params: GetServerTypesQueryParams = field()
     
 
 @dataclass
 class GetServerTypesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_server_types_200_application_json_object: Optional[GetServerTypes200ApplicationJSON] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AlertFeedback } from "./alertfeedback";
 /**
  * Response message for an alert feedback listing request.

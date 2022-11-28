@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CampaignManagerIds } from "./campaignmanagerids";
 import { Dv3Ids } from "./dv3ids";
 
+
 export enum CustomEventInsertInsertEventTypeEnum {
-    Unknown = "UNKNOWN"
-,    Impression = "IMPRESSION"
-,    Click = "CLICK"
+    Unknown = "UNKNOWN",
+    Impression = "IMPRESSION",
+    Click = "CLICK"
 }
 
 
@@ -14,21 +15,21 @@ export enum CustomEventInsertInsertEventTypeEnum {
  * Custom event to be inserted.
 **/
 export class CustomEventInsert extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cmDimensions" })
+  @SpeakeasyMetadata({ data: "json, name=cmDimensions" })
   cmDimensions?: CampaignManagerIds;
 
-  @Metadata({ data: "json, name=dv3Dimensions" })
+  @SpeakeasyMetadata({ data: "json, name=dv3Dimensions" })
   dv3Dimensions?: Dv3Ids;
 
-  @Metadata({ data: "json, name=insertEventType" })
+  @SpeakeasyMetadata({ data: "json, name=insertEventType" })
   insertEventType?: CustomEventInsertInsertEventTypeEnum;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=matchId" })
+  @SpeakeasyMetadata({ data: "json, name=matchId" })
   matchId?: string;
 
-  @Metadata({ data: "json, name=mobileDeviceId" })
+  @SpeakeasyMetadata({ data: "json, name=mobileDeviceId" })
   mobileDeviceId?: string;
 }

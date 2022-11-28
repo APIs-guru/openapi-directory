@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import googlecloudretailv2betauserevent
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
-class GoogleCloudRetailV2betaUserEventInlineSource:
-    user_events: Optional[List[googlecloudretailv2betauserevent.GoogleCloudRetailV2betaUserEvent]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'userEvents' }})
+class GoogleCloudRetailV2betaUserEventInlineSourceInput:
+    r"""GoogleCloudRetailV2betaUserEventInlineSourceInput
+    The inline source for the input config for ImportUserEvents method.
+    """
+    
+    user_events: Optional[List[GoogleCloudRetailV2betaUserEventInput]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('userEvents') }})
     

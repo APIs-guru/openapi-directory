@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class GetAlbumCustomThumbsPathParams:
-    album_id: float = field(default=None, metadata={'path_param': { 'field_name': 'album_id', 'style': 'simple', 'explode': False }})
-    user_id: float = field(default=None, metadata={'path_param': { 'field_name': 'user_id', 'style': 'simple', 'explode': False }})
+    album_id: float = field(metadata={'path_param': { 'field_name': 'album_id', 'style': 'simple', 'explode': False }})
+    user_id: float = field(metadata={'path_param': { 'field_name': 'user_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,14 +17,14 @@ class GetAlbumCustomThumbsQueryParams:
 
 @dataclass
 class GetAlbumCustomThumbsRequest:
-    path_params: GetAlbumCustomThumbsPathParams = field(default=None)
-    query_params: GetAlbumCustomThumbsQueryParams = field(default=None)
+    path_params: GetAlbumCustomThumbsPathParams = field()
+    query_params: GetAlbumCustomThumbsQueryParams = field()
     
 
 @dataclass
 class GetAlbumCustomThumbsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     legacy_error: Optional[shared.LegacyError] = field(default=None)
     pictures: Optional[List[shared.Picture]] = field(default=None)
     

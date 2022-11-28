@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ConfigManagementBinauthzVersion
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The version of binauthz.
 **/
 export class ConfigManagementBinauthzVersion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=webhookVersion" })
+  @SpeakeasyMetadata({ data: "json, name=webhookVersion" })
   webhookVersion?: string;
 }

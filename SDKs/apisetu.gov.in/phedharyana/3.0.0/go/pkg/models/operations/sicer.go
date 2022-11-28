@@ -27,11 +27,6 @@ type SicerSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type SicerRequest struct {
-	Request  *SicerRequestBody `request:"mediaType=application/json"`
-	Security SicerSecurity
-}
-
 type Sicer400ApplicationJSONErrorEnum string
 
 const (
@@ -161,6 +156,11 @@ const (
 type Sicer504ApplicationJSON struct {
 	Error            *Sicer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Sicer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type SicerRequest struct {
+	Request  *SicerRequestBody `request:"mediaType=application/json"`
+	Security SicerSecurity
 }
 
 type SicerResponse struct {

@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class MoveOrganizationLicensesSeatsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=organizationId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=organizationId" })
   organizationId: string;
 }
 
 
 export class MoveOrganizationLicensesSeatsRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=destOrganizationId" })
+  @SpeakeasyMetadata({ data: "json, name=destOrganizationId" })
   destOrganizationId: string;
 
-  @Metadata({ data: "json, name=licenseId" })
+  @SpeakeasyMetadata({ data: "json, name=licenseId" })
   licenseId: string;
 
-  @Metadata({ data: "json, name=seatCount" })
+  @SpeakeasyMetadata({ data: "json, name=seatCount" })
   seatCount: number;
 }
 
 
 export class MoveOrganizationLicensesSeatsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: MoveOrganizationLicensesSeatsPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: MoveOrganizationLicensesSeatsRequestBody;
 }
 
 
 export class MoveOrganizationLicensesSeatsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   moveOrganizationLicensesSeats200ApplicationJsonObject?: Map<string, any>;
 }

@@ -1,32 +1,29 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import subscriptioncategory_enum
-from . import organizationrepresentation
-from . import organizationrepresentation
-from . import consentmanagerpatientid
-from . import subscriptionperiod
-from . import usepurpose
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SubscriptionRequestSubscription:
-    categories: List[subscriptioncategory_enum.SubscriptionCategoryEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'categories' }})
-    hips: Optional[List[organizationrepresentation.OrganizationRepresentation]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'hips' }})
-    hiu: organizationrepresentation.OrganizationRepresentation = field(default=None, metadata={'dataclasses_json': { 'field_name': 'hiu' }})
-    patient: consentmanagerpatientid.ConsentManagerPatientID = field(default=None, metadata={'dataclasses_json': { 'field_name': 'patient' }})
-    period: subscriptionperiod.SubscriptionPeriod = field(default=None, metadata={'dataclasses_json': { 'field_name': 'period' }})
-    purpose: usepurpose.UsePurpose = field(default=None, metadata={'dataclasses_json': { 'field_name': 'purpose' }})
+    categories: List[SubscriptionCategoryEnum] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('categories') }})
+    hiu: OrganizationRepresentation = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('hiu') }})
+    patient: ConsentManagerPatientID = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('patient') }})
+    period: SubscriptionPeriod = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('period') }})
+    purpose: UsePurpose = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('purpose') }})
+    hips: Optional[List[OrganizationRepresentation]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('hips') }})
     
 
 @dataclass_json
 @dataclass
 class SubscriptionRequest:
-    request_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'requestId' }})
-    subscription: SubscriptionRequestSubscription = field(default=None, metadata={'dataclasses_json': { 'field_name': 'subscription' }})
-    timestamp: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timestamp', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    request_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('requestId') }})
+    subscription: SubscriptionRequestSubscription = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('subscription') }})
+    timestamp: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('timestamp'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     

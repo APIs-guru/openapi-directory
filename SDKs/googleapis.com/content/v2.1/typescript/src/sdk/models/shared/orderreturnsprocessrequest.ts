@@ -1,19 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OrderreturnsRefundOperation } from "./orderreturnsrefundoperation";
 import { OrderreturnsReturnItem } from "./orderreturnsreturnitem";
 
 
+
 export class OrderreturnsProcessRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fullChargeReturnShippingCost" })
+  @SpeakeasyMetadata({ data: "json, name=fullChargeReturnShippingCost" })
   fullChargeReturnShippingCost?: boolean;
 
-  @Metadata({ data: "json, name=operationId" })
+  @SpeakeasyMetadata({ data: "json, name=operationId" })
   operationId?: string;
 
-  @Metadata({ data: "json, name=refundShippingFee" })
+  @SpeakeasyMetadata({ data: "json, name=refundShippingFee" })
   refundShippingFee?: OrderreturnsRefundOperation;
 
-  @Metadata({ data: "json, name=returnItems", elemType: shared.OrderreturnsReturnItem })
+  @SpeakeasyMetadata({ data: "json, name=returnItems", elemType: OrderreturnsReturnItem })
   returnItems?: OrderreturnsReturnItem[];
 }

@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ListStateFilterActionEnum } from "./liststatefilteractionenum";
 import { ApplicationRevisionSortByEnum } from "./applicationrevisionsortbyenum";
 import { SortOrderEnum } from "./sortorderenum";
+
 
 
 // ListApplicationRevisionsInput
@@ -9,24 +10,24 @@ import { SortOrderEnum } from "./sortorderenum";
  *  Represents the input of a <code>ListApplicationRevisions</code> operation. 
 **/
 export class ListApplicationRevisionsInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=applicationName" })
+  @SpeakeasyMetadata({ data: "json, name=applicationName" })
   applicationName: string;
 
-  @Metadata({ data: "json, name=deployed" })
+  @SpeakeasyMetadata({ data: "json, name=deployed" })
   deployed?: ListStateFilterActionEnum;
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=s3Bucket" })
+  @SpeakeasyMetadata({ data: "json, name=s3Bucket" })
   s3Bucket?: string;
 
-  @Metadata({ data: "json, name=s3KeyPrefix" })
+  @SpeakeasyMetadata({ data: "json, name=s3KeyPrefix" })
   s3KeyPrefix?: string;
 
-  @Metadata({ data: "json, name=sortBy" })
+  @SpeakeasyMetadata({ data: "json, name=sortBy" })
   sortBy?: ApplicationRevisionSortByEnum;
 
-  @Metadata({ data: "json, name=sortOrder" })
+  @SpeakeasyMetadata({ data: "json, name=sortOrder" })
   sortOrder?: SortOrderEnum;
 }

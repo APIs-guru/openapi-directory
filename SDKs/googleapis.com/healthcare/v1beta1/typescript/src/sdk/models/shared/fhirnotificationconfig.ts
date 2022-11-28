@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // FhirNotificationConfig
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains the configuration for FHIR notifications.
 **/
 export class FhirNotificationConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pubsubTopic" })
+  @SpeakeasyMetadata({ data: "json, name=pubsubTopic" })
   pubsubTopic?: string;
 
-  @Metadata({ data: "json, name=sendFullResource" })
+  @SpeakeasyMetadata({ data: "json, name=sendFullResource" })
   sendFullResource?: boolean;
 }

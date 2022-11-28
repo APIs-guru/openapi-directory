@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DrivePermissionsUpdatePathParams:
-    file_id: str = field(default=None, metadata={'path_param': { 'field_name': 'fileId', 'style': 'simple', 'explode': False }})
-    permission_id: str = field(default=None, metadata={'path_param': { 'field_name': 'permissionId', 'style': 'simple', 'explode': False }})
+    file_id: str = field(metadata={'path_param': { 'field_name': 'fileId', 'style': 'simple', 'explode': False }})
+    permission_id: str = field(metadata={'path_param': { 'field_name': 'permissionId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class DrivePermissionsUpdateQueryParams:
 
 @dataclass
 class DrivePermissionsUpdateSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DrivePermissionsUpdateSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -45,15 +49,15 @@ class DrivePermissionsUpdateSecurity:
 
 @dataclass
 class DrivePermissionsUpdateRequest:
-    path_params: DrivePermissionsUpdatePathParams = field(default=None)
-    query_params: DrivePermissionsUpdateQueryParams = field(default=None)
-    request: Optional[shared.Permission] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DrivePermissionsUpdateSecurity = field(default=None)
+    path_params: DrivePermissionsUpdatePathParams = field()
+    query_params: DrivePermissionsUpdateQueryParams = field()
+    security: DrivePermissionsUpdateSecurity = field()
+    request: Optional[shared.PermissionInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DrivePermissionsUpdateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     permission: Optional[shared.Permission] = field(default=None)
-    status_code: int = field(default=None)
     

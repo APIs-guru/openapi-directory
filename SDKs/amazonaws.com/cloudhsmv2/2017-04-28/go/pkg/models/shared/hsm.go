@@ -1,5 +1,7 @@
 package shared
 
+// Hsm
+// Contains information about a hardware security module (HSM) in an AWS CloudHSM cluster.
 type Hsm struct {
 	AvailabilityZone *string       `json:"AvailabilityZone,omitempty"`
 	ClusterID        *string       `json:"ClusterId,omitempty"`

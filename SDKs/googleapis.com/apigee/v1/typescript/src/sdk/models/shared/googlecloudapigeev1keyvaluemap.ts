@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudApigeeV1KeyValueMap
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Collection of key/value string pairs.
 **/
 export class GoogleCloudApigeeV1KeyValueMap extends SpeakeasyBase {
-  @Metadata({ data: "json, name=encrypted" })
+  @SpeakeasyMetadata({ data: "json, name=encrypted" })
   encrypted?: boolean;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

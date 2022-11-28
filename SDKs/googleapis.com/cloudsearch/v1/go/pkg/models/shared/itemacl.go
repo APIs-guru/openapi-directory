@@ -9,6 +9,8 @@ const (
 	ItemACLACLInheritanceTypeEnumBothPermit     ItemACLACLInheritanceTypeEnum = "BOTH_PERMIT"
 )
 
+// ItemACL
+// Access control list information for the item. For more information see [Map ACLs](https://developers.google.com/cloud-search/docs/guides/acls).
 type ItemACL struct {
 	ACLInheritanceType *ItemACLACLInheritanceTypeEnum `json:"aclInheritanceType,omitempty"`
 	DeniedReaders      []Principal                    `json:"deniedReaders,omitempty"`

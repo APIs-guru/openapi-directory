@@ -1,70 +1,71 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostTIdInviteJsonPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class PostTIdInviteJsonHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Api-Key" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Key" })
   apiKey: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=Api-Username" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Username" })
   apiUsername: string;
 }
 
 
 export class PostTIdInviteJsonRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=user" })
+  @SpeakeasyMetadata({ data: "json, name=user" })
   user?: string;
 }
 
 
-export class PostTIdInviteJsonRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: PostTIdInviteJsonPathParams;
-
-  @Metadata()
-  headers: PostTIdInviteJsonHeaders;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: PostTIdInviteJsonRequestBody;
-}
-
-
 export class PostTIdInviteJson200ApplicationJsonUser extends SpeakeasyBase {
-  @Metadata({ data: "json, name=avatar_template" })
+  @SpeakeasyMetadata({ data: "json, name=avatar_template" })
   avatarTemplate?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=username" })
+  @SpeakeasyMetadata({ data: "json, name=username" })
   username?: string;
 }
 
 
 export class PostTIdInviteJson200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=user" })
+  @SpeakeasyMetadata({ data: "json, name=user" })
   user?: PostTIdInviteJson200ApplicationJsonUser;
 }
 
 
+export class PostTIdInviteJsonRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: PostTIdInviteJsonPathParams;
+
+  @SpeakeasyMetadata()
+  headers: PostTIdInviteJsonHeaders;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: PostTIdInviteJsonRequestBody;
+}
+
+
 export class PostTIdInviteJsonResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postTIdInviteJson200ApplicationJsonObject?: PostTIdInviteJson200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

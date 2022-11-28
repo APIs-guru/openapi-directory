@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Artifact } from "./artifact";
+
 
 
 // ListArtifactsResponse
@@ -8,9 +8,9 @@ import { Artifact } from "./artifact";
  * Response message for ListArtifacts.
 **/
 export class ListArtifactsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=artifacts", elemType: shared.Artifact })
+  @SpeakeasyMetadata({ data: "json, name=artifacts", elemType: Artifact })
   artifacts?: Artifact[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

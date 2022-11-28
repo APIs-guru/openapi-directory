@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // FindListingRecommendationRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An list of listing ID values for which you want Promoted Listings ad configuration information.
 **/
 export class FindListingRecommendationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=listingIds" })
+  @SpeakeasyMetadata({ data: "json, name=listingIds" })
   listingIds?: string[];
 }

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ScriptProjectsDeploymentsListPathParams:
-    script_id: str = field(default=None, metadata={'path_param': { 'field_name': 'scriptId', 'style': 'simple', 'explode': False }})
+    script_id: str = field(metadata={'path_param': { 'field_name': 'scriptId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,14 +28,14 @@ class ScriptProjectsDeploymentsListQueryParams:
 
 @dataclass
 class ScriptProjectsDeploymentsListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ScriptProjectsDeploymentsListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -45,14 +46,14 @@ class ScriptProjectsDeploymentsListSecurity:
 
 @dataclass
 class ScriptProjectsDeploymentsListRequest:
-    path_params: ScriptProjectsDeploymentsListPathParams = field(default=None)
-    query_params: ScriptProjectsDeploymentsListQueryParams = field(default=None)
-    security: ScriptProjectsDeploymentsListSecurity = field(default=None)
+    path_params: ScriptProjectsDeploymentsListPathParams = field()
+    query_params: ScriptProjectsDeploymentsListQueryParams = field()
+    security: ScriptProjectsDeploymentsListSecurity = field()
     
 
 @dataclass
 class ScriptProjectsDeploymentsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_deployments_response: Optional[shared.ListDeploymentsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

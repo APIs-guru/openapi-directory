@@ -1,15 +1,18 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import consumedcapacity
-from . import itemcollectionmetrics
-from . import writerequest
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BatchWriteItemOutput:
-    consumed_capacity: Optional[List[consumedcapacity.ConsumedCapacity]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ConsumedCapacity' }})
-    item_collection_metrics: Optional[dict[str, List[itemcollectionmetrics.ItemCollectionMetrics]]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ItemCollectionMetrics' }})
-    unprocessed_items: Optional[dict[str, List[writerequest.WriteRequest]]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'UnprocessedItems' }})
+    r"""BatchWriteItemOutput
+    Represents the output of a <code>BatchWriteItem</code> operation.
+    """
+    
+    consumed_capacity: Optional[List[ConsumedCapacity]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ConsumedCapacity') }})
+    item_collection_metrics: Optional[dict[str, List[ItemCollectionMetrics]]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ItemCollectionMetrics') }})
+    unprocessed_items: Optional[dict[str, List[WriteRequest]]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('UnprocessedItems') }})
     

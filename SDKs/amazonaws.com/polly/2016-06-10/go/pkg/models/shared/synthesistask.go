@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// SynthesisTask
+// SynthesisTask object that provides information about a speech synthesis task.
 type SynthesisTask struct {
 	CreationTime      *time.Time           `json:"CreationTime,omitempty"`
 	Engine            *EngineEnum          `json:"Engine,omitempty"`

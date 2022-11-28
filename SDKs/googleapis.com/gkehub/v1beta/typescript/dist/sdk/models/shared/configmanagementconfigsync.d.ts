@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ConfigManagementGitConfig } from "./configmanagementgitconfig";
 import { ConfigManagementOciConfig } from "./configmanagementociconfig";
 /**

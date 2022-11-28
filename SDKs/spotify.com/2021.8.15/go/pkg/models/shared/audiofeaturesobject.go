@@ -1,5 +1,8 @@
 package shared
 
+// AudioFeaturesObject
+
+// https://developer.spotify.com/documentation/web-api/reference/#object-audiofeaturesobject - Find more info on the official Spotify Web API Reference
 type AudioFeaturesObject struct {
 	Acousticness     *float64 `json:"acousticness,omitempty"`
 	AnalysisURL      *string  `json:"analysis_url,omitempty"`

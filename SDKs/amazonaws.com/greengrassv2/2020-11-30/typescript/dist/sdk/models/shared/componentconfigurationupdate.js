@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ComponentConfigurationUpdate
 /**
  * Contains information about a deployment's update to a component's configuration on Greengrass core devices. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/update-component-configurations.html">Update component configurations</a> in the <i>IoT Greengrass V2 Developer Guide</i>.
@@ -33,11 +33,11 @@ var ComponentConfigurationUpdate = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=merge" }),
+        SpeakeasyMetadata({ data: "json, name=merge" }),
         __metadata("design:type", String)
     ], ComponentConfigurationUpdate.prototype, "merge", void 0);
     __decorate([
-        Metadata({ data: "json, name=reset" }),
+        SpeakeasyMetadata({ data: "json, name=reset" }),
         __metadata("design:type", Array)
     ], ComponentConfigurationUpdate.prototype, "reset", void 0);
     return ComponentConfigurationUpdate;

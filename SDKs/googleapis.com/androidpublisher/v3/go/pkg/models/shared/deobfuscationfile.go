@@ -8,6 +8,8 @@ const (
 	DeobfuscationFileSymbolTypeEnumNativeCode                       DeobfuscationFileSymbolTypeEnum = "nativeCode"
 )
 
+// DeobfuscationFile
+// Represents a deobfuscation file.
 type DeobfuscationFile struct {
 	SymbolType *DeobfuscationFileSymbolTypeEnum `json:"symbolType,omitempty"`
 }

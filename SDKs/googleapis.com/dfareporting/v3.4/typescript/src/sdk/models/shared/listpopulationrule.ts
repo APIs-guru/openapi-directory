@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ListPopulationClause } from "./listpopulationclause";
+
 
 
 // ListPopulationRule
@@ -8,12 +8,12 @@ import { ListPopulationClause } from "./listpopulationclause";
  * Remarketing List Population Rule.
 **/
 export class ListPopulationRule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=floodlightActivityId" })
+  @SpeakeasyMetadata({ data: "json, name=floodlightActivityId" })
   floodlightActivityId?: string;
 
-  @Metadata({ data: "json, name=floodlightActivityName" })
+  @SpeakeasyMetadata({ data: "json, name=floodlightActivityName" })
   floodlightActivityName?: string;
 
-  @Metadata({ data: "json, name=listPopulationClauses", elemType: shared.ListPopulationClause })
+  @SpeakeasyMetadata({ data: "json, name=listPopulationClauses", elemType: ListPopulationClause })
   listPopulationClauses?: ListPopulationClause[];
 }

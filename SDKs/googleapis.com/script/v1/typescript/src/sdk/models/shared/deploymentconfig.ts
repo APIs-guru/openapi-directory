@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DeploymentConfig
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Metadata the defines how a deployment is configured.
 **/
 export class DeploymentConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=manifestFileName" })
+  @SpeakeasyMetadata({ data: "json, name=manifestFileName" })
   manifestFileName?: string;
 
-  @Metadata({ data: "json, name=scriptId" })
+  @SpeakeasyMetadata({ data: "json, name=scriptId" })
   scriptId?: string;
 
-  @Metadata({ data: "json, name=versionNumber" })
+  @SpeakeasyMetadata({ data: "json, name=versionNumber" })
   versionNumber?: number;
 }

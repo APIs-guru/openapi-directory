@@ -1,33 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateDomainConfigurationPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=domainConfigurationName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=domainConfigurationName" })
   domainConfigurationName: string;
 }
 
 
 export class UpdateDomainConfigurationHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -37,71 +38,71 @@ export class UpdateDomainConfigurationHeaders extends SpeakeasyBase {
  * An object that specifies the authorization service for a domain.
 **/
 export class UpdateDomainConfigurationRequestBodyAuthorizerConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowAuthorizerOverride" })
+  @SpeakeasyMetadata({ data: "json, name=allowAuthorizerOverride" })
   allowAuthorizerOverride?: boolean;
 
-  @Metadata({ data: "json, name=defaultAuthorizerName" })
+  @SpeakeasyMetadata({ data: "json, name=defaultAuthorizerName" })
   defaultAuthorizerName?: string;
 }
 
 export enum UpdateDomainConfigurationRequestBodyDomainConfigurationStatusEnum {
-    Enabled = "ENABLED"
-,    Disabled = "DISABLED"
+    Enabled = "ENABLED",
+    Disabled = "DISABLED"
 }
 
 
 export class UpdateDomainConfigurationRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authorizerConfig" })
+  @SpeakeasyMetadata({ data: "json, name=authorizerConfig" })
   authorizerConfig?: UpdateDomainConfigurationRequestBodyAuthorizerConfig;
 
-  @Metadata({ data: "json, name=domainConfigurationStatus" })
+  @SpeakeasyMetadata({ data: "json, name=domainConfigurationStatus" })
   domainConfigurationStatus?: UpdateDomainConfigurationRequestBodyDomainConfigurationStatusEnum;
 
-  @Metadata({ data: "json, name=removeAuthorizerConfig" })
+  @SpeakeasyMetadata({ data: "json, name=removeAuthorizerConfig" })
   removeAuthorizerConfig?: boolean;
 }
 
 
 export class UpdateDomainConfigurationRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateDomainConfigurationPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdateDomainConfigurationHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdateDomainConfigurationRequestBody;
 }
 
 
 export class UpdateDomainConfigurationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   certificateValidationException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalFailureException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceUnavailableException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   unauthorizedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateDomainConfigurationResponse?: shared.UpdateDomainConfigurationResponse;
 }

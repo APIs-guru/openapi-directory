@@ -40,11 +40,8 @@ type GetNetworksIDActionsQueryParams struct {
 	Status *GetNetworksIDActionsStatusParameterStatusEnum `queryParam:"style=form,explode=true,name=status"`
 }
 
-type GetNetworksIDActionsRequest struct {
-	PathParams  GetNetworksIDActionsPathParams
-	QueryParams GetNetworksIDActionsQueryParams
-}
-
+// GetNetworksIDActionsActionsResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type GetNetworksIDActionsActionsResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -90,6 +87,11 @@ type GetNetworksIDActionsActionsResponseMeta struct {
 type GetNetworksIDActionsActionsResponse struct {
 	Actions []GetNetworksIDActionsActionsResponseAction `json:"actions"`
 	Meta    *GetNetworksIDActionsActionsResponseMeta    `json:"meta,omitempty"`
+}
+
+type GetNetworksIDActionsRequest struct {
+	PathParams  GetNetworksIDActionsPathParams
+	QueryParams GetNetworksIDActionsQueryParams
 }
 
 type GetNetworksIDActionsResponse struct {

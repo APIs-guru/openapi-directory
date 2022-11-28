@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LaunchPermissionConfiguration } from "./launchpermissionconfiguration";
 // AmiDistributionConfiguration
 /**
@@ -34,27 +34,27 @@ var AmiDistributionConfiguration = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=amiTags" }),
+        SpeakeasyMetadata({ data: "json, name=amiTags" }),
         __metadata("design:type", Map)
     ], AmiDistributionConfiguration.prototype, "amiTags", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], AmiDistributionConfiguration.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=kmsKeyId" }),
+        SpeakeasyMetadata({ data: "json, name=kmsKeyId" }),
         __metadata("design:type", String)
     ], AmiDistributionConfiguration.prototype, "kmsKeyId", void 0);
     __decorate([
-        Metadata({ data: "json, name=launchPermission" }),
+        SpeakeasyMetadata({ data: "json, name=launchPermission" }),
         __metadata("design:type", LaunchPermissionConfiguration)
     ], AmiDistributionConfiguration.prototype, "launchPermission", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], AmiDistributionConfiguration.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=targetAccountIds" }),
+        SpeakeasyMetadata({ data: "json, name=targetAccountIds" }),
         __metadata("design:type", Array)
     ], AmiDistributionConfiguration.prototype, "targetAccountIds", void 0);
     return AmiDistributionConfiguration;

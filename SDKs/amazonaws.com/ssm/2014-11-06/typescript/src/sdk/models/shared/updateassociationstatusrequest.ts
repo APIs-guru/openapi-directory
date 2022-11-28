@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AssociationStatus } from "./associationstatus";
 
 
+
 export class UpdateAssociationStatusRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AssociationStatus" })
+  @SpeakeasyMetadata({ data: "json, name=AssociationStatus" })
   associationStatus: AssociationStatus;
 
-  @Metadata({ data: "json, name=InstanceId" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceId" })
   instanceId: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 }

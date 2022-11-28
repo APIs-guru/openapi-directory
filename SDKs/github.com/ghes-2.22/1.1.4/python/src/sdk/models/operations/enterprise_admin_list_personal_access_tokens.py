@@ -11,13 +11,13 @@ class EnterpriseAdminListPersonalAccessTokensQueryParams:
 
 @dataclass
 class EnterpriseAdminListPersonalAccessTokensRequest:
-    query_params: EnterpriseAdminListPersonalAccessTokensQueryParams = field(default=None)
+    query_params: EnterpriseAdminListPersonalAccessTokensQueryParams = field()
     
 
 @dataclass
 class EnterpriseAdminListPersonalAccessTokensResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     authorizations: Optional[List[shared.Authorization]] = field(default=None)
     

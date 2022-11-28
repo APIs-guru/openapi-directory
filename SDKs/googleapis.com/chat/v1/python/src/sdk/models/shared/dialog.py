@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import googleappscardv1card
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Dialog:
-    body: Optional[googleappscardv1card.GoogleAppsCardV1Card] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'body' }})
+    r"""Dialog
+    Wrapper around the card body of the dialog.
+    """
+    
+    body: Optional[GoogleAppsCardV1Card] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('body') }})
     

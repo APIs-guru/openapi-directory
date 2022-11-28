@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ManagedZone } from "./managedzone";
-import { ManagedZone } from "./managedzone";
+
 
 
 export class OperationManagedZoneContext extends SpeakeasyBase {
-  @Metadata({ data: "json, name=newValue" })
+  @SpeakeasyMetadata({ data: "json, name=newValue" })
   newValue?: ManagedZone;
 
-  @Metadata({ data: "json, name=oldValue" })
+  @SpeakeasyMetadata({ data: "json, name=oldValue" })
   oldValue?: ManagedZone;
 }

@@ -30,7 +30,7 @@ type DisplayvideoInventorySourceGroupsAssignedInventorySourcesBulkEditSecurity s
 type DisplayvideoInventorySourceGroupsAssignedInventorySourcesBulkEditRequest struct {
 	PathParams  DisplayvideoInventorySourceGroupsAssignedInventorySourcesBulkEditPathParams
 	QueryParams DisplayvideoInventorySourceGroupsAssignedInventorySourcesBulkEditQueryParams
-	Request     *shared.BulkEditAssignedInventorySourcesRequest `request:"mediaType=application/json"`
+	Request     *shared.BulkEditAssignedInventorySourcesRequestInput `request:"mediaType=application/json"`
 	Security    DisplayvideoInventorySourceGroupsAssignedInventorySourcesBulkEditSecurity
 }
 

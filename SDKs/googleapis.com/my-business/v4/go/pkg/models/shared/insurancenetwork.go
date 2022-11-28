@@ -10,6 +10,8 @@ const (
 	InsuranceNetworkStateEnumNotAccepted             InsuranceNetworkStateEnum = "NOT_ACCEPTED"
 )
 
+// InsuranceNetwork
+// A single insurance network. Next id: 5
 type InsuranceNetwork struct {
 	NetworkID    *string                    `json:"networkId,omitempty"`
 	NetworkNames map[string]string          `json:"networkNames,omitempty"`

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DiskSnapshotInfo
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes a disk snapshot.
 **/
 export class DiskSnapshotInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=sizeInGb" })
+  @SpeakeasyMetadata({ data: "json, name=sizeInGb" })
   sizeInGb?: number;
 }

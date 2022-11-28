@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ServiceActionDefinitionTypeEnum } from "./serviceactiondefinitiontypeenum";
 export declare class CreateServiceActionInput extends SpeakeasyBase {
     acceptLanguage?: string;

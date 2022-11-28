@@ -1,5 +1,7 @@
 package shared
 
+// AccounttaxCustomBatchRequestEntry
+// A batch entry encoding a single non-batch accounttax request.
 type AccounttaxCustomBatchRequestEntry struct {
 	AccountID  *string     `json:"accountId,omitempty"`
 	AccountTax *AccountTax `json:"accountTax,omitempty"`

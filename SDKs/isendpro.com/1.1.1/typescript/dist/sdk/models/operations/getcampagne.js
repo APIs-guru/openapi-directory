@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export var GetCampagneRapportCampagneEnum;
 (function (GetCampagneRapportCampagneEnum) {
@@ -34,19 +34,19 @@ var GetCampagneQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=date_deb" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=date_deb" }),
         __metadata("design:type", String)
     ], GetCampagneQueryParams.prototype, "dateDeb", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=date_fin" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=date_fin" }),
         __metadata("design:type", String)
     ], GetCampagneQueryParams.prototype, "dateFin", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=keyid" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=keyid" }),
         __metadata("design:type", String)
     ], GetCampagneQueryParams.prototype, "keyid", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=rapportCampagne" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=rapportCampagne" }),
         __metadata("design:type", String)
     ], GetCampagneQueryParams.prototype, "rapportCampagne", void 0);
     return GetCampagneQueryParams;
@@ -58,7 +58,7 @@ var GetCampagneRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetCampagneQueryParams)
     ], GetCampagneRequest.prototype, "queryParams", void 0);
     return GetCampagneRequest;
@@ -70,27 +70,27 @@ var GetCampagneResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetCampagneResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetCampagneResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Erreur)
     ], GetCampagneResponse.prototype, "erreur", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetCampagneResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetCampagneResponse.prototype, "getCampagne200ApplicationJsonBinaryString", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetCampagneResponse.prototype, "getCampagne200FileBinaryString", void 0);
     return GetCampagneResponse;

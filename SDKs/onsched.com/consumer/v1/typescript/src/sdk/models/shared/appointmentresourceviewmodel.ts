@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AppointmentResourceViewModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=appointmentId" })
+  @SpeakeasyMetadata({ data: "json, name=appointmentId" })
   appointmentId?: string;
 
-  @Metadata({ data: "json, name=resourceId" })
+  @SpeakeasyMetadata({ data: "json, name=resourceId" })
   resourceId?: string;
 }

@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UsersCreateGpgKeyForAuthenticatedRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=armored_public_key" })
+  @SpeakeasyMetadata({ data: "json, name=armored_public_key" })
   armoredPublicKey: string;
 }
 
 
 export class UsersCreateGpgKeyForAuthenticatedRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: UsersCreateGpgKeyForAuthenticatedRequestBody;
 }
 
 
 export class UsersCreateGpgKeyForAuthenticatedResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   gpgKey?: shared.GpgKey;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationError?: shared.ValidationError;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { VehHistory } from "./vehhistory";
 export declare class VehHistoryData extends SpeakeasyBase {
     data: VehHistory[];

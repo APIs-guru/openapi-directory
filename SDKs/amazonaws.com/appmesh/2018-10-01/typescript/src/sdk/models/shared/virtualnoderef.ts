@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // VirtualNodeRef
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An object representing a virtual node returned by a list operation.
 **/
 export class VirtualNodeRef extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=meshName" })
+  @SpeakeasyMetadata({ data: "json, name=meshName" })
   meshName?: string;
 
-  @Metadata({ data: "json, name=virtualNodeName" })
+  @SpeakeasyMetadata({ data: "json, name=virtualNodeName" })
   virtualNodeName?: string;
 }

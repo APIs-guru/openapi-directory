@@ -1,14 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import evaluationtype_enum
-from . import resourcetargetdefinition
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ResourceChangeDetail:
-    causing_entity: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CausingEntity' }})
-    evaluation: Optional[evaluationtype_enum.EvaluationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Evaluation' }})
-    target: Optional[resourcetargetdefinition.ResourceTargetDefinition] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Target' }})
+    r"""ResourceChangeDetail
+    Information about a change to a resource attribute.
+    """
+    
+    causing_entity: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CausingEntity') }})
+    evaluation: Optional[EvaluationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Evaluation') }})
+    target: Optional[ResourceTargetDefinition] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Target') }})
     

@@ -1,33 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateProfilePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=DomainName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=DomainName" })
   domainName: string;
 }
 
 
 export class UpdateProfileHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -37,34 +38,34 @@ export class UpdateProfileHeaders extends SpeakeasyBase {
  * Updates associated with the address properties of a customer profile.
 **/
 export class UpdateProfileRequestBodyAddress extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Address1" })
+  @SpeakeasyMetadata({ data: "json, name=Address1" })
   address1?: string;
 
-  @Metadata({ data: "json, name=Address2" })
+  @SpeakeasyMetadata({ data: "json, name=Address2" })
   address2?: string;
 
-  @Metadata({ data: "json, name=Address3" })
+  @SpeakeasyMetadata({ data: "json, name=Address3" })
   address3?: string;
 
-  @Metadata({ data: "json, name=Address4" })
+  @SpeakeasyMetadata({ data: "json, name=Address4" })
   address4?: string;
 
-  @Metadata({ data: "json, name=City" })
+  @SpeakeasyMetadata({ data: "json, name=City" })
   city?: string;
 
-  @Metadata({ data: "json, name=Country" })
+  @SpeakeasyMetadata({ data: "json, name=Country" })
   country?: string;
 
-  @Metadata({ data: "json, name=County" })
+  @SpeakeasyMetadata({ data: "json, name=County" })
   county?: string;
 
-  @Metadata({ data: "json, name=PostalCode" })
+  @SpeakeasyMetadata({ data: "json, name=PostalCode" })
   postalCode?: string;
 
-  @Metadata({ data: "json, name=Province" })
+  @SpeakeasyMetadata({ data: "json, name=Province" })
   province?: string;
 
-  @Metadata({ data: "json, name=State" })
+  @SpeakeasyMetadata({ data: "json, name=State" })
   state?: string;
 }
 
@@ -74,41 +75,41 @@ export class UpdateProfileRequestBodyAddress extends SpeakeasyBase {
  * Updates associated with the address properties of a customer profile.
 **/
 export class UpdateProfileRequestBodyBillingAddress extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Address1" })
+  @SpeakeasyMetadata({ data: "json, name=Address1" })
   address1?: string;
 
-  @Metadata({ data: "json, name=Address2" })
+  @SpeakeasyMetadata({ data: "json, name=Address2" })
   address2?: string;
 
-  @Metadata({ data: "json, name=Address3" })
+  @SpeakeasyMetadata({ data: "json, name=Address3" })
   address3?: string;
 
-  @Metadata({ data: "json, name=Address4" })
+  @SpeakeasyMetadata({ data: "json, name=Address4" })
   address4?: string;
 
-  @Metadata({ data: "json, name=City" })
+  @SpeakeasyMetadata({ data: "json, name=City" })
   city?: string;
 
-  @Metadata({ data: "json, name=Country" })
+  @SpeakeasyMetadata({ data: "json, name=Country" })
   country?: string;
 
-  @Metadata({ data: "json, name=County" })
+  @SpeakeasyMetadata({ data: "json, name=County" })
   county?: string;
 
-  @Metadata({ data: "json, name=PostalCode" })
+  @SpeakeasyMetadata({ data: "json, name=PostalCode" })
   postalCode?: string;
 
-  @Metadata({ data: "json, name=Province" })
+  @SpeakeasyMetadata({ data: "json, name=Province" })
   province?: string;
 
-  @Metadata({ data: "json, name=State" })
+  @SpeakeasyMetadata({ data: "json, name=State" })
   state?: string;
 }
 
 export enum UpdateProfileRequestBodyGenderEnum {
-    Male = "MALE"
-,    Female = "FEMALE"
-,    Unspecified = "UNSPECIFIED"
+    Male = "MALE",
+    Female = "FEMALE",
+    Unspecified = "UNSPECIFIED"
 }
 
 
@@ -117,41 +118,41 @@ export enum UpdateProfileRequestBodyGenderEnum {
  * Updates associated with the address properties of a customer profile.
 **/
 export class UpdateProfileRequestBodyMailingAddress extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Address1" })
+  @SpeakeasyMetadata({ data: "json, name=Address1" })
   address1?: string;
 
-  @Metadata({ data: "json, name=Address2" })
+  @SpeakeasyMetadata({ data: "json, name=Address2" })
   address2?: string;
 
-  @Metadata({ data: "json, name=Address3" })
+  @SpeakeasyMetadata({ data: "json, name=Address3" })
   address3?: string;
 
-  @Metadata({ data: "json, name=Address4" })
+  @SpeakeasyMetadata({ data: "json, name=Address4" })
   address4?: string;
 
-  @Metadata({ data: "json, name=City" })
+  @SpeakeasyMetadata({ data: "json, name=City" })
   city?: string;
 
-  @Metadata({ data: "json, name=Country" })
+  @SpeakeasyMetadata({ data: "json, name=Country" })
   country?: string;
 
-  @Metadata({ data: "json, name=County" })
+  @SpeakeasyMetadata({ data: "json, name=County" })
   county?: string;
 
-  @Metadata({ data: "json, name=PostalCode" })
+  @SpeakeasyMetadata({ data: "json, name=PostalCode" })
   postalCode?: string;
 
-  @Metadata({ data: "json, name=Province" })
+  @SpeakeasyMetadata({ data: "json, name=Province" })
   province?: string;
 
-  @Metadata({ data: "json, name=State" })
+  @SpeakeasyMetadata({ data: "json, name=State" })
   state?: string;
 }
 
 export enum UpdateProfileRequestBodyPartyTypeEnum {
-    Individual = "INDIVIDUAL"
-,    Business = "BUSINESS"
-,    Other = "OTHER"
+    Individual = "INDIVIDUAL",
+    Business = "BUSINESS",
+    Other = "OTHER"
 }
 
 
@@ -160,141 +161,141 @@ export enum UpdateProfileRequestBodyPartyTypeEnum {
  * Updates associated with the address properties of a customer profile.
 **/
 export class UpdateProfileRequestBodyShippingAddress extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Address1" })
+  @SpeakeasyMetadata({ data: "json, name=Address1" })
   address1?: string;
 
-  @Metadata({ data: "json, name=Address2" })
+  @SpeakeasyMetadata({ data: "json, name=Address2" })
   address2?: string;
 
-  @Metadata({ data: "json, name=Address3" })
+  @SpeakeasyMetadata({ data: "json, name=Address3" })
   address3?: string;
 
-  @Metadata({ data: "json, name=Address4" })
+  @SpeakeasyMetadata({ data: "json, name=Address4" })
   address4?: string;
 
-  @Metadata({ data: "json, name=City" })
+  @SpeakeasyMetadata({ data: "json, name=City" })
   city?: string;
 
-  @Metadata({ data: "json, name=Country" })
+  @SpeakeasyMetadata({ data: "json, name=Country" })
   country?: string;
 
-  @Metadata({ data: "json, name=County" })
+  @SpeakeasyMetadata({ data: "json, name=County" })
   county?: string;
 
-  @Metadata({ data: "json, name=PostalCode" })
+  @SpeakeasyMetadata({ data: "json, name=PostalCode" })
   postalCode?: string;
 
-  @Metadata({ data: "json, name=Province" })
+  @SpeakeasyMetadata({ data: "json, name=Province" })
   province?: string;
 
-  @Metadata({ data: "json, name=State" })
+  @SpeakeasyMetadata({ data: "json, name=State" })
   state?: string;
 }
 
 
 export class UpdateProfileRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccountNumber" })
+  @SpeakeasyMetadata({ data: "json, name=AccountNumber" })
   accountNumber?: string;
 
-  @Metadata({ data: "json, name=AdditionalInformation" })
+  @SpeakeasyMetadata({ data: "json, name=AdditionalInformation" })
   additionalInformation?: string;
 
-  @Metadata({ data: "json, name=Address" })
+  @SpeakeasyMetadata({ data: "json, name=Address" })
   address?: UpdateProfileRequestBodyAddress;
 
-  @Metadata({ data: "json, name=Attributes" })
+  @SpeakeasyMetadata({ data: "json, name=Attributes" })
   attributes?: Map<string, string>;
 
-  @Metadata({ data: "json, name=BillingAddress" })
+  @SpeakeasyMetadata({ data: "json, name=BillingAddress" })
   billingAddress?: UpdateProfileRequestBodyBillingAddress;
 
-  @Metadata({ data: "json, name=BirthDate" })
+  @SpeakeasyMetadata({ data: "json, name=BirthDate" })
   birthDate?: string;
 
-  @Metadata({ data: "json, name=BusinessEmailAddress" })
+  @SpeakeasyMetadata({ data: "json, name=BusinessEmailAddress" })
   businessEmailAddress?: string;
 
-  @Metadata({ data: "json, name=BusinessName" })
+  @SpeakeasyMetadata({ data: "json, name=BusinessName" })
   businessName?: string;
 
-  @Metadata({ data: "json, name=BusinessPhoneNumber" })
+  @SpeakeasyMetadata({ data: "json, name=BusinessPhoneNumber" })
   businessPhoneNumber?: string;
 
-  @Metadata({ data: "json, name=EmailAddress" })
+  @SpeakeasyMetadata({ data: "json, name=EmailAddress" })
   emailAddress?: string;
 
-  @Metadata({ data: "json, name=FirstName" })
+  @SpeakeasyMetadata({ data: "json, name=FirstName" })
   firstName?: string;
 
-  @Metadata({ data: "json, name=Gender" })
+  @SpeakeasyMetadata({ data: "json, name=Gender" })
   gender?: UpdateProfileRequestBodyGenderEnum;
 
-  @Metadata({ data: "json, name=HomePhoneNumber" })
+  @SpeakeasyMetadata({ data: "json, name=HomePhoneNumber" })
   homePhoneNumber?: string;
 
-  @Metadata({ data: "json, name=LastName" })
+  @SpeakeasyMetadata({ data: "json, name=LastName" })
   lastName?: string;
 
-  @Metadata({ data: "json, name=MailingAddress" })
+  @SpeakeasyMetadata({ data: "json, name=MailingAddress" })
   mailingAddress?: UpdateProfileRequestBodyMailingAddress;
 
-  @Metadata({ data: "json, name=MiddleName" })
+  @SpeakeasyMetadata({ data: "json, name=MiddleName" })
   middleName?: string;
 
-  @Metadata({ data: "json, name=MobilePhoneNumber" })
+  @SpeakeasyMetadata({ data: "json, name=MobilePhoneNumber" })
   mobilePhoneNumber?: string;
 
-  @Metadata({ data: "json, name=PartyType" })
+  @SpeakeasyMetadata({ data: "json, name=PartyType" })
   partyType?: UpdateProfileRequestBodyPartyTypeEnum;
 
-  @Metadata({ data: "json, name=PersonalEmailAddress" })
+  @SpeakeasyMetadata({ data: "json, name=PersonalEmailAddress" })
   personalEmailAddress?: string;
 
-  @Metadata({ data: "json, name=PhoneNumber" })
+  @SpeakeasyMetadata({ data: "json, name=PhoneNumber" })
   phoneNumber?: string;
 
-  @Metadata({ data: "json, name=ProfileId" })
+  @SpeakeasyMetadata({ data: "json, name=ProfileId" })
   profileId: string;
 
-  @Metadata({ data: "json, name=ShippingAddress" })
+  @SpeakeasyMetadata({ data: "json, name=ShippingAddress" })
   shippingAddress?: UpdateProfileRequestBodyShippingAddress;
 }
 
 
 export class UpdateProfileRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateProfilePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdateProfileHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdateProfileRequestBody;
 }
 
 
 export class UpdateProfileResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   accessDeniedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   badRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateProfileResponse?: shared.UpdateProfileResponse;
 }

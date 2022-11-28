@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DocumentaiProjectsLocationsProcessorTypesListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class DocumentaiProjectsLocationsProcessorTypesListQueryParams:
 
 @dataclass
 class DocumentaiProjectsLocationsProcessorTypesListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DocumentaiProjectsLocationsProcessorTypesListRequest:
-    path_params: DocumentaiProjectsLocationsProcessorTypesListPathParams = field(default=None)
-    query_params: DocumentaiProjectsLocationsProcessorTypesListQueryParams = field(default=None)
-    security: DocumentaiProjectsLocationsProcessorTypesListSecurity = field(default=None)
+    path_params: DocumentaiProjectsLocationsProcessorTypesListPathParams = field()
+    query_params: DocumentaiProjectsLocationsProcessorTypesListQueryParams = field()
+    security: DocumentaiProjectsLocationsProcessorTypesListSecurity = field()
     
 
 @dataclass
 class DocumentaiProjectsLocationsProcessorTypesListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_documentai_v1_list_processor_types_response: Optional[shared.GoogleCloudDocumentaiV1ListProcessorTypesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

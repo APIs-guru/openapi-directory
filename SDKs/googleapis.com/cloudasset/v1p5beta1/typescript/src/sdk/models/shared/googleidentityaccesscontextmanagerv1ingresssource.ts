@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleIdentityAccesscontextmanagerV1IngressSource
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The source that IngressPolicy authorizes access from.
 **/
 export class GoogleIdentityAccesscontextmanagerV1IngressSource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessLevel" })
+  @SpeakeasyMetadata({ data: "json, name=accessLevel" })
   accessLevel?: string;
 
-  @Metadata({ data: "json, name=resource" })
+  @SpeakeasyMetadata({ data: "json, name=resource" })
   resource?: string;
 }

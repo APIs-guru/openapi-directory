@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudOrgpolicyV2ConstraintListConstraint } from "./googlecloudorgpolicyv2constraintlistconstraint";
 export declare enum GoogleCloudOrgpolicyV2ConstraintConstraintDefaultEnum {
     ConstraintDefaultUnspecified = "CONSTRAINT_DEFAULT_UNSPECIFIED",

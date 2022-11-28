@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetIdentityProviderByIdentifierRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=IdpIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=IdpIdentifier" })
   idpIdentifier: string;
 
-  @Metadata({ data: "json, name=UserPoolId" })
+  @SpeakeasyMetadata({ data: "json, name=UserPoolId" })
   userPoolId: string;
 }

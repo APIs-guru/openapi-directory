@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetApiV1GenevaActionsConfigurationTargetKeyPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=key" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=key" })
   key: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=target" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=target" })
   target: string;
 }
 
 
 export class GetApiV1GenevaActionsConfigurationTargetKeyRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetApiV1GenevaActionsConfigurationTargetKeyPathParams;
 }
 
 
 export class GetApiV1GenevaActionsConfigurationTargetKeyResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   systemConfigurationResponse?: shared.SystemConfigurationResponse;
 }

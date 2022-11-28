@@ -1,6 +1,7 @@
 
 
+
 export enum BoardRelationshipEnum {
-    Owned = "owned"
-,    Invited = "invited"
+    Owned = "owned",
+    Invited = "invited"
 }

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDescribeStemmingOptionsActionEnum(str, Enum):
     DESCRIBE_STEMMING_OPTIONS = "DescribeStemmingOptions"
@@ -10,8 +14,8 @@ class PostDescribeStemmingOptionsVersionEnum(str, Enum):
 
 @dataclass
 class PostDescribeStemmingOptionsQueryParams:
-    action: PostDescribeStemmingOptionsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDescribeStemmingOptionsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDescribeStemmingOptionsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDescribeStemmingOptionsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDescribeStemmingOptionsHeaders:
 
 @dataclass
 class PostDescribeStemmingOptionsRequest:
-    query_params: PostDescribeStemmingOptionsQueryParams = field(default=None)
-    headers: PostDescribeStemmingOptionsHeaders = field(default=None)
+    headers: PostDescribeStemmingOptionsHeaders = field()
+    query_params: PostDescribeStemmingOptionsQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDescribeStemmingOptionsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

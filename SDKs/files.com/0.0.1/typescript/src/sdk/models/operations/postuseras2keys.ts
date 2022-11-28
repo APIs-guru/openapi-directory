@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostUserAs2KeysRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, name=as2_partnership_name" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=as2_partnership_name" })
   as2PartnershipName: string;
 
-  @Metadata({ data: "multipart_form, name=public_key" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=public_key" })
   publicKey: string;
 
-  @Metadata({ data: "multipart_form, name=user_id" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=user_id" })
   userId?: number;
 }
 
 
 export class PostUserAs2KeysRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=multipart/form-data" })
+  @SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" })
   request?: PostUserAs2KeysRequestBody;
 }
 
 
 export class PostUserAs2KeysResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   as2KeyEntity?: shared.As2KeyEntity;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

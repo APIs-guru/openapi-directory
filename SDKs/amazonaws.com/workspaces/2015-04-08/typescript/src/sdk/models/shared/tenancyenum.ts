@@ -1,6 +1,7 @@
 
 
+
 export enum TenancyEnum {
-    Dedicated = "DEDICATED"
-,    Shared = "SHARED"
+    Dedicated = "DEDICATED",
+    Shared = "SHARED"
 }

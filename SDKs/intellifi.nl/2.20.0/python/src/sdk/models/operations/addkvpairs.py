@@ -5,12 +5,12 @@ from sdk.models import shared
 
 @dataclass
 class AddKvPairsRequest:
-    request: shared.KeyValuePair = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.KeyValuePairInput = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class AddKvPairsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     response_default_resource: Optional[shared.ResponseDefaultResource] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -8,6 +8,8 @@ const (
 	GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestConstraintsSupportedCompressionsEnumRice                       GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestConstraintsSupportedCompressionsEnum = "RICE"
 )
 
+// GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestConstraints
+// The constraints for this update.
 type GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestConstraints struct {
 	DeviceLocation        *string                                                                                                          `json:"deviceLocation,omitempty"`
 	Language              *string                                                                                                          `json:"language,omitempty"`

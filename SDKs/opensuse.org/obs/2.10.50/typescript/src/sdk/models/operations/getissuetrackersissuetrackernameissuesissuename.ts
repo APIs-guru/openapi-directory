@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetIssueTrackersIssueTrackerNameIssuesIssueNamePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=issue_name" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=issue_name" })
   issueName: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=issue_tracker_name" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=issue_tracker_name" })
   issueTrackerName: string;
 }
 
 
 export class GetIssueTrackersIssueTrackerNameIssuesIssueNameSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   basicAuthentication: shared.SchemeBasicAuthentication;
 }
 
 
 export class GetIssueTrackersIssueTrackerNameIssuesIssueNameRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetIssueTrackersIssueTrackerNameIssuesIssueNamePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetIssueTrackersIssueTrackerNameIssuesIssueNameSecurity;
 }
 
 
 export class GetIssueTrackersIssueTrackerNameIssuesIssueNameResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -30,7 +30,7 @@ type CloudbuildProjectsLocationsBuildsApproveSecurity struct {
 type CloudbuildProjectsLocationsBuildsApproveRequest struct {
 	PathParams  CloudbuildProjectsLocationsBuildsApprovePathParams
 	QueryParams CloudbuildProjectsLocationsBuildsApproveQueryParams
-	Request     *shared.ApproveBuildRequest `request:"mediaType=application/json"`
+	Request     *shared.ApproveBuildRequestInput `request:"mediaType=application/json"`
 	Security    CloudbuildProjectsLocationsBuildsApproveSecurity
 }
 

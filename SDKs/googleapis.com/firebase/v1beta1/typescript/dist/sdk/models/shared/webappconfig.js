@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // WebAppConfig
 /**
  * Configuration metadata of a single Firebase App for the web.
@@ -33,39 +33,39 @@ var WebAppConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=apiKey" }),
+        SpeakeasyMetadata({ data: "json, name=apiKey" }),
         __metadata("design:type", String)
     ], WebAppConfig.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "json, name=appId" }),
+        SpeakeasyMetadata({ data: "json, name=appId" }),
         __metadata("design:type", String)
     ], WebAppConfig.prototype, "appId", void 0);
     __decorate([
-        Metadata({ data: "json, name=authDomain" }),
+        SpeakeasyMetadata({ data: "json, name=authDomain" }),
         __metadata("design:type", String)
     ], WebAppConfig.prototype, "authDomain", void 0);
     __decorate([
-        Metadata({ data: "json, name=databaseURL" }),
+        SpeakeasyMetadata({ data: "json, name=databaseURL" }),
         __metadata("design:type", String)
     ], WebAppConfig.prototype, "databaseUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=locationId" }),
+        SpeakeasyMetadata({ data: "json, name=locationId" }),
         __metadata("design:type", String)
     ], WebAppConfig.prototype, "locationId", void 0);
     __decorate([
-        Metadata({ data: "json, name=measurementId" }),
+        SpeakeasyMetadata({ data: "json, name=measurementId" }),
         __metadata("design:type", String)
     ], WebAppConfig.prototype, "measurementId", void 0);
     __decorate([
-        Metadata({ data: "json, name=messagingSenderId" }),
+        SpeakeasyMetadata({ data: "json, name=messagingSenderId" }),
         __metadata("design:type", String)
     ], WebAppConfig.prototype, "messagingSenderId", void 0);
     __decorate([
-        Metadata({ data: "json, name=projectId" }),
+        SpeakeasyMetadata({ data: "json, name=projectId" }),
         __metadata("design:type", String)
     ], WebAppConfig.prototype, "projectId", void 0);
     __decorate([
-        Metadata({ data: "json, name=storageBucket" }),
+        SpeakeasyMetadata({ data: "json, name=storageBucket" }),
         __metadata("design:type", String)
     ], WebAppConfig.prototype, "storageBucket", void 0);
     return WebAppConfig;

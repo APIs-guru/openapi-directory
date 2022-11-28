@@ -22,44 +22,44 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RuleStateEnum } from "./rulestateenum";
+import { Tag } from "./tag";
 var PutRuleRequest = /** @class */ (function (_super) {
     __extends(PutRuleRequest, _super);
     function PutRuleRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], PutRuleRequest.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=EventBusName" }),
+        SpeakeasyMetadata({ data: "json, name=EventBusName" }),
         __metadata("design:type", String)
     ], PutRuleRequest.prototype, "eventBusName", void 0);
     __decorate([
-        Metadata({ data: "json, name=EventPattern" }),
+        SpeakeasyMetadata({ data: "json, name=EventPattern" }),
         __metadata("design:type", String)
     ], PutRuleRequest.prototype, "eventPattern", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], PutRuleRequest.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=RoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=RoleArn" }),
         __metadata("design:type", String)
     ], PutRuleRequest.prototype, "roleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=ScheduleExpression" }),
+        SpeakeasyMetadata({ data: "json, name=ScheduleExpression" }),
         __metadata("design:type", String)
     ], PutRuleRequest.prototype, "scheduleExpression", void 0);
     __decorate([
-        Metadata({ data: "json, name=State" }),
+        SpeakeasyMetadata({ data: "json, name=State" }),
         __metadata("design:type", String)
     ], PutRuleRequest.prototype, "state", void 0);
     __decorate([
-        Metadata({ data: "json, name=Tags", elemType: shared.Tag }),
+        SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag }),
         __metadata("design:type", Array)
     ], PutRuleRequest.prototype, "tags", void 0);
     return PutRuleRequest;

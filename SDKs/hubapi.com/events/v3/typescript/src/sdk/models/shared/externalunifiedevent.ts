@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ExternalUnifiedEvent
@@ -27,21 +28,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * ```
 **/
 export class ExternalUnifiedEvent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=eventType" })
+  @SpeakeasyMetadata({ data: "json, name=eventType" })
   eventType: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=objectId" })
+  @SpeakeasyMetadata({ data: "json, name=objectId" })
   objectId: string;
 
-  @Metadata({ data: "json, name=objectType" })
+  @SpeakeasyMetadata({ data: "json, name=objectType" })
   objectType: string;
 
-  @Metadata({ data: "json, name=occurredAt" })
+  @SpeakeasyMetadata({ data: "json, name=occurredAt" })
   occurredAt: Date;
 
-  @Metadata({ data: "json, name=properties" })
+  @SpeakeasyMetadata({ data: "json, name=properties" })
   properties: Map<string, string>;
 }

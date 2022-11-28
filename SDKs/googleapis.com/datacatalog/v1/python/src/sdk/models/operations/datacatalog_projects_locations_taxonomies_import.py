@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DatacatalogProjectsLocationsTaxonomiesImportPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class DatacatalogProjectsLocationsTaxonomiesImportQueryParams:
 
 @dataclass
 class DatacatalogProjectsLocationsTaxonomiesImportSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DatacatalogProjectsLocationsTaxonomiesImportRequest:
-    path_params: DatacatalogProjectsLocationsTaxonomiesImportPathParams = field(default=None)
-    query_params: DatacatalogProjectsLocationsTaxonomiesImportQueryParams = field(default=None)
+    path_params: DatacatalogProjectsLocationsTaxonomiesImportPathParams = field()
+    query_params: DatacatalogProjectsLocationsTaxonomiesImportQueryParams = field()
+    security: DatacatalogProjectsLocationsTaxonomiesImportSecurity = field()
     request: Optional[shared.GoogleCloudDatacatalogV1ImportTaxonomiesRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DatacatalogProjectsLocationsTaxonomiesImportSecurity = field(default=None)
     
 
 @dataclass
 class DatacatalogProjectsLocationsTaxonomiesImportResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_datacatalog_v1_import_taxonomies_response: Optional[shared.GoogleCloudDatacatalogV1ImportTaxonomiesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

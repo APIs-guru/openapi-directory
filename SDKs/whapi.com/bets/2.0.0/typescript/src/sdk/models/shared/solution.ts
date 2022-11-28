@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Solution extends SpeakeasyBase {
-  @Metadata({ data: "json, name=betNum" })
+  @SpeakeasyMetadata({ data: "json, name=betNum" })
   betNum?: string;
 
-  @Metadata({ data: "json, name=eventId" })
+  @SpeakeasyMetadata({ data: "json, name=eventId" })
   eventId?: string;
 
-  @Metadata({ data: "json, name=handicap" })
+  @SpeakeasyMetadata({ data: "json, name=handicap" })
   handicap?: string;
 
-  @Metadata({ data: "json, name=handicapPrecision" })
+  @SpeakeasyMetadata({ data: "json, name=handicapPrecision" })
   handicapPrecision?: string;
 
-  @Metadata({ data: "json, name=priceDen" })
+  @SpeakeasyMetadata({ data: "json, name=priceDen" })
   priceDen?: string;
 
-  @Metadata({ data: "json, name=priceNum" })
+  @SpeakeasyMetadata({ data: "json, name=priceNum" })
   priceNum?: string;
 
-  @Metadata({ data: "json, name=selectionHandicap" })
+  @SpeakeasyMetadata({ data: "json, name=selectionHandicap" })
   selectionHandicap?: string;
 
-  @Metadata({ data: "json, name=selectionId" })
+  @SpeakeasyMetadata({ data: "json, name=selectionId" })
   selectionId?: string;
 }

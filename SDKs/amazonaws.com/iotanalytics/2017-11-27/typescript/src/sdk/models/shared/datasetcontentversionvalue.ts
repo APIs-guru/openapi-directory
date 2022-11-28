@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DatasetContentVersionValue
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The dataset whose latest contents are used as input to the notebook or application.
 **/
 export class DatasetContentVersionValue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=datasetName" })
+  @SpeakeasyMetadata({ data: "json, name=datasetName" })
   datasetName: string;
 }

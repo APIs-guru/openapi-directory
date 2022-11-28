@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetLayer2NetworkPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,20 +15,20 @@ class GetLayer2NetworkQueryParams:
 
 @dataclass
 class GetLayer2NetworkSecurity:
-    api_key_auth: shared.SchemeAPIKeyAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    api_key_auth: shared.SchemeAPIKeyAuth = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetLayer2NetworkRequest:
-    path_params: GetLayer2NetworkPathParams = field(default=None)
-    query_params: GetLayer2NetworkQueryParams = field(default=None)
-    security: GetLayer2NetworkSecurity = field(default=None)
+    path_params: GetLayer2NetworkPathParams = field()
+    query_params: GetLayer2NetworkQueryParams = field()
+    security: GetLayer2NetworkSecurity = field()
     
 
 @dataclass
 class GetLayer2NetworkResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_error: Optional[shared.APIError] = field(default=None)
     base_l2_network: Optional[shared.BaseL2Network] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

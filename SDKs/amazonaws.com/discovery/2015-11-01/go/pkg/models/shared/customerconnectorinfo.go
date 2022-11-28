@@ -1,5 +1,7 @@
 package shared
 
+// CustomerConnectorInfo
+// Inventory data for installed discovery connectors.
 type CustomerConnectorInfo struct {
 	ActiveConnectors      int64 `json:"activeConnectors"`
 	BlackListedConnectors int64 `json:"blackListedConnectors"`

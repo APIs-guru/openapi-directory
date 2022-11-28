@@ -9,10 +9,6 @@ type CreateMockRequestBody struct {
 	Mock *CreateMockRequestBodyMock `json:"mock,omitempty"`
 }
 
-type CreateMockRequest struct {
-	Request *CreateMockRequestBody `request:"mediaType=application/json"`
-}
-
 type CreateMock200ApplicationJSONMock struct {
 	Collection  *string `json:"collection,omitempty"`
 	Environment *string `json:"environment,omitempty"`
@@ -24,6 +20,10 @@ type CreateMock200ApplicationJSONMock struct {
 
 type CreateMock200ApplicationJSON struct {
 	Mock *CreateMock200ApplicationJSONMock `json:"mock,omitempty"`
+}
+
+type CreateMockRequest struct {
+	Request *CreateMockRequestBody `request:"mediaType=application/json"`
 }
 
 type CreateMockResponse struct {

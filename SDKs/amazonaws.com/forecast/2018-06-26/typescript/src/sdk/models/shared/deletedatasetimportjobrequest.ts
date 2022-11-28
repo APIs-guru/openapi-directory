@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteDatasetImportJobRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DatasetImportJobArn" })
+  @SpeakeasyMetadata({ data: "json, name=DatasetImportJobArn" })
   datasetImportJobArn: string;
 }

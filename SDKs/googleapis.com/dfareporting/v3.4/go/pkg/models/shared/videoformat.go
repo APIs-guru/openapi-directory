@@ -10,6 +10,8 @@ const (
 	VideoFormatFileTypeEnumM3U8     VideoFormatFileTypeEnum = "M3U8"
 )
 
+// VideoFormat
+// Contains information about supported video formats.
 type VideoFormat struct {
 	FileType      *VideoFormatFileTypeEnum `json:"fileType,omitempty"`
 	ID            *int32                   `json:"id,omitempty"`

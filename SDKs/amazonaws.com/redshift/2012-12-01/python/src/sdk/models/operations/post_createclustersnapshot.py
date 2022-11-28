@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostCreateClusterSnapshotActionEnum(str, Enum):
     CREATE_CLUSTER_SNAPSHOT = "CreateClusterSnapshot"
@@ -10,8 +14,8 @@ class PostCreateClusterSnapshotVersionEnum(str, Enum):
 
 @dataclass
 class PostCreateClusterSnapshotQueryParams:
-    action: PostCreateClusterSnapshotActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostCreateClusterSnapshotVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostCreateClusterSnapshotActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostCreateClusterSnapshotVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostCreateClusterSnapshotHeaders:
 
 @dataclass
 class PostCreateClusterSnapshotRequest:
-    query_params: PostCreateClusterSnapshotQueryParams = field(default=None)
-    headers: PostCreateClusterSnapshotHeaders = field(default=None)
+    headers: PostCreateClusterSnapshotHeaders = field()
+    query_params: PostCreateClusterSnapshotQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostCreateClusterSnapshotResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

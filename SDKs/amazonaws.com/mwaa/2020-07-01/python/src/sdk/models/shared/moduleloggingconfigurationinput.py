@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import logginglevel_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ModuleLoggingConfigurationInput:
-    enabled: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Enabled' }})
-    log_level: logginglevel_enum.LoggingLevelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LogLevel' }})
+    r"""ModuleLoggingConfigurationInput
+    Defines the type of logs to send for the Apache Airflow log type (e.g. <code>DagProcessingLogs</code>). Valid values: <code>CloudWatchLogGroupArn</code>, <code>Enabled</code>, <code>LogLevel</code>.
+    """
+    
+    enabled: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Enabled') }})
+    log_level: LoggingLevelEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('LogLevel') }})
     

@@ -17,14 +17,14 @@ type InsertSectionForProjectRequestBody struct {
 	Data *shared.ProjectSectionInsertRequest `json:"data,omitempty"`
 }
 
+type InsertSectionForProject200ApplicationJSON struct {
+	Data map[string]interface{} `json:"data,omitempty"`
+}
+
 type InsertSectionForProjectRequest struct {
 	PathParams  InsertSectionForProjectPathParams
 	QueryParams InsertSectionForProjectQueryParams
 	Request     InsertSectionForProjectRequestBody `request:"mediaType=application/json"`
-}
-
-type InsertSectionForProject200ApplicationJSON struct {
-	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type InsertSectionForProjectResponse struct {

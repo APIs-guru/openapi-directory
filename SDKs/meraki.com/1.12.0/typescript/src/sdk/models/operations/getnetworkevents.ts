@@ -1,85 +1,86 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetNetworkEventsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
 export enum GetNetworkEventsProductTypeEnum {
-    Wireless = "wireless"
-,    Appliance = "appliance"
-,    Switch = "switch"
-,    SystemsManager = "systemsManager"
-,    Camera = "camera"
-,    CellularGateway = "cellularGateway"
+    Wireless = "wireless",
+    Appliance = "appliance",
+    Switch = "switch",
+    SystemsManager = "systemsManager",
+    Camera = "camera",
+    CellularGateway = "cellularGateway"
 }
 
 
 export class GetNetworkEventsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=clientIp" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=clientIp" })
   clientIp?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=clientMac" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=clientMac" })
   clientMac?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=clientName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=clientName" })
   clientName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=deviceMac" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=deviceMac" })
   deviceMac?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=deviceName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=deviceName" })
   deviceName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=deviceSerial" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=deviceSerial" })
   deviceSerial?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=endingBefore" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=endingBefore" })
   endingBefore?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=excludedEventTypes" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=excludedEventTypes" })
   excludedEventTypes?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=includedEventTypes" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=includedEventTypes" })
   includedEventTypes?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=perPage" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=perPage" })
   perPage?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=productType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=productType" })
   productType?: GetNetworkEventsProductTypeEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=smDeviceMac" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=smDeviceMac" })
   smDeviceMac?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=smDeviceName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=smDeviceName" })
   smDeviceName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=startingAfter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=startingAfter" })
   startingAfter?: string;
 }
 
 
 export class GetNetworkEventsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetNetworkEventsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetNetworkEventsQueryParams;
 }
 
 
 export class GetNetworkEventsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getNetworkEvents200ApplicationJsonObject?: Map<string, any>;
 }

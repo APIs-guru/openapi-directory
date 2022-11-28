@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,22 +22,22 @@ class BatchImportFindingsHeaders:
 @dataclass_json
 @dataclass
 class BatchImportFindingsRequestBody:
-    findings: List[shared.AwsSecurityFinding] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Findings' }})
+    findings: List[shared.AwsSecurityFinding] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Findings') }})
     
 
 @dataclass
 class BatchImportFindingsRequest:
-    headers: BatchImportFindingsHeaders = field(default=None)
-    request: BatchImportFindingsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: BatchImportFindingsHeaders = field()
+    request: BatchImportFindingsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class BatchImportFindingsResponse:
+    content_type: str = field()
+    status_code: int = field()
     batch_import_findings_response: Optional[shared.BatchImportFindingsResponse] = field(default=None)
-    content_type: str = field(default=None)
     internal_exception: Optional[Any] = field(default=None)
     invalid_access_exception: Optional[Any] = field(default=None)
     invalid_input_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

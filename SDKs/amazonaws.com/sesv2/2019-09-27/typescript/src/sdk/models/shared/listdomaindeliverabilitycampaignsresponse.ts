@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DomainDeliverabilityCampaign } from "./domaindeliverabilitycampaign";
+
 
 
 // ListDomainDeliverabilityCampaignsResponse
@@ -8,9 +8,9 @@ import { DomainDeliverabilityCampaign } from "./domaindeliverabilitycampaign";
  * An array of objects that provide deliverability data for all the campaigns that used a specific domain to send email during a specified time range. This data is available for a domain only if you enabled the Deliverability dashboard for the domain.
 **/
 export class ListDomainDeliverabilityCampaignsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DomainDeliverabilityCampaigns", elemType: shared.DomainDeliverabilityCampaign })
+  @SpeakeasyMetadata({ data: "json, name=DomainDeliverabilityCampaigns", elemType: DomainDeliverabilityCampaign })
   domainDeliverabilityCampaigns: DomainDeliverabilityCampaign[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

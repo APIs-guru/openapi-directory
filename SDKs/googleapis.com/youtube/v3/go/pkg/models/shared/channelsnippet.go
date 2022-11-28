@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ChannelSnippet
+// Basic details about a channel, including title, description and thumbnails.
 type ChannelSnippet struct {
 	Country         *string              `json:"country,omitempty"`
 	CustomURL       *string              `json:"customUrl,omitempty"`

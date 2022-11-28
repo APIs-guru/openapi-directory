@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class StopPointCrowdingPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=line" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=line" })
   line: string;
 }
 
 export enum StopPointCrowdingDirectionEnum {
-    Inbound = "inbound"
-,    Outbound = "outbound"
-,    All = "all"
+    Inbound = "inbound",
+    Outbound = "outbound",
+    All = "all"
 }
 
 
 export class StopPointCrowdingQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=direction" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=direction" })
   direction: StopPointCrowdingDirectionEnum;
 }
 
 
 export class StopPointCrowdingRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: StopPointCrowdingPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: StopPointCrowdingQueryParams;
 }
 
 
 export class StopPointCrowdingResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.TflApiPresentationEntitiesStopPoint })
+  @SpeakeasyMetadata({ elemType: shared.TflApiPresentationEntitiesStopPoint })
   tflApiPresentationEntitiesStopPoints?: shared.TflApiPresentationEntitiesStopPoint[];
 }

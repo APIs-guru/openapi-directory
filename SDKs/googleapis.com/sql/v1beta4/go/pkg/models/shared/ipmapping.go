@@ -10,6 +10,8 @@ const (
 	IPMappingTypeEnumMigrated1StGen              IPMappingTypeEnum = "MIGRATED_1ST_GEN"
 )
 
+// IPMapping
+// Database instance IP Mapping.
 type IPMapping struct {
 	IPAddress    *string            `json:"ipAddress,omitempty"`
 	TimeToRetire *string            `json:"timeToRetire,omitempty"`

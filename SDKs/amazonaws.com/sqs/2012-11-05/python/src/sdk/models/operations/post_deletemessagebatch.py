@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDeleteMessageBatchActionEnum(str, Enum):
     DELETE_MESSAGE_BATCH = "DeleteMessageBatch"
@@ -10,8 +14,8 @@ class PostDeleteMessageBatchVersionEnum(str, Enum):
 
 @dataclass
 class PostDeleteMessageBatchQueryParams:
-    action: PostDeleteMessageBatchActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDeleteMessageBatchVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDeleteMessageBatchActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDeleteMessageBatchVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDeleteMessageBatchHeaders:
 
 @dataclass
 class PostDeleteMessageBatchRequest:
-    query_params: PostDeleteMessageBatchQueryParams = field(default=None)
-    headers: PostDeleteMessageBatchHeaders = field(default=None)
+    headers: PostDeleteMessageBatchHeaders = field()
+    query_params: PostDeleteMessageBatchQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDeleteMessageBatchResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

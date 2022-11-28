@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConfigurationAggregator } from "./configurationaggregator";
 
 
+
 export class PutConfigurationAggregatorResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConfigurationAggregator" })
+  @SpeakeasyMetadata({ data: "json, name=ConfigurationAggregator" })
   configurationAggregator?: ConfigurationAggregator;
 }

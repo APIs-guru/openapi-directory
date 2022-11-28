@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AssertionRule } from "./assertionrule";
 import { GatingRule } from "./gatingrule";
 export declare class DescribeSafetyRuleResponse extends SpeakeasyBase {

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WorldGenerationJobErrorCodeEnum } from "./worldgenerationjoberrorcodeenum";
 // WorldFailure
 /**
@@ -34,15 +34,15 @@ var WorldFailure = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=failureCode" }),
+        SpeakeasyMetadata({ data: "json, name=failureCode" }),
         __metadata("design:type", String)
     ], WorldFailure.prototype, "failureCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=failureCount" }),
+        SpeakeasyMetadata({ data: "json, name=failureCount" }),
         __metadata("design:type", Number)
     ], WorldFailure.prototype, "failureCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=sampleFailureReason" }),
+        SpeakeasyMetadata({ data: "json, name=sampleFailureReason" }),
         __metadata("design:type", String)
     ], WorldFailure.prototype, "sampleFailureReason", void 0);
     return WorldFailure;

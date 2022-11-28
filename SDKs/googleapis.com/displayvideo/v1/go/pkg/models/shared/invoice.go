@@ -8,6 +8,8 @@ const (
 	InvoiceInvoiceTypeEnumInvoiceTypeInvoice     InvoiceInvoiceTypeEnum = "INVOICE_TYPE_INVOICE"
 )
 
+// Invoice
+// A single invoice.
 type Invoice struct {
 	BudgetInvoiceGroupingID *string                 `json:"budgetInvoiceGroupingId,omitempty"`
 	BudgetSummaries         []BudgetSummary         `json:"budgetSummaries,omitempty"`

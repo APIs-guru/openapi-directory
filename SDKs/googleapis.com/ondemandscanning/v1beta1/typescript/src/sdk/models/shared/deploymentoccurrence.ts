@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum DeploymentOccurrencePlatformEnum {
-    PlatformUnspecified = "PLATFORM_UNSPECIFIED"
-,    Gke = "GKE"
-,    Flex = "FLEX"
-,    Custom = "CUSTOM"
+    PlatformUnspecified = "PLATFORM_UNSPECIFIED",
+    Gke = "GKE",
+    Flex = "FLEX",
+    Custom = "CUSTOM"
 }
 
 
@@ -13,24 +14,24 @@ export enum DeploymentOccurrencePlatformEnum {
  * The period during which some deployable was active in a runtime.
 **/
 export class DeploymentOccurrence extends SpeakeasyBase {
-  @Metadata({ data: "json, name=address" })
+  @SpeakeasyMetadata({ data: "json, name=address" })
   address?: string;
 
-  @Metadata({ data: "json, name=config" })
+  @SpeakeasyMetadata({ data: "json, name=config" })
   config?: string;
 
-  @Metadata({ data: "json, name=deployTime" })
+  @SpeakeasyMetadata({ data: "json, name=deployTime" })
   deployTime?: string;
 
-  @Metadata({ data: "json, name=platform" })
+  @SpeakeasyMetadata({ data: "json, name=platform" })
   platform?: DeploymentOccurrencePlatformEnum;
 
-  @Metadata({ data: "json, name=resourceUri" })
+  @SpeakeasyMetadata({ data: "json, name=resourceUri" })
   resourceUri?: string[];
 
-  @Metadata({ data: "json, name=undeployTime" })
+  @SpeakeasyMetadata({ data: "json, name=undeployTime" })
   undeployTime?: string;
 
-  @Metadata({ data: "json, name=userEmail" })
+  @SpeakeasyMetadata({ data: "json, name=userEmail" })
   userEmail?: string;
 }

@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { UsageRecord } from "./usagerecord";
 // BatchMeterUsageRequest
 /**
  * A BatchMeterUsageRequest contains UsageRecords, which indicate quantities of usage within your application.
@@ -34,11 +34,11 @@ var BatchMeterUsageRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ProductCode" }),
+        SpeakeasyMetadata({ data: "json, name=ProductCode" }),
         __metadata("design:type", String)
     ], BatchMeterUsageRequest.prototype, "productCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=UsageRecords", elemType: shared.UsageRecord }),
+        SpeakeasyMetadata({ data: "json, name=UsageRecords", elemType: UsageRecord }),
         __metadata("design:type", Array)
     ], BatchMeterUsageRequest.prototype, "usageRecords", void 0);
     return BatchMeterUsageRequest;

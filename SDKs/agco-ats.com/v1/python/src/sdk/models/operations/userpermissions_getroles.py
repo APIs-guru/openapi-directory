@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class UserPermissionsGetRolesPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,14 +17,14 @@ class UserPermissionsGetRolesQueryParams:
 
 @dataclass
 class UserPermissionsGetRolesRequest:
-    path_params: UserPermissionsGetRolesPathParams = field(default=None)
-    query_params: UserPermissionsGetRolesQueryParams = field(default=None)
+    path_params: UserPermissionsGetRolesPathParams = field()
+    query_params: UserPermissionsGetRolesQueryParams = field()
     
 
 @dataclass
 class UserPermissionsGetRolesResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_models_api_error: Optional[shared.APIModelsAPIError] = field(default=None)
     api_paged_response_api_models_role_: Optional[shared.APIPagedResponseAPIModelsRole] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

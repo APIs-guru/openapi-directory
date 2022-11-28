@@ -9,6 +9,8 @@ const (
 	CohortsRangeGranularityEnumMonthly                CohortsRangeGranularityEnum = "MONTHLY"
 )
 
+// CohortsRange
+// Configures the extended reporting date range for a cohort report. Specifies an offset duration to follow the cohorts over.
 type CohortsRange struct {
 	EndOffset   *int32                       `json:"endOffset,omitempty"`
 	Granularity *CohortsRangeGranularityEnum `json:"granularity,omitempty"`

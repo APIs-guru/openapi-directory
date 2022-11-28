@@ -1,21 +1,21 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import quotastatus
-from . import quotastatus
-from . import quotastatus
-from . import quotastatus
-from . import quotastatus
-from . import quotastatus
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class PropertyQuota:
-    concurrent_requests: Optional[quotastatus.QuotaStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'concurrentRequests' }})
-    potentially_thresholded_requests_per_hour: Optional[quotastatus.QuotaStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'potentiallyThresholdedRequestsPerHour' }})
-    server_errors_per_project_per_hour: Optional[quotastatus.QuotaStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'serverErrorsPerProjectPerHour' }})
-    tokens_per_day: Optional[quotastatus.QuotaStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tokensPerDay' }})
-    tokens_per_hour: Optional[quotastatus.QuotaStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tokensPerHour' }})
-    tokens_per_project_per_hour: Optional[quotastatus.QuotaStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tokensPerProjectPerHour' }})
+    r"""PropertyQuota
+    Current state of all quotas for this Analytics Property. If any quota for a property is exhausted, all requests to that property will return Resource Exhausted errors.
+    """
+    
+    concurrent_requests: Optional[QuotaStatus] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('concurrentRequests') }})
+    potentially_thresholded_requests_per_hour: Optional[QuotaStatus] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('potentiallyThresholdedRequestsPerHour') }})
+    server_errors_per_project_per_hour: Optional[QuotaStatus] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('serverErrorsPerProjectPerHour') }})
+    tokens_per_day: Optional[QuotaStatus] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tokensPerDay') }})
+    tokens_per_hour: Optional[QuotaStatus] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tokensPerHour') }})
+    tokens_per_project_per_hour: Optional[QuotaStatus] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tokensPerProjectPerHour') }})
     

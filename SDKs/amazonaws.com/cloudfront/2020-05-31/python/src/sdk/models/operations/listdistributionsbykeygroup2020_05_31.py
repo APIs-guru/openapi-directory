@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
 
 
 @dataclass
 class ListDistributionsByKeyGroup20200531PathParams:
-    key_group_id: str = field(default=None, metadata={'path_param': { 'field_name': 'KeyGroupId', 'style': 'simple', 'explode': False }})
+    key_group_id: str = field(metadata={'path_param': { 'field_name': 'KeyGroupId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,14 +29,14 @@ class ListDistributionsByKeyGroup20200531Headers:
 
 @dataclass
 class ListDistributionsByKeyGroup20200531Request:
-    path_params: ListDistributionsByKeyGroup20200531PathParams = field(default=None)
-    query_params: ListDistributionsByKeyGroup20200531QueryParams = field(default=None)
-    headers: ListDistributionsByKeyGroup20200531Headers = field(default=None)
+    headers: ListDistributionsByKeyGroup20200531Headers = field()
+    path_params: ListDistributionsByKeyGroup20200531PathParams = field()
+    query_params: ListDistributionsByKeyGroup20200531QueryParams = field()
     
 
 @dataclass
 class ListDistributionsByKeyGroup20200531Response:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { RecommendationSourceTypeEnum } from "./recommendationsourcetypeenum";
 /**
  * Describes the source of a recommendation, such as an Amazon EC2 instance or Auto Scaling group.

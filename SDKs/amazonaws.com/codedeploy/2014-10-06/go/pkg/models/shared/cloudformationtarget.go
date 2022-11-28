@@ -4,6 +4,9 @@ import (
 	"time"
 )
 
+// CloudFormationTarget
+//
+//	Information about the target to be updated by an AWS CloudFormation blue/green deployment. This target type is used for all deployments initiated by a CloudFormation stack update.
 type CloudFormationTarget struct {
 	DeploymentID        *string           `json:"deploymentId,omitempty"`
 	LastUpdatedAt       *time.Time        `json:"lastUpdatedAt,omitempty"`

@@ -1,16 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AppValidationConfiguration } from "./appvalidationconfiguration";
 import { ServerGroupValidationConfiguration } from "./servergroupvalidationconfiguration";
 
 
+
 export class PutAppValidationConfigurationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=appId" })
+  @SpeakeasyMetadata({ data: "json, name=appId" })
   appId: string;
 
-  @Metadata({ data: "json, name=appValidationConfigurations", elemType: shared.AppValidationConfiguration })
+  @SpeakeasyMetadata({ data: "json, name=appValidationConfigurations", elemType: AppValidationConfiguration })
   appValidationConfigurations?: AppValidationConfiguration[];
 
-  @Metadata({ data: "json, name=serverGroupValidationConfigurations", elemType: shared.ServerGroupValidationConfiguration })
+  @SpeakeasyMetadata({ data: "json, name=serverGroupValidationConfigurations", elemType: ServerGroupValidationConfiguration })
   serverGroupValidationConfigurations?: ServerGroupValidationConfiguration[];
 }

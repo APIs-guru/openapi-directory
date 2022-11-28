@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LinkAttributeUpdate } from "./linkattributeupdate";
 import { TypedLinkSpecifier } from "./typedlinkspecifier";
+
 
 
 // BatchUpdateLinkAttributes
@@ -9,9 +9,9 @@ import { TypedLinkSpecifier } from "./typedlinkspecifier";
  * Updates a given typed link’s attributes inside a <a>BatchRead</a> operation. Attributes to be updated must not contribute to the typed link’s identity, as defined by its <code>IdentityAttributeOrder</code>. For more information, see <a>UpdateLinkAttributes</a> and <a>BatchReadRequest$Operations</a>.
 **/
 export class BatchUpdateLinkAttributes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AttributeUpdates", elemType: shared.LinkAttributeUpdate })
+  @SpeakeasyMetadata({ data: "json, name=AttributeUpdates", elemType: LinkAttributeUpdate })
   attributeUpdates: LinkAttributeUpdate[];
 
-  @Metadata({ data: "json, name=TypedLinkSpecifier" })
+  @SpeakeasyMetadata({ data: "json, name=TypedLinkSpecifier" })
   typedLinkSpecifier: TypedLinkSpecifier;
 }

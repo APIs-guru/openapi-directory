@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ResourceDataSyncItem
+// Information about a resource data sync configuration, including its current status and last successful sync.
 type ResourceDataSyncItem struct {
 	LastStatus             *LastResourceDataSyncStatusEnum  `json:"LastStatus,omitempty"`
 	LastSuccessfulSyncTime *time.Time                       `json:"LastSuccessfulSyncTime,omitempty"`

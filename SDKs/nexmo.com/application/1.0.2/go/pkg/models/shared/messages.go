@@ -20,6 +20,8 @@ type MessagesWebhooks struct {
 	HTTPMethod   MessagesWebhooksHTTPMethodEnum   `json:"http_method"`
 }
 
+// Messages
+// The Nexmo product that you access with this application.
 type Messages struct {
 	Webhooks []MessagesWebhooks `json:"webhooks,omitempty"`
 }

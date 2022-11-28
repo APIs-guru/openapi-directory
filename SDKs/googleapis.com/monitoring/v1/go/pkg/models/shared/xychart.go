@@ -1,5 +1,7 @@
 package shared
 
+// XyChart
+// A chart that displays data on a 2D (X and Y axes) plane.
 type XyChart struct {
 	ChartOptions      *ChartOptions `json:"chartOptions,omitempty"`
 	DataSets          []DataSet     `json:"dataSets,omitempty"`

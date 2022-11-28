@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CardObjectTypeBody } from "./cardobjecttypebody";
+
 
 
 // CardFetchBody
@@ -8,9 +8,9 @@ import { CardObjectTypeBody } from "./cardobjecttypebody";
  * Configuration for this card's data fetch request.
 **/
 export class CardFetchBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=objectTypes", elemType: shared.CardObjectTypeBody })
+  @SpeakeasyMetadata({ data: "json, name=objectTypes", elemType: CardObjectTypeBody })
   objectTypes: CardObjectTypeBody[];
 
-  @Metadata({ data: "json, name=targetUrl" })
+  @SpeakeasyMetadata({ data: "json, name=targetUrl" })
   targetUrl: string;
 }

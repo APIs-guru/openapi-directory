@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Greengrass } from "./greengrass";
 import { GreengrassV2 } from "./greengrassv2";
 // GatewayPlatform
@@ -35,11 +35,11 @@ var GatewayPlatform = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=greengrass" }),
+        SpeakeasyMetadata({ data: "json, name=greengrass" }),
         __metadata("design:type", Greengrass)
     ], GatewayPlatform.prototype, "greengrass", void 0);
     __decorate([
-        Metadata({ data: "json, name=greengrassV2" }),
+        SpeakeasyMetadata({ data: "json, name=greengrassV2" }),
         __metadata("design:type", GreengrassV2)
     ], GatewayPlatform.prototype, "greengrassV2", void 0);
     return GatewayPlatform;

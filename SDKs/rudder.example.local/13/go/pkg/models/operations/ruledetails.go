@@ -8,10 +8,6 @@ type RuleDetailsPathParams struct {
 	RuleID string `pathParam:"style=simple,explode=false,name=ruleId"`
 }
 
-type RuleDetailsRequest struct {
-	PathParams RuleDetailsPathParams
-}
-
 type RuleDetails200ApplicationJSONActionEnum string
 
 const (
@@ -33,6 +29,10 @@ type RuleDetails200ApplicationJSON struct {
 	Action RuleDetails200ApplicationJSONActionEnum `json:"action"`
 	Data   RuleDetails200ApplicationJSONData       `json:"data"`
 	Result RuleDetails200ApplicationJSONResultEnum `json:"result"`
+}
+
+type RuleDetailsRequest struct {
+	PathParams RuleDetailsPathParams
 }
 
 type RuleDetailsResponse struct {

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetAssociatedResourceResourceTypeEnum(str, Enum):
@@ -8,9 +12,9 @@ class GetAssociatedResourceResourceTypeEnum(str, Enum):
 
 @dataclass
 class GetAssociatedResourcePathParams:
-    application: str = field(default=None, metadata={'path_param': { 'field_name': 'application', 'style': 'simple', 'explode': False }})
-    resource: str = field(default=None, metadata={'path_param': { 'field_name': 'resource', 'style': 'simple', 'explode': False }})
-    resource_type: GetAssociatedResourceResourceTypeEnum = field(default=None, metadata={'path_param': { 'field_name': 'resourceType', 'style': 'simple', 'explode': False }})
+    application: str = field(metadata={'path_param': { 'field_name': 'application', 'style': 'simple', 'explode': False }})
+    resource: str = field(metadata={'path_param': { 'field_name': 'resource', 'style': 'simple', 'explode': False }})
+    resource_type: GetAssociatedResourceResourceTypeEnum = field(metadata={'path_param': { 'field_name': 'resourceType', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,16 +30,16 @@ class GetAssociatedResourceHeaders:
 
 @dataclass
 class GetAssociatedResourceRequest:
-    path_params: GetAssociatedResourcePathParams = field(default=None)
-    headers: GetAssociatedResourceHeaders = field(default=None)
+    headers: GetAssociatedResourceHeaders = field()
+    path_params: GetAssociatedResourcePathParams = field()
     
 
 @dataclass
 class GetAssociatedResourceResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_associated_resource_response: Optional[shared.GetAssociatedResourceResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

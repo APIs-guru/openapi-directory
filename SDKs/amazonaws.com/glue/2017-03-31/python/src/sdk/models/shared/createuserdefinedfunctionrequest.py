@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import userdefinedfunctioninput
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateUserDefinedFunctionRequest:
-    catalog_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CatalogId' }})
-    database_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DatabaseName' }})
-    function_input: userdefinedfunctioninput.UserDefinedFunctionInput = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FunctionInput' }})
+    database_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('DatabaseName') }})
+    function_input: UserDefinedFunctionInput = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('FunctionInput') }})
+    catalog_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CatalogId') }})
     

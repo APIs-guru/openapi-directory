@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // DpsJobInstructionDpsJobInstructionEmployer
 /**
  * The dps job instructions' employer
@@ -33,15 +33,15 @@ var DpsJobInstructionDpsJobInstructionEmployer = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=@href" }),
+        SpeakeasyMetadata({ data: "json, name=@href" }),
         __metadata("design:type", String)
     ], DpsJobInstructionDpsJobInstructionEmployer.prototype, "atHref", void 0);
     __decorate([
-        Metadata({ data: "json, name=@rel" }),
+        SpeakeasyMetadata({ data: "json, name=@rel" }),
         __metadata("design:type", String)
     ], DpsJobInstructionDpsJobInstructionEmployer.prototype, "atRel", void 0);
     __decorate([
-        Metadata({ data: "json, name=@title" }),
+        SpeakeasyMetadata({ data: "json, name=@title" }),
         __metadata("design:type", String)
     ], DpsJobInstructionDpsJobInstructionEmployer.prototype, "atTitle", void 0);
     return DpsJobInstructionDpsJobInstructionEmployer;
@@ -57,7 +57,7 @@ var DpsJobInstructionDpsJobInstructionType = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Type" }),
+        SpeakeasyMetadata({ data: "json, name=Type" }),
         __metadata("design:type", Array)
     ], DpsJobInstructionDpsJobInstructionType.prototype, "type", void 0);
     return DpsJobInstructionDpsJobInstructionType;
@@ -73,7 +73,7 @@ var DpsJobInstructionDpsJobInstructionMessage = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Message" }),
+        SpeakeasyMetadata({ data: "json, name=Message" }),
         __metadata("design:type", Array)
     ], DpsJobInstructionDpsJobInstructionMessage.prototype, "message", void 0);
     return DpsJobInstructionDpsJobInstructionMessage;
@@ -85,31 +85,31 @@ var DpsJobInstructionDpsJobInstruction = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Apply" }),
+        SpeakeasyMetadata({ data: "json, name=Apply" }),
         __metadata("design:type", Boolean)
     ], DpsJobInstructionDpsJobInstruction.prototype, "apply", void 0);
     __decorate([
-        Metadata({ data: "json, name=Employer" }),
+        SpeakeasyMetadata({ data: "json, name=Employer" }),
         __metadata("design:type", DpsJobInstructionDpsJobInstructionEmployer)
     ], DpsJobInstructionDpsJobInstruction.prototype, "employer", void 0);
     __decorate([
-        Metadata({ data: "json, name=FromDate" }),
+        SpeakeasyMetadata({ data: "json, name=FromDate" }),
         __metadata("design:type", Date)
     ], DpsJobInstructionDpsJobInstruction.prototype, "fromDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=HoldingDate" }),
+        SpeakeasyMetadata({ data: "json, name=HoldingDate" }),
         __metadata("design:type", Date)
     ], DpsJobInstructionDpsJobInstruction.prototype, "holdingDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=MessageTypes" }),
+        SpeakeasyMetadata({ data: "json, name=MessageTypes" }),
         __metadata("design:type", DpsJobInstructionDpsJobInstructionType)
     ], DpsJobInstructionDpsJobInstruction.prototype, "messageTypes", void 0);
     __decorate([
-        Metadata({ data: "json, name=MessagesToProcess" }),
+        SpeakeasyMetadata({ data: "json, name=MessagesToProcess" }),
         __metadata("design:type", DpsJobInstructionDpsJobInstructionMessage)
     ], DpsJobInstructionDpsJobInstruction.prototype, "messagesToProcess", void 0);
     __decorate([
-        Metadata({ data: "json, name=Retrieve" }),
+        SpeakeasyMetadata({ data: "json, name=Retrieve" }),
         __metadata("design:type", Boolean)
     ], DpsJobInstructionDpsJobInstruction.prototype, "retrieve", void 0);
     return DpsJobInstructionDpsJobInstruction;
@@ -121,7 +121,7 @@ var DpsJobInstruction = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DpsJobInstruction" }),
+        SpeakeasyMetadata({ data: "json, name=DpsJobInstruction" }),
         __metadata("design:type", DpsJobInstructionDpsJobInstruction)
     ], DpsJobInstruction.prototype, "dpsJobInstruction", void 0);
     return DpsJobInstruction;

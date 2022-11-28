@@ -1,5 +1,7 @@
 package shared
 
+// ExecutionStatus
+// ExecutionStatus represents the current state of an Execution.
 type ExecutionStatus struct {
 	CancelledCount     *int32                      `json:"cancelledCount,omitempty"`
 	CompletionTime     *string                     `json:"completionTime,omitempty"`

@@ -4,17 +4,17 @@ from typing import List,Optional
 
 @dataclass
 class GetSpotListIdsByIDPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetSpotListIdsByIDRequest:
-    path_params: GetSpotListIdsByIDPathParams = field(default=None)
+    path_params: GetSpotListIdsByIDPathParams = field()
     
 
 @dataclass
 class GetSpotListIdsByIDResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_of_item_ids: Optional[List[str]] = field(default=None)
-    status_code: int = field(default=None)
     

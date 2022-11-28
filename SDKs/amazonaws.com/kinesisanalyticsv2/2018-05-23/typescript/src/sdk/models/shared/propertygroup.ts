@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PropertyGroup
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Property key-value pairs passed into an application.
 **/
 export class PropertyGroup extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PropertyGroupId" })
+  @SpeakeasyMetadata({ data: "json, name=PropertyGroupId" })
   propertyGroupId: string;
 
-  @Metadata({ data: "json, name=PropertyMap" })
+  @SpeakeasyMetadata({ data: "json, name=PropertyMap" })
   propertyMap: Map<string, string>;
 }

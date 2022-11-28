@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class StoragetransferGoogleServiceAccountsGetPathParams:
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class StoragetransferGoogleServiceAccountsGetQueryParams:
 
 @dataclass
 class StoragetransferGoogleServiceAccountsGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class StoragetransferGoogleServiceAccountsGetRequest:
-    path_params: StoragetransferGoogleServiceAccountsGetPathParams = field(default=None)
-    query_params: StoragetransferGoogleServiceAccountsGetQueryParams = field(default=None)
-    security: StoragetransferGoogleServiceAccountsGetSecurity = field(default=None)
+    path_params: StoragetransferGoogleServiceAccountsGetPathParams = field()
+    query_params: StoragetransferGoogleServiceAccountsGetQueryParams = field()
+    security: StoragetransferGoogleServiceAccountsGetSecurity = field()
     
 
 @dataclass
 class StoragetransferGoogleServiceAccountsGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_service_account: Optional[shared.GoogleServiceAccount] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GmailUsersSettingsSendAsSmimeInfoInsertPathParams:
-    send_as_email: str = field(default=None, metadata={'path_param': { 'field_name': 'sendAsEmail', 'style': 'simple', 'explode': False }})
-    user_id: str = field(default=None, metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
+    send_as_email: str = field(metadata={'path_param': { 'field_name': 'sendAsEmail', 'style': 'simple', 'explode': False }})
+    user_id: str = field(metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,14 +27,14 @@ class GmailUsersSettingsSendAsSmimeInfoInsertQueryParams:
 
 @dataclass
 class GmailUsersSettingsSendAsSmimeInfoInsertSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GmailUsersSettingsSendAsSmimeInfoInsertSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -44,15 +45,15 @@ class GmailUsersSettingsSendAsSmimeInfoInsertSecurity:
 
 @dataclass
 class GmailUsersSettingsSendAsSmimeInfoInsertRequest:
-    path_params: GmailUsersSettingsSendAsSmimeInfoInsertPathParams = field(default=None)
-    query_params: GmailUsersSettingsSendAsSmimeInfoInsertQueryParams = field(default=None)
+    path_params: GmailUsersSettingsSendAsSmimeInfoInsertPathParams = field()
+    query_params: GmailUsersSettingsSendAsSmimeInfoInsertQueryParams = field()
+    security: GmailUsersSettingsSendAsSmimeInfoInsertSecurity = field()
     request: Optional[shared.SmimeInfo] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: GmailUsersSettingsSendAsSmimeInfoInsertSecurity = field(default=None)
     
 
 @dataclass
 class GmailUsersSettingsSendAsSmimeInfoInsertResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     smime_info: Optional[shared.SmimeInfo] = field(default=None)
-    status_code: int = field(default=None)
     

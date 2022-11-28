@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ServicePrincipalsUpdatePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=objectId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=objectId" })
   objectId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=tenantID" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=tenantID" })
   tenantId: string;
 }
 
 
 export class ServicePrincipalsUpdateQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=api-version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api-version" })
   apiVersion: string;
 }
 
 
 export class ServicePrincipalsUpdateRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   servicePrincipalUpdateParameters?: shared.ServicePrincipalUpdateParameters;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   servicePrincipalUpdateParameters1?: shared.ServicePrincipalUpdateParameters;
 }
 
 
 export class ServicePrincipalsUpdateRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ServicePrincipalsUpdatePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ServicePrincipalsUpdateQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request: ServicePrincipalsUpdateRequests;
 }
 
 
 export class ServicePrincipalsUpdateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   graphError?: shared.GraphError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CheckpointConfiguration } from "./checkpointconfiguration";
 import { MonitoringConfiguration } from "./monitoringconfiguration";
 import { ParallelismConfiguration } from "./parallelismconfiguration";
+
 
 
 // FlinkApplicationConfiguration
@@ -9,12 +10,12 @@ import { ParallelismConfiguration } from "./parallelismconfiguration";
  * Describes configuration parameters for a Flink-based Kinesis Data Analytics application or a Studio notebook.
 **/
 export class FlinkApplicationConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CheckpointConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=CheckpointConfiguration" })
   checkpointConfiguration?: CheckpointConfiguration;
 
-  @Metadata({ data: "json, name=MonitoringConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=MonitoringConfiguration" })
   monitoringConfiguration?: MonitoringConfiguration;
 
-  @Metadata({ data: "json, name=ParallelismConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=ParallelismConfiguration" })
   parallelismConfiguration?: ParallelismConfiguration;
 }

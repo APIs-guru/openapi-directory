@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -20,20 +21,20 @@ class HomegraphDevicesSyncQueryParams:
 
 @dataclass
 class HomegraphDevicesSyncSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class HomegraphDevicesSyncRequest:
-    query_params: HomegraphDevicesSyncQueryParams = field(default=None)
+    query_params: HomegraphDevicesSyncQueryParams = field()
+    security: HomegraphDevicesSyncSecurity = field()
     request: Optional[shared.SyncRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: HomegraphDevicesSyncSecurity = field(default=None)
     
 
 @dataclass
 class HomegraphDevicesSyncResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     sync_response: Optional[shared.SyncResponse] = field(default=None)
     

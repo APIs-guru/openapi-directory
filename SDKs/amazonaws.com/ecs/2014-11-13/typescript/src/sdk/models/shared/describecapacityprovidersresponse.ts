@@ -1,16 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CapacityProvider } from "./capacityprovider";
 import { Failure } from "./failure";
 
 
+
 export class DescribeCapacityProvidersResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=capacityProviders", elemType: shared.CapacityProvider })
+  @SpeakeasyMetadata({ data: "json, name=capacityProviders", elemType: CapacityProvider })
   capacityProviders?: CapacityProvider[];
 
-  @Metadata({ data: "json, name=failures", elemType: shared.Failure })
+  @SpeakeasyMetadata({ data: "json, name=failures", elemType: Failure })
   failures?: Failure[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

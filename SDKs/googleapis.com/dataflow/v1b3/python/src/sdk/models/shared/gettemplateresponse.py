@@ -1,9 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import templatemetadata
-from . import runtimemetadata
-from . import status
+from sdk import utils
+from . import *
 
 class GetTemplateResponseTemplateTypeEnum(str, Enum):
     UNKNOWN = "UNKNOWN"
@@ -14,8 +14,12 @@ class GetTemplateResponseTemplateTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GetTemplateResponse:
-    metadata: Optional[templatemetadata.TemplateMetadata] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadata' }})
-    runtime_metadata: Optional[runtimemetadata.RuntimeMetadata] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'runtimeMetadata' }})
-    status: Optional[status.Status] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    template_type: Optional[GetTemplateResponseTemplateTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'templateType' }})
+    r"""GetTemplateResponse
+    The response to a GetTemplate request.
+    """
+    
+    metadata: Optional[TemplateMetadata] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('metadata') }})
+    runtime_metadata: Optional[RuntimeMetadata] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('runtimeMetadata') }})
+    status: Optional[Status] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    template_type: Optional[GetTemplateResponseTemplateTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('templateType') }})
     

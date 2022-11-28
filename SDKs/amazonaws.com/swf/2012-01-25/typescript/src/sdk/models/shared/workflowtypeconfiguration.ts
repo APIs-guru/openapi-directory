@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ChildPolicyEnum } from "./childpolicyenum";
 import { TaskList } from "./tasklist";
+
 
 
 // WorkflowTypeConfiguration
@@ -8,21 +9,21 @@ import { TaskList } from "./tasklist";
  * The configuration settings of a workflow type.
 **/
 export class WorkflowTypeConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=defaultChildPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=defaultChildPolicy" })
   defaultChildPolicy?: ChildPolicyEnum;
 
-  @Metadata({ data: "json, name=defaultExecutionStartToCloseTimeout" })
+  @SpeakeasyMetadata({ data: "json, name=defaultExecutionStartToCloseTimeout" })
   defaultExecutionStartToCloseTimeout?: string;
 
-  @Metadata({ data: "json, name=defaultLambdaRole" })
+  @SpeakeasyMetadata({ data: "json, name=defaultLambdaRole" })
   defaultLambdaRole?: string;
 
-  @Metadata({ data: "json, name=defaultTaskList" })
+  @SpeakeasyMetadata({ data: "json, name=defaultTaskList" })
   defaultTaskList?: TaskList;
 
-  @Metadata({ data: "json, name=defaultTaskPriority" })
+  @SpeakeasyMetadata({ data: "json, name=defaultTaskPriority" })
   defaultTaskPriority?: string;
 
-  @Metadata({ data: "json, name=defaultTaskStartToCloseTimeout" })
+  @SpeakeasyMetadata({ data: "json, name=defaultTaskStartToCloseTimeout" })
   defaultTaskStartToCloseTimeout?: string;
 }

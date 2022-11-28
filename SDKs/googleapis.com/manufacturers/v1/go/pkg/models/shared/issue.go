@@ -17,6 +17,8 @@ const (
 	IssueSeverityEnumInfo                IssueSeverityEnum = "INFO"
 )
 
+// Issue
+// Product issue.
 type Issue struct {
 	Attribute   *string              `json:"attribute,omitempty"`
 	Description *string              `json:"description,omitempty"`

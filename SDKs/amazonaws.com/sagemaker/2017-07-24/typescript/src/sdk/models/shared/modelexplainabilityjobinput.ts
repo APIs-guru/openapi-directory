@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EndpointInput } from "./endpointinput";
+
 
 
 // ModelExplainabilityJobInput
@@ -7,6 +8,6 @@ import { EndpointInput } from "./endpointinput";
  * Inputs for the model explainability job.
 **/
 export class ModelExplainabilityJobInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EndpointInput" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointInput" })
   endpointInput: EndpointInput;
 }

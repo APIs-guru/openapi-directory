@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetProgrammesByChannelPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=channel" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=channel" })
   channel: string;
 }
 
 
 export class GetProgrammesByChannelQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=availability" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=availability" })
   availability: shared.AvailabilityEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=lang" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lang" })
   lang: shared.LangEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=rights" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=rights" })
   rights: shared.RightsEnum;
 }
 
 
 export class GetProgrammesByChannelRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetProgrammesByChannelPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetProgrammesByChannelQueryParams;
 }
 
 
 export class GetProgrammesByChannelResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   ibl?: any;
 }

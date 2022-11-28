@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RemoveCustomRoutingEndpointsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EndpointGroupArn" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointGroupArn" })
   endpointGroupArn: string;
 
-  @Metadata({ data: "json, name=EndpointIds" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointIds" })
   endpointIds: string[];
 }

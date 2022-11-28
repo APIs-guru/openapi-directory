@@ -1,6 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AutoRenewingPlan } from "./autorenewingplan";
+import { OfferDetails } from "./offerdetails";
 import { PrepaidPlan } from "./prepaidplan";
+
 
 
 // SubscriptionPurchaseLineItem
@@ -8,15 +10,18 @@ import { PrepaidPlan } from "./prepaidplan";
  * Item-level info for a subscription purchase.
 **/
 export class SubscriptionPurchaseLineItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=autoRenewingPlan" })
+  @SpeakeasyMetadata({ data: "json, name=autoRenewingPlan" })
   autoRenewingPlan?: AutoRenewingPlan;
 
-  @Metadata({ data: "json, name=expiryTime" })
+  @SpeakeasyMetadata({ data: "json, name=expiryTime" })
   expiryTime?: string;
 
-  @Metadata({ data: "json, name=prepaidPlan" })
+  @SpeakeasyMetadata({ data: "json, name=offerDetails" })
+  offerDetails?: OfferDetails;
+
+  @SpeakeasyMetadata({ data: "json, name=prepaidPlan" })
   prepaidPlan?: PrepaidPlan;
 
-  @Metadata({ data: "json, name=productId" })
+  @SpeakeasyMetadata({ data: "json, name=productId" })
   productId?: string;
 }

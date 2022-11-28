@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GoogleFirestoreAdminV1beta2Field } from "./googlefirestoreadminv1beta2field";
 /**
  * The response for FirestoreAdmin.ListFields.

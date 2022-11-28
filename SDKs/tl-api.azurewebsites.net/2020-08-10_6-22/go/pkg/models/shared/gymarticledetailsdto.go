@@ -1,5 +1,8 @@
 package shared
 
+// GymArticleDetailsDto
+// The GymArticleDetailsDTO Class.
+// Contains fields of GymArticleDetails DTO in application.
 type GymArticleDetailsDto struct {
 	ArticleID        *int32   `json:"articleId,omitempty"`
 	AvailableQty     *float64 `json:"availableQty,omitempty"`

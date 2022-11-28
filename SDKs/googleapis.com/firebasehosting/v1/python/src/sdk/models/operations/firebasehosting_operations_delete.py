@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class FirebasehostingOperationsDeletePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,13 +26,13 @@ class FirebasehostingOperationsDeleteQueryParams:
 
 @dataclass
 class FirebasehostingOperationsDeleteRequest:
-    path_params: FirebasehostingOperationsDeletePathParams = field(default=None)
-    query_params: FirebasehostingOperationsDeleteQueryParams = field(default=None)
+    path_params: FirebasehostingOperationsDeletePathParams = field()
+    query_params: FirebasehostingOperationsDeleteQueryParams = field()
     
 
 @dataclass
 class FirebasehostingOperationsDeleteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

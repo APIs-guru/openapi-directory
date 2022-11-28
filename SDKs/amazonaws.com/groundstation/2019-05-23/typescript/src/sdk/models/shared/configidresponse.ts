@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConfigCapabilityTypeEnum } from "./configcapabilitytypeenum";
+
 
 
 // ConfigIdResponse
@@ -7,12 +8,12 @@ import { ConfigCapabilityTypeEnum } from "./configcapabilitytypeenum";
  * <p/>
 **/
 export class ConfigIdResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=configArn" })
+  @SpeakeasyMetadata({ data: "json, name=configArn" })
   configArn?: string;
 
-  @Metadata({ data: "json, name=configId" })
+  @SpeakeasyMetadata({ data: "json, name=configId" })
   configId?: string;
 
-  @Metadata({ data: "json, name=configType" })
+  @SpeakeasyMetadata({ data: "json, name=configType" })
   configType?: ConfigCapabilityTypeEnum;
 }

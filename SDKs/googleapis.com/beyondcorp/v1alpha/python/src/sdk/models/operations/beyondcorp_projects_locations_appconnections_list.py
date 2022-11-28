@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class BeyondcorpProjectsLocationsAppConnectionsListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -29,20 +30,20 @@ class BeyondcorpProjectsLocationsAppConnectionsListQueryParams:
 
 @dataclass
 class BeyondcorpProjectsLocationsAppConnectionsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BeyondcorpProjectsLocationsAppConnectionsListRequest:
-    path_params: BeyondcorpProjectsLocationsAppConnectionsListPathParams = field(default=None)
-    query_params: BeyondcorpProjectsLocationsAppConnectionsListQueryParams = field(default=None)
-    security: BeyondcorpProjectsLocationsAppConnectionsListSecurity = field(default=None)
+    path_params: BeyondcorpProjectsLocationsAppConnectionsListPathParams = field()
+    query_params: BeyondcorpProjectsLocationsAppConnectionsListQueryParams = field()
+    security: BeyondcorpProjectsLocationsAppConnectionsListSecurity = field()
     
 
 @dataclass
 class BeyondcorpProjectsLocationsAppConnectionsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_beyondcorp_appconnections_v1alpha_list_app_connections_response: Optional[shared.GoogleCloudBeyondcorpAppconnectionsV1alphaListAppConnectionsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

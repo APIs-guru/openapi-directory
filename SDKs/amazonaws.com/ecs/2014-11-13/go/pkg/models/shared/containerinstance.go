@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ContainerInstance
+// An EC2 instance that is running the Amazon ECS agent and has been registered with a cluster.
 type ContainerInstance struct {
 	AgentConnected       *bool                  `json:"agentConnected,omitempty"`
 	AgentUpdateStatus    *AgentUpdateStatusEnum `json:"agentUpdateStatus,omitempty"`

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // SearchRangeRequest
 /**
  * Request to search for an unused range within allocated ranges.
@@ -33,11 +33,11 @@ var SearchRangeRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ipPrefixLength" }),
+        SpeakeasyMetadata({ data: "json, name=ipPrefixLength" }),
         __metadata("design:type", Number)
     ], SearchRangeRequest.prototype, "ipPrefixLength", void 0);
     __decorate([
-        Metadata({ data: "json, name=network" }),
+        SpeakeasyMetadata({ data: "json, name=network" }),
         __metadata("design:type", String)
     ], SearchRangeRequest.prototype, "network", void 0);
     return SearchRangeRequest;

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LoggingVariantConfig } from "./loggingvariantconfig";
+
 
 
 // NodePoolLoggingConfig
@@ -7,6 +8,6 @@ import { LoggingVariantConfig } from "./loggingvariantconfig";
  * NodePoolLoggingConfig specifies logging configuration for nodepools.
 **/
 export class NodePoolLoggingConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=variantConfig" })
+  @SpeakeasyMetadata({ data: "json, name=variantConfig" })
   variantConfig?: LoggingVariantConfig;
 }

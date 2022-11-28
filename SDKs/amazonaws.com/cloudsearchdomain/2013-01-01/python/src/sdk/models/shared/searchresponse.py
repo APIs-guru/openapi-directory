@@ -1,17 +1,19 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import bucketinfo
-from . import hits
-from . import fieldstats
-from . import searchstatus
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SearchResponse:
-    facets: Optional[dict[str, bucketinfo.BucketInfo]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'facets' }})
-    hits: Optional[hits.Hits] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'hits' }})
-    stats: Optional[dict[str, fieldstats.FieldStats]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stats' }})
-    status: Optional[searchstatus.SearchStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    r"""SearchResponse
+    The result of a <code>Search</code> request. Contains the documents that match the specified search criteria and any requested fields, highlights, and facet information.
+    """
+    
+    facets: Optional[dict[str, BucketInfo]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('facets') }})
+    hits: Optional[Hits] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('hits') }})
+    stats: Optional[dict[str, FieldStats]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('stats') }})
+    status: Optional[SearchStatus] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     

@@ -11,11 +11,6 @@ type BookingPricingmatrixRequestBody struct {
 	TourGradeCode *string `json:"tourGradeCode,omitempty"`
 }
 
-type BookingPricingmatrixRequest struct {
-	Headers BookingPricingmatrixHeaders
-	Request *BookingPricingmatrixRequestBody `request:"mediaType=application/json"`
-}
-
 type BookingPricingmatrix200ApplicationJSONDataAgeBandPricesPrices struct {
 	CurrencyCode                      *string  `json:"currencyCode,omitempty"`
 	MerchantNetPrice                  *float64 `json:"merchantNetPrice,omitempty"`
@@ -55,6 +50,11 @@ type BookingPricingmatrix200ApplicationJSON struct {
 	Success          *bool                                        `json:"success,omitempty"`
 	TotalCount       *int64                                       `json:"totalCount,omitempty"`
 	Vmid             *string                                      `json:"vmid,omitempty"`
+}
+
+type BookingPricingmatrixRequest struct {
+	Headers BookingPricingmatrixHeaders
+	Request *BookingPricingmatrixRequestBody `request:"mediaType=application/json"`
 }
 
 type BookingPricingmatrixResponse struct {

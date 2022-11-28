@@ -1,5 +1,7 @@
 package shared
 
+// Source
+// Source describes the location of the source used for the build.
 type Source struct {
 	AdditionalContexts    []GoogleDevtoolsContaineranalysisV1alpha1SourceContext `json:"additionalContexts,omitempty"`
 	ArtifactStorageSource *StorageSource                                         `json:"artifactStorageSource,omitempty"`

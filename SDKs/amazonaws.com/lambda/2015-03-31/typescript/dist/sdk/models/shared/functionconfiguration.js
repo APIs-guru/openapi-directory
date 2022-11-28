@@ -22,13 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeadLetterConfig } from "./deadletterconfig";
 import { EnvironmentResponse } from "./environmentresponse";
+import { FileSystemConfig } from "./filesystemconfig";
 import { ImageConfigResponse } from "./imageconfigresponse";
 import { LastUpdateStatusEnum } from "./lastupdatestatusenum";
 import { LastUpdateStatusReasonCodeEnum } from "./lastupdatestatusreasoncodeenum";
+import { Layer } from "./layer";
 import { PackageTypeEnum } from "./packagetypeenum";
 import { RuntimeEnum } from "./runtimeenum";
 import { StateEnum } from "./stateenum";
@@ -45,127 +46,127 @@ var FunctionConfiguration = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CodeSha256" }),
+        SpeakeasyMetadata({ data: "json, name=CodeSha256" }),
         __metadata("design:type", String)
     ], FunctionConfiguration.prototype, "codeSha256", void 0);
     __decorate([
-        Metadata({ data: "json, name=CodeSize" }),
+        SpeakeasyMetadata({ data: "json, name=CodeSize" }),
         __metadata("design:type", Number)
     ], FunctionConfiguration.prototype, "codeSize", void 0);
     __decorate([
-        Metadata({ data: "json, name=DeadLetterConfig" }),
+        SpeakeasyMetadata({ data: "json, name=DeadLetterConfig" }),
         __metadata("design:type", DeadLetterConfig)
     ], FunctionConfiguration.prototype, "deadLetterConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], FunctionConfiguration.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=Environment" }),
+        SpeakeasyMetadata({ data: "json, name=Environment" }),
         __metadata("design:type", EnvironmentResponse)
     ], FunctionConfiguration.prototype, "environment", void 0);
     __decorate([
-        Metadata({ data: "json, name=FileSystemConfigs", elemType: shared.FileSystemConfig }),
+        SpeakeasyMetadata({ data: "json, name=FileSystemConfigs", elemType: FileSystemConfig }),
         __metadata("design:type", Array)
     ], FunctionConfiguration.prototype, "fileSystemConfigs", void 0);
     __decorate([
-        Metadata({ data: "json, name=FunctionArn" }),
+        SpeakeasyMetadata({ data: "json, name=FunctionArn" }),
         __metadata("design:type", String)
     ], FunctionConfiguration.prototype, "functionArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=FunctionName" }),
+        SpeakeasyMetadata({ data: "json, name=FunctionName" }),
         __metadata("design:type", String)
     ], FunctionConfiguration.prototype, "functionName", void 0);
     __decorate([
-        Metadata({ data: "json, name=Handler" }),
+        SpeakeasyMetadata({ data: "json, name=Handler" }),
         __metadata("design:type", String)
     ], FunctionConfiguration.prototype, "handler", void 0);
     __decorate([
-        Metadata({ data: "json, name=ImageConfigResponse" }),
+        SpeakeasyMetadata({ data: "json, name=ImageConfigResponse" }),
         __metadata("design:type", ImageConfigResponse)
     ], FunctionConfiguration.prototype, "imageConfigResponse", void 0);
     __decorate([
-        Metadata({ data: "json, name=KMSKeyArn" }),
+        SpeakeasyMetadata({ data: "json, name=KMSKeyArn" }),
         __metadata("design:type", String)
     ], FunctionConfiguration.prototype, "kmsKeyArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastModified" }),
+        SpeakeasyMetadata({ data: "json, name=LastModified" }),
         __metadata("design:type", String)
     ], FunctionConfiguration.prototype, "lastModified", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastUpdateStatus" }),
+        SpeakeasyMetadata({ data: "json, name=LastUpdateStatus" }),
         __metadata("design:type", String)
     ], FunctionConfiguration.prototype, "lastUpdateStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastUpdateStatusReason" }),
+        SpeakeasyMetadata({ data: "json, name=LastUpdateStatusReason" }),
         __metadata("design:type", String)
     ], FunctionConfiguration.prototype, "lastUpdateStatusReason", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastUpdateStatusReasonCode" }),
+        SpeakeasyMetadata({ data: "json, name=LastUpdateStatusReasonCode" }),
         __metadata("design:type", String)
     ], FunctionConfiguration.prototype, "lastUpdateStatusReasonCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=Layers", elemType: shared.Layer }),
+        SpeakeasyMetadata({ data: "json, name=Layers", elemType: Layer }),
         __metadata("design:type", Array)
     ], FunctionConfiguration.prototype, "layers", void 0);
     __decorate([
-        Metadata({ data: "json, name=MasterArn" }),
+        SpeakeasyMetadata({ data: "json, name=MasterArn" }),
         __metadata("design:type", String)
     ], FunctionConfiguration.prototype, "masterArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=MemorySize" }),
+        SpeakeasyMetadata({ data: "json, name=MemorySize" }),
         __metadata("design:type", Number)
     ], FunctionConfiguration.prototype, "memorySize", void 0);
     __decorate([
-        Metadata({ data: "json, name=PackageType" }),
+        SpeakeasyMetadata({ data: "json, name=PackageType" }),
         __metadata("design:type", String)
     ], FunctionConfiguration.prototype, "packageType", void 0);
     __decorate([
-        Metadata({ data: "json, name=RevisionId" }),
+        SpeakeasyMetadata({ data: "json, name=RevisionId" }),
         __metadata("design:type", String)
     ], FunctionConfiguration.prototype, "revisionId", void 0);
     __decorate([
-        Metadata({ data: "json, name=Role" }),
+        SpeakeasyMetadata({ data: "json, name=Role" }),
         __metadata("design:type", String)
     ], FunctionConfiguration.prototype, "role", void 0);
     __decorate([
-        Metadata({ data: "json, name=Runtime" }),
+        SpeakeasyMetadata({ data: "json, name=Runtime" }),
         __metadata("design:type", String)
     ], FunctionConfiguration.prototype, "runtime", void 0);
     __decorate([
-        Metadata({ data: "json, name=SigningJobArn" }),
+        SpeakeasyMetadata({ data: "json, name=SigningJobArn" }),
         __metadata("design:type", String)
     ], FunctionConfiguration.prototype, "signingJobArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=SigningProfileVersionArn" }),
+        SpeakeasyMetadata({ data: "json, name=SigningProfileVersionArn" }),
         __metadata("design:type", String)
     ], FunctionConfiguration.prototype, "signingProfileVersionArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=State" }),
+        SpeakeasyMetadata({ data: "json, name=State" }),
         __metadata("design:type", String)
     ], FunctionConfiguration.prototype, "state", void 0);
     __decorate([
-        Metadata({ data: "json, name=StateReason" }),
+        SpeakeasyMetadata({ data: "json, name=StateReason" }),
         __metadata("design:type", String)
     ], FunctionConfiguration.prototype, "stateReason", void 0);
     __decorate([
-        Metadata({ data: "json, name=StateReasonCode" }),
+        SpeakeasyMetadata({ data: "json, name=StateReasonCode" }),
         __metadata("design:type", String)
     ], FunctionConfiguration.prototype, "stateReasonCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=Timeout" }),
+        SpeakeasyMetadata({ data: "json, name=Timeout" }),
         __metadata("design:type", Number)
     ], FunctionConfiguration.prototype, "timeout", void 0);
     __decorate([
-        Metadata({ data: "json, name=TracingConfig" }),
+        SpeakeasyMetadata({ data: "json, name=TracingConfig" }),
         __metadata("design:type", TracingConfigResponse)
     ], FunctionConfiguration.prototype, "tracingConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=Version" }),
+        SpeakeasyMetadata({ data: "json, name=Version" }),
         __metadata("design:type", String)
     ], FunctionConfiguration.prototype, "version", void 0);
     __decorate([
-        Metadata({ data: "json, name=VpcConfig" }),
+        SpeakeasyMetadata({ data: "json, name=VpcConfig" }),
         __metadata("design:type", VpcConfigResponse)
     ], FunctionConfiguration.prototype, "vpcConfig", void 0);
     return FunctionConfiguration;

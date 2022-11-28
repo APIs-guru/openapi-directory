@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { CreatePrinterRequest } from "./createprinterrequest";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { CreatePrinterRequestInput } from "./createprinterrequest";
 
 
-// BatchCreatePrintersRequest
+
+// BatchCreatePrintersRequestInput
 /** 
  * Request for adding new printers in batch.
 **/
-export class BatchCreatePrintersRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=requests", elemType: shared.CreatePrinterRequest })
-  requests?: CreatePrinterRequest[];
+export class BatchCreatePrintersRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=requests", elemType: CreatePrinterRequestInput })
+  requests?: CreatePrinterRequestInput[];
 }

@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Bin } from "./bin";
 import { Percentiles } from "./percentiles";
+
 
 
 // Metric
@@ -9,9 +9,9 @@ import { Percentiles } from "./percentiles";
  * A `metric` is a set of user experience data for a single web performance metric, like "first contentful paint". It contains a summary histogram of real world Chrome usage as a series of `bins`.
 **/
 export class Metric extends SpeakeasyBase {
-  @Metadata({ data: "json, name=histogram", elemType: shared.Bin })
+  @SpeakeasyMetadata({ data: "json, name=histogram", elemType: Bin })
   histogram?: Bin[];
 
-  @Metadata({ data: "json, name=percentiles" })
+  @SpeakeasyMetadata({ data: "json, name=percentiles" })
   percentiles?: Percentiles;
 }

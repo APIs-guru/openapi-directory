@@ -1,29 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InvoiceSummaryAdditionalChargeSummary } from "./invoicesummaryadditionalchargesummary";
-import { Amount } from "./amount";
-import { Amount } from "./amount";
-import { Amount } from "./amount";
 import { Amount } from "./amount";
 import { Promotion } from "./promotion";
 
 
+
 export class InvoiceSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=additionalChargeSummaries", elemType: shared.InvoiceSummaryAdditionalChargeSummary })
+  @SpeakeasyMetadata({ data: "json, name=additionalChargeSummaries", elemType: InvoiceSummaryAdditionalChargeSummary })
   additionalChargeSummaries?: InvoiceSummaryAdditionalChargeSummary[];
 
-  @Metadata({ data: "json, name=customerBalance" })
+  @SpeakeasyMetadata({ data: "json, name=customerBalance" })
   customerBalance?: Amount;
 
-  @Metadata({ data: "json, name=googleBalance" })
+  @SpeakeasyMetadata({ data: "json, name=googleBalance" })
   googleBalance?: Amount;
 
-  @Metadata({ data: "json, name=merchantBalance" })
+  @SpeakeasyMetadata({ data: "json, name=merchantBalance" })
   merchantBalance?: Amount;
 
-  @Metadata({ data: "json, name=productTotal" })
+  @SpeakeasyMetadata({ data: "json, name=productTotal" })
   productTotal?: Amount;
 
-  @Metadata({ data: "json, name=promotionSummaries", elemType: shared.Promotion })
+  @SpeakeasyMetadata({ data: "json, name=promotionSummaries", elemType: Promotion })
   promotionSummaries?: Promotion[];
 }

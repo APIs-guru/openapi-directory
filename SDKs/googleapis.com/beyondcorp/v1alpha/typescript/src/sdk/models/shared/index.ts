@@ -30,8 +30,6 @@ export * from "./googlecloudbeyondcorpappconnectorsv1alphanotificationconfigclou
 export * from "./googlecloudbeyondcorpappconnectorsv1alphareportstatusrequest";
 export * from "./googlecloudbeyondcorpappconnectorsv1alpharesolveinstanceconfigresponse";
 export * from "./googlecloudbeyondcorpappconnectorsv1alpharesourceinfo";
-export * from "./googlecloudbeyondcorpnetconnectionsv1alphalistnetconnectionsresponse";
-export * from "./googlecloudbeyondcorpnetconnectionsv1alphanetconnection";
 export * from "./googlecloudbeyondcorpsaasplatforminsightsv1alphaappliedconfig";
 export * from "./googlecloudbeyondcorpsaasplatforminsightsv1alphaconfiguredinsightresponse";
 export * from "./googlecloudbeyondcorpsaasplatforminsightsv1alphacustomgrouping";
@@ -41,6 +39,8 @@ export * from "./googlecloudbeyondcorpsaasplatforminsightsv1alphainsightmetadata
 export * from "./googlecloudbeyondcorpsaasplatforminsightsv1alphalistinsightsresponse";
 export * from "./googlecloudbeyondcorpsaasplatforminsightsv1alpharow";
 export * from "./googlecloudbeyondcorpsaasplatforminsightsv1alpharowfieldval";
+export * from "./googlecloudbeyondcorpsaasplatformsubscriptionsv1alphalistsubscriptionsresponse";
+export * from "./googlecloudbeyondcorpsaasplatformsubscriptionsv1alphasubscription";
 export * from "./googlecloudlocationlistlocationsresponse";
 export * from "./googlecloudlocationlocation";
 export * from "./googleiamv1auditconfig";

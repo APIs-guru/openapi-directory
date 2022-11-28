@@ -10,6 +10,8 @@ const (
 	ContentInstreamPositionTargetingOptionDetailsContentInstreamPositionEnumContentInstreamPositionUnknown     ContentInstreamPositionTargetingOptionDetailsContentInstreamPositionEnum = "CONTENT_INSTREAM_POSITION_UNKNOWN"
 )
 
+// ContentInstreamPositionTargetingOptionDetails
+// Represents a targetable content instream position, which could be used by video and audio ads. This will be populated in the content_instream_position_details field when targeting_type is `TARGETING_TYPE_CONTENT_INSTREAM_POSITION`.
 type ContentInstreamPositionTargetingOptionDetails struct {
 	ContentInstreamPosition *ContentInstreamPositionTargetingOptionDetailsContentInstreamPositionEnum `json:"contentInstreamPosition,omitempty"`
 }

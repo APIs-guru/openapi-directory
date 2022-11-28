@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ObjectAccessControl } from "./objectaccesscontrol";
 /**
  * The owner of the object. This will always be the uploader of the object.

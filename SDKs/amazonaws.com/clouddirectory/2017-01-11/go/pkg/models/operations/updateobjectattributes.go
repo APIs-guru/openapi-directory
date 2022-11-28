@@ -15,6 +15,8 @@ type UpdateObjectAttributesHeaders struct {
 	XAmzDataPartition string  `header:"style=simple,explode=false,name=x-amz-data-partition"`
 }
 
+// UpdateObjectAttributesRequestBodyObjectReference
+// The reference that identifies an object.
 type UpdateObjectAttributesRequestBodyObjectReference struct {
 	Selector *string `json:"Selector,omitempty"`
 }

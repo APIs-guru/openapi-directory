@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CloudWatchLogGroupLogDestination } from "./cloudwatchloggrouplogdestination";
+
 
 
 // TextLogDestination
@@ -7,6 +8,6 @@ import { CloudWatchLogGroupLogDestination } from "./cloudwatchloggrouplogdestina
  * Defines the Amazon CloudWatch Logs destination log group for conversation text logs.
 **/
 export class TextLogDestination extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cloudWatch" })
+  @SpeakeasyMetadata({ data: "json, name=cloudWatch" })
   cloudWatch: CloudWatchLogGroupLogDestination;
 }

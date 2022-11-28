@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class IdentitytoolkitProjectsTenantsOauthIdpConfigsPatchPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,14 +30,14 @@ class IdentitytoolkitProjectsTenantsOauthIdpConfigsPatchQueryParams:
 
 @dataclass
 class IdentitytoolkitProjectsTenantsOauthIdpConfigsPatchSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class IdentitytoolkitProjectsTenantsOauthIdpConfigsPatchSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -44,15 +48,15 @@ class IdentitytoolkitProjectsTenantsOauthIdpConfigsPatchSecurity:
 
 @dataclass
 class IdentitytoolkitProjectsTenantsOauthIdpConfigsPatchRequest:
-    path_params: IdentitytoolkitProjectsTenantsOauthIdpConfigsPatchPathParams = field(default=None)
-    query_params: IdentitytoolkitProjectsTenantsOauthIdpConfigsPatchQueryParams = field(default=None)
+    path_params: IdentitytoolkitProjectsTenantsOauthIdpConfigsPatchPathParams = field()
+    query_params: IdentitytoolkitProjectsTenantsOauthIdpConfigsPatchQueryParams = field()
+    security: IdentitytoolkitProjectsTenantsOauthIdpConfigsPatchSecurity = field()
     request: Optional[shared.GoogleCloudIdentitytoolkitAdminV2OAuthIdpConfig] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: IdentitytoolkitProjectsTenantsOauthIdpConfigsPatchSecurity = field(default=None)
     
 
 @dataclass
 class IdentitytoolkitProjectsTenantsOauthIdpConfigsPatchResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_identitytoolkit_admin_v2_o_auth_idp_config: Optional[shared.GoogleCloudIdentitytoolkitAdminV2OAuthIdpConfig] = field(default=None)
-    status_code: int = field(default=None)
     

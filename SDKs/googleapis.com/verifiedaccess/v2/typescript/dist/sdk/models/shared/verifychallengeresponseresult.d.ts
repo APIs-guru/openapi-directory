@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum VerifyChallengeResponseResultKeyTrustLevelEnum {
     KeyTrustLevelUnspecified = "KEY_TRUST_LEVEL_UNSPECIFIED",
     ChromeOsVerifiedMode = "CHROME_OS_VERIFIED_MODE",

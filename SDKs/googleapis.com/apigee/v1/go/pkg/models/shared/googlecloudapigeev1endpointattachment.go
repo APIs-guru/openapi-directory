@@ -23,6 +23,8 @@ const (
 	GoogleCloudApigeeV1EndpointAttachmentStateEnumUpdating         GoogleCloudApigeeV1EndpointAttachmentStateEnum = "UPDATING"
 )
 
+// GoogleCloudApigeeV1EndpointAttachment
+// Apigee endpoint attachment. For more information, see [Southbound networking patterns] (https://cloud.google.com/apigee/docs/api-platform/architecture/southbound-networking-patterns-endpoints).
 type GoogleCloudApigeeV1EndpointAttachment struct {
 	ConnectionState   *GoogleCloudApigeeV1EndpointAttachmentConnectionStateEnum `json:"connectionState,omitempty"`
 	Host              *string                                                   `json:"host,omitempty"`
@@ -30,4 +32,12 @@ type GoogleCloudApigeeV1EndpointAttachment struct {
 	Name              *string                                                   `json:"name,omitempty"`
 	ServiceAttachment *string                                                   `json:"serviceAttachment,omitempty"`
 	State             *GoogleCloudApigeeV1EndpointAttachmentStateEnum           `json:"state,omitempty"`
+}
+
+// GoogleCloudApigeeV1EndpointAttachmentInput
+// Apigee endpoint attachment. For more information, see [Southbound networking patterns] (https://cloud.google.com/apigee/docs/api-platform/architecture/southbound-networking-patterns-endpoints).
+type GoogleCloudApigeeV1EndpointAttachmentInput struct {
+	Location          *string `json:"location,omitempty"`
+	Name              *string `json:"name,omitempty"`
+	ServiceAttachment *string `json:"serviceAttachment,omitempty"`
 }

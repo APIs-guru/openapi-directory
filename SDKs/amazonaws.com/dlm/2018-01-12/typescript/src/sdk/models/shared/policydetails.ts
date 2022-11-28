@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Action } from "./action";
 import { EventSource } from "./eventsource";
 import { Parameters } from "./parameters";
@@ -10,32 +9,33 @@ import { Schedule } from "./schedule";
 import { Tag } from "./tag";
 
 
+
 // PolicyDetails
 /** 
  * Specifies the configuration of a lifecycle policy.
 **/
 export class PolicyDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Actions", elemType: shared.Action })
+  @SpeakeasyMetadata({ data: "json, name=Actions", elemType: Action })
   actions?: Action[];
 
-  @Metadata({ data: "json, name=EventSource" })
+  @SpeakeasyMetadata({ data: "json, name=EventSource" })
   eventSource?: EventSource;
 
-  @Metadata({ data: "json, name=Parameters" })
+  @SpeakeasyMetadata({ data: "json, name=Parameters" })
   parameters?: Parameters;
 
-  @Metadata({ data: "json, name=PolicyType" })
+  @SpeakeasyMetadata({ data: "json, name=PolicyType" })
   policyType?: PolicyTypeValuesEnum;
 
-  @Metadata({ data: "json, name=ResourceLocations" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceLocations" })
   resourceLocations?: ResourceLocationValuesEnum[];
 
-  @Metadata({ data: "json, name=ResourceTypes" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceTypes" })
   resourceTypes?: ResourceTypeValuesEnum[];
 
-  @Metadata({ data: "json, name=Schedules", elemType: shared.Schedule })
+  @SpeakeasyMetadata({ data: "json, name=Schedules", elemType: Schedule })
   schedules?: Schedule[];
 
-  @Metadata({ data: "json, name=TargetTags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=TargetTags", elemType: Tag })
   targetTags?: Tag[];
 }

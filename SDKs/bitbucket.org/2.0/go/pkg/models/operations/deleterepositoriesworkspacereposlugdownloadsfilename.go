@@ -10,22 +10,10 @@ type DeleteRepositoriesWorkspaceRepoSlugDownloadsFilenamePathParams struct {
 	Workspace string `pathParam:"style=simple,explode=false,name=workspace"`
 }
 
-type DeleteRepositoriesWorkspaceRepoSlugDownloadsFilenameSecurityOption1 struct {
-	Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
-}
-
-type DeleteRepositoriesWorkspaceRepoSlugDownloadsFilenameSecurityOption2 struct {
-	Basic shared.SchemeBasic `security:"scheme,type=http,subtype=basic"`
-}
-
-type DeleteRepositoriesWorkspaceRepoSlugDownloadsFilenameSecurityOption3 struct {
-	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
-}
-
 type DeleteRepositoriesWorkspaceRepoSlugDownloadsFilenameSecurity struct {
-	Option1 *DeleteRepositoriesWorkspaceRepoSlugDownloadsFilenameSecurityOption1 `security:"option"`
-	Option2 *DeleteRepositoriesWorkspaceRepoSlugDownloadsFilenameSecurityOption2 `security:"option"`
-	Option3 *DeleteRepositoriesWorkspaceRepoSlugDownloadsFilenameSecurityOption3 `security:"option"`
+	Oauth2 *shared.SchemeOauth2 `security:"scheme,type=oauth2"`
+	Basic  *shared.SchemeBasic  `security:"scheme,type=http,subtype=basic"`
+	APIKey *shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type DeleteRepositoriesWorkspaceRepoSlugDownloadsFilenameRequest struct {

@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Directory } from "./directory";
 
 
+
 export class GetDirectoryResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Directory" })
+  @SpeakeasyMetadata({ data: "json, name=Directory" })
   directory: Directory;
 }

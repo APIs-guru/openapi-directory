@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FieldTypeDetails } from "./fieldtypedetails";
+
 
 
 // SupportedFieldTypeDetails
@@ -7,6 +8,6 @@ import { FieldTypeDetails } from "./fieldtypedetails";
  *  Contains details regarding all the supported <code>FieldTypes</code> and their corresponding <code>filterOperators</code> and <code>supportedValues</code>. 
 **/
 export class SupportedFieldTypeDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=v1" })
+  @SpeakeasyMetadata({ data: "json, name=v1" })
   v1: FieldTypeDetails;
 }

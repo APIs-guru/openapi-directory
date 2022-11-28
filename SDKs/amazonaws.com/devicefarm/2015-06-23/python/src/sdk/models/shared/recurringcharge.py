@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import monetaryamount
-from . import recurringchargefrequency_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class RecurringCharge:
-    cost: Optional[monetaryamount.MonetaryAmount] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cost' }})
-    frequency: Optional[recurringchargefrequency_enum.RecurringChargeFrequencyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'frequency' }})
+    r"""RecurringCharge
+    Specifies whether charges for devices are recurring.
+    """
+    
+    cost: Optional[MonetaryAmount] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cost') }})
+    frequency: Optional[RecurringChargeFrequencyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('frequency') }})
     

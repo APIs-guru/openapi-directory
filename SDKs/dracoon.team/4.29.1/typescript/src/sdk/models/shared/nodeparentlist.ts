@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NodeParent } from "./nodeparent";
+
 
 
 // NodeParentList
@@ -8,6 +8,6 @@ import { NodeParent } from "./nodeparent";
  * List of parent nodes
 **/
 export class NodeParentList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.NodeParent })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: NodeParent })
   items?: NodeParent[];
 }

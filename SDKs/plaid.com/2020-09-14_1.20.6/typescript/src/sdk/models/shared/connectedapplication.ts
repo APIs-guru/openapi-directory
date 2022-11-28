@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RequestedScopes } from "./requestedscopes";
 
+
 export enum ConnectedApplicationProductDataTypesEnum {
-    AccountBalance = "ACCOUNT_BALANCE"
-,    AccountUserInfo = "ACCOUNT_USER_INFO"
-,    AccountTransactions = "ACCOUNT_TRANSACTIONS"
+    AccountBalance = "ACCOUNT_BALANCE",
+    AccountUserInfo = "ACCOUNT_USER_INFO",
+    AccountTransactions = "ACCOUNT_TRANSACTIONS"
 }
 
 
@@ -13,33 +14,33 @@ export enum ConnectedApplicationProductDataTypesEnum {
  * Describes the connected application for a particular end user.
 **/
 export class ConnectedApplication extends SpeakeasyBase {
-  @Metadata({ data: "json, name=application_id" })
+  @SpeakeasyMetadata({ data: "json, name=application_id" })
   applicationId: string;
 
-  @Metadata({ data: "json, name=application_url" })
+  @SpeakeasyMetadata({ data: "json, name=application_url" })
   applicationUrl: string;
 
-  @Metadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata({ data: "json, name=created_at" })
   createdAt: string;
 
-  @Metadata({ data: "json, name=logo" })
+  @SpeakeasyMetadata({ data: "json, name=logo" })
   logo: string;
 
-  @Metadata({ data: "json, name=logo_url" })
+  @SpeakeasyMetadata({ data: "json, name=logo_url" })
   logoUrl: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=product_data_types" })
+  @SpeakeasyMetadata({ data: "json, name=product_data_types" })
   productDataTypes: ConnectedApplicationProductDataTypesEnum[];
 
-  @Metadata({ data: "json, name=reason_for_access" })
+  @SpeakeasyMetadata({ data: "json, name=reason_for_access" })
   reasonForAccess: string;
 
-  @Metadata({ data: "json, name=requested_scopes" })
+  @SpeakeasyMetadata({ data: "json, name=requested_scopes" })
   requestedScopes?: RequestedScopes;
 
-  @Metadata({ data: "json, name=scopes" })
+  @SpeakeasyMetadata({ data: "json, name=scopes" })
   scopes?: Map<string, any>;
 }

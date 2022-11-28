@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import bytes_range
+from sdk import utils
+from . import *
 
 class VideostatusIngestStatusEnum(str, Enum):
     MISSING = "missing"
@@ -12,7 +14,11 @@ class VideostatusIngestStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class VideostatusIngest:
-    filesize: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'filesize' }})
-    received_bytes: Optional[List[bytes_range.BytesRange]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'receivedBytes' }})
-    status: Optional[VideostatusIngestStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    r"""VideostatusIngest
+    Details about the capturing, transferring, and storing of your video for use immediately or in the future.
+    """
+    
+    filesize: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('filesize') }})
+    received_bytes: Optional[List[BytesRange]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('receivedBytes') }})
+    status: Optional[VideostatusIngestStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ArimaOrder
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Arima order, can be used for both non-seasonal and seasonal parts.
 **/
 export class ArimaOrder extends SpeakeasyBase {
-  @Metadata({ data: "json, name=d" })
+  @SpeakeasyMetadata({ data: "json, name=d" })
   d?: string;
 
-  @Metadata({ data: "json, name=p" })
+  @SpeakeasyMetadata({ data: "json, name=p" })
   p?: string;
 
-  @Metadata({ data: "json, name=q" })
+  @SpeakeasyMetadata({ data: "json, name=q" })
   q?: string;
 }

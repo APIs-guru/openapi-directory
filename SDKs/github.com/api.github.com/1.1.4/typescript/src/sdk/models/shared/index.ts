@@ -61,6 +61,7 @@ export * from "./contentreferenceattachment";
 export * from "./contentsubmodule";
 export * from "./contentsymlink";
 export * from "./contenttraffic";
+export * from "./contenttree";
 export * from "./contributor";
 export * from "./contributoractivity";
 export * from "./credentialauthorization";

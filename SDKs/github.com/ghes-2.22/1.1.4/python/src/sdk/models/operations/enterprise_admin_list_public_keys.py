@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class EnterpriseAdminListPublicKeysSortEnum(str, Enum):
@@ -19,13 +23,13 @@ class EnterpriseAdminListPublicKeysQueryParams:
 
 @dataclass
 class EnterpriseAdminListPublicKeysRequest:
-    query_params: EnterpriseAdminListPublicKeysQueryParams = field(default=None)
+    query_params: EnterpriseAdminListPublicKeysQueryParams = field()
     
 
 @dataclass
 class EnterpriseAdminListPublicKeysResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     enterprise_public_keys: Optional[List[shared.EnterprisePublicKey]] = field(default=None)
     

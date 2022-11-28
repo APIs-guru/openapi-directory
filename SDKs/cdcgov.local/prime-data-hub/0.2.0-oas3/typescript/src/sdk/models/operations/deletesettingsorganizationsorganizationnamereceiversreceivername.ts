@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DeleteSettingsOrganizationsOrganizationNameReceiversReceiverNamePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=organizationName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=organizationName" })
   organizationName: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=receiverName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=receiverName" })
   receiverName: string;
 }
 
 
 export class DeleteSettingsOrganizationsOrganizationNameReceiversReceiverNameSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oAuth2: shared.SchemeOAuth2;
 }
 
 
 export class DeleteSettingsOrganizationsOrganizationNameReceiversReceiverNameRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DeleteSettingsOrganizationsOrganizationNameReceiversReceiverNamePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: DeleteSettingsOrganizationsOrganizationNameReceiversReceiverNameSecurity;
 }
 
 
 export class DeleteSettingsOrganizationsOrganizationNameReceiversReceiverNameResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   receiver?: shared.Receiver;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Metro } from "./metro";
+
 
 
 // MetrosListResponse
@@ -8,9 +8,9 @@ import { Metro } from "./metro";
  * Metro List Response
 **/
 export class MetrosListResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=metros", elemType: shared.Metro })
+  @SpeakeasyMetadata({ data: "json, name=metros", elemType: Metro })
   metros?: Metro[];
 }

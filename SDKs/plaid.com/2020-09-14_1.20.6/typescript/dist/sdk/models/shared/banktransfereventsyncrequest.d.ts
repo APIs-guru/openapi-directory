@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * BankTransferEventSyncRequest defines the request schema for `/bank_transfer/event/sync`
 **/

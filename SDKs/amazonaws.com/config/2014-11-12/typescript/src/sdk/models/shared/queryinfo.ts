@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FieldInfo } from "./fieldinfo";
+
 
 
 // QueryInfo
@@ -8,6 +8,6 @@ import { FieldInfo } from "./fieldinfo";
  * Details about the query.
 **/
 export class QueryInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SelectFields", elemType: shared.FieldInfo })
+  @SpeakeasyMetadata({ data: "json, name=SelectFields", elemType: FieldInfo })
   selectFields?: FieldInfo[];
 }

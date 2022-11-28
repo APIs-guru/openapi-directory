@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DeleteItemBookmarkPathParams:
-    item_id: str = field(default=None, metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
+    item_id: str = field(metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,19 +17,19 @@ class DeleteItemBookmarkQueryParams:
 
 @dataclass
 class DeleteItemBookmarkSecurity:
-    profile_auth: shared.SchemeProfileAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    profile_auth: shared.SchemeProfileAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DeleteItemBookmarkRequest:
-    path_params: DeleteItemBookmarkPathParams = field(default=None)
-    query_params: DeleteItemBookmarkQueryParams = field(default=None)
-    security: DeleteItemBookmarkSecurity = field(default=None)
+    path_params: DeleteItemBookmarkPathParams = field()
+    query_params: DeleteItemBookmarkQueryParams = field()
+    security: DeleteItemBookmarkSecurity = field()
     
 
 @dataclass
 class DeleteItemBookmarkResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     service_error: Optional[shared.ServiceError] = field(default=None)
-    status_code: int = field(default=None)
     

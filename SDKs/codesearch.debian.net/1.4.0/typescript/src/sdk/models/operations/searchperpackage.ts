@@ -1,43 +1,44 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum SearchperpackageMatchModeEnum {
-    Literal = "literal"
-,    Regexp = "regexp"
+    Literal = "literal",
+    Regexp = "regexp"
 }
 
 
 export class SearchperpackageQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=match_mode" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=match_mode" })
   matchMode?: SearchperpackageMatchModeEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=query" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=query" })
   query: string;
 }
 
 
 export class SearchperpackageSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   apiKey: shared.SchemeApiKey;
 }
 
 
 export class SearchperpackageRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: SearchperpackageQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: SearchperpackageSecurity;
 }
 
 
 export class SearchperpackageResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.PackageSearchResult })
+  @SpeakeasyMetadata({ elemType: shared.PackageSearchResult })
   packageSearchResults?: shared.PackageSearchResult[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

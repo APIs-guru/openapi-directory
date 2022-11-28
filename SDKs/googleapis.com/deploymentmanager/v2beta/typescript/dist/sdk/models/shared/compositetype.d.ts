@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CompositeTypeLabelEntry } from "./compositetypelabelentry";
 import { Operation } from "./operation";
 import { TemplateContents } from "./templatecontents";

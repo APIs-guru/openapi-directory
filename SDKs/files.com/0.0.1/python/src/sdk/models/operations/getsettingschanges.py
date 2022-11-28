@@ -18,12 +18,12 @@ class GetSettingsChangesQueryParams:
 
 @dataclass
 class GetSettingsChangesRequest:
-    query_params: GetSettingsChangesQueryParams = field(default=None)
+    query_params: GetSettingsChangesQueryParams = field()
     
 
 @dataclass
 class GetSettingsChangesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     settings_change_entities: Optional[List[shared.SettingsChangeEntity]] = field(default=None)
-    status_code: int = field(default=None)
     

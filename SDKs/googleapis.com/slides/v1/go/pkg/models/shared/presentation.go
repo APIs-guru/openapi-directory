@@ -1,5 +1,7 @@
 package shared
 
+// Presentation
+// A Google Slides presentation.
 type Presentation struct {
 	Layouts        []Page  `json:"layouts,omitempty"`
 	Locale         *string `json:"locale,omitempty"`

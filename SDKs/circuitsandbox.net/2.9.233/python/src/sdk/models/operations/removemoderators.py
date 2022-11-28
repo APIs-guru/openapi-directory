@@ -1,31 +1,32 @@
 from dataclasses import dataclass, field
 from typing import List
+from sdk.models import shared
 
 
 @dataclass
 class RemoveModeratorsPathParams:
-    conv_id: str = field(default=None, metadata={'path_param': { 'field_name': 'convId', 'style': 'simple', 'explode': False }})
+    conv_id: str = field(metadata={'path_param': { 'field_name': 'convId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class RemoveModeratorsRequestBody:
-    moderators: List[str] = field(default=None, metadata={'form': { 'field_name': 'moderators' }})
+    moderators: List[str] = field(metadata={'form': { 'field_name': 'moderators' }})
     
 
 @dataclass
 class RemoveModeratorsSecurity:
-    oauth: shared.SchemeOauth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth: shared.SchemeOauth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class RemoveModeratorsRequest:
-    path_params: RemoveModeratorsPathParams = field(default=None)
-    request: RemoveModeratorsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
-    security: RemoveModeratorsSecurity = field(default=None)
+    path_params: RemoveModeratorsPathParams = field()
+    request: RemoveModeratorsRequestBody = field(metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    security: RemoveModeratorsSecurity = field()
     
 
 @dataclass
 class RemoveModeratorsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import codesigningconfig
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateCodeSigningConfigResponse:
-    code_signing_config: codesigningconfig.CodeSigningConfig = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CodeSigningConfig' }})
+    code_signing_config: CodeSigningConfig = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('CodeSigningConfig') }})
     

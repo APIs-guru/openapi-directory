@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // KnownUser
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A known user.
 **/
 export class KnownUser extends SpeakeasyBase {
-  @Metadata({ data: "json, name=isCurrentUser" })
+  @SpeakeasyMetadata({ data: "json, name=isCurrentUser" })
   isCurrentUser?: boolean;
 
-  @Metadata({ data: "json, name=personName" })
+  @SpeakeasyMetadata({ data: "json, name=personName" })
   personName?: string;
 }

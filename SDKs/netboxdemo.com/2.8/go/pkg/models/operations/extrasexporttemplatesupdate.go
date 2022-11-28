@@ -10,7 +10,7 @@ type ExtrasExportTemplatesUpdatePathParams struct {
 
 type ExtrasExportTemplatesUpdateRequest struct {
 	PathParams ExtrasExportTemplatesUpdatePathParams
-	Request    shared.WritableExportTemplate `request:"mediaType=application/json"`
+	Request    shared.WritableExportTemplateInput `request:"mediaType=application/json"`
 }
 
 type ExtrasExportTemplatesUpdateResponse struct {

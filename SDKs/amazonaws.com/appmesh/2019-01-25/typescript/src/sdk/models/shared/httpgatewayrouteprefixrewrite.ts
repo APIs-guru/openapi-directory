@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DefaultGatewayRouteRewriteEnum } from "./defaultgatewayrouterewriteenum";
+
 
 
 // HttpGatewayRoutePrefixRewrite
@@ -7,9 +8,9 @@ import { DefaultGatewayRouteRewriteEnum } from "./defaultgatewayrouterewriteenum
  * An object representing the beginning characters of the route to rewrite.
 **/
 export class HttpGatewayRoutePrefixRewrite extends SpeakeasyBase {
-  @Metadata({ data: "json, name=defaultPrefix" })
+  @SpeakeasyMetadata({ data: "json, name=defaultPrefix" })
   defaultPrefix?: DefaultGatewayRouteRewriteEnum;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }

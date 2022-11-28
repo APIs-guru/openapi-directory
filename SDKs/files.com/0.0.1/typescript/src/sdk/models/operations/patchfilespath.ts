@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PatchFilesPathPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=path" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=path" })
   path: string;
 }
 
 
 export class PatchFilesPathRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, name=priority_color" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=priority_color" })
   priorityColor?: string;
 
-  @Metadata({ data: "multipart_form, name=provided_mtime" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=provided_mtime" })
   providedMtime?: Date;
 }
 
 
 export class PatchFilesPathRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PatchFilesPathPathParams;
 
-  @Metadata({ data: "request, media_type=multipart/form-data" })
+  @SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" })
   request?: PatchFilesPathRequestBody;
 }
 
 
 export class PatchFilesPathResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   fileEntity?: shared.FileEntity;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

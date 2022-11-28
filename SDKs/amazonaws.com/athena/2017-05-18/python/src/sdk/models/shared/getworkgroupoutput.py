@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import workgroup
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetWorkGroupOutput:
-    work_group: Optional[workgroup.WorkGroup] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'WorkGroup' }})
+    work_group: Optional[WorkGroup] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('WorkGroup') }})
     

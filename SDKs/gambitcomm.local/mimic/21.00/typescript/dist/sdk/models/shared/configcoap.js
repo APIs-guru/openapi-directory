@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ConfigCoap = /** @class */ (function (_super) {
     __extends(ConfigCoap, _super);
     function ConfigCoap() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=keystore" }),
+        SpeakeasyMetadata({ data: "json, name=keystore" }),
         __metadata("design:type", String)
     ], ConfigCoap.prototype, "keystore", void 0);
     __decorate([
-        Metadata({ data: "json, name=primary_port" }),
+        SpeakeasyMetadata({ data: "json, name=primary_port" }),
         __metadata("design:type", Number)
     ], ConfigCoap.prototype, "primaryPort", void 0);
     __decorate([
-        Metadata({ data: "json, name=rule" }),
+        SpeakeasyMetadata({ data: "json, name=rule" }),
         __metadata("design:type", String)
     ], ConfigCoap.prototype, "rule", void 0);
     __decorate([
-        Metadata({ data: "json, name=secure_port" }),
+        SpeakeasyMetadata({ data: "json, name=secure_port" }),
         __metadata("design:type", Number)
     ], ConfigCoap.prototype, "securePort", void 0);
     return ConfigCoap;

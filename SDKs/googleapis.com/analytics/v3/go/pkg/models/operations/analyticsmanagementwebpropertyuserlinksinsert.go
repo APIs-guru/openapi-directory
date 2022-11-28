@@ -27,7 +27,7 @@ type AnalyticsManagementWebpropertyUserLinksInsertSecurity struct {
 type AnalyticsManagementWebpropertyUserLinksInsertRequest struct {
 	PathParams  AnalyticsManagementWebpropertyUserLinksInsertPathParams
 	QueryParams AnalyticsManagementWebpropertyUserLinksInsertQueryParams
-	Request     *shared.EntityUserLink `request:"mediaType=application/json"`
+	Request     *shared.EntityUserLinkInput `request:"mediaType=application/json"`
 	Security    AnalyticsManagementWebpropertyUserLinksInsertSecurity
 }
 

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CreditDebitIndicatorEnum } from "./creditdebitindicatorenum";
+
 
 
 // StatementLine
@@ -7,27 +8,27 @@ import { CreditDebitIndicatorEnum } from "./creditdebitindicatorenum";
  * the lines details for a statement
 **/
 export class StatementLine extends SpeakeasyBase {
-  @Metadata({ data: "json, name=amount" })
+  @SpeakeasyMetadata({ data: "json, name=amount" })
   amount?: number;
 
-  @Metadata({ data: "json, name=chequeNumber" })
+  @SpeakeasyMetadata({ data: "json, name=chequeNumber" })
   chequeNumber?: string;
 
-  @Metadata({ data: "json, name=creditDebitIndicator" })
+  @SpeakeasyMetadata({ data: "json, name=creditDebitIndicator" })
   creditDebitIndicator?: CreditDebitIndicatorEnum;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=payeeName" })
+  @SpeakeasyMetadata({ data: "json, name=payeeName" })
   payeeName?: string;
 
-  @Metadata({ data: "json, name=postedDate" })
+  @SpeakeasyMetadata({ data: "json, name=postedDate" })
   postedDate?: Date;
 
-  @Metadata({ data: "json, name=reference" })
+  @SpeakeasyMetadata({ data: "json, name=reference" })
   reference?: string;
 
-  @Metadata({ data: "json, name=transactionId" })
+  @SpeakeasyMetadata({ data: "json, name=transactionId" })
   transactionId?: string;
 }

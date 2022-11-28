@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -13,50 +18,54 @@ class ListConversationsQueryParams:
     record_index: Optional[float] = field(default=None, metadata={'query_param': { 'field_name': 'record_index', 'style': 'form', 'explode': True }})
     
 
-@dataclass
-class ListConversationsRequest:
-    query_params: ListConversationsQueryParams = field(default=None)
-    
-
 @dataclass_json
 @dataclass
 class ListConversations200ApplicationJSONEmbeddedConversationsLinksSelf:
-    href: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'href' }})
+    href: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('href') }})
     
 
 @dataclass_json
 @dataclass
 class ListConversations200ApplicationJSONEmbeddedConversationsLinks:
-    self: Optional[ListConversations200ApplicationJSONEmbeddedConversationsLinksSelf] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'self' }})
+    self: Optional[ListConversations200ApplicationJSONEmbeddedConversationsLinksSelf] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('self') }})
     
 
 @dataclass_json
 @dataclass
 class ListConversations200ApplicationJSONEmbeddedConversations:
-    links: Optional[ListConversations200ApplicationJSONEmbeddedConversationsLinks] = field(default=None, metadata={'dataclasses_json': { 'field_name': '_links' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    uuid: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uuid' }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    uuid: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uuid') }})
+    links: Optional[ListConversations200ApplicationJSONEmbeddedConversationsLinks] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('_links') }})
     
 
 @dataclass_json
 @dataclass
 class ListConversations200ApplicationJSONEmbedded:
-    conversations: List[ListConversations200ApplicationJSONEmbeddedConversations] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'conversations' }})
+    r"""ListConversations200ApplicationJSONEmbedded
+    A list of conversation objects. See the [get details of a specific conversation](#retrieveConversation) response fields for a description of the nested objects
+    """
+    
+    conversations: List[ListConversations200ApplicationJSONEmbeddedConversations] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('conversations') }})
     
 
 @dataclass_json
 @dataclass
 class ListConversations200ApplicationJSON:
-    embedded: ListConversations200ApplicationJSONEmbedded = field(default=None, metadata={'dataclasses_json': { 'field_name': '_embedded' }})
-    links: shared.LinksConversationsList = field(default=None, metadata={'dataclasses_json': { 'field_name': '_links' }})
-    count: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'count' }})
-    page_size: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'page_size' }})
-    record_index: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'record_index' }})
+    embedded: ListConversations200ApplicationJSONEmbedded = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('_embedded') }})
+    links: shared.LinksConversationsList = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('_links') }})
+    count: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('count') }})
+    page_size: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('page_size') }})
+    record_index: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('record_index') }})
+    
+
+@dataclass
+class ListConversationsRequest:
+    query_params: ListConversationsQueryParams = field()
     
 
 @dataclass
 class ListConversationsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_conversations_200_application_json_object: Optional[ListConversations200ApplicationJSON] = field(default=None)
     

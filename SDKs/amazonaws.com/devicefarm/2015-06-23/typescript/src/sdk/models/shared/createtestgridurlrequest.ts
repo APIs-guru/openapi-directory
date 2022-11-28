@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateTestGridUrlRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=expiresInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=expiresInSeconds" })
   expiresInSeconds: number;
 
-  @Metadata({ data: "json, name=projectArn" })
+  @SpeakeasyMetadata({ data: "json, name=projectArn" })
   projectArn: string;
 }

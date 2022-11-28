@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudRetailV2alphaSearchResponseSearchResult
+// Represents the search results.
 type GoogleCloudRetailV2alphaSearchResponseSearchResult struct {
 	ID                    *string                          `json:"id,omitempty"`
 	MatchingVariantCount  *int32                           `json:"matchingVariantCount,omitempty"`

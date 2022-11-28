@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SslConfiguration
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes an app's SSL configuration.
 **/
 export class SslConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Certificate" })
+  @SpeakeasyMetadata({ data: "json, name=Certificate" })
   certificate: string;
 
-  @Metadata({ data: "json, name=Chain" })
+  @SpeakeasyMetadata({ data: "json, name=Chain" })
   chain?: string;
 
-  @Metadata({ data: "json, name=PrivateKey" })
+  @SpeakeasyMetadata({ data: "json, name=PrivateKey" })
   privateKey: string;
 }

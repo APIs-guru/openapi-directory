@@ -1,8 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { ResourceManifest } from "./resourcemanifest";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceManifest } from "./resourcemanifest";
 import { ResourceOptions } from "./resourceoptions";
+
 
 
 // KubernetesResource
@@ -10,15 +9,28 @@ import { ResourceOptions } from "./resourceoptions";
  * KubernetesResource contains the YAML manifests and configuration for Membership Kubernetes resources in the cluster. After CreateMembership or UpdateMembership, these resources should be re-applied in the cluster.
 **/
 export class KubernetesResource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=connectResources", elemType: shared.ResourceManifest })
+  @SpeakeasyMetadata({ data: "json, name=connectResources", elemType: ResourceManifest })
   connectResources?: ResourceManifest[];
 
-  @Metadata({ data: "json, name=membershipCrManifest" })
+  @SpeakeasyMetadata({ data: "json, name=membershipCrManifest" })
   membershipCrManifest?: string;
 
-  @Metadata({ data: "json, name=membershipResources", elemType: shared.ResourceManifest })
+  @SpeakeasyMetadata({ data: "json, name=membershipResources", elemType: ResourceManifest })
   membershipResources?: ResourceManifest[];
 
-  @Metadata({ data: "json, name=resourceOptions" })
+  @SpeakeasyMetadata({ data: "json, name=resourceOptions" })
+  resourceOptions?: ResourceOptions;
+}
+
+
+// KubernetesResourceInput
+/** 
+ * KubernetesResource contains the YAML manifests and configuration for Membership Kubernetes resources in the cluster. After CreateMembership or UpdateMembership, these resources should be re-applied in the cluster.
+**/
+export class KubernetesResourceInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=membershipCrManifest" })
+  membershipCrManifest?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=resourceOptions" })
   resourceOptions?: ResourceOptions;
 }

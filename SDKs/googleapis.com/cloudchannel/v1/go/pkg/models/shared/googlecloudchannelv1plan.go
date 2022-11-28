@@ -19,6 +19,8 @@ const (
 	GoogleCloudChannelV1PlanPaymentTypeEnumPostpay                GoogleCloudChannelV1PlanPaymentTypeEnum = "POSTPAY"
 )
 
+// GoogleCloudChannelV1Plan
+// The payment plan for the Offer. Describes how to make a payment.
 type GoogleCloudChannelV1Plan struct {
 	BillingAccount *string                                  `json:"billingAccount,omitempty"`
 	PaymentCycle   *GoogleCloudChannelV1Period              `json:"paymentCycle,omitempty"`

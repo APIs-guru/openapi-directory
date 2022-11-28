@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GoogleCloudAssuredworkloadsV1beta1Workload } from "./googlecloudassuredworkloadsv1beta1workload";
 // GoogleCloudAssuredworkloadsV1beta1ListWorkloadsResponse
 /**
  * Response of ListWorkloads endpoint.
@@ -34,11 +34,11 @@ var GoogleCloudAssuredworkloadsV1beta1ListWorkloadsResponse = /** @class */ (fun
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=nextPageToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextPageToken" }),
         __metadata("design:type", String)
     ], GoogleCloudAssuredworkloadsV1beta1ListWorkloadsResponse.prototype, "nextPageToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=workloads", elemType: shared.GoogleCloudAssuredworkloadsV1beta1Workload }),
+        SpeakeasyMetadata({ data: "json, name=workloads", elemType: GoogleCloudAssuredworkloadsV1beta1Workload }),
         __metadata("design:type", Array)
     ], GoogleCloudAssuredworkloadsV1beta1ListWorkloadsResponse.prototype, "workloads", void 0);
     return GoogleCloudAssuredworkloadsV1beta1ListWorkloadsResponse;

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CargoShipmentTrackingByAwbPrefixAndAwbNumberGetPathParams = /** @class */ (function (_super) {
     __extends(CargoShipmentTrackingByAwbPrefixAndAwbNumberGetPathParams, _super);
@@ -30,11 +30,11 @@ var CargoShipmentTrackingByAwbPrefixAndAwbNumberGetPathParams = /** @class */ (f
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=aWBNumber" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=aWBNumber" }),
         __metadata("design:type", String)
     ], CargoShipmentTrackingByAwbPrefixAndAwbNumberGetPathParams.prototype, "aWbNumber", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=aWBPrefix" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=aWBPrefix" }),
         __metadata("design:type", String)
     ], CargoShipmentTrackingByAwbPrefixAndAwbNumberGetPathParams.prototype, "aWbPrefix", void 0);
     return CargoShipmentTrackingByAwbPrefixAndAwbNumberGetPathParams;
@@ -46,7 +46,7 @@ var CargoShipmentTrackingByAwbPrefixAndAwbNumberGetHeaders = /** @class */ (func
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Accept" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept" }),
         __metadata("design:type", String)
     ], CargoShipmentTrackingByAwbPrefixAndAwbNumberGetHeaders.prototype, "accept", void 0);
     return CargoShipmentTrackingByAwbPrefixAndAwbNumberGetHeaders;
@@ -58,7 +58,7 @@ var CargoShipmentTrackingByAwbPrefixAndAwbNumberGetSecurity = /** @class */ (fun
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeAuth)
     ], CargoShipmentTrackingByAwbPrefixAndAwbNumberGetSecurity.prototype, "auth", void 0);
     return CargoShipmentTrackingByAwbPrefixAndAwbNumberGetSecurity;
@@ -70,15 +70,15 @@ var CargoShipmentTrackingByAwbPrefixAndAwbNumberGetRequest = /** @class */ (func
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CargoShipmentTrackingByAwbPrefixAndAwbNumberGetPathParams)
     ], CargoShipmentTrackingByAwbPrefixAndAwbNumberGetRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CargoShipmentTrackingByAwbPrefixAndAwbNumberGetHeaders)
     ], CargoShipmentTrackingByAwbPrefixAndAwbNumberGetRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CargoShipmentTrackingByAwbPrefixAndAwbNumberGetSecurity)
     ], CargoShipmentTrackingByAwbPrefixAndAwbNumberGetRequest.prototype, "security", void 0);
     return CargoShipmentTrackingByAwbPrefixAndAwbNumberGetRequest;
@@ -90,15 +90,15 @@ var CargoShipmentTrackingByAwbPrefixAndAwbNumberGetResponse = /** @class */ (fun
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], CargoShipmentTrackingByAwbPrefixAndAwbNumberGetResponse.prototype, "cargoShipmentTrackingByAwbPrefixAndAwbNumberGet200ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CargoShipmentTrackingByAwbPrefixAndAwbNumberGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CargoShipmentTrackingByAwbPrefixAndAwbNumberGetResponse.prototype, "statusCode", void 0);
     return CargoShipmentTrackingByAwbPrefixAndAwbNumberGetResponse;

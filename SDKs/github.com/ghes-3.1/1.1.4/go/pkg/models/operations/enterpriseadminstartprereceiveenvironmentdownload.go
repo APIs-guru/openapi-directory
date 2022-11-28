@@ -8,10 +8,6 @@ type EnterpriseAdminStartPreReceiveEnvironmentDownloadPathParams struct {
 	PreReceiveEnvironmentID int64 `pathParam:"style=simple,explode=false,name=pre_receive_environment_id"`
 }
 
-type EnterpriseAdminStartPreReceiveEnvironmentDownloadRequest struct {
-	PathParams EnterpriseAdminStartPreReceiveEnvironmentDownloadPathParams
-}
-
 type EnterpriseAdminStartPreReceiveEnvironmentDownload422ApplicationJSONErrors struct {
 	Code     *string `json:"code,omitempty"`
 	Message  *string `json:"message,omitempty"`
@@ -21,6 +17,10 @@ type EnterpriseAdminStartPreReceiveEnvironmentDownload422ApplicationJSONErrors s
 type EnterpriseAdminStartPreReceiveEnvironmentDownload422ApplicationJSON struct {
 	Errors  []EnterpriseAdminStartPreReceiveEnvironmentDownload422ApplicationJSONErrors `json:"errors,omitempty"`
 	Message *string                                                                     `json:"message,omitempty"`
+}
+
+type EnterpriseAdminStartPreReceiveEnvironmentDownloadRequest struct {
+	PathParams EnterpriseAdminStartPreReceiveEnvironmentDownloadPathParams
 }
 
 type EnterpriseAdminStartPreReceiveEnvironmentDownloadResponse struct {

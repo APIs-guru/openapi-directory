@@ -1,5 +1,7 @@
 package shared
 
+// TypedLinkAttributeDefinition
+// A typed link attribute definition.
 type TypedLinkAttributeDefinition struct {
 	DefaultValue     *TypedAttributeValue          `json:"DefaultValue,omitempty"`
 	IsImmutable      *bool                         `json:"IsImmutable,omitempty"`

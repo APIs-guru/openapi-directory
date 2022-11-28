@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .accelerator import *
 from .action import *
 from .alt_enum import *

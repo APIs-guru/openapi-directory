@@ -1,9 +1,11 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class HealthInformationNotificationNotificationNotifierTypeEnum(str, Enum):
     HIU = "HIU"
@@ -13,8 +15,8 @@ class HealthInformationNotificationNotificationNotifierTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class HealthInformationNotificationNotificationNotifier:
-    id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    type: HealthInformationNotificationNotificationNotifierTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    type: HealthInformationNotificationNotificationNotifierTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     
 class HealthInformationNotificationNotificationStatusNotificationSessionStatusEnum(str, Enum):
     TRANSFERRED = "TRANSFERRED"
@@ -29,33 +31,33 @@ class HealthInformationNotificationNotificationStatusNotificationStatusResponses
 @dataclass_json
 @dataclass
 class HealthInformationNotificationNotificationStatusNotificationStatusResponses:
-    care_context_reference: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'careContextReference' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    hi_status: HealthInformationNotificationNotificationStatusNotificationStatusResponsesHiStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'hiStatus' }})
+    care_context_reference: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('careContextReference') }})
+    hi_status: HealthInformationNotificationNotificationStatusNotificationStatusResponsesHiStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('hiStatus') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
     
 
 @dataclass_json
 @dataclass
 class HealthInformationNotificationNotificationStatusNotification:
-    hip_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'hipId' }})
-    session_status: HealthInformationNotificationNotificationStatusNotificationSessionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sessionStatus' }})
-    status_responses: Optional[List[HealthInformationNotificationNotificationStatusNotificationStatusResponses]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'statusResponses' }})
+    hip_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('hipId') }})
+    session_status: HealthInformationNotificationNotificationStatusNotificationSessionStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('sessionStatus') }})
+    status_responses: Optional[List[HealthInformationNotificationNotificationStatusNotificationStatusResponses]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('statusResponses') }})
     
 
 @dataclass_json
 @dataclass
 class HealthInformationNotificationNotification:
-    consent_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'consentId' }})
-    done_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'doneAt', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    notifier: HealthInformationNotificationNotificationNotifier = field(default=None, metadata={'dataclasses_json': { 'field_name': 'notifier' }})
-    status_notification: HealthInformationNotificationNotificationStatusNotification = field(default=None, metadata={'dataclasses_json': { 'field_name': 'statusNotification' }})
-    transaction_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'transactionId' }})
+    consent_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('consentId') }})
+    done_at: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('doneAt'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    notifier: HealthInformationNotificationNotificationNotifier = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('notifier') }})
+    status_notification: HealthInformationNotificationNotificationStatusNotification = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('statusNotification') }})
+    transaction_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('transactionId') }})
     
 
 @dataclass_json
 @dataclass
 class HealthInformationNotification:
-    notification: HealthInformationNotificationNotification = field(default=None, metadata={'dataclasses_json': { 'field_name': 'notification' }})
-    request_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'requestId' }})
-    timestamp: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timestamp', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    notification: HealthInformationNotificationNotification = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('notification') }})
+    request_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('requestId') }})
+    timestamp: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('timestamp'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     

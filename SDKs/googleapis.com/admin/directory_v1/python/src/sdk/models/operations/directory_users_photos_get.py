@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DirectoryUsersPhotosGetPathParams:
-    user_key: str = field(default=None, metadata={'path_param': { 'field_name': 'userKey', 'style': 'simple', 'explode': False }})
+    user_key: str = field(metadata={'path_param': { 'field_name': 'userKey', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class DirectoryUsersPhotosGetQueryParams:
 
 @dataclass
 class DirectoryUsersPhotosGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DirectoryUsersPhotosGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,14 +44,14 @@ class DirectoryUsersPhotosGetSecurity:
 
 @dataclass
 class DirectoryUsersPhotosGetRequest:
-    path_params: DirectoryUsersPhotosGetPathParams = field(default=None)
-    query_params: DirectoryUsersPhotosGetQueryParams = field(default=None)
-    security: DirectoryUsersPhotosGetSecurity = field(default=None)
+    path_params: DirectoryUsersPhotosGetPathParams = field()
+    query_params: DirectoryUsersPhotosGetQueryParams = field()
+    security: DirectoryUsersPhotosGetSecurity = field()
     
 
 @dataclass
 class DirectoryUsersPhotosGetResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     user_photo: Optional[shared.UserPhoto] = field(default=None)
     

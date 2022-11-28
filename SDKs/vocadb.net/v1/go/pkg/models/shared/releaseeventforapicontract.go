@@ -50,3 +50,28 @@ type ReleaseEventForAPIContract struct {
 	Version         *int32                                  `json:"version,omitempty"`
 	WebLinks        []WebLinkForAPIContract                 `json:"webLinks,omitempty"`
 }
+
+type ReleaseEventForAPIContractInput struct {
+	AdditionalNames *string                                 `json:"additionalNames,omitempty"`
+	Artists         []ArtistForEventContract                `json:"artists,omitempty"`
+	Category        *ReleaseEventForAPIContractCategoryEnum `json:"category,omitempty"`
+	Date            *time.Time                              `json:"date,omitempty"`
+	Description     *string                                 `json:"description,omitempty"`
+	EndDate         *time.Time                              `json:"endDate,omitempty"`
+	ID              *int32                                  `json:"id,omitempty"`
+	MainPicture     *EntryThumbForAPIContract               `json:"mainPicture,omitempty"`
+	Name            *string                                 `json:"name,omitempty"`
+	Names           []LocalizedStringContract               `json:"names,omitempty"`
+	Series          *ReleaseEventSeriesContract             `json:"series,omitempty"`
+	SeriesID        *int32                                  `json:"seriesId,omitempty"`
+	SeriesNumber    *int32                                  `json:"seriesNumber,omitempty"`
+	SeriesSuffix    *string                                 `json:"seriesSuffix,omitempty"`
+	SongList        *SongListBaseContract                   `json:"songList,omitempty"`
+	Status          *ReleaseEventForAPIContractStatusEnum   `json:"status,omitempty"`
+	Tags            []TagUsageForAPIContract                `json:"tags,omitempty"`
+	URLSlug         *string                                 `json:"urlSlug,omitempty"`
+	Venue           *VenueForAPIContractInput               `json:"venue,omitempty"`
+	VenueName       *string                                 `json:"venueName,omitempty"`
+	Version         *int32                                  `json:"version,omitempty"`
+	WebLinks        []WebLinkForAPIContract                 `json:"webLinks,omitempty"`
+}

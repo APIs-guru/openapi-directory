@@ -15,13 +15,13 @@ type GetCustomFieldsForWorkspaceQueryParams struct {
 	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
+type GetCustomFieldsForWorkspace200ApplicationJSON struct {
+	Data []shared.CustomFieldResponse `json:"data,omitempty"`
+}
+
 type GetCustomFieldsForWorkspaceRequest struct {
 	PathParams  GetCustomFieldsForWorkspacePathParams
 	QueryParams GetCustomFieldsForWorkspaceQueryParams
-}
-
-type GetCustomFieldsForWorkspace200ApplicationJSON struct {
-	Data []shared.CustomFieldResponse `json:"data,omitempty"`
 }
 
 type GetCustomFieldsForWorkspaceResponse struct {

@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InstanceStateEnum } from "./instancestateenum";
 import { InstanceStateChangeReason } from "./instancestatechangereason";
 import { InstanceTimeline } from "./instancetimeline";
+
 
 
 // InstanceStatus
@@ -9,12 +10,12 @@ import { InstanceTimeline } from "./instancetimeline";
  * The instance status details.
 **/
 export class InstanceStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=State" })
+  @SpeakeasyMetadata({ data: "json, name=State" })
   state?: InstanceStateEnum;
 
-  @Metadata({ data: "json, name=StateChangeReason" })
+  @SpeakeasyMetadata({ data: "json, name=StateChangeReason" })
   stateChangeReason?: InstanceStateChangeReason;
 
-  @Metadata({ data: "json, name=Timeline" })
+  @SpeakeasyMetadata({ data: "json, name=Timeline" })
   timeline?: InstanceTimeline;
 }

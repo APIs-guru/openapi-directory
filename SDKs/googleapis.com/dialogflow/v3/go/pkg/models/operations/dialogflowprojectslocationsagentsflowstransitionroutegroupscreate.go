@@ -41,7 +41,7 @@ type DialogflowProjectsLocationsAgentsFlowsTransitionRouteGroupsCreateSecurity s
 type DialogflowProjectsLocationsAgentsFlowsTransitionRouteGroupsCreateRequest struct {
 	PathParams  DialogflowProjectsLocationsAgentsFlowsTransitionRouteGroupsCreatePathParams
 	QueryParams DialogflowProjectsLocationsAgentsFlowsTransitionRouteGroupsCreateQueryParams
-	Request     *shared.GoogleCloudDialogflowCxV3TransitionRouteGroup `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudDialogflowCxV3TransitionRouteGroupInput `request:"mediaType=application/json"`
 	Security    DialogflowProjectsLocationsAgentsFlowsTransitionRouteGroupsCreateSecurity
 }
 

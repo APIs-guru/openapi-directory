@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VerificationRefreshStatusEnum } from "./verificationrefreshstatusenum";
+
 
 
 // IncomeVerificationRefreshResponse
@@ -7,9 +8,9 @@ import { VerificationRefreshStatusEnum } from "./verificationrefreshstatusenum";
  * IncomeVerificationRequestResponse defines the response schema for `/income/verification/refresh`
 **/
 export class IncomeVerificationRefreshResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=request_id" })
+  @SpeakeasyMetadata({ data: "json, name=request_id" })
   requestId: string;
 
-  @Metadata({ data: "json, name=verification_refresh_status" })
+  @SpeakeasyMetadata({ data: "json, name=verification_refresh_status" })
   verificationRefreshStatus: VerificationRefreshStatusEnum;
 }

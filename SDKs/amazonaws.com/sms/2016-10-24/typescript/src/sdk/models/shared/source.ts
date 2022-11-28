@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { S3Location } from "./s3location";
+
 
 
 // Source
@@ -7,6 +8,6 @@ import { S3Location } from "./s3location";
  * Contains the location of a validation script.
 **/
 export class Source extends SpeakeasyBase {
-  @Metadata({ data: "json, name=s3Location" })
+  @SpeakeasyMetadata({ data: "json, name=s3Location" })
   s3Location?: S3Location;
 }

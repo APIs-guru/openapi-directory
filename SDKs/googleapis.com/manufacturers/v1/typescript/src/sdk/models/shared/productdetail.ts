@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ProductDetail
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A product detail of the product. For more information, see https://support.google.com/manufacturers/answer/6124116#productdetail.
 **/
 export class ProductDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attributeName" })
+  @SpeakeasyMetadata({ data: "json, name=attributeName" })
   attributeName?: string;
 
-  @Metadata({ data: "json, name=attributeValue" })
+  @SpeakeasyMetadata({ data: "json, name=attributeValue" })
   attributeValue?: string;
 
-  @Metadata({ data: "json, name=sectionName" })
+  @SpeakeasyMetadata({ data: "json, name=sectionName" })
   sectionName?: string;
 }

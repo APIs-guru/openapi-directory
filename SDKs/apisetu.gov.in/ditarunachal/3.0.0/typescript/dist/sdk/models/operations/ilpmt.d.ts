@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class IlpmtRequestBodyCertificateParameters extends SpeakeasyBase {
     fullName: string;
@@ -18,10 +18,6 @@ export declare class IlpmtRequestBody extends SpeakeasyBase {
 export declare class IlpmtSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class IlpmtRequest extends SpeakeasyBase {
-    request?: IlpmtRequestBody;
-    security: IlpmtSecurity;
 }
 export declare enum Ilpmt400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -104,6 +100,10 @@ export declare enum Ilpmt504ApplicationJsonErrorDescriptionEnum {
 export declare class Ilpmt504ApplicationJson extends SpeakeasyBase {
     error?: Ilpmt504ApplicationJsonErrorEnum;
     errorDescription?: Ilpmt504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class IlpmtRequest extends SpeakeasyBase {
+    request?: IlpmtRequestBody;
+    security: IlpmtSecurity;
 }
 export declare class IlpmtResponse extends SpeakeasyBase {
     contentType: string;

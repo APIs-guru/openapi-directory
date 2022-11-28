@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Alias } from "./alias";
 import { HistogramEntry } from "./histogramentry";
 import { EdgeStatistics } from "./edgestatistics";
+
 
 
 // Edge
@@ -10,21 +10,21 @@ import { EdgeStatistics } from "./edgestatistics";
  * Information about a connection between two services.
 **/
 export class Edge extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Aliases", elemType: shared.Alias })
+  @SpeakeasyMetadata({ data: "json, name=Aliases", elemType: Alias })
   aliases?: Alias[];
 
-  @Metadata({ data: "json, name=EndTime" })
+  @SpeakeasyMetadata({ data: "json, name=EndTime" })
   endTime?: Date;
 
-  @Metadata({ data: "json, name=ReferenceId" })
+  @SpeakeasyMetadata({ data: "json, name=ReferenceId" })
   referenceId?: number;
 
-  @Metadata({ data: "json, name=ResponseTimeHistogram", elemType: shared.HistogramEntry })
+  @SpeakeasyMetadata({ data: "json, name=ResponseTimeHistogram", elemType: HistogramEntry })
   responseTimeHistogram?: HistogramEntry[];
 
-  @Metadata({ data: "json, name=StartTime" })
+  @SpeakeasyMetadata({ data: "json, name=StartTime" })
   startTime?: Date;
 
-  @Metadata({ data: "json, name=SummaryStatistics" })
+  @SpeakeasyMetadata({ data: "json, name=SummaryStatistics" })
   summaryStatistics?: EdgeStatistics;
 }

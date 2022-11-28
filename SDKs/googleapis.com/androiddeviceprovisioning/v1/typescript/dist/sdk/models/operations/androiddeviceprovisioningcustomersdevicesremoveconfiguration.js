@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var AndroiddeviceprovisioningCustomersDevicesRemoveConfigurationPathParams = /** @class */ (function (_super) {
     __extends(AndroiddeviceprovisioningCustomersDevicesRemoveConfigurationPathParams, _super);
@@ -30,7 +30,7 @@ var AndroiddeviceprovisioningCustomersDevicesRemoveConfigurationPathParams = /**
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=parent" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=parent" }),
         __metadata("design:type", String)
     ], AndroiddeviceprovisioningCustomersDevicesRemoveConfigurationPathParams.prototype, "parent", void 0);
     return AndroiddeviceprovisioningCustomersDevicesRemoveConfigurationPathParams;
@@ -42,47 +42,47 @@ var AndroiddeviceprovisioningCustomersDevicesRemoveConfigurationQueryParams = /*
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], AndroiddeviceprovisioningCustomersDevicesRemoveConfigurationQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], AndroiddeviceprovisioningCustomersDevicesRemoveConfigurationQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], AndroiddeviceprovisioningCustomersDevicesRemoveConfigurationQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], AndroiddeviceprovisioningCustomersDevicesRemoveConfigurationQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], AndroiddeviceprovisioningCustomersDevicesRemoveConfigurationQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], AndroiddeviceprovisioningCustomersDevicesRemoveConfigurationQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], AndroiddeviceprovisioningCustomersDevicesRemoveConfigurationQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], AndroiddeviceprovisioningCustomersDevicesRemoveConfigurationQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], AndroiddeviceprovisioningCustomersDevicesRemoveConfigurationQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], AndroiddeviceprovisioningCustomersDevicesRemoveConfigurationQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], AndroiddeviceprovisioningCustomersDevicesRemoveConfigurationQueryParams.prototype, "uploadProtocol", void 0);
     return AndroiddeviceprovisioningCustomersDevicesRemoveConfigurationQueryParams;
@@ -94,15 +94,15 @@ var AndroiddeviceprovisioningCustomersDevicesRemoveConfigurationRequest = /** @c
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AndroiddeviceprovisioningCustomersDevicesRemoveConfigurationPathParams)
     ], AndroiddeviceprovisioningCustomersDevicesRemoveConfigurationRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AndroiddeviceprovisioningCustomersDevicesRemoveConfigurationQueryParams)
     ], AndroiddeviceprovisioningCustomersDevicesRemoveConfigurationRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.CustomerRemoveConfigurationRequest)
     ], AndroiddeviceprovisioningCustomersDevicesRemoveConfigurationRequest.prototype, "request", void 0);
     return AndroiddeviceprovisioningCustomersDevicesRemoveConfigurationRequest;
@@ -114,15 +114,15 @@ var AndroiddeviceprovisioningCustomersDevicesRemoveConfigurationResponse = /** @
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], AndroiddeviceprovisioningCustomersDevicesRemoveConfigurationResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], AndroiddeviceprovisioningCustomersDevicesRemoveConfigurationResponse.prototype, "empty", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], AndroiddeviceprovisioningCustomersDevicesRemoveConfigurationResponse.prototype, "statusCode", void 0);
     return AndroiddeviceprovisioningCustomersDevicesRemoveConfigurationResponse;

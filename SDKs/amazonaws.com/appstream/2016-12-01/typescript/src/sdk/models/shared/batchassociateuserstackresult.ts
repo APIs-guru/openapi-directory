@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserStackAssociationError } from "./userstackassociationerror";
 
 
+
 export class BatchAssociateUserStackResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.UserStackAssociationError })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: UserStackAssociationError })
   errors?: UserStackAssociationError[];
 }

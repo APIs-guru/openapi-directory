@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RecommendationCategoryEnum } from "./recommendationcategoryenum";
 import { RuleMetadata } from "./rulemetadata";
 import { SeverityEnum } from "./severityenum";
+
 
 
 // RecommendationSummary
@@ -9,27 +10,27 @@ import { SeverityEnum } from "./severityenum";
  *  Information about recommendations. 
 **/
 export class RecommendationSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=EndLine" })
+  @SpeakeasyMetadata({ data: "json, name=EndLine" })
   endLine?: number;
 
-  @Metadata({ data: "json, name=FilePath" })
+  @SpeakeasyMetadata({ data: "json, name=FilePath" })
   filePath?: string;
 
-  @Metadata({ data: "json, name=RecommendationCategory" })
+  @SpeakeasyMetadata({ data: "json, name=RecommendationCategory" })
   recommendationCategory?: RecommendationCategoryEnum;
 
-  @Metadata({ data: "json, name=RecommendationId" })
+  @SpeakeasyMetadata({ data: "json, name=RecommendationId" })
   recommendationId?: string;
 
-  @Metadata({ data: "json, name=RuleMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=RuleMetadata" })
   ruleMetadata?: RuleMetadata;
 
-  @Metadata({ data: "json, name=Severity" })
+  @SpeakeasyMetadata({ data: "json, name=Severity" })
   severity?: SeverityEnum;
 
-  @Metadata({ data: "json, name=StartLine" })
+  @SpeakeasyMetadata({ data: "json, name=StartLine" })
   startLine?: number;
 }

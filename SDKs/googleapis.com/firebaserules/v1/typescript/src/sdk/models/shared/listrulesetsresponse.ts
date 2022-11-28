@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Ruleset } from "./ruleset";
+
 
 
 // ListRulesetsResponse
@@ -8,9 +8,9 @@ import { Ruleset } from "./ruleset";
  * The response for FirebaseRulesService.ListRulesets.
 **/
 export class ListRulesetsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=rulesets", elemType: shared.Ruleset })
+  @SpeakeasyMetadata({ data: "json, name=rulesets", elemType: Ruleset })
   rulesets?: Ruleset[];
 }

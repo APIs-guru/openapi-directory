@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // WeightedFontFamily
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents a font family and weight of text.
 **/
 export class WeightedFontFamily extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fontFamily" })
+  @SpeakeasyMetadata({ data: "json, name=fontFamily" })
   fontFamily?: string;
 
-  @Metadata({ data: "json, name=weight" })
+  @SpeakeasyMetadata({ data: "json, name=weight" })
   weight?: number;
 }

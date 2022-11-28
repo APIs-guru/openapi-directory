@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { PiiEntityTypeEnum } from "./piientitytypeenum";
 /**
  * Specifies one of the label or labels that categorize the personally identifiable information (PII) entity being analyzed.

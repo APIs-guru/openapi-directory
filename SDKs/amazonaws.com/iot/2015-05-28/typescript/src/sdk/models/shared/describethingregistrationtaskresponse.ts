@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StatusEnum } from "./statusenum";
 
 
+
 export class DescribeThingRegistrationTaskResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=creationDate" })
+  @SpeakeasyMetadata({ data: "json, name=creationDate" })
   creationDate?: Date;
 
-  @Metadata({ data: "json, name=failureCount" })
+  @SpeakeasyMetadata({ data: "json, name=failureCount" })
   failureCount?: number;
 
-  @Metadata({ data: "json, name=inputFileBucket" })
+  @SpeakeasyMetadata({ data: "json, name=inputFileBucket" })
   inputFileBucket?: string;
 
-  @Metadata({ data: "json, name=inputFileKey" })
+  @SpeakeasyMetadata({ data: "json, name=inputFileKey" })
   inputFileKey?: string;
 
-  @Metadata({ data: "json, name=lastModifiedDate" })
+  @SpeakeasyMetadata({ data: "json, name=lastModifiedDate" })
   lastModifiedDate?: Date;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=percentageProgress" })
+  @SpeakeasyMetadata({ data: "json, name=percentageProgress" })
   percentageProgress?: number;
 
-  @Metadata({ data: "json, name=roleArn" })
+  @SpeakeasyMetadata({ data: "json, name=roleArn" })
   roleArn?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: StatusEnum;
 
-  @Metadata({ data: "json, name=successCount" })
+  @SpeakeasyMetadata({ data: "json, name=successCount" })
   successCount?: number;
 
-  @Metadata({ data: "json, name=taskId" })
+  @SpeakeasyMetadata({ data: "json, name=taskId" })
   taskId?: string;
 
-  @Metadata({ data: "json, name=templateBody" })
+  @SpeakeasyMetadata({ data: "json, name=templateBody" })
   templateBody?: string;
 }

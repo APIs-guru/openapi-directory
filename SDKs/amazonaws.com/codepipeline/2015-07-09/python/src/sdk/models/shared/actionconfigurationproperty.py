@@ -1,17 +1,23 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import actionconfigurationpropertytype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ActionConfigurationProperty:
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    key: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    queryable: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'queryable' }})
-    required: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'required' }})
-    secret: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'secret' }})
-    type: Optional[actionconfigurationpropertytype_enum.ActionConfigurationPropertyTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""ActionConfigurationProperty
+    Represents information about an action configuration property.
+    """
+    
+    key: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('key') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    required: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('required') }})
+    secret: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('secret') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    queryable: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('queryable') }})
+    type: Optional[ActionConfigurationPropertyTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AuthorizationPolicy } from "./authorizationpolicy";
 /**
  * Response returned by the ListAuthorizationPolicies method.

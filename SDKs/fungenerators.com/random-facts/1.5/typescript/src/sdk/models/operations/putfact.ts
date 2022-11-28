@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PutFactQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=category" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=category" })
   category: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fact" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fact" })
   fact: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=subcategory" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=subcategory" })
   subcategory: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=tags" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tags" })
   tags: string;
 }
 
 
 export class PutFactSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   xFungeneratorsApiSecret: shared.SchemeXFungeneratorsApiSecret;
 }
 
 
 export class PutFactRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PutFactQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: PutFactSecurity;
 }
 
 
 export class PutFactResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

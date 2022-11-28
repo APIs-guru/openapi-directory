@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var UgdcnRequestBodyCertificateParameters = /** @class */ (function (_super) {
     __extends(UgdcnRequestBodyCertificateParameters, _super);
@@ -30,7 +30,7 @@ var UgdcnRequestBodyCertificateParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DocumentNumber" }),
+        SpeakeasyMetadata({ data: "json, name=DocumentNumber" }),
         __metadata("design:type", String)
     ], UgdcnRequestBodyCertificateParameters.prototype, "documentNumber", void 0);
     return UgdcnRequestBodyCertificateParameters;
@@ -46,19 +46,19 @@ var UgdcnRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=certificateParameters" }),
+        SpeakeasyMetadata({ data: "json, name=certificateParameters" }),
         __metadata("design:type", UgdcnRequestBodyCertificateParameters)
     ], UgdcnRequestBody.prototype, "certificateParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=consentArtifact" }),
+        SpeakeasyMetadata({ data: "json, name=consentArtifact" }),
         __metadata("design:type", Object)
     ], UgdcnRequestBody.prototype, "consentArtifact", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], UgdcnRequestBody.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=txnId" }),
+        SpeakeasyMetadata({ data: "json, name=txnId" }),
         __metadata("design:type", String)
     ], UgdcnRequestBody.prototype, "txnId", void 0);
     return UgdcnRequestBody;
@@ -70,32 +70,16 @@ var UgdcnSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], UgdcnSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeClientId)
     ], UgdcnSecurity.prototype, "clientId", void 0);
     return UgdcnSecurity;
 }(SpeakeasyBase));
 export { UgdcnSecurity };
-var UgdcnRequest = /** @class */ (function (_super) {
-    __extends(UgdcnRequest, _super);
-    function UgdcnRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", UgdcnRequestBody)
-    ], UgdcnRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", UgdcnSecurity)
-    ], UgdcnRequest.prototype, "security", void 0);
-    return UgdcnRequest;
-}(SpeakeasyBase));
-export { UgdcnRequest };
 export var Ugdcn400ApplicationJsonErrorEnum;
 (function (Ugdcn400ApplicationJsonErrorEnum) {
     Ugdcn400ApplicationJsonErrorEnum["MissingParameter"] = "missing_parameter";
@@ -118,11 +102,11 @@ var Ugdcn400ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Ugdcn400ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Ugdcn400ApplicationJson.prototype, "errorDescription", void 0);
     return Ugdcn400ApplicationJson;
@@ -144,11 +128,11 @@ var Ugdcn401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Ugdcn401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Ugdcn401ApplicationJson.prototype, "errorDescription", void 0);
     return Ugdcn401ApplicationJson;
@@ -170,11 +154,11 @@ var Ugdcn404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Ugdcn404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Ugdcn404ApplicationJson.prototype, "errorDescription", void 0);
     return Ugdcn404ApplicationJson;
@@ -194,11 +178,11 @@ var Ugdcn500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Ugdcn500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Ugdcn500ApplicationJson.prototype, "errorDescription", void 0);
     return Ugdcn500ApplicationJson;
@@ -218,11 +202,11 @@ var Ugdcn502ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Ugdcn502ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Ugdcn502ApplicationJson.prototype, "errorDescription", void 0);
     return Ugdcn502ApplicationJson;
@@ -242,11 +226,11 @@ var Ugdcn503ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Ugdcn503ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Ugdcn503ApplicationJson.prototype, "errorDescription", void 0);
     return Ugdcn503ApplicationJson;
@@ -266,55 +250,71 @@ var Ugdcn504ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Ugdcn504ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Ugdcn504ApplicationJson.prototype, "errorDescription", void 0);
     return Ugdcn504ApplicationJson;
 }(SpeakeasyBase));
 export { Ugdcn504ApplicationJson };
+var UgdcnRequest = /** @class */ (function (_super) {
+    __extends(UgdcnRequest, _super);
+    function UgdcnRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", UgdcnRequestBody)
+    ], UgdcnRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", UgdcnSecurity)
+    ], UgdcnRequest.prototype, "security", void 0);
+    return UgdcnRequest;
+}(SpeakeasyBase));
+export { UgdcnRequest };
 var UgdcnResponse = /** @class */ (function (_super) {
     __extends(UgdcnResponse, _super);
     function UgdcnResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UgdcnResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UgdcnResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Ugdcn400ApplicationJson)
     ], UgdcnResponse.prototype, "ugdcn400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Ugdcn401ApplicationJson)
     ], UgdcnResponse.prototype, "ugdcn401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Ugdcn404ApplicationJson)
     ], UgdcnResponse.prototype, "ugdcn404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Ugdcn500ApplicationJson)
     ], UgdcnResponse.prototype, "ugdcn500ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Ugdcn502ApplicationJson)
     ], UgdcnResponse.prototype, "ugdcn502ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Ugdcn503ApplicationJson)
     ], UgdcnResponse.prototype, "ugdcn503ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Ugdcn504ApplicationJson)
     ], UgdcnResponse.prototype, "ugdcn504ApplicationJsonObject", void 0);
     return UgdcnResponse;

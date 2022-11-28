@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// CveDetailsCvssv2
+// CVSS V2 of the CVE
 type CveDetailsCvssv2 struct {
 	BaseScore *int64  `json:"baseScore,omitempty"`
 	Vector    *string `json:"vector,omitempty"`
@@ -19,6 +21,8 @@ const (
 	CveDetailsCvssv3BaseSeverityEnumNone     CveDetailsCvssv3BaseSeverityEnum = "none"
 )
 
+// CveDetailsCvssv3
+// CVSS V3 of the CVE
 type CveDetailsCvssv3 struct {
 	BaseScore    *float64                          `json:"baseScore,omitempty"`
 	BaseSeverity *CveDetailsCvssv3BaseSeverityEnum `json:"baseSeverity,omitempty"`

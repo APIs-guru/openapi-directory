@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Certificate
+// <p>Describes the full details of an Amazon Lightsail SSL/TLS certificate.</p> <note> <p>To get a summary of a certificate, use the <code>GetCertificates</code> action and ommit <code>includeCertificateDetails</code> from your request. The response will include only the certificate Amazon Resource Name (ARN), certificate name, domain name, and tags.</p> </note>
 type Certificate struct {
 	Arn                     *string                  `json:"arn,omitempty"`
 	CreatedAt               *time.Time               `json:"createdAt,omitempty"`

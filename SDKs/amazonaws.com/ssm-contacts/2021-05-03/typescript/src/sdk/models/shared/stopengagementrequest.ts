@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class StopEngagementRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EngagementId" })
+  @SpeakeasyMetadata({ data: "json, name=EngagementId" })
   engagementId: string;
 
-  @Metadata({ data: "json, name=Reason" })
+  @SpeakeasyMetadata({ data: "json, name=Reason" })
   reason?: string;
 }

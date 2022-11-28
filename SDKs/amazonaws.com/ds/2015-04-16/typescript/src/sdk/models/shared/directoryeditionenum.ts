@@ -1,6 +1,7 @@
 
 
+
 export enum DirectoryEditionEnum {
-    Enterprise = "Enterprise"
-,    Standard = "Standard"
+    Enterprise = "Enterprise",
+    Standard = "Standard"
 }

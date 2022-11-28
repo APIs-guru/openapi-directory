@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDescribeOrderableClusterOptionsActionEnum(str, Enum):
     DESCRIBE_ORDERABLE_CLUSTER_OPTIONS = "DescribeOrderableClusterOptions"
@@ -10,12 +14,12 @@ class GetDescribeOrderableClusterOptionsVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeOrderableClusterOptionsQueryParams:
-    action: GetDescribeOrderableClusterOptionsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribeOrderableClusterOptionsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDescribeOrderableClusterOptionsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     cluster_version: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'ClusterVersion', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
     max_records: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxRecords', 'style': 'form', 'explode': True }})
     node_type: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NodeType', 'style': 'form', 'explode': True }})
-    version: GetDescribeOrderableClusterOptionsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -31,13 +35,13 @@ class GetDescribeOrderableClusterOptionsHeaders:
 
 @dataclass
 class GetDescribeOrderableClusterOptionsRequest:
-    query_params: GetDescribeOrderableClusterOptionsQueryParams = field(default=None)
-    headers: GetDescribeOrderableClusterOptionsHeaders = field(default=None)
+    headers: GetDescribeOrderableClusterOptionsHeaders = field()
+    query_params: GetDescribeOrderableClusterOptionsQueryParams = field()
     
 
 @dataclass
 class GetDescribeOrderableClusterOptionsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -10,22 +10,10 @@ type GetRepositoriesWorkspaceRepoSlugComponentsComponentIDPathParams struct {
 	Workspace   string `pathParam:"style=simple,explode=false,name=workspace"`
 }
 
-type GetRepositoriesWorkspaceRepoSlugComponentsComponentIDSecurityOption1 struct {
-	Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
-}
-
-type GetRepositoriesWorkspaceRepoSlugComponentsComponentIDSecurityOption2 struct {
-	Basic shared.SchemeBasic `security:"scheme,type=http,subtype=basic"`
-}
-
-type GetRepositoriesWorkspaceRepoSlugComponentsComponentIDSecurityOption3 struct {
-	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
-}
-
 type GetRepositoriesWorkspaceRepoSlugComponentsComponentIDSecurity struct {
-	Option1 *GetRepositoriesWorkspaceRepoSlugComponentsComponentIDSecurityOption1 `security:"option"`
-	Option2 *GetRepositoriesWorkspaceRepoSlugComponentsComponentIDSecurityOption2 `security:"option"`
-	Option3 *GetRepositoriesWorkspaceRepoSlugComponentsComponentIDSecurityOption3 `security:"option"`
+	Oauth2 *shared.SchemeOauth2 `security:"scheme,type=oauth2"`
+	Basic  *shared.SchemeBasic  `security:"scheme,type=http,subtype=basic"`
+	APIKey *shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type GetRepositoriesWorkspaceRepoSlugComponentsComponentIDRequest struct {

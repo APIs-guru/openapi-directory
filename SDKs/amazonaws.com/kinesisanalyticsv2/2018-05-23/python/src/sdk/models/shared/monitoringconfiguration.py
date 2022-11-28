@@ -1,15 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import configurationtype_enum
-from . import loglevel_enum
-from . import metricslevel_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class MonitoringConfiguration:
-    configuration_type: configurationtype_enum.ConfigurationTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ConfigurationType' }})
-    log_level: Optional[loglevel_enum.LogLevelEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LogLevel' }})
-    metrics_level: Optional[metricslevel_enum.MetricsLevelEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MetricsLevel' }})
+    r"""MonitoringConfiguration
+    Describes configuration parameters for Amazon CloudWatch logging for an application. For more information about CloudWatch logging, see <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/java/monitoring-overview.html\">Monitoring</a>.
+    """
+    
+    configuration_type: ConfigurationTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ConfigurationType') }})
+    log_level: Optional[LogLevelEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('LogLevel') }})
+    metrics_level: Optional[MetricsLevelEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MetricsLevel') }})
     

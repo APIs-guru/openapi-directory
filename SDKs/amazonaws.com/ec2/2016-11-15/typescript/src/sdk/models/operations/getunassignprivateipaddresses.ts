@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetUnassignPrivateIpAddressesActionEnum {
     UnassignPrivateIpAddresses = "UnassignPrivateIpAddresses"
@@ -10,60 +11,60 @@ export enum GetUnassignPrivateIpAddressesVersionEnum {
 
 
 export class GetUnassignPrivateIpAddressesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Action" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" })
   action: GetUnassignPrivateIpAddressesActionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Ipv4Prefix" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Ipv4Prefix" })
   ipv4Prefix?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=NetworkInterfaceId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=NetworkInterfaceId" })
   networkInterfaceId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=PrivateIpAddress" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=PrivateIpAddress" })
   privateIpAddress?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" })
   version: GetUnassignPrivateIpAddressesVersionEnum;
 }
 
 
 export class GetUnassignPrivateIpAddressesHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class GetUnassignPrivateIpAddressesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetUnassignPrivateIpAddressesQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetUnassignPrivateIpAddressesHeaders;
 }
 
 
 export class GetUnassignPrivateIpAddressesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

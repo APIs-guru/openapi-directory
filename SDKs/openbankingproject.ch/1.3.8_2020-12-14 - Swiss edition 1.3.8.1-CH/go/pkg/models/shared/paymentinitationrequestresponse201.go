@@ -1,5 +1,7 @@
 package shared
 
+// PaymentInitationRequestResponse201
+// Body of the response for a successful payment initiation request.
 type PaymentInitationRequestResponse201 struct {
 	Links                              map[string]HrefType    `json:"_links"`
 	ChallengeData                      *ChallengeData         `json:"challengeData,omitempty"`

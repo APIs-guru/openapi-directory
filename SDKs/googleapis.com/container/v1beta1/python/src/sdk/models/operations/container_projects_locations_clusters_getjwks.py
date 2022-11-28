@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ContainerProjectsLocationsClustersGetJwksPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,13 +26,13 @@ class ContainerProjectsLocationsClustersGetJwksQueryParams:
 
 @dataclass
 class ContainerProjectsLocationsClustersGetJwksRequest:
-    path_params: ContainerProjectsLocationsClustersGetJwksPathParams = field(default=None)
-    query_params: ContainerProjectsLocationsClustersGetJwksQueryParams = field(default=None)
+    path_params: ContainerProjectsLocationsClustersGetJwksPathParams = field()
+    query_params: ContainerProjectsLocationsClustersGetJwksQueryParams = field()
     
 
 @dataclass
 class ContainerProjectsLocationsClustersGetJwksResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_json_web_keys_response: Optional[shared.GetJSONWebKeysResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,41 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetCertificatesSortEnum {
-    Id = "id"
-,    IdAsc = "id:asc"
-,    IdDesc = "id:desc"
-,    Name = "name"
-,    NameAsc = "name:asc"
-,    NameDesc = "name:desc"
-,    Created = "created"
-,    CreatedAsc = "created:asc"
-,    CreatedDesc = "created:desc"
+    Id = "id",
+    IdAsc = "id:asc",
+    IdDesc = "id:desc",
+    Name = "name",
+    NameAsc = "name:asc",
+    NameDesc = "name:desc",
+    Created = "created",
+    CreatedAsc = "created:asc",
+    CreatedDesc = "created:desc"
 }
 
 export enum GetCertificatesTypeParameterTypeEnum {
-    Uploaded = "uploaded"
-,    Managed = "managed"
+    Uploaded = "uploaded",
+    Managed = "managed"
 }
 
 
 export class GetCertificatesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=label_selector" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=label_selector" })
   labelSelector?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name" })
   name?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: GetCertificatesSortEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=type" })
   type?: GetCertificatesTypeParameterTypeEnum;
-}
-
-
-export class GetCertificatesRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetCertificatesQueryParams;
 }
 
 
@@ -44,24 +39,24 @@ export class GetCertificatesRequest extends SpeakeasyBase {
  * If issuance or renewal reports `failed`, this property contains information about what happened
 **/
 export class GetCertificatesCertificatesResponseCertificateStatusError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 export enum GetCertificatesCertificatesResponseCertificateStatusIssuanceEnum {
-    Pending = "pending"
-,    Completed = "completed"
-,    Failed = "failed"
+    Pending = "pending",
+    Completed = "completed",
+    Failed = "failed"
 }
 
 export enum GetCertificatesCertificatesResponseCertificateStatusRenewalEnum {
-    Scheduled = "scheduled"
-,    Pending = "pending"
-,    Failed = "failed"
-,    Unavailable = "unavailable"
+    Scheduled = "scheduled",
+    Pending = "pending",
+    Failed = "failed",
+    Unavailable = "unavailable"
 }
 
 
@@ -70,113 +65,119 @@ export enum GetCertificatesCertificatesResponseCertificateStatusRenewalEnum {
  * Current status of a type `managed` Certificate, always *null* for type `uploaded` Certificates
 **/
 export class GetCertificatesCertificatesResponseCertificateStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: GetCertificatesCertificatesResponseCertificateStatusError;
 
-  @Metadata({ data: "json, name=issuance" })
+  @SpeakeasyMetadata({ data: "json, name=issuance" })
   issuance?: GetCertificatesCertificatesResponseCertificateStatusIssuanceEnum;
 
-  @Metadata({ data: "json, name=renewal" })
+  @SpeakeasyMetadata({ data: "json, name=renewal" })
   renewal?: GetCertificatesCertificatesResponseCertificateStatusRenewalEnum;
 }
 
 export enum GetCertificatesCertificatesResponseCertificateTypeEnum {
-    Uploaded = "uploaded"
-,    Managed = "managed"
+    Uploaded = "uploaded",
+    Managed = "managed"
 }
 
 
 export class GetCertificatesCertificatesResponseCertificateUsedBy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }
 
 
 export class GetCertificatesCertificatesResponseCertificate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=certificate" })
+  @SpeakeasyMetadata({ data: "json, name=certificate" })
   certificate: string;
 
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created: string;
 
-  @Metadata({ data: "json, name=domain_names" })
+  @SpeakeasyMetadata({ data: "json, name=domain_names" })
   domainNames: string[];
 
-  @Metadata({ data: "json, name=fingerprint" })
+  @SpeakeasyMetadata({ data: "json, name=fingerprint" })
   fingerprint: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels: Map<string, string>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=not_valid_after" })
+  @SpeakeasyMetadata({ data: "json, name=not_valid_after" })
   notValidAfter: string;
 
-  @Metadata({ data: "json, name=not_valid_before" })
+  @SpeakeasyMetadata({ data: "json, name=not_valid_before" })
   notValidBefore: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: GetCertificatesCertificatesResponseCertificateStatus;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: GetCertificatesCertificatesResponseCertificateTypeEnum;
 
-  @Metadata({ data: "json, name=used_by", elemType: operations.GetCertificatesCertificatesResponseCertificateUsedBy })
+  @SpeakeasyMetadata({ data: "json, name=used_by", elemType: GetCertificatesCertificatesResponseCertificateUsedBy })
   usedBy: GetCertificatesCertificatesResponseCertificateUsedBy[];
 }
 
 
 export class GetCertificatesCertificatesResponseMetaPagination extends SpeakeasyBase {
-  @Metadata({ data: "json, name=last_page" })
+  @SpeakeasyMetadata({ data: "json, name=last_page" })
   lastPage: number;
 
-  @Metadata({ data: "json, name=next_page" })
+  @SpeakeasyMetadata({ data: "json, name=next_page" })
   nextPage: number;
 
-  @Metadata({ data: "json, name=page" })
+  @SpeakeasyMetadata({ data: "json, name=page" })
   page: number;
 
-  @Metadata({ data: "json, name=per_page" })
+  @SpeakeasyMetadata({ data: "json, name=per_page" })
   perPage: number;
 
-  @Metadata({ data: "json, name=previous_page" })
+  @SpeakeasyMetadata({ data: "json, name=previous_page" })
   previousPage: number;
 
-  @Metadata({ data: "json, name=total_entries" })
+  @SpeakeasyMetadata({ data: "json, name=total_entries" })
   totalEntries: number;
 }
 
 
 export class GetCertificatesCertificatesResponseMeta extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pagination" })
+  @SpeakeasyMetadata({ data: "json, name=pagination" })
   pagination: GetCertificatesCertificatesResponseMetaPagination;
 }
 
 
 export class GetCertificatesCertificatesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=certificates", elemType: operations.GetCertificatesCertificatesResponseCertificate })
+  @SpeakeasyMetadata({ data: "json, name=certificates", elemType: GetCertificatesCertificatesResponseCertificate })
   certificates: GetCertificatesCertificatesResponseCertificate[];
 
-  @Metadata({ data: "json, name=meta" })
+  @SpeakeasyMetadata({ data: "json, name=meta" })
   meta?: GetCertificatesCertificatesResponseMeta;
 }
 
 
+export class GetCertificatesRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetCertificatesQueryParams;
+}
+
+
 export class GetCertificatesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   certificatesResponse?: GetCertificatesCertificatesResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

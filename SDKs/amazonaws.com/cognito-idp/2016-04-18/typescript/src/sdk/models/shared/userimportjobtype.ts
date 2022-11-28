@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserImportJobStatusTypeEnum } from "./userimportjobstatustypeenum";
+
 
 
 // UserImportJobType
@@ -7,42 +8,42 @@ import { UserImportJobStatusTypeEnum } from "./userimportjobstatustypeenum";
  * The user import job type.
 **/
 export class UserImportJobType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CloudWatchLogsRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=CloudWatchLogsRoleArn" })
   cloudWatchLogsRoleArn?: string;
 
-  @Metadata({ data: "json, name=CompletionDate" })
+  @SpeakeasyMetadata({ data: "json, name=CompletionDate" })
   completionDate?: Date;
 
-  @Metadata({ data: "json, name=CompletionMessage" })
+  @SpeakeasyMetadata({ data: "json, name=CompletionMessage" })
   completionMessage?: string;
 
-  @Metadata({ data: "json, name=CreationDate" })
+  @SpeakeasyMetadata({ data: "json, name=CreationDate" })
   creationDate?: Date;
 
-  @Metadata({ data: "json, name=FailedUsers" })
+  @SpeakeasyMetadata({ data: "json, name=FailedUsers" })
   failedUsers?: number;
 
-  @Metadata({ data: "json, name=ImportedUsers" })
+  @SpeakeasyMetadata({ data: "json, name=ImportedUsers" })
   importedUsers?: number;
 
-  @Metadata({ data: "json, name=JobId" })
+  @SpeakeasyMetadata({ data: "json, name=JobId" })
   jobId?: string;
 
-  @Metadata({ data: "json, name=JobName" })
+  @SpeakeasyMetadata({ data: "json, name=JobName" })
   jobName?: string;
 
-  @Metadata({ data: "json, name=PreSignedUrl" })
+  @SpeakeasyMetadata({ data: "json, name=PreSignedUrl" })
   preSignedUrl?: string;
 
-  @Metadata({ data: "json, name=SkippedUsers" })
+  @SpeakeasyMetadata({ data: "json, name=SkippedUsers" })
   skippedUsers?: number;
 
-  @Metadata({ data: "json, name=StartDate" })
+  @SpeakeasyMetadata({ data: "json, name=StartDate" })
   startDate?: Date;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: UserImportJobStatusTypeEnum;
 
-  @Metadata({ data: "json, name=UserPoolId" })
+  @SpeakeasyMetadata({ data: "json, name=UserPoolId" })
   userPoolId?: string;
 }

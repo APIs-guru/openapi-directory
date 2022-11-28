@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CandlestickData } from "./candlestickdata";
 import { CandlestickDomain } from "./candlestickdomain";
+
 
 
 // CandlestickChartSpec
@@ -9,9 +9,9 @@ import { CandlestickDomain } from "./candlestickdomain";
  * A candlestick chart.
 **/
 export class CandlestickChartSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data", elemType: shared.CandlestickData })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: CandlestickData })
   data?: CandlestickData[];
 
-  @Metadata({ data: "json, name=domain" })
+  @SpeakeasyMetadata({ data: "json, name=domain" })
   domain?: CandlestickDomain;
 }

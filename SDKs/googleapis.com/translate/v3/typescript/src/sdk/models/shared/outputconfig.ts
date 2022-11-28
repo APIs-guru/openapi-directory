@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GcsDestination } from "./gcsdestination";
+
 
 
 // OutputConfig
@@ -7,6 +8,6 @@ import { GcsDestination } from "./gcsdestination";
  * Output configuration for BatchTranslateText request.
 **/
 export class OutputConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=gcsDestination" })
+  @SpeakeasyMetadata({ data: "json, name=gcsDestination" })
   gcsDestination?: GcsDestination;
 }

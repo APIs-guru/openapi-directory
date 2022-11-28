@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudWebriskV1RawIndices } from "./googlecloudwebriskv1rawindices";
 import { GoogleCloudWebriskV1RiceDeltaEncoding } from "./googlecloudwebriskv1ricedeltaencoding";
+
 
 
 // GoogleCloudWebriskV1ThreatEntryRemovals
@@ -8,9 +9,9 @@ import { GoogleCloudWebriskV1RiceDeltaEncoding } from "./googlecloudwebriskv1ric
  * Contains the set of entries to remove from a local database.
 **/
 export class GoogleCloudWebriskV1ThreatEntryRemovals extends SpeakeasyBase {
-  @Metadata({ data: "json, name=rawIndices" })
+  @SpeakeasyMetadata({ data: "json, name=rawIndices" })
   rawIndices?: GoogleCloudWebriskV1RawIndices;
 
-  @Metadata({ data: "json, name=riceIndices" })
+  @SpeakeasyMetadata({ data: "json, name=riceIndices" })
   riceIndices?: GoogleCloudWebriskV1RiceDeltaEncoding;
 }

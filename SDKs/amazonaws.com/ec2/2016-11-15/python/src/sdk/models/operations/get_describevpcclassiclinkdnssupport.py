@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetDescribeVpcClassicLinkDNSSupportActionEnum(str, Enum):
     DESCRIBE_VPC_CLASSIC_LINK_DNS_SUPPORT = "DescribeVpcClassicLinkDnsSupport"
@@ -10,10 +14,10 @@ class GetDescribeVpcClassicLinkDNSSupportVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeVpcClassicLinkDNSSupportQueryParams:
-    action: GetDescribeVpcClassicLinkDNSSupportActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribeVpcClassicLinkDNSSupportActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDescribeVpcClassicLinkDNSSupportVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     max_results: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxResults', 'style': 'form', 'explode': True }})
     next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NextToken', 'style': 'form', 'explode': True }})
-    version: GetDescribeVpcClassicLinkDNSSupportVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     vpc_ids: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'VpcIds', 'style': 'form', 'explode': True }})
     
 
@@ -30,13 +34,13 @@ class GetDescribeVpcClassicLinkDNSSupportHeaders:
 
 @dataclass
 class GetDescribeVpcClassicLinkDNSSupportRequest:
-    query_params: GetDescribeVpcClassicLinkDNSSupportQueryParams = field(default=None)
-    headers: GetDescribeVpcClassicLinkDNSSupportHeaders = field(default=None)
+    headers: GetDescribeVpcClassicLinkDNSSupportHeaders = field()
+    query_params: GetDescribeVpcClassicLinkDNSSupportQueryParams = field()
     
 
 @dataclass
 class GetDescribeVpcClassicLinkDNSSupportResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TrafficPortSelector
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specification of a port-based selector.
 **/
 export class TrafficPortSelector extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ports" })
+  @SpeakeasyMetadata({ data: "json, name=ports" })
   ports?: string[];
 }

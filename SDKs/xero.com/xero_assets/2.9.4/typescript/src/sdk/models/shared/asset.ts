@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AssetStatusEnum } from "./assetstatusenum";
 
 
+
 export class Asset extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountingBookValue" })
+  @SpeakeasyMetadata({ data: "json, name=accountingBookValue" })
   accountingBookValue?: number;
 
-  @Metadata({ data: "json, name=assetId" })
+  @SpeakeasyMetadata({ data: "json, name=assetId" })
   assetId?: string;
 
-  @Metadata({ data: "json, name=assetName" })
+  @SpeakeasyMetadata({ data: "json, name=assetName" })
   assetName: string;
 
-  @Metadata({ data: "json, name=assetNumber" })
+  @SpeakeasyMetadata({ data: "json, name=assetNumber" })
   assetNumber?: string;
 
-  @Metadata({ data: "json, name=assetStatus" })
+  @SpeakeasyMetadata({ data: "json, name=assetStatus" })
   assetStatus?: AssetStatusEnum;
 
-  @Metadata({ data: "json, name=assetTypeId" })
+  @SpeakeasyMetadata({ data: "json, name=assetTypeId" })
   assetTypeId?: string;
 
-  @Metadata({ data: "json, name=bookDepreciationDetail" })
+  @SpeakeasyMetadata({ data: "json, name=bookDepreciationDetail" })
   bookDepreciationDetail?: any;
 
-  @Metadata({ data: "json, name=bookDepreciationSetting" })
+  @SpeakeasyMetadata({ data: "json, name=bookDepreciationSetting" })
   bookDepreciationSetting?: any;
 
-  @Metadata({ data: "json, name=canRollback" })
+  @SpeakeasyMetadata({ data: "json, name=canRollback" })
   canRollback?: boolean;
 
-  @Metadata({ data: "json, name=disposalDate" })
+  @SpeakeasyMetadata({ data: "json, name=disposalDate" })
   disposalDate?: Date;
 
-  @Metadata({ data: "json, name=disposalPrice" })
+  @SpeakeasyMetadata({ data: "json, name=disposalPrice" })
   disposalPrice?: number;
 
-  @Metadata({ data: "json, name=isDeleteEnabledForDate" })
+  @SpeakeasyMetadata({ data: "json, name=isDeleteEnabledForDate" })
   isDeleteEnabledForDate?: boolean;
 
-  @Metadata({ data: "json, name=purchaseDate" })
+  @SpeakeasyMetadata({ data: "json, name=purchaseDate" })
   purchaseDate?: Date;
 
-  @Metadata({ data: "json, name=purchasePrice" })
+  @SpeakeasyMetadata({ data: "json, name=purchasePrice" })
   purchasePrice?: number;
 
-  @Metadata({ data: "json, name=serialNumber" })
+  @SpeakeasyMetadata({ data: "json, name=serialNumber" })
   serialNumber?: string;
 
-  @Metadata({ data: "json, name=warrantyExpiryDate" })
+  @SpeakeasyMetadata({ data: "json, name=warrantyExpiryDate" })
   warrantyExpiryDate?: string;
 }

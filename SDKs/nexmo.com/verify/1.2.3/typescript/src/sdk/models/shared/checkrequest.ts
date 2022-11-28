@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CheckRequest extends SpeakeasyBase {
-  @Metadata({ data: "form, name=api_key;" })
+  @SpeakeasyMetadata({ data: "form, name=api_key;" })
   apiKey: string;
 
-  @Metadata({ data: "form, name=api_secret;" })
+  @SpeakeasyMetadata({ data: "form, name=api_secret;" })
   apiSecret: string;
 
-  @Metadata({ data: "form, name=code;" })
+  @SpeakeasyMetadata({ data: "form, name=code;" })
   code: string;
 
-  @Metadata({ data: "form, name=ip_address;" })
+  @SpeakeasyMetadata({ data: "form, name=ip_address;" })
   ipAddress?: string;
 
-  @Metadata({ data: "form, name=request_id;" })
+  @SpeakeasyMetadata({ data: "form, name=request_id;" })
   requestId: string;
 }

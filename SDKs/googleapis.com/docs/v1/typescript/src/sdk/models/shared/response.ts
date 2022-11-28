@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CreateFooterResponse } from "./createfooterresponse";
 import { CreateFootnoteResponse } from "./createfootnoteresponse";
 import { CreateHeaderResponse } from "./createheaderresponse";
@@ -8,29 +8,30 @@ import { InsertInlineSheetsChartResponse } from "./insertinlinesheetschartrespon
 import { ReplaceAllTextResponse } from "./replacealltextresponse";
 
 
+
 // Response
 /** 
  * A single response from an update.
 **/
 export class Response extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createFooter" })
+  @SpeakeasyMetadata({ data: "json, name=createFooter" })
   createFooter?: CreateFooterResponse;
 
-  @Metadata({ data: "json, name=createFootnote" })
+  @SpeakeasyMetadata({ data: "json, name=createFootnote" })
   createFootnote?: CreateFootnoteResponse;
 
-  @Metadata({ data: "json, name=createHeader" })
+  @SpeakeasyMetadata({ data: "json, name=createHeader" })
   createHeader?: CreateHeaderResponse;
 
-  @Metadata({ data: "json, name=createNamedRange" })
+  @SpeakeasyMetadata({ data: "json, name=createNamedRange" })
   createNamedRange?: CreateNamedRangeResponse;
 
-  @Metadata({ data: "json, name=insertInlineImage" })
+  @SpeakeasyMetadata({ data: "json, name=insertInlineImage" })
   insertInlineImage?: InsertInlineImageResponse;
 
-  @Metadata({ data: "json, name=insertInlineSheetsChart" })
+  @SpeakeasyMetadata({ data: "json, name=insertInlineSheetsChart" })
   insertInlineSheetsChart?: InsertInlineSheetsChartResponse;
 
-  @Metadata({ data: "json, name=replaceAllText" })
+  @SpeakeasyMetadata({ data: "json, name=replaceAllText" })
   replaceAllText?: ReplaceAllTextResponse;
 }

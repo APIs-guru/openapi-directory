@@ -5,6 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class PostWebhookTestsRequestBody:
+    url: str = field(metadata={'multipart_form': { 'field_name': 'url' }})
     action: Optional[str] = field(default=None, metadata={'multipart_form': { 'field_name': 'action' }})
     body: Optional[dict[str, Any]] = field(default=None, metadata={'multipart_form': { 'field_name': 'body', 'json': True }})
     encoding: Optional[str] = field(default=None, metadata={'multipart_form': { 'field_name': 'encoding' }})
@@ -13,17 +14,16 @@ class PostWebhookTestsRequestBody:
     headers: Optional[dict[str, Any]] = field(default=None, metadata={'multipart_form': { 'field_name': 'headers', 'json': True }})
     method: Optional[str] = field(default=None, metadata={'multipart_form': { 'field_name': 'method' }})
     raw_body: Optional[str] = field(default=None, metadata={'multipart_form': { 'field_name': 'raw_body' }})
-    url: str = field(default=None, metadata={'multipart_form': { 'field_name': 'url' }})
     
 
 @dataclass
 class PostWebhookTestsRequest:
-    request: PostWebhookTestsRequestBody = field(default=None, metadata={'request': { 'media_type': 'multipart/form-data' }})
+    request: PostWebhookTestsRequestBody = field(metadata={'request': { 'media_type': 'multipart/form-data' }})
     
 
 @dataclass
 class PostWebhookTestsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     webhook_test_entity: Optional[shared.WebhookTestEntity] = field(default=None)
     

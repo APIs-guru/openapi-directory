@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudContactcenterinsightsV1IssueModelLabelStatsIssueStats
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Aggregated statistics about an issue.
 **/
 export class GoogleCloudContactcenterinsightsV1IssueModelLabelStatsIssueStats extends SpeakeasyBase {
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=issue" })
+  @SpeakeasyMetadata({ data: "json, name=issue" })
   issue?: string;
 
-  @Metadata({ data: "json, name=labeledConversationsCount" })
+  @SpeakeasyMetadata({ data: "json, name=labeledConversationsCount" })
   labeledConversationsCount?: string;
 }

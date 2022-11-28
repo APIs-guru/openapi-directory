@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class DoubleVerifyAppStarRatingAvoidedStarRatingEnum(str, Enum):
     APP_STAR_RATE_UNSPECIFIED = "APP_STAR_RATE_UNSPECIFIED"
@@ -16,6 +18,10 @@ class DoubleVerifyAppStarRatingAvoidedStarRatingEnum(str, Enum):
 @dataclass_json
 @dataclass
 class DoubleVerifyAppStarRating:
-    avoid_insufficient_star_rating: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'avoidInsufficientStarRating' }})
-    avoided_star_rating: Optional[DoubleVerifyAppStarRatingAvoidedStarRatingEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'avoidedStarRating' }})
+    r"""DoubleVerifyAppStarRating
+    Details of DoubleVerify star ratings settings.
+    """
+    
+    avoid_insufficient_star_rating: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('avoidInsufficientStarRating') }})
+    avoided_star_rating: Optional[DoubleVerifyAppStarRatingAvoidedStarRatingEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('avoidedStarRating') }})
     

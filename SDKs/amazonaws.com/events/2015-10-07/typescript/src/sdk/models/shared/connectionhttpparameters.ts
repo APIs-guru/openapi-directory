@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConnectionBodyParameter } from "./connectionbodyparameter";
 import { ConnectionHeaderParameter } from "./connectionheaderparameter";
 import { ConnectionQueryStringParameter } from "./connectionquerystringparameter";
+
 
 
 // ConnectionHttpParameters
@@ -10,12 +10,12 @@ import { ConnectionQueryStringParameter } from "./connectionquerystringparameter
  * Contains additional parameters for the connection.
 **/
 export class ConnectionHttpParameters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BodyParameters", elemType: shared.ConnectionBodyParameter })
+  @SpeakeasyMetadata({ data: "json, name=BodyParameters", elemType: ConnectionBodyParameter })
   bodyParameters?: ConnectionBodyParameter[];
 
-  @Metadata({ data: "json, name=HeaderParameters", elemType: shared.ConnectionHeaderParameter })
+  @SpeakeasyMetadata({ data: "json, name=HeaderParameters", elemType: ConnectionHeaderParameter })
   headerParameters?: ConnectionHeaderParameter[];
 
-  @Metadata({ data: "json, name=QueryStringParameters", elemType: shared.ConnectionQueryStringParameter })
+  @SpeakeasyMetadata({ data: "json, name=QueryStringParameters", elemType: ConnectionQueryStringParameter })
   queryStringParameters?: ConnectionQueryStringParameter[];
 }

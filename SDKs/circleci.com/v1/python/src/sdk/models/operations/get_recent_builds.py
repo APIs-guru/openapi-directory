@@ -11,12 +11,12 @@ class GetRecentBuildsQueryParams:
 
 @dataclass
 class GetRecentBuildsRequest:
-    query_params: GetRecentBuildsQueryParams = field(default=None)
+    query_params: GetRecentBuildsQueryParams = field()
     
 
 @dataclass
 class GetRecentBuildsResponse:
+    content_type: str = field()
+    status_code: int = field()
     builds: Optional[List[shared.Build]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

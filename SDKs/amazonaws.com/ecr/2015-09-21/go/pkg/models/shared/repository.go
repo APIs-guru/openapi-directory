@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Repository
+// An object representing a repository.
 type Repository struct {
 	CreatedAt                  *time.Time                  `json:"createdAt,omitempty"`
 	EncryptionConfiguration    *EncryptionConfiguration    `json:"encryptionConfiguration,omitempty"`

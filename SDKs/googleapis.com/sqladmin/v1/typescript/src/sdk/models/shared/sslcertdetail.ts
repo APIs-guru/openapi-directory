@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SslCert } from "./sslcert";
+
 
 
 // SslCertDetail
@@ -7,9 +8,9 @@ import { SslCert } from "./sslcert";
  * SslCertDetail.
 **/
 export class SslCertDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=certInfo" })
+  @SpeakeasyMetadata({ data: "json, name=certInfo" })
   certInfo?: SslCert;
 
-  @Metadata({ data: "json, name=certPrivateKey" })
+  @SpeakeasyMetadata({ data: "json, name=certPrivateKey" })
   certPrivateKey?: string;
 }

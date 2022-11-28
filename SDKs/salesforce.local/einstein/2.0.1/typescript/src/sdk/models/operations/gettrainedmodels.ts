@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetTrainedModelsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=datasetId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=datasetId" })
   datasetId: string;
 }
 
 
 export class GetTrainedModelsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=count" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=count" })
   count?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: string;
 }
 
 
 export class GetTrainedModelsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   bearerToken: shared.SchemeBearerToken;
 }
 
 
 export class GetTrainedModelsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetTrainedModelsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetTrainedModelsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetTrainedModelsSecurity;
 }
 
 
 export class GetTrainedModelsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   modelList?: shared.ModelList;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

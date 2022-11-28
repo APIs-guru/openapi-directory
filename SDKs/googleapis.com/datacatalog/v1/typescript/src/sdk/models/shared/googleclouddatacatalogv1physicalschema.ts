@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDatacatalogV1PhysicalSchemaAvroSchema } from "./googleclouddatacatalogv1physicalschemaavroschema";
 import { GoogleCloudDatacatalogV1PhysicalSchemaProtobufSchema } from "./googleclouddatacatalogv1physicalschemaprotobufschema";
 import { GoogleCloudDatacatalogV1PhysicalSchemaThriftSchema } from "./googleclouddatacatalogv1physicalschemathriftschema";
+
 
 
 // GoogleCloudDatacatalogV1PhysicalSchema
@@ -9,21 +10,21 @@ import { GoogleCloudDatacatalogV1PhysicalSchemaThriftSchema } from "./googleclou
  * Native schema used by a resource represented as an entry. Used by query engines for deserializing and parsing source data.
 **/
 export class GoogleCloudDatacatalogV1PhysicalSchema extends SpeakeasyBase {
-  @Metadata({ data: "json, name=avro" })
+  @SpeakeasyMetadata({ data: "json, name=avro" })
   avro?: GoogleCloudDatacatalogV1PhysicalSchemaAvroSchema;
 
-  @Metadata({ data: "json, name=csv" })
+  @SpeakeasyMetadata({ data: "json, name=csv" })
   csv?: Map<string, any>;
 
-  @Metadata({ data: "json, name=orc" })
+  @SpeakeasyMetadata({ data: "json, name=orc" })
   orc?: Map<string, any>;
 
-  @Metadata({ data: "json, name=parquet" })
+  @SpeakeasyMetadata({ data: "json, name=parquet" })
   parquet?: Map<string, any>;
 
-  @Metadata({ data: "json, name=protobuf" })
+  @SpeakeasyMetadata({ data: "json, name=protobuf" })
   protobuf?: GoogleCloudDatacatalogV1PhysicalSchemaProtobufSchema;
 
-  @Metadata({ data: "json, name=thrift" })
+  @SpeakeasyMetadata({ data: "json, name=thrift" })
   thrift?: GoogleCloudDatacatalogV1PhysicalSchemaThriftSchema;
 }

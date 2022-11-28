@@ -26,6 +26,8 @@ const (
 	ImageTypeEnumUploaded        ImageTypeEnum = "UPLOADED"
 )
 
+// Image
+// An image.
 type Image struct {
 	ImageURL *string          `json:"imageUrl,omitempty"`
 	Status   *ImageStatusEnum `json:"status,omitempty"`

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PlayerLevel } from "./playerlevel";
-import { PlayerLevel } from "./playerlevel";
+
 
 
 // PlayerExperienceInfo
@@ -8,18 +8,18 @@ import { PlayerLevel } from "./playerlevel";
  * 1P/3P metadata about the player's experience.
 **/
 export class PlayerExperienceInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=currentExperiencePoints" })
+  @SpeakeasyMetadata({ data: "json, name=currentExperiencePoints" })
   currentExperiencePoints?: string;
 
-  @Metadata({ data: "json, name=currentLevel" })
+  @SpeakeasyMetadata({ data: "json, name=currentLevel" })
   currentLevel?: PlayerLevel;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=lastLevelUpTimestampMillis" })
+  @SpeakeasyMetadata({ data: "json, name=lastLevelUpTimestampMillis" })
   lastLevelUpTimestampMillis?: string;
 
-  @Metadata({ data: "json, name=nextLevel" })
+  @SpeakeasyMetadata({ data: "json, name=nextLevel" })
   nextLevel?: PlayerLevel;
 }

@@ -1,22 +1,25 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import obactiveorhistoriccurrencyandamount
-from . import obcreditdebitcode_enum
-from . import obcreditline1
-from . import obbalancetype1code_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ObCashBalance1:
-    account_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AccountId' }})
-    amount: obactiveorhistoriccurrencyandamount.ObActiveOrHistoricCurrencyAndAmount = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Amount' }})
-    credit_debit_indicator: obcreditdebitcode_enum.ObCreditDebitCodeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CreditDebitIndicator' }})
-    credit_line: Optional[List[obcreditline1.ObCreditLine1]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CreditLine' }})
-    date_time: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DateTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    type: obbalancetype1code_enum.ObBalanceType1CodeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
+    r"""ObCashBalance1
+    Set of elements used to define the balance details.
+    """
+    
+    account_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('AccountId') }})
+    amount: ObActiveOrHistoricCurrencyAndAmount = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Amount') }})
+    credit_debit_indicator: ObCreditDebitCodeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('CreditDebitIndicator') }})
+    date_time: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('DateTime'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    type: ObBalanceType1CodeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Type') }})
+    credit_line: Optional[List[ObCreditLine1]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CreditLine') }})
     

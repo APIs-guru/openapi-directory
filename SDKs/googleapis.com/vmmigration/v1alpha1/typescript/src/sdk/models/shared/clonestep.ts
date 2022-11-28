@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CloneStep
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * CloneStep holds information about the clone step progress.
 **/
 export class CloneStep extends SpeakeasyBase {
-  @Metadata({ data: "json, name=adaptingOs" })
+  @SpeakeasyMetadata({ data: "json, name=adaptingOs" })
   adaptingOs?: Map<string, any>;
 
-  @Metadata({ data: "json, name=endTime" })
+  @SpeakeasyMetadata({ data: "json, name=endTime" })
   endTime?: string;
 
-  @Metadata({ data: "json, name=instantiatingMigratedVm" })
+  @SpeakeasyMetadata({ data: "json, name=instantiatingMigratedVm" })
   instantiatingMigratedVm?: Map<string, any>;
 
-  @Metadata({ data: "json, name=preparingVmDisks" })
+  @SpeakeasyMetadata({ data: "json, name=preparingVmDisks" })
   preparingVmDisks?: Map<string, any>;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: string;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Token
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Token
 **/
 export class Token extends SpeakeasyBase {
-  @Metadata({ data: "json, name=$id" })
+  @SpeakeasyMetadata({ data: "json, name=$id" })
   dollarId: string;
 
-  @Metadata({ data: "json, name=expire" })
+  @SpeakeasyMetadata({ data: "json, name=expire" })
   expire: number;
 
-  @Metadata({ data: "json, name=secret" })
+  @SpeakeasyMetadata({ data: "json, name=secret" })
   secret: string;
 
-  @Metadata({ data: "json, name=userId" })
+  @SpeakeasyMetadata({ data: "json, name=userId" })
   userId: string;
 }

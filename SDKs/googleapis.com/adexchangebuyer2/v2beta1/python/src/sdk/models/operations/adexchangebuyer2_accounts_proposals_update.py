@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class Adexchangebuyer2AccountsProposalsUpdatePathParams:
-    account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
-    proposal_id: str = field(default=None, metadata={'path_param': { 'field_name': 'proposalId', 'style': 'simple', 'explode': False }})
+    account_id: str = field(metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
+    proposal_id: str = field(metadata={'path_param': { 'field_name': 'proposalId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +30,21 @@ class Adexchangebuyer2AccountsProposalsUpdateQueryParams:
 
 @dataclass
 class Adexchangebuyer2AccountsProposalsUpdateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class Adexchangebuyer2AccountsProposalsUpdateRequest:
-    path_params: Adexchangebuyer2AccountsProposalsUpdatePathParams = field(default=None)
-    query_params: Adexchangebuyer2AccountsProposalsUpdateQueryParams = field(default=None)
-    request: Optional[shared.Proposal] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: Adexchangebuyer2AccountsProposalsUpdateSecurity = field(default=None)
+    path_params: Adexchangebuyer2AccountsProposalsUpdatePathParams = field()
+    query_params: Adexchangebuyer2AccountsProposalsUpdateQueryParams = field()
+    security: Adexchangebuyer2AccountsProposalsUpdateSecurity = field()
+    request: Optional[shared.ProposalInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class Adexchangebuyer2AccountsProposalsUpdateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     proposal: Optional[shared.Proposal] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Bullet } from "./bullet";
 import { ParagraphStyle } from "./paragraphstyle";
+
 
 
 // ParagraphMarker
@@ -8,9 +9,9 @@ import { ParagraphStyle } from "./paragraphstyle";
  * A TextElement kind that represents the beginning of a new paragraph.
 **/
 export class ParagraphMarker extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bullet" })
+  @SpeakeasyMetadata({ data: "json, name=bullet" })
   bullet?: Bullet;
 
-  @Metadata({ data: "json, name=style" })
+  @SpeakeasyMetadata({ data: "json, name=style" })
   style?: ParagraphStyle;
 }

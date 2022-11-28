@@ -1,9 +1,11 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 class GetTransactionsStatusEnum(str, Enum):
@@ -33,24 +35,24 @@ class GetTransactionsQueryParams:
     updated_at_dollar_lte_: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'updatedAt[$lte]', 'style': 'form', 'explode': True }})
     
 
-@dataclass
-class GetTransactionsRequest:
-    query_params: GetTransactionsQueryParams = field(default=None)
-    
-
 @dataclass_json
 @dataclass
 class GetTransactions200ApplicationJSON:
-    has_next: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'hasNext' }})
-    has_previous: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'hasPrevious' }})
-    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
-    ok: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ok' }})
-    result: Optional[List[Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'result' }})
+    has_next: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('hasNext') }})
+    has_previous: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('hasPrevious') }})
+    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('message') }})
+    ok: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ok') }})
+    result: Optional[List[Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('result') }})
+    
+
+@dataclass
+class GetTransactionsRequest:
+    query_params: GetTransactionsQueryParams = field()
     
 
 @dataclass
 class GetTransactionsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_transactions_200_application_json_object: Optional[GetTransactions200ApplicationJSON] = field(default=None)
     

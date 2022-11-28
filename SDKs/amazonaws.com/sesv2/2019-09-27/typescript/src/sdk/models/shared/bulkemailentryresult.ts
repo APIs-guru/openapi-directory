@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BulkEmailStatusEnum } from "./bulkemailstatusenum";
+
 
 
 // BulkEmailEntryResult
@@ -7,12 +8,12 @@ import { BulkEmailStatusEnum } from "./bulkemailstatusenum";
  * The result of the <code>SendBulkEmail</code> operation of each specified <code>BulkEmailEntry</code>.
 **/
 export class BulkEmailEntryResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Error" })
+  @SpeakeasyMetadata({ data: "json, name=Error" })
   error?: string;
 
-  @Metadata({ data: "json, name=MessageId" })
+  @SpeakeasyMetadata({ data: "json, name=MessageId" })
   messageId?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: BulkEmailStatusEnum;
 }

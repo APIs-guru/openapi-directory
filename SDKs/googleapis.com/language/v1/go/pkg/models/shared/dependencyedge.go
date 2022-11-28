@@ -88,6 +88,8 @@ const (
 	DependencyEdgeLabelEnumNcomp        DependencyEdgeLabelEnum = "NCOMP"
 )
 
+// DependencyEdge
+// Represents dependency parse tree information for a token. (For more information on dependency labels, see http://www.aclweb.org/anthology/P13-2017
 type DependencyEdge struct {
 	HeadTokenIndex *int32                   `json:"headTokenIndex,omitempty"`
 	Label          *DependencyEdgeLabelEnum `json:"label,omitempty"`

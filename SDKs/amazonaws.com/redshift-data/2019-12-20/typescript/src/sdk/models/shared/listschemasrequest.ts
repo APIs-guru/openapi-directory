@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ListSchemasRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClusterIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=ClusterIdentifier" })
   clusterIdentifier: string;
 
-  @Metadata({ data: "json, name=ConnectedDatabase" })
+  @SpeakeasyMetadata({ data: "json, name=ConnectedDatabase" })
   connectedDatabase?: string;
 
-  @Metadata({ data: "json, name=Database" })
+  @SpeakeasyMetadata({ data: "json, name=Database" })
   database: string;
 
-  @Metadata({ data: "json, name=DbUser" })
+  @SpeakeasyMetadata({ data: "json, name=DbUser" })
   dbUser?: string;
 
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=SchemaPattern" })
+  @SpeakeasyMetadata({ data: "json, name=SchemaPattern" })
   schemaPattern?: string;
 
-  @Metadata({ data: "json, name=SecretArn" })
+  @SpeakeasyMetadata({ data: "json, name=SecretArn" })
   secretArn?: string;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// AwsDynamoDbTableDetails
+// Provides details about a DynamoDB table.
 type AwsDynamoDbTableDetails struct {
 	AttributeDefinitions   []AwsDynamoDbTableAttributeDefinition  `json:"AttributeDefinitions,omitempty"`
 	BillingModeSummary     *AwsDynamoDbTableBillingModeSummary    `json:"BillingModeSummary,omitempty"`

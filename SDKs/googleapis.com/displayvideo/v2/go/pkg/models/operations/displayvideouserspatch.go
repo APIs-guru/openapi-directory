@@ -31,7 +31,7 @@ type DisplayvideoUsersPatchSecurity struct {
 type DisplayvideoUsersPatchRequest struct {
 	PathParams  DisplayvideoUsersPatchPathParams
 	QueryParams DisplayvideoUsersPatchQueryParams
-	Request     *shared.User `request:"mediaType=application/json"`
+	Request     *shared.UserInput `request:"mediaType=application/json"`
 	Security    DisplayvideoUsersPatchSecurity
 }
 

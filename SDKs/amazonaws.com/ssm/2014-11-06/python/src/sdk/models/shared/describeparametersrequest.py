@@ -1,15 +1,15 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import parametersfilter
-from . import parameterstringfilter
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeParametersRequest:
-    filters: Optional[List[parametersfilter.ParametersFilter]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Filters' }})
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MaxResults' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
-    parameter_filters: Optional[List[parameterstringfilter.ParameterStringFilter]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ParameterFilters' }})
+    filters: Optional[List[ParametersFilter]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Filters') }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MaxResults') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
+    parameter_filters: Optional[List[ParameterStringFilter]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ParameterFilters') }})
     

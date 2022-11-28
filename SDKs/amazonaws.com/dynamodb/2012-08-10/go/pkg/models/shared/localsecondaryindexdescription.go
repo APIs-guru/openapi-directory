@@ -1,5 +1,7 @@
 package shared
 
+// LocalSecondaryIndexDescription
+// Represents the properties of a local secondary index.
 type LocalSecondaryIndexDescription struct {
 	IndexArn       *string            `json:"IndexArn,omitempty"`
 	IndexName      *string            `json:"IndexName,omitempty"`

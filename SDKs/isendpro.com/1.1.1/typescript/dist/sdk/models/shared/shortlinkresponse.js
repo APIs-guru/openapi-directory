@@ -22,23 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ShortlinkResponseEtatEtat = /** @class */ (function (_super) {
     __extends(ShortlinkResponseEtatEtat, _super);
     function ShortlinkResponseEtatEtat() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=code" }),
+        SpeakeasyMetadata({ data: "json, name=code" }),
         __metadata("design:type", Number)
     ], ShortlinkResponseEtatEtat.prototype, "code", void 0);
     __decorate([
-        Metadata({ data: "json, name=message" }),
+        SpeakeasyMetadata({ data: "json, name=message" }),
         __metadata("design:type", String)
     ], ShortlinkResponseEtatEtat.prototype, "message", void 0);
     __decorate([
-        Metadata({ data: "json, name=shortlink" }),
+        SpeakeasyMetadata({ data: "json, name=shortlink" }),
         __metadata("design:type", String)
     ], ShortlinkResponseEtatEtat.prototype, "shortlink", void 0);
     return ShortlinkResponseEtatEtat;
@@ -50,7 +49,7 @@ var ShortlinkResponseEtat = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=etat", elemType: shared.ShortlinkResponseEtatEtat }),
+        SpeakeasyMetadata({ data: "json, name=etat", elemType: ShortlinkResponseEtatEtat }),
         __metadata("design:type", Array)
     ], ShortlinkResponseEtat.prototype, "etat", void 0);
     return ShortlinkResponseEtat;
@@ -62,7 +61,7 @@ var ShortlinkResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=etat" }),
+        SpeakeasyMetadata({ data: "json, name=etat" }),
         __metadata("design:type", ShortlinkResponseEtat)
     ], ShortlinkResponse.prototype, "etat", void 0);
     return ShortlinkResponse;

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// WorldGenerationJobSummary
+// Information about a world generator job.
 type WorldGenerationJobSummary struct {
 	Arn                 *string                       `json:"arn,omitempty"`
 	CreatedAt           *time.Time                    `json:"createdAt,omitempty"`

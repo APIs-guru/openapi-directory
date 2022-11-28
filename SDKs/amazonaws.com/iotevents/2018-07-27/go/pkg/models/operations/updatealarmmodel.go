@@ -18,19 +18,27 @@ type UpdateAlarmModelHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateAlarmModelRequestBodyAlarmCapabilities
+// Contains the configuration information of alarm state changes.
 type UpdateAlarmModelRequestBodyAlarmCapabilities struct {
 	AcknowledgeFlow             *shared.AcknowledgeFlow             `json:"acknowledgeFlow,omitempty"`
 	InitializationConfiguration *shared.InitializationConfiguration `json:"initializationConfiguration,omitempty"`
 }
 
+// UpdateAlarmModelRequestBodyAlarmEventActions
+// Contains information about one or more alarm actions.
 type UpdateAlarmModelRequestBodyAlarmEventActions struct {
 	AlarmActions []shared.AlarmAction `json:"alarmActions,omitempty"`
 }
 
+// UpdateAlarmModelRequestBodyAlarmNotification
+// Contains information about one or more notification actions.
 type UpdateAlarmModelRequestBodyAlarmNotification struct {
 	NotificationActions []shared.NotificationAction `json:"notificationActions,omitempty"`
 }
 
+// UpdateAlarmModelRequestBodyAlarmRule
+// Defines when your alarm is invoked.
 type UpdateAlarmModelRequestBodyAlarmRule struct {
 	SimpleRule *shared.SimpleRule `json:"simpleRule,omitempty"`
 }

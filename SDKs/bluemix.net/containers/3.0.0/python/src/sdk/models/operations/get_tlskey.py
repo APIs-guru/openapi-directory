@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class GetTlskeyHeaders:
-    x_auth_project_id: str = field(default=None, metadata={'header': { 'field_name': 'X-Auth-Project-Id', 'style': 'simple', 'explode': False }})
-    x_auth_token: str = field(default=None, metadata={'header': { 'field_name': 'X-Auth-Token', 'style': 'simple', 'explode': False }})
+    x_auth_project_id: str = field(metadata={'header': { 'field_name': 'X-Auth-Project-Id', 'style': 'simple', 'explode': False }})
+    x_auth_token: str = field(metadata={'header': { 'field_name': 'X-Auth-Token', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetTlskeyRequest:
-    headers: GetTlskeyHeaders = field(default=None)
+    headers: GetTlskeyHeaders = field()
     
 
 @dataclass
 class GetTlskeyResponse:
+    content_type: str = field()
+    status_code: int = field()
     certificate: Optional[shared.Certificate] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

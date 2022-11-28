@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { RequestTransferActionParamEnum } from "./requesttransferactionparamenum";
 export declare class UpdateCallRequestTransferNccoDestination extends SpeakeasyBase {
     ncco: Map<string, any>[];

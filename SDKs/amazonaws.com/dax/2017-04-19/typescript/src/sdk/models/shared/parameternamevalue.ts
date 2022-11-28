@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ParameterNameValue
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An individual DAX parameter.
 **/
 export class ParameterNameValue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ParameterName" })
+  @SpeakeasyMetadata({ data: "json, name=ParameterName" })
   parameterName?: string;
 
-  @Metadata({ data: "json, name=ParameterValue" })
+  @SpeakeasyMetadata({ data: "json, name=ParameterValue" })
   parameterValue?: string;
 }

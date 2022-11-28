@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateNetworkWirelessSsidPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=number" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=number" })
   number: string;
 }
 
@@ -15,19 +16,19 @@ export class UpdateNetworkWirelessSsidPathParams extends SpeakeasyBase {
  * (Optional) The credentials of the user account to be used by the AP to bind to your Active Directory server. The Active Directory account should have permissions on all your Active Directory servers. Only valid if the splashPage is 'Password-protected with Active Directory'.
 **/
 export class UpdateNetworkWirelessSsidRequestBodyActiveDirectoryCredentials extends SpeakeasyBase {
-  @Metadata({ data: "json, name=logonName" })
+  @SpeakeasyMetadata({ data: "json, name=logonName" })
   logonName?: string;
 
-  @Metadata({ data: "json, name=password" })
+  @SpeakeasyMetadata({ data: "json, name=password" })
   password?: string;
 }
 
 
 export class UpdateNetworkWirelessSsidRequestBodyActiveDirectoryServers extends SpeakeasyBase {
-  @Metadata({ data: "json, name=host" })
+  @SpeakeasyMetadata({ data: "json, name=host" })
   host: string;
 
-  @Metadata({ data: "json, name=port" })
+  @SpeakeasyMetadata({ data: "json, name=port" })
   port?: number;
 }
 
@@ -37,32 +38,32 @@ export class UpdateNetworkWirelessSsidRequestBodyActiveDirectoryServers extends 
  * The current setting for Active Directory. Only valid if splashPage is 'Password-protected with Active Directory'
 **/
 export class UpdateNetworkWirelessSsidRequestBodyActiveDirectory extends SpeakeasyBase {
-  @Metadata({ data: "json, name=credentials" })
+  @SpeakeasyMetadata({ data: "json, name=credentials" })
   credentials?: UpdateNetworkWirelessSsidRequestBodyActiveDirectoryCredentials;
 
-  @Metadata({ data: "json, name=servers", elemType: operations.UpdateNetworkWirelessSsidRequestBodyActiveDirectoryServers })
+  @SpeakeasyMetadata({ data: "json, name=servers", elemType: UpdateNetworkWirelessSsidRequestBodyActiveDirectoryServers })
   servers?: UpdateNetworkWirelessSsidRequestBodyActiveDirectoryServers[];
 }
 
 
 export class UpdateNetworkWirelessSsidRequestBodyApTagsAndVlanIds extends SpeakeasyBase {
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: string[];
 
-  @Metadata({ data: "json, name=vlanId" })
+  @SpeakeasyMetadata({ data: "json, name=vlanId" })
   vlanId?: number;
 }
 
 export enum UpdateNetworkWirelessSsidRequestBodyAuthModeEnum {
-    Open = "open"
-,    Psk = "psk"
-,    OpenWithRadius = "open-with-radius"
-,    EightThousandAndTwentyOnexMeraki = "8021x-meraki"
-,    EightThousandAndTwentyOnexRadius = "8021x-radius"
-,    EightThousandAndTwentyOnexGoogle = "8021x-google"
-,    EightThousandAndTwentyOnexLocalradius = "8021x-localradius"
-,    IpskWithRadius = "ipsk-with-radius"
-,    IpskWithoutRadius = "ipsk-without-radius"
+    Open = "open",
+    Psk = "psk",
+    OpenWithRadius = "open-with-radius",
+    EightThousandAndTwentyOnexMeraki = "8021x-meraki",
+    EightThousandAndTwentyOnexRadius = "8021x-radius",
+    EightThousandAndTwentyOnexGoogle = "8021x-google",
+    EightThousandAndTwentyOnexLocalradius = "8021x-localradius",
+    IpskWithRadius = "ipsk-with-radius",
+    IpskWithoutRadius = "ipsk-without-radius"
 }
 
 
@@ -71,10 +72,10 @@ export enum UpdateNetworkWirelessSsidRequestBodyAuthModeEnum {
  * DNS servers rewrite settings
 **/
 export class UpdateNetworkWirelessSsidRequestBodyDnsRewrite extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dnsCustomNameservers" })
+  @SpeakeasyMetadata({ data: "json, name=dnsCustomNameservers" })
   dnsCustomNameservers?: string[];
 
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 }
 
@@ -84,10 +85,10 @@ export class UpdateNetworkWirelessSsidRequestBodyDnsRewrite extends SpeakeasyBas
  * The current setting for 802.11r
 **/
 export class UpdateNetworkWirelessSsidRequestBodyDot11r extends SpeakeasyBase {
-  @Metadata({ data: "json, name=adaptive" })
+  @SpeakeasyMetadata({ data: "json, name=adaptive" })
   adaptive?: boolean;
 
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 }
 
@@ -97,21 +98,21 @@ export class UpdateNetworkWirelessSsidRequestBodyDot11r extends SpeakeasyBase {
  * The current setting for Protected Management Frames (802.11w).
 **/
 export class UpdateNetworkWirelessSsidRequestBodyDot11w extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=required" })
+  @SpeakeasyMetadata({ data: "json, name=required" })
   required?: boolean;
 }
 
 export enum UpdateNetworkWirelessSsidRequestBodyEncryptionModeEnum {
-    Wep = "wep"
-,    Wpa = "wpa"
+    Wep = "wep",
+    Wpa = "wpa"
 }
 
 export enum UpdateNetworkWirelessSsidRequestBodyEnterpriseAdminAccessEnum {
-    AccessDisabled = "access disabled"
-,    AccessEnabled = "access enabled"
+    AccessDisabled = "access disabled",
+    AccessEnabled = "access enabled"
 }
 
 
@@ -120,10 +121,10 @@ export enum UpdateNetworkWirelessSsidRequestBodyEnterpriseAdminAccessEnum {
  * (Optional) The credentials of the user account to be used by the AP to bind to your LDAP server. The LDAP account should have permissions on all your LDAP servers.
 **/
 export class UpdateNetworkWirelessSsidRequestBodyLdapCredentials extends SpeakeasyBase {
-  @Metadata({ data: "json, name=distinguishedName" })
+  @SpeakeasyMetadata({ data: "json, name=distinguishedName" })
   distinguishedName?: string;
 
-  @Metadata({ data: "json, name=password" })
+  @SpeakeasyMetadata({ data: "json, name=password" })
   password?: string;
 }
 
@@ -133,16 +134,16 @@ export class UpdateNetworkWirelessSsidRequestBodyLdapCredentials extends Speakea
  * The CA certificate used to sign the LDAP server's key.
 **/
 export class UpdateNetworkWirelessSsidRequestBodyLdapServerCaCertificate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=contents" })
+  @SpeakeasyMetadata({ data: "json, name=contents" })
   contents?: string;
 }
 
 
 export class UpdateNetworkWirelessSsidRequestBodyLdapServers extends SpeakeasyBase {
-  @Metadata({ data: "json, name=host" })
+  @SpeakeasyMetadata({ data: "json, name=host" })
   host: string;
 
-  @Metadata({ data: "json, name=port" })
+  @SpeakeasyMetadata({ data: "json, name=port" })
   port: number;
 }
 
@@ -152,16 +153,16 @@ export class UpdateNetworkWirelessSsidRequestBodyLdapServers extends SpeakeasyBa
  * The current setting for LDAP. Only valid if splashPage is 'Password-protected with LDAP'.
 **/
 export class UpdateNetworkWirelessSsidRequestBodyLdap extends SpeakeasyBase {
-  @Metadata({ data: "json, name=baseDistinguishedName" })
+  @SpeakeasyMetadata({ data: "json, name=baseDistinguishedName" })
   baseDistinguishedName?: string;
 
-  @Metadata({ data: "json, name=credentials" })
+  @SpeakeasyMetadata({ data: "json, name=credentials" })
   credentials?: UpdateNetworkWirelessSsidRequestBodyLdapCredentials;
 
-  @Metadata({ data: "json, name=serverCaCertificate" })
+  @SpeakeasyMetadata({ data: "json, name=serverCaCertificate" })
   serverCaCertificate?: UpdateNetworkWirelessSsidRequestBodyLdapServerCaCertificate;
 
-  @Metadata({ data: "json, name=servers", elemType: operations.UpdateNetworkWirelessSsidRequestBodyLdapServers })
+  @SpeakeasyMetadata({ data: "json, name=servers", elemType: UpdateNetworkWirelessSsidRequestBodyLdapServers })
   servers?: UpdateNetworkWirelessSsidRequestBodyLdapServers[];
 }
 
@@ -171,7 +172,7 @@ export class UpdateNetworkWirelessSsidRequestBodyLdap extends SpeakeasyBase {
  * The Client CA Certificate used to sign the client certificate.
 **/
 export class UpdateNetworkWirelessSsidRequestBodyLocalRadiusCertificateAuthenticationClientRootCaCertificate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=contents" })
+  @SpeakeasyMetadata({ data: "json, name=contents" })
   contents?: string;
 }
 
@@ -181,19 +182,19 @@ export class UpdateNetworkWirelessSsidRequestBodyLocalRadiusCertificateAuthentic
  * The current setting for certificate verification.
 **/
 export class UpdateNetworkWirelessSsidRequestBodyLocalRadiusCertificateAuthentication extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clientRootCaCertificate" })
+  @SpeakeasyMetadata({ data: "json, name=clientRootCaCertificate" })
   clientRootCaCertificate?: UpdateNetworkWirelessSsidRequestBodyLocalRadiusCertificateAuthenticationClientRootCaCertificate;
 
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=ocspResponderUrl" })
+  @SpeakeasyMetadata({ data: "json, name=ocspResponderUrl" })
   ocspResponderUrl?: string;
 
-  @Metadata({ data: "json, name=useLdap" })
+  @SpeakeasyMetadata({ data: "json, name=useLdap" })
   useLdap?: boolean;
 
-  @Metadata({ data: "json, name=useOcsp" })
+  @SpeakeasyMetadata({ data: "json, name=useOcsp" })
   useOcsp?: boolean;
 }
 
@@ -203,7 +204,7 @@ export class UpdateNetworkWirelessSsidRequestBodyLocalRadiusCertificateAuthentic
  * The current setting for password-based authentication.
 **/
 export class UpdateNetworkWirelessSsidRequestBodyLocalRadiusPasswordAuthentication extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 }
 
@@ -213,13 +214,13 @@ export class UpdateNetworkWirelessSsidRequestBodyLocalRadiusPasswordAuthenticati
  * The current setting for Local Authentication, a built-in RADIUS server on the access point. Only valid if authMode is '8021x-localradius'.
 **/
 export class UpdateNetworkWirelessSsidRequestBodyLocalRadius extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cacheTimeout" })
+  @SpeakeasyMetadata({ data: "json, name=cacheTimeout" })
   cacheTimeout?: number;
 
-  @Metadata({ data: "json, name=certificateAuthentication" })
+  @SpeakeasyMetadata({ data: "json, name=certificateAuthentication" })
   certificateAuthentication?: UpdateNetworkWirelessSsidRequestBodyLocalRadiusCertificateAuthentication;
 
-  @Metadata({ data: "json, name=passwordAuthentication" })
+  @SpeakeasyMetadata({ data: "json, name=passwordAuthentication" })
   passwordAuthentication?: UpdateNetworkWirelessSsidRequestBodyLocalRadiusPasswordAuthentication;
 }
 
@@ -229,264 +230,264 @@ export class UpdateNetworkWirelessSsidRequestBodyLocalRadius extends SpeakeasyBa
  * The OAuth settings of this SSID. Only valid if splashPage is 'Google OAuth'.
 **/
 export class UpdateNetworkWirelessSsidRequestBodyOauth extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowedDomains" })
+  @SpeakeasyMetadata({ data: "json, name=allowedDomains" })
   allowedDomains?: string[];
 }
 
 
 export class UpdateNetworkWirelessSsidRequestBodyRadiusAccountingServers extends SpeakeasyBase {
-  @Metadata({ data: "json, name=host" })
+  @SpeakeasyMetadata({ data: "json, name=host" })
   host: string;
 
-  @Metadata({ data: "json, name=port" })
+  @SpeakeasyMetadata({ data: "json, name=port" })
   port?: number;
 
-  @Metadata({ data: "json, name=radsecEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=radsecEnabled" })
   radsecEnabled?: boolean;
 
-  @Metadata({ data: "json, name=secret" })
+  @SpeakeasyMetadata({ data: "json, name=secret" })
   secret?: string;
 }
 
 export enum UpdateNetworkWirelessSsidRequestBodyRadiusAttributeForGroupPoliciesEnum {
-    FilterId = "Filter-Id"
-,    ReplyMessage = "Reply-Message"
-,    AirespaceAclName = "Airespace-ACL-Name"
-,    ArubaUserRole = "Aruba-User-Role"
+    FilterId = "Filter-Id",
+    ReplyMessage = "Reply-Message",
+    AirespaceAclName = "Airespace-ACL-Name",
+    ArubaUserRole = "Aruba-User-Role"
 }
 
 export enum UpdateNetworkWirelessSsidRequestBodyRadiusFailoverPolicyEnum {
-    DenyAccess = "Deny access"
-,    AllowAccess = "Allow access"
+    DenyAccess = "Deny access",
+    AllowAccess = "Allow access"
 }
 
 export enum UpdateNetworkWirelessSsidRequestBodyRadiusLoadBalancingPolicyEnum {
-    StrictPriorityOrder = "Strict priority order"
-,    RoundRobin = "Round robin"
+    StrictPriorityOrder = "Strict priority order",
+    RoundRobin = "Round robin"
 }
 
 
 export class UpdateNetworkWirelessSsidRequestBodyRadiusServers extends SpeakeasyBase {
-  @Metadata({ data: "json, name=host" })
+  @SpeakeasyMetadata({ data: "json, name=host" })
   host: string;
 
-  @Metadata({ data: "json, name=port" })
+  @SpeakeasyMetadata({ data: "json, name=port" })
   port?: number;
 
-  @Metadata({ data: "json, name=radsecEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=radsecEnabled" })
   radsecEnabled?: boolean;
 
-  @Metadata({ data: "json, name=secret" })
+  @SpeakeasyMetadata({ data: "json, name=secret" })
   secret?: string;
 }
 
 export enum UpdateNetworkWirelessSsidRequestBodySplashPageEnum {
-    None = "None"
-,    ClickThroughSplashPage = "Click-through splash page"
-,    Billing = "Billing"
-,    PasswordProtectedWithMerakiRadius = "Password-protected with Meraki RADIUS"
-,    PasswordProtectedWithCustomRadius = "Password-protected with custom RADIUS"
-,    PasswordProtectedWithActiveDirectory = "Password-protected with Active Directory"
-,    PasswordProtectedWithLdap = "Password-protected with LDAP"
-,    SmsAuthentication = "SMS authentication"
-,    SystemsManagerSentry = "Systems Manager Sentry"
-,    FacebookWiFi = "Facebook Wi-Fi"
-,    GoogleOAuth = "Google OAuth"
-,    SponsoredGuest = "Sponsored guest"
-,    CiscoIse = "Cisco ISE"
-,    GoogleAppsDomain = "Google Apps domain"
+    None = "None",
+    ClickThroughSplashPage = "Click-through splash page",
+    Billing = "Billing",
+    PasswordProtectedWithMerakiRadius = "Password-protected with Meraki RADIUS",
+    PasswordProtectedWithCustomRadius = "Password-protected with custom RADIUS",
+    PasswordProtectedWithActiveDirectory = "Password-protected with Active Directory",
+    PasswordProtectedWithLdap = "Password-protected with LDAP",
+    SmsAuthentication = "SMS authentication",
+    SystemsManagerSentry = "Systems Manager Sentry",
+    FacebookWiFi = "Facebook Wi-Fi",
+    GoogleOAuth = "Google OAuth",
+    SponsoredGuest = "Sponsored guest",
+    CiscoIse = "Cisco ISE",
+    GoogleAppsDomain = "Google Apps domain"
 }
 
 export enum UpdateNetworkWirelessSsidRequestBodyWpaEncryptionModeEnum {
-    Wpa1Only = "WPA1 only"
-,    Wpa1AndWpa2 = "WPA1 and WPA2"
-,    Wpa2Only = "WPA2 only"
-,    Wpa3TransitionMode = "WPA3 Transition Mode"
-,    Wpa3Only = "WPA3 only"
+    Wpa1Only = "WPA1 only",
+    Wpa1AndWpa2 = "WPA1 and WPA2",
+    Wpa2Only = "WPA2 only",
+    Wpa3TransitionMode = "WPA3 Transition Mode",
+    Wpa3Only = "WPA3 only"
 }
 
 
 export class UpdateNetworkWirelessSsidRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=activeDirectory" })
+  @SpeakeasyMetadata({ data: "json, name=activeDirectory" })
   activeDirectory?: UpdateNetworkWirelessSsidRequestBodyActiveDirectory;
 
-  @Metadata({ data: "json, name=adultContentFilteringEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=adultContentFilteringEnabled" })
   adultContentFilteringEnabled?: boolean;
 
-  @Metadata({ data: "json, name=apTagsAndVlanIds", elemType: operations.UpdateNetworkWirelessSsidRequestBodyApTagsAndVlanIds })
+  @SpeakeasyMetadata({ data: "json, name=apTagsAndVlanIds", elemType: UpdateNetworkWirelessSsidRequestBodyApTagsAndVlanIds })
   apTagsAndVlanIds?: UpdateNetworkWirelessSsidRequestBodyApTagsAndVlanIds[];
 
-  @Metadata({ data: "json, name=authMode" })
+  @SpeakeasyMetadata({ data: "json, name=authMode" })
   authMode?: UpdateNetworkWirelessSsidRequestBodyAuthModeEnum;
 
-  @Metadata({ data: "json, name=availabilityTags" })
+  @SpeakeasyMetadata({ data: "json, name=availabilityTags" })
   availabilityTags?: string[];
 
-  @Metadata({ data: "json, name=availableOnAllAps" })
+  @SpeakeasyMetadata({ data: "json, name=availableOnAllAps" })
   availableOnAllAps?: boolean;
 
-  @Metadata({ data: "json, name=bandSelection" })
+  @SpeakeasyMetadata({ data: "json, name=bandSelection" })
   bandSelection?: string;
 
-  @Metadata({ data: "json, name=concentratorNetworkId" })
+  @SpeakeasyMetadata({ data: "json, name=concentratorNetworkId" })
   concentratorNetworkId?: string;
 
-  @Metadata({ data: "json, name=defaultVlanId" })
+  @SpeakeasyMetadata({ data: "json, name=defaultVlanId" })
   defaultVlanId?: number;
 
-  @Metadata({ data: "json, name=dnsRewrite" })
+  @SpeakeasyMetadata({ data: "json, name=dnsRewrite" })
   dnsRewrite?: UpdateNetworkWirelessSsidRequestBodyDnsRewrite;
 
-  @Metadata({ data: "json, name=dot11r" })
+  @SpeakeasyMetadata({ data: "json, name=dot11r" })
   dot11r?: UpdateNetworkWirelessSsidRequestBodyDot11r;
 
-  @Metadata({ data: "json, name=dot11w" })
+  @SpeakeasyMetadata({ data: "json, name=dot11w" })
   dot11w?: UpdateNetworkWirelessSsidRequestBodyDot11w;
 
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=encryptionMode" })
+  @SpeakeasyMetadata({ data: "json, name=encryptionMode" })
   encryptionMode?: UpdateNetworkWirelessSsidRequestBodyEncryptionModeEnum;
 
-  @Metadata({ data: "json, name=enterpriseAdminAccess" })
+  @SpeakeasyMetadata({ data: "json, name=enterpriseAdminAccess" })
   enterpriseAdminAccess?: UpdateNetworkWirelessSsidRequestBodyEnterpriseAdminAccessEnum;
 
-  @Metadata({ data: "json, name=ipAssignmentMode" })
+  @SpeakeasyMetadata({ data: "json, name=ipAssignmentMode" })
   ipAssignmentMode?: string;
 
-  @Metadata({ data: "json, name=lanIsolationEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=lanIsolationEnabled" })
   lanIsolationEnabled?: boolean;
 
-  @Metadata({ data: "json, name=ldap" })
+  @SpeakeasyMetadata({ data: "json, name=ldap" })
   ldap?: UpdateNetworkWirelessSsidRequestBodyLdap;
 
-  @Metadata({ data: "json, name=localRadius" })
+  @SpeakeasyMetadata({ data: "json, name=localRadius" })
   localRadius?: UpdateNetworkWirelessSsidRequestBodyLocalRadius;
 
-  @Metadata({ data: "json, name=mandatoryDhcpEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=mandatoryDhcpEnabled" })
   mandatoryDhcpEnabled?: boolean;
 
-  @Metadata({ data: "json, name=minBitrate" })
+  @SpeakeasyMetadata({ data: "json, name=minBitrate" })
   minBitrate?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=oauth" })
+  @SpeakeasyMetadata({ data: "json, name=oauth" })
   oauth?: UpdateNetworkWirelessSsidRequestBodyOauth;
 
-  @Metadata({ data: "json, name=perClientBandwidthLimitDown" })
+  @SpeakeasyMetadata({ data: "json, name=perClientBandwidthLimitDown" })
   perClientBandwidthLimitDown?: number;
 
-  @Metadata({ data: "json, name=perClientBandwidthLimitUp" })
+  @SpeakeasyMetadata({ data: "json, name=perClientBandwidthLimitUp" })
   perClientBandwidthLimitUp?: number;
 
-  @Metadata({ data: "json, name=perSsidBandwidthLimitDown" })
+  @SpeakeasyMetadata({ data: "json, name=perSsidBandwidthLimitDown" })
   perSsidBandwidthLimitDown?: number;
 
-  @Metadata({ data: "json, name=perSsidBandwidthLimitUp" })
+  @SpeakeasyMetadata({ data: "json, name=perSsidBandwidthLimitUp" })
   perSsidBandwidthLimitUp?: number;
 
-  @Metadata({ data: "json, name=psk" })
+  @SpeakeasyMetadata({ data: "json, name=psk" })
   psk?: string;
 
-  @Metadata({ data: "json, name=radiusAccountingEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=radiusAccountingEnabled" })
   radiusAccountingEnabled?: boolean;
 
-  @Metadata({ data: "json, name=radiusAccountingInterimInterval" })
+  @SpeakeasyMetadata({ data: "json, name=radiusAccountingInterimInterval" })
   radiusAccountingInterimInterval?: number;
 
-  @Metadata({ data: "json, name=radiusAccountingServers", elemType: operations.UpdateNetworkWirelessSsidRequestBodyRadiusAccountingServers })
+  @SpeakeasyMetadata({ data: "json, name=radiusAccountingServers", elemType: UpdateNetworkWirelessSsidRequestBodyRadiusAccountingServers })
   radiusAccountingServers?: UpdateNetworkWirelessSsidRequestBodyRadiusAccountingServers[];
 
-  @Metadata({ data: "json, name=radiusAttributeForGroupPolicies" })
+  @SpeakeasyMetadata({ data: "json, name=radiusAttributeForGroupPolicies" })
   radiusAttributeForGroupPolicies?: UpdateNetworkWirelessSsidRequestBodyRadiusAttributeForGroupPoliciesEnum;
 
-  @Metadata({ data: "json, name=radiusAuthenticationNasId" })
+  @SpeakeasyMetadata({ data: "json, name=radiusAuthenticationNasId" })
   radiusAuthenticationNasId?: string;
 
-  @Metadata({ data: "json, name=radiusCalledStationId" })
+  @SpeakeasyMetadata({ data: "json, name=radiusCalledStationId" })
   radiusCalledStationId?: string;
 
-  @Metadata({ data: "json, name=radiusCoaEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=radiusCoaEnabled" })
   radiusCoaEnabled?: boolean;
 
-  @Metadata({ data: "json, name=radiusFailoverPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=radiusFailoverPolicy" })
   radiusFailoverPolicy?: UpdateNetworkWirelessSsidRequestBodyRadiusFailoverPolicyEnum;
 
-  @Metadata({ data: "json, name=radiusFallbackEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=radiusFallbackEnabled" })
   radiusFallbackEnabled?: boolean;
 
-  @Metadata({ data: "json, name=radiusGuestVlanEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=radiusGuestVlanEnabled" })
   radiusGuestVlanEnabled?: boolean;
 
-  @Metadata({ data: "json, name=radiusGuestVlanId" })
+  @SpeakeasyMetadata({ data: "json, name=radiusGuestVlanId" })
   radiusGuestVlanId?: number;
 
-  @Metadata({ data: "json, name=radiusLoadBalancingPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=radiusLoadBalancingPolicy" })
   radiusLoadBalancingPolicy?: UpdateNetworkWirelessSsidRequestBodyRadiusLoadBalancingPolicyEnum;
 
-  @Metadata({ data: "json, name=radiusOverride" })
+  @SpeakeasyMetadata({ data: "json, name=radiusOverride" })
   radiusOverride?: boolean;
 
-  @Metadata({ data: "json, name=radiusProxyEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=radiusProxyEnabled" })
   radiusProxyEnabled?: boolean;
 
-  @Metadata({ data: "json, name=radiusServerAttemptsLimit" })
+  @SpeakeasyMetadata({ data: "json, name=radiusServerAttemptsLimit" })
   radiusServerAttemptsLimit?: number;
 
-  @Metadata({ data: "json, name=radiusServerTimeout" })
+  @SpeakeasyMetadata({ data: "json, name=radiusServerTimeout" })
   radiusServerTimeout?: number;
 
-  @Metadata({ data: "json, name=radiusServers", elemType: operations.UpdateNetworkWirelessSsidRequestBodyRadiusServers })
+  @SpeakeasyMetadata({ data: "json, name=radiusServers", elemType: UpdateNetworkWirelessSsidRequestBodyRadiusServers })
   radiusServers?: UpdateNetworkWirelessSsidRequestBodyRadiusServers[];
 
-  @Metadata({ data: "json, name=radiusTestingEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=radiusTestingEnabled" })
   radiusTestingEnabled?: boolean;
 
-  @Metadata({ data: "json, name=splashGuestSponsorDomains" })
+  @SpeakeasyMetadata({ data: "json, name=splashGuestSponsorDomains" })
   splashGuestSponsorDomains?: string[];
 
-  @Metadata({ data: "json, name=splashPage" })
+  @SpeakeasyMetadata({ data: "json, name=splashPage" })
   splashPage?: UpdateNetworkWirelessSsidRequestBodySplashPageEnum;
 
-  @Metadata({ data: "json, name=useVlanTagging" })
+  @SpeakeasyMetadata({ data: "json, name=useVlanTagging" })
   useVlanTagging?: boolean;
 
-  @Metadata({ data: "json, name=visible" })
+  @SpeakeasyMetadata({ data: "json, name=visible" })
   visible?: boolean;
 
-  @Metadata({ data: "json, name=vlanId" })
+  @SpeakeasyMetadata({ data: "json, name=vlanId" })
   vlanId?: number;
 
-  @Metadata({ data: "json, name=walledGardenEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=walledGardenEnabled" })
   walledGardenEnabled?: boolean;
 
-  @Metadata({ data: "json, name=walledGardenRanges" })
+  @SpeakeasyMetadata({ data: "json, name=walledGardenRanges" })
   walledGardenRanges?: string[];
 
-  @Metadata({ data: "json, name=wpaEncryptionMode" })
+  @SpeakeasyMetadata({ data: "json, name=wpaEncryptionMode" })
   wpaEncryptionMode?: UpdateNetworkWirelessSsidRequestBodyWpaEncryptionModeEnum;
 }
 
 
 export class UpdateNetworkWirelessSsidRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateNetworkWirelessSsidPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: UpdateNetworkWirelessSsidRequestBody;
 }
 
 
 export class UpdateNetworkWirelessSsidResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateNetworkWirelessSsid200ApplicationJsonObject?: Map<string, any>;
 }

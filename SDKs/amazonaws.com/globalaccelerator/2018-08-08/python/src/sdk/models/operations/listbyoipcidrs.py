@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -14,6 +18,7 @@ class ListByoipCidrsXAmzTargetEnum(str, Enum):
 
 @dataclass
 class ListByoipCidrsHeaders:
+    x_amz_target: ListByoipCidrsXAmzTargetEnum = field(metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm', 'style': 'simple', 'explode': False }})
     x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256', 'style': 'simple', 'explode': False }})
     x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential', 'style': 'simple', 'explode': False }})
@@ -21,23 +26,22 @@ class ListByoipCidrsHeaders:
     x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token', 'style': 'simple', 'explode': False }})
     x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature', 'style': 'simple', 'explode': False }})
     x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders', 'style': 'simple', 'explode': False }})
-    x_amz_target: ListByoipCidrsXAmzTargetEnum = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ListByoipCidrsRequest:
-    query_params: ListByoipCidrsQueryParams = field(default=None)
-    headers: ListByoipCidrsHeaders = field(default=None)
-    request: shared.ListByoipCidrsRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ListByoipCidrsHeaders = field()
+    query_params: ListByoipCidrsQueryParams = field()
+    request: shared.ListByoipCidrsRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ListByoipCidrsResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_service_error_exception: Optional[Any] = field(default=None)
     invalid_argument_exception: Optional[Any] = field(default=None)
     invalid_next_token_exception: Optional[Any] = field(default=None)
     list_byoip_cidrs_response: Optional[shared.ListByoipCidrsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -10,22 +10,10 @@ type PutRepositoriesWorkspaceRepoSlugHooksUIDPathParams struct {
 	Workspace string `pathParam:"style=simple,explode=false,name=workspace"`
 }
 
-type PutRepositoriesWorkspaceRepoSlugHooksUIDSecurityOption1 struct {
-	Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
-}
-
-type PutRepositoriesWorkspaceRepoSlugHooksUIDSecurityOption2 struct {
-	Basic shared.SchemeBasic `security:"scheme,type=http,subtype=basic"`
-}
-
-type PutRepositoriesWorkspaceRepoSlugHooksUIDSecurityOption3 struct {
-	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
-}
-
 type PutRepositoriesWorkspaceRepoSlugHooksUIDSecurity struct {
-	Option1 *PutRepositoriesWorkspaceRepoSlugHooksUIDSecurityOption1 `security:"option"`
-	Option2 *PutRepositoriesWorkspaceRepoSlugHooksUIDSecurityOption2 `security:"option"`
-	Option3 *PutRepositoriesWorkspaceRepoSlugHooksUIDSecurityOption3 `security:"option"`
+	Oauth2 *shared.SchemeOauth2 `security:"scheme,type=oauth2"`
+	Basic  *shared.SchemeBasic  `security:"scheme,type=http,subtype=basic"`
+	APIKey *shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type PutRepositoriesWorkspaceRepoSlugHooksUIDRequest struct {

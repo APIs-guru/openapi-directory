@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HandshakePartyTypeEnum } from "./handshakepartytypeenum";
+
 
 
 // HandshakeParty
@@ -7,9 +8,9 @@ import { HandshakePartyTypeEnum } from "./handshakepartytypeenum";
  * Identifies a participant in a handshake.
 **/
 export class HandshakeParty extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id: string;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type: HandshakePartyTypeEnum;
 }

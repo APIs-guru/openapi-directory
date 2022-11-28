@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ThirdPartyJobDetails } from "./thirdpartyjobdetails";
+
 
 
 // GetThirdPartyJobDetailsOutput
@@ -7,6 +8,6 @@ import { ThirdPartyJobDetails } from "./thirdpartyjobdetails";
  * Represents the output of a <code>GetThirdPartyJobDetails</code> action.
 **/
 export class GetThirdPartyJobDetailsOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=jobDetails" })
+  @SpeakeasyMetadata({ data: "json, name=jobDetails" })
   jobDetails?: ThirdPartyJobDetails;
 }

@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateSimulationApplicationHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -31,7 +32,7 @@ export class UpdateSimulationApplicationHeaders extends SpeakeasyBase {
  * The object that contains the Docker image URI for either your robot or simulation applications.
 **/
 export class UpdateSimulationApplicationRequestBodyEnvironment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri?: string;
 }
 
@@ -41,10 +42,10 @@ export class UpdateSimulationApplicationRequestBodyEnvironment extends Speakeasy
  * Information about a rendering engine.
 **/
 export class UpdateSimulationApplicationRequestBodyRenderingEngine extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: shared.RenderingEngineTypeEnum;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 }
 
@@ -54,10 +55,10 @@ export class UpdateSimulationApplicationRequestBodyRenderingEngine extends Speak
  * Information about a robot software suite (ROS distribution).
 **/
 export class UpdateSimulationApplicationRequestBodyRobotSoftwareSuite extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: shared.RobotSoftwareSuiteTypeEnum;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: shared.RobotSoftwareSuiteVersionTypeEnum;
 }
 
@@ -67,69 +68,69 @@ export class UpdateSimulationApplicationRequestBodyRobotSoftwareSuite extends Sp
  * Information about a simulation software suite.
 **/
 export class UpdateSimulationApplicationRequestBodySimulationSoftwareSuite extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: shared.SimulationSoftwareSuiteTypeEnum;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 }
 
 
 export class UpdateSimulationApplicationRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=application" })
+  @SpeakeasyMetadata({ data: "json, name=application" })
   application: string;
 
-  @Metadata({ data: "json, name=currentRevisionId" })
+  @SpeakeasyMetadata({ data: "json, name=currentRevisionId" })
   currentRevisionId?: string;
 
-  @Metadata({ data: "json, name=environment" })
+  @SpeakeasyMetadata({ data: "json, name=environment" })
   environment?: UpdateSimulationApplicationRequestBodyEnvironment;
 
-  @Metadata({ data: "json, name=renderingEngine" })
+  @SpeakeasyMetadata({ data: "json, name=renderingEngine" })
   renderingEngine?: UpdateSimulationApplicationRequestBodyRenderingEngine;
 
-  @Metadata({ data: "json, name=robotSoftwareSuite" })
+  @SpeakeasyMetadata({ data: "json, name=robotSoftwareSuite" })
   robotSoftwareSuite: UpdateSimulationApplicationRequestBodyRobotSoftwareSuite;
 
-  @Metadata({ data: "json, name=simulationSoftwareSuite" })
+  @SpeakeasyMetadata({ data: "json, name=simulationSoftwareSuite" })
   simulationSoftwareSuite: UpdateSimulationApplicationRequestBodySimulationSoftwareSuite;
 
-  @Metadata({ data: "json, name=sources", elemType: shared.SourceConfig })
+  @SpeakeasyMetadata({ data: "json, name=sources", elemType: shared.SourceConfig })
   sources?: shared.SourceConfig[];
 }
 
 
 export class UpdateSimulationApplicationRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdateSimulationApplicationHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdateSimulationApplicationRequestBody;
 }
 
 
 export class UpdateSimulationApplicationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidParameterException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   limitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateSimulationApplicationResponse?: shared.UpdateSimulationApplicationResponse;
 }

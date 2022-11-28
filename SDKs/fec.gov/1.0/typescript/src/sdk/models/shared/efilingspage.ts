@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OffsetInfo } from "./offsetinfo";
 import { EFilings } from "./efilings";
 
 
+
 export class EFilingsPage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pagination" })
+  @SpeakeasyMetadata({ data: "json, name=pagination" })
   pagination?: OffsetInfo;
 
-  @Metadata({ data: "json, name=results", elemType: shared.EFilings })
+  @SpeakeasyMetadata({ data: "json, name=results", elemType: EFilings })
   results?: EFilings[];
 }

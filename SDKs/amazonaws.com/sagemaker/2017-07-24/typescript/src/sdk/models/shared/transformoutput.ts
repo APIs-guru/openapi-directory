@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AssemblyTypeEnum } from "./assemblytypeenum";
+
 
 
 // TransformOutput
@@ -7,15 +8,15 @@ import { AssemblyTypeEnum } from "./assemblytypeenum";
  * Describes the results of a transform job.
 **/
 export class TransformOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Accept" })
+  @SpeakeasyMetadata({ data: "json, name=Accept" })
   accept?: string;
 
-  @Metadata({ data: "json, name=AssembleWith" })
+  @SpeakeasyMetadata({ data: "json, name=AssembleWith" })
   assembleWith?: AssemblyTypeEnum;
 
-  @Metadata({ data: "json, name=KmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=KmsKeyId" })
   kmsKeyId?: string;
 
-  @Metadata({ data: "json, name=S3OutputPath" })
+  @SpeakeasyMetadata({ data: "json, name=S3OutputPath" })
   s3OutputPath: string;
 }

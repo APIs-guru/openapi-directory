@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Finding
+// Contains information about an Amazon Inspector finding. This data type is used as the response element in the <a>DescribeFindings</a> action.
 type Finding struct {
 	Arn                   string                      `json:"arn"`
 	AssetAttributes       *AssetAttributes            `json:"assetAttributes,omitempty"`

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { PermissionsEnum } from "./permissionsenum";
 export declare class DescribeEnvironmentMembershipsRequest extends SpeakeasyBase {
     environmentId?: string;

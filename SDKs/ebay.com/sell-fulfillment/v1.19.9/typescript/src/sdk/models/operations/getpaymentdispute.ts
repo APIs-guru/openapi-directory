@@ -1,42 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export const GETPAYMENTDISPUTE_SERVERS = [
-	"https://apiz.ebay.com{basePath}",
-];
 
+export const GetPaymentDisputeServerList = [
+	"https://apiz.ebay.com{basePath}",
+] as const;
 
 
 export class GetPaymentDisputePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=payment_dispute_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=payment_dispute_id" })
   paymentDisputeId: string;
 }
 
 
 export class GetPaymentDisputeSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   apiAuth: shared.SchemeApiAuth;
 }
 
 
 export class GetPaymentDisputeRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   serverUrl?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetPaymentDisputePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetPaymentDisputeSecurity;
 }
 
 
 export class GetPaymentDisputeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   paymentDispute?: shared.PaymentDispute;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

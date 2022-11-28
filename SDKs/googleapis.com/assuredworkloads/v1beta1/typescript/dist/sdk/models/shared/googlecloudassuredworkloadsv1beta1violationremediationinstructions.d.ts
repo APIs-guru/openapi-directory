@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudAssuredworkloadsV1beta1ViolationRemediationInstructionsConsole } from "./googlecloudassuredworkloadsv1beta1violationremediationinstructionsconsole";
 import { GoogleCloudAssuredworkloadsV1beta1ViolationRemediationInstructionsGcloud } from "./googlecloudassuredworkloadsv1beta1violationremediationinstructionsgcloud";
 /**

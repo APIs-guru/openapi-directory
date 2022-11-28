@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PutApiV1TenantTenantIdPoolPoolNameVmVmNamePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=poolName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=poolName" })
   poolName: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=tenantId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=tenantId" })
   tenantId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=vmName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=vmName" })
   vmName: string;
 }
 
 
 export class PutApiV1TenantTenantIdPoolPoolNameVmVmNameRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
   claimVmBody?: shared.ClaimVmBody;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   claimVmBody1?: shared.ClaimVmBody;
 
-  @Metadata({ data: "request, media_type=application/json-patch+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json-patch+json" })
   claimVmBody2?: shared.ClaimVmBody;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   claimVmBody3?: shared.ClaimVmBody;
 }
 
 
 export class PutApiV1TenantTenantIdPoolPoolNameVmVmNameRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PutApiV1TenantTenantIdPoolPoolNameVmVmNamePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request?: PutApiV1TenantTenantIdPoolPoolNameVmVmNameRequests;
 }
 
 
 export class PutApiV1TenantTenantIdPoolPoolNameVmVmNameResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   vmResult?: shared.VmResult;
 }

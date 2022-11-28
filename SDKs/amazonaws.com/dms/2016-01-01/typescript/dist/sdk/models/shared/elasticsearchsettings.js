@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ElasticsearchSettings
 /**
  * Provides information that defines an Elasticsearch endpoint.
@@ -33,19 +33,19 @@ var ElasticsearchSettings = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=EndpointUri" }),
+        SpeakeasyMetadata({ data: "json, name=EndpointUri" }),
         __metadata("design:type", String)
     ], ElasticsearchSettings.prototype, "endpointUri", void 0);
     __decorate([
-        Metadata({ data: "json, name=ErrorRetryDuration" }),
+        SpeakeasyMetadata({ data: "json, name=ErrorRetryDuration" }),
         __metadata("design:type", Number)
     ], ElasticsearchSettings.prototype, "errorRetryDuration", void 0);
     __decorate([
-        Metadata({ data: "json, name=FullLoadErrorPercentage" }),
+        SpeakeasyMetadata({ data: "json, name=FullLoadErrorPercentage" }),
         __metadata("design:type", Number)
     ], ElasticsearchSettings.prototype, "fullLoadErrorPercentage", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServiceAccessRoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=ServiceAccessRoleArn" }),
         __metadata("design:type", String)
     ], ElasticsearchSettings.prototype, "serviceAccessRoleArn", void 0);
     return ElasticsearchSettings;

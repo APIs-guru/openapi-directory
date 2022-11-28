@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * Provides a collection of table statistics in response to a request by the <code>DescribeTableStatistics</code> operation.
 **/

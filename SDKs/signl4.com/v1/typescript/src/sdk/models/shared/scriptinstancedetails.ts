@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ScriptInstanceInfoRuntimeInformationModel } from "./scriptinstanceinforuntimeinformationmodel";
 
 
+
 export class ScriptInstanceDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=config" })
+  @SpeakeasyMetadata({ data: "json, name=config" })
   config?: any;
 
-  @Metadata({ data: "json, name=customScriptDescription" })
+  @SpeakeasyMetadata({ data: "json, name=customScriptDescription" })
   customScriptDescription?: string;
 
-  @Metadata({ data: "json, name=customScriptName" })
+  @SpeakeasyMetadata({ data: "json, name=customScriptName" })
   customScriptName?: string;
 
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=eventPattern" })
+  @SpeakeasyMetadata({ data: "json, name=eventPattern" })
   eventPattern?: any;
 
-  @Metadata({ data: "json, name=instanceId" })
+  @SpeakeasyMetadata({ data: "json, name=instanceId" })
   instanceId?: string;
 
-  @Metadata({ data: "json, name=lastModified" })
+  @SpeakeasyMetadata({ data: "json, name=lastModified" })
   lastModified?: Date;
 
-  @Metadata({ data: "json, name=runtimeInformation" })
+  @SpeakeasyMetadata({ data: "json, name=runtimeInformation" })
   runtimeInformation?: ScriptInstanceInfoRuntimeInformationModel;
 
-  @Metadata({ data: "json, name=scriptId" })
+  @SpeakeasyMetadata({ data: "json, name=scriptId" })
   scriptId?: string;
 
-  @Metadata({ data: "json, name=scriptName" })
+  @SpeakeasyMetadata({ data: "json, name=scriptName" })
   scriptName?: string;
 
-  @Metadata({ data: "json, name=subscriptionId" })
+  @SpeakeasyMetadata({ data: "json, name=subscriptionId" })
   subscriptionId?: string;
 
-  @Metadata({ data: "json, name=teamId" })
+  @SpeakeasyMetadata({ data: "json, name=teamId" })
   teamId?: string;
 }

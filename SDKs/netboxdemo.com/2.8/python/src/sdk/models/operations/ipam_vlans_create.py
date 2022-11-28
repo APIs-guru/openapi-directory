@@ -5,12 +5,12 @@ from sdk.models import shared
 
 @dataclass
 class IpamVlansCreateRequest:
-    request: shared.WritableVlan = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.WritableVlanInput = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class IpamVlansCreateResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     vlan: Optional[shared.Vlan] = field(default=None)
     

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Bucket } from "./bucket";
+
 
 
 // UserPageLoadMetricV5
@@ -8,21 +8,21 @@ import { Bucket } from "./bucket";
  * A CrUX metric object for a single metric and form factor.
 **/
 export class UserPageLoadMetricV5 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=category" })
+  @SpeakeasyMetadata({ data: "json, name=category" })
   category?: string;
 
-  @Metadata({ data: "json, name=distributions", elemType: shared.Bucket })
+  @SpeakeasyMetadata({ data: "json, name=distributions", elemType: Bucket })
   distributions?: Bucket[];
 
-  @Metadata({ data: "json, name=formFactor" })
+  @SpeakeasyMetadata({ data: "json, name=formFactor" })
   formFactor?: string;
 
-  @Metadata({ data: "json, name=median" })
+  @SpeakeasyMetadata({ data: "json, name=median" })
   median?: number;
 
-  @Metadata({ data: "json, name=metricId" })
+  @SpeakeasyMetadata({ data: "json, name=metricId" })
   metricId?: string;
 
-  @Metadata({ data: "json, name=percentile" })
+  @SpeakeasyMetadata({ data: "json, name=percentile" })
   percentile?: number;
 }

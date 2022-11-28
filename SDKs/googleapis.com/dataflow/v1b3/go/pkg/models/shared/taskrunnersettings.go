@@ -1,5 +1,7 @@
 package shared
 
+// TaskRunnerSettings
+// Taskrunner configuration settings.
 type TaskRunnerSettings struct {
 	Alsologtostderr          *bool           `json:"alsologtostderr,omitempty"`
 	BaseTaskDir              *string         `json:"baseTaskDir,omitempty"`

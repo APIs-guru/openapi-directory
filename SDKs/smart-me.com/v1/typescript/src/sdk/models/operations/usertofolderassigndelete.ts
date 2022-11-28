@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UserToFolderAssignDeleteQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=source" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=source" })
   source: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=target" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=target" })
   target: string;
 }
 
 
 export class UserToFolderAssignDeleteRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: UserToFolderAssignDeleteQueryParams;
 }
 
 
 export class UserToFolderAssignDeleteResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

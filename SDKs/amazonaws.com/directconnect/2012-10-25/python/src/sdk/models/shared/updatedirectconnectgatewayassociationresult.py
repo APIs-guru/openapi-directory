@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import directconnectgatewayassociation
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateDirectConnectGatewayAssociationResult:
-    direct_connect_gateway_association: Optional[directconnectgatewayassociation.DirectConnectGatewayAssociation] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'directConnectGatewayAssociation' }})
+    direct_connect_gateway_association: Optional[DirectConnectGatewayAssociation] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('directConnectGatewayAssociation') }})
     

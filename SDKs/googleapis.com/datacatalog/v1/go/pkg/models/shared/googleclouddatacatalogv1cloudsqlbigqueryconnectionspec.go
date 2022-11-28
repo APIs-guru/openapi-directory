@@ -8,6 +8,8 @@ const (
 	GoogleCloudDatacatalogV1CloudSQLBigQueryConnectionSpecTypeEnumMysql                   GoogleCloudDatacatalogV1CloudSQLBigQueryConnectionSpecTypeEnum = "MYSQL"
 )
 
+// GoogleCloudDatacatalogV1CloudSQLBigQueryConnectionSpec
+// Specification for the BigQuery connection to a Cloud SQL instance.
 type GoogleCloudDatacatalogV1CloudSQLBigQueryConnectionSpec struct {
 	Database   *string                                                         `json:"database,omitempty"`
 	InstanceID *string                                                         `json:"instanceId,omitempty"`

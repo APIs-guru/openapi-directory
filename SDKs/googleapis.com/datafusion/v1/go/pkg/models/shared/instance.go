@@ -1,5 +1,14 @@
 package shared
 
+type InstanceTypeEnum string
+
+const (
+	InstanceTypeEnumTypeUnspecified InstanceTypeEnum = "TYPE_UNSPECIFIED"
+	InstanceTypeEnumBasic           InstanceTypeEnum = "BASIC"
+	InstanceTypeEnumEnterprise      InstanceTypeEnum = "ENTERPRISE"
+	InstanceTypeEnumDeveloper       InstanceTypeEnum = "DEVELOPER"
+)
+
 type InstanceDisabledReasonEnum string
 
 const (
@@ -23,15 +32,30 @@ const (
 	InstanceStateEnumDisabled         InstanceStateEnum = "DISABLED"
 )
 
-type InstanceTypeEnum string
+// InstanceInput
+// Represents a Data Fusion instance.
+type InstanceInput struct {
+	Accelerators                []Accelerator       `json:"accelerators,omitempty"`
+	AvailableVersion            []Version           `json:"availableVersion,omitempty"`
+	CryptoKeyConfig             *CryptoKeyConfig    `json:"cryptoKeyConfig,omitempty"`
+	DataprocServiceAccount      *string             `json:"dataprocServiceAccount,omitempty"`
+	Description                 *string             `json:"description,omitempty"`
+	DisplayName                 *string             `json:"displayName,omitempty"`
+	EnableRbac                  *bool               `json:"enableRbac,omitempty"`
+	EnableStackdriverLogging    *bool               `json:"enableStackdriverLogging,omitempty"`
+	EnableStackdriverMonitoring *bool               `json:"enableStackdriverMonitoring,omitempty"`
+	EventPublishConfig          *EventPublishConfig `json:"eventPublishConfig,omitempty"`
+	Labels                      map[string]string   `json:"labels,omitempty"`
+	NetworkConfig               *NetworkConfig      `json:"networkConfig,omitempty"`
+	Options                     map[string]string   `json:"options,omitempty"`
+	PrivateInstance             *bool               `json:"privateInstance,omitempty"`
+	Type                        *InstanceTypeEnum   `json:"type,omitempty"`
+	Version                     *string             `json:"version,omitempty"`
+	Zone                        *string             `json:"zone,omitempty"`
+}
 
-const (
-	InstanceTypeEnumTypeUnspecified InstanceTypeEnum = "TYPE_UNSPECIFIED"
-	InstanceTypeEnumBasic           InstanceTypeEnum = "BASIC"
-	InstanceTypeEnumEnterprise      InstanceTypeEnum = "ENTERPRISE"
-	InstanceTypeEnumDeveloper       InstanceTypeEnum = "DEVELOPER"
-)
-
+// Instance
+// Represents a Data Fusion instance.
 type Instance struct {
 	Accelerators                []Accelerator                `json:"accelerators,omitempty"`
 	APIEndpoint                 *string                      `json:"apiEndpoint,omitempty"`

@@ -8,6 +8,8 @@ const (
 	RestoreDeletedNodesRequestResolutionStrategyEnumFail       RestoreDeletedNodesRequestResolutionStrategyEnum = "fail"
 )
 
+// RestoreDeletedNodesRequest
+// Request model for restoring deleted nodes
 type RestoreDeletedNodesRequest struct {
 	DeletedNodeIds     []int64                                           `json:"deletedNodeIds"`
 	KeepShareLinks     *bool                                             `json:"keepShareLinks,omitempty"`

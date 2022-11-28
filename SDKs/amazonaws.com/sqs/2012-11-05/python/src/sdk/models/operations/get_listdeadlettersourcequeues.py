@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 
 @dataclass
 class GetListDeadLetterSourceQueuesPathParams:
-    account_number: int = field(default=None, metadata={'path_param': { 'field_name': 'AccountNumber', 'style': 'simple', 'explode': False }})
-    queue_name: str = field(default=None, metadata={'path_param': { 'field_name': 'QueueName', 'style': 'simple', 'explode': False }})
+    account_number: int = field(metadata={'path_param': { 'field_name': 'AccountNumber', 'style': 'simple', 'explode': False }})
+    queue_name: str = field(metadata={'path_param': { 'field_name': 'QueueName', 'style': 'simple', 'explode': False }})
     
 class GetListDeadLetterSourceQueuesActionEnum(str, Enum):
     LIST_DEAD_LETTER_SOURCE_QUEUES = "ListDeadLetterSourceQueues"
@@ -16,10 +20,10 @@ class GetListDeadLetterSourceQueuesVersionEnum(str, Enum):
 
 @dataclass
 class GetListDeadLetterSourceQueuesQueryParams:
-    action: GetListDeadLetterSourceQueuesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetListDeadLetterSourceQueuesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetListDeadLetterSourceQueuesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     max_results: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxResults', 'style': 'form', 'explode': True }})
     next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NextToken', 'style': 'form', 'explode': True }})
-    version: GetListDeadLetterSourceQueuesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -35,14 +39,14 @@ class GetListDeadLetterSourceQueuesHeaders:
 
 @dataclass
 class GetListDeadLetterSourceQueuesRequest:
-    path_params: GetListDeadLetterSourceQueuesPathParams = field(default=None)
-    query_params: GetListDeadLetterSourceQueuesQueryParams = field(default=None)
-    headers: GetListDeadLetterSourceQueuesHeaders = field(default=None)
+    headers: GetListDeadLetterSourceQueuesHeaders = field()
+    path_params: GetListDeadLetterSourceQueuesPathParams = field()
+    query_params: GetListDeadLetterSourceQueuesQueryParams = field()
     
 
 @dataclass
 class GetListDeadLetterSourceQueuesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

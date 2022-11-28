@@ -1,29 +1,29 @@
 from dataclasses import dataclass, field
-from typing import List
+from typing import List,Optional
 
 
 @dataclass
 class GetObservationsByCodesPathParams:
-    user_id: int = field(default=None, metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
+    user_id: int = field(metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetObservationsByCodesQueryParams:
-    code: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'code', 'style': 'form', 'explode': True }})
-    limit: int = field(default=None, metadata={'query_param': { 'field_name': 'limit', 'style': 'form', 'explode': True }})
-    offset: int = field(default=None, metadata={'query_param': { 'field_name': 'offset', 'style': 'form', 'explode': True }})
-    order_direction: str = field(default=None, metadata={'query_param': { 'field_name': 'orderDirection', 'style': 'form', 'explode': True }})
+    code: List[str] = field(metadata={'query_param': { 'field_name': 'code', 'style': 'form', 'explode': True }})
+    limit: int = field(metadata={'query_param': { 'field_name': 'limit', 'style': 'form', 'explode': True }})
+    offset: int = field(metadata={'query_param': { 'field_name': 'offset', 'style': 'form', 'explode': True }})
+    order_direction: str = field(metadata={'query_param': { 'field_name': 'orderDirection', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class GetObservationsByCodesRequest:
-    path_params: GetObservationsByCodesPathParams = field(default=None)
-    query_params: GetObservationsByCodesQueryParams = field(default=None)
+    path_params: GetObservationsByCodesPathParams = field()
+    query_params: GetObservationsByCodesQueryParams = field()
     
 
 @dataclass
 class GetObservationsByCodesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

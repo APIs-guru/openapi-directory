@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Optional
@@ -8,7 +8,7 @@ from sdk.models import shared
 
 @dataclass
 class PatchFilesPathPathParams:
-    path: str = field(default=None, metadata={'path_param': { 'field_name': 'path', 'style': 'simple', 'explode': False }})
+    path: str = field(metadata={'path_param': { 'field_name': 'path', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -19,13 +19,13 @@ class PatchFilesPathRequestBody:
 
 @dataclass
 class PatchFilesPathRequest:
-    path_params: PatchFilesPathPathParams = field(default=None)
+    path_params: PatchFilesPathPathParams = field()
     request: Optional[PatchFilesPathRequestBody] = field(default=None, metadata={'request': { 'media_type': 'multipart/form-data' }})
     
 
 @dataclass
 class PatchFilesPathResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     file_entity: Optional[shared.FileEntity] = field(default=None)
-    status_code: int = field(default=None)
     

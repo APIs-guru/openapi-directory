@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum DataAccessOptionsLogModeEnum {
     LogModeUnspecified = "LOG_MODE_UNSPECIFIED",
     LogFailClosed = "LOG_FAIL_CLOSED"

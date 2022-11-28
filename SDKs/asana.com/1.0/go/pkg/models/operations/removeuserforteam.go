@@ -17,14 +17,14 @@ type RemoveUserForTeamRequestBody struct {
 	Data *shared.TeamRemoveUserRequest `json:"data,omitempty"`
 }
 
+type RemoveUserForTeam204ApplicationJSON struct {
+	Data map[string]interface{} `json:"data,omitempty"`
+}
+
 type RemoveUserForTeamRequest struct {
 	PathParams  RemoveUserForTeamPathParams
 	QueryParams RemoveUserForTeamQueryParams
 	Request     RemoveUserForTeamRequestBody `request:"mediaType=application/json"`
-}
-
-type RemoveUserForTeam204ApplicationJSON struct {
-	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type RemoveUserForTeamResponse struct {

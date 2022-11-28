@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=address" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=address" })
   address: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=baudrate" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=baudrate" })
   baudrate: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=device" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=device" })
   device: string;
 }
 
 
 export class GetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetPathParams;
 }
 
 
 export class GetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   mbusData?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   textError?: string;
 }

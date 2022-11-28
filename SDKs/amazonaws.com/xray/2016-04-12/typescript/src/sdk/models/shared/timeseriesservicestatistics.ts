@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EdgeStatistics } from "./edgestatistics";
 import { HistogramEntry } from "./histogramentry";
 import { ForecastStatistics } from "./forecaststatistics";
 import { ServiceStatistics } from "./servicestatistics";
+
 
 
 // TimeSeriesServiceStatistics
@@ -11,18 +11,18 @@ import { ServiceStatistics } from "./servicestatistics";
  * A list of TimeSeriesStatistic structures.
 **/
 export class TimeSeriesServiceStatistics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EdgeSummaryStatistics" })
+  @SpeakeasyMetadata({ data: "json, name=EdgeSummaryStatistics" })
   edgeSummaryStatistics?: EdgeStatistics;
 
-  @Metadata({ data: "json, name=ResponseTimeHistogram", elemType: shared.HistogramEntry })
+  @SpeakeasyMetadata({ data: "json, name=ResponseTimeHistogram", elemType: HistogramEntry })
   responseTimeHistogram?: HistogramEntry[];
 
-  @Metadata({ data: "json, name=ServiceForecastStatistics" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceForecastStatistics" })
   serviceForecastStatistics?: ForecastStatistics;
 
-  @Metadata({ data: "json, name=ServiceSummaryStatistics" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceSummaryStatistics" })
   serviceSummaryStatistics?: ServiceStatistics;
 
-  @Metadata({ data: "json, name=Timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=Timestamp" })
   timestamp?: Date;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PostalAddress6Ch
@@ -9,24 +10,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * 
 **/
 export class PostalAddress6Ch extends SpeakeasyBase {
-  @Metadata({ data: "json, name=addressLine1" })
+  @SpeakeasyMetadata({ data: "json, name=addressLine1" })
   addressLine1?: string;
 
-  @Metadata({ data: "json, name=addressLine2" })
+  @SpeakeasyMetadata({ data: "json, name=addressLine2" })
   addressLine2?: string;
 
-  @Metadata({ data: "json, name=buildingNumber" })
+  @SpeakeasyMetadata({ data: "json, name=buildingNumber" })
   buildingNumber?: string;
 
-  @Metadata({ data: "json, name=country" })
+  @SpeakeasyMetadata({ data: "json, name=country" })
   country?: string;
 
-  @Metadata({ data: "json, name=postCode" })
+  @SpeakeasyMetadata({ data: "json, name=postCode" })
   postCode?: string;
 
-  @Metadata({ data: "json, name=streetName" })
+  @SpeakeasyMetadata({ data: "json, name=streetName" })
   streetName?: string;
 
-  @Metadata({ data: "json, name=townName" })
+  @SpeakeasyMetadata({ data: "json, name=townName" })
   townName?: string;
 }

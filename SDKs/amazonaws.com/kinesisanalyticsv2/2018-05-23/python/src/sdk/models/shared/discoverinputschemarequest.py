@@ -1,17 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import inputprocessingconfiguration
-from . import inputstartingpositionconfiguration
-from . import s3configuration
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DiscoverInputSchemaRequest:
-    input_processing_configuration: Optional[inputprocessingconfiguration.InputProcessingConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'InputProcessingConfiguration' }})
-    input_starting_position_configuration: Optional[inputstartingpositionconfiguration.InputStartingPositionConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'InputStartingPositionConfiguration' }})
-    resource_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ResourceARN' }})
-    s3_configuration: Optional[s3configuration.S3Configuration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'S3Configuration' }})
-    service_execution_role: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ServiceExecutionRole' }})
+    service_execution_role: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ServiceExecutionRole') }})
+    input_processing_configuration: Optional[InputProcessingConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('InputProcessingConfiguration') }})
+    input_starting_position_configuration: Optional[InputStartingPositionConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('InputStartingPositionConfiguration') }})
+    resource_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ResourceARN') }})
+    s3_configuration: Optional[S3Configuration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('S3Configuration') }})
     

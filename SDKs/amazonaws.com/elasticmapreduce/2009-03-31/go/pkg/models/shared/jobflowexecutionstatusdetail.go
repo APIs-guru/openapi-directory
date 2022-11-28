@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// JobFlowExecutionStatusDetail
+// Describes the status of the cluster (job flow).
 type JobFlowExecutionStatusDetail struct {
 	CreationDateTime      time.Time                 `json:"CreationDateTime"`
 	EndDateTime           *time.Time                `json:"EndDateTime,omitempty"`

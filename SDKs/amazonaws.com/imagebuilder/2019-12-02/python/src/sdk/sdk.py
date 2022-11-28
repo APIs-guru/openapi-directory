@@ -1,8 +1,11 @@
-import warnings
+
+__doc__ = """ SDK Documentation: https://docs.aws.amazon.com/imagebuilder/ - Amazon Web Services documentation"""
 import requests
-from typing import Any,List,Optional
-from sdk.models import operations, shared
+from typing import Any,Optional
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -14,37 +17,63 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    r"""SDK Documentation: https://docs.aws.amazon.com/imagebuilder/ - Amazon Web Services documentation"""
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
-    
-    def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
+            self._server_url = server_url
 
+        
+    
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        
+    
+
+    def config_security(self, security: shared.Security):
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        
+    
+    
     
     def cancel_image_creation(self, request: operations.CancelImageCreationRequest) -> operations.CancelImageCreationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""CancelImageCreation cancels the creation of Image. This operation can only be used on images in a non-terminal state.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/CancelImageCreation"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -91,22 +120,22 @@ class SDK:
 
     
     def create_component(self, request: operations.CreateComponentRequest) -> operations.CreateComponentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a new component that can be used to build, validate, test, and assess your image.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/CreateComponent"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -165,22 +194,22 @@ class SDK:
 
     
     def create_container_recipe(self, request: operations.CreateContainerRecipeRequest) -> operations.CreateContainerRecipeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a new container recipe. Container recipes define how images are configured, tested, and assessed.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/CreateContainerRecipe"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -239,22 +268,22 @@ class SDK:
 
     
     def create_distribution_configuration(self, request: operations.CreateDistributionConfigurationRequest) -> operations.CreateDistributionConfigurationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a new distribution configuration. Distribution configurations define and configure the outputs of your pipeline.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/CreateDistributionConfiguration"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -313,22 +342,22 @@ class SDK:
 
     
     def create_image(self, request: operations.CreateImageRequest) -> operations.CreateImageResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Creates a new image. This request will create a new image along with all of the configured output resources defined in the distribution configuration. You must specify exactly one recipe for your image, using either a ContainerRecipeArn or an ImageRecipeArn.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/CreateImage"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -379,22 +408,22 @@ class SDK:
 
     
     def create_image_pipeline(self, request: operations.CreateImagePipelineRequest) -> operations.CreateImagePipelineResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Creates a new image pipeline. Image pipelines enable you to automate the creation and distribution of images.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/CreateImagePipeline"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -449,22 +478,22 @@ class SDK:
 
     
     def create_image_recipe(self, request: operations.CreateImageRecipeRequest) -> operations.CreateImageRecipeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Creates a new image recipe. Image recipes define how images are configured, tested, and assessed.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/CreateImageRecipe"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -523,22 +552,22 @@ class SDK:
 
     
     def create_infrastructure_configuration(self, request: operations.CreateInfrastructureConfigurationRequest) -> operations.CreateInfrastructureConfigurationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Creates a new infrastructure configuration. An infrastructure configuration defines the environment in which your image will be built and tested.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/CreateInfrastructureConfiguration"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -593,17 +622,18 @@ class SDK:
 
     
     def delete_component(self, request: operations.DeleteComponentRequest) -> operations.DeleteComponentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Deletes a component build version.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/DeleteComponent#componentBuildVersionArn"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -646,17 +676,18 @@ class SDK:
 
     
     def delete_container_recipe(self, request: operations.DeleteContainerRecipeRequest) -> operations.DeleteContainerRecipeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a container recipe.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/DeleteContainerRecipe#containerRecipeArn"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -699,17 +730,18 @@ class SDK:
 
     
     def delete_distribution_configuration(self, request: operations.DeleteDistributionConfigurationRequest) -> operations.DeleteDistributionConfigurationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Deletes a distribution configuration.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/DeleteDistributionConfiguration#distributionConfigurationArn"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -752,17 +784,18 @@ class SDK:
 
     
     def delete_image(self, request: operations.DeleteImageRequest) -> operations.DeleteImageResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Deletes an image.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/DeleteImage#imageBuildVersionArn"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -805,17 +838,18 @@ class SDK:
 
     
     def delete_image_pipeline(self, request: operations.DeleteImagePipelineRequest) -> operations.DeleteImagePipelineResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Deletes an image pipeline.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/DeleteImagePipeline#imagePipelineArn"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -858,17 +892,18 @@ class SDK:
 
     
     def delete_image_recipe(self, request: operations.DeleteImageRecipeRequest) -> operations.DeleteImageRecipeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Deletes an image recipe.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/DeleteImageRecipe#imageRecipeArn"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -911,17 +946,18 @@ class SDK:
 
     
     def delete_infrastructure_configuration(self, request: operations.DeleteInfrastructureConfigurationRequest) -> operations.DeleteInfrastructureConfigurationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Deletes an infrastructure configuration.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/DeleteInfrastructureConfiguration#infrastructureConfigurationArn"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -964,17 +1000,18 @@ class SDK:
 
     
     def get_component(self, request: operations.GetComponentRequest) -> operations.GetComponentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Gets a component object.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/GetComponent#componentBuildVersionArn"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1013,17 +1050,18 @@ class SDK:
 
     
     def get_component_policy(self, request: operations.GetComponentPolicyRequest) -> operations.GetComponentPolicyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Gets a component policy.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/GetComponentPolicy#componentArn"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1062,17 +1100,18 @@ class SDK:
 
     
     def get_container_recipe(self, request: operations.GetContainerRecipeRequest) -> operations.GetContainerRecipeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves a container recipe.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/GetContainerRecipe#containerRecipeArn"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1111,17 +1150,18 @@ class SDK:
 
     
     def get_container_recipe_policy(self, request: operations.GetContainerRecipePolicyRequest) -> operations.GetContainerRecipePolicyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves the policy for a container recipe.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/GetContainerRecipePolicy#containerRecipeArn"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1160,17 +1200,18 @@ class SDK:
 
     
     def get_distribution_configuration(self, request: operations.GetDistributionConfigurationRequest) -> operations.GetDistributionConfigurationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Gets a distribution configuration.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/GetDistributionConfiguration#distributionConfigurationArn"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1209,17 +1250,18 @@ class SDK:
 
     
     def get_image(self, request: operations.GetImageRequest) -> operations.GetImageResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Gets an image.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/GetImage#imageBuildVersionArn"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1258,17 +1300,18 @@ class SDK:
 
     
     def get_image_pipeline(self, request: operations.GetImagePipelineRequest) -> operations.GetImagePipelineResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Gets an image pipeline.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/GetImagePipeline#imagePipelineArn"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1307,17 +1350,18 @@ class SDK:
 
     
     def get_image_policy(self, request: operations.GetImagePolicyRequest) -> operations.GetImagePolicyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Gets an image policy.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/GetImagePolicy#imageArn"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1356,17 +1400,18 @@ class SDK:
 
     
     def get_image_recipe(self, request: operations.GetImageRecipeRequest) -> operations.GetImageRecipeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Gets an image recipe.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/GetImageRecipe#imageRecipeArn"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1405,17 +1450,18 @@ class SDK:
 
     
     def get_image_recipe_policy(self, request: operations.GetImageRecipePolicyRequest) -> operations.GetImageRecipePolicyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Gets an image recipe policy.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/GetImageRecipePolicy#imageRecipeArn"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1454,17 +1500,18 @@ class SDK:
 
     
     def get_infrastructure_configuration(self, request: operations.GetInfrastructureConfigurationRequest) -> operations.GetInfrastructureConfigurationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Gets an infrastructure configuration.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/GetInfrastructureConfiguration#infrastructureConfigurationArn"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1503,22 +1550,22 @@ class SDK:
 
     
     def import_component(self, request: operations.ImportComponentRequest) -> operations.ImportComponentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Imports a component and transforms its data into a component document.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/ImportComponent"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1573,24 +1620,23 @@ class SDK:
 
     
     def list_component_build_versions(self, request: operations.ListComponentBuildVersionsRequest) -> operations.ListComponentBuildVersionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p> Returns the list of component build versions for the specified semantic version.</p> <note> <p>The semantic version has four nodes: &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can assign values for the first three, and can filter on all of them.</p> <p> <b>Filtering:</b> When you retrieve or reference a resource with a semantic version, you can use wildcards (x) to filter your results. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be wildcards. For example, specifying \"1.2.x\", or \"1.x.x\" works to filter list results, but neither \"1.x.2\", nor \"x.2.x\" will work. You do not have to specify the build - Image Builder automatically uses a wildcard for that, if applicable.</p> </note>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/ListComponentBuildVersions"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1633,24 +1679,23 @@ class SDK:
 
     
     def list_components(self, request: operations.ListComponentsRequest) -> operations.ListComponentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Returns the list of component build versions for the specified semantic version.</p> <note> <p>The semantic version has four nodes: &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can assign values for the first three, and can filter on all of them.</p> <p> <b>Filtering:</b> When you retrieve or reference a resource with a semantic version, you can use wildcards (x) to filter your results. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be wildcards. For example, specifying \"1.2.x\", or \"1.x.x\" works to filter list results, but neither \"1.x.2\", nor \"x.2.x\" will work. You do not have to specify the build - Image Builder automatically uses a wildcard for that, if applicable.</p> </note>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/ListComponents"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1693,24 +1738,23 @@ class SDK:
 
     
     def list_container_recipes(self, request: operations.ListContainerRecipesRequest) -> operations.ListContainerRecipesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of container recipes.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/ListContainerRecipes"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1753,24 +1797,23 @@ class SDK:
 
     
     def list_distribution_configurations(self, request: operations.ListDistributionConfigurationsRequest) -> operations.ListDistributionConfigurationsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of distribution configurations.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/ListDistributionConfigurations"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1813,24 +1856,23 @@ class SDK:
 
     
     def list_image_build_versions(self, request: operations.ListImageBuildVersionsRequest) -> operations.ListImageBuildVersionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Returns a list of image build versions.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/ListImageBuildVersions"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1873,24 +1915,23 @@ class SDK:
 
     
     def list_image_packages(self, request: operations.ListImagePackagesRequest) -> operations.ListImagePackagesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List the Packages that are associated with an Image Build Version, as determined by Amazon EC2 Systems Manager Inventory at build time.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/ListImagePackages"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1937,24 +1978,23 @@ class SDK:
 
     
     def list_image_pipeline_images(self, request: operations.ListImagePipelineImagesRequest) -> operations.ListImagePipelineImagesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Returns a list of images created by the specified pipeline.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/ListImagePipelineImages"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2001,24 +2041,23 @@ class SDK:
 
     
     def list_image_pipelines(self, request: operations.ListImagePipelinesRequest) -> operations.ListImagePipelinesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of image pipelines.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/ListImagePipelines"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2061,24 +2100,23 @@ class SDK:
 
     
     def list_image_recipes(self, request: operations.ListImageRecipesRequest) -> operations.ListImageRecipesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Returns a list of image recipes.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/ListImageRecipes"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2121,24 +2159,23 @@ class SDK:
 
     
     def list_images(self, request: operations.ListImagesRequest) -> operations.ListImagesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Returns the list of images that you have access to.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/ListImages"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2181,24 +2218,23 @@ class SDK:
 
     
     def list_infrastructure_configurations(self, request: operations.ListInfrastructureConfigurationsRequest) -> operations.ListInfrastructureConfigurationsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Returns a list of infrastructure configurations.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/ListInfrastructureConfigurations"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2241,15 +2277,17 @@ class SDK:
 
     
     def list_tags_for_resource(self, request: operations.ListTagsForResourceRequest) -> operations.ListTagsForResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Returns the list of tags for the specified resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/tags/{resourceArn}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2276,22 +2314,22 @@ class SDK:
 
     
     def put_component_policy(self, request: operations.PutComponentPolicyRequest) -> operations.PutComponentPolicyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Applies a policy to a component. We recommend that you call the RAM API <a href=\"https://docs.aws.amazon.com/ram/latest/APIReference/API_CreateResourceShare.html\">CreateResourceShare</a> to share resources. If you call the Image Builder API <code>PutComponentPolicy</code>, you must also call the RAM API <a href=\"https://docs.aws.amazon.com/ram/latest/APIReference/API_PromoteResourceShareCreatedFromPolicy.html\">PromoteResourceShareCreatedFromPolicy</a> in order for the resource to be visible to all principals with whom the resource is shared.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/PutComponentPolicy"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2338,22 +2376,22 @@ class SDK:
 
     
     def put_container_recipe_policy(self, request: operations.PutContainerRecipePolicyRequest) -> operations.PutContainerRecipePolicyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Applies a policy to a container image. We recommend that you call the RAM API CreateResourceShare (https://docs.aws.amazon.com/ram/latest/APIReference/API_CreateResourceShare.html) to share resources. If you call the Image Builder API <code>PutContainerImagePolicy</code>, you must also call the RAM API PromoteResourceShareCreatedFromPolicy (https://docs.aws.amazon.com/ram/latest/APIReference/API_PromoteResourceShareCreatedFromPolicy.html) in order for the resource to be visible to all principals with whom the resource is shared.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/PutContainerRecipePolicy"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2400,22 +2438,22 @@ class SDK:
 
     
     def put_image_policy(self, request: operations.PutImagePolicyRequest) -> operations.PutImagePolicyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Applies a policy to an image. We recommend that you call the RAM API <a href=\"https://docs.aws.amazon.com/ram/latest/APIReference/API_CreateResourceShare.html\">CreateResourceShare</a> to share resources. If you call the Image Builder API <code>PutImagePolicy</code>, you must also call the RAM API <a href=\"https://docs.aws.amazon.com/ram/latest/APIReference/API_PromoteResourceShareCreatedFromPolicy.html\">PromoteResourceShareCreatedFromPolicy</a> in order for the resource to be visible to all principals with whom the resource is shared.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/PutImagePolicy"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2462,22 +2500,22 @@ class SDK:
 
     
     def put_image_recipe_policy(self, request: operations.PutImageRecipePolicyRequest) -> operations.PutImageRecipePolicyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Applies a policy to an image recipe. We recommend that you call the RAM API <a href=\"https://docs.aws.amazon.com/ram/latest/APIReference/API_CreateResourceShare.html\">CreateResourceShare</a> to share resources. If you call the Image Builder API <code>PutImageRecipePolicy</code>, you must also call the RAM API <a href=\"https://docs.aws.amazon.com/ram/latest/APIReference/API_PromoteResourceShareCreatedFromPolicy.html\">PromoteResourceShareCreatedFromPolicy</a> in order for the resource to be visible to all principals with whom the resource is shared.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/PutImageRecipePolicy"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2524,22 +2562,22 @@ class SDK:
 
     
     def start_image_pipeline_execution(self, request: operations.StartImagePipelineExecutionRequest) -> operations.StartImagePipelineExecutionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Manually triggers a pipeline to create an image.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/StartImagePipelineExecution"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2590,22 +2628,22 @@ class SDK:
 
     
     def tag_resource(self, request: operations.TagResourceRequest) -> operations.TagResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Adds a tag to a resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/tags/{resourceArn}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2632,17 +2670,18 @@ class SDK:
 
     
     def untag_resource(self, request: operations.UntagResourceRequest) -> operations.UntagResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Removes a tag from a resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/tags/{resourceArn}#tagKeys", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2669,22 +2708,22 @@ class SDK:
 
     
     def update_distribution_configuration(self, request: operations.UpdateDistributionConfigurationRequest) -> operations.UpdateDistributionConfigurationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Updates a new distribution configuration. Distribution configurations define and configure the outputs of your pipeline.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/UpdateDistributionConfiguration"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2735,22 +2774,22 @@ class SDK:
 
     
     def update_image_pipeline(self, request: operations.UpdateImagePipelineRequest) -> operations.UpdateImagePipelineResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p> Updates an image pipeline. Image pipelines enable you to automate the creation and distribution of images.</p> <note> <p>UpdateImagePipeline does not support selective updates for the pipeline. You must specify all of the required properties in the update request, not just the properties that have changed.</p> </note>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/UpdateImagePipeline"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2797,22 +2836,22 @@ class SDK:
 
     
     def update_infrastructure_configuration(self, request: operations.UpdateInfrastructureConfigurationRequest) -> operations.UpdateInfrastructureConfigurationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Updates a new infrastructure configuration. An infrastructure configuration defines the environment in which your image will be built and tested.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/UpdateInfrastructureConfiguration"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

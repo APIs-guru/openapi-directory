@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GridRange } from "./gridrange";
 import { RowData } from "./rowdata";
 import { GridCoordinate } from "./gridcoordinate";
+
 
 
 // UpdateCellsRequest
@@ -10,15 +10,15 @@ import { GridCoordinate } from "./gridcoordinate";
  * Updates all cells in a range with new data.
 **/
 export class UpdateCellsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fields" })
+  @SpeakeasyMetadata({ data: "json, name=fields" })
   fields?: string;
 
-  @Metadata({ data: "json, name=range" })
+  @SpeakeasyMetadata({ data: "json, name=range" })
   range?: GridRange;
 
-  @Metadata({ data: "json, name=rows", elemType: shared.RowData })
+  @SpeakeasyMetadata({ data: "json, name=rows", elemType: RowData })
   rows?: RowData[];
 
-  @Metadata({ data: "json, name=start" })
+  @SpeakeasyMetadata({ data: "json, name=start" })
   start?: GridCoordinate;
 }

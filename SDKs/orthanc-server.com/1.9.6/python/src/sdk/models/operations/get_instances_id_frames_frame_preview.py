@@ -4,8 +4,8 @@ from typing import Optional
 
 @dataclass
 class GetInstancesIDFramesFramePreviewPathParams:
-    frame: float = field(default=None, metadata={'path_param': { 'field_name': 'frame', 'style': 'simple', 'explode': False }})
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    frame: float = field(metadata={'path_param': { 'field_name': 'frame', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,14 +20,14 @@ class GetInstancesIDFramesFramePreviewHeaders:
 
 @dataclass
 class GetInstancesIDFramesFramePreviewRequest:
-    path_params: GetInstancesIDFramesFramePreviewPathParams = field(default=None)
-    query_params: GetInstancesIDFramesFramePreviewQueryParams = field(default=None)
-    headers: GetInstancesIDFramesFramePreviewHeaders = field(default=None)
+    headers: GetInstancesIDFramesFramePreviewHeaders = field()
+    path_params: GetInstancesIDFramesFramePreviewPathParams = field()
+    query_params: GetInstancesIDFramesFramePreviewQueryParams = field()
     
 
 @dataclass
 class GetInstancesIDFramesFramePreviewResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

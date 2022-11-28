@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import objectreference
-from . import objectreference
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BatchAttachObject:
-    child_reference: objectreference.ObjectReference = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ChildReference' }})
-    link_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LinkName' }})
-    parent_reference: objectreference.ObjectReference = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ParentReference' }})
+    r"""BatchAttachObject
+    Represents the output of an <a>AttachObject</a> operation.
+    """
+    
+    child_reference: ObjectReference = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ChildReference') }})
+    link_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('LinkName') }})
+    parent_reference: ObjectReference = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ParentReference') }})
     

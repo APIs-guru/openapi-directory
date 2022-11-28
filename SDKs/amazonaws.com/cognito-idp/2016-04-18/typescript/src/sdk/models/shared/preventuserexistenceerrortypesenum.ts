@@ -1,6 +1,7 @@
 
 
+
 export enum PreventUserExistenceErrorTypesEnum {
-    Legacy = "LEGACY"
-,    Enabled = "ENABLED"
+    Legacy = "LEGACY",
+    Enabled = "ENABLED"
 }

@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AuthConfig } from "./authconfig";
 import { ConfigVariable } from "./configvariable";
 import { DestinationConfig } from "./destinationconfig";
@@ -8,59 +7,100 @@ import { NodeConfig } from "./nodeconfig";
 import { ConnectionStatus } from "./connectionstatus";
 
 
+
 // Connection
 /** 
  * Connection represents an instance of connector.
 **/
 export class Connection extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authConfig" })
+  @SpeakeasyMetadata({ data: "json, name=authConfig" })
   authConfig?: AuthConfig;
 
-  @Metadata({ data: "json, name=configVariables", elemType: shared.ConfigVariable })
+  @SpeakeasyMetadata({ data: "json, name=configVariables", elemType: ConfigVariable })
   configVariables?: ConfigVariable[];
 
-  @Metadata({ data: "json, name=connectorVersion" })
+  @SpeakeasyMetadata({ data: "json, name=connectorVersion" })
   connectorVersion?: string;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=destinationConfigs", elemType: shared.DestinationConfig })
+  @SpeakeasyMetadata({ data: "json, name=destinationConfigs", elemType: DestinationConfig })
   destinationConfigs?: DestinationConfig[];
 
-  @Metadata({ data: "json, name=envoyImageLocation" })
+  @SpeakeasyMetadata({ data: "json, name=envoyImageLocation" })
   envoyImageLocation?: string;
 
-  @Metadata({ data: "json, name=imageLocation" })
+  @SpeakeasyMetadata({ data: "json, name=imageLocation" })
   imageLocation?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=lockConfig" })
+  @SpeakeasyMetadata({ data: "json, name=lockConfig" })
   lockConfig?: LockConfig;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=nodeConfig" })
+  @SpeakeasyMetadata({ data: "json, name=nodeConfig" })
   nodeConfig?: NodeConfig;
 
-  @Metadata({ data: "json, name=serviceAccount" })
+  @SpeakeasyMetadata({ data: "json, name=serviceAccount" })
   serviceAccount?: string;
 
-  @Metadata({ data: "json, name=serviceDirectory" })
+  @SpeakeasyMetadata({ data: "json, name=serviceDirectory" })
   serviceDirectory?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: ConnectionStatus;
 
-  @Metadata({ data: "json, name=suspended" })
+  @SpeakeasyMetadata({ data: "json, name=suspended" })
   suspended?: boolean;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
+}
+
+
+// ConnectionInput
+/** 
+ * Connection represents an instance of connector.
+**/
+export class ConnectionInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=authConfig" })
+  authConfig?: AuthConfig;
+
+  @SpeakeasyMetadata({ data: "json, name=configVariables", elemType: ConfigVariable })
+  configVariables?: ConfigVariable[];
+
+  @SpeakeasyMetadata({ data: "json, name=connectorVersion" })
+  connectorVersion?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=destinationConfigs", elemType: DestinationConfig })
+  destinationConfigs?: DestinationConfig[];
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=lockConfig" })
+  lockConfig?: LockConfig;
+
+  @SpeakeasyMetadata({ data: "json, name=nodeConfig" })
+  nodeConfig?: NodeConfig;
+
+  @SpeakeasyMetadata({ data: "json, name=serviceAccount" })
+  serviceAccount?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=status" })
+  status?: ConnectionStatus;
+
+  @SpeakeasyMetadata({ data: "json, name=suspended" })
+  suspended?: boolean;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RouteFilterPrefix
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about a route filter prefix that a customer can advertise through Border Gateway Protocol (BGP) over a public virtual interface.
 **/
 export class RouteFilterPrefix extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cidr" })
+  @SpeakeasyMetadata({ data: "json, name=cidr" })
   cidr?: string;
 }

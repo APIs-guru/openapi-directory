@@ -8,6 +8,8 @@ type ProtectedBranchPullRequestReviewDismissalRestrictions struct {
 	UsersURL *string      `json:"users_url,omitempty"`
 }
 
+// ProtectedBranchPullRequestReview
+// Protected Branch Pull Request Review
 type ProtectedBranchPullRequestReview struct {
 	DismissStaleReviews          bool                                                   `json:"dismiss_stale_reviews"`
 	DismissalRestrictions        *ProtectedBranchPullRequestReviewDismissalRestrictions `json:"dismissal_restrictions,omitempty"`

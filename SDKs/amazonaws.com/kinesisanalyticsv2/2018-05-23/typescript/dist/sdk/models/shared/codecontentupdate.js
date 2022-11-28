@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { S3ContentLocationUpdate } from "./s3contentlocationupdate";
 // CodeContentUpdate
 /**
@@ -34,15 +34,15 @@ var CodeContentUpdate = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=S3ContentLocationUpdate" }),
+        SpeakeasyMetadata({ data: "json, name=S3ContentLocationUpdate" }),
         __metadata("design:type", S3ContentLocationUpdate)
     ], CodeContentUpdate.prototype, "s3ContentLocationUpdate", void 0);
     __decorate([
-        Metadata({ data: "json, name=TextContentUpdate" }),
+        SpeakeasyMetadata({ data: "json, name=TextContentUpdate" }),
         __metadata("design:type", String)
     ], CodeContentUpdate.prototype, "textContentUpdate", void 0);
     __decorate([
-        Metadata({ data: "json, name=ZipFileContentUpdate" }),
+        SpeakeasyMetadata({ data: "json, name=ZipFileContentUpdate" }),
         __metadata("design:type", String)
     ], CodeContentUpdate.prototype, "zipFileContentUpdate", void 0);
     return CodeContentUpdate;

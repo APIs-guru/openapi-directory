@@ -1,12 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import attributename_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Trait:
-    name: Optional[attributename_enum.AttributeNameEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
-    score: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Score' }})
+    r"""Trait
+     Provides contextual information about the extracted entity. 
+    """
+    
+    name: Optional[AttributeNameEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
+    score: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Score') }})
     

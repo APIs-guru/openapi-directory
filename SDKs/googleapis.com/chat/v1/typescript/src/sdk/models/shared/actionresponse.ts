@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DialogAction } from "./dialogaction";
 
+
 export enum ActionResponseTypeEnum {
-    TypeUnspecified = "TYPE_UNSPECIFIED"
-,    NewMessage = "NEW_MESSAGE"
-,    UpdateMessage = "UPDATE_MESSAGE"
-,    UpdateUserMessageCards = "UPDATE_USER_MESSAGE_CARDS"
-,    RequestConfig = "REQUEST_CONFIG"
-,    Dialog = "DIALOG"
+    TypeUnspecified = "TYPE_UNSPECIFIED",
+    NewMessage = "NEW_MESSAGE",
+    UpdateMessage = "UPDATE_MESSAGE",
+    UpdateUserMessageCards = "UPDATE_USER_MESSAGE_CARDS",
+    RequestConfig = "REQUEST_CONFIG",
+    Dialog = "DIALOG"
 }
 
 
@@ -16,12 +17,12 @@ export enum ActionResponseTypeEnum {
  * Parameters that a Chat app can use to configure how it's response is posted.
 **/
 export class ActionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dialogAction" })
+  @SpeakeasyMetadata({ data: "json, name=dialogAction" })
   dialogAction?: DialogAction;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: ActionResponseTypeEnum;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }

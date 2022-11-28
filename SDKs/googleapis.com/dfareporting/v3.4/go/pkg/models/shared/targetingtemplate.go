@@ -1,5 +1,7 @@
 package shared
 
+// TargetingTemplate
+// Contains properties of a targeting template. A targeting template encapsulates targeting information which can be reused across multiple ads.
 type TargetingTemplate struct {
 	AccountID                   *string                      `json:"accountId,omitempty"`
 	AdvertiserID                *string                      `json:"advertiserId,omitempty"`

@@ -1,57 +1,58 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetWordListWordsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=permalink" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=permalink" })
   permalink: string;
 }
 
 export enum GetWordListWordsSortByEnum {
-    CreateDate = "createDate"
-,    Alpha = "alpha"
+    CreateDate = "createDate",
+    Alpha = "alpha"
 }
 
 
 export class GetWordListWordsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=skip" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=skip" })
   skip?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sortBy" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sortBy" })
   sortBy?: GetWordListWordsSortByEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sortOrder" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sortOrder" })
   sortOrder?: string;
 }
 
 
 export class GetWordListWordsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=auth_token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=auth_token" })
   authToken: string;
 }
 
 
 export class GetWordListWordsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetWordListWordsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetWordListWordsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetWordListWordsHeaders;
 }
 
 
 export class GetWordListWordsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

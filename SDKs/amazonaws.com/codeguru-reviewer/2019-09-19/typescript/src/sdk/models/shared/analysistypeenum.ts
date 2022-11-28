@@ -1,6 +1,7 @@
 
 
+
 export enum AnalysisTypeEnum {
-    Security = "Security"
-,    CodeQuality = "CodeQuality"
+    Security = "Security",
+    CodeQuality = "CodeQuality"
 }

@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudRetailV2betaSearchRequestBoostSpec } from "./googlecloudretailv2betasearchrequestboostspec";
 import { GoogleCloudRetailV2betaSearchRequestDynamicFacetSpec } from "./googlecloudretailv2betasearchrequestdynamicfacetspec";
 import { GoogleCloudRetailV2betaSearchRequestFacetSpec } from "./googlecloudretailv2betasearchrequestfacetspec";
@@ -8,10 +7,11 @@ import { GoogleCloudRetailV2betaSearchRequestQueryExpansionSpec } from "./google
 import { GoogleCloudRetailV2betaSearchRequestSpellCorrectionSpec } from "./googlecloudretailv2betasearchrequestspellcorrectionspec";
 import { GoogleCloudRetailV2betaUserInfo } from "./googlecloudretailv2betauserinfo";
 
+
 export enum GoogleCloudRetailV2betaSearchRequestSearchModeEnum {
-    SearchModeUnspecified = "SEARCH_MODE_UNSPECIFIED"
-,    ProductSearchOnly = "PRODUCT_SEARCH_ONLY"
-,    FacetedSearchOnly = "FACETED_SEARCH_ONLY"
+    SearchModeUnspecified = "SEARCH_MODE_UNSPECIFIED",
+    ProductSearchOnly = "PRODUCT_SEARCH_ONLY",
+    FacetedSearchOnly = "FACETED_SEARCH_ONLY"
 }
 
 
@@ -20,63 +20,63 @@ export enum GoogleCloudRetailV2betaSearchRequestSearchModeEnum {
  * Request message for SearchService.Search method.
 **/
 export class GoogleCloudRetailV2betaSearchRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=boostSpec" })
+  @SpeakeasyMetadata({ data: "json, name=boostSpec" })
   boostSpec?: GoogleCloudRetailV2betaSearchRequestBoostSpec;
 
-  @Metadata({ data: "json, name=branch" })
+  @SpeakeasyMetadata({ data: "json, name=branch" })
   branch?: string;
 
-  @Metadata({ data: "json, name=canonicalFilter" })
+  @SpeakeasyMetadata({ data: "json, name=canonicalFilter" })
   canonicalFilter?: string;
 
-  @Metadata({ data: "json, name=dynamicFacetSpec" })
+  @SpeakeasyMetadata({ data: "json, name=dynamicFacetSpec" })
   dynamicFacetSpec?: GoogleCloudRetailV2betaSearchRequestDynamicFacetSpec;
 
-  @Metadata({ data: "json, name=facetSpecs", elemType: shared.GoogleCloudRetailV2betaSearchRequestFacetSpec })
+  @SpeakeasyMetadata({ data: "json, name=facetSpecs", elemType: GoogleCloudRetailV2betaSearchRequestFacetSpec })
   facetSpecs?: GoogleCloudRetailV2betaSearchRequestFacetSpec[];
 
-  @Metadata({ data: "json, name=filter" })
+  @SpeakeasyMetadata({ data: "json, name=filter" })
   filter?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=offset" })
+  @SpeakeasyMetadata({ data: "json, name=offset" })
   offset?: number;
 
-  @Metadata({ data: "json, name=orderBy" })
+  @SpeakeasyMetadata({ data: "json, name=orderBy" })
   orderBy?: string;
 
-  @Metadata({ data: "json, name=pageCategories" })
+  @SpeakeasyMetadata({ data: "json, name=pageCategories" })
   pageCategories?: string[];
 
-  @Metadata({ data: "json, name=pageSize" })
+  @SpeakeasyMetadata({ data: "json, name=pageSize" })
   pageSize?: number;
 
-  @Metadata({ data: "json, name=pageToken" })
+  @SpeakeasyMetadata({ data: "json, name=pageToken" })
   pageToken?: string;
 
-  @Metadata({ data: "json, name=personalizationSpec" })
+  @SpeakeasyMetadata({ data: "json, name=personalizationSpec" })
   personalizationSpec?: GoogleCloudRetailV2betaSearchRequestPersonalizationSpec;
 
-  @Metadata({ data: "json, name=query" })
+  @SpeakeasyMetadata({ data: "json, name=query" })
   query?: string;
 
-  @Metadata({ data: "json, name=queryExpansionSpec" })
+  @SpeakeasyMetadata({ data: "json, name=queryExpansionSpec" })
   queryExpansionSpec?: GoogleCloudRetailV2betaSearchRequestQueryExpansionSpec;
 
-  @Metadata({ data: "json, name=searchMode" })
+  @SpeakeasyMetadata({ data: "json, name=searchMode" })
   searchMode?: GoogleCloudRetailV2betaSearchRequestSearchModeEnum;
 
-  @Metadata({ data: "json, name=spellCorrectionSpec" })
+  @SpeakeasyMetadata({ data: "json, name=spellCorrectionSpec" })
   spellCorrectionSpec?: GoogleCloudRetailV2betaSearchRequestSpellCorrectionSpec;
 
-  @Metadata({ data: "json, name=userInfo" })
+  @SpeakeasyMetadata({ data: "json, name=userInfo" })
   userInfo?: GoogleCloudRetailV2betaUserInfo;
 
-  @Metadata({ data: "json, name=variantRollupKeys" })
+  @SpeakeasyMetadata({ data: "json, name=variantRollupKeys" })
   variantRollupKeys?: string[];
 
-  @Metadata({ data: "json, name=visitorId" })
+  @SpeakeasyMetadata({ data: "json, name=visitorId" })
   visitorId?: string;
 }

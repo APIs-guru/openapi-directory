@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ConfigManagementErrorResource } from "./configmanagementerrorresource";
 // ConfigManagementSyncError
 /**
  * An ACM created error representing a problem syncing configurations
@@ -34,15 +34,15 @@ var ConfigManagementSyncError = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=code" }),
+        SpeakeasyMetadata({ data: "json, name=code" }),
         __metadata("design:type", String)
     ], ConfigManagementSyncError.prototype, "code", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorMessage" }),
+        SpeakeasyMetadata({ data: "json, name=errorMessage" }),
         __metadata("design:type", String)
     ], ConfigManagementSyncError.prototype, "errorMessage", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorResources", elemType: shared.ConfigManagementErrorResource }),
+        SpeakeasyMetadata({ data: "json, name=errorResources", elemType: ConfigManagementErrorResource }),
         __metadata("design:type", Array)
     ], ConfigManagementSyncError.prototype, "errorResources", void 0);
     return ConfigManagementSyncError;

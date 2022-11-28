@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetAssociateVpcCidrBlockActionEnum(str, Enum):
     ASSOCIATE_VPC_CIDR_BLOCK = "AssociateVpcCidrBlock"
@@ -10,14 +14,14 @@ class GetAssociateVpcCidrBlockVersionEnum(str, Enum):
 
 @dataclass
 class GetAssociateVpcCidrBlockQueryParams:
-    action: GetAssociateVpcCidrBlockActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetAssociateVpcCidrBlockActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetAssociateVpcCidrBlockVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    vpc_id: str = field(metadata={'query_param': { 'field_name': 'VpcId', 'style': 'form', 'explode': True }})
     amazon_provided_ipv6_cidr_block: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'AmazonProvidedIpv6CidrBlock', 'style': 'form', 'explode': True }})
     cidr_block: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'CidrBlock', 'style': 'form', 'explode': True }})
     ipv6_cidr_block: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Ipv6CidrBlock', 'style': 'form', 'explode': True }})
     ipv6_cidr_block_network_border_group: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Ipv6CidrBlockNetworkBorderGroup', 'style': 'form', 'explode': True }})
     ipv6_pool: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Ipv6Pool', 'style': 'form', 'explode': True }})
-    version: GetAssociateVpcCidrBlockVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
-    vpc_id: str = field(default=None, metadata={'query_param': { 'field_name': 'VpcId', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -33,13 +37,13 @@ class GetAssociateVpcCidrBlockHeaders:
 
 @dataclass
 class GetAssociateVpcCidrBlockRequest:
-    query_params: GetAssociateVpcCidrBlockQueryParams = field(default=None)
-    headers: GetAssociateVpcCidrBlockHeaders = field(default=None)
+    headers: GetAssociateVpcCidrBlockHeaders = field()
+    query_params: GetAssociateVpcCidrBlockQueryParams = field()
     
 
 @dataclass
 class GetAssociateVpcCidrBlockResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

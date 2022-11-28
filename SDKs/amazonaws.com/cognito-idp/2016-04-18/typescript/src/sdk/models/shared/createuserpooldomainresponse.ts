@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateUserPoolDomainResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CloudFrontDomain" })
+  @SpeakeasyMetadata({ data: "json, name=CloudFrontDomain" })
   cloudFrontDomain?: string;
 }

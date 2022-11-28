@@ -1,16 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Genre } from "./genre";
 import { PodcastTypeaheadResult } from "./podcasttypeaheadresult";
 
 
+
 export class TypeaheadResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=genres", elemType: shared.Genre })
+  @SpeakeasyMetadata({ data: "json, name=genres", elemType: Genre })
   genres?: Genre[];
 
-  @Metadata({ data: "json, name=podcasts", elemType: shared.PodcastTypeaheadResult })
+  @SpeakeasyMetadata({ data: "json, name=podcasts", elemType: PodcastTypeaheadResult })
   podcasts?: PodcastTypeaheadResult[];
 
-  @Metadata({ data: "json, name=terms" })
+  @SpeakeasyMetadata({ data: "json, name=terms" })
   terms: string[];
 }

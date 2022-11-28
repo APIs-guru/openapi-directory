@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Project } from "./project";
 
 
+
 export class BatchGetProjectsOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=projects", elemType: shared.Project })
+  @SpeakeasyMetadata({ data: "json, name=projects", elemType: Project })
   projects?: Project[];
 
-  @Metadata({ data: "json, name=projectsNotFound" })
+  @SpeakeasyMetadata({ data: "json, name=projectsNotFound" })
   projectsNotFound?: string[];
 }

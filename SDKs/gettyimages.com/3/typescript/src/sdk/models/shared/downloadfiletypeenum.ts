@@ -1,6 +1,7 @@
 
 
+
 export enum DownloadFileTypeEnum {
-    Eps = "eps"
-,    Jpg = "jpg"
+    Eps = "eps",
+    Jpg = "jpg"
 }

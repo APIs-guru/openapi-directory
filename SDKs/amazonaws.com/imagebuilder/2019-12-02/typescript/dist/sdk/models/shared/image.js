@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContainerRecipe } from "./containerrecipe";
 import { DistributionConfiguration } from "./distributionconfiguration";
 import { ImageRecipe } from "./imagerecipe";
@@ -42,75 +42,75 @@ var Image = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=arn" }),
+        SpeakeasyMetadata({ data: "json, name=arn" }),
         __metadata("design:type", String)
     ], Image.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=containerRecipe" }),
+        SpeakeasyMetadata({ data: "json, name=containerRecipe" }),
         __metadata("design:type", ContainerRecipe)
     ], Image.prototype, "containerRecipe", void 0);
     __decorate([
-        Metadata({ data: "json, name=dateCreated" }),
+        SpeakeasyMetadata({ data: "json, name=dateCreated" }),
         __metadata("design:type", String)
     ], Image.prototype, "dateCreated", void 0);
     __decorate([
-        Metadata({ data: "json, name=distributionConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=distributionConfiguration" }),
         __metadata("design:type", DistributionConfiguration)
     ], Image.prototype, "distributionConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=enhancedImageMetadataEnabled" }),
+        SpeakeasyMetadata({ data: "json, name=enhancedImageMetadataEnabled" }),
         __metadata("design:type", Boolean)
     ], Image.prototype, "enhancedImageMetadataEnabled", void 0);
     __decorate([
-        Metadata({ data: "json, name=imageRecipe" }),
+        SpeakeasyMetadata({ data: "json, name=imageRecipe" }),
         __metadata("design:type", ImageRecipe)
     ], Image.prototype, "imageRecipe", void 0);
     __decorate([
-        Metadata({ data: "json, name=imageTestsConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=imageTestsConfiguration" }),
         __metadata("design:type", ImageTestsConfiguration)
     ], Image.prototype, "imageTestsConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=infrastructureConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=infrastructureConfiguration" }),
         __metadata("design:type", InfrastructureConfiguration)
     ], Image.prototype, "infrastructureConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Image.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=osVersion" }),
+        SpeakeasyMetadata({ data: "json, name=osVersion" }),
         __metadata("design:type", String)
     ], Image.prototype, "osVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=outputResources" }),
+        SpeakeasyMetadata({ data: "json, name=outputResources" }),
         __metadata("design:type", OutputResources)
     ], Image.prototype, "outputResources", void 0);
     __decorate([
-        Metadata({ data: "json, name=platform" }),
+        SpeakeasyMetadata({ data: "json, name=platform" }),
         __metadata("design:type", String)
     ], Image.prototype, "platform", void 0);
     __decorate([
-        Metadata({ data: "json, name=sourcePipelineArn" }),
+        SpeakeasyMetadata({ data: "json, name=sourcePipelineArn" }),
         __metadata("design:type", String)
     ], Image.prototype, "sourcePipelineArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=sourcePipelineName" }),
+        SpeakeasyMetadata({ data: "json, name=sourcePipelineName" }),
         __metadata("design:type", String)
     ], Image.prototype, "sourcePipelineName", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", ImageState)
     ], Image.prototype, "state", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags" }),
+        SpeakeasyMetadata({ data: "json, name=tags" }),
         __metadata("design:type", Map)
     ], Image.prototype, "tags", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], Image.prototype, "type", void 0);
     __decorate([
-        Metadata({ data: "json, name=version" }),
+        SpeakeasyMetadata({ data: "json, name=version" }),
         __metadata("design:type", String)
     ], Image.prototype, "version", void 0);
     return Image;

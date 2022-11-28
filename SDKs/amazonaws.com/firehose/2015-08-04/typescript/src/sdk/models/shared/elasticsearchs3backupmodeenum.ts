@@ -1,6 +1,7 @@
 
 
+
 export enum ElasticsearchS3BackupModeEnum {
-    FailedDocumentsOnly = "FailedDocumentsOnly"
-,    AllDocuments = "AllDocuments"
+    FailedDocumentsOnly = "FailedDocumentsOnly",
+    AllDocuments = "AllDocuments"
 }

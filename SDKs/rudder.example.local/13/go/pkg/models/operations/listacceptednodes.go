@@ -12,16 +12,14 @@ type ListAcceptedNodesQueryParams struct {
 	Where       []shared.NodeWhere          `queryParam:"serialization=json,name=where"`
 }
 
-type ListAcceptedNodesRequest struct {
-	QueryParams ListAcceptedNodesQueryParams
-}
-
 type ListAcceptedNodes200ApplicationJSONActionEnum string
 
 const (
 	ListAcceptedNodes200ApplicationJSONActionEnumListAcceptedNodes ListAcceptedNodes200ApplicationJSONActionEnum = "listAcceptedNodes"
 )
 
+// ListAcceptedNodes200ApplicationJSONData
+// Information about the nodes
 type ListAcceptedNodes200ApplicationJSONData struct {
 	Nodes []shared.NodeFull `json:"nodes"`
 }
@@ -37,6 +35,10 @@ type ListAcceptedNodes200ApplicationJSON struct {
 	Action ListAcceptedNodes200ApplicationJSONActionEnum `json:"action"`
 	Data   ListAcceptedNodes200ApplicationJSONData       `json:"data"`
 	Result ListAcceptedNodes200ApplicationJSONResultEnum `json:"result"`
+}
+
+type ListAcceptedNodesRequest struct {
+	QueryParams ListAcceptedNodesQueryParams
 }
 
 type ListAcceptedNodesResponse struct {

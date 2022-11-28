@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import targettype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ShareTarget:
-    id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Id' }})
-    type: targettype_enum.TargetTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
+    r"""ShareTarget
+    Identifier that contains details about the directory consumer account.
+    """
+    
+    id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Id') }})
+    type: TargetTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Type') }})
     

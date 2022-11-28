@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RequestSyncDevicesRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request type for the [`RequestSyncDevices`](#google.home.graph.v1.HomeGraphApiService.RequestSyncDevices) call.
 **/
 export class RequestSyncDevicesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=agentUserId" })
+  @SpeakeasyMetadata({ data: "json, name=agentUserId" })
   agentUserId?: string;
 
-  @Metadata({ data: "json, name=async" })
+  @SpeakeasyMetadata({ data: "json, name=async" })
   async?: boolean;
 }

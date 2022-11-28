@@ -1,17 +1,21 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import encryption
-from . import segmentsettings
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class MuxStream:
-    container: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'container' }})
-    elementary_streams: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'elementaryStreams' }})
-    encryption: Optional[encryption.Encryption] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'encryption' }})
-    file_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fileName' }})
-    key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
-    segment_settings: Optional[segmentsettings.SegmentSettings] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'segmentSettings' }})
+    r"""MuxStream
+    Multiplexing settings for output stream.
+    """
+    
+    container: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('container') }})
+    elementary_streams: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('elementaryStreams') }})
+    encryption: Optional[Encryption] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('encryption') }})
+    file_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fileName') }})
+    key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('key') }})
+    segment_settings: Optional[SegmentSettings] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('segmentSettings') }})
     

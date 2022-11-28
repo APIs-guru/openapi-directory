@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var PlayerSeasonSplitStatsFormatEnum;
 (function (PlayerSeasonSplitStatsFormatEnum) {
     PlayerSeasonSplitStatsFormatEnum["Xml"] = "XML";
@@ -40,15 +40,15 @@ var PlayerSeasonSplitStatsPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=format" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" }),
         __metadata("design:type", String)
     ], PlayerSeasonSplitStatsPathParams.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=season" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=season" }),
         __metadata("design:type", String)
     ], PlayerSeasonSplitStatsPathParams.prototype, "season", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=split" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=split" }),
         __metadata("design:type", String)
     ], PlayerSeasonSplitStatsPathParams.prototype, "split", void 0);
     return PlayerSeasonSplitStatsPathParams;
@@ -60,7 +60,7 @@ var PlayerSeasonSplitStatsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PlayerSeasonSplitStatsPathParams)
     ], PlayerSeasonSplitStatsRequest.prototype, "pathParams", void 0);
     return PlayerSeasonSplitStatsRequest;
@@ -72,15 +72,15 @@ var PlayerSeasonSplitStatsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PlayerSeasonSplitStatsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Array)
     ], PlayerSeasonSplitStatsResponse.prototype, "playerSeasons", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PlayerSeasonSplitStatsResponse.prototype, "statusCode", void 0);
     return PlayerSeasonSplitStatsResponse;

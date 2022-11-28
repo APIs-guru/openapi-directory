@@ -8,6 +8,8 @@ const (
 	RestoreServiceRequestRestoreTypeEnumMetadataOnly           RestoreServiceRequestRestoreTypeEnum = "METADATA_ONLY"
 )
 
+// RestoreServiceRequest
+// Request message for DataprocMetastore.Restore.
 type RestoreServiceRequest struct {
 	Backup      *string                               `json:"backup,omitempty"`
 	RequestID   *string                               `json:"requestId,omitempty"`

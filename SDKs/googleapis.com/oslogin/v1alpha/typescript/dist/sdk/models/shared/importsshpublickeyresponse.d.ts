@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { LoginProfile } from "./loginprofile";
 /**
  * A response message for importing an SSH public key.

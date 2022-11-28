@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { OidcToken } from "./oidctoken";
 /**
  * Configuration for a push delivery endpoint.

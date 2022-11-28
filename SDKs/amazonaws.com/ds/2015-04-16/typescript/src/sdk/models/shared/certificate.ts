@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ClientCertAuthSettings } from "./clientcertauthsettings";
 import { CertificateStateEnum } from "./certificatestateenum";
 import { CertificateTypeEnum } from "./certificatetypeenum";
+
 
 
 // Certificate
@@ -9,27 +10,27 @@ import { CertificateTypeEnum } from "./certificatetypeenum";
  * Information about the certificate.
 **/
 export class Certificate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CertificateId" })
+  @SpeakeasyMetadata({ data: "json, name=CertificateId" })
   certificateId?: string;
 
-  @Metadata({ data: "json, name=ClientCertAuthSettings" })
+  @SpeakeasyMetadata({ data: "json, name=ClientCertAuthSettings" })
   clientCertAuthSettings?: ClientCertAuthSettings;
 
-  @Metadata({ data: "json, name=CommonName" })
+  @SpeakeasyMetadata({ data: "json, name=CommonName" })
   commonName?: string;
 
-  @Metadata({ data: "json, name=ExpiryDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=ExpiryDateTime" })
   expiryDateTime?: Date;
 
-  @Metadata({ data: "json, name=RegisteredDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=RegisteredDateTime" })
   registeredDateTime?: Date;
 
-  @Metadata({ data: "json, name=State" })
+  @SpeakeasyMetadata({ data: "json, name=State" })
   state?: CertificateStateEnum;
 
-  @Metadata({ data: "json, name=StateReason" })
+  @SpeakeasyMetadata({ data: "json, name=StateReason" })
   stateReason?: string;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: CertificateTypeEnum;
 }

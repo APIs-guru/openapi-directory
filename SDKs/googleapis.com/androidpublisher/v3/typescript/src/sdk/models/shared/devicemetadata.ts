@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DeviceMetadata
@@ -6,36 +7,36 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Characteristics of the user's device.
 **/
 export class DeviceMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cpuMake" })
+  @SpeakeasyMetadata({ data: "json, name=cpuMake" })
   cpuMake?: string;
 
-  @Metadata({ data: "json, name=cpuModel" })
+  @SpeakeasyMetadata({ data: "json, name=cpuModel" })
   cpuModel?: string;
 
-  @Metadata({ data: "json, name=deviceClass" })
+  @SpeakeasyMetadata({ data: "json, name=deviceClass" })
   deviceClass?: string;
 
-  @Metadata({ data: "json, name=glEsVersion" })
+  @SpeakeasyMetadata({ data: "json, name=glEsVersion" })
   glEsVersion?: number;
 
-  @Metadata({ data: "json, name=manufacturer" })
+  @SpeakeasyMetadata({ data: "json, name=manufacturer" })
   manufacturer?: string;
 
-  @Metadata({ data: "json, name=nativePlatform" })
+  @SpeakeasyMetadata({ data: "json, name=nativePlatform" })
   nativePlatform?: string;
 
-  @Metadata({ data: "json, name=productName" })
+  @SpeakeasyMetadata({ data: "json, name=productName" })
   productName?: string;
 
-  @Metadata({ data: "json, name=ramMb" })
+  @SpeakeasyMetadata({ data: "json, name=ramMb" })
   ramMb?: number;
 
-  @Metadata({ data: "json, name=screenDensityDpi" })
+  @SpeakeasyMetadata({ data: "json, name=screenDensityDpi" })
   screenDensityDpi?: number;
 
-  @Metadata({ data: "json, name=screenHeightPx" })
+  @SpeakeasyMetadata({ data: "json, name=screenHeightPx" })
   screenHeightPx?: number;
 
-  @Metadata({ data: "json, name=screenWidthPx" })
+  @SpeakeasyMetadata({ data: "json, name=screenWidthPx" })
   screenWidthPx?: number;
 }

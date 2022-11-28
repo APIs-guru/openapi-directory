@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { FunctionConfiguration } from "./functionconfiguration";
 /**
  * Information about a Lambda function.

@@ -22,34 +22,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var BehavioralEventHttpCompletionRequest = /** @class */ (function (_super) {
     __extends(BehavioralEventHttpCompletionRequest, _super);
     function BehavioralEventHttpCompletionRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=email" }),
+        SpeakeasyMetadata({ data: "json, name=email" }),
         __metadata("design:type", String)
     ], BehavioralEventHttpCompletionRequest.prototype, "email", void 0);
     __decorate([
-        Metadata({ data: "json, name=eventName" }),
+        SpeakeasyMetadata({ data: "json, name=eventName" }),
         __metadata("design:type", String)
     ], BehavioralEventHttpCompletionRequest.prototype, "eventName", void 0);
     __decorate([
-        Metadata({ data: "json, name=objectId" }),
+        SpeakeasyMetadata({ data: "json, name=objectId" }),
         __metadata("design:type", String)
     ], BehavioralEventHttpCompletionRequest.prototype, "objectId", void 0);
     __decorate([
-        Metadata({ data: "json, name=occurredAt" }),
+        SpeakeasyMetadata({ data: "json, name=occurredAt" }),
         __metadata("design:type", Date)
     ], BehavioralEventHttpCompletionRequest.prototype, "occurredAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=properties" }),
+        SpeakeasyMetadata({ data: "json, name=properties" }),
         __metadata("design:type", Map)
     ], BehavioralEventHttpCompletionRequest.prototype, "properties", void 0);
     __decorate([
-        Metadata({ data: "json, name=utk" }),
+        SpeakeasyMetadata({ data: "json, name=utk" }),
         __metadata("design:type", String)
     ], BehavioralEventHttpCompletionRequest.prototype, "utk", void 0);
     return BehavioralEventHttpCompletionRequest;

@@ -41,7 +41,7 @@ type CloudidentityInboundSsoAssignmentsPatchSecurity struct {
 type CloudidentityInboundSsoAssignmentsPatchRequest struct {
 	PathParams  CloudidentityInboundSsoAssignmentsPatchPathParams
 	QueryParams CloudidentityInboundSsoAssignmentsPatchQueryParams
-	Request     *shared.InboundSsoAssignment `request:"mediaType=application/json"`
+	Request     *shared.InboundSsoAssignmentInput `request:"mediaType=application/json"`
 	Security    CloudidentityInboundSsoAssignmentsPatchSecurity
 }
 

@@ -1,5 +1,7 @@
 package shared
 
+// OrcSerDe
+// A serializer to use for converting data to the ORC format before storing it in Amazon S3. For more information, see <a href="https://orc.apache.org/docs/">Apache ORC</a>.
 type OrcSerDe struct {
 	BlockSizeBytes                      *int64                `json:"BlockSizeBytes,omitempty"`
 	BloomFilterColumns                  []string              `json:"BloomFilterColumns,omitempty"`

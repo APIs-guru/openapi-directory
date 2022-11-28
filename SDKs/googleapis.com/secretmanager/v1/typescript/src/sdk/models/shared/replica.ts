@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CustomerManagedEncryption } from "./customermanagedencryption";
+
 
 
 // Replica
@@ -7,9 +8,9 @@ import { CustomerManagedEncryption } from "./customermanagedencryption";
  * Represents a Replica for this Secret.
 **/
 export class Replica extends SpeakeasyBase {
-  @Metadata({ data: "json, name=customerManagedEncryption" })
+  @SpeakeasyMetadata({ data: "json, name=customerManagedEncryption" })
   customerManagedEncryption?: CustomerManagedEncryption;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: string;
 }

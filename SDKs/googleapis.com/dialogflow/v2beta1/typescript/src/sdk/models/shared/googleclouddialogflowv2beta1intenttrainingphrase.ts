@@ -1,11 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowV2beta1IntentTrainingPhrasePart } from "./googleclouddialogflowv2beta1intenttrainingphrasepart";
 
+
 export enum GoogleCloudDialogflowV2beta1IntentTrainingPhraseTypeEnum {
-    TypeUnspecified = "TYPE_UNSPECIFIED"
-,    Example = "EXAMPLE"
-,    Template = "TEMPLATE"
+    TypeUnspecified = "TYPE_UNSPECIFIED",
+    Example = "EXAMPLE",
+    Template = "TEMPLATE"
 }
 
 
@@ -14,15 +14,15 @@ export enum GoogleCloudDialogflowV2beta1IntentTrainingPhraseTypeEnum {
  * Represents an example that the agent is trained on.
 **/
 export class GoogleCloudDialogflowV2beta1IntentTrainingPhrase extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=parts", elemType: shared.GoogleCloudDialogflowV2beta1IntentTrainingPhrasePart })
+  @SpeakeasyMetadata({ data: "json, name=parts", elemType: GoogleCloudDialogflowV2beta1IntentTrainingPhrasePart })
   parts?: GoogleCloudDialogflowV2beta1IntentTrainingPhrasePart[];
 
-  @Metadata({ data: "json, name=timesAddedCount" })
+  @SpeakeasyMetadata({ data: "json, name=timesAddedCount" })
   timesAddedCount?: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: GoogleCloudDialogflowV2beta1IntentTrainingPhraseTypeEnum;
 }

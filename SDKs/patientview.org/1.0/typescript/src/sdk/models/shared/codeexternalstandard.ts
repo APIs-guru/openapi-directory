@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ExternalStandard } from "./externalstandard";
 
 
+
 export class CodeExternalStandard extends SpeakeasyBase {
-  @Metadata({ data: "json, name=codeString" })
+  @SpeakeasyMetadata({ data: "json, name=codeString" })
   codeString?: string;
 
-  @Metadata({ data: "json, name=externalStandard" })
+  @SpeakeasyMetadata({ data: "json, name=externalStandard" })
   externalStandard?: ExternalStandard;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 }

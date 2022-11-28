@@ -5,23 +5,23 @@ from sdk.models import shared
 
 @dataclass
 class GetTrainedModelMetrics1PathParams:
-    model_id: str = field(default=None, metadata={'path_param': { 'field_name': 'modelId', 'style': 'simple', 'explode': False }})
+    model_id: str = field(metadata={'path_param': { 'field_name': 'modelId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetTrainedModelMetrics1Security:
-    bearer_token: shared.SchemeBearerToken = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_token: shared.SchemeBearerToken = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class GetTrainedModelMetrics1Request:
-    path_params: GetTrainedModelMetrics1PathParams = field(default=None)
-    security: GetTrainedModelMetrics1Security = field(default=None)
+    path_params: GetTrainedModelMetrics1PathParams = field()
+    security: GetTrainedModelMetrics1Security = field()
     
 
 @dataclass
 class GetTrainedModelMetrics1Response:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     metrics: Optional[shared.Metrics] = field(default=None)
-    status_code: int = field(default=None)
     

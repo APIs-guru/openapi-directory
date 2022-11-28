@@ -10,13 +10,13 @@ class RequestOpenIDAuthInfoQueryParams:
 
 @dataclass
 class RequestOpenIDAuthInfoRequest:
-    query_params: RequestOpenIDAuthInfoQueryParams = field(default=None)
+    query_params: RequestOpenIDAuthInfoQueryParams = field()
     
 
 @dataclass
 class RequestOpenIDAuthInfoResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     open_id_auth_info: Optional[shared.OpenIDAuthInfo] = field(default=None)
-    status_code: int = field(default=None)
     

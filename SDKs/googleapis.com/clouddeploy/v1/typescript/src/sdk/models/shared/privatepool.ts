@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PrivatePool
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Execution using a private Cloud Build pool.
 **/
 export class PrivatePool extends SpeakeasyBase {
-  @Metadata({ data: "json, name=artifactStorage" })
+  @SpeakeasyMetadata({ data: "json, name=artifactStorage" })
   artifactStorage?: string;
 
-  @Metadata({ data: "json, name=serviceAccount" })
+  @SpeakeasyMetadata({ data: "json, name=serviceAccount" })
   serviceAccount?: string;
 
-  @Metadata({ data: "json, name=workerPool" })
+  @SpeakeasyMetadata({ data: "json, name=workerPool" })
   workerPool?: string;
 }

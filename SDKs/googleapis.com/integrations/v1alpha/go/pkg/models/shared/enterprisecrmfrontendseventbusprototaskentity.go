@@ -8,6 +8,8 @@ const (
 	EnterpriseCrmFrontendsEventbusProtoTaskEntityTaskTypeEnumIoTemplate   EnterpriseCrmFrontendsEventbusProtoTaskEntityTaskTypeEnum = "IO_TEMPLATE"
 )
 
+// EnterpriseCrmFrontendsEventbusProtoTaskEntity
+// Contains a task's metadata and associated information. Next available id: 7
 type EnterpriseCrmFrontendsEventbusProtoTaskEntity struct {
 	DisabledForVpcSc *bool                                                      `json:"disabledForVpcSc,omitempty"`
 	Metadata         *EnterpriseCrmEventbusProtoTaskMetadata                    `json:"metadata,omitempty"`

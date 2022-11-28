@@ -1,18 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProfileConditionTypeEnum } from "./profileconditiontypeenum";
 import { ProfileConditionValueEnum } from "./profileconditionvalueenum";
 
 
+
 export class ProfileCondition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Condition" })
+  @SpeakeasyMetadata({ data: "json, name=Condition" })
   condition?: ProfileConditionTypeEnum;
 
-  @Metadata({ data: "json, name=IsRequired" })
+  @SpeakeasyMetadata({ data: "json, name=IsRequired" })
   isRequired?: boolean;
 
-  @Metadata({ data: "json, name=Property" })
+  @SpeakeasyMetadata({ data: "json, name=Property" })
   property?: ProfileConditionValueEnum;
 
-  @Metadata({ data: "json, name=Value" })
+  @SpeakeasyMetadata({ data: "json, name=Value" })
   value?: string;
 }

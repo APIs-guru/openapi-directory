@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AndroidpublisherMonetizationConvertRegionPricesPathParams:
-    package_name: str = field(default=None, metadata={'path_param': { 'field_name': 'packageName', 'style': 'simple', 'explode': False }})
+    package_name: str = field(metadata={'path_param': { 'field_name': 'packageName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class AndroidpublisherMonetizationConvertRegionPricesQueryParams:
 
 @dataclass
 class AndroidpublisherMonetizationConvertRegionPricesSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AndroidpublisherMonetizationConvertRegionPricesRequest:
-    path_params: AndroidpublisherMonetizationConvertRegionPricesPathParams = field(default=None)
-    query_params: AndroidpublisherMonetizationConvertRegionPricesQueryParams = field(default=None)
+    path_params: AndroidpublisherMonetizationConvertRegionPricesPathParams = field()
+    query_params: AndroidpublisherMonetizationConvertRegionPricesQueryParams = field()
+    security: AndroidpublisherMonetizationConvertRegionPricesSecurity = field()
     request: Optional[shared.ConvertRegionPricesRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AndroidpublisherMonetizationConvertRegionPricesSecurity = field(default=None)
     
 
 @dataclass
 class AndroidpublisherMonetizationConvertRegionPricesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     convert_region_prices_response: Optional[shared.ConvertRegionPricesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

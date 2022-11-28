@@ -1,5 +1,7 @@
 package shared
 
+// BaseItemPersonImageBlurHashes
+// Gets or sets the primary image blurhash.
 type BaseItemPersonImageBlurHashes struct {
 	Art        map[string]string `json:"Art,omitempty"`
 	Backdrop   map[string]string `json:"Backdrop,omitempty"`
@@ -16,6 +18,8 @@ type BaseItemPersonImageBlurHashes struct {
 	Thumb      map[string]string `json:"Thumb,omitempty"`
 }
 
+// BaseItemPerson
+// This is used by the api to get information about a Person within a BaseItem.
 type BaseItemPerson struct {
 	ID              *string                        `json:"Id,omitempty"`
 	ImageBlurHashes *BaseItemPersonImageBlurHashes `json:"ImageBlurHashes,omitempty"`

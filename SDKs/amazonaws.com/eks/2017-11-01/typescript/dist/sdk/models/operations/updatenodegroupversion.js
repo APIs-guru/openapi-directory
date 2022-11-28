@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var UpdateNodegroupVersionPathParams = /** @class */ (function (_super) {
     __extends(UpdateNodegroupVersionPathParams, _super);
@@ -30,11 +30,11 @@ var UpdateNodegroupVersionPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=name" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=name" }),
         __metadata("design:type", String)
     ], UpdateNodegroupVersionPathParams.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=nodegroupName" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=nodegroupName" }),
         __metadata("design:type", String)
     ], UpdateNodegroupVersionPathParams.prototype, "nodegroupName", void 0);
     return UpdateNodegroupVersionPathParams;
@@ -46,31 +46,31 @@ var UpdateNodegroupVersionHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], UpdateNodegroupVersionHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], UpdateNodegroupVersionHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], UpdateNodegroupVersionHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], UpdateNodegroupVersionHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], UpdateNodegroupVersionHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], UpdateNodegroupVersionHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], UpdateNodegroupVersionHeaders.prototype, "xAmzSignedHeaders", void 0);
     return UpdateNodegroupVersionHeaders;
@@ -86,15 +86,15 @@ var UpdateNodegroupVersionRequestBodyLaunchTemplate = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], UpdateNodegroupVersionRequestBodyLaunchTemplate.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], UpdateNodegroupVersionRequestBodyLaunchTemplate.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=version" }),
+        SpeakeasyMetadata({ data: "json, name=version" }),
         __metadata("design:type", String)
     ], UpdateNodegroupVersionRequestBodyLaunchTemplate.prototype, "version", void 0);
     return UpdateNodegroupVersionRequestBodyLaunchTemplate;
@@ -106,23 +106,23 @@ var UpdateNodegroupVersionRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=clientRequestToken" }),
+        SpeakeasyMetadata({ data: "json, name=clientRequestToken" }),
         __metadata("design:type", String)
     ], UpdateNodegroupVersionRequestBody.prototype, "clientRequestToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=force" }),
+        SpeakeasyMetadata({ data: "json, name=force" }),
         __metadata("design:type", Boolean)
     ], UpdateNodegroupVersionRequestBody.prototype, "force", void 0);
     __decorate([
-        Metadata({ data: "json, name=launchTemplate" }),
+        SpeakeasyMetadata({ data: "json, name=launchTemplate" }),
         __metadata("design:type", UpdateNodegroupVersionRequestBodyLaunchTemplate)
     ], UpdateNodegroupVersionRequestBody.prototype, "launchTemplate", void 0);
     __decorate([
-        Metadata({ data: "json, name=releaseVersion" }),
+        SpeakeasyMetadata({ data: "json, name=releaseVersion" }),
         __metadata("design:type", String)
     ], UpdateNodegroupVersionRequestBody.prototype, "releaseVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=version" }),
+        SpeakeasyMetadata({ data: "json, name=version" }),
         __metadata("design:type", String)
     ], UpdateNodegroupVersionRequestBody.prototype, "version", void 0);
     return UpdateNodegroupVersionRequestBody;
@@ -134,15 +134,15 @@ var UpdateNodegroupVersionRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateNodegroupVersionPathParams)
     ], UpdateNodegroupVersionRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateNodegroupVersionHeaders)
     ], UpdateNodegroupVersionRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", UpdateNodegroupVersionRequestBody)
     ], UpdateNodegroupVersionRequest.prototype, "request", void 0);
     return UpdateNodegroupVersionRequest;
@@ -154,39 +154,39 @@ var UpdateNodegroupVersionResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateNodegroupVersionResponse.prototype, "clientException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UpdateNodegroupVersionResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateNodegroupVersionResponse.prototype, "invalidParameterException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateNodegroupVersionResponse.prototype, "invalidRequestException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateNodegroupVersionResponse.prototype, "resourceInUseException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateNodegroupVersionResponse.prototype, "resourceNotFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateNodegroupVersionResponse.prototype, "serverException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UpdateNodegroupVersionResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.UpdateNodegroupVersionResponse)
     ], UpdateNodegroupVersionResponse.prototype, "updateNodegroupVersionResponse", void 0);
     return UpdateNodegroupVersionResponse;

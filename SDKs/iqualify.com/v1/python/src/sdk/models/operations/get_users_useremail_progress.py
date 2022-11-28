@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class GetUsersUserEmailProgressPathParams:
-    user_email: str = field(default=None, metadata={'path_param': { 'field_name': 'userEmail', 'style': 'simple', 'explode': False }})
+    user_email: str = field(metadata={'path_param': { 'field_name': 'userEmail', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetUsersUserEmailProgressRequest:
-    path_params: GetUsersUserEmailProgressPathParams = field(default=None)
+    path_params: GetUsersUserEmailProgressPathParams = field()
     
 
 @dataclass
 class GetUsersUserEmailProgressResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[shared.Error] = field(default=None)
     learner_response: Optional[shared.LearnerResponse] = field(default=None)
-    status_code: int = field(default=None)
     

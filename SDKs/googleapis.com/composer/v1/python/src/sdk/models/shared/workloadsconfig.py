@@ -1,15 +1,18 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import schedulerresource
-from . import webserverresource
-from . import workerresource
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class WorkloadsConfig:
-    scheduler: Optional[schedulerresource.SchedulerResource] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'scheduler' }})
-    web_server: Optional[webserverresource.WebServerResource] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'webServer' }})
-    worker: Optional[workerresource.WorkerResource] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'worker' }})
+    r"""WorkloadsConfig
+    The Kubernetes workloads configuration for GKE cluster associated with the Cloud Composer environment. Supported for Cloud Composer environments in versions composer-2.*.*-airflow-*.*.* and newer.
+    """
+    
+    scheduler: Optional[SchedulerResource] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('scheduler') }})
+    web_server: Optional[WebServerResource] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('webServer') }})
+    worker: Optional[WorkerResource] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('worker') }})
     

@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import googlecloudretailv2alphaservingconfig
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleCloudRetailV2alphaListServingConfigsResponse:
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextPageToken' }})
-    serving_configs: Optional[List[googlecloudretailv2alphaservingconfig.GoogleCloudRetailV2alphaServingConfig]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'servingConfigs' }})
+    r"""GoogleCloudRetailV2alphaListServingConfigsResponse
+    Response for ListServingConfigs method.
+    """
+    
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextPageToken') }})
+    serving_configs: Optional[List[GoogleCloudRetailV2alphaServingConfig]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('servingConfigs') }})
     

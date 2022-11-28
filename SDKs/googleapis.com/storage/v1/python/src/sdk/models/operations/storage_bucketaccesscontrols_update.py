@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class StorageBucketAccessControlsUpdatePathParams:
-    bucket: str = field(default=None, metadata={'path_param': { 'field_name': 'bucket', 'style': 'simple', 'explode': False }})
-    entity: str = field(default=None, metadata={'path_param': { 'field_name': 'entity', 'style': 'simple', 'explode': False }})
+    bucket: str = field(metadata={'path_param': { 'field_name': 'bucket', 'style': 'simple', 'explode': False }})
+    entity: str = field(metadata={'path_param': { 'field_name': 'entity', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -24,14 +28,14 @@ class StorageBucketAccessControlsUpdateQueryParams:
 
 @dataclass
 class StorageBucketAccessControlsUpdateSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class StorageBucketAccessControlsUpdateSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -42,15 +46,15 @@ class StorageBucketAccessControlsUpdateSecurity:
 
 @dataclass
 class StorageBucketAccessControlsUpdateRequest:
-    path_params: StorageBucketAccessControlsUpdatePathParams = field(default=None)
-    query_params: StorageBucketAccessControlsUpdateQueryParams = field(default=None)
+    path_params: StorageBucketAccessControlsUpdatePathParams = field()
+    query_params: StorageBucketAccessControlsUpdateQueryParams = field()
+    security: StorageBucketAccessControlsUpdateSecurity = field()
     request: Optional[shared.BucketAccessControl] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: StorageBucketAccessControlsUpdateSecurity = field(default=None)
     
 
 @dataclass
 class StorageBucketAccessControlsUpdateResponse:
+    content_type: str = field()
+    status_code: int = field()
     bucket_access_control: Optional[shared.BucketAccessControl] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

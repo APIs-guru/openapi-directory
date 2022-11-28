@@ -13,13 +13,13 @@ type GetProjectStatusQueryParams struct {
 	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
+type GetProjectStatus200ApplicationJSON struct {
+	Data *shared.ProjectStatusResponse `json:"data,omitempty"`
+}
+
 type GetProjectStatusRequest struct {
 	PathParams  GetProjectStatusPathParams
 	QueryParams GetProjectStatusQueryParams
-}
-
-type GetProjectStatus200ApplicationJSON struct {
-	Data *shared.ProjectStatusResponse `json:"data,omitempty"`
 }
 
 type GetProjectStatusResponse struct {

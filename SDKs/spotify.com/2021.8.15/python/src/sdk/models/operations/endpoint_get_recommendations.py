@@ -5,6 +5,9 @@ from sdk.models import shared
 
 @dataclass
 class EndpointGetRecommendationsQueryParams:
+    seed_artists: str = field(metadata={'query_param': { 'field_name': 'seed_artists', 'style': 'form', 'explode': True }})
+    seed_genres: str = field(metadata={'query_param': { 'field_name': 'seed_genres', 'style': 'form', 'explode': True }})
+    seed_tracks: str = field(metadata={'query_param': { 'field_name': 'seed_tracks', 'style': 'form', 'explode': True }})
     limit: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'limit', 'style': 'form', 'explode': True }})
     market: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'market', 'style': 'form', 'explode': True }})
     max_acousticness: Optional[float] = field(default=None, metadata={'query_param': { 'field_name': 'max_acousticness', 'style': 'form', 'explode': True }})
@@ -35,9 +38,6 @@ class EndpointGetRecommendationsQueryParams:
     min_tempo: Optional[float] = field(default=None, metadata={'query_param': { 'field_name': 'min_tempo', 'style': 'form', 'explode': True }})
     min_time_signature: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'min_time_signature', 'style': 'form', 'explode': True }})
     min_valence: Optional[float] = field(default=None, metadata={'query_param': { 'field_name': 'min_valence', 'style': 'form', 'explode': True }})
-    seed_artists: str = field(default=None, metadata={'query_param': { 'field_name': 'seed_artists', 'style': 'form', 'explode': True }})
-    seed_genres: str = field(default=None, metadata={'query_param': { 'field_name': 'seed_genres', 'style': 'form', 'explode': True }})
-    seed_tracks: str = field(default=None, metadata={'query_param': { 'field_name': 'seed_tracks', 'style': 'form', 'explode': True }})
     target_acousticness: Optional[float] = field(default=None, metadata={'query_param': { 'field_name': 'target_acousticness', 'style': 'form', 'explode': True }})
     target_danceability: Optional[float] = field(default=None, metadata={'query_param': { 'field_name': 'target_danceability', 'style': 'form', 'explode': True }})
     target_duration_ms: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'target_duration_ms', 'style': 'form', 'explode': True }})
@@ -56,25 +56,25 @@ class EndpointGetRecommendationsQueryParams:
 
 @dataclass
 class EndpointGetRecommendationsHeaders:
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
+    authorization: str = field(metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class EndpointGetRecommendationsSecurity:
-    spotify_auth: shared.SchemeSpotifyAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    spotify_auth: shared.SchemeSpotifyAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class EndpointGetRecommendationsRequest:
-    query_params: EndpointGetRecommendationsQueryParams = field(default=None)
-    headers: EndpointGetRecommendationsHeaders = field(default=None)
-    security: EndpointGetRecommendationsSecurity = field(default=None)
+    headers: EndpointGetRecommendationsHeaders = field()
+    query_params: EndpointGetRecommendationsQueryParams = field()
+    security: EndpointGetRecommendationsSecurity = field()
     
 
 @dataclass
 class EndpointGetRecommendationsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response_object: Optional[shared.ErrorResponseObject] = field(default=None)
     recommendations_object: Optional[shared.RecommendationsObject] = field(default=None)
-    status_code: int = field(default=None)
     

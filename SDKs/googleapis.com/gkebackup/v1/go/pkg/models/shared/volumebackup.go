@@ -19,6 +19,8 @@ const (
 	VolumeBackupStateEnumDeleting         VolumeBackupStateEnum = "DELETING"
 )
 
+// VolumeBackup
+// Represents the backup of a specific persistent volume as a component of a Backup - both the record of the operation and a pointer to the underlying storage-specific artifacts. Next id: 14
 type VolumeBackup struct {
 	CompleteTime       *string                 `json:"completeTime,omitempty"`
 	CreateTime         *string                 `json:"createTime,omitempty"`

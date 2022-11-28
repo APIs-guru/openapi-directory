@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum RestoreTypeEnum {
-    TypeUnspecified = "TYPE_UNSPECIFIED"
-,    Untrash = "UNTRASH"
+    TypeUnspecified = "TYPE_UNSPECIFIED",
+    Untrash = "UNTRASH"
 }
 
 
@@ -11,6 +12,6 @@ export enum RestoreTypeEnum {
  * A deleted object was restored.
 **/
 export class Restore extends SpeakeasyBase {
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: RestoreTypeEnum;
 }

@@ -1,11 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
 class GetServersIDActionsPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 class GetServersIDActionsSortParameterSortEnum(str, Enum):
     ID = "id"
@@ -39,24 +41,22 @@ class GetServersIDActionsQueryParams:
     status: Optional[GetServersIDActionsStatusParameterStatusEnum] = field(default=None, metadata={'query_param': { 'field_name': 'status', 'style': 'form', 'explode': True }})
     
 
-@dataclass
-class GetServersIDActionsRequest:
-    path_params: GetServersIDActionsPathParams = field(default=None)
-    query_params: GetServersIDActionsQueryParams = field(default=None)
-    
-
 @dataclass_json
 @dataclass
 class GetServersIDActionsActionsResponseActionError:
-    code: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
-    message: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
+    r"""GetServersIDActionsActionsResponseActionError
+    Error message for the Action if error occurred, otherwise null
+    """
+    
+    code: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('code') }})
+    message: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('message') }})
     
 
 @dataclass_json
 @dataclass
 class GetServersIDActionsActionsResponseActionResources:
-    id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    id: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    type: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     
 class GetServersIDActionsActionsResponseActionStatusEnum(str, Enum):
     SUCCESS = "success"
@@ -67,43 +67,49 @@ class GetServersIDActionsActionsResponseActionStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GetServersIDActionsActionsResponseAction:
-    command: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'command' }})
-    error: GetServersIDActionsActionsResponseActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    finished: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'finished' }})
-    id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    progress: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'progress' }})
-    resources: List[GetServersIDActionsActionsResponseActionResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
-    started: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'started' }})
-    status: GetServersIDActionsActionsResponseActionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    command: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('command') }})
+    error: GetServersIDActionsActionsResponseActionError = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    finished: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('finished') }})
+    id: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    progress: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('progress') }})
+    resources: List[GetServersIDActionsActionsResponseActionResources] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('resources') }})
+    started: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('started') }})
+    status: GetServersIDActionsActionsResponseActionStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     
 
 @dataclass_json
 @dataclass
 class GetServersIDActionsActionsResponseMetaPagination:
-    last_page: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'last_page' }})
-    next_page: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page' }})
-    page: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'page' }})
-    per_page: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'per_page' }})
-    previous_page: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'previous_page' }})
-    total_entries: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total_entries' }})
+    last_page: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('last_page') }})
+    next_page: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('next_page') }})
+    page: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('page') }})
+    per_page: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('per_page') }})
+    previous_page: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('previous_page') }})
+    total_entries: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total_entries') }})
     
 
 @dataclass_json
 @dataclass
 class GetServersIDActionsActionsResponseMeta:
-    pagination: GetServersIDActionsActionsResponseMetaPagination = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pagination' }})
+    pagination: GetServersIDActionsActionsResponseMetaPagination = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('pagination') }})
     
 
 @dataclass_json
 @dataclass
 class GetServersIDActionsActionsResponse:
-    actions: List[GetServersIDActionsActionsResponseAction] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'actions' }})
-    meta: Optional[GetServersIDActionsActionsResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    actions: List[GetServersIDActionsActionsResponseAction] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('actions') }})
+    meta: Optional[GetServersIDActionsActionsResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('meta') }})
+    
+
+@dataclass
+class GetServersIDActionsRequest:
+    path_params: GetServersIDActionsPathParams = field()
+    query_params: GetServersIDActionsQueryParams = field()
     
 
 @dataclass
 class GetServersIDActionsResponse:
+    content_type: str = field()
+    status_code: int = field()
     actions_response: Optional[GetServersIDActionsActionsResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

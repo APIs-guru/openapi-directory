@@ -12,13 +12,13 @@ class GetAPILordsInterestsRegisterQueryParams:
 
 @dataclass
 class GetAPILordsInterestsRegisterRequest:
-    query_params: GetAPILordsInterestsRegisterQueryParams = field(default=None)
+    query_params: GetAPILordsInterestsRegisterQueryParams = field()
     
 
 @dataclass
 class GetAPILordsInterestsRegisterResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     members_interests_members_service_search_result: Optional[shared.MembersInterestsMembersServiceSearchResult] = field(default=None)
-    status_code: int = field(default=None)
     

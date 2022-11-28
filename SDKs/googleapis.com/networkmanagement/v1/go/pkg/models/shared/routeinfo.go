@@ -27,9 +27,11 @@ const (
 	RouteInfoRouteTypeEnumPeeringSubnet        RouteInfoRouteTypeEnum = "PEERING_SUBNET"
 	RouteInfoRouteTypeEnumPeeringStatic        RouteInfoRouteTypeEnum = "PEERING_STATIC"
 	RouteInfoRouteTypeEnumPeeringDynamic       RouteInfoRouteTypeEnum = "PEERING_DYNAMIC"
-	RouteInfoRouteTypeEnumPolicyBasedRoute     RouteInfoRouteTypeEnum = "POLICY_BASED_ROUTE"
+	RouteInfoRouteTypeEnumPolicyBased          RouteInfoRouteTypeEnum = "POLICY_BASED"
 )
 
+// RouteInfo
+// For display only. Metadata associated with a Compute Engine route.
 type RouteInfo struct {
 	DestIPRange    *string                   `json:"destIpRange,omitempty"`
 	DestPortRanges []string                  `json:"destPortRanges,omitempty"`

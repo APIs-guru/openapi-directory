@@ -1,6 +1,7 @@
 
 
+
 export enum NotebookInstanceSortOrderEnum {
-    Ascending = "Ascending"
-,    Descending = "Descending"
+    Ascending = "Ascending",
+    Descending = "Descending"
 }

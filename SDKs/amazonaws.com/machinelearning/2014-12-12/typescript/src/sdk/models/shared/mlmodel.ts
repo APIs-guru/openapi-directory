@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AlgorithmEnum } from "./algorithmenum";
 import { RealtimeEndpointInfo } from "./realtimeendpointinfo";
 import { MlModelTypeEnum } from "./mlmodeltypeenum";
 import { EntityStatusEnum } from "./entitystatusenum";
+
 
 
 // MlModel
@@ -10,60 +11,60 @@ import { EntityStatusEnum } from "./entitystatusenum";
  * <p> Represents the output of a <code>GetMLModel</code> operation. </p> <p>The content consists of the detailed metadata and the current status of the <code>MLModel</code>.</p>
 **/
 export class MlModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Algorithm" })
+  @SpeakeasyMetadata({ data: "json, name=Algorithm" })
   algorithm?: AlgorithmEnum;
 
-  @Metadata({ data: "json, name=ComputeTime" })
+  @SpeakeasyMetadata({ data: "json, name=ComputeTime" })
   computeTime?: number;
 
-  @Metadata({ data: "json, name=CreatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=CreatedByIamUser" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedByIamUser" })
   createdByIamUser?: string;
 
-  @Metadata({ data: "json, name=EndpointInfo" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointInfo" })
   endpointInfo?: RealtimeEndpointInfo;
 
-  @Metadata({ data: "json, name=FinishedAt" })
+  @SpeakeasyMetadata({ data: "json, name=FinishedAt" })
   finishedAt?: Date;
 
-  @Metadata({ data: "json, name=InputDataLocationS3" })
+  @SpeakeasyMetadata({ data: "json, name=InputDataLocationS3" })
   inputDataLocationS3?: string;
 
-  @Metadata({ data: "json, name=LastUpdatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=LastUpdatedAt" })
   lastUpdatedAt?: Date;
 
-  @Metadata({ data: "json, name=MLModelId" })
+  @SpeakeasyMetadata({ data: "json, name=MLModelId" })
   mlModelId?: string;
 
-  @Metadata({ data: "json, name=MLModelType" })
+  @SpeakeasyMetadata({ data: "json, name=MLModelType" })
   mlModelType?: MlModelTypeEnum;
 
-  @Metadata({ data: "json, name=Message" })
+  @SpeakeasyMetadata({ data: "json, name=Message" })
   message?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=ScoreThreshold" })
+  @SpeakeasyMetadata({ data: "json, name=ScoreThreshold" })
   scoreThreshold?: number;
 
-  @Metadata({ data: "json, name=ScoreThresholdLastUpdatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=ScoreThresholdLastUpdatedAt" })
   scoreThresholdLastUpdatedAt?: Date;
 
-  @Metadata({ data: "json, name=SizeInBytes" })
+  @SpeakeasyMetadata({ data: "json, name=SizeInBytes" })
   sizeInBytes?: number;
 
-  @Metadata({ data: "json, name=StartedAt" })
+  @SpeakeasyMetadata({ data: "json, name=StartedAt" })
   startedAt?: Date;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: EntityStatusEnum;
 
-  @Metadata({ data: "json, name=TrainingDataSourceId" })
+  @SpeakeasyMetadata({ data: "json, name=TrainingDataSourceId" })
   trainingDataSourceId?: string;
 
-  @Metadata({ data: "json, name=TrainingParameters" })
+  @SpeakeasyMetadata({ data: "json, name=TrainingParameters" })
   trainingParameters?: Map<string, string>;
 }

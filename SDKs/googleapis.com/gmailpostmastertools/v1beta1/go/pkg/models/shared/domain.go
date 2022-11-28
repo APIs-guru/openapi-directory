@@ -9,6 +9,8 @@ const (
 	DomainPermissionEnumNone                  DomainPermissionEnum = "NONE"
 )
 
+// Domain
+// A registered domain resource in the Postmaster API.
 type Domain struct {
 	CreateTime *string               `json:"createTime,omitempty"`
 	Name       *string               `json:"name,omitempty"`

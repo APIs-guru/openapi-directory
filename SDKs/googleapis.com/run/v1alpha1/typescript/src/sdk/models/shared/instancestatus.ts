@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InstanceAttemptResult } from "./instanceattemptresult";
+
 
 
 // InstanceStatus
@@ -7,27 +8,27 @@ import { InstanceAttemptResult } from "./instanceattemptresult";
  * Instance represents the status of an instance of a Job.
 **/
 export class InstanceStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=completionTime" })
+  @SpeakeasyMetadata({ data: "json, name=completionTime" })
   completionTime?: string;
 
-  @Metadata({ data: "json, name=failed" })
+  @SpeakeasyMetadata({ data: "json, name=failed" })
   failed?: number;
 
-  @Metadata({ data: "json, name=index" })
+  @SpeakeasyMetadata({ data: "json, name=index" })
   index?: number;
 
-  @Metadata({ data: "json, name=lastAttemptResult" })
+  @SpeakeasyMetadata({ data: "json, name=lastAttemptResult" })
   lastAttemptResult?: InstanceAttemptResult;
 
-  @Metadata({ data: "json, name=lastExitCode" })
+  @SpeakeasyMetadata({ data: "json, name=lastExitCode" })
   lastExitCode?: number;
 
-  @Metadata({ data: "json, name=restarted" })
+  @SpeakeasyMetadata({ data: "json, name=restarted" })
   restarted?: number;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: string;
 
-  @Metadata({ data: "json, name=succeeded" })
+  @SpeakeasyMetadata({ data: "json, name=succeeded" })
   succeeded?: number;
 }

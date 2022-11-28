@@ -1,5 +1,7 @@
 package shared
 
+// UserAuthData
+// User Authentication Data
 type UserAuthData struct {
 	AdConfigID         *int32  `json:"adConfigId,omitempty"`
 	Login              *string `json:"login,omitempty"`

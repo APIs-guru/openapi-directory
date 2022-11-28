@@ -1,18 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CreativeSpecification } from "./creativespecification";
 
+
 export enum CreativeRestrictionsCreativeFormatEnum {
-    CreativeFormatUnspecified = "CREATIVE_FORMAT_UNSPECIFIED"
-,    Display = "DISPLAY"
-,    Video = "VIDEO"
+    CreativeFormatUnspecified = "CREATIVE_FORMAT_UNSPECIFIED",
+    Display = "DISPLAY",
+    Video = "VIDEO"
 }
 
 export enum CreativeRestrictionsSkippableAdTypeEnum {
-    SkippableAdTypeUnspecified = "SKIPPABLE_AD_TYPE_UNSPECIFIED"
-,    Skippable = "SKIPPABLE"
-,    InstreamSelect = "INSTREAM_SELECT"
-,    NotSkippable = "NOT_SKIPPABLE"
+    SkippableAdTypeUnspecified = "SKIPPABLE_AD_TYPE_UNSPECIFIED",
+    Skippable = "SKIPPABLE",
+    InstreamSelect = "INSTREAM_SELECT",
+    NotSkippable = "NOT_SKIPPABLE"
 }
 
 
@@ -21,12 +21,12 @@ export enum CreativeRestrictionsSkippableAdTypeEnum {
  * Represents creative restrictions associated to Programmatic Guaranteed/ Preferred Deal in Ad Manager. This doesn't apply to Private Auction and AdX Preferred Deals.
 **/
 export class CreativeRestrictions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=creativeFormat" })
+  @SpeakeasyMetadata({ data: "json, name=creativeFormat" })
   creativeFormat?: CreativeRestrictionsCreativeFormatEnum;
 
-  @Metadata({ data: "json, name=creativeSpecifications", elemType: shared.CreativeSpecification })
+  @SpeakeasyMetadata({ data: "json, name=creativeSpecifications", elemType: CreativeSpecification })
   creativeSpecifications?: CreativeSpecification[];
 
-  @Metadata({ data: "json, name=skippableAdType" })
+  @SpeakeasyMetadata({ data: "json, name=skippableAdType" })
   skippableAdType?: CreativeRestrictionsSkippableAdTypeEnum;
 }

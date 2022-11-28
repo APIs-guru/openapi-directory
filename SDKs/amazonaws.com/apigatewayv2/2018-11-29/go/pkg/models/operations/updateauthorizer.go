@@ -26,6 +26,8 @@ const (
 	UpdateAuthorizerRequestBodyAuthorizerTypeEnumJwt     UpdateAuthorizerRequestBodyAuthorizerTypeEnum = "JWT"
 )
 
+// UpdateAuthorizerRequestBodyJwtConfiguration
+// Represents the configuration of a JWT authorizer. Required for the JWT authorizer type. Supported only for HTTP APIs.
 type UpdateAuthorizerRequestBodyJwtConfiguration struct {
 	Audience []string `json:"Audience,omitempty"`
 	Issuer   *string  `json:"Issuer,omitempty"`

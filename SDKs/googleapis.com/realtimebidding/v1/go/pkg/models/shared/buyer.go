@@ -1,5 +1,7 @@
 package shared
 
+// Buyer
+// RTB Buyer account information.
 type Buyer struct {
 	ActiveCreativeCount        *string  `json:"activeCreativeCount,omitempty"`
 	Bidder                     *string  `json:"bidder,omitempty"`
